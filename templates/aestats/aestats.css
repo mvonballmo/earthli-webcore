@@ -1,0 +1,262 @@
+/*
+ *    aestats.css   19.10.01 18:58
+ *   -------------  by Christoph 'AEon' Loewe (c) 1998-2001   AEon@planetquake.com
+ *                  Code provided as is, use at your own risk.
+ *
+ *   Control the look of the AEstats output pages with this style sheet file.
+ */
+
+/* Netscape bugs: if you set class=text in TD, another class= in any following TD 
+                  table will reset the settings. you need to span class=text in between! */
+
+
+
+/*---Links & Mouse-Overs---*/
+A { font-weight: bold }
+A:link		{color: #0099CC; text-decoration: none}
+A:visited	{color: #0077CC; text-decoration: none}
+A:active, A:hover, A:focus	{color: #FFFF00; text-decoration: none}
+
+body
+{ 
+	font-family: Verdana, Arial, Helvetica;
+	background-color: black;
+	color: white;
+	font-size: 10pt;
+	padding: 0em;
+	margin: 0em;
+}
+
+code
+{
+	color: #3399CC;
+}
+
+dd
+{
+	margin: .25em 2em;
+	
+}
+
+dt
+{
+	font-weight: bold;
+}
+
+.sub-section-info
+{
+	margin: .5em 2em;
+	border-top: 1px #666666 solid;
+	border-bottom: 1px #666666 solid;
+	padding: .5em;
+	color: #CCCCCC;
+}
+
+.sub-section-title
+{
+	font-weight: bold;
+	font-size: 150%;
+	font-variant: small-caps;
+	letter-spacing: .25em;
+}
+
+.sub-sections
+{
+	clear: both;
+}
+
+h2
+{
+	color: #666666;
+	letter-spacing: .35em;
+	font-variant: small-caps;
+	font-size: 18pt;
+}
+
+table
+{
+	border-color: #333333;
+	border-width: 1px;
+}
+
+td 
+{ 
+	font-size: 10pt;
+}
+
+.footer
+{
+	font-size: 85%;
+	font-style: italic;
+	border-top: 1px #999999 dotted;
+	background: #333333;
+	padding: .5em;
+	text-align: center;
+}
+
+.game-type
+{
+	font-style: italic;
+	color: #66CC66;
+}
+
+.kw
+{
+	font-style: italic;
+	color: white;
+}
+
+.nav-bar
+{ 
+	background: #333333;
+	border: 1px #999999 dotted;
+	padding: .5em;
+	float: right;
+	margin-left: 1em;
+}
+
+.notes
+{
+	font-size: 85%;
+	font-style: italic;
+}
+
+.page-body
+{
+	padding: 1em;
+	margin: auto;
+	max-width: 800px;
+}
+
+.selected
+{
+	color: #FF9900;
+	font-weight: bold;
+	font-style: italic;
+}
+
+.server-title
+{
+	color: #FF9933;
+}
+
+.sub-menu
+{
+	margin-left: 1.5em;
+}
+
+.sub-menu-title
+{
+	font-weight: bold;
+	color: white;
+}
+
+/*---Span classes - Text---*/
+
+/*Standard black normal sized font used in all tables, & as regular text on template pages*/
+span.text	{ font-size:10pt; }
+
+/*Standard black small sized font used in all tables, & as regular text on template pages*/
+span.small	{ font-size:8pt; }
+
+/*Seldom used medium sized font used in the templates only*/
+span.med	{ font-size:12pt; }
+
+/*Huge sized font used server name on intro templates page ("p"age title, see td.ptitle)*/
+span.ptitle	{ font-size:23pt; }
+
+/*Intials - used on the intro template page in subtitles*/
+span.initial	{ font-size:20pt; }
+span.initialmed	{ font-size:12pt; font-weight:bold; }
+
+
+
+/*---Span classes - Color---*/
+
+/*Main 'marking' color, used in all tables, and also on the templates */
+span.blue	{ color:#FFFF66; }		/*light blue: 0099FF, FF8000*/
+
+/*Secondary 'marking' color, used in all tables, and also on the templates */
+span.red	{ color:#FF9933; }
+
+/*Navigation bar - color of link we reached, then only a text*/
+span.gray	{ color:#3C3C3C; }
+
+/*Colored text - Intensity range blue to red, same as the 'td.0' to 'td.9' intensity range*/
+span.i0		{ color:#FF0101; } /*red	*/
+span.i1		{ color:#FF7901; } /*organge	*/
+span.i2		{ color:#FFB401; } /*lorange	*/
+span.i3		{ color:#FFF001; } /*yellow	*/
+span.i4		{ color:#D2FF01; } /*ygreen	*/
+span.i5		{ color:#96FF01; } /*lgreen	*/
+span.i6		{ color:#01FF5B; } /*dgreen	*/
+span.i7		{ color:#01FFD2; } /*lblueg	*/
+span.i8		{ color:#01B4FF; } /*lblue	*/
+span.i9		{ color:#013DFF; } /*dblue	*/
+
+
+
+/*---Special----*/
+/*Typewriter font - used in templates to denote files names, and paths, uses span.blue color*/
+tt		{ font-family:Courier New,Courier; color:#3366FF; font-size:10pt; }
+
+/*Blockquote used for intro, faq and help page templates*/
+blockquote.text { font-size:10pt; }
+
+
+
+/*---TD Classes - Text---*/
+/* there are no 'tr.' or 'table.' classes since all settings are done on the lowest 'td.' level: */
+
+/*Standard black normal sized font used in all tables*/
+td.text		{ font-size:10pt; }
+
+/*Standard black small sized font used in all tables*/
+td.small	{ font-size:8pt; }
+
+/*The titles of all tables use this 'td.' black small sized font used in all tables (much like td.bg)*/
+td.title	{ text-align:center; font-weight:bold; background-color: #555555; }
+
+/*Huge sized font used for main titles on all templates pages ("p"age title)*/
+td.ptitle	{ font-size:24pt; color:#666666; }
+
+/*Small sized font, used in the index tables on all template pages*/
+td.index	{ font-size:8pt; line-height:11pt; }
+  
+  
+
+/*---TD Classes - Text with background colors---*/
+
+/*Standard black normal sized font, with 'light gray' background, used in all tables*/
+td.bg     { background-color: #444444 }
+
+/*Standard black small sized font, with 'light gray' background, used in all tables*/
+td.sbg    { background-color: #444444 }
+
+/*Color spectrum for td backgrounds (e.g. player numbers, or Weapons), used in all tables*/
+td.s0	{ background-color:#ea0000; color: black; } /*red	*/
+td.s1	{ background-color:#ea8100; color: black; } /*organge	*/
+td.s2	{ background-color:#d9ca00; color: black; } /*yellow	*/
+td.s3	{ background-color:#58ea00; color: black; } /*litegreen*/
+td.s4	{ background-color:#00d000; color: black; } /*green	*/
+td.s5	{ background-color:#00eaa4; color: black; } /*olive	*/
+td.s6	{ background-color:#00b6ea; color: black; } /*liteblue*/
+td.s7	{ background-color:#003aea; color: black; } /*blue	*/
+td.s8	{ background-color:#c700ea; color: black; } /*purple	*/
+td.s9	{ background-color:#ea0093; color: black; } /*pink	*/
+
+/*s10 is not part of any loop - extra 11th "color"
+       gray, extra color used for suis in pl weapon usage table*/	
+td.s10	{ background-color:#7b7c6e; }
+
+/*Intensity range blue to red, used in all tables*/
+td.i0	{ background-color:#FF0101; color: black; } /*red	*/
+td.i1	{ background-color:#FF7901; color: black; } /*organge	*/
+td.i2	{ background-color:#FFB401; color: black; } /*lorange	*/
+td.i3	{ background-color:#FFF001; color: black; } /*yellow	*/
+td.i4	{ background-color:#D2FF01; color: black; } /*ygreen	*/
+td.i5	{ background-color:#96FF01; color: black; } /*lgreen	*/
+td.i6	{ background-color:#01FF5B; color: black; } /*dgreen	*/
+td.i7	{ background-color:#01FFD2; color: black; } /*lblueg	*/
+td.i8	{ background-color:#01B4FF; color: black; } /*lblue	*/
+td.i9	{ background-color:#013DFF; color: black; } /*dblue	*/

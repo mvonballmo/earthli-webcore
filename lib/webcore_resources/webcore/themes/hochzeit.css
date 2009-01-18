@@ -1,0 +1,165 @@
+/****************************************************************************
+
+Copyright (c) 2002 Marco Von Ballmoos
+
+This file is part of earthli WebCore.
+
+earthli WebCore is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+earthli WebCore is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with earthli WebCore; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
+For more information about the earthli WebCore, visit:
+
+http://www.earthli.com/software/webcore
+
+****************************************************************************/
+
+body
+{
+	background: #BBAA99 url(hochzeit/fossil_paper.jpg) repeat;
+	color: #FDF8E5;
+}
+
+.page
+{
+	max-width: 800px;
+	margin: auto;
+}
+
+.banner a:link, .banner a:visited, .footer a:link, .footer a:visited
+{
+	color: #3357A2;
+}
+
+.nav-box
+{
+	background: #DDCCBB url(hochzeit/fossil_paper_light.jpg) repeat;
+	border: 1px solid #554433;
+	color: #554433;
+}
+
+a:link, a:visited
+{
+	color: #5579C4;
+}
+
+a:hover, a:active
+{
+	color: #FF0000;
+}
+
+.box, .menu
+{
+	background: #FDF8E5 url(hochzeit/milkweed_paper.jpg) repeat;
+	color: #554433;
+	border-color: #554433;
+}
+
+.box-title
+{
+	border-color: #554433;
+}
+
+.side-bar, .chart, .preview
+{
+	background: #FDF8E5 url(hochzeit/milkweed_paper.jpg) repeat;
+	color: #554433;
+	border-color: #554433;
+}
+
+.preview
+{
+	width: 85%;
+	margin: auto;
+	border-width: 0px;
+}
+
+.preview-title
+{
+	border-width: 0px;
+}
+
+.preview-body, .form-basic
+{
+	border: 1px solid #554433;
+	background: url(hochzeit/10_percent_brown.png);
+}
+
+.menu
+{
+	background-color: transparent;
+	background: #DDCCBB url(hochzeit/milkweed_paper.jpg) repeat;
+}
+
+.side-bar-title
+{
+	border-color: #554433;
+}
+
+.chart-title
+{
+	background: #DDCCBB url(hochzeit/fossil_paper_light.jpg) repeat;
+}
+
+.callout
+{
+	border-color: #554433;
+}
+
+.horizontal-separator, .vertical-separator
+{
+	border-color: #554433;
+}
+
+.cell-selected, .cell-highlight
+{
+	background: #DDCCBB url(hochzeit/fossil_paper_light.jpg) repeat;
+}
+
+.error
+{
+	background-color: transparent;
+	border-width: 0px;
+}
+
+h1
+{
+	color: #FDF8E5;
+}
+
+.graph-foreground
+{
+	background: #FDF8E5;
+}
+
+.graph-background
+{
+	background: #887766;
+}
+
+.highlight
+{
+	color: #FF0000;
+}
+
+.quote, .quote-inline
+{
+	color: black;
+}
+
+.quote-block
+{
+	border: 1px solid #554433;
+	padding: .5em;
+	background: url(hochzeit/10_percent_brown.png) repeat;
+}

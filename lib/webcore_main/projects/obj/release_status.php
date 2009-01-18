@@ -1,0 +1,474 @@
+<?php
+
+/**
+ * @copyright Copyright (c) 2002-2008 Marco Von Ballmoos
+ * @author Marco Von Ballmoos
+ * @filesource
+ * @package projects
+ * @subpackage obj
+ * @version 3.0.0
+ * @since 1.8.0
+ */
+
+/****************************************************************************
+
+Copyright (c) 2002-2008 Marco Von Ballmoos
+
+This file is part of earthli Projects.
+
+earthli Projects is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+earthli Projects is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with earthli Projects; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
+For more information about the earthli Projects, visit:
+
+http://www.earthli.com/software/webcore/projects
+
+****************************************************************************/
+
+/** */
+require_once ('webcore/obj/webcore_object.php');
+
+/**
+ * Describes the overall status for a {@link RELEASE}.
+ * Includes two {@link RELEASE_DATE_STATUS} objects, describing the testing and shipping status.
+ * @package projects
+ * @subpackage obj
+ * @version 3.0.0
+ * @since 1.8.0
+ * @access private
+ */
+class RELEASE_STATUS
+{
+  /**
+   * Information about the testing status of a release.
+   * @var RELEASE_DATE_STATUS
+   */
+  var $test;
+  /**
+   * Information about the shipping status of a release.
+   * @var RELEASE_DATE_STATUS
+   */
+  var $ship;
+
+  /**
+   * @param RELEASE &$release
+   * @param boolean $text_only Omit all tags if True.
+   */
+  function RELEASE_STATUS (&$release, $text_only)
+  {
+    $this->test = new RELEASE_DATE_STATUS ($release, $release->time_tested, $release->time_testing_scheduled, ! $release->planned ());
+    $this->ship = new RELEASE_DATE_STATUS ($release, $release->time_shipped, $release->time_scheduled);
+  }
+
+  /**
+   * Return whether this release is overdue in any way.
+   * Use this function rather than checking the states of {@link $test} and {@link $ship}.
+   * @return boolean
+   */
+  function is_overdue ()
+  {
+    return $this->test->overdue || $this->ship->overdue;
+  }
+
+  /**
+   * Return this status as HTML
+   * @return string
+   */
+  function as_html ()
+  {
+    if (! isset ($this->_html_text))
+      $this->_html_text = $this->_as_text (FALSE);
+    return $this->_html_text;
+  }
+
+  /**
+   * Return this status as plain text.
+   * @return string
+   */
+  function as_plain_text ()
+  {
+    if (! isset ($this->_plain_text))
+      $this->_plain_text = $this->_as_text (TRUE);
+    return $this->_plain_text;
+  }
+
+  /**
+   * Format into a concise text representation.
+   * @param boolean $text_only Do not use tags when formatting.
+   * @return string
+   * @access private
+   */
+  function _as_text ($text_only)
+  {
+    if ($this->ship->occurred)
+      $Result = 'Released on ' . $this->ship->date_as_text ($text_only);
+    else
+    {
+      if ($this->test->scheduled)
+      {
+        if (! $this->test->occurred)
+        {
+          $label = 'testing';
+          $stat = $this->test;
+        }
+        else if ($this->ship->scheduled)
+        {
+          $label = 'release';
+          $stat = $this->ship;
+        }
+      }
+      else if ($this->ship->scheduled)
+      {
+        $label = 'release';
+        $stat = $this->ship;
+      }
+      else
+        $Result = 'Assigned to release';
+    }
+
+    if (! isset ($Result))
+    {
+      $Result = '';
+      if ($text_only)
+      {
+        if ($stat->text)
+          $Result = '[' . $stat->text . '] ';
+      }
+      else
+      {
+        if ($stat->icon)
+          $Result = $stat->icon . ' ';
+      }
+
+      $Result .= "Scheduled for $label " . $stat->date_as_text ($text_only);
+      $Result .= ' (' . $stat->diff_as_text ($text_only) . ' ' . $stat->diff_label . ')';
+    }
+
+    return $Result;
+  }
+
+  /**
+   * @var string
+   * @access private
+   */
+  var $_html_text;
+  /**
+   * @var string
+   * @access private
+   */
+  var $_plain_text;
+}
+
+/**
+ * Describes the status for a {@link RELEASE} date.
+ * Releases have two dates: testing and shipping.
+ * @package projects
+ * @subpackage obj
+ * @version 3.0.0
+ * @since 1.8.0
+ */
+class RELEASE_DATE_STATUS extends WEBCORE_OBJECT
+{
+  /**
+   * Either the time scheduled or the time occurred.
+   * @var DATE_TIME
+   */
+  var $date;
+  /**
+   * The relevant time difference.
+   * If {@link $occurred} is True, then this is the difference between scheduled
+   * time and occurred time. If {@link $scheduled} is True, then this is the
+   * difference between now and time scheduled.
+   * @var TIME_INTERVAL
+   */
+  var $difference;
+  /**
+   * Either 'early' or 'late'.
+   * @var string
+   */
+  var $diff_label;
+  /**
+   * True if scheduled time has passed and {@link $occurred} is False.
+   * @var boolean
+   */
+  var $overdue;
+  /**
+   * True if the event occurred.
+   * @var boolean
+   */
+  var $occurred;
+  /**
+   * True if the event is (or was) scheduled.
+   * @var boolean
+   */
+  var $scheduled;
+  /**
+   * Graphic indicator of the status condition.
+   * Indicates whether an event has occurred, was skipped or is overdue.
+   * @see $text
+   * @var string
+   */
+  var $icon;
+  /**
+   * Text indicator of the status condition.
+   * Indicates whether an event has occurred, was skipped or is overdue.
+   * @see $icon
+   * @var string
+   */
+  var $text;
+
+  /**
+   * Time the event was scheduled.
+   * @var DATE_TIME
+   */
+  var $time_scheduled;
+  /**
+   * Time the event occurred.
+   * @var DATE_TIME
+   */
+  var $time_occurred;
+
+  /**
+   * @param RELEASE &$release
+   * @param DATE_TIME &$occurred Time the event occurred. Need not be valid.
+   * @param DATE_TIME &$scheduled Time the event is scheduled. Need not be valid.
+   * @param boolean $skip_condition Marks an event as skipped if this is true, and the event was scheduled, but has not occurred.
+   */
+  function RELEASE_DATE_STATUS (&$rel, &$occurred, &$scheduled, $skip_condition = FALSE)
+  {
+    WEBCORE_OBJECT::WEBCORE_OBJECT ($rel->context);
+
+    $this->_release =& $rel;
+    $this->time_occurred =& $occurred;
+    $this->time_scheduled =& $scheduled;
+    $this->_skip_condition = $skip_condition;
+
+    $this->refresh ();
+  }
+
+  /**
+   * Return this status as HTML
+   * @return string
+   */
+  function as_html ()
+  {
+    if (! isset ($this->_html_text))
+    {
+       $this->_html_text = $this->_as_text (FALSE);
+      if ($this->icon)
+        $this->_html_text = $this->icon . ' ' . $this->_html_text;
+      $this->_html_text = '<span style="white-space: nowrap">' . $this->_html_text . '</span>';
+    }
+    return $this->_html_text;
+  }
+
+  /**
+   * Return this status as plain text.
+   * @return string
+   */
+  function as_plain_text ()
+  {
+    if (! isset ($this->_plain_text))
+    {
+       $this->_plain_text = $this->_as_text (TRUE);
+      if ($this->text)
+        $this->_plain_text = $this->text . ' ' . $this->_plain_text;
+    }
+    return $this->_plain_text;
+  }
+
+  /**
+   * Format the date into a string.
+   * @param boolean $text_only Do not use tags when formatting.
+   * @return string
+   */
+  function date_as_text ($text_only)
+  {
+    if (isset ($this->date))
+      return $this->_date ($this->date, $text_only);
+  }
+
+  /**
+   * Format the time difference into a string.
+   * @param boolean $text_only Do not use tags when formatting.
+   * @return string
+   */
+  function diff_as_text ($text_only)
+  {
+    if (isset ($this->difference) && ! $this->difference->is_empty ())
+      return $this->difference->format (1);
+    else
+      return '';
+  }
+
+  /**
+   * Recalculates the event's status.
+   * Call this if you reassign the dates.
+   */
+  function refresh ()
+  {
+    $this->scheduled = $this->time_scheduled->is_valid ();
+    $this->occurred = $this->time_occurred->is_valid ();
+    $this->overdue = FALSE;
+    $this->icon = '';
+    $this->text = '';
+    $this->diff_label = '';
+    unset ($this->_html_text);
+    unset ($this->_plain_text);
+
+    if ($this->occurred)
+    {
+      $this->date = $this->time_occurred;
+
+      $this->icon = $this->context->resolve_icon_as_html ('{icons}indicators/released', 'Complete', '16px');
+
+      if ($this->time_scheduled->is_valid ())
+      {
+        if ($this->time_occurred->less_than_equal ($this->time_scheduled))
+        {
+          $this->difference = $this->time_scheduled->diff ($this->time_occurred);
+          $this->diff_label = 'early';
+        }
+        else
+        {
+          $this->difference = $this->time_occurred->diff ($this->time_scheduled);
+          $this->diff_label = 'late';
+        }
+      }
+    }
+    else
+    {
+      if ($this->scheduled)
+      {
+        $this->date = $this->time_scheduled;
+        if ($this->_skip_condition)
+        {
+          $this->icon = $this->context->resolve_icon_as_html ('{icons}indicators/warning', 'Skipped', '16px');
+          $this->text = 'Skipped';
+        }
+        else
+        {
+          $this->icon = $this->context->resolve_icon_as_html ('{icons}buttons/calendar', 'Scheduled', '16px');
+          $now = new DATE_TIME ();
+
+          if ($now->less_than_equal ($this->time_scheduled))
+          {
+            $this->difference = $this->time_scheduled->diff ($now);
+            $this->diff_label = 'left';
+
+            /* Determine whether there should be a warning for the approaching deadline. */
+
+            $warn_time = $this->_release->warning_time ($this->time_scheduled);
+            if ($warn_time->less_than ($now))
+            {
+              $this->icon = $this->context->resolve_icon_as_html ('{icons}indicators/warning', 'Due soon', '16px');
+              $this->text = 'Due soon';
+            }
+          }
+          else
+          {
+            $this->overdue = TRUE;
+            $this->icon = $this->context->resolve_icon_as_html ('{icons}indicators/error', 'Overdue', '16px');
+            $this->text = 'Overdue';
+            $this->difference = $now->diff ($this->time_scheduled);
+            $this->diff_label = 'late';
+          }
+        }
+      }
+    }
+  }
+
+  /**
+   * Format as generic text.
+   * @param boolean $text_only Do not use tags when formatting.
+   * @return string
+   * @access private
+   */
+  function _as_text ($text_only)
+  {
+    $date_text = $this->date_as_text ($text_only);
+    $diff_text = $this->diff_as_text ($text_only);
+
+    if ($this->overdue)
+      $Result = "$date_text ($diff_text $this->diff_label)";
+    else if ($this->occurred)
+    {
+      if ($diff_text)
+        $Result = "$date_text ($diff_text $this->diff_label)";
+      else
+        $Result = $date_text;
+    }
+    else if ($this->scheduled)
+    {
+      if ($diff_text)
+        $Result = "$diff_text $this->diff_label ($date_text)";
+      else
+        $Result = $date_text;
+    }
+    else
+      $Result = 'Not scheduled';
+      
+    return $Result;
+  }
+
+  /**
+   * Format a date for display.
+   * @param DATE_TIME $date
+   * @param boolean $text_only Do not use tags when formatting.
+   * @return string
+   * @access private
+   */
+  function _date ($date, $text_only)
+  {
+    $Result = '';
+
+    if (isset ($date) && $date->is_valid ())
+    {
+      $f = $date->formatter ();
+      $f->type = Date_time_format_short_date;
+      $f->show_local_time = ! $text_only && $this->context->local_times_allowed ();
+      $f->show_CSS = ! $text_only;
+
+      $Result = $date->format ($f);
+      if (! $text_only)
+        $Result = '<span class="visible" style="white-space: nowrap">' . $Result . '</span>';
+    }
+
+    return $Result;
+  }
+
+  /**
+   * Attached to this release.
+   * @var RELEASE
+   * @access private
+   */
+  var $_release;
+  /**
+   * @var boolean
+   * @access private
+   */
+  var $_skip_condition;
+  /**
+   * @var string
+   * @access private
+   */
+  var $_html_text;
+  /**
+   * @var string
+   * @access private
+   */
+  var $_plain_text;
+}
+
+?>

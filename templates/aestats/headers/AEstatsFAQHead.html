@@ -1,0 +1,412 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+<HEAD>
+<TITLE>&aelig;stats  -  f. a. q.</TITLE>
+<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="TEXT/HTML; CHARSET=ISO-8859-1">
+<link rel="stylesheet" type="text/css"
+<!--AEstats StyleSheet;-->
+>
+</HEAD>
+</head>
+	<body>
+		<div class="page-body">
+
+			<div class="nav-bar">
+				<a href="AEstats.html">intro</a><br>
+				<a href="AEstatsRanking.html">dm rank</a><br>
+				<a href="AEstatsTeam.html">team rank</a><br>
+				<a href="AEstatsBuddy.html">buddy stats</a><br>
+				<a href="AEstatsBestOfs.html">best of</a><br>
+				<a href="AEstatsGlobal.html">global</a><br>
+				<a href="AEstatsRankMatrix.html">rank matrix</a><br>
+				<a href="AEstatsDiffMatrix.html">diff matrix</a><br>
+				<a href="AEstatsHelp.html">help</a><br>
+				<span class="selected">F.A.Q.</span><br>
+        <div class="sub-menu">
+					<div class="sub-menu-title">Ranking terms</div>
+					...How many players <a href="#HowRanking">made it</a> into the ranking?<br>
+					...Why not rank <a href="#RankEvery">every</a> player?<br>
+					...How to <a href="#Filter">get into</a> the ranking?<br>
+					...Why is ranking so <a href="#RankComplicated">complicated</a>?<br>
+					...What's with these ranking <a href="#Matrices">matrices</a>?<br>
+					...What's the <a href="#DataBasis">data basis</a> of ranking?<br>
+					...How is the rank <a href="#RankCalc">calculated</a>?<br>
+					...What rank <a href="#RankValues">values</a> are possible?<br>
+					...Why is the rank data <a href="#RankVsPlayer">different</a> from the player data?<p>
+          <div class="sub-menu-title">Notation</div>
+					...What are <a href="#Events">events</a>?<br>
+					...What are <a href="#Incidents">incidents</a>?<br>
+					...What are <a href="#Happenings">happenings</a>?<br>
+					...What are <a href="#Netto">netto%</a> values?<br>
+					...What do <a href="#FDS">F, D, S, &amp; E </a> mean?
+				</div>
+				<a href="http://www.planetquake.com/aeons/aestats" target="_new">&aelig;s site</a>
+			</div>
+
+			<h1 class="server-title">
+<!--AEstats serverName; -->
+			</h1>
+
+			<div class="notes">
+				<span class="field">Ranking</span> last updated on
+				<span class="kw">
+<!--AEstats LastUpDated; Wednesday, September 16th 18:22 1998-->
+				</span>
+			</div>
+
+			<h2>F.A.Q.</h2>
+
+      <p>Here all the frequently asked questions are answered. Since I had to
+				invent quite a few terms, to better explain what is happening in ranking,
+				you might want to look these up, to get my drift ;).</p>
+
+      <dl class="sub-sections">
+
+				<dt class="sub-section-title">
+					<a name="HowRanking"></a>
+					How many players made it into the ranking?
+				</dt>
+				<dd class="sub-section-info">
+					Only the top
+					<span class="kw">
+<!--AEstats MaxPlayers ; 90 of 90 max.-->
+				</span>(in <a href="#Incidents">incident</a> counts, and high
+				in <a href="#Netto">netto%</a>) players will show on
+				the pages here. Of the <span class="kw">
+<!--AEstats Players; 150-->
+				</span> players (with unique names) seen on this server, <span class="kw">
+<!--AEstats MadeItPlayers ; 90-->
+				</span>
+				made it into the stats.
+				</dd>
+
+				<dt class="sub-section-title">
+					<a name="RankEvery"></a>
+					Why not rank every player?
+				</dt>
+				<dd class="sub-section-info">
+					<p>The 'quality' of ranking can only be as good as the statistics. Let me
+					explain this...</p>
+
+					<p>If you have players that play a lot and thereby score
+					many frags, then <span class="kw">&AElig;stats</span> will be able to judge
+					these players very accurately. The calculated average player ability will
+					then be very much the player's <span class="kw">real</span> ability. These
+					stats try to say something about how a player is doing on average, no attempt
+					is being made to determine the day to day fluctuations.</p>
+
+					<p>If you have players that don't play much, and want to compare them with the
+					above frequent players, then this will not be very fair, since there is
+					not sufficient data available to calculate the average behavior of these infrequent
+					players. E.g. a player enters a game gets 'lucky' with his rocket launcher and frags
+					5 (even 1 frag is enough) players without getting hit and then leaves the server.
+					This player will have a rank of <span class="kw">100</span>. A perfect player in other words.
+					But this rank is meaningless, because he did not play many other players and did
+					not play much!</p>
+
+					<p>Therefore I try <a href="#Filter">filter</a> out players that have not played much.</p>
+				</dd>
+
+				<dt class="sub-section-title">
+					<a name="Filter"></a>
+					How to get into ranking?
+				</dt>
+				<dd class="sub-section-info">
+					<p>As mentioned <a href="#RankEvery">above</a> not everyone gets ranked. For good reason
+						as I hope you will agree after reading the next few paragraphs.<p>
+
+					<p>All players seen on this <span class="kw">
+<!--AEstats GameName; -->
+						</span> server (currently <code>
+<!--AEstats Players; 150-->
+					</code> with unique names), are sorted by their number of
+					<a href="#Incidents">incidents</a> in the <span class="kw">1st</span> step.</p>
+
+					<p>In the <span class="kw">2nd</span> step, from this list the top <span class="kw">
+<!--AEstats MaxPlayers ; 90 of 90 max.-->
+					* 2</span> players are picked and sorted by their <span class="kw">netto%</span>
+					scores. Provided there are that many players in the logs, if there are less, then
+					all are picked.</p>
+
+					<p>In the <span class="kw">3rd</span> step, those top
+<!--AEstats MaxPlayers ; 90 of 90 max.-->
+					players left are then ranked. E.g. their data is collected and copied into
+					the <a href="#Matrices">ranking matrix</a>.</p>
+
+					<p>In the <span class="kw">4th</span> step, those players
+					are compared against the so called <span class="kw">incident barrier</span>
+					(as defined in the <code>AEstats.cfg</code>). If they have less incidents than
+					the barrier's <span class="kw">
+<!--AEstats IncidentBarrier; -->
+					</span> value, then they are removed from the matrix. this makes things a bit
+					complicated, since the player who was just kicked will 'take his frags
+					with him', leaving less frags for the remaining folks. Recursively the
+					barrier is checked against players, until the player with the least incidents
+					has more incidents, than the barrier requires.</p>
+
+					<p class="notes">If <span class="kw">no player makes it</span> past the <span class="kw">incident barrier</span>,
+					then <span class="kw">all players</span> in the matrix are ranked. This is to ensure that there is at
+					least some data to show.</p>
+
+					<p class="notes">What this means: Play a lot to ensure that your incident counts are high. Then
+					try to be good, frag a lot, without getting hit much, and avoid suicides. This will
+					lead to high netto% (efficiency) values. If you are then among the top <span class="kw">
+<!--AEstats MaxPlayers ; 90 of 90 max.-->
+					</span> you will very probably be seen in ranking.</p>
+
+				</dd>
+
+				<dt class="sub-section-title">
+					<a name="RankComplicated"></a>
+					Why is ranking so complicated?</dt>
+				<dd class="sub-section-info">
+					<p>As mentioned <a href="#Filter">above</a>, players are picked in
+					4 steps for ranking.</p>
+
+					<p>Why has it got to be so complicated? Because through 3 generations of parsers,
+					I have come to understand how 'rank possessed' players tick and how they will do
+					anything to be N&deg; 1 in ranking.</p>
+
+					<p>In <span class="kw">step 1</span> I try to make the rank as fair and
+					'<span class="kw">significant</span>' as possible, and this can only be done for those
+					players that have played enough on this server. This translates to picking players with
+					<span class="kw">high incident counts</span>.</p>
+
+					<p>In <span class="kw">step 2</span> only players with high netto% are picked. The netto%
+					values are a primitive sort of ranking, that lets me find those players that
+					<span class="kw">play pretty well</span>.</p>
+
+					<p>In the very beginning I did not check for this. This led to situations where good players along
+					with weak players that got fragged a lot (both have high incident counts) where ranked against
+					each other. What happened then was this: The strong players expressively picked out the weak players
+					and ripped them off so badly, that the weak (I am not saying bad) players, lost all fun in playing.
+					Personally I hate that! Gaming should be fun and not spoiled by a few idiots that always have to
+					win and be on top. Therefore to avoid such a situation, now only the strong players are ranked
+					against the other strong players.</p>
+
+					<p>In <span class="kw">step 3</span> only those players that are left are actually placed
+					in the ranking matrix.</p>
+
+					<p>In <span class="kw">step 4</span> i had to add an <span class="kw">incident barrier</span>
+					since, the matrix still had plenty of players in it, that had really low incident
+					counts. Using the barrier helps to ensures 'good' statistics (as good as possible with the
+					provided data, that is) meaning high incident counts.</p>
+
+					<p>As you can see I have given the matter a lot of thought... and this is the reason why I call
+					my ranking a <span class="kw">real</span> ranking. Most other rankings are something
+					like the netto%, I also use here.</p>
+				</dd>
+
+				<dt class="sub-section-title">
+					<a name="Matrices"></a>
+					What's with these ranking matrices?
+				</dt>
+				<dd class="sub-section-info">
+					<p>To be able to calculate real ranking, <span class="kw">&AElig;stats</span> uses
+					2 dimensional arrays (matrices) that contain the data for each ranked player in
+					form of frags and deaths.</p>
+
+					<p>There are 2 matrices: One is the
+<!--AEstats LinkRankMatrix; <a href=...html> -->
+					ranking matrix</a>, that lets you see in absolute counts how many frags you
+					scored against other players, and how many deaths got the better of you.</p>
+
+					<p>The second matrix does not really contain new data, it just displays the above matrix's
+					data in a different way, to make frag comparison a bit easier. See the
+<!--AEstats LinkDiffMatrix; <a href=...html> -->
+					difference matrix</a> for this. Shown are not absolute frag counts but
+					relative counts. The difference was calculated between, the frags you scored against
+					one specific player, and frags he scored against you. Positive values will mean you
+					scored more frags against him. You'll want that to be the default :).</p>
+
+					<p class="notes">Suicides are no longer shown, since these are <span class="kw">redistributed</span> among the other
+					players (those that fragged you), as <span class="kw">virtual frags</span>.</p>
+				</dd>
+
+				<dt class="sub-section-title">
+					<a name="DataBasis"></a>
+					What's the data basis of ranking?
+				</dt>
+				<dd class="sub-section-info">
+					Basis of all ranking is the socalled
+<!--AEstats LinkRankMatrix; <a href=...html> -->
+					ranking matrix</a>. It nicely sums up all the relevant data in a 2 dimensional array.
+					It shows your frags, and deaths. suicides are <span class="kw">redistributed</span> as
+					<span class="kw">virtual frags</span>.
+				</dd>
+
+				<dt class="sub-section-title">
+					<a name="RankCalc"></a>
+					How is the rank calculated?
+				</dt>
+				<dd class="sub-section-info">
+					<p>Using the
+<!--AEstats LinkRankMatrix; <a href=...html> -->
+					ranking matrix</a> data - for each pair of players <code>i</code> and <code>j</code>,
+					we calculate:</p>
+
+					<p>For all <code>i &lt;&gt; j</code> (frags/deaths) the difference <code>matrix[i][j] - matrix[j][i]</code>
+					(Frags <code>i</code> scored against <code>j</code> minus the frags <code>j</code> scored
+					again <code>i</code>) is calculated. We then devide by <code>matrix[i][j] + matrix[j][i]</code> to
+					calculate an efficiency. This is done for all possible other players <code>j</code>, telling us
+					how good player <code>i</code> has been doing against all these other players.</p>
+
+					<p>Summing up these quotients we get a 'netto performance sum'. The latter is finally divided
+					by the number of <code>i</code>'s contacts (e.g. the N&deg; of possible other <code>j</code> players that
+					fragged <code>i</code>).</p>
+
+					<p>This yields values from <code>-1</code> to <code>1</code>. I then shift the range by <code>+1</code>
+					and multiply by <code>50</code>, to get the ranking range you know from <code>0</code> to <code>100</code>.</p>
+				</dd>
+
+				<dt class="sub-section-title">
+					<a name="RankValues"></a>
+					What rank values are possible?
+				</dt>
+				<dd class="sub-section-info">
+					<p>The above rank <a href="#RankCalc">calculation</a> yields normed
+					<span class="kw">rank</span> values, that
+					run from <code>0</code> to <code>100</code>. A rank of <code>50</code> is
+					thereby considered as <span class="kw">average</span>. E.g. a player that does not suicide much
+					and gets hit as much as he hands out.</p>
+
+					<p>So you will want to have values way above <code>50</code>... trust me ;).</p>
+				</dd>
+
+				<dt class="sub-section-title">
+					<a name="RankVsPlayer"></a>
+					Why is the rank data different from the player data?
+				</dt>
+				<dd class="sub-section-info">
+					<p>You may have noticed that the frag and death counts along with the netto% values
+					on the
+<!--AEstats LinkRanking; <a href=...html> -->
+					ranking</a> page differ from those shown on
+					<a href="players/AEstatsPlayer0.html">player stats</a> pages?</p>
+
+					<dl>
+						<dt>Why is this so?</dt>
+						<dd>On the ranking page only the data is used that is <span class="kw">relevant to ranking</span>, read: only the
+							frags, deaths, suicides between the top ranked players is used. All the other info
+							in the log file is ignored. Therefore the frags/death counts will almost always be lower than
+							the total counts. On the player stats page on the other hand, *all* frag, deaths, and suicides
+							are counted and shown.</dd>
+
+						<dt>Why not simply show the same data?</dt>
+						<dd>
+							The ranking page can only show relevant data, so it would not help to try to show more data
+							there. The player stats page could show less data, the data that is used for ranking,
+							but personally I like to have as much data available as possible, even if it may not be ranking
+							relevant.</dd>
+
+						<dt>What do you mean with relevant?</dt>
+						<dd>Since the death match ranking uses the ranking matrix for ranking calculations,
+							only the data of the players that are actually *in* ranking can
+							and is used. This is the relevant data.</dd>
+					</dl>
+				</dd>
+
+				<dt class="sub-section-title">
+					<a name="Events"></a>
+					What are events?
+				</dt>
+				<dd class="sub-section-info">
+					Apart from the leathal things that happen on gaming
+					servers, like frags, deaths and suicides, there are
+					also many non-leathal things. I call these
+					<span class="kw">events</span>. Examples for events are
+					typically flag captures, flag touches, healing of players,
+					and anything else of relevance that might happen on a
+					map.
+				</dd>
+
+				<dt class="sub-section-title">
+					<a name="Incidents"></a>
+					What are incidents?
+				</dt>
+				<dd class="sub-section-info">
+					<p>Incidents are things that can happen to a player during
+					multiplayer gameplay. To be exact they are the sum of frags,
+					deaths and suicides:</p>
+
+					<p><code>Incidents = <span class="kw">F</span>rags +
+							<span class="kw">D</span>eaths +
+							<span class="kw">S</span>uicides</code></p>
+				</dd>
+
+				<dt class="sub-section-title">
+					<a name="Happenings"></a>
+					What are happenings?
+				</dt>
+				<dd class="sub-section-info">
+					<p>So far I had been able to track frags, deaths and
+					suicides. Now i am also tracking events. To
+					express all the things going on in one term i
+					'invented' the term <span class="kw">happening</span>.
+					A happening can be a frag, death, suicide or an event:</p>
+
+					<p><code>Happening = <span class="kw">F</span>rags +
+							<span class="kw">D</span>eaths +
+							<span class="kw">S</span>uicides +
+							<span class="kw">E</span>vents</code></p>
+				</dd>
+
+				<dt class="sub-section-title">
+				<a name="Netto"></a>
+					What are netto% values?
+				</dt>
+				<dd class="sub-section-info">
+					<p>The so called <span class="kw">netto%</span> values are a primitive sort of ranking.</p>
+
+					<p>The advantage of this value is that it can be calculated for each player, without
+					having to take all the other players into account. The disadvantage: It's sorta wish washy :)...
+					the netto% value only hints at the player's real in-game quality. The latter can only be properly
+					estimated if one uses the data of the other players that interacted with you. So done on the
+<!--AEstats LinkRanking; <a href=...html> -->
+					ranking</a> page.</p>
+
+					<p>How is the netto% value calculated?</p>
+					<p><code>
+						Incidents = <span class="kw">F</span>rags + <span class="kw">D</span>eaths + <span class="kw">S</span>uicides<br>
+						Nettos = <span class="kw">F</span>rags - <span class="kw">D</span>eaths - <span class="kw">S</span>uicides
+					</code></p>
+
+					<p><code><span class="kw">netto%</span> = ( Nettos / Incidents ) * 100 </code></p>
+
+					<p>This yields values from <code>0</code> to <code>100%</code>.</p>
+				</dd>
+
+				<dt class="sub-section-title">
+					<a name="FDS"></a>
+					What do F, D, S, &amp; E mean?
+				</dt>
+				<dd class="sub-section-info">
+					<p>These are the abbreviations that are used in tables:</p>
+					<table cellpadding="5">
+					<tr><td class="bg">F</td><td>Frags, you scored 'em.</td></tr>
+					<tr><td class="bg">D</td><td>Deaths, you got hit.</td></tr>
+					<tr><td class="bg">S</td><td>Suicides, you did it unto yourself.</td></tr>
+					<tr><td class="bg">E</td><td>Events, all the other stuff you did.</td></tr>
+					<tr><td class="bg">I</td><td>Incidents, (F,S,D).</td></tr>
+					<tr><td class="bg">H</td><td>Happenings, (F,S,D,E).</td></tr>
+					</table>
+				</dd>
+
+			</dl>
+
+		</div>
+
+<!-- Copyright Info and Links -->
+		<div class="footer">
+			This page was generated with <a href="http://www.planetquake.com/aeons/aestats">&AElig;stats</a> (c) 1998-2001
+			by <span class="kw">&AElig;on</span>.<br>
+			Using build
+<!--AEstats AEstats_Version;-->
+			<br>
+<!--AEstats LastUpDated; Wednesday, September 16th 18:22 1998-->
+			<br>Commercial use prohibited!
+		</div>
+
+	</body>
+</html>
+

@@ -1,0 +1,167 @@
+/****************************************************************************
+
+Copyright (c) 2002 Marco Von Ballmoos
+
+This file is part of earthli WebCore.
+
+earthli WebCore is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+earthli WebCore is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with earthli WebCore; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
+For more information about the earthli WebCore, visit:
+
+http://www.earthli.com/software/webcore
+
+****************************************************************************/
+
+body
+{
+	background: #544332;
+	color: #FFFFFF;
+}
+
+.page
+{
+	max-width: 800px;
+	margin: auto;
+}
+
+.nav-box
+{
+	border-width: 0px;
+}
+
+.box
+{
+	border-width: 0px;
+}
+
+.box-title
+{
+	color: #AA9988;
+	border-width: 0px;
+	border-bottom: 1px solid #766554;
+	text-align: center;
+}
+
+.side-bar, .chart, .preview, .form-basic, .menu
+{
+	background-color: #655443;
+	border-color: #322110;
+}
+
+.side-bar-title
+{
+	border-width: 0px;
+	text-align: center;
+	color: #AA9988;
+}
+
+.preview-title
+{
+	border-width: 0px;
+	color: #AA9988;
+}
+
+.chart-title
+{
+	background-color: #4B3A29;
+	color: #CCBBAA;
+}
+
+.cell-non-empty
+{
+	border-color: #766554;
+}
+
+.cell-selected, .cell-highlight
+{
+	background: #655443;
+	border-color: #766554;
+}
+
+.menu-bar-top, .menu-bar-bottom
+{
+	border-width: 0px;
+}
+
+a:link
+{
+	color: #CCBBAA;
+}
+
+a:visited
+{
+	color: #CCBBAA;
+}
+
+a:active
+{
+	color: #FFFF00;
+}
+
+a:hover
+{
+	color: #FFFF00;
+}
+
+h2
+{
+	border-color: #CCCCCC;
+}
+
+th
+{
+	border-color: #CCCCCC;
+}
+
+.graph-foreground
+{
+	background: #CCBBAA;
+}
+
+.graph-background
+{
+	background: #443322;
+}
+
+.disabled
+{
+	color: #CCCCCC;
+}
+
+.highlight
+{
+	color: #FF0000;
+}
+
+.object-in-list, .info-box-top, .info-box-bottom, .horizontal-separator, .vertical-separator
+{
+	border-color: #766554;
+}
+
+.label
+{
+	color: #CCBBAA;
+}
+
+.quote, .quote-inline, .quote-block
+{
+	color: #CCBBAA;
+}
+
+.required
+{
+	color: #CCBBAA;
+}
+

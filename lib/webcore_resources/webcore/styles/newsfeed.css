@@ -1,0 +1,73 @@
+feed:before, rss:before
+{
+  display: block;
+  padding: 2px;
+  border: 1px solid #FF9999;
+  background-color: #FFFF99;
+  text-align: center;
+  width: 500px;
+  margin: 10px auto;
+}
+
+rss, feed 
+{
+  display: block;
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 10pt;
+}
+
+title 
+{
+  display: block;
+  margin: 5px;
+  padding: 2px;
+  color: #000080;
+  font-size: 14pt;
+  border-bottom: 2px solid #000080;
+}
+
+link, updated, rights, subtitle, pubDate, id, copyright
+{
+  padding-left: 10px;
+  display: block;
+}
+
+link, updated, pubDate, id
+{
+  color: #666666;
+}
+
+subtitle
+{
+  margin: 1em 1em 1em 0em;
+}
+
+item, entry
+{
+  display: block;
+  padding: 2px 30px 2px 30px;
+}
+
+description, content
+{
+  display: block;
+  margin-left: 5px;
+}
+
+description:before, content:before
+{
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+  content: "Contents";
+}
+
+rights, copyright
+{
+  font-size: 85%;
+  font-style: italic;
+  margin: 5px;
+  padding: 2px;
+  padding-top: 4px;
+  border-top: 2px solid #000080;
+}

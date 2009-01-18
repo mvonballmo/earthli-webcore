@@ -1,0 +1,338 @@
+<?php
+
+/**
+ * @copyright Copyright (c) 2002-2008 Marco Von Ballmoos
+ * @author Marco Von Ballmoos
+ * @filesource
+ * @package webcore
+ * @subpackage config
+ * @version 3.0.0
+ * @since 2.5.0
+ */
+
+/****************************************************************************
+
+Copyright (c) 2002-2008 Marco Von Ballmoos
+
+This file is part of earthli WebCore.
+
+earthli WebCore is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+earthli WebCore is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with earthli WebCore; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
+For more information about the earthli WebCore, visit:
+
+http://www.earthli.com/software/webcore
+
+****************************************************************************/
+
+/**
+ * Request no text validation.
+ * @see CONTEXT::tag_validator()
+ */
+define ('Tag_validator_none', '');
+/**
+ * Request a validator for multi-line text.
+ * @see CONTEXT::tag_validator()
+ */
+define ('Tag_validator_single_line', 'single-line');
+/**
+ * Request a validator for single-line text.
+ * @see CONTEXT::tag_validator()
+ */
+define ('Tag_validator_multi_line', 'multi-line');
+
+/**
+ * Request a {@link CSS_TAG_BUILDER}.
+ * @see CONTEXT::make_tag_builder()
+ */
+define ('Tag_builder_css', 'css_tag');
+/**
+ * Request an {@link HTML_TAG_BUILDER}.
+ * @see CONTEXT::make_tag_builder()
+ */
+define ('Tag_builder_html', 'html_tag');
+
+/**
+ * @see CONTEXT::$display_options
+ * @package webcore
+ * @subpackage config
+ * @version 3.0.0
+ * @since 2.2.1
+ */
+class CONTEXT_DISPLAY_OPTIONS
+{
+  /**
+   * Separator string used between items in menus
+   * @var string
+   */
+  var $menu_separator = ' | ';
+  /**
+   * Separator string used between page numbers in page navigators.
+   * @var string
+   */
+  var $page_separator = ' &bull; ';
+  /**
+   * Separator string used between locations in the navigation bar.
+   * @var string
+   */
+  var $location_separator = ' &gt; ';
+  /**
+   * Separator string used between objects in any context.
+   * @var string
+   */
+  var $object_separator = ' &gt; ';
+  /**
+   * Maximum number of page numbers to show in page navigators.
+   * @var integer
+   */
+  var $pages_to_show = 7;
+  /**
+   * Maximum number of objects to show in the list of an entry navigator.
+   * @var integer
+   */
+  var $objects_to_show = 25;
+  /**
+   * Use this extensions for icons that don't specify one.
+   * @var string
+   */
+  var $default_icon_extension = 'png';
+  /**
+   * Should the interface use DHTML to render?
+   * This option is assumed False if the browser is not DHTML-capable. Use
+   * {@link CONTEXT::dhtml_allowed()} to check this option.
+   * @var boolean
+   */
+  var $use_DHTML = TRUE;
+  /**
+   * Use JavaScript to display local times in this application?
+   * @var boolean
+   */
+  var $show_local_times = TRUE;
+  /**
+   * Specify a maximum number of characters to display for object titles.
+   * @var integer
+   */
+  var $default_max_title_size = 25;
+  /**
+   * Use this title size for all elements (temporarily).
+   * Set this if you are rendering content in such a way that you know the titles will
+   * always fit. The maximum title sizes are actually for navigation bars and lists; generally
+   * grids and title bars have enough room for the whole title.
+   * @var integer
+   */
+  var $overridden_max_title_size = 0;
+
+  /**
+   * @param CONTEXT &$context
+   */
+  function CONTEXT_DISPLAY_OPTIONS (&$context)
+  {
+    $this->context =& $context;
+  }
+
+  /**
+   * @param CONTEXT_DISPLAY_OPTIONS
+   */
+  function copy_from ($opts)
+  {
+    $this->menu_separator = $opts->menu_separator;
+    $this->page_separator = $opts->page_separator;
+    $this->location_separator = $opts->location_separator;
+    $this->object_separator = $opts->object_separator;
+    $this->pages_to_show = $opts->pages_to_show;
+    $this->objects_to_show = $opts->objects_to_show;
+    $this->default_icon_extension = $opts->default_icon_extension;
+    $this->use_DHTML = $opts->use_DHTML;
+    $this->show_local_times = $opts->show_local_times;
+    $this->default_max_title_size = $opts->default_max_title_size;
+    $this->overridden_max_title_size = $opts->overridden_max_title_size;
+  }
+
+  /**
+   * @var CONTEXT
+   * @access private
+   */
+  var $context;
+}
+
+/**
+ * @see CONTEXT::$mail_options
+ * @package webcore
+ * @subpackage config
+ * @version 3.0.0
+ * @since 2.2.1
+ */
+class CONTEXT_MAIL_OPTIONS
+{
+  /**
+   * @var boolean
+   */
+  var $send_as_html = TRUE;
+  /**
+   * @var boolean
+   */
+  var $enabled = TRUE;
+  /**
+   * @var string
+   */
+  var $webmaster_address = 'webmaster@my-domain-name.com';
+  /**
+   * @var string
+   */
+  var $send_from_address = 'webcore@my-domain-name.com';
+  /**
+   * @var string
+   */
+  var $send_from_name = 'WebCore';
+  /**
+   * @var string
+   */
+  var $log_file_name;
+  /**
+   * @var boolean
+   */
+  var $logging_enabled = TRUE;
+  /**
+   * @var string
+   */
+  var $SMTP_server = '';
+  /**
+   * Determines which entry history items should be published.
+   * Publishes all history items if empty.
+   * @see History_item_state_constants
+   * @var string
+   */
+  var $entry_publication_filter;
+  /**
+   * Determines which comment history items should be published.
+   * Publishes all history items if empty.
+   * @see History_item_state_constants
+   * @var string
+   */
+  var $comment_publication_filter;
+
+  /**
+   * @param CONTEXT_MAIL_OPTIONS
+   */
+  function copy_from ($opts)
+  {
+    $this->send_as_html = $opts->send_as_html;
+    $this->enabled = $opts->enabled;
+    $this->webmaster_address = $opts->webmaster_address;
+    $this->send_from_address = $opts->send_from_address;
+    $this->send_from_name = $opts->send_from_name;
+    $this->log_file_name = $opts->log_file_name;
+    $this->logging_enabled = $opts->logging_enabled;
+    $this->SMTP_server = $opts->SMTP_server;
+  }
+}
+
+/**
+ * @see CONTEXT::$database_options
+ * @package webcore
+ * @subpackage config
+ * @version 3.0.0
+ * @since 2.5.0
+ */
+class CONTEXT_DATABASE_OPTIONS
+{
+  /**
+   * @var string
+   */
+  var $host = 'localhost';
+  /**
+   * @var string
+   */
+  var $name;
+  /**
+   * @var string
+   */
+  var $user_name = 'root';
+  /**
+   * @var string
+   */
+  var $password;
+
+  /**
+   * @param CONTEXT_DATABASE_OPTIONS
+   */
+  function copy_from ($opts)
+  {
+    $this->host = $opts->host;
+    $this->name = $opts->name;
+    $this->user_name = $opts->user_name;
+    $this->password = $opts->password;
+  }
+}
+
+/**
+ * @see CONTEXT::$upload_options
+ * @package webcore
+ * @subpackage config
+ * @version 3.0.0
+ * @since 2.5.0
+ */
+class CONTEXT_UPLOAD_OPTIONS
+{
+  /**
+   * If this is non-empty, successful uploads for invalid forms will be stored
+   * here until the form is submitted correctly. That is, if a user submits a
+   * form with an upload and the upload succeeds while the form does not, the
+   * user will not have to upload the file again in order to submit the form
+   * with that file.
+   *
+   * In order for preview for uploaded files to function correctly, this folder
+   * should be under the document root. A simple scheduled task can periodically
+   * cull files that have been uploaded and abandoned.
+   * @see FORM::_process_uploaded_file()
+   */
+  var $temp_folder = '{data}temp';
+  /**
+   * Indicate the maximum upload size.
+   * Uses PHP units like "2M"
+   * @var string
+   */
+  var $max_size = '2M';
+  /**
+   * Indicate whether file names should be converted to lower case by default.
+   * @var boolean
+   */
+  var $use_lower_case_file_names = TRUE;
+
+  /**
+   * @param CONTEXT_UPLOAD_OPTIONS $opts
+   */
+  function copy_from ($opts)
+  {
+    $this->temp_folder = $opts->temp_folder;
+  }
+}
+
+/**
+ * Options used to store date to a client.
+ * @package webcore
+ * @subpackage config
+ * @version 3.0.0
+ * @since 2.6.1
+ */
+class CONTEXT_STORAGE_OPTIONS
+{
+  /**
+   * Number of days to store a setting.
+   * @var integer
+   */
+  var $setting_duration = 180;
+}
+
+?>

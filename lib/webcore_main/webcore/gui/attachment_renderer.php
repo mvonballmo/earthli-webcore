@@ -1,0 +1,281 @@
+<?php
+
+/**
+ * @copyright Copyright (c) 2002-2007 Marco Von Ballmoos
+ * @author Marco Von Ballmoos
+ * @filesource
+ * @package webcore
+ * @subpackage renderer
+ * @version 2.8.0
+ * @since 2.5.0
+ */
+
+/****************************************************************************
+
+Copyright (c) 2002-2007 Marco Von Ballmoos
+
+This file is part of earthli WebCore.
+
+earthli WebCore is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+earthli WebCore is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with earthli WebCore; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
+For more information about the earthli WebCore, visit:
+
+http://www.earthli.com/software/webcore
+
+****************************************************************************/
+
+/** */
+require_once ('webcore/gui/content_object_renderer.php');
+
+/**
+ * Render details for {@link ATTACHMENT}s.
+ * @package webcore
+ * @subpackage renderer
+ * @version 2.8.0
+ * @since 2.5.0
+ */
+class ATTACHMENT_RENDERER extends CONTENT_OBJECT_RENDERER
+{
+  /**
+   * Outputs the object as HTML.
+   * @param ATTACHMENT &$obj
+   * @access private
+   */
+  function _display_as_html (&$obj)
+  {
+    echo '<div style="float: left">';
+    echo $obj->icon_as_html ('50px');
+    echo '</div><div style="margin-left: 60px">';
+
+    $file_name = $obj->full_file_name ();
+    $file_url = htmlentities ($obj->full_url ());
+    
+    echo "<table>\n";
+    echo '<tr><td class="label">Name</td><td>' . $obj->original_file_name;
+    if ($obj->exists () && ($obj->original_file_name != $obj->file_name) && $this->_options->show_interactive)
+    {
+      $img = $this->app->resolve_icon_as_html ('{icons}indicators/info', 'Info', '16px');
+      echo '<div class="caution" style="margin-top: .2em"><span class="notes">' . $img . ' Stored as <span class="field">' . $obj->file_name . "</span> on the server.</span></div>\n";
+    }    
+    echo "</td></tr>\n";
+    echo '<tr><td class="label">Size</td><td>' . file_size_as_text ($obj->size) . "</td></tr>\n";
+    echo '<tr><td class="label">Type</td><td>' . $obj->mime_type . "</td></tr>\n";
+
+    if ($this->_options->show_interactive && ! $obj->is_image)
+    {
+      echo "<tr><td colspan=\"2\">&nbsp;</td></tr>\n";
+      echo '<tr><td colspan="2">';
+      $renderer =& $this->context->make_controls_renderer ();
+      $buttons [] = $renderer->button_as_html ('Download', $file_url, '{icons}buttons/download');
+      $renderer->draw_buttons_in_row ($buttons);
+      echo "</td></tr>\n";
+    }
+
+    echo "</table>\n<br>\n";
+
+    if ($obj->is_image)
+      $this->_draw_html_image ($obj, $file_url);
+    elseif ($obj->is_archive)
+      $this->_draw_html_archive ($obj, $file_name);
+    else
+      echo $this->_echo_html_description ($obj);
+
+    $this->_echo_html_user_information ($obj, 'info-box-bottom');
+
+    echo '</div>';
+  }
+  
+  /**
+   * Show the image for this given file name.
+   * @param ATTACHMENT &$obj
+   * @param string $file_url
+   * @access private
+   */
+  function _draw_html_image ($obj, $file_url)
+  {
+    $class_name = $this->app->final_class_name ('IMAGE_METRICS', 'webcore/util/image.php');
+    $metrics = new $class_name ();
+    $metrics->set_url ($file_url);
+    $metrics->resize_to_fit (640, 640);
+    if ($metrics->loaded ())
+    {
+?>
+<div style="margin: auto; width: <?php echo $metrics->width (); ?>px">
+  <div>
+    <?php $this->_echo_html_description ($obj); ?>
+  </div>
+  <div>
+    <?php
+      if ($this->_options->show_interactive) 
+        echo $metrics->as_html ($obj->title_as_plain_text ());
+      else 
+        echo $metrics->as_html_without_link ($obj->title_as_plain_text ());
+    ?>    
+  </div>
+  <?php
+    if ($this->_options->show_interactive && $metrics->was_resized)
+    {
+  ?>
+  <div class="notes">
+    Resized from
+    <?php echo $metrics->original_width; ?> x <?php echo $metrics->original_height; ?> to
+    <?php echo $metrics->constrained_width; ?> x <?php echo $metrics->constrained_height; ?>.
+    Click to show full size in a separate window.
+  </div>
+  <?php
+    }
+  ?>
+</div>
+<?php
+    }
+    else
+      echo "<div class=\"error\">[$metrics->url] could not be opened for preview.</div>";    
+  }
+
+  /**
+   * Show the {@link ARCHIVE} for this given file name.
+   * @param ATTACHMENT &$obj
+   * @param string $file_name
+   * @access private
+   */
+  function _draw_html_archive ($obj, $file_name)
+  {
+    echo $this->_echo_html_description ($obj);
+
+    if ($obj->is_archive)
+    {
+      $class_name = $this->app->final_class_name ('ARCHIVE', 'webcore/util/archive.php');
+      $archive = new $class_name ($file_name);      
+      echo '<h2>Files</h2>';
+      echo '<br>';
+      echo '<table class="detail" cellspacing="0">';
+      echo '<tr><th style="text-align: left; padding-right: 1em">Name</th><th style="text-align: right">Size</th></tr>';
+      $archive->for_each (new CALLBACK_METHOD ('list_file_as_html', $this));
+      echo '</table>';
+    }
+    else if ($obj->mime_type == 'text/plain')
+    {
+      echo '<pre>';
+      if ($this->_options->preferred_text_length)
+      {
+        $handle = fopen ($file_name, 'r+');
+        echo fread ($handle, $this->_options->preferred_text_length);
+        $finished = FALSE;
+      }
+      else
+        readfile ($file_name);
+      echo '</pre>';
+    }
+  }
+  
+  /**
+   * Outputs the object as plain text.
+   * @param object &$entry
+   * @access private
+   */
+  function _display_as_plain_text (&$obj)
+  {
+    $this->_echo_plain_text_user_information ($obj);
+
+    $file_url = $obj->full_url ();
+    $file_name = url_to_file_name ($file_url);
+    $file_url = htmlentities ($file_url);
+
+    echo $this->_line ('[Name]: ' . $obj->original_file_name);
+    echo $this->_line ('[Size]: ' . file_size_as_text ($obj->size));
+    echo $this->_line ('[Type]: ' . $obj->mime_type);
+    echo $this->_par (' [URL]: <' . $file_url . '>');
+
+    $this->_echo_plain_text_description ($obj);
+
+    if ($obj->is_archive)
+      $this->_draw_text_archive ($obj, $file_name);
+    else if ($obj->mime_type == 'text/plain')
+    {
+      if ($this->_options->preferred_text_length)
+      {
+        $handle = fopen ($file_name, 'r+');
+        echo fread ($handle, $this->_options->preferred_text_length);
+        $finished = FALSE;
+      }
+      else
+        readfile ($file_name);
+    }
+  }
+
+  /**
+   * Show the {@link ARCHIVE} for this given file name.
+   * @param ATTACHMENT &$obj
+   * @param string $file_name
+   * @access private
+   */
+  function _draw_text_archive ($obj, $file_name)
+  {
+    $class_name = $this->app->final_class_name ('ARCHIVE', 'webcore/util/archive.php');
+    $archive = new $class_name ($file_name);      
+    echo $this->_line ('[Files]');
+    echo $this->_sep ();
+    $this->_longest_name = 0;
+    $archive->for_each (new CALLBACK_METHOD ('list_file_as_text', $this));
+    foreach ($this->_file_entries as $entry)
+      echo $this->_line ($entry->name . str_repeat (' ', $this->_longest_name - strlen ($entry->name)) . ' (' . file_size_as_text ($entry->size) . ')');
+  }
+  
+  /**
+   * Draw information for a file as HTML.
+   * Passed as a {@link CALLBACK} if the attachment is an {@link ARCHIVE}.
+   * @param ARCHIVE &$archive
+   * @param COMPRESSED_FILE_ENTRY &$entry
+   * @param CALLBACK $error_callback Function prototype: function ({@link COMPRESSED_FILE} $archive, string $msg, {@link COMPRESSED_FILE_ENTRY} $entry)
+   * @access private
+   */
+  function list_file_as_html (&$archive, &$entry, $error_callback = null)
+  {
+    $ft = $this->context->file_type_manager ();
+    $url = new FILE_URL ($entry->name);
+    $icon = $ft->icon_as_html ('', $url->extension (), '16px');
+
+    echo '<tr><td style="padding-right: 1em">' . $icon . ' ' . $entry->name
+         . '</td><td style="text-align: right">' . file_size_as_text ($entry->size) . '</td></tr>';
+  }
+
+  /**
+   * Draw information for a file as plain text.
+   * Passed as a {@link CALLBACK} if the attachment is an {@link ARCHIVE}.
+   * @param ARCHIVE &$archive
+   * @param COMPRESSED_FILE_ENTRY &$entry
+   * @param CALLBACK $error_callback Function prototype: function ({@link COMPRESSED_FILE} $archive, string $msg, {@link COMPRESSED_FILE_ENTRY} $entry)
+   * @access private
+   */
+  function list_file_as_text (&$archive, &$entry, $error_callback = null)
+  {
+    $this->_file_entries [] = $entry;
+    $this->_longest_name = max ($this->_longest_name, strlen ($entry->name));
+  }
+
+  /**
+   * @var integer
+   * @access private
+   */
+  var $_longest_name;
+  /**
+   * @var array[COMPRESSED_FILE_ENTRY]
+   * @see COMPRESSED_FILE_ENTRY
+   * @access private
+   */
+  var $_file_entries;
+}
+
+?>

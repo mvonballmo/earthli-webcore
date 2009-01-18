@@ -1,0 +1,186 @@
+/****************************************************************************
+
+Copyright (c) 2002 Marco Von Ballmoos
+
+This file is part of earthli WebCore.
+
+earthli WebCore is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+earthli WebCore is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with earthli WebCore; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
+For more information about the earthli WebCore, visit:
+
+http://www.earthli.com/software/webcore
+
+****************************************************************************/
+
+body
+{
+	background: #000000 url(halloween/halloween_bg.jpg) no-repeat fixed center center;
+	color: #FFFFFF;
+}
+
+.page
+{
+	max-width: 800px;
+	margin: auto;
+}
+
+.banner-title
+{
+	color: #FF9900;
+}
+
+.nav-box
+{
+	border-width: 0px;
+}
+
+.box
+{
+	border-width: 0px;
+}
+
+.box-title, .side-bar-title, .chart-title
+{
+	color: #FF9900;
+	border-bottom: 1px solid #666666;
+}
+
+.preview, .preview-title
+{
+	border-width: 0px;
+}
+
+.form-basic, .quote-block
+{
+	border: 1px solid #999999;
+	background: url(halloween/20_percent_black.png);
+}
+
+.menu
+{
+	background-color: transparent;
+	background: url(halloween/60_percent_black.png);
+}
+
+.side-bar, .chart
+{
+	border: 1px #666666 solid;
+}
+
+.cell-non-empty
+{
+	border-color: #999999;
+}
+
+.cell-selected, .cell-highlight
+{
+	border-color: #999999;
+}
+
+.menu-bar-bottom, .menu-bar-top
+{
+	border-width: 0px;
+}
+
+.horizontal-separator, .vertical-separator
+{
+	border-color: #999999;
+}
+
+a:link, a:visited
+{
+	color: #FF9933;
+}
+
+a:hover, a:active
+{
+	color: #FFFF00;
+}
+
+h1
+{
+	color: #FF6600;
+}
+
+h2
+{
+	color: #CCCCCC;
+	border-bottom: 2px solid #CCCCCC;
+}
+
+th
+{
+	border-bottom-color: #FFFFFF;
+}
+
+.disabled
+{
+	color: #999999;
+}
+
+.frame
+{
+	border-color: #666666;
+}
+
+.graph-answer
+{
+	background-color: #444444;
+}
+
+.graph-background
+{
+	background-color: #FF9933;
+}
+
+.highlight
+{
+	color: #FFFF00;
+}
+
+.object-in-list, .info-box-top, .info-box-bottom
+{
+	border-color: #666666;
+}
+
+.label
+{
+	color: #FF6600;
+}
+
+.quote, .quote-inline, .quote-block
+{
+	color: #CCCCCC;
+}
+
+.quote-block
+{
+	padding: .5em;
+}
+
+.required
+{
+	color: #FF6600;
+}
+
+.selected
+{
+	color: #FF6600;
+}
+
+.locked a:link, .locked a:visited
+{
+	color: #CC6600;
+}

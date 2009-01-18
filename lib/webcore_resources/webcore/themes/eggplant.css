@@ -1,0 +1,170 @@
+/****************************************************************************
+
+Copyright (c) 2002 Marco Von Ballmoos
+
+This file is part of earthli WebCore.
+
+earthli WebCore is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+earthli WebCore is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with earthli WebCore; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
+For more information about the earthli WebCore, visit:
+
+http://www.earthli.com/software/webcore
+
+****************************************************************************/
+
+body
+{
+	background: #553355;
+	color: #FFFFFF;
+}
+
+.page
+{
+	max-width: 800px;
+	margin: auto;
+}
+
+.nav-box
+{
+	border-width: 0px;
+}
+
+.banner-title
+{
+	color: #CCBBAA;
+}
+
+a:link, a:visited
+{
+	color: #FFFF99;
+}
+
+a:active, a:hover
+{
+	color: #FFFF00;
+}
+
+.box
+{
+	border-width: 0px;
+}
+
+.box-title
+{
+	background: #553355;
+	color: #CCBBAA;
+	border-bottom: 1px solid #998877;
+	text-align: center;
+}
+
+.side-bar, .chart, .preview
+{
+	border-width: 0px;
+}
+
+.side-bar-body, .chart-body, .preview-body, .form-basic,
+.quote-block, .menu
+{
+	background: #663366;
+	border: 1px solid #998877;
+}
+
+.quote-block
+{
+	padding: .5em;
+}
+
+.side-bar-title, .chart-title, .preview-title
+{
+	color: #CCBBAA;
+	border-width: 0px;
+}
+
+.cell-non-empty
+{
+	border-color: #998877;
+}
+
+.cell-selected, .cell-highlight
+{
+	border-color: #998877;
+	background: #664466;
+}
+
+.horizontal-separator, .vertical-separator
+{
+	border-color: #998877;
+}
+
+.menu-bar-top, .menu-bar-bottom
+{
+	border-width: 0px;
+}
+
+.object-in-list, .info-box-top, .info-box-bottom
+{
+	border-color: #998877;
+}
+
+span ul.menu
+{
+	background: #663366;
+	border-color: #998877;
+}
+
+h2
+{
+	border-color: #998877;
+}
+
+th
+{
+	border-color: #998877;
+}
+
+.frame
+{
+	border-color: #CCBBAA;
+}
+
+.graph-foreground
+{
+	background: #CCBBAA;
+}
+
+.graph-background
+{
+	background: #330033;
+}
+
+.highlight
+{
+	color: #88CC88;
+}
+
+.required, .label
+{
+	color: #CCBBAA;
+}
+
+.quote, .quote-inline, .quote-block
+{
+	color: #CCBBAA;
+}
+
+.locked a:link, .locked a:visited
+{
+	color: #CCCC66;
+}

@@ -1,0 +1,226 @@
+/****************************************************************************
+
+Copyright (c) 2002 Marco Von Ballmoos
+
+This file is part of earthli WebCore.
+
+earthli WebCore is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+earthli WebCore is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with earthli WebCore; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
+For more information about the earthli WebCore, visit:
+
+http://www.earthli.com/software/webcore
+
+****************************************************************************/
+
+a:visited, a:link
+{
+	color: #0066CC;
+}
+
+a:hover, a:active
+{
+	color: #CC3333;
+}
+
+body
+{
+	margin: 0px;
+	padding: 0px;
+	background: url(ice/sidebar-background.png) top left no-repeat;
+	background-color: #FFFFFF;
+}
+
+.page
+{
+	width: 800px;
+	max-width: 800px;
+	margin: auto;
+}
+
+/* Hidden from IE. Combined with the rule above, this ensures that IE
+   is always 800px, but other, better browsers are a maximum of 800px. */
+body>.page
+{
+	width: auto;
+}
+
+.banner
+{
+	padding: 6px 4px;
+}
+
+.banner-title
+{
+	color: #003399;
+}
+
+.box
+{
+	border: 0px solid #FFFFFF;
+}
+
+.box-title
+{
+/*  color: #0055BB; */
+	color: #333333;
+	border-color: #CCCCCC;
+}
+
+.horizontal-separator, .vertical-separator
+{
+	border-color: #CCCCCC;
+}
+
+.cell-non-empty, .cell-selected, .cell-highlight
+{
+	border-color: #999999;
+}
+
+.cell-highlight
+{
+	background-color: #F4F4F4;
+}
+
+.cell-selected
+{
+	background-color: #DDEEFF;
+}
+
+.highlight
+{
+	color: #00AA00;
+}
+
+.menu-bar-top, .menu-bar-bottom
+{
+	border-color: #CCCCCC;
+}
+
+.menu
+{
+	border: 1px solid #AAAAAA;
+}
+
+.menu-item
+{
+	border-top: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+}
+
+/* Hack to prevent IE from drawing "transparent" as bright blue. */
+.menu-dropdown-ie .menu-item
+{
+	border-color: white;
+}
+
+.menu-item:hover
+{
+	background: url(ice/menu-item-background.png) no-repeat;
+	border-top: 1px solid #AAAAAA;
+	border-bottom: 1px solid #AAAAAA;
+}
+
+.menu-button
+{
+	border: 1px solid #CCCCCC;
+}
+
+.menu-button:hover
+{
+	border: 1px solid #AAAAAA;
+	background: url(ice/menu-item-background.png) no-repeat;
+}
+
+.nav-box
+{
+	border-width: 0px;
+	border-bottom: 1px solid #CCCCCC;
+}
+
+.page-body
+{
+	padding: 10px;
+}
+
+.quote-inline
+{
+	font-style: italic;
+	color: #800000;
+}
+
+.quote-inline em
+{
+	font-style: normal;
+}
+
+.quote-block
+{
+	padding: .5em;
+	color: #800000;
+	border: 1px solid #CCCCCC;
+}
+
+.pullquote
+{
+}
+
+.side-bar, .chart, .preview, .form-basic-block
+{
+	border: 1px solid #CCCCCC;
+	background: url(ice/sidebar-background.png) top left no-repeat;
+}
+
+.side-bar-title, .chart-title, .preview-title
+{
+  color: #0055BB;
+	border-bottom: 1px solid #CCCCCC;
+}
+
+h2
+{
+	border-bottom: 1px dotted #AAAAAA;
+	padding-left: .2em;
+	padding: .2em;
+	color: #0066CC;
+}
+
+h3
+{
+	color: #333333;
+/**  color: #0066CC; */
+}
+
+h4
+{
+  color: #666666;
+}
+
+.locked a:link, .locked a:visited
+{
+	color: #336699;
+}
+
+.object-in-list, .info-box-top, .info-box-bottom, .frame
+{
+	border-color: #CCCCCC;
+}
+
+pre code
+{
+  background-color: rgb(250,250,250);
+  border-color: rgb(160,160,160);
+  border-width: 3px 1px 1px;
+  border-style: solid dotted;
+}

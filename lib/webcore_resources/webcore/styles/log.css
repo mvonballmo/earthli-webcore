@@ -1,0 +1,63 @@
+.log-box
+{
+  font-family: "Courier New", Courier, fixed;
+  font-size: 8pt;
+  color: black;
+  padding: .5em;
+}
+
+.log-block-title
+{
+	font-weight: bold;
+	font-size: 125%;
+}
+
+.log-block
+{
+  margin: 1em 1.5em;
+  border: 1px dotted #999999;
+  border-right: 0em;
+}
+
+.log-msg-channel
+{}
+
+.log-msg-date
+{}
+
+.log-msg-type
+{}
+
+.log-debug-info
+{
+  color: #444444;
+}
+
+.log-debug-warning
+{
+  font-weight: bold;
+  color: #CC9966;
+}
+
+.log-error
+{
+  font-weight: bold;
+  color: red;
+}
+
+.log-info
+{
+  color: black;
+}
+
+.log-warning
+{
+  font-weight: bold;
+  color: #FF6600;
+}
+
+.log-start, .log-finish
+{
+  font-size: 125%;
+  font-weight: bold;
+}

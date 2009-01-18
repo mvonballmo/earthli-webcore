@@ -1,0 +1,41 @@
+/* 
+   The main RSS styles are defined in "newsfeed.css" to make them the same
+   as those for other newsfeeds (read: Atom). 
+*/
+
+@import url(newsfeed.css);
+
+rss:before
+{
+  content: "This is an RSS newsfeed. Best viewed with a compatible newsreader. See http://www.rssboard.org/rss-specification for more information.";
+}
+
+channel description:before
+{
+  display: none;
+  font-weight: bold;
+  margin-bottom: 5px;
+  content: "Contents";
+}
+
+item description:before
+{
+  display: block;
+  font-weight: bold;
+  margin-top: 15px;
+  margin-bottom: 5px;
+  content: "Contents";
+}
+
+description
+{
+  white-space: pre;
+}
+
+/* all hidden elements */
+generator, language, lastBuildDate, ttl, guid, category, image, docs 
+{
+  display: none;
+}
+
+

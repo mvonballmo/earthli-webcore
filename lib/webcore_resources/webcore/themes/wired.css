@@ -1,0 +1,157 @@
+/****************************************************************************
+
+Copyright (c) 2002 Marco Von Ballmoos
+
+This file is part of earthli WebCore.
+
+earthli WebCore is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+earthli WebCore is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with earthli WebCore; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
+For more information about the earthli WebCore, visit:
+
+http://www.earthli.com/software/webcore
+
+****************************************************************************/
+
+a:link
+{
+	color: #3366CC;
+	text-decoration: underline;
+}
+
+a:visited
+{
+	color: #5588EE;
+	text-decoration: underline;
+}
+
+a:active, a:hover
+{
+	color: #FF3300;
+}
+
+code
+{
+	color: #008000;
+}
+
+.page
+{
+	max-width: 800px;
+	margin: auto;
+}
+
+h2
+{
+	color: #666666;
+	border-bottom-color: #666666;
+}
+
+th
+{
+	border-bottom: 1px solid #666666;
+}
+
+.banner-title
+{
+	color: #999999;
+}
+
+.cell-selected
+{
+	background: #FFFFFF url(osx/dialog_light.gif) repeat;
+}
+
+.detail
+{
+	color: #FF6600;
+}
+
+.side-bar .error, .chart .error
+{
+	color: #FFFF00;
+}
+
+.frame
+{
+	border-color: #999999;
+	border-width: 1px;
+}
+
+.graph-background
+{
+	background: #CCCCCC;
+}
+
+.graph-foreground
+{
+	background: #0000FF url(osx/progress.gif) repeat;
+}
+
+.highlight
+{
+	color: #00AA00;
+}
+
+.locked a:link, .locked a:visited
+{
+	color: #888888;
+}
+
+.label
+{
+	color: #333333;
+}
+
+.menu-bar-top, .menu-bar-bottom
+{
+	border-color: #999999;
+}
+
+.quote, .quote-block, .quote-inline, .required
+{
+	color: #6699BB;
+}
+
+.object-in-list, .info-box-top, .info-box-bottom, .menu-bar-top, .menu-bar-bottom, .text-control, .menu-control, .button-control
+{
+	border-color: #CCCCCC;
+}
+
+.button-control:hover, .button-control:focus
+{
+	border-color: #000000;
+	background-color: #EEEEEE;
+}
+
+.object-in-list a:link, .object-in-list a:visited, .tree-node a:link, .tree-node a:visited
+{
+	text-decoration: none;
+}
+
+.box-title, .side-bar-title, .chart-title
+{
+	background: url("wired/bg_pinstripes_w.gif");
+	border-bottom: 1px solid #CCCCCC;
+}
+
+.box, .side-bar, .chart
+{
+	border: 1px solid #CCCCCC;
+}
+
+.nav-box
+{
+	color: white;
+}

@@ -1,0 +1,870 @@
+/****************************************************************************
+
+Copyright (c) 2002 Marco Von Ballmoos
+
+This file is part of earthli WebCore.
+
+earthli WebCore is free software;	you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation;	either version 2 of the License, or
+(at your option) any later version.
+
+earthli WebCore is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY;	without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with earthli WebCore;	if not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
+For more information about the earthli WebCore, visit:
+
+http://www.earthli.com/software/webcore
+
+****************************************************************************/
+
+/* @group HTML Base */
+
+body 
+{
+  margin: 0em;
+  padding: .5em;
+  background-color: white;
+  color: black;
+}
+
+h1, h3, h4 
+{
+  font-weight: bold
+}
+
+h2 
+{
+  font-weight: normal;
+  margin: 0px;
+  padding: 2px 0px;
+  border-bottom: 1px solid #000000
+}
+
+h5 
+{
+  font-weight: bold;
+  margin: 0px;
+  padding: 2px 0px
+}
+
+dd 
+{
+  margin: 0.2em 0em .7em 1.5em
+}
+
+td 
+{
+  text-align: left
+}
+
+th 
+{
+  font-weight: bold;
+  vertical-align: bottom;
+  border-bottom: 1px solid #000000
+}
+
+a:active, a:hover 
+{
+  text-decoration: underline
+}
+
+a:link, a:visited 
+{
+  text-decoration: none
+}
+
+a img 
+{
+  border: 0px
+}
+
+dfn, var, cite
+{
+  font-style: italic;
+}
+
+var, kbd
+{
+  font-family: monospace;
+}
+
+pre
+{
+  font-size: 9pt;
+  font-family: monospace;
+  line-height: normal;
+  text-align: left;
+}
+
+pre code
+{
+  margin: 1em auto;
+  width: 95%;
+  padding: .5em;
+  display: block;
+}
+
+/* IE mac sucks, the PREs disappear completely \*/
+pre code
+{
+  overflow: auto;
+  overflow-y: hidden;  
+}
+
+/* @end */
+
+/* @group Structure */
+
+/* Page super-structure. Meant to be used like this:
+
+		body (HTML)
+			page
+				banner
+					banner-box
+						banner-header
+							banner-logo
+							banner-icon
+							banner-content
+								banner-title
+								login-status
+						nav-box
+				page-body
+				footer
+					footer-box
+*/
+
+.page 
+{
+  
+}
+
+.banner 
+{
+  margin-bottom: 1em
+}
+
+.banner-box 
+{
+  
+}
+
+.banner-header 
+{
+  padding: .5em;
+  padding-bottom: 1em;
+}
+
+.banner-logo 
+{
+  float: left;
+}
+
+.banner-content 
+{
+  clear: right;
+  text-align: right;
+  margin-top: 1em;
+}
+
+.banner-title 
+{
+  font-weight: bold;
+  margin: 0px
+}
+
+.login-status 
+{
+  
+}
+
+.nav-box 
+{
+  clear: both;
+  border-bottom: 1px solid #000000;
+  padding: 4px;
+  margin-top: .5em;
+}
+
+.nav-item 
+{
+  font-weight: normal;
+}
+
+.page-body 
+{
+  clear: both
+}
+
+.footer 
+{
+  margin-top: 2em;
+  margin-bottom: 0px;
+  padding: 1em;
+  clear: both;
+}
+
+.footer-box 
+{
+  
+}
+
+/* @end */
+
+/* @group Containers */
+
+/* Defines blocks within the page-body.
+
+		Should hold the page's main content
+
+		box
+		  box-title
+			box-body
+
+		Defines areas outside of the main content -- perhaps with additional information
+		or directing to other areas.
+
+		side-bar
+		  side-bar-title
+			side-bar-body
+
+		Used for blocks within a side-bar or box.
+
+		chart
+		  chart-title
+			chart-body
+
+		description - used for long runs of text
+
+		callout -
+
+*/
+
+.box 
+{
+  border: 1px solid #000000;
+  border-spacing: 0px
+}
+
+.box-body 
+{
+  padding: .6em .25em;
+  empty-cells: show
+}
+
+.box-title 
+{
+  padding: .25em;
+  font-weight: bold;
+  empty-cells: show;
+  border-bottom: 1px solid #000000;
+  text-align: left
+}
+
+.side-bar 
+{
+  border: 1px solid #000000;
+  border-spacing: 0px
+}
+
+.side-bar-body 
+{
+  padding: .5em .25em;
+  empty-cells: show
+}
+
+.side-bar-title 
+{
+  padding: .25em;
+  font-weight: bold;
+  empty-cells: show;
+  border-bottom: 1px solid #000000;
+  text-align: left
+}
+
+.chart, .preview 
+{
+  border: 1px solid #000000
+}
+
+.chart-body, .preview-body 
+{
+  padding: .5em
+}
+
+.chart-title, .preview-title 
+{
+  padding: .25em;
+  font-weight: bold;
+  border-bottom: 1px solid #000000
+}
+
+.object-in-list, .info-box-top, .info-box-bottom 
+{
+  padding: .5em .1em;
+  clear: both;
+}
+
+.object-in-list, .info-box-top 
+{
+  border-bottom: 1px solid #000000;
+  margin-bottom: 1em;
+}
+
+.info-box-bottom 
+{
+  border-top: 1px solid #000000;
+  margin-top: 1em;
+  text-align: right;
+}
+
+.graph-foreground 
+{
+  background-color: #AAAAAA;
+}
+
+.graph-background 
+{
+  border: solid 1px #888888;
+  padding: 1px;
+  background-color: #DDDDDD;
+}
+
+/* @end */
+
+/* @group Menus */
+
+.menu-trigger 
+{
+  
+}
+
+.menu-dropdown, .menu-dropdown-ie 
+{
+  display: none;
+  position: absolute;
+}
+
+.menu 
+{
+  white-space: nowrap;
+  background-color: #FFFFFF;
+  border: 1px solid black;
+  text-align: left;
+  padding: .5em 0em;
+  margin: 0px;
+  margin-left: 2px;
+}
+
+.menu-dropdown 
+{
+  top: auto;
+  left: auto;
+}
+
+.menu-trigger:hover .menu-dropdown,
+.menu-trigger-ie-over .menu-dropdown-ie 
+{
+  display: block;
+}
+
+.menu-trigger 
+{
+  
+}
+
+.menu-group-title 
+{
+  font-weight: bold;
+  margin: .75em .25em .25em .25em;
+  border-bottom: 1px solid #AAAAAA;
+}
+
+.menu-button 
+{
+  display: block;
+  float: left;
+  padding: 2px;
+  margin-left: 2px;
+}
+
+.menu-item 
+{
+  padding: .25em .50em;
+  display: block;
+}
+
+.menu-button:hover, .menu-item:hover, .menu-bar-top a:hover 
+{
+  text-decoration: none;
+}
+
+.menu-bar-bottom 
+{
+  text-align: right;
+  border-top: 1px solid #000000;
+  padding: 3px 3px
+}
+
+.menu-bar-top 
+{
+  text-align: right;
+  border-bottom: 1px solid #000000;
+  padding: 3px 3px
+}
+
+/* @end */
+
+/* @group Calendar */
+
+.calendar 
+{
+  
+}
+
+.calendar-banner, .calendar-footer 
+{
+  padding: .1em;
+}
+
+.calendar-today 
+{
+  
+}
+
+.calendar-footer 
+{
+  padding-top: .5em;
+}
+
+.calendar-title 
+{
+  text-align: center;
+  font-weight: bold;
+}
+
+.calendar-body 
+{
+  border-collapse: collapse;
+}
+
+.calendar-weekday 
+{
+  font-style: italic;
+  padding: .1em;
+  text-align: center;
+}
+
+.cell-empty, .cell-non-empty, .cell-selected, .cell-highlight 
+{
+  padding: 2px;
+  vertical-align: top;
+  empty-cells: show;
+}
+
+.cell-selected, .cell-highlight, .cell-non-empty 
+{
+  border: 1px solid #000000;
+}
+
+/* @end */
+
+/* @group Statuses */
+
+.visible 
+{
+  font-weight: bold;
+}
+
+a.visible 
+{
+  font-weight: bold;
+}
+
+.invisible 
+{
+  font-weight: normal;
+  font-style: italic
+}
+
+.invisible:link, .invisible:visited, .invisible:active, .invisible:hover 
+{
+  font-weight: normal;
+  font-style: italic
+}
+
+.reserved 
+{
+  font-weight: bold
+}
+
+.selected 
+{
+  font-weight: bold;
+  font-style: italic
+}
+
+.disabled 
+{
+  color: #666666;
+}
+
+.locked 
+{
+  color: #999999;
+}
+
+.error 
+{
+  background: #FFE6E6;
+  border: 1px dotted #A00000;
+  padding: 3px;
+  color: #A00000;
+  font-style: italic;
+}
+
+span.error 
+{
+  padding: 1px;
+}
+
+.warning 
+{
+  background: #EBAE39;
+  color: #000000;
+  border: 1px dotted #A06000;
+  padding: 3px;
+  font-style: italic;
+}
+
+.caution 
+{
+  background: #FFFFCC;
+  color: #000000;
+  border: 1px dotted #A0A000;
+  padding: 3px;
+  font-style: italic;
+}
+
+.caution a:link, .caution a:visited, .warning a:link, .warning a:visited 
+{
+  color: #0066FF;
+}
+
+.caution a:hover, .warning a:hover 
+{
+  background: none;
+  color: #CC0000;
+}
+
+.status-indicator 
+{
+  font-style: italic;
+  font-size: 85%;
+  margin: 1em 0em 2em 0em;
+}
+
+.highlight 
+{
+  font-weight: bold;
+}
+
+/* @end */
+
+/* @group Quotes */
+
+.quote 
+{
+  display: block;
+  margin: 1em 2em;
+  float-displace: block;
+}
+
+.quote-block 
+{
+}
+
+.quote-block p:first-child
+{
+	margin-top: 0;
+}
+
+.quote-block p:last-child
+{
+	margin-bottom: 0;
+}
+
+.pullquote 
+{
+  font-size: 150%;
+  border: 1px black solid;
+  padding: .5em;
+}
+
+.abstract
+{
+  font-style: italic;
+  border-width: 1px 0px;
+  border-color: black;
+  border-style: solid;
+  padding: 1em 0em;
+}
+
+.quote-inline
+{
+}
+
+.quoter 
+{
+  margin-left: 3em;
+  font-style: italic;
+}
+
+/* @end */
+
+/* @group Text Flow */
+
+/* Makes sure floated images in paragraphs start low enough. */
+
+p div:first-child img:first-child 
+{
+  margin-top: 1.5em;
+}
+
+/* Make sure that paragraphs inside block elements don't use margins.*/
+
+blockquote p:first-child, .side-bar-body p:first-child, .chart-body p:first-child 
+{
+  margin: 0em;
+}
+
+.text-flow 
+{
+  line-height: 160%;
+  text-align: left
+}
+
+.text-flow ul li 
+{
+  line-height: 140%;
+  margin-top: .4em;
+}
+
+.text-flow .notes 
+{
+  line-height: 120%;
+}
+
+.inline-icon 
+{
+  vertical-align: middle;
+}
+
+/* @end */
+
+/* @group Forms */
+
+.form-basic 
+{
+  padding: .75em;
+}
+
+.label, .required, .form-basic-required, .form-basic-label 
+{
+  font-weight: bold;
+  text-align: right;
+  white-space: nowrap;
+  vertical-align: top;
+  padding-right: 1em;
+}
+
+.form-button-content 
+{
+  text-align: right;
+}
+
+.form-basic-block 
+{
+  border: 1px dotted #999999;
+ 
+
+/* background: url(../themes/common/5_percent_black.png) repeat; */
+	padding: .5em;
+}
+
+/* @end */
+
+/* @group Munger */
+
+.auto-content-block
+{
+  display: block;
+}
+
+.auto-content-inline
+{
+  display: block;
+  text-align: center;  
+}
+
+.auto-content-caption
+{
+  font-size: 85%;
+  padding-top: .5em;
+  display: block;
+  text-align: center;
+}
+
+.footnote-number 
+{
+  vertical-align: super;
+  font-size: 85%;
+  line-height: 1em;
+}
+
+.footnote-return 
+{
+  
+}
+
+.footnote-reference 
+{
+  display: block;
+  margin-top: .5em;
+  margin-left: 1.5em;
+  margin-bottom: .5em;
+}
+
+.footnote-reference .footnote-number:first-child
+{
+  float: left;
+  margin-left: -1.5em;
+}
+
+/* @end */
+
+.date-time 
+{
+  font-style: italic;
+}
+
+.vertical-separator 
+{
+  border-left: 1px solid #000000;
+  empty-cells: show;
+  width: .1em
+}
+
+.horizontal-separator 
+{
+  border-bottom: 1px solid #000000;
+  empty-cells: show;
+  height: .1em
+}
+
+.comment-block 
+{
+  margin-left: 1.5em
+}
+
+.description 
+{
+  
+}
+
+.detail 
+{
+  font-style: normal
+}
+
+.page-message 
+{
+  padding: .75em;
+  margin-bottom: .5em;
+}
+
+.excerpt 
+{
+  font-size: 150%
+}
+
+.field 
+{
+  font-weight: bold
+}
+
+.frame 
+{
+  border: 1px solid #000000;
+  padding: 1px;
+  margin: .2em
+}
+
+.grid-title 
+{
+  padding-bottom: .5em;
+}
+
+.notes 
+{
+  font-style: italic;
+  font-weight: normal;
+}
+
+.notes em 
+{
+  font-weight: bold;
+}
+
+.print-item-box 
+{
+  text-align: center;
+}
+
+.reference 
+{
+  font-style: italic
+}
+
+.tree-node 
+{
+  white-space: nowrap;
+  margin-bottom: .1em;
+}
+
+.message-box 
+{
+  margin: 1em;
+}
+
+.error-message 
+{
+  padding-left: 40px;
+  background: url(../../icons/webcore_png/indicators/error_32px.png) no-repeat;
+}
+
+.message-title 
+{
+  font-weight: bold;
+}
+
+.message-description 
+{
+  margin: 1em 0em;
+  font-size: 85%;
+  font-style: italic;
+}
+
+.complete-text-link
+{
+  font-weight: normal;
+  font-style: normal;
+  font-size: 100%;
+}

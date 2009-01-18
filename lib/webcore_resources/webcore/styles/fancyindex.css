@@ -1,0 +1,14 @@
+body, pre
+{
+	font-family: Consolas, Monaco, 'Lucida Console', 'Bitstream Sans Mono', fixed;
+}
+
+a:link
+{
+	color: #0033CC;
+}
+
+a:visited
+{
+	color: #0066FF;
+}

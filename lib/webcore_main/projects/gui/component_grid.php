@@ -1,0 +1,125 @@
+<?php
+
+/**
+ * @copyright Copyright (c) 2002-2008 Marco Von Ballmoos
+ * @author Marco Von Ballmoos
+ * @filesource
+ * @package projects
+ * @subpackage gui
+ * @version 3.0.0
+ * @since 1.4.1
+ */
+
+/****************************************************************************
+
+Copyright (c) 2002-2008 Marco Von Ballmoos
+
+This file is part of earthli Projects.
+
+earthli Projects is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+earthli Projects is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with earthli Projects; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
+For more information about the earthli Projects, visit:
+
+http://www.earthli.com/software/webcore/projects
+
+****************************************************************************/
+
+/** */
+require_once ('webcore/gui/grid.php');
+
+/**
+ * Display a list of {@link COMPONENT}s from a {@link QUERY}.
+ * @package projects
+ * @subpackage gui
+ * @version 3.0.0
+ * @since 1.7.0
+ */
+class COMPONENT_GRID extends STANDARD_GRID
+{
+  /**
+   * @var string
+   */
+  var $box_style = 'object-in-list';
+  /**
+   * @var string
+   */
+  var $object_name = 'Component';
+  /**
+   * @var integer
+   */
+  var $spacing = 4;
+  /**
+   * @var boolean
+   */
+  var $even_columns = FALSE;
+  /**
+   * @var boolean
+   */
+  var $show_separator = FALSE;
+  /**
+   * @var boolean Show creator/modifier with releases?
+   */
+  var $show_user = TRUE;
+  /**
+   * @var boolean Show project for release?
+   */
+  var $show_folder = FALSE;
+  /**
+   * @var boolean Show branch for release?
+   */
+  var $show_branch = FALSE;
+
+  /**
+   * @param RELEASE &$obj
+    * @access private
+    */
+  function _draw_box (&$obj)
+  {
+    $folder =& $obj->parent_folder ();
+    $creator =& $obj->creator ();
+?>
+  <div class="grid-title">
+    <?php echo $obj->icon_as_html ('32px') . ' ' . $obj->title_as_link (); ?>
+  </div>
+  <div style="margin-left: 1em; float: right">
+  <?php
+    $this->_draw_menu_for ($obj, Menu_size_compact);
+  ?>
+  </div>
+  <div>
+  <?php
+    $menu = $this->context->make_menu ();
+
+    $entry_types = $this->app->entry_type_infos ();
+    $url = new URL ($obj->home_page ());
+
+    foreach ($entry_types as $type_info)
+    {
+      $panel_name = strtolower ($type_info->plural_title);
+      $t = $obj->title_formatter ();
+      $url->replace_argument ('panel', $panel_name);
+      $menu->append ($type_info->plural_title, $url->as_html ());
+    }
+
+    $url->replace_argument ('panel', 'comments');
+    $menu->append ('Comments', $url->as_html ());
+
+    $menu->display ();
+  ?>
+  </div>
+<?php
+  }
+}
+?>

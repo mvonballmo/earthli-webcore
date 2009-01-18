@@ -1,0 +1,11 @@
+.cell-empty {  width: 8em; height: 4em}
+.cell-non-empty {  width: 8em; height: 4em}
+.cell-selected {  width: 8em; height: 4em}
+
+.calendar {  border-collapse: collapse}
+.year {  text-align: center; font-weight: bold}
+.month {  text-align: center; font-weight: bold}
+.weekday {  text-align: center; font-weight: bold}
+
+.month {  font-size: 120%; }
+.year {  font-size: 150%; }

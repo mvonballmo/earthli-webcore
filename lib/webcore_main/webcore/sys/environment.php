@@ -1,0 +1,851 @@
+<?php
+
+/**
+ * @copyright Copyright (c) 2002-2008 Marco Von Ballmoos
+ * @author Marco Von Ballmoos
+ * @filesource
+ * @package webcore
+ * @subpackage sys
+ * @version 3.0.0
+ * @since 2.2.1
+ */
+
+/****************************************************************************
+
+Copyright (c) 2002-2008 Marco Von Ballmoos
+
+This file is part of earthli WebCore.
+
+earthli WebCore is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+earthli WebCore is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with earthli WebCore; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
+For more information about the earthli WebCore, visit:
+
+http://www.earthli.com/software/webcore
+
+****************************************************************************/
+
+/***/
+require_once ('webcore/constants.php');
+require_once ('webcore/sys/resolver.php');
+require_once ('webcore/sys/date_time.php');
+require_once ('webcore/sys/files.php');
+require_once ('webcore/sys/url.php');
+require_once ('webcore/log/logger_container.php');
+
+/**
+ * Global properties of the execution environment.
+ * There is only one of these per execution, just like there is only one page. The
+ * environment is a subset of functionality that exists outside of the page. Allows
+ * some functionality to be used outside of the context of the WebCore page object
+ * (like exception handling).
+ * @see PAGE
+ * @package webcore
+ * @subpackage sys
+ * @version 3.0.0
+ * @since 2.2.1
+ */
+class ENVIRONMENT extends RESOLVER
+{
+  /**
+   * Name of the web site.
+   * Identifies the entire web site, not just a single page instance. Used by
+   * {@link LOCATION_MENU::add_root_link()} if set.
+   * @var string
+   */
+  var $title = '';
+  /**
+   * Unique ID for this framework.
+   * Do not change this as it is used for migration and versioning.
+   * @var string
+   */
+  var $framework_id = 'com.earthli.webcore';
+  /**
+   * Version number of the WebCore library.
+   * @var string
+   */
+  var $version = '3.0.0';
+  /**
+   * Default identifier for this environment.
+   * Set this value with {@link set_host_properties()}.
+   * @var string
+   */
+  var $default_domain;
+
+  /* Helper objects */
+
+  /**
+   * Defaults to {@link global_date_time_toolkit()}.
+   * Provided for convenience.
+   * @var DATE_TIME_TOOLKIT
+   */
+  var $date_time_toolkit;
+  /**
+   * Settings for file operations.
+   * Defaults to {@link global_file_options()}.
+   * @see global_url_options() for a URL-style implementation.
+   * @var FILE_OPTIONS
+   */
+  var $file_options;
+  /**
+   * Settings for url operations.
+   * Defaults to {@link global_url_options()}.
+   * @see global_file_options() for a URL-style implementation.
+   * @var FILE_OPTIONS
+   */
+  var $url_options;
+  /**
+   * List of logging objects.
+   * May be empty.
+   * @var LOGGER_CONTAINER
+   */
+  var $logs;
+  /**
+   * Profiling object used to collect global performance information.
+   * May be null.
+   * @var PROFILER
+   */
+  var $profiler;
+
+  /* Exception handling */
+
+  /**
+   * Should redirect requests be honored?
+   * This is often set to TRUE when debugging pages like form submissions. It allows things like the
+   * {@link JS_CONSOLE_LOGGER} to display output. It will also let you see any PHP warnings and notices
+   * issued during the update.
+   * @var boolean
+   * @access private
+   */
+  var $ignore_redirects = FALSE;
+  /**
+   * To which page should exceptions be redirected?
+   * This property is used by the {@link REDIRECT_EXCEPTION_HANDLER} if no default page is given.
+   * @var string
+   */
+  var $exception_handler_page = '{pages}/handle_exception.php';
+  /**
+   * Location of the webcore library files.
+   * Real file system path; should end in a path delimiter. Initialized at startup.
+   * @var string
+   */
+  var $library_path;
+
+  /* Debugging/logging */
+
+  /**
+   * Is debugging enabled?
+   * This property determines whether the "debug" flag has any effect.
+   * @var boolean
+   */
+  var $debug_enabled = FALSE;
+  /**
+   * Is this a debugging session?
+   * Use {@link setup_debugging()} to enable debugging.
+   */
+  var $debugging = FALSE;
+  /**
+   * The exact debugging flags.
+   * By default, the WebCore can pass debugging flags using post and get variables. These
+   * indicate which channels should be loggeed. Use {@link setup_debugging()} to enable debugging.
+   */
+  var $debugging_flags = '';
+  /**
+   * Emulate conditions when running from a command line.
+   * Forces {@link running_on_default_host()} and {@link is_http_server()} to
+   * return <code>False</code>.
+   * @var boolean
+   */
+  var $run_as_console = FALSE;
+  /**
+   * Database queries executed in this session.
+   * @var integer
+   */
+  var $num_queries_executed = 0;
+  /**
+   * Number of exceptions raised in this session.
+   * If the default exception handler (set by {@link
+   * set_default_exception_handler()} is of type {@link
+   * ENVIRONMENT_EXCEPTION_HANDLER}, it will track the number of exceptions
+   * raised.
+   */
+  var $num_exceptions_raised = 0;
+  /**
+   * Number of {@link WEBCORE_OBJECT}s created in this session.
+   * @var integer
+   */
+  var $num_webcore_objects = 0;
+  /**
+   * Retains all query texts in order to detect duplicates.
+   * Should only be used when debugging or doing development.
+   * @var boolean
+   * @access private
+   */
+  var $warn_if_duplicate_query_executed = FALSE;
+  /**
+   * Logs the name of each {@link WEBCORE_OBJECT} created and loaded.
+   * Should only be used when debugging or doing development.
+   * @var boolean
+   * @access private
+   */
+  var $log_class_names = FALSE;
+  /**
+   * Style sheet for HTML-style logs.
+   * @var string
+   */
+  var $logger_style_sheet = '{styles}/log.css';
+
+  function ENVIRONMENT ()
+  {
+    $this->date_time_toolkit =& global_date_time_toolkit ();
+    $this->file_options =& global_file_options ();
+    $this->url_options =& global_url_options ();
+    $this->logs = new LOGGER_CONTAINER ();
+
+    RESOLVER::RESOLVER ();
+
+    $this->auto_detect_os ();
+
+    /* server-local paths */
+    $this->set_path (Folder_name_system_temp, temp_folder ());
+    $this->set_forced_root (Folder_name_system_temp, FALSE);
+    $this->set_path (Folder_name_logs, '/var/log');
+    $this->set_forced_root (Folder_name_logs, FALSE);
+
+    /* URLs */
+    $this->set_path (Folder_name_root, '/');
+    $this->set_path (Folder_name_resources, '{' . Folder_name_root . '}');
+    $this->set_path (Folder_name_data, '{' . Folder_name_root . '}data');
+    $this->set_path (Folder_name_pages, '{' . Folder_name_resources . '}pages');
+    $this->set_path (Folder_name_icons, '{' . Folder_name_resources . '}icons');
+    $this->set_path (Folder_name_themes, '{' . Folder_name_resources . '}themes');
+    $this->set_path (Folder_name_styles, '{' . Folder_name_resources . '}styles');
+    $this->set_path (Folder_name_scripts, '{' . Folder_name_resources . '}scripts');
+
+    $this->set_extension (Folder_name_themes, 'css');
+    $this->set_extension (Folder_name_styles, 'css');
+    $this->set_extension (Folder_name_scripts, 'js');
+    $this->set_extension (Folder_name_icons, 'png');
+
+    /* Set up the path to the library. */
+
+    $url = new FILE_URL (realpath (__FILE__));
+    $url->strip_name ();
+    $url->go_back ();
+    $url->go_back ();
+    $this->library_path = $url->as_text ();
+  }
+
+  /**
+   * Full path to the install location of this application.
+   * @return FILE_URL
+   */
+  function source_path ()
+  {
+    $Result = new FILE_URL (realpath (__FILE__));
+    $Result->strip_name ();
+    $Result->go_back ();
+    return $Result;
+  }
+
+  /**
+   * Returns the name and version of the framework.
+   * @var boolean $as_html Return HTML-formatted if <code>TRUE</code>.
+   * @return string
+   */
+  function description ($as_html = TRUE)
+  {
+    if ($as_html)
+      return 'earthli WebCore&trade; ' . $this->version;
+    else
+      return 'earthli WebCore (TM) ' . $this->version;
+  }
+
+  /**
+   * Retrieve information about the client.
+   * @return BROWSER
+   */
+  function browser ()
+  {
+    if (! isset ($this->_browser))
+    {
+      $class_name = $this->final_class_name ('BROWSER', 'webcore/util/browser.php');
+      $this->_browser = new $class_name ();
+    }
+
+    return $this->_browser;
+  }
+
+  /**
+   * Returns false if running from command line.
+   * @return boolean
+   */
+  function is_http_server ()
+  {
+    return ! $this->run_as_console && read_array_index ($_SERVER, 'HTTP_USER_AGENT') <> '';
+  }
+
+  /**
+   * Is this script running on its own server?
+   * Returns True is this page is an 'island' of code in a page on a web-server other than that
+   * which is the declared web-server. This allows another server to host a 'top ten' articles,
+   * for example, while pointing all links to the main server. Will also return False when running
+   * from the command line.
+   * @see is_http_server()
+   * @see server_domain()
+   * @see host_name()
+   * @return boolean
+   */
+  function running_on_declared_host ()
+  {
+    if ($this->run_as_console)
+      return false;
+
+    if (! isset ($this->_running_on_declared_host))
+    {
+      $this->_running_on_declared_host = preg_match ('/^' . str_replace('/', '\\/', 'http://' . $this->server_domain ()) . '/', $this->url_options->main_domain);
+    }
+
+    return $this->_running_on_declared_host;
+  }
+
+  /**
+   * Description of the server.
+   * Usually includes the Apache and PHP versions.
+   * @return string
+   */
+  function server_info ()
+  {
+    return read_array_index ($_SERVER, 'SERVER_SOFTWARE');
+  }
+
+  /**
+   * Name of the server as returned by PHP.
+   * Returns empty if the script is not running on a server (running from the
+   * command line).
+   * @see running_on_declared_host()
+   * @see host_name()
+   * @return string
+   */
+  function server_domain ()
+  {
+    return read_array_index ($_SERVER, 'HTTP_HOST');
+  }
+
+  /**
+   * Name of the server as configured.
+   * @see running_on_declared_host()
+   * @see host_name()
+   * @return string
+   */
+  function default_domain ()
+  {
+    return $this->default_domain;
+  }
+
+  /**
+   * Non-empty name of the server for this process.
+   * Returns the {@link current_host_name()} if running on a server; returns the
+   * {@link domain()} if running from the command line. Use this function when
+   * generating emails or content from the command line to ensure properly
+   * resolved absolute URLs. Set the default domain value with {@link
+   * set_host_properties()}.
+   * @see running_on_declared_host()
+   * @see server_domain()
+   * @return string
+   */
+  function host_name ()
+  {
+    $host_name = $this->server_domain ();
+    if (! $host_name)
+      $host_name = $this->default_domain ();
+    return ensure_has_protocol ($host_name, 'http');
+  }
+
+  /**
+   * Returns the requested parts of the current URL.
+   * @param integer $parts Can be any combination of {@link Url_part_host},
+   * {@link Url_part_path}, {@link Url_part_name}, {@link Url_part_ext} and
+   * {@link Url_part_args}.
+   * @return string
+   */
+  function url ($parts = Url_part_no_args)
+  {
+    if (! isset ($this->_url))
+    {
+      $this->_url = new URL (read_array_index ($_SERVER, 'REQUEST_URI'));
+      if ($this->_url->name () == '')
+        $this->_url->replace_name_and_extension ('index.php');
+    }
+
+    $url = clone_object ($this->_url); // make a copy so it can be modified below.
+
+    switch ($parts)
+    {
+    case Url_part_all:
+      return $this->host_name () . $url->as_text ();
+
+    case Url_part_path:
+      return $url->path ();
+
+    case Url_part_file_name:
+      return $url->name ();
+
+    case Url_part_ext:
+      return $url->extension ();
+
+    case Url_part_no_host:
+      return $url->as_text ();
+
+    case Url_part_no_host_args:
+      $url->replace_query_string ('');
+      return $url->as_text ();
+
+    case Url_part_no_args:
+      $url->replace_query_string ('');
+      return $this->host_name () . $url->as_text ();
+
+    case Url_part_no_host_path:
+      return $url->name_with_query_string ();
+
+    default:
+      $this->raise ('Unsupported combination of parts', 'url', 'ENVIRONMENT');
+    }
+  }
+
+  /**
+   * Is page-buffering enabled?
+   * If this returns true, then the whole page is first prepared, then sent. This
+   * allows redirects and cookies to be set throughout page preparation.
+   * @return boolean
+   */
+  function buffered ()
+  {
+    return $this->_buffered;
+  }
+
+  /**
+   * Finish initializing the environment.
+   * Should be called as the last step before calling {@link PAGE::run()}.
+   */
+  function run ()
+  {
+    $this->root_url = $this->host_name ();
+    $this->restore_root_behavior ();
+  }
+
+  /**
+   * Set page buffering on or off.
+   * This buffers content for the page until it is completely rendered on the
+   * server. For larger pages, this means a longer delay on slow connections
+   * before data begins arriving. You should enable this when using the {@link
+   * REDIRECT_EXCEPTION_HANDLER}.
+   * @param boolean $value
+   */
+  function set_buffered ($value = TRUE)
+  {
+    if ($this->_buffered != $value)
+    {
+      $this->_buffered = $value;
+
+      if ($value)
+        ob_start ();
+      else
+        @ob_end_flush ();
+    }
+  }
+
+  /**
+   * Set up the defaul domain name and url to document root mapping (used for
+   * offline scripts and uploading).
+   *
+   * @see url_to_file_name()
+   * @see url_to_folder()
+   * @param string $default_domain Default host to use if ({@link
+   * is_http_server()} is <code>False</code>).
+   * @param array[string] $domains Optional list of domains and their
+   * corresponding server-local paths. The default mapping maps the server root
+   * to the document root. However, you can customize the mapping with regular
+   * expressions or add other sub-domains supported by this server. (e. g. array
+   * ('mydomain. [net|com]' => '/var/www/mydomain/', '[www.]? otherdomain\.
+   * [com|net|org]' => '/var/www/otherdomain/').
+   */
+  function set_host_properties ($default_domain, $domains = null)
+  {
+    $this->default_domain = $default_domain;
+    if (isset($domains))
+    {
+      unset($this->url_options->domains);
+      $this->url_options->domains = $domains;
+      $keys = array_keys($domains);
+      $this->url_options->main_domain = $keys[0];
+    }
+    unset($this->_running_on_declared_host);
+  }
+
+  /**
+   * Initialize debugging tools for WebCore objects.
+   * @see ignore_redirect_requests()
+   * @see set_up_release()
+   * @param string $flags List of channels to log. Can be 'all' or any channel name.
+   */
+  function set_up_debugging ($flags)
+  {
+    $this->ignore_redirect_requests ();
+
+    if (isset ($this->logs->logger))
+    {
+      $this->logs->logger->reset ();
+      switch ($flags)
+      {
+      case 'all':
+      case '1':
+        $this->logs->logger->set_enabled (Msg_type_all);
+        break;
+      default:
+        $this->logs->logger->set_enabled (Msg_type_none);
+        $this->logs->logger->set_channel_enabled ($flags, Msg_type_all);
+      }
+    }
+
+    $this->warn_if_duplicate_query_executed = TRUE;
+    $this->log_class_names = TRUE;
+    $this->debugging = TRUE;
+    $this->debugging_flags = $flags;
+  }
+
+  /**
+   * Turn off all debugging output and tracking.
+   * @see set_up_debugging()
+   */
+  function set_up_release ()
+  {
+    $this->warn_if_duplicate_query_executed = FALSE;
+    $this->log_class_names = FALSE;
+    $this->debugging = FALSE;
+    $this->debugging_flags = '';
+
+    if (isset ($this->logs->logger))
+    {
+      $this->logs->logger->reset ();
+      $this->logs->logger->set_enabled (Msg_type_error | Msg_type_warning);
+    }
+  }
+
+  /**
+   * Set up OS-specific {@link FILE_OPTIONS} automatically.
+   * @see set_os()
+   */
+  function auto_detect_os ()
+  {
+    if (strpos (strtoupper (php_uname ('s')), 'WIN') === 0)
+      $this->set_os (Os_win);
+    else
+      $this->set_os (Os_unix);
+  }
+
+  /**
+   * Set OS-specific {@link FILE_OPTIONS}.
+   * @see auto_detect_os()
+   * @param integer $os_type Can be {@link Os_win} or {@link Os_unix}.
+   */
+  function set_os ($os_type)
+  {
+    switch ($os_type)
+    {
+      case Os_win:
+        $this->file_options->path_delimiter = "\\";
+        $this->file_options->end_of_line = "\r\n";
+        break;
+      case Os_unix:
+        $this->file_options->path_delimiter = "/";
+        $this->file_options->end_of_line = "\n";
+        break;
+      default:
+        $this->raise ("Invalid os type [$os_type]", 'set_os', 'ENVIRONMENT');
+    }
+  }
+
+  /**
+   * Prevent any redirections using the WebCore.
+   * @see set_up_debugging()
+   */
+  function ignore_redirect_requests ()
+  {
+    $this->ignore_redirects = TRUE;
+    set_default_exception_handler (new LOGGER_EXCEPTION_HANDLER ($this));
+  }
+
+  /**
+   * Redirect to an absolute URL on the same server.
+   * This feature makes use of HTTP headers, so if the page is not cached using
+   * {@link set_buffered()}, it must be called before any content is emitted.
+   * 'location' should not contain the protocol (e.g. HTTP://).
+   * To redirect to a fully resolved URL, use {@link redirect_remote()}.
+   * To redirect to a relatively resolved URL on the same server, use (@link redirect_local()}.
+   * @param string $location
+   */
+  function redirect_root ($location)
+  {
+    $url = new URL ($location);
+    $url->prepend ($this->host_name ());
+    return $this->redirect_remote ($url->as_text ());
+  }
+
+  /**
+   * Redirect to a URL relative to the current one.
+   * This feature makes use of HTTP headers, so if the page is not cached using
+   * {@link set_buffered()}, it must be called before any content is emitted.
+   * 'location' should not contain the protocol (e.g. HTTP://).
+   * To redirect to a fully resolved URL, use {@link redirect_remote()}.
+   * To redirect to a fully resolved URL on the same server, use (@link redirect_root()}.
+   * @param string $location
+   */
+  function redirect_local ($location)
+  {
+    $host_name = $this->host_name ();
+    if (strpos ($location, $host_name) !== 0)
+    {
+      $url_path = $this->url (Url_part_path);
+      if (strpos ($location, $url_path) === 0)
+        $url = new URL ($location);
+      else
+      {
+        $url = new URL ($url_path);
+        $url->append ($location);
+      }
+      $url->prepend ($this->host_name ());
+      $location = $url->as_text ();
+    }
+
+    $this->redirect_remote ($location);
+  }
+
+  /**
+   * Redirect to an absolute URL.
+   * 'location' should not contain the protocol (e.g. HTTP://).
+   * This feature makes use of HTTP headers, so if the page is not cached using
+   * {@link set_buffered()}, it must be called before any content is emitted.
+   * 'location' should not contain the protocol (e.g. HTTP://).
+   * To redirect to a relatively resolved URL on the same server, use (@link redirect_local()}.
+   * To redirect to a fully resolved URL on the same server, use (@link redirect_root()}.
+   * @param string $location
+   */
+  function redirect_remote ($location)
+  {
+    if ($this->ignore_redirects)
+      log_message ("Redirection to [$location] was ignored.", Msg_type_warning, Msg_channel_system);
+    else
+    {
+      $this->assert ($this->is_http_server (), "Could not redirect to [$location]: not running from server", 'redirect_remote', 'SYSTEM', $this);
+      header ('Location: ' . $location);
+      exit;
+    }
+  }
+
+  /**
+   * Called from {@link restore_root_behavior()}.
+   * @return boolean
+   * @access private
+   */
+  function _default_resolve_to_root ()
+  {
+    return ! $this->running_on_declared_host ();
+  }
+
+  /**
+   * Build entire page before sending?
+   * With buffering enabled, the entire page is built first, then sent back to the client. With
+   * buffering disabled, it is streamed. If buffering is off, the code cannot redirect once content
+   * has been sent. Use {@link set_buffered()} to set this value.
+   * @var boolean
+   */
+  var $_buffered = FALSE;
+  /**
+   * Access this object through {@link browser()}.
+   * @var BROWSER
+   * @access private
+   */
+  var $_browser;
+  /**
+   * Cached URL used by {@link url()}.
+   * @var URL
+   * @access private
+   */
+  var $_url;
+  /**
+   * Cached flag indicating whether the environment is local
+   * to the declared server.
+   * @var bool
+   * @access private
+   */
+  var $_running_on_declared_host;
+}
+
+/**
+ * Handler that works with the {@link ENVIRONMENT}.
+ * @package webcore
+ * @subpackage sys
+ * @version 3.0.0
+ * @since 2.7.0
+ */
+class ENVIRONMENT_EXCEPTION_HANDLER extends EXCEPTION_HANDLER
+{
+  /**
+   * @param ENVIRONMENT &$env Global environment.
+   */
+  function HTML_EXCEPTION_HANDLER (&$env)
+  {
+    $this->env =& $env;
+  }
+
+  /**
+   * Generates a plain-text page halt with the error information.
+   * @param string $message The error message
+   * @param string $routine_name The name of the routine where the error occurred (can be empty)
+   * @param string $class_name The name of the class where the error occurred (can be empty)
+   * @param object $obj Reference to the object where the error occurred (can be empty)
+   */
+  function raise ($message, $routine_name, $class_name, $obj)
+  {
+    $this->env->num_exceptions_raised++;
+    parent::raise ($message, $routine_name, $class_name, $obj);
+  }
+}
+
+/**
+ * HTML-formatted exception message.
+ * @package webcore
+ * @subpackage sys
+ * @version 3.0.0
+ * @since 2.2.1
+ */
+class HTML_EXCEPTION_HANDLER extends ENVIRONMENT_EXCEPTION_HANDLER
+{
+  /**
+   * Show the error as HTML if running from the server.
+   * @param EXCEPTION_SIGNATURE &$sig
+   * @param string $msg Pre-formatted error message (not used here).
+   * @access private
+   */
+  function dispatch (&$sig, $msg)
+  {
+    if ($this->env->is_http_server ())
+    {
+      if (isset ($sig->is_derived_type))
+        die ("<div class=\"error\">Fatal error in <span class=\"field\">$sig->dynamic_class_name => $sig->scope</span>: $sig->message</div>");
+      else
+        die ("<div class=\"error\">Fatal error in <span class=\"field\">$sig->scope</span>: $sig->message</div>");
+    }
+    else
+      parent::dispatch ($sig, $msg);
+  }
+}
+
+/**
+ * Logs the exception using the {@link ENVIRONMENT::$logger}.
+ * May also be configured to continue operating using {@link $stop_on_error}.
+ * @see function raise()
+ * @package webcore
+ * @subpackage sys
+ * @version 3.0.0
+ * @since 2.4.0
+ */
+class LOGGER_EXCEPTION_HANDLER extends HTML_EXCEPTION_HANDLER
+{
+  /**
+   * Constructs a default instance; seems to be required for PHP5.
+   */
+  function LOGGER_EXCEPTION_HANDLER(&$env)
+  {
+    HTML_EXCEPTION_HANDLER::HTML_EXCEPTION_HANDLER($env);
+  }
+
+  /**
+   * Should the handler kill execution?
+   * @var boolean
+   */
+  var $stop_on_error = TRUE;
+
+  /**
+   * Send the error to the logger.
+   * @param EXCEPTION_SIGNATURE &$sig
+   * @param string $msg Pre-formatted error message.
+   * @access private
+   */
+  function dispatch (&$sig, $msg)
+  {
+    log_message ($msg, Msg_type_error, Msg_channel_system);
+    if ($this->stop_on_error)
+    {
+      $this->env->logs->close_all ();
+      parent::dispatch ($sig, $msg);
+    }
+  }
+}
+
+/**
+ * Fatal errors are redirected to another page.
+ * @package webcore
+ * @subpackage sys
+ * @version 3.0.0
+ * @since 2.2.1
+ */
+class REDIRECT_EXCEPTION_HANDLER extends HTML_EXCEPTION_HANDLER
+{
+  /**
+   * @var ENVIRONMENT
+   */
+  var $env;
+
+  /**
+   * @param ENVIRONMENT $env Global environment.
+    * @param string $handler_url Redirect exceptions to this url.
+    */
+  function REDIRECT_EXCEPTION_HANDLER (&$env)
+  {
+    if (! $env->exception_handler_page)
+      raise ('Exception handler URL cannot be empty.', 'REDIRECT_EXCEPTION_HANDLER', 'REDIRECT_EXCEPTION_HANDLER');
+
+    $this->env =& $env;
+  }
+
+  /**
+   * Send the error to the logger.
+   * @param EXCEPTION_SIGNATURE &$sig
+   * @param string $msg
+   * @access private
+   */
+  function dispatch (&$sig, $msg)
+  {
+    if ($this->env->is_http_server ()
+        && $this->env->buffered ()
+        && $this->env->exception_handler_page)
+    {
+      $current_url = $this->env->url ();
+      $handler_url = $this->env->resolve_file ($this->env->exception_handler_page);
+      if (strpos ($current_url, $handler_url) === FALSE)
+      {
+        $parameters = $sig->as_query_string ();
+        $this->env->redirect_root ($handler_url .'?' . $parameters);
+      }
+      else
+        parent::dispatch ($sig, $msg);
+    }
+    else
+      parent::dispatch ($sig, $msg);
+  }
+}
+
+?>

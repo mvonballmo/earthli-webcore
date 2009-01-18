@@ -1,0 +1,243 @@
+/****************************************************************************
+
+Copyright (c) 2002 Marco Von Ballmoos
+
+This file is part of earthli WebCore.
+
+earthli WebCore is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+earthli WebCore is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with earthli WebCore; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
+For more information about the earthli WebCore, visit:
+
+http://www.earthli.com/software/webcore
+
+****************************************************************************/
+
+body
+{
+	padding: 0em;
+	background-color:	#FFF8DD;
+	color: black;
+}
+
+h2, h3, h4
+{
+	color: #FF9933;
+	border-color: transparent;
+}
+
+.nav-box
+{
+	border-width: 0px;
+}
+
+.page-body
+{
+	padding: 0em .5em;
+	max-width: 800px;
+	margin: auto;
+}
+
+.banner, .footer
+{
+	border-style: solid;
+	border-color: #333333;
+	border-width: 0px;
+	background-color: #FFC868;
+}
+
+.banner
+{
+	border-bottom-width: 1px;
+}
+
+.banner-box, .footer-box
+{
+	max-width: 800px;
+	margin: auto;
+}
+
+.banner-title
+{
+	color: #444444;
+}
+
+.footer
+{
+	border-top-width: 1px;
+}
+
+a:link, a:visited
+{
+	color: #0055BB;
+}
+
+a:hover, a:active
+{
+	color: #699C36;
+}
+
+.box
+{
+	border-width: 0px;
+}
+
+.box-title
+{
+	color: #FF9933;
+	text-align: center;
+	border-bottom: 1px dotted #666666;
+}
+
+.side-bar, .chart, .preview, .form-basic, .quote-block,
+.info-box-top, .info-box-bottom
+{
+	border: 1px solid #999999;
+	background-color: #FFE8A8;
+}
+
+.frame
+{
+	border: 1px solid #999999;
+}
+
+.side-bar .info-box-top, .chart .info-box-top, .preview .info-box-top,
+.side-bar .info-box-bottom, .chart .info-box-bottom, .preview .info-box-bottom
+.side-bar .quote-block, .chart .quote-block, .preview .quote-block
+{
+	border: 1px solid #999999;
+	background-color: #FFD878;	
+}
+
+.side-bar-title, .chart-title, .preview-title
+{
+	border-color: transparent;
+	color: #FF7700;
+}
+
+.cell-selected, .cell-highlight, .cell-empty, .cell-non-empty
+{
+	border-color: #999999;
+}
+
+.cell-selected
+{
+	background-color: #FFBB55;
+}
+
+.cell-highlight
+{
+	background-color: #FFD878;
+}
+
+.calendar
+{
+	border: 1px solid #999999;
+}
+
+.calendar-banner, .calendar-footer
+{
+	background-color: #FFC868;
+}
+
+.calendar-weekday-banner
+{
+	background-color: #FFE8A8;
+}
+
+.menu-bar-top, .menu-bar-bottom
+{
+	border-width: 0px;
+}
+
+.menu
+{
+	color: #003399;
+	background-color: #FFD878;
+	border-color: #999999;
+}
+
+.menu-item
+{
+	border: 1px #FFD878 solid
+}
+
+.menu-item:hover, .menu-button:hover
+{
+	background: #FFE8A8;
+	border: 1px #FF6600 solid;
+}
+
+.menu-button
+{
+	border: 1px solid #999999;
+	background-color: #FFD878;
+}
+
+.graph-foreground
+{
+	background: #FFF8DD;
+}
+
+.graph-background
+{
+	border: 1px solid #999999;
+	background-color: #FFC868;	
+}
+
+.highlight
+{
+	color: red;
+}
+
+.object-in-list
+{
+	border-color: #544332;
+}
+
+.label
+{
+	color: #003399;
+}
+
+.quote-inline, .quote
+{
+	font-style: italic;
+}
+
+.quote-inline em, .quote em
+{
+	font-style: normal;
+}
+
+.quote-block
+{
+	color: #544332;
+  padding: .5em;
+}
+
+.required
+{
+	color: #003399;
+}
+
+.locked
+{
+	color: #666666;
+}
+
+.locked a:link, .locked a:visited
+{
+	color: #336699;
+}
