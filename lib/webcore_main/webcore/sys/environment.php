@@ -226,6 +226,7 @@ class ENVIRONMENT extends RESOLVER
     /* URLs */
     $this->set_path (Folder_name_root, '/');
     $this->set_path (Folder_name_resources, '{' . Folder_name_root . '}');
+    $this->set_path (Folder_name_apps, '{' . Folder_name_root . '}');
     $this->set_path (Folder_name_data, '{' . Folder_name_root . '}data');
     $this->set_path (Folder_name_pages, '{' . Folder_name_resources . '}pages');
     $this->set_path (Folder_name_icons, '{' . Folder_name_resources . '}icons');

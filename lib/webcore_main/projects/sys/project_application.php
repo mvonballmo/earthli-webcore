@@ -235,7 +235,7 @@ class PROJECT_APPLICATION extends APPLICATION
 
     $this->xml_options = new PROJECT_APPLICATION_XML_OPTIONS ();
 
-    $this->set_path (Folder_name_application, '{' . Folder_name_pages . '}projects');
+    $this->set_path (Folder_name_application, '{' . Folder_name_apps . '}projects');
     $this->set_path (Folder_name_attachments, '{' . Folder_name_data . '}projects/attachments');
 
     $this->storage_options->return_to_page_name = 'projects_page';

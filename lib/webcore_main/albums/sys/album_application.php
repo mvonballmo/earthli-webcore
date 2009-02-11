@@ -171,7 +171,7 @@ class ALBUM_APPLICATION extends APPLICATION
   {
     APPLICATION::APPLICATION ($page);
 
-    $this->set_path (Folder_name_application, '{' . Folder_name_pages . '}albums');
+    $this->set_path (Folder_name_application, '{' . Folder_name_apps . '}albums');
     $this->set_path (Folder_name_attachments, '{' . Folder_name_data . '}albums/attachments');
 
     $this->storage_options->return_to_page_name = 'albums_page';

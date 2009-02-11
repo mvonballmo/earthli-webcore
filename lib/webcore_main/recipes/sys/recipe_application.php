@@ -147,7 +147,7 @@ class RECIPE_APPLICATION extends DRAFTABLE_APPLICATION
   {
     APPLICATION::APPLICATION ($page);
 
-    $this->set_path (Folder_name_application, '{' . Folder_name_pages . '}recipes');
+    $this->set_path (Folder_name_application, '{' . Folder_name_apps . '}recipes');
     $this->set_path (Folder_name_attachments, '{' . Folder_name_data . '}recipes/attachments');
 
     $this->storage_options->return_to_page_name = 'recipes_page';

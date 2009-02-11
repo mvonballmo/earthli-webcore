@@ -459,6 +459,11 @@ define ('Folder_name_data', 'data');
  */
 define ('Folder_name_root', 'root');
 /**
+ * Base folder for all applications  managed by the WebCore.
+ * Use as an alias with the {@link RESOURCE_MANAGER}.
+ */
+define ('Folder_name_apps', 'apps');
+/**
  * Base folder for all resources managed by the WebCore.
  * Use as an alias with the {@link RESOURCE_MANAGER}.
  */
