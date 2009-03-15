@@ -1599,7 +1599,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
   function _control_group_as_html ($id, &$props, $type)
   {
     if ($id)
-      $field =& $this->_field_at ($id);
+      $field = $this->_field_at ($id);
 
     if (! isset ($field) || $field->visible)
     {
@@ -1632,7 +1632,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
             $needs_descriptions = ! empty ($item->description);
           else
           {
-            $field =& $this->_field_at ($item->title);
+            $field = $this->_field_at ($item->title);
             $needs_descriptions = ! empty ($field->description);
           }
           if ($needs_descriptions) break;
@@ -1645,7 +1645,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
 
         if (! $id)
         {
-          $field =& $this->_field_at ($item->title);
+          $field = $this->_field_at ($item->title);
           $item->title = $field->title;
           $item->description = $field->description;
           $item->enabled = $field->enabled;
