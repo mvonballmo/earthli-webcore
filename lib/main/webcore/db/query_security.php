@@ -487,6 +487,7 @@ class QUERY_SECURITY_RESTRICTION_SET
     if (isset ($this->set))
     {
       $other_items = $this->set->_all_items ();
+
       foreach ($items as $item)
       {
         foreach ($other_items as $other_item)

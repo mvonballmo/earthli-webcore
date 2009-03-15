@@ -594,7 +594,7 @@ class DATE_TIME extends RAISABLE
    */
   function as_php ()
   {
-    if ($this->_php_time == Date_time_unassigned)
+    if (($this->_php_time == Date_time_unassigned) && ! empty($this->_iso_time))
     {
       $regs = null; // Compiler warning
       ereg ("([0-9]{4})-([0-9]{1,2})-([0-9]{1,2})( ([0-9]{1,2}):([0-9]{1,2}):([0-9]{1,2}))", $this->_iso_time, $regs);
