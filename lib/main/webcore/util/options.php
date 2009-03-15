@@ -121,7 +121,7 @@ class STORED_OPTION extends WEBCORE_OBJECT
    */
   function _url_for_value ($value)
   {
-    $Result = new URL ('set_option.php');
+    $Result = new URL ('{' . Folder_name_pages . '}set_option.php');
     $Result->add_argument ('opt_name', $this->name);
     $Result->add_argument ('opt_value', $value);
     $Result->add_argument ('opt_page_context', $this->context->is_page);
