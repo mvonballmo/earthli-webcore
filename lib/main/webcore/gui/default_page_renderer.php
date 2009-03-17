@@ -184,7 +184,8 @@ class DEFAULT_PAGE_RENDERER extends WEBCORE_PAGE_RENDERER
    * Return Login/Theme/etc. information.
    * @param PAGE_TEMPLATE_OPTIONS $options
    * @return string
-   * @access private*/
+   * @access private
+	*/
   function _login_theme_status (&$options)
   {
     /* Access the application through the page here since the parent
@@ -253,7 +254,8 @@ class DEFAULT_PAGE_RENDERER extends WEBCORE_PAGE_RENDERER
    * Return Contact/Support/Privacy links.
    * @param PAGE_TEMPLATE_OPTIONS $options
    * @return string
-   * @access private*/
+   * @access private
+	*/
   function _links_as_text (&$options)
   {
     if ($options->show_links)
@@ -279,7 +281,8 @@ class DEFAULT_PAGE_RENDERER extends WEBCORE_PAGE_RENDERER
    * Return the WebCore and application versions.
    * @param PAGE_TEMPLATE_OPTIONS $options
    * @return string
-   * @access private*/
+   * @access private
+	*/
   function _versions_as_text ($options)
   {
     $versions = array ();
@@ -296,7 +299,8 @@ class DEFAULT_PAGE_RENDERER extends WEBCORE_PAGE_RENDERER
    * Return the WebCore and application versions.
    * @param PAGE_TEMPLATE_OPTIONS $options
    * @return string
-   * @access private*/
+   * @access private
+	*/
   function _page_statistics_as_text ($options)
   {
     if ($options->show_statistics)
@@ -351,7 +355,8 @@ class DEFAULT_PAGE_RENDERER extends WEBCORE_PAGE_RENDERER
    * {@link PAGE_TEMPLATE_OPTIONS::$check_browser} is true.
    * @param PAGE_TEMPLATE_OPTIONS $options
    * @param boolean $in_header True is rendering in the header.
-   * @access private */
+   * @access private 
+	*/
   function _handle_browser_warnings (&$options, $in_header)
   {
     if (! ($in_header ^ $this->browser_warning_in_header)
@@ -384,7 +389,16 @@ class DEFAULT_PAGE_RENDERER extends WEBCORE_PAGE_RENDERER
 
         $url = $opt_ignore_warning->setter_url_as_html (! $opt_ignore_warning->value ());
       ?>
-      <div style="margin-top: 1em">
+			<p>
+			  To get the maximum amount of pleasure while browsing this and other websites you can download for free any one of these 
+			  <a href="http://getfirefox.com">FireFox</a>, 
+			  <a href="http://google.com/chrome">Chrome</a>, 
+			  <a href="http://opera.com">Opera</a> or 
+			  <a href="http://apple.com/safari">Safari</a>.
+			  If you are using a work computer where you are not allowed to install software yourself you 
+			  can use <a href="http://portableapps.com/">Portable Apps</a> to make it possible to run FireFox without even having to "install" it...      
+			</p>      
+			<div style="margin-top: 1em">
         <input id="ignore_browser_warning" type="checkbox" value="<?php echo $opt_ignore_warning->value (); ?>" onclick="window.location='<?php echo $url; ?>'" style="vertical-align: middle">
         <label for="ignore_browser_warning">Do not show this message again.</label>
       </div>

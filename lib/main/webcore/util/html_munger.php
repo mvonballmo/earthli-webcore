@@ -536,7 +536,7 @@ class HTML_FOOTNOTE_REFERENCE_REPLACER extends MUNGER_FOOTNOTE_REFERENCE_REPLACE
    */
   function _format_reference (&$token, &$info)
   {
-    return '<a href="#' . $info->name_to . '" id="' . $info->name_from . '" class="footnote-number" title="Jump to footnote.">' . $info->number . '</a>';
+    return '<a href="#' . $info->name_to . '" id="' . $info->name_from . '" class="footnote-number" title="Jump to footnote.">[' . $info->number . ']</a>';
   }
 }
 
