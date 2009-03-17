@@ -150,7 +150,7 @@ class QUERY_SECURITY_RESTRICTION extends WEBCORE_OBJECT
   function _generate_sql_for_sets ($set_names)
   {
     $this->_set_names = $set_names;
-    $permissions =& $this->login->permissions ();
+    $permissions = $this->login->permissions ();
     for ($idx_set = 0; $idx_set < sizeof ($set_names); $idx_set++)
       $privs [] = $permissions->value_for ($set_names [$idx_set], Privilege_view);
 
@@ -477,7 +477,7 @@ class QUERY_SECURITY_RESTRICTION_SET
    * Gather list of all items recursively.
    * Gets all items, regardless of state and type. Returns {@link _items()} if
    * there is no nested {@link $set}.
-   * Used internally by {@link _items_for()}
+   * Used internally by {@link _items_for()}.
    * @access private
    */
   function _all_items ()
@@ -487,12 +487,14 @@ class QUERY_SECURITY_RESTRICTION_SET
     if (isset ($this->set))
     {
       $other_items = $this->set->_all_items ();
+
       foreach ($items as $item)
       {
         foreach ($other_items as $other_item)
         {
-          $other_item->append ($item);
-          $Result [] = $other_item;
+          $other_clone = clone_object($other_item);
+          $other_clone->append ($item);
+          $Result [] = $other_clone;
         }
       }
     }

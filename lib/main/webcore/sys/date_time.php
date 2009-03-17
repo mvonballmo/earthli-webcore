@@ -266,7 +266,7 @@ class DATE_TIME_FORMATTER extends RAISABLE
     else
       return $Result;
   }
-  
+
   /**
    * Sets the {@link $type} and clears all formatting flags.
    * Calls {@link clear_flags()} to remove all markup and format as plain text.
@@ -277,7 +277,7 @@ class DATE_TIME_FORMATTER extends RAISABLE
     $this->type = $type;
     $this->clear_flags ();
   }
-  
+
   /**
    * Clears all formatting flags.
    * Useful for plain text and debugging output. Sets {@link $show_local_time},
@@ -594,7 +594,7 @@ class DATE_TIME extends RAISABLE
    */
   function as_php ()
   {
-    if ($this->_php_time == Date_time_unassigned)
+    if (($this->_php_time == Date_time_unassigned) && ! empty($this->_iso_time))
     {
       $regs = null; // Compiler warning
       ereg ("([0-9]{4})-([0-9]{1,2})-([0-9]{1,2})( ([0-9]{1,2}):([0-9]{1,2}):([0-9]{1,2}))", $this->_iso_time, $regs);
@@ -623,7 +623,7 @@ class DATE_TIME extends RAISABLE
 
   /**
    * Returns the RFC 2822 representation.
-   * Use this format with the {@link RSS_RENDERER}. 
+   * Use this format with the {@link RSS_RENDERER}.
    * Example: Thu, 21 Dec 2000 16:01:07 +0200
    * @return string
    */
@@ -631,10 +631,10 @@ class DATE_TIME extends RAISABLE
   {
     return date ('r', $this->as_php ());
   }
-  
+
   /**
    * Returns the RFC 3339 representation.
-   * Use this format with the {@link RSS_RENDERER}. 
+   * Use this format with the {@link RSS_RENDERER}.
    * Example: 2000-12-21T16:01:07+02:00
    * @return string
    */
@@ -691,7 +691,7 @@ class DATE_TIME extends RAISABLE
     $toolkit =& $this->toolkit ();
     $this->set_from_php ($toolkit->text_to_php ($t, $parts));
   }
-  
+
   function set_now ()
   {
     $this->set_from_php (time ());
@@ -820,7 +820,7 @@ class DATE_TIME extends RAISABLE
    */
   function formatter ()
   {
-    $toolkit =& $this->toolkit (); 
+    $toolkit =& $this->toolkit ();
     return $toolkit->formatter;
   }
 
@@ -841,7 +841,7 @@ class DATE_TIME extends RAISABLE
       $Result =& global_date_time_toolkit ();
     return $Result;
   }
-  
+
   /**
    * Use the given toolkit for conversions and formatting.
    * @param DATE_TIME_TOOLKIT &$toolkit
@@ -974,7 +974,7 @@ class TIME_INTERVAL
   function format ($num_significant_units = 2, $long_names = TRUE, $decimal_places = 0)
   {
     /* Build some constants to use for conversions. */
-    
+
     $unit_sizes_in_seconds = array (31104000, 2592000, 604800, 86400, 3600, 60 );
     $unit_sizes = array (1000000, 12, 4, 7, 24, 60, 60);
     if ($long_names)
@@ -986,9 +986,9 @@ class TIME_INTERVAL
      * years, months, weeks, etc. in an array from left to right. At the same
      * time, find the location in the array of the least significant unit (LSU).
      * If the array looks like this:
-     * 
+     *
      * 0, 5, 3, 2, 5, 0, 52
-     * 
+     *
      * And "num_significant_units" is 2, then the position of the LSU is at
      * index 2 (index 0 is empty, index 1 is most significant and index 2 is the
      * least).
@@ -997,7 +997,7 @@ class TIME_INTERVAL
     $idx_unit = 0;
     $idx_least_significant = sizeof ($unit_sizes) - 1;
     $num_significant_units_found = 0;
-    $s = max ($this->_total_seconds, 0);    
+    $s = max ($this->_total_seconds, 0);
 
     foreach ($unit_sizes_in_seconds as $unit_size)
     {
@@ -1017,7 +1017,7 @@ class TIME_INTERVAL
     }
 
     /* Add seconds to the end of the array in the same way as described above. */
-    
+
     $unit = $s;
     $units [] = $s;
     if ($unit)
@@ -1029,50 +1029,50 @@ class TIME_INTERVAL
           $idx_least_significant = sizeof($units) - 1;
       }
     }
-    
+
     /* Now apply rounding rules.
-     * 
+     *
      * If "decimal_places" is non-zero, then check the unit to the right of the
      * LSU and calculate what fraction of a full unit it is. The units array
      * from above is:
-     * 
+     *
      * 0, 5, 3, 2, 5, 0, 52
-     * 
+     *
      * Adding fractions at all non-significant levels yields (with
      * decimal_places = 1):
-     * 
+     *
      * 0, 5, 3.3, 2.2, 5, .9, 52
-     * 
+     *
      * With 2 significant units, this returns "5 months, 3.3 weeks". With one
      * significant unit, it would round up to 6 months.
-     * 
+     *
      * If "decimal_places" is false, start with the LSU and check the unit to
      * the right of it; if it rounds up, add one to the current unit and move
      * one unit to the left until no more rounding up is needed. If the current
      * unit is equal to the max units (was rounded by the unit to its right),
      * then zero it and add one to the unit to the left.
-     * 
+     *
      * Given the following units:
-     * 
+     *
      * 0, 5, 3, 6, 15, 0, 52
-     * 
+     *
      * Naively, this returns 5 months, 3 weeks. With proper rounding, 15 hours
      * are rounded to a day (adding 1 day to the 6 days); the resulting 7 days
      * are rounded to 1 week and the resulting 4 weeks are rounded to 1 month.
      * The successive stages of the array are as follows:
-     * 
+     *
      * 0, 5, 3, 6, 15, 0, 52
      * 0, 5, 3, 6, 15, 1, 0
      * 0, 5, 3, 6, 15, 1, 0
      * 0, 5, 3, 7, 0, 1, 0
      * 0, 5, 4, 0, 0, 1, 0
      * 0, 6, 0, 0, 0, 1, 0
-     * 
+     *
      * With 2 significant units, this returns "6 months" (because 1 minute is
      * not significant relative to 1 month)
-     * 
+     *
      */
-     
+
     if ($decimal_places > 0)
     {
       $idx_unit = sizeof ($units) - 2;
@@ -1119,27 +1119,27 @@ class TIME_INTERVAL
         $idx_unit--;
       }
     }
-    
+
     /* At this point, the units in the array are correct, so format the
      * required significant units and return them. If some units have already
      * been formatted and a zero is encountered, then skip all remaining units
      * as they are not significant. From the exampe above, we had:
-     * 
+     *
      * 0, 6, 0, 0, 0, 1, 0
-     * 
+     *
      * This yields "6 months" regardless of how many units are requested because
      * there are no other significant units available (it doesn't make sense to
      * return 6 months, 1 minute in any case).
-     * 
+     *
      */
 
     $num_units = sizeof ($units);
     $formatted_units = array ();
     $idx_unit = 0;
     while ((sizeof ($formatted_units) < $num_significant_units) && ($idx_unit < $num_units))
-    {          
+    {
       $unit = $units [$idx_unit];
-      
+
       if ($unit)
       {
         $unit_name = $names [$idx_unit];
@@ -1158,7 +1158,7 @@ class TIME_INTERVAL
         if (sizeof ($formatted_units))
           $num_significant_units = 0;
       }
-      
+
       $idx_unit++;
     }
 
@@ -1184,7 +1184,7 @@ class TIME_INTERVAL
 
 /**
  * Returns the global date/time toolkit.
- * Used by {@link DATE_TIME} if no other toolkit is assigned. 
+ * Used by {@link DATE_TIME} if no other toolkit is assigned.
  * @return DATE_TIME_TOOLKIT
  * @access private
  */

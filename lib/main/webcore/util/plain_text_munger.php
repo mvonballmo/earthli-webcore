@@ -533,7 +533,9 @@ class PLAIN_TEXT_LIST_TRANSFORMER extends MUNGER_LIST_TRANSFORMER
 
     if (($this->_depth == 1) && (($this->_buffer_state == Munger_first_data_block) ||
                                  ($this->_buffer_state == Munger_only_data_block)))
+    {
       $Result = substr ($Result, 1);
+    }
 
     return $Result;
   }
@@ -956,6 +958,7 @@ class TEXT_MUNGER extends MUNGER
       if ($left_margin)
         $text = str_replace ("\n", "\n" . str_repeat (' ', $left_margin), $text);
     }
+
     return $text;
   }
 

@@ -222,8 +222,9 @@ class OBJECT_IN_FOLDER extends CONTENT_OBJECT
    */
   function parent_folder_id ()
   {
-    $fldr =& $this->parent_folder ();
-    return $fldr->id;
+    $fldr = $this->parent_folder ();
+    if (isset($fldr))
+      return $fldr->id;
   }
 
   /**
@@ -236,7 +237,7 @@ class OBJECT_IN_FOLDER extends CONTENT_OBJECT
    */
   function move_to (&$fldr, &$options)
   {
-    $parent =& $this->parent_folder ();
+    $parent = $this->parent_folder ();
     if (! $parent->equals ($fldr))
     {
       $privilege_set = $this->_privilege_set ();

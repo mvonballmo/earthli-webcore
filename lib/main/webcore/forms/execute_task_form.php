@@ -103,6 +103,12 @@ class EXECUTE_TASK_FORM extends FORM
     $field->description = 'Abort execution of the task if an error occurs; turn this off to ignore spurious errors.';
     $this->add_field ($field);
 
+    $field = new BOOLEAN_FIELD ();
+    $field->id = 'database';
+    $field->title = 'Show Database Output';
+    $field->description = 'Shows queries executed against the database.';
+    $this->add_field ($field);
+
     $field =& $this->field_at ('debug');
     $field->visible = TRUE;
     $field->description = 'Show all debugging output from all sub-systems. Similar to "verbose".';
@@ -115,6 +121,7 @@ class EXECUTE_TASK_FORM extends FORM
     $this->set_value ('testing', FALSE);
     $this->set_value ('stop_on_error', TRUE);
     $this->set_value ('debug', FALSE);
+    $this->set_value ('database', FALSE);
     $this->set_value ('console', FALSE);
   }
 
@@ -129,6 +136,7 @@ class EXECUTE_TASK_FORM extends FORM
     $this->set_value ('testing', $obj->testing);
     $this->set_value ('stop_on_error', $obj->stop_on_error);
     $this->set_value ('debug', $obj->log_debug);
+    $this->set_value ('database', $obj->log_database);
     $this->set_value ('console', $obj->run_as_console);
   }
 
@@ -143,6 +151,7 @@ class EXECUTE_TASK_FORM extends FORM
     $obj->testing = $this->value_for ('testing');
     $obj->stop_on_error = $this->value_for ('stop_on_error');
     $obj->log_debug = $this->value_for ('debug');
+    $obj->log_database = $this->value_for ('database');
     $obj->run_as_console = $this->value_for ('console');
     $obj->owns_page = FALSE;
     $obj->execute ();
@@ -159,6 +168,7 @@ class EXECUTE_TASK_FORM extends FORM
     $props->add_item ('stop_on_error', 1);
     $props->add_item ('verbose', 1);
     $props->add_item ('debug', 1);
+    $props->add_item ('database', 1);
     $props->add_item ('console', 1);
   }
 

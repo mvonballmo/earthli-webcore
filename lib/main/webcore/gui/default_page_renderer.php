@@ -64,12 +64,13 @@ class DEFAULT_PAGE_RENDERER extends WEBCORE_PAGE_RENDERER
   {
     $page =& $this->page;
     $env =& $this->env;
+    $browser =& $env->browser();
 
     $options = $page->template_options;
 ?>
   <div class="page">
 <?php
-    if ($options->header_visible)
+    if ($options->header_visible && !$browser->is(Browser_previewer))
     {
 ?>
     <div class="banner">
@@ -121,13 +122,14 @@ class DEFAULT_PAGE_RENDERER extends WEBCORE_PAGE_RENDERER
   {
     $page =& $this->page;
     $options = $page->template_options;
-
+    $browser =& $this->env->browser();
+    
     if ($options->close_logger)
       $this->env->logs->close_all ();
 ?>
     </div>  <!-- end of page-body -->
     <?php
-      if ($options->footer_visible)
+      if ($options->footer_visible && !$browser->is(Browser_previewer))
       {
     ?>
     <div class="footer">

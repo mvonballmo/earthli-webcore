@@ -127,8 +127,8 @@ class MUNGER_BASE_TEST_TASK extends TEST_TASK
 //    $this->_munger = new PLAIN_TEXT_MUNGER ();
     $this->_munger = new HTML_TEXT_MUNGER ();
 
-$s = <<<EOD
-EOD;
+//$s = <<<EOD
+//EOD;
 
 $s = "'Single-quoted', \"double-quoted\",
 '<a href=\"test.html\">Test</a>', \"<a href=\"test.html\">Test</a>\",
@@ -167,8 +167,8 @@ don't
 //'5'9\"',
 //";
 
-$result = <<<EORESULT
-EORESULT;
+//$result = <<<EORESULT
+//EORESULT;
 
     $this->_munger->max_visible_output_chars = 0;
 

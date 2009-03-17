@@ -53,34 +53,38 @@ class FILE_TEST_TASK extends TEST_TASK
 {
   function _execute ()
   {
+    $file_options = global_file_options();
+    $delimiter = $file_options->path_delimiter;
+
     $this->_check_equal (FALSE, begins_with_delimiter ('path/to/the/folder/'));
-    $this->_check_equal (TRUE, begins_with_delimiter ('/path/to/the/folder/'));
-    $this->_check_equal (TRUE, ends_with_delimiter ('path/to/the/folder/'));
+    $this->_check_equal (TRUE, begins_with_delimiter ($delimiter . 'path/to/the/folder/'));
+    $this->_check_equal (TRUE, ends_with_delimiter ('path/to/the/folder' . $file_options->path_delimiter));
     $this->_check_equal (FALSE, ends_with_delimiter ('path/to/the/folder'));
-    
+
     $this->_check_equal (TRUE, begins_with_delimiter (ensure_begins_with_delimiter ('path/to/the/folder/')));
     $this->_check_equal (TRUE, begins_with_delimiter (ensure_begins_with_delimiter ('/path/to/the/folder/')));
     $this->_check_equal (TRUE, ends_with_delimiter (ensure_ends_with_delimiter ('path/to/the/folder/')));
     $this->_check_equal (TRUE, ends_with_delimiter (ensure_ends_with_delimiter ('path/to/the/folder')));
-    
-    $this->_check_equal ('untergeordnet_aesthetisch', normalize_file_id ('Ÿntergeordnet ŠŽsthetisch'));
-    
+
+    $this->_check_equal ('untergeordnet_asthetisch', normalize_file_id ('Untergeordnet Ästhetisch'));
+
     $input_path = $this->env->source_path ();
-    $input_path->append ('wizards/new_application');
+
+    $input_path->append ('../../../templates/wizards/new_application');
 
     $files = file_list_for ($input_path->as_text (), '', TRUE);
-    $this->_check_equal (139, sizeof ($files)); 
-    $this->_check_equal ('code/cmd/[[_entry_name_lc_]]_commands.php', $files [0]);
+    $this->_check_equal (140, sizeof ($files));
+    $this->_check_equal ('code' . $delimiter . 'cmd' . $delimiter . '[[_entry_name_lc_]]_commands.php', $files [0]);
     $files = file_list_for ($input_path->as_text (), '', FALSE);
     $this->_check_equal (1, sizeof ($files));
     $this->_check_equal ('config.ini', $files [0]);
 
     $files = file_list_for ($input_path->as_text (), 'my/new/files', TRUE);
-    $this->_check_equal (139, sizeof ($files)); 
-    $this->_check_equal ('my/new/files/code/cmd/[[_entry_name_lc_]]_commands.php', $files [0]);
+    $this->_check_equal (140, sizeof ($files));
+    $this->_check_equal ('my' . $delimiter . 'new' . $delimiter . 'files' . $delimiter . 'code' . $delimiter . 'cmd' . $delimiter . '[[_entry_name_lc_]]_commands.php', $files [0]);
     $files = file_list_for ($input_path->as_text (), 'my/new/files', FALSE);
     $this->_check_equal (1, sizeof ($files));
-    $this->_check_equal ('my/new/files/config.ini', $files [0]);
+    $this->_check_equal ('my' . $delimiter . 'new' . $delimiter . 'files' . $delimiter . 'config.ini', $files [0]);
   }
 }
 

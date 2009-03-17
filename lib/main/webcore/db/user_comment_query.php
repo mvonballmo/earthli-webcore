@@ -57,7 +57,7 @@ class USER_COMMENT_QUERY extends USER_ENTRY_SUB_OBJECT_QUERY
   /**
    * Apply default restrictions and tables.
    */
-  function apply_defaults () 
+  function apply_defaults ()
   {
     $this->set_select ($this->alias . '.*');
     $this->set_table ($this->app->table_names->comments . ' ' . $this->alias);
@@ -106,7 +106,7 @@ class USER_COMMENT_QUERY extends USER_ENTRY_SUB_OBJECT_QUERY
   {
     $obj->set_entry ($entry);
   }
-  
+
   /**
    * Name of the default permission set to use.
    * @var string
@@ -127,7 +127,7 @@ class USER_MULTI_TYPE_COMMENT_QUERY extends USER_COMMENT_QUERY
   /**
    * Apply default restrictions and tables.
    */
-  function apply_defaults () 
+  function apply_defaults ()
   {
     parent::apply_defaults ();
     $this->add_select ('entry.type as entry_type');

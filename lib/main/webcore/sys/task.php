@@ -56,6 +56,7 @@ class TASK extends WEBCORE_OBJECT
    * @var string
    */
   var $log_channel = Msg_channel_system;
+
   /**
    * Should debug messages be displayed in the log?
    * If this is enabled, all SQL commands issued during the process are logged to
@@ -63,6 +64,7 @@ class TASK extends WEBCORE_OBJECT
    * @var boolean
    */
   var $log_debug = TRUE;
+
   /**
    * If true, does not actually execute SQL or other tasks.
    * The full process is executed, running through all scripts and emitting
@@ -70,11 +72,13 @@ class TASK extends WEBCORE_OBJECT
    * @var boolean
    */
   var $testing;
+
   /**
    * Number of seconds to run before timeout occurs.
    * @var integer
    */
   var $time_out_in_seconds = 600;
+
   /**
    * Should the process stop if an error is encountered?
    * The task overrides the exception-handling system, logging everything to screen
@@ -82,11 +86,13 @@ class TASK extends WEBCORE_OBJECT
    * despite fatal errors.
    */
   var $stop_on_error = TRUE;
+
   /**
    * Include system error and warning messages in output.
    * @var boolean
    */
   var $log_system_errors = TRUE;
+
   /**
    * Include generic debugging messages in output.
    * This allows debugging code from messages logged to {@link
@@ -95,6 +101,13 @@ class TASK extends WEBCORE_OBJECT
    * @var boolean
    */
   var $log_default_errors = TRUE;
+
+  /**
+   * Include database messages in output.
+   * @var boolean
+   */
+  var $log_database = FALSE;
+
   /**
    * Show more information during migration.
    * @var boolean
@@ -296,6 +309,8 @@ class TASK extends WEBCORE_OBJECT
     $this->_logger = $this->_make_logger ();
     $this->_logger->set_enabled (0);
     $this->_add_log_channel ($this->log_channel);
+    if ($this->log_database)
+      $this->_add_log_channel (Msg_channel_database);
     if ($this->log_default_errors)
       $this->_logger->set_channel_enabled (Msg_channel_default, Msg_type_all);
     if ($this->log_system_errors)

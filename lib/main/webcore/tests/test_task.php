@@ -92,7 +92,13 @@ class TEST_TASK extends TASK
   function _check ($value, $msg)
   {
     if (! $value)
+    {
       $this->_log ('Check failed for: "' . $msg . '"', Msg_type_error);
+      if ($this->stop_on_error)
+      {
+        $this->_abort("Stopping on error.");
+      }
+    }
     else
       $this->_log ('Check succeeded for: "' . $msg . '"', Msg_type_debug_info);
   }
@@ -109,6 +115,11 @@ class TEST_TASK extends TASK
     {
       $this->_log ("Expected [$value1]", Msg_type_error);
       $this->_log_more ("Received [$value2]");
+
+      if ($this->stop_on_error)
+      {
+        $this->_abort("Stopping on error.");
+      }
     }
     else
       $this->_log ("Expected and got [$value1].", Msg_type_debug_info);

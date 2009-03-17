@@ -239,7 +239,7 @@ class BASELINE_DATA_TEST_TASK extends TEST_TASK
   function _clear_and_return_root_folder ()
   {
     $folder_query = $this->app->login->folder_query ();
-    $root_folder =& $folder_query->object_at_id ($this->app->root_folder_id);
+    $root_folder = $folder_query->object_at_id ($this->app->root_folder_id);
 
     if (isset ($root_folder))
     {
@@ -249,8 +249,9 @@ class BASELINE_DATA_TEST_TASK extends TEST_TASK
     else
       $root_folder = $this->app->new_folder ();
 
+    // ensure that we get the root folder id again
     $this->_query ("TRUNCATE TABLE `test_harness_folders`");
-      // ensure that we get the root folder id again
+
     $root_folder->title = 'Root';
     $root_folder->store ();
 

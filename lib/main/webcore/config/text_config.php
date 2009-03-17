@@ -103,9 +103,16 @@ class TEXT_OPTIONS
   function convert_to_html_entities ($value, $quote_style = ENT_NOQUOTES)
   {
     if (is_php_5 ())
-      $Result = htmlentities ($value, $quote_style, 'ISO-8859-1', FALSE);
+    {
+      // The fourth parameter "double_encode" is only supported on PHP 5.2.3 and higher
+      // $Result = htmlentities ($value, $quote_style, 'ISO-8859-1', FALSE);
+      $Result = htmlentities ($value, $quote_style, 'ISO-8859-1');
+    }
     else
+    {
       $Result = htmlentities ($value, $quote_style);
+    }
+
     return strtr ($Result, $this->html_entity_translations);
   }
 

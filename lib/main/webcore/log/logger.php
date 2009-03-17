@@ -141,13 +141,15 @@ function log_message ($msg, $type = Msg_type_debug_info, $channel = Msg_channel_
   global $Logger;
 
   if ($Logger)
+  {
     $Logger->record ($msg, $type, $channel, $has_html);
+  }
 }
 
 /**
  * Records this message to the global logger.
- * Records using the same type and channel as the previous message. 
- * Use this function for messages with multiple lines. Will not cause 
+ * Records using the same type and channel as the previous message.
+ * Use this function for messages with multiple lines. Will not cause
  * an error if the logger does not exist.
  * @see log_message()
  * @param string $msg The message itself.

@@ -89,9 +89,9 @@ class ATTACHMENT extends OBJECT_IN_FOLDER
    * @var boolean
    */
   var $is_archive;
-  
+
   /**
-   * Fully resolved server-local path to the file. 
+   * Fully resolved server-local path to the file.
    * @return string
    */
   function full_file_name ()
@@ -101,10 +101,10 @@ class ATTACHMENT extends OBJECT_IN_FOLDER
       $Result = url_to_file_name ($this->full_url (Force_root_on));
     return $Result;
   }
-  
+
   /**
    * Fully resolved URL to the file.
-   * @see full_file_name() 
+   * @see full_file_name()
    * @param boolean $root_override Overrides {@link $resolve_to_root} if set to
    * {@link Force_root_on}.
    * @return string
@@ -114,14 +114,15 @@ class ATTACHMENT extends OBJECT_IN_FOLDER
     if (file_exists ($this->file_name))
       $Result = file_name_to_url ($this->file_name);
     else
-      $Result = $this->_host->resolve_url ('{att_link}' . $this->file_name, $root_override); 
+      $Result = $this->_host->resolve_url ('{att_link}' . $this->file_name, $root_override);
+
     return $Result;
   }
 
   /**
    * Fully resolved server-local path to the thumbnail.
-   * Will be empty if not {@link is_image} or no thumnail was generated. 
-   * @see thumbnail_url() 
+   * Will be empty if not {@link is_image} or no thumnail was generated.
+   * @see thumbnail_url()
    * @return string
    */
   function thumbnail_file_name ($for_file = '')
@@ -136,7 +137,7 @@ class ATTACHMENT extends OBJECT_IN_FOLDER
   /**
    * Fully resolved URL to the thumbnail.
    * May be empty.
-   * @see thumbnail_file_name() 
+   * @see thumbnail_file_name()
    * @return string
    */
   function thumbnail_url ()
@@ -147,7 +148,7 @@ class ATTACHMENT extends OBJECT_IN_FOLDER
   }
 
   /**
-   * Thumbnail as an HTML tag. 
+   * Thumbnail as an HTML tag.
    * @param string $CSS_class
    * @return string
    */
@@ -196,17 +197,17 @@ class ATTACHMENT extends OBJECT_IN_FOLDER
     $old_file_name = $this->full_file_name ();
     if ($old_file_name != $new_file_name)
     {
-      $this->_old_file_name = $old_file_name;  
+      $this->_old_file_name = $old_file_name;
       $this->file_name = $new_file_name;
-  
+
       $class_name = $this->app->final_class_name ('IMAGE', 'webcore/util/image.php');
-      $img = new $class_name ();      
+      $img = new $class_name ();
       $img->set_file ($this->full_file_name ());
-      $this->is_image = $img->loadable ();      
+      $this->is_image = $img->loadable ();
       if (! $this->is_image)
       {
         $class_name = $this->app->final_class_name ('ARCHIVE', 'webcore/util/archive.php');
-        $archive = new $class_name ($this->full_file_name ());      
+        $archive = new $class_name ($this->full_file_name ());
         $this->is_archive = $archive->readable ();
       }
     }
@@ -233,7 +234,7 @@ class ATTACHMENT extends OBJECT_IN_FOLDER
   {
     return $this->app->page_names->attachment_home;
   }
-  
+
   /**
    * Arguments to the home page url for this object.
    * @return string

@@ -54,11 +54,11 @@ class MUNGER_TEST_TASK extends MUNGER_BASE_TEST_TASK
   function _run_tests ()
   {
     parent::_run_tests ();
-    $this->_run_token_tests ();
-    $this->_run_attribute_tests ();
-    $this->_run_validator_tests ();
+//    $this->_run_token_tests ();
+//    $this->_run_attribute_tests ();
+//    $this->_run_validator_tests ();
     $this->_run_plain_text_tests ();
-    $this->_run_html_tests ();
+//    $this->_run_html_tests ();
   }
 
   function _run_token_tests ()
@@ -99,6 +99,12 @@ class MUNGER_TEST_TASK extends MUNGER_BASE_TEST_TASK
 
   function _run_plain_text_tests ()
   {
+    $old_show_html_output = $this->show_html_output;
+    $this->show_html_output = FALSE;
+
+    $this->_munger = new PLAIN_TEXT_MUNGER ();
+    $this->_munger->right_margin = 80;
+
     include('webcore/tests/tests/plain_text_munger_tests.php');
   }
 

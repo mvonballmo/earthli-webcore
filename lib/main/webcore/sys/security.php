@@ -344,10 +344,9 @@ class FOLDER_SECURITY extends FOLDER_INHERITABLE_SETTINGS
         }
       }
 
-      if (! isset ($this->_anonymous_permissions))
-        $this->_anonymous_permissions =& $this->_create_and_store_permissions (Privilege_kind_anonymous);
-      if (! isset ($this->_registered_permissions))
-        $this->_registered_permissions =& $this->_create_and_store_permissions (Privilege_kind_registered);
+      log_message("Loading permissions.");
+
+      $this->_ensure_default_permissions_are_stored();
     }
   }
 
@@ -544,12 +543,17 @@ class FOLDER_SECURITY extends FOLDER_INHERITABLE_SETTINGS
   {
     parent::_create ();
 
-    $perms =& $this->anonymous_permissions ();
-    if (! isset ($perms))
-      $this->_anonymous_permissions = $this->_create_and_store_permissions (Privilege_kind_anonymous);
-    $perms =& $this->registered_permissions ();
-    if (! isset ($perms))
-      $this->_registered_permissions = $this->_create_and_store_permissions (Privilege_kind_registered);
+    log_message("Creating folder.");
+
+    $this->_ensure_default_permissions_are_stored();
+  }
+
+  function _ensure_default_permissions_are_stored()
+  {
+    if (! isset ($this->_anonymous_permissions))
+      $this->_anonymous_permissions =& $this->_create_and_store_permissions (Privilege_kind_anonymous);
+    if (! isset ($this->_registered_permissions))
+      $this->_registered_permissions =& $this->_create_and_store_permissions (Privilege_kind_registered);
   }
 
   /**

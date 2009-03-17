@@ -77,7 +77,7 @@ class FILE_OPTIONS
    * List of characters to convert <i>to</i> in afile name.
    * Each character replaces its corresponding entry in {@link
    * $source_chars} if found in a file name.
-   * @var string */ 
+   * @var string */
   var $target_chars = 'aaaaeeeeiiiioooouuuuAAAAEEEEIIIIOOOOUUUUnNcC';
   /**
    * Longest possible file name.
@@ -137,8 +137,7 @@ function make_canonical ($path, $opts = null)
     $Result = '';
   else
   {
-    $Result = preg_replace (array ("/\\//", "/\\//", "/[^\\$curr]\\$curr\\$sep/"), 
-                         array ($sep, $sep, ''), $path);
+    $Result = preg_replace (array ("/\\//", "/\\//", "/[^\\$curr]\\$curr\\$sep/"), array ($sep, $sep, ''), $path);
   }
   return $Result;
 }
@@ -163,7 +162,7 @@ function join_paths ($path1, $path2, $opts = null)
 
     $path1 = make_canonical ($path1, $opts);
     $path2 = make_canonical ($path2, $opts);
-    
+
     if (strstr ($path2, '..'))
     {
       $folders = explode ($sep, $path2);
@@ -227,7 +226,7 @@ function join_paths ($path1, $path2, $opts = null)
  * is a sub-path of 'to', a chain of '..' directories is returned. If 'to' is a
  * sub-path of 'from', 'from' is removed from the path in order to make it
  * relative.
- * 
+ *
  * <b>Examples:</b>
  * <code>path_between ('/a/b/c/', '/a/b/c/') is ''
  * path_between ('/a/b/c/', '/a/b/') is '../'
@@ -236,7 +235,7 @@ function join_paths ($path1, $path2, $opts = null)
  * path_between ('/a/', '/a/b/c/') is 'b/c/'
  * path_between ('/a/d/c', '/a/b/c/') is '/a/b/c/'
  * </code>
- * 
+ *
  * @param string $from
  * @param string $to
  * @param FILE_OPTIONS $opts
@@ -250,7 +249,7 @@ function path_between ($from, $to, $opts = null)
 
   $from = make_canonical ($from, $opts);
   $to = make_canonical ($to, $opts);
-  
+
   if ($to)
   {
     if (strpos ($from, $to) === 0)
@@ -363,9 +362,9 @@ function ends_with_delimiter ($f, $opts = null)
 function has_root ($f, $opts = null)
 {
   if (! isset ($opts))
-    $opts =& global_file_options ();  
+    $opts =& global_file_options ();
   $path_starts_with_delimiter = $opts->path_starts_with_delimiter();
-  return ($path_starts_with_delimiter && begins_with_delimiter ($f, $opts)) || 
+  return ($path_starts_with_delimiter && begins_with_delimiter ($f, $opts)) ||
          (! $path_starts_with_delimiter && (strpos ($f, ':') == 1));
 }
 
@@ -435,13 +434,13 @@ function normalize_path ($path, $opts = null)
   if (sizeof ($parts_to_process))
   {
     /* If the first part is a Windows drive, use it without normalizing it. */
-    
+
     $part = $parts_to_process [0];
     if (! $opts->path_starts_with_delimiter () && (strlen ($part) == 2) && ($part [1] == ':'))
       $processed_parts [] = array_shift ($parts_to_process);
-    
+
     /* Process all other path parts normally. */
-    
+
     foreach ($parts_to_process as $part)
       $processed_parts [] = normalize_file_id ($part, $opts);
 
@@ -491,7 +490,7 @@ function file_size_as_text ($size, $force_kb = FALSE)
     $places++;
     $size = $size / 1024;
   }
-  
+
   $size = round ($size, 1);
 
   switch ($places)
@@ -499,7 +498,7 @@ function file_size_as_text ($size, $force_kb = FALSE)
   case 0:
     if ($force_kb | ($size < 1024))
       return $size . ' Bytes';
-    else  
+    else
       return round ($size / 1024, 1) . ' KB';
   case 1:
     return $size . ' KB';
@@ -574,7 +573,7 @@ function is_valid_path ($path, $opts = null)
  * <li>The path is not legal; use {@link normalize_path()} to generate a valid
  * path for the server file system.</li>
  * <li>The path is excluded by an "open_base_dir" directive in the PHP
- * configuration.</li> 
+ * configuration.</li>
  * <li>The server process user does not have rights to create the requested
  * path.</li>
  * </ul>
@@ -591,7 +590,7 @@ function ensure_path_exists ($path, $opts = null)
     $path = str_replace ('\\', $opts->path_delimiter, $path);
     $path = str_replace ('/', $opts->path_delimiter, $path);
 
-    /* Hack here to make sure that UNIX-base systems have 
+    /* Hack here to make sure that UNIX-base systems have
      * their leading separator.
      */
 
@@ -664,7 +663,7 @@ function file_list_for ($base_path, $path_to_prepend = '', $recurse = FALSE, $op
   $$base_path = ensure_ends_with_delimiter ($base_path, $opts);
 
   $Result = array ();
-  if ($handle = opendir ($base_path)) 
+  if ($handle = opendir ($base_path))
   {
     while (($name = readdir ($handle)) !== FALSE)
     {
@@ -678,7 +677,7 @@ function file_list_for ($base_path, $path_to_prepend = '', $recurse = FALSE, $op
         else
           $Result [] = join_paths ($path_to_prepend, $name);
       }
-    } 
+    }
     closedir ($handle);
   }
   return $Result;

@@ -54,7 +54,9 @@ http://www.earthli.com/software/webcore
         $form = $task->form ();
         $form->process_existing ($task);
         if (! $form->committed ())
+        {
           $form->display ();
+        }
       ?>
     </div>
   </div>
