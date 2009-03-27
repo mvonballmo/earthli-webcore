@@ -886,11 +886,14 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
       $attrs = $token->attributes ();
       $Result = $this->_open_outer_area ($munger, $attrs, $this->is_block);
       if (! $this->has_end_tag)
+      {
         $Result .= $this->_close_outer_area ($munger, $this->is_block);
+      }
+      
       return $Result;
     }
-    else
-      return $this->_close_outer_area ($munger, $this->is_block);
+
+    return $this->_close_outer_area ($munger, $this->is_block);
   }
 
   /**
@@ -1896,10 +1899,10 @@ class HTML_MUNGER extends MUNGER
    */
   function style_builder ($css = '')
   {
-    if (! isset ($this->_style_builder))
-      $this->_style_builder = new CSS_STYLE_BUILDER ();
-    $this->_style_builder->set_text ($css);
-    return $this->_style_builder;
+    $Result = new CSS_STYLE_BUILDER ();
+    $Result->set_text ($css);
+    
+    return $Result;
   }
 
   /**

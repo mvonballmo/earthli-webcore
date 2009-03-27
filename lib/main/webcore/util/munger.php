@@ -183,7 +183,10 @@ class MUNGER_TOKEN
   function data()
   {
     if (!isset ($this->_data))
+    {
       $this->_data = substr($this->_input, $this->_first, $this->size);
+    }
+    
     return $this->_data;
   }
 
@@ -198,16 +201,22 @@ class MUNGER_TOKEN
     if (!isset ($this->_name))
     {
       if ($this->is_start_tag())
+      {
         $this->_name = strtok($this->tag_data(), " \t\n");
+      }
 
       if ($this->is_end_tag())
+      {
         $this->_name = $this->tag_data();
+      }
     }
 
     if (isset($this->_name))
-      return strtolower($this->_name);
-
-    return "";
+    { 
+    	return strtolower($this->_name);
+    }
+    
+    return '';
   }
 
   /**
@@ -291,8 +300,13 @@ class MUNGER_TOKEN
     if (!isset ($this->_tag_data))
     {
       if ($this->is_start_tag())
+      {
         $this->_tag_data = substr($this->_input, $this->_first + 1, $this->size - 2);
-      elseif ($this->is_end_tag()) $this->_tag_data = substr($this->_input, $this->_first + 2, $this->size - 3);
+      }
+      elseif ($this->is_end_tag()) 
+      {
+      	$this->_tag_data = substr($this->_input, $this->_first + 2, $this->size - 3);
+      }
     }
 
     return $this->_tag_data;
@@ -464,7 +478,7 @@ class MUNGER_TOKENIZER extends RAISABLE
    * Contents of last token read with {@link MUNGER_TOKENIZER::read_next_token()}.
    * @return MUNGER_TOKEN
    */
-  function & current_token()
+  function &current_token()
   {
     return $this->_current_token;
   }
@@ -505,9 +519,13 @@ class MUNGER_TOKENIZER extends RAISABLE
             else
             {
               if ($first_tag_char == $this->end_tag_char)
+              {
                 $type = Munger_token_end_tag;
+              }
               else
+              {
                 $type = Munger_token_start_tag;
+              }
 
               $this->_set_current_token($this->_pos, $end_of_tag - $this->_pos + 1, $type);
 
@@ -520,11 +538,15 @@ class MUNGER_TOKENIZER extends RAISABLE
                 $this->_start_of_text_block = $this->_pos;
               }
               else
+              {
                 $this->abort();
+              }
             }
           }
           else // no close tag found
+          {
             $this->_set_last_token();
+          }
         }
         else
         {
@@ -552,10 +574,14 @@ class MUNGER_TOKENIZER extends RAISABLE
         }
       }
       else // open tag was final character
+      {
         $this->_set_last_token();
+      }
     }
     else // no more tags
+    {
       $this->_set_last_token();
+    }
   }
 
   /**
@@ -668,12 +694,12 @@ class MUNGER_REPLACER extends MUNGER_TOOL
 {
   /**
    * Convert the given token to the output format.
-   * @param MUNGER &$munger The transformation context.
-   * @param MUNGER_TOKEN &$token
+   * @param MUNGER $munger The transformation context.
+   * @param MUNGER_TOKEN $token
    * @return string
    * @abstract
    */
-  function transform(&$munger, &$token)
+  function transform($munger, $token)
   {
     $this->raise_deferred('MUNGER_REPLACER', 'transform');
   }
@@ -705,7 +731,10 @@ class MUNGER_CONVERTER extends MUNGER_TOOL
   function convert(&$munger, $text)
   {
     if ($this->enabled)
+    {
       return $this->_convert($munger, $text);
+    }
+    
     return $text;
   }
 
@@ -735,12 +764,12 @@ class MUNGER_HTML_CONVERTER extends MUNGER_CONVERTER
 {
   /**
    * Convert the text to an output format.
-   * @param MUNGER &$munger The conversion context.
+   * @param MUNGER $munger The conversion context.
    * @param string $text
    * @return string
    * @access private
    */
-  function _convert(&$munger, $text)
+  function _convert($munger, $text)
   {
     switch ($munger->convert_mode)
     {
@@ -786,9 +815,11 @@ class MUNGER_BASIC_REPLACER extends MUNGER_REPLACER
   function transform(&$munger, &$token)
   {
     if ($token->is_start_tag())
+    {
       return $this->_start_tag;
-    else
-      return $this->_end_tag;
+    }
+
+    return $this->_end_tag;
   }
 
   /**
@@ -865,8 +896,11 @@ class MUNGER_MACRO_REPLACER extends MUNGER_REPLACER
           {
             $flag = substr($flag, 1);
             $enabled = TRUE;
-          } else
+          } 
+          else
+          {
             $enabled = TRUE;
+          }
 
           switch ($flag)
           {
@@ -879,7 +913,9 @@ class MUNGER_MACRO_REPLACER extends MUNGER_REPLACER
               break;
             default :
               if (isset ($converters[$flag]))
+              {
                 $converters[$flag]->enabled = $enabled;
+              }
           }
         }
       }
@@ -954,8 +990,11 @@ class MUNGER_FOOTNOTE_TEXT_REPLACER extends MUNGER_REPLACER
   function transform(&$munger, &$token)
   {
     if ($token->is_start_tag())
+    {
       $munger->inc_footnote_texts();
+    }
     $info = $munger->current_text_footnote_info();
+    
     return $this->_format_text($token, $info);
   }
 
@@ -994,7 +1033,9 @@ class MUNGER_TRANSFORMER extends MUNGER_TOOL
   function data(&$munger)
   {
     if ($this->_buffer_state != Munger_only_data_block)
+    {
       $this->_buffer_state = Munger_last_data_block;
+   	}
 
     $this->_process_raw_text($munger);
 
@@ -1024,9 +1065,13 @@ class MUNGER_TRANSFORMER extends MUNGER_TOOL
   function add_transformer(&$munger, &$transformer, $start_text, $end_text)
   {
     if ($this->_buffer_state == Munger_only_data_block)
+    {
       $this->_buffer_state = Munger_first_data_block;
+    }
     else
+    {
       $this->_buffer_state = Munger_middle_data_block;
+    }
 
     $this->_process_raw_text($munger);
 
@@ -1040,6 +1085,7 @@ class MUNGER_TRANSFORMER extends MUNGER_TOOL
   {
     $this->_processed_text = '';
     $this->_raw_text = '';
+    $this->_buffer_state = Munger_only_data_block;
   }
 
   /**
@@ -1261,7 +1307,9 @@ class MUNGER_BLOCK_TRANSFORMER extends MUNGER_TRANSFORMER
       $attrs = $token->attributes();
       $Result = read_array_index($attrs, 'quote_style');
       if (!$Result)
+      {
         $Result = Munger_quote_style_default;
+      }
     }
 
     return $Result;
@@ -1286,13 +1334,13 @@ class MUNGER_BLOCK_TRANSFORMER extends MUNGER_TRANSFORMER
       case Munger_quote_style_single :
         switch ($this->_buffer_state)
         {
-          case Munger_first_data_block :
+          case Munger_first_data_block:
             return $open_quote . $text;
-          case Munger_only_data_block :
+          case Munger_only_data_block:
             return $open_quote . $text . $close_quote;
-          case Munger_middle_data_block :
+          case Munger_middle_data_block:
             return $text;
-          case Munger_last_data_block :
+          case Munger_last_data_block:
             return $text . $close_quote;
         }
       default :
@@ -1340,10 +1388,14 @@ class MUNGER_LIST_TRANSFORMER extends MUNGER_TRANSFORMER
       $num_chars = -1;
 
     if (($first_char > 0) || ($num_chars <> $len))
+    {
       $text = substr($text, $first_char, $num_chars);
-
+    }
+    
     if ($text)
+    {
       $text = $this->_transform_to_list($munger, $text, $item_was_open);
+    }
 
     return $text;
   }
@@ -1445,7 +1497,9 @@ class MUNGER_DEFINITION_LIST_TRANSFORMER extends MUNGER_LIST_TRANSFORMER
     $lines = explode("\n", $text);
 
     foreach ($lines as $line)
+    {
       $Result .= $this->_build_definition_part($munger, ltrim($line));
+    }
 
     return $Result;
   }
@@ -1460,9 +1514,13 @@ class MUNGER_DEFINITION_LIST_TRANSFORMER extends MUNGER_LIST_TRANSFORMER
   function _build_definition_part(&$munger, $line)
   {
     if ($this->_term_needed)
+    {
       $Result = $this->_build_as_definition_term($munger, $line);
+    }
     else
+    {
       $Result = $this->_build_as_definition_body($munger, $line);
+    }
 
     $this->_term_needed = !$this->_term_needed;
 
@@ -1573,7 +1631,10 @@ class MUNGER_PARSER extends RAISABLE
   function _process_current_nesting_level($input)
   {
     if ($this->_nesting_level == sizeof($this->_tokenizers))
+    {
       $this->_tokenizers[] = $this->_make_tokenizer();
+    }
+    
     $this->_process_given_tokenizer($input, $this->_tokenizers[$this->_nesting_level]);
   }
 
@@ -1588,7 +1649,8 @@ class MUNGER_PARSER extends RAISABLE
     while ($tokenizer->tokens_available())
     {
       $tokenizer->read_next_token();
-      $this->_process_token($tokenizer->current_token());
+      $token =& $tokenizer->current_token();
+      $this->_process_token($token);
     }
   }
 
@@ -1602,7 +1664,9 @@ class MUNGER_PARSER extends RAISABLE
   function _process_token(&$token)
   {
     if (($token->type == Munger_token_text))
+    {
       $this->_transform_as_text($token);
+    }
     elseif ($this->_treat_as_text($token))
     {
       /* If the tag should be displayed as text, process the initial tag
@@ -1616,9 +1680,14 @@ class MUNGER_PARSER extends RAISABLE
       $this->_process_current_nesting_level($text);
       $this->_nesting_level--;
     }
-    elseif ($token->is_start_tag()) $this->_transform_as_start_tag($token);
+    elseif ($token->is_start_tag()) 
+    {
+      $this->_transform_as_start_tag($token);
+    }
     else
+    {
       $this->_transform_as_end_tag($token);
+    }
   }
 
   /**
@@ -1862,7 +1931,10 @@ class MUNGER extends MUNGER_PARSER
   function resolve_url($url, $root_override = null)
   {
     if ($url && isset ($this->_context_object))
+    {
       return $this->_context_object->resolve_url($url, $root_override);
+    }
+    
     return $url;
   }
 
@@ -1875,7 +1947,10 @@ class MUNGER extends MUNGER_PARSER
   function unique_id_for_context()
   {
     if (isset ($this->_context_object))
+    {
       return $this->_context_object->unique_id();
+    }
+    
     return rand();
   }
 
@@ -1887,7 +1962,11 @@ class MUNGER extends MUNGER_PARSER
   function context_for_context()
   {
     if (isset ($this->_context_object))
+    {
       return $this->_context_object->context;
+    }
+    
+    return null;
   }
 
   /**
@@ -1960,10 +2039,13 @@ class MUNGER extends MUNGER_PARSER
   {
     $this->_paginated = FALSE;
     $this->_transform($input, $context_object);
+    
     if (isset ($this->_pages[0]))
+    {
       return $this->_pages[0]->text;
-    else
-      return '';
+    }
+
+    return '';
   }
 
   /**
@@ -1992,6 +2074,8 @@ class MUNGER extends MUNGER_PARSER
     $this->_num_footnote_texts = 0;
     $this->_footnote_infos = array ();
     $this->_current_visible_chars = 0;
+    $this->_current_maximum_chars = 0;
+    $this->_nesting_level = 0;
     $this->_current_transformer = $this->_default_transformer;
   }
 
@@ -2009,9 +2093,13 @@ class MUNGER extends MUNGER_PARSER
 
     $this->_context_object = $context_object;
     if ($this->max_visible_output_chars)
+    {
       $this->_current_maximum_chars = $this->max_visible_output_chars;
+    }
     else
+    {
       $this->_current_maximum_chars = strlen($input);
+    }
 
     $this->_process($input);
     $this->_close_open_tags();
@@ -2047,14 +2135,18 @@ class MUNGER extends MUNGER_PARSER
     {
       $num_chars = $this->_truncated_length($text, $num_chars);
       if ($num_chars != $token->size)
+      {
         $text = substr($text, 0, $num_chars);
+      }
     }
 
     $this->_add_text_to_output($this->_as_output_text($text));
     $this->_current_visible_chars += $num_chars;
 
     if ($truncated || (($this->_current_visible_chars >= $this->_current_maximum_chars) &&$this->_tokenizers[$this->_nesting_level]->tokens_available()))
+    {
       $this->_truncate();
+    }
   }
 
   /**
@@ -2087,7 +2179,7 @@ class MUNGER extends MUNGER_PARSER
     if ($this->_paginated)
     {
       $this->_finish_page();
-      $page = null; // Compiler warning
+      $page = new stdClass();
       $page->title = $title;
       $this->_pages[] = $page;
     }
@@ -2107,10 +2199,12 @@ class MUNGER extends MUNGER_PARSER
     if ($output)
     {
       if (sizeof($this->_pages))
+      {
         $this->_pages[sizeof($this->_pages) - 1]->text = $output;
+      }
       else
       {
-        $page = null; // Compiler warning
+        $page = new stdClass();
         $page->title = '';
         $page->text = $output;
         $this->_pages[] = $page;
@@ -2125,7 +2219,9 @@ class MUNGER extends MUNGER_PARSER
   function _close_open_tags()
   {
     while ($tag = array_pop($this->_open_tags))
+    {
       $this->_transform_block($tag, $this->_end_tag_token_for($tag->token));
+    }
   }
 
   /**
@@ -2141,6 +2237,7 @@ class MUNGER extends MUNGER_PARSER
     $data = $t->open_tag_char . $t->end_tag_char . $token->name() . $t->close_tag_char;
     $Result = new MUNGER_TOKEN($t, $data);
     $Result->set_properties(0, strlen($data), Munger_token_end_tag);
+    
     return $Result;
   }
 
@@ -2174,19 +2271,26 @@ class MUNGER extends MUNGER_PARSER
         if (isset ($this->_transformers[$name]))
         {
           array_push($this->_open_tags, new MUNGER_TAG($token, $this->_current_transformer, $this->_tag_as_text($token)));
-          $this->_current_transformer = $this->_transformers[$name];
+          $this->_current_transformer = clone($this->_transformers[$name]);
           $this->_current_transformer->activate($this, TRUE, $token);
-        } else
+        } 
+        else
         {
           array_push($this->_open_tags, new MUNGER_TAG($token, null, ''));
           $this->_add_text_to_output($this->_tag_as_text($token));
         }
-      } else
+      } 
+      else
+      {
         $this->_add_text_to_output($this->_tag_as_text($token));
-    } else
+      }
+    } 
+    else
     {
       if (!$this->strip_unknown_tags)
+      {
         $this->_add_text_to_output($this->_tag_as_text($token));
+      }
     }
   }
 
@@ -2220,16 +2324,22 @@ class MUNGER extends MUNGER_PARSER
           {
             $matches = $tag->token->matches($token);
             if (!$matches)
+            {
               $this->_transform_block($tag, $this->_end_tag_token_for($tag->token));
+            }
             else
+            {
               $this->_transform_block($tag, $token);
+            }
           }
         } while (isset ($tag) && !$matches);
       }
     } else
     {
       if (!$this->strip_unknown_tags)
+      {
         $this->_add_text_to_output($this->_tag_as_text($token));
+      }
     }
   }
 
@@ -2248,7 +2358,9 @@ class MUNGER extends MUNGER_PARSER
       $this->_current_transformer->activate($this, FALSE, $token);
       $this->_current_transformer = $tag->transformer;
     } else
+    {
       $this->_add_text_to_output($this->_tag_as_text($token));
+    }
   }
 
   /**
@@ -2270,13 +2382,17 @@ class MUNGER extends MUNGER_PARSER
     // (1) If breaking inside a word is allowed, get the optimally-sized text.
 
     if ($this->break_inside_word)
+    {
       $Result = $optimal_break;
+    }
     else
     {
       // (2) If the optimal break sits on a white-space character, use it.
 
       if (strpos(" \t\n", $text[$optimal_break -1]) !== FALSE)
+      {
         $Result = $optimal_break -1;
+      }
       else
       {
         $trunc_text = substr($text, 0, $optimal_break);
@@ -2295,14 +2411,18 @@ class MUNGER extends MUNGER_PARSER
         $word_len = strlen($word);
 
         if ($word_len < $trunc_len)
+        {
           $Result = $trunc_len - $word_len -1;
+        }
         else
         {
           // (4) Search *forward* from the desired break for white-space.
 
           $space = strpos($text, ' ', $optimal_break);
           if ($space !== FALSE)
+          {
             $Result = $space;
+          }
           else
           {
             // (5) No spaces found in text, so use the whole text.
@@ -2326,7 +2446,9 @@ class MUNGER extends MUNGER_PARSER
     $Result = TRUE;
     $tags = $this->_open_tags;
     while ($Result && ($tag = array_pop($tags)))
+    {
       $Result = !isset ($tag->transformer);
+    }
     return $Result;
   }
 
@@ -2351,7 +2473,9 @@ class MUNGER extends MUNGER_PARSER
     if (isset ($this->_converters))
     {
       foreach ($this->_converters as $id => $converter)
+      {
         $text = $converter->convert($this, $text);
+      }
     }
 
     return $text;
@@ -2384,14 +2508,21 @@ class MUNGER extends MUNGER_PARSER
       if (isset ($this->_replacers[$name]))
       {
         $rep = &$this->_replacers[$name];
+        
         return $rep->transform($this, $token);
-      } else
-        return $this->_known_tag_as_text($token);
-    } else
+      } 
+
+      return $this->_known_tag_as_text($token);
+    } 
+    else
     {
       if (!$this->strip_unknown_tags)
+      {
         return $token->data();
+      }
     }
+    
+    return '';
   }
 
   /**
@@ -2593,8 +2724,9 @@ class REGULAR_EXPRESSION
          is only initialized once. */
 
       return preg_replace($preg_words, "\\1$prefix\\2$suffix\\3", $text);
-    } else
-      return $text;
+    }
+
+    return $text;
   }
 
   /**
@@ -2622,7 +2754,9 @@ class REGULAR_EXPRESSION
       $start_pos = $start_pos;
       $end_pos = strpos($text, '<?/?>', $start_pos +4);
       if ($end_pos === FALSE)
+      {
         $end_pos = strlen($text);
+      }
 
       if (($start_pos - $context_size) <= 0)
       {
@@ -2631,13 +2765,17 @@ class REGULAR_EXPRESSION
       } else
       {
         if ($break_inside_word)
+        {
           $prefix = substr($text, $start_pos - $context_size, $context_size);
+        }
         else
         {
           /* No offset available in PHP 4. */
           $space = $start_pos - $context_size;
           while (($space != 0) && ($text[$space] != ' '))
+          {
             $space--;
+          }
           $includes_head = ($space === 0);
           $prefix = substr($text, $space, $start_pos - $space);
         }
@@ -2653,7 +2791,9 @@ class REGULAR_EXPRESSION
       {
         $space = @ strpos($text, ' ', $end_pos +5 + $context_size);
         if ($space === FALSE)
+        {
           $space = strlen($text);
+        }
         $suffix = substr($text, $end_pos +5, $space - $end_pos -5);
         $end_pos = $space;
       }
@@ -2667,22 +2807,34 @@ class REGULAR_EXPRESSION
     {
       $Result = '';
       if (!$includes_head)
+      {
         $Result = '...';
+      }
       $Result .= implode(' ... ', $fragments);
 
       if (($max_length > 0) && ($max_length < strlen($Result)))
       {
         if ($break_inside_word)
+        {
           $Result = substr($Result, 0, $max_length) . '...';
+        }
         else
         {
           $space = strpos($Result, ' ', $max_length -1);
           if ($space !== FALSE)
+          {
             $Result = substr($Result, 0, $space) . '...';
-          elseif ($end_pos != strlen($text)) $Result .= '...';
+          }
+          elseif ($end_pos != strlen($text)) 
+          {
+            $Result .= '...';
+          }
         }
       }
-      elseif ($end_pos != strlen($text)) $Result .= '...';
+      elseif ($end_pos != strlen($text)) 
+      {
+        $Result .= '...';
+      }
 
       return $Result;
     }

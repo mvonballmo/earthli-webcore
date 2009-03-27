@@ -267,7 +267,9 @@ function path_between ($from, $to, $opts = null)
       }
     }
     else if (strpos ($to, $from) === 0)
+    {
       $Result = substr ($to, strlen ($from));
+    }
   }
 
   return $Result;

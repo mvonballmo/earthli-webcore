@@ -127,11 +127,15 @@ class PLAIN_TEXT_BLOCK_TRANSFORMER extends MUNGER_BLOCK_TRANSFORMER
     if ($this->_buffer_state == Munger_first_data_block)
     {
       if (($len > 0) && ($text [$len - 1] != "\n"))
+      {
         $text .= "\n\n";
+      }
       elseif ($len > 1)
       {
         if ($text [$len - 2] != "\n")
+        {
           $text .= "\n";
+        }
       }
     }
 
@@ -141,14 +145,20 @@ class PLAIN_TEXT_BLOCK_TRANSFORMER extends MUNGER_BLOCK_TRANSFORMER
         ($this->_buffer_state == Munger_last_data_block))
     {
       if (($len > 0) && ($text [0] != "\n"))
+      {
         $text = "\n\n" . $text;
+      }
       elseif ($len > 1)
       {
         if ($text [1] != "\n")
+        {
           $text = "\n" . $text;
+        }
       }
       else
+      {
         $text = "\n" . $text;
+      }
 
       /* Make sure each block in a document ends with two newlines.
          Do not end the document with two newlines. */
@@ -156,14 +166,20 @@ class PLAIN_TEXT_BLOCK_TRANSFORMER extends MUNGER_BLOCK_TRANSFORMER
       if ($this->_buffer_state == Munger_middle_data_block)
       {
         if ($text [strlen ($text) - 1] != "\n")
+        {
           $text .= "\n\n";
+        }
         elseif ($len > 1)
         {
           if ($text [strlen ($text) - 2] != "\n")
+          {
             $text .= "\n";
+          }
         }
         else
+        {
           $text .= "\n";
+        }
       }
     }
 
@@ -207,10 +223,15 @@ class PLAIN_TEXT_PARAGRAPH_TRANSFORMER extends PLAIN_TEXT_BLOCK_TRANSFORMER
   {
     $Result = parent::data ($munger);
 
-    if ($Result && (($munger->force_paragraphs || (strpos ($Result, "\n") !== FALSE)) &&
-                    (substr ($Result, -1) != "\n")))
+    if ($Result && 
+    	  (
+    			($munger->force_paragraphs || (strpos ($Result, "\n") !== FALSE)) &&
+     			(substr ($Result, -1) != "\n"))
+     	 	)
+    {
       $Result .= "\n";
-
+    }
+    
     return $Result;
   }
 }

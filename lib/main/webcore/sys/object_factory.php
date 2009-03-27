@@ -63,7 +63,7 @@ class OBJECT_FACTORY extends RAISABLE
    */
   function register_class ($id, $class_name, $file_name = '', $context = '')
   {
-    $item = null; // Compiler warning
+    $item = new stdClass();
     $item->class_name = $class_name;
     $item->file_name = $file_name;
     $item->context = $context;

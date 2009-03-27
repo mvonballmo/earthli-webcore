@@ -882,7 +882,8 @@ class APPLICATION extends CONTEXT
     if (! isset ($this->_user_cache))
     {
       include_once ('webcore/db/query.php');
-      $this->_user_cache = new QUERY_BASED_CACHE ($this->user_query ());
+      $query = $this->user_query ();
+      $this->_user_cache = new QUERY_BASED_CACHE ($query);
     }
     return $this->_user_cache;
   }

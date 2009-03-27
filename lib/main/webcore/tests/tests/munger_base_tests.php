@@ -109,7 +109,7 @@ class MUNGER_BASE_TEST_TASK extends TEST_TASK
     $this->_num_tests = 0;
     ob_start ();
 //      $this->_run_beta_tests ();
-      $this->_run_tests ();
+			$this->_run_tests ();
       $errors = ob_get_contents ();
     ob_end_clean ();
 
@@ -374,9 +374,10 @@ don't
   {
     $this->_num_tests++;
 
-    $output = $this->_munger->transform ($input, $this->context);
-
-    if ($output <> $expected)
+    $this->page->root_url = '/earthli/tests/';
+    $output = $this->_munger->transform ($input, $this->page);
+    
+    if ((strcmp($output, $expected) != 0))
     {
       $this->_num_errors++;
       echo "<hr style=\"clear: both\">\n";
@@ -388,17 +389,78 @@ don't
     elseif ($this->show_html_output)
       echo $output;
 
-    if (($output <> $expected) || $this->show_munger_stats)
+    if ((strcmp($output, $expected) != 0) || $this->show_munger_stats)
     {
       echo "<p>[" . get_class ($this->_munger) . "]: Force pars = [" . $this->_munger->force_paragraphs . "], Max chars = [" . $this->_munger->max_visible_output_chars . "], Break word = [" . $this->_munger->break_inside_word . "]</p>\n\n";
-      echo "<h4>Input</h4>\n\n";
-      echo "[$input]\n\n";
-      echo "<h4>Expected output</h4>\n\n[";
-      echo "$expected";
-      echo "]\n\n<h4>Actual output</h4>\n\n[";
-      echo "$output]\n\n";
+//      echo "<h4>Input</h4>\n\n";
+//      echo "[$input]\n\n";
+//      echo "<h4>Expected output</h4>\n\n[";
+//      echo "$expected";
+//      echo "]\n\n<h4>Actual output</h4>\n\n[";
+//      echo "$output]\n\n";
+      
+      
+//      echo '<pre>' . htmlDiff($expected, $output) . '</pre>';
+      
+      $expected_file = "d:\\expected.txt";
+      $actual_file = "d:\\actual.txt";
+      write_text_file($expected_file, $expected);
+      write_text_file($actual_file, $output);
+//      
     }
   }
 }
+
+/* 
+        Paul's Simple Diff Algorithm v 0.1 
+        (C) Paul Butler 2007 <http://www.paulbutler.org/> 
+        May be used and distributed under the zlib/libpng license. 
+        
+        This code is intended for learning purposes; it was written with short 
+        code taking priority over performance. It could be used in a practical 
+        application, but there are a few ways it could be optimized. 
+        
+        Given two arrays, the function diff will return an array of the changes. 
+        I won't describe the format of the array, but it will be obvious 
+        if you use print_r() on the result of a diff on some test data. 
+        
+        htmlDiff is a wrapper for the diff command, it takes two strings and 
+        returns the differences in HTML. The tags used are <ins> and <del>, 
+        which can easily be styled with CSS.  
+*/ 
+
+function diff($old, $new){ 
+				$maxlen = 0;
+        foreach($old as $oindex => $ovalue){ 
+                $nkeys = array_keys($new, $ovalue); 
+                foreach($nkeys as $nindex){ 
+                        $matrix[$oindex][$nindex] = isset($matrix[$oindex - 1][$nindex - 1]) ? 
+                                $matrix[$oindex - 1][$nindex - 1] + 1 : 1; 
+                        if($matrix[$oindex][$nindex] > $maxlen){ 
+                                $maxlen = $matrix[$oindex][$nindex]; 
+                                $omax = $oindex + 1 - $maxlen; 
+                                $nmax = $nindex + 1 - $maxlen; 
+                        } 
+                }        
+        } 
+        if($maxlen == 0) return array(array('d'=>$old, 'i'=>$new)); 
+        return array_merge( 
+                diff(array_slice($old, 0, $omax), array_slice($new, 0, $nmax)), 
+                array_slice($new, $nmax, $maxlen), 
+                diff(array_slice($old, $omax + $maxlen), array_slice($new, $nmax + $maxlen))); 
+} 
+
+function htmlDiff($old, $new){ 
+        $diff = diff(explode(' ', $old), explode(' ', $new));
+        $ret = '';
+        foreach($diff as $k){ 
+                if(is_array($k)) 
+                        $ret .= (!empty($k['d'])?"<del>".implode(' ',$k['d'])."</del> ":''). 
+                                (!empty($k['i'])?"<ins>".implode(' ',$k['i'])."</ins> ":''); 
+                else $ret .= $k . ' '; 
+        } 
+        return $ret; 
+} 
+
 
 ?>

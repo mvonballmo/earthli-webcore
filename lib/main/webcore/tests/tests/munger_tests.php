@@ -57,8 +57,8 @@ class MUNGER_TEST_TASK extends MUNGER_BASE_TEST_TASK
 //    $this->_run_token_tests ();
 //    $this->_run_attribute_tests ();
 //    $this->_run_validator_tests ();
-    $this->_run_plain_text_tests ();
-//    $this->_run_html_tests ();
+//    $this->_run_plain_text_tests ();
+    $this->_run_html_tests ();
   }
 
   function _run_token_tests ()

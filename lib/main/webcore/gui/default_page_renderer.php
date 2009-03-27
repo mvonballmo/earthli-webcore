@@ -64,7 +64,7 @@ class DEFAULT_PAGE_RENDERER extends WEBCORE_PAGE_RENDERER
   {
     $page =& $this->page;
     $env =& $this->env;
-    $browser =& $env->browser();
+    $browser = $env->browser();
 
     $options = $page->template_options;
 ?>
@@ -122,7 +122,7 @@ class DEFAULT_PAGE_RENDERER extends WEBCORE_PAGE_RENDERER
   {
     $page =& $this->page;
     $options = $page->template_options;
-    $browser =& $this->env->browser();
+    $browser = $this->env->browser();
     
     if ($options->close_logger)
       $this->env->logs->close_all ();

@@ -223,11 +223,15 @@ function is_php_5 ()
 
 function clone_object ($obj)
 {
-  if (is_a ($obj, 'WEBCORE_OBJECT'))
-    return $obj->make_clone ();
-
   if (is_php_5 ())
+  {
     return clone ($obj);
+  }
+  
+	if (is_a ($obj, 'WEBCORE_OBJECT'))
+	{
+    return $obj->make_clone ();
+	}
 
   return $obj;
 }
