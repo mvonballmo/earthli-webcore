@@ -66,20 +66,20 @@ class BROWSER_TEST_TASK extends TEST_TASK
   {
     $browser = $this->env->browser ();
 
-//    $browser->load_from_string ('Mozilla/5.0 (compatible; Yahoo! Slurp; http://help.yahoo.com/help/us/ysearch/slurp)');
-//
-//          $this->_check_equal ('Mozilla/5.0 (compatible; Yahoo! Slurp; http://help.yahoo.com/help/us/ysearch/slurp)', $browser->user_agent_string);
-//          $this->_check_equal ('Unknown', $browser->system_id ());
-//          $this->_check_equal ('Unknown', $browser->system_name ());
-//          $this->_check_equal ('', $browser->system_version ());
-//          $this->_check_equal ('Facebook Preview', $browser->name ());
-//          $this->_check_equal ('1.0', $browser->version ());
-//          $this->_check_equal ('Facebook Preview', $browser->renderer_name ());
-//          $this->_check_equal ('1.0', $browser->renderer_version ());
-//          $date = $browser->gecko_date ();
-//          $this->_check (!$date->is_valid (), 'Date should not be valid');
-//          $this->_check (!$browser->is (Browser_robot), 'Browser should not be a robot.');
-//          $this->_check ($browser->is (Browser_previewer), "Browser should be a previewer.");
+    $browser->load_from_string ('Mozilla/5.0 (compatible; Yahoo! Slurp; http://help.yahoo.com/help/us/ysearch/slurp)');
+
+          $this->_check_equal ('Mozilla/5.0 (compatible; Yahoo! Slurp; http://help.yahoo.com/help/us/ysearch/slurp)', $browser->user_agent_string);
+          $this->_check_equal ('Unknown', $browser->system_id ());
+          $this->_check_equal ('Unknown', $browser->system_name ());
+          $this->_check_equal ('', $browser->system_version ());
+          $this->_check_equal ('Mozilla', $browser->name ());
+          $this->_check_equal ('5.0', $browser->version ());
+          $this->_check_equal ('Gecko', $browser->renderer_name ());
+          $this->_check_equal ('5.0', $browser->renderer_version ());
+          $date = $browser->gecko_date ();
+          $this->_check (!$date->is_valid (), 'Date should not be valid');
+          $this->_check (!$browser->is (Browser_robot), 'Browser should not be a robot.');
+          $this->_check (!$browser->is (Browser_previewer), "Browser should not be a previewer.");
           
 		$browser->load_from_string ('facebookexternalhit/1.0 (+http://www.facebook.com/externalhit_uatext.php)');
 
@@ -233,7 +233,7 @@ class BROWSER_TEST_TASK extends TEST_TASK
     $browser->load_from_string ('curl/7.7.1 (i386--freebsd4.3) libcurl 7.7.1 (SSL 0.9.6) (ipv6 enabled)');
 
           $this->_check_equal ('curl/7.7.1 (i386--freebsd4.3) libcurl 7.7.1 (SSL 0.9.6) (ipv6 enabled)', $browser->user_agent_string);
-          $this->_check_equal ('FreeBSD', $browser->system_id ());
+          $this->_check_equal ('FreeBSD 4.3', $browser->system_id ());
           $this->_check_equal ('FreeBSD', $browser->calculated_system_name ());
           $this->_check_equal ('FreeBSD', $browser->system_name ());
           $this->_check_equal ('4.3', $browser->system_version ());
@@ -248,9 +248,9 @@ class BROWSER_TEST_TASK extends TEST_TASK
     $browser->load_from_string ('DocZilla/1.0 (Windows; U; WinNT4.0; en-US; rv:1.0.0) Gecko/20020804');
 
           $this->_check_equal ('DocZilla/1.0 (Windows; U; WinNT4.0; en-US; rv:1.0.0) Gecko/20020804', $browser->user_agent_string);
-          $this->_check_equal ('Windows NT 4.x', $browser->system_id ());
+          $this->_check_equal ('Windows NT 4.0 (Windows NT 4.x)', $browser->system_id ());
           $this->_check_equal ('Windows NT 4.x', $browser->calculated_system_name ());
-          $this->_check_equal ('Windows NT 4.x', $browser->system_name ());
+          $this->_check_equal ('Windows NT', $browser->system_name ());
           $this->_check_equal ('4.0', $browser->system_version ());
           $this->_check_equal ('DocZilla', $browser->name ());
           $this->_check_equal ('1.0', $browser->version ());
@@ -441,7 +441,7 @@ class BROWSER_TEST_TASK extends TEST_TASK
           $this->_check (!$date->is_valid (), 'Date should not be valid');
           $this->_check (!$browser->is (Browser_robot), 'Browser should not be a robot.');
           $this->_check (!$browser->is (Browser_newsreader), 'Browser should not be a newsreader');
-  }
+    }
 
   function _test_bots ()
   {
@@ -671,21 +671,20 @@ class BROWSER_TEST_TASK extends TEST_TASK
   {
     $browser = $this->env->browser ();
 
-    $browser->load_from_string ('Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US) AppleWebKit/525.13 (KHTML, like Gecko) Chrome/0.2.149.27 Safari/525.13');
+    $browser->load_from_string ('WWWeasel Robot v1.00 (http://wwweasel.de)');
 
-          $this->_check_equal ('Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US) AppleWebKit/525.13 (KHTML, like Gecko) Chrome/0.2.149.27 Safari/525.13', $browser->user_agent_string);
-          $this->_check_equal ('Windows NT 5.1 (Windows XP)', $browser->system_id ());
-          $this->_check_equal ('Windows XP', $browser->calculated_system_name ());
-          $this->_check_equal ('Windows NT', $browser->system_name ());
-          $this->_check_equal ('5.1', $browser->system_version ());
-          $this->_check_equal ('Google Chrome', $browser->name ());
-          $this->_check_equal ('0.2.149.27', $browser->version ());
-          $this->_check_equal ('Webcore', $browser->renderer_name ());
-          $this->_check_equal ('525.13', $browser->renderer_version ());
+          $this->_check_equal ('WWWeasel Robot v1.00 (http://wwweasel.de)', $browser->user_agent_string);
+          $this->_check_equal ('Unknown', $browser->system_id ());
+          $this->_check_equal ('Unknown', $browser->calculated_system_name ());
+          $this->_check_equal ('Unknown', $browser->system_name ());
+          $this->_check_equal ('', $browser->system_version ());
+          $this->_check_equal ('WWWeasel Robot', $browser->name ());
+          $this->_check_equal ('1.00', $browser->version ());
+          $this->_check_equal ('Unknown', $browser->renderer_name ());
+          $this->_check_equal ('', $browser->renderer_version ());
           $date = $browser->gecko_date ();
           $this->_check (!$date->is_valid (), 'Date should not be valid');
-          $this->_check (!$browser->is (Browser_robot), 'Browser should not be a robot.');
-          $this->_check (!$browser->is (Browser_newsreader), 'Browser should not be a newsreader');
+          $this->_check ($browser->is (Browser_robot), 'Browser should be a robot.');
   }
 }
 

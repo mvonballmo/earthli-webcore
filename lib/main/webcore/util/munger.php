@@ -737,6 +737,20 @@ class MUNGER_CONVERTER extends MUNGER_TOOL
     
     return $text;
   }
+  
+  /**
+   * Reset the converter to its default values.
+   * Called by the munger to make sure that the converters don't maintain state from previous transformations.
+   */
+  function reset()
+  {
+    if (!isset($this->_initial_enabled))
+    {
+      $this->_initial_enabled = $this->enabled;
+    }
+    
+    $this->enabled = $this->_initial_enabled;
+  }
 
   /**
    * Convert the text to an output format.
@@ -750,6 +764,8 @@ class MUNGER_CONVERTER extends MUNGER_TOOL
   {
     $this->raise_deferred('MUNGER_CONVERTER', '_convert');
   }
+  
+  private $_initial_enabled;
 }
 
 /**
@@ -2077,6 +2093,11 @@ class MUNGER extends MUNGER_PARSER
     $this->_current_maximum_chars = 0;
     $this->_nesting_level = 0;
     $this->_current_transformer = $this->_default_transformer;
+    
+    foreach ($this->_converters as $id => $converter)
+    {
+      $converter->reset();
+    }
   }
 
   /**

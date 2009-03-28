@@ -105,7 +105,7 @@ class TEXT_OPTIONS
     if (is_php_5 ())
     {
       // The fourth parameter "double_encode" is only supported on PHP 5.2.3 and higher
-      // $Result = htmlentities ($value, $quote_style, 'ISO-8859-1', FALSE);
+      //$Result = htmlentities ($value, $quote_style, 'ISO-8859-1', FALSE);
       $Result = htmlentities ($value, $quote_style, 'ISO-8859-1');
     }
     else

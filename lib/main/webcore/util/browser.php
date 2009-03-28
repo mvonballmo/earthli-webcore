@@ -653,7 +653,10 @@ class USER_AGENT_PARSER
     $Result = new USER_AGENT_PROPERTIES ();
 
     $parts = null; // Compiler warning
-    preg_match_all ('/(\w[-&\w ]*[-&\w]+)[-\/: ]([vV]?[0-9][0-9a-z]*([\.-][0-9][0-9a-z]*)*)/', $s, $parts);
+    
+//    preg_match_all ('/([a-zA-Z][ \-&a-zA-Z]*)[-\/: ]?[vV]?([0-9][0-9a-z]*([\.-][0-9][0-9a-z]*)*)/', $s, $parts);
+    preg_match_all ('/([a-zA-Z]|[a-zA-Z]+[0-9]+|[a-zA-Z]+[ 0-9]+[a-zA-Z]|[a-zA-Z][ \-&a-zA-Z]*[a-zA-Z])[-\/: ]?[vV]?([0-9][0-9a-z]*([\.-][0-9][0-9a-z]*)*)/', $s, $parts);
+//    preg_match_all ('/(\w[-&\w ]*[-&\w]*)[-\/: ]([vV]?[0-9][0-9a-z]*([\.-][0-9][0-9a-z]*)*)/', $s, $parts);
 
     $ids = $parts [1];
     $vers = $parts [2];
@@ -670,51 +673,78 @@ class USER_AGENT_PARSER
     {
       $ver = $this->_extract_version ($vers [$idx_id]);
       $id = strtolower ($ids [$idx_id]);
-
-      if (isset ($renderers [$id]))
+      
+      // Remove the trailing version marker if needed
+      
+      if (strcasecmp(substr($id, -2), ' v') == 0)
       {
-        $renderer = $renderers [$id];
-
-        if (empty ($current_renderer) || ($current_renderer->renderer_can_be_overridden ()))
-        {
-          if ($renderer->is_mozilla_gecko ($ver))
-            $current_renderer = $renderers [Browser_gecko];
-          else
-            $current_renderer = $renderer;
-
-          if ($id == Browser_gecko)
-            $Result->gecko_date = $this->_determine_gecko_date ($ver);
-          else
-            $current_version = $ver;
-        }
+        $id = substr($id, 0, -2);
+        $ids [$idx_id] = substr($ids [$idx_id], 0, -2);
       }
 
-      if (! isset ($ignored_ids [$id]))
+      // Don't bother processing ids only one character long
+      
+      if (strlen($id) > 1)
       {
-        if (empty ($current_renderer) || $current_renderer->browser_can_be_overridden ())
+        if (isset ($renderers [$id]))
         {
-          $Result->version = $ver;
-          if (isset ($renderers [$id]))
+          $renderer = $renderers [$id];
+  
+          if (empty ($current_renderer) || ($current_renderer->renderer_can_be_overridden ()))
           {
-            $renderer = $renderers [$id];
             if ($renderer->is_mozilla_gecko ($ver))
-              $Result->name = 'Mozilla';
+            {
+              $current_renderer = $renderers [Browser_gecko];
+            }
             else
-              $Result->name = $renderer->display_name;
-
-            $continue_processing = $renderer->continue_processing_ids ();
+            {
+              $current_renderer = $renderer;
+            }
+  
+            if ($id == Browser_gecko)
+            {
+              $Result->gecko_date = $this->_determine_gecko_date ($ver);
+            }
+            else
+            {
+              $current_version = $ver;
+            }
           }
-          else
-            $Result->name = $ids [$idx_id]; // Use the id in original case
+        }
+  
+        if (! isset ($ignored_ids [$id]) && !isset($system_ids[$id]))
+        {
+          if (empty ($current_renderer) || $current_renderer->browser_can_be_overridden ())
+          {
+            $Result->version = $ver;
+            if (isset ($renderers [$id]))
+            {
+              $renderer = $renderers [$id];
+              if ($renderer->is_mozilla_gecko ($ver))
+              {
+                $Result->name = 'Mozilla';
+              }
+              else
+              {
+                $Result->name = $renderer->display_name;
+              }
+  
+              $continue_processing = $renderer->continue_processing_ids ();
+            }
+            else
+            {
+              $Result->name = $ids [$idx_id]; // Use the id in original case
+            }
+          }
+        }
+  
+        if (isset ($system_ids [$id]))
+        {
+          $Result->system_name = $system_ids [$id];
+          $Result->system_version = $ver;
         }
       }
-
-      if (isset ($system_ids [$id]))
-      {
-        $Result->system_name = $system_ids [$id];
-        $Result->system_version = $ver;
-      }
-
+      
       $idx_id++;
     }
 
@@ -930,7 +960,10 @@ class USER_AGENT_PARSE_TABLES
                   'cldc' => 1,                  // Nokia phone
                   'midp' => 1,                  // Nokia phone
                   'views' => 1,                 // Newsfeed readers
-                  'users' => 1                  // Newsfeed readers
+                  'users' => 1,                  // Newsfeed readers
+                  'ipv' => 1,
+                  'ssl' => 1,
+                  'linux i' => 1,
                   );
   }
 
@@ -948,7 +981,9 @@ class USER_AGENT_PARSE_TABLES
                   'debian package' => 'Debian',
                   'suse' => 'SUSE',
                   'series80' => 'Series 80',
-                  );
+                  'winnt' => 'Windows NT',
+                  'freebsd' => 'FreeBSD',
+    );
   }
 
   /**

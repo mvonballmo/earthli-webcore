@@ -137,14 +137,22 @@ class IMAGE extends RAISABLE
   function saveable_to ($type)
   {
     if (! $this->loaded ())
+    {
       return FALSE;
+    }
+    
     if (($type == Image_type_JPG) || ($type == Image_type_PNG))
+    {
       return TRUE;
+    }
+    
     if ($type == Image_type_GIF)
     {
       $gd_caps = gd_info ();
       return $gd_caps ['GIF Create Support'];
     }
+    
+    return FALSE;
   }
 
   /**
@@ -481,13 +489,19 @@ class IMAGE_PROPERTIES
       {
         $this->_read_exif ($name);
         if (! $this->php_type)
+        {
           $this->_read_image_info ($name);
+        }
       }
       else
+      {
         $this->_read_image_info ($name);
+      }
 
       if (! $this->exists ())
+      {
         $this->file_name = null;
+      }
     }
   }
 
@@ -554,7 +568,9 @@ class IMAGE_PROPERTIES
   {
     $size = @getimagesize ($name);
     if (isset ($php_errormsg))
+    {
       log_message ('[' . $name . ']: ' . $php_errormsg, Msg_type_debug_warning, Msg_channel_image);
+    }
 
     if ($size && $size [2] > 0)
     {
@@ -583,7 +599,9 @@ class IMAGE_PROPERTIES
     $this->aperture = $this->_read_exif_value ('COMPUTED', 'ApertureFNumber');
     $this->iso_speed = $this->_read_exif_value ('EXIF', 'ISOSpeedRatings');
     if (! $this->iso_speed)
+    {
       $this->iso_speed = $this->_read_exif_value ('EXIF', 'ShutterSpeedValue');
+    }
     $this->used_flash = $this->_read_exif_value ('EXIF', 'Flash');
     $this->is_color = $this->_read_exif_value ('COMPUTED', 'IsColor');
     $this->camera_make = $this->_read_exif_value ('IFD0', 'Make');

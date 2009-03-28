@@ -277,11 +277,15 @@ class RESOURCE_MANAGER extends RAISABLE
   {
     $Result = null;
     if (isset ($this->_forced_roots [$alias]))
+    {
       $Result = $this->_forced_roots [$alias];
+    }
     else
     {
       if (isset ($this->_parent_resources))
+      {
         $Result = $this->_parent_resources->forced_root_for_alias ($alias);
+      }
     }
     return $Result;
   }

@@ -82,10 +82,14 @@ class HTML_BLOCK_TRANSFORMER extends MUNGER_BLOCK_TRANSFORMER
         $Result = str_replace ("<br>\n</p>", "<br>\n&nbsp;</p>", $Result);
       }
       else
+      {
         $Result = $text;
+      }
     }
     else
+    {
       $Result = $this->_apply_simple_transform ($munger, $text);
+    }
 
     return $Result;
   }
@@ -113,7 +117,9 @@ class HTML_BLOCK_TRANSFORMER extends MUNGER_BLOCK_TRANSFORMER
     case Munger_first_data_block:
     case Munger_only_data_block:
       if (! $this->strict_newlines && ($len > 0) && ($text [0] == "\n"))
+      {
         $first_char = 1;
+      }
       break;
 
     case Munger_middle_data_block:
@@ -122,7 +128,9 @@ class HTML_BLOCK_TRANSFORMER extends MUNGER_BLOCK_TRANSFORMER
       {
         $first_char = 1;
         if (($len > 1) && ($text [1] == "\n"))
+        {
           $first_char = 2;
+        }
       }
       break;
     }
@@ -135,19 +143,25 @@ class HTML_BLOCK_TRANSFORMER extends MUNGER_BLOCK_TRANSFORMER
       {
         $new_len = -1;
         if (($len > 1) && ($text [$len - 2] == "\n"))
+        {
           $new_len = -2;
+        }
       }
       break;
 
     case Munger_only_data_block:
     case Munger_last_data_block:
       if (! $this->strict_newlines && ($len > 0) && ($text [$len - 1] == "\n"))
+      {
         $new_len = -1;
+      }
       break;
     }
 
     if (($first_char > 0) || ($new_len != $len))
+    {
       $text = substr ($text, $first_char, $new_len);
+    }
 
     return $text;
   }
@@ -197,7 +211,7 @@ class HTML_QUOTE_TRANSFORMER extends HTML_BLOCK_TRANSFORMER
    */
   function _apply_transform (&$munger, $text)
   {
-    $text = $this->_apply_quotes ($text, $this->_quote_style, '&#8220;', '&#8221;');
+    $text = $this->_apply_quotes ($text, $this->_quote_style, '&ldquo;', '&rdquo;');
     return parent::_apply_transform ($munger, $text);
   }
 
@@ -629,7 +643,7 @@ class HTML_SMART_QUOTE_CONVERTER extends MUNGER_CONVERTER
 {
   /**
    * Characters considered to be white-space.
-   * A quote after one of these characters is converted to a left quote.
+   * A quote after one of these characters should be a left quote.
    */
   var $white_space_chars = array (' ', "\n", "\t");
   /**
@@ -640,8 +654,16 @@ class HTML_SMART_QUOTE_CONVERTER extends MUNGER_CONVERTER
    * for now.
    * @var array[char]
    */
-  var $left_chars = array ('(', '[', '{', '<', '='/*0x00AB, 0x3008, 0x300A*/);
+  var $left_chars = array ('(', '[', '{', '<', '=', ';', '.', ',', '"', '\''/*0x00AB, 0x3008, 0x300A*/);
 
+  function reset()
+  {
+    parent::reset();
+    $this->_last_char = null;
+    $this->_double_quote_open = FALSE;
+    $this->_single_quote_open = FALSE;
+  }
+  
   /**
    * Convert the text to an output format.
    * @param MUNGER &$munger The conversion context.
@@ -661,7 +683,9 @@ class HTML_SMART_QUOTE_CONVERTER extends MUNGER_CONVERTER
       {
         $last = substr($munger->current_raw_text (), -1);
         if ($last === FALSE)
+        {
           $last = null;
+        }
       }
 
       /* break the string into pieces starting with a quote character,
@@ -688,34 +712,31 @@ class HTML_SMART_QUOTE_CONVERTER extends MUNGER_CONVERTER
 
           if (is_numeric($last) && is_numeric($next))
           {
+            // 9'9 or 9"9
             $Result .= $char;
           }
           elseif (is_numeric($last) && ($char == '"') && !$this->_double_quote_open)
           {
+            // 9"
             $Result .= $char;
           }
           elseif (is_numeric($last) && ($char == '\'') && !$this->_single_quote_open)
           {
+            // 9'
             $Result .= $char;
           }
-          elseif (
-            ! isset ($last)
-            || ($last === '')
-            || in_array ($last, $this->left_chars)
-            || in_array ($last, $this->white_space_chars)
-//              || (($last == "'") && ($char == '"'))
-//              || (($char == "'") && ($last == '"'))
-          )
+          elseif (! isset ($last) || ($last === '') || in_array ($last, $this->white_space_chars)
+            || ((in_array ($last, $this->left_chars) && (($char != '"') || !$this->_double_quote_open)) && (($char != '\'') || !$this->_single_quote_open)))
           {
             // Add left quote
             if ($char == '"')
             {
-              $Result .= '&#8220;';
+              $Result .= '&ldquo;';
               $this->_double_quote_open = TRUE;
             }
             else
             {
-              $Result .= '&#8216;';
+              $Result .= '&lsquo;';
               $this->_single_quote_open = TRUE;
             }
           }
@@ -724,12 +745,12 @@ class HTML_SMART_QUOTE_CONVERTER extends MUNGER_CONVERTER
             // Add right quote
             if ($char == '"')
             {
-              $Result .= '&#8221;';
+              $Result .= '&rdquo;';
               $this->_double_quote_open = FALSE;
             }
             else
             {
-              $Result .= '&#8217;';
+              $Result .= '&rsquo;';
               $this->_single_quote_open = FALSE;
             }
           }
@@ -738,11 +759,15 @@ class HTML_SMART_QUOTE_CONVERTER extends MUNGER_CONVERTER
           $Result .= substr ($segment, 1);
         }
         else
+        {
           $Result .= $segment;
+        }
 
         $last = substr ($segment, -1);
         if ($last === FALSE)
+        {
           $last = null;
+        }
       }
 
       $this->_last_char = $last;
@@ -916,7 +941,7 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
    */
   function _open_outer_area (&$munger, &$attrs, $is_block)
   {
-    $outer_css = $munger->style_builder ();
+    $outer_css = $munger->make_style_builder ();
 
     $alignment = read_array_index ($attrs, 'align');
 
@@ -943,7 +968,9 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
     }
 
     if (!empty ($clear))
+    {
       $outer_css->add_text ('clear: ' . $clear);
+    }
 
     switch ($alignment)
     {
@@ -962,16 +989,20 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
       break;
     }
 
-    $inner_css = $munger->style_builder ();
+    $inner_css = $munger->make_style_builder ();
     $inner_css->add_text (read_array_index ($attrs, 'style'));
 
     $class = read_array_index ($attrs, 'class');
     if ($this->css_classes)
     {
       if ($class)
+      {
         $class = $this->css_classes . ' ' . $class;
+      }
       else
+      {
         $class = $this->css_classes;
+      }
     }
 
     $this->_caption = $this->_calculate_caption ($munger, $attrs);
@@ -982,10 +1013,12 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
     if ($this->_has_outer_area ())
     {
       if ($is_block)
-        $builder = $munger->tag_builder ('div');
+      {
+        $builder = $munger->make_tag_builder ('div');
+      }
       else
       {
-        $builder = $munger->tag_builder ('span');
+        $builder = $munger->make_tag_builder ('span');
 
         if ($width)
         {
@@ -995,7 +1028,9 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
            * this style; it is invalid CSS to add it again.
            */
           if ($alignment != 'center')
+          {
             $outer_css->add_attribute ('display', 'table');
+          }
         }
       }
 
@@ -1003,13 +1038,19 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
       $outer_css->clear ();
       $inner = $this->_open_inner_area ($munger, $attrs, $outer_css, $inner_css, $class);
       if ($is_block)
+      {
         $tag = '<div class="auto-content-block">';
+      }
       else
+      {
         $tag = '<span class="auto-content-inline">';
+      }
       $Result = $builder->as_html () . $tag . $inner;
     }
     else
+    {
       $Result = $this->_open_inner_area ($munger, $attrs, $outer_css, $inner_css, $class);
+    }
 
     return $Result;
   }
@@ -1069,7 +1110,7 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
    */
   function _open_inner_area (&$munger, &$attrs, &$outer_css, &$inner_css, $inner_class)
   {
-    $builder = $munger->tag_builder ($this->main_tag);
+    $builder = $munger->make_tag_builder ($this->main_tag);
     $builder->add_attribute ('class', $inner_class);
 
     $outer_css->add_text ($inner_css->as_text ());
@@ -1324,7 +1365,7 @@ class HTML_BOX_REPLACER extends HTML_DIV_REPLACER
    */
   function _open_inner_area (&$munger, &$attrs, &$outer_css, &$inner_css, $inner_class)
   {
-    $builder = $munger->tag_builder ($this->main_tag);
+    $builder = $munger->make_tag_builder ($this->main_tag);
     $builder->add_attribute ('class', 'chart');
     $builder->add_attribute ('style', $outer_css->as_text ());
     $Result = $builder->as_html ();
@@ -1338,7 +1379,7 @@ class HTML_BOX_REPLACER extends HTML_DIV_REPLACER
     else
       $inner_class = 'chart-body';
 
-    $builder = $munger->tag_builder ($this->main_tag);
+    $builder = $munger->make_tag_builder ($this->main_tag);
     $builder->add_attribute ('class', $inner_class);
     $builder->add_attribute ('style', $inner_css->as_text ());
     $Result .= $builder->as_html ();
@@ -1509,7 +1550,7 @@ class HTML_IMAGE_REPLACER extends HTML_INLINE_ASSET_REPLACER
     if (! $alt)
       $alt = ' ';
 
-    $builder = $munger->tag_builder ('img');
+    $builder = $munger->make_tag_builder ('img');
     $builder->add_attribute ('title', $title);
     $builder->add_attribute ('src', $munger->resolve_url ($src));
     $builder->add_attribute ('alt', $alt);
@@ -1521,7 +1562,7 @@ class HTML_IMAGE_REPLACER extends HTML_INLINE_ASSET_REPLACER
 
     if ($href)
     {
-      $builder = $munger->tag_builder ('a');
+      $builder = $munger->make_tag_builder ('a');
       $builder->add_attribute ('href', $munger->resolve_url ($href));
       $Result = $builder->as_html () . $Result . '</a>';
     }
@@ -1617,9 +1658,13 @@ class HTML_MEDIA_REPLACER extends HTML_INLINE_ASSET_REPLACER
     /* Get the source URL and format it according to media type. */
     $attachment_name = read_array_index ($attrs, 'attachment');
     if ($attachment_name)
+    {
       $src = '{att_link}/' . $attachment_name;
+    }
     else
+    {
       $src = read_array_index ($attrs, 'src');
+    }
 
     return $this->_render_asset ($munger, $munger->resolve_url ($src), $attrs, $inner_css, $outer_css, $inner_class);
   }
@@ -1672,7 +1717,7 @@ class HTML_MEDIA_REPLACER extends HTML_INLINE_ASSET_REPLACER
    */
   function _asset_as_movie (&$munger, $src, &$attrs, &$inner_css, &$outer_css, $inner_class)
   {
-    $builder = $munger->tag_builder ('embed');
+    $builder = $munger->make_tag_builder ('embed');
     $builder->add_array_attribute ('title', $attrs);
     $builder->add_attribute ('class', $inner_class);
     $builder->add_attribute ('src', $src);
@@ -1734,7 +1779,7 @@ class HTML_LINK_REPLACER extends HTML_BASE_REPLACER
 
       $this->_suffix = $this->_calculate_suffix (' ', $author, $date, $source);
 
-      $builder = $munger->tag_builder ('a');
+      $builder = $munger->make_tag_builder ('a');
       $builder->add_attribute ('href', $href);
       $builder->add_array_attribute ('title', $attrs);
       $builder->add_array_attribute ('class', $attrs);
@@ -1800,7 +1845,7 @@ class HTML_ANCHOR_REPLACER extends MUNGER_REPLACER
 
     $id = read_array_index ($attrs, 'id');
 
-    $builder = $munger->tag_builder ('span');
+    $builder = $munger->make_tag_builder ('span');
     $builder->add_attribute ('id', $id);
     return $builder->as_html () . '</span>';
   }
@@ -1884,12 +1929,12 @@ class HTML_MUNGER extends MUNGER
    * @param string $name Name of the tag to start creating.
    * @return HTML_TAG_BUILDER
    */
-  function tag_builder ($name)
+  function make_tag_builder ($name)
   {
-    if (! isset ($this->_tag_builder))
-      $this->_tag_builder = new HTML_TAG_BUILDER ();
-    $this->_tag_builder->set_name ($name);
-    return $this->_tag_builder;
+    $Result = new HTML_TAG_BUILDER ();
+    $Result->set_name ($name);
+    
+    return $Result;
   }
 
   /**
@@ -1897,7 +1942,7 @@ class HTML_MUNGER extends MUNGER
    * @param string $name Initialize with this CSS fragment.
    * @return CSS_STYLE_BUILDER
    */
-  function style_builder ($css = '')
+  function make_style_builder ($css = '')
   {
     $Result = new CSS_STYLE_BUILDER ();
     $Result->set_text ($css);
@@ -1909,11 +1954,13 @@ class HTML_MUNGER extends MUNGER
    * Resolve the given address to a full url.
    * Convert all HTML special characters to their escaped equivalents.
    * @param string $url
+   * @param boolean $root_override Overrides {@link $resolve_to_root} if set to
+   * {@link Force_root_on}.
    * @return string
    */
-  function resolve_url ($url)
+  function resolve_url ($url, $root_override = null)
   {
-    return parent::resolve_url ($url);
+    return parent::resolve_url ($url, $root_override);
   }
 
   /**
@@ -1948,21 +1995,12 @@ class HTML_MUNGER extends MUNGER
   function _link ()
   {
     if ($this->complete_text_url)
+    {
       return " [<a class=\"complete-text-link\" href=\"$this->complete_text_url\">More</a>]";
+    }
+    
+    return '';
   }
-
-  /**
-   * @var HTML_TAG_BUILDER
-   * @access private
-   * @see tag_builder()
-   */
-  var $_tag_builder;
-  /**
-   * @var CSS_STYLE_BUILDER
-   * @access private
-   * @see style_builder()
-   */
-  var $_style_builder;
 }
 
 /**
@@ -1993,17 +2031,8 @@ class HTML_BASE_MUNGER extends HTML_MUNGER
     $this->register_known_tag ('abbr', TRUE);  // abbreviation
     $this->register_known_tag ('cite', TRUE);  // citations of other sources
 
-    if (is_php_5 ())
-    {
-      $this->register_converter ('quotes', new HTML_SMART_QUOTE_CONVERTER ());
-      $this->register_converter ('tags', new MUNGER_HTML_CONVERTER ());
-    }
-    else
-    {
-      $this->register_converter ('tags', new MUNGER_HTML_CONVERTER ());
-      $this->register_converter ('quotes', new HTML_SMART_QUOTE_CONVERTER ());
-    }
-
+    $this->register_converter ('tags', new MUNGER_HTML_CONVERTER ());
+    $this->register_converter ('quotes', new HTML_SMART_QUOTE_CONVERTER ());
     $this->register_converter ('punctuation', new HTML_PUNCTUATION_CONVERTER ());
     $this->register_converter ('highlight', new HTML_HIGHLIGHT_CONVERTER ());
   }
@@ -2044,7 +2073,7 @@ class HTML_TEXT_MUNGER extends HTML_BASE_MUNGER
     $this->register_transformer ('h', $nop_transformer);
 
     $this->register_replacer ('page', new MUNGER_PAGE_REPLACER (), FALSE);
-    $this->register_replacer ('iq', new MUNGER_BASIC_REPLACER ('<span class="quote-inline">&#8220;', '&#8221;</span>'));
+    $this->register_replacer ('iq', new MUNGER_BASIC_REPLACER ('<span class="quote-inline">&ldquo;', '&rdquo;</span>'));
     $this->register_replacer ('bq', new HTML_BLOCK_QUOTE_REPLACER ('quote quote-block'));
     $this->register_replacer ('pullquote', new HTML_BLOCK_QUOTE_REPLACER ('quote pullquote'));
     $this->register_replacer ('abstract', new HTML_BLOCK_QUOTE_REPLACER ('quote abstract'));
