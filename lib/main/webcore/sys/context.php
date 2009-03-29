@@ -56,15 +56,15 @@ class CONTEXT extends RESOLVER
   /**
    * @var ENVIRONMENT
    */
-  var $env;
+  public $env;
   /**
    * @var COOKIE
    */
-  var $cookie;
+  public $cookie;
   /**
    * @var DATABASE
    */
-  var $database;
+  public $database;
 
   /**
    * Implementation-independent per-client storage.
@@ -72,70 +72,70 @@ class CONTEXT extends RESOLVER
    * storage providers.
    * @var CLIENT_STORAGE
    */
-  var $storage;
+  public $storage;
   /**
    * Reference to the {@link ENVIRONMENT::$date_time_toolkit}.
    * Provided for convenience.
    * @var DATE_TIME_TOOLKIT
    */
-  var $date_time_toolkit;
+  public $date_time_toolkit;
 
   /**
    * Basic mailing options (used when no subscriber is given)
     * @var CONTEXT_MAIL_OPTIONS
     */
-  var $mail_options;
+  public $mail_options;
   /**
    * Settings for the shared database.
     * @var CONTEXT_DATABASE_OPTIONS
     */
-  var $database_options;
+  public $database_options;
   /**
    * Conversion settings for forms and text content.
     * @var TEXT_OPTIONS
     */
-  var $text_options;
+  public $text_options;
   /**
    * Display settings for common UI elements.
     * @var CONTEXT_DISPLAY_OPTIONS
     */
-  var $display_options;
+  public $display_options;
   /**
    * Controls how uploaded files are handled.
    * @var CONTEXT_UPLOAD_OPTIONS
    */
-  var $upload_options;
+  public $upload_options;
   /**
    * Aliases uses when storing data to cookie or session.
    * @var CONTEXT_STORAGE_OPTIONS
    */
-  var $storage_options;
+  public $storage_options;
   /**
    * @var EXCEPTION_HANDLER
    */
-  var $exception_handler;
+  public $exception_handler;
 
   /**
    * Is this context a page (singleton)?
    * @var boolean
    */
-  var $is_page = FALSE;
+  public $is_page = FALSE;
 
   /**
-   * @param ENVIRONMENT &$env Global environment.
+   * @param ENVIRONMENT $env Global environment.
    */
-  function CONTEXT (&$env)
+  function CONTEXT ($env)
   {
-    $this->env =& $env;
+    $this->env = $env;
     RESOLVER::RESOLVER ();
 
-    $this->date_time_toolkit =& $this->env->date_time_toolkit;
+    $this->date_time_toolkit = $this->env->date_time_toolkit;
 
     $class_name = $this->final_class_name ('COOKIE', 'webcore/util/cookie.php');
     $this->cookie = new $class_name ();
     $this->cookie->set_path ('/');
 
-    $this->storage =& $this->cookie;
+    $this->storage = $this->cookie;
 
     $class_name = $this->final_class_name ('CONTEXT_DISPLAY_OPTIONS');
     $this->display_options = new $class_name ($this);
@@ -148,7 +148,7 @@ class CONTEXT extends RESOLVER
     $class_name = $this->final_class_name ('CONTEXT_STORAGE_OPTIONS');
     $this->storage_options = new $class_name ();
 
-    $this->text_options =& global_text_options ();
+    $this->text_options = global_text_options ();
   }
 
   /**
@@ -171,7 +171,7 @@ class CONTEXT extends RESOLVER
    * resources with which to resolve paths or files.
    * @return RESOURCES ()
    */
-  function &resources ()
+  function resources ()
   {
     return $this;
   }
@@ -263,7 +263,7 @@ class CONTEXT extends RESOLVER
    * This generates all forms of output for titles, including plain text and as HTML text and link.
    * @return TITLE_FORMATTER
    */
-  function &title_formatter ()
+  function title_formatter ()
   {
     return $this->find_or_create_singleton ('title_formatter', 'TITLE_FORMATTER', 'webcore/util/title_formatter.php');
   }
@@ -274,7 +274,7 @@ class CONTEXT extends RESOLVER
    * many tags like quoting, images, linking, etc.
    * @return HTML_TEXT_MUNGER
    */
-  function &html_text_formatter ()
+  function html_text_formatter ()
   {
     return $this->find_or_create_singleton ('html_text_formatter', 'HTML_TEXT_MUNGER', 'webcore/util/html_munger.php');
   }
@@ -284,7 +284,7 @@ class CONTEXT extends RESOLVER
    * This is specialized for displaying titles in the page.
    * @return HTML_TITLE_MUNGER
    */
-  function &html_title_formatter ()
+  function html_title_formatter ()
   {
     return $this->find_or_create_singleton ('html_title_formatter', 'HTML_TITLE_MUNGER', 'webcore/util/html_munger.php');
   }
@@ -293,7 +293,7 @@ class CONTEXT extends RESOLVER
    * Customizable plain text formatter.
    * @return PLAIN_TEXT_MUNGER
    */
-  function &plain_text_formatter ()
+  function plain_text_formatter ()
   {
     return $this->find_or_create_singleton ('plain_text_formatter', 'PLAIN_TEXT_MUNGER', 'webcore/util/plain_text_munger.php');
   }
@@ -303,7 +303,7 @@ class CONTEXT extends RESOLVER
    * This is specialized for displaying titles in the page.
    * @return PLAIN_TEXT_TITLE_MUNGER
    */
-  function &plain_text_title_formatter ()
+  function plain_text_title_formatter ()
   {
     return $this->find_or_create_singleton ('plain_text_title_formatter', 'PLAIN_TEXT_TITLE_MUNGER', 'webcore/util/plain_text_munger.php');
   }
@@ -357,7 +357,7 @@ class CONTEXT extends RESOLVER
    * Returns information on supported file types.
    * @return FILE_TYPE_MANAGER
    */
-  function &file_type_manager ()
+  function file_type_manager ()
   {
     return $this->find_or_create_singleton ('file_type_manager', 'FILE_TYPE_MANAGER', 'webcore/util/file_type_manager.php');
   }
@@ -370,7 +370,7 @@ class CONTEXT extends RESOLVER
     $class_name = $this->final_class_name ('MAIL_PROVIDER', 'webcore/mail/mail_provider.php');
     $Result = new $class_name ($this);
 
-    $opts =& $this->mail_options;
+    $opts = $this->mail_options;
     if ($opts->logging_enabled)
     {
       $class_name = $this->final_class_name ('FILE_LOGGER', 'webcore/log/file_logger.php');
@@ -396,10 +396,10 @@ class CONTEXT extends RESOLVER
 
   /**
    * Return an object to draw the given form.
-   * @param FORM &$form
+   * @param FORM $form
    * @return FORM_RENDERER
    */
-  function make_form_renderer (&$form)
+  function make_form_renderer ($form)
   {
     $class_name = $this->final_class_name ('FORM_RENDERER', 'webcore/forms/form_renderer.php');
     return new $class_name ($form);
@@ -510,7 +510,7 @@ class CONTEXT extends RESOLVER
    * accepted tags on the fly.
    * @var string
    */
-  var $_accepted_tags = '';
+  protected $_accepted_tags = '';
 }
 
 ?>

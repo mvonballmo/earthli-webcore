@@ -51,9 +51,9 @@ require_once ('webcore/cmd/commands.php');
 class GROUP_COMMANDS extends COMMANDS
 {
   /**
-   * @param GROUP &$group Configure commands for this object.
+   * @param GROUP $group Configure commands for this object.
    */
-  function GROUP_COMMANDS (&$group)
+  function GROUP_COMMANDS ($group)
   {
     COMMANDS::COMMANDS ($group->app);
 

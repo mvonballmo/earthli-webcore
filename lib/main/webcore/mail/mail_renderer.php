@@ -52,10 +52,10 @@ class MAIL_RENDERER extends RENDERER
    * Sets up the application to generate an email.
    * Makes sure that absolute URLs are on and JavaScript is off.
    * @param MAIL_RENDERER_OPTIONS $options
-   * @param MAIL_RENDERER_STATE &$state
+   * @param MAIL_RENDERER_STATE $state
    * @access private
    */
-  function _start_rendering (&$options, &$state)
+  function _start_rendering ($options, $state)
   {
     /* Save options to be restored later. */
    
@@ -69,7 +69,7 @@ class MAIL_RENDERER extends RENDERER
     $this->context->set_root_behavior (Force_root_on);
     $this->page->display_options->show_local_times = FALSE;
     
-    $options =& $this->page->template_options;
+    $options = $this->page->template_options;
     $options->header_visible = TRUE;
     $options->footer_visible = TRUE;
     $options->include_scripts = FALSE;
@@ -90,7 +90,7 @@ class MAIL_RENDERER extends RENDERER
    * @param MAIL_RENDERER_STATE $state
    * @access private
    */
-  function _finish_rendering (&$options, $state)
+  function _finish_rendering ($options, $state)
   {
     $this->context->restore_root_behavior ();
     $this->page->display_options = $state->saved_display_options;
@@ -115,25 +115,25 @@ class MAIL_RENDERER_STATE
    * Stored by {@link _start_rendering()} and restored by {@link _finish_rendering()}. 
    * @var PAGE_DISPLAY_OPTIONS
    */
-  var $saved_display_options;
+  public $saved_display_options;
   /**
    * Copy of the page's template options.
    * Stored by {@link _start_rendering()} and restored by {@link _finish_rendering()}. 
    * @var PAGE_TEMPLATE_OPTIONS
    */
-  var $saved_template_options;
+  public $saved_template_options;
   /**
    * Saved value for {@link MAIL_RENDERER_OPTIONS::$show_interactive}. 
    * Stored by {@link _start_rendering()} and restored by {@link _finish_rendering()}. 
    * @var boolean
    */
-  var $saved_show_local_time_option;
+  public $saved_show_local_time_option;
   /**
    * Saved value for {@link MAIL_RENDERER_OPTIONS::$show_interactive}. 
    * Stored by {@link _start_rendering()} and restored by {@link _finish_rendering()}. 
    * @var boolean
    */
-  var $saved_show_interactive_option;
+  public $saved_show_interactive_option;
 }
 
 ?>

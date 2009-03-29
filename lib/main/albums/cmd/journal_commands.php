@@ -51,25 +51,25 @@ require_once ('webcore/cmd/entry_commands.php');
 class JOURNAL_COMMANDS extends ENTRY_COMMANDS
 {
   /**
-   * @param JOURNAL &$entry Configure commands for this journal entry.
+   * @param JOURNAL $entry Configure commands for this journal entry.
    */
-  function JOURNAL_COMMANDS (&$entry)
+  function JOURNAL_COMMANDS ($entry)
   {
     ENTRY_COMMANDS::ENTRY_COMMANDS ($entry);
 
-    $cmd =& $this->command_at ('edit');
+    $cmd = $this->command_at ('edit');
     $cmd->link = "edit_journal.php?id=$entry->id";
     
-    $cmd =& $this->command_at ('delete');
+    $cmd = $this->command_at ('delete');
     $cmd->link = "delete_journal.php?id=$entry->id";
 
-    $cmd =& $this->command_at ('purge');
+    $cmd = $this->command_at ('purge');
     $cmd->link = "purge_journal.php?id=$entry->id";
 
-    $cmd =& $this->command_at ('clone');
+    $cmd = $this->command_at ('clone');
     $cmd->link = "clone_journal.php?id=$entry->id";
 
-    $cmd =& $this->command_at ('send');
+    $cmd = $this->command_at ('send');
     $cmd->link = "send_journal.php?id=$entry->id";
   }
 }

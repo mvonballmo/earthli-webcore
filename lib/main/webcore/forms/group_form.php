@@ -55,6 +55,6 @@ class GROUP_FORM extends CONTENT_OBJECT_FORM
    * @var string
    * @access private
    */
-  var $_privilege_set = Privilege_set_group;
+  protected $_privilege_set = Privilege_set_group;
 }
 ?>

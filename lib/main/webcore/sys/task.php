@@ -55,7 +55,7 @@ class TASK extends WEBCORE_OBJECT
    * Log all messages in this channel.
    * @var string
    */
-  var $log_channel = Msg_channel_system;
+  public $log_channel = Msg_channel_system;
 
   /**
    * Should debug messages be displayed in the log?
@@ -63,7 +63,7 @@ class TASK extends WEBCORE_OBJECT
    * the output console (web page).
    * @var boolean
    */
-  var $log_debug = TRUE;
+  public $log_debug = TRUE;
 
   /**
    * If true, does not actually execute SQL or other tasks.
@@ -71,13 +71,13 @@ class TASK extends WEBCORE_OBJECT
    * all log messages, but no database/files/etc. changes are made.
    * @var boolean
    */
-  var $testing;
+  public $testing;
 
   /**
    * Number of seconds to run before timeout occurs.
    * @var integer
    */
-  var $time_out_in_seconds = 600;
+  public $time_out_in_seconds = 600;
 
   /**
    * Should the process stop if an error is encountered?
@@ -85,13 +85,13 @@ class TASK extends WEBCORE_OBJECT
    * instead of redirecting to another page. If this is False, the process will continue
    * despite fatal errors.
    */
-  var $stop_on_error = TRUE;
+  public $stop_on_error = TRUE;
 
   /**
    * Include system error and warning messages in output.
    * @var boolean
    */
-  var $log_system_errors = TRUE;
+  public $log_system_errors = TRUE;
 
   /**
    * Include generic debugging messages in output.
@@ -100,36 +100,36 @@ class TASK extends WEBCORE_OBJECT
    * under debug mode.
    * @var boolean
    */
-  var $log_default_errors = TRUE;
+  public $log_default_errors = TRUE;
 
   /**
    * Include database messages in output.
    * @var boolean
    */
-  var $log_database = FALSE;
+  public $log_database = FALSE;
 
   /**
    * Show more information during migration.
    * @var boolean
    */
-  var $verbose = FALSE;
+  public $verbose = FALSE;
   /**
    * Force emulation of running from the command line.
    * @var boolean
    */
-  var $run_as_console = FALSE;
+  public $run_as_console = FALSE;
   /**
    * Icon to show in the title bar when executing.
    * @var string
    */
-  var $icon = '{icons}indicators/working';
+  public $icon = '{icons}indicators/working';
   /**
    * Take care of drawing the page header and footer?
    * By default, a task will "take over" a page. Set this to <code>False</code>
    * to display only task information.
    * @var boolean
    */
-  var $owns_page = TRUE;
+  public $owns_page = TRUE;
 
   /**
    * Return a formatted title for this task.
@@ -199,7 +199,7 @@ class TASK extends WEBCORE_OBJECT
   {
     if (! $this->testing)
     {
-      $db =& $this->_database ();
+      $db = $this->_database ();
       $db->query ($sql);
     }
     if ($this->verbose)
@@ -219,7 +219,7 @@ class TASK extends WEBCORE_OBJECT
    * @return DATABASE
    * @access private
    */
-  function &_database ()
+  function _database ()
   {
     $this->context->ensure_database_exists ();
     return $this->context->database;
@@ -396,7 +396,7 @@ class TASK extends WEBCORE_OBJECT
    * @var LOGGER
    * @access private
    */
-  var $_logger;
+  protected $_logger;
 }
 
 ?>

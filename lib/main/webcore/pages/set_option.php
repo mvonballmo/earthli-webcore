@@ -34,11 +34,11 @@ http://www.earthli.com/software/webcore
   
   if (isset ($App) && ! $opt_page_context)
   {
-    $Toolkit =& $App;
+    $Toolkit = $App;
   }
   else
   {
-    $Toolkit =& $Page;
+    $Toolkit = $Page;
   }
 
   if ($last_page && $opt_name)

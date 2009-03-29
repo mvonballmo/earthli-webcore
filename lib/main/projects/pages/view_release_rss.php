@@ -28,17 +28,17 @@ http://www.earthli.com/software/webcore/projects
 
   $id = read_var ('id');
   $folder_query = $App->login->folder_query ();
-  $folder =& $folder_query->folder_for_release_at_id ($id);
+  $folder = $folder_query->folder_for_release_at_id ($id);
 
   if (isset ($folder))
   {
     $rel_query = $folder->release_query ();
-    $release =& $rel_query->object_at_id ($id);
+    $release = $rel_query->object_at_id ($id);
   }
 
   if (isset ($release) && $App->login->is_allowed (Privilege_set_release, Privilege_view, $release))
   {
-    $branch =& $release->branch ();
+    $branch = $release->branch ();
 
     $class_name = $App->final_class_name ('NEWSFEED_ENGINE', 'webcore/config/newsfeed_engine.php', 'index');
     $newsfeed_engine = new $class_name ($App);

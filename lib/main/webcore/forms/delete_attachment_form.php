@@ -50,10 +50,10 @@ require_once ('webcore/forms/delete_form.php');
 class DELETE_ATTACHMENT_FORM extends DELETE_OBJECT_IN_FOLDER_FORM
 {
   /**
-   * @param FOLDER &$folder Deleting content from this folder.
+   * @param FOLDER $folder Deleting content from this folder.
    * @param string $set_name
    */
-  function DELETE_ATTACHMENT_FORM (&$folder, $set_name)
+  function DELETE_ATTACHMENT_FORM ($folder, $set_name)
   {
     DELETE_OBJECT_IN_FOLDER_FORM::DELETE_OBJECT_IN_FOLDER_FORM ($folder, $set_name);
 
@@ -66,9 +66,9 @@ class DELETE_ATTACHMENT_FORM extends DELETE_OBJECT_IN_FOLDER_FORM
 
   /**
    * Load initial properties from this object.
-   * @param ATTACHMENT &$obj
+   * @param ATTACHMENT $obj
    */
-  function load_from_object (&$obj)
+  function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
     $this->set_value ('type', $obj->type);

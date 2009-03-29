@@ -51,25 +51,25 @@ require_once ('webcore/cmd/entry_commands.php');
 class PICTURE_COMMANDS extends ENTRY_COMMANDS
 {
   /**
-   * @param PICTURE &$entry Configure commands for this picture.
+   * @param PICTURE $entry Configure commands for this picture.
    */
-  function PICTURE_COMMANDS (&$entry)
+  function PICTURE_COMMANDS ($entry)
   {
     ENTRY_COMMANDS::ENTRY_COMMANDS ($entry);
 
-    $cmd =& $this->command_at ('edit');
+    $cmd = $this->command_at ('edit');
     $cmd->link = "edit_picture.php?id=$entry->id";
     
-    $cmd =& $this->command_at ('delete');
+    $cmd = $this->command_at ('delete');
     $cmd->link = "delete_picture.php?id=$entry->id";
 
-    $cmd =& $this->command_at ('purge');
+    $cmd = $this->command_at ('purge');
     $cmd->link = "purge_picture.php?id=$entry->id";
 
-    $cmd =& $this->command_at ('clone');
+    $cmd = $this->command_at ('clone');
     $cmd->link = "clone_picture.php?id=$entry->id";
 
-    $cmd =& $this->command_at ('send');
+    $cmd = $this->command_at ('send');
     $cmd->link = "send_picture.php?id=$entry->id";
   }
 }

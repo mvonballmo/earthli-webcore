@@ -52,7 +52,7 @@ class SUBSCRIBER_QUERY extends QUERY
    * SQL alias for the "main" table.
    * @var string
    */
-  var $alias = 'subscribers';
+  public $alias = 'subscribers';
 
   /**
    * Apply default restrictions and tables.
@@ -68,7 +68,7 @@ class SUBSCRIBER_QUERY extends QUERY
    * @param string $name
    * @return USER
    */
-  function &object_at_email ($email)
+  function object_at_email ($email)
   {
     return $this->object_with_field ('email', $email);
   }

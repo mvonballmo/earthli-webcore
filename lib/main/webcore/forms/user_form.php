@@ -50,9 +50,9 @@ require_once ('webcore/forms/content_object_form.php');
 class USER_FORM extends CONTENT_OBJECT_FORM
 {
   /**
-   * @param APPLICATION &$app Main application.
+   * @param APPLICATION $app Main application.
    */
-  function USER_FORM (&$app)
+  function USER_FORM ($app)
   {
     CONTENT_OBJECT_FORM::CONTENT_OBJECT_FORM ($app);
 
@@ -126,15 +126,15 @@ class USER_FORM extends CONTENT_OBJECT_FORM
     $field->title = 'Signature';
     $this->add_field ($field);
 
-    $field =& $this->_fields ['title'];
+    $field = $this->_fields ['title'];
     $field->title = 'Name';
   }
 
   /**
    * Load initial properties from this user.
-   * @param USER &$obj
+   * @param USER $obj
    */
-  function load_from_object (&$obj)
+  function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
     $this->set_value ('name', $obj->title);
@@ -191,10 +191,10 @@ class USER_FORM extends CONTENT_OBJECT_FORM
 
   /**
    * Called after fields are validated.
-    * @param USER &$obj
+    * @param USER $obj
     * @access private
     */
-  function _post_validate (&$obj)
+  function _post_validate ($obj)
   {
     parent::_post_validate ($obj);
 
@@ -234,10 +234,10 @@ class USER_FORM extends CONTENT_OBJECT_FORM
   /**
    * Execute the form.
    * The form has been validated and can be executed.
-   * @param object &$obj
+   * @param object $obj
    * @access private
    */
-  function commit (&$obj)
+  function commit ($obj)
   {
     $new_user = ! $obj->exists ();
 
@@ -280,10 +280,10 @@ class USER_FORM extends CONTENT_OBJECT_FORM
 
   /**
    * Store the form's values to this user.
-    * @param USER &$obj
+    * @param USER $obj
     * @access private
     */
-  function _store_to_object (&$obj)
+  function _store_to_object ($obj)
   {
     if (! $obj->exists ())
     {
@@ -316,10 +316,10 @@ class USER_FORM extends CONTENT_OBJECT_FORM
   }
 
   /**
-   * @param FORM_RENDERER &$renderer
+   * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_controls (&$renderer)
+  function _draw_controls ($renderer)
   {
     $renderer->start ();
 
@@ -382,7 +382,7 @@ class USER_FORM extends CONTENT_OBJECT_FORM
    * @var string
    * @access private
    */
-  var $_privilege_set = Privilege_set_user;
+  protected $_privilege_set = Privilege_set_user;
 }
 
 ?>

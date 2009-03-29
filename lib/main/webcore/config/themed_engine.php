@@ -57,7 +57,7 @@ class THEMED_ENGINE extends ENGINE
    * used.
    * @var boolean
    */
-  var $use_local_theme = TRUE;
+  public $use_local_theme = TRUE;
 
   /**
    * Register plugins in {@link $classes} during initialization.
@@ -71,10 +71,10 @@ class THEMED_ENGINE extends ENGINE
 
   /**
    * Called to set the initial default {@link THEME_OPTIONS}.
-   * @param THEMED_PAGE &$page
+   * @param THEMED_PAGE $page
    * @access private
    */
-  function _init_theme (&$page)
+  function _init_theme ($page)
   {
     $page->default_theme->main_CSS_file_name = '{themes}/ice';
     $page->default_theme->font_name_CSS_file_name = '{styles}fonts/verdana';
@@ -83,11 +83,11 @@ class THEMED_ENGINE extends ENGINE
 
   /**
    * Called immediately after creating a page.
-   * @param ENVIRONMENT &$env
-   * @param PAGE &$page
+   * @param ENVIRONMENT $env
+   * @param PAGE $page
    * @access private
    */
-  function _init_page (&$env, &$page)
+  function _init_page ($env, $page)
   {
     parent::_init_page ($env, $page);
     $this->_init_theme ($page);

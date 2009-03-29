@@ -49,9 +49,9 @@ require_once ('webcore/forms/search_fields.php');
 class SEARCH_PICTURE_FIELDS extends SEARCH_ENTRY_FIELDS
 {
   /**
-   * @param APPLICATION &$app Main application.
+   * @param APPLICATION $app Main application.
    */
-  function SEARCH_PICTURE_FIELDS (&$app)
+  function SEARCH_PICTURE_FIELDS ($app)
   {
     SEARCH_ENTRY_FIELDS::SEARCH_ENTRY_FIELDS ($app);
 
@@ -69,9 +69,9 @@ class SEARCH_PICTURE_FIELDS extends SEARCH_ENTRY_FIELDS
 class SEARCH_JOURNAL_FIELDS extends SEARCH_ENTRY_FIELDS
 {
   /**
-   * @param APPLICATION &$app Main application.
+   * @param APPLICATION $app Main application.
    */
-  function SEARCH_JOURNAL_FIELDS (&$app)
+  function SEARCH_JOURNAL_FIELDS ($app)
   {
     SEARCH_ENTRY_FIELDS::SEARCH_ENTRY_FIELDS ($app);
 
@@ -85,9 +85,9 @@ class SEARCH_JOURNAL_FIELDS extends SEARCH_ENTRY_FIELDS
 
   /**
    * Add fields for search properties to this form.
-   * @param FORM &$form
+   * @param FORM $form
    */
-  function add_fields (&$form)
+  function add_fields ($form)
   {
     parent::add_fields ($form);
 
@@ -115,10 +115,10 @@ class SEARCH_JOURNAL_FIELDS extends SEARCH_ENTRY_FIELDS
 
   /**
    * Restrict the query by these fields.
-   * @param QUERY &$query
-   * @param object &$obj
+   * @param QUERY $query
+   * @param object $obj
    */
-  function apply_to_query (&$query, &$obj)
+  function apply_to_query ($query, $obj)
   {
     parent::apply_to_query ($query, $obj);
 
@@ -162,14 +162,14 @@ class SEARCH_JOURNAL_FIELDS extends SEARCH_ENTRY_FIELDS
 
   /**
    * Text representation of applied search fields.
-   * @param object &$obj
+   * @param object $obj
    * @return string
    * @access private
    */
-  function _restrictions_as_text (&$obj)
+  function _restrictions_as_text ($obj)
   {
     $Result = parent::_restrictions_as_text ($obj);
-    $props =& $this->app->display_options->weather_icons ();
+    $props = $this->app->display_options->weather_icons ();
 
     if (sizeof ($obj->parameters ['weather_type']))
     {
@@ -190,11 +190,11 @@ class SEARCH_JOURNAL_FIELDS extends SEARCH_ENTRY_FIELDS
   }
 
   /**
-   * @param FORM &$form
-   * @param FORM_RENDERER &$renderer
+   * @param FORM $form
+   * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_date_fields (&$form, &$renderer)
+  function _draw_date_fields ($form, $renderer)
   {
     $renderer->draw_check_box_row ('not_weather_type');
 
@@ -202,7 +202,7 @@ class SEARCH_JOURNAL_FIELDS extends SEARCH_ENTRY_FIELDS
     $props->items_per_row = 7;
 
     $i = 0;
-    $icons =& $this->app->display_options->weather_icons ();
+    $icons = $this->app->display_options->weather_icons ();
     foreach ($icons as $icon)
     {
       $i++;

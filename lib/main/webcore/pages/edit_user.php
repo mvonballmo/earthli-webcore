@@ -27,7 +27,7 @@ http://www.earthli.com/software/webcore
 ****************************************************************************/
 
   $user_query = $App->user_query ();
-  $user =& $user_query->object_at_name (read_var ('name'));
+  $user = $user_query->object_at_name (read_var ('name'));
 
   if (isset ($user) && $App->login->is_allowed (Privilege_set_user, Privilege_modify, $user))
   {

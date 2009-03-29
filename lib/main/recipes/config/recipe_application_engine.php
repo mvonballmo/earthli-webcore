@@ -61,11 +61,11 @@ class RECIPE_APPLICATION_ENGINE extends APPLICATION_ENGINE
   
   /**
    * Customize the application object.
-   * @param PAGE &$page
-   * @param APPLICATION &$app
+   * @param PAGE $page
+   * @param APPLICATION $app
    * @access private
    */
-  function _init_application (&$page, &$app)
+  function _init_application ($page, $app)
   {
     parent::_init_application ($page, $app);
     $app->mail_options->send_from_address = 'recipes@' . $app->env->default_domain ();

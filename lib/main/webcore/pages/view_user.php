@@ -31,7 +31,7 @@ http://www.earthli.com/software/webcore
   if ($name)
   {
     $user_query = $App->user_query ();
-    $user =& $user_query->object_at_name ($name);
+    $user = $user_query->object_at_name ($name);
   }
   
   if (isset ($user) && $App->login->is_allowed (Privilege_set_user, Privilege_view, $user))
@@ -41,7 +41,7 @@ http://www.earthli.com/software/webcore
 
     $class_name = $App->final_class_name ('USER_PANEL_MANAGER', 'webcore/gui/panel.php');
     $panel_manager = new $class_name ($user);
-    $panel =& $panel_manager->selected_panel ();
+    $panel = $panel_manager->selected_panel ();
 
     $Page->title->add_object ($user);
     $Page->title->subject = $panel->raw_title ();

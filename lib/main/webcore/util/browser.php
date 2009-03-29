@@ -201,7 +201,7 @@ class BROWSER
    * Set this property with {@link load_from_server()} or {@link load_from_string()}.
    * @var string
    */
-  var $user_agent_string;
+  public $user_agent_string;
 
   /**
    * Calls {@link load_from_server()} by default.
@@ -560,7 +560,7 @@ class BROWSER
    * @return USER_AGENT_PARSER
    * @access private
    */
-  function _make_user_agent_parser (&$tables)
+  function _make_user_agent_parser ($tables)
   {
     return new USER_AGENT_PARSER ($tables);
   }
@@ -584,62 +584,62 @@ class USER_AGENT_PROPERTIES
    * Name of the client application.
    * @var string
    */
-  var $name = Browser_unknown;
+  public $name = Browser_unknown;
   /**
    * Version of the client application.
    * @var string
    */
-  var $version = '';
+  public $version = '';
   /**
    * Name of the rendering technology.
    * @var string
    */
-  var $renderer_name = Browser_unknown;
+  public $renderer_name = Browser_unknown;
   /**
    * @var string
    */
-  var $renderer_version = '';
+  public $renderer_version = '';
   /**
    * @var string
    */
-  var $renderer_id = Browser_unknown;
+  public $renderer_id = Browser_unknown;
   /**
    * @var string
    */
-  var $system_name = Browser_unknown;
+  public $system_name = Browser_unknown;
   /**
    * @var string
    */
-  var $system_version = '';
+  public $system_version = '';
   /**
    * @var string
    */
-  var $calculated_system_name = Browser_unknown;
+  public $calculated_system_name = Browser_unknown;
   /**
    * @var string
    */
-  var $os_id = '';
+  public $os_id = '';
   /**
    * @var DATE_TIME
    */
-  var $gecko_date;
+  public $gecko_date;
   /**
    * @var boolean
    */
-  var $is_robot;
+  public $is_robot;
 
   /**
    * @var integer
    */
-  var $major_version = 0;
+  public $major_version = 0;
   /**
    * @var integer
    */
-  var $minor_version = 0;
+  public $minor_version = 0;
   /**
    * @var integer
    */
-  var $build_number = 0;
+  public $build_number = 0;
 
   function USER_AGENT_PROPERTIES ()
   {
@@ -661,11 +661,11 @@ class USER_AGENT_PROPERTIES
 class USER_AGENT_PARSER
 {
   /**
-   * @param USER_AGENT_PARSE_TABLES &$tables
+   * @param USER_AGENT_PARSE_TABLES $tables
    */
-  function USER_AGENT_PARSER (&$tables)
+  function USER_AGENT_PARSER ($tables)
   {
-    $this->_tables =& $tables;
+    $this->_tables = $tables;
   }
 
   function make_properties_from ($s)
@@ -825,11 +825,11 @@ class USER_AGENT_PARSER
    * Determine the operating system.
    * Since most user agents don't specify an OS with version (Linux is a
    * standout here), we examine the user agent in a non version-specific way.
-   * @param USER_AGENT_PROPERTIES &$props
+   * @param USER_AGENT_PROPERTIES $props
    * @param string $raw_data User agent to examine, in lower-case format.
    * @access private
    */
-  function _determine_os (&$props, $raw_data)
+  function _determine_os ($props, $raw_data)
   {
     $raw_data = strtolower ($raw_data);
     $props->calculated_system_name = Browser_unknown;
@@ -877,10 +877,10 @@ class USER_AGENT_PARSER
   /**
    * Check if the client is a search engine or robot.
    * Only checks if the {@link $renderer_id} has not already been set.
-   * @param USER_AGENT_PROPERTIES &$props
+   * @param USER_AGENT_PROPERTIES $props
    * @access private
    */
-  function _determine_robot (&$props)
+  function _determine_robot ($props)
   {
     if ($props->renderer_id == Browser_unknown)
     {
@@ -1150,27 +1150,27 @@ class USER_AGENT_RENDERER_INFO
    * browser constants.
    * @var string
    */
-  var $id;
+  public $id;
   /**
    * Code name for the rendering technology.
    * May be the same as {@link $display_name}.
    * @var string
    */
-  var $technology_name;
+  public $technology_name;
   /**
    * Replacement for the name found in the user agent.
    * Often the renderer is identified by a non-user-friendly id (e.g. MSIE)
    * instead of the name of the browser. This is the name to use for the browser
    * if no other name is given.
    */
-  var $display_name;
+  public $display_name;
   /**
    * Defines the precedence for this renderer during detection.
    * Uses {@link User_agent_temporary_renderer}, {@link
    * User_agent_final_renderer}, {@link User_agent_final_browser}.
    * @var integer
    */
-  var $precedence;
+  public $precedence;
 
   /**
    * Create a description for a renderer.

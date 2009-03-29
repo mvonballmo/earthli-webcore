@@ -53,11 +53,11 @@ class PICTURE_HISTORY_ITEM extends ENTRY_HISTORY_ITEM
   /**
    * Record class-specific differences.
    * 'orig' is the same as {@link $_object}, but is passed here for convenience.
-   * @param PICTURE &$orig
-   * @param PICTURE &$new
+   * @param PICTURE $orig
+   * @param PICTURE $new
    * @access private
    */
-  function _record_differences (&$orig, &$new)
+  function _record_differences ($orig, $new)
   {
     parent::_record_differences ($orig, $new);
 
@@ -79,11 +79,11 @@ class JOURNAL_HISTORY_ITEM extends ENTRY_HISTORY_ITEM
   /**
    * Record class-specific differences.
    * 'orig' is the same as {@link $_object}, but is passed here for convenience.
-   * @param JOURNAL &$orig
-   * @param JOURNAL &$new
+   * @param JOURNAL $orig
+   * @param JOURNAL $new
    * @access private
    */
-  function _record_differences (&$orig, &$new)
+  function _record_differences ($orig, $new)
   {
     parent::_record_differences ($orig, $new);
 
@@ -123,11 +123,11 @@ class ALBUM_HISTORY_ITEM extends FOLDER_HISTORY_ITEM
   /**
    * Record class-specific differences.
    * 'orig' is the same as {@link $_object}, but is passed here for convenience.
-   * @param ALBUM &$orig
-   * @param ALBUM &$new
+   * @param ALBUM $orig
+   * @param ALBUM $new
    * @access private
    */
-  function _record_differences (&$orig, &$new)
+  function _record_differences ($orig, $new)
   {
     parent::_record_differences ($orig, $new);
 

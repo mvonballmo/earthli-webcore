@@ -63,7 +63,7 @@ class HTML_TAG_BUILDER
   {
     if ($value)
     {
-      $text_options =& global_text_options ();
+      $text_options = global_text_options ();
       $this->_text .= ' ' . $name . '="' . $text_options->convert_to_html_attribute ($value) . '"';
     }
   }
@@ -74,7 +74,7 @@ class HTML_TAG_BUILDER
    * @param string $name
    * @param array $values
    */
-  function add_array_attribute ($name, &$array, $default_value = '')
+  function add_array_attribute ($name, $array, $default_value = '')
   {
     $this->add_attribute ($name, read_array_index ($array, $name, $default_value));
   }
@@ -92,7 +92,7 @@ class HTML_TAG_BUILDER
    * @var string
    * @access private
    */
-  var $_text;
+  protected $_text;
 }
 
 /**
@@ -135,7 +135,7 @@ class CSS_STYLE_BUILDER
         $this->_text .= '; ';
       }
        
-			$text_options =& global_text_options ();
+			$text_options = global_text_options ();
  
       $this->_text .= $name . ': ' . $text_options->convert_to_html_attribute ($value);
     }
@@ -147,7 +147,7 @@ class CSS_STYLE_BUILDER
    * @param string $name
    * @param array $values
    */
-  function add_array_attribute ($name, &$array, $default_value = '')
+  function add_array_attribute ($name, $array, $default_value = '')
   {
     $this->add_attribute ($name, read_array_index ($array, $name, $default_value));
   }
@@ -190,7 +190,7 @@ class CSS_STYLE_BUILDER
    * @var string
    * @access private
    */
-  var $_text;
+  protected $_text;
 }
 
 ?>

@@ -31,9 +31,9 @@ require_once ('webcore/tasks/db/upgrade_per_app_221_23.php');
 
 class ALBUMS_24_25_MIGRATOR_TASK extends UPGRADE_PER_APP_221_23_TASK
 {
-  var $application_name = 'earthli Albums';
-  var $version_from = '2.4.0';
-  var $version_to = '2.5.0';
+  public $application_name = 'earthli Albums';
+  public $version_from = '2.4.0';
+  public $version_to = '2.5.0';
 
   function _execute ()
   {

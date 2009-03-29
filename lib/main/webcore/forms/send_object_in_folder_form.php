@@ -50,9 +50,9 @@ require_once ('webcore/forms/send_multiple_mail_form.php');
 class SEND_OBJECT_IN_FOLDER_FORM extends SEND_MULTIPLE_MAIL_FORM
 {
   /**
-   * @param APPLICATION &$app Main application.
+   * @param APPLICATION $app Main application.
    */
-  function SEND_OBJECT_IN_FOLDER_FORM (&$app)
+  function SEND_OBJECT_IN_FOLDER_FORM ($app)
   {
     SEND_MULTIPLE_MAIL_FORM::SEND_MULTIPLE_MAIL_FORM ($app);
 
@@ -80,11 +80,11 @@ class SEND_OBJECT_IN_FOLDER_FORM extends SEND_MULTIPLE_MAIL_FORM
 
   /**
    * Load initial properties from this object.
-   * @param OBJECT_IN_FOLDER &$obj
+   * @param OBJECT_IN_FOLDER $obj
    */
-  function load_from_object (&$obj)
+  function load_from_object ($obj)
   {
-    $folder =& $obj->parent_folder ();
+    $folder = $obj->parent_folder ();
     $this->set_value ('id', $obj->id);
     $this->set_value ('subject', "$folder->title: $obj->title");
     $this->load_with_defaults ();
@@ -115,10 +115,10 @@ class SEND_OBJECT_IN_FOLDER_FORM extends SEND_MULTIPLE_MAIL_FORM
   /**
    * Display additional email options.
    * Allow descendants to use the standard email form rendering, while still adding new mailing options.
-   * @param FORM_RENDERER &$renderer
+   * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_options (&$renderer)
+  function _draw_options ($renderer)
   {
     parent::_draw_options ($renderer);
 
@@ -136,11 +136,11 @@ class SEND_OBJECT_IN_FOLDER_FORM extends SEND_MULTIPLE_MAIL_FORM
   }
 
   /**
-   * @param OBJECT_IN_FOLDER &$obj The object to render.
+   * @param OBJECT_IN_FOLDER $obj The object to render.
    * @return CONTENT_OBJECT_MAIL_RENDERER
    * @access private
    */
-  function _make_obj_renderer (&$obj)
+  function _make_obj_renderer ($obj)
   {
     $class_name = $this->context->final_class_name ('CONTENT_OBJECT_MAIL_RENDERER', 'webcore/mail/content_object_mail_renderer.php');
     return new $class_name ($this->context);

@@ -34,13 +34,13 @@ http://www.earthli.com/software/webcore
   switch ($type)
   {
   case History_item_entry:
-    $folder =& $folder_query->folder_for_entry_at_id ($id);
+    $folder = $folder_query->folder_for_entry_at_id ($id);
     break;
   case History_item_comment:
-    $folder =& $folder_query->folder_for_comment_at_id ($id);
+    $folder = $folder_query->folder_for_comment_at_id ($id);
     break;
   case History_item_folder:
-    $folder =& $folder_query->object_at_id ($id);
+    $folder = $folder_query->object_at_id ($id);
     break;
   }
 
@@ -53,7 +53,7 @@ http://www.earthli.com/software/webcore
 
     if ($type == History_item_folder)
     {
-      $host =& $folder;
+      $host = $folder;
     }
     else
     {
@@ -62,10 +62,10 @@ http://www.earthli.com/software/webcore
       switch ($type)
       {
       case History_item_entry:
-        $entry =& $entry_query->object_at_id ($id);
+        $entry = $entry_query->object_at_id ($id);
         break;
       case History_item_comment:
-        $entry =& $entry_query->object_for_comment_at_id ($id);
+        $entry = $entry_query->object_for_comment_at_id ($id);
         break;
       }
 
@@ -76,19 +76,19 @@ http://www.earthli.com/software/webcore
 
         if ($type == History_item_entry)
         {
-          $host =& $entry;
+          $host = $entry;
         }
         else
         {
           $com_query = $entry->comment_query ();
-          $comment =& $com_query->object_at_id ($id);
+          $comment = $com_query->object_at_id ($id);
 
           if (isset ($comment))
           {
             $Page->title->add_object ($comment);
             $Page->location->add_object_link ($comment);
 
-            $host =& $comment;
+            $host = $comment;
           }
         }
       }

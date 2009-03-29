@@ -51,9 +51,9 @@ require_once ('webcore/cmd/commands.php');
 class CHANGE_LOG_COMMANDS extends COMMANDS
 {
   /**
-   * @param APPLICATION &$app
+   * @param APPLICATION $app
    */
-  function CHANGE_LOG_COMMANDS (&$app)
+  function CHANGE_LOG_COMMANDS ($app)
   {
     COMMANDS::COMMANDS ($app);
 
@@ -141,9 +141,9 @@ class CHANGE_LOG_COMMANDS extends COMMANDS
 class BRANCH_CHANGE_LOG_COMMANDS extends CHANGE_LOG_COMMANDS
 {
   /**
-   * @param APPLICATION &$app
+   * @param APPLICATION $app
    */
-  function BRANCH_CHANGE_LOG_COMMANDS (&$app)
+  function BRANCH_CHANGE_LOG_COMMANDS ($app)
   {
     CHANGE_LOG_COMMANDS::CHANGE_LOG_COMMANDS ($app);
 

@@ -59,15 +59,15 @@ class LIST_GRID extends STANDARD_GRID
   /**
    * Add space between columns?
    * @var boolean*/
-  var $use_spacers = TRUE;
+  public $use_spacers = TRUE;
   /**
    * @var boolean
    */
-  var $show_separator = FALSE;
+  public $show_separator = FALSE;
   /**
    * @var boolean
    */
-  var $even_columns = FALSE;
+  public $even_columns = FALSE;
 
   /**
    * Add a column to the end of the list.
@@ -98,10 +98,10 @@ class LIST_GRID extends STANDARD_GRID
   }
 
   /**
-   * @param object &$obj
+   * @param object $obj
    * @access private
    */
-  function _draw_box (&$obj)
+  function _draw_box ($obj)
   {
     $i = 0;
     $c = sizeof ($this->_columns);
@@ -148,12 +148,12 @@ class LIST_GRID extends STANDARD_GRID
 
   /**
    * Draw the given column's data using the given object.
-   * @param object &$obj
+   * @param object $obj
    * @param integer $index
    * @access private
    * @abstract
    */
-  function _draw_column_contents (&$obj, $index)
+  function _draw_column_contents ($obj, $index)
   {
     $this->raise_deferred ('_draw_column_contents', 'LIST_GRID');
   }
@@ -172,7 +172,7 @@ class LIST_GRID extends STANDARD_GRID
    * @see LIST_GRID_COLUMN
    * @access private
    */
-  var $_column_names = array ();
+  protected $_column_names = array ();
 }
 
 /**
@@ -189,13 +189,13 @@ class LIST_GRID_COLUMN
    * Name to be displayed in the header. 
    * @var string
    */
-  var $name;
+  public $name;
   /**
    * Horizontal alignment for header and data.
    * Can be 'left', 'right', 'center'.
    * @var string
    */
-  var $alignment = 'left';
+  public $alignment = 'left';
 }
 
 ?>

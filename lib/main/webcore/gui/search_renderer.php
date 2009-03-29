@@ -50,10 +50,10 @@ class SEARCH_RENDERER extends CONTENT_OBJECT_RENDERER
 {
   /**
    * Outputs the object as HTML.
-   * @param SEARCH &$obj
+   * @param SEARCH $obj
    * @access private
    */
-  function _display_as_html (&$obj)
+  function _display_as_html ($obj)
   {
     $this->_echo_html_description ($obj);
     echo $obj->system_description_as_html ();
@@ -61,10 +61,10 @@ class SEARCH_RENDERER extends CONTENT_OBJECT_RENDERER
 
   /**
    * Outputs the object as plain text.
-   * @param SEARCH &$obj
+   * @param SEARCH $obj
    * @access private
    */
-  function _display_as_plain_text (&$obj)
+  function _display_as_plain_text ($obj)
   {
     $this->_echo_plain_text_description ($obj);
     echo $obj->system_description_as_plain_text ();

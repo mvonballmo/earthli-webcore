@@ -58,12 +58,12 @@ class DEFAULT_PAGE_RENDERER extends WEBCORE_PAGE_RENDERER
    * shows up in the page footer.
    * @var boolean
    */
-  var $browser_warning_in_header = TRUE;
+  public $browser_warning_in_header = TRUE;
 
   function _start_body ()
   {
-    $page =& $this->page;
-    $env =& $this->env;
+    $page = $this->page;
+    $env = $this->env;
     $browser = $env->browser();
 
     $options = $page->template_options;
@@ -122,7 +122,7 @@ class DEFAULT_PAGE_RENDERER extends WEBCORE_PAGE_RENDERER
 
   function _finish_body ()
   {
-    $page =& $this->page;
+    $page = $this->page;
     $options = $page->template_options;
     $browser = $this->env->browser();
     
@@ -196,7 +196,7 @@ class DEFAULT_PAGE_RENDERER extends WEBCORE_PAGE_RENDERER
    * @return string
    * @access private
 	*/
-  function _login_theme_status (&$options)
+  function _login_theme_status ($options)
   {
     /* Access the application through the page here since the parent
      * of the renderer is always a PAGE, not an APPLICATION.
@@ -206,7 +206,7 @@ class DEFAULT_PAGE_RENDERER extends WEBCORE_PAGE_RENDERER
     $show_login = $options->show_login && $app_exists;
     if ($app_exists)
     {
-      $app =& $this->page->app;
+      $app = $this->page->app;
     }
     if ($show_login)
     {
@@ -222,7 +222,7 @@ class DEFAULT_PAGE_RENDERER extends WEBCORE_PAGE_RENDERER
       {
         if (! $logged_in)
         {
-          $anon =& $app->anon_user ();
+          $anon = $app->anon_user ();
           $menu->append ('Not logged in');
           $menu->append ('Log in...', $app->resolve_file_for_alias (Folder_name_application, $app->page_names->log_in));
           if ($anon->is_allowed (Privilege_set_user, Privilege_create))
@@ -245,7 +245,7 @@ class DEFAULT_PAGE_RENDERER extends WEBCORE_PAGE_RENDERER
           $menu->append ('Configure', $url);
         }
 
-        $res =& $this->page->resources ();
+        $res = $this->page->resources ();
         if ($options->settings_url)
         {
           $url = $res->resolve_file ($options->settings_url);
@@ -276,13 +276,13 @@ class DEFAULT_PAGE_RENDERER extends WEBCORE_PAGE_RENDERER
    * @return string
    * @access private
 	*/
-  function _links_as_text (&$options)
+  function _links_as_text ($options)
   {
     if ($options->show_links)
     {
       /* Make a copy. */
       $menu = $this->context->make_menu ();
-      $res =& $this->page->resources ();
+      $res = $this->page->resources ();
 
       if ($options->contact_url)
       {
@@ -303,6 +303,8 @@ class DEFAULT_PAGE_RENDERER extends WEBCORE_PAGE_RENDERER
 
       return $menu->as_html ();
     }
+    
+    return '';
   }
 
   /**
@@ -335,7 +337,7 @@ class DEFAULT_PAGE_RENDERER extends WEBCORE_PAGE_RENDERER
   {
     if ($options->show_statistics)
     {
-      $profiler =& $this->env->profiler;
+      $profiler = $this->env->profiler;
 
       if (isset ($profiler) && $profiler->exists ('global'))
       {
@@ -389,7 +391,7 @@ class DEFAULT_PAGE_RENDERER extends WEBCORE_PAGE_RENDERER
    * @param boolean $in_header True is rendering in the header.
    * @access private 
 	*/
-  function _handle_browser_warnings (&$options, $in_header)
+  function _handle_browser_warnings ($options, $in_header)
   {
     if (! ($in_header ^ $this->browser_warning_in_header) && $options->check_browser && ! $this->browser_supported ())
     {
@@ -397,7 +399,7 @@ class DEFAULT_PAGE_RENDERER extends WEBCORE_PAGE_RENDERER
       $opt_ignore_warning = new STORED_OPTION ($this->page, "ignore_browser_warning");
       if (! $opt_ignore_warning->value ())
       {
-        $res =& $this->page->resources ();
+        $res = $this->page->resources ();
   ?>
     <div class="caution page-message notes">
       <?php echo $res->resolve_icon_as_html ('{icons}/indicators/warning', '', '32px', 'float: left'); ?>
@@ -447,13 +449,13 @@ class DEFAULT_PAGE_RENDERER extends WEBCORE_PAGE_RENDERER
    * @param PAGE_TEMPLATE_OPTIONS $options
    * @access private
    */
-  function _handle_client_data_warnings (&$options)
+  function _handle_client_data_warnings ($options)
   {
     $page = $this->page;
 
     if (! $page->stored_theme_is_valid)
     {
-      $res =& $this->page->resources ();
+      $res = $this->page->resources ();
   ?>
   <div class="warning page-message notes">
     <?php echo $res->resolve_icon_as_html ('{icons}/indicators/warning', '', '32px', 'float: left'); ?>

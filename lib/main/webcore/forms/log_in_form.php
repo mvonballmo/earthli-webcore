@@ -51,29 +51,29 @@ class LOG_IN_FORM extends FORM
   /**
    * @var string
    */
-  var $name = 'log_in_form';
+  public $name = 'log_in_form';
   /**
    * @var string
    */
-  var $button = 'Log in';
+  public $button = 'Log in';
   /**
    * @var string
    */
-  var $button_icon = '{icons}buttons/login';
+  public $button_icon = '{icons}buttons/login';
   /**
    * @var string
     * @access private
     */
-  var $submitted_flag = 'login_submitted';
+  public $submitted_flag = 'login_submitted';
   /**
    * @var string
    */
-  var $CSS_class = 'login';
+  public $CSS_class = 'login';
 
   /**
-   * @param APPLICATION &$app Main application.
+   * @param APPLICATION $app Main application.
    */
-  function LOG_IN_FORM (&$app)
+  function LOG_IN_FORM ($app)
   {
     FORM::FORM ($app);
 
@@ -112,10 +112,10 @@ class LOG_IN_FORM extends FORM
 
   /**
    * Called after fields are validated.
-    * @param object &$obj This parameter is ignored.
+    * @param object $obj This parameter is ignored.
     * @access private
     */
-  function _post_validate (&$obj)
+  function _post_validate ($obj)
   {
     parent::_post_validate ($obj);
 
@@ -123,7 +123,7 @@ class LOG_IN_FORM extends FORM
     {
       $user_query = $this->app->user_query ();
       $user_query->include_permissions (TRUE);
-      $this->_user =& $user_query->object_at_name ($this->value_for ('name'));
+      $this->_user = $user_query->object_at_name ($this->value_for ('name'));
 
       if (! $this->_user)
       {
@@ -149,10 +149,10 @@ class LOG_IN_FORM extends FORM
 
   /**
    * Log in the selected user, if possible.
-    * @param object &$obj This parameter is ignored.
+    * @param object $obj This parameter is ignored.
     * @access private
     */
-  function commit (&$obj)
+  function commit ($obj)
   {
     if (! $this->_user->is_anonymous ())
     {
@@ -165,10 +165,10 @@ class LOG_IN_FORM extends FORM
   }
 
   /**
-   * @param FORM_RENDERER &$renderer
+   * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_controls (&$renderer)
+  function _draw_controls ($renderer)
   {
     $renderer->show_required_mark = FALSE;
     $renderer->set_width ('15em');
@@ -186,7 +186,7 @@ class LOG_IN_FORM extends FORM
 
     if ($this->app->login->is_anonymous ())
     {
-      $anon =& $this->app->anon_user ();
+      $anon = $this->app->anon_user ();
       if ($anon->is_allowed (Privilege_set_user, Privilege_create))
       {
         $renderer->draw_separator ();

@@ -56,7 +56,7 @@ class STATIC_TREE extends HTML_TREE
     * @var integer
     * @access private
     */
-  var $_min_depth_for_icons = 1;
+  protected $_min_depth_for_icons = 1;
 }
 
 ?>

@@ -55,18 +55,18 @@ class FRAMEWORK_INFO extends NAMED_OBJECT
    * {@link APPLICATION::$framework_id}.
    * @var string
    */
-  var $title;
+  public $title;
   /**
    * Version of the database.
    * @var string
    */
-  var $database_version;
+  public $database_version;
   /**
    * Version of the software.
    * Set with {@link set_software()}.
    * @var string
    */
-  var $software_version;
+  public $software_version;
   
   /**
    * Does this object exist?
@@ -156,18 +156,18 @@ class FRAMEWORK_INFO extends NAMED_OBJECT
   
   /**
    * Set the software version and information.
-   * @param mixed &$obj An {@link APPLICATION} or an {@link ENVIRONMENT}.
+   * @param mixed $obj An {@link APPLICATION} or an {@link ENVIRONMENT}.
    */
-  function set_software (&$obj)
+  function set_software ($obj)
   {
     $this->title = $obj->framework_id;
     $this->software_version = $obj->version;
   }
   
   /**
-   * @param DATABASE &$db Database from which to load values.
+   * @param DATABASE $db Database from which to load values.
    */
-  function load (&$db)
+  function load ($db)
   {
     parent::load ($db);
     $this->title = $db->f ('title');
@@ -176,9 +176,9 @@ class FRAMEWORK_INFO extends NAMED_OBJECT
   }
 
   /**
-   * @param SQL_STORAGE &$storage Store values to this object.
+   * @param SQL_STORAGE $storage Store values to this object.
    */
-  function store_to (&$storage)
+  function store_to ($storage)
   {
     $tname = $this->app->table_names->versions;
     $storage->add ($tname, 'title', Field_type_string, $this->title);
@@ -201,7 +201,7 @@ class FRAMEWORK_INFO extends NAMED_OBJECT
    * @var boolean 
    * @access private
    */
-  var $_version_not_found = TRUE;
+  protected $_version_not_found = TRUE;
 }
 
 /**
@@ -218,17 +218,17 @@ class APPLICATION_CONFIGURATION_INFO extends WEBCORE_OBJECT
    * Version and name of application.
    * @var FRAMEWORK_INFO
    */
-  var $app_info;
+  public $app_info;
   /**
    * Version and name of library.
    * @var FRAMEWORK_INFO
    */
-  var $lib_info;
+  public $lib_info;
 
   /**
-   * @param APPLICATION &$app
+   * @param APPLICATION $app
    */
-  function APPLICATION_CONFIGURATION_INFO (&$app)
+  function APPLICATION_CONFIGURATION_INFO ($app)
   {
     WEBCORE_OBJECT::WEBCORE_OBJECT ($app);
     $this->load_from ($app);
@@ -236,9 +236,9 @@ class APPLICATION_CONFIGURATION_INFO extends WEBCORE_OBJECT
   
   /**
    * Initialize all versions for this app and environment.
-   * @param APPLICATION &$app
+   * @param APPLICATION $app
    */
-  function load_from (&$obj)
+  function load_from ($obj)
   {
     if ($this->db->table_exists ($this->app->table_names->versions))
     {
@@ -251,7 +251,7 @@ class APPLICATION_CONFIGURATION_INFO extends WEBCORE_OBJECT
     
     if (! isset ($this->app_info))
     {
-      $this->app_info =& $this->_make_object ();
+      $this->app_info = $this->_make_object ();
       switch ($obj->framework_id)
       {
         case 'com.earthli.albums':
@@ -271,7 +271,7 @@ class APPLICATION_CONFIGURATION_INFO extends WEBCORE_OBJECT
     
     if (! isset ($this->lib_info))
     {
-      $this->lib_info =& $this->_make_object ($this->env->title);
+      $this->lib_info = $this->_make_object ($this->env->title);
       $this->lib_info->database_version = '2.6.0';
     }
 

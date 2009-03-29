@@ -50,10 +50,10 @@ class AUDITABLE_RENDERER extends OBJECT_RENDERER
 {
   /**
    * Outputs the object as HTML.
-  * @param AUDITABLE &$obj
+  * @param AUDITABLE $obj
   * @access private
   */
-  function _display_as_html (&$obj)
+  function _display_as_html ($obj)
   {
     $this->_echo_html_user_information ($obj);
   }
@@ -61,11 +61,11 @@ class AUDITABLE_RENDERER extends OBJECT_RENDERER
   /**
    * Shows creator/modifier as a box in HTML.
    * Uses {@link _echo_html_users()} to format its contents.
-   * @param AUDITABLE &$obj
+   * @param AUDITABLE $obj
    * @param string $CSS_class
    * @access private
    */
-  function _echo_html_user_information (&$obj, $CSS_class = 'info-box-top')
+  function _echo_html_user_information ($obj, $CSS_class = 'info-box-top')
   {
     if ($this->_options->show_users)
     {
@@ -78,10 +78,10 @@ class AUDITABLE_RENDERER extends OBJECT_RENDERER
   /**
    * Show created/updated information in HTML.
    * Uses {@link _echo_html_user()} to format users.
-   * @param AUDITABLE &$obj
+   * @param AUDITABLE $obj
    * @access private
    */
-  function _echo_html_users (&$obj)
+  function _echo_html_users ($obj)
   {
     $this->_echo_html_user ('Created', $obj->creator (), $obj->time_created);
     if ($obj->modified ())
@@ -94,12 +94,12 @@ class AUDITABLE_RENDERER extends OBJECT_RENDERER
    * Display a user and date in HTML.
    * Formatted as: 'caption' by 'user' on 'time'
    * @param string $caption
-   * @param USER &$user
+   * @param USER $user
 
-   *    * @param DATE_TIME &$time
+   *    * @param DATE_TIME $time
    * @access private
    */
-  function _echo_html_user ($caption, &$user, &$time)
+  function _echo_html_user ($caption, $user, $time)
   {
     echo "<div>\n";
     echo $caption . ' by ' . $user->title_as_link () . ' on ' . $time->format () . "\n";
@@ -108,12 +108,12 @@ class AUDITABLE_RENDERER extends OBJECT_RENDERER
 
   /**
    * Show a button to toggle subscribe status.
-   * @param AUDITABLE &$obj
+   * @param AUDITABLE $obj
    * @param string $page_name Location of "toggle" url.
    * @param string $kind Can be any of the {@link Subscribe_constants}.
    * @access private
    */
-  function _echo_html_subscribed_toggle (&$obj, $page_name, $kind)
+  function _echo_html_subscribed_toggle ($obj, $page_name, $kind)
   {
     if ($this->_options->show_interactive)
     {
@@ -140,12 +140,12 @@ class AUDITABLE_RENDERER extends OBJECT_RENDERER
           {
             if (in_array (Subscribe_user, $kinds))
             {
-              $creator =& $obj->creator ();
+              $creator = $obj->creator ();
               $text = 'You are subscribed to this ' . $obj_title . ' through the user, ' . $creator->title_as_link () . '.';
             }
             else
             {
-              $folder =& $obj->parent_folder ();
+              $folder = $obj->parent_folder ();
               $folder_type_info = $folder->type_info ();
               $folder_title = strtolower ($folder_type_info->singular_title);
               $text = 'You are subscribed to this ' . $obj_title . ' through its ' . $folder_title . ', ' . $folder->title_as_link () . '.';
@@ -164,10 +164,10 @@ class AUDITABLE_RENDERER extends OBJECT_RENDERER
 
   /**
    * Outputs the object as plain text.
-  * @param AUDITABLE &$obj
+  * @param AUDITABLE $obj
   * @access private
   */
-  function _display_as_plain_text (&$obj)
+  function _display_as_plain_text ($obj)
   {
     $this->_echo_plain_text_user_information ($obj);
   }
@@ -175,11 +175,11 @@ class AUDITABLE_RENDERER extends OBJECT_RENDERER
   /**
    * Format created/updated information into a box.
    * Uses {@link _echo_plain_text_users()} to format its contents.
-   * @param AUDITABLE &$obj
+   * @param AUDITABLE $obj
    * @param boolean $top_aligned Shown before the description?
    * @access private
    */
-  function _echo_plain_text_user_information (&$obj, $top_aligned = TRUE)
+  function _echo_plain_text_user_information ($obj, $top_aligned = TRUE)
   {
     if ($this->_options->show_users)
     {
@@ -200,10 +200,10 @@ class AUDITABLE_RENDERER extends OBJECT_RENDERER
   /**
    * Show created/updated information in plain text.
    * Uses {@link _echo_plain_text_user()} to format users.
-   * @param AUDITABLE &$obj
+   * @param AUDITABLE $obj
    * @access private
    */
-  function _echo_plain_text_users (&$obj)
+  function _echo_plain_text_users ($obj)
   {
     $this->_echo_plain_text_user ('Created', $obj->creator (), $obj->time_created);
     if ($obj->modified ())
@@ -216,11 +216,11 @@ class AUDITABLE_RENDERER extends OBJECT_RENDERER
    * Display a user and date in plain text.
    * Formatted as: 'caption' by 'user' on 'time'
    * @param string $caption
-   * @param USER &$user
-   * @param DATE_TIME &$time
+   * @param USER $user
+   * @param DATE_TIME $time
    * @access private
    */
-  function _echo_plain_text_user ($caption, &$user, &$time)
+  function _echo_plain_text_user ($caption, $user, $time)
   {
     echo $this->_line ($caption . ' by ' . $user->title_as_plain_text () . ' on ' . $this->_time ($time));
   }

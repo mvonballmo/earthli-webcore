@@ -74,7 +74,7 @@ class OBJECT_CACHE extends RAISABLE
     * The internal cache will is adjusted to work efficiently with this value.
     * @var integer
     */
-  var $window_size;
+  public $window_size;
   /**
    * Total number of objects represented by this cache.
    * The cache is simply a window of objects over a (possibly) larger list. This is the number
@@ -84,60 +84,60 @@ class OBJECT_CACHE extends RAISABLE
    * Use this along with {@link $position_of_selected_id} to show a position indicator (e.g. item 23/25).
    * @var integer
    */
-  var $num_objects_in_list;
+  public $num_objects_in_list;
   /**
    * Index of current item in total number of objects.
    * Use this along with {@link $num_objects_in_list} to show a position indicator (e.g. item 23/25).
    * @var integer
    */
-  var $position_of_selected_id;
+  public $position_of_selected_id;
   /**
    * Context list for the current object.
    * Set the current object with {@link set_selected_id()}.
    * @var array[object]
    */
-  var $objects_in_window;
+  public $objects_in_window;
   /**
    * First object in the list.
    * Is always set; use {@link is_first()} to determine whether it is the same as the selected object.
    * @var object
    */
-  var $first_object;
+  public $first_object;
   /**
    * Object one 'window_size' before the selected one.
    * May be empty; use {@link is_on_first_page()} to determine whether it is set.
    * @var object
    */
-  var $previous_page_object;
+  public $previous_page_object;
   /**
    * Object one position before the selected one.
    * May be empty; use {@link is_first()} to determine whether it is set.
    * @var object
    */
-  var $previous_object;
+  public $previous_object;
   /**
    * Object at the selected position.
    * @var object
    */
-  var $selected_object;
+  public $selected_object;
   /**
    * Object one position after the selected one.
    * May be empty; use {@link is_last()} to determine whether it is set.
    * @var object
    */
-  var $next_object;
+  public $next_object;
   /**
    * Object one 'window_size' after the selected one.
    * May be empty; use {@link is_on_last_page()} to determine whether it is set.
    * @var object
    */
-  var $next_page_object;
+  public $next_page_object;
   /**
    * Last object in the entire list (not the window).
    * Is always set; use {@link is_last()} to determine whether it is the same as the {@link $selected_object}.
    * @var object
    */
-  var $last_object;
+  public $last_object;
 
   /**
    * Was the object requested with {@link set_selected_id()} located?

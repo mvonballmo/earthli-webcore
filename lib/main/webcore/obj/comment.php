@@ -54,14 +54,14 @@ class COMMENT extends ATTACHMENT_HOST
    * @var integer
    * @access private
    */
-  var $entry_id;
+  public $entry_id;
   /**
    * The id of the comment above this comment.
    * If this is empty, the comment is a directy annonation of the entry.
    * @var integer
    * @access private
    */
-  var $parent_id;
+  public $parent_id;
   /**
    * This is the nth comment in attached to this entry.
    * Comments are not renumbered when an item is deleted or purged. This can
@@ -69,20 +69,20 @@ class COMMENT extends ATTACHMENT_HOST
    * system as well. That way, censoring will be apparent, to some degree.
    * @var integer
    */
-  var $number;
+  public $number;
   /**
    * Identifies the icon/type of this comment.
    * Kinds can be customized per deployment.
    * @see WEBCORE_SETTINGS
    * @var integer
    */
-  var $kind;
+  public $kind;
 
   /**
    * Comment annotates this entry.
    * @return ENTRY
    */
-  function &entry ()
+  function entry ()
   {
     $this->assert (isset ($this->_entry), '_entry is not cached.', 'entry', 'COMMENT');
     return $this->_entry;
@@ -99,7 +99,7 @@ class COMMENT extends ATTACHMENT_HOST
       return $this->_parent_folder->id;
     }
 
-    $entry =& $this->entry ();
+    $entry = $this->entry ();
     return $entry->parent_folder_id ();
   }
 
@@ -107,7 +107,7 @@ class COMMENT extends ATTACHMENT_HOST
    * A QUERY for retrieving comments directly attached to this one.
    * @return ENTRY_COMMENT_ENTRY
    */
-  function &comment_query ()
+  function comment_query ()
   {
     $this->assert ($this->exists (), 'Comment does not exist yet.', 'comment_query', 'COMMENT');
 
@@ -132,8 +132,8 @@ class COMMENT extends ATTACHMENT_HOST
   {
     if (! isset ($this->_sub_comments))
     {
-      $comment_query =& $this->comment_query ();
-      $this->_sub_comments =& $comment_query->tree ($this->id);
+      $comment_query = $this->comment_query ();
+      $this->_sub_comments = $comment_query->tree ($this->id);
     }
 
     return $this->_sub_comments;
@@ -143,24 +143,24 @@ class COMMENT extends ATTACHMENT_HOST
    * Caches a prepared sub-comment.
    * Generally called when a tree of comments is built to avoid re-querying for
    * data that has already been retrieved.
-   * @param COMMENT &$c
+   * @param COMMENT $c
    * @access private
    */
-  function add_comment (&$c)
+  function add_comment ($c)
   {
-    $this->_sub_comments [] =& $c;
+    $this->_sub_comments [] = $c;
   }
 
   /**
    * Caches a list of sub-comment.
    * Generally called when a tree of comments is built to avoid re-querying for
    * data that has already been retrieved.
-   * @param array[COMMENT] &$subs
+   * @param array[COMMENT] $subs
    * @access private
    */
-  function set_sub_comments (&$subs)
+  function set_sub_comments ($subs)
   {
-    $this->_sub_comments =& $subs;
+    $this->_sub_comments = $subs;
   }
 
   /**
@@ -210,12 +210,12 @@ class COMMENT extends ATTACHMENT_HOST
    * Attach this comment to an entry.
    * Does not store to the database. Sets up both the entry and the folder information
    * for this comment; used during object setup when retrieved from database.
-   * @param ENTRY &$entry
+   * @param ENTRY $entry
    */
-  function set_entry (&$entry)
+  function set_entry ($entry)
   {
     $this->set_parent_folder ($entry->parent_folder ());
-    $this->_entry =& $entry;
+    $this->_entry = $entry;
     $this->entry_id = $entry->id;
   }
 
@@ -245,9 +245,9 @@ class COMMENT extends ATTACHMENT_HOST
   }
 
   /**
-   * @param DATABASE &$db Database from which to load values.
+   * @param DATABASE $db Database from which to load values.
    */
-  function load (&$db)
+  function load ($db)
   {
     parent::load ($db);
     $this->entry_id = $db->f ("entry_id");
@@ -258,9 +258,9 @@ class COMMENT extends ATTACHMENT_HOST
   }
 
   /**
-   * @param SQL_STORAGE &$storage Store values to this object.
+   * @param SQL_STORAGE $storage Store values to this object.
    */
-  function store_to (&$storage)
+  function store_to ($storage)
   {
     parent::store_to ($storage);
     $tname =$this->_table_name ();
@@ -304,7 +304,7 @@ class COMMENT extends ATTACHMENT_HOST
   function _purge ($options)
   {
     /* remove sub-comments */
-    $comments =& $this->sub_comments ();
+    $comments = $this->sub_comments ();
     foreach ($comments as $comment)
       $comment->purge ($options);
 
@@ -333,12 +333,12 @@ class COMMENT extends ATTACHMENT_HOST
   {
     if ($this->exists ())
     {
-      $subs =& $this->sub_comments ();
+      $subs = $this->sub_comments ();
       $c = sizeof ($subs);
       $i = 0;
       while ($i < $c)
       {
-        $com =& $subs [$i];
+        $com = $subs [$i];
         $com->set_state ($this->state, TRUE);
         $i++;
       }
@@ -358,7 +358,7 @@ class COMMENT extends ATTACHMENT_HOST
   function _object_url ($use_links, $separator = null, $formatter = null)
   {
     $Result = parent::_object_url ($use_links, $separator, $formatter);
-    $entry =& $this->entry ();
+    $entry = $this->entry ();
     $entry_url = $entry->_object_url ($use_links, $separator, $formatter);
 
     if (! isset ($separator))
@@ -407,13 +407,13 @@ class COMMENT extends ATTACHMENT_HOST
 
   /**
    * Apply class-specific restrictions to this query.
-   * @param SUBSCRIPTION_QUERY &$query
-   * @param HISTORY_ITEM &$history_item Action that generated this request. May be empty.
+   * @param SUBSCRIPTION_QUERY $query
+   * @param HISTORY_ITEM $history_item Action that generated this request. May be empty.
    * @access private
    */
-  function _prepare_subscription_query (&$query, &$history_item)
+  function _prepare_subscription_query ($query, $history_item)
   {
-    $folder =& $this->parent_folder ();
+    $folder = $this->parent_folder ();
 
     $query->restrict ('watch_comments > 0');
     $query->restrict_kinds (array (Subscribe_folder => $folder->id
@@ -427,17 +427,17 @@ class COMMENT extends ATTACHMENT_HOST
    * @var array[COMMENT]
     * @access private
     */
-  var $_sub_comments;
+  protected $_sub_comments;
   /**
    * @var ENTRY
     * @access private
     */
-  var $_entry;
+  protected $_entry;
   /**
    * @var FOLDER
     * @access private
     */
-  var $_folder;
+  protected $_folder;
 }
  
 ?>

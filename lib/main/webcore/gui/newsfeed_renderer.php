@@ -64,62 +64,62 @@ class NEWSFEED_RENDERER extends WEBCORE_OBJECT
   /**
    * @var PAGE_TITLE
    */
-  var $title;
+  public $title;
   /**
    * @var string
    */
-  var $base_url;
+  public $base_url;
   /**
    * @var string
    */
-  var $description = '';
+  public $description = '';
   /**
    * @var string
    */
-  var $language = 'en-us';
+  public $language = 'en-us';
   /**
    * @var string
    */
-  var $style_sheet = '{styles}newsfeed.css';
+  public $style_sheet = '{styles}newsfeed.css';
   /**
    * Image to display with the RSS feed.
    * Initialized to the {@link PAGE_TEMPLATE_OPTIONS::$icon} in the constructor.
    * @var string
    */
-  var $icon_file;
+  public $icon_file;
   /**
    * Copyright notice to display with the RSS feed.
    * Initialized to the {@link PAGE_TEMPLATE_OPTIONS::$copyright} in the
    * constructor.
    * @var string
    */
-  var $copyright;
+  public $copyright;
   /**
    * The name of the generator for the RSS.
    * Initialized to the {@link CONTEXT::title()} in the constructor.
    * @var string
    */
-  var $generator;
+  public $generator;
   /**
    * Content is rendered as HTML if <code>True</code>.
    * @var boolean
    */
-  var $html = FALSE;
+  public $html = FALSE;
   /**
    * The content=type to use for the HTTP response.
    * @var string
    */
-  var $content_type = 'application/xml';
+  public $content_type = 'application/xml';
   /**
    * The character set to use for the HTTP response.
    * @var string
    */
-  var $character_set = 'iso-8859-1';
+  public $character_set = 'iso-8859-1';
 
   /**
-   * @param CONTEXT &$context
+   * @param CONTEXT $context
    */
-  function NEWSFEED_RENDERER (&$context)
+  function NEWSFEED_RENDERER ($context)
   {
     WEBCORE_OBJECT::WEBCORE_OBJECT ($context);
 
@@ -139,9 +139,9 @@ class NEWSFEED_RENDERER extends WEBCORE_OBJECT
    * Read in the description from this object.
    * Descendents can decide which description (HTML or plain text) to use based
    * on the {@link $html} flag or other properties.
-   * @param CONTENT_OBJECT &$obj
+   * @param CONTENT_OBJECT $obj
    */
-  function set_description_from (&$obj)
+  function set_description_from ($obj)
   {
     if ($this->html)
     {
@@ -160,14 +160,14 @@ class NEWSFEED_RENDERER extends WEBCORE_OBJECT
    * this behavior. Configures {@link NEWSFEEDER_RENDERER_OPTIONS} and passes
    * them with each object from the query result to a {@link
    * NEWSFEED_OBJECT_RENDERER}.
-   * @param QUERY &$query
+   * @param QUERY $query
    */
-  function display (&$query)
+  function display ($query)
   {
     $this->_prepare_globals ();
 
     $this->_prepare_query ($query);
-    $objs =& $query->objects ();
+    $objs = $query->objects ();
 
     $time_modified = $this->context->make_date_time ();
     if (! empty ($objs))
@@ -277,10 +277,10 @@ class NEWSFEED_RENDERER extends WEBCORE_OBJECT
   /**
    * Adjust the query for RSS display.
    * Called from {@link display()}; calls {@link _prepare_sort()}.
-   * @param QUERY &$query
+   * @param QUERY $query
    * @access private
    */
-  function _prepare_query (&$query)
+  function _prepare_query ($query)
   {
     $query->set_filter (Visible);
     $this->_prepare_sort ($query);
@@ -292,10 +292,10 @@ class NEWSFEED_RENDERER extends WEBCORE_OBJECT
   /**
    * Apply the desired sorting for RSS.
    * Called from {@link prepare_query()}.
-   * @param QUERY &$query
+   * @param QUERY $query
    * @access private
    */
-  function _prepare_sort (&$query)
+  function _prepare_sort ($query)
   {
     $query->set_order ('entry.time_created DESC');
   }
@@ -310,12 +310,12 @@ class NEWSFEED_RENDERER extends WEBCORE_OBJECT
     /* Make all URLs absolute. */
     $this->context->set_root_behavior (Force_root_on);
 
-    $opts =& $this->context->display_options;
+    $opts = $this->context->display_options;
     $opts->overridden_max_title_size = 150;
     $opts->use_DHTML = FALSE;
     $opts->show_local_times = FALSE;
 
-    $opts =& $this->page->template_options;
+    $opts = $this->page->template_options;
 
     /* No Javascript in newsfeeds and no browser check. */
     $opts->include_scripts = FALSE;
@@ -335,7 +335,7 @@ class NEWSFEED_RENDERER extends WEBCORE_OBJECT
     $opts->header_visible = FALSE;
 
     include_once ('webcore/util/plain_text_munger.php');
-    $munger =& $this->context->html_text_formatter ();
+    $munger = $this->context->html_text_formatter ();
     $munger->register_replacer ('fn', new NEWSFEED_FOOTNOTE_REFERENCE_REPLACER ($this), FALSE);
     $munger->register_replacer ('ft', new NEWSFEED_FOOTNOTE_TEXT_REPLACER ($this));
     $munger->register_replacer ('media', new NEWSFEED_MEDIA_REPLACER ($this), FALSE);
@@ -358,7 +358,7 @@ class NEWSFEED_RENDERER extends WEBCORE_OBJECT
    * @var string
    * @access private
    */
-  var $_handler_type;
+  protected $_handler_type;
 }
 
 /**
@@ -372,11 +372,11 @@ class NEWSFEED_OBJECT_RENDERER extends HANDLER_RENDERER
 {
   /**
    * Return the appropriate renderer for the given object and options.
-   * @param RENDERABLE &$obj
+   * @param RENDERABLE $obj
    * @param OBJECT_RENDERER_OPTIONS $options
    * @access private
    */
-  function _content_for (&$obj, $options = null)
+  function _content_for ($obj, $options = null)
   {
     if (isset ($options))
     {
@@ -388,7 +388,7 @@ class NEWSFEED_OBJECT_RENDERER extends HANDLER_RENDERER
     }
 
     $renderer = $obj->handler_for ($handler_type);
-    $obj_options =& $renderer->options ();
+    $obj_options = $renderer->options ();
     $obj_options->show_interactive = FALSE;
     $obj_options->preferred_text_length = $options->preferred_text_length;
     $Result = $renderer->display_to_string ($obj);
@@ -457,12 +457,12 @@ class NEWSFEEDER_RENDERER_OPTIONS extends OBJECT_RENDERER_OPTIONS
    * render. Can be any of the {@link Handler_constants}.
    * @var string
    */
-  var $handler_type;
+  public $handler_type;
   /**
    * Language code to use for output in this feed.
    * @var string
    */
-  var $language = 'en-us';
+  public $language = 'en-us';
   /**
    * Page renderer to use for an HTML envelope.
    * If HTML output is needed, renderers should call {@link
@@ -470,7 +470,7 @@ class NEWSFEEDER_RENDERER_OPTIONS extends OBJECT_RENDERER_OPTIONS
    * finish_display_as_text()} before and after the entry's content.
    * @var PAGE_RENDERER
    */
-  var $page_renderer;
+  public $page_renderer;
 }
 
 /**
@@ -538,12 +538,12 @@ class NEWSFEED_FOOTNOTE_TEXT_REPLACER extends HTML_FOOTNOTE_TEXT_REPLACER
 {
   /**
    * Format the text for the given footnote number.
-   * @param MUNGER_TOKEN &$token
-   * @param MUNGER_FOOTNOTE_INFO &$info
+   * @param MUNGER_TOKEN $token
+   * @param MUNGER_FOOTNOTE_INFO $info
    * @return string
    * @access private
    */
-  function _format_text (&$token, &$info)
+  function _format_text ($token, $info)
   {
     if (! $token->is_start_tag ())
     {
@@ -567,12 +567,12 @@ class NEWSFEED_FOOTNOTE_REFERENCE_REPLACER extends MUNGER_FOOTNOTE_REFERENCE_REP
 {
   /**
    * Format the reference to the given footnote number.
-   * @param MUNGER_TOKEN &$token
-   * @param MUNGER_FOOTNOTE_INFO &$info
+   * @param MUNGER_TOKEN $token
+   * @param MUNGER_FOOTNOTE_INFO $info
    * @return string
    * @access private
    */
-  function _format_reference (&$token, &$info)
+  function _format_reference ($token, $info)
   {
     return " [$info->number]";
   }

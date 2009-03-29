@@ -51,9 +51,9 @@ require_once ('webcore/cmd/commands.php');
 class ENTRY_COMMANDS extends COMMANDS
 {
   /**
-   * @param ENTRY &$entry Configure commands for this object.
+   * @param ENTRY $entry Configure commands for this object.
    */
-  function ENTRY_COMMANDS (&$entry)
+  function ENTRY_COMMANDS ($entry)
   {
     COMMANDS::COMMANDS ($entry->app);
 
@@ -67,10 +67,10 @@ class ENTRY_COMMANDS extends COMMANDS
 
   /**
    * Add commands that edit the entry.
-   * @param ENTRY &$entry
+   * @param ENTRY $entry
    * @access private
    */
-  function _add_editors (&$entry)
+  function _add_editors ($entry)
   {
     $cmd = $this->make_command ();
     $cmd->id = 'edit';
@@ -113,10 +113,10 @@ class ENTRY_COMMANDS extends COMMANDS
 
   /**
    * Add commands that provide views on the entry.
-   * @param ENTRY &$entry
+   * @param ENTRY $entry
    * @access private
    */
-  function _add_viewers (&$entry)
+  function _add_viewers ($entry)
   {
     $folder_id = $entry->parent_folder_id ();
 
@@ -150,10 +150,10 @@ class ENTRY_COMMANDS extends COMMANDS
 
   /**
    * Add commands that attaches objects to the entry.
-   * @param ENTRY &$entry
+   * @param ENTRY $entry
    * @access private
    */
-  function _add_creators (&$entry)
+  function _add_creators ($entry)
   {
     $cmd = $this->make_command ();
     $cmd->id = 'comment';
@@ -185,7 +185,7 @@ class ENTRY_COMMANDS extends COMMANDS
     $cmd->importance = Command_importance_high - 2 * Command_importance_increment;
     $this->append ($cmd);
 
-    $folder =& $entry->parent_folder ();
+    $folder = $entry->parent_folder ();
 
     if (! $folder->is_organizational ())
     {
@@ -213,10 +213,10 @@ class DRAFTABLE_ENTRY_COMMANDS extends ENTRY_COMMANDS
 {
   /**
    * Add commands that edit the entry.
-   * @param ENTRY &$entry
+   * @param ENTRY $entry
    * @access private
    */
-  function _add_editors (&$entry)
+  function _add_editors ($entry)
   {
     $last_page = urlencode ($this->env->url (Url_part_all));
     $cmd = $this->make_command ();
@@ -246,7 +246,7 @@ class DRAFTABLE_ENTRY_COMMANDS extends ENTRY_COMMANDS
     $cmd->title = 'Queue';
     $cmd->link = "set_queued.php?id=$entry->id&last_page=$last_page";
     $cmd->icon = '{icons}buttons/queue';
-    $cmd->executable = ! $entry->queued () &&$this->login->is_allowed (Privilege_set_entry, Privilege_modify, $entry) && ($entry->unpublished ());
+    $cmd->executable = ! $entry->queued () &$this->login->is_allowed (Privilege_set_entry, Privilege_modify, $entry) && ($entry->unpublished ());
     $cmd->importance = Command_importance_default;
     $this->append ($cmd);
 

@@ -51,33 +51,33 @@ class USER_GRID extends CONTENT_OBJECT_GRID
   /**
    * @var string
    */
-  var $box_style = 'object-in-list';
+  public $box_style = 'object-in-list';
   /**
    * @var string
    */
-  var $object_name = 'User';
+  public $object_name = 'User';
   /**
    * @var boolean
    */
-  var $show_separator = FALSE;
+  public $show_separator = FALSE;
   /**
    * @var string
    */
-  var $width = '60%';
+  public $width = '60%';
   /**
    * @var boolean
    */
-  var $centered = TRUE;
+  public $centered = TRUE;
   /**
    * @var boolean
    */
-  var $even_columns = FALSE;
+  public $even_columns = FALSE;
 
   /**
-   * @param USER &$obj
+   * @param USER $obj
    * @access private
    */
-  function _draw_box (&$obj)
+  function _draw_box ($obj)
   {
 ?>
   <div style="float: left; margin-right: .5em">
@@ -128,10 +128,10 @@ class USER_GRID extends CONTENT_OBJECT_GRID
 class SELECT_USER_GRID extends USER_GRID
 {
   /**
-   * @param USER &$obj
+   * @param USER $obj
    * @access private
    */
-  function _draw_box (&$obj)
+  function _draw_box ($obj)
   {
     $c = $obj->time_created;
     $f = $c->formatter ();

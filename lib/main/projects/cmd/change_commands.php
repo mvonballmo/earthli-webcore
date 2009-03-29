@@ -51,25 +51,25 @@ require_once ('webcore/cmd/entry_commands.php');
 class CHANGE_COMMANDS extends ENTRY_COMMANDS
 {
   /**
-   * @param CHANGE &$obj Configure commands for this object.
+   * @param CHANGE $obj Configure commands for this object.
    */
-  function CHANGE_COMMANDS (&$entry)
+  function CHANGE_COMMANDS ($entry)
   {
     ENTRY_COMMANDS::ENTRY_COMMANDS ($entry);
 
-    $cmd =& $this->command_at ('edit');
+    $cmd = $this->command_at ('edit');
     $cmd->link = "edit_change.php?id=$entry->id";
     
-    $cmd =& $this->command_at ('delete');
+    $cmd = $this->command_at ('delete');
     $cmd->link = "delete_change.php?id=$entry->id";
 
-    $cmd =& $this->command_at ('purge');
+    $cmd = $this->command_at ('purge');
     $cmd->link = "purge_change.php?id=$entry->id";
 
-    $cmd =& $this->command_at ('clone');
+    $cmd = $this->command_at ('clone');
     $cmd->link = "clone_change.php?id=$entry->id";
 
-    $cmd =& $this->command_at ('send');
+    $cmd = $this->command_at ('send');
     $cmd->link = "send_change.php?id=$entry->id";
   }
 }

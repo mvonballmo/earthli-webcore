@@ -130,7 +130,7 @@ class OBJECT_IN_FOLDER_QUERY extends QUERY
    */
   function _visible_objects_available ()
   {
-    $p =& $this->login->permissions ();
+    $p = $this->login->permissions ();
     return $p->value_for ($this->_privilege_set, Privilege_view) != Privilege_always_denied;
   }
 
@@ -141,7 +141,7 @@ class OBJECT_IN_FOLDER_QUERY extends QUERY
    */
   function _invisible_objects_available ()
   {
-    $p =& $this->login->permissions ();
+    $p = $this->login->permissions ();
     return $p->value_for ($this->_privilege_set, Privilege_view_hidden) != Privilege_always_denied;
   }
 
@@ -162,14 +162,14 @@ class OBJECT_IN_FOLDER_QUERY extends QUERY
    * @var string
    * @access private
    */
-  var $_privilege_set = '';
+  protected $_privilege_set = '';
   /**
    * Filter objects by this state.
    * This is taken as a suggestion by {@link _update()} and can be strengthened to exclude more objects.
    * @var integer
    * @access private
    */
-  var $_filter = All;
+  protected $_filter = All;
 }
 
 /**
@@ -184,12 +184,12 @@ class OBJECT_IN_SINGLE_FOLDER_QUERY extends OBJECT_IN_FOLDER_QUERY
 {
   /**
    * Builds a query for an object in a folder.
-   * @param FOLDER &$folder
+   * @param FOLDER $folder
    */
-  function OBJECT_IN_SINGLE_FOLDER_QUERY (&$folder)
+  function OBJECT_IN_SINGLE_FOLDER_QUERY ($folder)
   {
     OBJECT_IN_FOLDER_QUERY::OBJECT_IN_FOLDER_QUERY ($folder->app);
-    $this->_folder =& $folder;
+    $this->_folder = $folder;
   }
 
   /**
@@ -215,10 +215,10 @@ class OBJECT_IN_SINGLE_FOLDER_QUERY extends OBJECT_IN_FOLDER_QUERY
   /**
    * Perform any setup needed on each returned object.
    * Sets the parent folder for the object.
-   * @param OBJECT_IN_FOLDER &$obj
+   * @param OBJECT_IN_FOLDER $obj
    * @access private
    */
-  function _prepare_object (&$obj)
+  function _prepare_object ($obj)
   {
     parent::_prepare_object ($obj);
     $obj->set_parent_folder ($this->_folder);
@@ -228,7 +228,7 @@ class OBJECT_IN_SINGLE_FOLDER_QUERY extends OBJECT_IN_FOLDER_QUERY
    * @var FOLDER
    * @access private
    */
-  var $_folder;
+  protected $_folder;
 }
 
 ?>

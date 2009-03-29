@@ -51,23 +51,23 @@ class HISTORY_ITEM_GRID extends STANDARD_GRID
   /**
    * @var string
    */
-  var $box_style = 'object-in-list';
+  public $box_style = 'object-in-list';
   /**
    * @var string
    */
-  var $object_name = 'history item';
+  public $object_name = 'history item';
   /**
    * @var integer
    */
-  var $padding = 0;
-  var $show_separator = FALSE;
+  public $padding = 0;
+  public $show_separator = FALSE;
 
   /**
    * Render the grid itself.
-    * @param array[object] &$objs
+    * @param array[object] $objs
     * @access private
     */
-  function _draw (&$objs)
+  function _draw ($objs)
   {
     foreach ($objs as $obj)
     {
@@ -83,10 +83,10 @@ class HISTORY_ITEM_GRID extends STANDARD_GRID
   }
 
   /**
-   * @param ARTICLE &$obj
+   * @param ARTICLE $obj
     * @access private
     */
-  function _start_row (&$obj)
+  function _start_row ($obj)
   {
     $curr_date = $obj->time_created;
     if (! isset ($this->last_date) || (! $curr_date->equals ($this->last_date, Date_time_date_part)))
@@ -121,14 +121,14 @@ class HISTORY_ITEM_GRID extends STANDARD_GRID
   }
 
   /**
-   * @param HISTORY_ITEM &$obj
+   * @param HISTORY_ITEM $obj
     * @access private
     */
-  function _draw_box (&$obj)
+  function _draw_box ($obj)
   {
     $item_number = $this->_num_objects - ($this->_num_rows * $this->_num_columns * ($this->paginator->page_number - 1)) - $this->_item_number;
     $this->_item_number++;
-    $creator =& $obj->creator ();
+    $creator = $obj->creator ();
     
     $layer = $this->context->make_layer ('obj_' . $obj->id);
     $layer->visible = FALSE;
@@ -200,11 +200,11 @@ class HISTORY_ITEM_GRID extends STANDARD_GRID
    * @var integer
    * @access private
    */
-  var $_item_number = 0;
+  protected $_item_number = 0;
   /**
    * @var DATE_TIME
    * @access private
    */
-  var $_last_time;
+  protected $_last_time;
 }
 ?>

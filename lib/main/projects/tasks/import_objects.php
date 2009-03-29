@@ -132,7 +132,7 @@ http://www.earthli.com/software/webcore/projects
         raise_xml ("Creator title cannot be empty.");
       }
       $user_query = $App->user_query ();
-      $user =& $user_query->object_at_name ($user_name);
+      $user = $user_query->object_at_name ($user_name);
       if (! $user)
       {
         raise_xml ("User [$user_name] does not exist.");
@@ -144,7 +144,7 @@ http://www.earthli.com/software/webcore/projects
     case 'FOLDER':
       raise_if_not_in_object ($name);
       $id = $attrs ['ID'];
-      $folder =& $folders [$id];
+      $folder = $folders [$id];
       if (! $folder)
       {
         raise_xml ("Folder [$id] does not exist.");
@@ -239,13 +239,13 @@ http://www.earthli.com/software/webcore/projects
   }
   else
   {
-    $indexed_kinds =& $App->entry_kinds ();
+    $indexed_kinds = $App->entry_kinds ();
     foreach ($indexed_kinds as $kind)
       $kinds [strtolower ($kind->title)] = $kind;
 
     $App->impersonate ($App->mail_options->publisher_user_name, $App->mail_options->publisher_user_password);
     $folder_query = $App->login->folder_query ();
-    $folders =& $folder_query->indexed_objects ();
+    $folders = $folder_query->indexed_objects ();
 
     $App->display_options->show_local_times = FALSE;
 
@@ -281,9 +281,9 @@ http://www.earthli.com/software/webcore/projects
       $i = 0;
       while ($i < $c)
       {
-        $obj =& $objs [$i];
-        $folder =& $obj->parent_folder ();
-        $creator =& $obj->creator ();
+        $obj = $objs [$i];
+        $folder = $obj->parent_folder ();
+        $creator = $obj->creator ();
         if ($commit)
         {
           // Now, get the main trunk,

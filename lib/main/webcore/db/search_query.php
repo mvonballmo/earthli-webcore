@@ -52,7 +52,7 @@ class SEARCH_QUERY extends QUERY
    * SQL alias for the "main" table.
    * @var string
    */
-  var $alias = 'search';
+  public $alias = 'search';
 
   /**
    * Apply default restrictions and tables.

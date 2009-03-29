@@ -56,26 +56,26 @@ class DATABASE extends DB_Sql
   /**
    * @var string
    */
-  var $Host = "localhost";
+  public $Host = "localhost";
   /**
    * @var string
    */
-  var $Database = '';
+  public $Database = '';
   /**
    * @var string
    */
-  var $User = '';
+  public $User = '';
   /**
    * @var string
    */
-  var $Password = '';
+  public $Password = '';
 
   /**
-   * @param ENVIRONMENT &$env Global environment.
+   * @param ENVIRONMENT $env Global environment.
    */
-  function DATABASE (&$env)
+  function DATABASE ($env)
   {
-    $this->env =& $env;
+    $this->env = $env;
     $this->Halt_On_Error = "no";
     $this->Auto_Free = 1;
   }
@@ -211,7 +211,7 @@ class DATABASE extends DB_Sql
     $Result->User = $this->User;
     $Result->Password = $this->Password;
     $Result->Database = $this->Database;
-    $Result->_query_texts =& $this->_query_texts;
+    $Result->_query_texts = $this->_query_texts;
     $Result->Link_ID = 0;
     $Result->Query_ID = 0;
 
@@ -223,24 +223,24 @@ class DATABASE extends DB_Sql
    * @var array[string]
    * @access private
    */
-  var $_query_texts;
+  protected $_query_texts;
   /**
    * @var string
    * @access private
    */
-  var $classname = "DATABASE";
+  public $classname = "DATABASE";
   /**
    * Shortcut to global environment.
     * @var ENVIRONMENT
     * @access private
     */
-  var $env = null;
+  public $env = null;
   /**
    * Shortcut to global profiler.
     * @var PROFILER
     * @access private
     */
-  var $profiler = null;
+  public $profiler = null;
 }
 
 ?>

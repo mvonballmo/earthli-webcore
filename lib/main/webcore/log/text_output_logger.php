@@ -54,28 +54,28 @@ class TEXT_OUTPUT_LOGGER extends LOGGER
    * Show the day with each log item?
    * @var boolean
    */
-  var $show_date = TRUE;
+  public $show_date = TRUE;
   /**
    * Show the time with each log item?
    * @var boolean
    */
-  var $show_time = TRUE;
+  public $show_time = TRUE;
   /**
    * Show the message type with each log item?
    * @var boolean
    */
-  var $show_type = TRUE;
+  public $show_type = TRUE;
   /**
    * Show the originating channel?
    * It can be useful to shut this off if a logger only has one channel open.
    * @var boolean
    */
-  var $show_channel = TRUE;
+  public $show_channel = TRUE;
   /**
    * Empty messages are replaced with this string (makes it easier to see empty messages).
     * @var string
     */
-  var $empty_message = '---';
+  public $empty_message = '---';
 
   function set_is_html ($value = TRUE)
   {
@@ -383,31 +383,31 @@ class TEXT_OUTPUT_LOGGER extends LOGGER
    * @var integer
    * @access private
    */
-  var $_last_header_length;
+  protected $_last_header_length;
   /**
    * Symbol to demarcate lines.
    * @var string
    * @access private
    */
-  var $_new_line = "\n";
+  protected $_new_line = "\n";
   /**
    * Symbol to make a single space in the text output format.
    * @var string
    * @access private
    */
-  var $_space = ' ';
+  protected $_space = ' ';
   /**
    * Set by {@link set_is_html()}.
    * @var boolean
    * @access private
    */
-  var $_is_html = FALSE;
+  protected $_is_html = FALSE;
   /**
    * Number of open blocks in the log.
    * @var integer
    * @access private
    */
-  var $_block_level;
+  protected $_block_level;
 }
 
 ?>

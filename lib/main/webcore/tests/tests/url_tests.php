@@ -295,7 +295,7 @@ class URL_TEST_TASK extends TEST_TASK
           $this->_check_equal ('arg1=1&arg2=hello world&arg3=<span class="something">', $url->query_string ());
           $this->_check_equal ('file', $url->name_without_extension ());
           $this->_check_equal ('file.png?arg1=1&arg2=hello world&arg3=<span class="something">', $url->name_with_query_string ());
-          $this->_check_equal ('http://earthli.com/pages/images/new/more/file.png?arg1=1&arg2=hello world&arg3=&lt;span class=&quot;something&quot;&gt;', $url->as_text (TRUE));
+          $this->_check_equal ('http://earthli.com/pages/images/new/more/file.png?arg1=1&arg2=hello world&arg3=lt;span class=quot;something&quot;&gt;', $url->as_text (TRUE));
 
     $this->_log ('cleared the extension', Msg_type_info);
     $url->replace_extension ('');
@@ -309,7 +309,7 @@ class URL_TEST_TASK extends TEST_TASK
           $this->_check_equal ('arg1=1&arg2=hello world&arg3=<span class="something">', $url->query_string ());
           $this->_check_equal ('file', $url->name_without_extension ());
           $this->_check_equal ('file?arg1=1&arg2=hello world&arg3=<span class="something">', $url->name_with_query_string ());
-          $this->_check_equal ('http://earthli.com/pages/images/new/more/file?arg1=1&arg2=hello world&arg3=&lt;span class=&quot;something&quot;&gt;', $url->as_text (TRUE));
+          $this->_check_equal ('http://earthli.com/pages/images/new/more/file?arg1=1&arg2=hello world&arg3=lt;span class=quot;something&quot;&gt;', $url->as_text (TRUE));
 
     $this->_log ('stripped the domain', Msg_type_info);
     $url->strip_domain ();
@@ -323,7 +323,7 @@ class URL_TEST_TASK extends TEST_TASK
           $this->_check_equal ('arg1=1&arg2=hello world&arg3=<span class="something">', $url->query_string ());
           $this->_check_equal ('file', $url->name_without_extension ());
           $this->_check_equal ('file?arg1=1&arg2=hello world&arg3=<span class="something">', $url->name_with_query_string ());
-          $this->_check_equal ('/pages/images/new/more/file?arg1=1&arg2=hello world&arg3=&lt;span class=&quot;something&quot;&gt;', $url->as_text (TRUE));
+          $this->_check_equal ('/pages/images/new/more/file?arg1=1&arg2=hello world&arg3=lt;span class=quot;something&quot;&gt;', $url->as_text (TRUE));
 
     $this->_log ('set to root', Msg_type_info);
     $url->set_text ('/');
@@ -351,7 +351,7 @@ class URL_TEST_TASK extends TEST_TASK
           $this->_check_equal ('arg1=1&arg2=hello world&arg3=<span class="something">', $url->query_string ());
           $this->_check_equal ('', $url->name_without_extension ());
           $this->_check_equal ('arg1=1&arg2=hello world&arg3=<span class="something">', $url->name_with_query_string ());
-          $this->_check_equal ('/?arg1=1&arg2=hello world&arg3=&lt;span class=&quot;something&quot;&gt;', $url->as_text (TRUE));
+          $this->_check_equal ('/?arg1=1&arg2=hello world&arg3=lt;span class=quot;something&quot;&gt;', $url->as_text (TRUE));
 
     $this->_log ('set to protocol and domain only', Msg_type_info);
     $url->set_text ('http://earthli.org');

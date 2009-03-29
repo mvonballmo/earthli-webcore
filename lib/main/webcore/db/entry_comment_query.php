@@ -52,15 +52,15 @@ class ENTRY_COMMENT_QUERY extends COMMENT_QUERY
    * SQL alias for the "main" table.
    * @var string
    */
-  var $alias = 'com';
+  public $alias = 'com';
 
   /**
-   * @param ENTRY &$entry Retrieve comments from this entry.
+   * @param ENTRY $entry Retrieve comments from this entry.
    */
-  function ENTRY_COMMENT_QUERY (&$entry)
+  function ENTRY_COMMENT_QUERY ($entry)
   {
     COMMENT_QUERY::COMMENT_QUERY ($entry->parent_folder ());
-    $this->_entry =& $entry;
+    $this->_entry = $entry;
   }
 
   /**
@@ -79,7 +79,7 @@ class ENTRY_COMMENT_QUERY extends COMMENT_QUERY
    * @param integer $id
    * @return ENTRY
    */
-  function &object_for_attachment_at_id ($id)
+  function object_for_attachment_at_id ($id)
   {
     $id = $this->validate_as_integer ($id);
     if ($id)
@@ -90,7 +90,7 @@ class ENTRY_COMMENT_QUERY extends COMMENT_QUERY
       $objs = $this->objects ();
       if (sizeof ($objs))
       {
-        $Result =& $objs [0];
+        $Result = $objs [0];
       }
       $this->_end_system_call ();
       $this->_tables = $old_tables;
@@ -122,7 +122,7 @@ class ENTRY_COMMENT_QUERY extends COMMENT_QUERY
    * @var ENTRY
    * @access private
    */
-  var $_entry;
+  protected $_entry;
 }
 
 ?>

@@ -51,13 +51,13 @@ require_once ('webcore/cmd/folder_commands.php');
 class ALBUM_COMMANDS extends FOLDER_COMMANDS
 {
   /**
-   * @param ALBUM &$folder Configure commands for this object.
+   * @param ALBUM $folder Configure commands for this object.
    */
-  function ALBUM_COMMANDS (&$folder)
+  function ALBUM_COMMANDS ($folder)
   {
     FOLDER_COMMANDS::FOLDER_COMMANDS ($folder);
 
-    $cmd =& $this->command_at ('new');
+    $cmd = $this->command_at ('new');
     $cmd->icon = '{app_icons}buttons/new_album';
     $cmd->importance = Command_importance_high + Command_importance_increment;
     $cmd->title = 'New album';
@@ -65,11 +65,11 @@ class ALBUM_COMMANDS extends FOLDER_COMMANDS
 
   /**
    * Add commands that provide views on the folder.
-   * @param FOLDER &$folder Show commands for this folder.
-   * @param USER &$creator Folder belongs to this user (also available as $folder->creator ()).
+   * @param FOLDER $folder Show commands for this folder.
+   * @param USER $creator Folder belongs to this user (also available as $folder->creator ()).
    * @access private
    */
-  function _add_viewers (&$folder)
+  function _add_viewers ($folder)
   {
     parent::_add_viewers ($folder);
 
@@ -107,11 +107,11 @@ class ALBUM_COMMANDS extends FOLDER_COMMANDS
 
   /**
    * Add buttons that create items in the folder.
-   * @param FOLDER &$folder
-   * @param USER &$creator Folder belongs to this user (also available as $folder->creator ()).
+   * @param FOLDER $folder
+   * @param USER $creator Folder belongs to this user (also available as $folder->creator ()).
    * @access private
    */
-  function _add_creators (&$folder)
+  function _add_creators ($folder)
   {
     $cmd = $this->make_command ();
     $cmd->id = 'new_picture';

@@ -52,16 +52,16 @@ class JOB_LIST extends SELECT_LIST
   /**
    * @var string display jobs only.
    */
-  var $object_name = 'job';
+  public $object_name = 'job';
   /**
    * @var string Unique name for the selector controls for this list.
    */
-  var $control_name = 'job_ids';
+  public $control_name = 'job_ids';
 
   /**
-   * @param PROJECT_APPLICATION &$app Main application.
+   * @param PROJECT_APPLICATION $app Main application.
    */
-  function JOB_LIST (&$app)
+  function JOB_LIST ($app)
   {
     SELECT_LIST::SELECT_LIST ($app);
     $this->append_column ('Name');
@@ -71,11 +71,11 @@ class JOB_LIST extends SELECT_LIST
   }
 
   /**
-   * @param JOB &$obj Draw fields from this job.
+   * @param JOB $obj Draw fields from this job.
     * @param integer $index Draw the column at this index.
     * @access private
     */
-  function _draw_column_contents (&$obj, $index)
+  function _draw_column_contents ($obj, $index)
   {
     switch ($index)
     {
@@ -88,16 +88,16 @@ class JOB_LIST extends SELECT_LIST
       echo $obj->title_as_link ($t);
       break;
     case 2:
-      $branch_info =& $obj->main_branch_info ();
+      $branch_info = $obj->main_branch_info ();
       $interval = $branch_info->age ();
       echo $interval->format ();
       break;
     case 3:
-      $branch_info =& $obj->main_branch_info ();
+      $branch_info = $obj->main_branch_info ();
       echo $branch_info->priority_as_text ();
       break;
     case 4:
-      $branch_info =& $obj->main_branch_info ();
+      $branch_info = $obj->main_branch_info ();
       echo $branch_info->status_as_text ();
       break;
     }

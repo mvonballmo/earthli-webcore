@@ -212,7 +212,7 @@ class OBJECT_FACTORY extends RAISABLE
    * @see OBJECT_FACTORY_ITEM
    * @access private
    */
-  var $_registered_classes;
+  protected $_registered_classes;
 }
 
 /**
@@ -230,12 +230,12 @@ class OBJECT_FACTORY_ITEM
    * Name of the class to create.
    * @var string
    */
-  var $class_name;
+  public $class_name;
   /**
    * File name containing the class description.
    * @var string
    */
-  var $file_name;
+  public $file_name;
 }
 
 ?>

@@ -52,12 +52,12 @@ class SEND_MULTIPLE_MAIL_FORM extends SEND_MAIL_FORM
    * @var bool
     * @access private
     */
-  var $show_send_to = FALSE;
+  public $show_send_to = FALSE;
 
   /**
-   * @param APPLICATION &$app Main application.
+   * @param APPLICATION $app Main application.
    */
-  function SEND_MULTIPLE_MAIL_FORM (&$app)
+  function SEND_MULTIPLE_MAIL_FORM ($app)
   {
     SEND_MAIL_FORM::SEND_MAIL_FORM ($app);
 
@@ -77,7 +77,7 @@ class SEND_MULTIPLE_MAIL_FORM extends SEND_MAIL_FORM
     $field->add_value ('multiple_mail');
     $this->add_field ($field);
 
-    $field =& $this->field_at ('send_to');
+    $field = $this->field_at ('send_to');
     $field->required = FALSE;
   }
 
@@ -92,10 +92,10 @@ class SEND_MULTIPLE_MAIL_FORM extends SEND_MAIL_FORM
     * Anonymous users are limited to sending 'max_anonymous_recipients' emails at a time.
     * Registered users are limited to sending 'max_registered_recipients' emails at a time.
     * @see APPLICATION::$mail_options
-    * @param object &$obj This parameter is ignored.
+    * @param object $obj This parameter is ignored.
     * @access private
     */
-  function _post_validate (&$obj)
+  function _post_validate ($obj)
   {
     parent::_post_validate ($obj);
 
@@ -103,7 +103,7 @@ class SEND_MULTIPLE_MAIL_FORM extends SEND_MAIL_FORM
     $this->recipient_list = str_replace ("\r", '', $this->value_for ('recipients'));
     $this->recipient_list = split ("\n", $this->recipient_list);
 
-    $opts =& $this->app->mail_options;
+    $opts = $this->app->mail_options;
 
     if (($this->login->is_anonymous () && (sizeof ($this->recipient_list) > $opts->max_anonymous_recipients)) || 
       (! $this->login->is_anonymous () && (sizeof ($this->recipient_list) > $opts->max_registered_recipients)))
@@ -115,11 +115,11 @@ class SEND_MULTIPLE_MAIL_FORM extends SEND_MAIL_FORM
 
   /**
    * Send a message to the chosen recipients.
-   * @param MAIL_PROVIDER &$provider
-   * @param MAIL_MESSAGE &$msg
+   * @param MAIL_PROVIDER $provider
+   * @param MAIL_MESSAGE $msg
    * @access private
    */
-  function send_mail (&$provider, &$msg)
+  function send_mail ($provider, $msg)
   {
     if ($this->value_for ('email_type') == 'single_mail')
     {
@@ -139,10 +139,10 @@ class SEND_MULTIPLE_MAIL_FORM extends SEND_MAIL_FORM
   /**
    * Display additional email options.
    * Allow descendants to use the standard email form rendering, while still adding new mailing options.
-   * @param FORM_RENDERER &$renderer
+   * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_options (&$renderer)
+  function _draw_options ($renderer)
   {
     parent::_draw_options ($renderer);
 

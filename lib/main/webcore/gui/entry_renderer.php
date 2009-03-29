@@ -50,10 +50,10 @@ class ENTRY_RENDERER extends CONTENT_OBJECT_RENDERER
 {
   /**
    * Outputs the object as HTML.
-   * @param ENTRY &$obj
+   * @param ENTRY $obj
    * @access private
    */
-  function _display_as_html (&$obj)
+  function _display_as_html ($obj)
   {
     $this->_echo_html_user_information ($obj);
     $this->_echo_subscribe_status ($obj);
@@ -62,10 +62,10 @@ class ENTRY_RENDERER extends CONTENT_OBJECT_RENDERER
   
   /**
    * Shows the subscription status for this object.
-   * @param ENTRY &$obj
+   * @param ENTRY $obj
    * @access private
    */
-  function _echo_subscribe_status (&$obj)
+  function _echo_subscribe_status ($obj)
   {
     $this->_echo_html_subscribed_toggle ($obj, 'subscribe_to_entry.php?id=' . $obj->id, Subscribe_entry);
   }
@@ -82,10 +82,10 @@ class DRAFTABLE_ENTRY_RENDERER extends ENTRY_RENDERER
 {
   /**
    * Shows creator/modifier in HTML.
-   * @param DRAFTABLE_ENTRY &$entry
+   * @param DRAFTABLE_ENTRY $entry
    * @access private
    */
-  function _echo_html_users (&$entry)
+  function _echo_html_users ($entry)
   {
     if ($entry->time_published->is_valid ())
     {
@@ -103,10 +103,10 @@ class DRAFTABLE_ENTRY_RENDERER extends ENTRY_RENDERER
 
   /**
    * Show created/updated information in plain text.
-   * @param DRAFTABLE_ENTRY &$entry
+   * @param DRAFTABLE_ENTRY $entry
    * @access private
    */
-  function _echo_plain_text_users (&$entry)
+  function _echo_plain_text_users ($entry)
   {
     if ($entry->time_published->is_valid ())
     {
@@ -134,15 +134,15 @@ class ENTRY_ASSOCIATED_DATA_RENDERER extends HANDLER_RENDERER
 {
   /**
    * Draws {@link COMMENT}s and {@link ATTACHMENT}s.
-   * @param ENTRY &$obj
+   * @param ENTRY $obj
    * @param OBJECT_RENDERER_OPTIONS $options
    */
-  function display (&$obj, $options = null)
+  function display ($obj, $options = null)
   {
-    $folder =& $obj->parent_folder ();
+    $folder = $obj->parent_folder ();
     if ($this->login->is_allowed (Privilege_set_attachment, Privilege_view, $folder))
     {
-      $attachment_query =& $obj->attachment_query ();
+      $attachment_query = $obj->attachment_query ();
       if ($attachment_query->size ())
       {
   ?>

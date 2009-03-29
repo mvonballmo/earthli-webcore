@@ -52,7 +52,7 @@ class FILE_LOGGER extends TEXT_OUTPUT_LOGGER
    * Symbol to demarcate lines.
     * @var string
     */
-  var $newline = "\n";
+  public $newline = "\n";
 
   /**
    * Record to this file.
@@ -129,17 +129,17 @@ class FILE_LOGGER extends TEXT_OUTPUT_LOGGER
    * @var string Name of the log file.
    * @access private
    */
-  var $_file_name = '';
+  protected $_file_name = '';
   /**
    * @var boolean Have any messages been written?
    * @access private
    */
-  var $_has_messages = FALSE;
+  protected $_has_messages = FALSE;
   /**
    * @var integer Handle to the open file
    * @access private
    */
-  var $_file_handle;
+  protected $_file_handle;
 }
 
 ?>

@@ -49,6 +49,6 @@ require_once ('webcore/tests/init.php');
  * @version 3.0.0
  * @since 2.6.0
  */
-$App =& $Page->make_application (Test_harness_application_id, TRUE, TRUE);
+$App = $Page->make_application (Test_harness_application_id, TRUE, TRUE);
 
 ?>

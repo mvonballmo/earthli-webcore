@@ -28,12 +28,12 @@ http://www.earthli.com/software/webcore/projects
 
   $id = read_var ('id');
   $folder_query = $App->login->folder_query ();
-  $folder =& $folder_query->folder_for_branch_at_id ($id);
+  $folder = $folder_query->folder_for_branch_at_id ($id);
 
   if (isset ($folder))
   {
     $branch_query = $folder->branch_query ();
-    $branch =& $branch_query->object_at_id ($id);
+    $branch = $branch_query->object_at_id ($id);
   }
 
   if (isset ($branch))
@@ -45,7 +45,7 @@ http://www.earthli.com/software/webcore/projects
     $Page->location->add_object_link ($branch);
 
     $history_item_query = $branch->history_item_query ();
-    $obj =& $branch;
+    $obj = $branch;
 
     include_once ('webcore/pages/view_history.php');
   }

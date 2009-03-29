@@ -49,12 +49,12 @@ require_once ('webcore/gui/object_navigator.php');
 class ENTRY_NAVIGATOR extends OBJECT_NAVIGATOR
 {
   /**
-   * @param ENTRY &$entry
+   * @param ENTRY $entry
    */
-  function ENTRY_NAVIGATOR (&$entry)
+  function ENTRY_NAVIGATOR ($entry)
   {
     OBJECT_NAVIGATOR::OBJECT_NAVIGATOR ($entry->context);
-    $this->_entry =& $entry;
+    $this->_entry = $entry;
   }
 
   /**
@@ -62,10 +62,10 @@ class ENTRY_NAVIGATOR extends OBJECT_NAVIGATOR
    * Restrict the query selection to required fields.
    * The navigator needs only a few fields from an entry; use {@link QUERY::
    * set_select()} to reset the selection clause.
-   * @param QUERY &$query
+   * @param QUERY $query
    * @access private
    */
-  function _adjust_query (&$query)
+  function _adjust_query ($query)
   {
     $query->set_select ('entry.id, entry.title, entry.state');
   }
@@ -82,10 +82,10 @@ class MULTI_TYPE_ENTRY_NAVIGATOR extends ENTRY_NAVIGATOR
 {
   /**
    * Modify the query to navigate.
-   * @param QUERY &$query
+   * @param QUERY $query
    * @access private
    */
-  function _adjust_query (&$query)
+  function _adjust_query ($query)
   {
     parent::_adjust_query ($query);
     $query->add_select ('entry.type as entry_type');

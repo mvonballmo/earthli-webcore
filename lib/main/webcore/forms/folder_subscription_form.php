@@ -53,23 +53,23 @@ class FOLDER_SUBSCRIPTION_FORM extends SUBSCRIPTION_FORM
    * @var string
    * @access private
    */
-  var $panel_name = 'folders';
+  public $panel_name = 'folders';
 
   /**
    * Updates the subscriber's folder subscriptions.
-   * @param SUBSCRIBER &$obj
+   * @param SUBSCRIBER $obj
    * @access private
    */
-  function commit (&$obj)
+  function commit ($obj)
   {
     $obj->update_subscriptions_for (Subscribe_folder, $this->value_for ('ids'));
   }
 
   /**
-   * @param FORM_RENDERER &$renderer
+   * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_controls (&$renderer)
+  function _draw_controls ($renderer)
   {
     if ($this->object_exists ())
     {
@@ -93,8 +93,8 @@ class FOLDER_SUBSCRIPTION_FORM extends SUBSCRIPTION_FORM
     $decorator->form_name = $this->name;
     $decorator->auto_toggle_children = TRUE;
 
-    $tree->node_info =& $tree_node_info;
-    $tree->decorator =& $decorator;
+    $tree->node_info = $tree_node_info;
+    $tree->decorator = $decorator;
     $tree->set_visible_nodes ($selected_folders);
 
     $ctrl_name = $this->js_name ('ids');

@@ -52,12 +52,12 @@ class PICTURE_SEARCH extends MULTI_ENTRY_SEARCH
   /**
    * @var string
    */
-  var $type = 'picture';
+  public $type = 'picture';
 
   /**
-   * @param APPLICATION &$app Main application.
+   * @param APPLICATION $app Main application.
    */
-  function PICTURE_SEARCH (&$app)
+  function PICTURE_SEARCH ($app)
   {
     MULTI_ENTRY_SEARCH::MULTI_ENTRY_SEARCH ($app, new SEARCH_PICTURE_FIELDS ($app));
   }
@@ -75,12 +75,12 @@ class JOURNAL_SEARCH extends MULTI_ENTRY_SEARCH
   /**
    * @var string
    */
-  var $type = 'journal';
+  public $type = 'journal';
 
   /**
-   * @param APPLICATION &$app Main application.
+   * @param APPLICATION $app Main application.
    */
-  function JOURNAL_SEARCH (&$app)
+  function JOURNAL_SEARCH ($app)
   {
     MULTI_ENTRY_SEARCH::MULTI_ENTRY_SEARCH ($app, new SEARCH_JOURNAL_FIELDS ($app));
   }

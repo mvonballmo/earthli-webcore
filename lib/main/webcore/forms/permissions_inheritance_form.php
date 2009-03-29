@@ -51,16 +51,16 @@ class PERMISSIONS_INHERITANCE_FORM extends ID_BASED_FORM
   /**
    * @var string
    */
-  var $name = 'permissions_form';
+  public $name = 'permissions_form';
   /**
    * @var string
    */
-  var $action = 'create_folder_permissions.php';
+  public $action = 'create_folder_permissions.php';
 
   /**
-   * @param APPLICATION &$app Main application.
+   * @param APPLICATION $app Main application.
    */
-  function PERMISSIONS_INHERITANCE_FORM (&$app)
+  function PERMISSIONS_INHERITANCE_FORM ($app)
   {
     ID_BASED_FORM::ID_BASED_FORM ($app);
 
@@ -72,33 +72,33 @@ class PERMISSIONS_INHERITANCE_FORM extends ID_BASED_FORM
   }
 
   /**
-   * @param FOLDER &$obj
+   * @param FOLDER $obj
    */
-  function load_from_object (&$obj)
+  function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
     $this->set_value ('defined', $obj->defines_security ());
   }
 
   /**
-   * @param FORM_RENDERER &$renderer
+   * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_controls (&$renderer)
+  function _draw_controls ($renderer)
   {
     $renderer->start ();
 
     $folder_query = $this->login->folder_query ();
-    $folder =& $this->_object;
-    $parent =& $folder->parent_folder ();
+    $folder = $this->_object;
+    $parent = $folder->parent_folder ();
 
     if (! $this->value_for ('defined'))
     {
-      $permissions_folder =& $folder_query->object_at_id ($folder->permissions_id);
+      $permissions_folder = $folder_query->object_at_id ($folder->permissions_id);
     }
     else
     {
-      $permissions_folder =& $folder_query->object_at_id ($parent->permissions_id);
+      $permissions_folder = $folder_query->object_at_id ($parent->permissions_id);
     }
 
     if ($this->login->is_allowed (Privilege_set_folder, Privilege_secure, $permissions_folder))

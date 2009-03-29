@@ -69,23 +69,23 @@ class ENTRY_PRINT_RENDERER extends WEBCORE_OBJECT
     * @var PRINT_PREVIEW
     * @access private
     */
-  var $preview;
+  public $preview;
 
   /**
-   * @param PRINT_PREVIEW &$preview Render an entry for this print preview.
+   * @param PRINT_PREVIEW $preview Render an entry for this print preview.
    */
-  function ENTRY_PRINT_RENDERER (&$preview)
+  function ENTRY_PRINT_RENDERER ($preview)
   {
     WEBCORE_OBJECT::WEBCORE_OBJECT ($preview->app);
-    $this->preview =& $preview;
+    $this->preview = $preview;
   }
 
   /**
    * Render the given object to the print preview.
-    * @param ENTRY &$entry
+    * @param ENTRY $entry
     * @access private
     */
-  function draw (&$entry)
+  function draw ($entry)
   {
     $this->_draw_object ($entry);
     $this->_draw_comments ($entry);
@@ -94,10 +94,10 @@ class ENTRY_PRINT_RENDERER extends WEBCORE_OBJECT
   /**
    * Draw the object itself.
     * Called from {@link draw()}
-    * @param ENTRY &$entry
+    * @param ENTRY $entry
     * @access private
     */
-  function _draw_object (&$entry)
+  function _draw_object ($entry)
   {
     $this->_draw_title ($entry);
 
@@ -108,10 +108,10 @@ class ENTRY_PRINT_RENDERER extends WEBCORE_OBJECT
   /**
    * Draw the comments for the object.
     * Called from {@link draw()}.
-    * @param ENTRY &$entry
+    * @param ENTRY $entry
     * @access private
     */
-  function _draw_comments (&$entry)
+  function _draw_comments ($entry)
   {
     if ($this->preview->options->show_comments != Print_comments_off)
     {
@@ -144,11 +144,11 @@ class ENTRY_PRINT_RENDERER extends WEBCORE_OBJECT
   /**
    * Draw the comments for this entry.
     * @see ENTRY_PRINT_RENDERER::_draw_comments()
-    * @param ENTRY &$entry
-    * @param ENTRY_COMMENT_QUERY &$com_query
+    * @param ENTRY $entry
+    * @param ENTRY_COMMENT_QUERY $com_query
     * @access private
     */
-  function _draw_comments_body (&$entry, &$com_query)
+  function _draw_comments_body ($entry, $com_query)
   {
     if (! isset ($this->grid))
     {
@@ -185,9 +185,9 @@ class ENTRY_PRINT_RENDERER extends WEBCORE_OBJECT
   /**
    * Draw the title for the object.
    * Object renderers don't draw the title, so the print preview does that.
-   * @param ENTRY &$entry
+   * @param ENTRY $entry
    */
-  function _draw_title (&$entry)
+  function _draw_title ($entry)
   {
 ?>
   <h2><?php echo $entry->title_as_link (); ?></h2>
@@ -208,9 +208,9 @@ class PRINT_PREVIEW extends WEBCORE_OBJECT
    * Printing options, specified by the user.
    * @var PRINT_RENDERER_OPTIONS
    */
-  var $options;
+  public $options;
 
-  function PRINT_PREVIEW (&$app)
+  function PRINT_PREVIEW ($app)
   {
     WEBCORE_OBJECT::WEBCORE_OBJECT ($app);
 
@@ -220,9 +220,9 @@ class PRINT_PREVIEW extends WEBCORE_OBJECT
 
   /**
    * Render the print preview.
-    * @param array[ENTRY] &$entries
+    * @param array[ENTRY] $entries
     */
-  function display (&$entries)
+  function display ($entries)
   {
     $dhtml_opt = $this->app->display_options->use_DHTML;
     $this->app->display_options->use_DHTML = FALSE;
@@ -236,7 +236,7 @@ class PRINT_PREVIEW extends WEBCORE_OBJECT
 
       while ($i < $c)
       {
-        $entry =& $entries [$i];
+        $entry = $entries [$i];
         $this->draw_object ($entry);
         $i++;
 
@@ -255,12 +255,12 @@ class PRINT_PREVIEW extends WEBCORE_OBJECT
   /**
    * Draw this entry (called from 'display')
     * @see PRINT_PREVIEW::display()
-    * @param ENTRY &$entry
+    * @param ENTRY $entry
     * @access private
     */
-  function draw_object (&$entry)
+  function draw_object ($entry)
   {
-    $renderer =& $this->_renderer_for ($entry);
+    $renderer = $this->_renderer_for ($entry);
     $renderer->draw ($entry);
   }
 
@@ -299,14 +299,14 @@ class PRINT_PREVIEW extends WEBCORE_OBJECT
 
   /**
    * Get a renderer from cache, if possible.
-    * @param ENTRY &$entry
+    * @param ENTRY $entry
     * @return ENTRY_PRINT_RENDERER
     * @access private
     */
-  function &_renderer_for (&$entry)
+  function _renderer_for ($entry)
   {
     $class_name = strtoupper (get_class ($entry));
-    $Result =& $this->_renderers [$class_name];
+    $Result = $this->_renderers [$class_name];
     if (! $Result)
     {
       $Result = $this->_make_renderer ($class_name);
@@ -350,7 +350,7 @@ class PRINT_RENDERER_OPTIONS extends OBJECT_RENDERER_OPTIONS
    * Can be {@link Print_comments_off}, {@link Print_comments_threaded} or {@link Print_comments_flat}.
    * @var string
    */
-  var $show_comments = Print_comments_off;
+  public $show_comments = Print_comments_off;
 
   /**
    * Load values from the HTTP request.

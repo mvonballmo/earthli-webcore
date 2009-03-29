@@ -52,17 +52,17 @@ class PERMISSIONS_QUERY extends QUERY
    * SQL alias for the "main" table.
    * @var string
    */
-  var $alias = 'perm';
+  public $alias = 'perm';
   /**
    * Name of the SQL field for the ID in the "main" table.
    * @var string
    */
-  var $id = 'ref_id';
+  public $id = 'ref_id';
 
   /**
-   * @param APPLICATION &$app Main application.
+   * @param APPLICATION $app Main application.
    */
-  function PERMISSIONS_QUERY (&$app)
+  function PERMISSIONS_QUERY ($app)
   {
     QUERY::QUERY ($app);
 
@@ -109,7 +109,7 @@ class PERMISSIONS_QUERY extends QUERY
    * @var string
    * @access private
    */
-  var $_kind;
+  protected $_kind;
 }
 
 /**
@@ -122,12 +122,12 @@ class PERMISSIONS_QUERY extends QUERY
 class FOLDER_PERMISSIONS_QUERY extends PERMISSIONS_QUERY
 {
   /**
-   * @param FOLDER &$folder Retrieve permissions for this folder.
+   * @param FOLDER $folder Retrieve permissions for this folder.
    */
-  function FOLDER_PERMISSIONS_QUERY (&$folder)
+  function FOLDER_PERMISSIONS_QUERY ($folder)
   {
     PERMISSIONS_QUERY::PERMISSIONS_QUERY ($folder->app);
-    $this->_folder =& $folder;
+    $this->_folder = $folder;
   }
 
   /**

@@ -52,19 +52,19 @@ class PROJECT_TYPE_INFO extends FOLDER_TYPE_INFO
   /**
    * @var string
    */
-  var $id = 'project';
+  public $id = 'project';
   /**
    * @var string
    */
-  var $singular_title = 'Project';
+  public $singular_title = 'Project';
   /**
    * @var string
    */
-  var $plural_title = 'Projects';
+  public $plural_title = 'Projects';
   /**
    * @var string
    */
-  var $edit_page = 'edit_project.php';
+  public $edit_page = 'edit_project.php';
 }
 
 /**
@@ -80,23 +80,23 @@ class JOB_TYPE_INFO extends ENTRY_TYPE_INFO
   /**
    * @var string
    */
-  var $id = 'job';
+  public $id = 'job';
   /**
    * @var string
    */
-  var $singular_title = 'Job';
+  public $singular_title = 'Job';
   /**
    * @var string
    */
-  var $plural_title = 'Jobs';
+  public $plural_title = 'Jobs';
   /**
    * @var string
    */
-  var $icon = '{app_icons}buttons/new_job';
+  public $icon = '{app_icons}buttons/new_job';
   /**
    * @var string
    */
-  var $edit_page = 'edit_job.php';
+  public $edit_page = 'edit_job.php';
 }
 
 /**
@@ -112,23 +112,23 @@ class CHANGE_TYPE_INFO extends ENTRY_TYPE_INFO
   /**
    * @var string
    */
-  var $id = 'change';
+  public $id = 'change';
   /**
    * @var string
    */
-  var $singular_title = 'Change';
+  public $singular_title = 'Change';
   /**
    * @var string
    */
-  var $plural_title = 'Changes';
+  public $plural_title = 'Changes';
   /**
    * @var string
    */
-  var $icon = '{app_icons}buttons/new_change';
+  public $icon = '{app_icons}buttons/new_change';
   /**
    * @var string
    */
-  var $edit_page = 'edit_change.php';
+  public $edit_page = 'edit_change.php';
 }
 
 /**
@@ -144,23 +144,23 @@ class BRANCH_TYPE_INFO extends TYPE_INFO
   /**
    * @var string
    */
-  var $id = 'branch';
+  public $id = 'branch';
   /**
    * @var string
    */
-  var $singular_title = 'Branch';
+  public $singular_title = 'Branch';
   /**
    * @var string
    */
-  var $plural_title = 'Branchs';
+  public $plural_title = 'Branchs';
   /**
    * @var string
    */
-  var $icon = '{app_icons}buttons/new_branch';
+  public $icon = '{app_icons}buttons/new_branch';
   /**
    * @var string
    */
-  var $edit_page = 'edit_branch.php';
+  public $edit_page = 'edit_branch.php';
 }
 
 /**
@@ -176,23 +176,23 @@ class RELEASE_TYPE_INFO extends TYPE_INFO
   /**
    * @var string
    */
-  var $id = 'release';
+  public $id = 'release';
   /**
    * @var string
    */
-  var $singular_title = 'Release';
+  public $singular_title = 'Release';
   /**
    * @var string
    */
-  var $plural_title = 'Releases';
+  public $plural_title = 'Releases';
   /**
    * @var string
    */
-  var $icon = '{app_icons}buttons/new_release';
+  public $icon = '{app_icons}buttons/new_release';
   /**
    * @var string
    */
-  var $edit_page = 'edit_release.php';
+  public $edit_page = 'edit_release.php';
 }
 
 ?>

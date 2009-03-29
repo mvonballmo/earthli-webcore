@@ -51,25 +51,25 @@ require_once ('webcore/cmd/entry_commands.php');
 class RECIPE_COMMANDS extends DRAFTABLE_ENTRY_COMMANDS
 {
   /**
-   * @param RECIPE &$entry Configure commands for this object.
+   * @param RECIPE $entry Configure commands for this object.
    */
-  function RECIPE_COMMANDS (&$entry)
+  function RECIPE_COMMANDS ($entry)
   {
     ENTRY_COMMANDS::ENTRY_COMMANDS ($entry);
 
-    $cmd =& $this->command_at ('edit');
+    $cmd = $this->command_at ('edit');
     $cmd->link = "edit_recipe.php?id=$entry->id";
     
-    $cmd =& $this->command_at ('delete');
+    $cmd = $this->command_at ('delete');
     $cmd->link = "delete_recipe.php?id=$entry->id";
 
-    $cmd =& $this->command_at ('purge');
+    $cmd = $this->command_at ('purge');
     $cmd->link = "purge_recipe.php?id=$entry->id";
 
-    $cmd =& $this->command_at ('clone');
+    $cmd = $this->command_at ('clone');
     $cmd->link = "clone_recipe.php?id=$entry->id";
 
-    $cmd =& $this->command_at ('send');
+    $cmd = $this->command_at ('send');
     $cmd->link = "send_recipe.php?id=$entry->id";
   }
 }

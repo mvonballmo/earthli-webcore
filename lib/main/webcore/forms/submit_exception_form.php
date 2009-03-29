@@ -49,9 +49,9 @@ require_once ('webcore/forms/send_mail_form.php');
 class SUBMIT_EXCEPTION_FORM extends SEND_MAIL_FORM
 {
   /**
-   * @param CONTEXT &$context
+   * @param CONTEXT $context
    */
-  function SUBMIT_EXCEPTION_FORM (&$context)
+  function SUBMIT_EXCEPTION_FORM ($context)
   {
     SEND_MAIL_FORM::SEND_MAIL_FORM ($context);
 
@@ -70,14 +70,14 @@ class SUBMIT_EXCEPTION_FORM extends SEND_MAIL_FORM
     $this->set_required ('sender_name', FALSE);
     $this->set_required ('sender_email', FALSE);
 
-    $field =& $this->field_at ('sender_email');
+    $field = $this->field_at ('sender_email');
     $field->description = 'Optional, but lets us follow up if we have any questions.';
     
-    $field =& $this->field_at ('message');
+    $field = $this->field_at ('message');
     $field->description = 'Briefly describe what you were doing when the error occurred (very useful).';
   }
 
-  function load_from_object (&$obj)
+  function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
 
@@ -108,11 +108,11 @@ class SUBMIT_EXCEPTION_FORM extends SEND_MAIL_FORM
   }
 
   /**
-   * @param object &$obj Get renderer for this object.
+   * @param object $obj Get renderer for this object.
    * @return EXCEPTION_MAIL_RENDERER
    * @access private
    */
-  function _make_obj_renderer (&$obj)
+  function _make_obj_renderer ($obj)
   {
     $class_name = $this->context->final_class_name ('EXCEPTION_MAIL_RENDERER', 'webcore/mail/exception_mail_renderer.php');
     return new $class_name ($this->context);
@@ -135,10 +135,10 @@ class SUBMIT_EXCEPTION_FORM extends SEND_MAIL_FORM
   }
 
   /**
-   * @param FORM_RENDERER &$renderer
+   * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_hidden_controls (&$renderer)
+  function _draw_hidden_controls ($renderer)
   {
     parent::_draw_hidden_controls ($renderer);
 
@@ -151,10 +151,10 @@ class SUBMIT_EXCEPTION_FORM extends SEND_MAIL_FORM
   /**
    * Display additional email options.
    * Allow descendants to use the standard email form rendering, while still adding new mailing options.
-   * @param FORM_RENDERER &$renderer
+   * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_options (&$renderer)
+  function _draw_options ($renderer)
   {
     parent::_draw_options ($renderer);
     $renderer->draw_separator ();

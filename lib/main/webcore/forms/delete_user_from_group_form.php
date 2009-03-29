@@ -51,16 +51,16 @@ class DELETE_USER_FROM_GROUP_FORM extends ID_BASED_FORM
   /**
    * @var string
    */
-  var $button = 'Yes';
+  public $button = 'Yes';
 
   /**
-   * @param USER &$user Delete this user.
+   * @param USER $user Delete this user.
    */
-  function DELETE_USER_FROM_GROUP_FORM (&$user)
+  function DELETE_USER_FROM_GROUP_FORM ($user)
   {
     ID_BASED_FORM::ID_BASED_FORM ($user->app);
 
-    $this->_user =& $user;
+    $this->_user = $user;
 
     $field = new TITLE_FIELD ();
     $field->id = 'name';
@@ -72,7 +72,7 @@ class DELETE_USER_FROM_GROUP_FORM extends ID_BASED_FORM
 
   /**
    * Remove the selected user from the given group.
-    * @param GROUP &$obj
+    * @param GROUP $obj
     * @access private
     */
   function commit ($obj)
@@ -82,19 +82,19 @@ class DELETE_USER_FROM_GROUP_FORM extends ID_BASED_FORM
 
   /**
    * Load form fields from this object.
-   * @param object &$obj
+   * @param object $obj
    */
-  function load_from_object (&$obj)
+  function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
     $this->set_value ('name', $this->_user->title);
   }
 
   /**
-   * @param FORM_RENDERER &$renderer
+   * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_controls (&$renderer)
+  function _draw_controls ($renderer)
   {
     $renderer->width = '65%';
     $renderer->start ();

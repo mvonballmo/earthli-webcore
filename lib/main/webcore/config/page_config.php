@@ -53,21 +53,21 @@ class PAGE_TITLE_OPTIONS
     * Also separates the object list from the group and subject.
     * @var string
     */
-  var $separator = ' &gt; ';
+  public $separator = ' &gt; ';
   /**
    * Starts every page title.
     * @var string
     */
-  var $prefix = '..:: ';
+  public $prefix = '..:: ';
   /**
    *  Finishes every page title.
     * @var string
     */
-  var $suffix = ' ::..';
+  public $suffix = ' ::..';
   /**
    * @var string
    */
-  var $group;
+  public $group;
 }
 
 /**
@@ -82,16 +82,16 @@ class PAGE_REFRESH_OPTIONS
   /**
    * @var boolean
    */
-  var $enabled = FALSE;
+  public $enabled = FALSE;
   /**
    * @var string
    */
-  var $url;
+  public $url;
   /**
    * Given in seconds.
     * @var integer
     */
-  var $duration = 5;
+  public $duration = 5;
 
   function display ()
   {
@@ -113,11 +113,11 @@ class PAGE_REFRESH_OPTIONS
   }
 
   /**
-   * @param PAGE &$page
+   * @param PAGE $page
    */
-  function PAGE_REFRESH_OPTIONS (&$page)
+  function PAGE_REFRESH_OPTIONS ($page)
   {
-    $this->page  =& $page;
+    $this->page  = $page;
   }
 }
 
@@ -139,27 +139,27 @@ class PAGE_ICON_OPTIONS
   /**
    * @var boolean
    */
-  var $enabled = TRUE;
+  public $enabled = TRUE;
   /**
    * Standard mime type For example, "image/png" or "image/x-icon". Mime type 
    * should match the file give in {@link $file_name}.
    * @var string
    */
-  var $mime_type = 'image/x-icon';
+  public $mime_type = 'image/x-icon';
   /**
    * URL of the icon for this page.
    * Locations can be absolute or relative to resource locations defined in the
    * {@link PAGE}. For example, "{icons}/page_icons/my_icon.ico".
    * @var string
    */
-  var $file_name = '/favicon.ico';
+  public $file_name = '/favicon.ico';
 
   /**
-   * @param PAGE &$page
+   * @param PAGE $page
    */
-  function PAGE_ICON_OPTIONS (&$page)
+  function PAGE_ICON_OPTIONS ($page)
   {
-    $this->page =& $page;
+    $this->page = $page;
   }
 
   /**
@@ -192,26 +192,26 @@ class PAGE_NEWSFEED_OPTIONS
   /**
    * @var boolean
    */
-  var $enabled = TRUE;
+  public $enabled = TRUE;
   /**
    * Name of the feed presented to the user when subscribing.
    * @var PAGE_TITLE
    */
-  var $title;
+  public $title;
   /**
    * URL of the newsfeed.
    * Locations can be absolute or relative to resource locations defined in the
    * {@link PAGE}. For example, "{app}/rss.php".
    * @var string
    */
-  var $file_name = '';
+  public $file_name = '';
 
   /**
-   * @param PAGE &$page
+   * @param PAGE $page
    */
-  function PAGE_NEWSFEED_OPTIONS (&$page)
+  function PAGE_NEWSFEED_OPTIONS ($page)
   {
-    $this->page =& $page;
+    $this->page = $page;
     $class_name = $page->final_class_name ('PAGE_TITLE', 'webcore/gui/page_title.php');
     $this->title = new $class_name ($page);
     $this->title->prefix = '';
@@ -262,50 +262,50 @@ class PAGE_TEMPLATE_OPTIONS
    * Show the standard header for this page?
    * @var boolean
    */
-  var $header_visible = TRUE;
+  public $header_visible = TRUE;
   /**
    * Show the standard footer for this page?
    * @var boolean
    */
-  var $footer_visible = TRUE;
+  public $footer_visible = TRUE;
   
   /**
    * Include JavaScript files in this page?
    * @var boolean
    */
-  var $include_scripts = TRUE;
+  public $include_scripts = TRUE;
   /**
    * JavaScript to execute when the page is loaded.
    * @var string
    */
-  var $body_load_script = '';
+  public $body_load_script = '';
   
   /**
    * Short title for the page (usually one word).
    * @var string
    */
-  var $title = '';
+  public $title = '';
   /**
    * Icon that represents the page content. Paths are resolved relative to the
    * {@link Folder_name_icons} folder in the {@link PAGE}.
    * @var string
    */
-  var $icon = '';
+  public $icon = '';
   /**
    * Text of the copyright message for this page.
    * @var string
    */
-  var $copyright = '';
+  public $copyright = '';
   /**
    * URL to the location of the site logo.
    * @var string
    */
-  var $logo_file = '';
+  public $logo_file = '';
   /**
    * Alternate text for the site logo.
    * @var string
    */
-  var $logo_title = '';
+  public $logo_title = '';
   /**
    * Describes the main application embedded in the page.
    * Generally includes the {@link APPLICATION::$short_title},
@@ -314,18 +314,18 @@ class PAGE_TEMPLATE_OPTIONS
    * application for a page (calls {@link _make_application()}).
    * @var string
    */
-  var $app_info = '';
+  public $app_info = '';
 
   /**
    * Show the log-in information on this page?
    * @var boolean
    */
-  var $show_login = TRUE;
+  public $show_login = TRUE;
   /**
    * Show the update time for the file itself?
    * @var boolean
    */
-  var $show_last_time_modified = TRUE;
+  public $show_last_time_modified = TRUE;
   /**
    * Show statistics gathered during page generation?
    * The WebCore keeps track of number of objects created, queries issued and
@@ -333,55 +333,55 @@ class PAGE_TEMPLATE_OPTIONS
    * ENVIRONMENT}).
    * @var boolean
    */
-  var $show_statistics = TRUE;
+  public $show_statistics = TRUE;
   /**
    * Show the Contact/Support/Privacy links.
    * Toggle this value to turn off rendering off all extra links in the
    * template.
    * @var boolean
    */
-  var $show_links = TRUE;
+  public $show_links = TRUE;
   /**
    * Show the library and application versions? 
    * @var boolean
    */
-  var $show_versions = TRUE;
+  public $show_versions = TRUE;
   
   /**
    * Link to change theme settings.
    * @var string
    */
-  var $settings_url = '{pages}settings.php';
+  public $settings_url = '{pages}settings.php';
   /**
    * Link to view browser properties.
    * @var string
    */
-  var $browser_url = '{pages}browser.php';
+  public $browser_url = '{pages}browser.php';
   /**
    * Link to show current page source.
    * @var string
    */
-  var $show_source_url = '{pages}show_source.php';
+  public $show_source_url = '{pages}show_source.php';
   /**
    * Link to show site/application privacy policy. 
    * @var string
    */
-  var $privacy_url = '{pages}privacy.php';
+  public $privacy_url = '{pages}privacy.php';
   /**
    * Link to show support options. 
    * @var string
    */
-  var $support_url = '{pages}support.php';
+  public $support_url = '{pages}support.php';
   /**
    * Link to show contact options. 
    * @var string
    */
-  var $contact_url = '{pages}contact.php';
+  public $contact_url = '{pages}contact.php';
   /**
    * Link to show site/application copyright policy. 
    * @var string
    */
-  var $rights_url = '{pages}rights.php';
+  public $rights_url = '{pages}rights.php';
   
   /**
    * Should the page close the logger when rendering the footer?
@@ -392,12 +392,12 @@ class PAGE_TEMPLATE_OPTIONS
    * @see THEMED_MAIL_BODY_RENDERER
    * @var boolean
    */
-  var $close_logger = TRUE;
+  public $close_logger = TRUE;
   /**
    * Check the browser and report errors?
    * @var boolean
    */
-  var $check_browser = TRUE;
+  public $check_browser = TRUE;
 }
 
 /**
@@ -416,7 +416,7 @@ class PAGE_STORAGE_OPTIONS extends CONTEXT_STORAGE_OPTIONS
    * {@link THEME_SETTINGS} are stored under this key.
    * @var string
    */
-  var $theme_settings_name = 'theme_settings';
+  public $theme_settings_name = 'theme_settings';
 }
 
 ?>

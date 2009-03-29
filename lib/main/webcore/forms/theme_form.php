@@ -49,9 +49,9 @@ require_once ('webcore/forms/renderable_form.php');
 class THEME_FORM extends RENDERABLE_FORM
 {
   /**
-   * @param APPLICATION &$app Main application.
+   * @param APPLICATION $app Main application.
    */
-  function THEME_FORM (&$app)
+  function THEME_FORM ($app)
   {
     RENDERABLE_FORM::RENDERABLE_FORM ($app);
 
@@ -114,9 +114,9 @@ class THEME_FORM extends RENDERABLE_FORM
 
   /**
    * Load initial properties from this object.
-   * @param UNIQUE_OBJECT &$obj
+   * @param UNIQUE_OBJECT $obj
    */
-  function load_from_object (&$obj)
+  function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
     $this->set_value ('title', $obj->title);
@@ -130,11 +130,11 @@ class THEME_FORM extends RENDERABLE_FORM
 
   /**
    * Store the form's values to this object.
-   * @param STORABLE &$obj
+   * @param STORABLE $obj
    * @access private
    * @abstract
    */
-  function _store_to_object (&$obj)
+  function _store_to_object ($obj)
   {
     $obj->title = $this->value_for ('title');
     $obj->main_CSS_file_name = $this->value_for ('main_CSS_file_name');
@@ -146,10 +146,10 @@ class THEME_FORM extends RENDERABLE_FORM
   }
 
   /**
-   * @param FORM_RENDERER &$renderer
+   * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_controls (&$renderer)
+  function _draw_controls ($renderer)
   {
     $renderer->start ();
 

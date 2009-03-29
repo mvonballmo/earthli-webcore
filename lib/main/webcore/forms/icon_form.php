@@ -49,9 +49,9 @@ require_once ('webcore/forms/renderable_form.php');
 class ICON_FORM extends RENDERABLE_FORM
 {
   /**
-   * @param APPLICATION &$app Main application.
+   * @param APPLICATION $app Main application.
    */
-  function ICON_FORM (&$app)
+  function ICON_FORM ($app)
   {
     UNIQUE_OBJECT_FORM::UNIQUE_OBJECT_FORM ($app);
 
@@ -76,9 +76,9 @@ class ICON_FORM extends RENDERABLE_FORM
 
   /**
    * Load initial properties from this object.
-   * @param UNIQUE_OBJECT &$obj
+   * @param UNIQUE_OBJECT $obj
    */
-  function load_from_object (&$obj)
+  function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
     $this->set_value ('title', $obj->title);
@@ -88,11 +88,11 @@ class ICON_FORM extends RENDERABLE_FORM
 
   /**
    * Store the form's values to this object.
-   * @param STORABLE &$obj
+   * @param STORABLE $obj
    * @access private
    * @abstract
    */
-  function _store_to_object (&$obj)
+  function _store_to_object ($obj)
   {
     $obj->title = $this->value_for ('title');
     $obj->category = $this->value_for ('category');
@@ -100,10 +100,10 @@ class ICON_FORM extends RENDERABLE_FORM
   }
 
   /**
-   * @param FORM_RENDERER &$renderer
+   * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_controls (&$renderer)
+  function _draw_controls ($renderer)
   {
     $renderer->start ();
     $renderer->draw_text_line_row ('title');

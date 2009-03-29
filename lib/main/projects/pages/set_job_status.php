@@ -35,12 +35,12 @@ http://www.earthli.com/software/webcore
   {
     $entry_query = $App->login->all_entry_query ();
     $entry_query->set_type ('job');
-    $job =& $entry_query->object_at_id ($id);
+    $job = $entry_query->object_at_id ($id);
     $action = $job->new_history_item ();
     $action->compare_branches = TRUE;
     
-    $branch_infos =& $job->stored_branch_infos ();
-    $main_branch_info =& $job->main_branch_info ();
+    $branch_infos = $job->stored_branch_infos ();
+    $main_branch_info = $job->main_branch_info ();
     foreach ($branch_infos as $branch_info)
     {
       if ($branch_info->branch_id == $branch_id)

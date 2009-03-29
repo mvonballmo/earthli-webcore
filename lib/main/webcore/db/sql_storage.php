@@ -79,23 +79,23 @@ class SQL_FIELD
   /**
    * @var string
    */
-  var $table_id;
+  public $table_id;
   /**
    * @var string
    */
-  var $id;
+  public $id;
   /**
    * @var integer
    */
-  var $type;
+  public $type;
   /**
    * @var mixed
    */
-  var $value;
+  public $value;
   /**
    * @var integer
    */
-  var $action;
+  public $action;
 
   /**
    * Create a field mapping to a physical database field.
@@ -103,14 +103,14 @@ class SQL_FIELD
    * 'action'.
    * @param string $id Name of the field in the database.
    * @param integer $type Is it an integer, date or string?
-   * @param mixed &$value The raw value
+   * @param mixed $value The raw value
    * @param integer $action Which actions is this field used for?
    */
-  function SQL_FIELD ($id, $type, &$value, $action)
+  function SQL_FIELD ($id, $type, $value, $action)
   {
     $this->id = $id;
     $this->type = $type;
-    $this->value =& $value;
+    $this->value = $value;
     $this->action = $action;
   }
 
@@ -162,13 +162,13 @@ class SQL_FIELD
  */
 class SQL_TABLE extends WEBCORE_OBJECT
 {
-  var $name;
+  public $name;
 
   /**
-   * @param CONTEXT &$context
+   * @param CONTEXT $context
    * @param string $name Name of the database table.
    */
-  function SQL_TABLE (&$context, $name)
+  function SQL_TABLE ($context, $name)
   {
     WEBCORE_OBJECT::WEBCORE_OBJECT ($context);
     $this->name = $name;
@@ -179,10 +179,10 @@ class SQL_TABLE extends WEBCORE_OBJECT
    * @see SQL_FIELD
    * @param string $field_id
    * @param integer $field_type
-   * @param mixed &$value
+   * @param mixed $value
    * @param integer $action
    */
-  function add ($field_id, $field_type, &$value, $action)
+  function add ($field_id, $field_type, $value, $action)
   {
     $class_name = $this->context->final_class_name ('SQL_FIELD');
     $this->fields [$field_id] = new $class_name ($field_id, $field_type, $value, $action);
@@ -363,9 +363,9 @@ class SQL_TABLE extends WEBCORE_OBJECT
 class SQL_STORAGE extends WEBCORE_OBJECT
 {
   /**
-   * @param CONTEXT &$context
+   * @param CONTEXT $context
    */
-  function SQL_STORAGE (&$context)
+  function SQL_STORAGE ($context)
   {
     $this->raise_if_not_is_a ($context, 'CONTEXT', 'QUERY', 'QUERY');
     $context->ensure_database_exists ();   // storage always need a database
@@ -378,14 +378,14 @@ class SQL_STORAGE extends WEBCORE_OBJECT
    * @param string $field_id Store value to this field.
    * @param integer $field_type Field is of this type (can be
    * 'Field_type_string', 'Field_type_integer', 'Field_type_date_time').
-   * @param mixed &$value Reference to the actual value to store.
+   * @param mixed $value Reference to the actual value to store.
    * @param integer $action Store this field for these actions (can be {@link
    * Storage_action_none}, {@link Storage_action_create}, {@link
    * Storage_action_update}, {@link Storage_action_all}).
    */
-  function add ($table_id, $field_id, $field_type, &$value, $action = Storage_action_all)
+  function add ($table_id, $field_id, $field_type, $value, $action = Storage_action_all)
   {
-    $table =& $this->_table_at_id ($table_id);
+    $table = $this->_table_at_id ($table_id);
     $table->add ($field_id, $field_type, $value, $action);
   }
 
@@ -400,24 +400,24 @@ class SQL_STORAGE extends WEBCORE_OBJECT
    */
   function restrict ($table_id, $field_id)
   {
-    $table =& $this->_table_at_id ($table_id);
+    $table = $this->_table_at_id ($table_id);
     $table->restrict ($field_id);
   }
 
   /**
    * Create the object specified in the schema.
-   * @param STORABLE &$obj
+   * @param STORABLE $obj
    */
-  function create_object (&$obj)
+  function create_object ($obj)
   {
     $this->_commit ($obj, Storage_action_create);
   }
 
   /**
    * Update the object specified in the schema.
-   * @param STORABLE &$obj
+   * @param STORABLE $obj
    */
-  function update_object (&$obj)
+  function update_object ($obj)
   {
     $this->_commit ($obj, Storage_action_update);
   }
@@ -426,10 +426,10 @@ class SQL_STORAGE extends WEBCORE_OBJECT
    * Check existence of the object specified in the schema.
    * The object is deemed to exist if it exists in at least one of the tables in
    * its schema.
-   * @param STORABLE &$obj
+   * @param STORABLE $obj
    * @return boolean
    */
-  function object_exists (&$obj)
+  function object_exists ($obj)
   {
     $obj->store_to ($this);
 
@@ -448,11 +448,11 @@ class SQL_STORAGE extends WEBCORE_OBJECT
 
   /**
    * Called internally to commit the storage action.
-   * @param STORABLE &$obj
+   * @param STORABLE $obj
    * @param integer $action
    * @access private
    */
-  function _commit (&$obj, $action)
+  function _commit ($obj, $action)
   {
     $obj->store_to ($this);
 
@@ -476,12 +476,12 @@ class SQL_STORAGE extends WEBCORE_OBJECT
 
   /**
    * Commits changes to a single table in a storage action.
-   * @param SQL_TABLE &$table
+   * @param SQL_TABLE $table
    * @param integer $action
-   * @param STORABLE &$obj
+   * @param STORABLE $obj
    * @access private
    */
-  function _commit_table (&$table, $action, &$obj)
+  function _commit_table ($table, $action, $obj)
   {
     $table->commit ($action);
   }
@@ -492,16 +492,16 @@ class SQL_STORAGE extends WEBCORE_OBJECT
    * @return SQL_TABLE
    * @access private
    */
-  function &_table_at_id ($table_id)
+  function _table_at_id ($table_id)
   {
     $this->assert (! empty ($table_id), 'table_id cannot be empty.', '_table_at_id', 'SQL_STORAGE');
 
-    $Result =& $this->_tables [$table_id];
+    $Result = $this->_tables [$table_id];
     if (! $Result)
     {
       $class_name = $this->context->final_class_name ('SQL_TABLE');
       $Result = new $class_name ($this->context, $table_id);
-      $this->_tables [$table_id] =& $Result;
+      $this->_tables [$table_id] = $Result;
     }
     return $Result;
   }

@@ -53,14 +53,14 @@ class SELECTOR_TREE_DECORATOR extends TREE_DECORATOR
    * The name of the control to use for the selector.
    * @var string
    */
-  var $control_name = 'selector';
+  public $control_name = 'selector';
 
   /**
    * Render the decorator for this node.
-   * @param object &$node
+   * @param object $node
    * @param string $text
    */
-  function draw (&$node, $text)
+  function draw ($node, $text)
   {
     $node_info = $this->node_info ();
     $id = $node_info->id ($node);
@@ -87,22 +87,22 @@ class MULTI_SELECTOR_TREE_DECORATOR extends TREE_DECORATOR
    * Name of controls embedded in the tree nodes.
    * @var string
    */
-  var $control_name;
+  public $control_name;
   /**
    * Should child nodes be toggled with the parent?
    * @var boolean
    */
-  var $auto_toggle_children = TRUE;
+  public $auto_toggle_children = TRUE;
   /**
    * @var string
    */
-  var $form_name = 'update_form';
+  public $form_name = 'update_form';
 
   /**
-   * @param TREE &$tree Decorate this tree.
+   * @param TREE $tree Decorate this tree.
    * @param array[integer] $selected_node_ids Initially selected node ids
    */
-  function MULTI_SELECTOR_TREE_DECORATOR (&$tree, $selected_node_ids)
+  function MULTI_SELECTOR_TREE_DECORATOR ($tree, $selected_node_ids)
   {
     TREE_DECORATOR::TREE_DECORATOR ($tree);
     $this->selected_node_ids = $selected_node_ids;
@@ -110,9 +110,9 @@ class MULTI_SELECTOR_TREE_DECORATOR extends TREE_DECORATOR
 
   /**
    * Node is about to be rendered.
-   * @param object &$node
+   * @param object $node
    */
-  function node_found (&$node)
+  function node_found ($node)
   {
     if ($this->auto_toggle_children)
     {
@@ -190,10 +190,10 @@ class MULTI_SELECTOR_TREE_DECORATOR extends TREE_DECORATOR
 
   /**
    * Render the decorator for this node.
-   * @param object &$node
+   * @param object $node
    * @param string $text
    */
-  function draw (&$node, $text)
+  function draw ($node, $text)
   {
     $control_name = $this->control_name;
     $node_info = $this->node_info ();

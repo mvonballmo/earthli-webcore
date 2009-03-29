@@ -28,12 +28,12 @@ http://www.earthli.com/software/webcore/projects
 
   $id = read_var ('id');
   $folder_query = $App->login->folder_query ();
-  $folder =& $folder_query->folder_for_branch_at_id ($id);
+  $folder = $folder_query->folder_for_branch_at_id ($id);
 
   if (isset ($folder))
   {
     $branch_query = $folder->branch_query ();
-    $branch =& $branch_query->object_at_id ($id);
+    $branch = $branch_query->object_at_id ($id);
   }
 
   if (isset ($branch) && $App->login->is_allowed (Privilege_set_branch, Privilege_view, $branch))
@@ -42,7 +42,7 @@ http://www.earthli.com/software/webcore/projects
 
     $class_name = $App->final_class_name ('PROJECT_BRANCH_PANEL_MANAGER', 'projects/gui/project_panel.php');
     $panel_manager = new $class_name ($branch);
-    $panel =& $panel_manager->selected_panel ();
+    $panel = $panel_manager->selected_panel ();
 
     $Page->title->add_object ($folder);
     $Page->title->add_object ($branch);
@@ -73,7 +73,7 @@ http://www.earthli.com/software/webcore/projects
     <div class="side-bar-body">
     <?php
       $renderer = $branch->handler_for (Handler_html_renderer);
-      $options =& $renderer->options ();
+      $options = $renderer->options ();
       $options->show_as_summary = TRUE;
       $options->show_users = FALSE;
       $renderer->display ($branch);

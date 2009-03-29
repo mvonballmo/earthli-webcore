@@ -47,7 +47,7 @@ http://www.earthli.com/software/webcore
 
       include_once ('webcore/gui/folder_tree_node_info.php');
       $tree = $App->make_tree_renderer ();
-      $tree->node_info = & new FOLDER_TREE_NODE_INFO ($App);
+      $tree->node_info = new FOLDER_TREE_NODE_INFO ($App);
       $tree->node_info->page_link = read_var ('last_page');
       $tree->display ($folders);
     ?>

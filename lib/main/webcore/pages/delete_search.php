@@ -27,7 +27,7 @@ http://www.earthli.com/software/webcore
 ****************************************************************************/
 
   $search_query = $App->login->search_query ();
-  $search =& $search_query->object_at_id (read_var ('id'));
+  $search = $search_query->object_at_id (read_var ('id'));
 
   if (isset ($search))
   {

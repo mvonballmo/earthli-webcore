@@ -49,9 +49,9 @@ require_once ('webcore/forms/folder_form.php');
 class PROJECT_FORM extends FOLDER_FORM
 {
   /**
-   * @param PROJECT &$folder Project to edit or project in which to add.
+   * @param PROJECT $folder Project to edit or project in which to add.
    */
-  function PROJECT_FORM (&$folder)
+  function PROJECT_FORM ($folder)
   {
     FOLDER_FORM::FOLDER_FORM ($folder);
 
@@ -117,17 +117,17 @@ class PROJECT_FORM extends FOLDER_FORM
 
   /**
    * Load initial properties from this project.
-   * @param PROJECT &$obj
+   * @param PROJECT $obj
    */
-  function load_from_object (&$obj)
+  function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
 
-    $options =& $obj->options ();
+    $options = $obj->options ();
     $this->set_value ('defines_options', $obj->defines_options ());
     $this->_apply_options_to_UI ($options);
 
-    $trunk =& $obj->trunk ();
+    $trunk = $obj->trunk ();
     $this->set_value ('trunk_id', $trunk->id);
 
     $this->_set_up_options ();
@@ -141,7 +141,7 @@ class PROJECT_FORM extends FOLDER_FORM
 
     if ($this->_folder)
     {
-      $options =& $this->_folder->options ();
+      $options = $this->_folder->options ();
       $this->set_value ('defines_options', 0);
       $this->_apply_options_to_UI ($options);
     }
@@ -171,10 +171,10 @@ class PROJECT_FORM extends FOLDER_FORM
 
   /**
    * Commit the changed to the database.
-    * @param PROJECT &$obj
+    * @param PROJECT $obj
     * @access private
     */
-  function commit (&$obj)
+  function commit ($obj)
   {
     $obj_exists = $obj->exists ();
 
@@ -182,26 +182,26 @@ class PROJECT_FORM extends FOLDER_FORM
 
     if (! $obj_exists)
     {
-      $trunk =& $obj->new_object ('branch');
+      $trunk = $obj->new_object ('branch');
       $trunk->title = $this->value_for ('branch_title');
 
-      $history_item =& $trunk->new_history_item ();
+      $history_item = $trunk->new_history_item ();
       $trunk->store_if_different ($history_item);
 
       $obj->trunk_id = $trunk->id;
       $obj->store ();
     }
 
-    $options =& $obj->options ();
+    $options = $obj->options ();
     $options->apply_changes ();
   }
     
   /**
    * Apply values to the UI.
-   * @param PROJECT_OPTIONS &$options
+   * @param PROJECT_OPTIONS $options
    * @access private
    */
-  function _apply_options_to_UI (&$options)
+  function _apply_options_to_UI ($options)
   {
     $this->set_value ('assignee_group_type', $options->assignee_group_type);
     $this->set_value ('assignee_group_id', $options->assignee_group_id);
@@ -212,10 +212,10 @@ class PROJECT_FORM extends FOLDER_FORM
 
   /**
    * Store form field values to the options.
-   * @param PROJECT_OPTIONS &$options
+   * @param PROJECT_OPTIONS $options
    * @access private
    */
-  function _store_to_options (&$options)
+  function _store_to_options ($options)
   {
     $options->assignee_group_type = $this->value_for ('assignee_group_type');
     $options->assignee_group_id = $this->value_for ('assignee_group_id');
@@ -226,19 +226,19 @@ class PROJECT_FORM extends FOLDER_FORM
 
   /**
    * Store the form's values for this project.
-    * @param PROJECT &$obj
+    * @param PROJECT $obj
     * @access private
     */
-  function _store_to_object (&$obj)
+  function _store_to_object ($obj)
   {
     parent::_store_to_object ($obj);
 
     if ($obj->exists ())
     {
-      $obj->trunk_id =& $this->value_for ('trunk_id');
+      $obj->trunk_id = $this->value_for ('trunk_id');
     }
 
-    $options =& $obj->options ();
+    $options = $obj->options ();
     $options->set_inherited (! $this->value_for ('defines_options'), FALSE);
     $this->_store_to_options ($options);
 
@@ -246,9 +246,9 @@ class PROJECT_FORM extends FOLDER_FORM
     {
       if (! $obj->exists ())
       {
-        $trunk =& $obj->new_object ('branch');
+        $trunk = $obj->new_object ('branch');
         $trunk->title = $this->value_for ('branch_title');
-        $obj->_trunk =& $trunk;
+        $obj->_trunk = $trunk;
       }
     }
   }
@@ -284,10 +284,10 @@ class PROJECT_FORM extends FOLDER_FORM
   }
 
   /**
-   * @param FORM_RENDERER &$renderer
+   * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_controls (&$renderer)
+  function _draw_controls ($renderer)
   {
     $renderer->start ();
     $renderer->start_column ();
@@ -297,7 +297,7 @@ class PROJECT_FORM extends FOLDER_FORM
       <div class="chart-body">
       <?php
         $folder_query = $this->login->folder_query ();
-        $folders =& $folder_query->tree ();
+        $folders = $folder_query->tree ();
 
         include_once ('projects/gui/project_tree_node_info.php');
         $tree_node_info = new PROJECT_TREE_NODE_INFO ($this->app);
@@ -308,7 +308,7 @@ class PROJECT_FORM extends FOLDER_FORM
 
         /* Make a copy (not a reference). */
         $tree = $this->app->make_tree_renderer ();
-        $tree->node_info = & $tree_node_info;
+        $tree->node_info = $tree_node_info;
         $tree->display ($folders);
       ?>
       </div>
@@ -336,8 +336,8 @@ class PROJECT_FORM extends FOLDER_FORM
       }
       elseif (! $this->_object->is_root ())
       {
-        $branch_query =& $this->_object->branch_query ();
-        $branches =& $branch_query->objects ();
+        $branch_query = $this->_object->branch_query ();
+        $branches = $branch_query->objects ();
   
         $props = $renderer->make_list_properties ();
         foreach ($branches as $branch)
@@ -365,7 +365,7 @@ class PROJECT_FORM extends FOLDER_FORM
 
       if ($parent)
       {
-        $options_folder =& $folder_query->object_at_id ($parent->options_id);
+        $options_folder = $folder_query->object_at_id ($parent->options_id);
         $props = $renderer->make_list_properties ();
         $props->on_click_script = 'on_inherit_changed (this)';
 
@@ -436,20 +436,20 @@ class PROJECT_FORM extends FOLDER_FORM
     $renderer->finish ();
   }
   
-  function _make_user_list_properties_for (&$renderer, $ctrl_id)
+  function _make_user_list_properties_for ($renderer, $ctrl_id)
   {
-    $Result =& $renderer->make_list_properties ();
+    $Result = $renderer->make_list_properties ();
     $Result->on_click_script = 'on_group_type_changed (this, this.form.' . $ctrl_id . ')';
     $Result->add_item ('Allow all users', Project_user_all);
     $Result->add_item ('Allow only registered users', Project_user_registered_only);
 
     if ($this->login->is_allowed (Privilege_set_group, Privilege_view))
     {
-      $group_query =& $this->app->group_query ();
-      $groups =& $group_query->objects ();
+      $group_query = $this->app->group_query ();
+      $groups = $group_query->objects ();
       if (sizeof ($groups))
       {
-        $group_props =& $renderer->make_list_properties ();
+        $group_props = $renderer->make_list_properties ();
         foreach ($groups as $group)
           $group_props->add_item ($group->title_as_plain_text (), $group->id);
         
@@ -473,6 +473,6 @@ class PROJECT_FORM extends FOLDER_FORM
    * @var boolean
    * @access private
    */
-  var $_user_list_error_message;
+  protected $_user_list_error_message;
 }
 ?>

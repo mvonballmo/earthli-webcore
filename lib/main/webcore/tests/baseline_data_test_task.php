@@ -107,13 +107,13 @@ define ('Baseline_test_owner3_id', 12000);
 class BASELINE_DATA_TEST_TASK extends TEST_TASK
 {
   /**
-   * @param FOLDER &$fldr
+   * @param FOLDER $fldr
    * @param integer $state
    * @param string $title
    * @param string $allow_id
    * @access private
    */
-  function _add_folder (&$fldr, $state, $title, $allow_id = 'all')
+  function _add_folder ($fldr, $state, $title, $allow_id = 'all')
   {
     $this->_log ("Adding folder [$title]...");
     $Result = $fldr->new_folder ();
@@ -167,13 +167,13 @@ class BASELINE_DATA_TEST_TASK extends TEST_TASK
   }
 
   /**
-   * @param ENTRY &$entry
+   * @param ENTRY $entry
    * @param integer $state
    * @param string $title
    * @param integer $owner_id
    * @access private
    */
-  function _add_comment (&$entry, $state, $title, $owner_id)
+  function _add_comment ($entry, $state, $title, $owner_id)
   {
     $this->_log ("Adding comment [$title]...");
     $comment = $entry->new_comment (0);
@@ -185,13 +185,13 @@ class BASELINE_DATA_TEST_TASK extends TEST_TASK
   }
 
   /**
-   * @param FOLDER &$fldr
+   * @param FOLDER $fldr
    * @param integer $state
    * @param string $title
    * @param integer $owner_id
    * @access private
    */
-  function _add_entry (&$fldr, $state, $title, $owner_id)
+  function _add_entry ($fldr, $state, $title, $owner_id)
   {
     $this->_log ("Adding entry [$title]...");
     $entry = $fldr->new_object ();
@@ -219,10 +219,10 @@ class BASELINE_DATA_TEST_TASK extends TEST_TASK
   }
 
   /**
-   * @param FOLDER &$fldr
+   * @param FOLDER $fldr
    * @access private
    */
-  function _add_entries_to_folder (&$fldr)
+  function _add_entries_to_folder ($fldr)
   {
     $this->_log ("Adding entries to [$fldr->title]...");
     $this->_add_entry ($fldr, Visible, 'Vis1', Baseline_test_owner1_id);

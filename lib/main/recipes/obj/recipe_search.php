@@ -52,12 +52,12 @@ class RECIPE_SEARCH extends ENTRY_SEARCH
   /**
    * @var string
    */
-  var $type = 'recipe';
+  public $type = 'recipe';
 
   /**
-   * @param APPLICATION &$app Main application.
+   * @param APPLICATION $app Main application.
    */
-  function RECIPE_SEARCH (&$app)
+  function RECIPE_SEARCH ($app)
   {
     ENTRY_SEARCH::ENTRY_SEARCH ($app, new SEARCH_RECIPE_FIELDS ($app));
   }

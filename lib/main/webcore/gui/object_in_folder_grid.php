@@ -52,26 +52,26 @@ class OBJECT_IN_FOLDER_SUMMARY_GRID extends CONTENT_OBJECT_GRID
   /**
    * @var string
    */
-  var $box_style = 'object-in-list';
+  public $box_style = 'object-in-list';
   /**
    * @var boolean
    */
-  var $show_separator = FALSE;
+  public $show_separator = FALSE;
   /**
    * @var integer
    */
-  var $width = '65%';
+  public $width = '65%';
   /**
    * Show check-box selectors next to items?
    * @var boolean
    */
-  var $items_are_selectable = TRUE;
+  public $items_are_selectable = TRUE;
 
   /**
-   * @param OBJECT_IN_FOLDER &$obj
+   * @param OBJECT_IN_FOLDER $obj
    * @access private
    */
-  function _draw_box (&$obj)
+  function _draw_box ($obj)
   {
     $this->_draw_menu_for ($obj, Menu_size_minimal);
 ?>
@@ -91,21 +91,21 @@ class OBJECT_IN_FOLDER_SUMMARY_GRID extends CONTENT_OBJECT_GRID
   
   /**
    * Return the size of the object.
-   * @param OBJECT_IN_FOLDER &$obj
+   * @param OBJECT_IN_FOLDER $obj
    * @return integer
    * @access private
    */
-  function _size_of (&$obj)
+  function _size_of ($obj)
   {
     return strlen ($obj->description);
   }
   
   /**
    * Show all details for an object.
-   * @param OBJECT_IN_FOLDER &$obj
+   * @param OBJECT_IN_FOLDER $obj
    * @access private
    */
-  function _echo_header (&$obj)
+  function _echo_header ($obj)
   {
 ?>
   <table cellpadding="1" cellspacing="0">
@@ -128,10 +128,10 @@ class OBJECT_IN_FOLDER_SUMMARY_GRID extends CONTENT_OBJECT_GRID
   
   /**
    * Show search details for an object.
-   * @param OBJECT_IN_FOLDER &$obj
+   * @param OBJECT_IN_FOLDER $obj
    * @access private
    */
-  function _echo_details (&$obj)
+  function _echo_details ($obj)
   {
     $this->_echo_user_information ('Created by', $obj->creator (), $obj->time_created );
   }
@@ -139,11 +139,11 @@ class OBJECT_IN_FOLDER_SUMMARY_GRID extends CONTENT_OBJECT_GRID
   /**
    * Show set of user details.
    * @param string $title
-   * @param USER &$user
-   * @param DATE_TIME &$date
+   * @param USER $user
+   * @param DATE_TIME $date
    * @access private
    */
-  function _echo_user_information ($title, &$user, &$date)
+  function _echo_user_information ($title, $user, $date)
   {
 ?>
     <tr>
@@ -159,12 +159,12 @@ class OBJECT_IN_FOLDER_SUMMARY_GRID extends CONTENT_OBJECT_GRID
 
   /**
    * Show parent folders in outline form. 
-   * @param OBJECT_IN_FOLDER &$obj
+   * @param OBJECT_IN_FOLDER $obj
    * @access private
    */
-  function _echo_folders (&$obj)
+  function _echo_folders ($obj)
   {
-    $folder =& $obj->parent_folder ();
+    $folder = $obj->parent_folder ();
     $depth = 0;
     while ($folder->id && ! $folder->is_root ())
     {
@@ -179,7 +179,7 @@ class OBJECT_IN_FOLDER_SUMMARY_GRID extends CONTENT_OBJECT_GRID
       }
       echo $folder->title_as_link ();
       echo '<br>';
-      $folder =& $folder->parent_folder ();
+      $folder = $folder->parent_folder ();
       $depth++;
     }
   }

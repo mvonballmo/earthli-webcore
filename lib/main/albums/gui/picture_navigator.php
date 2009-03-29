@@ -51,10 +51,10 @@ class PICTURE_NAVIGATOR extends MULTI_TYPE_ENTRY_NAVIGATOR
 {
   /**
    * Modify the query to navigate.
-   * @param QUERY &$query
+   * @param QUERY $query
    * @access private
    */
-  function _adjust_query (&$query)
+  function _adjust_query ($query)
   {
     parent::_adjust_query ($query);
 
@@ -65,9 +65,9 @@ class PICTURE_NAVIGATOR extends MULTI_TYPE_ENTRY_NAVIGATOR
 
     if ($journal)
     {
-      $folder =& $this->_entry->parent_folder ();
+      $folder = $this->_entry->parent_folder ();
       $jrnl_query = $folder->entry_query ();
-      $jrnl =& $jrnl_query->object_at_id ($journal);
+      $jrnl = $jrnl_query->object_at_id ($journal);
       if (isset ($jrnl))
       {
         $jrnl->adjust_query ($query);

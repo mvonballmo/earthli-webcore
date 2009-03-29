@@ -52,7 +52,7 @@ class GROUP_QUERY extends QUERY
    * SQL alias for the "main" table.
    * @var string
    */
-  var $alias = 'grp';
+  public $alias = 'grp';
 
   /**
    * Apply default restrictions and tables.
@@ -79,7 +79,7 @@ class GROUP_QUERY extends QUERY
    * @var string
    * @access private
    */
-  var $_privilege_set = Privilege_set_group;
+  protected $_privilege_set = Privilege_set_group;
 }
 
 /**

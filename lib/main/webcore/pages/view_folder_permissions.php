@@ -27,7 +27,7 @@ http://www.earthli.com/software/webcore
 ****************************************************************************/
 
   $folder_query = $App->login->folder_query ();
-  $folder =& $folder_query->object_at_id (read_var ('id'));
+  $folder = $folder_query->object_at_id (read_var ('id'));
 
   if (isset ($folder) && $App->login->is_allowed (Privilege_set_folder, Privilege_secure, $folder))
   {
@@ -45,7 +45,7 @@ http://www.earthli.com/software/webcore
     $Page->start_display ();
 
     $defined = $folder->defines_security ();
-    $parent =& $folder->parent_folder ();
+    $parent = $folder->parent_folder ();
 
     $formatter = new PERMISSIONS_FORMATTER ($App);
     $privilege_groups = $formatter->content_privilege_groups ();
@@ -101,7 +101,7 @@ http://www.earthli.com/software/webcore
 
           /* Make a copy (not a reference). */
           $tree = $App->make_tree_renderer ();
-          $tree->node_info = & $tree_node_info;
+          $tree->node_info = $tree_node_info;
           $tree->display ($folders);
       ?>
       </div>
@@ -246,7 +246,7 @@ http://www.earthli.com/software/webcore
         <td colspan="<?php echo $cols; ?>">&nbsp;</td>
       </tr>
       <?php
-        $groups =& $security->group_permissions ();
+        $groups = $security->group_permissions ();
 
         if (sizeof ($groups) || $defined)
         {
@@ -298,7 +298,7 @@ http://www.earthli.com/software/webcore
         <td colspan="<?php echo $cols; ?>">&nbsp;</td>
       </tr>
       <?php
-        $users =& $security->user_permissions ();
+        $users = $security->user_permissions ();
 
         if (sizeof ($users) || $defined)
         {

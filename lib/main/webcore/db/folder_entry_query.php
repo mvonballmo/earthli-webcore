@@ -53,7 +53,7 @@ class FOLDER_ENTRY_QUERY extends OBJECT_IN_SINGLE_FOLDER_QUERY
    * SQL alias for the "main" table.
    * @var string
    */
-  var $alias = 'entry';
+  public $alias = 'entry';
 
   /**
    * Apply default restrictions and tables.
@@ -80,7 +80,7 @@ class FOLDER_ENTRY_QUERY extends OBJECT_IN_SINGLE_FOLDER_QUERY
    * @param integer $id
    * @return ENTRY
    */
-  function &object_for_comment_at_id ($id)
+  function object_for_comment_at_id ($id)
   {
     $id = $this->validate_as_integer ($id);
     if ($id)
@@ -105,7 +105,7 @@ class FOLDER_ENTRY_QUERY extends OBJECT_IN_SINGLE_FOLDER_QUERY
    * @param string $type
    * @return ENTRY
    */
-  function &object_for_attachment_at_id ($id, $type)
+  function object_for_attachment_at_id ($id, $type)
   {
     $id = $this->validate_as_integer ($id);
     if ($id)
@@ -126,7 +126,7 @@ class FOLDER_ENTRY_QUERY extends OBJECT_IN_SINGLE_FOLDER_QUERY
       $objs = $this->objects ();
       if (sizeof ($objs))
       {
-        $Result =& $objs [0];
+        $Result = $objs [0];
       }
       $this->_end_system_call ();
       $this->_tables = $old_tables;
@@ -205,7 +205,7 @@ class FOLDER_ENTRY_QUERY extends OBJECT_IN_SINGLE_FOLDER_QUERY
    * @var string
    * @access private
    */
-  var $_privilege_set = Privilege_set_entry;
+  protected $_privilege_set = Privilege_set_entry;
 }
 
 /**
@@ -218,9 +218,9 @@ class FOLDER_ENTRY_QUERY extends OBJECT_IN_SINGLE_FOLDER_QUERY
 class FOLDER_MULTI_ENTRY_QUERY extends FOLDER_ENTRY_QUERY
 {
   /**
-   * @param FOLDER &$folder Retrieve entries from this folder.
+   * @param FOLDER $folder Retrieve entries from this folder.
    */
-  function FOLDER_MULTI_ENTRY_QUERY (&$folder)
+  function FOLDER_MULTI_ENTRY_QUERY ($folder)
   {
     FOLDER_ENTRY_QUERY::FOLDER_ENTRY_QUERY ($folder);
     $this->set_type ('');

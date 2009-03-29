@@ -50,9 +50,9 @@ class PROJECT_RENDERER extends FOLDER_RENDERER
 {
   /**
    * Display details for a project in HTML.
-   * @param PROJECT &$obj
+   * @param PROJECT $obj
    */
-  function _echo_html_content (&$obj)
+  function _echo_html_content ($obj)
   {
     if (! $this->_options->show_as_summary || ! $obj->is_organizational ())
     {
@@ -64,9 +64,9 @@ class PROJECT_RENDERER extends FOLDER_RENDERER
 
   /**
    * Shows trunk/branch/etc. for a project in HTML.
-   * @param PROJECT &$obj
+   * @param PROJECT $obj
    */
-  function _echo_details_as_html (&$obj)
+  function _echo_details_as_html ($obj)
   {
   ?>
   <table cellpadding="2" cellspacing="0">
@@ -75,8 +75,8 @@ class PROJECT_RENDERER extends FOLDER_RENDERER
     {
       if ($obj->exists ())
       {
-        $trunk =& $obj->trunk ();
-        $latest_release =& $trunk->latest_release ();
+        $trunk = $obj->trunk ();
+        $latest_release = $trunk->latest_release ();
         if ($latest_release)
         {
           $latest_text = $latest_release->title_as_link ();
@@ -125,7 +125,7 @@ class PROJECT_RENDERER extends FOLDER_RENDERER
 
     if (! $this->_options->show_as_summary)
     {
-      $options =& $obj->options ();
+      $options = $obj->options ();
   ?>
     <tr>
       <td class="label">Assignees</td>
@@ -140,7 +140,7 @@ class PROJECT_RENDERER extends FOLDER_RENDERER
           echo 'Allow all users';
           break;
         case Project_user_group:
-          $group =& $options->assignee_group ();
+          $group = $options->assignee_group ();
           echo 'Allow only users from ' . $group->title_as_link ();
           break;
         }
@@ -160,7 +160,7 @@ class PROJECT_RENDERER extends FOLDER_RENDERER
           echo 'Allow all users';
           break;
         case Project_user_group:
-          $group =& $options->reporter_group ();
+          $group = $options->reporter_group ();
           echo 'Allow only users from ' . $group->title_as_link ();
           break;
         }
@@ -190,7 +190,7 @@ class PROJECT_RENDERER extends FOLDER_RENDERER
       <td></td>
       <td class="notes">
   <?php 
-          $definer =& $options->definer ();
+          $definer = $options->definer ();
           echo 'Options are inherited from ' . $definer->title_as_link ();
         }
   ?>
@@ -205,9 +205,9 @@ class PROJECT_RENDERER extends FOLDER_RENDERER
 
   /**
    * Display details for a project in plain text.
-   * @param PROJECT &$obj
+   * @param PROJECT $obj
    */
-  function _display_as_plain_text (&$obj)
+  function _display_as_plain_text ($obj)
   {
     parent::_display_as_plain_text ($obj);
   }

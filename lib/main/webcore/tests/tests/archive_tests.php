@@ -82,7 +82,7 @@ class ARCHIVE_TEST_TASK extends TEST_TASK
     $archive->extract_to ($this->_temp_path, new CALLBACK_METHOD ('show_error', $this));
   }
   
-  var $_temp_path;
+  protected $_temp_path;
 }
 
 ?>

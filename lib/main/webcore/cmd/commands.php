@@ -53,41 +53,41 @@ class COMMAND
    * Unique id used to access the command.
    * @var string
    */
-  var $id;
+  public $id;
   /**
    * Text used for the title of the link.
    * @var string
    */
-  var $title = '';
+  public $title = '';
   /**
    * Text used inside the link.
    * @var string
    */
-  var $text = '';
+  public $text = '';
   /**
    * URL to execute the command.
    * @var string
    */
-  var $link = '';
+  public $link = '';
   /**
    * Name of the image to use for the command when rendered.
    * @var string
    */
-  var $icon = '';
+  public $icon = '';
   /**
    * Can this command be executed?
    * The renderer can decide whether to display this button as disabled or to
    * simply omit it from the list.
    * @var boolean
    */
-  var $executable = TRUE;
+  public $executable = TRUE;
   /**
    * Weight used to sort commands in lists.
    * Used by the {@link MENU_RENDERER} to determine which commands are shown
    * outside of a dropdown. Values are normalized prior to rendering.
    * @var integer
    */
-  var $importance = Command_importance_default;
+  public $importance = Command_importance_default;
 }
 
 /**
@@ -103,12 +103,12 @@ class COMMAND_GROUP
   /**
    * @var string
    */
-  var $name;
+  public $name;
   /**
    * @see COMMAND 
    * @var array[COMMAND]
    */
-  var $commands = array ();  
+  public $commands = array ();  
   
   /**
    * Are there any executable commands in this group?
@@ -176,7 +176,7 @@ class COMMANDS extends WEBCORE_OBJECT
    * @param string $id
    * @return BUTTON
    */
-  function &command_at ($id)
+  function command_at ($id)
   {
     if (isset ($this->_commands [$id]))
     {
@@ -214,7 +214,7 @@ class COMMANDS extends WEBCORE_OBJECT
   function append_group ($group)
   {
     $this->_set_current_group ($group);
-    $this->_groups [] =& $this->_current_group;    
+    $this->_groups [] = $this->_current_group;    
   }
 
   /**
@@ -240,8 +240,8 @@ class COMMANDS extends WEBCORE_OBJECT
   function append ($cmd, $group = '')
   {
     $this->_add_command ($cmd, $group);
-    $this->_current_group->commands [] =& $cmd;
-    $this->_ordered_commands [] =& $cmd;
+    $this->_current_group->commands [] = $cmd;
+    $this->_ordered_commands [] = $cmd;
   }
   
   /**
@@ -269,7 +269,7 @@ class COMMANDS extends WEBCORE_OBJECT
   {
     for ($idx = 0; $idx < sizeof ($this->_ordered_commands); $idx++)
     {
-      $cmd =& $this->_ordered_commands [$idx];
+      $cmd = $this->_ordered_commands [$idx];
       if (! in_array ($cmd->id, $ids))
       {
         $cmd->executable = FALSE;
@@ -280,19 +280,19 @@ class COMMANDS extends WEBCORE_OBJECT
   /**
    * Add a command to the current group and the command list.
    * Called from {@link append()} and {@link prepend()}.
-   * @param COMMAND &$cmd
+   * @param COMMAND $cmd
    * @param string $group Add the command to this group. If this is empty, the
    * button is added to the current group. If the group does not exist, the
    * group is created with {@link append_group()}.
    * @access private
    */
-  function _add_command (&$cmd, $group)
+  function _add_command ($cmd, $group)
   {
     if (! isset ($this->_current_group) || (($group != '') && ($group != $this->_current_group->name)))
     {
       $this->append_group ($group);
     }
-    $this->_commands [$cmd->id] =& $cmd;
+    $this->_commands [$cmd->id] = $cmd;
   }
   
   /**
@@ -325,7 +325,7 @@ class COMMANDS extends WEBCORE_OBJECT
    * @see $_commands
    * @access private
    */
-  var $_groups = array ();
+  protected $_groups = array ();
   /**
    * All commands indexed by {@link COMMAND::$id}.
    * @var array[COMMAND]
@@ -334,7 +334,7 @@ class COMMANDS extends WEBCORE_OBJECT
    * @see $_ordered_commands
    * @access private
    */
-  var $_commands = array ();
+  protected $_commands = array ();
   /**
    * All commands in order.
    * @var array[COMMAND]
@@ -343,7 +343,7 @@ class COMMANDS extends WEBCORE_OBJECT
    * @see $_groups
    * @access private
    */
-  var $_ordered_commands = array ();
+  protected $_ordered_commands = array ();
 }
 
 ?>

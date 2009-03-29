@@ -52,11 +52,11 @@ class CONTENT_OBJECT extends AUDITABLE
   /**
    * @var string
    */
-  var $title;
+  public $title;
   /**
    * @var string
    */
-  var $description;
+  public $description;
 
   /**
    * Description transformed into HTML.
@@ -89,9 +89,9 @@ class CONTENT_OBJECT extends AUDITABLE
   }
 
   /**
-   * @param DATABASE &$db Database from which to load values.
+   * @param DATABASE $db Database from which to load values.
    */
-  function load (&$db)
+  function load ($db)
   {
     parent::load ($db);
     $this->title = $db->f ('title');
@@ -99,9 +99,9 @@ class CONTENT_OBJECT extends AUDITABLE
   }
 
   /**
-   * @param SQL_STORAGE &$storage Store values to this object.
+   * @param SQL_STORAGE $storage Store values to this object.
    */
-  function store_to (&$storage)
+  function store_to ($storage)
   {
     parent::store_to ($storage);
     $tname = $this->_table_name ();

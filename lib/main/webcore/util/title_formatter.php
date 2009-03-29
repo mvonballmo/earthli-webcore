@@ -54,7 +54,7 @@ class TITLE_FORMATTER extends WEBCORE_OBJECT
    * Used for both text and link.
    * @var string
    */
-  var $CSS_class = '';
+  public $CSS_class = '';
   /**
    * The maximum displayed length of the text.
    * If the title given exceeds this length, the excess characters are cut from
@@ -62,24 +62,24 @@ class TITLE_FORMATTER extends WEBCORE_OBJECT
    * link or as the title of a span wrapped around the text.
    * @var integer
    */
-  var $max_visible_output_chars = 0;
+  public $max_visible_output_chars = 0;
   /**
    * URL used when formatting the title as a link.
    * @var string
    */
-  var $location;
+  public $location;
   /**
    * Full text of the title to display.
    * @var string
    */
-  var $text;
+  public $text;
   /**
    * Contents of the link's title (usually a tooltip).
    * This is displayed in addition to the entire text if the text has to be
    * truncated, or displayed alone if not.
    * @var string
    */
-  var $title = '';
+  public $title = '';
 
   /**
    * Append a query string name and value to the url.
@@ -125,7 +125,7 @@ class TITLE_FORMATTER extends WEBCORE_OBJECT
    */
   function as_plain_text ()
   {
-    $munger =& $this->context->plain_text_title_formatter ();
+    $munger = $this->context->plain_text_title_formatter ();
     $text_to_use = $munger->transform ($this->text);
     return $this->_truncate ($text_to_use);
   }
@@ -239,7 +239,7 @@ class TITLE_FORMATTER extends WEBCORE_OBJECT
     }
     else
     {
-      $munger =& $this->context->html_title_formatter ();
+      $munger = $this->context->html_title_formatter ();
       $text_to_use = $munger->transform ($this->text);
     }
 

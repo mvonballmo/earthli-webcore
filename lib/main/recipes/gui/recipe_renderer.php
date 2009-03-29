@@ -50,10 +50,10 @@ class RECIPE_RENDERER extends DRAFTABLE_ENTRY_RENDERER
 {
   /**
    * Outputs the object as HTML.
-   * @param RECIPE &$entry
+   * @param RECIPE $entry
    * @access private
    */
-  function _display_as_html (&$entry)
+  function _display_as_html ($entry)
   {
     $this->_echo_subscribe_status ($entry);
 
@@ -84,10 +84,10 @@ class RECIPE_RENDERER extends DRAFTABLE_ENTRY_RENDERER
 
   /**
    * Outputs the object as plain text.
-   * @param RECIPE &$entry
+   * @param RECIPE $entry
    * @access private
    */
-  function _display_as_plain_text (&$entry)
+  function _display_as_plain_text ($entry)
   {
     $this->_echo_plain_text_user_information ($entry);
 

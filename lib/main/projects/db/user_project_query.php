@@ -54,7 +54,7 @@ class USER_PROJECT_QUERY extends USER_FOLDER_QUERY
     * @param integer $id Unique id of the branch to retrieve.
     * @return PROJECT
     */
-  function &folder_for_branch_at_id ($id)
+  function folder_for_branch_at_id ($id)
   {
     $id = $this->validate_as_integer ($id);
     if ($id)
@@ -76,7 +76,7 @@ class USER_PROJECT_QUERY extends USER_FOLDER_QUERY
     * @param integer $id Unique id of the release to retrieve.
     * @return PROJECT
     */
-  function &folder_for_release_at_id ($id)
+  function folder_for_release_at_id ($id)
   {
     $id = $this->validate_as_integer ($id);
     if ($id)
@@ -97,7 +97,7 @@ class USER_PROJECT_QUERY extends USER_FOLDER_QUERY
     * @param integer $id Unique id of the component to retrieve.
     * @return PROJECT
     */
-  function &folder_for_component_at_id ($id)
+  function folder_for_component_at_id ($id)
   {
     $id = $this->validate_as_integer ($id);
     if ($id)

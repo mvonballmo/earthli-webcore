@@ -53,22 +53,22 @@ class PURGE_OBJECT_FORM extends RENDERABLE_FORM
   /**
    * @var string
    */
-  var $button = 'Yes';
+  public $button = 'Yes';
   /**
    * Show the object's name as a link when displayed?
     * @var boolean
     */
-  var $show_object_as_link = TRUE;
+  public $show_object_as_link = TRUE;
   /**
    * Show the previews before the form?
    * @var boolean
    */
-  var $show_previews_first = FALSE;
+  public $show_previews_first = FALSE;
   
   /**
-   * @param APPLICATION &$app
+   * @param APPLICATION $app
    */
-  function PURGE_OBJECT_FORM (&$app)
+  function PURGE_OBJECT_FORM ($app)
   {
     RENDERABLE_FORM::RENDERABLE_FORM ($app);
     
@@ -81,7 +81,7 @@ class PURGE_OBJECT_FORM extends RENDERABLE_FORM
 
   /**
    * Delete the given object.
-   * @param OBJECT_IN_FOLDER &$obj
+   * @param OBJECT_IN_FOLDER $obj
    * @access private
    */
   function commit ($obj)
@@ -93,16 +93,16 @@ class PURGE_OBJECT_FORM extends RENDERABLE_FORM
 
   /**
    * Load initial properties from this object.
-   * @param OBJECT_IN_FOLDER &$obj
+   * @param OBJECT_IN_FOLDER $obj
    */
-  function load_from_object (&$obj)
+  function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
     $this->add_preview ($obj, $obj->title_as_html (), FALSE);
     $this->set_value ('remove_resources', TRUE);
 
     $type_info = $this->_object->type_info ();
-    $field =& $this->field_at ('remove_resources');
+    $field = $this->field_at ('remove_resources');
     $field->description = '<strong>Uncheck</strong> if this is a duplicate (e.g. another ' . $type_info->singular_title . ' uses the same files).';
   }
 
@@ -113,29 +113,29 @@ class PURGE_OBJECT_FORM extends RENDERABLE_FORM
   
   /**
    * Apply form properties to the purge options for the object.
-   * @param PURGE_OPTIONS &$options
+   * @param PURGE_OPTIONS $options
    * @access private
    */
-  function _configure_purge_options (&$options)
+  function _configure_purge_options ($options)
   {
     $options->remove_resources = $this->value_for ('remove_resources');
   }
 
   /**
-   * @param OBJECT_IN_FOLDER &$obj
+   * @param OBJECT_IN_FOLDER $obj
    * @access private
    */
-  function _store_to_object (&$obj)
+  function _store_to_object ($obj)
   {
   }
   
   /**
    * Allows descendents to draw options in the standard form.
    * Called from {@link _draw_controls()}.
-   * @param FORM_RENDERER &$renderer
+   * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_options (&$renderer)
+  function _draw_options ($renderer)
   {
     if ($this->visible ('remove_resources'))
     {
@@ -146,10 +146,10 @@ class PURGE_OBJECT_FORM extends RENDERABLE_FORM
   }
   
   /**
-   * @param FORM_RENDERER &$renderer
+   * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_controls (&$renderer)
+  function _draw_controls ($renderer)
   {
     $renderer->start ();
 

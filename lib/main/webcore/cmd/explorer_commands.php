@@ -53,10 +53,10 @@ require_once ('webcore/cmd/commands.php');
 class EXPLORER_COMMANDS extends COMMANDS
 {
   /**
-   * @param FOLDER &$folder Configure commands for this object.
+   * @param FOLDER $folder Configure commands for this object.
    * @param string $form_name Commands are created using this form name.
    */
-  function EXPLORER_COMMANDS (&$folder, $form_name)
+  function EXPLORER_COMMANDS ($folder, $form_name)
   {
     COMMANDS::COMMANDS ($folder->app);
 
@@ -131,10 +131,10 @@ class EXPLORER_COMMANDS extends COMMANDS
 class DRAFTABLE_EXPLORER_COMMANDS extends EXPLORER_COMMANDS
 {
   /**
-   * @param FOLDER &$folder Configure commands for this object.
+   * @param FOLDER $folder Configure commands for this object.
    * @param string $form_name Commands are created using this form name.
    */
-  function DRAFTABLE_EXPLORER_COMMANDS (&$folder, $form_name)
+  function DRAFTABLE_EXPLORER_COMMANDS ($folder, $form_name)
   {
     EXPLORER_COMMANDS::EXPLORER_COMMANDS ($folder, $form_name);
 

@@ -54,10 +54,10 @@ class PROJECT_TREE_NODE_INFO extends FOLDER_TREE_NODE_INFO
 {
   /**
    * Return the icon for the given node.
-   * @param PROJECT &$node Draw the title for this project.
+   * @param PROJECT $node Draw the title for this project.
    * @return string
    */
-  function icon_for (&$node)
+  function icon_for ($node)
   {
     if ($node->defines_options ())
     {
@@ -69,19 +69,19 @@ class PROJECT_TREE_NODE_INFO extends FOLDER_TREE_NODE_INFO
   }
   
   /**
-   * @param PROJECT &$node Is this project editable?
+   * @param PROJECT $node Is this project editable?
     * @access private
     */
-  function visitable (&$node)
+  function visitable ($node)
   {
     return $this->login->is_allowed (Privilege_set_folder, Privilege_modify, $node);
   }
 
   /**
-   * @param array[PROJECT] &$nodes If a node in this list defines its own options, make sure its parent node is open (make it visible). Works with a tree of projects as well.
+   * @param array[PROJECT] $nodes If a node in this list defines its own options, make sure its parent node is open (make it visible). Works with a tree of projects as well.
     * @access private
     */
-  function set_defined_nodes_visible (&$nodes)
+  function set_defined_nodes_visible ($nodes)
   {
     if (sizeof ($nodes))
     {

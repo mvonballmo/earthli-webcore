@@ -52,7 +52,7 @@ class FRAMEWORK_INFO_QUERY extends QUERY
    * SQL alias for the "main" table.
    * @var string
    */
-  var $alias = 'ver';
+  public $alias = 'ver';
 
   /**
    * Apply default restrictions and tables.
@@ -66,11 +66,11 @@ class FRAMEWORK_INFO_QUERY extends QUERY
   
   /**
    * Get the application info for the given application.
-   * @param mixed &$obj Can be an {@link APPLICATION} or an {@link
+   * @param mixed $obj Can be an {@link APPLICATION} or an {@link
    * ENVIRONMENT}.
    * @return FRAMEWORK_INFO
    */
-  function info_for (&$obj)
+  function info_for ($obj)
   {
     $this->clear_restrictions ();
     $this->restrict_by_op ('title', $obj->framework_id);

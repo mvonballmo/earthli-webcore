@@ -50,10 +50,10 @@ class ATTACHMENT_RENDERER extends CONTENT_OBJECT_RENDERER
 {
   /**
    * Outputs the object as HTML.
-   * @param ATTACHMENT &$obj
+   * @param ATTACHMENT $obj
    * @access private
    */
-  function _display_as_html (&$obj)
+  function _display_as_html ($obj)
   {
     echo '<div style="float: left">';
     echo $obj->icon_as_html ('50px');
@@ -77,7 +77,7 @@ class ATTACHMENT_RENDERER extends CONTENT_OBJECT_RENDERER
     {
       echo "<tr><td colspan=\"2\">&nbsp;</td></tr>\n";
       echo '<tr><td colspan="2">';
-      $renderer =& $this->context->make_controls_renderer ();
+      $renderer = $this->context->make_controls_renderer ();
       $buttons [] = $renderer->button_as_html ('Download', $file_url, '{icons}buttons/download');
       $renderer->draw_buttons_in_row ($buttons);
       echo "</td></tr>\n";
@@ -103,7 +103,7 @@ class ATTACHMENT_RENDERER extends CONTENT_OBJECT_RENDERER
   
   /**
    * Show the image for this given file name.
-   * @param ATTACHMENT &$obj
+   * @param ATTACHMENT $obj
    * @param string $file_url
    * @access private
    */
@@ -152,7 +152,7 @@ class ATTACHMENT_RENDERER extends CONTENT_OBJECT_RENDERER
 
   /**
    * Show the {@link ARCHIVE} for this given file name.
-   * @param ATTACHMENT &$obj
+   * @param ATTACHMENT $obj
    * @param string $file_name
    * @access private
    */
@@ -190,10 +190,10 @@ class ATTACHMENT_RENDERER extends CONTENT_OBJECT_RENDERER
   
   /**
    * Outputs the object as plain text.
-   * @param object &$entry
+   * @param object $entry
    * @access private
    */
-  function _display_as_plain_text (&$obj)
+  function _display_as_plain_text ($obj)
   {
     $this->_echo_plain_text_user_information ($obj);
 
@@ -229,7 +229,7 @@ class ATTACHMENT_RENDERER extends CONTENT_OBJECT_RENDERER
 
   /**
    * Show the {@link ARCHIVE} for this given file name.
-   * @param ATTACHMENT &$obj
+   * @param ATTACHMENT $obj
    * @param string $file_name
    * @access private
    */
@@ -248,12 +248,12 @@ class ATTACHMENT_RENDERER extends CONTENT_OBJECT_RENDERER
   /**
    * Draw information for a file as HTML.
    * Passed as a {@link CALLBACK} if the attachment is an {@link ARCHIVE}.
-   * @param ARCHIVE &$archive
-   * @param COMPRESSED_FILE_ENTRY &$entry
+   * @param ARCHIVE $archive
+   * @param COMPRESSED_FILE_ENTRY $entry
    * @param CALLBACK $error_callback Function prototype: function ({@link COMPRESSED_FILE} $archive, string $msg, {@link COMPRESSED_FILE_ENTRY} $entry)
    * @access private
    */
-  function list_file_as_html (&$archive, &$entry, $error_callback = null)
+  function list_file_as_html ($archive, $entry, $error_callback = null)
   {
     $ft = $this->context->file_type_manager ();
     $url = new FILE_URL ($entry->name);
@@ -266,12 +266,12 @@ class ATTACHMENT_RENDERER extends CONTENT_OBJECT_RENDERER
   /**
    * Draw information for a file as plain text.
    * Passed as a {@link CALLBACK} if the attachment is an {@link ARCHIVE}.
-   * @param ARCHIVE &$archive
-   * @param COMPRESSED_FILE_ENTRY &$entry
+   * @param ARCHIVE $archive
+   * @param COMPRESSED_FILE_ENTRY $entry
    * @param CALLBACK $error_callback Function prototype: function ({@link COMPRESSED_FILE} $archive, string $msg, {@link COMPRESSED_FILE_ENTRY} $entry)
    * @access private
    */
-  function list_file_as_text (&$archive, &$entry, $error_callback = null)
+  function list_file_as_text ($archive, $entry, $error_callback = null)
   {
     $this->_file_entries [] = $entry;
     $this->_longest_name = max ($this->_longest_name, strlen ($entry->name));
@@ -281,13 +281,13 @@ class ATTACHMENT_RENDERER extends CONTENT_OBJECT_RENDERER
    * @var integer
    * @access private
    */
-  var $_longest_name;
+  protected $_longest_name;
   /**
    * @var array[COMPRESSED_FILE_ENTRY]
    * @see COMPRESSED_FILE_ENTRY
    * @access private
    */
-  var $_file_entries;
+  protected $_file_entries;
 }
 
 ?>

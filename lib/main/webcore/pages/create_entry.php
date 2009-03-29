@@ -32,7 +32,7 @@ http://www.earthli.com/software/webcore
   */
 
   $folder_query = $App->login->folder_query ();
-  $folder =& $folder_query->object_at_id (read_var ('id'));
+  $folder = $folder_query->object_at_id (read_var ('id'));
 
   if (! isset ($folder))
   {

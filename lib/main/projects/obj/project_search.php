@@ -52,12 +52,12 @@ class JOB_SEARCH extends MULTI_ENTRY_SEARCH
   /**
    * @var string
    */
-  var $type = 'job';
+  public $type = 'job';
 
   /**
-   * @param APPLICATION &$app Main application.
+   * @param APPLICATION $app Main application.
    */
-  function JOB_SEARCH (&$app)
+  function JOB_SEARCH ($app)
   {
     MULTI_ENTRY_SEARCH::MULTI_ENTRY_SEARCH ($app, new SEARCH_JOB_FIELDS ($app));
   }
@@ -75,12 +75,12 @@ class CHANGE_SEARCH extends MULTI_ENTRY_SEARCH
   /**
    * @var string
    */
-  var $type = 'change';
+  public $type = 'change';
 
   /**
-   * @param APPLICATION &$app Main application.
+   * @param APPLICATION $app Main application.
    */
-  function CHANGE_SEARCH (&$app)
+  function CHANGE_SEARCH ($app)
   {
     MULTI_ENTRY_SEARCH::MULTI_ENTRY_SEARCH ($app, new SEARCH_CHANGE_FIELDS ($app));
   }

@@ -42,7 +42,7 @@ http://www.earthli.com/software/webcore/projects
   fwrite ($fhandle, "<?xml version=\"1.0\"?>\n");
   fwrite ($fhandle, "<OpusVCS>\n");
 
-  $indexed_kinds =& $App->entry_kinds ();
+  $indexed_kinds = $App->entry_kinds ();
   foreach ($indexed_kinds as $kind)
   {
     fwrite ($fhandle, "<kind name=\"$kind->title\">\n");

@@ -50,10 +50,10 @@ class COMPONENT_RENDERER extends CONTENT_OBJECT_RENDERER
 {
   /**
    * Outputs the object as HTML.
-   * @param COMPONENT &$obj
+   * @param COMPONENT $obj
    * @access private
    */
-  function _display_as_html (&$obj)
+  function _display_as_html ($obj)
   {
     if ($obj->icon_url)
     {

@@ -52,7 +52,7 @@ class PROJECT_USER_BRANCH_QUERY extends USER_ENTRY_QUERY
    * SQL alias for the "main" table.
    * @var string
    */
-  var $alias = 'bra';
+  public $alias = 'bra';
 
   /**
    * Apply default restrictions and tables.

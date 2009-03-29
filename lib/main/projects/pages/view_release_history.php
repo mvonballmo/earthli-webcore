@@ -28,16 +28,16 @@ http://www.earthli.com/software/webcore/projects
 
   $id = read_var ('id');
   $folder_query = $App->login->folder_query ();
-  $folder =& $folder_query->folder_for_release_at_id ($id);
+  $folder = $folder_query->folder_for_release_at_id ($id);
 
   if (isset ($folder))
   {
     $rel_query = $folder->release_query ();
-    $release =& $rel_query->object_at_id ($id);
+    $release = $rel_query->object_at_id ($id);
 
     if (isset ($release))
     {
-      $branch =& $release->branch ();
+      $branch = $release->branch ();
     }
   }
 
@@ -53,7 +53,7 @@ http://www.earthli.com/software/webcore/projects
     $Page->location->add_object_link ($release);
 
     $history_item_query = $release->history_item_query ();
-    $obj =& $release;
+    $obj = $release;
 
     include_once ('webcore/pages/view_history.php');
   }

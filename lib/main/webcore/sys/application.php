@@ -73,101 +73,101 @@ class APPLICATION extends CONTEXT
    * Displayed in the {@link PAGE_TITLE::$group}.
    * @var string
    */
-  var $title = 'WebCore Application';
+  public $title = 'WebCore Application';
   /**
    * Displayed in the banner by the {@link DEFAULT_PAGE_RENDERER}.
    * @var string
    */
-  var $short_title = 'WebCore';
+  public $short_title = 'WebCore';
   /**
    * Unique ID for this framework.
    * Change only in descendents; used for versioning and migration.
    * @var string
    */
-  var $framework_id = 'com.earthli.generic-app';
+  public $framework_id = 'com.earthli.generic-app';
   /**
    * @var integer
    */
-  var $version = '1.0';
+  public $version = '1.0';
   /**
    * @var string
    */
-  var $icon = '{icons}products/webcore';
+  public $icon = '{icons}products/webcore';
   /**
    * Home page for the application.
    * Used to format the application info for support requests.
    * @var string
    */
-  var $support_url = 'http://earthli.com/software/webcore/';
+  public $support_url = 'http://earthli.com/software/webcore/';
   /**
    * Id of the folder that serves as the tree root (can be empty)
    * @var integer
    */
-  var $root_folder_id = 1;
+  public $root_folder_id = 1;
   /**
    * Is this application online?
    * Call {@link set_offline()} to change this value.
    * @var boolean
    */
-  var $offline = FALSE;
+  public $offline = FALSE;
   /**
    * Text to display as having been searched.
    * @var string
    */
-  var $search_text = '';
+  public $search_text = '';
 
   /**
    * Page in which this application is anchored.
    * @var PAGE
    */
-  var $page;
+  public $page;
   /**
    * The logged-in user (can be anonymous)
    * @var USER
    */
-  var $login;
+  public $login;
 
   /**
    * Map the physical table names to the aliases used by the WebCore.
     * @var APPLICATION_TABLE_NAMES
     */
-  var $table_names;
+  public $table_names;
   /**
    * Map the physical page names to the aliases used by the WebCore.
     * @var APPLICATION_PAGE_NAMES
     */
-  var $page_names;
+  public $page_names;
   /**
    * Application-specific display settings.
     * @var APPLICATION_DISPLAY_OPTIONS
     */
-  var $display_options;
+  public $display_options;
   /**
    * Options related to users.
     * @var APPLICATION_USER_OPTIONS
     */
-  var $user_options;
+  public $user_options;
   /**
    * Additional mailing options (added to those declared in CONTEXT).
     * @var APPLICATION_MAIL_OPTIONS
     */
-  var $mail_options;
+  public $mail_options;
   /**
    * Options used to build anonymous user names.
     * @var APPLICATION_ANON_OPTIONS
     */
-  var $anon_options;
+  public $anon_options;
   /**
    * @var array[integer]
    */
-  var $max_title_sizes;
+  public $max_title_sizes;
 
   /**
-   * @param PAGE &$page Page to which this application is attached.
+   * @param PAGE $page Page to which this application is attached.
    */
-  function APPLICATION (&$page)
+  function APPLICATION ($page)
   {
-    $this->page =& $page;
+    $this->page = $page;
     $this->inherit_resources_from ($page);
 
     CONTEXT::CONTEXT ($page->env);
@@ -188,7 +188,7 @@ class APPLICATION extends CONTEXT
     $this->set_extension (Folder_name_app_styles, 'css');
     $this->set_extension (Folder_name_app_scripts, 'js');
 
-    $this->exception_handler =& $page->exception_handler;
+    $this->exception_handler = $page->exception_handler;
 
     $class_name = $this->final_class_name ('APPLICATION_TABLE_NAMES');
     $this->table_names = new $class_name ();
@@ -441,10 +441,10 @@ class APPLICATION extends CONTEXT
    * on the local client. Use this function only for a legitimate login. To
    * change the logged-in user when performing tasks, use {@link set_login()}.
    * To log in using a name and password, use {@link impersonate()}.
-   * @param USER &$user Log in as this user
+   * @param USER $user Log in as this user
    * @param boolean $remember Remember this login between sessions?
    */
-  function log_in (&$user, $remember)
+  function log_in ($user, $remember)
   {
     if (isset ($user) && ! $user->is_allowed (Privilege_set_global, Privilege_login))
     {
@@ -468,9 +468,9 @@ class APPLICATION extends CONTEXT
    * local client. Use this function from tasks that need to retrieve data as
    * other users. To log in using a name and password, use
    * {@link impersonate()}.
-   * @param USER &$user
+   * @param USER $user
    */
-  function set_login (&$user)
+  function set_login ($user)
   {
     $this->login = $user;
 
@@ -479,7 +479,7 @@ class APPLICATION extends CONTEXT
      * login variable manually.
      */
 
-    $user->login =& $user;
+    $user->login = $user;
   }
 
   /**
@@ -496,7 +496,7 @@ class APPLICATION extends CONTEXT
     {
       $user_query = $this->user_query ();
       $user_query->include_permissions (TRUE);
-      $user =& $user_query->object_at_name ($name);
+      $user = $user_query->object_at_name ($name);
       $user_query->include_permissions (FALSE);
     }
 
@@ -536,17 +536,17 @@ class APPLICATION extends CONTEXT
    * otherwise, returns {@link non_existent_user()}.
    * @return USER
    */
-  function &user_at_id ($id, $include_permissions = FALSE, $allow_null = FALSE)
+  function user_at_id ($id, $include_permissions = FALSE, $allow_null = FALSE)
   {
     $Result = null;
 
     if (! empty ($id))
     {
-      $cache =& $this->user_cache ();
-      $old = $cache->_query->permissions_included;
-      $cache->_query->include_permissions ($include_permissions);
-      $Result =& $cache->object_at_id ($id);
-      $cache->_query->include_permissions ($old);
+      $cache = $this->user_cache ();
+      $old = $cache->query->permissions_included;
+      $cache->query->include_permissions ($include_permissions);
+      $Result = $cache->object_at_id ($id);
+      $cache->query->include_permissions ($old);
     }
 
     if (empty ($Result))
@@ -558,7 +558,7 @@ class APPLICATION extends CONTEXT
       }
       else
       {
-        $Result =& $this->non_existent_user ();
+        $Result = $this->non_existent_user ();
       }
     }
 
@@ -569,7 +569,7 @@ class APPLICATION extends CONTEXT
    * Return a user representing a generic anonymous user
    * @return USER
    */
-  function &non_existent_user ()
+  function non_existent_user ()
   {
     if (! isset ($this->_non_existent_user))
     {
@@ -586,7 +586,7 @@ class APPLICATION extends CONTEXT
    * Return a user representing a generic anonymous user
    * @return USER
    */
-  function &anon_user ()
+  function anon_user ()
   {
     if (! isset ($this->_anon_user))
     {
@@ -599,7 +599,7 @@ class APPLICATION extends CONTEXT
       $this->_anon_user->id = Anon_user_id;
       $this->_anon_user->kind = Privilege_kind_anonymous;
       $this->_anon_user->load_permissions ();
-      $cache =& $this->user_cache ();
+      $cache = $this->user_cache ();
       $cache->add_object ($this->_anon_user);
     }
 
@@ -611,7 +611,7 @@ class APPLICATION extends CONTEXT
    * Used primarily for reading global permissions.
    * @return USER
    */
-  function &global_user ()
+  function global_user ()
   {
     if (! isset ($this->_global_user))
     {
@@ -651,9 +651,9 @@ class APPLICATION extends CONTEXT
   function set_search_text ($text)
   {
     $this->search_text = $text;
-    $munger =& $this->html_text_formatter ();
+    $munger = $this->html_text_formatter ();
     $munger->highlighted_words = $text;
-    $munger =& $this->html_title_formatter ();
+    $munger = $this->html_title_formatter ();
     $munger->highlighted_words = $text;
   }
 
@@ -902,7 +902,7 @@ class APPLICATION extends CONTEXT
    * @return QUERY_BASED_CACHE
    * @access private
    */
-  function &user_cache ()
+  function user_cache ()
   {
     if (! isset ($this->_user_cache))
     {
@@ -938,7 +938,7 @@ class APPLICATION extends CONTEXT
    */
   function _make_anon_name ()
   {
-    $opts =& $this->anon_options;
+    $opts = $this->anon_options;
     $browser = $this->env->browser ();
 
     if ($opts->resolve_host)
@@ -1006,7 +1006,7 @@ class APPLICATION extends CONTEXT
    * @return USER
    * @access private
    */
-  function &_logged_in_user ($force = FALSE)
+  function _logged_in_user ($force = FALSE)
   {
     $info_name = $this->storage_options->login_user_name;
     $user_info = $this->storage->value ($info_name);
@@ -1026,28 +1026,28 @@ class APPLICATION extends CONTEXT
       if ($ip_address)
       {
         $user_query->include_permissions (TRUE);
-        $Result =& $user_query->object_with_fields (array ('ip_address', 'kind'), array(ip2long ($ip_address), 'anonymous'));
+        $Result = $user_query->object_with_fields (array ('ip_address', 'kind'), array(ip2long ($ip_address), 'anonymous'));
         $user_query->include_permissions (FALSE);
 
         if ($Result)
         {
-          $cache =& $this->user_cache ();
+          $cache = $this->user_cache ();
           $cache->add_object ($Result);
         }
         elseif ($force)
         {
-          $Result =& $this->new_user (Privilege_kind_anonymous);
-          $history_item =& $Result->new_history_item ();
+          $Result = $this->new_user (Privilege_kind_anonymous);
+          $history_item = $Result->new_history_item ();
           $Result->store_if_different ($history_item);
 
-          $cache =& $this->user_cache ();
+          $cache = $this->user_cache ();
           $cache->add_object ($Result);
         }
       }
     }
     else
     {
-      $Result =& $this->_decode_user ($user_info);
+      $Result = $this->_decode_user ($user_info);
     }
 
     /* Enforce login privilege. If not allowed to log in, log them back out. */
@@ -1061,7 +1061,7 @@ class APPLICATION extends CONTEXT
 
     if (! isset ($Result))
     {
-      $Result =& $this->anon_user ();
+      $Result = $this->anon_user ();
       $this->storage->clear_value ($info_name);
     }
 
@@ -1071,11 +1071,11 @@ class APPLICATION extends CONTEXT
   /**
    * Return a unique identifier for a user.
    * This is stored in client-side storage (cookie) in order to remember a login.
-   * @param USER &$user
+   * @param USER $user
    * @return string
    * @access private
    */
-  function _encode_user (&$user)
+  function _encode_user ($user)
   {
     return $user->title . '|' . $user->password;
   }
@@ -1087,7 +1087,7 @@ class APPLICATION extends CONTEXT
    * @param string $user_id Unique identifier created with '_encode_user'.
    * @return USER
    */
-  function &_decode_user ($user_id)
+  function _decode_user ($user_id)
   {
     $params = explode ('|', $user_id);
     if (sizeof ($params) == 2)
@@ -1096,11 +1096,11 @@ class APPLICATION extends CONTEXT
       $user_query->include_permissions (TRUE);
       $user_query->restrict ("title = '{$params[0]}'");
       $user_query->restrict ("password = '{$params[1]}'");
-      $Result =& $user_query->first_object ();
+      $Result = $user_query->first_object ();
       $user_query->include_permissions (FALSE);
       if (isset ($Result))
       {
-        $cache =& $this->user_cache ();
+        $cache = $this->user_cache ();
         $cache->add_object ($Result);
       }
       return $Result;
@@ -1137,24 +1137,24 @@ class APPLICATION extends CONTEXT
    * @access private
    * @var USER
    */
-  var $_anon_user;
+  protected $_anon_user;
   /**
    * @access private
    * @var USER
    */
-  var $_global_user;
+  protected $_global_user;
   /**
    * @access private
    * @var USER
    */
-  var $_logged_in_user;
+  protected $_logged_in_user;
 
   /**
    * Access using {@link user_cache()}.
    * @access private
    * @var QUERY_BASED_CACHE
    */
-  var $_user_cache;
+  protected $_user_cache;
 
   /**
    * List of {@link ENTRY} classes.
@@ -1163,13 +1163,13 @@ class APPLICATION extends CONTEXT
    * @var array[string,string]
    * @access private
    */
-  var $_entry_classes;
+  protected $_entry_classes;
   /**
    * Cached list of {@link TYPE_INFO} objects.
    * @var array[TYPE_INFO]
    * @see entry_type_infos()
    * @access private*/
-  var $_entry_type_infos;
+  protected $_entry_type_infos;
   /**
    * Map from a search name to a class name.
    * Used to get type information for the object being searched.
@@ -1177,12 +1177,12 @@ class APPLICATION extends CONTEXT
    * @var array [string,string]
    * @access private
    */
-  var $_searches;
+  protected $_searches;
   /**
    * @var array[string]
    * @access private
    */
-  var $_page_templates;
+  protected $_page_templates;
 }
 
 /**

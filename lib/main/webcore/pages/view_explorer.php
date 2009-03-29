@@ -27,14 +27,14 @@ http://www.earthli.com/software/webcore
 ****************************************************************************/
 
   $folder_query = $App->login->folder_query ();
-  $folder =& $folder_query->object_at_id (read_var ('id'));
+  $folder = $folder_query->object_at_id (read_var ('id'));
 
   if (isset ($folder) && $App->login->is_allowed (Privilege_set_folder, Privilege_view, $folder))
   {
     $App->set_referer ();
 
     $Page->title->subject = 'Explore ' . $folder->title_as_plain_text ();
-    $parent =& $folder->parent_folder ();
+    $parent = $folder->parent_folder ();
     $Page->location->add_folder_link ($parent, '', 'view_explorer.php');
     $Page->location->add_object_link ($folder);
     $Page->location->append ('Explorer');

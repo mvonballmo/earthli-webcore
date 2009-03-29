@@ -52,7 +52,7 @@ class THEME_QUERY extends QUERY
    * SQL alias for the "main" table.
    * @var string
    */
-  var $alias = 'theme';
+  public $alias = 'theme';
 
   /**
    * Apply default restrictions and tables.

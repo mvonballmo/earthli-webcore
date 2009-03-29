@@ -51,25 +51,25 @@ require_once ('webcore/cmd/entry_commands.php');
 class ARTICLE_COMMANDS extends DRAFTABLE_ENTRY_COMMANDS
 {
   /**
-   * @param ARTICLE &$obj Configure commands for this object.
+   * @param ARTICLE $obj Configure commands for this object.
    */
-  function ARTICLE_COMMANDS (&$entry)
+  function ARTICLE_COMMANDS ($entry)
   {
     ENTRY_COMMANDS::ENTRY_COMMANDS ($entry);
 
-    $cmd =& $this->command_at ('edit');
+    $cmd = $this->command_at ('edit');
     $cmd->link = "edit_article.php?id=$entry->id";
     
-    $cmd =& $this->command_at ('delete');
+    $cmd = $this->command_at ('delete');
     $cmd->link = "delete_article.php?id=$entry->id";
 
-    $cmd =& $this->command_at ('purge');
+    $cmd = $this->command_at ('purge');
     $cmd->link = "purge_article.php?id=$entry->id";
 
-    $cmd =& $this->command_at ('clone');
+    $cmd = $this->command_at ('clone');
     $cmd->link = "clone_article.php?id=$entry->id";
 
-    $cmd =& $this->command_at ('send');
+    $cmd = $this->command_at ('send');
     $cmd->link = "send_article.php?id=$entry->id";
   }
 }

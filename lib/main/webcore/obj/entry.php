@@ -105,9 +105,9 @@ class ENTRY extends ATTACHMENT_HOST
   }
 
   /**
-   * @param SQL_STORAGE &$storage Store values to this object.
+   * @param SQL_STORAGE $storage Store values to this object.
    */
-  function store_to (&$storage)
+  function store_to ($storage)
   {
     parent::store_to ($storage);
     $tname =$this->_table_name ();
@@ -135,7 +135,7 @@ class ENTRY extends ATTACHMENT_HOST
   function _object_url ($use_links, $separator = null, $formatter = null)
   {
     $Result = parent::_object_url ($use_links, $separator, $formatter);
-    $folder =& $this->parent_folder ();
+    $folder = $this->parent_folder ();
     $folder_url = $folder->_object_url ($use_links, $separator, $formatter);
 
     if (! isset ($separator))
@@ -204,7 +204,7 @@ class ENTRY extends ATTACHMENT_HOST
       else
       {
         $this->_time_changed = $this->time_modified;
-        $this->_changer =& $this->modifier ();
+        $this->_changer = $this->modifier ();
       }
     }
   }
@@ -265,11 +265,11 @@ class ENTRY extends ATTACHMENT_HOST
 
   /**
    * Apply class-specific restrictions to this query.
-   * @param SUBSCRIPTION_QUERY &$query
-   * @param HISTORY_ITEM &$history_item Action that generated this request. May be empty.
+   * @param SUBSCRIPTION_QUERY $query
+   * @param HISTORY_ITEM $history_item Action that generated this request. May be empty.
    * @access private
    */
-  function _prepare_subscription_query (&$query, &$history_item)
+  function _prepare_subscription_query ($query, $history_item)
   {
     $query->restrict ('watch_entries > 0');
     $query->restrict_kinds (array (Subscribe_folder => $this->parent_folder_id ()
@@ -281,17 +281,17 @@ class ENTRY extends ATTACHMENT_HOST
    * @var FOLDER
    * @access private
    */
-  var $_folder;
+  protected $_folder;
   /**
    * @var DATE_TIME
    * @access private
    */
-  var $_latest_comment_time;
+  protected $_latest_comment_time;
   /**
    * @var USER
    * @access private
    */
-  var $_latest_commenter;
+  protected $_latest_commenter;
 }
 
 /**
@@ -308,20 +308,20 @@ class DRAFTABLE_ENTRY extends ENTRY
    * This is the time the entry was changed from {@link Unpublished} to {@link Visible}.
    * @var DATE_TIME
    */
-  var $time_published;
+  public $time_published;
   /**
    * @var integer
    */
-  var $publisher_id;
+  public $publisher_id;
   /**
    * @var integer
    */
-  var $state = Draft;
+  public $state = Draft;
 
   /**
-   * @param APPLICATION &$app Main application.
+   * @param APPLICATION $app Main application.
    */
-  function DRAFTABLE_ENTRY (&$app)
+  function DRAFTABLE_ENTRY ($app)
   {
     ENTRY::ENTRY ($app);
 
@@ -357,7 +357,7 @@ class DRAFTABLE_ENTRY extends ENTRY
   /**
    * @return USER
    */
-  function &publisher ()
+  function publisher ()
   {
     return $this->app->user_at_id ($this->publisher_id);
   }
@@ -410,9 +410,9 @@ class DRAFTABLE_ENTRY extends ENTRY
   }
 
   /**
-   * @param DATABASE &$db Database from which to load values.
+   * @param DATABASE $db Database from which to load values.
    */
-  function load (&$db)
+  function load ($db)
   {
     parent::load ($db);
     $this->publisher_id = $db->f ('publisher_id');
@@ -420,10 +420,10 @@ class DRAFTABLE_ENTRY extends ENTRY
   }
 
   /**
-   * @param SQL_STORAGE &$storage Store values to this object.
+   * @param SQL_STORAGE $storage Store values to this object.
    * @access private
    */
-  function store_to (&$storage)
+  function store_to ($storage)
   {
     parent::store_to ($storage);
     $tname =$this->_table_name ();
@@ -488,10 +488,10 @@ class DRAFTABLE_ENTRY extends ENTRY
 
   /**
    * Copy the object to the specified folder.
-   * @param FOLDER &$fldr
-   * @param FOLDER_OPERATION_OPTIONS &$options
+   * @param FOLDER $fldr
+   * @param FOLDER_OPERATION_OPTIONS $options
    */
-  function _copy_to (&$fldr, &$options)
+  function _copy_to ($fldr, $options)
   {
     if ($options->copy_as_draft)
     {

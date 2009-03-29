@@ -51,42 +51,42 @@ require_once ('webcore/cmd/entry_commands.php');
 class JOB_COMMANDS extends ENTRY_COMMANDS
 {
   /**
-   * @param JOB &$entry Configure commands for this object.
+   * @param JOB $entry Configure commands for this object.
    */
-  function JOB_COMMANDS (&$entry)
+  function JOB_COMMANDS ($entry)
   {
     ENTRY_COMMANDS::ENTRY_COMMANDS($entry);
 
-    $cmd =& $this->command_at ('edit');
+    $cmd = $this->command_at ('edit');
     $cmd->link = "edit_job.php?id=$entry->id";
 
-    $cmd =& $this->command_at ('delete');
+    $cmd = $this->command_at ('delete');
     $cmd->link = "delete_job.php?id=$entry->id";
 
-    $cmd =& $this->command_at ('purge');
+    $cmd = $this->command_at ('purge');
     $cmd->link = "purge_job.php?id=$entry->id";
 
-    $cmd =& $this->command_at ('clone');
+    $cmd = $this->command_at ('clone');
     $cmd->link = "clone_job.php?id=$entry->id";
 
-    $cmd =& $this->command_at ('send');
+    $cmd = $this->command_at ('send');
     $cmd->link = "send_job.php?id=$entry->id";
   }
 
   /**
    * Add commands that edit the entry.
-   * @param JOB &$entry
+   * @param JOB $entry
    * @access private
    */
-  function _add_editors (&$entry)
+  function _add_editors ($entry)
   {
     parent::_add_editors ($entry);
 
     $branch_info = $entry->main_branch_info ();
     $last_page = urlencode ($this->env->url (Url_part_all));
 
-    $branch =& $branch_info->branch ();
-    $release =& $branch_info->release ();
+    $branch = $branch_info->branch ();
+    $release = $branch_info->release ();
     $locked = $branch->locked () || (isset ($release) && $release->locked ());
 
     $cmd = $this->make_command ();
@@ -128,13 +128,13 @@ class JOB_COMMANDS extends ENTRY_COMMANDS
 
   /**
    * Add commands that attach objects to the entry.
-   * @param JOB &$entry
-   * @param PROJECT &$folder Entry is in this folder (also available as $entry-
+   * @param JOB $entry
+   * @param PROJECT $folder Entry is in this folder (also available as $entry-
    * >parent_folder ()).
-   * @param USER &$creator Folder belongs to this user (also available as $folder->creator ()).
+   * @param USER $creator Folder belongs to this user (also available as $folder->creator ()).
    * @access private
    */
-  function _add_creators (&$entry)
+  function _add_creators ($entry)
   {
     parent::_add_creators ($entry);
 

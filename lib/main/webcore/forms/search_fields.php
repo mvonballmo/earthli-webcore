@@ -55,22 +55,22 @@ class SEARCH_FIELDS extends WEBCORE_OBJECT
    * Field id in object and form.
    * @var string
    */
-  var $base_name;
+  public $base_name;
   /**
    * Display name used for sorting.
    * @var string
    */
-  var $title;
+  public $title;
   /**
    * @var boolean
    */
-  var $sortable;
+  public $sortable;
 
   /**
-   * @param CONTEXT &$context
+   * @param CONTEXT $context
    * @param string $base_name
    */
-  function SEARCH_FIELDS (&$context, $base_name, $title = '', $sortable = TRUE, $table_name = '')
+  function SEARCH_FIELDS ($context, $base_name, $title = '', $sortable = TRUE, $table_name = '')
   {
     WEBCORE_OBJECT::WEBCORE_OBJECT ($context);
 
@@ -90,26 +90,26 @@ class SEARCH_FIELDS extends WEBCORE_OBJECT
    * @return string
    * @abstract
    */
-  function description (&$obj)
+  function description ($obj)
   {
     $this->raise_deferred ('description', 'SEARCH_FIELDS');
   }
 
   /**
    * Add fields for search properties to this form.
-   * @param FORM &$form
+   * @param FORM $form
    * @abstract
    */
-  function add_fields (&$form)
+  function add_fields ($form)
   {
     $this->raise_deferred ('add_fields', 'SEARCH_FIELDS');
   }
 
   /**
    * Add sortable values to the array.
-   * @param array[string, string] &$values
+   * @param array[string, string] $values
    */
-  function add_sort_fields (&$values)
+  function add_sort_fields ($values)
   {
     if ($this->sortable)
     {
@@ -119,67 +119,67 @@ class SEARCH_FIELDS extends WEBCORE_OBJECT
 
   /**
    * Set default properties for these fields in the form.
-   * @param FORM &$form
+   * @param FORM $form
    */
-  function load_with_defaults (&$form) {}
+  function load_with_defaults ($form) {}
 
   /**
    * Load properties from object into form.
-   * @param FORM &$form
-   * @param object &$obj
+   * @param FORM $form
+   * @param object $obj
    * @abstract
    */
-  function load_from_object (&$form, &$obj)
+  function load_from_object ($form, $obj)
   {
     $this->raise_deferred ('load_from_object', 'SEARCH_FIELDS');
   }
 
   /**
    * Make sure data is correct.
-   * @param FORM &$form
-   * @param object &$obj
+   * @param FORM $form
+   * @param object $obj
    */
-  function validate (&$form, &$obj) {}
+  function validate ($form, $obj) {}
 
   /**
    * Store properties from form into object.
-   * @param FORM &$form
-   * @param object &$obj
+   * @param FORM $form
+   * @param object $obj
    * @abstract
    */
-  function store_to_object (&$form, &$obj)
+  function store_to_object ($form, $obj)
   {
     $this->raise_deferred ('store_to_object', 'SEARCH_FIELDS');
   }
 
   /**
    * Restrict the query by these fields.
-   * @param QUERY &$query
-   * @param object &$obj
+   * @param QUERY $query
+   * @param object $obj
    * @abstract
    */
-  function apply_to_query (&$query, &$obj)
+  function apply_to_query ($query, $obj)
   {
     $this->raise_deferred ('apply_to_query', 'SEARCH_FIELDS');
   }
 
   /**
    * Are there errors or values for these fields?
-   * @param FORM &$form
+   * @param FORM $form
    * @return boolean
    */
-  function needs_visible (&$form)
+  function needs_visible ($form)
   {
     return FALSE;
   }
 
   /**
    * To which table should these fields store?
-   * @param QUERY &$query
+   * @param QUERY $query
    * @param string $field_name
    * @return string
    */
-  function full_name (&$query, $field_name)
+  function full_name ($query, $field_name)
   {
     $Result = $this->_table_name;
     if (! $Result && (strpos ($field_name, '.') === FALSE))
@@ -192,22 +192,22 @@ class SEARCH_FIELDS extends WEBCORE_OBJECT
 
   /**
    * Draw selectors for these fields in the form.
-   * @param FORM &$form
-   * @param FORM_RENDERER &$renderer
+   * @param FORM $form
+   * @param FORM_RENDERER $renderer
    * @abstract
    */
-  function draw_fields (&$form, &$renderer)
+  function draw_fields ($form, $renderer)
   {
     $this->raise_deferred ('draw_fields', 'SEARCH_FIELDS');
   }
 
   /**
    * Store field values as hidden fields in the form.
-   * @param FORM &$form
-   * @param FORM_RENDERER &$renderer
+   * @param FORM $form
+   * @param FORM_RENDERER $renderer
    * @abstract
    */
-  function draw_fields_hidden (&$form, &$renderer)
+  function draw_fields_hidden ($form, $renderer)
   {
     $this->raise_deferred ('draw_fields_hidden', 'SEARCH_FIELDS');
   }
@@ -217,7 +217,7 @@ class SEARCH_FIELDS extends WEBCORE_OBJECT
    * @var string
    * @access private
    */
-  var $_table_name;
+  protected $_table_name;
 }
 
 /**
@@ -249,7 +249,7 @@ class SEARCH_DATE_FIELDS extends SEARCH_FIELDS
    * @return string
    * @abstract
    */
-  function description (&$obj)
+  function description ($obj)
   {
     switch ($obj->parameters [$this->search_type_name ()])
     {
@@ -283,9 +283,9 @@ class SEARCH_DATE_FIELDS extends SEARCH_FIELDS
 
   /**
    * Add fields for search properties to this form.
-   * @param FORM &$form
+   * @param FORM $form
    */
-  function add_fields (&$form)
+  function add_fields ($form)
   {
     $field = new ENUMERATED_FIELD ();
     $field->id = $this->search_type_name ();
@@ -309,19 +309,19 @@ class SEARCH_DATE_FIELDS extends SEARCH_FIELDS
 
   /**
    * Set default properties for these fields in the form.
-   * @param FORM &$form
+   * @param FORM $form
    */
-  function load_with_defaults (&$form)
+  function load_with_defaults ($form)
   {
     $form->set_value ($this->search_type_name (), Search_date_constant);
   }
 
   /**
    * Load properties from object into form.
-   * @param FORM &$form
-   * @param object &$obj
+   * @param FORM $form
+   * @param object $obj
    */
-  function load_from_object (&$form, &$obj)
+  function load_from_object ($form, $obj)
   {
     $form->set_value ($this->search_type_name (), $obj->parameters [$this->search_type_name ()]);
     $form->set_value ($this->after_name (), $obj->parameters [$this->after_name ()]);
@@ -330,10 +330,10 @@ class SEARCH_DATE_FIELDS extends SEARCH_FIELDS
 
   /**
    * Make sure data is correct.
-   * @param FORM &$form
-   * @param object &$obj
+   * @param FORM $form
+   * @param object $obj
    */
-  function validate (&$form, &$obj)
+  function validate ($form, $obj)
   {
     $after = $form->value_for ($this->after_name ());
     $before = $form->value_for ($this->before_name ());
@@ -346,10 +346,10 @@ class SEARCH_DATE_FIELDS extends SEARCH_FIELDS
 
   /**
    * Store properties from form into object.
-   * @param FORM &$form
-   * @param object &$obj
+   * @param FORM $form
+   * @param object $obj
    */
-  function store_to_object (&$form, &$obj)
+  function store_to_object ($form, $obj)
   {
     $obj->parameters [$this->search_type_name ()] = $form->value_for ($this->search_type_name ());
     $obj->parameters [$this->after_name ()] = $form->value_for ($this->after_name ());
@@ -358,10 +358,10 @@ class SEARCH_DATE_FIELDS extends SEARCH_FIELDS
 
   /**
    * Restrict the query by these fields.
-   * @param QUERY &$query
-   * @param object &$obj
+   * @param QUERY $query
+   * @param object $obj
    */
-  function apply_to_query (&$query, &$obj)
+  function apply_to_query ($query, $obj)
   {
     $now = time ();
 
@@ -393,10 +393,10 @@ class SEARCH_DATE_FIELDS extends SEARCH_FIELDS
 
   /**
    * Are there errors or values for these fields?
-   * @param FORM &$form
+   * @param FORM $form
    * @return boolean
    */
-  function needs_visible (&$form)
+  function needs_visible ($form)
   {
     $date_before = $form->value_for ($this->before_name ());
     $date_after = $form->value_for ($this->after_name ());
@@ -408,10 +408,10 @@ class SEARCH_DATE_FIELDS extends SEARCH_FIELDS
 
   /**
    * Store properties from form into object.
-   * @param FORM &$form
-   * @param FORM_RENDERER &$renderer
+   * @param FORM $form
+   * @param FORM_RENDERER $renderer
    */
-  function draw_fields (&$form, &$renderer)
+  function draw_fields ($form, $renderer)
   {
     $props = $renderer->make_list_properties ();
     $props->add_item ('Today', Search_date_today);
@@ -427,10 +427,10 @@ class SEARCH_DATE_FIELDS extends SEARCH_FIELDS
 
   /**
    * Store field values as hidden fields in the form.
-   * @param FORM &$form
-   * @param FORM_RENDERER &$renderer
+   * @param FORM $form
+   * @param FORM_RENDERER $renderer
    */
-  function draw_fields_hidden (&$form, &$renderer)
+  function draw_fields_hidden ($form, $renderer)
   {
     $renderer->draw_hidden ($this->search_type_name ());
     $renderer->draw_hidden ($this->after_name ());
@@ -462,7 +462,7 @@ class SEARCH_USER_FIELDS extends SEARCH_FIELDS
    * @return string
    * @abstract
    */
-  function description (&$obj)
+  function description ($obj)
   {
     $search_type = $obj->parameters [$this->search_type_name ()];
 
@@ -487,9 +487,9 @@ class SEARCH_USER_FIELDS extends SEARCH_FIELDS
 
   /**
    * Add fields for search properties to this form.
-   * @param FORM &$form
+   * @param FORM $form
    */
-  function add_fields (&$form)
+  function add_fields ($form)
   {
     $field = new ENUMERATED_FIELD ();
     $field->id = $this->search_type_name ();
@@ -514,19 +514,19 @@ class SEARCH_USER_FIELDS extends SEARCH_FIELDS
 
   /**
    * Set default properties for these fields in the form.
-   * @param FORM &$form
+   * @param FORM $form
    */
-  function load_with_defaults (&$form)
+  function load_with_defaults ($form)
   {
     $form->set_value ($this->search_type_name (), Search_user_constant);
   }
 
   /**
    * Load properties from object into form.
-   * @param FORM &$form
-   * @param object &$obj
+   * @param FORM $form
+   * @param object $obj
    */
-  function load_from_object (&$form, &$obj)
+  function load_from_object ($form, $obj)
   {
     $form->set_value ($this->base_name, $obj->parameters [$this->base_name]);
     $form->set_value ($this->search_type_name (), $obj->parameters [$this->search_type_name ()]);
@@ -535,10 +535,10 @@ class SEARCH_USER_FIELDS extends SEARCH_FIELDS
 
   /**
    * Make sure data is correct.
-   * @param FORM &$form
-   * @param object &$obj
+   * @param FORM $form
+   * @param object $obj
    */
-  function validate (&$form, &$obj)
+  function validate ($form, $obj)
   {
     $user_list = $form->value_for ($this->base_name);
 
@@ -550,7 +550,7 @@ class SEARCH_USER_FIELDS extends SEARCH_FIELDS
 
       foreach ($user_names as $name)
       {
-        $user =& $user_query->object_at_name ($name);
+        $user = $user_query->object_at_name ($name);
         if (! $user)
         {
           $form->record_error ($this->base_name, "[$name] does not exist.");
@@ -570,10 +570,10 @@ class SEARCH_USER_FIELDS extends SEARCH_FIELDS
 
   /**
    * Store properties from form into object.
-   * @param FORM &$form
-   * @param object &$obj
+   * @param FORM $form
+   * @param object $obj
    */
-  function store_to_object (&$form, &$obj)
+  function store_to_object ($form, $obj)
   {
     $obj->parameters [$this->base_name] = $form->value_for ($this->base_name);
     $obj->parameters [$this->search_type_name ()] = $form->value_for ($this->search_type_name ());
@@ -582,10 +582,10 @@ class SEARCH_USER_FIELDS extends SEARCH_FIELDS
 
   /**
    * Restrict the query by these fields.
-   * @param QUERY &$query
-   * @param object &$obj
+   * @param QUERY $query
+   * @param object $obj
    */
-  function apply_to_query (&$query, &$obj, &$user)
+  function apply_to_query ($query, $obj, $user)
   {
     $search_type = $obj->parameters [$this->search_type_name ()];
 
@@ -593,11 +593,11 @@ class SEARCH_USER_FIELDS extends SEARCH_FIELDS
     {
       if (isset ($user))
       {
-        $search_user =& $user;
+        $search_user = $user;
       }
       else if ($search_type == Search_user_context_login)
  {
-   $search_user =& $this->app->login;
+   $search_user = $this->app->login;
  }
 
       if (isset ($search_user))
@@ -619,20 +619,20 @@ class SEARCH_USER_FIELDS extends SEARCH_FIELDS
 
   /**
    * Are there errors or values for these fields?
-   * @param FORM &$form
+   * @param FORM $form
    * @return boolean
    */
-  function needs_visible (&$form)
+  function needs_visible ($form)
   {
     return $form->value_for ($this->base_name) || ($form->value_for ($this->search_type_name ()) != Search_user_constant);
   }
 
   /**
    * Store properties from form into object.
-   * @param FORM &$form
-   * @param FORM_RENDERER &$renderer
+   * @param FORM $form
+   * @param FORM_RENDERER $renderer
    */
-  function draw_fields (&$form, &$renderer)
+  function draw_fields ($form, $renderer)
   {
     $props = $renderer->make_list_properties ();
     $props->add_item ('Context or none', Search_user_context_none);
@@ -651,10 +651,10 @@ class SEARCH_USER_FIELDS extends SEARCH_FIELDS
 
   /**
    * Store field values as hidden fields in the form.
-   * @param FORM &$form
-   * @param FORM_RENDERER &$renderer
+   * @param FORM $form
+   * @param FORM_RENDERER $renderer
    */
-  function draw_fields_hidden (&$form, &$renderer)
+  function draw_fields_hidden ($form, $renderer)
   {
     $renderer->draw_hidden ($this->search_type_name ());
     $renderer->draw_hidden ($this->base_name);
@@ -674,14 +674,14 @@ class SEARCH_TEXT_FIELDS extends SEARCH_FIELDS
    * Is this text search initially selected?
    * @var boolean
    */
-  var $selected_by_default = TRUE;
+  public $selected_by_default = TRUE;
 
   /**
    * Return text describing this search field.
    * @return string
    * @abstract
    */
-  function description (&$obj)
+  function description ($obj)
   {
     if ($obj->parameters [$this->base_name])
     {
@@ -691,9 +691,9 @@ class SEARCH_TEXT_FIELDS extends SEARCH_FIELDS
 
   /**
    * Add fields for search properties to this form.
-   * @param FORM &$form
+   * @param FORM $form
    */
-  function add_fields (&$form)
+  function add_fields ($form)
   {
     $field = new BOOLEAN_FIELD ($form->app);
     $field->id = $this->base_name;
@@ -703,39 +703,39 @@ class SEARCH_TEXT_FIELDS extends SEARCH_FIELDS
 
   /**
    * Set default properties for these fields in the form.
-   * @param FORM &$form
+   * @param FORM $form
    */
-  function load_with_defaults (&$form)
+  function load_with_defaults ($form)
   {
     $form->set_value ($this->base_name, $this->selected_by_default);
   }
 
   /**
    * Load properties from object into form.
-   * @param FORM &$form
-   * @param object &$obj
+   * @param FORM $form
+   * @param object $obj
    */
-  function load_from_object (&$form, &$obj)
+  function load_from_object ($form, $obj)
   {
     $form->set_value ($this->base_name, $obj->parameters [$this->base_name]);
   }
 
   /**
    * Store properties from form into object.
-   * @param FORM &$form
-   * @param object &$obj
+   * @param FORM $form
+   * @param object $obj
    */
-  function store_to_object (&$form, &$obj)
+  function store_to_object ($form, $obj)
   {
     $obj->parameters [$this->base_name] = $form->value_for ($this->base_name);
   }
 
   /**
    * Restrict the query by these fields.
-   * @param QUERY &$query
-   * @param object &$obj
+   * @param QUERY $query
+   * @param object $obj
    */
-  function apply_to_query (&$query, &$obj, &$fields)
+  function apply_to_query ($query, $obj, $fields)
   {
     if ($obj->parameters [$this->base_name])
     {
@@ -745,10 +745,10 @@ class SEARCH_TEXT_FIELDS extends SEARCH_FIELDS
 
   /**
    * Store field values as hidden fields in the form.
-   * @param FORM &$form
-   * @param FORM_RENDERER &$renderer
+   * @param FORM $form
+   * @param FORM_RENDERER $renderer
    */
-  function draw_fields_hidden (&$form, &$renderer)
+  function draw_fields_hidden ($form, $renderer)
   {
     $renderer->draw_hidden ($this->base_name);
   }
@@ -775,11 +775,11 @@ class SORT_FIELDS extends SEARCH_FIELDS
 
   /**
    * Return text describing this search field.
-   * @param object &$obj
-   * @param array[string,string] &$sort_values
+   * @param object $obj
+   * @param array[string,string] $sort_values
    * @return string
    */
-  function description (&$obj, &$sort_values)
+  function description ($obj, $sort_values)
   {
     if ($obj->parameters [$this->sort_name ()])
     {
@@ -800,9 +800,9 @@ class SORT_FIELDS extends SEARCH_FIELDS
 
   /**
    * Add fields for search properties to this form.
-   * @param FORM &$form
+   * @param FORM $form
    */
-  function add_fields (&$form)
+  function add_fields ($form)
   {
     $field = new TEXT_FIELD ($form->app);
     $field->id = $this->sort_name ();
@@ -820,19 +820,19 @@ class SORT_FIELDS extends SEARCH_FIELDS
 
   /**
    * Set default properties for these fields in the form.
-   * @param FORM &$form
+   * @param FORM $form
    */
-  function load_with_defaults (&$form)
+  function load_with_defaults ($form)
   {
     $form->set_value ($this->direction_name (), 'asc');
   }
 
   /**
    * Load properties from object into form.
-   * @param FORM &$form
-   * @param object &$obj
+   * @param FORM $form
+   * @param object $obj
    */
-  function load_from_object (&$form, &$obj)
+  function load_from_object ($form, $obj)
   {
     $n = $this->base_name;
     $form->set_value ($this->sort_name (), $obj->parameters [$this->sort_name ()]);
@@ -841,10 +841,10 @@ class SORT_FIELDS extends SEARCH_FIELDS
 
   /**
    * Store properties from form into object.
-   * @param FORM &$form
-   * @param object &$obj
+   * @param FORM $form
+   * @param object $obj
    */
-  function store_to_object (&$form, &$obj)
+  function store_to_object ($form, $obj)
   {
     $obj->parameters [$this->sort_name ()] = $form->value_for ($this->sort_name ());
     $obj->parameters [$this->direction_name ()] = $form->value_for ($this->direction_name ());
@@ -852,10 +852,10 @@ class SORT_FIELDS extends SEARCH_FIELDS
 
   /**
    * Restrict the query by these fields.
-   * @param QUERY &$query
-   * @param object &$obj
+   * @param QUERY $query
+   * @param object $obj
    */
-  function apply_to_query (&$query, &$obj, &$orders)
+  function apply_to_query ($query, $obj, $orders)
   {
     $sort = $obj->parameters [$this->sort_name ()];
     if ($sort)
@@ -867,11 +867,11 @@ class SORT_FIELDS extends SEARCH_FIELDS
 
   /**
    * Store properties from form into object.
-   * @param FORM &$form
-   * @param FORM_RENDERER &$renderer
-   * @param array[string,string] &$values
+   * @param FORM $form
+   * @param FORM_RENDERER $renderer
+   * @param array[string,string] $values
    */
-  function draw_fields (&$form, &$renderer, &$sort_values)
+  function draw_fields ($form, $renderer, $sort_values)
   {
     $props = $renderer->make_list_properties ();
     $props->add_item ('[Default]', '');
@@ -888,10 +888,10 @@ class SORT_FIELDS extends SEARCH_FIELDS
 
   /**
    * Store field values as hidden fields in the form.
-   * @param FORM &$form
-   * @param FORM_RENDERER &$renderer
+   * @param FORM $form
+   * @param FORM_RENDERER $renderer
    */
-  function draw_fields_hidden (&$form, &$renderer)
+  function draw_fields_hidden ($form, $renderer)
   {
     $renderer->draw_hidden ($this->sort_name ());
     $renderer->draw_hidden ($this->direction_name ());
@@ -911,12 +911,12 @@ class SEARCH_OBJECT_FIELDS extends WEBCORE_OBJECT
    * Used for some user fields.
    * @var USER
    */
-  var $user_from_context;
+  public $user_from_context;
 
   /**
-   * @param CONTEXT &$context
+   * @param CONTEXT $context
    */
-  function SEARCH_OBJECT_FIELDS (&$context)
+  function SEARCH_OBJECT_FIELDS ($context)
   {
     WEBCORE_OBJECT::WEBCORE_OBJECT ($context);
     $this->_add_synced_field ('search_text', '');
@@ -924,33 +924,33 @@ class SEARCH_OBJECT_FIELDS extends WEBCORE_OBJECT
 
   /**
    * Describe this set of search fields as HTML.
-   * @param object &$obj
+   * @param object $obj
    * @return string
    */
-  function description_as_html (&$obj)
+  function description_as_html ($obj)
   {
     $desc = $this->_description_as_munger_text ($obj);
-    $munger =& $this->app->html_text_formatter ();
+    $munger = $this->app->html_text_formatter ();
     return $munger->transform ($desc);
   }
 
   /**
    * Describe this set of search fields as plain text.
-   * @param object &$obj
+   * @param object $obj
    * @return string
    */
-  function description_as_plain_text (&$obj)
+  function description_as_plain_text ($obj)
   {
     $desc = $this->_description_as_munger_text ($obj);
-    $munger =& $this->app->plain_text_formatter ();
+    $munger = $this->app->plain_text_formatter ();
     return $munger->transform ($desc);
   }
 
   /**
    * Add fields for search properties to this form.
-   * @param FORM &$form
+   * @param FORM $form
    */
-  function add_fields (&$form)
+  function add_fields ($form)
   {
     $field = new TEXT_FIELD ();
     $field->id = 'search_text';
@@ -964,9 +964,9 @@ class SEARCH_OBJECT_FIELDS extends WEBCORE_OBJECT
 
   /**
    * Load default properties.
-   * @param FORM &$form
+   * @param FORM $form
    */
-  function load_with_defaults (&$form)
+  function load_with_defaults ($form)
   {
     foreach ($this->_synced_fields as $name => $value)
       $form->set_value ($name, $value);
@@ -977,10 +977,10 @@ class SEARCH_OBJECT_FIELDS extends WEBCORE_OBJECT
 
   /**
    * Load initial properties from this branch.
-   * @param FORM &$form
-   * @param object &$obj
+   * @param FORM $form
+   * @param object $obj
    */
-  function load_from_object (&$form, &$obj)
+  function load_from_object ($form, $obj)
   {
     foreach ($this->_synced_fields as $name => $value)
       $form->set_value ($name, $obj->parameters [$name]);
@@ -991,10 +991,10 @@ class SEARCH_OBJECT_FIELDS extends WEBCORE_OBJECT
 
   /**
    * Make sure values are valid.
-   * @param FORM &$form
-   * @param object &$obj
+   * @param FORM $form
+   * @param object $obj
    */
-  function validate (&$form, &$obj)
+  function validate ($form, $obj)
   {
     foreach ($this->_sets as $set)
       $set->validate ($form, $obj);
@@ -1002,10 +1002,10 @@ class SEARCH_OBJECT_FIELDS extends WEBCORE_OBJECT
 
   /**
    * Store form values to this object.
-   * @param FORM &$form
-   * @param object &$obj
+   * @param FORM $form
+   * @param object $obj
    */
-  function store_to_object (&$form, &$obj)
+  function store_to_object ($form, $obj)
   {
     foreach ($this->_synced_fields as $name => $value)
       $obj->parameters [$name] = $form->value_for ($name);
@@ -1016,10 +1016,10 @@ class SEARCH_OBJECT_FIELDS extends WEBCORE_OBJECT
 
   /**
    * Restrict the query by these fields.
-   * @param QUERY &$query
-   * @param object &$obj
+   * @param QUERY $query
+   * @param object $obj
    */
-  function apply_to_query (&$query, &$obj)
+  function apply_to_query ($query, $obj)
   {
     foreach ($this->_dates as $date)
       $date->apply_to_query ($query, $obj);
@@ -1050,10 +1050,10 @@ class SEARCH_OBJECT_FIELDS extends WEBCORE_OBJECT
 
   /**
    * Draw all fields into the form.
-   * @param FORM &$form
-   * @param FORM_RENDERER &$renderer
+   * @param FORM $form
+   * @param FORM_RENDERER $renderer
    */
-  function draw_fields (&$form, &$renderer)
+  function draw_fields ($form, $renderer)
   {
     $renderer->draw_text_line_row ('search_text');
 
@@ -1091,11 +1091,11 @@ class SEARCH_OBJECT_FIELDS extends WEBCORE_OBJECT
 
   /**
    * Return text describing this set of search fields.
-   * @param object &$obj
+   * @param object $obj
    * @return string
    * @access private
    */
-  function _description_as_munger_text (&$obj)
+  function _description_as_munger_text ($obj)
   {
     $restrictions = $this->_restrictions_as_text ($obj);
 
@@ -1132,11 +1132,11 @@ class SEARCH_OBJECT_FIELDS extends WEBCORE_OBJECT
   }
 
   /**
-   * @param FORM &$form
-   * @param FORM_RENDERER &$renderer
+   * @param FORM $form
+   * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_date_fields (&$form, &$renderer)
+  function _draw_date_fields ($form, $renderer)
   {
     $old_width = $renderer->default_control_width;
     $renderer->default_control_width = '10em';
@@ -1172,11 +1172,11 @@ class SEARCH_OBJECT_FIELDS extends WEBCORE_OBJECT
   }
 
   /**
-   * @param FORM &$form
-   * @param FORM_RENDERER &$renderer
+   * @param FORM $form
+   * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_user_fields (&$form, &$renderer)
+  function _draw_user_fields ($form, $renderer)
   {
     $old_width = $renderer->default_control_width;
     $renderer->default_control_width = '10em';
@@ -1197,11 +1197,11 @@ class SEARCH_OBJECT_FIELDS extends WEBCORE_OBJECT
   }
 
   /**
-   * @param FORM &$form
-   * @param FORM_RENDERER &$renderer
+   * @param FORM $form
+   * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_sort_fields (&$form, &$renderer)
+  function _draw_sort_fields ($form, $renderer)
   {
     $sort_values = $this->_sort_values ();
 
@@ -1222,8 +1222,8 @@ class SEARCH_OBJECT_FIELDS extends WEBCORE_OBJECT
   function _add_date ($base_name, $title = '', $sortable = TRUE)
   {
     $date = new SEARCH_DATE_FIELDS ($this->context, $base_name, $title, $sortable);
-    $this->_sets [] =& $date;
-    $this->_dates [$base_name] =& $date;
+    $this->_sets [] = $date;
+    $this->_dates [$base_name] = $date;
   }
 
   /**
@@ -1234,8 +1234,8 @@ class SEARCH_OBJECT_FIELDS extends WEBCORE_OBJECT
   function _add_user ($base_name, $title = '', $sortable = TRUE)
   {
     $user = new SEARCH_USER_FIELDS ($this->context, $base_name, $title, $sortable);
-    $this->_sets [] =& $user;
-    $this->_users [$base_name] =& $user;
+    $this->_sets [] = $user;
+    $this->_users [$base_name] = $user;
   }
 
   /**
@@ -1247,8 +1247,8 @@ class SEARCH_OBJECT_FIELDS extends WEBCORE_OBJECT
   {
     $text = new SEARCH_TEXT_FIELDS ($this->context, $base_name, $title, $sortable, $table_name);
     $text->selected_by_default = $selected_by_default;
-    $this->_sets [] =& $text;
-    $this->_texts [$base_name] =& $text ;
+    $this->_sets [] = $text;
+    $this->_texts [$base_name] = $text ;
   }
 
   /**
@@ -1259,8 +1259,8 @@ class SEARCH_OBJECT_FIELDS extends WEBCORE_OBJECT
   function _add_sort ($base_name)
   {
     $sort = new SORT_FIELDS ($this->context, $base_name, '', FALSE);
-    $this->_sets [] =& $sort;
-    $this->_sorts [$base_name] =& $sort;
+    $this->_sets [] = $sort;
+    $this->_sorts [$base_name] = $sort;
   }
 
   /**
@@ -1302,11 +1302,11 @@ class SEARCH_OBJECT_FIELDS extends WEBCORE_OBJECT
 
   /**
    * Text representation of applied search fields.
-   * @param object &$obj
+   * @param object $obj
    * @return string
    * @access private
    */
-  function _restrictions_as_text (&$obj)
+  function _restrictions_as_text ($obj)
   {
     $Result = array ();
 
@@ -1363,41 +1363,41 @@ class SEARCH_OBJECT_FIELDS extends WEBCORE_OBJECT
    * @var array[SEARCH_DATE_FIELDS]
    * @access private
    */
-  var $_dates;
+  protected $_dates;
   /**
    * All registered user search field sets.
    * @see SEARCH_USER_FIELDS
    * @var array[SEARCH_USER_FIELDS]
    * @access private
    */
-  var $_users;
+  protected $_users;
   /**
    * All registered text search field sets.
    * @see SEARCH_TEXT_FIELDS
    * @var array[SEARCH_TEXT_FIELDS]
    * @access private
    */
-  var $_texts;
+  protected $_texts;
   /**
    * All registered sort field sets.
    * @see SORT_FIELDS
    * @var array[SORT_FIELDS]
    * @access private
    */
-  var $_sorts;
+  protected $_sorts;
   /**
    * All registered search field sets.
    * @see SEARCH_FIELDS
    * @var array[SEARCH_FIELDS]
    * @access private
    */
-  var $_sets;
+  protected $_sets;
   /**
    * Indicates which fields should be drawn together.
    * @var array[string,string]
    * @access private
    */
-  var $_linked_fields;
+  protected $_linked_fields;
   /**
    * Fields that are automatically synced with search data.
    * Loading and storing is handled automatically for these fields. The value part of the array holds
@@ -1405,7 +1405,7 @@ class SEARCH_OBJECT_FIELDS extends WEBCORE_OBJECT
    * @var array[string, mixed]
    * @access private
    */
-  var $_synced_fields;
+  protected $_synced_fields;
 }
 
 /**
@@ -1418,9 +1418,9 @@ class SEARCH_OBJECT_FIELDS extends WEBCORE_OBJECT
 class SEARCH_AUDITABLE_FIELDS extends SEARCH_OBJECT_FIELDS
 {
   /**
-   * @param CONTEXT &$context
+   * @param CONTEXT $context
    */
-  function SEARCH_AUDITABLE_FIELDS (&$context)
+  function SEARCH_AUDITABLE_FIELDS ($context)
   {
     SEARCH_OBJECT_FIELDS::SEARCH_OBJECT_FIELDS ($context);
 
@@ -1451,9 +1451,9 @@ class SEARCH_AUDITABLE_FIELDS extends SEARCH_OBJECT_FIELDS
 class SEARCH_CONTENT_OBJECT_FIELDS extends SEARCH_AUDITABLE_FIELDS
 {
   /**
-   * @param CONTEXT &$context
+   * @param CONTEXT $context
    */
-  function SEARCH_CONTENT_OBJECT_FIELDS (&$context)
+  function SEARCH_CONTENT_OBJECT_FIELDS ($context)
   {
     SEARCH_AUDITABLE_FIELDS::SEARCH_AUDITABLE_FIELDS ($context);
 
@@ -1474,12 +1474,12 @@ class SEARCH_OBJECT_IN_FOLDER_FIELDS extends SEARCH_CONTENT_OBJECT_FIELDS
    * Used for some the folder selector.
    * @var FOLDER
    */
-  var $folder_from_context;
+  public $folder_from_context;
 
   /**
-   * @param CONTEXT &$context
+   * @param CONTEXT $context
    */
-  function SEARCH_OBJECT_IN_FOLDER_FIELDS (&$context)
+  function SEARCH_OBJECT_IN_FOLDER_FIELDS ($context)
   {
     SEARCH_CONTENT_OBJECT_FIELDS::SEARCH_CONTENT_OBJECT_FIELDS ($context);
 
@@ -1491,10 +1491,10 @@ class SEARCH_OBJECT_IN_FOLDER_FIELDS extends SEARCH_CONTENT_OBJECT_FIELDS
 
   /**
    * Add fields for search properties to this form.
-   * @param FORM &$form
+   * @param FORM $form
    * @param boolean $visible
    */
-  function add_fields (&$form, $visible = TRUE)
+  function add_fields ($form, $visible = TRUE)
   {
     parent::add_fields ($form);
 
@@ -1532,10 +1532,10 @@ class SEARCH_OBJECT_IN_FOLDER_FIELDS extends SEARCH_CONTENT_OBJECT_FIELDS
 
   /**
    * Restrict the query by these fields.
-   * @param QUERY &$query
-   * @param object &$obj
+   * @param QUERY $query
+   * @param object $obj
    */
-  function apply_to_query (&$query, &$obj)
+  function apply_to_query ($query, $obj)
   {
     parent::apply_to_query ($query, $obj);
 
@@ -1600,7 +1600,7 @@ class SEARCH_OBJECT_IN_FOLDER_FIELDS extends SEARCH_CONTENT_OBJECT_FIELDS
                   Deleted => 'Deleted');
   }
 
-  function _draw_state_selector (&$form, &$renderer)
+  function _draw_state_selector ($form, $renderer)
   {
     $old_width = $renderer->default_control_width;
     $renderer->default_control_width = '10em';
@@ -1623,11 +1623,11 @@ class SEARCH_OBJECT_IN_FOLDER_FIELDS extends SEARCH_CONTENT_OBJECT_FIELDS
 
   /**
    * Text representation of applied search fields.
-   * @param object &$obj
+   * @param object $obj
    * @return string
    * @access private
    */
-  function _restrictions_as_text (&$obj)
+  function _restrictions_as_text ($obj)
   {
     $Result = parent::_restrictions_as_text ($obj);
 
@@ -1686,22 +1686,22 @@ class SEARCH_OBJECT_IN_FOLDER_FIELDS extends SEARCH_CONTENT_OBJECT_FIELDS
 
   /**
    * Return string for the selected state.
-   * @param object &$obj
+   * @param object $obj
    * @return string
    * @access private
    */
-  function _state_as_text (&$obj)
+  function _state_as_text ($obj)
   {
     $states = $this->_states ();
     return $states [$obj->parameters ['state']];
   }
 
   /**
-   * @param FORM &$form
-   * @param FORM_RENDERER &$renderer
+   * @param FORM $form
+   * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_folder_selector (&$form, &$renderer)
+  function _draw_folder_selector ($form, $renderer)
   {
     $old_width = $renderer->default_control_width;
     $renderer->default_control_width = '10em';
@@ -1758,8 +1758,8 @@ class SEARCH_OBJECT_IN_FOLDER_FIELDS extends SEARCH_CONTENT_OBJECT_FIELDS
           $decorator->form_name = $form->name;
           $decorator->auto_toggle_children = TRUE;
 
-          $tree->node_info =& $tree_node_info;
-          $tree->decorator =& $decorator;
+          $tree->node_info = $tree_node_info;
+          $tree->decorator = $decorator;
           $tree->set_visible_nodes ($selected_folders);
           $tree->centered = FALSE;
 
@@ -1775,11 +1775,11 @@ class SEARCH_OBJECT_IN_FOLDER_FIELDS extends SEARCH_CONTENT_OBJECT_FIELDS
   }
 
   /**
-   * @param FORM &$form
-   * @param FORM_RENDERER &$renderer
+   * @param FORM $form
+   * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_date_fields (&$form, &$renderer)
+  function _draw_date_fields ($form, $renderer)
   {
     $this->_draw_state_selector ($form, $renderer);
     $renderer->draw_separator ();
@@ -1809,9 +1809,9 @@ class SEARCH_ENTRY_FIELDS extends SEARCH_OBJECT_IN_FOLDER_FIELDS
 class SEARCH_DRAFTABLE_FIELDS extends SEARCH_ENTRY_FIELDS
 {
   /**
-   * @param APPLICATION &$app Main application.
+   * @param APPLICATION $app Main application.
    */
-  function SEARCH_DRAFTABLE_FIELDS (&$app)
+  function SEARCH_DRAFTABLE_FIELDS ($app)
   {
     SEARCH_ENTRY_FIELDS::SEARCH_ENTRY_FIELDS ($app);
 
@@ -1844,9 +1844,9 @@ class SEARCH_DRAFTABLE_FIELDS extends SEARCH_ENTRY_FIELDS
 class SEARCH_USER_OBJECT_FIELDS extends SEARCH_CONTENT_OBJECT_FIELDS
 {
   /**
-   * @param APPLICATION &$app Main application.
+   * @param APPLICATION $app Main application.
    */
-  function SEARCH_USER_OBJECT_FIELDS (&$app)
+  function SEARCH_USER_OBJECT_FIELDS ($app)
   {
     SEARCH_CONTENT_OBJECT_FIELDS::SEARCH_CONTENT_OBJECT_FIELDS ($app);
 
@@ -1862,9 +1862,9 @@ class SEARCH_USER_OBJECT_FIELDS extends SEARCH_CONTENT_OBJECT_FIELDS
 
   /**
    * Add fields for search properties to this form.
-   * @param FORM &$form
+   * @param FORM $form
    */
-  function add_fields (&$form)
+  function add_fields ($form)
   {
     parent::add_fields ($form);
 
@@ -1880,10 +1880,10 @@ class SEARCH_USER_OBJECT_FIELDS extends SEARCH_CONTENT_OBJECT_FIELDS
 
   /**
    * Restrict the query by these fields.
-   * @param QUERY &$query
-   * @param object &$obj
+   * @param QUERY $query
+   * @param object $obj
    */
-  function apply_to_query (&$query, &$obj)
+  function apply_to_query ($query, $obj)
   {
     parent::apply_to_query ($query, $obj);
 
@@ -1895,11 +1895,11 @@ class SEARCH_USER_OBJECT_FIELDS extends SEARCH_CONTENT_OBJECT_FIELDS
 
   /**
    * Text representation of applied search fields.
-   * @param object &$obj
+   * @param object $obj
    * @return string
    * @access private
    */
-  function _restrictions_as_text (&$obj)
+  function _restrictions_as_text ($obj)
   {
     $Result = parent::_restrictions_as_text ($obj);
 
@@ -1911,7 +1911,7 @@ class SEARCH_USER_OBJECT_FIELDS extends SEARCH_CONTENT_OBJECT_FIELDS
     return $Result;
   }
 
-  function _draw_kind_selector (&$form, &$renderer)
+  function _draw_kind_selector ($form, $renderer)
   {
     $old_width = $renderer->default_control_width;
     $renderer->default_control_width = '10em';
@@ -1940,11 +1940,11 @@ class SEARCH_USER_OBJECT_FIELDS extends SEARCH_CONTENT_OBJECT_FIELDS
   }
 
   /**
-   * @param FORM &$form
-   * @param FORM_RENDERER &$renderer
+   * @param FORM $form
+   * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_date_fields (&$form, &$renderer)
+  function _draw_date_fields ($form, $renderer)
   {
     $this->_draw_kind_selector ($form, $renderer);
     parent::_draw_date_fields ($form, $renderer);
@@ -1961,9 +1961,9 @@ class SEARCH_USER_OBJECT_FIELDS extends SEARCH_CONTENT_OBJECT_FIELDS
 class SEARCH_FOLDER_FIELDS extends SEARCH_OBJECT_IN_FOLDER_FIELDS
 {
   /**
-   * @param APPLICATION &$app Main application.
+   * @param APPLICATION $app Main application.
    */
-  function SEARCH_FOLDER_FIELDS (&$app)
+  function SEARCH_FOLDER_FIELDS ($app)
   {
     SEARCH_OBJECT_IN_FOLDER_FIELDS::SEARCH_OBJECT_IN_FOLDER_FIELDS ($app);
 

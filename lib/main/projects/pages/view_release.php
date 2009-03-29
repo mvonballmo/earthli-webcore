@@ -28,23 +28,23 @@ http://www.earthli.com/software/webcore/projects
 
   $id = read_var ('id');
   $folder_query = $App->login->folder_query ();
-  $folder =& $folder_query->folder_for_release_at_id ($id);
+  $folder = $folder_query->folder_for_release_at_id ($id);
 
   if (isset ($folder))
   {
     $rel_query = $folder->release_query ();
-    $release =& $rel_query->object_at_id ($id);
+    $release = $rel_query->object_at_id ($id);
   }
 
   if (isset ($release) && $App->login->is_allowed (Privilege_set_release, Privilege_view, $release))
   {
     $App->set_referer ();
 
-    $branch =& $release->branch ();
+    $branch = $release->branch ();
 
     $class_name = $App->final_class_name ('PROJECT_RELEASE_PANEL_MANAGER', 'projects/gui/project_panel.php');
     $panel_manager = new $class_name ($release);
-    $panel =& $panel_manager->selected_panel ();
+    $panel = $panel_manager->selected_panel ();
 
     $Page->title->add_object ($folder);
     $Page->title->add_object ($branch);
@@ -79,7 +79,7 @@ http://www.earthli.com/software/webcore/projects
     <div class="side-bar-body">
     <?php
       $renderer = $release->handler_for (Handler_html_renderer);
-      $options =& $renderer->options ();
+      $options = $renderer->options ();
       $options->show_users = FALSE;
       $options->show_as_summary = TRUE;
       $renderer->display ($release);

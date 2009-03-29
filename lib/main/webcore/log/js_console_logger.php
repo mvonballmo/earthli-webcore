@@ -55,60 +55,60 @@ class JS_CONSOLE_LOGGER extends TEXT_OUTPUT_LOGGER
    * Width of the popup console.
    * @var integer
    */
-  var $height = 600;
+  public $height = 600;
   /**
    * Height of the popup console.
    * @var integer
    */
-  var $width = 300;
+  public $width = 300;
   /**
    * Name of the external style sheet to apply.
    * File name is resolves using {@link RESOURCE_MANAGER::resolve_file()}.
    * @var string
    */
-  var $CSS_file_name;
+  public $CSS_file_name;
   /**
    * Font to use. Use any valid CSS font-size.
    * @var string
    */
-  var $font_size = '10pt';
+  public $font_size = '10pt';
   /**
    * Background color. Use any valid CSS color.
    * @var string
    */
-  var $bg_color = 'black';
+  public $bg_color = 'black';
   /**
    * Foreground color. Use any valid CSS color.
    * @var string
    */
-  var $fg_color = 'white';
+  public $fg_color = 'white';
   /**
    * Title for the console window.
    * @var string
    */
-  var $title = 'earthli WebCore Console';
+  public $title = 'earthli WebCore Console';
   /**
    * Show the time with each log item?
    * Sets the default to FALSE (not really useful for live debugging).
    * @var boolean
    */
-  var $show_time = FALSE;
+  public $show_time = FALSE;
   /**
    * Show the date with each log item?
    * Sets the default to FALSE (not really useful for live debugging).
    * @var boolean
    */
-  var $show_date = FALSE;
+  public $show_date = FALSE;
 
   /**
-   * @param ENVIRONMENT &$env Requires the global environment to check JavaScript capabilities.
+   * @param ENVIRONMENT $env Requires the global environment to check JavaScript capabilities.
    */
-  function JS_CONSOLE_LOGGER (&$env)
+  function JS_CONSOLE_LOGGER ($env)
   {
     TEXT_OUTPUT_LOGGER::TEXT_OUTPUT_LOGGER ($env);
     $this->set_is_html (TRUE);
-    $this->env =& $env;
-    $this->CSS_file_name =& $env->logger_style_sheet;
+    $this->env = $env;
+    $this->CSS_file_name = $env->logger_style_sheet;
   }
 
   /**
@@ -235,12 +235,12 @@ class JS_CONSOLE_LOGGER extends TEXT_OUTPUT_LOGGER
    * @var ENVIRONMENT
    * @access private
    */
-  var $env = null;
+  public $env = null;
   /**
    * @var array[object]
    * @access private
    */
-  var $_messages = array ();
+  protected $_messages = array ();
 }
 
 ?>

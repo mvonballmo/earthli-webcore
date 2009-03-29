@@ -50,10 +50,10 @@ class JOB_NAVIGATOR extends MULTI_TYPE_ENTRY_NAVIGATOR
 {
   /**
    * Modify the query to navigate.
-   * @param QUERY &$query
+   * @param QUERY $query
    * @access private
    */
-  function _adjust_query (&$query)
+  function _adjust_query ($query)
   {
     parent::_adjust_query ($query);
     $query->add_select ('jtob.priority, jtob.status, entry.kind');
@@ -61,15 +61,15 @@ class JOB_NAVIGATOR extends MULTI_TYPE_ENTRY_NAVIGATOR
   }
 
   /**
-   * @param JOB &$obj Retrieve the title from this job.
+   * @param JOB $obj Retrieve the title from this job.
    * @param boolean $selected Is this the current item in the list?
    * @return string
    * @access private
    */
-  function _text_for_list (&$obj)
+  function _text_for_list ($obj)
   {
     $Result = $obj->kind_icon ('16px') . ' ' . parent::_text_for_list ($obj);
-    $branch_info =& $obj->main_branch_info ();
+    $branch_info = $obj->main_branch_info ();
     if ($branch_info->is_closed ())
     {
       $Result = "<span class=\"locked\">$Result</span>";
@@ -78,14 +78,14 @@ class JOB_NAVIGATOR extends MULTI_TYPE_ENTRY_NAVIGATOR
   }
 
   /**
-   * @param JOB &$obj Retrieve the title formatter from this job.
+   * @param JOB $obj Retrieve the title formatter from this job.
    * @return TITLE_FORMATTER
    * @access private
    */
-  function _formatter_for_object (&$obj)
+  function _formatter_for_object ($obj)
   {
     $Result = parent::_formatter_for_object ($obj);
-    $branch_info =& $obj->main_branch_info ();
+    $branch_info = $obj->main_branch_info ();
     $Result->title = $branch_info->status_as_text () . ' - ' . $branch_info->priority_as_text ();
     return $Result;
   }

@@ -51,7 +51,7 @@ class UNIQUE_OBJECT extends NAMED_OBJECT
   /**
    * @var integer
    */
-  var $id = 0;
+  public $id = 0;
 
   /**
    * Is the object stored in the database?
@@ -64,12 +64,12 @@ class UNIQUE_OBJECT extends NAMED_OBJECT
   
   /**
    * Is this the same object?
-   * @param UNIQUE_OBJECT &$obj
+   * @param UNIQUE_OBJECT $obj
    * @return boolean
    */
-  function equals (&$obj)
+  function equals ($obj)
   {
-    return $obj->id == $this->id;
+    return isset($obj) && ($obj->id == $this->id);
   }
   
   /**
@@ -92,17 +92,17 @@ class UNIQUE_OBJECT extends NAMED_OBJECT
   }
 
   /**
-   * @param DATABASE &$db Database from which to load values.
+   * @param DATABASE $db Database from which to load values.
    */
-  function load (&$db)
+  function load ($db)
   {
     $this->id = $db->f ('id');
   }
 
   /**
-   * @param SQL_STORAGE &$storage Store values to this object.
+   * @param SQL_STORAGE $storage Store values to this object.
    */
-  function store_to (&$storage)
+  function store_to ($storage)
   {
     $tname = $this->_table_name ();
     $storage->restrict ($tname, 'id');

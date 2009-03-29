@@ -50,10 +50,10 @@ class JOB_RENDERER extends PROJECT_ENTRY_RENDERER
 {
   /**
    * Outputs the object as HTML.
-   * @param JOB &$entry
+   * @param JOB $entry
    * @access private
    */
-  function _display_as_html (&$entry)
+  function _display_as_html ($entry)
   {
     $this->_echo_subscribe_status ($entry);
 ?>
@@ -66,7 +66,7 @@ class JOB_RENDERER extends PROJECT_ENTRY_RENDERER
     <?php
       if ($entry->component_id)
       {
-        $comp =& $entry->component ();
+        $comp = $entry->component ();
     ?>
     <tr>
       <td class="label">Component</td>
@@ -82,7 +82,7 @@ class JOB_RENDERER extends PROJECT_ENTRY_RENDERER
       <td class="label">Needed By</td>
       <td>
       <?php
-        $f =& $entry->time_needed->formatter ();
+        $f = $entry->time_needed->formatter ();
         $f->type = Date_time_format_date_only;
         echo $entry->time_needed->format ($f);
       ?></td>
@@ -96,7 +96,7 @@ class JOB_RENDERER extends PROJECT_ENTRY_RENDERER
       <?php
         echo $entry->assignee_icon () . ' ';
 
-        $assignee =& $entry->assignee ();
+        $assignee = $entry->assignee ();
         if ($assignee)
         {
           echo $assignee->title_as_link ();
@@ -114,8 +114,8 @@ class JOB_RENDERER extends PROJECT_ENTRY_RENDERER
       </td>
     </tr>
     <?php
-      $creator =& $entry->creator ();
-      $reporter =& $entry->reporter ();
+      $creator = $entry->creator ();
+      $reporter = $entry->reporter ();
       if (! $reporter->equals ($creator))
       {
     ?>
@@ -153,7 +153,7 @@ class JOB_RENDERER extends PROJECT_ENTRY_RENDERER
     <?php
         if (! $entry->time_created->equals ($entry->time_modified))
         {
-          $modifier =& $entry->modifier ();
+          $modifier = $entry->modifier ();
     ?>
     <tr>
       <td class="label">Modified</td>
@@ -175,11 +175,11 @@ class JOB_RENDERER extends PROJECT_ENTRY_RENDERER
 
   /**
    * Show information for this branch as HTML.
-   * @param JOB &$obj
-   * @param JOB_BRANCH_INFO &$branch_info
+   * @param JOB $obj
+   * @param JOB_BRANCH_INFO $branch_info
    * @access private
    */
-  function _echo_html_branch_info (&$obj, &$branch_info)
+  function _echo_html_branch_info ($obj, $branch_info)
   {
     if (! $branch_info->is_closed())
     {
@@ -193,7 +193,7 @@ class JOB_RENDERER extends PROJECT_ENTRY_RENDERER
   <span class="field"><?php echo $branch_info->status_icon () . ' ' . $branch_info->status_as_text (); ?></span>
   <span class="detail">
   <?php
-    $closer =& $branch_info->closer ();
+    $closer = $branch_info->closer ();
     $time_open = $branch_info->age ();
     $time_in_status = $branch_info->status_age ();
     if (isset ($closer))
@@ -229,10 +229,10 @@ class JOB_RENDERER extends PROJECT_ENTRY_RENDERER
 
   /**
    * Show information for a branch's release.
-   * @param JOB_BRANCH_INFO &$branch_info
+   * @param JOB_BRANCH_INFO $branch_info
    * @access private
    */
-  function _echo_html_branch_release_info (&$branch_info)
+  function _echo_html_branch_release_info ($branch_info)
   {
     if ($branch_info->is_closed ())
     {
@@ -246,14 +246,14 @@ class JOB_RENDERER extends PROJECT_ENTRY_RENDERER
 
   /**
    * Outputs the object as plain text.
-   * @param object &$entry
+   * @param object $entry
    * @access private
    */
-  function _display_as_plain_text (&$entry)
+  function _display_as_plain_text ($entry)
   {
     echo $this->_line ('[Kind]: ' . $entry->kind_as_text ());
 
-    $assignee =& $entry->assignee ();
+    $assignee = $entry->assignee ();
     if ($assignee)
     {
       $assignee_text = '[Assigned to]: ' . $assignee->title_as_plain_text ();
@@ -270,8 +270,8 @@ class JOB_RENDERER extends PROJECT_ENTRY_RENDERER
       echo $this->_line ('[Assigned to]: Nobody');
     }
 
-    $creator =& $entry->creator ();
-    $reporter =& $entry->reporter ();
+    $creator = $entry->creator ();
+    $reporter = $entry->reporter ();
     if (! $reporter->equals ($creator))
     {
       echo $this->_line ('[Reported By]: ' . $reporter->title_as_plain_text ());
@@ -290,11 +290,11 @@ class JOB_RENDERER extends PROJECT_ENTRY_RENDERER
 
   /**
    * Show information for this branch
-   * @param JOB &$obj
-   * @param JOB_BRANCH_INFO &$branch_info
+   * @param JOB $obj
+   * @param JOB_BRANCH_INFO $branch_info
    * @access private
    */
-  function _echo_plain_text_branch_info (&$entry, &$branch_info)
+  function _echo_plain_text_branch_info ($entry, $branch_info)
   {
     if (! $branch_info->is_closed())
     {
@@ -307,7 +307,7 @@ class JOB_RENDERER extends PROJECT_ENTRY_RENDERER
 
     echo '    ' . $branch_info->status_as_text ();
 
-    $closer =& $branch_info->closer ();
+    $closer = $branch_info->closer ();
     $time_open = $branch_info->age ();
     $time_in_status = $branch_info->status_age ();
     if ($closer)
@@ -330,10 +330,10 @@ class JOB_RENDERER extends PROJECT_ENTRY_RENDERER
 
   /**
    * Show information for a branch's release.
-   * @param JOB_BRANCH_INFO &$branch_info
+   * @param JOB_BRANCH_INFO $branch_info
    * @access private
    */
-  function _echo_plain_text_branch_release_info (&$branch_info)
+  function _echo_plain_text_branch_release_info ($branch_info)
   {
     if ($branch_info->is_closed ())
     {
@@ -347,24 +347,24 @@ class JOB_RENDERER extends PROJECT_ENTRY_RENDERER
 
   /**
    * Outputs the object for print preview.
-   * @param JOB &$entry
+   * @param JOB $entry
    * @access private
    */
-  function _display_as_printable (&$entry)
+  function _display_as_printable ($entry)
   {
     parent::_display_as_printable ($entry);
 
     if ($this->_options->show_changes)
     {
       $chng_query = $entry->change_query ();
-      $chngs =& $chng_query->objects ();
+      $chngs = $chng_query->objects ();
       $num_changes = sizeof ($chngs);
       if ($num_changes)
       {
   ?>
     <h2><?php echo $num_changes; ?> Changes</h2>
   <?php
-        $renderer =& $chngs[0]->handler_for (Handler_print_renderer, $this->_options);
+        $renderer = $chngs[0]->handler_for (Handler_print_renderer, $this->_options);
         foreach ($chngs as $chng)
         {
           echo '<h3>' . $chng->title_as_link () . '</h3>';
@@ -387,10 +387,10 @@ class JOB_ASSOCIATED_DATA_RENDERER extends ENTRY_ASSOCIATED_DATA_RENDERER
 {
   /**
    * Draws the list of {@link CHANGE}s.
-   * @param JOB &$obj
+   * @param JOB $obj
    * @param OBJECT_RENDERER_OPTIONS $options
    */
-  function display (&$obj, $options = null)
+  function display ($obj, $options = null)
   {
     $chng_query = $obj->change_query ();
     $num_changes = $chng_query->size ();

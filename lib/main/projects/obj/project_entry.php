@@ -53,19 +53,19 @@ class PROJECT_ENTRY extends MULTI_TYPE_ENTRY
    * @var integer
    * @see PROJECT_APPLICATION_DISPLAY_OPTIONS::entry_kinds()
    */
-  var $kind;
+  public $kind;
   /**
    * To which {@link COMPONENT} does this entry belong?
    * @var integer
    */
-  var $component_id;
+  public $component_id;
   /**
    * What is the main branch for this entry?
    * This branch is only used to provide a default set of branch-specific properties for an entry.
    * @var integer
    * @see PROJECT_ENTRY::main_branch_info()
    */
-  var $main_branch_id;
+  public $main_branch_id;
   /**
    * Contains longer information like core-dumps, examples, etc.
    * This area can contain a longer discussion of the new feature, examples of
@@ -73,12 +73,12 @@ class PROJECT_ENTRY extends MULTI_TYPE_ENTRY
    * not appear in the change log or job list, by default.
    * @var string
    */
-  var $extra_description;
+  public $extra_description;
 
   /**
-   * @param PROJECT_APPLICATION &$app Main application.
+   * @param PROJECT_APPLICATION $app Main application.
    */
-  function PROJECT_ENTRY (&$app)
+  function PROJECT_ENTRY ($app)
   {
     MULTI_TYPE_ENTRY::MULTI_TYPE_ENTRY ($app);
 
@@ -131,13 +131,13 @@ class PROJECT_ENTRY extends MULTI_TYPE_ENTRY
    * This entry's component.
    * @return COMPONENT
    */
-  function &component ()
+  function component ()
   {
     if ($this->component_id)
     {
       if (! isset ($this->_component))
       {
-        $this->_component =& $this->app->component_at_id ($this->component_id);
+        $this->_component = $this->app->component_at_id ($this->component_id);
       }
 
       return $this->_component;
@@ -167,16 +167,16 @@ class PROJECT_ENTRY extends MULTI_TYPE_ENTRY
 
   /**
    * Returns an object which maps this entry to the given branch.
-   * @param BRANCH &$branch
+   * @param BRANCH $branch
    * @return PROJECT_ENTRY_BRANCH_INFO
    */
-  function new_branch_info (&$branch)
+  function new_branch_info ($branch)
   {
     $this->assert (isset ($branch), 'Branch cannot be empty.', 'new_branch_info', 'PROJECT_ENTRY');
 
     if ($this->exists ())
     {
-      $stored_branch_infos =& $this->stored_branch_infos ();
+      $stored_branch_infos = $this->stored_branch_infos ();
     }
 
     if (isset ($stored_branch_infos [$branch->id]))
@@ -201,9 +201,9 @@ class PROJECT_ENTRY extends MULTI_TYPE_ENTRY
    * In order to update a project entry, add all required branches to it, then attempt to store it.
    * The internal storage routine takes care of comparing the new branch information against the old and
    * auditing any changes.
-   * @param PROJECT_ENTRY_BRANCH_INFO &$branch_info
+   * @param PROJECT_ENTRY_BRANCH_INFO $branch_info
    */
-  function add_branch_info (&$branch_info)
+  function add_branch_info ($branch_info)
   {
     $this->_current_branch_infos [$branch_info->branch_id] = $branch_info;
   }
@@ -214,7 +214,7 @@ class PROJECT_ENTRY extends MULTI_TYPE_ENTRY
    * branches have changed.
    * @return array[integer,PROJECT_ENTRY_BRANCH_INFO]
    */
-  function &current_branch_infos ()
+  function current_branch_infos ()
   {
     return $this->_current_branch_infos;
   }
@@ -225,12 +225,12 @@ class PROJECT_ENTRY extends MULTI_TYPE_ENTRY
    * branches have changed.
    * @return array[integer,PROJECT_ENTRY_BRANCH_INFO]
    */
-  function &stored_branch_infos ()
+  function stored_branch_infos ()
   {
     if (! isset ($this->_stored_branch_infos))
     {
       $branch_query = $this->branch_info_query ();
-      $this->_stored_branch_infos =& $branch_query->indexed_objects_by_branch_id (TRUE);
+      $this->_stored_branch_infos = $branch_query->indexed_objects_by_branch_id (TRUE);
     }
 
     return $this->_stored_branch_infos;
@@ -241,7 +241,7 @@ class PROJECT_ENTRY extends MULTI_TYPE_ENTRY
    * In {@link JOB} objects, this function returns {@link JOB_BRANCH_INFO}.
    * @return PROJECT_ENTRY_BRANCH_INFO
    */
-  function &main_branch_info ()
+  function main_branch_info ()
   {
     $this->assert (isset ($this->_main_branch_info), 'Branch information must be set.', 'main_branch_info', 'PROJECT_ENTRY');
 
@@ -252,7 +252,7 @@ class PROJECT_ENTRY extends MULTI_TYPE_ENTRY
    * Returns the main branch for this entry.
    * @return BRANCH
    */
-  function &main_branch ()
+  function main_branch ()
   {
     return $this->app->branch_at_id ($this->main_branch_id);
   }
@@ -276,19 +276,19 @@ class PROJECT_ENTRY extends MULTI_TYPE_ENTRY
 
   /**
    * Set the main branch for this project entry.
-   * @param PROJECT_ENTRY_BRANCH_INFO &$branch_info
+   * @param PROJECT_ENTRY_BRANCH_INFO $branch_info
    * @param boolean $update_now
    */
-  function set_main_branch_info (&$branch_info)
+  function set_main_branch_info ($branch_info)
   {
     $this->_main_branch_info = $branch_info;
     $this->main_branch_id = $branch_info->branch_id;
   }
 
   /**
-   * @param DATABASE &$db
+   * @param DATABASE $db
    */
-  function load (&$db)
+  function load ($db)
   {
     parent::load ($db);
     $this->kind = $db->f ('kind');
@@ -301,9 +301,9 @@ class PROJECT_ENTRY extends MULTI_TYPE_ENTRY
   }
 
   /**
-   * @param SQL_STORAGE &$storage Store values to this object.
+   * @param SQL_STORAGE $storage Store values to this object.
    */
-  function store_to (&$storage)
+  function store_to ($storage)
   {
     parent::store_to ($storage);
     $tname =$this->_table_name ();
@@ -316,8 +316,8 @@ class PROJECT_ENTRY extends MULTI_TYPE_ENTRY
 
   function store_branch_infos ()
   {
-    $orig_branch_infos =& $this->stored_branch_infos ();
-    $new_branch_infos =& $this->current_branch_infos ();
+    $orig_branch_infos = $this->stored_branch_infos ();
+    $new_branch_infos = $this->current_branch_infos ();
 
     if (isset ($new_branch_infos))
     {
@@ -355,7 +355,7 @@ class PROJECT_ENTRY extends MULTI_TYPE_ENTRY
    */
   function _purge ($options)
   {
-    $branch_infos =& $this->stored_branch_infos ();
+    $branch_infos = $this->stored_branch_infos ();
     foreach ($branch_infos as $branch_info)
       $branch_info->purge ($options);
     parent::_purge ($options);
@@ -393,19 +393,19 @@ class PROJECT_ENTRY extends MULTI_TYPE_ENTRY
    * @var PROJECT_ENTRY_BRANCH_INFO
    * @access private
    */
-  var $_main_branch_info;
+  protected $_main_branch_info;
   /**
    * Used during storage to hold new branches.
    * @var array[integer,PROJECT_ENTRY_BRANCH_INFO]
    * @access private
    */
-  var $_current_branch_infos;
+  protected $_current_branch_infos;
   /**
    * Used during storage to hold stored branches.
    * @var array[integer,PROJECT_ENTRY_BRANCH_INFO]
    * @access private
    */
-  var $_stored_branch_infos;
+  protected $_stored_branch_infos;
 }
 
 /**
@@ -425,34 +425,34 @@ class PROJECT_ENTRY_BRANCH_INFO extends UNIQUE_OBJECT
    * @var integer
    * @see PROJECT_ENTRY_BRANCH_INFO::branch()
    */
-  var $branch_id;
+  public $branch_id;
   /**
    * Which entry is this info attached to?
    * @var integer
    * @see PROJECT_ENTRY_BRANCH_INFO::entry()
    */
-  var $entry_id;
+  public $entry_id;
   /**
    * Which release is this info attached to?
    * @var integer
    * @see PROJECT_ENTRY_BRANCH_INFO::release()
    */
-  var $release_id = 0;
+  public $release_id = 0;
 
   /**
-   * @param PROJECT_ENTRY &$entry Branch info is attached to this project entry.
+   * @param PROJECT_ENTRY $entry Branch info is attached to this project entry.
    */
-  function PROJECT_ENTRY_BRANCH_INFO (&$entry)
+  function PROJECT_ENTRY_BRANCH_INFO ($entry)
   {
     UNIQUE_OBJECT::UNIQUE_OBJECT ($entry->app);
-    $this->_entry =& $entry;
+    $this->_entry = $entry;
   }
 
   /**
    * Entry for this info.
    * @return PROJECT_ENTRY
    */
-  function &entry ()
+  function entry ()
   {
     $this->assert (isset ($this->_entry), '_entry is not cached.', 'entry', 'PROJECT_ENTRY_BRANCH_INFO');
     return $this->_entry;
@@ -471,11 +471,11 @@ class PROJECT_ENTRY_BRANCH_INFO extends UNIQUE_OBJECT
    * Branch for this info.
    * @return BRANCH
    */
-  function &branch ()
+  function branch ()
   {
     if (! isset ($this->_branch))
     {
-      $this->_branch =& $this->app->branch_at_id ($this->branch_id);
+      $this->_branch = $this->app->branch_at_id ($this->branch_id);
     }
 
     return $this->_branch;
@@ -486,11 +486,11 @@ class PROJECT_ENTRY_BRANCH_INFO extends UNIQUE_OBJECT
    * Can be empty.
    * @return RELEASE
    */
-  function &release ()
+  function release ()
   {
     if (! isset ($this->_release) && ($this->release_id > 0))
     {
-      $this->_release =& $this->app->release_at_id ($this->release_id);
+      $this->_release = $this->app->release_at_id ($this->release_id);
     }
 
     return $this->_release;
@@ -498,9 +498,9 @@ class PROJECT_ENTRY_BRANCH_INFO extends UNIQUE_OBJECT
 
   /**
    * Change the branch for this info.
-   * @param BRANCH &$branch
+   * @param BRANCH $branch
    */
-  function set_branch (&$branch)
+  function set_branch ($branch)
   {
     // Deliberately break the reference here (avoids a copy bug)
 
@@ -509,9 +509,9 @@ class PROJECT_ENTRY_BRANCH_INFO extends UNIQUE_OBJECT
   }
 
   /**
-   * @param DATABASE &$db
+   * @param DATABASE $db
    */
-  function load (&$db)
+  function load ($db)
   {
     parent::load ($db);
     $this->entry_id = $db->f ('entry_id');
@@ -525,7 +525,7 @@ class PROJECT_ENTRY_BRANCH_INFO extends UNIQUE_OBJECT
    */
   function raw_title ()
   {
-    $branch =& $this->branch ();
+    $branch = $this->branch ();
     return $branch->raw_title ();
   }
 
@@ -548,14 +548,14 @@ class PROJECT_ENTRY_BRANCH_INFO extends UNIQUE_OBJECT
   }
 
   /**
-   * @param SQL_STORAGE &$storage Store values to this object.
+   * @param SQL_STORAGE $storage Store values to this object.
    * @access private
    */
-  function store_to (&$storage)
+  function store_to ($storage)
   {
     if (! $this->entry_id)
     {
-      $entry =& $this->entry ();
+      $entry = $this->entry ();
       $this->assert ($entry->exists (), 'Entry does not exist (cannot store branch information).', 'store_to', 'PROJECT_ENTRY_BRANCH_INFO');
       $this->entry_id = $entry->id;
     }
@@ -617,22 +617,22 @@ class PROJECT_ENTRY_BRANCH_INFO extends UNIQUE_OBJECT
    * @var PROJECT_ENTRY
    * @access private
    */
-  var $_entry;
+  protected $_entry;
   /**
    * @var RELEASE
    * @access private
    */
-  var $_release;
+  protected $_release;
   /**
    * @var BRANCH
    * @access private
    */
-  var $_branch;
+  protected $_branch;
   /**
    * @var COMPONENT
    * @access private
    */
-  var $_component;
+  protected $_component;
 }
 
 ?>

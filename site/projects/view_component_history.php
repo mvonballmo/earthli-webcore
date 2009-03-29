@@ -30,12 +30,12 @@ http://www.earthli.com/software/webcore/projects
 
   $id = read_var ('id');
   $folder_query = $App->login->folder_query ();  
-  $folder =& $folder_query->folder_for_component_at_id ($id);
+  $folder = $folder_query->folder_for_component_at_id ($id);
 
   if (isset ($folder))
   {
     $comp_query = $folder->component_query ();
-    $comp =& $comp_query->object_at_id ($id);
+    $comp = $comp_query->object_at_id ($id);
   }
   
   if (isset ($comp))
@@ -47,7 +47,7 @@ http://www.earthli.com/software/webcore/projects
     $Page->location->add_object_link ($comp);
           
     $history_item_query = $comp->history_item_query ();
-    $obj =& $comp;
+    $obj = $comp;
 
     include_once ('webcore/pages/view_history.php');
   }

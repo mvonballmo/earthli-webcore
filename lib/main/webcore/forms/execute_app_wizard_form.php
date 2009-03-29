@@ -51,20 +51,20 @@ class EXECUTE_APP_WIZARD_FORM extends FORM
   /**
    * @var string
    */
-  var $name = 'app_wizard';
+  public $name = 'app_wizard';
   /**
    * @var string
    */
-  var $button = 'Generate';
+  public $button = 'Generate';
   /**
    * @var string
    */
-  var $button_icon = '{icons}buttons/ship';
+  public $button_icon = '{icons}buttons/ship';
   
   /**
-   * @param CONTEXT &$context
+   * @param CONTEXT $context
    */
-  function EXECUTE_APP_WIZARD_FORM (&$context)
+  function EXECUTE_APP_WIZARD_FORM ($context)
   {
     FORM::FORM ($context);
 
@@ -145,7 +145,7 @@ class EXECUTE_APP_WIZARD_FORM extends FORM
     $this->load_from_client ('author_email', '');
   }
   
-  function load_from_object (&$obj)
+  function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
     $this->load_with_defaults ();
@@ -153,10 +153,10 @@ class EXECUTE_APP_WIZARD_FORM extends FORM
 
   /**
    * Execute the form.
-   * @param TASK &$obj
+   * @param TASK $obj
    * @access private
    */
-  function commit (&$obj)
+  function commit ($obj)
   {
     $obj->app_title = $this->value_for ('app_title');
     $obj->app_id = $this->value_for ('app_id');
@@ -173,10 +173,10 @@ class EXECUTE_APP_WIZARD_FORM extends FORM
   }
 
   /**
-   * @param FORM_RENDERER &$renderer
+   * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_controls (&$renderer)
+  function _draw_controls ($renderer)
   {
     $renderer->start ();
 

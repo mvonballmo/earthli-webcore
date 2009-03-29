@@ -28,12 +28,12 @@ http://www.earthli.com/software/webcore
 
   $id = read_var ('id');
   $folder_query = $App->login->folder_query ();
-  $folder =& $folder_query->folder_for_release_at_id ($id);
+  $folder = $folder_query->folder_for_release_at_id ($id);
 
   if (isset ($folder))
   {
     $rel_query = $folder->release_query ();
-    $release =& $rel_query->object_at_id ($id);
+    $release = $rel_query->object_at_id ($id);
 
     include ('projects/forms/ship_release_form.php');
     $form = new SHIP_RELEASE_FORM ($App);
@@ -44,7 +44,7 @@ http://www.earthli.com/software/webcore
       $App->return_to_referer ($release->home_page ());
     }
 
-    $branch =& $release->branch ();
+    $branch = $release->branch ();
 
     $Page->title->add_object ($folder);
     $Page->title->add_object ($branch);

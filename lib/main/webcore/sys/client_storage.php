@@ -72,12 +72,12 @@ class CLIENT_STORAGE extends RAISABLE
    * duration.
    * @var DATE_TIME
    */
-  var $expire_date;
+  public $expire_date;
   /**
    * Identifier to prepend when storing or retrieving values.
    * @var string
    */
-  var $prefix = '';
+  public $prefix = '';
   
   function CLIENT_STORAGE ()
   {
@@ -314,7 +314,7 @@ class CLIENT_STORAGE extends RAISABLE
    * @var array[string,string]
    * @access private
    */
-  var $_values = array ();
+  protected $_values = array ();
   /**
    * Contains settings when storing multiple values.
    * Use {@link start_multiple_value()} to start storing to a list of
@@ -323,13 +323,13 @@ class CLIENT_STORAGE extends RAISABLE
    * @var array[string,string]
    * @access private
    */
-  var $_multiple_values;
+  protected $_multiple_values;
   /**
    * Multiple values will be stored to this key.
    * @var string
    * @access private
    */
-  var $_multiple_value_key;
+  protected $_multiple_value_key;
 }
 
 ?>

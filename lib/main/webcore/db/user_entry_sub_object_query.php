@@ -116,12 +116,12 @@ class USER_ENTRY_SUB_OBJECT_QUERY extends OBJECT_IN_FOLDER_QUERY
    * link to the entry. This avoids retrieving all the entry data when only the
    * link needs to be displayed (since this query shows comments, not full
    * entries).
-   * @param ENTRY &$entry The entry whose properties should be set.
+   * @param ENTRY $entry The entry whose properties should be set.
    * @access private
    */
-  function _prepare_entry (&$entry)
+  function _prepare_entry ($entry)
   {
-    $db =& $this->db;
+    $db = $this->db;
     $entry->id = $db->f ('entry_id');
     $entry->title = $db->f ('entry_title');
     $entry->state = $db->f ('entry_state');
@@ -133,10 +133,10 @@ class USER_ENTRY_SUB_OBJECT_QUERY extends OBJECT_IN_FOLDER_QUERY
    * Create, prepare and set the entry for each comment.
    * @see _make_entry()
    * @see _prepare_entry()
-   * @param OBJECT_IN_FOLDER &$obj
+   * @param OBJECT_IN_FOLDER $obj
    * @access private
    */
-  function _prepare_object (&$obj)
+  function _prepare_object ($obj)
   {
     $entry = $this->_make_entry ();
     $this->_prepare_entry ($entry);
@@ -145,12 +145,12 @@ class USER_ENTRY_SUB_OBJECT_QUERY extends OBJECT_IN_FOLDER_QUERY
   
   /**
    * Called from {@link _prepare_object()}.
-   * @param OBJECT_IN_FOLDER &$obj
-   * @param ENTRY &$entry
+   * @param OBJECT_IN_FOLDER $obj
+   * @param ENTRY $entry
    * @access private
    * @abstract
    */
-  function _attach_entry_to_object (&$obj, &$entry)
+  function _attach_entry_to_object ($obj, $entry)
   {
     $this->raise_deferred ('_attach_entry_to_object', 'USER_ENTRY_SUB_OBJECT_QUERY');
   }  

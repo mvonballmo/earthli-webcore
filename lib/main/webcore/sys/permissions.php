@@ -113,9 +113,9 @@ class PRIVILEGES extends RAISABLE
   }
 
   /**
-   * @param DATABASE &$db Database from which to load values.
+   * @param DATABASE $db Database from which to load values.
    */
-  function load (&$db, $prefix = '')
+  function load ($db, $prefix = '')
   {
     foreach ($this->_set_names as $set_name)
       $this->_sets [$set_name]->load ($db->f ($prefix . $set_name));
@@ -142,11 +142,11 @@ class PRIVILEGES extends RAISABLE
   }
 
   /**
-   * @param SQL_STORAGE &$storage Store values to this object.
+   * @param SQL_STORAGE $storage Store values to this object.
    * @param string $table_name Store values to this table.
    * @access private
    */
-  function store_to (&$storage, $table_name, $prefix = '')
+  function store_to ($storage, $table_name, $prefix = '')
   {
     foreach ($this->_set_names as $set_name)
       $storage->add ($table_name, $prefix . $set_name, Field_type_integer, $this->_sets [$set_name]->bits);
@@ -156,12 +156,12 @@ class PRIVILEGES extends RAISABLE
    * Adds a new set of privileges.
    * Called from the constructor.
    * @param string $name Name of the set. Used when loading and storing values.
-   * @param BITS &$bits Reference to the storage for these privileges.
+   * @param BITS $bits Reference to the storage for these privileges.
    * @access private
    */
-  function _register_privileges ($name, &$bits)
+  function _register_privileges ($name, $bits)
   {
-    $this->_sets [$name] =& $bits;
+    $this->_sets [$name] = $bits;
     $this->_set_names [] = $name;
   }
 
@@ -179,12 +179,12 @@ class PRIVILEGES extends RAISABLE
    * @var array[string]
    * @access private
    */
-  var $_set_names;
+  protected $_set_names;
   /**
    * @var array[string,BITS]
    * @access private
    */
-  var $_sets;
+  protected $_sets;
 }
 
 /**
@@ -207,21 +207,21 @@ class CONTENT_PRIVILEGES extends PRIVILEGES
    * @var BITS
    * @access private
    */
-  var $general_privileges;
+  public $general_privileges;
   /**
    * Privileges for {@link FOLDER}s.
    * @see is_allowed()
    * @var BITS
    * @access private
    */
-  var $folder_privileges;
+  public $folder_privileges;
   /**
    * Privileges for {@link COMMENT}s.
    * @see is_allowed()
    * @var BITS
    * @access private
    */
-  var $comment_privileges;
+  public $comment_privileges;
 
   function CONTENT_PRIVILEGES ()
   {
@@ -257,7 +257,7 @@ class SINGLE_ENTRY_PRIVILEGES extends CONTENT_PRIVILEGES
    * @var BITS
    * @access private
    */
-  var $entry_privileges;
+  public $entry_privileges;
 
   function SINGLE_ENTRY_PRIVILEGES ()
   {
@@ -285,14 +285,14 @@ class GLOBAL_PRIVILEGES extends PRIVILEGES
    * @var BITS
    * @access private
    */
-  var $user_privileges;
+  public $user_privileges;
   /**
    * Privileges applied for {@link GROUP}s.
    * @see is_allowed()
    * @var BITS
    * @access private
    */
-  var $group_privileges;
+  public $group_privileges;
 
   function GLOBAL_PRIVILEGES ()
   {
@@ -325,27 +325,27 @@ class USER_PERMISSIONS extends STORABLE
    * Permissions are defined for this {@link USER}.
    * @var integer
    */
-  var $user_id;
+  public $user_id;
   /**
    * Privileges which are always allowed for this {@link USER}.
    * @var CONTENT_PRIVILEGES
    */
-  var $allow_privileges;
+  public $allow_privileges;
   /**
    * Privileges which are never allowed for this {@link USER}.
    * @var CONTENT_PRIVILEGES
    */
-  var $deny_privileges;
+  public $deny_privileges;
   /**
    * Global privileges for this {@link USER}.
    * @var GLOBAL_PRIVILEGES
    */
-  var $global_privileges;
+  public $global_privileges;
 
   /**
-   * @param APPLICATION &$app Main application.
+   * @param APPLICATION $app Main application.
    */
-  function USER_PERMISSIONS (&$app)
+  function USER_PERMISSIONS ($app)
   {
     STORABLE::STORABLE ($app);
 
@@ -442,9 +442,9 @@ class USER_PERMISSIONS extends STORABLE
 
   /**
    * Copy permissions from another user.
-   * @param USER_PERMISSIONS &$other
+   * @param USER_PERMISSIONS $other
    */
-  function copy_from (&$other)
+  function copy_from ($other)
   {
     $this->global_privileges = $other->global_privileges;
     $this->allow_privileges = $other->allow_privileges;
@@ -452,9 +452,9 @@ class USER_PERMISSIONS extends STORABLE
   }
 
   /**
-   * @param DATABASE &$db Database from which to load values.
+   * @param DATABASE $db Database from which to load values.
    */
-  function load (&$db)
+  function load ($db)
   {
     $this->_exists = TRUE;
     $this->user_id = $db->f ('user_id');
@@ -464,10 +464,10 @@ class USER_PERMISSIONS extends STORABLE
   }
 
   /**
-   * @param SQL_STORAGE &$storage Store values to this object.
+   * @param SQL_STORAGE $storage Store values to this object.
     * @access private
     */
-  function store_to (&$storage)
+  function store_to ($storage)
   {
     $tname = $this->app->table_names->user_permissions;
 
@@ -490,7 +490,7 @@ class USER_PERMISSIONS extends STORABLE
    * @var boolean
    *  @access private
    */
-  var $_exists = FALSE;
+  protected $_exists = FALSE;
 }
 
 ?>

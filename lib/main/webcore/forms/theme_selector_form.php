@@ -51,17 +51,17 @@ class THEME_SELECTOR_FORM extends FORM
   /**
    * @var string
    */
-  var $name = 'theme_setter_form';
+  public $name = 'theme_setter_form';
 
   /**
-   * @param APPLICATION &$app Main application.
-    * @param array[THEME] &$themes List of available themes.
+   * @param APPLICATION $app Main application.
+    * @param array[THEME] $themes List of available themes.
     */
-  function THEME_SELECTOR_FORM (&$page, &$themes)
+  function THEME_SELECTOR_FORM ($page, $themes)
   {
     FORM::FORM ($page);
 
-    $this->_themes =& $themes;
+    $this->_themes = $themes;
 
     $field = new INTEGER_FIELD ();
     $field->id = 'page_number';
@@ -94,10 +94,10 @@ class THEME_SELECTOR_FORM extends FORM
 
   /**
    * Store the form's values as the theme settings.
-    * @param object &$obj This parameter is ignored.
+    * @param object $obj This parameter is ignored.
     * @access private
     */
-  function commit (&$obj)
+  function commit ($obj)
   {
     $this->page->set_theme_font_name ($this->value_for ('font_name_CSS_file_name'));
     $this->page->set_theme_font_size ($this->value_for ('font_size_CSS_file_name'));
@@ -130,10 +130,10 @@ class THEME_SELECTOR_FORM extends FORM
   }
 
   /**
-   * @param FORM_RENDERER &$renderer
+   * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_controls (&$renderer)
+  function _draw_controls ($renderer)
   {
     $renderer->start ();
 

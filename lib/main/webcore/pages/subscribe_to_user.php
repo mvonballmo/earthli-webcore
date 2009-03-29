@@ -31,7 +31,7 @@ http://www.earthli.com/software/webcore
   if ($name)
   {
     $query = $App->user_query ();
-    $obj =& $query->object_at_name ($name);
+    $obj = $query->object_at_name ($name);
     $sub_type = Subscribe_user;
   }
 

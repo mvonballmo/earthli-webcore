@@ -27,7 +27,7 @@ http://www.earthli.com/software/webcore
 ****************************************************************************/
 
   $folder_query = $App->login->folder_query ();
-  $folder =& $folder_query->object_at_id (read_var ('id'));
+  $folder = $folder_query->object_at_id (read_var ('id'));
 
   if (isset ($folder) && $App->login->is_allowed (Privilege_set_folder, Privilege_delete, $folder))
   {
@@ -37,7 +37,7 @@ http://www.earthli.com/software/webcore
     $form->process_existing ($folder);
     if ($form->committed ())
     {
-      $parent =& $folder->parent_folder ();
+      $parent = $folder->parent_folder ();
 
       if ($App->login->is_allowed (Privilege_set_folder, Privilege_hidden, $folder) && ! $form->value_for ('purge'))
       {

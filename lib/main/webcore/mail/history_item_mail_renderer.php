@@ -49,11 +49,11 @@ require_once ('webcore/mail/mail_object_renderer.php');
 class HISTORY_ITEM_MAIL_RENDERER extends MAIL_OBJECT_RENDERER
 {
   /**
-   * @param HISTORY_ITEM &$obj
+   * @param HISTORY_ITEM $obj
    * @param MAIL_OBJECT_RENDERER_OPTIONS $options
    * @access private
    */
-  function _echo_html_content (&$obj, $options)
+  function _echo_html_content ($obj, $options)
   {
     if ($options->num_items > 1)
     {
@@ -67,11 +67,11 @@ class HISTORY_ITEM_MAIL_RENDERER extends MAIL_OBJECT_RENDERER
   }
   
   /**
-   * @param HISTORY_ITEM &$obj
+   * @param HISTORY_ITEM $obj
    * @param MAIL_OBJECT_RENDERER_OPTIONS $options
    * @access private
    */
-  function _echo_text_content (&$obj, $options)
+  function _echo_text_content ($obj, $options)
   {
     if ($options->num_items > 1)
     {

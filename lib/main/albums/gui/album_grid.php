@@ -51,27 +51,27 @@ class ALBUM_GRID extends FOLDER_GRID
   /**
    * @var boolean
    */
-  var $show_separator = FALSE;
+  public $show_separator = FALSE;
   /**
    * @var string
    */
-  var $object_name = 'Album';
+  public $object_name = 'Album';
   /**
    * @var string
    */
-  var $box_style = 'chart';
+  public $box_style = 'chart';
   /**
    * @var integer
    */
-  var $spacing = 8;
+  public $spacing = 8;
 
   /**
-   * @param ALBUM &$obj
+   * @param ALBUM $obj
     * @access private
     */
-  function _draw_box (&$obj)
+  function _draw_box ($obj)
   {
-    $main_pic =& $obj->main_picture ();
+    $main_pic = $obj->main_picture ();
 ?>
   <div class="chart-title" style="text-align: center">
     <?php echo $obj->title_as_html (); ?>

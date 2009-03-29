@@ -51,44 +51,44 @@ class PRINTABLE_COMMENT_GRID extends STANDARD_GRID
   /**
    * @var string
    */
-  var $object_name = 'comment';
+  public $object_name = 'comment';
   /**
    * @var boolean
    */
-  var $show_separator = FALSE;
+  public $show_separator = FALSE;
   /**
    * @var boolean
    */
-  var $show_controls = TRUE;
+  public $show_controls = TRUE;
   /**
    * Paginate this set of comments?
     * @var boolean
     */
-  var $show_paginated = TRUE;
+  public $show_paginated = TRUE;
   /**
    * @var boolean
    */
-  var $show_user_info = TRUE;
+  public $show_user_info = TRUE;
 
   /**
-   * @param APPLICATION &$application
-   * @param COMMENT &$comment Comments belong to this comment (can be empty).
+   * @param APPLICATION $application
+   * @param COMMENT $comment Comments belong to this comment (can be empty).
    */
-  function PRINTABLE_COMMENT_GRID (&$app, &$comment)
+  function PRINTABLE_COMMENT_GRID ($app, $comment)
   {
     GRID::GRID ($app);
-    $this->_comment =& $comment;
+    $this->_comment = $comment;
   }
 
   /**
    * Show the paginator only if not printing.
-    * @access private
-    */
+   * @access private
+   */
   function _draw_paginator ()
   {
     if ($this->_show_paginator)
     {
-      return parent::_draw_paginator ();
+      parent::_draw_paginator ();
     }
   }
 
@@ -98,12 +98,12 @@ class PRINTABLE_COMMENT_GRID extends STANDARD_GRID
     * @var COMMENT
     * @access private
     */
-  var $_comment;
+  protected $_comment;
   /**
    * @var boolean
     * @access private
     */
-  var $_show_paginator = FALSE;
+  protected $_show_paginator = FALSE;
 
 }
 ?>

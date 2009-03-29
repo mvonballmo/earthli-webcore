@@ -52,7 +52,7 @@ class PROJECT_RELEASE_QUERY extends FOLDER_ENTRY_QUERY
    * SQL alias for the "main" table.
    * @var string
    */
-  var $alias = 'rel';
+  public $alias = 'rel';
 
   /**
    * Apply default restrictions and tables.
@@ -95,7 +95,7 @@ class PROJECT_RELEASE_QUERY extends FOLDER_ENTRY_QUERY
    * @param RELEASE
    * @access private
    */
-  function _prepare_object (&$obj)
+  function _prepare_object ($obj)
   {
     parent::_prepare_object ($obj);
 
@@ -125,7 +125,7 @@ class PROJECT_RELEASE_QUERY extends FOLDER_ENTRY_QUERY
    * @var string
    * @access private
    */
-  var $_privilege_set = Privilege_set_folder;
+  protected $_privilege_set = Privilege_set_folder;
 }
 
 ?>

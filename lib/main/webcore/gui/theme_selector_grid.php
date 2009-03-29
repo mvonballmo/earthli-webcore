@@ -50,17 +50,17 @@ require_once ('webcore/gui/theme_grid.php');
  */
 class THEME_SELECTOR_GRID extends THEME_GRID
 {
-  var $box_style = '';
-  var $width = '';
-  var $show_separator = FALSE;
-  var $padding = 0;
-  var $centered = TRUE;
+  public $box_style = '';
+  public $width = '';
+  public $show_separator = FALSE;
+  public $padding = 0;
+  public $centered = TRUE;
 
   /**
-   * @param THEME &$obj
+   * @param THEME $obj
     * @access private
     */
-  function _draw_box (&$obj)
+  function _draw_box ($obj)
   {
 ?>
   <div style="text-align: center">

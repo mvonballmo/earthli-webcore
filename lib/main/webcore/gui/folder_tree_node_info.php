@@ -53,36 +53,36 @@ class FOLDER_TREE_NODE_INFO extends TREE_NODE_INFO
    * This redirects folders to this page instead of their default home page.
    * @var string
    */
-  var $page_link = '';
+  public $page_link = '';
   /**
    * Add arguments to this page.
    * These constant arguments are appended to each generated link.
    * @var string
    */
-  var $page_args = '';
+  public $page_args = '';
   /**
    * Show the icon for a folder?
    * Overridden in specialized displayers that show other icons.
    * @var boolean
    */
-  var $show_folder_icon = TRUE;
+  public $show_folder_icon = TRUE;
 
   /**
    * Return list of sub-nodes for 'node'.
-   * @param FOLDER &$node
+   * @param FOLDER $node
    * @access private
    */
-  function sub_nodes (&$node)
+  function sub_nodes ($node)
   {
     return $node->sub_folders ();
   }
 
   /**
    * Return the title for the given node.
-   * @param PROJECT &$node Draw the title for this project.
+   * @param PROJECT $node Draw the title for this project.
    * @return string
    */
-  function title_for (&$node)
+  function title_for ($node)
   {
     if ($this->selected ($node))
     {
@@ -123,10 +123,10 @@ class FOLDER_TREE_NODE_INFO extends TREE_NODE_INFO
 
   /**
    * Return the icon for the given node.
-   * @param PROJECT &$node Draw the title for this project.
+   * @param PROJECT $node Draw the title for this project.
    * @return string
    */
-  function icon_for (&$node)
+  function icon_for ($node)
   {
     if ($this->show_folder_icon && $node->icon_url)
     {
@@ -136,11 +136,11 @@ class FOLDER_TREE_NODE_INFO extends TREE_NODE_INFO
 
   /**
    * Is this node closed in this tree?
-   * @param FOLDER &$node
+   * @param FOLDER $node
    * @return boolean
    * @access private
    */
-  function closed (&$node)
+  function closed ($node)
   {
     if (! isset ($this->open_nodes) || ! sizeof ($this->open_nodes))
     {
@@ -153,22 +153,22 @@ class FOLDER_TREE_NODE_INFO extends TREE_NODE_INFO
 
   /**
    * Return the node's parent node.
-   * @param FOLDER &$node
+   * @param FOLDER $node
    * @return FOLDER
    * @access private
    */
-  function parent (&$node)
+  function parent ($node)
   {
     return $node->parent_folder ();
   }
 
   /**
    * Return the node's id.
-   * @param FOLDER &$node
+   * @param FOLDER $node
    * @return integer
    * @access private
    */
-  function id (&$node)
+  function id ($node)
   {
     return $node->id;
   }
@@ -185,11 +185,11 @@ class EXPLORER_FOLDER_TREE_NODE_INFO extends FOLDER_TREE_NODE_INFO
 {
   /**
    * Is this node selectable in this tree?
-   * @param FOLDER &$node
+   * @param FOLDER $node
    * @return boolean
    * @access private
    */
-  function selectable (&$node)
+  function selectable ($node)
   {
     return $this->app->login->is_allowed (Privilege_set_entry, Privilege_create, $node);
   }
@@ -209,13 +209,13 @@ class SECURITY_FOLDER_TREE_NODE_INFO extends FOLDER_TREE_NODE_INFO
    * Overridden in specialized displayers that show other icons.
    * @var boolean
    */
-  var $show_folder_icon = FALSE;
+  public $show_folder_icon = FALSE;
 
   /**
    * Make sure all nodes that define their permissions are visible in the tree.
-   * @param array[FOLDER] &$nodes
+   * @param array[FOLDER] $nodes
    */
-  function set_defined_nodes_visible (&$nodes)
+  function set_defined_nodes_visible ($nodes)
   {
     if (sizeof ($nodes))
     {
@@ -234,21 +234,21 @@ class SECURITY_FOLDER_TREE_NODE_INFO extends FOLDER_TREE_NODE_INFO
 
   /**
    * Is this node visitable in this tree?
-   * @param FOLDER &$node
+   * @param FOLDER $node
    * @return boolean
    * @access private
    */
-  function visitable (&$node)
+  function visitable ($node)
   {
     return $this->login->is_allowed (Privilege_set_folder, Privilege_secure, $node);
   }
 
   /**
    * Return the icon for the given node.
-   * @param PROJECT &$node Draw the title for this project.
+   * @param PROJECT $node Draw the title for this project.
    * @return string
    */
-  function icon_for (&$node)
+  function icon_for ($node)
   {
     if ($node->defines_security ())
     {
@@ -271,11 +271,11 @@ class SUBSCRIPTION_FOLDER_TREE_NODE_INFO extends FOLDER_TREE_NODE_INFO
 {
   /**
    * Is this node selectable in this tree?
-    * @param FOLDER &$node
+    * @param FOLDER $node
     * @return bool
     * @access private
     */
-  function visitable (&$node)
+  function visitable ($node)
   {
     return $this->app->login->is_allowed (Privilege_set_folder, Privilege_modify, $node);
   }

@@ -58,13 +58,13 @@ class ENGINE extends RESOLVER
    * Call {@link init()} to create and initialize.
    * @var ENVIRONMENT
    */
-  var $env;
+  public $env;
   /**
    * Global page for this session.
    * Call {@link init()} to create and initialize.
    * @var PAGE
    */
-  var $page;
+  public $page;
   /**
    * If true, logging is initialized.
    * Override {@link _make_logger()} to create custom logging.
@@ -73,13 +73,13 @@ class ENGINE extends RESOLVER
    * @see _make_text_file_logger()
    * @var boolean
    */
-  var $use_logging = TRUE;
+  public $use_logging = TRUE;
   /**
    * If true, checks for and initializes debug mode using
    * {@link apply_debug_settings()}.
    * @var boolean
    */
-  var $use_debug_mode = TRUE;
+  public $use_debug_mode = TRUE;
 
   /**
    * Initialize global objects for this session.
@@ -95,7 +95,7 @@ class ENGINE extends RESOLVER
     global $Profiler;
     if (isset ($Profiler))
     {
-      $this->env->profiler =& $Profiler;
+      $this->env->profiler = $Profiler;
     }
 
     if ($this->use_logging)
@@ -156,10 +156,10 @@ class ENGINE extends RESOLVER
    * REDIRECT_EXCEPTION_HANDLER}.
    *
    * @see _make_environment()
-   * @param ENVIRONMENT &$env
+   * @param ENVIRONMENT $env
    * @access private
    */
-  function _init_environment (&$env)
+  function _init_environment ($env)
   {
     $env->title = 'WebCore';
     $env->set_buffered ();
@@ -170,10 +170,10 @@ class ENGINE extends RESOLVER
    * Replaces the standard {@link US_DATE_TIME_FORMATTER} with the
    * {@link EURO_DATE_TIME_FORMATTER}, which uses a different time zone and
    * different formatting.
-   * @param ENVIRONMENT &$env
+   * @param ENVIRONMENT $env
    * @access private
    */
-  function _apply_european_settings (&$env)
+  function _apply_european_settings ($env)
   {
     $env->date_time_toolkit->formatter = new EURO_DATE_TIME_FORMATTER ();
   }
@@ -182,10 +182,10 @@ class ENGINE extends RESOLVER
    * Adjust the environment for ISO dates.
    * Replaces the standard {@link US_DATE_TIME_FORMATTER} with the
    * {@link ISO_DATE_TIME_FORMATTER}, which uses different formatting.
-   * @param ENVIRONMENT &$env
+   * @param ENVIRONMENT $env
    * @access private
    */
-  function _apply_iso_settings (&$env)
+  function _apply_iso_settings ($env)
   {
     $env->date_time_toolkit->formatter = new ISO_DATE_TIME_FORMATTER ();
   }
@@ -197,7 +197,7 @@ class ENGINE extends RESOLVER
    * {@link _apply_release_settings()}. Release web sites should call
    * <code>_apply_release_settings</code> instead.
    */
-  function _apply_debug_settings (&$env)
+  function _apply_debug_settings ($env)
   {
     $debug = read_var ('debug');
     if ($debug)
@@ -217,7 +217,7 @@ class ENGINE extends RESOLVER
    * and redirect the exception to an error handler page.
    * @see _apply_debug_settings()
    */
-  function _apply_release_settings (&$env)
+  function _apply_release_settings ($env)
   {
     $env->debug_enabled = FALSE;
     set_default_exception_handler (new REDIRECT_EXCEPTION_HANDLER ($env));
@@ -234,11 +234,11 @@ class ENGINE extends RESOLVER
    * alias will not be available. This is a compromise so that the environment
    * startup can be logged.
    *
-   * @param ENVIRONMENT &$env
+   * @param ENVIRONMENT $env
    * @return LOGGER
    * @access private
    */
-  function _make_logger (&$env)
+  function _make_logger ($env)
   {
     $class_name = $this->final_class_name ('LOGGER', 'webcore/log/logger.php');
     return new $class_name ();
@@ -251,11 +251,11 @@ class ENGINE extends RESOLVER
    * which type of object is created.
    * @see _make_echo_logger()
    * @see _make_text_file_logger()
-   * @param ENVIRONMENT &$env
+   * @param ENVIRONMENT $env
    * @return JS_CONSOLE_LOGGER
    * @access private
    */
-  function _make_console_logger (&$env)
+  function _make_console_logger ($env)
   {
     $class_name = $this->final_class_name ('JS_CONSOLE_LOGGER', 'webcore/log/js_console_logger.php');
     return new $class_name ($env);
@@ -267,11 +267,11 @@ class ENGINE extends RESOLVER
    * "ECHO_LOGGER" extension point to control which type of object is created.
    * @see _make_text_file_logger()
    * @see _make_console_logger()
-   * @param ENVIRONMENT &$env
+   * @param ENVIRONMENT $env
    * @return ECHO_LOGGER
    * @access private
    */
-  function _make_echo_logger (&$env)
+  function _make_echo_logger ($env)
   {
     $class_name = $this->final_class_name ('ECHO_LOGGER', 'webcore/log/echo_logger.php');
     return new $class_name ($env);
@@ -283,7 +283,7 @@ class ENGINE extends RESOLVER
    * is created.
    * @see _make_echo_logger()
    * @see _make_console_logger()
-   * @param ENVIRONMENT &$env
+   * @param ENVIRONMENT $env
    * @param string $file_name Path to the log file; resolved relative to the
    * environment. Use the {@link Folder_name_logs} alias to store in the default
    * logs folder.
@@ -315,10 +315,10 @@ class ENGINE extends RESOLVER
    * channel (which are messages you are likely to emit with the when calling
    * {@link log_message()}.
    * @see _make_logger()
-   * @param LOGGER &$logger
+   * @param LOGGER $logger
    * @access private
    */
-  function _init_logger (&$env, &$logger)
+  function _init_logger ($env, $logger)
   {
     $logger->set_enabled (Msg_type_error | Msg_type_warning);
     $logger->set_channel_enabled (Msg_channel_default, Msg_type_all);
@@ -327,11 +327,11 @@ class ENGINE extends RESOLVER
   /**
    * Make the global page for this session.
    * Calls {@link _init_page()} to allow customization.
-   * @param ENVIRONMENT &$env
+   * @param ENVIRONMENT $env
    * @return PAGE
    * @access private
    */
-  function _make_page (&$env)
+  function _make_page ($env)
   {
     $class_name = $this->final_class_name ('PAGE', 'webcore/sys/page.php');
     return new $class_name ($env);
@@ -341,11 +341,11 @@ class ENGINE extends RESOLVER
    * Called immediately after creating a page.
    * Override this function to customize initialization.
    * @see _make_page()
-   * @param ENVIRONMENT &$env
-   * @param PAGE &$page
+   * @param ENVIRONMENT $env
+   * @param PAGE $page
    * @access private
    */
-  function _init_page (&$env, &$page)
+  function _init_page ($env, $page)
   {
     /* Set default properties for the <PAGE_TITLE>. */
 

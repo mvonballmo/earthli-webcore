@@ -52,7 +52,7 @@ class PROJECT_COMPONENT_QUERY extends OBJECT_IN_SINGLE_FOLDER_QUERY
    * SQL alias for the "main" table.
    * @var string
    */
-  var $alias = 'comp';
+  public $alias = 'comp';
 
   /**
    * Apply default restrictions and tables.
@@ -89,7 +89,7 @@ class PROJECT_COMPONENT_QUERY extends OBJECT_IN_SINGLE_FOLDER_QUERY
    * @var string
    * @access private
    */
-  var $_privilege_set = Privilege_set_folder;
+  protected $_privilege_set = Privilege_set_folder;
 }
 
 ?>

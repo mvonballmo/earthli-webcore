@@ -114,7 +114,7 @@ class ALBUM_APPLICATION_DISPLAY_OPTIONS extends APPLICATION_DISPLAY_OPTIONS
    * @var array[PROPERTY_VALUE]
    * @access private
    */
-  var $_weather_icons;
+  protected $_weather_icons;
 }
 
 ?>

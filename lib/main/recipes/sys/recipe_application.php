@@ -51,7 +51,7 @@ class RECIPE_APPLICATION_PAGE_NAMES extends APPLICATION_PAGE_NAMES
   /**
    * @var string
    */
-  var $entry_home = 'view_recipe.php';
+  public $entry_home = 'view_recipe.php';
 }
 
 /**
@@ -65,43 +65,43 @@ class RECIPE_APPLICATION_TABLE_NAMES extends APPLICATION_TABLE_NAMES
   /**
    * @var string
    */
-  var $folders = 'recipe_folders';
+  public $folders = 'recipe_folders';
   /**
    * @var string
    */
-  var $comments = 'recipe_comments';
+  public $comments = 'recipe_comments';
   /**
    * @var string
    */
-  var $entries = 'recipes';
+  public $entries = 'recipes';
   /**
    * @var string
    */
-  var $user_permissions = 'recipe_user_permissions';
+  public $user_permissions = 'recipe_user_permissions';
   /**
    * @var string
    */
-  var $folder_permissions = 'recipe_folder_permissions';
+  public $folder_permissions = 'recipe_folder_permissions';
   /**
    * @var string
    */
-  var $subscriptions = 'recipe_subscriptions';
+  public $subscriptions = 'recipe_subscriptions';
   /**
    * @var string
    */
-  var $subscribers = 'recipe_subscribers';
+  public $subscribers = 'recipe_subscribers';
   /**
    * @var string
    */
-  var $history_items = 'recipe_history_items';
+  public $history_items = 'recipe_history_items';
   /**
    * @var string
    */
-  var $searches = 'recipe_searches';
+  public $searches = 'recipe_searches';
   /**
    * @var string
    */
-  var $attachments = 'recipe_attachments';
+  public $attachments = 'recipe_attachments';
 }
 
 /**
@@ -116,34 +116,34 @@ class RECIPE_APPLICATION extends DRAFTABLE_APPLICATION
   /**
    * @var string
    */
-  var $title = 'earthli Recipes';
+  public $title = 'earthli Recipes';
   /**
    * @var string
    */
-  var $short_title = 'Recipes';
+  public $short_title = 'Recipes';
   /**
    * @var string
    */
-  var $icon = '{app_icons}app/recipes';
+  public $icon = '{app_icons}app/recipes';
   /**
    * @var string
    */
-  var $support_url = 'http://earthli.com/software/webcore/app_recipes.php';
+  public $support_url = 'http://earthli.com/software/webcore/app_recipes.php';
   /**
    * Unique ID for this framework.
    * @var string
    */
-  var $framework_id = 'com.earthli.recipes';
+  public $framework_id = 'com.earthli.recipes';
   /**
    * @var integer
    */
-  var $version = '3.0.0';
+  public $version = '3.0.0';
 
   /**
-   * @param PAGE &$page Page to which this application is attached.
+   * @param PAGE $page Page to which this application is attached.
    * @access private
    */
-  function RECIPE_APPLICATION (&$page)
+  function RECIPE_APPLICATION ($page)
   {
     APPLICATION::APPLICATION ($page);
 

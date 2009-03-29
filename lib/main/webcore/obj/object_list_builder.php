@@ -54,22 +54,22 @@ class OBJECT_LIST_BUILDER extends WEBCORE_OBJECT
    * Use {@link load_from_request()} to populate.
    * @var array[FOLDER]
    */
-  var $folders;
+  public $folders;
   /**
    * List of selected entries.
    * Use {@link load_from_request()} to populate.
    * @var array[ENTRY]
    */
-  var $entries;
+  public $entries;
 
   /**
-   * @param FOLDER &$folder Objects are from this folder.
+   * @param FOLDER $folder Objects are from this folder.
    */
-  function OBJECT_LIST_BUILDER (&$folder)
+  function OBJECT_LIST_BUILDER ($folder)
   {
     WEBCORE_OBJECT::WEBCORE_OBJECT ($folder->app);
 
-    $this->_folder =& $folder;
+    $this->_folder = $folder;
     $this->entries = array ();
     $this->folders = array ();
   }
@@ -193,7 +193,7 @@ class OBJECT_LIST_BUILDER extends WEBCORE_OBJECT
         $this->assert (! empty ($folder_id), 'Cannot retrieve all items with an [id].', 'load_from_request', 'OBJECT_LIST_BUILDER');
     
         $folder_query = $this->login->folder_query ();
-        $folder =& $folder_query->object_at_id ($folder_id);
+        $folder = $folder_query->object_at_id ($folder_id);
         $entry_query = $folder->entry_query ();
         $entry_query->set_type ($entry_type);
     
@@ -220,14 +220,14 @@ class OBJECT_LIST_BUILDER extends WEBCORE_OBJECT
    * @var FOLDER $folder
    * @access private
    */
-  var $_folder;
+  protected $_folder;
   /**
    * Description of the contents of the list builder.
    * Returned by {@link description()}.
    * @var array[string]
    * @access private
    */
-  var $_content;
+  protected $_content;
 }
 
 ?>

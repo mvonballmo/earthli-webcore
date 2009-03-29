@@ -51,22 +51,22 @@ class FOLDER_GROUP_PERMISSIONS_CREATE_FORM extends FOLDER_PERMISSIONS_FORM
   /**
    * @var string
    */
-  var $button = 'Add';
+  public $button = 'Add';
   /**
    * @var string
    */
-  var $button_icon = '{icons}buttons/add';
+  public $button_icon = '{icons}buttons/add';
 
   /**
-   * @param FOLDER &$folder Folder for which permissions are defined.
-    * @param GROUP_QUERY &$group_query Retrieve groups with this query.
+   * @param FOLDER $folder Folder for which permissions are defined.
+    * @param GROUP_QUERY $group_query Retrieve groups with this query.
     */
-  function FOLDER_GROUP_PERMISSIONS_CREATE_FORM (&$folder, &$group_query)
+  function FOLDER_GROUP_PERMISSIONS_CREATE_FORM ($folder, $group_query)
   {
     FOLDER_PERMISSIONS_FORM::FOLDER_PERMISSIONS_FORM ($folder->app);
 
-    $this->_folder =& $folder;
-    $this->_group_query =& $group_query;
+    $this->_folder = $folder;
+    $this->_group_query = $group_query;
 
     $field = new TEXT_FIELD ();
     $field->id = 'group_name';
@@ -79,10 +79,10 @@ class FOLDER_GROUP_PERMISSIONS_CREATE_FORM extends FOLDER_PERMISSIONS_FORM
   
   /**
    * Called after fields are validated.
-    * @param PERMISSIONS &$obj
+    * @param PERMISSIONS $obj
     * @access private
     */
-  function _post_validate (&$obj)
+  function _post_validate ($obj)
   {
     parent::_post_validate ($obj);
 
@@ -90,7 +90,7 @@ class FOLDER_GROUP_PERMISSIONS_CREATE_FORM extends FOLDER_PERMISSIONS_FORM
     {
       // the name validated OK (specifically, it is not empty)
       
-      $this->_group =& $this->_group_query->object_with_field ('title', $this->value_for ('group_name'));
+      $this->_group = $this->_group_query->object_with_field ('title', $this->value_for ('group_name'));
 
       if (! $this->_group)
       {
@@ -99,8 +99,8 @@ class FOLDER_GROUP_PERMISSIONS_CREATE_FORM extends FOLDER_PERMISSIONS_FORM
 
       if (! $this->num_errors ('group_name'))
       {
-        $security =& $this->_folder->security_definition ();
-        $group =& $security->group_permissions_at_id ($this->_group->id);
+        $security = $this->_folder->security_definition ();
+        $group = $security->group_permissions_at_id ($this->_group->id);
         if (isset ($group))
         {
           $this->record_error ('group_name', "That group already has permissions in this folder.");
@@ -111,10 +111,10 @@ class FOLDER_GROUP_PERMISSIONS_CREATE_FORM extends FOLDER_PERMISSIONS_FORM
 
   /**
    * Store the form's values to this set of permissions.
-    * @param PERMISSIONS &$obj
+    * @param PERMISSIONS $obj
     * @access private
     */
-  function commit (&$obj)
+  function commit ($obj)
   {
     $obj->ref_id = $this->_group->id;
     $obj->kind = Privilege_kind_group;
@@ -131,7 +131,7 @@ class FOLDER_GROUP_PERMISSIONS_CREATE_FORM extends FOLDER_PERMISSIONS_FORM
     $selected_group_id = read_var ('selected_group_id', 0);
     if ($selected_group_id)
     {
-      $group =& $this->_group_query->object_at_id ($selected_group_id);
+      $group = $this->_group_query->object_at_id ($selected_group_id);
       $this->set_value ('group_name', $group->title);
     }
   }
@@ -154,12 +154,12 @@ class FOLDER_GROUP_PERMISSIONS_CREATE_FORM extends FOLDER_PERMISSIONS_FORM
   }
 
   /**
-   * @param FORM_RENDERER &$renderer
-   * @param PERMISSIONS_FORMATTER &$formatter
+   * @param FORM_RENDERER $renderer
+   * @param PERMISSIONS_FORMATTER $formatter
    * @access private
    * @abstract
    */
-  function _draw_permission_controls (&$renderer, &$formatter)
+  function _draw_permission_controls ($renderer, $formatter)
   {
     $options = new FORM_TEXT_CONTROL_OPTIONS ();
     $options->width = '20em';

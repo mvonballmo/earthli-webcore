@@ -39,29 +39,29 @@ class PHP_Highlight
     /**
      * Hold the source
      */
-    var $source;
+    public $source;
 
     /**
      * Toggle for function referencing
      */
-    var $funcref = true;
+    public $funcref = true;
 
     /**
      * Hold highlight colors
      */
-    var $highlight;
+    public $highlight;
 
     /**
      * Array of things to be replaced per token
      */
-    var $tokmatch = array("\t", ' ');
+    public $tokmatch = array("\t", ' ');
 
     /**
      * Array of things to be replaced with per token
      */
-    var $tokreplace = array('&nbsp;&nbsp;', '&nbsp;');
+    public $tokreplace = array('&nbsp;&nbsp;', '&nbsp;');
 
-    var $link_functions = TRUE;
+    public $link_functions = TRUE;
 
 
     /**

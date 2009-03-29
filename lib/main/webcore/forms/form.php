@@ -88,17 +88,17 @@ class FORM extends WEBCORE_OBJECT
     * @see FORM::set_name()
     * @var string
     */
-  var $name = 'update_form';
+  public $name = 'update_form';
   /**
    * Text of the submit button.
     * @var string
     */
-  var $button = Form_default_button_title;
+  public $button = Form_default_button_title;
   /**
    * Icon for the submit button.
    * @var string
    */
-  var $button_icon = '';
+  public $button_icon = '';
   /**
    * HTTP submission method.
    * Also determines from where the form reads it's submitted values. The
@@ -109,44 +109,44 @@ class FORM extends WEBCORE_OBJECT
    * variables into one array based on installation preferences).
    * @var string
    */
-  var $method = 'post';
+  public $method = 'post';
   /**
    * To which url is this form submitted?
    * Defaults to the current page.
    * @var string
    */
-  var $action;
+  public $action;
   /**
    * Location within the target page.
    * Some browsers do not support this feature. It will be left off if
    * {@link Browser_anchors_in_posts} is not supported.
    */
-  var $action_anchor;
+  public $action_anchor;
   /**
    * Main form container has this CSS class.
    * @var string
    */
-  var $CSS_class = 'basic';
+  public $CSS_class = 'basic';
   /**
    * Always executes the form as submitted, if set.
    * @var boolean
    */
-  var $assume_submitted = FALSE;
+  public $assume_submitted = FALSE;
   /**
    * Should this form set focus to its initial control?
    * @var boolean
    */
-  var $allow_focus = TRUE;
+  public $allow_focus = TRUE;
   /**
    * Handles verifying human (vs. robot) input in the form.
    * @var CAPTCHA
    */
-  var $captcha;
+  public $captcha;
 
   /**
-   * @param CONTEXT &$context Attach to this object.
+   * @param CONTEXT $context Attach to this object.
    */
-  function FORM (&$context)
+  function FORM ($context)
   {
     WEBCORE_OBJECT::WEBCORE_OBJECT ($context);
 
@@ -229,9 +229,9 @@ class FORM extends WEBCORE_OBJECT
    * This call implies that the form is applied against an object, but is not
    * necessarily saving or storing it, simply processing the object. This will
    * {@link commit()} the form if it has been {@link submitted()}.
-   * @param object &$obj
+   * @param object $obj
    */
-  function process (&$obj)
+  function process ($obj)
   {
     $this->_process ($obj, Form_load_action_default);
   }
@@ -250,9 +250,9 @@ class FORM extends WEBCORE_OBJECT
   /**
    * Execute the form on the new object.
    * This will commit the form if it has been {@link submitted()}.
-   * @param object &$obj
+   * @param object $obj
    */
-  function process_new (&$obj)
+  function process_new ($obj)
   {
     $this->_process ($obj, Form_load_action_default);
   }
@@ -260,9 +260,9 @@ class FORM extends WEBCORE_OBJECT
   /**
    * Execute the form on the existing object.
    * This will commit the form if it has been {@link submitted()}.
-   * @param object &$obj
+   * @param object $obj
    */
-  function process_existing (&$obj)
+  function process_existing ($obj)
   {
     $this->_process ($obj, Form_load_action_object);
   }
@@ -272,7 +272,7 @@ class FORM extends WEBCORE_OBJECT
    * This is done automatically when {@link attempt_action()} is called.
    * @param object Validate for this object.
    */
-  function validate (&$obj)
+  function validate ($obj)
   {
     $this->load_from_request ();
     $this->_errors = array ();
@@ -301,7 +301,7 @@ class FORM extends WEBCORE_OBJECT
 
       while ($idx_field < $num_upload_fields)
       {
-        $field =& $this->_upload_fields [$idx_field];
+        $field = $this->_upload_fields [$idx_field];
         if ($this->num_errors ($field->id) == 0)
         {
           $idx_file = 0;
@@ -324,12 +324,12 @@ class FORM extends WEBCORE_OBJECT
    * Try to apply the values in this form to 'obj'.
    * If the form validates, then apply the values to the object and store it to
    * the database.
-   * @param object &$obj Store the form values to this object.
+   * @param object $obj Store the form values to this object.
    */
-  function attempt_action (&$obj)
+  function attempt_action ($obj)
   {
     $this->_committed = FALSE;
-    $this->_object =& $obj;
+    $this->_object = $obj;
     $this->validate ($obj);
     if (! $this->has_errors ())
     {
@@ -345,9 +345,9 @@ class FORM extends WEBCORE_OBJECT
 
   /**
    * Load initial properties from this object.
-   * @param object &$obj
+   * @param object $obj
    */
-  function load_from_object (&$obj)
+  function load_from_object ($obj)
   {
     if (isset ($this->captcha))
     {
@@ -483,7 +483,7 @@ class FORM extends WEBCORE_OBJECT
     {
       foreach ($field_names as $id)
       {
-        $field =& $this->field_at ($id);
+        $field = $this->field_at ($id);
         $val = $field->as_text ($this);
         $Result [] = "$id=$val";
       }
@@ -516,7 +516,7 @@ class FORM extends WEBCORE_OBJECT
         /* As soon as elements are removed, the list shrinks */
         if (isset ($this->_field_list [$idx]))
         {
-          $field =& $this->_field_list [$idx];
+          $field = $this->_field_list [$idx];
           foreach ($field_names as $field_name)
           {
             if ($field->id == $field_name)
@@ -550,7 +550,7 @@ class FORM extends WEBCORE_OBJECT
    * @return FIELD
    * @access private
    */
-  function &field_at ($id)
+  function field_at ($id)
   {
     $this->_verify_id ($id, 'field_at');
     return $this->_fields [$id];
@@ -773,7 +773,7 @@ class FORM extends WEBCORE_OBJECT
   function load_from_request_for ($id)
   {
     $this->_verify_id ($id, 'load_from_request_for');
-    $values =& $this->_request_array_to_use ();
+    $values = $this->_request_array_to_use ();
     $this->_fields [$id]->set_value_from_request ($values);
   }
 
@@ -814,7 +814,7 @@ class FORM extends WEBCORE_OBJECT
    * Return an object that manages uploaded files.
    * @return UPLOADER
    */
-  function &uploader ()
+  function uploader ()
   {
     if (! isset ($this->_uploader))
     {
@@ -894,13 +894,13 @@ class FORM extends WEBCORE_OBJECT
    * Almost always called from the {@link FORM} constructor. The parameter
    * is explicitly not a reference for PHP4; call this function only after
    * setting all properties of the field. In PHP5, normal semantics apply.
-   * @param FIELD &$field
+   * @param FIELD $field
    * @access private
    */
   function add_field ($field)
   {
-    $this->_field_list [] =& $field;
-    $this->_fields [$field->id] =& $field;
+    $this->_field_list [] = $field;
+    $this->_fields [$field->id] = $field;
     $field->added_to_form ($this);
   }
 
@@ -935,7 +935,7 @@ class FORM extends WEBCORE_OBJECT
           $size = max ($size, $field->max_bytes);
       }
 
-      $uploader =& $this->uploader ();
+      $uploader = $this->uploader ();
       if ($size)
       {
         $size = min ($size, $uploader->ini_max_file_size);
@@ -981,7 +981,7 @@ class FORM extends WEBCORE_OBJECT
    * return array[string]
    * @access private
    */
-  function &_request_array_to_use ()
+  function _request_array_to_use ()
   {
     switch ($this->method)
     {
@@ -992,6 +992,8 @@ class FORM extends WEBCORE_OBJECT
     case 'request':
       return $_REQUEST;
     }
+    
+    return null;
   }
 
   /**
@@ -1003,12 +1005,12 @@ class FORM extends WEBCORE_OBJECT
    */
   function _load_from_request ()
   {
-    $values =& $this->_request_array_to_use ();
+    $values = $this->_request_array_to_use ();
     $idx = 0;
     $count = sizeof ($this->_field_list);
     while ($idx < $count)
     {
-      $field =& $this->_field_list [$idx];
+      $field = $this->_field_list [$idx];
       $field->set_value_from_request ($values);
       $idx++;
     }
@@ -1031,7 +1033,7 @@ class FORM extends WEBCORE_OBJECT
    */
   function _store_sticky_fields ()
   {
-    $s =& $this->context->storage;
+    $s = $this->context->storage;
     $s->expire_in_n_days ($this->context->storage_options->setting_duration);
     $s->start_multiple_value ($this->name);
     foreach ($this->_fields as $field)
@@ -1060,12 +1062,12 @@ class FORM extends WEBCORE_OBJECT
    * @see CONTEXT::$upload_options
    * @see _move_uploaded_file()
    *
-   * @param UPLOAD_FILE_FIELD &$field
-   * @param UPLOADED_FILE &$file
+   * @param UPLOAD_FILE_FIELD $field
+   * @param UPLOADED_FILE $file
    * @param boolean $form_is_valid Will the form be committed?
    * @access private
    */
-  function _process_uploaded_file (&$field, &$file, $form_is_valid)
+  function _process_uploaded_file ($field, $file, $form_is_valid)
   {
     if (! $file->processed && $file->is_valid ())
     {
@@ -1085,13 +1087,13 @@ class FORM extends WEBCORE_OBJECT
    * Performs the actual move for {@link _process_uploaded_file()}.
    * Can be called from {@link _prepare_for_commit()} in descendent forms to use
    * the same mechanisms for resolved overwrite options.
-   * @param UPLOAD_FILE_FIELD &$field File is associated with this field.
-   * @param UPLOADED_FILE &$file Move this file object.
+   * @param UPLOAD_FILE_FIELD $field File is associated with this field.
+   * @param UPLOADED_FILE $file Move this file object.
    * @param $path Move to this folder.
    * @param boolean $form_is_valid Will the form be committed?
    * @access private
    */
-  function _move_uploaded_file (&$field, &$file, $path, $form_is_valid = TRUE)
+  function _move_uploaded_file ($field, $file, $path, $form_is_valid = TRUE)
   {
     $file->move_to ($path, $this->_upload_file_copy_mode ($field, $file, $form_is_valid));
   }
@@ -1102,12 +1104,12 @@ class FORM extends WEBCORE_OBJECT
    * files to a 'temp' area until the form is actually committed. Descendent forms can override
    * this behavior to move files directly to the final location. E.g. if the file is an image, it
    * needs to be in the document root in order to be displayed in a preview.
-   * @param UPLOAD_FILE_FIELD &$field
-   * @param UPLOADED_FILE &$file
+   * @param UPLOAD_FILE_FIELD $field
+   * @param UPLOADED_FILE $file
    * @param boolean $form_is_valid Will the form be committed?
    * @access private
    */
-  function _upload_folder_for (&$field, &$file, $form_is_valid)
+  function _upload_folder_for ($field, $file, $form_is_valid)
   {
     $temp_folder = $this->context->upload_options->temp_folder;
     $path = $this->context->resolve_path ($temp_folder, Force_root_on);
@@ -1117,13 +1119,13 @@ class FORM extends WEBCORE_OBJECT
   /**
    * Specify how to store this uploaded file.
    * Return a file-copy mode to determine whether to overwrite an existing file in the move-to location.
-   * @param UPLOAD_FILE_FIELD &$field
-   * @param UPLOADED_FILE &$file
+   * @param UPLOAD_FILE_FIELD $field
+   * @param UPLOADED_FILE $file
    * @param boolean $form_is_valid Will the form be committed?
    * @return string Can be {@link Uploaded_file_unique_name} or {@link Uploaded_file_overwrite}.
    * @access private
    */
-  function _upload_file_copy_mode (&$field, &$file, $form_is_valid)
+  function _upload_file_copy_mode ($field, $file, $form_is_valid)
   {
     return Uploaded_file_unique_name;
   }
@@ -1134,11 +1136,11 @@ class FORM extends WEBCORE_OBJECT
    * defaults using {@link load_with_defaults()} in order to set up disabled
    * states for controls correctly. Then re-load the request data on top of
    * the object's data in the form to reflect the actual edited state.
-   * @param object &$obj
+   * @param object $obj
    * @param string $load_action
    * @access private
    */
-  function _apply_all_data (&$obj, $load_action)
+  function _apply_all_data ($obj, $load_action)
   {
     $this->_process_load_action ($obj, $load_action);
     $this->load_from_request (TRUE);
@@ -1147,11 +1149,11 @@ class FORM extends WEBCORE_OBJECT
 
   /**
    * Executes the form for an object.
-   * @param object &$obj
+   * @param object $obj
    * @param string $load_action
    * @access private
    */
-  function _process (&$obj, $load_action)
+  function _process ($obj, $load_action)
   {
     $this->_load_action = $load_action;
 
@@ -1172,13 +1174,13 @@ class FORM extends WEBCORE_OBJECT
 
   /**
    * Load the form according to the given action.
-   * @param object &$obj
+   * @param object $obj
    * @param string $load_action Can be {@link Form_load_action_default} or {@link Form_load_action_object}.
    * @access private
    */
-  function _process_load_action (&$obj, $load_action)
+  function _process_load_action ($obj, $load_action)
   {
-    $this->_object =& $obj;
+    $this->_object = $obj;
     /* Make sure to load any client-side data for this form. */
     $this->context->storage->load_multiple_values ($this->name);
 
@@ -1213,19 +1215,19 @@ class FORM extends WEBCORE_OBJECT
    * on fields which depend on other field values. For example, if an integer field depends on
    * a boolean field being checked before it is used. The integer field's 'required' property can
    * be set to whether the boolean field is selected.
-   * @param object &$obj Object being validated.
+   * @param object $obj Object being validated.
    * @access private
    */
-  function _pre_validate (&$obj) {}
+  function _pre_validate ($obj) {}
 
   /**
    * Called after fields are validated.
    * Perform multi-field validation here. Use {@link num_errors()} to check whether a field
    * already has errors recorded. Use {@link record_error()} to record new errors for a field.
-   * @param object &$obj Object being validated.
+   * @param object $obj Object being validated.
    * @access private
    */
-  function _post_validate (&$obj)
+  function _post_validate ($obj)
   {
     if (isset ($this->captcha))
     {
@@ -1242,10 +1244,10 @@ class FORM extends WEBCORE_OBJECT
    * a new object, default values, the server request or some combination thereof. Once the data
    * is fully loaded, this function is executed to allow forms to update control states and prepare
    * for display (e.g. Set enabled/visible states depending on data).
-   * @param object &$obj Object from which data was loaded. May be null.
+   * @param object $obj Object from which data was loaded. May be null.
    * @access private
    */
-  function _post_load_data (&$obj) {}
+  function _post_load_data ($obj) {}
 
   /**
    * Apply post-validation operations to the object.
@@ -1256,21 +1258,21 @@ class FORM extends WEBCORE_OBJECT
    * For example, an attachment may be fully validated, but the thumbnail cannot be created. Create the
    * thumbnail in this function and abort the commit. The fact that the object could not be committed has
    * nothing to do with its validity; external factors prevented it from being committed.
-   * @param object &$obj
+   * @param object $obj
    * @access private
    */
-  function _prepare_for_commit (&$obj) {}
+  function _prepare_for_commit ($obj) {}
 
   /**
    * Register an upload field in this form.
    * Used internally by {@link UPLOAD_FILE_FIELD} so that the form is aware of all uploaders
    * in it and can properly calculate the {@link max_upload_file_size()}.
-   * @param UPLOAD_FILE_FIELD &$field
+   * @param UPLOAD_FILE_FIELD $field
    * @access private
    */
-  function _add_upload_field (&$field)
+  function _add_upload_field ($field)
   {
-    $this->_upload_fields [] =& $field;
+    $this->_upload_fields [] = $field;
 
     if (! isset ($this->_fields [Form_max_file_size_field_name]))
     {
@@ -1305,12 +1307,12 @@ class FORM extends WEBCORE_OBJECT
   }
 
   /**
-   * @param FORM_RENDERER &$renderer
+   * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_hidden_controls (&$renderer)
+  function _draw_hidden_controls ($renderer)
   {
-    $sub_field =& $this->field_at ($this->_form_based_field_name ('submitted'));
+    $sub_field = $this->field_at ($this->_form_based_field_name ('submitted'));
     $old_sub_value = $sub_field->value ();
     $sub_field->set_value (1);
 
@@ -1338,10 +1340,10 @@ class FORM extends WEBCORE_OBJECT
 
   /**
    * Draw the form itself.
-   * @param FORM_RENDERER &$renderer
+   * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_form (&$renderer)
+  function _draw_form ($renderer)
   {
     $encoding = '';
     if ($this->contains_uploads ())
@@ -1376,10 +1378,10 @@ class FORM extends WEBCORE_OBJECT
    * Draw captcha controls to verify human input.
    * Captcha handling is provided by default, but a form must determine on its
    * own where the controls appear.
-   * @param FORM_RENDERER &$renderer
+   * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_captcha_controls (&$renderer)
+  function _draw_captcha_controls ($renderer)
   {
     if (isset ($this->captcha))
     {
@@ -1390,11 +1392,11 @@ class FORM extends WEBCORE_OBJECT
 
   /**
    * Draw the controls for the form.
-   * @param FORM_RENDERER &$renderer
+   * @param FORM_RENDERER $renderer
    * @access private
    * @abstract
    */
-  function _draw_controls (&$renderer)
+  function _draw_controls ($renderer)
   {
     $this->raise_deferred ('_draw_controls', 'FORM');
   }
@@ -1463,7 +1465,7 @@ class FORM extends WEBCORE_OBJECT
       $field = new BOOLEAN_FIELD ();
       $field->id = $this->_form_based_field_name ($field_name);
       $field->title = ucfirst ($field_name);
-      $field->_value = FALSE;
+      $field->set_value(FALSE);
       $field->visible = FALSE;
       $this->add_field ($field);
     }
@@ -1485,11 +1487,11 @@ class FORM extends WEBCORE_OBJECT
   /**
    * Execute the form.
    * The form has been validated and can be executed.
-   * @param object &$obj
+   * @param object $obj
    * @access private
    * @abstract
    */
-  function commit (&$obj) {}
+  function commit ($obj) {}
 
   /**
    * Table of fields indexed by id.
@@ -1497,48 +1499,48 @@ class FORM extends WEBCORE_OBJECT
    * @see FIELD
    * @access private
    */
-  var $_fields = array ();
+  protected $_fields = array ();
   /**
    * Simple list of all fields.
    * Used for referenced iteration.
    * @var array[FIELD]
    * @access private
    */
-  var $_field_list = array ();
+  protected $_field_list = array ();
   /**
    * @var array[string]
     * @access private
     */
-  var $_errors = array ();
+  protected $_errors = array ();
   /**
    * @var array[UPLOAD_FILE_FIELD]
    * @see UPLOAD_FILE_FIELD
    * @access private
    */
-  var $_upload_fields = array ();
+  protected $_upload_fields = array ();
 
   /**
    * @var bool
     * @access private
     */
-  var $_committed = FALSE;
+  protected $_committed = FALSE;
   /**
    * @var bool
     * @access private
     */
-  var $_loaded = FALSE;
+  protected $_loaded = FALSE;
   /**
    * @var object
     * @access private
     */
-  var $_object;
+  protected $_object;
   /**
    * Set when the form is loaded or processed.
    * Can be {@link Form_load_action_default} or {@link Form_load_action_object}.
    * @var string
    * @access private
    */
-  var $_load_action;
+  protected $_load_action;
 
   /**
    * Name of the control with focus when the form is displayed.
@@ -1546,12 +1548,12 @@ class FORM extends WEBCORE_OBJECT
    * @var string
    * @access private
    */
-  var $_initial_focus = '';
+  protected $_initial_focus = '';
   /**
    * @var integer
    * @access private
    */
-  var $_max_upload_file_size;
+  protected $_max_upload_file_size;
 }
 
 /**
@@ -1566,9 +1568,9 @@ class FORM extends WEBCORE_OBJECT
 class ID_BASED_FORM extends FORM
 {
   /**
-   * @param APPLICATION &$app Main application.
+   * @param APPLICATION $app Main application.
    */
-  function ID_BASED_FORM (&$app)
+  function ID_BASED_FORM ($app)
   {
     FORM::FORM ($app);
 
@@ -1588,9 +1590,9 @@ class ID_BASED_FORM extends FORM
 
   /**
    * Load form fields from this object.
-   * @param object &$obj
+   * @param object $obj
    */
-  function load_from_object (&$obj)
+  function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
     if (isset ($obj->id))

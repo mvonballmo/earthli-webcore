@@ -49,9 +49,9 @@ require_once ('webcore/forms/object_in_folder_form.php');
 class BRANCH_FORM extends OBJECT_IN_FOLDER_FORM
 {
   /**
-   * @param PROJECT &$folder Project in which to add or edit the job.
+   * @param PROJECT $folder Project in which to add or edit the job.
    */
-  function BRANCH_FORM (&$folder)
+  function BRANCH_FORM ($folder)
   {
     OBJECT_IN_FOLDER_FORM::OBJECT_IN_FOLDER_FORM ($folder);
 
@@ -76,10 +76,10 @@ class BRANCH_FORM extends OBJECT_IN_FOLDER_FORM
 
     if ($branch_id > 0)
     {
-      $branch =& $this->app->branch_at_id ($branch_id);
+      $branch = $this->app->branch_at_id ($branch_id);
       if (isset ($branch))
       {
-        $release =& $branch->latest_release ();
+        $release = $branch->latest_release ();
         if (isset ($release))
         {
           $this->set_value ('parent_release_id', $release->id);
@@ -90,9 +90,9 @@ class BRANCH_FORM extends OBJECT_IN_FOLDER_FORM
 
   /**
    * Load initial properties from this branch.
-   * @param BRANCH &$obj
+   * @param BRANCH $obj
    */
-  function load_from_object (&$obj)
+  function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
     $this->set_value ('parent_release_id', $obj->parent_release_id);
@@ -101,10 +101,10 @@ class BRANCH_FORM extends OBJECT_IN_FOLDER_FORM
 
   /**
    * Store the form's values for this change.
-    * @param CHANGE &$obj
+    * @param CHANGE $obj
     * @access private
     */
-  function _store_to_object (&$obj)
+  function _store_to_object ($obj)
   {
     parent::_store_to_object ($obj);
     $obj->parent_release_id = $this->value_for ('parent_release_id');
@@ -124,10 +124,10 @@ class BRANCH_FORM extends OBJECT_IN_FOLDER_FORM
   }
 
   /**
-   * @param FORM_RENDERER &$renderer
+   * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_controls (&$renderer)
+  function _draw_controls ($renderer)
   {
     $renderer->start ();
     $renderer->draw_text_line_row ('title');
@@ -178,6 +178,6 @@ class BRANCH_FORM extends OBJECT_IN_FOLDER_FORM
    * @var string
    * @access private
    */
-  var $_privilege_set = Privilege_set_folder;
+  protected $_privilege_set = Privilege_set_folder;
 }
 ?>

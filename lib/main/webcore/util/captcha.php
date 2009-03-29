@@ -139,15 +139,15 @@ class NUMERIC_CAPTCHA extends CAPTCHA
   /**
    * @var string
    */
-  var $operand_left;
+  public $operand_left;
   /**
    * @var integer
    */
-  var $operator;
+  public $operator;
   /**
    * @var string
    */
-  var $operand_right;
+  public $operand_right;
   
   /**
    * Automatically generates an initial expression.

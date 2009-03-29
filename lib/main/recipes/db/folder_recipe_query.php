@@ -49,9 +49,9 @@ require_once ('webcore/db/folder_entry_query.php');
 class FOLDER_RECIPE_QUERY extends FOLDER_ENTRY_QUERY
 {
   /**
-   * @param RECIPE_BOOK &$folder Retrieve recipes from this recipe book.
+   * @param RECIPE_BOOK $folder Retrieve recipes from this recipe book.
    */
-  function FOLDER_RECIPE_QUERY (&$folder)
+  function FOLDER_RECIPE_QUERY ($folder)
   {
     FOLDER_ENTRY_QUERY::FOLDER_ENTRY_QUERY ($folder);
     $this->_order = 'entry.title';

@@ -51,15 +51,15 @@ require_once ('webcore/gui/grid.php');
  */
 class TINY_PICTURE_GRID extends CSS_FLOW_GRID
 {
-  var $object_name = 'Picture';
-  var $box_style = '';
-  var $padding = 0;
-  var $spacing = 0;
-  var $width = '';
-  var $max_width = 100;
-  var $max_height = 75;
+  public $object_name = 'Picture';
+  public $box_style = '';
+  public $padding = 0;
+  public $spacing = 0;
+  public $width = '';
+  public $max_width = 100;
+  public $max_height = 75;
 
-  function _draw_box (&$obj)
+  function _draw_box ($obj)
   {
     $url = $obj->thumbnail_location (Force_root_on);
     $is_local = $url->has_local_domain ();

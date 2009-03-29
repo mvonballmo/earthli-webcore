@@ -52,7 +52,7 @@ class ICON_QUERY extends QUERY
    * SQL alias for the "main" table.
    * @var string
    */
-  var $alias = 'icon';
+  public $alias = 'icon';
 
   /**
    * Apply default restrictions and tables.

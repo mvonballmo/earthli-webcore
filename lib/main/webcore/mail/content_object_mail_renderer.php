@@ -49,21 +49,21 @@ require_once ('webcore/mail/mail_object_renderer.php');
 class CONTENT_OBJECT_MAIL_RENDERER extends MAIL_OBJECT_RENDERER
 {
   /**
-   * @param CONTENT_OBJECT &$obj
+   * @param CONTENT_OBJECT $obj
     * @param MAIL_OBJECT_RENDERER_OPTIONS $options
     * @return string
     */
-  function subject (&$obj, $options)
+  function subject ($obj, $options)
   {
     return $obj->object_url_as_text ();
   }
 
   /**
-   * @param CONTENT_OBJECT &$obj
+   * @param CONTENT_OBJECT $obj
    * @param MAIL_OBJECT_RENDERER_OPTIONS $options
    * @access private
    */
-  function _echo_html_content (&$obj, $options)
+  function _echo_html_content ($obj, $options)
   {
 ?>
   <h3><?php echo $obj->title_as_html (); ?></h3>
@@ -74,11 +74,11 @@ class CONTENT_OBJECT_MAIL_RENDERER extends MAIL_OBJECT_RENDERER
   }
 
   /**
-   * @param CONTENT_OBJECT &$obj
+   * @param CONTENT_OBJECT $obj
    * @param MAIL_OBJECT_RENDERER_OPTIONS $options
    * @access private
    */
-  function _echo_text_content (&$obj, $options)
+  function _echo_text_content ($obj, $options)
   {
     $f = $obj->title_formatter ();
     $f->max_visible_output_chars = 0;

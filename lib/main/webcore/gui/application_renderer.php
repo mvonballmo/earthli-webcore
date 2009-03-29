@@ -51,9 +51,9 @@ class APPLICATION_RENDERER extends RENDERER
 {
   /**
    * Renders application details as HTML.
-   * @param APPLICATION_CONFIGURATION_INFO &$obj
+   * @param APPLICATION_CONFIGURATION_INFO $obj
    */
-  function display_as_html (&$obj)
+  function display_as_html ($obj)
   {
     $main_style = '';
     if ($obj->app->icon)

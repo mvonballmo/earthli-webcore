@@ -72,14 +72,14 @@ class PROJECT_USER_ENTRY_QUERY extends USER_MULTI_ENTRY_QUERY
 
   /**
    * Perform any setup needed on each returned object.
-   * @param PROJECT_ENTRY &$obj
+   * @param PROJECT_ENTRY $obj
    * @access private
    */
-  function _prepare_object (&$obj)
+  function _prepare_object ($obj)
   {
     parent::_prepare_object ($obj);
 
-    $branch_info =& $obj->main_branch_info ();
+    $branch_info = $obj->main_branch_info ();
     $branch_info->release_id = $this->db->f ('release_id');
     
     switch ($obj->type)
@@ -103,7 +103,7 @@ class PROJECT_USER_ENTRY_QUERY extends USER_MULTI_ENTRY_QUERY
    * @var string
    * @access private
    */
-  var $_type;
+  protected $_type;
 }
 
 ?>

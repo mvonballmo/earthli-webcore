@@ -51,12 +51,12 @@ class PURGE_BRANCH_FORM extends PURGE_OBJECT_FORM
   /**
    * @var string
    */
-  var $button = 'Yes';
+  public $button = 'Yes';
 
   /**
-   * @param APPLICATION &$app
+   * @param APPLICATION $app
    */
-  function PURGE_BRANCH_FORM (&$app)
+  function PURGE_BRANCH_FORM ($app)
   {
     PURGE_OBJECT_FORM::PURGE_OBJECT_FORM ($app);
 
@@ -70,7 +70,7 @@ class PURGE_BRANCH_FORM extends PURGE_OBJECT_FORM
 
   /**
    * Delete the given object.
-    * @param BRANCH &$obj
+    * @param BRANCH $obj
     * @access private
     */
   function commit ($obj)
@@ -80,17 +80,17 @@ class PURGE_BRANCH_FORM extends PURGE_OBJECT_FORM
     $obj->purge ($options);
   }
 
-  function load_from_object (&$obj)
+  function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
     $this->set_value ('sub_history_item_publication_state', History_item_silent);
   }
 
   /**
-   * @param FORM_RENDERER &$renderer
+   * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_controls (&$renderer)
+  function _draw_controls ($renderer)
   {
     $renderer->start ();
     $renderer->draw_text_row ('', 'Are you sure you want to purge ' . $this->_object->title_as_link () . '?');

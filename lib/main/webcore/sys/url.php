@@ -105,12 +105,12 @@ class URL_OPTIONS extends FILE_OPTIONS
    * regular expressions.
    * @var array[string,string]
    */
-  var $domains;
+  public $domains;
   /**
    * The main domain for this web site.
    * @var string
    */
-  var $main_domain;
+  public $main_domain;
 
   function URL_OPTIONS ()
   {
@@ -339,7 +339,7 @@ class URL
    * @return FILE_OPTIONS
    * @see path_delimiter()
    */
-  function &options ()
+  function options ()
   {
     return global_url_options ();
   }
@@ -644,7 +644,7 @@ class URL
   {
     if (! $this->ends_with_delimiter ())
     {
-      $opts =& $this->options ();
+      $opts = $this->options ();
       $this->_text .= $opts->path_delimiter;
     }
   }
@@ -788,7 +788,7 @@ class FILE_URL extends URL
    * Creates a URL that is treated as a server-local file.
    * '/' is automatically converted to the local form, so you can freely
    * base a file system path on an internet URL.
-   * @param CONTEXT &$context
+   * @param CONTEXT $context
    * @param string $text Initial path.
    */
   function FILE_URL ($text)
@@ -981,7 +981,7 @@ function extract_domain ($f, $opts = null)
   {
     if (! isset ($opts))
     {
-      $opts =& global_file_options ();
+      $opts = global_file_options ();
     }
 
     $slash_pos = strpos ($f, $opts->path_delimiter, $colon_pos + 3);
@@ -999,7 +999,7 @@ function extract_domain ($f, $opts = null)
 
   if (! isset ($opts))
   {
-    $opts =& global_file_options ();
+    $opts = global_file_options ();
   }
   $slash_pos = strpos ($f, $opts->path_delimiter);
   if ($slash_pos !== FALSE)
@@ -1049,7 +1049,7 @@ function strip_domain ($f, $opts = null)
   {
     if (! isset ($opts))
     {
-      $opts =& global_file_options ();
+      $opts = global_file_options ();
     }
     $slash_pos = strpos ($f, $opts->path_delimiter, $colon_pos + 3);
     $f = substr ($f, $slash_pos);
@@ -1069,7 +1069,7 @@ function has_local_domain ($f, $opts = null)
 {
   if (! isset ($opts))
   {
-    $opts =& global_url_options ();
+    $opts = global_url_options ();
   }
   if (has_domain ($f, '', $opts))
   {
@@ -1097,7 +1097,7 @@ function file_name_to_url ($f, $opts = null)
 {
   if (! isset ($opts))
   {
-    $opts =& global_url_options ();
+    $opts = global_url_options ();
   }
 
   foreach ($opts->domains as $url_root => $document_root)
@@ -1136,7 +1136,7 @@ function url_to_file_name ($f, $opts = null)
 {
   if (! isset ($opts))
   {
-    $opts =& global_url_options ();
+    $opts = global_url_options ();
   }
 
   list($local_domain, $document_root) = has_local_domain ($f, $opts);
@@ -1187,7 +1187,7 @@ function scramble_email ($email)
  * @return FILE_OPTIONS
  * @access private
  */
-function &global_url_options ()
+function global_url_options ()
 {
   global $_g_url_options;
   if (! isset ($_g_url_options))

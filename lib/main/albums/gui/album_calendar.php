@@ -52,31 +52,31 @@ class ALBUM_CALENDAR extends BASIC_CALENDAR
    * @var ALBUM
     * @access private
     */
-  var $album;
+  public $album;
   /**
    * @var array[ALBUM]
     * @access private
     */
-  var $_albums;
+  protected $_albums;
   /**
    * @var array[JOURNAL]
     * @access private
     */
-  var $_journals;
+  protected $_journals;
   /**
    * @var array[DATE_TIME]
     * @access private
     */
-  var $_pic_dates;
+  protected $_pic_dates;
 
   /**
-   * @param ALBUM &$folder Show calendar for this album.
+   * @param ALBUM $folder Show calendar for this album.
    */
-  function ALBUM_CALENDAR (&$album)
+  function ALBUM_CALENDAR ($album)
   {
     BASIC_CALENDAR::BASIC_CALENDAR ($album->app);
 
-    $this->album =& $album;
+    $this->album = $album;
     $this->set_ranges ($album->first_day, $album->last_day);
     $this->_albums = $album->sub_folders ();
   }
@@ -122,7 +122,7 @@ class ALBUM_CALENDAR extends BASIC_CALENDAR
       $c = sizeof ($this->_albums);
       while ($i < $c)
       {
-        $album =& $this->_albums [$i];
+        $album = $this->_albums [$i];
         if ((($php_first_day <= $album->first_day->as_php ()) && ($album->first_day->as_php () <= $php_last_day)) ||
             (($php_first_day <= $album->last_day->as_php ()) && ($album->last_day->as_php () <= $php_last_day)))
           $Result = TRUE;
@@ -334,7 +334,7 @@ class ALBUM_CALENDAR extends BASIC_CALENDAR
     $pic_query->set_type ('picture');
     $pic_query->set_select ('entry.date');
     $pic_query->set_days ("$this->curr_year-$this->curr_month-01", "$this->last_year-$this->last_month-31");
-    $pic_db =& $pic_query->raw_output ();
+    $pic_db = $pic_query->raw_output ();
     if ($pic_db)
     {
       while ($pic_db->next_record ())

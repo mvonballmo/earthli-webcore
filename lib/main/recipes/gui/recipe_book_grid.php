@@ -51,27 +51,27 @@ class RECIPE_BOOK_GRID extends FOLDER_GRID
   /**
    * @var string
    */
-  var $object_name = 'Recipe Book';
+  public $object_name = 'Recipe Book';
   /**
    * @var string
    */
-  var $box_style = '';
+  public $box_style = '';
   /**
    * @var integer
    */
-  var $spacing = 6;
+  public $spacing = 6;
   /**
    * @var boolean
    */
-  var $show_separator = FALSE;
+  public $show_separator = FALSE;
 
   /**
-   * @param RECIPE_BOOK &$obj
+   * @param RECIPE_BOOK $obj
     * @access private
     */
-  function _draw_box (&$obj)
+  function _draw_box ($obj)
   {
-    $folder =& $obj;
+    $folder = $obj;
 ?>
   <div class="button-control">
     <div style="float: left; padding-right: .5em">

@@ -55,28 +55,28 @@ class RSS_RENDERER extends NEWSFEED_RENDERER
   /**
    * @var string
    */
-  var $style_sheet = '{styles}rss.css';
+  public $style_sheet = '{styles}rss.css';
   /**
    * @var string
    */
-  var $more_info_page = '{pages}rss_info.php';
+  public $more_info_page = '{pages}rss_info.php';
   /**
    * @var integer
    */
-  var $ttl_in_minutes = 720;
+  public $ttl_in_minutes = 720;
   /**
    * @var string
    * The following override is commented because Firefox offers to download
    * this file type instead of displaying it.
    */
-////  var $content_type = 'application/rss+xml';
+////  public $content_type = 'application/rss+xml';
   
   /**
    * Read in the description from this object.
    * RSS always uses plain text for descriptions (HTML is not allowed).
-   * @param CONTENT_OBJECT &$obj
+   * @param CONTENT_OBJECT $obj
    */
-  function set_description_from (&$obj)
+  function set_description_from ($obj)
   {
     $this->description = $obj->description_as_plain_text ();
   }
@@ -129,7 +129,7 @@ class RSS_RENDERER extends NEWSFEED_RENDERER
    * @var string
    * @access private
    */
-  var $_handler_type = Handler_rss_renderer;
+  protected $_handler_type = Handler_rss_renderer;
 }
 
 /**
@@ -143,10 +143,10 @@ class ENTRY_RSS_RENDERER extends NEWSFEED_OBJECT_RENDERER
 {
   /**
    * Draws the RSS item for this entry.
-   * @param ENTRY &$obj
+   * @param ENTRY $obj
    * @param OBJECT_RENDERER_OPTIONS $options
    */
-  function display (&$obj, $options = null)
+  function display ($obj, $options = null)
   {
     $t = $this->_publication_date_for ($obj);
     $content = $this->_content_for ($obj, $options);
@@ -163,11 +163,11 @@ class ENTRY_RSS_RENDERER extends NEWSFEED_OBJECT_RENDERER
   
   /**
    * Get the time to display for the entry.
-   * @param ENTRY &$obj
+   * @param ENTRY $obj
    * @return DATE_TIME
    * @access private
    */
-  function _publication_date_for (&$obj)
+  function _publication_date_for ($obj)
   {
     return $obj->time_created;
   }
@@ -184,11 +184,11 @@ class DRAFTABLE_ENTRY_RSS_RENDERER extends ENTRY_RSS_RENDERER
 {
   /**
    * Get the time to display for the entry.
-   * @param ENTRY &$obj
+   * @param ENTRY $obj
    * @return DATE_TIME
    * @access private
    */
-  function _publication_date_for (&$obj)
+  function _publication_date_for ($obj)
   {
     return $obj->time_published;
   }

@@ -57,37 +57,37 @@ class MUNGER_BASE_TEST_TASK extends TEST_TASK
    * Allows you to validate the generated content in an HTML validator.
    * @var boolean
    */
-  var $show_html_output = FALSE;
+  public $show_html_output = FALSE;
   /**
    * Show white space for token tests.
    * @var boolean
    */
-  var $show_white_space = FALSE;
+  public $show_white_space = FALSE;
   /**
    * Show token output for token tests.
    * @var boolean
    */
-  var $show_tokens = FALSE;
+  public $show_tokens = FALSE;
   /**
    * Show output for attribute tests.
    * @var boolean
    */
-  var $show_attributes = FALSE;
+  public $show_attributes = FALSE;
   /**
    * Show statistics for the validator tests.
    * @var boolean
    */
-  var $show_validator_stats = FALSE;
+  public $show_validator_stats = FALSE;
   /**
    * Show statistics for the munger tests.
    * @var boolean
    */
-  var $show_munger_stats = FALSE;
+  public $show_munger_stats = FALSE;
 
   /**
-   * @param CONTEXT &$context Pass in an {@link APPLICATION} object.
+   * @param CONTEXT $context Pass in an {@link APPLICATION} object.
    */
-  function MUNGER_BASE_TEST_TASK (&$context)
+  function MUNGER_BASE_TEST_TASK ($context)
   {
     TEST_TASK::TEST_TASK ($context);
     $this->show_html_output = read_var ('show_html_output', FALSE);

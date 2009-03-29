@@ -52,12 +52,12 @@ class ARTICLE_SEARCH extends ENTRY_SEARCH
   /**
    * @var string
    */
-  var $type = 'article';
+  public $type = 'article';
 
   /**
-   * @param APPLICATION &$app Main application.
+   * @param APPLICATION $app Main application.
    */
-  function ARTICLE_SEARCH (&$app)
+  function ARTICLE_SEARCH ($app)
   {
     ENTRY_SEARCH::ENTRY_SEARCH ($app, new SEARCH_DRAFTABLE_FIELDS ($app));
   }

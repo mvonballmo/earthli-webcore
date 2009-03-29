@@ -69,7 +69,7 @@ class ATTACHMENT_HOST extends OBJECT_IN_FOLDER
   /**
    * @return ATTACHMENT_QUERY
    */
-  function &attachment_query ()
+  function attachment_query ()
   {
     if (! isset ($this->_attachment_query))
     {
@@ -122,7 +122,7 @@ class ATTACHMENT_HOST extends OBJECT_IN_FOLDER
    * @var ATTACHMENT_QUERY
    * @access private
    */
-  var $_attachment_query;
+  protected $_attachment_query;
 }
 
 ?>

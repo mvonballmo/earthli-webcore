@@ -28,17 +28,17 @@ http://www.earthli.com/software/webcore
 
   $id = read_var ('id');
   $folder_query = $App->login->folder_query ();
-  $folder =& $folder_query->folder_for_comment_at_id ($id);
+  $folder = $folder_query->folder_for_comment_at_id ($id);
 
   if (isset ($folder))
   {
     $entry_query = $folder->entry_query ();
-    $entry =& $entry_query->object_for_comment_at_id ($id);
+    $entry = $entry_query->object_for_comment_at_id ($id);
 
     if (isset ($entry))
     {
       $com_query = $entry->comment_query ();
-      $comment =& $com_query->object_at_id ($id);
+      $comment = $com_query->object_at_id ($id);
     }
   }
 
@@ -54,7 +54,7 @@ http://www.earthli.com/software/webcore
     $Page->location->add_object_link ($comment);
 
     $history_item_query = $comment->history_item_query ();
-    $obj =& $comment;
+    $obj = $comment;
 
     include_once ('webcore/pages/view_history.php');
   }

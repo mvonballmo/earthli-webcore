@@ -31,7 +31,7 @@ http://www.earthli.com/software/webcore
   if ($App->login->is_allowed (Privilege_set_group, Privilege_view))
   {
     $folder_query = $App->login->folder_query ();
-    $folder =& $folder_query->object_at_id (read_var ('id'));
+    $folder = $folder_query->object_at_id (read_var ('id'));
     if ($folder)
     {
       $Page->template_options->header_visible = FALSE;
@@ -60,7 +60,7 @@ http://www.earthli.com/software/webcore
         /* Show only groups that do not have permission in this folder. */
   
         $security = $folder->security_definition ();
-        $permissions =& $security->group_permissions ();
+        $permissions = $security->group_permissions ();
   
         $ids = array ();
         foreach ($permissions as $permission)

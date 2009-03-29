@@ -52,13 +52,13 @@ class STORED_OPTION extends WEBCORE_OBJECT
    * Name of the option.
    * @var string
    */
-  var $name;
+  public $name;
 
   /**
-   * @param CONTEXT &$context
+   * @param CONTEXT $context
    * @param string $name
    */
-  function STORED_OPTION (&$context, $name)
+  function STORED_OPTION ($context, $name)
   {
     WEBCORE_OBJECT::WEBCORE_OBJECT ($context);
     $this->name = $name;
@@ -145,7 +145,7 @@ class STORED_OPTION extends WEBCORE_OBJECT
    * @var array[string,string]
    * @access private
    */
-  var $_args;
+  protected $_args;
 }
 
 ?>

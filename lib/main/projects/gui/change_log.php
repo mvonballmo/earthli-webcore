@@ -49,9 +49,9 @@ require_once ('webcore/gui/object_list_title.php');
  */
 class CHANGE_LOG extends WEBCORE_OBJECT
 {
-  var $show_date = FALSE;
-  var $show_description = FALSE;
-  var $show_user = TRUE;
+  public $show_date = FALSE;
+  public $show_description = FALSE;
+  public $show_user = TRUE;
   
   /**
    * Display the jobs, changes and releases given.
@@ -59,11 +59,11 @@ class CHANGE_LOG extends WEBCORE_OBJECT
     * then those changes. Then, for each release in the list, show the release details, then
     * the list of associated jobs (from the list) and the list of assocated changes (from the
     * list).
-    * @param array[JOB] &$jobs
-    * @param array[CHANGE] &$chngs
-    * @param array[RELEASE] &$rels
+    * @param array[JOB] $jobs
+    * @param array[CHANGE] $chngs
+    * @param array[RELEASE] $rels
     */
-  function display (&$jobs, &$chngs, &$rels)
+  function display ($jobs, $chngs, $rels)
   {
     $this->app->display_options->overridden_max_title_size = 150;
     $this->app->date_time_toolkit->formatter->set_default_formatter (Date_time_format_short_date);
@@ -106,11 +106,11 @@ class CHANGE_LOG extends WEBCORE_OBJECT
 
   /**
    * Display all changes and jobs which belong to 'rel'.
-   * @param array[JOB] &$jobs
-   * @param array[CHANGE] &$chngs
-   * @param RELEASE &$rel
+   * @param array[JOB] $jobs
+   * @param array[CHANGE] $chngs
+   * @param RELEASE $rel
    */
-  function display_release (&$jobs, &$chngs, &$rel)
+  function display_release ($jobs, $chngs, $rel)
   {
     $this->app->display_options->overridden_max_title_size = 150;
     $this->app->date_time_toolkit->formatter->set_default_formatter (Date_time_format_short_date);
@@ -126,14 +126,14 @@ class CHANGE_LOG extends WEBCORE_OBJECT
    * Display all entries that have release equal to 'release_id'.
    * 'entry_idx' is the current position in the given entry list. Processing should start with this index
    * and should increment it for each entry processed.
-   * @param array[ENTRY] &$entries
+   * @param array[ENTRY] $entries
    * @param integer $release_id
-   * @param integer &$entry_idx
+   * @param integer $entry_idx
    * @param string $draw_entry Use this method to render the 'entries' in the list.
    * @param string $label Identifies the type of entry in the heading.
    * @access private
    */
-  function _display_entries (&$entries, $release_id, &$entry_idx, $draw_entry, $label)
+  function _display_entries ($entries, $release_id, $entry_idx, $draw_entry, $label)
   {
     unset ($this->curr_day);
     unset ($this->comp_id);
@@ -143,7 +143,7 @@ class CHANGE_LOG extends WEBCORE_OBJECT
     
     if ($entry_idx < $entry_count)
     {
-      $branch_info =& $entries [$entry_idx]->main_branch_info ();
+      $branch_info = $entries [$entry_idx]->main_branch_info ();
 
       if ($branch_info->release_id == $release_id)
       {
@@ -152,7 +152,7 @@ class CHANGE_LOG extends WEBCORE_OBJECT
           $old_idx = $entry_idx;
           while (($entry_idx < $entry_count) && ($branch_info->release_id == $release_id))
           {
-            $entry =& $entries [$entry_idx];
+            $entry = $entries [$entry_idx];
             if (is_a ($entry, 'JOB'))
             {
               $this->_draw_job ($entry);
@@ -165,7 +165,7 @@ class CHANGE_LOG extends WEBCORE_OBJECT
             $entry_idx++;
             if ($entry_idx < $entry_count)
             {
-              $branch_info =& $entries [$entry_idx]->main_branch_info ();
+              $branch_info = $entries [$entry_idx]->main_branch_info ();
             }
           }
           if ($old_idx != $entry_idx)
@@ -206,12 +206,12 @@ class CHANGE_LOG extends WEBCORE_OBJECT
     {
       if (! isset ($this->_components))
       {
-        $folder =& $entry->parent_folder ();
+        $folder = $entry->parent_folder ();
         $component_query = $folder->component_query ();
         $components = $component_query->indexed_objects ();
       }
       
-      $component =& $components [$entry->component_id];
+      $component = $components [$entry->component_id];
       $Result = $component->icon_as_html ('20px') . ' ' . $component->title_as_link ();
     }
     
@@ -220,10 +220,10 @@ class CHANGE_LOG extends WEBCORE_OBJECT
 
   /**
    * Draw a job or a change in the list.
-    * @param JOB &$job
+    * @param JOB $job
     * @access private
     */
-  function _draw_entry (&$entry, &$user, &$time)
+  function _draw_entry ($entry, $user, $time)
   {
     $this->_draw_component_break ($entry);
 
@@ -255,7 +255,7 @@ class CHANGE_LOG extends WEBCORE_OBJECT
 
     if ($this->show_description)
     {
-      $munger =& $entry->html_formatter ();
+      $munger = $entry->html_formatter ();
       $munger->force_paragraphs = FALSE;
       $desc = $entry->description_as_html ($munger);
       echo "<dd class=\"detail\">\n$desc</dd>\n";
@@ -264,21 +264,21 @@ class CHANGE_LOG extends WEBCORE_OBJECT
 
   /**
    * Draw a job in the list.
-    * @param JOB &$job
+    * @param JOB $job
     * @access private
     */
-  function _draw_job (&$job)
+  function _draw_job ($job)
   {
-    $branch_info =& $job->main_branch_info ();
+    $branch_info = $job->main_branch_info ();
     $this->_draw_entry ($job, $branch_info->closer (), $branch_info->time_closed);
   }
   
   /**
    * Draw a change in the list.
-    * @param CHANGE &$chng
+    * @param CHANGE $chng
     * @access private
     */
-  function _draw_change (&$chng)
+  function _draw_change ($chng)
   {
     $this->_draw_entry ($chng, $chng->creator (), $chng->time_created);
   }
@@ -287,12 +287,12 @@ class CHANGE_LOG extends WEBCORE_OBJECT
    * Draw a release in the list.
     * If the job and changes counts are 0, then assume that the entries for
     * that release weren't in the list and retrieve the counts.
-    * @param RELEASE &$rel
+    * @param RELEASE $rel
     * @param integer $num_jobs Number of jobs in this release. Can be empty.
     * @param integer $num_chngs Number of changes in this release. Can be empty.
     * @access private
     */
-  function _draw_release (&$rel, $num_jobs, $num_chngs)
+  function _draw_release ($rel, $num_jobs, $num_chngs)
   {
     if (! $num_chngs)
     {
@@ -328,7 +328,7 @@ class CHANGE_LOG extends WEBCORE_OBJECT
 <?php
     $t = $rel->time_created->formatter ();
     $t->type = Date_time_format_date_and_time;
-    $creator =& $rel->creator ();
+    $creator = $rel->creator ();
 ?>
     <p>
       Created by <?php echo $creator->title_as_link (); ?> - <?php echo $rel->time_created->format ($t); ?>

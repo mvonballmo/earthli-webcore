@@ -59,32 +59,32 @@ class AUDITABLE extends RENDERABLE
    * Cached within the object for quick retrieval.
    * @var DATE_TIME
    */
-  var $time_created;
+  public $time_created;
   /**
    * Last time the object was modified
    * Cached within the object for quick retrieval.
    * @var DATE_TIME
    * @see modified()
    */
-  var $time_modified;
+  public $time_modified;
 
   /**
    * ID of the user that created the object.
    * @var integer
    * @see creator()
    */
-  var $creator_id;
+  public $creator_id;
   /**
    * ID of the user that last modified the object.
    * @var integer
    * @see modifier()
    */
-  var $modifier_id;
+  public $modifier_id;
 
   /**
-   * @param APPLICATION &$app Main application.
+   * @param APPLICATION $app Main application.
    */
-  function AUDITABLE (&$app)
+  function AUDITABLE ($app)
   {
     RENDERABLE::RENDERABLE ($app);
 
@@ -104,7 +104,7 @@ class AUDITABLE extends RENDERABLE
   /**
    * @return USER
    */
-  function &creator ()
+  function creator ()
   {
     return $this->app->user_at_id ($this->creator_id);
   }
@@ -112,7 +112,7 @@ class AUDITABLE extends RENDERABLE
   /**
    * @return USER
    */
-  function &modifier ()
+  function modifier ()
   {
     return $this->app->user_at_id ($this->modifier_id);
   }
@@ -122,11 +122,11 @@ class AUDITABLE extends RENDERABLE
    * Override this function to show other information for an history item's object in the title. The subscriber
    * for whom the title is prepared is also sent, so that any subscriber settings can be used to render the
    * title.
-   * @param ENTRY &$obj
-   * @param SUBSCRIBER &$subscriber
+   * @param ENTRY $obj
+   * @param SUBSCRIBER $subscriber
    * @return string
    */
-  function title_for_history_item (&$obj, &$subscriber)
+  function title_for_history_item ($obj, $subscriber)
   {
     $type_info = $this->type_info ();
     $type_info->singular_title;
@@ -215,9 +215,9 @@ class AUDITABLE extends RENDERABLE
   }
 
   /**
-   * @param DATABASE &$db Database from which to load values.
+   * @param DATABASE $db Database from which to load values.
    */
-  function load (&$db)
+  function load ($db)
   {
     parent::load ($db);
     $this->time_created->set_from_iso ($db->f ('time_created'));
@@ -229,9 +229,9 @@ class AUDITABLE extends RENDERABLE
   /**
    * Stores this object if the history item warrants it.
    * The object is only stored if there are differences from 'history item'.
-   * @param HISTORY_ITEM &$history_item
+   * @param HISTORY_ITEM $history_item
    */
-  function store_as_is_if_different (&$history_item)
+  function store_as_is_if_different ($history_item)
   {
     $this->_store_if_different ($history_item, 'store_as_is');
   }
@@ -252,17 +252,17 @@ class AUDITABLE extends RENDERABLE
   /**
    * Stores this object if the history item warrants it.
    * The object is only stored if there are differences from 'history item'.
-   * @param HISTORY_ITEM &$history_item
+   * @param HISTORY_ITEM $history_item
    */
-  function store_if_different (&$history_item)
+  function store_if_different ($history_item)
   {
     $this->_store_if_different ($history_item, 'store');
   }
 
   /**
-   * @param SQL_STORAGE &$storage Store values to this object.
+   * @param SQL_STORAGE $storage Store values to this object.
    */
-  function store_to (&$storage)
+  function store_to ($storage)
   {
     parent::store_to ($storage);
     $tname = $this->_table_name ();
@@ -293,11 +293,11 @@ class AUDITABLE extends RENDERABLE
    * Stores this object if the history item warrants it.
    * The object is only stored if there are differences from 'history item'. If the object needs to be stored, the
    * function specified in the second parameter is called.
-   * @param HISTORY_ITEM &$history_item
-   * @param string &$store_func_name
+   * @param HISTORY_ITEM $history_item
+   * @param string $store_func_name
    * @access private
    */
-  function _store_if_different (&$history_item, $store_func_name)
+  function _store_if_different ($history_item, $store_func_name)
   {
     $history_item->record_differences ($this);
 
@@ -360,11 +360,11 @@ class AUDITABLE extends RENDERABLE
 
   /**
    * Apply class-specific restrictions to this query.
-   * @param SUBSCRIPTION_QUERY &$query
-   * @param HISTORY_ITEM &$history_item Action that generated this request. May be empty.
+   * @param SUBSCRIPTION_QUERY $query
+   * @param HISTORY_ITEM $history_item Action that generated this request. May be empty.
    * @access private
    */
-  function _prepare_subscription_query (&$query, &$history_item)
+  function _prepare_subscription_query ($query, $history_item)
   {
     $this->raise_deferred ('_prepare_subscription_query', 'AUDITABLE');
   }
@@ -374,7 +374,7 @@ class AUDITABLE extends RENDERABLE
    * @var SUBSCRIBER_QUERY
    * @access private
    */
-  var $_subscriber_query;
+  protected $_subscriber_query;
 }
 
 ?>

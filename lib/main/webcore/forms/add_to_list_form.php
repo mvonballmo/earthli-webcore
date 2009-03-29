@@ -52,23 +52,23 @@ class ADD_TO_LIST_FORM extends ID_BASED_FORM
   /**
    * @var boolean
    */
-  var $controls_visible = TRUE;
+  public $controls_visible = TRUE;
   /**
    * @var string
    */
-  var $button = 'Go';
+  public $button = 'Go';
 
   /**
-   * @param APPLICATION &$app Main application.
-   * @param SEARCH &$search
-   * @param QUERY &$search_query
+   * @param APPLICATION $app Main application.
+   * @param SEARCH $search
+   * @param QUERY $search_query
    */
-  function ADD_TO_LIST_FORM (&$app, &$search, &$search_query)
+  function ADD_TO_LIST_FORM ($app, $search, $search_query)
   {
     ID_BASED_FORM::ID_BASED_FORM ($app);
 
-    $this->_search =& $search;
-    $this->_search_query =& $search_query;
+    $this->_search = $search;
+    $this->_search_query = $search_query;
     $search->fields->add_fields ($this);
 
     foreach ($this->_fields as $field)
@@ -91,7 +91,7 @@ class ADD_TO_LIST_FORM extends ID_BASED_FORM
     $field->title = 'Selected only';
     $this->add_field ($field);
 
-    $field =& $this->field_at ('id');
+    $field = $this->field_at ('id');
     $field->visible = TRUE;
   }
 
@@ -101,7 +101,7 @@ class ADD_TO_LIST_FORM extends ID_BASED_FORM
     $this->set_value ('type', read_var ('type'));
   }
 
-  function _post_validate (&$obj)
+  function _post_validate ($obj)
   {
     parent::_post_validate ($obj);
 
@@ -111,16 +111,16 @@ class ADD_TO_LIST_FORM extends ID_BASED_FORM
     }
   }
 
-  function commit (&$obj)
+  function commit ($obj)
   {
     die ('committing form with ' . $this->text_value_for ('object_ids'));
   }
 
   /**
-   * @param FORM_RENDERER &$renderer
+   * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_controls (&$renderer)
+  function _draw_controls ($renderer)
   {
     $renderer->start ();
     $renderer->start_row ();
@@ -143,7 +143,7 @@ class ADD_TO_LIST_FORM extends ID_BASED_FORM
 
     $renderer->finish ();
 
-    $grid =& $this->_search->grid ();
+    $grid = $this->_search->grid ();
     $grid->show_folder = TRUE;
     $grid->set_ranges (10, 1);
     $grid->set_query ($this->_search_query);

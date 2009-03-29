@@ -51,44 +51,44 @@ class COMPONENT_GRID extends STANDARD_GRID
   /**
    * @var string
    */
-  var $box_style = 'object-in-list';
+  public $box_style = 'object-in-list';
   /**
    * @var string
    */
-  var $object_name = 'Component';
+  public $object_name = 'Component';
   /**
    * @var integer
    */
-  var $spacing = 4;
+  public $spacing = 4;
   /**
    * @var boolean
    */
-  var $even_columns = FALSE;
+  public $even_columns = FALSE;
   /**
    * @var boolean
    */
-  var $show_separator = FALSE;
+  public $show_separator = FALSE;
   /**
    * @var boolean Show creator/modifier with releases?
    */
-  var $show_user = TRUE;
+  public $show_user = TRUE;
   /**
    * @var boolean Show project for release?
    */
-  var $show_folder = FALSE;
+  public $show_folder = FALSE;
   /**
    * @var boolean Show branch for release?
    */
-  var $show_branch = FALSE;
+  public $show_branch = FALSE;
 
   /**
-   * @param RELEASE &$obj
+   * @param RELEASE $obj
     * @access private
     */
-  function _draw_box (&$obj)
+  function _draw_box ($obj)
   {
-    $folder =& $obj->parent_folder ();
-    $creator =& $obj->creator ();
+    $folder = $obj->parent_folder ();
+    $creator = $obj->creator ();
 ?>
   <div class="grid-title">
     <?php echo $obj->icon_as_html ('32px') . ' ' . $obj->title_as_link (); ?>

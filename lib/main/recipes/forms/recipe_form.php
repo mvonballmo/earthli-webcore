@@ -49,9 +49,9 @@ require_once ('webcore/forms/object_in_folder_form.php');
 class RECIPE_FORM extends DRAFTABLE_ENTRY_FORM
 {
   /**
-   * @param RECIPE_BOOK &$folder Add or create recipes in this recipe book.
+   * @param RECIPE_BOOK $folder Add or create recipes in this recipe book.
    */
-  function RECIPE_FORM (&$folder)
+  function RECIPE_FORM ($folder)
   {
     DRAFTABLE_ENTRY_FORM::DRAFTABLE_ENTRY_FORM ($folder);
 
@@ -87,9 +87,9 @@ class RECIPE_FORM extends DRAFTABLE_ENTRY_FORM
 
   /**
    * Load initial properties from this recipe.
-   * @param RECIPE &$obj
+   * @param RECIPE $obj
    */
-  function load_from_object (&$obj)
+  function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
 
@@ -111,10 +111,10 @@ class RECIPE_FORM extends DRAFTABLE_ENTRY_FORM
 
   /**
    * Store the form's values to this recipe.
-    * @param RECIPE &$obj
+    * @param RECIPE $obj
     * @access private
     */
-  function _store_to_object (&$obj)
+  function _store_to_object ($obj)
   {
     $obj->originator = $this->value_as_text ('originator');
     $obj->ingredients = $this->value_as_text ('ingredients');
@@ -126,10 +126,10 @@ class RECIPE_FORM extends DRAFTABLE_ENTRY_FORM
   }
 
   /**
-   * @param FORM_RENDERER &$renderer
+   * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_controls (&$renderer)
+  function _draw_controls ($renderer)
   {
     $renderer->start ();
     $renderer->draw_text_line_row ('title');

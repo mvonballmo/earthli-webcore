@@ -51,10 +51,10 @@ class PICTURE_RENDERER extends ENTRY_RENDERER
 {
   /**
    * Outputs the object as HTML.
-   * @param PICTURE &$entry
+   * @param PICTURE $entry
    * @access private
    */
-  function _display_as_html (&$entry)
+  function _display_as_html ($entry)
   {
     $this->_echo_subscribe_status ($entry);
     $this->_echo_picture_as_html ($entry);
@@ -62,12 +62,12 @@ class PICTURE_RENDERER extends ENTRY_RENDERER
 
   /**
    * Outputs the object as HTML.
-   * @param PICTURE &$entry
+   * @param PICTURE $entry
    * @access private
    */
-  function _display_as_plain_text (&$entry)
+  function _display_as_plain_text ($entry)
   {
-    $folder =& $entry->parent_folder ();
+    $folder = $entry->parent_folder ();
     $f = $entry->date->formatter ();
     $f->clear_flags ();
     echo $this->_line ($folder->format_date ($entry->date, $f));
@@ -77,22 +77,22 @@ class PICTURE_RENDERER extends ENTRY_RENDERER
 
   /**
    * Outputs the object for print-preview.
-   * @param PICTURE &$entry
+   * @param PICTURE $entry
    * @access private
    */
-  function _display_as_printable (&$entry)
+  function _display_as_printable ($entry)
   {
     $this->_echo_picture_as_html ($entry);
   }
 
   /**
    * Format the picture as HTML for printing or display.
-   * @param PICTURE &$entry
+   * @param PICTURE $entry
    * @access private
    */
-  function _echo_picture_as_html (&$entry)
+  function _echo_picture_as_html ($entry)
   {
-    $folder =& $entry->parent_folder ();
+    $folder = $entry->parent_folder ();
     $metrics = $entry->metrics ();
     if ($metrics->loaded ())
     {
@@ -158,11 +158,11 @@ class PICTURE_LOCATION_RENDERER extends OBJECT_IN_FOLDER_LOCATION_RENDERER
 {
   /**
    * Render any parent objects to the title and location.
-   * @param PAGE &$page
-   * @param RENDERABLE &$obj
+   * @param PAGE $page
+   * @param RENDERABLE $obj
    * @access private
    */
-  function _add_context (&$page, &$obj)
+  function _add_context ($page, $obj)
   {
     parent::_add_context ($page, $obj);
 
@@ -170,7 +170,7 @@ class PICTURE_LOCATION_RENDERER extends OBJECT_IN_FOLDER_LOCATION_RENDERER
     $journal = read_var ('journal');
     $first_day = read_var ('first_day');
     $last_day = read_var ('last_day');
-    $folder =& $obj->parent_folder ();
+    $folder = $obj->parent_folder ();
 
     if ($calendar)
     {
@@ -180,7 +180,7 @@ class PICTURE_LOCATION_RENDERER extends OBJECT_IN_FOLDER_LOCATION_RENDERER
     if ($journal)
     {
       $jrnl_query = $folder->entry_query ();
-      $jrnl =& $jrnl_query->object_at_id ($journal);
+      $jrnl = $jrnl_query->object_at_id ($journal);
       if (isset ($jrnl))
       {
         if ($calendar)

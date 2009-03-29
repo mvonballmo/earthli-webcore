@@ -54,7 +54,7 @@ class CALLBACK
    * Name of the global function to call.
    * @var string
    */
-  var $name;
+  public $name;
 
   /**
    * @var string
@@ -106,10 +106,10 @@ class CALLBACK_METHOD extends CALLBACK
    * @param string $name
    * @param object $obj
    */
-  function CALLBACK_METHOD ($name, &$obj)
+  function CALLBACK_METHOD ($name, $obj)
   {
     CALLBACK::CALLBACK ($name);
-    $this->_obj =& $obj;
+    $this->_obj = $obj;
   }
 
   /**
@@ -141,7 +141,7 @@ class CALLBACK_METHOD extends CALLBACK
    * @var object
    * @access private
    */
-  var $_obj;
+  protected $_obj;
 }
 
 /**
@@ -184,13 +184,13 @@ class CALLBACK_LIST
    * @var array[CALLBACK]
    * @access private
    */
-  var $_items = array ();
+  protected $_items = array ();
   /**
    * Set internally when iterating the list.
    * If this flag is set, calls to {@link execute()} are ignored.
    * @access private
    */
-  var $_executing = FALSE;
+  protected $_executing = FALSE;
 }
 
 ?>

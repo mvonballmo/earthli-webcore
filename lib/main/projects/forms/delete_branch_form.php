@@ -50,7 +50,7 @@ class DELETE_BRANCH_FORM extends DELETE_OBJECT_IN_FOLDER_FORM
 {
   /**
    * Delete the given object.
-    * @param BRANCH &$obj
+    * @param BRANCH $obj
     * @access private
     */
   function commit ($obj)

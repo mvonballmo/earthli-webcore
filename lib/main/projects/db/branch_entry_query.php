@@ -49,11 +49,11 @@ require_once ('projects/db/project_entry_query.php');
 class BRANCH_ENTRY_QUERY extends GENERIC_PROJECT_ENTRY_QUERY
 {
   /**
-   * @param BRANCH &$branch Branch for which entries are retrieved.
+   * @param BRANCH $branch Branch for which entries are retrieved.
    */
-  function BRANCH_ENTRY_QUERY (&$branch)
+  function BRANCH_ENTRY_QUERY ($branch)
   {
-    $folder =& $branch->parent_folder ();
+    $folder = $branch->parent_folder ();
     GENERIC_PROJECT_ENTRY_QUERY::GENERIC_PROJECT_ENTRY_QUERY ($folder);
     $this->_branch = $branch;
   }
@@ -67,7 +67,7 @@ class BRANCH_ENTRY_QUERY extends GENERIC_PROJECT_ENTRY_QUERY
   {
     parent::set_type ($type);
 
-    $table_names =& $this->app->table_names;
+    $table_names = $this->app->table_names;
 
     $this->add_select ('etob.branch_release_id');
     $this->add_table ("{$table_names->entries_to_branches} etob", 'etob.entry_id = entry.id');
@@ -108,13 +108,13 @@ class BRANCH_ENTRY_QUERY extends GENERIC_PROJECT_ENTRY_QUERY
    * @var BRANCH
    * @access private
    */
-  var $_branch;
+  protected $_branch;
   /**
    * Name of the default permission set to use.
    * @var string
    * @access private
    */
-  var $_privilege_set = Privilege_set_entry;
+  protected $_privilege_set = Privilege_set_entry;
 }
 
 ?>

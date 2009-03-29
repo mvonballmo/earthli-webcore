@@ -49,13 +49,13 @@ require_once ('projects/db/project_release_query.php');
 class BRANCH_RELEASE_QUERY extends PROJECT_RELEASE_QUERY
 {
   /**
-   * @param BRANCH &$branch Branch from which releases are retrieved.
+   * @param BRANCH $branch Branch from which releases are retrieved.
    */
-  function BRANCH_RELEASE_QUERY (&$branch)
+  function BRANCH_RELEASE_QUERY ($branch)
   {
-    $folder =& $branch->parent_folder ();
+    $folder = $branch->parent_folder ();
     PROJECT_RELEASE_QUERY::PROJECT_RELEASE_QUERY ($folder);
-    $this->_branch =& $branch;
+    $this->_branch = $branch;
     $this->set_order ('time_created DESC');
   }
 
@@ -73,7 +73,7 @@ class BRANCH_RELEASE_QUERY extends PROJECT_RELEASE_QUERY
    * @var BRANCH
    * @access private
    */
-  var $_branch;
+  protected $_branch;
 }
 
 ?>

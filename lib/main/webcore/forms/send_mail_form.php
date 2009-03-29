@@ -54,20 +54,20 @@ class SEND_MAIL_FORM extends PREVIEWABLE_FORM
    * Enable previewing for these forms.
    * @var boolean
    */
-  var $preview_enabled = TRUE;
+  public $preview_enabled = TRUE;
   /**
    * @var string
    */
-  var $button = 'Send';
+  public $button = 'Send';
   /**
    * @var string
    */
-  var $button_icon = '{icons}buttons/send';
+  public $button_icon = '{icons}buttons/send';
 
   /**
-   * @param CONTEXT &$context
+   * @param CONTEXT $context
    */
-  function SEND_MAIL_FORM (&$context)
+  function SEND_MAIL_FORM ($context)
   {
     PREVIEWABLE_FORM::PREVIEWABLE_FORM ($context);
 
@@ -112,7 +112,7 @@ class SEND_MAIL_FORM extends PREVIEWABLE_FORM
    * Get a mail renderer for this object.
    * @return MAIL_OBJECT_RENDERER
    */
-  function mail_renderer (&$obj)
+  function mail_renderer ($obj)
   {
     return $this->_make_obj_renderer ($obj);
   }
@@ -135,11 +135,11 @@ class SEND_MAIL_FORM extends PREVIEWABLE_FORM
 
   /**
    * Store the form's values to this object.
-   * @param STORABLE &$obj
+   * @param STORABLE $obj
    * @access private
    * @abstract
    */
-  function _store_to_object (&$obj)
+  function _store_to_object ($obj)
   {
   }
 
@@ -156,10 +156,10 @@ class SEND_MAIL_FORM extends PREVIEWABLE_FORM
    * Send the given object in an email.
    * Takes care of setting the mail format, setting up the recipient list and
    * rendering the object.
-   * @param object &$obj
+   * @param object $obj
    * @access private
    */
-  function commit (&$obj)
+  function commit ($obj)
   {
     $provider = $this->context->make_mail_provider ();
     $this->send_mail ($provider, $this->make_message ($obj));
@@ -168,11 +168,11 @@ class SEND_MAIL_FORM extends PREVIEWABLE_FORM
 
   /**
    * Return a mail representing this form.
-   * @param object &$obj
+   * @param object $obj
    * @return MAIL_MESSAGE
    * @access private
    */
-  function make_message (&$obj)
+  function make_message ($obj)
   {
     $class_name = $this->context->final_class_name ('MAIL_MESSAGE', 'webcore/mail/mail_message.php');
     $Result = new $class_name ($this->context);
@@ -227,11 +227,11 @@ class SEND_MAIL_FORM extends PREVIEWABLE_FORM
 
   /**
    * Send a message using the given provider
-   * @param MAIL_PROVIDER &$provider
-   * @param MAIL_MESSAGE &$msg
+   * @param MAIL_PROVIDER $provider
+   * @param MAIL_MESSAGE $msg
    * @access private
    */
-  function send_mail (&$provider, &$msg)
+  function send_mail ($provider, $msg)
   {
     $msg->set_send_to ($this->value_for ('send_to'));
     $msg->send ($provider);
@@ -244,29 +244,29 @@ class SEND_MAIL_FORM extends PREVIEWABLE_FORM
   function excerpt_size () { return 0; }
 
   /**
-   * @param object &$obj Get renderer for this object.
+   * @param object $obj Get renderer for this object.
    * @return MAIL_OBJECT_RENDERER
    * @access private
    * @abstract
    */
-  function _make_obj_renderer (&$obj) 
+  function _make_obj_renderer ($obj) 
   { 
     $this->raise_deferred ('_make_obj_renderer', 'SEND_MAIL_FORM'); 
   }
 
   /**
    * Return a preview for the given object.
-   * @param STORABLE &$obj
+   * @param STORABLE $obj
    * @return FORM_PREVIEW_SETTINGS
    * @access private
    */
-  function _make_preview_settings (&$obj)
+  function _make_preview_settings ($obj)
   {
     $Result = new SEND_MAIL_FORM_PREVIEW_SETTINGS ($this->context);
     $Result->obj_renderer = $this->_make_obj_renderer ($obj);
     $Result->options = $this->_make_renderer_options ();
     $Result->show_as_html = $this->value_for ('send_as_html'); 
-    $Result->form =& $this;
+    $Result->form = $this;
     return $Result;
   }
 
@@ -285,10 +285,10 @@ class SEND_MAIL_FORM extends PREVIEWABLE_FORM
 
   /**
    * Title for a previewed object.
-   * @param object &$obj
+   * @param object $obj
    * @return string
    */
-  function _preview_title (&$obj)
+  function _preview_title ($obj)
   {
     $munger = $this->context->html_title_formatter ();
     return 'Preview of ' . $munger->transform ($this->value_for ('subject'));
@@ -297,10 +297,10 @@ class SEND_MAIL_FORM extends PREVIEWABLE_FORM
   /**
    * Display additional email options.
    * Allow descendants to use the standard email form rendering, while still adding new mailing options.
-   * @param FORM_RENDERER &$renderer
+   * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_options (&$renderer)
+  function _draw_options ($renderer)
   {
     if ($this->visible ('send_as_html'))
     {
@@ -314,10 +314,10 @@ class SEND_MAIL_FORM extends PREVIEWABLE_FORM
   }
 
   /**
-   * @param FORM_RENDERER &$renderer
+   * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_controls (&$renderer)
+  function _draw_controls ($renderer)
   {
     $renderer->set_width ('25em');
     $renderer->default_control_height = '6em';
@@ -358,17 +358,17 @@ class SEND_MAIL_FORM_PREVIEW_SETTINGS extends FORM_PREVIEW_SETTINGS
    * Use these options with the {@link $obj_renderer}.
    * @var MAIL_OBJECT_RENDERER_OPTIONS
    */
-  var $options;
+  public $options;
   /**
    * Renders the {@link $object}.
    * @var MAIL_OBJECT_RENDERER
    */
-  var $obj_renderer;
+  public $obj_renderer;
   /**
    * Renders HTML if <code>True</code>, otherwise plain text.
    * @var boolean
    */
-  var $show_as_html;
+  public $show_as_html;
   
   /**
    * Render the preview for this object.

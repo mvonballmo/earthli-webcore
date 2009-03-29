@@ -51,12 +51,12 @@ class PURGE_COMPONENT_FORM extends PURGE_OBJECT_FORM
   /**
    * @var string
    */
-  var $button = 'Yes';
+  public $button = 'Yes';
 
   /**
-   * @param APPLICATION &$app
+   * @param APPLICATION $app
    */
-  function PURGE_COMPONENT_FORM (&$app)
+  function PURGE_COMPONENT_FORM ($app)
   {
     PURGE_OBJECT_FORM::PURGE_OBJECT_FORM ($app);
 
@@ -76,7 +76,7 @@ class PURGE_COMPONENT_FORM extends PURGE_OBJECT_FORM
 
   /**
    * Delete the given object.
-    * @param COMPONENT &$obj
+    * @param COMPONENT $obj
     * @access private
     */
   function commit ($obj)
@@ -87,17 +87,17 @@ class PURGE_COMPONENT_FORM extends PURGE_OBJECT_FORM
     $obj->purge ($options);
   }
 
-  function load_from_object (&$obj)
+  function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
     $this->set_value ('sub_history_item_publication_state', History_item_silent);
   }
 
   /**
-   * @param FORM_RENDERER &$renderer
+   * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_controls (&$renderer)
+  function _draw_controls ($renderer)
   {
     $renderer->start ();
     $renderer->draw_text_row ('', 'Are you sure you want to purge ' . $this->_object->title_as_link () . '?');
@@ -109,9 +109,9 @@ class PURGE_COMPONENT_FORM extends PURGE_OBJECT_FORM
     $props->add_item ('Publish all', History_item_needs_send, 'Generate individual notifications for affected jobs and changes.');
     $renderer->draw_radio_group_row ('sub_history_item_publication_state', $props);
 
-    $folder =& $this->_object->parent_folder ();
+    $folder = $this->_object->parent_folder ();
     $component_query = $folder->component_query ();
-    $other_comps =& $component_query->objects_at_ids ($this->_object->id, TRUE);
+    $other_comps = $component_query->objects_at_ids ($this->_object->id, TRUE);
 
     $props = $renderer->make_list_properties ();
     $props->add_item ('[None]', 0);

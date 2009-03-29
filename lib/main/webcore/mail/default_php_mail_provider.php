@@ -49,10 +49,10 @@ require_once ('webcore/mail/mail_provider.php');
 class DEFAULT_PHP_MAIL_PROVIDER extends MAIL_PROVIDER
 {
   /**
-   * @param MAIL_MESSAGE &$message
+   * @param MAIL_MESSAGE $message
     * @access private
     */
-  function _internal_send (&$message)
+  function _internal_send ($message)
   {
     $mailer_id = "PHP " . phpversion ();
     $header = $this->renderer->_line ("From: $message->send_from_name <$message->send_from_address>");
@@ -123,7 +123,7 @@ class DEFAULT_PHP_MAIL_PROVIDER extends MAIL_PROVIDER
    * @var string
    * @access private
    */
-  var $_last_error;
+  protected $_last_error;
 }
 
 ?>

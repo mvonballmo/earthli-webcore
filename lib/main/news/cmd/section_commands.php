@@ -51,16 +51,16 @@ require_once ('webcore/cmd/folder_commands.php');
 class SECTION_COMMANDS extends FOLDER_COMMANDS
 {
   /**
-   * @param SECTION &$folder Configure commands for this object.
+   * @param SECTION $folder Configure commands for this object.
    */
-  function SECTION_COMMANDS (&$folder)
+  function SECTION_COMMANDS ($folder)
   {
     FOLDER_COMMANDS::FOLDER_COMMANDS ($folder);
 
-    $cmd =& $this->command_at ('new');
+    $cmd = $this->command_at ('new');
     $cmd->title = 'New section';
 
-    $cmd =& $this->command_at ('new_entry');
+    $cmd = $this->command_at ('new_entry');
     $cmd->title = 'New article';
     $cmd->icon = '{app_icons}buttons/new_article';
     $cmd->link = "create_article.php?id=$folder->id";

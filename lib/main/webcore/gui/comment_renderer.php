@@ -53,9 +53,9 @@ class COMMENT_RENDERER extends CONTENT_OBJECT_RENDERER
    * @param COMMENT $obj
    * @access private
    */
-  function _display_as_html (&$obj)
+  function _display_as_html ($obj)
   {
-    $creator =& $obj->creator ();
+    $creator = $obj->creator ();
 ?>
     <div class="info-box-top">
       <div style="float: left; margin-right: .5em">
@@ -89,7 +89,7 @@ class COMMENT_RENDERER extends CONTENT_OBJECT_RENDERER
    * @param COMMENT $obj
    * @access private
    */
-  function _display_as_plain_text (&$obj)
+  function _display_as_plain_text ($obj)
   {
     $this->_echo_plain_text_description ($obj);
     $this->_echo_plain_text_user_information ($obj, FALSE);
@@ -97,10 +97,10 @@ class COMMENT_RENDERER extends CONTENT_OBJECT_RENDERER
 
   /**
    * Shows the subscription status for this object.
-   * @param COMMENT &$obj
+   * @param COMMENT $obj
    * @access private
    */
-  function _echo_subscribe_status (&$obj)
+  function _echo_subscribe_status ($obj)
   {
     $this->_echo_html_subscribed_toggle ($obj, 'subscribe_to_comment.php?id=' . $obj->id, Subscribe_comment);
   }
@@ -128,19 +128,19 @@ define ('Comment_render_threaded', 'threaded');
 class COMMENT_LIST_RENDERER extends WEBCORE_OBJECT
 {
   /**
-   * @param QUERY &$com_query Show comments from this query.
-    * @param ENTRY|COMMENT &$obj Entry or comment on whose page to render comments.
+   * @param QUERY $com_query Show comments from this query.
+    * @param ENTRY|COMMENT $obj Entry or comment on whose page to render comments.
     * @param string $default_mode Default mode for comment display (Can be 'Comment_render_flat' or 'Comment_render_threaded').
     */
-  function COMMENT_LIST_RENDERER (&$com_query, &$obj, $default_mode = Comment_render_threaded)
+  function COMMENT_LIST_RENDERER ($com_query, $obj, $default_mode = Comment_render_threaded)
   {
     WEBCORE_OBJECT::WEBCORE_OBJECT ($obj->app);
 
-    $this->_comment_query =& $com_query;
-    $this->_obj =& $obj;
+    $this->_comment_query = $com_query;
+    $this->_obj = $obj;
     if (is_a ($this->_obj, 'COMMENT'))
     {
-      $this->_comment =& $this->_obj;
+      $this->_comment = $this->_obj;
     }
 
     $this->comment_mode = read_var ('comment_mode', $default_mode);
@@ -208,16 +208,16 @@ class COMMENT_LIST_RENDERER extends WEBCORE_OBJECT
    * @var ENTRY|COMMENT
     * @access private
     */
-  var $_obj;
+  protected $_obj;
   /**
    * @var COMMENT
     * @access private
     */
-  var $_comment;
+  protected $_comment;
   /**
    * @var QUERY
     * @access private
     */
-  var $_comment_query;
+  protected $_comment_query;
 }
 ?>

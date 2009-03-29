@@ -52,25 +52,25 @@ class SUBSCRIBER_GRID extends STANDARD_GRID
   /**
    * @var string
    */
-  var $object_name = 'Subscriber';
+  public $object_name = 'Subscriber';
   /**
    * @var integer
    */
-  var $spacing = 2;
+  public $spacing = 2;
   /**
    * @var string
    */
-  var $width = '';
+  public $width = '';
   /**
    * @var boolean
    */
-  var $show_separator = FALSE;
+  public $show_separator = FALSE;
 
   /**
-   * @param SUBSCRIBER &$obj
+   * @param SUBSCRIBER $obj
     * @access private
     */
-  function _draw_box (&$obj)
+  function _draw_box ($obj)
   {
 ?>
     <input type="checkbox" value="<?php echo $obj->email; ?>" name="subscriber_ids[]" checked>

@@ -53,13 +53,13 @@ class ENTRY_SUBSCRIPTION_FORM extends CONTENT_OBJECT_SUBSCRIPTION_FORM
    * @var string
    * @access private
    */
-  var $panel_name = 'entries';
+  public $panel_name = 'entries';
 
   /**
-   * @param APPLICATION &$app Main application.
+   * @param APPLICATION $app Main application.
    * @param TYPE_INFO $type_info
    */
-  function ENTRY_SUBSCRIPTION_FORM (&$app, $type_info)
+  function ENTRY_SUBSCRIPTION_FORM ($app, $type_info)
   {
     CONTENT_OBJECT_SUBSCRIPTION_FORM::CONTENT_OBJECT_SUBSCRIPTION_FORM ($app);
     $this->_type_info = $type_info;
@@ -95,7 +95,7 @@ class ENTRY_SUBSCRIPTION_FORM extends CONTENT_OBJECT_SUBSCRIPTION_FORM
    * Type of subscriptions to manage.
    * @var string
    */
-  var $_sub_type = Subscribe_entry;
+  protected $_sub_type = Subscribe_entry;
 }
 
 ?>

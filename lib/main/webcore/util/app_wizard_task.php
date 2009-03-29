@@ -58,49 +58,49 @@ class APP_WIZARD_TASK extends TASK
    * Icon to show in the title bar when executing.
    * @var string
    */
-  var $icon = '{icons}buttons/create';
+  public $icon = '{icons}buttons/create';
   /**
    * Log all messages in this channel.
    * @var string
    */
-  var $log_channel = Msg_channel_app_wizard;
+  public $log_channel = Msg_channel_app_wizard;
   
   /**
    * @var string
    */
-  var $app_title;
+  public $app_title;
   /**
    * @var string
    */
-  var $app_id;
+  public $app_id;
   /**
    * @var string
    */
-  var $app_prefix;
+  public $app_prefix;
   /**
    * @var string
    */
-  var $app_url;
+  public $app_url;
   /**
    * @var string
    */
-  var $app_folder;
+  public $app_folder;
   /**
    * @var string
    */
-  var $folder_name;
+  public $folder_name;
   /**
    * @var string
    */
-  var $entry_name;
+  public $entry_name;
   /**
    * @var string
    */
-  var $author_name;
+  public $author_name;
   /**
    * @var string
    */
-  var $author_email;
+  public $author_email;
 
   /**
    * Return a formatted title for this task.

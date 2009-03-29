@@ -54,35 +54,35 @@ class PAGE_TITLE extends WEBCORE_OBJECT
    * Separates individual pieces of the title.
    * @var string
    */
-  var $separator = ' &gt; ';
+  public $separator = ' &gt; ';
   /**
    * Starts every page title.
    * @var string
    */
-  var $prefix = '..:: ';
+  public $prefix = '..:: ';
   /**
    *  Finishes every page title.
    * @var string
    */
-  var $suffix = ' ::..';
+  public $suffix = ' ::..';
   /**
    * The main area of the page.
    * @var string
    */
-  var $group = '';
+  public $group = '';
   /**
    * The specific intent of the page.
    * @var string
    */
-  var $subject = '';
+  public $subject = '';
 
   /**
    * Add an object to the page context.
-   * @param NAMED_OBJECT &$obj
+   * @param NAMED_OBJECT $obj
    */
-  function add_object (&$obj)
+  function add_object ($obj)
   {
-    $this->_objects [] =& $obj;
+    $this->_objects [] = $obj;
   }
   
   /**
@@ -91,7 +91,7 @@ class PAGE_TITLE extends WEBCORE_OBJECT
    */
   function as_text ()
   {
-    $opts =& $this->context->text_options;
+    $opts = $this->context->text_options;
     if ($this->group)
     {
       $pieces [] = $opts->convert_to_html_entities ($this->group);
@@ -141,7 +141,7 @@ class PAGE_TITLE extends WEBCORE_OBJECT
    * @var array [NAMED_OBJECT]
    * @access private
    */
-  var $_objects;
+  protected $_objects;
 }
 
 ?>

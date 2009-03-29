@@ -111,18 +111,18 @@ class UPLOADED_FILE extends RAISABLE
    * Original name (name from client file system).
    * @var string
    */
-  var $name;
+  public $name;
   /**
    * Number of bytes in file.
    * @var integer
    */
-  var $size;
+  public $size;
   /**
    * MIME type of the file.
    * May be empty if the server/browser does not specify it or figure it out.
    * @var string
    */
-  var $mime_type;
+  public $mime_type;
   /**
    * Error code associated with this file.
    * May be {@link Uploaded_file_error_none}, {@link Uploaded_file_error_ini_size},
@@ -130,13 +130,13 @@ class UPLOADED_FILE extends RAISABLE
    * {@link Uploaded_file_error_missing}.
    * @var integer
    */
-  var $error;
+  public $error;
   /**
    * Version of {@link $name} that is file-system-valid.
    * This name is initialized using {@link normalize_file_name()}.
    * @var string
    */
-  var $normalized_name;
+  public $normalized_name;
 
   /**
    * Has the file for this field been processed?
@@ -149,19 +149,19 @@ class UPLOADED_FILE extends RAISABLE
    * in the form).
    * @var boolean
    */
-  var $processed = FALSE;
+  public $processed = FALSE;
 
   /**
-   * @param UPLOADER &$uploader Attached to this uploader.
+   * @param UPLOADER $uploader Attached to this uploader.
    * @param string $name Original name of the uploaded file.
    * @param integer $size Size of the file.
    * @param string $type MIME type of the file.
    * @param string $temp_name Name of the file as uploaded.
    * @param integer $error Error code.
    */
-  function UPLOADED_FILE (&$uploader, $name, $size, $mime_type, $temp_name, $error)
+  function UPLOADED_FILE ($uploader, $name, $size, $mime_type, $temp_name, $error)
   {
-    $this->_uploader =& $uploader;
+    $this->_uploader = $uploader;
     $this->name = $name;
     $this->size = $size;
     $this->mime_type = $mime_type;
@@ -287,7 +287,7 @@ class UPLOADED_FILE extends RAISABLE
           if (move_uploaded_file ($this->temp_name, $path . $final_name))
           {
             $this->_final_name_and_path = $path . $final_name;
-            $opts =& global_file_options (); 
+            $opts = global_file_options (); 
             chmod ($this->_final_name_and_path, $opts->default_access_mode);
             $this->processed = TRUE;
           }          
@@ -364,7 +364,7 @@ class UPLOADED_FILE extends RAISABLE
    * @var UPLOADER
    * @access private
    */
-  var $_uploader;
+  protected $_uploader;
   /**
    * Full and path after the file has been moved.
    * Once the file is moved with {@link move_to()}, this variable is set to the name
@@ -372,14 +372,14 @@ class UPLOADED_FILE extends RAISABLE
    * @var string
    * @access private
    */
-  var $_final_name_and_path;
+  protected $_final_name_and_path;
   /**
    * Current location of file on server.
    * The uploaded file is stored to this name when it is uploaded to the server.
    * @var string
    * @access private
    */
-  var $temp_name;
+  public $temp_name;
 }
 
 /**
@@ -398,15 +398,15 @@ class UPLOADED_FILE_SET
    * @var array[UPLOADED_FILE]
    * @see UPLOADED_FILE
    */
-  var $files = array ();
+  public $files = array ();
 
   /**
-   * @param UPLOADER &$uploader Attached to this uploader.
+   * @param UPLOADER $uploader Attached to this uploader.
    * @param string $field_name Name of the field for which this set was submitted.
    */
-  function UPLOADED_FILE_SET (&$uploader, $field_name)
+  function UPLOADED_FILE_SET ($uploader, $field_name)
   {
-    $this->_uploader =& $uploader;
+    $this->_uploader = $uploader;
 
     if (isset ($_FILES [$field_name]))
     {
@@ -509,7 +509,7 @@ class UPLOADED_FILE_SET
    * @var UPLOADER
    * @access private
    */
-  var $_uploader;
+  protected $_uploader;
 }
 
 /**
@@ -529,47 +529,47 @@ class UPLOADER extends RAISABLE
    * Number of files uploaded.
    * @var integer
    */
-  var $total_files = 0;
+  public $total_files = 0;
   /**
    * Maximum file size specified in the form.
    * @var integer
    */
-  var $form_max_file_size;
+  public $form_max_file_size;
   /**
    * Maximum file size in PHP configuration.
    * @var integer
    */
-  var $ini_max_file_size;
+  public $ini_max_file_size;
   /**
    * Value of 'upload_max_filesize'.
    * This is a PHP configuration value and controls the maximum size of a single uploaded file.
    * @var integer
    */
-  var $upload_max_filesize;
+  public $upload_max_filesize;
   /**
    * Value of 'post_max_size'.
    * This is a PHP configuration value and controls the maximum size of a form's data.
    * @var integer
    */
-  var $post_max_size;
+  public $post_max_size;
   /**
    * Actual maximum file size for this upload.
    * Calculated as the minimum of {@link $form_max_file_size} and {@link $ini_max_file_size}.
    * @var integer
    */
-  var $max_file_size;
+  public $max_file_size;
   /**
    * Map of field name to list of files.
    * Each submitted fields may be associated with one of more uploaded files.
    * @var array[string,UPLOADED_FILE_SET]
    * @see UPLOADED_FILE_SET
    */
-  var $file_sets = array ();
+  public $file_sets = array ();
   /**
    * Name of the previously uploaded file information.
    * @var string
    */
-  var $stored_info_name = 'webcore_saved_uploads';
+  public $stored_info_name = 'webcore_saved_uploads';
 
   function UPLOADER ()
   {
@@ -599,7 +599,7 @@ class UPLOADER extends RAISABLE
       if ($file_set->size ())
       {
         $this->total_files += $file_set->size ();
-        $this->file_sets [$file_set_id] =& $file_set;
+        $this->file_sets [$file_set_id] = $file_set;
       }
     }
 
@@ -621,12 +621,12 @@ class UPLOADER extends RAISABLE
         $file_set_id = $file->load_from_text ($upload);
         if (isset ($this->file_sets [$file_set_id]))
         {
-          $file_set =& $this->file_sets [$file_set_id];
+          $file_set = $this->file_sets [$file_set_id];
         }
         else
         {
           $file_set = new UPLOADED_FILE_SET ($this, $file_set_id);
-          $this->file_sets [$file_set_id] =& $file_set;
+          $this->file_sets [$file_set_id] = $file_set;
         }
         array_unshift ($file_set->files, $file);
       }

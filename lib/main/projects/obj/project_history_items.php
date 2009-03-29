@@ -57,16 +57,16 @@ class PROJECT_ENTRY_HISTORY_ITEM extends ENTRY_HISTORY_ITEM
    * 'removed from branch x' messages in the history item.
    * @var boolean
    */
-  var $compare_branches = FALSE;
+  public $compare_branches = FALSE;
 
   /**
    * Record class-specific differences.
    * 'orig' is the same as {@link $_object}, but is passed here for convenience.
-   * @param PROJECT_ENTRY &$orig
-   * @param PROJECT_ENTRY &$new
+   * @param PROJECT_ENTRY $orig
+   * @param PROJECT_ENTRY $new
    * @access private
    */
-  function _record_differences (&$orig, &$new)
+  function _record_differences ($orig, $new)
   {
     parent::_record_differences ($orig, $new);
 
@@ -88,8 +88,8 @@ class PROJECT_ENTRY_HISTORY_ITEM extends ENTRY_HISTORY_ITEM
 
     if ($this->compare_branches)
     {
-      $orig_branches =& $orig->stored_branch_infos ();
-      $new_branches =& $new->current_branch_infos ();
+      $orig_branches = $orig->stored_branch_infos ();
+      $new_branches = $new->current_branch_infos ();
 
       if (sizeof ($orig_branches))
       {
@@ -126,11 +126,11 @@ class PROJECT_ENTRY_HISTORY_ITEM extends ENTRY_HISTORY_ITEM
 
   /**
    * Record differences for two branches.
-   * @param PROJECT_ENTRY_BRANCH_INFO &$orig_branch
-   * @param PROJECT_ENTRY_BRANCH_INFO &$new_branch
+   * @param PROJECT_ENTRY_BRANCH_INFO $orig_branch
+   * @param PROJECT_ENTRY_BRANCH_INFO $new_branch
    * @access private
    */
-  function _record_branch_differences (&$orig_branch, &$new_branch)
+  function _record_branch_differences ($orig_branch, $new_branch)
   {
     if ($orig_branch->release_id != $new_branch->release_id)
     {
@@ -153,11 +153,11 @@ class JOB_HISTORY_ITEM extends PROJECT_ENTRY_HISTORY_ITEM
   /**
    * Record class-specific differences.
    * 'orig' is the same as {@link $_object}, but is passed here for convenience.
-   * @param JOB &$orig
-   * @param JOB &$new
+   * @param JOB $orig
+   * @param JOB $new
    * @access private
    */
-  function _record_differences (&$orig, &$new)
+  function _record_differences ($orig, $new)
   {
     if ($orig->reporter_id != $new->reporter_id)
     {
@@ -176,11 +176,11 @@ class JOB_HISTORY_ITEM extends PROJECT_ENTRY_HISTORY_ITEM
 
   /**
    * Record differences for two branches.
-   * @param PROJECT_ENTRY_BRANCH_INFO &$orig_branch
-   * @param PROJECT_ENTRY_BRANCH_INFO &$new_branch
+   * @param PROJECT_ENTRY_BRANCH_INFO $orig_branch
+   * @param PROJECT_ENTRY_BRANCH_INFO $new_branch
    * @access private
    */
-  function _record_branch_differences (&$orig_branch, &$new_branch)
+  function _record_branch_differences ($orig_branch, $new_branch)
   {
     parent::_record_branch_differences ($orig_branch, $new_branch);
 
@@ -215,11 +215,11 @@ class CHANGE_HISTORY_ITEM extends PROJECT_ENTRY_HISTORY_ITEM
   /**
    * Record class-specific differences.
    * 'orig' is the same as {@link $_object}, but is passed here for convenience.
-   * @param CHANGE &$orig
-   * @param CHANGE &$new
+   * @param CHANGE $orig
+   * @param CHANGE $new
    * @access private
    */
-  function _record_differences (&$orig, &$new)
+  function _record_differences ($orig, $new)
   {
     $this->_record_text_difference ('Files', $orig->files, $new->files);
 
@@ -246,16 +246,16 @@ class BRANCH_HISTORY_ITEM extends OBJECT_IN_FOLDER_HISTORY_ITEM
    * Which kind of object is this?
    * @var string
    */
-  var $object_type = History_item_branch;
+  public $object_type = History_item_branch;
 
   /**
    * Record class-specific differences.
    * 'orig' is the same as {@link $_object}, but is passed here for convenience.
-   * @param BRANCH &$orig
-   * @param BRANCH &$new
+   * @param BRANCH $orig
+   * @param BRANCH $new
    * @access private
    */
-  function _record_differences (&$orig, &$new)
+  function _record_differences ($orig, $new)
   {
     parent::_record_differences ($orig, $new);
 
@@ -280,16 +280,16 @@ class RELEASE_HISTORY_ITEM extends OBJECT_IN_FOLDER_HISTORY_ITEM
    * Which kind of object is this?
    * @var string
    */
-  var $object_type = History_item_release;
+  public $object_type = History_item_release;
 
   /**
    * Record class-specific differences.
    * 'orig' is the same as {@link $_object}, but is passed here for convenience.
-   * @param RELEASE &$orig
-   * @param RELEASE &$new
+   * @param RELEASE $orig
+   * @param RELEASE $new
    * @access private
    */
-  function _record_differences (&$orig, &$new)
+  function _record_differences ($orig, $new)
   {
     parent::_record_differences ($orig, $new);
 
@@ -313,16 +313,16 @@ class COMPONENT_HISTORY_ITEM extends OBJECT_IN_FOLDER_HISTORY_ITEM
    * Which kind of object is this?
    * @var string
    */
-  var $object_type = History_item_component;
+  public $object_type = History_item_component;
 
   /**
    * Record class-specific differences.
    * 'orig' is the same as {@link $_object}, but is passed here for convenience.
-   * @param COMPONENT &$orig
-   * @param COMPONENT &$new
+   * @param COMPONENT $orig
+   * @param COMPONENT $new
    * @access private
    */
-  function _record_differences (&$orig, &$new)
+  function _record_differences ($orig, $new)
   {
     parent::_record_differences ($orig, $new);
 
@@ -343,11 +343,11 @@ class PROJECT_HISTORY_ITEM extends FOLDER_HISTORY_ITEM
   /**
    * Record class-specific differences.
    * 'orig' is the same as {@link $_object}, but is passed here for convenience.
-   * @param PROJECT &$orig
-   * @param PROJECT &$new
+   * @param PROJECT $orig
+   * @param PROJECT $new
    * @access private
    */
-  function _record_differences (&$orig, &$new)
+  function _record_differences ($orig, $new)
   {
     parent::_record_differences ($orig, $new);
 
@@ -356,12 +356,12 @@ class PROJECT_HISTORY_ITEM extends FOLDER_HISTORY_ITEM
       $this->_record_object_difference ('Trunk', $orig->trunk (), $new->trunk ());
     }
 
-    $orig_options =& $orig->options ();
-    $new_options =& $new->options ();
+    $orig_options = $orig->options ();
+    $new_options = $new->options ();
 
     if ($orig_options->inherited () != $new_options->inherited ())
     {
-      $definer =& $new_options->definer ();
+      $definer = $new_options->definer ();
       $this->record_difference ('Project options are now inherited from ' . $definer->title_as_plain_text ());
     }
 
@@ -383,29 +383,29 @@ class PROJECT_HISTORY_ITEM extends FOLDER_HISTORY_ITEM
 
   /**
    * Description of assignee options.
-   * @param PROJECT_OPTIONS &$options
+   * @param PROJECT_OPTIONS $options
    * @return string
    * @access private
    */
-  function _text_for_assignee_options (&$options)
+  function _text_for_assignee_options ($options)
   {
     return $this->_text_for_user_list_options ($options->assignee_group_type, $options->assignee_group ());
   }
 
   /**
    * Description of reporter options.
-   * @param PROJECT_OPTIONS &$options
+   * @param PROJECT_OPTIONS $options
    * @return string
    * @access private
    */
-  function _text_for_reporter_options (&$options)
+  function _text_for_reporter_options ($options)
   {
     return $this->_text_for_user_list_options ($options->reporter_group_type, $options->reporter_group ());
   }
 
   /**
    * Description of reporter options.
-   * @param PROJECT_OPTIONS &$options
+   * @param PROJECT_OPTIONS $options
    * @return string
    * @access private
    */

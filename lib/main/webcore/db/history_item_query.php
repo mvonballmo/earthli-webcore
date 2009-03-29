@@ -52,7 +52,7 @@ class HISTORY_ITEM_QUERY extends QUERY
    * SQL alias for the "main" table.
    * @var string
    */
-  var $alias = 'act';
+  public $alias = 'act';
 
   /**
    * Apply default restrictions and tables.

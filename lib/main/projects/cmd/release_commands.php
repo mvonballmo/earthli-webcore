@@ -51,9 +51,9 @@ require_once ('webcore/cmd/commands.php');
 class RELEASE_COMMANDS extends COMMANDS
 {
   /**
-   * @param RELEASE &$obj Configure commands for this object.
+   * @param RELEASE $obj Configure commands for this object.
    */
-  function RELEASE_COMMANDS (&$obj)
+  function RELEASE_COMMANDS ($obj)
   {
     COMMANDS::COMMANDS ($obj->app);
 
@@ -124,8 +124,8 @@ class RELEASE_COMMANDS extends COMMANDS
     $cmd->importance = Command_importance_high;
     $this->append ($cmd);
 
-    $folder =& $obj->parent_folder ();
-    $branch =& $obj->branch ();
+    $folder = $obj->parent_folder ();
+    $branch = $obj->branch ();
 
     if (! $folder->is_organizational ())
     {

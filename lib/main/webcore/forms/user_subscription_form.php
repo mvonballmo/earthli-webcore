@@ -53,12 +53,12 @@ class USER_SUBSCRIPTION_FORM extends CONTENT_OBJECT_SUBSCRIPTION_FORM
    * @var string
    * @access private
    */
-  var $panel_name = 'users';
+  public $panel_name = 'users';
 
   /**
-   * @param APPLICATION &$app Main application.
+   * @param APPLICATION $app Main application.
    */
-  function USER_SUBSCRIPTION_FORM (&$app)
+  function USER_SUBSCRIPTION_FORM ($app)
   {
     CONTENT_OBJECT_SUBSCRIPTION_FORM::CONTENT_OBJECT_SUBSCRIPTION_FORM ($app);
     $this->_type_info = $this->app->type_info_for ('USER');
@@ -89,7 +89,7 @@ class USER_SUBSCRIPTION_FORM extends CONTENT_OBJECT_SUBSCRIPTION_FORM
    * Type of subscriptions to manage.
    * @var string
    */
-  var $_sub_type = Subscribe_user;
+  protected $_sub_type = Subscribe_user;
 }
 
 ?>

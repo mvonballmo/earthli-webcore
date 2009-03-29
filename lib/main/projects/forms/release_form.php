@@ -49,9 +49,9 @@ require_once ('webcore/forms/object_in_folder_form.php');
 class RELEASE_FORM extends OBJECT_IN_FOLDER_FORM
 {
   /**
-   * @param PROJECT &$folder Project in which to add or edit the job.
+   * @param PROJECT $folder Project in which to add or edit the job.
    */
-  function RELEASE_FORM (&$folder)
+  function RELEASE_FORM ($folder)
   {
     OBJECT_IN_FOLDER_FORM::OBJECT_IN_FOLDER_FORM ($folder);
 
@@ -83,16 +83,16 @@ class RELEASE_FORM extends OBJECT_IN_FOLDER_FORM
     
     $this->set_value ('state', Planned);
 
-    $field =& $this->field_at ('id');
+    $field = $this->field_at ('id');
     $field->visible = TRUE;
     $field->title = 'Branch';
   }
 
   /**
    * Load initial properties from this branch.
-   * @param BRANCH &$obj
+   * @param BRANCH $obj
    */
-  function load_from_object (&$obj)
+  function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
 
@@ -104,7 +104,7 @@ class RELEASE_FORM extends OBJECT_IN_FOLDER_FORM
 
   /**
    * Called after fields are validated.
-   * @param object &$obj Object being validated.
+   * @param object $obj Object being validated.
    * @access private
    */
   function _post_validate ($obj)
@@ -125,10 +125,10 @@ class RELEASE_FORM extends OBJECT_IN_FOLDER_FORM
 
   /**
    * Store the form's values for this change.
-    * @param RELEASE &$obj
+    * @param RELEASE $obj
     * @access private
     */
-  function _store_to_object (&$obj)
+  function _store_to_object ($obj)
   {
     $obj->summary = $this->value_for ('summary');
     $obj->set_time_scheduled ($this->value_for ('time_scheduled'));
@@ -157,10 +157,10 @@ class RELEASE_FORM extends OBJECT_IN_FOLDER_FORM
   }
 
   /**
-   * @param FORM_RENDERER &$renderer
+   * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_controls (&$renderer)
+  function _draw_controls ($renderer)
   {
     $renderer->start ();
     $renderer->draw_text_line_row ('title');
@@ -169,7 +169,7 @@ class RELEASE_FORM extends OBJECT_IN_FOLDER_FORM
     if ($this->visible ('id'))
     {
       $branch_query = $this->_folder->branch_query ();
-      $branches =& $branch_query->objects ();
+      $branches = $branch_query->objects ();
       $props = $renderer->make_list_properties ();
       $props->width = '10em';
       foreach ($branches as $branch)
@@ -233,6 +233,6 @@ class RELEASE_FORM extends OBJECT_IN_FOLDER_FORM
    * @var string
    * @access private
    */
-  var $_privilege_set = Privilege_set_folder;
+  protected $_privilege_set = Privilege_set_folder;
 }
 ?>

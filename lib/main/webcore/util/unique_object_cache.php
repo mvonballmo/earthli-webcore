@@ -51,12 +51,12 @@ require_once ('webcore/util/object_cache.php');
 class UNIQUE_OBJECT_CACHE extends OBJECT_CACHE
 {
   /**
-   * @param QUERY &$query List objects from this query.
+   * @param QUERY $query List objects from this query.
    */
-  function UNIQUE_OBJECT_CACHE (&$query)
+  function UNIQUE_OBJECT_CACHE ($query)
   {
-    $this->_app =& $query->app;
-    $this->_query =& $query;
+    $this->_app = $query->app;
+    $this->_query = $query;
     $this->window_size = $this->_app->display_options->objects_to_show;
     $this->_app->storage->load_multiple_values ($this->_stored_name (''));
   }
@@ -217,19 +217,19 @@ class UNIQUE_OBJECT_CACHE extends OBJECT_CACHE
     * @var APPLICATION
     * @access private
     */
-  var $_app;
+  protected $_app;
   /**
    * Objects for this list are pulled from this query.
     * @var QUERY
     * @access private
     */
-  var $_query;
+  protected $_query;
   /**
    * Used during iteration
     * @var DATABASE
     * @access private
     */
-  var $_iteration_db;
+  protected $_iteration_db;
 }
 
 ?>

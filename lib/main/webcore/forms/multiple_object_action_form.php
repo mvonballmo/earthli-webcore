@@ -54,25 +54,25 @@ class MULTIPLE_OBJECT_ACTION_FORM extends ID_BASED_FORM
    * Holds information on the selected folders and entries.
    * @var OBJECT_LIST_BUILDER
    */
-  var $object_list;
+  public $object_list;
   /**
    * @var string
    * @access private
    */
-  var $method = 'request';
+  public $method = 'request';
   /**
    * @var string
    */
-  var $button = 'Yes';
+  public $button = 'Yes';
 
   /**
-   * @param FOLDER &$folder Objects are from this folder.
+   * @param FOLDER $folder Objects are from this folder.
    */
-  function MULTIPLE_OBJECT_ACTION_FORM (&$folder)
+  function MULTIPLE_OBJECT_ACTION_FORM ($folder)
   {
     ID_BASED_FORM::ID_BASED_FORM ($folder->app);
 
-    $this->_folder =& $folder;
+    $this->_folder = $folder;
 
     $field = new ARRAY_FIELD ();
     $field->id = 'folder_ids';
@@ -91,10 +91,10 @@ class MULTIPLE_OBJECT_ACTION_FORM extends ID_BASED_FORM
 
   /**
    * Apply the action to all selected folders and entries.
-   * @param object &$obj This parameter is ignored.
+   * @param object $obj This parameter is ignored.
    * @access private
    */
-  function commit (&$obj)
+  function commit ($obj)
   {
     if ($this->object_list->has_folders ())
     {
@@ -151,19 +151,19 @@ class MULTIPLE_OBJECT_ACTION_FORM extends ID_BASED_FORM
 
   /**
    * Execute action for a single folder.
-   * @param FOLDER &$fldr
+   * @param FOLDER $fldr
    * @access private
    * @abstract
    */
-  function _folder_run (&$fldr) { $this->raise_deferred ('_folder_run', 'MULTIPLE_OBJECT_ACTION_FORM'); }
+  function _folder_run ($fldr) { $this->raise_deferred ('_folder_run', 'MULTIPLE_OBJECT_ACTION_FORM'); }
 
   /**
    * Execute action for a single entry.
-   * @param ENTRY &$entry
+   * @param ENTRY $entry
    * @access private
    * @abstract
    */
-  function _entry_run (&$entry) { $this->raise_deferred ('_entry_run', 'MULTIPLE_OBJECT_ACTION_FORM'); }
+  function _entry_run ($entry) { $this->raise_deferred ('_entry_run', 'MULTIPLE_OBJECT_ACTION_FORM'); }
 
   /**
    * Displays the list of selected entries and folders.
@@ -188,7 +188,7 @@ class MULTIPLE_OBJECT_ACTION_FORM extends ID_BASED_FORM
 
       while ($i < $c)
       {
-        $fldr =& $this->object_list->folders [$i];
+        $fldr = $this->object_list->folders [$i];
         echo $fldr->title_as_link () . "<br>";
         $i++;
       }
@@ -203,7 +203,7 @@ class MULTIPLE_OBJECT_ACTION_FORM extends ID_BASED_FORM
 
       while ($i < $c)
       {
-        $entry =& $this->object_list->entries [$i];
+        $entry = $this->object_list->entries [$i];
         $type_info = $entry->type_info ();
 
         if ($type_info->plural_title != $current_type)
@@ -236,20 +236,20 @@ class MULTIPLE_OBJECT_ACTION_FORM extends ID_BASED_FORM
 
   /**
    * Draw a confirmation message for this action.
-   * @param FORM_RENDERER &$renderer
+   * @param FORM_RENDERER $renderer
    * @access private
    * @abstract
    */
-  function _draw_message (&$renderer)
+  function _draw_message ($renderer)
   {
     $this->raise_deferred ('_draw_message', 'MULTIPLE_OBJECT_ACTION_FORM');
   }
 
   /**
-   * @param FORM_RENDERER &$renderer
+   * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_controls (&$renderer)
+  function _draw_controls ($renderer)
   {
     $renderer->set_width ('');
 
@@ -279,13 +279,13 @@ class MULTIPLE_OBJECT_ACTION_FORM extends ID_BASED_FORM
    * @var array[FOLDER]
    * @access private
    */
-  var $folders;
+  public $folders;
   /**
    * List of selected entries.
    * Available only when not submitted.
    * @var array[ENTRY]
    * @access private
    */
-  var $entries;
+  public $entries;
 }
 ?>

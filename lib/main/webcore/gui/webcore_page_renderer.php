@@ -66,12 +66,12 @@ class WEBCORE_PAGE_RENDERER extends THEMED_PAGE_RENDERER
    */
   function start_display ()
   {
-    $page =& $this->page;
+    $page = $this->page;
 
     if ($page->printable)
     {
       $page->display_options->use_DHTML = FALSE;
-      $options =& $page->template_options; 
+      $options = $page->template_options; 
       $options->header_visible = FALSE;
       $options->show_statistics = FALSE;
       $options->show_links = FALSE;

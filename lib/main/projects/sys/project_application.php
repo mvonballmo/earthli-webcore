@@ -52,23 +52,23 @@ class PROJECT_APPLICATION_PAGE_NAMES extends APPLICATION_PAGE_NAMES
   /**
    * @var string
    */
-  var $change_home = 'view_change.php';
+  public $change_home = 'view_change.php';
   /**
    * @var string
    */
-  var $job_home = 'view_job.php';
+  public $job_home = 'view_job.php';
   /**
    * @var string
    */
-  var $release_home = 'view_release.php';
+  public $release_home = 'view_release.php';
   /**
    * @var string
    */
-  var $branch_home = 'view_branch.php';
+  public $branch_home = 'view_branch.php';
   /**
    * @var string
    */
-  var $component_home = 'view_component.php';
+  public $component_home = 'view_component.php';
 }
 
 /**
@@ -82,83 +82,83 @@ class PROJECT_APPLICATION_TABLE_NAMES extends APPLICATION_TABLE_NAMES
   /**
    * @var string
    */
-  var $folders = 'project_folders';
+  public $folders = 'project_folders';
   /**
    * @var string
    */
-  var $comments = 'project_comments';
+  public $comments = 'project_comments';
   /**
    * @var string
    */
-  var $entries = 'project_entries';
+  public $entries = 'project_entries';
   /**
    * @var string
    */
-  var $user_permissions = 'project_user_permissions';
+  public $user_permissions = 'project_user_permissions';
   /**
    * @var string
    */
-  var $folder_permissions = 'project_folder_permissions';
+  public $folder_permissions = 'project_folder_permissions';
   /**
    * @var string
    */
-  var $folder_options = 'project_options';
+  public $folder_options = 'project_options';
   /**
    * @var string
    */
-  var $jobs = 'project_jobs';
+  public $jobs = 'project_jobs';
   /**
    * @var string
    */
-  var $changes = 'project_changes';
+  public $changes = 'project_changes';
   /**
    * @var string
    */
-  var $releases = 'project_releases';
+  public $releases = 'project_releases';
   /**
    * @var string
    */
-  var $branches = 'project_branches';
+  public $branches = 'project_branches';
   /**
    * @var string
    */
-  var $components = 'project_components';
+  public $components = 'project_components';
   /**
    * @var string
    */
-  var $entries_to_branches = 'project_entries_to_branches';
+  public $entries_to_branches = 'project_entries_to_branches';
   /**
    * @var string
    */
-  var $changes_to_branches = 'project_changes_to_branches';
+  public $changes_to_branches = 'project_changes_to_branches';
   /**
    * @var string
    */
-  var $jobs_to_branches = 'project_jobs_to_branches';
+  public $jobs_to_branches = 'project_jobs_to_branches';
   /**
    * @var string
    */
-  var $branches_to_releases = 'project_branches_to_releases';
+  public $branches_to_releases = 'project_branches_to_releases';
   /**
    * @var string
    */
-  var $subscriptions = 'project_subscriptions';
+  public $subscriptions = 'project_subscriptions';
   /**
    * @var string
    */
-  var $subscribers = 'project_subscribers';
+  public $subscribers = 'project_subscribers';
   /**
    * @var string
    */
-  var $history_items = 'project_history_items';
+  public $history_items = 'project_history_items';
   /**
    * @var string
    */
-  var $searches = 'project_searches';
+  public $searches = 'project_searches';
   /**
    * @var string
    */
-  var $attachments = 'project_attachments';
+  public $attachments = 'project_attachments';
 }
 
 /**
@@ -174,20 +174,20 @@ class PROJECT_APPLICATION_XML_OPTIONS
    * This is only used when importing changes.
    * @var string
    */
-  var $log_file_name = '';
+  public $log_file_name = '';
   /**
    * Location of project settings export file.
    * The list of projects and change types can be exported to a file. This is for integrtion with systems
    * that then load that file to display project settings for users.
    * @var string
    */
-  var $export_file_name = '';
+  public $export_file_name = '';
   /**
    * Location of changes files.
    * Changes can be exported to XML file; projects will load these changes from here.
    * @var string
    */
-  var $import_file_name = '';
+  public $import_file_name = '';
 }
 
 /**
@@ -203,33 +203,33 @@ class PROJECT_APPLICATION extends APPLICATION
   /**
    * @var string
    */
-  var $title = 'earthli Projects';
+  public $title = 'earthli Projects';
   /**
    * @var string
    */
-  var $short_title = 'Projects';
+  public $short_title = 'Projects';
   /**
    * @var string
    */
-  var $icon = '{app_icons}app/projects';
+  public $icon = '{app_icons}app/projects';
   /**
    * @var string
    */
-  var $support_url = 'http://earthli.com/software/webcore/app_projects.php';
+  public $support_url = 'http://earthli.com/software/webcore/app_projects.php';
   /**
    * Unique ID for this framework.
    * @var string
    */
-  var $framework_id = 'com.earthli.projects';
+  public $framework_id = 'com.earthli.projects';
   /**
    * @var integer
    */
-  var $version = '3.0.0';
+  public $version = '3.0.0';
 
   /**
-   * @param PAGE &$page Page to which this application is attached.
+   * @param PAGE $page Page to which this application is attached.
    */
-  function PROJECT_APPLICATION (&$page)
+  function PROJECT_APPLICATION ($page)
   {
     APPLICATION::APPLICATION ($page);
 
@@ -297,7 +297,7 @@ class PROJECT_APPLICATION extends APPLICATION
    * @param integer $id
    * @return BRANCH
    */
-  function &branch_at_id ($id)
+  function branch_at_id ($id)
   {
     if (! isset ($this->_branch_cache))
     {
@@ -314,7 +314,7 @@ class PROJECT_APPLICATION extends APPLICATION
    * @param integer $id
    * @return RELEASE
    */
-  function &release_at_id ($id)
+  function release_at_id ($id)
   {
     if (! isset ($this->_release_cache))
     {
@@ -332,7 +332,7 @@ class PROJECT_APPLICATION extends APPLICATION
    * @param integer $id
    * @return COMPONENT
    */
-  function &component_at_id ($id)
+  function component_at_id ($id)
   {
     if (! isset ($this->_component_cache))
     {

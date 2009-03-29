@@ -56,13 +56,13 @@ class COOKIE extends CLIENT_STORAGE
    * If no path is set, it defaults to the path for the current page.
    * @var string
    */
-  var $path = '';
+  public $path = '';
   /**
    * Cookies are available from this domain.
    * If no domain is set, it defaults to the domain for the current page.
    * @var string
    */
-  var $domain = '';
+  public $domain = '';
 
   /**
    * Adjust the value of {@link $path}.
@@ -139,7 +139,7 @@ class COOKIE extends CLIENT_STORAGE
    * @var array[string,string]
    * @access private
    */
-  var $_values = array ();
+  protected $_values = array ();
   /**
    * Contains cookies when storing multiple values.
    * Use {@link start_multiple_value()} to start storing to a list of
@@ -148,13 +148,13 @@ class COOKIE extends CLIENT_STORAGE
    * @var array[string,string]
    * @access private
    */
-  var $_multiple_values;
+  protected $_multiple_values;
   /**
    * Multiple values will be stored to this key.
    * @var string
    * @access private
    */
-  var $_multiple_value_key;
+  protected $_multiple_value_key;
 }
 
 ?>

@@ -51,51 +51,51 @@ class PICTURE_GRID extends ALBUM_ENTRY_GRID
   /**
    * @var string
    */
-  var $box_style = 'chart';
+  public $box_style = 'chart';
   /**
    * @var string
    */
-  var $object_name = 'Picture';
+  public $object_name = 'Picture';
   /**
    * @var integer
    */
-  var $spacing = 8;
+  public $spacing = 8;
   /**
    * @var integer
    */
-  var $padding = 0;
+  public $padding = 0;
   /**
    * @var integer
    */
-  var $description_length = 100;
+  public $description_length = 100;
   /**
    * @var boolean
    */
-  var $show_separator = FALSE;
+  public $show_separator = FALSE;
   /**
    * @var boolean
    */
-  var $show_user = FALSE;
+  public $show_user = FALSE;
   /**
    * @var boolean
    */
-  var $show_folder = FALSE;
+  public $show_folder = FALSE;
   /**
    * @var boolean
    */
-  var $show_controls = TRUE;
+  public $show_controls = TRUE;
   /**
    * @var boolean
    */
-  var $show_date = TRUE;
+  public $show_date = TRUE;
 
   /**
-   * @param PICTURE &$obj
+   * @param PICTURE $obj
     * @access private
     */
-  function _draw_box (&$obj)
+  function _draw_box ($obj)
   {
-    $folder =& $obj->parent_folder ();
+    $folder = $obj->parent_folder ();
 ?>
   <div class="chart-title" style="text-align: center">
   <?php
@@ -128,7 +128,7 @@ class PICTURE_GRID extends ALBUM_ENTRY_GRID
     ?>
     <div style="text-align: justify">
     <?php
-      $munger =& $obj->html_formatter ();
+      $munger = $obj->html_formatter ();
       $obj->max_visible_output_chars = $this->description_length;
       echo $obj->description_as_html ($munger);
     ?>
@@ -150,28 +150,28 @@ class PICTURE_SUMMARY_GRID extends ENTRY_SUMMARY_GRID
   /**
    * @var string
    */
-  var $object_name = 'Picture';
+  public $object_name = 'Picture';
   /**
    * @var integer
    */
-  var $width = '75%';
+  public $width = '75%';
 
   /**
    * Return the size of the object.
-   * @param OBJECT_IN_FOLDER &$obj
+   * @param OBJECT_IN_FOLDER $obj
    * @return integer
    * @access private
    */
-  function _size_of (&$obj)
+  function _size_of ($obj)
   {
     return @filesize (url_to_file_name ($obj->full_file_name (TRUE)));
   }
 
   /**
-   * @param PICTURE &$obj
+   * @param PICTURE $obj
    * @access private
    */
-  function _echo_header (&$obj)
+  function _echo_header ($obj)
   {
     $box = $this->app->make_box_renderer ();
     $box->start_column_set ();

@@ -49,11 +49,11 @@ class ALBUM_APPLICATION_PAGE_NAMES extends APPLICATION_PAGE_NAMES
   /**
    * @var string
    */
-  var $picture_home = 'view_picture.php';
+  public $picture_home = 'view_picture.php';
   /**
    * @var string
    */
-  var $journal_home = 'view_journal.php';
+  public $journal_home = 'view_journal.php';
 }
 
 /**
@@ -65,51 +65,51 @@ class ALBUM_APPLICATION_TABLE_NAMES extends APPLICATION_TABLE_NAMES
   /**
    * @var string
    */
-  var $folders = 'album_folders';
+  public $folders = 'album_folders';
   /**
    * @var string
    */
-  var $comments = 'album_comments';
+  public $comments = 'album_comments';
   /**
    * @var string
    */
-  var $entries = 'album_entries';
+  public $entries = 'album_entries';
   /**
    * @var string
    */
-  var $journals = 'album_journal';
+  public $journals = 'album_journal';
   /**
    * @var string
    */
-  var $pictures = 'album_pictures';
+  public $pictures = 'album_pictures';
   /**
    * @var string
    */
-  var $user_permissions = 'album_user_permissions';
+  public $user_permissions = 'album_user_permissions';
   /**
    * @var string
    */
-  var $folder_permissions = 'album_folder_permissions';
+  public $folder_permissions = 'album_folder_permissions';
   /**
    * @var string
    */
-  var $subscriptions = 'album_subscriptions';
+  public $subscriptions = 'album_subscriptions';
   /**
    * @var string
    */
-  var $subscribers = 'album_subscribers';
+  public $subscribers = 'album_subscribers';
   /**
    * @var string
    */
-  var $history_items = 'album_history_items';
+  public $history_items = 'album_history_items';
   /**
    * @var string
    */
-  var $searches = 'album_searches';
+  public $searches = 'album_searches';
   /**
    * @var string
    */
-  var $attachments = 'album_attachments';
+  public $attachments = 'album_attachments';
 }
 
 /**
@@ -121,11 +121,11 @@ class ALBUM_APPLICATION_PICTURE_OPTIONS
   /**
    * @var integer
    */
-  var $default_max_picture_height = 480;
+  public $default_max_picture_height = 480;
   /**
    * @var integer
    */
-  var $default_max_picture_width = 640;
+  public $default_max_picture_width = 640;
 }
 
 /**
@@ -141,33 +141,33 @@ class ALBUM_APPLICATION extends APPLICATION
   /**
    * @var string
    */
-  var $title = 'earthli Albums';
+  public $title = 'earthli Albums';
   /**
    * @var string
    */
-  var $short_title = 'Albums';
+  public $short_title = 'Albums';
   /**
    * @var string
    */
-  var $icon = '{app_icons}app/albums';
+  public $icon = '{app_icons}app/albums';
   /**
    * @var string
    */
-  var $support_url = 'http://earthli.com/software/webcore/app_albums.php';
+  public $support_url = 'http://earthli.com/software/webcore/app_albums.php';
   /**
    * Unique ID for this framework.
    * @var string
    */
-  var $framework_id = 'com.earthli.albums';
+  public $framework_id = 'com.earthli.albums';
   /**
    * @var integer
    */
-  var $version = '3.0.0';
+  public $version = '3.0.0';
 
   /**
-   * @param PAGE &$page Page to which this application is attached.
+   * @param PAGE $page Page to which this application is attached.
    */
-  function ALBUM_APPLICATION (&$page)
+  function ALBUM_APPLICATION ($page)
   {
     APPLICATION::APPLICATION ($page);
 

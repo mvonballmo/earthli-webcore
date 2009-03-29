@@ -61,19 +61,19 @@ class OBJECT_IN_FOLDER extends CONTENT_OBJECT
   /**
    * @var integer
    */
-  var $state = Visible;
+  public $state = Visible;
   /**
    * ID of the user with owner privileges on this object.
    * This is usually the same as the {@link $creator_id}.
    * @var integer
    * @see owner()
    */
-  var $owner_id;
+  public $owner_id;
 
   /**
    * @return USER
    */
-  function &owner ()
+  function owner ()
   {
     return $this->app->user_at_id ($this->owner_id);
   }
@@ -190,7 +190,7 @@ class OBJECT_IN_FOLDER extends CONTENT_OBJECT
    */
   function resolve_url ($url, $root_override = null)
   {
-    $fldr =& $this->parent_folder ();
+    $fldr = $this->parent_folder ();
     if (isset ($fldr))
     {
       return $fldr->resolve_url ($url, $root_override);
@@ -207,11 +207,11 @@ class OBJECT_IN_FOLDER extends CONTENT_OBJECT
    * from database.
    * @return FOLDER
    */
-  function &parent_folder ()
+  function parent_folder ()
   {
     if (! isset ($this->_parent_folder))
     {
-      $this->_parent_folder =& $this->_load_parent_folder ();
+      $this->_parent_folder = $this->_load_parent_folder ();
     }
     return $this->_parent_folder;
   }
@@ -222,7 +222,7 @@ class OBJECT_IN_FOLDER extends CONTENT_OBJECT
    * is_allowed()} to determine access permissions.
    * @return FOLDER
    */
-  function &security_context ()
+  function security_context ()
   {
     return $this->parent_folder ();
   }
@@ -248,10 +248,10 @@ class OBJECT_IN_FOLDER extends CONTENT_OBJECT
    * Logged-in user must have the proper security clearance to perform the
    * action. If the folder is the same as the current {@link parent_folder()},
    * the function does nothing.
-   * @param FOLDER &$fldr
-   * @param FOLDER_OPERATION_OPTIONS &$options
+   * @param FOLDER $fldr
+   * @param FOLDER_OPERATION_OPTIONS $options
    */
-  function move_to (&$fldr, &$options)
+  function move_to ($fldr, $options)
   {
     $parent = $this->parent_folder ();
     if (! $parent->equals ($fldr))
@@ -282,10 +282,10 @@ class OBJECT_IN_FOLDER extends CONTENT_OBJECT
    * Logged-in user must have the proper security clearance to perform the
    * action. If the folder is the same as the current {@link parent_folder()},
    * the function makes an exact copy (except for {@link $id}).
-   * @param FOLDER &$fldr
-   * @param FOLDER_OPERATION_OPTIONS &$options
+   * @param FOLDER $fldr
+   * @param FOLDER_OPERATION_OPTIONS $options
    */
-  function copy_to (&$fldr, &$options)
+  function copy_to ($fldr, $options)
   {
     $privilege_set = $this->_privilege_set ();
     if ($this->login->is_allowed ($privilege_set, Privilege_create, $fldr))
@@ -369,7 +369,7 @@ class OBJECT_IN_FOLDER extends CONTENT_OBJECT
       {
         if ($update_now)
         {
-          $history_item =& $this->new_history_item ();
+          $history_item = $this->new_history_item ();
           $history_item->kind = $this->history_item_kind_for_transition_to ($state);
           $this->state = $state;
           $this->store_if_different ($history_item);
@@ -431,9 +431,9 @@ class OBJECT_IN_FOLDER extends CONTENT_OBJECT
   }
 
   /**
-   * @param DATABASE &$db Database from which to load values.
+   * @param DATABASE $db Database from which to load values.
    */
-  function load (&$db)
+  function load ($db)
   {
     parent::load ($db);
     $this->state = $db->f ('state');
@@ -442,9 +442,9 @@ class OBJECT_IN_FOLDER extends CONTENT_OBJECT
   }
 
   /**
-   * @param SQL_STORAGE &$storage Store values to this object.
+   * @param SQL_STORAGE $storage Store values to this object.
    */
-  function store_to (&$storage)
+  function store_to ($storage)
   {
     parent::store_to ($storage);
     $tname = $this->_table_name ();
@@ -519,9 +519,9 @@ class OBJECT_IN_FOLDER extends CONTENT_OBJECT
    * move an object to another folder, use {@link move_to()} instead.
    * @access private
    */
-  function set_parent_folder (&$fldr)
+  function set_parent_folder ($fldr)
   {
-    $this->_parent_folder =& $fldr;
+    $this->_parent_folder = $fldr;
   }
 
   /**
@@ -529,7 +529,7 @@ class OBJECT_IN_FOLDER extends CONTENT_OBJECT
    * @return FOLDER
    * @access private
    */
-  function &_load_parent_folder ()
+  function _load_parent_folder ()
   {
     $this->raise ("Parent folder for [$this->title] is not set.", '_load_parent_folder', 'OBJECT_IN_FOLDER');
   }
@@ -565,10 +565,10 @@ class OBJECT_IN_FOLDER extends CONTENT_OBJECT
   /**
    * Move the object to the specified folder.
    * Called from {@link move_to()} after checking security privileges.
-   * @param FOLDER &$fldr
-   * @param FOLDER_OPERATION_OPTIONS &$options
+   * @param FOLDER $fldr
+   * @param FOLDER_OPERATION_OPTIONS $options
    */
-  function _move_to (&$fldr, &$options)
+  function _move_to ($fldr, $options)
   {
     if ($options->update_now)
     {
@@ -578,7 +578,7 @@ class OBJECT_IN_FOLDER extends CONTENT_OBJECT
     }
     else
     {
-      $this->_parent_folder =& $fldr;
+      $this->_parent_folder = $fldr;
     }
   }
 
@@ -588,21 +588,21 @@ class OBJECT_IN_FOLDER extends CONTENT_OBJECT
    * object becomes the copied object -- if {@link
    * FOLDER_OPERATION_OPTIONS::$update_now} is <code>False</code>, the
    * object is simply cloned, but not stored.
-   * @param FOLDER &$fldr
-   * @param FOLDER_OPERATION_OPTIONS &$options
+   * @param FOLDER $fldr
+   * @param FOLDER_OPERATION_OPTIONS $options
    */
-  function _copy_to (&$fldr, &$options)
+  function _copy_to ($fldr, $options)
   {
     $this->initialize_as_new ();
     if ($options->update_now)
     {
-      $history_item =& $this->new_history_item ();
+      $history_item = $this->new_history_item ();
       $this->set_parent_folder ($fldr);
       $this->store_if_different ($history_item);
     }
     else
     {
-      $this->_parent_folder =& $fldr;
+      $this->_parent_folder = $fldr;
     }
   }
 
@@ -640,7 +640,7 @@ class OBJECT_IN_FOLDER extends CONTENT_OBJECT
    * @var FOLDER
    * @access private
    */
-  var $_parent_folder;
+  protected $_parent_folder;
   /**
    * Retains the state in the database.
    * If this state differs the current state when the object is stored, a call to {@link _state_changed()}
@@ -648,7 +648,7 @@ class OBJECT_IN_FOLDER extends CONTENT_OBJECT
    * @var integer
    * @access private
    */
-  var $_state_when_loaded;
+  protected $_state_when_loaded;
 }
 
 /**
@@ -669,28 +669,28 @@ class FOLDER_OPERATION_OPTIONS
    * is true.
    * @var boolean
    */
-  var $maintain_permissions = FALSE;
+  public $maintain_permissions = FALSE;
   /**
    * Store newly created objects as {@link Draft}s.
    * Objects that do not descend from {@link DRAFTABLE_ENTRY} ignore this
    * option.
    * @var boolean
    */
-  var $copy_as_draft = FALSE;
+  public $copy_as_draft = FALSE;
   /**
    * Object should be stored immediately.
    * If this is false, the change to the folder location will not be stored to the database
    * until {@link store()} or {@link store_if_different()} is called.
    * @var boolean
    */
-  var $update_now = TRUE;
+  public $update_now = TRUE;
   /**
    * Raise an error if security settings prevent the action.
    * If <code>False</code>, logs an error (failing silently) and continues the
    * operation on other objects, if any.
    * @var boolean
    */
-  var $raise_on_security_failure = FALSE;
+  public $raise_on_security_failure = FALSE;
 }
 
 ?>

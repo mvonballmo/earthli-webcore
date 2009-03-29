@@ -67,10 +67,10 @@ class TREE_NODE
    * Add the given 'node' as a child.
    * @param TREE_NODE $node
    */
-  function append (&$node)
+  function append ($node)
   {
-    $node->_parent =& $this;
-    $this->_nodes [] =& $node;
+    $node->_parent = $this;
+    $this->_nodes [] = $node;
   }
 
   /**
@@ -97,37 +97,37 @@ class TREE_NODE
    * @var string
    * @access private
    */
-  var $_title;
+  protected $_title;
   /**
    * URL for the link.
    * @var string
    * @access private
    */
-  var $_link;
+  protected $_link;
   /**
    * Direct links to this target.
    * @var string
    * @access private
    */
-  var $_target;
+  protected $_target;
   /**
    * Used by the tree to toggle DHTML sections.
    * @var integer
    * @access private
    */
-  var $_id;
+  protected $_id;
   /**
    * Optional parent node.
    * @var TREE_NODE
    * @access private
    */
-  var $_parent;
+  protected $_parent;
   /**
    * Is this node closed initially?
    * @var boolean
    * @access private
    */
-  var $_closed;
+  protected $_closed;
 }
 
 require_once ('webcore/gui/tree.php');
@@ -143,54 +143,54 @@ class GENERIC_TREE_NODE_INFO extends TREE_NODE_INFO
 {
   /**
    * Return list of sub-nodes for 'node'.
-   * @param TREE_NODE &$node
+   * @param TREE_NODE $node
    * @access private
    */
-  function &sub_nodes (&$node)
+  function sub_nodes ($node)
   {
     return $node->_nodes;
   }
 
   /**
    * Draw title for 'node'.
-   * @param TREE_NODE &$node
+   * @param TREE_NODE $node
    * @return string
    * @access private
    */
-  function title_for (&$node)
+  function title_for ($node)
   {
     return $node->text ();
   }
 
   /**
    * Is this node closed in this tree?
-   * @param TREE_NODE &$node
+   * @param TREE_NODE $node
    * @return bool
    * @access private
    */
-  function closed (&$node)
+  function closed ($node)
   {
     return $node->_closed;
   }
 
   /**
    * Return the node's parent node.
-   * @param TREE_NODE &$node
+   * @param TREE_NODE $node
    * @return TREE_NODE
    * @access private
    */
-  function parent (&$node)
+  function parent ($node)
   {
     return $node->_parent;
   }
 
   /**
    * Return the node's id.
-   * @param TREE_NODE &$node
+   * @param TREE_NODE $node
    * @return integer
    * @access private
    */
-  function id (&$node)
+  function id ($node)
   {
     return $node->_id;
   }

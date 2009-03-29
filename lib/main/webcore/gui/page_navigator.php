@@ -59,40 +59,40 @@ class PAGE_NAVIGATOR extends WEBCORE_OBJECT
    * @see PAGE_NAVIGATOR::set_ranges()
    * @var integer
    */
-  var $page_number = 0;
+  public $page_number = 0;
   /**
    * Retrieve the page number from this request variable.
    * Only used if {@link PAGE_NAVIGATOR::$page_number} is 0.
    * @var string
    */
-  var $page_number_var_name = 'page_number';
+  public $page_number_var_name = 'page_number';
   /**
    * Page to which the navigator should link.
    * Specify a url that ends in 'var=', where 'var' is the name of the query string variable used to hold the
    * page number in the request.
    * @var string
    */
-  var $page_link;
+  public $page_link;
   /**
    * Optional page anchor for the page_link.
    * @var string
    */
-  var $page_anchor = 'pages';
+  public $page_anchor = 'pages';
   /**
    * Inserted between page numbers.
    * @var string
    */
-  var $separator = '&nbsp;&bull;&nbsp';
+  public $separator = '&nbsp;&bull;&nbsp';
   /**
    * Inserted after first/previous links and before page numbers.
    * @var string
    */
-  var $begin_block = '&nbsp;';
+  public $begin_block = '&nbsp;';
   /**
    * Inserted after page numbers and before next/last links.
    * @var string
    */
-  var $end_block = '&nbsp;';
+  public $end_block = '&nbsp;';
   /**
    * Number of page numbers to display at once.
    * Pages displayed will be centered on the current page if this number is exceeded. For example, if
@@ -100,33 +100,33 @@ class PAGE_NAVIGATOR extends WEBCORE_OBJECT
    * page numbers displayed are 27-33. Odd number work best here.
    * @var integer
    */
-  var $pages_to_show = 7;
+  public $pages_to_show = 7;
   /**
    * Offset the actual page number by this amount when displayed.
    * Useful when rendering things other than pages. For example, the calendar uses this offset to
    * display year numbers instead of page numbers.
    * @var integer
    */
-  var $page_offset = 0;
+  public $page_offset = 0;
   /**
    * Name used when displaying total pages.
    * If there are more pages than 'pages_to_show', the navigator indicates the total number of pages
    * at the end, like this (# Pages)
    * @var string
    */
-  var $entry_type = 'Pages';
+  public $entry_type = 'Pages';
   /**
    * Show the total number of pages?
    * @var boolean
    */
-  var $show_total = TRUE;
+  public $show_total = TRUE;
 
   /**
-   * @param CONTEXT &$context
+   * @param CONTEXT $context
     * @param integer $num_total_objects Total number of objects that need to be displayed.
     * @param integer $num_objects_per_page Number of objects to show per page.
     */
-  function PAGE_NAVIGATOR (&$context, $num_total_objects = 0, $num_objects_per_page = 0)
+  function PAGE_NAVIGATOR ($context, $num_total_objects = 0, $num_objects_per_page = 0)
   {
     WEBCORE_OBJECT::WEBCORE_OBJECT ($context);
     $this->separator = $context->display_options->page_separator;
@@ -365,32 +365,32 @@ class PAGE_NAVIGATOR extends WEBCORE_OBJECT
    * @see generate()
    * @access private
    */
-  var $_output;
+  protected $_output;
   /**
    * How many objects per page?
    * @var integer
    * @access private
    */
-  var $_page_size;
+  protected $_page_size;
   /**
    * How many pages are needed to display all objects?
    * @see set_ranges()
    * @var integer
    * @access private
    */
-  var $_count;
+  protected $_count;
   /**
    * Number of objects to navigate.
    * @see set_ranges()
    * @var integer
    * @access private
    */
-  var $_item_count;
+  protected $_item_count;
   /**
    * Used internally to generate links.
    * @var URL
    * @access private
    */
-  var $_url;
+  protected $_url;
 }
 ?>

@@ -52,23 +52,23 @@ class RECIPE_TYPE_INFO extends DRAFTABLE_ENTRY_TYPE_INFO
   /**
    * @var string
    */
-  var $id = 'recipe';
+  public $id = 'recipe';
   /**
    * @var string
    */
-  var $singular_title = 'Recipe';
+  public $singular_title = 'Recipe';
   /**
    * @var string
    */
-  var $plural_title = 'Recipes';
+  public $plural_title = 'Recipes';
   /**
    * @var string
    */
-  var $icon = '{app_icons}buttons/new_recipe';
+  public $icon = '{app_icons}buttons/new_recipe';
   /**
    * @var string
    */
-  var $edit_page = 'edit_recipe.php';
+  public $edit_page = 'edit_recipe.php';
 }
 
 /**
@@ -84,15 +84,15 @@ class RECIPE_BOOK_TYPE_INFO extends FOLDER_TYPE_INFO
   /**
    * @var string
    */
-  var $singular_title = 'Recipe book';
+  public $singular_title = 'Recipe book';
   /**
    * @var string
    */
-  var $plural_title = 'Recipe books';
+  public $plural_title = 'Recipe books';
   /**
    * @var string
    */
-  var $edit_page = 'edit_recipe_book.php';
+  public $edit_page = 'edit_recipe_book.php';
 }
 
 ?>

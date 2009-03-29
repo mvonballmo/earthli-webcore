@@ -26,7 +26,7 @@ http://www.earthli.com/software/webcore/projects
 
 ****************************************************************************/
 
-  function process_folders (&$folders, $depth)
+  function process_folders ($folders, $depth)
   {
     $depth++;
 
@@ -43,7 +43,7 @@ http://www.earthli.com/software/webcore/projects
 
         // export the folder
 
-        $parent =& $folder->parent_folder ();
+        $parent = $folder->parent_folder ();
 
         if ($parent)
         {
@@ -82,7 +82,7 @@ http://www.earthli.com/software/webcore/projects
   fwrite ($fhandle, "<OpusVCS>\n");
 
   $folder_query = $App->login->folder_query ();
-  $folders =& $folder_query->tree ();
+  $folders = $folder_query->tree ();
 
   process_folders ($folders, 0);
 

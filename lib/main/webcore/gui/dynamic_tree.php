@@ -49,9 +49,9 @@ require_once ('webcore/gui/tree.php');
 class DYNAMIC_TREE extends HTML_TREE
 {
   /**
-   * @param CONTEXT &$context
+   * @param CONTEXT $context
    */
-  function DYNAMIC_TREE (&$context)
+  function DYNAMIC_TREE ($context)
   {
     TREE::TREE ($context);
 
@@ -64,7 +64,7 @@ class DYNAMIC_TREE extends HTML_TREE
    * Draw the specified icon for this node.
    * Overridden to allow the dynamic layer to draw the toggle.
    * @param integer $kind Any of the tree constants are valid here.
-   * @param object &$node
+   * @param object $node
    * @access private
    */
   function draw_icon ($kind, $node)
@@ -86,10 +86,10 @@ class DYNAMIC_TREE extends HTML_TREE
   /**
    * Called before sub-nodes are rendered.
    * Overridden to open the dynamic layer before drawing the child nodes.
-   * @param object &$node
+   * @param object $node
    * @access private
    */
-  function pre_draw_children (&$node)
+  function pre_draw_children ($node)
   {
     echo "</div>\n<div class=\"tree-node\">";
     $this->_layer->name = 'obj_' . $this->node_info->id ($node);
@@ -100,10 +100,10 @@ class DYNAMIC_TREE extends HTML_TREE
   /**
    * Called after sub-nodes are rendered.
    * Overridden to close the dynamic layer after drawing the child nodes.
-   * @param object &$node
+   * @param object $node
    * @access private
    */
-  function post_draw_children (&$node)
+  function post_draw_children ($node)
   {
     $this->_layer->finish ();
   }

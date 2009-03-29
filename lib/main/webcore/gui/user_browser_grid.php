@@ -52,32 +52,32 @@ class USER_BROWSER_GRID extends STANDARD_GRID
   /**
    * @var string
    */
-  var $object_name = 'User';
+  public $object_name = 'User';
   /**
    * @var boolean
    */
-  var $show_separator = FALSE;
+  public $show_separator = FALSE;
   /**
    * @var boolean
    */
-  var $even_columns = FALSE;
+  public $even_columns = FALSE;
   /**
    * @var boolean
    */
-  var $centered = TRUE;
+  public $centered = TRUE;
   /**
    * @var integer
    */
-  var $padding = 1;
+  public $padding = 1;
   /**
    * @var string
    */
-  var $width = '';
+  public $width = '';
 
   /**
-   * @param CONTEXT &$context
+   * @param CONTEXT $context
    */
-  function USER_BROWSER_GRID (&$context)
+  function USER_BROWSER_GRID ($context)
   {
     GRID::GRID ($context);
     $this->_controls_renderer = $this->app->make_controls_renderer ();
@@ -97,10 +97,10 @@ class USER_BROWSER_GRID extends STANDARD_GRID
   }
 
   /**
-   * @param USER &$obj
+   * @param USER $obj
     * @access private
     */
-  function _draw_box (&$obj)
+  function _draw_box ($obj)
   {
     echo $obj->title_as_link ();
     echo "</td>\n<td style=\"padding-left: 1em; text-align: center\">";
@@ -111,11 +111,11 @@ class USER_BROWSER_GRID extends STANDARD_GRID
    * @var FOLDER
    * @access private
    */
-  var $_folder;
+  protected $_folder;
   /**
    * @var CONTROLS_RENDERER
    * @access private
    */
-  var $_controls_renderer;
+  protected $_controls_renderer;
 }
 ?>

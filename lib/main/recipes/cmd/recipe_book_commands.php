@@ -51,16 +51,16 @@ require_once ('webcore/cmd/folder_commands.php');
 class RECIPE_BOOK_COMMANDS extends FOLDER_COMMANDS
 {
   /**
-   * @param RECIPE_BOOK &$folder Configure commands for this object.
+   * @param RECIPE_BOOK $folder Configure commands for this object.
    */
-  function RECIPE_BOOK_COMMANDS (&$folder)
+  function RECIPE_BOOK_COMMANDS ($folder)
   {
     FOLDER_COMMANDS::FOLDER_COMMANDS ($folder);
 
-    $cmd =& $this->command_at ('new');
+    $cmd = $this->command_at ('new');
     $cmd->title = 'New recipe book';
 
-    $cmd =& $this->command_at ('new_entry');
+    $cmd = $this->command_at ('new_entry');
     $cmd->title = 'New recipe';
     $cmd->icon = '{app_icons}buttons/new_recipe';
     $cmd->link = "create_recipe.php?id=$folder->id";

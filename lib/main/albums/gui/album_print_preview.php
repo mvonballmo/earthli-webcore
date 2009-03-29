@@ -49,10 +49,10 @@ require_once ('webcore/gui/print_preview.php');
 class PICTURE_PRINT_RENDERER extends ENTRY_PRINT_RENDERER
 {
   /**
-   * @param PICTURE &$entry
+   * @param PICTURE $entry
     * @private
     */
-  function _draw_title (&$entry)
+  function _draw_title ($entry)
   {
     // do nothing, title is drawn by renderer
   }
@@ -73,13 +73,13 @@ class ALBUM_PRINT_RENDERER_OPTIONS extends PRINT_RENDERER_OPTIONS
    * Pictures are displayed as thumbnails under the journal entry.
    * @var boolean
    */
-  var $show_pictures = TRUE;
+  public $show_pictures = TRUE;
   /**
    * Resize pictures using album options?
    * If this is true, pictures are resized to the same size as they are on the picture's home page.
    * @var boolean
    */
-  var $resize_pictures = TRUE;
+  public $resize_pictures = TRUE;
 
   /**
    * Load values from the HTTP request.

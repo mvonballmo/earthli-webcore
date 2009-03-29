@@ -61,50 +61,50 @@ class MAIL_MESSAGE extends WEBCORE_OBJECT
   /**
    * @var string
    */
-  var $send_from_address;
+  public $send_from_address;
   /**
    * @var string
    */
-  var $return_path_address;
+  public $return_path_address;
   /**
    * @var string
    */
-  var $send_from_name;
+  public $send_from_name;
   /**
    * @var boolean
    */
-  var $send_as_html = TRUE;
+  public $send_as_html = TRUE;
 
   /**
    * @var array[string]
    */
-  var $send_to = array ();
+  public $send_to = array ();
   /**
    * @var array[string]
    */
-  var $cc = array ();
+  public $cc = array ();
   /**
    * @var array[string]
    */
-  var $bcc = array ();
+  public $bcc = array ();
   /**
    * @var array[string]
    */
-  var $custom_headers = array ();
+  public $custom_headers = array ();
 
   /**
    * @var integer
    */
-  var $priority = Mail_message_priority_normal;
+  public $priority = Mail_message_priority_normal;
 
   /**
    * @var string
    */
-  var $body;
+  public $body;
   /**
    * @var string
    */
-  var $subject;
+  public $subject;
 
   /**
    * @param string $name
@@ -233,9 +233,9 @@ class MAIL_MESSAGE extends WEBCORE_OBJECT
 
   /**
    * Send the message using the given provider.
-   * @param PROVIDER &$provider
+   * @param PROVIDER $provider
    */
-  function send (&$provider)
+  function send ($provider)
   {
     $provider->send ($this);
   }

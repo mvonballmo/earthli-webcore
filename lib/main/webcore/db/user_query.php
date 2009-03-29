@@ -53,13 +53,13 @@ class USER_QUERY extends QUERY
    * SQL alias for the "main" table.
    * @var string
    */
-  var $alias = 'usr';
+  public $alias = 'usr';
   /**
    * Are permissions loaded with the user?
    * @see include_permissions()
    * @var boolean
    */
-  var $permissions_included = FALSE;
+  public $permissions_included = FALSE;
 
   /**
    * Apply default restrictions and tables.
@@ -108,7 +108,7 @@ class USER_QUERY extends QUERY
    * @param string $name
     * @return USER
     */
-  function &object_at_name ($name)
+  function object_at_name ($name)
   {
     return $this->object_with_field ('usr.title', $name);
   }
@@ -117,7 +117,7 @@ class USER_QUERY extends QUERY
    * @param string $name
     * @return USER
     */
-  function &object_at_email ($email)
+  function object_at_email ($email)
   {
     return $this->object_with_field ('usr.email', $email);
   }
@@ -184,12 +184,12 @@ class USER_QUERY extends QUERY
    * @var string
     * @access private
     */
-  var $_kind;
+  protected $_kind;
   /**
    * Name of the default permission set to use.
    * @var string
    * @access private
    */
-  var $_privilege_set = Privilege_set_user;
+  protected $_privilege_set = Privilege_set_user;
 }
 ?>

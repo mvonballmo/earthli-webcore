@@ -52,15 +52,15 @@ class ATTACHMENT_QUERY extends OBJECT_IN_SINGLE_FOLDER_QUERY
    * SQL alias for the "main" table.
    * @var string
    */
-  var $alias = 'att';
+  public $alias = 'att';
 
   /**
-   * @param ATTACHMENT_HOST &$host
+   * @param ATTACHMENT_HOST $host
    */
-  function ATTACHMENT_QUERY (&$host)
+  function ATTACHMENT_QUERY ($host)
   {
-    $this->_host =& $host;
-    $folder =& $host->parent_folder ();
+    $this->_host = $host;
+    $folder = $host->parent_folder ();
     OBJECT_IN_SINGLE_FOLDER_QUERY::OBJECT_IN_SINGLE_FOLDER_QUERY ($folder);
   }
 
@@ -102,12 +102,12 @@ class ATTACHMENT_QUERY extends OBJECT_IN_SINGLE_FOLDER_QUERY
    * @var HOST
    * @access private
    */
-  var $_host;
+  protected $_host;
   /**
    * Name of the default permission set to use.
    * @var string
    * @access private
    */
-  var $_privilege_set = Privilege_set_attachment;
+  protected $_privilege_set = Privilege_set_attachment;
 }
 ?>

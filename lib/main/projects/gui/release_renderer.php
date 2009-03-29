@@ -50,7 +50,7 @@ class RELEASE_RENDERER extends CONTENT_OBJECT_RENDERER
 {
   /**
    * Outputs the object as HTML.
-   * @param RELEASE &$obj
+   * @param RELEASE $obj
    * @access private
    */
   function _display_as_html(& $obj)
@@ -83,7 +83,7 @@ class RELEASE_RENDERER extends CONTENT_OBJECT_RENDERER
 
   /**
    * Shows testing/ship dates for a release in HTML.
-   * @param RELEASE &$obj
+   * @param RELEASE $obj
    */
   function _echo_details_as_html(& $obj) 
   {
@@ -96,7 +96,7 @@ class RELEASE_RENDERER extends CONTENT_OBJECT_RENDERER
 
   /**
    * Outputs the object as plain text.
-   * @param object &$obj
+   * @param object $obj
    * @access private
    */
   function _display_as_plain_text(& $obj) 

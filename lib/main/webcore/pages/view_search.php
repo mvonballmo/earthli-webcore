@@ -27,7 +27,7 @@ http://www.earthli.com/software/webcore
 ****************************************************************************/
 
   $search_query = $App->login->search_query ();
-  $search =& $search_query->object_at_id (read_var ('id'));
+  $search = $search_query->object_at_id (read_var ('id'));
 
   if (isset ($search))
   {
@@ -65,7 +65,7 @@ http://www.earthli.com/software/webcore
   <div class="box-body">
   <?php
 
-    $grid =& $search->grid ();
+    $grid = $search->grid ();
     $grid->show_folder = TRUE;
     $grid->set_ranges (10, 1);
     $grid->set_query ($search_query);

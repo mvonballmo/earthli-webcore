@@ -1,6 +1,5 @@
 <?php
 
-
 /**
  * @copyright Copyright (c) 2002-2007 Marco Von Ballmoos
  * @author Marco Von Ballmoos
@@ -156,22 +155,22 @@ class MUNGER_TOKEN
    * @see Munger_token_text, Munger_token_start_tag, Munger_token_end_tag
    * @var integer
    */
-  var $type = Munger_token_text;
+  public $type = Munger_token_text;
   /**
    * How much data is in this token?
    * Retrieve the contents of this token with {@link MUNGER_TOKEN::data()}. This allows
    * a token to be arbitrarily large without taking memory for its data until requested.
    */
-  var $size = 0;
+  public $size = 0;
 
   /**
    * @param MUNGER_TOKENIZER $owner
    * @param string $data
    */
-  function MUNGER_TOKEN(&$owner, &$data)
+  function MUNGER_TOKEN($owner, $data)
   {
-    $this->_owner = &$owner;
-    $this->_input = &$data;
+    $this->_owner = $owner;
+    $this->_input = $data;
   }
 
   /**
@@ -331,6 +330,11 @@ class MUNGER_TOKEN
   {
     return $this->type == Munger_token_end_tag;
   }
+  
+  function set_input($input)
+  {
+    $this->_input = $input;
+  }
 
   /**
    * Update the token with new properties.
@@ -379,7 +383,7 @@ class MUNGER_TOKEN
    * @var MUNGER_TOKENIZER
    * @access private
    */
-  var $_owner;
+  protected $_owner;
   /**
    * Source string from which the token pulls its content.
    * This is a reference to the input string in the {@link MUNGER_TOKENIZER}.
@@ -388,7 +392,7 @@ class MUNGER_TOKEN
    * @var string
    * @access private
    */
-  var $_input;
+  protected $_input;
   /**
    * Locally cached reference to the data.
    * If the data is generated internally (to retrieve the name or attributes), it is cached
@@ -396,7 +400,7 @@ class MUNGER_TOKEN
    * @var string
    * @access private
    */
-  var $_data;
+  protected $_data;
   /**
    * Locally cached reference to the tag data.
    * If the data is generated internally (to retrieve the name or attributes), it is cached
@@ -404,20 +408,20 @@ class MUNGER_TOKEN
    * @var string
    * @access private
    */
-  var $_tag_data;
+  protected $_tag_data;
   /**
    * Locally cached reference to the name.
    * This avoids searching the string multiple times for a name.
    * @var string
    * @access private
    */
-  var $_name;
+  protected $_name;
   /**
    * Index of first character for token in {@link MUNGER_TOKEN::$_input}.
    * @var integer
    * @access private
    */
-  var $_first = 0;
+  protected $_first = 0;
 }
 
 /**
@@ -440,17 +444,17 @@ class MUNGER_TOKENIZER extends RAISABLE
    * Character used to open a tag.
    * @var character
    */
-  var $open_tag_char = '<';
+  public $open_tag_char = '<';
   /**
    * Character used to close a tag.
    * @var character
    */
-  var $close_tag_char = '>';
+  public $close_tag_char = '>';
   /**
    * Character used to indicate a closing tag.
    * @var character
    */
-  var $end_tag_char = '/';
+  public $end_tag_char = '/';
 
   function MUNGER_TOKENIZER()
   {
@@ -464,6 +468,7 @@ class MUNGER_TOKENIZER extends RAISABLE
   function set_input($input)
   {
     $this->_input = $input;
+    $this->_current_token->set_input($input);
     $this->_pos = 0;
     $this->_start_of_text_block = 0;
     $this->_size = strlen($input);
@@ -482,7 +487,7 @@ class MUNGER_TOKENIZER extends RAISABLE
    * Contents of last token read with {@link MUNGER_TOKENIZER::read_next_token()}.
    * @return MUNGER_TOKEN
    */
-  function &current_token()
+  function current_token()
   {
     return $this->_current_token;
   }
@@ -646,31 +651,31 @@ class MUNGER_TOKENIZER extends RAISABLE
    * @var string
    * @access private
    */
-  var $_input;
+  protected $_input;
   /**
    * Position within the {@link MUNGER_TOKENIZER::$_input}.
    * @var integer
    * @access private
    */
-  var $_pos = 0;
+  protected $_pos = 0;
   /**
    * Length of {@link MUNGER_TOKENIZER::$_input}.
    * @var integer
    * @access private
    */
-  var $_size = 0;
+  protected $_size = 0;
   /**
    * Position of first character of current text-block.
    * @var integer
    * @access private
    */
-  var $_start_of_text_block = 0;
+  protected $_start_of_text_block = 0;
   /**
    * Reference to the current token.
    * @var MUNGER_TOKEN
    * @access private
    */
-  var $_current_token;
+  protected $_current_token;
 }
 
 /**
@@ -723,16 +728,16 @@ class MUNGER_CONVERTER extends MUNGER_TOOL
   /**
    * @var boolean
    */
-  var $enabled = TRUE;
+  public $enabled = TRUE;
 
   /**
    * Convert the text to an output format.
    * Calls {@link _convert()} if {@link $enabled} is <c>True</c>.
-   * @param MUNGER &$munger The conversion context.
+   * @param MUNGER $munger The conversion context.
    * @param string $text
    * @return string
    */
-  function convert(&$munger, $text)
+  function convert($munger, $text)
   {
     if ($this->enabled)
     {
@@ -758,18 +763,18 @@ class MUNGER_CONVERTER extends MUNGER_TOOL
 
   /**
    * Convert the text to an output format.
-   * @param MUNGER &$munger The conversion context.
+   * @param MUNGER $munger The conversion context.
    * @param string $text
    * @return string
    * @access private
    * @abstract
    */
-  function _convert(&$munger, $text)
+  function _convert($munger, $text)
   {
     $this->raise_deferred('MUNGER_CONVERTER', '_convert');
   }
   
-  private $_initial_enabled;
+  protected $_initial_enabled;
 }
 
 /**
@@ -796,7 +801,7 @@ class MUNGER_HTML_CONVERTER extends MUNGER_CONVERTER
       case Munger_convert_html_simple:
         return htmlspecialchars($text, ENT_NOQUOTES);
       case Munger_convert_html_strict:
-        $options = & global_text_options();
+        $options = global_text_options();
         return $options->convert_to_html_entities($text);
       case Munger_convert_plain_text:
         return $text;
@@ -828,11 +833,11 @@ class MUNGER_BASIC_REPLACER extends MUNGER_REPLACER
 
   /**
    * Convert the given token to the output format.
-   * @param MUNGER &$munger The transformation context.
-   * @param MUNGER_TOKEN &$token
+   * @param MUNGER $munger The transformation context.
+   * @param MUNGER_TOKEN $token
    * @return string
    */
-  function transform(&$munger, &$token)
+  function transform($munger, $token)
   {
     if ($token->is_start_tag())
     {
@@ -846,8 +851,8 @@ class MUNGER_BASIC_REPLACER extends MUNGER_REPLACER
    * @var string
    * @access private
    */
-  var $_start_tag;
-  var $_end_tag;
+  protected $_start_tag;
+  protected $_end_tag;
 }
 
 /**
@@ -862,11 +867,11 @@ class MUNGER_PAGE_REPLACER extends MUNGER_REPLACER
 {
   /**
    * Convert the given token to the output format.
-   * @param MUNGER &$munger The transformation context.
-   * @param MUNGER_TOKEN &$token
+   * @param MUNGER $munger The transformation context.
+   * @param MUNGER_TOKEN $token
    * @return string
    */
-  function transform(&$munger, &$token)
+  function transform($munger, $token)
   {
     if ($token->is_start_tag())
     {
@@ -891,11 +896,11 @@ class MUNGER_MACRO_REPLACER extends MUNGER_REPLACER
 {
   /**
    * Convert the given token to the output format.
-   * @param MUNGER &$munger The transformation context.
-   * @param MUNGER_TOKEN &$token
+   * @param MUNGER $munger The transformation context.
+   * @param MUNGER_TOKEN $token
    * @return string
    */
-  function transform(&$munger, &$token)
+  function transform($munger, $token)
   {
     if ($token->is_start_tag())
     {
@@ -904,7 +909,7 @@ class MUNGER_MACRO_REPLACER extends MUNGER_REPLACER
       $flags = explode(',', $convert);
       if (is_array($flags))
       {
-        $converters = &$munger->converters();
+        $converters = $munger->converters();
         foreach ($flags as $flag)
         {
           if (substr($flag, 0, 1) == '-')
@@ -962,11 +967,11 @@ class MUNGER_FOOTNOTE_REFERENCE_REPLACER extends MUNGER_REPLACER
 {
   /**
    * Convert the given token to the output format.
-   * @param MUNGER &$munger The transformation context.
-   * @param MUNGER_TOKEN &$token
+   * @param MUNGER $munger The transformation context.
+   * @param MUNGER_TOKEN $token
    * @return string
    */
-  function transform(&$munger, &$token)
+  function transform($munger, $token)
   {
     if ($token->is_start_tag())
     {
@@ -978,13 +983,13 @@ class MUNGER_FOOTNOTE_REFERENCE_REPLACER extends MUNGER_REPLACER
 
   /**
    * Format the reference to the given footnote number.
-   * @param MUNGER_TOKEN &$token
-   * @param MUNGER_FOOTNOTE_INFO &$info
+   * @param MUNGER_TOKEN $token
+   * @param MUNGER_FOOTNOTE_INFO $info
    * @return string
    * @access private
    * @abstract
    */
-  function _format_reference(&$token, &$info)
+  function _format_reference($token, $info)
   {
     $this->raise_deferred('_format_reference', 'MUNGER_FOOTNOTE_REFERENCE_REPLACER');
   }
@@ -1005,11 +1010,11 @@ class MUNGER_FOOTNOTE_TEXT_REPLACER extends MUNGER_REPLACER
 {
   /**
    * Convert the given token to the output format.
-   * @param MUNGER &$munger The transformation context.
-   * @param MUNGER_TOKEN &$token
+   * @param MUNGER $munger The transformation context.
+   * @param MUNGER_TOKEN $token
    * @return string
    */
-  function transform(&$munger, &$token)
+  function transform($munger, $token)
   {
     if ($token->is_start_tag())
     {
@@ -1022,13 +1027,13 @@ class MUNGER_FOOTNOTE_TEXT_REPLACER extends MUNGER_REPLACER
 
   /**
    * Format the text for the given footnote number.
-   * @param MUNGER_TOKEN &$token
-   * @param MUNGER_FOOTNOTE_INFO &$info
+   * @param MUNGER_TOKEN $token
+   * @param MUNGER_FOOTNOTE_INFO $info
    * @return string
    * @access private
    * @abstract
    */
-  function _format_text(&$token, &$info)
+  function _format_text($token, $info)
   {
     $this->raise_deferred('_format_text', 'MUNGER_FOOTNOTE_TEXT_REPLACER');
   }
@@ -1049,10 +1054,10 @@ class MUNGER_TRANSFORMER extends MUNGER_TOOL
    * Returns transformed content.
    * Guarantees that all content added with {@link add_text()} or {@link add_transformer()} is
    * transformed and merged correctly.
-   * @param MUNGER &$munger The data context.
+   * @param MUNGER $munger The data context.
    * @return string
    */
-  function data(&$munger)
+  function data($munger)
   {
     if ($this->_buffer_state != Munger_only_data_block)
     {
@@ -1072,6 +1077,16 @@ class MUNGER_TRANSFORMER extends MUNGER_TOOL
   {
     $this->_raw_text .= $data;
   }
+  
+  /**
+   * Return the un-transformed text.
+   *
+   * @return string
+   */
+  function raw_text()
+  {
+    return $this->_raw_text;
+  }
 
   /**
    * Add the contents of another transformer.
@@ -1080,11 +1095,11 @@ class MUNGER_TRANSFORMER extends MUNGER_TOOL
    * nested transformer. They are to be added to the current transformer and are not to be transformed
    * with the transformer they spawned. That's why they are added here, before and after the results
    * of 'transformer'.
-   * @param MUNGER_TRANSFORMER &$transformer
+   * @param MUNGER_TRANSFORMER $transformer
    * @param string $start_text
    * @param string $end_text
    */
-  function add_transformer(&$munger, &$transformer, $start_text, $end_text)
+  function add_transformer($munger, $transformer, $start_text, $end_text)
   {
     if ($this->_buffer_state == Munger_only_data_block)
     {
@@ -1114,11 +1129,11 @@ class MUNGER_TRANSFORMER extends MUNGER_TOOL
    * Set this as the active or inactive transformer.
    * Descendent classes can use this to perform necessary processing when they are pushed or
    * popped from the transformation stack.
-   * @param MUNGER &$munger The activation context.
+   * @param MUNGER $munger The activation context.
    * @param boolean $value True if the transformer is being activated.
-   * @param MUNGER_TOKEN &$token Token that caused the activation.
+   * @param MUNGER_TOKEN $token Token that caused the activation.
    */
-  function activate(&$munger, $value, &$token)
+  function activate($munger, $value, $token)
   {
     $this->clear ();
   }
@@ -1126,10 +1141,10 @@ class MUNGER_TRANSFORMER extends MUNGER_TOOL
   /**
    * Transform any unprocessed text.
    * Processes text added with {@link add_text()} since the last time this function was called.
-   * @param MUNGER &$munger The processing context.
+   * @param MUNGER $munger The processing context.
    * @access private
    */
-  function _process_raw_text(&$munger)
+  function _process_raw_text($munger)
   {
     if ($this->_raw_text)
     {
@@ -1140,11 +1155,11 @@ class MUNGER_TRANSFORMER extends MUNGER_TOOL
 
   /**
    * Post-process text generated from another transformer.
-   * @param MUNGER &$munger The transformation context.
+   * @param MUNGER $munger The transformation context.
    * @param string $text
    * @access private
    */
-  function _transformer_text(&$munger, $text)
+  function _transformer_text($munger, $text)
   {
     return $text;
   }
@@ -1152,12 +1167,12 @@ class MUNGER_TRANSFORMER extends MUNGER_TOOL
   /**
    * Transform raw text.
    * @access private
-   * @param MUNGER &$munger The transformation context.
+   * @param MUNGER $munger The transformation context.
    * @param string $text
    * @return string
    * @abstract
    */
-  function _apply_transform(&$munger, $text)
+  function _apply_transform($munger, $text)
   {
     $this->raise_deferred('_apply_transform', 'MUNGER_TRANSFORMER');
   }
@@ -1170,21 +1185,21 @@ class MUNGER_TRANSFORMER extends MUNGER_TOOL
    * @var string
    * @access private
    */
-  var $_raw_text = '';
+  protected $_raw_text = '';
   /**
    * Buffer holding already-processed text.
    * Text processed by {@link MUNGER_TRANSFORMER::_apply_transform()} is added to this buffer.
    * @var string
    * @access private
    */
-  var $_processed_text = '';
+  protected $_processed_text = '';
   /**
    * Tracks the internal state of the processed buffer.
    * Descendents can use this to determine how to respond depending on how many pieces of data there are.
    * @var integer
    * @access private
    */
-  var $_buffer_state = Munger_only_data_block;
+  protected $_buffer_state = Munger_only_data_block;
 }
 
 /**
@@ -1199,12 +1214,12 @@ class MUNGER_NOP_TRANSFORMER extends MUNGER_TRANSFORMER
 {
   /**
    * Transform raw text.
-   * @param MUNGER &$munger The transformation context.
+   * @param MUNGER $munger The transformation context.
    * @param string $text
    * @return string
    * @access private
    */
-  function _apply_transform(&$munger, $text)
+  function _apply_transform($munger, $text)
   {
     return $text;
   }
@@ -1222,12 +1237,12 @@ class MUNGER_PREFORMATTED_TRANSFORMER extends MUNGER_TRANSFORMER
 {
   /**
    * Transform raw text.
-   * @param MUNGER &$munger The transformation context.
+   * @param MUNGER $munger The transformation context.
    * @param string $text
    * @return string
    * @access private
    */
-  function _apply_transform(&$munger, $text)
+  function _apply_transform($munger, $text)
   {
     switch ($this->_buffer_state)
     {
@@ -1295,7 +1310,7 @@ class MUNGER_BLOCK_TRANSFORMER extends MUNGER_TRANSFORMER
    * there for spacing away from the tag and is dropped.
    * @var boolean
    */
-  var $strict_newlines = FALSE;
+  public $strict_newlines = FALSE;
 
   /**
    * Remove newlines according to tagging rules.
@@ -1317,7 +1332,7 @@ class MUNGER_BLOCK_TRANSFORMER extends MUNGER_TRANSFORMER
   /**
    * Read the quote style from a token.
    * @param boolean $value
-   * @param MUNGER_TOKEN &$token Token that caused the activation.
+   * @param MUNGER_TOKEN $token Token that caused the activation.
    * @return string
    * @access private
    */
@@ -1386,11 +1401,11 @@ class MUNGER_LIST_TRANSFORMER extends MUNGER_TRANSFORMER
    * Prepare buffer for transformation to a list.
    * The first and last newlines in a list are ignored. Newlines abutting formatting blocks within the list
    * are maintained.
-   * @param MUNGER &$munger The transformation context.
+   * @param MUNGER $munger The transformation context.
    * @param string $text
    * @return string
    */
-  function _apply_transform(&$munger, $text)
+  function _apply_transform($munger, $text)
   {
     /* Eat any spaces and tabs at the end so we can check if the item ends in a newline. */
     $text = rtrim($text, " \t");
@@ -1431,14 +1446,14 @@ class MUNGER_LIST_TRANSFORMER extends MUNGER_TRANSFORMER
    * The 'item_was_open' parameter indicates whether a list item has already been started. If this is
    * the case, then this list should be generated as a continuation of that one, rather than starting
    * a new one. In the HTML renderer, this means that a new list-item should not be started in that case.
-   * @param MUNGER &$munger The transformation context.
+   * @param MUNGER $munger The transformation context.
    * @param string $text
    * @param boolean $item_was_open
    * @return string
    * @access private
    * @abstract
    */
-  function _transform_to_list(&$munger, $text, $item_was_open)
+  function _transform_to_list($munger, $text, $item_was_open)
   {
     $this->raise_deferred('_transform_to_list', 'LIST_MUNGER_TRANSFORMER');
   }
@@ -1469,7 +1484,7 @@ class MUNGER_LIST_TRANSFORMER extends MUNGER_TRANSFORMER
    * @var boolean
    * @access private
    */
-  var $_item_is_open = FALSE;
+  protected $_item_is_open = FALSE;
 }
 
 /**
@@ -1486,11 +1501,11 @@ class MUNGER_DEFINITION_LIST_TRANSFORMER extends MUNGER_LIST_TRANSFORMER
 {
   /**
    * Set this as the active or inactive transformer.
-   * @param MUNGER &$munger The activation context.
+   * @param MUNGER $munger The activation context.
    * @param boolean $value True if the transformer is being activated.
-   * @param MUNGER_TOKEN &$token Token that caused the activation.
+   * @param MUNGER_TOKEN $token Token that caused the activation.
    */
-  function activate(&$munger, $value, &$token)
+  function activate($munger, $value, $token)
   {
     if ($value)
     {
@@ -1500,11 +1515,11 @@ class MUNGER_DEFINITION_LIST_TRANSFORMER extends MUNGER_LIST_TRANSFORMER
 
   /**
    * Post-process text generated from another transformer.
-   * @param MUNGER &$munger The transformation context.
+   * @param MUNGER $munger The transformation context.
    * @param string
    * @access private
    */
-  function _transformer_text(&$munger, $text)
+  function _transformer_text($munger, $text)
   {
     return $this->_build_definition_part($munger, $text);
   }
@@ -1512,13 +1527,13 @@ class MUNGER_DEFINITION_LIST_TRANSFORMER extends MUNGER_LIST_TRANSFORMER
   /**
    * Transform preprocessed text into a list.
    * Calls {@link _build_definition_part()} for each newline-delimited piece of text.
-   * @param MUNGER &$munger The transformation context.
+   * @param MUNGER $munger The transformation context.
    * @param string $text
    * @param boolean $item_was_open
    * @return string
    * @access private
    */
-  function _transform_to_list(&$munger, $text, $item_was_open)
+  function _transform_to_list($munger, $text, $item_was_open)
   {
     $Result = '';
     $text = ltrim($text, " \t");
@@ -1535,11 +1550,11 @@ class MUNGER_DEFINITION_LIST_TRANSFORMER extends MUNGER_LIST_TRANSFORMER
   /**
    * Transform to a term or body.
    * Uses {@link _build_as_definition_term()} and {@link _build_as_definition_body()}.
-   * @param MUNGER &$munger The transformation context.
+   * @param MUNGER $munger The transformation context.
    * @param string $line
    * @access private
    */
-  function _build_definition_part(&$munger, $line)
+  function _build_definition_part($munger, $line)
   {
     if ($this->_term_needed)
     {
@@ -1558,12 +1573,12 @@ class MUNGER_DEFINITION_LIST_TRANSFORMER extends MUNGER_LIST_TRANSFORMER
   /**
    * Transform to a term or body.
    * Called from {@link _build_definition_part()}.
-   * @param MUNGER &$munger The transformation context.
+   * @param MUNGER $munger The transformation context.
    * @param string $line
    * @access private
    * @abstract
    */
-  function _build_as_definition_term(&$munger, $line)
+  function _build_as_definition_term($munger, $line)
   {
     $this->raise_deferred('_build_as_definition_term', 'MUNGER_DEFINITION_LIST_TRANSFORMER');
   }
@@ -1571,12 +1586,12 @@ class MUNGER_DEFINITION_LIST_TRANSFORMER extends MUNGER_LIST_TRANSFORMER
   /**
    * Transform to a term or body.
    * Called from {@link _build_definition_part()}.
-   * @param MUNGER &$munger The transformation context.
+   * @param MUNGER $munger The transformation context.
    * @param string $line
    * @access private
    * @abstract
    */
-  function _build_as_definition_body(&$munger, $line)
+  function _build_as_definition_body($munger, $line)
   {
     $this->raise_deferred('_build_as_definition_body', 'MUNGER_DEFINITION_LIST_TRANSFORMER');
   }
@@ -1585,7 +1600,7 @@ class MUNGER_DEFINITION_LIST_TRANSFORMER extends MUNGER_LIST_TRANSFORMER
    * @var boolean
    * @access private
    */
-  var $_term_needed;
+  protected $_term_needed;
 }
 
 /**
@@ -1602,21 +1617,21 @@ class MUNGER_TAG
    * Token for the tag.
    * @var MUNGER_TOKEN
    */
-  var $token;
+  public $token;
   /**
    * Converted text for the tag.
    * This text is prepared beforehand so that tags that can be nested are
    * replaced in the order that they are found (e.g. header tags). This also
    * ensures consistent handling for tags with and without transformers.
    */
-  var $text;
+  public $text;
   /**
    * Current transformer when this token was found.
    * If the tag forces a transformer change, this holds the previous one so that it can
    * be restored when the end tag for this tag is found.
    * @var MUNGER_TRANSFORMER
    */
-  var $transformer;
+  public $transformer;
 
   /**
    * @param MUNGER_TOKEN $token
@@ -1671,13 +1686,13 @@ class MUNGER_PARSER extends RAISABLE
    * @var string $input
    * @access private
    */
-  function _process_given_tokenizer($input, &$tokenizer)
+  function _process_given_tokenizer($input, $tokenizer)
   {
     $tokenizer->set_input($input);
     while ($tokenizer->tokens_available())
     {
       $tokenizer->read_next_token();
-      $token =& $tokenizer->current_token();
+      $token = $tokenizer->current_token();
       $this->_process_token($token);
     }
   }
@@ -1689,7 +1704,7 @@ class MUNGER_PARSER extends RAISABLE
    * @var MUNGER_TOKEN $token
    * @access private
    */
-  function _process_token(&$token)
+  function _process_token($token)
   {
     if (($token->type == Munger_token_text))
     {
@@ -1721,7 +1736,7 @@ class MUNGER_PARSER extends RAISABLE
   /**
    * @return MUNGER_TOKENIZER
    */
-  function & _current_tokenizer()
+  function  _current_tokenizer()
   {
     return $this->_tokenizers[$this->_nesting_level];
   }
@@ -1743,17 +1758,17 @@ class MUNGER_PARSER extends RAISABLE
    * @var MUNGER_TOKEN $token
    * @access private
    */
-  function _treat_as_text(&$token)
+  function _treat_as_text($token)
   {
     return FALSE;
   }
 
   /**
    * Transform a token as text.
-   * @param MUNGER_TOKEN &$token
+   * @param MUNGER_TOKEN $token
    * @access private
    */
-  function _transform_as_text(&$token)
+  function _transform_as_text($token)
   {
   }
 
@@ -1765,7 +1780,7 @@ class MUNGER_PARSER extends RAISABLE
    * @param MUNGER_TOKEN $token
    * @access private
    */
-  function _transform_as_start_tag(&$token)
+  function _transform_as_start_tag($token)
   {
   }
 
@@ -1777,7 +1792,7 @@ class MUNGER_PARSER extends RAISABLE
    * @param MUNGER_TOKEN $token
    * @access private
    */
-  function _transform_as_end_tag(&$token)
+  function _transform_as_end_tag($token)
   {
   }
 
@@ -1797,7 +1812,7 @@ class MUNGER_PARSER extends RAISABLE
    * @var array[MUNGER_TOKENIZER]
    * @access private
    */
-  var $_tokenizers;
+  protected $_tokenizers;
   /**
    * The current nesting level of tokenization.
    * Provides support for detecting nested tags, as found in HTML samples.
@@ -1805,7 +1820,7 @@ class MUNGER_PARSER extends RAISABLE
    * @var integer
    * @access private
    */
-  var $_nesting_level;
+  protected $_nesting_level;
 }
 
 /**
@@ -1823,12 +1838,12 @@ class MUNGER_PAGE
    * This is extracted from the page tag and may be empty.
    * @var string
    */
-  var $title;
+  public $title;
   /**
    * Contents of the page.
    * @var string
    */
-  var $text;
+  public $text;
 }
 
 /**
@@ -1847,7 +1862,7 @@ class MUNGER extends MUNGER_PARSER
    * Return, at most, this many visible characters from a transformation.
    * The default of '0' returns the entire transformed input.
    * @var integer*/
-  var $max_visible_output_chars = 0;
+  public $max_visible_output_chars = 0;
   /**
    * Allow break inside a word when truncating to {@link $max_visible_output_chars}?
    * If this is TRUE, the algorithm will return at most 'max_visible_output_chars'. If this is
@@ -1855,7 +1870,7 @@ class MUNGER extends MUNGER_PARSER
    * find one, it scans <em>forward</em> to find a space.
    * @var boolean
    */
-  var $break_inside_word = FALSE;
+  public $break_inside_word = FALSE;
   /**
    * Take out all tags from the input?
    * If this is true, then only tags placed in the string by a replacer or munger will be left
@@ -1863,7 +1878,7 @@ class MUNGER extends MUNGER_PARSER
    * are transformed to the destination output as text.
    * @var boolean
    */
-  var $strip_unknown_tags = FALSE;
+  public $strip_unknown_tags = FALSE;
   /**
    * Force paragraphs on all transformed text?
    * The munger will transform the text, replacing all newlines with output-specific version.
@@ -1872,7 +1887,7 @@ class MUNGER extends MUNGER_PARSER
    * block regardless of content. Note: if the input text is empty, no paragraphs are generated.
    * @var boolean
    */
-  var $force_paragraphs = TRUE;
+  public $force_paragraphs = TRUE;
   /**
    * Specify how normal text is to be transformed.
    * Most outputters will default to {@link Munger_html_conversion_none}, but
@@ -1886,7 +1901,7 @@ class MUNGER extends MUNGER_PARSER
    * @see Munger_convert_constants
    * @var string
    */
-  var $convert_mode = Munger_convert_none;
+  public $convert_mode = Munger_convert_none;
 
   /**
    * Add an extension to replace 'name' tags.
@@ -1894,9 +1909,9 @@ class MUNGER extends MUNGER_PARSER
    * @param MUNGER_REPLACER
    * @access private
    */
-  function register_replacer($name, &$replacer, $has_end_tag = TRUE)
+  function register_replacer($name, $replacer, $has_end_tag = TRUE)
   {
-    $this->_replacers[strtolower($name)] = &$replacer;
+    $this->_replacers[strtolower($name)] = $replacer;
     $this->register_known_tag($name, $has_end_tag);
   }
 
@@ -1906,9 +1921,9 @@ class MUNGER extends MUNGER_PARSER
    * @param MUNGER_TRANSFORMER
    * @access private
    */
-  function register_transformer($name, &$transformer)
+  function register_transformer($name, $transformer)
   {
-    $this->_transformers[strtolower($name)] = &$transformer;
+    $this->_transformers[strtolower($name)] = $transformer;
     $this->register_known_tag($name, TRUE);
   }
 
@@ -1919,9 +1934,9 @@ class MUNGER extends MUNGER_PARSER
    * @param MUNGER_CONVERTER
    * @access private
    */
-  function register_converter($name, &$converter)
+  function register_converter($name, $converter)
   {
-    $this->_converters[strtolower($name)] = &$converter;
+    $this->_converters[strtolower($name)] = $converter;
   }
 
   /**
@@ -1929,7 +1944,7 @@ class MUNGER extends MUNGER_PARSER
    * @see MUNGER_CONVERTER
    * @return array[string,MUNGER_CONVERTER]
    */
-  function & converters()
+  function  converters()
   {
     return $this->_converters;
   }
@@ -2053,7 +2068,7 @@ class MUNGER extends MUNGER_PARSER
    */
   function current_raw_text()
   {
-    return $this->_current_transformer->_raw_text;
+    return $this->_current_transformer->raw_text();
   }
 
   /**
@@ -2146,7 +2161,7 @@ class MUNGER extends MUNGER_PARSER
    * @var MUNGER_TOKEN $token
    * @access private
    */
-  function _treat_as_text(&$token)
+  function _treat_as_text($token)
   {
     return !isset ($this->_known_tags[$token->name()]) && !$this->strip_unknown_tags;
   }
@@ -2155,10 +2170,10 @@ class MUNGER extends MUNGER_PARSER
    * Transform a token as text.
    * This will make sure to abort tokenization if {@link $max_visible_output_chars} has
    * been reached, truncating the text in the best way possible.
-   * @param MUNGER_TOKEN &$token
+   * @param MUNGER_TOKEN $token
    * @access private
    */
-  function _transform_as_text(&$token)
+  function _transform_as_text($token)
   {
     $num_chars = $token->size;
     $text = $token->data();
@@ -2176,7 +2191,7 @@ class MUNGER extends MUNGER_PARSER
     $this->_add_text_to_output($this->_as_output_text($text));
     $this->_current_visible_chars += $num_chars;
 
-    if ($truncated || (($this->_current_visible_chars >= $this->_current_maximum_chars) &&$this->_tokenizers[$this->_nesting_level]->tokens_available()))
+    if ($truncated || (($this->_current_visible_chars >= $this->_current_maximum_chars) &$this->_tokenizers[$this->_nesting_level]->tokens_available()))
     {
       $this->_truncate();
     }
@@ -2192,7 +2207,7 @@ class MUNGER extends MUNGER_PARSER
   {
     while ($this->_nesting_level >= 0)
     {
-      $t = &$this->_current_tokenizer();
+      $t = $this->_current_tokenizer();
       $t->abort();
       $this->_nesting_level--;
     }
@@ -2266,7 +2281,7 @@ class MUNGER extends MUNGER_PARSER
    */
   function _end_tag_token_for($token)
   {
-    $t = &$this->_current_tokenizer();
+    $t = $this->_current_tokenizer();
     $data = $t->open_tag_char . $t->end_tag_char . $token->name() . $t->close_tag_char;
     $Result = new MUNGER_TOKEN($t, $data);
     $Result->set_properties(0, strlen($data), Munger_token_end_tag);
@@ -2282,7 +2297,7 @@ class MUNGER extends MUNGER_PARSER
    * @param MUNGER_TOKEN $token
    * @access private
    */
-  function _transform_as_start_tag(&$token)
+  function _transform_as_start_tag($token)
   {
     /* If the tag is not registered, then either add it as text, or strip it out,
      * depending on the 'strip_unknown_tags' setting. If it is registered,
@@ -2335,7 +2350,7 @@ class MUNGER extends MUNGER_PARSER
    * @param MUNGER_TOKEN $token
    * @access private
    */
-  function _transform_as_end_tag(&$token)
+  function _transform_as_end_tag($token)
   {
     $name = $token->name();
 
@@ -2533,14 +2548,14 @@ class MUNGER extends MUNGER_PARSER
    * @return string
    * @access private
    */
-  function _tag_as_text(&$token)
+  function _tag_as_text($token)
   {
     $name = $token->name();
     if (isset ($this->_known_tags[$name]))
     {
       if (isset ($this->_replacers[$name]))
       {
-        $rep = &$this->_replacers[$name];
+        $rep = $this->_replacers[$name];
         
         return $rep->transform($this, $token);
       } 
@@ -2564,7 +2579,7 @@ class MUNGER extends MUNGER_PARSER
    * @return string
    * @access private
    */
-  function _known_tag_as_text(&$token)
+  function _known_tag_as_text($token)
   {
     return $token->data();
   }
@@ -2594,7 +2609,7 @@ class MUNGER extends MUNGER_PARSER
    * @see MUNGER_REPLACER
    * @access private
    */
-  var $_replacers;
+  protected $_replacers;
   /**
    * List of text formatters.
    * These transform raw text into the correct output format; transformers are tied to tags so that
@@ -2604,7 +2619,7 @@ class MUNGER extends MUNGER_PARSER
    * @see MUNGER_TRANSFORMER
    * @access private
    */
-  var $_transformers;
+  protected $_transformers;
   /**
    * List of content converters.
    * These convert a piece of non-tag text to a final format. All registered
@@ -2612,43 +2627,43 @@ class MUNGER extends MUNGER_PARSER
    * @see MUNGER_CONVERTER
    * @access private
    */
-  var $_converters;
+  protected $_converters;
   /**
    * The first transformer for any piece of text.
    * @var MUNGER_TRANSFORMER
    * @access private
    */
-  var $_default_transformer;
+  protected $_default_transformer;
   /**
    * @var array[string]
    * @access private
    */
-  var $_known_tags;
+  protected $_known_tags;
 
   /**
    * Stack of tags found in the input stream.
    * @var array[MUNGER_TAG]
    * @access private
    */
-  var $_open_tags = array ();
+  protected $_open_tags = array ();
   /**
    * The current transformer during a transformation.
    * @var MUNGER_TRANSFORMER
    * @access private
    */
-  var $_current_transformer;
+  protected $_current_transformer;
   /**
    * Number of visible (non-tag) characters in the transformed buffer.
    * @var integer
    * @access private
    */
-  var $_current_visible_chars;
+  protected $_current_visible_chars;
   /**
    * Maximum number of allowed visible (non-tag) characters in the transformed buffer.
    * @var integer
    * @access private
    */
-  var $_current_maximum_chars;
+  protected $_current_maximum_chars;
   /**
    * Text is transformed for this object.
    * URL requests are piped to this object for final resolution. The object must define a
@@ -2656,14 +2671,14 @@ class MUNGER extends MUNGER_PARSER
    * @var object
    * @access private
    */
-  var $_context_object;
+  protected $_context_object;
 
   /**
    * Content is broken into pages at designated page breaks.
    * @var boolean
    * @access private
    */
-  var $_paginated = 0;
+  protected $_paginated = 0;
   /**
    * List of pages generated during the transformation.
    * If either {@link $_paginated} is False, there is always only one page.
@@ -2671,7 +2686,7 @@ class MUNGER extends MUNGER_PARSER
    * @var array[MUNGER_PAGE]
    * @access private
    */
-  var $_pages;
+  protected $_pages;
 
   /**
    * Current number of footnote references in the text.
@@ -2679,14 +2694,14 @@ class MUNGER extends MUNGER_PARSER
    * @var integer
    * @access private
    */
-  var $_num_footnote_references = 0;
+  protected $_num_footnote_references = 0;
   /**
    * Current number of footnote bodies in the text.
    * Value is reset to 0 when {@link transform()} is called.
    * @var integer
    * @access private
    */
-  var $_num_footnote_texts = 0;
+  protected $_num_footnote_texts = 0;
   /**
    * Unique names for footnotes in the text.
    * Randomly generated during text transformation to ensure uniqueness within a
@@ -2695,7 +2710,7 @@ class MUNGER extends MUNGER_PARSER
    * @var array[MUNGER_FOOTNOTE_INFO]
    * @access private
    */
-  var $_footnote_infos;
+  protected $_footnote_infos;
 }
 
 /**
@@ -2710,15 +2725,15 @@ class MUNGER_FOOTNOTE_INFO
   /**
    * @var string
    */
-  var $name_to;
+  public $name_to;
   /**
    * @var string
    */
-  var $name_from;
+  public $name_from;
   /**
    * @var integer
    */
-  var $number;
+  public $number;
 }
 
 /**

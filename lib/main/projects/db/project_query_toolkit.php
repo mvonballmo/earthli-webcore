@@ -38,13 +38,13 @@ http://www.earthli.com/software/webcore/projects
 
 /**
  * Sets up a query for a particular entry type.
- * @param QUERY &$query
+ * @param QUERY $query
  * @param string $type
  * @access private
  */
-function project_query_set_type (&$query, $type)
+function project_query_set_type ($query, $type)
 {
-  $table_names =& $query->app->table_names;
+  $table_names = $query->app->table_names;
 
   switch ($type)
   {
@@ -67,11 +67,11 @@ function project_query_set_type (&$query, $type)
 
 /**
  * Set the most recent ordering for a query.
- * @param QUERY &$query
+ * @param QUERY $query
  * @param string $type
  * @access private
  */
-function project_query_order_by_recent (&$query, $type)
+function project_query_order_by_recent ($query, $type)
 {
   switch ($type)
   {

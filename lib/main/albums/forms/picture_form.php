@@ -51,12 +51,12 @@ class PICTURE_FORM extends ALBUM_ENTRY_FORM
   /**
    * @var string
    */
-  var $name = 'picture_form';
+  public $name = 'picture_form';
 
   /**
-   * @param ALBUM &$folder Album in which to add or edit the picture.
+   * @param ALBUM $folder Album in which to add or edit the picture.
    */
-  function PICTURE_FORM (&$folder)
+  function PICTURE_FORM ($folder)
   {
     ALBUM_ENTRY_FORM::ALBUM_ENTRY_FORM ($folder);
 
@@ -104,15 +104,15 @@ class PICTURE_FORM extends ALBUM_ENTRY_FORM
     $field->sticky = TRUE;
     $this->add_field ($field);
 
-    $field =& $this->field_at ('day');
+    $field = $this->field_at ('day');
     $field->required = FALSE;
   }
 
   /**
    * Load initial properties from this picture.
-   * @param PICTURE &$obj
+   * @param PICTURE $obj
    */
-  function load_from_object (&$obj)
+  function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
     $this->set_value ('thumbnail_size', 200);
@@ -126,9 +126,9 @@ class PICTURE_FORM extends ALBUM_ENTRY_FORM
 
   /**
    * Load initial properties from the object, but store as a new object.
-   * @param STORABLE &$obj
+   * @param STORABLE $obj
    */
-  function load_from_clone (&$obj)
+  function load_from_clone ($obj)
   {
     parent::load_from_clone ($obj);
     $this->set_value ('create_thumbnail', $this->_folder->uploads_allowed ());
@@ -148,7 +148,7 @@ class PICTURE_FORM extends ALBUM_ENTRY_FORM
 
   /**
    * Called after fields are loaded with data.
-   * @param object &$obj Object from which data was loaded. May be null.
+   * @param object $obj Object from which data was loaded. May be null.
    * @access private
    */
   function _post_load_data ($obj)
@@ -182,10 +182,10 @@ class PICTURE_FORM extends ALBUM_ENTRY_FORM
 
   /**
    * Apply post-validation operations to the object.
-   * @param object &$obj Object being validated.
+   * @param object $obj Object being validated.
    * @access private
    */
-  function _prepare_for_commit (&$obj)
+  function _prepare_for_commit ($obj)
   {
     parent::_prepare_for_commit ($obj);
 
@@ -216,10 +216,10 @@ class PICTURE_FORM extends ALBUM_ENTRY_FORM
 
   /**
    * Store the form's values to this picture.
-   * @param PICTURE &$obj
+   * @param PICTURE $obj
    * @access private
    */
-  function _store_to_object (&$obj)
+  function _store_to_object ($obj)
   {
     parent::_store_to_object ($obj);
 
@@ -238,10 +238,10 @@ class PICTURE_FORM extends ALBUM_ENTRY_FORM
 
   /**
    * Called before fields are validated.
-   * @param PICTURE &$obj
+   * @param PICTURE $obj
    * @access private
    */
-  function _pre_validate (&$obj)
+  function _pre_validate ($obj)
   {
     parent::_pre_validate ($obj);
     $use_upload = $this->value_for ('use_upload');
@@ -251,10 +251,10 @@ class PICTURE_FORM extends ALBUM_ENTRY_FORM
 
   /**
    * Called after fields are validated.
-   * @param PICTURE &$obj
+   * @param PICTURE $obj
    * @access private
    */
-  function _post_validate (&$obj)
+  function _post_validate ($obj)
   {
     parent::_post_validate ($obj);
 
@@ -291,13 +291,13 @@ class PICTURE_FORM extends ALBUM_ENTRY_FORM
 
   /**
    * Specify how to store this uploaded file.
-   * @param UPLOAD_FILE_FIELD &$field
-   * @param UPLOADED_FILE &$file
+   * @param UPLOAD_FILE_FIELD $field
+   * @param UPLOADED_FILE $file
    * @param boolean $form_is_valid Will the form be committed?
    * @return string Can be {@link Uploaded_file_unique_name} or {@link Uploaded_file_overwrite}.
    * @access private
    */
-  function _upload_file_copy_mode (&$field, &$file, $form_is_valid)
+  function _upload_file_copy_mode ($field, $file, $form_is_valid)
   {
     if (! $this->previewing () && $this->value_for ('overwrite'))
     {
@@ -355,10 +355,10 @@ class PICTURE_FORM extends ALBUM_ENTRY_FORM
   }
 
   /**
-   * @param FORM_RENDERER &$renderer
+   * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_thumbnail_options (&$renderer, $row_title)
+  function _draw_thumbnail_options ($renderer, $row_title)
   {
     $options = new FORM_TEXT_CONTROL_OPTIONS ();
     $options->width = '4em';
@@ -374,10 +374,10 @@ class PICTURE_FORM extends ALBUM_ENTRY_FORM
   }
 
   /**
-   * @param FORM_RENDERER &$renderer
+   * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_controls (&$renderer)
+  function _draw_controls ($renderer)
   {
     $file_set = $this->value_for ('upload_file');
 

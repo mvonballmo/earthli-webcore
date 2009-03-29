@@ -55,17 +55,17 @@ class PROPERTY_VALUE extends WEBCORE_OBJECT
    * displaying properties with this value.
    * @var integer
    */
-  var $value;
+  public $value;
   /**
    * @var string
    */
-  var $title;
+  public $title;
   /**
    * Name and path of icon.
    * Can contain a location alias that will be resolved with a {@link RESOURCE_MANAGER}.
    * @var string
    */
-  var $icon;
+  public $icon;
 
   /**
    * Icon rendered as an HTML image tag.

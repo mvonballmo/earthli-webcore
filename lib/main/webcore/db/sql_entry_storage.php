@@ -50,12 +50,12 @@ require_once ('webcore/db/sql_unique_storage.php');
 class SQL_MULTI_TYPE_ENTRY_STORAGE extends SQL_UNIQUE_STORAGE
 {
   /**
-   * @param SQL_TABLE &$table
+   * @param SQL_TABLE $table
    * @param integer $action
-   * @param STORABLE &$obj
+   * @param STORABLE $obj
    * @access private
    */
-  function _commit_table (&$table, $action, &$obj)
+  function _commit_table ($table, $action, $obj)
   {
     if (($table->name == $obj->_secondary_table_name ()) && ($action == Storage_action_create))
     {

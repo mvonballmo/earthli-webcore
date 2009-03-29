@@ -53,23 +53,23 @@ class ALBUM_TYPE_INFO extends FOLDER_TYPE_INFO
   /**
    * @var string
    */
-  var $id = 'album';
+  public $id = 'album';
   /**
    * @var string
    */
-  var $singular_title = 'Album';
+  public $singular_title = 'Album';
   /**
    * @var string
    */
-  var $plural_title = 'Albums';
+  public $plural_title = 'Albums';
   /**
    * @var string
    */
-  var $icon = '{app_icons}buttons/new_album';
+  public $icon = '{app_icons}buttons/new_album';
   /**
    * @var string
    */
-  var $edit_page = 'edit_album.php';
+  public $edit_page = 'edit_album.php';
 }
 
 /**
@@ -85,23 +85,23 @@ class JOURNAL_TYPE_INFO extends ENTRY_TYPE_INFO
   /**
    * @var string
    */
-  var $id = 'journal';
+  public $id = 'journal';
   /**
    * @var string
    */
-  var $singular_title = 'Journal';
+  public $singular_title = 'Journal';
   /**
    * @var string
    */
-  var $plural_title = 'Journals';
+  public $plural_title = 'Journals';
   /**
    * @var string
    */
-  var $icon = '{app_icons}buttons/new_journal';
+  public $icon = '{app_icons}buttons/new_journal';
   /**
    * @var string
    */
-  var $edit_page = 'edit_journal.php';
+  public $edit_page = 'edit_journal.php';
 }
 
 /**
@@ -117,23 +117,23 @@ class PICTURE_TYPE_INFO extends ENTRY_TYPE_INFO
   /**
    * @var string
    */
-  var $id = 'picture';
+  public $id = 'picture';
   /**
    * @var string
    */
-  var $singular_title = 'Picture';
+  public $singular_title = 'Picture';
   /**
    * @var string
    */
-  var $plural_title = 'Pictures';
+  public $plural_title = 'Pictures';
   /**
    * @var string
    */
-  var $icon = '{app_icons}buttons/new_picture';
+  public $icon = '{app_icons}buttons/new_picture';
   /**
    * @var string
    */
-  var $edit_page = 'edit_picture.php';
+  public $edit_page = 'edit_picture.php';
 }
 
 ?>

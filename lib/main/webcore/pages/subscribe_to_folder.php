@@ -31,7 +31,7 @@ http://www.earthli.com/software/webcore
   if ($id)
   {
     $query = $App->login->folder_query ();
-    $obj =& $query->object_at_id ($id);
+    $obj = $query->object_at_id ($id);
     $sub_type = Subscribe_folder;
   }
 

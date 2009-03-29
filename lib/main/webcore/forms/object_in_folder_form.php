@@ -49,9 +49,9 @@ require_once ('webcore/forms/content_object_form.php');
 class OBJECT_IN_FOLDER_FORM extends CONTENT_OBJECT_FORM
 {
   /**
-   * @param FOLDER &$folder Object is created/edited in this folder.
+   * @param FOLDER $folder Object is created/edited in this folder.
    */
-  function OBJECT_IN_FOLDER_FORM (&$folder)
+  function OBJECT_IN_FOLDER_FORM ($folder)
   {
     CONTENT_OBJECT_FORM::CONTENT_OBJECT_FORM ($folder->app);
     $this->_folder = $folder;
@@ -65,10 +65,10 @@ class OBJECT_IN_FOLDER_FORM extends CONTENT_OBJECT_FORM
 
   /**
    * Store the form's values to this object.
-    * @param OBJECT_IN_FOLDER &$obj
+    * @param OBJECT_IN_FOLDER $obj
     * @access private
     */
-  function _store_to_object (&$obj)
+  function _store_to_object ($obj)
   {
     parent::_store_to_object ($obj);
 
@@ -89,9 +89,9 @@ class OBJECT_IN_FOLDER_FORM extends CONTENT_OBJECT_FORM
 
   /**
    * Load initial properties from this object.
-   * @param OBJECT_IN_FOLDER &$obj
+   * @param OBJECT_IN_FOLDER $obj
    */
-  function load_from_object (&$obj)
+  function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
 
@@ -131,19 +131,19 @@ class OBJECT_IN_FOLDER_FORM extends CONTENT_OBJECT_FORM
    * Draw options between the title and description.
    * This is a good place for controls that add content to the description
    * (toolbars, etc.).
-   * @param FORM_RENDERER &$renderer
+   * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_options (&$renderer)
+  function _draw_options ($renderer)
   {
     $renderer->draw_check_box_row ('is_visible');
   }
 
   /**
-   * @param FORM_RENDERER &$renderer
+   * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_controls (&$renderer)
+  function _draw_controls ($renderer)
   {
     $renderer->start ();
     $renderer->draw_text_line_row ('title');
@@ -165,13 +165,13 @@ class OBJECT_IN_FOLDER_FORM extends CONTENT_OBJECT_FORM
    * @var string
    * @access private
    */
-  var $_privilege_set;
+  protected $_privilege_set;
   /**
    * Folder containing the object being edited/created.
    * @var FOLDER
    * @access private
    */
-  var $_folder;
+  protected $_folder;
 }
 
 /**
@@ -184,9 +184,9 @@ class OBJECT_IN_FOLDER_FORM extends CONTENT_OBJECT_FORM
 class ATTACHMENT_HOST_FORM extends OBJECT_IN_FOLDER_FORM
 {
   /**
-   * @param FOLDER &$folder Object is created/edited in this folder.
+   * @param FOLDER $folder Object is created/edited in this folder.
    */
-  function ATTACHMENT_HOST_FORM (&$folder)
+  function ATTACHMENT_HOST_FORM ($folder)
   {
     OBJECT_IN_FOLDER_FORM::OBJECT_IN_FOLDER_FORM ($folder);
 
@@ -229,10 +229,10 @@ class ATTACHMENT_HOST_FORM extends OBJECT_IN_FOLDER_FORM
   }
   
   /**
-   * @param FORM_RENDERER &$renderer
+   * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_attachment_selector (&$renderer)
+  function _draw_attachment_selector ($renderer)
   {
     $atts = $this->_attachments ();
     if (sizeof ($atts))
@@ -339,10 +339,10 @@ class ATTACHMENT_HOST_FORM extends OBJECT_IN_FOLDER_FORM
    * Draw options between the title and description.
    * This is a good place for controls that add content to the description
    * (toolbars, etc.).
-   * @param FORM_RENDERER &$renderer
+   * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_options (&$renderer)
+  function _draw_options ($renderer)
   {
     parent::_draw_options ($renderer);
     $this->_draw_attachment_selector ($renderer);
@@ -363,7 +363,7 @@ class ENTRY_FORM extends ATTACHMENT_HOST_FORM
    * @var string
    * @access private
    */
-  var $_privilege_set = Privilege_set_entry;
+  protected $_privilege_set = Privilege_set_entry;
 }
 
 /**
@@ -376,9 +376,9 @@ class ENTRY_FORM extends ATTACHMENT_HOST_FORM
 class DRAFTABLE_ENTRY_FORM extends ENTRY_FORM
 {
   /**
-   * @param CONTEXT &$context Attach to this object.
+   * @param CONTEXT $context Attach to this object.
    */
-  function DRAFTABLE_ENTRY_FORM (&$context)
+  function DRAFTABLE_ENTRY_FORM ($context)
   {
     ENTRY_FORM::ENTRY_FORM ($context);
 
@@ -408,9 +408,9 @@ class DRAFTABLE_ENTRY_FORM extends ENTRY_FORM
 
   /**
    * Load initial properties from the object.
-   * @param DRAFTABLE_ENTRY &$obj
+   * @param DRAFTABLE_ENTRY $obj
    */
-  function load_from_object (&$obj)
+  function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
     $this->set_value ('draft', $obj->unpublished ());
@@ -423,9 +423,9 @@ class DRAFTABLE_ENTRY_FORM extends ENTRY_FORM
 
   /**
    * Load initial properties from the object, but store as a new object.
-   * @param DRAFTABLE_ENTRY &$obj
+   * @param DRAFTABLE_ENTRY $obj
    */
-  function load_from_clone (&$obj)
+  function load_from_clone ($obj)
   {
     $obj->time_published->clear ();
     $obj->publisher_id = 0;
@@ -436,9 +436,9 @@ class DRAFTABLE_ENTRY_FORM extends ENTRY_FORM
   /**
    * Execute the form on a cloned object.
    * This will commit the form if it has been {@link submitted()}.
-   * @param object &$obj Object being copied.
+   * @param object $obj Object being copied.
    */
-  function process_clone (&$obj)
+  function process_clone ($obj)
   {
     $obj->time_published->clear ();
     $obj->publisher_id = 0;
@@ -447,10 +447,10 @@ class DRAFTABLE_ENTRY_FORM extends ENTRY_FORM
 
   /**
    * Store the form's values to this article.
-   * @param DRAFTABLE_ENTRY &$obj
+   * @param DRAFTABLE_ENTRY $obj
    * @access private
    */
-  function _store_to_object (&$obj)
+  function _store_to_object ($obj)
   {
     parent::_store_to_object ($obj);
 
@@ -462,10 +462,10 @@ class DRAFTABLE_ENTRY_FORM extends ENTRY_FORM
 
   /**
    * Execute the form.
-   * @param AUDITABLE &$obj
+   * @param AUDITABLE $obj
    * @access private
    */
-  function commit (&$obj)
+  function commit ($obj)
   {
     if ($this->object_exists () && $this->value_for ('quick_save'))
     {

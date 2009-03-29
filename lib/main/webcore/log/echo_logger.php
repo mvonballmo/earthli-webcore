@@ -53,14 +53,14 @@ class ECHO_LOGGER extends TEXT_OUTPUT_LOGGER
    * Flushes output after each message if enabled.
    * @var boolean
    */
-  var $flushed = FALSE;
+  public $flushed = FALSE;
 
   /**
    * Initialize the on-screen logger by passing {@link ENVIRONMENT::is_http_server()} 
    * to {@link set_is_html()}.
-   * @param ENVIRONMENT &$env
+   * @param ENVIRONMENT $env
    */
-  function ECHO_LOGGER (&$env)
+  function ECHO_LOGGER ($env)
   {
     TEXT_OUTPUT_LOGGER::TEXT_OUTPUT_LOGGER ();
     $this->set_is_html ($env->is_http_server ());

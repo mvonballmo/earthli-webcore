@@ -50,10 +50,10 @@ class THEME_RENDERER extends OBJECT_RENDERER
 {
   /**
    * Outputs the object as HTML.
-   * @param THEME &$obj
+   * @param THEME $obj
    * @access private
    */
-  function _display_as_html (&$obj)
+  function _display_as_html ($obj)
   {
 ?>
 <div style="text-align: center">

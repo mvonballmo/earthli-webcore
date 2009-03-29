@@ -51,13 +51,13 @@ class RECIPE_PANEL_MANAGER_HELPER extends PANEL_MANAGER_HELPER
   /**
    * Apply global options to a panel manager.
    * Does nothing by default.
-   * @param PANEL_MANAGER &$manager
+   * @param PANEL_MANAGER $manager
    */
-  function configure (&$manager)
+  function configure ($manager)
   {
     if ($manager->is_panel ('folder'))
     {
-      $panel =& $manager->panel_at ('folder');
+      $panel = $manager->panel_at ('folder');
       $panel->rows = 10;
       $panel->columns = 2;
       $manager->move_panel_to ('folder', 0, Panel_selection);

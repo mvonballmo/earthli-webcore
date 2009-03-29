@@ -51,9 +51,9 @@ require_once ('webcore/cmd/commands.php');
 class BRANCH_COMMANDS extends COMMANDS
 {
   /**
-   * @param BRANCH &$obj Configure commands for this branch.
+   * @param BRANCH $obj Configure commands for this branch.
    */
-  function BRANCH_COMMANDS (&$obj)
+  function BRANCH_COMMANDS ($obj)
   {
     COMMANDS::COMMANDS ($obj->app);
 

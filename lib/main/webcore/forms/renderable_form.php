@@ -54,25 +54,25 @@ class RENDERABLE_FORM extends UNIQUE_OBJECT_FORM
    * Enable previewing for these forms.
    * @var boolean
    */
-  var $preview_enabled = TRUE;
+  public $preview_enabled = TRUE;
 
   /**
    * Return a preview for the given object.
-   * @param STORABLE &$obj
+   * @param STORABLE $obj
    * @return FORM_PREVIEW_SETTINGS
    * @access private
    */
-  function _make_preview_settings (&$obj)
+  function _make_preview_settings ($obj)
   {
     return new RENDERABLE_FORM_PREVIEW_SETTINGS ($this->context);
   }
 
   /**
    * Title for a previewed object.
-   * @param object &$obj
+   * @param object $obj
    * @return string
    */
-  function _preview_title (&$obj)
+  function _preview_title ($obj)
   {
     return 'Preview of ' . $obj->title_as_html ();
   }
@@ -108,10 +108,10 @@ class RENDERABLE_FORM_PREVIEW_SETTINGS extends FORM_PREVIEW_SETTINGS
   
   /**
    * Adjust the display options for the object.
-   * @param OBJECT_RENDERER_OPTIONS &$options
+   * @param OBJECT_RENDERER_OPTIONS $options
    * @access private
    */
-  function _configure_options (&$options)
+  function _configure_options ($options)
   {
     $options->show_interactive = FALSE;
   }

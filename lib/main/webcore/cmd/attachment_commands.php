@@ -51,9 +51,9 @@ require_once ('webcore/cmd/commands.php');
 class ATTACHMENT_COMMANDS extends COMMANDS
 {
   /**
-   * @param ATTACHMENT &$attachment Configure commands for this attachment.
+   * @param ATTACHMENT $attachment Configure commands for this attachment.
    */
-  function ATTACHMENT_COMMANDS (&$attachment)
+  function ATTACHMENT_COMMANDS ($attachment)
   {
     COMMANDS::COMMANDS ($attachment->app);
 

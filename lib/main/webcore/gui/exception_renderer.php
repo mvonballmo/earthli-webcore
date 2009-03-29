@@ -50,10 +50,10 @@ class EXCEPTION_RENDERER extends OBJECT_RENDERER
 {
   /**
    * Outputs the object as HTML.
-   * @param EXCEPTION_SIGNATURE &$obj
+   * @param EXCEPTION_SIGNATURE $obj
    * @access private
    */
-  function _display_as_html (&$obj)
+  function _display_as_html ($obj)
   {
     $page_name = $obj->page_name;
     $dynamic_class_name = $obj->dynamic_class_name;
@@ -252,11 +252,11 @@ class EXCEPTION_RENDERER extends OBJECT_RENDERER
 
   /**
    * Outputs the object as plain text.
-   * @param EXCEPTION_SIGNATURE &$obj
+   * @param EXCEPTION_SIGNATURE $obj
    * @access private
    * @abstract
    */
-  function _display_as_plain_text (&$obj)
+  function _display_as_plain_text ($obj)
   {
     $page_name = $obj->page_name;
     $dynamic_class_name = $obj->dynamic_class_name;
@@ -376,17 +376,17 @@ class EXCEPTION_RENDERER_OPTIONS extends OBJECT_RENDERER_OPTIONS
    * Details are hidden in a {@link LAYER} if False.
    * @var boolean
    */
-  var $show_details = FALSE;
+  public $show_details = FALSE;
   /**
    * Send Get/Post/Cookie info with exception?
    * @var boolean
    */
-  var $include_page_data = TRUE;
+  public $include_page_data = TRUE;
   /**
    * Send browser info with exception?
    * @var boolean
    */
-  var $include_browser_info = TRUE;
+  public $include_browser_info = TRUE;
 }
 
 ?>

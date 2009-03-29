@@ -49,9 +49,9 @@ require_once ('webcore/gui/select_list.php');
 class ALBUM_ENTRY_LIST extends SELECT_LIST
 {
   /**
-   * @param ALBUM_APPLICATION &$app Main application.
+   * @param ALBUM_APPLICATION $app Main application.
    */
-  function ALBUM_ENTRY_LIST (&$app)
+  function ALBUM_ENTRY_LIST ($app)
   {
     SELECT_LIST::SELECT_LIST ($app);
     $this->append_column ('Name');
@@ -59,11 +59,11 @@ class ALBUM_ENTRY_LIST extends SELECT_LIST
   }
 
   /**
-   * @param ALBUM &$obj
+   * @param ALBUM $obj
     * @param integer $index
     * @private
     */
-  function _draw_column_contents (&$obj, $index)
+  function _draw_column_contents ($obj, $index)
   {
     switch ($index)
     {
@@ -76,7 +76,7 @@ class ALBUM_ENTRY_LIST extends SELECT_LIST
       echo $obj->title_as_link ($t);
       break;
     case 2:
-      $folder =& $obj->parent_folder ();
+      $folder = $obj->parent_folder ();
       echo $folder->format_date ($obj->date);
       break;
     }

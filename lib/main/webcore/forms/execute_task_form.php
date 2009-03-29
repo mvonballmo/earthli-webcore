@@ -51,25 +51,25 @@ class EXECUTE_TASK_FORM extends FORM
   /**
    * @var string
    */
-  var $name = 'task_form';
+  public $name = 'task_form';
   /**
    * @var string
    * @access private
    */
-  var $method = 'get';
+  public $method = 'get';
   /**
    * @var string
    */
-  var $button = 'Run';
+  public $button = 'Run';
   /**
    * @var string
    */
-  var $button_icon = '{icons}buttons/ship';
+  public $button_icon = '{icons}buttons/ship';
 
   /**
-   * @param APPLICATION &$app Main application.
+   * @param APPLICATION $app Main application.
    */
-  function EXECUTE_TASK_FORM (&$app)
+  function EXECUTE_TASK_FORM ($app)
   {
     FORM::FORM ($app);
 
@@ -109,7 +109,7 @@ class EXECUTE_TASK_FORM extends FORM
     $field->description = 'Shows queries executed against the database.';
     $this->add_field ($field);
 
-    $field =& $this->field_at ('debug');
+    $field = $this->field_at ('debug');
     $field->visible = TRUE;
     $field->description = 'Show all debugging output from all sub-systems. Similar to "verbose".';
   }
@@ -127,9 +127,9 @@ class EXECUTE_TASK_FORM extends FORM
 
   /**
    * Load initial properties from this branch.
-   * @param TASK &$obj
+   * @param TASK $obj
    */
-  function load_from_object (&$obj)
+  function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
     $this->set_value ('verbose', $obj->verbose);
@@ -142,10 +142,10 @@ class EXECUTE_TASK_FORM extends FORM
 
   /**
    * Execute the form.
-   * @param TASK &$obj
+   * @param TASK $obj
    * @access private
    */
-  function commit (&$obj)
+  function commit ($obj)
   {
     $obj->verbose = $this->value_for ('verbose');
     $obj->testing = $this->value_for ('testing');
@@ -159,10 +159,10 @@ class EXECUTE_TASK_FORM extends FORM
 
   /**
    * Add boolean fields to the check boxes.
-   * @param FORM_LIST_PROPERTIES &$props
+   * @param FORM_LIST_PROPERTIES $props
    * @access private
    */
-  function _add_boolean_options (&$props)
+  function _add_boolean_options ($props)
   {
     $props->add_item ('testing', 1);
     $props->add_item ('stop_on_error', 1);
@@ -174,10 +174,10 @@ class EXECUTE_TASK_FORM extends FORM
 
   /**
    * Draw task option controls.
-   * @param FORM_RENDERER &$renderer
+   * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_options (&$renderer)
+  function _draw_options ($renderer)
   {
     $props = $renderer->make_list_properties ();
     $props->show_descriptions = TRUE;
@@ -187,10 +187,10 @@ class EXECUTE_TASK_FORM extends FORM
   }
 
   /**
-   * @param FORM_RENDERER &$renderer
+   * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_controls (&$renderer)
+  function _draw_controls ($renderer)
   {
     $renderer->start ();
 

@@ -51,9 +51,9 @@ require_once ('webcore/cmd/commands.php');
 class ICON_COMMANDS extends COMMANDS
 {
   /**
-   * @param ICON &$icon Configure commands for this object.
+   * @param ICON $icon Configure commands for this object.
    */
-  function ICON_COMMANDS (&$icon)
+  function ICON_COMMANDS ($icon)
   {
     COMMANDS::COMMANDS ($icon->app);
     

@@ -55,12 +55,12 @@ class CONTROLS_RENDERER extends WEBCORE_OBJECT
    * Value is in CSS units.
    * @param string
    */
-  var $button_width = '';
+  public $button_width = '';
   
   /**
-   * @param CONTEXT &$context
+   * @param CONTEXT $context
    */
-  function CONTROLS_RENDERER (&$context)
+  function CONTROLS_RENDERER ($context)
   {
     WEBCORE_OBJECT::WEBCORE_OBJECT ($context);
     $browser = $this->env->browser ();
@@ -173,7 +173,7 @@ class CONTROLS_RENDERER extends WEBCORE_OBJECT
    * Can CSS 2 be used to render controls?
    * @var boolean
    */
-  var $_supports_css_2;
+  protected $_supports_css_2;
 }
 
 ?>

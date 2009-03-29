@@ -49,10 +49,10 @@ require_once ('webcore/forms/purge_form.php');
 class PURGE_ATTACHMENT_FORM extends PURGE_OBJECT_FORM
 {
   /**
-   * @param FOLDER &$app Deleting content from this folder.
+   * @param FOLDER $app Deleting content from this folder.
    * @param string $set_name
    */
-  function PURGE_ATTACHMENT_FORM (&$app)
+  function PURGE_ATTACHMENT_FORM ($app)
   {
     PURGE_OBJECT_FORM::PURGE_OBJECT_FORM ($app);
 
@@ -62,15 +62,15 @@ class PURGE_ATTACHMENT_FORM extends PURGE_OBJECT_FORM
     $field->visible = FALSE;
     $this->add_field ($field);
     
-    $field =& $this->field_at ('remove_resources');
+    $field = $this->field_at ('remove_resources');
     $field->visible = TRUE;
   }
 
   /**
    * Load initial properties from this object.
-   * @param ATTACHMENT &$obj
+   * @param ATTACHMENT $obj
    */
-  function load_from_object (&$obj)
+  function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
     $this->set_value ('type', $obj->type);

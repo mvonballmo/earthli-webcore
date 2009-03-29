@@ -165,10 +165,10 @@ function read_vars ($indexes)
  * Remove empty entries from an array.
  * @version 3.0.0
  * @since 2.2.1
- * @param array &$arr
+ * @param array $arr
  * @return array
  */
-function trim_array (&$arr)
+function trim_array ($arr)
 {
   foreach ($arr as $key => $value)
   {
@@ -218,9 +218,9 @@ function raise ($message, $routine_name = '', $class_name = '', $obj = null, $ha
  * @since 2.2.1
  * @see raise()
  */
-function set_default_exception_handler (&$handler)
+function set_default_exception_handler ($handler)
 {
-  $GLOBALS ['_default_exception_handler'] =& $handler;
+  $GLOBALS ['_default_exception_handler'] = $handler;
 }
 
 function hook_php_error_handler ()
@@ -322,13 +322,13 @@ class RAISABLE
 
   /**
    * Raise an error if the object is not the requested type.
-   * @param object &$obj
+   * @param object $obj
    * @param string $class_name
    * @access private
    */
-  function raise_if_not_is_a (&$obj, $expected_class, $routine_name, $class_name)
+  function raise_if_not_is_a ($obj, $expected_class, $routine_name, $class_name)
   {
-    if (! is_a ($obj, $expected_class))
+    if (! ($obj instanceof $expected_class))
     {
       $this->raise ('[' . get_class ($obj) . "] is not a [$expected_class]", $routine_name, $class_name);
     }
@@ -470,11 +470,11 @@ class EXCEPTION_HANDLER
    * Dispatches the error message to the handler.
    * Override in descendants to use the same message, but a different delivery mechanism. The
    * default behavior issues a PHP {@link die()} command, which stops page-processing.
-   * @param EXCEPTION_SIGNATURE &$sig
+   * @param EXCEPTION_SIGNATURE $sig
    * @param string $msg Pre-formatted error message.
    * @access private
    */
-  function dispatch (&$sig, $msg)
+  function dispatch ($sig, $msg)
   {
     die ($msg);
   }
@@ -495,33 +495,33 @@ class TYPE_INFO
    * Type name, unique within the application.
    * @var string
    */
-  var $id = 'object';
+  public $id = 'object';
   /**
    * Title for a single object.
    * @var string
    */
-  var $singular_title = 'Object';
+  public $singular_title = 'Object';
   /**
    * Title for more than one of these objects.
    * @var string
    */
-  var $plural_title = 'Objects';
+  public $plural_title = 'Objects';
   /**
    * Object is reachable via this URL.
    * May not be set for some objects.
    * @var string
    */
-  var $home_page = '';
+  public $home_page = '';
   /**
    * Resource location inside the {@link Folder_name_icons} folder.
    * May be empty.
    * @var string
    */
-  var $icon = '{icons}buttons/new_object';
+  public $icon = '{icons}buttons/new_object';
   /**
    * @var string
    */
-  var $edit_page = 'edit_object.php';
+  public $edit_page = 'edit_object.php';
 
   /**
    * Return the number with the title attached as units.

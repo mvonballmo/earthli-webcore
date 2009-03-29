@@ -49,9 +49,9 @@ require_once ('webcore/forms/object_in_folder_form.php');
 class PROJECT_ENTRY_FORM extends ENTRY_FORM
 {
   /**
-   * @param PROJECT &$folder Project in which to add or edit the PROJECT_ENTRY.
+   * @param PROJECT $folder Project in which to add or edit the PROJECT_ENTRY.
    */
-  function PROJECT_ENTRY_FORM (&$folder)
+  function PROJECT_ENTRY_FORM ($folder)
   {
     ENTRY_FORM::ENTRY_FORM ($folder);
 
@@ -96,7 +96,7 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
     $field->min_value = 1;
     $this->add_field ($field);
 
-    $field =& $this->field_at ('description');
+    $field = $this->field_at ('description');
     $field->title = 'Summary';
     $field->description = 'A short description that is shown in change logs and job lists.'
                           . ' Longer text that should not appear in summaries should go in'
@@ -106,9 +106,9 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
 
   /**
    * Load initial properties from this PROJECT_ENTRY.
-   * @param PROJECT_ENTRY &$obj
+   * @param PROJECT_ENTRY $obj
    */
-  function load_from_object (&$obj)
+  function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
 
@@ -141,10 +141,10 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
   /**
    * Does this form hold valid data for this project entry?
    * Applies additional check to ensure that at least one branch is selected.
-   * @param PROJECT_ENTRY &$obj
+   * @param PROJECT_ENTRY $obj
    * @access private
    */
-  function _post_validate (&$obj)
+  function _post_validate ($obj)
   {
     parent::_post_validate ($obj);
 
@@ -154,7 +154,7 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
 
     while (! $selected && ($i < $c))
     {
-      $branch =& $this->branches [$i];
+      $branch = $this->branches [$i];
       $selected = ($this->value_for ("branch_{$branch->id}_enabled") > 0);
       $i++;
     }
@@ -180,10 +180,10 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
 
   /**
    * Store the form's values for this job.
-   * @param PROJECT_ENTRY &$obj
+   * @param PROJECT_ENTRY $obj
    * @access private
    */
-  function commit (&$obj)
+  function commit ($obj)
   {
     parent::commit ($obj);
     $obj->store_branch_infos ();
@@ -191,10 +191,10 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
 
   /**
    * Store the form's values for this job.
-    * @param PROJECT_ENTRY &$obj
+    * @param PROJECT_ENTRY $obj
     * @access private
     */
-  function _store_to_object (&$obj)
+  function _store_to_object ($obj)
   {
     $main_branch_id = $this->value_for ('main_branch_id');
 
@@ -236,10 +236,10 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
 
   /**
    * Create the per-branch fields for this form.
-   * @param BRANCH &$branch
+   * @param BRANCH $branch
    * @access private
    */
-  function _add_fields_for_branch (&$branch)
+  function _add_fields_for_branch ($branch)
   {
     $field = new BOOLEAN_FIELD ();
     $field->id = "branch_{$branch->id}_enabled";
@@ -257,17 +257,17 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
   /**
    * Load the branch information into the form.
    * This is called once for each branch that is enabled on a loaded object.
-   * @param PROJECT_ENTRY_BRANCH_INFO &$branch_info
+   * @param PROJECT_ENTRY_BRANCH_INFO $branch_info
    * @access private
    */
-  function _load_from_branch_info (&$branch_info)
+  function _load_from_branch_info ($branch_info)
   {
     $id = $branch_info->branch_id;
     $show_branch = TRUE;
 
     if ($this->cloning ())
     {
-      $branch =& $branch_info->branch ();
+      $branch = $branch_info->branch ();
       $show_branch = ! $branch->locked ();
 
       if (! $show_branch && ($this->value_for ('main_branch_id') == $id))
@@ -289,10 +289,10 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
   /**
    * Store form values for this branch.
    * This is called once for each branch that is enabled when the form is committed.
-   * @param PROJECT_ENTRY_BRANCH_INFO &$branch_info
+   * @param PROJECT_ENTRY_BRANCH_INFO $branch_info
    * @access private
    */
-  function _store_to_branch_info (&$branch_info)
+  function _store_to_branch_info ($branch_info)
   {
     $branch_info->release_id = $this->value_for ("branch_{$branch_info->branch_id}_release_id");
   }
@@ -301,10 +301,10 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
    * Configure the history item's properties.
    * Makes sure that the branch information is compared when the main object is
    * stored.
-   * @param HISTORY_ITEM &$history_item
+   * @param HISTORY_ITEM $history_item
    * @access private
    */
-  function _adjust_history_item (&$history_item)
+  function _adjust_history_item ($history_item)
   {
     parent::_adjust_history_item ($history_item);
     $history_item->compare_branches = TRUE;
@@ -370,10 +370,10 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
 
   /**
    * Draws the entry {@link PROJECT_ENTRY::$kind} selector controls.
-   * @param FORM_RENDERER &$renderer
+   * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_kind_controls (&$renderer)
+  function _draw_kind_controls ($renderer)
   {
     $kinds = $this->app->display_options->entry_kinds ();
     if (sizeof ($kinds))
@@ -391,7 +391,7 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
     }
   }
 
-  function _draw_component_controls (&$renderer)
+  function _draw_component_controls ($renderer)
   {
     $props = $renderer->make_list_properties ();
     $props->add_item ('[None]', 0);
@@ -406,11 +406,11 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
 
   /**
    * Should controls for this branch be disabled?
-   * @param BRANCH &$branch
-   * @param RELEASE &$release
+   * @param BRANCH $branch
+   * @param RELEASE $release
    * @access private
    */
-  function _branch_is_locked (&$branch, &$release)
+  function _branch_is_locked ($branch, $release)
   {
     return $branch->locked () || (isset ($release) && $release->locked () && ! $this->cloning ());
   }
@@ -418,13 +418,13 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
   /**
    * Draw the selector's for branch properties.
    * If the branch or release is locked, the values should be displayed as read-only.
-   * @param BRANCH &$branch
-   * @param FORM_RENDERER &$renderer
+   * @param BRANCH $branch
+   * @param FORM_RENDERER $renderer
    * @param boolean $visible Is this branch enabled for this project entry?
    * @param RELEASE $release Release in this branch (may be empty).
    * @access private
    */
-  function _draw_branch_info_controls (&$branch, &$renderer, $visible, &$release)
+  function _draw_branch_info_controls ($branch, $renderer, $visible, $release)
   {
     if ($this->_branch_is_locked ($branch, $release))
     {
@@ -504,10 +504,10 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
 
   /**
    * Draw the selector for all branches.
-   * @param FORM_RENDERER &$renderer
+   * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_branch_controls (&$renderer)
+  function _draw_branch_controls ($renderer)
   {
     if (sizeof ($this->branches))
     {
@@ -541,7 +541,7 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
               if ($release_id)
               {
                 $release_query = $branch->release_query ();
-                $release =& $release_query->object_at_id ($release_id);
+                $release = $release_query->object_at_id ($release_id);
                 $locked = $locked || $this->_branch_is_locked ($branch, $release);
               }
               else
@@ -617,6 +617,6 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
    * @var integer
    * @access private
    */
-  var $default_branch_id;
+  public $default_branch_id;
 }
 ?>

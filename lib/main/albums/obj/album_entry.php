@@ -53,12 +53,12 @@ class ALBUM_ENTRY extends MULTI_TYPE_ENTRY
    * When did this entry happen?
    * @var DATE_TIME
    */
-  var $date;
+  public $date;
 
   /**
-   * @param ALBUM_APPLICATION &$app Main application.
+   * @param ALBUM_APPLICATION $app Main application.
    */
-  function ALBUM_ENTRY (&$app)
+  function ALBUM_ENTRY ($app)
   {
     MULTI_TYPE_ENTRY::MULTI_TYPE_ENTRY ($app);
     $this->date = $app->make_date_time ();
@@ -71,12 +71,12 @@ class ALBUM_ENTRY extends MULTI_TYPE_ENTRY
    */
   function date_as_string ()
   {
-    $f =& $this->parent_folder ();
+    $f = $this->parent_folder ();
     return $f->format_date ($this->date);
   }
 
   /**
-   * @param DATABASE &$db
+   * @param DATABASE $db
    */
   function load ($db)
   {
@@ -85,14 +85,14 @@ class ALBUM_ENTRY extends MULTI_TYPE_ENTRY
   }
 
   /**
-   * @param SQL_STORAGE &$storage Store values to this object.
+   * @param SQL_STORAGE $storage Store values to this object.
    */
-  function store_to (&$storage)
+  function store_to ($storage)
   {
     parent::store_to ($storage);
     $storage->add ($this->_table_name (), 'date', Field_type_date_time, $this->date);
     
-    $folder =& $this->parent_folder ();
+    $folder = $this->parent_folder ();
     $folder->include_entry ($this);
   }
 
@@ -115,7 +115,7 @@ class ALBUM_ENTRY extends MULTI_TYPE_ENTRY
   {
     parent::_purge ($options);
     
-    $folder =& $this->parent_folder ();
+    $folder = $this->parent_folder ();
     $folder->refresh_dates (TRUE);
   }
 }

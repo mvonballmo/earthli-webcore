@@ -51,16 +51,16 @@ class EXECUTE_TEST_SUITE_FORM extends FORM
   /**
    * @var string
    */
-  var $button = 'Load';
+  public $button = 'Load';
   /**
    * @var string
    */
-  var $button_icon = '{icons}buttons/ship';
+  public $button_icon = '{icons}buttons/ship';
   
   /**
-   * @param CONTEXT &$context
+   * @param CONTEXT $context
    */
-  function EXECUTE_TEST_SUITE_FORM (&$context)
+  function EXECUTE_TEST_SUITE_FORM ($context)
   {
     FORM::FORM ($context);
 
@@ -72,9 +72,9 @@ class EXECUTE_TEST_SUITE_FORM extends FORM
   }
   
   /**
-   * @param TEST_SUITE &$obj
+   * @param TEST_SUITE $obj
    */
-  function load_from_object (&$obj)
+  function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
     $names = $obj->test_names ();
@@ -83,10 +83,10 @@ class EXECUTE_TEST_SUITE_FORM extends FORM
   }
   
   /**
-   * @param FORM_RENDERER &$renderer
+   * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_controls (&$renderer)
+  function _draw_controls ($renderer)
   {
     $renderer->start ();
     

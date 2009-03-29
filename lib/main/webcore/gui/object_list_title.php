@@ -56,7 +56,7 @@ class OBJECT_LIST_TITLE extends WEBCORE_OBJECT
    * Number of objects of all types.
    * @var integer
    */
-  var $num_objects = 0;
+  public $num_objects = 0;
 
   /**
    * Add an object to the subject.
@@ -110,12 +110,12 @@ class OBJECT_LIST_TITLE extends WEBCORE_OBJECT
    * @var string
    * @access private
    */
-  var $_text = '';
+  protected $_text = '';
   /**
    * @var array [OBJECT_LIST_TITLE_ITEM]
    * @access private
    */
-  var $_items;
+  protected $_items;
 }
 
 /**
@@ -134,12 +134,12 @@ class OBJECT_LIST_TITLE_ITEM
    * Descriptor for the objects in this item.
    * @var TYPE_INFO
    */
-  var $type_info;
+  public $type_info;
   /**
    * Number of objects in this item.
    * @var integer
    */
-  var $num_objects = 0;
+  public $num_objects = 0;
 
   function as_text ()
   {

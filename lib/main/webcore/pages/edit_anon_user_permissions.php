@@ -26,7 +26,7 @@ http://www.earthli.com/software/webcore
 
 ****************************************************************************/
 
-  $user =& $App->anon_user ();
+  $user = $App->anon_user ();
 
   if (isset ($user) && ($App->login->is_allowed (Privilege_set_user, Privilege_secure)))
   {

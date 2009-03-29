@@ -51,10 +51,10 @@ class LOCATION_RENDERER extends WEBCORE_OBJECT
   /**
    * Render 'obj' to 'page' as a link.
    * Updates the {@link PAGE::$location} and {@link PAGE::$title}.
-   * @param PAGE &$page
-   * @param RENDERABLE &$obj
+   * @param PAGE $page
+   * @param RENDERABLE $obj
    */
-  function add_to_page_as_link (&$page, &$obj)
+  function add_to_page_as_link ($page, $obj)
   {
     $this->_add_context ($page, $obj);
     $page->title->add_object ($obj);
@@ -64,10 +64,10 @@ class LOCATION_RENDERER extends WEBCORE_OBJECT
   /**
    * Render 'obj' to 'page' as text.
    * Updates the {@link PAGE::$location} and {@link PAGE::$title}.
-   * @param PAGE &$page
-   * @param RENDERABLE &$obj
+   * @param PAGE $page
+   * @param RENDERABLE $obj
    */
-  function add_to_page_as_text (&$page, &$obj)
+  function add_to_page_as_text ($page, $obj)
   {
     $this->_add_context ($page, $obj);
     $page->title->add_object ($obj);
@@ -76,11 +76,11 @@ class LOCATION_RENDERER extends WEBCORE_OBJECT
   
   /**
    * Render any parent objects to the title and location.
-   * @param PAGE &$page
-   * @param RENDERABLE &$obj
+   * @param PAGE $page
+   * @param RENDERABLE $obj
    * @access private
    */
-  function _add_context (&$page, &$obj)
+  function _add_context ($page, $obj)
   {
   }
 }
@@ -96,11 +96,11 @@ class OBJECT_IN_FOLDER_LOCATION_RENDERER extends LOCATION_RENDERER
 {
   /**
    * Render any parent objects to the title and location.
-   * @param PAGE &$page
-   * @param RENDERABLE &$obj
+   * @param PAGE $page
+   * @param RENDERABLE $obj
    * @access private
    */
-  function _add_context (&$page, &$obj)
+  function _add_context ($page, $obj)
   {
     $f = $obj->parent_folder ();
     $page->location->add_folder_link ($f);

@@ -53,24 +53,24 @@ class SELECTABLE_GRID extends STANDARD_GRID
    * Name of the selector control.
    * @var string
    */
-  var $selector_name = 'ids[]';
+  public $selector_name = 'ids[]';
   /**
    * Show check-box selectors next to items?
    * @var boolean
    */
-  var $items_are_selectable = FALSE;
+  public $items_are_selectable = FALSE;
   /**
    * Are the checkboxes enabled at first?
    * @var boolean
    */
-  var $items_are_selected = FALSE;
+  public $items_are_selected = FALSE;
 
   /**
    * Render the start of a single cell.
-   * @param object &$obj
+   * @param object $obj
    * @access private
    */
-  function _start_box (&$obj)
+  function _start_box ($obj)
   {
     parent::_start_box ($obj);
     if ($this->items_are_selectable)
@@ -84,7 +84,7 @@ class SELECTABLE_GRID extends STANDARD_GRID
     }
   }
   
-  function _finish_box (&$obj)
+  function _finish_box ($obj)
   {
     if ($this->items_are_selectable)
     {
@@ -97,10 +97,10 @@ class SELECTABLE_GRID extends STANDARD_GRID
   
   /**
    * Display a checkbox to select this item.
-   * @param object &$obj
+   * @param object $obj
    * @access private
    */
-  function _echo_selector (&$obj)
+  function _echo_selector ($obj)
   {
     if ($this->items_are_selectable)
     {

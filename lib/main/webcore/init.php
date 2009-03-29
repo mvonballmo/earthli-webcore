@@ -107,7 +107,7 @@ $Engine->init ();
  * @since 2.2.1
  * @global ENVIRONMENT $Env
  */
-$Env =& $Engine->env;
+$Env = $Engine->env;
 
 /**
  * Reference to the global page.
@@ -119,7 +119,7 @@ $Env =& $Engine->env;
  * @since 2.2.1
  * @global PAGE $Page
  */
-$Page =& $Engine->page;
+$Page = $Engine->page;
 
 /**
  * Reference to the global logger.
@@ -133,6 +133,6 @@ $Page =& $Engine->page;
  * @global LOGGER $Logger
  * @access private
  */
-$Logger =& $Env->logs->logger;
+$Logger = $Env->logs->logger;
 
 ?>

@@ -32,7 +32,7 @@ http://www.earthli.com/software/webcore
 
   if ($name)
   {
-    $user =& $user_query->object_at_name ($name);
+    $user = $user_query->object_at_name ($name);
 
     if (isset ($user) && ($App->login->is_allowed (Privilege_set_user, Privilege_secure)))
     {

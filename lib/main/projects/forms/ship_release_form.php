@@ -52,12 +52,12 @@ class SHIP_RELEASE_FORM extends AUDITABLE_FORM
   /**
    * @var string
    */
-  var $button = 'Yes';
+  public $button = 'Yes';
 
   /**
-   * @param APPLICATION &$app
+   * @param APPLICATION $app
    */
-  function SHIP_RELEASE_FORM (&$app)
+  function SHIP_RELEASE_FORM ($app)
   {
     AUDITABLE_FORM::AUDITABLE_FORM ($app);
 
@@ -76,10 +76,10 @@ class SHIP_RELEASE_FORM extends AUDITABLE_FORM
 
   /**
    * Store the form's values for this change.
-    * @param RELEASE &$obj
+    * @param RELEASE $obj
     * @access private
     */
-  function _store_to_object (&$obj)
+  function _store_to_object ($obj)
   {
     switch ($this->value_for ('state'))
     {
@@ -96,9 +96,9 @@ class SHIP_RELEASE_FORM extends AUDITABLE_FORM
   }
 
   /**
-   * @param RELEASE &$obj
+   * @param RELEASE $obj
    */
-  function load_from_object (&$obj)
+  function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
     $this->set_value ('state', Locked);
@@ -113,7 +113,7 @@ class SHIP_RELEASE_FORM extends AUDITABLE_FORM
 
   /**
    * Delete the given object.
-   * @param RELEASE &$obj
+   * @param RELEASE $obj
    * @access private
    */
   function commit ($obj)
@@ -127,20 +127,20 @@ class SHIP_RELEASE_FORM extends AUDITABLE_FORM
 
   /**
    * Return a preview for the given object.
-   * @param STORABLE &$obj
+   * @param STORABLE $obj
    * @return FORM_PREVIEW_SETTINGS
    * @access private
    */
-  function _make_preview_settings (&$obj)
+  function _make_preview_settings ($obj)
   {
     return new SHIP_RELEASE_PREVIEW_SETTINGS ($this->context);
   }
 
   /**
-   * @param FORM_RENDERER &$renderer
+   * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_controls (&$renderer)
+  function _draw_controls ($renderer)
   {
     $renderer->start ();
     $renderer->draw_text_row ('', 'Are you sure you want to ship ' . $this->_object->title_as_link () . '?');
@@ -173,7 +173,7 @@ class SHIP_RELEASE_FORM extends AUDITABLE_FORM
    * @var string
    * @access private
    */
-  var $_privilege_set = Privilege_set_folder;
+  protected $_privilege_set = Privilege_set_folder;
 }
 
 /**
@@ -195,7 +195,7 @@ class SHIP_RELEASE_PREVIEW_SETTINGS extends UPDATE_RELEASE_PREVIEW_SETTINGS
 ?>
   <p>Shipping this release will make the following changes (scroll down or hide this preview to accept).</p>
 <?php
-    $replacement =& $committer->replacement_release ();
+    $replacement = $committer->replacement_release ();
     if (isset ($replacement))
     {
       $text = 'These jobs are still open and will be <span class="field">moved</span> to ' . $replacement->title_as_link ();

@@ -31,9 +31,9 @@ require_once ('webcore/tasks/db/upgrade_per_app_260_270.php');
 
 class PROJECT_180_190_MIGRATOR_TASK extends UPGRADE_PER_APP_260_270_TASK
 {
-  var $application_name = 'earthli Projects';
-  var $version_from = '1.8.0';
-  var $version_to = '1.9.0';
+  public $application_name = 'earthli Projects';
+  public $version_from = '1.8.0';
+  public $version_to = '1.9.0';
 
   function _execute ()
   {

@@ -33,12 +33,12 @@ http://www.earthli.com/software/webcore
 
   $id = read_var ('id');
   $folder_query = $App->login->folder_query ();
-  $folder =& $folder_query->folder_for_entry_at_id ($id);
+  $folder = $folder_query->folder_for_entry_at_id ($id);
 
   if (isset ($folder))
   {
     $entry_query = $folder->entry_query ();
-    $entry =& $entry_query->object_at_id ($id);
+    $entry = $entry_query->object_at_id ($id);
   }
 
   if (isset ($entry) && $App->login->is_allowed (Privilege_set_entry, Privilege_view, $entry))

@@ -55,25 +55,25 @@ require_once ('webcore/sys/system.php');
 class WEBCORE_OBJECT extends RAISABLE
 {
   /**
-   * @param CONTEXT &$context Page or application object to which this one belongs.
+   * @param CONTEXT $context Page or application object to which this one belongs.
    */
-  function WEBCORE_OBJECT (&$context)
+  function WEBCORE_OBJECT ($context)
   {
     $this->assert (isset ($context), "[context] cannot be empty.", 'WEBCORE_OBJECT', 'WEBCORE_OBJECT');
 
-    $this->context =& $context;
-    $this->env =& $context->env;
-    $this->db =& $context->database;
+    $this->context = $context;
+    $this->env = $context->env;
+    $this->db = $context->database;
 
     if ($context->is_page)
     {
-      $this->page =& $context;
+      $this->page = $context;
     }
     else
     {
-      $this->app =& $context;
-      $this->page =& $context->page;
-      $this->login =& $context->login;
+      $this->app = $context;
+      $this->page = $context->page;
+      $this->login = $context->login;
     }
 
     $this->env->num_webcore_objects++;
@@ -88,7 +88,7 @@ class WEBCORE_OBJECT extends RAISABLE
    * Return meta-information about this class.
    * @return ENTRY_TYPE_INFO
    */
-  function &type_info ()
+  function type_info ()
   {
     return $this->context->type_info_for (get_class ($this));
   }
@@ -176,39 +176,39 @@ class WEBCORE_OBJECT extends RAISABLE
     * @var CONTEXT
     * @access private
     */
-  var $context = null;
+  public $context = null;
   /**
    * Shortcut to global environment.
     * @var ENVIRONMENT
     * @access private
     */
-  var $env = null;
+  public $env = null;
   /**
    * Shortcut to global page object.
     * @var PAGE
     * @access private
     */
-  var $page = null;
+  public $page = null;
   /**
    * Reference to the shared database.
     * @var DATABASE
     * @access private
     */
-  var $db = null;
+  public $db = null;
   /**
    * Reference to the application.
     * Can be empty if there is no application.
     * @var APPLICATION
     * @access private
     */
-  var $app = null;
+  public $app = null;
   /**
    * Shortcut to the 'login' in the application.
     * Can be empty if there is no application.
     * @var USER
     * @access private
     */
-  var $login = null;
+  public $login = null;
 }
 
 ?>

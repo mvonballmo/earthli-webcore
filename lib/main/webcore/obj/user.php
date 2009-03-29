@@ -55,49 +55,49 @@ class USER extends CONTENT_OBJECT
   /**
    * @var string
    */
-  var $password = '';
+  public $password = '';
   /**
    * @var string
    */
-  var $real_first_name = '';
+  public $real_first_name = '';
   /**
    * @var string
    */
-  var $real_last_name = '';
+  public $real_last_name = '';
   /**
    * @var string
    */
-  var $home_page_url = '';
+  public $home_page_url = '';
   /**
    * @var string
    */
-  var $email = '';
+  public $email = '';
   /**
    * @var string
    */
-  var $picture_url = '';
+  public $picture_url = '';
   /**
    * @var string
    */
-  var $signature = '';
+  public $signature = '';
   /**
    * Location of user's icon.
    * Use {@link icon_as_html()} or {@link expanded_icon_url()} to access this property.
    * @var integer
    */
-  var $icon_url = '';
+  public $icon_url = '';
   /**
    * @var string
     * @access private
     */
-  var $ip_address;
+  public $ip_address;
   /**
    * Determines how email is displayed in the interface.
    * Can be {@link User_email_hidden}, {@link User_email_scrambled} or 
    * {@link User_email_visible}.
    * @var boolean
    */
-  var $email_visibility = User_email_scrambled;
+  public $email_visibility = User_email_scrambled;
 
   /**
    * Was this user logged in by the system?
@@ -106,7 +106,7 @@ class USER extends CONTENT_OBJECT
    * be used for further validation, since it may have far too many rights.
    * @var boolean
    */
-  var $ad_hoc_login = FALSE;
+  public $ad_hoc_login = FALSE;
 
   /**
    * Icon, renderered as HTML.
@@ -212,8 +212,8 @@ class USER extends CONTENT_OBJECT
   {
     $this->assert (! $this->ad_hoc_login, 'Cannot use an ad-hoc login.', 'is_allowed', 'USER');
 
-    $user_options =& $this->app->user_options;
-    $user_permissions =& $this->permissions ();
+    $user_options = $this->app->user_options;
+    $user_permissions = $this->permissions ();
 
     if ($user_permissions->global_privileges->supports ($set_name))
     {
@@ -261,12 +261,12 @@ class USER extends CONTENT_OBJECT
  }
       else
       {
-        $folder =& $obj->security_context ();
-        $folder_permissions =& $folder->permissions ();
+        $folder = $obj->security_context ();
+        $folder_permissions = $folder->permissions ();
         $Result = $folder_permissions->enabled ($set_name, $type);
         if (! $Result)
         {
-          $owner =& $obj->owner ();
+          $owner = $obj->owner ();
           switch ($type)
           {
           case Privilege_view:
@@ -318,7 +318,7 @@ class USER extends CONTENT_OBJECT
    * Permissions applicable to this user.
    * @return USER_PERMISSIONS
    */
-  function &permissions ()
+  function permissions ()
   {
     $this->assert (isset ($this->_permissions), "Permissions not loaded for [$this->title].", 'permissions', 'USER');
     return $this->_permissions;
@@ -346,11 +346,11 @@ class USER extends CONTENT_OBJECT
   }
 
   /**
-   * @param USER &$u
+   * @param USER $u
     * @return bool
     * @access private
     */
-  function equals (&$u)
+  function equals ($u)
   {
     return $u->id == $this->id;
   }
@@ -388,11 +388,11 @@ class USER extends CONTENT_OBJECT
   /**
    * Create a new folder rooted at 'parent'.
     * Does not store to the database.
-    * @param FOLDER &$parent
+    * @param FOLDER $parent
     * @return FOLDER
     * @access private
     */
-  function new_folder (&$parent)
+  function new_folder ($parent)
   {
     $Result = $this->app->new_folder ();
     $Result->creator_id = $this->id;
@@ -491,28 +491,30 @@ class USER extends CONTENT_OBJECT
    * @param boolean $can_fail
    * @return FOLDER
    */
-  function &folder_at_id ($id, $can_fail = FALSE)
+  function folder_at_id ($id, $can_fail = FALSE)
   {
     if ($id)
     {
-      $cache =& $this->folder_cache ();
-      $Result =& $cache->object_at_id ($id);
+      $cache = $this->folder_cache ();
+      $Result = $cache->object_at_id ($id);
+      
+      if (isset ($Result) || ! $Result)
+      {
+        return $Result; 
+      }
     }
 
-    if (! isset ($Result) || ! $Result)
+    $msg = "Folder for id [$id] not found.";
+    if ($can_fail)
     {
-      $msg = "Folder for id [$id] not found.";
-      if ($can_fail)
-      {
-        log_message ($msg, Msg_type_debug_info, Msg_channel_system);
-      }
-      else
-      {
-        $this->raise ($msg, 'folder_at_id', 'USER');
-      }
+      log_message ($msg, Msg_type_debug_info, Msg_channel_system);
     }
-
-    return $Result;
+    else
+    {
+      $this->raise ($msg, 'folder_at_id', 'USER');
+    }
+    
+    return null;
   }
 
   /**
@@ -520,7 +522,7 @@ class USER extends CONTENT_OBJECT
    * @return QUERY_BASED_CACHE
    * @access private
    */
-  function &folder_cache ()
+  function folder_cache ()
   {
     if (! isset ($this->_folder_cache))
     {
@@ -654,9 +656,9 @@ class USER extends CONTENT_OBJECT
   }
 
   /**
-   * @param DATABASE &$db Database from which to load values.
+   * @param DATABASE $db Database from which to load values.
    */
-  function load (&$db)
+  function load ($db)
   {
     parent::load ($db);
     $this->kind = $db->f ('kind');
@@ -687,9 +689,9 @@ class USER extends CONTENT_OBJECT
   }
 
   /**
-   * @param SQL_STORAGE &$storage Store values to this object.
+   * @param SQL_STORAGE $storage Store values to this object.
    */
-  function store_to (&$storage)
+  function store_to ($storage)
   {
     parent::store_to ($storage);
     $tname =$this->_table_name ();
@@ -724,11 +726,11 @@ class USER extends CONTENT_OBJECT
   {
     if ($this->is_anonymous ())
     {
-      $user =& $this->app->anon_user ();
+      $user = $this->app->anon_user ();
     }
     else
     {
-      $user =& $this->app->global_user ();
+      $user = $this->app->global_user ();
     }
 
     include_once ('webcore/sys/permissions.php');
@@ -840,11 +842,11 @@ class USER extends CONTENT_OBJECT
 
   /**
    * Apply class-specific restrictions to this query.
-   * @param SUBSCRIPTION_QUERY &$query
-   * @param HISTORY_ITEM &$history_item Action that generated this request. May be empty.
+   * @param SUBSCRIPTION_QUERY $query
+   * @param HISTORY_ITEM $history_item Action that generated this request. May be empty.
    * @access private
    */
-  function _prepare_subscription_query (&$query, &$history_item)
+  function _prepare_subscription_query ($query, $history_item)
   {
     $query->restrict ('watch_entries > 0');
     $query->restrict_kinds (array (Subscribe_user => $this->id));
@@ -855,13 +857,13 @@ class USER extends CONTENT_OBJECT
    * @access private
    * @var QUERY_BASED_CACHE
    */
-  var $_folder_cache;
+  protected $_folder_cache;
   /**
    * Locally-cached query for all visible folders.
    * @var USER_FOLDER_QUERY
    * @access private
    */
-  var $_folder_query;
+  protected $_folder_query;
   /**
    * Applicable permissions for this user.
    * May be empty if the user was generated without retrieving permissions. Generally, only the
@@ -869,13 +871,13 @@ class USER extends CONTENT_OBJECT
    * @var USER_PERMISSIONS
    * @access private
    */
-  var $_permissions;
+  protected $_permissions;
   /**
    * Can be {@link Privilege_kind_anonymous} or {@link Privilege_kind_registered}.
     * @var string
     * @access private
     */
-  var $kind;
+  public $kind;
 }
 
 ?>

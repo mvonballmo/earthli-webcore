@@ -64,24 +64,24 @@ class ENVIRONMENT extends RESOLVER
    * {@link LOCATION_MENU::add_root_link()} if set.
    * @var string
    */
-  var $title = '';
+  public $title = '';
   /**
    * Unique ID for this framework.
    * Do not change this as it is used for migration and versioning.
    * @var string
    */
-  var $framework_id = 'com.earthli.webcore';
+  public $framework_id = 'com.earthli.webcore';
   /**
    * Version number of the WebCore library.
    * @var string
    */
-  var $version = '3.0.0';
+  public $version = '3.0.0';
   /**
    * Default identifier for this environment.
    * Set this value with {@link set_host_properties()}.
    * @var string
    */
-  var $default_domain;
+  public $default_domain;
 
   /* Helper objects */
 
@@ -90,33 +90,33 @@ class ENVIRONMENT extends RESOLVER
    * Provided for convenience.
    * @var DATE_TIME_TOOLKIT
    */
-  var $date_time_toolkit;
+  public $date_time_toolkit;
   /**
    * Settings for file operations.
    * Defaults to {@link global_file_options()}.
    * @see global_url_options() for a URL-style implementation.
    * @var FILE_OPTIONS
    */
-  var $file_options;
+  public $file_options;
   /**
    * Settings for url operations.
    * Defaults to {@link global_url_options()}.
    * @see global_file_options() for a URL-style implementation.
    * @var FILE_OPTIONS
    */
-  var $url_options;
+  public $url_options;
   /**
    * List of logging objects.
    * May be empty.
    * @var LOGGER_CONTAINER
    */
-  var $logs;
+  public $logs;
   /**
    * Profiling object used to collect global performance information.
    * May be null.
    * @var PROFILER
    */
-  var $profiler;
+  public $profiler;
 
   /* Exception handling */
 
@@ -128,19 +128,19 @@ class ENVIRONMENT extends RESOLVER
    * @var boolean
    * @access private
    */
-  var $ignore_redirects = FALSE;
+  public $ignore_redirects = FALSE;
   /**
    * To which page should exceptions be redirected?
    * This property is used by the {@link REDIRECT_EXCEPTION_HANDLER} if no default page is given.
    * @var string
    */
-  var $exception_handler_page = '{pages}/handle_exception.php';
+  public $exception_handler_page = '{pages}/handle_exception.php';
   /**
    * Location of the webcore library files.
    * Real file system path; should end in a path delimiter. Initialized at startup.
    * @var string
    */
-  var $library_path;
+  public $library_path;
 
   /* Debugging/logging */
 
@@ -149,30 +149,30 @@ class ENVIRONMENT extends RESOLVER
    * This property determines whether the "debug" flag has any effect.
    * @var boolean
    */
-  var $debug_enabled = FALSE;
+  public $debug_enabled = FALSE;
   /**
    * Is this a debugging session?
    * Use {@link setup_debugging()} to enable debugging.
    */
-  var $debugging = FALSE;
+  public $debugging = FALSE;
   /**
    * The exact debugging flags.
    * By default, the WebCore can pass debugging flags using post and get variables. These
    * indicate which channels should be loggeed. Use {@link setup_debugging()} to enable debugging.
    */
-  var $debugging_flags = '';
+  public $debugging_flags = '';
   /**
    * Emulate conditions when running from a command line.
    * Forces {@link running_on_default_host()} and {@link is_http_server()} to
    * return <code>False</code>.
    * @var boolean
    */
-  var $run_as_console = FALSE;
+  public $run_as_console = FALSE;
   /**
    * Database queries executed in this session.
    * @var integer
    */
-  var $num_queries_executed = 0;
+  public $num_queries_executed = 0;
   /**
    * Number of exceptions raised in this session.
    * If the default exception handler (set by {@link
@@ -180,37 +180,37 @@ class ENVIRONMENT extends RESOLVER
    * ENVIRONMENT_EXCEPTION_HANDLER}, it will track the number of exceptions
    * raised.
    */
-  var $num_exceptions_raised = 0;
+  public $num_exceptions_raised = 0;
   /**
    * Number of {@link WEBCORE_OBJECT}s created in this session.
    * @var integer
    */
-  var $num_webcore_objects = 0;
+  public $num_webcore_objects = 0;
   /**
    * Retains all query texts in order to detect duplicates.
    * Should only be used when debugging or doing development.
    * @var boolean
    * @access private
    */
-  var $warn_if_duplicate_query_executed = FALSE;
+  public $warn_if_duplicate_query_executed = FALSE;
   /**
    * Logs the name of each {@link WEBCORE_OBJECT} created and loaded.
    * Should only be used when debugging or doing development.
    * @var boolean
    * @access private
    */
-  var $log_class_names = FALSE;
+  public $log_class_names = FALSE;
   /**
    * Style sheet for HTML-style logs.
    * @var string
    */
-  var $logger_style_sheet = '{styles}/log.css';
+  public $logger_style_sheet = '{styles}/log.css';
 
   function ENVIRONMENT ()
   {
-    $this->date_time_toolkit =& global_date_time_toolkit ();
-    $this->file_options =& global_file_options ();
-    $this->url_options =& global_url_options ();
+    $this->date_time_toolkit = global_date_time_toolkit ();
+    $this->file_options = global_file_options ();
+    $this->url_options = global_url_options ();
     $this->logs = new LOGGER_CONTAINER ();
 
     RESOLVER::RESOLVER ();
@@ -507,6 +507,18 @@ class ENVIRONMENT extends RESOLVER
     }
     unset($this->_running_on_declared_host);
   }
+  
+  /**
+   * Sets the time-zone explicitly to avoid relying on the server time-zone setting.
+   * See the help for {@link PHP_MANUAL#date_default_timezone_set} for a list of valid time
+   * zones. 
+   *
+   * @param string $time_zone
+   */
+  function set_time_zone ($time_zone)
+  {
+    date_default_timezone_set($time_zone);
+  }
 
   /**
    * Initialize debugging tools for WebCore objects.
@@ -693,26 +705,26 @@ class ENVIRONMENT extends RESOLVER
    * has been sent. Use {@link set_buffered()} to set this value.
    * @var boolean
    */
-  var $_buffered = FALSE;
+  protected $_buffered = FALSE;
   /**
    * Access this object through {@link browser()}.
    * @var BROWSER
    * @access private
    */
-  var $_browser;
+  protected $_browser;
   /**
    * Cached URL used by {@link url()}.
    * @var URL
    * @access private
    */
-  var $_url;
+  protected $_url;
   /**
    * Cached flag indicating whether the environment is local
    * to the declared server.
    * @var bool
    * @access private
    */
-  var $_running_on_declared_host;
+  protected $_running_on_declared_host;
 }
 
 /**
@@ -725,11 +737,11 @@ class ENVIRONMENT extends RESOLVER
 class ENVIRONMENT_EXCEPTION_HANDLER extends EXCEPTION_HANDLER
 {
   /**
-   * @param ENVIRONMENT &$env Global environment.
+   * @param ENVIRONMENT $env Global environment.
    */
-  function HTML_EXCEPTION_HANDLER (&$env)
+  function HTML_EXCEPTION_HANDLER ($env)
   {
-    $this->env =& $env;
+    $this->env = $env;
   }
 
   /**
@@ -757,11 +769,11 @@ class HTML_EXCEPTION_HANDLER extends ENVIRONMENT_EXCEPTION_HANDLER
 {
   /**
    * Show the error as HTML if running from the server.
-   * @param EXCEPTION_SIGNATURE &$sig
+   * @param EXCEPTION_SIGNATURE $sig
    * @param string $msg Pre-formatted error message (not used here).
    * @access private
    */
-  function dispatch (&$sig, $msg)
+  function dispatch ($sig, $msg)
   {
     if ($this->env->is_http_server ())
     {
@@ -795,7 +807,7 @@ class LOGGER_EXCEPTION_HANDLER extends HTML_EXCEPTION_HANDLER
   /**
    * Constructs a default instance; seems to be required for PHP5.
    */
-  function LOGGER_EXCEPTION_HANDLER(&$env)
+  function LOGGER_EXCEPTION_HANDLER($env)
   {
     HTML_EXCEPTION_HANDLER::HTML_EXCEPTION_HANDLER($env);
   }
@@ -804,15 +816,15 @@ class LOGGER_EXCEPTION_HANDLER extends HTML_EXCEPTION_HANDLER
    * Should the handler kill execution?
    * @var boolean
    */
-  var $stop_on_error = TRUE;
+  public $stop_on_error = TRUE;
 
   /**
    * Send the error to the logger.
-   * @param EXCEPTION_SIGNATURE &$sig
+   * @param EXCEPTION_SIGNATURE $sig
    * @param string $msg Pre-formatted error message.
    * @access private
    */
-  function dispatch (&$sig, $msg)
+  function dispatch ($sig, $msg)
   {
     log_message ($msg, Msg_type_error, Msg_channel_system);
     if ($this->stop_on_error)
@@ -835,29 +847,29 @@ class REDIRECT_EXCEPTION_HANDLER extends HTML_EXCEPTION_HANDLER
   /**
    * @var ENVIRONMENT
    */
-  var $env;
+  public $env;
 
   /**
    * @param ENVIRONMENT $env Global environment.
     * @param string $handler_url Redirect exceptions to this url.
     */
-  function REDIRECT_EXCEPTION_HANDLER (&$env)
+  function REDIRECT_EXCEPTION_HANDLER ($env)
   {
     if (! $env->exception_handler_page)
     {
       raise ('Exception handler URL cannot be empty.', 'REDIRECT_EXCEPTION_HANDLER', 'REDIRECT_EXCEPTION_HANDLER');
     }
 
-    $this->env =& $env;
+    $this->env = $env;
   }
 
   /**
    * Send the error to the logger.
-   * @param EXCEPTION_SIGNATURE &$sig
+   * @param EXCEPTION_SIGNATURE $sig
    * @param string $msg
    * @access private
    */
-  function dispatch (&$sig, $msg)
+  function dispatch ($sig, $msg)
   {
     if ($this->env->is_http_server () && $this->env->buffered () && $this->env->exception_handler_page)
     {

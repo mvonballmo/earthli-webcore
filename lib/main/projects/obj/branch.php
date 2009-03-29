@@ -55,20 +55,20 @@ class BRANCH extends OBJECT_IN_FOLDER
     * @var integer
     * @see BRANCH::parent_release()
     */
-  var $parent_release_id;
+  public $parent_release_id;
 
   /**
    * Latest available release for this branch.
     * Release must be available (cannot be 'planned'). May return empty.
     * @return RELEASE
     */
-  function &latest_release ()
+  function latest_release ()
   {
     if (! isset ($this->_latest_release))
     {
       $q = $this->release_query ();
       $q->restrict_to_one_of (array ('rel.state = ' . Locked, 'rel.state = ' . Shipped));
-      $this->_latest_release =& $q->first_object ();
+      $this->_latest_release = $q->first_object ();
     }
 
     return $this->_latest_release;
@@ -79,12 +79,12 @@ class BRANCH extends OBJECT_IN_FOLDER
    * May return empty.
    * @return RELEASE
    */
-  function &next_release ()
+  function next_release ()
   {
     if (! isset ($this->_next_release))
     {
       $q = $this->pending_release_query ();
-      $this->_next_release =& $q->first_object ();
+      $this->_next_release = $q->first_object ();
     }
 
     return $this->_next_release;
@@ -95,13 +95,13 @@ class BRANCH extends OBJECT_IN_FOLDER
    * May return empty.
    * @return RELEASE
    */
-  function &parent_release ()
+  function parent_release ()
   {
     if (! isset ($this->_parent_release) && isset ($this->parent_release_id))
     {
       $f = $this->parent_folder ();
       $q = $f->release_query ();
-      $this->_parent_release =& $q->object_at_id ($this->parent_release_id);
+      $this->_parent_release = $q->object_at_id ($this->parent_release_id);
     }
 
     return $this->_parent_release;
@@ -157,7 +157,7 @@ class BRANCH extends OBJECT_IN_FOLDER
    * List of all jobs for this branch.
    * @return BRANCH_ENTRY_QUERY
    */
-  function &job_query ()
+  function job_query ()
   {
     $Result = $this->entry_query ();
     $Result->set_type ('job');
@@ -184,24 +184,24 @@ class BRANCH extends OBJECT_IN_FOLDER
     $class_name = $this->app->final_class_name ('RELEASE', 'projects/obj/release.php');
     $Result = new $class_name ($this->app);
     $Result->branch_id = $this->id;
-    $Result->_branch =& $this;
+    $Result->_branch = $this;
     $Result->set_parent_folder ($this->parent_folder ());
     return $Result;
   }
 
   /**
-   * @param DATABASE &$db
+   * @param DATABASE $db
    */
-  function load (&$db)
+  function load ($db)
   {
     parent::load ($db);
     $this->parent_release_id = $db->f ('parent_release_id');
   }
 
   /**
-   * @param SQL_STORAGE &$storage Store values to this object.
+   * @param SQL_STORAGE $storage Store values to this object.
    */
-  function store_to (&$storage)
+  function store_to ($storage)
   {
     parent::store_to ($storage);
     $tname =$this->_table_name ();
@@ -240,7 +240,7 @@ class BRANCH extends OBJECT_IN_FOLDER
   function _object_url ($use_links, $separator = null, $formatter = null)
   {
     $Result = parent::_object_url ($use_links, $separator, $formatter);
-    $folder =& $this->parent_folder ();
+    $folder = $this->parent_folder ();
     $folder_url = $folder->_object_url ($use_links, $separator, $formatter);
 
     if (! isset ($separator))
@@ -257,9 +257,9 @@ class BRANCH extends OBJECT_IN_FOLDER
    */
   function _purge ($options)
   {
-    $folder =& $this->parent_folder ();
+    $folder = $this->parent_folder ();
     $branch_query = $folder->branch_query ();
-    $branches =& $branch_query->objects ();
+    $branches = $branch_query->objects ();
     $num_branches = sizeof ($branches);
 
     $this->assert ($num_branches > 1, 'The last branch in a project cannot be purged.', '_purge', 'BRANCH');
@@ -282,23 +282,23 @@ class BRANCH extends OBJECT_IN_FOLDER
 
       if (isset ($new_trunk))
       {
-        $history_item =& $folder->new_history_item ();
+        $history_item = $folder->new_history_item ();
         $history_item->publication_state = $options->sub_history_item_publication_state;
         $folder->trunk_id = $new_trunk->id;
         $folder->store_if_different ($history_item);
 
-        $trunk =& $new_trunk;
+        $trunk = $new_trunk;
       }
     }
     else
     {
-      $trunk =& $folder->trunk ();
+      $trunk = $folder->trunk ();
     }
 
     /* Update every entry, making sure to create a history item for each one, indicating
        the change (branch removed, trunk added, main branch changed). */
 
-    $entries =& $entry_query->objects ();
+    $entries = $entry_query->objects ();
     $main_branch_info = null; // Compiler warning
 
     foreach ($entries as $entry)
@@ -306,7 +306,7 @@ class BRANCH extends OBJECT_IN_FOLDER
       $history_item = $entry->new_history_item ();
       $history_item->compare_branches = TRUE;
       $history_item->publication_state = $options->sub_history_item_publication_state;
-      $branch_infos =& $entry->stored_branch_infos ();
+      $branch_infos = $entry->stored_branch_infos ();
       unset ($main_branch_info);
 
       /* The check should actually be for equals to 1, but if an entry has no branch information
@@ -343,8 +343,8 @@ class BRANCH extends OBJECT_IN_FOLDER
 
       $entry->store_if_different ($history_item);
 
-      $orig_branch_infos =& $entry->stored_branch_infos ();
-      $new_branch_infos =& $entry->current_branch_infos ();
+      $orig_branch_infos = $entry->stored_branch_infos ();
+      $new_branch_infos = $entry->current_branch_infos ();
 
       if (! isset ($main_branch_info))
       {
@@ -393,11 +393,11 @@ class BRANCH extends OBJECT_IN_FOLDER
 
   /**
    * Apply class-specific restrictions to this query.
-   * @param SUBSCRIPTION_QUERY &$query
-   * @param HISTORY_ITEM &$history_item Action that generated this request. May be empty.
+   * @param SUBSCRIPTION_QUERY $query
+   * @param HISTORY_ITEM $history_item Action that generated this request. May be empty.
    * @access private
    */
-  function _prepare_subscription_query (&$query, &$history_item)
+  function _prepare_subscription_query ($query, $history_item)
   {
     $query->restrict ('watch_entries > 0');
     $query->restrict_kinds (array (Subscribe_folder => $this->parent_folder_id ()
@@ -410,14 +410,14 @@ class BRANCH extends OBJECT_IN_FOLDER
    * @var RELEASE
    * @access private
    */
-  var $_latest_release;
+  protected $_latest_release;
   /**
    * Locally-cached reference to the next planned release.
    * @see next_release()
    * @var RELEASE
    * @access private
    */
-  var $_next_release;
+  protected $_next_release;
 }
 
 ?>

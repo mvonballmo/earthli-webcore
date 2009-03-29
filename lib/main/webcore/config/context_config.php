@@ -76,54 +76,54 @@ class CONTEXT_DISPLAY_OPTIONS
    * Separator string used between items in menus
    * @var string
    */
-  var $menu_separator = ' | ';
+  public $menu_separator = ' | ';
   /**
    * Separator string used between page numbers in page navigators.
    * @var string
    */
-  var $page_separator = ' &bull; ';
+  public $page_separator = ' &bull; ';
   /**
    * Separator string used between locations in the navigation bar.
    * @var string
    */
-  var $location_separator = ' &gt; ';
+  public $location_separator = ' &gt; ';
   /**
    * Separator string used between objects in any context.
    * @var string
    */
-  var $object_separator = ' &gt; ';
+  public $object_separator = ' &gt; ';
   /**
    * Maximum number of page numbers to show in page navigators.
    * @var integer
    */
-  var $pages_to_show = 7;
+  public $pages_to_show = 7;
   /**
    * Maximum number of objects to show in the list of an entry navigator.
    * @var integer
    */
-  var $objects_to_show = 25;
+  public $objects_to_show = 25;
   /**
    * Use this extensions for icons that don't specify one.
    * @var string
    */
-  var $default_icon_extension = 'png';
+  public $default_icon_extension = 'png';
   /**
    * Should the interface use DHTML to render?
    * This option is assumed False if the browser is not DHTML-capable. Use
    * {@link CONTEXT::dhtml_allowed()} to check this option.
    * @var boolean
    */
-  var $use_DHTML = TRUE;
+  public $use_DHTML = TRUE;
   /**
    * Use JavaScript to display local times in this application?
    * @var boolean
    */
-  var $show_local_times = TRUE;
+  public $show_local_times = TRUE;
   /**
    * Specify a maximum number of characters to display for object titles.
    * @var integer
    */
-  var $default_max_title_size = 25;
+  public $default_max_title_size = 25;
   /**
    * Use this title size for all elements (temporarily).
    * Set this if you are rendering content in such a way that you know the titles will
@@ -131,14 +131,14 @@ class CONTEXT_DISPLAY_OPTIONS
    * grids and title bars have enough room for the whole title.
    * @var integer
    */
-  var $overridden_max_title_size = 0;
+  public $overridden_max_title_size = 0;
 
   /**
-   * @param CONTEXT &$context
+   * @param CONTEXT $context
    */
-  function CONTEXT_DISPLAY_OPTIONS (&$context)
+  function CONTEXT_DISPLAY_OPTIONS ($context)
   {
-    $this->context =& $context;
+    $this->context = $context;
   }
 
   /**
@@ -163,7 +163,7 @@ class CONTEXT_DISPLAY_OPTIONS
    * @var CONTEXT
    * @access private
    */
-  var $context;
+  public $context;
 }
 
 /**
@@ -178,49 +178,49 @@ class CONTEXT_MAIL_OPTIONS
   /**
    * @var boolean
    */
-  var $send_as_html = TRUE;
+  public $send_as_html = TRUE;
   /**
    * @var boolean
    */
-  var $enabled = TRUE;
+  public $enabled = TRUE;
   /**
    * @var string
    */
-  var $webmaster_address = 'webmaster@my-domain-name.com';
+  public $webmaster_address = 'webmaster@my-domain-name.com';
   /**
    * @var string
    */
-  var $send_from_address = 'webcore@my-domain-name.com';
+  public $send_from_address = 'webcore@my-domain-name.com';
   /**
    * @var string
    */
-  var $send_from_name = 'WebCore';
+  public $send_from_name = 'WebCore';
   /**
    * @var string
    */
-  var $log_file_name;
+  public $log_file_name;
   /**
    * @var boolean
    */
-  var $logging_enabled = TRUE;
+  public $logging_enabled = TRUE;
   /**
    * @var string
    */
-  var $SMTP_server = '';
+  public $SMTP_server = '';
   /**
    * Determines which entry history items should be published.
    * Publishes all history items if empty.
    * @see History_item_state_constants
    * @var string
    */
-  var $entry_publication_filter;
+  public $entry_publication_filter;
   /**
    * Determines which comment history items should be published.
    * Publishes all history items if empty.
    * @see History_item_state_constants
    * @var string
    */
-  var $comment_publication_filter;
+  public $comment_publication_filter;
 
   /**
    * @param CONTEXT_MAIL_OPTIONS
@@ -250,19 +250,19 @@ class CONTEXT_DATABASE_OPTIONS
   /**
    * @var string
    */
-  var $host = 'localhost';
+  public $host = 'localhost';
   /**
    * @var string
    */
-  var $name;
+  public $name;
   /**
    * @var string
    */
-  var $user_name = 'root';
+  public $user_name = 'root';
   /**
    * @var string
    */
-  var $password;
+  public $password;
 
   /**
    * @param CONTEXT_DATABASE_OPTIONS
@@ -297,18 +297,18 @@ class CONTEXT_UPLOAD_OPTIONS
    * cull files that have been uploaded and abandoned.
    * @see FORM::_process_uploaded_file()
    */
-  var $temp_folder = '{data}temp';
+  public $temp_folder = '{data}temp';
   /**
    * Indicate the maximum upload size.
    * Uses PHP units like "2M"
    * @var string
    */
-  var $max_size = '2M';
+  public $max_size = '2M';
   /**
    * Indicate whether file names should be converted to lower case by default.
    * @var boolean
    */
-  var $use_lower_case_file_names = TRUE;
+  public $use_lower_case_file_names = TRUE;
 
   /**
    * @param CONTEXT_UPLOAD_OPTIONS $opts
@@ -332,7 +332,7 @@ class CONTEXT_STORAGE_OPTIONS
    * Number of days to store a setting.
    * @var integer
    */
-  var $setting_duration = 180;
+  public $setting_duration = 180;
 }
 
 ?>

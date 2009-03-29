@@ -49,9 +49,9 @@ require_once ('webcore/forms/auditable_form.php');
 class CONTENT_OBJECT_FORM extends AUDITABLE_FORM
 {
   /**
-   * @param APPLICATION &$app
+   * @param APPLICATION $app
    */
-  function CONTENT_OBJECT_FORM (&$app)
+  function CONTENT_OBJECT_FORM ($app)
   {
     AUDITABLE_FORM::AUDITABLE_FORM ($app);
 
@@ -69,10 +69,10 @@ class CONTENT_OBJECT_FORM extends AUDITABLE_FORM
 
   /**
    * Store the form's values to this object.
-    * @param CONTENT_OBJECT &$obj
+    * @param CONTENT_OBJECT $obj
     * @access private
     */
-  function _store_to_object (&$obj)
+  function _store_to_object ($obj)
   {
     $obj->title = $this->value_as_text ('title');
     $obj->description = $this->value_as_text ('description');
@@ -80,9 +80,9 @@ class CONTENT_OBJECT_FORM extends AUDITABLE_FORM
 
   /**
    * Load initial properties from this object.
-   * @param CONTENT_OBJECT &$obj
+   * @param CONTENT_OBJECT $obj
    */
-  function load_from_object (&$obj)
+  function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
 
@@ -91,10 +91,10 @@ class CONTENT_OBJECT_FORM extends AUDITABLE_FORM
   }
 
   /**
-   * @param FORM_RENDERER &$renderer
+   * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_controls (&$renderer)
+  function _draw_controls ($renderer)
   {
     $renderer->start ();
     $renderer->draw_text_line_row ('title');
@@ -111,13 +111,13 @@ class CONTENT_OBJECT_FORM extends AUDITABLE_FORM
    * @var string
    * @access private
    */
-  var $_privilege_set;
+  protected $_privilege_set;
   /**
    * Folder containing the object being edited/created.
    * @var FOLDER
    * @access private
    */
-  var $_folder;
+  protected $_folder;
 }
 
 ?>

@@ -51,21 +51,21 @@ class SEARCH_GRID extends STANDARD_GRID
   /**
    * @var string
    */
-  var $object_name = 'search';
+  public $object_name = 'search';
   /**
    * @var boolean
    */
-  var $show_separator = FALSE;
+  public $show_separator = FALSE;
   /**
    * @var string
    */
-  var $width = '';
+  public $width = '';
 
   /**
-   * @param SEARCH &$obj
+   * @param SEARCH $obj
     * @access private
     */
-  function _draw_box (&$obj)
+  function _draw_box ($obj)
   {
 ?>
   <div class="grid-title">

@@ -38,7 +38,7 @@ http://www.earthli.com/software/webcore
 
   if (! empty ($show_only_root_folders))
   {
-    $folder =& $folder_query->object_at_id ($App->root_folder_id);
+    $folder = $folder_query->object_at_id ($App->root_folder_id);
     $folder_query->restrict ('parent_id = ' . $App->root_folder_id);
 
     if (! empty($sort_by_modified))
@@ -54,7 +54,7 @@ http://www.earthli.com/software/webcore
   else
   {
     $folders = $folder_query->root_tree ($App->root_folder_id);
-    $folder =& $folder_query->object_at_id ($App->root_folder_id);
+    $folder = $folder_query->object_at_id ($App->root_folder_id);
   }
 
   if (! sizeof ($folders) && $App->login->is_anonymous ())
@@ -64,7 +64,7 @@ http://www.earthli.com/software/webcore
 
   $class_name = $App->final_class_name ('INDEX_PANEL_MANAGER', 'webcore/gui/panel.php');
   $panel_manager = new $class_name ($App, $folders);
-  $panel =& $panel_manager->selected_panel ();
+  $panel = $panel_manager->selected_panel ();
 
   $Page->location->add_root_link (FALSE);
   $Page->location->append ($App->short_title);
@@ -98,7 +98,7 @@ http://www.earthli.com/software/webcore
       if (isset ($folder))
       {
         $renderer = $folder->handler_for (Handler_html_renderer);
-        $options =& $renderer->options ();
+        $options = $renderer->options ();
         $options->show_as_summary = TRUE;
         $options->show_users = FALSE;
         $renderer->display ($folder);

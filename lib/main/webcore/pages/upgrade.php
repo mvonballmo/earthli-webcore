@@ -44,7 +44,7 @@ http://www.earthli.com/software/webcore
     
     if (! $info_to_uprade->exists () || $info_to_uprade->needs_upgrade ())
     {
-      $version_tag = 'var $version_from = \'' . $info_to_uprade->database_version . '\';';
+      $version_tag = 'public $version_from = \'' . $info_to_uprade->database_version . '\';';
 
       $base_url->append ('tasks/db');
       $path = $base_url->as_text ();

@@ -54,7 +54,7 @@ class COMPONENT extends OBJECT_IN_FOLDER
    * Use {@link icon_as_html()} or {@link expanded_icon_url()} to access this property.
    * @var integer
    */
-  var $icon_url = '';
+  public $icon_url = '';
 
   /**
    * Icon, renderered as HTML.
@@ -84,9 +84,9 @@ class COMPONENT extends OBJECT_IN_FOLDER
    * List of all entries (jobs or changes) for this release.
    * @return PROJECT_ENTRY_QUERY
    */
-  function &entry_query ()
+  function entry_query ()
   {
-    $fldr =& $this->parent_folder ();
+    $fldr = $this->parent_folder ();
     $Result = $fldr->entry_query ();
     $Result->restrict ("entry.component_id = $this->id");
     return $Result;
@@ -96,9 +96,9 @@ class COMPONENT extends OBJECT_IN_FOLDER
    * List of all changes for this release.
    * @return PROJECT_ENTRY_QUERY
    */
-  function &change_query ()
+  function change_query ()
   {
-    $Result =& $this->entry_query ();
+    $Result = $this->entry_query ();
     $Result->set_type ('change');
     return $Result;
   }
@@ -107,9 +107,9 @@ class COMPONENT extends OBJECT_IN_FOLDER
    * List of all jobs for this release.
    * @return PROJECT_ENTRY_QUERY
    */
-  function &job_query ()
+  function job_query ()
   {
-    $Result =& $this->entry_query ();
+    $Result = $this->entry_query ();
     $Result->set_type ('job');
     return $Result;
   }
@@ -118,9 +118,9 @@ class COMPONENT extends OBJECT_IN_FOLDER
    * List of all {@link COMMENT}s for this branch.
     * @return BRANCH_COMMENT_QUERY
     */
-  function &comment_query ()
+  function comment_query ()
   {
-    $folder =& $this->parent_folder ();
+    $folder = $this->parent_folder ();
     $class_name = $this->app->final_class_name ('PROJECT_COMMENT_QUERY', 'projects/db/project_comment_query.php');
     $Result = new $class_name ($folder);
     $Result->restrict ("entry.component_id = $this->id");
@@ -138,7 +138,7 @@ class COMPONENT extends OBJECT_IN_FOLDER
   function _object_url ($use_links, $separator = null, $formatter = null)
   {
     $Result = parent::_object_url ($use_links, $separator, $formatter);
-    $folder =& $this->parent_folder ();
+    $folder = $this->parent_folder ();
     $folder_url = $folder->_object_url ($use_links, $separator, $formatter);
 
     if (! isset ($separator))
@@ -150,18 +150,18 @@ class COMPONENT extends OBJECT_IN_FOLDER
   }
 
   /**
-   * @param DATABASE &$db
+   * @param DATABASE $db
    */
-  function load (&$db)
+  function load ($db)
   {
     parent::load ($db);
     $this->icon_url = $db->f ('icon_url');
   }
 
   /**
-   * @param SQL_STORAGE &$storage Store values to this object.
+   * @param SQL_STORAGE $storage Store values to this object.
    */
-  function store_to (&$storage)
+  function store_to ($storage)
   {
     parent::store_to ($storage);
     $tname =$this->_table_name ();
@@ -196,7 +196,7 @@ class COMPONENT extends OBJECT_IN_FOLDER
   function _purge ($options)
   {
     $entry_query = $this->entry_query ();
-    $entries =& $entry_query->objects ();
+    $entries = $entry_query->objects ();
 
     foreach ($entries as $entry)
     {
@@ -253,7 +253,7 @@ class COMPONENT_PURGE_OPTIONS extends PURGE_OPTIONS
    * Replace purged component with this one.
    * @var integer
    */
-  var $replacement_component_id;
+  public $replacement_component_id;
 }
 
 ?>

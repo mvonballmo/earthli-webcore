@@ -58,7 +58,7 @@ class PICTURE extends ALBUM_ENTRY
    * May be relative to the {@link $url_root} of the {@link ALBUM}.
    * @var string
    */
-  var $file_name;
+  public $file_name;
 
   /**
    * Return the path to the picture as a URL.
@@ -159,7 +159,7 @@ class PICTURE extends ALBUM_ENTRY
 
     if ($apply_folder_size)
     {
-      $fldr =& $this->parent_folder ();
+      $fldr = $this->parent_folder ();
       if ($fldr->max_picture_width && $fldr->max_picture_height)
       {
         if ($load_image)
@@ -193,7 +193,7 @@ class PICTURE extends ALBUM_ENTRY
   }
 
   /**
-   * @param DATABASE &$db
+   * @param DATABASE $db
    */
   function load ($db)
   {
@@ -202,9 +202,9 @@ class PICTURE extends ALBUM_ENTRY
   }
 
   /**
-   * @param SQL_STORAGE &$storage Store values to this object.
+   * @param SQL_STORAGE $storage Store values to this object.
    */
-  function store_to (&$storage)
+  function store_to ($storage)
   {
     parent::store_to ($storage);
     $storage->add ($this->_secondary_table_name (), 'file_name', Field_type_string, $this->file_name);
@@ -243,14 +243,14 @@ class PICTURE extends ALBUM_ENTRY
    * Move the object to the specified folder.
    * If both the source and target albums are {@link Album_location_type_local},
    * then move the pictures to the new folder.
-   * @param FOLDER &$fldr
-   * @param FOLDER_OPERATION_OPTIONS &$options
+   * @param FOLDER $fldr
+   * @param FOLDER_OPERATION_OPTIONS $options
    */
-  function _move_to (&$fldr, &$options)
+  function _move_to ($fldr, $options)
   {
     if ($options->update_now)
     {
-      $parent =& $this->parent_folder ();
+      $parent = $this->parent_folder ();
       $old_location = $parent->location;
       $old_folder = url_to_folder ($parent->picture_folder_url (TRUE));
     }
@@ -309,14 +309,14 @@ class PICTURE extends ALBUM_ENTRY
    * Copy the object to the specified folder.
    * If both the source and target albums are {@link Album_location_type_local},
    * and they are different folders, copy the pictures to the new folder.
-   * @param FOLDER &$fldr
-   * @param FOLDER_OPERATION_OPTIONS &$options
+   * @param FOLDER $fldr
+   * @param FOLDER_OPERATION_OPTIONS $options
    */
-  function _copy_to (&$fldr, &$options)
+  function _copy_to ($fldr, $options)
   {
     if ($options->update_now)
     {
-      $parent =& $this->parent_folder ();
+      $parent = $this->parent_folder ();
       $old_location = $parent->location;
       $old_folder = url_to_folder ($parent->picture_folder_url (TRUE));
     }
@@ -434,7 +434,7 @@ class PICTURE extends ALBUM_ENTRY
    * @var string
    * @access private
    */
-  var $type = 'picture';
+  public $type = 'picture';
 }
 
 ?>

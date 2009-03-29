@@ -55,41 +55,41 @@ class PUBLISHER extends LOGGABLE
    * Run without updating the database or sending email.
     * @var boolean
     */
-  var $testing = FALSE;
+  public $testing = FALSE;
   /**
    * Show contents of emails when in test mode.
     * @var boolean
     */
-  var $preview = FALSE;
+  public $preview = FALSE;
   /**
    * The channel for log messages generated as publication notifications.
     * @var string
     */
-  var $default_channel = Msg_channel_publisher;
+  public $default_channel = Msg_channel_publisher;
   /**
    * The type of log messages generated as publication notifications.
     * @var string
     */
-  var $default_type = Msg_type_info;
+  public $default_type = Msg_type_info;
   /**
    * How much of the object descriptions to send?
     * @var integer
     */
-  var $excerpt_length = 0;
+  public $excerpt_length = 0;
   /**
    * Should history item details be included in messages?
    * @var boolean
    */
-  var $include_history_items_in_messages = TRUE;
+  public $include_history_items_in_messages = TRUE;
 
   /**
-   * @param MAIL_PROVIDER &$provider Publish mail using this provider.
+   * @param MAIL_PROVIDER $provider Publish mail using this provider.
    */
-  function PUBLISHER (&$provider)
+  function PUBLISHER ($provider)
   {
     LOGGABLE::LOGGABLE ($provider->context);
 
-    $this->provider =& $provider;
+    $this->provider = $provider;
     $this->logs->set_logger ($provider->logger);
 
     $this->excerpt_length = $this->app->mail_options->excerpt_length;
@@ -100,9 +100,9 @@ class PUBLISHER extends LOGGABLE
   /**
    * Publish objects in the 'query' whose publication state matches 'state'.
    * Notifications are sent according to user preferences by default.
-   * @param HISTORY_ITEM_QUERY &$query
+   * @param HISTORY_ITEM_QUERY $query
    */
-  function publish_history_items (&$query)
+  function publish_history_items ($query)
   {
     $this->app->display_options->overridden_max_title_size = 100;
 
@@ -226,7 +226,7 @@ class PUBLISHER extends LOGGABLE
         {
           foreach ($obj_history_items as $history_item)
           {
-            $obj =& $objects [$object_type][$object_id];
+            $obj = $objects [$object_type][$object_id];
             if ($obj)
             {
               $subscribers = $this->_subscribers_for ($history_item, $obj);
@@ -293,7 +293,7 @@ class PUBLISHER extends LOGGABLE
 
       foreach ($subscriber_records as $email => $subscriber_rec)
       {
-        $subscriber =& $subscriber_rec->subscriber;
+        $subscriber = $subscriber_rec->subscriber;
 
         if (sizeof ($subscriber_rec->history_items))
         {
@@ -328,7 +328,7 @@ class PUBLISHER extends LOGGABLE
 
       foreach ($subscriber_records as $email => $subscriber_rec)
       {
-        $subscriber =& $subscriber_rec->subscriber;
+        $subscriber = $subscriber_rec->subscriber;
 
         if ($subscriber->ready_for_messages ())
         {
@@ -459,10 +459,10 @@ class PUBLISHER extends LOGGABLE
    * Mark the given records as published in the database.
    * Called from {@link publish_history_items()} once all interested subscribers have
    * been updated with the history item ids.
-   * @param array[HISTORY_ITEM] &$history_items
+   * @param array[HISTORY_ITEM] $history_items
    * @access private
    */
-  function _update_publication_status_for (&$history_items)
+  function _update_publication_status_for ($history_items)
   {
     $table_name = $this->app->table_names->history_items;
     $all_affected_history_item_ids = implode (',', array_keys ($history_items));
@@ -479,10 +479,10 @@ class PUBLISHER extends LOGGABLE
    * Remove all queued history items for this subscriber.
    * Call this once all emails have been sent to a subscriber in order to clear
    * the database or any pending history items for that subscriber.
-   * @param SUBSCRIBER &$subscriber
+   * @param SUBSCRIBER $subscriber
    * @access private
    */
-  function _clear_queued_history_items_for (&$subscriber)
+  function _clear_queued_history_items_for ($subscriber)
   {
     $this->record ("$subscriber->email: Cleared queued history items from database.");
     $subscriber->clear_queued_history_items ();
@@ -497,10 +497,10 @@ class PUBLISHER extends LOGGABLE
    * Each message contains all the information it needs to send an email to the
    * given subscriber. Once all emails are sent to a subscriber, the queued
    * history items for that subscriber are cleared in the database.
-   * @param array[PUBLISHER_MESSAGE] &$items
+   * @param array[PUBLISHER_MESSAGE] $items
    * @access private
    */
-  function _send_items (&$items)
+  function _send_items ($items)
   {
     if (sizeof ($items))
     {
@@ -553,18 +553,18 @@ class PUBLISHER extends LOGGABLE
 
   /**
    * Get a renderer from cache, if possible.
-    * @param PUBLISHABLE &$obj
+    * @param PUBLISHABLE $obj
     * @return MAIL_OBJECT_RENDERER
     * @access private
     */
-  function &_renderer_for (&$obj)
+  function _renderer_for ($obj)
   {
     $class_name = strtoupper (get_class ($obj));
-    $Result =& $this->_renderers [$class_name];
+    $Result = $this->_renderers [$class_name];
     if (! $Result)
     {
       $Result = $obj->handler_for (Handler_mail);
-      $this->_renderers [$class_name] =& $Result;
+      $this->_renderers [$class_name] = $Result;
     }
 
     return $Result;
@@ -572,13 +572,13 @@ class PUBLISHER extends LOGGABLE
 
   /**
    * Get the body for this description.
-    * @param PUBLISHER_MESSAGE &$item
+    * @param PUBLISHER_MESSAGE $item
     * @return string
     * @access private
     */
-  function _body_for (&$item)
+  function _body_for ($item)
   {
-    $Result =& $this->_rendered_bodies [$item->identifier];
+    $Result = $this->_rendered_bodies [$item->identifier];
     if (! $Result)
     {
       $class_name = $this->app->final_class_name ('WEBCORE_MAIL_BODY_RENDERER', 'webcore/mail/webcore_mail_body_renderer.php');
@@ -611,12 +611,12 @@ class PUBLISHER extends LOGGABLE
    * could be pulled from cache, but the email address differs with each email. This
    * allows the publisher to make the most of caching and still customize the email body
    * for the recipient.
-   * @param PUBLICATION_BATCH &$batch Contains information about the publication phase
+   * @param PUBLICATION_BATCH $batch Contains information about the publication phase
    * @param string $text
    * @return string
    * @access private
    */
-  function _replace_aliases (&$item, $text)
+  function _replace_aliases ($item, $text)
   {
     return str_replace (Subscriber_email_alias, $item->subscriber->email, $text);
   }
@@ -645,16 +645,17 @@ class PUBLISHER extends LOGGABLE
       return $this->login->all_attachment_query ();
     default:
       $this->record ("Unknown object type [$object_type]", Msg_type_warning);
+      return null;
     }
   }
 
   /**
    * List of subscribers for this objct.
-   * @param HISTORY_ITEM &$history_item
-   * @param AUDITABLE &$obj
+   * @param HISTORY_ITEM $history_item
+   * @param AUDITABLE $obj
    * @return array[SUBSCRIBER]
    */
-  function _subscribers_for (&$history_item, &$obj)
+  function _subscribers_for ($history_item, $obj)
   {
     $query = $obj->subscriber_query ($history_item);
 
@@ -674,7 +675,7 @@ class PUBLISHER extends LOGGABLE
     $class_name = $this->app->final_class_name ('MAIL_MESSAGE', 'webcore/mail/mail_message.php');
     $Result = new $class_name ($this->context);
 
-    $opts =& $this->app->mail_options;
+    $opts = $this->app->mail_options;
     $Result->set_sender ($opts->send_from_name, $opts->send_from_address);
 
     return $Result;
@@ -684,7 +685,7 @@ class PUBLISHER extends LOGGABLE
    * @var SUBSCRIPTION_SETTINGS
    * @access private
    */
-  var $_subscription_settings;
+  protected $_subscription_settings;
 }
 
 /**
@@ -708,17 +709,17 @@ class PUBLISHER_MESSAGE extends WEBCORE_OBJECT
    * A hash that can be used as a key in a cache.
    * @var string
    */
-  var $identifier;
+  public $identifier;
   /**
    * Subscriber for whom the message should be prepared.
    * @var SUBSCRIBER
    */
-  var $subscriber;
+  public $subscriber;
   /**
    * List of objects to render in the message.
    * @var array[UNIQUE_OBJECT]
    */
-  var $objects;
+  public $objects;
   /**
    * How many logical items are represented?
    * The list of objects in this item may all describe the same item or they may describe multiple items.
@@ -727,17 +728,17 @@ class PUBLISHER_MESSAGE extends WEBCORE_OBJECT
    * items. This value is set when the item is prepared.
    * @var boolean
    */
-  var $num_items = 0;
+  public $num_items = 0;
 
   /**
-   * @param PUBLISHER &$publisher
-   * @param SUBSCRIBER &$subscriber
+   * @param PUBLISHER $publisher
+   * @param SUBSCRIBER $subscriber
    */
-  function PUBLISHER_MESSAGE (&$publisher, &$subscriber)
+  function PUBLISHER_MESSAGE ($publisher, $subscriber)
   {
     WEBCORE_OBJECT::WEBCORE_OBJECT ($publisher->context);
 
-    $this->_publisher =& $publisher;
+    $this->_publisher = $publisher;
     $this->subscriber = $subscriber;
     $this->identifier = "[{$subscriber->send_as_html}]";
 
@@ -766,9 +767,9 @@ class PUBLISHER_MESSAGE extends WEBCORE_OBJECT
   /**
    * Add an object to the body of the message.
    * @see add_main_object()
-   * @param object &$obj
+   * @param object $obj
    */
-  function add_object (&$obj)
+  function add_object ($obj)
   {
     $this->objects [] = $obj;
     $this->identifier .= '|' . $obj->id . '|';
@@ -777,9 +778,9 @@ class PUBLISHER_MESSAGE extends WEBCORE_OBJECT
   /**
    * Add an object to the subject and body of the message.
    * @see add_object()
-   * @param object &$obj
+   * @param object $obj
    */
-  function add_main_object (&$obj)
+  function add_main_object ($obj)
   {
     $this->add_object ($obj);
     $this->_subject->add_object ($obj);
@@ -789,7 +790,7 @@ class PUBLISHER_MESSAGE extends WEBCORE_OBJECT
    * Fill out the message body and subject accordingly.
    * @param MAIL_MESSAGE
    */
-  function apply (&$msg)
+  function apply ($msg)
   {
     $msg->set_send_to ($this->subscriber->email);
     $msg->send_as_html = $this->subscriber->send_as_html;
@@ -836,12 +837,12 @@ class PUBLISHER_MESSAGE extends WEBCORE_OBJECT
    * @var PUBLISHER
     * @access private
     */
-  var $_publisher;
+  protected $_publisher;
   /**
    * @var PUBLISHER_MESSAGE_SUBJECT
    * @access private
    */
-  var $_subject;
+  protected $_subject;
 }
 
 /**
@@ -876,21 +877,21 @@ require_once ('webcore/mail/mail_object_renderer.php');
 class SUBSCRIPTION_SETTINGS_MAIL_RENDERER extends MAIL_OBJECT_RENDERER
 {
   /**
-   * @param SEND_MAIL_FORM &$obj
+   * @param SEND_MAIL_FORM $obj
     * @param EXCEPTION_MAIL_OBJECT_RENDERER_OPTIONS $options
     * @return string
     */
-  function subject (&$obj, $options)
+  function subject ($obj, $options)
   {
     return 'Subscription Settings';
   }
 
   /**
-   * @param object &$obj Parameter is not used.
+   * @param object $obj Parameter is not used.
     * @param integer $excerpt_length
     * @access private
     */
-  function _echo_html_content (&$obj, $excerpt_length)
+  function _echo_html_content ($obj, $excerpt_length)
   {
     $app_root = $this->app->url ();
     echo ("<p class=\"notes\">This email was generated automatically. <a href=\"{$app_root}view_user_subscriptions.php?email=" .
@@ -898,11 +899,11 @@ class SUBSCRIPTION_SETTINGS_MAIL_RENDERER extends MAIL_OBJECT_RENDERER
   }
 
   /**
-   * @param SEND_MAIL_FORM &$obj
+   * @param SEND_MAIL_FORM $obj
     * @param integer $excerpt_length
     * @access private
     */
-  function _echo_text_content (&$obj, $excerpt_length)
+  function _echo_text_content ($obj, $excerpt_length)
   {
     $link = $this->app->resolve_file ("view_user_subscriptions.php?email=" . Subscriber_email_alias);
     echo $this->_line ("This email was generated automatically. Check your subscription settings:");

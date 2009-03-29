@@ -52,7 +52,7 @@ class PERMISSIONS_FORM extends FORM
   /**
    * @var string
    */
-  var $name = 'permissions_form';
+  public $name = 'permissions_form';
   
   /**
    * @access private
@@ -74,10 +74,10 @@ class PERMISSIONS_FORM extends FORM
   }
 
   /**
-   * @param FORM_RENDERER &$renderer
+   * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_controls (&$renderer)
+  function _draw_controls ($renderer)
   {
     $formatter = $this->app->make_permissions_formatter ();
 
@@ -88,10 +88,10 @@ class PERMISSIONS_FORM extends FORM
   }
   
   /**
-   * @param FORM_RENDERER &$renderer
+   * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_buttons (&$renderer)
+  function _draw_buttons ($renderer)
   {
     $buttons [] = $renderer->javascript_button_as_html ('Grant All', 'grant_all_permissions (this.form)', '{icons}buttons/select');
     $buttons [] = $renderer->javascript_button_as_html ('Grant None', 'grant_no_permissions (this.form)', '{icons}buttons/close');
@@ -105,12 +105,12 @@ class PERMISSIONS_FORM extends FORM
   }
 
   /**
-   * @param FORM_RENDERER &$renderer
-   * @param PERMISSIONS_FORMATTER &$formatter
+   * @param FORM_RENDERER $renderer
+   * @param PERMISSIONS_FORMATTER $formatter
    * @access private
    * @abstract
    */
-  function _draw_permission_controls (&$renderer, &$formatter)
+  function _draw_permission_controls ($renderer, $formatter)
   {
     $this->raise_deferred ('_draw_permission_controls', 'PERMISSIONS_FORM');
   }
@@ -119,15 +119,15 @@ class PERMISSIONS_FORM extends FORM
    * Draw the permission with icon and title.
    * Adds the icon to the title. This is done when drawn so that the icon
    * calculation is not done if the form is only being submitted.
-   * @param PRIVILEGE_MAP &$map Information about the privilege.
-   * @param PERMISSIONS_FORMATTER &$formatter Use this to get formatting information.
-   * @param FORM_RENDERER &$renderer
+   * @param PRIVILEGE_MAP $map Information about the privilege.
+   * @param PERMISSIONS_FORMATTER $formatter Use this to get formatting information.
+   * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_permission (&$map, &$formatter, &$renderer)
+  function _draw_permission ($map, $formatter, $renderer)
   {
     $id = $map->id ();
-    $field =& $this->field_at ($id);
+    $field = $this->field_at ($id);
     $field->title = $formatter->icon_for ($map) . ' ' . $formatter->title_for ($map);
     echo $renderer->check_box_as_HTML ($id);
     echo "<div style=\"height: .2em\"></div>\n";

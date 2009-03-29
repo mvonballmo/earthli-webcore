@@ -49,13 +49,13 @@ require_once ('webcore/forms/folder_permissions_form.php');
 class FOLDER_GROUP_PERMISSIONS_FORM extends FOLDER_PERMISSIONS_FORM
 {
   /**
-   * @param GROUP &$group Edit this group's permissions.
+   * @param GROUP $group Edit this group's permissions.
    */
-  function FOLDER_GROUP_PERMISSIONS_FORM (&$group)
+  function FOLDER_GROUP_PERMISSIONS_FORM ($group)
   {
     FOLDER_PERMISSIONS_FORM::FOLDER_PERMISSIONS_FORM ($group->app);
 
-    $this->_group =& $group;
+    $this->_group = $group;
 
     $field = new TEXT_FIELD ();
     $field->id = 'group_id';
@@ -68,9 +68,9 @@ class FOLDER_GROUP_PERMISSIONS_FORM extends FOLDER_PERMISSIONS_FORM
 
   /**
    * Load initial properties from these permissions.
-   * @param PERMISSIONS &$obj
+   * @param PERMISSIONS $obj
    */
-  function load_from_object (&$obj)
+  function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
     $this->set_value ('group_id', $this->_group->id);
@@ -78,10 +78,10 @@ class FOLDER_GROUP_PERMISSIONS_FORM extends FOLDER_PERMISSIONS_FORM
 
   /**
    * Store the form's values to this set of permissions.
-    * @param PERMISSIONS &$obj
+    * @param PERMISSIONS $obj
     * @access private
     */
-  function commit (&$obj)
+  function commit ($obj)
   {
     $obj->user_id = $this->_group->id;
     $obj->kind = Privilege_kind_group;

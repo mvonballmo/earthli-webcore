@@ -57,27 +57,27 @@ class MULTI_TYPE_ENTRY extends ENTRY
     * @var string
     * @access private
     */
-  var $type;
+  public $type;
   /**
    * @var integer
     * @access private
     */
-  var $entry_id;
+  public $entry_id;
 
   /**
-   * @param DATABASE &$db Database from which to load values.
+   * @param DATABASE $db Database from which to load values.
    */
-  function load (&$db)
+  function load ($db)
   {
     parent::load ($db);
     $this->type = $db->f ("type");
-    $this->entry_id =& $this->id;
+    $this->entry_id = $this->id;
   }
 
   /**
-   * @param SQL_STORAGE &$storage Store values to this object.
+   * @param SQL_STORAGE $storage Store values to this object.
    */
-  function store_to (&$storage)
+  function store_to ($storage)
   {
     parent::store_to ($storage);
     $storage->add ($this->_table_name (), 'type', Field_type_string, $this->type, Storage_action_create);

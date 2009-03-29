@@ -49,13 +49,13 @@ require_once ('webcore/db/user_query.php');
 class GROUP_USER_QUERY extends USER_QUERY
 {
   /**
-   * @param GROUP &$group Retrieve users in this group.
+   * @param GROUP $group Retrieve users in this group.
    */
-  function GROUP_USER_QUERY (&$group)
+  function GROUP_USER_QUERY ($group)
   {
     USER_QUERY::USER_QUERY ($group->app);
 
-    $this->_group =& $group;
+    $this->_group = $group;
 
     $this->add_table ("{$this->app->table_names->users_to_groups} utg", 'utg.user_id = usr.id');
   }
@@ -72,6 +72,6 @@ class GROUP_USER_QUERY extends USER_QUERY
    * @var GROUP
     * @access private
     */
-  var $_group;
+  protected $_group;
 }
 ?>

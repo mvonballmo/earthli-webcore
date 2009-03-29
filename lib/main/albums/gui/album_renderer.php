@@ -50,12 +50,12 @@ class ALBUM_RENDERER extends FOLDER_RENDERER
 {
   /**
    * Outputs the object as HTML.
-   * @param ALBUM &$obj
+   * @param ALBUM $obj
    * @access private
    */
-  function _display_as_html (&$obj)
+  function _display_as_html ($obj)
   {
-    $main_pic =& $obj->main_picture ();
+    $main_pic = $obj->main_picture ();
     if (isset ($main_pic))
     {
       $f = $main_pic->date->formatter ();
@@ -120,14 +120,14 @@ class ALBUM_RENDERER extends FOLDER_RENDERER
 
   /**
    * Outputs the object as plain text.
-   * @param ALBUM &$obj
+   * @param ALBUM $obj
    * @access private
    */
-  function _display_as_plain_text (&$obj)
+  function _display_as_plain_text ($obj)
   {
     if (! $obj->is_organizational ())
     {
-      $f =& $obj->first_day->formatter ();
+      $f = $obj->first_day->formatter ();
       $f->clear_flags ();
       echo $this->_line ($obj->format_date ($obj->first_day, $f) . ' - ' . $obj->format_date ($obj->last_day, $f));
     }

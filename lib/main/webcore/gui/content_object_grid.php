@@ -50,11 +50,11 @@ class CONTENT_OBJECT_GRID extends SELECTABLE_GRID
 {
   /**
    * Used to draw the entry's title in each cell.
-   * @param CONTENT_OBJECT_GRID &$obj
+   * @param CONTENT_OBJECT_GRID $obj
    * @return TITLE_FORMATTER
    * @access private
    */
-  function title_formatter (&$obj)
+  function title_formatter ($obj)
   {
     $Result = $obj->title_formatter ();
     $Result->max_visible_output_chars = 0;
@@ -70,11 +70,11 @@ class CONTENT_OBJECT_GRID extends SELECTABLE_GRID
   /**
    * Format the link to include search arguments..
    * @see title_formatter()
-   * @param CONTENT_OBJECT &$obj
+   * @param CONTENT_OBJECT $obj
    * @return string
    * @access private
    */
-  function obj_link (&$obj)
+  function obj_link ($obj)
   {
     $t = $this->title_formatter ($obj);
     return $obj->title_as_link ($t);
@@ -84,10 +84,10 @@ class CONTENT_OBJECT_GRID extends SELECTABLE_GRID
    * Return the block of text to summarize.
    * Search words and their contexts are extracted and highlighted using a
    * {@link MUNGER_SUMMARIZER}.
-   * @param CONTENT_OBJECT &$obj
+   * @param CONTENT_OBJECT $obj
    * @access private
    */
-  function _echo_text_summary (&$obj)
+  function _echo_text_summary ($obj)
   {
     if ($this->app->search_text)
     {
@@ -104,10 +104,10 @@ class CONTENT_OBJECT_GRID extends SELECTABLE_GRID
    * Return the block of text to summarize.
    * Called from {@link _echo_text_summary()}. Override in descendents to return
    * more text.
-   * @param CONTENT_OBJECT &$obj
+   * @param CONTENT_OBJECT $obj
    * @access private
    */
-  function _text_to_summarize (&$obj)
+  function _text_to_summarize ($obj)
   {
     return $obj->description;
   }

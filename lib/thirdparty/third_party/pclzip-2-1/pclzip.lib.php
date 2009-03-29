@@ -145,14 +145,14 @@
   class PclZip
   {
     // ----- Filename of the zip file
-    var $zipname = '';
+    public $zipname = '';
 
     // ----- File descriptor of the zip file
-    var $zip_fd = 0;
+    public $zip_fd = 0;
 
     // ----- Internal error handling
-    var $error_code = 1;
-    var $error_string = '';
+    public $error_code = 1;
+    public $error_string = '';
 
   // --------------------------------------------------------------------------------
   // Function : PclZip()
@@ -243,7 +243,7 @@
     // ----- Look for arguments
     if ($v_size > 1) {
       // ----- Get the arguments
-      $v_arg_list = &func_get_args();
+      $v_arg_list =func_get_args();
 
       // ----- Remove form the options list the first argument
       array_shift($v_arg_list);
@@ -404,7 +404,7 @@
     // ----- Look for arguments
     if ($v_size > 1) {
       // ----- Get the arguments
-      $v_arg_list = &func_get_args();
+      $v_arg_list =func_get_args();
 
       // ----- Remove form the options list the first argument
       array_shift($v_arg_list);
@@ -641,7 +641,7 @@
     // ----- Look for arguments
     if ($v_size > 0) {
       // ----- Get the arguments
-      $v_arg_list = &func_get_args();
+      $v_arg_list =func_get_args();
 
       // ----- Look for first arg
       if ((is_integer($v_arg_list[0])) && ($v_arg_list[0] > 77000)) {
@@ -945,7 +945,7 @@
     }
 
     // ----- Get the arguments
-    $v_arg_list = &func_get_args();
+    $v_arg_list =func_get_args();
 
     // ----- Parse the options
     $v_result = $this->privParseOptions($v_arg_list, $v_size, $v_options,
@@ -1359,7 +1359,7 @@
   //   1 on success.
   //   0 on failure.
   // --------------------------------------------------------------------------------
-  function privParseOptions(&$p_options_list, $p_size, &$v_result_list, $v_requested_options=false)
+  function privParseOptions($p_options_list, $p_size, $v_result_list, $v_requested_options=false)
   {
     //--(MAGIC-PclTrace)--//PclTraceFctStart(__FILE__, __LINE__, "PclZip::privParseOptions", "");
     $v_result=1;
@@ -1712,7 +1712,7 @@
   // Parameters :
   // Return Values :
   // --------------------------------------------------------------------------------
-  function privCreate($p_list, &$p_result_list, $p_add_dir, $p_remove_dir, $p_remove_all_dir, &$p_options)
+  function privCreate($p_list, $p_result_list, $p_add_dir, $p_remove_dir, $p_remove_all_dir, $p_options)
   {
     //--(MAGIC-PclTrace)--//PclTraceFctStart(__FILE__, __LINE__, "PclZip::privCreate", "list, result_list, add_dir='$p_add_dir', remove_dir='$p_remove_dir'");
     $v_result=1;
@@ -1744,7 +1744,7 @@
   // Parameters :
   // Return Values :
   // --------------------------------------------------------------------------------
-  function privAdd($p_list, &$p_result_list, $p_add_dir, $p_remove_dir, $p_remove_all_dir, &$p_options)
+  function privAdd($p_list, $p_result_list, $p_add_dir, $p_remove_dir, $p_remove_all_dir, $p_options)
   {
     //--(MAGIC-PclTrace)--//PclTraceFctStart(__FILE__, __LINE__, "PclZip::privAdd", "list, result_list, add_dir='$p_add_dir', remove_dir='$p_remove_dir'");
     $v_result=1;
@@ -1994,7 +1994,7 @@
   //   $p_remove_dir : Path to remove in the filename path archived
   // Return Values :
   // --------------------------------------------------------------------------------
-  function privAddList($p_list, &$p_result_list, $p_add_dir, $p_remove_dir, $p_remove_all_dir, &$p_options)
+  function privAddList($p_list, $p_result_list, $p_add_dir, $p_remove_dir, $p_remove_all_dir, $p_options)
   {
     //--(MAGIC-PclTrace)--//PclTraceFctStart(__FILE__, __LINE__, "PclZip::privAddList", "list, add_dir='$p_add_dir', remove_dir='$p_remove_dir'");
     $v_result=1;
@@ -2067,7 +2067,7 @@
   //   $p_remove_dir : Path to remove in the filename path archived
   // Return Values :
   // --------------------------------------------------------------------------------
-  function privAddFileList($p_list, &$p_result_list, $p_add_dir, $p_remove_dir, $p_remove_all_dir, &$p_options)
+  function privAddFileList($p_list, $p_result_list, $p_add_dir, $p_remove_dir, $p_remove_all_dir, $p_options)
   {
     //--(MAGIC-PclTrace)--//PclTraceFctStart(__FILE__, __LINE__, "PclZip::privAddFileList", "list, add_dir='$p_add_dir', remove_dir='$p_remove_dir'");
     $v_result=1;
@@ -2202,7 +2202,7 @@
   // Parameters :
   // Return Values :
   // --------------------------------------------------------------------------------
-  function privAddFile($p_filename, &$p_header, $p_add_dir, $p_remove_dir, $p_remove_all_dir, &$p_options)
+  function privAddFile($p_filename, $p_header, $p_add_dir, $p_remove_dir, $p_remove_all_dir, $p_options)
   {
     //--(MAGIC-PclTrace)--//PclTraceFctStart(__FILE__, __LINE__, "PclZip::privAddFile", "filename='$p_filename', add_dir='$p_add_dir', remove_dir='$p_remove_dir'");
     $v_result=1;
@@ -2442,7 +2442,7 @@
   // Parameters :
   // Return Values :
   // --------------------------------------------------------------------------------
-  function privWriteFileHeader(&$p_header)
+  function privWriteFileHeader($p_header)
   {
     //--(MAGIC-PclTrace)--//PclTraceFctStart(__FILE__, __LINE__, "PclZip::privWriteFileHeader", 'file="'.$p_header['filename'].'", stored as "'.$p_header['stored_filename'].'"');
     $v_result=1;
@@ -2493,7 +2493,7 @@
   // Parameters :
   // Return Values :
   // --------------------------------------------------------------------------------
-  function privWriteCentralFileHeader(&$p_header)
+  function privWriteCentralFileHeader($p_header)
   {
     //--(MAGIC-PclTrace)--//PclTraceFctStart(__FILE__, __LINE__, "PclZip::privWriteCentralFileHeader", 'file="'.$p_header['filename'].'", stored as "'.$p_header['stored_filename'].'"');
     $v_result=1;
@@ -2574,7 +2574,7 @@
   // Parameters :
   // Return Values :
   // --------------------------------------------------------------------------------
-  function privList(&$p_list)
+  function privList($p_list)
   {
     //--(MAGIC-PclTrace)--//PclTraceFctStart(__FILE__, __LINE__, "PclZip::privList", "list");
     $v_result=1;
@@ -2659,7 +2659,7 @@
   // Parameters :
   // Return Values :
   // --------------------------------------------------------------------------------
-  function privConvertHeader2FileInfo($p_header, &$p_info)
+  function privConvertHeader2FileInfo($p_header, $p_info)
   {
     //--(MAGIC-PclTrace)--//PclTraceFctStart(__FILE__, __LINE__, "PclZip::privConvertHeader2FileInfo", "Filename='".$p_header['filename']."'");
     $v_result=1;
@@ -2697,7 +2697,7 @@
   // Return Values :
   //   1 on success,0 or less on error (see error code list)
   // --------------------------------------------------------------------------------
-  function privExtractByRule(&$p_file_list, $p_path, $p_remove_path, $p_remove_all_path, &$p_options)
+  function privExtractByRule($p_file_list, $p_path, $p_remove_path, $p_remove_all_path, $p_options)
   {
     //--(MAGIC-PclTrace)--//PclTraceFctStart(__FILE__, __LINE__, "PclZip::privExtractByRule", "path='$p_path', remove_path='$p_remove_path', remove_all_path='".($p_remove_all_path?'true':'false')."'");
     $v_result=1;
@@ -2998,7 +2998,7 @@
   // Parameters :
   // Return Values :
   // --------------------------------------------------------------------------------
-  function privExtractFile(&$p_entry, $p_path, $p_remove_path, $p_remove_all_path, &$p_options)
+  function privExtractFile($p_entry, $p_path, $p_remove_path, $p_remove_all_path, $p_options)
   {
     //--(MAGIC-PclTrace)--//PclTraceFctStart(__FILE__, __LINE__, 'PclZip::privExtractFile', "path='$p_path', remove_path='$p_remove_path', remove_all_path='".($p_remove_all_path?'true':'false')."'");
     $v_result=1;
@@ -3292,7 +3292,7 @@
   // Parameters :
   // Return Values :
   // --------------------------------------------------------------------------------
-  function privExtractFileInOutput(&$p_entry, &$p_options)
+  function privExtractFileInOutput($p_entry, $p_options)
   {
     //--(MAGIC-PclTrace)--//PclTraceFctStart(__FILE__, __LINE__, 'PclZip::privExtractFileInOutput', "");
     $v_result=1;
@@ -3416,7 +3416,7 @@
   // Parameters :
   // Return Values :
   // --------------------------------------------------------------------------------
-  function privExtractFileAsString(&$p_entry, &$p_string)
+  function privExtractFileAsString($p_entry, $p_string)
   {
     //--(MAGIC-PclTrace)--//PclTraceFctStart(__FILE__, __LINE__, 'PclZip::privExtractFileAsString', "p_entry['filename']='".$p_entry['filename']."'");
     $v_result=1;
@@ -3482,7 +3482,7 @@
   // Parameters :
   // Return Values :
   // --------------------------------------------------------------------------------
-  function privReadFileHeader(&$p_header)
+  function privReadFileHeader($p_header)
   {
     //--(MAGIC-PclTrace)--//PclTraceFctStart(__FILE__, __LINE__, "PclZip::privReadFileHeader", "");
     $v_result=1;
@@ -3609,7 +3609,7 @@
   // Parameters :
   // Return Values :
   // --------------------------------------------------------------------------------
-  function privReadCentralFileHeader(&$p_header)
+  function privReadCentralFileHeader($p_header)
   {
     //--(MAGIC-PclTrace)--//PclTraceFctStart(__FILE__, __LINE__, "PclZip::privReadCentralFileHeader", "");
     $v_result=1;
@@ -3742,7 +3742,7 @@
   // Parameters :
   // Return Values :
   // --------------------------------------------------------------------------------
-  function privReadEndCentralDir(&$p_central_dir)
+  function privReadEndCentralDir($p_central_dir)
   {
     //--(MAGIC-PclTrace)--//PclTraceFctStart(__FILE__, __LINE__, "PclZip::privReadEndCentralDir", "");
     $v_result=1;
@@ -3920,7 +3920,7 @@
   // Parameters :
   // Return Values :
   // --------------------------------------------------------------------------------
-  function privDeleteByRule(&$p_result_list, &$p_options)
+  function privDeleteByRule($p_result_list, $p_options)
   {
     //--(MAGIC-PclTrace)--//PclTraceFctStart(__FILE__, __LINE__, "PclZip::privDeleteByRule", "");
     $v_result=1;
@@ -4330,7 +4330,7 @@
   // Parameters :
   // Return Values :
   // --------------------------------------------------------------------------------
-  function privMerge(&$p_archive_to_add)
+  function privMerge($p_archive_to_add)
   {
     //--(MAGIC-PclTrace)--//PclTraceFctStart(__FILE__, __LINE__, "PclZip::privMerge", "archive='".$p_archive_to_add->zipname."'");
     $v_result=1;

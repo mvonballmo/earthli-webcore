@@ -52,10 +52,10 @@ class PROJECT_ENTRY_RENDERER extends ENTRY_RENDERER
 {
   /**
    * Outputs branches for this entry.
-   * @param PROJECT_ENTRY &$entry
+   * @param PROJECT_ENTRY $entry
    * @access private
    */
-  function _echo_branches_as_html (&$entry)
+  function _echo_branches_as_html ($entry)
   {
   ?>
   <dl>
@@ -63,7 +63,7 @@ class PROJECT_ENTRY_RENDERER extends ENTRY_RENDERER
     /* If the entry is new or cloned, use the current information, not
        that stored in the database. */
 
-    $branch_infos =& $entry->current_branch_infos ();
+    $branch_infos = $entry->current_branch_infos ();
     if (sizeof ($branch_infos) == 0)
     {
       $branch_info_query = $entry->branch_info_query ();
@@ -72,7 +72,7 @@ class PROJECT_ENTRY_RENDERER extends ENTRY_RENDERER
 
     foreach ($branch_infos as $branch_info)
     {
-      $rel =& $branch_info->release ();
+      $rel = $branch_info->release ();
   ?>
     <dt>
     <?php
@@ -80,7 +80,7 @@ class PROJECT_ENTRY_RENDERER extends ENTRY_RENDERER
       {
         echo '<span style="cursor: help" title="Used for non-branch-specific lists.">&bull;&nbsp;</span>';
       }
-      $branch =& $branch_info->branch ();
+      $branch = $branch_info->branch ();
       if ($branch->locked ())
       {
         echo $this->app->resolve_icon_as_html ('{icons}indicators/locked', 'Locked', '16px') . ' ';
@@ -119,10 +119,10 @@ class PROJECT_ENTRY_RENDERER extends ENTRY_RENDERER
 
   /**
    * Show the extra description in a DHTML layer.
-   * @param PROJECT_ENTRY &$entry
+   * @param PROJECT_ENTRY $entry
    * @access private
    */
-  function _echo_html_extra_description (&$entry)
+  function _echo_html_extra_description ($entry)
   {
     $browser = $this->env->browser ();
     if ($entry->extra_description && ! $this->_options->preferred_text_length)
@@ -153,33 +153,33 @@ class PROJECT_ENTRY_RENDERER extends ENTRY_RENDERER
 
   /**
    * Show information for this branch as HTML.
-   * @param PROJECT_ENTRY &$obj
-   * @param PROJECT_ENTRY_BRANCH_INFO &$branch_info
+   * @param PROJECT_ENTRY $obj
+   * @param PROJECT_ENTRY_BRANCH_INFO $branch_info
    * @access private
    * @abstract
    */
-  function _echo_html_branch_info (&$obj, &$branch_info)
+  function _echo_html_branch_info ($obj, $branch_info)
   {
     $this->raise_deferred ('_echo_html_branch_info', 'PROJECT_ENTRY_MAIL_RENDERER');
   }
 
   /**
    * Show information for a branch's release as HTML.
-   * @param PROJECT_ENTRY_BRANCH_INFO &$branch_info
+   * @param PROJECT_ENTRY_BRANCH_INFO $branch_info
    * @access private
    * @abstract
    */
-  function _echo_html_branch_release_info (&$branch_info)
+  function _echo_html_branch_release_info ($branch_info)
   {
     $this->raise_deferred ('_echo_html_branch_release_info', 'PROJECT_ENTRY_MAIL_RENDERER');
   }
 
   /**
    * Render properties for this entry as plain text.
-   * @param PROJECT_ENTRY &$entry
+   * @param PROJECT_ENTRY $entry
    * @access private
    */
-  function _echo_branches_as_plain_text (&$entry)
+  function _echo_branches_as_plain_text ($entry)
   {
     $branch_info_query = $entry->branch_info_query ();
     $branch_infos = $branch_info_query->objects ();
@@ -198,7 +198,7 @@ class PROJECT_ENTRY_RENDERER extends ENTRY_RENDERER
 
       echo $branch_info->title_as_plain_text ();
       echo $this->app->mail_options->object_separator;
-      $rel =& $branch_info->release ();
+      $rel = $branch_info->release ();
       if ($rel)
       {
         $status = $rel->status ();
@@ -226,21 +226,21 @@ class PROJECT_ENTRY_RENDERER extends ENTRY_RENDERER
    * Display a user and date in plain text.
    * Formatted as: ['caption']: 'time' by 'user'
    * @param string $caption
-   * @param USER &$user
-   * @param DATE_TIME &$time
+   * @param USER $user
+   * @param DATE_TIME $time
    * @access private
    */
-  function _echo_plain_text_user ($caption, &$user, &$time)
+  function _echo_plain_text_user ($caption, $user, $time)
   {
     echo $this->_line ('[' . $caption . ']: ' . $this->_time ($time) . ' by ' . $user->title_as_plain_text ());
   }
 
   /**
    * Render the description for this entry as plain text.
-   * @param PROJECT_ENTRY &$entry
+   * @param PROJECT_ENTRY $entry
    * @access private
    */
-  function _echo_plain_text_extra_description (&$entry)
+  function _echo_plain_text_extra_description ($entry)
   {
     if (! $this->_options->preferred_text_length && $entry->extra_description)
     {
@@ -255,32 +255,32 @@ class PROJECT_ENTRY_RENDERER extends ENTRY_RENDERER
 
   /**
    * Show information for this branch as plain text.
-   * @param PROJECT_ENTRY &$obj
-   * @param PROJECT_ENTRY_BRANCH_INFO &$branch_info
+   * @param PROJECT_ENTRY $obj
+   * @param PROJECT_ENTRY_BRANCH_INFO $branch_info
    * @access private
    * @abstract
    */
-  function _echo_plain_text_branch_info (&$obj, &$branch_info)
+  function _echo_plain_text_branch_info ($obj, $branch_info)
   {
     $this->raise_deferred ('_echo_plain_text_branch_info', 'PROJECT_ENTRY_MAIL_RENDERER');
   }
 
   /**
    * Show information for a branch's release as plain text.
-   * @param PROJECT_ENTRY_BRANCH_INFO &$branch_info
+   * @param PROJECT_ENTRY_BRANCH_INFO $branch_info
    * @access private
    * @abstract
    */
-  function _echo_plain_text_branch_release_info (&$branch_info)
+  function _echo_plain_text_branch_release_info ($branch_info)
   {
     $this->raise_deferred ('_echo_plain_text_branch_release_info', 'PROJECT_ENTRY_MAIL_RENDERER');
   }
 
   /**
    * Outputs the object for print preview.
-   * @param PROJECT_ENTRY &$entry
+   * @param PROJECT_ENTRY $entry
    */
-  function display_as_printable (&$entry)
+  function display_as_printable ($entry)
   {
     $this->_hide_users = ! $this->_options->show_users;
     parent::display_as_printable ($entry);
@@ -292,7 +292,7 @@ class PROJECT_ENTRY_RENDERER extends ENTRY_RENDERER
    * @var boolean
    * @access private
    */
-  var $_hide_users = FALSE;
+  protected $_hide_users = FALSE;
 }
 
 /**
@@ -306,11 +306,11 @@ class PROJECT_ENTRY_LOCATION_RENDERER extends OBJECT_IN_FOLDER_LOCATION_RENDERER
 {
   /**
    * Render any parent objects to the title and location.
-   * @param PAGE &$page
-   * @param RENDERABLE &$obj
+   * @param PAGE $page
+   * @param RENDERABLE $obj
    * @access private
    */
-  function _add_context (&$page, &$obj)
+  function _add_context ($page, $obj)
   {
     parent::_add_context ($page, $obj);
 

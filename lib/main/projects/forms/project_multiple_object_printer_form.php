@@ -49,9 +49,9 @@ require_once ('webcore/forms/multiple_object_printer_form.php');
 class PROJECT_MULTIPLE_OBJECT_PRINTER_FORM extends MULTIPLE_OBJECT_PRINTER_FORM
 {
   /**
-   * @param PROJECT &$folder Project from which to print objects.
+   * @param PROJECT $folder Project from which to print objects.
    */
-  function PROJECT_MULTIPLE_OBJECT_PRINTER_FORM (&$folder)
+  function PROJECT_MULTIPLE_OBJECT_PRINTER_FORM ($folder)
   {
     MULTIPLE_OBJECT_PRINTER_FORM::MULTIPLE_OBJECT_PRINTER_FORM ($folder);
 
@@ -77,10 +77,10 @@ class PROJECT_MULTIPLE_OBJECT_PRINTER_FORM extends MULTIPLE_OBJECT_PRINTER_FORM
 
   /**
    * Hook to allow descendants to use the default form layout, but add print options.
-   * @param FORM_RENDERER &$renderer
+   * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_print_options (&$renderer)
+  function _draw_print_options ($renderer)
   {
     parent::_draw_print_options ($renderer);
     $renderer->draw_separator ();

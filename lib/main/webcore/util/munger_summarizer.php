@@ -52,22 +52,22 @@ class TEXT_STRIPPER extends TEXT_MUNGER
   /**
    * Return, at most, this many visible characters from a transformation.
    * @var integer*/
-  var $max_visible_output_chars = 0;
+  public $max_visible_output_chars = 0;
   /**
    * Allow break inside a word when truncating to {@link $max_visible_output_chars}?
    * @var boolean
    */
-  var $break_inside_word = FALSE;
+  public $break_inside_word = FALSE;
   /**
    * Take out all tags from the input?
    * @var boolean
    */
-  var $strip_unknown_tags = TRUE;
+  public $strip_unknown_tags = TRUE;
   /**
    * Force paragraphs on all transformed text?
    * @var boolean
    */
-  var $force_paragraphs = TRUE;
+  public $force_paragraphs = TRUE;
   
   function TEXT_STRIPPER ()
   {
@@ -96,26 +96,26 @@ class MUNGER_SUMMARIZER
    * Number of characters to return on each side of a term.
    * @var integer
    */
-  var $context_size = 20;
+  public $context_size = 20;
   /**
    * Return, at most, this many visible characters from a transformation.
    * @var integer*/
-  var $max_visible_output_chars = 0;
+  public $max_visible_output_chars = 0;
   /**
    * Allow break inside a word when truncating to {@link $max_visible_output_chars}?
    * @var boolean
    */
-  var $break_inside_word = FALSE;
+  public $break_inside_word = FALSE;
   /**
    * Open each highlighted section with this text.
    * @var string
    */
-  var $highlight_prefix = '<span class="highlight">';
+  public $highlight_prefix = '<span class="highlight">';
   /**
    * Close each highlighted section with this text.
    * @var string
    */
-  var $highlight_suffix = '</span>';
+  public $highlight_suffix = '</span>';
   
   function transform ($text, $phrase)
   {
@@ -137,12 +137,12 @@ class MUNGER_SUMMARIZER
    * @var TEXT_STRIPPER 
    * @access private
    */
-  var $_stripper;
+  protected $_stripper;
   /**
    * @var REGULAR_EXPRESSION
    * @access private
    */
-  var $_reg_exp;
+  protected $_reg_exp;
 }
 
 ?>

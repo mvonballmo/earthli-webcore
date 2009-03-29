@@ -53,20 +53,20 @@ class MULTIPLE_OBJECT_PRINTER_FORM extends MULTIPLE_OBJECT_ACTION_FORM
    * HTTP submission method.
    * @var string
    */
-  var $method = 'get';
+  public $method = 'get';
   /**
    * @var string
    */
-  var $button = 'View printable';
+  public $button = 'View printable';
   /**
    * @var string
    */
-  var $button_icon = '{icons}buttons/print';
+  public $button_icon = '{icons}buttons/print';
 
   /**
-   * @param FOLDER &$folder Objects are from this folder.
+   * @param FOLDER $folder Objects are from this folder.
    */
-  function MULTIPLE_OBJECT_PRINTER_FORM (&$folder)
+  function MULTIPLE_OBJECT_PRINTER_FORM ($folder)
   {
     MULTIPLE_OBJECT_ACTION_FORM::MULTIPLE_OBJECT_ACTION_FORM ($folder);
 
@@ -86,9 +86,9 @@ class MULTIPLE_OBJECT_PRINTER_FORM extends MULTIPLE_OBJECT_ACTION_FORM
 
   /**
    * Load initial properties from this folder.
-   * @param FOLDER &$obj
+   * @param FOLDER $obj
    */
-  function load_from_object (&$obj)
+  function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
     $this->load_with_defaults ();
@@ -103,25 +103,25 @@ class MULTIPLE_OBJECT_PRINTER_FORM extends MULTIPLE_OBJECT_ACTION_FORM
   /**
    * Do nothing with folders.
     * Redirects to a different page, so there is no action needed here.
-    * @param FOLDER &$fldr
+    * @param FOLDER $fldr
     * @access private
     */
-  function _folder_run (&$fldr) {}
+  function _folder_run ($fldr) {}
 
   /**
    * Do nothing with entries.
     * Redirects to a different page, so there is no action needed here.
-    * @param ENTRY &$entry
+    * @param ENTRY $entry
     * @access private
     */
-  function _entry_run (&$obj) {}
+  function _entry_run ($obj) {}
 
   /**
    * Draw a confirmation message for this action.
-   * @param FORM_RENDERER &$renderer
+   * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_message (&$renderer)
+  function _draw_message ($renderer)
   {
     $renderer->draw_text_row ('', 'To the left are the items you selected. Please select your printing options below and click <span class="reference">View printable</span> to see a preview. Then simply print the preview page from the browser window.');
     $renderer->draw_separator ();
@@ -134,10 +134,10 @@ class MULTIPLE_OBJECT_PRINTER_FORM extends MULTIPLE_OBJECT_ACTION_FORM
 
   /**
    * Hook to allow descendants to use the default form layout, but add print options.
-   * @param FORM_RENDERER &$renderer
+   * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_print_options (&$renderer)
+  function _draw_print_options ($renderer)
   {
     $props = $renderer->make_list_properties ();
     $props->smart_wrapping = TRUE;

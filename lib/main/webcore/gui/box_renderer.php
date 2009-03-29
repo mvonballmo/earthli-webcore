@@ -50,9 +50,9 @@ require_once ('webcore/obj/webcore_object.php');
 class BOX_RENDERER extends WEBCORE_OBJECT
 {
   /**
-   * @param CONTEXT &$context
+   * @param CONTEXT $context
    */
-  function BOX_RENDERER (&$context)
+  function BOX_RENDERER ($context)
   {
     WEBCORE_OBJECT::WEBCORE_OBJECT ($context);
     $browser = $this->env->browser ();
@@ -152,13 +152,13 @@ class BOX_RENDERER extends WEBCORE_OBJECT
    * Can CSS 2 be used to render controls?
    * @var boolean
    */
-  var $_supports_css_tables;
+  protected $_supports_css_tables;
 
   /**
    * @var boolean 
    * @access private
    */
-  var $_column_started = FALSE;
+  protected $_column_started = FALSE;
 }
 
 ?>

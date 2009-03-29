@@ -50,9 +50,9 @@ require_once ('webcore/forms/renderable_form.php');
 class AUDITABLE_FORM extends RENDERABLE_FORM
 {
   /**
-   * @param APPLICATION &$app Main application.
+   * @param APPLICATION $app Main application.
    */
-  function AUDITABLE_FORM (&$app)
+  function AUDITABLE_FORM ($app)
   {
     RENDERABLE_FORM::RENDERABLE_FORM ($app);
 
@@ -85,11 +85,11 @@ class AUDITABLE_FORM extends RENDERABLE_FORM
   /**
    * Add this object to be previewed in the form.
    * Uses {@link FORM_PREVIEW_SETTINGS} to store these settings.
-   * @param AUDITABLE &$obj
+   * @param AUDITABLE $obj
    * @param string $title
    * @param boolean $visible
    */
-  function add_preview (&$obj, $title, $visible = TRUE)
+  function add_preview ($obj, $title, $visible = TRUE)
   {
     if (! $obj->exists ())
     {
@@ -103,9 +103,9 @@ class AUDITABLE_FORM extends RENDERABLE_FORM
    * Try to apply the values in this form to 'obj'.
    * Since the object is auditable, make a copy of it here so that any changes
    * made during validation or the commit process do not affect the original.
-   * @param AUDITABLE &$obj Store the form values to this object.
+   * @param AUDITABLE $obj Store the form values to this object.
    */
-  function attempt_action (&$obj)
+  function attempt_action ($obj)
   {
     if (! $this->previewing ())
     {
@@ -119,7 +119,7 @@ class AUDITABLE_FORM extends RENDERABLE_FORM
    * Called after fields are validated.
    * Check whether the object has changed since this form was loaded. If it has, do not update
    * the object with this form's contents (else it will overwrite newly-stored changes).
-   * @param object &$obj Object being validated.
+   * @param object $obj Object being validated.
    * @access private
    */
   function _post_validate ($obj)
@@ -145,10 +145,10 @@ class AUDITABLE_FORM extends RENDERABLE_FORM
   /**
    * Configure the history item's properties.
    * Applies form values to the history item.
-   * @param HISTORY_ITEM &$history_item
+   * @param HISTORY_ITEM $history_item
    * @access private
    */
-  function _adjust_history_item (&$history_item)
+  function _adjust_history_item ($history_item)
   {
     $history_item->title = $this->value_as_text ('history_item_title');
     $history_item->description = $this->value_as_text ('history_item_description');
@@ -162,9 +162,9 @@ class AUDITABLE_FORM extends RENDERABLE_FORM
 
   /**
    * Load initial properties from this object.
-   * @param AUDITABLE &$obj
+   * @param AUDITABLE $obj
    */
-  function load_from_object (&$obj)
+  function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
     $this->set_value ('time_modified', $obj->time_modified);
@@ -173,9 +173,9 @@ class AUDITABLE_FORM extends RENDERABLE_FORM
 
   /**
    * Load initial properties from the object, but store as a new object.
-   * @param AUDITABLE &$obj
+   * @param AUDITABLE $obj
    */
-  function load_from_clone (&$obj)
+  function load_from_clone ($obj)
   {
     parent::load_from_clone ($obj);
     $this->set_value ('publication_state', History_item_needs_send);
@@ -191,10 +191,10 @@ class AUDITABLE_FORM extends RENDERABLE_FORM
   /**
    * Execute the form.
    * The form has been validated and can be executed.
-   * @param AUDITABLE &$obj
+   * @param AUDITABLE $obj
    * @access private
    */
-  function commit (&$obj)
+  function commit ($obj)
   {
     if ($this->cloning ())
     {
@@ -210,7 +210,7 @@ class AUDITABLE_FORM extends RENDERABLE_FORM
    * Draws controls for history item notification.
    *  @access private
    */
-  function _draw_history_item_controls (&$renderer, $show_initially)
+  function _draw_history_item_controls ($renderer, $show_initially)
   {
     $renderer->draw_separator ();
     $description = 'Change history is stored automatically. %s history options.';

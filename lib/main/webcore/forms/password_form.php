@@ -52,16 +52,16 @@ class PASSWORD_FORM extends FORM
   /**
    * @var string
    */
-  var $button = 'Change';
+  public $button = 'Change';
   /**
    * @var string
    */
-  var $button_icon = '{icons}buttons/password';
+  public $button_icon = '{icons}buttons/password';
   
   /**
-   * @param APPLICATION &$app Main application.
+   * @param APPLICATION $app Main application.
    */
-  function PASSWORD_FORM (&$app)
+  function PASSWORD_FORM ($app)
   {
     FORM::FORM ($app);
 
@@ -97,10 +97,10 @@ class PASSWORD_FORM extends FORM
 
   /**
    * Called after fields are validated.
-    * @param USER &$obj This parameter is ignored.
+    * @param USER $obj This parameter is ignored.
     * @access private
     */
-  function _post_validate (&$obj)
+  function _post_validate ($obj)
   {
     parent::_post_validate ($obj);
 
@@ -117,12 +117,12 @@ class PASSWORD_FORM extends FORM
 
   /**
    * Store the form's values as this user's password.
-    * @param USER &$obj
+    * @param USER $obj
     * @access private
     */
-  function commit (&$obj)
+  function commit ($obj)
   {
-    $history_item =& $obj->new_history_item ();
+    $history_item = $obj->new_history_item ();
     $obj->set_password ($this->value_as_text ('password1'));
     $obj->store_if_different ($history_item);
     $obj->load_permissions ();
@@ -133,20 +133,20 @@ class PASSWORD_FORM extends FORM
   }
 
   /**
-   * @param FORM_RENDERER &$renderer
+   * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_hidden_controls (&$renderer)
+  function _draw_hidden_controls ($renderer)
   {
     $this->set_value ('name', read_var ('name'));
     parent::_draw_hidden_controls ($renderer);
   }
 
   /**
-   * @param FORM_RENDERER &$renderer
+   * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_controls (&$renderer)
+  function _draw_controls ($renderer)
   {
     $renderer->set_width ('12em');
 

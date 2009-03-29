@@ -286,24 +286,24 @@ class PROJECT_APPLICATION_DISPLAY_OPTIONS extends APPLICATION_DISPLAY_OPTIONS
    * @see PROPERTY_VALUE
    * @var array[PROPERTY_VALUE]
    */
-  var $_entry_kinds;
+  protected $_entry_kinds;
   /**
    * List of job priorities.
    * @see PROPERTY_VALUE
    * @var array[PROPERTY_VALUE]
    */
-  var $_job_priorities;
+  protected $_job_priorities;
   /**
    * List of job statuses.
    * @see JOB_STATUS_VALUE
    * @var array[JOB_STATUS_VALUE]
    */
-  var $_job_statuses;
+  protected $_job_statuses;
   /**
    * List of job status mappings.
    * @var JOB_STATUS_MAP
    */
-  var $_job_status_map;
+  protected $_job_status_map;
 }
 
 /**
@@ -321,19 +321,19 @@ class JOB_STATUS_MAP extends WEBCORE_OBJECT
    * Stored as a comma-separated list.
    * @var string
    */
-  var $from;
+  public $from;
   /**
    * Map statuses in 'map_from' to this status.
    * @var integer
    */
-  var $to;
+  public $to;
 
   /**
-   * @param APPLICATION &$app
+   * @param APPLICATION $app
    * @param array[integer] $from
    * @param integer $to
    */
-  function JOB_STATUS_MAP (&$app, $from, $to)
+  function JOB_STATUS_MAP ($app, $from, $to)
   {
     WEBCORE_OBJECT::WEBCORE_OBJECT ($app);
 

@@ -28,7 +28,7 @@ http://www.earthli.com/software/webcore/projects
 
   $id = read_var ('id');
   $folder_query = $App->login->folder_query ();
-  $folder =& $folder_query->object_at_id ($id);
+  $folder = $folder_query->object_at_id ($id);
 
   if (isset ($folder) && $App->login->is_allowed (Privilege_set_folder, Privilege_modify, $folder))
   {

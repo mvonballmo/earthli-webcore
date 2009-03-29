@@ -37,8 +37,8 @@ http://www.earthli.com/software/webcore
     if ($email)
     {
       $user_query = $App->user_query ();
-      $user =& $user_query->object_at_email ($email);
-      $subscriber =& $user->subscriber ();
+      $user = $user_query->object_at_email ($email);
+      $subscriber = $user->subscriber ();
     }
   }  
     

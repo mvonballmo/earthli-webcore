@@ -51,12 +51,12 @@ require_once ('webcore/db/sql_storage.php');
 class SQL_UNIQUE_STORAGE extends SQL_STORAGE
 {
   /**
-   * @param SQL_TABLE &$table
+   * @param SQL_TABLE $table
    * @param integer $action
-   * @param STORABLE &$obj
+   * @param STORABLE $obj
    * @access private
    */
-  function _commit_table (&$table, $action, &$obj)
+  function _commit_table ($table, $action, $obj)
   {
     parent::_commit_table ($table, $action, $obj);
 

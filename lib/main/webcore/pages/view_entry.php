@@ -28,7 +28,7 @@ http://www.earthli.com/software/webcore
 
   $id = read_var ('id');
   $folder_query = $App->login->folder_query ();
-  $folder =& $folder_query->folder_for_entry_at_id ($id);
+  $folder = $folder_query->folder_for_entry_at_id ($id);
 
   if (isset ($folder))
   {
@@ -41,7 +41,7 @@ http://www.earthli.com/software/webcore
       $entry_query->set_type ($entry_type_id);
     }
 
-    $entry =& $entry_query->object_at_id ($id);
+    $entry = $entry_query->object_at_id ($id);
   }
 
   if (isset ($entry) && $App->login->is_allowed (Privilege_set_entry, Privilege_view, $entry))

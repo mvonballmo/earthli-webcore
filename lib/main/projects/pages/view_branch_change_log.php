@@ -28,12 +28,12 @@ http://www.earthli.com/software/webcore/projects
 
   $id = read_var ('id');
   $folder_query = $App->login->folder_query ();
-  $folder =& $folder_query->folder_for_branch_at_id ($id);
+  $folder = $folder_query->folder_for_branch_at_id ($id);
 
   if (isset ($folder))
   {
     $branch_query = $folder->branch_query ();
-    $branch =& $branch_query->object_at_id ($id);
+    $branch = $branch_query->object_at_id ($id);
   }
 
   if (isset ($branch) && $App->login->is_allowed (Privilege_set_folder, Privilege_view, $branch))
@@ -103,7 +103,7 @@ http://www.earthli.com/software/webcore/projects
       $entry_query->restrict ('((ctob.branch_applier_id <> 0) OR (jtob.branch_closer_id <> 0)) AND NOT ((ctob.branch_applier_id <> 0) AND (jtob.branch_closer_id <> 0))');
       $entry_query->restrict ('etob.branch_release_id = 0');
       $entry_query->set_order ('comp.title ASC, entry.kind, time_to_use DESC');
-      $entries =& $entry_query->objects ();
+      $entries = $entry_query->objects ();
     }
     else
     {

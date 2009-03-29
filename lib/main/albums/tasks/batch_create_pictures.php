@@ -54,34 +54,34 @@ class BATCH_CREATE_PICTURES_TASK extends TASK
    * Title of the processing web page.
    * @var string
    */
-  var $page_title = 'Import pictures';
+  public $page_title = 'Import pictures';
   /**
    * Log all messages in this channel.
    * @var string
    */
-  var $log_channel = 'Import';
+  public $log_channel = 'Import';
 
   /**
    * Archive from which to extract pictures.
    * @var string
    */
-  var $archive_file_name;
+  public $archive_file_name;
   /**
    * Extract the date from each picture?
    * @var boolean
    */
-  var $read_exif;
+  public $read_exif;
   /**
    * Create a thumbnail for each picture?
    * @var boolean
    */
-  var $create_thumbnail;
+  public $create_thumbnail;
   /**
    * Maximum width or height of the thumbnail.
    * Aspect ratio is preserved.
    * @var integer
    */
-  var $thumbnail_size;
+  public $thumbnail_size;
   /**
    * Picture titles are created using this template.
    * Use {#} to include the picture number and {file} to include the file name
@@ -89,26 +89,26 @@ class BATCH_CREATE_PICTURES_TASK extends TASK
    * file1.jpg will have the title 'Picture 1 - file1'.
    * @var string
    */
-  var $file_name_template;
+  public $file_name_template;
   /**
    * Use this date if picture dates are not available or wanted.
    * @see $read_exif
    * @var DATE_TIME
    */
-  var $default_date;
+  public $default_date;
   /**
    * Start numbering new pictures from here.
    * @var integer
    */
-  var $starting_index = 1;
+  public $starting_index = 1;
 
   /**
-   * @param FOLDER &$folder Create pictures in this folder.
+   * @param FOLDER $folder Create pictures in this folder.
    */
-  function BATCH_CREATE_PICTURES_TASK (&$folder)
+  function BATCH_CREATE_PICTURES_TASK ($folder)
   {
     TASK::TASK ($folder->context);
-    $this->_folder =& $folder;
+    $this->_folder = $folder;
   }
 
   /**
@@ -165,12 +165,12 @@ class BATCH_CREATE_PICTURES_TASK extends TASK
 
   /**
    * Called once for each image in the archive.
-   * @param COMPRESSED_FILE &$archive
-   * @param COMPRESSED_FILE_ENTRY &$entry
+   * @param COMPRESSED_FILE $archive
+   * @param COMPRESSED_FILE_ENTRY $entry
    * @param CALLBACK $error_callback
    * @access private
    */
-  function process_image (&$archive, &$entry, $error_callback)
+  function process_image ($archive, $entry, $error_callback)
   {
     log_open_block ("Extracting [$entry->name]...");
     $entry->extract_to ($this->_folder_url, $error_callback);
@@ -249,12 +249,12 @@ class BATCH_CREATE_PICTURES_TASK extends TASK
 
   /**
    * Called by the archive to report errors.
-   * @param COMPRESSED_FILE &$archive
+   * @param COMPRESSED_FILE $archive
    * @param string $msg
    * @param COMPRESSED_FILE_ENTRY $entry
    * @access private
    */
-  function show_error (&$archive, $msg, $entry)
+  function show_error ($archive, $msg, $entry)
   {
     $this->_log ($msg, Msg_type_error);
   }
@@ -264,11 +264,11 @@ class BATCH_CREATE_PICTURES_TASK extends TASK
    * @var string
    * @access private
    */
-  var $_folder_url;
+  protected $_folder_url;
   /**
    * @var integer
    * @access private
    */
-  var $_num_pictures_imported;
+  protected $_num_pictures_imported;
 }
 ?>

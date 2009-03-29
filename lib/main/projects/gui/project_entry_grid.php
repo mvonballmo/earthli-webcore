@@ -52,47 +52,47 @@ class PROJECT_ENTRY_GRID extends CONTENT_OBJECT_GRID
   /**
    * @var string
    */
-  var $box_style = 'object-in-list';
+  public $box_style = 'object-in-list';
   /**
    * @var integer
    */
-  var $spacing = 4;
+  public $spacing = 4;
   /**
    * @var boolean
    */
-  var $even_columns = FALSE;
+  public $even_columns = FALSE;
   /**
    * @var boolean
    */
-  var $show_separator = FALSE;
+  public $show_separator = FALSE;
   /**
    * @var boolean
    */
-  var $show_user = TRUE;
+  public $show_user = TRUE;
   /**
    * @var boolean
    */
-  var $show_folder = FALSE;
+  public $show_folder = FALSE;
   /**
    * @var boolean
    */
-  var $show_branch = TRUE;
+  public $show_branch = TRUE;
   /**
    * @var boolean
    */
-  var $show_release = TRUE;
+  public $show_release = TRUE;
   /**
    * @var boolean
    */
-  var $show_component = TRUE;
+  public $show_component = TRUE;
   
   /**
-   * @param PROJECT_ENTRY &$obj
+   * @param PROJECT_ENTRY $obj
    * @access private
    */
-  function _draw_box (&$obj)
+  function _draw_box ($obj)
   {
-    $branch_info =& $obj->main_branch_info ();
+    $branch_info = $obj->main_branch_info ();
 ?>
 <div style="float: left">
 <?php
@@ -143,7 +143,7 @@ class PROJECT_ENTRY_GRID extends CONTENT_OBJECT_GRID
       echo '<br>Updated ';
       if ($this->show_user)
       {
-        $modifier =& $obj->modifier ();
+        $modifier = $obj->modifier ();
         echo 'by ' . $modifier->title_as_link ();
       }
       echo ' on ' . $obj->time_modified->format ();
@@ -164,10 +164,10 @@ class PROJECT_ENTRY_GRID extends CONTENT_OBJECT_GRID
    * Draw the "path" to the entry.
    * Takes the visibility properties into account to determine whether to show
    * the component/project/release/branch.
-   * @param PROJECT_ENTRY &$obj
-   * @param PROJECT_ENTRY_BRANCH_INFO &$branch_info
+   * @param PROJECT_ENTRY $obj
+   * @param PROJECT_ENTRY_BRANCH_INFO $branch_info
    */
-  function _draw_context_in_project_for (&$obj, &$branch_info)
+  function _draw_context_in_project_for ($obj, $branch_info)
   {
     if ($this->show_folder || $this->show_branch || $this->show_release || $this->show_component)
     {
@@ -179,25 +179,25 @@ class PROJECT_ENTRY_GRID extends CONTENT_OBJECT_GRID
 
       if ($this->show_folder)
       {
-        $folder =& $obj->parent_folder ();
+        $folder = $obj->parent_folder ();
         $menu->append ($folder->title_as_link ());
       }
 
       if ($this->show_component && $obj->component_id)
       {
-        $comp =& $obj->component ();
+        $comp = $obj->component ();
         $menu->append ($comp->title_as_link ());
       }
 
       if ($this->show_branch)
       {
-        $branch =& $obj->main_branch ();
+        $branch = $obj->main_branch ();
         $menu->append ($branch->title_as_link ());
       }
 
       if ($this->show_release)
       {
-        $rel =& $branch_info->release ();
+        $rel = $branch_info->release ();
         if (isset ($rel))
         {
           $menu->append ($rel->title_as_link ());
@@ -213,28 +213,28 @@ class PROJECT_ENTRY_GRID extends CONTENT_OBJECT_GRID
   
   /**
    * Draw entry-specific information for the given release.
-   * @param PROJECT_ENTRY &$obj
-   * @param PROJECT_ENTRY_BRANCH_INFO &$branch_info
+   * @param PROJECT_ENTRY $obj
+   * @param PROJECT_ENTRY_BRANCH_INFO $branch_info
    */
-  function _draw_release_details (&$obj, &$branch_info)
+  function _draw_release_details ($obj, $branch_info)
   {
   }
   
   /**
    * Draw user-specific information for the given release.
-   * @param PROJECT_ENTRY &$obj
-   * @param PROJECT_ENTRY_BRANCH_INFO &$branch_info
+   * @param PROJECT_ENTRY $obj
+   * @param PROJECT_ENTRY_BRANCH_INFO $branch_info
    */
-  function _draw_user_details (&$obj, &$branch_info)
+  function _draw_user_details ($obj, $branch_info)
   {
   }
   
   /**
    * Draw extra description information for the entry.
-   * @param PROJECT_ENTRY &$obj
-   * @param PROJECT_ENTRY_BRANCH_INFO &$branch_info
+   * @param PROJECT_ENTRY $obj
+   * @param PROJECT_ENTRY_BRANCH_INFO $branch_info
    */
-  function _draw_description (&$obj)
+  function _draw_description ($obj)
   {
   }    
 }
@@ -250,10 +250,10 @@ class PROJECT_ENTRY_SUMMARY_GRID extends ENTRY_SUMMARY_GRID
 {
   /**
    * Show search details for an object.
-   * @param PROJECT_ENTRY &$obj
+   * @param PROJECT_ENTRY $obj
    * @access private
    */
-  function _echo_details (&$obj)
+  function _echo_details ($obj)
   {
 ?>
     <tr>
@@ -261,7 +261,7 @@ class PROJECT_ENTRY_SUMMARY_GRID extends ENTRY_SUMMARY_GRID
       <td><?php echo $obj->kind_icon () . ' ' . $obj->kind_as_text (); ?></td>
     </tr>
 <?php
-    $comp =& $obj->component ();
+    $comp = $obj->component ();
     if (isset ($comp))
     {
 ?>
@@ -276,10 +276,10 @@ class PROJECT_ENTRY_SUMMARY_GRID extends ENTRY_SUMMARY_GRID
 
   /**
    * Return the block of text to summarize.
-   * @param OBJECT_IN_FOLDER &$obj
+   * @param OBJECT_IN_FOLDER $obj
    * @access private
    */
-  function _text_to_summarize (&$obj)
+  function _text_to_summarize ($obj)
   {
     return $obj->description . ' ' . $obj->extra_description;
   }  

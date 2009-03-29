@@ -71,17 +71,17 @@ class NEWSFEED_ENGINE extends WEBCORE_OBJECT
    * Type of newsfeed to create with {@link make_renderer()}.
    * @var string
    */
-  var $format = Newsfeed_format_rss;
+  public $format = Newsfeed_format_rss;
   /**
    * Type of content in newsfeed items/entries.
    * @var string
    */
-  var $content = Newsfeed_content_html;
+  public $content = Newsfeed_content_html;
   
   /**
    * @param CONTEXT $context
    */
-  function NEWSFEED_ENGINE (&$context)
+  function NEWSFEED_ENGINE ($context)
   {
     WEBCORE_OBJECT::WEBCORE_OBJECT ($context);
     $this->format = read_var ('format', Newsfeed_format_rss);
@@ -90,9 +90,9 @@ class NEWSFEED_ENGINE extends WEBCORE_OBJECT
   
   /**
    * Return a newsfeed renderer for the given folder.
-   * @param OBJECT_IN_FOLDER &$obj
+   * @param OBJECT_IN_FOLDER $obj
    */
-  function make_renderer (&$obj)
+  function make_renderer ($obj)
   {
     $f = $this->_format_with_fallback ();
     switch ($f)

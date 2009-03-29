@@ -49,9 +49,9 @@ require_once ('webcore/forms/object_in_folder_form.php');
 class COMMENT_FORM extends ATTACHMENT_HOST_FORM
 {
   /**
-   * @param FOLDER &$folder Object belongs in this folder.
+   * @param FOLDER $folder Object belongs in this folder.
    */
-  function COMMENT_FORM (&$folder)
+  function COMMENT_FORM ($folder)
   {
     ATTACHMENT_HOST_FORM::ATTACHMENT_HOST_FORM ($folder);
 
@@ -71,15 +71,15 @@ class COMMENT_FORM extends ATTACHMENT_HOST_FORM
     $field->visible = FALSE;
     $this->add_field ($field);
 
-    $field =& $this->_fields ['title'];
+    $field = $this->_fields ['title'];
     $field->required = FALSE;
   }
 
   /**
    * Load initial properties from this comment.
-   * @param COMMENT &$obj
+   * @param COMMENT $obj
    */
-  function load_from_object (&$obj)
+  function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
 
@@ -107,10 +107,10 @@ class COMMENT_FORM extends ATTACHMENT_HOST_FORM
 
   /**
    * Called after fields are validated.
-   * @param COMMENT &$obj
+   * @param COMMENT $obj
    * @access private
    */
-  function _post_validate (&$obj)
+  function _post_validate ($obj)
   {
     parent::_post_validate ($obj);
 
@@ -122,10 +122,10 @@ class COMMENT_FORM extends ATTACHMENT_HOST_FORM
 
   /**
    * Store the form's values to this comment.
-    * @param COMMENT &$obj
+    * @param COMMENT $obj
     * @access private
     */
-  function _store_to_object (&$obj)
+  function _store_to_object ($obj)
   {
     $obj->kind = $this->value_for ('kind');
     $obj->parent_id = $this->value_for ('parent_id');
@@ -143,10 +143,10 @@ class COMMENT_FORM extends ATTACHMENT_HOST_FORM
   }
   
   /**
-   * @param FORM_RENDERER &$renderer
+   * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_controls (&$renderer)
+  function _draw_controls ($renderer)
   {
     $renderer->start ();
 
@@ -195,6 +195,6 @@ class COMMENT_FORM extends ATTACHMENT_HOST_FORM
    * @var string
    * @access private
    */
-  var $_privilege_set = Privilege_set_comment;
+  protected $_privilege_set = Privilege_set_comment;
 }
 ?>

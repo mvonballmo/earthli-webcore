@@ -53,12 +53,12 @@ class PROJECT_PRINT_RENDERER_OPTIONS extends PRINT_RENDERER_OPTIONS
    * Show {@link CHANGE}s associated with {@link JOB}s?
    * @var boolean
    */
-  var $show_changes = TRUE;
+  public $show_changes = TRUE;
   /**
    * Show files when showing {@link CHANGE}s?
    * @var boolean
    */
-  var $show_files = TRUE;
+  public $show_files = TRUE;
 
   /**
    * Load values from the HTTP request.

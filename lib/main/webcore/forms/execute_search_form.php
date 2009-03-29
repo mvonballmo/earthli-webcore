@@ -53,46 +53,46 @@ class EXECUTE_SEARCH_FORM extends ID_BASED_FORM
   /**
    * @var string
    */
-  var $name = 'search_form';
+  public $name = 'search_form';
   /**
    * @var string
    * @access private
    */
-  var $method = 'get';
+  public $method = 'get';
   /**
    * @var string
    */
-  var $button = 'Search';
+  public $button = 'Search';
   /**
    * @var string
    */
-  var $button_icon = '{icons}buttons/view';
+  public $button_icon = '{icons}buttons/view';
   /**
    * @var boolean
    */
-  var $controls_visible = TRUE;
+  public $controls_visible = TRUE;
   /**
    * @var string
    */
-  var $action = 'search.php';
+  public $action = 'search.php';
   /**
    * @var string
    */
-  var $action_anchor = 'search-results';
+  public $action_anchor = 'search-results';
 
   /**
    * Initialize the form with a search object.
    * If the search is <c>null</c>, the form will be shown in "quick search"
    * mode. This shows only the text search and a drop-down to select the type
    * of object to search.
-   * @param APPLICATION &$app Main application.
-   * @param SEARCH &$search Build the form based on this search object.
+   * @param APPLICATION $app Main application.
+   * @param SEARCH $search Build the form based on this search object.
    */
-  function EXECUTE_SEARCH_FORM (&$app, &$search)
+  function EXECUTE_SEARCH_FORM ($app, $search)
   {
     ID_BASED_FORM::ID_BASED_FORM ($app);
 
-    $this->_search =& $search;
+    $this->_search = $search;
     
     $entry_type_infos = $this->app->entry_type_infos ();
     $type = $entry_type_infos [0]->id;
@@ -157,9 +157,9 @@ class EXECUTE_SEARCH_FORM extends ID_BASED_FORM
 
   /**
    * Load initial properties from this branch.
-   * @param SEARCH &$obj
+   * @param SEARCH $obj
    */
-  function load_from_object (&$obj)
+  function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
     if (isset ($this->_search))
@@ -171,10 +171,10 @@ class EXECUTE_SEARCH_FORM extends ID_BASED_FORM
 
   /**
    * Called after fields are validated.
-   * @param SEARCH &$obj
+   * @param SEARCH $obj
    * @access private
    */
-  function _post_validate (&$obj)
+  function _post_validate ($obj)
   {
     parent::_post_validate ($obj);
     if (isset ($this->_search))
@@ -210,10 +210,10 @@ class EXECUTE_SEARCH_FORM extends ID_BASED_FORM
 
   /**
    * Execute the form.
-   * @param SEARCH &$obj
+   * @param SEARCH $obj
    * @access private
    */
-  function commit (&$obj)
+  function commit ($obj)
   {
     $this->_search->fields->store_to_object ($this, $obj);
   }
@@ -241,10 +241,10 @@ class EXECUTE_SEARCH_FORM extends ID_BASED_FORM
   }
 
   /**
-   * @param FORM_RENDERER &$renderer
+   * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_controls (&$renderer)
+  function _draw_controls ($renderer)
   {
     if (! isset ($this->_search))
     {

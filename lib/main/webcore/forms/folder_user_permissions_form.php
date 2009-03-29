@@ -49,13 +49,13 @@ require_once ('webcore/forms/folder_permissions_form.php');
 class FOLDER_USER_PERMISSIONS_FORM extends FOLDER_PERMISSIONS_FORM
 {
   /**
-   * @param USER &$user Edit this user's folder permissions.
+   * @param USER $user Edit this user's folder permissions.
    */
-  function FOLDER_USER_PERMISSIONS_FORM (&$user)
+  function FOLDER_USER_PERMISSIONS_FORM ($user)
   {
     FOLDER_PERMISSIONS_FORM::FOLDER_PERMISSIONS_FORM ($user->app);
 
-    $this->_user =& $user;
+    $this->_user = $user;
 
     $field = new TITLE_FIELD ();
     $field->id = 'name';
@@ -67,9 +67,9 @@ class FOLDER_USER_PERMISSIONS_FORM extends FOLDER_PERMISSIONS_FORM
 
   /**
    * Load initial properties from these permissions.
-   * @param PERMISSIONS &$obj
+   * @param PERMISSIONS $obj
    */
-  function load_from_object (&$obj)
+  function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
     $this->set_value ('name', $this->_user->title);
@@ -77,10 +77,10 @@ class FOLDER_USER_PERMISSIONS_FORM extends FOLDER_PERMISSIONS_FORM
 
   /**
    * Store the form's values to this set of permissions.
-    * @param PERMISSIONS &$obj
+    * @param PERMISSIONS $obj
     * @access private
     */
-  function commit (&$obj)
+  function commit ($obj)
   {
     $obj->user_id = $this->_user->id;
     $obj->kind = Privilege_kind_user;

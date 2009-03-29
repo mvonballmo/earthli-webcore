@@ -40,8 +40,8 @@ class UPGRADE_PER_APP_221_23_TASK extends MIGRATOR_TASK
     {
       $obj->id = $Page->database->f ('id');
       $obj->parent_id = $Page->database->f ('parent_id');
-      $folders [] =& $obj;
-      $folder_map [$obj->id] =& $obj;
+      $folders [] = $obj;
+      $folder_map [$obj->id] = $obj;
       unset($obj);
     }
 
@@ -50,16 +50,16 @@ class UPGRADE_PER_APP_221_23_TASK extends MIGRATOR_TASK
 
     while ($i < $c)
     {
-      $folder =& $folders [$i];
+      $folder = $folders [$i];
       if ($folder->parent_id)
       {
-        $parent =& $folder_map [$folder->parent_id];
-        $parent->children [] =& $folder;
-        $folder->parent =& $parent;
+        $parent = $folder_map [$folder->parent_id];
+        $parent->children [] = $folder;
+        $folder->parent = $parent;
       }
       else
       {
-        $roots [] =& $folder;
+        $roots [] = $folder;
       }
 
       $i++;
@@ -68,7 +68,7 @@ class UPGRADE_PER_APP_221_23_TASK extends MIGRATOR_TASK
     build_folder_tree ($roots, $table_name);
   }
 
-  function build_folder_tree (&$folders, $table_name)
+  function build_folder_tree ($folders, $table_name)
   {
     if (sizeof ($folders))
     {

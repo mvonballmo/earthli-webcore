@@ -52,33 +52,33 @@ class COMMENT_GRID extends SELECTABLE_GRID
   /**
    * @var string
    */
-  var $object_name = 'Comment';
+  public $object_name = 'Comment';
   /**
    * @var integer
    */
-  var $spacing = 2;
+  public $spacing = 2;
   /**
    * @var boolean
    */
-  var $show_separator = TRUE;
+  public $show_separator = TRUE;
   /**
    * @var string
    */
-  var $box_style = 'object-in-list';
+  public $box_style = 'object-in-list';
   /**
    * @var boolean
    */
-  var $show_user = TRUE;
+  public $show_user = TRUE;
   /**
    * @var boolean
    */
-  var $show_folder = TRUE;
+  public $show_folder = TRUE;
 
   /**
-   * @param COMMENT &$obj
+   * @param COMMENT $obj
     * @access private
     */
-  function _draw_box (&$obj)
+  function _draw_box ($obj)
   {
     $this->_echo_header ($obj);
 ?>
@@ -99,11 +99,11 @@ class COMMENT_GRID extends SELECTABLE_GRID
     $this->_echo_entry_info ($obj);
   }
 
-  function _echo_entry_info (&$obj)
+  function _echo_entry_info ($obj)
   {
-    $folder =& $obj->parent_folder ();
-    $entry =& $obj->entry ();
-    $type_info =& $entry->type_info ();
+    $folder = $obj->parent_folder ();
+    $entry = $obj->entry ();
+    $type_info = $entry->type_info ();
 ?>
   <div class="detail">
   (Attached to <?php
@@ -122,7 +122,7 @@ class COMMENT_GRID extends SELECTABLE_GRID
   {
     $this->_draw_menu_for ($obj, Menu_size_compact);
 
-    $creator =& $obj->creator ();
+    $creator = $obj->creator ();
     if ($creator->icon_url)
     {
   ?>

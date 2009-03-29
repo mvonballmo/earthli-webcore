@@ -52,12 +52,12 @@ class USER_FOLDER_QUERY extends OBJECT_IN_FOLDER_QUERY
    * SQL alias for the "main" table.
    * @var string
    */
-  var $alias = 'fldr';
+  public $alias = 'fldr';
 
   /**
-   * @param APPLICATION &$app Main application.
+   * @param APPLICATION $app Main application.
    */
-  function USER_FOLDER_QUERY (&$app)
+  function USER_FOLDER_QUERY ($app)
   {
     OBJECT_IN_FOLDER_QUERY::OBJECT_IN_FOLDER_QUERY ($app);
 
@@ -122,7 +122,7 @@ class USER_FOLDER_QUERY extends OBJECT_IN_FOLDER_QUERY
    * @param integer $id
    * @return FOLDER
    */
-  function &folder_for_entry_at_id ($id)
+  function folder_for_entry_at_id ($id)
   {
     $id = $this->validate_as_integer ($id);
     if ($id)
@@ -141,7 +141,7 @@ class USER_FOLDER_QUERY extends OBJECT_IN_FOLDER_QUERY
    * @param integer $id
    * @return FOLDER
    */
-  function &folder_for_comment_at_id ($id)
+  function folder_for_comment_at_id ($id)
   {
     $id = $this->validate_as_integer ($id);
     if ($id)
@@ -163,7 +163,7 @@ class USER_FOLDER_QUERY extends OBJECT_IN_FOLDER_QUERY
    * @param string $type Can be {@link History_item_entry}, {@link History_item_comment}, {@link History_item_folder}, {@link History_item_user} or {@link History_item_group}.
    * @return FOLDER
    */
-  function &folder_for_attachment_at_id ($id, $type)
+  function folder_for_attachment_at_id ($id, $type)
   {
     $id = $this->validate_as_integer ($id);
     if ($id)
@@ -218,7 +218,7 @@ class USER_FOLDER_QUERY extends OBJECT_IN_FOLDER_QUERY
 
     if (! $this->_returns_no_data ())
     {
-      $p =& $this->login->permissions ();
+      $p = $this->login->permissions ();
       $vis = $p->value_for (Privilege_set_folder, Privilege_view);
       $invis = $p->value_for (Privilege_set_folder, Privilege_view_hidden);
 
@@ -408,7 +408,7 @@ class USER_FOLDER_QUERY extends OBJECT_IN_FOLDER_QUERY
     $this->_calculated_restrictions [] =  'fldr.id = fldr.permissions_id';
 
 /*
-    $db =& $this->raw_output ();
+    $db = $this->raw_output ();
     while ($db->next_record ())
     {
       if ($this->_is_valid_object ($db))
@@ -436,11 +436,11 @@ class USER_FOLDER_QUERY extends OBJECT_IN_FOLDER_QUERY
   }
 
   /**
-   * @param FOLDER &$obj
+   * @param FOLDER $obj
    * @return boolean
    * @access private
    */
-  function _is_indexable_object (&$obj)
+  function _is_indexable_object ($obj)
   {
     $Result = ! isset ($this->_filter_by_sets);
     if (! $Result)
@@ -487,11 +487,11 @@ class USER_FOLDER_QUERY extends OBJECT_IN_FOLDER_QUERY
    * 'usable' field which indicates whether the user is allowed to use this
    * folder. This addresses the possibility that the most applicable permissions
    * *exclude* a user from seeing it.
-   * @param DATABASE &$db
+   * @param DATABASE $db
    * @return bool
    * @access private
    */
-  function _is_valid_object (&$db)
+  function _is_valid_object ($db)
   {
     $id = $db->f ("id");
     $usable = $db->f ("usable");
@@ -518,30 +518,30 @@ class USER_FOLDER_QUERY extends OBJECT_IN_FOLDER_QUERY
   }
 
   /**
-   * @param FOLDER &$parent
-   * @param FOLDER &$obj
+   * @param FOLDER $parent
+   * @param FOLDER $obj
    * @access private
    */
-  function _obj_connect_to_parent (&$parent, &$obj)
+  function _obj_connect_to_parent ($parent, $obj)
   {
     $parent->add_sub_folder ($obj);
   }
 
   /**
-   * @param FOLDER &$obj
+   * @param FOLDER $obj
    * @access private
    */
-  function _obj_set_sub_objects_cached (&$obj)
+  function _obj_set_sub_objects_cached ($obj)
   {
     $obj->set_sub_folders_cached ();
   }
 
   /**
    * @return array[FOLDER]
-   * @param FOLDER &$obj
+   * @param FOLDER $obj
    * @access private
    */
-  function _obj_sub_objects (&$obj)
+  function _obj_sub_objects ($obj)
   {
     return $obj->sub_folders ();
   }
@@ -553,7 +553,7 @@ class USER_FOLDER_QUERY extends OBJECT_IN_FOLDER_QUERY
    */
   function _visible_objects_available ()
   {
-    $p =& $this->login->permissions ();
+    $p = $this->login->permissions ();
     return $p->value_for (Privilege_set_folder, Privilege_view) != Privilege_always_denied;
   }
 
@@ -564,7 +564,7 @@ class USER_FOLDER_QUERY extends OBJECT_IN_FOLDER_QUERY
    */
   function _invisible_objects_available ()
   {
-    $p =& $this->login->permissions ();
+    $p = $this->login->permissions ();
     return $p->value_for (Privilege_set_folder, Privilege_view_hidden) != Privilege_always_denied;
   }
 
@@ -589,25 +589,25 @@ class USER_FOLDER_QUERY extends OBJECT_IN_FOLDER_QUERY
    * @var integer
    * @access private
    */
-  var $_num_folders = 0;
+  protected $_num_folders = 0;
   /**
    * @var array[string]
    * @see _filtered_data()
    * @access private
    */
-  var $_filter_by_sets;
+  protected $_filter_by_sets;
   /**
    * @var integer
    * @see filtered_objects()
    * @access private
    */
-  var $_filter_by_type;
+  protected $_filter_by_type;
   /**
    * Name of the default permission set to use.
    * @var string
    * @access private
    */
-  var $_privilege_set = Privilege_set_folder;
+  protected $_privilege_set = Privilege_set_folder;
 }
 
 ?>

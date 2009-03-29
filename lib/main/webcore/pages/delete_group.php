@@ -27,7 +27,7 @@ http://www.earthli.com/software/webcore
 ****************************************************************************/
 
   $group_query = $App->group_query ();
-  $group =& $group_query->object_at_id (read_var ('id'));
+  $group = $group_query->object_at_id (read_var ('id'));
 
   if (isset ($group) && $App->login->is_allowed (Privilege_set_group, Privilege_delete))
   {

@@ -30,7 +30,7 @@ http://www.earthli.com/software/webcore
 
   $Page->start_display ();
 
-  $munger =& $App->html_munger ();
+  $munger = $App->html_munger ();
   echo $munger->transform ($text);
 
   $Page->finish_display ();

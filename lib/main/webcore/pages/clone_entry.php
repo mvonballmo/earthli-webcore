@@ -33,12 +33,12 @@ http://www.earthli.com/software/webcore
 
   $id = read_var ('id');
   $folder_query = $App->login->folder_query ();
-  $folder =& $folder_query->folder_for_entry_at_id ($id);
+  $folder = $folder_query->folder_for_entry_at_id ($id);
 
   if (isset ($folder))
   {
     $entry_query = $folder->entry_query ();
-    $clone =& $entry_query->object_at_id ($id);
+    $clone = $entry_query->object_at_id ($id);
     $entry = $folder->new_object ($entry_type_info->id);
   }
 

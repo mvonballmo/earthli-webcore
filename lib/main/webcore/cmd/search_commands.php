@@ -51,9 +51,9 @@ require_once ('webcore/cmd/commands.php');
 class SEARCH_COMMANDS extends COMMANDS
 {
   /**
-   * @param SEARCH &$search Configure commands for this object.
+   * @param SEARCH $search Configure commands for this object.
    */
-  function SEARCH_COMMANDS (&$search)
+  function SEARCH_COMMANDS ($search)
   {
     COMMANDS::COMMANDS ($search->app);
 

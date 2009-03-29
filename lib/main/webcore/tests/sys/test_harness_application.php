@@ -50,55 +50,55 @@ class TEST_HARNESS_APPLICATION_TABLE_NAMES extends APPLICATION_TABLE_NAMES
   /**
    * @var string
    */
-  var $users = 'test_harness_users';
+  public $users = 'test_harness_users';
   /**
    * @var string
    */
-  var $groups = 'test_harness_groups';
+  public $groups = 'test_harness_groups';
   /**
    * @var string
    */
-  var $users_to_groups = 'test_harness_users_to_groups';
+  public $users_to_groups = 'test_harness_users_to_groups';
   /**
    * @var string
    */
-  var $folders = 'test_harness_folders';
+  public $folders = 'test_harness_folders';
   /**
    * @var string
    */
-  var $comments = 'test_harness_comments';
+  public $comments = 'test_harness_comments';
   /**
    * @var string
    */
-  var $entries = 'test_harness_entries';
+  public $entries = 'test_harness_entries';
   /**
    * @var string
    */
-  var $user_permissions = 'test_harness_user_permissions';
+  public $user_permissions = 'test_harness_user_permissions';
   /**
    * @var string
    */
-  var $folder_permissions = 'test_harness_folder_permissions';
+  public $folder_permissions = 'test_harness_folder_permissions';
   /**
    * @var string
    */
-  var $subscriptions = 'test_harness_subscriptions';
+  public $subscriptions = 'test_harness_subscriptions';
   /**
    * @var string
    */
-  var $subscribers = 'test_harness_subscribers';
+  public $subscribers = 'test_harness_subscribers';
   /**
    * @var string
    */
-  var $history_items = 'test_harness_history_items';
+  public $history_items = 'test_harness_history_items';
   /**
    * @var string
    */
-  var $searches = 'test_harness_searches';
+  public $searches = 'test_harness_searches';
   /**
    * @var string
    */
-  var $attachments = 'test_harness_attachments';
+  public $attachments = 'test_harness_attachments';
 }
 
 /**
@@ -113,15 +113,15 @@ class TEST_HARNESS_APPLICATION extends APPLICATION
   /**
    * @var string
    */
-  var $title = 'earthli Test Harness';
+  public $title = 'earthli Test Harness';
   /**
    * @var string
    */
-  var $short_title = 'Test Suite';
+  public $short_title = 'Test Suite';
   /**
    * @var integer
    */
-  var $version = '1.0.0 beta 1';
+  public $version = '1.0.0 beta 1';
 
   /**
    * Add classes to the {@link $classes} object factory.

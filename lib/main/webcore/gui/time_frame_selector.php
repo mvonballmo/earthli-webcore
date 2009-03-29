@@ -77,12 +77,12 @@ class TIME_FRAME_SELECTOR extends WEBCORE_OBJECT
    * Direct user selections to this page.
     * @var string
     */
-  var $page_link;
+  public $page_link;
   /**
    * Number of objects to show in the 'recent' time frame.
     * @var integer
     */
-  var $num_in_recent = 10;
+  public $num_in_recent = 10;
   /**
    * Selected time period to which to restrict.
    * This is applied to the query in {@link prepare_query()} and shown as
@@ -92,14 +92,14 @@ class TIME_FRAME_SELECTOR extends WEBCORE_OBJECT
    * Time_frame_last_week}, {@link Time_frame_last_month} or {@link
    * Time_frame_all}.
    */
-  var $period;
+  public $period;
 
   /**
-   * @param APPLICATION &$app Main application.
+   * @param APPLICATION $app Main application.
     * @param integer $default Default time frame to show.
     * @see Time_frame_recent
     */
-  function TIME_FRAME_SELECTOR (&$app, $default = Time_frame_recent)
+  function TIME_FRAME_SELECTOR ($app, $default = Time_frame_recent)
   {
     WEBCORE_OBJECT::WEBCORE_OBJECT ($app);
     $this->load_period_from_request ($default);
@@ -142,9 +142,9 @@ class TIME_FRAME_SELECTOR extends WEBCORE_OBJECT
 
   /**
    * Restrict the query to the time frame.
-    * @param QUERY &$query
+    * @param QUERY $query
     */
-  function prepare_query (&$query)
+  function prepare_query ($query)
   {
     if (! $query)
     {

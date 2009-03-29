@@ -51,11 +51,11 @@ class SUBSCRIPTION_FORM extends FORM
   /**
    * @var string
    */
-  var $button = 'Save';
+  public $button = 'Save';
   /**
    * @var string
    */
-  var $button_icon = '{icons}buttons/save';
+  public $button_icon = '{icons}buttons/save';
   /**
    * Name of the panel in which the form is displayed.
    * Since these types of forms are displayed within panels, the page has to
@@ -65,13 +65,13 @@ class SUBSCRIPTION_FORM extends FORM
    * @var string
    * @access private
    */
-  var $panel_name;
+  public $panel_name;
 
   /**
-   * @param APPLICATION &$app Main application.
-    * @param SUBSCRIBER &$subscriber Edit subscriptions for this user.
+   * @param APPLICATION $app Main application.
+    * @param SUBSCRIBER $subscriber Edit subscriptions for this user.
     */
-  function SUBSCRIPTION_FORM (&$app)
+  function SUBSCRIPTION_FORM ($app)
   {
     FORM::FORM ($app);
 
@@ -96,9 +96,9 @@ class SUBSCRIPTION_FORM extends FORM
 
   /**
    * Load initial properties from this user.
-   * @param SUBSCRIBER &$obj
+   * @param SUBSCRIBER $obj
    */
-  function load_from_object (&$obj)
+  function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
     $this->set_value ('email', $obj->email);
@@ -123,19 +123,19 @@ class CONTENT_OBJECT_SUBSCRIPTION_FORM extends SUBSCRIPTION_FORM
 {
   /**
    * Updates the user's entry subscriptions.
-   * @param SUBSCRIBER &$obj
+   * @param SUBSCRIBER $obj
    * @access private
    */
-  function commit (&$obj)
+  function commit ($obj)
   {
     $obj->update_subscriptions_for ($this->_sub_type, $this->value_for ('ids'), $this->_type);
   }
 
   /**
-   * @param FORM_RENDERER &$renderer
+   * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_controls (&$renderer)
+  function _draw_controls ($renderer)
   {
     $size = 0;
     
@@ -218,18 +218,18 @@ class CONTENT_OBJECT_SUBSCRIPTION_FORM extends SUBSCRIPTION_FORM
    * @var TYPE_INFO
    * @access private
    */
-  var $_type_info;
+  protected $_type_info;
   /**
    * Used by {@link ENTRY} subscriptions.
    * @var string 
    * @access private
    */
-  var $_type = '';
+  protected $_type = '';
   /**
    * Type of subscriptions to manage.
    * @var string
    */
-  var $_sub_type;
+  protected $_sub_type;
 }
 
 ?>

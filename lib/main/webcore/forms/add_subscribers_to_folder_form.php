@@ -51,20 +51,20 @@ class ADD_SUBSCRIBERS_TO_FOLDER_FORM extends ID_BASED_FORM
   /**
    * @var string
    */
-  var $button = 'Add';
+  public $button = 'Add';
   /**
    * @var string
    */
-  var $button_icon = '{icons}buttons/add';
+  public $button_icon = '{icons}buttons/add';
 
   /**
-   * @param FOLDER &$folder Add subscribers to this folder.
+   * @param FOLDER $folder Add subscribers to this folder.
    */
-  function ADD_SUBSCRIBERS_TO_FOLDER_FORM (&$folder)
+  function ADD_SUBSCRIBERS_TO_FOLDER_FORM ($folder)
   {
     ID_BASED_FORM::ID_BASED_FORM ($folder->app);
 
-    $this->_folder =& $folder;
+    $this->_folder = $folder;
 
     $field = new TEXT_FIELD ();
     $field->id = 'emails';
@@ -76,10 +76,10 @@ class ADD_SUBSCRIBERS_TO_FOLDER_FORM extends ID_BASED_FORM
 
   /**
    * Store the form's values to this folder.
-    * @param FOLDER &$obj
+    * @param FOLDER $obj
     * @access private
     */
-  function commit (&$obj)
+  function commit ($obj)
   {
     // strip the '\r' for Windows systems, then split the string at '\n'
     $emails = str_replace ("\r", '', $this->value_for ('emails'));
@@ -102,10 +102,10 @@ class ADD_SUBSCRIBERS_TO_FOLDER_FORM extends ID_BASED_FORM
   }
 
   /**
-   * @param FORM_RENDERER &$renderer
+   * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_controls (&$renderer)
+  function _draw_controls ($renderer)
   {
     $renderer->start ();
     $renderer->draw_text_box_row ('emails', '25em', '6em');

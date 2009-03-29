@@ -59,18 +59,18 @@ class QUERY extends WEBCORE_OBJECT
    * @see $id
    * @var string
    */
-  var $alias = 'obj';
+  public $alias = 'obj';
   /**
    * Name of the SQL field for the ID in the "main" table.
    * @see $alias
    * @var string
    */
-  var $id = 'id';
+  public $id = 'id';
 
   /**
-   * @param CONTEXT &$context Attach the query to this object.
+   * @param CONTEXT $context Attach the query to this object.
    */
-  function QUERY (&$context)
+  function QUERY ($context)
   {
     $this->raise_if_not_is_a ($context, 'CONTEXT', 'QUERY', 'QUERY');
     $context->ensure_database_exists ();   // queries always need a database
@@ -466,7 +466,7 @@ class QUERY extends WEBCORE_OBJECT
    * @return DATABASE
    * @access private
    */
-  function &raw_output ()
+  function raw_output ()
   {
     if (! $this->_returns_no_data ())
     {
@@ -556,7 +556,7 @@ class QUERY extends WEBCORE_OBJECT
             $obj = $this->_make_object ();
             $obj->load ($this->db);
             $this->_prepare_object ($obj);
-            $this->_objects [] =& $obj;
+            $this->_objects [] = $obj;
             if ($this->env->log_class_names)
             {
               log_message ("Loaded [" . $obj->instance_description () . ']', Msg_type_debug_info, Msg_channel_system);
@@ -594,7 +594,7 @@ class QUERY extends WEBCORE_OBJECT
    * @param integer $id
    * @return object
    */
-  function &object_at_id ($id)
+  function object_at_id ($id)
   {
     $id = $this->validate_as_integer ($id);
 
@@ -609,16 +609,17 @@ class QUERY extends WEBCORE_OBJECT
         $this->_system_call = TRUE;
         $indexed_objs = $this->indexed_objects ();
         $this->_system_call = FALSE;
-        $Result =& $indexed_objs [$id];
+        
+        if (isset($indexed_objs [$id]))
+        {
+          return $indexed_objs [$id];
+        }
       }
 
-      if (! $Result)
-      {
-        $this->_start_system_call ($this->alias . '.' . $this->id . '=' . $id);
-        $objs = $this->objects ();
-        $Result =& $objs [0];
-        $this->_end_system_call ();
-      }
+      $this->_start_system_call ($this->alias . '.' . $this->id . '=' . $id);
+      $objs = $this->objects ();
+      $Result = $objs [0];
+      $this->_end_system_call ();
 
       return $Result;
     }
@@ -631,7 +632,7 @@ class QUERY extends WEBCORE_OBJECT
    * Return the first object to match the query.
    * @return object
    */
-  function &first_object ()
+  function first_object ()
   {
     $old_first = $this->_first_record;
     $old_count = $this->_num_records;
@@ -722,7 +723,7 @@ class QUERY extends WEBCORE_OBJECT
    * @param string $value
    * @return array[object]
    */
-  function &object_with_field ($field, $value)
+  function object_with_field ($field, $value)
   {
     $objs = $this->objects_with_field ($field, $value);
     return $objs [0];
@@ -734,12 +735,18 @@ class QUERY extends WEBCORE_OBJECT
    * @param array[string] $fields
    * @param array[string] $values
    * @param string $operator Can be any of the {@link Operator_constants}.
-   * @return array[object]
+   * @return object
    */
-  function &object_with_fields ($fields, $values, $operator = Operator_equal)
+  function object_with_fields ($fields, $values, $operator = Operator_equal)
   {
     $objs = $this->objects_with_fields ($fields, $values, $operator);
-    return $objs [0];
+    
+    if (isset($objs [0]))
+    {
+      return $objs [0];
+    }
+    
+    return null;
   }
 
   /**
@@ -758,10 +765,10 @@ class QUERY extends WEBCORE_OBJECT
       $c = sizeof ($objs);
       while ($i < $c)
       {
-        $obj =& $objs [$i];
+        $obj = $objs [$i];
         if ($this->_is_indexable_object ($obj))
         {
-          $this->_indexed_objects [$this->_id_for_object ($obj)] =& $obj;
+          $this->_indexed_objects [$this->_id_for_object ($obj)] = $obj;
         }
         $i++;
       }
@@ -840,23 +847,22 @@ class QUERY extends WEBCORE_OBJECT
         // root (_object_tree), otherwise, adding them into the
         // hierarchy at the appropriate point.
 
-        $obj =& $objs [$i];
+        $obj = $objs [$i];
         $parent_id = $this->_parent_id_for_object ($obj);
         if ($parent_id)
         {
-          $parent =& $parents [$parent_id];
-          if ($parent)
+          if (isset($parents [$parent_id]))
           {
-            $this->_obj_connect_to_parent ($parent, $obj);
+            $this->_obj_connect_to_parent ($parents [$parent_id], $obj);
           }
           else
           {
-            $this->_object_tree [] =& $obj;
+            $this->_object_tree [] = $obj;
           }
         }
         else
         {
-          $this->_object_tree [] =& $obj;
+          $this->_object_tree [] = $obj;
         }
 
         $this->_obj_set_sub_objects_cached ($obj);
@@ -872,7 +878,7 @@ class QUERY extends WEBCORE_OBJECT
         $parents = $this->indexed_objects ();
       }
 
-      $obj =& $parents [$sub_folder_id];
+      $obj = $parents [$sub_folder_id];
       if ($obj)
       {
         return $this->_obj_sub_objects ($obj);
@@ -909,12 +915,12 @@ class QUERY extends WEBCORE_OBJECT
    * Cache this set of objects as the result of the query.
    * The objects for this query have already been calculated elsewhere and are
    * assumed to represent the correct query results.
-   * @param array[object] &$objects
+   * @param array[object] $objects
    * @access private
    */
-  function cache (&$objects)
+  function cache ($objects)
   {
-    $this->_objects =& $objects;
+    $this->_objects = $objects;
     $this->_num_objects = sizeof ($objects);
     $this->_prepared = TRUE;
   }
@@ -976,7 +982,7 @@ class QUERY extends WEBCORE_OBJECT
         {
           if (isset ($indexed_objs [$id]))
           {
-            $Result [] =& $indexed_objs [$id];
+            $Result [] = $indexed_objs [$id];
           }
           else
           {
@@ -1104,7 +1110,7 @@ class QUERY extends WEBCORE_OBJECT
    * @return array[string]
    * @access private
    */
-  function &_restrictions ()
+  function _restrictions ()
   {
     $Result = $this->_restrictions;
     $Result = array_merge ($Result, $this->_system_restrictions);
@@ -1172,10 +1178,10 @@ class QUERY extends WEBCORE_OBJECT
 
   /**
    * Perform any setup needed on each returned object.
-   * @param object &$obj
+   * @param object $obj
    * @access private
    */
-  function _prepare_object (&$obj) {}
+  function _prepare_object ($obj) {}
 
   /**
    * Prepare security- and filter-based restrictions.
@@ -1186,52 +1192,52 @@ class QUERY extends WEBCORE_OBJECT
 
   /**
    * Should this object be added to the current result set?
-   * @param DATABASE &$db
+   * @param DATABASE $db
    * @return bool
    * @access private
    */
-  function _is_valid_object (&$db) { return TRUE; }
+  function _is_valid_object ($db) { return TRUE; }
 
   /**
    * Should this object be indexed?
-   * @param DATABASE &$db
+   * @param DATABASE $db
    * @return bool
    * @access private
    */
-  function _is_indexable_object (&$obj) { return TRUE; }
+  function _is_indexable_object ($obj) { return TRUE; }
 
   /**
    * @param object
    * @return integer
    * @access private
    */
-  function _parent_id_for_object (&$obj) { return $obj->parent_id; }
+  function _parent_id_for_object ($obj) { return $obj->parent_id; }
 
   /**
    * @param object
    * @return integer
    * @access private
    */
-  function _id_for_object (&$obj) { return $obj->id; }
+  function _id_for_object ($obj) { return $obj->id; }
 
   /**
-   * @param object &$obj
+   * @param object $obj
    * @access private
    * @abstract
    */
-  function _obj_set_sub_objects_cached (&$obj) { $this->raise_deferred ('_obj_set_sub_objects_cached', 'QUERY'); }
+  function _obj_set_sub_objects_cached ($obj) { $this->raise_deferred ('_obj_set_sub_objects_cached', 'QUERY'); }
   /**
-   * @param object &$obj
+   * @param object $obj
    * @access private
    * @abstract
    */
-  function _obj_connect_to_parent (&$obj) { $this->raise_deferred ('_obj_connect_to_parent', 'QUERY'); }
+  function _obj_connect_to_parent ($obj) { $this->raise_deferred ('_obj_connect_to_parent', 'QUERY'); }
   /**
-   * @param object &$obj
+   * @param object $obj
    * @access private
    * @abstract
    */
-  function _obj_sub_objects (&$obj) { $this->raise_deferred ('_obj_sub_objects', 'QUERY'); }
+  function _obj_sub_objects ($obj) { $this->raise_deferred ('_obj_sub_objects', 'QUERY'); }
 
   /**
    * Used internally to signal that parameters are updated for a system-initiated retrieval.
@@ -1285,14 +1291,14 @@ class QUERY extends WEBCORE_OBJECT
    * @see set_limits()
    * @access private
    */
-  var $_first_record = 0;
+  protected $_first_record = 0;
   /**
    * Number of records to return.
    * @var integer
    * @see set_limits()
    * @access private
    */
-  var $_num_records = 0;
+  protected $_num_records = 0;
 
   /**
    * Return only records after this date.
@@ -1300,14 +1306,14 @@ class QUERY extends WEBCORE_OBJECT
    * @var string
    * @access private
    */
-  var $_first_day = '';
+  protected $_first_day = '';
   /**
    * Return only records before this date.
    * @see set_days()
    * @var string
    * @access private
    */
-  var $_last_day = '';
+  protected $_last_day = '';
   /**
    * Apply date filter to this SQL field. Use {@link set_day_field()}
    * to change this value. Use {@link set_days()} to change the restricted
@@ -1315,7 +1321,7 @@ class QUERY extends WEBCORE_OBJECT
    * @var string
    * @access private
    */
-  var $_day_field = 'time_created';
+  protected $_day_field = 'time_created';
 
   /**
    * SQL table/join statement.
@@ -1325,7 +1331,7 @@ class QUERY extends WEBCORE_OBJECT
    * @var string
    * @access private
    */
-  var $_tables;
+  protected $_tables;
   /**
    * SQL fields to select from '_tables'.
    * Usually set in the constructor, but also can be set in response to
@@ -1334,7 +1340,7 @@ class QUERY extends WEBCORE_OBJECT
    * @var string
    * @access private
    */
-  var $_select;
+  protected $_select;
   /**
    * SQL fields and ordering specifications.
    * Usually set in the constructor. Can also be set externally.
@@ -1342,7 +1348,7 @@ class QUERY extends WEBCORE_OBJECT
    * @var string
    * @access private
    */
-  var $_order;
+  protected $_order;
   /**
    * Ordering to use when {@link order_by_recent()} is called.
    * Call {@link set_order_as_recent()} to store the current ordering to be used
@@ -1350,7 +1356,7 @@ class QUERY extends WEBCORE_OBJECT
    * @var string
    * @access private
    */
-  var $_recent_order;
+  protected $_recent_order;
 
   /**
    * Does this query need updating from the database?
@@ -1361,7 +1367,7 @@ class QUERY extends WEBCORE_OBJECT
    * @var boolean
    * @access private
    */
-  var $_prepared = FALSE;
+  protected $_prepared = FALSE;
   /**
    * Is the query preparing itself?
    * This flag is set when the query is asked to prepare all restrictions and determine
@@ -1370,7 +1376,7 @@ class QUERY extends WEBCORE_OBJECT
    * @var boolean
    * @access private
    */
-  var $_preparing_query = FALSE;
+  protected $_preparing_query = FALSE;
   /**
    * Does the query contain system information?
    * The query will add restrictions and arguments if certain functions are called. This
@@ -1378,7 +1384,7 @@ class QUERY extends WEBCORE_OBJECT
    * @var boolean
    * @access private
    */
-  var $_system_call = FALSE;
+  protected $_system_call = FALSE;
   /**
    * List of restrictions imposed by a system call.
    * Restrictions added by this object internally are added to this list. They are cleared when
@@ -1389,7 +1395,7 @@ class QUERY extends WEBCORE_OBJECT
    * @var array[string]
    * @access private
    */
-  var $_system_restrictions;
+  protected $_system_restrictions;
   /**
    * List of restrictions imposed by security and filtering.
    * Descendent query classes override {@link _prepare_restrictions} to impose security and filtering
@@ -1397,7 +1403,7 @@ class QUERY extends WEBCORE_OBJECT
    * @var array[string]
    * @access private
    */
-  var $_calculated_restrictions;
+  protected $_calculated_restrictions;
   /**
    * Can this query possibly return data?
    * Internal flag indicating that the restrictions imposed on this query obviate the need for
@@ -1405,7 +1411,7 @@ class QUERY extends WEBCORE_OBJECT
    * @var boolean
    * @access private
    */
-  var $_returns_no_data_flag;
+  protected $_returns_no_data_flag;
   /**
    * Text of SQL query to retrieve objects.
    * Valid only after an 'objects' (or any of 'object_at_id', 'objects_at_ids',
@@ -1413,14 +1419,14 @@ class QUERY extends WEBCORE_OBJECT
    * @var string
    * @access private
    */
-  var $_objects_SQL;
+  protected $_objects_SQL;
   /**
    * Text of SQL query to retrieve the number of objects.
    * Valid only after a 'size' request has been successfully issued.
    * @var string
    * @access private
    */
-  var $_count_SQL;
+  protected $_count_SQL;
 
   /**
    * Current result set.
@@ -1429,28 +1435,28 @@ class QUERY extends WEBCORE_OBJECT
    * @var array[object]
    * @access private
    */
-  var $_objects;
+  protected $_objects;
   /**
    * Current number of objects.
    * Valid only after a 'size' request has been successfully issued.
    * @var string
    * @access private
    */
-  var $_num_objects;
+  protected $_num_objects;
   /**
    * Current result set.
    * Valid only after a call to 'indexed_objects' has been issued.
    * @var array[object]
    * @access private
    */
-  var $_indexed_objects;
+  protected $_indexed_objects;
   /**
    * Current result set.
    * Valid only after a call to 'tree' or 'root_tree' has been issued.
    * @var array[object]
    * @access private
    */
-  var $_object_tree;
+  protected $_object_tree;
 }
 
 /**
@@ -1473,13 +1479,19 @@ class QUERY extends WEBCORE_OBJECT
 class QUERY_BASED_CACHE extends RAISABLE
 {
   /**
-   * @param QUERY &$query Retrieve objects using this query.
+   * @var QUERY
+   * @access private
    */
-  function QUERY_BASED_CACHE (&$query)
+  public $query;
+  
+	/**
+   * @param QUERY $query Retrieve objects using this query.
+   */
+  function QUERY_BASED_CACHE ($query)
   {
     /* Make sure the query is its own reference, so changes to the
        query elsewhere don't affect which objects can be returned. */
-    $this->_query = $query;
+    $this->query = $query;
   }
 
   /**
@@ -1487,20 +1499,17 @@ class QUERY_BASED_CACHE extends RAISABLE
    * @param integer $id
    * @return UNIQUE_OBJECT
    */
-  function &object_at_id ($id)
+  function object_at_id ($id)
   {
-    $this->assert (! empty ($id), 'ID cannot be empty (in ' . strtoupper (get_class ($this->_query)) . ')', 'object_at_id', 'QUERY_BASED_CACHE');
+    $this->assert (! empty ($id), 'ID cannot be empty (in ' . strtoupper (get_class ($this->query)) . ')', 'object_at_id', 'QUERY_BASED_CACHE');
 
-    $Result =& $this->_cache [$id];
-
-    if (! isset ($Result))
+    if (isset ($this->_cache [$id]))
     {
-      $Result =& $this->_query->object_at_id ($id);
-      if (isset ($Result))
-      {
-        $this->_cache [$Result->id] = $Result;
-      }
+      return $this->_cache [$id];
     }
+    
+    $Result = $this->query->object_at_id ($id);
+    $this->_cache [$Result->id] = $Result;
 
     return $Result;
   }
@@ -1508,23 +1517,18 @@ class QUERY_BASED_CACHE extends RAISABLE
   /**
    * Add a pre-created object to the cache.
    * This allows the cache to be expanded with objects created by other queries.
-   * @param UNIQUE_OBJECT &$obj
+   * @param UNIQUE_OBJECT $obj
    */
-  function add_object (&$obj)
+  function add_object ($obj)
   {
-    $this->_cache [$obj->id] =& $obj;
+    $this->_cache [$obj->id] = $obj;
   }
 
-  /**
-   * @var QUERY
-   * @access private
-   */
-  var $_query;
   /**
    * @var array[UNIQUE_OBJECT]
    * @access private
    */
-  var $_cache;
+  protected $_cache;
 }
 
 /**
@@ -1543,12 +1547,12 @@ class QUERY_ITERATOR extends RAISABLE
    * Number of objects to load at once.
    * @var integer
    */
-  var $batch_size = 10;
+  public $batch_size = 10;
 
   /**
-   * @param QUERY &$query Retrieve objects using this query.
+   * @param QUERY $query Retrieve objects using this query.
    */
-  function QUERY_ITERATOR (&$query)
+  function QUERY_ITERATOR ($query)
   {
     /* Make sure the query is its own reference, so changes to the
        query elsewhere don't affect which objects can be returned. */
@@ -1583,7 +1587,7 @@ class QUERY_ITERATOR extends RAISABLE
    * Return the object at the current position.
    * @return object
    */
-  function &item ()
+  function item ()
   {
     return $this->_objects [$this->_item_index];
   }
@@ -1638,24 +1642,24 @@ class QUERY_ITERATOR extends RAISABLE
   /**
    * @var integer
    */
-  var $_item_index;
+  protected $_item_index;
   /**
    * @var integer
    */
-  var $_num_items_iterated;
+  protected $_num_items_iterated;
   /**
    * @var integer
    */
-  var $_first_item_to_get;
+  protected $_first_item_to_get;
   /**
    * @var array[object]
    */
-  var $_objects;
+  protected $_objects;
   /**
    * @var QUERY
    * @access private
    */
-  var $_query;
+  protected $_query;
 }
 
 ?>

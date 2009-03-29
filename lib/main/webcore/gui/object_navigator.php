@@ -59,17 +59,17 @@ class OBJECT_NAVIGATOR extends WEBCORE_OBJECT
    * @see APPLICATION_DISPLAY_OPTIONS::$menu_separator
    * @var string
    */
-  var $separator;
+  public $separator;
   /**
    * Page on which the navigator is displayed.
    * Generated links go this url.
    * @var string
    */
-  var $page_link;
+  public $page_link;
   /**
    * Text for the anchor of all generated links; can be empty.
    */
-  var $page_anchor = "navigator";
+  public $page_anchor = "navigator";
 
   /**
    * Text for link that goes to previous page in the near list.
@@ -77,43 +77,43 @@ class OBJECT_NAVIGATOR extends WEBCORE_OBJECT
    * this link is provided to jump 'size' entries back in the list.
    * @var string
    */
-  var $list_previous_text = "[Previous Page]";
+  public $list_previous_text = "[Previous Page]";
   /**
    * Text for link that goes to next page in the near list.
    * If the number of entries in the list is greater than {@link $window_size},
    * this link is provided to jump 'window_size' entries forward in the list.
    * @var string
    */
-  var $list_next_text = "[Next Page]";
+  public $list_next_text = "[Next Page]";
   /**
    * Text for link that goes to first entry in the list.
    * @var string
    */
-  var $controls_first_text = "First";
+  public $controls_first_text = "First";
   /**
    * Text for link that goes to previous entry in the list.
    * @var string
    */
-  var $controls_previous_text = "Previous";
+  public $controls_previous_text = "Previous";
   /**
    * Text for link that goes to next entry in the list.
    * @var string
    */
-  var $controls_next_text = "Next";
+  public $controls_next_text = "Next";
   /**
    * Text for link that goes to last entry in the list.
    * @var string
    */
-  var $controls_last_text = "Last";
+  public $controls_last_text = "Last";
 
   /**
-   * @param CONTEXT &$context
+   * @param CONTEXT $context
    */
-  function OBJECT_NAVIGATOR (&$context)
+  function OBJECT_NAVIGATOR ($context)
   {
     WEBCORE_OBJECT::WEBCORE_OBJECT ($context);
 
-    $opts =& $context->display_options;
+    $opts = $context->display_options;
     $this->window_size = $opts->objects_to_show;
     $this->separator = $opts->menu_separator . "\n";
     $this->num_entries = Unassigned;
@@ -124,14 +124,14 @@ class OBJECT_NAVIGATOR extends WEBCORE_OBJECT
    * Assign the query to navigate.
    * This must be assigned before calling {@link size()}, {@link
    * list_near_selected()} or {@link controls()}.
-   * @param QUERY &$query
+   * @param QUERY $query
    */
-  function set_query (&$query)
+  function set_query ($query)
   {
     $this->_adjust_query ($query);
     include_once ('webcore/util/unique_object_cache.php');
     $this->_context = new UNIQUE_OBJECT_CACHE ($query);
-    $this->_query =& $query;
+    $this->_query = $query;
   }
 
   /**
@@ -202,7 +202,7 @@ class OBJECT_NAVIGATOR extends WEBCORE_OBJECT
                                       "</div>\n";
       }
 
-      $objs =& $this->_context->objects_in_window;
+      $objs = $this->_context->objects_in_window;
 
       foreach ($objs as $obj)
         $this->_list_near_selected .= $this->_text_for_list ($obj) . "<br>\n";
@@ -255,13 +255,13 @@ class OBJECT_NAVIGATOR extends WEBCORE_OBJECT
    * Return the object title as a link or text.
    * If this is the selected entry, it is returned as text (with style 'selected'), otherwise
    * a link to the entry's home page is returned.
-   * @param NAMED_OBJECT &$obj
+   * @param NAMED_OBJECT $obj
    * @param string $text Text to use; may be empty.
    * @param string $icon
    * @return string
    * @access private
    */
-  function _text_for_control (&$obj, $text, $icon = '')
+  function _text_for_control ($obj, $text, $icon = '')
   {
     $this->_url->replace_argument ('id', $obj->id);
     $t = $this->_formatter_for_object ($obj);
@@ -285,10 +285,10 @@ class OBJECT_NAVIGATOR extends WEBCORE_OBJECT
 
   /**
    * Return the object title for the list.
-   * @param NAMED_OBJECT &$obj
+   * @param NAMED_OBJECT $obj
    * @return string
    */
-  function _text_for_list (&$obj)
+  function _text_for_list ($obj)
   {
     $id = $obj->id;
     $t = $this->_formatter_for_object ($obj);
@@ -318,7 +318,7 @@ class OBJECT_NAVIGATOR extends WEBCORE_OBJECT
    * @return TITLE_FORMATTER
    * @access private
    */
-  function _formatter_for_object (&$obj)
+  function _formatter_for_object ($obj)
   {
     return $obj->title_formatter ();
   }
@@ -326,10 +326,10 @@ class OBJECT_NAVIGATOR extends WEBCORE_OBJECT
   /**
    * Modify the query to navigate.
    * Called from {@link set_query()}.
-   * @param QUERY &$query
+   * @param QUERY $query
    * @access private
    */
-  function _adjust_query (&$query)
+  function _adjust_query ($query)
   {
   }
 
@@ -339,27 +339,27 @@ class OBJECT_NAVIGATOR extends WEBCORE_OBJECT
     * @var string
     * @access private
     */
-  var $_controls;
+  protected $_controls;
   /**
    * List of entries 'near' this selected one.
     * @see ENTRY_NAVIGATOR::_generate()
     * @var string
     * @access private
     */
-  var $_list_near_selected;
+  protected $_list_near_selected;
   /**
    * Objects for this list are pulled from this query.
     * @var QUERY
     * @access private
     */
-  var $_query;
+  protected $_query;
   /**
    * Used to generate URLs for the items.
    * The current URL is used, replacing the id with each item's id.
    * @var URL
    * @access private
    */
-  var $_url;
+  protected $_url;
 }
 
 ?>

@@ -92,39 +92,39 @@ class SEARCH extends CONTENT_OBJECT
   /**
    * @var string
    */
-  var $title;
+  public $title;
   /**
    * @var string
    */
-  var $type;
+  public $type;
   /**
    * @var mixed
    */
-  var $parameters;
+  public $parameters;
   /**
    * @var string
    */
-  var $description;
+  public $description;
 
   /**
    * @var SEARCH_OBJECT_FIELDS
    */
-  var $fields;
+  public $fields;
 
   /**
-   * @param APPLICATION &$app Main application.
-   * @param SEARCH_OBJECT_FIELDS &$fields
+   * @param APPLICATION $app Main application.
+   * @param SEARCH_OBJECT_FIELDS $fields
    */
-  function SEARCH (&$app, &$fields)
+  function SEARCH ($app, $fields)
   {
     CONTENT_OBJECT::CONTENT_OBJECT ($app);
-    $this->fields =& $fields;
+    $this->fields = $fields;
   }
 
   /**
-   * @param USER &$user
+   * @param USER $user
    */
-  function set_user_from_context (&$user)
+  function set_user_from_context ($user)
   {
     $this->fields->user_from_context = $user;
   }
@@ -202,9 +202,9 @@ class SEARCH extends CONTENT_OBJECT
   }
 
   /**
-   * @param DATABASE &$db Database from which to load values.
+   * @param DATABASE $db Database from which to load values.
    */
-  function load (&$db)
+  function load ($db)
   {
     parent::load ($db);
     $this->title = $db->f ('title');
@@ -217,9 +217,9 @@ class SEARCH extends CONTENT_OBJECT
   }
 
   /**
-   * @param SQL_STORAGE &$storage Store values to this object.
+   * @param SQL_STORAGE $storage Store values to this object.
    */
-  function store_to (&$storage)
+  function store_to ($storage)
   {
     parent::store_to ($storage);
     $tname = $this->_table_name ();
@@ -243,10 +243,10 @@ class SEARCH extends CONTENT_OBJECT
 
   /**
    * Restrict the query for these search parameters.
-   * @param QUERY &$query
+   * @param QUERY $query
    * @access private
    */
-  function _apply_to_query (&$query)
+  function _apply_to_query ($query)
   {
     $this->fields->apply_to_query ($query, $this);
   }
@@ -316,17 +316,17 @@ class SEARCH extends CONTENT_OBJECT
 class OBJECT_IN_FOLDER_SEARCH extends SEARCH
 {
   /**
-   * @param USER &$user
+   * @param USER $user
    */
-  function set_user_from_context (&$user)
+  function set_user_from_context ($user)
   {
     $this->fields->user_from_context = $user;
   }
 
   /**
-   * @param FOLDER &$folder
+   * @param FOLDER $folder
    */
-  function set_folder_from_context (&$folder)
+  function set_folder_from_context ($folder)
   {
     $this->fields->folder_from_context = $folder;
   }
@@ -403,12 +403,12 @@ class COMMENT_SEARCH extends OBJECT_IN_FOLDER_SEARCH
   /**
    * @var string
    */
-  var $type = 'comment';
+  public $type = 'comment';
 
   /**
-   * @param APPLICATION &$app Main application.
+   * @param APPLICATION $app Main application.
    */
-  function COMMENT_SEARCH (&$app)
+  function COMMENT_SEARCH ($app)
   {
     $class_name = $app->final_class_name ('SEARCH_OBJECT_IN_FOLDER_FIELDS', 'webcore/forms/search_fields.php');
     OBJECT_IN_FOLDER_SEARCH::OBJECT_IN_FOLDER_SEARCH ($app, new $class_name ($app));
@@ -455,12 +455,12 @@ class GROUP_SEARCH extends SEARCH
   /**
    * @var string
    */
-  var $type = 'group';
+  public $type = 'group';
 
   /**
-   * @param APPLICATION &$app Main application.
+   * @param APPLICATION $app Main application.
    */
-  function GROUP_SEARCH (&$app)
+  function GROUP_SEARCH ($app)
   {
     $class_name = $app->final_class_name ('SEARCH_AUDITABLE_FIELDS', 'webcore/forms/search_fields.php');
     SEARCH::SEARCH ($app, new $class_name ($app));
@@ -501,12 +501,12 @@ class USER_SEARCH extends SEARCH
   /**
    * @var string
    */
-  var $type = 'user';
+  public $type = 'user';
 
   /**
-   * @param APPLICATION &$app Main application.
+   * @param APPLICATION $app Main application.
    */
-  function USER_SEARCH (&$app)
+  function USER_SEARCH ($app)
   {
     $class_name = $app->final_class_name ('SEARCH_USER_OBJECT_FIELDS', 'webcore/forms/search_fields.php');
     SEARCH::SEARCH ($app, new $class_name ($app));
@@ -547,12 +547,12 @@ class FOLDER_SEARCH extends OBJECT_IN_FOLDER_SEARCH
   /**
    * @var string
    */
-  var $type = 'folder';
+  public $type = 'folder';
 
   /**
-   * @param APPLICATION &$app Main application.
+   * @param APPLICATION $app Main application.
    */
-  function FOLDER_SEARCH (&$app)
+  function FOLDER_SEARCH ($app)
   {
     $class_name = $app->final_class_name ('SEARCH_FOLDER_FIELDS', 'webcore/forms/search_fields.php');
     OBJECT_IN_FOLDER_SEARCH::OBJECT_IN_FOLDER_SEARCH ($app, new $class_name ($app));

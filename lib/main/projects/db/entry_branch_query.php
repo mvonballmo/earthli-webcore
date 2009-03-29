@@ -52,15 +52,15 @@ class PROJECT_ENTRY_BRANCH_INFO_QUERY extends QUERY
    * SQL alias for the "main" table.
    * @var string
    */
-  var $alias = 'bra';
+  public $alias = 'bra';
 
   /**
-   * @param ENTRY &$entry Entry for which branches are retrieved.
+   * @param ENTRY $entry Entry for which branches are retrieved.
    */
-  function PROJECT_ENTRY_BRANCH_INFO_QUERY (&$entry)
+  function PROJECT_ENTRY_BRANCH_INFO_QUERY ($entry)
   {
     QUERY::QUERY ($entry->app);
-    $this->_entry =& $entry;
+    $this->_entry = $entry;
   }
 
   /**
@@ -102,7 +102,7 @@ class PROJECT_ENTRY_BRANCH_INFO_QUERY extends QUERY
    * Result set with each object stored as [branch_id => PROJECT_ENTRY_INFO].
    * @return array[PROJECT_ENTRY_INFO]
    */
-  function &indexed_objects_by_branch_id ()
+  function indexed_objects_by_branch_id ()
   {
     $this->_index_by_branch_id = TRUE;
     $Result = $this->indexed_objects ();
@@ -115,7 +115,7 @@ class PROJECT_ENTRY_BRANCH_INFO_QUERY extends QUERY
    * @return integer
    * @access private
    */
-  function _id_for_object (&$obj)
+  function _id_for_object ($obj)
   {
     if ($this->_index_by_branch_id)
     {
@@ -130,12 +130,12 @@ class PROJECT_ENTRY_BRANCH_INFO_QUERY extends QUERY
    * @var ENTRY
    * @access private
    */
-  var $_entry;
+  protected $_entry;
   /**
    * @var boolean
    * @access private 
    */
-  var $_index_by_branch_id = FALSE;
+  protected $_index_by_branch_id = FALSE;
 }
 
 /**
@@ -148,9 +148,9 @@ class PROJECT_ENTRY_BRANCH_INFO_QUERY extends QUERY
 class JOB_BRANCH_INFO_QUERY extends PROJECT_ENTRY_BRANCH_INFO_QUERY
 {
   /**
-   * @param ENTRY &$entry Entry for which branches are retrieved.
+   * @param ENTRY $entry Entry for which branches are retrieved.
    */
-  function JOB_BRANCH_INFO_QUERY (&$entry)
+  function JOB_BRANCH_INFO_QUERY ($entry)
   {
     PROJECT_ENTRY_BRANCH_INFO_QUERY::PROJECT_ENTRY_BRANCH_INFO_QUERY ($entry);
     $this->add_select ('jtob.*');
@@ -178,9 +178,9 @@ class JOB_BRANCH_INFO_QUERY extends PROJECT_ENTRY_BRANCH_INFO_QUERY
 class CHANGE_BRANCH_INFO_QUERY extends PROJECT_ENTRY_BRANCH_INFO_QUERY
 {
   /**
-   * @param ENTRY &$entry Entry for which branches are retrieved.
+   * @param ENTRY $entry Entry for which branches are retrieved.
    */
-  function CHANGE_BRANCH_INFO_QUERY (&$entry)
+  function CHANGE_BRANCH_INFO_QUERY ($entry)
   {
     PROJECT_ENTRY_BRANCH_INFO_QUERY::PROJECT_ENTRY_BRANCH_INFO_QUERY ($entry);
     $this->add_select ('ctob.*');

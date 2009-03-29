@@ -49,15 +49,15 @@ require_once ('webcore/db/folder_comment_query.php');
 class BRANCH_COMMENT_QUERY extends FOLDER_MULTI_TYPE_COMMENT_QUERY
 {
   /**
-   * @param BRANCH &$branch Branch for which comments are retrieved.
+   * @param BRANCH $branch Branch for which comments are retrieved.
    */
-  function BRANCH_COMMENT_QUERY (&$branch)
+  function BRANCH_COMMENT_QUERY ($branch)
   {
-    $folder =& $branch->parent_folder ();
+    $folder = $branch->parent_folder ();
     FOLDER_MULTI_TYPE_COMMENT_QUERY::FOLDER_MULTI_TYPE_COMMENT_QUERY ($folder);
-    $this->_branch =& $branch;
+    $this->_branch = $branch;
 
-    $table_names =& $this->app->table_names;
+    $table_names = $this->app->table_names;
 
     $this->add_select ('entry.kind as entry_kind, chng.number as chng_number, chng.job_id as chng_job_id, etob.branch_release_id' .
                        ', jtob.branch_status, jtob.branch_priority, jtob.branch_closer_id' .
@@ -83,22 +83,22 @@ class BRANCH_COMMENT_QUERY extends FOLDER_MULTI_TYPE_COMMENT_QUERY
    * Set the type for the entry.
    * This allows the query to determine which type of object to create for each
    * row in the result.
-   * @param ENTRY &$entry The entry whose properties should be set.
+   * @param ENTRY $entry The entry whose properties should be set.
    * @access private
    */
-  function _prepare_entry (&$entry)
+  function _prepare_entry ($entry)
   {
     parent::_prepare_entry ($entry);
 
-    $db =& $this->db;
-    $branch_info =& $entry->main_branch_info ();
+    $db = $this->db;
+    $branch_info = $entry->main_branch_info ();
     $branch_info->release_id = $db->f ('branch_release_id');
 
     switch ($entry->type)
     {
     case 'job':
       $entry->time_created->set_from_iso ($db->f ('job_time_created'));
-      $branch_info =& $entry->main_branch_info ();
+      $branch_info = $entry->main_branch_info ();
       $branch_info->status = $db->f ('branch_status');
       $branch_info->priority = $db->f ('branch_priority');
       $branch_info->time_closed->set_from_iso ($db->f ('branch_time_closed'));

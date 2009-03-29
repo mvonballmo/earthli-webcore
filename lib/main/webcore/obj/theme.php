@@ -53,54 +53,54 @@ class THEME extends RENDERABLE
    * English name of the the theme.
    * @var string
    */
-  var $title;
+  public $title;
   /**
    * The name of the PHP class to use to render this theme.
     *  In addition to specifyin icon sets and style sheets, a theme can also specify which renderer
     * will layout the basic structure of the page (the header/body/footer).
     * @var string
     */
-  var $renderer_class_name;
+  public $renderer_class_name;
   /**
    * Name of the CSS Stylesheet for the colors, borders, spacing, etc.
     * @var string
     */
-  var $main_CSS_file_name;
+  public $main_CSS_file_name;
   /**
    * Name of the CSS font-face stylesheet to use.
    * The font is completely separated from the stylesheet, so that users can mix and match font-styles
    * with different themes.
    * @var string
    */
-  var $font_name_CSS_file_name;
+  public $font_name_CSS_file_name;
   /**
    * Name of the CSS font-size stylesheet to use.
    * The font is completely separated from the stylesheet, so that users can mix and match font-sizes
    * with different themes (font size is nice to adjust to suit their needs).
    * @var string
    */
-  var $font_size_CSS_file_name;
+  public $font_size_CSS_file_name;
   /**
    * Path to icons (appended to {@link Folder_name_icons} folder).
     * Each theme can provide a specialized set of icons.
     * @var string
     */
-  var $icon_set;
+  public $icon_set;
   /**
    * Default extension for images in this theme.
     * Specify which set of icons to use within the path.
     * @var string
     */
-  var $icon_extension;
+  public $icon_extension;
   /**
    * @var DATE_TIME
    */
-  var $time_created;
+  public $time_created;
 
   /**
-   * @param CONTEXT &$context
+   * @param CONTEXT $context
    */
-  function THEME (&$context)
+  function THEME ($context)
   {
     RENDERABLE::RENDERABLE ($context);
     $this->time_created = $context->make_date_time ();
@@ -133,9 +133,9 @@ class THEME extends RENDERABLE
   }
 
   /**
-   * @param DATABASE &$db Database from which to load values.
+   * @param DATABASE $db Database from which to load values.
    */
-  function load (&$db)
+  function load ($db)
   {
     parent::load ($db);
     $this->title = $db->f ('title');
@@ -149,9 +149,9 @@ class THEME extends RENDERABLE
   }
 
   /**
-   * @param SQL_STORAGE &$storage Store values to this object.
+   * @param SQL_STORAGE $storage Store values to this object.
    */
-  function store_to (&$storage)
+  function store_to ($storage)
   {
     parent::store_to ($storage);
     $tname = $this->_table_name ();

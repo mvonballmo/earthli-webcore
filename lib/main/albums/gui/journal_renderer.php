@@ -50,14 +50,14 @@ class JOURNAL_RENDERER extends ENTRY_RENDERER
 {
   /**
    * Outputs the object as HTML.
-   * @param JOURNAL &$entry
+   * @param JOURNAL $entry
    * @access private
    */
-  function _display_as_html (&$entry)
+  function _display_as_html ($entry)
   {
     $this->_echo_subscribe_status ($entry);
 
-    $folder =& $entry->parent_folder ();
+    $folder = $entry->parent_folder ();
 ?>
 <div class="info-box-top">
   <div style="float: left; padding-right: 1em">
@@ -81,10 +81,10 @@ class JOURNAL_RENDERER extends ENTRY_RENDERER
 
   /**
    * Outputs the object as plain text.
-   * @param JOURNAL &$entry
+   * @param JOURNAL $entry
    * @access private
    */
-  function _display_as_plain_text (&$entry)
+  function _display_as_plain_text ($entry)
   {
     $props = $entry->weather_icon_properties ();
     echo $this->_line ($props->title);
@@ -99,10 +99,10 @@ class JOURNAL_RENDERER extends ENTRY_RENDERER
 
   /**
    * Outputs the object for print preview.
-   * @param JOURNAL &$entry
+   * @param JOURNAL $entry
    * @access private
    */
-  function _display_as_printable (&$entry)
+  function _display_as_printable ($entry)
   {
     parent::display_as_printable ($entry);
 
@@ -146,10 +146,10 @@ class JOURNAL_ASSOCIATED_DATA_RENDERER extends ENTRY_ASSOCIATED_DATA_RENDERER
 {
   /**
    * Draws the list of {@link PICTURE}s.
-   * @param JOURNAL &$obj
+   * @param JOURNAL $obj
    * @param OBJECT_RENDERER_OPTIONS $options
    */
-  function display (&$obj, $options = null)
+  function display ($obj, $options = null)
   {
     $pic_query = $obj->picture_query ();
     $num_pics = $pic_query->size ();

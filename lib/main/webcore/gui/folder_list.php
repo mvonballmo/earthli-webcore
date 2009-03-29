@@ -51,22 +51,22 @@ class FOLDER_LIST extends SELECT_LIST
   /**
    * @var string
    */
-  var $object_name = 'folder';
+  public $object_name = 'folder';
   /**
    * @var string
    */
-  var $control_name = 'folder_ids';
+  public $control_name = 'folder_ids';
   /**
    * Link folders to this page.
     * This redirects folders to this page instead of their default home page.
     * @var string
     */
-  var $page_name = '';
+  public $page_name = '';
 
   /**
-   * @param APPLICATION &$app Main application.
+   * @param APPLICATION $app Main application.
    */
-  function FOLDER_LIST (&$app)
+  function FOLDER_LIST ($app)
   {
     SELECT_LIST::SELECT_LIST ($app);
     $this->append_column ('Name');
@@ -75,11 +75,11 @@ class FOLDER_LIST extends SELECT_LIST
 
   /**
    * Draw the given column's data using the given object.
-    * @param FOLDER &$obj
+    * @param FOLDER $obj
     * @param integer $index
     * @access private
     */
-  function _draw_column_contents (&$obj, $index)
+  function _draw_column_contents ($obj, $index)
   {
     switch ($index)
     {
@@ -96,7 +96,7 @@ class FOLDER_LIST extends SELECT_LIST
       echo $obj->title_as_link ($t);
       break;
     case 2:
-      $t =& $obj->html_formatter ();
+      $t = $obj->html_formatter ();
       $t->force_paragraphs = FALSE;
       echo $obj->summary_as_html ($t);
     }

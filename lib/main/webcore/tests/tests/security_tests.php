@@ -591,7 +591,7 @@ class SECURITY_TEST_TASK extends BASELINE_DATA_TEST_TASK
 
     $this->_log ("Testing user with rights = [fv$vft, ev$vet, cv$vct, fi$ift, ei$iet, ci$ict]", Msg_type_info);
     $Result = $this->_new_transient_user ();
-    $perms =& $Result->permissions ();
+    $perms = $Result->permissions ();
     $perms->set (Privilege_set_folder, Privilege_view, $vf);
     $perms->set (Privilege_set_entry, Privilege_view, $ve);
     $perms->set (Privilege_set_comment, Privilege_view, $vc);

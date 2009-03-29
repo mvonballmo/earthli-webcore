@@ -72,9 +72,9 @@ class STORABLE extends WEBCORE_OBJECT
   }
 
   /**
-   * @param DATABASE &$db Database from which to load values.
+   * @param DATABASE $db Database from which to load values.
    */
-  function load (&$db)
+  function load ($db)
   {
   }
 
@@ -100,12 +100,12 @@ class STORABLE extends WEBCORE_OBJECT
   }
 
   /**
-   * @param SQL_STORAGE &$storage Store values to this object.
+   * @param SQL_STORAGE $storage Store values to this object.
    * Called from {@link SQL_STORAGE::_commit()}. Call {@link store()} to
    * properly store the object.
    * @abstract
    */
-  function store_to (&$storage)
+  function store_to ($storage)
   {
     $this->raise_deferred ('store_to', 'STORABLE');
   }
@@ -251,13 +251,13 @@ class PURGE_OPTIONS
    * History_item_needs_send}.
    * @var string
    */
-  var $sub_history_item_publication_state = FALSE;
+  public $sub_history_item_publication_state = FALSE;
   /**
    * Should the object remove associated resources?
    * This applies to objects that refer to files, like {@link ATTACHMENT}s or
    * {@link PICTURE}s.
    */
-  var $remove_resources = TRUE;
+  public $remove_resources = TRUE;
 }
 
 ?>

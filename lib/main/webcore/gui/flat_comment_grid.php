@@ -51,18 +51,18 @@ class FLAT_COMMENT_GRID extends PRINTABLE_COMMENT_GRID
   /**
    * @var string
    */
-  var $box_style = '';
+  public $box_style = '';
   /**
    * Used when printing to shut off pagination
    * @var boolean
    */
-  var $show_paginator = TRUE;
+  public $show_paginator = TRUE;
 
   /**
-   * @param COMMENT &$obj
+   * @param COMMENT $obj
     * @access private
     */
-  function _draw_box (&$obj)
+  function _draw_box ($obj)
   {
     $this->_draw_comment_contents ($obj);
   }
@@ -70,12 +70,12 @@ class FLAT_COMMENT_GRID extends PRINTABLE_COMMENT_GRID
   /**
    * Draws a single comment.
    * Allows descendants to use this single method for rendering the comment.
-   * @param COMMENT &$obj
+   * @param COMMENT $obj
    * @access private
    */
   function _draw_comment_contents ($obj)
   {
-    $creator =& $obj->creator ();
+    $creator = $obj->creator ();
 ?>
     <div class="info-box-top">
       <?php

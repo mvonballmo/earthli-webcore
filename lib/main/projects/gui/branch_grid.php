@@ -51,40 +51,40 @@ class BRANCH_GRID extends CONTENT_OBJECT_GRID
   /**
    * @var string
    */
-  var $box_style = 'object-in-list';
+  public $box_style = 'object-in-list';
   /**
    * @var string
    */
-  var $object_name = 'Branch';
+  public $object_name = 'Branch';
   /**
    * @var integer
    */
-  var $spacing = 4;
+  public $spacing = 4;
   /**
    * @var boolean
    */
-  var $even_columns = FALSE;
+  public $even_columns = FALSE;
   /**
    * @var boolean
    */
-  var $show_separator = FALSE;
+  public $show_separator = FALSE;
   /**
    * @var boolean Show creator/modifier with branchs?
    */
-  var $show_user = TRUE;
+  public $show_user = TRUE;
   /**
    * @var boolean Show project for branch?
    */
-  var $show_folder = FALSE;
+  public $show_folder = FALSE;
 
   /**
-   * @param BRANCH &$obj
+   * @param BRANCH $obj
     * @access private
     */
-  function _draw_box (&$obj)
+  function _draw_box ($obj)
   {
-    $folder =& $obj->parent_folder ();
-    $creator =& $obj->creator ();
+    $folder = $obj->parent_folder ();
+    $creator = $obj->creator ();
   ?>
   <?php
       $this->_draw_menu_for ($obj, Menu_size_compact);
@@ -134,7 +134,7 @@ class BRANCH_GRID extends CONTENT_OBJECT_GRID
   
     if (! $obj->time_created->equals ($obj->time_modified))
     {
-      $modifier =& $obj->modifier ();
+      $modifier = $obj->modifier ();
       echo '<br>Updated ';
       if ($this->show_user)
       {

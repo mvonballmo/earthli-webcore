@@ -56,25 +56,25 @@ class JOB extends PROJECT_ENTRY
     * This is the date that the user creating the job would like it completed.
     * @var DATE_TIME
     */
-  var $time_needed;
+  public $time_needed;
 
   /**
    * Which user should take care of this job?
     * @var integer
     * @see assignee()
     */
-  var $assignee_id = 0;
+  public $assignee_id = 0;
   /**
    * Which user reported this job (if not the creator)?
     * @var integer
     * @see reporter()
     */
-  var $reporter_id;
+  public $reporter_id;
 
   /**
-   * @param PROJECT_APPLICATION &$app Main application.
+   * @param PROJECT_APPLICATION $app Main application.
    */
-  function JOB (&$app)
+  function JOB ($app)
   {
     PROJECT_ENTRY::PROJECT_ENTRY ($app);
 
@@ -106,7 +106,7 @@ class JOB extends PROJECT_ENTRY
     */
   function assignee_icon ($size = '16px')
   {
-    $assignee =& $this->assignee ();
+    $assignee = $this->assignee ();
     if ($assignee)
     {
       $Result = $assignee->icon_as_html ($size, 'Assigned');
@@ -129,7 +129,7 @@ class JOB extends PROJECT_ENTRY
    */
   function change_query ()
   {
-    $fldr =& $this->parent_folder ();
+    $fldr = $this->parent_folder ();
     $Result = $fldr->entry_query ();
     $Result->set_type ('change');
     $Result->restrict ("chng.job_id = $this->id");
@@ -156,9 +156,9 @@ class JOB extends PROJECT_ENTRY
 ?>
     <p class="detail">
 <?php
-    $branch_info =& $this->_main_branch_info;
-    $interval =& $branch_info->age ();
-     $closer =& $branch_info->closer ();
+    $branch_info = $this->_main_branch_info;
+    $interval = $branch_info->age ();
+     $closer = $branch_info->closer ();
      if ($closer)
      {
 ?>
@@ -174,7 +174,7 @@ class JOB extends PROJECT_ENTRY
     <span class="field"><?php echo $branch_info->status_as_text (); ?></span> (<?php echo $interval->format (); ?>)<br>
     <?php echo $branch_info->priority_as_text (); ?>
 <?php
-      $assignee =& $this->assignee ();
+      $assignee = $this->assignee ();
       if ($assignee)
       {
 ?>
@@ -192,7 +192,7 @@ class JOB extends PROJECT_ENTRY
    * This user is responsible for managing/fixing/closing this job.
    * @return PROJECT_USER
    */
-  function &assignee ()
+  function assignee ()
   {
     return $this->app->user_at_id ($this->assignee_id, FALSE, TRUE);
   }
@@ -217,7 +217,7 @@ class JOB extends PROJECT_ENTRY
    * field, but entered by a developer later.)
    * @return PROJECT_USER
    */
-  function &reporter ()
+  function reporter ()
   {
     if ($this->reporter_id)
     {
@@ -235,11 +235,11 @@ class JOB extends PROJECT_ENTRY
   {
     $Result = parent::title_formatter ();
 
-    $branch_info =& $this->main_branch_info ();
+    $branch_info = $this->main_branch_info ();
 
     if ($branch_info->is_closed ())
     {
-      $closer =& $branch_info->closer ();
+      $closer = $branch_info->closer ();
       $age = $branch_info->age ();
       $Result->title = $branch_info->status_as_text () . ' by ' . $closer->title_as_plain_text () . ' after ' . $age->format ();
     }
@@ -265,9 +265,9 @@ class JOB extends PROJECT_ENTRY
   }
 
   /**
-   * @param DATABASE &$db
+   * @param DATABASE $db
    */
-  function load (&$db)
+  function load ($db)
   {
     parent::load ($db);
     $this->time_needed->set_from_iso ($db->f ('time_needed'));
@@ -277,9 +277,9 @@ class JOB extends PROJECT_ENTRY
   }
 
   /**
-   * @param SQL_STORAGE &$storage Store values to this object.
+   * @param SQL_STORAGE $storage Store values to this object.
    */
-  function store_to (&$storage)
+  function store_to ($storage)
   {
     parent::store_to ($storage);
     $tname = $this->_secondary_table_name ();
@@ -375,13 +375,13 @@ class JOB extends PROJECT_ENTRY
    * @var string
    * @access private
    */
-  var $type = 'job';
+  public $type = 'job';
 
   /**
    * @var JOB_BRANCH_INFO
    * @access private
    */
-  var $_main_branch_info;
+  protected $_main_branch_info;
 }
 
 /**
@@ -398,7 +398,7 @@ class JOB_STATUS_VALUE extends PROPERTY_VALUE
    * Can be either {@link Job_status_kind_open} or {@link Job_status_kind_closed}.
    * @var integer
    */
-  var $kind;
+  public $kind;
   /**
    * Controls movement between statuses.
    * A job at a particular status can only be moved to another status with level equal
@@ -408,7 +408,7 @@ class JOB_STATUS_VALUE extends PROPERTY_VALUE
    * from closed; Open is no longer reachable.)
    * @var integer
    */
-  var $level;
+  public $level;
 }
 
 /**
@@ -427,34 +427,34 @@ class JOB_BRANCH_INFO extends PROJECT_ENTRY_BRANCH_INFO
    * @var integer
    * @see PROJECT_APPLICATION_DISPLAY_OPTIONS::job_priorities()
    */
-  var $priority;
+  public $priority;
   /**
    * In what phase is this job?
    * @var integer
    * @see PROJECT_APPLICATION_DISPLAY_OPTIONS::job_statuses()
    */
-  var $status = 0;
+  public $status = 0;
   /**
    * When was this job closed?
    * @var DATE_TIME
    */
-  var $time_closed;
+  public $time_closed;
   /**
    * Which user closed this job?
    * @var integer
    * @see closer()
    */
-  var $closer_id = 0;
+  public $closer_id = 0;
   /**
    * When did the status last change?
    * @var boolean
    */
-  var $time_status_changed;
+  public $time_status_changed;
 
   /**
-   * @param JOB &$entry Branch info is attached to this job.
+   * @param JOB $entry Branch info is attached to this job.
    */
-  function JOB_BRANCH_INFO (&$entry)
+  function JOB_BRANCH_INFO ($entry)
   {
     PROJECT_ENTRY_BRANCH_INFO::PROJECT_ENTRY_BRANCH_INFO ($entry);
 
@@ -517,7 +517,7 @@ class JOB_BRANCH_INFO extends PROJECT_ENTRY_BRANCH_INFO
 
     if ($Result)
     {
-      $rel =& $this->release ();
+      $rel = $this->release ();
       if (isset ($rel))
       {
         $status = $rel->status ();
@@ -530,7 +530,7 @@ class JOB_BRANCH_INFO extends PROJECT_ENTRY_BRANCH_INFO
 
       if (! $Result)
       {
-        $entry =& $this->entry ();
+        $entry = $this->entry ();
         if ($entry->time_needed->is_valid ())
         {
           $now = new DATE_TIME ();
@@ -565,7 +565,7 @@ class JOB_BRANCH_INFO extends PROJECT_ENTRY_BRANCH_INFO
    * Can be empty.
    * @return PROJECT_USER
    */
-  function &closer ()
+  function closer ()
   {
     return $this->app->user_at_id ($this->closer_id, FALSE, TRUE);
   }
@@ -603,7 +603,7 @@ class JOB_BRANCH_INFO extends PROJECT_ENTRY_BRANCH_INFO
         // Clear the release only if the release has been shipped (no longer in planning stage).
         // Otherwise, the association can stand.
 
-        $rel =& $this->release ();
+        $rel = $this->release ();
         if (isset ($rel) && $rel->locked ())
         {
           $this->release_id = 0;
@@ -699,9 +699,9 @@ class JOB_BRANCH_INFO extends PROJECT_ENTRY_BRANCH_INFO
   }
 
   /**
-   * @param DATABASE &$db
+   * @param DATABASE $db
    */
-  function load (&$db)
+  function load ($db)
   {
     parent::load ($db);
     $this->status = $db->f ('branch_status');
@@ -722,10 +722,10 @@ class JOB_BRANCH_INFO extends PROJECT_ENTRY_BRANCH_INFO
   }
 
   /**
-   * @param SQL_STORAGE &$storage Store values to this object.
+   * @param SQL_STORAGE $storage Store values to this object.
    * @access private
    */
-  function store_to (&$storage)
+  function store_to ($storage)
   {
     parent::store_to ($storage);
     $tname = $this->_secondary_table_name ();
@@ -749,7 +749,7 @@ class JOB_BRANCH_INFO extends PROJECT_ENTRY_BRANCH_INFO
   function _needed_by_as_text ($text_only)
   {
     $Result = '';
-    $entry =& $this->entry ();
+    $entry = $this->entry ();
     if ($entry->time_needed->is_valid ())
     {
       $rel = $this->release ();
@@ -798,7 +798,7 @@ class JOB_BRANCH_INFO extends PROJECT_ENTRY_BRANCH_INFO
    * @var integer
    * @access private
    */
-  var $entry_to_branch_id;
+  public $entry_to_branch_id;
 }
 
 ?>

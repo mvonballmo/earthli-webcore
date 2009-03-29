@@ -78,7 +78,7 @@ class IMAGE extends RAISABLE
   /**
    * @var IMAGE_PROPERTIES
    */
-  var $properties;
+  public $properties;
 
   /**
    * @param boolean $use_internal_exif Use the PHP function {@link PHP_MANUAL#exif_read_data} if available.
@@ -214,7 +214,7 @@ class IMAGE extends RAISABLE
       $type = $this->properties->php_type;
     }
 
-    $opts =& global_file_options ();
+    $opts = global_file_options ();
     switch ($type)
     {
     case Image_type_GIF:
@@ -252,7 +252,7 @@ class IMAGE extends RAISABLE
   function resize ($width, $height)
   {
     $this->_assert_loaded ('resize');
-    $metrics =& $this->metrics ();
+    $metrics = $this->metrics ();
     $metrics->resize ($width, $height);
     $this->_resize_to ($metrics);
   }
@@ -276,7 +276,7 @@ class IMAGE extends RAISABLE
    * @param IMAGE_METRICS
    * @access private
    */
-  function _resize_to (&$metrics)
+  function _resize_to ($metrics)
   {
     $this->_assert_loaded ('_resize');
 
@@ -353,83 +353,83 @@ class IMAGE_PROPERTIES
    * May be empty if the {@link $url} is non-local.
    * @var string
    */
-  var $file_name;
+  public $file_name;
   /**
    * Fully qualified URL of the file
    * May be empty if the {@link $file_name} is a local file outside of the document root.
    * @var string
    */
-  var $url;
+  public $url;
   /**
    * Mime type for the loaded file.
    * Detects most common image formats; tries to use the PHP function "image_type_to_mime_type".
    * @var string
    */
-  var $mime_type = '';
+  public $mime_type = '';
   /**
    * Internal PHP type for the file.
    * Used to determine the mime type by both PHP and the WebCore.
    * @var integer
    */
-  var $php_type = 0;
+  public $php_type = 0;
   /**
    * Width, in pixels.
    * @var integer
    */
-  var $width = 0;
+  public $width = 0;
   /**
    * Height, in pixels.
    * @var integer
    */
-  var $height = 0;
+  public $height = 0;
   /**
    * Time the picture was taken.
    * There is no industry-standard way of storing this date, but every effort is made to extract
    * a usable date.
    * @var DATE_TIME
    */
-  var $time_created;
+  public $time_created;
   /**
    * Camera-specific aperture setting.
    * @var integer
    */
-  var $aperture = 0;
+  public $aperture = 0;
   /**
    * ISO-speed at which the picture was taken.
    * @var integer
    */
-  var $iso_speed = 0;
+  public $iso_speed = 0;
   /**
    * Was the flash used?
    * @var boolean
    */
-  var $used_flash = FALSE;
+  public $used_flash = FALSE;
   /**
    * Is this a color photograph?
    * @var boolean
    */
-  var $is_color = TRUE;
+  public $is_color = TRUE;
   /**
    * Vendor-specific string describing the vendor.
    * @var string
    */
-  var $camera_make = '';
+  public $camera_make = '';
   /**
    * Vendor-specific string describing the camera.
    * @var string
    */
-  var $camera_model = '';
+  public $camera_model = '';
   /**
    * Reference to the full exif information returned by PHP.
    * May not be set.
    * @var array
    */
-  var $exif;
+  public $exif;
   /**
    * Uses the function {@link PHP_MANUAL#exif_read_data} if <code>True</code>.
    * @var boolean
    */
-  var $use_internal_exif = TRUE;
+  public $use_internal_exif = TRUE;
 
   /**
    * @param boolean $use_internal_exif Use the PHP function {@link PHP_MANUAL#exif_read_data} if available.
@@ -690,36 +690,36 @@ class IMAGE_METRICS
    * Fully-resolved URL for this picture.
    * @var string
    */
-  var $url;
+  public $url;
   /**
    * @var boolean
    */
-  var $was_resized = FALSE;
+  public $was_resized = FALSE;
   /**
    * @var integer
    */
-  var $original_width;
+  public $original_width;
   /**
    * @var integer
    */
-  var $original_height;
+  public $original_height;
   /**
    * @var integer
    */
-  var $constrained_width;
+  public $constrained_width;
   /**
    * @var integer
    */
-  var $constrained_height;
+  public $constrained_height;
 
   /**
-   * @param IMAGE &$image
+   * @param IMAGE $image
    */
-  function set_image (&$image)
+  function set_image ($image)
   {
     if ($image->exists ())
     {
-      $this->_image =& $image;
+      $this->_image = $image;
       $this->url = $image->properties->url;
       $this->original_width = $image->properties->width;
       $this->original_height = $image->properties->height;
@@ -911,7 +911,7 @@ class IMAGE_METRICS
    * @var IMAGE
    * @access private
    */
-  var $_image;
+  protected $_image;
 }
 
 /**
@@ -930,7 +930,7 @@ class THUMBNAIL_CREATOR extends WEBCORE_OBJECT
    * Set during the call to {@link create_thumbnail_for()}.
    * @var string
    */
-  var $error_message = '';
+  public $error_message = '';
 
   /**
    * Generate a thumbnail for the given file name and size.

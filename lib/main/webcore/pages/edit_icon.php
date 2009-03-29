@@ -27,7 +27,7 @@ http://www.earthli.com/software/webcore
 ****************************************************************************/
 
   $icon_query = $App->icon_query ();
-  $icon =& $icon_query->object_at_id (read_var ('id'));
+  $icon = $icon_query->object_at_id (read_var ('id'));
 
   if (isset ($icon) && $App->login->is_allowed (Privilege_set_global, Privilege_resources))
   {

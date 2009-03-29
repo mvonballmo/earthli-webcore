@@ -50,14 +50,14 @@ class PROJECT_COMMENT extends COMMENT
 {
   /**
    * Apply class-specific restrictions to this query.
-   * @param SUBSCRIPTION_QUERY &$query
-   * @param HISTORY_ITEM &$history_item Action that generated this request. May be empty.
+   * @param SUBSCRIPTION_QUERY $query
+   * @param HISTORY_ITEM $history_item Action that generated this request. May be empty.
    * @access private
    */
-  function _prepare_subscription_query (&$query, &$history_item)
+  function _prepare_subscription_query ($query, $history_item)
   {
-    $entry =& $this->entry ();
-    $folder =& $this->parent_folder ();
+    $entry = $this->entry ();
+    $folder = $this->parent_folder ();
 
     // If it's a change, grab the job id
 

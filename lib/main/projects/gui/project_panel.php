@@ -51,15 +51,15 @@ class RELEASE_PANEL extends QUERY_PANEL
   /**
    * @var string
    */
-  var $id = 'release';
+  public $id = 'release';
   /**
    * @var string
    */
-  var $title = 'Releases';
+  public $title = 'Releases';
   /**
    * @var boolean
    */
-  var $uses_time_selector = FALSE;
+  public $uses_time_selector = FALSE;
 
   /**
    * @return RELEASE_GRID
@@ -84,15 +84,15 @@ class BRANCH_PANEL extends QUERY_PANEL
   /**
    * @var string
    */
-  var $id = 'branch';
+  public $id = 'branch';
   /**
    * @var string
    */
-  var $title = 'Branches';
+  public $title = 'Branches';
   /**
    * @var boolean
    */
-  var $uses_time_selector = FALSE;
+  public $uses_time_selector = FALSE;
 
   /**
    * @return BRANCH_GRID
@@ -117,15 +117,15 @@ class COMPONENT_PANEL extends QUERY_PANEL
   /**
    * @var string
    */
-  var $id = 'component';
+  public $id = 'component';
   /**
    * @var string
    */
-  var $title = 'Components';
+  public $title = 'Components';
   /**
    * @var boolean
    */
-  var $uses_time_selector = FALSE;
+  public $uses_time_selector = FALSE;
 
   /**
    * @return COMPONENT_GRID
@@ -142,7 +142,7 @@ class COMPONENT_PANEL extends QUERY_PANEL
  * Adds restrictions for finding only open jobs.
  * @access private
  */
-function restrict_to_open (&$query)
+function restrict_to_open ($query)
 {
   $query->restrict ("closer_id = 0");
 }
@@ -151,7 +151,7 @@ function restrict_to_open (&$query)
  * Adds restrictions for finding only closed jobs.
  * @access private
  */
-function restrict_to_closed (&$query)
+function restrict_to_closed ($query)
 {
   $query->restrict ("closer_id <> 0");
   $query->set_order ('time_closed DESC');
@@ -162,7 +162,7 @@ function restrict_to_closed (&$query)
  * Adds restrictions for finding only scheduled jobs.
  * @access private
  */
-function restrict_to_scheduled (&$query)
+function restrict_to_scheduled ($query)
 {
   $query->add_table ('project_releases rel_sched', 'rel_sched.id = entry.release_id');
   $query->restrict ('not ISNULL(rel_sched.time_next_deadline)');
@@ -187,19 +187,19 @@ class PROJECT_PANEL_OPTIONS extends PANEL_OPTIONS
    * Does not apply to all grids.
    * @var boolean
    */
-  var $show_branch = TRUE;
+  public $show_branch = TRUE;
   /**
    * Show release info with objects in the grid?
    * Does not apply to all grids.
    * @var boolean
    */
-  var $show_release = TRUE;
+  public $show_release = TRUE;
   /**
    * Show component info with objects in the grid?
    * Does not apply to all grids.
    * @var boolean
    */
-  var $show_component = TRUE;
+  public $show_component = TRUE;
 }
 
 /**
@@ -512,20 +512,20 @@ class PROJECT_BRANCH_PANEL_MANAGER extends WEBCORE_PANEL_MANAGER
 
   /**
    * Initialize the panel options.
-   * @param PANEL_OPTIONS &$options
+   * @param PANEL_OPTIONS $options
    */
-  function _init_options (&$options)
+  function _init_options ($options)
   {
     $options->show_folder = FALSE;
     $options->show_branch = FALSE;
   }
   
   /**
-   * @param PROJECT &$folder Project for which to show panels.
+   * @param PROJECT $folder Project for which to show panels.
    */
-  function PROJECT_BRANCH_PANEL_MANAGER (&$branch)
+  function PROJECT_BRANCH_PANEL_MANAGER ($branch)
   {
-    $this->_branch =& $branch;
+    $this->_branch = $branch;
     WEBCORE_PANEL_MANAGER::WEBCORE_PANEL_MANAGER ($branch->app);
   }
   
@@ -538,7 +538,7 @@ class PROJECT_BRANCH_PANEL_MANAGER extends WEBCORE_PANEL_MANAGER
     parent::_add_panels ();
 
     $comp_panel_class_name = $this->app->final_class_name ('COMPONENT_PANEL', '');
-    $folder =& $this->_branch->parent_folder ();
+    $folder = $this->_branch->parent_folder ();
     $comp_query = $folder->component_query ();
     $panel = new $comp_panel_class_name ($this, $comp_query);
     $this->add_panel ($panel);
@@ -616,7 +616,7 @@ class PROJECT_BRANCH_PANEL_MANAGER extends WEBCORE_PANEL_MANAGER
    * @var BRANCH
    * @access private
    */
-  var $_branch;
+  protected $_branch;
 }
 
 /**
@@ -640,9 +640,9 @@ class PROJECT_RELEASE_PANEL_MANAGER extends WEBCORE_PANEL_MANAGER
 
   /**
    * Initialize the panel options.
-   * @param PANEL_OPTIONS &$options
+   * @param PANEL_OPTIONS $options
    */
-  function _init_options (&$options)
+  function _init_options ($options)
   {
     $options->show_folder = FALSE;
     $options->show_branch = FALSE;
@@ -650,11 +650,11 @@ class PROJECT_RELEASE_PANEL_MANAGER extends WEBCORE_PANEL_MANAGER
   }
 
   /**
-   * @param PROJECT &$folder Project for which to show panels.
+   * @param PROJECT $folder Project for which to show panels.
    */
-  function PROJECT_RELEASE_PANEL_MANAGER (&$release)
+  function PROJECT_RELEASE_PANEL_MANAGER ($release)
   {
-    $this->_release =& $release;
+    $this->_release = $release;
     WEBCORE_PANEL_MANAGER::WEBCORE_PANEL_MANAGER ($release->app);
   }
 
@@ -667,7 +667,7 @@ class PROJECT_RELEASE_PANEL_MANAGER extends WEBCORE_PANEL_MANAGER
     parent::_add_panels ();
 
     $comp_panel_class_name = $this->app->final_class_name ('COMPONENT_PANEL', '');
-    $folder =& $this->_release->parent_folder ();
+    $folder = $this->_release->parent_folder ();
     $comp_query = $folder->component_query ();
     $panel = new $comp_panel_class_name ($this, $comp_query);
     $this->add_panel ($panel);
@@ -724,7 +724,7 @@ class PROJECT_RELEASE_PANEL_MANAGER extends WEBCORE_PANEL_MANAGER
    * @var RELEASE
    * @access private
    */
-  var $_release;
+  protected $_release;
 }
 
 /**
@@ -748,20 +748,20 @@ class PROJECT_COMPONENT_PANEL_MANAGER extends WEBCORE_PANEL_MANAGER
 
   /**
    * Initialize the panel options.
-   * @param PANEL_OPTIONS &$options
+   * @param PANEL_OPTIONS $options
    */
-  function _init_options (&$options)
+  function _init_options ($options)
   {
     $options->show_folder = FALSE;
     $options->show_component = FALSE;
   }
 
   /**
-   * @param PROJECT &$folder Project for which to show panels.
+   * @param PROJECT $folder Project for which to show panels.
    */
-  function PROJECT_COMPONENT_PANEL_MANAGER (&$component)
+  function PROJECT_COMPONENT_PANEL_MANAGER ($component)
   {
-    $this->_component =& $component;
+    $this->_component = $component;
     WEBCORE_PANEL_MANAGER::WEBCORE_PANEL_MANAGER ($component->app);
   }
 
@@ -832,7 +832,7 @@ class PROJECT_COMPONENT_PANEL_MANAGER extends WEBCORE_PANEL_MANAGER
    * @var COMPONENT
    * @access private
    */
-  var $_component;
+  protected $_component;
 }
 
 ?>

@@ -49,10 +49,10 @@ require_once ('webcore/forms/object_in_folder_form.php');
 class ARTICLE_FORM extends DRAFTABLE_ENTRY_FORM
 {
   /**
-   * @param FORM_RENDERER &$renderer
+   * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_controls (&$renderer)
+  function _draw_controls ($renderer)
   {
     $renderer->set_width ('40em');
     $renderer->default_control_height = '25em';

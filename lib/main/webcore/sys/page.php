@@ -56,56 +56,56 @@ class PAGE extends CONTEXT
   /**
    * @var PAGE_TITLE
    */
-  var $title;
+  public $title;
   /**
    * @var string
    */
-  var $doc_type = '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/1998/REC-html40-19980424/strict.dtd">';
+  public $doc_type = '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/1998/REC-html40-19980424/strict.dtd">';
   /**
    * @var string
    */
-  var $content_type = 'text/html; charset=ISO-8859-1';
+  public $content_type = 'text/html; charset=ISO-8859-1';
 
   /**
    * Controls the page icon.
    * @var PAGE_ICON_OPTIONS
    */
-  var $icon_options;
+  public $icon_options;
   /**
    * Controls the newsfeed header tags.
    * @var PAGE_NEWSFEED_OPTIONS
    */
-  var $newsfeed_options;
+  public $newsfeed_options;
   /**
    * Controls the meta refresh tag.
    * @var PAGE_REFRESH_OPTIONS
    */
-  var $refresh_options;
+  public $refresh_options;
   /**
    * Controls the formatting of the page template.
    * @var PAGE_TEMPLATE_OPTIONS
    * @see DEFAULT_PAGE_TEMPLATE
    */
-  var $template_options;
+  public $template_options;
   /**
    * @var string
    */
-  var $keywords = '';
+  public $keywords = '';
   /**
    * @var string
    */
-  var $description = '';
+  public $description = '';
   /**
    * @var string
    */
-  var $author = '';
+  public $author = '';
   
   /**
    * Name of the class to use for a page renderer.
    * @var string
    * @see DEFAULT_PAGE_RENDERER
    */
-  var $renderer_class_name = 'DEFAULT_PAGE_RENDERER';
+  public $renderer_class_name = 'DEFAULT_PAGE_RENDERER';
 
   /**
    * Path to the folder containing the renderer class file.
@@ -114,19 +114,19 @@ class PAGE extends CONTEXT
    * @var string
    * @see DEFAULT_PAGE_RENDERER
    */
-  var $renderer_file_path = 'webcore/sys/';
+  public $renderer_file_path = 'webcore/sys/';
 
   /**
    * Manages the description of the page's location (used to display navigation)
    * @var LOCATION_MENU
    */
-  var $location;
+  public $location;
 
   /**
    * Is this page printable?
    * @var boolean
    */
-  var $printable = FALSE;
+  public $printable = FALSE;
   /**
    * If true, generated URLs are post-processed to make them relative.
    * Applies only to URLs that are a sub-path of the current path. These are
@@ -135,18 +135,18 @@ class PAGE extends CONTEXT
    * @see path_between()
    * @var boolean
    */
-  var $prefer_relative_urls = TRUE;
+  public $prefer_relative_urls = TRUE;
 
   /**
    * Should access violation errors redirect to another page?
    * @var boolean
    */
-  var $redirect_security_violations = TRUE;
+  public $redirect_security_violations = TRUE;
 
   /**
-   * @param ENVIRONMENT &$env Global environment.
+   * @param ENVIRONMENT $env Global environment.
    */
-  function PAGE (&$env)
+  function PAGE ($env)
   {
     $this->inherit_resources_from ($env);
     $this->resolve_to_root = $env->resolve_to_root;
@@ -155,14 +155,14 @@ class PAGE extends CONTEXT
     CONTEXT::CONTEXT ($env);
 
     $this->is_page = TRUE;
-    $this->page =& $this;
+    $this->page = $this;
 
     $class_name = $this->final_class_name ('PAGE_TITLE', 'webcore/gui/page_title.php');
     $this->title = new $class_name ($this);
 
     $class_name = $this->final_class_name ('LOCATION_MENU', 'webcore/gui/location_menu.php');
     $this->location = new $class_name ($this);
-    $this->location->renderer->separator =& $this->display_options->location_separator;
+    $this->location->renderer->separator = $this->display_options->location_separator;
 
     $this->template_options = new PAGE_TEMPLATE_OPTIONS ();
     $this->icon_options = new PAGE_ICON_OPTIONS ($this);
@@ -186,7 +186,7 @@ class PAGE extends CONTEXT
    * specific resources are also resolved.
    * @return RESOURCES ()
    */
-  function &resources ()
+  function resources ()
   {
     if (isset ($this->app))
     {
@@ -398,7 +398,7 @@ class PAGE extends CONTEXT
 
       /* HACK: This reference has to be patched for 4.4.x; can't figure out a better way yet. */
             
-    $this->location->page->app =& $engine->app;
+    $this->location->page->app = $engine->app;
       
     return $engine->app;
   }
@@ -436,14 +436,14 @@ class PAGE extends CONTEXT
    * {@link THEMED_PAGE}s will make sure to redirect these aliases to the theme-
    * specific location when resolved. The resource manager is used to
    * communicate the change and apply the theme settings to a path immediately.
-   * @param RESOURCE_MANAGER &$resource_manager
+   * @param RESOURCE_MANAGER $resource_manager
    * @see add_as_icon_listener_to()
    * @see refresh_icon_alias()
    * @param string $alias
    */
-  function add_icon_alias (&$resource_manager, $alias)
+  function add_icon_alias ($resource_manager, $alias)
   {
-    $this->_icon_aliases [$alias] =& $resource_manager;
+    $this->_icon_aliases [$alias] = $resource_manager;
     $resource_manager->refresh ($alias);
   }
   
@@ -453,9 +453,9 @@ class PAGE extends CONTEXT
    * updated to reflect page settings. The {@link THEMED_PAGE} uses these
    * settings to adjust icon paths according to theme.
    * @see add_icon_alias()
-   * @param RESOURCE_MANAGER &$resource_manager
+   * @param RESOURCE_MANAGER $resource_manager
    */
-  function add_as_icon_listener_to (&$resource_manager)
+  function add_as_icon_listener_to ($resource_manager)
   {
     include_once ('webcore/sys/callback.php');
     $resource_manager->add_listener (new CALLBACK_METHOD ('_on_alias_changed', $this));
@@ -533,12 +533,12 @@ class PAGE extends CONTEXT
    * This page registers itself as a listener for the {@link ENVIRONMENT} 
    * and itself so that when a path is changed with {@link set_path()}, it can
    * ensure that icon paths are properly redirected by theme.
-   * @param RESOURCE_MANAGER &$resource_manager Affected resource manager.
+   * @param RESOURCE_MANAGER $resource_manager Affected resource manager.
    * @param string $alias Affected alias.
    * @param string $path New path.
    * @access private
    */
-  function _on_alias_changed (&$resource_manager, $alias, $path)
+  function _on_alias_changed ($resource_manager, $alias, $path)
   {
     if (isset ($this->_icon_aliases [$alias]))
     {
@@ -550,12 +550,12 @@ class PAGE extends CONTEXT
    * Called after an icon path has been changed.
    * This event is called if an alias registered with {@link add_icon_alias()}
    * is changed.
-   * @param RESOURCE_MANAGER &$resource_manager Affected resource manager.
+   * @param RESOURCE_MANAGER $resource_manager Affected resource manager.
    * @param string $alias Affected alias.
    * @param string $path New path.
    * @access private
    */
-  function _on_icon_alias_changed (&$resource_manager, $alias, $path)
+  function _on_icon_alias_changed ($resource_manager, $alias, $path)
   {
   }
   
@@ -596,13 +596,13 @@ class PAGE extends CONTEXT
    * @var PAGE_RENDERER
    * @access private
    */
-  var $_renderer;
+  protected $_renderer;
   /**
    * List of path aliases to treat as icon paths.
    * @var array[string]
    * @access private
    */
-  var $_icon_aliases;
+  protected $_icon_aliases;
 }
 
 ?>

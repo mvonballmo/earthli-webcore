@@ -51,9 +51,9 @@ require_once ('webcore/cmd/commands.php');
 class THEME_COMMANDS extends COMMANDS
 {
   /**
-   * @param THEME &$theme Configure commands for this object.
+   * @param THEME $theme Configure commands for this object.
    */
-  function THEME_COMMANDS (&$theme)
+  function THEME_COMMANDS ($theme)
   {
     COMMANDS::COMMANDS ($theme->context);
 

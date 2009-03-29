@@ -28,18 +28,18 @@ http://www.earthli.com/software/webcore/projects
   
   $id = read_var ('id');
   $folder_query = $App->login->folder_query ();
-  $folder =& $folder_query->folder_for_branch_at_id ($id);
+  $folder = $folder_query->folder_for_branch_at_id ($id);
   
   if (isset ($folder))
   {
     $branch_query = $folder->branch_query ();
-    $branch =& $branch_query->object_at_id ($id);
+    $branch = $branch_query->object_at_id ($id);
   }
 
   if (isset ($branch) && $App->login->is_allowed (Privilege_set_branch, Privilege_modify, $branch))
   {
     $class_name = $App->final_class_name ('BRANCH_FORM', 'projects/forms/branch_form.php');
-    $form =& new $class_name ($folder);
+    $form = new $class_name ($folder);
 
     $form->process_existing ($branch);
     if ($form->committed ())

@@ -31,16 +31,16 @@ http://www.earthli.com/software/webcore
   if ($email)
   {
     $subscriber_query = $App->subscriber_query ();
-    $subscriber =& $subscriber_query->object_at_email ($email);
+    $subscriber = $subscriber_query->object_at_email ($email);
 
     if (isset ($subscriber))
     {
-      $user =& $subscriber->user ();
+      $user = $subscriber->user ();
     }
     else
     {
       $user_query = $App->user_query ();
-      $user =& $user_query->object_at_email ($email);
+      $user = $user_query->object_at_email ($email);
       if (! isset ($user))
       {
         $Env->redirect_local ("create_subscriber.php?email=$email");
@@ -73,7 +73,7 @@ http://www.earthli.com/software/webcore
 
       $class_name = $App->final_class_name ('SUBSCRIPTION_PANEL_MANAGER', 'webcore/gui/subscription_panel.php');
       $panel_manager = new $class_name ($subscriber);
-      $selected_panel =& $panel_manager->selected_panel ();
+      $selected_panel = $panel_manager->selected_panel ();
       $selected_panel->check ();
 
       $Page->start_display ();

@@ -52,16 +52,16 @@ class USER_PERMISSIONS_FORM extends PERMISSIONS_FORM
   /**
    * @var string
    */
-  var $button = 'Save';
+  public $button = 'Save';
   /**
    * @var string
    */
-  var $button_icon = '{icons}buttons/save';
+  public $button_icon = '{icons}buttons/save';
   
   /**
-   * @param APPLICATION &$app Main application.
+   * @param APPLICATION $app Main application.
    */
-  function USER_PERMISSIONS_FORM (&$app)
+  function USER_PERMISSIONS_FORM ($app)
   {
     FORM::FORM ($app);
 
@@ -107,26 +107,26 @@ class USER_PERMISSIONS_FORM extends PERMISSIONS_FORM
    * Add a field that is represents a permission.
    * These fields are handled specially so that they can be enabled/disabled
    * easily when loading the form.
-   * @param FIELD &$field
+   * @param FIELD $field
    * @access private
    */
-  function add_privilege_field (&$field)
+  function add_privilege_field ($field)
   {
     $this->add_field ($field);
-    $this->_privilege_fields [] =& $field;
+    $this->_privilege_fields [] = $field;
   }
 
   /**
    * Load initial properties from this user.
-   * @param USER &$obj
+   * @param USER $obj
    */
-  function load_from_object (&$obj)
+  function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
 
     $this->set_value ('name', $obj->title);
 
-    $permissions =& $obj->permissions ();
+    $permissions = $obj->permissions ();
 
     $this->set_value ('use_defaults', ! $permissions->exists ());
 
@@ -155,12 +155,12 @@ class USER_PERMISSIONS_FORM extends PERMISSIONS_FORM
 
   /**
    * Store the form's values as this user's permissions.
-    * @param USER &$obj
+    * @param USER $obj
     * @access private
     */
-  function commit (&$obj)
+  function commit ($obj)
   {
-    $permissions =& $obj->permissions ();
+    $permissions = $obj->permissions ();
 
     if ($this->value_for ('use_defaults'))
     {
@@ -226,12 +226,12 @@ function update_controls ()
   }
 
   /**
-   * @param FORM_RENDERER &$renderer
-   * @param PERMISSIONS_FORMATTER &$formatter
+   * @param FORM_RENDERER $renderer
+   * @param PERMISSIONS_FORMATTER $formatter
    * @access private
    * @abstract
    */
-  function _draw_permission_controls (&$renderer, &$formatter)
+  function _draw_permission_controls ($renderer, $formatter)
   {
     $renderer->draw_text_row ('', 'The settings on the left can override content permissions, either <em>Granting</em> or <em>Denying</em> them. <em>[Folder]</em> uses the permissions defined in the folder.', 'notes');
     $renderer->draw_separator ();
@@ -294,16 +294,16 @@ function update_controls ()
    * Draw the permission with icon and title.
    * Adds the icon to the title. This is done when drawn so that the icon
    * calculation is not done if the form is only being submitted.
-   * @param PRIVILEGE_MAP &$map Information about the privilege.
-   * @param PERMISSIONS_FORMATTER &$formatter Use this to get formatting information.
-   * @param FORM_RENDERER &$renderer
-   * @param FORM_LIST_PROPERTIES &$props
+   * @param PRIVILEGE_MAP $map Information about the privilege.
+   * @param PERMISSIONS_FORMATTER $formatter Use this to get formatting information.
+   * @param FORM_RENDERER $renderer
+   * @param FORM_LIST_PROPERTIES $props
    * @access private
    */
-  function _draw_tri_permission (&$map, &$formatter, &$renderer, &$props)
+  function _draw_tri_permission ($map, $formatter, $renderer, $props)
   {
     $id = $map->id ();
-    $field =& $this->field_at ($id);
+    $field = $this->field_at ($id);
     $field->title = $formatter->icon_for ($map) . ' ' . $formatter->title_for ($map);
     echo '<div style="margin-bottom: .4em">';
     echo $renderer->drop_down_as_HTML ($id, $props);
@@ -315,7 +315,7 @@ function update_controls ()
    * @var array[FIELD]
    * @access private
    */
-  var $_privilege_fields;
+  protected $_privilege_fields;
 }
 
 ?>

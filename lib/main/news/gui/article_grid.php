@@ -51,39 +51,39 @@ class BASE_ARTICLE_GRID extends CONTENT_OBJECT_GRID
   /**
    * @var string
    */
-  var $object_name = 'Article';
+  public $object_name = 'Article';
   /**
    * @var boolean
    */
-  var $show_folder = FALSE;
+  public $show_folder = FALSE;
   /**
    * @var boolean
    */
-  var $show_user = TRUE;
+  public $show_user = TRUE;
   /**
    * @var integer
    */
-  var $chars_to_show_for_hidden = 200;  
+  public $chars_to_show_for_hidden = 200;  
   /**
    * @var integer
    */
-  var $chars_to_show_for_visible = 0;
+  public $chars_to_show_for_visible = 0;
   /**
    * @var boolean
    */
-  var $show_description = FALSE;
+  public $show_description = FALSE;
   /**
    * @var boolean
    */
-  var $show_controls = FALSE;  
+  public $show_controls = FALSE;  
 
   /**
-   * @param ARTICLE &$obj
+   * @param ARTICLE $obj
     * @access private
     */
-  function _draw_box (&$obj)
+  function _draw_box ($obj)
   {
-    $folder =& $obj->parent_folder ();
+    $folder = $obj->parent_folder ();
 ?>
   <div>
     <div>
@@ -111,14 +111,14 @@ class BASE_ARTICLE_GRID extends CONTENT_OBJECT_GRID
           {
             if ($obj->unpublished ())
             {
-              $user =& $obj->creator ();
-              $time =& $obj->time_created;
+              $user = $obj->creator ();
+              $time = $obj->time_created;
               echo 'Created by ' . $user->title_as_link () . ' on ';
             }
             else
             {
-              $user =& $obj->publisher ();
-              $time =& $obj->time_published;
+              $user = $obj->publisher ();
+              $time = $obj->time_published;
               echo 'Published by ' . $user->title_as_link () . ' on ';
             }
           }
@@ -136,11 +136,11 @@ class BASE_ARTICLE_GRID extends CONTENT_OBJECT_GRID
 
           if ($obj->unpublished ())
           {
-            $time =& $obj->time_created;
+            $time = $obj->time_created;
           }
           else
           {
-            $time =& $obj->time_published;
+            $time = $obj->time_published;
           }
             
           echo $time->format ();
@@ -159,7 +159,7 @@ class BASE_ARTICLE_GRID extends CONTENT_OBJECT_GRID
   ?>
   <div class="text-flow">
     <?php
-      $munger =& $obj->html_formatter ();
+      $munger = $obj->html_formatter ();
       if ($obj->invisible ())
       {
         $munger->max_visible_output_chars = $this->chars_to_show_for_hidden;
@@ -189,21 +189,21 @@ class ARTICLE_GRID extends BASE_ARTICLE_GRID
   /**
    * @var boolean
    */
-  var $show_description = TRUE;
+  public $show_description = TRUE;
   /**
    * @var boolean
    */
-  var $show_controls = TRUE;
+  public $show_controls = TRUE;
   /**
    * @var boolean
    */
-  var $fuzzy_dates = TRUE;  
+  public $fuzzy_dates = TRUE;  
 
   /**
-   * @param ARTICLE &$obj
+   * @param ARTICLE $obj
     * @access private
     */
-  function _start_row (&$obj)
+  function _start_row ($obj)
   {
     $curr_date = $obj->time_published;
     if (! $curr_date->is_valid ())
@@ -277,7 +277,7 @@ class ARTICLE_GRID extends BASE_ARTICLE_GRID
    * @var string
    * @access private
    */
-  var $last_interval;
+  public $last_interval;
 }
 
 /**
@@ -292,7 +292,7 @@ class ARTICLE_SUMMARY_GRID extends DRAFTABLE_ENTRY_SUMMARY_GRID
   /**
    * @var string
    */
-  var $object_name = 'Article';
+  public $object_name = 'Article';
 }
 
 ?>

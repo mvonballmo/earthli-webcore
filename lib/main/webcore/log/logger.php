@@ -261,12 +261,12 @@ class LOGGER_FILTER_SETTINGS
    * @var array
    * @access private
    */
-  var $_default_filter = Msg_type_all;
+  protected $_default_filter = Msg_type_all;
   /**
    * @var array
    * @access private
    */
-  var $_channels;
+  protected $_channels;
 }
 
 /**
@@ -286,7 +286,7 @@ class LOGGER extends LOGGER_CONTAINER
    * Loggers can be linked in chains, but each is constrained by its parent's filter.
    * @var LOGGER
    */
-  var $logger;
+  public $logger;
 
   function LOGGER ()
   {
@@ -328,11 +328,11 @@ class LOGGER extends LOGGER_CONTAINER
 
   /**
    * Copy this logger's filter settings to the parameter.
-   * @param LOGGER &$logger
+   * @param LOGGER $logger
    */
-  function copy_settings_to (&$logger)
+  function copy_settings_to ($logger)
   {
-    $logger->_filter_settings =& $this->_filter_settings;
+    $logger->_filter_settings = $this->_filter_settings;
   }
 
   /**
@@ -501,26 +501,26 @@ class LOGGER extends LOGGER_CONTAINER
    * @var LOGGER_FILTER_SETTINGS
    * @access private
    */
-  var $_filter_settings;
+  protected $_filter_settings;
   /**
    * Set by {@link record()}.
    * Used by {@link record_more()} to know to which channel the last message was logged.
    * @var string
    * @access private
    */
-  var $_last_channel;
+  protected $_last_channel;
   /**
    * Set by {@link record()}.
    * Used by {@link record_more()} to know which type the last message was.
    * @var string
    * @access private
    */
-  var $_last_type;
+  protected $_last_type;
   /**
    * How many open blocks are there in this logger?
    * @var integer
    */
-  var $_block_level = 0;
+  protected $_block_level = 0;
 }
 
 /**

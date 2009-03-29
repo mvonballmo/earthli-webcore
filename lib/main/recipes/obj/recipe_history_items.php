@@ -53,11 +53,11 @@ class RECIPE_HISTORY_ITEM extends ENTRY_HISTORY_ITEM
   /**
    * Record class-specific differences.
    * 'orig' is the same as {@link $_object}, but is passed here for convenience.
-   * @param RECIPE &$orig
-   * @param RECIPE &$new
+   * @param RECIPE $orig
+   * @param RECIPE $new
    * @access private
    */
-  function _record_differences (&$orig, &$new)
+  function _record_differences ($orig, $new)
   {
     parent::_record_differences ($orig, $new);
 

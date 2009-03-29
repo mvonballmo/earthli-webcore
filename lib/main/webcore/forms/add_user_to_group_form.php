@@ -51,16 +51,16 @@ class ADD_USER_TO_GROUP_FORM extends ID_BASED_FORM
   /**
    * @var string
    */
-  var $button = 'Add';
+  public $button = 'Add';
   /**
    * @var string
    */
-  var $button_icon = '{icons}buttons/add';
+  public $button_icon = '{icons}buttons/add';
 
   /**
-   * @param APPLICATION &$app Main application.
+   * @param APPLICATION $app Main application.
    */
-  function ADD_USER_TO_GROUP_FORM (&$app)
+  function ADD_USER_TO_GROUP_FORM ($app)
   {
     ID_BASED_FORM::ID_BASED_FORM ($app);
 
@@ -73,10 +73,10 @@ class ADD_USER_TO_GROUP_FORM extends ID_BASED_FORM
 
   /**
    * Called after fields are validated.
-    * @param GROUP &$obj
+    * @param GROUP $obj
     * @access private
     */
-  function _post_validate (&$obj)
+  protected function _post_validate ($obj)
   {
     parent::_post_validate ($obj);
 
@@ -85,7 +85,7 @@ class ADD_USER_TO_GROUP_FORM extends ID_BASED_FORM
       $name = $this->value_for ('name');
 
       $user_query = $this->app->user_query ();
-      $this->_user =& $user_query->object_at_name ($name);
+      $this->_user = $user_query->object_at_name ($name);
 
       if (! $this->_user)
       {
@@ -95,7 +95,7 @@ class ADD_USER_TO_GROUP_FORM extends ID_BASED_FORM
       if ($this->num_errors ('name') == 0)
       {
         $user_query = $obj->user_query ();
-        $user =& $user_query->object_at_name ($name);
+        $user = $user_query->object_at_name ($name);
 
         if ($user)
         {
@@ -107,9 +107,9 @@ class ADD_USER_TO_GROUP_FORM extends ID_BASED_FORM
 
   /**
    * Load initial properties from this object.
-   * @param GROUP &$obj
+   * @param GROUP $obj
    */
-  function load_from_object (&$obj)
+  function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
     $this->set_value ('name', read_var ('name'));
@@ -123,10 +123,10 @@ class ADD_USER_TO_GROUP_FORM extends ID_BASED_FORM
 
   /**
    * Add the selected user to the group.
-    * @param GROUP &$obj
+    * @param GROUP $obj
     * @access private
     */
-  function commit (&$obj)
+  function commit ($obj)
   {
     $obj->add_user ($this->_user);
   }
@@ -134,7 +134,7 @@ class ADD_USER_TO_GROUP_FORM extends ID_BASED_FORM
   /**
    * @access private
    */
-  function _draw_scripts ()
+  protected function _draw_scripts ()
   {
     parent::_draw_scripts ();
     $js_form = $this->js_form_name ();
@@ -149,10 +149,10 @@ class ADD_USER_TO_GROUP_FORM extends ID_BASED_FORM
   }
 
   /**
-   * @param FORM_RENDERER &$renderer
+   * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_controls (&$renderer)
+  protected function _draw_controls ($renderer)
   {
     $renderer->set_width ('20em');
 

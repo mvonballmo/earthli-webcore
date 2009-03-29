@@ -52,16 +52,16 @@ class STORE_SEARCH_FORM extends RENDERABLE_FORM
   /**
    * @var boolean
    */
-  var $controls_visible = TRUE;
+  public $controls_visible = TRUE;
 
   /**
-   * @param APPLICATION &$app Main application.
+   * @param APPLICATION $app Main application.
    */
-  function STORE_SEARCH_FORM (&$app, &$fields)
+  function STORE_SEARCH_FORM ($app, $fields)
   {
     RENDERABLE_FORM::RENDERABLE_FORM ($app);
 
-    $this->_search_fields =& $fields;
+    $this->_search_fields = $fields;
     $this->_search_fields->add_fields ($this);
 
     $field = new TEXT_FIELD ();
@@ -91,9 +91,9 @@ class STORE_SEARCH_FORM extends RENDERABLE_FORM
 
   /**
    * Load initial properties from this branch.
-   * @param BRANCH &$obj
+   * @param BRANCH $obj
    */
-  function load_from_object (&$obj)
+  function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
 
@@ -105,10 +105,10 @@ class STORE_SEARCH_FORM extends RENDERABLE_FORM
 
   /**
    * Store the form's values to this object.
-    * @param OBJECT_IN_FOLDER &$obj
+    * @param OBJECT_IN_FOLDER $obj
     * @access private
     */
-  function _store_to_object (&$obj)
+  function _store_to_object ($obj)
   {
     $obj->title = $this->value_as_text ('search_title');
     $obj->description = $this->value_as_text ('search_description');
@@ -117,17 +117,17 @@ class STORE_SEARCH_FORM extends RENDERABLE_FORM
     $this->_search_fields->store_to_object ($this, $obj);
   }
 
-  function _post_validate (&$obj)
+  function _post_validate ($obj)
   {
     parent::_post_validate ($obj);
     $this->_search_fields->validate ($this, $obj);
   }
 
   /**
-   * @param FORM_RENDERER &$renderer
+   * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_controls (&$renderer)
+  function _draw_controls ($renderer)
   {
     $renderer->start ();
 

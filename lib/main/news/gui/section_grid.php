@@ -51,21 +51,21 @@ class SECTION_GRID extends FOLDER_GRID
   /**
    * @var string
    */
-  var $object_name = 'section';
+  public $object_name = 'section';
   /**
    * @var string
    */
-  var $box_style = 'object-in-list';
+  public $box_style = 'object-in-list';
   /**
    * @var boolean
    */
-  var $show_separator = FALSE;
+  public $show_separator = FALSE;
 
   /**
-   * @param SECTION &$obj
+   * @param SECTION $obj
    * @access private
    */
-  function _draw_box (&$obj)
+  function _draw_box ($obj)
   {
     $t = $obj->title_formatter ();
     $t->max_visible_output_chars = 0;
@@ -92,7 +92,7 @@ class SECTION_GRID extends FOLDER_GRID
   <?php
         while ($i < $c)
         {
-          $entry =& $entries [$i];
+          $entry = $entries [$i];
           $t = $entry->title_formatter ();
           $f = $entry->time_created->formatter ();
           $f->type = Date_time_format_short_date;

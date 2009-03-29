@@ -52,12 +52,12 @@ class CREATE_FOLDER_PERMISSIONS_FORM extends ID_BASED_FORM
   /**
    * @var string
    */
-  var $button = 'Yes';
+  public $button = 'Yes';
 
   /**
-   * @param APPLICATION &$app
+   * @param APPLICATION $app
    */
-  function CREATE_FOLDER_PERMISSIONS_FORM (&$app)
+  function CREATE_FOLDER_PERMISSIONS_FORM ($app)
   {
     ID_BASED_FORM::ID_BASED_FORM ($app);
 
@@ -72,12 +72,12 @@ class CREATE_FOLDER_PERMISSIONS_FORM extends ID_BASED_FORM
 
   /**
    * Store the form's values to this folder's permissions.
-   * @param FOLDER &$obj
+   * @param FOLDER $obj
    * @access private
    */
-  function commit (&$obj)
+  function commit ($obj)
   {
-    $security =& $obj->security_definition ();
+    $security = $obj->security_definition ();
     if ($security->inherited ())
     {
       $security->copy_and_store ($this->value_for ('copy_mode'));
@@ -88,17 +88,17 @@ class CREATE_FOLDER_PERMISSIONS_FORM extends ID_BASED_FORM
     }
   }
 
-  function load_from_object (&$obj)
+  function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
     $this->set_value ('copy_mode', Security_copy_current);
   }
 
   /**
-   * @param FORM_RENDERER &$renderer
+   * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_controls (&$renderer)
+  function _draw_controls ($renderer)
   {
     if (! $this->_object->defines_security ())
     {
@@ -106,8 +106,8 @@ class CREATE_FOLDER_PERMISSIONS_FORM extends ID_BASED_FORM
       $renderer->draw_text_row ('', 'Are you sure you want to create new permissions for ' . $this->_object->title_as_link () . '?');
       $renderer->draw_separator ();
       
-      $parent_folder =& $this->_object->parent_folder ();
-      $permissions_folder =& $parent_folder->permissions_folder ();
+      $parent_folder = $this->_object->parent_folder ();
+      $permissions_folder = $parent_folder->permissions_folder ();
       
       $props = $renderer->make_list_properties ();
       $props->add_item ('Do not create any default permissions*', Security_copy_none);
@@ -121,7 +121,7 @@ class CREATE_FOLDER_PERMISSIONS_FORM extends ID_BASED_FORM
       $renderer->draw_buttons_in_row ($buttons);
       $renderer->draw_separator ();
 
-      $permissions =& $this->login->permissions ();      
+      $permissions = $this->login->permissions ();      
       if ($permissions->value_for (Privilege_set_folder, Privilege_view) != Privilege_always_granted)
       {
         $renderer->draw_text_row ('', '<div class="caution">' . $this->app->resolve_icon_as_html ('{icons}/indicators/warning', 'Warning', '16px') . ' *In this case, you <span class="field">will not</span> be able to see this folder.</div>', 'notes');

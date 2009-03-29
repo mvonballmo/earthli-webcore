@@ -27,7 +27,7 @@ http://www.earthli.com/software/webcore
 ****************************************************************************/
 
   $theme_query = $App->theme_query ();
-  $theme =& $theme_query->object_at_id (read_var ('id'));
+  $theme = $theme_query->object_at_id (read_var ('id'));
 
   if (isset ($theme) && $App->login->is_allowed (Privilege_set_global, Privilege_resources))
   {

@@ -31,9 +31,9 @@ require_once ('webcore/tasks/db/upgrade_per_app_271_300.php');
 
 class NEWS_281_300_MIGRATOR_TASK extends UPGRADE_PER_APP_271_300_TASK
 {
-  var $application_name = 'com.earthli.news';
-  var $version_from = '2.8.1';
-  var $version_to = '3.0.0';
+  public $application_name = 'com.earthli.news';
+  public $version_from = '2.8.1';
+  public $version_to = '3.0.0';
 
   function _execute ()
   {

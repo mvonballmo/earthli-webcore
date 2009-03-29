@@ -66,28 +66,28 @@ class STORABLE_FORM extends PREVIEWABLE_FORM
   /**
    * Execute the form on a cloned object.
    * This will commit the form if it has been {@link submitted()}.
-   * @param object &$obj Object being copied.
+   * @param object $obj Object being copied.
    */
-  function process_clone (&$obj)
+  function process_clone ($obj)
   {
     $this->_process ($obj, Form_load_action_clone);
   }
 
   /**
    * Load initial properties from the object, but store as a new object.
-   * @param STORABLE &$obj
+   * @param STORABLE $obj
    */
-  function load_from_clone (&$obj)
+  function load_from_clone ($obj)
   {
     $this->load_from_object ($obj);
   }
 
   /**
    * Validate the form and apply data to the object.
-   * @param object &$obj
+   * @param object $obj
    * @access private
    */
-  function _prepare_for_commit (&$obj)
+  function _prepare_for_commit ($obj)
   {
     $this->_store_to_object ($obj);
   }
@@ -95,10 +95,10 @@ class STORABLE_FORM extends PREVIEWABLE_FORM
   /**
    * Execute the form.
    * The form has been validated and can be executed.
-   * @param STORABLE &$obj
+   * @param STORABLE $obj
    * @access private
    */
-  function commit (&$obj)
+  function commit ($obj)
   {
     if ($this->cloning ())
     {
@@ -110,11 +110,11 @@ class STORABLE_FORM extends PREVIEWABLE_FORM
 
   /**
    * Load the form according to the given action.
-   * @param STORABLE &$obj
+   * @param STORABLE $obj
    * @param string $load_action Can be {@link Form_load_action_default}, {@link Form_load_action_object} or {@link Form_load_action_clone}.
    * @access private
    */
-  function _process_load_action (&$obj, $load_action)
+  function _process_load_action ($obj, $load_action)
   {
     if (strcmp ($this->button, Form_default_button_title) == 0)
     {

@@ -66,7 +66,7 @@ class PAGE_RENDERER extends WEBCORE_OBJECT
   ?>
   </head>
 <?php
-    $opts =& $this->page->template_options;
+    $opts = $this->page->template_options;
     if ($opts->body_load_script)
     {
 ?>
@@ -171,7 +171,7 @@ class PAGE_RENDERER extends WEBCORE_OBJECT
   {
     if (! empty($tag_content))
     {
-      $options =& $this->context->text_options;
+      $options = $this->context->text_options;
       $tag_name = $options->convert_to_html_entities($tag_name);
       $tag_content = $options->convert_to_html_entities($tag_content);
 
@@ -211,10 +211,10 @@ class PAGE_RENDERER extends WEBCORE_OBJECT
    */
   function display_styles ()
   {
-    $page =& $this->page;
+    $page = $this->page;
     if (! empty ($page->styles))
     {
-      $res =& $page->resources ();
+      $res = $page->resources ();
       foreach ($page->styles as $style)
       {
         $style = $res->resolve_file ($style);
@@ -235,7 +235,7 @@ class PAGE_RENDERER extends WEBCORE_OBJECT
    */
   function display_scripts ()
   {
-    $page =& $this->page;
+    $page = $this->page;
     if (! empty ($page->scripts))
     {
       foreach ($page->scripts as $script)

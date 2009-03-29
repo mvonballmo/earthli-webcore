@@ -52,22 +52,22 @@ class JOURNAL extends ALBUM_ENTRY
    * High temperature for the day (Celsius).
    * @var integer
    */
-  var $hi_temp;
+  public $hi_temp;
   /**
    * Low temperature for the day (Celsius).
    * @var integer
    */
-  var $lo_temp;
+  public $lo_temp;
   /**
    * Brief description of the weather.
    * @var string
    */
-  var $weather;
+  public $weather;
   /**
    * Index into a list of deployment-dependent weather types.
    * @var string
    */
-  var $weather_type;
+  public $weather_type;
 
   /**
    * All properties of this entry's kind.
@@ -107,7 +107,7 @@ class JOURNAL extends ALBUM_ENTRY
    */
   function temperature_as_html ()
   {
-    $folder =& $this->parent_folder ();
+    $folder = $this->parent_folder ();
     $lo = $folder->temperature_as_html ($this->lo_temp);
     $hi = $folder->temperature_as_html ($this->hi_temp);
     if ($lo == $hi)
@@ -144,7 +144,7 @@ class JOURNAL extends ALBUM_ENTRY
   {
     if (! isset ($munger))
     {
-      $munger =& $this->html_formatter ();
+      $munger = $this->html_formatter ();
       $munger->force_paragraphs = FALSE;
     }
 
@@ -166,7 +166,7 @@ class JOURNAL extends ALBUM_ENTRY
    * Restrict the query to this journal's day only.
    * @param ALBUM_ENTRY_QUERY
    */
-  function adjust_query (&$query)
+  function adjust_query ($query)
   {
     /* Copy instead of taking a reference. */
 
@@ -185,7 +185,7 @@ class JOURNAL extends ALBUM_ENTRY
    */
   function picture_query ()
   {
-    $folder =& $this->parent_folder ();
+    $folder = $this->parent_folder ();
     $Result = $folder->entry_query ();
     $Result->set_type ('picture');
     $this->adjust_query ($Result);
@@ -193,7 +193,7 @@ class JOURNAL extends ALBUM_ENTRY
   }
 
   /**
-   * @param DATABASE &$db
+   * @param DATABASE $db
    */
   function load ($db)
   {
@@ -205,9 +205,9 @@ class JOURNAL extends ALBUM_ENTRY
   }
 
   /**
-   * @param SQL_STORAGE &$storage Store values to this object.
+   * @param SQL_STORAGE $storage Store values to this object.
    */
-  function store_to (&$storage)
+  function store_to ($storage)
   {
     parent::store_to ($storage);
     $tname =$this->_secondary_table_name ();
@@ -274,7 +274,7 @@ class JOURNAL extends ALBUM_ENTRY
    * @var string
    * @access private
    */
-  var $type = 'journal';
+  public $type = 'journal';
 }
 
 ?>

@@ -49,9 +49,9 @@ require_once ('webcore/db/user_comment_query.php');
 class PROJECT_USER_COMMENT_QUERY extends USER_MULTI_TYPE_COMMENT_QUERY
 {
   /**
-   * @param PROJECT_APPLICATION &$app Main application.
+   * @param PROJECT_APPLICATION $app Main application.
    */
-  function PROJECT_USER_COMMENT_QUERY (&$app)
+  function PROJECT_USER_COMMENT_QUERY ($app)
   {
     USER_MULTI_TYPE_COMMENT_QUERY::USER_MULTI_TYPE_COMMENT_QUERY ($app);
 
@@ -69,14 +69,14 @@ class PROJECT_USER_COMMENT_QUERY extends USER_MULTI_TYPE_COMMENT_QUERY
    * link to the job or change. This avoids retrieving all the job or change
    * data when only the link needs to be displayed (since this query shows
    * comments, not full entries).
-   * @param PROJECT_ENTRY &$entry The entry whose properties should be set.
+   * @param PROJECT_ENTRY $entry The entry whose properties should be set.
    * @access private
    */
-  function _prepare_entry (&$entry)
+  function _prepare_entry ($entry)
   {
     parent::_prepare_entry ($entry);
 
-    $db =& $this->db;
+    $db = $this->db;
     $entry->kind = $db->f ('entry_kind');
 
     switch ($entry->type)
@@ -87,7 +87,7 @@ class PROJECT_USER_COMMENT_QUERY extends USER_MULTI_TYPE_COMMENT_QUERY
       break;
     case 'job':
       $entry->time_created->set_from_iso ($db->f ('job_time_created'));
-      $branch_info =& $entry->main_branch_info ();
+      $branch_info = $entry->main_branch_info ();
       $branch_info->status = $db->f ('job_status');
       $branch_info->priority = $db->f ('job_priority');
       $branch_info->time_closed->set_from_iso ($db->f ('job_time_closed'));

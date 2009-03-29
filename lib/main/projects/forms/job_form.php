@@ -51,12 +51,12 @@ class JOB_FORM extends PROJECT_ENTRY_FORM
   /**
    * @var string
    */
-  var $name = 'job_form';
+  public $name = 'job_form';
 
   /**
-   * @param PROJECT &$folder Project in which to add or edit the job.
+   * @param PROJECT $folder Project in which to add or edit the job.
    */
-  function JOB_FORM (&$folder)
+  function JOB_FORM ($folder)
   {
     PROJECT_ENTRY_FORM::PROJECT_ENTRY_FORM ($folder);
 
@@ -98,9 +98,9 @@ class JOB_FORM extends PROJECT_ENTRY_FORM
 
   /**
    * Load initial properties from this job.
-   * @param JOB &$obj
+   * @param JOB $obj
    */
-  function load_from_object (&$obj)
+  function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
 
@@ -124,21 +124,21 @@ class JOB_FORM extends PROJECT_ENTRY_FORM
     $this->set_value ('subscribe_assignee', TRUE);
     $this->set_value ('subscribe_creator', TRUE);
 
-    $creator =& $obj->creator ();
+    $creator = $obj->creator ();
     if ($creator)
     {
       $subscriber = $creator->subscriber ();
       $this->set_value ('subscribe_creator', $subscriber->subscribed ($obj, Subscribe_entry));
     }
 
-    $reporter =& $obj->reporter ();
+    $reporter = $obj->reporter ();
     if ($reporter)
     {
       $subscriber = $reporter->subscriber ();
       $this->set_value ('subscribe_reporter', $subscriber->subscribed ($obj, Subscribe_entry));
     }
 
-    $assignee =& $obj->assignee ();
+    $assignee = $obj->assignee ();
     if ($assignee)
     {
       $subscriber = $assignee->subscriber ();
@@ -161,19 +161,19 @@ class JOB_FORM extends PROJECT_ENTRY_FORM
 
   /**
    * Store the form's values for this job.
-   * @param JOB &$obj
+   * @param JOB $obj
    * @access private
    */
-  function commit (&$obj)
+  function commit ($obj)
   {
     parent::commit ($obj);
 
     // after the object has been stored with (possible) new assignee and reporter
     // fix up the subscriptions, maintaining at most one per unique user
 
-    $creator =& $obj->creator ();
-    $reporter =& $obj->reporter ();
-    $assignee =& $obj->assignee ();
+    $creator = $obj->creator ();
+    $reporter = $obj->reporter ();
+    $assignee = $obj->assignee ();
 
     $creator_equal_reporter = $creator->equals ($reporter);
 
@@ -206,7 +206,7 @@ class JOB_FORM extends PROJECT_ENTRY_FORM
 
     if ($creator)
     {
-      $subscriber =& $creator->subscriber ();
+      $subscriber = $creator->subscriber ();
       if ($subscriber->email)
       {
         $subscriber->set_subscribed ($obj, Subscribe_entry, $subscribe_creator);
@@ -215,7 +215,7 @@ class JOB_FORM extends PROJECT_ENTRY_FORM
 
     if ($reporter && ! $creator_equal_reporter)
     {
-      $subscriber =& $reporter->subscriber ();
+      $subscriber = $reporter->subscriber ();
       if ($subscriber->email)
       {
         $subscriber->set_subscribed ($obj, Subscribe_entry, $subscribe_reporter);
@@ -224,7 +224,7 @@ class JOB_FORM extends PROJECT_ENTRY_FORM
 
     if ($assignee && ! $creator_equal_assignee && ! $assignee_equal_reporter)
     {
-      $subscriber =& $assignee->subscriber ();
+      $subscriber = $assignee->subscriber ();
       if ($subscriber->email)
       {
         $subscriber->set_subscribed ($obj, Subscribe_entry, $subscribe_assignee);
@@ -234,10 +234,10 @@ class JOB_FORM extends PROJECT_ENTRY_FORM
 
   /**
    * Store the form's values for this job.
-    * @param JOB &$obj
+    * @param JOB $obj
     * @access private
     */
-  function _store_to_object (&$obj)
+  function _store_to_object ($obj)
   {
     $obj->set_assignee_id ($this->value_for ('assignee_id'));
     $obj->reporter_id = $this->value_for ('reporter_id');
@@ -248,7 +248,7 @@ class JOB_FORM extends PROJECT_ENTRY_FORM
 
   /**
    * Called after fields are validated.
-   * @param object &$obj Object being validated.
+   * @param object $obj Object being validated.
    * @access private
    */
   function _post_validate ($obj)
@@ -265,7 +265,7 @@ class JOB_FORM extends PROJECT_ENTRY_FORM
         if ($branch_release_id)
         {
           $release_query = $branch->release_query ();
-          $release =& $release_query->object_at_id ($branch_release_id);
+          $release = $release_query->object_at_id ($branch_release_id);
 
           if (! $release->planned ())
           {
@@ -299,10 +299,10 @@ class JOB_FORM extends PROJECT_ENTRY_FORM
 
   /**
    * Create the per-branch fields for this form.
-   * @param BRANCH &$branch
+   * @param BRANCH $branch
    * @access private
    */
-  function _add_fields_for_branch (&$branch)
+  function _add_fields_for_branch ($branch)
   {
     parent::_add_fields_for_branch ($branch);
 
@@ -336,10 +336,10 @@ class JOB_FORM extends PROJECT_ENTRY_FORM
   /**
    * Load the branch information into the form.
    * This is called once for each branch enabled on the attached object.
-   * @param JOB_BRANCH_INFO &$branch_info
+   * @param JOB_BRANCH_INFO $branch_info
    * @access private
    */
-  function _load_from_branch_info (&$branch_info)
+  function _load_from_branch_info ($branch_info)
   {
     parent::_load_from_branch_info ($branch_info);
 
@@ -353,10 +353,10 @@ class JOB_FORM extends PROJECT_ENTRY_FORM
   /**
    * Store form values for this branch.
    * This is called once for each branch that is enabled when the form is committed.
-   * @param PROJECT_ENTRY_BRANCH_INFO &$branch_info
+   * @param PROJECT_ENTRY_BRANCH_INFO $branch_info
    * @access private
    */
-  function _store_to_branch_info (&$branch_info)
+  function _store_to_branch_info ($branch_info)
   {
     parent::_store_to_branch_info ($branch_info);
     $branch_info->set_status ($this->value_for ("branch_{$branch_info->branch_id}_status"));
@@ -388,13 +388,13 @@ class JOB_FORM extends PROJECT_ENTRY_FORM
   /**
    * Draw the selectors for branch properties.
    * If the branch or release is locked, the values should be displayed as read-only.
-   * @param BRANCH &$branch
-   * @param FORM_RENDERER &$renderer
+   * @param BRANCH $branch
+   * @param FORM_RENDERER $renderer
    * @param boolean $visible Is this branch enabled for this project entry?
    * @param RELEASE $release Release in this branch (may be empty).
    * @access private
    */
-  function _draw_branch_info_controls (&$branch, &$renderer, $visible, &$release)
+  function _draw_branch_info_controls ($branch, $renderer, $visible, $release)
   {
     /* Get the list of statuses for this branch. */
     $selected_status = $this->value_for ("branch_{$branch->id}_status");
@@ -450,12 +450,12 @@ class JOB_FORM extends PROJECT_ENTRY_FORM
 
   /**
    * Add all users from the query result to the result.
-   * @param USER_QUERY &$user_query
-   * @param FORM_RENDERER &$renderer
+   * @param USER_QUERY $user_query
+   * @param FORM_RENDERER $renderer
    * @return FORM_LIST_PROPERTIES
    * @access private
    */
-  function _prepare_list_properties_for (&$renderer, &$user_query)
+  function _prepare_list_properties_for ($renderer, $user_query)
   {
     $users = $user_query->objects ();
     $Result = $renderer->make_list_properties ();
@@ -467,10 +467,10 @@ class JOB_FORM extends PROJECT_ENTRY_FORM
   }
 
   /**
-   * @param FORM_RENDERER &$renderer
+   * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_controls (&$renderer)
+  function _draw_controls ($renderer)
   {
     $renderer->start ();
     $renderer->draw_text_line_row ('title');
@@ -479,7 +479,7 @@ class JOB_FORM extends PROJECT_ENTRY_FORM
     $this->_draw_component_controls ($renderer);
     $renderer->draw_separator ();
 
-    $project_options =& $this->_folder->options ();
+    $project_options = $this->_folder->options ();
 
     /* Draw the assignee box */
 
@@ -535,14 +535,14 @@ class JOB_FORM extends PROJECT_ENTRY_FORM
 
     if ($this->object_exists ())
     {
-      $creator =& $this->_object->creator ();
+      $creator = $this->_object->creator ();
     }
     else
     {
-      $creator =& $this->app->login;
+      $creator = $this->app->login;
     }
 
-    $field =& $this->field_at ('subscribe_creator');
+    $field = $this->field_at ('subscribe_creator');
     $field->title = $field->title . ' (' . $creator->title_as_link () . ')';
 
     echo "<p>\n";

@@ -52,9 +52,9 @@ require_once ('webcore/obj/webcore_object.php');
 class FILE_TYPE_MANAGER extends WEBCORE_OBJECT
 {
   /**
-   * @param CONTEXT &$context
+   * @param CONTEXT $context
    */
-  function FILE_TYPE_MANAGER (&$context)
+  function FILE_TYPE_MANAGER ($context)
   {
     WEBCORE_OBJECT::WEBCORE_OBJECT ($context);
     $this->_load ();
@@ -136,19 +136,19 @@ class FILE_TYPE_MANAGER extends WEBCORE_OBJECT
    * @var string
    * @access private
    */
-  var $_default_icon_url;
+  protected $_default_icon_url;
   /**
    * Maps mime types to icon urls.
    * @var array[string,string]
    * @access private
    */
-  var $_mime_types;
+  protected $_mime_types;
   /**
    * Maps extensions to icon urls.
    * @var array[string,string]
    * @access private
    */
-  var $_extensions;
+  protected $_extensions;
 }
 
 /**

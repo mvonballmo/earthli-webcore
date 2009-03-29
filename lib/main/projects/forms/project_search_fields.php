@@ -49,9 +49,9 @@ require_once ('webcore/forms/search_fields.php');
 class SEARCH_PROJECT_ENTRY_FIELDS extends SEARCH_ENTRY_FIELDS
 {
   /**
-   * @param APPLICATION &$app Main application.
+   * @param APPLICATION $app Main application.
    */
-  function SEARCH_PROJECT_ENTRY_FIELDS (&$app)
+  function SEARCH_PROJECT_ENTRY_FIELDS ($app)
   {
     SEARCH_ENTRY_FIELDS::SEARCH_ENTRY_FIELDS ($app);
 
@@ -64,9 +64,9 @@ class SEARCH_PROJECT_ENTRY_FIELDS extends SEARCH_ENTRY_FIELDS
 
   /**
    * Add fields for search properties to this form.
-   * @param FORM &$form
+   * @param FORM $form
    */
-  function add_fields (&$form)
+  function add_fields ($form)
   {
     parent::add_fields ($form);
 
@@ -106,10 +106,10 @@ class SEARCH_PROJECT_ENTRY_FIELDS extends SEARCH_ENTRY_FIELDS
 
   /**
    * Restrict the query by these fields.
-   * @param QUERY &$query
-   * @param object &$obj
+   * @param QUERY $query
+   * @param object $obj
    */
-  function apply_to_query (&$query, &$obj)
+  function apply_to_query ($query, $obj)
   {
     parent::apply_to_query ($query, $obj);
 
@@ -146,11 +146,11 @@ class SEARCH_PROJECT_ENTRY_FIELDS extends SEARCH_ENTRY_FIELDS
 
   /**
    * Text representation of applied search fields.
-   * @param object &$obj
+   * @param object $obj
    * @return string
    * @access private
    */
-  function _restrictions_as_text (&$obj)
+  function _restrictions_as_text ($obj)
   {
     $Result = parent::_restrictions_as_text ($obj);
 
@@ -192,11 +192,11 @@ class SEARCH_PROJECT_ENTRY_FIELDS extends SEARCH_ENTRY_FIELDS
 
 
   /**
-   * @param FORM &$form
-   * @param FORM_RENDERER &$renderer
+   * @param FORM $form
+   * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_date_fields (&$form, &$renderer)
+  function _draw_date_fields ($form, $renderer)
   {
     $renderer->draw_check_box_row ('not_kind');
 
@@ -232,9 +232,9 @@ class SEARCH_PROJECT_ENTRY_FIELDS extends SEARCH_ENTRY_FIELDS
 class SEARCH_JOB_FIELDS extends SEARCH_PROJECT_ENTRY_FIELDS
 {
   /**
-   * @param APPLICATION &$app Main application.
+   * @param APPLICATION $app Main application.
    */
-  function SEARCH_JOB_FIELDS (&$app)
+  function SEARCH_JOB_FIELDS ($app)
   {
     SEARCH_PROJECT_ENTRY_FIELDS::SEARCH_PROJECT_ENTRY_FIELDS ($app);
   }
@@ -250,9 +250,9 @@ class SEARCH_JOB_FIELDS extends SEARCH_PROJECT_ENTRY_FIELDS
 class SEARCH_CHANGE_FIELDS extends SEARCH_PROJECT_ENTRY_FIELDS
 {
   /**
-   * @param APPLICATION &$app Main application.
+   * @param APPLICATION $app Main application.
    */
-  function SEARCH_CHANGE_FIELDS (&$app)
+  function SEARCH_CHANGE_FIELDS ($app)
   {
     SEARCH_PROJECT_ENTRY_FIELDS::SEARCH_PROJECT_ENTRY_FIELDS ($app);
 
@@ -261,41 +261,41 @@ class SEARCH_CHANGE_FIELDS extends SEARCH_PROJECT_ENTRY_FIELDS
 
   /**
    * Add fields for search properties to this form.
-   * @param FORM &$form
+   * @param FORM $form
    */
-  function add_fields (&$form)
+  function add_fields ($form)
   {
     parent::add_fields ($form);
   }
 
   /**
    * Restrict the query by these fields.
-   * @param QUERY &$query
-   * @param object &$obj
+   * @param QUERY $query
+   * @param object $obj
    */
-  function apply_to_query (&$query, &$obj)
+  function apply_to_query ($query, $obj)
   {
     parent::apply_to_query ($query, $obj);
   }
 
   /**
    * Text representation of applied search fields.
-   * @param object &$obj
+   * @param object $obj
    * @return string
    * @access private
    */
-  function _restrictions_as_text (&$obj)
+  function _restrictions_as_text ($obj)
   {
     $Result = parent::_restrictions_as_text ($obj);
     return $Result;
   }
 
   /**
-   * @param FORM &$form
-   * @param FORM_RENDERER &$renderer
+   * @param FORM $form
+   * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_date_fields (&$form, &$renderer)
+  function _draw_date_fields ($form, $renderer)
   {
     parent::_draw_date_fields ($form, $renderer);
   }

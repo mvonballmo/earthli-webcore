@@ -53,11 +53,11 @@ class PLAIN_TEXT_BLOCK_TRANSFORMER extends MUNGER_BLOCK_TRANSFORMER
 {
   /**
    * Set this as the active or inactive transformer.
-   * @param MUNGER &$munger Activation context.
+   * @param MUNGER $munger Activation context.
    * @param boolean $value True if the transformer is being activated.
-   * @param MUNGER_TOKEN &$token Token that caused the activation.
+   * @param MUNGER_TOKEN $token Token that caused the activation.
    */
-  function activate (&$munger, $value, &$token)
+  function activate ($munger, $value, $token)
   {
     parent::activate ($munger, $value, $token);
     $this->_indent = $munger->num_spaces;
@@ -119,11 +119,11 @@ class PLAIN_TEXT_BLOCK_TRANSFORMER extends MUNGER_BLOCK_TRANSFORMER
    * no case in which whitespace 'magically' disappears; however, white-space is managed
    * so that property HTML-style paragraph blocking achieved, especially with nested lists
    * and other blocks.
-   * @param MUNGER &$munger The transformation context.
+   * @param MUNGER $munger The transformation context.
    * @param string $text The text to transform.
    * @access private
    */
-  function _apply_transform (&$munger, $text)
+  function _apply_transform ($munger, $text)
   {
     $text = $this->_trim ($text);
     $len = strlen ($text);
@@ -197,7 +197,7 @@ class PLAIN_TEXT_BLOCK_TRANSFORMER extends MUNGER_BLOCK_TRANSFORMER
    * @var integer
    * @access private
    */
-  var $_indent = 0;
+  protected $_indent = 0;
 }
 
 /**
@@ -218,14 +218,14 @@ class PLAIN_TEXT_PARAGRAPH_TRANSFORMER extends PLAIN_TEXT_BLOCK_TRANSFORMER
    * the first and last newlines in the text.
    * @var boolean
    */
-  var $strict_newlines = TRUE;
+  public $strict_newlines = TRUE;
 
   /**
    * Returns transformed content.
-   * @param MUNGER &$munger The transformation context.
+   * @param MUNGER $munger The transformation context.
    * @return string
    */
-  function data (&$munger)
+  function data ($munger)
   {
     $Result = parent::data ($munger);
 
@@ -254,11 +254,11 @@ class PLAIN_TEXT_QUOTE_TRANSFORMER extends PLAIN_TEXT_BLOCK_TRANSFORMER
 {
   /**
    * Set this as the active or inactive transformer.
-   * @param MUNGER &$munger The activation context.
+   * @param MUNGER $munger The activation context.
    * @param boolean $value True if the transformer is being activated.
-   * @param MUNGER_TOKEN &$token Token that caused the activation.
+   * @param MUNGER_TOKEN $token Token that caused the activation.
    */
-  function activate (&$munger, $value, $token)
+  function activate ($munger, $value, $token)
   {
     parent::activate ($munger, $value, $token);
     if ($value)
@@ -269,12 +269,12 @@ class PLAIN_TEXT_QUOTE_TRANSFORMER extends PLAIN_TEXT_BLOCK_TRANSFORMER
 
   /**
    * Transform given newlines to plain text boxes.
-   * @param MUNGER &$munger The transformation context.
+   * @param MUNGER $munger The transformation context.
    * @param string $text
    * @return string
    * @access private
    */
-  function _apply_transform (&$munger, $text)
+  function _apply_transform ($munger, $text)
   {
     $text = $this->_apply_quotes ($text, $this->_quote_style, '"', '"');
     return parent::_apply_transform ($munger, $text);
@@ -284,7 +284,7 @@ class PLAIN_TEXT_QUOTE_TRANSFORMER extends PLAIN_TEXT_BLOCK_TRANSFORMER
    * @var string
    * @access private
    */
-  var $_quote_style;
+  protected $_quote_style;
 }
 
 /**
@@ -305,11 +305,11 @@ class PLAIN_TEXT_LINK_REPLACER extends MUNGER_REPLACER
 {
   /**
    * Convert the given token to the output format.
-   * @param MUNGER &$munger The transformation context.
-   * @param MUNGER_TOKEN &$token
+   * @param MUNGER $munger The transformation context.
+   * @param MUNGER_TOKEN $token
    * @return string
    */
-  function transform (&$munger, &$token)
+  function transform ($munger, $token)
   {
     if ($token->is_start_tag ())
     {
@@ -351,7 +351,7 @@ class PLAIN_TEXT_LINK_REPLACER extends MUNGER_REPLACER
    * @var string
    * @access private
    */
-  var $_format;
+  protected $_format;
   /**
    * The author of the link.
    * Will be displayed after the content text, if specified.
@@ -360,17 +360,17 @@ class PLAIN_TEXT_LINK_REPLACER extends MUNGER_REPLACER
    * @var string
    * @access private
    */
-  var $_author;
+  protected $_author;
   /**
    * @var string
    * @access private
    */
-  var $_title;
+  protected $_title;
   /**
    * @var string
    * @access private
    */
-  var $_href;
+  protected $_href;
 }
 
 /**
@@ -399,11 +399,11 @@ class PLAIN_TEXT_MEDIA_REPLACER extends MUNGER_REPLACER
 
   /**
    * Convert the given token to the output format.
-   * @param MUNGER &$munger The transformation context.
-   * @param MUNGER_TOKEN &$token
+   * @param MUNGER $munger The transformation context.
+   * @param MUNGER_TOKEN $token
    * @return string
    */
-  function transform (&$munger, &$token)
+  function transform ($munger, $token)
   {
     if ($token->is_start_tag ())
     {
@@ -461,7 +461,7 @@ class PLAIN_TEXT_MEDIA_REPLACER extends MUNGER_REPLACER
    * @var string
    * @access private
    */
-  var $_default_title;
+  protected $_default_title;
 }
 
 /**
@@ -476,12 +476,12 @@ class PLAIN_TEXT_FOOTNOTE_REFERENCE_REPLACER extends MUNGER_FOOTNOTE_REFERENCE_R
 {
   /**
    * Format the reference to the given footnote number.
-   * @param MUNGER_TOKEN &$token
-   * @param MUNGER_FOOTNOTE_INFO &$info
+   * @param MUNGER_TOKEN $token
+   * @param MUNGER_FOOTNOTE_INFO $info
    * @return string
    * @access private
    */
-  function _format_reference (&$token, &$info)
+  function _format_reference ($token, $info)
   {
     return " [$info->number]";
   }
@@ -499,12 +499,12 @@ class PLAIN_TEXT_FOOTNOTE_TEXT_REPLACER extends MUNGER_FOOTNOTE_TEXT_REPLACER
 {
   /**
    * Format the text for the given footnote number.
-   * @param MUNGER_TOKEN &$token
-   * @param MUNGER_FOOTNOTE_INFO &$info
+   * @param MUNGER_TOKEN $token
+   * @param MUNGER_FOOTNOTE_INFO $info
    * @return string
    * @access private
    */
-  function _format_text (&$token, &$info)
+  function _format_text ($token, $info)
   {
     if ($token->is_start_tag ())
     {
@@ -528,20 +528,20 @@ class PLAIN_TEXT_LIST_TRANSFORMER extends MUNGER_LIST_TRANSFORMER
    * Text to use for bullets, by default.
    * @var string
    */
-  var $default_mark = '*';
+  public $default_mark = '*';
   /**
    * Amount to indent at each level.
    * @var string
    */
-  var $spaces_to_indent = 2;
+  public $spaces_to_indent = 2;
 
   /**
    * Set this as the active or inactive transformer.
-   * @param MUNGER &$munger The activation context.
+   * @param MUNGER $munger The activation context.
    * @param boolean $value True if the transformer is being activated.
-   * @param MUNGER_TOKEN &$token Token that caused the activation.
+   * @param MUNGER_TOKEN $token Token that caused the activation.
    */
-  function activate (&$munger, $value, &$token)
+  function activate ($munger, $value, $token)
   {
     if ($value)
     {
@@ -558,13 +558,13 @@ class PLAIN_TEXT_LIST_TRANSFORMER extends MUNGER_LIST_TRANSFORMER
 
   /**
    * Transform preprocessed text into a list.
-   * @param MUNGER &$munger The transformation context.
+   * @param MUNGER $munger The transformation context.
    * @param string $text
    * @param boolean $item_was_open
    * @return string
    * @access private
    */
-  function _transform_to_list (&$munger, $text, $item_was_open)
+  function _transform_to_list ($munger, $text, $item_was_open)
   {
     if ($this->_item_is_open && ! $item_was_open)
     {
@@ -595,12 +595,12 @@ class PLAIN_TEXT_LIST_TRANSFORMER extends MUNGER_LIST_TRANSFORMER
 
   /**
    * Format the list items themselves.
-   * @param MUNGER &$munger The generation context.
+   * @param MUNGER $munger The generation context.
    * @param string $text
    * @return string
    * @access private
    */
-  function _generate_list_items (&$munger, $text)
+  function _generate_list_items ($munger, $text)
   {
     $Result = '';
     $last_pos = 0;
@@ -649,14 +649,14 @@ class PLAIN_TEXT_LIST_TRANSFORMER extends MUNGER_LIST_TRANSFORMER
    * @see $_indent
    * @var integer
    */
-  var $_depth;
+  protected $_depth;
   /**
    * Amount of indenting to add when wrapping.
    * @see $_depth
    * @var integer
    * @access private
    */
-  var $_indent = 0;
+  protected $_indent = 0;
 }
 
 /**
@@ -673,7 +673,7 @@ class PLAIN_TEXT_NUMERIC_LIST_TRANSFORMER extends PLAIN_TEXT_LIST_TRANSFORMER
    * Amount to indent at each level.
    * @var string
    */
-  var $spaces_to_indent = 3;
+  public $spaces_to_indent = 3;
 
   /**
    * Create the 'mark' for the bullet.
@@ -702,7 +702,7 @@ class PLAIN_TEXT_NUMERIC_LIST_TRANSFORMER extends PLAIN_TEXT_LIST_TRANSFORMER
    * @var integer
    * @access private
    */
-  var $_current_mark = 0;
+  protected $_current_mark = 0;
 }
 
 /**
@@ -720,15 +720,15 @@ class PLAIN_TEXT_DEFINITION_LIST_TRANSFORMER extends MUNGER_DEFINITION_LIST_TRAN
    * Amount to indent at each level.
    * @var string
    */
-  var $spaces_to_indent = 3;
+  public $spaces_to_indent = 3;
 
   /**
    * Set this as the active or inactive transformer.
-   * @param MUNGER &$munger The activation context.
+   * @param MUNGER $munger The activation context.
    * @param boolean $value True if the transformer is being activated.
-   * @param MUNGER_TOKEN &$token Token that caused the activation.
+   * @param MUNGER_TOKEN $token Token that caused the activation.
    */
-  function activate (&$munger, $value, &$token)
+  function activate ($munger, $value, $token)
   {
     parent::activate ($munger, $value, $token);
     if ($value)
@@ -744,10 +744,10 @@ class PLAIN_TEXT_DEFINITION_LIST_TRANSFORMER extends MUNGER_DEFINITION_LIST_TRAN
 
   /**
    * Returns transformed content.
-   * @param MUNGER &$munger
+   * @param MUNGER $munger
    * @return string
    */
-  function data (&$munger)
+  function data ($munger)
   {
     return rtrim (parent::data ($munger));
   }
@@ -755,11 +755,11 @@ class PLAIN_TEXT_DEFINITION_LIST_TRANSFORMER extends MUNGER_DEFINITION_LIST_TRAN
   /**
    * Transform to a term or body.
    * Called from {@link _build_definition_part()}.
-   * @param MUNGER &$munger The transformation context.
+   * @param MUNGER $munger The transformation context.
    * @param string $line
    * @access private
    */
-  function _build_as_definition_term (&$munger, $line)
+  function _build_as_definition_term ($munger, $line)
   {
     return "$line\n";
   }
@@ -767,11 +767,11 @@ class PLAIN_TEXT_DEFINITION_LIST_TRANSFORMER extends MUNGER_DEFINITION_LIST_TRAN
   /**
    * Transform to a term or body.
    * Called from {@link _build_definition_part()}.
-   * @param MUNGER &$munger The generation context.
+   * @param MUNGER $munger The generation context.
    * @param string $line
    * @access private
    */
-  function _build_as_definition_body (&$munger, $line)
+  function _build_as_definition_body ($munger, $line)
   {
     $Result = "\n\n";
     if ($line)
@@ -794,7 +794,7 @@ class PLAIN_TEXT_DEFINITION_LIST_TRANSFORMER extends MUNGER_DEFINITION_LIST_TRAN
    * @var integer
    * @access private
    */
-  var $_indent = 0;
+  protected $_indent = 0;
 }
 
 /**
@@ -811,11 +811,11 @@ class PLAIN_TEXT_PREFORMATTED_TRANSFORMER extends MUNGER_TRANSFORMER
    * Transform for preformatted text.
    * This will strip at most 2 newlines off the end of the preformatted text; the next
    * container will add space after this container anyway.
-   * @param MUNGER &$munger The transformation context.
+   * @param MUNGER $munger The transformation context.
    * @param string $text
    * @return string
    */
-  function _apply_transform (&$munger, $text)
+  function _apply_transform ($munger, $text)
   {
     $len = strlen ($text);
     $first_char = 0;
@@ -862,11 +862,11 @@ class PLAIN_TEXT_BOX_REPLACER extends MUNGER_REPLACER
 {
   /**
    * Convert the given token to the output format.
-   * @param MUNGER &$munger The transformation context.
-   * @param MUNGER_TOKEN &$token
+   * @param MUNGER $munger The transformation context.
+   * @param MUNGER_TOKEN $token
    * @return string
    */
-  function transform (&$munger, &$token)
+  function transform ($munger, $token)
   {
     if ($token->is_start_tag ())
     {
@@ -903,11 +903,11 @@ class PLAIN_TEXT_HORIZONTAL_RULE_REPLACER extends MUNGER_REPLACER
 {
   /**
    * Convert the given token to the output format.
-   * @param MUNGER &$munger The transformation context.
-   * @param MUNGER_TOKEN &$token
+   * @param MUNGER $munger The transformation context.
+   * @param MUNGER_TOKEN $token
    * @return string
    */
-  function transform (&$munger, &$token)
+  function transform ($munger, $token)
   {
     if ($token->is_start_tag ())
     {
@@ -931,7 +931,7 @@ class PLAIN_TEXT_PUNCTUATION_CONVERTER extends MUNGER_CONVERTER
    * Table of punctuation mappings to apply in {@link _convert()}
    * @var array[string,string]
    */
-  var $punctuation_table = array ( '---' => ' -- '
+  public $punctuation_table = array ( '---' => ' -- '
                                  , '(s,)' => 's'   // Turkish s with cedilla
                                  , '(c,)' => 'c'   // Turkish c with cedilla
                                  , '(i-)' => 'i'   // Turkish i without dot
@@ -941,12 +941,12 @@ class PLAIN_TEXT_PUNCTUATION_CONVERTER extends MUNGER_CONVERTER
 
   /**
    * Convert the text to an output format.
-   * @param MUNGER &$munger
+   * @param MUNGER $munger
    * @param string $text
    * @return string
    * @access private
    */
-  function _convert (&$munger, $text)
+  function _convert ($munger, $text)
   {
     return strtr ($text, $this->punctuation_table);
   }
@@ -966,25 +966,25 @@ class TEXT_MUNGER extends MUNGER
    * Used by the {@link PLAIN_TEXT_LIST_TRANSFORMER}.
    * @var integer
    */
-  var $num_indents;
+  public $num_indents;
   /**
    * Current indenting level.
    * @var integer
    * @access private
    */
-  var $num_spaces = 0;
+  public $num_spaces = 0;
   /**
    * Wrap all text to this right margin.
    * @var integer
    */
-  var $right_margin = 72;
+  public $right_margin = 72;
   /**
    * Disables wrapping in paragraphs when True.
    * The {@link PLAIN_TEXT_DEFINITION_LIST_TRANSFORMER} sets this to prevent nested
    * paragraphs from wrapping their text. The list takes care of all wrapping when it
    * is generated.
    */
-  var $disable_default_wrapping = FALSE;
+  public $disable_default_wrapping = FALSE;
 
   function increase_indent_by ($num_spaces)
   {
@@ -1071,7 +1071,7 @@ class TEXT_MUNGER extends MUNGER
    * @return string
    * @access private
    */
-  function _known_tag_as_text (&$token)
+  function _known_tag_as_text ($token)
   {
     return '';
   }
@@ -1153,7 +1153,7 @@ class PLAIN_TEXT_TITLE_MUNGER extends TEXT_MUNGER
   /**
    * @var boolean
    */
-  var $force_paragraphs = FALSE;
+  public $force_paragraphs = FALSE;
 
   function PLAIN_TEXT_TITLE_MUNGER ()
   {

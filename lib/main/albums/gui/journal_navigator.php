@@ -51,15 +51,15 @@ class JOURNAL_NAVIGATOR extends MULTI_TYPE_ENTRY_NAVIGATOR
 {
   /**
    * Modify the query to navigate.
-   * @param QUERY &$query
+   * @param QUERY $query
    * @access private
    */
-  function _adjust_query (&$query)
+  function _adjust_query ($query)
   {
     $calendar = read_var ('calendar');
     $first_day = read_var ('first_day');
     $last_day = read_var ('last_day');
-    $folder =& $this->_entry->parent_folder ();
+    $folder = $this->_entry->parent_folder ();
 
     if ($calendar)
     {

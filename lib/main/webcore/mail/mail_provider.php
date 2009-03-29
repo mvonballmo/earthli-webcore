@@ -54,17 +54,17 @@ class MAIL_PROVIDER extends LOGGABLE
    * Used to implement basic text-display.
    * @var RENDERER
    */
-  var $renderer;
+  public $renderer;
   /**
    * {@link record()} uses this channel, by default.
    * @var string
    */
-  var $default_channel = Msg_channel_mail;
+  public $default_channel = Msg_channel_mail;
 
   /**
-   * @param CONTEXT &$context
+   * @param CONTEXT $context
    */
-  function MAIL_PROVIDER (&$context)
+  function MAIL_PROVIDER ($context)
   {
     LOGGABLE::LOGGABLE ($context);
 
@@ -75,9 +75,9 @@ class MAIL_PROVIDER extends LOGGABLE
   /**
    * Send the 'message'.
     * Handles all logging and error messages.
-    * @param MAIL_MESSAGE &$message
+    * @param MAIL_MESSAGE $message
     */
-  function send (&$message)
+  function send ($message)
   {
     $this->assert (sizeof ($message->send_to) > 0, 'must send to at least one address', 'send', 'MAIL_PROVIDER');
     $this->assert (! empty ($message->subject) && ! empty ($message->body), 'subject and body cannot be empty', 'send', 'MAIL_PROVIDER');
@@ -116,11 +116,11 @@ class MAIL_PROVIDER extends LOGGABLE
   function last_error_as_html () { $this->raise_deferred ('last_error_as_html', 'MAIL_PROVIDER'); }
 
   /**
-   * @param MAIL_MESSAGE &$message
+   * @param MAIL_MESSAGE $message
     * @access private
     * @abstract
     */
-  function _internal_send (&$message) { $this->raise_deferred ('_inernal_send', 'MAIL_PROVIDER'); }
+  function _internal_send ($message) { $this->raise_deferred ('_inernal_send', 'MAIL_PROVIDER'); }
 }
 
 ?>

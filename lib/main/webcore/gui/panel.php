@@ -87,29 +87,29 @@ class PANEL_MANAGER extends WEBCORE_OBJECT
    * Base all links on this URL.
    * @var string
    */
-  var $page_link;
+  public $page_link;
   /**
    * Id of the currently-displayed panel.
    * @var string
    */
-  var $selected_panel_id = '';
+  public $selected_panel_id = '';
   /**
    * Use this panel if there are no visible panels.
    * @var string
    */
-  var $empty_panel_id = Empty_panel_id;
+  public $empty_panel_id = Empty_panel_id;
   /**
    * Options used by {@link PANELS} in this set.
    * Initialized in the constructor using {@link _make_options()}.
    * @var PANEL_OPTIONS
    */
-  var $options;
+  public $options;
 
   /**
-   * @param APPLICATION &$app Main application.
+   * @param APPLICATION $app Main application.
     * @param boolean $show_time_menu Show a TIME_FRAME_SELECTOR with the panels?
     */
-  function PANEL_MANAGER (&$app, $show_time_menu = TRUE)
+  function PANEL_MANAGER ($app, $show_time_menu = TRUE)
   {
     WEBCORE_OBJECT::WEBCORE_OBJECT ($app);
 
@@ -148,7 +148,7 @@ class PANEL_MANAGER extends WEBCORE_OBJECT
    * @param string $id
    * @return PANEL
    */
-  function &panel_at ($id)
+  function panel_at ($id)
   {
     $this->assert ($this->is_panel ($id), "Panel [$id] does not exist.", 'panel_at', 'PANEL_MANAGER');
     return $this->_panels [$id];
@@ -158,7 +158,7 @@ class PANEL_MANAGER extends WEBCORE_OBJECT
    * The displayed panel.
    * @return PANEL
    */
-  function &selected_panel ()
+  function selected_panel ()
   {
     if ($this->is_panel ($this->selected_panel_id))
     {
@@ -174,7 +174,7 @@ class PANEL_MANAGER extends WEBCORE_OBJECT
    * @param integer $flag Can be {@link Panel_location} or {@link Panel_selection}.
    * @return array[PANEL]
    */
-  function &ordered_panels ($flag)
+  function ordered_panels ($flag)
   {
     switch ($flag)
   	{
@@ -190,7 +190,7 @@ class PANEL_MANAGER extends WEBCORE_OBJECT
 
   	$Result = array ();
   	foreach ($panel_ids as $id)
-  	  $Result [] =& $this->_panels [$id];
+  	  $Result [] = $this->_panels [$id];
 
   	return $Result;
   }
@@ -199,9 +199,9 @@ class PANEL_MANAGER extends WEBCORE_OBJECT
    * Add this panel to the list.
    * Commonly called from {@link _add_panels()}. Use {@link move_panel_to()} or
    * {@link move_panel_after()} to modify the order.
-   * @param PANEL &$panel
+   * @param PANEL $panel
    */
-  function add_panel (&$panel)
+  function add_panel ($panel)
   {
     $this->assert (isset ($panel) && ! empty ($panel->id), 'Panel and panel id cannot be empty', 'add_panel', 'PANEL_MANAGER');
     $this->assert (! $this->is_panel ($panel->id), "Panel [$panel->id] already exists.", 'add_panel', 'PANEL_MANAGER');
@@ -315,7 +315,7 @@ class PANEL_MANAGER extends WEBCORE_OBJECT
     <?php
       foreach ($this->_location_order as $id)
       {
-        $panel =& $this->_panels [$id];
+        $panel = $this->_panels [$id];
         if ($panel->selectable ())
         {
     ?>
@@ -358,13 +358,13 @@ class PANEL_MANAGER extends WEBCORE_OBJECT
     if (! $this->selected_panel ())
     {
       $this->selected_panel_id = $this->_find_default_panel_id ();
-      $selected_panel =& $this->selected_panel ();
+      $selected_panel = $this->selected_panel ();
       $this->assert (isset ($selected_panel), "Panel [$this->selected_panel_id] does not exist.", 'init_selected_panel_from_request', 'PANEL_MANAGER');
     }
 
     if (isset ($this->time_menu))
     {
-      $panel =& $this->selected_panel ();
+      $panel = $this->selected_panel ();
       $this->time_menu->load_period_from_request ($panel->default_time_frame);
     }
   }
@@ -409,7 +409,7 @@ class PANEL_MANAGER extends WEBCORE_OBJECT
    * Panel_selection} or {@link Panel_all}.
    * @access private
    */
-  function _move_panel_to ($id, $index, &$panels)
+  function _move_panel_to ($id, $index, $panels)
   {
     $old_index = array_search ($id, $panels);
     if ($old_index !== FALSE)
@@ -431,9 +431,9 @@ class PANEL_MANAGER extends WEBCORE_OBJECT
 
   /**
    * Initialize the panel options.
-   * @param PANEL_OPTIONS &$options
+   * @param PANEL_OPTIONS $options
    */
-  function _init_options (&$options)
+  function _init_options ($options)
   {
   }
 
@@ -442,7 +442,7 @@ class PANEL_MANAGER extends WEBCORE_OBJECT
    * @see PANEL
    * @access private
    */
-  var $_panels;
+  protected $_panels;
   /**
    * Panels ids in the order they should be selected.
    * By default, these are in the order in which they were added with {@link
@@ -451,7 +451,7 @@ class PANEL_MANAGER extends WEBCORE_OBJECT
    * @see PANEL
    * @access private
    */
-  var $_selection_order;
+  protected $_selection_order;
   /**
    * Panels ids in the order they should be displayed.
    * By default, these are in the order in which they were added with {@link
@@ -460,19 +460,19 @@ class PANEL_MANAGER extends WEBCORE_OBJECT
    * @see PANEL
    * @access private
    */
-  var $_location_order;
+  protected $_location_order;
   /**
    * Insert new panels after this index in the selection.
    * @see add_panels_after()
    * @access private
    */
-  var $_selection_add_index;
+  protected $_selection_add_index;
   /**
    * Insert new panels after this index in the display.
    * @see add_panels_after()
    * @access private
    */
-  var $_location_add_index;
+  protected $_location_add_index;
 }
 
 /**
@@ -490,9 +490,9 @@ class PANEL_MANAGER_HELPER extends WEBCORE_OBJECT
   /**
    * Apply global options to a panel manager.
    * Does nothing by default.
-   * @param PANEL_MANAGER &$manager
+   * @param PANEL_MANAGER $manager
    */
-  function configure (&$manager)
+  function configure ($manager)
   {
   }
 }
@@ -515,41 +515,41 @@ class PANEL extends WEBCORE_OBJECT
   /**
    * @var string
    */
-  var $id = 'objects';
+  public $id = 'objects';
   /**
    * @var string
    */
-  var $title = 'Objects';
+  public $title = 'Objects';
   /**
    * @var boolean
    */
-  var $visible = TRUE;
+  public $visible = TRUE;
   /**
    * Does this panel want the time selected rendered?
    * @var boolean
    */
-  var $uses_time_selector = FALSE;
+  public $uses_time_selector = FALSE;
   /**
    * Which time frame is used as the default?
    * Used only if {@link $uses_time_selector} is <c>True</c>.
    * @var string
    */
-  var $default_time_frame = Time_frame_recent;
+  public $default_time_frame = Time_frame_recent;
   /**
    * State restriction hint for this panel.
    * If set, this is used by a search box to restrict to the state of the
    * selected panel.
    * @var integer
    */
-  var $state = Visible;
+  public $state = Visible;
 
   /**
-   * @param PANEL_MANAGER &$manager Owner of this panel.
+   * @param PANEL_MANAGER $manager Owner of this panel.
    */
-  function PANEL (&$manager)
+  function PANEL ($manager)
   {
     WEBCORE_OBJECT::WEBCORE_OBJECT ($manager->app);
-    $this->_panel_manager =& $manager;
+    $this->_panel_manager = $manager;
   }
 
   /**
@@ -621,10 +621,10 @@ class PANEL extends WEBCORE_OBJECT
   /**
    * Renders this panel.
    * The page number is passed to the embedded grid, if applicable.
-   * @param PANEL_OPTIONS &$options
+   * @param PANEL_OPTIONS $options
    * @abstract
    */
-  function display (&$options)
+  function display ($options)
   {
     $this->raise_deferred ('display', 'PANEL');
   }
@@ -636,7 +636,7 @@ class PANEL extends WEBCORE_OBJECT
    */
   function page_link ()
   {
-    $pm =& $this->_panel_manager;
+    $pm = $this->_panel_manager;
     $url = new URL ($pm->page_link);
     $url->replace_argument ('panel', $this->id);
     return $url->as_html ();
@@ -668,33 +668,33 @@ class PANEL_OPTIONS
    * Allow DHTML in the grid?
    * @var boolean
    */
-  var $use_DHTML = TRUE;
+  public $use_DHTML = TRUE;
   /**
    * Show user names in the grid?
    * Does not apply to all grids.
    * @var boolean
    */
-  var $show_user = TRUE;
+  public $show_user = TRUE;
   /**
    * Show folder info with objects in the grid?
    * Does not apply to all grids.
    * @var boolean
    */
-  var $show_folder = TRUE;
+  public $show_folder = TRUE;
   /**
    * Retrieve the page number from this request variable.
    * @var string
    */
-  var $page_number_var_name = 'page_number';
+  public $page_number_var_name = 'page_number';
 
   /**
    * Copy these settings to the given object.
    * Simply assigns the properties and values from these options to properties
    * with the same name in 'obj'. Usually applied to a {@link GRID} object by
    * {@link GRID_PANEL}.
-   * @param object &$obj
+   * @param object $obj
    */
-  function apply_to (&$obj)
+  function apply_to ($obj)
   {
     $vars = get_object_vars ($this);
     foreach ($vars as $name => $value)
@@ -718,7 +718,7 @@ class WEBCORE_PANEL_MANAGER extends PANEL_MANAGER
 {
   /**
    * Add a {@link FOLDER_PANEL} for the given query.
-   * @param array[FOLDER] &$folders
+   * @param array[FOLDER] $folders
    * @see FOLDER
    * @see _add_folder_panels()
    * @access private
@@ -736,7 +736,7 @@ class WEBCORE_PANEL_MANAGER extends PANEL_MANAGER
    * Add a {@link ENTRY_PANEL} for the given query.
    * Iterates the {@link APPLICATION::entry_type_infos()} list, adding
    * a panel with {@link _add_entry_panel()} for each registered type.
-   * @param QUERY &$query
+   * @param QUERY $query
    * @see _add_entry_panels()
    * @access private
    */
@@ -758,11 +758,11 @@ class WEBCORE_PANEL_MANAGER extends PANEL_MANAGER
 
   /**
    * Add a {@link COMMENT_PANEL} for the given query.
-   * @param QUERY &$query
+   * @param QUERY $query
    * @see _add_comment_panels()
    * @access private
    */
-  function _add_comment_panel_for (&$query)
+  function _add_comment_panel_for ($query)
   {
     $class_name = $this->app->final_class_name ('COMMENT_PANEL');
     $panel = new $class_name ($this, $query);
@@ -774,16 +774,16 @@ class WEBCORE_PANEL_MANAGER extends PANEL_MANAGER
    * Override in descendents to adjust the configuration and number of panels to
    * add per entry. {@link DRAFTABLE_ENTRY}s have more than one panel and are
    * configured by {@link _add_draft_panels_for()}.
-   * @param QUERY &$query
+   * @param QUERY $query
    * @param TYPE_INFO $type_info Type information for the {@link ENTRY}.
    * @param string $panel_class_name Name of the {@link PANEL} class to create.
    * */
-  function _add_entry_panel_for (&$query, $type_info, $panel_class_name)
+  function _add_entry_panel_for ($query, $type_info, $panel_class_name)
   {
     $this->add_panel (new $panel_class_name ($this, $query, $type_info));
     if ($type_info->draftable)
     {
-      $panel =& $this->panel_at ($type_info->id);
+      $panel = $this->panel_at ($type_info->id);
       $panel->query->filter_out (Unpublished);
       $this->_add_draft_panels_for ($query, $type_info, $panel_class_name);
     }
@@ -793,11 +793,11 @@ class WEBCORE_PANEL_MANAGER extends PANEL_MANAGER
    * Add a {@link ENTRY_PANEL} for drafting states.
    * Adds three panels, one for {@link Draft}s, one for {@link Abandoned}
    * entries and one for {@link Queued} entries.
-   * @param QUERY &$query
+   * @param QUERY $query
    * @see _add_entry_panels_for()
    * @access private
    */
-  function _add_draft_panels_for (&$query, $type_info, $panel_class_name)
+  function _add_draft_panels_for ($query, $type_info, $panel_class_name)
   {
     $draft_query = $query->make_clone ();
     $draft_query->set_filter (Draft);
@@ -846,21 +846,21 @@ class WEBCORE_PANEL_MANAGER extends PANEL_MANAGER
 class INDEX_PANEL_MANAGER extends WEBCORE_PANEL_MANAGER
 {
   /**
-   * @param APPLICATION &$app Main application.
-   * @param array[FOLDER] &$folders Show panels for these folders.
+   * @param APPLICATION $app Main application.
+   * @param array[FOLDER] $folders Show panels for these folders.
    * @see FOLDER
    */
-  function INDEX_PANEL_MANAGER (&$app, &$folders)
+  function INDEX_PANEL_MANAGER ($app, $folders)
   {
-    $this->_folders =& $folders;
+    $this->_folders = $folders;
     WEBCORE_PANEL_MANAGER::WEBCORE_PANEL_MANAGER ($app);
   }
 
   /**
    * Initialize the panel options.
-   * @param PANEL_OPTIONS &$options
+   * @param PANEL_OPTIONS $options
    */
-  function _init_options (&$options)
+  function _init_options ($options)
   {
     $options->show_folder = TRUE;
     $options->show_user = TRUE;
@@ -911,7 +911,7 @@ class INDEX_PANEL_MANAGER extends WEBCORE_PANEL_MANAGER
    * @see FOLDER
    * @access private
    */
-  var $_folders;
+  protected $_folders;
 }
 
 /**
@@ -925,9 +925,9 @@ class INDEX_PANEL_MANAGER extends WEBCORE_PANEL_MANAGER
  */
 class FOLDER_PANEL_MANAGER extends WEBCORE_PANEL_MANAGER
 {
-  function FOLDER_PANEL_MANAGER (&$folder)
+  function FOLDER_PANEL_MANAGER ($folder)
   {
-    $this->_folder =& $folder;
+    $this->_folder = $folder;
 
     WEBCORE_PANEL_MANAGER::WEBCORE_PANEL_MANAGER ($folder->app);
 
@@ -936,9 +936,9 @@ class FOLDER_PANEL_MANAGER extends WEBCORE_PANEL_MANAGER
 
   /**
    * Initialize the panel options.
-   * @param PANEL_OPTIONS &$options
+   * @param PANEL_OPTIONS $options
    */
-  function _init_options (&$options)
+  function _init_options ($options)
   {
     $options->show_folder = FALSE;
     $options->show_user = TRUE;
@@ -962,7 +962,7 @@ class FOLDER_PANEL_MANAGER extends WEBCORE_PANEL_MANAGER
    * @var FOLDER
    * @access private
    */
-  var $_folder;
+  protected $_folder;
 }
 
 /**
@@ -976,9 +976,9 @@ class FOLDER_PANEL_MANAGER extends WEBCORE_PANEL_MANAGER
  */
 class USER_PANEL_MANAGER extends WEBCORE_PANEL_MANAGER
 {
-  function USER_PANEL_MANAGER (&$user)
+  function USER_PANEL_MANAGER ($user)
   {
-    $this->_user =& $user;
+    $this->_user = $user;
 
     WEBCORE_PANEL_MANAGER::WEBCORE_PANEL_MANAGER ($user->app);
 
@@ -987,9 +987,9 @@ class USER_PANEL_MANAGER extends WEBCORE_PANEL_MANAGER
 
   /**
    * Initialize the panel options.
-   * @param PANEL_OPTIONS &$options
+   * @param PANEL_OPTIONS $options
    */
-  function _init_options (&$options)
+  function _init_options ($options)
   {
     $options->show_folder = TRUE;
     $options->show_user = FALSE;
@@ -1012,7 +1012,7 @@ class USER_PANEL_MANAGER extends WEBCORE_PANEL_MANAGER
    * @var USER
    * @access private
    */
-  var $_user;
+  protected $_user;
 }
 
 /**
@@ -1027,15 +1027,15 @@ class EMPTY_PANEL extends PANEL
   /**
    * @var string
    */
-  var $id = Empty_panel_id;
+  public $id = Empty_panel_id;
   /**
    * @var string
    */
-  var $title = 'No Content';
+  public $title = 'No Content';
   /**
    * @var boolean
    */
-  var $visible = FALSE;
+  public $visible = FALSE;
 
   /**
    * @return integer
@@ -1065,12 +1065,12 @@ class GRID_PANEL extends PANEL
    * Number of rows to use in the grid.
    * @var integer
    */
-  var $rows = 15;
+  public $rows = 15;
   /**
    * Number of columns to use in the grid.
    * @var integer
    */
-  var $columns = 1;
+  public $columns = 1;
 
   /**
    * Renders this panel.
@@ -1088,10 +1088,10 @@ class GRID_PANEL extends PANEL
 
   /**
    * Configure the grid before displaying it.
-   * @param GRID &$grid The grid to be displayed.
+   * @param GRID $grid The grid to be displayed.
    * @access private
    */
-  function _set_up_grid (&$grid)
+  function _set_up_grid ($grid)
   {
   }
 
@@ -1119,20 +1119,20 @@ class QUERY_PANEL extends GRID_PANEL
   /**
    * @var boolean
    */
-  var $uses_time_selector = TRUE;
+  public $uses_time_selector = TRUE;
   /**
    * @var QUERY
    */
-  var $query;
+  public $query;
 
   /**
-   * @param PANEL_MANAGER &$manager Owner of this panel.
-   * @param QUERY &$query Show objects from this query.
+   * @param PANEL_MANAGER $manager Owner of this panel.
+   * @param QUERY $query Show objects from this query.
    */
-  function QUERY_PANEL (&$manager, &$query)
+  function QUERY_PANEL ($manager, $query)
   {
     GRID_PANEL::GRID_PANEL ($manager);
-    $this->query =& $query;
+    $this->query = $query;
   }
 
   /**
@@ -1145,10 +1145,10 @@ class QUERY_PANEL extends GRID_PANEL
 
   /**
    * Configure the grid before displaying.
-   * @param GRID &$grid The grid to be displayed.
+   * @param GRID $grid The grid to be displayed.
    * @access private
    */
-  function _set_up_grid (&$grid)
+  function _set_up_grid ($grid)
   {
     if ($this->uses_time_selector && $this->_panel_manager->time_menu)
     {
@@ -1170,11 +1170,11 @@ class HISTORY_ITEM_PANEL extends QUERY_PANEL
   /**
    * @var string
    */
-  var $id = 'history';
+  public $id = 'history';
   /**
    * @var string
    */
-  var $title = 'History';
+  public $title = 'History';
 
   /**
    * @return HISTORY_ITEM_GRID
@@ -1199,15 +1199,15 @@ class COMMENT_PANEL extends QUERY_PANEL
   /**
    * @var string
    */
-  var $id = 'comments';
+  public $id = 'comments';
   /**
    * @var string
    */
-  var $title = 'Comments';
+  public $title = 'Comments';
   /**
    * @var boolean
    */
-  var $show_folder = TRUE;
+  public $show_folder = TRUE;
 
   /**
    * @return COMMENT_GRID
@@ -1232,21 +1232,21 @@ class GROUP_PANEL extends QUERY_PANEL
   /**
    * @var string
    */
-  var $id = 'groups';
+  public $id = 'groups';
   /**
    * @var string
    */
-  var $title = 'Groups';
+  public $title = 'Groups';
   /**
    * @var boolean
    */
-  var $uses_time_selector = FALSE;
+  public $uses_time_selector = FALSE;
 
   /**
-   * @param PANEL_MANAGER &$manager Owner of this panel.
-    * @param QUERY &$query Show objects from this query.
+   * @param PANEL_MANAGER $manager Owner of this panel.
+    * @param QUERY $query Show objects from this query.
     */
-  function GROUP_PANEL (&$manager, &$query)
+  function GROUP_PANEL ($manager, $query)
   {
     QUERY_PANEL::QUERY_PANEL ($manager, $query);
     $this->visible = $this->app->login->is_allowed (Privilege_set_group, Privilege_view);
@@ -1285,21 +1285,21 @@ class USER_PANEL extends QUERY_PANEL
   /**
    * @var string
    */
-  var $id = 'users';
+  public $id = 'users';
   /**
    * @var string
    */
-  var $title = 'Users';
+  public $title = 'Users';
   /**
    * @var boolean
    */
-  var $uses_time_selector = FALSE;
+  public $uses_time_selector = FALSE;
 
   /**
-   * @param PANEL_MANAGER &$manager Owner of this panel.
-    * @param QUERY &$query Show objects from this query.
+   * @param PANEL_MANAGER $manager Owner of this panel.
+    * @param QUERY $query Show objects from this query.
     */
-  function USER_PANEL (&$manager, &$query)
+  function USER_PANEL ($manager, $query)
   {
     QUERY_PANEL::QUERY_PANEL ($manager, $query);
     $this->visible = $this->app->login->is_allowed (Privilege_set_user, Privilege_view);
@@ -1348,31 +1348,31 @@ class THEME_PANEL extends QUERY_PANEL
   /**
    * @var string
    */
-  var $id = 'themes';
+  public $id = 'themes';
   /**
    * @var string
    */
-  var $title = 'Themes';
+  public $title = 'Themes';
   /**
    * @var boolean
    */
-  var $uses_time_selector = FALSE;
+  public $uses_time_selector = FALSE;
   /**
    * Number of rows to use in the grid.
    * @var integer
    */
-  var $rows = 10;
+  public $rows = 10;
   /**
    * Number of columns to use in the grid.
    * @var integer
    */
-  var $columns = 2;
+  public $columns = 2;
 
   /**
-   * @param PANEL_MANAGER &$manager Owner of this panel.
-    * @param QUERY &$query Show objects from this query.
+   * @param PANEL_MANAGER $manager Owner of this panel.
+    * @param QUERY $query Show objects from this query.
     */
-  function THEME_PANEL (&$manager, &$query)
+  function THEME_PANEL ($manager, $query)
   {
     QUERY_PANEL::QUERY_PANEL ($manager, $query);
     $this->visible = $this->app->login->is_allowed (Privilege_set_global, Privilege_resources);
@@ -1411,31 +1411,31 @@ class ICON_PANEL extends QUERY_PANEL
   /**
    * @var string
    */
-  var $id = 'icons';
+  public $id = 'icons';
   /**
    * @var string
    */
-  var $title = 'Icons';
+  public $title = 'Icons';
   /**
    * @var boolean
    */
-  var $uses_time_selector = FALSE;
+  public $uses_time_selector = FALSE;
   /**
    * Number of rows to use in the grid.
    * @var integer
    */
-  var $rows = 8;
+  public $rows = 8;
   /**
    * Number of columns to use in the grid.
    * @var integer
    */
-  var $columns = 3;
+  public $columns = 3;
 
   /**
-   * @param PANEL_MANAGER &$manager Owner of this panel.
-    * @param QUERY &$query Show objects from this query.
+   * @param PANEL_MANAGER $manager Owner of this panel.
+    * @param QUERY $query Show objects from this query.
     */
-  function ICON_PANEL (&$manager, &$query)
+  function ICON_PANEL ($manager, $query)
   {
     QUERY_PANEL::QUERY_PANEL ($manager, $query);
     $this->visible = $this->app->login->is_allowed (Privilege_set_global, Privilege_resources);
@@ -1474,17 +1474,17 @@ class ENTRY_PANEL extends QUERY_PANEL
   /**
    * @var string
    */
-  var $id = 'entries';
+  public $id = 'entries';
   /**
    * @var string
    */
-  var $title = 'Entries';
+  public $title = 'Entries';
 
   /**
-   * @param PANEL_MANAGER &$manager Owner of this panel.
-   * @param QUERY &$query Show objects from this query.
+   * @param PANEL_MANAGER $manager Owner of this panel.
+   * @param QUERY $query Show objects from this query.
    */
-  function ENTRY_PANEL (&$manager, &$query, $type_info = null)
+  function ENTRY_PANEL ($manager, $query, $type_info = null)
   {
     QUERY_PANEL::QUERY_PANEL ($manager, $query);
     if (! isset ($type_info))
@@ -1510,7 +1510,7 @@ class ENTRY_PANEL extends QUERY_PANEL
    * @var TYPE_INFO
    * @access private
    */
-  var $_type_info;
+  protected $_type_info;
 }
 
 /**
@@ -1525,34 +1525,34 @@ class FOLDER_PANEL extends GRID_PANEL
   /**
    * @var string
    */
-  var $id = 'folders';
+  public $id = 'folders';
   /**
    * @var string
    */
-  var $title = 'Folders';
+  public $title = 'Folders';
   /**
    * @var integer
    */
-  var $columns = 2;
+  public $columns = 2;
   /**
    * @var integer
    */
-  var $rows = 5;
+  public $rows = 5;
   /**
    * @var array[FOLDER]
    * @see FOLDER
    */
-  var $folders;
+  public $folders;
 
   /**
-   * @param PANEL_MANAGER &$manager Owner of this panel.
-   * @param array[FOLDER] &$folders Show this list of folders in this panel.
+   * @param PANEL_MANAGER $manager Owner of this panel.
+   * @param array[FOLDER] $folders Show this list of folders in this panel.
    * @see FOLDER
    */
-  function FOLDER_PANEL (&$manager, &$folders)
+  function FOLDER_PANEL ($manager, $folders)
   {
     PANEL::PANEL ($manager);
-    $this->folders =& $folders;
+    $this->folders = $folders;
     $type_info = $this->app->type_info_for ('FOLDER', 'webcore/obj/folder.php');
     $this->id = $type_info->id;
     $this->title = $type_info->plural_title;
@@ -1617,10 +1617,10 @@ class FOLDER_PANEL extends GRID_PANEL
 
   /**
    * Configure the grid before displaying it.
-   * @param GRID &$grid The grid to be displayed.
+   * @param GRID $grid The grid to be displayed.
    * @access private
    */
-  function _set_up_grid (&$grid)
+  function _set_up_grid ($grid)
   {
     $grid->set_folders ($this->folders);
   }
@@ -1630,7 +1630,7 @@ class FOLDER_PANEL extends GRID_PANEL
     * @var bool
     * @access private
     */
-  var $recurse_tree_for_count = FALSE;
+  public $recurse_tree_for_count = FALSE;
 }
 
 /**
@@ -1670,20 +1670,20 @@ class USER_SUMMARY_PANEL extends PANEL
   /**
    * @var string
    */
-  var $id = 'summary';
+  public $id = 'summary';
   /**
    * @var string
    */
-  var $title = 'Summary';
+  public $title = 'Summary';
 
   /**
-   * @param USER_PANEL_MANAGER &$panel_manager
-   * @param USER &$user
+   * @param USER_PANEL_MANAGER $panel_manager
+   * @param USER $user
    */
-  function USER_SUMMARY_PANEL (&$panel_manager, &$user)
+  function USER_SUMMARY_PANEL ($panel_manager, $user)
   {
     PANEL::PANEL ($panel_manager);
-    $this->_user =& $user;
+    $this->_user = $user;
   }
 
   /**
@@ -1698,7 +1698,7 @@ class USER_SUMMARY_PANEL extends PANEL
   function display ()
   {
     $renderer = $this->_user->handler_for (Handler_html_renderer);
-    $options =& $renderer->options ();
+    $options = $renderer->options ();
     $options->show_users = FALSE;
     $renderer->display ($this->_user);
   }
@@ -1707,7 +1707,7 @@ class USER_SUMMARY_PANEL extends PANEL
    * @var USER
    * @access private
    */
-  var $_user;
+  protected $_user;
 }
 
 ?>

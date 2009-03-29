@@ -53,16 +53,16 @@ class DELETE_FORM extends ID_BASED_FORM
   /**
    * @var string
    */
-  var $button = 'Yes';
+  public $button = 'Yes';
   /**
    * Show the object's name as a link when displayed?
     * @var boolean
     */
-  var $show_object_as_link = TRUE;
+  public $show_object_as_link = TRUE;
 
   /**
    * Delete the given object.
-    * @param UNIQUE_OBJECT &$obj
+    * @param UNIQUE_OBJECT $obj
     * @access private
     */
   function commit ($obj)
@@ -76,10 +76,10 @@ class DELETE_FORM extends ID_BASED_FORM
   }
 
   /**
-   * @param FORM_RENDERER &$renderer
+   * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_controls (&$renderer)
+  function _draw_controls ($renderer)
   {
     $renderer->start ();
     $renderer->start_row ();
@@ -108,23 +108,23 @@ class DELETE_OBJECT_FORM extends PURGE_OBJECT_FORM
   /**
    * @var string
    */
-  var $button = 'Yes';
+  public $button = 'Yes';
   /**
    * Show the object's name as a link when displayed?
     * @var boolean
     */
-  var $show_object_as_link = TRUE;
+  public $show_object_as_link = TRUE;
   /**
    * Show the previews before the form?
    * @var boolean
    */
-  var $show_previews_first = FALSE;
+  public $show_previews_first = FALSE;
 
   /**
-   * @param APPLICATION &$app Main application.
+   * @param APPLICATION $app Main application.
    * @param string $set_name
    */
-  function DELETE_OBJECT_FORM (&$app, $set_name)
+  function DELETE_OBJECT_FORM ($app, $set_name)
   {
     PURGE_OBJECT_FORM::PURGE_OBJECT_FORM ($app);
 
@@ -138,7 +138,7 @@ class DELETE_OBJECT_FORM extends PURGE_OBJECT_FORM
 
   /**
    * Delete the given object.
-    * @param OBJECT_IN_FOLDER &$obj
+    * @param OBJECT_IN_FOLDER $obj
     * @access private
     */
   function commit ($obj)
@@ -155,9 +155,9 @@ class DELETE_OBJECT_FORM extends PURGE_OBJECT_FORM
 
   /**
    * Load initial properties from this object.
-   * @param OBJECT_IN_FOLDER &$obj
+   * @param OBJECT_IN_FOLDER $obj
    */
-  function load_from_object (&$obj)
+  function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
     $this->set_visible ('purge', $this->_is_purge_visible ($obj));
@@ -165,7 +165,7 @@ class DELETE_OBJECT_FORM extends PURGE_OBJECT_FORM
     $this->set_enabled ('remove_resources', FALSE);
 
     $type_info = $this->_object->type_info ();
-    $field =& $this->field_at ('purge');
+    $field = $this->field_at ('purge');
     if ($this->login->is_allowed ($this->_privilege_set, Privilege_view_hidden, $this->_object))
     {
       $field->description = 'This ' . $type_info->singular_title . ' will be marked as deleted and hidden from non-admin users. Purging removes it permanently and cannot be undone.';
@@ -181,11 +181,11 @@ class DELETE_OBJECT_FORM extends PURGE_OBJECT_FORM
 
   /**
    * Can the user purge objects?
-   * @param OBJECT_IN_FOLDER &$obj
+   * @param OBJECT_IN_FOLDER $obj
    * @return boolean
    * @access private
    */
-  function _is_purge_visible (&$obj)
+  function _is_purge_visible ($obj)
   {
     return $this->login->is_allowed ($this->_privilege_set, Privilege_purge, $obj);
   }
@@ -205,10 +205,10 @@ class DELETE_OBJECT_FORM extends PURGE_OBJECT_FORM
   }  
 
   /**
-   * @param FORM_RENDERER &$renderer
+   * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_controls (&$renderer)
+  function _draw_controls ($renderer)
   {
     $renderer->start ();
 
@@ -243,7 +243,7 @@ class DELETE_OBJECT_FORM extends PURGE_OBJECT_FORM
    * @var string
    * @access private
    */
-  var $_privilege_set;
+  protected $_privilege_set;
 }
 
 /**
@@ -257,20 +257,20 @@ class DELETE_OBJECT_FORM extends PURGE_OBJECT_FORM
 class DELETE_OBJECT_IN_FOLDER_FORM extends DELETE_OBJECT_FORM
 {
   /**
-   * @param FOLDER &$folder Deleting content from this folder.
+   * @param FOLDER $folder Deleting content from this folder.
    * @param string $set_name
    */
-  function DELETE_OBJECT_IN_FOLDER_FORM (&$folder, $set_name)
+  function DELETE_OBJECT_IN_FOLDER_FORM ($folder, $set_name)
   {
     DELETE_OBJECT_FORM::DELETE_OBJECT_FORM ($folder->app, $set_name);
-    $this->_folder =& $folder;
+    $this->_folder = $folder;
   }
 
   /**
    * @var FOLDER
    * @access private
    */
-  var $_folder;
+  protected $_folder;
 }
 
 ?>

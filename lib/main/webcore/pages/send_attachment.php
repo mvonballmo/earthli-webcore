@@ -30,7 +30,7 @@ http://www.earthli.com/software/webcore
   $type = read_var ('type');
 
   $folder_query = $App->login->folder_query ();
-  $folder =& $folder_query->folder_for_attachment_at_id ($id, $type);
+  $folder = $folder_query->folder_for_attachment_at_id ($id, $type);
 
   if (isset ($folder))
   {
@@ -39,12 +39,12 @@ http://www.earthli.com/software/webcore
 
     if ($type == History_item_folder)
     {
-      $host =& $folder;
+      $host = $folder;
     }
     else
     {
       $entry_query = $folder->entry_query ();
-      $entry =& $entry_query->object_for_attachment_at_id ($id, $type);
+      $entry = $entry_query->object_for_attachment_at_id ($id, $type);
 
       if (isset ($entry))
       {
@@ -53,19 +53,19 @@ http://www.earthli.com/software/webcore
 
         if ($type == History_item_entry)
         {
-          $host =& $entry;
+          $host = $entry;
         }
         else
         {
           $com_query = $entry->comment_query ();
-          $comment =& $com_query->object_for_attachment_at_id ($id);
+          $comment = $com_query->object_for_attachment_at_id ($id);
 
           if (isset ($comment))
           {
             $Page->title->add_object ($comment);
             $Page->location->add_object_link ($comment);
 
-            $host =& $comment;
+            $host = $comment;
           }
         }
       }
@@ -74,7 +74,7 @@ http://www.earthli.com/software/webcore
     if (isset ($host))
     {
       $attachment_query = $host->attachment_query ();
-      $attachment =& $attachment_query->object_at_id ($id);
+      $attachment = $attachment_query->object_at_id ($id);
     }
   }
 

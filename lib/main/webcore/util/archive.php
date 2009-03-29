@@ -65,7 +65,7 @@ class ARCHIVE
    * Can be in any URL usable by PHP.
    * @var string
    */
-  var $file_name;
+  public $file_name;
 
   /**
    * @param string $file_name
@@ -187,14 +187,14 @@ class ARCHIVE
    * @var COMPRESSED_FILE
    * @access private
    */
-  var $_handler;
+  protected $_handler;
   /**
    * List of archive format handlers.
    * @see ARCHIVE_HANDLER
    * @var array[ARCHIVE_HANDLER]
    * @access private
    */
-  var $_handlers;
+  protected $_handlers;
 }
 
 /**
@@ -213,12 +213,12 @@ class ARCHIVE_HANDLER
    * Name of the handler class to create.
    * @var string
    */
-  var $class_name;
+  public $class_name;
   /**
    * Location of the {@link $class_name}.
    * May be empty if the file is guaranteed to be included.
    */
-  var $file_name;
+  public $file_name;
 }
 
 /**
@@ -240,7 +240,7 @@ class COMPRESSED_FILE extends RAISABLE
    * Can be in any URL usable by PHP.
    * @var string
    */
-  var $file_name;
+  public $file_name;
 
   /**
    * @param string $file_name
@@ -266,7 +266,7 @@ class COMPRESSED_FILE extends RAISABLE
     $this->_open ();
     if (! $this->is_open () && isset ($error_callback))
     {
-      $error_callback->execute (array (&$this, "Could not open file."));
+      $error_callback->execute (array ($this, "Could not open file."));
     }
   }
 
@@ -302,12 +302,12 @@ class COMPRESSED_FILE extends RAISABLE
   /**
    * Extract 'entry' to the target path.
    * This function is called for each file in the compressed file when {@link extract_to()} is called.
-   * @param COMPRESSED_FILE &$comp_file
-   * @param COMPRESSED_FILE_ENTRY &$entry
+   * @param COMPRESSED_FILE $comp_file
+   * @param COMPRESSED_FILE_ENTRY $entry
    * @param CALLBACK $error_callback Function prototype: function ({@link COMPRESSED_FILE} $archive, string $msg, {@link COMPRESSED_FILE_ENTRY} $entry)
    * @access private
    */
-  function _extract_file (&$comp_file, &$entry, $error_callback)
+  function _extract_file ($comp_file, $entry, $error_callback)
   {
     $entry->extract_to ($this->_target_path, $error_callback);
   }
@@ -352,36 +352,36 @@ class COMPRESSED_FILE_ENTRY extends RAISABLE
    * May include path information if the compressed file has folders included.
    * @var string
    */
-  var $name;
+  public $name;
   /**
    * Position of the file in the archive.
    * @var integer
    */
-  var $number;
+  public $number;
   /**
    * Size of file in the archive.
    * May not be available for all compressed file types.
    * @var integer
    */
-  var $compressed_size;
+  public $compressed_size;
   /**
    * Uncompressed size of the file.
    * @var integer
    */
-  var $size;
+  public $size;
   /**
    * Location of extracted file.
    * This property holds the last file produced when {@link extract_to()} was called. May be empty.
    * @var string
    */
-  var $extracted_name;
+  public $extracted_name;
 
   /**
-   * @param COMPRESSED_FILE &$file
+   * @param COMPRESSED_FILE $file
    */
-  function COMPRESSED_FILE_ENTRY (&$file)
+  function COMPRESSED_FILE_ENTRY ($file)
   {
-    $this->_file =& $file;
+    $this->_file = $file;
   }
 
   /**
@@ -442,7 +442,7 @@ class COMPRESSED_FILE_ENTRY extends RAISABLE
   {
     if (isset ($error_callback))
     {
-      $error_callback->execute (array (&$this->_file, $msg, &$this));
+      $error_callback->execute (array ($this->_file, $msg, $this));
     }
   }
 
@@ -451,7 +451,7 @@ class COMPRESSED_FILE_ENTRY extends RAISABLE
    * @var COMPRESSED_FILE
    * @access private
    */
-  var $_file;
+  protected $_file;
 }
 
 /**
@@ -501,7 +501,7 @@ class ZIP_FILE extends COMPRESSED_FILE
         $entry->size = $size;
         $entry->compressed_size = zip_entry_compressedsize ($zip_entry);
 
-        $file_callback->execute (array (&$this, &$entry, $error_callback));
+        $file_callback->execute (array ($this, $entry, $error_callback));
       }
     }
 
@@ -528,7 +528,7 @@ class ZIP_FILE extends COMPRESSED_FILE
    * @var resource
    * @access private
    */
-  var $_handle;
+  protected $_handle;
 }
 
 /**
@@ -545,14 +545,14 @@ class ZIP_ENTRY extends COMPRESSED_FILE_ENTRY
    * Size of block to use when reading zip files.
    * @var integer
    */
-  var $read_block_size = 2048;
+  public $read_block_size = 2048;
 
   /**
-   * @param COMPRESSED_FILE &$file
+   * @param COMPRESSED_FILE $file
    * @param resource $zh Handle returned by {@link PHP_MANUAL#zip_open()}
    * @param resource $h Handle returned by {@link PHP_MANUAL#zip_entry_open()}
    */
-  function ZIP_ENTRY (&$file, $zh, $h)
+  function ZIP_ENTRY ($file, $zh, $h)
   {
     COMPRESSED_FILE_ENTRY::COMPRESSED_FILE_ENTRY ($file);
     $this->_zip_handle = $zh;
@@ -593,13 +593,13 @@ class ZIP_ENTRY extends COMPRESSED_FILE_ENTRY
    * @var resource
    * @access private
    */
-  var $_handle;
+  protected $_handle;
   /**
    * Reference to a value returned from {@link PHP_MANUAL#zip_open()}
    * @var resource
    * @access private
    */
-  var $_zip_handle;
+  protected $_zip_handle;
 }
 
 ?>

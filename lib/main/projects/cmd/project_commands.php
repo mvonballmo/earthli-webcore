@@ -51,22 +51,22 @@ require_once ('webcore/cmd/folder_commands.php');
 class PROJECT_COMMANDS extends FOLDER_COMMANDS
 {
   /**
-   * @param PROJECT &$folder Configure commands for this object.
+   * @param PROJECT $folder Configure commands for this object.
    */
-  function PROJECT_COMMANDS (&$folder)
+  function PROJECT_COMMANDS ($folder)
   {
     FOLDER_COMMANDS::FOLDER_COMMANDS ($folder);
 
-    $cmd =& $this->command_at ('new');
+    $cmd = $this->command_at ('new');
     $cmd->title = 'New project';
   }
 
   /**
    * Add commands that create items in the folder.
-   * @param FOLDER &$folder
+   * @param FOLDER $folder
    * @access private
    */
-  function _add_creators (&$folder)
+  function _add_creators ($folder)
   {
     $cmd = $this->make_command ();
     $cmd->id = 'new_job';
@@ -99,7 +99,7 @@ class PROJECT_COMMANDS extends FOLDER_COMMANDS
     $cmd->id = 'new_branch';
     $cmd->title = 'New branch';
 
-    $branch =&  $folder->trunk ();
+    $branch =  $folder->trunk ();
     if (isset ($branch))
     {
       $cmd->link = "create_branch.php?id=$folder->id&branch_id=$branch->id";

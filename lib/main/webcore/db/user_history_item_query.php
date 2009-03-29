@@ -49,9 +49,9 @@ require_once ('webcore/db/history_item_query.php');
 class USER_HISTORY_ITEM_QUERY extends HISTORY_ITEM_QUERY
 {
   /**
-   * @param APPLICATION &$app Main application.
+   * @param APPLICATION $app Main application.
    */
-  function USER_HISTORY_ITEM_QUERY (&$app)
+  function USER_HISTORY_ITEM_QUERY ($app)
   {
     HISTORY_ITEM_QUERY::HISTORY_ITEM_QUERY ($app);
     $this->add_table ("{$this->app->table_names->folders} fldr", 'act.access_id = fldr.id');
@@ -99,10 +99,10 @@ class USER_HISTORY_ITEM_QUERY extends HISTORY_ITEM_QUERY
 
   /**
    * Perform any setup needed on each returned object.
-   * @param HISTORY_ITEM &$obj
+   * @param HISTORY_ITEM $obj
    * @access private
    */
-  function _prepare_object (&$obj)
+  function _prepare_object ($obj)
   {
     $obj->set_parent_folder ($this->login->folder_at_id ($obj->access_id));
   }

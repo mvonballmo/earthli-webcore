@@ -61,19 +61,19 @@ class SUBSCRIBER extends UNIQUE_OBJECT
   /**
    * @var string
    */
-  var $email = '';
+  public $email = '';
   /**
    * Send messages as HTML or plain text?
    * @var boolean
    */
-  var $send_as_html = TRUE;
+  public $send_as_html = TRUE;
   /**
    * Send messages for items modified only by this subscriber?
    * If this subscriber is also a {@link USER} and that user is the only modifier for an item,
    * should a message for that item be sent?
    * @var boolean
    */
-  var $send_own_changes = TRUE;
+  public $send_own_changes = TRUE;
   /**
    * Send at most this many objects individually.
    * If there are more than this many objects queued for a subscriber, the objects are grouped
@@ -82,13 +82,13 @@ class SUBSCRIBER extends UNIQUE_OBJECT
    * reasonable.
    * @var integer
    */
-  var $max_individual_messages = 5;
+  public $max_individual_messages = 5;
   /**
    * Send at most this many objects in one message item.
    * Set this object control the size of generated emails.
    * @var integer
    */
-  var $max_items_per_message = 25;
+  public $max_items_per_message = 25;
   /**
    * Wait this many hours between sending batches of items.
    * If this is 0, content is always sent as soon as the {@link PUBLISHER} processes it. If this is non-zero,
@@ -97,28 +97,28 @@ class SUBSCRIBER extends UNIQUE_OBJECT
    * are stored with the subscriber until the next publishing cycle.
    * @var integer
    */
-  var $min_hours_to_wait = 0;
+  public $min_hours_to_wait = 0;
   /**
    * When were messages last sent to this subscriber?
    * This field is used with {@link $min_hours_to_wait} to determine when messages should once again
    * be sent.
    * @var DATE_TIME
    */
-  var $time_messages_sent;
+  public $time_messages_sent;
   /**
    * Send multiply-modified item as one message?
    * If an item has been modified several times since the last messages were sent, should all
    * changes be grouped into one message?
    * @var boolean
    */
-  var $group_history_items = TRUE;
+  public $group_history_items = TRUE;
   /**
    * Should details of the exact kind of modification be sent?
    * Each modification of an item is recorded with an {@link HISTORY_ITEM}. Should the details of the
    * history item be included in the email?
    * @var boolean
    */
-  var $show_history_items = FALSE;
+  public $show_history_items = FALSE;
   /**
    * Should an history item title serve as the email title?
    * Each modification of an item is recorded with an {@link HISTORY_ITEM}. If a message contains only
@@ -128,7 +128,7 @@ class SUBSCRIBER extends UNIQUE_OBJECT
    * subject, along with the object's path.
    * @var boolean
    */
-  var $show_history_item_as_subject = TRUE;
+  public $show_history_item_as_subject = TRUE;
   /**
    * List of {@link HISTORY_ITEM}s queued for this subscriber.
    * If a publication cycle is execution by {@link PUBLISHER}, but this user is not 
@@ -140,18 +140,18 @@ class SUBSCRIBER extends UNIQUE_OBJECT
    * The list is comma-separated and new ids are appended to any existing ids.
    * @var string
    */
-  var $queued_history_item_ids;
+  public $queued_history_item_ids;
   /**
    * How much text from an object should be shown?
    * This is a suggestion to the email renderer to limit larger texts. If zero, all text is shown.
    * @var integer
    */
-  var $preferred_text_length = 0;
+  public $preferred_text_length = 0;
 
   /**
-   * @param APPLICATION &$app
+   * @param APPLICATION $app
    */
-  function SUBSCRIBER (&$app)
+  function SUBSCRIBER ($app)
   {
     UNIQUE_OBJECT::UNIQUE_OBJECT ($app);
     $this->time_messages_sent = $app->make_date_time ();
@@ -252,13 +252,13 @@ class SUBSCRIBER extends UNIQUE_OBJECT
    * registered, the associated user object is returned here.
    * @return USER
    */
-  function &user ()
+  function user ()
   {
     if (! isset ($this->_user))
     {
       $user_query = $this->app->user_query ();
       $user_query->set_kind (Privilege_kind_registered);
-      $this->_user =& $user_query->object_at_email ($this->email);
+      $this->_user = $user_query->object_at_email ($this->email);
     }
 
     return $this->_user;
@@ -272,7 +272,7 @@ class SUBSCRIBER extends UNIQUE_OBJECT
    * @param integer $kind Can be any of the {@link Subscribe_constants}.
    * @param boolean $enabled Turn the subscription on or off.
    */
-  function set_subscribed (&$obj, $kind, $enabled)
+  function set_subscribed ($obj, $kind, $enabled)
   {
     if ($enabled)
     {
@@ -332,7 +332,7 @@ class SUBSCRIBER extends UNIQUE_OBJECT
    * @param integer $kind Can be any of the {@link Subscribe_constants}.
    * @return boolean
    */
-  function subscribed (&$obj, $kind)
+  function subscribed ($obj, $kind)
   {
     return in_array ($kind, $this->receives_notifications_through ($obj));
   }
@@ -341,10 +341,10 @@ class SUBSCRIBER extends UNIQUE_OBJECT
    * How is the user subscribed to this object?
    * Returns a list of {@link Subscribe_constants} that match this person and the
    * given object.
-   * @param AUDITABLE &$obj
+   * @param AUDITABLE $obj
    * @return array[integer]
    */
-  function receives_notifications_through (&$obj)
+  function receives_notifications_through ($obj)
   {
     $Result = array ();
     if (isset ($this->email) && $obj->exists ())
@@ -352,7 +352,7 @@ class SUBSCRIBER extends UNIQUE_OBJECT
       $query = $obj->subscriber_query ();
       $query->restrict ("subscribers.email = '$this->email'");
       $query->set_select ('subs.kind as subkind');
-      $db =& $query->raw_output ();
+      $db = $query->raw_output ();
       while ($db->next_record ())
         $Result [] = $db->f ('subkind');
     }
@@ -408,7 +408,7 @@ class SUBSCRIBER extends UNIQUE_OBJECT
 
     $Result = array ();
 
-    $db =& $query->raw_output ();
+    $db = $query->raw_output ();
     while ($db->next_record ())
     {
       $id = $db->f ("id");
@@ -421,16 +421,16 @@ class SUBSCRIBER extends UNIQUE_OBJECT
   /**
    * Should this history item trigger a notification?
    * This uses the {@link $send_own_changes} option.
-   * @param HISTORY_ITEM &$history_item
+   * @param HISTORY_ITEM $history_item
    * @return boolean
    */
-  function wants_notification (&$history_item)
+  function wants_notification ($history_item)
   {
     $Result = $this->send_own_changes;
 
     if (! $Result)
     {
-      $creator =& $history_item->creator ();
+      $creator = $history_item->creator ();
       $Result = ($this->email != $creator->email);
     }
 
@@ -482,9 +482,9 @@ class SUBSCRIBER extends UNIQUE_OBJECT
   }
 
   /**
-   * @param DATABASE &$db Database from which to load values.
+   * @param DATABASE $db Database from which to load values.
    */
-  function load (&$db)
+  function load ($db)
   {
     parent::load ($db);
     $this->send_as_html = $db->f ('send_as_html');
@@ -506,9 +506,9 @@ class SUBSCRIBER extends UNIQUE_OBJECT
   }
 
   /**
-   * @param SQL_STORAGE &$storage Store values to this object.
+   * @param SQL_STORAGE $storage Store values to this object.
    */
-  function store_to (&$storage)
+  function store_to ($storage)
   {
     parent::store_to ($storage);
     $tname = $this->_table_name ();
@@ -608,12 +608,12 @@ class SUBSCRIBER extends UNIQUE_OBJECT
    * @var boolean
    * @access private
    */
-  var $_read_only = TRUE;
+  protected $_read_only = TRUE;
   /**
    * Queued history items as an array of ids.
    * @var array[integer]
    */
-  var $_queued_history_items;
+  protected $_queued_history_items;
 }
 
 ?>

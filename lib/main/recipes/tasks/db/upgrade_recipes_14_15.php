@@ -31,9 +31,9 @@ require_once ('webcore/tasks/db/upgrade_per_app_24_25.php');
 
 class RECIPES_14_15_MIGRATOR_TASK extends UPGRADE_PER_APP_24_25_TASK
 {
-  var $application_name = 'earthli Recipes';
-  var $version_from = '1.4.0';
-  var $version_to = '1.5.0';
+  public $application_name = 'earthli Recipes';
+  public $version_from = '1.4.0';
+  public $version_to = '1.5.0';
 
   function _execute ()
   {

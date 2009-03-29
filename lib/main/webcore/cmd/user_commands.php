@@ -51,9 +51,9 @@ require_once ('webcore/cmd/commands.php');
 class USER_COMMANDS extends COMMANDS
 {
   /**
-   * @param USER &$user Configure commands for this object.
+   * @param USER $user Configure commands for this object.
    */
-  function USER_COMMANDS (&$user)
+  function USER_COMMANDS ($user)
   {
     COMMANDS::COMMANDS ($user->app);
 

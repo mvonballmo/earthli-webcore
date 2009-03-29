@@ -97,7 +97,7 @@ class DATE_TIME_TOOLKIT
    * Formats date/times for string output.
    * @var DATE_TIME_FORMATTER
    */
-  var $formatter;
+  public $formatter;
 
   function DATE_TIME_TOOLKIT ()
   {
@@ -114,9 +114,9 @@ class DATE_TIME_TOOLKIT
    * The conversion string should be compatible with the PHP 'ereg' function.
    * @param DATE_TIME_CONVERTER $converter
    */
-  function register_converter (&$converter)
+  function register_converter ($converter)
   {
-    $this->_converters [] =& $converter;
+    $this->_converters [] = $converter;
   }
 
   /**
@@ -146,7 +146,7 @@ class DATE_TIME_TOOLKIT
    * @see DATE_TIME_CONVERTER
    * @access private
    */
-  var $_converters;
+  protected $_converters;
 }
 
 /**
@@ -168,31 +168,31 @@ class DATE_TIME_FORMATTER extends RAISABLE
    * @see Date_time_format_month_and_year
    * @see Date_time_format_short_date
    */
-  var $type;
+  public $type;
   /**
    * Show adjusted to local time? (uses JavaScript)
    * @var boolean
    */
-  var $show_local_time = TRUE;
+  public $show_local_time = TRUE;
   /**
    * Show the time zone in the result?
    * Will only be shown if {@link $show_local_time} is False.
    * @var boolean
    */
-  var $show_time_zone = TRUE;
+  public $show_time_zone = TRUE;
   /**
    * Time-zone to show for non-local times.
    * If the time is shown without JavaScript, this time zone is appended to indicate the
    * locale of the server.
    * @var string
    */
-  var $time_zone_id = 'GMT-5';
+  public $time_zone_id = 'GMT-5';
   /**
    * Wrap the formatted output in CSS.
    * This wraps a 'span' tag around the date with class = 'date-time'.
    * @var boolean
    */
-  var $show_CSS = TRUE;
+  public $show_CSS = TRUE;
 
   /**
    * Set the format string for a date time type.
@@ -306,13 +306,13 @@ class DATE_TIME_FORMATTER extends RAISABLE
    * @var string
    * @access private
    */
-  var $_default_format_type;
+  protected $_default_format_type;
   /**
    * List of registered output formats.
    * @var array[string]
    * @access private
    */
-  var $_format_strings;
+  protected $_format_strings;
 }
 
 /**
@@ -388,19 +388,19 @@ class DATE_TIME_CONVERTER extends RAISABLE
    * Used with the PHP 'ereg' function.
    * @var string
    */
-  var $ereg_string;
+  public $ereg_string;
   /**
    * @var integer
    */
-  var $month_pos;
+  public $month_pos;
   /**
    * @var integer
    */
-  var $day_pos;
+  public $day_pos;
   /**
    * @var integer
    */
-  var $year_pos;
+  public $year_pos;
 
   /**
    * Convert a string to a php time.
@@ -443,19 +443,19 @@ class US_DATE_TIME_CONVERTER extends DATE_TIME_CONVERTER
    * Used by {@link PHP_MANUAL#ereg} to get date and time.
    * @var string
    */
-  var $ereg_text = '^(([0-9]{1,2})/([0-9]{1,2})/([0-9]{4}))?[ ]?(([0-9]{1,2}):([0-9]{1,2}):([0-9]{1,2}))?$';
+  public $ereg_text = '^(([0-9]{1,2})/([0-9]{1,2})/([0-9]{4}))?[ ]?(([0-9]{1,2}):([0-9]{1,2}):([0-9]{1,2}))?$';
   /**
    * @var integer
    */
-  var $month_pos = 2;
+  public $month_pos = 2;
   /**
    * @var integer
    */
-  var $day_pos = 3;
+  public $day_pos = 3;
   /**
    * @var integer
    */
-  var $year_pos = 4;
+  public $year_pos = 4;
 }
 
 /**
@@ -471,19 +471,19 @@ class EURO_DATE_TIME_CONVERTER extends DATE_TIME_CONVERTER
    * Used by {@link PHP_MANUAL#ereg} to get date and time.
    * @var string
    */
-  var $ereg_text = '^(([0-9]{1,2})\.([0-9]{1,2})\.([0-9]{4}))?[ ]?(([0-9]{1,2}):([0-9]{1,2}):([0-9]{1,2}))?$';
+  public $ereg_text = '^(([0-9]{1,2})\.([0-9]{1,2})\.([0-9]{4}))?[ ]?(([0-9]{1,2}):([0-9]{1,2}):([0-9]{1,2}))?$';
   /**
    * @var integer
    */
-  var $month_pos = 3;
+  public $month_pos = 3;
   /**
    * @var integer
    */
-  var $day_pos = 2;
+  public $day_pos = 2;
   /**
    * @var integer
    */
-  var $year_pos = 4;
+  public $year_pos = 4;
 }
 
 /**
@@ -499,19 +499,19 @@ class ISO_DATE_TIME_CONVERTER extends DATE_TIME_CONVERTER
    * Used by {@link PHP_MANUAL#ereg} to get date and time.
    * @var string
    */
-  var $ereg_text = '^(([0-9]{4})-([0-9]{1,2})-([0-9]{1,2}))?[ ]?(([0-9]{1,2}):([0-9]{1,2}):([0-9]{1,2}))?$';
+  public $ereg_text = '^(([0-9]{4})-([0-9]{1,2})-([0-9]{1,2}))?[ ]?(([0-9]{1,2}):([0-9]{1,2}):([0-9]{1,2}))?$';
   /**
    * @var integer
    */
-  var $month_pos = 3;
+  public $month_pos = 3;
   /**
    * @var integer
    */
-  var $day_pos = 4;
+  public $day_pos = 4;
   /**
    * @var integer
    */
-  var $year_pos = 2;
+  public $year_pos = 2;
 }
 
 /**
@@ -527,19 +527,19 @@ class EXIF_DATE_TIME_CONVERTER extends DATE_TIME_CONVERTER
    * Used by {@link PHP_MANUAL#ereg} to get date and time.
    * @var string
    */
-  var $ereg_text = '^(([0-9]{4}):([0-9]{1,2}):([0-9]{1,2}))?[ ]?(([0-9]{1,2}):([0-9]{1,2}):([0-9]{1,2}))?$';
+  public $ereg_text = '^(([0-9]{4}):([0-9]{1,2}):([0-9]{1,2}))?[ ]?(([0-9]{1,2}):([0-9]{1,2}):([0-9]{1,2}))?$';
   /**
    * @var integer
    */
-  var $month_pos = 3;
+  public $month_pos = 3;
   /**
    * @var integer
    */
-  var $day_pos = 4;
+  public $day_pos = 4;
   /**
    * @var integer
    */
-  var $year_pos = 2;
+  public $year_pos = 2;
 }
 
 /**
@@ -708,7 +708,7 @@ class DATE_TIME extends RAISABLE
    */
   function set_from_text ($t, $parts = Date_time_both_parts)
   {
-    $toolkit =& $this->toolkit ();
+    $toolkit = $this->toolkit ();
     $this->set_from_php ($toolkit->text_to_php ($t, $parts));
   }
 
@@ -843,7 +843,7 @@ class DATE_TIME extends RAISABLE
    */
   function formatter ()
   {
-    $toolkit =& $this->toolkit ();
+    $toolkit = $this->toolkit ();
     return $toolkit->formatter;
   }
 
@@ -856,27 +856,27 @@ class DATE_TIME extends RAISABLE
    * @see use_toolkit()
    * @return DATE_TIME_TOOLKIT
    */
-  function &toolkit ()
+  function toolkit ()
   {
     if (isset ($this->_toolkit))
     {
-      $Result =& $this->_toolkit;
+      $Result = $this->_toolkit;
     }
     else
     {
-      $Result =& global_date_time_toolkit ();
+      $Result = global_date_time_toolkit ();
     }
     return $Result;
   }
 
   /**
    * Use the given toolkit for conversions and formatting.
-   * @param DATE_TIME_TOOLKIT &$toolkit
+   * @param DATE_TIME_TOOLKIT $toolkit
    * @see toolkit()
    */
-  function use_toolkit (&$toolkit)
+  function use_toolkit ($toolkit)
   {
-    $this->_toolkit =& $toolkit;
+    $this->_toolkit = $toolkit;
   }
 
   /**
@@ -935,12 +935,12 @@ class DATE_TIME extends RAISABLE
    * @var integer
    *  @access private
    */
-  var $_php_time = Date_time_unassigned;
+  protected $_php_time = Date_time_unassigned;
   /**
    * @var string
    *  @access private
    */
-  var $_iso_time = Date_time_unassigned;
+  protected $_iso_time = Date_time_unassigned;
   /**
    * Context-specific toolkit.
    * May be empty.
@@ -949,7 +949,7 @@ class DATE_TIME extends RAISABLE
    * @var DATE_TIME_TOOLKIT
    * @access private
    */
-  var $_toolkit;
+  protected $_toolkit;
 }
 
 /**
@@ -1228,7 +1228,7 @@ class TIME_INTERVAL
    * @var integer
    * @access private
    */
-  var $_total_seconds;
+  protected $_total_seconds;
 }
 
 /**
@@ -1237,7 +1237,7 @@ class TIME_INTERVAL
  * @return DATE_TIME_TOOLKIT
  * @access private
  */
-function &global_date_time_toolkit ()
+function global_date_time_toolkit ()
 {
   global $_g_date_time_toolkit;
   if (! isset ($_g_date_time_toolkit))

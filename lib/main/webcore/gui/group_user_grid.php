@@ -51,32 +51,32 @@ class GROUP_USER_GRID extends STANDARD_GRID
   /**
    * @var string
    */
-  var $object_name = 'user';
+  public $object_name = 'user';
   /**
    * @var boolean
    */
-  var $show_separator = FALSE;
+  public $show_separator = FALSE;
   /**
    * @var boolean
    */
-  var $even_columns = FALSE;
+  public $even_columns = FALSE;
   /**
    * @var boolean
    */
-  var $centered = TRUE;
+  public $centered = TRUE;
   /**
    * @var string
    */
-  var $width = '';
+  public $width = '';
   /**
    * @var integer
    */
-  var $padding = 1;
+  public $padding = 1;
 
   /**
-   * @param GROUP &$group Show users from this group.
+   * @param GROUP $group Show users from this group.
    */
-  function GROUP_USER_GRID (&$group)
+  function GROUP_USER_GRID ($group)
   {
     GRID::GRID ($group->app);
     $this->_group_id = $group->id;
@@ -84,10 +84,10 @@ class GROUP_USER_GRID extends STANDARD_GRID
   }
 
   /**
-   * @param USER &$obj
+   * @param USER $obj
     * @access private
     */
-  function _draw_box (&$obj)
+  function _draw_box ($obj)
   {
     echo $obj->title_as_link ();
 
@@ -146,6 +146,6 @@ class GROUP_USER_GRID extends STANDARD_GRID
    * @var CONTROLS_RENDERER
    * @access private
    */
-  var $_controls_renderer;
+  protected $_controls_renderer;
 }
 ?>

@@ -50,10 +50,10 @@ class ALBUM_ENTRY_GRID extends CONTENT_OBJECT_GRID
 {
   /**
    * Render the grid itself.
-   * @param array[object] &$objs
+   * @param array[object] $objs
    * @access private
    */
-  function _draw (&$objs)
+  function _draw ($objs)
   {
     if (sizeof ($objs))
     {
@@ -67,11 +67,11 @@ class ALBUM_ENTRY_GRID extends CONTENT_OBJECT_GRID
 
   /**
    * Used to draw the entry's title in each cell.
-   * @param PICTURE &$obj
+   * @param PICTURE $obj
    * @return TITLE_FORMATTER
    * @access private
    */
-  function title_formatter (&$obj)
+  function title_formatter ($obj)
   {
     $Result = parent::title_formatter ($obj);
 
@@ -87,7 +87,7 @@ class ALBUM_ENTRY_GRID extends CONTENT_OBJECT_GRID
    * @var URL
    * @access private
    */
-  var $_url;
+  protected $_url;
 }
 
 ?>

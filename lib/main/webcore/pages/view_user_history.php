@@ -31,7 +31,7 @@ http://www.earthli.com/software/webcore
   if ($name)
   {
     $user_query = $App->user_query ();
-    $user =& $user_query->object_at_name ($name);
+    $user = $user_query->object_at_name ($name);
   }
 
   if (isset ($user) && $App->login->is_allowed (Privilege_set_user, Privilege_view_history, $user))
@@ -43,7 +43,7 @@ http://www.earthli.com/software/webcore
     $Page->location->add_object_link ($user);
 
     $history_item_query = $user->history_item_query ();
-    $obj =& $user;
+    $obj = $user;
 
     include_once ('webcore/pages/view_history.php');
   }

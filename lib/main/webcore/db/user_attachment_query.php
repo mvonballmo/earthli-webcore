@@ -53,7 +53,7 @@ class USER_ATTACHMENT_QUERY extends USER_ENTRY_SUB_OBJECT_QUERY
    * SQL alias for the "main" table.
    * @var string
    */
-  var $alias = 'att';
+  public $alias = 'att';
 
   /**
    * Apply default restrictions and tables.
@@ -99,11 +99,11 @@ class USER_ATTACHMENT_QUERY extends USER_ENTRY_SUB_OBJECT_QUERY
 
   /**
    * Called from {@link _prepare_object()}.
-   * @param ATTACHMENT &$obj
-   * @param ENTRY &$entry
+   * @param ATTACHMENT $obj
+   * @param ENTRY $entry
    * @access private
    */
-  function _attach_entry_to_object (&$obj, &$entry)
+  function _attach_entry_to_object ($obj, $entry)
   {
     $obj->set_host ($entry);
   }
@@ -113,7 +113,7 @@ class USER_ATTACHMENT_QUERY extends USER_ENTRY_SUB_OBJECT_QUERY
    * @var string
    * @access private
    */
-  var $_privilege_set = Privilege_set_attachment;
+  protected $_privilege_set = Privilege_set_attachment;
 }
 
 /**
@@ -149,10 +149,10 @@ class USER_MULTI_TYPE_ATTACHMENT_QUERY extends USER_ATTACHMENT_QUERY
    * Set the type for the entry.
    * This allows the query to determine which type of object to create for each
    * row in the result.
-   * @param ENTRY &$entry The entry whose properties should be set.
+   * @param ENTRY $entry The entry whose properties should be set.
    * @access private
    */
-  function _prepare_entry (&$entry)
+  function _prepare_entry ($entry)
   {
     parent::_prepare_entry ($entry);
     $entry->type = $this->db->f ('entry_type');

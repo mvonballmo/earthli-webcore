@@ -52,15 +52,15 @@ class SIMPLE_PICTURE_GRID extends STANDARD_GRID
   /**
    * @var string
    */
-  var $object_name = 'Picture';
+  public $object_name = 'Picture';
   /**
    * @var integer
    */
-  var $spacing = 4;
+  public $spacing = 4;
   /**
    * @var boolean
    */
-  var $show_separator = FALSE;
+  public $show_separator = FALSE;
 
   /**
    * Draw JavaScripts used by this grid.
@@ -76,10 +76,10 @@ class SIMPLE_PICTURE_GRID extends STANDARD_GRID
   }
 
   /**
-   * @param PICTURE &$obj
+   * @param PICTURE $obj
    * @access private
    */
-  function _draw_box (&$obj)
+  function _draw_box ($obj)
   {
     $f = $obj->date->formatter ();
     $f->clear_flags ();

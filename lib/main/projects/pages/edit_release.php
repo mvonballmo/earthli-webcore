@@ -28,12 +28,12 @@ http://www.earthli.com/software/webcore/projects
 
   $id = read_var ('id');
   $folder_query = $App->login->folder_query ();
-  $folder =& $folder_query->folder_for_release_at_id ($id);
+  $folder = $folder_query->folder_for_release_at_id ($id);
 
   if (isset ($folder))
   {
     $release_query = $folder->release_query ();
-    $rel =& $release_query->object_at_id ($id);
+    $rel = $release_query->object_at_id ($id);
   }
 
   if (isset ($rel) && $App->login->is_allowed (Privilege_set_release, Privilege_modify, $rel))

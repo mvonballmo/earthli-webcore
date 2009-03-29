@@ -57,29 +57,29 @@ class LAYER extends WEBCORE_OBJECT
    * Must be unique to the page.
     * @var string
     */
-  var $name = 'layer';
+  public $name = 'layer';
   /**
    * Name of a CSS class used as the style for the layer.
     * @var string
     */
-  var $CSS_class = '';
+  public $CSS_class = '';
   /**
    * Is this layer initially displayed?
     * @var boolean
     */
-  var $visible = FALSE;
+  public $visible = FALSE;
   /**
    * CSS style used for the top margin of the layer.
    * Overrides that specified in the {@link $CSS_class} property.
    * @var string
    */
-  var $margin_top = '';
+  public $margin_top = '';
   /**
    * CSS style used for the left margin of the layer.
    * Overrides that specified in the {@link $CSS_class} property.
    * @var string
    */
-  var $margin_left = '';
+  public $margin_left = '';
 
   /**
    * The toggle for this layer in HTML.

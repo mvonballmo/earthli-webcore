@@ -27,7 +27,7 @@ http://www.earthli.com/software/webcore/albums
 ****************************************************************************/
 
   $folder_query = $App->login->folder_query ();
-  $folder =& $folder_query->object_at_id (read_var ('id'));
+  $folder = $folder_query->object_at_id (read_var ('id'));
   
   if (isset ($folder) && $App->login->is_allowed (Privilege_set_folder, Privilege_view, $folder))
   {
@@ -38,11 +38,11 @@ http://www.earthli.com/software/webcore/albums
      */
      
     $folders = $folder_query->tree ($folder->id, $folder->root_id);
-    $folder =& $folder_query->object_at_id ($folder->id);
+    $folder = $folder_query->object_at_id ($folder->id);
 
     $class_name = $App->final_class_name ('FOLDER_PANEL_MANAGER', 'webcore/gui/panel.php');
     $panel_manager = new $class_name ($folder);
-    $panel =& $panel_manager->selected_panel ();
+    $panel = $panel_manager->selected_panel ();
 
     $Page->location->add_folder_text ($folder, 'panel=' . $panel_manager->selected_panel_id);
     $Page->title->add_object ($folder);
@@ -65,7 +65,7 @@ http://www.earthli.com/software/webcore/albums
     <div class="side-bar-body">
       <?php
         $renderer = $folder->handler_for (Handler_html_renderer);
-        $options =& $renderer->options ();
+        $options = $renderer->options ();
         $options->show_as_summary = TRUE;
         $options->show_users = FALSE;
         $renderer->display ($folder);
@@ -79,7 +79,7 @@ http://www.earthli.com/software/webcore/albums
           /* Make a copy (not a reference). */
           $tree = $App->make_tree_renderer ();
           include_once ('webcore/gui/folder_tree_node_info.php');
-          $tree->node_info = & new FOLDER_TREE_NODE_INFO ($App);
+          $tree->node_info = new FOLDER_TREE_NODE_INFO ($App);
           $tree->node_info->page_args = read_vars (array ('panel', 'time_frame'));
           $tree->display ($folders);
         }

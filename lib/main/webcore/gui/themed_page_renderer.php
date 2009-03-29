@@ -56,7 +56,7 @@ class THEMED_PAGE_RENDERER extends PAGE_RENDERER
     $page = $this->page;
     $theme = $page->theme;
 
-    $res =& $page->resources ();
+    $res = $page->resources ();
     $styles [] = $res->resolve_file ('{styles}core/core');
     if (! $theme->dont_apply_to_forms)
     {

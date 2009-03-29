@@ -50,10 +50,10 @@ class CHANGE_NAVIGATOR extends ENTRY_NAVIGATOR
 {
   /**
    * Modify the query to navigate.
-   * @param QUERY &$query
+   * @param QUERY $query
    * @access private
    */
-  function _adjust_query (&$query)
+  function _adjust_query ($query)
   {
     parent::_adjust_query ($query);
     $query->add_select ('chng.number, entry.kind');
@@ -61,12 +61,12 @@ class CHANGE_NAVIGATOR extends ENTRY_NAVIGATOR
   }
 
   /**
-   * @param CHANGE &$obj Retrieve the title from this change.
+   * @param CHANGE $obj Retrieve the title from this change.
    * @param boolean $selected Is this the current item in the list?
    * @return string
    * @access private
    */
-  function _text_for_list (&$obj)
+  function _text_for_list ($obj)
   {
     return $obj->kind_icon ('16px') . ' ' . parent::_text_for_list ($obj);
   }

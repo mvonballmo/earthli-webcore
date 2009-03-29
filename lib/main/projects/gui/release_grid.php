@@ -51,45 +51,45 @@ class RELEASE_GRID extends CONTENT_OBJECT_GRID
   /**
    * @var string
    */
-  var $box_style = 'object-in-list';
+  public $box_style = 'object-in-list';
   /**
    * @var string
    */
-  var $object_name = 'Release';
+  public $object_name = 'Release';
   /**
    * @var integer
    */
-  var $spacing = 4;
+  public $spacing = 4;
   /**
    * @var boolean
    */
-  var $even_columns = FALSE;
+  public $even_columns = FALSE;
   /**
    * @var boolean
    */
-  var $show_separator = FALSE;
+  public $show_separator = FALSE;
   /**
    * @var boolean Show creator/modifier with releases?
    */
-  var $show_user = TRUE;
+  public $show_user = TRUE;
   /**
    * @var boolean Show project for release?
    */
-  var $show_folder = FALSE;
+  public $show_folder = FALSE;
   /**
    * @var boolean Show branch for release?
    */
-  var $show_branch = FALSE;
+  public $show_branch = FALSE;
 
   /**
-   * @param RELEASE &$obj
+   * @param RELEASE $obj
     * @access private
     */
-  function _draw_box (&$obj)
+  function _draw_box ($obj)
   {
-    $folder =& $obj->parent_folder ();
-    $branch =& $obj->branch ();
-    $creator =& $obj->creator ();
+    $folder = $obj->parent_folder ();
+    $branch = $obj->branch ();
+    $creator = $obj->creator ();
 ?>
 <div style="margin-left: 24px">
   <?php
@@ -140,7 +140,7 @@ class RELEASE_GRID extends CONTENT_OBJECT_GRID
 
   if (! $obj->time_created->equals ($obj->time_modified))
   {
-    $modifier =& $obj->modifier ();
+    $modifier = $obj->modifier ();
     echo '<br>Updated ';
     if ($this->show_user)
     {

@@ -37,7 +37,7 @@ http://www.earthli.com/software/webcore
   if ($last_page && $id)
   {
     $entry_query = $App->login->all_entry_query ();
-    $entry =& $entry_query->object_at_id ($id);
+    $entry = $entry_query->object_at_id ($id);
   }
   
   if (isset ($entry))

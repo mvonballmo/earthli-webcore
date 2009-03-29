@@ -51,9 +51,9 @@ require_once ('webcore/cmd/commands.php');
 class FOLDER_COMMANDS extends COMMANDS
 {
   /**
-   * @param FOLDER &$folder Return commands for this object.
+   * @param FOLDER $folder Return commands for this object.
    */
-  function FOLDER_COMMANDS (&$folder)
+  function FOLDER_COMMANDS ($folder)
   {
     COMMANDS::COMMANDS ($folder->app);
 
@@ -81,10 +81,10 @@ class FOLDER_COMMANDS extends COMMANDS
 
   /**
    * Add commands that edit the folder.
-   * @param FOLDER &$folder Show commands for this folder.
+   * @param FOLDER $folder Show commands for this folder.
    * @access private
    */
-  function _add_editors (&$folder)
+  function _add_editors ($folder)
   {
     $cmd = $this->make_command ();
     $cmd->id = 'edit';
@@ -118,11 +118,11 @@ class FOLDER_COMMANDS extends COMMANDS
 
   /**
    * Add buttons that provide views on the folder.
-   * @param FOLDER &$folder
-   * @param USER &$creator Folder belongs to this user (also available as $folder->creator ()).
+   * @param FOLDER $folder
+   * @param USER $creator Folder belongs to this user (also available as $folder->creator ()).
    * @access private
    */
-  function _add_viewers (&$folder)
+  function _add_viewers ($folder)
   {
     $cmd = $this->make_command ();
     $cmd->id = 'security';
@@ -162,10 +162,10 @@ class FOLDER_COMMANDS extends COMMANDS
 
   /**
    * Add commands that create items in the folder.
-   * @param FOLDER &$folder
+   * @param FOLDER $folder
    * @access private
    */
-  function _add_creators (&$folder)
+  function _add_creators ($folder)
   {
     $cmd = $this->make_command ();
     $cmd->id = 'new_entry';

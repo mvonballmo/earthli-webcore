@@ -51,22 +51,22 @@ class FOLDER_USER_PERMISSIONS_CREATE_FORM extends FOLDER_PERMISSIONS_FORM
   /**
    * @var string
    */
-  var $button = 'Add';
+  public $button = 'Add';
   /**
    * @var string
    */
-  var $button_icon = '{icons}buttons/add';
+  public $button_icon = '{icons}buttons/add';
 
   /**
-   * @param FOLDER &$folder Folder for which permissions are defined.
-    * @param USER_QUERY &$user_query Retrieve user with this query.
+   * @param FOLDER $folder Folder for which permissions are defined.
+    * @param USER_QUERY $user_query Retrieve user with this query.
     */
-  function FOLDER_USER_PERMISSIONS_CREATE_FORM (&$folder, &$user_query)
+  function FOLDER_USER_PERMISSIONS_CREATE_FORM ($folder, $user_query)
   {
     FOLDER_PERMISSIONS_FORM::FOLDER_PERMISSIONS_FORM ($folder->app);
 
-    $this->_folder =& $folder;
-    $this->_user_query =& $user_query;
+    $this->_folder = $folder;
+    $this->_user_query = $user_query;
 
     $field = new TITLE_FIELD ();
     $field->id = 'title';
@@ -77,10 +77,10 @@ class FOLDER_USER_PERMISSIONS_CREATE_FORM extends FOLDER_PERMISSIONS_FORM
 
   /**
    * Called after fields are validated.
-    * @param PERMISSIONS &$obj
+    * @param PERMISSIONS $obj
     * @access private
     */
-  function _post_validate (&$obj)
+  function _post_validate ($obj)
   {
     parent::_post_validate ($obj);
 
@@ -88,7 +88,7 @@ class FOLDER_USER_PERMISSIONS_CREATE_FORM extends FOLDER_PERMISSIONS_FORM
     {
       // the name validated OK (specifically, it is not empty)
       
-      $this->_user =& $this->_user_query->object_with_field ('title', $this->value_for ('title'));
+      $this->_user = $this->_user_query->object_with_field ('title', $this->value_for ('title'));
 
       if (! $this->_user)
       {
@@ -97,8 +97,8 @@ class FOLDER_USER_PERMISSIONS_CREATE_FORM extends FOLDER_PERMISSIONS_FORM
 
       if (! $this->num_errors ('title'))
       {
-        $security =& $this->_folder->security_definition ();
-        $user =& $security->user_permissions_at_id ($this->_user->id);
+        $security = $this->_folder->security_definition ();
+        $user = $security->user_permissions_at_id ($this->_user->id);
         if (isset ($user))
         {
           $this->record_error ('title', "That user already has permissions in this folder.");
@@ -109,10 +109,10 @@ class FOLDER_USER_PERMISSIONS_CREATE_FORM extends FOLDER_PERMISSIONS_FORM
 
   /**
    * Store the form's values to this set of permissions.
-    * @param PERMISSIONS &$obj
+    * @param PERMISSIONS $obj
     * @access private
     */
-  function commit (&$obj)
+  function commit ($obj)
   {
     $obj->ref_id = $this->_user->id;
     $obj->kind = Privilege_kind_user;
@@ -146,12 +146,12 @@ class FOLDER_USER_PERMISSIONS_CREATE_FORM extends FOLDER_PERMISSIONS_FORM
   }
 
   /**
-   * @param FORM_RENDERER &$renderer
-   * @param PERMISSIONS_FORMATTER &$formatter
+   * @param FORM_RENDERER $renderer
+   * @param PERMISSIONS_FORMATTER $formatter
    * @access private
    * @abstract
    */
-  function _draw_permission_controls (&$renderer, &$formatter)
+  function _draw_permission_controls ($renderer, $formatter)
   {
     $options = new FORM_TEXT_CONTROL_OPTIONS ();
     $options->width = '20em';

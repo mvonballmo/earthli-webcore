@@ -51,41 +51,41 @@ class ATTACHMENT_GRID extends STANDARD_GRID
   /**
    * @var string
    */
-  var $box_style = 'chart';
+  public $box_style = 'chart';
   /**
    * @var integer
    */
-  var $spacing = '5';
+  public $spacing = '5';
   /**
    * @var boolean
    */
-  var $show_separator = FALSE;
+  public $show_separator = FALSE;
   /**
    * @var string
    */
-  var $object_name = 'Attachment';
+  public $object_name = 'Attachment';
   /**
    * @var string
    */
-  var $width = '';
+  public $width = '';
   /**
    * @var boolean
    */
-  var $centered = TRUE;
+  public $centered = TRUE;
   /**
    * @var boolean
    */
-  var $even_columns = TRUE;
+  public $even_columns = TRUE;
   /**
    * @var string
    */
-  var $last_page;
+  public $last_page;
 
   /**
-   * @param USER &$obj
+   * @param USER $obj
     * @access private
     */
-  function _draw_box (&$obj)
+  function _draw_box ($obj)
   {
 ?>
 <div style="text-align: center">

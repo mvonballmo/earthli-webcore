@@ -51,36 +51,36 @@ class JOURNAL_GRID extends ALBUM_ENTRY_GRID
   /**
    * @var string
    */
-  var $object_name = 'Journal';
+  public $object_name = 'Journal';
   /**
    * @var string
    */
-  var $box_style = 'object-in-list';
+  public $box_style = 'object-in-list';
   /**
    * @var integer
    */
-  var $spacing = 2;
+  public $spacing = 2;
   /**
    * @var boolean
    */
-  var $show_separator = FALSE;
+  public $show_separator = FALSE;
   /**
    * @var boolean
    */
-  var $show_user = TRUE;
+  public $show_user = TRUE;
   /**
    * @var boolean
    */
-  var $show_folder = FALSE;
+  public $show_folder = FALSE;
 
   /**
-   * @param JOURNAL &$obj
+   * @param JOURNAL $obj
     * @access private
     */
-  function _draw_box (&$obj)
+  function _draw_box ($obj)
   {
-    $folder =& $obj->parent_folder ();
-    $creator =& $obj->creator ();
+    $folder = $obj->parent_folder ();
+    $creator = $obj->creator ();
 ?>
   <div class="info-box-top">
     <?php
@@ -107,7 +107,7 @@ class JOURNAL_GRID extends ALBUM_ENTRY_GRID
   </div>
   <div class="description">
     <?php
-      $munger =& $obj->html_formatter ();
+      $munger = $obj->html_formatter ();
       $munger->max_visible_output_chars = 250;
       echo $obj->description_as_html ($munger);
     ?>
@@ -133,14 +133,14 @@ class JOURNAL_SUMMARY_GRID extends ENTRY_SUMMARY_GRID
   /**
    * @var string
    */
-  var $object_name = 'Journal';
+  public $object_name = 'Journal';
 
   /**
    * Show search details for an object.
-   * @param JOURNAL &$obj
+   * @param JOURNAL $obj
    * @access private
    */
-  function _echo_details (&$obj)
+  function _echo_details ($obj)
   {
     parent::_echo_details ($obj);
 ?>
@@ -157,10 +157,10 @@ class JOURNAL_SUMMARY_GRID extends ENTRY_SUMMARY_GRID
 
   /**
    * Return the block of text to summarize.
-   * @param OBJECT_IN_FOLDER &$obj
+   * @param OBJECT_IN_FOLDER $obj
    * @access private
    */
-  function _text_to_summarize (&$obj)
+  function _text_to_summarize ($obj)
   {
     return $obj->description . ' ' . $obj->weather;
   }  

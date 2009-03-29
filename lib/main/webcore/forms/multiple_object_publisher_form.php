@@ -51,29 +51,29 @@ class MULTIPLE_OBJECT_PUBLISHER_FORM extends MULTIPLE_OBJECT_ACTION_FORM
 {
   /**
    * Execute action for a single folder.
-   * @param FOLDER &$fldr
+   * @param FOLDER $fldr
    * @access private
    */
-  function _folder_run (&$fldr)
+  function _folder_run ($fldr)
   {
   }
 
   /**
    * Execute action for a single entry
-   * @param ENTRY &$entry
+   * @param ENTRY $entry
    * @access private
    */
-  function _entry_run (&$entry)
+  function _entry_run ($entry)
   {
     $entry->set_state (Visible, TRUE);
   }
 
   /**
    * Draw a confirmation message for this action.
-   * @param FORM_RENDERER &$renderer
+   * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_message (&$renderer)
+  function _draw_message ($renderer)
   {
     $renderer->draw_text_row ('', 'Are you sure you want to publish ' . $this->object_list->description () . '?');
     $renderer->draw_separator ();

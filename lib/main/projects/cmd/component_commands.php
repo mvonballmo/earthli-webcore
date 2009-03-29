@@ -51,9 +51,9 @@ require_once ('webcore/cmd/commands.php');
 class COMPONENT_COMMANDS extends COMMANDS
 {
   /**
-   * @param COMPONENT &$comp Configure commands for this object.
+   * @param COMPONENT $comp Configure commands for this object.
    */
-  function COMPONENT_COMMANDS (&$comp)
+  function COMPONENT_COMMANDS ($comp)
   {
     COMMANDS::COMMANDS ($comp->app);
 

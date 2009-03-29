@@ -49,10 +49,10 @@ require_once ('webcore/obj/user.php');
 class PROJECT_USER extends USER
 {
   /**
-   * @param PROJECT &$parent Parent of this project. If empty, new project is at the root.
+   * @param PROJECT $parent Parent of this project. If empty, new project is at the root.
     * @return PROJECT Make a new project.
     */
-  function new_folder (&$parent)
+  function new_folder ($parent)
   {
     $Result = parent::new_folder ($parent);
 

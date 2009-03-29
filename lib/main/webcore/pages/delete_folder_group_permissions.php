@@ -27,15 +27,15 @@ http://www.earthli.com/software/webcore
 ****************************************************************************/
 
   $folder_query = $App->login->folder_query ();
-  $folder =& $folder_query->object_at_id (read_var ('id'));
+  $folder = $folder_query->object_at_id (read_var ('id'));
   
   if (isset ($folder))
   {
     $security = $folder->security_definition ();
-    $perm =& $security->group_permissions_at_id (read_var ('group_id'));
+    $perm = $security->group_permissions_at_id (read_var ('group_id'));
     if ($perm)
     {
-      $group =& $perm->group ();
+      $group = $perm->group ();
     }
   }
 

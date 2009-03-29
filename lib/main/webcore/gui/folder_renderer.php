@@ -50,15 +50,15 @@ class FOLDER_RENDERER extends CONTENT_OBJECT_RENDERER
 {
   /**
    * Outputs the object as HTML.
-   * @param FOLDER &$obj
+   * @param FOLDER $obj
    * @access private
    */
-  function _display_as_html (&$obj)
+  function _display_as_html ($obj)
   {
     $use_table = ! $this->_options->show_as_summary && $obj->icon_url;
     if ($use_table)
     {
-      $box =& $this->context->make_box_renderer ();
+      $box = $this->context->make_box_renderer ();
       $box->start_column_set ();
       $box->new_column ('padding-right: .5em');  
       echo $obj->icon_as_html ('50px');
@@ -76,15 +76,15 @@ class FOLDER_RENDERER extends CONTENT_OBJECT_RENDERER
 
   /**
    * Shows content (independent of chosen icon).
-   * @param FOLDER &$obj
+   * @param FOLDER $obj
    */
-  function _echo_html_content (&$obj)
+  function _echo_html_content ($obj)
   {
     $this->_echo_html_user_information ($obj);
     $this->_echo_html_descriptions ($obj);
   }
 
-  function _echo_html_descriptions (&$obj)
+  function _echo_html_descriptions ($obj)
   {
     if ($obj->summary && $this->_options->show_as_summary)
     {
@@ -98,10 +98,10 @@ class FOLDER_RENDERER extends CONTENT_OBJECT_RENDERER
 
   /**
    * Shows the subscription status for this object.
-   * @param FOLDER &$obj
+   * @param FOLDER $obj
    * @access private
    */
-  function _echo_subscribe_status (&$obj)
+  function _echo_subscribe_status ($obj)
   {
     if (! $obj->is_root ())
     {

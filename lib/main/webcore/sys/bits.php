@@ -114,7 +114,7 @@ class BITS
    * @var integer
    * @access private
    */
-  var $bits = 0;
+  public $bits = 0;
 }
 
 ?>

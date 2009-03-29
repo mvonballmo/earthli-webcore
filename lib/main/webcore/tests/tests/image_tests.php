@@ -51,7 +51,7 @@ require_once ('webcore/util/image.php');
  */
 class IMAGE_TEST_TASK extends TEST_TASK
 {
-  function _set_image (&$img, $f, $include_exif = FALSE, $acceptable_time = 10)
+  function _set_image ($img, $f, $include_exif = FALSE, $acceptable_time = 10)
   {
     $this->env->profiler->restart ('image.load');
     $img->set_file ($f, $include_exif);

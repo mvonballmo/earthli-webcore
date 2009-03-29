@@ -53,22 +53,22 @@ class LOGGABLE extends WEBCORE_OBJECT
    * Messages are logged to this chain of {@link LOGGER}s.
    * @var LOGGER_CONTAINER
    */
-  var $logs;
+  public $logs;
   /**
    * {@link record()} uses this channel, by default.
    * @var string
    */
-  var $default_channel = Msg_channel_default;
+  public $default_channel = Msg_channel_default;
   /**
    * {@link record()} uses this type, by default.
    * @var string
    */
-  var $default_type = Msg_type_debug_info;
+  public $default_type = Msg_type_debug_info;
   
   /**
-   * @param CONTEXT &$context
+   * @param CONTEXT $context
    */
-  function LOGGABLE (&$context)
+  function LOGGABLE ($context)
   {
     WEBCORE_OBJECT::WEBCORE_OBJECT ($context);
     $this->logs = new LOGGER_CONTAINER ();

@@ -49,9 +49,9 @@ require_once ('webcore/forms/send_mail_form.php');
 class SUBMIT_SUPPORT_FORM extends SEND_MAIL_FORM
 {
   /**
-   * @param CONTEXT &$context
+   * @param CONTEXT $context
    */
-  function SUBMIT_SUPPORT_FORM (&$context)
+  function SUBMIT_SUPPORT_FORM ($context)
   {
     SEND_MAIL_FORM::SEND_MAIL_FORM ($context);
 
@@ -59,10 +59,10 @@ class SUBMIT_SUPPORT_FORM extends SEND_MAIL_FORM
     $this->set_required ('sender_email', FALSE);
     $this->set_required ('message', TRUE);
 
-    $field =& $this->field_at ('sender_email');
+    $field = $this->field_at ('sender_email');
     $field->description = 'Optional, but lets us follow up if we have any questions.';
     
-    $field =& $this->field_at ('message');
+    $field = $this->field_at ('message');
     $field->description = 'Briefly describe the question or problem you\'re having.';
   }
 
@@ -75,10 +75,10 @@ class SUBMIT_SUPPORT_FORM extends SEND_MAIL_FORM
   }
 
   /**
-   * @param object &$obj Get renderer for this object.
+   * @param object $obj Get renderer for this object.
    * @access private
    */
-  function _make_obj_renderer (&$obj)
+  function _make_obj_renderer ($obj)
   {
     return null;
   }

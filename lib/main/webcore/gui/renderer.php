@@ -88,7 +88,7 @@ class RENDERER extends WEBCORE_OBJECT
 
   /**
    * Format a {@link DATE_TIME} as plain text.
-   * @param DATE_TIME &$t
+   * @param DATE_TIME $t
    * @param integer $type Override the default formatting type.
    * @return string
    * @access private
@@ -122,14 +122,14 @@ class TEXT_TABLE_RENDERER
    * If true, labels are aligned to the right.
    * @var @boolean
    */
-  var $right_aligned = TRUE;
+  public $right_aligned = TRUE;
 
   /**
-   * @param RENDERER &$renderer Use this renderer to display the finished table.
+   * @param RENDERER $renderer Use this renderer to display the finished table.
    */
-  function TEXT_TABLE_RENDERER (&$renderer)
+  function TEXT_TABLE_RENDERER ($renderer)
   {
-    $this->_renderer =& $renderer;
+    $this->_renderer = $renderer;
   }
 
   /**
@@ -190,13 +190,13 @@ class TEXT_TABLE_RENDERER
    * @var integer
    * @access private
    */
-  var $_max_label_length = 0;
+  protected $_max_label_length = 0;
   /**
    * List of label/column pairs in the table.
    * @var array[string][string]
    * @access private
    */
-  var $_items;
+  protected $_items;
 }
 
 ?>

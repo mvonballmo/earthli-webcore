@@ -53,7 +53,7 @@ class USER_ENTRY_QUERY extends OBJECT_IN_FOLDER_QUERY
    * SQL alias for the "main" table.
    * @var string
    */
-  var $alias = 'entry';
+  public $alias = 'entry';
 
   /**
    * Apply default restrictions and tables.
@@ -129,10 +129,10 @@ class USER_ENTRY_QUERY extends OBJECT_IN_FOLDER_QUERY
 
   /**
    * Perform any setup needed on each returned object.
-   * @param ENTRY &$obj
+   * @param ENTRY $obj
    * @access private
    */
-  function _prepare_object (&$obj)
+  function _prepare_object ($obj)
   {
     $obj->set_parent_folder ($this->login->folder_at_id ($this->db->f ('folder_id')));
   }
@@ -141,13 +141,13 @@ class USER_ENTRY_QUERY extends OBJECT_IN_FOLDER_QUERY
    * @var USER_FOLDER_QUERY
    * @access private
    */
-  var $_folder_query;
+  protected $_folder_query;
   /**
    * Name of the default permission set to use.
    * @var string
    * @access private
    */
-  var $_privilege_set = Privilege_set_entry;
+  protected $_privilege_set = Privilege_set_entry;
 }
 
 /**
@@ -160,9 +160,9 @@ class USER_ENTRY_QUERY extends OBJECT_IN_FOLDER_QUERY
 class USER_MULTI_ENTRY_QUERY extends USER_ENTRY_QUERY
 {
   /**
-   * @param ALBUM_APPLICATION &$app Main application.
+   * @param ALBUM_APPLICATION $app Main application.
    */
-  function USER_MULTI_ENTRY_QUERY (&$app)
+  function USER_MULTI_ENTRY_QUERY ($app)
   {
     USER_ENTRY_QUERY::USER_ENTRY_QUERY ($app);
     $this->set_type ('');

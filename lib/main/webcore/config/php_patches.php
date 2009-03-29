@@ -157,10 +157,10 @@ function print_r_capture ($mixed)
  * whether the index is valid for the given array.
  * @param array $array Original array
  * @param integer $index Index into array
- * @param mixed &$value Value to insert at 'index'
+ * @param mixed $value Value to insert at 'index'
  * @return array
  */
-function array_insert (&$array, $index, &$value)
+function array_insert ($array, $index, $value)
 {
   $array = array_merge (array_slice ($array, 0, $index), array ($value), array_slice ($array, $index));
 }

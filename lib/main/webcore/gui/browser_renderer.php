@@ -51,14 +51,14 @@ class BROWSER_RENDERER extends OBJECT_RENDERER
   /**
    * @var boolean
    */
-  var $show_user_agent = FALSE;
+  public $show_user_agent = FALSE;
   
   /**
    * Outputs the object as HTML.
-   * @param BROWSER &$obj
+   * @param BROWSER $obj
    * @access private
    */
-  function _display_as_html (&$obj)
+  function _display_as_html ($obj)
   {
     $browser = $obj;
     
@@ -133,10 +133,10 @@ class BROWSER_RENDERER extends OBJECT_RENDERER
 
   /**
    * Outputs the object as plain text.
-   * @param BROWSER &$obj
+   * @param BROWSER $obj
    * @access private
    */
-  function _display_as_plain_text (&$obj)
+  function _display_as_plain_text ($obj)
   {
     $browser = $obj;
     

@@ -28,23 +28,23 @@ http://www.earthli.com/software/webcore
 
   $id = read_var ('id');
   $folder_query = $App->login->folder_query ();
-  $folder =& $folder_query->folder_for_comment_at_id ($id);
+  $folder = $folder_query->folder_for_comment_at_id ($id);
 
   if (isset ($folder))
   {
     $entry_query = $folder->entry_query ();
-    $entry =& $entry_query->object_for_comment_at_id ($id);
+    $entry = $entry_query->object_for_comment_at_id ($id);
 
     if (isset ($entry))
     {
       $com_query = $entry->comment_query ();
-      $comment =& $com_query->object_at_id ($id);
+      $comment = $com_query->object_at_id ($id);
 
       if (isset ($comment))
       {
         if ($comment->parent_id)
         {
-          $parent =& $com_query->object_at_id ($comment->parent_id);
+          $parent = $com_query->object_at_id ($comment->parent_id);
         }
       }
     }
@@ -64,11 +64,11 @@ http://www.earthli.com/software/webcore
     {
       if (isset ($parent))
       {
-        $prev =& $parent;
+        $prev = $parent;
       }
       else
       {
-        $prev =& $entry;
+        $prev = $entry;
       }
 
       $form->add_preview ($prev, 'In reply to: ' . $prev->title_as_html (), ! $form->previewing ());

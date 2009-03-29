@@ -53,9 +53,9 @@ require_once ('webcore/cmd/commands.php');
 class USER_LIST_COMMANDS extends COMMANDS
 {
   /**
-   * @param APPLICATION &$app
+   * @param APPLICATION $app
    */
-  function USER_LIST_COMMANDS (&$app)
+  function USER_LIST_COMMANDS ($app)
   {
     COMMANDS::COMMANDS ($app);
 
@@ -106,9 +106,9 @@ class USER_LIST_COMMANDS extends COMMANDS
 class USER_MANAGEMENT_COMMANDS extends USER_LIST_COMMANDS
 {
   /**
-   * @param APPLICATION &$app
+   * @param APPLICATION $app
    */
-  function USER_MANAGEMENT_COMMANDS (&$app)
+  function USER_MANAGEMENT_COMMANDS ($app)
   {
     USER_LIST_COMMANDS::USER_LIST_COMMANDS ($app);
 

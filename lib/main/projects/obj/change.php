@@ -55,14 +55,14 @@ class CHANGE extends PROJECT_ENTRY
    * Always one more than the last change made.
    * @var integer
    */
-  var $number;
+  public $number;
   /**
    * Id of the job to which this change is attached.
    * Can be empty.
    * @var integer
    * @see PROJECT_ENTRY::job ()
    */
-  var $job_id;
+  public $job_id;
   /**
    * List of files associated with this change.
    * Can be empty. If non-empty, should be a newline-separated list. This is
@@ -70,20 +70,20 @@ class CHANGE extends PROJECT_ENTRY
    * files.
    * @var string
    */
-  var $files;
+  public $files;
 
   /**
    * Job associated with this change.
    * May be empty.
    * @return JOB
    */
-  function &job ()
+  function job ()
   {
     if (! isset ($this->_job))
     {
-      $fldr =& $this->parent_folder ();
+      $fldr = $this->parent_folder ();
       $job_query = $fldr->entry_query ();
-      $this->_job =& $job_query->object_at_id ($this->job_id);
+      $this->_job = $job_query->object_at_id ($this->job_id);
     }
 
     return $this->_job;
@@ -105,7 +105,7 @@ class CHANGE extends PROJECT_ENTRY
     */
   function files_as_html ()
   {
-    $munger =& $this->html_formatter ();
+    $munger = $this->html_formatter ();
     $munger->force_paragraphs = TRUE;
     return $this->_text_as_html ("<code>$this->files</code>", $munger);
   }
@@ -139,9 +139,9 @@ class CHANGE extends PROJECT_ENTRY
   }
 
   /**
-   * @param DATABASE &$db
+   * @param DATABASE $db
    */
-  function load (&$db)
+  function load ($db)
   {
     parent::load ($db);
     $this->number = $db->f ('number');
@@ -150,9 +150,9 @@ class CHANGE extends PROJECT_ENTRY
   }
 
   /**
-   * @param SQL_STORAGE &$storage Store values to this object.
+   * @param SQL_STORAGE $storage Store values to this object.
    */
-  function store_to (&$storage)
+  function store_to ($storage)
   {
     parent::store_to ($storage);
     $tname =$this->_secondary_table_name ();
@@ -174,10 +174,10 @@ class CHANGE extends PROJECT_ENTRY
   
   /**
    * Returns a new object which maps this change to the given branch.
-   * @param BRANCH &$branch
+   * @param BRANCH $branch
    * @return CHANGE_BRANCH_INFO
    */
-  function new_branch_info (&$branch)
+  function new_branch_info ($branch)
   {
     $Result = parent::new_branch_info ($branch);
     $Result->time_applied->set_now ();
@@ -252,11 +252,11 @@ class CHANGE extends PROJECT_ENTRY
 
   /**
    * Apply class-specific restrictions to this query.
-   * @param SUBSCRIPTION_QUERY &$query
-   * @param HISTORY_ITEM &$history_item Action that generated this request. May be empty.
+   * @param SUBSCRIPTION_QUERY $query
+   * @param HISTORY_ITEM $history_item Action that generated this request. May be empty.
    * @access private
    */
-  function _prepare_subscription_query (&$query, &$history_item)
+  function _prepare_subscription_query ($query, $history_item)
   {
     $query->restrict ('watch_entries > 0');
     $query->restrict_kinds (array (Subscribe_folder => $this->parent_folder_id ()
@@ -270,12 +270,12 @@ class CHANGE extends PROJECT_ENTRY
     * @var string
     * @access private
     */
-  var $type = 'change';
+  public $type = 'change';
   /**
    * @var JOB
    * @access private
    */
-  var $_job;
+  protected $_job;
 }
 
 /**
@@ -293,18 +293,18 @@ class CHANGE_BRANCH_INFO extends PROJECT_ENTRY_BRANCH_INFO
    * When was this change applied?
     * @var DATE_TIME
     */
-  var $time_applied;
+  public $time_applied;
   /**
    * Which user applied the change?
     * @var integer
     * @see CHANGE::applier()
     */
-  var $applier_id;
+  public $applier_id;
 
   /**
-   * @param CHANGE &$entry Branch info is attached to this job.
+   * @param CHANGE $entry Branch info is attached to this job.
    */
-  function CHANGE_BRANCH_INFO (&$entry)
+  function CHANGE_BRANCH_INFO ($entry)
   {
     PROJECT_ENTRY_BRANCH_INFO::PROJECT_ENTRY_BRANCH_INFO ($entry);
 
@@ -315,15 +315,15 @@ class CHANGE_BRANCH_INFO extends PROJECT_ENTRY_BRANCH_INFO
    * Who applied this change?
     * @return PROJECT_USER
     */
-  function &applier ()
+  function applier ()
   {
     return $this->app->user_at_id ($this->applier_id, FALSE, TRUE);
   }
 
   /**
-   * @param DATABASE &$db
+   * @param DATABASE $db
    */
-  function load (&$db)
+  function load ($db)
   {
     parent::load ($db);
     $this->time_applied->set_from_iso ($db->f ('branch_time_applied'));
@@ -341,10 +341,10 @@ class CHANGE_BRANCH_INFO extends PROJECT_ENTRY_BRANCH_INFO
   }
 
   /**
-   * @param SQL_STORAGE &$storage Store values to this object.
+   * @param SQL_STORAGE $storage Store values to this object.
     * @access private
     */
-  function store_to (&$storage)
+  function store_to ($storage)
   {
     parent::store_to ($storage);
     $tname = $this->_secondary_table_name ();
@@ -357,7 +357,7 @@ class CHANGE_BRANCH_INFO extends PROJECT_ENTRY_BRANCH_INFO
    * @var integer
    * @access private
    */
-  var $entry_to_branch_id;
+  public $entry_to_branch_id;
 }
 
 ?>

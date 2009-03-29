@@ -50,9 +50,9 @@ require_once ('webcore/forms/send_object_in_folder_form.php');
 class SEND_ATTACHMENT_FORM extends SEND_OBJECT_IN_FOLDER_FORM
 {
   /**
-   * @param APPLICATION &$app Main application.
+   * @param APPLICATION $app Main application.
    */
-  function SEND_ATTACHMENT_FORM (&$app)
+  function SEND_ATTACHMENT_FORM ($app)
   {
     SEND_OBJECT_IN_FOLDER_FORM::SEND_OBJECT_IN_FOLDER_FORM ($app);
 
@@ -65,9 +65,9 @@ class SEND_ATTACHMENT_FORM extends SEND_OBJECT_IN_FOLDER_FORM
 
   /**
    * Load initial properties from this object.
-   * @param ATTACHMENT &$obj
+   * @param ATTACHMENT $obj
    */
-  function load_from_object (&$obj)
+  function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
     $this->set_value ('type', $obj->type);

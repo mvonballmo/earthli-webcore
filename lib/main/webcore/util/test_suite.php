@@ -52,9 +52,9 @@ require_once ('webcore/obj/webcore_object.php');
 class TEST_SUITE extends WEBCORE_OBJECT
 {
   /**
-   * @param CONTEXT &$context
+   * @param CONTEXT $context
    */
-  function TEST_SUITE (&$context)
+  function TEST_SUITE ($context)
   {
     WEBCORE_OBJECT::WEBCORE_OBJECT ($context);
     $this->_load ();
@@ -109,7 +109,7 @@ class TEST_SUITE extends WEBCORE_OBJECT
    * @var array[string,string]
    * @access private
    */
-  var $_tests;
+  protected $_tests;
 }
 
 /**

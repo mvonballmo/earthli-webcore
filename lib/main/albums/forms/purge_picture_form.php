@@ -49,14 +49,14 @@ require_once ('webcore/forms/purge_form.php');
 class PURGE_PICTURE_FORM extends PURGE_OBJECT_FORM
 {
   /**
-   * @param FOLDER &$app Deleting content from this folder.
+   * @param FOLDER $app Deleting content from this folder.
    * @param string $set_name
    */
-  function PURGE_PICTURE_FORM (&$app)
+  function PURGE_PICTURE_FORM ($app)
   {
     PURGE_OBJECT_FORM::PURGE_OBJECT_FORM ($app);
 
-    $field =& $this->field_at ('remove_resources');
+    $field = $this->field_at ('remove_resources');
     $field->visible = TRUE;
   }
 }

@@ -31,9 +31,9 @@ require_once ('webcore/db/migrator_task.php');
 
 class UPGRADE_WEBCORE_221_23_TASK extends MIGRATOR_TASK
 {
-  var $application_name = 'earthli WebCore';
-  var $version_from = '2.2.1';
-  var $version_to = '2.3.0';
+  public $application_name = 'earthli WebCore';
+  public $version_from = '2.2.1';
+  public $version_to = '2.3.0';
 
   function _execute ()
   {

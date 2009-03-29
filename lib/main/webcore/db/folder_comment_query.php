@@ -52,7 +52,7 @@ class FOLDER_COMMENT_QUERY extends COMMENT_QUERY
    * SQL alias for the "main" table.
    * @var string
    */
-  var $alias = 'com';
+  public $alias = 'com';
 
   /**
    * Apply default restrictions and tables.
@@ -111,10 +111,10 @@ class FOLDER_COMMENT_QUERY extends COMMENT_QUERY
 
   /**
    * Set properties for the entry associated with a comment.
-   * @param ENTRY &$entry The entry whose properties should be set.
+   * @param ENTRY $entry The entry whose properties should be set.
    * @access private
    */
-  function _prepare_entry (&$entry)
+  function _prepare_entry ($entry)
   {
     parent::_prepare_entry ($entry);
     $entry->title = $this->db->f ('entry_title');
@@ -154,10 +154,10 @@ class FOLDER_MULTI_TYPE_COMMENT_QUERY extends FOLDER_COMMENT_QUERY
    * Set the type for the entry.
    * This allows the query to determine which type of object to create for each
    * row in the result.
-   * @param ENTRY &$entry The entry whose properties should be set.
+   * @param ENTRY $entry The entry whose properties should be set.
    * @access private
    */
-  function _prepare_entry (&$entry)
+  function _prepare_entry ($entry)
   {
     parent::_prepare_entry ($entry);
     $entry->type = $this->db->f ('entry_type');

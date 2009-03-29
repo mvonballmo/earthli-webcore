@@ -51,17 +51,17 @@ class UPLOAD_PICTURES_FORM extends ID_BASED_FORM
   /**
    * @var string
    */
-  var $button = 'Upload';
+  public $button = 'Upload';
   /**
    * @var string
    */
-  var $button_icon = '{icons}buttons/upload';
+  public $button_icon = '{icons}buttons/upload';
 
-  function UPLOAD_PICTURES_FORM (&$folder)
+  function UPLOAD_PICTURES_FORM ($folder)
   {
     ID_BASED_FORM::ID_BASED_FORM ($folder->context);
 
-    $this->_folder =& $folder;
+    $this->_folder = $folder;
 
     $field = new UPLOAD_FILE_FIELD ();
     $field->id = 'zipfile';
@@ -123,7 +123,7 @@ class UPLOAD_PICTURES_FORM extends ID_BASED_FORM
 
   /**
    * Called after fields are loaded with data.
-   * @param object &$obj Object from which data was loaded. May be null.
+   * @param object $obj Object from which data was loaded. May be null.
    * @access private
    */
   function _post_load_data ($obj) 
@@ -135,7 +135,7 @@ class UPLOAD_PICTURES_FORM extends ID_BASED_FORM
   /**
    * @access private
    */
-  function commit (&$obj)
+  function commit ($obj)
   {
     include_once ('albums/tasks/batch_create_pictures.php');
     $task = new BATCH_CREATE_PICTURES_TASK ($this->_folder);
@@ -168,7 +168,7 @@ class UPLOAD_PICTURES_FORM extends ID_BASED_FORM
 <?php
   }
 
-  function _draw_controls (&$renderer)
+  function _draw_controls ($renderer)
   {
     $renderer->start ();
     $renderer->draw_text_line_row ('title');

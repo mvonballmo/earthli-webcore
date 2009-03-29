@@ -53,23 +53,23 @@ class ARTICLE_TYPE_INFO extends DRAFTABLE_ENTRY_TYPE_INFO
   /**
    * @var string
    */
-  var $id = 'article';
+  public $id = 'article';
   /**
    * @var string
    */
-  var $singular_title = 'Article';
+  public $singular_title = 'Article';
   /**
    * @var string
    */
-  var $plural_title = 'Articles';
+  public $plural_title = 'Articles';
   /**
    * @var string
    */
-  var $icon = '{app_icons}buttons/new_article';
+  public $icon = '{app_icons}buttons/new_article';
   /**
    * @var string
    */
-  var $edit_page = 'edit_article.php';
+  public $edit_page = 'edit_article.php';
 }
 
 /**
@@ -85,23 +85,23 @@ class SECTION_TYPE_INFO extends TYPE_INFO
   /**
    * @var string
    */
-  var $id = 'section';
+  public $id = 'section';
   /**
    * @var string
    */
-  var $singular_title = 'Section';
+  public $singular_title = 'Section';
   /**
    * @var string
    */
-  var $plural_title = 'Sections';
+  public $plural_title = 'Sections';
   /**
    * @var string
    */
-  var $icon = '{icons}buttons/new_folder';
+  public $icon = '{icons}buttons/new_folder';
   /**
    * @var string
    */
-  var $edit_page = 'edit_section.php';
+  public $edit_page = 'edit_section.php';
 }
 
 ?>

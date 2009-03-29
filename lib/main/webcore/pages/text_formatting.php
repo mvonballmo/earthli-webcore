@@ -221,7 +221,7 @@ http://www.earthli.com/software/webcore
       </dd>
     </dl>
     <h2 id="tags">Tags</h2>
-    <p>Tags are the same format as HTML tags (e.g. &lt;tag attr=&quot;value&quot;&gt;).
+    <p>Tags are the same format as HTML tags (e.g. &lt;tag attr=quot;value&quot;&gt;).
       The tokenizer recognizes as a tag any grouping of text that starts with
       &lt;, has a letter or number as the next letter, then ends with &gt;.
       This is discussed in more detail in <a href="#Usingastext">Using &lt;
@@ -316,7 +316,7 @@ http://www.earthli.com/software/webcore
       </dd>
     </dl>
     <h3>Example</h3>
-    <p>&lt;a href=&quot;http://www.earthli.com/software/webcore/&quot; title=&quot;Try
+    <p>&lt;a href=quot;http://www.earthli.com/software/webcore/&quot; title=quot;Try
       out the earthli WebCore!&quot;&gt;earthli WebCore&lt;/a&gt;</p>
     <h4>HTML result</h4>
     <p><a href="http://www.earthli.com/software/webcore/" title="Try out the earthli WebCore!">earthli
@@ -379,17 +379,17 @@ http://www.earthli.com/software/webcore
       </dd>
     </dl>
     <h3>Example</h3>
-    <p><code>&lt;img src=&quot;{icons}/file_types/file_50px&quot;
-      align=&quot;right&quot; alt=&quot;WebCore File Icon&quot; format=&quot;basic&quot;&gt;</code>This
+    <p><code>&lt;img src=quot;{icons}/file_types/file_50px&quot;
+      align=quot;right&quot; alt=quot;WebCore File Icon&quot; format=quot;basic&quot;&gt;</code>This
       is purely sample text to illustrate that the text immediately following
       an image tag will be formatted around the image if it has an 'align' value
       of 'left' or 'right'. If it has an alignment of 'center', the image is
       placed in its own block, separating the text flow. If it is 'none', the
       image is simply rendered inline with the text. The image below is formatted
       differently. </p>
-    <p><code>&lt;img href=&quot;http://data.earthli.com/albums/oz/images/im000185.jpg&quot;
-      src=&quot;http://www.earthli.com/users/oz/images/IM000185_tn.jpg&quot;
-      align=&quot;center&quot; title=&quot;Ozzie in the garden&quot;&gt;</code></p>
+    <p><code>&lt;img href=quot;http://data.earthli.com/albums/oz/images/im000185.jpg&quot;
+      src=quot;http://www.earthli.com/users/oz/images/IM000185_tn.jpg&quot;
+      align=quot;center&quot; title=quot;Ozzie in the garden&quot;&gt;</code></p>
     <h4>HTML result</h4>
     <p><?php echo $Page->resolve_icon_as_html ('{icons}file_types/file', 'Webcore File Icon', '50px', 'margin-left: .5em; margin-bottom: .5em; float: right'); ?>
       This is purely sample text to illustrate that the text immediately following
@@ -627,7 +627,7 @@ Definition.
     </dl>
     <p>All other attributes, if specified, are <em>discarded</em>.</p>
     <h3>Example</h3>
-    <pre><code>&lt;box title=&quot;Listing One&quot; align=&quot;right&quot; width=&quot;35%&quot;&gt;
+    <pre><code>&lt;box title=quot;Listing One&quot; align=quot;right&quot; width=quot;35%&quot;&gt;
 &lt;pre&gt;&lt;code&gt;</code>function add_parsed (&amp;$data)
 {
 $data = trim ($data);
@@ -666,7 +666,7 @@ if ($data)
     <div class="chart" style="float: right; margin-left: .5em; width: 35%">
       <div class="chart-title">Listing One</div>
       <div class="chart-body">
-        <pre><code class="detail">function add_parsed (&$data)
+        <pre><code class="detail">function add_parsed ($data)
 {
 $data = trim ($data);
 if ($data)

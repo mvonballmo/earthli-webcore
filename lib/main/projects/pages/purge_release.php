@@ -28,12 +28,12 @@ http://www.earthli.com/software/webcore/projects
 
   $id = read_var ('id');
   $folder_query = $App->login->folder_query ();
-  $folder =& $folder_query->folder_for_release_at_id ($id);
+  $folder = $folder_query->folder_for_release_at_id ($id);
 
   if (isset ($folder))
   {
     $rel_query = $folder->release_query ();
-    $rel =& $rel_query->object_at_id ($id);
+    $rel = $rel_query->object_at_id ($id);
   }
 
   if (isset ($rel) && $App->login->is_allowed (Privilege_set_release, Privilege_purge, $rel))
@@ -47,7 +47,7 @@ http://www.earthli.com/software/webcore/projects
       $Env->redirect_local ($folder->home_page ());
     }
 
-    $branch =& $rel->branch ();
+    $branch = $rel->branch ();
 
     $Page->title->add_object ($folder);
     $Page->title->add_object ($branch);

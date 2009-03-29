@@ -49,9 +49,9 @@ require_once ('webcore/gui/dynamic_tree.php');
 class DYNAMIC_NODE_TREE extends DYNAMIC_TREE
 {
   /**
-   * @param APPLICATION &$app Main application.
+   * @param APPLICATION $app Main application.
    */
-  function DYNAMIC_NODE_TREE (&$app)
+  function DYNAMIC_NODE_TREE ($app)
   {
     include_once ('webcore/gui/tree_node.php');
     DYNAMIC_TREE::DYNAMIC_TREE ($app, new GENERIC_TREE_NODE_INFO ($app));

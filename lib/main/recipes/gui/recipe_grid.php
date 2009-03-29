@@ -51,36 +51,36 @@ class RECIPE_GRID extends CONTENT_OBJECT_GRID
   /**
    * @var string
    */
-  var $object_name = 'Recipe';
+  public $object_name = 'Recipe';
   /**
    * @var string
    */
-  var $box_style = 'object-in-list';
+  public $box_style = 'object-in-list';
   /**
    * @var integer
    */
-  var $spacing = 4;
+  public $spacing = 4;
   /**
    * @var boolean
    */
-  var $show_separator = FALSE;
+  public $show_separator = FALSE;
   /**
    * @var boolean
    */
-  var $show_user = TRUE;
+  public $show_user = TRUE;
   /**
    * @var boolean
    */
-  var $show_folder = FALSE;
+  public $show_folder = FALSE;
 
   /**
-   * @param RECIPE &$obj
+   * @param RECIPE $obj
    * @access private
    */
-  function _draw_box (&$obj)
+  function _draw_box ($obj)
   {
-    $folder =& $obj->parent_folder ();
-    $creator =& $obj->creator ();
+    $folder = $obj->parent_folder ();
+    $creator = $obj->creator ();
   ?>
   <div class="grid-title">
   <?php
@@ -131,14 +131,14 @@ class RECIPE_SUMMARY_GRID extends DRAFTABLE_ENTRY_SUMMARY_GRID
   /**
    * @var string
    */
-  var $object_name = 'Recipe';
+  public $object_name = 'Recipe';
 
   /**
    * Return the block of text to summarize.
-   * @param OBJECT_IN_FOLDER &$obj
+   * @param OBJECT_IN_FOLDER $obj
    * @access private
    */
-  function _text_to_summarize (&$obj)
+  function _text_to_summarize ($obj)
   {
     return $obj->description . ' ' . $obj->ingredients . ' ' . $obj->instructions;
   }  

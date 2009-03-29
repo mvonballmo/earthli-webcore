@@ -43,7 +43,7 @@ http://www.earthli.com/software/webcore
       }
       
       $folder_query = $App->login->folder_query ();
-      $folder =& $folder_query->object_at_id ($id);
+      $folder = $folder_query->object_at_id ($id);
     }
     
     $class_name = $App->final_class_name ('EXECUTE_SEARCH_FORM', 'webcore/forms/execute_search_form.php');
@@ -61,7 +61,7 @@ http://www.earthli.com/software/webcore
 
     if (isset ($folder))
     {
-      $search->folder_from_context =& $folder;
+      $search->folder_from_context = $folder;
       $Page->location->add_folder_link ($folder);
       $Page->title->add_object ($folder);          
     }

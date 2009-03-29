@@ -26,7 +26,7 @@ http://www.earthli.com/software/webcore/projects
 
 ****************************************************************************/
 
-  function process_folders (&$folders, $depth)
+  function process_folders ($folders, $depth)
   {
     $depth++;
 
@@ -43,7 +43,7 @@ http://www.earthli.com/software/webcore/projects
 
         // export the folder
 
-        $parent =& $folder->parent_folder ();
+        $parent = $folder->parent_folder ();
 
         if ($parent)
         {
@@ -98,7 +98,7 @@ http://www.earthli.com/software/webcore/projects
     $folder_query->set_order ("fldr.title, perm.type DESC");
   }
 
-  $folders =& $folder_query->tree ();
+  $folders = $folder_query->tree ();
 
   fwrite ($fhandle, "  <earthliProjects>\n");
   fwrite ($fhandle, "    <folderList>\n");
@@ -110,7 +110,7 @@ http://www.earthli.com/software/webcore/projects
   fwrite ($fhandle, "    <kindList>\n");
 
   echo "<h3>Exporting kinds...</h3>";
-  $indexed_kinds =& $App->entry_kinds ();
+  $indexed_kinds = $App->entry_kinds ();
   foreach ($indexed_kinds as $kind)
   {
     fwrite ($fhandle, "      <kind name=\"$kind->title\"/>\n");

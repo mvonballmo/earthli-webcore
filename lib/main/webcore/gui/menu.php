@@ -48,14 +48,14 @@ http://www.earthli.com/software/webcore
  */
 class MENU extends WEBCORE_OBJECT
 {
-  var $renderer;
+  public $renderer;
 
   /**
    *
    * Create a menu in the given context.
-   * @param CONTEXT &$context
+   * @param CONTEXT $context
    */  
-  function MENU (&$context)
+  function MENU ($context)
   {
     WEBCORE_OBJECT::WEBCORE_OBJECT ($context);
     
@@ -187,7 +187,7 @@ class MENU extends WEBCORE_OBJECT
    * @var COMMANDS
    * @access private
    */
-  var $_commands;
+  protected $_commands;
 }
 
 ?>

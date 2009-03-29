@@ -51,16 +51,16 @@ class USER_SUBSCRIPTION_OPTIONS_FORM extends SUBSCRIPTION_FORM
   /**
    * @var string
    */
-  var $button = 'Save';
+  public $button = 'Save';
   /**
    * @var string
    */
-  var $button_icon = '{icons}buttons/save';
+  public $button_icon = '{icons}buttons/save';
   
   /**
-   * @param APPLICATION &$app Main application.
+   * @param APPLICATION $app Main application.
    */
-  function USER_SUBSCRIPTION_OPTIONS_FORM (&$app)
+  function USER_SUBSCRIPTION_OPTIONS_FORM ($app)
   {
     SUBSCRIPTION_FORM::SUBSCRIPTION_FORM ($app);
 
@@ -141,9 +141,9 @@ class USER_SUBSCRIPTION_OPTIONS_FORM extends SUBSCRIPTION_FORM
 
   /**
    * Load initial properties from this user.
-   * @param SUBSCRIBER &$obj
+   * @param SUBSCRIBER $obj
    */
-  function load_from_object (&$obj)
+  function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
     $this->set_value ('new_email', $obj->email);
@@ -189,7 +189,7 @@ class USER_SUBSCRIPTION_OPTIONS_FORM extends SUBSCRIPTION_FORM
 
   /**
    * Called after fields are loaded with data.
-   * @param SUBSCRIBER &$obj Object from which data was loaded. May be null.
+   * @param SUBSCRIBER $obj Object from which data was loaded. May be null.
    * @access private
    */
   function _post_load_data ($obj) 
@@ -212,7 +212,7 @@ class USER_SUBSCRIPTION_OPTIONS_FORM extends SUBSCRIPTION_FORM
 
   /**
    * Called before fields are validated.
-   * @param object &$obj Object being validated.
+   * @param object $obj Object being validated.
    * @access private
    */
   function _pre_validate ($obj)
@@ -221,7 +221,7 @@ class USER_SUBSCRIPTION_OPTIONS_FORM extends SUBSCRIPTION_FORM
 
     if (! $this->value_for ('group_objects'))
     {
-      $field =& $this->field_at ('max_individual_messages');
+      $field = $this->field_at ('max_individual_messages');
       $field->required = FALSE;
       $field->set_value (0);
       $field->min_value = 0;
@@ -231,10 +231,10 @@ class USER_SUBSCRIPTION_OPTIONS_FORM extends SUBSCRIPTION_FORM
 
   /**
    * Store the form's values for this user's subscription options.
-    * @param SUBSCRIBER &$obj
+    * @param SUBSCRIBER $obj
     * @access private
     */
-  function commit (&$obj)
+  function commit ($obj)
   {
     $orig_email = $this->value_for ('email');
     $new_email = $this->value_for ('new_email');
@@ -291,7 +291,7 @@ class USER_SUBSCRIPTION_OPTIONS_FORM extends SUBSCRIPTION_FORM
         // synchronize the email address in the user record with the new subscriber address.
 
         $user_query = $this->app->user_query ();
-        $user =& $user_query->object_at_email ($orig_email);
+        $user = $user_query->object_at_email ($orig_email);
 
         if (isset ($user))
         {
@@ -358,16 +358,16 @@ class USER_SUBSCRIPTION_OPTIONS_FORM extends SUBSCRIPTION_FORM
   }
 
   /**
-   * @param FORM_RENDERER &$renderer
+   * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_controls (&$renderer)
+  function _draw_controls ($renderer)
   {
     $user_query = $this->app->user_query ();
-    $user =& $user_query->object_at_email ($this->value_for ('email'));
+    $user = $user_query->object_at_email ($this->value_for ('email'));
     if (isset ($user))
     {
-      $field =& $this->field_at ('new_email');
+      $field = $this->field_at ('new_email');
       $field->description = 'Linked to the email address for ' . $user->title_as_link ();
     }
 

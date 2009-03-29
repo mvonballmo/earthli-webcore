@@ -54,45 +54,45 @@ class FORM_LIST_ITEM
    * Title to display.
    * @var string
    */
-  var $title = '';
+  public $title = '';
   /**
    * Value of item posted with the form.
    * @var string
    */
-  var $value;
+  public $value;
   /**
    * Is this item enabled?
    * This property is not used by all control renderers. If the item is disabled, it is not selectable.
    * @var boolean
    */
-  var $enabled = TRUE;
+  public $enabled = TRUE;
   /**
    * Additional non-label text.
    * This text is formatted with the item, but is not enclosed within the label for the control. This
    * makes it possible to add other controls and larger texts to the item.
    * @var string
    */
-  var $text = '';
+  public $text = '';
   /**
    * Descriptive text displayed after the item.
    * This text is not included in the label for the control and is renderered only by the list box in
    * a paragraph following the control and title.
    */
-  var $description = '';
+  public $description = '';
   /**
    * Script used by this item (if applicable).
    * Some items, like checkboxes or radio buttons can have their own click scripts.
    * If this property is set, it will be used. Otherwise, the script from the list properties is used.
    * @var string
    */
-  var $on_click_script = null;
+  public $on_click_script = null;
   /**
    * Wraps text to the right of the control only.
    * If this is false, text can wrap underneath the control. If True, the control is placed in a block
    * to the left of another block, which contains the text. Overrides the value set in the list properties.
    * @var boolean
    */
-  var $smart_wrapping = FALSE;
+  public $smart_wrapping = FALSE;
 }
 
 /**
@@ -109,7 +109,7 @@ class CHECK_BOX_ITEM extends FORM_LIST_ITEM
    * Value of item posted with the form.
    * @var string
    */
-  var $value = 1;
+  public $value = 1;
 }
 
 /**
@@ -131,39 +131,39 @@ class FORM_LIST_PROPERTIES
    * Should be specified in legal CSS units. Used by the drop-down box and the list-box.
    * @var string
    */
-  var $width = null;
+  public $width = null;
   /**
    * How many items at once should be shown?
    * Used by the list-box.
    * @var integer
    */
-  var $height = 5;
+  public $height = 5;
   /**
    * JavaScript to call when the control is clicked or changed.
    * Used by radio buttons and checkboxes when clicked; used by drop-downs when changed.
    * @var string
    */
-  var $on_click_script = null;
+  public $on_click_script = null;
   /**
    * List of items for this control.
    * Do not add items to this list directly. Use {@link add_item()} instead.
    * @var array [FORM_LIST_ITEM]
    * @see FORM_LIST_ITEM
    */
-  var $items = array ();
+  public $items = array ();
   /**
    * How many items to show one one line.
    * Only some control types will use this.
    * @var integer
    */
-  var $items_per_row = 1;
+  public $items_per_row = 1;
   /**
    * CSS value for the amount of space between rows of items.
    * This property is ignored if 'show_descriptions' is True, since a default spacing is used there
    * to offset the description.
    * @var string
    */
-  var $line_spacing = '';
+  public $line_spacing = '';
   /**
    * Shows the list with descriptions.
    * Only by the radio and check button renderers. If this is True, then
@@ -171,7 +171,7 @@ class FORM_LIST_PROPERTIES
    * and assumed to be equal to one.
    * @var boolean
    */
-  var $show_descriptions = FALSE;
+  public $show_descriptions = FALSE;
   /**
    * Should the description immediately follow the control?
    * If the control has a description, it will be displayed immediately after the control,
@@ -179,33 +179,33 @@ class FORM_LIST_PROPERTIES
    * placed under the control. Some controls may ignore this flag.
    * @var boolean
    */
-  var $show_description_on_same_line = FALSE;
+  public $show_description_on_same_line = FALSE;
   /**
    * Style to use for the list item title.
    * Used only if {@link $show_descriptions} is True.
    * @see $description_class
    * @var string name of a CSS class.
    */
-  var $item_class = '';
+  public $item_class = '';
   /**
    * Style to use for list item descriptions.
    * Used only if {@link $show_descriptions} is True.
    * @var string name of a CSS class.
    */
-  var $description_class = 'notes';
+  public $description_class = 'notes';
   /**
    * Wraps text to the right of the control only.
    * If this is false, text can wrap underneath the control. If True, the control is placed in a block
    * to the left of another block, which contains the text.
    * @var boolean
    */
-  var $smart_wrapping = FALSE;
+  public $smart_wrapping = FALSE;
   /**
    * Extra CSS class to apply to the control.
    * Control will still have the class "menu-control", but this class is applied
    * afterwards.
    */
-  var $CSS_class = '';
+  public $CSS_class = '';
 
   /**
    * Add an item to the list.
@@ -221,7 +221,7 @@ class FORM_LIST_PROPERTIES
    */
   function add_item ($title, $value, $description = '', $enabled = TRUE, $text = '', $script = '')
   {
-    $item = null; // Compiler warning
+    $item = new stdClass();
     $item->title = $title;
     $item->value = $value;
     $item->enabled = $enabled;
@@ -255,7 +255,7 @@ class FORM_LIST_PROPERTIES
    */
   function replace_item ($index, $title, $value, $enabled = TRUE, $text = '')
   {
-    $item =& $this->items [$index];
+    $item = $this->items [$index];
     $item->title = $title;
     $item->value = $value;
     $item->enabled = $enabled;
@@ -286,7 +286,7 @@ class FORM_TEXT_CONTROL_OPTIONS
    * Defaults to {@link FORM_RENDERER::$default_control_width} if not specified.
    * @var string
    */
-  var $width = null;
+  public $width = null;
   /**
    * Should the description immediately follow the control?
    * If the control has a description, it will be displayed immediately after the control,
@@ -294,24 +294,24 @@ class FORM_TEXT_CONTROL_OPTIONS
    * placed under the control. Some controls may ignore this flag.
    * @var boolean
    */
-  var $show_description_on_same_line = FALSE;
+  public $show_description_on_same_line = FALSE;
   /**
    * Text to add to the description of the field.
    * This text will be merged with the the {@link FIELD}'s description when displayed.
    * @var string
    */
-  var $extra_description = '';
+  public $extra_description = '';
   /**
    * Javascript to call when the control's contents change.
    * @var string
    */
-  var $on_change_script = null;
+  public $on_change_script = null;
   /**
    * Extra CSS class to apply to the control.
    * Control will still have the class "text-control", but this class is
    * applied afterwards.
    */
-  var $CSS_class = '';
+  public $CSS_class = '';
 }
 
 /**
@@ -328,31 +328,31 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * Is the form centered in its parent?
    * @var boolean
    */
-  var $centered = TRUE;
+  public $centered = TRUE;
   /**
    * Name of the icon to use for the 'required' mark.
    * Preferred over {@link required_text}.
    * @var string
    */
-  var $required_icon = '{icons}indicators/required_16px';
+  public $required_icon = '{icons}indicators/required_16px';
   /**
    * Text to use to mark a field as 'required'.
    * Used only if {@link required_icon} is empty.
    * @var string
    */
-  var $required_text = '*';
+  public $required_text = '*';
   /**
    * How wide should controls be by default?
    * Should be specified in legal CSS units. Used by all text controls and the drop-down box.
    * @var string
    */
-  var $default_control_width = '35em';
+  public $default_control_width = '35em';
   /**
    * How high should controls be by default?
    * Should be specified in legal CSS units. Used only by the text-area.
    * @var string
    */
-  var $default_control_height = '8em';
+  public $default_control_height = '8em';
   /**
    * How width should date only controls be by default?
    * Should be specified in legal CSS units. Only the {@link date_as_html()} and
@@ -360,14 +360,14 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * @see $default_date_time_width;
    * @var string
    */
-  var $default_date_width = '8em';
+  public $default_date_width = '8em';
   /**
    * How width should date/time controls be by default?
    * Should be specified in legal CSS units. Only the {@link date_as_html()} and
    * {@link draw_date_row()} functions use this default.
    * @var string
    */
-  var $default_date_time_width = '12em';
+  public $default_date_time_width = '12em';
   /**
    * Should the form ensure that all form values are submitted?
    * Disabled fields in an HTML form do not submit values. This can often make validation and
@@ -375,46 +375,46 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * all disabled fields using JavaScript before submitting.
    * @var boolean
    */
-  var $submit_all_fields = 1;
+  public $submit_all_fields = 1;
   /**
    * How wide should the form be?
    * Should be specified in legal CSS units.
    * @var string
    */
-  var $width = '35em';
+  public $width = '35em';
   /**
    * Spacing between rows and columns.
    * @var integer
    */
-  var $spacing = 0;
+  public $spacing = 0;
   /**
    * Padding inside each row.
    * @var integer
    */
-  var $padding = 2;
+  public $padding = 2;
   /**
    * Show the icon for required fields?
    * @var boolean
    */
-  var $show_required_mark = TRUE;
+  public $show_required_mark = TRUE;
   /**
    * Should this renderer allow previewing?
    * @var boolean
    */
-  var $preview_enabled = FALSE;
+  public $preview_enabled = FALSE;
   /**
    * Should this renderer allow drafts?
    * @var boolean
    */
-  var $drafts_enabled = FALSE;
+  public $drafts_enabled = FALSE;
 
   /**
-   * @param FORM &$form
+   * @param FORM $form
    */
-  function FORM_RENDERER (&$form)
+  function FORM_RENDERER ($form)
   {
     CONTROLS_RENDERER::CONTROLS_RENDERER ($form->context);
-    $this->_form =& $form;
+    $this->_form = $form;
     $this->default_control_properties = new FORM_LIST_ITEM ();
   }
 
@@ -427,7 +427,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
   function set_width ($css_width)
   {
     /* Store the current values. */
-    $stored_width = null; // Compiler warning
+    $stored_width = new stdClass();
     $stored_width->width = $this->width;
     $stored_width->control_width = $this->default_control_width;
     $this->_widths [] = $stored_width;
@@ -629,7 +629,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * Should be paired with {@link start_layer_row()}.
    * @see start_layer_row()
    */
-  function finish_layer_row (&$layer)
+  function finish_layer_row ($layer)
   {
     $this->finish_block ();
     if (isset ($layer))
@@ -959,7 +959,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
       $this->finish_row ();
       foreach ($props->items as $item)
       {
-        $field =& $this->_field_at ($item->title);
+        $field = $this->_field_at ($item->title);
         if ($field->visible)
         {
           $this->draw_error_row ($field->id);
@@ -974,7 +974,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * @param string $on_click JavaScript to execute when clicked.
    * @param string $value Value assigned to the checkbox.
    */
-  function draw_check_group_row ($id, &$props, $title = null)
+  function draw_check_group_row ($id, $props, $title = null)
   {
     $this->_draw_field_row ($this->_field_at ($id), $this->check_group_as_HTML ($id, $props), $title);
   }
@@ -986,7 +986,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    */
   function draw_check_box_row ($id, $item = null, $title = '')
   {
-    $field =& $this->_field_at ($id);
+    $field = $this->_field_at ($id);
     if (! isset ($item))
     {
       $item = $this->make_check_properties ();
@@ -1142,7 +1142,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    */
   function text_box_as_html ($id, $width = null, $height = null)
   {
-    $field =& $this->_field_at ($id);
+    $field = $this->_field_at ($id);
 
     if ($field->visible)
     {
@@ -1237,7 +1237,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * @param FORM_LIST_PROPERTIES $props
    * @return string
    */
-  function check_group_as_html ($id, &$props)
+  function check_group_as_html ($id, $props)
   {
     return $this->_control_group_as_HTML ($id, $props, 'checkbox');
   }
@@ -1248,7 +1248,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * @param FORM_LIST_PROPERTIES $props
    * @return string
    */
-  function radio_group_as_html ($id, &$props)
+  function radio_group_as_html ($id, $props)
   {
     return $this->_control_group_as_HTML ($id, $props, 'radio');
   }
@@ -1261,7 +1261,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    */
   function drop_down_as_html ($id, $props)
   {
-    $field =& $this->_field_at ($id);
+    $field = $this->_field_at ($id);
 
     if ($field->visible)
     {
@@ -1336,7 +1336,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    */
   function list_box_as_html ($id, $props)
   {
-    $field =& $this->_field_at ($id);
+    $field = $this->_field_at ($id);
 
     if ($field->visible)
     {
@@ -1407,7 +1407,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    */
   function file_as_html ($id, $options = null)
   {
-    $field =& $this->_field_at ($id);
+    $field = $this->_field_at ($id);
 
     if (! isset ($options))
     {
@@ -1430,7 +1430,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
 
     if ($field->is_processed ($this->_num_controls [$id]))
     {
-      $file =& $field->file_at ($this->_num_controls [$id]);
+      $file = $field->file_at ($this->_num_controls [$id]);
       $ft = $this->context->file_type_manager ();
       $url = new FILE_URL ($file->name);
       $icon = $ft->icon_as_html ($file->mime_type, $url->extension (), '16px');
@@ -1494,7 +1494,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    */
   function draw_hidden ($id)
   {
-    $field =& $this->_form->field_at ($id);
+    $field = $this->_form->field_at ($id);
     $value = $field->value ();
     $name = $field->js_name ();
     if (is_array ($value))
@@ -1522,12 +1522,12 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * Draw the field in the form.
    * This routine will display the field, honoring the required, enabled, visible, etc. properties.
    * Field-specific errors is also drawn here, if necessary.
-   * @param FIELD &$field
+   * @param FIELD $field
    * @param string $control_text Prepared string of text; should be HTML code for a form control.
    * @param string $dom_id If set, makes an HTML label around the title with that id.
    * @access private
    */
-  function _draw_field_row (&$field, $control_text, $dom_id = '', $title = null)
+  function _draw_field_row ($field, $control_text, $dom_id = '', $title = null)
   {
     if ($field->visible)
     {
@@ -1582,11 +1582,11 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * Open an HTML tag for the given field.
    * Maps the name and id of the control so that it is uniformly available as JavaScript (automatically
    * mapping {@link ARRAY_FIELD}s). Also renders the field's enabled state.
-   * @param FIELD &$field
+   * @param FIELD $field
    * @param string $tag_name Name of the HTML tag to generate.
    * @access private
    */
-  function _start_control (&$field, $tag_name = 'input', $dom_id = null)
+  function _start_control ($field, $tag_name = 'input', $dom_id = null)
   {
     if (isset ($dom_id))
     {
@@ -1607,13 +1607,13 @@ class FORM_RENDERER extends CONTROLS_RENDERER
   /**
    * Return the contents of the field 'id' as HTML.
    * Text values have to have characters properly escaped before inserting them into text inputs or areas.
-   * @param FIELD &$field
+   * @param FIELD $field
    * @param string $quote_style Can be "ENT_NOQUOTES" or "ENT_QUOTES", which
    * translates quotes or not, respectively.
    * @return string
    * @access private
    */
-  function _to_html (&$field, $quote_style)
+  function _to_html ($field, $quote_style)
   {
     if (isset ($this->_num_controls [$field->id]))
     {
@@ -1670,7 +1670,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * @return FIELD
    * @access private
    */
-  function &_field_at ($id)
+  function _field_at ($id)
   {
     return $this->_form->field_at ($id);
   }
@@ -1689,7 +1689,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    */
   function _text_line_as_html ($id, $type, $options)
   {
-    $field =& $this->_field_at ($id);
+    $field = $this->_field_at ($id);
 
     if (! isset ($options))
     {
@@ -1757,7 +1757,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * @return string
    * @access private
    */
-  function _control_group_as_html ($id, &$props, $type)
+  function _control_group_as_html ($id, $props, $type)
   {
     if ($id)
     {
@@ -1931,7 +1931,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * Renders a checkbox or radio buttion with a label.
    * Used by {@link _control_group_as_HTML()} and {@link draw_check_box_row()} to generate
    * the raw control text.
-   * @param FIELD &$field Render the control for this field.
+   * @param FIELD $field Render the control for this field.
    * @param FORM_LIST_PROPERTIES $props Control is rendered in this list (may be null).
    * @param FORM_LIST_ITEM $item Settings to apply for the rendered item.
    * @param string $type Type of control: "checkbox" or "radio".
@@ -1939,7 +1939,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * @return string
    * @access private
    */
-  function _grouped_control_as_html (&$field, $props, $item, $type, $dom_id)
+  function _grouped_control_as_html ($field, $props, $item, $type, $dom_id)
   {
     if ($field->visible)
     {
@@ -1999,7 +1999,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * @var FORM
    * @access private
    */
-  var $_form;
+  protected $_form;
   /**
    * Set if the required mark is generated during form construction.
    * The renderer will generate a legend explaining the required mark if the mark
@@ -2007,13 +2007,13 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * @var boolean
    * @access private
    */
-  var $_required_mark_used = FALSE;
+  protected $_required_mark_used = FALSE;
   /**
    * Currently building columns.
    * @var boolean
    * @access private
    */
-  var $_column_started = FALSE;
+  protected $_column_started = FALSE;
   /**
    * Table of used DOM ids.
    * If radio buttons or other group controls are rendered to different parts of a page for the
@@ -2021,13 +2021,13 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * @var array[string, integer]
    * @access private
    */
-  var $_num_controls = array ();
+  protected $_num_controls = array ();
   /**
    * Stack of widths applied with {@link set_width()}.
    * @var array[STORED_WIDTH]
    * @access private
    */
-  var $_widths;
+  protected $_widths;
 }
 
 /**
@@ -2045,12 +2045,12 @@ class STORED_WIDTH
    * Stored value for {@link FORM_RENDERER::$width}.
    * @var string
    */
-  var $width;
+  public $width;
   /**
    * Stored value for {@link FORM_RENDERER::$default_control_width}.
    * @var string
    */
-  var $control_width;
+  public $control_width;
 }
 
 /**
@@ -2060,7 +2060,7 @@ class STORED_WIDTH
  * @return FORM_TEXT_CONTROL_OPTIONS
  * @access private
  */
-function &default_text_options ()
+function default_text_options ()
 {
   global $_g_default_text_options;
   if (! isset ($_g_default_text_options))

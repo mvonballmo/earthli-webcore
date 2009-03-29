@@ -49,9 +49,9 @@ require_once ('webcore/forms/object_in_folder_form.php');
 class ALBUM_ENTRY_FORM extends ENTRY_FORM
 {
   /**
-   * @param ALBUM &$folder Album in which to add or edit the picture.
+   * @param ALBUM $folder Album in which to add or edit the picture.
    */
-  function ALBUM_ENTRY_FORM (&$folder)
+  function ALBUM_ENTRY_FORM ($folder)
   {
     ENTRY_FORM::ENTRY_FORM ($folder);
 
@@ -65,9 +65,9 @@ class ALBUM_ENTRY_FORM extends ENTRY_FORM
 
   /**
    * Load initial properties from this picture.
-   * @param ALBUM_ENTRY &$obj
+   * @param ALBUM_ENTRY $obj
    */
-  function load_from_object (&$obj)
+  function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
     $this->set_value ('day', $obj->date);
@@ -81,10 +81,10 @@ class ALBUM_ENTRY_FORM extends ENTRY_FORM
 
   /**
    * Does this form hold valid data for this picture?
-    * @param ALBUM_ENTRY &$obj
+    * @param ALBUM_ENTRY $obj
     * @access private
     */
-  function _post_validate (&$obj)
+  function _post_validate ($obj)
   {
     parent::_post_validate ($obj);
 
@@ -99,10 +99,10 @@ class ALBUM_ENTRY_FORM extends ENTRY_FORM
 
   /**
    * Store the form's values to this object.
-   * @param ALBUM_ENTRY &$obj
+   * @param ALBUM_ENTRY $obj
    * @access private
    */
-  function _store_to_object (&$obj)
+  function _store_to_object ($obj)
   {
     parent::_store_to_object ($obj);
     $obj->date = $this->value_for ('day');

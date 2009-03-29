@@ -50,9 +50,9 @@ require_once ('webcore/forms/multiple_object_action_form.php');
 class MULTIPLE_OBJECT_PURGER_FORM extends MULTIPLE_OBJECT_ACTION_FORM
 {
   /**
-   * @param APPLICATION &$app
+   * @param APPLICATION $app
    */
-  function MULTIPLE_OBJECT_PURGER_FORM (&$app)
+  function MULTIPLE_OBJECT_PURGER_FORM ($app)
   {
     MULTIPLE_OBJECT_ACTION_FORM::MULTIPLE_OBJECT_ACTION_FORM ($app);
     
@@ -66,43 +66,43 @@ class MULTIPLE_OBJECT_PURGER_FORM extends MULTIPLE_OBJECT_ACTION_FORM
 
   /**
    * Execute action for a single folder.
-   * @param FOLDER &$fldr
+   * @param FOLDER $fldr
    * @access private
    */
-  function _folder_run (&$fldr)
+  function _folder_run ($fldr)
   {
     $fldr->purge ($this->_purge_options_for ($fldr));
   }
 
   /**
    * Execute action for a single entry.
-   * @param ENTRY &$entry
+   * @param ENTRY $entry
    * @access private
    */
-  function _entry_run (&$entry)
+  function _entry_run ($entry)
   {
     $entry->purge ($this->_purge_options_for ($entry));
   }
 
   /**
    * Options for purging an object.
-   * @param OBJECT_IN_FOLDER &$obj
+   * @param OBJECT_IN_FOLDER $obj
    * @return PURGE_OPTIONS
    * @access private
    */
-  function _purge_options_for (&$obj)
+  function _purge_options_for ($obj)
   {
-    $Result =& $obj->make_purge_options ();
+    $Result = $obj->make_purge_options ();
     $Result->remove_resources = $this->value_for ('remove_resources');
     return $Result;
   }
 
   /**
    * Draw a confirmation message for this action.
-   * @param FORM_RENDERER &$renderer
+   * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_message (&$renderer)
+  function _draw_message ($renderer)
   {
     $renderer->start_row ();
 

@@ -49,7 +49,7 @@ class NEWS_APPLICATION_PAGE_NAMES extends APPLICATION_PAGE_NAMES
   /**
    * @var string
    */
-  var $entry_home = 'view_article.php';
+  public $entry_home = 'view_article.php';
 }
 
 /**
@@ -61,43 +61,43 @@ class NEWS_APPLICATION_TABLE_NAMES extends APPLICATION_TABLE_NAMES
   /**
    * @var string
    */
-  var $folders = 'news_folders';
+  public $folders = 'news_folders';
   /**
    * @var string
    */
-  var $comments = 'news_comments';
+  public $comments = 'news_comments';
   /**
    * @var string
    */
-  var $entries = 'news_articles';
+  public $entries = 'news_articles';
   /**
    * @var string
    */
-  var $user_permissions = 'news_user_permissions';
+  public $user_permissions = 'news_user_permissions';
   /**
    * @var string
    */
-  var $folder_permissions = 'news_folder_permissions';
+  public $folder_permissions = 'news_folder_permissions';
   /**
    * @var string
    */
-  var $subscriptions = 'news_subscriptions';
+  public $subscriptions = 'news_subscriptions';
   /**
    * @var string
    */
-  var $subscribers = 'news_subscribers';
+  public $subscribers = 'news_subscribers';
   /**
    * @var string
    */
-  var $history_items = 'news_history_items';
+  public $history_items = 'news_history_items';
   /**
    * @var string
    */
-  var $searches = 'news_searches';
+  public $searches = 'news_searches';
   /**
    * @var string
    */
-  var $attachments = 'news_attachments';
+  public $attachments = 'news_attachments';
 }
 
 /**
@@ -113,33 +113,33 @@ class NEWS_APPLICATION extends DRAFTABLE_APPLICATION
   /**
    * @var string
    */
-  var $title = 'earthli News';
+  public $title = 'earthli News';
   /**
    * @var string
    */
-  var $short_title = 'News';
+  public $short_title = 'News';
   /**
    * @var string
    */
-  var $icon = '{app_icons}app/news';
+  public $icon = '{app_icons}app/news';
   /**
    * @var string
    */
-  var $support_url = 'http://earthli.com/software/webcore/app_news.php';
+  public $support_url = 'http://earthli.com/software/webcore/app_news.php';
   /**
    * Unique ID for this framework.
    * @var string
    */
-  var $framework_id = 'com.earthli.news';
+  public $framework_id = 'com.earthli.news';
   /**
    * @var integer
    */
-  var $version = '3.0.0';
+  public $version = '3.0.0';
 
   /**
-   * @param PAGE &$page Page to which this application is attached.
+   * @param PAGE $page Page to which this application is attached.
    */
-  function NEWS_APPLICATION (&$page)
+  function NEWS_APPLICATION ($page)
   {
     APPLICATION::APPLICATION ($page);
 

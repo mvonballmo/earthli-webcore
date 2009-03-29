@@ -31,7 +31,7 @@ http://www.earthli.com/software/webcore
   if ($App->login->is_allowed (Privilege_set_user, Privilege_view))
   {
     $folder_query = $App->login->folder_query ();
-    $folder =& $folder_query->object_at_id (read_var ('id'));
+    $folder = $folder_query->object_at_id (read_var ('id'));
     if ($folder)
     {
       $Page->template_options->header_visible = FALSE;
@@ -58,7 +58,7 @@ http://www.earthli.com/software/webcore
         /* get the list of user ids that are already mapped in this folder. */
   
         $security = $folder->security_definition ();
-        $permissions =& $security->user_permissions ();
+        $permissions = $security->user_permissions ();
   
         $ids = array ();
         foreach ($permissions as $permission)

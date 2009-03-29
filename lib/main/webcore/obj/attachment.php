@@ -54,41 +54,41 @@ class ATTACHMENT extends OBJECT_IN_FOLDER
    * The type of object to which this belongs.
    * @var string
    */
-  var $type;
+  public $type;
   /**
    * To which object id is this attached?
    * @var integer
    */
-  var $object_id;
+  public $object_id;
   /**
    * What was the name of the file when uploaded?
    * @var string
    */
-  var $original_file_name;
+  public $original_file_name;
   /**
    * Location within the server file system.
    * @var string
    */
-  var $file_name = '';
+  public $file_name = '';
   /**
    * How large is the file?
    * @var string
    */
-  var $size;
+  public $size;
   /**
    * MIME type of the file.
    * May be empty or unknown.
    * @var string
    */
-  var $mime_type;
+  public $mime_type;
   /**
    * @var boolean
    */
-  var $is_image;
+  public $is_image;
   /**
    * @var boolean
    */
-  var $is_archive;
+  public $is_archive;
 
   /**
    * Fully resolved server-local path to the file.
@@ -193,7 +193,7 @@ class ATTACHMENT extends OBJECT_IN_FOLDER
    * Attached to this object.
     * @return ATTACHMENT_HOST
     */
-  function &host ()
+  function host ()
   {
     $this->assert (isset ($this->_host), '_host is not cached.', 'host', 'ATTACHMENT');
     return $this->_host;
@@ -230,12 +230,12 @@ class ATTACHMENT extends OBJECT_IN_FOLDER
    * Set the parent object for this attachment.
    * Does not store to the database. Sets up both the host and the folder information
    * for this attachment; used during object setup when retrieved from database.
-   * @param ATTACHMENT_HOST &$host
+   * @param ATTACHMENT_HOST $host
    */
-  function set_host (&$host)
+  function set_host ($host)
   {
     $this->set_parent_folder ($host->parent_folder ());
-    $this->_host =& $host;
+    $this->_host = $host;
     $this->object_id = $host->id;
   }
 
@@ -268,9 +268,9 @@ class ATTACHMENT extends OBJECT_IN_FOLDER
   }
 
   /**
-   * @param DATABASE &$db Database from which to load values.
+   * @param DATABASE $db Database from which to load values.
    */
-  function load (&$db)
+  function load ($db)
   {
     parent::load ($db);
     $this->type = $db->f ('type');
@@ -284,9 +284,9 @@ class ATTACHMENT extends OBJECT_IN_FOLDER
   }
 
   /**
-   * @param SQL_STORAGE &$storage Store values to this object.
+   * @param SQL_STORAGE $storage Store values to this object.
    */
-  function store_to (&$storage)
+  function store_to ($storage)
   {
     parent::store_to ($storage);
     $tname = $this->_table_name ();
@@ -325,7 +325,7 @@ class ATTACHMENT extends OBJECT_IN_FOLDER
   function _object_url ($use_links, $separator = null, $formatter = null)
   {
     $Result = parent::_object_url ($use_links, $separator, $formatter);
-    $host =& $this->host ();
+    $host = $this->host ();
     $host_url = $host->_object_url ($use_links, $separator, $formatter);
 
     if (! isset ($separator))
@@ -392,14 +392,14 @@ class ATTACHMENT extends OBJECT_IN_FOLDER
 
   /**
    * Apply class-specific restrictions to this query.
-   * @param SUBSCRIPTION_QUERY &$query
-   * @param HISTORY_ITEM &$history_item Action that generated this request. May be empty.
+   * @param SUBSCRIPTION_QUERY $query
+   * @param HISTORY_ITEM $history_item Action that generated this request. May be empty.
    * @access private
    */
-  function _prepare_subscription_query (&$query, &$history_item)
+  function _prepare_subscription_query ($query, $history_item)
   {
-    $folder =& $this->parent_folder ();
-    $host =& $this->host ();
+    $folder = $this->parent_folder ();
+    $host = $this->host ();
 
     switch ($this->type)
     {
@@ -430,12 +430,12 @@ class ATTACHMENT extends OBJECT_IN_FOLDER
    * @var string
    * @access private
    */
-  var $_old_file_name;
+  protected $_old_file_name;
   /**
    * @var ATTACHMENT_HOST
    * @access private
    */
-  var $_host;
+  protected $_host;
 }
 
 ?>

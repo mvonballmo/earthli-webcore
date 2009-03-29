@@ -56,23 +56,23 @@ class SELECT_LIST extends LIST_GRID
    * APPLICATION}. Extension is also filled in by the theme or the application.
    * @var string
    */
-  var $toggle_image = '{icons}tree/collapse';
+  public $toggle_image = '{icons}tree/collapse';
   /**
    * Title used for the select/deselect all button.
    * @var string
    */
-  var $toggle_title = 'Select/Deselect All';
+  public $toggle_title = 'Select/Deselect All';
   /**
    * Name of the form embedded in the list.
    * This form is used to submit the selected rows to a worker page.
    * @var string
    */
-  var $form_name = 'update_form';
+  public $form_name = 'update_form';
   /**
    * Name assigned to the selector controls.
    * @var string
    */
-  var $control_name = 'entry_ids';
+  public $control_name = 'entry_ids';
 
   /**
    * @access private
@@ -98,7 +98,7 @@ class SELECT_LIST extends LIST_GRID
   /**
    * @access private
    */
-  function _draw_selector (&$obj)
+  function _draw_selector ($obj)
   {
 ?><input type="checkbox" name="<?php echo $this->control_name; ?>[]" value="<?php echo $obj->id; ?>" id="<?php echo $this->control_name . '_' . $this->_num_rows; ?>">
 <?php
@@ -106,11 +106,11 @@ class SELECT_LIST extends LIST_GRID
 
   /**
    * Draw the given column's data using the given object.
-   * @param UNIQUE_OBJECT &$obj
+   * @param UNIQUE_OBJECT $obj
    * @param integer $index
    * @access private
    */
-  function _draw_column_contents (&$obj, $index)
+  function _draw_column_contents ($obj, $index)
   {
     switch ($index)
     {

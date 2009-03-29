@@ -51,16 +51,16 @@ class CHANGE_GRID extends PROJECT_ENTRY_GRID
   /**
    * @var string
    */
-  var $object_name = 'Change';
+  public $object_name = 'Change';
   
   /**
    * Draw entry-specific information for the given release.
-   * @param CHANGE &$obj
-   * @param CHANGE_BRANCH_INFO &$branch_info
+   * @param CHANGE $obj
+   * @param CHANGE_BRANCH_INFO $branch_info
    */
-  function _draw_release_details (&$obj, &$branch_info)
+  function _draw_release_details ($obj, $branch_info)
   {
-    $rel =& $branch_info->release ();
+    $rel = $branch_info->release ();
     if (isset ($rel))
     {
       $status = $rel->status ();
@@ -74,15 +74,15 @@ class CHANGE_GRID extends PROJECT_ENTRY_GRID
 
   /**
    * Draw user-specific information for the given release.
-   * @param CHANGE &$obj
-   * @param CHANGE_BRANCH_INFO &$branch_info
+   * @param CHANGE $obj
+   * @param CHANGE_BRANCH_INFO $branch_info
    */
-  function _draw_user_details (&$obj, &$branch_info)
+  function _draw_user_details ($obj, $branch_info)
   {
     echo 'Applied ';
     if ($this->show_user)
     {
-      $applier =& $branch_info->applier ();
+      $applier = $branch_info->applier ();
       echo 'by ' . $applier->title_as_link ();
     }
     echo  ' on ' . $obj->time_created->format ();
@@ -90,10 +90,10 @@ class CHANGE_GRID extends PROJECT_ENTRY_GRID
   
   /**
    * Draw extra description information for the entry.
-   * @param CHANGE &$obj
-   * @param CHANGE_BRANCH_INFO &$branch_info
+   * @param CHANGE $obj
+   * @param CHANGE_BRANCH_INFO $branch_info
    */
-  function _draw_description (&$obj)
+  function _draw_description ($obj)
   {
     if ($obj->files)
     {
@@ -115,7 +115,7 @@ class CHANGE_SUMMARY_GRID extends PROJECT_ENTRY_SUMMARY_GRID
   /**
    * @var string
    */
-  var $object_name = 'Change';
+  public $object_name = 'Change';
 }
 
 ?>

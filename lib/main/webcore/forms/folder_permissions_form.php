@@ -52,16 +52,16 @@ class FOLDER_PERMISSIONS_FORM extends PERMISSIONS_FORM
   /**
    * @var string
    */
-  var $button = 'Save';
+  public $button = 'Save';
   /**
    * @var string
    */
-  var $button_icon = '{icons}buttons/save';
+  public $button_icon = '{icons}buttons/save';
 
   /**
-   * @param APPLICATION &$app Main application.
+   * @param APPLICATION $app Main application.
    */
-  function FOLDER_PERMISSIONS_FORM (&$app)
+  function FOLDER_PERMISSIONS_FORM ($app)
   {
     PERMISSIONS_FORM::PERMISSIONS_FORM ($app);
 
@@ -89,10 +89,10 @@ class FOLDER_PERMISSIONS_FORM extends PERMISSIONS_FORM
 
   /**
    * Store the form's values to this set of permissions.
-   * @param FOLDER_PERMISSIONS &$obj
+   * @param FOLDER_PERMISSIONS $obj
    * @access private
    */
-  function commit (&$obj)
+  function commit ($obj)
   {
     foreach ($this->groups as $group)
     {
@@ -116,9 +116,9 @@ class FOLDER_PERMISSIONS_FORM extends PERMISSIONS_FORM
 
   /**
    * Load initial properties from these permissions.
-   * @param FOLDER_PERMISSIONS &$obj
+   * @param FOLDER_PERMISSIONS $obj
    */
-  function load_from_object (&$obj)
+  function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
 
@@ -132,12 +132,12 @@ class FOLDER_PERMISSIONS_FORM extends PERMISSIONS_FORM
   }
 
   /**
-   * @param FORM_RENDERER &$renderer
-   * @param PERMISSIONS_FORMATTER &$formatter
+   * @param FORM_RENDERER $renderer
+   * @param PERMISSIONS_FORMATTER $formatter
    * @access private
    * @abstract
    */
-  function _draw_permission_controls (&$renderer, &$formatter)
+  function _draw_permission_controls ($renderer, $formatter)
   {
     $this->_draw_buttons ($renderer);
     foreach ($this->groups as $group)

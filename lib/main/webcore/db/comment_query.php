@@ -64,10 +64,10 @@ class COMMENT_QUERY extends OBJECT_IN_SINGLE_FOLDER_QUERY
    * Create, prepare and set the entry for each comment.
    * @see _make_entry()
    * @see _prepare_entry()
-   * @param COMMENT &$obj
+   * @param COMMENT $obj
    * @access private
    */
-  function _prepare_object (&$obj)
+  function _prepare_object ($obj)
   {
     parent::_prepare_object ($obj);
     $entry = $this->_make_entry ();
@@ -92,40 +92,40 @@ class COMMENT_QUERY extends OBJECT_IN_SINGLE_FOLDER_QUERY
    * link to the entry. This avoids retrieving all the entry data when only the
    * link needs to be displayed (since this query shows comments, not full
    * entries).
-   * @param ENTRY &$entry The entry whose properties should be set.
+   * @param ENTRY $entry The entry whose properties should be set.
    * @access private
    */
-  function _prepare_entry (&$entry)
+  function _prepare_entry ($entry)
   {
     $entry->set_parent_folder ($this->_folder);
     $entry->id = $this->db->f ('entry_id');
   }
 
   /**
-   * @param COMMENT &$parent
-    * @param COMMENT &$obj
+   * @param COMMENT $parent
+    * @param COMMENT $obj
     * @access private
     */
-  function _obj_connect_to_parent (&$parent, &$obj)
+  function _obj_connect_to_parent ($parent, $obj)
   {
     $parent->add_comment ($obj);
   }
 
   /**
-   * @param COMMENT &$obj
+   * @param COMMENT $obj
     * @access private
     */
-  function _obj_set_sub_objects_cached (&$obj)
+  function _obj_set_sub_objects_cached ($obj)
   {
     $obj->set_comments_cached (TRUE);
   }
 
   /**
    * @return array[COMMENT]
-    * @param COMMENT &$obj
+    * @param COMMENT $obj
     * @access private
     */
-  function _obj_sub_objects (&$obj)
+  function _obj_sub_objects ($obj)
   {
     return $obj->sub_comments ();
   }
@@ -134,13 +134,13 @@ class COMMENT_QUERY extends OBJECT_IN_SINGLE_FOLDER_QUERY
    * @var ENTRY
    * @access private
    */
-  var $_entry = null;
+  protected $_entry = null;
   /**
    * Name of the default permission set to use.
    * @var string
    * @access private
    */
-  var $_privilege_set = Privilege_set_comment;
+  protected $_privilege_set = Privilege_set_comment;
 }
 
 ?>

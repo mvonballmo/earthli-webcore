@@ -51,17 +51,17 @@ class ATTACHMENT_FORM extends OBJECT_IN_FOLDER_FORM
   /**
    * @var string
    */
-  var $name = 'attachment_form';
+  public $name = 'attachment_form';
 
   /**
-   * @param ENTRY &$entry Will be attached to this object.
+   * @param ENTRY $entry Will be attached to this object.
    */
-  function ATTACHMENT_FORM (&$entry)
+  function ATTACHMENT_FORM ($entry)
   {
-    $folder =& $entry->parent_folder ();
+    $folder = $entry->parent_folder ();
     OBJECT_IN_FOLDER_FORM::OBJECT_IN_FOLDER_FORM ($folder);
 
-    $this->_entry =& $entry;
+    $this->_entry = $entry;
 
     $field = new TEXT_FIELD ();
     $field->id = 'type';
@@ -100,9 +100,9 @@ class ATTACHMENT_FORM extends OBJECT_IN_FOLDER_FORM
 
   /**
    * Load initial properties from this object.
-   * @param UNIQUE_OBJECT &$obj
+   * @param UNIQUE_OBJECT $obj
    */
-  function load_from_object (&$obj)
+  function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
     $this->load_from_client ('thumbnail_size', 200);
@@ -123,7 +123,7 @@ class ATTACHMENT_FORM extends OBJECT_IN_FOLDER_FORM
 
   /**
    * Called after fields are loaded with data.
-   * @param object &$obj Object from which data was loaded. May be null.
+   * @param object $obj Object from which data was loaded. May be null.
    * @access private
    */
   function _post_load_data ($obj) 
@@ -144,10 +144,10 @@ class ATTACHMENT_FORM extends OBJECT_IN_FOLDER_FORM
 
   /**
    * Apply post-validation operations to the object.
-   * @param object &$obj Object being validated.
+   * @param object $obj Object being validated.
    * @access private
    */
-  function _prepare_for_commit (&$obj)
+  function _prepare_for_commit ($obj)
   {
     parent::_prepare_for_commit ($obj);
 
@@ -177,10 +177,10 @@ class ATTACHMENT_FORM extends OBJECT_IN_FOLDER_FORM
 
   /**
    * Store the form's values to this object.
-   * @param STORABLE &$obj
+   * @param STORABLE $obj
    * @access private
    */
-  function _store_to_object (&$obj)
+  function _store_to_object ($obj)
   {
     parent::_store_to_object ($obj);
 
@@ -197,13 +197,13 @@ class ATTACHMENT_FORM extends OBJECT_IN_FOLDER_FORM
 
   /**
    * Specify how to store this uploaded file.
-   * @param UPLOAD_FILE_FIELD &$field
-   * @param UPLOADED_FILE &$file
+   * @param UPLOAD_FILE_FIELD $field
+   * @param UPLOADED_FILE $file
    * @param boolean $form_is_valid Will the form be committed?
    * @return string Can be {@link Uploaded_file_unique_name} or {@link Uploaded_file_overwrite}.
    * @access private
    */
-  function _upload_file_copy_mode (&$field, &$file, $form_is_valid)
+  function _upload_file_copy_mode ($field, $file, $form_is_valid)
   {
     if (! $this->previewing () && $this->value_for ('overwrite'))
     {
@@ -238,10 +238,10 @@ class ATTACHMENT_FORM extends OBJECT_IN_FOLDER_FORM
 
   /**
    * Draw the file upload controls.
-   * @var FORM_RENDERER &$renderer
+   * @var FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_file_controls (&$renderer)
+  function _draw_file_controls ($renderer)
   {
     $options = new FORM_TEXT_CONTROL_OPTIONS ();
     $options->on_change_script = 'upload_file_changed (this)';
@@ -264,10 +264,10 @@ class ATTACHMENT_FORM extends OBJECT_IN_FOLDER_FORM
   }
 
   /**
-   * @param FORM_RENDERER &$renderer
+   * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_controls (&$renderer)
+  function _draw_controls ($renderer)
   {
     $renderer->start ();
 
@@ -336,12 +336,12 @@ class ATTACHMENT_FORM extends OBJECT_IN_FOLDER_FORM
    * @var string
    * @access private
    */
-  var $_privilege_set = Privilege_set_entry;
+  protected $_privilege_set = Privilege_set_entry;
   /**
    * @var ENTRY
    * @access private
    */
-  var $_entry;
+  protected $_entry;
 }
 
 ?>

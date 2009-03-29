@@ -59,18 +59,18 @@ class CALENDAR extends WEBCORE_OBJECT
    * Treat as a read-only property; set only with {@link set_ranges()}.
    * @var DATE_TIME
    */
-  var $first_day;
+  public $first_day;
   /**
    * Last day to render.
    * Treat as a read-only property; set only with {@link set_ranges()}.
    * @var DATE_TIME
    */
-  var $last_day;
+  public $last_day;
 
   /**
-   * @param APPLICATION &$app Main application.
+   * @param APPLICATION $app Main application.
    */
-  function CALENDAR (&$app)
+  function CALENDAR ($app)
   {
     WEBCORE_OBJECT::WEBCORE_OBJECT ($app);
 
@@ -409,27 +409,27 @@ class CALENDAR extends WEBCORE_OBJECT
    * @var integer
    * @access private
    */
-  var $_first_empty_month;
+  protected $_first_empty_month;
   /**
    * Last month of current data-free range in calendar.
    * @see CALENDAR::make_empty_months()
    * @var integer
    * @access private
    */
-  var $_last_empty_month;
+  protected $_last_empty_month;
   /**
    * First year of current data-free range in calendar.
    * @see CALENDAR::make_empty_months()
    * @var integer
    * @access private
    */
-  var $_first_empty_year;
+  protected $_first_empty_year;
   /**
    * Last year of current data-free range in calendar.
    * @see CALENDAR::make_empty_months()
    * @var integer
    * @access private
    */
-  var $_last_empty_year;
+  protected $_last_empty_year;
 }
 ?>

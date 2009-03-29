@@ -52,28 +52,28 @@ class GROUP_BROWSER_GRID extends STANDARD_GRID
   /**
    * @var string
    */
-  var $object_name = 'group';
+  public $object_name = 'group';
   /**
    * @var boolean
    */
-  var $show_separator = FALSE;
+  public $show_separator = FALSE;
   /**
    * @var integer
    */
-  var $padding = 4;
+  public $padding = 4;
   /**
    * @var string
    */
-  var $width = '';
+  public $width = '';
   /**
    * @var boolean
    */
-  var $centered = TRUE;
+  public $centered = TRUE;
 
   /**
-   * @param CONTEXT &$context
+   * @param CONTEXT $context
    */
-  function GROUP_BROWSER_GRID (&$context)
+  function GROUP_BROWSER_GRID ($context)
   {
     GRID::GRID ($context);
     $this->_controls_renderer = $this->app->make_controls_renderer ();
@@ -93,10 +93,10 @@ class GROUP_BROWSER_GRID extends STANDARD_GRID
   }
 
   /**
-   * @param GROUP &$obj
+   * @param GROUP $obj
     * @access private
     */
-  function _draw_box (&$obj)
+  function _draw_box ($obj)
   {
     echo $obj->title_as_link ();
     echo "</td>\n<td style=\"padding-left: 1em; text-align: center\">";
@@ -107,6 +107,6 @@ class GROUP_BROWSER_GRID extends STANDARD_GRID
    * @var CONTROLS_RENDERER
    * @access private
    */
-  var $_controls_renderer;
+  protected $_controls_renderer;
 }
 ?>

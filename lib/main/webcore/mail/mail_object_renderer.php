@@ -51,43 +51,43 @@ require_once ('webcore/gui/object_renderer.php');
 class MAIL_OBJECT_RENDERER extends MAIL_RENDERER
 {
   /**
-   * @param object &$obj
+   * @param object $obj
    * @return string
    */
-  function subject (&$obj, $options)
+  function subject ($obj, $options)
   {
     return '';
   }
 
   /**
    * Returns the object's contents as HTML.
-   * @param object &$obj
+   * @param object $obj
    * @param MAIL_OBJECT_RENDERER_OPTIONS $options
    * @return string
    */
-  function html_body (&$obj, $options)
+  function html_body ($obj, $options)
   {
     return $this->_body ($obj, $options, '_echo_html_content');
   }
 
   /**
    * Returns the object's contents as text.
-   * @param object &$obj
+   * @param object $obj
    * @param MAIL_OBJECT_RENDERER_OPTIONS $options
    * @return string
    */
-  function text_body (&$obj, $options)
+  function text_body ($obj, $options)
   {
     return $this->_body ($obj, $options, '_echo_text_content');
   }
 
   /**
-   * @param object &$obj
+   * @param object $obj
    * @param MAIL_OBJECT_RENDERER_OPTIONS $options
    * @param method $func The method {@link _echo_text_content} or {@link _echo_html_content}.
    * @access private
    */
-  function _body (&$obj, $options, $func)
+  function _body ($obj, $options, $func)
   {
     $state = null;  // Compiler warning
     $this->_start_rendering ($options, $state);
@@ -103,20 +103,20 @@ class MAIL_OBJECT_RENDERER extends MAIL_RENDERER
   }
 
   /**
-   * @param object &$obj
+   * @param object $obj
    * @param MAIL_OBJECT_RENDERER_OPTIONS $options
    * @access private
    * @abstract
    */
-  function _echo_text_content (&$obj, $options) { $this->raise_deferred ('_echo_text_content', 'MAIL_OBJECT_RENDERER'); }
+  function _echo_text_content ($obj, $options) { $this->raise_deferred ('_echo_text_content', 'MAIL_OBJECT_RENDERER'); }
 
   /**
-   * @param object &$obj
+   * @param object $obj
    * @param MAIL_OBJECT_RENDERER_OPTIONS $options
    * @access private
    * @abstract
    */
-  function _echo_html_content (&$obj, $options) { $this->raise_deferred ('_echo_html_content', 'MAIL_OBJECT_RENDERER'); }
+  function _echo_html_content ($obj, $options) { $this->raise_deferred ('_echo_html_content', 'MAIL_OBJECT_RENDERER'); }
 }
 
 /**
@@ -131,22 +131,22 @@ class MAIL_OBJECT_RENDERER extends MAIL_RENDERER
 class RENDERER_BASED_MAIL_RENDERER extends MAIL_OBJECT_RENDERER
 {
   /**
-   * @param object &$obj
+   * @param object $obj
    * @param MAIL_OBJECT_RENDERER_OPTIONS $options
    * @access private
    */
-  function _echo_html_content (&$obj, $options)
+  function _echo_html_content ($obj, $options)
   {
     $renderer = $this->_make_renderer ();
     $renderer->display_as_html ($obj, $options);
   }
 
   /**
-   * @param object &$obj
+   * @param object $obj
    * @param MAIL_OBJECT_RENDERER_OPTIONS $options
    * @access private
    */
-  function _echo_text_content (&$obj, $options)
+  function _echo_text_content ($obj, $options)
   {
     $renderer = $this->_make_renderer ();
     $renderer->display_as_plain_text ($obj, $options);
@@ -180,20 +180,20 @@ class MAIL_OBJECT_RENDERER_OPTIONS extends OBJECT_RENDERER_OPTIONS
    * but leave it off when rendered alone.
    * @var integer
    */
-  var $num_items;
+  public $num_items;
   /**
    * Brief description of the contained objects.
    * Some renderers will preface their object list with this summary, to indicate what is
    * contained in a longer email.
    * @var string
    */
-  var $content_summary;
+  public $content_summary;
   /**
    * Ignore the subscriber's message length preference if true.
    * Use this option to truncate mail text and drive traffic to the site.
    * @var boolean
    */
-  var $ignore_subscriber_preferred_text_length = FALSE;
+  public $ignore_subscriber_preferred_text_length = FALSE;
 }
 
 ?>

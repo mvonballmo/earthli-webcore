@@ -49,9 +49,9 @@ require_once ('webcore/forms/search_fields.php');
 class SEARCH_RECIPE_FIELDS extends SEARCH_DRAFTABLE_FIELDS
 {
   /**
-   * @param APPLICATION &$app Main application.
+   * @param APPLICATION $app Main application.
    */
-  function SEARCH_RECIPE_FIELDS (&$app)
+  function SEARCH_RECIPE_FIELDS ($app)
   {
     SEARCH_DRAFTABLE_FIELDS::SEARCH_DRAFTABLE_FIELDS ($app);
 

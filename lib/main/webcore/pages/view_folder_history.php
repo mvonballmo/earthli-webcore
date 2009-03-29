@@ -27,7 +27,7 @@ http://www.earthli.com/software/webcore
 ****************************************************************************/
 
   $folder_query = $App->login->folder_query ();
-  $folder =& $folder_query->object_at_id (read_var ('id'));
+  $folder = $folder_query->object_at_id (read_var ('id'));
 
   if (isset ($folder) && $App->login->is_allowed (Privilege_set_folder, Privilege_view_history, $folder))
   {
@@ -35,7 +35,7 @@ http://www.earthli.com/software/webcore
     $Page->location->add_folder_link ($folder);
 
     $history_item_query = $folder->history_item_query ();
-    $obj =& $folder;
+    $obj = $folder;
     
     include_once ('webcore/pages/view_history.php');
   }

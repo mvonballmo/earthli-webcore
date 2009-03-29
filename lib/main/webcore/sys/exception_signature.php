@@ -51,49 +51,49 @@ class EXCEPTION_SIGNATURE
    * Exception scope (class name, function name or 'global').
    * @var string
    */
-  var $scope;
+  public $scope;
   /**
    * Is the dynamic class different than the scope?
    * If the dynamic type is other than the class in which the exception-generating method
    * is defined, this flag is set.
    * @var boolean
    */
-  var $is_derived_type;
+  public $is_derived_type;
   /**
    * If non-empty, the routine that generated the exception.
    * This can be empty if the exception happened in a global routine or scope.
    * @var string
    */
-  var $routine_name;
+  public $routine_name;
   /**
    * If non-empty, the routine is a method of this class.
    * This can be empty if the exception happened in a global routine or scope.
    * @var string
    */
-  var $class_name;
+  public $class_name;
   /**
    * Name of the dynamic class that generated the exception.
    * This can be empty if the exception happened in a global routine or scope.
    * @var string
    */
-  var $dynamic_class_name;
+  public $dynamic_class_name;
   /**
    * Page in which the exception occurred.
    * @var string
    */
-  var $page_name;
+  public $page_name;
   /**
    * Name and version of the application.
    * The exception handler page may not instantiate the application that raised the exception, so
    * pass along this information manually.
    * @var string
    */
-  var $application_description;
+  public $application_description;
   /**
    * Message issued with the exception.
    * @var string
    */
-  var $message;
+  public $message;
 
   /**
    * Record values from the given exception state.
@@ -297,10 +297,10 @@ class EXCEPTION_SIGNATURE
    * Used by {@link as_array()} to include information about the post/get/cookie state when the
    * exception occurred.
    * @param string $title Name of the array to get. Can be {@link Var_type_post}, {@link Var_type_get}, {@link Var_type_cookie} or {@link Var_type_upload}.
-   * @param array[string,string] &$to_array
+   * @param array[string,string] $to_array
    * @access private
    */
-  function _add_values_from ($title, &$to_array)
+  function _add_values_from ($title, $to_array)
   {
     if (isset ($this->_variables))
     {
@@ -354,7 +354,7 @@ class EXCEPTION_SIGNATURE
    * @var array[string,string,string]
    * @access private
    */
-  var $_variables;
+  protected $_variables;
 }
 
 ?>

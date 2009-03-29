@@ -63,12 +63,12 @@ class FOLDER_INHERITABLE_SETTINGS extends STORABLE
    * @var boolean
    * @access private
    */
-  var $create_history_item_for_self = TRUE;
+  public $create_history_item_for_self = TRUE;
 
   /**
-   * @param FOLDER &$folder Attached to this folder.
+   * @param FOLDER $folder Attached to this folder.
    */
-  function FOLDER_INHERITABLE_SETTINGS (&$folder)
+  function FOLDER_INHERITABLE_SETTINGS ($folder)
   {
     STORABLE::STORABLE ($folder->app);
     $this->attach_to ($folder);
@@ -90,11 +90,11 @@ class FOLDER_INHERITABLE_SETTINGS extends STORABLE
    * Folder which defines these settings.
    * @return FOLDER
    */
-  function &definer ()
+  function definer ()
   {
     if (! isset ($this->_definer))
     {
-      $this->_definer =& $this->app->login->folder_at_id ($this->_definer_id);
+      $this->_definer = $this->app->login->folder_at_id ($this->_definer_id);
     }
 
     return $this->_definer;
@@ -184,10 +184,10 @@ class FOLDER_INHERITABLE_SETTINGS extends STORABLE
   /**
    * Move these settings to this folder.
    * Simply transfers ownership of internal fields.
-   * @param FOLDER &$folder */
-  function attach_to (&$folder)
+   * @param FOLDER $folder */
+  function attach_to ($folder)
   {
-    $this->_folder =& $folder;
+    $this->_folder = $folder;
     $field_name = $this->_field_name;
     $this->_definer_id = $folder->$field_name;
     $this->_exists = ($folder->$field_name == $folder->id);
@@ -198,9 +198,9 @@ class FOLDER_INHERITABLE_SETTINGS extends STORABLE
   }
 
   /**
-   * @param DATABASE &$db
+   * @param DATABASE $db
    */
-  function load (&$db)
+  function load ($db)
   {
     parent::load ($db);
     $this->folder_id = $db->f ("folder_id");
@@ -208,9 +208,9 @@ class FOLDER_INHERITABLE_SETTINGS extends STORABLE
   }
 
   /**
-   * @param SQL_STORAGE &$storage Store values to this object.
+   * @param SQL_STORAGE $storage Store values to this object.
    */
-  function store_to (&$storage)
+  function store_to ($storage)
   {
     if ($this->_stores_data)
     {
@@ -275,7 +275,7 @@ class FOLDER_INHERITABLE_SETTINGS extends STORABLE
    * @param boolean $creating Flag passed to {@link _update_folder()}.
    * @access private
    */
-  function _update_folder_list (&$folders, $source_folder, $creating)
+  function _update_folder_list ($folders, $source_folder, $creating)
   {
     if (sizeof ($folders))
     {
@@ -293,7 +293,7 @@ class FOLDER_INHERITABLE_SETTINGS extends STORABLE
    * @param boolean $creating
    * @access private
    */
-  function _update_folder (&$target_folder, $source_folder, $creating)
+  function _update_folder ($target_folder, $source_folder, $creating)
   {
     $field_name = $this->_field_name;
 
@@ -325,9 +325,9 @@ class FOLDER_INHERITABLE_SETTINGS extends STORABLE
    * @return FOLDER
    * @access private
    */
-  function &parent_definer ()
+  function parent_definer ()
   {
-    $parent =& $this->_folder->parent_folder ();
+    $parent = $this->_folder->parent_folder ();
     if (isset ($parent))
     {
       $field_name = $this->_field_name;
@@ -351,7 +351,7 @@ class FOLDER_INHERITABLE_SETTINGS extends STORABLE
     /* Update this folder and all subfolders to use the settings used
        by the parent (which is not necessarily the definer of the settings). */
 
-    $this->_definer =& $this->parent_definer ();
+    $this->_definer = $this->parent_definer ();
     if (isset ($this->_definer))
     {
       $this->_definer_id = $this->_definer->id;
@@ -394,12 +394,12 @@ class FOLDER_INHERITABLE_SETTINGS extends STORABLE
   /**
    * Description for a folder's history item for inheriting this option.
    * @param boolean $adding Is the option being added?
-   * @param FOLDER &$folder Folder from which the option is being added.
+   * @param FOLDER $folder Folder from which the option is being added.
    * @return string
    * @access private
    * @abstract
    */
-  function _history_item_description ($creating, &$folder)
+  function _history_item_description ($creating, $folder)
   {
     $this->raise_deferred ('_history_item_description', 'FOLDER_INHERITABLE_SETTINGS');
   }
@@ -425,25 +425,25 @@ class FOLDER_INHERITABLE_SETTINGS extends STORABLE
    * @see definer()
    * @var integer
    */
-  var $_definer_id;
+  protected $_definer_id;
   /**
    * Settings are defined in this folder.
    * @var FOLDER
    * @access private
    */
-  var $_definer;
+  protected $_definer;
   /**
    * Name of the object field in the folder and database.
    * @var string
    * @access private
    */
-  var $_field_name;
+  protected $_field_name;
   /**
    * Settings retrieved from this folder.
    *  @access private
    * @var FOLDER
    */
-  var $_folder;
+  protected $_folder;
   /**
    * If <code>True</code>, stores to {@link _settings_table_name()}.
    * If <code>False</code>, settings are not automatically saved when {@link
@@ -453,12 +453,12 @@ class FOLDER_INHERITABLE_SETTINGS extends STORABLE
    * @var boolean
    * @access private
    */
-  var $_stores_data = TRUE;
+  protected $_stores_data = TRUE;
   /**
    * @var boolean
    * @access private
    */
-  var $_exists;
+  protected $_exists;
 }
 
 ?>

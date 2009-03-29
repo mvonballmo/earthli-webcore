@@ -57,12 +57,12 @@ class TEST_TASK extends TASK
    * Icon to show in the title bar when executing.
    * @var string
    */
-  var $icon = '{icons}buttons/test';
+  public $icon = '{icons}buttons/test';
   /**
    * Log all messages in this channel.
    * @var string
    */
-  var $log_channel = Msg_channel_test;
+  public $log_channel = Msg_channel_test;
 
   /**
    * Return a formatted title for this task.

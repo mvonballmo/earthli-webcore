@@ -55,18 +55,18 @@ class FOLDER extends ATTACHMENT_HOST
    * {@link APPLICATION::link_to()}.
    * @var string
    */
-  var $icon_url;
+  public $icon_url;
   /**
    * Short description of the contents of the folder.
    * @var string
    */
-  var $summary;
+  public $summary;
   /**
    * Denotes a folder that does not hold content.
    * Content controls will not be displayed for this folder.
    * @var boolean
    */
-  var $organizational;
+  public $organizational;
 
   /**
    * Foreign key reference to the id of this folder's parent.
@@ -74,20 +74,20 @@ class FOLDER extends ATTACHMENT_HOST
     * @var integer
     * @access private
     */
-  var $parent_id;
+  public $parent_id;
   /**
    * Foreign key reference to the id of the root folder for this subtree.
     * Zero if this is a root folder
     * @var integer
     * @access private
     */
-  var $root_id;
+  public $root_id;
   /**
    * Foreign key reference to the id of the id this folder uses to obtain permissions.
     * @var integer
     * @access private
     */
-  var $permissions_id;
+  public $permissions_id;
 
   /**
    * Is this the root folder in this {@link APPLICATION}?
@@ -164,7 +164,7 @@ class FOLDER extends ATTACHMENT_HOST
     * of the folder itself. Useful for displaying activity in folders.
     * @return USER
     */
-  function &latest_object_creator ()
+  function latest_object_creator ()
   {
     $this->_cache_latest_object_info ();
     return $this->_latest_object_creator;
@@ -176,7 +176,7 @@ class FOLDER extends ATTACHMENT_HOST
    * most applicable to that user.
    * @return CONTENT_PRIVILEGES
    */
-  function &permissions ()
+  function permissions ()
   {
     $this->assert (isset ($this->_privileges), "Permissions not loaded for [$this->title].", 'permissions', 'FOLDER');
     return $this->_privileges;
@@ -186,12 +186,12 @@ class FOLDER extends ATTACHMENT_HOST
    * Parent folder for this one; may be empty.
    * @return FOLDER
    */
-  function &permissions_folder ()
+  function permissions_folder ()
   {
     if (! isset ($this->_permissions_folder))
     {
       $folder_query = $this->login->folder_query ();
-      $this->_permissions_folder =& $folder_query->object_at_id ($this->permissions_id);
+      $this->_permissions_folder = $folder_query->object_at_id ($this->permissions_id);
     }
 
     return $this->_permissions_folder;
@@ -201,7 +201,7 @@ class FOLDER extends ATTACHMENT_HOST
    * Contains permissions for this object.
    * @return FOLDER
    */
-  function &security_context ()
+  function security_context ()
   {
     return $this;
   }
@@ -232,6 +232,8 @@ class FOLDER extends ATTACHMENT_HOST
 
       return $this->_security;
     }
+    
+    return null;
   }
 
 
@@ -338,7 +340,7 @@ class FOLDER extends ATTACHMENT_HOST
       if (is_numeric ($id))
       {
         $entry_query = $this->entry_query ();
-        $entry =& $entry_query->object_at_id ($id);
+        $entry = $entry_query->object_at_id ($id);
         $url = $entry->home_page ();
       }
       else
@@ -359,7 +361,7 @@ class FOLDER extends ATTACHMENT_HOST
    * @return FOLDER
    * @access private
    */
-  function &_load_parent_folder ()
+  function _load_parent_folder ()
   {
     return $this->login->folder_at_id ($this->parent_id, TRUE);
   }
@@ -368,7 +370,7 @@ class FOLDER extends ATTACHMENT_HOST
    * Set the containing folder for the object.
    * @access private
    */
-  function set_parent_folder (&$fldr)
+  function set_parent_folder ($fldr)
   {
     parent::set_parent_folder ($fldr);
     $this->parent_id = $fldr->id;
@@ -377,12 +379,12 @@ class FOLDER extends ATTACHMENT_HOST
 
   /**
    * Attach this folder as a sub-folder here.
-    * @param FOLDER &$folder
+    * @param FOLDER $folder
     * @access private
     */
-  function add_sub_folder (&$folder)
+  function add_sub_folder ($folder)
   {
-    $this->_sub_folders [] =& $folder;
+    $this->_sub_folders [] = $folder;
     $folder->set_parent_folder ($this);
   }
 
@@ -423,9 +425,9 @@ class FOLDER extends ATTACHMENT_HOST
   }
 
   /**
-   * @param DATABASE &$db Database from which to load values.
+   * @param DATABASE $db Database from which to load values.
    */
-  function load (&$db)
+  function load ($db)
   {
     parent::load ($db);
     $this->summary = $db->f ('summary');
@@ -439,14 +441,14 @@ class FOLDER extends ATTACHMENT_HOST
     $this->_privileges = $this->app->make_privileges ();
     $this->_privileges->load ($db);
 
-    $folder_cache =& $this->login->folder_cache ();
+    $folder_cache = $this->login->folder_cache ();
     $folder_cache->add_object ($this);
   }
 
   /**
-   * @param SQL_STORAGE &$storage Store values to this object.
+   * @param SQL_STORAGE $storage Store values to this object.
    */
-  function store_to (&$storage)
+  function store_to ($storage)
   {
     parent::store_to ($storage);
     $tname =$this->_table_name ();
@@ -479,7 +481,7 @@ class FOLDER extends ATTACHMENT_HOST
   {
     parent::_create ();
 
-    $parent =& $this->parent_folder ();
+    $parent = $this->parent_folder ();
 
     if (! isset ($parent))
     {
@@ -504,12 +506,12 @@ class FOLDER extends ATTACHMENT_HOST
   {
     if ($this->exists ())
     {
-      $subs =& $this->sub_folders ();
+      $subs = $this->sub_folders ();
       $c = sizeof ($subs);
       $i = 0;
       while ($i < $c)
       {
-        $f =& $subs [$i];
+        $f = $subs [$i];
         $f->set_state ($this->state, TRUE);
         $i++;
       }
@@ -520,10 +522,10 @@ class FOLDER extends ATTACHMENT_HOST
 
   /**
    * Move the object to the specified folder.
-   * @param FOLDER &$fldr
-   * @param FOLDER_OPERATION_OPTIONS &$options
+   * @param FOLDER $fldr
+   * @param FOLDER_OPERATION_OPTIONS $options
    */
-  function _move_to (&$fldr, &$options)
+  function _move_to ($fldr, $options)
   {
     if ($options->update_now && $options->maintain_permissions)
     {
@@ -550,16 +552,16 @@ class FOLDER extends ATTACHMENT_HOST
 
   /**
    * Copy the object to the specified folder.
-   * @param FOLDER &$fldr
-   * @param FOLDER_OPERATION_OPTIONS &$options
+   * @param FOLDER $fldr
+   * @param FOLDER_OPERATION_OPTIONS $options
    */
-  function _copy_to (&$fldr, &$options)
+  function _copy_to ($fldr, $options)
   {
     if ($options->update_now && $options->maintain_permissions)
     {
       if ($this->permissions_id != $fldr->permissions_id)
       {
-        $security =& $this->security_definition ();
+        $security = $this->security_definition ();
         $security->copy_and_store (Security_copy_current);
         $this->permissions_id = $this->id;
       }
@@ -657,7 +659,7 @@ class FOLDER extends ATTACHMENT_HOST
       else
       {
         $this->_latest_object_create_time = $this->time_modified;
-        $this->_latest_object_creator =& $this->modifier ();
+        $this->_latest_object_creator = $this->modifier ();
       }
     }
   }
@@ -711,11 +713,11 @@ class FOLDER extends ATTACHMENT_HOST
 
   /**
    * Apply class-specific restrictions to this query.
-   * @param SUBSCRIPTION_QUERY &$query
-   * @param HISTORY_ITEM &$history_item Action that generated this request. May be empty.
+   * @param SUBSCRIPTION_QUERY $query
+   * @param HISTORY_ITEM $history_item Action that generated this request. May be empty.
    * @access private
    */
-  function _prepare_subscription_query (&$query, &$history_item)
+  function _prepare_subscription_query ($query, $history_item)
   {
     $query->restrict ('watch_entries > 0');
     $query->restrict_kinds (array (Subscribe_folder => $this->id
@@ -726,43 +728,43 @@ class FOLDER extends ATTACHMENT_HOST
    * @var FOLDER
     * @access private
     */
-  var $_parent;
+  protected $_parent;
   /**
    * @var FOLDER
     * @access private
     */
-  var $_permissions_folder;
+  protected $_permissions_folder;
   /**
    * @var DATE_TIME
     * @access private
     */
-  var $_latest_object_create_time;
+  protected $_latest_object_create_time;
   /**
    * @var USER
     * @access private
     */
-  var $_latest_object_creator;
+  protected $_latest_object_creator;
   /**
    * @var boolean
    * @access private
    */
-  var $_sub_folders_cached = FALSE;
+  protected $_sub_folders_cached = FALSE;
   /**
    * @var array[FOLDER]
     * @access private
     */
-  var $_sub_folders;
+  protected $_sub_folders;
   /**
    * @var bool
     * @access private
     */
-  var $_use_cached_sub_folders;
+  protected $_use_cached_sub_folders;
   /**
    * Permissions for the {@link $login} user.
     * @var CONTENT_PRIVILEGES
     * @access private
     */
-  var $_privileges;
+  protected $_privileges;
 }
 
 ?>

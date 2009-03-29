@@ -50,12 +50,12 @@ class HISTORY_ITEM_RENDERER extends OBJECT_RENDERER
 {
   /**
    * Outputs the object as HTML.
-   * @param HISTORY_ITEM &$obj
+   * @param HISTORY_ITEM $obj
    * @access private
    */
-  function _display_as_html (&$obj)
+  function _display_as_html ($obj)
   {
-    $creator =& $obj->creator ();
+    $creator = $obj->creator ();
 ?>
   <p class="detail">
     <?php echo $obj->kind_as_icon () . ' ' . $creator->title_as_link () . ' - ' . $this->_time ($obj->time_created); ?>
@@ -82,12 +82,12 @@ class HISTORY_ITEM_RENDERER extends OBJECT_RENDERER
 
   /**
    * Outputs the object as plain text.
-   * @param HISTORY_ITEM &$obj
+   * @param HISTORY_ITEM $obj
    * @access private
    */
-  function _display_as_plain_text (&$obj)
+  function _display_as_plain_text ($obj)
   {
-    $creator =& $obj->creator ();
+    $creator = $obj->creator ();
     echo $this->_line (ucfirst ($obj->kind_as_text ()) . ' by ' . $creator->title_as_plain_text () . ' - ' . $this->_time ($obj->time_created));
     echo $this->_line ($this->_sep ());
 

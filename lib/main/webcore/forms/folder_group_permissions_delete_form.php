@@ -48,12 +48,12 @@ require_once ('webcore/forms/delete_form.php');
  */
 class FOLDER_GROUP_PERMISSIONS_DELETE_FORM extends DELETE_FORM
 {
-  var $show_object_as_link = FALSE;
+  public $show_object_as_link = FALSE;
 
   /**
-   * @param APPLICATION &$app Main application.
+   * @param APPLICATION $app Main application.
    */
-  function FOLDER_GROUP_PERMISSIONS_DELETE_FORM (&$app)
+  function FOLDER_GROUP_PERMISSIONS_DELETE_FORM ($app)
   {
     DELETE_FORM::DELETE_FORM ($app);
 
@@ -68,9 +68,9 @@ class FOLDER_GROUP_PERMISSIONS_DELETE_FORM extends DELETE_FORM
 
   /**
    * Load initial properties from these permissions.
-   * @param PERMISSIONS &$obj
+   * @param PERMISSIONS $obj
    */
-  function load_from_object (&$obj)
+  function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
     $this->set_value ('id', $obj->folder_id);

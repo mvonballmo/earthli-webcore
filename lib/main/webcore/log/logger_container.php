@@ -53,33 +53,33 @@ class LOGGER_CONTAINER extends RAISABLE
    * Loggers can be linked in chains, but each is constrained by its parent's filter.
    * @var LOGGER
    */
-  var $logger;
+  public $logger;
 
   /**
    * Set the logger. Replaces all other loggers.
    * Use {@link add_logger()} to append a logger to the chain.
-   * @param LOGGER &$logger
+   * @param LOGGER $logger
    * @param boolean $copy_settings Copies settings from the current logger if
    * <code>True</code>.
    */
-  function set_logger (&$logger, $copy_settings = TRUE)
+  function set_logger ($logger, $copy_settings = TRUE)
   {
     if ($copy_settings && $this->logger)
     {
       $this->logger->copy_settings_to ($logger);
     }
-    $this->logger =& $logger;
+    $this->logger = $logger;
   }
 
   /**
    * Add this logger to the chain. 
    * Existing loggers remain in the list. Use {@link set_logger()} to replace
    * the whole chain of current loggers.
-   * @param LOGGER &$logger
+   * @param LOGGER $logger
    * @param boolean $copy_settings Copies settings from the current logger if
    * <code>True</code>.
    */
-  function add_logger (&$logger, $copy_settings = TRUE)
+  function add_logger ($logger, $copy_settings = TRUE)
   {
     if (isset ($this->logger))
     {
@@ -103,7 +103,7 @@ class LOGGER_CONTAINER extends RAISABLE
       {
         if (isset ($this->logger->logger))
         {
-          $this->logger =& $this->logger->logger;
+          $this->logger = $this->logger->logger;
         }
         else
         {

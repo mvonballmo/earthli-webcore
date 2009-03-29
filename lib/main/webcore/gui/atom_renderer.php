@@ -88,13 +88,13 @@ class ATOM_RENDERER extends NEWSFEED_RENDERER
   /**
    * @var string
    */
-  var $style_sheet = '{styles}atom.css';
+  public $style_sheet = '{styles}atom.css';
   /**
    * @var string 
    * The following override is commented because Firefox offers to download
    * this file type instead of displaying it.
    */
-////  var $content_type = 'application/atom+xml';
+////  public $content_type = 'application/atom+xml';
 
   /**
    * Called from {@link start_display()}.
@@ -138,7 +138,7 @@ class ATOM_RENDERER extends NEWSFEED_RENDERER
    * @var string
    * @access private
    */
-  var $_handler_type = Handler_atom_renderer;
+  protected $_handler_type = Handler_atom_renderer;
 }
 
 /**
@@ -152,23 +152,23 @@ class ENTRY_ATOM_RENDERER extends NEWSFEED_OBJECT_RENDERER
 {
   /**
    * Draws the RSS item for this entry.
-   * @param ENTRY &$obj
+   * @param ENTRY $obj
    * @param OBJECT_RENDERER_OPTIONS $options
    */
-  function display (&$obj, $options = null)
+  function display ($obj, $options = null)
   {
     $t = $this->_publication_date_for ($obj);
-    $modifier =& $obj->modifier ();
+    $modifier = $obj->modifier ();
     $content = $this->_content_for ($obj, $options);
     $html = $this->_is_html($options);
 
     if ($html)
     {
-      $munger =& $obj->html_formatter ();
+      $munger = $obj->html_formatter ();
     }
     else
     {
-      $munger =& $obj->plain_text_formatter ();
+      $munger = $obj->plain_text_formatter ();
     }
       
     $munger->max_visible_output_chars = 300;
@@ -196,11 +196,11 @@ class ENTRY_ATOM_RENDERER extends NEWSFEED_OBJECT_RENDERER
   
   /**
    * Get the time to display for the entry.
-   * @param ENTRY &$obj
+   * @param ENTRY $obj
    * @return DATE_TIME
    * @access private
    */
-  function _publication_date_for (&$obj)
+  function _publication_date_for ($obj)
   {
     return $obj->time_created;
   }
@@ -217,11 +217,11 @@ class DRAFTABLE_ENTRY_ATOM_RENDERER extends ENTRY_ATOM_RENDERER
 {
   /**
    * Get the time to display for the entry.
-   * @param ENTRY &$obj
+   * @param ENTRY $obj
    * @return DATE_TIME
    * @access private
    */
-  function _publication_date_for (&$obj)
+  function _publication_date_for ($obj)
   {
     return $obj->time_published;
   }

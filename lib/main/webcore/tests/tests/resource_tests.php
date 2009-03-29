@@ -87,7 +87,7 @@ class RESOURCE_TEST_TASK extends TEST_TASK
     $this->_check_equal ('/external/software/vacation/old_file_large.zip', $res->resolve_file ('{external}vacation/old_file_large'));
   }
   
-  function _check_force_root_override (&$page_res, &$app_res)
+  function _check_force_root_override ($page_res, $app_res)
   {
     $this->_check_equal ('#location_in_page', $app_res->resolve_file ('#location_in_page', Force_root_on));
     $this->_check_equal ('/var/log/mail/mylog.txt', $app_res->resolve_file ('{logs}/mail/mylog.txt', Force_root_on));
@@ -106,7 +106,7 @@ class RESOURCE_TEST_TASK extends TEST_TASK
     $this->_check_equal ('attachments/entry/hello/', $app_res->resolve_path_for_alias ('entry_attachments', 'hello', Force_root_off));
   }
   
-  function _check_force_root_default (&$env_res, &$page_res, &$app_res)
+  function _check_force_root_default ($env_res, $page_res, $app_res)
   {
     $page_res->set_path ('attachments', '');
     $page_res->set_path ('entry_attachments', '');

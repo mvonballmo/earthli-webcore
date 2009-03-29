@@ -57,13 +57,13 @@ class HIGHLIGHTER extends WEBCORE_OBJECT
    * Only works for PHP 4.3 and higher.
    * @var boolean
    */
-  var $show_line_numbers = TRUE;
+  public $show_line_numbers = TRUE;
   /**
    * Links PHP functions to the PHP web site.
    * Only works for PHP 4.3 and higher.
    * @var boolean
    */
-  var $link_functions = TRUE;
+  public $link_functions = TRUE;
 
   /**
    * Syntax-highlight the contents of the current url.

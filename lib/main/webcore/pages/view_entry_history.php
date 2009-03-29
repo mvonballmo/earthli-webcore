@@ -28,12 +28,12 @@ http://www.earthli.com/software/webcore
 
   $id = read_var ('id');
   $folder_query = $App->login->folder_query ();
-  $folder =& $folder_query->folder_for_entry_at_id ($id);
+  $folder = $folder_query->folder_for_entry_at_id ($id);
 
   if (isset ($folder))
   {
     $entry_query = $folder->entry_query ();
-    $entry =& $entry_query->object_at_id ($id);
+    $entry = $entry_query->object_at_id ($id);
   }
 
   if (isset ($entry) && $App->login->is_allowed (Privilege_set_entry, Privilege_view_history, $entry))
@@ -45,7 +45,7 @@ http://www.earthli.com/software/webcore
     $Page->location->add_object_link ($entry);
 
     $history_item_query = $entry->history_item_query ();
-    $obj =& $entry;
+    $obj = $entry;
 
     include_once ($App->page_template_for ('webcore/pages/view_history.php'));
   }

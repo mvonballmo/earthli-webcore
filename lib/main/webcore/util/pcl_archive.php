@@ -117,7 +117,7 @@ class PCL_ZIP_FILE extends COMPRESSED_FILE
         $entry->size = $zip_entry ['size'];
         $entry->compressed_size = $zip_entry ['compressed_size'];
 
-        $file_callback->execute (array (&$this, &$entry, $error_callback));
+        $file_callback->execute (array ($this, $entry, $error_callback));
       }
     }
   }
@@ -135,7 +135,7 @@ class PCL_ZIP_FILE extends COMPRESSED_FILE
    * @var array
    * @access private
    */
-  var $_entries;
+  protected $_entries;
 }
 
 /**
@@ -152,14 +152,14 @@ class PCL_ZIP_ENTRY extends COMPRESSED_FILE_ENTRY
    * Size of block to use when reading zip files.
    * @var integer
    */
-  var $read_block_size = 2048;
+  public $read_block_size = 2048;
 
   /**
-   * @param COMPRESSED_FILE &$file
-   * @param &$PclZip $zip Reference to a object.
+   * @param COMPRESSED_FILE $file
+   * @param $PclZip $zip Reference to a object.
    * @param object $entry The entry from which to extract. 
    */
-  function PCL_ZIP_ENTRY (&$file, $zip, $entry)
+  function PCL_ZIP_ENTRY ($file, $zip, $entry)
   {
     COMPRESSED_FILE_ENTRY::COMPRESSED_FILE_ENTRY ($file);
     $this->_zip = $zip;
@@ -187,13 +187,13 @@ class PCL_ZIP_ENTRY extends COMPRESSED_FILE_ENTRY
    * @var resource
    * @access private
    */
-  var $_entry;
+  protected $_entry;
   /**
    * Reference to a value returned from {@link PHP_MANUAL#zip_open()}
    * @var resource
    * @access private
    */
-  var $_zip;
+  protected $_zip;
 }
 
 ?>

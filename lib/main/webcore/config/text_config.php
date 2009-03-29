@@ -64,7 +64,7 @@ class TEXT_OPTIONS
    * PHP_MANUAL#get_html_translation_table}.
    * @var array[string,string]
    */
-  var $html_entity_translations = array ( ISO_8859_1_em_dash => '&mdash;'
+  public $html_entity_translations = array ( ISO_8859_1_em_dash => '&mdash;'
                                         , ISO_8859_1_en_dash => '&#8211;'
                                         , ISO_8859_1_em_dash => '&#8212;'
                                         , ISO_8859_1_trademark => '&trade;'
@@ -141,7 +141,7 @@ class TEXT_OPTIONS
  * Used when no options are passed to a text function.
  * @return TEXT_OPTIONS
  */
-function &global_text_options ()
+function global_text_options ()
 {
   global $_g_text_options;
   if (! isset ($_g_text_options))

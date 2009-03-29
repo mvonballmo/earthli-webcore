@@ -53,55 +53,55 @@ class FIELD extends RAISABLE
    * This must be unique to the form to which this field is attached.
    * @var string
    */
-  var $id = '';
+  public $id = '';
   /**
    * Title used in error messages and display.
    * @var string
    */
-  var $title = '';
+  public $title = '';
   /**
    * Must this field be non-empty?
    * @var boolean
    */
-  var $required = FALSE;
+  public $required = FALSE;
   /**
    * Is the control for this field enabled (can it be changed?)
    * @var boolean
    */
-  var $enabled = TRUE;
+  public $enabled = TRUE;
   /**
    * Is the control displayed in the form?
    * @var boolean
    */
-  var $visible = TRUE;
+  public $visible = TRUE;
   /**
    * Description of the control.
    * Displayed differently depending on the control. Some controls don't display this at all.
    * @var string
    */
-  var $description = '';
+  public $description = '';
   /**
    * Perform tag validation for content.
    * Text fields can be checked for compliance with the munger formatter. Errors are listed with
    * line and character number.
    * @var boolean
    */
-  var $tag_validator_type = Tag_validator_none;
+  public $tag_validator_type = Tag_validator_none;
   /**
    * Persist values on the client?
    * If True, the last value entered is stored in a cookie and used as the
    * default value when the same form is shown again.
    * @var boolean
    */
-  var $sticky = FALSE;
+  public $sticky = FALSE;
 
   /**
    * Check whether the current value for this field conforms.
    * Doesn't return a value. Just record conformance violations with {@link FORM::record_error()}.
    * @see FORM::record_error()
-   * @param FORM &$form
+   * @param FORM $form
    */
-  function validate (&$form)
+  function validate ($form)
   {
     if ($this->required && $this->is_empty ())
     {
@@ -150,15 +150,17 @@ class FIELD extends RAISABLE
     {
       return $this->_value;
     }
+    
+    return null;
   }
 
   /**
    * Convert the {@link value()} to text.
-   * @param FORM &$form Not used here, but used by descendents.
+   * @param FORM $form Not used here, but used by descendents.
    * @param mixed $value Optional parameter used by some fields to distinguish between different components of the value.
    * @return string
    */
-  function as_text (&$form, $value = null)
+  function as_text ($form, $value = null)
   {
     return $this->value ();
   }
@@ -166,14 +168,14 @@ class FIELD extends RAISABLE
   /**
    * Convert the {@link value()} to html.
    * Escapes special characters as HTML entities.
-   * @param FORM &$form Provides a context from which to read {@link
+   * @param FORM $form Provides a context from which to read {@link
    * TEXT_OPTIONS} and convert HTML entities.
    * @param string $quote_style Can be "ENT_NOQUOTES" or "ENT_QUOTES", which
    * translates quotes or not, respectively.
    * @param mixed $value Optional parameter used by some fields to distinguish between different components of the value.
    * @return string
    */
-  function as_html (&$form, $quote_style, $value = null)
+  function as_html ($form, $quote_style, $value = null)
   {
     return $form->context->text_options->convert_to_html_entities ($this->as_text ($form, $value), $quote_style);
   }
@@ -182,10 +184,10 @@ class FIELD extends RAISABLE
    * Does this field need validation?
    * This will return True only if the field has not already generated an error and it has content.
    * Descendents use this function to determine whether to continue validation or not.
-   * @param FORM &$form
+   * @param FORM $form
    * @return boolean
    */
-  function continue_validating (&$form)
+  function continue_validating ($form)
   {
     return ! $this->is_empty () && ! $form->num_errors ($this->id);
   }
@@ -193,8 +195,8 @@ class FIELD extends RAISABLE
   /**
    * Set this field from a request array.
    * Sets the field to <code>null</code> if it is not in the array.
-   * @param array[string] &$values */
-  function set_value_from_request (&$values)
+   * @param array[string] $values */
+  function set_value_from_request ($values)
   {
     if (isset ($values [$this->id]))
     {
@@ -230,10 +232,10 @@ class FIELD extends RAISABLE
   /**
    * Unique storage id within the given form.
    * Called from {@link store_to_client()} and {@link load_from_client()}.
-   * @param FORM &$form
+   * @param FORM $form
    * @return string
    */
-  function storage_id_for (&$form)
+  function storage_id_for ($form)
   {
     return $form->name . '_' . $this->id;
   }
@@ -241,21 +243,21 @@ class FIELD extends RAISABLE
   /**
    * Stores the current value to the client.
    * Uses the {@link CONTEXT::$storage} to record its value.
-   * @var FORM &$form
-   * @param STORAGE &$storage
+   * @var FORM $form
+   * @param STORAGE $storage
    */
-  function store_to_client (&$form, &$storage)
+  function store_to_client ($form, $storage)
   {
     $storage->set_value ($this->storage_id_for ($form), $this->as_text ($form));
   }
 
   /**
    * Loads a value from the 'storage' into the field.
-   * @param FORM &$form
-   * @param STORAGE &$storage
+   * @param FORM $form
+   * @param STORAGE $storage
    * @param mixed $default Use this value if the client is empty.
    */
-  function load_from_client (&$form, &$storage, $default)
+  function load_from_client ($form, $storage, $default)
   {
     $key = $this->storage_id_for ($form);
     if ($storage->exists_on_client ($key))
@@ -271,16 +273,16 @@ class FIELD extends RAISABLE
   /**
    * Called by the form when adding this field to its list.
    * Override in descendents to implement custom behavior.
-   * @param FORM &$form
+   * @param FORM $form
    */
-  function added_to_form (&$form) {}
+  function added_to_form ($form) {}
 
   /**
    * Actual value stored in this field.
    * @var string
    * @access private
    */
-  var $_value;
+  protected $_value;
 }
 
 /**
@@ -299,18 +301,18 @@ class INTEGER_FIELD extends FIELD
     * Used only if the variable is set.
     * @var integer
     */
-  var $max_value;
+  public $max_value;
   /**
    * Minimum valid value.
     * Used only if the variable is set.
     * @var integer
     */
-  var $min_value;
+  public $min_value;
 
   /**
-   * @var FORM &$form
+   * @var FORM $form
    */
-  function validate (&$form)
+  function validate ($form)
   {
     parent::validate ($form);
     if ($this->continue_validating ($form))
@@ -378,9 +380,9 @@ class FLOAT_FIELD extends INTEGER_FIELD
 class BOOLEAN_FIELD extends FIELD
 {
   /**
-   * @var FORM &$form
+   * @var FORM $form
    */
-  function validate (&$form)
+  function validate ($form)
   {
     parent::validate ($form);
     if ($this->continue_validating ($form))
@@ -424,35 +426,35 @@ class TEXT_FIELD extends FIELD
    * Used only if the variable is set.
    * @var integer
    */
-  var $max_length = 0;
+  public $max_length = 0;
   /**
    * Minimum valid length.
    * @var integer
    */
-  var $min_length = 0;
+  public $min_length = 0;
   /**
    * Perl-style regular expression against which the value must validate.
    * @var string
    */
-  var $expression = '';
+  public $expression = '';
   /**
    * Help message explaining why the value didn't conform if the regular
    * expression fails.
    * @var string
    */
-  var $expression_help = '';
+  public $expression_help = '';
   /**
    * Perform tag validation for content.
    * Text fields can be checked for compliance with the munger formatter. Errors
    * are listed with line and character number.
    * @var boolean
    */
-  var $tag_validator_type = Tag_validator_none;
+  public $tag_validator_type = Tag_validator_none;
 
   /**
-   * @var FORM &$form
+   * @var FORM $form
    */
-  function validate (&$form)
+  function validate ($form)
   {
     parent::validate ($form);
     if ($this->continue_validating ($form))
@@ -505,11 +507,11 @@ class TEXT_FIELD extends FIELD
    * Replaces all HTML entities with proper character equivalents and
    * counteracts the effects of PHP's {@link PHP_MANUAL#get_magic_quotes_gpc()}
    * setting, if necessary.
-   * @param FORM &$form
+   * @param FORM $form
    * @param mixed $value Ignored.
    * @return string
    */
-  function as_text (&$form, $value = null)
+  function as_text ($form, $value = null)
   {
     /* Get the final value. */
     $Result = $this->value ();
@@ -536,19 +538,19 @@ class EMAIL_FIELD extends TEXT_FIELD
   /**
    * @var integer
    */
-  var $max_length = 255;
+  public $max_length = 255;
   /**
    * @var integer
    */
-  var $min_length = 5;
+  public $min_length = 5;
   /**
    * @var string
    */
-  var $expression = '/^(.+)@(.+)\\.(.+)$/';
+  public $expression = '/^(.+)@(.+)\\.(.+)$/';
   /**
    * @var string
    */
-  var $expression_help = 'must be a valid email address';
+  public $expression_help = 'must be a valid email address';
 }
 
 /**
@@ -567,19 +569,19 @@ class TITLE_FIELD extends TEXT_FIELD
   /**
    * @var integer
    */
-  var $max_length = 100;
+  public $max_length = 100;
   /**
    * @var integer
    */
-  var $min_length = 1;
+  public $min_length = 1;
   /**
    * @var string
    */
-  var $expression = '/^\S$|^\S[\S ]*\S$/';
+  public $expression = '/^\S$|^\S[\S ]*\S$/';
   /**
    * @var string
    */
-  var $expression_help = 'must start and end with a non-white-space character';
+  public $expression_help = 'must start and end with a non-white-space character';
 }
 
 /**
@@ -597,20 +599,20 @@ class URI_FIELD extends TEXT_FIELD
   /**
    * @var integer
    */
-  var $max_length = 255;
+  public $max_length = 255;
   /**
    * @var integer
    */
-  var $min_length = 1;
+  public $min_length = 1;
   /**
    * Not implemented.
    * @var string
    */
-  var $expression = '';
+  public $expression = '';
   /**
    * @var string
    */
-  var $expression_help = 'must be a valid URL';
+  public $expression_help = 'must be a valid URL';
 }
 
 /**
@@ -628,11 +630,11 @@ class MUNGER_TEXT_FIELD extends TEXT_FIELD
    * Validates content as multi-line {@link MUNGER} text.
    * @var boolean
    */
-  var $tag_validator_type = Tag_validator_multi_line;
+  public $tag_validator_type = Tag_validator_multi_line;
   /**
    * @var integer
    */
-  var $max_length = 65535;
+  public $max_length = 65535;
 }
 
 /**
@@ -650,7 +652,7 @@ class MUNGER_STRING_FIELD extends TEXT_FIELD
    * Validates content as multi-line {@link MUNGER} text.
    * @var boolean
    */
-  var $tag_validator_type = Tag_validator_single_line;
+  public $tag_validator_type = Tag_validator_single_line;
 }
 
 /**
@@ -668,7 +670,7 @@ class MUNGER_TITLE_FIELD extends TITLE_FIELD
    * Validates content as multi-line {@link MUNGER} text.
    * @var boolean
    */
-  var $tag_validator_type = Tag_validator_single_line;
+  public $tag_validator_type = Tag_validator_single_line;
 }
 
 /**
@@ -685,18 +687,18 @@ class DATE_TIME_FIELD extends FIELD
    * Used only if the variable is set. Do not set directly, use @see set_max_date instead.
    * @var DATE_TIME
    */
-  var $max_date;
+  public $max_date;
   /**
    * Minimum date-time.
    * Used only if the variable is set. Do not set directly, use @see set_min_date instead.
    * @var integer
    */
-  var $min_date;
+  public $min_date;
   /**
    * Can be {@link Date_time_time_part}, {@link Date_time_date_part} or {@link Date_time_both_parts}
    * @var integer
    */
-  var $parts_to_convert = Date_time_both_parts;
+  public $parts_to_convert = Date_time_both_parts;
 
   /**
    * Set the minimum date.
@@ -706,7 +708,7 @@ class DATE_TIME_FIELD extends FIELD
    */
   function set_min_date ($d, $type = Date_time_iso)
   {
-    $this->min_date = & new DATE_TIME ($d, $type);
+    $this->min_date = new DATE_TIME ($d, $type);
   }
 
   /**
@@ -717,7 +719,7 @@ class DATE_TIME_FIELD extends FIELD
    */
   function set_max_date ($d, $type = Date_time_iso)
   {
-    $this->max_date = & new DATE_TIME ($d, $type);
+    $this->max_date = new DATE_TIME ($d, $type);
   }
 
   /**
@@ -756,11 +758,11 @@ class DATE_TIME_FIELD extends FIELD
 
   /**
    * Convert the {@link value()} to html.
-   * @param FORM &$form Not used.
+   * @param FORM $form Not used.
    * @param mixed $value Optional parameter used by some fields to distinguish between different components of the value.
    * @return string
    */
-  function as_text (&$form, $value = null)
+  function as_text ($form, $value = null)
   {
     return $this->_text_value;
   }
@@ -775,9 +777,9 @@ class DATE_TIME_FIELD extends FIELD
   }
 
   /**
-   * @var FORM &$form
+   * @var FORM $form
    */
-  function validate (&$form)
+  function validate ($form)
   {
     parent::validate ($form);
 
@@ -824,9 +826,9 @@ class DATE_TIME_FIELD extends FIELD
   /**
    * Called by the form when adding this field to its list.
    * Override in descendents to implement custom behavior.
-   * @param FORM &$form
+   * @param FORM $form
    */
-  function added_to_form (&$form)
+  function added_to_form ($form)
   {
     $this->_value = $form->context->make_date_time ();
     $form->page->add_script_file ('{scripts}webcore_calendar.js');
@@ -836,12 +838,12 @@ class DATE_TIME_FIELD extends FIELD
    * @var string
    * @access private
    */
-  var $_date_format = Date_time_format_short_date_and_time;
+  protected $_date_format = Date_time_format_short_date_and_time;
   /**
    * @var string
    * @access private
    */
-  var $_text_value = '';
+  protected $_text_value = '';
 }
 
 /**
@@ -863,12 +865,12 @@ class DATE_FIELD extends DATE_TIME_FIELD
    * Can be {@link Date_time_time_part}, {@link Date_time_date_part} or {@link Date_time_both_parts}
    * @var integer
    */
-  var $parts_to_convert = Date_time_date_part;
+  public $parts_to_convert = Date_time_date_part;
   /**
    * @var string
    * @access private
    */
-  var $_date_format = Date_time_format_short_date;
+  protected $_date_format = Date_time_format_short_date;
 }
 
 /**
@@ -886,17 +888,17 @@ class ARRAY_FIELD extends FIELD
    * Used only if the variable is set.
    * @var integer
    */
-  var $max_values;
+  public $max_values;
   /**
    * Minimum valid number of values.
    * @var integer
    */
-  var $min_values = 0;
+  public $min_values = 0;
 
   /**
-   * @var FORM &$form
+   * @var FORM $form
    */
-  function validate (&$form)
+  function validate ($form)
   {
     parent::validate ($form);
     if ($this->continue_validating ($form))
@@ -932,11 +934,11 @@ class ARRAY_FIELD extends FIELD
   /**
    * Convert the {@link value()} to text.
    * All elements are returned as a comma-separated list.
-   * @param FORM &$form Not used.
+   * @param FORM $form Not used.
    * @param integer $value Ignored in this field.
    * @return string
    */
-  function as_text (&$form, $value = null)
+  function as_text ($form, $value = null)
   {
     if (isset ($this->_value))
     {
@@ -1011,9 +1013,9 @@ class ENUMERATED_FIELD extends FIELD
   }
 
   /**
-   * @var FORM &$form
+   * @var FORM $form
    */
-  function validate (&$form)
+  function validate ($form)
   {
     if (! sizeof ($this->_values))
     {
@@ -1037,7 +1039,7 @@ class ENUMERATED_FIELD extends FIELD
    * @var array
    * @access private
    */
-  var $_values = array ();
+  protected $_values = array ();
 }
 
 /**
@@ -1057,7 +1059,7 @@ class UPLOAD_FILE_FIELD extends FIELD
    * default.
    * @var integer
    */
-  var $max_bytes = 0;
+  public $max_bytes = 0;
 
   /**
    * Upload files do not accept initial values.
@@ -1076,19 +1078,19 @@ class UPLOAD_FILE_FIELD extends FIELD
   {
     if (isset ($this->_uploader->file_sets [$this->id]))
     {
-      $this->_value = &$this->_uploader->file_sets [$this->id];
+      $this->_value = $this->_uploader->file_sets [$this->id];
     }
   }
 
   /**
    * Convert the {@link value()} to text.
    * Returns a result only if 'value' is set.
-   * @param FORM &$form Not used.
+   * @param FORM $form Not used.
    * @param mixed $value 'Value' must be an integer, indexing into the list of
    * files associated with this field.
    * @return string
    */
-  function as_text (&$form, $value = null)
+  function as_text ($form, $value = null)
   {
     if (isset ($value) && isset ($this->_value))
     {
@@ -1113,7 +1115,7 @@ class UPLOAD_FILE_FIELD extends FIELD
    */
   function is_processed ($idx)
   {
-    $file = &$this->file_at ($idx);
+    $file = $this->file_at ($idx);
     return (isset ($file) && $file->is_valid () && ! $this->_form->num_errors ($this->id, $idx) && $file->processed);
   }
 
@@ -1123,7 +1125,7 @@ class UPLOAD_FILE_FIELD extends FIELD
    * @param integer $idx
    * @return UPLOADED_FILE
    */
-  function &file_at ($idx)
+  function file_at ($idx)
   {
     if (isset ($this->_value))
     {
@@ -1167,9 +1169,9 @@ class UPLOAD_FILE_FIELD extends FIELD
   }
 
   /**
-   * @var FORM &$form
+   * @var FORM $form
    */
-  function validate (&$form)
+  function validate ($form)
   {
     parent::validate ($form);
 
@@ -1201,12 +1203,12 @@ class UPLOAD_FILE_FIELD extends FIELD
   /**
    * Called by the form when adding this field to its list.
    * Override in descendents to implement custom behavior.
-   * @param FORM &$form
+   * @param FORM $form
    */
-  function added_to_form (&$form)
+  function added_to_form ($form)
   {
-    $this->_uploader =& $form->uploader ();
-    $this->_form =& $form;
+    $this->_uploader = $form->uploader ();
+    $this->_form = $form;
     $form->_add_upload_field ($this);
   }
 
@@ -1214,12 +1216,12 @@ class UPLOAD_FILE_FIELD extends FIELD
    * @var UPLOADER
    * @access private
    */
-  var $_uploader;
+  protected $_uploader;
   /**
    * @var FORM
    * @access private
    */
-  var $_form;
+  protected $_form;
 }
 
 ?>

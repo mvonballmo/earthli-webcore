@@ -54,12 +54,12 @@ class MULTIPLE_OBJECT_MOVER_FORM extends MULTIPLE_OBJECT_ACTION_FORM
    * If <code>True</code>, makes copies of the objects instead.
    * @var boolean
    */
-  var $copy = FALSE;
+  public $copy = FALSE;
   
   /**
-   * @param FOLDER &$folder Objects are from this folder.
+   * @param FOLDER $folder Objects are from this folder.
    */
-  function MULTIPLE_OBJECT_MOVER_FORM (&$folder)
+  function MULTIPLE_OBJECT_MOVER_FORM ($folder)
   {
     MULTIPLE_OBJECT_ACTION_FORM::MULTIPLE_OBJECT_ACTION_FORM ($folder);
 
@@ -105,23 +105,23 @@ class MULTIPLE_OBJECT_MOVER_FORM extends MULTIPLE_OBJECT_ACTION_FORM
 
   /**
    * Options for moving an object to the target folder.
-   * @param OBJECT_IN_FOLDER &$obj
+   * @param OBJECT_IN_FOLDER $obj
    * @return FOLDER_OPERATION_OPTIONS
    * @access private
    */
-  function _move_options_for (&$obj)
+  function _move_options_for ($obj)
   {
-    $Result =& $obj->make_move_options ();
+    $Result = $obj->make_move_options ();
     $Result->maintain_permissions = $this->value_for ('maintain_permissions');
     $Result->copy_as_draft = $this->value_for ('copy_as_draft');
     return $Result;
   }
   
-  function _post_validate (&$obj)
+  function _post_validate ($obj)
   {
     parent::_post_validate ($obj);
     $folder_query = $this->app->login->folder_query ();
-    $this->_target =& $folder_query->object_at_id ($this->value_for ('selected_folder_id'));
+    $this->_target = $folder_query->object_at_id ($this->value_for ('selected_folder_id'));
     if (empty ($this->_target))
     {
       $this->record_error ('selected_folder_id', 'Please choose a valid folder.');
@@ -138,10 +138,10 @@ class MULTIPLE_OBJECT_MOVER_FORM extends MULTIPLE_OBJECT_ACTION_FORM
 
   /**
    * Execute action for a single folder.
-   * @param FOLDER &$fldr
+   * @param FOLDER $fldr
    * @access private
    */
-  function _folder_run (&$fldr)
+  function _folder_run ($fldr)
   {
     $opts = $this->_move_options_for ($fldr);
     if ($this->copy)
@@ -156,10 +156,10 @@ class MULTIPLE_OBJECT_MOVER_FORM extends MULTIPLE_OBJECT_ACTION_FORM
 
   /**
    * Execute action for a single entry
-   * @param ENTRY &$entry
+   * @param ENTRY $entry
    * @access private
    */
-  function _entry_run (&$entry)
+  function _entry_run ($entry)
   {
     $opts = $this->_move_options_for ($entry);
     if ($this->copy)
@@ -174,20 +174,20 @@ class MULTIPLE_OBJECT_MOVER_FORM extends MULTIPLE_OBJECT_ACTION_FORM
 
   /**
    * Draw the controls for the form.
-   * @param FORM_RENDERER &$renderer
+   * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_controls (&$renderer)
+  function _draw_controls ($renderer)
   {
     parent::_draw_controls ($renderer);
   }
 
   /**
    * Draw a confirmation message for this action.
-   * @param FORM_RENDERER &$renderer
+   * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_message (&$renderer)
+  function _draw_message ($renderer)
   {
     if ($this->copy)
     {
@@ -227,8 +227,8 @@ class MULTIPLE_OBJECT_MOVER_FORM extends MULTIPLE_OBJECT_ACTION_FORM
     $decorator = new SELECTOR_TREE_DECORATOR ($tree);
     $decorator->control_name = 'selected_folder_id';
 
-    $tree->node_info =& $tree_node_info;
-    $tree->decorator =& $decorator;
+    $tree->node_info = $tree_node_info;
+    $tree->decorator = $decorator;
 
     $folder_query = $this->app->login->folder_query ();
     $folders = $folder_query->tree ();
@@ -258,14 +258,14 @@ class MULTIPLE_OBJECT_MOVER_FORM extends MULTIPLE_OBJECT_ACTION_FORM
 class MULTIPLE_DRAFTABLE_OBJECT_MOVER_FORM extends MULTIPLE_OBJECT_MOVER_FORM
 {
   /**
-   * @param FOLDER &$folder Objects are from this folder.
-   * @param FOLDER &$target Move objects to this folder.
+   * @param FOLDER $folder Objects are from this folder.
+   * @param FOLDER $target Move objects to this folder.
    */
-  function MULTIPLE_DRAFTABLE_OBJECT_MOVER_FORM (&$folder)
+  function MULTIPLE_DRAFTABLE_OBJECT_MOVER_FORM ($folder)
   {
     MULTIPLE_OBJECT_MOVER_FORM::MULTIPLE_OBJECT_MOVER_FORM ($folder);
 
-    $field =& $this->field_at ('copy_as_draft');
+    $field = $this->field_at ('copy_as_draft');
     $field->visible = TRUE;
   }
 }

@@ -49,9 +49,9 @@ require_once ('webcore/forms/folder_form.php');
 class ALBUM_FORM extends FOLDER_FORM
 {
   /**
-   * @param ALBUM &$folder Album to edit or create.
+   * @param ALBUM $folder Album to edit or create.
    */
-  function ALBUM_FORM (&$folder)
+  function ALBUM_FORM ($folder)
   {
     FOLDER_FORM::FOLDER_FORM ($folder);
 
@@ -173,9 +173,9 @@ class ALBUM_FORM extends FOLDER_FORM
 
   /**
    * Load initial properties from this album.
-   * @param ALBUM &$obj
+   * @param ALBUM $obj
    */
-  function load_from_object (&$obj)
+  function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
 
@@ -221,7 +221,7 @@ class ALBUM_FORM extends FOLDER_FORM
 
   /**
    * Called after fields are loaded with data.
-   * @param object &$obj Object from which data was loaded. May be null.
+   * @param object $obj Object from which data was loaded. May be null.
    * @access private
    */
   function _post_load_data ($obj)
@@ -245,10 +245,10 @@ class ALBUM_FORM extends FOLDER_FORM
 
   /**
    * Does this form hold valid data for this album?
-    * @param ALBUM &$obj
+    * @param ALBUM $obj
     * @access private
     */
-  function _post_validate (&$obj)
+  function _post_validate ($obj)
   {
     parent::_post_validate ($obj);
 
@@ -279,10 +279,10 @@ class ALBUM_FORM extends FOLDER_FORM
 
   /**
    * Store the form's values to this album.
-    * @param ALBUM &$obj
+    * @param ALBUM $obj
     * @access private
     */
-  function _store_to_object (&$obj)
+  function _store_to_object ($obj)
   {
     $obj->url_root = $this->value_as_text ('url_root');
     $obj->location = $this->value_as_text ('location');
@@ -462,10 +462,10 @@ class ALBUM_FORM extends FOLDER_FORM
   }
 
   /**
-   * @param FORM_RENDERER &$renderer
+   * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_controls (&$renderer)
+  function _draw_controls ($renderer)
   {
     $renderer->start ();
 
@@ -578,10 +578,10 @@ class ALBUM_FORM extends FOLDER_FORM
   }
 
   /**
-   * @param FORM_RENDERER &$renderer
+   * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_cover_picture (&$renderer)
+  function _draw_cover_picture ($renderer)
   {
     if ($this->object_exists ())
     {
@@ -591,7 +591,7 @@ class ALBUM_FORM extends FOLDER_FORM
       {
         $pic_query = $this->_object->entry_query ();
         $pic_query->set_type ('picture');
-        $main_picture =& $pic_query->object_at_id ($main_picture_id);
+        $main_picture = $pic_query->object_at_id ($main_picture_id);
       }
 
       $renderer->start_block (TRUE);

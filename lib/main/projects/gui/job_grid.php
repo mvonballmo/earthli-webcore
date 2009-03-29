@@ -51,16 +51,16 @@ class JOB_GRID extends PROJECT_ENTRY_GRID
   /**
    * @var string
    */
-  var $object_name = 'Job';
+  public $object_name = 'Job';
 
   /**
    * Draw entry-specific information for the given release.
-   * @param JOB &$obj
-   * @param JOB_BRANCH_INFO &$branch_info
+   * @param JOB $obj
+   * @param JOB_BRANCH_INFO $branch_info
    */
-  function _draw_release_details (&$obj, &$branch_info)
+  function _draw_release_details ($obj, $branch_info)
   {
-    $rel =& $branch_info->release ();
+    $rel = $branch_info->release ();
     if (isset ($rel))
     {
       $status = $rel->status ();
@@ -81,10 +81,10 @@ class JOB_GRID extends PROJECT_ENTRY_GRID
 
   /**
    * Draw user-specific information for the given release.
-   * @param JOB &$obj
-   * @param JOB_BRANCH_INFO &$branch_info
+   * @param JOB $obj
+   * @param JOB_BRANCH_INFO $branch_info
    */
-  function _draw_user_details (&$obj, &$branch_info)
+  function _draw_user_details ($obj, $branch_info)
   {
     // PHP 4.4x HACK
     $branch_info->_entry = $obj;
@@ -112,7 +112,7 @@ class JOB_GRID extends PROJECT_ENTRY_GRID
   <?php
     if ($is_closed)
     {
-      $closer =& $branch_info->closer ();
+      $closer = $branch_info->closer ();
   ?>
     (<?php echo $branch_info->time_closed->format (); ?>
     by <?php echo $closer->title_as_link (); ?>
@@ -144,7 +144,7 @@ class JOB_GRID extends PROJECT_ENTRY_GRID
   <div>
     <div style="float: left">
     <?php
-      $assignee =& $obj->assignee ();
+      $assignee = $obj->assignee ();
       if (! $is_closed)
       {
         echo $obj->assignee_icon ();
@@ -174,16 +174,16 @@ class JOB_GRID extends PROJECT_ENTRY_GRID
   }
 
   /**
-   * @param JOB &$obj Get the title formatter from this job.
+   * @param JOB $obj Get the title formatter from this job.
     * Jobs format open jobs with the default 'field' style, whereas closed jobs
     * are formatted with no style (usually rendered as non-bold).
     * @return TITLE_FORMATTER
     * @access private
     */
-  function &title_formatter (&$obj)
+  function title_formatter ($obj)
   {
     $Result = parent::title_formatter ($obj);
-    $branch_info =& $obj->main_branch_info ();
+    $branch_info = $obj->main_branch_info ();
     if ($branch_info->is_closed ())
     {
       $Result->CSS_class = '';
@@ -205,7 +205,7 @@ class JOB_SUMMARY_GRID extends PROJECT_ENTRY_SUMMARY_GRID
   /**
    * @var string
    */
-  var $object_name = 'Job';
+  public $object_name = 'Job';
 }
 
 ?>

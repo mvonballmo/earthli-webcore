@@ -90,7 +90,7 @@ class RESOLVER extends RESOURCE_MANAGER
    * @param string $context Distiguishes among multiple similar registrations.
    * @return object
    */
-  function &find_or_create_singleton ($singleton_name, $class_name, $file_name = '', $context = '')
+  function find_or_create_singleton ($singleton_name, $class_name, $file_name = '', $context = '')
   {
     if (empty ($this->_singletons [$singleton_name]))
     {
@@ -102,7 +102,7 @@ class RESOLVER extends RESOURCE_MANAGER
   
   function make_object ($id, $class_name, $file_name = '', $context = '')
   {
-    $Result =& $this->find_or_create_singleton($id, $class_name, $file_name, $context);
+    $Result = $this->find_or_create_singleton($id, $class_name, $file_name, $context);
     return clone_object ($Result);
   }
 
@@ -182,7 +182,7 @@ class RESOLVER extends RESOURCE_MANAGER
    * @param string $class_name
    * @return TYPE_INFO
    */
-  function &type_info_for ($class_name, $file_name = '')
+  function type_info_for ($class_name, $file_name = '')
   {
     /* Resolve the class, then check for type info for that class. */
 
@@ -234,7 +234,7 @@ class RESOLVER extends RESOURCE_MANAGER
    * @var OBJECT_FACTORY
    * @access private
    */
-  var $_classes;  
+  protected $_classes;  
   /**
    *  Page template registry.
    * Use {@link page_template_for()} to retrieve a page template name. Use 
@@ -242,12 +242,12 @@ class RESOLVER extends RESOURCE_MANAGER
    * @var array[string,string]
    * @access private
    */
-  var $_page_templates;
+  protected $_page_templates;
   /**
    * @var array[string,object]
    * @access private
    */
-  var $_singletons;
+  protected $_singletons;
 }
 
 ?>

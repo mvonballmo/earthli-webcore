@@ -52,33 +52,33 @@ class RECIPE extends DRAFTABLE_ENTRY
    * The picture/logo/icon associated with this project.
     * @var string
     */
-  var $picture_url;
+  public $picture_url;
   /**
    * Name of the inventor.
     * @var string
     */
-  var $originator;
+  public $originator;
   /**
    * HTML text describing the ingredients.
     * @var string
     */
-  var $ingredients;
+  public $ingredients;
   /**
    * HTML text describing the instructions.
     * @var string
     */
-  var $instructions;
+  public $instructions;
 
   /**
    * Show ingredients as a bullet list?
     * @var boolean
     */
-  var $bullet_ingredients;
+  public $bullet_ingredients;
   /**
    * Show instructions as a numbered list?
     * @var boolean
     */
-  var $number_instructions;
+  public $number_instructions;
 
   /**
    * Render the {@link $originator} as HTML.
@@ -86,7 +86,7 @@ class RECIPE extends DRAFTABLE_ENTRY
     */
   function originator_as_html ()
   {
-    $formatter =& $this->html_formatter ();
+    $formatter = $this->html_formatter ();
     $force_pars = $formatter->force_paragraphs;
     $formatter->force_paragraphs = FALSE;
     $Result = $this->_text_as_html ($this->originator, $formatter);
@@ -100,7 +100,7 @@ class RECIPE extends DRAFTABLE_ENTRY
     */
   function originator_as_plain_text ()
   {
-    $formatter =& $this->plain_text_formatter ();
+    $formatter = $this->plain_text_formatter ();
     $force_pars = $formatter->force_paragraphs;
     $formatter->force_paragraphs = FALSE;
     $Result = $this->_text_as_plain_text ($this->originator, $formatter);
@@ -169,7 +169,7 @@ class RECIPE extends DRAFTABLE_ENTRY
   }
   
   /**
-   * @param DATABASE &$db
+   * @param DATABASE $db
    */
   function load ($db)
   {
@@ -185,9 +185,9 @@ class RECIPE extends DRAFTABLE_ENTRY
   }
 
   /**
-   * @param SQL_STORAGE &$storage Store values to this object.
+   * @param SQL_STORAGE $storage Store values to this object.
    */
-  function store_to (&$storage)
+  function store_to ($storage)
   {
     parent::store_to ($storage);
     $tname = $this->_table_name ();

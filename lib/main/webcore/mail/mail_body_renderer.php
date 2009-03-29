@@ -55,32 +55,32 @@ class MAIL_BODY_RENDERER extends MAIL_RENDERER
    * Wrap html at this right margin.
    * Some mailers needs hard returns; this is a reasonable default.
    */
-  var $html_wrap_limit = 200;
+  public $html_wrap_limit = 200;
   /**
    * @var integer
    * Wrap text at this right margin.
    * Many mailers can't handle unwrapped (or lines longer than 255 characters) plain-text emails.
    */
-  var $text_wrap_limit = 72;
+  public $text_wrap_limit = 72;
   /**
    * List of objects in the email.
    * @see MAIL_BODY_RENDERER_OBJECT
    * @var array [MAIL_BODY_RENDERER_OBJECT]
    */
-  var $objects;
+  public $objects;
 
   /**
    * Add an object to be renderered when the full email is rendered.
     * You can add multiple objects; renderer must be matched with the object.
-    * @param object &$obj
-    * @param OBJECT_MAIL_RENDERER &$renderer
+    * @param object $obj
+    * @param OBJECT_MAIL_RENDERER $renderer
     */
-  function add (&$obj, &$renderer)
+  function add ($obj, $renderer)
   {
     $pair = null; // Compiler warning
     $pair->obj = $obj;
-    $pair->renderer =& $renderer;
-    $this->objects [] =& $pair;
+    $pair->renderer = $renderer;
+    $this->objects [] = $pair;
   }
 
   /**
@@ -190,7 +190,7 @@ class MAIL_BODY_RENDERER extends MAIL_RENDERER
 
       while ($obj_idx < $num_objs)
       {
-        $pair =& $this->objects [$obj_idx];
+        $pair = $this->objects [$obj_idx];
 
         $obj_text = $pair->renderer->text_body ($pair->obj, $options);
 
@@ -266,13 +266,13 @@ class MAIL_BODY_RENDERER extends MAIL_RENDERER
 class MAIL_BODY_RENDERER_OBJECT
 {
   /**
-   * @var object &$obj
+   * @var object $obj
    */
-  var $obj;
+  public $obj;
   /**
    * @var OBJECT_MAIL_RENDERER
    */
-  var $renderer;
+  public $renderer;
 }
 
 ?>

@@ -126,19 +126,19 @@ class PROFILER_TIMER extends RAISABLE
    * @var real
    * @access private
    */
-  var $_start_time;
+  protected $_start_time;
   /**
    * How much time has elapsed in this timer?
    * @var real
    * @access private
    */
-  var $_elapsed = 0;
+  protected $_elapsed = 0;
   /**
    * How many times has {@link start()} been called without {@link stop()}?
    * @var integer
    * @access private
    */
-  var $_num_starts = 0;
+  protected $_num_starts = 0;
 }
 
 /**
@@ -174,7 +174,7 @@ class PROFILER extends RAISABLE
     */
   function elapsed ($id, $rounded_to = 3)
   {
-    $timer =& $this->_existing_timer ($id);
+    $timer = $this->_existing_timer ($id);
     if (isset ($timer))
     {
       return $timer->elapsed ($rounded_to);
@@ -191,7 +191,7 @@ class PROFILER extends RAISABLE
     */
   function running ($id)
   {
-    $timer =& $this->_existing_timer ($id);
+    $timer = $this->_existing_timer ($id);
     if (isset ($timer))
     {
       return $timer->running ();
@@ -234,7 +234,7 @@ class PROFILER extends RAISABLE
     */
   function stop ($id)
   {
-    $timer =& $this->_existing_timer ($id);
+    $timer = $this->_existing_timer ($id);
     if (isset ($timer))
     {
       $this->assert ($timer->running (), "Timer [$id] was never started.", 'stop', 'PROFILER');
@@ -248,7 +248,7 @@ class PROFILER extends RAISABLE
    * @var strind id
    * @access private
    */
-  function &_existing_timer ($id)
+  function _existing_timer ($id)
   {
     if (! isset ($this->_timers [$id]))
     {
@@ -261,7 +261,7 @@ class PROFILER extends RAISABLE
   /**
    * @var array[object]
    */
-  var $_timers = array ();
+  protected $_timers = array ();
 }
 
 ?>

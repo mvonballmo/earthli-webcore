@@ -55,34 +55,34 @@ class PUBLISHER_TASK extends TASK
   /**
    * @var string
    */
-  var $page_title = 'Publish Queued Content';
+  public $page_title = 'Publish Queued Content';
   /**
    * Log all messages in this channel.
    * @var string
    */
-  var $log_channel = Msg_channel_publisher;
+  public $log_channel = Msg_channel_publisher;
   /**
    * Shows generated mails on the fly if set.
    * @var boolean
    */
-  var $preview = FALSE;
+  public $preview = FALSE;
   /**
    * Publish only the given entry history item type, if set.
    * Can contain any of the {@link History_item_state_constants}.
    * @var array[string]
    */
-  var $entry_filter;
+  public $entry_filter;
   /**
    * Publish only the given entry history item type, if set.
    * Can contain any of the {@link History_item_state_constants}.
    * @var array[string]
    */
-  var $comment_filter;
+  public $comment_filter;
   /**
    * Icon to show in the title bar when executing.
    * @var string
    */
-  var $icon = '{icons}indicators/published';
+  public $icon = '{icons}indicators/published';
 
   /**
    * Return a formatted title for this task.
@@ -113,7 +113,7 @@ class PUBLISHER_TASK extends TASK
     /* Log in as a user that can see all objects that need sending
        If the impersonation fails, it throws an exception. */
 
-    $opts =& $this->app->mail_options;
+    $opts = $this->app->mail_options;
     $this->app->impersonate ($opts->publisher_user_name, $opts->publisher_user_password);
     $publisher = $this->app->make_publisher ();
     $publisher->testing = $this->testing;
@@ -130,10 +130,10 @@ class PUBLISHER_TASK extends TASK
 
   /**
    * Overridable for descendents.
-   * @param PUBLISHER &$publisher
+   * @param PUBLISHER $publisher
    * @access private
    */
-  function _publish (&$publisher)
+  function _publish ($publisher)
   {
     $history_item_query = $this->login->all_history_item_query ();
     if ($this->entry_filter || $this->comment_filter)

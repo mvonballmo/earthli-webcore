@@ -49,10 +49,10 @@ require_once ('webcore/gui/flat_comment_grid.php');
 class THREADED_COMMENT_GRID extends FLAT_COMMENT_GRID
 {
   /**
-   * @param array[COMMENT] &$objs
+   * @param array[COMMENT] $objs
     * @access private
     */
-  function _draw_cells (&$objs)
+  function _draw_cells ($objs)
   {
     $depth = 0;
     $this->_draw_comments ($objs, $depth);
@@ -102,7 +102,7 @@ class THREADED_COMMENT_GRID extends FLAT_COMMENT_GRID
           $num_objects_per_page = $this->_num_rows * $this->_num_columns;
           $query->set_select ('com.id, com.time_created');
           $query->set_limits (($this->paginator->page_number - 1) * $num_objects_per_page, $num_objects_per_page);
-          $db =& $this->_query->raw_output ();
+          $db = $this->_query->raw_output ();
 
           if ($db)
           {
@@ -139,11 +139,11 @@ class THREADED_COMMENT_GRID extends FLAT_COMMENT_GRID
   }
 
   /**
-   * @param array[COMMENT] &$objs
-    * @param integer &$depth Nesting level.
+   * @param array[COMMENT] $objs
+    * @param integer $depth Nesting level.
     * @access private
     */
-  function _draw_comments (&$objs, &$depth)
+  function _draw_comments ($objs, $depth)
   {
     $c = sizeof ($objs);
     $i = 0;
@@ -156,7 +156,7 @@ class THREADED_COMMENT_GRID extends FLAT_COMMENT_GRID
     $depth++;
     while ($i < $c)
     {
-      $obj =& $objs [$i];
+      $obj = $objs [$i];
       $this->_draw_comment ($obj, $depth);
       $i++;
     }
@@ -170,11 +170,11 @@ class THREADED_COMMENT_GRID extends FLAT_COMMENT_GRID
   }
 
   /**
-   * @param COMMENT &$obj
-    * @param integer &$depth Nesting level.
+   * @param COMMENT $obj
+    * @param integer $depth Nesting level.
     * @access private
     */
-  function _draw_comment (&$obj, &$depth)
+  function _draw_comment ($obj, $depth)
   {
     $this->_draw_comment_contents ($obj);
     $objs = $obj->sub_comments ();  // break the reference deliberately or there is an infinite loop

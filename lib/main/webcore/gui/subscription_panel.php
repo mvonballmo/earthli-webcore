@@ -50,13 +50,13 @@ require_once ('webcore/gui/panel.php');
 class SUBSCRIPTION_PANEL extends PANEL
 {
   /**
-   * @param PANEL_MANAGER &$manager Owner of this panel.
-   * @param SUBSCRIBER &$subscriber Show subscriptions for this user.
+   * @param PANEL_MANAGER $manager Owner of this panel.
+   * @param SUBSCRIBER $subscriber Show subscriptions for this user.
    */
-  function SUBSCRIPTION_PANEL (&$manager, &$subscriber)
+  function SUBSCRIPTION_PANEL ($manager, $subscriber)
   {
     FORM_PANEL::FORM_PANEL ($manager);
-    $this->_subscriber =& $subscriber;
+    $this->_subscriber = $subscriber;
   }
 
   /**
@@ -71,7 +71,7 @@ class SUBSCRIPTION_PANEL extends PANEL
    * @var SUBSCRIBER
    * @access private
    */
-  var $_subscriber;
+  protected $_subscriber;
 }
 
 /**
@@ -88,7 +88,7 @@ class FORM_BASED_SUBSCRIPTION_PANEL extends SUBSCRIPTION_PANEL
    */
   function check ()
   {
-    $form =& $this->form ();
+    $form = $this->form ();
     $form->process_existing ($this->_subscriber);
     if ($form->committed ())
     {
@@ -101,7 +101,7 @@ class FORM_BASED_SUBSCRIPTION_PANEL extends SUBSCRIPTION_PANEL
    */
   function display ()
   {
-    $form =& $this->form ();
+    $form = $this->form ();
     $form->display ();
   }
 
@@ -109,7 +109,7 @@ class FORM_BASED_SUBSCRIPTION_PANEL extends SUBSCRIPTION_PANEL
    * Creates/returns a form for this panel.
    * @access private
    */
-  function &form ()
+  function form ()
   {
     if (! isset ($this->_form))
     {
@@ -133,7 +133,7 @@ class FORM_BASED_SUBSCRIPTION_PANEL extends SUBSCRIPTION_PANEL
    * @var FORM
    * @access private
    */
-  var $_form;
+  protected $_form;
 }
 
 /**
@@ -148,17 +148,17 @@ class FOLDER_SUBSCRIPTION_PANEL extends FORM_BASED_SUBSCRIPTION_PANEL
   /**
    * @var string
    */
-  var $id = 'folders';
+  public $id = 'folders';
   /**
    * @var string
    */
-  var $title = 'Folders';
+  public $title = 'Folders';
 
   /**
-   * @param PANEL_MANAGER &$manager Owner of this panel.
-   * @param SUBSCRIBER &$subscriber Show subscriptions for this user.
+   * @param PANEL_MANAGER $manager Owner of this panel.
+   * @param SUBSCRIBER $subscriber Show subscriptions for this user.
    */
-  function FOLDER_SUBSCRIPTION_PANEL (&$manager, &$subscriber)
+  function FOLDER_SUBSCRIPTION_PANEL ($manager, $subscriber)
   {
     FORM_BASED_SUBSCRIPTION_PANEL::FORM_BASED_SUBSCRIPTION_PANEL ($manager, $subscriber);
     $type_info = $this->app->type_info_for ('FOLDER', 'webcore/obj/folder.php');
@@ -220,18 +220,18 @@ class ENTRY_SUBSCRIPTION_PANEL extends FORM_BASED_SUBSCRIPTION_PANEL
   /**
    * @var string
    */
-  var $id = 'entries';
+  public $id = 'entries';
   /**
    * @var string
    */
-  var $title = 'Entries';
+  public $title = 'Entries';
 
   /**
-   * @param PANEL_MANAGER &$manager Owner of this panel.
-   * @param SUBSCRIBER &$subscriber Show subscriptions for this user.
+   * @param PANEL_MANAGER $manager Owner of this panel.
+   * @param SUBSCRIBER $subscriber Show subscriptions for this user.
    * @param TYPE_INFO $type_info
    */
-  function ENTRY_SUBSCRIPTION_PANEL (&$manager, &$subscriber, $type_info)
+  function ENTRY_SUBSCRIPTION_PANEL ($manager, $subscriber, $type_info)
   {
     FORM_BASED_SUBSCRIPTION_PANEL::FORM_BASED_SUBSCRIPTION_PANEL ($manager, $subscriber);
     $this->_type_info = $type_info;
@@ -283,7 +283,7 @@ class ENTRY_SUBSCRIPTION_PANEL extends FORM_BASED_SUBSCRIPTION_PANEL
    * @var TYPE_INFO
    * @access private
    */
-  var $_type_info;
+  protected $_type_info;
 }
 
 /**
@@ -298,11 +298,11 @@ class USER_SUBSCRIPTION_PANEL extends FORM_BASED_SUBSCRIPTION_PANEL
   /**
    * @var string
    */
-  var $id = 'users';
+  public $id = 'users';
   /**
    * @var string
    */
-  var $title = 'Users';
+  public $title = 'Users';
 
   /**
    * Return <code>True</code> to always display a link.
@@ -358,11 +358,11 @@ class USER_SUBSCRIPTION_OPTIONS_PANEL extends FORM_BASED_SUBSCRIPTION_PANEL
   /**
    * @var string
    */
-  var $id = 'prefs';
+  public $id = 'prefs';
   /**
    * @var string
    */
-  var $title = 'Preferences';
+  public $title = 'Preferences';
 
   /**
    * Return <code>True</code> to always display a link.
@@ -396,11 +396,11 @@ class SUBSCRIPTION_SUMMARY_PANEL extends SUBSCRIPTION_PANEL
   /**
    * @var string
    */
-  var $id = 'summary';
+  public $id = 'summary';
   /**
    * @var string
    */
-  var $title = 'Summary';
+  public $title = 'Summary';
 
   /**
    * Return <code>True</code> to always display a link.
@@ -597,9 +597,9 @@ class SUBSCRIPTION_SUMMARY_PANEL extends SUBSCRIPTION_PANEL
 
   /**
    * Display a summary of this panel?
-   * @var PANEL &$panel
+   * @var PANEL $panel
    */
-  function _is_summarizable (&$panel)
+  function _is_summarizable ($panel)
   {
     return ($panel->id != 'prefs') && ($panel->id != 'summary') && ($panel->id != Empty_panel_id);
   }
@@ -618,14 +618,14 @@ class SUBSCRIPTION_PANEL_MANAGER extends PANEL_MANAGER
   /**
    * @var string
    */
-  var $default_panel_id = 'summary';
+  public $default_panel_id = 'summary';
 
   /**
-   * @param SUBSCRIBER &$subscriber Show settings for this subscriber.
+   * @param SUBSCRIBER $subscriber Show settings for this subscriber.
    */
-  function SUBSCRIPTION_PANEL_MANAGER (&$subscriber)
+  function SUBSCRIPTION_PANEL_MANAGER ($subscriber)
   {
-    $this->_subscriber =& $subscriber;
+    $this->_subscriber = $subscriber;
     PANEL_MANAGER::PANEL_MANAGER ($subscriber->app, FALSE);
   }
 
@@ -656,7 +656,7 @@ class SUBSCRIPTION_PANEL_MANAGER extends PANEL_MANAGER
    * @var SUBSCRIBER
    * @access private
    */
-  var $_subscriber;
+  protected $_subscriber;
 }
 
 ?>

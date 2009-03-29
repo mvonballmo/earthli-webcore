@@ -39,13 +39,13 @@ http://www.earthli.com/software/webcore/albums
 
 /**
  * Sets up a query for a particular entry type.
- * @param QUERY &$query
+ * @param QUERY $query
  * @param string $type
  * @access private
  */
-function album_query_set_type (&$query, $type)
+function album_query_set_type ($query, $type)
 {
-  $table_names =& $query->app->table_names;
+  $table_names = $query->app->table_names;
 
   switch ($type)
   {

@@ -51,15 +51,15 @@ class FOLDER_GRID extends STANDARD_GRID
   /**
    * @var integer
    */
-  var $padding = 0;
+  public $padding = 0;
 
   /**
    * Assign the tree of {@link FOLDER}s to display.
    * @param array[FOLDER]
    */
-  function set_folders (&$folders)
+  function set_folders ($folders)
   {
-    $this->_folders =& $folders;
+    $this->_folders = $folders;
     $this->_num_objects = null;
   }
 
@@ -91,7 +91,7 @@ class FOLDER_GRID extends STANDARD_GRID
    * @see FOLDER
    * @access private
    */
-  var $_folders;
+  protected $_folders;
 }
 
 ?>

@@ -52,9 +52,9 @@ require_once ('webcore/forms/storable_form.php');
 class UNIQUE_OBJECT_FORM extends STORABLE_FORM
 {
   /**
-   * @param CONTEXT &$context.
+   * @param CONTEXT $context.
    */
-  function UNIQUE_OBJECT_FORM (&$context)
+  function UNIQUE_OBJECT_FORM ($context)
   {
     STORABLE_FORM::STORABLE_FORM ($context);
 
@@ -68,9 +68,9 @@ class UNIQUE_OBJECT_FORM extends STORABLE_FORM
 
   /**
    * Load initial properties from this object.
-   * @param UNIQUE_OBJECT &$obj
+   * @param UNIQUE_OBJECT $obj
    */
-  function load_from_object (&$obj)
+  function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
     $this->set_value ('id', $obj->id);

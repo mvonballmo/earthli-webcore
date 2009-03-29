@@ -56,13 +56,13 @@ class THEME_SETTINGS extends WEBCORE_OBJECT
    * Uniquely identifies the theme and is used to determine whether it has changed.
    * @var integer
    */
-  var $id = 0;
+  public $id = 0;
   /**
    * User-friendly title of the theme.
    * This is loaded and stored so that the current theme name can be displayed.
    * @var string
    */
-  var $title = 'Default';
+  public $title = 'Default';
   /**
    * Name of the class used to render the page layout.
    * This governs where the basic page elements (like header, footer, etc.) are
@@ -71,33 +71,33 @@ class THEME_SETTINGS extends WEBCORE_OBJECT
    * be the same in some places.
    * @var string
    */
-  var $renderer_class_name = '';
+  public $renderer_class_name = '';
   /**
    * Name of the main style sheet.
    * This governs which theme-specific stylesheet is used in a page.
    * @var string
    */
-  var $main_CSS_file_name = '{themes}/ice';
+  public $main_CSS_file_name = '{themes}/ice';
   /**
    * Name of the font-face stylesheet to use.
    * The font is completely separated from the stylesheet, so that users can mix and match font-styles
    * with different themes.
    * @var string
    */
-  var $font_name_CSS_file_name = '{styles}fonts/verdana';
+  public $font_name_CSS_file_name = '{styles}fonts/verdana';
   /**
    * Name of the font-size stylesheet to use.
    * The font is completely separated from the stylesheet, so that users can mix and match font-sizes
    * with different themes (font size is nice to adjust to suit their needs).
    * @var string
    */
-  var $font_size_CSS_file_name = '{styles}core/small';
+  public $font_size_CSS_file_name = '{styles}core/small';
   /**
    *  Path to the icons folder.
    * This is always relative to the page's icon folder, specified in {@link PAGE_FOLDER_NAMES}.
    * @var string
    */
-  var $icon_set = 'webcore_png';
+  public $icon_set = 'webcore_png';
   /**
    *  Default extension to use for icons.
    * Icons should, in general, not specify an extension, so that this default can be appended
@@ -105,7 +105,7 @@ class THEME_SETTINGS extends WEBCORE_OBJECT
    * users will default to GIF because PNG is not properly supported).
    * @var string
    */
-  var $icon_extension = 'png';
+  public $icon_extension = 'png';
   /**
    * Apply theme to form elements (controls)?
    * If this is false, then an additional CSS style sheet is loaded with each page, that applies
@@ -113,13 +113,13 @@ class THEME_SETTINGS extends WEBCORE_OBJECT
    * to eliminate form styling so that browser page controls look uniform with the browser and/or
    * operating system.
    */
-  var $dont_apply_to_forms = FALSE;
+  public $dont_apply_to_forms = FALSE;
 
   /**
    * Load theme from a client-side storage (cookie).
-   * @param STORAGE &$storage
+   * @param STORAGE $storage
    */
-  function load_from_client (&$storage)
+  function load_from_client ($storage)
   {
     $this->id = $storage->value ('theme_id');
     $this->title = $storage->value ('theme_title');
@@ -134,9 +134,9 @@ class THEME_SETTINGS extends WEBCORE_OBJECT
 
   /**
    * Store theme to a client-side storage (cookie).
-   * @param STORAGE &$storage
+   * @param STORAGE $storage
    */
-  function store_to_client (&$storage)
+  function store_to_client ($storage)
   {
     $storage->set_value ('theme_id', $this->id);
     $storage->set_value ('theme_title', $this->title);
@@ -236,19 +236,19 @@ class THEME_OPTIONS
    * This only happens if user-themes are supported by calling {@link load_theme()}.
    * @var integer
    */
-  var $duration = 365;
+  public $duration = 365;
   /**
    * In which database table are themes stored?
    * Theme information is stored in a database table, but is only accessed when the user elects
    * to change their theme settings.
    * @var string
    */
-  var $table_name = 'themes';
+  public $table_name = 'themes';
 
   /**
    * A list of the font name themes available.
    */
-  function &font_names ()
+  function font_names ()
   {
     if (! isset ($this->_font_names))
     {
@@ -260,7 +260,7 @@ class THEME_OPTIONS
   /**
    * A list of the font name themes available.
    */
-  function &font_sizes ()
+  function font_sizes ()
   {
     if (! isset ($this->_font_sizes))
     {
@@ -325,12 +325,12 @@ class THEME_OPTIONS
    * @var array[string,string]
    * @access private
    */
-  var $_font_names;
+  protected $_font_names;
   /**
    * @var array[string,string]
    * @access private
    */
-  var $_font_sizes;
+  protected $_font_sizes;
 }
 
 /**
@@ -348,22 +348,22 @@ class THEMED_PAGE extends PAGE
    * calculated theme settings.
    * @var THEME_SETTINGS
    */
-  var $theme;
+  public $theme;
   /**
    * theme settings retrieved from storage.
    * @var THEME_SETTINGS
    */
-  var $stored_theme;
+  public $stored_theme;
   /**
    * default theme settings.
    * used with 'stored_theme' to create 'theme'
    * @var THEME_SETTINGS
    */
-  var $default_theme;
+  public $default_theme;
   /**
    * @var THEME_OPTIONS
    */
-  var $theme_options;
+  public $theme_options;
   /**
    * False is the theme could not be loaded.
    * If the storage mechanism changes for themes, {@link validate_theme()} makes
@@ -371,12 +371,12 @@ class THEMED_PAGE extends PAGE
    * False.
    * @var boolean
    */
-  var $stored_theme_is_valid = TRUE;
+  public $stored_theme_is_valid = TRUE;
 
   /**
-   * @param ENVIRONMENT &$env Global environment.
+   * @param ENVIRONMENT $env Global environment.
    */
-  function THEMED_PAGE (&$env)
+  function THEMED_PAGE ($env)
   {
     PAGE::PAGE ($env);
 
@@ -486,7 +486,7 @@ class THEMED_PAGE extends PAGE
       if ($id)
       {
         $theme_query = $this->theme_query ();
-        $theme =& $theme_query->object_at_id ($id);
+        $theme = $theme_query->object_at_id ($id);
       }
 
       if (isset ($theme))
@@ -599,7 +599,7 @@ class THEMED_PAGE extends PAGE
    * @param string $path New path.
    * @access private
    */
-  function _on_icon_alias_changed (&$resource_manager, $alias, $path)
+  function _on_icon_alias_changed ($resource_manager, $alias, $path)
   {
     parent::_on_icon_alias_changed ($resource_manager, $alias, $path);
     if (isset ($this->default_theme))

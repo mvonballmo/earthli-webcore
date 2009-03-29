@@ -48,16 +48,16 @@ require_once ('webcore/forms/execute_task_form.php');
  */
 class EXECUTE_PUBLISHER_TASK_FORM extends EXECUTE_TASK_FORM
 {
-  var $button = 'Publish';
+  public $button = 'Publish';
   /**
    * @var string
    */
-  var $button_icon = '{icons}indicators/published';
+  public $button_icon = '{icons}indicators/published';
 
   /**
-   * @param APPLICATION &$app Main application.
+   * @param APPLICATION $app Main application.
    */
-  function EXECUTE_PUBLISHER_TASK_FORM (&$app)
+  function EXECUTE_PUBLISHER_TASK_FORM ($app)
   {
     EXECUTE_TASK_FORM::EXECUTE_TASK_FORM ($app);
 
@@ -76,9 +76,9 @@ class EXECUTE_PUBLISHER_TASK_FORM extends EXECUTE_TASK_FORM
 
   /**
    * Load initial properties from this branch.
-   * @param TASK &$obj
+   * @param TASK $obj
    */
-  function load_from_object (&$obj)
+  function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
     $this->set_value ('preview', $obj->preview);
@@ -86,10 +86,10 @@ class EXECUTE_PUBLISHER_TASK_FORM extends EXECUTE_TASK_FORM
 
   /**
    * Execute the form.
-   * @param TASK &$obj
+   * @param TASK $obj
    * @access private
    */
-  function commit (&$obj)
+  function commit ($obj)
   {
     $obj->preview = $this->value_for ('preview');
     parent::commit ($obj);
@@ -97,10 +97,10 @@ class EXECUTE_PUBLISHER_TASK_FORM extends EXECUTE_TASK_FORM
 
   /**
    * Add boolean fields to the check boxes. 
-   * @param FORM_LIST_PROPERTIES &$props
+   * @param FORM_LIST_PROPERTIES $props
    * @access private
    */
-  function _add_boolean_options (&$props)
+  function _add_boolean_options ($props)
   {
     parent::_add_boolean_options ($props);
     $props->add_item ('preview', 1);    

@@ -49,56 +49,56 @@ class FILE_OPTIONS
    * Separates two directories in the file system.
    * @var string
    */
-  var $path_delimiter = '/';
+  public $path_delimiter = '/';
   /**
    * Indicates the current directory in the file system.
    * @var string
    */
-  var $current_folder = '.';
+  public $current_folder = '.';
   /**
    * Separates two lines in a text file.
    * @var string
    */
-  var $end_of_line = "\n";
+  public $end_of_line = "\n";
   /**
    * Access mode for new folders.
    * Used by {@link ensure_path_exists()}.
    * @var integer
    */
-  var $default_access_mode = 0777;
+  public $default_access_mode = 0777;
   /**
    * List of characters to convert <i>from</i> in a file name.
    * {@link normalize_file_id()} replaces these characters with their
    * corresponding entry in {@link $target_chars}.
    * @var string
    */
-  var $source_chars = 'äáàâëéèêïíìîöóòôüúùûÄÁÀÂËÉÈÊÏÍÌÎÖÓÒÔÜÚÙÛñÑçÇ';
+  public $source_chars = 'äáàâëéèêïíìîöóòôüúùûÄÁÀÂËÉÈÊÏÍÌÎÖÓÒÔÜÚÙÛñÑçÇ';
   /**
    * List of characters to convert <i>to</i> in afile name.
    * Each character replaces its corresponding entry in {@link
    * $source_chars} if found in a file name.
    * @var string */
-  var $target_chars = 'aaaaeeeeiiiioooouuuuAAAAEEEEIIIIOOOOUUUUnNcC';
+  public $target_chars = 'aaaaeeeeiiiioooouuuuAAAAEEEEIIIIOOOOUUUUnNcC';
   /**
    * Longest possible file name.
    * @var integer
    */
-  var $max_name_length = 255;
+  public $max_name_length = 255;
   /**
    * String containing all valid file name characters.
    * @var string
    */
-  var $valid_file_chars = 'a-zA-Z0-9,._\+\()\-';
+  public $valid_file_chars = 'a-zA-Z0-9,._\+\()\-';
   /**
    * Collapse successive invalid characters into one replacement character.
    * @var boolean
    */
-  var $collapse_invalid_chars = TRUE;
+  public $collapse_invalid_chars = TRUE;
   /**
    * Single character used to replace all invalid file name characters.
    * @var string
    */
-  var $replacement_char = '_';
+  public $replacement_char = '_';
   /**
    * Use only lower-case for normalized paths.
    * This avoids path anamolies in case-sensitive file systems (e.g. UNIX-based)
@@ -106,7 +106,7 @@ class FILE_OPTIONS
    * a new directory and/or path.
    * @var boolean
    */
-  var $normalized_ids_are_lower_case = TRUE;
+  public $normalized_ids_are_lower_case = TRUE;
 
   /**
    * Returns true is the path should have a leading separator.
@@ -131,7 +131,7 @@ function make_canonical ($path, $opts = null)
 {
   if (! isset ($opts))
   {
-    $opts =& global_file_options ();
+    $opts = global_file_options ();
   }
   $sep = $opts->path_delimiter;
   $curr = $opts->current_folder;
@@ -161,7 +161,7 @@ function join_paths ($path1, $path2, $opts = null)
   {
     if (! isset ($opts))
     {
-      $opts =& global_file_options ();
+      $opts = global_file_options ();
     }
 
     $sep = $opts->path_delimiter;
@@ -270,7 +270,7 @@ function path_between ($from, $to, $opts = null)
 
   if (! isset ($opts))
   {
-    $opts =& global_file_options ();
+    $opts = global_file_options ();
   }
 
   $from = make_canonical ($from, $opts);
@@ -316,7 +316,7 @@ function ensure_begins_with_delimiter ($f, $opts = null)
   {
     if (! isset ($opts))
     {
-      $opts =& global_file_options ();
+      $opts = global_file_options ();
     }
     if (! begins_with_delimiter ($f, $opts))
     {
@@ -343,7 +343,7 @@ function ensure_ends_with_delimiter ($f, $opts = null)
   {
     if (! isset ($opts))
     {
-      $opts =& global_file_options ();
+      $opts = global_file_options ();
     }
     if (! ends_with_delimiter ($f, $opts))
     {
@@ -371,7 +371,7 @@ function begins_with_delimiter ($f, $opts = null)
   {
     if (! isset ($opts))
     {
-      $opts =& global_file_options ();
+      $opts = global_file_options ();
     }
     return $f [0] == $opts->path_delimiter;
   }
@@ -391,7 +391,7 @@ function ends_with_delimiter ($f, $opts = null)
   {
     if (! isset ($opts))
     {
-      $opts =& global_file_options ();
+      $opts = global_file_options ();
     }
     return substr ($f, -1) == $opts->path_delimiter;
   }
@@ -409,7 +409,7 @@ function has_root ($f, $opts = null)
 {
   if (! isset ($opts))
   {
-    $opts =& global_file_options ();
+    $opts = global_file_options ();
   }
   $path_starts_with_delimiter = $opts->path_starts_with_delimiter();
   return ($path_starts_with_delimiter && begins_with_delimiter ($f, $opts)) ||
@@ -430,7 +430,7 @@ function is_file_name ($f, $opts = null)
   {
     if (! isset ($opts))
     {
-      $opts =& global_file_options ();
+      $opts = global_file_options ();
     }
     $slash_pos = strrpos ($f, $opts->path_delimiter);
     return $slash_pos < $dot_pos;
@@ -483,7 +483,7 @@ function normalize_path ($path, $opts = null)
 
   if (! isset ($opts))
   {
-    $opts =& global_file_options ();
+    $opts = global_file_options ();
   }
 
   $parts_to_process = explode ($opts->path_delimiter, $path);
@@ -524,7 +524,7 @@ function normalize_file_id ($part, $opts = null)
 {
   if (! isset ($opts))
   {
-    $opts =& global_file_options ();
+    $opts = global_file_options ();
   }
   $Result = substr ($part, 0, $opts->max_name_length);
   $Result = strtr ($Result, $opts->source_chars, $opts->target_chars);
@@ -657,7 +657,7 @@ function ensure_path_exists ($path, $opts = null)
   {
     if (! isset ($opts))
     {
-      $opts =& global_file_options ();
+      $opts = global_file_options ();
     }
 
     $path = str_replace ('\\', $opts->path_delimiter, $path);
@@ -707,7 +707,7 @@ function write_text_file ($file_name, $text, $opts = null)
 {
   if (! isset ($opts))
   {
-    $opts =& global_file_options ();
+    $opts = global_file_options ();
   }
   $f = @fopen ($file_name, 'w');
   @fwrite ($f, $text);
@@ -739,7 +739,7 @@ function file_list_for ($base_path, $path_to_prepend = '', $recurse = FALSE, $op
 {
   if (! isset ($opts))
   {
-    $opts =& global_file_options ();
+    $opts = global_file_options ();
   }
   $$base_path = ensure_ends_with_delimiter ($base_path, $opts);
 
@@ -774,7 +774,7 @@ function file_list_for ($base_path, $path_to_prepend = '', $recurse = FALSE, $op
  * @return FILE_OPTIONS
  * @access private
  */
-function &global_file_options ()
+function global_file_options ()
 {
   global $_g_file_options;
   if (! isset ($_g_file_options))

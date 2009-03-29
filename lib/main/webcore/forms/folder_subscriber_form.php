@@ -50,20 +50,20 @@ class FOLDER_SUBSCRIBER_FORM extends ID_BASED_FORM
   /**
    * @var string
    */
-  var $button = 'Save';
+  public $button = 'Save';
   /**
    * @var string
    */
-  var $button_icon = '{icons}buttons/save';
+  public $button_icon = '{icons}buttons/save';
 
   /**
-   * @param FOLDER &$folder Update subscribers to this folder.
+   * @param FOLDER $folder Update subscribers to this folder.
    */
-  function FOLDER_SUBSCRIBER_FORM (&$folder)
+  function FOLDER_SUBSCRIBER_FORM ($folder)
   {
     ID_BASED_FORM::ID_BASED_FORM ($folder->app);
 
-    $this->_folder =& $folder;
+    $this->_folder = $folder;
 
     $field = new ARRAY_FIELD ();
     $field->id = 'subscriber_ids';
@@ -73,15 +73,15 @@ class FOLDER_SUBSCRIBER_FORM extends ID_BASED_FORM
 
   /**
    * Store the form's values to this folder.
-    * @param FOLDER &$obj
+    * @param FOLDER $obj
     * @access private
     */
-  function commit (&$obj)
+  function commit ($obj)
   {
     $selected_emails = $this->value_for ('subscriber_ids');
 
     $query = $this->_folder->subscriber_query ();
-    $subscribers =& $query->objects ();
+    $subscribers = $query->objects ();
     foreach ($subscribers as $subscriber)
     {
       if (! in_array ($subscriber->email, $selected_emails))
@@ -92,10 +92,10 @@ class FOLDER_SUBSCRIBER_FORM extends ID_BASED_FORM
   }
 
   /**
-   * @param FORM_RENDERER &$renderer
+   * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_controls (&$renderer)
+  function _draw_controls ($renderer)
   {
     $query = $this->_folder->subscriber_query ();
 

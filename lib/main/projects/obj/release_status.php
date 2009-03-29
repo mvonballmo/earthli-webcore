@@ -54,18 +54,18 @@ class RELEASE_STATUS
    * Information about the testing status of a release.
    * @var RELEASE_DATE_STATUS
    */
-  var $test;
+  public $test;
   /**
    * Information about the shipping status of a release.
    * @var RELEASE_DATE_STATUS
    */
-  var $ship;
+  public $ship;
 
   /**
-   * @param RELEASE &$release
+   * @param RELEASE $release
    * @param boolean $text_only Omit all tags if True.
    */
-  function RELEASE_STATUS (&$release, $text_only)
+  function RELEASE_STATUS ($release, $text_only)
   {
     $this->test = new RELEASE_DATE_STATUS ($release, $release->time_tested, $release->time_testing_scheduled, ! $release->planned ());
     $this->ship = new RELEASE_DATE_STATUS ($release, $release->time_shipped, $release->time_scheduled);
@@ -174,12 +174,12 @@ class RELEASE_STATUS
    * @var string
    * @access private
    */
-  var $_html_text;
+  protected $_html_text;
   /**
    * @var string
    * @access private
    */
-  var $_plain_text;
+  protected $_plain_text;
 }
 
 /**
@@ -196,7 +196,7 @@ class RELEASE_DATE_STATUS extends WEBCORE_OBJECT
    * Either the time scheduled or the time occurred.
    * @var DATE_TIME
    */
-  var $date;
+  public $date;
   /**
    * The relevant time difference.
    * If {@link $occurred} is True, then this is the difference between scheduled
@@ -204,66 +204,66 @@ class RELEASE_DATE_STATUS extends WEBCORE_OBJECT
    * difference between now and time scheduled.
    * @var TIME_INTERVAL
    */
-  var $difference;
+  public $difference;
   /**
    * Either 'early' or 'late'.
    * @var string
    */
-  var $diff_label;
+  public $diff_label;
   /**
    * True if scheduled time has passed and {@link $occurred} is False.
    * @var boolean
    */
-  var $overdue;
+  public $overdue;
   /**
    * True if the event occurred.
    * @var boolean
    */
-  var $occurred;
+  public $occurred;
   /**
    * True if the event is (or was) scheduled.
    * @var boolean
    */
-  var $scheduled;
+  public $scheduled;
   /**
    * Graphic indicator of the status condition.
    * Indicates whether an event has occurred, was skipped or is overdue.
    * @see $text
    * @var string
    */
-  var $icon;
+  public $icon;
   /**
    * Text indicator of the status condition.
    * Indicates whether an event has occurred, was skipped or is overdue.
    * @see $icon
    * @var string
    */
-  var $text;
+  public $text;
 
   /**
    * Time the event was scheduled.
    * @var DATE_TIME
    */
-  var $time_scheduled;
+  public $time_scheduled;
   /**
    * Time the event occurred.
    * @var DATE_TIME
    */
-  var $time_occurred;
+  public $time_occurred;
 
   /**
-   * @param RELEASE &$release
-   * @param DATE_TIME &$occurred Time the event occurred. Need not be valid.
-   * @param DATE_TIME &$scheduled Time the event is scheduled. Need not be valid.
+   * @param RELEASE $release
+   * @param DATE_TIME $occurred Time the event occurred. Need not be valid.
+   * @param DATE_TIME $scheduled Time the event is scheduled. Need not be valid.
    * @param boolean $skip_condition Marks an event as skipped if this is true, and the event was scheduled, but has not occurred.
    */
-  function RELEASE_DATE_STATUS (&$rel, &$occurred, &$scheduled, $skip_condition = FALSE)
+  function RELEASE_DATE_STATUS ($rel, $occurred, $scheduled, $skip_condition = FALSE)
   {
     WEBCORE_OBJECT::WEBCORE_OBJECT ($rel->context);
 
-    $this->_release =& $rel;
-    $this->time_occurred =& $occurred;
-    $this->time_scheduled =& $scheduled;
+    $this->_release = $rel;
+    $this->time_occurred = $occurred;
+    $this->time_scheduled = $scheduled;
     $this->_skip_condition = $skip_condition;
 
     $this->refresh ();
@@ -488,22 +488,22 @@ class RELEASE_DATE_STATUS extends WEBCORE_OBJECT
    * @var RELEASE
    * @access private
    */
-  var $_release;
+  protected $_release;
   /**
    * @var boolean
    * @access private
    */
-  var $_skip_condition;
+  protected $_skip_condition;
   /**
    * @var string
    * @access private
    */
-  var $_html_text;
+  protected $_html_text;
   /**
    * @var string
    * @access private
    */
-  var $_plain_text;
+  protected $_plain_text;
 }
 
 ?>

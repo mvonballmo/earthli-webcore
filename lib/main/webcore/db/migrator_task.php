@@ -62,12 +62,12 @@ class MIGRATOR_TASK extends TASK
    * @var FRAMEWORK_INFO
    * @access private
    */
-  var $info;
+  public $info;
   /**
    * Log all messages in this channel.
    * @var string
    */
-  var $log_channel = Msg_channel_migrate;
+  public $log_channel = Msg_channel_migrate;
   /**
    * Version from which this migrator works.
    * The version in the database must match this version or the database will
@@ -76,14 +76,14 @@ class MIGRATOR_TASK extends TASK
    * @see $ignore_from_version
    * @see $version_to
    */
-  var $version_from = '';
+  public $version_from = '';
   /**
    * Version to which application will be migrated.
    * Version number is updated when the migration finishes.
    * @var string
    * @see $version_from
    */
-  var $version_to = '';
+  public $version_to = '';
   /**
    * Migrate regardless of whether the database has the correct version.
    * This may cause errors in the migration process, as the migration does
@@ -94,20 +94,20 @@ class MIGRATOR_TASK extends TASK
    * @see $version_to
    * @see $version_from
    */
-  var $ignore_from_version = FALSE;
+  public $ignore_from_version = FALSE;
   /**
    * Icon to show in the title bar when executing.
    * @var string
    */
-  var $icon = '{icons}buttons/upgrade';
+  public $icon = '{icons}buttons/upgrade';
 
   /**
    * @param FRAMEWORK_INFO
    */
-  function MIGRATOR_TASK (&$info)
+  function MIGRATOR_TASK ($info)
   {
     TASK::TASK ($info->context);
-    $this->info =& $info;
+    $this->info = $info;
     $this->ignore_from_version = ! $this->info->exists ();
   }
 

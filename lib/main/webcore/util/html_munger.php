@@ -57,16 +57,16 @@ class HTML_BLOCK_TRANSFORMER extends MUNGER_BLOCK_TRANSFORMER
    * the first and last newlines in the text.
    * @var boolean
    */
-  var $strict_newlines = FALSE;
+  public $strict_newlines = FALSE;
 
   /**
    * Transform given newlines to HTML boxes.
-   * @param MUNGER &$munger The transformation context.
+   * @param MUNGER $munger The transformation context.
    * @param string $text
    * @return string
    * @access private
    */
-  function _apply_transform (&$munger, $text)
+  function _apply_transform ($munger, $text)
   {
     if (strpos ($text, "\n") !== FALSE)
     {
@@ -168,12 +168,12 @@ class HTML_BLOCK_TRANSFORMER extends MUNGER_BLOCK_TRANSFORMER
 
   /**
    * Transform text without newlines.
-   * @param MUNGER &$munger The transformation context.
+   * @param MUNGER $munger The transformation context.
    * @param string $text
    * @return string
    * @access private
    */
-  function _apply_simple_transform (&$munger, $text)
+  function _apply_simple_transform ($munger, $text)
   {
     return $text;
   }
@@ -191,11 +191,11 @@ class HTML_QUOTE_TRANSFORMER extends HTML_BLOCK_TRANSFORMER
 {
   /**
    * Set this as the active or inactive transformer.
-   * @param MUNGER &$munger The transformation context.
+   * @param MUNGER $munger The transformation context.
    * @param boolean $value True if the transformer is being activated.
-   * @param MUNGER_TOKEN &$token Token that caused the activation.
+   * @param MUNGER_TOKEN $token Token that caused the activation.
    */
-  function activate (&$munger, $value, &$token)
+  function activate ($munger, $value, $token)
   {
     parent::activate ($munger, $value, $token);
     if ($value)
@@ -206,12 +206,12 @@ class HTML_QUOTE_TRANSFORMER extends HTML_BLOCK_TRANSFORMER
 
   /**
    * Transform given newlines to HTML boxes.
-   * @param MUNGER &$munger The transformation context.
+   * @param MUNGER $munger The transformation context.
    * @param string $text
    * @return string
    * @access private
    */
-  function _apply_transform (&$munger, $text)
+  function _apply_transform ($munger, $text)
   {
     $text = $this->_apply_quotes ($text, $this->_quote_style, '&ldquo;', '&rdquo;');
     return parent::_apply_transform ($munger, $text);
@@ -221,7 +221,7 @@ class HTML_QUOTE_TRANSFORMER extends HTML_BLOCK_TRANSFORMER
    * @var string
    * @access private
    */
-  var $_quote_style;
+  protected $_quote_style;
 }
 
 /**
@@ -240,15 +240,15 @@ class HTML_PARAGRAPH_TRANSFORMER extends HTML_BLOCK_TRANSFORMER
    * the first and last newlines in the text.
    * @var boolean
    */
-  var $strict_newlines = TRUE;
+  public $strict_newlines = TRUE;
 
   /**
    * Transform text without newlines.
-   * @param MUNGER &$munger The transformation context.
+   * @param MUNGER $munger The transformation context.
    * @param string $text
    * @return string
    */
-  function _apply_simple_transform (&$munger, $text)
+  function _apply_simple_transform ($munger, $text)
   {
     if (($this->_buffer_state != Munger_only_data_block) || $munger->force_paragraphs)
     {
@@ -272,12 +272,12 @@ class HTML_GESHI_CODE_TRANSFORMER extends MUNGER_TRANSFORMER
 {
   /**
    * Transform raw text.
-   * @param MUNGER &$munger The transformation context.
+   * @param MUNGER $munger The transformation context.
    * @param string $text
    * @return string
    * @access private
    */
-  function _apply_transform (&$munger, $text)
+  function _apply_transform ($munger, $text)
   {
 //    include_once ('third_party/geshi/geshi.php');
     $geshi = new GeSHi($text, 'java');
@@ -300,19 +300,19 @@ class HTML_LIST_TRANSFORMER_ITEM
    * Individual items.
    * @var array[string]
    */
-  var $items;
+  public $items;
   /**
    * Is this list part of a previous list?
    * If True, it does not need to open an item tag.
    * @var boolean
    */
-  var $was_open;
+  public $was_open;
   /**
    * Is the last item in this list open?
    * If True, it does not need to close the last item tag.
    * @var boolean
    */
-  var $is_open;
+  public $is_open;
 }
 
 /**
@@ -363,13 +363,13 @@ class HTML_LIST_TRANSFORMER extends MUNGER_LIST_TRANSFORMER
 
   /**
    * Transform preprocessed text into a list.
-   * @param MUNGER &$munger The transformation context.
+   * @param MUNGER $munger The transformation context.
    * @param string $text
    * @param boolean $item_was_open
    * @return string
    * @access private
    */
-  function _transform_to_list (&$munger, $text, $item_was_open)
+  function _transform_to_list ($munger, $text, $item_was_open)
   {
     if ($this->_buffer_state == Munger_only_data_block)
     {
@@ -401,11 +401,11 @@ class HTML_LIST_TRANSFORMER extends MUNGER_LIST_TRANSFORMER
 
   /**
    * Post-process text generated from another transformer.
-   * @param MUNGER &$munger The transformation context.
+   * @param MUNGER $munger The transformation context.
    * @param string
    * @access private
    */
-  function _transformer_text (&$munger, $text)
+  function _transformer_text ($munger, $text)
   {
     $text = parent::_transformer_text ($munger, $text);
     if ($this->_last_item)
@@ -457,7 +457,7 @@ class HTML_LIST_TRANSFORMER extends MUNGER_LIST_TRANSFORMER
   /**
    * @access private
    */
-  var $_last_item = null;
+  protected $_last_item = null;
 }
 
 /**
@@ -473,11 +473,11 @@ class HTML_DEFINITION_LIST_TRANSFORMER extends MUNGER_DEFINITION_LIST_TRANSFORME
 {
   /**
    * Set this as the active or inactive transformer.
-   * @param MUNGER &$munger The transformation context.
+   * @param MUNGER $munger The transformation context.
    * @param boolean $value True if the transformer is being activated.
-   * @param MUNGER_TOKEN &$token Token that caused the activation.
+   * @param MUNGER_TOKEN $token Token that caused the activation.
    */
-  function activate (&$munger, $value, &$token)
+  function activate ($munger, $value, $token)
   {
     parent::activate ($munger, $value, $token);
     $attrs = $token->attributes ();
@@ -488,11 +488,11 @@ class HTML_DEFINITION_LIST_TRANSFORMER extends MUNGER_DEFINITION_LIST_TRANSFORME
   /**
    * Transform to a term or body.
    * Called from {@link _build_definition_part()}.
-   * @param MUNGER &$munger The transformation context.
+   * @param MUNGER $munger The transformation context.
    * @param string $line
    * @access private
    */
-  function _build_as_definition_term (&$munger, $line)
+  function _build_as_definition_term ($munger, $line)
   {
     if ($this->_term_class)
     {
@@ -506,11 +506,11 @@ class HTML_DEFINITION_LIST_TRANSFORMER extends MUNGER_DEFINITION_LIST_TRANSFORME
   /**
    * Transform to a term or body.
    * Called from {@link _build_definition_part()}.
-   * @param MUNGER &$munger The transformation context.
+   * @param MUNGER $munger The transformation context.
    * @param string $line
    * @access private
    */
-  function _build_as_definition_body (&$munger, $line)
+  function _build_as_definition_body ($munger, $line)
   {
     if ($this->_definition_class)
     {
@@ -525,12 +525,12 @@ class HTML_DEFINITION_LIST_TRANSFORMER extends MUNGER_DEFINITION_LIST_TRANSFORME
    * @var string
    * @access private
    */
-  var $_term_class;
+  protected $_term_class;
   /**
    * @var string
    * @access private
    */
-  var $_definition_class;
+  protected $_definition_class;
 }
 
 /**
@@ -545,11 +545,11 @@ class HTML_BASIC_REPLACER extends MUNGER_BASIC_REPLACER
 {
   /**
    * Convert the given token to the output format.
-   * @param MUNGER &$munger The transformation context.
-   * @param MUNGER_TOKEN &$token
+   * @param MUNGER $munger The transformation context.
+   * @param MUNGER_TOKEN $token
    * @return string
    */
-  function transform (&$munger, &$token)
+  function transform ($munger, $token)
   {
     $Result = parent::transform ($munger, $token);
 
@@ -579,12 +579,12 @@ class HTML_FOOTNOTE_REFERENCE_REPLACER extends MUNGER_FOOTNOTE_REFERENCE_REPLACE
 {
   /**
    * Format the reference to the given footnote number.
-   * @param MUNGER_TOKEN &$token
-   * @param MUNGER_FOOTNOTE_INFO &$info
+   * @param MUNGER_TOKEN $token
+   * @param MUNGER_FOOTNOTE_INFO $info
    * @return string
    * @access private
    */
-  function _format_reference (&$token, &$info)
+  function _format_reference ($token, $info)
   {
     return '<a href="#' . $info->name_to . '" id="' . $info->name_from . '" class="footnote-number" title="Jump to footnote.">[' . $info->number . ']</a>';
   }
@@ -602,12 +602,12 @@ class HTML_FOOTNOTE_TEXT_REPLACER extends MUNGER_FOOTNOTE_TEXT_REPLACER
 {
   /**
    * Format the text for the given footnote number.
-   * @param MUNGER_TOKEN &$token
-   * @param MUNGER_FOOTNOTE_INFO &$info
+   * @param MUNGER_TOKEN $token
+   * @param MUNGER_FOOTNOTE_INFO $info
    * @return string
    * @access private
    */
-  function _format_text (&$token, &$info)
+  function _format_text ($token, $info)
   {
     if ($token->is_start_tag ())
     {
@@ -635,7 +635,7 @@ class HTML_PUNCTUATION_CONVERTER extends MUNGER_CONVERTER
    * Table of punctuation mappings to apply in {@link _convert()}
    * @var array[string,string]
    */
-  var $punctuation_table = array ( '---' => '&mdash;'
+  public $punctuation_table = array ( '---' => '&mdash;'
                                  , '--' => '&#8211;'
                                  , '1/2' => '&frac12;'
                                  , '1/4' => '&frac14;'
@@ -659,12 +659,12 @@ class HTML_PUNCTUATION_CONVERTER extends MUNGER_CONVERTER
 
   /**
    * Convert the text to an output format.
-   * @param MUNGER &$munger
+   * @param MUNGER $munger
    * @param string $text
    * @return string
    * @access private
    */
-  function _convert (&$munger, $text)
+  function _convert ($munger, $text)
   {
     return strtr ($text, $this->punctuation_table);
   }
@@ -684,7 +684,7 @@ class HTML_SMART_QUOTE_CONVERTER extends MUNGER_CONVERTER
    * Characters considered to be white-space.
    * A quote after one of these characters should be a left quote.
    */
-  var $white_space_chars = array (' ', "\n", "\t");
+  public $white_space_chars = array (' ', "\n", "\t");
   /**
    * Characters that are followed by left quotes.
    * A quote after a non white-space character is converted to a right quote,
@@ -693,7 +693,7 @@ class HTML_SMART_QUOTE_CONVERTER extends MUNGER_CONVERTER
    * for now.
    * @var array[char]
    */
-  var $left_chars = array ('(', '[', '{', '<', '=', ';', '.', ',', '"', '\''/*0x00AB, 0x3008, 0x300A*/);
+  public $left_chars = array ('(', '[', '{', '<', '=', ';', '.', ',', '"', '\''/*0x00AB, 0x3008, 0x300A*/);
 
   function reset()
   {
@@ -705,12 +705,12 @@ class HTML_SMART_QUOTE_CONVERTER extends MUNGER_CONVERTER
   
   /**
    * Convert the text to an output format.
-   * @param MUNGER &$munger The conversion context.
+   * @param MUNGER $munger The conversion context.
    * @param string $text
    * @return string
    * @access private
    */
-  function _convert (&$munger, $text)
+  function _convert ($munger, $text)
   {
     if ($text)
     {
@@ -821,11 +821,11 @@ class HTML_SMART_QUOTE_CONVERTER extends MUNGER_CONVERTER
    * @var string
    * @access private
    */
-  var $_last_char = '';
+  protected $_last_char = '';
 
-  var $_double_quote_open = FALSE;
+  protected $_double_quote_open = FALSE;
 
-  var $_single_quote_open = FALSE;
+  protected $_single_quote_open = FALSE;
 }
 
 /**
@@ -843,7 +843,7 @@ class HTML_LIGATURE_CONVERTER extends MUNGER_CONVERTER
    * Table of punctuation mappings to apply in {@link _convert()}
    * @var array[string,string]
    */
-  var $punctuation_table = array ( 'ffi' => '&#xfb03;;'
+  public $punctuation_table = array ( 'ffi' => '&#xfb03;;'
                                  , 'ffl' => '&#xfb04;'
                                  , 'ff' => '&#xfb00;'
                                  , 'fi' => '&#xfb01;'
@@ -852,12 +852,12 @@ class HTML_LIGATURE_CONVERTER extends MUNGER_CONVERTER
 
   /**
    * Convert the text to an output format.
-   * @param MUNGER &$munger The conversion context.
+   * @param MUNGER $munger The conversion context.
    * @param string $text
    * @return string
    * @access private
    */
-  function _convert (&$munger, $text)
+  function _convert ($munger, $text)
   {
     return strtr ($text, $this->punctuation_table);
   }
@@ -878,21 +878,21 @@ class HTML_HIGHLIGHT_CONVERTER extends MUNGER_CONVERTER
    * Open each highlighted section with this text.
    * @var string
    */
-  var $highlight_prefix = '<span class="highlight">';
+  public $highlight_prefix = '<span class="highlight">';
   /**
    * Close each highlighted section with this text.
    * @var string
    */
-  var $highlight_suffix = '</span>';
+  public $highlight_suffix = '</span>';
 
   /**
    * Convert the text to an output format.
-   * @param MUNGER &$munger The conversion context.
+   * @param MUNGER $munger The conversion context.
    * @param string $text
    * @return string
    * @access private
    */
-  function _convert (&$munger, $text)
+  function _convert ($munger, $text)
   {
     if ($munger->highlighted_words)
     {
@@ -920,30 +920,30 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
    * Used by {@link transform()} to provide default behavior.
    * @var string
    */
-  var $main_tag = 'div';
+  public $main_tag = 'div';
   /**
    * True if the main tag is a block element.
    * @var boolean
    */
-  var $is_block = TRUE;
+  public $is_block = TRUE;
   /**
    * True if the main tag has an end tag.
    * @var boolean
    */
-  var $has_end_tag = TRUE;
+  public $has_end_tag = TRUE;
   /**
    * Default classes for the inner container.
    * @var string
    */
-  var $css_classes = '';
+  public $css_classes = '';
 
   /**
    * Convert the given token to the output format.
-   * @param MUNGER &$munger The transformation context.
-   * @param MUNGER_TOKEN &$token
+   * @param MUNGER $munger The transformation context.
+   * @param MUNGER_TOKEN $token
    * @return string
    */
-  function transform (&$munger, &$token)
+  function transform ($munger, $token)
   {
     if ($token->is_start_tag ())
     {
@@ -970,15 +970,15 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
    * to the outermost container. Calls {@link _render_content()} to create the
    * content inside all of the extra containers.
    * @see _close_outer_area()
-   * @param MUNGER &$munger The transformation context.
-   * @param ARRAY[string,string] &$attrs Attributes of a tag; retrieved from the
+   * @param MUNGER $munger The transformation context.
+   * @param ARRAY[string,string] $attrs Attributes of a tag; retrieved from the
    * token.
    * @param boolean $is_block If true, uses DIV tags for extra containers;
    * otherwise, SPAN tags are used.
    * @return string
    * @access private
    */
-  function _open_outer_area (&$munger, &$attrs, $is_block)
+  function _open_outer_area ($munger, $attrs, $is_block)
   {
     $outer_css = $munger->make_style_builder ();
 
@@ -1105,13 +1105,13 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
    * Calls {@link _close_inner_area()} to close all tag-specific tags, then
    * renders closing tags for the caption.
    * @see _open_outer_area()
-   * @param MUNGER &$munger The transformation context.
+   * @param MUNGER $munger The transformation context.
    * @param boolean $is_block If true, uses DIV tags for extra containers;
    * otherwise, SPAN tags are used.
    * @return string
    * @access private
    */
-  function _close_outer_area (&$munger, $is_block)
+  function _close_outer_area ($munger, $is_block)
   {
     $Result = $this->_close_inner_area ($munger);
 
@@ -1145,19 +1145,19 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
    * Called by {@link _open_outer_area()} with parameters containing pre-
    * calculated values for common values. Should be closed with {@link
    * _close_inner_area()}.
-   * @param MUNGER &$munger The transformation context.
-   * @param array[string,string] &$attrs List of attributes for the tag
+   * @param MUNGER $munger The transformation context.
+   * @param array[string,string] $attrs List of attributes for the tag
    * (retrieved from the token).
-   * @param CSS_STYLE_BUILDER &$outer_css Styles intended for the bounding
+   * @param CSS_STYLE_BUILDER $outer_css Styles intended for the bounding
    * container; includes alignment and width.
-   * @param CSS_STYLE_BUILDER &$inner_css Styles intended for the inner
+   * @param CSS_STYLE_BUILDER $inner_css Styles intended for the inner
    * container; includes additional style and properties.
    * @param $inner_class CSS classes to apply to the inner container.
    * @see _close_inner_area()
    * @return string
    * @access private
    */
-  function _open_inner_area (&$munger, &$attrs, &$outer_css, &$inner_css, $inner_class)
+  function _open_inner_area ($munger, $attrs, $outer_css, $inner_css, $inner_class)
   {
     $builder = $munger->make_tag_builder ($this->main_tag);
     $builder->add_attribute ('class', $inner_class);
@@ -1172,24 +1172,24 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
    * Render the closing tag.
    * Called by {@link _close_outer_area()}.
    * @see _open_inner_area()
-   * @param MUNGER &$munger The transformation context.
+   * @param MUNGER $munger The transformation context.
    * @return string
    * @access private
    */
-  function _close_inner_area (&$munger)
+  function _close_inner_area ($munger)
   {
     return '</' . $this->main_tag . '>';
   }
 
   /**
    * Return the width to use for the tag.
-   * @param MUNGER &$munger The transformation context.
-   * @param array[string,string] &$attrs List of attributes for the tag
+   * @param MUNGER $munger The transformation context.
+   * @param array[string,string] $attrs List of attributes for the tag
    * (retrieved from the token).
    * @return string
    * @access private
    */
-  function _calculate_width (&$munger, &$attrs)
+  function _calculate_width ($munger, $attrs)
   {
     return read_array_index ($attrs, 'width');
   }
@@ -1197,13 +1197,13 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
 	/**
    * Read a value from the attributes list and convert it for placement
    * within an HTML tag attribute value.
-   * @param array[string,string] &$attrs List of attributes for the tag
+   * @param array[string,string] $attrs List of attributes for the tag
    * (retrieved from the token).
    * @param string $index Index into the attributes array.
    * @return string
    * @access private
    */
-  function _read_attribute (&$attrs, $index)
+  function _read_attribute ($attrs, $index)
   {
     return $this->_convert_to_attribute (read_array_index ($attrs, $index));
   }
@@ -1216,7 +1216,7 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
    */
   function _convert_to_attribute ($value)
   {
-    $text_options =& global_text_options ();
+    $text_options = global_text_options ();
     return $text_options->convert_to_html_attribute($value);
   }
 
@@ -1225,13 +1225,13 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
    * Uses the "author", "caption", "source" and "href" to link the
    * caption or author and optionally note the source (using the domain
    * of the "href").
-   * @param MUNGER &$munger The transformation context.
-   * @param array[string,string] &$attrs List of attributes for the tag
+   * @param MUNGER $munger The transformation context.
+   * @param array[string,string] $attrs List of attributes for the tag
    * (retrieved from the token).
    * @return string
    * @access private
    */
-  function _calculate_caption (&$munger, &$attrs)
+  function _calculate_caption ($munger, $attrs)
   {
     $caption = $this->_read_attribute ($attrs, 'caption');
     $author = $this->_read_attribute ($attrs, 'author');
@@ -1262,7 +1262,7 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
    * @return string
    * @access private
    */
-  function _calculate_source (&$attrs, $href)
+  function _calculate_source ($attrs, $href)
   {
     $Result = $this->_read_attribute ($attrs, 'source');
     if ($Result && $href)
@@ -1332,7 +1332,7 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
    * @return string
    * @access private
    */
-  function _url_for_source (&$attrs)
+  function _url_for_source ($attrs)
   {
     return read_array_index ($attrs, 'href');
   }
@@ -1344,7 +1344,7 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
    * @var string
    * @access private
    */
-  var $_caption;
+  protected $_caption;
 }
 
 /**
@@ -1381,7 +1381,7 @@ class HTML_BLOCK_QUOTE_REPLACER extends HTML_DIV_REPLACER
    * Overriding this with "blockquote" has strange effects, therefore it has
    * been set back to the inherited "div" value.
    * @var string */
-  var $main_tag = 'div';
+  public $main_tag = 'div';
 }
 
 /**
@@ -1395,7 +1395,7 @@ class HTML_PREFORMATTED_BLOCK_REPLACER extends HTML_DIV_REPLACER
 {
   /** The main tag to use, by default.
    * @var string */
-  var $main_tag = 'pre';
+  public $main_tag = 'pre';
 }
 
 /**
@@ -1414,19 +1414,19 @@ class HTML_BOX_REPLACER extends HTML_DIV_REPLACER
 {
   /**
    * Render the beginning of the tag.
-   * @param MUNGER &$munger The transformation context.
-   * @param array[string,string] &$attrs List of attributes for the tag
+   * @param MUNGER $munger The transformation context.
+   * @param array[string,string] $attrs List of attributes for the tag
    * (retrieved from the token).
-   * @param CSS_STYLE_BUILDER &$outer_css Styles intended for the bounding
+   * @param CSS_STYLE_BUILDER $outer_css Styles intended for the bounding
    * container; includes alignment and width.
-   * @param CSS_STYLE_BUILDER &$inner_css Styles intended for the inner
+   * @param CSS_STYLE_BUILDER $inner_css Styles intended for the inner
    * container; includes additional style and properties.
    * @param $inner_class CSS classes to apply to the inner container.
    * @see _close_inner_area()
    * @return string
    * @access private
    */
-  function _open_inner_area (&$munger, &$attrs, &$outer_css, &$inner_css, $inner_class)
+  function _open_inner_area ($munger, $attrs, $outer_css, $inner_css, $inner_class)
   {
     $builder = $munger->make_tag_builder ($this->main_tag);
     $builder->add_attribute ('class', 'chart');
@@ -1458,11 +1458,11 @@ class HTML_BOX_REPLACER extends HTML_DIV_REPLACER
 
   /**
    * Render the actual content of the tag.
-   * @param MUNGER &$munger The transformation context.
+   * @param MUNGER $munger The transformation context.
    * @return string
    * @access private
    */
-  function _close_inner_area (&$munger)
+  function _close_inner_area ($munger)
   {
     return '</' . $this->main_tag . '></' . $this->main_tag . '>';
   }
@@ -1484,19 +1484,19 @@ class HTML_MUNGER_CODE_REPLACER extends HTML_PREFORMATTED_BLOCK_REPLACER
 {
   /**
    * Render the beginning of the tag.
-   * @param MUNGER &$munger The transformation context.
-   * @param array[string,string] &$attrs List of attributes for the tag
+   * @param MUNGER $munger The transformation context.
+   * @param array[string,string] $attrs List of attributes for the tag
    * (retrieved from the token).
-   * @param CSS_STYLE_BUILDER &$outer_css Styles intended for the bounding
+   * @param CSS_STYLE_BUILDER $outer_css Styles intended for the bounding
    * container; includes alignment and width.
-   * @param CSS_STYLE_BUILDER &$inner_css Styles intended for the inner
+   * @param CSS_STYLE_BUILDER $inner_css Styles intended for the inner
    * container; includes additional style and properties.
    * @param $inner_class CSS classes to apply to the inner container.
    * @see _close_inner_area()
    * @return string
    * @access private
    */
-  function _open_inner_area (&$munger, &$attrs, &$outer_css, &$inner_css, $inner_class)
+  function _open_inner_area ($munger, $attrs, $outer_css, $inner_css, $inner_class)
   {
 ////    return parent::_open_inner_area ($attrs, $outer_css, $inner_css, $inner_class) . '<textarea name="code" class="java" rows="15" cols="100">';
     return parent::_open_inner_area ($munger, $attrs, $outer_css, $inner_css, $inner_class) . '<code>';
@@ -1504,16 +1504,16 @@ class HTML_MUNGER_CODE_REPLACER extends HTML_PREFORMATTED_BLOCK_REPLACER
 
   /**
    * Render the actual content of the tag.
-   * @param MUNGER &$munger The transformation context.
+   * @param MUNGER $munger The transformation context.
    * @return string
    * @access private
    */
-  function _close_inner_area (&$munger)
+  function _close_inner_area ($munger)
   {
     return '</code>' . parent::_close_inner_area ($munger);
   }
 
-  var $_use_highlighting;
+  protected $_use_highlighting;
 }
 
 /**
@@ -1535,21 +1535,21 @@ class HTML_INLINE_ASSET_REPLACER extends HTML_BASE_REPLACER
    * True if the main tag is a block element.
    * @var boolean
    */
-  var $is_block = FALSE;
+  public $is_block = FALSE;
   /**
    * True if the main tag has an end tag.
    * @var boolean
    */
-  var $has_end_tag = FALSE;
+  public $has_end_tag = FALSE;
 
   /**
    * Render the closing tag.
    * @see _open_inner_area()
-   * @param MUNGER &$munger The transformation context.
+   * @param MUNGER $munger The transformation context.
    * @return string
    * @access private
    */
-  function _close_inner_area (&$munger)
+  function _close_inner_area ($munger)
   {
     return '';
   }
@@ -1560,7 +1560,7 @@ class HTML_INLINE_ASSET_REPLACER extends HTML_BASE_REPLACER
    * @return string
    * @access private
    */
-  function _url_for_source (&$attrs)
+  function _url_for_source ($attrs)
   {
     $attachment_name = read_array_index ($attrs, 'attachment');
     if ($attachment_name)
@@ -1592,19 +1592,19 @@ class HTML_IMAGE_REPLACER extends HTML_INLINE_ASSET_REPLACER
 {
   /**
    * Render the open tag for the image and link.
-   * @param MUNGER &$munger The transformation context.
-   * @param array[string,string] &$attrs List of attributes for the tag
+   * @param MUNGER $munger The transformation context.
+   * @param array[string,string] $attrs List of attributes for the tag
    * (retrieved from the token).
-   * @param CSS_STYLE_BUILDER &$outer_css Styles intended for the bounding
+   * @param CSS_STYLE_BUILDER $outer_css Styles intended for the bounding
    * container; includes alignment and width.
-   * @param CSS_STYLE_BUILDER &$inner_css Styles intended for the inner
+   * @param CSS_STYLE_BUILDER $inner_css Styles intended for the inner
    * container; includes additional style and properties.
    * @param $inner_class CSS classes to apply to the inner container.
    * @see _close_inner_area()
    * @return string
    * @access private
    */
-  function _open_inner_area (&$munger, &$attrs, &$outer_css, &$inner_css, $inner_class)
+  function _open_inner_area ($munger, $attrs, $outer_css, $inner_css, $inner_class)
   {
     $attachment_name = read_array_index ($attrs, 'attachment');
     if ($attachment_name)
@@ -1647,13 +1647,13 @@ class HTML_IMAGE_REPLACER extends HTML_INLINE_ASSET_REPLACER
 
   /**
    * Return the width to use for the tag.
-   * @param MUNGER &$munger The transformation context.
-   * @param array[string,string] &$attrs List of attributes for the tag
+   * @param MUNGER $munger The transformation context.
+   * @param array[string,string] $attrs List of attributes for the tag
    * (retrieved from the token).
    * @return string
    * @access private
    */
-  function _calculate_width (&$munger, &$attrs)
+  function _calculate_width ($munger, $attrs)
   {
     /* Prefer scale over width, discarding invalid scale values.
      * Retrieve width from the image only if scale is set or
@@ -1728,19 +1728,19 @@ class HTML_MEDIA_REPLACER extends HTML_INLINE_ASSET_REPLACER
 {
   /**
    * Render the open tag for the image and link.
-   * @param MUNGER &$munger The transformation context.
-   * @param array[string,string] &$attrs List of attributes for the tag
+   * @param MUNGER $munger The transformation context.
+   * @param array[string,string] $attrs List of attributes for the tag
    * (retrieved from the token).
-   * @param CSS_STYLE_BUILDER &$outer_css Styles intended for the bounding
+   * @param CSS_STYLE_BUILDER $outer_css Styles intended for the bounding
    * container; includes alignment and width.
-   * @param CSS_STYLE_BUILDER &$inner_css Styles intended for the inner
+   * @param CSS_STYLE_BUILDER $inner_css Styles intended for the inner
    * container; includes additional style and properties.
    * @param $inner_class CSS classes to apply to the inner container.
    * @see _close_inner_area()
    * @return string
    * @access private
    */
-  function _open_inner_area (&$munger, &$attrs, &$outer_css, &$inner_css, $inner_class)
+  function _open_inner_area ($munger, $attrs, $outer_css, $inner_css, $inner_class)
   {
     /* Get the source URL and format it according to media type. */
     $attachment_name = read_array_index ($attrs, 'attachment');
@@ -1758,51 +1758,51 @@ class HTML_MEDIA_REPLACER extends HTML_INLINE_ASSET_REPLACER
 
   /**
    * Return the width to use for the tag.
-   * @param MUNGER &$munger The transformation context.
-   * @param array[string,string] &$attrs List of attributes for the tag
+   * @param MUNGER $munger The transformation context.
+   * @param array[string,string] $attrs List of attributes for the tag
    * (retrieved from the token).
    * @return string
    * @access private
    */
-  function _calculate_width (&$munger, &$attrs)
+  function _calculate_width ($munger, $attrs)
   {
     return read_array_index ($attrs, 'width', '450px');
   }
 
   /**
    * Return a representation for this url and attributes.
-   * @param MUNGER &$munger The transformation context.
+   * @param MUNGER $munger The transformation context.
    * @param string $src The url to the movie.
-   * @param array[string,string] &$attrs List of attributes for the tag
+   * @param array[string,string] $attrs List of attributes for the tag
    * (retrieved from the token).
-   * @param CSS_STYLE_BUILDER &$outer_css Styles intended for the bounding
+   * @param CSS_STYLE_BUILDER $outer_css Styles intended for the bounding
    * container; includes alignment and width.
-   * @param CSS_STYLE_BUILDER &$inner_css Styles intended for the inner
+   * @param CSS_STYLE_BUILDER $inner_css Styles intended for the inner
    * container; includes additional style and properties.
    * @param $inner_class CSS classes to apply to the inner container.
    * @return string
    * @access private
    */
-  function _render_asset (&$munger, $src, &$attrs, &$inner_css, &$outer_css, $inner_class)
+  function _render_asset ($munger, $src, $attrs, $inner_css, $outer_css, $inner_class)
   {
     return $this->_asset_as_movie ($munger, $src, $attrs, $inner_css, $outer_css, $inner_class);
   }
 
   /**
    * Return a control to display the movie.
-   * @param MUNGER &$munger The transformation context.
+   * @param MUNGER $munger The transformation context.
    * @param string $src The url to the movie.
-   * @param array[string,string] &$attrs List of attributes for the tag
+   * @param array[string,string] $attrs List of attributes for the tag
    * (retrieved from the token).
-   * @param CSS_STYLE_BUILDER &$outer_css Styles intended for the bounding
+   * @param CSS_STYLE_BUILDER $outer_css Styles intended for the bounding
    * container; includes alignment and width.
-   * @param CSS_STYLE_BUILDER &$inner_css Styles intended for the inner
+   * @param CSS_STYLE_BUILDER $inner_css Styles intended for the inner
    * container; includes additional style and properties.
    * @param $inner_class CSS classes to apply to the inner container.
    * @return string
    * @access private
    */
-  function _asset_as_movie (&$munger, $src, &$attrs, &$inner_css, &$outer_css, $inner_class)
+  function _asset_as_movie ($munger, $src, $attrs, $inner_css, $outer_css, $inner_class)
   {
     $builder = $munger->make_tag_builder ('embed');
     $builder->add_array_attribute ('title', $attrs);
@@ -1849,11 +1849,11 @@ class HTML_LINK_REPLACER extends HTML_BASE_REPLACER
 {
   /**
    * Convert the given token to the output format.
-   * @param MUNGER &$munger The transformation context.
-   * @param MUNGER_TOKEN &$token
+   * @param MUNGER $munger The transformation context.
+   * @param MUNGER_TOKEN $token
    * @return string
    */
-  function transform (&$munger, &$token)
+  function transform ($munger, $token)
   {
     if ($token->is_start_tag ())
     {
@@ -1889,7 +1889,7 @@ class HTML_LINK_REPLACER extends HTML_BASE_REPLACER
    * @var string
    * @access private
    */
-  var $_source;
+  protected $_source;
   /**
    * Name to show as author of link.
    * If this is specified, this text is shown with an 'author' style after the link.
@@ -1899,14 +1899,14 @@ class HTML_LINK_REPLACER extends HTML_BASE_REPLACER
    * @var string
    * @access private
    */
-  var $_author;
+  protected $_author;
   /**
    * Actual contents of the link.
    * Maintained internally to use when formatting the {@link $_source} property.
    * @var string
    * @access private
    */
-  var $_href;
+  protected $_href;
 }
 
 /**
@@ -1923,11 +1923,11 @@ class HTML_ANCHOR_REPLACER extends MUNGER_REPLACER
 {
   /**
    * Convert the given token to the output format.
-   * @param MUNGER &$munger The transformation context.
-   * @param MUNGER_TOKEN &$token
+   * @param MUNGER $munger The transformation context.
+   * @param MUNGER_TOKEN $token
    * @return string
    */
-  function transform (&$munger, &$token)
+  function transform ($munger, $token)
   {
     $attrs = $token->attributes ();
 
@@ -1955,15 +1955,15 @@ class HTML_HEADING_REPLACER extends MUNGER_REPLACER
    * Heading level to use if none is specified.
    * @var integer
    */
-  var $default_level = 3;
+  public $default_level = 3;
 
   /**
    * Convert the given token to the output format.
-   * @param MUNGER &$munger The transformation context.
-   * @param MUNGER_TOKEN &$token
+   * @param MUNGER $munger The transformation context.
+   * @param MUNGER_TOKEN $token
    * @return string
    */
-  function transform (&$munger, &$token)
+  function transform ($munger, $token)
   {
     if ($token->is_start_tag ())
     {
@@ -1987,7 +1987,7 @@ class HTML_HEADING_REPLACER extends MUNGER_REPLACER
    * @var integer
    * @access private
    */
-  var $_level;
+  protected $_level;
 }
 
 /**
@@ -2004,16 +2004,16 @@ class HTML_MUNGER extends MUNGER
    * Used only if the text must be truncated.
    * @var string
    */
-  var $complete_text_url;
+  public $complete_text_url;
   /**
    * Space-separated list of words to highlight.
    * @var string
    */
-  var $highlighted_words = '';
+  public $highlighted_words = '';
   /**
    * @var string
    */
-  var $convert_mode = Munger_convert_html_strict;
+  public $convert_mode = Munger_convert_html_strict;
 
   /**
    * Shared instance used by {@link MUNGER_REPLACER}s and {@link MUNGER_TRANSFORMER}s.
@@ -2203,11 +2203,11 @@ class HTML_TITLE_MUNGER extends HTML_BASE_MUNGER
   /**
    * @var boolean
    */
-  var $strip_unknown_tags = FALSE;
+  public $strip_unknown_tags = FALSE;
   /**
    * @var boolean
    */
-  var $force_paragraphs = FALSE;
+  public $force_paragraphs = FALSE;
 
   function HTML_TITLE_MUNGER ()
   {

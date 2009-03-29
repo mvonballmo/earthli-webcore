@@ -52,23 +52,23 @@ class PROJECT extends FOLDER
    * Id of the main {@link BRANCH} for this project.
    * @var integer
    */
-  var $trunk_id;
+  public $trunk_id;
   /**
    * Use options from the project with this id.
    * @var integer
    */
-  var $options_id;
+  public $options_id;
 
   /**
    * The main code line for this project.
     * @return BRANCH
     */
-  function &trunk ()
+  function trunk ()
   {
     if (! isset ($this->_trunk))
     {
       $q = $this->branch_query ();
-      $this->_trunk =& $q->object_at_id ($this->trunk_id);
+      $this->_trunk = $q->object_at_id ($this->trunk_id);
     }
     return $this->_trunk;
   }
@@ -133,7 +133,7 @@ class PROJECT extends FOLDER
    * project.
    * @return PROJECT_OPTIONS
    */
-  function &options ()
+  function options ()
   {
     if (! isset ($this->_options))
     {
@@ -151,9 +151,9 @@ class PROJECT extends FOLDER
   }
 
   /**
-   * @param DATABASE &$db
+   * @param DATABASE $db
    */
-  function load (&$db)
+  function load ($db)
   {
     $this->options_id = $db->f ('options_id');
     $this->trunk_id = $db->f ('trunk_id');
@@ -161,9 +161,9 @@ class PROJECT extends FOLDER
   }
 
   /**
-   * @param SQL_STORAGE &$storage Store values to this object.
+   * @param SQL_STORAGE $storage Store values to this object.
    */
-  function store_to (&$storage)
+  function store_to ($storage)
   {
     parent::store_to ($storage);
     $tname = $this->_table_name ();
@@ -198,7 +198,7 @@ class PROJECT extends FOLDER
     $tables = $this->app->table_names;
 
     $branch_query = $this->branch_query ();
-    $branches =& $branch_query->objects ();
+    $branches = $branch_query->objects ();
     foreach ($branches as $branch)
       $branch_ids [] = $branch->id;
 
@@ -326,23 +326,23 @@ class PROJECT extends FOLDER
    * @var BRANCH
    * @access private
    */
-  var $_trunk;
+  protected $_trunk;
   /**
    * @var PROJECT_OPTIONS
    * @access private
    */
-  var $_options;
+  protected $_options;
 
   /**
    * @var QUERY_BASED_CACHE
    * @access private
    */
-  var $_branch_cache;
+  protected $_branch_cache;
   /**
    * @var QUERY_BASED_CACHE
    * @access private
    */
-  var $_release_cache;
+  protected $_release_cache;
 }
 
 ?>

@@ -28,18 +28,18 @@ http://www.earthli.com/software/webcore
   
   $id = read_var ('id');
   $folder_query = $App->login->folder_query ();  
-  $folder =& $folder_query->folder_for_component_at_id ($id);
+  $folder = $folder_query->folder_for_component_at_id ($id);
 
   if (isset ($folder))
   {
     $App->set_referer ();
 
     $comp_query = $folder->component_query ();
-    $comp =& $comp_query->object_at_id ($id);
+    $comp = $comp_query->object_at_id ($id);
 
     $class_name = $App->final_class_name ('PROJECT_COMPONENT_PANEL_MANAGER', 'projects/gui/project_panel.php');
     $panel_manager = new $class_name ($comp);
-    $panel =& $panel_manager->selected_panel ();
+    $panel = $panel_manager->selected_panel ();
 
     $Page->title->add_object ($folder);
     $Page->title->add_object ($comp);
@@ -59,8 +59,8 @@ http://www.earthli.com/software/webcore
     </div>
     <div class="side-bar-body">
     <?php
-      $renderer =& $comp->handler_for (Handler_html_renderer);
-      $options =& $renderer->options ();
+      $renderer = $comp->handler_for (Handler_html_renderer);
+      $options = $renderer->options ();
       $options->show_as_summary = TRUE;
       $options->show_users = FALSE;
       $renderer->display_as_html ($comp);

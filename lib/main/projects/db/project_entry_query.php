@@ -75,7 +75,7 @@ class GENERIC_PROJECT_ENTRY_QUERY extends FOLDER_MULTI_ENTRY_QUERY
    * @var string
    * @access private
    */
-  var $_type;
+  protected $_type;
 }
 
 /**
@@ -92,14 +92,14 @@ class PROJECT_ENTRY_QUERY extends GENERIC_PROJECT_ENTRY_QUERY
    * Redirect branch information onto default branch information. When an entry
    * is displayed in a project, it uses cached information relating to its
    * 'main' branch.
-   * @param PROJECT_ENTRY &$obj
+   * @param PROJECT_ENTRY $obj
    * @access private
    */
-  function _prepare_object (&$obj)
+  function _prepare_object ($obj)
   {
     parent::_prepare_object ($obj);
 
-    $branch_info =& $obj->main_branch_info ();
+    $branch_info = $obj->main_branch_info ();
     $branch_info->release_id = $this->db->f ('release_id');
 
     switch ($obj->type)

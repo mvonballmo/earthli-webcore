@@ -52,17 +52,17 @@ class PURGE_RELEASE_FORM extends PURGE_OBJECT_FORM
   /**
    * @var string
    */
-  var $button = 'Yes';
+  public $button = 'Yes';
   /**
    * Show the previews before the form?
    * @var boolean
    */
-  var $show_previews_first = TRUE;
+  public $show_previews_first = TRUE;
 
   /**
-   * @param APPLICATION &$app
+   * @param APPLICATION $app
    */
-  function PURGE_RELEASE_FORM (&$app)
+  function PURGE_RELEASE_FORM ($app)
   {
     PURGE_OBJECT_FORM::PURGE_OBJECT_FORM ($app);
 
@@ -76,7 +76,7 @@ class PURGE_RELEASE_FORM extends PURGE_OBJECT_FORM
 
   /**
    * Delete the given object.
-    * @param RELEASE &$obj
+    * @param RELEASE $obj
     * @access private
     */
   function commit ($obj)
@@ -87,9 +87,9 @@ class PURGE_RELEASE_FORM extends PURGE_OBJECT_FORM
   }
 
   /**
-   * @param RELEASE &$obj
+   * @param RELEASE $obj
    */
-  function load_from_object (&$obj)
+  function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
     $this->set_value ('sub_history_item_publication_state', History_item_silent);
@@ -98,20 +98,20 @@ class PURGE_RELEASE_FORM extends PURGE_OBJECT_FORM
 
   /**
    * Return a preview for the given object.
-   * @param STORABLE &$obj
+   * @param STORABLE $obj
    * @return FORM_PREVIEW_SETTINGS
    * @access private
    */
-  function _make_preview_settings (&$obj)
+  function _make_preview_settings ($obj)
   {
     return new PURGE_RELEASE_PREVIEW_SETTINGS ($this->context);
   }
 
   /**
-   * @param FORM_RENDERER &$renderer
+   * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_controls (&$renderer)
+  function _draw_controls ($renderer)
   {
     $renderer->start ();
     $renderer->draw_text_row ('', 'Are you sure you want to purge ' . $this->_object->title_as_link () . '?');
@@ -154,7 +154,7 @@ class PURGE_RELEASE_PREVIEW_SETTINGS extends UPDATE_RELEASE_PREVIEW_SETTINGS
 ?>
   <p>Purging this release will make the following changes (scroll down or hide this preview to accept).</p>
 <?php
-    $replacement =& $committer->replacement_release ();
+    $replacement = $committer->replacement_release ();
     if (isset ($replacement))
     {
       $text = '<span class="field">moved to</span> ' . $replacement->title_as_link ();

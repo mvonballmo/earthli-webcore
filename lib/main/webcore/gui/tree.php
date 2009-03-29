@@ -80,20 +80,20 @@ class TREE extends WEBCORE_OBJECT
    * @see TREE_NODE_INFO
    * @var TREE_DECORATOR
    */
-  var $decorator;
+  public $decorator;
   /**
    * Used to render specific node-types.
    * This type must match that of the nodes passed to 'display'. Must be
    * assigned.
    * @var TREE_NODE_INFO
    */
-  var $node_info;
+  public $node_info;
 
   /**
    * Render the tree using the given nodes.
-   * @param array [object] &$nodes
+   * @param array [object] $nodes
    */
-  function display (&$nodes)
+  function display ($nodes)
   {
     if (sizeof ($nodes))
     {
@@ -122,9 +122,9 @@ class TREE extends WEBCORE_OBJECT
   /**
    * Render this node as opened.
    * Static renderers may render all nodes as open (so this call is moot on those trees).
-   * @param object &$node
+   * @param object $node
    */
-  function set_open_node (&$node)
+  function set_open_node ($node)
   {
     $this->node_info->set_open_node ($node);
   }
@@ -133,9 +133,9 @@ class TREE extends WEBCORE_OBJECT
    * Render this node as visible.
    * That means that all parent nodes need to be open. Static renderers may render
    * all nodes as open (so this call is moot on those trees).
-   * @param object &$node
+   * @param object $node
    */
-  function set_visible_node (&$node)
+  function set_visible_node ($node)
   {
     $this->node_info->set_visible_node ($node);
   }
@@ -143,9 +143,9 @@ class TREE extends WEBCORE_OBJECT
   /**
    * Render all of these nodes as opened.
    * @see TREE::set_open_node()
-   * @param array [object] &$nodes
+   * @param array [object] $nodes
    */
-  function set_open_nodes (&$nodes)
+  function set_open_nodes ($nodes)
   {
     if (isset ($nodes) && sizeof ($nodes))
     {
@@ -157,9 +157,9 @@ class TREE extends WEBCORE_OBJECT
   /**
    * Render all of these nodes as visible.
    * @see TREE::set_visible_node()
-   * @param array [object] &$nodes
+   * @param array [object] $nodes
    */
-  function set_visible_nodes (&$nodes)
+  function set_visible_nodes ($nodes)
   {
     if (isset ($nodes) && sizeof ($nodes))
     {
@@ -181,38 +181,38 @@ class TREE extends WEBCORE_OBJECT
 
   /**
    * Start rendering a node.
-   * @param object &$node
+   * @param object $node
    * @param boolean $is_last Is this a terminal node in this list?
    * @access private
    */
-  function start_node (&$node, $is_last) {}
+  function start_node ($node, $is_last) {}
   /**
    * Finish rendering a node.
-    * @param object &$node
+    * @param object $node
     * @param boolean $is_last Is this a terminal node in this list?
     * @access private
     */
-  function finish_node (&$node, $is_last) {}
+  function finish_node ($node, $is_last) {}
 
   /**
    * Called before sub-nodes are rendered.
-   * @param object &$node
+   * @param object $node
    * @access private
    */
-  function pre_draw_children (&$node) {}
+  function pre_draw_children ($node) {}
   /**
    * Called after sub-nodes are rendered.
-   * @param object &$node
+   * @param object $node
    * @access private
    */
-  function post_draw_children (&$node) {}
+  function post_draw_children ($node) {}
 
   /**
    * Draw the specified icon for this node.
    * This builds the customary branch structure next to the nodes and provides for indenting. This
    * function will be called once per nesting level for the given node.
    * @param integer $kind Any of the tree constants are valid here.
-   * @param object &$node
+   * @param object $node
    * @access private
    */
   function draw_icon ($kind, $node)
@@ -240,10 +240,10 @@ class TREE extends WEBCORE_OBJECT
    * Render the node itself.
    * Defaults to drawing the 'title' of the node.
    * @see TREE::draw_title()
-   * @param object &$node
+   * @param object $node
    * @access private
    */
-  function draw_node (&$node)
+  function draw_node ($node)
   {
     $this->draw_title ($node);
   }
@@ -252,10 +252,10 @@ class TREE extends WEBCORE_OBJECT
    * Render the title for this node.
    * Defers this function to the 'decorator' passed in to the constructor.
    * @see TREE_DECORATOR
-   * @param object &$node
+   * @param object $node
    * @access private
    */
-  function draw_title (&$node)
+  function draw_title ($node)
   {
     $icon = $this->node_info->icon_for ($node);
     $title = $this->node_info->title_for ($node);
@@ -276,11 +276,11 @@ class TREE extends WEBCORE_OBJECT
 
   /**
    * Render the sub-tree for this node.
-   * @param object &$node
+   * @param object $node
    * @param boolean $is_last Is this a terminal node in this list?
    * @access private
    */
-  function iterate_node (&$node, $is_last)
+  function iterate_node ($node, $is_last)
   {
     $this->_depth++;
     if ($node)
@@ -351,16 +351,16 @@ class TREE extends WEBCORE_OBJECT
 
   /**
    * Renders the given array of nodes.
-    * @param array [object] &$nodes
+    * @param array [object] $nodes
     * @access private
     */
-  function iterate_nodes (&$nodes)
+  function iterate_nodes ($nodes)
   {
     $c = count ($nodes);
     $i = 0;
     while ($i < $c)
     {
-      $node =& $nodes [$i];
+      $node = $nodes [$i];
       if (isset ($this->decorator))
       {
         $this->decorator->node_found ($node);
@@ -376,13 +376,13 @@ class TREE extends WEBCORE_OBJECT
    * @var array[integer]
    * @access private
    */
-  var $_stack;
+  protected $_stack;
   /**
    * Tracks the current depth in the tree during rendering.
    * @var integer
    * @access private
    */
-  var $_depth;
+  protected $_depth;
   /**
    * Specifies the minimum depth before 'plus' or 'ell' icons are drawn.
    * If the tree is rendered statically, then it doesn't make sense to render
@@ -392,7 +392,7 @@ class TREE extends WEBCORE_OBJECT
    * @var integer
    * @access private
    */
-  var $_min_depth_for_icons = 0;
+  protected $_min_depth_for_icons = 0;
 }
 
 /**
@@ -409,14 +409,14 @@ class TREE_NODE_INFO extends WEBCORE_OBJECT
   /**
    * @var boolean
    */
-  var $nodes_are_links = TRUE;
+  public $nodes_are_links = TRUE;
   
   /**
    * Render this node as opened.
    * Iterates all parents to make sure they are open as well.
-   * @param object &$node
+   * @param object $node
    */
-  function set_open_node (&$node)
+  function set_open_node ($node)
   {
     while ($node)
     {
@@ -428,9 +428,9 @@ class TREE_NODE_INFO extends WEBCORE_OBJECT
   /**
    * Render this node as visible.
    * Iterates all parents to make sure they are open as well.
-   * @param object &$node
+   * @param object $node
    */
-  function set_visible_node (&$node)
+  function set_visible_node ($node)
   {
     $this->set_open_node ($this->parent ($node));
   }
@@ -440,9 +440,9 @@ class TREE_NODE_INFO extends WEBCORE_OBJECT
    * Use 'set_visible_node' if you want this node to also be visible on initial
    * display.
    * @see TREE_NODE_INFO::set_visible_node()
-   * @param object &$node
+   * @param object $node
    */
-  function set_selected_node (&$node)
+  function set_selected_node ($node)
   {
     $this->selected_nodes [$this->id ($node)] = $node;
   }
@@ -450,55 +450,55 @@ class TREE_NODE_INFO extends WEBCORE_OBJECT
   /**
    * Return list of sub-nodes for 'node'.
    * Default behavior returns no nodes.
-   * @param object &$node
+   * @param object $node
    * @access private
    */
-  function sub_nodes (&$node) {}
+  function sub_nodes ($node) {}
 
   /**
    * Return the title for the given node.
-   * @param PROJECT &$node Draw the title for this project.
+   * @param PROJECT $node Draw the title for this project.
    * @return string
    * @abstract
    */
-  function title_for (&$node)
+  function title_for ($node)
   {
     $this->raise_deferred ('title_for', 'TREE_NODE_INFO');
   }
 
   /**
    * Return the icon for the given node.
-   * @param PROJECT &$node Draw the title for this project.
+   * @param PROJECT $node Draw the title for this project.
    * @return string
    */
-  function icon_for (&$node)
+  function icon_for ($node)
   {
   }
   
   /**
    * Return the node's id.
-   * @param object &$node
+   * @param object $node
    * @return integer
    * @access private
    * @abstract
    */
-  function id (&$node) { $this->raise_deferred ('id', 'TREE_NODE_INFO'); }
+  function id ($node) { $this->raise_deferred ('id', 'TREE_NODE_INFO'); }
   
   /**
    * Return the node's parent node.
-   * @param object &$node
+   * @param object $node
    * @return object
    * @access private
    * @abstract
    */
-  function parent (&$node) { $this->raise_deferred ('parent', 'TREE_NODE_INFO'); }
+  function parent ($node) { $this->raise_deferred ('parent', 'TREE_NODE_INFO'); }
 
   /**
    * Is this node closed in this tree?
-   * @param object &$node
+   * @param object $node
    * @return boolean
    */
-  function closed (&$node)
+  function closed ($node)
   {
     return ! read_array_index ($this->open_nodes, $this->id ($node));
   }
@@ -507,11 +507,11 @@ class TREE_NODE_INFO extends WEBCORE_OBJECT
    * Is this node selected in this tree?
    * If so, most trees will render this node differently (perhaps highlighting
    * it and not making it a link).
-   * @param object &$node
+   * @param object $node
    * @return boolean
    * @access private
    */
-  function selected (&$node)
+  function selected ($node)
   {
     if (isset ($this->selected_nodes))
     {
@@ -524,33 +524,33 @@ class TREE_NODE_INFO extends WEBCORE_OBJECT
    * Is this node selectable in this tree?
    * Useful for selectable trees, return false to render the selector as
    * disabled or invisible for this node.
-   * @param object &$node
+   * @param object $node
    * @return boolean
    * @access private
    */
-  function selectable (&$node) { return TRUE; }
+  function selectable ($node) { return TRUE; }
   
   /**
    * Is this node visitable in this tree?
    * This is useful for making certain nodes non-linkable (e.g. if can see the
    * node, but can't perform the action or see the page for the node, then
    * return false).
-   * @param object &$node
+   * @param object $node
    * @return boolean
    * @access private
    */
-  function visitable (&$node) { return $this->nodes_are_links; }
+  function visitable ($node) { return $this->nodes_are_links; }
 
   /**
    * @var array[integer => object]
     * @access private
     */
-  var $open_nodes;
+  public $open_nodes;
   /**
    * @var array[integer => object]
     * @access private
     */
-  var $selected_nodes;
+  public $selected_nodes;
 }
 
 /**
@@ -568,19 +568,19 @@ class TREE_NODE_INFO extends WEBCORE_OBJECT
 class TREE_DECORATOR extends WEBCORE_OBJECT
 {
   /**
-   * @param TREE &$tree Decorate this tree.
+   * @param TREE $tree Decorate this tree.
    */
-  function TREE_DECORATOR (&$tree)
+  function TREE_DECORATOR ($tree)
   {
     WEBCORE_OBJECT::WEBCORE_OBJECT ($tree->app);
-    $this->tree =& $tree;
+    $this->tree = $tree;
   }
 
   /**
    * Node is about to be rendered.
-   * @param object &$node
+   * @param object $node
    */
-  function node_found (&$node) {}
+  function node_found ($node) {}
 
   /**
    * Tree is about to start display.
@@ -594,10 +594,10 @@ class TREE_DECORATOR extends WEBCORE_OBJECT
 
   /**
    * Render the decorator for this node.
-   * @param object &$node
+   * @param object $node
    * @param string $text
    */
-  function draw (&$node, $text) {}
+  function draw ($node, $text) {}
 
   /**
    * Reference to the parent tree's node info object.
@@ -622,13 +622,13 @@ class HTML_TREE extends TREE
    * Is this tree centered in its parent container?
    * @var boolean
    */
-  var $centered = TRUE;
+  public $centered = TRUE;
   /**
    * How much space does this tree leave above and below?
    * Specify with valid CSS values.
    * @var string
    */
-  var $vertical_margin = '1em';
+  public $vertical_margin = '1em';
 
   /**
    * Start rendering the tree.
@@ -674,11 +674,11 @@ class HTML_TREE extends TREE
 
   /**
    * Start rendering a node.
-   * @param object &$node
+   * @param object $node
    * @param boolean $is_last Is this a terminal node in this list?
    * @access private
    */
-  function start_node (&$node, $is_last)
+  function start_node ($node, $is_last)
   {
 ?>
   <div class="tree-node">
@@ -687,11 +687,11 @@ class HTML_TREE extends TREE
 
   /**
    * Finish rendering a node.
-   * @param object &$node
+   * @param object $node
    * @param boolean $is_last Is this a terminal node in this list?
    * @access private
    */
-  function finish_node (&$node, $is_last)
+  function finish_node ($node, $is_last)
   {
 ?>
   </div>

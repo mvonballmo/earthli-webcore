@@ -50,9 +50,9 @@ require_once ('webcore/forms/object_in_folder_form.php');
 class COMPONENT_FORM extends OBJECT_IN_FOLDER_FORM
 {
   /**
-   * @param APPLICATION &$folder
+   * @param APPLICATION $folder
    */
-  function COMPONENT_FORM (&$folder)
+  function COMPONENT_FORM ($folder)
   {
     OBJECT_IN_FOLDER_FORM::OBJECT_IN_FOLDER_FORM ($folder);
 
@@ -64,9 +64,9 @@ class COMPONENT_FORM extends OBJECT_IN_FOLDER_FORM
 
   /**
    * Load initial properties from this object.
-   * @param UNIQUE_OBJECT &$obj
+   * @param UNIQUE_OBJECT $obj
    */
-  function load_from_object (&$obj)
+  function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
     $icon_url = read_var ('icon_url');
@@ -93,11 +93,11 @@ class COMPONENT_FORM extends OBJECT_IN_FOLDER_FORM
 
   /**
    * Store the form's values to this object.
-   * @param STORABLE &$obj
+   * @param STORABLE $obj
    * @access private
    * @abstract
    */
-  function _store_to_object (&$obj)
+  function _store_to_object ($obj)
   {
     parent::_store_to_object ($obj);
     $obj->icon_url = $this->value_for ('icon_url');
@@ -113,10 +113,10 @@ class COMPONENT_FORM extends OBJECT_IN_FOLDER_FORM
   }
 
   /**
-   * @param FORM_RENDERER &$renderer
+   * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_controls (&$renderer)
+  function _draw_controls ($renderer)
   {
     $renderer->start ();
     $renderer->draw_text_line_row ('title');
@@ -135,7 +135,7 @@ class COMPONENT_FORM extends OBJECT_IN_FOLDER_FORM
    * @var string
    * @access private
    */
-  var $_privilege_set = Privilege_set_folder;
+  protected $_privilege_set = Privilege_set_folder;
 }
 
 ?>

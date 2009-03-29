@@ -51,12 +51,12 @@ class CHANGE_FORM extends PROJECT_ENTRY_FORM
   /**
    * @var string
    */
-  var $name = 'change_form';
+  public $name = 'change_form';
   
   /**
-   * @param PROJECT &$folder Project in which to add or edit the change.
+   * @param PROJECT $folder Project in which to add or edit the change.
    */
-  function CHANGE_FORM (&$folder)
+  function CHANGE_FORM ($folder)
   {
     PROJECT_ENTRY_FORM::PROJECT_ENTRY_FORM ($folder);
 
@@ -88,7 +88,7 @@ class CHANGE_FORM extends PROJECT_ENTRY_FORM
       $job_id = $this->value_for ('job_id');
     }
     
-    $job =& $this->job_at ($job_id); 
+    $job = $this->job_at ($job_id); 
     if (isset ($job))
     {
       $this->set_value ('job_id', $job_id);
@@ -102,15 +102,15 @@ class CHANGE_FORM extends PROJECT_ENTRY_FORM
 
   /**
    * Load initial properties from this change.
-   * @param CHANGE &$obj
+   * @param CHANGE $obj
    */
-  function load_from_object (&$obj)
+  function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
 
     $this->set_value ('files', $obj->files);
 
-    $job =& $this->job_at ($obj->job_id);
+    $job = $this->job_at ($obj->job_id);
     if (isset ($job))
     {
       $this->set_value ('job_id', $job->id);
@@ -124,10 +124,10 @@ class CHANGE_FORM extends PROJECT_ENTRY_FORM
 
   /**
    * Store the form's values for this change.
-    * @param CHANGE &$obj
+    * @param CHANGE $obj
     * @access private
     */
-  function _store_to_object (&$obj)
+  function _store_to_object ($obj)
   {
     $obj->job_id = $this->value_for ('job_id');
     $obj->files = $this->value_for ('files');
@@ -137,10 +137,10 @@ class CHANGE_FORM extends PROJECT_ENTRY_FORM
 
   /**
    * Does this form hold valid data for this change?
-   * @param CHANGE &$obj
+   * @param CHANGE $obj
    * @access private
    */
-  function _post_validate (&$obj)
+  function _post_validate ($obj)
   {
     parent::_post_validate ($obj);
 
@@ -156,7 +156,7 @@ class CHANGE_FORM extends PROJECT_ENTRY_FORM
     * @return PROJECT_ENTRY_QUERY
     * @access private
     */
-  function &job_query ()
+  function job_query ()
   {
     if (! isset ($this->_job_query))
     {
@@ -174,7 +174,7 @@ class CHANGE_FORM extends PROJECT_ENTRY_FORM
       $q->restrict ("closer_id <> 0 OR job.time_closed < '" . $t->as_iso () . "'");
       $q->restrict ("entry.time_created < '" . $t->as_iso () . "'");
 
-      $this->_job_query =& $q;
+      $this->_job_query = $q;
     }
 
     return $this->_job_query;
@@ -186,17 +186,17 @@ class CHANGE_FORM extends PROJECT_ENTRY_FORM
     * @return JOB
     * @access private
     */
-  function &job_at ($id)
+  function job_at ($id)
   {
     $job_query = $this->job_query ();
     return $job_query->object_at_id ($id);
   }
 
   /**
-   * @param FORM_RENDERER &$renderer
+   * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_controls (&$renderer)
+  function _draw_controls ($renderer)
   {
     $renderer->start ();
     $renderer->draw_text_line_row ('title');
@@ -235,13 +235,13 @@ class CHANGE_FORM extends PROJECT_ENTRY_FORM
 
     $branch_id = $this->value_for ('main_branch_id');    
     $branch_query = $this->_folder->branch_query ();
-    $branch =& $branch_query->object_at_id ($branch_id);
+    $branch = $branch_query->object_at_id ($branch_id);
 
     $release_id = $this->value_for ("branch_{$branch_id}_release_id");
     if ($release_id)
     {
       $release_query = $branch->release_query ();
-      $release =& $release_query->object_at_id ($release_id);
+      $release = $release_query->object_at_id ($release_id);
       $entry_query = $release->entry_query ();
     }
     else
@@ -283,7 +283,7 @@ class CHANGE_FORM extends PROJECT_ENTRY_FORM
         $props->add_item ($iter_job->title_as_plain_text ($t), $iter_job->id);
       }
 
-      $job =& $this->job_at ($this->value_for ('job_id'));
+      $job = $this->job_at ($this->value_for ('job_id'));
       $job_text = 'A change can be attached to the job to which it contributed. Only the jobs for the selected branch and release are shown.';
       if ($job)
       {
@@ -310,7 +310,7 @@ class CHANGE_FORM extends PROJECT_ENTRY_FORM
    * @var QUERY
    * @access private
    */
-  var $_job_query;
+  protected $_job_query;
 }
 
 ?>

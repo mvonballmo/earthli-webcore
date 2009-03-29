@@ -57,13 +57,13 @@ class PROJECT_OPTIONS extends FOLDER_INHERITABLE_SETTINGS
    * @see Project_user_registered_only
    * @see Project_user_group
    */
-  var $assignee_group_type;
+  public $assignee_group_type;
   /**
    * Unique id of the group that contains the possible assignees.
    * Used only if {@link $assignee_group_type} is {@link Project_user_group}.
    * @var integer
    */
-  var $assignee_group_id;
+  public $assignee_group_id;
   /**
    * Which set of users are allowed to be reporters in this project?
    * @var integer
@@ -71,27 +71,27 @@ class PROJECT_OPTIONS extends FOLDER_INHERITABLE_SETTINGS
    * @see Project_user_registered_only
    * @see Project_user_group
    */
-  var $reporter_group_type;
+  public $reporter_group_type;
   /**
    * Unique id of the group that contains the possible reporters.
    * Used only if {@link $reporter_group_type} is {@link
    * Project_user_group}.
    * @var integer
    */
-  var $reporter_group_id;
+  public $reporter_group_id;
   /**
    * In non-zero, shows release deadline warnings.
    * The warning is issued if the deadline is in less than this many seconds.
    * @var integer
    */
-  var $seconds_until_deadline;
+  public $seconds_until_deadline;
 
   /**
    * Do not create an history item for the creating folder.
    * @var boolean
    * @access private
    */
-  var $create_history_item_for_self = FALSE;
+  public $create_history_item_for_self = FALSE;
 
   /**
    * Assignees are selected from this user group.
@@ -129,7 +129,7 @@ class PROJECT_OPTIONS extends FOLDER_INHERITABLE_SETTINGS
    * Depends on the setting stored in {@link $assignee_group_type}.
    * @return USER_QUERY
    */
-  function &assignee_query ()
+  function assignee_query ()
   {
     return $this->_user_query_for ($this->assignee_group_type, $this->assignee_group_id);
   }
@@ -139,7 +139,7 @@ class PROJECT_OPTIONS extends FOLDER_INHERITABLE_SETTINGS
    * Depends on the setting stored in {@link $reporter_group_type}.
    * @return USER_QUERY
    */
-  function &reporter_query ()
+  function reporter_query ()
   {
     return $this->_user_query_for ($this->reporter_group_type, $this->reporter_group_id);
   }
@@ -202,20 +202,20 @@ class PROJECT_OPTIONS extends FOLDER_INHERITABLE_SETTINGS
    * @return USER_QUERY
    * @access private
    */
-  function &_user_query_for ($type, $group_id)
+  function _user_query_for ($type, $group_id)
   {
     switch ($type)
     {
     case Project_user_all:
-      $Result =& $this->app->user_query ();
+      $Result = $this->app->user_query ();
       break;
     case Project_user_registered_only:
-      $Result =& $this->app->user_query ();
+      $Result = $this->app->user_query ();
       $Result->set_kind (Privilege_kind_registered);
       break;
     case Project_user_group:
       $group_query = $this->app->group_query ();
-      $group =& $group_query->object_at_id ($group_id);
+      $group = $group_query->object_at_id ($group_id);
       if (! empty ($group))
       {
         $Result = $group->user_query ();
@@ -226,9 +226,9 @@ class PROJECT_OPTIONS extends FOLDER_INHERITABLE_SETTINGS
   }
 
   /**
-   * @param DATABASE &$db
+   * @param DATABASE $db
    */
-  function load (&$db)
+  function load ($db)
   {
     parent::load ($db);
     $this->assignee_group_type = $db->f ('assignee_group_type');
@@ -239,9 +239,9 @@ class PROJECT_OPTIONS extends FOLDER_INHERITABLE_SETTINGS
   }
 
   /**
-   * @param SQL_STORAGE &$storage Store values to this object.
+   * @param SQL_STORAGE $storage Store values to this object.
    */
-  function store_to (&$storage)
+  function store_to ($storage)
   {
     parent::store_to ($storage);
     $tname = $this->_settings_table_name ();
@@ -269,7 +269,7 @@ class PROJECT_OPTIONS extends FOLDER_INHERITABLE_SETTINGS
    * @return string
    * @access private
    */
-  function _history_item_description ($adding, &$folder)
+  function _history_item_description ($adding, $folder)
   {
     return 'Project options are now inherited from ' . $folder->title_as_plain_text () . '.';
   }
@@ -289,19 +289,19 @@ class PROJECT_OPTIONS extends FOLDER_INHERITABLE_SETTINGS
    * @var string
    * @access private
    */
-  var $_field_name = 'options_id';
+  protected $_field_name = 'options_id';
   /**
    * @see assignee_group()
    * @var GROUP
    * @access private
    */
-  var $_assignee_group;
+  protected $_assignee_group;
   /**
    * @see reporter_group()
    * @var GROUP
    * @access private
    */
-  var $_reporter_group;
+  protected $_reporter_group;
 }
 
 ?>

@@ -48,16 +48,16 @@ require_once ('webcore/forms/execute_task_form.php');
  */
 class EXECUTE_MIGRATOR_TASK_FORM extends EXECUTE_TASK_FORM
 {
-  var $button = 'Upgrade';
+  public $button = 'Upgrade';
   /**
    * @var string
    */
-  var $button_icon = '{icons}buttons/upgrade';
+  public $button_icon = '{icons}buttons/upgrade';
 
   /**
-   * @param FRAMEWORK_INFO &$app Main application.
+   * @param FRAMEWORK_INFO $app Main application.
    */
-  function EXECUTE_MIGRATOR_TASK_FORM (&$app)
+  function EXECUTE_MIGRATOR_TASK_FORM ($app)
   {
     EXECUTE_TASK_FORM::EXECUTE_TASK_FORM ($app);
 
@@ -82,9 +82,9 @@ class EXECUTE_MIGRATOR_TASK_FORM extends EXECUTE_TASK_FORM
 
   /**
    * Load initial properties from this task.
-   * @param MIGRATOR_TASK &$obj
+   * @param MIGRATOR_TASK $obj
    */
-  function load_from_object (&$obj)
+  function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
     $this->set_value ('ignore_from_version', $obj->ignore_from_version);
@@ -94,10 +94,10 @@ class EXECUTE_MIGRATOR_TASK_FORM extends EXECUTE_TASK_FORM
 
   /**
    * Execute the form.
-   * @param TASK &$obj
+   * @param TASK $obj
    * @access private
    */
-  function commit (&$obj)
+  function commit ($obj)
   {
     $obj->ignore_from_version = $this->value_for ('ignore_from_version');
     parent::commit ($obj);
@@ -105,10 +105,10 @@ class EXECUTE_MIGRATOR_TASK_FORM extends EXECUTE_TASK_FORM
 
   /**
    * Add boolean fields to the check boxes. 
-   * @param FORM_LIST_PROPERTIES &$props
+   * @param FORM_LIST_PROPERTIES $props
    * @access private
    */
-  function _add_boolean_options (&$props)
+  function _add_boolean_options ($props)
   {
     $props->add_item ('testing', 1);    
     $props->add_item ('stop_on_error', 1);    
@@ -118,10 +118,10 @@ class EXECUTE_MIGRATOR_TASK_FORM extends EXECUTE_TASK_FORM
 
   /**
    * Draw task option controls.
-   * @param FORM_RENDERER &$renderer
+   * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_options (&$renderer)
+  function _draw_options ($renderer)
   {
     if (! $this->_object->info->exists ())
     {

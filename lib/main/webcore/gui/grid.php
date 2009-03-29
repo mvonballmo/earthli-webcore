@@ -55,87 +55,87 @@ class GRID extends WEBCORE_OBJECT
    * Space to leave betweena grid cell border and its content.
    * @var integer
    */
-  var $padding = 2;
+  public $padding = 2;
   /**
    * Space to leave between grid cells.
    * @var integer
    */
-  var $spacing = 0;
+  public $spacing = 0;
   /**
    * A CSS-style specifying the width of the grid.
    * @var string
    */
-  var $width = '100%';
+  public $width = '100%';
   /**
    * Center the grid in its parent?
    * @var boolean
    */
-  var $centered = TRUE;
+  public $centered = TRUE;
   /**
    * Displays page navigation for the grid, if necessary.
    * @var PAGE_NAVIGATOR
    */
-  var $paginator;
+  public $paginator;
   /**
    * Force all columns to even width, regardless of content.
    * @var boolean
    */
-  var $even_columns = TRUE;
+  public $even_columns = TRUE;
   /**
    * Style to use for each box containing an object.
    * Should be a defined CSS class.
    * @var string
    */
-  var $box_style = '';
+  public $box_style = '';
   /**
    * Put a separator between rows in the grid?
    * @var boolean
    */
-  var $show_separator = TRUE;
+  public $show_separator = TRUE;
   /**
    * Use CSS-style page-breaks for printing?
    * @var boolean
    */
-  var $show_page_breaks = FALSE;
+  public $show_page_breaks = FALSE;
   /**
    * How many grid rows to show per page when printing?
    * @var integer
    */
-  var $rows_per_printed_page = 2;
+  public $rows_per_printed_page = 2;
   /**
    * Border width to show for the entire grid.
    * Used primarily for debugging.
    * @var integer
    */
-  var $border_size = 0;
+  public $border_size = 0;
   /**
    * Name of the type of objects shown.
    * @var string
    */
-  var $object_name = 'object';
+  public $object_name = 'object';
   /**
    * Override maximum title size to be this length.
    * If this is 0, then the size is not overridden.
    * @var integer
    */
-  var $overridden_max_title_size = 75;
+  public $overridden_max_title_size = 75;
   /**
    * Should the paginator be drawn?
    * Set this to False to prevent page numbers from displaying even if there are
    * more pages than can be displayed.
    * @var boolean
    */
-  var $show_paginator = TRUE;
+  public $show_paginator = TRUE;
   /**
    * Should menus be drawn for objects?
    * @var boolean
    */
-  var $show_menus = TRUE;
+  public $show_menus = TRUE;
 
   /**
-   * @param APPLICATION &$app Main application.
+   * @param APPLICATION $app Main application.
    */
-  function GRID (&$app)
+  function GRID ($app)
   {
     WEBCORE_OBJECT::WEBCORE_OBJECT ($app);
     include_once ('webcore/gui/page_navigator.php');
@@ -158,11 +158,11 @@ class GRID extends WEBCORE_OBJECT
   /**
    * Attach the query to be displayed.
    * Call this before calling {@link display()}.
-   * @param QUERY &$query
+   * @param QUERY $query
    */
-  function set_query (&$query)
+  function set_query ($query)
   {
-    $this->_query =& $query;
+    $this->_query = $query;
     $this->_num_objects = null;
   }
 
@@ -226,10 +226,10 @@ class GRID extends WEBCORE_OBJECT
    * and {@link _draw_header()}. After calling {@link _draw_cells()} to draw the content, it
    * finishes with {@link _draw_footer()} and {@link _finish_grid()} before drawing the
    * paginator again with {@link _draw_paginator()}.
-   * @param array[object] &$objs
+   * @param array[object] $objs
    * @access private
    */
-  function _draw (&$objs)
+  function _draw ($objs)
   {
     if ($this->show_paginator)
     {
@@ -292,10 +292,10 @@ class GRID extends WEBCORE_OBJECT
    *
    * Most descendents will only override the {@link _draw_box()} method to draw the
    * object details.
-   * @param array[object] &$objs
+   * @param array[object] $objs
    * @access private
    */
-  function _draw_cells (&$objs)
+  function _draw_cells ($objs)
   {
     $i = 0;
     $c = sizeof ($objs);
@@ -304,7 +304,7 @@ class GRID extends WEBCORE_OBJECT
 
     while ($i < $c)
     {
-      $obj =& $objs [$i];
+      $obj = $objs [$i];
       $remainder = $i % $this->_num_columns;
 
       if ($remainder == 0)
@@ -361,18 +361,18 @@ class GRID extends WEBCORE_OBJECT
   /**
    * Start rendering a row.
    * Called from {@link _draw_cells()}.
-   * @param object &$obj
+   * @param object $obj
    * @access private
    */
-  function _start_row (&$obj) {}
+  function _start_row ($obj) {}
 
   /**
    * Finish rendering a row.
    * Called from {@link _draw_cells()}.
-   * @param object &$obj
+   * @param object $obj
    * @access private
    */
-  function _finish_row (&$obj) {}
+  function _finish_row ($obj) {}
 
   /**
    * Render the footer for the grid.
@@ -392,27 +392,27 @@ class GRID extends WEBCORE_OBJECT
   /**
    * Render the start of a single cell.
    * Called from {@link _draw_cells()}.
-   * @param object &$obj
+   * @param object $obj
    * @access private
    */
-  function _start_box (&$obj) {}
+  function _start_box ($obj) {}
 
   /**
    * Close the open cell.
    * Called from {@link _draw_cells()}.
-   * @param object &$obj
+   * @param object $obj
    * @access private
    */
-  function _finish_box (&$obj) {}
+  function _finish_box ($obj) {}
 
   /**
    * Render the actual cell contents.
    * Override in descendants to show details for the specific object being displayed in the grid.
-   * @param object &$obj
+   * @param object $obj
    * @access private
    * @abstract
    */
-  function _draw_box (&$obj) { $this->raise_deferred ('_draw_box', 'GRID'); }
+  function _draw_box ($obj) { $this->raise_deferred ('_draw_box', 'GRID'); }
 
   /**
    * Render the page navigator, if necessary.
@@ -486,12 +486,12 @@ class GRID extends WEBCORE_OBJECT
    * Renders using the object's menu and commands.
    * Uses the {@link Handler_menu} and {@link Handler_commands} from the given
    * object. Draws nothing if {@link $show_menus} is <code>False</code>.
-   * @param RENDERABLE &$obj
+   * @param RENDERABLE $obj
    * @param string $size Sizing constant; see {@link Menu_size_standard}.
    * @param string $alignment Alignment constant; see {@link
    * Menu_alignment_default}.
    */
-  function _draw_menu_for (&$obj, $size = Menu_size_standard, $alignment = '')
+  function _draw_menu_for ($obj, $size = Menu_size_standard, $alignment = '')
   {
     if ($this->show_menus)
     {
@@ -583,22 +583,22 @@ class GRID extends WEBCORE_OBJECT
    * @var integer
    * @access private
    */
-  var $_num_columns = 3;
+  protected $_num_columns = 3;
   /**
    * @var integer
    * @access private
    */
-  var $_num_rows = 5;
+  protected $_num_rows = 5;
   /**
    * @var integer
    * @access private
    */
-  var $_num_objects;
+  protected $_num_objects;
   /**
    * @var QUERY
    * @access private
    */
-  var $_query;
+  protected $_query;
 }
 
 /**
@@ -627,10 +627,10 @@ class HTML_TABLE_GRID extends GRID
 
   /**
    * Start rendering a row.
-   * @param object &$obj
+   * @param object $obj
    * @access private
    */
-  function _start_row (&$obj)
+  function _start_row ($obj)
   {
 ?>
   <tr>
@@ -639,10 +639,10 @@ class HTML_TABLE_GRID extends GRID
 
   /**
    * Render the start of a single cell.
-   * @param object &$obj
+   * @param object $obj
    * @access private
    */
-  function _start_box (&$obj)
+  function _start_box ($obj)
   {
     $attrs = $this->_CSS_for_box ();
 ?>
@@ -652,10 +652,10 @@ class HTML_TABLE_GRID extends GRID
 
   /**
    * Close the open cell.
-   * @param object &$obj
+   * @param object $obj
    * @access private
    */
-  function _finish_box (&$obj)
+  function _finish_box ($obj)
   {
 ?>
 </td>
@@ -664,10 +664,10 @@ class HTML_TABLE_GRID extends GRID
 
   /**
    * Finish rendering a row.
-   * @param object &$obj
+   * @param object $obj
    * @access private
    */
-  function _finish_row (&$obj)
+  function _finish_row ($obj)
   {
 ?>
   </tr>
@@ -731,13 +731,13 @@ class CSS_FLOW_GRID extends GRID
    * still flow more or less normally.
    * @var boolean
    */
-  var $even_columns = FALSE;
+  public $even_columns = FALSE;
   /**
    * Minimum width of a single box.
    * Use CSS units to specify the width.
    * @var string
    */
-  var $min_box_width = '';
+  public $min_box_width = '';
 
   /**
    * Start rendering the grid.
@@ -754,10 +754,10 @@ class CSS_FLOW_GRID extends GRID
 
   /**
    * Start rendering a row.
-   * @param object &$obj
+   * @param object $obj
    * @access private
    */
-  function _start_row (&$obj)
+  function _start_row ($obj)
   {
 ?>
 <div style="display: table">
@@ -766,10 +766,10 @@ class CSS_FLOW_GRID extends GRID
 
   /**
    * Render the start of a single cell.
-   * @param object &$obj
+   * @param object $obj
    * @access private
    */
-  function _start_box (&$obj)
+  function _start_box ($obj)
   {
     $attrs = $this->_CSS_for_box ();
 ?>
@@ -779,10 +779,10 @@ class CSS_FLOW_GRID extends GRID
 
   /**
    * Close the open cell.
-   * @param object &$obj
+   * @param object $obj
    * @access private
    */
-  function _finish_box (&$obj)
+  function _finish_box ($obj)
   {
 ?>
 </div>
@@ -791,10 +791,10 @@ class CSS_FLOW_GRID extends GRID
 
   /**
    * Finish rendering a row.
-   * @param object &$obj
+   * @param object $obj
    * @access private
    */
-  function _finish_row (&$obj)
+  function _finish_row ($obj)
   {
 ?>
 </div>

@@ -27,7 +27,7 @@ http://www.earthli.com/software/webcore/albums
 ****************************************************************************/
 
 	$folder_query = $App->login->folder_query ();
-	$folder =& $folder_query->object_at_id (read_var ('id'));
+	$folder = $folder_query->object_at_id (read_var ('id'));
 
 	if (isset ($folder)
       && $App->login->is_allowed (Privilege_set_folder, Privilege_view, $folder)
@@ -57,7 +57,7 @@ http://www.earthli.com/software/webcore/albums
 		if ($journal)
 		{
 			$jrnl_query = $folder->entry_query ();
-			$jrnl =& $jrnl_query->object_at_id ($journal);
+			$jrnl = $jrnl_query->object_at_id ($journal);
 			$Page->location->append ($jrnl->title, "view_journal.php?id=$jrnl->id&amp;calendar=$calendar&amp;page_number=$page_number");
 		}
 

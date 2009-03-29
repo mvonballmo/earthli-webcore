@@ -219,9 +219,9 @@ class NAMED_OBJECT extends STORABLE
    * Returns an HTML formatter customized for this object.
    * @return HTML_MUNGER
    */
-  function &html_formatter ()
+  function html_formatter ()
   {
-    $munger =& $this->app->html_text_formatter ();
+    $munger = $this->app->html_text_formatter ();
     $munger->complete_text_url = $this->home_page ();
     return $munger;
   }
@@ -230,7 +230,7 @@ class NAMED_OBJECT extends STORABLE
    * Returns an HTML formatter customized for this object.
    * @return HTML_MUNGER
    */
-  function &plain_text_formatter ()
+  function plain_text_formatter ()
   {
     return $this->app->plain_text_formatter ();
   }
@@ -291,7 +291,7 @@ class NAMED_OBJECT extends STORABLE
   {
     if (! isset ($munger))
     {
-      $munger =& $this->html_formatter ();
+      $munger = $this->html_formatter ();
       $munger->force_paragraphs = TRUE;
     }
 
@@ -309,7 +309,7 @@ class NAMED_OBJECT extends STORABLE
   {
     if (! isset ($munger))
     {
-      $munger =& $this->plain_text_formatter ();
+      $munger = $this->plain_text_formatter ();
       $munger->force_paragraphs = TRUE;
     }
 

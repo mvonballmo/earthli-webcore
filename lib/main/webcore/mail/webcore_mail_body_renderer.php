@@ -54,36 +54,36 @@ class MAIL_TOC_ENTRY_RENDERER extends RENDERER
    * Represents this entry.
    * @var MAIL_BODY_RENDERER_OBJECT
    */
-  var $main_pair;
+  public $main_pair;
   /**
    * List of {@link MAIL_BODY_RENDERER_OBJECT}s.
    * @var array[MAIL_BODY_RENDERER_OBJECT]
    */
-  var $pairs = array ();
+  public $pairs = array ();
   /**
    * Reference to the parent container.
    * @var MAIL_TOC_RENDERER
    */
-  var $toc;
+  public $toc;
 
   /**
    * Create a table of contents group.
-   * @param MAIL_TOC_RENDERER &$toc
+   * @param MAIL_TOC_RENDERER $toc
    */
-  function MAIL_TOC_ENTRY_RENDERER (&$toc, &$group)
+  function MAIL_TOC_ENTRY_RENDERER ($toc, $group)
   {
     RENDERER::RENDERER ($toc->context);
-    $this->toc =& $toc;
-    $this->group =& $group;
+    $this->toc = $toc;
+    $this->group = $group;
   }
 
   /**
    * Returns whether this folder matches this group.
    * Called during {@link MAIL_TOC_RENDERER} generation.
-   * @param OBJECT_IN_FOLDER &$obj
+   * @param OBJECT_IN_FOLDER $obj
    * @return boolean
    */
-  function accepts_item (&$obj)
+  function accepts_item ($obj)
   {
     if (is_a ($obj, 'OBJECT_IN_FOLDER'))
     {
@@ -96,7 +96,7 @@ class MAIL_TOC_ENTRY_RENDERER extends RENDERER
   /**
    * Adds an object to the group.
    * Called during {@link MAIL_TOC_RENDERER} generation.
-   * @param MAIL_BODY_RENDERER_OBJECT &$pair
+   * @param MAIL_BODY_RENDERER_OBJECT $pair
    */
   function add_pair ($pair)
   {
@@ -118,7 +118,7 @@ class MAIL_TOC_ENTRY_RENDERER extends RENDERER
     }
   }
 
-  function location_for_obj (&$obj)
+  function location_for_obj ($obj)
   {
     $type_info = $obj->type_info ();
     return $type_info->id . '_' . $obj->id;
@@ -128,11 +128,11 @@ class MAIL_TOC_ENTRY_RENDERER extends RENDERER
    * Render an item in the TOC as HTML.
    * Displays the item's title with an anchor to link directly to that item's body.
    * Called from {@link as_html_for_table()}.
-   * @param MAIL_BODY_RENDERER_OBJECT &$pair
+   * @param MAIL_BODY_RENDERER_OBJECT $pair
    */
   function pair_as_html_for_table ($pair)
   {
-    $obj =& $pair->obj;
+    $obj = $pair->obj;
     $t = $obj->title_formatter ();
     $t->CSS_class = '';
     $t->location = '#' . $this->location_for_obj ($obj);
@@ -174,11 +174,11 @@ class MAIL_TOC_ENTRY_RENDERER extends RENDERER
   /**
    * Render an item as html.
    * Displays the item's full content. Called from {@link as_html_for_items()}.
-   * @param MAIL_BODY_RENDERER_OBJECT &$pair
+   * @param MAIL_BODY_RENDERER_OBJECT $pair
    * @param MAIL_RENDERER_OPTIONS $options
    * @param string $top_link HTML text for the link back to the top of the page.
    */
-  function pair_as_html_for_items (&$pair, $options, $top_link = '')
+  function pair_as_html_for_items ($pair, $options, $top_link = '')
   {
     $obj = $pair->obj;
     $Result = '';
@@ -212,7 +212,7 @@ class MAIL_TOC_ENTRY_RENDERER extends RENDERER
   /**
    * Render an item in the TOC as plain text.
    * Displays the item's title. Called from {@link as_plain_text_for_table()}.
-   * @param MAIL_BODY_RENDERER_OBJECT &$pair
+   * @param MAIL_BODY_RENDERER_OBJECT $pair
    */
   function pair_as_plain_text_for_table ($pair, $indent)
   {
@@ -238,7 +238,7 @@ class MAIL_TOC_ENTRY_RENDERER extends RENDERER
   /**
    * Render a single object as plain text.
    * Displays the item's full content. Called from {@link as_plain_text_for_items()}.
-   * @param MAIL_BODY_RENDERER_OBJECT &$pair
+   * @param MAIL_BODY_RENDERER_OBJECT $pair
    * @param MAIL_RENDERER_OPTIONS $options
    */
   function pair_as_plain_text_item ($pair, $options)
@@ -267,7 +267,7 @@ class MAIL_TOC_ENTRY_RENDERER extends RENDERER
    * @var integer
    * @access private
    */
-  var $_obj_id = 0;
+  protected $_obj_id = 0;
 }
 
 /**
@@ -284,33 +284,33 @@ class MAIL_TOC_GROUP_RENDERER extends RENDERER
   /**
    * Number of objects contained in all {@link $groups}.
    * @var integer */
-  var $num_entries = 0;
+  public $num_entries = 0;
   /**
    * Group represents this folder.
    * May be empty.
    * @var FOLDER */
-  var $folder;
+  public $folder;
   /**
    * List of {@link MAIL_TOC_ENTRY_RENDERER} in this group.
    * @var array[MAIL_TOC_ENTRY_RENDERER]
    */
-  var $entries = array ();
+  public $entries = array ();
   /**
    * Reference to the parent container.
    * @var MAIL_TOC_RENDERER
    */
-  var $toc;
+  public $toc;
 
   /**
    * Create a table of contents group.
-   * @param MAIL_TOC_RENDERER &$toc
-   * @param object &$obj
+   * @param MAIL_TOC_RENDERER $toc
+   * @param object $obj
    */
-  function MAIL_TOC_GROUP_RENDERER (&$toc, &$obj)
+  function MAIL_TOC_GROUP_RENDERER ($toc, $obj)
   {
     RENDERER::RENDERER ($toc->context);
     $this->subject = new PUBLISHER_MESSAGE_SUBJECT ($toc->context);
-    $this->toc =& $toc;
+    $this->toc = $toc;
     if (is_a ($obj, 'OBJECT_IN_FOLDER'))
     {
       $this->folder = $obj->parent_folder ();
@@ -323,10 +323,10 @@ class MAIL_TOC_GROUP_RENDERER extends RENDERER
   /**
    * Returns whether this folder matches this group.
    * Called during {@link MAIL_TOC_RENDERER} generation.
-   * @param object &$obj
+   * @param object $obj
    * @return boolean
    */
-  function accepts_item (&$obj)
+  function accepts_item ($obj)
   {
     if (is_a ($obj, 'OBJECT_IN_FOLDER'))
     {
@@ -350,7 +350,7 @@ class MAIL_TOC_GROUP_RENDERER extends RENDERER
   {
     if (isset ($this->folder))
     {
-      $fldr =& $this->folder;
+      $fldr = $this->folder;
       $t = $fldr->title_formatter ();
       $t->CSS_class = '';
       $t->location = '#fldr_' .  $fldr->id;
@@ -375,7 +375,7 @@ class MAIL_TOC_GROUP_RENDERER extends RENDERER
 
     if (isset ($this->folder))
     {
-      $fldr =& $this->folder;
+      $fldr = $this->folder;
       $Result = "<div class=\"horizontal-separator\" style=\"margin-top: 3.5em\"></div>\n";
       $Result .= '<a id="fldr_' . $fldr->id . "\"></a>\n";
       $Result .= '<h2>' . $fldr->title_as_html () . "</h2>\n";
@@ -439,26 +439,26 @@ class MAIL_TOC_GROUP_RENDERER extends RENDERER
 
   /**
    * Create a new TOC entry.
-   * @param object &$obj
+   * @param object $obj
    * @return MAIL_TOC_ENTRY_RENDERER
    * @access private
    */
-  function &new_entry (&$obj)
+  function new_entry ($obj)
   {
     $Result = $this->_make_entry ($obj);
     $this->num_entries++;
-    $this->entries [] =& $Result;
+    $this->entries [] = $Result;
     return $Result;
   }
 
   /**
    * Make a TOC entry.
    * Called from {@link new_entry()}.
-   * @param object &$obj
+   * @param object $obj
    * @return MAIL_TOC_ENTRY_RENDERER
    * @access private
    */
-  function _make_entry (&$obj)
+  function _make_entry ($obj)
   {
     $class_name = $this->app->final_class_name ('MAIL_TOC_ENTRY_RENDERER');
     return new $class_name ($this->toc, $this);
@@ -479,20 +479,20 @@ class MAIL_TOC_RENDERER extends RENDERER
   /**
    * Number of objects contained in all {@link $groups}.
    * @var integer */
-  var $num_entries = 0;
+  public $num_entries = 0;
   /**
    * List of {@link MAIL_TOC_GROUP_RENDERER}s.
    * @var array[MAIL_TOC_GROUP_RENDERER]
    */
-  var $groups;
+  public $groups;
 
   /**
    * Create a table of contents for the given list.
    * @see MAIL_BODY_RENDERER_OBJECT
-   * @param CONTEXT &$context
-   * @param array[MAIL_BODY_RENDERER_OBJECT] &$pairs
+   * @param CONTEXT $context
+   * @param array[MAIL_BODY_RENDERER_OBJECT] $pairs
    */
-  function MAIL_TOC_RENDERER (&$context, &$pairs)
+  function MAIL_TOC_RENDERER ($context, $pairs)
   {
     RENDERER::RENDERER ($context);
 
@@ -501,17 +501,17 @@ class MAIL_TOC_RENDERER extends RENDERER
 
     foreach ($pairs as $pair)
     {
-      $obj =& $pair->obj;
+      $obj = $pair->obj;
 
       if (! isset ($group) || ! $group->accepts_item ($obj))
       {
-        $group =& $this->new_group ($obj);
+        $group = $this->new_group ($obj);
         unset ($entry);
       }
 
       if (! isset ($entry) || ! $entry->accepts_item ($obj))
       {
-        $entry =& $group->new_entry ($obj);
+        $entry = $group->new_entry ($obj);
       }
 
       $entry->add_pair ($pair);
@@ -577,25 +577,25 @@ class MAIL_TOC_RENDERER extends RENDERER
   /**
    * Create a new TOC group.
    * The group may or may not be based on a folder.
-   * @param FOLDER &$fldr
+   * @param FOLDER $fldr
    * @return MAIL_TOC_GROUP_RENDERER
    * @access private
    */
-  function &new_group (&$fldr)
+  function new_group ($fldr)
   {
     $Result = $this->_make_group ($fldr);
-    $this->groups [] =& $Result;
+    $this->groups [] = $Result;
     return $Result;
   }
 
   /**
    * Make a TOC group.
    * Called from {@link new_group()}.
-   * @param object &$obj
+   * @param object $obj
    * @return MAIL_TOC_GROUP_RENDERER
    * @access private
    */
-  function _make_group (&$obj)
+  function _make_group ($obj)
   {
     $class_name = $this->app->final_class_name ('MAIL_TOC_GROUP_RENDERER');
     return new $class_name ($this, $obj);

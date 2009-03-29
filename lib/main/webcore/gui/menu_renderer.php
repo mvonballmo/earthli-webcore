@@ -122,13 +122,13 @@ class MENU_RENDERER extends WEBCORE_OBJECT
    * Menu_show_title} or {@link Menu_show_as_buttons}.
    * @var string
    */
-  var $content_mode = Menu_show_all_as_buttons;
+  public $content_mode = Menu_show_all_as_buttons;
   /**
    * Rendering mode for commands.
    *  This options is ignored if {@link
    * APPLICATION::dhmtl_allowed()} is <code>False</code>.
    */
-  var $display_mode = Menu_horizontal_with_dropdown;
+  public $display_mode = Menu_horizontal_with_dropdown;
   /**
    * Number of commands to show outside of the drop-down.
    * Used only if {@link $display_mode} is {@link Menu_horizontal_with_dropdown}
@@ -139,7 +139,7 @@ class MENU_RENDERER extends WEBCORE_OBJECT
    * returns <code>False</code>.
    * @var integer
    */
-  var $num_important_commands = 3;
+  public $num_important_commands = 3;
   /**
    * Attachment for the menu in its container.
    * Can be {@link Menu_align_default}, {@link Menu_align_left}, {@link
@@ -148,30 +148,30 @@ class MENU_RENDERER extends WEBCORE_OBJECT
    * menu position.
    * @var string
    */
-  var $alignment = Menu_align_right;
+  public $alignment = Menu_align_right;
   /**
    * Show the word "Commands" for the drop-down?
    * Turned off when using {@link Menu_size_minimal} with {@link set_size()}.
    * @var boolean
    */
-  var $show_commands_title = TRUE;
+  public $show_commands_title = TRUE;
   /**
    * Use this separator if {@link Menu_show_as_buttons} is <code>False</code>.
    * Defaults to {@link CONTEXT_DISPLAY_OPTIONS::$menu_separator}.
    * @var string
    */
-  var $separator;
+  public $separator;
   /**
    * Target frame for generated links.
    * Use only from within framesets; usually used to target the "_top" frame.
    * @var string
    */
-  var $target = '';
+  public $target = '';
 
   /**
-   * @param CONTEXT &$context
+   * @param CONTEXT $context
    */
-  function MENU_RENDERER (&$context)
+  function MENU_RENDERER ($context)
   {
     WEBCORE_OBJECT::WEBCORE_OBJECT ($context);
     $browser = $this->env->browser ();
@@ -217,10 +217,10 @@ class MENU_RENDERER extends WEBCORE_OBJECT
    * Render the commands into a toolbar container.
    * Renders the buttons into a DIV that functions as a toolbar if there are any
    * executable commands, otherwise renders nothing.
-   * @param COMMANDS &$commands
+   * @param COMMANDS $commands
    * @param string $CSS_class
    */
-  function display_as_toolbar (&$commands, $CSS_class = 'menu-bar-top')
+  function display_as_toolbar ($commands, $CSS_class = 'menu-bar-top')
   {
     if ($commands->num_executable_commands () > 0)
     {
@@ -238,9 +238,9 @@ class MENU_RENDERER extends WEBCORE_OBJECT
    * Depending on settings, this will render as a toolbar (across) or as a menu
    * list (vertical) and may include styles and/or javascript to make it a drop-
    * down menu.
-   * @param COMMANDS &$commands
+   * @param COMMANDS $commands
    */
-  function display (&$commands)
+  function display ($commands)
   {
     if (isset ($this->env->profiler)) $this->env->profiler->start ('ui');
     if ($commands->num_executable_commands ())
@@ -304,14 +304,14 @@ class MENU_RENDERER extends WEBCORE_OBJECT
   
   /**
    * Draw some or all of the given commands.
-   * @param COMMANDS &$commands
+   * @param COMMANDS $commands
    * @param boolean $important_only If <code>True</code>, shows only the first
    * {@link $num_important_commands} when sorted by {@link
    * COMMAND::$importance}.
    * @param string $CSS_class CSS class used for each {@link COMMAND}.
    * @access private
    */
-  function _draw_commands (&$commands, $important_only, $CSS_class = 'menu-button')
+  function _draw_commands ($commands, $important_only, $CSS_class = 'menu-button')
   {
     $cmds = $commands->command_list ();
     $num_cmds_to_be_shown = $commands->num_executable_commands (); 
@@ -358,11 +358,11 @@ class MENU_RENDERER extends WEBCORE_OBJECT
   
   /**
    * Create an HTML link for the command.
-   * @param COMMAND &$cmd
+   * @param COMMAND $cmd
    * @return string
    * @access private
    */
-  function _command_as_html (&$cmd, $CSS_class)
+  function _command_as_html ($cmd, $CSS_class)
   {
     $Result = '';
     
@@ -419,11 +419,11 @@ class MENU_RENDERER extends WEBCORE_OBJECT
    * Draw all commands in groups vertically.
    * Used by the drop-down renderer and lists that use the {@link
    * Menu_vertical} or {@link Menu_vertical_with_dropdown} style.
-   * @param COMMANDS &$commands
+   * @param COMMANDS $commands
    * @param string $CSS_class Used for the menu container.
    * @access private
    */
-  function _draw_vertical_menu (&$commands, $important_only)
+  function _draw_vertical_menu ($commands, $important_only)
   {
     echo '    <div class="menu">' . "\n";
     if ($important_only)
@@ -505,7 +505,7 @@ class MENU_RENDERER extends WEBCORE_OBJECT
    * @param COMMANDS $commands
    * @access private
    */
-  function _draw_dropdown (&$commands)
+  function _draw_dropdown ($commands)
   {
     $trigger_class = 'menu-trigger';
     $menu_class = 'menu-dropdown';
@@ -542,7 +542,7 @@ class MENU_RENDERER extends WEBCORE_OBJECT
    * @param COMMANDS $commands
    * @access private
    */
-  function _draw_horizontal_with_dropdown (&$commands)
+  function _draw_horizontal_with_dropdown ($commands)
   {
     if (! isset ($_menu_box_renderer))
     {
@@ -561,13 +561,13 @@ class MENU_RENDERER extends WEBCORE_OBJECT
    * @var boolean
    * @access private
    */
-  var $_is_ie; 
+  protected $_is_ie; 
   /**
    * Initialized to <code>True</code> if browser supports CSS 2.
    * @var boolean
    * @access private
    */
-  var $_supports_css_2; 
+  protected $_supports_css_2; 
 }
 
 /**

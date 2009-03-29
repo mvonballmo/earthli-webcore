@@ -53,23 +53,23 @@ class FOLDER_TYPE_INFO extends TYPE_INFO
   /**
    * @var string
    */
-  var $id = 'folder';
+  public $id = 'folder';
   /**
    * @var string
    */
-  var $singular_title = 'Folder';
+  public $singular_title = 'Folder';
   /**
    * @var string
    */
-  var $plural_title = 'Folders';
+  public $plural_title = 'Folders';
   /**
    * @var string
    */
-  var $icon = '{icons}buttons/new_folder';
+  public $icon = '{icons}buttons/new_folder';
   /**
    * @var string
    */
-  var $edit_page = 'edit_folder.php';
+  public $edit_page = 'edit_folder.php';
 }
 
 /**
@@ -85,27 +85,27 @@ class ENTRY_TYPE_INFO extends TYPE_INFO
   /**
    * @var string
    */
-  var $id = 'entry';
+  public $id = 'entry';
   /**
    * @var string
    */
-  var $singular_title = 'Entry';
+  public $singular_title = 'Entry';
   /**
    * @var string
    */
-  var $plural_title = 'Entries';
+  public $plural_title = 'Entries';
   /**
    * @var string
    */
-  var $icon = '{icons}buttons/new_object';
+  public $icon = '{icons}buttons/new_object';
   /**
    * @var string
    */
-  var $edit_page = 'edit_entry.php';
+  public $edit_page = 'edit_entry.php';
   /**
    * @var boolean
    */
-  var $draftable = FALSE;
+  public $draftable = FALSE;
 }
 
 /**
@@ -121,7 +121,7 @@ class DRAFTABLE_ENTRY_TYPE_INFO extends ENTRY_TYPE_INFO
   /**
    * @var boolean
    */
-  var $draftable = TRUE;
+  public $draftable = TRUE;
 }
 
 /**
@@ -137,23 +137,23 @@ class COMMENT_TYPE_INFO extends TYPE_INFO
   /**
    * @var string
    */
-  var $id = 'comment';
+  public $id = 'comment';
   /**
    * @var string
    */
-  var $singular_title = 'Comment';
+  public $singular_title = 'Comment';
   /**
    * @var string
    */
-  var $plural_title = 'Comments';
+  public $plural_title = 'Comments';
   /**
    * @var string
    */
-  var $icon = '{icons}buttons/reply';
+  public $icon = '{icons}buttons/reply';
   /**
    * @var string
    */
-  var $edit_page = 'edit_comment.php';
+  public $edit_page = 'edit_comment.php';
 }
 
 /**
@@ -169,19 +169,19 @@ class USER_TYPE_INFO extends TYPE_INFO
   /**
    * @var string
    */
-  var $id = 'user';
+  public $id = 'user';
   /**
    * @var string
    */
-  var $singular_title = 'User';
+  public $singular_title = 'User';
   /**
    * @var string
    */
-  var $plural_title = 'Users';
+  public $plural_title = 'Users';
   /**
    * @var string
    */
-  var $edit_page = 'edit_user.php';
+  public $edit_page = 'edit_user.php';
 }
 
 /**
@@ -197,19 +197,19 @@ class GROUP_TYPE_INFO extends TYPE_INFO
   /**
    * @var string
    */
-  var $id = 'group';
+  public $id = 'group';
   /**
    * @var string
    */
-  var $singular_title = 'Group';
+  public $singular_title = 'Group';
   /**
    * @var string
    */
-  var $plural_title = 'Groups';
+  public $plural_title = 'Groups';
   /**
    * @var string
    */
-  var $edit_page = 'edit_group.php';
+  public $edit_page = 'edit_group.php';
 }
 
 ?>

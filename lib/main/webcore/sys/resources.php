@@ -72,70 +72,70 @@ class RESOURCE_MANAGER extends RAISABLE
    * Denotes the start of an alias in a URL fragment.
    * @var string
    */
-  var $alias_open_delimiter = '{';
+  public $alias_open_delimiter = '{';
   /**
    * Denotes the end of an alias in a URL fragment.
    * @var string
    */
-  var $alias_close_delimiter = '}';
+  public $alias_close_delimiter = '}';
   /**
    * Denotes a local anchor in a URL.
    * @var string
    */
-  var $anchor_delimiter = '#';
+  public $anchor_delimiter = '#';
   /**
    * Should urls be expanded to the root?
    * Use {@link set_root_behavior()} and {@link restore_root_behavior()} to
    * set this value properly for chained resource managers.
    * @var boolean
    */
-  var $resolve_to_root = FALSE;
+  public $resolve_to_root = FALSE;
   /**
    * What is the absolute root of all resources?
    * This value is prepended to resolved URLs if {@link $resolve_to_root} is True.
    * This allows a manager to resolve URLs regardless of context (when displayed in
    * an email, for instance).
    */
-  var $root_url = '';
+  public $root_url = '';
   /**
    * Is alias-caching enabled?
    * Set this value with {@link set_caching_enabled()}.
    * @var boolean
    */
-  var $caching_enabled = TRUE;
+  public $caching_enabled = TRUE;
 
   function RESOURCE_MANAGER ()
   {
-    $this->_url_options =& global_url_options ();
-    $this->_text_options =& global_text_options ();
+    $this->_url_options = global_url_options ();
+    $this->_text_options = global_text_options ();
     $this->restore_root_behavior ();
   }
 
   /**
    * Inherit resource patterns from this object.
-   * @param RESOURCE_MANAGER &$parent
+   * @param RESOURCE_MANAGER $parent
    */
-  function inherit_resources_from (&$parent)
+  function inherit_resources_from ($parent)
   {
-    $this->_parent_resources =& $parent;
+    $this->_parent_resources = $parent;
   }
 
   /**
    * Specify which file options to use when building URLs.
-   * @param FILE_OPTIONS &$options
+   * @param FILE_OPTIONS $options
    */
-  function set_url_options (&$options)
+  function set_url_options ($options)
   {
-    $this->_url_options =& $options;
+    $this->_url_options = $options;
   }
 
   /**
    * Specify which text options to use when formatting HTML.
-   * @param TEXT_OPTIONS &$options
+   * @param TEXT_OPTIONS $options
    */
-  function set_text_options (&$options)
+  function set_text_options ($options)
   {
-    $this->_text_options =& $options;
+    $this->_text_options = $options;
   }
 
   /**
@@ -539,7 +539,7 @@ class RESOURCE_MANAGER extends RAISABLE
   {
     if (isset ($this->_listeners))
     {
-      $this->_listeners->execute (array (&$this, $alias, $path));
+      $this->_listeners->execute (array ($this, $alias, $path));
     }
   }
 
@@ -756,45 +756,45 @@ class RESOURCE_MANAGER extends RAISABLE
    * @var FILE_OPTIONS
    * @access private
    */
-  var $_url_options;
+  protected $_url_options;
   /**
    * Use these options to format HTML text.
    * @var TEXT_OPTIONS
    * @access private
    */
-  var $_text_options;
+  protected $_text_options;
   /**
    * Inherit resources from this manager.
    * @var RESOURCE_MANAGER
    * @access private
    */
-  var $_parent_resources;
+  protected $_parent_resources;
   /**
    * Alias to path mapping.
    * Each path is a legal url with an optional alias prefix.
    * @var array[string,string]
    * @access private
    */
-  var $_paths;
+  protected $_paths;
   /**
    * Alias to extension mapping.
    * @var array[string,string]
    * @access private
    */
-  var $_extensions;
+  protected $_extensions;
   /**
    * Record aliases that force root resolution.
    * @var array[string,boolean]
    * @access private
    */
-  var $_forced_roots;
+  protected $_forced_roots;
   /**
    * List of listeners for changes to aliases.
    * Add listeners with {@link add_listener()} and receive a message
    * when a path is changed with {@link set_path()}.
    * @var CALLBACK_LIST
    */
-  var $_listeners;
+  protected $_listeners;
   /**
    * Maps aliases to expanded paths.
    * Provides a significant performance boost. Paths are invalidated when
@@ -803,7 +803,7 @@ class RESOURCE_MANAGER extends RAISABLE
    * @var array[string,string]
    * @access private
    */
-  var $_cache;
+  protected $_cache;
 }
 
 ?>

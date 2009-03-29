@@ -27,7 +27,7 @@ http://www.earthli.com/software/webcore
 ****************************************************************************/
 
   $folder_query = $App->login->folder_query ();
-  $parent =& $folder_query->object_at_id (read_var ('id'));
+  $parent = $folder_query->object_at_id (read_var ('id'));
 
   if (isset ($parent) && $App->login->is_allowed (Privilege_set_folder, Privilege_create, $parent))
   {

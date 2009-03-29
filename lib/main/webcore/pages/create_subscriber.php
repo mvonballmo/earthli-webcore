@@ -31,7 +31,7 @@ http://www.earthli.com/software/webcore
   if ($email)
   {
     $subscriber_query = $App->subscriber_query ();
-    $subscriber =& $subscriber_query->object_at_email ($email);
+    $subscriber = $subscriber_query->object_at_email ($email);
 
     if (isset ($subscriber))
     {

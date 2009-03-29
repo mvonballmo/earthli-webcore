@@ -55,37 +55,37 @@ class RELEASE extends OBJECT_IN_FOLDER
     * @var integer
     * @see RELEASE::branch()
     */
-  var $branch_id;
+  public $branch_id;
   /**
    * Scheduled release date.
     * @var DATE_TIME
     */
-  var $time_scheduled;
+  public $time_scheduled;
   /**
    * Scheduled internal testing date.
     * @var DATE_TIME
     */
-  var $time_testing_scheduled;
+  public $time_testing_scheduled;
   /**
    * Actual internal testing date.
    * @var DATE_TIME
    */
-  var $time_tested;
+  public $time_tested;
   /**
    * Actual release date.
    * @var DATE_TIME
    */
-  var $time_shipped;
+  public $time_shipped;
   /**
    * Next due date (testing or release).
    * @var DATE_TIME
    */
-  var $time_next_deadline;
+  public $time_next_deadline;
 
   /**
-   * @param PROJECT_APPLICATION &$app Main application.
+   * @param PROJECT_APPLICATION $app Main application.
    */
-  function RELEASE (&$app)
+  function RELEASE ($app)
   {
     OBJECT_IN_FOLDER::OBJECT_IN_FOLDER ($app);
 
@@ -177,8 +177,8 @@ class RELEASE extends OBJECT_IN_FOLDER
    */
   function warning_time ($date)
   {
-    $fldr =& $this->parent_folder ();
-    $options =& $fldr->options ();
+    $fldr = $this->parent_folder ();
+    $options = $fldr->options ();
     switch ($options->seconds_until_deadline)
     {
     case 0:
@@ -274,7 +274,7 @@ class RELEASE extends OBJECT_IN_FOLDER
    * The branch on which this release occurred (or is planned).
     * @return BRANCH
     */
-  function &branch ()
+  function branch ()
   {
     $this->assert (isset ($this->_branch), '_branch is not cached.', 'branch', 'RELEASE');
     return $this->_branch;
@@ -284,7 +284,7 @@ class RELEASE extends OBJECT_IN_FOLDER
    * Current overall status as a set of properties.
    * @return RELEASE_STATUS
    */
-  function &status ()
+  function status ()
   {
     if (! isset ($this->_status))
     {
@@ -365,9 +365,9 @@ class RELEASE extends OBJECT_IN_FOLDER
   }
 
   /**
-   * @param DATABASE &$db
+   * @param DATABASE $db
    */
-  function load (&$db)
+  function load ($db)
   {
     parent::load ($db);
     $this->branch_id = $db->f ('branch_id');
@@ -380,9 +380,9 @@ class RELEASE extends OBJECT_IN_FOLDER
   }
 
   /**
-   * @param SQL_STORAGE &$storage Store values to this object.
+   * @param SQL_STORAGE $storage Store values to this object.
    */
-  function store_to (&$storage)
+  function store_to ($storage)
   {
     parent::store_to ($storage);
     $tname =$this->_table_name ();
@@ -415,7 +415,7 @@ class RELEASE extends OBJECT_IN_FOLDER
   function _object_url ($use_links, $separator = null, $formatter = null)
   {
     $Result = parent::_object_url ($use_links, $separator, $formatter);
-    $branch =& $this->branch ();
+    $branch = $this->branch ();
     $branch_url = $branch->_object_url ($use_links, $separator, $formatter);
 
     if (! isset ($separator))
@@ -554,13 +554,13 @@ class RELEASE extends OBJECT_IN_FOLDER
 
   /**
    * Apply class-specific restrictions to this query.
-   * @param SUBSCRIPTION_QUERY &$query
-   * @param HISTORY_ITEM &$history_item Action that generated this request. May be empty.
+   * @param SUBSCRIPTION_QUERY $query
+   * @param HISTORY_ITEM $history_item Action that generated this request. May be empty.
    * @access private
    */
-  function _prepare_subscription_query (&$query, &$history_item)
+  function _prepare_subscription_query ($query, $history_item)
   {
-    $branch =& $this->branch ();
+    $branch = $this->branch ();
 
     $query->restrict ('watch_entries > 0');
     $query->restrict_kinds (array (Subscribe_folder => $branch->parent_folder_id ()

@@ -61,21 +61,21 @@ class GROUP extends CONTENT_OBJECT
   /**
    * Add this user to the group.
    * Does not check whether the user is already a member of the group.
-   * @param USER &$user
+   * @param USER $user
    */
-  function add_user (&$user)
+  function add_user ($user)
   {
     $this->db->logged_query ("INSERT INTO {$this->app->table_names->users_to_groups} (group_id, user_id)" .
                              " VALUES ($this->id, $user->id)");
 
     // update the history with the change
 
-    $history_item =& $this->new_history_item ();
+    $history_item = $this->new_history_item ();
     $history_item->kind = History_item_updated;
     $history_item->record_difference ('Added [' . $user->title_as_plain_text () . '].');
     $history_item->store ();
 
-    $history_item =& $user->new_history_item ();
+    $history_item = $user->new_history_item ();
     $history_item->kind = History_item_updated;
     $history_item->record_difference ('Added to group [' . $this->title_as_plain_text () . ']');
     $history_item->store ();
@@ -84,20 +84,20 @@ class GROUP extends CONTENT_OBJECT
   /**
    * Delete this user from the group.
    * Does not check whether the user is a member of the group.
-   * @param USER &$user
+   * @param USER $user
    */
-  function remove_user (&$user)
+  function remove_user ($user)
   {
     $this->db->logged_query ("DELETE FROM {$this->app->table_names->users_to_groups} WHERE user_id = $user->id");
 
     // update the history with the change
 
-    $history_item =& $this->new_history_item ();
+    $history_item = $this->new_history_item ();
     $history_item->kind = History_item_updated;
     $history_item->record_difference ('Removed [' . $user->title_as_plain_text () . '].');
     $history_item->store ();
 
-    $history_item =& $user->new_history_item ();
+    $history_item = $user->new_history_item ();
     $history_item->kind = History_item_updated;
     $history_item->record_difference ('Removed from group [' . $this->title_as_plain_text () . ']');
     $history_item->store ();

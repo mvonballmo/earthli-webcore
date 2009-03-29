@@ -56,18 +56,18 @@ class RELEASE_UPDATER extends WEBCORE_OBJECT
    * The release to be committed.
    *  @var RELEASE
    */
-  var $release;
+  public $release;
   /**
    * Release belongs to this branch.
    *  @var BRANCH
    */
-  var $branch;
+  public $branch;
 
-  function RELEASE_UPDATER (&$release)
+  function RELEASE_UPDATER ($release)
   {
     WEBCORE_OBJECT::WEBCORE_OBJECT ($release->app);
-    $this->release =& $release;
-    $this->branch =& $release->branch ();
+    $this->release = $release;
+    $this->branch = $release->branch ();
   }
 
   /**
@@ -90,13 +90,13 @@ class RELEASE_UPDATER extends WEBCORE_OBJECT
    * release in this branch.
    * @return RELEASE
    */
-  function &replacement_release ()
+  function replacement_release ()
   {
     if (! isset ($this->_replacement_release))
     {
       $release_query = $this->branch->release_query ();
       $release_query->set_order ('rel.time_next_deadline ASC');
-      $releases =& $release_query->objects ();
+      $releases = $release_query->objects ();
 
       /* Look for this release in the list of releases for this branch. If it's found,
          get the next release in the list, if it exists. If there is no newer release,
@@ -135,12 +135,12 @@ class RELEASE_UPDATER extends WEBCORE_OBJECT
    * Apply the change to all entries in the query.
    * If the entry is in this updater's branch, the method 'applier_func' is called with that
    * branch info object. The method automatically updates the entry's history accordingly.
-   * @param QUERY &$entry_query
+   * @param QUERY $entry_query
    * @param string $sub_history_item_publication_state Can be {@link History_item_silent} or {@link History_item_needs_send}.
    * @param string $applier_func
    * @access private
    */
-  function _apply_to_entries (&$entry_query, $sub_history_item_publication_state, $applier_func)
+  function _apply_to_entries ($entry_query, $sub_history_item_publication_state, $applier_func)
   {
     $entries = $entry_query->objects ();
 
@@ -153,7 +153,7 @@ class RELEASE_UPDATER extends WEBCORE_OBJECT
       $history_item->publication_state = $sub_history_item_publication_state;
       unset ($this_branch_info);
 
-      $branch_infos =& $entry->stored_branch_infos ();
+      $branch_infos = $entry->stored_branch_infos ();
 
       if (sizeof ($branch_infos) > 0)
       {
@@ -187,7 +187,7 @@ class RELEASE_UPDATER extends WEBCORE_OBJECT
    */
   function _replacement_release_id ()
   {
-    $rel =& $this->replacement_release ();
+    $rel = $this->replacement_release ();
     if (isset ($rel))
     {
       return $rel->id;
@@ -220,10 +220,10 @@ class RELEASE_PURGER extends RELEASE_UPDATER
 
   /**
    * Apply the required change to the {@link BRANCH}.
-   * @param PROJECT_ENTRY_BRANCH_INFO &$branch_info
+   * @param PROJECT_ENTRY_BRANCH_INFO $branch_info
    * @access private
    */
-  function _set_replacement_release (&$branch_info)
+  function _set_replacement_release ($branch_info)
   {
     $branch_info->release_id = $this->_replacement_release_id ();
   }
@@ -245,9 +245,9 @@ class RELEASE_SHIPPER extends RELEASE_UPDATER
    * Mapping for closed jobs in this release.
    * @var JOB_STATUS_MAP
    */
-  var $status_map;
+  public $status_map;
 
-  function RELEASE_SHIPPER (&$release)
+  function RELEASE_SHIPPER ($release)
   {
     RELEASE_UPDATER::RELEASE_UPDATER ($release);
     $this->status_map = $this->app->display_options->job_status_map ();
@@ -324,30 +324,30 @@ class RELEASE_SHIPPER extends RELEASE_UPDATER
 
   /**
    * Set the release to the one being updated.
-   * @param PROJECT_ENTRY_BRANCH_INFO &$branch_info
+   * @param PROJECT_ENTRY_BRANCH_INFO $branch_info
    * @access private
    */
-  function _set_release (&$branch_info)
+  function _set_release ($branch_info)
   {
     $branch_info->release_id = $this->release->id;
   }
 
   /**
    * Clear the release for this branch.
-   * @param PROJECT_ENTRY_BRANCH_INFO &$branch_info
+   * @param PROJECT_ENTRY_BRANCH_INFO $branch_info
    * @access private
    */
-  function _clear_release (&$branch_info)
+  function _clear_release ($branch_info)
   {
     $branch_info->release_id = 0;
   }
 
   /**
    * Changes the closed status for this branch.
-   * @param PROJECT_ENTRY_BRANCH_INFO &$branch_info
+   * @param PROJECT_ENTRY_BRANCH_INFO $branch_info
    * @access private
    */
-  function _map_status (&$branch_info)
+  function _map_status ($branch_info)
   {
     $branch_info->status = $this->status_map->to;
   }
@@ -367,12 +367,12 @@ class UPDATE_RELEASE_PREVIEW_SETTINGS extends FORM_PREVIEW_SETTINGS
    * Draw a list with a title.
    * @param string $title
    * @param string $text
-   * @param QUERY &$query
+   * @param QUERY $query
    * @access private
    */
-  function _draw_section ($title, $text, &$query)
+  function _draw_section ($title, $text, $query)
   {
-    $objs =& $query->objects ();
+    $objs = $query->objects ();
     if (sizeof ($objs))
     {
       $this->_objects_displayed = TRUE;
@@ -387,11 +387,11 @@ class UPDATE_RELEASE_PREVIEW_SETTINGS extends FORM_PREVIEW_SETTINGS
   }
 
   /**
-   * @param array[PROJECT_ENTRY] &$entries
+   * @param array[PROJECT_ENTRY] $entries
    * @see PROJECT_ENTRY
    * @access private
    */
-  function _draw_entries (&$entries, $show_status = FALSE)
+  function _draw_entries ($entries, $show_status = FALSE)
   {
     $this->app->display_options->overridden_max_title_size = 100;
     echo '<div style="margin-left: 2em">';
@@ -401,10 +401,10 @@ class UPDATE_RELEASE_PREVIEW_SETTINGS extends FORM_PREVIEW_SETTINGS
   }
 
   /**
-   * @param PROJECT_ENTRY &$entry
+   * @param PROJECT_ENTRY $entry
    * @access private
    */
-  function _draw_entry (&$entry, $show_status = FALSE)
+  function _draw_entry ($entry, $show_status = FALSE)
   {
     $icon = $entry->kind_icon ('16px');
     if ($show_status)
@@ -419,7 +419,7 @@ class UPDATE_RELEASE_PREVIEW_SETTINGS extends FORM_PREVIEW_SETTINGS
    * @var boolean
    * @access private
    */
-  var $_objects_displayed = FALSE;
+  protected $_objects_displayed = FALSE;
 }
 
 ?>

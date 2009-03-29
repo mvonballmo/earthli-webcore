@@ -41,10 +41,10 @@ require_once ('webcore/gui/panel.php');
 
 /**
  * Apply general settings to Albums panels.
- * @param PANEL_MANAGER &$manager Add and configure panels for this manager.
+ * @param PANEL_MANAGER $manager Add and configure panels for this manager.
  * @access private
  */
-function _configure_album_panels (&$manager)
+function _configure_album_panels ($manager)
 {
   /* Force the time menu to read its value, using 'all' as a default. It will be
    * read by the panel manager again later, but the picture and journal panels
@@ -54,7 +54,7 @@ function _configure_album_panels (&$manager)
 
   if ($manager->is_panel ('picture'))
   {
-    $panel =& $manager->panel_at ('picture');
+    $panel = $manager->panel_at ('picture');
     $panel->rows = 10;
     $panel->columns = 2;
     $panel->default_time_frame = Time_frame_all;
@@ -62,13 +62,13 @@ function _configure_album_panels (&$manager)
 
   if ($manager->is_panel ('journal'))
   {
-    $panel =& $manager->panel_at ('journal');
+    $panel = $manager->panel_at ('journal');
     $panel->default_time_frame = Time_frame_all; 
   }
 
   if ($manager->is_panel ('album'))
   {
-    $panel =& $manager->panel_at ('album');
+    $panel = $manager->panel_at ('album');
     $panel->columns = 2;
   }
 }

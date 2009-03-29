@@ -53,11 +53,11 @@ class AUDITABLE_HISTORY_ITEM extends HISTORY_ITEM
   /**
    * Record class-specific differences.
    * 'orig' is the same as {@link $_object}, but is passed here for convenience.
-   * @param AUDITABLE &$orig
-   * @param AUDITABLE &$new
+   * @param AUDITABLE $orig
+   * @param AUDITABLE $new
    * @access private
    */
-  function _record_differences (&$orig, &$new)
+  function _record_differences ($orig, $new)
   {
     parent::_record_differences ($orig, $new);
 
@@ -84,11 +84,11 @@ class CONTENT_OBJECT_HISTORY_ITEM extends AUDITABLE_HISTORY_ITEM
   /**
    * Record class-specific differences.
    * 'orig' is the same as {@link $_object}, but is passed here for convenience.
-   * @param OBJECT_IN_FOLDER &$orig
-   * @param OBJECT_IN_FOLDER &$new
+   * @param OBJECT_IN_FOLDER $orig
+   * @param OBJECT_IN_FOLDER $new
    * @access private
    */
-  function _record_differences (&$orig, &$new)
+  function _record_differences ($orig, $new)
   {
     parent::_record_differences ($orig, $new);
     $this->_record_string_difference ('Title', $orig->title, $new->title);
@@ -112,10 +112,10 @@ class OBJECT_IN_FOLDER_HISTORY_ITEM extends CONTENT_OBJECT_HISTORY_ITEM
    * Update the object id internally.
    * If the object was just created, then the id has just become available. Override this function to set
    * internal fields that depend on the object id.
-   * @param OBJECT_IN_FOLDER &$obj
+   * @param OBJECT_IN_FOLDER $obj
    * @access private
    */
-  function update_object (&$obj)
+  function update_object ($obj)
   {
     parent::update_object ($obj);
     $this->access_id = $obj->parent_folder_id ();
@@ -124,11 +124,11 @@ class OBJECT_IN_FOLDER_HISTORY_ITEM extends CONTENT_OBJECT_HISTORY_ITEM
   /**
    * Record class-specific differences.
    * 'orig' is the same as {@link $_object}, but is passed here for convenience.
-   * @param OBJECT_IN_FOLDER &$orig
-   * @param OBJECT_IN_FOLDER &$new
+   * @param OBJECT_IN_FOLDER $orig
+   * @param OBJECT_IN_FOLDER $new
    * @access private
    */
-  function _record_differences (&$orig, &$new)
+  function _record_differences ($orig, $new)
   {
     parent::_record_differences ($orig, $new);
 
@@ -222,16 +222,16 @@ class FOLDER_HISTORY_ITEM extends OBJECT_IN_FOLDER_HISTORY_ITEM
    * Which kind of object is this?
    * @var string
    */
-  var $object_type = History_item_folder;
+  public $object_type = History_item_folder;
 
   /**
    * Record class-specific differences.
    * 'orig' is the same as {@link $_object}, but is passed here for convenience.
-   * @param FOLDER &$orig
-   * @param FOLDER &$new
+   * @param FOLDER $orig
+   * @param FOLDER $new
    * @access private
    */
-  function _record_differences (&$orig, &$new)
+  function _record_differences ($orig, $new)
   {
     parent::_record_differences ($orig, $new);
 
@@ -266,7 +266,7 @@ class ENTRY_HISTORY_ITEM extends OBJECT_IN_FOLDER_HISTORY_ITEM
    * Which kind of object is this?
    * @var string
    */
-  var $object_type = History_item_entry;
+  public $object_type = History_item_entry;
 
   /**
    * Returns text only if this history item uses that kind.
@@ -326,16 +326,16 @@ class COMMENT_HISTORY_ITEM extends OBJECT_IN_FOLDER_HISTORY_ITEM
    * Which kind of object is this?
    * @var string
    */
-  var $object_type = History_item_comment;
+  public $object_type = History_item_comment;
 
   /**
    * Record class-specific differences.
    * 'orig' is the same as {@link $_object}, but is passed here for convenience.
-   * @param COMMENT &$orig
-   * @param COMMENT &$new
+   * @param COMMENT $orig
+   * @param COMMENT $new
    * @access private
    */
-  function _record_differences (&$orig, &$new)
+  function _record_differences ($orig, $new)
   {
     parent::_record_differences ($orig, $new);
 
@@ -362,16 +362,16 @@ class ATTACHMENT_HISTORY_ITEM extends OBJECT_IN_FOLDER_HISTORY_ITEM
    * Which kind of object is this?
    * @var string
    */
-  var $object_type = History_item_attachment;
+  public $object_type = History_item_attachment;
 
   /**
    * Record class-specific differences.
    * 'orig' is the same as {@link $_object}, but is passed here for convenience.
-   * @param COMMENT &$orig
-   * @param COMMENT &$new
+   * @param COMMENT $orig
+   * @param COMMENT $new
    * @access private
    */
-  function _record_differences (&$orig, &$new)
+  function _record_differences ($orig, $new)
   {
     parent::_record_differences ($orig, $new);
 
@@ -403,14 +403,14 @@ class USER_HISTORY_ITEM extends CONTENT_OBJECT_HISTORY_ITEM
    * Which kind of object is this?
    * @var string
    */
-  var $object_type = History_item_user;
+  public $object_type = History_item_user;
 
   /**
    * Set the object on which the history item occurs.
-   * @param USER &$obj
+   * @param USER $obj
    * @access private
    */
-  function update_object (&$obj)
+  function update_object ($obj)
   {
     parent::update_object ($obj);
     $this->access_id = $obj->id;
@@ -419,11 +419,11 @@ class USER_HISTORY_ITEM extends CONTENT_OBJECT_HISTORY_ITEM
   /**
    * Record class-specific differences.
    * 'orig' is the same as {@link $_object}, but is passed here for convenience.
-   * @param USER &$orig
-   * @param USER &$new
+   * @param USER $orig
+   * @param USER $new
    * @access private
    */
-  function _record_differences (&$orig, &$new)
+  function _record_differences ($orig, $new)
   {
     parent::_record_differences ($orig, $new);
 
@@ -485,14 +485,14 @@ class GROUP_HISTORY_ITEM extends CONTENT_OBJECT_HISTORY_ITEM
    * Which kind of object is this?
    * @var string
    */
-  var $object_type = History_item_group;
+  public $object_type = History_item_group;
 
   /**
    * Set the object on which the history item occurs.
-   * @param GROUP &$obj
+   * @param GROUP $obj
    * @access private
    */
-  function update_object (&$obj)
+  function update_object ($obj)
   {
     parent::update_object ($obj);
     $this->access_id = $obj->id;

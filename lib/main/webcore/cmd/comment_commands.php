@@ -51,9 +51,9 @@ require_once ('webcore/cmd/commands.php');
 class COMMENT_COMMANDS extends COMMANDS
 {
   /**
-   * @param COMMENT &$comment Configure commands for this object.
+   * @param COMMENT $comment Configure commands for this object.
    */
-  function COMMENT_COMMANDS (&$comment)
+  function COMMENT_COMMANDS ($comment)
   {
     COMMANDS::COMMANDS ($comment->app);
 

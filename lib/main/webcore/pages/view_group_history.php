@@ -27,7 +27,7 @@ http://www.earthli.com/software/webcore
 ****************************************************************************/
 
   $group_query = $App->group_query ();
-  $group =& $group_query->object_at_id (read_var ('id'));
+  $group = $group_query->object_at_id (read_var ('id'));
 
   if (isset ($group))
   {
@@ -38,7 +38,7 @@ http://www.earthli.com/software/webcore
     $Page->location->add_object_link ($group);
 
     $history_item_query = $group->history_item_query ();
-    $obj =& $group;
+    $obj = $group;
 
     include_once ('webcore/pages/view_history.php');
   }

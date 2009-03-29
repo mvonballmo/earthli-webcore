@@ -51,11 +51,11 @@ class NEWS_PANEL_MANAGER_HELPER extends PANEL_MANAGER_HELPER
   /**
    * Apply global options to a panel manager.
    * Does nothing by default.
-   * @param PANEL_MANAGER &$manager
+   * @param PANEL_MANAGER $manager
    */
-  function configure (&$manager)
+  function configure ($manager)
   {
-////    $panel =& $manager->panel_at ('article');
+////    $panel = $manager->panel_at ('article');
 ////    $panel->default_time_frame = Time_frame_last_month;
   }
 }

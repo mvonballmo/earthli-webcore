@@ -50,10 +50,10 @@ class CONTENT_OBJECT_RENDERER extends AUDITABLE_RENDERER
 {
   /**
    * Outputs the object as HTML.
-   * @param CONTENT_OBJECT &$obj
+   * @param CONTENT_OBJECT $obj
    * @access private
    */
-  function _display_as_html (&$obj)
+  function _display_as_html ($obj)
   {
     parent::_display_as_html ($obj);
     $this->_echo_html_description ($obj);
@@ -61,20 +61,20 @@ class CONTENT_OBJECT_RENDERER extends AUDITABLE_RENDERER
 
   /**
    * Emits the "description" field as HTML.
-   * @param CONTENT_OBJECT &$obj
+   * @param CONTENT_OBJECT $obj
    * @access private
    */
-  function _echo_html_description (&$obj)
+  function _echo_html_description ($obj)
   {
     $this->_echo_text_as_html ($obj, $obj->description);
   }
 
   /**
    * Outputs the object as plain text.
-   * @param CONTENT_OBJECT &$obj
+   * @param CONTENT_OBJECT $obj
    * @access private
    */
-  function _display_as_plain_text (&$obj)
+  function _display_as_plain_text ($obj)
   {
     parent::_display_as_plain_text ($obj);
     $this->_echo_plain_text_description ($obj);
@@ -82,10 +82,10 @@ class CONTENT_OBJECT_RENDERER extends AUDITABLE_RENDERER
 
   /**
    * Emits the "description" field as plain text.
-   * @param CONTENT_OBJECT &$obj
+   * @param CONTENT_OBJECT $obj
    * @access private
    */
-  function _echo_plain_text_description (&$obj)
+  function _echo_plain_text_description ($obj)
   {
     $this->_echo_text_as_plain_text ($obj, $obj->description);
   }
@@ -95,11 +95,11 @@ class CONTENT_OBJECT_RENDERER extends AUDITABLE_RENDERER
    * Used standard formatting provided by the {@link NAMED_OBJECT::html_formatter()}
    * and settings from {@link _prepare_formatter()}.
    */
-  function _echo_text_as_html (&$obj, $text)
+  function _echo_text_as_html ($obj, $text)
   {
     if ($text)
     {
-      $munger =& $obj->html_formatter ();
+      $munger = $obj->html_formatter ();
       $this->_prepare_formatter ($munger);
   ?>
       <div class="text-flow">
@@ -116,11 +116,11 @@ class CONTENT_OBJECT_RENDERER extends AUDITABLE_RENDERER
    * Used standard formatting provided by the {@link NAMED_OBJECT::plain_text_formatter()}
    * and settings from {@link _prepare_formatter()}.
    */
-  function _echo_text_as_plain_text (&$obj, $text)
+  function _echo_text_as_plain_text ($obj, $text)
   {
     if ($text)
     {
-      $munger =& $obj->plain_text_formatter ();
+      $munger = $obj->plain_text_formatter ();
       $this->_prepare_formatter ($munger);
       echo $this->_line ($munger->transform ($text, $obj));
     }
@@ -129,10 +129,10 @@ class CONTENT_OBJECT_RENDERER extends AUDITABLE_RENDERER
   /**
    * Apply default formatting properties.
    * Used by both the HTML and plain text formatters.
-   * @param MUNGER &$munger
+   * @param MUNGER $munger
    * @access private
    */
-  function _prepare_formatter (&$munger)
+  function _prepare_formatter ($munger)
   {
     $munger->max_visible_output_chars = $this->_options->preferred_text_length;
     $munger->force_paragraphs = TRUE;

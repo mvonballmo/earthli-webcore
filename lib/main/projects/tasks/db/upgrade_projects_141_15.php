@@ -31,9 +31,9 @@ require_once ('webcore/tasks/db/upgrade_per_app_221_23.php');
 
 class PROJECTS_141_15_MIGRATOR_TASK extends UPGRADE_PER_APP_221_23_TASK
 {
-  var $application_name = 'earthli Projects';
-  var $version_from = '1.4.1';
-  var $version_to = '1.5.0';
+  public $application_name = 'earthli Projects';
+  public $version_from = '1.4.1';
+  public $version_to = '1.5.0';
 
   function _execute ()
   {

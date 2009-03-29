@@ -50,10 +50,10 @@ class BRANCH_RENDERER extends CONTENT_OBJECT_RENDERER
 {
   /**
    * Outputs the object as HTML.
-   * @param BRANCH &$obj
+   * @param BRANCH $obj
    * @access private
    */
-  function _display_as_html (&$obj)
+  function _display_as_html ($obj)
   {
     $this->_echo_details_as_html ($obj);
     echo $obj->description_as_html ();
@@ -62,14 +62,14 @@ class BRANCH_RENDERER extends CONTENT_OBJECT_RENDERER
 
   /**
    * Shows parent/latest release for a branch in HTML.
-   * @param BRANCH &$obj
+   * @param BRANCH $obj
    */
-  function _echo_details_as_html (&$obj)
+  function _echo_details_as_html ($obj)
   {
 ?>
   <table cellpadding="2" cellspacing="0">
 <?php
-    $parent_release =& $obj->parent_release ();
+    $parent_release = $obj->parent_release ();
     if ($parent_release)
     {
       $parent_branch = $parent_release->branch ();
@@ -97,7 +97,7 @@ class BRANCH_RENDERER extends CONTENT_OBJECT_RENDERER
 
     if ($obj->exists ())
     {
-      $latest_release =& $obj->latest_release ();
+      $latest_release = $obj->latest_release ();
       if ($latest_release)
       {
         $rel_text = $latest_release->title_as_link ();
@@ -113,7 +113,7 @@ class BRANCH_RENDERER extends CONTENT_OBJECT_RENDERER
     </tr>
 <?php
 
-      $next_release =& $obj->next_release ();
+      $next_release = $obj->next_release ();
       if ($next_release)
       {
         $rel_text = $next_release->title_as_link ();
@@ -136,17 +136,17 @@ class BRANCH_RENDERER extends CONTENT_OBJECT_RENDERER
 
   /**
    * Outputs the object as plain text.
-   * @param BRANCH &$obj
+   * @param BRANCH $obj
    * @access private
    */
-  function _display_as_plain_text (&$obj)
+  function _display_as_plain_text ($obj)
   {
     $this->_echo_plain_text_user_information ($obj);
 
-    $release =& $obj->parent_release ();
+    $release = $obj->parent_release ();
     if (isset ($release))
     {
-      $branch =& $release->branch ();
+      $branch = $release->branch ();
       echo $this->_par ($branch->title_as_link () . $this->app->display_options->object_separator . $release->title_as_link ());
     }
 

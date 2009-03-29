@@ -55,15 +55,15 @@ class APPLICATION_ENGINE extends RESOLVER
    * Call {@link init()} to create and initialize.
    * @var APPLICATION
    */
-  var $app;
+  public $app;
 
   /**
    * Initialize global objects for this session.
    * Creates {@link $env}, {@link $logger} and {@link $page}; call this
    * before calling {@link run()}.
-   * @param PAGE &$page
+   * @param PAGE $page
    */
-  function init (&$page)
+  function init ($page)
   {
     $this->app = $this->_make_application ($page);
     $this->_init_application ($page, $this->app);
@@ -83,9 +83,9 @@ class APPLICATION_ENGINE extends RESOLVER
    * Set the main application for the page.
    * Initialize the application with {@link init()} beforehand, so that {@link
    * $app} has been created.
-   * @param PAGE &$page
+   * @param PAGE $page
    */
-  function set_main_app_for (&$page)
+  function set_main_app_for ($page)
   {
     $this->_apply_to ($page, $this->app);
   }
@@ -104,11 +104,11 @@ class APPLICATION_ENGINE extends RESOLVER
    * Make the application object.
    * Calls {@link _init_application()} to allow customization.
    * @see _init_application()
-   * @param PAGE &$page
+   * @param PAGE $page
    * @return APPLICATION
    * @access private
    */
-  function _make_application (&$page)
+  function _make_application ($page)
   {
     $class_name = $this->final_class_name ('APPLICATION', 'webcore/sys/application.php');
     return new $class_name ($page);
@@ -118,11 +118,11 @@ class APPLICATION_ENGINE extends RESOLVER
    * Customize the application object.
    * Called immediately after {@link _make_application()}.
    * @see _make_application()
-   * @param PAGE &$page
-   * @param APPLICATION &$app
+   * @param PAGE $page
+   * @param APPLICATION $app
    * @access private
    */
-  function _init_application (&$page, &$app)
+  function _init_application ($page, $app)
   {
     /* Logged in user information is stored in a cookie. This is the name
      * of the key to use when storing the cookie. You can also set the path
@@ -189,21 +189,21 @@ class APPLICATION_ENGINE extends RESOLVER
    * Start up the application object.
    * Called from {@link start()}.
    * @see _init_application()
-   * @param APPLICATION &$app
+   * @param APPLICATION $app
    * @access private
    */
-  function _start_application (&$app)
+  function _start_application ($app)
   {
     $app->load_login ();
   }
 
   /**
    * Make this application the main application for the given page.
-   * @param PAGE &$page
-   * @param APPLICATION &$app
+   * @param PAGE $page
+   * @param APPLICATION $app
    * @access private
    */
-  function _apply_to (&$page, &$app)
+  function _apply_to ($page, $app)
   {
     /* Set the main name of the page. (this uses a PAGE_TITLE object; see the
      * documentation for more information.) Also sets up some values in the page
@@ -217,7 +217,7 @@ class APPLICATION_ENGINE extends RESOLVER
 
     /* Finally, make this the "main" application for the page. */
 
-    $page->app =& $app;
+    $page->app = $app;
   }
 }
 

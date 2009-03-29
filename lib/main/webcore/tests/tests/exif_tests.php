@@ -124,7 +124,7 @@ class EXIF_TEST_TASK extends TEST_TASK
     $this->_add_log_channel (Msg_channel_image);
   }
   
-  var $_use_internal_exif = TRUE;
+  protected $_use_internal_exif = TRUE;
 }
 
 ?>

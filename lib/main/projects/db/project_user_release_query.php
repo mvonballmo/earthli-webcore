@@ -52,7 +52,7 @@ class PROJECT_USER_RELEASE_QUERY extends USER_ENTRY_QUERY
    * SQL alias for the "main" table.
    * @var string
    */
-  var $alias = 'rel';
+  public $alias = 'rel';
 
   /**
    * Apply default restrictions and tables.
@@ -81,7 +81,7 @@ class PROJECT_USER_RELEASE_QUERY extends USER_ENTRY_QUERY
    * @param RELEASE
    * @access private
    */
-  function _prepare_object (&$obj)
+  function _prepare_object ($obj)
   {
     // build the branch first.
 

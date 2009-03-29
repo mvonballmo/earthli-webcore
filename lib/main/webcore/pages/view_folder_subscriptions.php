@@ -27,7 +27,7 @@ http://www.earthli.com/software/webcore
 ****************************************************************************/
 
   $folder_query = $App->login->folder_query ();
-  $folder =& $folder_query->object_at_id (read_var ('id'));
+  $folder = $folder_query->object_at_id (read_var ('id'));
 
   if (isset ($folder) && $App->login->is_allowed (Privilege_set_folder, Privilege_modify, $folder))
   {
@@ -109,7 +109,7 @@ http://www.earthli.com/software/webcore
   
           /* Make a copy (not a reference). */
           $tree = $App->make_tree_renderer ();
-          $tree->node_info = & $tree_node_info;
+          $tree->node_info = $tree_node_info;
           $tree->display ($folders);
       ?>
       </div>

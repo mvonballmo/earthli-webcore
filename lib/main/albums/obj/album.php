@@ -119,43 +119,43 @@ class ALBUM extends FOLDER
     * @var integer
     * @access private
     */
-  var $main_picture_id = 0;
+  public $main_picture_id = 0;
   /**
    * URL from which pictures are loaded.
     * @var string
     * @access private
     */
-  var $url_root;
+  public $url_root;
 
   /**
    * First day of this album.
     * @var DATE_TIME
     */
-  var $first_day;
+  public $first_day;
   /**
    * Last day of this album.
     * @var DATE_TIME
     */
-  var $last_day;
+  public $last_day;
 
   /**
    * Show times when displaying dates.
     * @var boolean
     */
-  var $show_times;
+  public $show_times;
   /**
    * Show temperatures in Celsius.
     * Shown in Fahrenheit if false.
     * @var boolean
     */
-  var $show_celsius = 1;
+  public $show_celsius = 1;
   /**
    * Where are pictures stored?
    * This can be either {@link Album_location_type_remote} or {@link
    * Album_location_type_local}.
    * @var boolean
    */
-  var $location = Album_location_type_remote;
+  public $location = Album_location_type_remote;
 
   /**
    * How is the first day maintained?
@@ -163,30 +163,30 @@ class ALBUM extends FOLDER
     * @var integer
     * @access private
     */
-  var $first_day_mode = '';
+  public $first_day_mode = '';
   /**
    * How is the first day maintained?
     * @see Day_mode_fixed
     * @var integer
     * @access private
     */
-  var $last_day_mode = '';
+  public $last_day_mode = '';
 
   /**
    * Maximum width of picture when displayed full-size.
     * @var integer
     */
-  var $max_picture_width;
+  public $max_picture_width;
   /**
    * Maximum height of picture when displayed full-size.
     * @var integer
     */
-  var $max_picture_height;
+  public $max_picture_height;
 
   /**
-   * @param ALBUM_APPLICATION &$app Main application.
+   * @param ALBUM_APPLICATION $app Main application.
    */
-  function ALBUM (&$app)
+  function ALBUM ($app)
   {
     FOLDER::FOLDER ($app);
 
@@ -224,7 +224,7 @@ class ALBUM extends FOLDER
     * May be empty.
     * @return PICTURE
     */
-  function &main_picture ()
+  function main_picture ()
   {
     $pic_query = $this->entry_query ();
     $pic_query->set_type ('picture');
@@ -455,11 +455,11 @@ class ALBUM extends FOLDER
    * Only has an effect when the album has a {@link $first_day_mode} or {@link
    * $last_day_mode} of {@link Day_mode_adjust}. Use {@link refresh_dates()} to
    * set the days from already contained content.
-   * @param ALBUM_ENTRY &$entry
+   * @param ALBUM_ENTRY $entry
    * @param boolean $update_now Updates the database immediately when
    * <code>True</code>.
    */
-  function include_entry (&$entry, $update_now = TRUE)
+  function include_entry ($entry, $update_now = TRUE)
   {
     $first_day = $this->first_day->as_php ();
     $last_day = $this->last_day->as_php ();
@@ -547,7 +547,7 @@ class ALBUM extends FOLDER
       {
         $pic_query = $this->entry_query ();
         $pic_query->set_type ('picture');
-        $pic =& $pic_query->object_at_id ($id);
+        $pic = $pic_query->object_at_id ($id);
         if (($key == $thumb_key))
         {
           $url = $pic->full_thumbnail_name ();
@@ -573,7 +573,7 @@ class ALBUM extends FOLDER
   }
 
   /**
-   * @param DATABASE &$db
+   * @param DATABASE $db
    */
   function load ($db)
   {
@@ -614,9 +614,9 @@ class ALBUM extends FOLDER
   }
   
   /**
-   * @param SQL_STORAGE &$storage Store values to this object.
+   * @param SQL_STORAGE $storage Store values to this object.
    */
-  function store_to (&$storage)
+  function store_to ($storage)
   {
     parent::store_to ($storage);
     $tname =$this->_table_name ();
