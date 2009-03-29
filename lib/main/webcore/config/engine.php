@@ -94,7 +94,9 @@ class ENGINE extends RESOLVER
 
     global $Profiler;
     if (isset ($Profiler))
+    {
       $this->env->profiler =& $Profiler;
+    }
 
     if ($this->use_logging)
     {
@@ -199,9 +201,13 @@ class ENGINE extends RESOLVER
   {
     $debug = read_var ('debug');
     if ($debug)
+    {
       $env->set_up_debugging ($debug);
+    }
     else
+    {
       $this->_apply_release_settings ($env);
+    }
     $env->debug_enabled = TRUE;
   }
 

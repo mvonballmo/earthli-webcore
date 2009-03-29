@@ -73,9 +73,13 @@ class CHANGE_LOG_COMMANDS extends COMMANDS
     $cmd = $this->make_command ();
     $cmd->id = 'show_dates';
     if ($show_date)
+    {
       $cmd->title = 'Hide Dates';
+    }
     else
+    {
       $cmd->title = 'Show Dates';
+    }
     $url = new URL ($this->env->url (Url_part_no_host_path));
     $url->replace_argument ('show_date', ! $show_date);
     $cmd->link = $url->as_text ();
@@ -89,9 +93,13 @@ class CHANGE_LOG_COMMANDS extends COMMANDS
     $cmd = $this->make_command ();
     $cmd->id = 'show_users';
     if ($show_user)
+    {
       $cmd->title = 'Hide Users';
+    }
     else
+    {
       $cmd->title = 'Show Users';
+    }
     $url = new URL ($this->env->url (Url_part_no_host_path));
     $url->replace_argument ('show_user', ! $show_user);
     $cmd->link = $url->as_text ();
@@ -105,9 +113,13 @@ class CHANGE_LOG_COMMANDS extends COMMANDS
     $cmd = $this->make_command ();
     $cmd->id = 'show_descriptions';
     if ($show_description)
+    {
       $cmd->title = 'Hide descriptions';
+    }
     else
+    {
       $cmd->title = 'Show descriptions';
+    }
     $url = new URL ($this->env->url (Url_part_no_host_path));
     $url->replace_argument ('show_description', ! $show_description);
     $cmd->link = $url->as_text ();

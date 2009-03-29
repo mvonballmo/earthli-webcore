@@ -91,9 +91,13 @@ class LAYER extends WEBCORE_OBJECT
     if ($this->context->dhtml_allowed ())
     {
       if ($this->visible)
+      {
         $icon = $this->context->resolve_icon_as_html ('{icons}tree/collapse', '[-]', '', 'vertical-align: middle', "{$this->name}_image");
+      }
       else
+      {
         $icon = $this->context->resolve_icon_as_html ('{icons}tree/expand', '[+]', '', 'vertical-align: middle', "{$this->name}_image");
+      }
 
       return '<a href="javascript:toggle_visibility(\'' . $this->name . '\')">' . $icon . '</a>';
     }
@@ -118,21 +122,33 @@ class LAYER extends WEBCORE_OBJECT
     if (isset ($this->env->profiler)) $this->env->profiler->start ('ui');
     $css = $this->context->make_tag_builder (Tag_builder_css);
     if ($this->context->dhtml_allowed () && ! $this->visible)
+    {
       $css->add_attribute ('display', 'none');
+    }
     if ($this->margin_left)
+    {
       $css->add_attribute ('margin-left', $this->margin_left);
+    }
     if ($this->margin_top)
+    {
       $css->add_attribute ('margin-top', $this->margin_top);
+    }
     $css_style = $css->as_text ();
      
     $div = $this->context->make_tag_builder (Tag_builder_html);
     $div->set_name ('div');
     if ($this->CSS_class)
+    {
       $div->add_attribute ('class', $this->CSS_class);
+    }
     if ($this->context->dhtml_allowed ())
+    {
       $div->add_attribute ('id', $this->name . '_layer');
+    }
     if ($css_style)
+    {
       $div->add_attribute ('style', $css_style);
+    }
       
     echo $div->as_html () . "\n";      
     if (isset ($this->env->profiler)) $this->env->profiler->stop ('ui');

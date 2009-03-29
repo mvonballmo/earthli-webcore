@@ -50,9 +50,13 @@ http://www.earthli.com/software/webcore
     if ($form->committed ())
     {
       if ($form->is_field ('quick_save') && $form->value_for ('quick_save'))
+      {
         $Env->redirect_local ($Env->url (Url_part_no_args) . '?id=' . $entry->id);
+      }
       else
+      {
         $App->return_to_referer ($entry->home_page ());
+      }
     }
 
     $Page->title->add_object ($folder);
@@ -86,5 +90,7 @@ http://www.earthli.com/software/webcore
     $Page->finish_display ();
   }
   else
+  {
     $Page->raise_security_violation ("You are not allowed to edit this {$entry_type_info->singular_title}.", $folder);
+  }
 ?>

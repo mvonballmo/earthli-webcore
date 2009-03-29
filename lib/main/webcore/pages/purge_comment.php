@@ -49,7 +49,9 @@ http://www.earthli.com/software/webcore
 
     $form->process_existing ($comment);
     if ($form->committed ())
+    {
       $Env->redirect_local ($entry->home_page ());
+    }
 
     $Page->title->add_object ($folder);
     $Page->title->add_object ($entry);
@@ -77,5 +79,7 @@ http://www.earthli.com/software/webcore
     $Page->finish_display ();
   }
   else
+  {
     $Page->raise_security_violation ('You are not allowed to purge this comment.', $folder);
+  }
 ?>

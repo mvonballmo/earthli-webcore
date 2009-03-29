@@ -98,16 +98,24 @@ class FOLDER_TREE_NODE_INFO extends TREE_NODE_INFO
         {
           $t = $node->title_formatter ();
           if ($this->page_link)
+          {
             $t->set_name ($this->page_link);
+          }
           if ($this->page_args)
+          {
             $t->add_arguments ($this->page_args);
+          }
           $Result = $node->title_as_link ($t);
         }
         else
+        {
           $Result = $node->title_as_link ();
+        }
       }
       else
+      {
         $Result = $node->title_as_html ();
+      }
     }
 
     return $Result;
@@ -121,7 +129,9 @@ class FOLDER_TREE_NODE_INFO extends TREE_NODE_INFO
   function icon_for (&$node)
   {
     if ($this->show_folder_icon && $node->icon_url)
+    {
       return $node->icon_as_html ('16px');
+    }
   }
 
   /**
@@ -133,9 +143,12 @@ class FOLDER_TREE_NODE_INFO extends TREE_NODE_INFO
   function closed (&$node)
   {
     if (! isset ($this->open_nodes) || ! sizeof ($this->open_nodes))
+    {
       return $node->id != $this->app->root_folder_id;
-    else
-      return parent::closed ($node);
+    }
+
+
+    return parent::closed ($node);
   }
 
   /**
@@ -209,7 +222,9 @@ class SECURITY_FOLDER_TREE_NODE_INFO extends FOLDER_TREE_NODE_INFO
       foreach ($nodes as $node)
       {
         if ($node->defines_security ())
+        {
           $this->set_visible_node ($node);
+        }
 
         $sub_nodes = $this->sub_nodes ($node);
         $this->set_defined_nodes_visible ($sub_nodes);
@@ -236,9 +251,12 @@ class SECURITY_FOLDER_TREE_NODE_INFO extends FOLDER_TREE_NODE_INFO
   function icon_for (&$node)
   {
     if ($node->defines_security ())
+    {
       return $this->app->resolve_icon_as_html ('{icons}buttons/security', 'Defines Own Security Settings', '16px');
-    else
-      return parent::icon_for ($node);
+    }
+
+
+    return parent::icon_for ($node);
   }
 }
 

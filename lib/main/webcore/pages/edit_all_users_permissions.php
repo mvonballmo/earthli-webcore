@@ -37,7 +37,9 @@ http://www.earthli.com/software/webcore
 
     $form->process_existing ($user);
     if ($form->committed ())
+    {
       $Env->redirect_local ('view_users.php');
+    }
 
     $Page->title->subject ='Permissions for all users';
     $Page->location->append ($App->short_title, './');
@@ -60,5 +62,7 @@ http://www.earthli.com/software/webcore
     $Page->finish_display ();
   }
   else
+  {
     $Page->raise_security_violation ('You are not allowed to see global user permissions.');
+  }
 ?>

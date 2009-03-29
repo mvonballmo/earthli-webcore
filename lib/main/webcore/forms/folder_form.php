@@ -100,9 +100,13 @@ class FOLDER_FORM extends OBJECT_IN_FOLDER_FORM
 
     $icon_url = read_var ('icon_url');
     if ($icon_url)
+    {
       $this->set_value ('icon_url', $icon_url);
+    }
     else
+    {
       $this->set_value ('icon_url', $obj->icon_url);
+    }
   }
 
   function load_with_defaults ()
@@ -111,7 +115,9 @@ class FOLDER_FORM extends OBJECT_IN_FOLDER_FORM
 
     $icon_url = read_var ('icon_url');
     if ($icon_url)
+    {
       $this->set_value ('icon_url', $icon_url);
+    }
   }
 
   /**

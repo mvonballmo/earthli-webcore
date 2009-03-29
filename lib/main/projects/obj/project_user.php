@@ -57,9 +57,13 @@ class PROJECT_USER extends USER
     $Result = parent::new_folder ($parent);
 
     if ($parent)
+    {
       $Result->options_id = $parent->options_id;
+    }
     else
+    {
       $Result->options_id = 0;
+    }
 
     return $Result;
   }

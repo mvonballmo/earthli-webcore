@@ -35,7 +35,9 @@ http://www.earthli.com/software/webcore
 
     $form->process_new ($group);
     if ($form->committed ())
+    {
       $Env->redirect_local ($group->home_page ());
+    }
 
     $Page->title->subject = 'Create Group';
 
@@ -59,5 +61,7 @@ http://www.earthli.com/software/webcore
     $Page->finish_display ();
   }
   else
+  {
     $Page->raise_security_violation ('You are not allowed to create groups.');
+  }
 ?>

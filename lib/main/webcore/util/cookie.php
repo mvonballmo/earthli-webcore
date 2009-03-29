@@ -83,7 +83,9 @@ class COOKIE extends CLIENT_STORAGE
   function _read ($key)
   {
     if (isset ($_COOKIE [$key]))
+    {
       return $_COOKIE [$key];
+    }
   }
 
   /**

@@ -85,7 +85,9 @@ class RECIPE_GRID extends CONTENT_OBJECT_GRID
   <div class="grid-title">
   <?php
     if ($this->show_folder)
+    {
       echo $folder->title_as_link () . $this->app->display_options->object_separator;
+    }
     echo $this->obj_link ($obj);
   ?>
   </div>
@@ -108,7 +110,9 @@ class RECIPE_GRID extends CONTENT_OBJECT_GRID
       }
   
       if ($obj->description && ! $this->items_are_selectable)
+      {
         echo $obj->description_as_html ();
+      }
     ?>
   </div>
   <?php

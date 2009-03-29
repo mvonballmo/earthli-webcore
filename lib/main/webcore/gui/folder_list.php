@@ -90,7 +90,9 @@ class FOLDER_LIST extends SELECT_LIST
       $t = $obj->title_formatter ();
       $t->max_visible_output_chars = 0;
       if ($this->page_name)
+      {
         $t->set_name ($this->page_name);
+      }
       echo $obj->title_as_link ($t);
       break;
     case 2:

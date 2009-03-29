@@ -75,7 +75,9 @@ http://www.earthli.com/software/webcore
     <?php
       }
       else
+      {
         $renderer->display_as_toolbar ($commands);
+      }
     ?>
     <div class="box-body">
     <?php
@@ -158,9 +160,13 @@ http://www.earthli.com/software/webcore
            */
           
           if ($list->paginator->num_pages () > 1)
+          {
             $items_text = ' Showing ' . $list->paginator->first_item_index () . ' - ' . $list->paginator->last_item_index () . ' of ' . $list->paginator->num_items () . ' ' . $type_info->plural_title;                     
+          }
           else
+          {
             $items_text = ' ' . $list->paginator->num_items () . ' ' . $type_info->plural_title;
+          }
       ?>
       <br>
       <h2 id="<?php echo $type_info->id . '_list'; ?>"><?php echo $App->title_bar_icon ($type_info->icon) . $items_text; ?></h2>
@@ -172,7 +178,9 @@ http://www.earthli.com/software/webcore
       </form>
 <?php
       if (isset ($box))
+      {
         $box->finish_column_set ();
+      }
 ?>
     </div>
   </div>
@@ -180,5 +188,7 @@ http://www.earthli.com/software/webcore
     $Page->finish_display ();
   }
   else
+  {
     $Page->raise_security_violation ('You are not allowed to explore this folder.', $folder);
+  }
 ?>

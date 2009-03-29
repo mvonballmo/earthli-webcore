@@ -72,7 +72,9 @@ class FOLDER_SUBSCRIPTION_FORM extends SUBSCRIPTION_FORM
   function _draw_controls (&$renderer)
   {
     if ($this->object_exists ())
+    {
       $selected_folder_ids = $this->_object->subscribed_ids_for (Subscribe_folder);
+    }
 
     $folder_query = $this->login->folder_query ();
     $folders = $folder_query->tree ($this->app->root_folder_id);
@@ -116,7 +118,9 @@ class FOLDER_SUBSCRIPTION_FORM extends SUBSCRIPTION_FORM
 
     $renderer->draw_separator ();
     if (! empty ($buttons))
+    {
       $renderer->draw_buttons_in_row ($buttons);
+    }
 
     $renderer->finish ();
   }

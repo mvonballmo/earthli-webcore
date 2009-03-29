@@ -100,14 +100,18 @@ class PICTURE_GRID extends ALBUM_ENTRY_GRID
   <div class="chart-title" style="text-align: center">
   <?php
     if ($this->show_folder)
+    {
       echo $folder->title_as_link () . $this->app->display_options->object_separator;
+    }
     echo $this->obj_link ($obj);
   ?>
   </div>
   <div class="chart-body" style="text-align: center">
     <?php
       if ($this->show_controls)
+      {
         $this->_draw_menu_for ($obj, Menu_size_minimal, Menu_align_right);
+      }
       $this->_url->replace_argument ('id', $obj->id);
     ?>
     <p style="clear: both">

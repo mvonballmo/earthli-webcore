@@ -160,7 +160,9 @@ class OBJECT_NAVIGATOR extends WEBCORE_OBJECT
   function controls ()
   {
     if (! isset ($this->_controls))
+    {
       $this->_generate ();
+    }
     return $this->_controls;
   }
 
@@ -171,7 +173,9 @@ class OBJECT_NAVIGATOR extends WEBCORE_OBJECT
   function list_near_selected ()
   {
     if (! isset ($this->_list_near_selected))
+    {
       $this->_generate ();
+    }
     return $this->_list_near_selected;
   }
 
@@ -192,9 +196,11 @@ class OBJECT_NAVIGATOR extends WEBCORE_OBJECT
       // Build the context list
 
       if (! $this->_context->is_on_first_page ())
+      {
         $this->_list_near_selected .= '<div style="text-align: center">' .
                                       $this->_text_for_control ($this->_context->previous_page_object, $this->list_previous_text, 'move_up') .
                                       "</div>\n";
+      }
 
       $objs =& $this->_context->objects_in_window;
 
@@ -202,9 +208,11 @@ class OBJECT_NAVIGATOR extends WEBCORE_OBJECT
         $this->_list_near_selected .= $this->_text_for_list ($obj) . "<br>\n";
 
       if (! $this->_context->is_on_last_page ())
+      {
         $this->_list_near_selected .= '<div style="text-align: center">' .
                                       $this->_text_for_control ($this->_context->next_page_object, $this->list_next_text, 'move_down') .
                                       "</div>\n";
+      }
 
       // Build the navigation controls
 
@@ -261,12 +269,16 @@ class OBJECT_NAVIGATOR extends WEBCORE_OBJECT
     $title = $obj->title_as_plain_text ($t);
 
     if ($icon)
+    {
       $text = $this->app->resolve_icon_as_html ("{icons}buttons/$icon", $title, '16px');
+    }
 
     $title = $this->context->text_options->convert_to_html_attribute ($title);
 
     if ($this->page_anchor)
+    {
       return '<a href="' . $this->_url->as_html () . '#' . $this->page_anchor . '" title="' . $title . '">' . $text . '</a>';
+    }
 
     return '<a href="' . $this->_url->as_html () . '" title="' . $title . '">' . $text . '</a>';
   }
@@ -283,7 +295,9 @@ class OBJECT_NAVIGATOR extends WEBCORE_OBJECT
     $this->_url->replace_argument ('id', $obj->id);
     $t->location = $this->_url->as_text ();
     if ($this->page_anchor)
+    {
       $t->location .= '#' . $this->page_anchor;
+    }
 
     if ($id == $this->_selected)
     {

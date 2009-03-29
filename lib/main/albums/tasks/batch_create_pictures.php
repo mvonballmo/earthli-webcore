@@ -139,9 +139,13 @@ class BATCH_CREATE_PICTURES_TASK extends TASK
 
     @unlink ($this->archive_file_name);
     if (isset ($php_errormsg))
+    {
       $this->_log ("Could not delete archive: " . $php_errormsg, Msg_type_warning);
+    }
     else
+    {
       $this->_log ("Deleted archive.", Msg_type_info);
+    }
   }
 
   /**
@@ -195,16 +199,22 @@ class BATCH_CREATE_PICTURES_TASK extends TASK
           $img->save_to_file ($thumbnail_name);
         }
         else
+        {
           $this->_log ("Could not create thumbnail.", Msg_type_error);
+        }
       }
 
       $pic_date = $this->default_date;
       if ($this->read_exif)
       {
         if ($img->properties->exists () && $img->properties->time_created->is_valid ())
+        {
           $pic_date = $img->properties->time_created;
+        }
         else
+        {
           $this->_log ("Could not read date from file (using default).", Msg_type_warning);
+        }
       }
 
       $pic_title = $this->file_name_template;
@@ -217,7 +227,7 @@ class BATCH_CREATE_PICTURES_TASK extends TASK
       $pic->date = $pic_date;
       $history_item = $pic->new_history_item ();
       $pic->store_if_different ($history_item);
-      $this->_num_pictures_imported++;
+      $this->_num_pictures_imported = $this->_num_pictures_imported + 1;
 
       $this->_log ("Created picture [$pic->title]", Msg_type_info);
     }
@@ -225,9 +235,13 @@ class BATCH_CREATE_PICTURES_TASK extends TASK
     {
       @unlink ($entry->extracted_name);
       if (isset ($php_errormsg))
+      {
         $this->_log ("This is not an image file (could not delete file on server): " . $php_errormsg, Msg_type_error);
+      }
       else
+      {
         $this->_log ("This is not an image file (file was deleted on the server).", Msg_type_warning);
+      }
     }
 
     log_close_block ();

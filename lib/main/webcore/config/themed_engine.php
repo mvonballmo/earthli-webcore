@@ -92,7 +92,9 @@ class THEMED_ENGINE extends ENGINE
     parent::_init_page ($env, $page);
     $this->_init_theme ($page);
     if ($this->use_local_theme)
+    {
       $page->load_theme ();
+    }
   }
 }
 

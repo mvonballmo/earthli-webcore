@@ -89,13 +89,19 @@ class OBJECT_FACTORY extends RAISABLE
     {
       $id = $this->_id_for ($class_name, $context);
       if (! isset ($this->_registered_classes [$id]))
+      {
         $id = $this->_id_for ($class_name);
+      }
     }
     else
+    {
       $id = $this->_id_for ($class_name);
+    }
     
     if (isset ($this->_registered_classes [$id]))
+    {
       $class_name = $this->_load_and_return_class ($id, $file_name);
+    }
     else
     {
       if ($file_name) 
@@ -144,7 +150,9 @@ class OBJECT_FACTORY extends RAISABLE
     foreach ($this->_registered_classes as $id => $item)
     {
       if (strpos ($id, $prefix) === 0)
+      {
         $Result [] = $this->final_class_name ($item->class_name, $item->file_name);
+      }
     }
     return $Result;
   }
@@ -159,9 +167,13 @@ class OBJECT_FACTORY extends RAISABLE
   function _id_for ($class_name, $context = '')
   {
     if ($context)
+    {
       $Result = $class_name . '_{' . $context . '}';
+    }
     else
+    {
       $Result = $class_name;
+    }
     return strtoupper ($Result);
   }
   
@@ -181,11 +193,15 @@ class OBJECT_FACTORY extends RAISABLE
      */
     
     if (! empty ($this->_registered_classes [$class_name]->file_name))
+    {
       include_once ($this->_registered_classes [$class_name]->file_name);
+    }
     else
     {
       if ($file_name)
+      {
         include_once ($file_name);
+      }
     }
     
     return $this->_registered_classes [$class_name]->class_name;

@@ -160,7 +160,9 @@ function log_more ($msg, $has_html = FALSE)
   global $Logger;
 
   if ($Logger)
+  {
     $Logger->record_more ($msg, $has_html);
+  }
 }
 
 /**
@@ -173,7 +175,9 @@ function log_open_block ($title)
   global $Logger;
 
   if ($Logger)
+  {
     $Logger->open_block ($title);
+  }
 }
 
 /**
@@ -185,7 +189,9 @@ function log_close_block ()
   global $Logger;
 
   if ($Logger)
+  {
     $Logger->close_block ();
+  }
 }
 
 /**
@@ -210,9 +216,13 @@ class LOGGER_FILTER_SETTINGS
     $channel = strtolower ($channel);
 
     if (isset ($this->_channels [$channel]))
+    {
       $filter = $this->_channels [$channel];
+    }
     else
+    {
       $filter = $this->_default_filter;
+    }
 
     return $filter & $type;
   }
@@ -335,13 +345,17 @@ class LOGGER extends LOGGER_CONTAINER
   function record ($msg, $type = Msg_type_debug_info, $channel = Msg_channel_default, $has_html = FALSE)
   {
     if ($this->_passes_filter ($channel, $type))
+    {
       $this->_record ($msg, $type, $channel, $has_html);
+    }
 
     $this->_last_channel = $channel;
     $this->_last_type = $type;
 
     if (isset ($this->logger))
+    {
       $this->logger->record ($msg, $type, $channel, $has_html);
+    }
   }
 
   /**
@@ -354,7 +368,9 @@ class LOGGER extends LOGGER_CONTAINER
   {
     $this->_record_more ($msg, $has_html);
     if (isset ($this->logger))
+    {
       $this->logger->record_more ($msg, $has_html);
+    }
   }
 
   /**
@@ -366,7 +382,9 @@ class LOGGER extends LOGGER_CONTAINER
     $this->_block_level++;
     $this->_open_block ($title);
     if (isset ($this->logger))
+    {
       $this->logger->open_block ($title);
+    }
   }
 
   /**
@@ -377,7 +395,9 @@ class LOGGER extends LOGGER_CONTAINER
     $this->_block_level--;
     $this->_close_block ();
     if (isset ($this->logger))
+    {
       $this->logger->close_block ();
+    }
   }
 
   /**
@@ -388,7 +408,9 @@ class LOGGER extends LOGGER_CONTAINER
   {
     $this->_close ();
     if (isset ($this->logger))
+    {
       $this->logger->close ();
+    }
   }
 
   /**

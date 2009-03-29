@@ -97,7 +97,9 @@ class CONTROLS_RENDERER extends WEBCORE_OBJECT
     {
       echo $button;
       if ($btn_drawn && ! $this->_supports_css_2)
+      {
         echo '&nbsp';
+      }
       $btn_drawn = TRUE;
     }
   }
@@ -126,10 +128,14 @@ class CONTROLS_RENDERER extends WEBCORE_OBJECT
   function javascript_button_as_html ($title, $action, $icon = '', $icon_size = '16px', $type = 'button')
   {
     if (isset ($icon) && $icon)
+    {
       $title = $this->context->resolve_icon_as_html ($icon, '', $icon_size) . ' ' . $title;
+    }
     $Result = '<button class="button-control" type="' . $type . '" onClick="' . $action . '"';
     if ($this->button_width)
+    {
       $Result .= ' style="width: ' . $this->button_width . '"';
+    }
     return $Result . '>' . $title . "</button>\n";
   }
 
@@ -153,7 +159,9 @@ class CONTROLS_RENDERER extends WEBCORE_OBJECT
   function submit_button_as_html ($title, $icon = '', $script = null, $icon_size = '16px')
   {
     if (! isset ($script))
+    {
       $script = 'submit_form';
+    }
     return $this->javascript_button_as_html ($title, $script . ' (\'' . $this->_form->name . '\', '
                                              . $this->submit_all_fields . ', '
                                              . "'" . $this->_form->_form_based_field_name ('submitted') . "', "

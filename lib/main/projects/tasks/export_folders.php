@@ -46,9 +46,13 @@ http://www.earthli.com/software/webcore/projects
         $parent =& $folder->parent_folder ();
 
         if ($parent)
+        {
           fwrite ($fhandle, "<folder name=\"" . $folder->title_as_plain_text () . "\" parent=\"" . $parent->title_as_plain_text () . "\" id=\"$folder->id\"/>\n");
+        }
         else
+        {
           fwrite ($fhandle, "<folder name=\"" . $folder->title_as_plain_text () . "\" id=\"$folder->id\"/>\n");
+        }
 
         echo "Exported [" . $folder->title_as_plain_text () . "]<br>";
 
@@ -70,7 +74,9 @@ http://www.earthli.com/software/webcore/projects
   $fhandle = fopen ($fn, 'w+');
 
   if (! $fhandle)
+  {
     raise ("Could not open file [$fn] for folder export.");
+  }
 
   fwrite ($fhandle, "<?xml version=\"1.0\"?>\n");
   fwrite ($fhandle, "<OpusVCS>\n");

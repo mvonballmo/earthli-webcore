@@ -100,7 +100,9 @@ class TREE extends WEBCORE_OBJECT
       if (isset ($this->env->profiler)) $this->env->profiler->start ('ui');
       
       if (isset ($this->decorator))
+      {
         $this->decorator->pre_iterate ();
+      }
   
       $this->_depth = 0;
       $this->_stack = array ();
@@ -109,7 +111,9 @@ class TREE extends WEBCORE_OBJECT
       $this->finish ();
   
       if (isset ($this->decorator))
+      {
         $this->decorator->post_iterate ();
+      }
   
       if (isset ($this->env->profiler)) $this->env->profiler->stop ('ui');
     }
@@ -257,11 +261,17 @@ class TREE extends WEBCORE_OBJECT
     $title = $this->node_info->title_for ($node);
     
     if ($icon)
+    {
       echo ' ' . $icon . ' '; 
+    }
     if (isset ($this->decorator))
+    {
       $this->decorator->draw ($node, $title);
+    }
     else
+    {
       echo $title;
+    }
   }
 
   /**
@@ -285,9 +295,13 @@ class TREE extends WEBCORE_OBJECT
         foreach ($this->_stack as $s)
         {
           if ($s)
+          {
             $this->draw_icon (Tree_line, $node);
+          }
           else
+          {
             $this->draw_icon (Tree_blank, $node);
+          }
         }
       }
 
@@ -296,17 +310,25 @@ class TREE extends WEBCORE_OBJECT
         if ($is_last)
         {
           if ($has_children)
+          {
             $this->draw_icon (Tree_ell_plus, $node);
+          }
           else
+          {
             $this->draw_icon (Tree_ell, $node);
+          }
           array_push ($this->_stack, 0);
         }
         else
         {
           if ($has_children)
+          {
             $this->draw_icon (Tree_tee_plus, $node);
+          }
           else
+          {
             $this->draw_icon (Tree_tee, $node);
+          }
           array_push ($this->_stack, 1);
         }
       }
@@ -340,7 +362,9 @@ class TREE extends WEBCORE_OBJECT
     {
       $node =& $nodes [$i];
       if (isset ($this->decorator))
+      {
         $this->decorator->node_found ($node);
+      }
       $this->iterate_node ($node, $i == $c - 1);
       $i++;
     }
@@ -490,7 +514,9 @@ class TREE_NODE_INFO extends WEBCORE_OBJECT
   function selected (&$node)
   {
     if (isset ($this->selected_nodes))
+    {
       return read_array_index ($this->selected_nodes, $this->id ($node));
+    }
     return FALSE;
   }
   

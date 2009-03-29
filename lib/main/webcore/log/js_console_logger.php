@@ -140,7 +140,9 @@ class JS_CONSOLE_LOGGER extends TEXT_OUTPUT_LOGGER
         $style_sheet_info = "<link rel=\\\"stylesheet\\\" type=\\\"text/css\\\" href=\\\"$css_file_name\\\">";
       }
       else
+      {
         $style_sheet_info = '';
+      }
 ?>
   console.document.write ("<html><head><title><?php echo $this->title; ?></title><?php echo $style_sheet_info; ?></head><body class=\"log-box\">");
   console.document.write ("<p class=\"log-start\">Log started for [<?php echo $this->env->url (Url_part_file_name); ?>] at [<?php echo date ("Y-n-j H:i:s", time ()); ?>]</p>");

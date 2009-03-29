@@ -144,9 +144,13 @@ class NEWSFEED_RENDERER extends WEBCORE_OBJECT
   function set_description_from (&$obj)
   {
     if ($this->html)
+    {
       $this->description = $obj->description_as_html ();
+    }
     else
+    {
       $this->description = $obj->description_as_plain_text ();
+    }
   }
 
   /**
@@ -172,7 +176,9 @@ class NEWSFEED_RENDERER extends WEBCORE_OBJECT
       foreach ($objs as $obj)
       {
         if ($time_modified->less_than ($obj->time_modified))
+        {
           $time_modified = $obj->time_modified;
+        }
       }
     }
 
@@ -189,9 +195,13 @@ class NEWSFEED_RENDERER extends WEBCORE_OBJECT
       $class_name = $this->context->final_class_name ('NEWSFEEDER_RENDERER_OPTIONS');
       $options = new $class_name ();
       if ($this->html)
+      {
         $options->handler_type = Handler_html_renderer;
+      }
       else
+      {
         $options->handler_type = Handler_text_renderer;
+      }
       $options->language = $this->language;
       $class_name = $this->context->final_class_name ('NEWSFEED_PAGE_RENDERER');
       $options->page_renderer = new $class_name ($this->context);
@@ -220,7 +230,9 @@ class NEWSFEED_RENDERER extends WEBCORE_OBJECT
     ob_clean ();
     $type = 'Content-type: ' . $this->content_type;
     if (! empty ($this->character_set))
+    {
       $type .= '; charset=' . $this->character_set;
+    }
     header ($type);
 
     $this->_start_display ($time_modified);
@@ -242,9 +254,13 @@ class NEWSFEED_RENDERER extends WEBCORE_OBJECT
   function _start_display ($time_modified)
   {
     if (! empty ($this->character_set))
+    {
       echo '<?xml version="1.0" encoding="' . $this->character_set . '" ?>';
+    }
     else
+    {
       echo '<?xml version="1.0" ?>';
+    }
     echo '<?xml-stylesheet type="text/css" href="' . $this->context->resolve_file ($this->style_sheet) . '" ?>';
   }
 
@@ -363,9 +379,13 @@ class NEWSFEED_OBJECT_RENDERER extends HANDLER_RENDERER
   function _content_for (&$obj, $options = null)
   {
     if (isset ($options))
+    {
       $handler_type = $options->handler_type;
+    }
     else
+    {
       $handler_type = Handler_text_renderer;
+    }
 
     $renderer = $obj->handler_for ($handler_type);
     $obj_options =& $renderer->options ();
@@ -397,9 +417,13 @@ class NEWSFEED_OBJECT_RENDERER extends HANDLER_RENDERER
   function _is_html ($options)
   {
     if (isset ($options))
+    {
       $Result = $options->handler_type == Handler_html_renderer;
+    }
     else
+    {
       $Result = FALSE;
+    }
     return $Result;
   }
 
@@ -522,9 +546,12 @@ class NEWSFEED_FOOTNOTE_TEXT_REPLACER extends HTML_FOOTNOTE_TEXT_REPLACER
   function _format_text (&$token, &$info)
   {
     if (! $token->is_start_tag ())
+    {
       return '</div>';
-    else
-      return parent::_format_text ($token, $info);
+    }
+
+
+    return parent::_format_text ($token, $info);
   }
 }
 

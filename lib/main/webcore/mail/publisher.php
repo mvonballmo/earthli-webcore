@@ -138,7 +138,9 @@ class PUBLISHER extends LOGGABLE
           foreach ($history_item_ids as $history_item_id)
           {
             if (! isset ($query_history_items [$history_item_id]) && ! isset ($queued_history_item_ids [$history_item_id]))
+            {
               $queued_history_item_ids [$history_item_id] = $history_item_id;
+            }
           }
         }
       }
@@ -162,10 +164,14 @@ class PUBLISHER extends LOGGABLE
            want a sort by folder id, object type, object id. ... */
       }
       else
+      {
         $history_items = $queued_history_items;
+      }
     }
     else
+    {
       $history_items = $query_history_items;
+    }
 
     $num_history_items = sizeof ($history_items);
 
@@ -205,7 +211,9 @@ class PUBLISHER extends LOGGABLE
           }
         }
         else
+        {
           $this->record ('Empty object type was ignored (bad data).', Msg_type_warning);
+        }
       }
 
       /* Build a list of subscribers, with structure [email].objects[folder][type][id].history_items */
@@ -271,7 +279,9 @@ class PUBLISHER extends LOGGABLE
               }
             }
             else
+            {
               $this->record ("Object [$object_type][$object_id] was not found.", Msg_type_warning);
+            }
           }
         }
       }
@@ -292,10 +302,14 @@ class PUBLISHER extends LOGGABLE
           $ids_for_subscriber = join (',', $history_item_ids);
           $this->record ("$subscriber->email: [$num_ids] subscribed items found.");
           if ($num_ids)
+          {
             $this->record ("$subscriber->email: Queued [$ids_for_subscriber].", Msg_type_debug_info);
+          }
           $subscriber->add_queued_history_items ($ids_for_subscriber);
           if (! $this->testing)
+          {
             $subscriber->store ();
+          }
         }
       }
 
@@ -324,9 +338,13 @@ class PUBLISHER extends LOGGABLE
           $num_objects = $subscriber_rec->num_objects;
 
           if ($subscriber->group_history_items)
+          {
             $num_items = $num_objects;
+          }
           else
+          {
             $num_items = $num_history_items;
+          }
 
           if ($subscriber->max_individual_messages && ($num_items > $subscriber->max_individual_messages))
           {
@@ -360,7 +378,9 @@ class PUBLISHER extends LOGGABLE
                   {
                     $item->num_items = $num_objects_in_message;
                     if ($num_objects_in_message == 1)
+                    {
                       $item->set_subject ($last_obj_rec->object->title_for_history_item ($last_obj_rec->history_items [0], $subscriber));
+                    }
                     $items [] = $item;
 
                     $item = new PUBLISHER_MESSAGE ($this, $subscriber);
@@ -374,7 +394,9 @@ class PUBLISHER extends LOGGABLE
             {
               $item->num_items = $num_objects_in_message;
               if ($num_objects_in_message == 1)
+              {
                 $item->set_subject ($last_obj_rec->object->title_for_history_item ($last_obj_rec->history_items [0], $subscriber));
+              }
               $items [] = $item;
             }
           }
@@ -407,7 +429,9 @@ class PUBLISHER extends LOGGABLE
                     {
                       $item = new PUBLISHER_MESSAGE ($this, $subscriber);
                       if ($subscriber->show_history_items)
+                      {
                         $item->add_object ($history_item);
+                      }
                       $item->add_main_object ($obj_rec->object);
                       $item->set_subject ($obj_rec->object->title_for_history_item ($history_item, $subscriber));
                       $item->num_items = 1;
@@ -446,7 +470,9 @@ class PUBLISHER extends LOGGABLE
     $this->record ("Marked [$num_history_items] items in [$table_name] as published.");
     $this->record ("Marked [$all_affected_history_item_ids] in [$table_name] as published.", Msg_type_debug_info);
     if (! $this->testing)
+    {
       $this->db->logged_query ("UPDATE $table_name SET publication_state = '" . History_item_sent . "' WHERE id IN ($all_affected_history_item_ids)");
+    }
   }
 
   /**
@@ -461,7 +487,9 @@ class PUBLISHER extends LOGGABLE
     $this->record ("$subscriber->email: Cleared queued history items from database.");
     $subscriber->clear_queued_history_items ();
     if (! $this->testing)
+    {
       $subscriber->store ();
+    }
   }
 
   /**
@@ -482,7 +510,9 @@ class PUBLISHER extends LOGGABLE
       {
         $subscriber = $item->subscriber;
         if (isset ($last_subscriber) && (strcmp ($subscriber->email, $last_subscriber->email) != 0))
+        {
           $this->_clear_queued_history_items_for ($last_subscriber);
+        }
 
         if ($subscriber->email)
         {
@@ -492,19 +522,27 @@ class PUBLISHER extends LOGGABLE
           {
             echo "<p class=\"field\">$msg->subject</p>";
             if ($msg->send_as_html)
+            {
               echo '<div class="chart"><div class="chart-body">' . $msg->body . '</div></div>';
+            }
             else
+            {
               echo "<pre>$msg->body</pre>";
+            }
           }
 
           $this->record ("$subscriber->email: Sent [$msg->subject].");
           $this->record ("$subscriber->email: Contents of [$msg->subject] are [$item->identifier].", Msg_type_debug_info);
 
           if (! $this->testing)
+          {
             $msg->send ($this->provider);
+          }
         }
         else
+        {
           $this->record ("Subscriber [$subscriber->id] has no email address (but has subscriptions).", Msg_type_warning);
+        }
 
         $last_subscriber = $subscriber;
       }
@@ -552,9 +590,13 @@ class PUBLISHER extends LOGGABLE
         $mail_renderer->add ($obj, $this->_renderer_for ($obj));
 
       if ($item->subscriber->send_as_html)
+      {
         $Result = $mail_renderer->as_html ($item->rendering_options ());
+      }
       else
+      {
         $Result = $mail_renderer->as_text ($item->rendering_options ());
+      }
 
       $this->_renderered_bodies [$item->identifier] = $Result;
     }
@@ -782,7 +824,9 @@ class PUBLISHER_MESSAGE extends WEBCORE_OBJECT
     $class_name = $this->app->final_class_name ('MAIL_OBJECT_RENDERER_OPTIONS', 'webcore/mail/mail_object_renderer.php');
     $Result = new $class_name ();
     if (! $Result->ignore_subscriber_preferred_text_length)
-    	$Result->preferred_text_length = $this->subscriber->preferred_text_length;
+    {
+      	$Result->preferred_text_length = $this->subscriber->preferred_text_length;
+    }
     $Result->num_items = $this->num_items;
     $Result->content_summary = $this->_subject->as_text ();
     return $Result;

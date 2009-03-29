@@ -37,7 +37,9 @@ http://www.earthli.com/software/webcore
     
   $form->process ($browser);
   if ($form->committed ())
+  {
     $Env->redirect_local ('exception_submitted.php');
+  }
 
   $Page->location->add_root_link ();
   $Page->location->append ('Support');

@@ -174,7 +174,9 @@ class OBJECT_IN_FOLDER_SUMMARY_GRID extends CONTENT_OBJECT_GRID
         echo $this->app->display_options->object_separator;
       }
       if ($folder->icon_url)
+      {
         echo $folder->icon_as_html ('16px') . ' ';
+      }
       echo $folder->title_as_link ();
       echo '<br>';
       $folder =& $folder->parent_folder ();

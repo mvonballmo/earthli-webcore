@@ -57,7 +57,9 @@ http://www.earthli.com/software/webcore
       <?php
         echo $Page->title->subject;
         if ($form->committed ())
+        {
           echo " ($num_search_results found)";
+        }
       ?>
     </div>
     <div class="box-body">
@@ -78,7 +80,9 @@ http://www.earthli.com/software/webcore
     <?php
       }
       else
+      {
         $form->display ();
+      }
     ?>
     </div>
   </div>
@@ -86,5 +90,7 @@ http://www.earthli.com/software/webcore
     $Page->finish_display ();
   }
   else
+  {
     $Page->raise_security_violation ("Cannot search for objects of type [$search_type]");
+  }
 ?>

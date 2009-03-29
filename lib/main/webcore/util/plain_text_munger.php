@@ -86,7 +86,9 @@ class PLAIN_TEXT_BLOCK_TRANSFORMER extends MUNGER_BLOCK_TRANSFORMER
     case Munger_first_data_block:
     case Munger_only_data_block:
       if (! $this->strict_newlines && ($len > 0) && ($text [0] == "\n"))
+      {
         $first_char = 1;
+      }
       break;
 
     }
@@ -96,12 +98,16 @@ class PLAIN_TEXT_BLOCK_TRANSFORMER extends MUNGER_BLOCK_TRANSFORMER
     case Munger_only_data_block:
     case Munger_last_data_block:
       if (! $this->strict_newlines && ($len > 0) && ($text [$len - 1] == "\n"))
+      {
         $new_len = -1;
+      }
       break;
     }
 
     if (($first_char > 0) || ($new_len != $len))
+    {
       $text = substr ($text, $first_char, $new_len);
+    }
 
     return $text;
   }
@@ -256,7 +262,9 @@ class PLAIN_TEXT_QUOTE_TRANSFORMER extends PLAIN_TEXT_BLOCK_TRANSFORMER
   {
     parent::activate ($munger, $value, $token);
     if ($value)
+    {
       $this->_quote_style = $this->_quote_style_from_token ($value, $token);
+    }
   }
 
   /**
@@ -319,12 +327,18 @@ class PLAIN_TEXT_LINK_REPLACER extends MUNGER_REPLACER
     {
       $Result = '"';
       if ($this->_author)
+      {
         $Result .= ' by ' . $this->_author;
+      }
       if (($this->_format == 'all') || ($this->_format == 'url'))
+      {
         $Result .= " <$this->_href>";
+      }
 
       if (($this->_format == 'all') && ($this->_title))
+      {
         $Result .= " ($this->_title)";
+      }
 
       return $Result;
     }
@@ -398,7 +412,9 @@ class PLAIN_TEXT_MEDIA_REPLACER extends MUNGER_REPLACER
 
       $format = read_array_index ($attrs, 'format');
       if (empty ($format))
+      {
         $format = 'alt';
+      }
 
       if ($format != 'none')
       {
@@ -410,15 +426,21 @@ class PLAIN_TEXT_MEDIA_REPLACER extends MUNGER_REPLACER
         $href = read_array_index ($attrs, 'href', $src);
 
         if (! $alt)
+        {
           $alt = $this->_default_title ();
+        }
 
         $Result = "[$alt]";
 
         if ((($format == 'all') || ($format == 'url')) && ! empty ($href))
+        {
           $Result .= " <$href>";
+        }
 
         if (($format == 'all') && $title && ($title != $alt))
+        {
           $Result .= " ($title)";
+        }
       }
 
       return $Result;
@@ -485,7 +507,9 @@ class PLAIN_TEXT_FOOTNOTE_TEXT_REPLACER extends MUNGER_FOOTNOTE_TEXT_REPLACER
   function _format_text (&$token, &$info)
   {
     if ($token->is_start_tag ())
+    {
       return "[$info->number] ";
+    }
   }
 }
 
@@ -520,9 +544,13 @@ class PLAIN_TEXT_LIST_TRANSFORMER extends MUNGER_LIST_TRANSFORMER
   function activate (&$munger, $value, &$token)
   {
     if ($value)
+    {
       $munger->increase_indent_by ($this->spaces_to_indent);
+    }
     else
+    {
       $munger->decrease_indent_by ($this->spaces_to_indent);
+    }
 
     $this->_indent = $munger->num_spaces;
     $this->_depth = $munger->num_indents;
@@ -539,13 +567,17 @@ class PLAIN_TEXT_LIST_TRANSFORMER extends MUNGER_LIST_TRANSFORMER
   function _transform_to_list (&$munger, $text, $item_was_open)
   {
     if ($this->_item_is_open && ! $item_was_open)
+    {
       $prefix = $this->_make_mark ();
+    }
     elseif ($item_was_open && ! $this->_item_is_open)
       $prefix = $this->_make_mark (' ');
     elseif (! $this->_item_is_open)
       $prefix = $this->_make_mark ();
     else
+    {
       $prefix = $this->_make_mark (' ');
+    }
 
     $Result = $prefix . $this->_generate_list_items ($munger, $text);
 
@@ -581,7 +613,9 @@ class PLAIN_TEXT_LIST_TRANSFORMER extends MUNGER_LIST_TRANSFORMER
     {
       $Result .= $munger->wrap (ltrim ($lines [$idx]), $this->_indent + strlen ($this->_last_mark));
       if ($idx < $count - 1)
+      {
         $Result .= $this->_make_mark ();
+      }
       $idx++;
     }
 
@@ -598,7 +632,9 @@ class PLAIN_TEXT_LIST_TRANSFORMER extends MUNGER_LIST_TRANSFORMER
   function _make_mark ($mark = null)
   {
     if (! isset ($mark))
+    {
       $mark = $this->default_mark;
+    }
     $mark .= ' ';
     $this->_last_mark = $mark;
     return "\n" . str_repeat (' ', $this->_indent) . $mark;
@@ -654,7 +690,9 @@ class PLAIN_TEXT_NUMERIC_LIST_TRANSFORMER extends PLAIN_TEXT_LIST_TRANSFORMER
       $mark = $this->_current_mark . '.';
     }
     else
+    {
       $mark = str_repeat (' ', strlen ($this->_current_mark) + 1);
+    }
 
     return parent::_make_mark ($mark);
   }
@@ -694,9 +732,13 @@ class PLAIN_TEXT_DEFINITION_LIST_TRANSFORMER extends MUNGER_DEFINITION_LIST_TRAN
   {
     parent::activate ($munger, $value, $token);
     if ($value)
+    {
       $munger->increase_indent_by ($this->spaces_to_indent);
+    }
     else
+    {
       $munger->decrease_indent_by ($this->spaces_to_indent);
+    }
     $this->_indent = $munger->num_spaces;
   }
 
@@ -736,9 +778,13 @@ class PLAIN_TEXT_DEFINITION_LIST_TRANSFORMER extends MUNGER_DEFINITION_LIST_TRAN
     {
       $line = $munger->wrap ($line, $this->_indent);
       if ($line [0] == "\n")
+      {
         $Result = $line . $Result;
+      }
       else
+      {
         $Result = "\n" . str_repeat (' ', $this->spaces_to_indent) . $line . $Result;
+      }
     }
     return $Result;
   }
@@ -782,15 +828,21 @@ class PLAIN_TEXT_PREFORMATTED_TRANSFORMER extends MUNGER_TRANSFORMER
       if ($text [$len - 1] == "\n")
       {
         if (($len > 1) && ($text [$len - 2] == "\n"))
+        {
           $num_chars = -2;
+        }
         else
+        {
           $num_chars = -1;
+        }
       }
       break;
     }
 
     if (($first_char > 0) || ($num_chars != $len))
+    {
       $text = substr ($text, $first_char, $num_chars);
+    }
 
     return $text;
   }
@@ -830,7 +882,9 @@ class PLAIN_TEXT_BOX_REPLACER extends MUNGER_REPLACER
     else
     {
       if ($this->_title)
+      {
         return "\n" . str_repeat ('-', strlen ($this->_title) + 4);
+      }
     }
   }
 }
@@ -856,7 +910,9 @@ class PLAIN_TEXT_HORIZONTAL_RULE_REPLACER extends MUNGER_REPLACER
   function transform (&$munger, &$token)
   {
     if ($token->is_start_tag ())
+    {
       return str_repeat ('-', $munger->available_width ()) . "\n";
+    }
   }
 }
 
@@ -941,7 +997,9 @@ class TEXT_MUNGER extends MUNGER
     $this->num_indents--;
     $this->num_spaces -= $num_spaces;
     if ($this->num_spaces < 0)
+    {
       log_message ('Indent level dropped below zero.', Msg_type_warning, Msg_channel_munger);
+    }
   }
 
   /**
@@ -977,7 +1035,9 @@ class TEXT_MUNGER extends MUNGER
     {
       $text = wordwrap ($text, $desired_width);
       if ($left_margin)
+      {
         $text = str_replace ("\n", "\n" . str_repeat (' ', $left_margin), $text);
+      }
     }
 
     return $text;

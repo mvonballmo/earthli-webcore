@@ -255,11 +255,16 @@ class BROWSER
     $forwarded = read_array_index ($_SERVER, 'HTTP_X_FORWARDED_FOR');
     $remote_addr = read_array_index ($_SERVER, 'REMOTE_ADDR');
     if ($forwarded)
+    {
       return $forwarded;
+    }
     else if ($remote_addr)
-      return $remote_addr;
-    else
-      return read_array_index ($_SERVER, 'REMOTE_HOST');
+ {
+   return $remote_addr;
+ }
+
+
+    return read_array_index ($_SERVER, 'REMOTE_HOST');
   }
 
   /**
@@ -336,7 +341,9 @@ class BROWSER
     $n = strtolower ($this->name ());
 
     if (strpos ($n, 'opera') !== FALSE)
+    {
       $Result = 'opera1_t';
+    }
     elseif (strpos ($n, 'firefox') !== FALSE)
       $Result = 'firefox';
     elseif (strpos ($n, 'omniweb') !== FALSE)
@@ -352,7 +359,9 @@ class BROWSER
     elseif (strpos ($n, 'chrome') !== FALSE)
       $Result = 'chrome';
     else
+    {
       $Result = '';
+    }
 
     return $Result;
   }
@@ -403,13 +412,18 @@ class BROWSER
     {
       $Result = $this->_ua->system_name;
       if ($this->_ua->system_version)
+      {
         $Result .= ' ' . $this->_ua->system_version;
+      }
       if (strcasecmp ($this->_ua->system_name, $this->_ua->calculated_system_name) != 0)
+      {
         $Result .= ' (' . $this->_ua->calculated_system_name . ')';
+      }
       return $Result;
     }
-    else
-      return $this->_ua->calculated_system_name;
+
+
+    return $this->_ua->calculated_system_name;
   }
 
   /**
@@ -507,9 +521,13 @@ class BROWSER
     $eng_name = $this->renderer_name () . ' ' . $this->renderer_version ();
 
     if ($app_name == $eng_name)
+    {
       $Result = $app_name;
+    }
     else
+    {
       $Result = "$app_name - $eng_name";
+    }
 
     if ($this->is (Browser_gecko))
     {
@@ -519,7 +537,9 @@ class BROWSER
         $t = $gd->formatter ();
         $t->type = Date_time_format_date_only;
         if ($text_only)
+        {
           $t->clear_flags ();
+        }
         $Result .= ' (Released ' . $gd->format ($t) . ')';
       }
     }
@@ -778,7 +798,9 @@ class USER_AGENT_PARSER
   {
     $Result = $version;
     if (($Result [0] == 'v') || ($Result [0] == 'V'))
+    {
       $Result = substr ($Result, 1);
+    }
     return $Result;
   }
 
@@ -793,7 +815,9 @@ class USER_AGENT_PARSER
     $parts = null; // Compiler warning
     preg_match ('/([0-9]{4})([0-9]{2})([0-9]{2})/', $version, $parts);
     if (sizeof ($parts))
+    {
       return new DATE_TIME (mktime (0, 0, 0, $parts [2], $parts [3], $parts [1]));
+    }
     return null;
   }
 
@@ -819,7 +843,9 @@ class USER_AGENT_PARSER
         foreach ($keys as $key)
           $match = $match && ($this->_contains ($raw_data, $key));
         if ($match)
+        {
           $props->calculated_system_name = $value;
+        }
       }
     }
 
@@ -828,16 +854,24 @@ class USER_AGENT_PARSER
      */
 
     if ($props->system_name == Browser_unknown)
+    {
       $props->system_name = $props->calculated_system_name;
+    }
 
     /* Set the standard OS id, if one exists. */
 
     if ($this->_contains ($props->calculated_system_name, 'Windows'))
+    {
       $props->os_id = Browser_os_windows;
+    }
     if ($this->_contains ($props->calculated_system_name, 'MacOS'))
+    {
       $props->os_id = Browser_os_mac;
+    }
     if ($this->_contains ($props->calculated_system_name, 'Linux'))
+    {
       $props->os_id = Browser_os_linux;
+    }
   }
 
   /**
@@ -854,7 +888,9 @@ class USER_AGENT_PARSER
       foreach ($robot_names as $n)
       {
         if ($this->_contains (strtolower ($props->name), $n))
+        {
           $props->renderer_id = Browser_robot;
+        }
       }
     }
   }
@@ -1149,9 +1185,13 @@ class USER_AGENT_RENDERER_INFO
     $this->id = $id;
     $this->technology_name = $tech;
     if ($disp)
+    {
       $this->display_name = $disp;
+    }
     else
+    {
       $this->display_name = $tech;
+    }
     $this->precedence = $prec;
   }
 

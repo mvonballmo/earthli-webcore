@@ -64,7 +64,9 @@ class ICON_RENDERER extends OBJECT_RENDERER
     <?php
       echo $obj->title_as_html ();
       if ($obj->category)
+      {
         echo " ($obj->category)";
+      }
     ?>
   </div>
 </div>

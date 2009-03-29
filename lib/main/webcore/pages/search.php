@@ -38,7 +38,9 @@ http://www.earthli.com/software/webcore
     {
       $id = read_var ('id');
       if (! $id)
+      {
         $id = $App->root_folder_id;
+      }
       
       $folder_query = $App->login->folder_query ();
       $folder =& $folder_query->object_at_id ($id);
@@ -64,7 +66,9 @@ http://www.earthli.com/software/webcore
       $Page->title->add_object ($folder);          
     }
     else
+    {
       $Page->location->add_root_link ();
+    }
 
     $Page->location->append ($Page->title->subject);
 
@@ -91,9 +95,13 @@ http://www.earthli.com/software/webcore
     <div id="search-results" class="box-title">
     <?php 
       if ($num_search_results == 1)
+      {
         echo $num_search_results . ' Result';
+      }
       else
+      {
         echo $num_search_results . ' Results';
+      }
     ?>
     </div>
     <div class="box-body">
@@ -118,5 +126,7 @@ http://www.earthli.com/software/webcore
     $Page->finish_display ();
   }
   else
+  {
     $Page->raise_security_violation ("Cannot search for objects of type [$search_type]");
+  }
 ?>

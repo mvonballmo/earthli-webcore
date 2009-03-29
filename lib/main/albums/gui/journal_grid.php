@@ -93,7 +93,9 @@ class JOURNAL_GRID extends ALBUM_ENTRY_GRID
       <div class="grid-title">
         <?php
           if ($this->show_folder)
+          {
             echo $folder->title_as_link () . $this->app->display_options->object_separator;
+          }
           echo $this->obj_link ($obj);
         ?>
       </div>

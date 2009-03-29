@@ -96,9 +96,13 @@ class PROJECT_ENTRY_HISTORY_ITEM extends ENTRY_HISTORY_ITEM
         foreach ($orig_branches as $branch_id => $orig_branch)
         {
           if (! isset ($new_branches [$branch_id]))
+          {
             $this->record_difference ('Removed from branch [' . $orig_branch->title_as_plain_text () . '].');
+          }
           else
+          {
             $this->_record_branch_differences ($orig_branch, $new_branches [$branch_id]);
+          }
         }
       }
 
@@ -107,13 +111,17 @@ class PROJECT_ENTRY_HISTORY_ITEM extends ENTRY_HISTORY_ITEM
         foreach ($new_branches as $branch_id => $new_branch)
         {
           if (! isset ($orig_branches [$branch_id]))
+          {
             $this->record_difference ('Added to branch [' . $new_branch->title_as_plain_text () . '].');
+          }
         }
       }
     }
 
     if ($orig->main_branch_id != $new->main_branch_id)
+    {
       $this->_record_object_difference ('Main branch', $orig->main_branch_info (), $new->main_branch_info ());
+    }
   }
 
   /**
@@ -152,14 +160,18 @@ class JOB_HISTORY_ITEM extends PROJECT_ENTRY_HISTORY_ITEM
   function _record_differences (&$orig, &$new)
   {
     if ($orig->reporter_id != $new->reporter_id)
+    {
       $this->_record_object_difference ('Reporter', $orig->reporter (), $new->reporter ());
+    }
 
     parent::_record_differences ($orig, $new);
 
     $this->_record_time_difference ('Time needed', $orig->time_needed, $new->time_needed);
 
     if ($orig->assignee_id != $new->assignee_id)
+    {
       $this->_record_object_difference ('Assignee', $orig->assignee (), $new->assignee ());
+    }
   }
 
   /**
@@ -212,7 +224,9 @@ class CHANGE_HISTORY_ITEM extends PROJECT_ENTRY_HISTORY_ITEM
     $this->_record_text_difference ('Files', $orig->files, $new->files);
 
     if ($orig->job_id != $new->job_id)
+    {
       $this->_record_object_difference ('Job', $orig->job (), $new->job (), '(no job)', '\'', '\'');
+    }
 
     parent::_record_differences ($orig, $new);
   }
@@ -246,7 +260,9 @@ class BRANCH_HISTORY_ITEM extends OBJECT_IN_FOLDER_HISTORY_ITEM
     parent::_record_differences ($orig, $new);
 
     if ($orig->parent_release_id != $new->parent_release_id)
+    {
       $this->_record_object_difference ('Based-on release', $orig->parent_release (), $new->parent_release ());
+    }
   }
 }
 
@@ -336,7 +352,9 @@ class PROJECT_HISTORY_ITEM extends FOLDER_HISTORY_ITEM
     parent::_record_differences ($orig, $new);
 
     if ($orig->trunk_id != $new->trunk_id)
+    {
       $this->_record_object_difference ('Trunk', $orig->trunk (), $new->trunk ());
+    }
 
     $orig_options =& $orig->options ();
     $new_options =& $new->options ();
@@ -348,13 +366,19 @@ class PROJECT_HISTORY_ITEM extends FOLDER_HISTORY_ITEM
     }
 
     if (($orig_options->assignee_group_type != $new_options->assignee_group_type) || ($orig_options->assignee_group_id != $new_options->assignee_group_id))
+    {
       $this->_record_string_difference ('Assignees', $this->_text_for_assignee_options ($orig_options), $this->_text_for_assignee_options ($new_options));
+    }
 
     if (($orig_options->reporter_group_type != $new_options->reporter_group_type) || ($orig_options->reporter_group_id != $new_options->reporter_group_id))
+    {
       $this->_record_string_difference ('Reporters', $this->_text_for_reporter_options ($orig_options), $this->_text_for_reporter_options ($new_options));
+    }
       
     if ($orig_options->seconds_until_deadline != $new_options->seconds_until_deadline)
+    {
       $this->_record_string_difference ('Release Warning', $orig_options->release_warning_description (), $new_options->release_warning_description ());
+    }
   }
 
   /**

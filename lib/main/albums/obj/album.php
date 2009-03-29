@@ -242,12 +242,18 @@ class ALBUM extends FOLDER
   function format_date ($d, $f = 0)
   {
     if (! $f)
+    {
       $f = $d->formatter ();
+    }
 
     if ($this->show_times)
+    {
       $f->type = Date_time_format_date_and_time;
+    }
     else
+    {
       $f->type = Date_time_format_date_only;
+    }
 
     $f->show_local_time = FALSE;
     $f->show_time_zone = FALSE;
@@ -265,7 +271,9 @@ class ALBUM extends FOLDER
   function temperature_as_html ($temp)
   {
     if ($this->show_celsius)
+    {
       return "$temp&deg;C";
+    }
     else
     {
       $temp = round (($temp * 9) / 5) + 32;
@@ -284,7 +292,9 @@ class ALBUM extends FOLDER
   {
     $parts = Date_time_date_part;
     if ($this->show_times)
+    {
       $parts = Date_time_both_parts;
+    }
     return ! $this->first_day->equals ($this->last_day, $parts);
   }
   
@@ -297,9 +307,13 @@ class ALBUM extends FOLDER
   function is_valid_date ($date)
   {
     if ($this->show_times)
+    {
       $parts = Date_time_both_parts;
+    }
     else
+    {
       $parts = Date_time_date_part;
+    }
     
     return ((($this->first_day_mode == Day_mode_adjust) || ($this->first_day->less_than_equal ($date, $parts)))
             &&
@@ -311,15 +325,22 @@ class ALBUM extends FOLDER
   function date_style ()
   {
     if ($this->first_day_mode == Day_mode_adjust)
+    {
       return Album_is_adjusted;
+    }
     
     if ($this->last_day_mode == Day_mode_today)
+    {
       return Album_is_journal;
+    }
 
     if ($this->first_day->equals ($this->last_day, Date_time_date_part))
+    {
       return Album_is_single_day;
-    else
-      return Album_is_span;
+    }
+
+
+    return Album_is_span;
   }
 
   /**
@@ -379,7 +400,9 @@ class ALBUM extends FOLDER
     if (($first == Day_mode_adjust) || ($last == Day_mode_adjust))
     {
       if (($first != $old_first) || ($last != $old_last))
+      {
         $this->refresh_dates ();
+      }
     }
   }
   
@@ -405,7 +428,9 @@ class ALBUM extends FOLDER
         $this->db->logged_query ("SELECT date FROM {$this->app->table_names->entries} entry" .
                                  " WHERE entry.folder_id = $this->id ORDER BY entry.date ASC LIMIT 1");
         if ($this->db->next_record ())
+        {
           $this->first_day->set_from_iso ($this->db->f ('date'));
+        }
       }
 
       if ($this->last_day_mode == Day_mode_adjust)
@@ -413,12 +438,16 @@ class ALBUM extends FOLDER
         $this->db->logged_query ("SELECT date FROM {$this->app->table_names->entries} entry" .
                                  " WHERE entry.folder_id = $this->id ORDER BY entry.date DESC LIMIT 1");
         if ($this->db->next_record ())
+        {
           $this->last_day->set_from_iso ($this->db->f ('date'));
+        }
       }
     }
 
     if ($update_now)
+    {
       $this->db->logged_query ("UPDATE {$this->app->table_names->folders} SET first_day = '" . $this->first_day->as_iso () . "', last_day = '" . $this->last_day->as_iso () . "' WHERE id = $this->id");
+    }
   }
   
   /**
@@ -442,7 +471,9 @@ class ALBUM extends FOLDER
       {
         $this->first_day->set_from_php ($day);
         if ($update_now)
+        {
           $this->db->logged_query ("UPDATE {$this->app->table_names->folders} SET first_day = '" . $this->first_day->as_iso () . "' WHERE id = $this->id");
+        }
       }
     }
 
@@ -459,7 +490,9 @@ class ALBUM extends FOLDER
       {
         $this->last_day->set_from_php ($day);
         if ($update_now)
+        {
           $this->db->logged_query ("UPDATE {$this->app->table_names->folders} SET last_day = '" . $this->last_day->as_iso () . "' WHERE id = $this->id");
+        }
       }
     }
   }
@@ -492,15 +525,21 @@ class ALBUM extends FOLDER
     $pic_key = '{pic_image}';
 
     if (strpos ($url, $thumb_key) !== FALSE)
+    {
       $key = $thumb_key;
+    }
     else if (strpos ($url, $pic_key) !== FALSE)
-      $key = $pic_key;
+ {
+   $key = $pic_key;
+ }
 
     if (isset ($key))
     {
       $id = substr ($url, strlen ($key));
       if ($id && ($id [0] == '/'))
+      {
         $id = substr ($id, 1);
+      }
 
       /* Test if it can be an id. If yes, then look up the picture. If no, then assume
          it's a file name and include the id as a url */
@@ -510,16 +549,22 @@ class ALBUM extends FOLDER
         $pic_query->set_type ('picture');
         $pic =& $pic_query->object_at_id ($id);
         if (($key == $thumb_key))
+        {
           $url = $pic->full_thumbnail_name ();
+        }
         else
+        {
           $url = $pic->full_file_name ();
+        }
       }
       else
       {
         $url = new URL ($this->picture_folder_url ());
         $url->append ($id);
         if (($key == $thumb_key))
+        {
           $url->append_to_name ('_tn');
+        }
         $url = $url->as_text ();
       }
     }
@@ -546,9 +591,13 @@ class ALBUM extends FOLDER
     $this->first_day->set_from_iso ($db->f ('first_day'));
 
     if ($this->last_day_mode == Day_mode_today)
+    {
       $this->last_day->set_now ();
+    }
     else
+    {
       $this->last_day->set_from_iso ($db->f ('last_day'));
+    }
   }
 
   /**

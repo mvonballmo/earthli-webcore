@@ -93,9 +93,13 @@ class PERMISSIONS_INHERITANCE_FORM extends ID_BASED_FORM
     $parent =& $folder->parent_folder ();
 
     if (! $this->value_for ('defined'))
+    {
       $permissions_folder =& $folder_query->object_at_id ($folder->permissions_id);
+    }
     else
+    {
       $permissions_folder =& $folder_query->object_at_id ($parent->permissions_id);
+    }
 
     if ($this->login->is_allowed (Privilege_set_folder, Privilege_secure, $permissions_folder))
     {
@@ -104,7 +108,9 @@ class PERMISSIONS_INHERITANCE_FORM extends ID_BASED_FORM
       $title = $permissions_folder->title_as_link ($t);
     }
     else
+    {
       $title = $permissions_folder->title_as_html ();
+    }
       
     if ($folder->defines_security ())
     {

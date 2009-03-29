@@ -61,8 +61,9 @@ class BASIC_CALENDAR extends CALENDAR
     $noon = new DATE_TIME (mktime (12, 0, 0, $month, $day, $year));
 
     if (($this->first_day->less_than_equal ($noon)) && ($noon->less_than_equal ($this->last_day)))
-      // this day is part of this calendar
     {
+      // this day is part of this calendar
+      
       ob_start ();
         $this->_get_content_for_day ($day, $week, $month, $year);
         $content = ob_get_contents ();
@@ -210,9 +211,13 @@ class BASIC_CALENDAR extends CALENDAR
     $first_month = date ("F", mktime (0, 0, 0, $this->_first_empty_month, 1, $this->_first_empty_year));
     $last_month = date ("F", mktime (0, 0, 0, $this->_last_empty_month, 1, $this->_last_empty_year));
     if ($this->_first_empty_month != $this->_last_empty_month)
+    {
       echo "<tr><td class=\"month\" colspan=\"" . Days_in_week . "\">$first_month - $last_month <span class=\"notes\">(No Content)</span></td></tr>\n";
+    }
     else
+    {
       echo "<tr><td class=\"month\" colspan=\"" . Days_in_week . "\">$first_month <span class=\"notes\">(No Content)</span></td></tr>\n";
+    }
     echo "<tr><td colspan=\"" . Days_in_week . "\">&nbsp;</td></tr>\n";
 
     // clears the months as rendered

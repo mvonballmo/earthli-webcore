@@ -34,7 +34,9 @@ http://www.earthli.com/software/webcore
     $security = $folder->security_definition ();
     $perm =& $security->group_permissions_at_id (read_var ('group_id'));
     if ($perm)
+    {
       $group =& $perm->group ();
+    }
   }
 
   if (isset ($group) && $App->login->is_allowed (Privilege_set_folder, Privilege_secure, $folder))
@@ -44,7 +46,9 @@ http://www.earthli.com/software/webcore
 
     $form->process_existing ($perm);
     if ($form->committed ())
+    {
       $App->return_to_referer ($folder->permissions_home_page ());
+    }
 
     $Page->title->add_object ($folder);
     $Page->title->subject = 'Edit permissions for ' . $group->title_as_plain_text ();
@@ -69,5 +73,7 @@ http://www.earthli.com/software/webcore
     $Page->finish_display ();
   }
   else
+  {
     $Page->raise_security_violation ('You are not allowed to edit permissions for this group/folder.', $folder);
+  }
 ?>

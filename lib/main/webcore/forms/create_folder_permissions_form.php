@@ -79,9 +79,13 @@ class CREATE_FOLDER_PERMISSIONS_FORM extends ID_BASED_FORM
   {
     $security =& $obj->security_definition ();
     if ($security->inherited ())
+    {
       $security->copy_and_store ($this->value_for ('copy_mode'));
+    }
     else
+    {
       $security->purge ();
+    }
   }
 
   function load_from_object (&$obj)
@@ -119,9 +123,13 @@ class CREATE_FOLDER_PERMISSIONS_FORM extends ID_BASED_FORM
 
       $permissions =& $this->login->permissions ();      
       if ($permissions->value_for (Privilege_set_folder, Privilege_view) != Privilege_always_granted)
+      {
         $renderer->draw_text_row ('', '<div class="caution">' . $this->app->resolve_icon_as_html ('{icons}/indicators/warning', 'Warning', '16px') . ' *In this case, you <span class="field">will not</span> be able to see this folder.</div>', 'notes');
+      }
       else
+      {
         $renderer->draw_text_row ('', '*Your user will still be allowed to see this folder.', 'notes');
+      }
 
       $renderer->finish ();
     }

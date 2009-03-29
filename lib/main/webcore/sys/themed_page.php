@@ -175,16 +175,24 @@ class THEME_SETTINGS extends WEBCORE_OBJECT
     }
 
     if (! $this->font_name_CSS_file_name)
+    {
       $this->font_name_CSS_file_name = $default->font_name_CSS_file_name;
+    }
 
     if (! $this->font_size_CSS_file_name)
+    {
       $this->font_size_CSS_file_name = $default->font_size_CSS_file_name;
+    }
 
     if (! $this->icon_set)
+    {
       $this->icon_set = $default->icon_set;
+    }
 
     if (! $this->icon_extension)
+    {
       $this->icon_extension = $default->icon_extension;
+    }
   }
 
   /**
@@ -243,7 +251,9 @@ class THEME_OPTIONS
   function &font_names ()
   {
     if (! isset ($this->_font_names))
+    {
       $this->_init_font_names ();
+    }
     return $this->_font_names;
   }
 
@@ -253,7 +263,9 @@ class THEME_OPTIONS
   function &font_sizes ()
   {
     if (! isset ($this->_font_sizes))
+    {
       $this->_init_font_sizes ();
+    }
     return $this->_font_sizes;
   }
 
@@ -383,7 +395,9 @@ class THEMED_PAGE extends PAGE
     }
 
     if ($browser->is (Browser_ie))
+    {
       $this->default_theme->dont_apply_to_forms = TRUE;
+    }
   }
 
   /**
@@ -439,11 +453,17 @@ class THEMED_PAGE extends PAGE
   function validate_theme ()
   {
     if (strpos ($this->theme->main_CSS_file_name, '/') === FALSE)
+    {
       $this->theme->main_CSS_file_name = '';
+    }
     if (strpos ($this->theme->font_name_CSS_file_name, '/') === FALSE)
+    {
       $this->theme->font_name_CSS_file_name = '';
+    }
     if (strpos ($this->theme->font_size_CSS_file_name, '/') === FALSE)
+    {
       $this->theme->font_size_CSS_file_name = '';
+    }
   }
 
   /**
@@ -555,12 +575,18 @@ class THEMED_PAGE extends PAGE
     {
       $this->stored_theme->$setting_name = $value;
       if ($value != '')
+      {
         $this->theme->$setting_name = $value;
+      }
       else
+      {
         $this->theme->$setting_name = $this->default_theme->$setting_name;
+      }
 
       if ($store_immediately)
+      {
         $this->store_to_client ();
+      }
     }
   }
 

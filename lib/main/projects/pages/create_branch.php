@@ -38,7 +38,9 @@ http://www.earthli.com/software/webcore/projects
 
     $form->process_new ($branch);
     if ($form->committed ())
+    {
       $Env->redirect_local ($branch->home_page ());
+    }
 
     $Page->title->add_object ($folder);
     $Page->title->subject = 'Create Branch';
@@ -63,5 +65,7 @@ http://www.earthli.com/software/webcore/projects
     $Page->finish_display ();
   }
   else
+  {
     $Page->raise_security_violation ('You are not allowed to create branches.', $folder);
+  }
 ?>

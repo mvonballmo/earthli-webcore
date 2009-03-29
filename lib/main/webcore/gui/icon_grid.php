@@ -103,7 +103,9 @@ class ICON_GRID extends STANDARD_GRID
         echo '</a>';
       }
       else
+      {
         echo $obj->icon_as_html ();
+      }
     ?>
   </div>
   <div style="margin-top: 1em">
@@ -111,7 +113,9 @@ class ICON_GRID extends STANDARD_GRID
       $this->_draw_menu_for ($obj, Menu_size_minimal, Menu_align_left);
       echo $obj->title_as_html ();
       if ($obj->category)
+      {
         echo " ($obj->category)";
+      }
     ?>
   </div>
 </div>

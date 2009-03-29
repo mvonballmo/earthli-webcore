@@ -36,7 +36,9 @@ http://www.earthli.com/software/webcore
 
     $form->process_existing ($folder);
     if ($form->committed ())
+    {
       $App->return_to_referer ($folder->home_page ());
+    }
 
     $Page->title->add_object ($folder);
     $Page->title->subject = 'Edit';
@@ -60,5 +62,7 @@ http://www.earthli.com/software/webcore
     $Page->finish_display ();
   }
   else
+  {
     $Page->raise_security_violation ('You are not allowed to edit this folder.', $folder);
+  }
 ?>

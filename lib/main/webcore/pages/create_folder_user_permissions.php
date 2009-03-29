@@ -41,7 +41,9 @@ http://www.earthli.com/software/webcore
 
     $form->process_new ($obj);
     if ($form->committed ())
+    {
       $Env->redirect_local ($folder->permissions_home_page ());
+    }
 
     $Page->title->add_object ($folder);
     $Page->title->subject = 'Add permissions for user';
@@ -72,5 +74,7 @@ http://www.earthli.com/software/webcore
     $Page->finish_display ();
   }
   else
+  {
     $Page->raise_security_violation ('You are not allowed to edit the permissions for this folder.', $folder);
+  }
 ?>

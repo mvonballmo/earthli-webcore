@@ -93,12 +93,18 @@ class SUBMIT_EXCEPTION_FORM extends SEND_MAIL_FORM
     if ($routine_name)
     {
       if ($class_name)
+      {
         $this->set_value ('subject', "Exception in method [$class_name.$routine_name]");
+      }
       else
+      {
         $this->set_value ('subject', "Exception in function [$routine_name]");
+      }
     }
     else
+    {
       $this->set_value ('subject', 'Exception at global scope');
+    }
   }
 
   /**

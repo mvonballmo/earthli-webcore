@@ -139,9 +139,13 @@ class RELEASE extends OBJECT_IN_FOLDER
   function set_time_scheduled ($t)
   {
     if ($t)
+    {
       $this->time_scheduled = $t;
+    }
     else
+    {
       $this->time_scheduled->clear ();
+    }
 
     $this->_update_next_deadline ();
   }
@@ -153,9 +157,13 @@ class RELEASE extends OBJECT_IN_FOLDER
   function set_time_testing_scheduled ($t)
   {
     if ($t)
+    {
       $this->time_testing_scheduled = $t;
+    }
     else
+    {
       $this->time_testing_scheduled->clear ();
+    }
 
     $this->_update_next_deadline ();
   }
@@ -190,19 +198,29 @@ class RELEASE extends OBJECT_IN_FOLDER
       if ($test_valid)
       {
         if ($this->time_scheduled->less_than ($this->time_testing_scheduled))
+        {
           $this->time_next_deadline = $this->time_scheduled;
+        }
         else
+        {
           $this->time_next_deadline = $this->time_testing_scheduled;
+        }
       }
       else
+      {
         $this->time_next_deadline = $this->time_scheduled;
+      }
     }
     else
     {
       if ($test_valid)
+      {
         $this->time_next_deadline = $this->time_testing_scheduled;
+      }
       else
+      {
         $this->time_next_deadline->clear ();
+      }
     }
   }
 
@@ -269,7 +287,9 @@ class RELEASE extends OBJECT_IN_FOLDER
   function &status ()
   {
     if (! isset ($this->_status))
+    {
       $this->_status = $this->_make_status ();
+    }
     return $this->_status;
   }
 
@@ -399,7 +419,9 @@ class RELEASE extends OBJECT_IN_FOLDER
     $branch_url = $branch->_object_url ($use_links, $separator, $formatter);
 
     if (! isset ($separator))
+    {
       $separator = $this->app->display_options->obj_url_separator;
+    }
 
     return $branch_url . $separator . $Result;
   }
@@ -484,7 +506,9 @@ class RELEASE extends OBJECT_IN_FOLDER
 
       $Result = $date->format ($f);
       if (! $text_only)
+      {
         $Result = '<span class="visible" style="white-space: nowrap">' . $Result . '</span>';
+      }
     }
 
     return $Result;

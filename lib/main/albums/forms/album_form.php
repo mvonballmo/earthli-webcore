@@ -189,16 +189,22 @@ class ALBUM_FORM extends FOLDER_FORM
     $this->set_value ('location', $obj->location);
     $this->set_visible ('location', $this->login->is_allowed (Privilege_set_entry, Privilege_upload, $this->_folder));
     if (! $this->visible ('location'))
+    {
       $this->set_value ('location', Album_location_type_remote);
+    }
 
     $this->set_visible ('url_root_enabled', ($this->value_for ('url_root') != '') && ($this->value_for ('location') == Album_location_type_local));
     $this->set_enabled ('url_root', ! $this->visible ('url_root_enabled'));
 
     $main_picture_id = read_var ('main_picture_id', 'not set');
     if ($main_picture_id == 'not set')
+    {
       $this->set_value ('main_picture_id', $obj->main_picture_id);
+    }
     else
+    {
       $this->set_value ('main_picture_id', $main_picture_id);
+    }
 
     $this->set_value ('constrain_picture_size', $this->value_for ('max_picture_width') || $this->value_for ('max_picture_height'));
 
@@ -251,22 +257,24 @@ class ALBUM_FORM extends FOLDER_FORM
     case Album_is_journal:
       $now = new DATE_TIME ();
       if ($now->less_than ($this->value_for ('first_day')))
+      {
         $this->record_error ('First day of a journal cannot be in the future.');
+      }
       break;
     case Album_is_span:
       $last_day = $this->value_for ('last_day');
       if ($last_day->less_than ($this->value_for ('first_day')))
+      {
         $this->record_error ('First day must come before the last day.');
+      }
       break;
     }
 
-    if ($this->value_for ('constrain_picture_size')
-        && (
-            ($this->value_for ('max_picture_width') == 0)
-            || ($this->value_for ('max_picture_width') == 0)
-            )
-        )
+    if ($this->value_for ('constrain_picture_size') && 
+      (($this->value_for ('max_picture_width') == 0) || ($this->value_for ('max_picture_width') == 0)))
+    {
       $this->record_error ('picture', 'Please make sure that both picture width and height are greater than 0.');
+    }
   }
 
   /**
@@ -315,7 +323,9 @@ class ALBUM_FORM extends FOLDER_FORM
   PICTURE_VALUE_FIELD.prototype.set_value = function (v)
   {
     if (this.original_value === undefined)
+    {
       this.original_value = v;
+    }
     else
     {
       if (this.original_value != v)
@@ -389,7 +399,9 @@ class ALBUM_FORM extends FOLDER_FORM
   function ensure_trailing_delimiter (path)
   {
     if (path.charAt (path.length - 1) != '/')
+    {
       path += '/';
+    }
     return path;
   }
 
@@ -440,7 +452,9 @@ class ALBUM_FORM extends FOLDER_FORM
       var auto_url_root = parent_url_root + normalize_string (last_title);
       var current_url = ensure_trailing_delimiter (ctrl.form.url_root.value);
       if ((current_url == auto_url_root) || ((current_url == parent_url_root)))
+      {
         ctrl.form.url_root.value = parent_url_root + normalize_string (ctrl.value);
+      }
       last_title = ctrl.value;
     }
   }

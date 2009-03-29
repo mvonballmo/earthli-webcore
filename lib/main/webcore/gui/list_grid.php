@@ -108,7 +108,9 @@ class LIST_GRID extends STANDARD_GRID
     while ($i < $c)
     {
       if ($i > 0)
+      {
         echo '<td style="vertical-align: top; text-align: ' . $this->_columns [$i]->alignment . '">';
+      }
       $this->_draw_column_contents ($obj, $i);
       if (($i < $c - 1) && ($this->use_spacers))
       {
@@ -134,7 +136,9 @@ class LIST_GRID extends STANDARD_GRID
       {
         echo '<th style="text-align: ' . $this->_columns [$i]->alignment . '">' . $this->_columns [$i]->name . "</th>\n";
         if (($i < $c - 1) && ($this->use_spacers))
+        {
           $this->_draw_spacer ('th');
+        }
   
         $i++;
       }

@@ -112,7 +112,9 @@ class JOURNAL_FORM extends ALBUM_ENTRY_FORM
     parent::_post_validate ($obj);
 
     if ($this->value_for ('lo_temp') > $this->value_for ('hi_temp'))
+    {
       $this->record_error ('temps', "Please make sure that low temperature is less than the high temperature.");
+    }
   }
 
   /**

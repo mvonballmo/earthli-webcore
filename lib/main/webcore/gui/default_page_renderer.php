@@ -88,7 +88,9 @@ class DEFAULT_PAGE_RENDERER extends WEBCORE_PAGE_RENDERER
             <h1 class="banner-title"><?php echo $options->title; ?>
             <?php
               if ($options->icon)
+              {
                 echo $page->resolve_icon_as_html ($options->icon, ' ', '50px', 'vertical-align: text-bottom');
+              }
             ?>
             </h1>
             <div class="login-status">
@@ -125,7 +127,9 @@ class DEFAULT_PAGE_RENDERER extends WEBCORE_PAGE_RENDERER
     $browser = $this->env->browser();
     
     if ($options->close_logger)
+    {
       $this->env->logs->close_all ();
+    }
 ?>
     </div>  <!-- end of page-body -->
     <?php
@@ -139,13 +143,19 @@ class DEFAULT_PAGE_RENDERER extends WEBCORE_PAGE_RENDERER
       $lines = array ();
 
       if ($options->copyright)
+      {
         $lines [] = $options->copyright;
+      }
 
       if ($options->copyright && $options->show_versions)
+      {
         $lines [] = '';
+      }
 
       if ($options->show_versions)
+      {
         $lines [] = $this->_versions_as_text ($options);
+      }
 
       echo '<div style="float: left">';
       echo join ('<br>', $lines);
@@ -195,9 +205,13 @@ class DEFAULT_PAGE_RENDERER extends WEBCORE_PAGE_RENDERER
     $app_exists = isset ($this->page->app);
     $show_login = $options->show_login && $app_exists;
     if ($app_exists)
+    {
       $app =& $this->page->app;
+    }
     if ($show_login)
+    {
       $logged_in = $app_exists && ! $app->login->is_anonymous ();
+    }
 
     if ($options->show_links || $show_login)
     {
@@ -212,7 +226,9 @@ class DEFAULT_PAGE_RENDERER extends WEBCORE_PAGE_RENDERER
           $menu->append ('Not logged in');
           $menu->append ('Log in...', $app->resolve_file_for_alias (Folder_name_application, $app->page_names->log_in));
           if ($anon->is_allowed (Privilege_set_user, Privilege_create))
+          {
             $menu->append ('Register...', $app->resolve_file_for_alias (Folder_name_application, $app->page_names->user_create));
+          }
         }
         else
         {
@@ -234,9 +250,13 @@ class DEFAULT_PAGE_RENDERER extends WEBCORE_PAGE_RENDERER
         {
           $url = $res->resolve_file ($options->settings_url);
           if ($this->page->theme->title)
+          {
             $menu->append ('<a href="' . $url . '">Theme</a>' . ': ' . $this->page->theme->title);
+          }
           else
+          {
             $menu->append ('Theme', $url);
+          }
         }
 
         if ($options->show_source_url)
@@ -265,13 +285,21 @@ class DEFAULT_PAGE_RENDERER extends WEBCORE_PAGE_RENDERER
       $res =& $this->page->resources ();
 
       if ($options->contact_url)
+      {
         $menu->append ('Contact', $res->resolve_file ($options->contact_url));
+      }
       if ($options->support_url)
+      {
         $menu->append ('Support', $res->resolve_file ($options->support_url));
+      }
       if ($options->privacy_url)
+      {
         $menu->append ('Privacy', $res->resolve_file ($options->privacy_url));
+      }
       if ($options->rights_url)
+      {
         $menu->append ('Rights', $res->resolve_file ($options->rights_url));
+      }
 
       return $menu->as_html ();
     }
@@ -288,7 +316,9 @@ class DEFAULT_PAGE_RENDERER extends WEBCORE_PAGE_RENDERER
     $versions = array ();
 
     if ($options->app_info)
+    {
       $versions [] = $options->app_info;
+    }
 
     $versions [] = '<a href="http://earthli.com/software/webcore">' . $this->env->description () . '</a>';
 
@@ -345,7 +375,9 @@ class DEFAULT_PAGE_RENDERER extends WEBCORE_PAGE_RENDERER
     }
 
     if (! empty ($values))
+    {
       return join ($this->page->display_options->menu_separator, $values);
+    }
   }
 
   /**
@@ -359,9 +391,7 @@ class DEFAULT_PAGE_RENDERER extends WEBCORE_PAGE_RENDERER
 	*/
   function _handle_browser_warnings (&$options, $in_header)
   {
-    if (! ($in_header ^ $this->browser_warning_in_header)
-        && $options->check_browser
-        && ! $this->browser_supported ())
+    if (! ($in_header ^ $this->browser_warning_in_header) && $options->check_browser && ! $this->browser_supported ())
     {
       include_once ('webcore/util/options.php');
       $opt_ignore_warning = new STORED_OPTION ($this->page, "ignore_browser_warning");

@@ -87,7 +87,9 @@ class PRINTABLE_COMMENT_GRID extends STANDARD_GRID
   function _draw_paginator ()
   {
     if ($this->_show_paginator)
+    {
       return parent::_draw_paginator ();
+    }
   }
 
   /**

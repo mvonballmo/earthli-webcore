@@ -89,9 +89,13 @@ class USER_ENTRY_QUERY extends OBJECT_IN_FOLDER_QUERY
       $restriction = new QUERY_SECURITY_RESTRICTION ($this);
       $sql = $restriction->as_sql (array (Privilege_set_folder, Privilege_set_entry));
       if (! $sql)
+      {
         $this->_set_returns_no_data ();
+      }
       else
+      {
         $this->_calculated_restrictions [] = $sql;
+      }
     }
   }
 
@@ -180,7 +184,9 @@ class USER_MULTI_ENTRY_QUERY extends USER_ENTRY_QUERY
   function set_type ($type)
   {
     if ($type)
+    {
       $this->restrict ("entry_type = '$type'");
+    }
   }
 
   /**
@@ -219,9 +225,13 @@ class USER_DRAFTABLE_ENTRY_QUERY extends USER_ENTRY_QUERY
   function _order_by_recent ()
   {
     if ($this->includes (Unpublished) && ! $this->includes (Visible))
+    {
       $this->set_order ('entry.state ASC, entry.time_modified DESC');
+    }
     else
+    {
       $this->set_order ('entry.state ASC, entry.time_published DESC, entry.time_created DESC');
+    }
   }
 }
 

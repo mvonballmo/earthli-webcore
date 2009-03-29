@@ -92,7 +92,9 @@ class RECIPE_RENDERER extends DRAFTABLE_ENTRY_RENDERER
     $this->_echo_plain_text_user_information ($entry);
 
     if ($entry->originator)
+    {
       echo $this->_par ("From the kitchen of $entry->originator");
+    }
 
     $this->_echo_plain_text_description ($entry);
 

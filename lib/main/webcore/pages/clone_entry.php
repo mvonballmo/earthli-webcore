@@ -62,7 +62,9 @@ http://www.earthli.com/software/webcore
         $Env->redirect_local ($url->as_text ());
       }
       else
+      {
         $Env->redirect_local ($clone->home_page ());
+      }
     }
 
     $Page->title->add_object ($folder);
@@ -134,5 +136,7 @@ http://www.earthli.com/software/webcore
     $Page->finish_display ();
   }
   else
+  {
     $Page->raise_security_violation ("You are not allowed to create {$entry_type_info->plural_title} here.", $folder);
+  }
 ?>

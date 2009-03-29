@@ -199,7 +199,9 @@ class HTML_QUOTE_TRANSFORMER extends HTML_BLOCK_TRANSFORMER
   {
     parent::activate ($munger, $value, $token);
     if ($value)
+    {
       $this->_quote_style = $this->_quote_style_from_token ($value, $token);
+    }
   }
 
   /**
@@ -249,9 +251,12 @@ class HTML_PARAGRAPH_TRANSFORMER extends HTML_BLOCK_TRANSFORMER
   function _apply_simple_transform (&$munger, $text)
   {
     if (($this->_buffer_state != Munger_only_data_block) || $munger->force_paragraphs)
+    {
       return '<p>' . $text . "</p>\n";
-    else
-      return $text;
+    }
+
+
+    return $text;
   }
 }
 
@@ -330,7 +335,9 @@ class HTML_LIST_TRANSFORMER extends MUNGER_LIST_TRANSFORMER
   {
     $Result = join ("</li>\n<li>", $item->items);
     if ($item->is_open && ! $item->was_open)
+    {
       $Result = "\n<li>" . $Result;
+    }
     elseif ($item->was_open && ! $item->is_open)
       $Result = $Result . '</li>';
     elseif (! $item->is_open)
@@ -365,19 +372,29 @@ class HTML_LIST_TRANSFORMER extends MUNGER_LIST_TRANSFORMER
   function _transform_to_list (&$munger, $text, $item_was_open)
   {
     if ($this->_buffer_state == Munger_only_data_block)
+    {
       $Result = $this->_item_to_text ($this->_make_item ($text, $item_was_open));
+    }
     else
     {
       if (isset ($this->_last_item))
+      {
         $Result = $this->_item_to_text ($this->_last_item);
+      }
       else
+      {
         $Result = '';
+      }
 
       $item = $this->_make_item ($text, $item_was_open);
       if ($this->_buffer_state == Munger_last_data_block)
+      {
         $Result .= $this->_item_to_text ($item);
+      }
       else
+      {
         $this->_last_item = $item;
+      }
     }
     return $Result;
   }
@@ -398,7 +415,9 @@ class HTML_LIST_TRANSFORMER extends MUNGER_LIST_TRANSFORMER
         $last_item_text = array_pop ($this->_last_item->items);
         $Result = $this->_item_to_text ($this->_last_item);
         if ($Result && ! $this->_last_item->is_open && $this->_last_item->was_open)
+        {
           $Result .= '<li>';
+        }
       }
       else
       {
@@ -408,22 +427,31 @@ class HTML_LIST_TRANSFORMER extends MUNGER_LIST_TRANSFORMER
 
       $last_item_text = trim ($last_item_text);
       if ($last_item_text)
+      {
         $last_item_text = '<div>' . $last_item_text . $text . '</div>';
+      }
       else
+      {
         $last_item_text = $text;
+      }
 
       if (! $this->_last_item->was_open)
+      {
         $last_item_text = "\n<li>$last_item_text";
+      }
       if (! $this->_last_item->is_open)
+      {
         $last_item_text .= '</li>';
+      }
 
       $Result .= $last_item_text;
 
       $this->_last_item = null;
       return $Result;
     }
-    else
-      return "\n<li>" . $text . "</li>";
+
+
+    return "\n<li>" . $text . "</li>";
   }
 
   /**
@@ -467,9 +495,12 @@ class HTML_DEFINITION_LIST_TRANSFORMER extends MUNGER_DEFINITION_LIST_TRANSFORME
   function _build_as_definition_term (&$munger, $line)
   {
     if ($this->_term_class)
+    {
       return "<dt class=\"$this->_term_class\">$line</dt>\n";
-    else
-      return "<dt>$line</dt>\n";
+    }
+
+
+    return "<dt>$line</dt>\n";
   }
 
   /**
@@ -482,9 +513,12 @@ class HTML_DEFINITION_LIST_TRANSFORMER extends MUNGER_DEFINITION_LIST_TRANSFORME
   function _build_as_definition_body (&$munger, $line)
   {
     if ($this->_definition_class)
+    {
       return "<dd class=\"$this->_definition_class\">$line</dd>\n";
-    else
-      return "<dd>$line</dd>\n";
+    }
+
+
+    return "<dd>$line</dd>\n";
   }
 
   /**
@@ -524,7 +558,9 @@ class HTML_BASIC_REPLACER extends MUNGER_BASIC_REPLACER
       $attrs = $token->attributes ();
       $style = read_array_index ($attrs, 'style');
       if ($style)
+      {
         $Result = substr ($Result, 0, strlen ($Result) - 1) . ' style="' . $style . '">';
+      }
     }
 
     return $Result;
@@ -574,9 +610,12 @@ class HTML_FOOTNOTE_TEXT_REPLACER extends MUNGER_FOOTNOTE_TEXT_REPLACER
   function _format_text (&$token, &$info)
   {
     if ($token->is_start_tag ())
+    {
       return '<div class="footnote-reference"><span id="' . $info->name_to . '" class="footnote-number">' . $info->number . '</span> ';
-    else
-      return '<a href="#' . $info->name_from . '" class="footnote-return" title="Jump back to reference.">&#8617;</a></div>';
+    }
+
+
+    return '<a href="#' . $info->name_from . '" class="footnote-return" title="Jump back to reference.">&#8617;</a></div>';
   }
 }
 
@@ -950,18 +989,24 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
     {
       case 'right':
         if ($alignment == 'left-column')
+        {
           $clear = 'both';
+        }
         break;
       case 'left':
         if ($alignment == 'right-column')
+        {
           $clear = 'both';
+        }
         break;
       case 'both':
         ; // value is ok
         break;
       default:
         if ($alignment == 'left-column')
+        {
           $clear = 'left';
+        }
         elseif ($alignment == 'right-column')
           $clear = 'right';
         break;
@@ -1073,9 +1118,13 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
     if ($this->_has_outer_area ())
     {
       if ($is_block)
+      {
         $Result .= '</div><div class="auto-content-caption">' . $this->_caption . '</div></div>';
+      }
       else
+      {
         $Result .= '</span><span class="auto-content-caption">' . $this->_caption . '</span></span>';
+      }
     }
 
     return $Result;
@@ -1192,7 +1241,9 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
     if ($href)
     {
       if ($caption)
+      {
         $caption = '<a href="' . $href . '">' . $caption . '</a>';
+      }
       elseif ($date)
         $date = '<a href="' . $href . '">' . $date . '</a>';
       elseif ($author)
@@ -1240,24 +1291,36 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
     {
       $author = "<cite>$author</cite>";
       if ($Result)
+      {
         $Result = rtrim($Result) . ' by ' . $author;
+      }
       else
+      {
         $Result = '&mdash;' . $author;
+      }
     }
     if ($date)
     {
       if ($Result)
+      {
         $Result = rtrim($Result) . ' on ' . $date;
+      }
       else
+      {
         $Result = $date;
+      }
     }
     if ($source)
     {
       $source = "<cite>$source</cite>";
       if ($Result)
+      {
         $Result = rtrim($Result) . ' (' . $source . ')';
+      }
       else
+      {
         $Result = $source;
+      }
     }
 
     return rtrim($Result);
@@ -1372,12 +1435,18 @@ class HTML_BOX_REPLACER extends HTML_DIV_REPLACER
 
     $title = $this->_read_attribute ($attrs, 'title');;
     if ($title)
+    {
       $Result .= "<$this->main_tag class=\"chart-title\">$title</$this->main_tag>";
+    }
 
     if ($inner_class)
+    {
       $inner_class = 'chart-body ' . $inner_class;
+    }
     else
+    {
       $inner_class = 'chart-body';
+    }
 
     $builder = $munger->make_tag_builder ($this->main_tag);
     $builder->add_attribute ('class', $inner_class);
@@ -1495,9 +1564,13 @@ class HTML_INLINE_ASSET_REPLACER extends HTML_BASE_REPLACER
   {
     $attachment_name = read_array_index ($attrs, 'attachment');
     if ($attachment_name)
+    {
       $Result = '{att_link}/' . $attachment_name;
+    }
     else
+    {
       $Result = read_array_index ($attrs, 'href');
+    }
     return $Result;
   }
 }
@@ -1548,7 +1621,9 @@ class HTML_IMAGE_REPLACER extends HTML_INLINE_ASSET_REPLACER
     $title = $this->_read_attribute ($attrs, 'title');
     $alt = $this->_read_attribute ($attrs, 'alt', $title);
     if (! $alt)
+    {
       $alt = ' ';
+    }
 
     $builder = $munger->make_tag_builder ('img');
     $builder->add_attribute ('title', $title);
@@ -1590,19 +1665,27 @@ class HTML_IMAGE_REPLACER extends HTML_INLINE_ASSET_REPLACER
     if ($scale)
     {
       if (substr ($scale, -1, 1) == '%')
+      {
         $scale = substr ($scale, 0, -1);
+      }
 
       if (! is_numeric ($scale))
+      {
         $scale = '';
+      }
     }
 
     if (($scale) || (! $Result && $this->_has_outer_area ()))
     {
       $attachment_name = read_array_index ($attrs, 'attachment');
       if ($attachment_name)
+      {
         $src = '{att_thumb}/' . $attachment_name;
+      }
       else
+      {
         $src = read_array_index ($attrs, 'src');
+      }
       $url = new URL ($munger->resolve_url ($src, Force_root_on));
       if (! $url->has_domain () || $url->has_local_domain ())
       {
@@ -1612,9 +1695,13 @@ class HTML_IMAGE_REPLACER extends HTML_INLINE_ASSET_REPLACER
         if ($metrics->loaded ())
         {
           if ($scale)
+          {
             $Result = ceil(($metrics->original_width * $scale) / 100) . 'px';
+          }
           else
+          {
             $Result = $metrics->original_width . 'px';
+          }
         }
         elseif ($scale)
           $Result = $scale . '%';
@@ -1787,8 +1874,9 @@ class HTML_LINK_REPLACER extends HTML_BASE_REPLACER
 
       return $builder->as_html ();
     }
-    else
-      return '</a>' . $this->_suffix;
+
+
+    return '</a>' . $this->_suffix;
   }
 
   /**
@@ -1884,12 +1972,15 @@ class HTML_HEADING_REPLACER extends MUNGER_REPLACER
       $this->_level = read_array_index ($attrs, 'level');
 
       if (! is_numeric ($this->_level))
+      {
         $this->_level = $this->default_level;
+      }
 
       return "<h$this->_level>";
     }
-    else
-      return "</h$this->_level>";
+
+
+    return "</h$this->_level>";
   }
 
   /**

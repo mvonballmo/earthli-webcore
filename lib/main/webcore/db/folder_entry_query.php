@@ -90,7 +90,9 @@ class FOLDER_ENTRY_QUERY extends OBJECT_IN_SINGLE_FOLDER_QUERY
                                " WHERE com.id = $id");
 
       if ($this->db->next_record ())
+      {
         return $this->object_at_id ($this->db->f ("id"));
+      }
     }
     
     global $Null_reference;
@@ -116,12 +118,16 @@ class FOLDER_ENTRY_QUERY extends OBJECT_IN_SINGLE_FOLDER_QUERY
         $this->add_table ("{$this->app->table_names->attachments} att", 'att.object_id = com.id');
       }
       else
+      {
         $this->add_table ("{$this->app->table_names->attachments} att", 'att.object_id = entry.id');
+      }
 
       $this->_start_system_call ("att.id = $id");
       $objs = $this->objects ();
       if (sizeof ($objs))
+      {
         $Result =& $objs [0];
+      }
       $this->_end_system_call ();
       $this->_tables = $old_tables;
       return $Result;
@@ -236,7 +242,9 @@ class FOLDER_MULTI_ENTRY_QUERY extends FOLDER_ENTRY_QUERY
   function set_type ($type)
   {
     if ($type)
+    {
       $this->restrict ("entry_type = '$type'");
+    }
   }
 
   /**
@@ -275,9 +283,13 @@ class FOLDER_DRAFTABLE_ENTRY_QUERY extends FOLDER_ENTRY_QUERY
   function _order_by_recent ()
   {
     if ($this->includes (Unpublished) && ! $this->includes (Visible))
+    {
       $this->set_order ('entry.state ASC, entry.time_modified DESC');
+    }
     else
+    {
       $this->set_order ('entry.state ASC, entry.time_published DESC, entry.time_created DESC');
+    }
   }
 }
 

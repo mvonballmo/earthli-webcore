@@ -90,9 +90,13 @@ class STORABLE extends WEBCORE_OBJECT
     $this->_pre_store ();
 
     if ($this->exists ())
+    {
       $this->_update ();
+    }
     else
+    {
       $this->_create ();
+    }
   }
 
   /**
@@ -115,7 +119,9 @@ class STORABLE extends WEBCORE_OBJECT
     if ($this->exists ())
     {
       if (! isset ($options))
+      {
         $options = $this->make_purge_options();
+      }
       $this->_purge ($options);
     }
   }
@@ -172,7 +178,9 @@ class STORABLE extends WEBCORE_OBJECT
   function _update_login ()
   {
     if (isset ($this->app))
+    {
       $this->app->force_login ();
+    }
   }
 
   /**

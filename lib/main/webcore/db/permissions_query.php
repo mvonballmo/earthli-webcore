@@ -100,7 +100,9 @@ class PERMISSIONS_QUERY extends QUERY
   function _prepare_restrictions ()
   {
     if (isset ($this->_kind))
+    {
       $this->_calculated_restrictions [] = "perm.kind = '$this->_kind'";
+    }
   }
 
   /**

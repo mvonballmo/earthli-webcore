@@ -97,7 +97,9 @@ class MAIL_BODY_RENDERER extends MAIL_RENDERER
     $this->_finish_rendering ($options, $state);
 
     if ($this->html_wrap_limit)
+    {
       $Result = wordwrap ($Result, $this->html_wrap_limit);
+    }
 
     return $Result;
   }
@@ -116,7 +118,9 @@ class MAIL_BODY_RENDERER extends MAIL_RENDERER
     $this->_finish_rendering ($options, $state);
 
     if ($this->text_wrap_limit)
+    {
       $Result = wordwrap ($Result, $this->text_wrap_limit);
+    }
 
     return $Result;
   }
@@ -129,7 +133,9 @@ class MAIL_BODY_RENDERER extends MAIL_RENDERER
   function _html_header ()
   {
     if (! isset ($this->_cached_html_header))
+    {
       $this->_cached_html_header = $this->_build_html_header ();
+    }
 
     return $this->_cached_html_header;
   }
@@ -161,7 +167,9 @@ class MAIL_BODY_RENDERER extends MAIL_RENDERER
   function _html_footer ()
   {
     if (! isset ($this->_cached_html_footer))
+    {
       $this->_cached_html_footer = $this->_build_html_footer ();
+    }
 
     return $this->_cached_html_footer;
   }
@@ -191,7 +199,9 @@ class MAIL_BODY_RENDERER extends MAIL_RENDERER
           $Result .= $obj_text;
 
           if ($obj_idx < $num_objs - 1)
+          {
             $Result .= $this->_line ($this->_sep ('='));
+          }
         }
 
         $obj_idx++;

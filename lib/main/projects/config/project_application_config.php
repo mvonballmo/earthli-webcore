@@ -56,7 +56,9 @@ class PROJECT_APPLICATION_DISPLAY_OPTIONS extends APPLICATION_DISPLAY_OPTIONS
   function entry_kinds ()
   {
     if (! isset ($this->_entry_kinds))
+    {
       $this->_init_entry_kinds ();
+    }
     return $this->_entry_kinds;
   }
 
@@ -69,7 +71,9 @@ class PROJECT_APPLICATION_DISPLAY_OPTIONS extends APPLICATION_DISPLAY_OPTIONS
   function job_priorities ()
   {
     if (! isset ($this->_job_priorities))
+    {
       $this->_init_job_priorities ();
+    }
     return $this->_job_priorities;
   }
 
@@ -82,7 +86,9 @@ class PROJECT_APPLICATION_DISPLAY_OPTIONS extends APPLICATION_DISPLAY_OPTIONS
   function job_statuses ()
   {
     if (! isset ($this->_job_statuses))
+    {
       $this->_init_job_statuses ();
+    }
     return $this->_job_statuses;
   }
 
@@ -95,7 +101,9 @@ class PROJECT_APPLICATION_DISPLAY_OPTIONS extends APPLICATION_DISPLAY_OPTIONS
   function job_status_map ()
   {
     if (! isset ($this->_job_status_map))
+    {
       $this->_init_job_status_map ();
+    }
     return $this->_job_status_map;
   }
 
@@ -125,11 +133,15 @@ class PROJECT_APPLICATION_DISPLAY_OPTIONS extends APPLICATION_DISPLAY_OPTIONS
         foreach ($statuses as $status)
         {
           if ($status->level >= $current_status->level)
+          {
             $Result [] = $status;
+          }
         }
       }
       else
+      {
         $Result = $statuses;
+      }
     }
 
     return $Result;

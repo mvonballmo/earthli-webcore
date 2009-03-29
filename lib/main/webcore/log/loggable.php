@@ -87,9 +87,13 @@ class LOGGABLE extends WEBCORE_OBJECT
     if (isset ($this->logs->logger))
     {
       if (! $channel)
+      {
         $channel = $this->default_channel;
+      }
       if (! $type)
+      {
         $type = $this->default_type;
+      }
       $this->logs->logger->record ($msg, $type, $channel);
     }
   }
@@ -103,7 +107,9 @@ class LOGGABLE extends WEBCORE_OBJECT
   function record_more ($msg, $has_html = FALSE)
   {
     if (isset ($this->logs->logger))
+    {
       $this->logs->logger->record_more ($msg, $has_html);
+    }
   }
 }
 

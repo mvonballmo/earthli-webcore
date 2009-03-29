@@ -118,9 +118,12 @@ class PROJECT_ENTRY_BRANCH_INFO_QUERY extends QUERY
   function _id_for_object (&$obj)
   {
     if ($this->_index_by_branch_id)
+    {
       return $obj->branch_id;
-    else
-      return $obj->id;
+    }
+
+
+    return $obj->id;
   }
 
   /**

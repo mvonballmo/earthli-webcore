@@ -120,9 +120,13 @@ class MUNGER_SUMMARIZER
   function transform ($text, $phrase)
   {
     if (! isset ($this->_stripper))
+    {
       $this->_stripper = new TEXT_STRIPPER ();
+    }
     if (! isset ($this->_reg_exp))
+    {
       $this->_reg_exp = new REGULAR_EXPRESSION ();
+    }
     $Result = $this->_stripper->transform ($text);
     $Result = $this->_reg_exp->extract_words ($Result, $phrase, $this->context_size, $this->max_visible_output_chars, $this->break_inside_word);
     $Result = $this->_reg_exp->select_words ($Result, $phrase, $this->highlight_prefix, $this->highlight_suffix);

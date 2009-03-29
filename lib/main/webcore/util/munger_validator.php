@@ -128,7 +128,9 @@ class MUNGER_VALIDATOR_TAG_INFO
     foreach ($attrs as $key => $value)
     {
       if (! isset ($this->properties [$key]))
+      {
         $validator->_add_error ('Invalid attribute [' . $key . '] for [' . $token->name() . ']', $token);
+      }
     }
   }
 }
@@ -170,7 +172,9 @@ function sort_validation_errors ($err1, $err2)
   if ($err1->line_number == $err2->line_number)
   {
     if ($err1->column == $err2->column)
+    {
       return 0;
+    }
     return ($err1->column < $err2->column) ? -1 : 1;
   }
 
@@ -208,11 +212,13 @@ class MUNGER_VALIDATOR extends MUNGER_PARSER
     $this->_num_chars = 0;
     $this->_process ($input);
 
-    while ($tag = array_pop ($this->_open_tags))
+    while (($tag = array_pop ($this->_open_tags)))
     {
       $name = $tag->token->name ();
       if (isset($this->_known_tags [$name]) && $this->_known_tags [$name]->has_end_tag)
+      {
         $this->_add_error ('Missing end tag for [' . $tag->token->name() . '].', $tag->token, $tag->line_number, $tag->column);
+      }
     }
     usort ($this->errors, 'sort_validation_errors');
   }
@@ -263,7 +269,9 @@ class MUNGER_VALIDATOR extends MUNGER_PARSER
       $tag_info =& $this->_known_tags [$name];
       $tag_info->validate ($this, $token);
       if ($tag_info->has_end_tag)
+      {
         array_push ($this->_open_tags, new MUNGER_VALIDATOR_TAG ($token, $this->_line_number, $this->_column));
+      }
     }
   }
 
@@ -292,10 +300,14 @@ class MUNGER_VALIDATOR extends MUNGER_PARSER
           }
         }
         else
+        {
           $this->_add_error ('Unexpected end tag [' . $name . '] (no tags are open).', $token);
+        }
       }
       else
+      {
         $this->_add_error ('Tag [' . $name . '] cannot have an end tag.', $token);
+      }
     }
   }
 
@@ -319,9 +331,13 @@ class MUNGER_VALIDATOR extends MUNGER_PARSER
   function _add_error ($msg, $token, $line = null, $col = null)
   {
     if (! isset ($line))
+    {
       $line = $this->_line_number;
+    }
     if (! isset ($col))
+    {
       $col = $this->_column;
+    }
 
     $col++;
 
@@ -354,13 +370,17 @@ class MUNGER_VALIDATOR extends MUNGER_PARSER
         $this->_column = 1;
         $pos = strpos ($text, "\n", $last_pos);
         if ($pos !== FALSE)
+        {
           $last_pos = $pos + 1;
+        }
       }
 
       $this->_column += strlen ($text) - $last_pos;
     }
     else
+    {
       $this->_column += strlen ($text);
+    }
   }
 
   /**

@@ -44,15 +44,17 @@ http://www.earthli.com/software/webcore
     break;
   }
 
-  if (isset ($folder)
-      && $App->login->is_allowed (Privilege_set_attachment, Privilege_create, $folder)
-      && $App->login->is_allowed (Privilege_set_attachment, Privilege_upload, $folder))
+  if (isset ($folder) && 
+    $App->login->is_allowed (Privilege_set_attachment, Privilege_create, $folder) && 
+    $App->login->is_allowed (Privilege_set_attachment, Privilege_upload, $folder))
   {
     $Page->title->add_object ($folder);
     $Page->location->add_folder_link ($folder);
 
     if ($type == History_item_folder)
+    {
       $host =& $folder;
+    }
     else
     {
       $entry_query = $folder->entry_query ();
@@ -73,7 +75,9 @@ http://www.earthli.com/software/webcore
         $Page->location->add_object_link ($entry);
 
         if ($type == History_item_entry)
+        {
           $host =& $entry;
+        }
         else
         {
           $com_query = $entry->comment_query ();
@@ -91,7 +95,9 @@ http://www.earthli.com/software/webcore
     }
 
     if (isset ($host))
+    {
       $attachment = $host->new_attachment ();
+    }
   }
 
   if (isset ($attachment))
@@ -101,7 +107,9 @@ http://www.earthli.com/software/webcore
 
     $form->process_new ($attachment);
     if ($form->committed ())
+    {
       $App->return_to_referer ($host->home_page ());
+    }
 
     $Page->title->subject = 'Create Attachment';
     $Page->location->append ($Page->title->subject);
@@ -122,5 +130,7 @@ http://www.earthli.com/software/webcore
     $Page->finish_display ();
   }
   else
+  {
     $Page->raise_security_violation ('You are not allowed to create attachments here.', $folder);
+  }
 ?>

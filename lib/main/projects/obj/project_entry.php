@@ -94,7 +94,9 @@ class PROJECT_ENTRY extends MULTI_TYPE_ENTRY
   {
     $props = $this->app->display_options->entry_kinds ();
     if (isset ($props [$this->kind]))
+    {
       return $props [$this->kind];
+    }
     else
     {
       $prop = new PROPERTY_VALUE ($this->app);
@@ -134,7 +136,9 @@ class PROJECT_ENTRY extends MULTI_TYPE_ENTRY
     if ($this->component_id)
     {
       if (! isset ($this->_component))
+      {
         $this->_component =& $this->app->component_at_id ($this->component_id);
+      }
 
       return $this->_component;
     }
@@ -171,15 +175,21 @@ class PROJECT_ENTRY extends MULTI_TYPE_ENTRY
     $this->assert (isset ($branch), 'Branch cannot be empty.', 'new_branch_info', 'PROJECT_ENTRY');
 
     if ($this->exists ())
+    {
       $stored_branch_infos =& $this->stored_branch_infos ();
+    }
 
     if (isset ($stored_branch_infos [$branch->id]))
+    {
       $Result = $stored_branch_infos [$branch->id];
+    }
     else
     {
       $Result = $this->_make_branch_info ();
       if (isset ($this->id))
+      {
         $Result->entry_id = $this->id;
+      }
       $Result->set_branch ($branch);
     }
 
@@ -320,7 +330,9 @@ class PROJECT_ENTRY extends MULTI_TYPE_ENTRY
       foreach ($orig_branch_infos as $branch_id => $orig_branch_info)
       {
         if (! isset ($new_branch_infos [$branch_id]))
+        {
           $orig_branch_info->purge ();
+        }
       }
     }
   }
@@ -462,7 +474,9 @@ class PROJECT_ENTRY_BRANCH_INFO extends UNIQUE_OBJECT
   function &branch ()
   {
     if (! isset ($this->_branch))
+    {
       $this->_branch =& $this->app->branch_at_id ($this->branch_id);
+    }
 
     return $this->_branch;
   }
@@ -475,7 +489,9 @@ class PROJECT_ENTRY_BRANCH_INFO extends UNIQUE_OBJECT
   function &release ()
   {
     if (! isset ($this->_release) && ($this->release_id > 0))
+    {
       $this->_release =& $this->app->release_at_id ($this->release_id);
+    }
 
     return $this->_release;
   }

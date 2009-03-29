@@ -38,7 +38,9 @@ http://www.earthli.com/software/webcore
     
     $form->process_existing ($test_suite);
     if ($form->committed ())
+    {
       $Env->redirect_local ('run_test.php?test_name=' . $form->value_for ('test_name'));
+    }
   
     $Page->title->subject = 'Run Test Suite';
     
@@ -62,5 +64,7 @@ http://www.earthli.com/software/webcore
     $Page->finish_display ();
   }
   else
+  {
     $Page->raise_security_violation ('You are not allowed to test this application.');
+  }
 ?>

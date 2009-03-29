@@ -145,7 +145,9 @@ function &global_text_options ()
 {
   global $_g_text_options;
   if (! isset ($_g_text_options))
+  {
     $_g_text_options = new TEXT_OPTIONS ();
+  }
   return $_g_text_options;
 }
 

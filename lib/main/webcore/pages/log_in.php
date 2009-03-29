@@ -33,11 +33,15 @@ http://www.earthli.com/software/webcore
 
   $form->process_plain ();
   if ($form->committed ())
+  {
     $App->return_to_referer ('index.php');
+  }
   else
   {
     if ($form->submitted ())
+    {
       $Page->title->subject = 'Login Failed';
+    }
   }
 
   $Page->location->add_root_link ();

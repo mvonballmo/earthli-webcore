@@ -109,7 +109,9 @@ class PASSWORD_FORM extends FORM
       $password1 = $this->value_for ('password1');
       $password2 = $this->value_for ('password2');
       if (strcasecmp ($password1, $password2))
+      {
         $this->record_error ('password2', "Please make sure the passwords are the same.");
+      }
     }
   }
 
@@ -125,7 +127,9 @@ class PASSWORD_FORM extends FORM
     $obj->store_if_different ($history_item);
     $obj->load_permissions ();
     if ($this->login->equals ($obj))
+    {
       $this->app->log_in ($obj, $this->value_for ('remember'));
+    }
   }
 
   /**
@@ -150,7 +154,9 @@ class PASSWORD_FORM extends FORM
     $renderer->draw_password_row ('password1');
     $renderer->draw_password_row ('password2');
     if ($this->login->equals ($this->_object))
+    {
       $renderer->draw_check_box_row ('remember');
+    }
     $renderer->draw_separator ();
     $renderer->draw_submit_button_row ();
     $renderer->finish ();

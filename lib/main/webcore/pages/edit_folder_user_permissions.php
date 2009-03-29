@@ -48,7 +48,9 @@ http://www.earthli.com/software/webcore
 
     $form->process_existing ($perm);
     if ($form->committed ())
+    {
       $App->return_to_referer ($folder->permissions_home_page ());
+    }
 
     $Page->title->add_object ($folder);
     $Page->title->subject = 'Edit ' . $perm->title_as_plain_text ();
@@ -73,5 +75,7 @@ http://www.earthli.com/software/webcore
     $Page->finish_display ();
   }
   else
+  {
     $Page->raise_security_violation ('You are not allowed to edit the permissions for this folder.', $folder);
+  }
 ?>

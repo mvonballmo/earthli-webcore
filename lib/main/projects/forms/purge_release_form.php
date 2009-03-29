@@ -156,9 +156,13 @@ class PURGE_RELEASE_PREVIEW_SETTINGS extends UPDATE_RELEASE_PREVIEW_SETTINGS
 <?php
     $replacement =& $committer->replacement_release ();
     if (isset ($replacement))
+    {
       $text = '<span class="field">moved to</span> ' . $replacement->title_as_link ();
+    }
     else
+    {
       $text = '<span class="field">removed from</span> this release.';
+    }
       
     $this->_draw_section ('change(s)', 'These changes will be ' . $text, $this->object->change_query ());
     $this->_draw_section ('job(s)', 'These job will be ' . $text, $this->object->job_query ());

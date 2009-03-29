@@ -153,7 +153,9 @@ class PROJECT_ENTRY_GRID extends CONTENT_OBJECT_GRID
 <?php
     echo $obj->description_as_html ();
     if ($obj->extra_description)
+    {
       echo "<p><span class=\"field\">" . strlen ($obj->extra_description) . "</span> bytes of extra information.</p>";
+    }
     $this->_draw_description ($obj);
     $layer->finish ();
   }  
@@ -197,7 +199,9 @@ class PROJECT_ENTRY_GRID extends CONTENT_OBJECT_GRID
       {
         $rel =& $branch_info->release ();
         if (isset ($rel))
+        {
           $menu->append ($rel->title_as_link ());
+        }
       }
 
       $menu->display ();

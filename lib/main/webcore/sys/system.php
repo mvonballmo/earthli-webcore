@@ -108,7 +108,9 @@ $Null_reference = null;
 function read_array_index ($arr, $index, $default_value = '')
 {
   if (isset ($arr) && is_array ($arr) && isset ($arr [$index]))
+  {
     return $arr [$index];
+  }
   return $default_value;
 }
 
@@ -130,7 +132,9 @@ function read_var ($index, $default_value = '')
   $Result = read_array_index ($_REQUEST, $index, $default_value);
 
   if (($default_value !== '') && ($Result === ''))
+  {
     $Result = $default_value;
+  }
 
   return $Result;
 }
@@ -150,7 +154,9 @@ function read_vars ($indexes)
   {
     $value = read_var ($index);
     if ($value)
+    {
       $Result [] = "$index=$value";
+    }
   }
   return implode ('&', $Result);
 }
@@ -167,7 +173,9 @@ function trim_array (&$arr)
   foreach ($arr as $key => $value)
   {
     if (! isset ($value) || $value == '')
+    {
       unset ($arr [$key]);
+    }
   }
 
   return $arr;
@@ -191,10 +199,14 @@ function trim_array (&$arr)
 function raise ($message, $routine_name = '', $class_name = '', $obj = null, $handler = null)
 {
   if (! isset ($handler))
+  {
     $handler = $GLOBALS ['_default_exception_handler'];
+  }
 
   if (! isset ($handler))
+  {
     $handler = new EXCEPTION_HANDLER ();
+  }
 
   $handler->raise ($message, $routine_name, $class_name, $obj);
 }
@@ -251,9 +263,13 @@ function __php_error_handler ($type, $msg, $file_name, $line_no)
   if ($file_name)
   {
     if ($line_no)
+    {
       $msg = "[$file_name - line $line_no]: $msg";
+    }
     else
+    {
       $msg = "[$file_name]: $msg";
+    }
   }
 
   switch ($type)
@@ -313,7 +329,9 @@ class RAISABLE
   function raise_if_not_is_a (&$obj, $expected_class, $routine_name, $class_name)
   {
     if (! is_a ($obj, $expected_class))
+    {
       $this->raise ('[' . get_class ($obj) . "] is not a [$expected_class]", $routine_name, $class_name);
+    }
   }
 
   /**
@@ -327,7 +345,9 @@ class RAISABLE
   function assert ($condition, $message, $routine_name, $class_name)
   {
     if (! $condition)
+    {
       $this->raise ($message, $routine_name, $class_name);
+    }
   }
 
   /**
@@ -353,10 +373,14 @@ class RAISABLE
   function validate_as_integer_silent ($value, $allow_empty = TRUE)
   {
     if ($allow_empty && ! $value)
+    {
       $value = 0;
+    }
 
     if (is_numeric ($value))
+    {
       return $value;
+    }
 
     return FALSE;
   }
@@ -376,7 +400,9 @@ class RAISABLE
   {
     $validated_value = $this->validate_as_integer_silent ($value, $allow_empty);
     if ($validated_value !== FALSE)
+    {
       return $validated_value;
+    }
 
     $this->raise ("[$value] is not an integer.", 'validate_as_integer', 'RAISABLE');
   }
@@ -414,9 +440,13 @@ class EXCEPTION_HANDLER
     $sig = $this->signature ($message, $routine_name, $class_name, $obj);
 
     if ($sig->is_derived_type)
+    {
       $this->dispatch ($sig, "Fatal error in $sig->dynamic_class_name => $sig->scope: $message");
+    }
     else
+    {
       $this->dispatch ($sig, "Fatal error in $sig->scope: $message");
+    }
   }
 
   /**
@@ -500,9 +530,13 @@ class TYPE_INFO
   function format_amount ($num)
   {
     if ($num == 1)
+    {
       $Result = $num . ' ' . $this->singular_title;
+    }
     else
+    {
       $Result = $num. ' ' . $this->plural_title;
+    }
     return $Result;
   }
 }

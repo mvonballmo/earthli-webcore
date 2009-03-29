@@ -110,9 +110,13 @@ class JOB_FORM extends PROJECT_ENTRY_FORM
     $this->set_value ('time_needed', $obj->time_needed);
 
     if ($obj->reporter_id)
+    {
       $this->set_value ('reporter_id', $obj->reporter_id);
+    }
     else
+    {
       $this->set_value ('reporter_id', $obj->creator_id);
+    }
 
     // set up subscription fields, defaulting to TRUE
 
@@ -204,21 +208,27 @@ class JOB_FORM extends PROJECT_ENTRY_FORM
     {
       $subscriber =& $creator->subscriber ();
       if ($subscriber->email)
+      {
         $subscriber->set_subscribed ($obj, Subscribe_entry, $subscribe_creator);
+      }
     }
 
     if ($reporter && ! $creator_equal_reporter)
     {
       $subscriber =& $reporter->subscriber ();
       if ($subscriber->email)
+      {
         $subscriber->set_subscribed ($obj, Subscribe_entry, $subscribe_reporter);
+      }
     }
 
     if ($assignee && ! $creator_equal_assignee && ! $assignee_equal_reporter)
     {
       $subscriber =& $assignee->subscriber ();
       if ($subscriber->email)
+      {
         $subscriber->set_subscribed ($obj, Subscribe_entry, $subscribe_assignee);
+      }
     }
   }
 
@@ -263,7 +273,9 @@ class JOB_FORM extends PROJECT_ENTRY_FORM
             $status = $statuses [$branch_status];
 
             if ($status->kind == Job_status_kind_open)
+            {
               $this->record_error ("branch_{$branch->id}_release_id", 'Cannot assign open jobs to a shipped release.');
+            }
           }
         }
       }
@@ -363,9 +375,13 @@ class JOB_FORM extends PROJECT_ENTRY_FORM
     var status_ctrl = ctrl.form ['branch_' + id + '_status'];
     var priority_ctrl = ctrl.form ['branch_' + id + '_priority'];
     if (status_ctrl)
+    {
       status_ctrl.disabled = ! ctrl.checked;
+    }
     if (priority_ctrl)
+    {
       priority_ctrl.disabled = ! ctrl.checked;
+    }
 <?php
   }
 
@@ -383,9 +399,13 @@ class JOB_FORM extends PROJECT_ENTRY_FORM
     /* Get the list of statuses for this branch. */
     $selected_status = $this->value_for ("branch_{$branch->id}_status");
     if ($this->cloning () || ! $this->object_exists ())
+    {
       $statuses = $this->app->display_options->job_statuses ();
+    }
     else
+    {
       $statuses = $this->app->display_options->job_statuses_for ($selected_status);
+    }
 
     if ($this->_branch_is_locked ($branch, $release))
     {
@@ -470,7 +490,9 @@ class JOB_FORM extends PROJECT_ENTRY_FORM
 
     /* Rebuild the list only if necessary. */
     if (! $project_options->reporters_equals_assigners ())
+    {
       $props = $this->_prepare_list_properties_for ($renderer, $project_options->reporter_query ());
+    }
 
     /* The default reporter is (Me), not (None). */
     $props->replace_item (0, '(Me)', $this->login->id);
@@ -512,9 +534,13 @@ class JOB_FORM extends PROJECT_ENTRY_FORM
     $renderer->start_row (' ');
 
     if ($this->object_exists ())
+    {
       $creator =& $this->_object->creator ();
+    }
     else
+    {
       $creator =& $this->app->login;
+    }
 
     $field =& $this->field_at ('subscribe_creator');
     $field->title = $field->title . ' (' . $creator->title_as_link () . ')';

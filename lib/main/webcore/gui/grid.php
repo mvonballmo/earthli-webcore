@@ -189,7 +189,9 @@ class GRID extends WEBCORE_OBJECT
       if (isset ($this->env->profiler)) $this->env->profiler->stop ('ui');
     }
     else
+    {
       $this->_draw_empty_grid ();
+    }
   }
 
   /**
@@ -230,7 +232,9 @@ class GRID extends WEBCORE_OBJECT
   function _draw (&$objs)
   {
     if ($this->show_paginator)
+    {
       $this->_draw_paginator (TRUE);
+    }
 
     $this->_start_grid ();
     $this->_draw_header ();
@@ -243,13 +247,17 @@ class GRID extends WEBCORE_OBJECT
       $this->context->display_options->overridden_max_title_size = $old_size;
     }
     else
+    {
       $this->_draw_cells ($objs);
+    }
 
     $this->_draw_footer ();
     $this->_finish_grid ();
 
     if ($this->show_paginator)
+    {
       $this->_draw_paginator (FALSE);
+    }
 
     ob_start ();
       $this->_draw_scripts ();
@@ -302,7 +310,9 @@ class GRID extends WEBCORE_OBJECT
       if ($remainder == 0)
       {
         if ($this->show_page_breaks && ($i % $this->rows_per_printed_page == 0))
+        {
           $this->_draw_page_break ();
+        }
 
         $this->_start_row ($obj);
       }
@@ -315,7 +325,9 @@ class GRID extends WEBCORE_OBJECT
       {
         $this->_finish_row ($obj);
         if (($i < $c - 1) && $this->show_separator)
+        {
           $this->_draw_separator ();
+        }
       }
 
       $i++;
@@ -417,16 +429,24 @@ class GRID extends WEBCORE_OBJECT
       if ($this->centered)
       {
         if ($include_anchor_id && $this->paginator->page_anchor)
+        {
           echo '<p style="text-align: center" id="' . $this->paginator->page_anchor . '">' . $output . '</p>';
+        }
         else
+        {
           echo '<p style="text-align: center">' . $output . '</p>';
+        }
       }
       else
       {
         if ($include_anchor_id && $this->paginator->page_anchor)
+        {
           echo '<p id="' . $this->paginator->page_anchor . '">' . $output . '</p>';
+        }
         else
+        {
           echo '<p>' . $output . '</p>';
+        }
       }
     }
   }
@@ -478,7 +498,9 @@ class GRID extends WEBCORE_OBJECT
       $renderer = $obj->handler_for (Handler_menu);
       $renderer->set_size ($size);
       if ($alignment)
+      {
         $renderer->alignment = $alignment;
+      }
       $renderer->display ($obj->handler_for (Handler_commands));
     }
   }
@@ -492,16 +514,25 @@ class GRID extends WEBCORE_OBJECT
   function _style_for_grid ()
   {
     if ($this->width)
+    {
       $styles [] = "width: $this->width";
+    }
     if ($this->centered)
+    {
       $styles [] = 'margin: auto';
+    }
     if ($this->show_page_breaks)
+    {
       $styles [] = 'page-break-before: always';
+    }
 
     if (isset ($styles) && sizeof ($styles))
+    {
       return join ('; ', $styles);
-    else
-      return '';
+    }
+
+
+    return '';
   }
 
   /**
@@ -514,13 +545,20 @@ class GRID extends WEBCORE_OBJECT
   {
     $style = $this->_style_for_box ();
     if ($style)
+    {
       $attrs [] = "style=\"$style\"";
+    }
     if ($this->box_style)
+    {
       $attrs [] = "class=\"$this->box_style\"";
+    }
     if (sizeof ($attrs))
+    {
       return join (' ', $attrs);
-    else
-      return '';
+    }
+
+
+    return '';
   }
 
   /**
@@ -536,8 +574,9 @@ class GRID extends WEBCORE_OBJECT
       $width = round (100 / $this->_num_columns, 0);
       return "vertical-align: top; width: $width%";
     }
-    else
-      return "vertical-align: top";
+
+
+    return "vertical-align: top";
   }
 
   /**
@@ -783,16 +822,26 @@ class CSS_FLOW_GRID extends GRID
   {
     $style = parent::_style_for_box ();
     if ($style)
+    {
       $Result = $style . '; float: left';
+    }
     else
+    {
       $Result = 'float: left';
+    }
 
     if ($this->spacing)
+    {
       $Result .= '; margin: ' . $this->spacing . 'px';
+    }
     if ($this->padding)
+    {
       $Result .= '; padding: ' . $this->padding . 'px';
+    }
     if ($this->min_box_width)
+    {
       $Result .= '; min-width: ' . $this->min_box_width;
+    }
 
     return $Result;
   }

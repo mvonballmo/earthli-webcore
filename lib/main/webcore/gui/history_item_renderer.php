@@ -106,7 +106,9 @@ class HISTORY_ITEM_RENDERER extends OBJECT_RENDERER
     else
     {
       if ($obj->description)
+      {
         echo $this->_line ($obj->description_as_plain_text ());
+      }
 
       echo $obj->system_description_as_plain_text ();
     }

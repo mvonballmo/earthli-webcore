@@ -67,9 +67,13 @@ class DRAFTABLE_ENTRY_SUMMARY_GRID extends ENTRY_SUMMARY_GRID
   function _echo_details (&$obj)
   {
     if ($obj->unpublished ())
+    {
       parent::_echo_details ($obj);
+    }
     else
+    {
       $this->_echo_user_information ('Published by', $obj->publisher (), $obj->time_published );
+    }
   }  
 }
 

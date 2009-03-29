@@ -89,9 +89,13 @@ class JOB extends PROJECT_ENTRY
   function set_time_needed ($t)
   {
     if ($t)
+    {
       $this->time_needed = $t;
+    }
     else
+    {
       $this->time_needed->clear ();
+    }
   }
 
   /**
@@ -107,10 +111,14 @@ class JOB extends PROJECT_ENTRY
     {
       $Result = $assignee->icon_as_html ($size, 'Assigned');
       if (! isset ($Result))
+      {
         $Result = $this->app->resolve_icon_as_html ('{app_icons}owners/assigned', 'Assigned', $size);
+      }
     }
     else
+    {
       $Result = $this->app->resolve_icon_as_html ('{app_icons}owners/unassigned', 'Unassigned', $size);
+    }
 
     return $Result;
   }
@@ -197,7 +205,9 @@ class JOB extends PROJECT_ENTRY
   {
     $now = new DATE_TIME ();
     if ($this->time_assignee_changed->is_valid ())
+    {
       return $now->diff ($this->time_assignee_changed);
+    }
   }
 
   /**
@@ -210,9 +220,12 @@ class JOB extends PROJECT_ENTRY
   function &reporter ()
   {
     if ($this->reporter_id)
+    {
       return $this->app->user_at_id ($this->reporter_id);
-    else
-      return $this->creator ();
+    }
+
+
+    return $this->creator ();
   }
 
   /**
@@ -231,7 +244,9 @@ class JOB extends PROJECT_ENTRY
       $Result->title = $branch_info->status_as_text () . ' by ' . $closer->title_as_plain_text () . ' after ' . $age->format ();
     }
     else
+    {
       $Result->title = $branch_info->status_as_text () . ' - ' . $branch_info->priority_as_text ();
+    }
 
     return $Result;
   }
@@ -277,7 +292,9 @@ class JOB extends PROJECT_ENTRY
     $storage->add ($tname, 'priority', Field_type_integer, $this->_main_branch_info->priority);
     $storage->add ($tname, 'closer_id', Field_type_integer, $this->_main_branch_info->closer_id);
     if ($this->_main_branch_info->closer_id)
+    {
       $storage->add ($tname, 'time_closed', Field_type_date_time, $this->_main_branch_info->time_closed);
+    }
     $storage->add ($tname, 'time_status_changed', Field_type_date_time, $this->_main_branch_info->time_status_changed);
   }
 
@@ -462,7 +479,9 @@ class JOB_BRANCH_INFO extends PROJECT_ENTRY_BRANCH_INFO
   function age ()
   {
     if ($this->closer_id)
+    {
       return $this->time_closed->diff ($this->_entry->time_created);
+    }
     else
     {
       $now = new DATE_TIME ();
@@ -478,9 +497,12 @@ class JOB_BRANCH_INFO extends PROJECT_ENTRY_BRANCH_INFO
   {
     $now = new DATE_TIME ();
     if ($this->time_status_changed->is_valid ())
+    {
       return $now->diff ($this->time_status_changed);
-    else
-      return $now->diff ($this->_entry->time_created);
+    }
+
+
+    return $now->diff ($this->_entry->time_created);
   }
 
   /**
@@ -502,7 +524,9 @@ class JOB_BRANCH_INFO extends PROJECT_ENTRY_BRANCH_INFO
         $Result = $status->is_overdue ();
       }
       else
+      {
         $Result = FALSE;
+      }
 
       if (! $Result)
       {
@@ -568,7 +592,9 @@ class JOB_BRANCH_INFO extends PROJECT_ENTRY_BRANCH_INFO
         $this->time_closed->set_now ();
         $this->closer_id = $this->login->id;
         if (! $this->_entry->assignee_id)
+        {
           $this->_entry->assignee_id = $this->login->id;
+        }
       }
       else
       {
@@ -579,7 +605,9 @@ class JOB_BRANCH_INFO extends PROJECT_ENTRY_BRANCH_INFO
 
         $rel =& $this->release ();
         if (isset ($rel) && $rel->locked ())
+        {
           $this->release_id = 0;
+        }
       }
 
       $this->status = $status;
@@ -595,7 +623,9 @@ class JOB_BRANCH_INFO extends PROJECT_ENTRY_BRANCH_INFO
   {
     $props = $this->app->display_options->job_priorities ();
     if (isset ($props [$this->priority]))
+    {
       return $props [$this->priority];
+    }
     else
     {
       $prop = new PROPERTY_VALUE ($this->app);
@@ -635,7 +665,9 @@ class JOB_BRANCH_INFO extends PROJECT_ENTRY_BRANCH_INFO
   {
     $props = $this->app->display_options->job_statuses ();
     if (isset ($props [$this->status]))
+    {
       return $props [$this->status];
+    }
     else
     {
       $prop = new PROPERTY_VALUE ($this->app);
@@ -701,7 +733,9 @@ class JOB_BRANCH_INFO extends PROJECT_ENTRY_BRANCH_INFO
     $storage->add ($tname, 'branch_priority', Field_type_integer, $this->priority);
     $storage->add ($tname, 'branch_closer_id', Field_type_integer, $this->closer_id);
     if ($this->closer_id)
+    {
       $storage->add ($tname, 'branch_time_closed', Field_type_date_time, $this->time_closed);
+    }
     $storage->add ($tname, 'branch_time_status_changed', Field_type_date_time, $this->time_status_changed);
   }
 
@@ -729,12 +763,16 @@ class JOB_BRANCH_INFO extends PROJECT_ENTRY_BRANCH_INFO
         if ($text_only)
         {
           if ($status->text)
+          {
             $Result = $status->text . ' ';
+          }
         }
         else
         {
           if ($status->icon)
+          {
             $Result = $status->icon . ' ';
+          }
         }
         $diff_as_text = $status->diff_as_text ($text_only);
         $Result .= 'Needed by ' . $status->date_as_text ($text_only);
@@ -742,9 +780,13 @@ class JOB_BRANCH_INFO extends PROJECT_ENTRY_BRANCH_INFO
         {
           $Result .= ' (' . $diff_as_text;
           if ($status->diff_label)
+          {
             $Result .= ' ' . $status->diff_label . ')';
+          }
           else
+          {
             $Result .= ')';
+          }
         }
       }
     }

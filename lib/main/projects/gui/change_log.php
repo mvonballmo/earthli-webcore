@@ -154,16 +154,24 @@ class CHANGE_LOG extends WEBCORE_OBJECT
           {
             $entry =& $entries [$entry_idx];
             if (is_a ($entry, 'JOB'))
+            {
               $this->_draw_job ($entry);
+            }
             else
+            {
               $this->_draw_change ($entry);
+            }
             $title->add_object ($entries [$entry_idx]);
             $entry_idx++;
             if ($entry_idx < $entry_count)
+            {
               $branch_info =& $entries [$entry_idx]->main_branch_info ();
+            }
           }
           if ($old_idx != $entry_idx)
+          {
             echo "</dl></blockquote>\n";
+          }
           $content = ob_get_contents ();
         ob_end_clean ();
         echo '<h2>' . $title->as_text () . "</h2>\n";
@@ -191,7 +199,9 @@ class CHANGE_LOG extends WEBCORE_OBJECT
   function comp_name_for ($entry)
   {
     if (! $entry->component_id)
+    {
       $Result = '(no component)';
+    }
     else
     {
       if (! isset ($this->_components))
@@ -233,7 +243,9 @@ class CHANGE_LOG extends WEBCORE_OBJECT
     
     $detail = '';
     if (! empty ($details))
+    {
       $detail = '[' . implode (' - ', $details) . '] ';
+    }
     
     $detail .= $entry->title_as_link ();
     

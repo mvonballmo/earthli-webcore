@@ -99,9 +99,13 @@ class BRANCH_RENDERER extends CONTENT_OBJECT_RENDERER
     {
       $latest_release =& $obj->latest_release ();
       if ($latest_release)
+      {
         $rel_text = $latest_release->title_as_link ();
+      }
       else
+      {
         $rel_text = 'not released';
+      }
 ?>
     <tr>
       <td class="label">Latest</td>
@@ -111,9 +115,13 @@ class BRANCH_RENDERER extends CONTENT_OBJECT_RENDERER
 
       $next_release =& $obj->next_release ();
       if ($next_release)
+      {
         $rel_text = $next_release->title_as_link ();
+      }
       else
+      {
         $rel_text = 'none planned';
+      }
 ?>
     <tr>
       <td class="label">Next</td>

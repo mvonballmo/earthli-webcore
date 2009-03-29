@@ -61,9 +61,13 @@ function _text_to_atom_html ($text)
 function _echo_atom_text_tag ($tag, $text, $language, $is_html)
 {
   if ($is_html)
+  {
     $type = 'html';
+  }
   else
+  {
     $type = 'text';
+  }
 ?>
   <<?php echo $tag; ?> type="<?php echo $type; ?>" xml:lang="<?php echo $language; ?>">
     <![CDATA[<?php echo $text; ?>]]>
@@ -159,9 +163,13 @@ class ENTRY_ATOM_RENDERER extends NEWSFEED_OBJECT_RENDERER
     $html = $this->_is_html($options);
 
     if ($html)
+    {
       $munger =& $obj->html_formatter ();
+    }
     else
+    {
       $munger =& $obj->plain_text_formatter ();
+    }
       
     $munger->max_visible_output_chars = 300;
     $summary = $munger->transform ($obj->description, $obj);

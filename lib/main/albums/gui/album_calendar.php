@@ -165,7 +165,9 @@ class ALBUM_CALENDAR extends BASIC_CALENDAR
           next ($this->_pic_dates);
           $pic_date = current ($this->_pic_dates);
           if ($pic_date)
+          {
             $php_pic_date = $pic_date->as_php ();
+          }
         }
       }
     }
@@ -186,7 +188,9 @@ class ALBUM_CALENDAR extends BASIC_CALENDAR
           next ($this->_journals);
           $jrnl = current ($this->_journals);
           if ($jrnl)
+          {
             $php_jrnl_date = $jrnl->date->as_php ();
+          }
         }
       }
     }
@@ -203,7 +207,9 @@ class ALBUM_CALENDAR extends BASIC_CALENDAR
       $d = $album->last_day->as_php ();
       $php_last_album_day = mktime (23, 59, 59, date ("n", $d), date ("j", $d), date ("Y", $d));
       if (($php_first_album_day <= $php_first_day) && ($php_last_day <= $php_last_album_day))
+      {
         $albums [] = $album;
+      }
       $i++;
     }
 
@@ -222,7 +228,9 @@ class ALBUM_CALENDAR extends BASIC_CALENDAR
               {
                 $first_jrnl = $jrnls [0];
                 if ($first_jrnl)
+                {
                   echo $first_jrnl->weather_icon ();
+                }
               }
             }
           ?>
@@ -260,8 +268,9 @@ class ALBUM_CALENDAR extends BASIC_CALENDAR
               $c = sizeof ($jrnls);
 
               if ($c > 1)
-                // too many journal entries to list
               {
+                // too many journal entries to list
+                
                 $iso_first_day = $first_day->as_iso ();
                 $iso_last_day = $last_day->as_iso ();
           ?>

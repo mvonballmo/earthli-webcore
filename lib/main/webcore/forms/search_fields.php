@@ -75,7 +75,9 @@ class SEARCH_FIELDS extends WEBCORE_OBJECT
     WEBCORE_OBJECT::WEBCORE_OBJECT ($context);
 
     if (! $title)
+    {
       $title = $base_name;
+    }
 
     $this->base_name = $base_name;
     $this->title = $title;
@@ -110,7 +112,9 @@ class SEARCH_FIELDS extends WEBCORE_OBJECT
   function add_sort_fields (&$values)
   {
     if ($this->sortable)
+    {
       $values [$this->base_name] = $this->title;
+    }
   }
 
   /**
@@ -179,7 +183,9 @@ class SEARCH_FIELDS extends WEBCORE_OBJECT
   {
     $Result = $this->_table_name;
     if (! $Result && (strpos ($field_name, '.') === FALSE))
+    {
       $Result = $query->alias;
+    }
     $Result .= '.' . $field_name;
     return $Result;
   }
@@ -261,11 +267,17 @@ class SEARCH_DATE_FIELDS extends SEARCH_FIELDS
       $f->type = Date_time_format_short_date;
       $f->show_local_time = FALSE;
       if ($date_after->is_valid ())
+      {
         $clauses [] = $this->title . ' after ' . $date_after->format ($f);
+      }
       if ($date_before->is_valid ())
+      {
         $clauses [] = $this->title . ' before ' . $date_before->format ($f);
+      }
       if (sizeof ($clauses))
+      {
         return join (' and ', $clauses);
+      }
     }
   }
 
@@ -327,7 +339,9 @@ class SEARCH_DATE_FIELDS extends SEARCH_FIELDS
     $before = $form->value_for ($this->before_name ());
 
     if ($before->is_valid () && $after->is_valid () && $before->less_than ($after))
+    {
       $form->record_error ($this->base_name, "Make sure 'before' is before 'after'");
+    }
   }
 
   /**
@@ -372,7 +386,9 @@ class SEARCH_DATE_FIELDS extends SEARCH_FIELDS
     }
 
     if (isset ($date_before) && isset ($date_after))
+    {
       $query->restrict_date ($this->full_name ($query, $this->base_name), $date_after, $date_before);
+    }
   }
 
   /**
@@ -462,7 +478,9 @@ class SEARCH_USER_FIELDS extends SEARCH_FIELDS
       {
         $user_names = explode (';', $user_names);
         if (sizeof ($user_names))
+        {
           return $this->title . ' is ' . join (' or ', $user_names);
+        }
       }
     }
   }
@@ -534,13 +552,19 @@ class SEARCH_USER_FIELDS extends SEARCH_FIELDS
       {
         $user =& $user_query->object_at_name ($name);
         if (! $user)
+        {
           $form->record_error ($this->base_name, "[$name] does not exist.");
+        }
         else
+        {
           $user_ids [] = $user->id;
+        }
       }
 
       if (sizeof ($user_ids) > 0)
+      {
         $form->set_value ($this->ids_name (), join (',', $user_ids));
+      }
     }
   }
 
@@ -568,9 +592,13 @@ class SEARCH_USER_FIELDS extends SEARCH_FIELDS
     if ($search_type != Search_user_constant)
     {
       if (isset ($user))
+      {
         $search_user =& $user;
+      }
       else if ($search_type == Search_user_context_login)
-        $search_user =& $this->app->login;
+ {
+   $search_user =& $this->app->login;
+ }
 
       if (isset ($search_user))
       {
@@ -656,7 +684,9 @@ class SEARCH_TEXT_FIELDS extends SEARCH_FIELDS
   function description (&$obj)
   {
     if ($obj->parameters [$this->base_name])
+    {
       return $this->title;
+    }
   }
 
   /**
@@ -708,7 +738,9 @@ class SEARCH_TEXT_FIELDS extends SEARCH_FIELDS
   function apply_to_query (&$query, &$obj, &$fields)
   {
     if ($obj->parameters [$this->base_name])
+    {
       $fields [] = $this->full_name ($query, $this->base_name);
+    }
   }
 
   /**
@@ -754,9 +786,13 @@ class SORT_FIELDS extends SEARCH_FIELDS
       $Result = $sort_values [$obj->parameters [$this->sort_name ()]];
 
       if ($obj->parameters [$this->direction_name ()] == 'asc')
+      {
         $Result .= ' Ascending';
+      }
       else
+      {
         $Result .= ' Descending';
+      }
 
       return $Result;
     }
@@ -998,14 +1034,18 @@ class SEARCH_OBJECT_FIELDS extends WEBCORE_OBJECT
         $text->apply_to_query ($query, $obj, $fields);
 
       if (sizeof ($fields))
+      {
         $query->add_search ($obj->parameters ['search_text'], $fields);
+      }
     }
 
     $orders = array ();
     foreach ($this->_sorts as $sort)
       $sort->apply_to_query ($query, $obj, $orders);
     if (sizeof ($orders))
+    {
       $query->set_order (join (', ', $orders));
+    }
   }
 
   /**
@@ -1060,9 +1100,13 @@ class SEARCH_OBJECT_FIELDS extends WEBCORE_OBJECT
     $restrictions = $this->_restrictions_as_text ($obj);
 
     if (! sizeof ($restrictions))
+    {
       $Result = '';
+    }
     else
+    {
       $Result = '<ul>' . join ("\n", $restrictions);
+    }
 
     $orders = array ();
     $sort_values = $this->_sort_values ();
@@ -1070,13 +1114,19 @@ class SEARCH_OBJECT_FIELDS extends WEBCORE_OBJECT
     {
       $desc = $sort->description ($obj, $sort_values);
       if ($desc)
+      {
         $orders [] = $desc;
+      }
     }
 
     if (sizeof ($orders))
+    {
       $Result .= "\nSorted by " . join (', ', $orders) . '</ul>';
+    }
     else
+    {
       $Result .= '</ul>';
+    }
 
     return $Result;
   }
@@ -1094,7 +1144,9 @@ class SEARCH_OBJECT_FIELDS extends WEBCORE_OBJECT
     foreach ($this->_dates as $date)
     {
       if (isset ($this->_linked_fields [$date->base_name]))
+      {
         $user = $this->_users [$this->_linked_fields [$date->base_name]];
+      }
 
       $layer = $this->context->make_layer ($date->title);
       $layer->visible = $date->needs_visible ($form) || (isset ($user) && $user->needs_visible ($form));
@@ -1105,7 +1157,9 @@ class SEARCH_OBJECT_FIELDS extends WEBCORE_OBJECT
           $renderer->start_block ();
 
             if (isset ($user))
+            {
               $user->draw_fields ($form, $renderer);
+            }
 
             $date->draw_fields ($form, $renderer);
 
@@ -1263,16 +1317,22 @@ class SEARCH_OBJECT_FIELDS extends WEBCORE_OBJECT
       {
         $desc = $text->description ($obj);
         if ($desc)
+        {
           $fields [] = $desc;
+        }
       }
 
       if (sizeof ($fields))
       {
         $search_text = htmlspecialchars ($obj->parameters ['search_text']);
         if (sizeof ($fields) < sizeof ($this->_texts))
+        {
           $Result [] = join (' or ', $fields) . ' contains "' . $search_text . '"';
+        }
         else
+        {
           $Result [] = 'Any text contains "' . $search_text . '"';
+        }
       }
     }
 
@@ -1280,14 +1340,18 @@ class SEARCH_OBJECT_FIELDS extends WEBCORE_OBJECT
     {
       $desc = $date->description ($obj);
       if ($desc)
+      {
         $Result [] = $desc;
+      }
     }
 
     foreach ($this->_users as $user)
     {
       $desc = $user->description ($obj);
       if ($desc)
+      {
         $Result [] = $desc;
+      }
     }
 
     return $Result;
@@ -1480,9 +1544,13 @@ class SEARCH_OBJECT_IN_FOLDER_FIELDS extends SEARCH_CONTENT_OBJECT_FIELDS
       $state_restriction = $query->alias . '.state = ' . $obj->parameters ['state'];
 
       if ($obj->parameters ['not_state'])
+      {
         $query->restrict ("NOT ($state_restriction)");
+      }
       else
+      {
         $query->restrict ($state_restriction);
+      }
     }
 
     if ($obj->parameters ['folder_search_type'] != Search_user_context_none)
@@ -1490,15 +1558,21 @@ class SEARCH_OBJECT_IN_FOLDER_FIELDS extends SEARCH_CONTENT_OBJECT_FIELDS
       if (sizeof ($obj->parameters ['folder_ids']))
       {
         if ($obj->parameters ['folder_search_type'] == Search_user_constant)
+        {
           $query->restrict_by_op ('fldr.id', $obj->parameters ['folder_ids'], Operator_in);
+        }
         else
+        {
           $query->restrict_by_op ('fldr.id', $obj->parameters ['folder_ids'], Operator_not_in);
+        }
       }
     }
     else
     {
       if (isset ($this->folder_from_context))
+      {
         $query->restrict ('fldr.id = ' . $this->folder_from_context->id);
+      }
     }
   }
 
@@ -1569,28 +1643,42 @@ class SEARCH_OBJECT_IN_FOLDER_FIELDS extends SEARCH_CONTENT_OBJECT_FIELDS
             $folder_names [] = $folder->title_as_plain_text ();
           $folder_names = join (', ', $folder_names);
           if ($obj->parameters ['folder_search_type'] == Search_user_constant)
+          {
             $folder_text = 'Folder is ';
+          }
           else
+          {
             $folder_text = 'Folder is not ';
+          }
 
           if (sizeof ($folder_names) == 1)
+          {
             $Result [] = $folder_text . $folder_names;
+          }
           else
+          {
             $Result [] = $folder_text . 'one of ' . $folder_names;
+          }
         }
       }
     }
     else
+    {
       $Result [] = 'Folder matches folder from context';;
+    }
 
     if ($obj->parameters ['state'])
     {
       $state_text = $this->_state_as_text ($obj);
 
       if ($obj->parameters ['not_state'])
+      {
         $Result [] = 'State is not ' . $state_text;
+      }
       else
+      {
         $Result [] = 'State is ' . $state_text;
+      }
     }
 
     return $Result;
@@ -1631,7 +1719,9 @@ class SEARCH_OBJECT_IN_FOLDER_FIELDS extends SEARCH_CONTENT_OBJECT_FIELDS
       foreach ($id_values as $id)
       {
         if ($id)
+        {
           $selected_folder_ids [$id] = $id;
+        }
       }
     }
 
@@ -1798,7 +1888,9 @@ class SEARCH_USER_OBJECT_FIELDS extends SEARCH_CONTENT_OBJECT_FIELDS
     parent::apply_to_query ($query, $obj);
 
     if ($obj->parameters ['user_kind'])
+    {
       $query->restrict ($query->alias . '.kind = \'' . $obj->parameters ['user_kind'] . '\'');
+    }
   }
 
   /**
@@ -1812,7 +1904,9 @@ class SEARCH_USER_OBJECT_FIELDS extends SEARCH_CONTENT_OBJECT_FIELDS
     $Result = parent::_restrictions_as_text ($obj);
 
     if ($obj->parameters ['user_kind'])
+    {
       $Result [] = 'Kind is ' . $obj->parameters ['user_kind'];
+    }
 
     return $Result;
   }

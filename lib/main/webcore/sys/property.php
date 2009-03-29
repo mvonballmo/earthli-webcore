@@ -88,7 +88,9 @@ class PROPERTY_VALUE extends WEBCORE_OBJECT
   function expanded_icon_url ($size = '16px')
   {
     if ($this->icon)
+    {
       return $this->context->sized_icon ($this->icon, $size);
+    }
   }
 }
 

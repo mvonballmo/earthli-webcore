@@ -115,9 +115,12 @@ class RECIPE extends DRAFTABLE_ENTRY
   function ingredients_as_html ()
   {
     if ($this->bullet_ingredients)
+    {
       return $this->_text_as_html ("<ul>$this->ingredients</ul>");
-    else
-      return $this->_text_as_html ($this->ingredients);
+    }
+
+
+    return $this->_text_as_html ($this->ingredients);
   }
 
   /**
@@ -127,9 +130,12 @@ class RECIPE extends DRAFTABLE_ENTRY
   function instructions_as_html ()
   {
     if ($this->number_instructions)
+    {
       return $this->_text_as_html ("<ol>$this->instructions</ol>");
-    else
-      return $this->_text_as_html ($this->instructions);
+    }
+
+
+    return $this->_text_as_html ($this->instructions);
   }
 
   /**
@@ -139,9 +145,12 @@ class RECIPE extends DRAFTABLE_ENTRY
   function ingredients_as_plain_text ()
   {
     if ($this->bullet_ingredients)
+    {
       return $this->_text_as_plain_text ("<ul>$this->ingredients</ul>");
-    else
-      return $this->_text_as_plain_text ($this->ingredients);
+    }
+
+
+    return $this->_text_as_plain_text ($this->ingredients);
   }
 
   /**
@@ -151,9 +160,12 @@ class RECIPE extends DRAFTABLE_ENTRY
   function instructions_as_plain_text ()
   {
     if ($this->number_instructions)
+    {
       return $this->_text_as_plain_text ("<ol>$this->instructions</ol>");
-    else
-      return $this->_text_as_plain_text ($this->instructions);
+    }
+
+
+    return $this->_text_as_plain_text ($this->instructions);
   }
   
   /**

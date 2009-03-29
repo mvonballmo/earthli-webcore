@@ -36,7 +36,9 @@ http://www.earthli.com/software/webcore
 
     $form->process_existing ($icon);
     if ($form->committed ())
+    {
       $Env->redirect_local ("view_icons.php");
+    }
 
     $Page->title->add_object ($icon);
     $Page->title->subject = 'Delete icon';
@@ -59,5 +61,7 @@ http://www.earthli.com/software/webcore
     $Page->finish_display ();
   }
   else
+  {
     $Page->raise_security_violation ('You are not allowed to delete this icon.', $icon);
+  }
 ?>

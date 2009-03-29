@@ -179,9 +179,12 @@ class UPLOADED_FILE extends RAISABLE
   function current_name ()
   {
     if (isset ($this->_final_name_and_path))
+    {
       return $this->_final_name_and_path;
-    else
-      return $this->temp_name;
+    }
+
+
+    return $this->temp_name;
   }
 
   /**
@@ -211,7 +214,9 @@ class UPLOADED_FILE extends RAISABLE
   function overwritable_in ($path)
   {
     if ($this->exists_in ($path))
+    {
       return is_writable ($path . $this->normalized_name);
+    }
   }
 
   function is_moveable_to ($path, $options = Uploaded_file_unique_name)
@@ -260,7 +265,9 @@ class UPLOADED_FILE extends RAISABLE
       ensure_path_exists ($path);
 
       if (! file_exists ($path))
+      {
         $this->raise ("Could not create [$path] on server.", 'move_to', 'UPLOADED_FILE');
+      }
       else
       {
         /* If the file has already been moved, use the normal move function to place it in the
@@ -269,7 +276,9 @@ class UPLOADED_FILE extends RAISABLE
         if (isset ($this->_final_name_and_path))
         {
           if (($options == Uploaded_file_overwrite) && file_exists ($path . $final_name))
+          {
             unlink ($path . $final_name);
+          }
           rename ($this->_final_name_and_path, $path . $final_name);
           $this->processed = TRUE;
         }
@@ -285,7 +294,9 @@ class UPLOADED_FILE extends RAISABLE
         }
         
         if (! file_exists ($path . $final_name))
+        {
           $this->raise ("Could not move [" . $this->current_name () . "] to [$path$final_name]", 'move_to', 'UPLOADED_FILE');        
+        }
       }
     }
   }
@@ -308,9 +319,12 @@ class UPLOADED_FILE extends RAISABLE
       return "$this->name was only partially uploaded.";
     case Uploaded_file_error_missing:
       if ($this->name)
+      {
         return "$this->name was not uploaded.";
-      else
-        return "Required file was not uploaded.";
+      }
+
+
+      return "Required file was not uploaded.";
     default:
       return "Unknown error (code $this->error).";
     }
@@ -403,9 +417,13 @@ class UPLOADED_FILE_SET
         foreach ($file_info [Uploaded_file_name] as $idx => $name)
         {
           if (isset ($file_info [Uploaded_file_error][$idx]))
+          {
             $error = $file_info [Uploaded_file_error][$idx];
+          }
           else
+          {
             $error = Uploaded_file_error_none;
+          }
 
           $this->_process_file ($file_info [Uploaded_file_name][$idx],
                                 $file_info [Uploaded_file_size][$idx],
@@ -436,7 +454,9 @@ class UPLOADED_FILE_SET
     foreach ($this->files as $file)
     {
       if (! $file->is_valid ())
+      {
         return FALSE;
+      }
     }
 
     return TRUE;  // All files are valid
@@ -480,7 +500,9 @@ class UPLOADED_FILE_SET
   function _process_file ($name, $size, $type, $temp_name, $error)
   {
     if (! (($error == Uploaded_file_error_none) && (! $size || ! $name)))
+    {
       $this->files [] = new UPLOADED_FILE ($this->_uploader, $name, $size, $type, $temp_name, $error);
+    }
   }
 
   /**
@@ -564,7 +586,9 @@ class UPLOADER extends RAISABLE
 
     $this->form_max_file_size = read_var (Form_max_file_size_field_name, 0);
     if ($this->form_max_file_size && ($this->form_max_file_size < $this->max_file_size))
+    {
       $this->max_file_size = $this->form_max_file_size;
+    }
 
     $this->_file_sets = array ();
     $this->total_files = 0;
@@ -596,7 +620,9 @@ class UPLOADER extends RAISABLE
         $file = new UPLOADED_FILE ($this, '', 0, '', '', 0);
         $file_set_id = $file->load_from_text ($upload);
         if (isset ($this->file_sets [$file_set_id]))
+        {
           $file_set =& $this->file_sets [$file_set_id];
+        }
         else
         {
           $file_set = new UPLOADED_FILE_SET ($this, $file_set_id);

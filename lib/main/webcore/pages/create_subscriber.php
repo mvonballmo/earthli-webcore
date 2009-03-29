@@ -34,7 +34,9 @@ http://www.earthli.com/software/webcore
     $subscriber =& $subscriber_query->object_at_email ($email);
 
     if (isset ($subscriber))
+    {
       $Env->redirect_local ($subscriber->home_page ());
+    }
     else
     {
       $class_name = $App->final_class_name ('USER_SUBSCRIPTION_OPTIONS_FORM', 'webcore/forms/user_subscription_options_form.php');
@@ -44,7 +46,9 @@ http://www.earthli.com/software/webcore
 
       $form->process_new ($subscriber);
       if ($form->committed ())
+      {
         $Env->redirect_local ($subscriber->home_page ());
+      }
 
       $Page->title->subject = "Create subscriber";
 
@@ -70,5 +74,7 @@ http://www.earthli.com/software/webcore
     }
   }
   else
+  {
     $Page->raise_error ('Please enter an email address.');
+  }
 ?>

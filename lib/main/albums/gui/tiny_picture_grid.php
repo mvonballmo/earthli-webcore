@@ -65,9 +65,13 @@ class TINY_PICTURE_GRID extends CSS_FLOW_GRID
     $is_local = $url->has_local_domain ();
     $metrics = $obj->thumbnail_metrics ($is_local);
     if ($is_local)
+    {
       $metrics->resize_to_fit ($this->max_width, $this->max_height);
+    }
     else
+    {
       $metrics->resize ($this->max_width, $this->max_height);
+    }
   ?>
     <a href="<?php echo $obj->home_page (); ?>"><?php echo $metrics->as_html_without_link ($obj->title_as_plain_text ()); ?></a>
   <?php

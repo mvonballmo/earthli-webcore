@@ -60,7 +60,9 @@ class CONTENT_OBJECT_GRID extends SELECTABLE_GRID
     $Result->max_visible_output_chars = 0;
 
     if (! empty ($this->app->search_text))
+    {
       $Result->add_argument ('search_text', $this->app->search_text);
+    }
 
     return $Result;
   }

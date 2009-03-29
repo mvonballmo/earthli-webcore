@@ -165,9 +165,13 @@ class NUMERIC_CAPTCHA extends CAPTCHA
     $this->operand_left = rand (1, 9);
     $this->operation = rand (Captcha_operator_plus, Captcha_operator_times);
     if ($this->operation == Captcha_operator_minus)
+    {
       $this->operand_right = rand (1, $this->operand_left);
+    }
     else
+    {
       $this->operand_right = rand (1, 9);
+    }
   }
   
   /**

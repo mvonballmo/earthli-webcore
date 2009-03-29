@@ -28,7 +28,9 @@ http://www.earthli.com/software/webcore
 
   $Page->title->subject = 'Text formatting';
   if (isset ($App))
+  {
     $Page->location->append ($App->short_title, './');
+  }
   $Page->location->append ($Page->title->subject);
 
   $Page->start_display ();
@@ -634,7 +636,9 @@ if ($data)
 {
   $this-&gt;_parse_unparsed_buffer ();
   if (! $this-&gt;_parsing_started)
+  {
     // parsed buffer has not
+  }
     // been initialized yet
   {
     $this-&gt;_open_buffer ();
@@ -671,7 +675,9 @@ if ($data)
 {
   $this->_parse_unparsed_buffer ();
   if (! $this->_parsing_started)
+  {
     // parsed buffer has
+  }
     // not been initialized yet
   {
     $this->_open_buffer ();

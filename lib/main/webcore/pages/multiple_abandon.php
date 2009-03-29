@@ -43,7 +43,9 @@ http://www.earthli.com/software/webcore
   {
     $form->process_existing ($folder);
     if ($form->committed ())
+    {
       $App->return_to_referer ("view_explorer.php?id=$folder->id");
+    }
 
     $Page->title->add_object ($folder);
     $Page->title->subject = 'Abandon ' . $form->object_list->description ();
@@ -68,5 +70,7 @@ http://www.earthli.com/software/webcore
     $Page->finish_display ();
   }
   else
+  {
     $Page->raise_security_violation ('You are not allowed to abandon the selected objects or folders.', $folder);
+  }
 ?>

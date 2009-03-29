@@ -98,7 +98,9 @@ class ATTACHMENT extends OBJECT_IN_FOLDER
   {
     $Result = $this->file_name;
     if (! $Result || ! file_exists ($this->file_name))
+    {
       $Result = url_to_file_name ($this->full_url (Force_root_on));
+    }
     return $Result;
   }
 
@@ -112,9 +114,13 @@ class ATTACHMENT extends OBJECT_IN_FOLDER
   function full_url ($root_override = null)
   {
     if (file_exists ($this->file_name))
+    {
       $Result = file_name_to_url ($this->file_name);
+    }
     else
+    {
       $Result = $this->_host->resolve_url ('{att_link}' . $this->file_name, $root_override);
+    }
 
     return $Result;
   }
@@ -128,7 +134,9 @@ class ATTACHMENT extends OBJECT_IN_FOLDER
   function thumbnail_file_name ($for_file = '')
   {
     if (! $for_file)
+    {
       $for_file = $this->full_file_name ();
+    }
     $url = new FILE_URL ($for_file);
     $url->append_to_name ('_tn');
     return $url->as_text ();
@@ -144,7 +152,9 @@ class ATTACHMENT extends OBJECT_IN_FOLDER
   {
     $thumb_url = $this->thumbnail_file_name ();
     if (file_exists ($thumb_url))
+    {
       return file_name_to_url ($thumb_url);
+    }
   }
 
   /**
@@ -158,9 +168,12 @@ class ATTACHMENT extends OBJECT_IN_FOLDER
     if ($thumb_url)
     {
       if ($CSS_class)
+      {
         return "<img class=\"$CSS_class\" src=\"$thumb_url\" alt=\"$this->title\">\n";
-      else
-        return "<img src=\"$thumb_url\" alt=\"$this->title\">\n";
+      }
+
+
+      return "<img src=\"$thumb_url\" alt=\"$this->title\">\n";
     }
   }
 
@@ -316,7 +329,9 @@ class ATTACHMENT extends OBJECT_IN_FOLDER
     $host_url = $host->_object_url ($use_links, $separator, $formatter);
 
     if (! isset ($separator))
+    {
       $separator = $this->app->display_options->obj_url_separator;
+    }
 
     return $host_url . $separator . $Result;
   }
@@ -331,7 +346,9 @@ class ATTACHMENT extends OBJECT_IN_FOLDER
     {
       @unlink ($this->file_name);
       if ($this->is_image)
+      {
         @unlink ($this->thumbnail_file_name ());
+      }
     }
 
     parent::_purge ($options);

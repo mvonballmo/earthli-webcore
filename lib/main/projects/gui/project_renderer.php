@@ -55,7 +55,9 @@ class PROJECT_RENDERER extends FOLDER_RENDERER
   function _echo_html_content (&$obj)
   {
     if (! $this->_options->show_as_summary || ! $obj->is_organizational ())
+    {
       $this->_echo_details_as_html ($obj);
+    }
     $this->_echo_html_descriptions ($obj);
     $this->_echo_html_user_information ($obj, 'info-box-bottom');
   }
@@ -76,17 +78,25 @@ class PROJECT_RENDERER extends FOLDER_RENDERER
         $trunk =& $obj->trunk ();
         $latest_release =& $trunk->latest_release ();
         if ($latest_release)
+        {
           $latest_text = $latest_release->title_as_link ();
+        }
         else
+        {
           $latest_text = 'Not released';
+        }
           
         $pending_release_query = $obj->release_query ();
         $pending_release_query->set_up_pending ();
         $next_release = $pending_release_query->first_object ();
         if ($next_release)
+        {
           $next_text = $next_release->title_as_link ();
+        }
         else
+        {
           $next_text = 'None planned';        
+        }
   ?>
       <tr>
         <td class="label">Trunk</td>
@@ -162,9 +172,13 @@ class PROJECT_RENDERER extends FOLDER_RENDERER
       <td>
       <?php
         if (! $options->seconds_until_deadline)
+        {
           echo 'Show no warnings for deadlines';
+        }
         else
+        {
           echo 'Show warning <span class="field">' . $options->release_warning_description () . '</span> before deadline.';
+        }
       ?>
     </td>
   </tr>

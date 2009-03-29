@@ -36,7 +36,9 @@ http://www.earthli.com/software/webcore
 
     $form->process_new ($icon);
     if ($form->committed ())
+    {
       $Env->redirect_local ('view_icons.php');
+    }
 
     $Page->title->subject = 'Create Icon';
 
@@ -60,5 +62,7 @@ http://www.earthli.com/software/webcore
     $Page->finish_display ();
   }
   else
+  {
     $Page->raise_security_violation ('You are not allowed to create icons.');
+  }
 ?>

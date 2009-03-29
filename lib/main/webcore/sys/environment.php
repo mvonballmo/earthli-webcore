@@ -268,9 +268,12 @@ class ENVIRONMENT extends RESOLVER
   function description ($as_html = TRUE)
   {
     if ($as_html)
+    {
       return 'earthli WebCore&trade; ' . $this->version;
-    else
-      return 'earthli WebCore (TM) ' . $this->version;
+    }
+
+
+    return 'earthli WebCore (TM) ' . $this->version;
   }
 
   /**
@@ -311,7 +314,9 @@ class ENVIRONMENT extends RESOLVER
   function running_on_declared_host ()
   {
     if ($this->run_as_console)
+    {
       return false;
+    }
 
     if (! isset ($this->_running_on_declared_host))
     {
@@ -370,7 +375,9 @@ class ENVIRONMENT extends RESOLVER
   {
     $host_name = $this->server_domain ();
     if (! $host_name)
+    {
       $host_name = $this->default_domain ();
+    }
     return ensure_has_protocol ($host_name, 'http');
   }
 
@@ -387,7 +394,9 @@ class ENVIRONMENT extends RESOLVER
     {
       $this->_url = new URL (read_array_index ($_SERVER, 'REQUEST_URI'));
       if ($this->_url->name () == '')
+      {
         $this->_url->replace_name_and_extension ('index.php');
+      }
     }
 
     $url = clone_object ($this->_url); // make a copy so it can be modified below.
@@ -461,9 +470,13 @@ class ENVIRONMENT extends RESOLVER
       $this->_buffered = $value;
 
       if ($value)
+      {
         ob_start ();
+      }
       else
+      {
         @ob_end_flush ();
+      }
     }
   }
 
@@ -551,9 +564,13 @@ class ENVIRONMENT extends RESOLVER
   function auto_detect_os ()
   {
     if (strpos (strtoupper (php_uname ('s')), 'WIN') === 0)
+    {
       $this->set_os (Os_win);
+    }
     else
+    {
       $this->set_os (Os_unix);
+    }
   }
 
   /**
@@ -620,7 +637,9 @@ class ENVIRONMENT extends RESOLVER
     {
       $url_path = $this->url (Url_part_path);
       if (strpos ($location, $url_path) === 0)
+      {
         $url = new URL ($location);
+      }
       else
       {
         $url = new URL ($url_path);
@@ -646,7 +665,9 @@ class ENVIRONMENT extends RESOLVER
   function redirect_remote ($location)
   {
     if ($this->ignore_redirects)
+    {
       log_message ("Redirection to [$location] was ignored.", Msg_type_warning, Msg_channel_system);
+    }
     else
     {
       $this->assert ($this->is_http_server (), "Could not redirect to [$location]: not running from server", 'redirect_remote', 'SYSTEM', $this);
@@ -745,12 +766,18 @@ class HTML_EXCEPTION_HANDLER extends ENVIRONMENT_EXCEPTION_HANDLER
     if ($this->env->is_http_server ())
     {
       if (isset ($sig->is_derived_type))
+      {
         die ("<div class=\"error\">Fatal error in <span class=\"field\">$sig->dynamic_class_name => $sig->scope</span>: $sig->message</div>");
+      }
       else
+      {
         die ("<div class=\"error\">Fatal error in <span class=\"field\">$sig->scope</span>: $sig->message</div>");
+      }
     }
     else
+    {
       parent::dispatch ($sig, $msg);
+    }
   }
 }
 
@@ -817,7 +844,9 @@ class REDIRECT_EXCEPTION_HANDLER extends HTML_EXCEPTION_HANDLER
   function REDIRECT_EXCEPTION_HANDLER (&$env)
   {
     if (! $env->exception_handler_page)
+    {
       raise ('Exception handler URL cannot be empty.', 'REDIRECT_EXCEPTION_HANDLER', 'REDIRECT_EXCEPTION_HANDLER');
+    }
 
     $this->env =& $env;
   }
@@ -830,9 +859,7 @@ class REDIRECT_EXCEPTION_HANDLER extends HTML_EXCEPTION_HANDLER
    */
   function dispatch (&$sig, $msg)
   {
-    if ($this->env->is_http_server ()
-        && $this->env->buffered ()
-        && $this->env->exception_handler_page)
+    if ($this->env->is_http_server () && $this->env->buffered () && $this->env->exception_handler_page)
     {
       $current_url = $this->env->url ();
       $handler_url = $this->env->resolve_file ($this->env->exception_handler_page);
@@ -842,10 +869,14 @@ class REDIRECT_EXCEPTION_HANDLER extends HTML_EXCEPTION_HANDLER
         $this->env->redirect_root ($handler_url .'?' . $parameters);
       }
       else
+      {
         parent::dispatch ($sig, $msg);
+      }
     }
     else
+    {
       parent::dispatch ($sig, $msg);
+    }
   }
 }
 

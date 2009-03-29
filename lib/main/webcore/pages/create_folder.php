@@ -39,7 +39,9 @@ http://www.earthli.com/software/webcore
 
     $form->process_new ($folder);
     if ($form->committed ())
+    {
       $Env->redirect_local ($folder->home_page ());
+    }
 
     if ($parent)
     {
@@ -66,5 +68,7 @@ http://www.earthli.com/software/webcore
     $Page->finish_display ();
   }
   else
+  {
     $Page->raise_security_violation ('You are not allowed to create folders.', $parent);
+  }
 ?>

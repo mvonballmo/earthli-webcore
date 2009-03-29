@@ -117,9 +117,13 @@ class UNIQUE_OBJECT extends NAMED_OBJECT
   {
     $Result = parent::instance_description ();
     if ($this->exists ())
+    {
       $Result .= ', id=' . $this->id;
+    }
     else
+    {
       $Result .= ', new';
+    }
     return $Result;
   }
 

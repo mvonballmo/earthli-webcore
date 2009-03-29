@@ -140,9 +140,12 @@ class SQL_FIELD
       return "'" . addslashes ($this->value) . "'";
     case Field_type_boolean:
       if ($this->value)
+      {
         return '1';
-      else
-        return '0';
+      }
+
+
+      return '0';
     default:
       raise ("Unknown data type [$this->type]", 'value_for_sql', 'SQL_FIELD');
     }
@@ -203,12 +206,13 @@ class SQL_TABLE extends WEBCORE_OBJECT
   {
     foreach ($this->fields as $field)
     {
-      if ($field->needed_for_action ($action)
-          && ($field->type == Field_type_integer))
+      if ($field->needed_for_action ($action) && ($field->type == Field_type_integer))
       {
         $field->value = $this->validate_as_integer_silent ($field->value);
         if ($field->value === FALSE)
-          $this->raise ("[$value] is not an integer. (setting field [$field->id])", 'validate', 'SQL_TABLE');
+        {
+          $this->raise ("[$field->value] is not an integer. (setting field [$field->id])", 'validate', 'SQL_TABLE');
+        }
       }
     }
   }
@@ -224,7 +228,9 @@ class SQL_TABLE extends WEBCORE_OBJECT
     
     $this->db->logged_query ("SELECT COUNT(*) FROM $this->name WHERE $restrictions");
     if ($this->db->next_record ())
+    {
       return $this->db->f (0); 
+    }
   }
 
   /**
@@ -280,11 +286,15 @@ class SQL_TABLE extends WEBCORE_OBJECT
         // to mess up the entire database.
         
         if ($restrictions)
+        {
           $this->_query ("UPDATE $this->name SET $data WHERE $restrictions");
+        }
       }
     }
     else
+    {
       log_message ("No fields to update for [$this->name] (SQL_TABLE)", Msg_type_debug_warning, Msg_channel_sql);      
+    }
   }
   
   /**
@@ -308,7 +318,9 @@ class SQL_TABLE extends WEBCORE_OBJECT
     foreach ($this->fields as $id => $field)
     {
       if ($field->needed_for_action ($action))
+      {
         $Result [$id] = $field->value_for_sql ();
+      }
     }
     return $Result;
   }
@@ -427,7 +439,9 @@ class SQL_STORAGE extends WEBCORE_OBJECT
       foreach ($this->_tables as $table)
       {
         if ($table->exists ())
+        {
           return TRUE;
+        }
       }
     }
   }

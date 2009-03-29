@@ -147,9 +147,13 @@ http://www.earthli.com/software/webcore
         foreach ($privilege_groups as $group)
         {
           if ($idx % 2)
+          {
             $bg_style = '; background-image: url(' . $App->resolve_file ('{icons}shades/5_percent_black') . ')';
+          }
           else
+          {
             $bg_style = '';
+          }
     ?>
     <td class="detail" style="padding-right: 1em<?php echo $bg_style; ?>"><?php echo $group->title; ?></td>
     <?php
@@ -172,18 +176,26 @@ http://www.earthli.com/software/webcore
           foreach ($privilege_groups as $group)
           {
             if ($idx % 2)
+            {
               $bg_style = '; background-image: url(' . $App->resolve_file ('{icons}shades/5_percent_black') . ')';
+            }
             else
+            {
               $bg_style = '';
+            }
       ?>
       <td class="detail" style="padding-right: 1em<?php echo $bg_style; ?>; white-space: nowrap">
       <?php
           foreach ($group->maps as $map)
           {
             if ($perm->privileges->enabled ($map->set_name, $map->type))
+            {
               echo $formatter->icon_for ($map);
+            }
             else
+            {
               echo $App->resolve_icon_as_html ('{icons}buttons/blank', ' ', '16px');
+            }
           }
       ?>
       </td>
@@ -193,7 +205,9 @@ http://www.earthli.com/software/webcore
       }
 
       if ($defined)
+      {
         $renderer = $App->make_controls_renderer ();
+      }
     ?>
       <tr>
         <td></td>
@@ -206,7 +220,9 @@ http://www.earthli.com/software/webcore
         <td style="vertical-align: top; text-align: right">
         <?php
           if ($defined)
+          {
             echo $renderer->button_as_html ('', 'edit_folder_anon_user_permissions.php?id=' . $folder->id, '{icons}buttons/edit');
+          }
         ?>
         </td>
         <?php
@@ -217,7 +233,9 @@ http://www.earthli.com/software/webcore
         <td style="vertical-align: top; text-align: right">
         <?php
           if ($defined)
+          {
             echo $renderer->button_as_html ('', 'edit_folder_all_users_permissions.php?id=' . $folder->id, '{icons}buttons/edit');
+          }
         ?>
         </td>
         <?php
@@ -237,7 +255,9 @@ http://www.earthli.com/software/webcore
         <td style="text-align: right">
         <?php
           if ($defined)
+          {
             echo $renderer->button_as_html ('', 'create_folder_group_permissions.php?id=' . $folder->id, '{icons}buttons/add');
+          }
         ?>
         </td>
         <td colspan="<?php echo $cols - 1; ?>">
@@ -287,7 +307,9 @@ http://www.earthli.com/software/webcore
         <td style="text-align: right">
         <?php
           if ($defined)
+          {
             echo $renderer->button_as_html ('', 'create_folder_user_permissions.php?id=' . $folder->id, '{icons}buttons/add');
+          }
         ?>
         </td>
         <td colspan="<?php echo $cols - 1; ?>">
@@ -329,7 +351,9 @@ http://www.earthli.com/software/webcore
     </table>
 <?php
       if ($show_tree)
+      {
         $box->finish_column_set ();
+      }
 ?>
     </div>
   </div>
@@ -337,5 +361,7 @@ http://www.earthli.com/software/webcore
     $Page->finish_display ();
   }
   else
+  {
     $Page->raise_security_violation ('You are not allowed to see the permissions for this folder.', $folder);
+  }
 ?>

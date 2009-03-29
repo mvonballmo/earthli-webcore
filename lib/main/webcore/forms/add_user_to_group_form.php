@@ -88,7 +88,9 @@ class ADD_USER_TO_GROUP_FORM extends ID_BASED_FORM
       $this->_user =& $user_query->object_at_name ($name);
 
       if (! $this->_user)
+      {
         $this->record_error ('name', 'Please choose a valid user name.');
+      }
 
       if ($this->num_errors ('name') == 0)
       {
@@ -96,7 +98,9 @@ class ADD_USER_TO_GROUP_FORM extends ID_BASED_FORM
         $user =& $user_query->object_at_name ($name);
 
         if ($user)
+        {
           $this->record_error ('name', "[$name] is already in this group.");
+        }
       }
     }
   }

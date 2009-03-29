@@ -72,7 +72,9 @@ class HISTORY_ITEM_GRID extends STANDARD_GRID
     foreach ($objs as $obj)
     {
       if (isset ($this->_last_time))
+      {
         $this->time_diffs [] = $this->_last_time->diff ($obj->time_created);
+      }
 
       $this->_last_time = $obj->time_created;
     }
@@ -100,10 +102,14 @@ class HISTORY_ITEM_GRID extends STANDARD_GRID
         echo $curr_date->format ($t);
         $now = new DATE_TIME ();
         if ($curr_date->equals ($now, Date_time_date_part))
+        {
           echo ' (Today)';
+        }
         $now_yesterday = new DATE_TIME (time () - 86400);
         if ($curr_date->equals ($now_yesterday, Date_time_date_part))
+        {
           echo ' (Yesterday)';
+        }
       ?>
       </h2>
     </td>
@@ -140,7 +146,9 @@ class HISTORY_ITEM_GRID extends STANDARD_GRID
       <?php
         $icon = $creator->icon_as_html ('16px');
         if ($icon)
+        {
           echo $icon . ' ';
+        }
         echo $creator->title_as_link () . ' - ' . $obj->time_created->format ();
       ?>
       </div>

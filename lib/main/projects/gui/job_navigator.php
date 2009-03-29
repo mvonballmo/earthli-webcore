@@ -71,7 +71,9 @@ class JOB_NAVIGATOR extends MULTI_TYPE_ENTRY_NAVIGATOR
     $Result = $obj->kind_icon ('16px') . ' ' . parent::_text_for_list ($obj);
     $branch_info =& $obj->main_branch_info ();
     if ($branch_info->is_closed ())
+    {
       $Result = "<span class=\"locked\">$Result</span>";
+    }
     return $Result;
   }
 

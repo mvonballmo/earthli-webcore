@@ -81,7 +81,9 @@ class BRANCH_FORM extends OBJECT_IN_FOLDER_FORM
       {
         $release =& $branch->latest_release ();
         if (isset ($release))
+        {
           $this->set_value ('parent_release_id', $release->id);
+        }
       }
     }
   }

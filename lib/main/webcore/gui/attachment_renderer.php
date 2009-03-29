@@ -86,11 +86,15 @@ class ATTACHMENT_RENDERER extends CONTENT_OBJECT_RENDERER
     echo "</table>\n<br>\n";
 
     if ($obj->is_image)
+    {
       $this->_draw_html_image ($obj, $file_url);
+    }
     elseif ($obj->is_archive)
       $this->_draw_html_archive ($obj, $file_name);
     else
+    {
       echo $this->_echo_html_description ($obj);
+    }
 
     $this->_echo_html_user_information ($obj, 'info-box-bottom');
 
@@ -141,7 +145,9 @@ class ATTACHMENT_RENDERER extends CONTENT_OBJECT_RENDERER
 <?php
     }
     else
+    {
       echo "<div class=\"error\">[$metrics->url] could not be opened for preview.</div>";    
+    }
   }
 
   /**
@@ -175,7 +181,9 @@ class ATTACHMENT_RENDERER extends CONTENT_OBJECT_RENDERER
         $finished = FALSE;
       }
       else
+      {
         readfile ($file_name);
+      }
       echo '</pre>';
     }
   }
@@ -201,7 +209,9 @@ class ATTACHMENT_RENDERER extends CONTENT_OBJECT_RENDERER
     $this->_echo_plain_text_description ($obj);
 
     if ($obj->is_archive)
+    {
       $this->_draw_text_archive ($obj, $file_name);
+    }
     else if ($obj->mime_type == 'text/plain')
     {
       if ($this->_options->preferred_text_length)
@@ -211,7 +221,9 @@ class ATTACHMENT_RENDERER extends CONTENT_OBJECT_RENDERER
         $finished = FALSE;
       }
       else
+      {
         readfile ($file_name);
+      }
     }
   }
 

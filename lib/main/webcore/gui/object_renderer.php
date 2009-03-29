@@ -64,9 +64,13 @@ class HANDLER_RENDERER extends RENDERER
   {
     RENDERER::RENDERER ($context);
     if (isset ($options))
+    {
       $this->_options = $options;
+    }
     else
+    {
       $this->_options = $this->_make_options ();
+    }
   }
 
   /**
@@ -162,7 +166,9 @@ class OBJECT_RENDERER extends HANDLER_RENDERER
   function display_as_html (&$obj, $options = null)
   {
     if (isset ($options))
+    {
       $this->_options = $options;
+    }
     $this->_display_as_html ($obj);
   }
 
@@ -174,7 +180,9 @@ class OBJECT_RENDERER extends HANDLER_RENDERER
   function display_as_plain_text (&$obj, $options = null)
   {
     if (isset ($options))
+    {
       $this->_options = $options;
+    }
     $this->_display_as_plain_text ($obj);
   }
 
@@ -186,7 +194,9 @@ class OBJECT_RENDERER extends HANDLER_RENDERER
   function display_as_printable (&$obj, $options = null)
   {
     if (isset ($options))
+    {
       $this->_options = $options;
+    }
     $this->_options->show_interactive = FALSE;    
     $this->display_as_html ($obj, $options);
   }

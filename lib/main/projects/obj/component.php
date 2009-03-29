@@ -75,7 +75,9 @@ class COMPONENT extends OBJECT_IN_FOLDER
   function expanded_icon_url ($size = '32px')
   {
     if ($this->icon_url)
+    {
       return $this->app->sized_icon ($this->icon_url, $size);
+    }
   }
 
   /**
@@ -140,7 +142,9 @@ class COMPONENT extends OBJECT_IN_FOLDER
     $folder_url = $folder->_object_url ($use_links, $separator, $formatter);
 
     if (! isset ($separator))
+    {
       $separator = $this->app->display_options->obj_url_separator;
+    }
 
     return $folder_url . $separator . $Result;
   }

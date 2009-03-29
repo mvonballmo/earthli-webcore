@@ -107,9 +107,13 @@ class PICTURE_RENDERER extends ENTRY_RENDERER
     <div>
     <?php
       if ($this->_options->show_interactive)
+      {
         echo $metrics->as_html ($entry->title_as_plain_text ());
+      }
       else
+      {
         echo $metrics->as_html_without_link ($entry->title_as_plain_text ());
+      }
     ?>
     </div>
     <?php
@@ -169,7 +173,9 @@ class PICTURE_LOCATION_RENDERER extends OBJECT_IN_FOLDER_LOCATION_RENDERER
     $folder =& $obj->parent_folder ();
 
     if ($calendar)
+    {
       $this->page->location->append ('Calendar', "view_calendar.php?id=$folder->id");
+    }
 
     if ($journal)
     {
@@ -178,9 +184,13 @@ class PICTURE_LOCATION_RENDERER extends OBJECT_IN_FOLDER_LOCATION_RENDERER
       if (isset ($jrnl))
       {
         if ($calendar)
+        {
           $args = 'calendar=1';
+        }
         else
+        {
           $args = '';
+        }
         $this->page->location->add_object_link ($jrnl, $args);
       }
     }

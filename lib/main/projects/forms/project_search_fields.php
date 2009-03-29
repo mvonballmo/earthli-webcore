@@ -118,19 +118,27 @@ class SEARCH_PROJECT_ENTRY_FIELDS extends SEARCH_ENTRY_FIELDS
     if (sizeof ($obj->parameters ['kind']) == sizeof ($kinds))
     {
       if ($obj->parameters ['not_kind'])
+      {
         $query->restrict ('0');
+      }
     }
     else if (sizeof ($obj->parameters ['kind']) == 0)
     {
       if (! $obj->parameters ['not_kind'])
+      {
         $query->restrict ('0');
+      }
     }
     else
     {
       if ($obj->parameters ['not_kind'])
+      {
         $operator = Operator_not_in;
+      }
       else
+      {
         $operator = Operator_in;
+      }
 
       $query->restrict_by_op ('entry.kind', $obj->parameters ['kind'], $operator);
     }
@@ -151,12 +159,16 @@ class SEARCH_PROJECT_ENTRY_FIELDS extends SEARCH_ENTRY_FIELDS
     if (sizeof ($obj->parameters ['kind']) == sizeof ($kinds))
     {
       if ($obj->parameters ['not_kind'])
+      {
         $Result [] = '<span class="error">All kinds are removed</span>';
+      }
     }
     else if (sizeof ($obj->parameters ['kind']) == 0)
     {
       if (! $obj->parameters ['not_kind'])
+      {
         $Result [] = '<span class="error">No kinds are included</span>';
+      }
     }
     else
     {
@@ -166,9 +178,13 @@ class SEARCH_PROJECT_ENTRY_FIELDS extends SEARCH_ENTRY_FIELDS
         $kind_text [] = $kinds [$kind_id]->title;
 
       if ($obj->parameters ['not_kind'])
+      {
         $Result [] = 'Kind is not ' . join (',', $kind_text);
+      }
       else
+      {
         $Result [] = 'Kind is ' . join (',', $kind_text);
+      }
     }
 
     return $Result;

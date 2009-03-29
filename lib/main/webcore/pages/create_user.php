@@ -35,7 +35,9 @@ http://www.earthli.com/software/webcore
 
     $form->process_new ($user);
     if ($form->committed ())
+    {
       $Env->redirect_local ($user->home_page ());
+    }
 
     $Page->title->subject = 'Create user';
 
@@ -60,5 +62,7 @@ http://www.earthli.com/software/webcore
     $Page->finish_display ();
   }
   else
+  {
     $Page->raise_security_violation ('You are not allowed to create users.');
+  }
 ?>

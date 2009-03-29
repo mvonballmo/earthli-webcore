@@ -64,7 +64,9 @@ class AUDITABLE_HISTORY_ITEM extends HISTORY_ITEM
     $this->_record_time_difference ('Time created', $orig->time_created, $new->time_created);
 
     if ($orig->creator_id != $new->creator_id)
+    {
       $this->_record_object_difference ('Creator', $orig->creator (), $new->creator ());
+    }
   }
 }
 
@@ -140,16 +142,24 @@ class OBJECT_IN_FOLDER_HISTORY_ITEM extends CONTENT_OBJECT_HISTORY_ITEM
     else
     {
       if ($new->invisible ())
+      {
         $this->kind = History_item_hidden_update;
+      }
       else
+      {
         $this->kind = History_item_updated;
+      }
     }
 
     if ($orig->owner_id != $new->owner_id)
+    {
       $this->_record_object_difference ('Owner', $orig->owner (), $new->owner ());
+    }
 
     if ($orig->parent_folder_id () != $new->parent_folder_id ())
+    {
       $this->_record_object_difference ('Folder', $orig->parent_folder (), $new->parent_folder ());
+    }
   }
 
   /**
@@ -226,10 +236,14 @@ class FOLDER_HISTORY_ITEM extends OBJECT_IN_FOLDER_HISTORY_ITEM
     parent::_record_differences ($orig, $new);
 
     if ($orig->permissions_id != $new->permissions_id)
+    {
       $this->_record_object_difference ('Permissions', $orig->permissions_folder (), $new->permissions_folder ());
+    }
 
     if ($orig->parent_id != $new->parent_id)
+    {
       $this->_record_object_difference ('Parent', $orig->parent_folder (), $new->parent_folder ());
+    }
 
     $this->_record_boolean_difference ('Organizational', $orig->organizational, $new->organizational);
     $this->_record_string_difference ('Icon', $orig->icon_url, $new->icon_url);
@@ -362,11 +376,15 @@ class ATTACHMENT_HISTORY_ITEM extends OBJECT_IN_FOLDER_HISTORY_ITEM
     parent::_record_differences ($orig, $new);
 
     if ($orig->original_file_name != $new->original_file_name)
+    {
       $this->_record_string_difference ('File name', $orig->original_file_name, $new->original_file_name);
+    }
     else
     {
       if ($orig->file_name != $new->file_name)
+      {
         $this->_record_string_difference ('File name', $orig->file_name, $new->file_name);
+      }
     }
   }
 }
@@ -412,28 +430,44 @@ class USER_HISTORY_ITEM extends CONTENT_OBJECT_HISTORY_ITEM
     $this->_record_text_difference ('Password', $orig->password, $new->password);
 
     if ($orig->real_first_name != $new->real_first_name)
+    {
       $this->_record_string_difference ('First name', $orig->real_first_name, $new->real_first_name);
+    }
 
     if ($orig->real_last_name != $new->real_last_name)
+    {
       $this->_record_string_difference ('Last name', $orig->real_last_name, $new->real_last_name);
+    }
 
     if ($orig->home_page_url != $new->home_page_url)
+    {
       $this->_record_string_difference ('Home page', $orig->home_page_url, $new->home_page_url);
+    }
 
     if ($orig->picture_url != $new->picture_url)
+    {
       $this->_record_string_difference ('Picture', $orig->picture_url, $new->picture_url);
+    }
 
     if ($orig->email != $new->email)
+    {
       $this->_record_string_difference ('Email', $orig->email, $new->email);
+    }
 
     if ($orig->signature != $new->signature)
+    {
       $this->_record_string_difference ('Signature', $orig->signature, $new->signature);
+    }
 
     if ($orig->icon_url != $new->icon_url)
+    {
       $this->_record_string_difference ('Icon', $orig->icon_url, $new->icon_url);
+    }
 
     if ($orig->email_visibility != $new->email_visibility)
+    {
       $this->record_difference ('Email visibility was changed');
+    }
   }
 }
 

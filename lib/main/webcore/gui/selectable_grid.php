@@ -105,9 +105,13 @@ class SELECTABLE_GRID extends STANDARD_GRID
     if ($this->items_are_selectable)
     {
       if ($this->items_are_selected)
+      {
         $state = ' checked';
+      }
       else
+      {
         $state = '';
+      }
       echo '<input type="checkbox" name="' . $this->selector_name . '" value="' . $obj->id . '"' . $state . '>';
     }
   }

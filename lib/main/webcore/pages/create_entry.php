@@ -35,7 +35,9 @@ http://www.earthli.com/software/webcore
   $folder =& $folder_query->object_at_id (read_var ('id'));
 
   if (! isset ($folder))
+  {
     $Env->redirect_local ('select_folder.php?last_page=' . urlencode ($Env->url (Url_part_all)));
+  }
   else
   {
     if ($App->login->is_allowed (Privilege_set_entry, Privilege_create, $folder))
@@ -53,7 +55,9 @@ http://www.earthli.com/software/webcore
       if ($form->committed ())
       {
         if ($form->is_field ('quick_save') && $form->value_for ('quick_save'))
+        {
           $Env->redirect_local ($entry_type_info->edit_page . '?id=' . $entry->id);
+        }
         else
         {
           if ($opt_stay_on_page->value ())
@@ -64,7 +68,9 @@ http://www.earthli.com/software/webcore
             $Env->redirect_local ($url->as_text ());
           }
           else
+          {
             $Env->redirect_local ($entry->home_page ());
+          }
         }
       }
 
@@ -75,9 +81,13 @@ http://www.earthli.com/software/webcore
       $Page->location->append ($Page->title->subject);
 
       if ($entry_type_info->icon)
+      {
         $icon = $entry_type_info->icon;
+      }
       else
+      {
         $icon = '{icons}buttons/create';
+      }
 
       $Page->start_display ();
     ?>
@@ -127,6 +137,8 @@ http://www.earthli.com/software/webcore
       $Page->finish_display ();
     }
     else
+    {
       $Page->raise_security_violation ("You are not allowed to create {$entry_type_info->plural_title} in this folder.", $folder);
+    }
   }
 ?>

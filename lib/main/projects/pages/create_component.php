@@ -39,7 +39,9 @@ http://www.earthli.com/software/webcore/projects
 
     $form->process_new ($comp);
     if ($form->committed ())
+    {
       $Env->redirect_local ($comp->home_page ());
+    }
 
     $Page->title->add_object ($folder);
     $Page->title->subject = 'Create component';
@@ -64,5 +66,7 @@ http://www.earthli.com/software/webcore/projects
     $Page->finish_display ();
   }
   else
+  {
     $Page->raise_security_violation ('You are not allowed to create components for this folder.', $folder);
+  }
 ?>

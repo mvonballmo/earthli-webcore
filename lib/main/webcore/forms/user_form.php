@@ -155,9 +155,13 @@ class USER_FORM extends CONTENT_OBJECT_FORM
 
     $icon_url = read_var ('icon_url');
     if ($icon_url)
+    {
       $this->set_value ('icon_url', $icon_url);
+    }
     else
+    {
       $this->set_value ('icon_url', $obj->icon_url);
+    }
   }
 
   function load_with_defaults ()
@@ -171,7 +175,9 @@ class USER_FORM extends CONTENT_OBJECT_FORM
 
     $icon_url = read_var ('icon_url');
     if ($icon_url)
+    {
       $this->set_value ('icon_url', $icon_url);
+    }
   }
 
   /**
@@ -198,13 +204,18 @@ class USER_FORM extends CONTENT_OBJECT_FORM
       {
         $name = $this->value_for ('title');
         if (empty ($obj->title) || (strcasecmp ($obj->title, $name) != 0))
-          // new user or name has been changed
         {
+          // new user or name has been changed
+
           $user_query = $this->app->user_query ();
           $existing_user = $user_query->object_at_name ($name);
-            // see if there is a user with that name
+
+          // see if there is a user with that name
+
           if ($existing_user)
+          {
             $this->record_error ('title', "Someone is already using that name.");
+          }
         }
       }
 
@@ -213,7 +224,9 @@ class USER_FORM extends CONTENT_OBJECT_FORM
         $password1 = $this->value_for ('password1');
         $password2 = $this->value_for ('password2');
         if (strcasecmp ($password1, $password2))
+        {
           $this->record_error ('password2', "Please make sure the passwords are the same.");
+        }
       }
     }
   }
@@ -244,7 +257,9 @@ class USER_FORM extends CONTENT_OBJECT_FORM
       $subscriber->email = $orig_email;
 
       if (! $new_email)
+      {
         $subscriber->purge ();
+      }
       else
       {
         if ($subscriber->exists ())
@@ -258,7 +273,9 @@ class USER_FORM extends CONTENT_OBJECT_FORM
     // If current user is anonymous, then log in as the newly created user
 
     if ($new_user && ($this->login->is_anonymous () || $this->login->ad_hoc_login))
+    {
       $this->app->log_in ($obj, FALSE);
+    }
   }
 
   /**
@@ -269,10 +286,14 @@ class USER_FORM extends CONTENT_OBJECT_FORM
   function _store_to_object (&$obj)
   {
     if (! $obj->exists ())
+    {
       $obj->set_password ($this->value_as_text ('password1'));
+    }
 
     if ($this->visible ('title'))
+    {
       $obj->title = $this->value_as_text ('title');
+    }
 
     $obj->real_first_name = $this->value_as_text ('real_first_name');
     $obj->real_last_name = $this->value_as_text ('real_last_name');

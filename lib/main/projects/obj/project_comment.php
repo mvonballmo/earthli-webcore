@@ -62,9 +62,13 @@ class PROJECT_COMMENT extends COMMENT
     // If it's a change, grab the job id
 
     if (isset ($entry->job_id))
+    {
       $job_id = $entry->job_id;
+    }
     else
+    {
       $job_id = 0;
+    }
 
     $query->restrict ('watch_comments > 0');
     $query->restrict_kinds (array (Subscribe_folder => $folder->id

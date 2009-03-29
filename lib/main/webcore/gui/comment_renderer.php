@@ -139,7 +139,9 @@ class COMMENT_LIST_RENDERER extends WEBCORE_OBJECT
     $this->_comment_query =& $com_query;
     $this->_obj =& $obj;
     if (is_a ($this->_obj, 'COMMENT'))
+    {
       $this->_comment =& $this->_obj;
+    }
 
     $this->comment_mode = read_var ('comment_mode', $default_mode);
   }

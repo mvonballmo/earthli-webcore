@@ -180,29 +180,43 @@ class TEXT_OUTPUT_LOGGER extends LOGGER
     $header_parts = array ();
 
     if ($this->show_channel)
+    {
       $header_parts [] = $channel;
+    }
 
     if ($this->show_date)
     {
       if ($this->show_time)
+      {
         $header_parts [] = date ('Y-m-j H:i:s');
+      }
       else
+      {
         $header_parts [] = date ('Y-m-j');
+      }
     }
     else if ($this->show_time)
-      $header_parts [] = date ('H:i:s');
+ {
+   $header_parts [] = date ('H:i:s');
+ }
 
     if ($this->show_type)
+    {
       $header_parts [] = $this->type_to_string ($type);
+    }
 
     $Result = str_repeat ($this->_space, 2 * $this->_block_level);
     $num_parts = sizeof ($header_parts);
     if ($num_parts)
     {
       if ($num_parts == 1)
+      {
         $Result .= '[' . $header_parts [0] . ']: ';
+      }
       else
+      {
         $Result .= '[' . join ('] [', $header_parts) . ']: ';
+      }
     }
 
     return $Result;
@@ -218,9 +232,13 @@ class TEXT_OUTPUT_LOGGER extends LOGGER
   function _format_block ($title)
   {
     if ($this->_is_html)
+    {
       $Result = $this->_format_html_tag ($title, 'log-block-title');
+    }
     else
+    {
       $Result = str_repeat ($this->_space, 2 * ($this->_block_level - 1)) . $this->_prepare ($title);
+    }
     return $Result;
   }
 
@@ -235,9 +253,13 @@ class TEXT_OUTPUT_LOGGER extends LOGGER
   function _format_message ($msg)
   {
     if ($this->_is_html)
+    {
       $Result = $this->_format_html_tag ($msg, $this->_CSS_class_for_type ($this->_last_type));
+    }
     else
+    {
       $Result = $msg;
+    }
     return $Result;
   }
 
@@ -255,18 +277,24 @@ class TEXT_OUTPUT_LOGGER extends LOGGER
     if (is_object ($msg) || is_array ($msg))
     {
       if (is_a ($msg, 'DATE_TIME'))
+      {
         $msg = $msg->format_plain ();
+      }
       else
       {
         $msg = print_r_capture ($msg);
         if ($this->_is_html)
+        {
           $msg = '<pre>' . $msg . '</pre>';
+        }
       }
     }
     else
     {
       if (! isset ($msg))
+      {
         $msg = $this->empty_message;
+      }
       elseif ($msg === '')
         $msg = "'" . $this->empty_message . "'";
       elseif ($msg === FALSE)
@@ -280,7 +308,9 @@ class TEXT_OUTPUT_LOGGER extends LOGGER
           if (! is_resource ($msg))
           {
             if (! $has_html)
+            {
               $msg = htmlspecialchars ($msg);
+            }
 
             $msg = nl2br ($msg);
           }

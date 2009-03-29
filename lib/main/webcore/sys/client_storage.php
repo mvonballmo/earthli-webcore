@@ -95,9 +95,13 @@ class CLIENT_STORAGE extends RAISABLE
   function value ($key)
   {
     if (isset ($this->_values [$key]))
+    {
       $Result = $this->_values [$key];
+    }
     else
+    {
       $Result = $this->_read ($this->prefix . $key);
+    }
     return $Result;
   }
   
@@ -129,12 +133,16 @@ class CLIENT_STORAGE extends RAISABLE
         $this->_multiple_values [$key] = $value;
       }
       else
+      {
         $this->_multiple_values [$key] = $value;
+      }
     }
     else
     {
       if (! isset ($value) || ($value === ''))
+      {
         $this->clear_value ($key);
+      }
       else
       {
         $this->_values [$key] = $value;
@@ -196,7 +204,9 @@ class CLIENT_STORAGE extends RAISABLE
       {
         list ($sub_key, $value) = explode ('=', $pair);
         if ($prepend_key)
+        {
           $sub_key = $key . $sub_key;
+        }
         $this->_add ($this->prefix . $sub_key, $value);
       } 
     }    

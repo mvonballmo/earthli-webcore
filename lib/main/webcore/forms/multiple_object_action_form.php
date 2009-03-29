@@ -97,10 +97,14 @@ class MULTIPLE_OBJECT_ACTION_FORM extends ID_BASED_FORM
   function commit (&$obj)
   {
     if ($this->object_list->has_folders ())
+    {
       $this->_folders_run ();
+    }
 
     if ($this->object_list->has_entries ())
+    {
       $this->_entries_run ();
+    }
   }
 
   /**
@@ -205,15 +209,21 @@ class MULTIPLE_OBJECT_ACTION_FORM extends ID_BASED_FORM
         if ($type_info->plural_title != $current_type)
         {
           if ($i != 0)
+          {
             echo '</p>';
+          }
           $current_type = $type_info->plural_title;
           echo "<h3>{$type_info->plural_title}</h3>\n";
           echo '<p>';
         }
         if ($i < $c - 1)
+        {
           echo $entry->title_as_link () . "<br>\n";
+        }
         else
+        {
           echo $entry->title_as_link ();
+        }
         $i++;
       }
       echo "</p>\n";
@@ -256,7 +266,9 @@ class MULTIPLE_OBJECT_ACTION_FORM extends ID_BASED_FORM
       $renderer->finish_column ();
     }
     else
+    {
       $renderer->draw_text_row ('', 'No items were selected. Please select at least one item and try again.', 'error');
+    }
 
     $renderer->finish ();
   }

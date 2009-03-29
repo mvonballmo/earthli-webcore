@@ -75,7 +75,9 @@ class ECHO_LOGGER extends TEXT_OUTPUT_LOGGER
   {
     echo $msg . $this->_new_line;
     if ($this->flushed)
+    {
       flush ();
+    }
   }
 }
 

@@ -131,7 +131,9 @@ class PAGE_NAVIGATOR extends WEBCORE_OBJECT
     WEBCORE_OBJECT::WEBCORE_OBJECT ($context);
     $this->separator = $context->display_options->page_separator;
     if ($num_objects_per_page > 0)
+    {
       $this->set_ranges ($num_total_objects, $num_objects_per_page);
+    }
     $this->page_link = $context->env->url (Url_part_no_host_path);
   }
 
@@ -150,15 +152,23 @@ class PAGE_NAVIGATOR extends WEBCORE_OBJECT
     $this->_item_count = $num_total_objects;
     $this->_count = floor ($num_total_objects / $num_objects_per_page);
     if (($num_total_objects % $num_objects_per_page > 0) && ($num_objects_per_page > 1))
+    {
       $this->_count++;
+    }
 
     if (! $this->page_number)
+    {
       $this->page_number = read_var ($this->page_number_var_name, 1);
+    }
 
     if ($this->page_number > $this->_count)
+    {
       $this->page_number = $this->_count;
+    }
     if ($this->page_number < 1)
+    {
       $this->page_number = 1;
+    }
   }
 
   /**
@@ -176,7 +186,9 @@ class PAGE_NAVIGATOR extends WEBCORE_OBJECT
   function as_html ()
   {
     if (! isset ($this->_output))
+    {
       $this->_generate ();
+    }
     return $this->_output;
   }
 
@@ -230,7 +242,9 @@ class PAGE_NAVIGATOR extends WEBCORE_OBJECT
     $this->_url->replace_argument ($this->page_number_var_name, $page_num);
     $Result = $this->_url->as_html ();
     if (isset ($this->page_anchor))
+    {
       $Result .= '#' . $this->page_anchor;
+    }
     return $Result;
   }
 
@@ -251,45 +265,63 @@ class PAGE_NAVIGATOR extends WEBCORE_OBJECT
       // can be displayed
 
       if ($many_pages && ($this->page_number > 1))
+      {
         $this->_output = "<a title=\"First Page\" href=\"" .
                          $this->_make_page_link (1) .
                          "\">" .
                          $this->context->resolve_icon_as_html ('{icons}buttons/go_to_first', 'First page', '16px') .
                          "</a>&nbsp;";
+      }
 
       // put in the previous page, if necessary
 
       if ($this->page_number > 1)
+      {
         $this->_output .= "<a title=\"Previous Page\" href=\"" .
                           $this->_make_page_link ($this->page_number - 1) .
                           "\">" .
                           $this->context->resolve_icon_as_html ('{icons}buttons/go_to_previous', 'Previous page', '16px') .
                           "</a>&nbsp;";
+      }
 
       $this->_output .= $this->begin_block;
 
       // make the list of numbers
 
       if ($this->page_number <= $this->pages_to_show)
+      {
         $first_page = 1;
+      }
       else
+      {
         $first_page = min ($this->_count - $this->pages_to_show + 1, $this->page_number - floor ($this->pages_to_show / 2));
+      }
 
       if ($this->_count < $this->pages_to_show)
+      {
         $last_page = $this->_count;
+      }
       else
+      {
         $last_page = $first_page + $this->pages_to_show - 1;
+      }
 
       for ($i = $first_page; $i <= $last_page; $i++)
       {
         $page_text = $i + $this->page_offset;
         if ($i == $this->page_number)
+        {
           $this->_output .= "<span class=\"selected\">$page_text</span>";
+        }
         else
+        {
           $this->_output .= "<a href=\"" . $this->_make_page_link ($i) . "\">$page_text</a>";
+        }
 
         if ($i < $last_page)
+        {
           $this->_output .= $this->separator;
+        }
       }
 
       $this->_output .= $this->end_block;
@@ -297,27 +329,35 @@ class PAGE_NAVIGATOR extends WEBCORE_OBJECT
       // put in the next page, if necessary
 
       if ($this->page_number < $this->_count)
+      {
         $this->_output .= "&nbsp;<a title=\"Next Page\" href=\"" .
                           $this->_make_page_link ($this->page_number + 1) .
                           "\">" .
                           $this->context->resolve_icon_as_html ('{icons}buttons/go_to_next', 'Next page', '16px') .
                           "</a>";
+      }
 
       if ($many_pages)
       {
         if ($this->page_number < $this->_count)
+        {
           $this->_output .= "&nbsp;<a title=\"Last Page\" href=\"" .
                             $this->_make_page_link ($this->_count) .
                             "\">" .
                             $this->context->resolve_icon_as_html ('{icons}buttons/go_to_last', 'Last page', '16px') .
                             "</a>";
+        }
 
         if ($this->show_total)
+        {
           $this->_output .= "&nbsp($this->_count $this->entry_type)";
+        }
       }
     }
     else
+    {
       $this->pages = "<span class=\"selected\">1</span>";
+    }
   }
 
   /**

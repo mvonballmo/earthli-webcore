@@ -100,7 +100,9 @@ class TEST_TASK extends TASK
       }
     }
     else
+    {
       $this->_log ('Check succeeded for: "' . $msg . '"', Msg_type_debug_info);
+    }
   }
 
   /**
@@ -122,7 +124,9 @@ class TEST_TASK extends TASK
       }
     }
     else
+    {
       $this->_log ("Expected and got [$value1].", Msg_type_debug_info);
+    }
   }
 }
 

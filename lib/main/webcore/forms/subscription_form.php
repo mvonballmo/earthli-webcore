@@ -181,12 +181,16 @@ class CONTENT_OBJECT_SUBSCRIPTION_FORM extends SUBSCRIPTION_FORM
 
       $renderer->draw_separator ();
       if ($size > 0)
+      {
         $renderer->draw_buttons_in_row ($buttons);
+      }
 
       $renderer->finish ();
     }
     else
+    {
       echo '<div class="error">You are not subscribed to any ' . strtolower ($this->_type_info->plural_title) . '.</div>';
+    }
   }
 
   /**

@@ -197,9 +197,13 @@ class SHIP_RELEASE_PREVIEW_SETTINGS extends UPDATE_RELEASE_PREVIEW_SETTINGS
 <?php
     $replacement =& $committer->replacement_release ();
     if (isset ($replacement))
+    {
       $text = 'These jobs are still open and will be <span class="field">moved</span> to ' . $replacement->title_as_link ();
+    }
     else
+    {
       $text = 'These jobs are still open and will be <span class="field">removed from </span> this release.';
+    }
 
     $status = $committer->status_map->to_status ();
 

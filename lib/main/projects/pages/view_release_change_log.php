@@ -55,7 +55,9 @@ http://www.earthli.com/software/webcore/projects
     $printable = read_var ('printable');
 
     if ($printable)
+    {
       $Page->set_printable ();
+    }
 
     $Page->start_display ();
 
@@ -131,5 +133,7 @@ http://www.earthli.com/software/webcore/projects
     $Page->finish_display ();
   }
   else
+  {
     $Page->raise_security_violation ('You are not allowed to view this release.');
+  }
 ?>

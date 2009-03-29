@@ -91,10 +91,14 @@ class DRAFTABLE_ENTRY_RENDERER extends ENTRY_RENDERER
     {
       $this->_echo_html_user ('Published', $entry->publisher (), $entry->time_published);
       if ($entry->modified ())
+      {
         $this->_echo_html_user ('Updated', $entry->modifier (), $entry->time_modified);
+      }
     }
     else
+    {
       parent::_echo_html_users ($entry);
+    }
   }
 
   /**
@@ -108,10 +112,14 @@ class DRAFTABLE_ENTRY_RENDERER extends ENTRY_RENDERER
     {
       $this->_echo_plain_text_user ('Published', $entry->publisher (), $entry->time_published);
       if ($entry->modified ())
+      {
         $this->_echo_plain_text_user ('Updated', $entry->modifier (), $entry->time_modified);
+      }
     }
     else
+    {
       parent::_echo_plain_text_users ($entry);
+    }
   }
 }
 

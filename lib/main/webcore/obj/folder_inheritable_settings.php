@@ -93,7 +93,9 @@ class FOLDER_INHERITABLE_SETTINGS extends STORABLE
   function &definer ()
   {
     if (! isset ($this->_definer))
+    {
       $this->_definer =& $this->app->login->folder_at_id ($this->_definer_id);
+    }
 
     return $this->_definer;
   }
@@ -135,9 +137,13 @@ class FOLDER_INHERITABLE_SETTINGS extends STORABLE
     if ($this->inherited () != $inherited)
     {
       if (! $inherited)
+      {
         $this->_definer = $this->_folder;
+      }
       else
+      {
         $this->_definer = $this->parent_definer ();
+      }
 
       $this->_definer = clone_object($this->_definer);
 
@@ -151,7 +157,9 @@ class FOLDER_INHERITABLE_SETTINGS extends STORABLE
       $this->_changes_pending = TRUE;
 
     if ($apply_immediately)
+    {
       $this->apply_changes ();
+    }
   }
 
   /**
@@ -162,9 +170,13 @@ class FOLDER_INHERITABLE_SETTINGS extends STORABLE
     if ($this->_changes_pending)
     {
       if ($this->inherited ())
+      {
         $this->purge ();
+      }
       else
+      {
         $this->store ();
+      }
       $this->_changes_pending = FALSE;
     }
   }
@@ -180,7 +192,9 @@ class FOLDER_INHERITABLE_SETTINGS extends STORABLE
     $this->_definer_id = $folder->$field_name;
     $this->_exists = ($folder->$field_name == $folder->id);
     if ($folder->$field_name == $folder->id)
+    {
       $this->_definer = $folder;
+    }
   }
 
   /**
@@ -214,7 +228,9 @@ class FOLDER_INHERITABLE_SETTINGS extends STORABLE
   function _create ()
   {
     if ($this->_stores_data)
+    {
       parent::_create ();
+    }
     $this->_update_folder_tree (array ($this->_folder), $this->_folder);
     $this->_definer = $this->_folder;
     $this->_definer_id = $this->_definer->id;
@@ -229,7 +245,9 @@ class FOLDER_INHERITABLE_SETTINGS extends STORABLE
   function _update ()
   {
     if ($this->_stores_data)
+    {
       parent::_update ();
+    }
   }
 
   /**
@@ -283,9 +301,13 @@ class FOLDER_INHERITABLE_SETTINGS extends STORABLE
     {
       $history_item = $target_folder->new_history_item ();
       if ($target_folder->visible ())
+      {
         $history_item->kind = History_item_updated;
+      }
       else
+      {
         $history_item->kind = History_item_hidden_update;
+      }
       $history_item->title = $this->_history_item_title ($creating);
       $history_item->record_difference ($this->_history_item_description ($creating, $source_folder));
       $history_item->store ();
@@ -349,7 +371,9 @@ class FOLDER_INHERITABLE_SETTINGS extends STORABLE
 
     $tname = $this->_settings_table_name ();
     if ($tname)
+    {
       $this->db->logged_query ("DELETE LOW_PRIORITY FROM $tname WHERE folder_id = {$this->_folder->id}");
+    }
 
     $this->_folder->$field_name = $field_name_value;
     $this->_exists = FALSE;

@@ -66,7 +66,9 @@ http://www.earthli.com/software/webcore
         foreach ($permissions as $permission)
           $ids [] = $permission->ref_id;      
         if (sizeof ($ids))
+        {
           $group_query->restrict_by_op ('grp.id', $ids, Operator_not_in);
+        }
   
         $class_name = $App->final_class_name ('GROUP_BROWSER_GRID', 'webcore/gui/group_browser_grid.php');
         $grid = new $class_name ($App);
@@ -80,8 +82,12 @@ http://www.earthli.com/software/webcore
       $Page->finish_display ();
     }
     else
+    {
       $Page->raise_security_violation ('You are not allowed to edit this folder\'s permissions.', $folder);
+    }
   }
   else
+  {
     $Page->raise_security_violation ('You are not allowed to view groups.', $folder);
+  }
 ?>

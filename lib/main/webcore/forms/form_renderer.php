@@ -486,9 +486,13 @@ class FORM_RENDERER extends CONTROLS_RENDERER
     $this->_column_started = FALSE;
 
     if ($this->centered)
+    {
       $style [] = 'margin: auto';
+    }
     if (isset ($this->width) && $this->width)
+    {
       $style [] = 'width: ' . $this->width;
+    }
 
     if (sizeof ($style) > 0)
     {
@@ -496,7 +500,9 @@ class FORM_RENDERER extends CONTROLS_RENDERER
       echo '<table cellspacing="' . $this->spacing . '" cellpadding="' . $this->padding . '" class="form-' . $this->_form->CSS_class . '" style="' . $style . '">' . "\n";
     }
     else
+    {
       echo '<table cellspacing="' . $this->spacing . '" cellpadding="' . $this->padding . '">' . "\n";
+    }
 
     if ($this->_form->num_errors (Form_general_error_id))
     {
@@ -537,7 +543,9 @@ class FORM_RENDERER extends CONTROLS_RENDERER
   function start_row ($title = '', $CSS_class = '')
   {
     if (! $CSS_class)
+    {
       $CSS_class = $this->_form->CSS_class;
+    }
 
     if ($title)
     {
@@ -594,7 +602,9 @@ class FORM_RENDERER extends CONTROLS_RENDERER
       $Result->visible = $visible;
       $toggle = $Result->toggle_as_html ();
       if (! empty ($toggle))
+      {
         $title .= ' ' . $toggle;
+      }
       $description = sprintf ($description, 'Use the arrow to the left to show ');
     }
     else
@@ -606,7 +616,9 @@ class FORM_RENDERER extends CONTROLS_RENDERER
     $this->draw_text_row ($title, $description, 'notes');
     $this->start_row (' ');
     if (isset ($Result))
+    {
       $Result->start ();
+    }
     $this->start_block ($styled);
 
     return $Result;
@@ -621,7 +633,9 @@ class FORM_RENDERER extends CONTROLS_RENDERER
   {
     $this->finish_block ();
     if (isset ($layer))
+    {
       $layer->finish ();
+    }
     $this->finish_row ();
   }
 
@@ -647,7 +661,9 @@ class FORM_RENDERER extends CONTROLS_RENDERER
   function draw_text_row ($title, $text, $CSS_class = '')
   {
     if (! $CSS_class)
+    {
       $CSS_class = "form-" . $this->_form->CSS_class . "-content";
+    }
 
     if ($title)
     {
@@ -690,13 +706,17 @@ class FORM_RENDERER extends CONTROLS_RENDERER
   function draw_error_row ($id, $title = ' ', $width = '')
   {
     if (! $width)
+    {
       $width = $this->width;
+    }
 
     if (! $this->_form->num_errors ($id) && isset ($this->_num_controls [$id]))
     {
       $test_id = $id . ($this->_num_controls [$id] - 1);
       if ($this->_form->num_errors ($test_id))
+      {
         $id = $test_id;
+      }
     }
 
     if ($this->_form->num_errors ($id))
@@ -734,13 +754,19 @@ class FORM_RENDERER extends CONTROLS_RENDERER
   function start_block ($styled = FALSE, $width = null)
   {
     if ($styled)
+    {
       $css_class = ' class="form-' . $this->_form->CSS_class . '-block"';
+    }
     else
+    {
       $css_class = '';
+    }
     echo '<table width="100%" cellspacing="' . $this->spacing . '" cellpadding="' . $this->padding . '"' . $css_class . '>' . "\n";
 
     if (isset ($width))
+    {
       $this->set_width ($width);
+    }
   }
 
   /**
@@ -753,7 +779,9 @@ class FORM_RENDERER extends CONTROLS_RENDERER
   {
     echo "</table>\n";
     if ($restore_width)
+    {
       $this->restore_width ();
+    }
   }
 
   /**
@@ -933,7 +961,9 @@ class FORM_RENDERER extends CONTROLS_RENDERER
       {
         $field =& $this->_field_at ($item->title);
         if ($field->visible)
+        {
           $this->draw_error_row ($field->id);
+        }
       }
     }
   }
@@ -964,7 +994,9 @@ class FORM_RENDERER extends CONTROLS_RENDERER
     }
 
     if ($field->description)
+    {
       $item->title .= ' <span class="notes">' . $field->description . '</span>';
+    }
 
     $ctrl = $this->_grouped_control_as_HTML ($field, null, $item, 'checkbox', $field->id);
     $ctrl = $this->_control_created ($id, $ctrl);
@@ -979,14 +1011,22 @@ class FORM_RENDERER extends CONTROLS_RENDERER
   function draw_submit_button_row ($show_preview = null)
   {
     if ($this->drafts_enabled)
+    {
       $buttons [] = $this->submit_button_as_html ('Publish', '{icons}buttons/ship', 'save_as_visible');
+    }
     else
+    {
       $buttons [] = $this->submit_button_as_html ();
+    }
 
     if (! isset ($show_preview))
+    {
       $show_preview = $this->preview_enabled;
+    }
     if ($show_preview)
+    {
       $buttons [] = $this->submit_button_as_html ('Preview', '{icons}buttons/view', 'preview_form');
+    }
 
     if ($this->drafts_enabled)
     {
@@ -1058,9 +1098,13 @@ class FORM_RENDERER extends CONTROLS_RENDERER
     {
       $options = default_text_options ();
       if ($includes_time)
+      {
         $options->width = $this->default_date_time_width;
+      }
       else
+      {
         $options->width = $this->default_date_width;
+      }
     }
 
     $Result = $this->text_line_as_html ($id, $options);
@@ -1075,7 +1119,9 @@ class FORM_RENDERER extends CONTROLS_RENDERER
 
       $field = $this->_field_at ($id);
       if ($includes_time)
+      {
         $Result .= $id . "_field.show_time = true;\n";
+      }
 
       $Result .= $id . '_field.attach (' . $js_form . '.' . $id . ");\n";
 
@@ -1101,29 +1147,45 @@ class FORM_RENDERER extends CONTROLS_RENDERER
     if ($field->visible)
     {
       if (! isset ($width))
+      {
         $width = $this->default_control_width;
+      }
       if (! isset ($height))
+      {
         $height = $this->default_control_height;
+      }
 
       if ($field->required)
+      {
         $CSS_class = "text-control-required";
+      }
       else
+      {
         $CSS_class = "text-control";
+      }
 
       $Result = $this->_start_control ($field, 'textarea');
       $Result .= ' class="' . $CSS_class . '" rows="10" cols="25" style="width: ' . $width . '; height: ' . $height . '">';
       $Result .= $this->_to_html ($field, ENT_NOQUOTES) . '</textarea>';
 
       if ($field->description)
+      {
         $text = $field->description;
+      }
       else
+      {
         $text = '';
+      }
 
       if ($field->tag_validator_type != Tag_validator_none)
+      {
         $text .= ' Find out more about <a href="text_formatting.php">supported tags and formatting</a>.';
+      }
 
       if ($text)
+      {
         $text = '<div class="notes">' . $text . '</div>';
+      }
 
       $Result .= '<div style="width: ' . $width . '">' . $text . '</div>';
 
@@ -1149,7 +1211,9 @@ class FORM_RENDERER extends CONTROLS_RENDERER
       $item->smart_wrapping = FALSE;
     }
     else
+    {
       $item->title = $id;
+    }
 
     $props = $this->make_list_properties ();
     $props->show_descriptions = TRUE;
@@ -1202,24 +1266,34 @@ class FORM_RENDERER extends CONTROLS_RENDERER
     if ($field->visible)
     {
       if ($field->required)
+      {
         $CSS_class = "menu-control-required";
+      }
       else
+      {
         $CSS_class = "menu-control";
+      }
 
       if ($props->CSS_class)
+      {
         $CSS_class .= ' ' . $props->CSS_class;
+      }
 
       $Result = $this->_start_control ($field, 'select') . ' class="' . $CSS_class . '"';
 
       if (isset ($props->on_click_script))
+      {
         $Result .= ' onChange="' . $props->on_click_script . '"';
+      }
       if (isset ($props->width))
       {
         $Result .= ' style="width: ' . $props->width . '"';
         $width = $props->width;
       }
       else
+      {
         $width = $this->default_control_width;
+      }
 
       $Result .= '>';
       $counter = 0;
@@ -1230,7 +1304,9 @@ class FORM_RENDERER extends CONTROLS_RENDERER
       {
         $Result .= '<option value="' . $item->value . '"';
         if ($selected_value == $item->value)
+        {
           $Result .= ' selected';
+        }
         $Result .= '>' . $item->title . $item->text . "</option>\n";
       }
 
@@ -1239,9 +1315,13 @@ class FORM_RENDERER extends CONTROLS_RENDERER
       if ($field->description)
       {
         if ($props->show_description_on_same_line)
+        {
           $Result .= ' <span class="notes">' . $field->description . '</span>';
+        }
         else
+        {
           $Result .= '<div style="width: ' . $width . '"><div class="notes">' . $field->description . '</div></div>';
+        }
       }
 
       return $this->_control_created ($id, $Result);
@@ -1261,19 +1341,29 @@ class FORM_RENDERER extends CONTROLS_RENDERER
     if ($field->visible)
     {
       if ($field->required)
+      {
         $CSS_class = "menu-control-required";
+      }
       else
+      {
         $CSS_class = "menu-control";
+      }
 
       $Result = $this->_start_control ($field, 'select') . ' class="' . $CSS_class . '"';
 
       if (isset ($props->on_click_script))
+      {
         $Result .= ' onChange="' . $props->on_click_script . '"';
+      }
 
       if (isset ($props->width))
+      {
         $width = $props->width;
+      }
       else
+      {
         $width = $this->default_control_width;
+      }
 
       $Result .= 'style="width: ' . $width . '"';
       $Result .= 'size="' . $props->height . '"';
@@ -1286,16 +1376,22 @@ class FORM_RENDERER extends CONTROLS_RENDERER
       {
         $Result .= '<option value="' . $item->value . '"';
         if ($selected_value == $item->value)
+        {
           $Result .= ' selected';
+        }
         if (! $item->enabled)
+        {
           $Result .= ' disabled';
+        }
         $Result .= '>' . $item->title . $item->text . "</option>\n";
       }
 
       $Result .= '</select>';
 
       if ($field->description)
+      {
         $Result .= '<div style="margin-top: .5em; width: ' . $width . '"><div class="notes">' . $field->description . '</div></div>';
+      }
 
       return $this->_control_created ($id, $Result);
     }
@@ -1314,15 +1410,23 @@ class FORM_RENDERER extends CONTROLS_RENDERER
     $field =& $this->_field_at ($id);
 
     if (! isset ($options))
+    {
       $options = default_text_options ();
+    }
 
     if (isset ($options->width))
+    {
       $width = $options->width;
+    }
     else
+    {
       $width = $this->default_control_width;
+    }
 
     if (! isset ($this->_num_controls [$id]))
+    {
       $this->_num_controls [$id] = 0;
+    }
 
     if ($field->is_processed ($this->_num_controls [$id]))
     {
@@ -1338,13 +1442,17 @@ class FORM_RENDERER extends CONTROLS_RENDERER
       $Result .= '<input type="hidden" name="'. $uploader->stored_info_name . '[]" value="' . $file_info . "\">\n";
 
       if ($field->description)
+      {
         $Result .= '<div style="width: ' . $width . '"><div class="notes">' . $field->description . "</div></div>\n";
+      }
     }
     else
     {
       $max_size = $this->_form->max_upload_file_size ();
       if ($field->max_bytes)
+      {
         $max_size = min ($field->max_bytes, $max_size);
+      }
 
       $desc = 'Maximum file size is ' . file_size_as_text ($max_size) . '. ';
 
@@ -1372,7 +1480,9 @@ class FORM_RENDERER extends CONTROLS_RENDERER
     {
       $title = $this->_form->button;
       if ($this->_form->button_icon)
+      {
         $icon = $this->_form->button_icon;
+      }
     }
 
     return parent::submit_button_as_html ($title, $icon, $script);
@@ -1393,7 +1503,9 @@ class FORM_RENDERER extends CONTROLS_RENDERER
         $this->draw_hidden_value ($name, $val);
     }
     else
+    {
       $this->draw_hidden_value ($name, $field->as_text ($this->_form));
+    }
   }
 
   /**
@@ -1420,26 +1532,40 @@ class FORM_RENDERER extends CONTROLS_RENDERER
     if ($field->visible)
     {
       if ($field->required)
+      {
         $CSS_class = "form-" . $this->_form->CSS_class . "-required";
+      }
       else
+      {
         $CSS_class = "form-" . $this->_form->CSS_class . "-label";
+      }
 ?>
   <tr>
     <td class="<?php echo $CSS_class; ?>">
       <?php
         if (isset ($title))
+        {
           $t = $title;
+        }
         else
+        {
           $t = $field->title;
+        }
         if (! empty ($t))
         {
           if ($dom_id)
+          {
             echo '<label for="' . $dom_id . '">';
+          }
           echo $t;
           if ($dom_id)
+          {
             echo '</label>';
+          }
           if ($field->required && $this->show_required_mark)
+          {
             echo $this->required_mark ();
+          }
         }
       ?>
     </td>
@@ -1463,12 +1589,18 @@ class FORM_RENDERER extends CONTROLS_RENDERER
   function _start_control (&$field, $tag_name = 'input', $dom_id = null)
   {
     if (isset ($dom_id))
+    {
       $id = $dom_id;
+    }
     else
+    {
       $id = $field->id;
+    }
     $Result = '<' . $tag_name . ' name="' . $field->js_name () . '" id="' . $id . '"';
     if (! $field->enabled)
+    {
       $Result .= ' disabled';
+    }
     return $Result;
   }
 
@@ -1484,9 +1616,12 @@ class FORM_RENDERER extends CONTROLS_RENDERER
   function _to_html (&$field, $quote_style)
   {
     if (isset ($this->_num_controls [$field->id]))
+    {
       return $field->as_html ($this->_form, $quote_style, $this->_num_controls [$field->id]);
-    else
-      return $field->as_html ($this->_form, $quote_style);
+    }
+
+
+    return $field->as_html ($this->_form, $quote_style);
   }
 
   /**
@@ -1501,7 +1636,9 @@ class FORM_RENDERER extends CONTROLS_RENDERER
     if (! empty ($id))
     {
       if ($can_be_focused && ! $this->_form->initial_focus ())
+      {
         $this->_form->set_initial_focus ($id);
+      }
     }
     return $text;
   }
@@ -1515,9 +1652,13 @@ class FORM_RENDERER extends CONTROLS_RENDERER
     $this->_required_mark_used = TRUE;
 
     if ($this->required_icon)
+    {
       $Result = $this->context->resolve_icon_as_html ($this->required_icon, $this->required_text);
+    }
     else
+    {
       $Result = $this->required_text;
+    }
 
     return $Result;
   }
@@ -1551,27 +1692,43 @@ class FORM_RENDERER extends CONTROLS_RENDERER
     $field =& $this->_field_at ($id);
 
     if (! isset ($options))
+    {
       $options = default_text_options ();
+    }
 
     if (isset ($options->width))
+    {
       $width = $options->width;
+    }
     else
+    {
       $width = $this->default_control_width;
+    }
 
     $Result = $this->_start_control ($field);
     if (isset ($field->max_length) && ($field->max_length > 0))
+    {
       $Result .= ' maxlength="' . $field->max_length . '"';
+    }
 
     if ($field->required)
+    {
       $CSS_class = "text-control-required";
+    }
     else
+    {
       $CSS_class = "text-control";
+    }
 
     if ($options->CSS_class)
+    {
       $CSS_class .= ' ' . $options->CSS_class;
+    }
 
     if (isset ($options->on_change_script))
+    {
       $Result .= ' OnChange=\'' . $options->on_change_script . '\'';
+    }
 
     $Result .= ' type="' . $type . '" class="' . $CSS_class . '" value="' . $this->_to_html ($field, ENT_QUOTES) . '" style="width: ' . $width . '">';
 
@@ -1580,9 +1737,13 @@ class FORM_RENDERER extends CONTROLS_RENDERER
       $desc = $field->description . ' ' . $options->extra_description;
 
       if ($options->show_description_on_same_line)
+      {
         $Result .= ' <span class="notes">' . $desc . '</span>';
+      }
       else
+      {
         $Result .= '<div style="width: ' . $width . '"><div class="notes">' . $desc . '</div></div>';
+      }
     }
 
     return $this->_control_created ($id, $Result);
@@ -1599,7 +1760,9 @@ class FORM_RENDERER extends CONTROLS_RENDERER
   function _control_group_as_html ($id, &$props, $type)
   {
     if ($id)
+    {
       $field = $this->_field_at ($id);
+    }
 
     if (! isset ($field) || $field->visible)
     {
@@ -1608,17 +1771,27 @@ class FORM_RENDERER extends CONTROLS_RENDERER
       if ($id)
       {
         if (isset ($this->_num_controls [$id]))
+        {
           $counter = $this->_num_controls [$id] + 1;
+        }
         else
+        {
           $counter = 0;
+        }
       }
       else
+      {
         $counter = 0;
+      }
 
       if (isset ($props->width))
+      {
         $width = $props->width;
+      }
       else
+      {
         $width = $this->width;
+      }
 
       $num_items = sizeof ($props->items);
 
@@ -1629,7 +1802,9 @@ class FORM_RENDERER extends CONTROLS_RENDERER
         foreach ($props->items as $item)
         {
           if ($id)
+          {
             $needs_descriptions = ! empty ($item->description);
+          }
           else
           {
             $field = $this->_field_at ($item->title);
@@ -1653,34 +1828,44 @@ class FORM_RENDERER extends CONTROLS_RENDERER
           $dom_id = $field->id;
         }
         else
+        {
           $dom_id = $field->id . $counter;
+        }
 
         if ($field->visible)
         {
           $ctrl = $this->_grouped_control_as_HTML ($field, $props, $item, $type, $dom_id);
           if (! $id)
+          {
             $ctrl = $this->_control_created ($id, $ctrl, FALSE);
+          }
 
           if ($needs_descriptions)
           {
             $Result .= '<dt';
             if ($props->item_class)
+            {
               $Result .= ' class="' . $props->item_class . '"';
+            }
             $Result .= '>' . $ctrl . "</dt>\n<dd";
             if ($props->description_class)
+            {
               $Result .= ' style="margin-left: 2em" class="' . $props->description_class . '"';
+            }
             $Result .= '><label for="' . $dom_id . '">' . $item->description . "</label></dd>\n";
           }
           else
           {
             if ($props->item_class)
+            {
               $ctrls [] = '<span class="' . $props->item_class . '">' . $ctrl . '</span>';
+            }
             else
+            {
               $ctrls [] = $ctrl;
+            }
 
-            if (($counter == $num_items)
-                || ($props->items_per_row == 1)
-                || (($counter % $props->items_per_row) == 0))
+            if (($counter == $num_items) || ($props->items_per_row == 1) || (($counter % $props->items_per_row) == 0))
             {
               $ctrl_string = implode ("\n", $ctrls);
               $ctrls = null;
@@ -1688,18 +1873,26 @@ class FORM_RENDERER extends CONTROLS_RENDERER
               /* Avoid making an extra block if the controls never wrapped. */
 
               if (($Result == '') && ($counter == $num_items))
+              {
                 $Result .= $ctrl_string . "\n";
+              }
               else
               {
                 if ($props->line_spacing)
                 {
                   if ($Result != '')
+                  {
                     $Result .= '<div style="margin-top: ' . $props->line_spacing . '">' . $ctrl_string . "</div>\n";
+                  }
                   else
+                  {
                     $Result = '<div>' . $ctrl_string . "</div>\n";
+                  }
                 }
                 else
+                {
                   $Result .= '<div>' . $ctrl_string . "</div>\n";
+                }
               }
             }
           }
@@ -1709,9 +1902,13 @@ class FORM_RENDERER extends CONTROLS_RENDERER
       if ($needs_descriptions)
       {
         if ($width)
+        {
           $Result = '<dl style="margin:0px; width: ' . $width . "\">" . $Result . "</dl>\n";
+        }
         else
+        {
           $Result = '<dl style="margin:0px">' . $Result . "</dl>\n";
+        }
       }
 
       if ($id)
@@ -1719,7 +1916,9 @@ class FORM_RENDERER extends CONTROLS_RENDERER
         $this->_num_controls [$id] = $counter;
 
         if ($field->description)
+        {
           $Result .= '<div style="margin-left: 2em; margin-top: .5em; width: ' . $width . '"><div class="notes">' . $field->description . '</div></div>';
+        }
 
         $Result = $this->_control_created ($id, $Result, FALSE);
       }
@@ -1748,20 +1947,28 @@ class FORM_RENDERER extends CONTROLS_RENDERER
       $Result .= ' type="' . $type . '" value="' . $item->value . '"';
 
       if ($type == 'checkbox')
-         $Result .= ' class="check-box-control"';
+      {
+        $Result .= ' class="check-box-control"';
+      }
       elseif ($type == 'radio')
          $Result .= ' class="radio-control"';
 
       if (! $item->enabled && $field->enabled)
+      {
         $Result .= ' disabled';
+      }
 
       if (! empty ($item->on_click_script))
+      {
         $Result .= ' onClick="' . $item->on_click_script . '"';
+      }
       elseif (isset ($props) && ! empty ($props->on_click_script))
         $Result .= ' onClick="' . $props->on_click_script . '"';
 
       if ($field->selected ($item->value))
+      {
         $Result .= ' checked';
+      }
 
       $Result .= '>';
       $ctrl = $Result;
@@ -1780,7 +1987,9 @@ class FORM_RENDERER extends CONTROLS_RENDERER
         ob_end_clean ();
       }
       else
+      {
         $Result = $ctrl . ' ' . $label;
+      }
 
       return $Result;
     }
@@ -1855,7 +2064,9 @@ function &default_text_options ()
 {
   global $_g_default_text_options;
   if (! isset ($_g_default_text_options))
+  {
     $_g_default_text_options = new FORM_TEXT_CONTROL_OPTIONS ();
+  }
   return $_g_default_text_options;
 }
 

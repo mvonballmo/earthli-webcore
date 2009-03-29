@@ -102,10 +102,14 @@ class JOB_RENDERER extends PROJECT_ENTRY_RENDERER
           echo $assignee->title_as_link ();
           $time_owned = $entry->assignee_age ();
           if (isset ($time_owned))
+          {
             echo ' (' . $time_owned->format () . ')';
+          }
         }
         else
+        {
           echo '(None)';
+        }
       ?>
       </td>
     </tr>
@@ -120,9 +124,13 @@ class JOB_RENDERER extends PROJECT_ENTRY_RENDERER
       <td>
       <?php
         if ($reporter)
+        {
           echo $reporter->title_as_link ();
+        }
         else
+        {
           echo '(None)';
+        }
       ?>
       </td>
     </tr>
@@ -177,7 +185,9 @@ class JOB_RENDERER extends PROJECT_ENTRY_RENDERER
     {
       $needed_by = $branch_info->needed_by_as_html ();
       if ($needed_by)
-         echo $needed_by . '<br>';
+      {
+        echo $needed_by . '<br>';
+      }
     }
 ?>
   <span class="field"><?php echo $branch_info->status_icon () . ' ' . $branch_info->status_as_text (); ?></span>
@@ -225,9 +235,13 @@ class JOB_RENDERER extends PROJECT_ENTRY_RENDERER
   function _echo_html_branch_release_info (&$branch_info)
   {
     if ($branch_info->is_closed ())
+    {
       echo 'Next release';
+    }
     else
+    {
       echo 'Not scheduled for release';
+    }
   }
 
   /**
@@ -245,20 +259,28 @@ class JOB_RENDERER extends PROJECT_ENTRY_RENDERER
       $assignee_text = '[Assigned to]: ' . $assignee->title_as_plain_text ();
       $time_owned = $entry->assignee_age ();
       if (isset ($time_owned))
+      {
         $assignee_text .= ' (' . $time_owned->format () . ')';
+      }
 
       echo $this->_line ($assignee_text);
     }
     else
+    {
       echo $this->_line ('[Assigned to]: Nobody');
+    }
 
     $creator =& $entry->creator ();
     $reporter =& $entry->reporter ();
     if (! $reporter->equals ($creator))
+    {
       echo $this->_line ('[Reported By]: ' . $reporter->title_as_plain_text ());
+    }
 
     if ($entry->time_needed->is_valid ())
+    {
       echo $this->_line ('[Needed by]: ' . $this->_time ($entry->time_needed, Date_time_format_short_date));
+    }
 
     $this->_echo_plain_text_user_information ($entry);
     $this->_echo_branches_as_plain_text ($entry);
@@ -278,7 +300,9 @@ class JOB_RENDERER extends PROJECT_ENTRY_RENDERER
     {
       $needed_by = $branch_info->needed_by_as_plain_text ();
       if ($needed_by)
-         echo $this->_line ($needed_by);
+      {
+        echo $this->_line ($needed_by);
+      }
     }
 
     echo '    ' . $branch_info->status_as_text ();
@@ -287,13 +311,19 @@ class JOB_RENDERER extends PROJECT_ENTRY_RENDERER
     $time_open = $branch_info->age ();
     $time_in_status = $branch_info->status_age ();
     if ($closer)
+    {
       echo ' ' . $this->_time ($branch_info->time_closed) . ' by ' . $closer->title_as_plain_text () . ' after ' . $time_open->format ();
+    }
     else
     {
       if ($time_open->equals ($time_in_status))
+      {
         echo $this->_line (' (' . $time_open->format () . ')');
+      }
       else
+      {
         echo $this->_line (' (' . $time_in_status->format () . ') (open for ' . $time_open->format () . ')');
+      }
       echo '    ' . $branch_info->priority_as_text ();
     }
   }
@@ -306,9 +336,13 @@ class JOB_RENDERER extends PROJECT_ENTRY_RENDERER
   function _echo_plain_text_branch_release_info (&$branch_info)
   {
     if ($branch_info->is_closed ())
+    {
       echo 'Next release';
+    }
     else
+    {
       echo 'Not scheduled for release';
+    }
   }
 
   /**

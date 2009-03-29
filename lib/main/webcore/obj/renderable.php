@@ -71,12 +71,18 @@ class RENDERABLE extends UNIQUE_OBJECT
     $class_name = $this->context->final_class_name ($base_name, '', $handler_type);
     
     if ($class_name != $base_name)
+    {
       $Result = new $class_name ($this, $options);
+    }
     else
+    {
       $Result = $this->_default_handler_for ($handler_type, $options);
+    }
     
     if (isset ($Result))
+    {
       $Result->handler_type = $handler_type;
+    }
     
     return $Result;
   }

@@ -82,9 +82,13 @@ class SELECT_LIST extends LIST_GRID
     $col = '<div style="text-align: center">';
     $col .= "<a href=\"javascript:toggle_selected (document.getElementById('$this->form_name')['{$this->control_name}[]'])\" title=\"$this->toggle_title\">";
     if ($this->toggle_image)
+    {
       $col .= $this->app->resolve_icon_as_html ($this->toggle_image, $this->toggle_title);
+    }
     else
+    {
       $col .= $this->toggle_title;
+    }
     $col .= "</a>";
     $col .= '</div>';
     $this->prepend_column ($col);

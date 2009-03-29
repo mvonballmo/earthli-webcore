@@ -69,9 +69,13 @@ class JOB_GRID extends PROJECT_ENTRY_GRID
     else
     {
       if ($branch_info->is_closed ())
+      {
         echo 'Next release';
+      }
       else
+      {
         echo 'Not scheduled for release';
+      }
     }
   }
 
@@ -142,7 +146,9 @@ class JOB_GRID extends PROJECT_ENTRY_GRID
     <?php
       $assignee =& $obj->assignee ();
       if (! $is_closed)
+      {
         echo $obj->assignee_icon ();
+      }
       if ($assignee)
       {
     ?>
@@ -150,7 +156,9 @@ class JOB_GRID extends PROJECT_ENTRY_GRID
     <?php
         $time_owned = $obj->assignee_age ();
         if (isset ($time_owned))
+        {
           echo ' (' . $time_owned->format () . ')';
+        }
       }
       else
       {
@@ -177,7 +185,9 @@ class JOB_GRID extends PROJECT_ENTRY_GRID
     $Result = parent::title_formatter ($obj);
     $branch_info =& $obj->main_branch_info ();
     if ($branch_info->is_closed ())
+    {
       $Result->CSS_class = '';
+    }
     $Result->max_visible_output_chars = 0;
     return $Result;
   }

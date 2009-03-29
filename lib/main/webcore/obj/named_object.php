@@ -62,7 +62,9 @@ class NAMED_OBJECT extends STORABLE
   {
     $Result = $this->context->title_formatter ();
     if (isset ($this->app))
+    {
       $Result->max_visible_output_chars = $this->app->max_title_size (get_class ($this));
+    }
     $Result->location = $this->home_page ();
     $Result->text = $this->raw_title ();
     $Result->CSS_class = 'visible';
@@ -79,7 +81,9 @@ class NAMED_OBJECT extends STORABLE
   function title_as_link ($formatter = null)
   {
     if (! isset ($formatter))
+    {
       $formatter = $this->title_formatter ();
+    }
 
     return $formatter->as_html_link ();
   }
@@ -110,7 +114,9 @@ class NAMED_OBJECT extends STORABLE
   function title_as_plain_text ($formatter = null)
   {
     if (! isset ($formatter))
+    {
       $formatter = $this->title_formatter ();
+    }
 
     return $formatter->as_plain_text ();
   }
@@ -154,7 +160,9 @@ class NAMED_OBJECT extends STORABLE
     $page_name = $this->page_name ();
     $page_args = $this->page_arguments ();
     if (! empty ($page_args))
+    {
       $page_name .= '?' . $page_args;
+    }
     return $this->context->resolve_file ($page_name, $root_override);
   }
 
@@ -264,9 +272,12 @@ class NAMED_OBJECT extends STORABLE
     }
 
     if ($use_links)
+    {
       return $this->title_as_link ($formatter);
-    else
-      return $this->title_as_plain_text ($formatter);
+    }
+
+
+    return $this->title_as_plain_text ($formatter);
   }
 
   /**

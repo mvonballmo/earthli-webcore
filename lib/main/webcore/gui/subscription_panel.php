@@ -91,7 +91,9 @@ class FORM_BASED_SUBSCRIPTION_PANEL extends SUBSCRIPTION_PANEL
     $form =& $this->form ();
     $form->process_existing ($this->_subscriber);
     if ($form->committed ())
+    {
       $this->env->redirect_local ($this->_subscriber->home_page ());
+    }
   }
 
   /**
@@ -451,15 +453,23 @@ class SUBSCRIPTION_SUMMARY_PANEL extends SUBSCRIPTION_PANEL
     ?></span> in <span class="field">
     <?php
       if ($this->_subscriber->send_as_html)
+      {
         echo 'HTML';
+      }
       else
+      {
         echo 'Plain text';
+      }
     ?></span> format.</li>
     <li>Send <span class="field"><?php
       if (! $this->_subscriber->preferred_text_length)
+      {
         echo 'all text';
+      }
       else
+      {
         echo 'a ' . $this->_subscriber->preferred_text_length . ' character excerpt';
+      }
     ?></span> from each message.</li>
     <li>
     <?php
@@ -492,15 +502,23 @@ class SUBSCRIPTION_SUMMARY_PANEL extends SUBSCRIPTION_PANEL
     ?></li>
     <li><span class="field"><?php
       if ($this->_subscriber->send_own_changes)
+      {
         echo 'Send';
+      }
       else
+      {
         echo 'Do not send';
+      }
     ?></span> messages triggered by this subscriber.</li>
     <li><span class="field"><?php
       if ($this->_subscriber->show_history_item_as_subject)
+      {
         echo 'Include';
+      }
       else
+      {
         echo 'Do not include';
+      }
     ?></span> history details in message subject.</li>
     <li>
     <?php

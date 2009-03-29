@@ -74,7 +74,9 @@ class FOLDER_COMMANDS extends COMMANDS
     $this->append ($cmd);
 
     if (! $folder->is_organizational ())
+    {
       $this->_add_creators ($folder);
+    }
   }
 
   /**

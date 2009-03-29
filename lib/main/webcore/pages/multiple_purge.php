@@ -36,15 +36,15 @@ http://www.earthli.com/software/webcore
     $form->load_from_request ();
   }
 
-  if (isset ($form)
-      &&
-      (! $form->object_list->has_folders () || $App->login->is_allowed (Privilege_set_folder, Privilege_purge, $folder))
-      &&
-      (! $form->object_list->has_entries () || $App->login->is_allowed (Privilege_set_entry, Privilege_purge, $folder)))
+  if (isset ($form) && 
+    (! $form->object_list->has_folders () || $App->login->is_allowed (Privilege_set_folder, Privilege_purge, $folder)) &&
+    (! $form->object_list->has_entries () || $App->login->is_allowed (Privilege_set_entry, Privilege_purge, $folder)))
   {
     $form->process_existing ($folder);
     if ($form->committed ())
+    {
       $App->return_to_referer ("view_explorer.php?id=$folder->id");
+    }
 
     $Page->title->add_object ($folder);
     $Page->title->subject = 'Purge ' . $form->object_list->description ();
@@ -69,5 +69,7 @@ http://www.earthli.com/software/webcore
     $Page->finish_display ();
   }
   else
+  {
     $Page->raise_security_violation ('You are not allowed to purge the selected objects or folders.', $folder);
+  }
 ?>

@@ -169,7 +169,9 @@ class ATTACHMENT_FORM extends OBJECT_IN_FOLDER_FORM
       $creator = new $class_name ($this->app);
       $creator->create_thumbnail_for ($obj->full_file_name (), $this->value_for ('thumbnail_size'));
       if ($creator->error_message)
+      {
         $this->record_error ('create_thumbnail', $creator->error_message);
+      }
     }
   }
 
@@ -204,9 +206,12 @@ class ATTACHMENT_FORM extends OBJECT_IN_FOLDER_FORM
   function _upload_file_copy_mode (&$field, &$file, $form_is_valid)
   {
     if (! $this->previewing () && $this->value_for ('overwrite'))
+    {
       return Uploaded_file_overwrite;
-    else
-      return Uploaded_file_unique_name;
+    }
+
+
+    return Uploaded_file_unique_name;
   }
 
   /**
@@ -219,7 +224,9 @@ class ATTACHMENT_FORM extends OBJECT_IN_FOLDER_FORM
   function upload_file_changed (ctrl)
   {
     if (ctrl.value)
+    {
       ctrl.form.create_thumbnail.checked = true;
+    }
   }
 
   function on_click_thumbnail (ctrl)
@@ -271,7 +278,9 @@ class ATTACHMENT_FORM extends OBJECT_IN_FOLDER_FORM
       {
         $thumb = $this->_object->thumbnail_as_html ();
         if ($thumb)
+        {
           $img = $thumb;
+        }
       }
 
       $renderer->draw_text_row ('Current file', '<div style="float: left; margin-right: .5em">' . $img . '</div><div>' . $this->_object->original_file_name . '</div><div style="margin-top: .5em">' . $this->_object->mime_type . ' (' . file_size_as_text ($this->_object->size) . ')</div>', 'detail');
@@ -280,7 +289,9 @@ class ATTACHMENT_FORM extends OBJECT_IN_FOLDER_FORM
       $renderer->draw_text_line_row ('title');
       $renderer->draw_check_box_row ('is_visible');
       if ($this->visible ('is_visible'))
+      {
         $renderer->draw_separator ();
+      }
       $renderer->draw_text_box_row ('description');
 
       $renderer->draw_separator ();
@@ -307,7 +318,9 @@ class ATTACHMENT_FORM extends OBJECT_IN_FOLDER_FORM
       $renderer->draw_text_line_row ('title');
       $renderer->draw_check_box_row ('is_visible');
       if ($this->visible ('is_visible'))
+      {
         $renderer->draw_separator ();
+      }
       $renderer->draw_text_box_row ('description');
     }
 

@@ -92,9 +92,13 @@ class ATTACHMENT_HOST extends OBJECT_IN_FOLDER
     $att_thumb_key = '{att_thumb}';
 
     if (strpos ($url, $att_link_key) !== FALSE)
+    {
       $key = $att_link_key;
+    }
     else if (strpos ($url, $att_thumb_key) !== FALSE)
-      $key = $att_thumb_key;
+ {
+   $key = $att_thumb_key;
+ }
 
     if (isset ($key))
     {
@@ -104,7 +108,9 @@ class ATTACHMENT_HOST extends OBJECT_IN_FOLDER
       $url->prepend ('{' . Folder_name_attachments . '}/' . $history_item->object_type . '/' . $this->id . '/');
 
       if ($key == $att_thumb_key)
+      {
         $url->append_to_name ('_tn');
+      }
 
       $url = $url->as_text ();
     }

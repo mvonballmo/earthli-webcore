@@ -101,9 +101,13 @@ class PROJECT_COMMANDS extends FOLDER_COMMANDS
 
     $branch =&  $folder->trunk ();
     if (isset ($branch))
+    {
       $cmd->link = "create_branch.php?id=$folder->id&branch_id=$branch->id";
+    }
     else
+    {
       $cmd->link = "create_branch.php?id=$folder->id";
+    }
 
     $cmd->icon = '{app_icons}buttons/new_branch';
     $cmd->executable = $this->login->is_allowed (Privilege_set_folder, Privilege_modify, $folder);

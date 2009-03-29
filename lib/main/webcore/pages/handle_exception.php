@@ -38,7 +38,9 @@ http://www.earthli.com/software/webcore
 
   $form->process_existing ($sig);
   if ($form->committed ())
+  {
     $Env->redirect_local ('exception_submitted.php');
+  }
 
   $Page->location->add_root_link ();
   $Page->start_display ();
@@ -76,7 +78,9 @@ http://www.earthli.com/software/webcore
             $buttons [] = $ctrls_renderer->javascript_button_as_html ('Send', 'document.getElementById (\'update_form\').submit()', '{icons}buttons/send');
             $buttons [] = $ctrls_renderer->javascript_button_as_html ('Try again', 'document.getElementById (\'retry_form\').submit()', '{icons}buttons/restore');
             if ($Env->debug_enabled)
+            {
               $buttons [] = $ctrls_renderer->javascript_button_as_html ('Debug', 'document.getElementById (\'debug_form\').submit()', '{icons}buttons/debug');
+            }
           }
           else
           {

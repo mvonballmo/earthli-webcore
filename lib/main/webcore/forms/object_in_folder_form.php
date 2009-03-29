@@ -73,12 +73,17 @@ class OBJECT_IN_FOLDER_FORM extends CONTENT_OBJECT_FORM
     parent::_store_to_object ($obj);
 
     if ($this->visible ('is_visible'))
-      // if this field is displayed, then use it's value.
     {
+      // if this field is displayed, then use it's value.
+
       if ($this->value_for ('is_visible'))
+      {
         $obj->show (FALSE);
+      }
       else
+      {
         $obj->hide (FALSE);
+      }
     }
   }
 
@@ -216,7 +221,9 @@ class ATTACHMENT_HOST_FORM extends OBJECT_IN_FOLDER_FORM
         $this->_attachments = $attachment_query->objects ();
       }
       else
+      {
         $this->_attachments = array ();
+      }
     }
     return $this->_attachments;
   }
@@ -260,9 +267,13 @@ class ATTACHMENT_HOST_FORM extends OBJECT_IN_FOLDER_FORM
       $renderer->finish_row ();
       $browser = $this->env->browser ();
       if ($browser->supports (Browser_DOM_2))
+      {
         $renderer->draw_text_row (' ', 'Insert image/media tag for the selected attachment.', 'notes');
+      }
       else
+      {
         $renderer->draw_text_row (' ', 'Append image/media tag for the selected attachment (scroll to end of text).', 'notes');
+      }
     }
   }
   
@@ -297,11 +308,15 @@ class ATTACHMENT_HOST_FORM extends OBJECT_IN_FOLDER_FORM
       alignment = f.alignments.value;
       size = f.sizes.value;
       if (size == "thumbnail")
+      {
         text_to_insert = '<img attachment="' + f.attachments.value + '" align="' + alignment + '" class="frame" caption="' + caption_text + '">';
+      }
       else
       {
         if (size == "100")
+        {
           text_to_insert = '<img src="{att_link}' + f.attachments.value + '" align="' + alignment + '" class="frame" caption="' + caption_text + '">';
+        }
         else      
           text_to_insert = '<img src="{att_link}' + f.attachments.value + '" href="{att_link}' + f.attachments.value + '" align="' + alignment + '" class="frame" caption="' + caption_text + '" scale="' + size + '%">';
       }
@@ -440,7 +455,9 @@ class DRAFTABLE_ENTRY_FORM extends ENTRY_FORM
     parent::_store_to_object ($obj);
 
     if ($this->value_for ('draft'))
+    {
       $obj->state = Draft;
+    }
   }
 
   /**
@@ -451,9 +468,13 @@ class DRAFTABLE_ENTRY_FORM extends ENTRY_FORM
   function commit (&$obj)
   {
     if ($this->object_exists () && $this->value_for ('quick_save'))
+    {
       $obj->store ();
+    }
     else
+    {
       parent::commit ($obj);
+    }
   }
 
   /**
@@ -465,7 +486,9 @@ class DRAFTABLE_ENTRY_FORM extends ENTRY_FORM
     $Result = parent::make_renderer ();
     $Result->drafts_enabled = $this->value_for ('draft');
     if ($Result->drafts_enabled)
+    {
       $this->button = 'Publish';
+    }
     return $Result;
   }
 }

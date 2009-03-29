@@ -160,15 +160,21 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
     }
 
     if (! $selected)
+    {
       $this->record_error ('main_branch_id', 'Please select at least one branch.');
+    }
 
     $main_branch_id = $this->value_for ('main_branch_id');
     if (! $main_branch_id)
+    {
       $this->record_error ('main_branch_id', 'Please select a branch for use in non-branch-specific lists.');
+    }
     else
     {
       if (! $this->value_for ("branch_{$main_branch_id}_enabled"))
+      {
         $this->record_error ('main_branch_id', 'Please select an enabled branch for use in non-branch-specific lists.');
+      }
     }
   }
 
@@ -205,7 +211,9 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
         $obj->add_branch_info ($branch_info);
 
         if ($main_branch_id == $branch->id)
+        {
           $obj->set_main_branch_info ($branch_info);
+        }
       }
     }
 
@@ -263,10 +271,14 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
       $show_branch = ! $branch->locked ();
 
       if (! $show_branch && ($this->value_for ('main_branch_id') == $id))
+      {
         $this->set_value ('main_branch_id', 0);
+      }
 
       if ($show_branch && ! $this->value_for ('main_branch_id'))
+      {
         $this->set_value ('main_branch_id', $id);
+      }
     }
 
     $this->set_value ("branch_{$id}_enabled", $show_branch);
@@ -422,12 +434,16 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
       {
         $title = $release->title_as_link ();
         if ($release->locked ())
+        {
           $title = $this->app->resolve_icon_as_html ('{icons}indicators/locked', 'Locked', '16px') . ' ' . $title;
+        }
 
         $renderer->draw_text_row ('Release', $title);
       }
       else
+      {
         $renderer->draw_text_row ('Release', 'Not released');
+      }
 
       $renderer->draw_error_row ("branch_{$branch->id}_release_id");
     }
@@ -451,13 +467,17 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
             $status = $nd->format ($df);
           }
           else
+          {
             $status = $release->state_as_string ();
+          }
             
           $title = $release->title_as_plain_text () . ' (' . $status . ')';
           $props->add_item ($title, $release->id);
 
           if ($release->planned () && ! isset ($planned_release))
+          {
             $planned_release = $release;
+          }
         }
       }
 
@@ -467,7 +487,9 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
            first planned release as the default instead of '[Next release]'. */
 
         if ((! $this->object_exists () || ! $visible || $this->cloning ()) && isset ($planned_release))
+        {
           $this->set_value ("branch_{$branch->id}_release_id", $planned_release->id);
+        }
       }
 
       $renderer->draw_drop_down_row ("branch_{$branch->id}_release_id", $props);
@@ -505,7 +527,9 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
           if ($use_DHTML)
           {
             if (! $visible)
+            {
               $style = 'display: none';
+            }
           }
         ?>
         <div id="branch_<?php echo $branch->id; ?>_panel" <?php if ($visible) echo "class=\"chart\""; ?> style="margin-bottom: .25em; width: 35em">
@@ -521,13 +545,17 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
                 $locked = $locked || $this->_branch_is_locked ($branch, $release);
               }
               else
+              {
                 $release = null;
+              }
 
               if ($locked)
               {
                 $renderer->draw_hidden ("branch_{$branch->id}_enabled");
                 if ($branch->locked ())
+                {
                   echo $this->app->resolve_icon_as_html ('{icons}indicators/locked', 'Locked', '16px') . ' ';
+                }
                 echo $branch->title_as_link ();
               }
               else

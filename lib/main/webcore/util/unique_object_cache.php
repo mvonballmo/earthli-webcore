@@ -82,11 +82,15 @@ class UNIQUE_OBJECT_CACHE extends OBJECT_CACHE
   function _stored_name ($name)
   {
     if (! isset ($this->_hash_value))
+    {
       $this->_hash_value = $this->_query->hash ();
+    }
 
     $Result = 'list_' . $this->_hash_value;
     if ($name)
+    {
       $Result .= '_' . $name;
+    }
       
     return $Result;
   }

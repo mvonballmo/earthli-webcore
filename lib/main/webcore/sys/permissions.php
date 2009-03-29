@@ -129,9 +129,13 @@ class PRIVILEGES extends RAISABLE
   function set_all ($enabled = TRUE)
   {
     if ($enabled)
+    {
       $flags = Privilege_range_object_all;
+    }
     else
+    {
       $flags = 0;
+    }
 
     foreach ($this->_set_names as $set_name)
       $this->_sets [$set_name]->load ($flags);
@@ -362,18 +366,26 @@ class USER_PERMISSIONS extends STORABLE
     if ($this->global_privileges->supports ($set_name))
     {
       if ($this->global_privileges->enabled ($set_name, $type))
+      {
         return Privilege_always_granted;
-      else
-        return Privilege_always_denied;
+      }
+
+
+      return Privilege_always_denied;
     }
     else
     {
       if ($this->allow_privileges->enabled ($set_name, $type))
+      {
         return Privilege_always_granted;
+      }
       else if ($this->deny_privileges->enabled ($set_name, $type))
-        return Privilege_always_denied;
-      else
-        return Privilege_controlled_by_content;
+ {
+   return Privilege_always_denied;
+ }
+
+
+      return Privilege_controlled_by_content;
     }
   }
 

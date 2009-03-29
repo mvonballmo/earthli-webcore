@@ -98,7 +98,9 @@ class RENDERER extends WEBCORE_OBJECT
     $f = $t->formatter ();
     $f->clear_flags ();
     if (isset ($type))
+    {
       $f->type = $type;
+    }
     return $t->format ($f);
   }
 }
@@ -166,12 +168,18 @@ class TEXT_TABLE_RENDERER
       {
         $padding = str_repeat (' ', $this->_max_label_length - strlen ($label));
         if ($this->right_aligned)
+        {
           $text = $padding . '[' . $label . ']: ' . $content;
+        }
         else
+        {
           $text = "[$label]: $padding$content";
+        }
       }
       else
+      {
         $text = '';
+      }
 
       echo $this->_renderer->_line ($text);
     }

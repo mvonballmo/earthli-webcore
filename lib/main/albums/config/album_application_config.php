@@ -55,7 +55,9 @@ class ALBUM_APPLICATION_DISPLAY_OPTIONS extends APPLICATION_DISPLAY_OPTIONS
   function weather_icons ()
   {
     if (! isset ($this->_weather_icons))
+    {
       $this->_init_weather_icons ();
+    }
     return $this->_weather_icons;
   }
 

@@ -89,7 +89,9 @@ class ENTRY_COMMENT_QUERY extends COMMENT_QUERY
       $this->_start_system_call ("a.id = $id");
       $objs = $this->objects ();
       if (sizeof ($objs))
+      {
         $Result =& $objs [0];
+      }
       $this->_end_system_call ();
       $this->_tables = $old_tables;
       return $Result;

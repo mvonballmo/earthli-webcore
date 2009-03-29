@@ -152,7 +152,9 @@ class PAGE_RENDERER extends WEBCORE_OBJECT
   {
     $this->display_styles ();
     if ($this->page->template_options->include_scripts)
+    {
       $this->display_scripts ();
+    }
   }
   
   function display_meta_name_tag ($tag_name, $tag_content)

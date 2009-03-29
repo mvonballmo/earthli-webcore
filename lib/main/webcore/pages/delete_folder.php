@@ -39,17 +39,20 @@ http://www.earthli.com/software/webcore
     {
       $parent =& $folder->parent_folder ();
 
-      if ($App->login->is_allowed (Privilege_set_folder, Privilege_hidden, $folder)
-          && ! $form->value_for ('purge'))
+      if ($App->login->is_allowed (Privilege_set_folder, Privilege_hidden, $folder) && ! $form->value_for ('purge'))
       {
         $App->return_to_referer ($folder->home_page ());
       }
       else
       {
         if (isset ($parent))
+        {
           $Env->redirect_local ($parent->home_page ());
+        }
         else
+        {
           $Env->redirect_local ('index.php');
+        }
       }
     }
 
@@ -75,5 +78,7 @@ http://www.earthli.com/software/webcore
     $Page->finish_display ();
   }
   else
+  {
     $Page->raise_security_violation ('You are not allowed to delete this folder.', $folder);
+  }
 ?>

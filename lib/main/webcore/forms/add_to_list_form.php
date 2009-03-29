@@ -106,7 +106,9 @@ class ADD_TO_LIST_FORM extends ID_BASED_FORM
     parent::_post_validate ($obj);
 
     if (sizeof ($this->value_for ('object_ids')) == 0)
+    {
       $this->record_error (Form_general_error_id, 'Please select at least one object.');
+    }
   }
 
   function commit (&$obj)

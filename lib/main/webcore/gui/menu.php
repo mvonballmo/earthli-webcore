@@ -75,7 +75,9 @@ class MENU extends WEBCORE_OBJECT
   function size ()
   {
     if (isset ($this->_commands))
+    {
       return $this->_commands->size ();
+    }
   }
 
   /**
@@ -86,7 +88,9 @@ class MENU extends WEBCORE_OBJECT
   function display_as_toolbar ($CSS_class = 'menu-bar-top')
   {
     if (isset ($this->_commands))
+    {
       $this->renderer->display_as_toolbar ($this->_commands, $CSS_class);
+    }
   }
 
   /**
@@ -96,7 +100,9 @@ class MENU extends WEBCORE_OBJECT
   function display ()
   {
     if (isset ($this->_commands))
+    {
       $this->renderer->display ($this->_commands);
+    }
   }
   
   /**
@@ -163,7 +169,9 @@ class MENU extends WEBCORE_OBJECT
     $Result = $this->_commands->make_command ();
     $Result->id = 'item_' . mt_rand ();
     if ($selected)
+    {
       $Result->title = "<span class=\"selected\">$title</span>";
+    }
     else
     {
       $Result->title = $title;

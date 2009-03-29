@@ -247,7 +247,9 @@ class BASELINE_DATA_TEST_TASK extends TEST_TASK
       $root_folder->purge ();
     }
     else
+    {
       $root_folder = $this->app->new_folder ();
+    }
 
     // ensure that we get the root folder id again
     $this->_query ("TRUNCATE TABLE `test_harness_folders`");

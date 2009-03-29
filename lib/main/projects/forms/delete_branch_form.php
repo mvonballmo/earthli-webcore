@@ -62,7 +62,9 @@ class DELETE_BRANCH_FORM extends DELETE_OBJECT_IN_FOLDER_FORM
       $obj->purge ($options);
     }
     else
+    {
       $obj->delete ();
+    }
   }
 }
 

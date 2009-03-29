@@ -98,7 +98,9 @@ class MULTIPLE_OBJECT_MOVER_FORM extends MULTIPLE_OBJECT_ACTION_FORM
   function run ()
   {
     if ($this->_target)
+    {
       parent::run ();
+    }
   }
 
   /**
@@ -121,7 +123,9 @@ class MULTIPLE_OBJECT_MOVER_FORM extends MULTIPLE_OBJECT_ACTION_FORM
     $folder_query = $this->app->login->folder_query ();
     $this->_target =& $folder_query->object_at_id ($this->value_for ('selected_folder_id'));
     if (empty ($this->_target))
+    {
       $this->record_error ('selected_folder_id', 'Please choose a valid folder.');
+    }
     elseif (! $this->copy && $this->_folder->equals ($this->_target))
       $this->record_error ('selected_folder_id', 'You cannot move to the same folder.');
     elseif (($this->object_list->has_folders () && ! $this->app->login->is_allowed (Privilege_set_folder, Privilege_create, $this->_target)) ||
@@ -141,9 +145,13 @@ class MULTIPLE_OBJECT_MOVER_FORM extends MULTIPLE_OBJECT_ACTION_FORM
   {
     $opts = $this->_move_options_for ($fldr);
     if ($this->copy)
+    {
       $fldr->copy_to ($this->_target, $opts);
+    }
     else
+    {
       $fldr->move_to ($this->_target, $opts);
+    }
   }
 
   /**
@@ -155,9 +163,13 @@ class MULTIPLE_OBJECT_MOVER_FORM extends MULTIPLE_OBJECT_ACTION_FORM
   {
     $opts = $this->_move_options_for ($entry);
     if ($this->copy)
+    {
       $entry->copy_to ($this->_target, $opts);
+    }
     else
+    {
       $entry->move_to ($this->_target, $opts);
+    }
   }
 
   /**
@@ -178,9 +190,13 @@ class MULTIPLE_OBJECT_MOVER_FORM extends MULTIPLE_OBJECT_ACTION_FORM
   function _draw_message (&$renderer)
   {
     if ($this->copy)
+    {
       $renderer->draw_text_row ('', 'Are you sure you want to copy ' . $this->object_list->description () . '?');
+    }
     else
+    {
       $renderer->draw_text_row ('', 'Are you sure you want to move ' . $this->object_list->description () . '?');
+    }
     
     if ($this->object_list->has_folders () && $this->visible ('maintain_permissions'))
     {

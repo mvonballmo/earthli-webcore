@@ -59,12 +59,18 @@ http://www.earthli.com/software/webcore
       $group_user_query = $group->user_query ();
       $ids = $group_user_query->indexed_objects ();
       if (sizeof ($ids))
+      {
         $user_query->restrict_by_op ('usr.id', array_keys ($ids), Operator_not_in);
+      }
 
       if (read_var ('show_anon'))
+      {
         $user_query->set_kind (Privilege_kind_anonymous);
+      }
       else
+      {
         $user_query->set_kind (Privilege_kind_registered);
+      }
 
       $class_name = $App->final_class_name ('USER_BROWSER_GRID', 'webcore/gui/user_browser_grid.php');
       $grid = new $class_name ($App);
@@ -78,5 +84,7 @@ http://www.earthli.com/software/webcore
     $Page->finish_display ();
   }
   else
+  {
     $Page->raise_security_violation ('You are not allowed to modify groups.', $group);
+  }
 ?>

@@ -66,7 +66,9 @@ class WEBCORE_OBJECT extends RAISABLE
     $this->db =& $context->database;
 
     if ($context->is_page)
+    {
       $this->page =& $context;
+    }
     else
     {
       $this->app =& $context;
@@ -77,7 +79,9 @@ class WEBCORE_OBJECT extends RAISABLE
     $this->env->num_webcore_objects++;
 
     if ($this->env->log_class_names)
+    {
       log_message ("[{$this->env->num_webcore_objects}] Created [" . $this->instance_description () . ']', Msg_type_debug_info, Msg_channel_system);
+    }
   }
 
   /**
@@ -110,7 +114,9 @@ class WEBCORE_OBJECT extends RAISABLE
   function make_clone ()
   {
     if (is_php_5 ())
+    {
       return clone ($this);
+    }
 
     $Result = $this;
     $Result->_copy_from ($this);
@@ -138,7 +144,9 @@ class WEBCORE_OBJECT extends RAISABLE
   function _exception_handler ()
   {
     if (isset ($this->context->exception_handler))
+    {
       return $this->context->exception_handler;
+    }
   }
 
   /**

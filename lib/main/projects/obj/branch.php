@@ -244,7 +244,9 @@ class BRANCH extends OBJECT_IN_FOLDER
     $folder_url = $folder->_object_url ($use_links, $separator, $formatter);
 
     if (! isset ($separator))
+    {
       $separator = $this->app->display_options->obj_url_separator;
+    }
 
     return $folder_url . $separator . $Result;
   }
@@ -271,7 +273,9 @@ class BRANCH extends OBJECT_IN_FOLDER
       while (! isset ($new_trunk) && ($idx < $num_branches))
       {
         if ($branches [$idx]->id != $this->id)
+        {
           $new_trunk = $branches [$idx];
+        }
 
         $idx++;
       }
@@ -287,7 +291,9 @@ class BRANCH extends OBJECT_IN_FOLDER
       }
     }
     else
+    {
       $trunk =& $folder->trunk ();
+    }
 
     /* Update every entry, making sure to create a history item for each one, indicating
        the change (branch removed, trunk added, main branch changed). */
@@ -313,7 +319,9 @@ class BRANCH extends OBJECT_IN_FOLDER
           if ($branch_info->branch_id != $this->id)
           {
             if (! isset ($main_branch_info))
+            {
               $main_branch_info = $branch_info;
+            }
             $entry->add_branch_info ($branch_info);
           }
         }
@@ -328,7 +336,9 @@ class BRANCH extends OBJECT_IN_FOLDER
       else
       {
         if ($entry->main_branch_id == $this->id)
+        {
           $entry->set_main_branch_info ($main_branch_info);
+        }
       }
 
       $entry->store_if_different ($history_item);
@@ -345,7 +355,9 @@ class BRANCH extends OBJECT_IN_FOLDER
       foreach ($orig_branch_infos as $branch_id => $orig_branch_info)
       {
         if (! isset ($new_branch_infos [$branch_id]))
+        {
           $orig_branch_info->purge ();
+        }
       }
     }
 

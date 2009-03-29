@@ -91,8 +91,8 @@ http://www.earthli.com/software/webcore
       </div>
     <?php
       if ($panel->num_objects () && $panel->uses_time_selector)
-        // don't show the bottom selector if there are no objects
       {
+        // don't show the bottom selector if there are no objects
     ?>
       <div class="menu-bar-bottom" style="text-align: center">
         <?php $panel_manager->display_time_menu (); ?>
@@ -106,5 +106,7 @@ http://www.earthli.com/software/webcore
     $Page->finish_display ();
   }
   else
+  {
     $Page->raise_security_violation ('You are not allowed to see this user.', $user);
+  }
 ?>

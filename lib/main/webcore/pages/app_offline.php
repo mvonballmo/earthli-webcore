@@ -50,9 +50,13 @@ http://www.earthli.com/software/webcore
     $menu->append ('Home', $Page->path_to (Folder_name_root));
     
     if ($options->contact_url)
+    {
       $menu->append ('Contact', $Page->resolve_file ($options->contact_url));
+    }
     if ($options->support_url)
+    {
       $menu->append ('Support', $Page->resolve_file ($options->support_url));
+    }
       
     $menu->display ();
   ?>

@@ -189,7 +189,9 @@ class PAGE extends CONTEXT
   function &resources ()
   {
     if (isset ($this->app))
+    {
       return $this->app;
+    }
     return $this;
   }
 
@@ -238,7 +240,9 @@ class PAGE extends CONTEXT
     else
     {
       if ($this->env->ignore_redirects)
+      {
         log_message ("Access violation redirection was ignored.", Msg_type_warning, Msg_channel_system);
+      }
 
       if (is_a ($context, 'folder'))
       {
@@ -249,7 +253,9 @@ class PAGE extends CONTEXT
       {
         $this->location->add_root_link ();
         if (is_a ($context, 'group'))
+        {
           $this->location->append ('Groups', 'view_groups.php');
+        }
         elseif (is_a ($context, 'user'))
           $this->location->append ('Users', 'view_users.php');
       }
@@ -280,13 +286,17 @@ class PAGE extends CONTEXT
     {
       $this->location->add_root_link ();
       if (is_a ($context, 'group'))
+      {
         $this->location->append ('Groups', 'view_groups.php');
+      }
       elseif (is_a ($context, 'user'))
         $this->location->append ('Users', 'view_users.php');
     }
     
     if (! $caption)
+    {
       $caption = $this->title->subject;
+    }
     $caption .= ': Error';
     
     $this->title->subject = $caption;
@@ -349,7 +359,9 @@ class PAGE extends CONTEXT
   function register_application ($id, $engine_name)
   {
     if (! $this->is_registered ('APPLICATION_ENGINE', $id))
+    {
       $this->register_class ('APPLICATION_ENGINE', $engine_name, 'plugins/' . $id . '.init.php', $id);
+    }
   }
   
   /**
@@ -376,9 +388,13 @@ class PAGE extends CONTEXT
     $engine = new $class_name ();
     $engine->init ($this);
     if ($set_as_default)
+    {
       $engine->set_main_app_for ($this);
+    }
     if ($start)
+    {
       $engine->start ();
+    }
 
       /* HACK: This reference has to be patched for 4.4.x; can't figure out a better way yet. */
             
@@ -396,7 +412,9 @@ class PAGE extends CONTEXT
   function add_script_file ($url)
   {
     if (! isset ($this->scripts) || ! in_array ($url, $this->scripts))
+    {
       $this->scripts [] = $url;
+    }
   }
 
   /**
@@ -408,7 +426,9 @@ class PAGE extends CONTEXT
   function add_style_sheet ($url)
   {
     if (! isset ($this->styles) || ! in_array ($url, $this->styles))
+    {
       $this->styles [] = $url;
+    }
   }
 
   /**
@@ -494,10 +514,14 @@ class PAGE extends CONTEXT
     $overridden = $class_name != Custom_page_renderer;
      
     if ($overridden && $error_occurred)
+    {
       log_message ("[{$class_name}] is not a valid custom renderer.", Msg_type_warning, Msg_channel_system);
+    }
 
     if (! $overridden || $error_occurred)
+    {
       $class_name = $this->final_class_name ('PAGE_RENDERER', 'webcore/gui/page_renderer.php');
+    }
       
     $this->assert (class_exists ($class_name), "[{$class_name}] is not a valid default renderer.", 'make_renderer', 'PAGE');
 
@@ -517,7 +541,9 @@ class PAGE extends CONTEXT
   function _on_alias_changed (&$resource_manager, $alias, $path)
   {
     if (isset ($this->_icon_aliases [$alias]))
+    {
       $this->_on_icon_alias_changed ($resource_manager, $alias, $path);
+    }
   }
 
   /**
@@ -549,7 +575,9 @@ class PAGE extends CONTEXT
     {
       $Result = path_between ($this->root_url, $Result, global_url_options ());
       if ($Result == '')
+      {
         $Result = '.';
+      }
     }
     return $Result;
   }

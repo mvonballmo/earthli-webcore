@@ -34,9 +34,13 @@ http://www.earthli.com/software/webcore
 
     $show_anon = read_var ('show_anon');
     if ($show_anon)
+    {
       $user_query->set_kind (Privilege_kind_anonymous);
+    }
     else
+    {
       $user_query->set_kind (Privilege_kind_registered);
+    }
 
     $Page->title->subject = 'Users';
 
@@ -93,5 +97,7 @@ http://www.earthli.com/software/webcore
     $Page->finish_display ();
   }
   else
+  {
     $Page->raise_security_violation ('You are not allowed to see users.');
+  }
 ?>

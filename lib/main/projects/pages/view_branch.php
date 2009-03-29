@@ -65,7 +65,9 @@ http://www.earthli.com/software/webcore/projects
     <div class="side-bar-title">
       <?php
         if ($branch->locked ())
+        {
           echo $branch->state_as_icon ('20px') . ' ';
+        }
         echo $branch->title_as_html (); ?>
     </div>
     <div class="side-bar-body">
@@ -117,8 +119,8 @@ http://www.earthli.com/software/webcore/projects
     </div>
     <?php
       if ($panel->num_objects () && $panel->uses_time_selector)
-        // don't show the bottom selector if there are no objects
       {
+        // don't show the bottom selector if there are no objects
     ?>
       <div class="menu-bar-bottom" style="text-align: center">
         <?php $panel_manager->display_time_menu (); ?>
@@ -132,5 +134,7 @@ http://www.earthli.com/software/webcore/projects
     $Page->finish_display ();
   }
   else
+  {
     $Page->raise_security_violation ('You are not allowed to view branches in this folder.', $folder);
+  }
 ?>

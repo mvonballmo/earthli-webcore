@@ -85,19 +85,24 @@ class FOLDER_USER_PERMISSIONS_CREATE_FORM extends FOLDER_PERMISSIONS_FORM
     parent::_post_validate ($obj);
 
     if (! $this->num_errors ('title'))
-      // the name validated OK (specifically, it is not empty)
     {
+      // the name validated OK (specifically, it is not empty)
+      
       $this->_user =& $this->_user_query->object_with_field ('title', $this->value_for ('title'));
 
       if (! $this->_user)
+      {
         $this->record_error ('title', "Please choose a valid user.");
+      }
 
       if (! $this->num_errors ('title'))
       {
         $security =& $this->_folder->security_definition ();
         $user =& $security->user_permissions_at_id ($this->_user->id);
         if (isset ($user))
+        {
           $this->record_error ('title', "That user already has permissions in this folder.");
+        }
       }
     }
   }

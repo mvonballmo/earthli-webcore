@@ -141,7 +141,9 @@ class STORABLE_FORM extends PREVIEWABLE_FORM
       $this->load_from_clone ($clone);
     }
     else
+    {
       parent::_process_load_action ($obj, $load_action);
+    }
   }
 }
 

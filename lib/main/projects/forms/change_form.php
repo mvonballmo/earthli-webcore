@@ -95,7 +95,9 @@ class CHANGE_FORM extends PROJECT_ENTRY_FORM
       $this->add_preview ($job, 'Attached to job: ' . $job->title_as_html (), ! $this->previewing ());
     }
     else
+    {
       $this->set_value ('job_id', 0);
+    }
   }
 
   /**
@@ -143,7 +145,9 @@ class CHANGE_FORM extends PROJECT_ENTRY_FORM
     parent::_post_validate ($obj);
 
     if (! $this->value_for ('title') && ! $this->value_for ('description'))
+    {
       $this->record_error ('title', 'Please provide a title or description.');
+    }
   }
 
   /**
@@ -160,9 +164,13 @@ class CHANGE_FORM extends PROJECT_ENTRY_FORM
 
       $q->set_type ('job');
       if ($this->object_exists ())
+      {
         $t = $this->_object->time_created;
+      }
       else
+      {
         $t = new DATE_TIME ();
+      }
       $q->restrict ("closer_id <> 0 OR job.time_closed < '" . $t->as_iso () . "'");
       $q->restrict ("entry.time_created < '" . $t->as_iso () . "'");
 
@@ -237,17 +245,25 @@ class CHANGE_FORM extends PROJECT_ENTRY_FORM
       $entry_query = $release->entry_query ();
     }
     else
+    {
       $entry_query = $branch->entry_query ();
+    }
 
     $entry_query->set_type ('job');
     if ($this->object_exists ())
+    {
       $t = $this->_object->time_created;
+    }
     else
+    {
       $t = new DATE_TIME ();
+    }
 
     $job_id = $this->value_for ('job_id');
     if (empty ($job_id))
+    {
       $job_id = 0;
+    }
 
     $entry_query->restrict ("(entry.id = $job_id) OR (closer_id <> 0) <> 0 OR (job.time_closed < '" . $t->as_iso () . "')");
     $this->jobs = $entry_query->objects ();

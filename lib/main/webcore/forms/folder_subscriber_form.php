@@ -85,7 +85,9 @@ class FOLDER_SUBSCRIBER_FORM extends ID_BASED_FORM
     foreach ($subscribers as $subscriber)
     {
       if (! in_array ($subscriber->email, $selected_emails))
+      {
         $subscriber->unsubscribe ($this->_folder->id, Subscribe_folder);
+      }
     }
   }
 
@@ -124,7 +126,9 @@ class FOLDER_SUBSCRIBER_FORM extends ID_BASED_FORM
 
     $renderer->draw_separator ();
     if (! empty ($buttons))
+    {
       $renderer->draw_buttons_in_row ($buttons);
+    }
 
     $renderer->finish ();
   }

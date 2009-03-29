@@ -127,7 +127,9 @@ class USER extends CONTENT_OBJECT
   function expanded_icon_url ($size = '32px')
   {
     if ($this->icon_url)
+    {
       return $this->app->sized_icon ($this->icon_url, $size);
+    }
   }
 
   /**
@@ -160,7 +162,9 @@ class USER extends CONTENT_OBJECT
   function email_as_text ()
   {
     if (! $this->email)
+    {
       $Result = '[none]';
+    }
     else
     {
       switch ($this->email_visibility)
@@ -221,7 +225,9 @@ class USER extends CONTENT_OBJECT
         {
         case Privilege_view:
           if ($obj)
+          {
             $Result = $Result || ($obj->equals ($this));
+          }
           break;
         case Privilege_modify:
           $Result = $Result || ($user_options->users_can_edit_self && $obj->equals ($this));
@@ -236,7 +242,9 @@ class USER extends CONTENT_OBJECT
         case Privilege_subscribe:
         case Privilege_password:
           if ($obj)
+          {
             $Result = $Result || ($obj->equals ($this));
+          }
           break;
         }
       }
@@ -244,9 +252,13 @@ class USER extends CONTENT_OBJECT
     else
     {
       if ($user_permissions->allow_privileges->enabled ($set_name, $type))
+      {
         $Result = TRUE;
+      }
       else if ($user_permissions->deny_privileges->enabled ($set_name, $type))
-        $Result = FALSE;
+ {
+   $Result = FALSE;
+ }
       else
       {
         $folder =& $obj->security_context ();
@@ -319,7 +331,9 @@ class USER extends CONTENT_OBJECT
   function password_matches ($p)
   {
     if (! $this->app->user_options->passwords_are_case_sensitive)
+    {
       $p = strtolower ($p);
+    }
     return strcmp ($this->password, md5 ($p)) == 0;
   }
 
@@ -350,9 +364,12 @@ class USER extends CONTENT_OBJECT
   function title_as_link ($formatter = null)
   {
     if (($this->id != Non_existent_user_id) && $this->login->is_allowed (Privilege_set_user, Privilege_view, $this))
+    {
       return parent::title_as_link ($formatter);
-    else
-      return $this->title_as_html ($formatter);
+    }
+
+
+    return $this->title_as_html ($formatter);
   }
 
   /**
@@ -362,7 +379,9 @@ class USER extends CONTENT_OBJECT
   function set_password ($p)
   {
     if (! $this->app->user_options->passwords_are_case_sensitive)
+    {
       $p = strtolower ($p);
+    }
     $this->password = md5 ($p);
   }
 
@@ -407,28 +426,41 @@ class USER extends CONTENT_OBJECT
     if ($this->is_anonymous ())
     {
       if ($user_name_is_default)
+      {
         return $this->title;
-      else
-        return '(N/A)';
+      }
+
+
+      return '(N/A)';
     }
     else
     {
       if ($this->real_last_name)
       {
         if ($this->real_first_name)
+        {
           $Result = $this->real_first_name . " " . $this->real_last_name;
+        }
         else
+        {
           $Result = $this->real_last_name;
+        }
       }
       else if ($this->real_first_name)
-        $Result = $this->real_first_name;
+ {
+   $Result = $this->real_first_name;
+ }
 
       if (! isset ($Result))
       {
         if ($user_name_is_default)
+        {
           $Result = $this->title;
+        }
         else
+        {
           $Result = '(withheld)';
+        }
       }
 
       return $Result;
@@ -471,9 +503,13 @@ class USER extends CONTENT_OBJECT
     {
       $msg = "Folder for id [$id] not found.";
       if ($can_fail)
+      {
         log_message ($msg, Msg_type_debug_info, Msg_channel_system);
+      }
       else
+      {
         $this->raise ($msg, 'folder_at_id', 'USER');
+      }
     }
 
     return $Result;
@@ -611,7 +647,9 @@ class USER extends CONTENT_OBJECT
     $class_name = $this->app->final_class_name ('SUBSCRIBER', 'webcore/obj/subscriber.php');
     $Result = new $class_name ($this->app);
     if (isset ($this->email))
+    {
       $Result->email = $this->email;
+    }
     return $Result;
   }
 
@@ -642,7 +680,9 @@ class USER extends CONTENT_OBJECT
         $this->_permissions->load ($db);
       }
       else
+      {
         $this->use_default_permissions ();
+      }
     }
   }
 
@@ -655,9 +695,13 @@ class USER extends CONTENT_OBJECT
     $tname =$this->_table_name ();
 
     if ($this->ip_address)
+    {
       $ip = ip2long ($this->ip_address);
+    }
     else
+    {
       $ip = 0;
+    }
 
     $storage->add ($tname, 'ip_address', Field_type_integer, $ip, Storage_action_create);
     $storage->add ($tname, 'kind', Field_type_string, $this->kind, Storage_action_create);
@@ -679,9 +723,13 @@ class USER extends CONTENT_OBJECT
   function use_default_permissions ()
   {
     if ($this->is_anonymous ())
+    {
       $user =& $this->app->anon_user ();
+    }
     else
+    {
       $user =& $this->app->global_user ();
+    }
 
     include_once ('webcore/sys/permissions.php');
     $this->_permissions = new USER_PERMISSIONS ($this->app);
@@ -709,7 +757,9 @@ class USER extends CONTENT_OBJECT
         $this->_permissions->load ($db);
       }
       else
+      {
         $this->use_default_permissions ();
+      }
     }
   }
 

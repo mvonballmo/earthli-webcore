@@ -36,7 +36,9 @@ http://www.earthli.com/software/webcore
 
     $form->process_existing ($folder);
     if ($form->committed ())
+    {
       $App->return_to_referer ($folder->home_page ());
+    }
 
     $Page->title->add_object ($folder);
     $Page->title->subject = 'Subscribers';
@@ -119,7 +121,9 @@ http://www.earthli.com/software/webcore
         $form->button = "Update";
         $form->display ();
         if ($show_tree)
+        {
           $box->finish_column_set ();
+        }
 ?>
     </div>
   </div>
@@ -127,5 +131,7 @@ http://www.earthli.com/software/webcore
     $Page->finish_display ();
   }
   else
+  {
     $Page->raise_security_violation ('You are not allowed to edit subscriptions in this folder.', $folder);
+  }
 ?>

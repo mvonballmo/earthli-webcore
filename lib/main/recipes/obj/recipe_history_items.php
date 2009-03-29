@@ -70,17 +70,25 @@ class RECIPE_HISTORY_ITEM extends ENTRY_HISTORY_ITEM
     if ($orig->bullet_ingredients != $new->bullet_ingredients)
     {
       if ($new->bullet_ingredients)
+      {
         $this->record_difference ('Set automatic bullets for ingredients.');
+      }
       else
+      {
         $this->record_difference ('Turned off automatic bullets for ingredients.');
+      }
     }
 
     if ($orig->number_instructions != $new->number_instructions)
     {
       if ($new->number_instructions)
+      {
         $this->record_difference ('Set automatic numbering for instructions.');
+      }
       else
+      {
         $this->record_difference ('Turned off automatic numbering for instructions.');
+      }
     }
   }
 }

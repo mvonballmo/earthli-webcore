@@ -82,9 +82,13 @@ class ALBUM_COMMANDS extends FOLDER_COMMANDS
     $entry_query = $folder->entry_query ();
     $entry_query->set_type ('journal');
     if ($entry_query->size ())
+    {
       $cmd->link .= '&entry_type=journal';
+    }
     else
+    {
       $cmd->link .= '&entry_type=picture';
+    }
 
     $cmd->icon = '{icons}buttons/print';
     $cmd->executable = TRUE;

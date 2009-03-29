@@ -67,7 +67,9 @@ class CHANGE_GRID extends PROJECT_ENTRY_GRID
       echo $status->as_html ();
     }
     else
+    {
       echo 'Next release';
+    }
   }
 
   /**

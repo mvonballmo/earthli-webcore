@@ -154,9 +154,13 @@ class PURGE_OBJECT_FORM extends RENDERABLE_FORM
     $renderer->start ();
 
     if ($this->show_object_as_link)
+    {
       $obj_text = $this->_object->title_as_link ();
+    }
     else
+    {
       $obj_text = $this->_object->title_as_html ();
+    }
 
     $renderer->draw_text_row ('', 'Are you sure you want to purge ' . $obj_text . '?*');
     

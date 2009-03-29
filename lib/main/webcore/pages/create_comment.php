@@ -41,10 +41,14 @@ http://www.earthli.com/software/webcore
     {
       $com_query = $entry->comment_query ();
       if ($parent_id)
+      {
         $parent =& $com_query->object_at_id ($parent_id);
+      }
 
       if (! $parent_id || isset ($parent))
+      {
         $comment = $entry->new_comment ($parent_id);
+      }
     }
   }
 
@@ -55,13 +59,19 @@ http://www.earthli.com/software/webcore
 
     $form->process_new ($comment);
     if ($form->committed ())
+    {
       $App->return_to_referer ($comment->home_page ());
+    }
     else
     {
       if (isset ($parent))
+      {
         $prev =& $parent;
+      }
       else
+      {
         $prev =& $entry;
+      }
 
       $form->add_preview ($prev, 'In reply to: ' . $prev->title_as_html (), ! $form->previewing ());
     }
@@ -73,7 +83,9 @@ http://www.earthli.com/software/webcore
     $Page->location->add_folder_link ($folder);
     $Page->location->add_object_link ($entry);
     if (isset ($parent))
+    {
       $Page->location->add_object_link ($parent);
+    }
     $Page->location->append ($Page->title->subject);
 
     $Page->start_display ();
@@ -106,5 +118,7 @@ http://www.earthli.com/software/webcore
     $Page->finish_display ();
   }
   else
+  {
     $Page->raise_security_violation ('You are not allowed to create comments here.', $folder);
+  }
 ?>

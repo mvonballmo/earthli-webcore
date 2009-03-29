@@ -114,7 +114,9 @@ class PANEL_MANAGER extends WEBCORE_OBJECT
     WEBCORE_OBJECT::WEBCORE_OBJECT ($app);
 
     if ($show_time_menu)
+    {
       $this->time_menu = new TIME_FRAME_SELECTOR ($app);
+    }
 
     $this->page_link = $app->env->url (Url_part_all);
     $this->options = $this->_make_options ();
@@ -159,7 +161,9 @@ class PANEL_MANAGER extends WEBCORE_OBJECT
   function &selected_panel ()
   {
     if ($this->is_panel ($this->selected_panel_id))
+    {
       return $this->_panels [$this->selected_panel_id];
+    }
     global $Null_reference;
     return $Null_reference;
   }
@@ -210,7 +214,9 @@ class PANEL_MANAGER extends WEBCORE_OBJECT
       $this->_location_add_index++;
     }
     else
+    {
       $this->_location_order [] = $panel->id;
+    }
 
     if (isset ($this->_selection_add_index))
     {
@@ -218,7 +224,9 @@ class PANEL_MANAGER extends WEBCORE_OBJECT
       $this->_selection_add_index++;
     }
     else
+    {
       $this->_selection_order [] = $panel->id;
+    }
   }
 
   /**
@@ -235,9 +243,13 @@ class PANEL_MANAGER extends WEBCORE_OBJECT
     $this->assert ($this->is_panel ($id), "Panel [$id] does not exist.", 'move_panel_to', 'PANEL_MANAGER');
     $this->assert (($index >= 0) && ($index < sizeof ($this->_selection_order)), "Index [$index] is out of range.", 'move_panel_to', 'PANEL_MANAGER');
     if ($flags & Panel_location)
+    {
       $this->_move_panel_to ($id, $index, $this->_location_order);
+    }
     if ($flags & Panel_selection)
+    {
       $this->_move_panel_to ($id, $index, $this->_selection_order);
+    }
   }
 
   /**
@@ -312,7 +324,9 @@ class PANEL_MANAGER extends WEBCORE_OBJECT
           <?php
             $num_objects = $panel->num_objects ();
             if ($num_objects)
+            {
               echo $num_objects;
+            }
           ?>
         </td>
         <td>
@@ -367,7 +381,9 @@ class PANEL_MANAGER extends WEBCORE_OBJECT
     foreach ($this->_selection_order as $id)
     {
       if ($this->_panels [$id]->selectable ())
+      {
         return $id;
+      }
     }
 
     /* Return empty if no selectable panel is found. */
@@ -397,7 +413,9 @@ class PANEL_MANAGER extends WEBCORE_OBJECT
   {
     $old_index = array_search ($id, $panels);
     if ($old_index !== FALSE)
+    {
       unset ($panels [$old_index]);
+    }
     array_insert ($panels, $index, $id);
   }
 
@@ -571,10 +589,14 @@ class PANEL extends WEBCORE_OBJECT
   function title_as_link ()
   {
     if ($this->selected ())
+    {
       return '<span class="selected">' . $this->raw_title () . '</span>';
+    }
 
     if ($this->selectable ())
+    {
       return '<a href="' . $this->page_link () . '">' . $this->raw_title () . '</a>';
+    }
 
     return $this->raw_title ();
   }
@@ -863,9 +885,13 @@ class INDEX_PANEL_MANAGER extends WEBCORE_PANEL_MANAGER
     $user_query = $this->app->user_query ();
     $show_anon = read_var ('show_anon');
     if ($show_anon)
+    {
       $user_query->set_kind (Privilege_kind_anonymous);
+    }
     else
+    {
       $user_query->set_kind (Privilege_kind_registered);
+    }
     $panel = new $class_name ($this, $user_query);
     $this->add_panel ($panel);
 
@@ -1125,7 +1151,9 @@ class QUERY_PANEL extends GRID_PANEL
   function _set_up_grid (&$grid)
   {
     if ($this->uses_time_selector && $this->_panel_manager->time_menu)
+    {
       $this->_panel_manager->time_menu->prepare_query ($this->query);
+    }
     $grid->set_query ($this->query);
   }
 }
@@ -1460,7 +1488,9 @@ class ENTRY_PANEL extends QUERY_PANEL
   {
     QUERY_PANEL::QUERY_PANEL ($manager, $query);
     if (! isset ($type_info))
+    {
       $type_info = $this->app->type_info_for ('ENTRY', 'webcore/obj/entry.php');
+    }
     $this->_type_info = $type_info;
     $this->id = $type_info->id;
     $this->title = $type_info->plural_title;
@@ -1536,12 +1566,16 @@ class FOLDER_PANEL extends GRID_PANEL
     if ($this->folders)
     {
       if ($this->recurse_tree_for_count)
+      {
         return $this->recursive_num_objects ($this->folders);
-      else
-        return sizeof ($this->folders);
+      }
+
+
+      return sizeof ($this->folders);
     }
-    else
-      return 0;
+
+
+    return 0;
   }
 
   /**

@@ -121,7 +121,9 @@ class PUBLISHER_TASK extends TASK
     $publisher->default_channel = $this->log_channel;
     $logger = $publisher->logs->logger;
     if (isset ($logger))
+    {
       $this->env->logs->add_logger ($logger);
+    }
     $publisher->logs->set_logger ($this->env->logs->logger);
     $this->_publish ($publisher);
   }
@@ -148,7 +150,9 @@ class PUBLISHER_TASK extends TASK
           $entry_types [] = $type_info->id;
       }
       else
+      {
         $entry_types [] = History_item_entry;
+      }
 */
       /* The code above would work if the individual history items actually used
        * different types for their history items, which it seems they do not.
@@ -163,7 +167,9 @@ class PUBLISHER_TASK extends TASK
         $filters [] = "act.object_type IN ($entry_types) AND act.kind IN ($kinds)";
       }
       else
+      {
         $filters [] = "act.object_type IN ($entry_types)";
+      }
 
       if (! empty ($this->comment_filter))
       {
@@ -171,7 +177,9 @@ class PUBLISHER_TASK extends TASK
         $filters [] = "act.object_type = '" . History_item_comment . "' AND act.kind IN ($kinds)";
       }
       else
+      {
         $filters [] = "act.object_type = '" . History_item_comment . "'";
+      }
 
       $filters [] = "act.object_type IN ('" . History_item_folder . "') AND act.kind IN ('Created')";
 

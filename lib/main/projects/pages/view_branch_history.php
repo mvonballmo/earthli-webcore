@@ -50,5 +50,7 @@ http://www.earthli.com/software/webcore/projects
     include_once ('webcore/pages/view_history.php');
   }
   else
+  {
     $Page->raise_security_violation ('You are not allowed to view this branch\'s history.', $folder);
+  }
 ?>

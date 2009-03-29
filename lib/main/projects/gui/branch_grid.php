@@ -92,9 +92,13 @@ class BRANCH_GRID extends CONTENT_OBJECT_GRID
   <div class="grid-title">
   <?php
     if ($this->show_folder)
+    {
       echo $folder->title_as_link () . $this->app->display_options->object_separator;
+    }
     if ($obj->locked ())
+    {
       echo $this->app->resolve_icon_as_html ('{icons}indicators/locked', 'Locked', '16px') . ' ';
+    }
     echo $this->obj_link ($obj);
   ?>
   </div>
@@ -123,7 +127,9 @@ class BRANCH_GRID extends CONTENT_OBJECT_GRID
   <?php
     echo 'Created ';
     if ($this->show_user)
+    {
       echo 'by ' . $creator->title_as_link () . ' - ';
+    }
     echo $obj->time_created->format ();
   
     if (! $obj->time_created->equals ($obj->time_modified))
@@ -131,7 +137,9 @@ class BRANCH_GRID extends CONTENT_OBJECT_GRID
       $modifier =& $obj->modifier ();
       echo '<br>Updated ';
       if ($this->show_user)
+      {
         echo 'by ' . $modifier->title_as_link () . ' - ';
+      }
       echo $obj->time_modified->format ();
     }
   ?>

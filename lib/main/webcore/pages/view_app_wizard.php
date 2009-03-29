@@ -52,7 +52,9 @@ http://www.earthli.com/software/webcore
         <?php
           $form->process_existing ($task);
           if (! $form->committed ())
+          {
             $form->display ();
+          }
         ?>
       </div>
     </div>
@@ -60,5 +62,7 @@ http://www.earthli.com/software/webcore
     $Page->finish_display ();
   }
   else
+  {
     $Page->raise_security_violation ('You are not allowed to run this wizard.');
+  }
 ?>

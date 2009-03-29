@@ -96,19 +96,27 @@ class OBJECT_IN_FOLDER_QUERY extends QUERY
       $invis = $this->_invisible_objects_available ();
 
       if (! $vis || (! $this->includes (Visible) && ! $this->includes (Invisible)))
+      {
         $this->_set_returns_no_data ();
+      }
       else
       {
         /* if the filter specifies invisible objects, but the user doesn't
            have the right to them, remove it from the filter. */
 
         if ($this->includes (Invisible) && ! $invis)
+        {
           $actual_filter = $this->_filter & ~Invisible;
+        }
         else
+        {
           $actual_filter = $this->_filter;
+        }
 
         if ($actual_filter == None)
+        {
           $this->_set_returns_no_data ();
+        }
         elseif ($actual_filter != All)
           $this->_calculated_restrictions [] = $this->_filter_restriction ($actual_filter);
       }

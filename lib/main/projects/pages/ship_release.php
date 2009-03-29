@@ -40,7 +40,9 @@ http://www.earthli.com/software/webcore
 
     $form->process_existing ($release);
     if ($form->committed ())
+    {
       $App->return_to_referer ($release->home_page ());
+    }
 
     $branch =& $release->branch ();
 
@@ -73,5 +75,7 @@ http://www.earthli.com/software/webcore
     $Page->finish_display ();
   }
   else
+  {
     $Page->raise_security_violation ('You are not allowed to view releases in this folder.', $folder);
+  }
 ?>

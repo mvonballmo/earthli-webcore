@@ -63,7 +63,9 @@ class EXCEPTION_RENDERER extends OBJECT_RENDERER
     $error_message = $obj->message;
 
     if (! $this->_options->show_details)
+    {
       $layer = $this->context->make_layer ('exception_details');
+    }
 ?>
 <div style="width: 75%; margin: auto">
   <p class="error"><?php echo $error_message; ?></p>
@@ -84,9 +86,13 @@ class EXCEPTION_RENDERER extends OBJECT_RENDERER
       <?php
         $page_title = substr ($page_name, 0, 50);
         if ($page_title != $page_name)
+        {
           echo "<span title=\"$page_name\">$page_title...</span>\n";
+        }
         else
+        {
           echo "$page_title\n";
+        }
       ?>
     </td>
   </tr>
@@ -192,9 +198,13 @@ class EXCEPTION_RENDERER extends OBJECT_RENDERER
       <?php
         $browser_title = substr ($browser->user_agent_string, 0, 50);
         if ($browser_title != $browser->user_agent_string)
+        {
           echo "<span title=\"$browser->user_agent_string\">$browser_title...</span>\n";
+        }
         else
+        {
           echo "$browser_title\n";
+        }
       ?>
     </td>
   </tr>
@@ -264,27 +274,41 @@ class EXCEPTION_RENDERER extends OBJECT_RENDERER
     $table->add_item ('Page', $page_name);
 
     if ($application_description)
+    {
       $table->add_item ('Application', $application_description);
+    }
 
     if ($routine_name)
     {
       if ($dynamic_class_name)
       {
         if ($dynamic_class_name != $class_name)
+        {
           $table->add_item ('Class', "$dynamic_class_name ($class_name)");
+        }
         else
+        {
           $table->add_item ('Class', $class_name);
+        }
       }
       else
+      {
         $table->add_item ('Class', $class_name);
+      }
 
       if ($class_name == $routine_name)
+      {
         $table->add_item ('Routine', '<constructor>');
+      }
       else
+      {
         $table->add_item ('Routine', $routine_name);
+      }
     }
     else
+    {
       $table->add_item ('Scope', 'global');
+    }
 
     $table->add_separator ();
 

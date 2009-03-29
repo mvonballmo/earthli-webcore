@@ -182,9 +182,13 @@ class SEND_MAIL_FORM extends PREVIEWABLE_FORM
     $sender_email = $this->value_for ('sender_email');
 
     if (! $sender_name)
+    {
       $sender_name = 'Not specified';
+    }
     if (! $sender_email)
+    {
       $sender_email = $this->context->mail_options->webmaster_address;
+    }
 
     $Result->set_sender ($sender_name, $sender_email);
 
@@ -205,12 +209,18 @@ class SEND_MAIL_FORM extends PREVIEWABLE_FORM
     }
     
     if (empty ($subject))
+    {
       $subject = $mail_obj_renderer->subject ($this, $options);
+    }
 
     if ($Result->send_as_html)
+    {
       $Result->set_content ($subject, $mail_renderer->as_html ($options));
+    }
     else
+    {
       $Result->set_content ($subject, $mail_renderer->as_text ($options));
+    }
 
     return $Result;
   }
@@ -372,14 +382,18 @@ class SEND_MAIL_FORM_PREVIEW_SETTINGS extends FORM_PREVIEW_SETTINGS
     {
       echo $send_mail_renderer->html_body ($this->form, $this->options);
       if (! empty ($this->obj_renderer))
+      {
         echo $this->obj_renderer->html_body ($this->object, $this->options);
+      }
     }
     else
     {
       echo '<pre style="white-space: -o-pre-wrap">';
       echo htmlspecialchars ($send_mail_renderer->text_body ($this->form, $this->options));
       if (! empty ($this->obj_renderer))
+      {
         echo htmlspecialchars ($this->obj_renderer->text_body ($this->object, $this->options));
+      }
       echo '</pre>';
     }
   }

@@ -129,11 +129,14 @@ class FRAMEWORK_INFO extends NAMED_OBJECT
   function message ()
   {
     if ($this->_version_not_found || ! $this->database_version)
+    {
       return 'Database version not available.';    
+    }
     elseif ($this->needs_upgrade ())
       return 'Database upgrade required.';    
-    else
-      return 'Database is up-to-date.';    
+
+
+    return 'Database is up-to-date.';    
   }
   
   /**
@@ -144,7 +147,9 @@ class FRAMEWORK_INFO extends NAMED_OBJECT
   function description ($use_software_version = TRUE)
   {
     if ($use_software_version)
+    {
       return $this->title . ' ' . $this->software_version;
+    }
     else 
       return $this->icon_as_html () . ' ' . $this->title . ' ' . $this->database_version . ' &mdash; ' . $this->message ();
   }

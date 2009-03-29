@@ -97,10 +97,14 @@ class JOURNAL_HISTORY_ITEM extends ENTRY_HISTORY_ITEM
     }
 
     if ($orig->hi_temp != $new->hi_temp)
+    {
       $this->_record_string_difference ('Low temperature', $orig->lo_temp, $new->lo_temp);
+    }
 
     if ($orig->lo_temp != $new->lo_temp)
+    {
       $this->_record_string_difference ('High temperature', $orig->hi_temp, $new->hi_temp);
+    }
 
     $this->_record_text_difference ('Weather', $orig->weather, $new->weather);
   }
@@ -138,17 +142,25 @@ class ALBUM_HISTORY_ITEM extends FOLDER_HISTORY_ITEM
     if ($orig->show_times != $new->show_times)
     {
       if ($new->show_times)
+      {
         $this->record_difference ('Show times turned on.');
+      }
       else
+      {
         $this->record_difference ('Show times turned off.');
+      }
     }
 
     if ($orig->show_celsius != $new->show_celsius)
     {
       if ($new->show_celsius)
+      {
         $this->record_difference ('Show temperatures in Celsius.');
+      }
       else
+      {
         $this->record_difference ('Show temperatures in Fahrenheit.');
+      }
     }
 
     if ($orig->first_day_mode != $new->first_day_mode)
@@ -166,10 +178,14 @@ class ALBUM_HISTORY_ITEM extends FOLDER_HISTORY_ITEM
     }
 
     if ($orig->max_picture_width != $new->max_picture_width)
+    {
       $this->_record_string_difference ('Maximum picture width', $orig->max_picture_width, $new->max_picture_width);
+    }
 
     if ($orig->max_picture_height != $new->max_picture_height)
+    {
       $this->_record_string_difference ('Maximum picture height', $orig->max_picture_width, $new->max_picture_width);
+    }
   }
 
   /**

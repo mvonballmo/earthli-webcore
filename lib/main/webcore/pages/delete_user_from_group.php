@@ -41,7 +41,9 @@ http://www.earthli.com/software/webcore
 
       $form->process_existing ($group);
       if ($form->committed ())
+      {
         $Env->redirect_local ($group->home_page ());
+      }
 
       $Page->title->add_object ($group);
       $Page->title->subject = 'Remove ' . $user->title_as_plain_text ();
@@ -64,8 +66,12 @@ http://www.earthli.com/software/webcore
       $Page->finish_display ();
     }
     else
+    {
       $Page->raise_security_violation ('You are not allowed to remove this user from this group.', $group);
+    }
   }
   else
+  {
     $Page->raise_security_violation ('You are not allowed to edit this group.', $group);
+  }
 ?>

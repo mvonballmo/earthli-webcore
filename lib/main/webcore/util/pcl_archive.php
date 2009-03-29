@@ -177,7 +177,9 @@ class PCL_ZIP_ENTRY extends COMPRESSED_FILE_ENTRY
   {
     $path = substr ($path, 0, - strlen ($this->name));
     if (! $this->_zip->extractByIndex ($this->_index, PCLZIP_OPT_PATH, $path))
+    {
       $this->_report_error ($error_callback, "Could not open zip entry [$this->name].");
+    }
   }
 
   /**

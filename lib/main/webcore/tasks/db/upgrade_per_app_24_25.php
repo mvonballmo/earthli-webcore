@@ -315,11 +315,17 @@ class UPGRADE_PER_APP_24_25_TASK extends MIGRATOR_TASK
       $this->_query ("UPDATE `$actions_table` SET publication_state = 'sent' WHERE publication_state = '';");
       $this->_query ("UPDATE `$actions_table` SET kind = 'Published' WHERE kind = '';");
       if ($entry_table)
+      {
         $this->_query ("ALTER TABLE `$entry_table` DROP `publication_state`;");
+      }
       if ($comments_table)
+      {
         $this->_query ("ALTER TABLE `$comments_table` DROP `publication_state`;");
+      }
       if ($folders_table)
+      {
         $this->_query ("ALTER TABLE `$folders_table` DROP `publication_state`;");
+      }
     log_close_block ();
   }
 

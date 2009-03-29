@@ -133,7 +133,9 @@ class MULTI_SELECTOR_TREE_DECORATOR extends TREE_DECORATOR
   function pre_iterate ()
   {
     if ($this->auto_toggle_children)
+    {
       $this->child_map = array ();
+    }
   }
 
   /**
@@ -198,12 +200,18 @@ class MULTI_SELECTOR_TREE_DECORATOR extends TREE_DECORATOR
     $id = $node_info->id ($node);
 
     if (isset ($this->selected_node_ids [$id]))
+    {
       $state = ' checked';
+    }
     else
+    {
       $state = '';
+    }
 
     if ($this->auto_toggle_children)
+    {
       $on_click = "_on_click_$control_name (this)";
+    }
 
     $disabled = ! ($this->tree->node_info->selectable ($node));
     $dom_id = $this->control_name . '_' . $id;

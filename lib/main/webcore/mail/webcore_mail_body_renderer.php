@@ -86,7 +86,9 @@ class MAIL_TOC_ENTRY_RENDERER extends RENDERER
   function accepts_item (&$obj)
   {
     if (is_a ($obj, 'OBJECT_IN_FOLDER'))
+    {
       return $this->_obj_id == $obj->id;
+    }
     elseif (is_a ($obj, 'HISTORY_ITEM'))
       return $this->_obj_id == $obj->object_id;
   }
@@ -111,7 +113,9 @@ class MAIL_TOC_ENTRY_RENDERER extends RENDERER
       $this->pairs [] = $pair;
     }
     else
+    {
       $this->pairs [] = $pair;
+    }
   }
 
   function location_for_obj (&$obj)
@@ -133,7 +137,9 @@ class MAIL_TOC_ENTRY_RENDERER extends RENDERER
     $t->CSS_class = '';
     $t->location = '#' . $this->location_for_obj ($obj);
     if (is_a ($pair->obj, 'HISTORY_ITEM'))
+    {
       return $obj->title_as_link ($t) . '<br>';
+    }
     else
     {
       $type_info = $obj->type_info ();
@@ -158,7 +164,9 @@ class MAIL_TOC_ENTRY_RENDERER extends RENDERER
       $Result .= '<li>' . $this->pair_as_html_for_table ($pair) . '</li>';
 
     if (isset ($this->main_pair))
+    {
       $Result .= '</ul>';
+    }
 
     return $Result;
   }
@@ -176,7 +184,9 @@ class MAIL_TOC_ENTRY_RENDERER extends RENDERER
     $Result = '';
     $Result .= '<a id="' . $this->location_for_obj ($obj) . "\"></a>\n";
     if ($top_link)
+    {
       $Result .= '<div style="margin: 1em 0em">' . $top_link . "</div>\n";
+    }
     $Result .= $pair->renderer->html_body ($obj, $options);
     return $Result;
   }
@@ -191,7 +201,9 @@ class MAIL_TOC_ENTRY_RENDERER extends RENDERER
   {
     $Result = '<div class="horizontal-separator" style="margin-top: 2em"></div>';
     if (isset ($this->main_pair))
+    {
       $Result .= $this->pair_as_html_for_items ($this->main_pair, $options, $top_link);
+    }
     foreach ($this->pairs as $pair)
       $Result .= $this->pair_as_html_for_items ($pair, $options);
     return $Result;
@@ -215,7 +227,9 @@ class MAIL_TOC_ENTRY_RENDERER extends RENDERER
   {
     $Result = '';
     if (isset ($this->main_pair))
+    {
       $Result = $this->pair_as_plain_text_for_table ($this->main_pair, '   ');
+    }
     foreach ($this->pairs as $pair)
       $Result .= $this->pair_as_plain_text_for_table ($pair, '      ');
     return $Result;
@@ -241,7 +255,9 @@ class MAIL_TOC_ENTRY_RENDERER extends RENDERER
   {
     $Result = '';
     if (isset ($this->main_pair))
+    {
       $Result .= $this->_line ($this->pair_as_plain_text_item ($this->main_pair, $options));
+    }
     foreach ($this->pairs as $pair)
       $Result .= $this->_line ($this->pair_as_plain_text_item ($pair, $options));
     return $Result;
@@ -317,7 +333,9 @@ class MAIL_TOC_GROUP_RENDERER extends RENDERER
       $fldr = $obj->parent_folder ();
       $Result = isset ($this->folder_id) && ($this->folder_id == $fldr->id);
       if ($Result)
+      {
         $this->folder = $fldr;
+      }
       return $Result;
     }
     elseif (is_a ($obj, 'HISTORY_ITEM'))
@@ -492,7 +510,9 @@ class MAIL_TOC_RENDERER extends RENDERER
       }
 
       if (! isset ($entry) || ! $entry->accepts_item ($obj))
+      {
         $entry =& $group->new_entry ($obj);
+      }
 
       $entry->add_pair ($pair);
     }
@@ -608,8 +628,9 @@ class WEBCORE_MAIL_BODY_RENDERER extends THEMED_MAIL_BODY_RENDERER
       $Result .= $toc->items_as_html ($options);
       return $Result;
     }
-    else
-      return parent::_html_content ($options);
+
+
+    return parent::_html_content ($options);
   }
 
   /**
@@ -627,8 +648,9 @@ class WEBCORE_MAIL_BODY_RENDERER extends THEMED_MAIL_BODY_RENDERER
       $Result .= $toc->items_as_plain_text ($options);
       return $Result;
     }
-    else
-      return parent::_text_content ($options);
+
+
+    return parent::_text_content ($options);
   }
 
   /**

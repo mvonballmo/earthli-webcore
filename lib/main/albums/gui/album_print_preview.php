@@ -119,9 +119,12 @@ class ALBUM_PRINT_PREVIEW extends PRINT_PREVIEW
   function _make_renderer ($class_name)
   {
     if ($class_name == 'PICTURE')
+    {
       return new PICTURE_PRINT_RENDERER ($this);
-    else
-      return parent::_make_renderer ($class_name);
+    }
+
+
+    return parent::_make_renderer ($class_name);
   }
 }
 ?>

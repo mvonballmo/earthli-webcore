@@ -36,7 +36,9 @@ http://www.earthli.com/software/webcore
 
     $form->process ($folder);
     if ($form->committed ())
+    {
       $Env->redirect_local ($folder->subscriptions_home_page ());
+    }
 
     $Page->title->add_object ($folder);
     $Page->title->subject = 'Add subscribers';
@@ -60,5 +62,7 @@ http://www.earthli.com/software/webcore
     $Page->finish_display ();
   }
   else
+  {
     $Page->raise_security_violation ('You are not allowed to edit subscriptions in this folder.', $folder);
+  }
 ?>

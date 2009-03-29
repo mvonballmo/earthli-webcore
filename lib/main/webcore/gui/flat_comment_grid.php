@@ -93,9 +93,13 @@ class FLAT_COMMENT_GRID extends PRINTABLE_COMMENT_GRID
           if ($this->show_controls)
           {
             if ($obj->equals ($this->_comment))
+            {
               $this->_draw_menu_for ($obj);
+            }
             else
+            {
               $this->_draw_menu_for ($obj, Menu_size_compact);
+            }
           }
         ?>
         <div style="margin-bottom: .25em">
@@ -151,20 +155,21 @@ class FLAT_COMMENT_GRID extends PRINTABLE_COMMENT_GRID
     // if printing, then don't paginate, return all objects
 
     if ($this->show_paginator)
+    {
       return $this->_query->objects ();
+    }
     else
     {
       if ($this->_comment)
-        // return only the comments attached to this comment
       {
+        // return only the comments attached to this comment
+
         $this->_query->restrict ('(com.parent_id = ' . $this->_comment->id . ' OR com.id = ' . $this->_comment->id . ')');
         return parent::_get_objects ($this->_query);
       }
-      else
-        return parent::_get_objects ($this->_query);
-    }
 
-    $this->_show_paginator = $this->show_paginated;
+      return parent::_get_objects ($this->_query);
+    }
   }
 }
 

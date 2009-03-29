@@ -333,7 +333,9 @@ class APPLICATION extends CONTEXT
     $Result->ip_address = $browser->ip_address ();
 
     if ($kind == Privilege_kind_anonymous)
+    {
       $Result->title = $this->_make_anon_name ();
+    }
 
     return $Result;
   }
@@ -382,7 +384,9 @@ class APPLICATION extends CONTEXT
   {
     $this->offline = TRUE;
     if (isset ($this->login))
+    {
       $this->_enforce_offline ();
+    }
   }
 
   /**
@@ -393,7 +397,9 @@ class APPLICATION extends CONTEXT
     $this->set_login ($this->_logged_in_user ());
 
     if ($this->offline)
+    {
       $this->_enforce_offline ();
+    }
   }
 
   /**
@@ -406,7 +412,9 @@ class APPLICATION extends CONTEXT
   function force_login ()
   {
     if ($this->login->id == Anon_user_id)
+    {
       $this->set_login ($this->_logged_in_user (TRUE));
+    }
   }
 
   /**
@@ -439,12 +447,16 @@ class APPLICATION extends CONTEXT
   function log_in (&$user, $remember)
   {
     if (isset ($user) && ! $user->is_allowed (Privilege_set_global, Privilege_login))
+    {
       $this->page->raise_security_violation ('You are not allowed to log in.');
+    }
 
     if ($remember)  // user wants the password stored between sessions
       $this->storage->expire_in_n_days ($this->storage_options->login_duration);
     else
+    {
       $this->storage->expire_when_session_ends ();
+    }
 
     $this->storage->set_value ($this->storage_options->login_user_name, $this->_encode_user ($user));
     $this->set_login ($user);
@@ -491,9 +503,13 @@ class APPLICATION extends CONTEXT
     if ($user)
     {
       if (! $user->password_matches ($password))
+      {
         $this->raise ("That is not the correct password for user [$name].", 'impersonate', 'APPLICATION');
+      }
       else
+      {
         $this->set_login ($user);
+      }
     }
     else
     {
@@ -541,7 +557,9 @@ class APPLICATION extends CONTEXT
         $Result = $Null_reference;
       }
       else
+      {
         $Result =& $this->non_existent_user ();
+      }
     }
 
     return $Result;
@@ -649,9 +667,13 @@ class APPLICATION extends CONTEXT
   {
     $stored_url = $this->storage->value ($this->storage_options->return_to_page_name);
     if ($stored_url)
+    {
       $this->env->redirect_remote ($stored_url);
+    }
     else
+    {
       $this->env->redirect_local ($fallback_url);
+    }
   }
 
   /**
@@ -694,9 +716,12 @@ class APPLICATION extends CONTEXT
   function max_title_size ($entry_type = '')
   {
     if ($entry_type && isset ($this->max_title_sizes [$entry_type]))
+    {
       return $this->max_title_sizes [$entry_type];
-    else
-      return $this->display_options->default_max_title_size;
+    }
+
+
+    return $this->display_options->default_max_title_size;
   }
 
   /**
@@ -897,7 +922,9 @@ class APPLICATION extends CONTEXT
     if (! isset ($this->login) || ! $this->login->is_allowed (Privilege_set_global, Privilege_offline))
     {
       if ($this->env->url (Url_part_file_name) != $this->page_names->offline)
+      {
         $this->env->redirect_local ($this->page_names->offline . '?app_name=' . $this->title);
+      }
     }
   }
 
@@ -915,11 +942,15 @@ class APPLICATION extends CONTEXT
     $browser = $this->env->browser ();
 
     if ($opts->resolve_host)
+    {
       $Result = $browser->domain ();
+    }
     else
     {
       if ($opts->show_ip_address)
+      {
         $Result = $browser->ip_address ();
+      }
     }
 
     $Result = $opts->name_prefix . $Result . $opts->name_suffix;
@@ -947,7 +978,9 @@ class APPLICATION extends CONTEXT
       $this->root_url = strip_domain (path_between ($curr_url, $app_url, $opts), $opts);
     }
     else
+    {
       $this->root_url = $this->path_to (Folder_name_application, Force_root_off);
+    }
 
     return ! empty ($this->root_url);
   }
@@ -1013,12 +1046,16 @@ class APPLICATION extends CONTEXT
       }
     }
     else
+    {
       $Result =& $this->_decode_user ($user_info);
+    }
 
     /* Enforce login privilege. If not allowed to log in, log them back out. */
 
     if (isset ($Result) && ! $Result->is_allowed (Privilege_set_global, Privilege_login))
+    {
       unset ($Result);
+    }
 
     /* No user found, use the anonymous */
 
@@ -1088,9 +1125,12 @@ class APPLICATION extends CONTEXT
     $class_name = $this->final_class_name ($class_name);
 
     if ($class_name == $full_type)
+    {
       $this->raise ("Unknown [$type_prefix] type [$type]", '_make_special_registered_type', 'APPLICATION');
-    else
-      return new $class_name ($this);
+    }
+
+
+    return new $class_name ($this);
   }
 
   /**

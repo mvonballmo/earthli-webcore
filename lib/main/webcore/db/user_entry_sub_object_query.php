@@ -70,9 +70,13 @@ class USER_ENTRY_SUB_OBJECT_QUERY extends OBJECT_IN_FOLDER_QUERY
       $restriction = new QUERY_SECURITY_RESTRICTION ($this);
       $sql = $restriction->as_sql (array (Privilege_set_folder, Privilege_set_entry, $this->_privilege_set));
       if (! $sql)
+      {
         $this->_set_returns_no_data ();
+      }
       else
+      {
         $this->_calculated_restrictions [] = $sql;
+      }
     }
   }
 

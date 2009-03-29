@@ -40,9 +40,13 @@ http://www.earthli.com/software/webcore
       $parent =& $folder->parent_folder ();
 
       if ($parent)
+      {
         $Env->redirect_local ($parent->home_page ());
+      }
       else
+      {
         $Env->redirect_local ("index.php");
+      }
     }
 
     $Page->title->add_object ($folder);
@@ -67,5 +71,7 @@ http://www.earthli.com/software/webcore
     $Page->finish_display ();
   }
   else
+  {
     $Page->raise_security_violation ('You are not allowed to purge this folder.', $folder);
+  }
 ?>

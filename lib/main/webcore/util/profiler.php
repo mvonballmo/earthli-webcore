@@ -67,7 +67,9 @@ class PROFILER_TIMER extends RAISABLE
   {
     $Result = $this->_elapsed;
     if (isset ($this->_start_time))
+    {
       $Result += ($this->_current_time () - $this->_start_time);
+    }
 
     return round ($Result, $rounded_to);
   }
@@ -89,7 +91,9 @@ class PROFILER_TIMER extends RAISABLE
   function start ()
   {
     if (! $this->_num_starts)
+    {
       $this->_start_time = $this->_current_time ();
+    }
     $this->_num_starts++;
   }
 
@@ -172,9 +176,12 @@ class PROFILER extends RAISABLE
   {
     $timer =& $this->_existing_timer ($id);
     if (isset ($timer))
+    {
       return $timer->elapsed ($rounded_to);
-    else
-      return 0;
+    }
+
+
+    return 0;
   }
 
   /**
@@ -186,9 +193,12 @@ class PROFILER extends RAISABLE
   {
     $timer =& $this->_existing_timer ($id);
     if (isset ($timer))
+    {
       return $timer->running ();
-    else
-      return FALSE;
+    }
+
+
+    return FALSE;
   }
 
   /**
@@ -198,7 +208,9 @@ class PROFILER extends RAISABLE
   function start ($id)
   {
     if (! isset ($this->_timers [$id]))
+    {
       $this->_timers [$id] = new PROFILER_TIMER ();
+    }
     $this->_timers [$id]->start ();
   }
 
@@ -209,7 +221,9 @@ class PROFILER extends RAISABLE
   function restart ($id)
   {
     if (! isset ($this->_timers [$id]))
+    {
       $this->_timers [$id] = new PROFILER_TIMER ();
+    }
     $this->_timers [$id]->restart ();
   }
 
@@ -237,7 +251,9 @@ class PROFILER extends RAISABLE
   function &_existing_timer ($id)
   {
     if (! isset ($this->_timers [$id]))
+    {
       log_message ("Timer [$id] does not exist", Msg_type_warning, Msg_channel_system);
+    }
 
     return $this->_timers [$id];
   }

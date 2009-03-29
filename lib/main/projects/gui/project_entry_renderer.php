@@ -77,27 +77,37 @@ class PROJECT_ENTRY_RENDERER extends ENTRY_RENDERER
     <dt>
     <?php
       if ($branch_info->is_main () && (sizeof ($branch_infos) > 1))
+      {
         echo '<span style="cursor: help" title="Used for non-branch-specific lists.">&bull;&nbsp;</span>';
+      }
       $branch =& $branch_info->branch ();
       if ($branch->locked ())
+      {
         echo $this->app->resolve_icon_as_html ('{icons}indicators/locked', 'Locked', '16px') . ' ';
+      }
       echo $branch_info->title_as_link ();
       echo $this->app->display_options->object_separator;
       if ($rel)
       {
         if ($rel->locked ())
+        {
           echo $this->app->resolve_icon_as_html ('{icons}indicators/locked', 'Locked', '16px') . ' ';
+        }
         $rel_status = $rel->status ();
         echo $rel->title_as_link ();
       }
       else
+      {
         $this->_echo_html_branch_release_info ($branch_info);
+      }
     ?>
     </dt>
     <dd class="text-flow">
       <?php
         if (isset ($rel_status))
+        {
           echo $rel_status->as_html () . '<br>';
+        }
         echo $this->_echo_html_branch_info ($entry, $branch_info); ?>
     </dd>
   <?php
@@ -124,7 +134,9 @@ class PROJECT_ENTRY_RENDERER extends ENTRY_RENDERER
 <div style="margin-bottom: .75em">
 <?php
       if (! $layer->visible)
+      {
         $layer->draw_toggle ();
+      }
       echo ' <span class="field">' . strlen ($entry->extra_description) . ' bytes</span> of extra information';
 ?>
 </div>
@@ -176,9 +188,13 @@ class PROJECT_ENTRY_RENDERER extends ENTRY_RENDERER
       $is_main_branch = $branch_info->is_main () && (sizeof ($branch_infos) > 1);
 
       if ($is_main_branch)
+      {
         echo '* ';
+      }
       else
+      {
         echo '  ';
+      }
 
       echo $branch_info->title_as_plain_text ();
       echo $this->app->mail_options->object_separator;
@@ -189,12 +205,16 @@ class PROJECT_ENTRY_RENDERER extends ENTRY_RENDERER
         echo $rel->title_as_plain_text ();
       }
       else
+      {
         $this->_echo_plain_text_branch_release_info ($branch_info);
+      }
 
       echo $this->_line ();
 
       if (isset ($status))
+      {
         echo '    ' . $this->_line ($status->as_plain_text ());
+      }
 
       $this->_echo_plain_text_branch_info ($entry, $branch_info);
 

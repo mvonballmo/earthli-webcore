@@ -107,9 +107,13 @@ class TITLE_FORMATTER extends WEBCORE_OBJECT
   {
     $qmark = strpos ($this->location, '?');
     if ($qmark !== FALSE)
+    {
       $this->location = $page_name . substr ($this->location, $qmark);
+    }
     else
+    {
       $this->location = $page_name;
+    }
   }
 
   /**
@@ -163,7 +167,9 @@ class TITLE_FORMATTER extends WEBCORE_OBJECT
     $old_location = $this->location;
     $panel_id = read_var ('panel');
     if ($panel_id)
+    {
       $this->add_argument ('panel', $panel_id);
+    }
     $Result = $this->context->resolve_file ($this->location);
     $this->location = $old_location;
 
@@ -185,7 +191,9 @@ class TITLE_FORMATTER extends WEBCORE_OBJECT
     $max_size = $this->context->display_options->overridden_max_title_size;
 
     if (! $max_size)
+    {
       $max_size = $this->max_visible_output_chars;
+    }
 
     if (($max_size > 0) && ($len > $max_size))
     {
@@ -220,9 +228,13 @@ class TITLE_FORMATTER extends WEBCORE_OBJECT
     if ($stripped_text != $text_to_use)
     {
       if (! $this->title)
+      {
         $title_to_use = $stripped_text;
+      }
       else
+      {
         $title_to_use = $stripped_text . ' (' . $title_to_use . ')';
+      }
       $text_to_use = $this->context->text_options->convert_to_html_attribute ($text_to_use);
     }
     else
@@ -240,7 +252,9 @@ class TITLE_FORMATTER extends WEBCORE_OBJECT
     }
 
     if ($this->CSS_class)
+    {
       $Result .= " class=\"$this->CSS_class\"";
+    }
 
     $Result .= '>' . $text_to_use . $suffix;
 

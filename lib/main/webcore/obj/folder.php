@@ -139,7 +139,9 @@ class FOLDER extends ATTACHMENT_HOST
   function expanded_icon_url ($size = '32px')
   {
     if ($this->icon_url)
+    {
       return $this->app->sized_icon ($this->icon_url, $size);
+    }
   }
 
   /**
@@ -224,7 +226,9 @@ class FOLDER extends ATTACHMENT_HOST
     if ($this->login->is_allowed (Privilege_set_folder, Privilege_secure, $this))
     {
       if (! isset ($this->_security))
+      {
         $this->_security = $this->_make_security_definition ();
+      }
 
       return $this->_security;
     }
@@ -243,10 +247,14 @@ class FOLDER extends ATTACHMENT_HOST
     {
       $method_name = "_make_$type";
       if (! method_exists ($this, $method_name))
+      {
         $method_name = '_make_entry';
+      }
     }
     else
+    {
       $method_name = '_make_entry';
+    }
 
     $Result = $this->$method_name ();
     $Result->set_parent_folder ($this);
@@ -323,7 +331,9 @@ class FOLDER extends ATTACHMENT_HOST
     {
       $id = substr ($url, strlen ($entry_key));
       if ($id && ($id [0] == '/'))
+      {
         $id = substr ($id, 1);
+      }
 
       if (is_numeric ($id))
       {
@@ -332,7 +342,9 @@ class FOLDER extends ATTACHMENT_HOST
         $url = $entry->home_page ();
       }
       else
+      {
         $url = "[ERROR]:entry_for_$id_not_found";
+      }
     }
 
     return parent::resolve_url ($url, $root_override);
@@ -524,11 +536,15 @@ class FOLDER extends ATTACHMENT_HOST
           $this->permissions_id = $this->id;
         }
         else
+        {
           $this->permissions_id = $fldr->permissions_id;
+        }
       }
     }
     else
+    {
       $this->permissions_id = $fldr->permissions_id;
+    }
     parent::_move_to ($fldr, $options);
   }
 
@@ -549,7 +565,9 @@ class FOLDER extends ATTACHMENT_HOST
       }
     }
     else
+    {
       $this->permissions_id = $fldr->permissions_id;
+    }
     parent::_copy_to ($fldr, $options);
   }
 
@@ -576,7 +594,9 @@ class FOLDER extends ATTACHMENT_HOST
         /* If the data contains a cycle (where the parent = child), then
            ignore it. The folder will be removed anyway. */
         if ($folder->id != $this->id)
+        {
           $folder->purge ($options);
+        }
       }
     }
 

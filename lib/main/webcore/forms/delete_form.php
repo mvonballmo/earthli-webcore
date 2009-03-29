@@ -144,9 +144,13 @@ class DELETE_OBJECT_FORM extends PURGE_OBJECT_FORM
   function commit ($obj)
   {
     if ($this->value_for ('purge'))
+    {
       parent::commit ($obj);
+    }
     else
+    {
       $obj->delete ();
+    }
   }
 
   /**
@@ -163,7 +167,9 @@ class DELETE_OBJECT_FORM extends PURGE_OBJECT_FORM
     $type_info = $this->_object->type_info ();
     $field =& $this->field_at ('purge');
     if ($this->login->is_allowed ($this->_privilege_set, Privilege_view_hidden, $this->_object))
+    {
       $field->description = 'This ' . $type_info->singular_title . ' will be marked as deleted and hidden from non-admin users. Purging removes it permanently and cannot be undone.';
+    }
     else 
       $field->description = 'This ' . $type_info->singular_title . ' will be marked as deleted and hidden from you. Purging removes it permanently and cannot be undone.';
   }

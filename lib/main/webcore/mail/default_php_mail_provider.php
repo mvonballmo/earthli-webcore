@@ -62,15 +62,25 @@ class DEFAULT_PHP_MAIL_PROVIDER extends MAIL_PROVIDER
     $header .= $this->renderer->_line ("Return-Path: <$message->return_path_address>");
     $header .= $this->renderer->_line ("MIME-Version: 1.0");
     if ($message->send_as_html)
+    {
       $header .= $this->renderer->_line ("Content-Type: text/html; charset=iso-8859-1");
+    }
     else
+    {
       $header .= $this->renderer->_line ("Content-Type: text/plain");
+    }
     if (sizeof ($message->cc))
+    {
       $header .= $this->renderer->_line ("Cc: " . implode (",", $message->cc));
+    }
     if (sizeof ($message->bcc))
+    {
       $header .= $this->renderer->_line ("Bcc: " . implode (",", $message->bcc));
+    }
     if (sizeof ($message->custom_headers))
+    {
       $header .= implode ($this->eol, $message->custom_headers);
+    }
 
     $header = trim ($header);
 
@@ -84,7 +94,9 @@ class DEFAULT_PHP_MAIL_PROVIDER extends MAIL_PROVIDER
     $this->_last_error = '';
     $result = @mail (implode (',', $message->send_to), $message->subject, $message->body, $header);
     if (isset ($php_errormsg))
+    {
       $this->_last_error = $php_errormsg;
+    }
 
     return $result;
   }

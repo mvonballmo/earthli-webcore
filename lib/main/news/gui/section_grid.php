@@ -106,7 +106,9 @@ class SECTION_GRID extends FOLDER_GRID
           $i++;
         }
         if ($size > 10)
+        {
           echo "<li style=\"margin-bottom: 0px\">[<a href=\"view_folder.php?id=$obj->id\">More</a>]</li>\n";
+        }
     ?>
     </ul>
     <?php

@@ -164,9 +164,13 @@ class URL
         {
           $equal_pos = strpos ($qs_part, '=');
           if ($equal_pos !== FALSE)
+          {
             $new_parts [] = substr ($qs_part, 0, $equal_pos) . '=' . htmlspecialchars (substr ($qs_part, $equal_pos + 1));
+          }
           else
+          {
             $new_parts [] = $qs_part;
+          }
         }
         $Result = $text . '?' . implode ('&', $new_parts);
       }
@@ -207,11 +211,15 @@ class URL
     {
       // slash is part of protocol (e.g. http://earthli.com)
       if (($slash_pos != 0) && ($text [$slash_pos - 1] == $slash))
+      {
         return $text . $slash;
+      }
 
       // slash is last character (e.g. http://earthli.com/users/)
       if ($slash_pos == (strlen ($text) - 1))
+      {
         return $text;
+      }
 
       // return everything before the slash (e.g. http://earthli.com/users/readme.txt)
       return substr ($text, 0, $slash_pos + 1);
@@ -219,7 +227,9 @@ class URL
     else
     {
       if ($this->_extension_for($text) == '')
+      {
         return $text . $slash;
+      }
     }
   }
 
@@ -246,16 +256,21 @@ class URL
     if ($slash_pos >= 0)
     {
       if ($slash_pos === FALSE)
+      {
         return $text;
+      }
 
       // slash is part of protocol (e.g. http://earthli.com)
       if (($slash_pos != 0) && ($text [$slash_pos - 1] == $slash))
+      {
         return '';
+      }
 
       return substr ($text, $slash_pos + 1);
     }
-    else
-      return $text;
+
+
+    return $text;
   }
 
   /**
@@ -277,9 +292,12 @@ class URL
     $name = $this->name ();
     $ext_len = strlen ($this->extension ());
     if ($ext_len)
+    {
       return substr ($name, 0, - $ext_len - 1);
-    else
-      return $name;
+    }
+
+
+    return $name;
   }
 
   /**
@@ -300,7 +318,9 @@ class URL
   {
     $args_pos = strpos ($this->_text, '?');
     if ($args_pos)
+    {
       return substr ($this->_text, $args_pos + 1);
+    }
   }
 
   /**
@@ -333,14 +353,20 @@ class URL
     list($text, $args) = $this->_extract_resource_and_args ();
     $curr_ext = $this->_extension_for ($text);
     if ($curr_ext)
+    {
       $text = substr ($text, 0, - strlen ($curr_ext) - 1);
+    }
     else
     {
       if (ends_with_delimiter ($text, $this->options ()))
+      {
         $text = substr ($text, 0, -1);
+      }
     }
     if ($ext)
+    {
       $text = $text . '.' . $ext;
+    }
     $this->_text = $this->_text_for_resource_and_args ($text, $args);
   }
 
@@ -358,7 +384,9 @@ class URL
       $text = implode ('.', $parts) . $name . '.' . $last;
     }
     else
+    {
       $text .= $name;
+    }
     $this->_text = $this->_text_for_resource_and_args ($text, $args);
   }
 
@@ -373,9 +401,13 @@ class URL
     $ext = $this->extension ();
     $this->_text = $path . $name;
     if ($ext)
+    {
       $this->_text .= '.' . $ext;
+    }
     if ($qs)
+    {
       $this->_text .= '?' . $qs;
+    }
   }
 
   /**
@@ -389,7 +421,9 @@ class URL
     $qs = $this->query_string ();
     $this->_text = $path . $name;
     if ($qs)
+    {
       $this->_text .= '?' . $qs;
+    }
   }
 
   /**
@@ -400,9 +434,13 @@ class URL
   {
     $qs = $this->query_string ();
     if ($qs)
+    {
       $this->_text = substr ($this->_text, 0, - strlen ($qs) - 1);
+    }
     if ($query)
+    {
       $this->_text .= '?' . $query;
+    }
   }
 
   /**
@@ -436,7 +474,9 @@ class URL
   function add_argument ($name, $value)
   {
     if (is_bool ($value) && ! $value)
+    {
       $value = 0;
+    }
     $this->add_arguments ("$name=$value");
   }
 
@@ -451,9 +491,13 @@ class URL
     if ($args)
     {
       if (strpos ($this->_text, '?') !== FALSE)
+      {
         $this->_text .= '&' . $args;
+      }
       else
+      {
         $this->_text .= '?' . $args;
+      }
     }
   }
 
@@ -503,7 +547,9 @@ class URL
     $this->strip_name ();
     $this->append (str_repeat ('..' . $this->path_delimiter (), $num));
     if ($name)
+    {
       $this->_text .= $name;
+    }
   }
 
   /**
@@ -517,7 +563,9 @@ class URL
     $is_file = is_file_name ($url, $opts);
     $this->_text = join_paths ($this->_text, $url, $opts);
     if (! $is_file && ! $this->ends_with_delimiter ())
+    {
       $this->_text .= $opts->path_delimiter;
+    }
   }
 
   /**
@@ -646,9 +694,13 @@ class URL
     if ($args)
     {
       if ($text)
+      {
         $Result = $text . '?' . $args;
+      }
       else
+      {
         $Result = $args;
+      }
     }
 
     return $Result;
@@ -665,7 +717,9 @@ class URL
     $dot_pos = strrpos ($text, '.');
     $sep_pos = strrpos ($text, $opts->path_delimiter);
     if (($dot_pos !== FALSE) && (($sep_pos === FALSE) || ($dot_pos > $sep_pos)))
+    {
       return substr ($text, $dot_pos + 1);
+    }
   }
 
   /**
@@ -683,7 +737,9 @@ class URL
       foreach ($new_args as $name => $value)
       {
         if ($value !== '')
+        {
           $this->add_argument ($name, $value);
+        }
       }
     }
     else
@@ -697,17 +753,23 @@ class URL
         if (isset ($new_args [$n]))
         {
           if ($new_args [$n] !== '')
+          {
             $this->add_argument ($n, $new_args [$n]);
+          }
           unset ($new_args [$n]);
         }
         else
+        {
           $this->add_arguments ($arg);
+        }
       }
 
       foreach ($new_args as $name => $value)
       {
         if ($value !== '')
+        {
           $this->add_argument ($name, $value);
+        }
       }
     }
   }
@@ -773,7 +835,9 @@ class FILE_URL extends URL
   function ensure_path_exists ($normalize_allowed = TRUE)
   {
     if ($normalize_allowed)
+    {
       $this->normalize ();
+    }
 
     ensure_path_exists ($this->path ());
   }
@@ -837,7 +901,9 @@ function ensure_has_protocol ($f, $protocol, $opts = null)
   if (! has_protocol ($f, $protocol, $opts))
   {
     if (has_protocol ($f, $opts))
+    {
       strip_protocol ($f, $opts);
+    }
     return $protocol . '://' . $f;
   }
   return $f;
@@ -855,7 +921,9 @@ function has_protocol ($f, $protocol = '', $opts = null)
 {
   $Result = strpos ($f, ':') > 0;
   if ($Result && $protocol)
+  {
     $Result = strpos ($f, $protocol) === 0;
+  }
   return $Result;
 }
 
@@ -870,7 +938,9 @@ function strip_protocol ($f, $opts = null)
 {
   $colon_pos = strpos ($f, ':');
   if ($colon_pos !== FALSE)
+  {
     $f = substr ($f, $colon_pos + 3);
+  }
   return $f;
 }
 
@@ -910,22 +980,32 @@ function extract_domain ($f, $opts = null)
   if ($colon_pos !== FALSE)
   {
     if (! isset ($opts))
+    {
       $opts =& global_file_options ();
+    }
 
     $slash_pos = strpos ($f, $opts->path_delimiter, $colon_pos + 3);
     if ($slash_pos > $colon_pos)
+    {
       $result = substr ($f, $colon_pos + 3, $slash_pos - $colon_pos - 3);
+    }
     else
+    {
       $result = substr ($f, $colon_pos + 3);
+    }
 
     return $result;
   }
 
   if (! isset ($opts))
+  {
     $opts =& global_file_options ();
+  }
   $slash_pos = strpos ($f, $opts->path_delimiter);
   if ($slash_pos !== FALSE)
+  {
     return substr ($f, 0, $slash_pos);
+  }
   return $f;
 }
 
@@ -947,7 +1027,9 @@ function has_domain ($f, $domain = '', $opts = null)
   {
     $Result = strpos ($f, $domain, $Result + 3) === $Result + 3;
     if (! $Result)
+    {
       $Result = preg_match ('/' . $domain . '/', extract_domain ($f, $opts));
+    }
   }
 
   return $Result;
@@ -966,7 +1048,9 @@ function strip_domain ($f, $opts = null)
   if ($colon_pos !== FALSE)
   {
     if (! isset ($opts))
+    {
       $opts =& global_file_options ();
+    }
     $slash_pos = strpos ($f, $opts->path_delimiter, $colon_pos + 3);
     $f = substr ($f, $slash_pos);
   }
@@ -984,7 +1068,9 @@ function strip_domain ($f, $opts = null)
 function has_local_domain ($f, $opts = null)
 {
   if (! isset ($opts))
+  {
     $opts =& global_url_options ();
+  }
   if (has_domain ($f, '', $opts))
   {
     $matches = null;
@@ -992,7 +1078,9 @@ function has_local_domain ($f, $opts = null)
     {
       $is_match = preg_match ('/^' . str_replace('/', '\\/', $url) . '/', $f, $matches);
       if ($is_match)
+      {
         return array ($matches[0], $document_root);
+      }
     }
   }
   return FALSE;
@@ -1008,7 +1096,9 @@ function has_local_domain ($f, $opts = null)
 function file_name_to_url ($f, $opts = null)
 {
   if (! isset ($opts))
+  {
     $opts =& global_url_options ();
+  }
 
   foreach ($opts->domains as $url_root => $document_root)
   {
@@ -1045,12 +1135,16 @@ function file_name_to_url ($f, $opts = null)
 function url_to_file_name ($f, $opts = null)
 {
   if (! isset ($opts))
+  {
     $opts =& global_url_options ();
+  }
 
   list($local_domain, $document_root) = has_local_domain ($f, $opts);
 
   if ($local_domain)
+  {
     return join_paths ($document_root, substr($f, strlen($local_domain)));
+  }
 
   return '';
 }
@@ -1070,7 +1164,9 @@ function url_to_folder ($f, $opts = null, $create_if_not_found = TRUE)
 {
   $Result = url_to_file_name ($f, $opts);
   if ($Result && $create_if_not_found && ! is_dir ($Result))
+  {
     ensure_path_exists ($Result);
+  }
   return $Result;
 }
 

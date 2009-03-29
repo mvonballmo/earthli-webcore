@@ -350,9 +350,12 @@ class ENTRY_SEARCH extends OBJECT_IN_FOLDER_SEARCH
   function _base_query ()
   {
     if (($this->parameters->folder_search_type == Search_user_context_none) && ($this->fields->folder_from_context))
+    {
       return $this->fields->folder_from_context->entry_query ();
-    else
-      return $this->login->all_entry_query ();
+    }
+
+
+    return $this->login->all_entry_query ();
   }
 
   /**
@@ -420,9 +423,12 @@ class COMMENT_SEARCH extends OBJECT_IN_FOLDER_SEARCH
   function _base_query ()
   {
     if (($this->parameters->folder_search_type == Search_user_context_none) && ($this->fields->folder_from_context))
+    {
       return $this->fields->folder_from_context->comment_query ();
-    else
-      return $this->login->all_comment_query ();
+    }
+
+
+    return $this->login->all_comment_query ();
   }
 
   /**

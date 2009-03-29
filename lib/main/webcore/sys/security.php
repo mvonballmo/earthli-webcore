@@ -171,7 +171,9 @@ class FOLDER_PERMISSIONS extends NAMED_OBJECT
   function user ()
   {
     if ($this->kind == Privilege_kind_user)
+    {
       return $this->app->user_at_id ($this->ref_id);
+    }
   }
 
   /**
@@ -252,9 +254,13 @@ class FOLDER_PERMISSIONS extends NAMED_OBJECT
       $this->db->logged_query ("SELECT MAX(importance) FROM {$this->app->table_names->folder_permissions}" .
                                " WHERE folder_id = $this->folder_id AND kind = '" . Privilege_kind_group . "'");
       if ($this->db->next_record ())
+      {
         $this->importance = $this->db->f (0) + 1;
+      }
       else
+      {
         $this->importance = 1;
+      }
     }
 
     parent::_create ();
@@ -432,7 +438,9 @@ class FOLDER_SECURITY extends FOLDER_INHERITABLE_SETTINGS
   function &group_permissions_at_id ($id)
   {
     if (isset ($this->_group_table))
+    {
       return $this->_group_table [$id];
+    }
     else
     {
       $query =& $this->group_permissions_query ();
@@ -447,7 +455,9 @@ class FOLDER_SECURITY extends FOLDER_INHERITABLE_SETTINGS
   function &user_permissions_at_id ($id)
   {
     if (isset ($this->_user_table))
+    {
       return $this->_user_table [$id];
+    }
     else
     {
       $query =& $this->user_permissions_query ();
@@ -524,7 +534,9 @@ class FOLDER_SECURITY extends FOLDER_INHERITABLE_SETTINGS
       if ($copy_mode == Security_create_admin)
       {
         if (! isset ($user))
+        {
           $user =& $this->login;
+        }
         $perm = $this->new_permissions (Privilege_kind_user);
         $perm->ref_id = $user->id;
         $perm->set_folder ($folder);
@@ -551,9 +563,13 @@ class FOLDER_SECURITY extends FOLDER_INHERITABLE_SETTINGS
   function _ensure_default_permissions_are_stored()
   {
     if (! isset ($this->_anonymous_permissions))
+    {
       $this->_anonymous_permissions =& $this->_create_and_store_permissions (Privilege_kind_anonymous);
+    }
     if (! isset ($this->_registered_permissions))
+    {
       $this->_registered_permissions =& $this->_create_and_store_permissions (Privilege_kind_registered);
+    }
   }
 
   /**
@@ -951,9 +967,13 @@ class PRIVILEGE_MAP
     $set = null; // Compiler warning
     $set->name = $set_name;
     if (isset ($type))
+    {
       $set->type = $type;
+    }
     else
+    {
       $set->type = $this->type;
+    }
 
     $this->_sets [] = $set;
   }

@@ -75,7 +75,9 @@ class BROWSER_RENDERER extends OBJECT_RENDERER
         <?php
         $icon_name = $browser->icon_name ();
         if ($icon_name)
+        {
           echo $this->context->resolve_icon_as_html ('{icons}logos/browsers/' . $icon_name, '', '32px') . ' ';
+        }
         echo $browser->name () . ' ' . $browser->version ();
       ?>
       </dd>
@@ -139,7 +141,9 @@ class BROWSER_RENDERER extends OBJECT_RENDERER
     $browser = $obj;
     
     if ($this->show_user_agent)
+    {
       echo $this->_par ($browser->user_agent_string);
+    }
     $table = new TEXT_TABLE_RENDERER ($this);
 
     $table->add_item ('Application', $browser->name () . ' ' . $browser->version ());
@@ -151,7 +155,9 @@ class BROWSER_RENDERER extends OBJECT_RENDERER
       $table->add_item ('Renderer', $browser->renderer_name () . ' ' . $browser->renderer_version () . ' (Released ' . $gd->format ($t) . ')');
     }
     else
+    {
       $table->add_item ('Renderer', $browser->renderer_name () . ' ' . $browser->renderer_version ());
+    }
     $table->add_item ('Operating System', $browser->system_id ());
     $table->add_item ('Alpha PNG', $this->_boolean_as_text ($browser->supports (Browser_alpha_PNG)));
     $table->add_item ('Cookies', $this->_boolean_as_text ($browser->supports (Browser_cookie)));
@@ -176,13 +182,17 @@ class BROWSER_RENDERER extends OBJECT_RENDERER
     if ($value)
     {
       if (! $text)
+      {
         $text = 'yes';
+      }
       return $this->context->resolve_icon_as_html ('{icons}comment/thumbs_up', '', '15px') . ' ' . $text;
     }
     else
     {
       if (! $text)
+      {
         $text = 'no';
+      }
       return $this->context->resolve_icon_as_html ('{icons}comment/thumbs_down', '', '15px') . ' ' . $text;
     }
   }
@@ -198,16 +208,24 @@ class BROWSER_RENDERER extends OBJECT_RENDERER
     if ($value)
     {
       if ($text)
+      {
         $text .= ' (yes)';
+      }
       else
+      {
         $text = 'yes';
+      }
     }
     else
     {
       if ($text)
+      {
         $text .= ' (no)';
+      }
       else
+      {
         $text = 'no';
+      }
     }
 
     return $text;

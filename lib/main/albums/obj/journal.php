@@ -78,7 +78,9 @@ class JOURNAL extends ALBUM_ENTRY
   {
     $props = $this->app->display_options->weather_icons ();
     if (isset ($props [$this->weather_type - 1]))
+    {
       return $props [$this->weather_type - 1];
+    }
     else
     {
       $prop = new PROPERTY_VALUE ($this->app);
@@ -109,9 +111,12 @@ class JOURNAL extends ALBUM_ENTRY
     $lo = $folder->temperature_as_html ($this->lo_temp);
     $hi = $folder->temperature_as_html ($this->hi_temp);
     if ($lo == $hi)
+    {
       return $hi;
-    else
-      return "$lo to $hi";
+    }
+
+
+    return "$lo to $hi";
   }
 
   /**
@@ -121,9 +126,12 @@ class JOURNAL extends ALBUM_ENTRY
   function temperature_as_text ()
   {
     if ($this->lo_temp == $this->hi_temp)
+    {
       return "{$this->hi_temp}°C";
-    else
-      return "{$this->lo_temp}°C to {$this->hi_temp}°C";
+    }
+
+
+    return "{$this->lo_temp}°C to {$this->hi_temp}°C";
   }
 
   /**

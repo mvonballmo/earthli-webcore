@@ -119,10 +119,14 @@ http://www.earthli.com/software/webcore
           }
         }
         else
+        {
           draw_source ($page_text);
+        }
       }
       else
+      {
         echo "<div class=\"error\">[$page_name] is not a file.</div>";
+      }
     ?>
   </div>
 </div>

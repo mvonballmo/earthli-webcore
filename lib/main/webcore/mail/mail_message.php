@@ -150,9 +150,13 @@ class MAIL_MESSAGE extends WEBCORE_OBJECT
     $this->assert (! empty ($address), 'address cannot be empty', 'set_send_to', 'MAIL_MESSAGE');
     $this->send_to = array ();
     if (is_array ($address))
+    {
       $this->send_to = $address;
+    }
     else
+    {
       $this->send_to [] = $address;
+    }
   }
 
   /**
@@ -164,9 +168,13 @@ class MAIL_MESSAGE extends WEBCORE_OBJECT
   {
     $this->assert (! empty ($address), 'address cannot be empty', 'add_send_to', 'MAIL_MESSAGE');
     if (is_array ($address))
+    {
       $this->send_to = array_merge ($this->send_to, $address);
+    }
     else
+    {
       $this->send_to [] = $address;
+    }
   }
 
   /**
@@ -178,9 +186,13 @@ class MAIL_MESSAGE extends WEBCORE_OBJECT
   {
     $this->assert (! empty ($address), 'address cannot be empty', 'add_cc', 'MAIL_MESSAGE');
     if (is_array ($address))
+    {
       $this->cc = array_merge ($this->cc, $address);
+    }
     else
+    {
       $this->cc [] = $address;
+    }
   }
 
   /**
@@ -192,9 +204,13 @@ class MAIL_MESSAGE extends WEBCORE_OBJECT
   {
     $this->assert (! empty ($address), 'address cannot be empty', 'add_bcc', 'MAIL_MESSAGE');
     if (is_array ($address))
+    {
       $this->bcc = array_merge ($this->bcc, $address);
+    }
     else
+    {
       $this->bcc [] = $address;
+    }
   }
 
   /**
@@ -206,9 +222,13 @@ class MAIL_MESSAGE extends WEBCORE_OBJECT
   {
     $this->assert (! empty ($header), 'header cannot be empty', 'add_header', 'MAIL_MESSAGE');
     if (is_array ($header))
+    {
       $this->custom_headers = array_merge ($this->custom_headers, $header);
+    }
     else
+    {
       $this->custom_headers [] = $header;
+    }
   }
 
   /**

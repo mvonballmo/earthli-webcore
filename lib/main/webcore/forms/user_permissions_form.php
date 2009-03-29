@@ -165,7 +165,9 @@ class USER_PERMISSIONS_FORM extends PERMISSIONS_FORM
     if ($this->value_for ('use_defaults'))
     {
       if ($permissions->exists ())
+      {
         $permissions->delete ();
+      }
     }
     else
     {
@@ -239,9 +241,13 @@ function update_controls ()
       $props = $renderer->make_list_properties ();
       $props->on_click_script = 'update_controls ()';
       if ($this->_object->is_anonymous ())
+      {
         $props->add_item ('Use default permissions for anonymous users.', 1);
+      }
       else
+      {
         $props->add_item ('Use default permissions for registered users.', 1);
+      }
       $props->add_item ('Use the permissions below.', 0);
 
       $renderer->start_row ();

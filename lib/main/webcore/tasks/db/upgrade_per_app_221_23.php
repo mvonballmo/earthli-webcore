@@ -58,7 +58,9 @@ class UPGRADE_PER_APP_221_23_TASK extends MIGRATOR_TASK
         $folder->parent =& $parent;
       }
       else
+      {
         $roots [] =& $folder;
+      }
 
       $i++;
     }

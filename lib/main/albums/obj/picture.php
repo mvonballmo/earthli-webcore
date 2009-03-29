@@ -76,7 +76,9 @@ class PICTURE extends ALBUM_ENTRY
      */
 
     if ($Result->extension () == '')
+    {
       $Result->replace_extension ('jpg');
+    }
 
     /* If the file path is not already a full url, then prepend
      * the folder's path.
@@ -85,9 +87,13 @@ class PICTURE extends ALBUM_ENTRY
     if (! $Result->has_domain ())
     {
       if ($force_root)
+      {
         $root_override = Force_root_on;
+      }
       else
+      {
         $root_override = null;
+      }
 
       $f = $this->parent_folder ();
       $Result->prepend ($f->picture_folder_url ($root_override));
@@ -157,9 +163,13 @@ class PICTURE extends ALBUM_ENTRY
       if ($fldr->max_picture_width && $fldr->max_picture_height)
       {
         if ($load_image)
+        {
           $Result->resize_to_fit ($fldr->max_picture_width, $fldr->max_picture_height);
+        }
         else
+        {
           $Result->resize ($fldr->max_picture_width, $fldr->max_picture_height);
+        }
       }
     }
 
@@ -258,19 +268,25 @@ class PICTURE extends ALBUM_ENTRY
           $old_url = new FILE_URL ($old_folder);
           $old_url->replace_name ($this->file_name);
           if ($old_url->extension () == '')
+          {
             $old_url->replace_extension ('jpg');
+          }
 
           $new_url = new FILE_URL ($new_folder);
           $new_url->replace_name ($this->file_name);
           if ($new_url->extension () == '')
+          {
             $new_url->replace_extension ('jpg');
+          }
 
           if (file_exists ($old_url->as_text ()))
           {
             ensure_path_exists ($new_folder);
             log_message ('Moved [' . $old_url->as_text () . '] to [' . $new_url->as_text () . ']', Msg_type_debug_info, Msg_channel_system);
             if (! rename ($old_url->as_text (), $new_url->as_text ()))
+            {
               $this->raise ('_move_to', 'PICTURE', 'Could not move main image for [' . $this->title_as_plain_text () . '].');
+            }
           }
 
           $old_url->append_to_name (Picture_thumbnail_suffix);
@@ -280,7 +296,9 @@ class PICTURE extends ALBUM_ENTRY
             ensure_path_exists ($new_folder);
             log_message ('Moved [' . $old_url->as_text () . '] to [' . $new_url->as_text () . ']', Msg_type_debug_info, Msg_channel_system);
             if (! rename ($old_url->as_text (), $new_url->as_text ()))
+            {
               $this->raise ('_move_to', 'PICTURE', 'Could not move thumbnail image for [' . $this->title_as_plain_text () . '].');
+            }
           }
         }
       }
@@ -316,19 +334,25 @@ class PICTURE extends ALBUM_ENTRY
           $old_url = new FILE_URL ($old_folder);
           $old_url->replace_name ($this->file_name);
           if ($old_url->extension () == '')
+          {
             $old_url->replace_extension ('jpg');
+          }
 
           $new_url = new FILE_URL ($new_folder);
           $new_url->replace_name ($this->file_name);
           if ($new_url->extension () == '')
+          {
             $new_url->replace_extension ('jpg');
+          }
 
           if (file_exists ($old_url->as_text ()))
           {
             ensure_path_exists ($new_folder);
             log_message ('Copied [' . $old_url->as_text () . '] to [' . $new_url->as_text () . ']', Msg_type_debug_info, Msg_channel_system);
             if (! copy ($old_url->as_text (), $new_url->as_text ()))
+            {
               $this->raise ('_copy_to', 'PICTURE', 'Could not copy main image for [' . $this->title_as_plain_text () . '].');
+            }
           }
 
           $old_url->append_to_name (Picture_thumbnail_suffix);
@@ -338,7 +362,9 @@ class PICTURE extends ALBUM_ENTRY
             ensure_path_exists ($new_folder);
             log_message ('Copied [' . $old_url->as_text () . '] to [' . $new_url->as_text () . ']', Msg_type_debug_info, Msg_channel_system);
             if (! copy ($old_url->as_text (), $new_url->as_text ()))
+            {
               $this->raise ('_copy_to', 'PICTURE', 'Could not copy thumbnail image for [' . $this->title_as_plain_text () . '].');
+            }
           }
         }
       }
@@ -356,11 +382,15 @@ class PICTURE extends ALBUM_ENTRY
       $url = $this->location (TRUE);
       $file_name = url_to_file_name ($url->as_text ());
       if ($file_name)
+      {
         @unlink ($file_name);
+      }
       $url = $this->thumbnail_location (TRUE);
       $file_name = url_to_file_name ($url->as_text ());
       if ($file_name)
+      {
         @unlink ($file_name);
+      }
     }
 
     parent::_purge ($options);

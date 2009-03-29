@@ -234,7 +234,9 @@ class PROJECT_FORM extends FOLDER_FORM
     parent::_store_to_object ($obj);
 
     if ($obj->exists ())
+    {
       $obj->trunk_id =& $this->value_for ('trunk_id');
+    }
 
     $options =& $obj->options ();
     $options->set_inherited (! $this->value_for ('defines_options'), FALSE);
@@ -329,7 +331,9 @@ class PROJECT_FORM extends FOLDER_FORM
     if (! $this->object_exists () || ! $this->_object->is_root ())
     {
       if (! $this->object_exists ())
+      {
         $renderer->draw_text_line_row ('branch_title');
+      }
       elseif (! $this->_object->is_root ())
       {
         $branch_query =& $this->_object->branch_query ();
@@ -351,9 +355,13 @@ class PROJECT_FORM extends FOLDER_FORM
       // if this folder has a parent, then show the inheritance options
 
       if (! $this->object_exists ())
+      {
         $parent = $this->_folder;
+      }
       else
+      {
         $parent = $this->_folder->parent_folder ();
+      }
 
       if ($parent)
       {
@@ -368,7 +376,9 @@ class PROJECT_FORM extends FOLDER_FORM
           $title = 'Inherit options from ' . $options_folder->title_as_link ($t);
         }
         else
+        {
           $title = 'Inherit options from ' . $options_folder->title_as_html ();
+        }
 
         $props->add_item ($title, 0);
         $props->add_item ('Define options below.', 1);
@@ -376,7 +386,9 @@ class PROJECT_FORM extends FOLDER_FORM
         echo $renderer->radio_group_as_HTML ('defines_options', $props);
       }
       else
+      {
         $renderer->draw_hidden ('defines_options');
+      }
 
       $renderer->finish_row ();
 
@@ -405,7 +417,9 @@ class PROJECT_FORM extends FOLDER_FORM
       $renderer->draw_radio_group_row ('reporter_group_type', $props);
       
       if (isset ($this->_user_list_error_message))
+      {
         $renderer->draw_caution_row (' ', $this->_user_list_error_message);
+      }
 
     $renderer->finish_block ();
     $renderer->finish_row ();
@@ -442,10 +456,14 @@ class PROJECT_FORM extends FOLDER_FORM
         $Result->add_item ('Allow only ' . $renderer->drop_down_as_HTML ($ctrl_id, $group_props), Project_user_group);
       }
       else
+      {
         $this->_user_list_error_message = 'Cannot limit by group (no groups available)';
+      }
     }
     else
+    {
       $this->_user_list_error_message = 'Cannot limit by group (cannot see groups)';
+    }
       
     return $Result;
   }

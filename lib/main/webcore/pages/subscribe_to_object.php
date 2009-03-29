@@ -48,5 +48,7 @@ http://www.earthli.com/software/webcore
     $App->return_to_referer ($obj->home_page ());
   }
   else
+  {
     $Page->raise_security_violation ('Invalid subscription request or access denied.');
+  }
 ?>

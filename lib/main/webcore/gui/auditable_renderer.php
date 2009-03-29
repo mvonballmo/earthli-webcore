@@ -85,7 +85,9 @@ class AUDITABLE_RENDERER extends OBJECT_RENDERER
   {
     $this->_echo_html_user ('Created', $obj->creator (), $obj->time_created);
     if ($obj->modified ())
+    {
       $this->_echo_html_user ('Updated', $obj->modifier (), $obj->time_modified);
+    }
   }
 
   /**
@@ -131,7 +133,9 @@ class AUDITABLE_RENDERER extends OBJECT_RENDERER
         if (sizeof ($kinds) > 0)
         {
           if ($directly_subscribed)
+          {
             $text = 'You are subscribed to this ' . $obj_title . '. (<a href="' . $url->as_html () . '">Unsubscribe</a>)';
+          }
           else
           {
             if (in_array (Subscribe_user, $kinds))
@@ -149,7 +153,9 @@ class AUDITABLE_RENDERER extends OBJECT_RENDERER
           }
         }
         else
+        {
           $text = 'You are <strong>not</strong> subscribed to this ' . $obj_title . '. (<a href="' . $url->as_html () . '">Subscribe</a>)';
+        }
 
         echo '<div class="status-indicator"><div style="float: left">' . $icon . '</div><div style="margin-left: 20px">' . $text . '</div></div>';
       }
@@ -178,12 +184,16 @@ class AUDITABLE_RENDERER extends OBJECT_RENDERER
     if ($this->_options->show_users)
     {
       if (! $top_aligned)
+      {
         echo $this->_sep ();
+      }
 
       $this->_echo_plain_text_users ($obj);
 
       if ($top_aligned)
+      {
         echo $this->_line ($this->_sep ());
+      }
     }
   }
 
@@ -197,7 +207,9 @@ class AUDITABLE_RENDERER extends OBJECT_RENDERER
   {
     $this->_echo_plain_text_user ('Created', $obj->creator (), $obj->time_created);
     if ($obj->modified ())
+    {
       $this->_echo_plain_text_user ('Updated', $obj->modifier (), $obj->time_modified);
+    }
   }
 
   /**

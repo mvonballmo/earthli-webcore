@@ -116,9 +116,12 @@ class RESOLVER extends RESOURCE_MANAGER
   function page_template_for ($page_name)
   {
     if (isset ($this->_page_templates [$page_name]))
+    {
       return $this->_page_templates [$page_name];
-    else
-      return $page_name;
+    }
+
+
+    return $page_name;
   }
 
   /**

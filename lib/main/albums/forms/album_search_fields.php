@@ -123,17 +123,25 @@ class SEARCH_JOURNAL_FIELDS extends SEARCH_ENTRY_FIELDS
     parent::apply_to_query ($query, $obj);
 
     if ($obj->parameters ['colder_than'] != '')
+    {
       $query->restrict ('jrnl.hi_temp < ' . $obj->parameters ['colder_than']);
+    }
 
     if ($obj->parameters ['warmer_than'] != '')
+    {
       $query->restrict ('jrnl.lo_temp > ' . $obj->parameters ['warmer_than']);
+    }
 
     if ($obj->parameters ['weather_type'] != '')
     {
       if ($obj->parameters ['not_weather_type'])
+      {
         $operator = Operator_not_in;
+      }
       else
+      {
         $operator = Operator_in;
+      }
 
       $query->restrict_by_op ('jrnl.weather_type', $obj->parameters ['weather_type'], $operator);
     }
@@ -169,9 +177,13 @@ class SEARCH_JOURNAL_FIELDS extends SEARCH_ENTRY_FIELDS
         $weather_types [] = $props [$type]->title;
 
       if ($obj->parameters ['not_weather_type'])
+      {
         $Result [] = 'Weather is not one of ' . join (', ', $weather_types);
+      }
       else
+      {
         $Result [] = 'Weather is one of ' . join (', ', $weather_types);
+      }
     }
 
     return $Result;

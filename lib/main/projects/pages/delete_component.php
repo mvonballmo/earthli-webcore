@@ -45,9 +45,13 @@ http://www.earthli.com/software/webcore/projects
     if ($form->committed ())
     {
       if ($App->login->is_allowed (Privilege_set_component, Privilege_hidden, $folder, $creator))
+      {
         $App->return_to_referer ($comp->home_page ());
+      }
       else
+      {
         $Env->redirect_local ($folder->home_page ());
+      }
     }
 
     $Page->title->add_object ($folder);
@@ -74,5 +78,7 @@ http://www.earthli.com/software/webcore/projects
     $Page->finish_display ();
   }
   else
+  {
     $Page->raise_security_violation ("You are not allowed to delete this component.", $folder);
+  }
 ?>

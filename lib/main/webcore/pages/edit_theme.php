@@ -36,7 +36,9 @@ http://www.earthli.com/software/webcore
 
     $form->process_existing ($theme);
     if ($form->committed ())
+    {
       $App->return_to_referer ('view_themes.php');
+    }
 
     $Page->title->add_object ($theme);
     $Page->title->subject = 'Edit theme';
@@ -62,5 +64,7 @@ http://www.earthli.com/software/webcore
     $Page->finish_display ();
   }
   else
+  {
     $Page->raise_security_violation ('You are not allowed to edit this theme.', $theme);
+  }
 ?>

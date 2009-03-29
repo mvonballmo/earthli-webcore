@@ -105,7 +105,9 @@ class LOG_IN_FORM extends FORM
     $this->add_field ($field);
 
     if ($this->login->is_anonymous ())
+    {
       $this->set_initial_focus ('name');
+    }
   }
 
   /**
@@ -124,13 +126,17 @@ class LOG_IN_FORM extends FORM
       $this->_user =& $user_query->object_at_name ($this->value_for ('name'));
 
       if (! $this->_user)
+      {
         $this->record_error ('password', 'Please provide a valid login.');
+      }
       else
       {
         if (! $this->num_errors ('password'))
         {
           if (! $this->_user->password_matches ($this->value_for ('password')))
+          {
             $this->record_error ('password', 'Please provide a valid login.');
+          }
         }
       }
     }
@@ -149,9 +155,13 @@ class LOG_IN_FORM extends FORM
   function commit (&$obj)
   {
     if (! $this->_user->is_anonymous ())
+    {
       $this->app->log_in ($this->_user, $this->value_for ('remember'));
+    }
     else
+    {
       $this->app->log_out ();
+    }
   }
 
   /**

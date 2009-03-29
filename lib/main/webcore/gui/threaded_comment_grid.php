@@ -95,9 +95,10 @@ class THREADED_COMMENT_GRID extends FLAT_COMMENT_GRID
           // get the number of threads
 
         if ($num_threads > $this->_num_rows)
+        {
           // if there are more threads than will show on one page AND
           // we are not printing (when printing, all threads are displayed)
-        {
+          
           $num_objects_per_page = $this->_num_rows * $this->_num_columns;
           $query->set_select ('com.id, com.time_created');
           $query->set_limits (($this->paginator->page_number - 1) * $num_objects_per_page, $num_objects_per_page);
@@ -129,7 +130,9 @@ class THREADED_COMMENT_GRID extends FLAT_COMMENT_GRID
         }
       }
       else
+      {
         $Result = $this->_query->tree ();
+      }
     }
 
     return $Result;
@@ -176,7 +179,9 @@ class THREADED_COMMENT_GRID extends FLAT_COMMENT_GRID
     $this->_draw_comment_contents ($obj);
     $objs = $obj->sub_comments ();  // break the reference deliberately or there is an infinite loop
     if ($objs)
+    {
       $this->_draw_comments ($objs, $depth);
+    }
   }
 }
 

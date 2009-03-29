@@ -35,11 +35,15 @@ http://www.earthli.com/software/webcore
   $last_page = urldecode ($form->value_for ('last_page'));
 
   if ($form->committed ())
+  {
     $Env->redirect_root ($last_page);
+  }
   else
   {
     if ($form->submitted ())
+    {
       $Page->title->subject = 'Login Failed';
+    }
   }
 
   $Page->location->add_root_link ();
@@ -52,10 +56,14 @@ http://www.earthli.com/software/webcore
   <div class="box-body">
     <?php
       if (empty ($last_page))
+      {
         $last_page = 'unknown location';
+      }
       $error_message = read_var ('error_message');
       if (empty ($error_message))
+      {
         $error_message = 'You are not allowed to perform that operation.';
+      }
     ?>
     <div class="message-box">
       <div class="message-title"><?php echo $error_message; ?></div>

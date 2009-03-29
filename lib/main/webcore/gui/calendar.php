@@ -105,9 +105,13 @@ class CALENDAR extends WEBCORE_OBJECT
     $diff_months = (($last_year * Months_in_year) + $last_month) - (($first_year * Months_in_year) + $first_month);
 
     if ($diff_months > Months_in_year)
+    {
       $this->num_years = $last_year - $first_year + 1;
+    }
     else
+    {
       $this->num_years = 1;
+    }
 
     $this->paginator->set_ranges ($this->num_years, 1);
     $this->paginator->page_offset = date ("Y", $php_first_day) - 1;
@@ -118,8 +122,9 @@ class CALENDAR extends WEBCORE_OBJECT
     $diff_months = (($last_year * 12) + $last_month) - (($curr_year * 12) + $curr_month);
 
     if ($diff_months > 12)
-      // the span is more than 12 months, so split into pages
     {
+      // the span is more than 12 months, so split into pages
+      
       if ($this->paginator->page_number == 1)
       {
         $last_month = 12;
@@ -170,7 +175,9 @@ class CALENDAR extends WEBCORE_OBJECT
       $month_displayed = $month_displayed || $current_month_has_content;
 
       if ($current_month_has_content)
+      {
         $this->build_month ($this->curr_month, $this->curr_year);
+      }
       else
       {
         if (! isset ($this->_first_empty_month))
@@ -183,7 +190,9 @@ class CALENDAR extends WEBCORE_OBJECT
       }
 
       if ($this->curr_month < Months_in_year)
+      {
         $this->curr_month++;
+      }
       else
       {
         $this->finish_year ($this->curr_year);
@@ -191,17 +200,24 @@ class CALENDAR extends WEBCORE_OBJECT
         $this->curr_year++;
 
         if ($this->curr_year <= $this->last_year)
+        {
           $this->start_year ($this->curr_year);
+        }
       }
     }
 
     if (isset ($this->_first_empty_month))
+    {
       // purge out any empty months that were skipped
+
       $this->make_empty_months ();
+    }
 
     $this->finish_calendar ();
     if ($month_displayed)
+    {
       $this->_draw_paginator ();
+    }
   }
 
   /**
@@ -214,8 +230,10 @@ class CALENDAR extends WEBCORE_OBJECT
   function build_month ($month, $year)
   {
     if (isset ($this->_first_empty_month))
+    {
       // purge out any empty months that were skipped
       $this->make_empty_months ();
+    }
 
     $first_day = mktime (0, 0, 0, $month, 1, $year);
 
@@ -246,7 +264,9 @@ class CALENDAR extends WEBCORE_OBJECT
     while ($day_num != 1)
     {
       if ($day_of_week % Days_in_week == 0)
+      {
         $this->start_week ($week, $month, $year);
+      }
 
       $this->make_day ($day_num, $week, $month, $year);
 

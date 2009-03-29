@@ -98,9 +98,13 @@ class RELEASE_GRID extends CONTENT_OBJECT_GRID
   <div class="grid-title">
   <?php
     if ($this->show_folder && isset ($folder))
+    {
       echo $folder->title_as_link () . $this->app->display_options->object_separator;
+    }
     if ($this->show_branch && isset ($branch))
+    {
       echo $branch->title_as_link () . $this->app->display_options->object_separator;
+    }
     echo $obj->state_as_icon () . ' ';
     echo $this->obj_link ($obj);
   ?>
@@ -129,7 +133,9 @@ class RELEASE_GRID extends CONTENT_OBJECT_GRID
 <?php
   echo 'Created ';
   if ($this->show_user)
+  {
     echo 'by ' . $creator->title_as_link () . ' - ';
+  }
   echo $obj->time_created->format ();
 
   if (! $obj->time_created->equals ($obj->time_modified))
@@ -137,7 +143,9 @@ class RELEASE_GRID extends CONTENT_OBJECT_GRID
     $modifier =& $obj->modifier ();
     echo '<br>Updated ';
     if ($this->show_user)
+    {
       echo 'by ' . $modifier->title_as_link () . ' - ';
+    }
     echo $obj->time_modified->format ();
   }
 ?>

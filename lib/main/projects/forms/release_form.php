@@ -117,7 +117,9 @@ class RELEASE_FORM extends OBJECT_IN_FOLDER_FORM
     if ($test->is_valid () && $ship->is_valid ())
     {
       if (! $test->less_than_equal ($ship))
+      {
         $this->record_error ('time_testing_scheduled', 'Test date must be before or on ship date.');
+      }
     }
   }
 
@@ -193,7 +195,9 @@ class RELEASE_FORM extends OBJECT_IN_FOLDER_FORM
       $props->show_descriptions = TRUE;
       $props->width = '';
       if ($this->visible ('is_visible'))
+      {
         $props->add_item ($this->app->resolve_icon_as_html ('{icons}indicators/invisible', ' ', '16px') . ' Hidden', Hidden, 'Prevent searching or browsing by non-admin users.');
+      }
       $props->add_item ($this->app->resolve_icon_as_html ('{icons}buttons/calendar', ' ', '16px') . ' Planned', Planned, 'Release is in development.');
       $props->add_item ($this->app->resolve_icon_as_html ('{app_icons}statuses/working', ' ', '16px') . ' Testing', Testing, 'Release is feature-complete and in testing.');
       $renderer->draw_radio_group_row ('state', $props);
@@ -203,7 +207,9 @@ class RELEASE_FORM extends OBJECT_IN_FOLDER_FORM
       $props = $renderer->make_list_properties ();
       $props->show_descriptions = TRUE;
       if ($this->visible ('is_visible'))
+      {
         $props->add_item ($this->app->resolve_icon_as_html ('{icons}indicators/invisible', ' ', '16px') . ' Hidden', Hidden, 'Prevent searching or browsing by non-admin users.');
+      }
       $props->add_item ($this->app->resolve_icon_as_html ('{icons}buttons/ship', ' ', '16px') . ' Shipped', Shipped, 'Jobs and changes can still be added and removed.');
       $props->add_item ($this->app->resolve_icon_as_html ('{icons}indicators/locked', ' ', '16px') . ' Locked', Locked, 'Changes and jobs cannot be added or removed.');
       $renderer->draw_radio_group_row ('state', $props);

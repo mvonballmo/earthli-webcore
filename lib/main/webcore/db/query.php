@@ -176,9 +176,13 @@ class QUERY extends WEBCORE_OBJECT
   function add_select ($select)
   {
     if (! $this->_select)
+    {
       $this->_select = $select;
+    }
     else
+    {
       $this->_select .= ", $select";
+    }
 
     $this->_invalidate ();
   }
@@ -204,9 +208,13 @@ class QUERY extends WEBCORE_OBJECT
   function add_table ($table, $join_condition, $join_type = 'INNER')
   {
     if (! $this->_tables)
+    {
       $this->_tables = $table;
+    }
     else
+    {
       $this->_tables .= " $join_type JOIN $table ON $join_condition";
+    }
 
     $this->_invalidate ();
   }
@@ -222,12 +230,18 @@ class QUERY extends WEBCORE_OBJECT
     if (isset ($this->_order) && $this->_order)
     {
       if ($insert_before)
+      {
         $this->_order = $order . ', ' . $this->_order;
+      }
       else
+      {
         $this->_order .= ', ' . $order;
+      }
     }
     else
+    {
       $this->_order = $order;
+    }
   }
 
   /**
@@ -258,9 +272,13 @@ class QUERY extends WEBCORE_OBJECT
   function order_by_recent ()
   {
     if (! empty ($this->_recent_order))
+    {
       $this->set_order ($this->_recent_order);
+    }
     else
+    {
       $this->_order_by_recent ();
+    }
   }
 
   /**
@@ -287,7 +305,9 @@ class QUERY extends WEBCORE_OBJECT
   function clear_restrictions ()
   {
     if (sizeof ($this->_restrictions) > 0)
+    {
       $this->_invalidate ();
+    }
     $this->_restrictions = array ();
     $this->_system_restrictions = array ();
     $this->_calculated_restrictions = array ();
@@ -329,9 +349,13 @@ class QUERY extends WEBCORE_OBJECT
       reset ($value);
       $first = current ($value);
       if (is_numeric ($first))
+      {
         $value = join (',', $value);
+      }
       else
+      {
         $value = "'" . join ("','", $value) . "'";
+      }
     }
     elseif (! is_numeric ($value))
       $value = "'$value'";
@@ -340,15 +364,21 @@ class QUERY extends WEBCORE_OBJECT
     {
     case Operator_not_in:
       if ($value)
+      {
         $this->restrict ('NOT (' . $field . ' IN (' . $value . '))');
+      }
       break;
     case Operator_in:
       if ($value)
+      {
         $this->restrict ($field . ' IN (' . $value . ')');
+      }
       break;
     default:
       if ($value)
+      {
         $this->restrict ($field . ' ' . $operator . ' ' . $value);
+      }
     }
   }
 
@@ -400,7 +430,9 @@ class QUERY extends WEBCORE_OBJECT
       $clause = '(' . join (' OR ', $clauses) . ')';
     }
     else
+    {
       $clause = "MATCH ($fields) AGAINST ('$words')";
+    }
 
     $this->restrict ($clause);
   }
@@ -416,10 +448,14 @@ class QUERY extends WEBCORE_OBJECT
   function restrict_date ($field, $from, $to)
   {
     if ($from && $from->is_valid ())
+    {
       $this->restrict ("$field >= '" . $from->as_ISO () . "'");
+    }
 
     if ($to && $to->is_valid ())
+    {
       $this->restrict ("$field <= '" . $to->as_ISO () . "'");
+    }
   }
 
   /**
@@ -454,13 +490,17 @@ class QUERY extends WEBCORE_OBJECT
       if (! $this->_returns_no_data ())
       {
         if (isset ($this->env->profiler))
+        {
           $this->env->profiler->restart ('query');
+        }
 
         log_message ("<b>Reading count:</b><div style=\"margin: 1em 0em 0em 1.5em\">$this->_count_SQL</div>", Msg_type_debug_info, Msg_channel_database, TRUE);
 
         $this->db->query ($this->_count_SQL);
         if ($this->db->next_record ())
+        {
           $this->_num_objects = $this->db->f (0);
+        }
 
         if (isset ($this->env->profiler))
         {
@@ -468,7 +508,9 @@ class QUERY extends WEBCORE_OBJECT
           $msg = "<b>Count = [$this->_num_objects] ([$elapsed] seconds)</b><br>";
         }
         else
+        {
           $msg = "<b>Count = [$this->_num_objects]</b><br>";
+        }
 
         log_message ($msg, Msg_type_debug_info, Msg_channel_database, TRUE);
       }
@@ -495,7 +537,9 @@ class QUERY extends WEBCORE_OBJECT
         log_message ("<b>Reading objects:</b><div style=\"margin: 1em 0em 0em 1.5em\">$this->_objects_SQL</div>", Msg_type_debug_info, Msg_channel_database, TRUE);
 
         if (isset ($this->env->profiler))
+        {
           $this->env->profiler->restart ('query');
+        }
 
         $this->db->query ($this->_objects_SQL);
 
@@ -514,7 +558,9 @@ class QUERY extends WEBCORE_OBJECT
             $this->_prepare_object ($obj);
             $this->_objects [] =& $obj;
             if ($this->env->log_class_names)
+            {
               log_message ("Loaded [" . $obj->instance_description () . ']', Msg_type_debug_info, Msg_channel_system);
+            }
             unset($obj);
           }
         }
@@ -530,7 +576,9 @@ class QUERY extends WEBCORE_OBJECT
           $msg = "<b>Loaded [$this->_num_objects] objects ([db:$db_time, build:$obj_time] seconds)</b><br>";
         }
         else
+        {
           $msg = "<b>Loaded [$this->_num_objects] objects</b><br>";
+        }
 
         log_message ($msg, Msg_type_debug_info, Msg_channel_database, TRUE);
       }
@@ -555,8 +603,9 @@ class QUERY extends WEBCORE_OBJECT
       $Result = FALSE;
 
       if (isset ($this->_objects))
-        // objects have already been calculated
       {
+        // objects have already been calculated
+
         $this->_system_call = TRUE;
         $indexed_objs = $this->indexed_objects ();
         $this->_system_call = FALSE;
@@ -591,7 +640,9 @@ class QUERY extends WEBCORE_OBJECT
     $this->first = $old_first;
     $this->count = $old_count;
     if (! empty ($objs))
+    {
       return $objs [0];
+    }
 
     global $Null_reference;
     return $Null_reference;
@@ -709,7 +760,9 @@ class QUERY extends WEBCORE_OBJECT
       {
         $obj =& $objs [$i];
         if ($this->_is_indexable_object ($obj))
+        {
           $this->_indexed_objects [$this->_id_for_object ($obj)] =& $obj;
+        }
         $i++;
       }
     }
@@ -726,9 +779,13 @@ class QUERY extends WEBCORE_OBJECT
     $objs = $this->indexed_objects ();
 
     if (sizeof ($objs) > 0)
+    {
       $Result = array_keys ($objs);
+    }
     else
+    {
       $Result = array ();
+    }
 
     return $Result;
   }
@@ -789,12 +846,18 @@ class QUERY extends WEBCORE_OBJECT
         {
           $parent =& $parents [$parent_id];
           if ($parent)
+          {
             $this->_obj_connect_to_parent ($parent, $obj);
+          }
           else
+          {
             $this->_object_tree [] =& $obj;
+          }
         }
         else
+        {
           $this->_object_tree [] =& $obj;
+        }
 
         $this->_obj_set_sub_objects_cached ($obj);
 
@@ -805,14 +868,19 @@ class QUERY extends WEBCORE_OBJECT
     if ($sub_folder_id)
     {
       if (! isset ($parents))
+      {
         $parents = $this->indexed_objects ();
+      }
 
       $obj =& $parents [$sub_folder_id];
       if ($obj)
+      {
         return $this->_obj_sub_objects ($obj);
+      }
     }
-    else
-      return $this->_object_tree;
+
+
+    return $this->_object_tree;
   }
 
   /**
@@ -829,9 +897,12 @@ class QUERY extends WEBCORE_OBJECT
     $nodes = $this->tree ();
 
     if ((sizeof ($nodes) == 1) && ($nodes [0]->id == $parent_id))
+    {
       return $this->_obj_sub_objects ($nodes [0]);
-    else
-      return $nodes;
+    }
+
+
+    return $nodes;
   }
 
   /**
@@ -865,7 +936,9 @@ class QUERY extends WEBCORE_OBJECT
   function prepare ()
   {
     if (! $this->_preparing_query)
+    {
       $this->_prepare ();
+    }
   }
 
   /**
@@ -878,13 +951,16 @@ class QUERY extends WEBCORE_OBJECT
   function _objects_at_ids ($ids, $invert_logic, $method_name)
   {
     if (! is_array ($ids))
+    {
       $ids = trim_array (explode (',', $ids));
+    }
 
     if (sizeof ($ids) > 0)
     {
       if (! $invert_logic && isset ($this->_objects))
-        // objects have already been calculated
       {
+        // objects have already been calculated
+
         $this->_system_call = TRUE;
         $indexed_objs = $this->indexed_objects ();
         $this->_system_call = FALSE;
@@ -899,7 +975,9 @@ class QUERY extends WEBCORE_OBJECT
         foreach ($ids as $id)
         {
           if (isset ($indexed_objs [$id]))
+          {
             $Result [] =& $indexed_objs [$id];
+          }
           else
           {
             unset ($Result);
@@ -915,16 +993,22 @@ class QUERY extends WEBCORE_OBJECT
         if ($ids)
         {
           if ($invert_logic)
+          {
             $this->_start_system_call ('NOT (' . $this->alias . '.' . $this->id . ' IN (' . $ids . '))');
+          }
           else
+          {
             $this->_start_system_call ($this->alias . '.' . $this->id . ' IN (' . $ids . ')');
+          }
           $Result = $this->$method_name ();
           $this->_end_system_call ();
         }
       }
 
       if (isset ($Result))
+      {
         return $Result;
+      }
     }
   }
 
@@ -968,9 +1052,13 @@ class QUERY extends WEBCORE_OBJECT
 
       $this->_prepare_restrictions ();
       if ($this->_returns_no_data_flag)
+      {
         log_message ("Optimized [" . get_class ($this) . "] - returned no data.", Msg_type_debug_info, Msg_channel_database);
+      }
       else
+      {
         $this->_prepare_SQL ();
+      }
 
       $this->_select = $current_select;
       $this->_preparing_query = FALSE;
@@ -998,10 +1086,14 @@ class QUERY extends WEBCORE_OBJECT
     }
 
     if ($this->_order)
+    {
       $this->_objects_SQL .= ' ORDER BY ' . $this->_order;
+    }
 
     if ($this->_num_records)
+    {
       $this->_objects_SQL .= " LIMIT $this->_first_record, $this->_num_records";
+    }
   }
 
   /**
@@ -1019,10 +1111,14 @@ class QUERY extends WEBCORE_OBJECT
     $Result = array_merge ($Result, $this->_calculated_restrictions);
 
     if ($this->_first_day)
+    {
       $Result [] = $this->_day_field  . " >= '" . $this->_first_day . "'";
+    }
 
     if ($this->_last_day)
+    {
       $Result [] = $this->_day_field  . " <= '" . $this->_last_day . "'";
+    }
 
     return $Result;
   }
@@ -1170,7 +1266,9 @@ class QUERY extends WEBCORE_OBJECT
   function _check_system_call ()
   {
     if (! $this->_system_call && sizeof ($this->_system_restrictions))
+    {
       $this->_invalidate ();
+    }
   }
 
   /**
@@ -1399,7 +1497,9 @@ class QUERY_BASED_CACHE extends RAISABLE
     {
       $Result =& $this->_query->object_at_id ($id);
       if (isset ($Result))
+      {
         $this->_cache [$Result->id] = $Result;
+      }
     }
 
     return $Result;
@@ -1462,9 +1562,12 @@ class QUERY_ITERATOR extends RAISABLE
   function num_items_iterated ()
   {
     if (isset ($this->_item_index))
+    {
       return $this->_num_items_iterated + $this->_item_index;
-    else
-      return $this->_num_items_iterated;
+    }
+
+
+    return $this->_num_items_iterated;
   }
 
   /**
@@ -1501,7 +1604,9 @@ class QUERY_ITERATOR extends RAISABLE
   function go_to_next ()
   {
     if ($this->_item_index < sizeof ($this->_objects) - 1)
+    {
       $this->_item_index++;
+    }
     else
     {
       $this->_num_items_iterated += $this->_item_index + 1;
@@ -1521,9 +1626,13 @@ class QUERY_ITERATOR extends RAISABLE
     $this->_query->set_limits ($this->_first_item_to_get, $this->batch_size);
     $this->_objects = $this->_query->objects ();
     if (sizeof ($this->_objects))
+    {
       $this->_item_index = 0;
+    }
     else
+    {
       unset ($this->_item_index);
+    }
   }
 
   /**

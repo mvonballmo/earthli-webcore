@@ -104,7 +104,9 @@ class FIELD extends RAISABLE
   function validate (&$form)
   {
     if ($this->required && $this->is_empty ())
+    {
       $form->record_error ($this->id, "Please provide a value for $this->title.");
+    }
   }
 
   /**
@@ -145,7 +147,9 @@ class FIELD extends RAISABLE
   function value ()
   {
     if (isset ($this->_value))
+    {
       return $this->_value;
+    }
   }
 
   /**
@@ -193,9 +197,13 @@ class FIELD extends RAISABLE
   function set_value_from_request (&$values)
   {
     if (isset ($values [$this->id]))
+    {
       $this->set_value_from_text ($values [$this->id]);
+    }
     else
+    {
       $this->set_value_from_text (null);
+    }
   }
 
   /**
@@ -251,9 +259,13 @@ class FIELD extends RAISABLE
   {
     $key = $this->storage_id_for ($form);
     if ($storage->exists_on_client ($key))
+    {
       $this->set_value_from_text ($storage->value ($key));
+    }
     else
+    {
       $this->set_value ($default);
+    }
   }
 
   /**
@@ -304,7 +316,9 @@ class INTEGER_FIELD extends FIELD
     if ($this->continue_validating ($form))
     {
       if ($this->_value && !is_numeric ($this->_value))
+      {
         $form->record_error ($this->id, "Please enter a number for $this->title: [$this->_value] is not valid.");
+      }
       else
       {
         if (isset ($this->min_value))
@@ -312,12 +326,16 @@ class INTEGER_FIELD extends FIELD
           if (isset ($this->max_value))
           {
             if (! (($this->min_value <= $this->_value) && ($this->_value <= $this->max_value)))
+            {
               $form->record_error ($this->id, "Please enter a number between $this->min_value and $this->max_value for $this->title");
+            }
           }
           else
           {
             if ($this->_value < $this->min_value)
+            {
               $form->record_error ($this->id, "Please enter a number greater than or equal to $this->min_value for $this->title");
+            }
           }
         }
         else
@@ -325,7 +343,9 @@ class INTEGER_FIELD extends FIELD
           if (isset ($this->max_value))
           {
             if ($this->_value > $this->max_value)
+            {
               $form->record_error ($this->id, "Please enter a number less than or equal to $this->max_value for $this->title");
+            }
           }
         }
       }
@@ -366,7 +386,9 @@ class BOOLEAN_FIELD extends FIELD
     if ($this->continue_validating ($form))
     {
       if (! ((0 <= $this->_value) && ($this->_value <= 1)))
+      {
         $form->record_error ($this->id, "Please enter a boolean value (0 or 1) for $this->title");
+      }
     }
   }
 
@@ -377,9 +399,12 @@ class BOOLEAN_FIELD extends FIELD
   function value ()
   {
     if ($this->is_empty () || ($this->_value === FALSE) || ($this->_value === '0') || ($this->_value === 0))
+    {
       return 0;
-    else
-      return 1;
+    }
+
+
+    return 1;
   }
 }
 
@@ -436,16 +461,22 @@ class TEXT_FIELD extends FIELD
       if ($this->max_length > 0)
       {
         if (! (($this->min_length <= $len) && ($len <= $this->max_length)))
+        {
           $form->record_error ($this->id, "Please enter between $this->min_length and $this->max_length characters for $this->title");
+        }
       }
       else
       {
         if ($len < $this->min_length)
+        {
           $form->record_error ($this->id, "Please enter at least $this->min_length characters for $this->title");
+        }
       }
 
       if ($this->expression && ! preg_match ($this->expression, $this->_value))
+      {
         $form->record_error ($this->id, "$this->title $this->expression_help.");
+      }
 
       if ($this->tag_validator_type != Tag_validator_none)
       {
@@ -484,7 +515,9 @@ class TEXT_FIELD extends FIELD
     $Result = $this->value ();
     /* Get rid of magic quotes, if necessary. */
     if (get_magic_quotes_gpc ())
+    {
       $Result = stripslashes ($Result);
+    }
     return $form->context->text_options->convert_from_html_entities ($Result);
   }
 }
@@ -705,7 +738,9 @@ class DATE_TIME_FIELD extends FIELD
       $this->_text_value = $value->format ($f);
     }
     else
+    {
       $this->_text_value = '';
+    }
   }
 
   /**
@@ -749,7 +784,9 @@ class DATE_TIME_FIELD extends FIELD
     if ($this->continue_validating ($form))
     {
       if (! $this->_value->is_valid ())
+      {
         $form->record_error ($this->id, "[$this->_text_value] is not a valid date/time.");
+      }
       else
       {
         $date = $this->_value;
@@ -758,12 +795,16 @@ class DATE_TIME_FIELD extends FIELD
           if (isset ($this->min_date))
           {
             if ($date->less_than_equal ($this->min_date) || $this->max_date->less_than_equal ($date))
+            {
               $form->record_error ($this->id, 'Please enter a date between '.$this->min_date->as_iso ().' and '.$this->max_date->as_iso ()." for $this->title");
+            }
           }
           else
           {
             if ($this->max_date->less_than_equal ($date))
+            {
               $form->record_error ($this->id, 'Please enter a date less than '.$this->max_date->as_iso ()." for $this->title");
+            }
           }
         }
         else
@@ -771,7 +812,9 @@ class DATE_TIME_FIELD extends FIELD
           if (isset ($this->min_date))
           {
             if ($date->less_than_equal ($this->min_date))
+            {
               $form->record_error ($this->id, 'Please enter a date greater than '.$this->min_date->as_iso ()." for $this->title");
+            }
           }
         }
       }
@@ -864,18 +907,24 @@ class ARRAY_FIELD extends FIELD
         if (isset ($this->max_values))
         {
           if (! (($this->min_values <= $size) && ($size <= $this->max_values)))
+          {
             $form->record_error ($this->id, "Please enter between $this->min_values and $this->max_values values for $this->title");
+          }
         }
         else
         {
           if ($size < $this->min_values)
+          {
             $form->record_error ($this->id, "Please enter at least $this->min_values values for $this->title");
+          }
         }
       }
       else
       {
         if ($size > $this->max_values)
+        {
           $form->record_error ($this->id, "Please enter at most $this->max_values for $this->title");
+        }
       }
     }
   }
@@ -892,9 +941,12 @@ class ARRAY_FIELD extends FIELD
     if (isset ($this->_value))
     {
       if (is_array ($this->_value))
+      {
         return join (',', trim_array ($this->_value));
-      else
-        return $this->_value;
+      }
+
+
+      return $this->_value;
     }
   }
 
@@ -905,11 +957,15 @@ class ARRAY_FIELD extends FIELD
   function set_value_from_text ($value)
   {
     if (! $value)
+    {
       $this->_value = array ();
+    }
     elseif (! is_array ($value))
       $this->_value = explode (',', $value);
     else
+    {
       $this->_value = $value;
+    }
   }
 
   /**
@@ -960,7 +1016,9 @@ class ENUMERATED_FIELD extends FIELD
   function validate (&$form)
   {
     if (! sizeof ($this->_values))
+    {
       $form->raise ('ENUMERATED_FIELD', 'validate', 'no values assigned to enumerated type.');
+    }
 
     parent::validate ($form);
     if ($this->continue_validating ($form))
@@ -1017,7 +1075,9 @@ class UPLOAD_FILE_FIELD extends FIELD
   function set_value_from_text ($value)
   {
     if (isset ($this->_uploader->file_sets [$this->id]))
+    {
       $this->_value = &$this->_uploader->file_sets [$this->id];
+    }
   }
 
   /**
@@ -1031,7 +1091,9 @@ class UPLOAD_FILE_FIELD extends FIELD
   function as_text (&$form, $value = null)
   {
     if (isset ($value) && isset ($this->_value))
+    {
       return $this->_value->files [$value]->name;
+    }
   }
 
   /**
@@ -1064,7 +1126,9 @@ class UPLOAD_FILE_FIELD extends FIELD
   function &file_at ($idx)
   {
     if (isset ($this->_value))
+    {
       return $this->_value->files [$idx];
+    }
 
     global $Null_reference;
     return $Null_reference;
@@ -1077,7 +1141,9 @@ class UPLOAD_FILE_FIELD extends FIELD
   function num_files ()
   {
     if (isset ($this->_value))
+    {
       return $this->_value->size ();
+    }
   }
 
   /**
@@ -1115,12 +1181,16 @@ class UPLOAD_FILE_FIELD extends FIELD
         if (! $file->is_valid ())
         {
           if ($this->required || ($file->error != Uploaded_file_error_missing))
+          {
             $form->record_error ($this->id, $file->error_message (), $idx);
+          }
         }
         else
         {
           if ($this->max_bytes && ($file->size > $this->max_bytes))
+          {
             $form->record_error ($this->id, "$this->title can be at most ".file_size_as_text ($this->max_bytes).'.', $idx);
+          }
         }
 
         $idx++;

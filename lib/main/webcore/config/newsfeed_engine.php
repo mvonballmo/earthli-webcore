@@ -114,9 +114,13 @@ class NEWSFEED_ENGINE extends WEBCORE_OBJECT
     if (is_a ($obj, 'FOLDER'))
     {
       if ($obj->is_root ())
+      {
         $Result->title->subject = 'all';
+      }
       else
+      {
         $Result->title->add_object ($obj);
+      }
     }
       
     return $Result;
@@ -131,7 +135,9 @@ class NEWSFEED_ENGINE extends WEBCORE_OBJECT
   {
     $supported_formats = array (Newsfeed_format_atom, Newsfeed_format_rss);
     if (in_array ($this->format, $supported_formats))
+    {
       $Result = $this->format;
+    }
     else
     {
       log_message ("[$this->format] is not a valid newsfeed format.", Msg_type_warning, Msg_channel_newsfeed);
@@ -149,7 +155,9 @@ class NEWSFEED_ENGINE extends WEBCORE_OBJECT
   {
     $supported_formats = array (Newsfeed_content_html, Newsfeed_content_text);
     if (in_array ($this->content, $supported_formats))
+    {
       $Result = $this->content;
+    }
     else
     {
       log_message ("[$this->content] is not a valid newsfeed content type.", Msg_type_warning, Msg_channel_newsfeed);

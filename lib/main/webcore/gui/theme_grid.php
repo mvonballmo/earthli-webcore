@@ -68,7 +68,9 @@ class THEME_GRID extends STANDARD_GRID
     <h4>
     <?php
       if (! $this->is_chooser)
+      {
         $this->_draw_menu_for ($obj, Menu_size_minimal, Menu_align_left);
+      }
     ?>
       <?php echo $obj->title_as_html (); ?>
     </h4>

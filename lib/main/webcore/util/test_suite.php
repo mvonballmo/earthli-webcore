@@ -71,7 +71,9 @@ class TEST_SUITE extends WEBCORE_OBJECT
       $class_file_name = $this->_tests [$name];
       include_once ($class_file_name);
       if (class_exists ($name))
+      {
         return new $name ($this->page->make_application (Test_harness_application_id));
+      }
     }
   }
   
@@ -84,9 +86,12 @@ class TEST_SUITE extends WEBCORE_OBJECT
   function test_names ()
   {
     if (! empty ($this->_tests))
+    {
       return array_keys ($this->_tests);
-    else
-      return array ();
+    }
+
+
+    return array ();
   }
 
   /**

@@ -155,7 +155,9 @@ class AUDITABLE_FORM extends RENDERABLE_FORM
 
     $pub_state = $this->value_for ('publication_state');
     if ($pub_state)
+    {
       $history_item->publication_state = $pub_state;
+    }
   }
 
   /**

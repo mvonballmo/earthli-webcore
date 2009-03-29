@@ -65,7 +65,9 @@ class COMPONENT_RENDERER extends CONTENT_OBJECT_RENDERER
     parent::_display_as_html ($obj);
 
     if ($obj->icon_url)
+    {
       echo '</div>';
+    }
   }
 }
 

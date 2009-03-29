@@ -43,7 +43,9 @@ http://www.earthli.com/software/webcore/projects
 
     $form->process_existing ($rel);
     if ($form->committed ())
+    {
       $Env->redirect_local ($rel->home_page ());
+    }
 
     $Page->title->add_object ($folder);
     $Page->title->add_object ($rel);
@@ -69,5 +71,7 @@ http://www.earthli.com/software/webcore/projects
     $Page->finish_display ();
   }
   else
+  {
     $Page->raise_security_violation ('You are not allowed to view this release.', $folder);
+  }
 ?>

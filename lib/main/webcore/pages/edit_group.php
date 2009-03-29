@@ -36,7 +36,9 @@ http://www.earthli.com/software/webcore
 
     $form->process_existing ($group);
     if ($form->committed ())
+    {
       $App->return_to_referer ($group->home_page ());
+    }
 
     $Page->title->add_object ($group);
     $Page->title->subject = 'Edit group';
@@ -62,5 +64,7 @@ http://www.earthli.com/software/webcore
     $Page->finish_display ();
   }
   else
+  {
     $Page->raise_security_violation ('You are not allowed to edit this group.', $group);
+  }
 ?>

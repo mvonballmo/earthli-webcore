@@ -103,7 +103,9 @@ class QUERY_SECURITY_RESTRICTION extends WEBCORE_OBJECT
 
       $needs_folder_filter = sizeof ($this->_vis_sets) || sizeof ($item->sets);
       if ($needs_folder_filter)
+      {
         $ids = $this->_load_ids_for ($item);
+      }
 
       if (! $needs_folder_filter || $ids)
       {
@@ -113,28 +115,42 @@ class QUERY_SECURITY_RESTRICTION extends WEBCORE_OBJECT
           foreach ($item->states as $state)
           {
             if ($state)
+            {
               $parts [] = $this->_format_state ($item, $state, $idx_state);
+            }
             $idx_state++;
           }
         }
 
         if ($needs_folder_filter)
+        {
           $parts [] = "fldr.permissions_id IN ($ids)";
+        }
 
         if (isset ($parts))
         {
           if (sizeof ($parts) > 1)
+          {
             $text = '(' . implode (') AND (', $parts) . ')';
+          }
           else
+          {
             $text = $parts [0];
+          }
 
           if ($this->_text)
+          {
             $this->_text .= ' OR (' . $text . ')';
+          }
           else
+          {
             $this->_text = '(' . $text . ')';
+          }
         }
         else
+        {
           $this->_set_returns_all_data ();
+        }
       }
     }
   }
@@ -173,7 +189,9 @@ class QUERY_SECURITY_RESTRICTION extends WEBCORE_OBJECT
         $set = new QUERY_SECURITY_RESTRICTION_SET ($set_name, $privilege);
 
         if (isset ($last_set))
+        {
           $set->set = $last_set;
+        }
         $last_set = $set;
       }
 
@@ -212,7 +230,9 @@ class QUERY_SECURITY_RESTRICTION extends WEBCORE_OBJECT
     if ($set_name == Privilege_set_entry)
     {
       if ($item->include_drafts && ($state == Visible) && $this->_query->includes (Unpublished))
+      {
         $Result = "($Result) OR (($table_name.state & " . Unpublished . " = " . Unpublished . ") AND ($table_name.owner_id = {$this->login->id}))";
+      }
     }
     return $Result;
   }
@@ -329,9 +349,13 @@ class QUERY_SECURITY_RESTRICTION_SET_ITEM
     $this->states = array ();
     $this->privileges = array ();
     if (isset ($state))
+    {
       $this->states [] = $state;
+    }
     if (isset ($set_name))
+    {
       $this->add_set ($set_name);
+    }
   }
 
   /**
@@ -418,12 +442,18 @@ class QUERY_SECURITY_RESTRICTION_SET
   function apply (&$res)
   {
     if ($this->privilege == Privilege_always_granted)
+    {
       $this->_apply_items ($res, TRUE, 0);
+    }
     else
+    {
       $this->_apply_items ($res, TRUE, Visible);
+    }
 
     if ($this->privilege != Privilege_always_denied)
+    {
       $this->_apply_items ($res, FALSE, 0);
+    }
   }
 
   /**
@@ -451,7 +481,9 @@ class QUERY_SECURITY_RESTRICTION_SET
   function _items_for ($is_vis, $state)
   {
     if (! isset ($this->set))
+    {
       return $this->_items ($is_vis, ! $is_vis);
+    }
     else
     {
       $items = $this->set->_all_items ();
@@ -461,13 +493,17 @@ class QUERY_SECURITY_RESTRICTION_SET
         {
           $item->states [] = $state;
           if (! $is_vis && ($this->privilege == Privilege_controlled_by_content))
+          {
             $item->add_set ($this->name);
+          }
           $item->update_draft_status ($this);
           $Result [] = $item;
         }
       }
       else
+      {
         $Result = $items;
+      }
 
       return $Result;
     }
@@ -499,7 +535,9 @@ class QUERY_SECURITY_RESTRICTION_SET
       }
     }
     else
+    {
       $Result = $items;
+    }
 
     return $Result;
   }
@@ -520,17 +558,25 @@ class QUERY_SECURITY_RESTRICTION_SET
     {
     case Privilege_always_granted:
       if ($include_vis)
+      {
         $Result [] = new QUERY_SECURITY_RESTRICTION_SET_ITEM ($this, 0);
+      }
       break;
     case Privilege_always_denied:
       if ($include_invis)
+      {
         $Result [] = new QUERY_SECURITY_RESTRICTION_SET_ITEM ($this, Visible);
+      }
       break;
     case Privilege_controlled_by_content:
       if ($include_vis)
+      {
         $Result [] = new QUERY_SECURITY_RESTRICTION_SET_ITEM ($this, Visible);
+      }
       if ($include_invis)
+      {
         $Result [] = new QUERY_SECURITY_RESTRICTION_SET_ITEM ($this, 0, $this->name);
+      }
       break;
     }
 

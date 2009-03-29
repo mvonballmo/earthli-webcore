@@ -179,7 +179,9 @@ class COMMANDS extends WEBCORE_OBJECT
   function &command_at ($id)
   {
     if (isset ($this->_commands [$id]))
+    {
       return $this->_commands [$id];
+    }
       
     global $Null_reference;  
     return $Null_reference;
@@ -198,7 +200,9 @@ class COMMANDS extends WEBCORE_OBJECT
     foreach ($this->_commands as $id => $cmd)
     {
       if ($cmd->executable)
+      {
         $Result++;
+      }
     }
     return $Result;
   }
@@ -267,7 +271,9 @@ class COMMANDS extends WEBCORE_OBJECT
     {
       $cmd =& $this->_ordered_commands [$idx];
       if (! in_array ($cmd->id, $ids))
+      {
         $cmd->executable = FALSE;
+      }
     }
   }
 
@@ -283,7 +289,9 @@ class COMMANDS extends WEBCORE_OBJECT
   function _add_command (&$cmd, $group)
   {
     if (! isset ($this->_current_group) || (($group != '') && ($group != $this->_current_group->name)))
+    {
       $this->append_group ($group);
+    }
     $this->_commands [$cmd->id] =& $cmd;
   }
   

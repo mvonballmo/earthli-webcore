@@ -45,9 +45,13 @@ http://www.earthli.com/software/webcore/projects
     if ($form->committed ())
     {
       if ($App->login->is_allowed (Privilege_set_release, Privilege_hidden, $rel))
+      {
         $App->return_to_referer ($rel->home_page ());
+      }
       else
+      {
         $Env->redirect_local ($folder->home_page ());
+      }
     }
 
     $branch =& $rel->branch ();
@@ -78,5 +82,7 @@ http://www.earthli.com/software/webcore/projects
     $Page->finish_display ();
   }
   else
+  {
     $Page->raise_security_violation ("You are not allowed to delete this release.", $folder);
+  }
 ?>

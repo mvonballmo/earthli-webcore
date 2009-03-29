@@ -62,7 +62,9 @@ class USER_PROJECT_QUERY extends USER_FOLDER_QUERY
       $this->db->logged_query ("SELECT folder_id FROM {$this->app->table_names->branches} WHERE id = $id");
 
       if ($this->db->next_record ())
+      {
         return $this->object_at_id ($this->db->f ("folder_id"));
+      }
     }
     
     return null;
@@ -82,7 +84,9 @@ class USER_PROJECT_QUERY extends USER_FOLDER_QUERY
       $this->db->logged_query ("SELECT bra.folder_id FROM {$this->app->table_names->releases} rel INNER JOIN {$this->app->table_names->branches} bra ON bra.id = rel.branch_id WHERE rel.id = $id");
 
       if ($this->db->next_record ())
+      {
         return $this->object_at_id ($this->db->f ("folder_id"));
+      }
     }
     return null;
   }
@@ -101,7 +105,9 @@ class USER_PROJECT_QUERY extends USER_FOLDER_QUERY
       $this->db->logged_query ("SELECT folder_id FROM {$this->app->table_names->components} WHERE id = $id");
 
       if ($this->db->next_record ())
+      {
         return $this->object_at_id ($this->db->f ("folder_id"));
+      }
     }
     return null;
   }

@@ -80,12 +80,16 @@ class TREE_NODE
   function text ()
   {
     if ($this->_link)
+    {
       if ($this->_target)
+      {
         return "<a href=\"$this->_link\" target=\"$this->_target\">$this->_title</a>";
-      else
-        return "<a href=\"$this->_link\">$this->_title</a>";
-    else
-      return $this->_title;
+      }
+
+      return "<a href=\"$this->_link\">$this->_title</a>";
+    }
+
+    return $this->_title;
   }
 
   /**

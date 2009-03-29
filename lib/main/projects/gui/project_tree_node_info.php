@@ -60,9 +60,12 @@ class PROJECT_TREE_NODE_INFO extends FOLDER_TREE_NODE_INFO
   function icon_for (&$node)
   {
     if ($node->defines_options ())
+    {
       return $this->app->resolve_icon_as_html ('{icons}buttons/edit', 'Defines Assignee Options', '16px');
-    else
-      return parent::icon_for ($node);
+    }
+
+
+    return parent::icon_for ($node);
   }
   
   /**
@@ -85,7 +88,9 @@ class PROJECT_TREE_NODE_INFO extends FOLDER_TREE_NODE_INFO
       foreach ($nodes as $node)
       {
         if ($node->defines_options ())
+        {
           $this->set_visible_node ($node);
+        }
         $this->set_defined_nodes_visible ($this->sub_nodes ($node));
       }
     }

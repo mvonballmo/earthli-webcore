@@ -161,13 +161,19 @@ class ARCHIVE
           $handler = $this->_handlers [$idx_handler];
           $class_name = $handler->class_name;
           if ($handler->file_name)
+          {
             include_once ($handler->file_name);
+          }
           $this->_handler = new $class_name ($this->file_name);
           $this->_handler->open ();
           if ($this->_handler->is_open ())
+          {
             $this->_handler->close ();
+          }
           else
+          {
             $this->_handler = null;
+          }
           $idx_handler++;
         }
       }
@@ -259,7 +265,9 @@ class COMPRESSED_FILE extends RAISABLE
   {
     $this->_open ();
     if (! $this->is_open () && isset ($error_callback))
+    {
       $error_callback->execute (array (&$this, "Could not open file."));
+    }
   }
 
   /**
@@ -383,12 +391,16 @@ class COMPRESSED_FILE_ENTRY extends RAISABLE
   function compression_percentage ()
   {
     if (isset ($this->compressed_size))
+    {
       if ($this->size <= $this->compressed_size)
+      {
         return 0;
-      else
-        return 100 * round (($this->size - $this->compressed_size) / $this->size, 2);
-    else
-      return 0;
+      }
+
+      return 100 * round (($this->size - $this->compressed_size) / $this->size, 2);
+    }
+
+    return 0;
   }
 
   /**
@@ -429,7 +441,9 @@ class COMPRESSED_FILE_ENTRY extends RAISABLE
   function _report_error ($error_callback, $msg)
   {
     if (isset ($error_callback))
+    {
       $error_callback->execute (array (&$this->_file, $msg, &$this));
+    }
   }
 
   /**
@@ -474,7 +488,7 @@ class ZIP_FILE extends COMPRESSED_FILE
     $sep = $opts->path_delimiter;
     $file_num = 0;
 
-    while ($zip_entry = zip_read ($this->_handle))
+    while (($zip_entry = zip_read ($this->_handle)))
     {
       $size = zip_entry_filesize ($zip_entry);
       if ($size > 0)
@@ -504,7 +518,9 @@ class ZIP_FILE extends COMPRESSED_FILE
     {
       $this->_handle = @zip_open ($this->file_name);
       if ($this->_handle === FALSE)
+      {
         $this->_handle = null;
+      }
     }
   }
 
@@ -555,7 +571,9 @@ class ZIP_ENTRY extends COMPRESSED_FILE_ENTRY
     {
       $f = @fopen ($path, 'wb');
       if ($f === FALSE)
+      {
         $this->_report_error ($error_callback, "Could not open destination file [$path].");
+      }
       else
       {
         while (($s = zip_entry_read ($this->_handle, $this->read_block_size)) !== FALSE)
@@ -565,7 +583,9 @@ class ZIP_ENTRY extends COMPRESSED_FILE_ENTRY
       zip_entry_close ($this->_handle);
     }
     else
+    {
       $this->_report_error ($error_callback, "Could not open zip entry [$this->name].");
+    }
   }
 
   /**

@@ -103,7 +103,9 @@ class BASE_ARTICLE_GRID extends CONTENT_OBJECT_GRID
       <div class="detail">
         <?php
           if ($this->show_controls)
+          {
             $this->_draw_menu_for ($obj, Menu_size_compact);
+          }
 
           if ($this->show_user)
           {
@@ -123,20 +125,30 @@ class BASE_ARTICLE_GRID extends CONTENT_OBJECT_GRID
           else
           {
             if ($obj->unpublished ())
+            {
               echo 'Created on ';
+            }
             else
+            {
               echo 'Published on ';
+            }
           }
 
           if ($obj->unpublished ())
+          {
             $time =& $obj->time_created;
+          }
           else
+          {
             $time =& $obj->time_published;
+          }
             
           echo $time->format ();
           
           if ($this->show_folder)
+          {
             echo ' in ' . $folder->title_as_link ();
+          }
       ?>
       </div>
     </div>
@@ -149,9 +161,13 @@ class BASE_ARTICLE_GRID extends CONTENT_OBJECT_GRID
     <?php
       $munger =& $obj->html_formatter ();
       if ($obj->invisible ())
+      {
         $munger->max_visible_output_chars = $this->chars_to_show_for_hidden;
+      }
       else
+      {
         $munger->max_visible_output_chars = $this->chars_to_show_for_visible;
+      }
   
       echo $obj->description_as_html ($munger);
     ?>
@@ -191,22 +207,30 @@ class ARTICLE_GRID extends BASE_ARTICLE_GRID
   {
     $curr_date = $obj->time_published;
     if (! $curr_date->is_valid ())
+    {
       $curr_date = $obj->time_modified;
+    }
       
     $now = new DATE_TIME ();
     
     if ($curr_date->equals ($now, Date_time_date_part))
+    {
       $interval_text = 'Today';
+    }
     else
     {
       $yesterday = new DATE_TIME (time () - 86400);
       if ($curr_date->equals ($yesterday, Date_time_date_part))
+      {
         $interval_text = 'Yesterday'; 
+      }
       else
       {
         $two_days_ago = new DATE_TIME (time () - (86400 * 2));
         if ($curr_date->equals ($two_days_ago, Date_time_date_part))
+        {
           $interval_text = 'Two Days Ago';
+        }
         else
         {
           if ($this->fuzzy_dates)

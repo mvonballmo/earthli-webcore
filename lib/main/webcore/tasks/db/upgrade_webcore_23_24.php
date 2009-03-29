@@ -43,7 +43,9 @@ class UPGRADE_WEBCORE_23_24_TASK extends MIGRATOR_TASK
     {
       $id = $Page->database->f ('id');
       if (! $id)
+      {
         $id = $Page->database->f ('entry_id');
+      }
 
       $objs [$id] = array ($Page->database->f ('time_created'),
                            $Page->database->f ('creator_id'),
@@ -69,15 +71,15 @@ class UPGRADE_WEBCORE_23_24_TASK extends MIGRATOR_TASK
       $time_modified = $obj [2];
 
       if ($time_modified != $time_created)
+      {
         $this->_query ('INSERT INTO project_actions (object_id, object_type, user_id, time_created, publication_state, title)' .
                        " VALUES($id, '$obj_type', $modifier_id, '$time_modified', '$pub', 'Updated')");
+      }
     }
   }
 
   function _execute ()
   {
-    global $Page;
-
     log_open_block ("Adding actions table");
       $this->_query ("CREATE TABLE `project_actions` (`id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,`object_id` INT UNSIGNED NOT NULL ,`object_type` ENUM( 'folder', 'entry', 'comment', 'group', 'user', 'branch', 'release' ) NOT NULL ,`user_id` INT UNSIGNED NOT NULL ,`time_created` DATETIME NOT NULL ,`publication_state` ENUM( 'silent', 'published', 'queued' ) NOT NULL ,`title` VARCHAR( 200 ) NOT NULL ,`description` TEXT NOT NULL ,`system_description` TEXT NOT NULL ,PRIMARY KEY ( `id` ) ,INDEX ( `object_id` , `object_type` ) );");
     log_close_block ();

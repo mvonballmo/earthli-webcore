@@ -64,7 +64,9 @@ class FILE_LOGGER extends TEXT_OUTPUT_LOGGER
     if ($this->_file_name != $fn)
     {
       if ($this->is_open ())
+      {
         $this->close ();
+      }
 
       $url = new FILE_URL ($fn);
       $url->ensure_file_exists ();
@@ -88,7 +90,9 @@ class FILE_LOGGER extends TEXT_OUTPUT_LOGGER
     if ($this->is_open ())
     {
       if ($this->_has_messages)
+      {
         $this->record ('Log closed', Msg_type_info, Msg_channel_logger);
+      }
       @fclose ($this->_file_handle);
       unset ($this->_file_handle);
     }

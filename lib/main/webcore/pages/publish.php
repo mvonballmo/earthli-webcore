@@ -36,5 +36,7 @@ http://www.earthli.com/software/webcore
     include_once ($App->page_template_for ('webcore/pages/execute_task.php'));
   }
   else
+  {
     $Page->raise_security_violation ('You are not allowed to publish notifications for this application.');
+  }
 ?>

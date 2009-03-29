@@ -77,18 +77,26 @@ class USER_RENDERER extends CONTENT_OBJECT_RENDERER
     }
     
     if ($main_style)
+    {
       echo '<div style="' . $main_style . '">';
+    }
       
     $this->_echo_properties_as_html ($obj);
     
     if ($obj->description)
+    {
       echo $obj->description_as_html ();
+    }
 
     if ($obj->signature)
+    {
       echo $obj->signature_as_html ();
+    }
 
     if ($main_style)
+    {
       echo '</div>';
+    }
 
     $this->_echo_html_user_information ($obj, 'info-box-bottom');
     
@@ -143,7 +151,9 @@ class USER_RENDERER extends CONTENT_OBJECT_RENDERER
           echo $t->as_html_link ();
         }
         else
+        {
           echo "(none)";
+        }
       ?>
     </dd>
     <?php
@@ -156,9 +166,13 @@ class USER_RENDERER extends CONTENT_OBJECT_RENDERER
     <dd>
       <?php
         if ($obj->description)
+        {
           echo $obj->description_as_html ();
+        }
         else
+        {
           echo "(none)";
+        }
       ?>
     </dd>
     <dt class="field">
@@ -167,9 +181,13 @@ class USER_RENDERER extends CONTENT_OBJECT_RENDERER
     <dd>
       <?php
         if ($obj->signature)
+        {
           echo $obj->signature_as_html ();
+        }
         else
+        {
           echo "(none)";
+        }
       ?>
     </dd>
     <?php

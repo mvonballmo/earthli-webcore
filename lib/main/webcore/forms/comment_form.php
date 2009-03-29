@@ -86,9 +86,13 @@ class COMMENT_FORM extends ATTACHMENT_HOST_FORM
     $this->set_value ('parent_id', $obj->parent_id);
 
     if (! isset ($obj->kind))
+    {
       $this->set_value ('kind', 1);
+    }
     else
+    {
       $this->set_value ('kind', $obj->kind);
+    }
 
     /* When updating a comment, do not publish by default */
     $this->set_value ('publication_state', History_item_silent);
@@ -111,7 +115,9 @@ class COMMENT_FORM extends ATTACHMENT_HOST_FORM
     parent::_post_validate ($obj);
 
     if (! $this->value_for ('title') && ! $this->value_for ('description'))
+    {
       $this->record_error ('title', 'Please provide a title or description.');
+    }
   }
 
   /**

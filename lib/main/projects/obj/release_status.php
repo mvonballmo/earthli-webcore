@@ -88,7 +88,9 @@ class RELEASE_STATUS
   function as_html ()
   {
     if (! isset ($this->_html_text))
+    {
       $this->_html_text = $this->_as_text (FALSE);
+    }
     return $this->_html_text;
   }
 
@@ -99,7 +101,9 @@ class RELEASE_STATUS
   function as_plain_text ()
   {
     if (! isset ($this->_plain_text))
+    {
       $this->_plain_text = $this->_as_text (TRUE);
+    }
     return $this->_plain_text;
   }
 
@@ -112,7 +116,9 @@ class RELEASE_STATUS
   function _as_text ($text_only)
   {
     if ($this->ship->occurred)
+    {
       $Result = 'Released on ' . $this->ship->date_as_text ($text_only);
+    }
     else
     {
       if ($this->test->scheduled)
@@ -134,7 +140,9 @@ class RELEASE_STATUS
         $stat = $this->ship;
       }
       else
+      {
         $Result = 'Assigned to release';
+      }
     }
 
     if (! isset ($Result))
@@ -143,12 +151,16 @@ class RELEASE_STATUS
       if ($text_only)
       {
         if ($stat->text)
+        {
           $Result = '[' . $stat->text . '] ';
+        }
       }
       else
       {
         if ($stat->icon)
+        {
           $Result = $stat->icon . ' ';
+        }
       }
 
       $Result .= "Scheduled for $label " . $stat->date_as_text ($text_only);
@@ -267,7 +279,9 @@ class RELEASE_DATE_STATUS extends WEBCORE_OBJECT
     {
        $this->_html_text = $this->_as_text (FALSE);
       if ($this->icon)
+      {
         $this->_html_text = $this->icon . ' ' . $this->_html_text;
+      }
       $this->_html_text = '<span style="white-space: nowrap">' . $this->_html_text . '</span>';
     }
     return $this->_html_text;
@@ -283,7 +297,9 @@ class RELEASE_DATE_STATUS extends WEBCORE_OBJECT
     {
        $this->_plain_text = $this->_as_text (TRUE);
       if ($this->text)
+      {
         $this->_plain_text = $this->text . ' ' . $this->_plain_text;
+      }
     }
     return $this->_plain_text;
   }
@@ -296,7 +312,9 @@ class RELEASE_DATE_STATUS extends WEBCORE_OBJECT
   function date_as_text ($text_only)
   {
     if (isset ($this->date))
+    {
       return $this->_date ($this->date, $text_only);
+    }
   }
 
   /**
@@ -307,9 +325,12 @@ class RELEASE_DATE_STATUS extends WEBCORE_OBJECT
   function diff_as_text ($text_only)
   {
     if (isset ($this->difference) && ! $this->difference->is_empty ())
+    {
       return $this->difference->format (1);
-    else
-      return '';
+    }
+
+
+    return '';
   }
 
   /**
@@ -401,23 +422,35 @@ class RELEASE_DATE_STATUS extends WEBCORE_OBJECT
     $diff_text = $this->diff_as_text ($text_only);
 
     if ($this->overdue)
+    {
       $Result = "$date_text ($diff_text $this->diff_label)";
+    }
     else if ($this->occurred)
     {
       if ($diff_text)
+      {
         $Result = "$date_text ($diff_text $this->diff_label)";
+      }
       else
+      {
         $Result = $date_text;
+      }
     }
     else if ($this->scheduled)
     {
       if ($diff_text)
+      {
         $Result = "$diff_text $this->diff_label ($date_text)";
+      }
       else
+      {
         $Result = $date_text;
+      }
     }
     else
+    {
       $Result = 'Not scheduled';
+    }
       
     return $Result;
   }
@@ -442,7 +475,9 @@ class RELEASE_DATE_STATUS extends WEBCORE_OBJECT
 
       $Result = $date->format ($f);
       if (! $text_only)
+      {
         $Result = '<span class="visible" style="white-space: nowrap">' . $Result . '</span>';
+      }
     }
 
     return $Result;

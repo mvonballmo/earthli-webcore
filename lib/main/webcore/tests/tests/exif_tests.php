@@ -74,14 +74,22 @@ class EXIF_TEST_TASK extends TEST_TASK
     $this_url->append_folder ('images');
     $this_url->replace_name_and_extension ($filename);
     if ($this->_use_internal_exif)
+    {
       $image = new IMAGE ();
+    }
     else
+    {
       $image = new NON_INTERNAL_EXIF_IMAGE ();
+    }
     $image->set_file ($this_url->as_text (), TRUE);
     if ($image->properties->time_created->is_valid ())
+    {
       $this->_log ('Extracted date/time: ' . $image->properties->time_created->as_iso (), Msg_type_info);
+    }
     else
+    {
       $this->_log ('Could not extract date/time.', Msg_type_warning);
+    }
   }
 
   function _run_tests ()

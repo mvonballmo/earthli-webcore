@@ -110,7 +110,9 @@ class COMMENT_GRID extends SELECTABLE_GRID
     echo $type_info->singular_title . ' ';
     echo $entry->title_as_link ();
     if ($this->show_folder)
+    {
       echo ' in ' . $folder->title_as_link ();
+    }
   ?>)
   </div>
 <?php

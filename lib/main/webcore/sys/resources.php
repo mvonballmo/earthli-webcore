@@ -239,11 +239,15 @@ class RESOURCE_MANAGER extends RAISABLE
   {
     $Result = '';
     if (isset ($this->_paths [$alias]))
+    {
       $Result = $this->_paths [$alias];
+    }
     else
     {
       if (isset ($this->_parent_resources))
+      {
         $Result = $this->_parent_resources->path_for_alias ($alias);
+      }
     }
     return $Result;
   }
@@ -258,11 +262,15 @@ class RESOURCE_MANAGER extends RAISABLE
   {
     $Result = '';
     if (isset ($this->_extensions [$alias]))
+    {
       $Result = $this->_extensions [$alias];
+    }
     else
     {
       if (isset ($this->_parent_resources))
+      {
         $Result = $this->_parent_resources->extension_for_alias ($alias);
+      }
     }
     return $Result;
   }
@@ -431,9 +439,13 @@ class RESOURCE_MANAGER extends RAISABLE
       $text = $this->_text_options->convert_to_html_attribute ($text);
       $Result = "<img src=\"$url\" title=\"$text\" alt=\"$text\"";
       if ($dom_id)
+      {
         $Result .= " id=\"$dom_id\"";
+      }
       if ($style)
+      {
         $Result .= " style=\"$style\"";
+      }
       $Result .= ">";
       return $Result;
     }
@@ -460,7 +472,9 @@ class RESOURCE_MANAGER extends RAISABLE
         $Result = $url->as_text ();
       }
       else
+      {
         $Result = $base_url;
+      }
 
       return $this->resolve_file ($Result);
     }
@@ -476,7 +490,9 @@ class RESOURCE_MANAGER extends RAISABLE
   {
     $this->resolve_to_root = $value;
     if (isset ($this->_parent_resources))
+    {
       $this->_parent_resources->set_root_behavior ($value);
+    }
   }
 
   /**
@@ -491,7 +507,9 @@ class RESOURCE_MANAGER extends RAISABLE
   {
     $this->resolve_to_root = $this->_default_resolve_to_root ();
     if (isset ($this->_parent_resources))
+    {
       $this->_parent_resources->restore_root_behavior ();
+    }
   }
 
   /**
@@ -504,7 +522,9 @@ class RESOURCE_MANAGER extends RAISABLE
   {
     $path = $this->path_for_alias ($alias);
     if ($path)
+    {
       $this->_notify_listeners ($alias, $path);
+    }
   }
 
   /**
@@ -518,7 +538,9 @@ class RESOURCE_MANAGER extends RAISABLE
   function _notify_listeners ($alias, $path)
   {
     if (isset ($this->_listeners))
+    {
       $this->_listeners->execute (array (&$this, $alias, $path));
+    }
   }
 
   /**
@@ -568,10 +590,14 @@ class RESOURCE_MANAGER extends RAISABLE
     {
       $forced_root = $this->forced_root_for_alias ($alias);
       if (isset ($forced_root))
+      {
         $root_override = $forced_root;
+      }
 
       if ($this->caching_enabled && isset ($this->_cache [$alias]))
+      {
         $fragment = join_paths ($this->_cache [$alias], $fragment, $this->_url_options);
+      }
       else
       {
         $orig_alias = $alias;
@@ -585,9 +611,13 @@ class RESOURCE_MANAGER extends RAISABLE
         {
           $len = strlen ($orig_fragment);
           if ($len)
+          {
             $this->_cache [$orig_alias] = substr ($fragment, 0, -strlen ($orig_fragment));
+          }
           else
+          {
             $this->_cache [$orig_alias] = substr ($fragment, 0);
+          }
         }
       }
     }
@@ -609,9 +639,13 @@ class RESOURCE_MANAGER extends RAISABLE
   function _finalize_url ($url, $root_override)
   {
     if ($this->_needs_root ($url, $root_override))
+    {
       $url = join_paths ($this->root_url, $url, $this->_url_options);
+    }
     if (isset ($this->_parent_resources))
+    {
       $url = $this->_parent_resources->_finalize_url ($url, $root_override);
+    }
     return $url;
   }
 
@@ -634,13 +668,19 @@ class RESOURCE_MANAGER extends RAISABLE
         $end_of_alias = strpos ($fragment, $this->alias_close_delimiter, 1);
         $alias = substr ($fragment, 1, $end_of_alias - 1);
         if ($end_of_alias == strlen ($fragment) - 1)
+        {
           $fragment = '';
+        }
         else
         {
           if ($fragment [$end_of_alias + 1] == $this->_url_options->path_delimiter)
+          {
             $fragment = substr ($fragment, $end_of_alias + 2);
+          }
           else
+          {
             $fragment = substr ($fragment, $end_of_alias + 1);
+          }
         }
       }
     }
@@ -663,7 +703,9 @@ class RESOURCE_MANAGER extends RAISABLE
     {
       $ext = $this->extension_for_alias ($alias);
       if ($ext)
+      {
         $fragment .= '.' . $ext;
+      }
     }
 
     return $fragment;
@@ -686,18 +728,26 @@ class RESOURCE_MANAGER extends RAISABLE
     $Result = $this->root_url && ($this->resolve_to_root || ! empty ($root_override)) && ! (isset ($root_override) && ! $root_override);
     /* Check that the url is empty or does not begin with an anchor. */
     if ($Result)
+    {
       $Result = ! $url || ($url [0] != $this->anchor_delimiter);
+    }
     /* Check that the root is not already present. */
     if ($Result)
+    {
       $Result = strpos ($url, $this->root_url) !== 0;
+    }
     /* Check that the url does not already have a domain. */
     if ($Result)
+    {
       $Result = ! has_domain ($url, '', $this->_url_options);
+    }
     /* Check that the root has a domain or that the url does not begin
      * with a delimiter.
      */
     if ($Result)
+    {
       $Result = has_domain ($this->root_url, '', $this->_url_options) || ! begins_with_delimiter ($url, $this->_url_options);
+    }
     return $Result;
   }
 

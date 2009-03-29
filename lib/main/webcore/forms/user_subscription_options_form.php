@@ -259,14 +259,22 @@ class USER_SUBSCRIPTION_OPTIONS_FORM extends SUBSCRIPTION_FORM
       $obj->send_as_html = $this->value_for ('send_as_html');
 
       if ($this->value_for ('group_objects'))
+      {
         $obj->max_individual_messages = $this->value_for ('max_individual_messages');
+      }
       else
+      {
         $obj->max_individual_messages = 0;
+      }
 
       if ($this->value_for ('split_objects'))
+      {
         $obj->max_items_per_message = $this->value_for ('max_items_per_message');
+      }
       else
+      {
         $obj->max_items_per_message = 0;
+      }
 
       $obj->min_hours_to_wait = $this->value_for ('min_hours_to_wait');
 
@@ -286,8 +294,9 @@ class USER_SUBSCRIPTION_OPTIONS_FORM extends SUBSCRIPTION_FORM
         $user =& $user_query->object_at_email ($orig_email);
 
         if (isset ($user))
-          // matching user found for this subscriber
         {
+          // matching user found for this subscriber
+
           if ($orig_email != $new_email)
           {
             $user->email = $new_email;

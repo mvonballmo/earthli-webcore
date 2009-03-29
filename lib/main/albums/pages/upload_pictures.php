@@ -61,5 +61,7 @@ http://www.earthli.com/software/webcore/albums
     }
   }
   else
+  {
     $Page->raise_security_violation ('You are not allowed to upload pictures.', $folder);
+  }
 ?>

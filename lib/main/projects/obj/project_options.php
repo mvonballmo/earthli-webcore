@@ -161,7 +161,9 @@ class PROJECT_OPTIONS extends FOLDER_INHERITABLE_SETTINGS
   function release_warning_description ()
   {
     if (! $options->seconds_until_deadline)
+    {
       return 'None';
+    }
     else
     {
       switch ($this->seconds_until_deadline)
@@ -215,7 +217,9 @@ class PROJECT_OPTIONS extends FOLDER_INHERITABLE_SETTINGS
       $group_query = $this->app->group_query ();
       $group =& $group_query->object_at_id ($group_id);
       if (! empty ($group))
+      {
         $Result = $group->user_query ();
+      }
       break;
     }
     return $Result;

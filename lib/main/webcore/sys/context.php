@@ -340,11 +340,15 @@ class CONTEXT extends RESOLVER
     $extension_path = $this->env->library_path . 'plugins' . $sep . 'config' . $sep;
     $full_file_name = $extension_path . $file_name;
     if (file_exists ($full_file_name))
+    {
       return $full_file_name;
+    }
     $lib_path = $this->env->library_path . 'webcore' . $sep . 'config' . $sep;
     $full_file_name = $lib_path . $file_name;
     if (file_exists ($full_file_name))
+    {
       return $full_file_name;
+    }
 
     log_message("[$file_name] was not found in [$extension_path;$lib_path].", Msg_type_warning, Msg_channel_system);
   }
@@ -374,7 +378,9 @@ class CONTEXT extends RESOLVER
       $logger->set_file_name ($this->env->resolve_file ($opts->log_file_name));
 
       if ($this->env->debugging)
+      {
         $logger->set_enabled (Msg_type_all);
+      }
       else
       {
         $logger->set_enabled (Msg_type_all - Msg_type_all_debug);
@@ -434,9 +440,12 @@ class CONTEXT extends RESOLVER
   function make_tree_renderer ()
   {
     if ($this->dhtml_allowed ())
+    {
       return $this->make_object ('tree_renderer', 'DYNAMIC_TREE', 'webcore/gui/dynamic_tree.php');
-    else
-      return $this->make_object ('tree_renderer', 'STATIC_TREE', 'webcore/gui/static_tree.php');
+    }
+
+
+    return $this->make_object ('tree_renderer', 'STATIC_TREE', 'webcore/gui/static_tree.php');
   }
 
   /**

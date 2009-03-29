@@ -58,7 +58,9 @@ http://www.earthli.com/software/webcore
   }
 
   if (! sizeof ($folders) && $App->login->is_anonymous ())
+  {
     $Env->redirect_local ('log_in.php');
+  }
 
   $class_name = $App->final_class_name ('INDEX_PANEL_MANAGER', 'webcore/gui/panel.php');
   $panel_manager = new $class_name ($App, $folders);
@@ -82,9 +84,13 @@ http://www.earthli.com/software/webcore
     <div class="side-bar-title">
       <?php
         if (isset ($folder))
+        {
           echo $folder->title_as_html ();
+        }
         else
+        {
           echo $App->title;
+        }
       ?>
     </div>
     <div class="side-bar-body">
@@ -182,8 +188,8 @@ http://www.earthli.com/software/webcore
     </div>
     <?php
       if ($panel->num_objects () && $panel->uses_time_selector)
-        // don't show the bottom selector if there are no objects
       {
+        // don't show the bottom selector if there are no objects
     ?>
     <div class="menu-bar-bottom" style="text-align: center">
         <?php $panel_manager->display_time_menu (); ?>

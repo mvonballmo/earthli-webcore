@@ -50,11 +50,14 @@ http://www.earthli.com/software/webcore
     $form->process_existing ($comment);
     if ($form->committed ())
     {
-      if ($App->login->is_allowed (Privilege_set_comment, Privilege_hidden, $folder)
-          && ! $form->value_for ('purge'))
+      if ($App->login->is_allowed (Privilege_set_comment, Privilege_hidden, $folder) && ! $form->value_for ('purge'))
+      {
         $App->return_to_referer ($comment->home_page ());
+      }
       else
+      {
         $Env->redirect_local ($entry->home_page ());
+      }
     }
 
     $Page->title->add_object ($folder);
@@ -83,5 +86,7 @@ http://www.earthli.com/software/webcore
     $Page->finish_display ();
   }
   else
+  {
     $Page->raise_security_violation ('You are not allowed to delete this comment.', $folder);
+  }
 ?>

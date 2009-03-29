@@ -64,12 +64,18 @@ http://www.earthli.com/software/webcore
         foreach ($permissions as $permission)
           $ids [] = $permission->ref_id;      
         if (sizeof ($ids))
+        {
           $user_query->restrict_by_op ('usr.id', $ids, Operator_not_in);
+        }
   
         if (read_var ('show_anon'))
+        {
           $user_query->set_kind (Privilege_kind_anonymous);
+        }
         else
+        {
           $user_query->set_kind (Privilege_kind_registered);
+        }
   
         $class_name = $App->final_class_name ('USER_BROWSER_GRID', 'webcore/gui/user_browser_grid.php');
         $grid = new $class_name ($App);
@@ -83,8 +89,12 @@ http://www.earthli.com/software/webcore
       $Page->finish_display ();
     }
     else
+    {
       $Page->raise_security_violation ('You are not allowed to edit this folder\'s permissions.', $folder);
+    }
   }
   else
+  {
     $Page->raise_security_violation ('You are not allowed to view users.', $folder);
+  }
 ?>

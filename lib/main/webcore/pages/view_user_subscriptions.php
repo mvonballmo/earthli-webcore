@@ -34,13 +34,17 @@ http://www.earthli.com/software/webcore
     $subscriber =& $subscriber_query->object_at_email ($email);
 
     if (isset ($subscriber))
+    {
       $user =& $subscriber->user ();
+    }
     else
     {
       $user_query = $App->user_query ();
       $user =& $user_query->object_at_email ($email);
       if (! isset ($user))
+      {
         $Env->redirect_local ("create_subscriber.php?email=$email");
+      }
       else
       {
         $subscriber = $user->subscriber ();
@@ -105,8 +109,12 @@ http://www.earthli.com/software/webcore
       $Page->finish_display ();
     }
     else
+    {
       $Page->raise_security_violation ('You are not allowed to see the subscriptions for this user. Registered users must log in before they can view or update subscriptions.', $subscriber);
+    }
   }
   else
+  {
     $Page->raise_error ('Please enter an email address.');
+  }
 ?>

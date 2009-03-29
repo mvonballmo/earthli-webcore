@@ -153,7 +153,9 @@ class FORM extends WEBCORE_OBJECT
     $this->page->add_script_file ('{scripts}webcore_forms.js');
 
     if (! isset ($this->action))
+    {
       $this->action = $this->env->url (Url_part_file_name);
+    }
 
     $this->_form_based_field_names [] = 'submitted';
 
@@ -307,7 +309,9 @@ class FORM extends WEBCORE_OBJECT
           while ($idx_file < $cnt_file)
           {
             if ($this->num_errors ($field->id, $idx_file) == 0)
+            {
               $this->_process_uploaded_file ($field, $field->file_at ($idx_file), $form_is_valid);
+            }
             $idx_file++;
           }
         }
@@ -346,7 +350,9 @@ class FORM extends WEBCORE_OBJECT
   function load_from_object (&$obj)
   {
     if (isset ($this->captcha))
+    {
       $this->set_value ('verification_question', $this->captcha->encode ());
+    }
   }
 
   /**
@@ -355,7 +361,9 @@ class FORM extends WEBCORE_OBJECT
   function load_with_defaults ()
   {
     if (isset ($this->captcha))
+    {
       $this->set_value ('verification_question', $this->captcha->encode ());
+    }
   }
 
   /**
@@ -369,10 +377,14 @@ class FORM extends WEBCORE_OBJECT
        fields have been drawn, but no call to display that field's errors were made. */
 
     if ($this->env->debugging)
+    {
       $this->display_all_errors ();
+    }
 
     if (! isset ($renderer))
+    {
       $renderer = $this->make_renderer ();
+    }
 
     $this->_draw_form ($renderer);
 
@@ -387,9 +399,13 @@ class FORM extends WEBCORE_OBJECT
 <script type="text/javascript">
 <?php
   if (! empty ($scripts))
+  {
     echo $scripts;
+  }
   if ($this->allow_focus && $this->_initial_focus)
+  {
     echo '  ' . $this->js_form_name () . '.' . $this->_initial_focus . '.focus ();';
+  }
 ?>
 
 </script>
@@ -419,9 +435,13 @@ class FORM extends WEBCORE_OBJECT
   function errors_for ($id)
   {
     if (isset ($this->_errors [$id]))
+    {
       $Result = $this->_errors [$id];
+    }
     else
+    {
       $Result = array ();
+    }
     return $Result;
   }
 
@@ -470,7 +490,9 @@ class FORM extends WEBCORE_OBJECT
     }
 
     if (sizeof ($Result))
+    {
       $Result = join ('&amp;', $Result);
+    }
 
     return $Result;
   }
@@ -498,7 +520,9 @@ class FORM extends WEBCORE_OBJECT
           foreach ($field_names as $field_name)
           {
             if ($field->id == $field_name)
+            {
               array_splice ($this->_field_list, $idx, 1);
+            }
           }
         }
         $idx++;
@@ -561,7 +585,9 @@ class FORM extends WEBCORE_OBJECT
     {
       $file = $file_set->files [$index];
       if (isset ($file) && $file->is_valid ())
+      {
         return $file;
+      }
     }
   }
 
@@ -768,7 +794,9 @@ class FORM extends WEBCORE_OBJECT
   function set_initial_focus ($id)
   {
     if ($id)
+    {
       $this->_verify_id ($id, 'set_initial_focus');
+    }
     $this->_initial_focus = $id;
   }
 
@@ -816,9 +844,13 @@ class FORM extends WEBCORE_OBJECT
   function record_error ($id, $msg, $idx = null)
   {
     if (isset ($idx))
+    {
       $id .= $idx;
+    }
     if (! array_key_exists ($id, $this->_errors))
+    {
       $this->_errors [$id] = array ();
+    }
     array_push ($this->_errors [$id], $msg);
   }
 
@@ -832,7 +864,9 @@ class FORM extends WEBCORE_OBJECT
   function num_errors ($id, $idx = null)
   {
     if (isset ($idx))
+    {
       $id .= $idx;
+    }
     return isset ($this->_errors [$id]) && sizeof ($this->_errors [$id]);
   }
 
@@ -849,7 +883,9 @@ class FORM extends WEBCORE_OBJECT
   function error_at ($id, $index, $idx = null)
   {
     if (isset ($idx))
+    {
       $id .= $idx;
+    }
     return $this->_errors [$id][$index];
   }
 
@@ -901,9 +937,13 @@ class FORM extends WEBCORE_OBJECT
 
       $uploader =& $this->uploader ();
       if ($size)
+      {
         $size = min ($size, $uploader->ini_max_file_size);
+      }
       else
+      {
         $size = $uploader->ini_max_file_size;
+      }
 
       $this->_max_upload_file_size = $size;
     }
@@ -977,7 +1017,9 @@ class FORM extends WEBCORE_OBJECT
     {
       $question = $this->value_for ('verification_question');
       if ($question)
+      {
         $this->captcha->decode ($question);
+      }
     }
   }
 
@@ -995,7 +1037,9 @@ class FORM extends WEBCORE_OBJECT
     foreach ($this->_fields as $field)
     {
       if ($field->sticky)
+      {
         $field->store_to_client ($this, $s);
+      }
     }
     $s->finish_multiple_value ();
   }
@@ -1115,7 +1159,9 @@ class FORM extends WEBCORE_OBJECT
     {
       $this->attempt_action ($obj);
       if (! $this->committed ())
+      {
         $this->_apply_all_data ($obj, $load_action);
+      }
     }
     else
     {
@@ -1184,7 +1230,9 @@ class FORM extends WEBCORE_OBJECT
     if (isset ($this->captcha))
     {
       if (! $this->num_errors ('verification_answer') && ! $this->captcha->validate ($this->value_for ('verification_answer')))
+      {
         $this->record_error ('verification_answer', 'Please provide the correct answer.');
+      }
     }
   }
 
@@ -1269,7 +1317,9 @@ class FORM extends WEBCORE_OBJECT
     /* Update the maximum number of bytes allowed for upload. */
 
     if ($this->contains_uploads ())
+    {
       $this->set_value (Form_max_file_size_field_name, $this->max_upload_file_size ());
+    }
 
     /* Always reset the debug to be read from anywhere in the request, not just the form. */
 
@@ -1278,7 +1328,9 @@ class FORM extends WEBCORE_OBJECT
     foreach ($this->_fields as $field)
     {
       if (! $field->visible)
+      {
         $renderer->draw_hidden ($field->id);
+      }
     }
 
     $sub_field->set_value ($old_sub_value);
@@ -1293,16 +1345,22 @@ class FORM extends WEBCORE_OBJECT
   {
     $encoding = '';
     if ($this->contains_uploads ())
+    {
       $encoding = ' enctype="multipart/form-data"';
+    }
     $method = $this->method;
     if ($method == 'request')
+    {
       $method = 'post';
+    }
     $action = $this->action;
     if (isset ($this->action_anchor))
     {
       $browser = $this->env->browser ();
       if ($browser->supports (Browser_anchors_in_posts))
+      {
         $action = $action . '#' . $this->action_anchor;
+      }
     }
 ?>
 <form id="<?php echo $this->name; ?>" action="<?php echo $action; ?>" method="<?php echo $method; ?>"<?php echo $encoding; ?>>
@@ -1382,11 +1440,15 @@ class FORM extends WEBCORE_OBJECT
     if (sizeof ($errors))
     {
       if ($use_style)
+      {
         echo "<div class=\"error\">\n";
+      }
       foreach ($errors as $error)
         echo '<div>' . $error . '</div>';
       if ($use_style)
+      {
         echo "</div>\n";
+      }
     }
   }
 
@@ -1532,7 +1594,9 @@ class ID_BASED_FORM extends FORM
   {
     parent::load_from_object ($obj);
     if (isset ($obj->id))
+    {
       $this->set_value ('id', $obj->id);
+    }
   }
 }
 

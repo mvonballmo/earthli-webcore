@@ -38,7 +38,9 @@ http://www.earthli.com/software/webcore
     $Page->location->add_folder_link ($folder);
 
     if ($type == History_item_folder)
+    {
       $host =& $folder;
+    }
     else
     {
       $entry_query = $folder->entry_query ();
@@ -50,7 +52,9 @@ http://www.earthli.com/software/webcore
         $Page->location->add_object_link ($entry);
 
         if ($type == History_item_entry)
+        {
           $host =& $entry;
+        }
         else
         {
           $com_query = $entry->comment_query ();
@@ -85,11 +89,14 @@ http://www.earthli.com/software/webcore
     $form->process_existing ($attachment);
     if ($form->committed ())
     {
-      if ($App->login->is_allowed (Privilege_set_entry, Privilege_hidden, $folder)
-          && ! $form->value_for ('purge'))
+      if ($App->login->is_allowed (Privilege_set_entry, Privilege_hidden, $folder) && ! $form->value_for ('purge'))
+      {
         $App->return_to_referer ($attachment->home_page ());
+      }
       else
+      {
         $Env->redirect_local ($entry->home_page ());
+      }
     }
 
     $Page->title->add_object ($attachment);
@@ -114,5 +121,7 @@ http://www.earthli.com/software/webcore
     $Page->finish_display ();
   }
   else
+  {
     $Page->raise_security_violation ('You are not allowed to delete this attachment.', $folder);
+  }
 ?>

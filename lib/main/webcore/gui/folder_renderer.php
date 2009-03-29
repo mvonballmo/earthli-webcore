@@ -69,7 +69,9 @@ class FOLDER_RENDERER extends CONTENT_OBJECT_RENDERER
     $this->_echo_subscribe_status ($obj);
     
     if ($use_table)
+    {
       $box->finish_column_set ();
+    }
   }
 
   /**
@@ -85,9 +87,13 @@ class FOLDER_RENDERER extends CONTENT_OBJECT_RENDERER
   function _echo_html_descriptions (&$obj)
   {
     if ($obj->summary && $this->_options->show_as_summary)
+    {
       echo $obj->summary_as_html ();
+    }
     if ($obj->description && ! $this->_options->show_as_summary)
+    {
       echo $this->_echo_html_description ($obj);
+    }
   }
 
   /**
@@ -98,7 +104,9 @@ class FOLDER_RENDERER extends CONTENT_OBJECT_RENDERER
   function _echo_subscribe_status (&$obj)
   {
     if (! $obj->is_root ())
+    {
       $this->_echo_html_subscribed_toggle ($obj, 'subscribe_to_folder.php?id=' . $obj->id, Subscribe_folder);
+    }
   }
 }
 

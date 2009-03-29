@@ -34,7 +34,9 @@ http://www.earthli.com/software/webcore
 
   $form->process_new ($search);
   if ($form->committed ())
+  {
     $Env->redirect_local ($search->home_page ());
+  }
 
   $Page->title->subject = "Create $search_type search";
 

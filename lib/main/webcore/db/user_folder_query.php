@@ -130,7 +130,9 @@ class USER_FOLDER_QUERY extends OBJECT_IN_FOLDER_QUERY
       $this->db->logged_query ("SELECT folder_id FROM {$this->app->table_names->entries} WHERE id = $id");
 
       if ($this->db->next_record ())
+      {
         return $this->object_at_id ($this->db->f ("folder_id"));
+      }
     }
   }
 
@@ -149,7 +151,9 @@ class USER_FOLDER_QUERY extends OBJECT_IN_FOLDER_QUERY
                                " WHERE com.id = $id");
 
       if ($this->db->next_record ())
+      {
         return $this->object_at_id ($this->db->f ('folder_id'));
+      }
     }
   }
 
@@ -188,7 +192,9 @@ class USER_FOLDER_QUERY extends OBJECT_IN_FOLDER_QUERY
       }
 
       if ($type_known && $this->db->next_record ())
+      {
         return $this->object_at_id ($this->db->f ('folder_id'));
+      }
     }
   }
 
@@ -229,78 +235,106 @@ class USER_FOLDER_QUERY extends OBJECT_IN_FOLDER_QUERY
         if ($invis == Privilege_always_granted)
         {
           if ($this->_filter != All)
+          {
             $usable = "fldr.state & $this->_filter = fldr.state";
+          }
           else
+          {
             $usable = '1';
+          }
         }
         else
         {
           if ($invis == Privilege_always_denied)
+          {
             // all visible folders are returned, regardless of folder permissions
             // all invisible folders are blocked, regardless of folder permissions
-          {
+            
             $usable = "fldr.state & " . ($this->_filter & ~Invisible) . " = fldr.state";
               // Disallow any invisible folders
           }
           else
-            // Return all visible folders and only invisible folders with folder-level permissions
           {
+            // Return all visible folders and only invisible folders with folder-level permissions
+            
             if ($this->_filter & Visible)
             {
                 if ($this->_filter & Invisible)
+                {
                   $usable = "((fldr.state & " . Visible . ")" .
-                                  " OR ((fldr.state & " . Invisible . ") AND (perm.folder_permissions & " . Privilege_view_hidden . ")))" .
-                                  " AND (fldr.state & $this->_filter = fldr.state)";
+                            " OR ((fldr.state & " . Invisible . ") AND (perm.folder_permissions & " . Privilege_view_hidden . ")))" .
+                            " AND (fldr.state & $this->_filter = fldr.state)";
+                }
                 else
+                {
                   $usable = "(fldr.state & $this->_filter)";
+                }
             }
             else
             {
               if ($this->_filter & Invisible)
+              {
                 $usable = "((fldr.state & $this->_filter = fldr.state) AND (perm.folder_permissions & " . Privilege_view_hidden . "))";
+              }
               else
+              {
                 $this->raise ('Unreachable state (logic error)', '_prepare_restrictions', 'USER_FOLDER_QUERY');
+              }
             }
           }
         }
       }
       else
+      {
         // only those folders for which folder permissions allow this user are returned
+      }
       {
         $join_type = "INNER";
 
         if ($invis == Privilege_always_denied)
-          // no invisible folders are returned, regardless of folder permissions
         {
+          // no invisible folders are returned, regardless of folder permissions
+
           $usable = "(fldr.state & " . ($this->_filter & ~Invisible) . " = fldr.state) AND (perm.folder_permissions & " . Privilege_view . ")";
         }
         else
         {
           if ($invis == Privilege_always_granted)
+          {
             // all folder-granted visible folders and all invisible folders, regardless
             // of whether invisible is granted (view_folder is sufficient)
-          {
+            
             $usable = "(perm.folder_permissions & " . Privilege_view . ") AND (fldr.state & $this->_filter = fldr.state)";
           }
           else
+          {
             // no user-rights case: all visible folders with view_folder permissions
+          }
             // all invisible folders with view_folder, view_invisible permissions
           {
             if ($this->_filter & Visible)
             {
-                if ($this->_filter & Invisible)
-                  $usable = "(perm.folder_permissions & " . Privilege_view . ") AND ((fldr.state & " . Visible . ")" .
-                           " OR ((fldr.state & " . Invisible . ") AND (perm.folder_permissions & " . Privilege_view_hidden .")))" .
-                           " AND (fldr.state & $this->_filter = fldr.state)";
-                else
-                  $usable = "(perm.folder_permissions & " . Privilege_view . ") AND (fldr.state & $this->_filter = fldr.state)";
+              if ($this->_filter & Invisible)
+              {
+                $usable = "(perm.folder_permissions & " . Privilege_view . ") AND ((fldr.state & " . Visible . ")" .
+                          " OR ((fldr.state & " . Invisible . ") AND (perm.folder_permissions & " . Privilege_view_hidden .")))" .
+                          " AND (fldr.state & $this->_filter = fldr.state)";
+              }
+              else
+              {
+                $usable = "(perm.folder_permissions & " . Privilege_view . ") AND (fldr.state & $this->_filter = fldr.state)";
+              }
             }
             else
             {
               if ($this->_filter & Invisible)
+              {
                 $usable = "(perm.folder_permissions & " . Privilege_view . ") AND (perm.folder_permissions & " . Privilege_view_hidden . ") AND (fldr.state & $this->_filter = fldr.state)";
+              }
               else
+              {
                 $this->raise ('Unreachable state (logic error)', '_prepare_restrictions', 'USER_FOLDER_QUERY');
+              }
             }
           }
         }
@@ -316,19 +350,24 @@ class USER_FOLDER_QUERY extends OBJECT_IN_FOLDER_QUERY
                          " LEFT JOIN {$this->app->table_names->users_to_groups} utg ON utg.group_id = grp.id";
 
         if ($this->_num_records)
+        {
           // this query is special and can't use the LIMIT function
           // so record the number of records elsewhere. The record
           // count will be limited with '_is_valid_object'
-        {
+          
           $this->_num_folders = $this->_num_records;
           $this->_first_folder = $this->_first_record;
           $this->_num_records = 0;
         }
 
         if ($this->login->is_anonymous ())
+        {
           $global_type = Privilege_kind_anonymous;
+        }
         else
+        {
           $global_type = Privilege_kind_registered;
+        }
 
         $user_id = $this->login->id;
 
@@ -373,13 +412,19 @@ class USER_FOLDER_QUERY extends OBJECT_IN_FOLDER_QUERY
     while ($db->next_record ())
     {
       if ($this->_is_valid_object ($db))
+      {
         $ids [] = $db->f ('id');
+      }
     }
     
     if (isset ($ids))
+    {
       $Result = implode (", ", $ids);
+    }
     else
+    {
       $Result = '';
+    }
 */
     $Result = $this->$func_name ();
 
@@ -458,7 +503,9 @@ class USER_FOLDER_QUERY extends OBJECT_IN_FOLDER_QUERY
       if ($this->_num_folders)
       {
         if ($this->_num_folders_counted < $this->_first_folder)
+        {
           $this->_num_folders_counted++;
+        }
         else
         {
           $this->_num_folders_counted++;

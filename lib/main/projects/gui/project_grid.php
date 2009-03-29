@@ -78,7 +78,9 @@ class PROJECT_GRID extends FOLDER_GRID
 
       $t = $obj->title_formatter ();
       if (sizeof ($obj->sub_folders ()))
+      {
         $t->add_argument ('panel', 'projects');
+      }
       echo $obj->icon_as_html () . ' ' . $obj->title_as_link ($t);
     ?>
   </div>

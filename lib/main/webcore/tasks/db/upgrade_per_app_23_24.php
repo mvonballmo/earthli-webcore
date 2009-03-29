@@ -38,7 +38,9 @@ class UPGRADE_PER_APP_23_24_TASK extends MIGRATOR_TASK
     {
       $id = $Page->database->f ('id');
       if (! $id)
+      {
         $id = $Page->database->f ('entry_id');
+      }
 
       switch ($obj_type)
       {
@@ -78,8 +80,10 @@ class UPGRADE_PER_APP_23_24_TASK extends MIGRATOR_TASK
       $time_modified = $obj [2];
 
       if ($time_modified != $time_created)
+      {
         $this->_query ("INSERT INTO $table_name (object_id, object_type, user_id, access_id, kind, time_created, publication_state, title)" .
                        " VALUES($id, '$obj_type', $modifier_id, $access_id, 'Updated', '$time_modified', '$pub', 'Updated')");
+      }
     }
   }
 

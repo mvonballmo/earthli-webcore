@@ -40,5 +40,7 @@ http://www.earthli.com/software/webcore
     include_once ('webcore/pages/view_history.php');
   }
   else
+  {
     $Page->raise_security_violation ('You are not allowed to view this folder\'s history.');
+  }
 ?>

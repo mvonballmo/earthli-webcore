@@ -52,9 +52,12 @@ if (! function_exists ('is_a'))
   {
     $class_name = strtolower ($class_name);
     if (get_class ($object) == $class_name)
+    {
       return TRUE;
-    else
-      return is_subclass_of ($object, $class_name);
+    }
+
+
+    return is_subclass_of ($object, $class_name);
   }
 }
 

@@ -65,9 +65,13 @@ class BITS
   function set_enabled ($flag, $enabled)
   {
     if ($enabled)
+    {
       $this->set ($flag);
+    }
     else
+    {
       $this->clear ($flag);
+    }
   }
 
   /**

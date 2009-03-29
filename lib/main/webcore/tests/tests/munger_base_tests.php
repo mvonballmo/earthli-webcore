@@ -114,9 +114,13 @@ class MUNGER_BASE_TEST_TASK extends TEST_TASK
     ob_end_clean ();
 
     if (! $this->_num_errors)
+    {
       echo "<p>Congratulations! All [$this->_num_tests] tests have completed successfully.</p>";
+    }
     else
+    {
       echo "<p class=\"error\">Oops! You failed [$this->_num_errors] of [$this->_num_tests] tests.</p>";
+    }
 
     echo $errors;
   }
@@ -265,9 +269,13 @@ don't
         }
 
         if ($this->show_white_space)
+        {
           $data = str_replace ("\t", "<span class=\"disabled\">\xBB</span>\t", str_replace ("\n", "<span class=\"disabled\">\xAC</span>\n", htmlspecialchars ($token->data ())));
+        }
         else
+        {
           $data = htmlspecialchars ($token->data ());
+        }
         $size = $token->size;
 
         $token_content .= "[$type][$size]: $data<br>\n";
@@ -275,7 +283,9 @@ don't
     }
 
     if (($count != $expected_token_count) || ($this->show_tokens))
+    {
       echo "<hr style=\"clear: both\">\n";
+    }
 
     if (($count == $expected_token_count) && ($this->show_tokens))
     {
@@ -293,7 +303,9 @@ don't
     }
 
     if (($count != $expected_token_count) || ($this->show_tokens))
+    {
       echo $token_content;
+    }
   }
 
   function _test_attributes ($input, $expected_prop_count)

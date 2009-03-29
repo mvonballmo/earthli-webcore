@@ -105,10 +105,12 @@ class SEND_MULTIPLE_MAIL_FORM extends SEND_MAIL_FORM
 
     $opts =& $this->app->mail_options;
 
-    if (($this->login->is_anonymous () && (sizeof ($this->recipient_list) > $opts->max_anonymous_recipients))
-        || (! $this->login->is_anonymous () && (sizeof ($this->recipient_list) > $opts->max_registered_recipients)))
+    if (($this->login->is_anonymous () && (sizeof ($this->recipient_list) > $opts->max_anonymous_recipients)) || 
+      (! $this->login->is_anonymous () && (sizeof ($this->recipient_list) > $opts->max_registered_recipients)))
+    {
       $this->record_error ('recipients', "Guests are only allowed to send mail to at most {$opts->max_anonymous_recipients} users." .
                            " <br>Registered users are allowed {$opts->max_anonymous_recipients}, so log in if you have an account.");
+    }
   }
 
   /**

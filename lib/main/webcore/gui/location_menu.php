@@ -60,7 +60,9 @@ class LOCATION_MENU extends MENU
   function add_application_link ()
   {
     if (isset ($this->page->app) && $this->page->app->short_title)
+    {
       $this->prepend ($this->page->app->short_title, $this->page->app->path_to (Folder_name_application));
+    }
   }
 
   /**
@@ -73,9 +75,13 @@ class LOCATION_MENU extends MENU
   function add_root_link ($include_application = TRUE)
   {
     if ($include_application)
+    {
       $this->add_application_link ();
+    }
     if ($this->env->title)
+    {
       $this->prepend ($this->env->title, $this->page->path_to (Folder_name_root));
+    }
   }
   
   /**
@@ -95,9 +101,13 @@ class LOCATION_MENU extends MENU
       $t = $parent->title_formatter ();
       $t->CSS_class = 'nav-item';
       if ($page_url)
+      {
         $t->set_name ($page_url);
+      }
       if ($page_args)
+      {
         $t->add_arguments ($page_args);
+      }
       
       $this->prepend ($parent->title_as_link ($t));
       $parent =& $parent->parent_folder ();
@@ -132,7 +142,9 @@ class LOCATION_MENU extends MENU
     $t = $obj->title_formatter ();
     $t->CSS_class = 'nav-item';
     if ($page_args)
+    {
       $t->add_arguments ($page_args);
+    }
     $this->append ($obj->title_as_link ($t));
   }
 

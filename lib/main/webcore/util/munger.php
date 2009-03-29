@@ -277,9 +277,13 @@ class MUNGER_TOKEN
           while ($attr_idx < $num_attrs)
           {
             if ($attr_idx % 2 == 0)
+            {
               $attr_name = trim(substr($attrs[$attr_idx], 0, -1));
+            }
             else
+            {
               $Result[$attr_name] = $attrs[$attr_idx];
+            }
 
             $attr_idx++;
           }
@@ -924,7 +928,9 @@ class MUNGER_MACRO_REPLACER extends MUNGER_REPLACER
               foreach ($converters as $name => $converter)
               {
                 if ($name != 'tags')
+                {
                   $converters[$name]->enabled = $enabled;
+                }
               }
               break;
             default :
@@ -1399,9 +1405,13 @@ class MUNGER_LIST_TRANSFORMER extends MUNGER_TRANSFORMER
     $num_chars = $len;
 
     if ($text[0] == "\n")
+    {
       $first_char = 1;
+    }
     if ($text[$len -1] == "\n")
+    {
       $num_chars = -1;
+    }
 
     if (($first_char > 0) || ($num_chars <> $len))
     {
@@ -1483,7 +1493,9 @@ class MUNGER_DEFINITION_LIST_TRANSFORMER extends MUNGER_LIST_TRANSFORMER
   function activate(&$munger, $value, &$token)
   {
     if ($value)
+    {
       $this->_term_needed = TRUE;
+    }
   }
 
   /**
@@ -2239,7 +2251,7 @@ class MUNGER extends MUNGER_PARSER
    */
   function _close_open_tags()
   {
-    while ($tag = array_pop($this->_open_tags))
+    while (($tag = array_pop($this->_open_tags)))
     {
       $this->_transform_block($tag, $this->_end_tag_token_for($tag->token));
     }

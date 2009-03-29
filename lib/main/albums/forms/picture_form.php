@@ -171,10 +171,13 @@ class PICTURE_FORM extends ALBUM_ENTRY_FORM
     {
       $file = $this->upload_file_for ('upload_file');
       if (isset ($file))
+      {
         return $file->current_name ();
+      }
     }
-    else
-      return $this->value_as_text ('file_name');
+
+
+    return $this->value_as_text ('file_name');
   }
 
   /**
@@ -205,7 +208,9 @@ class PICTURE_FORM extends ALBUM_ENTRY_FORM
       $url = $obj->location ();
       $creator->create_thumbnail_for ($url->as_text (), $this->value_for ('thumbnail_size'));
       if ($creator->error_message)
+      {
         $this->record_error ('create_thumbnail', $creator->error_message);
+      }
     }
   }
 
@@ -226,7 +231,9 @@ class PICTURE_FORM extends ALBUM_ENTRY_FORM
 
     $obj->file_name = $file_name;
     if (isset ($this->_exif_date))
+    {
       $obj->date = $this->_exif_date;
+    }
   }
 
   /**
@@ -266,14 +273,20 @@ class PICTURE_FORM extends ALBUM_ENTRY_FORM
         $img = new $class_name ();
         $img->set_file ($file_name, TRUE);
         if ($img->properties->exists () && $img->properties->time_created->is_valid ())
+        {
           $this->_exif_date = $img->properties->time_created;
+        }
         else
+        {
           $this->record_error ('day', 'Could not extract date information from the picture.');
+        }
       }
     }
 
     if (! $this->value_for ('read_exif') && $this->value_is_empty ('day'))
+    {
       $this->record_error ('day', 'Please set a date.');
+    }
   }
 
   /**
@@ -287,9 +300,12 @@ class PICTURE_FORM extends ALBUM_ENTRY_FORM
   function _upload_file_copy_mode (&$field, &$file, $form_is_valid)
   {
     if (! $this->previewing () && $this->value_for ('overwrite'))
+    {
       return Uploaded_file_overwrite;
-    else
-      return Uploaded_file_unique_name;
+    }
+
+
+    return Uploaded_file_unique_name;
   }
 
   /**
@@ -373,9 +389,13 @@ class PICTURE_FORM extends ALBUM_ENTRY_FORM
     $this->set_enabled ('overwrite', $is_uploading);
     $this->set_enabled ('upload_file', $is_uploading);
     if (! $upload_allowed || $upload_found)
+    {
       $renderer->draw_hidden ('use_upload');
+    }
     if ($upload_found)
+    {
       $renderer->draw_hidden ('overwrite');
+    }
 
     $renderer->start ();
 
@@ -454,9 +474,13 @@ class PICTURE_FORM extends ALBUM_ENTRY_FORM
       $props->width = '30em';
       $props->on_click_script = 'on_date_changed (this)';
       if (isset ($this->_exif_date))
+      {
         $caption = 'Use <span class="field">' . $this->_exif_date->format () . '</span> (snapshot date)';
+      }
       else
+      {
         $caption = 'Use date stored by a digital camera';
+      }
       $props->add_item ($caption, 1);
       $props->add_item ('Use the date below', 0);
       $renderer->start_row ();

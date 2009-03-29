@@ -147,7 +147,9 @@ class TIME_FRAME_SELECTOR extends WEBCORE_OBJECT
   function prepare_query (&$query)
   {
     if (! $query)
+    {
       $this->raise ("'query' cannot be empty", 'prepare_query', 'TIME_FRAME_SELECTOR');
+    }
 
     switch ($this->period)
     {

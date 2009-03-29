@@ -241,7 +241,9 @@ class PRINT_PREVIEW extends WEBCORE_OBJECT
         $i++;
 
         if ($i <= $c - 1)
+        {
           $this->_draw_separator ();
+        }
       }
 
       $this->_draw_finish ();
@@ -306,7 +308,9 @@ class PRINT_PREVIEW extends WEBCORE_OBJECT
     $class_name = strtoupper (get_class ($entry));
     $Result =& $this->_renderers [$class_name];
     if (! $Result)
+    {
       $Result = $this->_make_renderer ($class_name);
+    }
     return $Result;
   }
 

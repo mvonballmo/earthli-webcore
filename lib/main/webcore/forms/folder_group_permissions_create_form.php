@@ -87,19 +87,24 @@ class FOLDER_GROUP_PERMISSIONS_CREATE_FORM extends FOLDER_PERMISSIONS_FORM
     parent::_post_validate ($obj);
 
     if (! $this->num_errors ('group_name'))
-      // the name validated OK (specifically, it is not empty)
     {
+      // the name validated OK (specifically, it is not empty)
+      
       $this->_group =& $this->_group_query->object_with_field ('title', $this->value_for ('group_name'));
 
       if (! $this->_group)
+      {
         $this->record_error ('group_name', "Please choose a valid group.");
+      }
 
       if (! $this->num_errors ('group_name'))
       {
         $security =& $this->_folder->security_definition ();
         $group =& $security->group_permissions_at_id ($this->_group->id);
         if (isset ($group))
+        {
           $this->record_error ('group_name', "That group already has permissions in this folder.");
+        }
       }
     }
   }

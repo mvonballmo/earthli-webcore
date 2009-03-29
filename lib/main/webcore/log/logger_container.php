@@ -65,7 +65,9 @@ class LOGGER_CONTAINER extends RAISABLE
   function set_logger (&$logger, $copy_settings = TRUE)
   {
     if ($copy_settings && $this->logger)
+    {
       $this->logger->copy_settings_to ($logger);
+    }
     $this->logger =& $logger;
   }
 
@@ -80,9 +82,13 @@ class LOGGER_CONTAINER extends RAISABLE
   function add_logger (&$logger, $copy_settings = TRUE)
   {
     if (isset ($this->logger))
+    {
       $this->logger->add_logger ($logger, $copy_settings);
+    }
     else
+    {
       $this->set_logger ($logger, $copy_settings);
+    }
   }
   
   /**
@@ -96,12 +102,18 @@ class LOGGER_CONTAINER extends RAISABLE
       if (is_a ($this->logger, $class_name))
       {
         if (isset ($this->logger->logger))
+        {
           $this->logger =& $this->logger->logger;
+        }
         else
+        {
           $this->logger = null; 
+        }
       }
       if (isset ($this->logger))
+      {
         $this->logger->remove_loggers_of_type ($class_name);
+      }
     }
   }
 
@@ -112,7 +124,9 @@ class LOGGER_CONTAINER extends RAISABLE
   function close_all ()
   {
     if (isset ($this->logger))
+    {
       $this->logger->close ();
+    }
   }
 }
 

@@ -36,7 +36,9 @@ http://www.earthli.com/software/webcore
 
     $form->process_existing ($search);
     if ($form->committed ())
+    {
       $Env->redirect_local ("view_searches.php");
+    }
 
     $Page->title->add_object ($search);
     $Page->title->subject = 'Delete search';
@@ -59,5 +61,7 @@ http://www.earthli.com/software/webcore
     $Page->finish_display ();
   }
   else
+  {
     $Page->raise_security_violation ('You are not allowed to delete this search.', $search);
+  }
 ?>

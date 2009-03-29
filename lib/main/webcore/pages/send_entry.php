@@ -48,7 +48,9 @@ http://www.earthli.com/software/webcore
 
     $form->process_existing ($entry);
     if ($form->committed ())
+    {
       $App->return_to_referer ($entry->home_page ());
+    }
 
     $Page->title->add_object ($folder);
     $Page->title->add_object ($entry);
@@ -74,5 +76,7 @@ http://www.earthli.com/software/webcore
       $Page->finish_display ();
   }
   else
+  {
     $Page->raise_security_violation ("You are not allowed to view this {$entry_type_info->singular_title}.", $folder);
+  }
 ?>

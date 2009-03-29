@@ -111,25 +111,37 @@ class EXCEPTION_SIGNATURE
     $this->class_name = $class_name;
 
     if (isset ($obj) && isset ($obj->env))
+    {
       $this->page_name = $obj->env->url ();
+    }
     else
+    {
       $this->page_name = "http://{$_SERVER ['HTTP_HOST']}{$_SERVER ['SCRIPT_NAME']}";
+    }
 
     if (isset ($obj) && isset ($obj->app))
+    {
       $this->application_description = $obj->app->description ();
+    }
 
     if ($class_name)
     {
       $this->scope = "$class_name.$routine_name";
       if (isset ($obj))
+      {
         $this->dynamic_class_name = strtoupper (get_class ($obj));
+      }
 
       $this->is_derived_type = isset ($this->dynamic_class_name) && ($this->dynamic_class_name != $class_name);
     }
     else if ($routine_name)
-      $this->scope = $routine_name;
+ {
+   $this->scope = $routine_name;
+ }
     else
+    {
       $this->scope = 'global scope';
+    }
   }
 
   /**
@@ -170,7 +182,9 @@ class EXCEPTION_SIGNATURE
   function variables_for ($type)
   {
     if (isset ($this->_variables [$type]))
+    {
       return $this->_variables [$type];
+    }
   }
 
   /**
@@ -187,7 +201,9 @@ class EXCEPTION_SIGNATURE
     foreach ($params as $name => $value)
     {
       if (! empty ($Result))
+      {
         $Result .= '&';
+      }
       $Result .= $name . '=' . $value;
     }
 
@@ -219,7 +235,9 @@ class EXCEPTION_SIGNATURE
       foreach ($fields as $name => $value)
       {
         if (! array_key_exists ($name, $params))
+        {
           $Result .= "<input type=\"hidden\" name=\"$name\" value=\"$value\">\n";
+        }
       }
     }
 
@@ -229,7 +247,9 @@ class EXCEPTION_SIGNATURE
       foreach ($fields as $name => $value)
       {
         if (! array_key_exists ($name, $params))
+        {
           $Result .= "<input type=\"hidden\" name=\"$name\" value=\"$value\">\n";
+        }
       }
     }
 
@@ -285,7 +305,9 @@ class EXCEPTION_SIGNATURE
     if (isset ($this->_variables))
     {
       if (isset ($this->_variables [$title]))
+      {
         $arr = $this->_variables [$title];
+      }
     }
     else
     {
@@ -298,9 +320,13 @@ class EXCEPTION_SIGNATURE
       foreach ($arr as $name => $value)
       {
         if (is_array ($value))
+        {
           $to_array [$title . $name] = $this->_encode_value(join (',', $value));
+        }
         else
+        {
           $to_array [$title . $name] = $this->_encode_value($value);
+        }
       }
     }
   }

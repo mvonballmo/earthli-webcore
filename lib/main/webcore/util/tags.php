@@ -131,7 +131,9 @@ class CSS_STYLE_BUILDER
     if ($value)
     {
       if ($this->_text)
+      {
         $this->_text .= '; ';
+      }
        
 			$text_options =& global_text_options ();
  
@@ -159,7 +161,9 @@ class CSS_STYLE_BUILDER
     if ($CSS)
     {
       if ($this->_text)
+      {
         $this->_text .= '; ';
+      }
       $this->_text .= $CSS;
     }
   }

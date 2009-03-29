@@ -107,7 +107,9 @@ class RELEASE_UPDATER extends WEBCORE_OBJECT
       while (! $curr_idx && ($idx < sizeof ($releases)))
       {
         if ($releases [$idx]->id == $this->release->id)
+        {
           $curr_idx = $idx;
+        }
         $idx++;
       }
 
@@ -115,11 +117,15 @@ class RELEASE_UPDATER extends WEBCORE_OBJECT
       {
         $curr_idx--;
         if ($releases [$curr_idx]->planned ())
+        {
           $this->_replacement_release = $releases [$curr_idx];
+        }
       }
 
       if (! isset ($this->_replacement_release))
+      {
         $this->_replacement_release = null;
+      }
     }
 
     return $this->_replacement_release;
@@ -158,7 +164,9 @@ class RELEASE_UPDATER extends WEBCORE_OBJECT
             $this->$applier_func ($branch_info);
 
             if ($branch_info->branch_id == $entry->main_branch_id)
+            {
               $entry->set_main_branch_info ($branch_info);
+            }
 
             $this_branch_info = $branch_info;
           }
@@ -181,9 +189,12 @@ class RELEASE_UPDATER extends WEBCORE_OBJECT
   {
     $rel =& $this->replacement_release ();
     if (isset ($rel))
+    {
       return $rel->id;
-    else
-      return 0;
+    }
+
+
+    return 0;
   }
 }
 

@@ -119,14 +119,22 @@ class CHANGE extends PROJECT_ENTRY
   function raw_title ()
   {
     if (isset ($this->number))
+    {
       $number = '#' . $this->number;
+    }
     else
+    {
       $number = '#???';
+    }
     $Result = parent::raw_title ();
     if ($Result)
+    {
       $Result = "$number - $Result";
+    }
     else
+    {
       $Result = $number;
+    }
     return $Result;
   }
 
@@ -196,7 +204,9 @@ class CHANGE extends PROJECT_ENTRY
                              " INNER JOIN {$this->app->table_names->entries} entry on chng.entry_id = entry.id" .
                              " WHERE folder_id = " . $this->parent_folder_id ());
     if ($this->db->next_record ())
+    {
       $this->number = $this->db->f (0) + 1;
+    }
 
     parent::_create ();
   }

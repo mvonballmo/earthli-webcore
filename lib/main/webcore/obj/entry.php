@@ -139,7 +139,9 @@ class ENTRY extends ATTACHMENT_HOST
     $folder_url = $folder->_object_url ($use_links, $separator, $formatter);
 
     if (! isset ($separator))
+    {
       $separator = $this->app->display_options->obj_url_separator;
+    }
 
     return $folder_url . $separator . $Result;
   }
@@ -366,9 +368,12 @@ class DRAFTABLE_ENTRY extends ENTRY
   function modified ()
   {
     if ($this->time_published->is_valid ())
+    {
       return ! $this->time_published->equals ($this->time_modified);
-    else
-      return parent::modified ();
+    }
+
+
+    return parent::modified ();
   }
 
   /**
@@ -386,9 +391,12 @@ class DRAFTABLE_ENTRY extends ENTRY
       return 'Queued';
     default:
       if ($this->unpublished ())
+      {
         return 'Unpublished';
-      else
-        return parent::state_as_string ();
+      }
+
+
+      return parent::state_as_string ();
     }
   }
 
@@ -442,9 +450,12 @@ class DRAFTABLE_ENTRY extends ENTRY
   function history_item_kind_for_new ()
   {
     if ($this->visible ())
+    {
       return History_item_published;
-    else
-      return History_item_created;
+    }
+
+
+    return History_item_created;
   }
 
   /**
@@ -455,15 +466,24 @@ class DRAFTABLE_ENTRY extends ENTRY
   function history_item_kind_for_transition_to ($state)
   {
     if (($this->unpublished ()) && ($state == Visible))
+    {
       return History_item_published;
+    }
     else if (($state & Unpublished) && $this->visible ())
-      return History_item_unpublished;
+ {
+   return History_item_unpublished;
+ }
     else if ($state == Queued)
-      return History_item_queued;
+ {
+   return History_item_queued;
+ }
     else if ($state == Abandoned)
-      return History_item_abandoned;
-    else
-      return parent::history_item_kind_for_transition_to ($state);
+ {
+   return History_item_abandoned;
+ }
+
+
+    return parent::history_item_kind_for_transition_to ($state);
   }
 
   /**
@@ -474,9 +494,13 @@ class DRAFTABLE_ENTRY extends ENTRY
   function _copy_to (&$fldr, &$options)
   {
     if ($options->copy_as_draft)
+    {
       $this->state = Draft;
+    }
     else
+    {
       $this->state = Visible;
+    }
     parent::_copy_to ($fldr, $options);
   }
 

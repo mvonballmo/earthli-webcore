@@ -128,7 +128,9 @@ class USER_QUERY extends QUERY
   function _prepare_restrictions ()
   {
     if (isset ($this->_kind))
+    {
       $this->_calculated_restrictions [] = "usr.kind = '$this->_kind'";
+    }
   }
 
   /**
@@ -141,9 +143,12 @@ class USER_QUERY extends QUERY
   function _visible_objects_available ()
   {
     if (isset ($this->login))
+    {
       return $this->login->is_allowed ($this->_privilege_set, Privilege_view);
-    else
-      return TRUE;
+    }
+
+
+    return TRUE;
 
   }
 
@@ -157,9 +162,12 @@ class USER_QUERY extends QUERY
   function _invisible_objects_available ()
   {
     if (isset ($this->login))
+    {
       return $this->login->is_allowed ($this->_privilege_set, Privilege_view_hidden);
-    else
-      return TRUE;
+    }
+
+
+    return TRUE;
   }
 
   /**

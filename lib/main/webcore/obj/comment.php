@@ -95,7 +95,9 @@ class COMMENT extends ATTACHMENT_HOST
   function parent_folder_id ()
   {
     if (isset ($this->_parent_folder))
+    {
       return $this->_parent_folder->id;
+    }
 
     $entry =& $this->entry ();
     return $entry->parent_folder_id ();
@@ -114,7 +116,9 @@ class COMMENT extends ATTACHMENT_HOST
     $Result->restrict ("com.parent_id = $this->id");
 
     if (isset ($this->_sub_comments))
+    {
       $Result->cache ($this->_sub_comments);
+    }
 
     return $Result;
   }
@@ -180,7 +184,9 @@ class COMMENT extends ATTACHMENT_HOST
   {
     $props = $this->app->display_options->comment_icons ();
     if (isset ($props [$this->kind - 1]))
+    {
       return $props [$this->kind - 1];
+    }
     else
     {
       $prop = new PROPERTY_VALUE ($this->app);
@@ -219,14 +225,22 @@ class COMMENT extends ATTACHMENT_HOST
   function raw_title ()
   {
     if (isset ($this->number))
+    {
       $number = '#' . $this->number;
+    }
     else
+    {
       $number = '#???';
+    }
     $Result = parent::raw_title ();
     if ($Result)
+    {
       $Result = "$number - $Result";
+    }
     else
+    {
       $Result = $number;
+    }
     return $Result;
   }
 
@@ -272,9 +286,13 @@ class COMMENT extends ATTACHMENT_HOST
   {
     $this->db->logged_query ("SELECT MAX(number) FROM {$this->app->table_names->comments} WHERE entry_id = $this->entry_id");
     if ($this->db->next_record ())
+    {
       $this->number = $this->db->f (0) + 1;
+    }
     else
+    {
       $this->number = 1;
+    }
 
     parent::_create ();
   }
@@ -344,7 +362,9 @@ class COMMENT extends ATTACHMENT_HOST
     $entry_url = $entry->_object_url ($use_links, $separator, $formatter);
 
     if (! isset ($separator))
+    {
       $separator = $this->app->display_options->obj_url_separator;
+    }
 
     return $entry_url . $separator . $Result;
   }

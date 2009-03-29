@@ -98,7 +98,9 @@ class EXECUTE_SEARCH_FORM extends ID_BASED_FORM
     $type = $entry_type_infos [0]->id;
 
     if (isset ($this->_search))
+    {
       $search->fields->add_fields ($this);    
+    }
     else
     {
       $this->CSS_class = 'quick-search';
@@ -133,7 +135,9 @@ class EXECUTE_SEARCH_FORM extends ID_BASED_FORM
 
     /* Set the first entry type as the default search. */
     if (! empty ($entry_type_infos))
+    {
       $this->set_value ('type', $type);
+    }
   }
 
   function load_with_defaults ()
@@ -146,7 +150,9 @@ class EXECUTE_SEARCH_FORM extends ID_BASED_FORM
       $this->set_value ('quick_search', FALSE);
     }
     if ($this->is_field ('folder_search_type'))
+    {
       $this->set_value ('folder_search_type', Search_user_context_none);
+    }
   }
 
   /**
@@ -172,7 +178,9 @@ class EXECUTE_SEARCH_FORM extends ID_BASED_FORM
   {
     parent::_post_validate ($obj);
     if (isset ($this->_search))
+    {
       $this->_search->fields->validate ($this, $obj);
+    }
   }
 
   /**

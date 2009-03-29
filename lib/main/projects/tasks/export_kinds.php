@@ -35,7 +35,9 @@ http://www.earthli.com/software/webcore/projects
   $fhandle = fopen ($fn, 'w+');
 
   if (! $fhandle)
+  {
     raise ("Could not open file [$fn] for kind export.");
+  }
 
   fwrite ($fhandle, "<?xml version=\"1.0\"?>\n");
   fwrite ($fhandle, "<OpusVCS>\n");

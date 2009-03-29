@@ -106,12 +106,16 @@ class PREVIEWABLE_FORM extends FORM
   function _draw_form (&$renderer)
   {
     if ($this->show_previews_first)
+    {
       $this->_draw_previews ();
+    }
 
     parent::_draw_form ($renderer);
 
     if (! $this->show_previews_first)
+    {
       $this->_draw_previews ();
+    }
   }
 
   /**
@@ -137,7 +141,9 @@ class PREVIEWABLE_FORM extends FORM
   function _set_object (&$obj, $load_action)
   {
     if (($load_action != Form_load_action_default) && $obj->exists ())
+    {
       $this->_object =& $obj;
+    }
   }
 
   /**
@@ -164,7 +170,9 @@ class PREVIEWABLE_FORM extends FORM
       $this->_apply_all_data ($obj, $load_action);
     }
     else
+    {
       parent::_process ($obj, $load_action);
+    }
   }
 
   /**
@@ -264,7 +272,9 @@ class PREVIEWABLE_ID_BASED_FORM extends PREVIEWABLE_FORM
   {
     parent::load_from_object ($obj);
     if (isset ($obj->id))
+    {
       $this->set_value ('id', $obj->id);
+    }
   }
 }
 

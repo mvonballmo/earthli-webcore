@@ -36,13 +36,21 @@ http://www.earthli.com/software/webcore
     $theme_dont_apply_to_forms = read_array_index ($_GET, 'dont_apply_to_forms', null);
 
     if (isset ($theme_name))
+    {
       $Page->set_theme_main ($theme_name);
+    }
     if (isset ($theme_font_name))
+    {
       $Page->set_theme_font_name ($theme_font_name);
+    }
     if (isset ($theme_font_size))
+    {
       $Page->set_theme_font_size ($theme_font_size);
+    }
     if (isset ($theme_dont_apply_to_forms))
+    {
       $Page->set_theme_dont_apply_to_forms ($theme_dont_apply_to_forms);
+    }
 
     $Env->redirect_root ($last_page);
   }

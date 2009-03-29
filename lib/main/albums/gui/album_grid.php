@@ -98,9 +98,13 @@ class ALBUM_GRID extends FOLDER_GRID
     <p class="detail">
     <?php
       if ($obj->is_multi_day ())
+      {
         echo $obj->format_date ($obj->first_day) . ' - ' . $obj->format_date ($obj->last_day); 
+      }
       else
+      {
         echo $obj->format_date ($obj->first_day);
+      }
     ?>  
     </p>
     <div class="detail"><?php echo $obj->summary_as_html (); ?></div>

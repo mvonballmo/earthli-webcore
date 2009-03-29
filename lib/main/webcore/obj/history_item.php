@@ -141,7 +141,9 @@ class HISTORY_ITEM extends RENDERABLE
   {
     $Result = $this->_supported_kind_as_text ();
     if (! $Result)
+    {
       $Result = 'updated';
+    }
     return $Result;
   }
 
@@ -216,7 +218,9 @@ class HISTORY_ITEM extends RENDERABLE
     if (! $this->exists ())
     {
       if (isset ($this->_differences))
+      {
         $sys_desc = implode ("\n", $this->_differences);
+      }
     }
 
     return $this->_text_as_html ("<ol>$sys_desc</ol>", $munger);
@@ -245,7 +249,9 @@ class HISTORY_ITEM extends RENDERABLE
     if (! $this->exists ())
     {
       if (isset ($this->_differences))
+      {
         $sys_desc = implode ("\n", $this->_differences);
+      }
     }
 
     return $this->_text_as_plain_text ("<ol>$sys_desc</ol>", $munger);
@@ -294,7 +300,9 @@ class HISTORY_ITEM extends RENDERABLE
   function record_difference ($text)
   {
     if ($text)
+    {
       $this->_differences [] = $text;
+    }
   }
 
   /**
@@ -327,13 +335,17 @@ class HISTORY_ITEM extends RENDERABLE
     if (! $obj->exists ())
     {
       if (! isset ($this->kind))
+      {
         $this->kind = $obj->history_item_kind_for_new ();
+      }
       $this->_is_new = TRUE;
     }
     else
     {
       if (! isset ($this->kind))
+      {
         $this->kind = History_item_updated;
+      }
       $this->_record_differences ($this->_object, $obj);
     }
   }
@@ -366,13 +378,17 @@ class HISTORY_ITEM extends RENDERABLE
     if (! $this->exists ())
     {
       if (isset ($this->_differences))
+      {
         $this->system_description = implode ("\n", $this->_differences);
+      }
     }
 
     // Assign a default title, if needed.
 
     if (! isset ($this->title) || ! $this->title)
+    {
       $this->title = $this->_make_default_title ();
+    }
 
     parent::store_to ($storage);
     $tname = $this->_table_name ();
@@ -445,7 +461,9 @@ class HISTORY_ITEM extends RENDERABLE
       $orig_title = $prefix . $orig->title_as_plain_text ($t) . $suffix;
     }
     else
+    {
       $orig_title = $empty_text;
+    }
     if (isset ($new))
     {
       $t = $new->title_formatter ();
@@ -453,7 +471,9 @@ class HISTORY_ITEM extends RENDERABLE
       $new_title = $prefix . $new->title_as_plain_text ($t) . $suffix;
     }
     else
+    {
       $new_title = $empty_text;
+    }
     $this->_record_string_difference ($name, $orig_title, $new_title);
   }
 
@@ -472,13 +492,21 @@ class HISTORY_ITEM extends RENDERABLE
       $f = $orig_date->formatter ();
       $f->set_type_and_clear_flags ($type);
       if ($orig_date->is_valid ())
+      {
         $orig_text = $orig_date->format ($f);
+      }
       else
+      {
         $orig_text = '[not set]';
+      }
       if ($new_date->is_valid ())
+      {
         $new_text = $new_date->format ($f);
+      }
       else
+      {
         $new_text = '[not set]';
+      }
       $this->_record_string_difference ($name, $orig_text, $new_text);
     }
   }
@@ -493,7 +521,9 @@ class HISTORY_ITEM extends RENDERABLE
   function _record_text_difference ($name, $orig_text, $new_text)
   {
     if ($orig_text != $new_text)
+    {
       $this->record_difference ($name . ' was changed. (' . strlen ($orig_text) . ' bytes => ' . strlen ($new_text) . ' bytes)');
+    }
   }
 
   /**
@@ -508,9 +538,13 @@ class HISTORY_ITEM extends RENDERABLE
     if ($orig_value != $new_value)
     {
       if ($new_value)
+      {
         $this->record_difference ($name . ' was turned on.');
+      }
       else
+      {
         $this->record_difference ($name . ' was turned off.');
+      }
     }
   }
 
@@ -524,14 +558,20 @@ class HISTORY_ITEM extends RENDERABLE
   {
     $Result = $this->_supported_kind_as_text ();
     if (isset ($Result))
+    {
       $Result = ucfirst ($Result);
+    }
     else
     {
       $num_diffs = sizeof ($this->_differences);
       if ($num_diffs)
+      {
         $Result = $this->_differences [$num_diffs - 1];
+      }
       else
+      {
         $Result = 'Updated';
+      }
     }
 
     return $Result;

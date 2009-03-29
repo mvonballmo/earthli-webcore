@@ -72,11 +72,17 @@ class FILE_TYPE_MANAGER extends WEBCORE_OBJECT
   function icon_as_html ($mime_type, $extension, $size = '32px')
   {
     if ($mime_type)
+    {
       $title = $mime_type;
+    }
     else if ($extension)
-      $title = $extension;
+ {
+   $title = $extension;
+ }
     else
+    {
       $title = ' ';
+    }
 
     return $this->context->image_as_html ($this->expanded_icon_url ($mime_type, $extension, $size), $title);
   }
@@ -103,11 +109,16 @@ class FILE_TYPE_MANAGER extends WEBCORE_OBJECT
   function icon_url ($mime_type, $extension)
   {
     if (isset ($this->_mime_types [$mime_type]))
+    {
       return $this->_mime_types [$mime_type];
+    }
     else if (isset ($this->_extensions [$extension]))
-      return $this->_extensions [$extension];
-    else
-      return $this->_default_icon_url;
+ {
+   return $this->_extensions [$extension];
+ }
+
+
+    return $this->_default_icon_url;
   }
 
   /**

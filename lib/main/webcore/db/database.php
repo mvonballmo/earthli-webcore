@@ -102,7 +102,9 @@ class DATABASE extends DB_Sql
   function set_name ($name)
   {
     if ($this->Link_ID)
+    {
       mysql_close ($this->Link_ID);
+    }
     $this->Link_ID = 0;
     $this->Database = $name;
   }
@@ -122,7 +124,9 @@ class DATABASE extends DB_Sql
   {
     $this->logged_query ("SHOW INDEX FROM $name FROM $this->Database");
     if ($this->next_record ())
+    {
       return $this->f ('Key_name') == 'Primary';
+    }
   }
 
   /**
@@ -132,9 +136,12 @@ class DATABASE extends DB_Sql
   function f ($name)
   {
     if (isset ($this->Record[$name]))
+    {
       return $this->Record[$name];
-    else
-      return null;
+    }
+
+
+    return null;
   }
 
   /**
@@ -152,7 +159,9 @@ class DATABASE extends DB_Sql
         $this->_query_texts [$qs]++;
       }
       else
+      {
         $this->_query_texts [$qs] = 1;
+      }
     }
 
     if (isset ($this->env->profiler))
@@ -162,7 +171,9 @@ class DATABASE extends DB_Sql
       $this->env->profiler->stop ('db');
     }
     else
+    {
       DB_Sql::query ($qs);
+    }
 
     $this->env->num_queries_executed++;
   }
@@ -176,10 +187,14 @@ class DATABASE extends DB_Sql
   function logged_query ($qs)
   {
     if (isset ($this->env->profiler))
+    {
       $this->env->profiler->restart ('query');
+    }
     $this->query ($qs);
     if (isset ($this->env->profiler))
+    {
       $elapsed = $this->env->profiler->elapsed ('query');
+    }
     log_message ("<b>Ran generic query in [$elapsed] seconds:</b><p>$qs</p>", Msg_type_debug_info, Msg_channel_database, TRUE);
   }
 

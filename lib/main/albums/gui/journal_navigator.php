@@ -62,7 +62,9 @@ class JOURNAL_NAVIGATOR extends MULTI_TYPE_ENTRY_NAVIGATOR
     $folder =& $this->_entry->parent_folder ();
 
     if ($calendar)
+    {
       $this->page->location->append ("Calendar", "view_calendar.php?id=$folder->id");
+    }
 
     if ($first_day)
     {

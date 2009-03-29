@@ -182,7 +182,9 @@ class OBJECT_CACHE extends RAISABLE
     $rebuild_cache = $stored_num_objects != $actual_num_objects;
 
     if ($rebuild_cache)
+    {
       $this->_record ('Rebuilding cache due to new entry');
+    }
 
     if (! $rebuild_cache)
     {
@@ -221,10 +223,14 @@ class OBJECT_CACHE extends RAISABLE
             $count = ($this->window_size * 4);
 
             if ($first + $count > $this->num_objects_in_list)
+            {
               $first = $this->num_objects_in_list - $count;
+            }
 
             if ($first < 0)
+            {
               $first = 0;
+            }
 
             $ids = array ();
             $this->_start_id_search ($first, $count);
@@ -232,7 +238,9 @@ class OBJECT_CACHE extends RAISABLE
             {
               $id = $this->_load_id ();
               if ($id == $selected_id)
+              {
                 $index_of_selected_id = sizeof ($ids);
+              }
               $ids [] = $id;
             }
 
@@ -271,11 +279,17 @@ class OBJECT_CACHE extends RAISABLE
       {
         $id = $this->_load_id ();
         if ($id == $selected_id)
+        {
           $index_of_selected_id = sizeof ($ids);
+        }
         if (! isset ($index_of_selected_id) || ($i < $index_of_selected_id + ($this->window_size * 2)) || ! isset ($last_id))
+        {
           $ids [] = $id;
+        }
         else
+        {
           break;
+        }
       }
 
       if (! isset ($last_id))
@@ -295,13 +309,19 @@ class OBJECT_CACHE extends RAISABLE
       $this->_record ($cache_start);
 
       if ($cache_start + $cache_count > $this->num_objects_in_list)
+      {
         $cache_start = $this->num_objects_in_list - $cache_count;
+      }
 
       if ($cache_start < 0)
+      {
         $cache_start = 0;
+      }
 
       if ($cache_start + $cache_count > $this->num_objects_in_list)
+      {
         $cache_count = $this->num_objects_in_list - $cache_start;
+      }
 
       $this->_record ("Retrieving cache from [$cache_start] ([$cache_count] items).");
 
@@ -338,21 +358,31 @@ class OBJECT_CACHE extends RAISABLE
     }
 
     if ($abs_index_of_selected_id > 0)
+    {
       $prev_id = $ids [$index_of_selected_id - 1];
+    }
     if ($abs_index_of_selected_id < $this->num_objects_in_list - 1)
+    {
       $next_id = $ids [$index_of_selected_id + 1];
+    }
 
     $first = $abs_index_of_selected_id - floor ($this->window_size / 2);
     $count = $this->window_size;
 
     if ($first + $count > $this->num_objects_in_list)
+    {
       $first = $this->num_objects_in_list - $count;
+    }
 
     if ($first < 0)
+    {
       $first = 0;
+    }
 
     if ($first + $count > $this->num_objects_in_list)
+    {
       $count = $this->num_objects_in_list - $first;
+    }
 
     $this->objects_in_window = $this->_load_objects_in_range ($first, $count);
     $this->selected_object = $this->objects_in_window [$abs_index_of_selected_id - $first];
@@ -365,19 +395,31 @@ class OBJECT_CACHE extends RAISABLE
       $special_ids = array ();
 
       if (isset ($prev_id))
+      {
         $special_ids [] = $prev_id;
+      }
       if (isset ($next_id))
+      {
         $special_ids [] = $next_id;
+      }
 
       if ($first_id != $selected_id)
+      {
         $special_ids [] = $first_id;
+      }
       if ($last_id != $selected_id)
+      {
         $special_ids [] = $last_id;
+      }
 
       if (isset ($prev_page_id))
+      {
         $special_ids [] = $prev_page_id;
+      }
       if (isset ($next_page_id))
+      {
         $special_ids [] = $next_page_id;
+      }
 
       if (sizeof ($special_ids))
       {
@@ -389,19 +431,31 @@ class OBJECT_CACHE extends RAISABLE
           $indexed_objs [$obj->id] = $obj;
 
         if (isset ($prev_id))
+        {
           $this->previous_object = $indexed_objs [$prev_id];
+        }
         if (isset ($next_id))
+        {
           $this->next_object = $indexed_objs [$next_id];
+        }
 
         if ($first_id != $selected_id)
+        {
           $this->first_object = $indexed_objs [$first_id];
+        }
         if ($last_id != $selected_id)
+        {
           $this->last_object = $indexed_objs [$last_id];
+        }
 
         if (isset ($prev_page_id))
+        {
           $this->previous_page_object = $indexed_objs [$prev_page_id];
+        }
         if (isset ($next_page_id))
+        {
           $this->next_page_object = $indexed_objs [$next_page_id];
+        }
       }
     }
   }

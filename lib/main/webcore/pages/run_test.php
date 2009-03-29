@@ -35,13 +35,21 @@ http://www.earthli.com/software/webcore
 
     $task_class_name = read_var ('test_name');
     if ($task_class_name)
+    {
       $task = $test_suite->test_task_at_name ($task_class_name);
+    }
 
     if (isset ($task))
+    {
       include_once ($App->page_template_for ('webcore/pages/execute_task.php'));
+    }
     else
+    {
       $Page->raise_error ('Please provide a test name.', 'Run Test');
+    }
   }
   else
+  {
     $Page->raise_security_violation ('You are not allowed to run tests.');
+  }
 ?>

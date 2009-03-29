@@ -114,8 +114,9 @@ class OBJECT_LIST_BUILDER extends WEBCORE_OBJECT
         $Result = implode (', ', $this->_contents);
         return $Result . ' and ' . $last;
       }
-      else
-        return $this->_contents [0];
+
+
+      return $this->_contents [0];
     }
   }
   
@@ -163,7 +164,9 @@ class OBJECT_LIST_BUILDER extends WEBCORE_OBJECT
     
     $this->_entry_ids = read_var ('entry_ids');
     if (! empty ($this->_entry_ids))
+    {
       $this->_contents [] = $entry_types [0]->format_amount (sizeof ($this->_entry_ids));
+    }
     else
     {
       $this->_entry_ids = array ();
@@ -205,7 +208,9 @@ class OBJECT_LIST_BUILDER extends WEBCORE_OBJECT
     {
       $entry_query = $this->login->all_entry_query ();
       if (sizeof ($this->app->entry_type_infos ()) > 1)
+      {
         $entry_query->set_order ('entry.type, entry.time_created');
+      }
       $this->entries = $entry_query->objects_at_ids ($this->_entry_ids);
     }
   }

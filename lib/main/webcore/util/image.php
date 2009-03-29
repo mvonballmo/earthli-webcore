@@ -187,7 +187,9 @@ class IMAGE extends RAISABLE
     }
 
     if (isset ($php_errormsg))
+    {
       $this->raise ('Could not load [' . $this->properties->file_name . ']: ' . $php_errormsg, 'load_from_file', 'IMAGE');
+    }
   }
 
   /**
@@ -198,7 +200,9 @@ class IMAGE extends RAISABLE
   function save_to_file ($name, $type = null)
   {
     if ($this->loaded () && ! isset ($type))
+    {
       $type = $this->properties->php_type;
+    }
 
     $this->assert ($this->saveable_to ($type), 'Saving images to type [' . $this->properties->mime_type . '/' . $this->properties->php_type . '] is not supported.', 'save_to_file', 'IMAGE');
 
@@ -206,7 +210,9 @@ class IMAGE extends RAISABLE
     $url->ensure_path_exists ();
 
     if (! isset ($type))
+    {
       $type = $this->properties->php_type;
+    }
 
     $opts =& global_file_options ();
     switch ($type)
@@ -480,7 +486,9 @@ class IMAGE_PROPERTIES
         }
       }
       else
+      {
         $name = str_replace (' ', '%20', $name);
+      }
     }
 
     if ($name)
@@ -522,12 +530,16 @@ class IMAGE_PROPERTIES
     {
       $this->exif = @exif_read_data ($name, 'IFD0');
       if ($this->exif === FALSE)
+      {
         $this->exif = null;
+      }
       else
       {
         $this->exif = @exif_read_data ($name, 0, TRUE);
         if (isset ($php_errormsg))
+        {
           log_message ('[' . $name . ']: ' . $php_errormsg, Msg_type_debug_warning, Msg_channel_image);
+        }
 
         $this->_initialize_properties_from_exif ();
       }
@@ -554,7 +566,9 @@ class IMAGE_PROPERTIES
     }
 
     if ($this->exists () && isset ($Profiler))
+    {
       log_message ('Read EXIF for [' . $name . '] in [' . $Profiler->elapsed ('EXIF') . '] seconds.', Msg_type_debug_info, Msg_channel_image);
+    }
   }
 
   /**
@@ -592,7 +606,9 @@ class IMAGE_PROPERTIES
     $this->mime_type = $this->_read_exif_value ('FILE', 'MimeType');
     $this->php_type = $this->_read_exif_value ('FILE', 'FileType');
     if (! $this->mime_type)
+    {
       $this->mime_type = image_type_to_mime_type ($this->php_type);
+    }
 
     $this->width = $this->_read_exif_value ('COMPUTED', 'Width');
     $this->height = $this->_read_exif_value ('COMPUTED', 'Height');
@@ -726,9 +742,12 @@ class IMAGE_METRICS
   function width ()
   {
     if ($this->was_resized)
+    {
       return $this->constrained_width;
-    else
-      return $this->original_width;
+    }
+
+
+    return $this->original_width;
   }
 
   /**
@@ -739,9 +758,12 @@ class IMAGE_METRICS
   function height ()
   {
     if ($this->was_resized)
+    {
       return $this->constrained_height;
-    else
-      return $this->original_height;
+    }
+
+
+    return $this->original_height;
   }
 
   /**
@@ -807,7 +829,9 @@ class IMAGE_METRICS
             $ch = $height;
           }
           else
+          {
             $cw = $width;
+          }
         }
         else
         {
@@ -827,7 +851,9 @@ class IMAGE_METRICS
       $this->resize ($cw, $ch);
     }
     else
+    {
       $this->resize ($width, $height);
+    }
   }
 
   /**
@@ -844,7 +870,9 @@ class IMAGE_METRICS
     if ($Result)
     {
       if ($this->was_resized)
+      {
         $Result = "<a href=\"javascript:open_image ('{$this->url}', {$this->original_width}, {$this->original_height})\">$Result</a>";
+      }
       return $Result;
     }
   }
@@ -864,14 +892,19 @@ class IMAGE_METRICS
       $title = $opts->convert_to_html_attribute ($title);
       $Result = '<img src="' . $this->url . '" alt="' . $title . '" title="' . $title . '"';
       if ($CSS_class)
+      {
         $Result .= ' class="' . $CSS_class . '"';
+      }
       if ($this->was_resized)
+      {
         $Result .= ' width="' . $this->constrained_width . '" height="' . $this->constrained_height . '"';
+      }
       $Result .= '>';
       return $Result;
     }
-    else
-      return '[<span title="' . $this->url . '">Image</span>] was not found.';
+
+
+    return '[<span title="' . $this->url . '">Image</span>] was not found.';
   }
 
   /**
@@ -920,10 +953,14 @@ class THUMBNAIL_CREATOR extends WEBCORE_OBJECT
         $img->save_to_file ($this->_thumbnail_name_for ($img->properties->file_name));
       }
       else
+      {
         $this->error_message = 'Cannot create thumbnails of type [' . $img->properties->mime_type . '].';
+      }
     }
     else
+    {
       $this->error_message = 'Could not create thumbnail from [' . $img->properties->file_name . '].';
+    }
   }
 
   /**

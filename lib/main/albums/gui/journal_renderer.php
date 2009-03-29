@@ -110,8 +110,9 @@ class JOURNAL_RENDERER extends ENTRY_RENDERER
     {
       $curr_date = date ('Y-m-d', $entry->date->as_php ());
       if (! isset ($this->last_date) || ! $entry->date->equals ($this->last_date, Date_time_date_part))
-        // only show pictures with the first journal of a new day
       {
+        // only show pictures with the first journal of a new day
+        
         $this->last_date = $curr_date;
         $pic_query = $entry->picture_query ();
         $num_pics = $pic_query->size ();

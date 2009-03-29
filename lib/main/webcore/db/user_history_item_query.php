@@ -71,9 +71,13 @@ class USER_HISTORY_ITEM_QUERY extends HISTORY_ITEM_QUERY
       $restriction = new QUERY_SECURITY_RESTRICTION ($this);
       $sql = $restriction->as_sql (array (Privilege_set_folder));
       if (! $sql)
+      {
         $this->_set_returns_no_data ();
+      }
       else
+      {
         $this->_calculated_restrictions [] = $sql;
+      }
     }
   }
 

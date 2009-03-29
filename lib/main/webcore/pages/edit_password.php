@@ -36,7 +36,9 @@ http://www.earthli.com/software/webcore
 
     $form->process ($user);
     if ($form->committed ())
+    {
       $App->return_to_referer ($user->home_page ());
+    }
 
     $Page->title->add_object ($user);
     $Page->title->subject = 'Change password';
@@ -62,5 +64,7 @@ http://www.earthli.com/software/webcore
     $Page->finish_display ();
   }
   else
+  {
     $Page->raise_security_violation ('You are not allowed to change this user\'s password.', $user);
+  }
 ?>

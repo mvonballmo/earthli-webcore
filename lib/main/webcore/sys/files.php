@@ -130,11 +130,15 @@ class FILE_OPTIONS
 function make_canonical ($path, $opts = null)
 {
   if (! isset ($opts))
+  {
     $opts =& global_file_options ();
+  }
   $sep = $opts->path_delimiter;
   $curr = $opts->current_folder;
   if ($path == $curr . $sep)
+  {
     $Result = '';
+  }
   else
   {
     $Result = preg_replace (array ("/\\//", "/\\//", "/[^\\$curr]\\$curr\\$sep/"), array ($sep, $sep, ''), $path);
@@ -156,7 +160,9 @@ function join_paths ($path1, $path2, $opts = null)
   if ($path2)
   {
     if (! isset ($opts))
+    {
       $opts =& global_file_options ();
+    }
 
     $sep = $opts->path_delimiter;
 
@@ -182,13 +188,19 @@ function join_paths ($path1, $path2, $opts = null)
 
       $path1 = join ($sep, $bases);
       if (sizeof ($folders))
+      {
         $path2 = implode ($sep, $folders);
+      }
       else
+      {
         $path2 = '';
+      }
     }
 
     if (! $path1)
+    {
       $Result = $path2;
+    }
     else
     {
       if ($path2)
@@ -196,24 +208,36 @@ function join_paths ($path1, $path2, $opts = null)
         if (begins_with_delimiter ($path2, $opts))
         {
           if (ends_with_delimiter ($path1, $opts))
+          {
             $Result = $path1 . substr ($path2, 1);
+          }
           else
+          {
             $Result = $path1 . $path2;
+          }
         }
         else
         {
           if (ends_with_delimiter ($path1, $opts))
+          {
             $Result = $path1 . $path2;
+          }
           else
+          {
             $Result = $path1 . $sep . $path2;
+          }
         }
       }
       else
+      {
         $Result = $path1;
+      }
     }
   }
   else
+  {
     $Result = $path1;
+  }
 
   return $Result;
 }
@@ -245,7 +269,9 @@ function path_between ($from, $to, $opts = null)
   $Result = $to;
 
   if (! isset ($opts))
+  {
     $opts =& global_file_options ();
+  }
 
   $from = make_canonical ($from, $opts);
   $to = make_canonical ($to, $opts);
@@ -262,7 +288,9 @@ function path_between ($from, $to, $opts = null)
         foreach ($sub_folders as $f)
         {
           if ($f)
+          {
             $Result .= '..' . $opts->path_delimiter;
+          }
         }
       }
     }
@@ -287,11 +315,17 @@ function ensure_begins_with_delimiter ($f, $opts = null)
   if ($f)
   {
     if (! isset ($opts))
+    {
       $opts =& global_file_options ();
+    }
     if (! begins_with_delimiter ($f, $opts))
+    {
       $Result = $opts->path_delimiter . $f;
+    }
     else
+    {
       $Result = $f;
+    }
     return $Result;
   }
 }
@@ -308,11 +342,17 @@ function ensure_ends_with_delimiter ($f, $opts = null)
   if ($f)
   {
     if (! isset ($opts))
+    {
       $opts =& global_file_options ();
+    }
     if (! ends_with_delimiter ($f, $opts))
+    {
       $f = $f . $opts->path_delimiter;
+    }
     else
+    {
       $f = $f;
+    }
   }
   return $f;
 }
@@ -330,7 +370,9 @@ function begins_with_delimiter ($f, $opts = null)
   if ($f)
   {
     if (! isset ($opts))
+    {
       $opts =& global_file_options ();
+    }
     return $f [0] == $opts->path_delimiter;
   }
 }
@@ -348,7 +390,9 @@ function ends_with_delimiter ($f, $opts = null)
   if ($f)
   {
     if (! isset ($opts))
+    {
       $opts =& global_file_options ();
+    }
     return substr ($f, -1) == $opts->path_delimiter;
   }
 }
@@ -364,7 +408,9 @@ function ends_with_delimiter ($f, $opts = null)
 function has_root ($f, $opts = null)
 {
   if (! isset ($opts))
+  {
     $opts =& global_file_options ();
+  }
   $path_starts_with_delimiter = $opts->path_starts_with_delimiter();
   return ($path_starts_with_delimiter && begins_with_delimiter ($f, $opts)) ||
          (! $path_starts_with_delimiter && (strpos ($f, ':') == 1));
@@ -383,7 +429,9 @@ function is_file_name ($f, $opts = null)
   if ($dot_pos !== FALSE)
   {
     if (! isset ($opts))
+    {
       $opts =& global_file_options ();
+    }
     $slash_pos = strrpos ($f, $opts->path_delimiter);
     return $slash_pos < $dot_pos;
   }
@@ -400,9 +448,13 @@ function is_file_name ($f, $opts = null)
 function ensure_has_full_path ($f, $opts = null)
 {
   if (! has_root ($f, $opts))
+  {
     $Result = join_paths (getcwd (), $f, $opts);
+  }
   else
+  {
     $Result = $f;
+  }
   return $Result;
 }
 
@@ -430,7 +482,9 @@ function normalize_path ($path, $opts = null)
   $Result = '';
 
   if (! isset ($opts))
+  {
     $opts =& global_file_options ();
+  }
 
   $parts_to_process = explode ($opts->path_delimiter, $path);
   if (sizeof ($parts_to_process))
@@ -439,7 +493,9 @@ function normalize_path ($path, $opts = null)
 
     $part = $parts_to_process [0];
     if (! $opts->path_starts_with_delimiter () && (strlen ($part) == 2) && ($part [1] == ':'))
+    {
       $processed_parts [] = array_shift ($parts_to_process);
+    }
 
     /* Process all other path parts normally. */
 
@@ -467,14 +523,20 @@ function normalize_path ($path, $opts = null)
 function normalize_file_id ($part, $opts = null)
 {
   if (! isset ($opts))
+  {
     $opts =& global_file_options ();
+  }
   $Result = substr ($part, 0, $opts->max_name_length);
   $Result = strtr ($Result, $opts->source_chars, $opts->target_chars);
   $Result = ereg_replace ('[^' . $opts->valid_file_chars . ']', $opts->replacement_char, $Result);
   if ($opts->collapse_invalid_chars)
+  {
     $Result = ereg_replace ('[' . $opts->replacement_char . ']+', $opts->replacement_char, $Result);
+  }
   if ($opts->normalized_ids_are_lower_case)
+  {
     $Result = strtolower ($Result);
+  }
   return $Result;
 }
 
@@ -499,9 +561,12 @@ function file_size_as_text ($size, $force_kb = FALSE)
   {
   case 0:
     if ($force_kb | ($size < 1024))
+    {
       return $size . ' Bytes';
-    else
-      return round ($size / 1024, 1) . ' KB';
+    }
+
+
+    return round ($size / 1024, 1) . ' KB';
   case 1:
     return $size . ' KB';
   case 2:
@@ -523,7 +588,9 @@ function file_size_as_text ($size, $force_kb = FALSE)
 function text_to_file_size ($text)
 {
   if (is_numeric ($text))
+  {
     return $text;
+  }
   else
   {
     $pieces = null; // Compiler warning
@@ -562,7 +629,9 @@ function is_valid_path ($path, $opts = null)
   if (isset ($path) && $path)
   {
     if ($this->normalized_ids_are_lower_case)
+    {
       $path = strtolower ($path);
+    }
     return $path == normalize_path ($path, $opts);
   }
 }
@@ -587,7 +656,9 @@ function ensure_path_exists ($path, $opts = null)
   if (! file_exists ($path))
   {
     if (! isset ($opts))
+    {
       $opts =& global_file_options ();
+    }
 
     $path = str_replace ('\\', $opts->path_delimiter, $path);
     $path = str_replace ('/', $opts->path_delimiter, $path);
@@ -597,9 +668,13 @@ function ensure_path_exists ($path, $opts = null)
      */
 
     if ($opts->path_starts_with_delimiter ())
+    {
       $path_to_create = $opts->path_delimiter;
+    }
     else
+    {
       $path_to_create = '';
+    }
 
     foreach (explode ($opts->path_delimiter, $path) as $folder)
     {
@@ -631,7 +706,9 @@ function ensure_path_exists ($path, $opts = null)
 function write_text_file ($file_name, $text, $opts = null)
 {
   if (! isset ($opts))
+  {
     $opts =& global_file_options ();
+  }
   $f = @fopen ($file_name, 'w');
   @fwrite ($f, $text);
   @fclose ($f);
@@ -661,11 +738,13 @@ function temp_folder ()
 function file_list_for ($base_path, $path_to_prepend = '', $recurse = FALSE, $opts = NULL)
 {
   if (! isset ($opts))
+  {
     $opts =& global_file_options ();
+  }
   $$base_path = ensure_ends_with_delimiter ($base_path, $opts);
 
   $Result = array ();
-  if ($handle = opendir ($base_path))
+  if (($handle = opendir ($base_path)))
   {
     while (($name = readdir ($handle)) !== FALSE)
     {
@@ -674,10 +753,14 @@ function file_list_for ($base_path, $path_to_prepend = '', $recurse = FALSE, $op
         if (is_dir (join_paths ($base_path, $name)))
         {
           if ($recurse)
+          {
             $Result = array_merge ($Result, file_list_for (join_paths ($base_path, $name, $opts), join_paths ($path_to_prepend, $name, $opts), $recurse, $opts));
+          }
         }
         else
+        {
           $Result [] = join_paths ($path_to_prepend, $name);
+        }
       }
     }
     closedir ($handle);
@@ -695,7 +778,9 @@ function &global_file_options ()
 {
   global $_g_file_options;
   if (! isset ($_g_file_options))
+  {
     $_g_file_options = new FILE_OPTIONS ();
+  }
   return $_g_file_options;
 }
 

@@ -195,7 +195,9 @@ class CHANGE_RENDERER extends PROJECT_ENTRY_RENDERER
 
     $job =& $entry->job ();
     if (isset ($job))
+    {
       echo $this->_line ('[Job]: ' . $job->title_as_plain_text ());
+    }
 
     $this->_echo_plain_text_user_information ($entry);
     $this->_echo_branches_as_plain_text ($entry);

@@ -67,9 +67,13 @@ class BOX_RENDERER extends WEBCORE_OBJECT
   function start_column_set ()
   {
     if ($this->_supports_css_tables)
+    {
       echo '<div style="display: table">' . "\n";
+    }
     else
+    {
       echo '<table cellpadding="0" cellspacing="0"><tr>' . "\n";
+    }
   }
   
   /**
@@ -80,7 +84,9 @@ class BOX_RENDERER extends WEBCORE_OBJECT
   function new_column ($CSS_style = '')
   {
     if ($this->_column_started)
+    {
       $this->_close_column ();
+    }
       
     if ($this->_supports_css_tables)
     {
@@ -94,7 +100,9 @@ class BOX_RENDERER extends WEBCORE_OBJECT
     }
     
     if ($CSS_style)
+    {
       $style .= '; ' . $CSS_style;
+    }
       
     echo '  <' . $tag_name . ' style="' . $style . '">' . "\n";
 
@@ -108,12 +116,18 @@ class BOX_RENDERER extends WEBCORE_OBJECT
   function finish_column_set ()
   {
     if ($this->_column_started)
+    {
       $this->_close_column ();
+    }
       
     if ($this->_supports_css_tables)
+    {
       echo '</div>' . "\n";
+    }
     else
+    {
       echo '</tr></table>' . "\n";
+    }
   }
   
   /**
@@ -125,9 +139,13 @@ class BOX_RENDERER extends WEBCORE_OBJECT
   function _close_column ()
   {
     if ($this->_supports_css_tables)
+    {
       echo '  </div>' . "\n";
+    }
     else
+    {
       echo '  </td>' . "\n";
+    }
   }
   
   /**

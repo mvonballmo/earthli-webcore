@@ -104,12 +104,18 @@ class ATTACHMENT_GRID extends STANDARD_GRID
       {
         $thumb = $obj->thumbnail_as_html ();
         if ($thumb)
+        {
           echo $thumb;
+        }
         else
+        {
           echo $obj->icon_as_html ('100px');
+        }
       }
       else
+      {
         echo $obj->icon_as_html ('100px');
+      }
     ?></a>
     </div>
   </div>

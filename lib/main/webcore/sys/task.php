@@ -158,7 +158,9 @@ class TASK extends WEBCORE_OBJECT
       $this->_post_execute ();
     }
     else
+    {
       $this->_log ('Could not execute task.', Msg_type_error);
+    }
 
     $this->_finish ();
   }
@@ -181,7 +183,9 @@ class TASK extends WEBCORE_OBJECT
   function _abort ($msg = '')
   {
     if (! $msg)
+    {
       $msg = 'Process aborted';
+    }
     $this->raise ($msg, '_abort', 'TASK');
   }
 
@@ -199,9 +203,13 @@ class TASK extends WEBCORE_OBJECT
       $db->query ($sql);
     }
     if ($this->verbose)
+    {
       $this->_log ("Executed [$sql]", Msg_type_info);
+    }
     else
+    {
       $this->_log ("Executed [$sql]");
+    }
   }
 
   /**
@@ -310,11 +318,17 @@ class TASK extends WEBCORE_OBJECT
     $this->_logger->set_enabled (0);
     $this->_add_log_channel ($this->log_channel);
     if ($this->log_database)
+    {
       $this->_add_log_channel (Msg_channel_database);
+    }
     if ($this->log_default_errors)
+    {
       $this->_logger->set_channel_enabled (Msg_channel_default, Msg_type_all);
+    }
     if ($this->log_system_errors)
+    {
       $this->_logger->set_channel_enabled (Msg_channel_system, Msg_type_error + Msg_type_warning);
+    }
     $this->env->logs->add_logger ($this->_logger, FALSE);
     $this->env->logs->remove_loggers_of_type ('JS_CONSOLE_LOGGER');
   }
@@ -328,9 +342,13 @@ class TASK extends WEBCORE_OBJECT
   function _add_log_channel ($channel)
   {
     if ($this->log_debug)
+    {
       $this->_logger->set_channel_enabled ($channel, Msg_type_all);
+    }
     else
+    {
       $this->_logger->set_channel_enabled ($channel, Msg_type_all - Msg_type_all_debug);
+    }
   }
 
   /**

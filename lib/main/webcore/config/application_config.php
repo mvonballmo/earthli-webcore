@@ -217,7 +217,9 @@ class APPLICATION_DISPLAY_OPTIONS extends CONTEXT_DISPLAY_OPTIONS
   function comment_icons ()
   {
     if (! isset ($this->_comment_icons))
+    {
       $this->_init_comment_icons ();
+    }
     return $this->_comment_icons;
   }
   

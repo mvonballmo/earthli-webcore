@@ -132,13 +132,19 @@ class AUDITABLE extends RENDERABLE
     $type_info->singular_title;
     $kind = $obj->_supported_kind_as_text ();
     if ($kind)
+    {
       $Result = $type_info->singular_title . ' ' . $kind;
+    }
     else
     {
       if ($subscriber->show_history_item_as_subject)
+      {
         $Result = $obj->title_as_plain_text ();
+      }
       else
+      {
         $Result = $type_info->singular_title . ' updated';
+      }
     }
 
     $location = $this->object_url_as_text ();
@@ -305,7 +311,9 @@ class AUDITABLE extends RENDERABLE
        */
 
       if (! $exists)
+      {
         $history_item->update_object ($this);
+      }
 
       $history_item->store ();
     }

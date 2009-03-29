@@ -101,7 +101,9 @@ class RENDERABLE_FORM_PREVIEW_SETTINGS extends FORM_PREVIEW_SETTINGS
       $renderer->display ($this->object);
     }
     else
+    {
       echo '<div class="error">No HTML renderer defined.</div>';
+    }
   }
   
   /**

@@ -109,7 +109,9 @@ class APPLICATION_RENDERER extends RENDERER
   </dl>
 <?php
     if ($obj->app->icon)
+    {
       echo '</div>';
+    }
   }
 }
 

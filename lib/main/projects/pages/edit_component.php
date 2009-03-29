@@ -43,7 +43,9 @@ http://www.earthli.com/software/webcore/projects
   
     $form->process_existing ($comp);
     if ($form->committed ())
+    {
       $App->return_to_referer ($comp->home_page ());
+    }
 
     $Page->title->add_object ($folder);
     $Page->title->add_object ($comp);
@@ -70,5 +72,7 @@ http://www.earthli.com/software/webcore/projects
     $Page->finish_display ();
   }
   else
+  {
     $Page->raise_security_violation ('You are not allowed to edit this component.', $folder);
+  }
 ?>

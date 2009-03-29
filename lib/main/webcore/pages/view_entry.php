@@ -37,7 +37,9 @@ http://www.earthli.com/software/webcore
     /* Set this global value to optimize the query for accessing the particular
        type of entry. */
     if (isset ($entry_type_id))
+    {
       $entry_query->set_type ($entry_type_id);
+    }
 
     $entry =& $entry_query->object_at_id ($id);
   }
@@ -122,14 +124,20 @@ http://www.earthli.com/software/webcore
       </div>
 <?php
     if ($need_side_panel)
+    {
       $box->finish_column_set ();
+    }
 
     $associated_data = $entry->handler_for (Handler_associated_data);
     if (isset ($associated_data))
+    {
       $associated_data->display ($entry);
+    }
 
     $Page->finish_display ();
   }
   else
+  {
     $Page->raise_security_violation ("You are not allowed to view this item.", $folder);
+  }
 ?>

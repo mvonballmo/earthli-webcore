@@ -32,9 +32,13 @@ http://www.earthli.com/software/webcore
   */
 
   if (isset ($App))
+  {
     $context =& $App;
+  }
   else
+  {
     $context =& $Page;
+  }
 
   $Page->title->subject = $task->title_as_text ();
 

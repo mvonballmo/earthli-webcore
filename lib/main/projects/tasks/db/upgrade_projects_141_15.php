@@ -98,9 +98,13 @@ class PROJECTS_141_15_MIGRATOR_TASK extends UPGRADE_PER_APP_221_23_TASK
       {
         $branch_id = $branch_map [$folder_id];
         if (! $branch_id)
+        {
           $this->_log ("Did not find mapping for id = [$id], folder id = [$folder_id]", Msg_type_warning);
+        }
         else
+        {
           $this->_query ("UPDATE project_releases SET time_scheduled = time_created, branch_id = $branch_id, state = 5 WHERE id = $id");
+        }
       }
     log_close_block ();
 
@@ -124,7 +128,9 @@ class PROJECTS_141_15_MIGRATOR_TASK extends UPGRADE_PER_APP_221_23_TASK
         $applier_id = $other_ids [3];
 
         if (! $branch_id)
+        {
           log_message ("No project found for id [$folder_id] (change [$id] not imported).", Msg_type_warning, Msg_channel_migrate);
+        }
         else
         {
           $this->_query ("INSERT INTO project_entries_to_branches (entry_id, branch_id, branch_release_id) VALUES ($id, $branch_id, $revision_id)");
@@ -193,7 +199,9 @@ class PROJECTS_141_15_MIGRATOR_TASK extends UPGRADE_PER_APP_221_23_TASK
         $time_closed = $other_ids[6];
 
         if (! $branch_id)
+        {
           log_message ("No project found for id [$folder_id] (job [$id] not imported).", Msg_type_warning, Msg_channel_migrate);
+        }
         else
         {
           $this->_query ("INSERT INTO project_entries_to_branches (entry_id, branch_id, branch_release_id) VALUES ($id, $branch_id, $revision_id)");

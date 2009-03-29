@@ -67,14 +67,18 @@ http://www.earthli.com/software/webcore/projects
     $num = xml_get_current_line_number ($xml_parser);
     log_message ("$msg [line $num]", $type, Msg_channel_xml);
     if ($type == Msg_type_error)
+    {
       $errors_occurred++;
+    }
   }
 
   function raise_if_not_in_object ($tag_name)
   {
     global $obj;
     if (! $obj)
+    {
       raise_xml ("[$tag_name] cannot occur outside of an object.");
+    }
   }
 
   function start_xml_element ($parser, $name, $attrs)
@@ -95,12 +99,16 @@ http://www.earthli.com/software/webcore/projects
 
       $kind = $kinds [strtolower ($attrs ['KIND'])];
       if (! $kind)
+      {
         raise_xml ("[{$attrs ['KIND']}] is not a valid change type.");
+      }
       $obj->kind = $kind->value;
 
       $t = $App->make_date_time ($attrs ['TIME'], Date_time_iso);
       if (! $t->is_valid ())
+      {
         raise_xml ("[{$attrs ['TIME']}] is not a valid date/time.");
+      }
       else
       {
         $obj->time_created = $t;
@@ -120,11 +128,15 @@ http://www.earthli.com/software/webcore/projects
         raise_xml ("Truncated name from [$orig_name] to [$user_name]", Msg_type_warning);
       }
       if (! $user_name)
+      {
         raise_xml ("Creator title cannot be empty.");
+      }
       $user_query = $App->user_query ();
       $user =& $user_query->object_at_name ($user_name);
       if (! $user)
+      {
         raise_xml ("User [$user_name] does not exist.");
+      }
       $obj->creator_id = $user->id;
       $obj->modifier_id = $user->id;
       break;
@@ -134,7 +146,9 @@ http://www.earthli.com/software/webcore/projects
       $id = $attrs ['ID'];
       $folder =& $folders [$id];
       if (! $folder)
+      {
         raise_xml ("Folder [$id] does not exist.");
+      }
       $obj->set_parent_folder ($folder);
       break;
 
@@ -178,7 +192,9 @@ http://www.earthli.com/software/webcore/projects
       }
 
       if (! isset ($error_occurred))
+      {
         $objs [] = $obj;
+      }
 
       unset ($obj);
       break;
@@ -233,7 +249,7 @@ http://www.earthli.com/software/webcore/projects
 
     $App->display_options->show_local_times = FALSE;
 
-    while ($data = fread($fhandle, 4096))
+    while (($data = fread($fhandle, 4096)))
     {
       if (! xml_parse ($xml_parser, $data, feof($fhandle))) {
         raise ( sprintf ("XML error: %s at line %d",
@@ -246,13 +262,19 @@ http://www.earthli.com/software/webcore/projects
     $commit = ! read_var ('testing');
 
     if (isset ($errors_occurred))
+    {
       log_message ("[$errors_occurred] errors detected. Objects not imported.", Msg_type_warning, Msg_channel_xml);
+    }
     else
     {
       if ($commit)
+      {
         $action = 'Imported';
+      }
       else
+      {
         $action = 'Found';
+      }
 
       $c = sizeof ($objs);
       log_message ("[$c] changes found. Importing...", Msg_type_info, Msg_channel_xml);
@@ -296,7 +318,9 @@ http://www.earthli.com/software/webcore/projects
 
       fclose ($fhandle);
       if ($commit)
+      {
         unlink ($fn);
+      }
     }
 
     $Logger->close ();

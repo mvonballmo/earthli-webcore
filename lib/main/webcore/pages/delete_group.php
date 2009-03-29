@@ -37,11 +37,14 @@ http://www.earthli.com/software/webcore
     $form->process_existing ($group);
     if ($form->committed ())
     {
-      if ($App->login->is_allowed (Privilege_set_group, Privilege_hidden)
-          && ! $form->value_for ('purge'))
+      if ($App->login->is_allowed (Privilege_set_group, Privilege_hidden) && ! $form->value_for ('purge'))
+      {
         $App->return_to_referer ($group->home_page ());
+      }
       else
+      {
         $Env->redirect_local ("view_groups.php");
+      }
     }
 
     $Page->title->add_object ($group);
@@ -65,5 +68,7 @@ http://www.earthli.com/software/webcore
     $Page->finish_display ();
   }
   else
+  {
     $Page->raise_security_violation ('You are not allowed to delete this group.', $group);
+  }
 ?>

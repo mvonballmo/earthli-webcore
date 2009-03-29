@@ -234,9 +234,13 @@ class DATE_TIME_FORMATTER extends RAISABLE
   function date_time_to_text ($php_time)
   {
     if (isset ($this->type))
+    {
       $type = $this->type;
+    }
     else
+    {
       $type = $this->_default_format_type;
+    }
 
     $this->assert (! empty ($this->_format_strings [$type]), "[$type] is not a registered date time format.", 'date_time_to_text', 'DATE_TIME_FORMATTER');
 
@@ -255,16 +259,23 @@ class DATE_TIME_FORMATTER extends RAISABLE
       if ($Result)
       {
         if (($type == Date_time_format_date_and_time) && ($this->show_time_zone))
+        {
           $Result .= " ($this->time_zone_id)";
+        }
       }
       else
+      {
         $Result = "[none]";
+      }
     }
 
     if ($this->show_CSS)
+    {
       return "<span class=\"date-time\">$Result</span>";
-    else
-      return $Result;
+    }
+
+
+    return $Result;
   }
 
   /**
@@ -413,8 +424,9 @@ class DATE_TIME_CONVERTER extends RAISABLE
         return mktime (0, 0, 0, $arr [$this->month_pos], $arr [$this->day_pos], $arr [$this->year_pos]);
       }
     }
-    else
-      return Date_time_unassigned;
+
+
+    return Date_time_unassigned;
   }
 }
 
@@ -564,9 +576,13 @@ class DATE_TIME extends RAISABLE
     if (! isset ($type))
     {
       if (is_int ($time))
+      {
         $type = Date_time_php;
+      }
       else
+      {
         $type = Date_time_iso;
+      }
     }
 
     switch ($type)
@@ -615,7 +631,9 @@ class DATE_TIME extends RAISABLE
     if ($this->_iso_time == Date_time_unassigned)
     {
       if ($this->_php_time > 0)
+      {
         $this->_iso_time = date ("Y-m-d H:i:s", $this->_php_time);
+      }
     }
 
     return $this->_iso_time;
@@ -672,7 +690,9 @@ class DATE_TIME extends RAISABLE
   function set_time_from_iso ($t)
   {
     if ($this->_iso_time == Date_time_unassigned)
+    {
       $this->set_from_iso ($this->as_iso ());
+    }
 
     $parts = split (' ', $this->_iso_time);
     $this->_iso_time = $parts [0] . " $t";
@@ -718,7 +738,9 @@ class DATE_TIME extends RAISABLE
   function format ($formatter = 0)
   {
     if (! $formatter)
+    {
       $formatter = $this->formatter ();
+    }
     return $formatter->date_time_to_text ($this->as_php ());
   }
 
@@ -797,8 +819,9 @@ class DATE_TIME extends RAISABLE
     case 2:
       if (checkdate ($month, 29, date ('Y', $t)))    // check if the year is a leap year
         return 29;
-      else
-        return 28;
+
+
+      return 28;
     }
   }
 
@@ -836,9 +859,13 @@ class DATE_TIME extends RAISABLE
   function &toolkit ()
   {
     if (isset ($this->_toolkit))
+    {
       $Result =& $this->_toolkit;
+    }
     else
+    {
       $Result =& global_date_time_toolkit ();
+    }
     return $Result;
   }
 
@@ -891,15 +918,17 @@ class DATE_TIME extends RAISABLE
 
     switch ($operator)
     {
-    case Operator_equal:
-      return $left == $right;
-    case Operator_less_than_equal:
-      return $left <= $right;
-    case Operator_less_than:
-      return $left < $right;
-    default:
-      $this->raise ("[$operator] is not supported.", '_compare_to', 'DATE_TIME');
+      case Operator_equal:
+        return $left == $right;
+      case Operator_less_than_equal:
+        return $left <= $right;
+      case Operator_less_than:
+        return $left < $right;
+      default:
+        $this->raise ("[$operator] is not supported.", '_compare_to', 'DATE_TIME');
     }
+    
+    return false; // Compiler warning; the call to "raise" should abort execution 
   }
 
   /**
@@ -978,9 +1007,13 @@ class TIME_INTERVAL
     $unit_sizes_in_seconds = array (31104000, 2592000, 604800, 86400, 3600, 60 );
     $unit_sizes = array (1000000, 12, 4, 7, 24, 60, 60);
     if ($long_names)
+    {
       $names = array ('year', 'month', 'week', 'day', 'hour', 'minute', 'second');
+    }
     else
+    {
       $names = array ('y', 'm', 'w', 'd', 'h', 'm', 's');
+    }
 
     /* Break the total number of seconds down into individual units, storing
      * years, months, weeks, etc. in an array from left to right. At the same
@@ -1009,7 +1042,9 @@ class TIME_INTERVAL
         {
           $num_significant_units_found++;
           if ($num_significant_units_found == $num_significant_units)
+          {
             $idx_least_significant = $idx_unit;
+          }
         }
       }
       $s -= $unit * $unit_size;
@@ -1026,7 +1061,9 @@ class TIME_INTERVAL
       {
         $num_significant_units_found++;
         if ($num_significant_units_found == $num_significant_units)
+        {
           $idx_least_significant = sizeof($units) - 1;
+        }
       }
     }
 
@@ -1146,17 +1183,25 @@ class TIME_INTERVAL
         if ($long_names)
         {
           if ($unit != 1)
+          {
             $formatted_units [] = "$unit {$unit_name}s";
+          }
           else
+          {
             $formatted_units [] = "$unit $unit_name";
+          }
         }
         else
+        {
           $formatted_units [] = $unit . $unit_name;
+        }
       }
       else
       {
         if (sizeof ($formatted_units))
+        {
           $num_significant_units = 0;
+        }
       }
 
       $idx_unit++;
@@ -1167,9 +1212,13 @@ class TIME_INTERVAL
     if (! $Result)
     {
       if ($long_names)
+      {
         $Result = '0 seconds';
+      }
       else
+      {
         $Result = '0s';
+      }
     }
 
     return trim ($Result);
@@ -1192,7 +1241,9 @@ function &global_date_time_toolkit ()
 {
   global $_g_date_time_toolkit;
   if (! isset ($_g_date_time_toolkit))
+  {
     $_g_date_time_toolkit = new DATE_TIME_TOOLKIT ();
+  }
   return $_g_date_time_toolkit;
 }
 

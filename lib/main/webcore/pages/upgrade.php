@@ -57,7 +57,9 @@ http://www.earthli.com/software/webcore
           $class_names = null;
           $Result = preg_match ('/class ([a-zA-Z_0-9]+) extends/', $text, $class_names);
           if (sizeof ($class_names) != 2)
+          {
             log_message ("Could not find class name in [$f].", Msg_type_warning);
+          }
           else
           {
             $task_class_name = $class_names [1];
@@ -68,10 +70,14 @@ http://www.earthli.com/software/webcore
       }
       
       if (empty ($task_class_name))
+      {
         $error_message = 'Could not find an upgrade for <span class="field">' . $info_to_uprade->title . ' ' . $info_to_uprade->database_version . '</span>. Please contact support.'; 
+      }
     }
     else
+    {
       $error_message = $info_to_uprade->message ();
+    }
     
     if (! empty ($task_class_name))
     {
@@ -92,5 +98,7 @@ http://www.earthli.com/software/webcore
     }    
   }
   else
+  {
     $Page->raise_security_violation ('You are not allowed to upgrade this application.');
+  }
 ?>

@@ -163,7 +163,9 @@ class SUBSCRIBER extends UNIQUE_OBJECT
   function exists ()
   {
     if ($this->email)
+    {
       $this->synchronize ();
+    }
     return parent::exists ();
   }
 
@@ -204,7 +206,9 @@ class SUBSCRIBER extends UNIQUE_OBJECT
     if ($this->queued_history_item_ids)
     {
       if (! isset ($this->_queued_history_items))
+      {
         $this->_queued_history_items = explode (',', $this->queued_history_item_ids);
+      }
 
       return in_array ($id, $this->_queued_history_items);
     }
@@ -219,9 +223,13 @@ class SUBSCRIBER extends UNIQUE_OBJECT
   function add_queued_history_items ($id)
   {
     if (isset ($this->queued_history_item_ids) && $this->queued_history_item_ids)
+    {
       $this->queued_history_item_ids .= ',' . $id;
+    }
     else
+    {
       $this->queued_history_item_ids = $id;
+    }
 
     $id_array = explode (',', $this->queued_history_item_ids);
     $id_array = array_unique ($id_array);
@@ -269,10 +277,14 @@ class SUBSCRIBER extends UNIQUE_OBJECT
     if ($enabled)
     {
       if (! $this->subscribed ($obj, $kind))
+      {
         $this->subscribe ($obj->id, $kind);
+      }
     }
     else
+    {
       $this->unsubscribe ($obj->id, $kind);
+    }
   }
 
   /**
@@ -285,7 +297,9 @@ class SUBSCRIBER extends UNIQUE_OBJECT
     $this->synchronize ();
 
     if (! $this->exists ())
+    {
       $this->store ();
+    }
 
     $this->db->logged_query ("INSERT INTO {$this->app->table_names->subscriptions}" .
                              " VALUES ($this->id, '$kind', $id, 1, 1)");
@@ -381,7 +395,9 @@ class SUBSCRIBER extends UNIQUE_OBJECT
         $query->set_select ('entry.id');    
         $type_infos = $this->app->entry_type_infos ();
         if ($type && (sizeof ($type_infos) > 1))
+        {
           $query->restrict_text ('entry.type', $type);
+        }
         break;
       case Subscribe_user:
         $query->add_table ($this->app->table_names->users . ' usr', 'usr.id = subs.ref_id');
@@ -439,7 +455,9 @@ class SUBSCRIBER extends UNIQUE_OBJECT
       foreach ($selected_ids as $id)
       {
         if (! in_array ($id, $original_ids))
+        {
           $this->subscribe ($id, $kind);
+        }
       }
     }
 
@@ -448,7 +466,9 @@ class SUBSCRIBER extends UNIQUE_OBJECT
       foreach ($original_ids as $id)
       {
         if (! in_array ($id, $selected_ids))
+        {
           $this->unsubscribe ($id, $kind);
+        }
       }
     }
   }
@@ -551,7 +571,9 @@ class SUBSCRIBER extends UNIQUE_OBJECT
   function _purge ($options)
   {
     if ($this->email)
+    {
       $this->synchronize ();
+    }
 
     $this->db->logged_query ("DELETE LOW_PRIORITY FROM {$this->app->table_names->subscriptions} WHERE subscriber_id = $this->id");
 
@@ -574,7 +596,9 @@ class SUBSCRIBER extends UNIQUE_OBJECT
 
       $this->db->logged_query ("SELECT * FROM {$this->app->table_names->subscribers} WHERE email = '$this->email'");
       if ($this->db->next_record ())
+      {
         $this->load ($this->db);
+      }
     }
   }
 

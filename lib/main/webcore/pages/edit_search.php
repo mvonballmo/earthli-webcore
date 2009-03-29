@@ -36,7 +36,9 @@ http://www.earthli.com/software/webcore
 
     $form->process_existing ($search);
     if ($form->committed ())
+    {
       $Env->redirect_local ($search->home_page ());
+    }
 
     $Page->title->add_object ($search);
     $Page->title->subject = "Edit";
@@ -62,5 +64,7 @@ http://www.earthli.com/software/webcore
     $Page->finish_display ();
   }
   else
+  {
     $Page->raise_security_violation ('You are not allowed to view this search.');
+  }
 ?>

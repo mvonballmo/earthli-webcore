@@ -94,7 +94,9 @@ class OBJECT_LIST_TITLE extends WEBCORE_OBJECT
   function as_text ()
   {
     if ($this->_text)
+    {
       return $this->_text;
+    }
     else
     {
       foreach ($this->_items as $id => $item)
@@ -144,9 +146,12 @@ class OBJECT_LIST_TITLE_ITEM
     if ($this->num_objects > 0)
     {
       if ($this->num_objects > 1)
+      {
         return $this->num_objects . ' ' . $this->type_info->plural_title;
-      else
-        return $this->num_objects . ' ' . $this->type_info->singular_title;
+      }
+
+
+      return $this->num_objects . ' ' . $this->type_info->singular_title;
     }
   }
 }

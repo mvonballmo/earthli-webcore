@@ -36,7 +36,9 @@ http://www.earthli.com/software/webcore
 
     $form->process_existing ($folder);
     if ($form->committed ())
+    {
       $Env->redirect_local ($folder->permissions_home_page ());
+    }
 
     $Page->title->add_object ($folder);
 
@@ -70,5 +72,7 @@ http://www.earthli.com/software/webcore
     $Page->finish_display ();
   }
   else
+  {
     $Page->raise_security_violation ('You are not allowed to modify permissions for this folder.', $folder);
+  }
 ?>

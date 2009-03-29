@@ -93,7 +93,9 @@ class PAGE_TITLE extends WEBCORE_OBJECT
   {
     $opts =& $this->context->text_options;
     if ($this->group)
+    {
       $pieces [] = $opts->convert_to_html_entities ($this->group);
+    }
 
     if (isset ($this->_objects) && sizeof ($this->_objects))
     {
@@ -101,16 +103,24 @@ class PAGE_TITLE extends WEBCORE_OBJECT
         $titles [] = $opts->convert_to_html_entities ($obj->title_as_plain_text ());
       $objects = join ($this->separator, $titles);
       if (isset ($objects))
+      {
         $pieces [] = $objects;
+      }
     }
 
     if ($this->subject)
+    {
       $pieces [] = $opts->convert_to_html_entities ($this->subject);
+    }
 
     if (isset ($pieces))
+    {
       $Result = $this->prefix . join ($this->separator, $pieces) . $this->suffix;
+    }
     else
+    {
       $Result = $this->prefix . $this->suffix;
+    }
       
     return $Result; 
   }

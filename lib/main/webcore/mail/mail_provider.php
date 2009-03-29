@@ -68,7 +68,7 @@ class MAIL_PROVIDER extends LOGGABLE
   {
     LOGGABLE::LOGGABLE ($context);
 
-    $class_name = $this->app->final_class_name ('RENDERER', 'webcore/gui/renderer.php');
+    $class_name = $this->context->final_class_name ('RENDERER', 'webcore/gui/renderer.php');
     $this->renderer = new $class_name ($context);
   }
 
@@ -88,7 +88,9 @@ class MAIL_PROVIDER extends LOGGABLE
     {
       $recipients = implode (';', $message->send_to);
       if ($sent)
+      {
         $this->record ("[$recipients] was sent [$message->subject]", Msg_type_info);
+      }
       else
       {
         $this->record ("[$recipients] was NOT sent [$message->subject]", Msg_type_error);

@@ -139,17 +139,23 @@ class MIGRATOR_TASK extends TASK
   {
     $Result = FALSE;
     if ($this->ignore_from_version)
+    {
       $Result = TRUE;
+    }
     else
     {
       if ($this->info->database_version)
       {
         $Result = $this->info->database_version == $this->version_from;
         if (! $Result)
+        {
           $this->_log ('Cannot migrate. database is at version [' . $this->info->database_version . ']; expected version [' . $this->version_from . '].', Msg_type_warning);
+        }
       }
       else
+      {
         $Result = TRUE;
+      }
     }
 
     return $Result;
@@ -165,11 +171,15 @@ class MIGRATOR_TASK extends TASK
     {
       $this->info->database_version = $this->version_to;
       if (! $this->testing)
+      {
         $this->info->store ();
+      }
       $this->_log ('Migration completed with (0) errors.', Msg_type_info);
     }
     else
+    {
       $this->_log ('Version not updated because of [' . $this->env->num_exceptions_raised . '] errors.', Msg_type_warning);
+    }
   }
 }
 

@@ -130,9 +130,12 @@ class OBJECT_IN_FOLDER extends CONTENT_OBJECT
       return 'Hidden';
     default:
       if ($this->state & Invisible)
+      {
         return 'Invisible';
-      else
-        return 'Unknown';
+      }
+
+
+      return 'Unknown';
     }
   }
 
@@ -155,9 +158,13 @@ class OBJECT_IN_FOLDER extends CONTENT_OBJECT
   {
     $Result = parent::title_formatter ();
     if ($this->invisible ())
+    {
       $Result->CSS_class = 'invisible';
+    }
     else
+    {
       $Result->CSS_class = 'visible';
+    }
     return $Result;
   }
 
@@ -168,7 +175,9 @@ class OBJECT_IN_FOLDER extends CONTENT_OBJECT
   {
     $Result = parent::raw_title ();
     if ($this->invisible ())
+    {
       $Result .= ' (' . $this->state_as_string () . ')';
+    }
     return $Result;
   }
 
@@ -183,9 +192,12 @@ class OBJECT_IN_FOLDER extends CONTENT_OBJECT
   {
     $fldr =& $this->parent_folder ();
     if (isset ($fldr))
+    {
       return $fldr->resolve_url ($url, $root_override);
-    else
-      return parent::resolve_url ($url, $root_override);
+    }
+
+
+    return parent::resolve_url ($url, $root_override);
   }
 
   /**
@@ -198,7 +210,9 @@ class OBJECT_IN_FOLDER extends CONTENT_OBJECT
   function &parent_folder ()
   {
     if (! isset ($this->_parent_folder))
+    {
       $this->_parent_folder =& $this->_load_parent_folder ();
+    }
     return $this->_parent_folder;
   }
 
@@ -224,7 +238,9 @@ class OBJECT_IN_FOLDER extends CONTENT_OBJECT
   {
     $fldr = $this->parent_folder ();
     if (isset($fldr))
+    {
       return $fldr->id;
+    }
   }
 
   /**
@@ -241,8 +257,8 @@ class OBJECT_IN_FOLDER extends CONTENT_OBJECT
     if (! $parent->equals ($fldr))
     {
       $privilege_set = $this->_privilege_set ();
-      if ($this->login->is_allowed ($privilege_set, Privilege_delete, $this->parent_folder ())
-          && $this->login->is_allowed ($privilege_set, Privilege_create, $fldr))
+      if ($this->login->is_allowed ($privilege_set, Privilege_delete, $this->parent_folder ()) && 
+        $this->login->is_allowed ($privilege_set, Privilege_create, $fldr))
       {
         $this->_move_to ($fldr, $options);
       }
@@ -250,9 +266,13 @@ class OBJECT_IN_FOLDER extends CONTENT_OBJECT
       {
         $msg = 'Could not move ' . get_class ($this) . '[' . $this->title_as_plain_text () . '] to folder [' . $fldr->title_as_plain_text () . '] (insufficent privileges).';
         if ($options->raise_on_security_failure)
+        {
           $this->raise ($msg);
+        }
         else
+        {
           log_message ($msg, Msg_type_debug_warning, Msg_channel_system);
+        }
       }
     }
   }
@@ -269,14 +289,20 @@ class OBJECT_IN_FOLDER extends CONTENT_OBJECT
   {
     $privilege_set = $this->_privilege_set ();
     if ($this->login->is_allowed ($privilege_set, Privilege_create, $fldr))
+    {
       $this->_copy_to ($fldr, $options);
+    }
     else
     {
       $msg = 'Could not copy ' . get_class ($this) . '[' . $this->title_as_plain_text () . '] to folder [' . $fldr->title_as_plain_text () . '] (insufficent privileges).';
       if ($options->raise_on_security_failure)
+      {
         $this->raise ($msg);
+      }
       else
+      {
         log_message ($msg, Msg_type_debug_warning, Msg_channel_system);
+      }
     }
   }
 
@@ -370,21 +396,28 @@ class OBJECT_IN_FOLDER extends CONTENT_OBJECT
       return History_item_hidden;
     case Visible:
       if ($this->invisible ())
+      {
         return History_item_restored;
-      else
-        return History_item_updated;
+      }
+
+
+      return History_item_updated;
     case Locked:
       return History_item_locked;
     default:
       if ($this->invisible ())
       {
         if ($state & Invisible)
+        {
           return History_item_hidden_update;
-        else
-          return History_item_udpated;
+        }
+
+
+        return History_item_udpated;
       }
-      else
-        return History_item_updated;
+
+
+      return History_item_updated;
     }
   }
 
@@ -428,10 +461,14 @@ class OBJECT_IN_FOLDER extends CONTENT_OBJECT
     parent::_pre_store ();
 
     if (isset ($this->_stored_state) && ($this->_stored_state != $this->state))
+    {
       $this->_state_changed ();
+    }
 
     if (! $this->exists ())
+    {
       $this->owner_id = $this->login->id;
+    }
 
     $this->_stored_state = $this->state;
   }
@@ -516,9 +553,12 @@ class OBJECT_IN_FOLDER extends CONTENT_OBJECT
       return '{icons}indicators/invisible';
     default:
       if ($this->state & Invisible)
+      {
         return '{icons}indicators/invisible';
-      else
-        return '{icons}indicators/unknown';
+      }
+
+
+      return '{icons}indicators/unknown';
     }
   }
 
@@ -537,7 +577,9 @@ class OBJECT_IN_FOLDER extends CONTENT_OBJECT
       $this->store_if_different ($history_item);
     }
     else
+    {
       $this->_parent_folder =& $fldr;
+    }
   }
 
   /**
@@ -559,7 +601,9 @@ class OBJECT_IN_FOLDER extends CONTENT_OBJECT
       $this->store_if_different ($history_item);
     }
     else
+    {
       $this->_parent_folder =& $fldr;
+    }
   }
 
   /**
@@ -583,9 +627,13 @@ class OBJECT_IN_FOLDER extends CONTENT_OBJECT
   {
     unset ($this->_parent_folder);
     if (isset ($other->_parent_folder))
+    {
       $this->_parent_folder = $other->_parent_folder->make_clone ();
+    }
     else
+    {
       $this->_parent_folder = null;
+    }
   }
 
   /**

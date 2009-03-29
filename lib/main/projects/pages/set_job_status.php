@@ -44,9 +44,13 @@ http://www.earthli.com/software/webcore
     foreach ($branch_infos as $branch_info)
     {
       if ($branch_info->branch_id == $branch_id)
+      {
         $branch_info->set_status ($status);
+      }
       if ($main_branch_info->branch_id == $branch_info->branch_id)
+      {
         $job->set_main_branch_info ($branch_info);
+      }
       $job->add_branch_info ($branch_info);
     }
     

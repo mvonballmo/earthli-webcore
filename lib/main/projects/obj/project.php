@@ -142,7 +142,9 @@ class PROJECT extends FOLDER
       {
         $this->db->logged_query ("SELECT * from {$this->app->table_names->folder_options} WHERE folder_id = $this->options_id");
         if ($this->db->next_record ())
+        {
           $this->_options->load ($this->db);
+        }
       }
     }
     return $this->_options;
@@ -178,9 +180,13 @@ class PROJECT extends FOLDER
   {
     unset($this->_options);
     if ($other->exists ())
+    {
       $this->_options = $other->options ();
+    }
     else
+    {
       $this->_options = null;
+    }
   }
   
   /**
