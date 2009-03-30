@@ -287,6 +287,29 @@ function __php_error_handler ($type, $msg, $file_name, $line_no)
   }
 }
 
+class UNKNOWN_VALUE_EXCEPTION extends Exception
+{
+  public function __construct($value) 
+  {
+    $this->_value = $value;
+  }
+  
+  public function message()
+  {
+    return "Unknown value [$this->_value]";
+  }
+
+  private $_value;
+}
+
+class METHOD_NOT_IMPLEMENTED_EXCEPTION extends Exception
+{
+  public function message()
+  {
+    return "Method not implemented.";
+  }
+}
+
 /**
  * Defines a class that is connected to a context with an exception handler.
  * This allows groups of classes to use different exception handlers.
@@ -304,7 +327,7 @@ class RAISABLE
    * @param string $class_name The name of the class where the error occurred
    * @access private
    */
-  function raise ($message, $routine_name, $class_name)
+  public function raise ($message, $routine_name, $class_name)
   {
     raise ($message, $routine_name, $class_name, $this, $this->_exception_handler ());
   }
@@ -315,7 +338,7 @@ class RAISABLE
    * @param string $class_name The name of the class where the error occurred
    * @access private
    */
-  function raise_deferred ($routine_name, $class_name)
+  public function raise_deferred ($routine_name, $class_name)
   {
     $this->raise ('deferred function is not implemented.', $routine_name, $class_name);
   }
@@ -326,7 +349,7 @@ class RAISABLE
    * @param string $class_name
    * @access private
    */
-  function raise_if_not_is_a ($obj, $expected_class, $routine_name, $class_name)
+  public function raise_if_not_is_a ($obj, $expected_class, $routine_name, $class_name)
   {
     if (! ($obj instanceof $expected_class))
     {
@@ -335,14 +358,14 @@ class RAISABLE
   }
 
   /**
-   * Passes the error to a shared exception handler if the condition is TRUE.
+   * Passes the error to a shared exception handler if the condition is true.
    * @param boolean $condition The condition to check
    * @param string $message The error message
    * @param string $routine_name The name of the routine where the error occurred
    * @param string $class_name The name of the class where the error occurred
    * @access private
    */
-  function assert ($condition, $message, $routine_name, $class_name)
+  public function assert ($condition, $message, $routine_name, $class_name)
   {
     if (! $condition)
     {
@@ -356,21 +379,21 @@ class RAISABLE
    * handling to function properly.
    * @param string $msg
    */
-  function halt ($msg = 'Process halted.')
+  public function halt ($msg = 'Process halted.')
   {
     raise ($msg, '[unknown]', get_class ($this), $this, $this->_exception_handler ());
   }
 
   /**
    * Determines whether a value is an integer or not.
-   * This will return FALSE if it is not. To validate an integer with an exception,
+   * This will return false if it is not. To validate an integer with an exception,
    * use {@link validate_as_integer()} instead.
    * @param mixed $value The integer prospect
    * @param boolean $allow_empty Is an empty value interpreted as 0?
-   * @return mixed Returns FALSE if it's not an integer. Returns the integer otherwise (or 0 if empty).
+   * @return mixed Returns false if it's not an integer. Returns the integer otherwise (or 0 if empty).
    * @access private
    */
-  function validate_as_integer_silent ($value, $allow_empty = TRUE)
+  public function validate_as_integer_silent ($value, $allow_empty = true)
   {
     if ($allow_empty && ! $value)
     {
@@ -382,7 +405,7 @@ class RAISABLE
       return $value;
     }
 
-    return FALSE;
+    return false;
   }
 
   /**
@@ -396,15 +419,15 @@ class RAISABLE
    * @see RAISABLE::validate_as_integer_silent
    * @access private
    */
-  function validate_as_integer ($value, $allow_empty = TRUE)
+  public function validate_as_integer ($value, $allow_empty = true)
   {
     $validated_value = $this->validate_as_integer_silent ($value, $allow_empty);
-    if ($validated_value !== FALSE)
+    if ($validated_value !== false)
     {
       return $validated_value;
     }
 
-    $this->raise ("[$value] is not an integer.", 'validate_as_integer', 'RAISABLE');
+    throw new Exception("[$value] is not an integer.");
   }
 
   /**
@@ -412,7 +435,7 @@ class RAISABLE
    * @return EXCEPTION_HANDLER
    * @access private
    */
-  function _exception_handler ()
+  protected function _exception_handler ()
   {
     return null;
   }
@@ -435,7 +458,7 @@ class EXCEPTION_HANDLER
    * @param string $class_name The name of the class where the error occurred (can be empty)
    * @param object $obj Reference to the object where the error occurred (can be empty)
    */
-  function raise ($message, $routine_name, $class_name, $obj)
+  public function raise ($message, $routine_name, $class_name, $obj)
   {
     $sig = $this->signature ($message, $routine_name, $class_name, $obj);
 
@@ -458,7 +481,7 @@ class EXCEPTION_HANDLER
    * @return EXCEPTION_SIGNATURE
    * @access private
    */
-  function signature ($message, $routine_name, $class_name, $obj)
+  public function signature ($message, $routine_name, $class_name, $obj)
   {
     include_once ('webcore/sys/exception_signature.php');
     $Result = new EXCEPTION_SIGNATURE ($message, $routine_name, $class_name, $obj);
@@ -474,7 +497,7 @@ class EXCEPTION_HANDLER
    * @param string $msg Pre-formatted error message.
    * @access private
    */
-  function dispatch ($sig, $msg)
+  public function dispatch ($sig, $msg)
   {
     die ($msg);
   }
@@ -496,28 +519,33 @@ class TYPE_INFO
    * @var string
    */
   public $id = 'object';
+
   /**
    * Title for a single object.
    * @var string
    */
   public $singular_title = 'Object';
+
   /**
    * Title for more than one of these objects.
    * @var string
    */
   public $plural_title = 'Objects';
+
   /**
    * Object is reachable via this URL.
    * May not be set for some objects.
    * @var string
    */
   public $home_page = '';
+
   /**
    * Resource location inside the {@link Folder_name_icons} folder.
    * May be empty.
    * @var string
    */
   public $icon = '{icons}buttons/new_object';
+
   /**
    * @var string
    */
@@ -527,7 +555,7 @@ class TYPE_INFO
    * Return the number with the title attached as units.
    * Uses {@link $plural_title} or {@link $singular_title}.
    */
-  function format_amount ($num)
+  public function format_amount ($num)
   {
     if ($num == 1)
     {

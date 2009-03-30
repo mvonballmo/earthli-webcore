@@ -59,7 +59,7 @@ http://www.earthli.com/software/webcore
 
     $class_name = $App->final_class_name ('GROUP_USER_GRID', 'webcore/gui/group_user_grid.php');
     $grid = new $class_name ($group);
-    $grid->show_folder = TRUE;
+    $grid->show_folder = true;
     $grid->set_ranges (25, 1);
     $grid->set_query ($user_query);
     $grid->display ();

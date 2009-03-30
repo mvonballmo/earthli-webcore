@@ -53,7 +53,7 @@ class CHANGE_LOG_COMMANDS extends COMMANDS
   /**
    * @param APPLICATION $app
    */
-  function CHANGE_LOG_COMMANDS ($app)
+  public function CHANGE_LOG_COMMANDS ($app)
   {
     COMMANDS::COMMANDS ($app);
 
@@ -64,11 +64,11 @@ class CHANGE_LOG_COMMANDS extends COMMANDS
     $url->add_argument ('printable', '1');
     $cmd->link = $url->as_text ();
     $cmd->icon = '{icons}/buttons/print';
-    $cmd->executable = TRUE;
+    $cmd->executable = true;
     $cmd->importance = Command_importance_high;
     $this->append ($cmd);
 
-    $show_date = read_var ('show_date', TRUE);
+    $show_date = read_var ('show_date', true);
 
     $cmd = $this->make_command ();
     $cmd->id = 'show_dates';
@@ -84,11 +84,11 @@ class CHANGE_LOG_COMMANDS extends COMMANDS
     $url->replace_argument ('show_date', ! $show_date);
     $cmd->link = $url->as_text ();
     $cmd->icon = '{icons}/buttons/calendar';
-    $cmd->executable = TRUE;
+    $cmd->executable = true;
     $cmd->importance = Command_importance_high - Command_importance_increment;
     $this->append ($cmd);
 
-    $show_user = read_var ('show_user', TRUE);
+    $show_user = read_var ('show_user', true);
 
     $cmd = $this->make_command ();
     $cmd->id = 'show_users';
@@ -104,11 +104,11 @@ class CHANGE_LOG_COMMANDS extends COMMANDS
     $url->replace_argument ('show_user', ! $show_user);
     $cmd->link = $url->as_text ();
     $cmd->icon = '{icons}/buttons/login';
-    $cmd->executable = TRUE;
+    $cmd->executable = true;
     $cmd->importance = Command_importance_high - Command_importance_increment;
     $this->append ($cmd);
 
-    $show_description = read_var ('show_description', TRUE);
+    $show_description = read_var ('show_description', true);
 
     $cmd = $this->make_command ();
     $cmd->id = 'show_descriptions';
@@ -124,7 +124,7 @@ class CHANGE_LOG_COMMANDS extends COMMANDS
     $url->replace_argument ('show_description', ! $show_description);
     $cmd->link = $url->as_text ();
     $cmd->icon = '{icons}indicators/text';
-    $cmd->executable = TRUE;
+    $cmd->executable = true;
     $cmd->importance = Command_importance_high - Command_importance_increment;
     $this->append ($cmd);
   }
@@ -143,7 +143,7 @@ class BRANCH_CHANGE_LOG_COMMANDS extends CHANGE_LOG_COMMANDS
   /**
    * @param APPLICATION $app
    */
-  function BRANCH_CHANGE_LOG_COMMANDS ($app)
+  public function BRANCH_CHANGE_LOG_COMMANDS ($app)
   {
     CHANGE_LOG_COMMANDS::CHANGE_LOG_COMMANDS ($app);
 
@@ -164,7 +164,7 @@ class BRANCH_CHANGE_LOG_COMMANDS extends CHANGE_LOG_COMMANDS
     $url = new URL ($this->env->url (Url_part_no_host_path));
     $url->replace_argument ('show_all', ! $show_all);
     $cmd->link = $url->as_text ();
-    $cmd->executable = TRUE;
+    $cmd->executable = true;
     $cmd->importance = Command_importance_low;
     $this->append ($cmd);
   }

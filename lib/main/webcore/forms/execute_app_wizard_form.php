@@ -52,10 +52,12 @@ class EXECUTE_APP_WIZARD_FORM extends FORM
    * @var string
    */
   public $name = 'app_wizard';
+
   /**
    * @var string
    */
   public $button = 'Generate';
+
   /**
    * @var string
    */
@@ -64,75 +66,75 @@ class EXECUTE_APP_WIZARD_FORM extends FORM
   /**
    * @param CONTEXT $context
    */
-  function EXECUTE_APP_WIZARD_FORM ($context)
+  public function EXECUTE_APP_WIZARD_FORM ($context)
   {
     FORM::FORM ($context);
 
     $field = new TEXT_FIELD ();
     $field->id = 'app_title';
     $field->title = 'Title';
-    $field->sticky = TRUE;
-    $field->required = TRUE;
+    $field->sticky = true;
+    $field->required = true;
     $this->add_field ($field);
 
     $field = new TEXT_FIELD ();
     $field->id = 'app_id';
     $field->title = 'Identifier';
-    $field->sticky = TRUE;
-    $field->required = TRUE;
+    $field->sticky = true;
+    $field->required = true;
     $this->add_field ($field);
 
     $field = new TEXT_FIELD ();
     $field->id = 'app_url';
     $field->title = 'URL';
-    $field->sticky = TRUE;
-    $field->required = TRUE;
+    $field->sticky = true;
+    $field->required = true;
     $this->add_field ($field);
 
     $field = new TEXT_FIELD ();
     $field->id = 'app_folder';
     $field->title = 'Folder';
-    $field->sticky = TRUE;
-    $field->required = TRUE;
+    $field->sticky = true;
+    $field->required = true;
     $this->add_field ($field);
 
     $field = new TEXT_FIELD ();
     $field->id = 'app_prefix';
     $field->title = 'Prefix';
-    $field->sticky = TRUE;
-    $field->required = TRUE;
+    $field->sticky = true;
+    $field->required = true;
     $this->add_field ($field);
 
     $field = new TEXT_FIELD ();
     $field->id = 'folder_name';
     $field->title = 'Folder Name';
-    $field->sticky = TRUE;
-    $field->required = TRUE;
+    $field->sticky = true;
+    $field->required = true;
     $this->add_field ($field);
 
     $field = new TEXT_FIELD ();
     $field->id = 'entry_name';
     $field->title = 'Entry Name';
-    $field->sticky = TRUE;
-    $field->required = TRUE;
+    $field->sticky = true;
+    $field->required = true;
     $this->add_field ($field);
 
     $field = new TEXT_FIELD ();
     $field->id = 'author_name';
     $field->title = 'Author Name';
-    $field->sticky = TRUE;
-    $field->required = TRUE;
+    $field->sticky = true;
+    $field->required = true;
     $this->add_field ($field);
 
     $field = new EMAIL_FIELD ();
     $field->id = 'author_email';
     $field->title = 'Author Email';
-    $field->sticky = TRUE;
-    $field->required = TRUE;
+    $field->sticky = true;
+    $field->required = true;
     $this->add_field ($field);
   }
   
-  function load_with_defaults ()
+  public function load_with_defaults ()
   {
     $this->load_from_client ('app_title', '');
     $this->load_from_client ('app_id', '');
@@ -145,7 +147,7 @@ class EXECUTE_APP_WIZARD_FORM extends FORM
     $this->load_from_client ('author_email', '');
   }
   
-  function load_from_object ($obj)
+  public function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
     $this->load_with_defaults ();
@@ -156,7 +158,7 @@ class EXECUTE_APP_WIZARD_FORM extends FORM
    * @param TASK $obj
    * @access private
    */
-  function commit ($obj)
+  public function commit ($obj)
   {
     $obj->app_title = $this->value_for ('app_title');
     $obj->app_id = $this->value_for ('app_id');
@@ -167,8 +169,8 @@ class EXECUTE_APP_WIZARD_FORM extends FORM
     $obj->entry_name = $this->value_for ('entry_name');
     $obj->author_name = $this->value_for ('author_name');
     $obj->author_email = $this->value_for ('author_email');
-    $obj->owns_page = FALSE;
-    $obj->debug = FALSE;
+    $obj->owns_page = false;
+    $obj->debug = false;
     $obj->execute ();
   }
 
@@ -176,7 +178,7 @@ class EXECUTE_APP_WIZARD_FORM extends FORM
    * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_controls ($renderer)
+  protected function _draw_controls ($renderer)
   {
     $renderer->start ();
 

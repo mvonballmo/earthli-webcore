@@ -46,7 +46,7 @@ require_once ('webcore/gui/selectable_grid.php');
  * @subpackage grid
  * @version 3.0.0
  * @since 2.7.0*/
-class CONTENT_OBJECT_GRID extends SELECTABLE_GRID
+abstract class CONTENT_OBJECT_GRID extends SELECTABLE_GRID
 {
   /**
    * Used to draw the entry's title in each cell.
@@ -54,7 +54,7 @@ class CONTENT_OBJECT_GRID extends SELECTABLE_GRID
    * @return TITLE_FORMATTER
    * @access private
    */
-  function title_formatter ($obj)
+  public function title_formatter ($obj)
   {
     $Result = $obj->title_formatter ();
     $Result->max_visible_output_chars = 0;
@@ -74,7 +74,7 @@ class CONTENT_OBJECT_GRID extends SELECTABLE_GRID
    * @return string
    * @access private
    */
-  function obj_link ($obj)
+  public function obj_link ($obj)
   {
     $t = $this->title_formatter ($obj);
     return $obj->title_as_link ($t);
@@ -87,7 +87,7 @@ class CONTENT_OBJECT_GRID extends SELECTABLE_GRID
    * @param CONTENT_OBJECT $obj
    * @access private
    */
-  function _echo_text_summary ($obj)
+  protected function _echo_text_summary ($obj)
   {
     if ($this->app->search_text)
     {
@@ -107,7 +107,7 @@ class CONTENT_OBJECT_GRID extends SELECTABLE_GRID
    * @param CONTENT_OBJECT $obj
    * @access private
    */
-  function _text_to_summarize ($obj)
+  protected function _text_to_summarize ($obj)
   {
     return $obj->description;
   }

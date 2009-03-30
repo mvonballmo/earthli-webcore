@@ -52,19 +52,23 @@ class LOG_IN_FORM extends FORM
    * @var string
    */
   public $name = 'log_in_form';
+
   /**
    * @var string
    */
   public $button = 'Log in';
+
   /**
    * @var string
    */
   public $button_icon = '{icons}buttons/login';
+
   /**
    * @var string
-    * @access private
-    */
+   * @access private
+   */
   public $submitted_flag = 'login_submitted';
+
   /**
    * @var string
    */
@@ -73,21 +77,21 @@ class LOG_IN_FORM extends FORM
   /**
    * @param APPLICATION $app Main application.
    */
-  function LOG_IN_FORM ($app)
+  public function LOG_IN_FORM ($app)
   {
     FORM::FORM ($app);
 
     $field = new TEXT_FIELD ();
     $field->id = 'name';
     $field->title = 'Name';
-    $field->required = TRUE;
+    $field->required = true;
     $field->max_length = 100;
     $this->add_field ($field);
 
     $field = new TEXT_FIELD ();
     $field->id = 'password';
     $field->title = 'Password';
-    $field->required = TRUE;
+    $field->required = true;
     $field->min_length = 1;
     $field->max_length = 20;
     $this->add_field ($field);
@@ -101,7 +105,7 @@ class LOG_IN_FORM extends FORM
     $field = new TEXT_FIELD ();
     $field->id = 'last_page';
     $field->title = 'Last page';
-    $field->visible = FALSE;
+    $field->visible = false;
     $this->add_field ($field);
 
     if ($this->login->is_anonymous ())
@@ -112,17 +116,17 @@ class LOG_IN_FORM extends FORM
 
   /**
    * Called after fields are validated.
-    * @param object $obj This parameter is ignored.
-    * @access private
-    */
-  function _post_validate ($obj)
+   * @param object $obj This parameter is ignored.
+   * @access private
+   */
+  protected function _post_validate ($obj)
   {
     parent::_post_validate ($obj);
 
     if (! $this->num_errors ('name') && $this->value_for ('name'))
     {
       $user_query = $this->app->user_query ();
-      $user_query->include_permissions (TRUE);
+      $user_query->include_permissions (true);
       $this->_user = $user_query->object_at_name ($this->value_for ('name'));
 
       if (! $this->_user)
@@ -142,17 +146,17 @@ class LOG_IN_FORM extends FORM
     }
   }
 
-  function load_with_defaults ()
+  public function load_with_defaults ()
   {
     $this->set_value ('last_page', urlencode (read_var ('last_page')));
   }
 
   /**
    * Log in the selected user, if possible.
-    * @param object $obj This parameter is ignored.
-    * @access private
-    */
-  function commit ($obj)
+   * @param object $obj This parameter is ignored.
+   * @access private
+   */
+  public function commit ($obj)
   {
     if (! $this->_user->is_anonymous ())
     {
@@ -168,9 +172,9 @@ class LOG_IN_FORM extends FORM
    * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_controls ($renderer)
+  protected function _draw_controls ($renderer)
   {
-    $renderer->show_required_mark = FALSE;
+    $renderer->show_required_mark = false;
     $renderer->set_width ('15em');
 
     $renderer->start ();

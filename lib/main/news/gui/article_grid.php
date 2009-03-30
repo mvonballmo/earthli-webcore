@@ -52,14 +52,17 @@ class BASE_ARTICLE_GRID extends CONTENT_OBJECT_GRID
    * @var string
    */
   public $object_name = 'Article';
+
   /**
    * @var boolean
    */
-  public $show_folder = FALSE;
+  public $show_folder = false;
+
   /**
    * @var boolean
    */
-  public $show_user = TRUE;
+  public $show_user = true;
+
   /**
    * @var integer
    */
@@ -68,20 +71,22 @@ class BASE_ARTICLE_GRID extends CONTENT_OBJECT_GRID
    * @var integer
    */
   public $chars_to_show_for_visible = 0;
+
   /**
    * @var boolean
    */
-  public $show_description = FALSE;
+  public $show_description = false;
+
   /**
    * @var boolean
    */
-  public $show_controls = FALSE;  
+  public $show_controls = false;  
 
   /**
    * @param ARTICLE $obj
-    * @access private
-    */
-  function _draw_box ($obj)
+   * @access private
+   */
+  protected function _draw_box ($obj)
   {
     $folder = $obj->parent_folder ();
 ?>
@@ -189,21 +194,23 @@ class ARTICLE_GRID extends BASE_ARTICLE_GRID
   /**
    * @var boolean
    */
-  public $show_description = TRUE;
+  public $show_description = true;
+
   /**
    * @var boolean
    */
-  public $show_controls = TRUE;
+  public $show_controls = true;
+
   /**
    * @var boolean
    */
-  public $fuzzy_dates = TRUE;  
+  public $fuzzy_dates = true;  
 
   /**
    * @param ARTICLE $obj
-    * @access private
-    */
-  function _start_row ($obj)
+   * @access private
+   */
+  protected function _start_row ($obj)
   {
     $curr_date = $obj->time_published;
     if (! $curr_date->is_valid ())

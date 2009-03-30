@@ -55,6 +55,7 @@ class BATCH_CREATE_PICTURES_TASK extends TASK
    * @var string
    */
   public $page_title = 'Import pictures';
+
   /**
    * Log all messages in this channel.
    * @var string
@@ -66,22 +67,26 @@ class BATCH_CREATE_PICTURES_TASK extends TASK
    * @var string
    */
   public $archive_file_name;
+
   /**
    * Extract the date from each picture?
    * @var boolean
    */
   public $read_exif;
+
   /**
    * Create a thumbnail for each picture?
    * @var boolean
    */
   public $create_thumbnail;
+
   /**
    * Maximum width or height of the thumbnail.
    * Aspect ratio is preserved.
    * @var integer
    */
   public $thumbnail_size;
+
   /**
    * Picture titles are created using this template.
    * Use {#} to include the picture number and {file} to include the file name
@@ -90,12 +95,14 @@ class BATCH_CREATE_PICTURES_TASK extends TASK
    * @var string
    */
   public $file_name_template;
+
   /**
    * Use this date if picture dates are not available or wanted.
    * @see $read_exif
    * @var DATE_TIME
    */
   public $default_date;
+
   /**
    * Start numbering new pictures from here.
    * @var integer
@@ -105,7 +112,7 @@ class BATCH_CREATE_PICTURES_TASK extends TASK
   /**
    * @param FOLDER $folder Create pictures in this folder.
    */
-  function BATCH_CREATE_PICTURES_TASK ($folder)
+  public function BATCH_CREATE_PICTURES_TASK ($folder)
   {
     TASK::TASK ($folder->context);
     $this->_folder = $folder;
@@ -115,10 +122,10 @@ class BATCH_CREATE_PICTURES_TASK extends TASK
    * Initialize any loggers needed for the migration process.
    * @access private
    */
-  function _set_up_logging ()
+  protected function _set_up_logging ()
   {
     parent::_set_up_logging ();
-    $this->_logger->show_date = FALSE;
+    $this->_logger->show_date = false;
   }
 
   /**
@@ -126,7 +133,7 @@ class BATCH_CREATE_PICTURES_TASK extends TASK
    * This is task- and application-specific.
    * @access private
    */
-  function _execute ()
+  protected function _execute ()
   {
     $class_name = $this->app->final_class_name ('ARCHIVE', 'webcore/util/archive.php');
     $archive = new $class_name ($this->archive_file_name);
@@ -137,6 +144,7 @@ class BATCH_CREATE_PICTURES_TASK extends TASK
       $archive->for_each (new CALLBACK_METHOD ('process_image', $this), new CALLBACK_METHOD ('show_error', $this));
     log_close_block ();
 
+    $php_errormsg = null;
     @unlink ($this->archive_file_name);
     if (isset ($php_errormsg))
     {
@@ -152,14 +160,14 @@ class BATCH_CREATE_PICTURES_TASK extends TASK
    * Initialize any loggers needed for the migration process.
    * @access private
    */
-  function _finish ()
+  protected function _finish ()
   {
     $t = $this->_folder->title_formatter ();
     $t->text = 'View pictures';
     $t->add_argument ('time_frame', 'recent');
     $t->add_argument ('panel', 'picture');
     $link_text = $this->_folder->title_as_link ($t);
-    $this->_log ("Imported [$this->_num_pictures_imported] pictures. ($link_text)", Msg_type_info, TRUE);
+    $this->_log ("Imported [$this->_num_pictures_imported] pictures. ($link_text)", Msg_type_info, true);
     parent::_finish ();
   }
 
@@ -170,7 +178,7 @@ class BATCH_CREATE_PICTURES_TASK extends TASK
    * @param CALLBACK $error_callback
    * @access private
    */
-  function process_image ($archive, $entry, $error_callback)
+  public function process_image ($archive, $entry, $error_callback)
   {
     log_open_block ("Extracting [$entry->name]...");
     $entry->extract_to ($this->_folder_url, $error_callback);
@@ -233,6 +241,7 @@ class BATCH_CREATE_PICTURES_TASK extends TASK
     }
     else
     {
+      $php_errormsg = null;
       @unlink ($entry->extracted_name);
       if (isset ($php_errormsg))
       {
@@ -254,7 +263,7 @@ class BATCH_CREATE_PICTURES_TASK extends TASK
    * @param COMPRESSED_FILE_ENTRY $entry
    * @access private
    */
-  function show_error ($archive, $msg, $entry)
+  public function show_error ($archive, $msg, $entry)
   {
     $this->_log ($msg, Msg_type_error);
   }
@@ -265,6 +274,7 @@ class BATCH_CREATE_PICTURES_TASK extends TASK
    * @access private
    */
   protected $_folder_url;
+
   /**
    * @var integer
    * @access private

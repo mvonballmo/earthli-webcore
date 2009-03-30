@@ -55,7 +55,7 @@ class PAGE_RENDERER extends WEBCORE_OBJECT
   /**
    * Start painting the page (show the header)
    */
-  function start_display ()
+  public function start_display ()
   {
     $this->display_doc_type ();
 ?>
@@ -86,7 +86,7 @@ class PAGE_RENDERER extends WEBCORE_OBJECT
   /**
    * Finish painting the page (show the footer)
    */
-  function finish_display ()
+  public function finish_display ()
   {
     $this->_finish_body ();
 ?>
@@ -104,7 +104,7 @@ class PAGE_RENDERER extends WEBCORE_OBJECT
    * @see PAGE_ICON_OPTIONS::display()
    * @see PAGE_REFRESH_OPTIONS::display()
    */
-  function display_head ()
+  public function display_head ()
   {
     $this->display_title ();
     $this->display_content_type ();
@@ -118,7 +118,7 @@ class PAGE_RENDERER extends WEBCORE_OBJECT
   /**
    * Outputs the {@link PAGE::$doc_type}.
    */
-  function display_doc_type ()
+  public function display_doc_type ()
   {
     echo $this->page->doc_type;
   }
@@ -128,7 +128,7 @@ class PAGE_RENDERER extends WEBCORE_OBJECT
    * Called from {@link display_head()}; call individually if not using
    * start/finish display functions.
    */
-  function display_title ()
+  public function display_title ()
   {
     echo '<title>' . $this->page->title->as_text () . '</title>' . "\n";
   }
@@ -138,7 +138,7 @@ class PAGE_RENDERER extends WEBCORE_OBJECT
    * Called from {@link display_head()}; call individually if not using
    * start/finish display functions.
    */
-  function display_content_type ()
+  public function display_content_type ()
   {
     $this->display_meta_header_tag ('Content-Type', $this->page->content_type);
   }
@@ -148,7 +148,7 @@ class PAGE_RENDERER extends WEBCORE_OBJECT
    * Calls {@link _include_styles()} and {@link _include_scripts()}.
    * @access private
    */
-  function display_styles_and_scripts ()
+  public function display_styles_and_scripts ()
   {
     $this->display_styles ();
     if ($this->page->template_options->include_scripts)
@@ -157,17 +157,17 @@ class PAGE_RENDERER extends WEBCORE_OBJECT
     }
   }
   
-  function display_meta_name_tag ($tag_name, $tag_content)
+  public function display_meta_name_tag ($tag_name, $tag_content)
   {
     $this->display_meta_tag ('name', $tag_name, $tag_content);
   }
 
-  function display_meta_header_tag ($tag_name, $tag_content)
+  public function display_meta_header_tag ($tag_name, $tag_content)
   {
     $this->display_meta_tag ('http-equiv', $tag_name, $tag_content);
   }
 
-  function display_meta_tag ($meta_type, $tag_name, $tag_content)
+  public function display_meta_tag ($meta_type, $tag_name, $tag_content)
   {
     if (! empty($tag_content))
     {
@@ -179,14 +179,14 @@ class PAGE_RENDERER extends WEBCORE_OBJECT
     }
   }
   
-  function display_meta_information ()
+  public function display_meta_information ()
   {
     $this->display_meta_name_tag ('author', $this->page->author);
     $this->display_meta_name_tag ('keywords', $this->page->keywords);
     $this->display_meta_name_tag ('description', $this->page->description);
   }
 
-  function start_display_as_text ()
+  public function start_display_as_text ()
   {
     ob_start ();
       $this->start_display ();
@@ -195,7 +195,7 @@ class PAGE_RENDERER extends WEBCORE_OBJECT
     return $Result;
   }
 
-  function finish_display_as_text ()
+  public function finish_display_as_text ()
   {
     ob_start ();
       $this->finish_display ();
@@ -209,7 +209,7 @@ class PAGE_RENDERER extends WEBCORE_OBJECT
    * Includes and resolves all styles found in {@link PAGE::$styles}. Override
    * to include other stylesheets.
    */
-  function display_styles ()
+  public function display_styles ()
   {
     $page = $this->page;
     if (! empty ($page->styles))
@@ -233,7 +233,7 @@ class PAGE_RENDERER extends WEBCORE_OBJECT
    * Includes and resolves all scripts found in {@link PAGE::$scripts}. Override
    * to include other scripts.
    */
-  function display_scripts ()
+  public function display_scripts ()
   {
     $page = $this->page;
     if (! empty ($page->scripts))
@@ -255,13 +255,13 @@ class PAGE_RENDERER extends WEBCORE_OBJECT
    * Called from {@link start_display()}.
    * @access private
    */
-  function _start_body () {}
+  protected function _start_body () {}
 
   /**
    * Called from {@link finish_display()}.
    * @access private
    */
-  function _finish_body () {}
+  protected function _finish_body () {}
 }
 
 ?>

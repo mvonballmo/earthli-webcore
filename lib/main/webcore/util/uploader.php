@@ -112,17 +112,20 @@ class UPLOADED_FILE extends RAISABLE
    * @var string
    */
   public $name;
+
   /**
    * Number of bytes in file.
    * @var integer
    */
   public $size;
+
   /**
    * MIME type of the file.
    * May be empty if the server/browser does not specify it or figure it out.
    * @var string
    */
   public $mime_type;
+
   /**
    * Error code associated with this file.
    * May be {@link Uploaded_file_error_none}, {@link Uploaded_file_error_ini_size},
@@ -131,6 +134,7 @@ class UPLOADED_FILE extends RAISABLE
    * @var integer
    */
   public $error;
+
   /**
    * Version of {@link $name} that is file-system-valid.
    * This name is initialized using {@link normalize_file_name()}.
@@ -149,7 +153,7 @@ class UPLOADED_FILE extends RAISABLE
    * in the form).
    * @var boolean
    */
-  public $processed = FALSE;
+  public $processed = false;
 
   /**
    * @param UPLOADER $uploader Attached to this uploader.
@@ -159,7 +163,7 @@ class UPLOADED_FILE extends RAISABLE
    * @param string $temp_name Name of the file as uploaded.
    * @param integer $error Error code.
    */
-  function UPLOADED_FILE ($uploader, $name, $size, $mime_type, $temp_name, $error)
+  public function UPLOADED_FILE ($uploader, $name, $size, $mime_type, $temp_name, $error)
   {
     $this->_uploader = $uploader;
     $this->name = $name;
@@ -176,13 +180,12 @@ class UPLOADED_FILE extends RAISABLE
    * Use this to access the file without knowing whether or not it has been moved.
    * @return string
    */
-  function current_name ()
+  public function current_name ()
   {
     if (isset ($this->_final_name_and_path))
     {
       return $this->_final_name_and_path;
     }
-
 
     return $this->temp_name;
   }
@@ -191,7 +194,7 @@ class UPLOADED_FILE extends RAISABLE
    * Can the file be moved?
    * @return boolean
    */
-  function is_valid ()
+  public function is_valid ()
   {
     return ($this->error == Uploaded_file_error_none);
   }
@@ -201,7 +204,7 @@ class UPLOADED_FILE extends RAISABLE
    * @param string $path
    * @return boolean
    */
-  function exists_in ($path)
+  public function exists_in ($path)
   {
     return file_exists ($path . $this->normalized_name);
   }
@@ -211,15 +214,12 @@ class UPLOADED_FILE extends RAISABLE
    * @param string $path
    * @return boolean
    */
-  function overwritable_in ($path)
+  public function overwritable_in ($path)
   {
-    if ($this->exists_in ($path))
-    {
-      return is_writable ($path . $this->normalized_name);
-    }
+    return $this->exists_in ($path) && is_writable ($path . $this->normalized_name);
   }
 
-  function is_moveable_to ($path, $options = Uploaded_file_unique_name)
+  public function is_moveable_to ($path, $options = Uploaded_file_unique_name)
   {
     return (is_uploaded_file ($this->temp_name)
             && is_dir ($path)
@@ -236,7 +236,7 @@ class UPLOADED_FILE extends RAISABLE
    * @param integer $size
    * @return string
    */
-  function size_as_text ()
+  public function size_as_text ()
   {
     return file_size_as_text ($this->size);
   }
@@ -246,7 +246,7 @@ class UPLOADED_FILE extends RAISABLE
    * @param string $path
    * @param string $options Can be {@link Uploaded_file_unique_name} or {@link Uploaded_file_overwrite}.
    */
-  function move_to ($path, $options = Uploaded_file_unique_name)
+  public function move_to ($path, $options = Uploaded_file_unique_name)
   {
     $final_name = $this->normalized_name;
     
@@ -280,7 +280,7 @@ class UPLOADED_FILE extends RAISABLE
             unlink ($path . $final_name);
           }
           rename ($this->_final_name_and_path, $path . $final_name);
-          $this->processed = TRUE;
+          $this->processed = true;
         }
         else
         {
@@ -289,7 +289,7 @@ class UPLOADED_FILE extends RAISABLE
             $this->_final_name_and_path = $path . $final_name;
             $opts = global_file_options (); 
             chmod ($this->_final_name_and_path, $opts->default_access_mode);
-            $this->processed = TRUE;
+            $this->processed = true;
           }          
         }
         
@@ -305,7 +305,7 @@ class UPLOADED_FILE extends RAISABLE
    * Return an error message for this file.
    * @return string
    */
-  function error_message ()
+  public function error_message ()
   {
     switch ($this->error)
     {
@@ -323,7 +323,6 @@ class UPLOADED_FILE extends RAISABLE
         return "$this->name was not uploaded.";
       }
 
-
       return "Required file was not uploaded.";
     default:
       return "Unknown error (code $this->error).";
@@ -336,7 +335,7 @@ class UPLOADED_FILE extends RAISABLE
    * @param string $info
    * @return string $file_set_id
    */
-  function load_from_text ($info)
+  public function load_from_text ($info)
   {
     $parts = explode (':', $info);
     $this->name = urldecode ($parts [1]);
@@ -344,7 +343,7 @@ class UPLOADED_FILE extends RAISABLE
     $this->mime_type = $parts [3];
     $this->normalized_name = normalize_file_name ($this->name);
     $this->_final_name_and_path = urldecode ($parts [4]);
-    $this->processed = TRUE;
+    $this->processed = true;
     return $parts [0];
   }
 
@@ -354,7 +353,7 @@ class UPLOADED_FILE extends RAISABLE
    * @param string $id Unique id under which to store the information.
    * @return string
    */
-  function store_to_text ($id)
+  public function store_to_text ($id)
   {
     $name = urlencode ($this->name);
     return $id . ':' . $name . ':' . $this->size . ':' . $this->mime_type . ':' . urlencode ($this->current_name ());
@@ -365,6 +364,7 @@ class UPLOADED_FILE extends RAISABLE
    * @access private
    */
   protected $_uploader;
+
   /**
    * Full and path after the file has been moved.
    * Once the file is moved with {@link move_to()}, this variable is set to the name
@@ -373,6 +373,7 @@ class UPLOADED_FILE extends RAISABLE
    * @access private
    */
   protected $_final_name_and_path;
+
   /**
    * Current location of file on server.
    * The uploaded file is stored to this name when it is uploaded to the server.
@@ -404,7 +405,7 @@ class UPLOADED_FILE_SET
    * @param UPLOADER $uploader Attached to this uploader.
    * @param string $field_name Name of the field for which this set was submitted.
    */
-  function UPLOADED_FILE_SET ($uploader, $field_name)
+  public function UPLOADED_FILE_SET ($uploader, $field_name)
   {
     $this->_uploader = $uploader;
 
@@ -449,17 +450,17 @@ class UPLOADED_FILE_SET
    * Were all files successfully uploaded?
    * @return boolean
    */
-  function is_valid ()
+  public function is_valid ()
   {
     foreach ($this->files as $file)
     {
       if (! $file->is_valid ())
       {
-        return FALSE;
+        return false;
       }
     }
 
-    return TRUE;  // All files are valid
+    return true;  // All files are valid
   }
 
   /**
@@ -467,7 +468,7 @@ class UPLOADED_FILE_SET
    * @param string $path
    * @param string $options Can be {@link Uploaded_file_unique_name} or {@link Uploaded_file_overwrite}.
    */
-  function move_to ($path, $options = Uploaded_file_unique_name)
+  public function move_to ($path, $options = Uploaded_file_unique_name)
   {
     $idx_file = 0;
     $cnt_file = $this->size ();
@@ -482,7 +483,7 @@ class UPLOADED_FILE_SET
    * Number of files in this set.
    * @return integer
    */
-  function size ()
+  public function size ()
   {
     return sizeof ($this->files);
   }
@@ -497,7 +498,7 @@ class UPLOADED_FILE_SET
    * @param string $temp_name
    * @param integer $error Can be {@link Uploaded_file_error_none}, {@link Uploaded_file_error_missing}, {@link Uploaded_file_error_partial}, {@link Uploaded_file_error_form_size} or {@link Uploaded_file_error_ini_size}.
    */
-  function _process_file ($name, $size, $type, $temp_name, $error)
+  protected function _process_file ($name, $size, $type, $temp_name, $error)
   {
     if (! (($error == Uploaded_file_error_none) && (! $size || ! $name)))
     {
@@ -530,34 +531,40 @@ class UPLOADER extends RAISABLE
    * @var integer
    */
   public $total_files = 0;
+
   /**
    * Maximum file size specified in the form.
    * @var integer
    */
   public $form_max_file_size;
+
   /**
    * Maximum file size in PHP configuration.
    * @var integer
    */
   public $ini_max_file_size;
+
   /**
    * Value of 'upload_max_filesize'.
    * This is a PHP configuration value and controls the maximum size of a single uploaded file.
    * @var integer
    */
   public $upload_max_filesize;
+
   /**
    * Value of 'post_max_size'.
    * This is a PHP configuration value and controls the maximum size of a form's data.
    * @var integer
    */
   public $post_max_size;
+
   /**
    * Actual maximum file size for this upload.
    * Calculated as the minimum of {@link $form_max_file_size} and {@link $ini_max_file_size}.
    * @var integer
    */
   public $max_file_size;
+
   /**
    * Map of field name to list of files.
    * Each submitted fields may be associated with one of more uploaded files.
@@ -565,18 +572,19 @@ class UPLOADER extends RAISABLE
    * @see UPLOADED_FILE_SET
    */
   public $file_sets = array ();
+
   /**
    * Name of the previously uploaded file information.
    * @var string
    */
   public $stored_info_name = 'webcore_saved_uploads';
 
-  function UPLOADER ()
+  public function UPLOADER ()
   {
     $this->load_from_request ();
   }
 
-  function load_from_request ()
+  public function load_from_request ()
   {
     $this->upload_max_filesize = text_to_file_size (ini_get ('upload_max_filesize'));
     $this->post_max_size = text_to_file_size (ini_get ('post_max_size'));
@@ -608,7 +616,7 @@ class UPLOADER extends RAISABLE
        a previously uploaded file and store its properties in the form. The uploader reads those
        values and 'pretends' that this is a valid PHP upload file. This way, form validation can
        occur over multiple submissions but a successfully uploaded file need only be uploaded once.
-    */
+   */
 
     $uploads = read_var ($this->stored_info_name);
 

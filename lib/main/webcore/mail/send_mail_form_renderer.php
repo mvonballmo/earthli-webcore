@@ -50,10 +50,10 @@ class SEND_MAIL_FORM_RENDERER extends MAIL_OBJECT_RENDERER
 {
   /**
    * @param SEND_MAIL_FORM $obj
-    * @param EXCEPTION_MAIL_OBJECT_RENDERER_OPTIONS $options
-    * @return string
-    */
-  function subject ($obj, $options)
+   * @param EXCEPTION_MAIL_OBJECT_RENDERER_OPTIONS $options
+   * @return string
+   */
+  public function subject ($obj, $options)
   {
     return $obj->value_for ('subject');
   }
@@ -63,7 +63,7 @@ class SEND_MAIL_FORM_RENDERER extends MAIL_OBJECT_RENDERER
    * @param MAIL_RENDERER_OPTIONS $options
    * @access private
    */
-  function _echo_html_content ($obj, $options)
+  protected function _echo_html_content ($obj, $options)
   {
     if ($obj->value_for ('message'))
     {
@@ -85,7 +85,7 @@ class SEND_MAIL_FORM_RENDERER extends MAIL_OBJECT_RENDERER
    * @param MAIL_RENDERER_OPTIONS $options
    * @access private
    */
-  function _echo_text_content ($obj, $options)
+  protected function _echo_text_content ($obj, $options)
   {
     if ($obj->value_for ('message'))
     {

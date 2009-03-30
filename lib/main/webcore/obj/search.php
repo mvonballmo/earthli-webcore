@@ -87,20 +87,23 @@ require_once ('webcore/obj/content_object.php');
  * @since 2.5.0
  * @abstract
  */
-class SEARCH extends CONTENT_OBJECT
+abstract class SEARCH extends CONTENT_OBJECT
 {
   /**
    * @var string
    */
   public $title;
+  
   /**
    * @var string
    */
   public $type;
+  
   /**
    * @var mixed
    */
   public $parameters;
+  
   /**
    * @var string
    */
@@ -115,7 +118,7 @@ class SEARCH extends CONTENT_OBJECT
    * @param APPLICATION $app Main application.
    * @param SEARCH_OBJECT_FIELDS $fields
    */
-  function SEARCH ($app, $fields)
+  public function SEARCH ($app, $fields)
   {
     CONTENT_OBJECT::CONTENT_OBJECT ($app);
     $this->fields = $fields;
@@ -124,7 +127,7 @@ class SEARCH extends CONTENT_OBJECT
   /**
    * @param USER $user
    */
-  function set_user_from_context ($user)
+  public function set_user_from_context ($user)
   {
     $this->fields->user_from_context = $user;
   }
@@ -135,7 +138,7 @@ class SEARCH extends CONTENT_OBJECT
    * @param HTML_MUNGER $munger
    * @return string
    */
-  function description_as_html ($munger = null)
+  public function description_as_html ($munger = null)
   {
     return $this->_text_as_html ($this->description, $munger);
   }
@@ -146,7 +149,7 @@ class SEARCH extends CONTENT_OBJECT
    * @param PLAIN_TEXT_MUNGER $munger
    * @return string
    */
-  function description_as_plain_text ($munger = null)
+  public function description_as_plain_text ($munger = null)
   {
     return $this->_text_as_plain_text ($this->description, $munger);
   }
@@ -155,7 +158,7 @@ class SEARCH extends CONTENT_OBJECT
    * Description of search parameters as HTML.
    * @return string
    */
-  function system_description_as_html ()
+  public function system_description_as_html ()
   {
     return $this->fields->description_as_html ($this);
   }
@@ -164,7 +167,7 @@ class SEARCH extends CONTENT_OBJECT
    * Description of search parameters as plain text.
    * @return string
    */
-  function system_description_as_plain_text ()
+  public function system_description_as_plain_text ()
   {
     return $this->fields->description_as_plain_text ($this);
   }
@@ -174,7 +177,7 @@ class SEARCH extends CONTENT_OBJECT
    * The search examines its parameters and generates a query with all restrictions applied.
    * @return QUERY
    */
-  function prepared_query ()
+  public function prepared_query ()
   {
     $Result = $this->_base_query ();
     $this->_apply_to_query ($Result);
@@ -186,17 +189,14 @@ class SEARCH extends CONTENT_OBJECT
    * @return GRID
    * @abstract
    */
-  function grid ()
-  {
-    $this->raise_deferred ('grid', 'SEARCH');
-  }
+  public abstract function grid ();
 
   /**
    * The text that was searched.
    * The grids use this value to highlight the searched words in their text.
    * @return string
    */
-  function search_text ()
+  public function search_text ()
   {
     return $this->parameters ['search_text'];
   }
@@ -204,7 +204,7 @@ class SEARCH extends CONTENT_OBJECT
   /**
    * @param DATABASE $db Database from which to load values.
    */
-  function load ($db)
+  public function load ($db)
   {
     parent::load ($db);
     $this->title = $db->f ('title');
@@ -219,7 +219,7 @@ class SEARCH extends CONTENT_OBJECT
   /**
    * @param SQL_STORAGE $storage Store values to this object.
    */
-  function store_to ($storage)
+  public function store_to ($storage)
   {
     parent::store_to ($storage);
     $tname = $this->_table_name ();
@@ -236,7 +236,7 @@ class SEARCH extends CONTENT_OBJECT
   /**
    * @return string
    */
-  function raw_title ()
+  public function raw_title ()
   {
     return $this->title;
   }
@@ -246,7 +246,7 @@ class SEARCH extends CONTENT_OBJECT
    * @param QUERY $query
    * @access private
    */
-  function _apply_to_query ($query)
+  protected function _apply_to_query ($query)
   {
     $this->fields->apply_to_query ($query, $this);
   }
@@ -257,17 +257,14 @@ class SEARCH extends CONTENT_OBJECT
    * @access private
    * @abstract
    */
-  function _base_query ()
-  {
-    $this->raise_deferred ('_base_query', 'SEARCH');
-  }
+  protected abstract function _base_query ();
 
   /**
    * Name of this object's database table.
    * @return string
    * @access private
    */
-  function _table_name ()
+  protected function _table_name ()
   {
     return $this->app->table_names->searches;
   }
@@ -276,7 +273,7 @@ class SEARCH extends CONTENT_OBJECT
    * Name of the home page name for this object.
    * @return string
    */
-  function page_name ()
+  public function page_name ()
   {
     return $this->app->page_names->search_home;
   }
@@ -288,7 +285,7 @@ class SEARCH extends CONTENT_OBJECT
    * @return object
    * @access private
    */
-  function _default_handler_for ($handler_type, $options = null)
+  protected function _default_handler_for ($handler_type, $options = null)
   {
     switch ($handler_type)
     {
@@ -313,12 +310,12 @@ class SEARCH extends CONTENT_OBJECT
  * @version 3.0.0
  * @since 2.5.0
  */
-class OBJECT_IN_FOLDER_SEARCH extends SEARCH
+abstract class OBJECT_IN_FOLDER_SEARCH extends SEARCH
 {
   /**
    * @param USER $user
    */
-  function set_user_from_context ($user)
+  public function set_user_from_context ($user)
   {
     $this->fields->user_from_context = $user;
   }
@@ -326,7 +323,7 @@ class OBJECT_IN_FOLDER_SEARCH extends SEARCH
   /**
    * @param FOLDER $folder
    */
-  function set_folder_from_context ($folder)
+  public function set_folder_from_context ($folder)
   {
     $this->fields->folder_from_context = $folder;
   }
@@ -347,13 +344,12 @@ class ENTRY_SEARCH extends OBJECT_IN_FOLDER_SEARCH
    * @access private
    * @abstract
    */
-  function _base_query ()
+  protected function _base_query ()
   {
-    if (($this->parameters->folder_search_type == Search_user_context_none) && ($this->fields->folder_from_context))
+    if (($this->parameters->folder_search_type == Search_user_context_none) && (isset($this->fields->folder_from_context)))
     {
       return $this->fields->folder_from_context->entry_query ();
     }
-
 
     return $this->login->all_entry_query ();
   }
@@ -362,7 +358,7 @@ class ENTRY_SEARCH extends OBJECT_IN_FOLDER_SEARCH
    * A grid to display the results of the search.
    * @return ENTRY_SUMMARY_GRID
    */
-  function grid ()
+  public function grid ()
   {
     $class_name = $this->app->final_class_name ('ENTRY_SUMMARY_GRID', 'webcore/gui/entry_grid.php', $this->type);
     return new $class_name ($this->app);
@@ -383,7 +379,7 @@ class MULTI_ENTRY_SEARCH extends ENTRY_SEARCH
    * @return QUERY
    * @access private
    */
-  function _base_query ()
+  protected function _base_query ()
   {
     $Result = parent::_base_query ();
     $Result->set_type ($this->type);
@@ -408,7 +404,7 @@ class COMMENT_SEARCH extends OBJECT_IN_FOLDER_SEARCH
   /**
    * @param APPLICATION $app Main application.
    */
-  function COMMENT_SEARCH ($app)
+  public function COMMENT_SEARCH ($app)
   {
     $class_name = $app->final_class_name ('SEARCH_OBJECT_IN_FOLDER_FIELDS', 'webcore/forms/search_fields.php');
     OBJECT_IN_FOLDER_SEARCH::OBJECT_IN_FOLDER_SEARCH ($app, new $class_name ($app));
@@ -420,13 +416,12 @@ class COMMENT_SEARCH extends OBJECT_IN_FOLDER_SEARCH
    * @access private
    * @abstract
    */
-  function _base_query ()
+  protected function _base_query ()
   {
     if (($this->parameters->folder_search_type == Search_user_context_none) && ($this->fields->folder_from_context))
     {
       return $this->fields->folder_from_context->comment_query ();
     }
-
 
     return $this->login->all_comment_query ();
   }
@@ -436,7 +431,7 @@ class COMMENT_SEARCH extends OBJECT_IN_FOLDER_SEARCH
    * @return GRID
    * @abstract
    */
-  function grid ()
+  public function grid ()
   {
     $class_name = $this->app->final_class_name ('SELECT_COMMENT_GRID', 'webcore/gui/comment_grid.php');
     return new $class_name ($this->app);
@@ -460,7 +455,7 @@ class GROUP_SEARCH extends SEARCH
   /**
    * @param APPLICATION $app Main application.
    */
-  function GROUP_SEARCH ($app)
+  public function GROUP_SEARCH ($app)
   {
     $class_name = $app->final_class_name ('SEARCH_AUDITABLE_FIELDS', 'webcore/forms/search_fields.php');
     SEARCH::SEARCH ($app, new $class_name ($app));
@@ -472,7 +467,7 @@ class GROUP_SEARCH extends SEARCH
    * @access private
    * @abstract
    */
-  function _base_query ()
+  protected function _base_query ()
   {
     return $this->app->group_query ();
   }
@@ -482,7 +477,7 @@ class GROUP_SEARCH extends SEARCH
    * @return GRID
    * @abstract
    */
-  function grid ()
+  public function grid ()
   {
     $class_name = $this->app->final_class_name ('GROUP_GRID', 'webcore/gui/group_grid.php');
     return new $class_name ($this->app);
@@ -506,7 +501,7 @@ class USER_SEARCH extends SEARCH
   /**
    * @param APPLICATION $app Main application.
    */
-  function USER_SEARCH ($app)
+  public function USER_SEARCH ($app)
   {
     $class_name = $app->final_class_name ('SEARCH_USER_OBJECT_FIELDS', 'webcore/forms/search_fields.php');
     SEARCH::SEARCH ($app, new $class_name ($app));
@@ -518,7 +513,7 @@ class USER_SEARCH extends SEARCH
    * @access private
    * @abstract
    */
-  function _base_query ()
+  protected function _base_query ()
   {
     return $this->app->user_query ();
   }
@@ -528,7 +523,7 @@ class USER_SEARCH extends SEARCH
    * @return GRID
    * @abstract
    */
-  function grid ()
+  public function grid ()
   {
     $class_name = $this->app->final_class_name ('SELECT_USER_GRID', 'webcore/gui/user_grid.php');
     return new $class_name ($this->app);
@@ -552,7 +547,7 @@ class FOLDER_SEARCH extends OBJECT_IN_FOLDER_SEARCH
   /**
    * @param APPLICATION $app Main application.
    */
-  function FOLDER_SEARCH ($app)
+  public function FOLDER_SEARCH ($app)
   {
     $class_name = $app->final_class_name ('SEARCH_FOLDER_FIELDS', 'webcore/forms/search_fields.php');
     OBJECT_IN_FOLDER_SEARCH::OBJECT_IN_FOLDER_SEARCH ($app, new $class_name ($app));
@@ -564,7 +559,7 @@ class FOLDER_SEARCH extends OBJECT_IN_FOLDER_SEARCH
    * @access private
    * @abstract
    */
-  function _base_query ()
+  protected function _base_query ()
   {
     return $this->login->folder_query ();
   }
@@ -573,7 +568,7 @@ class FOLDER_SEARCH extends OBJECT_IN_FOLDER_SEARCH
    * A grid to display the results of the search.
    * @return FOLDER_GRID
    */
-  function grid ()
+  public function grid ()
   {
     $class_name = $this->app->final_class_name ('FOLDER_GRID', 'webcore/gui/folder_grid.php');
     $Result = new $class_name ($this->app);

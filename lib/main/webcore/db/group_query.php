@@ -57,7 +57,7 @@ class GROUP_QUERY extends QUERY
   /**
    * Apply default restrictions and tables.
    */
-  function apply_defaults ()
+  public function apply_defaults ()
   {
     $this->set_select ("grp.*");
     $this->set_table ($this->app->table_names->groups . ' grp');
@@ -68,7 +68,7 @@ class GROUP_QUERY extends QUERY
    * @return GROUP
    * @access private
    */
-  function _make_object ()
+  protected function _make_object ()
   {
     $class_name = $this->app->final_class_name ('GROUP', 'webcore/obj/group.php');
     return new $class_name ($this->app);
@@ -94,7 +94,7 @@ class USER_GROUP_QUERY extends GROUP_QUERY
   /**
    * Apply default restrictions and tables.
    */
-  function apply_defaults () 
+  public function apply_defaults () 
   {
     parent::apply_defaults ();
     $this->add_table ($this->app->table_names->users_to_groups . ' utog', 'grp.id = utog.group_id');

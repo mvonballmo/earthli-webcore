@@ -50,16 +50,16 @@ class FILE_LOGGER extends TEXT_OUTPUT_LOGGER
 {
   /**
    * Symbol to demarcate lines.
-    * @var string
-    */
+   * @var string
+   */
   public $newline = "\n";
 
   /**
    * Record to this file.
-    * Does not open the logger if not already open. Directory must exist.
-    * @param string $name
-    */
-  function set_file_name ($fn)
+   * Does not open the logger if not already open. Directory must exist.
+   * @param string $name
+   */
+  public function set_file_name ($fn)
   {
     if ($this->_file_name != $fn)
     {
@@ -75,7 +75,7 @@ class FILE_LOGGER extends TEXT_OUTPUT_LOGGER
       if ($this->is_open ())
       {
         $this->_file_name = $fn;
-        $this->_has_messages = FALSE;
+        $this->_has_messages = false;
       }
     }
   }
@@ -85,7 +85,7 @@ class FILE_LOGGER extends TEXT_OUTPUT_LOGGER
    * Stops logging until {@link FILE_LOGGER::set_file_name()} is called again.
    * @access private
    */
-  function _close ()
+  protected function _close ()
   {
     if ($this->is_open ())
     {
@@ -103,13 +103,13 @@ class FILE_LOGGER extends TEXT_OUTPUT_LOGGER
    * @param string $msg
    * @access private
    */
-  function _output ($msg)
+  protected function _output ($msg)
   {
     if ($this->is_open ())
     {
       if (! $this->_has_messages)
       {
-        $this->_has_messages = TRUE;
+        $this->_has_messages = true;
         $this->record ("Log opened [$this->_file_name]", Msg_type_info, Msg_channel_logger);
       }
 
@@ -120,9 +120,9 @@ class FILE_LOGGER extends TEXT_OUTPUT_LOGGER
   /**
    * @return boolean
    */
-  function is_open ()
+  public function is_open ()
   {
-    return isset ($this->_file_handle) && ! ($this->_file_handle == FALSE);
+    return isset ($this->_file_handle) && ! ($this->_file_handle == false);
   }
 
   /**
@@ -130,11 +130,13 @@ class FILE_LOGGER extends TEXT_OUTPUT_LOGGER
    * @access private
    */
   protected $_file_name = '';
+
   /**
    * @var boolean Have any messages been written?
    * @access private
    */
-  protected $_has_messages = FALSE;
+  protected $_has_messages = false;
+
   /**
    * @var integer Handle to the open file
    * @access private

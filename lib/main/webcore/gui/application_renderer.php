@@ -53,7 +53,7 @@ class APPLICATION_RENDERER extends RENDERER
    * Renders application details as HTML.
    * @param APPLICATION_CONFIGURATION_INFO $obj
    */
-  function display_as_html ($obj)
+  public function display_as_html ($obj)
   {
     $main_style = '';
     if ($obj->app->icon)
@@ -89,8 +89,8 @@ class APPLICATION_RENDERER extends RENDERER
       Databases
     </dt>
     <dd>
-      <?php echo $obj->app_info->description (FALSE); ?><br>
-      <?php echo $obj->lib_info->description (FALSE); ?>
+      <?php echo $obj->app_info->description (false); ?><br>
+      <?php echo $obj->lib_info->description (false); ?>
     </dd>
     <dt class="field">
       Support URL

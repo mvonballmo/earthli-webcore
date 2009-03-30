@@ -35,7 +35,7 @@ class UPGRADE_WEBCORE_26_261_TASK extends MIGRATOR_TASK
   public $version_from = '2.6.0';
   public $version_to = '2.6.1';
 
-  function _execute ()
+  protected function _execute ()
   {
     log_open_block ("Adding settings to users");
       $this->_query ("ALTER TABLE `users` ADD `email_visibility` ENUM( 'hidden', 'scrambled', 'visible' ) DEFAULT 'hidden' NOT NULL");

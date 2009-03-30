@@ -34,8 +34,8 @@ http://www.earthli.com/software/webcore/albums
     $Page->title->add_object ($folder);
     $Page->title->subject = 'Browse for picture';
 
-    $Page->template_options->header_visible = FALSE;
-    $Page->template_options->footer_visible = FALSE;
+    $Page->template_options->header_visible = false;
+    $Page->template_options->footer_visible = false;
     $Page->add_script_file ('{scripts}webcore_forms.js');    
     $Page->start_display ();
 ?>

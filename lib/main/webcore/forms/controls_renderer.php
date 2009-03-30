@@ -60,7 +60,7 @@ class CONTROLS_RENDERER extends WEBCORE_OBJECT
   /**
    * @param CONTEXT $context
    */
-  function CONTROLS_RENDERER ($context)
+  public function CONTROLS_RENDERER ($context)
   {
     WEBCORE_OBJECT::WEBCORE_OBJECT ($context);
     $browser = $this->env->browser ();
@@ -71,7 +71,7 @@ class CONTROLS_RENDERER extends WEBCORE_OBJECT
    * Start a new button-styled row.
    * @param string $title Title to show for this row.
    */
-  function start_button_row ($title = ' ')
+  public function start_button_row ($title = ' ')
   {
     echo "<div class=\"form-button-content\">\n";
   }
@@ -79,7 +79,7 @@ class CONTROLS_RENDERER extends WEBCORE_OBJECT
   /**
    * Close a previously opened row.
    */
-  function finish_row ()
+  public function finish_row ()
   {
     echo "</div>\n";
   }
@@ -90,9 +90,9 @@ class CONTROLS_RENDERER extends WEBCORE_OBJECT
    * {@link button_as_html()} or {@link submit_button_as_html()}.
    * @param array[string] $buttons
    */
-  function draw_buttons ($buttons)
+  public function draw_buttons ($buttons)
   {
-    $btn_drawn = FALSE;
+    $btn_drawn = false;
     foreach ($buttons as $button)
     {
       echo $button;
@@ -100,7 +100,7 @@ class CONTROLS_RENDERER extends WEBCORE_OBJECT
       {
         echo '&nbsp';
       }
-      $btn_drawn = TRUE;
+      $btn_drawn = true;
     }
   }
 
@@ -111,7 +111,7 @@ class CONTROLS_RENDERER extends WEBCORE_OBJECT
    * @param array[string] $buttons
    * @param string $title Title to show for this row.
    */
-  function draw_buttons_in_row ($buttons, $title = ' ')
+  public function draw_buttons_in_row ($buttons, $title = ' ')
   {
     $this->start_button_row ($title);
     $this->draw_buttons ($buttons);
@@ -125,7 +125,7 @@ class CONTROLS_RENDERER extends WEBCORE_OBJECT
    * @param string $type Can be 'button', 'submit' or 'cancel'.
    * @return string
    */
-  function javascript_button_as_html ($title, $action, $icon = '', $icon_size = '16px', $type = 'button')
+  public function javascript_button_as_html ($title, $action, $icon = '', $icon_size = '16px', $type = 'button')
   {
     if (isset ($icon) && $icon)
     {
@@ -145,7 +145,7 @@ class CONTROLS_RENDERER extends WEBCORE_OBJECT
    * @param string $action Link to go to when clicked. HTML characters should not be escaped.
    * @return string
    */
-  function button_as_html ($title, $location, $icon = '', $icon_size = '16px')
+  public function button_as_html ($title, $location, $icon = '', $icon_size = '16px')
   {
     return $this->javascript_button_as_html ($title, 'window.location=\'' . htmlspecialchars ($location) . '\'', $icon, $icon_size, 'button');
   }
@@ -156,17 +156,21 @@ class CONTROLS_RENDERER extends WEBCORE_OBJECT
    * @param string $script Name of the JavaScript function to execute (must conform to 'function(form: form; submit_all_fields: boolean; submit_field_name, preview_field_name: string)').
    * @return string
    */
-  function submit_button_as_html ($title, $icon = '', $script = null, $icon_size = '16px')
+  public function submit_button_as_html ($title, $icon = '', $script = null, $icon_size = '16px')
   {
     if (! isset ($script))
     {
       $script = 'submit_form';
     }
-    return $this->javascript_button_as_html ($title, $script . ' (\'' . $this->_form->name . '\', '
-                                             . $this->submit_all_fields . ', '
-                                             . "'" . $this->_form->_form_based_field_name ('submitted') . "', "
-                                             . "'" . $this->_form->_form_based_field_name ('previewing') . "'"
-                                             . ')', $icon, $icon_size, 'submit');
+    return $this->javascript_button_as_html (
+      $title, 
+      $script . ' (\'' . $this->_form->name . '\', ' . $this->submit_all_fields . ', ' . "'" . 
+      $this->_form->form_based_field_name ('submitted') . "', " . "'" . 
+      $this->_form->form_based_field_name ('previewing') . "'" . ')', 
+      $icon, 
+      $icon_size, 
+      'submit'
+    );
   }
 
   /**

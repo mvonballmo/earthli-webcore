@@ -55,36 +55,43 @@ class ATTACHMENT extends OBJECT_IN_FOLDER
    * @var string
    */
   public $type;
+
   /**
    * To which object id is this attached?
    * @var integer
    */
   public $object_id;
+
   /**
    * What was the name of the file when uploaded?
    * @var string
    */
   public $original_file_name;
+
   /**
    * Location within the server file system.
    * @var string
    */
   public $file_name = '';
+
   /**
    * How large is the file?
    * @var string
    */
   public $size;
+
   /**
    * MIME type of the file.
    * May be empty or unknown.
    * @var string
    */
   public $mime_type;
+
   /**
    * @var boolean
    */
   public $is_image;
+
   /**
    * @var boolean
    */
@@ -94,7 +101,7 @@ class ATTACHMENT extends OBJECT_IN_FOLDER
    * Fully resolved server-local path to the file.
    * @return string
    */
-  function full_file_name ()
+  public function full_file_name ()
   {
     $Result = $this->file_name;
     if (! $Result || ! file_exists ($this->file_name))
@@ -111,7 +118,7 @@ class ATTACHMENT extends OBJECT_IN_FOLDER
    * {@link Force_root_on}.
    * @return string
    */
-  function full_url ($root_override = null)
+  public function full_url ($root_override = null)
   {
     if (file_exists ($this->file_name))
     {
@@ -131,7 +138,7 @@ class ATTACHMENT extends OBJECT_IN_FOLDER
    * @see thumbnail_url()
    * @return string
    */
-  function thumbnail_file_name ($for_file = '')
+  public function thumbnail_file_name ($for_file = '')
   {
     if (! $for_file)
     {
@@ -148,13 +155,15 @@ class ATTACHMENT extends OBJECT_IN_FOLDER
    * @see thumbnail_file_name()
    * @return string
    */
-  function thumbnail_url ()
+  public function thumbnail_url ()
   {
     $thumb_url = $this->thumbnail_file_name ();
     if (file_exists ($thumb_url))
     {
       return file_name_to_url ($thumb_url);
     }
+    
+    return '';
   }
 
   /**
@@ -162,7 +171,7 @@ class ATTACHMENT extends OBJECT_IN_FOLDER
    * @param string $CSS_class
    * @return string
    */
-  function thumbnail_as_html ($CSS_class = 'frame')
+  public function thumbnail_as_html ($CSS_class = 'frame')
   {
     $thumb_url = $this->thumbnail_url ();
     if ($thumb_url)
@@ -172,9 +181,10 @@ class ATTACHMENT extends OBJECT_IN_FOLDER
         return "<img class=\"$CSS_class\" src=\"$thumb_url\" alt=\"$this->title\">\n";
       }
 
-
       return "<img src=\"$thumb_url\" alt=\"$this->title\">\n";
     }
+    
+    return '';
   }
 
   /**
@@ -182,7 +192,7 @@ class ATTACHMENT extends OBJECT_IN_FOLDER
    * Retrieves file type to icon mappings from the {@link APPLICATION::file_type_manager()}.
    * @return string
    */
-  function icon_as_html ($size = '100px')
+  public function icon_as_html ($size = '100px')
   {
     $ft = $this->app->file_type_manager ();
     $url = new FILE_URL ($this->file_name);
@@ -191,9 +201,9 @@ class ATTACHMENT extends OBJECT_IN_FOLDER
 
   /**
    * Attached to this object.
-    * @return ATTACHMENT_HOST
-    */
-  function host ()
+   * @return ATTACHMENT_HOST
+   */
+  public function host ()
   {
     $this->assert (isset ($this->_host), '_host is not cached.', 'host', 'ATTACHMENT');
     return $this->_host;
@@ -205,7 +215,7 @@ class ATTACHMENT extends OBJECT_IN_FOLDER
    * in the final location.
    * @param string $new_file_name Full path and file name.
    */
-  function set_full_file_name ($new_file_name)
+  public function set_full_file_name ($new_file_name)
   {
     $old_file_name = $this->full_file_name ();
     if ($old_file_name != $new_file_name)
@@ -232,7 +242,7 @@ class ATTACHMENT extends OBJECT_IN_FOLDER
    * for this attachment; used during object setup when retrieved from database.
    * @param ATTACHMENT_HOST $host
    */
-  function set_host ($host)
+  public function set_host ($host)
   {
     $this->set_parent_folder ($host->parent_folder ());
     $this->_host = $host;
@@ -243,7 +253,7 @@ class ATTACHMENT extends OBJECT_IN_FOLDER
    * Name of the home page name for this object.
    * @return string
    */
-  function page_name ()
+  public function page_name ()
   {
     return $this->app->page_names->attachment_home;
   }
@@ -252,7 +262,7 @@ class ATTACHMENT extends OBJECT_IN_FOLDER
    * Arguments to the home page url for this object.
    * @return string
    */
-  function page_arguments ()
+  public function page_arguments ()
   {
     return "id=$this->id&type=$this->type";
   }
@@ -262,7 +272,7 @@ class ATTACHMENT extends OBJECT_IN_FOLDER
    * @return string
    * @access private
    */
-  function _table_name ()
+  protected function _table_name ()
   {
     return $this->app->table_names->attachments;
   }
@@ -270,7 +280,7 @@ class ATTACHMENT extends OBJECT_IN_FOLDER
   /**
    * @param DATABASE $db Database from which to load values.
    */
-  function load ($db)
+  public function load ($db)
   {
     parent::load ($db);
     $this->type = $db->f ('type');
@@ -286,7 +296,7 @@ class ATTACHMENT extends OBJECT_IN_FOLDER
   /**
    * @param SQL_STORAGE $storage Store values to this object.
    */
-  function store_to ($storage)
+  public function store_to ($storage)
   {
     parent::store_to ($storage);
     $tname = $this->_table_name ();
@@ -303,7 +313,7 @@ class ATTACHMENT extends OBJECT_IN_FOLDER
   /**
    * @access private
    */
-  function store ()
+  public function store ()
   {
     parent::store ();
 
@@ -322,7 +332,7 @@ class ATTACHMENT extends OBJECT_IN_FOLDER
    * @return string
    * @access private
    */
-  function _object_url ($use_links, $separator = null, $formatter = null)
+  protected function _object_url ($use_links, $separator = null, $formatter = null)
   {
     $Result = parent::_object_url ($use_links, $separator, $formatter);
     $host = $this->host ();
@@ -340,7 +350,7 @@ class ATTACHMENT extends OBJECT_IN_FOLDER
    * @param PURGE_OPTIONS $options
    * @access private
    */
-  function _purge ($options)
+  protected function _purge ($options)
   {
     if ($options->remove_resources)
     {
@@ -358,7 +368,7 @@ class ATTACHMENT extends OBJECT_IN_FOLDER
    * Name of the {@link FOLDER_PERMISSIONS} to use for this object.
    * @access private
    */
-  function _privilege_set ()
+  protected function _privilege_set ()
   {
     return Privilege_set_attachment;
   }
@@ -370,7 +380,7 @@ class ATTACHMENT extends OBJECT_IN_FOLDER
    * @return object
    * @access private
    */
-  function _default_handler_for ($handler_type, $options = null)
+  protected function _default_handler_for ($handler_type, $options = null)
   {
     switch ($handler_type)
     {
@@ -396,7 +406,7 @@ class ATTACHMENT extends OBJECT_IN_FOLDER
    * @param HISTORY_ITEM $history_item Action that generated this request. May be empty.
    * @access private
    */
-  function _prepare_subscription_query ($query, $history_item)
+  protected function _prepare_subscription_query ($query, $history_item)
   {
     $folder = $this->parent_folder ();
     $host = $this->host ();
@@ -431,6 +441,7 @@ class ATTACHMENT extends OBJECT_IN_FOLDER
    * @access private
    */
   protected $_old_file_name;
+
   /**
    * @var ATTACHMENT_HOST
    * @access private

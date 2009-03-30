@@ -425,9 +425,9 @@ define ('Subscribe_comment', 'comment');
 define ('Subscribe_user', 'user');
 
 /** Forces full expansion of urls in {@link RESOURCE_MANAGER} functions.*/
-define ('Force_root_on', TRUE);
+define ('Force_root_on', true);
 /** Prevents full expansion of urls in {@link RESOURCE_MANAGER} functions.*/
-define ('Force_root_off', FALSE);
+define ('Force_root_off', false);
 
 /**
  * Store logs in this folder.

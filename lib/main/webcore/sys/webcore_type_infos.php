@@ -54,18 +54,22 @@ class FOLDER_TYPE_INFO extends TYPE_INFO
    * @var string
    */
   public $id = 'folder';
+
   /**
    * @var string
    */
   public $singular_title = 'Folder';
+
   /**
    * @var string
    */
   public $plural_title = 'Folders';
+
   /**
    * @var string
    */
   public $icon = '{icons}buttons/new_folder';
+
   /**
    * @var string
    */
@@ -86,26 +90,31 @@ class ENTRY_TYPE_INFO extends TYPE_INFO
    * @var string
    */
   public $id = 'entry';
+
   /**
    * @var string
    */
   public $singular_title = 'Entry';
+
   /**
    * @var string
    */
   public $plural_title = 'Entries';
+
   /**
    * @var string
    */
   public $icon = '{icons}buttons/new_object';
+
   /**
    * @var string
    */
   public $edit_page = 'edit_entry.php';
+
   /**
    * @var boolean
    */
-  public $draftable = FALSE;
+  public $draftable = false;
 }
 
 /**
@@ -121,7 +130,7 @@ class DRAFTABLE_ENTRY_TYPE_INFO extends ENTRY_TYPE_INFO
   /**
    * @var boolean
    */
-  public $draftable = TRUE;
+  public $draftable = true;
 }
 
 /**
@@ -138,18 +147,22 @@ class COMMENT_TYPE_INFO extends TYPE_INFO
    * @var string
    */
   public $id = 'comment';
+
   /**
    * @var string
    */
   public $singular_title = 'Comment';
+
   /**
    * @var string
    */
   public $plural_title = 'Comments';
+
   /**
    * @var string
    */
   public $icon = '{icons}buttons/reply';
+
   /**
    * @var string
    */
@@ -170,14 +183,17 @@ class USER_TYPE_INFO extends TYPE_INFO
    * @var string
    */
   public $id = 'user';
+
   /**
    * @var string
    */
   public $singular_title = 'User';
+
   /**
    * @var string
    */
   public $plural_title = 'Users';
+
   /**
    * @var string
    */
@@ -198,14 +214,17 @@ class GROUP_TYPE_INFO extends TYPE_INFO
    * @var string
    */
   public $id = 'group';
+
   /**
    * @var string
    */
   public $singular_title = 'Group';
+
   /**
    * @var string
    */
   public $plural_title = 'Groups';
+
   /**
    * @var string
    */

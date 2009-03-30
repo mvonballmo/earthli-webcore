@@ -49,7 +49,7 @@ require_once ('webcore/obj/webcore_object.php');
   * @abstract
   * @access private
   */
-class TASK extends WEBCORE_OBJECT
+abstract class TASK extends WEBCORE_OBJECT
 {
   /**
    * Log all messages in this channel.
@@ -63,7 +63,7 @@ class TASK extends WEBCORE_OBJECT
    * the output console (web page).
    * @var boolean
    */
-  public $log_debug = TRUE;
+  public $log_debug = true;
 
   /**
    * If true, does not actually execute SQL or other tasks.
@@ -85,13 +85,13 @@ class TASK extends WEBCORE_OBJECT
    * instead of redirecting to another page. If this is False, the process will continue
    * despite fatal errors.
    */
-  public $stop_on_error = TRUE;
+  public $stop_on_error = true;
 
   /**
    * Include system error and warning messages in output.
    * @var boolean
    */
-  public $log_system_errors = TRUE;
+  public $log_system_errors = true;
 
   /**
    * Include generic debugging messages in output.
@@ -100,43 +100,46 @@ class TASK extends WEBCORE_OBJECT
    * under debug mode.
    * @var boolean
    */
-  public $log_default_errors = TRUE;
+  public $log_default_errors = true;
 
   /**
    * Include database messages in output.
    * @var boolean
    */
-  public $log_database = FALSE;
+  public $log_database = false;
 
   /**
    * Show more information during migration.
    * @var boolean
    */
-  public $verbose = FALSE;
+  public $verbose = false;
+
   /**
    * Force emulation of running from the command line.
    * @var boolean
    */
-  public $run_as_console = FALSE;
+  public $run_as_console = false;
+
   /**
    * Icon to show in the title bar when executing.
    * @var string
    */
   public $icon = '{icons}indicators/working';
+
   /**
    * Take care of drawing the page header and footer?
    * By default, a task will "take over" a page. Set this to <code>False</code>
    * to display only task information.
    * @var boolean
    */
-  public $owns_page = TRUE;
+  public $owns_page = true;
 
   /**
    * Return a formatted title for this task.
    * Used as the {@link PAGE_TITLE::$subject} when executed.
    * @return string
    */
-  function title_as_text ()
+  public function title_as_text ()
   {
     return 'Processing...';
   }
@@ -144,7 +147,7 @@ class TASK extends WEBCORE_OBJECT
   /**
    * Execute the task.
    */
-  function execute ()
+  public function execute ()
   {
     set_time_limit ($this->time_out_in_seconds);
     $this->_set_up_exception_handling ();
@@ -169,7 +172,7 @@ class TASK extends WEBCORE_OBJECT
    * Return a form to display options and execute this task.
    * @return FORM
    */
-  function form ()
+  public function form ()
   {
     $class_name = $this->context->final_class_name ('EXECUTE_TASK_FORM', 'webcore/forms/execute_task_form.php');
     return new $class_name ($this->context);
@@ -180,7 +183,7 @@ class TASK extends WEBCORE_OBJECT
    * @param string $msg
    * @access private
    */
-  function _abort ($msg = '')
+  protected function _abort ($msg = '')
   {
     if (! $msg)
     {
@@ -195,7 +198,7 @@ class TASK extends WEBCORE_OBJECT
    * @param string $sql
    * @access private
    */
-  function _query ($sql)
+  protected function _query ($sql)
   {
     if (! $this->testing)
     {
@@ -219,7 +222,7 @@ class TASK extends WEBCORE_OBJECT
    * @return DATABASE
    * @access private
    */
-  function _database ()
+  protected function _database ()
   {
     $this->context->ensure_database_exists ();
     return $this->context->database;
@@ -230,7 +233,7 @@ class TASK extends WEBCORE_OBJECT
    * @param string $msg
    * @param integer $type Can be {@link Msg_type_debug_info}, {@link Msg_type_info} or other log message type.
    */
-  function _log ($msg, $type = Msg_type_debug_info, $has_html = FALSE)
+  protected function _log ($msg, $type = Msg_type_debug_info, $has_html = false)
   {
     log_message ($msg, $type, $this->log_channel, $has_html);
   }
@@ -241,7 +244,7 @@ class TASK extends WEBCORE_OBJECT
    * @param string $msg
    * @param integer $type Can be {@link Msg_type_debug_info}, {@link Msg_type_info} or other log message type.
    */
-  function _log_more ($msg, $has_html = FALSE)
+  protected function _log_more ($msg, $has_html = false)
   {
     log_more ($msg, $has_html);
   }
@@ -252,20 +255,20 @@ class TASK extends WEBCORE_OBJECT
    * @return boolean
    * @access private
    */
-  function _can_be_executed ()
+  protected function _can_be_executed ()
   {
-    return TRUE;
+    return true;
   }
 
   /**
    * Set up the process and begin page display.
    * @access private
    */
-  function _start ()
+  protected function _start ()
   {
     if ($this->env->is_http_server ())
     {
-      $this->env->set_buffered (FALSE);
+      $this->env->set_buffered (false);
       if ($this->owns_page)
       {
         $this->page->title->subject = $this->title_as_text ();
@@ -281,7 +284,7 @@ class TASK extends WEBCORE_OBJECT
    * Finish displaying the page.
    * @access private
    */
-  function _finish ()
+  protected function _finish ()
   {
     $this->env->logs->close_all ();
 
@@ -300,7 +303,7 @@ class TASK extends WEBCORE_OBJECT
    * Create a {@link LOGGER_EXCEPTION_HANDLER}, by default.
    * @access private
    */
-  function _set_up_exception_handling ()
+  protected function _set_up_exception_handling ()
   {
     $handler = new LOGGER_EXCEPTION_HANDLER ($this->env);
     $handler->stop_on_error = $this->stop_on_error;
@@ -312,7 +315,7 @@ class TASK extends WEBCORE_OBJECT
    * Initialize any loggers needed for the process.
    * @access private
    */
-  function _set_up_logging ()
+  protected function _set_up_logging ()
   {
     $this->_logger = $this->_make_logger ();
     $this->_logger->set_enabled (0);
@@ -329,7 +332,7 @@ class TASK extends WEBCORE_OBJECT
     {
       $this->_logger->set_channel_enabled (Msg_channel_system, Msg_type_error + Msg_type_warning);
     }
-    $this->env->logs->add_logger ($this->_logger, FALSE);
+    $this->env->logs->add_logger ($this->_logger, false);
     $this->env->logs->remove_loggers_of_type ('JS_CONSOLE_LOGGER');
   }
 
@@ -339,7 +342,7 @@ class TASK extends WEBCORE_OBJECT
    * if not.
    * @param string $channel
    * @access private */
-  function _add_log_channel ($channel)
+  protected function _add_log_channel ($channel)
   {
     if ($this->log_debug)
     {
@@ -356,7 +359,7 @@ class TASK extends WEBCORE_OBJECT
    * @return LOGGER
    * @access private
    */
-  function _make_logger ()
+  protected function _make_logger ()
   {
     $class_name = $this->context->final_class_name ('ECHO_LOGGER', 'webcore/log/echo_logger.php');
     return new $class_name ($this->env);
@@ -367,7 +370,7 @@ class TASK extends WEBCORE_OBJECT
    * {@link _can_be_executed()} has returned True.
    * @access private
    */
-  function _pre_execute ()
+  protected function _pre_execute ()
   {
   }
 
@@ -377,17 +380,14 @@ class TASK extends WEBCORE_OBJECT
    * @access private
    * @abstract
    */
-  function _execute ()
-  {
-    $this->raise_deferred ('_execute', 'TASK');
-  }
+  protected abstract function _execute ();
 
   /**
    * Perform cleanup for a process that has run.
    * {@link _can_be_executed()} has returned True.
    * @access private
    */
-  function _post_execute ()
+  protected function _post_execute ()
   {
   }
 

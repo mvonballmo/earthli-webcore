@@ -54,20 +54,22 @@ require_once ('webcore/gui/grid.php');
  * @since 2.2.1
  * @abstract
  */
-class LIST_GRID extends STANDARD_GRID
+abstract class LIST_GRID extends STANDARD_GRID
 {
   /**
    * Add space between columns?
    * @var boolean*/
-  public $use_spacers = TRUE;
+  public $use_spacers = true;
+
   /**
    * @var boolean
    */
-  public $show_separator = FALSE;
+  public $show_separator = false;
+
   /**
    * @var boolean
    */
-  public $even_columns = FALSE;
+  public $even_columns = false;
 
   /**
    * Add a column to the end of the list.
@@ -75,7 +77,7 @@ class LIST_GRID extends STANDARD_GRID
    * @param string $alignment Can be 'left', 'center' or 'right'
    * @access private
    */
-  function append_column ($name, $alignment = 'left')
+  public function append_column ($name, $alignment = 'left')
   {
     $col = null;  // Compiler warning
     $col->name = $name;
@@ -89,7 +91,7 @@ class LIST_GRID extends STANDARD_GRID
    * @param string $alignment Can be 'left', 'center' or 'right'
    * @access private
    */
-  function prepend_column ($name, $alignment = 'left')
+  public function prepend_column ($name, $alignment = 'left')
   {
     $col = null; // Compiler warning
     $col->name = $name;
@@ -101,7 +103,7 @@ class LIST_GRID extends STANDARD_GRID
    * @param object $obj
    * @access private
    */
-  function _draw_box ($obj)
+  protected function _draw_box ($obj)
   {
     $i = 0;
     $c = sizeof ($this->_columns);
@@ -125,7 +127,7 @@ class LIST_GRID extends STANDARD_GRID
   /**
    * @access private
    */
-  function _draw_header ()
+  protected function _draw_header ()
   {
     $i = 0;
     $c = sizeof ($this->_columns);
@@ -153,16 +155,13 @@ class LIST_GRID extends STANDARD_GRID
    * @access private
    * @abstract
    */
-  function _draw_column_contents ($obj, $index)
-  {
-    $this->raise_deferred ('_draw_column_contents', 'LIST_GRID');
-  }
+  protected abstract function _draw_column_contents ($obj, $index);
 
   /**
    * @param string $cell_type Can be 'td' or 'th'.
    * @access private
    */
-  function _draw_spacer ($cell_type)
+  protected function _draw_spacer ($cell_type)
   {
     echo "<$cell_type class=\"spacer\">&nbsp;</$cell_type>\n";
   }
@@ -190,6 +189,7 @@ class LIST_GRID_COLUMN
    * @var string
    */
   public $name;
+
   /**
    * Horizontal alignment for header and data.
    * Can be 'left', 'right', 'center'.

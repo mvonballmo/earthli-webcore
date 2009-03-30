@@ -47,7 +47,7 @@ require_once ('webcore/obj/webcore_object.php');
  * @since 2.2.1
  * @abstract
  */
-class STORABLE extends WEBCORE_OBJECT
+abstract class STORABLE extends WEBCORE_OBJECT
 {
   /**
    * Does this object exist?
@@ -56,16 +56,13 @@ class STORABLE extends WEBCORE_OBJECT
    * @return boolean
    * @abstract
    */
-  function exists ()
-  {
-    $this->raise_deferred ('exists', 'STORABLE');
-  }
+  public abstract function exists ();
 
   /**
    * Does this object exist in the database?
    * @return boolean
    */
-  function exists_in_database ()
+  public function exists_in_database ()
   {
     $storage = $this->_make_storage ();
     return $storage->object_exists ($this);
@@ -74,7 +71,7 @@ class STORABLE extends WEBCORE_OBJECT
   /**
    * @param DATABASE $db Database from which to load values.
    */
-  function load ($db)
+  public function load ($db)
   {
   }
 
@@ -83,7 +80,7 @@ class STORABLE extends WEBCORE_OBJECT
    * Determines automatically whether to update an existing entry or create a
    * new one.
    */
-  function store ()
+  public function store ()
   {
     $this->_update_login ();
 
@@ -105,16 +102,13 @@ class STORABLE extends WEBCORE_OBJECT
    * properly store the object.
    * @abstract
    */
-  function store_to ($storage)
-  {
-    $this->raise_deferred ('store_to', 'STORABLE');
-  }
+  public abstract function store_to ($storage);
 
   /**
    * Remove the object from the database.
    * @param PURGE_OPTIONS $options
    */
-  function purge ($options = null)
+  public function purge ($options = null)
   {
     if ($this->exists ())
     {
@@ -130,7 +124,7 @@ class STORABLE extends WEBCORE_OBJECT
    * Object-specific options for use with {@link purge()}.
    * @return PURGE_OPTIONS
    */
-  function make_purge_options ()
+  public function make_purge_options ()
   {
     return new PURGE_OPTIONS ();
   }
@@ -140,7 +134,7 @@ class STORABLE extends WEBCORE_OBJECT
    * Do not call this directly, call 'store' instead.
    * @access private
    */
-  function _create ()
+  protected function _create ()
   {
     $storage = $this->_make_storage ();
     $storage->create_object ($this);
@@ -151,7 +145,7 @@ class STORABLE extends WEBCORE_OBJECT
    * Do not call this directly, call 'store' instead.
    * @access private
    */
-  function _update ()
+  protected function _update ()
   {
     $storage = $this->_make_storage ();
     $storage->update_object ($this);
@@ -161,7 +155,7 @@ class STORABLE extends WEBCORE_OBJECT
    * Called after there is a guaranteed login.
    * @access private
    */
-  function _pre_store ()
+  protected function _pre_store ()
   {
   }
 
@@ -175,7 +169,7 @@ class STORABLE extends WEBCORE_OBJECT
    * functionality.
    * @access private
    */
-  function _update_login ()
+  protected function _update_login ()
   {
     if (isset ($this->app))
     {
@@ -185,9 +179,9 @@ class STORABLE extends WEBCORE_OBJECT
 
   /**
    * @return SQL_STORAGE
-    * @access private
-    */
-  function _make_storage ()
+   * @access private
+   */
+  protected function _make_storage ()
   {
     $class_name = $this->context->final_class_name ('SQL_STORAGE', 'webcore/db/sql_storage.php');
     return new $class_name ($this->context);
@@ -201,10 +195,7 @@ class STORABLE extends WEBCORE_OBJECT
    * @access private
    * @abstract
    */
-  function _purge ($options)
-  {
-    $this->raise_deferred ('_purge', 'STORABLE');
-  }
+  protected abstract function _purge ($options);
 
   /**
    * Removes all unnassociated entries from a table.
@@ -214,7 +205,7 @@ class STORABLE extends WEBCORE_OBJECT
    * @param string $to_field
    * @access private
    */
-  function _purge_foreign_key ($from_table, $from_field, $to_table, $to_field, $condition = '(1)')
+  protected function _purge_foreign_key ($from_table, $from_field, $to_table, $to_field, $condition = '(1)')
   {
     $this->db->logged_query ("SELECT to_table.$to_field FROM $to_table to_table LEFT JOIN $from_table from_table ON to_table.$to_field = from_table.$from_field WHERE ISNULL(from_table.$from_field) AND $condition");
     while ($this->db->next_record ())
@@ -251,13 +242,14 @@ class PURGE_OPTIONS
    * History_item_needs_send}.
    * @var string
    */
-  public $sub_history_item_publication_state = FALSE;
+  public $sub_history_item_publication_state = false;
+
   /**
    * Should the object remove associated resources?
    * This applies to objects that refer to files, like {@link ATTACHMENT}s or
    * {@link PICTURE}s.
    */
-  public $remove_resources = TRUE;
+  public $remove_resources = true;
 }
 
 ?>

@@ -58,7 +58,7 @@ class STORED_OPTION extends WEBCORE_OBJECT
    * @param CONTEXT $context
    * @param string $name
    */
-  function STORED_OPTION ($context, $name)
+  public function STORED_OPTION ($context, $name)
   {
     WEBCORE_OBJECT::WEBCORE_OBJECT ($context);
     $this->name = $name;
@@ -68,7 +68,7 @@ class STORED_OPTION extends WEBCORE_OBJECT
    * The current value of this option.
    * @return string
    */
-  function value ()
+  public function value ()
   {
     return $this->context->storage->value ($this->name);
   }
@@ -83,7 +83,7 @@ class STORED_OPTION extends WEBCORE_OBJECT
    * @param string $key
    * @param string $value
    */
-  function add_argument ($key, $value)
+  public function add_argument ($key, $value)
   {
     $this->_args [$key] = $value;
   }
@@ -95,7 +95,7 @@ class STORED_OPTION extends WEBCORE_OBJECT
    * @param string $value
    * @return string
    */
-  function setter_url_as_text ($value)
+  public function setter_url_as_text ($value)
   {
     $url = $this->_url_for_value ($value);
     return $url->as_text ();
@@ -107,7 +107,7 @@ class STORED_OPTION extends WEBCORE_OBJECT
    * @param string $value
    * @return string
    */
-  function setter_url_as_html ($value)
+  public function setter_url_as_html ($value)
   {
     $url = $this->_url_for_value ($value);
     return $url->as_html ();
@@ -119,7 +119,7 @@ class STORED_OPTION extends WEBCORE_OBJECT
    * @return URL
    * @access private
    */
-  function _url_for_value ($value)
+  protected function _url_for_value ($value)
   {
 		$set_option_path = $this->context->resolve_file ('{' . Folder_name_pages . '}set_option.php');
     $Result = new URL ($set_option_path);
@@ -131,7 +131,9 @@ class STORED_OPTION extends WEBCORE_OBJECT
     {
       $url = new URL ($last_page);
       foreach ($this->_args as $key => $value)
+      {
         $url->replace_argument ($key, $value);
+      }
       $last_page = $url->as_text ();
     }
     $Result->add_argument ('last_page', $last_page);

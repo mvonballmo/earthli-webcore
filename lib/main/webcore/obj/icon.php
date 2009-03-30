@@ -54,10 +54,12 @@ class ICON extends RENDERABLE
    * @var string
    */
   public $title;
+
   /**
    * @var string
    */
   public $category;
+
   /**
    * Points to the resource for this icon.
    * Source is resolved using {@link RESOURCE_MANAGER::resolve_icon_as_html()}, so it can
@@ -69,7 +71,7 @@ class ICON extends RENDERABLE
   /**
    * @return string
    */
-  function icon_as_html ($size = '100px')
+  public function icon_as_html ($size = '100px')
   {
     return $this->context->image_as_html ($this->home_page (), $this->title, $size);
   }
@@ -77,7 +79,7 @@ class ICON extends RENDERABLE
   /**
    * @param DATABASE $db Database from which to load values.
    */
-  function load ($db)
+  public function load ($db)
   {
     parent::load ($db);
     $this->title = $db->f ('title');
@@ -88,7 +90,7 @@ class ICON extends RENDERABLE
   /**
    * @param SQL_STORAGE $storage Store values to this object.
    */
-  function store_to ($storage)
+  public function store_to ($storage)
   {
     parent::store_to ($storage);
     $tname = $this->_table_name ();
@@ -100,7 +102,7 @@ class ICON extends RENDERABLE
   /**
    * @return string
    */
-  function raw_title ()
+  public function raw_title ()
   {
     return $this->title;
   }
@@ -109,7 +111,7 @@ class ICON extends RENDERABLE
    * Name of the home page name for this object.
    * @return string
    */
-  function page_name ()
+  public function page_name ()
   {
     return $this->context->sized_icon ($this->url, '100px');
   }
@@ -118,7 +120,7 @@ class ICON extends RENDERABLE
    * Arguments to the home page url for this object.
    * @return string
    */
-  function page_arguments ()
+  public function page_arguments ()
   {
     return '';
   }
@@ -128,7 +130,7 @@ class ICON extends RENDERABLE
    * @return string
    * @access private
    */
-  function _table_name ()
+  protected function _table_name ()
   {
     return $this->app->table_names->icons;
   }
@@ -140,7 +142,7 @@ class ICON extends RENDERABLE
    * @return object
    * @access private
    */
-  function _default_handler_for ($handler_type, $options = null)
+  protected function _default_handler_for ($handler_type, $options = null)
   {
     switch ($handler_type)
     {

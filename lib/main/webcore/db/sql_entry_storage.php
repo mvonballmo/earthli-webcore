@@ -55,7 +55,7 @@ class SQL_MULTI_TYPE_ENTRY_STORAGE extends SQL_UNIQUE_STORAGE
    * @param STORABLE $obj
    * @access private
    */
-  function _commit_table ($table, $action, $obj)
+  protected function _commit_table ($table, $action, $obj)
   {
     if (($table->name == $obj->_secondary_table_name ()) && ($action == Storage_action_create))
     {

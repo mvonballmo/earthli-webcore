@@ -53,7 +53,7 @@ class CHANGE_COMMANDS extends ENTRY_COMMANDS
   /**
    * @param CHANGE $obj Configure commands for this object.
    */
-  function CHANGE_COMMANDS ($entry)
+  public function CHANGE_COMMANDS ($entry)
   {
     ENTRY_COMMANDS::ENTRY_COMMANDS ($entry);
 

@@ -61,7 +61,7 @@ class QUERY_SECURITY_RESTRICTION extends WEBCORE_OBJECT
   /**
    * @param QUERY $query Query to which the restriction is applied.
    */
-  function QUERY_SECURITY_RESTRICTION ($query)
+  public function QUERY_SECURITY_RESTRICTION ($query)
   {
     WEBCORE_OBJECT::WEBCORE_OBJECT ($query->context);
     $this->_query = $query;
@@ -77,7 +77,7 @@ class QUERY_SECURITY_RESTRICTION extends WEBCORE_OBJECT
    * @param array[string] List of privilege sets to check.
    * @return string
    */
-  function as_sql ($set_names)
+  public function as_sql ($set_names)
   {
     $this->_set_returns_no_data ();
     $this->_generate_sql_for_sets ($set_names);
@@ -95,7 +95,7 @@ class QUERY_SECURITY_RESTRICTION extends WEBCORE_OBJECT
    *
    * @param QUERY_SECURITY_RESTRICTION_SET_ITEM $item
    */
-  function apply_item ($item)
+  public function apply_item ($item)
   {
     if (! $this->_returns_all_data ())
     {
@@ -163,7 +163,7 @@ class QUERY_SECURITY_RESTRICTION extends WEBCORE_OBJECT
    * @param array[string] $set_names
    * @access private
    */
-  function _generate_sql_for_sets ($set_names)
+  protected function _generate_sql_for_sets ($set_names)
   {
     $this->_set_names = $set_names;
     $permissions = $this->login->permissions ();
@@ -183,6 +183,8 @@ class QUERY_SECURITY_RESTRICTION extends WEBCORE_OBJECT
         }
       }
 
+      $last_set = null;
+      
       foreach ($set_names as $set_name)
       {
         $privilege = $permissions->value_for ($set_name, Privilege_view_hidden);
@@ -205,7 +207,7 @@ class QUERY_SECURITY_RESTRICTION extends WEBCORE_OBJECT
    * @param QUERY_SECURITY_RESTRICTION_SET_ITEM $item
    * @access private
    */
-  function _load_ids_for ($item)
+  protected function _load_ids_for ($item)
   {
     $sets = array_merge ($this->_vis_sets, $item->sets);
     $privs = array_merge ($this->_vis_privs, $item->privileges);
@@ -222,7 +224,7 @@ class QUERY_SECURITY_RESTRICTION extends WEBCORE_OBJECT
    * @param integer $idx
    * @access private
    */
-  function _format_state ($item, $state, $idx)
+  protected function _format_state ($item, $state, $idx)
   {
     $set_name = $this->_set_names [$idx];
     $table_name = $this->_query->table_for_set ($set_name);
@@ -244,7 +246,7 @@ class QUERY_SECURITY_RESTRICTION extends WEBCORE_OBJECT
    * @see _set_returns_no_data()
    * @access private
    */
-  function _set_returns_all_data ()
+  protected function _set_returns_all_data ()
   {
     $this->_text = '1';
   }
@@ -256,7 +258,7 @@ class QUERY_SECURITY_RESTRICTION extends WEBCORE_OBJECT
    * @return boolean
    * @access private
    */
-  function _returns_all_data ()
+  protected function _returns_all_data ()
   {
     return $this->_text == '1';
   }
@@ -268,7 +270,7 @@ class QUERY_SECURITY_RESTRICTION extends WEBCORE_OBJECT
    * @see _returns_all_data()
    * @access private
    */
-  function _set_returns_no_data ()
+  protected function _set_returns_no_data ()
   {
     $this->_text = '';
   }
@@ -281,6 +283,7 @@ class QUERY_SECURITY_RESTRICTION extends WEBCORE_OBJECT
    * @access private
    */
   protected $_vis_sets;
+
   /**
    * List of privileges for the visible states to check.
    * This array is always the same size as {@link $vis_sets} and only ever includes the
@@ -289,6 +292,13 @@ class QUERY_SECURITY_RESTRICTION extends WEBCORE_OBJECT
    * @access private
    */
   protected $_vis_privs;
+  
+  /**
+   * The query on which this object operates.
+   *
+   * @var QUERY
+   */
+  protected $_query;
 }
 
 /**
@@ -315,6 +325,7 @@ class QUERY_SECURITY_RESTRICTION_SET_ITEM
    * @var array[integer]
    */
   public $states;
+
   /**
    * List of privilege sets to restrict.
    * A list of folder ids is retrieved for which the user has the matching privileges
@@ -322,6 +333,7 @@ class QUERY_SECURITY_RESTRICTION_SET_ITEM
    * @var array[string]
    */
   public $sets;
+
   /**
    * List of privileges to restrict.
    * This array is always the same size as {@link $sets} and only ever includes the
@@ -329,20 +341,21 @@ class QUERY_SECURITY_RESTRICTION_SET_ITEM
    * @var array[integer]
    */
   public $privileges;
+
   /**
    * True if the generator should include {@link Draft}s.
    * If the user's visible and invisible rights are both content-based, then that user's
    * drafts can be included in the result set.
    * @var boolean
    */
-  public $include_drafts = FALSE;
+  public $include_drafts = false;
 
   /**
    * @param QUERY_SECURITY_RESTRICTION_SET $set
    * @param integer $state Initial state to include in {@link $states}.
    * @param string $set_name Initial set to include in {@link $sets}.
    */
-  function QUERY_SECURITY_RESTRICTION_SET_ITEM ($set, $state = null, $set_name = null)
+  public function QUERY_SECURITY_RESTRICTION_SET_ITEM ($set, $state = null, $set_name = null)
   {
     $this->update_draft_status ($set);
     $this->sets = array ();
@@ -362,7 +375,7 @@ class QUERY_SECURITY_RESTRICTION_SET_ITEM
    * Add a privilege set to this item.
    * @param string $set_name
    */
-  function add_set ($set_name)
+  public function add_set ($set_name)
   {
     $this->sets [] = $set_name;
     $this->privileges [] = Privilege_view_hidden;
@@ -372,7 +385,7 @@ class QUERY_SECURITY_RESTRICTION_SET_ITEM
    * Merge another item into this one.
    * @param QUERY_SECURITY_RESTRICTION_SET_ITEM $other
    */
-  function append ($other)
+  public function append ($other)
   {
     $this->states = array_merge ($this->states, $other->states);
     $this->sets = array_merge ($this->sets, $other->sets);
@@ -383,7 +396,7 @@ class QUERY_SECURITY_RESTRICTION_SET_ITEM
    * Sets whether drafts should be included for this item.
    * @param QUERY_SECURITY_RESTRICTION_SET $set
    */
-  function update_draft_status ($set)
+  public function update_draft_status ($set)
   {
     $this->include_drafts |= ($set->name == Privilege_set_entry) &&
                              ($set->privilege == Privilege_controlled_by_content);
@@ -414,11 +427,13 @@ class QUERY_SECURITY_RESTRICTION_SET
    * @var QUERY_SECURITY_RESTRICTION_SET
    */
   public $set;
+
   /**
    * Name of the privilege set.
    * @var string
    */
   public $name;
+
   /**
    * Kind of access the user has for objects in this set.
    * @var integer
@@ -429,7 +444,7 @@ class QUERY_SECURITY_RESTRICTION_SET
    * @param string $name
    * @param integer $privielege
    */
-  function QUERY_SECURITY_RESTRICTION_SET ($name, $privilege)
+  public function QUERY_SECURITY_RESTRICTION_SET ($name, $privilege)
   {
     $this->name = $name;
     $this->privilege = $privilege;
@@ -439,20 +454,20 @@ class QUERY_SECURITY_RESTRICTION_SET
    * Generate required items and apply to this restriction.
    * @param QUERY_SECURITY_RESTRICTION
    */
-  function apply ($res)
+  public function apply ($res)
   {
     if ($this->privilege == Privilege_always_granted)
     {
-      $this->_apply_items ($res, TRUE, 0);
+      $this->_apply_items ($res, true, 0);
     }
     else
     {
-      $this->_apply_items ($res, TRUE, Visible);
+      $this->_apply_items ($res, true, Visible);
     }
 
     if ($this->privilege != Privilege_always_denied)
     {
-      $this->_apply_items ($res, FALSE, 0);
+      $this->_apply_items ($res, false, 0);
     }
   }
 
@@ -464,11 +479,13 @@ class QUERY_SECURITY_RESTRICTION_SET
    * @param integer $state State to apply for this item at this level.
    * @access private
    */
-  function _apply_items ($res, $is_vis, $state)
+  protected function _apply_items ($res, $is_vis, $state)
   {
     $items = $this->_items_for ($is_vis, $state);
     foreach ($items as $item)
+    {
       $res->apply_item ($item);
+    }
   }
 
   /**
@@ -478,7 +495,7 @@ class QUERY_SECURITY_RESTRICTION_SET
    * @param integer $state State to apply for this item at this level.
    * @access private
    */
-  function _items_for ($is_vis, $state)
+  protected function _items_for ($is_vis, $state)
   {
     if (! isset ($this->set))
     {
@@ -516,7 +533,7 @@ class QUERY_SECURITY_RESTRICTION_SET
    * Used internally by {@link _items_for()}.
    * @access private
    */
-  function _all_items ()
+  protected function _all_items ()
   {
     $items = $this->_items ();
 
@@ -550,7 +567,7 @@ class QUERY_SECURITY_RESTRICTION_SET
    * @param boolean $include_invis Include states and sets for hidden objects?
    * @access private
    */
-  function _items ($include_vis = TRUE, $include_invis = TRUE)
+  protected function _items ($include_vis = true, $include_invis = true)
   {
     $Result = array ();
 

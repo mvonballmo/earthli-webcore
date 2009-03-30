@@ -33,7 +33,7 @@ http://www.earthli.com/software/webcore
     $class_name = $App->final_class_name ('USER_PERMISSIONS_FORM', 'webcore/forms/user_permissions_form.php');
     $form = new $class_name ($App);
 
-    $form->set_visible ('use_defaults', FALSE);
+    $form->set_visible ('use_defaults', false);
 
     $form->process_existing ($user);
     if ($form->committed ())

@@ -51,7 +51,7 @@ class PROJECT_COMMENT_QUERY extends FOLDER_MULTI_TYPE_COMMENT_QUERY
   /**
    * @param FOLDER $folder Folder from which comments are retrieved.
    */
-  function PROJECT_COMMENT_QUERY ($folder)
+  public function PROJECT_COMMENT_QUERY ($folder)
   {
     FOLDER_MULTI_TYPE_COMMENT_QUERY::FOLDER_MULTI_TYPE_COMMENT_QUERY ($folder);
 
@@ -72,7 +72,7 @@ class PROJECT_COMMENT_QUERY extends FOLDER_MULTI_TYPE_COMMENT_QUERY
    * @param PROJECT_ENTRY $entry The entry whose properties should be set.
    * @access private
    */
-  function _prepare_entry ($entry)
+  protected function _prepare_entry ($entry)
   {
     parent::_prepare_entry ($entry);
 

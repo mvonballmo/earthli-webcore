@@ -66,8 +66,8 @@ http://www.earthli.com/software/webcore/albums
       <?php
         $renderer = $folder->handler_for (Handler_html_renderer);
         $options = $renderer->options ();
-        $options->show_as_summary = TRUE;
-        $options->show_users = FALSE;
+        $options->show_as_summary = true;
+        $options->show_users = false;
         $renderer->display ($folder);
 
         $panel_manager->display ();

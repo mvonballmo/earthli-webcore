@@ -59,7 +59,7 @@ class CALLBACK
   /**
    * @var string
    */
-  function CALLBACK ($name)
+  public function CALLBACK ($name)
   {
     $this->name = $name;
   }
@@ -69,7 +69,7 @@ class CALLBACK
    * @param array $args
    * @return mixed
    */
-  function execute ($args = null)
+  public function execute ($args = null)
   {
     $name = $this->name;
     $num_args = sizeof ($args);
@@ -86,6 +86,8 @@ class CALLBACK
       return $name ($args[0], $args[1], $args[2]);
     case 3:
       return $name ($args[0], $args[1], $args[2], $args[3]);
+    default:
+      throw new UNKNOWN_VALUE_EXCEPTION($num_args);
     }
   }
 }
@@ -106,7 +108,7 @@ class CALLBACK_METHOD extends CALLBACK
    * @param string $name
    * @param object $obj
    */
-  function CALLBACK_METHOD ($name, $obj)
+  public function CALLBACK_METHOD ($name, $obj)
   {
     CALLBACK::CALLBACK ($name);
     $this->_obj = $obj;
@@ -117,7 +119,7 @@ class CALLBACK_METHOD extends CALLBACK
    * @param array $args
    * @return mixed
    */
-  function execute ($args = null)
+  public function execute ($args = null)
   {
     $name = $this->name;
     $num_args = sizeof ($args);
@@ -134,6 +136,8 @@ class CALLBACK_METHOD extends CALLBACK
       return $this->_obj->$name ($args[0], $args[1], $args[2]);
     case 3:
       return $this->_obj->$name ($args[0], $args[1], $args[2], $args[3]);
+    default:
+      throw new UNKNOWN_VALUE_EXCEPTION($num_args);
     }
   }
 
@@ -158,7 +162,7 @@ class CALLBACK_LIST
    * Add a callback to the list of listeners.
    * @param CALLBACK $callback
    */
-  function add_item ($callback)
+  public function add_item ($callback)
   {
     $this->_items [] = $callback;
   }
@@ -168,14 +172,16 @@ class CALLBACK_LIST
    * @param array $args
    * @return mixed
    */
-  function execute ($args = null)
+  public function execute ($args = null)
   {
     if (! $this->_executing)
     {
-      $this->_executing = TRUE;
+      $this->_executing = true;
       foreach ($this->_items as $item)
+      {
         $item->execute ($args);
-      $this->_executing = FALSE;
+      }
+      $this->_executing = false;
     }
   }
   
@@ -185,12 +191,13 @@ class CALLBACK_LIST
    * @access private
    */
   protected $_items = array ();
+
   /**
    * Set internally when iterating the list.
    * If this flag is set, calls to {@link execute()} are ignored.
    * @access private
    */
-  protected $_executing = FALSE;
+  protected $_executing = false;
 }
 
 ?>

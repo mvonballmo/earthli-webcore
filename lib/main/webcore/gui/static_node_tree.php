@@ -51,7 +51,7 @@ class STATIC_NODE_TREE extends STATIC_TREE
   /**
    * @param APPLICATION $app Main application.
    */
-  function STATIC_NODE_TREE ($app)
+  public function STATIC_NODE_TREE ($app)
   {
     include_once ('webcore/gui/tree_node.php');
     STATIC_TREE::STATIC_TREE ($app, new GENERIC_TREE_NODE_INFO ($app));

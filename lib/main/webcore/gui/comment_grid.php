@@ -53,32 +53,37 @@ class COMMENT_GRID extends SELECTABLE_GRID
    * @var string
    */
   public $object_name = 'Comment';
+
   /**
    * @var integer
    */
   public $spacing = 2;
+
   /**
    * @var boolean
    */
-  public $show_separator = TRUE;
+  public $show_separator = true;
+
   /**
    * @var string
    */
   public $box_style = 'object-in-list';
+
   /**
    * @var boolean
    */
-  public $show_user = TRUE;
+  public $show_user = true;
+
   /**
    * @var boolean
    */
-  public $show_folder = TRUE;
+  public $show_folder = true;
 
   /**
    * @param COMMENT $obj
-    * @access private
-    */
-  function _draw_box ($obj)
+   * @access private
+   */
+  protected function _draw_box ($obj)
   {
     $this->_echo_header ($obj);
 ?>
@@ -99,7 +104,7 @@ class COMMENT_GRID extends SELECTABLE_GRID
     $this->_echo_entry_info ($obj);
   }
 
-  function _echo_entry_info ($obj)
+  protected function _echo_entry_info ($obj)
   {
     $folder = $obj->parent_folder ();
     $entry = $obj->entry ();
@@ -118,7 +123,7 @@ class COMMENT_GRID extends SELECTABLE_GRID
 <?php
   }
 
-  function _echo_header ($obj)
+  protected function _echo_header ($obj)
   {
     $this->_draw_menu_for ($obj, Menu_size_compact);
 

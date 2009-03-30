@@ -50,45 +50,49 @@ class RECIPE extends DRAFTABLE_ENTRY
 {
   /**
    * The picture/logo/icon associated with this project.
-    * @var string
-    */
+   * @var string
+   */
   public $picture_url;
+
   /**
    * Name of the inventor.
-    * @var string
-    */
+   * @var string
+   */
   public $originator;
+
   /**
    * HTML text describing the ingredients.
-    * @var string
-    */
+   * @var string
+   */
   public $ingredients;
+
   /**
    * HTML text describing the instructions.
-    * @var string
-    */
+   * @var string
+   */
   public $instructions;
 
   /**
    * Show ingredients as a bullet list?
-    * @var boolean
-    */
+   * @var boolean
+   */
   public $bullet_ingredients;
+
   /**
    * Show instructions as a numbered list?
-    * @var boolean
-    */
+   * @var boolean
+   */
   public $number_instructions;
 
   /**
    * Render the {@link $originator} as HTML.
-    * @return string
-    */
-  function originator_as_html ()
+   * @return string
+   */
+  public function originator_as_html ()
   {
     $formatter = $this->html_formatter ();
     $force_pars = $formatter->force_paragraphs;
-    $formatter->force_paragraphs = FALSE;
+    $formatter->force_paragraphs = false;
     $Result = $this->_text_as_html ($this->originator, $formatter);
     $formatter->force_paragraphs = $force_pars;
     return $Result;
@@ -96,13 +100,13 @@ class RECIPE extends DRAFTABLE_ENTRY
 
   /**
    * Render the {@link $originator} as HTML.
-    * @return string
-    */
-  function originator_as_plain_text ()
+   * @return string
+   */
+  public function originator_as_plain_text ()
   {
     $formatter = $this->plain_text_formatter ();
     $force_pars = $formatter->force_paragraphs;
-    $formatter->force_paragraphs = FALSE;
+    $formatter->force_paragraphs = false;
     $Result = $this->_text_as_plain_text ($this->originator, $formatter);
     $formatter->force_paragraphs = $force_pars;
     return $Result;
@@ -110,60 +114,56 @@ class RECIPE extends DRAFTABLE_ENTRY
 
   /**
    * Render the {@link $ingredients} as HTML.
-    * @return string
-    */
-  function ingredients_as_html ()
+   * @return string
+   */
+  public function ingredients_as_html ()
   {
     if ($this->bullet_ingredients)
     {
       return $this->_text_as_html ("<ul>$this->ingredients</ul>");
     }
 
-
     return $this->_text_as_html ($this->ingredients);
   }
 
   /**
    * Render the {@link $instructions} as HTML.
-    * @return string
-    */
-  function instructions_as_html ()
+   * @return string
+   */
+  public function instructions_as_html ()
   {
     if ($this->number_instructions)
     {
       return $this->_text_as_html ("<ol>$this->instructions</ol>");
     }
 
-
     return $this->_text_as_html ($this->instructions);
   }
 
   /**
    * Render the {@link $ingredients} as plain text.
-    * @return string
-    */
-  function ingredients_as_plain_text ()
+   * @return string
+   */
+  public function ingredients_as_plain_text ()
   {
     if ($this->bullet_ingredients)
     {
       return $this->_text_as_plain_text ("<ul>$this->ingredients</ul>");
     }
 
-
     return $this->_text_as_plain_text ($this->ingredients);
   }
 
   /**
    * Render the {@link $instructions} as plain text.
-    * @return string
-    */
-  function instructions_as_plain_text ()
+   * @return string
+   */
+  public function instructions_as_plain_text ()
   {
     if ($this->number_instructions)
     {
       return $this->_text_as_plain_text ("<ol>$this->instructions</ol>");
     }
-
 
     return $this->_text_as_plain_text ($this->instructions);
   }
@@ -171,7 +171,7 @@ class RECIPE extends DRAFTABLE_ENTRY
   /**
    * @param DATABASE $db
    */
-  function load ($db)
+  public function load ($db)
   {
     parent::load ($db);
     $this->title = $db->f ("title");
@@ -187,7 +187,7 @@ class RECIPE extends DRAFTABLE_ENTRY
   /**
    * @param SQL_STORAGE $storage Store values to this object.
    */
-  function store_to ($storage)
+  public function store_to ($storage)
   {
     parent::store_to ($storage);
     $tname = $this->_table_name ();
@@ -206,7 +206,7 @@ class RECIPE extends DRAFTABLE_ENTRY
    * @return object
    * @access private
    */
-  function _default_handler_for ($handler_type, $options = null)
+  protected function _default_handler_for ($handler_type, $options = null)
   {
     switch ($handler_type)
     {

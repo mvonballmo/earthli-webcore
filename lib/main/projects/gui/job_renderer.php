@@ -53,7 +53,7 @@ class JOB_RENDERER extends PROJECT_ENTRY_RENDERER
    * @param JOB $entry
    * @access private
    */
-  function _display_as_html ($entry)
+  protected function _display_as_html ($entry)
   {
     $this->_echo_subscribe_status ($entry);
 ?>
@@ -76,7 +76,6 @@ class JOB_RENDERER extends PROJECT_ENTRY_RENDERER
       }
       if ($entry->time_needed->is_valid ())
       {
-        $now = new DATE_TIME ();
     ?>
     <tr>
       <td class="label">Needed By</td>
@@ -179,7 +178,7 @@ class JOB_RENDERER extends PROJECT_ENTRY_RENDERER
    * @param JOB_BRANCH_INFO $branch_info
    * @access private
    */
-  function _echo_html_branch_info ($obj, $branch_info)
+  protected function _echo_html_branch_info ($obj, $branch_info)
   {
     if (! $branch_info->is_closed())
     {
@@ -232,7 +231,7 @@ class JOB_RENDERER extends PROJECT_ENTRY_RENDERER
    * @param JOB_BRANCH_INFO $branch_info
    * @access private
    */
-  function _echo_html_branch_release_info ($branch_info)
+  protected function _echo_html_branch_release_info ($branch_info)
   {
     if ($branch_info->is_closed ())
     {
@@ -249,7 +248,7 @@ class JOB_RENDERER extends PROJECT_ENTRY_RENDERER
    * @param object $entry
    * @access private
    */
-  function _display_as_plain_text ($entry)
+  protected function _display_as_plain_text ($entry)
   {
     echo $this->_line ('[Kind]: ' . $entry->kind_as_text ());
 
@@ -294,7 +293,7 @@ class JOB_RENDERER extends PROJECT_ENTRY_RENDERER
    * @param JOB_BRANCH_INFO $branch_info
    * @access private
    */
-  function _echo_plain_text_branch_info ($entry, $branch_info)
+  protected function _echo_plain_text_branch_info ($entry, $branch_info)
   {
     if (! $branch_info->is_closed())
     {
@@ -333,7 +332,7 @@ class JOB_RENDERER extends PROJECT_ENTRY_RENDERER
    * @param JOB_BRANCH_INFO $branch_info
    * @access private
    */
-  function _echo_plain_text_branch_release_info ($branch_info)
+  protected function _echo_plain_text_branch_release_info ($branch_info)
   {
     if ($branch_info->is_closed ())
     {
@@ -350,7 +349,7 @@ class JOB_RENDERER extends PROJECT_ENTRY_RENDERER
    * @param JOB $entry
    * @access private
    */
-  function _display_as_printable ($entry)
+  protected function _display_as_printable ($entry)
   {
     parent::_display_as_printable ($entry);
 
@@ -390,7 +389,7 @@ class JOB_ASSOCIATED_DATA_RENDERER extends ENTRY_ASSOCIATED_DATA_RENDERER
    * @param JOB $obj
    * @param OBJECT_RENDERER_OPTIONS $options
    */
-  function display ($obj, $options = null)
+  public function display ($obj, $options = null)
   {
     $chng_query = $obj->change_query ();
     $num_changes = $chng_query->size ();

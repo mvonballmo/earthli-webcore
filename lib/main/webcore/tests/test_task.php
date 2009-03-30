@@ -58,6 +58,7 @@ class TEST_TASK extends TASK
    * @var string
    */
   public $icon = '{icons}buttons/test';
+
   /**
    * Log all messages in this channel.
    * @var string
@@ -69,7 +70,7 @@ class TEST_TASK extends TASK
    * Used as the {@link PAGE_TITLE::$subject} when executed.
    * @return string
    */
-  function title_as_text ()
+  public function title_as_text ()
   {
     return 'Running test [' . get_class ($this) . ']...';
   }
@@ -78,7 +79,7 @@ class TEST_TASK extends TASK
    * Log in as the default user.
    * @access private
    */
-  function _log_in_as_tester ()
+  protected function _log_in_as_tester ()
   {
     $this->app->impersonate ('tester', 'password');
   }
@@ -89,7 +90,7 @@ class TEST_TASK extends TASK
    * @param boolean $value
    * @param string $msg
    */
-  function _check ($value, $msg)
+  protected function _check ($value, $msg)
   {
     if (! $value)
     {
@@ -111,7 +112,7 @@ class TEST_TASK extends TASK
    * @param mixed $value1
    * @param mixed $value2
    */
-  function _check_equal ($value1, $value2)
+  protected function _check_equal ($value1, $value2)
   {
     if ($value1 != $value2)
     {

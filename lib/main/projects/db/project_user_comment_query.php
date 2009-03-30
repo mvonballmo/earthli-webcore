@@ -51,7 +51,7 @@ class PROJECT_USER_COMMENT_QUERY extends USER_MULTI_TYPE_COMMENT_QUERY
   /**
    * @param PROJECT_APPLICATION $app Main application.
    */
-  function PROJECT_USER_COMMENT_QUERY ($app)
+  public function PROJECT_USER_COMMENT_QUERY ($app)
   {
     USER_MULTI_TYPE_COMMENT_QUERY::USER_MULTI_TYPE_COMMENT_QUERY ($app);
 
@@ -72,7 +72,7 @@ class PROJECT_USER_COMMENT_QUERY extends USER_MULTI_TYPE_COMMENT_QUERY
    * @param PROJECT_ENTRY $entry The entry whose properties should be set.
    * @access private
    */
-  function _prepare_entry ($entry)
+  protected function _prepare_entry ($entry)
   {
     parent::_prepare_entry ($entry);
 

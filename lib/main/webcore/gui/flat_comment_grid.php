@@ -52,17 +52,18 @@ class FLAT_COMMENT_GRID extends PRINTABLE_COMMENT_GRID
    * @var string
    */
   public $box_style = '';
+
   /**
    * Used when printing to shut off pagination
    * @var boolean
    */
-  public $show_paginator = TRUE;
+  public $show_paginator = true;
 
   /**
    * @param COMMENT $obj
-    * @access private
-    */
-  function _draw_box ($obj)
+   * @access private
+   */
+  protected function _draw_box ($obj)
   {
     $this->_draw_comment_contents ($obj);
   }
@@ -73,7 +74,7 @@ class FLAT_COMMENT_GRID extends PRINTABLE_COMMENT_GRID
    * @param COMMENT $obj
    * @access private
    */
-  function _draw_comment_contents ($obj)
+  protected function _draw_comment_contents ($obj)
   {
     $creator = $obj->creator ();
 ?>
@@ -150,7 +151,7 @@ class FLAT_COMMENT_GRID extends PRINTABLE_COMMENT_GRID
    * @return array[COMMENT]
    * @access private
    */
-  function _get_objects ()
+  protected function _get_objects ()
   {
     // if printing, then don't paginate, return all objects
 

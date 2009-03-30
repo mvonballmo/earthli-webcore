@@ -77,53 +77,63 @@ class CONTEXT_DISPLAY_OPTIONS
    * @var string
    */
   public $menu_separator = ' | ';
+
   /**
    * Separator string used between page numbers in page navigators.
    * @var string
    */
   public $page_separator = ' &bull; ';
+
   /**
    * Separator string used between locations in the navigation bar.
    * @var string
    */
   public $location_separator = ' &gt; ';
+
   /**
    * Separator string used between objects in any context.
    * @var string
    */
   public $object_separator = ' &gt; ';
+
   /**
    * Maximum number of page numbers to show in page navigators.
    * @var integer
    */
   public $pages_to_show = 7;
+
   /**
    * Maximum number of objects to show in the list of an entry navigator.
    * @var integer
    */
   public $objects_to_show = 25;
+
   /**
    * Use this extensions for icons that don't specify one.
    * @var string
    */
   public $default_icon_extension = 'png';
+
   /**
    * Should the interface use DHTML to render?
    * This option is assumed False if the browser is not DHTML-capable. Use
    * {@link CONTEXT::dhtml_allowed()} to check this option.
    * @var boolean
    */
-  public $use_DHTML = TRUE;
+  public $use_DHTML = true;
+
   /**
    * Use JavaScript to display local times in this application?
    * @var boolean
    */
-  public $show_local_times = TRUE;
+  public $show_local_times = true;
+
   /**
    * Specify a maximum number of characters to display for object titles.
    * @var integer
    */
   public $default_max_title_size = 25;
+
   /**
    * Use this title size for all elements (temporarily).
    * Set this if you are rendering content in such a way that you know the titles will
@@ -136,7 +146,7 @@ class CONTEXT_DISPLAY_OPTIONS
   /**
    * @param CONTEXT $context
    */
-  function CONTEXT_DISPLAY_OPTIONS ($context)
+  public function CONTEXT_DISPLAY_OPTIONS ($context)
   {
     $this->context = $context;
   }
@@ -144,7 +154,7 @@ class CONTEXT_DISPLAY_OPTIONS
   /**
    * @param CONTEXT_DISPLAY_OPTIONS
    */
-  function copy_from ($opts)
+  public function copy_from ($opts)
   {
     $this->menu_separator = $opts->menu_separator;
     $this->page_separator = $opts->page_separator;
@@ -178,35 +188,43 @@ class CONTEXT_MAIL_OPTIONS
   /**
    * @var boolean
    */
-  public $send_as_html = TRUE;
+  public $send_as_html = true;
+
   /**
    * @var boolean
    */
-  public $enabled = TRUE;
+  public $enabled = true;
+
   /**
    * @var string
    */
   public $webmaster_address = 'webmaster@my-domain-name.com';
+
   /**
    * @var string
    */
   public $send_from_address = 'webcore@my-domain-name.com';
+
   /**
    * @var string
    */
   public $send_from_name = 'WebCore';
+
   /**
    * @var string
    */
   public $log_file_name;
+
   /**
    * @var boolean
    */
-  public $logging_enabled = TRUE;
+  public $logging_enabled = true;
+
   /**
    * @var string
    */
   public $SMTP_server = '';
+
   /**
    * Determines which entry history items should be published.
    * Publishes all history items if empty.
@@ -214,6 +232,7 @@ class CONTEXT_MAIL_OPTIONS
    * @var string
    */
   public $entry_publication_filter;
+
   /**
    * Determines which comment history items should be published.
    * Publishes all history items if empty.
@@ -225,7 +244,7 @@ class CONTEXT_MAIL_OPTIONS
   /**
    * @param CONTEXT_MAIL_OPTIONS
    */
-  function copy_from ($opts)
+  public function copy_from ($opts)
   {
     $this->send_as_html = $opts->send_as_html;
     $this->enabled = $opts->enabled;
@@ -251,14 +270,17 @@ class CONTEXT_DATABASE_OPTIONS
    * @var string
    */
   public $host = 'localhost';
+
   /**
    * @var string
    */
   public $name;
+
   /**
    * @var string
    */
   public $user_name = 'root';
+
   /**
    * @var string
    */
@@ -267,7 +289,7 @@ class CONTEXT_DATABASE_OPTIONS
   /**
    * @param CONTEXT_DATABASE_OPTIONS
    */
-  function copy_from ($opts)
+  public function copy_from ($opts)
   {
     $this->host = $opts->host;
     $this->name = $opts->name;
@@ -298,22 +320,24 @@ class CONTEXT_UPLOAD_OPTIONS
    * @see FORM::_process_uploaded_file()
    */
   public $temp_folder = '{data}temp';
+
   /**
    * Indicate the maximum upload size.
    * Uses PHP units like "2M"
    * @var string
    */
   public $max_size = '2M';
+
   /**
    * Indicate whether file names should be converted to lower case by default.
    * @var boolean
    */
-  public $use_lower_case_file_names = TRUE;
+  public $use_lower_case_file_names = true;
 
   /**
    * @param CONTEXT_UPLOAD_OPTIONS $opts
    */
-  function copy_from ($opts)
+  public function copy_from ($opts)
   {
     $this->temp_folder = $opts->temp_folder;
   }

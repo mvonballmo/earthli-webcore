@@ -35,7 +35,7 @@ class UPGRADE_WEBCORE_25_26_TASK extends MIGRATOR_TASK
   public $version_from = '2.5.0';
   public $version_to = '2.6.0';
 
-  function _execute ()
+  protected function _execute ()
   {
     log_open_block ("Adding version info table");
       $this->_query ("CREATE TABLE `versions` (`title` VARCHAR( 100 ) NOT NULL ,`version` VARCHAR( 50 ) NOT NULL);");

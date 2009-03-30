@@ -35,7 +35,7 @@ class UPGRADE_WEBCORE_23_24_TASK extends MIGRATOR_TASK
   public $version_from = '2.3.0';
   public $version_to = '2.4.0';
 
-  function _create_actions ($obj_type)
+  protected function _create_actions ($obj_type)
   {
     global $Page;
 
@@ -78,7 +78,7 @@ class UPGRADE_WEBCORE_23_24_TASK extends MIGRATOR_TASK
     }
   }
 
-  function _execute ()
+  protected function _execute ()
   {
     log_open_block ("Adding actions table");
       $this->_query ("CREATE TABLE `project_actions` (`id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,`object_id` INT UNSIGNED NOT NULL ,`object_type` ENUM( 'folder', 'entry', 'comment', 'group', 'user', 'branch', 'release' ) NOT NULL ,`user_id` INT UNSIGNED NOT NULL ,`time_created` DATETIME NOT NULL ,`publication_state` ENUM( 'silent', 'published', 'queued' ) NOT NULL ,`title` VARCHAR( 200 ) NOT NULL ,`description` TEXT NOT NULL ,`system_description` TEXT NOT NULL ,PRIMARY KEY ( `id` ) ,INDEX ( `object_id` , `object_type` ) );");

@@ -50,9 +50,9 @@ class THREADED_COMMENT_GRID extends FLAT_COMMENT_GRID
 {
   /**
    * @param array[COMMENT] $objs
-    * @access private
-    */
-  function _draw_cells ($objs)
+   * @access private
+   */
+  protected function _draw_cells ($objs)
   {
     $depth = 0;
     $this->_draw_comments ($objs, $depth);
@@ -60,22 +60,22 @@ class THREADED_COMMENT_GRID extends FLAT_COMMENT_GRID
 
   /**
    * Start rendering the grid.
-    * @access private
-    */
-  function _start_grid () {}
+   * @access private
+   */
+  protected function _start_grid () {}
 
   /**
    * Finish rendering the grid.
-    * @access private
-    */
-  function _finish_grid () {}
+   * @access private
+   */
+  protected function _finish_grid () {}
 
   /**
    * Get the list of objects for the requested page.
    * @return array[COMMENT]
    * @access private
    */
-  function _get_objects ()
+  protected function _get_objects ()
   {
     $this->_query->set_order ('time_created ASC');
 
@@ -119,7 +119,7 @@ class THREADED_COMMENT_GRID extends FLAT_COMMENT_GRID
               $this->_query->set_select ('com.*');
               $this->_query->restrict ("com.root_id IN ($str_com_ids)");
               $Result = $this->_query->tree ();
-              $this->_show_paginator = TRUE;
+              $this->_show_paginator = true;
             }
           }
         }
@@ -140,10 +140,10 @@ class THREADED_COMMENT_GRID extends FLAT_COMMENT_GRID
 
   /**
    * @param array[COMMENT] $objs
-    * @param integer $depth Nesting level.
-    * @access private
-    */
-  function _draw_comments ($objs, $depth)
+   * @param integer $depth Nesting level.
+   * @access private
+   */
+  protected function _draw_comments ($objs, $depth)
   {
     $c = sizeof ($objs);
     $i = 0;
@@ -171,10 +171,10 @@ class THREADED_COMMENT_GRID extends FLAT_COMMENT_GRID
 
   /**
    * @param COMMENT $obj
-    * @param integer $depth Nesting level.
-    * @access private
-    */
-  function _draw_comment ($obj, $depth)
+   * @param integer $depth Nesting level.
+   * @access private
+   */
+  protected function _draw_comment ($obj, $depth)
   {
     $this->_draw_comment_contents ($obj);
     $objs = $obj->sub_comments ();  // break the reference deliberately or there is an infinite loop

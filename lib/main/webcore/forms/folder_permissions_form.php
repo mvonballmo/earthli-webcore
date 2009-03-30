@@ -53,6 +53,7 @@ class FOLDER_PERMISSIONS_FORM extends PERMISSIONS_FORM
    * @var string
    */
   public $button = 'Save';
+
   /**
    * @var string
    */
@@ -61,7 +62,7 @@ class FOLDER_PERMISSIONS_FORM extends PERMISSIONS_FORM
   /**
    * @param APPLICATION $app Main application.
    */
-  function FOLDER_PERMISSIONS_FORM ($app)
+  public function FOLDER_PERMISSIONS_FORM ($app)
   {
     PERMISSIONS_FORM::PERMISSIONS_FORM ($app);
 
@@ -69,7 +70,7 @@ class FOLDER_PERMISSIONS_FORM extends PERMISSIONS_FORM
     $field->id = 'id';
     $field->title = 'ID';
     $field->min_value = 1;
-    $field->visible = FALSE;
+    $field->visible = false;
     $this->add_field ($field);
 
     $formatter = $this->app->make_permissions_formatter ();
@@ -81,7 +82,7 @@ class FOLDER_PERMISSIONS_FORM extends PERMISSIONS_FORM
       {
         $field = new BOOLEAN_FIELD ();
         $field->id = $map->id ();
-        $field->sticky = TRUE;
+        $field->sticky = true;
         $this->add_field ($field);
       }
     }
@@ -92,25 +93,29 @@ class FOLDER_PERMISSIONS_FORM extends PERMISSIONS_FORM
    * @param FOLDER_PERMISSIONS $obj
    * @access private
    */
-  function commit ($obj)
+  public function commit ($obj)
   {
     foreach ($this->groups as $group)
     {
       foreach ($group->maps as $map)
+      {
         $map->store_to_object ($obj, $this->value_for ($map->id ()));
+      }
     }
 
     $obj->store ();
   }
 
-  function load_with_defaults ()
+  public function load_with_defaults ()
   {
     parent::load_with_defaults ();
 
     foreach ($this->groups as $group)
     {
       foreach ($group->maps as $map)
-        $this->load_from_client ($map->id (), FALSE);
+      {
+        $this->load_from_client ($map->id (), false);
+      }
     }
   }
 
@@ -118,7 +123,7 @@ class FOLDER_PERMISSIONS_FORM extends PERMISSIONS_FORM
    * Load initial properties from these permissions.
    * @param FOLDER_PERMISSIONS $obj
    */
-  function load_from_object ($obj)
+  public function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
 
@@ -127,7 +132,9 @@ class FOLDER_PERMISSIONS_FORM extends PERMISSIONS_FORM
     foreach ($this->groups as $group)
     {
       foreach ($group->maps as $map)
+      {
         $this->set_value ($map->id (), $obj->is_allowed ($map->set_name, $map->type));
+      }
     }
   }
 
@@ -137,14 +144,16 @@ class FOLDER_PERMISSIONS_FORM extends PERMISSIONS_FORM
    * @access private
    * @abstract
    */
-  function _draw_permission_controls ($renderer, $formatter)
+  protected function _draw_permission_controls ($renderer, $formatter)
   {
     $this->_draw_buttons ($renderer);
     foreach ($this->groups as $group)
     {
       $renderer->start_row ($group->title);
       foreach ($group->maps as $map)
+      {
         $this->_draw_permission ($map, $formatter, $renderer);
+      }
       $renderer->finish_row ();
       $renderer->draw_separator ();
     }

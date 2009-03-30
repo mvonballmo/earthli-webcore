@@ -46,6 +46,7 @@ define ('Msg_channel_database', 'Database');
 
 /**
  * Vendor-independent access to a database.
+ *
  * @package webcore
  * @subpackage db
  * @version 3.0.0
@@ -57,14 +58,17 @@ class DATABASE extends DB_Sql
    * @var string
    */
   public $Host = "localhost";
+
   /**
    * @var string
    */
   public $Database = '';
+
   /**
    * @var string
    */
   public $User = '';
+
   /**
    * @var string
    */
@@ -73,7 +77,7 @@ class DATABASE extends DB_Sql
   /**
    * @param ENVIRONMENT $env Global environment.
    */
-  function DATABASE ($env)
+  public function DATABASE ($env)
   {
     $this->env = $env;
     $this->Halt_On_Error = "no";
@@ -85,7 +89,7 @@ class DATABASE extends DB_Sql
    * @param string $msg
    * @access private
    */
-  function halt($msg)
+  public function halt($msg)
   {
     DB_Sql::halt ($msg);
 
@@ -99,7 +103,7 @@ class DATABASE extends DB_Sql
    * handles closing an existing connection.
    * @param string $name
    */
-  function set_name ($name)
+  public function set_name ($name)
   {
     if ($this->Link_ID)
     {
@@ -111,35 +115,39 @@ class DATABASE extends DB_Sql
   
   /**
    * Search for the table in the current database.
+   * 
    * @param string $name
    * @return boolean
    */
-  function table_exists ($name)
+  public function table_exists ($name)
   {
     $this->logged_query ("SHOW TABLES FROM $this->Database LIKE '$name'");
     return $this->next_record ();
   }
   
-  function table_has_primary_index ($name)
+  /**
+   * Determine whether the table with the given name has a primary key.
+   *
+   * @param string $name
+   * @return boolean
+   */
+  public function table_has_primary_index ($name)
   {
     $this->logged_query ("SHOW INDEX FROM $name FROM $this->Database");
-    if ($this->next_record ())
-    {
-      return $this->f ('Key_name') == 'Primary';
-    }
+    
+    return ($this->next_record () && $this->f ('Key_name') == 'Primary');
   }
 
   /**
    * Return a field from the current row.
    * @param string|integer $name Index or name of the column to retrieve.
    */
-  function f ($name)
+  public function f ($name)
   {
     if (isset ($this->Record[$name]))
     {
       return $this->Record[$name];
     }
-
 
     return null;
   }
@@ -148,7 +156,7 @@ class DATABASE extends DB_Sql
    * Execute the SQL query.
    * @param string $qs
    */
-  function query ($qs)
+  public function query ($qs)
   {
     if ($this->env->warn_if_duplicate_query_executed)
     {
@@ -184,7 +192,7 @@ class DATABASE extends DB_Sql
    * automated logging built-in.
    * @param string $qs
    */
-  function logged_query ($qs)
+  public function logged_query ($qs)
   {
     if (isset ($this->env->profiler))
     {
@@ -195,7 +203,7 @@ class DATABASE extends DB_Sql
     {
       $elapsed = $this->env->profiler->elapsed ('query');
     }
-    log_message ("<b>Ran generic query in [$elapsed] seconds:</b><p>$qs</p>", Msg_type_debug_info, Msg_channel_database, TRUE);
+    log_message ("<b>Ran generic query in [$elapsed] seconds:</b><p>$qs</p>", Msg_type_debug_info, Msg_channel_database, true);
   }
 
   /**
@@ -204,7 +212,7 @@ class DATABASE extends DB_Sql
    * needs to opened. Defined here to simulate Zend 2.0 features.
    * @return DATABASE
    */
-  function make_clone ()
+  public function make_clone ()
   {
     $Result = new DATABASE ($this->env);
     $Result->Host = $this->Host;
@@ -224,22 +232,25 @@ class DATABASE extends DB_Sql
    * @access private
    */
   protected $_query_texts;
+
   /**
    * @var string
    * @access private
    */
   public $classname = "DATABASE";
+
   /**
    * Shortcut to global environment.
-    * @var ENVIRONMENT
-    * @access private
-    */
+   * @var ENVIRONMENT
+   * @access private
+   */
   public $env = null;
+
   /**
    * Shortcut to global profiler.
-    * @var PROFILER
-    * @access private
-    */
+   * @var PROFILER
+   * @access private
+   */
   public $profiler = null;
 }
 

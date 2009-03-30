@@ -52,32 +52,37 @@ class USER_GRID extends CONTENT_OBJECT_GRID
    * @var string
    */
   public $box_style = 'object-in-list';
+
   /**
    * @var string
    */
   public $object_name = 'User';
+
   /**
    * @var boolean
    */
-  public $show_separator = FALSE;
+  public $show_separator = false;
+
   /**
    * @var string
    */
   public $width = '60%';
+
   /**
    * @var boolean
    */
-  public $centered = TRUE;
+  public $centered = true;
+
   /**
    * @var boolean
    */
-  public $even_columns = FALSE;
+  public $even_columns = false;
 
   /**
    * @param USER $obj
    * @access private
    */
-  function _draw_box ($obj)
+  protected function _draw_box ($obj)
   {
 ?>
   <div style="float: left; margin-right: .5em">
@@ -99,7 +104,6 @@ class USER_GRID extends CONTENT_OBJECT_GRID
 
       foreach ($entry_types as $type_info)
       {
-        $t = $obj->title_formatter ();
         $url->replace_argument ('panel', $type_info->id);
         $menu->append ($type_info->plural_title, $url->as_text ());
       }
@@ -131,7 +135,7 @@ class SELECT_USER_GRID extends USER_GRID
    * @param USER $obj
    * @access private
    */
-  function _draw_box ($obj)
+  protected function _draw_box ($obj)
   {
     $c = $obj->time_created;
     $f = $c->formatter ();

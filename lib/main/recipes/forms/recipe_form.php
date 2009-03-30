@@ -51,7 +51,7 @@ class RECIPE_FORM extends DRAFTABLE_ENTRY_FORM
   /**
    * @param RECIPE_BOOK $folder Add or create recipes in this recipe book.
    */
-  function RECIPE_FORM ($folder)
+  public function RECIPE_FORM ($folder)
   {
     DRAFTABLE_ENTRY_FORM::DRAFTABLE_ENTRY_FORM ($folder);
 
@@ -63,13 +63,13 @@ class RECIPE_FORM extends DRAFTABLE_ENTRY_FORM
     $field = new MUNGER_TEXT_FIELD ();
     $field->id = 'instructions';
     $field->title = 'Instructions';
-    $field->required = TRUE;
+    $field->required = true;
     $this->add_field ($field);
 
     $field = new MUNGER_TEXT_FIELD ();
     $field->id = 'ingredients';
     $field->title = 'Ingredients';
-    $field->required = TRUE;
+    $field->required = true;
     $this->add_field ($field);
 
     $field = new BOOLEAN_FIELD ();
@@ -89,7 +89,7 @@ class RECIPE_FORM extends DRAFTABLE_ENTRY_FORM
    * Load initial properties from this recipe.
    * @param RECIPE $obj
    */
-  function load_from_object ($obj)
+  public function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
 
@@ -101,7 +101,7 @@ class RECIPE_FORM extends DRAFTABLE_ENTRY_FORM
     $this->set_value ('number_instructions', $obj->number_instructions);
   }
 
-  function load_with_defaults ()
+  public function load_with_defaults ()
   {
     parent::load_with_defaults ();
 
@@ -111,10 +111,10 @@ class RECIPE_FORM extends DRAFTABLE_ENTRY_FORM
 
   /**
    * Store the form's values to this recipe.
-    * @param RECIPE $obj
-    * @access private
-    */
-  function _store_to_object ($obj)
+   * @param RECIPE $obj
+   * @access private
+   */
+  protected function _store_to_object ($obj)
   {
     $obj->originator = $this->value_as_text ('originator');
     $obj->ingredients = $this->value_as_text ('ingredients');
@@ -129,7 +129,7 @@ class RECIPE_FORM extends DRAFTABLE_ENTRY_FORM
    * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_controls ($renderer)
+  protected function _draw_controls ($renderer)
   {
     $renderer->start ();
     $renderer->draw_text_line_row ('title');
@@ -149,7 +149,7 @@ class RECIPE_FORM extends DRAFTABLE_ENTRY_FORM
 
     $renderer->draw_submit_button_row ();
 
-    $this->_draw_history_item_controls ($renderer, FALSE);
+    $this->_draw_history_item_controls ($renderer, false);
 
     $renderer->finish ();
   }

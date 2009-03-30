@@ -57,7 +57,7 @@ class PICTURE_HISTORY_ITEM extends ENTRY_HISTORY_ITEM
    * @param PICTURE $new
    * @access private
    */
-  function _record_differences ($orig, $new)
+  protected function _record_differences ($orig, $new)
   {
     parent::_record_differences ($orig, $new);
 
@@ -83,7 +83,7 @@ class JOURNAL_HISTORY_ITEM extends ENTRY_HISTORY_ITEM
    * @param JOURNAL $new
    * @access private
    */
-  function _record_differences ($orig, $new)
+  protected function _record_differences ($orig, $new)
   {
     parent::_record_differences ($orig, $new);
 
@@ -127,7 +127,7 @@ class ALBUM_HISTORY_ITEM extends FOLDER_HISTORY_ITEM
    * @param ALBUM $new
    * @access private
    */
-  function _record_differences ($orig, $new)
+  protected function _record_differences ($orig, $new)
   {
     parent::_record_differences ($orig, $new);
 
@@ -194,7 +194,7 @@ class ALBUM_HISTORY_ITEM extends FOLDER_HISTORY_ITEM
    * @return string
    * @access private
    */
-  function _day_mode_as_text ($day_mode)
+  protected function _day_mode_as_text ($day_mode)
   {
     switch ($day_mode)
     {

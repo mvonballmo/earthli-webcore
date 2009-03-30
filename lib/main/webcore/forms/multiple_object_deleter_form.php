@@ -51,10 +51,10 @@ class MULTIPLE_OBJECT_DELETER_FORM extends MULTIPLE_OBJECT_ACTION_FORM
 {
   /**
    * Execute action for a single folder.
-    * @param FOLDER $fldr
-    * @access private
-    */
-  function _folder_run ($fldr)
+   * @param FOLDER $fldr
+   * @access private
+   */
+  protected function _folder_run ($fldr)
   {
     $fldr->delete ();
   }
@@ -64,7 +64,7 @@ class MULTIPLE_OBJECT_DELETER_FORM extends MULTIPLE_OBJECT_ACTION_FORM
    * @param ENTRY $entry
    * @access private
    */
-  function _entry_run ($entry)
+  protected function _entry_run ($entry)
   {
     $entry->delete ();
   }
@@ -74,7 +74,7 @@ class MULTIPLE_OBJECT_DELETER_FORM extends MULTIPLE_OBJECT_ACTION_FORM
    * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_message ($renderer)
+  protected function _draw_message ($renderer)
   {
     $renderer->start_row ();
 ?>

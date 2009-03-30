@@ -53,7 +53,7 @@ class CHANGE_NAVIGATOR extends ENTRY_NAVIGATOR
    * @param QUERY $query
    * @access private
    */
-  function _adjust_query ($query)
+  protected function _adjust_query ($query)
   {
     parent::_adjust_query ($query);
     $query->add_select ('chng.number, entry.kind');
@@ -66,7 +66,7 @@ class CHANGE_NAVIGATOR extends ENTRY_NAVIGATOR
    * @return string
    * @access private
    */
-  function _text_for_list ($obj)
+  protected function _text_for_list ($obj)
   {
     return $obj->kind_icon ('16px') . ' ' . parent::_text_for_list ($obj);
   }

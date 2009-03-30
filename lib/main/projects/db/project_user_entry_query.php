@@ -54,7 +54,7 @@ class PROJECT_USER_ENTRY_QUERY extends USER_MULTI_ENTRY_QUERY
    * If no type is specified, then assume all entries.
    * @param string $type 'job' and 'change' are valid here.
    */
-  function set_type ($type)
+  public function set_type ($type)
   {
     $this->_type = $type;
     $this->apply_defaults ();
@@ -65,7 +65,7 @@ class PROJECT_USER_ENTRY_QUERY extends USER_MULTI_ENTRY_QUERY
    * Reset the ordering to show recent items first.
    * @access private
    */
-  function _order_by_recent ()
+  protected function _order_by_recent ()
   {
     project_query_order_by_recent ($this, $this->_type);
   }
@@ -75,7 +75,7 @@ class PROJECT_USER_ENTRY_QUERY extends USER_MULTI_ENTRY_QUERY
    * @param PROJECT_ENTRY $obj
    * @access private
    */
-  function _prepare_object ($obj)
+  protected function _prepare_object ($obj)
   {
     parent::_prepare_object ($obj);
 

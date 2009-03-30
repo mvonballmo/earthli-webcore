@@ -63,7 +63,7 @@ class APPLICATION_ENGINE extends RESOLVER
    * before calling {@link run()}.
    * @param PAGE $page
    */
-  function init ($page)
+  public function init ($page)
   {
     $this->app = $this->_make_application ($page);
     $this->_init_application ($page, $this->app);
@@ -74,7 +74,7 @@ class APPLICATION_ENGINE extends RESOLVER
    * Must be called after {@link init()} and calls {@link APPLICATION::start()}
    * on {@link $app}, by default.
    */
-  function start ()
+  public function start ()
   {
     $this->_start_application ($this->app);
   }
@@ -85,7 +85,7 @@ class APPLICATION_ENGINE extends RESOLVER
    * $app} has been created.
    * @param PAGE $page
    */
-  function set_main_app_for ($page)
+  public function set_main_app_for ($page)
   {
     $this->_apply_to ($page, $this->app);
   }
@@ -94,7 +94,7 @@ class APPLICATION_ENGINE extends RESOLVER
    * Register plugins in {@link $classes} during initialization.
    * @access private
    */
-  function _initialize_class_registry ()
+  protected function _initialize_class_registry ()
   {
     parent::_initialize_class_registry ();
     $this->register_class ('PAGE', 'THEMED_PAGE', 'webcore/sys/themed_page.php');
@@ -108,7 +108,7 @@ class APPLICATION_ENGINE extends RESOLVER
    * @return APPLICATION
    * @access private
    */
-  function _make_application ($page)
+  protected function _make_application ($page)
   {
     $class_name = $this->final_class_name ('APPLICATION', 'webcore/sys/application.php');
     return new $class_name ($page);
@@ -122,7 +122,7 @@ class APPLICATION_ENGINE extends RESOLVER
    * @param APPLICATION $app
    * @access private
    */
-  function _init_application ($page, $app)
+  protected function _init_application ($page, $app)
   {
     /* Logged in user information is stored in a cookie. This is the name
      * of the key to use when storing the cookie. You can also set the path
@@ -192,7 +192,7 @@ class APPLICATION_ENGINE extends RESOLVER
    * @param APPLICATION $app
    * @access private
    */
-  function _start_application ($app)
+  protected function _start_application ($app)
   {
     $app->load_login ();
   }
@@ -203,7 +203,7 @@ class APPLICATION_ENGINE extends RESOLVER
    * @param APPLICATION $app
    * @access private
    */
-  function _apply_to ($page, $app)
+  protected function _apply_to ($page, $app)
   {
     /* Set the main name of the page. (this uses a PAGE_TITLE object; see the
      * documentation for more information.) Also sets up some values in the page

@@ -53,7 +53,7 @@ class EXCEPTION_RENDERER extends OBJECT_RENDERER
    * @param EXCEPTION_SIGNATURE $obj
    * @access private
    */
-  function _display_as_html ($obj)
+  protected function _display_as_html ($obj)
   {
     $page_name = $obj->page_name;
     $dynamic_class_name = $obj->dynamic_class_name;
@@ -229,13 +229,13 @@ class EXCEPTION_RENDERER extends OBJECT_RENDERER
     if (isset ($layer)) $layer->finish ();
   }
 
-  function _show_array_as_html ($title, $arr)
+  protected function _show_array_as_html ($title, $arr)
   {
     if (sizeof ($arr))
     {
       $layer = $this->context->make_layer ('array_' . $title);
       $layer->name = 'array_' . $title;
-      $layer->visible = FALSE;
+      $layer->visible = false;
 ?>
 <tr>
   <td class="label"><?php echo $title . ' ' . $layer->toggle_as_html (); ?></td>
@@ -256,7 +256,7 @@ class EXCEPTION_RENDERER extends OBJECT_RENDERER
    * @access private
    * @abstract
    */
-  function _display_as_plain_text ($obj)
+  protected function _display_as_plain_text ($obj)
   {
     $page_name = $obj->page_name;
     $dynamic_class_name = $obj->dynamic_class_name;
@@ -342,7 +342,7 @@ class EXCEPTION_RENDERER extends OBJECT_RENDERER
    * @param array $arr
    * @access private
    */
-  function _show_array_as_text ($title, $arr)
+  protected function _show_array_as_text ($title, $arr)
   {
     if (sizeof ($arr))
     {
@@ -356,7 +356,7 @@ class EXCEPTION_RENDERER extends OBJECT_RENDERER
    * @return EXCEPTION_RENDERER_OPTIONS
    * @access private
    */
-  function _make_options ()
+  protected function _make_options ()
   {
     return new EXCEPTION_RENDERER_OPTIONS ();
   }
@@ -376,17 +376,19 @@ class EXCEPTION_RENDERER_OPTIONS extends OBJECT_RENDERER_OPTIONS
    * Details are hidden in a {@link LAYER} if False.
    * @var boolean
    */
-  public $show_details = FALSE;
+  public $show_details = false;
+
   /**
    * Send Get/Post/Cookie info with exception?
    * @var boolean
    */
-  public $include_page_data = TRUE;
+  public $include_page_data = true;
+
   /**
    * Send browser info with exception?
    * @var boolean
    */
-  public $include_browser_info = TRUE;
+  public $include_browser_info = true;
 }
 
 ?>

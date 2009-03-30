@@ -52,6 +52,7 @@ class EXECUTE_TEST_SUITE_FORM extends FORM
    * @var string
    */
   public $button = 'Load';
+
   /**
    * @var string
    */
@@ -60,7 +61,7 @@ class EXECUTE_TEST_SUITE_FORM extends FORM
   /**
    * @param CONTEXT $context
    */
-  function EXECUTE_TEST_SUITE_FORM ($context)
+  public function EXECUTE_TEST_SUITE_FORM ($context)
   {
     FORM::FORM ($context);
 
@@ -74,7 +75,7 @@ class EXECUTE_TEST_SUITE_FORM extends FORM
   /**
    * @param TEST_SUITE $obj
    */
-  function load_from_object ($obj)
+  public function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
     $names = $obj->test_names ();
@@ -86,7 +87,7 @@ class EXECUTE_TEST_SUITE_FORM extends FORM
    * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_controls ($renderer)
+  protected function _draw_controls ($renderer)
   {
     $renderer->start ();
     
@@ -99,7 +100,7 @@ class EXECUTE_TEST_SUITE_FORM extends FORM
       {
         $props->add_item (current ($names), current ($names));
       }
-      while (next ($names) !== FALSE);
+      while (next ($names) !== false);
     }
     
     $renderer->draw_radio_group_row ('test_name', $props);

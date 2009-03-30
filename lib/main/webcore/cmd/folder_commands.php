@@ -53,7 +53,7 @@ class FOLDER_COMMANDS extends COMMANDS
   /**
    * @param FOLDER $folder Return commands for this object.
    */
-  function FOLDER_COMMANDS ($folder)
+  public function FOLDER_COMMANDS ($folder)
   {
     COMMANDS::COMMANDS ($folder->app);
 
@@ -84,7 +84,7 @@ class FOLDER_COMMANDS extends COMMANDS
    * @param FOLDER $folder Show commands for this folder.
    * @access private
    */
-  function _add_editors ($folder)
+  protected function _add_editors ($folder)
   {
     $cmd = $this->make_command ();
     $cmd->id = 'edit';
@@ -122,7 +122,7 @@ class FOLDER_COMMANDS extends COMMANDS
    * @param USER $creator Folder belongs to this user (also available as $folder->creator ()).
    * @access private
    */
-  function _add_viewers ($folder)
+  protected function _add_viewers ($folder)
   {
     $cmd = $this->make_command ();
     $cmd->id = 'security';
@@ -165,7 +165,7 @@ class FOLDER_COMMANDS extends COMMANDS
    * @param FOLDER $folder
    * @access private
    */
-  function _add_creators ($folder)
+  protected function _add_creators ($folder)
   {
     $cmd = $this->make_command ();
     $cmd->id = 'new_entry';

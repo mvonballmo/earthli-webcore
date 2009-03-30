@@ -52,12 +52,12 @@ class STORE_SEARCH_FORM extends RENDERABLE_FORM
   /**
    * @var boolean
    */
-  public $controls_visible = TRUE;
+  public $controls_visible = true;
 
   /**
    * @param APPLICATION $app Main application.
    */
-  function STORE_SEARCH_FORM ($app, $fields)
+  public function STORE_SEARCH_FORM ($app, $fields)
   {
     RENDERABLE_FORM::RENDERABLE_FORM ($app);
 
@@ -67,13 +67,13 @@ class STORE_SEARCH_FORM extends RENDERABLE_FORM
     $field = new TEXT_FIELD ();
     $field->id = 'type';
     $field->title = 'Type';
-    $field->visible = FALSE;
+    $field->visible = false;
     $this->add_field ($field);
 
     $field = new MUNGER_TITLE_FIELD ();
     $field->id = 'search_title';
     $field->title = 'Title';
-    $field->required = TRUE;
+    $field->required = true;
     $this->add_field ($field);
 
     $field = new MUNGER_TEXT_FIELD ();
@@ -82,7 +82,7 @@ class STORE_SEARCH_FORM extends RENDERABLE_FORM
     $this->add_field ($field);
   }
 
-  function load_with_defaults ()
+  public function load_with_defaults ()
   {
     parent::load_with_defaults ();
     $this->_search_fields->store_to_object ($this, $this->_object);
@@ -93,7 +93,7 @@ class STORE_SEARCH_FORM extends RENDERABLE_FORM
    * Load initial properties from this branch.
    * @param BRANCH $obj
    */
-  function load_from_object ($obj)
+  public function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
 
@@ -105,10 +105,10 @@ class STORE_SEARCH_FORM extends RENDERABLE_FORM
 
   /**
    * Store the form's values to this object.
-    * @param OBJECT_IN_FOLDER $obj
-    * @access private
-    */
-  function _store_to_object ($obj)
+   * @param OBJECT_IN_FOLDER $obj
+   * @access private
+   */
+  protected function _store_to_object ($obj)
   {
     $obj->title = $this->value_as_text ('search_title');
     $obj->description = $this->value_as_text ('search_description');
@@ -117,7 +117,7 @@ class STORE_SEARCH_FORM extends RENDERABLE_FORM
     $this->_search_fields->store_to_object ($this, $obj);
   }
 
-  function _post_validate ($obj)
+  protected function _post_validate ($obj)
   {
     parent::_post_validate ($obj);
     $this->_search_fields->validate ($this, $obj);
@@ -127,7 +127,7 @@ class STORE_SEARCH_FORM extends RENDERABLE_FORM
    * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_controls ($renderer)
+  protected function _draw_controls ($renderer)
   {
     $renderer->start ();
 

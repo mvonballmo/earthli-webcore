@@ -53,7 +53,7 @@ class USER_COMMANDS extends COMMANDS
   /**
    * @param USER $user Configure commands for this object.
    */
-  function USER_COMMANDS ($user)
+  public function USER_COMMANDS ($user)
   {
     COMMANDS::COMMANDS ($user->app);
 

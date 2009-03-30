@@ -53,27 +53,31 @@ class GROUP_BROWSER_GRID extends STANDARD_GRID
    * @var string
    */
   public $object_name = 'group';
+
   /**
    * @var boolean
    */
-  public $show_separator = FALSE;
+  public $show_separator = false;
+
   /**
    * @var integer
    */
   public $padding = 4;
+
   /**
    * @var string
    */
   public $width = '';
+
   /**
    * @var boolean
    */
-  public $centered = TRUE;
+  public $centered = true;
 
   /**
    * @param CONTEXT $context
    */
-  function GROUP_BROWSER_GRID ($context)
+  public function GROUP_BROWSER_GRID ($context)
   {
     GRID::GRID ($context);
     $this->_controls_renderer = $this->app->make_controls_renderer ();
@@ -83,7 +87,7 @@ class GROUP_BROWSER_GRID extends STANDARD_GRID
    * Draw JavaScripts used by this grid.
    * @access private
    */
-  function _draw_scripts ()
+  protected function _draw_scripts ()
   {
     parent::_draw_scripts ();
 ?>
@@ -94,9 +98,9 @@ class GROUP_BROWSER_GRID extends STANDARD_GRID
 
   /**
    * @param GROUP $obj
-    * @access private
-    */
-  function _draw_box ($obj)
+   * @access private
+   */
+  protected function _draw_box ($obj)
   {
     echo $obj->title_as_link ();
     echo "</td>\n<td style=\"padding-left: 1em; text-align: center\">";

@@ -57,7 +57,7 @@ class PROJECT_ENTRY_BRANCH_INFO_QUERY extends QUERY
   /**
    * @param ENTRY $entry Entry for which branches are retrieved.
    */
-  function PROJECT_ENTRY_BRANCH_INFO_QUERY ($entry)
+  public function PROJECT_ENTRY_BRANCH_INFO_QUERY ($entry)
   {
     QUERY::QUERY ($entry->app);
     $this->_entry = $entry;
@@ -66,7 +66,7 @@ class PROJECT_ENTRY_BRANCH_INFO_QUERY extends QUERY
   /**
    * Apply default restrictions and tables.
    */
-  function apply_defaults () 
+  public function apply_defaults () 
   {
     $this->set_select ('bra.title, etob.id, etob.entry_id, etob.branch_id, etob.branch_release_id');
     $this->set_table ($this->app->table_names->branches . ' bra');
@@ -78,7 +78,7 @@ class PROJECT_ENTRY_BRANCH_INFO_QUERY extends QUERY
    * Prepare security- and filter-based restrictions.
    * @access private
    */
-  function _prepare_restrictions ()
+  protected function _prepare_restrictions ()
   {
     $this->_returns_no_data = ! isset ($this->_entry) || ! $this->_entry->exists ();
     if (! $this->_returns_no_data)
@@ -90,9 +90,9 @@ class PROJECT_ENTRY_BRANCH_INFO_QUERY extends QUERY
 
   /**
    * @return PROJECT_ENTRY_BRANCH_INFO
-    * @access private
-    */
-  function _make_object ()
+   * @access private
+   */
+  protected function _make_object ()
   {
     $class_name = $this->app->final_class_name ('PROJECT_ENTRY_BRANCH_INFO', 'projects/obj/project_entry.php');
     return new $class_name ($this->_entry);
@@ -102,11 +102,11 @@ class PROJECT_ENTRY_BRANCH_INFO_QUERY extends QUERY
    * Result set with each object stored as [branch_id => PROJECT_ENTRY_INFO].
    * @return array[PROJECT_ENTRY_INFO]
    */
-  function indexed_objects_by_branch_id ()
+  public function indexed_objects_by_branch_id ()
   {
-    $this->_index_by_branch_id = TRUE;
+    $this->_index_by_branch_id = true;
     $Result = $this->indexed_objects ();
-    $this->_index_by_branch_id = FALSE;
+    $this->_index_by_branch_id = false;
     return $Result;
   }
 
@@ -115,13 +115,12 @@ class PROJECT_ENTRY_BRANCH_INFO_QUERY extends QUERY
    * @return integer
    * @access private
    */
-  function _id_for_object ($obj)
+  protected function _id_for_object ($obj)
   {
     if ($this->_index_by_branch_id)
     {
       return $obj->branch_id;
     }
-
 
     return $obj->id;
   }
@@ -131,11 +130,12 @@ class PROJECT_ENTRY_BRANCH_INFO_QUERY extends QUERY
    * @access private
    */
   protected $_entry;
+
   /**
    * @var boolean
    * @access private 
    */
-  protected $_index_by_branch_id = FALSE;
+  protected $_index_by_branch_id = false;
 }
 
 /**
@@ -150,7 +150,7 @@ class JOB_BRANCH_INFO_QUERY extends PROJECT_ENTRY_BRANCH_INFO_QUERY
   /**
    * @param ENTRY $entry Entry for which branches are retrieved.
    */
-  function JOB_BRANCH_INFO_QUERY ($entry)
+  public function JOB_BRANCH_INFO_QUERY ($entry)
   {
     PROJECT_ENTRY_BRANCH_INFO_QUERY::PROJECT_ENTRY_BRANCH_INFO_QUERY ($entry);
     $this->add_select ('jtob.*');
@@ -159,9 +159,9 @@ class JOB_BRANCH_INFO_QUERY extends PROJECT_ENTRY_BRANCH_INFO_QUERY
 
   /**
    * @return JOB_BRANCH_INFO
-    * @access private
-    */
-  function _make_object ()
+   * @access private
+   */
+  protected function _make_object ()
   {
     $class_name = $this->app->final_class_name ('JOB_BRANCH_INFO', 'projects/obj/job.php');
     return new $class_name ($this->_entry);
@@ -180,7 +180,7 @@ class CHANGE_BRANCH_INFO_QUERY extends PROJECT_ENTRY_BRANCH_INFO_QUERY
   /**
    * @param ENTRY $entry Entry for which branches are retrieved.
    */
-  function CHANGE_BRANCH_INFO_QUERY ($entry)
+  public function CHANGE_BRANCH_INFO_QUERY ($entry)
   {
     PROJECT_ENTRY_BRANCH_INFO_QUERY::PROJECT_ENTRY_BRANCH_INFO_QUERY ($entry);
     $this->add_select ('ctob.*');
@@ -189,9 +189,9 @@ class CHANGE_BRANCH_INFO_QUERY extends PROJECT_ENTRY_BRANCH_INFO_QUERY
 
   /**
    * @return CHANGE_BRANCH_INFO
-    * @access private
-    */
-  function _make_object ()
+   * @access private
+   */
+  protected function _make_object ()
   {
     $class_name = $this->app->final_class_name ('CHANGE_BRANCH_INFO', 'projects/obj/change.php');
     return new $class_name ($this->_entry);

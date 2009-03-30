@@ -50,7 +50,7 @@ require_once ('webcore/db/database.php');
  * @since 2.2.1
  * @abstract
  */
-class QUERY extends WEBCORE_OBJECT
+abstract class QUERY extends WEBCORE_OBJECT
 {
   /**
    * SQL alias for the "main" table.
@@ -60,6 +60,7 @@ class QUERY extends WEBCORE_OBJECT
    * @var string
    */
   public $alias = 'obj';
+
   /**
    * Name of the SQL field for the ID in the "main" table.
    * @see $alias
@@ -70,7 +71,7 @@ class QUERY extends WEBCORE_OBJECT
   /**
    * @param CONTEXT $context Attach the query to this object.
    */
-  function QUERY ($context)
+  public function QUERY ($context)
   {
     $this->raise_if_not_is_a ($context, 'CONTEXT', 'QUERY', 'QUERY');
     $context->ensure_database_exists ();   // queries always need a database
@@ -88,9 +89,9 @@ class QUERY extends WEBCORE_OBJECT
    * Provides for descendent classes.
    * @return boolean
    */
-  function includes ($filter)
+  public function includes ($filter)
   {
-    return TRUE;
+    return true;
   }
 
   /**
@@ -103,9 +104,9 @@ class QUERY extends WEBCORE_OBJECT
    * @return string
    * @abstract
    */
-  function table_for_set ($set_name)
+  public function table_for_set ($set_name)
   {
-    $this->raise_deferred ('table_for_set', 'QUERY');
+    throw new METHOD_NOT_IMPLEMENTED_EXCEPTION();
   }
 
   /**
@@ -113,7 +114,7 @@ class QUERY extends WEBCORE_OBJECT
    * Called from the constructor to initialize the query. Subsequent calls
    * clear all tables and restrictions and re-apply the defaults.
    */
-  function apply_defaults ()
+  public function apply_defaults ()
   {
     $this->set_select ('*');
     $this->set_table ('');
@@ -125,7 +126,7 @@ class QUERY extends WEBCORE_OBJECT
    * @param integer $first 0-based index of first record to retrieve.
    * @param integer $count Number of records to retrieve.
    */
-  function set_limits ($first, $count)
+  public function set_limits ($first, $count)
   {
     $first = $this->validate_as_integer ($first);
     $count = $this->validate_as_integer ($count);
@@ -141,7 +142,7 @@ class QUERY extends WEBCORE_OBJECT
    * @param string $first_day
    * @param string $last_day
    */
-  function set_days ($first_day, $last_day)
+  public function set_days ($first_day, $last_day)
   {
     $this->_invalidate ();
     $this->_first_day = $first_day;
@@ -153,7 +154,7 @@ class QUERY extends WEBCORE_OBJECT
    * @see set_days()
    * @param string $field
    */
-  function set_day_field ($field)
+  public function set_day_field ($field)
   {
     $this->_day_field = $field;
     $this->_invalidate ();
@@ -163,7 +164,7 @@ class QUERY extends WEBCORE_OBJECT
    * Specify which fields to pull from the database.
    * @param string $select
    */
-  function set_select ($select)
+  public function set_select ($select)
   {
     $this->_select = '';
     $this->add_select ($select);
@@ -173,7 +174,7 @@ class QUERY extends WEBCORE_OBJECT
    * Add additional fields to the query string.
    * @param string $select
    */
-  function add_select ($select)
+  public function add_select ($select)
   {
     if (! $this->_select)
     {
@@ -193,7 +194,7 @@ class QUERY extends WEBCORE_OBJECT
    * joins with {@link add_table()}.
    * @param string $table
    */
-  function set_table ($table)
+  public function set_table ($table)
   {
     $this->_tables = $table;
     $this->_invalidate ();
@@ -205,7 +206,7 @@ class QUERY extends WEBCORE_OBJECT
    * @param string $join_condition Only used if there is already a table.
    * @param string $join_type Only used if there is already a table.
    */
-  function add_table ($table, $join_condition, $join_type = 'INNER')
+  public function add_table ($table, $join_condition, $join_type = 'INNER')
   {
     if (! $this->_tables)
     {
@@ -224,7 +225,7 @@ class QUERY extends WEBCORE_OBJECT
    * @param string $order SQL-formatted sort directive.
    * @param boolean $insert_before Use this as the primary sort order.
    */
-  function add_order ($order, $insert_before = FALSE)
+  public function add_order ($order, $insert_before = false)
   {
     $this->_invalidate ();
     if (isset ($this->_order) && $this->_order)
@@ -248,7 +249,7 @@ class QUERY extends WEBCORE_OBJECT
    * Set (replace) the ordering on the result set.
    * @param string $order
    */
-  function set_order ($order)
+  public function set_order ($order)
   {
     $this->_order = '';
     $this->add_order ($order);
@@ -258,7 +259,7 @@ class QUERY extends WEBCORE_OBJECT
    * Set (replace) the ordering to sort by the day field.
    * @param string $direction Can be 'ASC' or 'DESC'.
    */
-  function order_by_day ($direction)
+  public function order_by_day ($direction)
   {
     $this->set_order ($this->_day_field . ' ' . $direction);
   }
@@ -269,7 +270,7 @@ class QUERY extends WEBCORE_OBJECT
    * {@link set_order()} or {@link add_order()}, then calling {@link
    * store_order_as_recent()}.
    */
-  function order_by_recent ()
+  public function order_by_recent ()
   {
     if (! empty ($this->_recent_order))
     {
@@ -284,7 +285,7 @@ class QUERY extends WEBCORE_OBJECT
   /**
    * Remembers the current order as the recent one to use.
    */
-  function store_order_as_recent ()
+  public function store_order_as_recent ()
   {
     $this->_recent_order = $this->_order;
   }
@@ -293,7 +294,7 @@ class QUERY extends WEBCORE_OBJECT
    * Remove all cached results.
    * Forces a query on the database (use this as a refresh function).
    */
-  function clear_results ()
+  public function clear_results ()
   {
     $this->_invalidate ();
   }
@@ -302,7 +303,7 @@ class QUERY extends WEBCORE_OBJECT
    * Remove all restrictions imposed with 'restrict'.
    * @see restrict()
    */
-  function clear_restrictions ()
+  public function clear_restrictions ()
   {
     if (sizeof ($this->_restrictions) > 0)
     {
@@ -317,7 +318,7 @@ class QUERY extends WEBCORE_OBJECT
    * Return only objects which match 'clause'.
    * @param string $clause
    */
-  function restrict ($clause)
+  public function restrict ($clause)
   {
     $this->_restrictions [] = $clause;
     $this->_invalidate ();
@@ -327,7 +328,7 @@ class QUERY extends WEBCORE_OBJECT
    * Restrict a text or date field.
    * Wraps the value in quote marks appropriate to the context.
    */
-  function restrict_text ($name, $value)
+  public function restrict_text ($name, $value)
   {
     $this->restrict ("$name = '$value'");
   }
@@ -340,7 +341,7 @@ class QUERY extends WEBCORE_OBJECT
    * string or any other value.
    * @param string $operator Can be any of the {@link Operator_constants}.
    */
-  function restrict_by_op ($field, $value, $operator = Operator_equal)
+  public function restrict_by_op ($field, $value, $operator = Operator_equal)
   {
     if (is_array ($value))
     {
@@ -358,7 +359,9 @@ class QUERY extends WEBCORE_OBJECT
       }
     }
     elseif (! is_numeric ($value))
+    {
       $value = "'$value'";
+    }
 
     switch ($operator)
     {
@@ -390,7 +393,7 @@ class QUERY extends WEBCORE_OBJECT
    * @param string $operator Can be {@link Operator_in} or {@link
    * Operator_not_in}.
    */
-  function restrict_to_ids ($ids, $operator = Operator_in)
+  public function restrict_to_ids ($ids, $operator = Operator_in)
   {
     $this->restrict_by_op ($this->alias . '.' . $this->id, $ids, $operator);
   }
@@ -400,7 +403,7 @@ class QUERY extends WEBCORE_OBJECT
    * This constructs an OR statement with the list of choices.
    * @param array[string] $choices
    */
-  function restrict_to_one_of ($choices)
+  public function restrict_to_one_of ($choices)
   {
     $this->restrict ('(' . join (') OR (', $choices) . ')');
   }
@@ -420,13 +423,15 @@ class QUERY extends WEBCORE_OBJECT
    * @param string $fields Fields in which to search (must be full-text
    * indexed).
    */
-  function add_search ($words, $fields)
+  public function add_search ($words, $fields)
   {
     $words = addslashes ($words);
     if (is_array ($fields))
     {
       foreach ($fields as $field)
+      {
         $clauses [] = "MATCH ($field) AGAINST ('$words')";
+      }
       $clause = '(' . join (' OR ', $clauses) . ')';
     }
     else
@@ -445,7 +450,7 @@ class QUERY extends WEBCORE_OBJECT
    * @param DATE_TIME $to
    * @param string $table
    */
-  function restrict_date ($field, $from, $to)
+  public function restrict_date ($field, $from, $to)
   {
     if ($from && $from->is_valid ())
     {
@@ -466,13 +471,16 @@ class QUERY extends WEBCORE_OBJECT
    * @return DATABASE
    * @access private
    */
-  function raw_output ()
+  public function raw_output ()
   {
     if (! $this->_returns_no_data ())
     {
       $this->db->logged_query ($this->_objects_SQL);
+      
       return $this->db;
     }
+    
+    return null;
   }
 
   /**
@@ -480,7 +488,7 @@ class QUERY extends WEBCORE_OBJECT
    * This result ignores the limit set in {@link set_limits()}
    * @return integer
    */
-  function size ()
+  public function size ()
   {
     $this->_check_system_call ();
 
@@ -494,7 +502,7 @@ class QUERY extends WEBCORE_OBJECT
           $this->env->profiler->restart ('query');
         }
 
-        log_message ("<b>Reading count:</b><div style=\"margin: 1em 0em 0em 1.5em\">$this->_count_SQL</div>", Msg_type_debug_info, Msg_channel_database, TRUE);
+        log_message ("<b>Reading count:</b><div style=\"margin: 1em 0em 0em 1.5em\">$this->_count_SQL</div>", Msg_type_debug_info, Msg_channel_database, true);
 
         $this->db->query ($this->_count_SQL);
         if ($this->db->next_record ())
@@ -512,7 +520,7 @@ class QUERY extends WEBCORE_OBJECT
           $msg = "<b>Count = [$this->_num_objects]</b><br>";
         }
 
-        log_message ($msg, Msg_type_debug_info, Msg_channel_database, TRUE);
+        log_message ($msg, Msg_type_debug_info, Msg_channel_database, true);
       }
     }
 
@@ -524,7 +532,7 @@ class QUERY extends WEBCORE_OBJECT
    * Use {@link restrict()} to constrain the result set.
    * @return array[object]
    */
-  function objects ()
+  public function objects ()
   {
     $this->_check_system_call ();
 
@@ -534,7 +542,7 @@ class QUERY extends WEBCORE_OBJECT
 
       if (! $this->_returns_no_data ())
       {
-        log_message ("<b>Reading objects:</b><div style=\"margin: 1em 0em 0em 1.5em\">$this->_objects_SQL</div>", Msg_type_debug_info, Msg_channel_database, TRUE);
+        log_message ("<b>Reading objects:</b><div style=\"margin: 1em 0em 0em 1.5em\">$this->_objects_SQL</div>", Msg_type_debug_info, Msg_channel_database, true);
 
         if (isset ($this->env->profiler))
         {
@@ -580,7 +588,7 @@ class QUERY extends WEBCORE_OBJECT
           $msg = "<b>Loaded [$this->_num_objects] objects</b><br>";
         }
 
-        log_message ($msg, Msg_type_debug_info, Msg_channel_database, TRUE);
+        log_message ($msg, Msg_type_debug_info, Msg_channel_database, true);
       }
     }
 
@@ -594,21 +602,21 @@ class QUERY extends WEBCORE_OBJECT
    * @param integer $id
    * @return object
    */
-  function object_at_id ($id)
+  public function object_at_id ($id)
   {
     $id = $this->validate_as_integer ($id);
 
     if ($id > 0)
     {
-      $Result = FALSE;
+      $Result = false;
 
       if (isset ($this->_objects))
       {
         // objects have already been calculated
 
-        $this->_system_call = TRUE;
+        $this->_system_call = true;
         $indexed_objs = $this->indexed_objects ();
-        $this->_system_call = FALSE;
+        $this->_system_call = false;
         
         if (isset($indexed_objs [$id]))
         {
@@ -632,7 +640,7 @@ class QUERY extends WEBCORE_OBJECT
    * Return the first object to match the query.
    * @return object
    */
-  function first_object ()
+  public function first_object ()
   {
     $old_first = $this->_first_record;
     $old_count = $this->_num_records;
@@ -658,7 +666,7 @@ class QUERY extends WEBCORE_OBJECT
    * query.
    * @return array[object]
    */
-  function objects_at_ids ($ids, $invert_logic = FALSE)
+  public function objects_at_ids ($ids, $invert_logic = false)
   {
     return $this->_objects_at_ids ($ids, $invert_logic, 'objects');
   }
@@ -670,7 +678,7 @@ class QUERY extends WEBCORE_OBJECT
    * query.
    * @return array[object]
    */
-  function indexed_objects_at_ids ($ids, $invert_logic = FALSE)
+  public function indexed_objects_at_ids ($ids, $invert_logic = false)
   {
     return $this->_objects_at_ids ($ids, $invert_logic, 'indexed_objects');
   }
@@ -681,7 +689,7 @@ class QUERY extends WEBCORE_OBJECT
    * @param string $value
    * @return array[object]
    */
-  function objects_with_field ($field, $value)
+  public function objects_with_field ($field, $value)
   {
     $this->assert (! empty ($field) && ! empty ($value), 'both field and value must be non-empty', 'objects_with_field', 'QUERY');
     $value = addslashes ($value);
@@ -698,7 +706,7 @@ class QUERY extends WEBCORE_OBJECT
    * @param string $operator Can be any of the {@link Operator_constants}.
    * @return array[object]
    */
-  function objects_with_fields ($fields, $values, $operator = Operator_equal)
+  public function objects_with_fields ($fields, $values, $operator = Operator_equal)
   {
     $arrays_match = is_array ($fields) && is_array ($values) && (sizeof ($fields) == sizeof ($values));
     $this->assert ($arrays_match, 'both fields and values must be the same size', 'objects_with_fields', 'QUERY');
@@ -723,7 +731,7 @@ class QUERY extends WEBCORE_OBJECT
    * @param string $value
    * @return array[object]
    */
-  function object_with_field ($field, $value)
+  public function object_with_field ($field, $value)
   {
     $objs = $this->objects_with_field ($field, $value);
     return $objs [0];
@@ -737,7 +745,7 @@ class QUERY extends WEBCORE_OBJECT
    * @param string $operator Can be any of the {@link Operator_constants}.
    * @return object
    */
-  function object_with_fields ($fields, $values, $operator = Operator_equal)
+  public function object_with_fields ($fields, $values, $operator = Operator_equal)
   {
     $objs = $this->objects_with_fields ($fields, $values, $operator);
     
@@ -754,7 +762,7 @@ class QUERY extends WEBCORE_OBJECT
    * Each object is stored in the result set, mapped to its id.
    * @return array[object]
    */
-  function indexed_objects ()
+  public function indexed_objects ()
   {
     if (! isset ($this->_indexed_objects))
     {
@@ -781,7 +789,7 @@ class QUERY extends WEBCORE_OBJECT
    * Ids of all objects in the result set.
    * @return string
    */
-  function indexed_ids ()
+  public function indexed_ids ()
   {
     $objs = $this->indexed_objects ();
 
@@ -801,11 +809,553 @@ class QUERY extends WEBCORE_OBJECT
    * Ids of all objects in the result set as a comma-separated string.
    * @return string
    */
-  function indexed_ids_as_string ()
+  public function indexed_ids_as_string ()
   {
     return implode (",", $this->indexed_ids ());
   }
 
+  /**
+   * Cache this set of objects as the result of the query.
+   * The objects for this query have already been calculated elsewhere and are
+   * assumed to represent the correct query results.
+   * @param array[object] $objects
+   * @access private
+   */
+  public function cache ($objects)
+  {
+    $this->_objects = $objects;
+    $this->_num_objects = sizeof ($objects);
+    $this->_prepared = true;
+  }
+
+  /**
+   *  Retrieve a hash of the object query SQL.
+   * @return string
+   */
+  public function hash ()
+  {
+    $this->_prepare ();
+    return md5 ($this->_objects_SQL);
+  }
+
+  /**
+   * Force preparation of the configured SQL.
+   * Used for debugging generated SQL.
+   */
+  public function prepare ()
+  {
+    if (! $this->_preparing_query)
+    {
+      $this->_prepare ();
+    }
+  }
+
+  /**
+   * Return only the objects with these ids.
+   * @param string $ids Comma-separated list of integers.
+   * @param boolean $invert_logic If true, returns all objects NOT matching the query.
+   * @param string $method_name Name of the method to call to retrieve objects.
+   * @return array[object]
+   */
+  protected function _objects_at_ids ($ids, $invert_logic, $method_name)
+  {
+    if (! is_array ($ids))
+    {
+      $ids = trim_array (explode (',', $ids));
+    }
+
+    if (sizeof ($ids) > 0)
+    {
+      if (! $invert_logic && isset ($this->_objects))
+      {
+        // objects have already been calculated
+
+        $this->_system_call = true;
+        $indexed_objs = $this->indexed_objects ();
+        $this->_system_call = false;
+
+        /* loop through all the ids, getting them out of cache. As soon as one
+         * is not in the cache, erase the whole result and go to the database in
+         * the next step. Otherwise, all the objects were found without hitting
+         * the cache.
+         */
+
+        $Result = null;
+        foreach ($ids as $id)
+        {
+          if (isset ($indexed_objs [$id]))
+          {
+            $Result [] = $indexed_objs [$id];
+          }
+          else
+          {
+            unset ($Result);
+            break;
+          }
+        }
+      }
+
+      if ((! isset ($Result) || ! sizeof ($Result)) && sizeof ($ids))
+      {
+        $ids = join (', ', $ids);
+
+        if ($ids)
+        {
+          if ($invert_logic)
+          {
+            $this->_start_system_call ('NOT (' . $this->alias . '.' . $this->id . ' IN (' . $ids . '))');
+          }
+          else
+          {
+            $this->_start_system_call ($this->alias . '.' . $this->id . ' IN (' . $ids . ')');
+          }
+          $Result = $this->$method_name ();
+          $this->_end_system_call ();
+        }
+      }
+
+      if (isset ($Result))
+      {
+        return $Result;
+      }
+    }
+    
+    return null;
+  }
+
+  /**
+   * Indicate that the query returns no data.
+   * Should be called by descendent queries from {@link _prepare_restrictions()} when they realize
+   * that their conditions can logically return no data.
+   * @access private
+   */
+  protected function _set_returns_no_data ()
+  {
+   $this->_returns_no_data_flag = true;
+  }
+
+  /**
+   * Could this query return data?
+   * Returns true if it can be determined that the query will not return data. This
+   * is the 'optimizer' and avoids going to the database with queries that include
+   * security or filtering restrictions that cannot return data.
+   * @return boolean
+   * @access private
+   */
+  protected function _returns_no_data ()
+  {
+    $this->prepare ();
+    return $this->_returns_no_data_flag;
+  }
+
+  /**
+   * Update the internal SQL.
+   * Called automatically from {@link _returns_no_data()}.
+   * @access private
+   */
+  protected function _prepare ()
+  {
+    if (! $this->_prepared)
+    {
+      $this->_preparing_query = true;
+      $this->_returns_no_data_flag = false;
+      $current_select = $this->_select;
+
+      $this->_prepare_restrictions ();
+      if ($this->_returns_no_data_flag)
+      {
+        log_message ("Optimized [" . get_class ($this) . "] - returned no data.", Msg_type_debug_info, Msg_channel_database);
+      }
+      else
+      {
+        $this->_prepare_SQL ();
+      }
+
+      $this->_select = $current_select;
+      $this->_preparing_query = false;
+      $this->_prepared = true;
+    }
+  }
+
+  /**
+   * Creates the SQL for getting {@link size()} and {@link objects()}.
+   * @access private
+   */
+  protected function _prepare_SQL ()
+  {
+    $this->assert (isset ($this->_select) && isset ($this->_tables), '\'_select\' and \'_tables\' must be non-empty.', '_prepare_SQL', 'QUERY');
+
+    $this->_objects_SQL = $this->_objects_command_as_SQL ();
+    $this->_count_SQL = $this->_count_command_as_SQL ();
+
+    $restrictions = $this->_restrictions ();
+    if ($restrictions)
+    {
+      $restrictions_as_string = '(' . implode (') AND (', $restrictions) . ')';
+      $this->_objects_SQL .= ' WHERE ' . $restrictions_as_string;
+      $this->_count_SQL .= ' WHERE ' . $restrictions_as_string;
+    }
+
+    if ($this->_order)
+    {
+      $this->_objects_SQL .= ' ORDER BY ' . $this->_order;
+    }
+
+    if ($this->_num_records)
+    {
+      $this->_objects_SQL .= " LIMIT $this->_first_record, $this->_num_records";
+    }
+  }
+
+  /**
+   * Return the list of restrictions for this query.
+   * Includes {@link $_system_restrictions}, {@link $_calculated_restrictions}
+   * and restrictions for {@link $_first_day} and {@link $_last_day}.
+   * @see _prepare_restrictions()
+   * @return array[string]
+   * @access private
+   */
+  protected function _restrictions ()
+  {
+    $Result = $this->_restrictions;
+    $Result = array_merge ($Result, $this->_system_restrictions);
+    $Result = array_merge ($Result, $this->_calculated_restrictions);
+
+    if ($this->_first_day)
+    {
+      $Result [] = $this->_day_field  . " >= '" . $this->_first_day . "'";
+    }
+
+    if ($this->_last_day)
+    {
+      $Result [] = $this->_day_field  . " <= '" . $this->_last_day . "'";
+    }
+
+    return $Result;
+  }
+
+  /**
+   * A query parameter has changed.
+   * Make sure that the query is updated when a request for objects or size is made.
+   * @access private
+   */
+  protected function _invalidate ()
+  {
+    if (! $this->_preparing_query)
+    {
+      $this->_prepared = false;
+      unset ($this->_objects);
+      unset ($this->_num_objects);
+      unset ($this->_indexed_objects);
+      unset ($this->_object_tree);
+      $this->_system_call = false;
+      $this->_system_restrictions = array ();
+      $this->_calculated_restrictions = array ();
+    }
+  }
+
+  /**
+   * Return the text of the object-retrieval command.
+   * @return string
+   * @access private
+   */
+  protected function _objects_command_as_SQL ()
+  {
+    return "SELECT $this->_select FROM $this->_tables";
+  }
+
+  /**
+   * Return the text of the size-retrieval command.
+   * @return string
+   * @access private
+   */
+  protected function _count_command_as_SQL ()
+  {
+    return 'SELECT COUNT(' . $this->alias . '.' . $this->id . ') FROM ' . $this->_tables;
+  }
+
+  /**
+   * Make the specific object returned by this query.
+   * @access private
+   * @abstract
+   */
+  protected abstract function _make_object ();
+
+  /**
+   * Perform any setup needed on each returned object.
+   * @param object $obj
+   * @access private
+   */
+  protected function _prepare_object ($obj) {}
+
+  /**
+   * Prepare security- and filter-based restrictions.
+   * Apply changes to {@link $_calculated_restrictions}.
+   * @access private
+   */
+  protected function _prepare_restrictions () {}
+
+  /**
+   * Should this object be added to the current result set?
+   * @param DATABASE $db
+   * @return bool
+   * @access private
+   */
+  protected function _is_valid_object ($db) { return true; }
+
+  /**
+   * Should this object be indexed?
+   * @param DATABASE $db
+   * @return bool
+   * @access private
+   */
+  protected function _is_indexable_object ($obj) { return true; }
+
+  /**
+   * @param object
+   * @return integer
+   * @access private
+   */
+  protected function _id_for_object ($obj) { return $obj->id; }
+
+  /**
+   * Used internally to signal that parameters are updated for a system-initiated retrieval.
+   * For example, the 'objects_at_ids' function will use an internal restriction
+   * on those ids that should not be noticed by users of this class.
+   * @param string $clause
+   * @access private
+   */
+  protected function _start_system_call ($clause)
+  {
+    $this->_invalidate ();
+    $this->_system_call = true;
+    $this->_system_restrictions = array ($clause);
+  }
+
+  /**
+   * System-initiated query is complete.
+   * @see _start_system_call()
+   * @access private
+   */
+  protected function _end_system_call ()
+  {
+    $this->_system_call = false;
+  }
+
+  /**
+   * Called internally to synchronize before going to the database.
+   * If a system call is not pending, but there are still system clauses in the
+   * query clause stream, then invalidate and regenerate the query command.
+   * @access private
+   */
+  protected function _check_system_call ()
+  {
+    if (! $this->_system_call && sizeof ($this->_system_restrictions))
+    {
+      $this->_invalidate ();
+    }
+  }
+
+  /**
+   * Overridable called from {@link order_by_recent()}.
+   * @access private */
+  protected function _order_by_recent ()
+  {
+    $this->order_by_day ('DESC');
+  }
+
+  /**
+   * Index in query result of first record to return.
+   * @var integer
+   * @see set_limits()
+   * @access private
+   */
+  protected $_first_record = 0;
+
+  /**
+   * Number of records to return.
+   * @var integer
+   * @see set_limits()
+   * @access private
+   */
+  protected $_num_records = 0;
+
+  /**
+   * Return only records after this date.
+   * @see set_days()
+   * @var string
+   * @access private
+   */
+  protected $_first_day = '';
+
+  /**
+   * Return only records before this date.
+   * @see set_days()
+   * @var string
+   * @access private
+   */
+  protected $_last_day = '';
+
+  /**
+   * Apply date filter to this SQL field. Use {@link set_day_field()}
+   * to change this value. Use {@link set_days()} to change the restricted
+   * values.
+   * @var string
+   * @access private
+   */
+  protected $_day_field = 'time_created';
+
+  /**
+   * SQL table/join statement.
+   * Usually set in the constructor, but also can be set in response to
+   * {@link _update()}.
+   * @see _update()
+   * @var string
+   * @access private
+   */
+  protected $_tables;
+
+  /**
+   * SQL fields to select from '_tables'.
+   * Usually set in the constructor, but also can be set in response to
+   * {@link _update()}. Can also be set externally.
+   * @see set_select_fields()
+   * @var string
+   * @access private
+   */
+  protected $_select;
+
+  /**
+   * SQL fields and ordering specifications.
+   * Usually set in the constructor. Can also be set externally.
+   * @see set_order()
+   * @var string
+   * @access private
+   */
+  protected $_order;
+
+  /**
+   * Ordering to use when {@link order_by_recent()} is called.
+   * Call {@link set_order_as_recent()} to store the current ordering to be used
+   * as the most recent ordering.
+   * @var string
+   * @access private
+   */
+  protected $_recent_order;
+
+  /**
+   * Does this query need updating from the database?
+   * Whenever the results for the current set of query properties have been
+   * calculated, this flag is set. If a property changes, this flag is cleared.
+   * Maintained intenally using {@link _invalidate()}.
+   * @see _invalidate()
+   * @var boolean
+   * @access private
+   */
+  protected $_prepared = false;
+
+  /**
+   * Is the query preparing itself?
+   * This flag is set when the query is asked to prepare all restrictions and determine
+   * whether data is returned or not. This allows the preparation process to ask whether it
+   * has already been determined that the query returns no data, in order to abort.
+   * @var boolean
+   * @access private
+   */
+  protected $_preparing_query = false;
+
+  /**
+   * Does the query contain system information?
+   * The query will add restrictions and arguments if certain functions are called. This
+   * flag indicates that this is the case. This is only used internally.
+   * @var boolean
+   * @access private
+   */
+  protected $_system_call = false;
+
+  /**
+   * List of restrictions imposed by a system call.
+   * Restrictions added by this object internally are added to this list. They are cleared when
+   * a different request is made and should never be visible to the user. For example, if the user
+   * calls {@link objects_with_field()}, the query imposes an internal restriction, but one that the
+   * user didn't actually add. This list holds temporary restrictions, as opposed to those stored in
+   * {@link _calculated_restrictions}.
+   * @var array[string]
+   * @access private
+   */
+  protected $_system_restrictions;
+
+  /**
+   * List of restrictions imposed by security and filtering.
+   * Descendent query classes override {@link _prepare_restrictions} to impose security and filtering
+   * restrictions. Those are added to this list.
+   * @var array[string]
+   * @access private
+   */
+  protected $_calculated_restrictions;
+
+  /**
+   * Can this query possibly return data?
+   * Internal flag indicating that the restrictions imposed on this query obviate the need for
+   * actually going to the database -- the query is known to return no data.
+   * @var boolean
+   * @access private
+   */
+  protected $_returns_no_data_flag;
+
+  /**
+   * Text of SQL query to retrieve objects.
+   * Valid only after an 'objects' (or any of 'object_at_id', 'objects_at_ids',
+   * etc.) request has been successfully issued.
+   * @var string
+   * @access private
+   */
+  protected $_objects_SQL;
+
+  /**
+   * Text of SQL query to retrieve the number of objects.
+   * Valid only after a 'size' request has been successfully issued.
+   * @var string
+   * @access private
+   */
+  protected $_count_SQL;
+
+  /**
+   * Current result set.
+   * Valid only after an 'objects' (or any of 'object_at_id', 'objects_at_ids',
+   * etc.) request has been successfully issued.
+   * @var array[object]
+   * @access private
+   */
+  protected $_objects;
+
+  /**
+   * Current number of objects.
+   * Valid only after a 'size' request has been successfully issued.
+   * @var string
+   * @access private
+   */
+  protected $_num_objects;
+
+  /**
+   * Current result set.
+   * Valid only after a call to 'indexed_objects' has been issued.
+   * @var array[object]
+   * @access private
+   */
+  protected $_indexed_objects;
+
+  /**
+   * Current result set.
+   * Valid only after a call to 'tree' or 'root_tree' has been issued.
+   * @var array[object]
+   * @access private
+   */
+  protected $_object_tree;
+}
+
+abstract class HIERARCHICAL_QUERY extends QUERY 
+{
   /**
    * Objects in the result set returned as a hierarchical tree.
    * @param integer $sub_folder_id Return only the hierarchy stemming from this
@@ -814,7 +1364,7 @@ class QUERY extends WEBCORE_OBJECT
    * objects to check when building the tree.
    * @return array[object]
    */
-  function tree ($sub_folder_id = 0, $root_id = 0)
+  public function tree ($sub_folder_id = 0, $root_id = 0)
   {
     if (! isset ($this->_object_tree))
     {
@@ -885,7 +1435,6 @@ class QUERY extends WEBCORE_OBJECT
       }
     }
 
-
     return $this->_object_tree;
   }
 
@@ -896,7 +1445,7 @@ class QUERY extends WEBCORE_OBJECT
    * @param integer $parent_id
    * @return array[object]
    */
-  function root_tree ($parent_id = 0)
+  public function root_tree ($parent_id = 0)
   {
     // first, get the whole tree, regardless of the root
 
@@ -907,556 +1456,50 @@ class QUERY extends WEBCORE_OBJECT
       return $this->_obj_sub_objects ($nodes [0]);
     }
 
-
     return $nodes;
   }
 
   /**
-   * Cache this set of objects as the result of the query.
-   * The objects for this query have already been calculated elsewhere and are
-   * assumed to represent the correct query results.
-   * @param array[object] $objects
+   * @param object
+   * @return integer
    * @access private
    */
-  function cache ($objects)
-  {
-    $this->_objects = $objects;
-    $this->_num_objects = sizeof ($objects);
-    $this->_prepared = TRUE;
+  protected function _parent_id_for_object ($obj) 
+  { 
+    return $obj->parent_id; 
   }
 
   /**
-   *  Retrieve a hash of the object query SQL.
-   * @return string
+   * @param object $obj
+   * @access private
+   * @abstract
    */
-  function hash ()
+  protected function _obj_set_sub_objects_cached ($obj)
   {
-    $this->_prepare ();
-    return md5 ($this->_objects_SQL);
+    throw new METHOD_NOT_IMPLEMENTED_EXCEPTION();
   }
-
+  
   /**
-   * Force preparation of the configured SQL.
-   * Used for debugging generated SQL.
+   * @param object $parent
+   * @param object $obj
+   * @access private
+   * @abstract
    */
-  function prepare ()
+  protected function _obj_connect_to_parent ($parent, $obj)
   {
-    if (! $this->_preparing_query)
-    {
-      $this->_prepare ();
-    }
+    throw new METHOD_NOT_IMPLEMENTED_EXCEPTION();
   }
 
   /**
-   * Return only the objects with these ids.
-   * @param string $ids Comma-separated list of integers.
-   * @param boolean $invert_logic If true, returns all objects NOT matching the query.
-   * @param string $method_name Name of the method to call to retrieve objects.
+   * @param object $obj
    * @return array[object]
-   */
-  function _objects_at_ids ($ids, $invert_logic, $method_name)
-  {
-    if (! is_array ($ids))
-    {
-      $ids = trim_array (explode (',', $ids));
-    }
-
-    if (sizeof ($ids) > 0)
-    {
-      if (! $invert_logic && isset ($this->_objects))
-      {
-        // objects have already been calculated
-
-        $this->_system_call = TRUE;
-        $indexed_objs = $this->indexed_objects ();
-        $this->_system_call = FALSE;
-
-        /* loop through all the ids, getting them out of cache. As soon as one
-         * is not in the cache, erase the whole result and go to the database in
-         * the next step. Otherwise, all the objects were found without hitting
-         * the cache.
-         */
-
-        $Result = null;
-        foreach ($ids as $id)
-        {
-          if (isset ($indexed_objs [$id]))
-          {
-            $Result [] = $indexed_objs [$id];
-          }
-          else
-          {
-            unset ($Result);
-            break;
-          }
-        }
-      }
-
-      if ((! isset ($Result) || ! sizeof ($Result)) && sizeof ($ids))
-      {
-        $ids = join (', ', $ids);
-
-        if ($ids)
-        {
-          if ($invert_logic)
-          {
-            $this->_start_system_call ('NOT (' . $this->alias . '.' . $this->id . ' IN (' . $ids . '))');
-          }
-          else
-          {
-            $this->_start_system_call ($this->alias . '.' . $this->id . ' IN (' . $ids . ')');
-          }
-          $Result = $this->$method_name ();
-          $this->_end_system_call ();
-        }
-      }
-
-      if (isset ($Result))
-      {
-        return $Result;
-      }
-    }
-  }
-
-  /**
-   * Indicate that the query returns no data.
-   * Should be called by descendent queries from {@link _prepare_restrictions()} when they realize
-   * that their conditions can logically return no data.
-   * @access private
-   */
-  function _set_returns_no_data ()
-  {
-   $this->_returns_no_data_flag = TRUE;
-  }
-
-  /**
-   * Could this query return data?
-   * Returns true if it can be determined that the query will not return data. This
-   * is the 'optimizer' and avoids going to the database with queries that include
-   * security or filtering restrictions that cannot return data.
-   * @return boolean
-   * @access private
-   */
-  function _returns_no_data ()
-  {
-    $this->prepare ();
-    return $this->_returns_no_data_flag;
-  }
-
-  /**
-   * Update the internal SQL.
-   * Called automatically from {@link _returns_no_data()}.
-   * @access private
-   */
-  function _prepare ()
-  {
-    if (! $this->_prepared)
-    {
-      $this->_preparing_query = TRUE;
-      $this->_returns_no_data_flag = FALSE;
-      $current_select = $this->_select;
-
-      $this->_prepare_restrictions ();
-      if ($this->_returns_no_data_flag)
-      {
-        log_message ("Optimized [" . get_class ($this) . "] - returned no data.", Msg_type_debug_info, Msg_channel_database);
-      }
-      else
-      {
-        $this->_prepare_SQL ();
-      }
-
-      $this->_select = $current_select;
-      $this->_preparing_query = FALSE;
-      $this->_prepared = TRUE;
-    }
-  }
-
-  /**
-   * Creates the SQL for getting {@link size()} and {@link objects()}.
-   * @access private
-   */
-  function _prepare_SQL ()
-  {
-    $this->assert (isset ($this->_select) && isset ($this->_tables), '\'_select\' and \'_tables\' must be non-empty.', '_prepare_SQL', 'QUERY');
-
-    $this->_objects_SQL = $this->_objects_command_as_SQL ();
-    $this->_count_SQL = $this->_count_command_as_SQL ();
-
-    $restrictions = $this->_restrictions ();
-    if ($restrictions)
-    {
-      $restrictions_as_string = '(' . implode (') AND (', $restrictions) . ')';
-      $this->_objects_SQL .= ' WHERE ' . $restrictions_as_string;
-      $this->_count_SQL .= ' WHERE ' . $restrictions_as_string;
-    }
-
-    if ($this->_order)
-    {
-      $this->_objects_SQL .= ' ORDER BY ' . $this->_order;
-    }
-
-    if ($this->_num_records)
-    {
-      $this->_objects_SQL .= " LIMIT $this->_first_record, $this->_num_records";
-    }
-  }
-
-  /**
-   * Return the list of restrictions for this query.
-   * Includes {@link $_system_restrictions}, {@link $_calculated_restrictions}
-   * and restrictions for {@link $_first_day} and {@link $_last_day}.
-   * @see _prepare_restrictions()
-   * @return array[string]
-   * @access private
-   */
-  function _restrictions ()
-  {
-    $Result = $this->_restrictions;
-    $Result = array_merge ($Result, $this->_system_restrictions);
-    $Result = array_merge ($Result, $this->_calculated_restrictions);
-
-    if ($this->_first_day)
-    {
-      $Result [] = $this->_day_field  . " >= '" . $this->_first_day . "'";
-    }
-
-    if ($this->_last_day)
-    {
-      $Result [] = $this->_day_field  . " <= '" . $this->_last_day . "'";
-    }
-
-    return $Result;
-  }
-
-  /**
-   * A query parameter has changed.
-    * Make sure that the query is updated when a request for objects or size is made.
-    * @access private
-    */
-  function _invalidate ()
-  {
-    if (! $this->_preparing_query)
-    {
-      $this->_prepared = FALSE;
-      unset ($this->_objects);
-      unset ($this->_num_objects);
-      unset ($this->_indexed_objects);
-      unset ($this->_object_tree);
-      $this->_system_call = FALSE;
-      $this->_system_restrictions = array ();
-      $this->_calculated_restrictions = array ();
-    }
-  }
-
-  /**
-   * Return the text of the object-retrieval command.
-    * @return string
-    * @access private
-    */
-  function _objects_command_as_SQL ()
-  {
-    return "SELECT $this->_select FROM $this->_tables";
-  }
-
-  /**
-   * Return the text of the size-retrieval command.
-    * @return string
-    * @access private
-    */
-  function _count_command_as_SQL ()
-  {
-    return 'SELECT COUNT(' . $this->alias . '.' . $this->id . ') FROM ' . $this->_tables;
-  }
-
-  /**
-   * Make the specific object returned by this query.
-    * @access private
-    * @abstract
-    */
-  function _make_object () { $this->raise_deferred ('_make_object', 'QUERY'); }
-
-  /**
-   * Perform any setup needed on each returned object.
-   * @param object $obj
-   * @access private
-   */
-  function _prepare_object ($obj) {}
-
-  /**
-   * Prepare security- and filter-based restrictions.
-   * Apply changes to {@link $_calculated_restrictions}.
-   * @access private
-   */
-  function _prepare_restrictions () {}
-
-  /**
-   * Should this object be added to the current result set?
-   * @param DATABASE $db
-   * @return bool
-   * @access private
-   */
-  function _is_valid_object ($db) { return TRUE; }
-
-  /**
-   * Should this object be indexed?
-   * @param DATABASE $db
-   * @return bool
-   * @access private
-   */
-  function _is_indexable_object ($obj) { return TRUE; }
-
-  /**
-   * @param object
-   * @return integer
-   * @access private
-   */
-  function _parent_id_for_object ($obj) { return $obj->parent_id; }
-
-  /**
-   * @param object
-   * @return integer
-   * @access private
-   */
-  function _id_for_object ($obj) { return $obj->id; }
-
-  /**
-   * @param object $obj
    * @access private
    * @abstract
    */
-  function _obj_set_sub_objects_cached ($obj) { $this->raise_deferred ('_obj_set_sub_objects_cached', 'QUERY'); }
-  /**
-   * @param object $obj
-   * @access private
-   * @abstract
-   */
-  function _obj_connect_to_parent ($obj) { $this->raise_deferred ('_obj_connect_to_parent', 'QUERY'); }
-  /**
-   * @param object $obj
-   * @access private
-   * @abstract
-   */
-  function _obj_sub_objects ($obj) { $this->raise_deferred ('_obj_sub_objects', 'QUERY'); }
-
-  /**
-   * Used internally to signal that parameters are updated for a system-initiated retrieval.
-   * For example, the 'objects_at_ids' function will use an internal restriction
-   * on those ids that should not be noticed by users of this class.
-   * @param string $clause
-   * @access private
-   */
-  function _start_system_call ($clause)
+  protected function _obj_sub_objects ($obj)
   {
-    $this->_invalidate ();
-    $this->_system_call = TRUE;
-    $this->_system_restrictions = array ($clause);
+    throw new METHOD_NOT_IMPLEMENTED_EXCEPTION();
   }
-
-  /**
-   * System-initiated query is complete.
-   * @see _start_system_call()
-   * @access private
-   */
-  function _end_system_call ()
-  {
-    $this->_system_call = FALSE;
-  }
-
-  /**
-   * Called internally to synchronize before going to the database.
-   * If a system call is not pending, but there are still system clauses in the
-   * query clause stream, then invalidate and regenerate the query command.
-   * @access private
-   */
-  function _check_system_call ()
-  {
-    if (! $this->_system_call && sizeof ($this->_system_restrictions))
-    {
-      $this->_invalidate ();
-    }
-  }
-
-  /**
-   * Overridable called from {@link order_by_recent()}.
-   * @access private */
-  function _order_by_recent ()
-  {
-    $this->order_by_day ('DESC');
-  }
-
-  /**
-   * Index in query result of first record to return.
-   * @var integer
-   * @see set_limits()
-   * @access private
-   */
-  protected $_first_record = 0;
-  /**
-   * Number of records to return.
-   * @var integer
-   * @see set_limits()
-   * @access private
-   */
-  protected $_num_records = 0;
-
-  /**
-   * Return only records after this date.
-   * @see set_days()
-   * @var string
-   * @access private
-   */
-  protected $_first_day = '';
-  /**
-   * Return only records before this date.
-   * @see set_days()
-   * @var string
-   * @access private
-   */
-  protected $_last_day = '';
-  /**
-   * Apply date filter to this SQL field. Use {@link set_day_field()}
-   * to change this value. Use {@link set_days()} to change the restricted
-   * values.
-   * @var string
-   * @access private
-   */
-  protected $_day_field = 'time_created';
-
-  /**
-   * SQL table/join statement.
-   * Usually set in the constructor, but also can be set in response to
-   * {@link _update()}.
-   * @see _update()
-   * @var string
-   * @access private
-   */
-  protected $_tables;
-  /**
-   * SQL fields to select from '_tables'.
-   * Usually set in the constructor, but also can be set in response to
-   * {@link _update()}. Can also be set externally.
-   * @see set_select_fields()
-   * @var string
-   * @access private
-   */
-  protected $_select;
-  /**
-   * SQL fields and ordering specifications.
-   * Usually set in the constructor. Can also be set externally.
-   * @see set_order()
-   * @var string
-   * @access private
-   */
-  protected $_order;
-  /**
-   * Ordering to use when {@link order_by_recent()} is called.
-   * Call {@link set_order_as_recent()} to store the current ordering to be used
-   * as the most recent ordering.
-   * @var string
-   * @access private
-   */
-  protected $_recent_order;
-
-  /**
-   * Does this query need updating from the database?
-   * Whenever the results for the current set of query properties have been
-   * calculated, this flag is set. If a property changes, this flag is cleared.
-   * Maintained intenally using {@link _invalidate()}.
-   * @see _invalidate()
-   * @var boolean
-   * @access private
-   */
-  protected $_prepared = FALSE;
-  /**
-   * Is the query preparing itself?
-   * This flag is set when the query is asked to prepare all restrictions and determine
-   * whether data is returned or not. This allows the preparation process to ask whether it
-   * has already been determined that the query returns no data, in order to abort.
-   * @var boolean
-   * @access private
-   */
-  protected $_preparing_query = FALSE;
-  /**
-   * Does the query contain system information?
-   * The query will add restrictions and arguments if certain functions are called. This
-   * flag indicates that this is the case. This is only used internally.
-   * @var boolean
-   * @access private
-   */
-  protected $_system_call = FALSE;
-  /**
-   * List of restrictions imposed by a system call.
-   * Restrictions added by this object internally are added to this list. They are cleared when
-   * a different request is made and should never be visible to the user. For example, if the user
-   * calls {@link objects_with_field()}, the query imposes an internal restriction, but one that the
-   * user didn't actually add. This list holds temporary restrictions, as opposed to those stored in
-   * {@link _calculated_restrictions}.
-   * @var array[string]
-   * @access private
-   */
-  protected $_system_restrictions;
-  /**
-   * List of restrictions imposed by security and filtering.
-   * Descendent query classes override {@link _prepare_restrictions} to impose security and filtering
-   * restrictions. Those are added to this list.
-   * @var array[string]
-   * @access private
-   */
-  protected $_calculated_restrictions;
-  /**
-   * Can this query possibly return data?
-   * Internal flag indicating that the restrictions imposed on this query obviate the need for
-   * actually going to the database -- the query is known to return no data.
-   * @var boolean
-   * @access private
-   */
-  protected $_returns_no_data_flag;
-  /**
-   * Text of SQL query to retrieve objects.
-   * Valid only after an 'objects' (or any of 'object_at_id', 'objects_at_ids',
-   * etc.) request has been successfully issued.
-   * @var string
-   * @access private
-   */
-  protected $_objects_SQL;
-  /**
-   * Text of SQL query to retrieve the number of objects.
-   * Valid only after a 'size' request has been successfully issued.
-   * @var string
-   * @access private
-   */
-  protected $_count_SQL;
-
-  /**
-   * Current result set.
-   * Valid only after an 'objects' (or any of 'object_at_id', 'objects_at_ids',
-   * etc.) request has been successfully issued.
-   * @var array[object]
-   * @access private
-   */
-  protected $_objects;
-  /**
-   * Current number of objects.
-   * Valid only after a 'size' request has been successfully issued.
-   * @var string
-   * @access private
-   */
-  protected $_num_objects;
-  /**
-   * Current result set.
-   * Valid only after a call to 'indexed_objects' has been issued.
-   * @var array[object]
-   * @access private
-   */
-  protected $_indexed_objects;
-  /**
-   * Current result set.
-   * Valid only after a call to 'tree' or 'root_tree' has been issued.
-   * @var array[object]
-   * @access private
-   */
-  protected $_object_tree;
 }
 
 /**
@@ -1487,7 +1530,7 @@ class QUERY_BASED_CACHE extends RAISABLE
 	/**
    * @param QUERY $query Retrieve objects using this query.
    */
-  function QUERY_BASED_CACHE ($query)
+  public function QUERY_BASED_CACHE ($query)
   {
     /* Make sure the query is its own reference, so changes to the
        query elsewhere don't affect which objects can be returned. */
@@ -1499,7 +1542,7 @@ class QUERY_BASED_CACHE extends RAISABLE
    * @param integer $id
    * @return UNIQUE_OBJECT
    */
-  function object_at_id ($id)
+  public function object_at_id ($id)
   {
     $this->assert (! empty ($id), 'ID cannot be empty (in ' . strtoupper (get_class ($this->query)) . ')', 'object_at_id', 'QUERY_BASED_CACHE');
 
@@ -1519,7 +1562,7 @@ class QUERY_BASED_CACHE extends RAISABLE
    * This allows the cache to be expanded with objects created by other queries.
    * @param UNIQUE_OBJECT $obj
    */
-  function add_object ($obj)
+  public function add_object ($obj)
   {
     $this->_cache [$obj->id] = $obj;
   }
@@ -1552,7 +1595,7 @@ class QUERY_ITERATOR extends RAISABLE
   /**
    * @param QUERY $query Retrieve objects using this query.
    */
-  function QUERY_ITERATOR ($query)
+  public function QUERY_ITERATOR ($query)
   {
     /* Make sure the query is its own reference, so changes to the
        query elsewhere don't affect which objects can be returned. */
@@ -1563,13 +1606,12 @@ class QUERY_ITERATOR extends RAISABLE
    * Number of items seen so far.
    * @return integer
    */
-  function num_items_iterated ()
+  public function num_items_iterated ()
   {
     if (isset ($this->_item_index))
     {
       return $this->_num_items_iterated + $this->_item_index;
     }
-
 
     return $this->_num_items_iterated;
   }
@@ -1578,7 +1620,7 @@ class QUERY_ITERATOR extends RAISABLE
    * Does this iterator contain items?
    * @return boolean
    */
-  function has_items ()
+  public function has_items ()
   {
     return isset ($this->_item_index);
   }
@@ -1587,7 +1629,7 @@ class QUERY_ITERATOR extends RAISABLE
    * Return the object at the current position.
    * @return object
    */
-  function item ()
+  public function item ()
   {
     return $this->_objects [$this->_item_index];
   }
@@ -1595,7 +1637,7 @@ class QUERY_ITERATOR extends RAISABLE
   /**
    * Move the position to the first item.
    */
-  function go_to_first ()
+  public function go_to_first ()
   {
     $this->_num_items_iterated = 0;
     $this->_first_item_to_get = 0;
@@ -1605,7 +1647,7 @@ class QUERY_ITERATOR extends RAISABLE
   /**
    * Move the position to the next item.
    */
-  function go_to_next ()
+  public function go_to_next ()
   {
     if ($this->_item_index < sizeof ($this->_objects) - 1)
     {
@@ -1625,7 +1667,7 @@ class QUERY_ITERATOR extends RAISABLE
    * bounds of the current batch.
    * @access private
    */
-  function _load_batch ()
+  protected function _load_batch ()
   {
     $this->_query->set_limits ($this->_first_item_to_get, $this->batch_size);
     $this->_objects = $this->_query->objects ();
@@ -1643,18 +1685,22 @@ class QUERY_ITERATOR extends RAISABLE
    * @var integer
    */
   protected $_item_index;
+
   /**
    * @var integer
    */
   protected $_num_items_iterated;
+
   /**
    * @var integer
    */
   protected $_first_item_to_get;
+
   /**
    * @var array[object]
    */
   protected $_objects;
+
   /**
    * @var QUERY
    * @access private

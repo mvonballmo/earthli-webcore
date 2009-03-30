@@ -49,7 +49,7 @@ class HTML_TAG_BUILDER
    * Start creating a tag called 'name'.
    * @param string $name
    */
-  function set_name ($name)
+  public function set_name ($name)
   {
     $this->_text = '<' . $name;
   }
@@ -59,7 +59,7 @@ class HTML_TAG_BUILDER
    * @param string $name
    * @param string $value
    */
-  function add_attribute ($name, $value)
+  public function add_attribute ($name, $value)
   {
     if ($value)
     {
@@ -74,7 +74,7 @@ class HTML_TAG_BUILDER
    * @param string $name
    * @param array $values
    */
-  function add_array_attribute ($name, $array, $default_value = '')
+  public function add_array_attribute ($name, $array, $default_value = '')
   {
     $this->add_attribute ($name, read_array_index ($array, $name, $default_value));
   }
@@ -83,7 +83,7 @@ class HTML_TAG_BUILDER
    * Get the HTML-formatted tag
    * @return string
    */
-  function as_html ()
+  public function as_html ()
   {
     return $this->_text . '>';
   }
@@ -108,7 +108,7 @@ class CSS_STYLE_BUILDER
    * Start creating a style using 'CSS' initially.
    * @param string $name
    */
-  function set_text ($CSS)
+  public function set_text ($CSS)
   {
     $this->_text = $CSS;
   }
@@ -116,7 +116,7 @@ class CSS_STYLE_BUILDER
   /**
    * Remove all styles.
    */
-  function clear ()
+  public function clear ()
   {
     $this->_text = '';
   }
@@ -126,7 +126,7 @@ class CSS_STYLE_BUILDER
    * @param string $name
    * @param string $value
    */
-  function add_attribute ($name, $value)
+  public function add_attribute ($name, $value)
   {
     if ($value)
     {
@@ -147,7 +147,7 @@ class CSS_STYLE_BUILDER
    * @param string $name
    * @param array $values
    */
-  function add_array_attribute ($name, $array, $default_value = '')
+  public function add_array_attribute ($name, $array, $default_value = '')
   {
     $this->add_attribute ($name, read_array_index ($array, $name, $default_value));
   }
@@ -156,7 +156,7 @@ class CSS_STYLE_BUILDER
    * Add pre-formatted CSS to the style.
    * @param string $CSS
    */
-  function add_text ($CSS)
+  public function add_text ($CSS)
   {
     if ($CSS)
     {
@@ -172,7 +172,7 @@ class CSS_STYLE_BUILDER
    * Get the CSS style as text.
    * @return string
    */
-  function as_text ()
+  public function as_text ()
   {
     return $this->_text;
   }
@@ -181,7 +181,7 @@ class CSS_STYLE_BUILDER
    * Are there styles assigned?
    * @return boolean
    */
-  function is_empty ()
+  public function is_empty ()
   {
     return empty ($this->_text);
   }

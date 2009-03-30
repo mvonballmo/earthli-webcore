@@ -57,31 +57,30 @@ class PROJECT_TREE_NODE_INFO extends FOLDER_TREE_NODE_INFO
    * @param PROJECT $node Draw the title for this project.
    * @return string
    */
-  function icon_for ($node)
+  public function icon_for ($node)
   {
     if ($node->defines_options ())
     {
       return $this->app->resolve_icon_as_html ('{icons}buttons/edit', 'Defines Assignee Options', '16px');
     }
 
-
     return parent::icon_for ($node);
   }
   
   /**
    * @param PROJECT $node Is this project editable?
-    * @access private
-    */
-  function visitable ($node)
+   * @access private
+   */
+  public function visitable ($node)
   {
     return $this->login->is_allowed (Privilege_set_folder, Privilege_modify, $node);
   }
 
   /**
    * @param array[PROJECT] $nodes If a node in this list defines its own options, make sure its parent node is open (make it visible). Works with a tree of projects as well.
-    * @access private
-    */
-  function set_defined_nodes_visible ($nodes)
+   * @access private
+   */
+  public function set_defined_nodes_visible ($nodes)
   {
     if (sizeof ($nodes))
     {

@@ -50,29 +50,32 @@ class ALBUM_CALENDAR extends BASIC_CALENDAR
 {
   /**
    * @var ALBUM
-    * @access private
-    */
+   * @access private
+   */
   public $album;
+
   /**
    * @var array[ALBUM]
-    * @access private
-    */
+   * @access private
+   */
   protected $_albums;
+
   /**
    * @var array[JOURNAL]
-    * @access private
-    */
+   * @access private
+   */
   protected $_journals;
+
   /**
    * @var array[DATE_TIME]
-    * @access private
-    */
+   * @access private
+   */
   protected $_pic_dates;
 
   /**
    * @param ALBUM $folder Show calendar for this album.
    */
-  function ALBUM_CALENDAR ($album)
+  public function ALBUM_CALENDAR ($album)
   {
     BASIC_CALENDAR::BASIC_CALENDAR ($album->app);
 
@@ -83,12 +86,12 @@ class ALBUM_CALENDAR extends BASIC_CALENDAR
 
   /**
    * @param integer $month
-    * @param integer $year
-    * @access private
-    */
-  function month_has_content ($month, $year)
+   * @param integer $year
+   * @access private
+   */
+  public function month_has_content ($month, $year)
   {
-    $Result = FALSE;
+    $Result = false;
     $first_day = new DATE_TIME (mktime (0, 0, 0, $month, 1, $year));
     $php_first_day = $first_day->as_php ();
     $php_last_day = mktime (23, 59, 59, $month, $first_day->last_legal_day (), $year);
@@ -125,7 +128,7 @@ class ALBUM_CALENDAR extends BASIC_CALENDAR
         $album = $this->_albums [$i];
         if ((($php_first_day <= $album->first_day->as_php ()) && ($album->first_day->as_php () <= $php_last_day)) ||
             (($php_first_day <= $album->last_day->as_php ()) && ($album->last_day->as_php () <= $php_last_day)))
-          $Result = TRUE;
+          $Result = true;
         $i++;
       }
     }
@@ -135,12 +138,12 @@ class ALBUM_CALENDAR extends BASIC_CALENDAR
 
   /**
    * @param integer $day
-    * @param integer $week
-    * @param integer $month
-    * @param integer $year
-    * @access private
-    */
-  function _get_content_for_day ($day, $week, $month, $year)
+   * @param integer $week
+   * @param integer $month
+   * @param integer $year
+   * @access private
+   */
+  protected function _get_content_for_day ($day, $week, $month, $year)
   {
     $first_day = new DATE_TIME (mktime (0, 0, 0, $month, $day, $year));
     $last_day = new DATE_TIME (mktime (23, 59, 59, $month, $day, $year));
@@ -319,7 +322,7 @@ class ALBUM_CALENDAR extends BASIC_CALENDAR
   /**
    * @access private
    */
-  function _page_changed ()
+  protected function _page_changed ()
   {
     $jrnl_query = $this->album->entry_query ();
     $jrnl_query->set_type ('journal');

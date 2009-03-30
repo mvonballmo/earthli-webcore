@@ -58,7 +58,7 @@ class USER_ENTRY_QUERY extends OBJECT_IN_FOLDER_QUERY
   /**
    * Apply default restrictions and tables.
    */
-  function apply_defaults () 
+  public function apply_defaults () 
   {
     $this->set_select ('entry.*');
     $this->set_table ($this->app->table_names->entries . ' entry');
@@ -73,13 +73,13 @@ class USER_ENTRY_QUERY extends OBJECT_IN_FOLDER_QUERY
    * entry-types.
    * @param string $type
    */
-  function set_type ($type) {}
+  public function set_type ($type) {}
 
   /**
    * Prepare security- and filter-based restrictions.
    * @access private
    */
-  function _prepare_restrictions ()
+  protected function _prepare_restrictions ()
   {
     parent::_prepare_restrictions ();
 
@@ -106,7 +106,7 @@ class USER_ENTRY_QUERY extends OBJECT_IN_FOLDER_QUERY
    * @return string
    * @access private
    */
-  function table_for_set ($set_name)
+  public function table_for_set ($set_name)
   {
     switch ($set_name)
     {
@@ -114,6 +114,8 @@ class USER_ENTRY_QUERY extends OBJECT_IN_FOLDER_QUERY
         return 'fldr';
       case Privilege_set_entry:
         return $this->alias;
+      default:
+        throw new UNKNOWN_VALUE_EXCEPTION($set_name);
     }
   }
 
@@ -121,7 +123,7 @@ class USER_ENTRY_QUERY extends OBJECT_IN_FOLDER_QUERY
    * @return ENTRY
    * @access private
    */
-  function _make_object ()
+  protected function _make_object ()
   {
     $class_name = $this->app->final_class_name ('ENTRY', 'webcore/obj/entry.php');
     return new $class_name ($this->app);
@@ -132,7 +134,7 @@ class USER_ENTRY_QUERY extends OBJECT_IN_FOLDER_QUERY
    * @param ENTRY $obj
    * @access private
    */
-  function _prepare_object ($obj)
+  protected function _prepare_object ($obj)
   {
     $obj->set_parent_folder ($this->login->folder_at_id ($this->db->f ('folder_id')));
   }
@@ -142,6 +144,7 @@ class USER_ENTRY_QUERY extends OBJECT_IN_FOLDER_QUERY
    * @access private
    */
   protected $_folder_query;
+
   /**
    * Name of the default permission set to use.
    * @var string
@@ -162,7 +165,7 @@ class USER_MULTI_ENTRY_QUERY extends USER_ENTRY_QUERY
   /**
    * @param ALBUM_APPLICATION $app Main application.
    */
-  function USER_MULTI_ENTRY_QUERY ($app)
+  public function USER_MULTI_ENTRY_QUERY ($app)
   {
     USER_ENTRY_QUERY::USER_ENTRY_QUERY ($app);
     $this->set_type ('');
@@ -171,7 +174,7 @@ class USER_MULTI_ENTRY_QUERY extends USER_ENTRY_QUERY
   /**
    * Apply default restrictions and tables.
    */
-  function apply_defaults () 
+  public function apply_defaults () 
   {
     parent::apply_defaults ();
     $this->add_select ('entry.type as entry_type');
@@ -181,7 +184,7 @@ class USER_MULTI_ENTRY_QUERY extends USER_ENTRY_QUERY
    * Specify the type of entry to retrieve.
    * @param string $type
    */
-  function set_type ($type)
+  public function set_type ($type)
   {
     if ($type)
     {
@@ -193,7 +196,7 @@ class USER_MULTI_ENTRY_QUERY extends USER_ENTRY_QUERY
    * @return ENTRY
    * @access private
    */
-  function _make_object ()
+  protected function _make_object ()
   {
     return $this->app->make_entry ($this->db->f ('entry_type'));
   }
@@ -211,7 +214,7 @@ class USER_DRAFTABLE_ENTRY_QUERY extends USER_ENTRY_QUERY
   /**
    * Apply default restrictions and tables.
    */
-  function apply_defaults () 
+  public function apply_defaults () 
   {
     parent::apply_defaults ();
     $this->set_day_field ('entry.time_published');
@@ -222,7 +225,7 @@ class USER_DRAFTABLE_ENTRY_QUERY extends USER_ENTRY_QUERY
    * Reset the ordering to show recent items first.
    * @access private
    */
-  function _order_by_recent ()
+  protected function _order_by_recent ()
   {
     if ($this->includes (Unpublished) && ! $this->includes (Visible))
     {

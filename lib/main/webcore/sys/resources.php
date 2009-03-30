@@ -73,23 +73,27 @@ class RESOURCE_MANAGER extends RAISABLE
    * @var string
    */
   public $alias_open_delimiter = '{';
+
   /**
    * Denotes the end of an alias in a URL fragment.
    * @var string
    */
   public $alias_close_delimiter = '}';
+
   /**
    * Denotes a local anchor in a URL.
    * @var string
    */
   public $anchor_delimiter = '#';
+
   /**
    * Should urls be expanded to the root?
    * Use {@link set_root_behavior()} and {@link restore_root_behavior()} to
    * set this value properly for chained resource managers.
    * @var boolean
    */
-  public $resolve_to_root = FALSE;
+  public $resolve_to_root = false;
+
   /**
    * What is the absolute root of all resources?
    * This value is prepended to resolved URLs if {@link $resolve_to_root} is True.
@@ -97,14 +101,15 @@ class RESOURCE_MANAGER extends RAISABLE
    * an email, for instance).
    */
   public $root_url = '';
+
   /**
    * Is alias-caching enabled?
    * Set this value with {@link set_caching_enabled()}.
    * @var boolean
    */
-  public $caching_enabled = TRUE;
+  public $caching_enabled = true;
 
-  function RESOURCE_MANAGER ()
+  public function RESOURCE_MANAGER ()
   {
     $this->_url_options = global_url_options ();
     $this->_text_options = global_text_options ();
@@ -115,7 +120,7 @@ class RESOURCE_MANAGER extends RAISABLE
    * Inherit resource patterns from this object.
    * @param RESOURCE_MANAGER $parent
    */
-  function inherit_resources_from ($parent)
+  public function inherit_resources_from ($parent)
   {
     $this->_parent_resources = $parent;
   }
@@ -124,7 +129,7 @@ class RESOURCE_MANAGER extends RAISABLE
    * Specify which file options to use when building URLs.
    * @param FILE_OPTIONS $options
    */
-  function set_url_options ($options)
+  public function set_url_options ($options)
   {
     $this->_url_options = $options;
   }
@@ -133,7 +138,7 @@ class RESOURCE_MANAGER extends RAISABLE
    * Specify which text options to use when formatting HTML.
    * @param TEXT_OPTIONS $options
    */
-  function set_text_options ($options)
+  public function set_text_options ($options)
   {
     $this->_text_options = $options;
   }
@@ -149,7 +154,7 @@ class RESOURCE_MANAGER extends RAISABLE
    *
    * @param boolean $value
    */
-  function set_caching_enabled ($value)
+  public function set_caching_enabled ($value)
   {
     if ($this->caching_enabled != $value)
     {
@@ -162,7 +167,7 @@ class RESOURCE_MANAGER extends RAISABLE
    * Remove all cached paths.
    * @see set_caching_enabled()
    */
-  function clear_cache ()
+  public function clear_cache ()
   {
     $this->_cache = array ();
   }
@@ -172,7 +177,7 @@ class RESOURCE_MANAGER extends RAISABLE
    * @param string $alias
    * @param string $path
    */
-  function set_path ($alias, $path)
+  public function set_path ($alias, $path)
   {
     $this->_paths [$alias] = $path;
     $this->_notify_listeners ($alias, $path);
@@ -184,7 +189,7 @@ class RESOURCE_MANAGER extends RAISABLE
    * @param string $alias
    * @param string $path
    */
-  function add_to_path ($alias, $path)
+  public function add_to_path ($alias, $path)
   {
     $this->set_path ($alias, join_paths ($this->path_for_alias ($alias), $path, $this->_url_options));
   }
@@ -194,7 +199,7 @@ class RESOURCE_MANAGER extends RAISABLE
    * @param string $alias
    * @param string $ext
    */
-  function set_extension ($alias, $ext)
+  public function set_extension ($alias, $ext)
   {
     $this->_extensions [$alias] = $ext;
   }
@@ -207,7 +212,7 @@ class RESOURCE_MANAGER extends RAISABLE
    * @param string $alias
    * @param boolean $force_root
    */
-  function set_forced_root ($alias, $force_root)
+  public function set_forced_root ($alias, $force_root)
   {
     $this->_forced_roots [$alias] = $force_root;
   }
@@ -218,7 +223,7 @@ class RESOURCE_MANAGER extends RAISABLE
    * changed with {@link set_path()}.
    * @param CALLBACK $listener
    */
-  function add_listener ($listener)
+  public function add_listener ($listener)
   {
     if (! isset ($this->_listeners))
     {
@@ -235,7 +240,7 @@ class RESOURCE_MANAGER extends RAISABLE
    * @param string $alias
    * @return string
    */
-  function path_for_alias ($alias)
+  public function path_for_alias ($alias)
   {
     $Result = '';
     if (isset ($this->_paths [$alias]))
@@ -258,7 +263,7 @@ class RESOURCE_MANAGER extends RAISABLE
    * @param string $alias
    * @return string
    */
-  function extension_for_alias ($alias)
+  public function extension_for_alias ($alias)
   {
     $Result = '';
     if (isset ($this->_extensions [$alias]))
@@ -281,7 +286,7 @@ class RESOURCE_MANAGER extends RAISABLE
    * @param string $alias
    * @return string
    */
-  function forced_root_for_alias ($alias)
+  public function forced_root_for_alias ($alias)
   {
     $Result = null;
     if (isset ($this->_forced_roots [$alias]))
@@ -307,7 +312,7 @@ class RESOURCE_MANAGER extends RAISABLE
    * {@link Force_root_on}.
    * @return string
    */
-  function path_to ($alias, $root_override = null)
+  public function path_to ($alias, $root_override = null)
   {
     return $this->resolve_path_for_alias ($alias, '', $root_override);
   }
@@ -333,7 +338,7 @@ class RESOURCE_MANAGER extends RAISABLE
    * @see resolve_path_for_alias()
    * @see RESOURCE_MANAGER for general documentation on aliases.
    */
-  function resolve_file ($fragment, $root_override = null)
+  public function resolve_file ($fragment, $root_override = null)
   {
     list ($alias, $url) = $this->_extract_alias_and_resolved_path ($fragment, $root_override);
     return $this->_apply_extension_for_alias ($alias, $url);
@@ -352,7 +357,7 @@ class RESOURCE_MANAGER extends RAISABLE
    * @see resolve_path_for_alias()
    * @see RESOURCE_MANAGER for general documentation on aliases.
    */
-  function resolve_path ($fragment, $root_override = null)
+  public function resolve_path ($fragment, $root_override = null)
   {
     list ($alias, $url) = $this->_extract_alias_and_resolved_path ($fragment, $root_override);
     return ensure_ends_with_delimiter ($url, $this->_url_options);
@@ -371,7 +376,7 @@ class RESOURCE_MANAGER extends RAISABLE
    * @param string $alias
    * @param string $fragment
    * @return string */
-  function resolve_file_for_alias ($alias, $fragment, $root_override = null)
+  public function resolve_file_for_alias ($alias, $fragment, $root_override = null)
   {
     $Result = $this->_resolve_path_for_alias ($alias, $fragment, $root_override);
     return $this->_apply_extension_for_alias ($alias, $Result);
@@ -391,7 +396,7 @@ class RESOURCE_MANAGER extends RAISABLE
    * @param string $fragment
    * @return string
    */
-  function resolve_path_for_alias ($alias, $fragment, $root_override = null)
+  public function resolve_path_for_alias ($alias, $fragment, $root_override = null)
   {
     $Result = $this->_resolve_path_for_alias ($alias, $fragment, $root_override);
     return ensure_ends_with_delimiter ($Result, $this->_url_options);
@@ -405,7 +410,7 @@ class RESOURCE_MANAGER extends RAISABLE
    * @param string $style an optional CSS style (not a class).
    * @return string
    */
-  function resolve_icon_as_html ($fragment, $text, $size = '', $style = 'vertical-align: middle', $dom_id = 0)
+  public function resolve_icon_as_html ($fragment, $text, $size = '', $style = 'vertical-align: middle', $dom_id = 0)
   {
     return $this->image_as_html ($this->sized_icon ($fragment, $size), $text, $style, $dom_id);
   }
@@ -419,7 +424,7 @@ class RESOURCE_MANAGER extends RAISABLE
    * {@link Force_root_on}.
    * @return string
    */
-  function resolve_url ($url, $root_override = null)
+  public function resolve_url ($url, $root_override = null)
   {
     return $this->resolve_file ($url, $root_override);
   }
@@ -432,7 +437,7 @@ class RESOURCE_MANAGER extends RAISABLE
    * @param string $style an optional CSS style (not a class).
    * @return string
    */
-  function image_as_html ($url, $text, $style = 'vertical-align: middle', $dom_id = 0)
+  public function image_as_html ($url, $text, $style = 'vertical-align: middle', $dom_id = 0)
   {
     if ($url)
     {
@@ -449,6 +454,8 @@ class RESOURCE_MANAGER extends RAISABLE
       $Result .= ">";
       return $Result;
     }
+    
+    return '';
   }
 
   /**
@@ -461,7 +468,7 @@ class RESOURCE_MANAGER extends RAISABLE
    * @param string $size Size modifier to use to find the correct icon.
    * @return string
    */
-  function sized_icon ($base_url, $size)
+  public function sized_icon ($base_url, $size)
   {
     if ($base_url)
     {
@@ -478,6 +485,8 @@ class RESOURCE_MANAGER extends RAISABLE
 
       return $this->resolve_file ($Result);
     }
+    
+    return '';
   }
 
   /**
@@ -486,7 +495,7 @@ class RESOURCE_MANAGER extends RAISABLE
    * Force_root_off}.
    * @see restore_root_behavior()
    */
-  function set_root_behavior ($value)
+  public function set_root_behavior ($value)
   {
     $this->resolve_to_root = $value;
     if (isset ($this->_parent_resources))
@@ -503,7 +512,7 @@ class RESOURCE_MANAGER extends RAISABLE
    * their own default value.
    * @see set_root_behavior()
    */
-  function restore_root_behavior ()
+  public function restore_root_behavior ()
   {
     $this->resolve_to_root = $this->_default_resolve_to_root ();
     if (isset ($this->_parent_resources))
@@ -518,7 +527,7 @@ class RESOURCE_MANAGER extends RAISABLE
    * modifier is changed and must be re-appended in the event handler).
    * @param string $alias
    */
-  function refresh ($alias)
+  public function refresh ($alias)
   {
     $path = $this->path_for_alias ($alias);
     if ($path)
@@ -535,7 +544,7 @@ class RESOURCE_MANAGER extends RAISABLE
    * @param string $path
    * @access private
    */
-  function _notify_listeners ($alias, $path)
+  protected function _notify_listeners ($alias, $path)
   {
     if (isset ($this->_listeners))
     {
@@ -549,9 +558,9 @@ class RESOURCE_MANAGER extends RAISABLE
    * @return boolean
    * @access private
    */
-  function _default_resolve_to_root ()
+  protected function _default_resolve_to_root ()
   {
-    return FALSE;
+    return false;
   }
 
   /**
@@ -566,7 +575,7 @@ class RESOURCE_MANAGER extends RAISABLE
    * @return array[string,string]
    * @access private
    */
-  function _extract_alias_and_resolved_path ($fragment, $root_override)
+  protected function _extract_alias_and_resolved_path ($fragment, $root_override)
   {
     list ($alias, $fragment) = $this->_extract_alias ($fragment);
     $fragment = $this->_resolve_path_for_alias ($alias, $fragment, $root_override);
@@ -584,7 +593,7 @@ class RESOURCE_MANAGER extends RAISABLE
    * @return string
    * @access private
    */
-  function _resolve_path_for_alias ($alias, $fragment, $root_override)
+  protected function _resolve_path_for_alias ($alias, $fragment, $root_override)
   {
     if ($alias != '')
     {
@@ -636,7 +645,7 @@ class RESOURCE_MANAGER extends RAISABLE
    * @return string
    * @access private
    */
-  function _finalize_url ($url, $root_override)
+  protected function _finalize_url ($url, $root_override)
   {
     if ($this->_needs_root ($url, $root_override))
     {
@@ -658,7 +667,7 @@ class RESOURCE_MANAGER extends RAISABLE
    * @param string $fragment
    * @return array[string,string]
    */
-  function _extract_alias ($fragment)
+  protected function _extract_alias ($fragment)
   {
     $alias = '';
     if ($fragment)
@@ -697,7 +706,7 @@ class RESOURCE_MANAGER extends RAISABLE
    * @return string
    * @access private
    */
-  function _apply_extension_for_alias ($alias, $fragment)
+  protected function _apply_extension_for_alias ($alias, $fragment)
   {
     if (! ends_with_delimiter ($fragment, $this->_url_options) && ! is_file_name ($fragment, $this->_url_options))
     {
@@ -722,7 +731,7 @@ class RESOURCE_MANAGER extends RAISABLE
    * @return boolean
    * @access private
    */
-  function _needs_root ($url, $root_override)
+  protected function _needs_root ($url, $root_override)
   {
     /* Check that there is a root and that it is desired. */
     $Result = $this->root_url && ($this->resolve_to_root || ! empty ($root_override)) && ! (isset ($root_override) && ! $root_override);
@@ -757,18 +766,21 @@ class RESOURCE_MANAGER extends RAISABLE
    * @access private
    */
   protected $_url_options;
+
   /**
    * Use these options to format HTML text.
    * @var TEXT_OPTIONS
    * @access private
    */
   protected $_text_options;
+
   /**
    * Inherit resources from this manager.
    * @var RESOURCE_MANAGER
    * @access private
    */
   protected $_parent_resources;
+
   /**
    * Alias to path mapping.
    * Each path is a legal url with an optional alias prefix.
@@ -776,18 +788,21 @@ class RESOURCE_MANAGER extends RAISABLE
    * @access private
    */
   protected $_paths;
+
   /**
    * Alias to extension mapping.
    * @var array[string,string]
    * @access private
    */
   protected $_extensions;
+
   /**
    * Record aliases that force root resolution.
    * @var array[string,boolean]
    * @access private
    */
   protected $_forced_roots;
+
   /**
    * List of listeners for changes to aliases.
    * Add listeners with {@link add_listener()} and receive a message
@@ -795,6 +810,7 @@ class RESOURCE_MANAGER extends RAISABLE
    * @var CALLBACK_LIST
    */
   protected $_listeners;
+
   /**
    * Maps aliases to expanded paths.
    * Provides a significant performance boost. Paths are invalidated when

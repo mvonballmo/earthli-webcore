@@ -52,6 +52,7 @@ class USER_SUBSCRIPTION_OPTIONS_FORM extends SUBSCRIPTION_FORM
    * @var string
    */
   public $button = 'Save';
+
   /**
    * @var string
    */
@@ -60,14 +61,14 @@ class USER_SUBSCRIPTION_OPTIONS_FORM extends SUBSCRIPTION_FORM
   /**
    * @param APPLICATION $app Main application.
    */
-  function USER_SUBSCRIPTION_OPTIONS_FORM ($app)
+  public function USER_SUBSCRIPTION_OPTIONS_FORM ($app)
   {
     SUBSCRIPTION_FORM::SUBSCRIPTION_FORM ($app);
 
     $field = new EMAIL_FIELD ();
     $field->id = 'new_email';
     $field->title = 'Email address';
-    $field->required = TRUE;
+    $field->required = true;
     $field->min_length = 5;
     $this->add_field ($field);
 
@@ -143,7 +144,7 @@ class USER_SUBSCRIPTION_OPTIONS_FORM extends SUBSCRIPTION_FORM
    * Load initial properties from this user.
    * @param SUBSCRIBER $obj
    */
-  function load_from_object ($obj)
+  public function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
     $this->set_value ('new_email', $obj->email);
@@ -166,7 +167,7 @@ class USER_SUBSCRIPTION_OPTIONS_FORM extends SUBSCRIPTION_FORM
     $this->set_value ('preferred_text_length', $obj->preferred_text_length);
   }
 
-  function load_with_defaults ()
+  public function load_with_defaults ()
   {
     parent::load_with_defaults ();
     $this->set_value ('new_email', $_REQUEST ['email']);
@@ -192,7 +193,7 @@ class USER_SUBSCRIPTION_OPTIONS_FORM extends SUBSCRIPTION_FORM
    * @param SUBSCRIBER $obj Object from which data was loaded. May be null.
    * @access private
    */
-  function _post_load_data ($obj) 
+  protected function _post_load_data ($obj) 
   {
     parent::_post_load_data ($obj);
     $enabled = $obj->enabled ();
@@ -215,14 +216,14 @@ class USER_SUBSCRIPTION_OPTIONS_FORM extends SUBSCRIPTION_FORM
    * @param object $obj Object being validated.
    * @access private
    */
-  function _pre_validate ($obj)
+  protected function _pre_validate ($obj)
   {
     parent::_pre_validate ($obj);
 
     if (! $this->value_for ('group_objects'))
     {
       $field = $this->field_at ('max_individual_messages');
-      $field->required = FALSE;
+      $field->required = false;
       $field->set_value (0);
       $field->min_value = 0;
     }
@@ -231,10 +232,10 @@ class USER_SUBSCRIPTION_OPTIONS_FORM extends SUBSCRIPTION_FORM
 
   /**
    * Store the form's values for this user's subscription options.
-    * @param SUBSCRIBER $obj
-    * @access private
-    */
-  function commit ($obj)
+   * @param SUBSCRIBER $obj
+   * @access private
+   */
+  public function commit ($obj)
   {
     $orig_email = $this->value_for ('email');
     $new_email = $this->value_for ('new_email');
@@ -310,28 +311,28 @@ class USER_SUBSCRIPTION_OPTIONS_FORM extends SUBSCRIPTION_FORM
   /**
    * @access private
    */
-  function _draw_scripts ()
+  protected function _draw_scripts ()
   {
     parent::_draw_scripts ();
 ?>
-  function on_show_history_items (ctrl)
+  public function on_show_history_items (ctrl)
   {
     ctrl.form.group_history_items.disabled = ! ctrl.checked;
   }
 
-  function on_group_objects (ctrl)
+  public function on_group_objects (ctrl)
   {
     ctrl.form.max_individual_messages.disabled = is_selected (ctrl, 0);
     enable_items (ctrl.form.split_objects, ! is_selected (ctrl, 0));
     ctrl.form.max_items_per_message.disabled = is_selected (ctrl, 0) || is_selected (ctrl.form.split_objects, 0);
   }
 
-  function on_split_objects (ctrl)
+  public function on_split_objects (ctrl)
   {
     ctrl.form.max_items_per_message.disabled = is_selected (ctrl, 0);
   }
 
-  function on_min_hours_to_wait (ctrl)
+  public function on_min_hours_to_wait (ctrl)
   {
     var enabled = (ctrl.value != <?php echo Subscriptions_disabled; ?>);
 
@@ -350,7 +351,7 @@ class USER_SUBSCRIPTION_OPTIONS_FORM extends SUBSCRIPTION_FORM
     ctrl.form.show_history_item_as_subject.disabled = ! enabled;
   }
 
-  function on_change_text_option (ctrl)
+  public function on_change_text_option (ctrl)
   {
     ctrl.form.preferred_text_length.disabled = is_selected (ctrl, 0);
   }
@@ -361,7 +362,7 @@ class USER_SUBSCRIPTION_OPTIONS_FORM extends SUBSCRIPTION_FORM
    * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_controls ($renderer)
+  protected function _draw_controls ($renderer)
   {
     $user_query = $this->app->user_query ();
     $user = $user_query->object_at_email ($this->value_for ('email'));
@@ -406,9 +407,9 @@ class USER_SUBSCRIPTION_OPTIONS_FORM extends SUBSCRIPTION_FORM
 
     $props = $renderer->make_list_properties ();
     $props->on_click_script = 'on_change_text_option (this)';
-    $props->smart_wrapping = TRUE;
+    $props->smart_wrapping = true;
     $props->add_item ('Send all available text.', 0);
-    $props->add_item ('Send at most ', 1, '', TRUE, $renderer->text_line_as_HTML ('preferred_text_length', $options) . ' characters.');
+    $props->add_item ('Send at most ', 1, '', true, $renderer->text_line_as_HTML ('preferred_text_length', $options) . ' characters.');
     $renderer->draw_radio_group_row ('text_options', $props);
     $renderer->draw_error_row ('preferred_text_length');
 
@@ -416,9 +417,9 @@ class USER_SUBSCRIPTION_OPTIONS_FORM extends SUBSCRIPTION_FORM
 
     $props = $renderer->make_list_properties ();
     $props->on_click_script = 'on_group_objects (this)';
-    $props->smart_wrapping = TRUE;
+    $props->smart_wrapping = true;
     $props->add_item ('One item per message.', 0);
-    $props->add_item ('Group items if there are more than ', 1, '', TRUE, $renderer->text_line_as_HTML ('max_individual_messages', $options) . ' at once.');
+    $props->add_item ('Group items if there are more than ', 1, '', true, $renderer->text_line_as_HTML ('max_individual_messages', $options) . ' at once.');
     $renderer->draw_radio_group_row ('group_objects', $props);
     $renderer->draw_error_row ('max_individual_messages');
 
@@ -426,9 +427,9 @@ class USER_SUBSCRIPTION_OPTIONS_FORM extends SUBSCRIPTION_FORM
 
     $props = $renderer->make_list_properties ();
     $props->on_click_script = 'on_split_objects (this)';
-    $props->smart_wrapping = TRUE;
+    $props->smart_wrapping = true;
     $props->add_item ('Send only one message.', 0);
-    $props->add_item ('Send at most ', 1, '', TRUE, $renderer->text_line_as_HTML ('max_items_per_message', $options) . ' items per message.');
+    $props->add_item ('Send at most ', 1, '', true, $renderer->text_line_as_HTML ('max_items_per_message', $options) . ' items per message.');
     $renderer->draw_radio_group_row ('split_objects', $props);
     $renderer->draw_error_row ('max_items_per_message');
 

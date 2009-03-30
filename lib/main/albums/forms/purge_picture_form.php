@@ -52,12 +52,12 @@ class PURGE_PICTURE_FORM extends PURGE_OBJECT_FORM
    * @param FOLDER $app Deleting content from this folder.
    * @param string $set_name
    */
-  function PURGE_PICTURE_FORM ($app)
+  public function PURGE_PICTURE_FORM ($app)
   {
     PURGE_OBJECT_FORM::PURGE_OBJECT_FORM ($app);
 
     $field = $this->field_at ('remove_resources');
-    $field->visible = TRUE;
+    $field->visible = true;
   }
 }
 

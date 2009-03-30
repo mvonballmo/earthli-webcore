@@ -57,7 +57,7 @@ class PICTURE_SEARCH extends MULTI_ENTRY_SEARCH
   /**
    * @param APPLICATION $app Main application.
    */
-  function PICTURE_SEARCH ($app)
+  public function PICTURE_SEARCH ($app)
   {
     MULTI_ENTRY_SEARCH::MULTI_ENTRY_SEARCH ($app, new SEARCH_PICTURE_FIELDS ($app));
   }
@@ -80,7 +80,7 @@ class JOURNAL_SEARCH extends MULTI_ENTRY_SEARCH
   /**
    * @param APPLICATION $app Main application.
    */
-  function JOURNAL_SEARCH ($app)
+  public function JOURNAL_SEARCH ($app)
   {
     MULTI_ENTRY_SEARCH::MULTI_ENTRY_SEARCH ($app, new SEARCH_JOURNAL_FIELDS ($app));
   }

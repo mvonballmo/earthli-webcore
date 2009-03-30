@@ -53,7 +53,7 @@ class ATTACHMENT_COMMANDS extends COMMANDS
   /**
    * @param ATTACHMENT $attachment Configure commands for this attachment.
    */
-  function ATTACHMENT_COMMANDS ($attachment)
+  public function ATTACHMENT_COMMANDS ($attachment)
   {
     COMMANDS::COMMANDS ($attachment->app);
 
@@ -89,7 +89,7 @@ class ATTACHMENT_COMMANDS extends COMMANDS
     $cmd->title = 'Send';
     $cmd->link = "send_attachment.php?id=$attachment->id&type=$attachment->type";
     $cmd->icon = '{icons}buttons/send';
-    $cmd->executable = TRUE;
+    $cmd->executable = true;
     $cmd->importance = Command_importance_high - Command_importance_increment;
     $this->append ($cmd);
 

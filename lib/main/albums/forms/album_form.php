@@ -51,14 +51,14 @@ class ALBUM_FORM extends FOLDER_FORM
   /**
    * @param ALBUM $folder Album to edit or create.
    */
-  function ALBUM_FORM ($folder)
+  public function ALBUM_FORM ($folder)
   {
     FOLDER_FORM::FOLDER_FORM ($folder);
 
     $field = new URI_FIELD ();
     $field->id = 'url_root';
     $field->title = 'Root URL';
-    $field->required = TRUE;
+    $field->required = true;
     $this->add_field ($field);
 
     $field = new BOOLEAN_FIELD ();
@@ -91,7 +91,7 @@ class ALBUM_FORM extends FOLDER_FORM
     $field->add_value (Album_is_span);
     $field->add_value (Album_is_journal);
     $field->add_value (Album_is_adjusted);
-    $field->required = TRUE;
+    $field->required = true;
     $this->add_field ($field);
 
     $field = new DATE_FIELD ();
@@ -114,13 +114,13 @@ class ALBUM_FORM extends FOLDER_FORM
     $field->id = 'main_picture_id';
     $field->title = 'Main picture';
     $field->min_value = 0;
-    $field->visible = FALSE;
+    $field->visible = false;
     $this->add_field ($field);
 
     $field = new ENUMERATED_FIELD ();
     $field->id = 'location';
     $field->title = 'Location';
-    $field->required = TRUE;
+    $field->required = true;
     $field->add_value (Album_location_type_local);
     $field->add_value (Album_location_type_remote);
     $this->add_field ($field);
@@ -132,7 +132,7 @@ class ALBUM_FORM extends FOLDER_FORM
     $this->add_field ($field);
   }
 
-  function load_with_defaults ()
+  public function load_with_defaults ()
   {
     parent::load_with_defaults ();
 
@@ -154,7 +154,7 @@ class ALBUM_FORM extends FOLDER_FORM
     else
     {
       $this->set_value ('location', Album_location_type_remote);
-      $this->set_value ('show_celsius', TRUE);
+      $this->set_value ('show_celsius', true);
 
       $this->set_value ('max_picture_width', 640);
       $this->set_value ('max_picture_height', 480);
@@ -175,7 +175,7 @@ class ALBUM_FORM extends FOLDER_FORM
    * Load initial properties from this album.
    * @param ALBUM $obj
    */
-  function load_from_object ($obj)
+  public function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
 
@@ -224,7 +224,7 @@ class ALBUM_FORM extends FOLDER_FORM
    * @param object $obj Object from which data was loaded. May be null.
    * @access private
    */
-  function _post_load_data ($obj)
+  protected function _post_load_data ($obj)
   {
     $constrain_pics = $this->value_for ('constrain_picture_size');
     $this->set_enabled ('max_picture_width', $constrain_pics);
@@ -234,21 +234,21 @@ class ALBUM_FORM extends FOLDER_FORM
     {
     case Album_is_single_day:
     case Album_is_journal:
-      $this->set_enabled ('last_day', FALSE);
+      $this->set_enabled ('last_day', false);
       break;
     case Album_is_adjusted:
-      $this->set_enabled ('first_day', FALSE);
-      $this->set_enabled ('last_day', FALSE);
+      $this->set_enabled ('first_day', false);
+      $this->set_enabled ('last_day', false);
       break;
     }
   }
 
   /**
    * Does this form hold valid data for this album?
-    * @param ALBUM $obj
-    * @access private
-    */
-  function _post_validate ($obj)
+   * @param ALBUM $obj
+   * @access private
+   */
+  protected function _post_validate ($obj)
   {
     parent::_post_validate ($obj);
 
@@ -279,10 +279,10 @@ class ALBUM_FORM extends FOLDER_FORM
 
   /**
    * Store the form's values to this album.
-    * @param ALBUM $obj
-    * @access private
-    */
-  function _store_to_object ($obj)
+   * @param ALBUM $obj
+   * @access private
+   */
+  protected function _store_to_object ($obj)
   {
     $obj->url_root = $this->value_as_text ('url_root');
     $obj->location = $this->value_as_text ('location');
@@ -309,13 +309,13 @@ class ALBUM_FORM extends FOLDER_FORM
   /**
    * @access private
    */
-  function _draw_scripts ()
+  protected function _draw_scripts ()
   {
     parent::_draw_scripts ();
     $js_form = $this->js_form_name ();
 ?>
 
-  function PICTURE_VALUE_FIELD ()
+  public function PICTURE_VALUE_FIELD ()
   {
   }
   PICTURE_VALUE_FIELD.prototype = new OBJECT_VALUE_FIELD;
@@ -357,7 +357,7 @@ class ALBUM_FORM extends FOLDER_FORM
   field.height = 700;
   field.page_name = 'browse_picture.php';
 
-  function on_day_mode_changed (ctrl)
+  public function on_day_mode_changed (ctrl)
   {
     var form = <?php echo $this->js_form_name (); ?>;
     var now_as_text = format_date_time (new Date (), '<?php echo $this->app->date_time_toolkit->formatter->format_string_for (Date_time_format_short_date); ?>');
@@ -387,7 +387,7 @@ class ALBUM_FORM extends FOLDER_FORM
     }
   }
 
-  function on_pic_size_constraint_changed (ctrl)
+  public function on_pic_size_constraint_changed (ctrl)
   {
     var ctrls_disabled = ! ctrl.checked;
     var form = <?php echo $this->js_form_name (); ?>;
@@ -396,7 +396,7 @@ class ALBUM_FORM extends FOLDER_FORM
     form.max_picture_height.disabled = ctrls_disabled;
   }
 
-  function ensure_trailing_delimiter (path)
+  public function ensure_trailing_delimiter (path)
   {
     if (path.charAt (path.length - 1) != '/')
     {
@@ -405,12 +405,12 @@ class ALBUM_FORM extends FOLDER_FORM
     return path;
   }
 
-  function on_url_root_changed (ctrl)
+  public function on_url_root_changed (ctrl)
   {
     ctrl.value = ensure_trailing_delimiter (ctrl.value.toLowerCase ());
   }
   
-  function on_url_root_enabled_changed (ctrl)
+  public function on_url_root_enabled_changed (ctrl)
   {
     var form = <?php echo $this->js_form_name (); ?>;
     form.url_root.disabled = ! ctrl.checked;
@@ -426,7 +426,7 @@ class ALBUM_FORM extends FOLDER_FORM
   var parent_url_root = "<?php echo $parent_url_root; ?>";
   var last_title = "<?php echo $this->value_for ('title'); ?>";
 
-  function normalize_string (s)
+  public function normalize_string (s)
   {
     if (s)
     {
@@ -441,12 +441,12 @@ class ALBUM_FORM extends FOLDER_FORM
     return s.toLowerCase ();
   }
 
-  function on_title_changed (ctrl)
+  public function on_title_changed (ctrl)
   {
     /* Basically, if the current url root (path) is the same as the one that
        would be automatically set (based on the previous title), then keep the
        url root in sync. If the user has modified the URL root, then do nothing.
-    */
+   */
     if (adjust_url_root && is_selected (ctrl.form.location, 'local'))
     {
       var auto_url_root = parent_url_root + normalize_string (last_title);
@@ -465,7 +465,7 @@ class ALBUM_FORM extends FOLDER_FORM
    * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_controls ($renderer)
+  protected function _draw_controls ($renderer)
   {
     $renderer->start ();
 
@@ -478,7 +478,7 @@ class ALBUM_FORM extends FOLDER_FORM
     if ($this->visible ('location'))
     {
       $props = $renderer->make_list_properties ();
-      $props->show_descriptions = TRUE;
+      $props->show_descriptions = true;
       $props->add_item ('Local', Album_location_type_local, 'Store pictures on this server under URL Root; uploading is supported.');
       $props->add_item ('Remote', Album_location_type_remote, 'Retrieve pictures from another server at URL Root; uploading is <b>not</b> supported.');
       $renderer->draw_radio_group_row ('location', $props);
@@ -490,7 +490,7 @@ class ALBUM_FORM extends FOLDER_FORM
     
     $item = $renderer->make_check_properties ();
     $item->on_click_script = 'on_url_root_enabled_changed (this)';
-    $item->smart_wrapping = TRUE;
+    $item->smart_wrapping = true;
     
     $renderer->draw_check_box_row ('url_root_enabled', $item);
     
@@ -500,11 +500,11 @@ class ALBUM_FORM extends FOLDER_FORM
     $options->width = '12em';
 
     $renderer->start_row ('Dates');
-    $renderer->start_block (TRUE);
+    $renderer->start_block (true);
 
     $props = $renderer->make_list_properties ();
     $props->on_click_script = 'on_day_mode_changed (this)';
-    $props->show_descriptions = TRUE;
+    $props->show_descriptions = true;
     $props->width = '30em';
     $props->add_item ('One day', Album_is_single_day, 'For parties or sporting events.');
     $props->add_item ('Several days', Album_is_span, 'For trips; both first and last day are fixed.');
@@ -528,9 +528,9 @@ class ALBUM_FORM extends FOLDER_FORM
     $renderer->draw_separator ();
 
     $renderer->start_row ('Settings');
-    $renderer->start_block (TRUE);
+    $renderer->start_block (true);
       $props = $renderer->make_list_properties ();
-      $props->show_descriptions = TRUE;
+      $props->show_descriptions = true;
       $props->width = '30em';
 
       $props->add_item ('is_visible', 1);
@@ -572,7 +572,7 @@ class ALBUM_FORM extends FOLDER_FORM
     $renderer->draw_separator ();
     $renderer->draw_submit_button_row ();
 
-    $this->_draw_history_item_controls ($renderer, FALSE);
+    $this->_draw_history_item_controls ($renderer, false);
 
     $renderer->finish ();
   }
@@ -581,7 +581,7 @@ class ALBUM_FORM extends FOLDER_FORM
    * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_cover_picture ($renderer)
+  protected function _draw_cover_picture ($renderer)
   {
     if ($this->object_exists ())
     {
@@ -594,7 +594,7 @@ class ALBUM_FORM extends FOLDER_FORM
         $main_picture = $pic_query->object_at_id ($main_picture_id);
       }
 
-      $renderer->start_block (TRUE);
+      $renderer->start_block (true);
       $renderer->start_row ();
 
       if (isset ($main_picture))

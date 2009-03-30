@@ -53,7 +53,7 @@ class ATTACHMENT_RENDERER extends CONTENT_OBJECT_RENDERER
    * @param ATTACHMENT $obj
    * @access private
    */
-  function _display_as_html ($obj)
+  protected function _display_as_html ($obj)
   {
     echo '<div style="float: left">';
     echo $obj->icon_as_html ('50px');
@@ -90,7 +90,9 @@ class ATTACHMENT_RENDERER extends CONTENT_OBJECT_RENDERER
       $this->_draw_html_image ($obj, $file_url);
     }
     elseif ($obj->is_archive)
+    {
       $this->_draw_html_archive ($obj, $file_name);
+    }
     else
     {
       echo $this->_echo_html_description ($obj);
@@ -107,7 +109,7 @@ class ATTACHMENT_RENDERER extends CONTENT_OBJECT_RENDERER
    * @param string $file_url
    * @access private
    */
-  function _draw_html_image ($obj, $file_url)
+  protected function _draw_html_image ($obj, $file_url)
   {
     $class_name = $this->app->final_class_name ('IMAGE_METRICS', 'webcore/util/image.php');
     $metrics = new $class_name ();
@@ -156,7 +158,7 @@ class ATTACHMENT_RENDERER extends CONTENT_OBJECT_RENDERER
    * @param string $file_name
    * @access private
    */
-  function _draw_html_archive ($obj, $file_name)
+  protected function _draw_html_archive ($obj, $file_name)
   {
     echo $this->_echo_html_description ($obj);
 
@@ -178,7 +180,6 @@ class ATTACHMENT_RENDERER extends CONTENT_OBJECT_RENDERER
       {
         $handle = fopen ($file_name, 'r+');
         echo fread ($handle, $this->_options->preferred_text_length);
-        $finished = FALSE;
       }
       else
       {
@@ -193,7 +194,7 @@ class ATTACHMENT_RENDERER extends CONTENT_OBJECT_RENDERER
    * @param object $entry
    * @access private
    */
-  function _display_as_plain_text ($obj)
+  protected function _display_as_plain_text ($obj)
   {
     $this->_echo_plain_text_user_information ($obj);
 
@@ -218,7 +219,6 @@ class ATTACHMENT_RENDERER extends CONTENT_OBJECT_RENDERER
       {
         $handle = fopen ($file_name, 'r+');
         echo fread ($handle, $this->_options->preferred_text_length);
-        $finished = FALSE;
       }
       else
       {
@@ -233,7 +233,7 @@ class ATTACHMENT_RENDERER extends CONTENT_OBJECT_RENDERER
    * @param string $file_name
    * @access private
    */
-  function _draw_text_archive ($obj, $file_name)
+  protected function _draw_text_archive ($obj, $file_name)
   {
     $class_name = $this->app->final_class_name ('ARCHIVE', 'webcore/util/archive.php');
     $archive = new $class_name ($file_name);      
@@ -242,7 +242,9 @@ class ATTACHMENT_RENDERER extends CONTENT_OBJECT_RENDERER
     $this->_longest_name = 0;
     $archive->for_each (new CALLBACK_METHOD ('list_file_as_text', $this));
     foreach ($this->_file_entries as $entry)
+    {
       echo $this->_line ($entry->name . str_repeat (' ', $this->_longest_name - strlen ($entry->name)) . ' (' . file_size_as_text ($entry->size) . ')');
+    }
   }
   
   /**
@@ -253,7 +255,7 @@ class ATTACHMENT_RENDERER extends CONTENT_OBJECT_RENDERER
    * @param CALLBACK $error_callback Function prototype: function ({@link COMPRESSED_FILE} $archive, string $msg, {@link COMPRESSED_FILE_ENTRY} $entry)
    * @access private
    */
-  function list_file_as_html ($archive, $entry, $error_callback = null)
+  public function list_file_as_html ($archive, $entry, $error_callback = null)
   {
     $ft = $this->context->file_type_manager ();
     $url = new FILE_URL ($entry->name);
@@ -271,7 +273,7 @@ class ATTACHMENT_RENDERER extends CONTENT_OBJECT_RENDERER
    * @param CALLBACK $error_callback Function prototype: function ({@link COMPRESSED_FILE} $archive, string $msg, {@link COMPRESSED_FILE_ENTRY} $entry)
    * @access private
    */
-  function list_file_as_text ($archive, $entry, $error_callback = null)
+  public function list_file_as_text ($archive, $entry, $error_callback = null)
   {
     $this->_file_entries [] = $entry;
     $this->_longest_name = max ($this->_longest_name, strlen ($entry->name));
@@ -282,6 +284,7 @@ class ATTACHMENT_RENDERER extends CONTENT_OBJECT_RENDERER
    * @access private
    */
   protected $_longest_name;
+
   /**
    * @var array[COMPRESSED_FILE_ENTRY]
    * @see COMPRESSED_FILE_ENTRY

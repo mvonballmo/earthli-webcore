@@ -35,7 +35,7 @@ class PROJECTS_15_16_MIGRATOR_TASK extends UPGRADE_PER_APP_23_24_TASK
   public $version_from = '1.5.0';
   public $version_to = '1.6.0';
 
-  function _execute ()
+  protected function _execute ()
   {
     log_open_block ("Repairing change to branch map...");
 

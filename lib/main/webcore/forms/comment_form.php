@@ -51,7 +51,7 @@ class COMMENT_FORM extends ATTACHMENT_HOST_FORM
   /**
    * @param FOLDER $folder Object belongs in this folder.
    */
-  function COMMENT_FORM ($folder)
+  public function COMMENT_FORM ($folder)
   {
     ATTACHMENT_HOST_FORM::ATTACHMENT_HOST_FORM ($folder);
 
@@ -68,18 +68,18 @@ class COMMENT_FORM extends ATTACHMENT_HOST_FORM
     $field->id = 'parent_id';
     $field->title = 'Parent Id';
     $field->min_value = 0;
-    $field->visible = FALSE;
+    $field->visible = false;
     $this->add_field ($field);
 
     $field = $this->_fields ['title'];
-    $field->required = FALSE;
+    $field->required = false;
   }
 
   /**
    * Load initial properties from this comment.
    * @param COMMENT $obj
    */
-  function load_from_object ($obj)
+  public function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
 
@@ -98,7 +98,7 @@ class COMMENT_FORM extends ATTACHMENT_HOST_FORM
     $this->set_value ('publication_state', History_item_silent);
   }
 
-  function load_with_defaults ()
+  public function load_with_defaults ()
   {
     parent::load_with_defaults ();
     $this->set_value ('parent_id', read_var ('parent_id', 0));
@@ -110,7 +110,7 @@ class COMMENT_FORM extends ATTACHMENT_HOST_FORM
    * @param COMMENT $obj
    * @access private
    */
-  function _post_validate ($obj)
+  protected function _post_validate ($obj)
   {
     parent::_post_validate ($obj);
 
@@ -122,10 +122,10 @@ class COMMENT_FORM extends ATTACHMENT_HOST_FORM
 
   /**
    * Store the form's values to this comment.
-    * @param COMMENT $obj
-    * @access private
-    */
-  function _store_to_object ($obj)
+   * @param COMMENT $obj
+   * @access private
+   */
+  protected function _store_to_object ($obj)
   {
     $obj->kind = $this->value_for ('kind');
     $obj->parent_id = $this->value_for ('parent_id');
@@ -137,7 +137,7 @@ class COMMENT_FORM extends ATTACHMENT_HOST_FORM
    * Return true to use integrated captcha verification.
    * @return boolean
    */
-  function _captcha_enabled ()
+  protected function _captcha_enabled ()
   {
     return $this->login->is_anonymous ();
   }
@@ -146,7 +146,7 @@ class COMMENT_FORM extends ATTACHMENT_HOST_FORM
    * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_controls ($renderer)
+  protected function _draw_controls ($renderer)
   {
     $renderer->start ();
 
@@ -185,7 +185,7 @@ class COMMENT_FORM extends ATTACHMENT_HOST_FORM
     $renderer->draw_separator ();
     $renderer->draw_submit_button_row ();
 
-    $this->_draw_history_item_controls ($renderer, FALSE);
+    $this->_draw_history_item_controls ($renderer, false);
 
     $renderer->finish ();
   }

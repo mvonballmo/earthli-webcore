@@ -58,7 +58,7 @@ class JOB_GRID extends PROJECT_ENTRY_GRID
    * @param JOB $obj
    * @param JOB_BRANCH_INFO $branch_info
    */
-  function _draw_release_details ($obj, $branch_info)
+  protected function _draw_release_details ($obj, $branch_info)
   {
     $rel = $branch_info->release ();
     if (isset ($rel))
@@ -84,10 +84,10 @@ class JOB_GRID extends PROJECT_ENTRY_GRID
    * @param JOB $obj
    * @param JOB_BRANCH_INFO $branch_info
    */
-  function _draw_user_details ($obj, $branch_info)
+  protected function _draw_user_details ($obj, $branch_info)
   {
     // PHP 4.4x HACK
-    $branch_info->_entry = $obj;
+//    $branch_info->_entry = $obj;
 
     $is_closed = $branch_info->is_closed ();
 
@@ -175,12 +175,12 @@ class JOB_GRID extends PROJECT_ENTRY_GRID
 
   /**
    * @param JOB $obj Get the title formatter from this job.
-    * Jobs format open jobs with the default 'field' style, whereas closed jobs
-    * are formatted with no style (usually rendered as non-bold).
-    * @return TITLE_FORMATTER
-    * @access private
-    */
-  function title_formatter ($obj)
+   * Jobs format open jobs with the default 'field' style, whereas closed jobs
+   * are formatted with no style (usually rendered as non-bold).
+   * @return TITLE_FORMATTER
+   * @access private
+   */
+  public function title_formatter ($obj)
   {
     $Result = parent::title_formatter ($obj);
     $branch_info = $obj->main_branch_info ();

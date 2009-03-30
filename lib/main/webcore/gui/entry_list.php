@@ -51,14 +51,14 @@ class ENTRY_LIST extends SELECT_LIST
 {
   /**
    * @var string
-    * @access private
-    */
+   * @access private
+   */
   public $object_name = 'object';
 
   /**
    * @param APPLICATION $app Main application.
    */
-  function ENTRY_LIST ($app)
+  public function ENTRY_LIST ($app)
   {
     SELECT_LIST::SELECT_LIST ($app);
     $this->append_column ('Name');
@@ -68,11 +68,11 @@ class ENTRY_LIST extends SELECT_LIST
 
   /**
    * Draw the given column's data using the given object.
-    * @param ENTRY $obj
-    * @param integer $index
-    * @access private
-    */
-  function _draw_column_contents ($obj, $index)
+   * @param ENTRY $obj
+   * @param integer $index
+   * @access private
+   */
+  protected function _draw_column_contents ($obj, $index)
   {
     switch ($index)
     {

@@ -53,7 +53,7 @@ class AUDITABLE_RENDERER extends OBJECT_RENDERER
   * @param AUDITABLE $obj
   * @access private
   */
-  function _display_as_html ($obj)
+  protected function _display_as_html ($obj)
   {
     $this->_echo_html_user_information ($obj);
   }
@@ -65,7 +65,7 @@ class AUDITABLE_RENDERER extends OBJECT_RENDERER
    * @param string $CSS_class
    * @access private
    */
-  function _echo_html_user_information ($obj, $CSS_class = 'info-box-top')
+  protected function _echo_html_user_information ($obj, $CSS_class = 'info-box-top')
   {
     if ($this->_options->show_users)
     {
@@ -81,7 +81,7 @@ class AUDITABLE_RENDERER extends OBJECT_RENDERER
    * @param AUDITABLE $obj
    * @access private
    */
-  function _echo_html_users ($obj)
+  protected function _echo_html_users ($obj)
   {
     $this->_echo_html_user ('Created', $obj->creator (), $obj->time_created);
     if ($obj->modified ())
@@ -99,7 +99,7 @@ class AUDITABLE_RENDERER extends OBJECT_RENDERER
    *    * @param DATE_TIME $time
    * @access private
    */
-  function _echo_html_user ($caption, $user, $time)
+  protected function _echo_html_user ($caption, $user, $time)
   {
     echo "<div>\n";
     echo $caption . ' by ' . $user->title_as_link () . ' on ' . $time->format () . "\n";
@@ -113,7 +113,7 @@ class AUDITABLE_RENDERER extends OBJECT_RENDERER
    * @param string $kind Can be any of the {@link Subscribe_constants}.
    * @access private
    */
-  function _echo_html_subscribed_toggle ($obj, $page_name, $kind)
+  protected function _echo_html_subscribed_toggle ($obj, $page_name, $kind)
   {
     if ($this->_options->show_interactive)
     {
@@ -167,7 +167,7 @@ class AUDITABLE_RENDERER extends OBJECT_RENDERER
   * @param AUDITABLE $obj
   * @access private
   */
-  function _display_as_plain_text ($obj)
+  protected function _display_as_plain_text ($obj)
   {
     $this->_echo_plain_text_user_information ($obj);
   }
@@ -179,7 +179,7 @@ class AUDITABLE_RENDERER extends OBJECT_RENDERER
    * @param boolean $top_aligned Shown before the description?
    * @access private
    */
-  function _echo_plain_text_user_information ($obj, $top_aligned = TRUE)
+  protected function _echo_plain_text_user_information ($obj, $top_aligned = true)
   {
     if ($this->_options->show_users)
     {
@@ -203,7 +203,7 @@ class AUDITABLE_RENDERER extends OBJECT_RENDERER
    * @param AUDITABLE $obj
    * @access private
    */
-  function _echo_plain_text_users ($obj)
+  protected function _echo_plain_text_users ($obj)
   {
     $this->_echo_plain_text_user ('Created', $obj->creator (), $obj->time_created);
     if ($obj->modified ())
@@ -220,7 +220,7 @@ class AUDITABLE_RENDERER extends OBJECT_RENDERER
    * @param DATE_TIME $time
    * @access private
    */
-  function _echo_plain_text_user ($caption, $user, $time)
+  protected function _echo_plain_text_user ($caption, $user, $time)
   {
     echo $this->_line ($caption . ' by ' . $user->title_as_plain_text () . ' on ' . $this->_time ($time));
   }

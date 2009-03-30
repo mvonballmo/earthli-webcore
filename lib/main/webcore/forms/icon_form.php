@@ -51,26 +51,26 @@ class ICON_FORM extends RENDERABLE_FORM
   /**
    * @param APPLICATION $app Main application.
    */
-  function ICON_FORM ($app)
+  public function ICON_FORM ($app)
   {
     UNIQUE_OBJECT_FORM::UNIQUE_OBJECT_FORM ($app);
 
     $field = new MUNGER_TITLE_FIELD ();
     $field->id = 'title';
     $field->title = 'Title';
-    $field->required = TRUE;
+    $field->required = true;
     $this->add_field ($field);
 
     $field = new TITLE_FIELD ();
     $field->id = 'category';
     $field->title = 'Category';
-    $field->required = FALSE;
+    $field->required = false;
     $this->add_field ($field);
 
     $field = new URI_FIELD ();
     $field->id = 'url';
     $field->title = 'URL';
-    $field->required = TRUE;
+    $field->required = true;
     $this->add_field ($field);
   }
 
@@ -78,7 +78,7 @@ class ICON_FORM extends RENDERABLE_FORM
    * Load initial properties from this object.
    * @param UNIQUE_OBJECT $obj
    */
-  function load_from_object ($obj)
+  public function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
     $this->set_value ('title', $obj->title);
@@ -92,7 +92,7 @@ class ICON_FORM extends RENDERABLE_FORM
    * @access private
    * @abstract
    */
-  function _store_to_object ($obj)
+  protected function _store_to_object ($obj)
   {
     $obj->title = $this->value_for ('title');
     $obj->category = $this->value_for ('category');
@@ -103,7 +103,7 @@ class ICON_FORM extends RENDERABLE_FORM
    * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_controls ($renderer)
+  protected function _draw_controls ($renderer)
   {
     $renderer->start ();
     $renderer->draw_text_line_row ('title');

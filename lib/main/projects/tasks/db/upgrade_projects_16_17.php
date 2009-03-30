@@ -35,7 +35,7 @@ class PROJECTS_16_17_MIGRATOR_TASK extends UPGRADE_PER_APP_24_25_TASK
   public $version_from = '1.6.0';
   public $version_to = '1.7.0';
 
-  function _execute ()
+  protected function _execute ()
   {
     $this->update_actions ('project_actions', 'project_comments', 'project_folders', 'project_entries');
     $this->update_subscriptions ('project_subscribers', 'project_subscriptions');

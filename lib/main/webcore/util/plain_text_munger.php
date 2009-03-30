@@ -57,7 +57,7 @@ class PLAIN_TEXT_BLOCK_TRANSFORMER extends MUNGER_BLOCK_TRANSFORMER
    * @param boolean $value True if the transformer is being activated.
    * @param MUNGER_TOKEN $token Token that caused the activation.
    */
-  function activate ($munger, $value, $token)
+  public function activate ($munger, $value, $token)
   {
     parent::activate ($munger, $value, $token);
     $this->_indent = $munger->num_spaces;
@@ -75,7 +75,7 @@ class PLAIN_TEXT_BLOCK_TRANSFORMER extends MUNGER_BLOCK_TRANSFORMER
    * @return string
    * @access private
    */
-  function _trim ($text)
+  protected function _trim ($text)
   {
     $len = strlen ($text);
     $first_char = 0;
@@ -123,7 +123,7 @@ class PLAIN_TEXT_BLOCK_TRANSFORMER extends MUNGER_BLOCK_TRANSFORMER
    * @param string $text The text to transform.
    * @access private
    */
-  function _apply_transform ($munger, $text)
+  protected function _apply_transform ($munger, $text)
   {
     $text = $this->_trim ($text);
     $len = strlen ($text);
@@ -218,20 +218,20 @@ class PLAIN_TEXT_PARAGRAPH_TRANSFORMER extends PLAIN_TEXT_BLOCK_TRANSFORMER
    * the first and last newlines in the text.
    * @var boolean
    */
-  public $strict_newlines = TRUE;
+  public $strict_newlines = true;
 
   /**
    * Returns transformed content.
    * @param MUNGER $munger The transformation context.
    * @return string
    */
-  function data ($munger)
+  public function data ($munger)
   {
     $Result = parent::data ($munger);
 
     if ($Result && 
     	  (
-    			($munger->force_paragraphs || (strpos ($Result, "\n") !== FALSE)) &&
+    			($munger->force_paragraphs || (strpos ($Result, "\n") !== false)) &&
      			(substr ($Result, -1) != "\n"))
      	 	)
     {
@@ -258,7 +258,7 @@ class PLAIN_TEXT_QUOTE_TRANSFORMER extends PLAIN_TEXT_BLOCK_TRANSFORMER
    * @param boolean $value True if the transformer is being activated.
    * @param MUNGER_TOKEN $token Token that caused the activation.
    */
-  function activate ($munger, $value, $token)
+  public function activate ($munger, $value, $token)
   {
     parent::activate ($munger, $value, $token);
     if ($value)
@@ -274,7 +274,7 @@ class PLAIN_TEXT_QUOTE_TRANSFORMER extends PLAIN_TEXT_BLOCK_TRANSFORMER
    * @return string
    * @access private
    */
-  function _apply_transform ($munger, $text)
+  protected function _apply_transform ($munger, $text)
   {
     $text = $this->_apply_quotes ($text, $this->_quote_style, '"', '"');
     return parent::_apply_transform ($munger, $text);
@@ -309,7 +309,7 @@ class PLAIN_TEXT_LINK_REPLACER extends MUNGER_REPLACER
    * @param MUNGER_TOKEN $token
    * @return string
    */
-  function transform ($munger, $token)
+  public function transform ($munger, $token)
   {
     if ($token->is_start_tag ())
     {
@@ -352,6 +352,7 @@ class PLAIN_TEXT_LINK_REPLACER extends MUNGER_REPLACER
    * @access private
    */
   protected $_format;
+
   /**
    * The author of the link.
    * Will be displayed after the content text, if specified.
@@ -361,11 +362,13 @@ class PLAIN_TEXT_LINK_REPLACER extends MUNGER_REPLACER
    * @access private
    */
   protected $_author;
+
   /**
    * @var string
    * @access private
    */
   protected $_title;
+
   /**
    * @var string
    * @access private
@@ -392,7 +395,7 @@ class PLAIN_TEXT_MEDIA_REPLACER extends MUNGER_REPLACER
   /**
    * @param string $default_title
    */
-  function PLAIN_TEXT_MEDIA_REPLACER ($default_title)
+  public function PLAIN_TEXT_MEDIA_REPLACER ($default_title)
   {
     $this->_default_title = $default_title;
   }
@@ -403,7 +406,7 @@ class PLAIN_TEXT_MEDIA_REPLACER extends MUNGER_REPLACER
    * @param MUNGER_TOKEN $token
    * @return string
    */
-  function transform ($munger, $token)
+  public function transform ($munger, $token)
   {
     if ($token->is_start_tag ())
     {
@@ -445,6 +448,8 @@ class PLAIN_TEXT_MEDIA_REPLACER extends MUNGER_REPLACER
 
       return $Result;
     }
+    
+    return '';
   }
 
   /**
@@ -452,7 +457,7 @@ class PLAIN_TEXT_MEDIA_REPLACER extends MUNGER_REPLACER
    * @return string
    * @access private
    */
-  function _default_title ()
+  protected function _default_title ()
   {
     return $this->_default_title;
   }
@@ -481,7 +486,7 @@ class PLAIN_TEXT_FOOTNOTE_REFERENCE_REPLACER extends MUNGER_FOOTNOTE_REFERENCE_R
    * @return string
    * @access private
    */
-  function _format_reference ($token, $info)
+  protected function _format_reference ($token, $info)
   {
     return " [$info->number]";
   }
@@ -504,12 +509,14 @@ class PLAIN_TEXT_FOOTNOTE_TEXT_REPLACER extends MUNGER_FOOTNOTE_TEXT_REPLACER
    * @return string
    * @access private
    */
-  function _format_text ($token, $info)
+  protected function _format_text ($token, $info)
   {
     if ($token->is_start_tag ())
     {
       return "[$info->number] ";
     }
+    
+    return '';
   }
 }
 
@@ -529,6 +536,7 @@ class PLAIN_TEXT_LIST_TRANSFORMER extends MUNGER_LIST_TRANSFORMER
    * @var string
    */
   public $default_mark = '*';
+
   /**
    * Amount to indent at each level.
    * @var string
@@ -541,7 +549,7 @@ class PLAIN_TEXT_LIST_TRANSFORMER extends MUNGER_LIST_TRANSFORMER
    * @param boolean $value True if the transformer is being activated.
    * @param MUNGER_TOKEN $token Token that caused the activation.
    */
-  function activate ($munger, $value, $token)
+  public function activate ($munger, $value, $token)
   {
     if ($value)
     {
@@ -564,16 +572,20 @@ class PLAIN_TEXT_LIST_TRANSFORMER extends MUNGER_LIST_TRANSFORMER
    * @return string
    * @access private
    */
-  function _transform_to_list ($munger, $text, $item_was_open)
+  protected function _transform_to_list ($munger, $text, $item_was_open)
   {
     if ($this->_item_is_open && ! $item_was_open)
     {
       $prefix = $this->_make_mark ();
     }
     elseif ($item_was_open && ! $this->_item_is_open)
+    {
       $prefix = $this->_make_mark (' ');
+    }
     elseif (! $this->_item_is_open)
+    {
       $prefix = $this->_make_mark ();
+    }
     else
     {
       $prefix = $this->_make_mark (' ');
@@ -600,10 +612,9 @@ class PLAIN_TEXT_LIST_TRANSFORMER extends MUNGER_LIST_TRANSFORMER
    * @return string
    * @access private
    */
-  function _generate_list_items ($munger, $text)
+  protected function _generate_list_items ($munger, $text)
   {
     $Result = '';
-    $last_pos = 0;
     $text = ltrim ($text, " \t");  // right side is already trimmed in 'apply_transform'.
 
     $lines = explode ("\n", $text);
@@ -629,7 +640,7 @@ class PLAIN_TEXT_LIST_TRANSFORMER extends MUNGER_LIST_TRANSFORMER
    * @param string $mark Optional mark to use instead of the default.
    * @access private
    */
-  function _make_mark ($mark = null)
+  protected function _make_mark ($mark = null)
   {
     if (! isset ($mark))
     {
@@ -650,6 +661,7 @@ class PLAIN_TEXT_LIST_TRANSFORMER extends MUNGER_LIST_TRANSFORMER
    * @var integer
    */
   protected $_depth;
+
   /**
    * Amount of indenting to add when wrapping.
    * @see $_depth
@@ -682,7 +694,7 @@ class PLAIN_TEXT_NUMERIC_LIST_TRANSFORMER extends PLAIN_TEXT_LIST_TRANSFORMER
    * @param string $mark Optional mark to use instead of the default.
    * @access private
    */
-  function _make_mark ($mark = null)
+  protected function _make_mark ($mark = null)
   {
     if (! isset ($mark))
     {
@@ -728,7 +740,7 @@ class PLAIN_TEXT_DEFINITION_LIST_TRANSFORMER extends MUNGER_DEFINITION_LIST_TRAN
    * @param boolean $value True if the transformer is being activated.
    * @param MUNGER_TOKEN $token Token that caused the activation.
    */
-  function activate ($munger, $value, $token)
+  public function activate ($munger, $value, $token)
   {
     parent::activate ($munger, $value, $token);
     if ($value)
@@ -747,7 +759,7 @@ class PLAIN_TEXT_DEFINITION_LIST_TRANSFORMER extends MUNGER_DEFINITION_LIST_TRAN
    * @param MUNGER $munger
    * @return string
    */
-  function data ($munger)
+  public function data ($munger)
   {
     return rtrim (parent::data ($munger));
   }
@@ -759,7 +771,7 @@ class PLAIN_TEXT_DEFINITION_LIST_TRANSFORMER extends MUNGER_DEFINITION_LIST_TRAN
    * @param string $line
    * @access private
    */
-  function _build_as_definition_term ($munger, $line)
+  protected function _build_as_definition_term ($munger, $line)
   {
     return "$line\n";
   }
@@ -771,7 +783,7 @@ class PLAIN_TEXT_DEFINITION_LIST_TRANSFORMER extends MUNGER_DEFINITION_LIST_TRAN
    * @param string $line
    * @access private
    */
-  function _build_as_definition_body ($munger, $line)
+  protected function _build_as_definition_body ($munger, $line)
   {
     $Result = "\n\n";
     if ($line)
@@ -815,7 +827,7 @@ class PLAIN_TEXT_PREFORMATTED_TRANSFORMER extends MUNGER_TRANSFORMER
    * @param string $text
    * @return string
    */
-  function _apply_transform ($munger, $text)
+  protected function _apply_transform ($munger, $text)
   {
     $len = strlen ($text);
     $first_char = 0;
@@ -866,7 +878,7 @@ class PLAIN_TEXT_BOX_REPLACER extends MUNGER_REPLACER
    * @param MUNGER_TOKEN $token
    * @return string
    */
-  function transform ($munger, $token)
+  public function transform ($munger, $token)
   {
     if ($token->is_start_tag ())
     {
@@ -886,6 +898,8 @@ class PLAIN_TEXT_BOX_REPLACER extends MUNGER_REPLACER
         return "\n" . str_repeat ('-', strlen ($this->_title) + 4);
       }
     }
+    
+    return '';
   }
 }
 
@@ -907,12 +921,14 @@ class PLAIN_TEXT_HORIZONTAL_RULE_REPLACER extends MUNGER_REPLACER
    * @param MUNGER_TOKEN $token
    * @return string
    */
-  function transform ($munger, $token)
+  public function transform ($munger, $token)
   {
     if ($token->is_start_tag ())
     {
       return str_repeat ('-', $munger->available_width ()) . "\n";
     }
+    
+    return '';
   }
 }
 
@@ -946,7 +962,7 @@ class PLAIN_TEXT_PUNCTUATION_CONVERTER extends MUNGER_CONVERTER
    * @return string
    * @access private
    */
-  function _convert ($munger, $text)
+  protected function _convert ($munger, $text)
   {
     return strtr ($text, $this->punctuation_table);
   }
@@ -967,32 +983,35 @@ class TEXT_MUNGER extends MUNGER
    * @var integer
    */
   public $num_indents;
+
   /**
    * Current indenting level.
    * @var integer
    * @access private
    */
   public $num_spaces = 0;
+
   /**
    * Wrap all text to this right margin.
    * @var integer
    */
   public $right_margin = 72;
+
   /**
    * Disables wrapping in paragraphs when True.
    * The {@link PLAIN_TEXT_DEFINITION_LIST_TRANSFORMER} sets this to prevent nested
    * paragraphs from wrapping their text. The list takes care of all wrapping when it
    * is generated.
    */
-  public $disable_default_wrapping = FALSE;
+  public $disable_default_wrapping = false;
 
-  function increase_indent_by ($num_spaces)
+  public function increase_indent_by ($num_spaces)
   {
     $this->num_indents++;
     $this->num_spaces += $num_spaces;
   }
 
-  function decrease_indent_by ($num_spaces)
+  public function decrease_indent_by ($num_spaces)
   {
     $this->num_indents--;
     $this->num_spaces -= $num_spaces;
@@ -1009,19 +1028,19 @@ class TEXT_MUNGER extends MUNGER
    * @param string $text
    * @return string
    */
-  function wrap ($text, $left_margin)
+  public function wrap ($text, $left_margin)
   {
     $desired_width = $this->right_margin - $left_margin;
 
     $non_indent_text = ltrim ($text);
     $newline_pos = strpos ($non_indent_text, "\n");
-    $wrap_needed = ($newline_pos === FALSE);
+    $wrap_needed = ($newline_pos === false);
 
     if (! $wrap_needed)
     {
       $space_pos = strpos ($non_indent_text, ' ');
       $wrap_needed = ($space_pos < $newline_pos) && ($newline_pos > $desired_width);
-      while (($newline_pos !== FALSE) && ! $wrap_needed)
+      while (($newline_pos !== false) && ! $wrap_needed)
       {
         $non_indent_text = substr ($non_indent_text, $newline_pos + 1);
         $non_indent_text = ltrim ($non_indent_text);
@@ -1048,7 +1067,7 @@ class TEXT_MUNGER extends MUNGER
    * Adjusted for the {@link $right_margin} and {@link $num_spaces}.
    * @return integer
    */
-  function available_width ()
+  public function available_width ()
   {
     return $this->right_margin - $this->num_spaces;
   }
@@ -1058,7 +1077,7 @@ class TEXT_MUNGER extends MUNGER
    * @var string $input
    * @return string
    */
-  function transform ($input, $context_object = null)
+  public function transform ($input, $context_object = null)
   {
     $this->num_indents = 0;
     $this->num_spaces = 0;
@@ -1071,7 +1090,7 @@ class TEXT_MUNGER extends MUNGER
    * @return string
    * @access private
    */
-  function _known_tag_as_text ($token)
+  protected function _known_tag_as_text ($token)
   {
     return '';
   }
@@ -1080,7 +1099,7 @@ class TEXT_MUNGER extends MUNGER
    * Show ellipses after the text to indicate truncation.
    * @access private
    */
-  function _truncate ()
+  protected function _truncate ()
   {
     parent::_truncate ();
     $this->_add_text_to_output ('...');
@@ -1096,7 +1115,7 @@ class TEXT_MUNGER extends MUNGER
  */
 class PLAIN_TEXT_MUNGER extends TEXT_MUNGER
 {
-  function PLAIN_TEXT_MUNGER ()
+  public function PLAIN_TEXT_MUNGER ()
   {
     TEXT_MUNGER::TEXT_MUNGER ();
 
@@ -1113,27 +1132,27 @@ class PLAIN_TEXT_MUNGER extends TEXT_MUNGER
     $this->register_transformer ('pre', new PLAIN_TEXT_PREFORMATTED_TRANSFORMER ());
     $this->register_transformer ('h', new MUNGER_NOP_TRANSFORMER ());
 
-    $this->register_replacer ('macro', new MUNGER_MACRO_REPLACER (), FALSE);
+    $this->register_replacer ('macro', new MUNGER_MACRO_REPLACER (), false);
     $this->register_replacer ('page', new MUNGER_PAGE_REPLACER ());
     $this->register_replacer ('hr', new PLAIN_TEXT_HORIZONTAL_RULE_REPLACER ());
     $this->register_replacer ('iq', new MUNGER_BASIC_REPLACER ('"', '"'));
     $this->register_replacer ('h', new MUNGER_BASIC_REPLACER ('[', ']'));
     $this->register_replacer ('box', new PLAIN_TEXT_BOX_REPLACER ());
     $this->register_replacer ('a', new PLAIN_TEXT_LINK_REPLACER ());
-    $this->register_replacer ('img', new PLAIN_TEXT_MEDIA_REPLACER ('image'), FALSE);
-    $this->register_replacer ('media', new PLAIN_TEXT_MEDIA_REPLACER ('media'), FALSE);
-    $this->register_replacer ('fn', new PLAIN_TEXT_FOOTNOTE_REFERENCE_REPLACER (), FALSE);
+    $this->register_replacer ('img', new PLAIN_TEXT_MEDIA_REPLACER ('image'), false);
+    $this->register_replacer ('media', new PLAIN_TEXT_MEDIA_REPLACER ('media'), false);
+    $this->register_replacer ('fn', new PLAIN_TEXT_FOOTNOTE_REFERENCE_REPLACER (), false);
     $this->register_replacer ('ft', new PLAIN_TEXT_FOOTNOTE_TEXT_REPLACER ());
 
-    $this->register_known_tag ('i', TRUE);
-    $this->register_known_tag ('n', TRUE);
-    $this->register_known_tag ('b', TRUE);
-    $this->register_known_tag ('c', TRUE);
-    $this->register_known_tag ('hl', TRUE);
-    $this->register_known_tag ('span', TRUE);
-    $this->register_known_tag ('hr', TRUE);
-    $this->register_known_tag ('cb', TRUE);
-    $this->register_known_tag ('anchor', TRUE);
+    $this->register_known_tag ('i', true);
+    $this->register_known_tag ('n', true);
+    $this->register_known_tag ('b', true);
+    $this->register_known_tag ('c', true);
+    $this->register_known_tag ('hl', true);
+    $this->register_known_tag ('span', true);
+    $this->register_known_tag ('hr', true);
+    $this->register_known_tag ('cb', true);
+    $this->register_known_tag ('anchor', true);
 
     $this->register_converter ('tags', new MUNGER_HTML_CONVERTER ());
     $this->register_converter ('punctuation', new PLAIN_TEXT_PUNCTUATION_CONVERTER ());
@@ -1153,18 +1172,18 @@ class PLAIN_TEXT_TITLE_MUNGER extends TEXT_MUNGER
   /**
    * @var boolean
    */
-  public $force_paragraphs = FALSE;
+  public $force_paragraphs = false;
 
-  function PLAIN_TEXT_TITLE_MUNGER ()
+  public function PLAIN_TEXT_TITLE_MUNGER ()
   {
     TEXT_MUNGER::TEXT_MUNGER ();
 
     $this->_default_transformer = new MUNGER_NOP_TRANSFORMER ();
-    $this->register_known_tag ('macro', TRUE);
-    $this->register_known_tag ('i', TRUE);
-    $this->register_known_tag ('b', TRUE);
-    $this->register_known_tag ('c', TRUE);
-    $this->register_known_tag ('hl', TRUE);
+    $this->register_known_tag ('macro', true);
+    $this->register_known_tag ('i', true);
+    $this->register_known_tag ('b', true);
+    $this->register_known_tag ('c', true);
+    $this->register_known_tag ('hl', true);
 
     $this->register_converter ('tags', new MUNGER_HTML_CONVERTER ());
     $this->register_converter ('punctuation', new PLAIN_TEXT_PUNCTUATION_CONVERTER ());

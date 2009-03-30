@@ -56,7 +56,7 @@ class PURGE_BRANCH_FORM extends PURGE_OBJECT_FORM
   /**
    * @param APPLICATION $app
    */
-  function PURGE_BRANCH_FORM ($app)
+  public function PURGE_BRANCH_FORM ($app)
   {
     PURGE_OBJECT_FORM::PURGE_OBJECT_FORM ($app);
 
@@ -70,17 +70,17 @@ class PURGE_BRANCH_FORM extends PURGE_OBJECT_FORM
 
   /**
    * Delete the given object.
-    * @param BRANCH $obj
-    * @access private
-    */
-  function commit ($obj)
+   * @param BRANCH $obj
+   * @access private
+   */
+  public function commit ($obj)
   {
     $options = new PURGE_OPTIONS ();
     $options->sub_history_item_publication_state = $this->value_for ('sub_history_item_publication_state');
     $obj->purge ($options);
   }
 
-  function load_from_object ($obj)
+  public function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
     $this->set_value ('sub_history_item_publication_state', History_item_silent);
@@ -90,14 +90,14 @@ class PURGE_BRANCH_FORM extends PURGE_OBJECT_FORM
    * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_controls ($renderer)
+  protected function _draw_controls ($renderer)
   {
     $renderer->start ();
     $renderer->draw_text_row ('', 'Are you sure you want to purge ' . $this->_object->title_as_link () . '?');
     $renderer->draw_separator ();
 
     $props = $renderer->make_list_properties ();
-    $props->show_descriptions = TRUE;
+    $props->show_descriptions = true;
     $props->add_item ('Publish branch only', History_item_silent, 'Generate a single notification indicating that the branch was purged.');
     $props->add_item ('Publish all', History_item_needs_send, 'Generate individual notifications for affected jobs and changes.');
     $renderer->draw_radio_group_row ('sub_history_item_publication_state', $props);

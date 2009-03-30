@@ -52,62 +52,77 @@ class APPLICATION_PAGE_NAMES
    * @var string
    */
   public $folder_home = 'view_folder.php';
+
   /**
    * @var string
    */
   public $folder_permissions_home = 'view_folder_permissions.php';
+
   /**
    * @var string
    */
   public $folder_subscriptions_home = 'view_folder_subscriptions.php';
+
   /**
    * @var string
    */
   public $comment_home = 'view_comment.php';
+
   /**
    * @var string
    */
   public $entry_home = 'view_entry.php';
+
   /**
    * @var string
    */
   public $group_home = 'view_group.php';
+
   /**
    * @var string
    */
   public $user_home = 'view_user.php';
+
   /**
    * @var string
    */
   public $history_item_home = 'view_history_item.php';
+
   /**
    * @var string
    */
   public $search_home = 'view_search.php';
+
   /**
    * @var string
    */
   public $attachment_home = 'view_attachment.php';
+
   /**
    * @var string
    */
   public $user_subscriptions_home = 'view_user_subscriptions.php';
+
   /**
    * @var string
    */
   public $user_create = 'create_user.php';
+
   /**
    * @var string
    */
   public $log_in = 'log_in.php';
+
   /**
    * @var string
    */
   public $log_out = 'log_out.php';
+
   /**
    * @var string
    */
   public $offline = 'offline.php';
+
   /**
    * @var string
    */
@@ -131,62 +146,77 @@ class APPLICATION_TABLE_NAMES
    * @var string
    */
   public $folders = 'folders';
+
   /**
    * @var string
    */
   public $entries = 'entries';
+
   /**
    * @var string
    */
   public $comments = 'comments';
+
   /**
    * @var string
    */
   public $user_permissions = 'user_permissions';
+
   /**
    * @var string
    */
   public $folder_permissions = 'folder_permissions';
+
   /**
    * @var string
    */
   public $subscriptions = 'subscriptions';
+
   /**
    * @var string
    */
   public $subscribers = 'subscribers';
+
   /**
    * @var string
    */
   public $history_items = 'history_items';
+
   /**
    * @var string
    */
   public $users = 'users';
+
   /**
    * @var string
    */
   public $groups = 'groups';
+
   /**
    * @var string
    */
   public $users_to_groups = 'users_to_groups';
+
   /**
    * @var string
    */
   public $icons = 'icons';
+
   /**
    * @var string
    */
   public $themes = 'themes';
+
   /**
    * @var string
    */
   public $searches = 'searches';
+
   /**
    * @var string
    */
   public $attachments = 'attachments';
+
   /**
    * @var string
    */
@@ -214,7 +244,7 @@ class APPLICATION_DISPLAY_OPTIONS extends CONTEXT_DISPLAY_OPTIONS
    * @see PROPERTY_VALUE
    * @return array[PROPERTY_VALUE]
    */
-  function comment_icons ()
+  public function comment_icons ()
   {
     if (! isset ($this->_comment_icons))
     {
@@ -229,7 +259,7 @@ class APPLICATION_DISPLAY_OPTIONS extends CONTEXT_DISPLAY_OPTIONS
    * @param string $icon Location of an image.
    * @param integer $value Value stored in the database.
    */
-  function add_comment_icon ($value, $title, $icon)
+  public function add_comment_icon ($value, $title, $icon)
   {
     include_once ('webcore/sys/property.php');
     $prop = new PROPERTY_VALUE ($this->context);
@@ -244,7 +274,7 @@ class APPLICATION_DISPLAY_OPTIONS extends CONTEXT_DISPLAY_OPTIONS
    * Called from {@link comment_icons()}.
    * @access private
    */
-  function _init_comment_icons ()
+  protected function _init_comment_icons ()
   {
     $this->add_comment_icon (0, 'Information', 'information');
     $this->add_comment_icon (1, 'Question', 'question');
@@ -292,24 +322,28 @@ class APPLICATION_MAIL_OPTIONS extends CONTEXT_MAIL_OPTIONS
    * @var string
    */
   public $publisher_user_name = 'auto-publisher';
+
   /**
    * Specifies how much of an entry to send by default.
-    * Used when sending a single entry or when publishing.
-    * @var integer
-    */
+   * Used when sending a single entry or when publishing.
+   * @var integer
+   */
   public $excerpt_length = 500;
+
   /**
    * How many emails can an anonymous user send an entry to?
-    * Used only when sending entries directly.
-    * @var integer
-    */
+   * Used only when sending entries directly.
+   * @var integer
+   */
   public $max_anonymous_recipients = 5;
+
   /**
    * How many emails can a registered user send an entry to?
-    * Used only when sending entries directly.
-    * @var integer
-    */
+   * Used only when sending entries directly.
+   * @var integer
+   */
   public $max_registered_recipients = 20;
+
   /**
    * Character used separate objects in titles.
    * @var string
@@ -328,42 +362,51 @@ class APPLICATION_USER_OPTIONS
   /**
    * @var boolean
    */
-  public $users_can_be_deleted = FALSE;
+  public $users_can_be_deleted = false;
+
   /**
    * @var boolean
    */
-  public $users_can_be_purged = FALSE;
+  public $users_can_be_purged = false;
+
   /**
    * Can users modify their own content (regardless of their rights in this folder?
-    * @var boolean
-    */
-  public $users_can_modify_own_content = TRUE;
+   * @var boolean
+   */
+  public $users_can_modify_own_content = true;
+
   /**
    * Can users delete their own content (regardless of their rights in this folder?
-    * @var boolean
-    */
-  public $users_can_delete_own_content = TRUE;
+   * @var boolean
+   */
+  public $users_can_delete_own_content = true;
+
   /**
    * Can users purge their own content (regardless of their rights in this folder?
-    * @var boolean
-    */
-  public $users_can_purge_own_content = FALSE;
+   * @var boolean
+   */
+  public $users_can_purge_own_content = false;
+
   /**
    * @var boolean
    */
-  public $users_can_edit_self = TRUE;
+  public $users_can_edit_self = true;
+
   /**
    * @var boolean
    */
-  public $users_can_change_name = FALSE;
+  public $users_can_change_name = false;
+
   /**
    * @var boolean
    */
-  public $passwords_are_case_sensitive = FALSE;
+  public $passwords_are_case_sensitive = false;
+
   /**
    * @var integer
    */
   public $default_user_creator_id = 1;
+
   /**
    * @var integer
    */
@@ -383,11 +426,13 @@ class APPLICATION_STORAGE_OPTIONS extends CONTEXT_STORAGE_OPTIONS
    * @var string
    */
   public $login_user_name = 'login_user';
+
   /**
    * Name of the cookie for storing last known page.
    * @var string
    */
   public $return_to_page_name = 'return_to_page';
+
   /**
    * Number of days to store a login.
    * @var integer
@@ -405,23 +450,26 @@ class APPLICATION_ANON_OPTIONS
    * @var string
    */
   public $name_prefix = 'anon@';
+
   /**
    * @var string
    */
   public $name_suffix;
+
   /**
    * Shows the anonymous user's ip address in their name.
    * Only used when creating the user's name.
    * @var boolean
    */
-  public $show_ip_address = TRUE;
+  public $show_ip_address = true;
+
   /**
    * Reverse name lookup for anonymous user's ip address.
    * Use the raw ip address if 'show_ip_address' is true. Only used when
    * creating the user's name
    * @var boolean
    */
-  public $resolve_host = TRUE;
+  public $resolve_host = true;
 }
 
 ?>

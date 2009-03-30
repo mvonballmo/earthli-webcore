@@ -53,6 +53,7 @@ class JOB_LIST extends SELECT_LIST
    * @var string display jobs only.
    */
   public $object_name = 'job';
+
   /**
    * @var string Unique name for the selector controls for this list.
    */
@@ -61,7 +62,7 @@ class JOB_LIST extends SELECT_LIST
   /**
    * @param PROJECT_APPLICATION $app Main application.
    */
-  function JOB_LIST ($app)
+  public function JOB_LIST ($app)
   {
     SELECT_LIST::SELECT_LIST ($app);
     $this->append_column ('Name');
@@ -72,10 +73,10 @@ class JOB_LIST extends SELECT_LIST
 
   /**
    * @param JOB $obj Draw fields from this job.
-    * @param integer $index Draw the column at this index.
-    * @access private
-    */
-  function _draw_column_contents ($obj, $index)
+   * @param integer $index Draw the column at this index.
+   * @access private
+   */
+  protected function _draw_column_contents ($obj, $index)
   {
     switch ($index)
     {

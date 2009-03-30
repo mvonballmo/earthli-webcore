@@ -58,12 +58,14 @@ class PROJECT_OPTIONS extends FOLDER_INHERITABLE_SETTINGS
    * @see Project_user_group
    */
   public $assignee_group_type;
+
   /**
    * Unique id of the group that contains the possible assignees.
    * Used only if {@link $assignee_group_type} is {@link Project_user_group}.
    * @var integer
    */
   public $assignee_group_id;
+
   /**
    * Which set of users are allowed to be reporters in this project?
    * @var integer
@@ -72,6 +74,7 @@ class PROJECT_OPTIONS extends FOLDER_INHERITABLE_SETTINGS
    * @see Project_user_group
    */
   public $reporter_group_type;
+
   /**
    * Unique id of the group that contains the possible reporters.
    * Used only if {@link $reporter_group_type} is {@link
@@ -79,6 +82,7 @@ class PROJECT_OPTIONS extends FOLDER_INHERITABLE_SETTINGS
    * @var integer
    */
   public $reporter_group_id;
+
   /**
    * In non-zero, shows release deadline warnings.
    * The warning is issued if the deadline is in less than this many seconds.
@@ -91,14 +95,14 @@ class PROJECT_OPTIONS extends FOLDER_INHERITABLE_SETTINGS
    * @var boolean
    * @access private
    */
-  public $create_history_item_for_self = FALSE;
+  public $create_history_item_for_self = false;
 
   /**
    * Assignees are selected from this user group.
    * This is only valid when the {@link $assignee_group_type} is {@link Project_user_group}.
    * @return GROUP
    */
-  function assignee_group ()
+  public function assignee_group ()
   {
     if (! isset ($this->_assignee_group))
     {
@@ -114,7 +118,7 @@ class PROJECT_OPTIONS extends FOLDER_INHERITABLE_SETTINGS
    * Project_user_group}.
    * @return GROUP
    */
-  function reporter_group ()
+  public function reporter_group ()
   {
     if (! isset ($this->_reporter_group))
     {
@@ -129,7 +133,7 @@ class PROJECT_OPTIONS extends FOLDER_INHERITABLE_SETTINGS
    * Depends on the setting stored in {@link $assignee_group_type}.
    * @return USER_QUERY
    */
-  function assignee_query ()
+  public function assignee_query ()
   {
     return $this->_user_query_for ($this->assignee_group_type, $this->assignee_group_id);
   }
@@ -139,7 +143,7 @@ class PROJECT_OPTIONS extends FOLDER_INHERITABLE_SETTINGS
    * Depends on the setting stored in {@link $reporter_group_type}.
    * @return USER_QUERY
    */
-  function reporter_query ()
+  public function reporter_query ()
   {
     return $this->_user_query_for ($this->reporter_group_type, $this->reporter_group_id);
   }
@@ -148,7 +152,7 @@ class PROJECT_OPTIONS extends FOLDER_INHERITABLE_SETTINGS
    * Return true if reporter and assigner lists are the same.
    * @return boolean
    */
-  function reporters_equals_assigners ()
+  public function reporters_equals_assigners ()
   {
     return ($this->assignee_group_type == $this->reporter_group_type) 
         && ($this->assignee_group_id == $this->reporter_group_id);
@@ -158,41 +162,31 @@ class PROJECT_OPTIONS extends FOLDER_INHERITABLE_SETTINGS
    * Return the release deadline warning units as text.
    * @return string
    */
-  function release_warning_description ()
+  public function release_warning_description ()
   {
-    if (! $options->seconds_until_deadline)
+    if (! $this->seconds_until_deadline)
     {
       return 'None';
     }
-    else
+     
+    switch ($this->seconds_until_deadline)
     {
-      switch ($this->seconds_until_deadline)
-      {
-      case 86400:
-        $units = 'one day';
-        break;
-      case 2 * 86400:
-        $units = 'two days';
-        break;
-      case 3 * 86400:
-        $units = 'three days';
-        break;
-      case 5 * 86400:
-        $units = 'five days';
-        break;
-      case 7 * 86400:
-        $units = 'one week';
-        break;
-      case 14 * 86400:
-        $units = 'two weeks';
-        break;
-      case 30 * 86400:
-        $units = 'one month';
-        break;
-      default:
-        $units = $this->seconds_until_deadline . ' seconds';
-      }
-      return $units;
+    case 86400:
+      return 'one day';
+    case 2 * 86400:
+      return 'two days';
+    case 3 * 86400:
+      return 'three days';
+    case 5 * 86400:
+      return 'five days';
+    case 7 * 86400:
+      return 'one week';
+    case 14 * 86400:
+      return 'two weeks';
+    case 30 * 86400:
+      return 'one month';
+    default:
+      return $this->seconds_until_deadline . ' seconds';
     }
   }
   
@@ -202,7 +196,7 @@ class PROJECT_OPTIONS extends FOLDER_INHERITABLE_SETTINGS
    * @return USER_QUERY
    * @access private
    */
-  function _user_query_for ($type, $group_id)
+  protected function _user_query_for ($type, $group_id)
   {
     switch ($type)
     {
@@ -228,7 +222,7 @@ class PROJECT_OPTIONS extends FOLDER_INHERITABLE_SETTINGS
   /**
    * @param DATABASE $db
    */
-  function load ($db)
+  public function load ($db)
   {
     parent::load ($db);
     $this->assignee_group_type = $db->f ('assignee_group_type');
@@ -241,7 +235,7 @@ class PROJECT_OPTIONS extends FOLDER_INHERITABLE_SETTINGS
   /**
    * @param SQL_STORAGE $storage Store values to this object.
    */
-  function store_to ($storage)
+  public function store_to ($storage)
   {
     parent::store_to ($storage);
     $tname = $this->_settings_table_name ();
@@ -258,7 +252,7 @@ class PROJECT_OPTIONS extends FOLDER_INHERITABLE_SETTINGS
    * @return string
    * @access private
    */
-  function _history_item_title ($adding)
+  protected function _history_item_title ($adding)
   {
     return 'Options inheritance changed';
   }
@@ -269,7 +263,7 @@ class PROJECT_OPTIONS extends FOLDER_INHERITABLE_SETTINGS
    * @return string
    * @access private
    */
-  function _history_item_description ($adding, $folder)
+  protected function _history_item_description ($adding, $folder)
   {
     return 'Project options are now inherited from ' . $folder->title_as_plain_text () . '.';
   }
@@ -279,7 +273,7 @@ class PROJECT_OPTIONS extends FOLDER_INHERITABLE_SETTINGS
    * @return string
    * @access private
    */
-  function _settings_table_name ()
+  protected function _settings_table_name ()
   {
     return $this->app->table_names->folder_options;
   }
@@ -290,12 +284,14 @@ class PROJECT_OPTIONS extends FOLDER_INHERITABLE_SETTINGS
    * @access private
    */
   protected $_field_name = 'options_id';
+
   /**
    * @see assignee_group()
    * @var GROUP
    * @access private
    */
   protected $_assignee_group;
+
   /**
    * @see reporter_group()
    * @var GROUP

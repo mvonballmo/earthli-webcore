@@ -56,7 +56,7 @@ class SQL_UNIQUE_STORAGE extends SQL_STORAGE
    * @param STORABLE $obj
    * @access private
    */
-  function _commit_table ($table, $action, $obj)
+  protected function _commit_table ($table, $action, $obj)
   {
     parent::_commit_table ($table, $action, $obj);
 

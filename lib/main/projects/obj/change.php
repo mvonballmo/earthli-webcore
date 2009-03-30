@@ -56,6 +56,7 @@ class CHANGE extends PROJECT_ENTRY
    * @var integer
    */
   public $number;
+
   /**
    * Id of the job to which this change is attached.
    * Can be empty.
@@ -63,6 +64,7 @@ class CHANGE extends PROJECT_ENTRY
    * @see PROJECT_ENTRY::job ()
    */
   public $job_id;
+
   /**
    * List of files associated with this change.
    * Can be empty. If non-empty, should be a newline-separated list. This is
@@ -77,7 +79,7 @@ class CHANGE extends PROJECT_ENTRY
    * May be empty.
    * @return JOB
    */
-  function job ()
+  public function job ()
   {
     if (! isset ($this->_job))
     {
@@ -91,32 +93,32 @@ class CHANGE extends PROJECT_ENTRY
 
   /**
    * Number of files listed in 'files'.
-    * @return integer
-    */
-  function num_files ()
+   * @return integer
+   */
+  public function num_files ()
   {
     return substr_count (trim ($this->files), "\n") + 1;
   }
 
   /**
    * 'files' formatted as HTML by the MUNGER.
-    * @return string
-    * @see MUNGER
-    */
-  function files_as_html ()
+   * @return string
+   * @see MUNGER
+   */
+  public function files_as_html ()
   {
     $munger = $this->html_formatter ();
-    $munger->force_paragraphs = TRUE;
+    $munger->force_paragraphs = true;
     return $this->_text_as_html ("<code>$this->files</code>", $munger);
   }
 
-  function branch_info_query ()
+  public function branch_info_query ()
   {
     include_once ('projects/db/entry_branch_query.php');
     return new CHANGE_BRANCH_INFO_QUERY ($this);
   }
 
-  function raw_title ()
+  public function raw_title ()
   {
     if (isset ($this->number))
     {
@@ -141,7 +143,7 @@ class CHANGE extends PROJECT_ENTRY
   /**
    * @param DATABASE $db
    */
-  function load ($db)
+  public function load ($db)
   {
     parent::load ($db);
     $this->number = $db->f ('number');
@@ -152,7 +154,7 @@ class CHANGE extends PROJECT_ENTRY
   /**
    * @param SQL_STORAGE $storage Store values to this object.
    */
-  function store_to ($storage)
+  public function store_to ($storage)
   {
     parent::store_to ($storage);
     $tname =$this->_secondary_table_name ();
@@ -167,7 +169,7 @@ class CHANGE extends PROJECT_ENTRY
    * Name of the home page name for this object.
    * @return string
    */
-  function page_name ()
+  public function page_name ()
   {
     return $this->app->page_names->change_home;
   }
@@ -177,7 +179,7 @@ class CHANGE extends PROJECT_ENTRY
    * @param BRANCH $branch
    * @return CHANGE_BRANCH_INFO
    */
-  function new_branch_info ($branch)
+  public function new_branch_info ($branch)
   {
     $Result = parent::new_branch_info ($branch);
     $Result->time_applied->set_now ();
@@ -190,7 +192,7 @@ class CHANGE extends PROJECT_ENTRY
    * @return string
    * @access private
    */
-  function _secondary_table_name ()
+  protected function _secondary_table_name ()
   {
     return $this->app->table_names->changes;
   }
@@ -198,7 +200,7 @@ class CHANGE extends PROJECT_ENTRY
   /**
    * @access private
    */
-  function _create ()
+  protected function _create ()
   {
     $this->db->logged_query ("SELECT MAX(number) FROM {$this->app->table_names->changes} chng" .
                              " INNER JOIN {$this->app->table_names->entries} entry on chng.entry_id = entry.id" .
@@ -215,7 +217,7 @@ class CHANGE extends PROJECT_ENTRY
    * @return CHANGE_BRANCH_INFO
    * @access private
    */
-  function _make_branch_info ()
+  protected function _make_branch_info ()
   {
     return new CHANGE_BRANCH_INFO ($this);
   }
@@ -227,7 +229,7 @@ class CHANGE extends PROJECT_ENTRY
    * @return object
    * @access private
    */
-  function _default_handler_for ($handler_type, $options = null)
+  protected function _default_handler_for ($handler_type, $options = null)
   {
     switch ($handler_type)
     {
@@ -256,7 +258,7 @@ class CHANGE extends PROJECT_ENTRY
    * @param HISTORY_ITEM $history_item Action that generated this request. May be empty.
    * @access private
    */
-  function _prepare_subscription_query ($query, $history_item)
+  protected function _prepare_subscription_query ($query, $history_item)
   {
     $query->restrict ('watch_entries > 0');
     $query->restrict_kinds (array (Subscribe_folder => $this->parent_folder_id ()
@@ -267,10 +269,11 @@ class CHANGE extends PROJECT_ENTRY
 
   /**
    * Name of this type of project entry.
-    * @var string
-    * @access private
-    */
+   * @var string
+   * @access private
+   */
   public $type = 'change';
+
   /**
    * @var JOB
    * @access private
@@ -291,20 +294,21 @@ class CHANGE_BRANCH_INFO extends PROJECT_ENTRY_BRANCH_INFO
 {
   /**
    * When was this change applied?
-    * @var DATE_TIME
-    */
+   * @var DATE_TIME
+   */
   public $time_applied;
+
   /**
    * Which user applied the change?
-    * @var integer
-    * @see CHANGE::applier()
-    */
+   * @var integer
+   * @see CHANGE::applier()
+   */
   public $applier_id;
 
   /**
    * @param CHANGE $entry Branch info is attached to this job.
    */
-  function CHANGE_BRANCH_INFO ($entry)
+  public function CHANGE_BRANCH_INFO ($entry)
   {
     PROJECT_ENTRY_BRANCH_INFO::PROJECT_ENTRY_BRANCH_INFO ($entry);
 
@@ -313,17 +317,17 @@ class CHANGE_BRANCH_INFO extends PROJECT_ENTRY_BRANCH_INFO
 
   /**
    * Who applied this change?
-    * @return PROJECT_USER
-    */
-  function applier ()
+   * @return PROJECT_USER
+   */
+  public function applier ()
   {
-    return $this->app->user_at_id ($this->applier_id, FALSE, TRUE);
+    return $this->app->user_at_id ($this->applier_id, false, true);
   }
 
   /**
    * @param DATABASE $db
    */
-  function load ($db)
+  public function load ($db)
   {
     parent::load ($db);
     $this->time_applied->set_from_iso ($db->f ('branch_time_applied'));
@@ -332,19 +336,19 @@ class CHANGE_BRANCH_INFO extends PROJECT_ENTRY_BRANCH_INFO
 
   /**
    * The name of the 'extra-info' table for this type.
-    * @return string
-    * @access private
-    */
-  function _secondary_table_name ()
+   * @return string
+   * @access private
+   */
+  protected function _secondary_table_name ()
   {
     return $this->app->table_names->changes_to_branches;
   }
 
   /**
    * @param SQL_STORAGE $storage Store values to this object.
-    * @access private
-    */
-  function store_to ($storage)
+   * @access private
+   */
+  public function store_to ($storage)
   {
     parent::store_to ($storage);
     $tname = $this->_secondary_table_name ();

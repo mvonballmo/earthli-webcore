@@ -53,7 +53,7 @@ class SEARCH_COMMANDS extends COMMANDS
   /**
    * @param SEARCH $search Configure commands for this object.
    */
-  function SEARCH_COMMANDS ($search)
+  public function SEARCH_COMMANDS ($search)
   {
     COMMANDS::COMMANDS ($search->app);
 
@@ -62,7 +62,7 @@ class SEARCH_COMMANDS extends COMMANDS
     $cmd->title = 'Edit';
     $cmd->link = "edit_search.php?id=$search->id";
     $cmd->icon = '{icons}buttons/edit';
-    $cmd->executable = TRUE;
+    $cmd->executable = true;
     $cmd->importance = Command_importance_high;
     $this->append ($cmd);
 
@@ -71,7 +71,7 @@ class SEARCH_COMMANDS extends COMMANDS
     $cmd->title = 'Delete';
     $cmd->link = "delete_search.php?id=$search->id";
     $cmd->icon = '{icons}buttons/delete';
-    $cmd->executable = TRUE;
+    $cmd->executable = true;
     $cmd->importance = Command_importance_high - 2 * Command_importance_increment;
     $this->append ($cmd);
   }

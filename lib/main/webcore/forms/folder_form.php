@@ -51,7 +51,7 @@ class FOLDER_FORM extends OBJECT_IN_FOLDER_FORM
   /**
    * @param FOLDER $folder Edit this folder.
    */
-  function FOLDER_FORM ($folder)
+  public function FOLDER_FORM ($folder)
   {
     OBJECT_IN_FOLDER_FORM::OBJECT_IN_FOLDER_FORM ($folder);
 
@@ -74,10 +74,10 @@ class FOLDER_FORM extends OBJECT_IN_FOLDER_FORM
 
   /**
    * Store the form's values to this folder.
-    * @param FOLDER $obj
-    * @access private
-    */
-  function _store_to_object ($obj)
+   * @param FOLDER $obj
+   * @access private
+   */
+  protected function _store_to_object ($obj)
   {
     $obj->organizational = $this->value_for ('is_organizational');
     $obj->summary = $this->value_as_text ('summary');
@@ -90,7 +90,7 @@ class FOLDER_FORM extends OBJECT_IN_FOLDER_FORM
    * Load initial properties from this folder.
    * @param FOLDER $obj
    */
-  function load_from_object ($obj)
+  public function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
 
@@ -109,7 +109,7 @@ class FOLDER_FORM extends OBJECT_IN_FOLDER_FORM
     }
   }
 
-  function load_with_defaults ()
+  public function load_with_defaults ()
   {
     parent::load_with_defaults ();
 
@@ -123,7 +123,7 @@ class FOLDER_FORM extends OBJECT_IN_FOLDER_FORM
   /**
    * @access private
    */
-  function _draw_scripts ()
+  protected function _draw_scripts ()
   {
     parent::_draw_scripts ();
     $this->_draw_icon_browser_script_for ('icon_url');
@@ -133,7 +133,7 @@ class FOLDER_FORM extends OBJECT_IN_FOLDER_FORM
    * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_controls ($renderer)
+  protected function _draw_controls ($renderer)
   {
     $renderer->start ();
     $renderer->draw_text_line_row ('title');
@@ -143,7 +143,7 @@ class FOLDER_FORM extends OBJECT_IN_FOLDER_FORM
     $renderer->draw_text_box_row ('summary', $renderer->default_control_width, '4em');
     $renderer->draw_text_box_row ('description');
     $renderer->draw_submit_button_row ();
-    $this->_draw_history_item_controls ($renderer, FALSE);
+    $this->_draw_history_item_controls ($renderer, false);
     $renderer->finish ();
   }
 

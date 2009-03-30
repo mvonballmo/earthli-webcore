@@ -52,6 +52,7 @@ class ADD_USER_TO_GROUP_FORM extends ID_BASED_FORM
    * @var string
    */
   public $button = 'Add';
+
   /**
    * @var string
    */
@@ -60,22 +61,22 @@ class ADD_USER_TO_GROUP_FORM extends ID_BASED_FORM
   /**
    * @param APPLICATION $app Main application.
    */
-  function ADD_USER_TO_GROUP_FORM ($app)
+  public function ADD_USER_TO_GROUP_FORM ($app)
   {
     ID_BASED_FORM::ID_BASED_FORM ($app);
 
     $field = new TITLE_FIELD ();
     $field->id = 'name';
     $field->title = 'User Name';
-    $field->required = TRUE;
+    $field->required = true;
     $this->add_field ($field);
   }
 
   /**
    * Called after fields are validated.
-    * @param GROUP $obj
-    * @access private
-    */
+   * @param GROUP $obj
+   * @access private
+   */
   protected function _post_validate ($obj)
   {
     parent::_post_validate ($obj);
@@ -109,13 +110,13 @@ class ADD_USER_TO_GROUP_FORM extends ID_BASED_FORM
    * Load initial properties from this object.
    * @param GROUP $obj
    */
-  function load_from_object ($obj)
+  public function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
     $this->set_value ('name', read_var ('name'));
   }
 
-  function load_with_defaults ()
+  public function load_with_defaults ()
   {
     parent::load_with_defaults ();
     $this->set_value ('name', read_var ('name'));
@@ -123,10 +124,10 @@ class ADD_USER_TO_GROUP_FORM extends ID_BASED_FORM
 
   /**
    * Add the selected user to the group.
-    * @param GROUP $obj
-    * @access private
-    */
-  function commit ($obj)
+   * @param GROUP $obj
+   * @access private
+   */
+  public function commit ($obj)
   {
     $obj->add_user ($this->_user);
   }

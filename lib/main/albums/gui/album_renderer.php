@@ -53,7 +53,7 @@ class ALBUM_RENDERER extends FOLDER_RENDERER
    * @param ALBUM $obj
    * @access private
    */
-  function _display_as_html ($obj)
+  protected function _display_as_html ($obj)
   {
     $main_pic = $obj->main_picture ();
     if (isset ($main_pic))
@@ -123,7 +123,7 @@ class ALBUM_RENDERER extends FOLDER_RENDERER
    * @param ALBUM $obj
    * @access private
    */
-  function _display_as_plain_text ($obj)
+  protected function _display_as_plain_text ($obj)
   {
     if (! $obj->is_organizational ())
     {

@@ -52,6 +52,7 @@ class PERMISSIONS_INHERITANCE_FORM extends ID_BASED_FORM
    * @var string
    */
   public $name = 'permissions_form';
+
   /**
    * @var string
    */
@@ -60,21 +61,21 @@ class PERMISSIONS_INHERITANCE_FORM extends ID_BASED_FORM
   /**
    * @param APPLICATION $app Main application.
    */
-  function PERMISSIONS_INHERITANCE_FORM ($app)
+  public function PERMISSIONS_INHERITANCE_FORM ($app)
   {
     ID_BASED_FORM::ID_BASED_FORM ($app);
 
     $field = new BOOLEAN_FIELD ();
     $field->id = 'defined';
     $field->title = 'Defined';
-    $field->required = TRUE;
+    $field->required = true;
     $this->add_field ($field);
   }
 
   /**
    * @param FOLDER $obj
    */
-  function load_from_object ($obj)
+  public function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
     $this->set_value ('defined', $obj->defines_security ());
@@ -84,7 +85,7 @@ class PERMISSIONS_INHERITANCE_FORM extends ID_BASED_FORM
    * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_controls ($renderer)
+  protected function _draw_controls ($renderer)
   {
     $renderer->start ();
 

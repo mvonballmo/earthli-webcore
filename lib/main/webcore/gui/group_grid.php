@@ -52,10 +52,12 @@ class GROUP_GRID extends STANDARD_GRID
    * @var string
    */
   public $object_name = 'group';
+
   /**
    * @var boolean
    */
-  public $show_separator = FALSE;
+  public $show_separator = false;
+
   /**
    * @var string
    */
@@ -63,9 +65,9 @@ class GROUP_GRID extends STANDARD_GRID
 
   /**
    * @param GROUP $obj
-    * @access private
-    */
-  function _draw_box ($obj)
+   * @access private
+   */
+  protected function _draw_box ($obj)
   {
     $user_query = $obj->user_query ();
     echo $obj->title_as_link ();
@@ -78,7 +80,7 @@ class GROUP_GRID extends STANDARD_GRID
   /**
    * @access private
    */
-  function _draw_header ()
+  protected function _draw_header ()
   {
 ?>
 <tr>

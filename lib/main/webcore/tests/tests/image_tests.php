@@ -51,7 +51,7 @@ require_once ('webcore/util/image.php');
  */
 class IMAGE_TEST_TASK extends TEST_TASK
 {
-  function _set_image ($img, $f, $include_exif = FALSE, $acceptable_time = 10)
+  protected function _set_image ($img, $f, $include_exif = false, $acceptable_time = 10)
   {
     $this->env->profiler->restart ('image.load');
     $img->set_file ($f, $include_exif);
@@ -59,9 +59,9 @@ class IMAGE_TEST_TASK extends TEST_TASK
     $this->_check ($actual_time < $acceptable_time, 'Image [' . $f . '] loaded in less than ' . $acceptable_time . 's (actual time was ' . $actual_time . 's)');
   }
 
-  function _check_local_urls ()
+  protected function _check_local_urls ()
   {
-    $this->page->prefer_relative_urls = FALSE;
+    $this->page->prefer_relative_urls = false;
     $local_url = $this->context->resolve_file ('{icons}/buttons/blank_16px.png');
     $root_url = $this->context->path_to (Folder_name_root);
     $image_file_name = substr ($local_url, strlen ($root_url));
@@ -74,7 +74,7 @@ class IMAGE_TEST_TASK extends TEST_TASK
     $this->_check_equal ($local_url_with_domain, $img->properties->url);
     $this->_check_equal ($local_path, $img->properties->file_name);
 
-    $this->_set_image ($img, $local_url_with_domain, TRUE);
+    $this->_set_image ($img, $local_url_with_domain, true);
     $this->_check_equal ($local_url_with_domain, $img->properties->url);
     $this->_check_equal ($local_path, $img->properties->file_name);
 
@@ -87,7 +87,7 @@ class IMAGE_TEST_TASK extends TEST_TASK
 
     $relative_image_url = path_between ($img->properties->url, $local_url, global_url_options());
 
-    $this->_set_image ($img, $local_path, TRUE);
+    $this->_set_image ($img, $local_path, true);
     $this->_check_equal ($local_url, $relative_image_url);
     $this->_check_equal ($local_path, $img->properties->file_name);
 
@@ -98,7 +98,7 @@ class IMAGE_TEST_TASK extends TEST_TASK
     $this->_check_equal ('', $img->properties->file_name);
   }
 
-  function _check_external_urls ()
+  protected function _check_external_urls ()
   {
     $remote_url = 'http://www.oalgar.com/albums/orhan/images/';
     $img = new IMAGE ();
@@ -109,7 +109,7 @@ class IMAGE_TEST_TASK extends TEST_TASK
     $this->_check_equal ($remote_url . '04020111_tn.jpg', $img->properties->url);
     $this->_check_equal ('', $img->properties->file_name);
 
-    $this->_set_image ($img, $remote_url . '04020111_tn.jpg', TRUE);
+    $this->_set_image ($img, $remote_url . '04020111_tn.jpg', true);
     $this->_check_equal ($remote_url . '04020111_tn.jpg', $img->properties->url);
     $this->_check_equal ('', $img->properties->file_name);
 
@@ -119,12 +119,12 @@ class IMAGE_TEST_TASK extends TEST_TASK
     $this->_check_equal ($remote_url . '04020111_tn.jpg.does.not.exist', $img->properties->url);
     $this->_check_equal ('', $img->properties->file_name);
 
-    $this->_set_image ($img, $remote_url . '04020111_tn.jpg.does.not.exist', TRUE);
+    $this->_set_image ($img, $remote_url . '04020111_tn.jpg.does.not.exist', true);
     $this->_check_equal ($remote_url . '04020111_tn.jpg.does.not.exist', $img->properties->url);
     $this->_check_equal ('', $img->properties->file_name);
   }
 
-  function _execute ()
+  protected function _execute ()
   {
     $this->_check_local_urls ();
     $this->_check_external_urls ();

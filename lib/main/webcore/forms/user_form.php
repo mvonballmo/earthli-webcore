@@ -52,14 +52,14 @@ class USER_FORM extends CONTENT_OBJECT_FORM
   /**
    * @param APPLICATION $app Main application.
    */
-  function USER_FORM ($app)
+  public function USER_FORM ($app)
   {
     CONTENT_OBJECT_FORM::CONTENT_OBJECT_FORM ($app);
 
     $field = new TEXT_FIELD ();
     $field->id = 'name';
     $field->title = 'Original name';
-    $field->visible = FALSE;
+    $field->visible = false;
     $this->add_field ($field);
 
     $field = new TEXT_FIELD ();
@@ -79,7 +79,7 @@ class USER_FORM extends CONTENT_OBJECT_FORM
     $field = new EMAIL_FIELD ();
     $field->id = 'orig_email';
     $field->title = 'Original email address';
-    $field->visible = FALSE;
+    $field->visible = false;
     $this->add_field ($field);
 
     $field = new EMAIL_FIELD ();
@@ -134,7 +134,7 @@ class USER_FORM extends CONTENT_OBJECT_FORM
    * Load initial properties from this user.
    * @param USER $obj
    */
-  function load_from_object ($obj)
+  public function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
     $this->set_value ('name', $obj->title);
@@ -150,8 +150,8 @@ class USER_FORM extends CONTENT_OBJECT_FORM
     $this->set_value ('email_visibility', $obj->email_visibility);
     
     $this->set_visible ('title', $this->app->user_options->users_can_change_name);
-    $this->set_visible ('password1', FALSE);
-    $this->set_visible ('password2', FALSE);
+    $this->set_visible ('password1', false);
+    $this->set_visible ('password2', false);
 
     $icon_url = read_var ('icon_url');
     if ($icon_url)
@@ -164,14 +164,14 @@ class USER_FORM extends CONTENT_OBJECT_FORM
     }
   }
 
-  function load_with_defaults ()
+  public function load_with_defaults ()
   {
     parent::load_with_defaults ();
     $this->set_value ('publication_state', History_item_silent);
     $this->set_value ('email_visibility', User_email_scrambled);
 
-    $this->set_required ('password1', TRUE);
-    $this->set_required ('password2', TRUE);
+    $this->set_required ('password1', true);
+    $this->set_required ('password2', true);
 
     $icon_url = read_var ('icon_url');
     if ($icon_url)
@@ -184,17 +184,17 @@ class USER_FORM extends CONTENT_OBJECT_FORM
    * Return true to use integrated captcha verification.fu
    * @return boolean
    */
-  function _captcha_enabled ()
+  protected function _captcha_enabled ()
   {
     return $this->login->is_anonymous ();
   }
 
   /**
    * Called after fields are validated.
-    * @param USER $obj
-    * @access private
-    */
-  function _post_validate ($obj)
+   * @param USER $obj
+   * @access private
+   */
+  protected function _post_validate ($obj)
   {
     parent::_post_validate ($obj);
 
@@ -237,7 +237,7 @@ class USER_FORM extends CONTENT_OBJECT_FORM
    * @param object $obj
    * @access private
    */
-  function commit ($obj)
+  public function commit ($obj)
   {
     $new_user = ! $obj->exists ();
 
@@ -274,16 +274,16 @@ class USER_FORM extends CONTENT_OBJECT_FORM
 
     if ($new_user && ($this->login->is_anonymous () || $this->login->ad_hoc_login))
     {
-      $this->app->log_in ($obj, FALSE);
+      $this->app->log_in ($obj, false);
     }
   }
 
   /**
    * Store the form's values to this user.
-    * @param USER $obj
-    * @access private
-    */
-  function _store_to_object ($obj)
+   * @param USER $obj
+   * @access private
+   */
+  protected function _store_to_object ($obj)
   {
     if (! $obj->exists ())
     {
@@ -309,7 +309,7 @@ class USER_FORM extends CONTENT_OBJECT_FORM
   /**
    * @access private
    */
-  function _draw_scripts ()
+  protected function _draw_scripts ()
   {
     parent::_draw_scripts ();
     $this->_draw_icon_browser_script_for ('icon_url');
@@ -319,7 +319,7 @@ class USER_FORM extends CONTENT_OBJECT_FORM
    * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_controls ($renderer)
+  protected function _draw_controls ($renderer)
   {
     $renderer->start ();
 
@@ -338,7 +338,7 @@ class USER_FORM extends CONTENT_OBJECT_FORM
     $renderer->draw_text_line_row ('email');    
 
     $props = $renderer->make_list_properties ();
-    $props->show_descriptions = TRUE;
+    $props->show_descriptions = true;
     $props->width = '';
     $props->item_class = 'field';
     $props->add_item ('Keep private', User_email_hidden, 'Do not display this email under any circumstances. Used only for sending subscriptions.');
@@ -372,7 +372,7 @@ class USER_FORM extends CONTENT_OBJECT_FORM
       $renderer->restore_width ();
     $renderer->finish_layer_row ($layer);
 
-    $this->_draw_history_item_controls ($renderer, FALSE);
+    $this->_draw_history_item_controls ($renderer, false);
 
     $renderer->finish ();
   }

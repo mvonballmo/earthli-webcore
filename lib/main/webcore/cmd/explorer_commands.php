@@ -56,7 +56,7 @@ class EXPLORER_COMMANDS extends COMMANDS
    * @param FOLDER $folder Configure commands for this object.
    * @param string $form_name Commands are created using this form name.
    */
-  function EXPLORER_COMMANDS ($folder, $form_name)
+  public function EXPLORER_COMMANDS ($folder, $form_name)
   {
     COMMANDS::COMMANDS ($folder->app);
 
@@ -65,7 +65,7 @@ class EXPLORER_COMMANDS extends COMMANDS
     $cmd->title = 'Print';
     $cmd->link = "javascript:submit_explorer_form ('$form_name', 'multiple_print.php')";
     $cmd->icon = '{icons}buttons/print';
-    $cmd->executable = TRUE;
+    $cmd->executable = true;
     $this->append ($cmd);
 
     $cmd = $this->make_command ();
@@ -82,7 +82,7 @@ class EXPLORER_COMMANDS extends COMMANDS
     $cmd->title = 'Copy';
     $cmd->link = "javascript:submit_explorer_form ('$form_name', 'multiple_copy.php')";
     $cmd->icon = '{icons}buttons/copy';
-    $cmd->executable = TRUE;
+    $cmd->executable = true;
     $this->append ($cmd);
 
     $cmd = $this->make_command ();
@@ -134,11 +134,9 @@ class DRAFTABLE_EXPLORER_COMMANDS extends EXPLORER_COMMANDS
    * @param FOLDER $folder Configure commands for this object.
    * @param string $form_name Commands are created using this form name.
    */
-  function DRAFTABLE_EXPLORER_COMMANDS ($folder, $form_name)
+  public function DRAFTABLE_EXPLORER_COMMANDS ($folder, $form_name)
   {
     EXPLORER_COMMANDS::EXPLORER_COMMANDS ($folder, $form_name);
-
-    $cmd = $this->make_command ();
 
     $cmd = $this->make_command ();
     $cmd->id = 'publish';

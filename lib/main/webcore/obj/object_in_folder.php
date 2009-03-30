@@ -44,7 +44,7 @@ require_once ('webcore/obj/content_object.php');
  * Used with the state-altering commands, like {@link show()}, {@link hide()},
  * {@link lock()}, {@link delete()} and {@link restore()}.
  */
-define ('Defer_database_update', FALSE);
+define ('Defer_database_update', false);
 
 /**
  * Base class of all content objects in a WebCore application.
@@ -56,12 +56,13 @@ define ('Defer_database_update', FALSE);
  * @version 3.0.0
  * @since 2.5.0
  */
-class OBJECT_IN_FOLDER extends CONTENT_OBJECT
+abstract class OBJECT_IN_FOLDER extends CONTENT_OBJECT
 {
   /**
    * @var integer
    */
   public $state = Visible;
+
   /**
    * ID of the user with owner privileges on this object.
    * This is usually the same as the {@link $creator_id}.
@@ -73,7 +74,7 @@ class OBJECT_IN_FOLDER extends CONTENT_OBJECT
   /**
    * @return USER
    */
-  function owner ()
+  public function owner ()
   {
     return $this->app->user_at_id ($this->owner_id);
   }
@@ -81,7 +82,7 @@ class OBJECT_IN_FOLDER extends CONTENT_OBJECT
   /**
    * @return boolean
    */
-  function invisible ()
+  public function invisible ()
   {
     return $this->state & Invisible;
   }
@@ -89,7 +90,7 @@ class OBJECT_IN_FOLDER extends CONTENT_OBJECT
   /**
    * @return boolean
    */
-  function visible ()
+  public function visible ()
   {
     return $this->state & Visible;
   }
@@ -97,7 +98,7 @@ class OBJECT_IN_FOLDER extends CONTENT_OBJECT
   /**
    * @return boolean
    */
-  function deleted ()
+  public function deleted ()
   {
     return ($this->state & Deleted) == Deleted;
   }
@@ -105,18 +106,18 @@ class OBJECT_IN_FOLDER extends CONTENT_OBJECT
   /**
    * @return boolean
    */
-  function locked ()
+  public function locked ()
   {
     return ($this->state & Locked) == Locked;
   }
 
   /**
    * Describe the state of this object.
-    * Useful for formatting titles and object descriptions.
-    * @see state_as_icon()
-    * @return string
-    */
-  function state_as_string ()
+   * Useful for formatting titles and object descriptions.
+   * @see state_as_icon()
+   * @return string
+   */
+  public function state_as_string ()
   {
     switch ($this->state)
     {
@@ -134,19 +135,18 @@ class OBJECT_IN_FOLDER extends CONTENT_OBJECT
         return 'Invisible';
       }
 
-
       return 'Unknown';
     }
   }
 
   /**
    * Describe the state of this object with an HTML icon.
-    * Useful for formatting titles and object descriptions.
-    * @see state_as_string()
-    * @param string $size CSS for the size of the picture.
-    * @return string
-    */
-  function state_as_icon ($size = '16px')
+   * Useful for formatting titles and object descriptions.
+   * @see state_as_string()
+   * @param string $size CSS for the size of the picture.
+   * @return string
+   */
+  public function state_as_icon ($size = '16px')
   {
     return $this->app->resolve_icon_as_html ($this->_state_icon_name (), $this->state_as_string (), $size);
   }
@@ -154,7 +154,7 @@ class OBJECT_IN_FOLDER extends CONTENT_OBJECT
   /**
    * @return TITLE_FORMATTER
    */
-  function title_formatter ()
+  public function title_formatter ()
   {
     $Result = parent::title_formatter ();
     if ($this->invisible ())
@@ -171,7 +171,7 @@ class OBJECT_IN_FOLDER extends CONTENT_OBJECT
   /**
    * @return string
    */
-  function raw_title ()
+  public function raw_title ()
   {
     $Result = parent::raw_title ();
     if ($this->invisible ())
@@ -188,14 +188,13 @@ class OBJECT_IN_FOLDER extends CONTENT_OBJECT
    * {@link Force_root_on}.
    * @return string
    */
-  function resolve_url ($url, $root_override = null)
+  public function resolve_url ($url, $root_override = null)
   {
     $fldr = $this->parent_folder ();
     if (isset ($fldr))
     {
       return $fldr->resolve_url ($url, $root_override);
     }
-
 
     return parent::resolve_url ($url, $root_override);
   }
@@ -207,7 +206,7 @@ class OBJECT_IN_FOLDER extends CONTENT_OBJECT
    * from database.
    * @return FOLDER
    */
-  function parent_folder ()
+  public function parent_folder ()
   {
     if (! isset ($this->_parent_folder))
     {
@@ -222,7 +221,7 @@ class OBJECT_IN_FOLDER extends CONTENT_OBJECT
    * is_allowed()} to determine access permissions.
    * @return FOLDER
    */
-  function security_context ()
+  public function security_context ()
   {
     return $this->parent_folder ();
   }
@@ -234,13 +233,15 @@ class OBJECT_IN_FOLDER extends CONTENT_OBJECT
    * folder object.
    * @return integer
    */
-  function parent_folder_id ()
+  public function parent_folder_id ()
   {
     $fldr = $this->parent_folder ();
     if (isset($fldr))
     {
       return $fldr->id;
     }
+    
+    return 0;
   }
 
   /**
@@ -251,7 +252,7 @@ class OBJECT_IN_FOLDER extends CONTENT_OBJECT
    * @param FOLDER $fldr
    * @param FOLDER_OPERATION_OPTIONS $options
    */
-  function move_to ($fldr, $options)
+  public function move_to ($fldr, $options)
   {
     $parent = $this->parent_folder ();
     if (! $parent->equals ($fldr))
@@ -285,7 +286,7 @@ class OBJECT_IN_FOLDER extends CONTENT_OBJECT
    * @param FOLDER $fldr
    * @param FOLDER_OPERATION_OPTIONS $options
    */
-  function copy_to ($fldr, $options)
+  public function copy_to ($fldr, $options)
   {
     $privilege_set = $this->_privilege_set ();
     if ($this->login->is_allowed ($privilege_set, Privilege_create, $fldr))
@@ -308,40 +309,40 @@ class OBJECT_IN_FOLDER extends CONTENT_OBJECT
 
   /**
    * Flag the object as deleted.
-    * Does not remove the object from the database.
-    * @param boolean $update_now Actualize the database?
-    */
-  function delete ($update_now = TRUE)
+   * Does not remove the object from the database.
+   * @param boolean $update_now Actualize the database?
+   */
+  public function delete ($update_now = true)
   {
     $this->set_state (Deleted, $update_now);
   }
 
   /**
    * Un-delete the object.
-    * This has the same effect as 'show'.
-    * @param boolean $update_now Actualize the database?
-    */
-  function restore ($update_now = TRUE)
+   * This has the same effect as 'show'.
+   * @param boolean $update_now Actualize the database?
+   */
+  public function restore ($update_now = true)
   {
     $this->set_state (Visible, $update_now);
   }
 
   /**
    * Set the object as visible.
-    * All users with 'view' rights in this object's folder will be able to see it.
-    * @param boolean $update_now Actualize the database?
-    */
-  function show ($update_now = TRUE)
+   * All users with 'view' rights in this object's folder will be able to see it.
+   * @param boolean $update_now Actualize the database?
+   */
+  public function show ($update_now = true)
   {
     $this->set_state (Visible, $update_now);
   }
 
   /**
    * Set the object as hidden.
-    * Only users with 'view invisible' rights in this folder will be able to see it.
-    * @param boolean $update_now Actualize the database?
-    */
-  function hide ($update_now = TRUE)
+   * Only users with 'view invisible' rights in this folder will be able to see it.
+   * @param boolean $update_now Actualize the database?
+   */
+  public function hide ($update_now = true)
   {
     $this->set_state (Hidden, $update_now);
   }
@@ -352,7 +353,7 @@ class OBJECT_IN_FOLDER extends CONTENT_OBJECT
    * varies with the object type.
    * @param boolean $update_now Actualize the database?
    */
-  function lock ($update_now = TRUE)
+  public function lock ($update_now = true)
   {
     $this->set_state (Locked, $update_now);
   }
@@ -361,7 +362,7 @@ class OBJECT_IN_FOLDER extends CONTENT_OBJECT
    * @param integer $state Change to this state.
    * @param boolean $update_now Actualize the database?
    */
-  function set_state ($state, $update_now)
+  public function set_state ($state, $update_now)
   {
     if ($this->state != $state)
     {
@@ -386,7 +387,7 @@ class OBJECT_IN_FOLDER extends CONTENT_OBJECT
    * @param integer $state
    * @return string
    */
-  function history_item_kind_for_transition_to ($state)
+  public function history_item_kind_for_transition_to ($state)
   {
     switch ($state)
     {
@@ -400,7 +401,6 @@ class OBJECT_IN_FOLDER extends CONTENT_OBJECT
         return History_item_restored;
       }
 
-
       return History_item_updated;
     case Locked:
       return History_item_locked;
@@ -412,10 +412,8 @@ class OBJECT_IN_FOLDER extends CONTENT_OBJECT
           return History_item_hidden_update;
         }
 
-
         return History_item_udpated;
       }
-
 
       return History_item_updated;
     }
@@ -425,7 +423,7 @@ class OBJECT_IN_FOLDER extends CONTENT_OBJECT
    * Return a set of default options for moving this object.
    * @return FOLDER_OPERATION_OPTIONS
    */
-  function make_move_options ()
+  public function make_move_options ()
   {
     return new FOLDER_OPERATION_OPTIONS ();
   }
@@ -433,7 +431,7 @@ class OBJECT_IN_FOLDER extends CONTENT_OBJECT
   /**
    * @param DATABASE $db Database from which to load values.
    */
-  function load ($db)
+  public function load ($db)
   {
     parent::load ($db);
     $this->state = $db->f ('state');
@@ -444,7 +442,7 @@ class OBJECT_IN_FOLDER extends CONTENT_OBJECT
   /**
    * @param SQL_STORAGE $storage Store values to this object.
    */
-  function store_to ($storage)
+  public function store_to ($storage)
   {
     parent::store_to ($storage);
     $tname = $this->_table_name ();
@@ -456,7 +454,7 @@ class OBJECT_IN_FOLDER extends CONTENT_OBJECT
    * Final preparation before storing to the database.
    * @access private
    */
-  function _pre_store ()
+  protected function _pre_store ()
   {
     parent::_pre_store ();
 
@@ -478,7 +476,7 @@ class OBJECT_IN_FOLDER extends CONTENT_OBJECT
    * This is useful for objects that need to synchronize sub-objects with their own states.
    * @access private
    */
-  function _state_changed () {}
+  protected function _state_changed () {}
 
   /**
    * Return default handler objects for supported tasks.
@@ -487,7 +485,7 @@ class OBJECT_IN_FOLDER extends CONTENT_OBJECT
    * @return object
    * @access private
    */
-  function _default_handler_for ($handler_type, $options = null)
+  protected function _default_handler_for ($handler_type, $options = null)
   {
     switch ($handler_type)
     {
@@ -507,7 +505,7 @@ class OBJECT_IN_FOLDER extends CONTENT_OBJECT
    * @return OBJECT_IN_FOLDER_HISTORY_ITEM_QUERY
    * @access private
    */
-  function _make_history_item_query ()
+  protected function _make_history_item_query ()
   {
     $class_name = $this->app->final_class_name ('OBJECT_IN_FOLDER_HISTORY_ITEM_QUERY', 'webcore/db/history_item_query.php');
     return new $class_name ($this->app);
@@ -519,7 +517,7 @@ class OBJECT_IN_FOLDER extends CONTENT_OBJECT
    * move an object to another folder, use {@link move_to()} instead.
    * @access private
    */
-  function set_parent_folder ($fldr)
+  public function set_parent_folder ($fldr)
   {
     $this->_parent_folder = $fldr;
   }
@@ -529,17 +527,17 @@ class OBJECT_IN_FOLDER extends CONTENT_OBJECT
    * @return FOLDER
    * @access private
    */
-  function _load_parent_folder ()
+  protected function _load_parent_folder ()
   {
     $this->raise ("Parent folder for [$this->title] is not set.", '_load_parent_folder', 'OBJECT_IN_FOLDER');
   }
 
   /**
    * Return an icon used by {@link state_as_icon()}.
-    * @return string
-    * @access private
-    */
-  function _state_icon_name ()
+   * @return string
+   * @access private
+   */
+  protected function _state_icon_name ()
   {
     switch ($this->state)
     {
@@ -557,7 +555,6 @@ class OBJECT_IN_FOLDER extends CONTENT_OBJECT
         return '{icons}indicators/invisible';
       }
 
-
       return '{icons}indicators/unknown';
     }
   }
@@ -568,7 +565,7 @@ class OBJECT_IN_FOLDER extends CONTENT_OBJECT
    * @param FOLDER $fldr
    * @param FOLDER_OPERATION_OPTIONS $options
    */
-  function _move_to ($fldr, $options)
+  protected function _move_to ($fldr, $options)
   {
     if ($options->update_now)
     {
@@ -591,7 +588,7 @@ class OBJECT_IN_FOLDER extends CONTENT_OBJECT
    * @param FOLDER $fldr
    * @param FOLDER_OPERATION_OPTIONS $options
    */
-  function _copy_to ($fldr, $options)
+  protected function _copy_to ($fldr, $options)
   {
     $this->initialize_as_new ();
     if ($options->update_now)
@@ -613,17 +610,14 @@ class OBJECT_IN_FOLDER extends CONTENT_OBJECT
    * @access private
    * @abstract
    */
-  function _privilege_set ()
-  {
-    $this->raise_deferred ('_privilege_set', 'OBJECT_IN_FOLDER');
-  }
+  protected abstract function _privilege_set ();
 
   /**
    * Copy properties from the given object.
    * @param OBJECT_IN_FOLDER $other
    * @access private
    */
-  function _copy_from ($other)
+  protected function _copy_from ($other)
   {
     unset ($this->_parent_folder);
     if (isset ($other->_parent_folder))
@@ -641,6 +635,7 @@ class OBJECT_IN_FOLDER extends CONTENT_OBJECT
    * @access private
    */
   protected $_parent_folder;
+
   /**
    * Retains the state in the database.
    * If this state differs the current state when the object is stored, a call to {@link _state_changed()}
@@ -669,28 +664,31 @@ class FOLDER_OPERATION_OPTIONS
    * is true.
    * @var boolean
    */
-  public $maintain_permissions = FALSE;
+  public $maintain_permissions = false;
+
   /**
    * Store newly created objects as {@link Draft}s.
    * Objects that do not descend from {@link DRAFTABLE_ENTRY} ignore this
    * option.
    * @var boolean
    */
-  public $copy_as_draft = FALSE;
+  public $copy_as_draft = false;
+
   /**
    * Object should be stored immediately.
    * If this is false, the change to the folder location will not be stored to the database
    * until {@link store()} or {@link store_if_different()} is called.
    * @var boolean
    */
-  public $update_now = TRUE;
+  public $update_now = true;
+
   /**
    * Raise an error if security settings prevent the action.
    * If <code>False</code>, logs an error (failing silently) and continues the
    * operation on other objects, if any.
    * @var boolean
    */
-  public $raise_on_security_failure = FALSE;
+  public $raise_on_security_failure = false;
 }
 
 ?>

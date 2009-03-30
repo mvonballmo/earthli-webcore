@@ -52,7 +52,7 @@ class BITS
    * @param integer $flag
    * @return boolean
    */
-  function enabled ($flag)
+  public function enabled ($flag)
   {
     return $this->bits & $flag;
   }
@@ -62,7 +62,7 @@ class BITS
    * @var integer $flag
    * @param boolean $enabled
    */
-  function set_enabled ($flag, $enabled)
+  public function set_enabled ($flag, $enabled)
   {
     if ($enabled)
     {
@@ -78,7 +78,7 @@ class BITS
    * Enable all the bits in 'flag'.
    * @param integer $flag
    */
-  function set ($flag)
+  public function set ($flag)
   {
     $this->bits = $this->bits | $flag;
   }
@@ -87,7 +87,7 @@ class BITS
    * Clear all the bits in 'flag'.
    * @param integer $flag
    */
-  function clear ($flag)
+  public function clear ($flag)
   {
     $this->bits = $this->bits & ~$flag;
   }
@@ -96,7 +96,7 @@ class BITS
    * Return true if there are no bits set.
    * @return boolean
    */
-  function is_empty ()
+  public function is_empty ()
   {
     return $this->bits == 0;
   }
@@ -105,7 +105,7 @@ class BITS
    * Load a set of flags from 'bits'.
    * @param integer $bits
    */
-  function load ($bits)
+  public function load ($bits)
   {
     $this->bits = $bits;
   }

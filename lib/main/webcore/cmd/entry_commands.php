@@ -53,7 +53,7 @@ class ENTRY_COMMANDS extends COMMANDS
   /**
    * @param ENTRY $entry Configure commands for this object.
    */
-  function ENTRY_COMMANDS ($entry)
+  public function ENTRY_COMMANDS ($entry)
   {
     COMMANDS::COMMANDS ($entry->app);
 
@@ -70,7 +70,7 @@ class ENTRY_COMMANDS extends COMMANDS
    * @param ENTRY $entry
    * @access private
    */
-  function _add_editors ($entry)
+  protected function _add_editors ($entry)
   {
     $cmd = $this->make_command ();
     $cmd->id = 'edit';
@@ -116,7 +116,7 @@ class ENTRY_COMMANDS extends COMMANDS
    * @param ENTRY $entry
    * @access private
    */
-  function _add_viewers ($entry)
+  protected function _add_viewers ($entry)
   {
     $folder_id = $entry->parent_folder_id ();
 
@@ -125,7 +125,7 @@ class ENTRY_COMMANDS extends COMMANDS
     $cmd->title = 'Print';
     $cmd->link = "multiple_print.php?id=$folder_id&entry_ids=$entry->id";
     $cmd->icon = '{icons}buttons/print';
-    $cmd->executable = TRUE;
+    $cmd->executable = true;
     $cmd->importance = Command_importance_high - Command_importance_increment;
     $this->append ($cmd);
 
@@ -134,7 +134,7 @@ class ENTRY_COMMANDS extends COMMANDS
     $cmd->title = 'Send';
     $cmd->link = "send_entry.php?id=$entry->id";
     $cmd->icon = '{icons}buttons/send';
-    $cmd->executable = TRUE;
+    $cmd->executable = true;
     $cmd->importance = Command_importance_high - Command_importance_increment;
     $this->append ($cmd);
 
@@ -153,7 +153,7 @@ class ENTRY_COMMANDS extends COMMANDS
    * @param ENTRY $entry
    * @access private
    */
-  function _add_creators ($entry)
+  protected function _add_creators ($entry)
   {
     $cmd = $this->make_command ();
     $cmd->id = 'comment';
@@ -181,7 +181,7 @@ class ENTRY_COMMANDS extends COMMANDS
     $cmd->title = 'Copy';
     $cmd->link = "multiple_copy.php?id=$folder_id&entry_ids=$entry->id";
     $cmd->icon = '{icons}buttons/copy';
-    $cmd->executable = TRUE;
+    $cmd->executable = true;
     $cmd->importance = Command_importance_high - 2 * Command_importance_increment;
     $this->append ($cmd);
 
@@ -216,10 +216,9 @@ class DRAFTABLE_ENTRY_COMMANDS extends ENTRY_COMMANDS
    * @param ENTRY $entry
    * @access private
    */
-  function _add_editors ($entry)
+  protected function _add_editors ($entry)
   {
     $last_page = urlencode ($this->env->url (Url_part_all));
-    $cmd = $this->make_command ();
 
     parent::_add_editors ($entry);
 

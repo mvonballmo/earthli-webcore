@@ -51,7 +51,7 @@ class OBJECT_IN_FOLDER_FORM extends CONTENT_OBJECT_FORM
   /**
    * @param FOLDER $folder Object is created/edited in this folder.
    */
-  function OBJECT_IN_FOLDER_FORM ($folder)
+  public function OBJECT_IN_FOLDER_FORM ($folder)
   {
     CONTENT_OBJECT_FORM::CONTENT_OBJECT_FORM ($folder->app);
     $this->_folder = $folder;
@@ -65,10 +65,10 @@ class OBJECT_IN_FOLDER_FORM extends CONTENT_OBJECT_FORM
 
   /**
    * Store the form's values to this object.
-    * @param OBJECT_IN_FOLDER $obj
-    * @access private
-    */
-  function _store_to_object ($obj)
+   * @param OBJECT_IN_FOLDER $obj
+   * @access private
+   */
+  protected function _store_to_object ($obj)
   {
     parent::_store_to_object ($obj);
 
@@ -78,11 +78,11 @@ class OBJECT_IN_FOLDER_FORM extends CONTENT_OBJECT_FORM
 
       if ($this->value_for ('is_visible'))
       {
-        $obj->show (FALSE);
+        $obj->show (false);
       }
       else
       {
-        $obj->hide (FALSE);
+        $obj->hide (false);
       }
     }
   }
@@ -91,7 +91,7 @@ class OBJECT_IN_FOLDER_FORM extends CONTENT_OBJECT_FORM
    * Load initial properties from this object.
    * @param OBJECT_IN_FOLDER $obj
    */
-  function load_from_object ($obj)
+  public function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
 
@@ -99,11 +99,11 @@ class OBJECT_IN_FOLDER_FORM extends CONTENT_OBJECT_FORM
     $this->set_visible ('is_visible', $this->_visible_allowed ());
   }
 
-  function load_with_defaults ()
+  public function load_with_defaults ()
   {
     parent::load_with_defaults ();
 
-    $this->set_value ('is_visible', TRUE);
+    $this->set_value ('is_visible', true);
     $this->set_visible ('is_visible', $this->_visible_allowed ());
   }
 
@@ -112,7 +112,7 @@ class OBJECT_IN_FOLDER_FORM extends CONTENT_OBJECT_FORM
    * @return boolean
    * @access private
    */
-  function _visible_allowed ()
+  protected function _visible_allowed ()
   {
     return $this->login->is_allowed ($this->_privilege_set, Privilege_view_hidden, $this->_folder);
   }
@@ -122,7 +122,7 @@ class OBJECT_IN_FOLDER_FORM extends CONTENT_OBJECT_FORM
    * @return boolean 
    * @access private
    */
-  function _has_options ()
+  protected function _has_options ()
   {
     return $this->visible ('is_visible'); 
   }
@@ -134,7 +134,7 @@ class OBJECT_IN_FOLDER_FORM extends CONTENT_OBJECT_FORM
    * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_options ($renderer)
+  protected function _draw_options ($renderer)
   {
     $renderer->draw_check_box_row ('is_visible');
   }
@@ -143,7 +143,7 @@ class OBJECT_IN_FOLDER_FORM extends CONTENT_OBJECT_FORM
    * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_controls ($renderer)
+  protected function _draw_controls ($renderer)
   {
     $renderer->start ();
     $renderer->draw_text_line_row ('title');
@@ -156,7 +156,7 @@ class OBJECT_IN_FOLDER_FORM extends CONTENT_OBJECT_FORM
     $renderer->draw_text_box_row ('description');
     $renderer->draw_separator ();
     $renderer->draw_submit_button_row ();
-    $this->_draw_history_item_controls ($renderer, FALSE);
+    $this->_draw_history_item_controls ($renderer, false);
     $renderer->finish ();
   }
 
@@ -166,6 +166,7 @@ class OBJECT_IN_FOLDER_FORM extends CONTENT_OBJECT_FORM
    * @access private
    */
   protected $_privilege_set;
+
   /**
    * Folder containing the object being edited/created.
    * @var FOLDER
@@ -186,7 +187,7 @@ class ATTACHMENT_HOST_FORM extends OBJECT_IN_FOLDER_FORM
   /**
    * @param FOLDER $folder Object is created/edited in this folder.
    */
-  function ATTACHMENT_HOST_FORM ($folder)
+  public function ATTACHMENT_HOST_FORM ($folder)
   {
     OBJECT_IN_FOLDER_FORM::OBJECT_IN_FOLDER_FORM ($folder);
 
@@ -211,7 +212,7 @@ class ATTACHMENT_HOST_FORM extends OBJECT_IN_FOLDER_FORM
    * @return array[ATTACHMENT]
    * @access private
    */
-  function _attachments ()
+  protected function _attachments ()
   {
     if (! isset ($this->_attachments))
     {
@@ -232,14 +233,16 @@ class ATTACHMENT_HOST_FORM extends OBJECT_IN_FOLDER_FORM
    * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_attachment_selector ($renderer)
+  protected function _draw_attachment_selector ($renderer)
   {
     $atts = $this->_attachments ();
     if (sizeof ($atts))
     {
       $props = $renderer->make_list_properties ();
       foreach ($atts as $att)
+      {
         $props->add_item ($att->title_as_plain_text (), $att->file_name);
+      }
       $attachments = $renderer->drop_down_as_html ('attachments', $props);
       
       $props = $renderer->make_list_properties ();
@@ -280,7 +283,7 @@ class ATTACHMENT_HOST_FORM extends OBJECT_IN_FOLDER_FORM
   /**
    * @access private
    */
-  function _draw_scripts ()
+  protected function _draw_scripts ()
   {
     parent::_draw_scripts ();
     
@@ -301,7 +304,7 @@ class ATTACHMENT_HOST_FORM extends OBJECT_IN_FOLDER_FORM
     }
 ?>
 
-    function on_insert_attachment ()
+    public function on_insert_attachment ()
     {
       f = <?php echo $this->js_form_name (); ?>;
       caption_text = attachments [f.attachments.value].replace (/"/g, "'");
@@ -330,7 +333,7 @@ class ATTACHMENT_HOST_FORM extends OBJECT_IN_FOLDER_FORM
    * @return boolean 
    * @access private
    */
-  function _has_options ()
+  protected function _has_options ()
   {
     return parent::_has_options () || ($this->object_exists () && sizeof ($this->_attachments ())); 
   }
@@ -342,7 +345,7 @@ class ATTACHMENT_HOST_FORM extends OBJECT_IN_FOLDER_FORM
    * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_options ($renderer)
+  protected function _draw_options ($renderer)
   {
     parent::_draw_options ($renderer);
     $this->_draw_attachment_selector ($renderer);
@@ -378,46 +381,46 @@ class DRAFTABLE_ENTRY_FORM extends ENTRY_FORM
   /**
    * @param CONTEXT $context Attach to this object.
    */
-  function DRAFTABLE_ENTRY_FORM ($context)
+  public function DRAFTABLE_ENTRY_FORM ($context)
   {
     ENTRY_FORM::ENTRY_FORM ($context);
 
     $field = new BOOLEAN_FIELD ();
     $field->id = 'draft';
     $field->title = 'Draft';
-    $field->visible = FALSE;
+    $field->visible = false;
     $this->add_field ($field);
 
     $field = new BOOLEAN_FIELD ();
     $field->id = 'quick_save';
     $field->title = 'Quick Save';
-    $field->visible = FALSE;
+    $field->visible = false;
     $this->add_field ($field);
   }
 
   /**
    * New object is being created, load default values.
    */
-  function load_with_defaults ()
+  public function load_with_defaults ()
   {
     parent::load_with_defaults ();
-    $this->set_value ('draft', TRUE);
-    $this->set_value ('is_visible', TRUE);
-    $this->set_visible ('is_visible', FALSE);
+    $this->set_value ('draft', true);
+    $this->set_value ('is_visible', true);
+    $this->set_visible ('is_visible', false);
   }
 
   /**
    * Load initial properties from the object.
    * @param DRAFTABLE_ENTRY $obj
    */
-  function load_from_object ($obj)
+  public function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
     $this->set_value ('draft', $obj->unpublished ());
     if ($obj->unpublished ())
     {
-      $this->set_value ('is_visible', TRUE);
-      $this->set_visible ('is_visible', FALSE);
+      $this->set_value ('is_visible', true);
+      $this->set_visible ('is_visible', false);
     }
   }
 
@@ -425,7 +428,7 @@ class DRAFTABLE_ENTRY_FORM extends ENTRY_FORM
    * Load initial properties from the object, but store as a new object.
    * @param DRAFTABLE_ENTRY $obj
    */
-  function load_from_clone ($obj)
+  public function load_from_clone ($obj)
   {
     $obj->time_published->clear ();
     $obj->publisher_id = 0;
@@ -438,7 +441,7 @@ class DRAFTABLE_ENTRY_FORM extends ENTRY_FORM
    * This will commit the form if it has been {@link submitted()}.
    * @param object $obj Object being copied.
    */
-  function process_clone ($obj)
+  public function process_clone ($obj)
   {
     $obj->time_published->clear ();
     $obj->publisher_id = 0;
@@ -450,7 +453,7 @@ class DRAFTABLE_ENTRY_FORM extends ENTRY_FORM
    * @param DRAFTABLE_ENTRY $obj
    * @access private
    */
-  function _store_to_object ($obj)
+  protected function _store_to_object ($obj)
   {
     parent::_store_to_object ($obj);
 
@@ -465,7 +468,7 @@ class DRAFTABLE_ENTRY_FORM extends ENTRY_FORM
    * @param AUDITABLE $obj
    * @access private
    */
-  function commit ($obj)
+  public function commit ($obj)
   {
     if ($this->object_exists () && $this->value_for ('quick_save'))
     {
@@ -481,7 +484,7 @@ class DRAFTABLE_ENTRY_FORM extends ENTRY_FORM
    * Add drafting to the renderer, if allowed.
    * @return FORM_RENDERER
    */
-  function make_renderer ()
+  public function make_renderer ()
   {
     $Result = parent::make_renderer ();
     $Result->drafts_enabled = $this->value_for ('draft');

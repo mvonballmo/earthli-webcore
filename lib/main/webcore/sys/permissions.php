@@ -61,7 +61,7 @@ class PRIVILEGES extends RAISABLE
    * @param string $set_name
    * @return boolean
    */
-  function supports ($set_name)
+  public function supports ($set_name)
   {
     return isset ($this->_sets [$set_name]);
   }
@@ -72,7 +72,7 @@ class PRIVILEGES extends RAISABLE
    * @param string $set_name
    * @return boolean
    */
-  function is_empty ($set_name = '')
+  public function is_empty ($set_name = '')
   {
     if ($set_name)
     {
@@ -81,9 +81,11 @@ class PRIVILEGES extends RAISABLE
     }
     else
     {
-      $Result = TRUE;
+      $Result = true;
       foreach ($this->_sets as $set_name => $set)
+      {
         $Result = $Result && $set->is_empty ();
+      }
       return $Result;
     }
   }
@@ -94,7 +96,7 @@ class PRIVILEGES extends RAISABLE
    * @param integer $type Check this privilege (or privileges).
    * @return boolean
    */
-  function enabled ($set_name, $type)
+  public function enabled ($set_name, $type)
   {
     $this->_raise_if_not_supported ($set_name, 'enabled');
     return $this->_sets [$set_name]->enabled ($type);
@@ -106,7 +108,7 @@ class PRIVILEGES extends RAISABLE
    * @param integer $type Set this privilege (or privileges).
    * @param boolean $value Set privileges to this value (true or false).
    */
-  function set ($set_name, $type, $value)
+  public function set ($set_name, $type, $value)
   {
     $this->_raise_if_not_supported ($set_name, 'set');
     $this->_sets [$set_name]->set_enabled ($type, $value);
@@ -115,10 +117,12 @@ class PRIVILEGES extends RAISABLE
   /**
    * @param DATABASE $db Database from which to load values.
    */
-  function load ($db, $prefix = '')
+  public function load ($db, $prefix = '')
   {
     foreach ($this->_set_names as $set_name)
+    {
       $this->_sets [$set_name]->load ($db->f ($prefix . $set_name));
+    }
   }
 
   /**
@@ -126,7 +130,7 @@ class PRIVILEGES extends RAISABLE
    * Used for creating 'root' users.
    * @param $enabled Set to False to remove all rights.
    */
-  function set_all ($enabled = TRUE)
+  public function set_all ($enabled = true)
   {
     if ($enabled)
     {
@@ -138,7 +142,9 @@ class PRIVILEGES extends RAISABLE
     }
 
     foreach ($this->_set_names as $set_name)
+    {
       $this->_sets [$set_name]->load ($flags);
+    }
   }
 
   /**
@@ -146,10 +152,12 @@ class PRIVILEGES extends RAISABLE
    * @param string $table_name Store values to this table.
    * @access private
    */
-  function store_to ($storage, $table_name, $prefix = '')
+  public function store_to ($storage, $table_name, $prefix = '')
   {
     foreach ($this->_set_names as $set_name)
+    {
       $storage->add ($table_name, $prefix . $set_name, Field_type_integer, $this->_sets [$set_name]->bits);
+    }
   }
 
   /**
@@ -159,7 +167,7 @@ class PRIVILEGES extends RAISABLE
    * @param BITS $bits Reference to the storage for these privileges.
    * @access private
    */
-  function _register_privileges ($name, $bits)
+  protected function _register_privileges ($name, $bits)
   {
     $this->_sets [$name] = $bits;
     $this->_set_names [] = $name;
@@ -170,7 +178,7 @@ class PRIVILEGES extends RAISABLE
    * @param string $set_name
    * @access private
    */
-  function _raise_if_not_supported ($set_name, $func_name)
+  protected function _raise_if_not_supported ($set_name, $func_name)
   {
     $this->assert ($this->supports ($set_name), "[$set_name] is not supported", $func_name, 'PRIVILEGES');
   }
@@ -180,6 +188,7 @@ class PRIVILEGES extends RAISABLE
    * @access private
    */
   protected $_set_names;
+
   /**
    * @var array[string,BITS]
    * @access private
@@ -208,6 +217,7 @@ class CONTENT_PRIVILEGES extends PRIVILEGES
    * @access private
    */
   public $general_privileges;
+
   /**
    * Privileges for {@link FOLDER}s.
    * @see is_allowed()
@@ -215,6 +225,7 @@ class CONTENT_PRIVILEGES extends PRIVILEGES
    * @access private
    */
   public $folder_privileges;
+
   /**
    * Privileges for {@link COMMENT}s.
    * @see is_allowed()
@@ -223,7 +234,7 @@ class CONTENT_PRIVILEGES extends PRIVILEGES
    */
   public $comment_privileges;
 
-  function CONTENT_PRIVILEGES ()
+  public function CONTENT_PRIVILEGES ()
   {
     $this->general_privileges = new BITS ();
     $this->_register_privileges (Privilege_set_general, $this->general_privileges);
@@ -259,7 +270,7 @@ class SINGLE_ENTRY_PRIVILEGES extends CONTENT_PRIVILEGES
    */
   public $entry_privileges;
 
-  function SINGLE_ENTRY_PRIVILEGES ()
+  public function SINGLE_ENTRY_PRIVILEGES ()
   {
     CONTENT_PRIVILEGES::CONTENT_PRIVILEGES ();
 
@@ -286,6 +297,7 @@ class GLOBAL_PRIVILEGES extends PRIVILEGES
    * @access private
    */
   public $user_privileges;
+
   /**
    * Privileges applied for {@link GROUP}s.
    * @see is_allowed()
@@ -294,7 +306,7 @@ class GLOBAL_PRIVILEGES extends PRIVILEGES
    */
   public $group_privileges;
 
-  function GLOBAL_PRIVILEGES ()
+  public function GLOBAL_PRIVILEGES ()
   {
     $this->general_privileges = new BITS ();
     $this->_register_privileges (Privilege_set_global, $this->general_privileges);
@@ -326,16 +338,19 @@ class USER_PERMISSIONS extends STORABLE
    * @var integer
    */
   public $user_id;
+
   /**
    * Privileges which are always allowed for this {@link USER}.
    * @var CONTENT_PRIVILEGES
    */
   public $allow_privileges;
+
   /**
    * Privileges which are never allowed for this {@link USER}.
    * @var CONTENT_PRIVILEGES
    */
   public $deny_privileges;
+
   /**
    * Global privileges for this {@link USER}.
    * @var GLOBAL_PRIVILEGES
@@ -345,7 +360,7 @@ class USER_PERMISSIONS extends STORABLE
   /**
    * @param APPLICATION $app Main application.
    */
-  function USER_PERMISSIONS ($app)
+  public function USER_PERMISSIONS ($app)
   {
     STORABLE::STORABLE ($app);
 
@@ -361,7 +376,7 @@ class USER_PERMISSIONS extends STORABLE
    * @param string $set_name Check this set of privileges.
    * @param integer $type Check this privilege (or privileges).
    */
-  function value_for ($set_name, $type)
+  public function value_for ($set_name, $type)
   {
     if ($this->global_privileges->supports ($set_name))
     {
@@ -369,7 +384,6 @@ class USER_PERMISSIONS extends STORABLE
       {
         return Privilege_always_granted;
       }
-
 
       return Privilege_always_denied;
     }
@@ -380,10 +394,9 @@ class USER_PERMISSIONS extends STORABLE
         return Privilege_always_granted;
       }
       else if ($this->deny_privileges->enabled ($set_name, $type))
- {
-   return Privilege_always_denied;
- }
-
+      {
+        return Privilege_always_denied;
+      }
 
       return Privilege_controlled_by_content;
     }
@@ -394,19 +407,19 @@ class USER_PERMISSIONS extends STORABLE
    * @param string $set_name Check this set of privileges.
    * @param integer $type Check this privilege (or privileges).
    * @param integer $value Can be one of {@link Privilege_always_granted}, {@link Permissions_always_denied} or {@link Privilege_controlled_by_content}.
-    * @access private
-    */
-  function set ($set_name, $type, $value)
+   * @access private
+   */
+  public function set ($set_name, $type, $value)
   {
     if ($this->global_privileges->supports ($set_name))
     {
       switch ($value)
       {
       case Privilege_always_denied:
-        $this->global_privileges->set ($set_name, $type, FALSE);
+        $this->global_privileges->set ($set_name, $type, false);
         break;
       case Privilege_always_granted:
-        $this->global_privileges->set ($set_name, $type, TRUE);
+        $this->global_privileges->set ($set_name, $type, true);
         break;
       case Privilege_controlled_by_content:
         $this->raise ('Global privileges cannot be controlled by content.', 'set_privilege_at', 'USER_PERMISSIONS');
@@ -417,16 +430,16 @@ class USER_PERMISSIONS extends STORABLE
       switch ($value)
       {
       case Privilege_always_denied:
-        $this->allow_privileges->set ($set_name, $type, FALSE);
-        $this->deny_privileges->set ($set_name, $type, TRUE);
+        $this->allow_privileges->set ($set_name, $type, false);
+        $this->deny_privileges->set ($set_name, $type, true);
         break;
       case Privilege_always_granted:
-        $this->allow_privileges->set ($set_name, $type, TRUE);
-        $this->deny_privileges->set ($set_name, $type, FALSE);
+        $this->allow_privileges->set ($set_name, $type, true);
+        $this->deny_privileges->set ($set_name, $type, false);
         break;
       case Privilege_controlled_by_content:
-        $this->allow_privileges->set ($set_name, $type, FALSE);
-        $this->deny_privileges->set ($set_name, $type, FALSE);
+        $this->allow_privileges->set ($set_name, $type, false);
+        $this->deny_privileges->set ($set_name, $type, false);
         break;
       }
     }
@@ -435,7 +448,7 @@ class USER_PERMISSIONS extends STORABLE
   /**
    * @return boolean
    */
-  function exists ()
+  public function exists ()
   {
     return $this->_exists;
   }
@@ -444,7 +457,7 @@ class USER_PERMISSIONS extends STORABLE
    * Copy permissions from another user.
    * @param USER_PERMISSIONS $other
    */
-  function copy_from ($other)
+  public function copy_from ($other)
   {
     $this->global_privileges = $other->global_privileges;
     $this->allow_privileges = $other->allow_privileges;
@@ -454,9 +467,9 @@ class USER_PERMISSIONS extends STORABLE
   /**
    * @param DATABASE $db Database from which to load values.
    */
-  function load ($db)
+  public function load ($db)
   {
-    $this->_exists = TRUE;
+    $this->_exists = true;
     $this->user_id = $db->f ('user_id');
     $this->global_privileges->load ($db);
     $this->allow_privileges->load ($db, 'allow_');
@@ -465,9 +478,9 @@ class USER_PERMISSIONS extends STORABLE
 
   /**
    * @param SQL_STORAGE $storage Store values to this object.
-    * @access private
-    */
-  function store_to ($storage)
+   * @access private
+   */
+  public function store_to ($storage)
   {
     $tname = $this->app->table_names->user_permissions;
 
@@ -478,19 +491,33 @@ class USER_PERMISSIONS extends STORABLE
     $this->allow_privileges->store_to ($storage, $tname, 'allow_');
     $this->deny_privileges->store_to ($storage, $tname, 'deny_');
 
-    $this->_exists = TRUE;
+    $this->_exists = true;
   }
 
-  function delete ()
+  public function delete ()
   {
     $this->db->logged_query ("DELETE LOW_PRIORITY FROM {$this->app->table_names->user_permissions} WHERE (user_id = $this->user_id)");
   }
+  
+  /**
+   * Remove the object from the database.
+   * Called from {@link purge()} which already checks that the object is
+   * in the database (using {@link exists()}).
+   * @param PURGE_OPTIONS $options
+   * @access private
+   * @abstract
+   */
+  protected function _purge($options) 
+  {
+  	$this->delete();
+  }
+  
 
   /**
    * @var boolean
-   *  @access private
+   * @access private
    */
-  protected $_exists = FALSE;
+  protected $_exists = false;
 }
 
 ?>

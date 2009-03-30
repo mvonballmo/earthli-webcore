@@ -62,31 +62,37 @@ class MAIL_MESSAGE extends WEBCORE_OBJECT
    * @var string
    */
   public $send_from_address;
+
   /**
    * @var string
    */
   public $return_path_address;
+
   /**
    * @var string
    */
   public $send_from_name;
+
   /**
    * @var boolean
    */
-  public $send_as_html = TRUE;
+  public $send_as_html = true;
 
   /**
    * @var array[string]
    */
   public $send_to = array ();
+
   /**
    * @var array[string]
    */
   public $cc = array ();
+
   /**
    * @var array[string]
    */
   public $bcc = array ();
+
   /**
    * @var array[string]
    */
@@ -101,6 +107,7 @@ class MAIL_MESSAGE extends WEBCORE_OBJECT
    * @var string
    */
   public $body;
+
   /**
    * @var string
    */
@@ -110,7 +117,7 @@ class MAIL_MESSAGE extends WEBCORE_OBJECT
    * @param string $name
    * @param string $email
    */
-  function set_sender ($name, $email)
+  public function set_sender ($name, $email)
   {
     $this->assert (! empty ($name) & ! empty ($email), 'name and email cannot be empty', 'set_sender', 'MAIL_MESSAGE');
     $this->send_from_name = $name;
@@ -122,7 +129,7 @@ class MAIL_MESSAGE extends WEBCORE_OBJECT
    * @param string $subject
    * @param string $body
    */
-  function set_content ($subject, $body)
+  public function set_content ($subject, $body)
   {
     $this->assert (! empty ($subject) && ! empty ($body), 'subject and body cannot be empty', 'set_content', 'MAIL_MESSAGE');
     $this->subject = $subject;
@@ -133,7 +140,7 @@ class MAIL_MESSAGE extends WEBCORE_OBJECT
    * Can be set to 'Mail_message_priority_normal' or 'Mail_message_priority_high'.
    * @param integer $priority
    */
-  function set_priority ($priority)
+  public function set_priority ($priority)
   {
     $is_valid_priority = ($priority >= Mail_message_priority_high) && ($priority <= Mail_message_priority_normal);
     $this->assert ($is_valid_priority, 'priority must be high or normal', 'add_header', 'MAIL_MESSAGE');
@@ -145,7 +152,7 @@ class MAIL_MESSAGE extends WEBCORE_OBJECT
    * Pass in either a single email or an array of emails.
    * @param string $address
    */
-  function set_send_to ($address)
+  public function set_send_to ($address)
   {
     $this->assert (! empty ($address), 'address cannot be empty', 'set_send_to', 'MAIL_MESSAGE');
     $this->send_to = array ();
@@ -164,7 +171,7 @@ class MAIL_MESSAGE extends WEBCORE_OBJECT
    * Pass in either a single email or an array of emails.
    * @param string $address
    */
-  function add_send_to ($address)
+  public function add_send_to ($address)
   {
     $this->assert (! empty ($address), 'address cannot be empty', 'add_send_to', 'MAIL_MESSAGE');
     if (is_array ($address))
@@ -182,7 +189,7 @@ class MAIL_MESSAGE extends WEBCORE_OBJECT
    * Pass in either a single email or an array of emails.
    * @param string $address
    */
-  function add_cc ($address)
+  public function add_cc ($address)
   {
     $this->assert (! empty ($address), 'address cannot be empty', 'add_cc', 'MAIL_MESSAGE');
     if (is_array ($address))
@@ -200,7 +207,7 @@ class MAIL_MESSAGE extends WEBCORE_OBJECT
    * Pass in either a single email or an array of emails.
    * @param string $address
    */
-  function add_bcc ($address)
+  public function add_bcc ($address)
   {
     $this->assert (! empty ($address), 'address cannot be empty', 'add_bcc', 'MAIL_MESSAGE');
     if (is_array ($address))
@@ -218,7 +225,7 @@ class MAIL_MESSAGE extends WEBCORE_OBJECT
    * Pass in either a single header or an array of headers.
    * @param string $header
    */
-  function add_custom_header ($header)
+  public function add_custom_header ($header)
   {
     $this->assert (! empty ($header), 'header cannot be empty', 'add_header', 'MAIL_MESSAGE');
     if (is_array ($header))
@@ -235,7 +242,7 @@ class MAIL_MESSAGE extends WEBCORE_OBJECT
    * Send the message using the given provider.
    * @param PROVIDER $provider
    */
-  function send ($provider)
+  public function send ($provider)
   {
     $provider->send ($this);
   }

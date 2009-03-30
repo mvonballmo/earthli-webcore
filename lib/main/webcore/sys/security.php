@@ -69,12 +69,14 @@ class FOLDER_PERMISSIONS extends NAMED_OBJECT
    *  @var integer
    */
   public $folder_id;
+
   /**
    * Unique id for the associated object.
    * Used only if these are {@link GROUP} or {@link USER} permissions.
    * @var integer
    */
   public $ref_id;
+
   /**
    * To which users are these permissions applied?
    * Can be {@link Privilege_kind_anonymous}, {@link Privilege_kind_registered},
@@ -82,12 +84,14 @@ class FOLDER_PERMISSIONS extends NAMED_OBJECT
    * @var string
    */
   public $kind;
+
   /**
    * Tie-breaker for multiple matches on permissions.
-    * Used only with group permissions.
-    * @var integer
-    */
+   * Used only with group permissions.
+   * @var integer
+   */
   public $importance;
+
   /**
    * List of privileges for this {@link FOLDER}.
    * @var CONTENT_PRIVILEGES
@@ -97,7 +101,7 @@ class FOLDER_PERMISSIONS extends NAMED_OBJECT
   /**
    * @param APPLICATION $app Main application.
    */
-  function FOLDER_PERMISSIONS ($app)
+  public function FOLDER_PERMISSIONS ($app)
   {
     NAMED_OBJECT::NAMED_OBJECT ($app);
     $this->privileges = $app->make_privileges ();
@@ -106,7 +110,7 @@ class FOLDER_PERMISSIONS extends NAMED_OBJECT
   /**
    * @return boolean
    */
-  function exists ()
+  public function exists ()
   {
     return $this->_exists;
   }
@@ -116,7 +120,7 @@ class FOLDER_PERMISSIONS extends NAMED_OBJECT
    * {@link exists()} will return <code>False</code> until {@link store()} is
    * called.
    * @param FOLDER $folder */
-  function set_folder ($folder)
+  public function set_folder ($folder)
   {
     $this->folder_id = $folder->id;
     $this->_exists = $this->exists_in_database ();
@@ -126,7 +130,7 @@ class FOLDER_PERMISSIONS extends NAMED_OBJECT
    * Returns true if no privileges in any set are enabled.
    * @return boolean
    */
-  function is_empty ()
+  public function is_empty ()
   {
     return $this->privileges->is_empty ();
   }
@@ -137,7 +141,7 @@ class FOLDER_PERMISSIONS extends NAMED_OBJECT
    * @param integer $type Check this privilege (or privileges).
    * @return boolean
    */
-  function is_allowed ($set_name, $type)
+  public function is_allowed ($set_name, $type)
   {
     return $this->privileges->enabled ($set_name, $type);
   }
@@ -148,7 +152,7 @@ class FOLDER_PERMISSIONS extends NAMED_OBJECT
    * @param integer $type Set this privilege (or privileges).
    * @param boolean $value Set privileges to this value (true or false).
    */
-  function set ($set_name, $type, $value)
+  public function set ($set_name, $type, $value)
   {
     $this->privileges->set ($set_name, $type, $value);
   }
@@ -158,7 +162,7 @@ class FOLDER_PERMISSIONS extends NAMED_OBJECT
    * Used for creating 'root' users.
    * @param $enabled Set to False to remove all rights.
    */
-  function set_all ($enabled = TRUE)
+  public function set_all ($enabled = true)
   {
     $this->privileges->set_all ($enabled);
   }
@@ -168,12 +172,14 @@ class FOLDER_PERMISSIONS extends NAMED_OBJECT
    * Only works for user privileges. Otherwise, returns null.
    * @return USER
    */
-  function user ()
+  public function user ()
   {
     if ($this->kind == Privilege_kind_user)
     {
       return $this->app->user_at_id ($this->ref_id);
     }
+    
+    return null;
   }
 
   /**
@@ -181,7 +187,7 @@ class FOLDER_PERMISSIONS extends NAMED_OBJECT
    * Only works for group privileges. Otherwise, returns null.
    * @return GROUP
    */
-  function group ()
+  public function group ()
   {
     if ($this->kind == Privilege_kind_group)
     {
@@ -189,14 +195,16 @@ class FOLDER_PERMISSIONS extends NAMED_OBJECT
       $Result = $group_query->object_at_id ($this->ref_id);
       return $Result;
     }
+    
+    return null;
   }
 
   /**
    * @param DATABASE $db Database from which to load values.
    */
-  function load ($db)
+  public function load ($db)
   {
-    $this->_exists = TRUE;
+    $this->_exists = true;
 
     $this->kind = $db->f ('kind');
     $this->folder_id = $db->f ('folder_id');
@@ -208,7 +216,7 @@ class FOLDER_PERMISSIONS extends NAMED_OBJECT
   /**
    * @param SQL_STORAGE $storage Store values to this object.
    */
-  function store_to ($storage)
+  public function store_to ($storage)
   {
     $tname = $this->app->table_names->folder_permissions;
 
@@ -223,14 +231,14 @@ class FOLDER_PERMISSIONS extends NAMED_OBJECT
 
     $this->privileges->store_to ($storage, $tname);
 
-    $this->_exists = TRUE;
+    $this->_exists = true;
   }
 
   /**
    * Name of the home page name for this object.
    * @return string
    */
-  function page_name ()
+  public function page_name ()
   {
     return $this->app->page_names->folder_permissions_home;
   }
@@ -239,7 +247,7 @@ class FOLDER_PERMISSIONS extends NAMED_OBJECT
    * Arguments to the home page url for this object.
    * @return string
    */
-  function page_arguments ()
+  public function page_arguments ()
   {
     return 'id=' . $this->folder_id;
   }
@@ -247,7 +255,7 @@ class FOLDER_PERMISSIONS extends NAMED_OBJECT
   /**
    * @access private
    */
-  function _create ()
+  protected function _create ()
   {
     if ($this->kind == Privilege_kind_group)
     {
@@ -270,7 +278,7 @@ class FOLDER_PERMISSIONS extends NAMED_OBJECT
    * @param PURGE_OPTIONS $options
    * @access private
    */
-  function _purge ($options)
+  protected function _purge ($options)
   {
     $this->db->logged_query ("DELETE LOW_PRIORITY FROM {$this->app->table_names->folder_permissions} WHERE (folder_id = $this->folder_id) " .
                              "AND (ref_id = $this->ref_id) AND (kind = '$this->kind')");
@@ -279,7 +287,7 @@ class FOLDER_PERMISSIONS extends NAMED_OBJECT
   /**
    * @return string
    */
-  function raw_title ()
+  public function raw_title ()
   {
     switch ($this->kind)
     {
@@ -293,6 +301,8 @@ class FOLDER_PERMISSIONS extends NAMED_OBJECT
     case Privilege_kind_group:
       $group = $this->group ();
       return 'Permissions for ' . $group->title_as_plain_text ();
+    default:
+      throw new UNKNOWN_VALUE_EXCEPTION($this->kind);
     }
   }
 
@@ -300,7 +310,7 @@ class FOLDER_PERMISSIONS extends NAMED_OBJECT
    * @var boolean
    *  @access private
    */
-  protected $_exists = FALSE;
+  protected $_exists = false;
 }
 
 /**
@@ -318,7 +328,7 @@ class FOLDER_SECURITY extends FOLDER_INHERITABLE_SETTINGS
    * Retrieve and organize all permissions in this folder.
    * All permissions are preloaded using one query.
    */
-  function load_all_permissions ()
+  public function load_all_permissions ()
   {
     if (! isset ($this->_user_table))
     {
@@ -358,9 +368,9 @@ class FOLDER_SECURITY extends FOLDER_INHERITABLE_SETTINGS
 
   /**
    * A query that finds all permissions.
-    * @return FOLDER_PERMISSIONS_QUERY
-    */
-  function permissions_query ()
+   * @return FOLDER_PERMISSIONS_QUERY
+   */
+  public function permissions_query ()
   {
     $class_name = $this->app->final_class_name ('FOLDER_PERMISSIONS_QUERY', 'webcore/db/permissions_query.php');
     return new $class_name ($this->_folder);
@@ -371,7 +381,7 @@ class FOLDER_SECURITY extends FOLDER_INHERITABLE_SETTINGS
    * Used only when no group or user permissions apply to a user.
    * @return FOLDER_PERMISSIONS
    */
-  function anonymous_permissions ()
+  public function anonymous_permissions ()
   {
     if (! isset ($this->_anonymous_permissions))
     {
@@ -387,7 +397,7 @@ class FOLDER_SECURITY extends FOLDER_INHERITABLE_SETTINGS
    * Used only when no group or user permissions apply to a user.
    * @return FOLDER_PERMISSIONS
    */
-  function registered_permissions ()
+  public function registered_permissions ()
   {
     if (! isset ($this->_registered_permissions))
     {
@@ -404,7 +414,7 @@ class FOLDER_SECURITY extends FOLDER_INHERITABLE_SETTINGS
    * @see FOLDER_PERMISSIONS
    * @return array[FOLDER_PERMISSIONS]
    */
-  function group_permissions ()
+  public function group_permissions ()
   {
     if (! isset ($this->_group_permissions))
     {
@@ -420,7 +430,7 @@ class FOLDER_SECURITY extends FOLDER_INHERITABLE_SETTINGS
    * @see FOLDER_PERMISSIONS
    * @return array[FOLDER_PERMISSIONS]
    */
-  function user_permissions ()
+  public function user_permissions ()
   {
     if (! isset ($this->_user_permissions))
     {
@@ -433,9 +443,9 @@ class FOLDER_SECURITY extends FOLDER_INHERITABLE_SETTINGS
 
   /**
    * Permissions for a particular group.
-    * @return FOLDER_PERMISSIONS
-    */
-  function group_permissions_at_id ($id)
+   * @return FOLDER_PERMISSIONS
+   */
+  public function group_permissions_at_id ($id)
   {
     if (isset ($this->_group_table))
     {
@@ -450,9 +460,9 @@ class FOLDER_SECURITY extends FOLDER_INHERITABLE_SETTINGS
 
   /**
    * Permisions for this user in this folder.
-    * @return FOLDER_PERMISSIONS
-    */
-  function user_permissions_at_id ($id)
+   * @return FOLDER_PERMISSIONS
+   */
+  public function user_permissions_at_id ($id)
   {
     if (isset ($this->_user_table))
     {
@@ -467,9 +477,9 @@ class FOLDER_SECURITY extends FOLDER_INHERITABLE_SETTINGS
 
   /**
    * A query that finds all group permissions.
-    * @return FOLDER_PERMISSIONS_QUERY
-    */
-  function group_permissions_query ()
+   * @return FOLDER_PERMISSIONS_QUERY
+   */
+  public function group_permissions_query ()
   {
     $Result = $this->permissions_query ();
     $Result->set_kind (Privilege_kind_group);
@@ -478,9 +488,9 @@ class FOLDER_SECURITY extends FOLDER_INHERITABLE_SETTINGS
 
   /**
    * A query that finds all user permissions.
-    * @return FOLDER_PERMISSIONS_QUERY
-    */
-  function user_permissions_query ()
+   * @return FOLDER_PERMISSIONS_QUERY
+   */
+  public function user_permissions_query ()
   {
     $Result = $this->permissions_query ();
     $Result->set_kind (Privilege_kind_user);
@@ -494,7 +504,7 @@ class FOLDER_SECURITY extends FOLDER_INHERITABLE_SETTINGS
    * Privilege_kind_user}.
    * @return FOLDER_PERMISSIONS
    */
-  function new_permissions ($kind)
+  public function new_permissions ($kind)
   {
     $Result = new FOLDER_PERMISSIONS ($this->app);
     $Result->folder_id = $this->_definer_id;
@@ -514,7 +524,7 @@ class FOLDER_SECURITY extends FOLDER_INHERITABLE_SETTINGS
    * <code>Security_create_admin</code>, this user is granted administrator
    * rights. Uses the logged-in user if not assigned.
    */
-  function copy_and_store ($copy_mode, $user = null)
+  public function copy_and_store ($copy_mode, $user = null)
   {
     $folder = $this->folder ();
 
@@ -545,13 +555,13 @@ class FOLDER_SECURITY extends FOLDER_INHERITABLE_SETTINGS
       }
     }
 
-    $this->set_inherited (FALSE);
+    $this->set_inherited (false);
   }
 
   /**
    * @access private
    */
-  function _create ()
+  protected function _create ()
   {
     parent::_create ();
 
@@ -560,7 +570,7 @@ class FOLDER_SECURITY extends FOLDER_INHERITABLE_SETTINGS
     $this->_ensure_default_permissions_are_stored();
   }
 
-  function _ensure_default_permissions_are_stored()
+  protected function _ensure_default_permissions_are_stored()
   {
     if (! isset ($this->_anonymous_permissions))
     {
@@ -578,7 +588,7 @@ class FOLDER_SECURITY extends FOLDER_INHERITABLE_SETTINGS
    * @param string $kind
    * @return FOLDER_PERMISSIONS
    */
-  function _create_and_store_permissions ($kind)
+  protected function _create_and_store_permissions ($kind)
   {
     $Result = $this->new_permissions ($kind);
     $Result->store ();
@@ -592,7 +602,7 @@ class FOLDER_SECURITY extends FOLDER_INHERITABLE_SETTINGS
    * @access private
    * @abstract
    */
-  function _history_item_title ($adding)
+  protected function _history_item_title ($adding)
   {
     return 'Security inheritance changed';
   }
@@ -604,7 +614,7 @@ class FOLDER_SECURITY extends FOLDER_INHERITABLE_SETTINGS
    * @access private
    * @abstract
    */
-  function _history_item_description ($adding, $folder)
+  protected function _history_item_description ($adding, $folder)
   {
     return 'Security is now inherited from ' . $folder->title_as_plain_text () . '.';
   }
@@ -615,7 +625,7 @@ class FOLDER_SECURITY extends FOLDER_INHERITABLE_SETTINGS
    * @access private
    * @abstract
    */
-  function _settings_table_name ()
+  protected function _settings_table_name ()
   {
     return $this->app->table_names->folder_permissions;
   }
@@ -625,41 +635,48 @@ class FOLDER_SECURITY extends FOLDER_INHERITABLE_SETTINGS
    * @var boolean
    * @access private
    */
-  protected $_stores_data = FALSE;
+  protected $_stores_data = false;
+
   /**
    * Name of the object field in the folder and database.
    * @var string
    * @access private
    */
   protected $_field_name = 'permissions_id';
+
   /**
    * @access private
    * @var FOLDER_PERMISSIONS
    */
   protected $_anonymous_permissions;
+
   /**
    * @access private
    * @var FOLDER_PERMISSIONS
    */
   protected $_registered_permissions;
+
   /**
    * @access private
    * @see FOLDER_PERMISSIONS
    * @var array[FOLDER_PERMISSIONS]
    */
   protected $_group_permissions;
+
   /**
    * @access private
    * @see FOLDER_PERMISSIONS
    * @var array[FOLDER_PERMISSIONS]
    */
   protected $_user_permissions;
+
   /**
    * @access private
    * @see FOLDER_PERMISSIONS
    * @var array[integer,FOLDER_PERMISSIONS]
    */
   protected $_group_table;
+
   /**
    * @access private
    * @see FOLDER_PERMISSIONS
@@ -686,7 +703,7 @@ class PERMISSIONS_FORMATTER extends WEBCORE_OBJECT
   /**
    * @param APPLICATION $app Main application.
    */
-  function PERMISSIONS_FORMATTER ($app)
+  public function PERMISSIONS_FORMATTER ($app)
   {
     WEBCORE_OBJECT::WEBCORE_OBJECT ($app);
 
@@ -713,7 +730,7 @@ class PERMISSIONS_FORMATTER extends WEBCORE_OBJECT
    * @see PRIVILEGE_GROUP
    * @return array[PRIVILEGE_GROUP]
    */
-  function content_privilege_groups ()
+  public function content_privilege_groups ()
   {
     $group = new PRIVILEGE_GROUP ('General');
     $group->description = 'Settings which apply globally within the folder.';
@@ -785,16 +802,16 @@ class PERMISSIONS_FORMATTER extends WEBCORE_OBJECT
    * @see PRIVILEGE_GROUP
    * @return array[PRIVILEGE_GROUP]
    */
-  function global_privilege_groups ()
+  public function global_privilege_groups ()
   {
     $group = new PRIVILEGE_GROUP ('Global');
 
-    $map = $group->new_map (Privilege_set_global, Privilege_configure, Privilege_range_global);
-    $map = $group->new_map (Privilege_set_global, Privilege_login, Privilege_range_global);
-    $map = $group->new_map (Privilege_set_global, Privilege_offline, Privilege_range_global);
-    $map = $group->new_map (Privilege_set_global, Privilege_subscribe, Privilege_range_global);
-    $map = $group->new_map (Privilege_set_global, Privilege_password, Privilege_range_global);
-    $map = $group->new_map (Privilege_set_global, Privilege_resources, Privilege_range_global);
+    $group->new_map (Privilege_set_global, Privilege_configure, Privilege_range_global);
+    $group->new_map (Privilege_set_global, Privilege_login, Privilege_range_global);
+    $group->new_map (Privilege_set_global, Privilege_offline, Privilege_range_global);
+    $group->new_map (Privilege_set_global, Privilege_subscribe, Privilege_range_global);
+    $group->new_map (Privilege_set_global, Privilege_password, Privilege_range_global);
+    $group->new_map (Privilege_set_global, Privilege_resources, Privilege_range_global);
 
     $Result [] = $group;
 
@@ -832,7 +849,7 @@ class PERMISSIONS_FORMATTER extends WEBCORE_OBJECT
    * Return the title registered for this privilege.
    * @param PRIVILEGE_MAP $map Information about the privilege.
    */
-  function title_for ($map)
+  public function title_for ($map)
   {
     return $this->_formatters [$map->range][$map->type]->title;
   }
@@ -841,7 +858,7 @@ class PERMISSIONS_FORMATTER extends WEBCORE_OBJECT
    * Return the icon registered for this privilege.
    * @param PRIVILEGE_MAP $map Information about the privilege.
    */
-  function icon_for ($map, $size = '16px')
+  public function icon_for ($map, $size = '16px')
   {
     $formatter = $this->_formatters [$map->range][$map->type];
     return $this->app->resolve_icon_as_html ($formatter->image, $formatter->title, $size);
@@ -854,7 +871,7 @@ class PERMISSIONS_FORMATTER extends WEBCORE_OBJECT
    * @param string $title
    * @access private
    */
-  function _register_formatter ($range, $type, $image, $title)
+  protected function _register_formatter ($range, $type, $image, $title)
   {
     $formatter = null; // Compiler warning
     $formatter->type = $type;
@@ -885,6 +902,7 @@ class PRIVILEGE_GROUP
    * @var string
    */
   public $title;
+
   /**
    * @var array[PRIVILEGE_MAP]
    * @see PRIVILEGE_MAP
@@ -894,7 +912,7 @@ class PRIVILEGE_GROUP
   /**
    * @param string $t Title of the group.
    */
-  function PRIVILEGE_GROUP ($t)
+  public function PRIVILEGE_GROUP ($t)
   {
     $this->title = $t;
   }
@@ -906,7 +924,7 @@ class PRIVILEGE_GROUP
    * @param string $range Can be {@link Privilege_range_object} or {@link
    * Privilege_range_global}.
    */
-  function new_map ($set_name, $type, $range = Privilege_range_object)
+  public function new_map ($set_name, $type, $range = Privilege_range_object)
   {
     $Result = new PRIVILEGE_MAP ($set_name, $type, $range);
     $this->maps [] = $Result;
@@ -929,10 +947,12 @@ class PRIVILEGE_MAP
    * @var string
    */
   public $set_name;
+
   /**
    * @var integer
    */
   public $type;
+
   /**
    * @var string
    */
@@ -948,7 +968,7 @@ class PRIVILEGE_MAP
    * @param string $range Can be {@link Privilege_range_object} or {@link
    * Privilege_range_global}.
    */
-  function PRIVILEGE_MAP ($set_name, $type, $range)
+  public function PRIVILEGE_MAP ($set_name, $type, $range)
   {
     $this->set_name = $set_name;
     $this->type = $type;
@@ -962,7 +982,7 @@ class PRIVILEGE_MAP
    * @param integer $type Specific privilege to set; must correspond to the
    * 'range'.
    */
-  function add ($set_name, $type = null)
+  public function add ($set_name, $type = null)
   {
     $set = null; // Compiler warning
     $set->name = $set_name;
@@ -982,7 +1002,7 @@ class PRIVILEGE_MAP
    * Return a unique id for a {@link FORM} {@link FIELD}.
    * @return string
    */
-  function id ()
+  public function id ()
   {
     return $this->set_name . '_' . $this->type;
   }
@@ -992,10 +1012,12 @@ class PRIVILEGE_MAP
    * @param FOLDER_PERMISSIONS $permissions
    * @param boolean @value
    */
-  function store_to_object ($permissions, $value)
+  public function store_to_object ($permissions, $value)
   {
     foreach ($this->_sets as $set)
+    {
       $permissions->set ($set->name, $set->type, $value);
+    }
   }
 
   /**

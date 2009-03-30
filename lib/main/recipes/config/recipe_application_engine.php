@@ -53,7 +53,7 @@ class RECIPE_APPLICATION_ENGINE extends APPLICATION_ENGINE
    * Register plugins in {@link $classes} during initialization.
    * @access private
    */
-  function _initialize_class_registry ()
+  protected function _initialize_class_registry ()
   {
     parent::_initialize_class_registry ();
     $this->register_class ('APPLICATION', 'RECIPE_APPLICATION', 'recipes/sys/recipe_application.php');
@@ -65,7 +65,7 @@ class RECIPE_APPLICATION_ENGINE extends APPLICATION_ENGINE
    * @param APPLICATION $app
    * @access private
    */
-  function _init_application ($page, $app)
+  protected function _init_application ($page, $app)
   {
     parent::_init_application ($page, $app);
     $app->mail_options->send_from_address = 'recipes@' . $app->env->default_domain ();

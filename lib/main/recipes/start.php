@@ -48,6 +48,6 @@ require_once ('recipes/init.php');
  * @version 3.0.0
  * @since 1.3.0
  */
-$App = $Page->make_application (Recipe_application_id, TRUE, TRUE);
+$App = $Page->make_application (Recipe_application_id, true, true);
 
 ?>

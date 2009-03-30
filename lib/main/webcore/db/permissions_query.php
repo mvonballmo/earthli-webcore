@@ -53,6 +53,7 @@ class PERMISSIONS_QUERY extends QUERY
    * @var string
    */
   public $alias = 'perm';
+
   /**
    * Name of the SQL field for the ID in the "main" table.
    * @var string
@@ -62,7 +63,7 @@ class PERMISSIONS_QUERY extends QUERY
   /**
    * @param APPLICATION $app Main application.
    */
-  function PERMISSIONS_QUERY ($app)
+  public function PERMISSIONS_QUERY ($app)
   {
     QUERY::QUERY ($app);
 
@@ -78,7 +79,7 @@ class PERMISSIONS_QUERY extends QUERY
    * {@link Privilege_kind_group} or {@link Privilege_kind_user}.
    * @var string
    */
-  function set_kind ($kind)
+  public function set_kind ($kind)
   {
     $this->_invalidate ();
     $this->_kind = $kind;
@@ -86,9 +87,9 @@ class PERMISSIONS_QUERY extends QUERY
 
   /**
    * @return PERMISSIONS
-    * @access private
-    */
-  function _make_object ()
+   * @access private
+   */
+  protected function _make_object ()
   {
     $class_name = $this->app->final_class_name ('FOLDER_PERMISSIONS', 'webcore/sys/permissions.php');
     return new $class_name ($this->app);
@@ -97,7 +98,7 @@ class PERMISSIONS_QUERY extends QUERY
   /**
    * @access private
    */
-  function _prepare_restrictions ()
+  protected function _prepare_restrictions ()
   {
     if (isset ($this->_kind))
     {
@@ -124,7 +125,7 @@ class FOLDER_PERMISSIONS_QUERY extends PERMISSIONS_QUERY
   /**
    * @param FOLDER $folder Retrieve permissions for this folder.
    */
-  function FOLDER_PERMISSIONS_QUERY ($folder)
+  public function FOLDER_PERMISSIONS_QUERY ($folder)
   {
     PERMISSIONS_QUERY::PERMISSIONS_QUERY ($folder->app);
     $this->_folder = $folder;
@@ -133,7 +134,7 @@ class FOLDER_PERMISSIONS_QUERY extends PERMISSIONS_QUERY
   /**
    * @access private
    */
-  function _prepare_restrictions ()
+  protected function _prepare_restrictions ()
   {
     parent::_prepare_restrictions ();
     $this->_calculated_restrictions [] = "folder_id = {$this->_folder->permissions_id}";

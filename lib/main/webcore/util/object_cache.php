@@ -67,14 +67,15 @@ require_once ('webcore/sys/system.php');
  * @access private
  * @abstract
  */
-class OBJECT_CACHE extends RAISABLE
+abstract class OBJECT_CACHE extends RAISABLE
 {
   /**
    * Maximum number of entries to show in the context.
-    * The internal cache will is adjusted to work efficiently with this value.
-    * @var integer
-    */
+   * The internal cache will is adjusted to work efficiently with this value.
+   * @var integer
+   */
   public $window_size;
+
   /**
    * Total number of objects represented by this cache.
    * The cache is simply a window of objects over a (possibly) larger list. This is the number
@@ -85,53 +86,62 @@ class OBJECT_CACHE extends RAISABLE
    * @var integer
    */
   public $num_objects_in_list;
+
   /**
    * Index of current item in total number of objects.
    * Use this along with {@link $num_objects_in_list} to show a position indicator (e.g. item 23/25).
    * @var integer
    */
   public $position_of_selected_id;
+
   /**
    * Context list for the current object.
    * Set the current object with {@link set_selected_id()}.
    * @var array[object]
    */
   public $objects_in_window;
+
   /**
    * First object in the list.
    * Is always set; use {@link is_first()} to determine whether it is the same as the selected object.
    * @var object
    */
   public $first_object;
+
   /**
    * Object one 'window_size' before the selected one.
    * May be empty; use {@link is_on_first_page()} to determine whether it is set.
    * @var object
    */
   public $previous_page_object;
+
   /**
    * Object one position before the selected one.
    * May be empty; use {@link is_first()} to determine whether it is set.
    * @var object
    */
   public $previous_object;
+
   /**
    * Object at the selected position.
    * @var object
    */
   public $selected_object;
+
   /**
    * Object one position after the selected one.
    * May be empty; use {@link is_last()} to determine whether it is set.
    * @var object
    */
   public $next_object;
+
   /**
    * Object one 'window_size' after the selected one.
    * May be empty; use {@link is_on_last_page()} to determine whether it is set.
    * @var object
    */
   public $next_page_object;
+
   /**
    * Last object in the entire list (not the window).
    * Is always set; use {@link is_last()} to determine whether it is the same as the {@link $selected_object}.
@@ -143,27 +153,27 @@ class OBJECT_CACHE extends RAISABLE
    * Was the object requested with {@link set_selected_id()} located?
    * @return boolean
    */
-  function is_valid ()
+  public function is_valid ()
   {
     return sizeof ($this->objects_in_window) > 0;
   }
 
-  function is_on_first_page ()
+  public function is_on_first_page ()
   {
     return ! isset ($this->previous_page_object);
   }
 
-  function is_first ()
+  public function is_first ()
   {
     return ! isset ($this->previous_object);
   }
 
-  function is_on_last_page ()
+  public function is_on_last_page ()
   {
     return ! isset ($this->next_page_object);
   }
 
-  function is_last ()
+  public function is_last ()
   {
     return ! isset ($this->next_object);
   }
@@ -173,7 +183,7 @@ class OBJECT_CACHE extends RAISABLE
    * If this id is found in the list on which the cache operates, then {@link is_valid()} will return true.
    * @param integer $selected_id
    */
-  function set_selected_id ($selected_id)
+  public function set_selected_id ($selected_id)
   {
     $stored_num_objects = $this->_read_value ('id_size');
     $actual_num_objects = $this->_num_objects_in_list ();
@@ -202,7 +212,7 @@ class OBJECT_CACHE extends RAISABLE
       {
         $this->_record ('ID list has ' . $cache_size . ' items');
         $index_of_selected_id = array_search ($selected_id, $ids);
-        $rebuild_cache = $index_of_selected_id === FALSE;
+        $rebuild_cache = $index_of_selected_id === false;
         if (! $rebuild_cache)
         {
           $this->_record ("[$selected_id] found in list at: $index_of_selected_id");
@@ -249,7 +259,7 @@ class OBJECT_CACHE extends RAISABLE
             $this->_write_value ('id_list_pos', $first);
 
             $pos_of_local_list = $first;
-            $rebuild_cache = FALSE;
+            $rebuild_cache = false;
 
             $this->_record ("Repositioned cache to [$first] with id at pos [$index_of_selected_id].");
           }
@@ -428,7 +438,9 @@ class OBJECT_CACHE extends RAISABLE
         $special_objs = $this->_load_objects_at_ids ($special_ids);
 
         foreach ($special_objs as $obj)
+        {
           $indexed_objs [$obj->id] = $obj;
+        }
 
         if (isset ($prev_id))
         {
@@ -466,7 +478,7 @@ class OBJECT_CACHE extends RAISABLE
    * @return string
    * @access private
    */
-  function _stored_name ($name)
+  protected function _stored_name ($name)
   {
     return $name;
   }
@@ -478,10 +490,7 @@ class OBJECT_CACHE extends RAISABLE
    * @access private
    * @abstract
    */
-  function _num_objects_in_list ()
-  {
-    $this->raise_deferred ('_num_objects_in_list', 'OBJECT_CACHE');
-  }
+  protected abstract function _num_objects_in_list ();
 
   /**
    * Load the requested objects.
@@ -490,10 +499,7 @@ class OBJECT_CACHE extends RAISABLE
    * @access private
    * @abstract
    */
-  function _load_objects_at_ids ($ids)
-  {
-    $this->raise_deferred ('_load_objects_at_ids', 'OBJECT_CACHE');
-  }
+  protected abstract function _load_objects_at_ids ($ids);
 
   /**
    * Load the requested objects.
@@ -503,10 +509,7 @@ class OBJECT_CACHE extends RAISABLE
    * @access private
    * @abstract
    */
-  function _load_objects_in_range ($first, $count)
-  {
-    $this->raise_deferred ('_load_objects_in_range', 'OBJECT_CACHE');
-  }
+  protected abstract function _load_objects_in_range ($first, $count);
 
   /**
    * Read a value from storage.
@@ -515,10 +518,7 @@ class OBJECT_CACHE extends RAISABLE
    * @access private
    * @abstract
    */
-  function _read_value ($name)
-  {
-    $this->raise_deferred ('_read_value', 'OBJECT_CACHE');
-  }
+  protected abstract function _read_value ($name);
 
   /**
    * Write a value to storage.
@@ -527,10 +527,7 @@ class OBJECT_CACHE extends RAISABLE
    * @access private
    * @abstract
    */
-  function _write_value ($name, $value)
-  {
-    $this->raise_deferred ('_write_value', 'OBJECT_CACHE');
-  }
+  protected abstract function _write_value ($name, $value);
 
   /**
    * Record a message to a logging mechanism.
@@ -540,10 +537,7 @@ class OBJECT_CACHE extends RAISABLE
    * @access private
    * @abstract
    */
-  function _record ($msg, $type, $channel)
-  {
-    $this->raise_deferred ('_record', 'OBJECT_CACHE');
-  }
+  protected abstract function _record ($msg, $type = Msg_type_debug_info, $channel = Msg_channel_system);
 
   /**
    * Start looking for ids in the given range.
@@ -552,10 +546,7 @@ class OBJECT_CACHE extends RAISABLE
    * @access private
    * @abstract
    */
-  function _start_id_search ($first = 0, $count = 0)
-  {
-    $this->raise_deferred ('_start_id_search', 'OBJECT_CACHE');
-  }
+  protected abstract function _start_id_search ($first = 0, $count = 0);
 
   /**
    * Are there ids left to iterate?
@@ -564,10 +555,7 @@ class OBJECT_CACHE extends RAISABLE
    * @access private
    * @abstract
    */
-  function _ids_exist ()
-  {
-    $this->raise_deferred ('_ids_exist', 'OBJECT_CACHE');
-  }
+  protected abstract function _ids_exist ();
 
   /**
    * Go to the next id in an iteration.
@@ -576,10 +564,7 @@ class OBJECT_CACHE extends RAISABLE
    * @access private
    * @abstract
    */
-  function _load_id ()
-  {
-    $this->raise_deferred ('_load_id', 'OBJECT_CACHE');
-  }
+  protected abstract function _load_id ();
 }
 
 ?>

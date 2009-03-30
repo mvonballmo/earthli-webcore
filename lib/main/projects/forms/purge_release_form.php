@@ -53,16 +53,17 @@ class PURGE_RELEASE_FORM extends PURGE_OBJECT_FORM
    * @var string
    */
   public $button = 'Yes';
+
   /**
    * Show the previews before the form?
    * @var boolean
    */
-  public $show_previews_first = TRUE;
+  public $show_previews_first = true;
 
   /**
    * @param APPLICATION $app
    */
-  function PURGE_RELEASE_FORM ($app)
+  public function PURGE_RELEASE_FORM ($app)
   {
     PURGE_OBJECT_FORM::PURGE_OBJECT_FORM ($app);
 
@@ -76,10 +77,10 @@ class PURGE_RELEASE_FORM extends PURGE_OBJECT_FORM
 
   /**
    * Delete the given object.
-    * @param RELEASE $obj
-    * @access private
-    */
-  function commit ($obj)
+   * @param RELEASE $obj
+   * @access private
+   */
+  public function commit ($obj)
   {
     $options = new PURGE_OPTIONS ();
     $options->sub_history_item_publication_state = $this->value_for ('sub_history_item_publication_state');
@@ -89,7 +90,7 @@ class PURGE_RELEASE_FORM extends PURGE_OBJECT_FORM
   /**
    * @param RELEASE $obj
    */
-  function load_from_object ($obj)
+  public function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
     $this->set_value ('sub_history_item_publication_state', History_item_silent);
@@ -102,7 +103,7 @@ class PURGE_RELEASE_FORM extends PURGE_OBJECT_FORM
    * @return FORM_PREVIEW_SETTINGS
    * @access private
    */
-  function _make_preview_settings ($obj)
+  protected function _make_preview_settings ($obj)
   {
     return new PURGE_RELEASE_PREVIEW_SETTINGS ($this->context);
   }
@@ -111,14 +112,14 @@ class PURGE_RELEASE_FORM extends PURGE_OBJECT_FORM
    * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_controls ($renderer)
+  protected function _draw_controls ($renderer)
   {
     $renderer->start ();
     $renderer->draw_text_row ('', 'Are you sure you want to purge ' . $this->_object->title_as_link () . '?');
     $renderer->draw_separator ();
 
     $props = $renderer->make_list_properties ();
-    $props->show_descriptions = TRUE;
+    $props->show_descriptions = true;
     $props->add_item ('Publish branch only', History_item_silent, 'Generate a single notification indicating that the release was purged.');
     $props->add_item ('Publish all', History_item_needs_send, 'Generate individual notifications for affected jobs and changes.');
     $renderer->draw_radio_group_row ('sub_history_item_publication_state', $props);
@@ -147,7 +148,7 @@ class PURGE_RELEASE_PREVIEW_SETTINGS extends UPDATE_RELEASE_PREVIEW_SETTINGS
   /**
    * Render the preview for this object.
    */
-  function _display ()
+  protected function _display ()
   {
     $class_name = $this->app->final_class_name ('RELEASE_PURGER', 'projects/obj/release_updater.php');
     $committer = new $class_name ($this->object);

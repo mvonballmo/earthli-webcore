@@ -51,7 +51,7 @@ class ENTRY_NAVIGATOR extends OBJECT_NAVIGATOR
   /**
    * @param ENTRY $entry
    */
-  function ENTRY_NAVIGATOR ($entry)
+  public function ENTRY_NAVIGATOR ($entry)
   {
     OBJECT_NAVIGATOR::OBJECT_NAVIGATOR ($entry->context);
     $this->_entry = $entry;
@@ -65,7 +65,7 @@ class ENTRY_NAVIGATOR extends OBJECT_NAVIGATOR
    * @param QUERY $query
    * @access private
    */
-  function _adjust_query ($query)
+  protected function _adjust_query ($query)
   {
     $query->set_select ('entry.id, entry.title, entry.state');
   }
@@ -85,7 +85,7 @@ class MULTI_TYPE_ENTRY_NAVIGATOR extends ENTRY_NAVIGATOR
    * @param QUERY $query
    * @access private
    */
-  function _adjust_query ($query)
+  protected function _adjust_query ($query)
   {
     parent::_adjust_query ($query);
     $query->add_select ('entry.type as entry_type');

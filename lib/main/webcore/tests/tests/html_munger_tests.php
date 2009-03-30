@@ -1723,7 +1723,7 @@ democratically by getting anti-war sentiments labelled as treason. Their recomme
 </div></div><p>I&rsquo;m not kidding, nor am I misinterpreting. This is the state of your news today. They are equating being against Bush&rsquo;s war with treason. Not agreeing with the govern</p>\n"
 );
 
-$this->_munger->force_paragraphs = FALSE;
+$this->_munger->force_paragraphs = false;
 
 $this->_run_munger_test (
   "< <<Whatever this is, eh?>",
@@ -1780,7 +1780,7 @@ $this->_run_munger_test (
 
 
 $this->_munger->max_visible_output_chars = 6;
-$this->_munger->force_paragraphs = TRUE;
+$this->_munger->force_paragraphs = true;
 $this->_run_munger_test (
   "This is my name.",
   "<p>This...</p>\n"
@@ -1789,7 +1789,7 @@ $this->_run_munger_test (
 
 $this->_munger->max_visible_output_chars = 0;
 
-$this->_munger->force_paragraphs = FALSE;
+$this->_munger->force_paragraphs = false;
 
 $this->_run_munger_test (
   "Horace Greeley",
@@ -2125,8 +2125,8 @@ num1.5\r
 );
 
 
-$this->_munger->force_paragraphs = FALSE;
-$this->_munger->break_inside_word = FALSE;
+$this->_munger->force_paragraphs = false;
+$this->_munger->break_inside_word = false;
 
 $this->_munger->max_visible_output_chars = 0;
 $this->_run_munger_test (
@@ -2914,8 +2914,8 @@ first <a href=\"something.php\"><span class=\"highlight\">name</span></a> <span 
 );
 
 
-$this->_munger->force_paragraphs = FALSE;
-$this->_munger->break_inside_word = TRUE;
+$this->_munger->force_paragraphs = false;
+$this->_munger->break_inside_word = true;
 
 $this->_munger->max_visible_output_chars = 0;
 $this->_run_munger_test (
@@ -3709,8 +3709,8 @@ first <a href=\"something.php\"><span class=\"highlight\">name</span></a> <span 
 );
 
 
-$this->_munger->force_paragraphs = TRUE;
-$this->_munger->break_inside_word = TRUE;
+$this->_munger->force_paragraphs = true;
+$this->_munger->break_inside_word = true;
 
 $this->_munger->max_visible_output_chars = 0;
 $this->_run_munger_test (

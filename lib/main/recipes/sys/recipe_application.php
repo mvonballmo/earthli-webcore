@@ -66,38 +66,47 @@ class RECIPE_APPLICATION_TABLE_NAMES extends APPLICATION_TABLE_NAMES
    * @var string
    */
   public $folders = 'recipe_folders';
+
   /**
    * @var string
    */
   public $comments = 'recipe_comments';
+
   /**
    * @var string
    */
   public $entries = 'recipes';
+
   /**
    * @var string
    */
   public $user_permissions = 'recipe_user_permissions';
+
   /**
    * @var string
    */
   public $folder_permissions = 'recipe_folder_permissions';
+
   /**
    * @var string
    */
   public $subscriptions = 'recipe_subscriptions';
+
   /**
    * @var string
    */
   public $subscribers = 'recipe_subscribers';
+
   /**
    * @var string
    */
   public $history_items = 'recipe_history_items';
+
   /**
    * @var string
    */
   public $searches = 'recipe_searches';
+
   /**
    * @var string
    */
@@ -117,23 +126,28 @@ class RECIPE_APPLICATION extends DRAFTABLE_APPLICATION
    * @var string
    */
   public $title = 'earthli Recipes';
+
   /**
    * @var string
    */
   public $short_title = 'Recipes';
+
   /**
    * @var string
    */
   public $icon = '{app_icons}app/recipes';
+
   /**
    * @var string
    */
   public $support_url = 'http://earthli.com/software/webcore/app_recipes.php';
+
   /**
    * Unique ID for this framework.
    * @var string
    */
   public $framework_id = 'com.earthli.recipes';
+
   /**
    * @var integer
    */
@@ -143,7 +157,7 @@ class RECIPE_APPLICATION extends DRAFTABLE_APPLICATION
    * @param PAGE $page Page to which this application is attached.
    * @access private
    */
-  function RECIPE_APPLICATION ($page)
+  public function RECIPE_APPLICATION ($page)
   {
     APPLICATION::APPLICATION ($page);
 
@@ -157,7 +171,7 @@ class RECIPE_APPLICATION extends DRAFTABLE_APPLICATION
    * Add classes to the {@link $classes} object factory.
    * @access private
    */
-  function _initialize_class_registry ()
+  protected function _initialize_class_registry ()
   {
     parent::_initialize_class_registry ();
     $this->register_class ('ENTRY', 'RECIPE', 'recipes/obj/recipe.php');
@@ -181,7 +195,7 @@ class RECIPE_APPLICATION extends DRAFTABLE_APPLICATION
    * Name used for version information.
    * @return string
    */
-  function name ()
+  public function name ()
   {
     return 'earthli Recipes';
   }
@@ -192,7 +206,7 @@ class RECIPE_APPLICATION extends DRAFTABLE_APPLICATION
    * @return string
    * @access private
    */
-  function _source_path ()
+  protected function _source_path ()
   {
     return __FILE__;
   }

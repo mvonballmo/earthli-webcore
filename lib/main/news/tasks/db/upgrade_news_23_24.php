@@ -35,7 +35,7 @@ class NEWS_23_24_MIGRATOR_TASK extends UPGRADE_PER_APP_221_23_TASK
   public $version_from = '2.3.0';
   public $version_to = '2.4.0';
 
-  function _execute ()
+  protected function _execute ()
   {
     log_open_block ("Updating names [object => entry]...");
       $this->_query ("ALTER TABLE `news_subscriptions` CHANGE `watch_objects` `watch_entries` TINYINT( 4 ) UNSIGNED DEFAULT '0' NOT NULL");

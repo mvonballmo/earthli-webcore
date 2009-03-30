@@ -41,12 +41,13 @@ require_once ('webcore/gui/grid.php');
 
 /**
  * Shows {@link FOLDER}s from a {@link QUERY}.
+ * @abstract
  * @package webcore
  * @subpackage grid
  * @version 3.0.0
  * @since 2.2.1
  */
-class FOLDER_GRID extends STANDARD_GRID
+abstract class FOLDER_GRID extends STANDARD_GRID
 {
   /**
    * @var integer
@@ -57,7 +58,7 @@ class FOLDER_GRID extends STANDARD_GRID
    * Assign the tree of {@link FOLDER}s to display.
    * @param array[FOLDER]
    */
-  function set_folders ($folders)
+  public function set_folders ($folders)
   {
     $this->_folders = $folders;
     $this->_num_objects = null;
@@ -68,7 +69,7 @@ class FOLDER_GRID extends STANDARD_GRID
    * @return integer
    * @access private
    */
-  function _get_size ()
+  protected function _get_size ()
   {
     $this->assert (isset ($this->_folders), 'folders are not set', '_get_size', 'FOLDER_GRID');
     return sizeof ($this->_folders);
@@ -79,7 +80,7 @@ class FOLDER_GRID extends STANDARD_GRID
    * @return array[FOLDER]
    * @access private
    */
-  function _get_objects ()
+  protected function _get_objects ()
   {
     $this->assert (isset ($this->_folders), 'folders are not set', '_get_objects', 'FOLDER_GRID');
     $num_objects_per_page = $this->_num_rows * $this->_num_columns;

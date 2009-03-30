@@ -53,6 +53,7 @@ class PASSWORD_FORM extends FORM
    * @var string
    */
   public $button = 'Change';
+
   /**
    * @var string
    */
@@ -61,21 +62,21 @@ class PASSWORD_FORM extends FORM
   /**
    * @param APPLICATION $app Main application.
    */
-  function PASSWORD_FORM ($app)
+  public function PASSWORD_FORM ($app)
   {
     FORM::FORM ($app);
 
     $field = new TEXT_FIELD ();
     $field->id = 'name';
     $field->title = 'Name';
-    $field->required = TRUE;
-    $field->visible = FALSE;
+    $field->required = true;
+    $field->visible = false;
     $this->add_field ($field);
 
     $field = new TEXT_FIELD ();
     $field->id = 'password1';
     $field->title = 'Password';
-    $field->required = TRUE;
+    $field->required = true;
     $field->min_length = $this->app->user_options->minimum_password_length;
     $field->max_length = 20;
     $this->add_field ($field);
@@ -83,7 +84,7 @@ class PASSWORD_FORM extends FORM
     $field = new TEXT_FIELD ();
     $field->id = 'password2';
     $field->title = 'Confirm Password';
-    $field->required = TRUE;
+    $field->required = true;
     $field->min_length = $this->app->user_options->minimum_password_length;
     $field->max_length = 20;
     $this->add_field ($field);
@@ -97,10 +98,10 @@ class PASSWORD_FORM extends FORM
 
   /**
    * Called after fields are validated.
-    * @param USER $obj This parameter is ignored.
-    * @access private
-    */
-  function _post_validate ($obj)
+   * @param USER $obj This parameter is ignored.
+   * @access private
+   */
+  protected function _post_validate ($obj)
   {
     parent::_post_validate ($obj);
 
@@ -117,10 +118,10 @@ class PASSWORD_FORM extends FORM
 
   /**
    * Store the form's values as this user's password.
-    * @param USER $obj
-    * @access private
-    */
-  function commit ($obj)
+   * @param USER $obj
+   * @access private
+   */
+  public function commit ($obj)
   {
     $history_item = $obj->new_history_item ();
     $obj->set_password ($this->value_as_text ('password1'));
@@ -136,7 +137,7 @@ class PASSWORD_FORM extends FORM
    * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_hidden_controls ($renderer)
+  protected function _draw_hidden_controls ($renderer)
   {
     $this->set_value ('name', read_var ('name'));
     parent::_draw_hidden_controls ($renderer);
@@ -146,7 +147,7 @@ class PASSWORD_FORM extends FORM
    * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_controls ($renderer)
+  protected function _draw_controls ($renderer)
   {
     $renderer->set_width ('12em');
 

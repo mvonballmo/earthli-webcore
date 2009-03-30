@@ -48,6 +48,6 @@ require_once ('albums/init.php');
  * @version 3.0.0
  * @since 2.5.0
  */
-$App = $Page->make_application (Album_application_id, TRUE, TRUE);
+$App = $Page->make_application (Album_application_id, true, true);
 
 ?>

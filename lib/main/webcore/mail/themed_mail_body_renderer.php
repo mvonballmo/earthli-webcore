@@ -52,7 +52,7 @@ class THEMED_MAIL_BODY_RENDERER extends MAIL_BODY_RENDERER
    * @return string
    * @access private
    */
-  function _build_html_header ()
+  protected function _build_html_header ()
   {
     ob_start ();
       $this->page->start_display ();
@@ -68,7 +68,7 @@ class THEMED_MAIL_BODY_RENDERER extends MAIL_BODY_RENDERER
    * @return string
    * @access private
    */
-  function _build_html_footer ()
+  protected function _build_html_footer ()
   {
     ob_start ();
 ?>

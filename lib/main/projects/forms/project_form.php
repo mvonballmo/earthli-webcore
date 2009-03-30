@@ -51,7 +51,7 @@ class PROJECT_FORM extends FOLDER_FORM
   /**
    * @param PROJECT $folder Project to edit or project in which to add.
    */
-  function PROJECT_FORM ($folder)
+  public function PROJECT_FORM ($folder)
   {
     FOLDER_FORM::FOLDER_FORM ($folder);
 
@@ -119,7 +119,7 @@ class PROJECT_FORM extends FOLDER_FORM
    * Load initial properties from this project.
    * @param PROJECT $obj
    */
-  function load_from_object ($obj)
+  public function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
 
@@ -133,7 +133,7 @@ class PROJECT_FORM extends FOLDER_FORM
     $this->_set_up_options ();
   }
 
-  function load_with_defaults ()
+  public function load_with_defaults ()
   {
     parent::load_with_defaults ();
 
@@ -155,7 +155,7 @@ class PROJECT_FORM extends FOLDER_FORM
    * to use a group.
    * @access private
    */
-  function _set_up_options ()
+  protected function _set_up_options ()
   {
     $defines_options = $this->value_for ('defines_options');
     $this->set_enabled ('seconds_until_deadline', $defines_options);
@@ -171,10 +171,10 @@ class PROJECT_FORM extends FOLDER_FORM
 
   /**
    * Commit the changed to the database.
-    * @param PROJECT $obj
-    * @access private
-    */
-  function commit ($obj)
+   * @param PROJECT $obj
+   * @access private
+   */
+  public function commit ($obj)
   {
     $obj_exists = $obj->exists ();
 
@@ -201,7 +201,7 @@ class PROJECT_FORM extends FOLDER_FORM
    * @param PROJECT_OPTIONS $options
    * @access private
    */
-  function _apply_options_to_UI ($options)
+  protected function _apply_options_to_UI ($options)
   {
     $this->set_value ('assignee_group_type', $options->assignee_group_type);
     $this->set_value ('assignee_group_id', $options->assignee_group_id);
@@ -215,7 +215,7 @@ class PROJECT_FORM extends FOLDER_FORM
    * @param PROJECT_OPTIONS $options
    * @access private
    */
-  function _store_to_options ($options)
+  protected function _store_to_options ($options)
   {
     $options->assignee_group_type = $this->value_for ('assignee_group_type');
     $options->assignee_group_id = $this->value_for ('assignee_group_id');
@@ -226,10 +226,10 @@ class PROJECT_FORM extends FOLDER_FORM
 
   /**
    * Store the form's values for this project.
-    * @param PROJECT $obj
-    * @access private
-    */
-  function _store_to_object ($obj)
+   * @param PROJECT $obj
+   * @access private
+   */
+  protected function _store_to_object ($obj)
   {
     parent::_store_to_object ($obj);
 
@@ -239,7 +239,7 @@ class PROJECT_FORM extends FOLDER_FORM
     }
 
     $options = $obj->options ();
-    $options->set_inherited (! $this->value_for ('defines_options'), FALSE);
+    $options->set_inherited (! $this->value_for ('defines_options'), false);
     $this->_store_to_options ($options);
 
     if ($this->previewing ())
@@ -256,11 +256,11 @@ class PROJECT_FORM extends FOLDER_FORM
   /**
    * @access private
    */
-  function _draw_scripts ()
+  protected function _draw_scripts ()
   {
     parent::_draw_scripts ();
 ?>
-  function on_inherit_changed (ctrl)
+  public function on_inherit_changed (ctrl)
   {
     var ctrls_disabled = is_selected (ctrl, 0);
     enable_items( ctrl.form.assignee_group_type, ! ctrls_disabled);
@@ -270,13 +270,13 @@ class PROJECT_FORM extends FOLDER_FORM
     on_group_type_changed (ctrl.form.reporter_group_type, ctrl.form.reporter_group_id);
   }
 
-  function on_group_type_changed (ctrl, group_ctrl)
+  public function on_group_type_changed (ctrl, group_ctrl)
   {
     var ctrls_disabled = ! is_selected (ctrl, <?php echo Project_user_group; ?>);
     group_ctrl.disabled = ctrls_disabled;
   }
   
-  function on_organizational_changed (ctrl)
+  public function on_organizational_changed (ctrl)
   {
     ctrl.form.trunk_id.disabled = ctrl.checked;
   }
@@ -287,7 +287,7 @@ class PROJECT_FORM extends FOLDER_FORM
    * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_controls ($renderer)
+  protected function _draw_controls ($renderer)
   {
     $renderer->start ();
     $renderer->start_column ();
@@ -323,7 +323,7 @@ class PROJECT_FORM extends FOLDER_FORM
     $renderer->draw_check_box_row ('is_visible');
     $item = $renderer->make_check_properties ();
     $item->on_click_script = 'on_organizational_changed (this)';
-    $item->smart_wrapping = TRUE;
+    $item->smart_wrapping = true;
     $renderer->draw_check_box_row ('is_organizational', $item);
     $renderer->draw_separator ();
 
@@ -341,14 +341,16 @@ class PROJECT_FORM extends FOLDER_FORM
   
         $props = $renderer->make_list_properties ();
         foreach ($branches as $branch)
+        {
           $props->add_item ($branch->title_as_plain_text (), $branch->id);
+        }
         $renderer->draw_drop_down_row ('trunk_id', $props);
       }
       $renderer->draw_separator ();
     }
     
     $renderer->start_row ('Options');
-    $renderer->start_block (TRUE);
+    $renderer->start_block (true);
 
       $renderer->start_row ('');
 
@@ -430,13 +432,13 @@ class PROJECT_FORM extends FOLDER_FORM
 
     $renderer->draw_separator ();
     $renderer->draw_submit_button_row ();
-    $this->_draw_history_item_controls ($renderer, FALSE);
+    $this->_draw_history_item_controls ($renderer, false);
 
     $renderer->finish_column ();
     $renderer->finish ();
   }
   
-  function _make_user_list_properties_for ($renderer, $ctrl_id)
+  protected function _make_user_list_properties_for ($renderer, $ctrl_id)
   {
     $Result = $renderer->make_list_properties ();
     $Result->on_click_script = 'on_group_type_changed (this, this.form.' . $ctrl_id . ')';
@@ -451,7 +453,9 @@ class PROJECT_FORM extends FOLDER_FORM
       {
         $group_props = $renderer->make_list_properties ();
         foreach ($groups as $group)
+        {
           $group_props->add_item ($group->title_as_plain_text (), $group->id);
+        }
         
         $Result->add_item ('Allow only ' . $renderer->drop_down_as_HTML ($ctrl_id, $group_props), Project_user_group);
       }

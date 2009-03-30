@@ -53,7 +53,7 @@ class PROJECT_COMMANDS extends FOLDER_COMMANDS
   /**
    * @param PROJECT $folder Configure commands for this object.
    */
-  function PROJECT_COMMANDS ($folder)
+  public function PROJECT_COMMANDS ($folder)
   {
     FOLDER_COMMANDS::FOLDER_COMMANDS ($folder);
 
@@ -66,7 +66,7 @@ class PROJECT_COMMANDS extends FOLDER_COMMANDS
    * @param FOLDER $folder
    * @access private
    */
-  function _add_creators ($folder)
+  protected function _add_creators ($folder)
   {
     $cmd = $this->make_command ();
     $cmd->id = 'new_job';

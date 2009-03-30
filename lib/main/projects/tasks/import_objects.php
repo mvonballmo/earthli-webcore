@@ -54,15 +54,14 @@ http://www.earthli.com/software/webcore/projects
 
   include_once ('webcore/log/file_logger.php');
   $file_logger = new FILE_LOGGER ();
-  $file_logger->set_file_name ( $App->xml_options->log_file_name );
-  $Logger->add_logger ( $file_logger );
+  $file_logger->set_file_name ($App->xml_options->log_file_name);
+  $Logger->add_logger ($file_logger);
 
   // define XML event handlers
 
   function raise_xml ($msg, $type = Msg_type_error)
   {
     global $xml_parser;
-    global $Logger;
     global $errors_occurred;
     $num = xml_get_current_line_number ($xml_parser);
     log_message ("$msg [line $num]", $type, Msg_channel_xml);
@@ -86,7 +85,6 @@ http://www.earthli.com/software/webcore/projects
     global $App;
     global $obj;
     global $kinds;
-    global $text_buffer;
     global $folders;
 
     switch ($name)
@@ -122,7 +120,7 @@ http://www.earthli.com/software/webcore/projects
       $orig_name = $attrs ['TITLE'];
       $user_name = $orig_name;
       $at = strpos ($user_name, '@');
-      if ($at !== FALSE)
+      if ($at !== false)
       {
         $user_name = substr ($user_name, 0, $at);
         raise_xml ("Truncated name from [$orig_name] to [$user_name]", Msg_type_warning);
@@ -167,7 +165,6 @@ http://www.earthli.com/software/webcore/projects
     global $objs;
     global $obj;
     global $text_buffer;
-    global $renderer;
 
     switch ($name)
     {
@@ -175,19 +172,19 @@ http://www.earthli.com/software/webcore/projects
       // change is complete. Render it for now.
       if (! $obj->_folder)
       {
-        $error_occurred = TRUE;
+        $error_occurred = true;
         raise_xml ("Folder is not set.");
       }
 
       if (! $obj->title && ! $obj->description)
       {
-        $error_occurred = TRUE;
+        $error_occurred = true;
         raise_xml ("Content cannot be empty (must have a title or a description or both).");
       }
 
       if (! $obj->modifier_id || ! $obj->creator_id)
       {
-        $error_occurred = TRUE;
+        $error_occurred = true;
         raise_xml ("Creator is not set.");
       }
 
@@ -241,13 +238,15 @@ http://www.earthli.com/software/webcore/projects
   {
     $indexed_kinds = $App->entry_kinds ();
     foreach ($indexed_kinds as $kind)
+    {
       $kinds [strtolower ($kind->title)] = $kind;
+    }
 
     $App->impersonate ($App->mail_options->publisher_user_name, $App->mail_options->publisher_user_password);
     $folder_query = $App->login->folder_query ();
     $folders = $folder_query->indexed_objects ();
 
-    $App->display_options->show_local_times = FALSE;
+    $App->display_options->show_local_times = false;
 
     while (($data = fread($fhandle, 4096)))
     {

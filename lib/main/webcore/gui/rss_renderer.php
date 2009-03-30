@@ -56,14 +56,17 @@ class RSS_RENDERER extends NEWSFEED_RENDERER
    * @var string
    */
   public $style_sheet = '{styles}rss.css';
+
   /**
    * @var string
    */
   public $more_info_page = '{pages}rss_info.php';
+
   /**
    * @var integer
    */
   public $ttl_in_minutes = 720;
+
   /**
    * @var string
    * The following override is commented because Firefox offers to download
@@ -76,7 +79,7 @@ class RSS_RENDERER extends NEWSFEED_RENDERER
    * RSS always uses plain text for descriptions (HTML is not allowed).
    * @param CONTENT_OBJECT $obj
    */
-  function set_description_from ($obj)
+  public function set_description_from ($obj)
   {
     $this->description = $obj->description_as_plain_text ();
   }
@@ -87,7 +90,7 @@ class RSS_RENDERER extends NEWSFEED_RENDERER
    * @access private
    * @abstract
    */
-  function _start_display ($time_modified)
+  protected function _start_display ($time_modified)
   {
     parent::_start_display ($time_modified);
 ?>
@@ -116,7 +119,7 @@ class RSS_RENDERER extends NEWSFEED_RENDERER
    * @access private
    * @abstract
    */
-  function _finish_display ()
+  protected function _finish_display ()
   {
 ?>
   </channel>
@@ -146,7 +149,7 @@ class ENTRY_RSS_RENDERER extends NEWSFEED_OBJECT_RENDERER
    * @param ENTRY $obj
    * @param OBJECT_RENDERER_OPTIONS $options
    */
-  function display ($obj, $options = null)
+  public function display ($obj, $options = null)
   {
     $t = $this->_publication_date_for ($obj);
     $content = $this->_content_for ($obj, $options);
@@ -167,7 +170,7 @@ class ENTRY_RSS_RENDERER extends NEWSFEED_OBJECT_RENDERER
    * @return DATE_TIME
    * @access private
    */
-  function _publication_date_for ($obj)
+  protected function _publication_date_for ($obj)
   {
     return $obj->time_created;
   }
@@ -188,7 +191,7 @@ class DRAFTABLE_ENTRY_RSS_RENDERER extends ENTRY_RSS_RENDERER
    * @return DATE_TIME
    * @access private
    */
-  function _publication_date_for ($obj)
+  protected function _publication_date_for ($obj)
   {
     return $obj->time_published;
   }

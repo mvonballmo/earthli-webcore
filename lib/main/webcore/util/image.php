@@ -83,7 +83,7 @@ class IMAGE extends RAISABLE
   /**
    * @param boolean $use_internal_exif Use the PHP function {@link PHP_MANUAL#exif_read_data} if available.
    */
-  function IMAGE ($use_internal_exif = TRUE)
+  public function IMAGE ($use_internal_exif = true)
   {
     $this->properties = new IMAGE_PROPERTIES ($use_internal_exif);
   }
@@ -91,7 +91,7 @@ class IMAGE extends RAISABLE
   /**
    * @return boolean
    */
-  function exists ()
+  public function exists ()
   {
     return $this->properties->exists ();
   }
@@ -102,7 +102,7 @@ class IMAGE extends RAISABLE
    * @param string $name Fully-resolved path to the image. May be a url.
    * @param boolean $include_exif If True, the loader will attempt to extract EXIF digital camera information from the file. This uses the PHP function {@link PHP_MANUAL#exif_read_data} and is known to be slower for some images.
    */
-  function set_file ($name, $include_exif = FALSE)
+  public function set_file ($name, $include_exif = false)
   {
     $this->properties->load_from_file ($name, $include_exif);
   }
@@ -111,7 +111,7 @@ class IMAGE extends RAISABLE
    * Can the set file be loaded?
    * @return boolean
    */
-  function loadable ()
+  public function loadable ()
   {
     return $this->exists () && ($this->properties->php_type > 0) && ($this->properties->php_type <= 4);
   }
@@ -122,7 +122,7 @@ class IMAGE extends RAISABLE
    * must return True.
    * @return boolean
    */
-  function saveable ()
+  public function saveable ()
   {
     return $this->loaded () && ! empty ($this->properties->file_name) && $this->saveable_to ($this->properties->php_type);
   }
@@ -134,16 +134,16 @@ class IMAGE extends RAISABLE
    * @param integer $type One of the PHP image type constants.
    * @return boolean
    */
-  function saveable_to ($type)
+  public function saveable_to ($type)
   {
     if (! $this->loaded ())
     {
-      return FALSE;
+      return false;
     }
     
     if (($type == Image_type_JPG) || ($type == Image_type_PNG))
     {
-      return TRUE;
+      return true;
     }
     
     if ($type == Image_type_GIF)
@@ -152,14 +152,14 @@ class IMAGE extends RAISABLE
       return $gd_caps ['GIF Create Support'];
     }
     
-    return FALSE;
+    return false;
   }
 
   /**
    * Is the image data loaded?
    * @return boolean
    */
-  function loaded ()
+  public function loaded ()
   {
     return isset ($this->_data);
   }
@@ -167,10 +167,12 @@ class IMAGE extends RAISABLE
   /**
    * Load image data from the current file name.
    */
-  function load_from_file ()
+  public function load_from_file ()
   {
     $this->assert ($this->loadable (), 'Loading images of type [' . $this->properties->mime_type . '] is not supported.', 'load_from_file', 'IMAGE');
 
+    $php_errormsg = null;
+    
     switch ($this->properties->php_type)
     {
     case 1:
@@ -197,7 +199,7 @@ class IMAGE extends RAISABLE
    * @param string $name Full path to the image file.
    * @param integer $type PHP image type constant specifying the type of image to create in that file.
    */
-  function save_to_file ($name, $type = null)
+  public function save_to_file ($name, $type = null)
   {
     if ($this->loaded () && ! isset ($type))
     {
@@ -236,7 +238,7 @@ class IMAGE extends RAISABLE
   /**
    * @return IMAGE_METRICS
    */
-  function metrics ()
+  public function metrics ()
   {
     $Result = new IMAGE_METRICS ();
     $Result->set_image ($this);
@@ -249,7 +251,7 @@ class IMAGE extends RAISABLE
    * @param integer $width
    * @param integer $height
    */
-  function resize ($width, $height)
+  public function resize ($width, $height)
   {
     $this->_assert_loaded ('resize');
     $metrics = $this->metrics ();
@@ -263,7 +265,7 @@ class IMAGE extends RAISABLE
    * @param integer $width
    * @param integer $height
    */
-  function resize_to_fit ($width, $height)
+  public function resize_to_fit ($width, $height)
   {
     $this->_assert_loaded ('resize_to_fit');
     $metrics = $this->metrics ();
@@ -276,7 +278,7 @@ class IMAGE extends RAISABLE
    * @param IMAGE_METRICS
    * @access private
    */
-  function _resize_to ($metrics)
+  protected function _resize_to ($metrics)
   {
     $this->_assert_loaded ('_resize');
 
@@ -331,7 +333,7 @@ class IMAGE extends RAISABLE
    * @param string $method_name
    * @access private
    */
-  function _assert_loaded ($method_name)
+  protected function _assert_loaded ($method_name)
   {
     $this->assert ($this->loaded (), 'image is not loaded (' . $this->properties->mime_type . ')', $method_name, 'IMAGE');
   }
@@ -354,34 +356,40 @@ class IMAGE_PROPERTIES
    * @var string
    */
   public $file_name;
+
   /**
    * Fully qualified URL of the file
    * May be empty if the {@link $file_name} is a local file outside of the document root.
    * @var string
    */
   public $url;
+
   /**
    * Mime type for the loaded file.
    * Detects most common image formats; tries to use the PHP function "image_type_to_mime_type".
    * @var string
    */
   public $mime_type = '';
+
   /**
    * Internal PHP type for the file.
    * Used to determine the mime type by both PHP and the WebCore.
    * @var integer
    */
   public $php_type = 0;
+
   /**
    * Width, in pixels.
    * @var integer
    */
   public $width = 0;
+
   /**
    * Height, in pixels.
    * @var integer
    */
   public $height = 0;
+
   /**
    * Time the picture was taken.
    * There is no industry-standard way of storing this date, but every effort is made to extract
@@ -389,52 +397,60 @@ class IMAGE_PROPERTIES
    * @var DATE_TIME
    */
   public $time_created;
+
   /**
    * Camera-specific aperture setting.
    * @var integer
    */
   public $aperture = 0;
+
   /**
    * ISO-speed at which the picture was taken.
    * @var integer
    */
   public $iso_speed = 0;
+
   /**
    * Was the flash used?
    * @var boolean
    */
-  public $used_flash = FALSE;
+  public $used_flash = false;
+
   /**
    * Is this a color photograph?
    * @var boolean
    */
-  public $is_color = TRUE;
+  public $is_color = true;
+
   /**
    * Vendor-specific string describing the vendor.
    * @var string
    */
   public $camera_make = '';
+
   /**
    * Vendor-specific string describing the camera.
    * @var string
    */
   public $camera_model = '';
+
   /**
    * Reference to the full exif information returned by PHP.
    * May not be set.
    * @var array
    */
   public $exif;
+
   /**
    * Uses the function {@link PHP_MANUAL#exif_read_data} if <code>True</code>.
    * @var boolean
    */
-  public $use_internal_exif = TRUE;
+  public $use_internal_exif = true;
 
   /**
    * @param boolean $use_internal_exif Use the PHP function {@link PHP_MANUAL#exif_read_data} if available.
    */
-  function IMAGE_PROPERTIES ($use_internal_exif = TRUE)
+  public function IMAGE_PROPERTIES ($use_internal_exif = true)
   {
     $this->time_created = new DATE_TIME ();
     $this->time_created->clear ();
@@ -444,7 +460,7 @@ class IMAGE_PROPERTIES
   /**
    * @return boolean
    */
-  function exists ()
+  public function exists ()
   {
     return isset ($this->php_type);
   }
@@ -454,7 +470,7 @@ class IMAGE_PROPERTIES
    * @param string $name Full path to the file to load. May be a URL or local file.
    * @param boolean $include_exif Load EXIF digital camera information from the file?
    */
-  function load_from_file ($name, $include_exif)
+  public function load_from_file ($name, $include_exif)
   {
     $this->php_type = null;
 
@@ -521,7 +537,7 @@ class IMAGE_PROPERTIES
    * @param string $name Full path to the file to read.
    * @access private
    */
-  function _read_exif ($name)
+  protected function _read_exif ($name)
   {
     global $Profiler;
     if (isset ($Profiler)) $Profiler->start ('EXIF');
@@ -529,13 +545,14 @@ class IMAGE_PROPERTIES
     if ($this->_use_internal_exif ())
     {
       $this->exif = @exif_read_data ($name, 'IFD0');
-      if ($this->exif === FALSE)
+      if ($this->exif === false)
       {
         $this->exif = null;
       }
       else
       {
-        $this->exif = @exif_read_data ($name, 0, TRUE);
+        $php_errormsg = null;
+        $this->exif = @exif_read_data ($name, 0, true);
         if (isset ($php_errormsg))
         {
           log_message ('[' . $name . ']: ' . $php_errormsg, Msg_type_debug_warning, Msg_channel_image);
@@ -578,8 +595,9 @@ class IMAGE_PROPERTIES
    * @param string $name Full path to the file to read.
    * @access private
    */
-  function _read_image_info ($name)
+  protected function _read_image_info ($name)
   {
+    $php_errormsg = null;
     $size = @getimagesize ($name);
     if (isset ($php_errormsg))
     {
@@ -601,7 +619,7 @@ class IMAGE_PROPERTIES
    * does not exist, it will still be set to empty in the object (so no PHP warnings are generated if read).
    * @access private
    */
-  function _initialize_properties_from_exif ()
+  protected function _initialize_properties_from_exif ()
   {
     $this->mime_type = $this->_read_exif_value ('FILE', 'MimeType');
     $this->php_type = $this->_read_exif_value ('FILE', 'FileType');
@@ -633,7 +651,7 @@ class IMAGE_PROPERTIES
    * @return string
    * @access private
    */
-  function _read_exif_value ($section, $name)
+  protected function _read_exif_value ($section, $name)
   {
     return read_array_index (read_array_index ($this->exif, $section), $name);
   }
@@ -645,7 +663,7 @@ class IMAGE_PROPERTIES
    * @return DATE_TIME
    * @access private
    */
-  function _time_from_exif ($exif_time)
+  protected function _time_from_exif ($exif_time)
   {
     $Result = new DATE_TIME ();
     $Result->clear ();
@@ -669,7 +687,7 @@ class IMAGE_PROPERTIES
    * @return boolean
    * @access private
    */
-  function _use_internal_exif ()
+  protected function _use_internal_exif ()
   {
     return $this->use_internal_exif && function_exists ('exif_read_data');
   }
@@ -691,22 +709,27 @@ class IMAGE_METRICS
    * @var string
    */
   public $url;
+
   /**
    * @var boolean
    */
-  public $was_resized = FALSE;
+  public $was_resized = false;
+
   /**
    * @var integer
    */
   public $original_width;
+
   /**
    * @var integer
    */
   public $original_height;
+
   /**
    * @var integer
    */
   public $constrained_width;
+
   /**
    * @var integer
    */
@@ -715,7 +738,7 @@ class IMAGE_METRICS
   /**
    * @param IMAGE $image
    */
-  function set_image ($image)
+  public function set_image ($image)
   {
     if ($image->exists ())
     {
@@ -729,7 +752,7 @@ class IMAGE_METRICS
   /**
    * @return boolean
    */
-  function loaded ()
+  public function loaded ()
   {
     return isset ($this->_image);
   }
@@ -739,13 +762,12 @@ class IMAGE_METRICS
    * If {@link resize()} or {@link resize_to_fit()} was called, the new width is returned.
    * @return integer
    */
-  function width ()
+  public function width ()
   {
     if ($this->was_resized)
     {
       return $this->constrained_width;
     }
-
 
     return $this->original_width;
   }
@@ -755,13 +777,12 @@ class IMAGE_METRICS
    * If {@link resize()} or {@link resize_to_fit()} was called, the new height is returned.
    * @return integer
    */
-  function height ()
+  public function height ()
   {
     if ($this->was_resized)
     {
       return $this->constrained_height;
     }
-
 
     return $this->original_height;
   }
@@ -774,7 +795,7 @@ class IMAGE_METRICS
    * and will simply set to fixed dimesions with {@link resize()}. Improves
    * speed in these cases (especially if the URL is external to the server).
    */
-  function set_url ($url, $load_image = TRUE)
+  public function set_url ($url, $load_image = true)
   {
     $this->url = $url;
     if ($load_image)
@@ -796,7 +817,7 @@ class IMAGE_METRICS
    * @param integer $width
    * @param integer $height
    */
-  function resize ($width, $height)
+  public function resize ($width, $height)
   {
     $this->constrained_width = $width;
     $this->constrained_height = $height;
@@ -809,7 +830,7 @@ class IMAGE_METRICS
    * @param integer $width
    * @param integer $height
    */
-  function resize_to_fit ($width, $height)
+  public function resize_to_fit ($width, $height)
   {
     if ($this->loaded ())
     {
@@ -864,7 +885,7 @@ class IMAGE_METRICS
    * @param string $CSS_class CSS class to use for the image.
    * @see as_html_without_link()
    */
-  function as_html ($title = ' ', $CSS_class = 'frame')
+  public function as_html ($title = ' ', $CSS_class = 'frame')
   {
     $Result = $this->as_html_without_link ($title, $CSS_class);
     if ($Result)
@@ -873,8 +894,11 @@ class IMAGE_METRICS
       {
         $Result = "<a href=\"javascript:open_image ('{$this->url}', {$this->original_width}, {$this->original_height})\">$Result</a>";
       }
+
       return $Result;
     }
+    
+    return '';
   }
 
   /**
@@ -884,7 +908,7 @@ class IMAGE_METRICS
    * @param string $CSS_class CSS class to use for the image.
    * @see as_html()
    */
-  function as_html_without_link ($title = ' ', $CSS_class = 'frame')
+  public function as_html_without_link ($title = ' ', $CSS_class = 'frame')
   {
     if (! isset ($this->_image) || $this->_image->loadable ())
     {
@@ -902,7 +926,6 @@ class IMAGE_METRICS
       $Result .= '>';
       return $Result;
     }
-
 
     return '[<span title="' . $this->url . '">Image</span>] was not found.';
   }
@@ -939,7 +962,7 @@ class THUMBNAIL_CREATOR extends WEBCORE_OBJECT
    * @param string $file_name A server-local file name or URL.
    * @param integer $size Thumbnail will be no more than this many pixels on a side.
    */
-  function create_thumbnail_for ($file_name, $size)
+  public function create_thumbnail_for ($file_name, $size)
   {
     $class_name = $this->context->final_class_name ('IMAGE', 'webcore/util/image.php');
     $img = new $class_name ();
@@ -969,7 +992,7 @@ class THUMBNAIL_CREATOR extends WEBCORE_OBJECT
    * @return string
    * @access private
    */
-  function _thumbnail_name_for ($file_name)
+  protected function _thumbnail_name_for ($file_name)
   {
     $url = new FILE_URL ($file_name);
     $url->append_to_name ('_tn');

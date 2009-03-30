@@ -53,25 +53,28 @@ class OBJECT_IN_FOLDER_SUMMARY_GRID extends CONTENT_OBJECT_GRID
    * @var string
    */
   public $box_style = 'object-in-list';
+
   /**
    * @var boolean
    */
-  public $show_separator = FALSE;
+  public $show_separator = false;
+
   /**
    * @var integer
    */
   public $width = '65%';
+
   /**
    * Show check-box selectors next to items?
    * @var boolean
    */
-  public $items_are_selectable = TRUE;
+  public $items_are_selectable = true;
 
   /**
    * @param OBJECT_IN_FOLDER $obj
    * @access private
    */
-  function _draw_box ($obj)
+  protected function _draw_box ($obj)
   {
     $this->_draw_menu_for ($obj, Menu_size_minimal);
 ?>
@@ -95,7 +98,7 @@ class OBJECT_IN_FOLDER_SUMMARY_GRID extends CONTENT_OBJECT_GRID
    * @return integer
    * @access private
    */
-  function _size_of ($obj)
+  protected function _size_of ($obj)
   {
     return strlen ($obj->description);
   }
@@ -105,7 +108,7 @@ class OBJECT_IN_FOLDER_SUMMARY_GRID extends CONTENT_OBJECT_GRID
    * @param OBJECT_IN_FOLDER $obj
    * @access private
    */
-  function _echo_header ($obj)
+  protected function _echo_header ($obj)
   {
 ?>
   <table cellpadding="1" cellspacing="0">
@@ -131,7 +134,7 @@ class OBJECT_IN_FOLDER_SUMMARY_GRID extends CONTENT_OBJECT_GRID
    * @param OBJECT_IN_FOLDER $obj
    * @access private
    */
-  function _echo_details ($obj)
+  protected function _echo_details ($obj)
   {
     $this->_echo_user_information ('Created by', $obj->creator (), $obj->time_created );
   }
@@ -143,7 +146,7 @@ class OBJECT_IN_FOLDER_SUMMARY_GRID extends CONTENT_OBJECT_GRID
    * @param DATE_TIME $date
    * @access private
    */
-  function _echo_user_information ($title, $user, $date)
+  protected function _echo_user_information ($title, $user, $date)
   {
 ?>
     <tr>
@@ -162,7 +165,7 @@ class OBJECT_IN_FOLDER_SUMMARY_GRID extends CONTENT_OBJECT_GRID
    * @param OBJECT_IN_FOLDER $obj
    * @access private
    */
-  function _echo_folders ($obj)
+  protected function _echo_folders ($obj)
   {
     $folder = $obj->parent_folder ();
     $depth = 0;

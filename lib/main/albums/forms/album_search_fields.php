@@ -51,11 +51,11 @@ class SEARCH_PICTURE_FIELDS extends SEARCH_ENTRY_FIELDS
   /**
    * @param APPLICATION $app Main application.
    */
-  function SEARCH_PICTURE_FIELDS ($app)
+  public function SEARCH_PICTURE_FIELDS ($app)
   {
     SEARCH_ENTRY_FIELDS::SEARCH_ENTRY_FIELDS ($app);
 
-    $this->_add_text ('file_name', 'File name', FALSE, FALSE, 'pic');
+    $this->_add_text ('file_name', 'File name', false, false, 'pic');
   }
 }
 
@@ -71,23 +71,23 @@ class SEARCH_JOURNAL_FIELDS extends SEARCH_ENTRY_FIELDS
   /**
    * @param APPLICATION $app Main application.
    */
-  function SEARCH_JOURNAL_FIELDS ($app)
+  public function SEARCH_JOURNAL_FIELDS ($app)
   {
     SEARCH_ENTRY_FIELDS::SEARCH_ENTRY_FIELDS ($app);
 
-    $this->_add_text ('weather', 'Weather', FALSE, FALSE, 'jrnl');
+    $this->_add_text ('weather', 'Weather', false, false, 'jrnl');
 
     $this->_add_synced_field ('colder_than', '');
     $this->_add_synced_field ('warmer_than', '');
     $this->_add_synced_field ('weather_type', array ());
-    $this->_add_synced_field ('not_weather_type', FALSE);
+    $this->_add_synced_field ('not_weather_type', false);
   }
 
   /**
    * Add fields for search properties to this form.
    * @param FORM $form
    */
-  function add_fields ($form)
+  public function add_fields ($form)
   {
     parent::add_fields ($form);
 
@@ -118,7 +118,7 @@ class SEARCH_JOURNAL_FIELDS extends SEARCH_ENTRY_FIELDS
    * @param QUERY $query
    * @param object $obj
    */
-  function apply_to_query ($query, $obj)
+  public function apply_to_query ($query, $obj)
   {
     parent::apply_to_query ($query, $obj);
 
@@ -151,7 +151,7 @@ class SEARCH_JOURNAL_FIELDS extends SEARCH_ENTRY_FIELDS
    * List of sortable values
    * @return array[string, string]
    */
-  function _sort_values ()
+  protected function _sort_values ()
   {
     $Result = parent::_sort_values ();
     $Result ['jrnl.lo_temp'] = 'Low temp';
@@ -166,7 +166,7 @@ class SEARCH_JOURNAL_FIELDS extends SEARCH_ENTRY_FIELDS
    * @return string
    * @access private
    */
-  function _restrictions_as_text ($obj)
+  protected function _restrictions_as_text ($obj)
   {
     $Result = parent::_restrictions_as_text ($obj);
     $props = $this->app->display_options->weather_icons ();
@@ -174,7 +174,9 @@ class SEARCH_JOURNAL_FIELDS extends SEARCH_ENTRY_FIELDS
     if (sizeof ($obj->parameters ['weather_type']))
     {
       foreach ($obj->parameters ['weather_type'] as $type)
+      {
         $weather_types [] = $props [$type]->title;
+      }
 
       if ($obj->parameters ['not_weather_type'])
       {
@@ -194,7 +196,7 @@ class SEARCH_JOURNAL_FIELDS extends SEARCH_ENTRY_FIELDS
    * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_date_fields ($form, $renderer)
+  protected function _draw_date_fields ($form, $renderer)
   {
     $renderer->draw_check_box_row ('not_weather_type');
 

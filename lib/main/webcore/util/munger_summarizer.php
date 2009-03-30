@@ -53,23 +53,26 @@ class TEXT_STRIPPER extends TEXT_MUNGER
    * Return, at most, this many visible characters from a transformation.
    * @var integer*/
   public $max_visible_output_chars = 0;
+
   /**
    * Allow break inside a word when truncating to {@link $max_visible_output_chars}?
    * @var boolean
    */
-  public $break_inside_word = FALSE;
+  public $break_inside_word = false;
+
   /**
    * Take out all tags from the input?
    * @var boolean
    */
-  public $strip_unknown_tags = TRUE;
+  public $strip_unknown_tags = true;
+
   /**
    * Force paragraphs on all transformed text?
    * @var boolean
    */
-  public $force_paragraphs = TRUE;
+  public $force_paragraphs = true;
   
-  function TEXT_STRIPPER ()
+  public function TEXT_STRIPPER ()
   {
     TEXT_MUNGER::TEXT_MUNGER ();
     $this->_default_transformer = new MUNGER_NOP_TRANSFORMER ($this);
@@ -97,27 +100,31 @@ class MUNGER_SUMMARIZER
    * @var integer
    */
   public $context_size = 20;
+
   /**
    * Return, at most, this many visible characters from a transformation.
    * @var integer*/
   public $max_visible_output_chars = 0;
+
   /**
    * Allow break inside a word when truncating to {@link $max_visible_output_chars}?
    * @var boolean
    */
-  public $break_inside_word = FALSE;
+  public $break_inside_word = false;
+
   /**
    * Open each highlighted section with this text.
    * @var string
    */
   public $highlight_prefix = '<span class="highlight">';
+
   /**
    * Close each highlighted section with this text.
    * @var string
    */
   public $highlight_suffix = '</span>';
   
-  function transform ($text, $phrase)
+  public function transform ($text, $phrase)
   {
     if (! isset ($this->_stripper))
     {
@@ -138,6 +145,7 @@ class MUNGER_SUMMARIZER
    * @access private
    */
   protected $_stripper;
+
   /**
    * @var REGULAR_EXPRESSION
    * @access private

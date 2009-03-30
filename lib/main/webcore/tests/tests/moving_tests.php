@@ -51,7 +51,7 @@ require_once ('webcore/tests/baseline_data_test_task.php');
  */
 class MOVING_TEST_TASK extends BASELINE_DATA_TEST_TASK
 {
-  function _execute ()
+  protected function _execute ()
   {
     $this->_log_in_as_tester ();
     $this->_test_moving_folders ();
@@ -60,7 +60,7 @@ class MOVING_TEST_TASK extends BASELINE_DATA_TEST_TASK
   /**
    * Make sure permissions are properly maintained when moving folders.
    */
-  function _test_moving_folders ()
+  protected function _test_moving_folders ()
   {
     $root_folder = $this->_clear_and_return_root_folder ();
     /* Make a folder and give it some permissions. */
@@ -68,7 +68,7 @@ class MOVING_TEST_TASK extends BASELINE_DATA_TEST_TASK
     $target = $root_folder->new_folder ();
     $target->store ();
     $target_sec = $target->security_definition ();
-    $target_sec->set_inherited (FALSE);
+    $target_sec->set_inherited (false);
 
     $p = $target_sec->new_permissions (Privilege_kind_user);
     $p->ref_id = 1;
@@ -89,7 +89,7 @@ class MOVING_TEST_TASK extends BASELINE_DATA_TEST_TASK
     $this->_check_equal( 3, $target_perm_query->size () );
 
     $options = $to_move->make_move_options ();
-    $options->maintain_permissions = TRUE;
+    $options->maintain_permissions = true;
 
     $this->_log ("Moved folder from [$to_move->parent_id] to [$target->id].", Msg_type_info);
     $to_move->move_to ($target, $options);
@@ -101,7 +101,7 @@ class MOVING_TEST_TASK extends BASELINE_DATA_TEST_TASK
     $this->_check_equal( 3, $target_perm_query->size () );
     $this->_check_equal( $to_move->permissions_id, $to_move->id );
 
-    $to_move_sec->set_inherited (TRUE);
+    $to_move_sec->set_inherited (true);
     $this->_check ($to_move_sec->inherited (), 'Security should be inherited.');
 
     $to_move_perm_query->clear_results ();
@@ -111,7 +111,7 @@ class MOVING_TEST_TASK extends BASELINE_DATA_TEST_TASK
     $this->_check_equal( $target->id, $target->permissions_id );
     $this->_check_equal( $target->permissions_id, $to_move->permissions_id );
 
-    $options->maintain_permissions = FALSE;
+    $options->maintain_permissions = false;
     $this->_log ("Moved folder from [$to_move->parent_id] to [$root_folder->id].", Msg_type_info);
     $to_move->move_to ($root_folder, $options);
     $this->_check ($to_move_sec->inherited (), 'Security should stay inherited after the move.');

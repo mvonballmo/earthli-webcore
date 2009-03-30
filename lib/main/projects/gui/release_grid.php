@@ -52,40 +52,47 @@ class RELEASE_GRID extends CONTENT_OBJECT_GRID
    * @var string
    */
   public $box_style = 'object-in-list';
+
   /**
    * @var string
    */
   public $object_name = 'Release';
+
   /**
    * @var integer
    */
   public $spacing = 4;
+
   /**
    * @var boolean
    */
-  public $even_columns = FALSE;
+  public $even_columns = false;
+
   /**
    * @var boolean
    */
-  public $show_separator = FALSE;
+  public $show_separator = false;
+
   /**
    * @var boolean Show creator/modifier with releases?
    */
-  public $show_user = TRUE;
+  public $show_user = true;
+
   /**
    * @var boolean Show project for release?
    */
-  public $show_folder = FALSE;
+  public $show_folder = false;
+
   /**
    * @var boolean Show branch for release?
    */
-  public $show_branch = FALSE;
+  public $show_branch = false;
 
   /**
    * @param RELEASE $obj
-    * @access private
-    */
-  function _draw_box ($obj)
+   * @access private
+   */
+  protected function _draw_box ($obj)
   {
     $folder = $obj->parent_folder ();
     $branch = $obj->branch ();

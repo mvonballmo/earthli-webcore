@@ -52,7 +52,7 @@ class PROJECT_RENDERER extends FOLDER_RENDERER
    * Display details for a project in HTML.
    * @param PROJECT $obj
    */
-  function _echo_html_content ($obj)
+  protected function _echo_html_content ($obj)
   {
     if (! $this->_options->show_as_summary || ! $obj->is_organizational ())
     {
@@ -66,7 +66,7 @@ class PROJECT_RENDERER extends FOLDER_RENDERER
    * Shows trunk/branch/etc. for a project in HTML.
    * @param PROJECT $obj
    */
-  function _echo_details_as_html ($obj)
+  protected function _echo_details_as_html ($obj)
   {
   ?>
   <table cellpadding="2" cellspacing="0">
@@ -207,7 +207,7 @@ class PROJECT_RENDERER extends FOLDER_RENDERER
    * Display details for a project in plain text.
    * @param PROJECT $obj
    */
-  function _display_as_plain_text ($obj)
+  protected function _display_as_plain_text ($obj)
   {
     parent::_display_as_plain_text ($obj);
   }

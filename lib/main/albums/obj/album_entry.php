@@ -42,12 +42,13 @@ require_once ('webcore/obj/multi_type_entry.php');
 /**
  * A generic album entry.
  * Maintains a date and other housekeeping code for {@link JOURNAL}s and {@link PICTURE}s.
+ * @abstract
  * @package albums
  * @subpackage obj
  * @version 3.0.0
  * @since 2.5.0
  */
-class ALBUM_ENTRY extends MULTI_TYPE_ENTRY
+abstract class ALBUM_ENTRY extends MULTI_TYPE_ENTRY
 {
   /**
    * When did this entry happen?
@@ -58,7 +59,7 @@ class ALBUM_ENTRY extends MULTI_TYPE_ENTRY
   /**
    * @param ALBUM_APPLICATION $app Main application.
    */
-  function ALBUM_ENTRY ($app)
+  public function ALBUM_ENTRY ($app)
   {
     MULTI_TYPE_ENTRY::MULTI_TYPE_ENTRY ($app);
     $this->date = $app->make_date_time ();
@@ -69,7 +70,7 @@ class ALBUM_ENTRY extends MULTI_TYPE_ENTRY
    * Local times (generated with JavaScript) are <i>never</i> used.
    * @return string
    */
-  function date_as_string ()
+  public function date_as_string ()
   {
     $f = $this->parent_folder ();
     return $f->format_date ($this->date);
@@ -78,7 +79,7 @@ class ALBUM_ENTRY extends MULTI_TYPE_ENTRY
   /**
    * @param DATABASE $db
    */
-  function load ($db)
+  public function load ($db)
   {
     parent::load ($db);
     $this->date->set_from_iso ($db->f ('date'));
@@ -87,7 +88,7 @@ class ALBUM_ENTRY extends MULTI_TYPE_ENTRY
   /**
    * @param SQL_STORAGE $storage Store values to this object.
    */
-  function store_to ($storage)
+  public function store_to ($storage)
   {
     parent::store_to ($storage);
     $storage->add ($this->_table_name (), 'date', Field_type_date_time, $this->date);
@@ -101,7 +102,7 @@ class ALBUM_ENTRY extends MULTI_TYPE_ENTRY
    * @param ALBUM_ENTRY $other
    * @access private
    */
-  function _copy_from ($other)
+  protected function _copy_from ($other)
   {
     unset ($this->date);
     $this->date = clone_object ($other->date);
@@ -111,12 +112,12 @@ class ALBUM_ENTRY extends MULTI_TYPE_ENTRY
    * @param PURGE_OPTIONS $options
    * @access private
    */
-  function _purge ($options)
+  protected function _purge ($options)
   {
     parent::_purge ($options);
     
     $folder = $this->parent_folder ();
-    $folder->refresh_dates (TRUE);
+    $folder->refresh_dates (true);
   }
 }
 

@@ -42,9 +42,10 @@ http://www.earthli.com/software/webcore/albums
 		$last_day = $App->make_date_time (read_var ('last_day'), Date_time_iso);
 		$calendar = read_var ('calendar');
 		$journal = read_var ('journal');
+		$page_number = read_var ('page_number');
 
 		$df = $first_day->formatter ();
-    $df->show_CSS = FALSE;
+    $df->show_CSS = false;
 
 		if ($first_day->equals ($last_day, Date_time_date_part))
 			$Page->title->subject = 'Pictures from ' . $folder->format_date ($first_day, $df);

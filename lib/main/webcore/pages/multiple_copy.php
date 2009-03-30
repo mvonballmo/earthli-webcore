@@ -33,7 +33,7 @@ http://www.earthli.com/software/webcore
   {
     $class_name = $App->final_class_name ('MULTIPLE_OBJECT_MOVER_FORM', 'webcore/forms/multiple_object_mover_form.php');
     $form = new $class_name ($folder);
-    $form->copy = TRUE;
+    $form->copy = true;
     $form->load_from_request ();
   }
 

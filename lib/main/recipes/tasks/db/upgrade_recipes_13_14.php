@@ -35,7 +35,7 @@ class RECIPES_13_14_MIGRATOR_TASK extends UPGRADE_PER_APP_23_24_TASK
   public $version_from = '1.3.0';
   public $version_to = '1.4.0';
 
-  function _execute ()
+  protected function _execute ()
   {
     log_open_block ("Cleaning text for comments...");
       $this->clean_text ('recipe_comments');

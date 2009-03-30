@@ -52,36 +52,42 @@ class BRANCH_GRID extends CONTENT_OBJECT_GRID
    * @var string
    */
   public $box_style = 'object-in-list';
+
   /**
    * @var string
    */
   public $object_name = 'Branch';
+
   /**
    * @var integer
    */
   public $spacing = 4;
+
   /**
    * @var boolean
    */
-  public $even_columns = FALSE;
+  public $even_columns = false;
+
   /**
    * @var boolean
    */
-  public $show_separator = FALSE;
+  public $show_separator = false;
+
   /**
    * @var boolean Show creator/modifier with branchs?
    */
-  public $show_user = TRUE;
+  public $show_user = true;
+
   /**
    * @var boolean Show project for branch?
    */
-  public $show_folder = FALSE;
+  public $show_folder = false;
 
   /**
    * @param BRANCH $obj
-    * @access private
-    */
-  function _draw_box ($obj)
+   * @access private
+   */
+  protected function _draw_box ($obj)
   {
     $folder = $obj->parent_folder ();
     $creator = $obj->creator ();

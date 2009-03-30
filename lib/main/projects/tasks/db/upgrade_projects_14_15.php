@@ -28,7 +28,7 @@ http://www.earthli.com/software/webcore/projects
 
   include ('projects/init.php');
 
-  $Env->set_buffered (FALSE);
+  $Env->set_buffered (false);
   set_time_limit (600);
   $Page->start_display ();
 
@@ -111,7 +111,9 @@ http://www.earthli.com/software/webcore/projects
     $emails [] = $Page->database->f ('email');
 
   foreach ($emails as $email)
+  {
     $Page->database->query ("INSERT INTO project_subscribers (email, send_as_html) VALUES ('$email', 0)");
+  }
 
   echo "<p>Adding foreign key to subscriptions</p>";
   $Page->database->query ("ALTER TABLE `project_subscriptions` ADD `subscriber_id` INT UNSIGNED NOT NULL FIRST");
@@ -123,7 +125,9 @@ http://www.earthli.com/software/webcore/projects
     $emails [$Page->database->f ('id')] = $Page->database->f ('email');
 
   foreach ($emails as $id => $email)
+  {
     $Page->database->query ("UPDATE project_subscriptions SET subscriber_id = $id WHERE email = '$email'");
+  }
 
   echo "<p>Removing email from subscriptions</p>";
   $Page->database->query ("ALTER TABLE `project_subscriptions` DROP `email`");

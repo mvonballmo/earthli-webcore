@@ -53,7 +53,7 @@ class THEME_COMMANDS extends COMMANDS
   /**
    * @param THEME $theme Configure commands for this object.
    */
-  function THEME_COMMANDS ($theme)
+  public function THEME_COMMANDS ($theme)
   {
     COMMANDS::COMMANDS ($theme->context);
 

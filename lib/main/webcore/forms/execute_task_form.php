@@ -52,15 +52,18 @@ class EXECUTE_TASK_FORM extends FORM
    * @var string
    */
   public $name = 'task_form';
+
   /**
    * @var string
    * @access private
    */
   public $method = 'get';
+
   /**
    * @var string
    */
   public $button = 'Run';
+
   /**
    * @var string
    */
@@ -69,14 +72,14 @@ class EXECUTE_TASK_FORM extends FORM
   /**
    * @param APPLICATION $app Main application.
    */
-  function EXECUTE_TASK_FORM ($app)
+  public function EXECUTE_TASK_FORM ($app)
   {
     FORM::FORM ($app);
 
     $field = new TEXT_FIELD ();
     $field->id = 'test_name';
     $field->title = 'Test Name';
-    $field->visible = FALSE;
+    $field->visible = false;
     $this->add_field ($field);
 
     $field = new BOOLEAN_FIELD ();
@@ -110,26 +113,26 @@ class EXECUTE_TASK_FORM extends FORM
     $this->add_field ($field);
 
     $field = $this->field_at ('debug');
-    $field->visible = TRUE;
+    $field->visible = true;
     $field->description = 'Show all debugging output from all sub-systems. Similar to "verbose".';
   }
 
-  function load_with_defaults ()
+  public function load_with_defaults ()
   {
     parent::load_with_defaults ();
-    $this->set_value ('verbose', FALSE);
-    $this->set_value ('testing', FALSE);
-    $this->set_value ('stop_on_error', TRUE);
-    $this->set_value ('debug', FALSE);
-    $this->set_value ('database', FALSE);
-    $this->set_value ('console', FALSE);
+    $this->set_value ('verbose', false);
+    $this->set_value ('testing', false);
+    $this->set_value ('stop_on_error', true);
+    $this->set_value ('debug', false);
+    $this->set_value ('database', false);
+    $this->set_value ('console', false);
   }
 
   /**
    * Load initial properties from this branch.
    * @param TASK $obj
    */
-  function load_from_object ($obj)
+  public function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
     $this->set_value ('verbose', $obj->verbose);
@@ -145,7 +148,7 @@ class EXECUTE_TASK_FORM extends FORM
    * @param TASK $obj
    * @access private
    */
-  function commit ($obj)
+  public function commit ($obj)
   {
     $obj->verbose = $this->value_for ('verbose');
     $obj->testing = $this->value_for ('testing');
@@ -153,7 +156,7 @@ class EXECUTE_TASK_FORM extends FORM
     $obj->log_debug = $this->value_for ('debug');
     $obj->log_database = $this->value_for ('database');
     $obj->run_as_console = $this->value_for ('console');
-    $obj->owns_page = FALSE;
+    $obj->owns_page = false;
     $obj->execute ();
   }
 
@@ -162,7 +165,7 @@ class EXECUTE_TASK_FORM extends FORM
    * @param FORM_LIST_PROPERTIES $props
    * @access private
    */
-  function _add_boolean_options ($props)
+  protected function _add_boolean_options ($props)
   {
     $props->add_item ('testing', 1);
     $props->add_item ('stop_on_error', 1);
@@ -177,10 +180,10 @@ class EXECUTE_TASK_FORM extends FORM
    * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_options ($renderer)
+  protected function _draw_options ($renderer)
   {
     $props = $renderer->make_list_properties ();
-    $props->show_descriptions = TRUE;
+    $props->show_descriptions = true;
     $props->item_class = 'field';
     $this->_add_boolean_options ($props);
     $renderer->draw_check_boxes_row ('Options', $props);
@@ -190,7 +193,7 @@ class EXECUTE_TASK_FORM extends FORM
    * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_controls ($renderer)
+  protected function _draw_controls ($renderer)
   {
     $renderer->start ();
 

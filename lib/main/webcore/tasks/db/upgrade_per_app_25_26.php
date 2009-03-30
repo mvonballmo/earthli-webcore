@@ -30,25 +30,25 @@ require_once ('webcore/db/migrator_task.php');
 
 class UPGRADE_PER_APP_25_26_TASK extends MIGRATOR_TASK
 {
-  function add_organizational ($table_name)
+  public function add_organizational ($table_name)
   {
     log_open_block ("Adding organizational to folders");
       $this->_query ("ALTER TABLE `$table_name` ADD `organizational` TINYINT NOT NULL AFTER `title` ;");
     log_close_block ();
   }
 
-  function add_owner_to_table ($table_name)
+  public function add_owner_to_table ($table_name)
   {
     $this->_query ("ALTER TABLE `$table_name` ADD `owner_id` INT UNSIGNED NOT NULL ;");
     $this->_query ("UPDATE `$table_name` SET owner_id = creator_id");
   }
 
-  function add_version_info ($table_name, $title, $version)
+  public function add_version_info ($table_name, $title, $version)
   {
     $this->_query ("INSERT INTO `versions` VALUES('$title', '$version');");
   }
 
-  function add_attachments ($table_name, $action_table_name)
+  public function add_attachments ($table_name, $action_table_name)
   {
     log_open_block ("Adding attachments...");
 
@@ -79,7 +79,7 @@ EOD;
     log_close_block ();
   }
 
-  function add_attachment_permissions($folder_table_name, $user_table_name)
+  public function add_attachment_permissions($folder_table_name, $user_table_name)
   {
     log_open_block ("Add attachment permissions...");
       $this->_query ("ALTER TABLE `$user_table_name` ADD `deny_attachment_permissions` SMALLINT UNSIGNED NOT NULL AFTER `deny_entry_permissions` ;");

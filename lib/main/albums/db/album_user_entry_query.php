@@ -52,7 +52,7 @@ class ALBUM_USER_ENTRY_QUERY extends USER_MULTI_ENTRY_QUERY
   /**
    * Apply default restrictions and tables.
    */
-  function apply_defaults () 
+  public function apply_defaults () 
   {
     parent::apply_defaults ();
     $this->set_day_field ('entry.date');
@@ -64,7 +64,7 @@ class ALBUM_USER_ENTRY_QUERY extends USER_MULTI_ENTRY_QUERY
    * If no type is specified, then assume all entries.
    * @param string $type 'job' and 'change' are valid here.
    */
-  function set_type ($type)
+  public function set_type ($type)
   {
     $this->apply_defaults ();
     album_query_set_type ($this, $type);

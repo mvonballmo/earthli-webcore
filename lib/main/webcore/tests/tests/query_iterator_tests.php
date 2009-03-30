@@ -50,14 +50,14 @@ require_once ('webcore/tests/baseline_data_test_task.php');
  */
 class QUERY_ITERATOR_TEST_TASK extends BASELINE_DATA_TEST_TASK
 {
-  function _execute ()
+  protected function _execute ()
   {
     $this->_log_in_as_tester ();
 //    $this->_set_up_data ();
     $this->_test_query_iterator ();
   }
 
-  function _test_query_iterator ()
+  protected function _test_query_iterator ()
   {
     $entry_query = $this->app->login->all_entry_query ();
     $num_items_in_db = $entry_query->size ();

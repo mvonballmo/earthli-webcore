@@ -51,15 +51,18 @@ class ALBUM_GRID extends FOLDER_GRID
   /**
    * @var boolean
    */
-  public $show_separator = FALSE;
+  public $show_separator = false;
+
   /**
    * @var string
    */
   public $object_name = 'Album';
+
   /**
    * @var string
    */
   public $box_style = 'chart';
+
   /**
    * @var integer
    */
@@ -67,9 +70,9 @@ class ALBUM_GRID extends FOLDER_GRID
 
   /**
    * @param ALBUM $obj
-    * @access private
-    */
-  function _draw_box ($obj)
+   * @access private
+   */
+  protected function _draw_box ($obj)
   {
     $main_pic = $obj->main_picture ();
 ?>
@@ -87,7 +90,7 @@ class ALBUM_GRID extends FOLDER_GRID
       if ($main_pic)
       {
         $f = $main_pic->date->formatter ();
-        $f->show_CSS = FALSE;
+        $f->show_CSS = false;
         $pic_title = $main_pic->title_as_plain_text () . " (" . $obj->format_date ($main_pic->date, $f) . ")";
       ?>
       <a href="view_folder.php?<?php echo "id=$obj->id"; ?>"><img class="frame" src="<?php echo $main_pic->full_thumbnail_name (); ?>" title="<?php echo $pic_title; ?>" alt="<?php echo $pic_title; ?>"></a>

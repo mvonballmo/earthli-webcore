@@ -35,7 +35,7 @@ class RECIPES_14_15_MIGRATOR_TASK extends UPGRADE_PER_APP_24_25_TASK
   public $version_from = '1.4.0';
   public $version_to = '1.5.0';
 
-  function _execute ()
+  protected function _execute ()
   {
     $this->update_actions ('recipe_actions', 'recipe_comments', 'recipe_folders', 'recipes');
     $this->update_subscriptions ('recipe_subscribers', 'recipe_subscriptions');

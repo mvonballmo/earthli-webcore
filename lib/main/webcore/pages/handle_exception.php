@@ -65,9 +65,9 @@ http://www.earthli.com/software/webcore
             $class_name = $Page->final_class_name ('EXCEPTION_RENDERER', 'webcore/gui/exception_renderer.php');
             $renderer = new $class_name ($Page);
             $options = $renderer->options ();
-            $options->show_details = FALSE;
-            $options->include_page_data = TRUE;
-            $options->include_browser_info = TRUE;
+            $options->show_details = false;
+            $options->include_page_data = true;
+            $options->include_browser_info = true;
             $renderer->display_as_html ($sig, $options);
 
             $retry_form_data = $sig->as_form (array(), 'retry_form');
@@ -88,7 +88,7 @@ http://www.earthli.com/software/webcore
             $details_url = $url->as_text ();
             $url->replace_argument ('error_message', urlencode ($sig->message));
             $url->add_argument ('details', 1);
-            $details_url = str_replace ("'", "\\'", $url->as_text (TRUE));
+            $details_url = str_replace ("'", "\\'", $url->as_text (true));
         ?>
         <p class="error" style="text-align: center">An unexpected error has occurred.</p>
         <?php

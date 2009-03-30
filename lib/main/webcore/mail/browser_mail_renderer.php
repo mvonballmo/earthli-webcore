@@ -52,11 +52,11 @@ class BROWSER_MAIL_RENDERER extends RENDERER_BASED_MAIL_RENDERER
    * @return BROWSER_RENDERER
    * @access private
    */
-  function _make_renderer ()
+  protected function _make_renderer ()
   {
     $class_name = $this->context->final_class_name ('BROWSER_RENDERER', 'webcore/gui/browser_renderer.php');
     $Result = new $class_name ($this->context);
-    $Result->show_user_agent = TRUE;
+    $Result->show_user_agent = true;
     return $Result;
   }
 }

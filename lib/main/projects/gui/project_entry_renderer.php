@@ -48,14 +48,14 @@ require_once ('webcore/gui/location_renderer.php');
  * @since 1.4.1
  * @abstract
  */
-class PROJECT_ENTRY_RENDERER extends ENTRY_RENDERER
+abstract class PROJECT_ENTRY_RENDERER extends ENTRY_RENDERER
 {
   /**
    * Outputs branches for this entry.
    * @param PROJECT_ENTRY $entry
    * @access private
    */
-  function _echo_branches_as_html ($entry)
+  protected function _echo_branches_as_html ($entry)
   {
   ?>
   <dl>
@@ -122,7 +122,7 @@ class PROJECT_ENTRY_RENDERER extends ENTRY_RENDERER
    * @param PROJECT_ENTRY $entry
    * @access private
    */
-  function _echo_html_extra_description ($entry)
+  protected function _echo_html_extra_description ($entry)
   {
     $browser = $this->env->browser ();
     if ($entry->extra_description && ! $this->_options->preferred_text_length)
@@ -158,10 +158,7 @@ class PROJECT_ENTRY_RENDERER extends ENTRY_RENDERER
    * @access private
    * @abstract
    */
-  function _echo_html_branch_info ($obj, $branch_info)
-  {
-    $this->raise_deferred ('_echo_html_branch_info', 'PROJECT_ENTRY_MAIL_RENDERER');
-  }
+  protected abstract function _echo_html_branch_info ($obj, $branch_info);
 
   /**
    * Show information for a branch's release as HTML.
@@ -169,17 +166,14 @@ class PROJECT_ENTRY_RENDERER extends ENTRY_RENDERER
    * @access private
    * @abstract
    */
-  function _echo_html_branch_release_info ($branch_info)
-  {
-    $this->raise_deferred ('_echo_html_branch_release_info', 'PROJECT_ENTRY_MAIL_RENDERER');
-  }
+  protected abstract function _echo_html_branch_release_info ($branch_info);
 
   /**
    * Render properties for this entry as plain text.
    * @param PROJECT_ENTRY $entry
    * @access private
    */
-  function _echo_branches_as_plain_text ($entry)
+  protected function _echo_branches_as_plain_text ($entry)
   {
     $branch_info_query = $entry->branch_info_query ();
     $branch_infos = $branch_info_query->objects ();
@@ -230,7 +224,7 @@ class PROJECT_ENTRY_RENDERER extends ENTRY_RENDERER
    * @param DATE_TIME $time
    * @access private
    */
-  function _echo_plain_text_user ($caption, $user, $time)
+  protected function _echo_plain_text_user ($caption, $user, $time)
   {
     echo $this->_line ('[' . $caption . ']: ' . $this->_time ($time) . ' by ' . $user->title_as_plain_text ());
   }
@@ -240,7 +234,7 @@ class PROJECT_ENTRY_RENDERER extends ENTRY_RENDERER
    * @param PROJECT_ENTRY $entry
    * @access private
    */
-  function _echo_plain_text_extra_description ($entry)
+  protected function _echo_plain_text_extra_description ($entry)
   {
     if (! $this->_options->preferred_text_length && $entry->extra_description)
     {
@@ -260,10 +254,7 @@ class PROJECT_ENTRY_RENDERER extends ENTRY_RENDERER
    * @access private
    * @abstract
    */
-  function _echo_plain_text_branch_info ($obj, $branch_info)
-  {
-    $this->raise_deferred ('_echo_plain_text_branch_info', 'PROJECT_ENTRY_MAIL_RENDERER');
-  }
+  protected abstract function _echo_plain_text_branch_info ($obj, $branch_info);
 
   /**
    * Show information for a branch's release as plain text.
@@ -271,16 +262,13 @@ class PROJECT_ENTRY_RENDERER extends ENTRY_RENDERER
    * @access private
    * @abstract
    */
-  function _echo_plain_text_branch_release_info ($branch_info)
-  {
-    $this->raise_deferred ('_echo_plain_text_branch_release_info', 'PROJECT_ENTRY_MAIL_RENDERER');
-  }
+  protected abstract function _echo_plain_text_branch_release_info ($branch_info);
 
   /**
    * Outputs the object for print preview.
    * @param PROJECT_ENTRY $entry
    */
-  function display_as_printable ($entry)
+  public function display_as_printable ($entry)
   {
     $this->_hide_users = ! $this->_options->show_users;
     parent::display_as_printable ($entry);
@@ -292,7 +280,7 @@ class PROJECT_ENTRY_RENDERER extends ENTRY_RENDERER
    * @var boolean
    * @access private
    */
-  protected $_hide_users = FALSE;
+  protected $_hide_users = false;
 }
 
 /**
@@ -310,7 +298,7 @@ class PROJECT_ENTRY_LOCATION_RENDERER extends OBJECT_IN_FOLDER_LOCATION_RENDERER
    * @param RENDERABLE $obj
    * @access private
    */
-  function _add_context ($page, $obj)
+  protected function _add_context ($page, $obj)
   {
     parent::_add_context ($page, $obj);
 

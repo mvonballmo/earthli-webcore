@@ -42,7 +42,7 @@ http://www.earthli.com/software/webcore
   
   if (isset ($entry))
   {
-    $entry->set_state ($state, TRUE);
+    $entry->set_state ($state, true);
     $Env->redirect_root ($last_page);
   }
   else

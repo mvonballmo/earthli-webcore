@@ -53,7 +53,7 @@ class CHANGE_RENDERER extends PROJECT_ENTRY_RENDERER
    * @param JOB $entry
    * @access private
    */
-  function _display_as_html ($entry)
+  protected function _display_as_html ($entry)
   {
     $this->_echo_subscribe_status ($entry);
 ?>
@@ -168,7 +168,7 @@ class CHANGE_RENDERER extends PROJECT_ENTRY_RENDERER
    * @param PROJECT_ENTRY_BRANCH_INFO $branch_info
    * @access private
    */
-  function _echo_html_branch_info ($obj, $branch_info)
+  protected function _echo_html_branch_info ($obj, $branch_info)
   {
     $applier = $branch_info->applier ();
     echo 'Applied ' . $branch_info->time_applied->format () . ' by ' . $applier->title_as_link ();
@@ -179,7 +179,7 @@ class CHANGE_RENDERER extends PROJECT_ENTRY_RENDERER
    * @param CHANGE_BRANCH_INFO $branch_info
    * @access private
    */
-  function _echo_html_branch_release_info ($branch_info)
+  protected function _echo_html_branch_release_info ($branch_info)
   {
     echo 'Next release';
   }
@@ -189,7 +189,7 @@ class CHANGE_RENDERER extends PROJECT_ENTRY_RENDERER
    * @param object $entry
    * @access private
    */
-  function _display_as_plain_text ($entry)
+  protected function _display_as_plain_text ($entry)
   {
     echo $this->_line ('[Kind]: ' . $entry->kind_as_text ());
 
@@ -210,7 +210,7 @@ class CHANGE_RENDERER extends PROJECT_ENTRY_RENDERER
    * @param PROJECT_ENTRY $entry
    * @param PROJECT_ENTRY_BRANCH_INFO $branch_info
    */
-  function _echo_plain_text_branch_info ($entry, $branch_info)
+  protected function _echo_plain_text_branch_info ($entry, $branch_info)
   {
     $applier = $branch_info->applier ();
     echo '    Applied ' . $this->_time ($branch_info->time_applied) . ' by ' . $applier->title_as_plain_text ();
@@ -220,7 +220,7 @@ class CHANGE_RENDERER extends PROJECT_ENTRY_RENDERER
    * Show information for a branch's release.
    * @param PROJECT_ENTRY_BRANCH_INFO $branch_info
    */
-  function _echo_plain_text_branch_release_info ($branch_info)
+  protected function _echo_plain_text_branch_release_info ($branch_info)
   {
     echo 'Next release';
   }
@@ -229,7 +229,7 @@ class CHANGE_RENDERER extends PROJECT_ENTRY_RENDERER
    * Outputs the object for print preview.
    * @param JOB $entry
    */
-  function display_as_printable ($entry)
+  public function display_as_printable ($entry)
   {
     $this->_hide_files = ! $this->_options->show_files;
     parent::display_as_printable ($entry);
@@ -241,7 +241,7 @@ class CHANGE_RENDERER extends PROJECT_ENTRY_RENDERER
    * @var boolean
    * @access private
    */
-  protected $_hide_files = FALSE;
+  protected $_hide_files = false;
 }
 
 ?>

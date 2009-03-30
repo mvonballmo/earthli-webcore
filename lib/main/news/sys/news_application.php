@@ -62,38 +62,47 @@ class NEWS_APPLICATION_TABLE_NAMES extends APPLICATION_TABLE_NAMES
    * @var string
    */
   public $folders = 'news_folders';
+
   /**
    * @var string
    */
   public $comments = 'news_comments';
+
   /**
    * @var string
    */
   public $entries = 'news_articles';
+
   /**
    * @var string
    */
   public $user_permissions = 'news_user_permissions';
+
   /**
    * @var string
    */
   public $folder_permissions = 'news_folder_permissions';
+
   /**
    * @var string
    */
   public $subscriptions = 'news_subscriptions';
+
   /**
    * @var string
    */
   public $subscribers = 'news_subscribers';
+
   /**
    * @var string
    */
   public $history_items = 'news_history_items';
+
   /**
    * @var string
    */
   public $searches = 'news_searches';
+
   /**
    * @var string
    */
@@ -114,23 +123,28 @@ class NEWS_APPLICATION extends DRAFTABLE_APPLICATION
    * @var string
    */
   public $title = 'earthli News';
+
   /**
    * @var string
    */
   public $short_title = 'News';
+
   /**
    * @var string
    */
   public $icon = '{app_icons}app/news';
+
   /**
    * @var string
    */
   public $support_url = 'http://earthli.com/software/webcore/app_news.php';
+
   /**
    * Unique ID for this framework.
    * @var string
    */
   public $framework_id = 'com.earthli.news';
+
   /**
    * @var integer
    */
@@ -139,7 +153,7 @@ class NEWS_APPLICATION extends DRAFTABLE_APPLICATION
   /**
    * @param PAGE $page Page to which this application is attached.
    */
-  function NEWS_APPLICATION ($page)
+  public function NEWS_APPLICATION ($page)
   {
     APPLICATION::APPLICATION ($page);
 
@@ -153,7 +167,7 @@ class NEWS_APPLICATION extends DRAFTABLE_APPLICATION
    * Add classes to the {@link $classes} object factory.
    * @access private
    */
-  function _initialize_class_registry ()
+  protected function _initialize_class_registry ()
   {
     parent::_initialize_class_registry ();
     $this->register_class ('DRAFTABLE_ENTRY_TYPE_INFO', 'ARTICLE_TYPE_INFO');
@@ -176,7 +190,7 @@ class NEWS_APPLICATION extends DRAFTABLE_APPLICATION
    * Name used for version information.
    * @return string
    */
-  function name ()
+  public function name ()
   {
     return 'earthli News';
   }
@@ -187,7 +201,7 @@ class NEWS_APPLICATION extends DRAFTABLE_APPLICATION
    * @return string
    * @access private
    */
-  function _source_path ()
+  protected function _source_path ()
   {
     return __FILE__;
   }

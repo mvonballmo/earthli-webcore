@@ -28,7 +28,7 @@ http://www.earthli.com/software/webcore
 
   $Page->template_options->title = 'Browser';
   $Page->title->subject = 'Browser support';
-  $Page->template_options->check_browser = FALSE;
+  $Page->template_options->check_browser = false;
 
   $browser = $Env->browser ();
 
@@ -216,7 +216,7 @@ http://www.earthli.com/software/webcore
           <li>fill out the form below to provide more information</li>
         </ul>
       <?php
-        $form->allow_focus = FALSE;
+        $form->allow_focus = false;
         $form->action_anchor = 'report_form';
         $form->display ();
       ?>

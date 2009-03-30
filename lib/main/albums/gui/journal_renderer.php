@@ -53,7 +53,7 @@ class JOURNAL_RENDERER extends ENTRY_RENDERER
    * @param JOURNAL $entry
    * @access private
    */
-  function _display_as_html ($entry)
+  protected function _display_as_html ($entry)
   {
     $this->_echo_subscribe_status ($entry);
 
@@ -84,7 +84,7 @@ class JOURNAL_RENDERER extends ENTRY_RENDERER
    * @param JOURNAL $entry
    * @access private
    */
-  function _display_as_plain_text ($entry)
+  protected function _display_as_plain_text ($entry)
   {
     $props = $entry->weather_icon_properties ();
     echo $this->_line ($props->title);
@@ -102,7 +102,7 @@ class JOURNAL_RENDERER extends ENTRY_RENDERER
    * @param JOURNAL $entry
    * @access private
    */
-  function _display_as_printable ($entry)
+  protected function _display_as_printable ($entry)
   {
     parent::display_as_printable ($entry);
 
@@ -122,9 +122,9 @@ class JOURNAL_RENDERER extends ENTRY_RENDERER
           $class_name = $this->app->final_class_name ('PICTURE_GRID', 'albums/gui/picture_grid.php');
           $grid = new $class_name ($this->app);
           $grid->description_length = 0;  // no truncation
-          $grid->show_controls = FALSE;
-          $grid->show_date = FALSE;
-          $grid->show_page_breaks = TRUE;
+          $grid->show_controls = false;
+          $grid->show_date = false;
+          $grid->show_page_breaks = true;
           $grid->set_ranges (100, 3);
           $grid->set_query ($pic_query);
           $grid->display ();
@@ -149,7 +149,7 @@ class JOURNAL_ASSOCIATED_DATA_RENDERER extends ENTRY_ASSOCIATED_DATA_RENDERER
    * @param JOURNAL $obj
    * @param OBJECT_RENDERER_OPTIONS $options
    */
-  function display ($obj, $options = null)
+  public function display ($obj, $options = null)
   {
     $pic_query = $obj->picture_query ();
     $num_pics = $pic_query->size ();

@@ -86,7 +86,7 @@ class ALBUM_INDEX_PANEL_MANAGER extends INDEX_PANEL_MANAGER
    * Create the set of panels to use.
    * @access private
    */
-  function _add_panels ()
+  protected function _add_panels ()
   {
     parent::_add_panels ();    
     _configure_album_panels ($this);
@@ -106,7 +106,7 @@ class ALBUM_FOLDER_PANEL_MANAGER extends FOLDER_PANEL_MANAGER
    * Create the set of panels to use.
    * @access private
    */
-  function _add_panels ()
+  protected function _add_panels ()
   {
     parent::_add_panels ();    
     _configure_album_panels ($this);
@@ -134,7 +134,7 @@ class ALBUM_USER_PANEL_MANAGER extends USER_PANEL_MANAGER
    * Create the set of panels to use.
    * @access private
    */
-  function _add_panels ()
+  protected function _add_panels ()
   {
     parent::_add_panels ();    
     _configure_album_panels ($this);

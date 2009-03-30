@@ -53,7 +53,7 @@ class RECIPE_RENDERER extends DRAFTABLE_ENTRY_RENDERER
    * @param RECIPE $entry
    * @access private
    */
-  function _display_as_html ($entry)
+  protected function _display_as_html ($entry)
   {
     $this->_echo_subscribe_status ($entry);
 
@@ -87,7 +87,7 @@ class RECIPE_RENDERER extends DRAFTABLE_ENTRY_RENDERER
    * @param RECIPE $entry
    * @access private
    */
-  function _display_as_plain_text ($entry)
+  protected function _display_as_plain_text ($entry)
   {
     $this->_echo_plain_text_user_information ($entry);
 

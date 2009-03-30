@@ -55,6 +55,7 @@ class TITLE_FORMATTER extends WEBCORE_OBJECT
    * @var string
    */
   public $CSS_class = '';
+
   /**
    * The maximum displayed length of the text.
    * If the title given exceeds this length, the excess characters are cut from
@@ -63,16 +64,19 @@ class TITLE_FORMATTER extends WEBCORE_OBJECT
    * @var integer
    */
   public $max_visible_output_chars = 0;
+
   /**
    * URL used when formatting the title as a link.
    * @var string
    */
   public $location;
+
   /**
    * Full text of the title to display.
    * @var string
    */
   public $text;
+
   /**
    * Contents of the link's title (usually a tooltip).
    * This is displayed in addition to the entire text if the text has to be
@@ -86,14 +90,14 @@ class TITLE_FORMATTER extends WEBCORE_OBJECT
    * Should be formatted as 'name=value'.
    * @var string $arg
    */
-  function add_arguments ($args)
+  public function add_arguments ($args)
   {
     $url = new URL ($this->location);
     $url->replace_arguments($args);
     $this->location = $url->as_text ();
   }
 
-  function add_argument ($name, $value)
+  public function add_argument ($name, $value)
   {
     $this->add_arguments ($name . '=' . $value);
   }
@@ -103,10 +107,10 @@ class TITLE_FORMATTER extends WEBCORE_OBJECT
    * This will retain any arguments applied to the previous home page
    * @param string $page_name
    */
-  function set_name ($page_name)
+  public function set_name ($page_name)
   {
     $qmark = strpos ($this->location, '?');
-    if ($qmark !== FALSE)
+    if ($qmark !== false)
     {
       $this->location = $page_name . substr ($this->location, $qmark);
     }
@@ -123,7 +127,7 @@ class TITLE_FORMATTER extends WEBCORE_OBJECT
    * {@link as_html()} instead.
    * @return string
    */
-  function as_plain_text ()
+  public function as_plain_text ()
   {
     $munger = $this->context->plain_text_title_formatter ();
     $text_to_use = $munger->transform ($this->text);
@@ -132,9 +136,9 @@ class TITLE_FORMATTER extends WEBCORE_OBJECT
 
   /**
    * Return contents as text.
-    * @return string
-    */
-  function as_html_text ()
+   * @return string
+   */
+  public function as_html_text ()
   {
     return $this->_make_html_tag ('<span', '</span>');
   }
@@ -147,7 +151,7 @@ class TITLE_FORMATTER extends WEBCORE_OBJECT
    * allowing <i>some</i> formatting in titles.
    * @return string
    */
-  function as_html_link ()
+  public function as_html_link ()
   {
     $page = htmlspecialchars ($this->_page ());
     return $this->_make_html_tag ("<a href=\"$page\"", '</a>');
@@ -155,12 +159,12 @@ class TITLE_FORMATTER extends WEBCORE_OBJECT
 
   /**
    * Return the url for this formatter.
-    * This will check application options to determine whether to render as a fully-qualified URL.
-    * It will also resolve the query arguments.
-    * @return string
-    * @access private
-    */
-  function _page ()
+   * This will check application options to determine whether to render as a fully-qualified URL.
+   * It will also resolve the query arguments.
+   * @return string
+   * @access private
+   */
+  protected function _page ()
   {
     /* Add in the currently active panel. */
 
@@ -184,7 +188,7 @@ class TITLE_FORMATTER extends WEBCORE_OBJECT
    * @return string
    * @access private
    */
-  function _truncate ($text)
+  protected function _truncate ($text)
   {
     $len = strlen ($text);
 
@@ -214,7 +218,7 @@ class TITLE_FORMATTER extends WEBCORE_OBJECT
    * @return string
    * @access private
    */
-  function _make_html_tag ($prefix, $suffix)
+  protected function _make_html_tag ($prefix, $suffix)
   {
     $stripped_text = strip_tags ($this->text);
     $text_to_use = $this->_truncate ($stripped_text);

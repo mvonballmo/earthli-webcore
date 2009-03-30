@@ -54,7 +54,7 @@ class PICTURE_RENDERER extends ENTRY_RENDERER
    * @param PICTURE $entry
    * @access private
    */
-  function _display_as_html ($entry)
+  protected function _display_as_html ($entry)
   {
     $this->_echo_subscribe_status ($entry);
     $this->_echo_picture_as_html ($entry);
@@ -65,7 +65,7 @@ class PICTURE_RENDERER extends ENTRY_RENDERER
    * @param PICTURE $entry
    * @access private
    */
-  function _display_as_plain_text ($entry)
+  protected function _display_as_plain_text ($entry)
   {
     $folder = $entry->parent_folder ();
     $f = $entry->date->formatter ();
@@ -80,7 +80,7 @@ class PICTURE_RENDERER extends ENTRY_RENDERER
    * @param PICTURE $entry
    * @access private
    */
-  function _display_as_printable ($entry)
+  protected function _display_as_printable ($entry)
   {
     $this->_echo_picture_as_html ($entry);
   }
@@ -90,7 +90,7 @@ class PICTURE_RENDERER extends ENTRY_RENDERER
    * @param PICTURE $entry
    * @access private
    */
-  function _echo_picture_as_html ($entry)
+  protected function _echo_picture_as_html ($entry)
   {
     $folder = $entry->parent_folder ();
     $metrics = $entry->metrics ();
@@ -162,14 +162,13 @@ class PICTURE_LOCATION_RENDERER extends OBJECT_IN_FOLDER_LOCATION_RENDERER
    * @param RENDERABLE $obj
    * @access private
    */
-  function _add_context ($page, $obj)
+  protected function _add_context ($page, $obj)
   {
     parent::_add_context ($page, $obj);
 
     $calendar = read_var ('calendar');
     $journal = read_var ('journal');
     $first_day = read_var ('first_day');
-    $last_day = read_var ('last_day');
     $folder = $obj->parent_folder ();
 
     if ($calendar)

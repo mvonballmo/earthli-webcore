@@ -35,7 +35,7 @@ class NEWS_24_25_MIGRATOR_TASK extends UPGRADE_PER_APP_23_24_TASK
   public $version_from = '2.4.0';
   public $version_to = '2.5.0';
 
-  function _execute ()
+  protected function _execute ()
   {
     log_open_block ("Cleaning text for comments...");
       $this->clean_text ('news_comments');

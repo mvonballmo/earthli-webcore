@@ -56,7 +56,7 @@ class PURGE_COMPONENT_FORM extends PURGE_OBJECT_FORM
   /**
    * @param APPLICATION $app
    */
-  function PURGE_COMPONENT_FORM ($app)
+  public function PURGE_COMPONENT_FORM ($app)
   {
     PURGE_OBJECT_FORM::PURGE_OBJECT_FORM ($app);
 
@@ -76,10 +76,10 @@ class PURGE_COMPONENT_FORM extends PURGE_OBJECT_FORM
 
   /**
    * Delete the given object.
-    * @param COMPONENT $obj
-    * @access private
-    */
-  function commit ($obj)
+   * @param COMPONENT $obj
+   * @access private
+   */
+  public function commit ($obj)
   {
     $options = new COMPONENT_PURGE_OPTIONS ();
     $options->sub_history_item_publication_state = $this->value_for ('sub_history_item_publication_state');
@@ -87,7 +87,7 @@ class PURGE_COMPONENT_FORM extends PURGE_OBJECT_FORM
     $obj->purge ($options);
   }
 
-  function load_from_object ($obj)
+  public function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
     $this->set_value ('sub_history_item_publication_state', History_item_silent);
@@ -97,26 +97,28 @@ class PURGE_COMPONENT_FORM extends PURGE_OBJECT_FORM
    * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_controls ($renderer)
+  protected function _draw_controls ($renderer)
   {
     $renderer->start ();
     $renderer->draw_text_row ('', 'Are you sure you want to purge ' . $this->_object->title_as_link () . '?');
     $renderer->draw_separator ();
 
     $props = $renderer->make_list_properties ();
-    $props->show_descriptions = TRUE;
+    $props->show_descriptions = true;
     $props->add_item ('Publish branch only', History_item_silent, 'Generate a single notification indicating that the branch was purged.');
     $props->add_item ('Publish all', History_item_needs_send, 'Generate individual notifications for affected jobs and changes.');
     $renderer->draw_radio_group_row ('sub_history_item_publication_state', $props);
 
     $folder = $this->_object->parent_folder ();
     $component_query = $folder->component_query ();
-    $other_comps = $component_query->objects_at_ids ($this->_object->id, TRUE);
+    $other_comps = $component_query->objects_at_ids ($this->_object->id, true);
 
     $props = $renderer->make_list_properties ();
     $props->add_item ('[None]', 0);
     foreach ($other_comps as $comp)
+    {
       $props->add_item ($comp->title_as_plain_text (), $comp->id);
+    }
     $renderer->draw_drop_down_row ('replacement_component_id', $props);
 
     $renderer->draw_separator ();

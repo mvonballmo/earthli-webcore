@@ -52,15 +52,15 @@ class THEME_SELECTOR_GRID extends THEME_GRID
 {
   public $box_style = '';
   public $width = '';
-  public $show_separator = FALSE;
+  public $show_separator = false;
   public $padding = 0;
-  public $centered = TRUE;
+  public $centered = true;
 
   /**
    * @param THEME $obj
-    * @access private
-    */
-  function _draw_box ($obj)
+   * @access private
+   */
+  protected function _draw_box ($obj)
   {
 ?>
   <div style="text-align: center">

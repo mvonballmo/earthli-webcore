@@ -53,7 +53,7 @@ class BRANCH_RENDERER extends CONTENT_OBJECT_RENDERER
    * @param BRANCH $obj
    * @access private
    */
-  function _display_as_html ($obj)
+  protected function _display_as_html ($obj)
   {
     $this->_echo_details_as_html ($obj);
     echo $obj->description_as_html ();
@@ -64,7 +64,7 @@ class BRANCH_RENDERER extends CONTENT_OBJECT_RENDERER
    * Shows parent/latest release for a branch in HTML.
    * @param BRANCH $obj
    */
-  function _echo_details_as_html ($obj)
+  protected function _echo_details_as_html ($obj)
   {
 ?>
   <table cellpadding="2" cellspacing="0">
@@ -139,7 +139,7 @@ class BRANCH_RENDERER extends CONTENT_OBJECT_RENDERER
    * @param BRANCH $obj
    * @access private
    */
-  function _display_as_plain_text ($obj)
+  protected function _display_as_plain_text ($obj)
   {
     $this->_echo_plain_text_user_information ($obj);
 

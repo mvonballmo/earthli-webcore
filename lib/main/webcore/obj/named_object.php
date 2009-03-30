@@ -48,7 +48,7 @@ require_once ('webcore/obj/storable.php');
  * @since 2.2.1
  * @abstract
  */
-class NAMED_OBJECT extends STORABLE
+abstract class NAMED_OBJECT extends STORABLE
 {
   /**
    * An object that knows how to format this object's name.
@@ -58,7 +58,7 @@ class NAMED_OBJECT extends STORABLE
    * or {@link NAMED_OBJECT::title_as_plain_text()} for custom behavior.
    * @return TITLE_FORMATTER
    */
-  function title_formatter ()
+  public function title_formatter ()
   {
     $Result = $this->context->title_formatter ();
     if (isset ($this->app))
@@ -74,11 +74,11 @@ class NAMED_OBJECT extends STORABLE
 
   /**
    * A string representing a link to this object's url.
-    * Uses the user-defined object home page and user-defined maximum title length.
-    * @param TITLE_FORMATTER $formatter Optional formatter to use.
-    * @return string
-    */
-  function title_as_link ($formatter = null)
+   * Uses the user-defined object home page and user-defined maximum title length.
+   * @param TITLE_FORMATTER $formatter Optional formatter to use.
+   * @return string
+   */
+  public function title_as_link ($formatter = null)
   {
     if (! isset ($formatter))
     {
@@ -90,11 +90,11 @@ class NAMED_OBJECT extends STORABLE
 
   /**
    * A string showing this object's title.
-    * Uses the user-defined maximum title length.
-    * @param TITLE_FORMATTER $formatter Optional formatter to use.
-    * @return string
-    */
-  function title_as_html ($formatter = null)
+   * Uses the user-defined maximum title length.
+   * @param TITLE_FORMATTER $formatter Optional formatter to use.
+   * @return string
+   */
+  public function title_as_html ($formatter = null)
   {
     if (! isset ($formatter))
     {
@@ -111,7 +111,7 @@ class NAMED_OBJECT extends STORABLE
    * @param TITLE_FORMATTER $formatter Optional formatter to use.
    * @return string
    */
-  function title_as_plain_text ($formatter = null)
+  public function title_as_plain_text ($formatter = null)
   {
     if (! isset ($formatter))
     {
@@ -130,9 +130,9 @@ class NAMED_OBJECT extends STORABLE
    * @param TITLE_FORMATTER $formatter Optional formatter to use.
    * @return string
    */
-  function object_url_as_text ($separator = null, $formatter = null)
+  public function object_url_as_text ($separator = null, $formatter = null)
   {
-    return $this->_object_url (FALSE, $separator, $formatter);
+    return $this->_object_url (false, $separator, $formatter);
   }
 
   /**
@@ -144,9 +144,9 @@ class NAMED_OBJECT extends STORABLE
    * @param TITLE_FORMATTER $formatter Optional formatter to use.
    * @return string
    */
-  function object_url_as_link ($separator = null, $formatter = null)
+  public function object_url_as_link ($separator = null, $formatter = null)
   {
-    return $this->_object_url (TRUE, $separator, $formatter);
+    return $this->_object_url (true, $separator, $formatter);
   }
 
   /**
@@ -155,7 +155,7 @@ class NAMED_OBJECT extends STORABLE
    * {@link Force_root_on}.
    * @return string
    */
-  function home_page ($root_override = null)
+  public function home_page ($root_override = null)
   {
     $page_name = $this->page_name ();
     $page_args = $this->page_arguments ();
@@ -173,7 +173,7 @@ class NAMED_OBJECT extends STORABLE
    * {@link Force_root_on}.
    * @return string
    */
-  function home_page_as_html ($root_override = null)
+  public function home_page_as_html ($root_override = null)
   {
     return $this->context->text_options->convert_to_html_attribute ($this->home_page ($root_override));
   }
@@ -183,16 +183,13 @@ class NAMED_OBJECT extends STORABLE
    * @return string
    * @abstract
    */
-  function page_name ()
-  {
-    $this->raise_deferred ('page_name', 'NAMED_OBJECT');
-  }
+  public abstract function page_name ();
   
   /**
    * Arguments to the home page url for this object.
    * @return string
    */
-  function page_arguments ()
+  public function page_arguments ()
   {
     return '';
   }
@@ -201,7 +198,7 @@ class NAMED_OBJECT extends STORABLE
    * Rewrite the given url to point to this object.
    * @param string $page_url The url to modify.
    */
-  function replace_page_arguments ($page_url)
+  public function replace_page_arguments ($page_url)
   {
     $args = $this->page_arguments ();
     
@@ -219,7 +216,7 @@ class NAMED_OBJECT extends STORABLE
    * Returns an HTML formatter customized for this object.
    * @return HTML_MUNGER
    */
-  function html_formatter ()
+  public function html_formatter ()
   {
     $munger = $this->app->html_text_formatter ();
     $munger->complete_text_url = $this->home_page ();
@@ -230,7 +227,7 @@ class NAMED_OBJECT extends STORABLE
    * Returns an HTML formatter customized for this object.
    * @return HTML_MUNGER
    */
-  function plain_text_formatter ()
+  public function plain_text_formatter ()
   {
     return $this->app->plain_text_formatter ();
   }
@@ -242,7 +239,7 @@ class NAMED_OBJECT extends STORABLE
    * {@link Force_root_on}.
    * @return string
    */
-  function resolve_url ($url, $root_override = null)
+  public function resolve_url ($url, $root_override = null)
   {
     return $this->context->resolve_file ($url, $root_override);
   }
@@ -252,9 +249,18 @@ class NAMED_OBJECT extends STORABLE
    * Generally, this will be displayed along with a truncated description.
    * @return string
    */
-  function preview () {}
+  public function preview () {}
+
 
   /**
+   * A string representing the entire title of the object.
+   * Does not truncate or format the title in any way.
+   * @return string
+   * @abstract
+   */
+  public abstract function raw_title ();
+  
+	/**
    * Render the location within the object hierarchy.
    * Return the scope of this object within the system, ending with the object itself. The path can be
    * rendered as plain text or with each portion linked to the object's home page.
@@ -263,7 +269,7 @@ class NAMED_OBJECT extends STORABLE
    * @param TITLE_FORMATTER $formatter Optional formatter to use.
    * @access private
    */
-  function _object_url ($use_links, $separator = null, $formatter = null)
+  protected function _object_url ($use_links, $separator = null, $formatter = null)
   {
     if (! isset ($formatter))
     {
@@ -276,7 +282,6 @@ class NAMED_OBJECT extends STORABLE
       return $this->title_as_link ($formatter);
     }
 
-
     return $this->title_as_plain_text ($formatter);
   }
 
@@ -287,12 +292,12 @@ class NAMED_OBJECT extends STORABLE
    * @param HTML_MUNGER $munger
    * @access private
    */
-  function _text_as_html ($text, $munger = null)
+  protected function _text_as_html ($text, $munger = null)
   {
     if (! isset ($munger))
     {
       $munger = $this->html_formatter ();
-      $munger->force_paragraphs = TRUE;
+      $munger->force_paragraphs = true;
     }
 
     return $munger->transform ($text, $this);
@@ -305,24 +310,16 @@ class NAMED_OBJECT extends STORABLE
    * @param HTML_MUNGER $munger
    * @access private
    */
-  function _text_as_plain_text ($text, $munger = null)
+  protected function _text_as_plain_text ($text, $munger = null)
   {
     if (! isset ($munger))
     {
       $munger = $this->plain_text_formatter ();
-      $munger->force_paragraphs = TRUE;
+      $munger->force_paragraphs = true;
     }
 
     return $munger->transform ($text, $this);
   }
-
-  /**
-   * A string representing the entire title of the object.
-   * Does not truncate or format the title in any way.
-   * @return string
-   * @abstract
-   */
-  function raw_title () { $this->raise_deferred ('raw_title', 'NAMED_OBJECT'); }
 }
 
 ?>

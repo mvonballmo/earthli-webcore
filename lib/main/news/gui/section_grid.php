@@ -52,20 +52,22 @@ class SECTION_GRID extends FOLDER_GRID
    * @var string
    */
   public $object_name = 'section';
+
   /**
    * @var string
    */
   public $box_style = 'object-in-list';
+
   /**
    * @var boolean
    */
-  public $show_separator = FALSE;
+  public $show_separator = false;
 
   /**
    * @param SECTION $obj
    * @access private
    */
-  function _draw_box ($obj)
+  protected function _draw_box ($obj)
   {
     $t = $obj->title_formatter ();
     $t->max_visible_output_chars = 0;
@@ -96,7 +98,7 @@ class SECTION_GRID extends FOLDER_GRID
           $t = $entry->title_formatter ();
           $f = $entry->time_created->formatter ();
           $f->type = Date_time_format_short_date;
-          $f->show_local_time = FALSE;
+          $f->show_local_time = false;
           $t->title = $entry->time_created->format ($f);
   ?>
       <li style="margin: 0px">

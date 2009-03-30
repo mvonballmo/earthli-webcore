@@ -57,7 +57,7 @@ class THEME_QUERY extends QUERY
   /**
    * Apply default restrictions and tables.
    */
-  function apply_defaults () 
+  public function apply_defaults () 
   {
     $this->set_select ('theme.*');
     $this->set_table ($this->page->theme_options->table_name . ' theme');
@@ -68,7 +68,7 @@ class THEME_QUERY extends QUERY
    * @return THEME
    * @access private
    */
-  function _make_object ()
+  protected function _make_object ()
   {
     $class_name = $this->context->final_class_name ('THEME', 'webcore/obj/theme.php');
     return new $class_name ($this->context);
@@ -87,7 +87,7 @@ class APPLICATION_THEME_QUERY extends THEME_QUERY
   /**
    * Apply default restrictions and tables.
    */
-  function apply_defaults () 
+  public function apply_defaults () 
   {
     parent::apply_defaults ();
     $this->set_table ($this->app->table_names->themes . ' theme');

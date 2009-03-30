@@ -51,7 +51,7 @@ require_once ('webcore/tests/baseline_data_test_task.php');
  */
 class SECURITY_TEST_TASK extends BASELINE_DATA_TEST_TASK
 {
-  function _execute ()
+  protected function _execute ()
   {
     $this->_log_in_as_tester ();
     $this->_users_tested = 0;
@@ -65,7 +65,7 @@ class SECURITY_TEST_TASK extends BASELINE_DATA_TEST_TASK
    * Tests all combinations of granted/denied for user permissions. Does
    * not test any content permissions.
    */
-  function _test_global_user_permissions ()
+  protected function _test_global_user_permissions ()
   {
     $this->_test_global_user_permission ( 42, 168
                                         , Privilege_always_granted
@@ -547,7 +547,7 @@ class SECURITY_TEST_TASK extends BASELINE_DATA_TEST_TASK
 
   }
 
-  function _privilege_to_char ($p)
+  protected function _privilege_to_char ($p)
   {
     switch ($p)
     {
@@ -560,7 +560,7 @@ class SECURITY_TEST_TASK extends BASELINE_DATA_TEST_TASK
     }
   }
 
-  function _test_content_user_permission ($exp_entry1, $exp_entry2, $exp_entry3, $exp_comment1, $exp_comment2, $exp_comment3, $vf, $ve, $vc, $if, $ie, $ic)
+  protected function _test_content_user_permission ($exp_entry1, $exp_entry2, $exp_entry3, $exp_comment1, $exp_comment2, $exp_comment3, $vf, $ve, $vc, $if, $ie, $ic)
   {
     $user = $this->_set_up_user ($vf, $ve, $vc, $if, $ie, $ic);
     $user->id = Baseline_test_owner1_id;
@@ -575,12 +575,12 @@ class SECURITY_TEST_TASK extends BASELINE_DATA_TEST_TASK
     $this->_test_user ($user, $exp_entry3, $exp_comment3);
   }
 
-  function _test_global_user_permission ($exp_entry, $exp_comment, $vf, $ve, $vc, $if, $ie, $ic)
+  protected function _test_global_user_permission ($exp_entry, $exp_comment, $vf, $ve, $vc, $if, $ie, $ic)
   {
     $this->_test_user ($this->_set_up_user ($vf, $ve, $vc, $if, $ie, $ic), $exp_entry, $exp_comment);
   }
 
-  function _set_up_user ($vf, $ve, $vc, $if, $ie, $ic)
+  protected function _set_up_user ($vf, $ve, $vc, $if, $ie, $ic)
   {
     $vft = $this->_privilege_to_char ($vf);
     $vet = $this->_privilege_to_char ($ve);
@@ -602,7 +602,7 @@ class SECURITY_TEST_TASK extends BASELINE_DATA_TEST_TASK
     return $Result;
   }
 
-  function _test_user ($user, $exp_entry, $exp_comment)
+  protected function _test_user ($user, $exp_entry, $exp_comment)
   {
     $this->app->set_login ($user);
     $entry_query = $this->app->login->all_entry_query ();

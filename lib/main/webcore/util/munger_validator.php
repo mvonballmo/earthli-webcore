@@ -56,11 +56,13 @@ class MUNGER_VALIDATOR_TAG
    * @var MUNGER_TOKEN
    */
   public $token;
+
   /**
    * Line number for the token.
    * @var integer
    */
   public $line_number;
+
   /**
    * Column in the line for the token.
    * @var integer
@@ -72,7 +74,7 @@ class MUNGER_VALIDATOR_TAG
    * @param integer $line_number
    * @param integer $column
    */
-  function MUNGER_VALIDATOR_TAG ($token, $line_number, $column)
+  public function MUNGER_VALIDATOR_TAG ($token, $line_number, $column)
   {
     $this->token = clone_object($token);
     $this->line_number = $line_number;
@@ -95,7 +97,8 @@ class MUNGER_VALIDATOR_TAG_INFO
    * Does this tag have an end tag?
    * @var boolean
    */
-  public $has_end_tag = TRUE;
+  public $has_end_tag = true;
+
   /**
    * Table of properties accepted by this tag.
    * @var array[string]
@@ -106,14 +109,16 @@ class MUNGER_VALIDATOR_TAG_INFO
    * @param boolean $has_end_tag
    * @param array[string] $properties
    */
-  function MUNGER_VALIDATOR_TAG_INFO ($has_end_tag, $properties = null)
+  public function MUNGER_VALIDATOR_TAG_INFO ($has_end_tag, $properties = null)
   {
     $this->has_end_tag = $has_end_tag;
 
     if (isset ($properties))
     {
       foreach ($properties as $prop)
-        $this->properties [$prop] = TRUE;
+      {
+        $this->properties [$prop] = true;
+      }
     }
   }
 
@@ -122,10 +127,10 @@ class MUNGER_VALIDATOR_TAG_INFO
    * @param MUNGER_VALIDATOR $validator
    * @param MUNGER_TOKEN $token
    */
-  function validate ($validator, $token)
+  public function validate ($validator, $token)
   {
     $attrs = $token->attributes ();
-    foreach ($attrs as $key => $value)
+    foreach (array_keys($attrs) as $key)
     {
       if (! isset ($this->properties [$key]))
       {
@@ -150,16 +155,19 @@ class MUNGER_VALIDATION_ERROR
    * @var string
    */
   public $message;
+
   /**
    * Line at which the error occurred.
    * @var integer
    */
   public $line_number;
+
   /**
    * Column at which the error occurred.
    * @var integer
    */
   public $column;
+
   /**
    * Token that generated the error.
    * @var MUNGER_TOKEN
@@ -204,7 +212,7 @@ class MUNGER_VALIDATOR extends MUNGER_PARSER
    * Check {@link $errors} afterwards for a list of errors that occurred.
    * @var string $input
    */
-  function validate ($input)
+  public function validate ($input)
   {
     $this->errors = array ();
     $this->_line_number = 1;
@@ -230,7 +238,7 @@ class MUNGER_VALIDATOR extends MUNGER_PARSER
    * @param MUNGER_VALIDATOR_TAG_INFO $info
    * @access private
    */
-  function register_known_tag ($name, $info)
+  public function register_known_tag ($name, $info)
   {
     $this->_known_tags [strtolower ($name)] = $info;
   }
@@ -240,7 +248,7 @@ class MUNGER_VALIDATOR extends MUNGER_PARSER
    * @var MUNGER_TOKEN $token
    * @access private
    */
-  function _process_token ($token)
+  protected function _process_token ($token)
   {
     parent::_process_token ($token);
     $this->_update_position ($token);
@@ -251,7 +259,7 @@ class MUNGER_VALIDATOR extends MUNGER_PARSER
    * @var MUNGER_TOKEN $token
    * @access private
    */
-  function _treat_as_text ($token)
+  protected function _treat_as_text ($token)
   {
     return ! isset ($this->_known_tags [$token->name ()]);
   }
@@ -261,7 +269,7 @@ class MUNGER_VALIDATOR extends MUNGER_PARSER
    * @param MUNGER_TOKEN $token
    * @access private
    */
-  function _transform_as_start_tag ($token)
+  protected function _transform_as_start_tag ($token)
   {
     $name = $token->name ();
     if (isset ($this->_known_tags [$name]))
@@ -280,7 +288,7 @@ class MUNGER_VALIDATOR extends MUNGER_PARSER
    * @param MUNGER_TOKEN $token
    * @access private
    */
-  function _transform_as_end_tag ($token)
+  protected function _transform_as_end_tag ($token)
   {
     $name = $token->name ();
     if (isset ($this->_known_tags [$name]))
@@ -314,7 +322,7 @@ class MUNGER_VALIDATOR extends MUNGER_PARSER
   /** Transform a token as text.
    * @param MUNGER_TOKEN $token
    * @access private */
-  function _transform_as_text ($token)
+  protected function _transform_as_text ($token)
   {
   }
 
@@ -328,7 +336,7 @@ class MUNGER_VALIDATOR extends MUNGER_PARSER
    * @param integer $col
    * @access private
    */
-  function _add_error ($msg, $token, $line = null, $col = null)
+  protected function _add_error ($msg, $token, $line = null, $col = null)
   {
     if (! isset ($line))
     {
@@ -355,21 +363,21 @@ class MUNGER_VALIDATOR extends MUNGER_PARSER
    * @param MUNGER_TOKEN $token
    * @access private
    */
-  function _update_position ($token)
+  protected function _update_position ($token)
   {
     $text = $token->data ();
     $pos = strpos ($text, "\n");
 
-    if ($pos !== FALSE)
+    if ($pos !== false)
     {
       $last_pos = $pos + 1;
 
-      while ($pos !== FALSE)
+      while ($pos !== false)
       {
         $this->_line_number++;
         $this->_column = 1;
         $pos = strpos ($text, "\n", $last_pos);
-        if ($pos !== FALSE)
+        if ($pos !== false)
         {
           $last_pos = $pos + 1;
         }
@@ -389,12 +397,14 @@ class MUNGER_VALIDATOR extends MUNGER_PARSER
    * @access private
    */
   protected $_open_tags = array ();
+
   /**
    * Current line number.
    * @see _update_position()
    * @access private
    */
   protected $_line_number;
+
   /**
    * Current column in the line.
    * @see _update_position()
@@ -412,12 +422,12 @@ class MUNGER_VALIDATOR extends MUNGER_PARSER
  */
 class MUNGER_BASE_VALIDATOR extends MUNGER_VALIDATOR
 {
-  function MUNGER_BASE_VALIDATOR ()
+  public function MUNGER_BASE_VALIDATOR ()
   {
     MUNGER_VALIDATOR::MUNGER_VALIDATOR ();
 
-    $standard_tag_info = new MUNGER_VALIDATOR_TAG_INFO (TRUE, array ('class', 'style', 'title'));
-    $this->register_known_tag ('macro', new MUNGER_VALIDATOR_TAG_INFO (FALSE, array('convert')));
+    $standard_tag_info = new MUNGER_VALIDATOR_TAG_INFO (true, array ('class', 'style', 'title'));
+    $this->register_known_tag ('macro', new MUNGER_VALIDATOR_TAG_INFO (false, array('convert')));
     $this->register_known_tag ('span', $standard_tag_info);
     $this->register_known_tag ('i', $standard_tag_info);
     $this->register_known_tag ('b', $standard_tag_info);
@@ -452,38 +462,38 @@ class MUNGER_DEFAULT_TITLE_VALIDATOR extends MUNGER_BASE_VALIDATOR
  */
 class MUNGER_DEFAULT_TEXT_VALIDATOR extends MUNGER_BASE_VALIDATOR
 {
-  function MUNGER_DEFAULT_TEXT_VALIDATOR ()
+  public function MUNGER_DEFAULT_TEXT_VALIDATOR ()
   {
     MUNGER_BASE_VALIDATOR::MUNGER_BASE_VALIDATOR ();
 
-    $standard_tag_info = new MUNGER_VALIDATOR_TAG_INFO (TRUE);
+    $standard_tag_info = new MUNGER_VALIDATOR_TAG_INFO (true);
     $base_tag_props = array ('class', 'style', 'author', 'href', 'source', 'date');
     $div_tag_props = array_merge ($base_tag_props, array ('caption', 'align', 'width', 'clear'));
-    $div_tag_info = new MUNGER_VALIDATOR_TAG_INFO (TRUE, $div_tag_props);
-    $quote_tag_info = new MUNGER_VALIDATOR_TAG_INFO (TRUE, array_merge ($div_tag_props, array ('quote_style')));
+    $div_tag_info = new MUNGER_VALIDATOR_TAG_INFO (true, $div_tag_props);
+    $quote_tag_info = new MUNGER_VALIDATOR_TAG_INFO (true, array_merge ($div_tag_props, array ('quote_style')));
     $asset_tag_props = array_merge ($div_tag_props, array ('title', 'src', 'format', 'attachment'));
 
-    $this->register_known_tag ('page', new MUNGER_VALIDATOR_TAG_INFO (FALSE, array ('title')));
-    $this->register_known_tag ('h', new MUNGER_VALIDATOR_TAG_INFO (TRUE, array ('level')));
-    $this->register_known_tag ('iq', new MUNGER_VALIDATOR_TAG_INFO (TRUE, array ('author', 'source')));
-    $this->register_known_tag ('anchor', new MUNGER_VALIDATOR_TAG_INFO (FALSE, array ('id')));
+    $this->register_known_tag ('page', new MUNGER_VALIDATOR_TAG_INFO (false, array ('title')));
+    $this->register_known_tag ('h', new MUNGER_VALIDATOR_TAG_INFO (true, array ('level')));
+    $this->register_known_tag ('iq', new MUNGER_VALIDATOR_TAG_INFO (true, array ('author', 'source')));
+    $this->register_known_tag ('anchor', new MUNGER_VALIDATOR_TAG_INFO (false, array ('id')));
     $this->register_known_tag ('pre', $div_tag_info);
-    $this->register_known_tag ('box', new MUNGER_VALIDATOR_TAG_INFO (TRUE, array_merge ($div_tag_props, array ('title'))));
+    $this->register_known_tag ('box', new MUNGER_VALIDATOR_TAG_INFO (true, array_merge ($div_tag_props, array ('title'))));
     $this->register_known_tag ('code', $div_tag_info);
     $this->register_known_tag ('bq', $quote_tag_info);
     $this->register_known_tag ('pullquote', $quote_tag_info);
     $this->register_known_tag ('abstract', $quote_tag_info);
     $this->register_known_tag ('div', $div_tag_info);
-    $this->register_known_tag ('clear', new MUNGER_VALIDATOR_TAG_INFO (FALSE));
+    $this->register_known_tag ('clear', new MUNGER_VALIDATOR_TAG_INFO (false));
     $this->register_known_tag ('ul', $standard_tag_info);
     $this->register_known_tag ('ol', $standard_tag_info);
     $this->register_known_tag ('ft', $standard_tag_info);
-    $this->register_known_tag ('dl', new MUNGER_VALIDATOR_TAG_INFO (TRUE, array ('dt_class', 'dd_class', 'style')));
-    $this->register_known_tag ('fn', new MUNGER_VALIDATOR_TAG_INFO (FALSE));
-    $this->register_known_tag ('hr', new MUNGER_VALIDATOR_TAG_INFO (FALSE, array ('style')));
-    $this->register_known_tag ('a', new MUNGER_VALIDATOR_TAG_INFO (TRUE, array_merge ($base_tag_props, array ('title'))));
-    $this->register_known_tag ('img', new MUNGER_VALIDATOR_TAG_INFO (FALSE, array_merge ($asset_tag_props, array ('scale'))));
-    $this->register_known_tag ('media', new MUNGER_VALIDATOR_TAG_INFO (FALSE, array_merge ($asset_tag_props, array ('height', 'args'))));
+    $this->register_known_tag ('dl', new MUNGER_VALIDATOR_TAG_INFO (true, array ('dt_class', 'dd_class', 'style')));
+    $this->register_known_tag ('fn', new MUNGER_VALIDATOR_TAG_INFO (false));
+    $this->register_known_tag ('hr', new MUNGER_VALIDATOR_TAG_INFO (false, array ('style')));
+    $this->register_known_tag ('a', new MUNGER_VALIDATOR_TAG_INFO (true, array_merge ($base_tag_props, array ('title'))));
+    $this->register_known_tag ('img', new MUNGER_VALIDATOR_TAG_INFO (false, array_merge ($asset_tag_props, array ('scale'))));
+    $this->register_known_tag ('media', new MUNGER_VALIDATOR_TAG_INFO (false, array_merge ($asset_tag_props, array ('height', 'args'))));
   }
 }
 

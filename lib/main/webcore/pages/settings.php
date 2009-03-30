@@ -53,7 +53,7 @@ http://www.earthli.com/software/webcore
     <?php
       $class_name = $Page->final_class_name ('THEME_GRID', 'webcore/gui/theme_grid.php');
       $grid = new $class_name ($Page);
-      $grid->is_chooser = TRUE;
+      $grid->is_chooser = true;
       $grid->set_ranges (5, 3);
       $grid->set_query ($theme_query);
       $grid->display ();

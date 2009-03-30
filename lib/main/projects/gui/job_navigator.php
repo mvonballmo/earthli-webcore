@@ -53,7 +53,7 @@ class JOB_NAVIGATOR extends MULTI_TYPE_ENTRY_NAVIGATOR
    * @param QUERY $query
    * @access private
    */
-  function _adjust_query ($query)
+  protected function _adjust_query ($query)
   {
     parent::_adjust_query ($query);
     $query->add_select ('jtob.priority, jtob.status, entry.kind');
@@ -66,7 +66,7 @@ class JOB_NAVIGATOR extends MULTI_TYPE_ENTRY_NAVIGATOR
    * @return string
    * @access private
    */
-  function _text_for_list ($obj)
+  protected function _text_for_list ($obj)
   {
     $Result = $obj->kind_icon ('16px') . ' ' . parent::_text_for_list ($obj);
     $branch_info = $obj->main_branch_info ();
@@ -82,7 +82,7 @@ class JOB_NAVIGATOR extends MULTI_TYPE_ENTRY_NAVIGATOR
    * @return TITLE_FORMATTER
    * @access private
    */
-  function _formatter_for_object ($obj)
+  protected function _formatter_for_object ($obj)
   {
     $Result = parent::_formatter_for_object ($obj);
     $branch_info = $obj->main_branch_info ();

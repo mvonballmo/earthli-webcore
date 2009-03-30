@@ -35,7 +35,7 @@ class UPGRADE_WEBCORE_24_25_TASK extends MIGRATOR_TASK
   public $version_from = '2.4.0';
   public $version_to = '2.5.0';
 
-  function _execute ()
+  protected function _execute ()
   {
     log_open_block ("Updating users table");
       $this->_query ("ALTER TABLE `users` ADD `kind` ENUM( 'anonymous', 'registered' ) DEFAULT 'anonymous' NOT NULL");

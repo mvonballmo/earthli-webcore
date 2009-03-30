@@ -35,7 +35,7 @@ class NEWS_281_300_MIGRATOR_TASK extends UPGRADE_PER_APP_271_300_TASK
   public $version_from = '2.8.1';
   public $version_to = '3.0.0';
 
-  function _execute ()
+  protected function _execute ()
   {
     log_open_block ("Updating summary in folders");
       $this->_update_folders ('news_folders');

@@ -60,7 +60,7 @@ class HANDLER_RENDERER extends RENDERER
    * @param CONTEXT $context
    * @param OBJECT_RENDERER_OPTIONS $options
    */
-  function HANDLER_RENDERER ($context, $options = null)
+  public function HANDLER_RENDERER ($context, $options = null)
   {
     RENDERER::RENDERER ($context);
     if (isset ($options))
@@ -79,7 +79,7 @@ class HANDLER_RENDERER extends RENDERER
    * A renderer always retains the last options used with it.
    * @return OBJECT_RENDERER_OPTIONS
    */
-  function options ()
+  public function options ()
   {
     return $this->_options;
   }
@@ -89,7 +89,7 @@ class HANDLER_RENDERER extends RENDERER
    * @param RENDERABLE $obj
    * @param OBJECT_RENDERER_OPTIONS $options
    */
-  function display ($obj, $options = null)
+  public function display ($obj, $options = null)
   {
   }
   
@@ -99,7 +99,7 @@ class HANDLER_RENDERER extends RENDERER
    * @param OBJECT_RENDERER_OPTIONS $options
    * @return string
    */
-  function display_to_string ($obj, $options = null)
+  public function display_to_string ($obj, $options = null)
   {
     ob_start ();
       $this->display ($obj, $options);
@@ -112,7 +112,7 @@ class HANDLER_RENDERER extends RENDERER
    * @return OBJECT_RENDERER_OPTIONS
    * @access private
    */
-  function _make_options ()
+  protected function _make_options ()
   {
     return new OBJECT_RENDERER_OPTIONS ();
   }
@@ -135,14 +135,14 @@ class HANDLER_RENDERER extends RENDERER
  * @since 2.5.0
  * @abstract
  */
-class OBJECT_RENDERER extends HANDLER_RENDERER
+abstract class OBJECT_RENDERER extends HANDLER_RENDERER
 {
   /**
    * Outputs the object as the configured {@link $handler_type}.
    * @param RENDERABLE $obj
    * @param OBJECT_RENDERER_OPTIONS $options
    */
-  function display ($obj, $options = null)
+  public function display ($obj, $options = null)
   {
     switch ($this->handler_type)
     {
@@ -163,7 +163,7 @@ class OBJECT_RENDERER extends HANDLER_RENDERER
    * @param RENDERABLE $obj
    * @param OBJECT_RENDERER_OPTIONS $options
    */
-  function display_as_html ($obj, $options = null)
+  public function display_as_html ($obj, $options = null)
   {
     if (isset ($options))
     {
@@ -177,7 +177,7 @@ class OBJECT_RENDERER extends HANDLER_RENDERER
    * @param RENDERABLE $obj
    * @param OBJECT_RENDERER_OPTIONS $options
    */
-  function display_as_plain_text ($obj, $options = null)
+  public function display_as_plain_text ($obj, $options = null)
   {
     if (isset ($options))
     {
@@ -191,13 +191,13 @@ class OBJECT_RENDERER extends HANDLER_RENDERER
    * @param RENDERABLE $obj
    * @param OBJECT_RENDERER_OPTIONS $options
    */
-  function display_as_printable ($obj, $options = null)
+  public function display_as_printable ($obj, $options = null)
   {
     if (isset ($options))
     {
       $this->_options = $options;
     }
-    $this->_options->show_interactive = FALSE;    
+    $this->_options->show_interactive = false;    
     $this->display_as_html ($obj, $options);
   }
 
@@ -207,10 +207,7 @@ class OBJECT_RENDERER extends HANDLER_RENDERER
    * @access private
    * @abstract
    */
-  function _display_as_html ($obj)
-  {
-    $this->raise_deferred ('_display_as_html', 'OBJECT_RENDERER');
-  }
+  protected abstract function _display_as_html ($obj);
 
   /**
    * Outputs the object as plain text.
@@ -218,10 +215,7 @@ class OBJECT_RENDERER extends HANDLER_RENDERER
    * @access private
    * @abstract
    */
-  function _display_as_plain_text ($obj)
-  {
-    $this->raise_deferred ('_display_as_plain_text', 'OBJECT_RENDERER');
-  }
+  protected abstract function _display_as_plain_text ($obj);
 }
 
 /**
@@ -242,27 +236,30 @@ class OBJECT_RENDERER_OPTIONS
    * @var integer
    */
   public $preferred_text_length = 0;
+
   /**
    * Show users and create/modify times?
    * @var boolean
    */
-  public $show_users = TRUE;
+  public $show_users = true;
+
   /**
    * Show only details for a summary.
    * This should be optimized for tall, skinny viewing and contain less text.
    * @var boolean
    */
-  public $show_as_summary = FALSE;
+  public $show_as_summary = false;
+
   /**
    * Show buttons/etc.
    * Set to false when rendering in an email/printing or other non-interactive media.
    */
-  public $show_interactive = TRUE;
+  public $show_interactive = true;
 
   /**
    * Load values from the HTTP request.
    */
-  function load_from_request ()
+  public function load_from_request ()
   {
     $this->preferred_text_length = read_var ('preferred_text_length');
     $this->show_users = read_var ('show_users');

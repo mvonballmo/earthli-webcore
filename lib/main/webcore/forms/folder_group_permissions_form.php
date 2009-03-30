@@ -51,7 +51,7 @@ class FOLDER_GROUP_PERMISSIONS_FORM extends FOLDER_PERMISSIONS_FORM
   /**
    * @param GROUP $group Edit this group's permissions.
    */
-  function FOLDER_GROUP_PERMISSIONS_FORM ($group)
+  public function FOLDER_GROUP_PERMISSIONS_FORM ($group)
   {
     FOLDER_PERMISSIONS_FORM::FOLDER_PERMISSIONS_FORM ($group->app);
 
@@ -60,9 +60,9 @@ class FOLDER_GROUP_PERMISSIONS_FORM extends FOLDER_PERMISSIONS_FORM
     $field = new TEXT_FIELD ();
     $field->id = 'group_id';
     $field->title = 'Group ID';
-    $field->required = TRUE;
+    $field->required = true;
     $field->min_value = 1;
-    $field->visible = FALSE;
+    $field->visible = false;
     $this->add_field ($field);
   }
 
@@ -70,7 +70,7 @@ class FOLDER_GROUP_PERMISSIONS_FORM extends FOLDER_PERMISSIONS_FORM
    * Load initial properties from these permissions.
    * @param PERMISSIONS $obj
    */
-  function load_from_object ($obj)
+  public function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
     $this->set_value ('group_id', $this->_group->id);
@@ -78,10 +78,10 @@ class FOLDER_GROUP_PERMISSIONS_FORM extends FOLDER_PERMISSIONS_FORM
 
   /**
    * Store the form's values to this set of permissions.
-    * @param PERMISSIONS $obj
-    * @access private
-    */
-  function commit ($obj)
+   * @param PERMISSIONS $obj
+   * @access private
+   */
+  public function commit ($obj)
   {
     $obj->user_id = $this->_group->id;
     $obj->kind = Privilege_kind_group;

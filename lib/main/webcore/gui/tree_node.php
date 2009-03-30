@@ -51,7 +51,7 @@ class TREE_NODE
    * @param boolean $closed Is this node closed by default?
    * @param string $target Target the link to this frame.
    */
-  function TREE_NODE ($title, $link = '', $closed = TRUE, $target = '')
+  public function TREE_NODE ($title, $link = '', $closed = true, $target = '')
   {
     static $id;
     $id++;
@@ -67,7 +67,7 @@ class TREE_NODE
    * Add the given 'node' as a child.
    * @param TREE_NODE $node
    */
-  function append ($node)
+  public function append ($node)
   {
     $node->_parent = $this;
     $this->_nodes [] = $node;
@@ -77,7 +77,7 @@ class TREE_NODE
    * Display text of this node (with optional link)
    * @return string
    */
-  function text ()
+  public function text ()
   {
     if ($this->_link)
     {
@@ -98,30 +98,35 @@ class TREE_NODE
    * @access private
    */
   protected $_title;
+
   /**
    * URL for the link.
    * @var string
    * @access private
    */
   protected $_link;
+
   /**
    * Direct links to this target.
    * @var string
    * @access private
    */
   protected $_target;
+
   /**
    * Used by the tree to toggle DHTML sections.
    * @var integer
    * @access private
    */
   protected $_id;
+
   /**
    * Optional parent node.
    * @var TREE_NODE
    * @access private
    */
   protected $_parent;
+
   /**
    * Is this node closed initially?
    * @var boolean
@@ -146,7 +151,7 @@ class GENERIC_TREE_NODE_INFO extends TREE_NODE_INFO
    * @param TREE_NODE $node
    * @access private
    */
-  function sub_nodes ($node)
+  public function sub_nodes ($node)
   {
     return $node->_nodes;
   }
@@ -157,7 +162,7 @@ class GENERIC_TREE_NODE_INFO extends TREE_NODE_INFO
    * @return string
    * @access private
    */
-  function title_for ($node)
+  public function title_for ($node)
   {
     return $node->text ();
   }
@@ -168,7 +173,7 @@ class GENERIC_TREE_NODE_INFO extends TREE_NODE_INFO
    * @return bool
    * @access private
    */
-  function closed ($node)
+  public function closed ($node)
   {
     return $node->_closed;
   }
@@ -179,7 +184,7 @@ class GENERIC_TREE_NODE_INFO extends TREE_NODE_INFO
    * @return TREE_NODE
    * @access private
    */
-  function parent ($node)
+  public function parent ($node)
   {
     return $node->_parent;
   }
@@ -190,7 +195,7 @@ class GENERIC_TREE_NODE_INFO extends TREE_NODE_INFO
    * @return integer
    * @access private
    */
-  function id ($node)
+  public function id ($node)
   {
     return $node->_id;
   }

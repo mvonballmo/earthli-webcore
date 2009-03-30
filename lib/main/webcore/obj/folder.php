@@ -56,11 +56,13 @@ class FOLDER extends ATTACHMENT_HOST
    * @var string
    */
   public $icon_url;
+
   /**
    * Short description of the contents of the folder.
    * @var string
    */
   public $summary;
+
   /**
    * Denotes a folder that does not hold content.
    * Content controls will not be displayed for this folder.
@@ -70,23 +72,25 @@ class FOLDER extends ATTACHMENT_HOST
 
   /**
    * Foreign key reference to the id of this folder's parent.
-    * Empty if this is a root folder.
-    * @var integer
-    * @access private
-    */
+   * Empty if this is a root folder.
+   * @var integer
+   * @access private
+   */
   public $parent_id;
+
   /**
    * Foreign key reference to the id of the root folder for this subtree.
-    * Zero if this is a root folder
-    * @var integer
-    * @access private
-    */
+   * Zero if this is a root folder
+   * @var integer
+   * @access private
+   */
   public $root_id;
+
   /**
    * Foreign key reference to the id of the id this folder uses to obtain permissions.
-    * @var integer
-    * @access private
-    */
+   * @var integer
+   * @access private
+   */
   public $permissions_id;
 
   /**
@@ -95,7 +99,7 @@ class FOLDER extends ATTACHMENT_HOST
    * entire content tree is based on this folder.
    * @return boolean
    */
-  function is_root ()
+  public function is_root ()
   {
     return $this->id == $this->app->root_folder_id;
   }
@@ -105,7 +109,7 @@ class FOLDER extends ATTACHMENT_HOST
    * Folders marked as organizational cannot contain content.
    * @return boolean
    */
-  function is_organizational ()
+  public function is_organizational ()
   {
     return $this->is_root () || $this->organizational;
   }
@@ -115,7 +119,7 @@ class FOLDER extends ATTACHMENT_HOST
    * @param HTML_MUNGER $munger
    * @return string
    */
-  function summary_as_html ($munger = null)
+  public function summary_as_html ($munger = null)
   {
     return $this->_text_as_html ($this->summary, $munger);
   }
@@ -126,7 +130,7 @@ class FOLDER extends ATTACHMENT_HOST
    * @var string $size
    * @return string
    */
-  function icon_as_html ($size = '32px')
+  public function icon_as_html ($size = '32px')
   {
     return $this->app->image_as_html ($this->expanded_icon_url ($size), ' ');
   }
@@ -136,22 +140,24 @@ class FOLDER extends ATTACHMENT_HOST
    * @param string $size
    * @return string
    */
-  function expanded_icon_url ($size = '32px')
+  public function expanded_icon_url ($size = '32px')
   {
     if ($this->icon_url)
     {
       return $this->app->sized_icon ($this->icon_url, $size);
     }
+    
+    return '';
   }
 
   /**
    * Last update time of any content in the folder.
-    * If a comment exists, return the time of the comment, else return
-    * the time of the most recent entry, else return the create time
-    * of the folder itself. Useful for displaying activity in folders.
-    * @return DATE_TIME
-    */
-  function latest_object_create_time ()
+   * If a comment exists, return the time of the comment, else return
+   * the time of the most recent entry, else return the create time
+   * of the folder itself. Useful for displaying activity in folders.
+   * @return DATE_TIME
+   */
+  public function latest_object_create_time ()
   {
     $this->_cache_latest_object_info ();
     return $this->_latest_object_create_time;
@@ -159,12 +165,12 @@ class FOLDER extends ATTACHMENT_HOST
 
   /**
    * Last updater of any content in the folder.
-    * If a comment exists, return the creator of the comment, else return
-    * the creator of the most recent entry, else return the creator
-    * of the folder itself. Useful for displaying activity in folders.
-    * @return USER
-    */
-  function latest_object_creator ()
+   * If a comment exists, return the creator of the comment, else return
+   * the creator of the most recent entry, else return the creator
+   * of the folder itself. Useful for displaying activity in folders.
+   * @return USER
+   */
+  public function latest_object_creator ()
   {
     $this->_cache_latest_object_info ();
     return $this->_latest_object_creator;
@@ -176,7 +182,7 @@ class FOLDER extends ATTACHMENT_HOST
    * most applicable to that user.
    * @return CONTENT_PRIVILEGES
    */
-  function permissions ()
+  public function permissions ()
   {
     $this->assert (isset ($this->_privileges), "Permissions not loaded for [$this->title].", 'permissions', 'FOLDER');
     return $this->_privileges;
@@ -186,7 +192,7 @@ class FOLDER extends ATTACHMENT_HOST
    * Parent folder for this one; may be empty.
    * @return FOLDER
    */
-  function permissions_folder ()
+  public function permissions_folder ()
   {
     if (! isset ($this->_permissions_folder))
     {
@@ -201,7 +207,7 @@ class FOLDER extends ATTACHMENT_HOST
    * Contains permissions for this object.
    * @return FOLDER
    */
-  function security_context ()
+  public function security_context ()
   {
     return $this;
   }
@@ -211,7 +217,7 @@ class FOLDER extends ATTACHMENT_HOST
    * @return boolean
    * @access private
    */
-  function defines_security ()
+  public function defines_security ()
   {
     return $this->permissions_id == $this->id;
   }
@@ -221,7 +227,7 @@ class FOLDER extends ATTACHMENT_HOST
    * This will be either inherited or defined in this folder.
    * @return FOLDER_SECURITY
    */
-  function security_definition ()
+  public function security_definition ()
   {
     if ($this->login->is_allowed (Privilege_set_folder, Privilege_secure, $this))
     {
@@ -243,7 +249,7 @@ class FOLDER extends ATTACHMENT_HOST
    * @param string $type
    * @return ENTRY
    */
-  function new_object ($type = '')
+  public function new_object ($type = '')
   {
     if ($type)
     {
@@ -266,10 +272,10 @@ class FOLDER extends ATTACHMENT_HOST
 
   /**
    * Create a sub folder of this one.
-    * Does not store to the database.
-    * @return FOLDER
-    */
-  function new_folder ()
+   * Does not store to the database.
+   * @return FOLDER
+   */
+  public function new_folder ()
   {
     $Result = $this->app->new_folder ();
     $Result->set_parent_folder ($this);
@@ -281,21 +287,21 @@ class FOLDER extends ATTACHMENT_HOST
 
   /**
    * Indicate that the sub-folders are cached.
-    * This is necessary for folders with no sub-folders, to show that the
-    * system has already determined that the current sub-folder list is all there is.
-    * @access private
-    */
-  function set_sub_folders_cached ()
+   * This is necessary for folders with no sub-folders, to show that the
+   * system has already determined that the current sub-folder list is all there is.
+   * @access private
+   */
+  public function set_sub_folders_cached ()
   {
-    $this->_sub_folders_cached = TRUE;
+    $this->_sub_folders_cached = true;
   }
 
   /**
    * Are the sub-folders cached?
-    * @return bool
-    * @access private
-    */
-  function sub_folders_cached ()
+   * @return bool
+   * @access private
+   */
+  public function sub_folders_cached ()
   {
     return $this->_sub_folders_cached;
   }
@@ -304,13 +310,13 @@ class FOLDER extends ATTACHMENT_HOST
    * Return a list of sub-folders visible to the logged-in user.
    * @return array[FOLDER]
    */
-  function sub_folders ()
+  public function sub_folders ()
   {
     if (! $this->_sub_folders_cached)
     {
       $folder_query = $this->login->folder_query ();
       $this->_sub_folders = $folder_query->tree ($this->id, $this->root_id);
-      $this->_sub_folders_cached = TRUE;
+      $this->_sub_folders_cached = true;
     }
 
     return $this->_sub_folders;
@@ -325,11 +331,11 @@ class FOLDER extends ATTACHMENT_HOST
    * {@link Force_root_on}.
    * @return string
    */
-  function resolve_url ($url, $root_override = null)
+  public function resolve_url ($url, $root_override = null)
   {
     $entry_key = '{entry}';
 
-    if (strpos ($url, $entry_key) !== FALSE)
+    if (strpos ($url, $entry_key) !== false)
     {
       $id = substr ($url, strlen ($entry_key));
       if ($id && ($id [0] == '/'))
@@ -345,7 +351,7 @@ class FOLDER extends ATTACHMENT_HOST
       }
       else
       {
-        $url = "[ERROR]:entry_for_$id_not_found";
+        $url = "[ERROR]:entry for $id not found";
       }
     }
 
@@ -361,16 +367,16 @@ class FOLDER extends ATTACHMENT_HOST
    * @return FOLDER
    * @access private
    */
-  function _load_parent_folder ()
+  protected function _load_parent_folder ()
   {
-    return $this->login->folder_at_id ($this->parent_id, TRUE);
+    return $this->login->folder_at_id ($this->parent_id, true);
   }
 
   /**
    * Set the containing folder for the object.
    * @access private
    */
-  function set_parent_folder ($fldr)
+  public function set_parent_folder ($fldr)
   {
     parent::set_parent_folder ($fldr);
     $this->parent_id = $fldr->id;
@@ -379,10 +385,10 @@ class FOLDER extends ATTACHMENT_HOST
 
   /**
    * Attach this folder as a sub-folder here.
-    * @param FOLDER $folder
-    * @access private
-    */
-  function add_sub_folder ($folder)
+   * @param FOLDER $folder
+   * @access private
+   */
+  public function add_sub_folder ($folder)
   {
     $this->_sub_folders [] = $folder;
     $folder->set_parent_folder ($this);
@@ -390,9 +396,9 @@ class FOLDER extends ATTACHMENT_HOST
 
   /**
    * A query that finds all comments in this folder.
-    * @return FOLDER_COMMENT_QUERY
-    */
-  function comment_query ()
+   * @return FOLDER_COMMENT_QUERY
+   */
+  public function comment_query ()
   {
     $class_name = $this->app->final_class_name ('FOLDER_COMMENT_QUERY', 'webcore/db/folder_comment_query.php');
     return new $class_name ($this);
@@ -400,9 +406,9 @@ class FOLDER extends ATTACHMENT_HOST
 
   /**
    * A query that finds all entries in this folder.
-    * @return FOLDER_ENTRY_QUERY
-    */
-  function entry_query ()
+   * @return FOLDER_ENTRY_QUERY
+   */
+  public function entry_query ()
   {
     $class_name = $this->app->final_class_name ('FOLDER_ENTRY_QUERY', 'webcore/db/folder_entry_query.php');
     return new $class_name ($this);
@@ -411,7 +417,7 @@ class FOLDER extends ATTACHMENT_HOST
   /**
    * @return string
    */
-  function permissions_home_page ()
+  public function permissions_home_page ()
   {
     return "{$this->app->page_names->folder_permissions_home}?id=$this->id";
   }
@@ -419,7 +425,7 @@ class FOLDER extends ATTACHMENT_HOST
   /**
    * @return string
    */
-  function subscriptions_home_page ()
+  public function subscriptions_home_page ()
   {
     return "{$this->app->page_names->folder_subscriptions_home}?id=$this->id";
   }
@@ -427,7 +433,7 @@ class FOLDER extends ATTACHMENT_HOST
   /**
    * @param DATABASE $db Database from which to load values.
    */
-  function load ($db)
+  public function load ($db)
   {
     parent::load ($db);
     $this->summary = $db->f ('summary');
@@ -448,7 +454,7 @@ class FOLDER extends ATTACHMENT_HOST
   /**
    * @param SQL_STORAGE $storage Store values to this object.
    */
-  function store_to ($storage)
+  public function store_to ($storage)
   {
     parent::store_to ($storage);
     $tname =$this->_table_name ();
@@ -464,7 +470,7 @@ class FOLDER extends ATTACHMENT_HOST
    * Name of the home page name for this object.
    * @return string
    */
-  function page_name ()
+  public function page_name ()
   {
     return $this->app->page_names->folder_home;
   }
@@ -477,7 +483,7 @@ class FOLDER extends ATTACHMENT_HOST
    * parent to this new folder.
    * @access private
    */
-  function _create ()
+  protected function _create ()
   {
     parent::_create ();
 
@@ -486,14 +492,16 @@ class FOLDER extends ATTACHMENT_HOST
     if (! isset ($parent))
     {
       $sec = $this->security_definition ();
-      $sec->set_inherited (FALSE);
+      $sec->set_inherited (false);
     }
     else
     {
       $subscriber_query = $parent->subscriber_query ();
       $objs = $subscriber_query->objects ();
       foreach ($objs as $obj)
+      {
         $obj->subscribe ($this->id, Subscribe_folder);
+      }
     }
   }
 
@@ -502,7 +510,7 @@ class FOLDER extends ATTACHMENT_HOST
    * When a state-change occurs, the state is applied to the comment and all sub-comments.
    * @access private
    */
-  function _state_changed ()
+  protected function _state_changed ()
   {
     if ($this->exists ())
     {
@@ -512,7 +520,7 @@ class FOLDER extends ATTACHMENT_HOST
       while ($i < $c)
       {
         $f = $subs [$i];
-        $f->set_state ($this->state, TRUE);
+        $f->set_state ($this->state, true);
         $i++;
       }
     }
@@ -525,7 +533,7 @@ class FOLDER extends ATTACHMENT_HOST
    * @param FOLDER $fldr
    * @param FOLDER_OPERATION_OPTIONS $options
    */
-  function _move_to ($fldr, $options)
+  protected function _move_to ($fldr, $options)
   {
     if ($options->update_now && $options->maintain_permissions)
     {
@@ -555,7 +563,7 @@ class FOLDER extends ATTACHMENT_HOST
    * @param FOLDER $fldr
    * @param FOLDER_OPERATION_OPTIONS $options
    */
-  function _copy_to ($fldr, $options)
+  protected function _copy_to ($fldr, $options)
   {
     if ($options->update_now && $options->maintain_permissions)
     {
@@ -577,7 +585,7 @@ class FOLDER extends ATTACHMENT_HOST
    * Name of the {@link FOLDER_PERMISSIONS} to use for this object.
    * @access private
    */
-  function _privilege_set ()
+  protected function _privilege_set ()
   {
     return Privilege_set_folder;
   }
@@ -586,7 +594,7 @@ class FOLDER extends ATTACHMENT_HOST
    * @param PURGE_OPTIONS $options
    * @access private
    */
-  function _purge ($options)
+  protected function _purge ($options)
   {
     $sub_folders = $this->sub_folders ();
     if (sizeof ($sub_folders))
@@ -631,7 +639,7 @@ class FOLDER extends ATTACHMENT_HOST
    * @return FOLDER_SECURITY
    * @access private
    */
-  function _make_security_definition ()
+  protected function _make_security_definition ()
   {
     $class_name = $this->app->final_class_name ('FOLDER_SECURITY', 'webcore/sys/security.php');
     return new $class_name ($this);
@@ -640,7 +648,7 @@ class FOLDER extends ATTACHMENT_HOST
   /**
    * @access private
    */
-  function _cache_latest_object_info ()
+  protected function _cache_latest_object_info ()
   {
     if (! isset ($this->_latest_object_time))
     {
@@ -668,7 +676,7 @@ class FOLDER extends ATTACHMENT_HOST
    * @return ENTRY
    * @access private
    */
-  function _make_entry ()
+  protected function _make_entry ()
   {
     $class_name = $this->app->final_class_name ('ENTRY', 'webcore/obj/entry.php');
     return new $class_name ($this->app);
@@ -679,7 +687,7 @@ class FOLDER extends ATTACHMENT_HOST
    * @return string
    * @access private
    */
-  function _table_name ()
+  protected function _table_name ()
   {
     return $this->app->table_names->folders;
   }
@@ -691,7 +699,7 @@ class FOLDER extends ATTACHMENT_HOST
    * @return object
    * @access private
    */
-  function _default_handler_for ($handler_type, $options = null)
+  protected function _default_handler_for ($handler_type, $options = null)
   {
     switch ($handler_type)
     {
@@ -717,7 +725,7 @@ class FOLDER extends ATTACHMENT_HOST
    * @param HISTORY_ITEM $history_item Action that generated this request. May be empty.
    * @access private
    */
-  function _prepare_subscription_query ($query, $history_item)
+  protected function _prepare_subscription_query ($query, $history_item)
   {
     $query->restrict ('watch_entries > 0');
     $query->restrict_kinds (array (Subscribe_folder => $this->id
@@ -726,44 +734,51 @@ class FOLDER extends ATTACHMENT_HOST
 
   /**
    * @var FOLDER
-    * @access private
-    */
+   * @access private
+   */
   protected $_parent;
+
   /**
    * @var FOLDER
-    * @access private
-    */
+   * @access private
+   */
   protected $_permissions_folder;
+
   /**
    * @var DATE_TIME
-    * @access private
-    */
+   * @access private
+   */
   protected $_latest_object_create_time;
+
   /**
    * @var USER
-    * @access private
-    */
+   * @access private
+   */
   protected $_latest_object_creator;
+
   /**
    * @var boolean
    * @access private
    */
-  protected $_sub_folders_cached = FALSE;
+  protected $_sub_folders_cached = false;
+
   /**
    * @var array[FOLDER]
-    * @access private
-    */
+   * @access private
+   */
   protected $_sub_folders;
+
   /**
    * @var bool
-    * @access private
-    */
+   * @access private
+   */
   protected $_use_cached_sub_folders;
+
   /**
    * Permissions for the {@link $login} user.
-    * @var CONTENT_PRIVILEGES
-    * @access private
-    */
+   * @var CONTENT_PRIVILEGES
+   * @access private
+   */
   protected $_privileges;
 }
 

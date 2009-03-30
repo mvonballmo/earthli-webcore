@@ -28,7 +28,7 @@ http://www.earthli.com/software/webcore/projects
 
   include ('projects/init.php');
 
-  $Env->set_buffered (FALSE);
+  $Env->set_buffered (false);
   set_time_limit (600);
   $Page->start_display ();
 

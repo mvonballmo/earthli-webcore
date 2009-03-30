@@ -64,7 +64,7 @@ class DRAFTABLE_ENTRY_SUMMARY_GRID extends ENTRY_SUMMARY_GRID
    * @param OBJECT_IN_FOLDER $obj
    * @access private
    */
-  function _echo_details ($obj)
+  protected function _echo_details ($obj)
   {
     if ($obj->unpublished ())
     {

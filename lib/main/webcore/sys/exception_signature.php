@@ -52,6 +52,7 @@ class EXCEPTION_SIGNATURE
    * @var string
    */
   public $scope;
+
   /**
    * Is the dynamic class different than the scope?
    * If the dynamic type is other than the class in which the exception-generating method
@@ -59,29 +60,34 @@ class EXCEPTION_SIGNATURE
    * @var boolean
    */
   public $is_derived_type;
+
   /**
    * If non-empty, the routine that generated the exception.
    * This can be empty if the exception happened in a global routine or scope.
    * @var string
    */
   public $routine_name;
+
   /**
    * If non-empty, the routine is a method of this class.
    * This can be empty if the exception happened in a global routine or scope.
    * @var string
    */
   public $class_name;
+
   /**
    * Name of the dynamic class that generated the exception.
    * This can be empty if the exception happened in a global routine or scope.
    * @var string
    */
   public $dynamic_class_name;
+
   /**
    * Page in which the exception occurred.
    * @var string
    */
   public $page_name;
+
   /**
    * Name and version of the application.
    * The exception handler page may not instantiate the application that raised the exception, so
@@ -89,6 +95,7 @@ class EXCEPTION_SIGNATURE
    * @var string
    */
   public $application_description;
+
   /**
    * Message issued with the exception.
    * @var string
@@ -104,7 +111,7 @@ class EXCEPTION_SIGNATURE
    * @param string $class_name May be empty.
    * @param object $obj May be empty.
    */
-  function load_from_exception ($msg, $routine_name, $class_name, $obj)
+  public function load_from_exception ($msg, $routine_name, $class_name, $obj)
   {
     $this->message = $msg;
     $this->routine_name = $routine_name;
@@ -150,7 +157,7 @@ class EXCEPTION_SIGNATURE
    * should have been created with {@link as_query_string()} or in a form that included the values returned
    * from {@link as_array()}.
    */
-  function load_from_request ()
+  public function load_from_request ()
   {
     $this->page_name = $this->_decode_value (read_var ('page_name'));
     $this->application_description = $this->_decode_value (read_var ('application_description'));
@@ -168,9 +175,9 @@ class EXCEPTION_SIGNATURE
   /**
    * @return boolean
    */
-  function exists ()
+  public function exists ()
   {
-    return TRUE;
+    return true;
   }
 
   /**
@@ -179,12 +186,14 @@ class EXCEPTION_SIGNATURE
    * @param string $type Can be {@link Var_type_post}, {@link Var_type_get}, {@link Var_type_cookie} or {@link Var_type_upload}.
    * @return array[string][string]
    */
-  function variables_for ($type)
+  public function variables_for ($type)
   {
     if (isset ($this->_variables [$type]))
     {
       return $this->_variables [$type];
     }
+    
+    return null;
   }
 
   /**
@@ -193,7 +202,7 @@ class EXCEPTION_SIGNATURE
    * in a format that fits within URL restrictions.
    * @return string
    */
-  function as_query_string ()
+  public function as_query_string ()
   {
     $params = $this->as_array ();
     $Result = '';
@@ -219,14 +228,16 @@ class EXCEPTION_SIGNATURE
    * @param array[string,string]
    * @return string
    */
-  function as_form ($params, $name)
+  public function as_form ($params, $name)
   {
     $Result = '<form id="' . $name . '" style="display: inline" action="' . $this->page_name . '" method="POST"><div style="display: inline">' . "\n";
 
     if (sizeof ($params))
     {
       foreach ($params as $name => $value)
+      {
         $Result .= "<input type=\"hidden\" name=\"$name\" value=\"$value\">\n";
+      }
     }
 
     $fields = $this->variables_for (Var_type_post);
@@ -265,7 +276,7 @@ class EXCEPTION_SIGNATURE
    * further or to build a form that can recreate the error.
    * @return array[string][string]
    */
-  function as_array ()
+  public function as_array ()
   {
     $Result ['page_name'] = $this->_encode_value ($this->page_name);
     $Result ['application_description'] = $this->_encode_value ($this->application_description);
@@ -282,12 +293,12 @@ class EXCEPTION_SIGNATURE
     return $Result;
   }
 
-  function _encode_value ($value)
+  protected function _encode_value ($value)
   {
     return urlencode (str_replace (array ("\r", "\n", '&'), array ('', '[LF]', '[AMP]'), $value));
   }
   
-  function _decode_value ($value)
+  protected function _decode_value ($value)
   {
     return urldecode (str_replace (array ('[LF]', '[AMP]'), array ("\n", '&'), $value));
   }
@@ -300,7 +311,7 @@ class EXCEPTION_SIGNATURE
    * @param array[string,string] $to_array
    * @access private
    */
-  function _add_values_from ($title, $to_array)
+  protected function _add_values_from ($title, $to_array)
   {
     if (isset ($this->_variables))
     {
@@ -337,7 +348,7 @@ class EXCEPTION_SIGNATURE
    * @param string $type Can be {@link Var_type_post}, {@link Var_type_get}, {@link Var_type_cookie} or {@link Var_type_upload}.
    * @access private
    */
-  function _add_vars_for ($type)
+  protected function _add_vars_for ($type)
   {
     foreach ($_REQUEST as $name => $value)
     {

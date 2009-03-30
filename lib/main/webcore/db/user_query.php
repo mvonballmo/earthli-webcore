@@ -54,17 +54,18 @@ class USER_QUERY extends QUERY
    * @var string
    */
   public $alias = 'usr';
+
   /**
    * Are permissions loaded with the user?
    * @see include_permissions()
    * @var boolean
    */
-  public $permissions_included = FALSE;
+  public $permissions_included = false;
 
   /**
    * Apply default restrictions and tables.
    */
-  function apply_defaults () 
+  public function apply_defaults () 
   {
     $this->set_select ('usr.*');
     $this->set_table ($this->app->table_names->users . ' usr');
@@ -75,7 +76,7 @@ class USER_QUERY extends QUERY
    * Add/remove permissions information when retrieving users.
    * @param boolean $value If true, permissions are included.
    */
-  function include_permissions ($value)
+  public function include_permissions ($value)
   {
     if ($this->permissions_included != $value)
     {
@@ -98,7 +99,7 @@ class USER_QUERY extends QUERY
    * Can be {@link Privilege_kind_anonymous} or {@link Privilege_kind_registered}.
    * @param string $kind
    */
-  function set_kind ($kind)
+  public function set_kind ($kind)
   {
     $this->_invalidate ();
     $this->_kind = $kind;
@@ -106,18 +107,18 @@ class USER_QUERY extends QUERY
 
   /**
    * @param string $name
-    * @return USER
-    */
-  function object_at_name ($name)
+   * @return USER
+   */
+  public function object_at_name ($name)
   {
     return $this->object_with_field ('usr.title', $name);
   }
 
   /**
    * @param string $name
-    * @return USER
-    */
-  function object_at_email ($email)
+   * @return USER
+   */
+  public function object_at_email ($email)
   {
     return $this->object_with_field ('usr.email', $email);
   }
@@ -125,7 +126,7 @@ class USER_QUERY extends QUERY
   /**
    * @access private
    */
-  function _prepare_restrictions ()
+  protected function _prepare_restrictions ()
   {
     if (isset ($this->_kind))
     {
@@ -136,45 +137,43 @@ class USER_QUERY extends QUERY
   /**
    * Return whether the user can see visible objects.
    * If there is no logged-in user, then assume that this query is retrieving login information
-   * and return TRUE.
+   * and return true.
    * @return boolean
    * @access private
    */
-  function _visible_objects_available ()
+  protected function _visible_objects_available ()
   {
     if (isset ($this->login))
     {
       return $this->login->is_allowed ($this->_privilege_set, Privilege_view);
     }
 
-
-    return TRUE;
+    return true;
 
   }
 
   /**
    * Return whether the user can see invisible objects.
    * If there is no logged-in user, then assume that this query is retrieving login information
-   * and return TRUE.
+   * and return true.
    * @return boolean
    * @access private
    */
-  function _invisible_objects_available ()
+  protected function _invisible_objects_available ()
   {
     if (isset ($this->login))
     {
       return $this->login->is_allowed ($this->_privilege_set, Privilege_view_hidden);
     }
 
-
-    return TRUE;
+    return true;
   }
 
   /**
    * @return USER
-    * @access private
-    */
-  function _make_object ()
+   * @access private
+   */
+  protected function _make_object ()
   {
     $class_name = $this->app->final_class_name ('USER', 'webcore/obj/user.php');
     return new $class_name ($this->app);
@@ -182,9 +181,10 @@ class USER_QUERY extends QUERY
 
   /**
    * @var string
-    * @access private
-    */
+   * @access private
+   */
   protected $_kind;
+
   /**
    * Name of the default permission set to use.
    * @var string

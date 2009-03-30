@@ -54,28 +54,30 @@ class PURGE_OBJECT_FORM extends RENDERABLE_FORM
    * @var string
    */
   public $button = 'Yes';
+
   /**
    * Show the object's name as a link when displayed?
-    * @var boolean
-    */
-  public $show_object_as_link = TRUE;
+   * @var boolean
+   */
+  public $show_object_as_link = true;
+
   /**
    * Show the previews before the form?
    * @var boolean
    */
-  public $show_previews_first = FALSE;
+  public $show_previews_first = false;
   
   /**
    * @param APPLICATION $app
    */
-  function PURGE_OBJECT_FORM ($app)
+  public function PURGE_OBJECT_FORM ($app)
   {
     RENDERABLE_FORM::RENDERABLE_FORM ($app);
     
     $field = new BOOLEAN_FIELD ();
     $field->id = 'remove_resources';
     $field->title = 'Remove associated files';
-    $field->visible = FALSE;
+    $field->visible = false;
     $this->add_field ($field);
   }
 
@@ -84,7 +86,7 @@ class PURGE_OBJECT_FORM extends RENDERABLE_FORM
    * @param OBJECT_IN_FOLDER $obj
    * @access private
    */
-  function commit ($obj)
+  public function commit ($obj)
   {
     $options = $obj->make_purge_options ();
     $this->_configure_purge_options ($options);
@@ -95,18 +97,18 @@ class PURGE_OBJECT_FORM extends RENDERABLE_FORM
    * Load initial properties from this object.
    * @param OBJECT_IN_FOLDER $obj
    */
-  function load_from_object ($obj)
+  public function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
-    $this->add_preview ($obj, $obj->title_as_html (), FALSE);
-    $this->set_value ('remove_resources', TRUE);
+    $this->add_preview ($obj, $obj->title_as_html (), false);
+    $this->set_value ('remove_resources', true);
 
     $type_info = $this->_object->type_info ();
     $field = $this->field_at ('remove_resources');
     $field->description = '<strong>Uncheck</strong> if this is a duplicate (e.g. another ' . $type_info->singular_title . ' uses the same files).';
   }
 
-  function load_with_defaults ()
+  public function load_with_defaults ()
   {
     $this->raise ('Cannot use purge form for new objects.', 'load_with_defaults', 'PURGE_OBJECT_FORM');
   }
@@ -116,7 +118,7 @@ class PURGE_OBJECT_FORM extends RENDERABLE_FORM
    * @param PURGE_OPTIONS $options
    * @access private
    */
-  function _configure_purge_options ($options)
+  protected function _configure_purge_options ($options)
   {
     $options->remove_resources = $this->value_for ('remove_resources');
   }
@@ -125,7 +127,7 @@ class PURGE_OBJECT_FORM extends RENDERABLE_FORM
    * @param OBJECT_IN_FOLDER $obj
    * @access private
    */
-  function _store_to_object ($obj)
+  protected function _store_to_object ($obj)
   {
   }
   
@@ -135,7 +137,7 @@ class PURGE_OBJECT_FORM extends RENDERABLE_FORM
    * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_options ($renderer)
+  protected function _draw_options ($renderer)
   {
     if ($this->visible ('remove_resources'))
     {
@@ -149,7 +151,7 @@ class PURGE_OBJECT_FORM extends RENDERABLE_FORM
    * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_controls ($renderer)
+  protected function _draw_controls ($renderer)
   {
     $renderer->start ();
 

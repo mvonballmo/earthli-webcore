@@ -30,7 +30,7 @@ require_once ('webcore/db/migrator_task.php');
 
 class UPGRADE_PER_APP_221_23_TASK extends MIGRATOR_TASK
 {
-  function build_folder_roots ($table_name)
+  public function build_folder_roots ($table_name)
   {
     global $Page;
 
@@ -68,7 +68,7 @@ class UPGRADE_PER_APP_221_23_TASK extends MIGRATOR_TASK
     build_folder_tree ($roots, $table_name);
   }
 
-  function build_folder_tree ($folders, $table_name)
+  public function build_folder_tree ($folders, $table_name)
   {
     if (sizeof ($folders))
     {

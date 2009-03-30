@@ -51,12 +51,12 @@ class SUBMIT_BROWSER_FORM extends SEND_MAIL_FORM
   /**
    * @param CONTEXT $context
    */
-  function SUBMIT_BROWSER_FORM ($context)
+  public function SUBMIT_BROWSER_FORM ($context)
   {
     SEND_MAIL_FORM::SEND_MAIL_FORM ($context);
 
-    $this->set_required ('sender_name', FALSE);
-    $this->set_required ('sender_email', FALSE);
+    $this->set_required ('sender_name', false);
+    $this->set_required ('sender_email', false);
 
     $field = $this->field_at ('sender_email');
     $field->description = 'Optional, but lets us follow up if we have any questions.';
@@ -65,7 +65,7 @@ class SUBMIT_BROWSER_FORM extends SEND_MAIL_FORM
     $field->description = 'Briefly describe the problem with our browser detection (very useful).';
   }
 
-  function load_with_defaults ()
+  public function load_with_defaults ()
   {
     parent::load_with_defaults ();
 
@@ -77,7 +77,7 @@ class SUBMIT_BROWSER_FORM extends SEND_MAIL_FORM
    * @param object $obj Get renderer for this object.
    * @access private
    */
-  function _make_obj_renderer ($obj)
+  protected function _make_obj_renderer ($obj)
   {
     $class_name = $this->context->final_class_name ('BROWSER_MAIL_RENDERER', 'webcore/mail/browser_mail_renderer.php');
     return new $class_name ($this->context);

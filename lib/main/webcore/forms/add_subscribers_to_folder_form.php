@@ -52,6 +52,7 @@ class ADD_SUBSCRIBERS_TO_FOLDER_FORM extends ID_BASED_FORM
    * @var string
    */
   public $button = 'Add';
+
   /**
    * @var string
    */
@@ -60,7 +61,7 @@ class ADD_SUBSCRIBERS_TO_FOLDER_FORM extends ID_BASED_FORM
   /**
    * @param FOLDER $folder Add subscribers to this folder.
    */
-  function ADD_SUBSCRIBERS_TO_FOLDER_FORM ($folder)
+  public function ADD_SUBSCRIBERS_TO_FOLDER_FORM ($folder)
   {
     ID_BASED_FORM::ID_BASED_FORM ($folder->app);
 
@@ -70,16 +71,16 @@ class ADD_SUBSCRIBERS_TO_FOLDER_FORM extends ID_BASED_FORM
     $field->id = 'emails';
     $field->title = 'Subscribers';
     $field->description = 'Place each email on its own line in the list.';
-    $field->required = TRUE;
+    $field->required = true;
     $this->add_field ($field);
   }
 
   /**
    * Store the form's values to this folder.
-    * @param FOLDER $obj
-    * @access private
-    */
-  function commit ($obj)
+   * @param FOLDER $obj
+   * @access private
+   */
+  public function commit ($obj)
   {
     // strip the '\r' for Windows systems, then split the string at '\n'
     $emails = str_replace ("\r", '', $this->value_for ('emails'));
@@ -95,7 +96,7 @@ class ADD_SUBSCRIBERS_TO_FOLDER_FORM extends ID_BASED_FORM
           $class_name = $this->app->final_class_name ('SUBSCRIBER', 'webcore/obj/subscriber.php');
           $subscriber = new $class_name ($this->app);
           $subscriber->email = $email;
-          $subscriber->set_subscribed ($this->_folder, Subscribe_folder, TRUE);
+          $subscriber->set_subscribed ($this->_folder, Subscribe_folder, true);
         }
       }
     }
@@ -105,7 +106,7 @@ class ADD_SUBSCRIBERS_TO_FOLDER_FORM extends ID_BASED_FORM
    * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_controls ($renderer)
+  protected function _draw_controls ($renderer)
   {
     $renderer->start ();
     $renderer->draw_text_box_row ('emails', '25em', '6em');

@@ -52,7 +52,7 @@ class ENTRY extends ATTACHMENT_HOST
    * The last modification time, either of the entry itself or a comment.
    * @return DATE_TIME
    */
-  function time_changed ()
+  public function time_changed ()
   {
     $this->_load_change_info ();
     return $this->_time_changed;
@@ -62,7 +62,7 @@ class ENTRY extends ATTACHMENT_HOST
    * The last modifier, either of the entry itself or a comment.
    * @return USER
    */
-  function changer ()
+  public function changer ()
   {
     $this->_load_change_info ();
     return $this->_changer;
@@ -72,7 +72,7 @@ class ENTRY extends ATTACHMENT_HOST
    * A query that addresses all the comments for this entry.
    * @return ENTRY_COMMENT_QUERY
    */
-  function comment_query ()
+  public function comment_query ()
   {
     include_once ('webcore/db/entry_comment_query.php');
     return new ENTRY_COMMENT_QUERY ($this);
@@ -85,7 +85,7 @@ class ENTRY extends ATTACHMENT_HOST
    * @param integer $parent_id
    * @return COMMENT
    */
-  function new_comment ($parent_id)
+  public function new_comment ($parent_id)
   {
     $Result = $this->_make_comment ();
     $Result->entry_id = $this->id;
@@ -96,7 +96,7 @@ class ENTRY extends ATTACHMENT_HOST
   /**
    * @return TITLE_FORMATTER
    */
-  function title_formatter ()
+  public function title_formatter ()
   {
     $Result = parent::title_formatter ();
     $Result->page_name = $this->app->page_names->entry_home;
@@ -107,7 +107,7 @@ class ENTRY extends ATTACHMENT_HOST
   /**
    * @param SQL_STORAGE $storage Store values to this object.
    */
-  function store_to ($storage)
+  public function store_to ($storage)
   {
     parent::store_to ($storage);
     $tname =$this->_table_name ();
@@ -119,7 +119,7 @@ class ENTRY extends ATTACHMENT_HOST
    * Name of the home page name for this object.
    * @return string
    */
-  function page_name ()
+  public function page_name ()
   {
     return $this->app->page_names->entry_home;
   }
@@ -132,7 +132,7 @@ class ENTRY extends ATTACHMENT_HOST
    * @return string
    * @access private
    */
-  function _object_url ($use_links, $separator = null, $formatter = null)
+  protected function _object_url ($use_links, $separator = null, $formatter = null)
   {
     $Result = parent::_object_url ($use_links, $separator, $formatter);
     $folder = $this->parent_folder ();
@@ -150,7 +150,7 @@ class ENTRY extends ATTACHMENT_HOST
    * @param PURGE_OPTIONS $options
    * @access private
    */
-  function _purge ($options)
+  protected function _purge ($options)
   {
     /* Remove comments */
     $this->db->logged_query ("DELETE LOW_PRIORITY FROM {$this->app->table_names->comments} WHERE entry_id = $this->id");
@@ -165,7 +165,7 @@ class ENTRY extends ATTACHMENT_HOST
    * @return string
    * @access private
    */
-  function _table_name ()
+  protected function _table_name ()
   {
     return $this->app->table_names->entries;
   }
@@ -174,7 +174,7 @@ class ENTRY extends ATTACHMENT_HOST
    * @return COMMENT
    * @access private
    */
-  function _make_comment ()
+  protected function _make_comment ()
   {
     $class_name = $this->app->final_class_name ('COMMENT', 'webcore/obj/comment.php');
     $Result = new $class_name ($this->app);
@@ -185,7 +185,7 @@ class ENTRY extends ATTACHMENT_HOST
   /**
    * @access private
    */
-  function _load_change_info ()
+  protected function _load_change_info ()
   {
     if (! isset ($this->_latest_comment_time))
     {
@@ -214,7 +214,7 @@ class ENTRY extends ATTACHMENT_HOST
    * @return HISTORY_ITEM_QUERY
    * @access private
    */
-  function _make_history_item_query ()
+  protected function _make_history_item_query ()
   {
     include_once ('webcore/db/history_item_query.php');
     return new ENTRY_HISTORY_ITEM_QUERY ($this->app);
@@ -224,7 +224,7 @@ class ENTRY extends ATTACHMENT_HOST
    * Name of the {@link FOLDER_PERMISSIONS} to use for this object.
    * @access private
    */
-  function _privilege_set ()
+  protected function _privilege_set ()
   {
     return Privilege_set_entry;
   }
@@ -236,7 +236,7 @@ class ENTRY extends ATTACHMENT_HOST
    * @return object
    * @access private
    */
-  function _default_handler_for ($handler_type, $options = null)
+  protected function _default_handler_for ($handler_type, $options = null)
   {
     switch ($handler_type)
     {
@@ -269,7 +269,7 @@ class ENTRY extends ATTACHMENT_HOST
    * @param HISTORY_ITEM $history_item Action that generated this request. May be empty.
    * @access private
    */
-  function _prepare_subscription_query ($query, $history_item)
+  protected function _prepare_subscription_query ($query, $history_item)
   {
     $query->restrict ('watch_entries > 0');
     $query->restrict_kinds (array (Subscribe_folder => $this->parent_folder_id ()
@@ -282,11 +282,13 @@ class ENTRY extends ATTACHMENT_HOST
    * @access private
    */
   protected $_folder;
+
   /**
    * @var DATE_TIME
    * @access private
    */
   protected $_latest_comment_time;
+
   /**
    * @var USER
    * @access private
@@ -309,10 +311,12 @@ class DRAFTABLE_ENTRY extends ENTRY
    * @var DATE_TIME
    */
   public $time_published;
+
   /**
    * @var integer
    */
   public $publisher_id;
+
   /**
    * @var integer
    */
@@ -321,7 +325,7 @@ class DRAFTABLE_ENTRY extends ENTRY
   /**
    * @param APPLICATION $app Main application.
    */
-  function DRAFTABLE_ENTRY ($app)
+  public function DRAFTABLE_ENTRY ($app)
   {
     ENTRY::ENTRY ($app);
 
@@ -333,7 +337,7 @@ class DRAFTABLE_ENTRY extends ENTRY
    * Is this entry in {@link Draft}, {@link Queued} or {@link Abandoned} status?
    * @return boolean
    */
-  function unpublished ()
+  public function unpublished ()
   {
     return ($this->state & Unpublished) == Unpublished;
   }
@@ -341,7 +345,7 @@ class DRAFTABLE_ENTRY extends ENTRY
   /**
    * @return boolean
    */
-  function queued ()
+  public function queued ()
   {
     return $this->state == Queued;
   }
@@ -349,7 +353,7 @@ class DRAFTABLE_ENTRY extends ENTRY
   /**
    * @return boolean
    */
-  function abandoned ()
+  public function abandoned ()
   {
     return $this->state == Abandoned;
   }
@@ -357,7 +361,7 @@ class DRAFTABLE_ENTRY extends ENTRY
   /**
    * @return USER
    */
-  function publisher ()
+  public function publisher ()
   {
     return $this->app->user_at_id ($this->publisher_id);
   }
@@ -365,13 +369,12 @@ class DRAFTABLE_ENTRY extends ENTRY
   /**
    * @return boolean
    */
-  function modified ()
+  public function modified ()
   {
     if ($this->time_published->is_valid ())
     {
       return ! $this->time_published->equals ($this->time_modified);
     }
-
 
     return parent::modified ();
   }
@@ -379,7 +382,7 @@ class DRAFTABLE_ENTRY extends ENTRY
   /**
    * @return string
    */
-  function state_as_string ()
+  public function state_as_string ()
   {
     switch ($this->state)
     {
@@ -395,7 +398,6 @@ class DRAFTABLE_ENTRY extends ENTRY
         return 'Unpublished';
       }
 
-
       return parent::state_as_string ();
     }
   }
@@ -403,7 +405,7 @@ class DRAFTABLE_ENTRY extends ENTRY
   /**
    * Set up this object so it will {@link store()} a new object.
    */
-  function initialize_as_new ()
+  public function initialize_as_new ()
   {
     parent::initialize_as_new ();
     $this->time_published->clear ();
@@ -412,7 +414,7 @@ class DRAFTABLE_ENTRY extends ENTRY
   /**
    * @param DATABASE $db Database from which to load values.
    */
-  function load ($db)
+  public function load ($db)
   {
     parent::load ($db);
     $this->publisher_id = $db->f ('publisher_id');
@@ -423,7 +425,7 @@ class DRAFTABLE_ENTRY extends ENTRY
    * @param SQL_STORAGE $storage Store values to this object.
    * @access private
    */
-  function store_to ($storage)
+  public function store_to ($storage)
   {
     parent::store_to ($storage);
     $tname =$this->_table_name ();
@@ -447,13 +449,12 @@ class DRAFTABLE_ENTRY extends ENTRY
    * State of item when created.
    * @return string
    */
-  function history_item_kind_for_new ()
+  public function history_item_kind_for_new ()
   {
     if ($this->visible ())
     {
       return History_item_published;
     }
-
 
     return History_item_created;
   }
@@ -463,7 +464,7 @@ class DRAFTABLE_ENTRY extends ENTRY
    * @param integer $state
    * @return string
    */
-  function history_item_kind_for_transition_to ($state)
+  public function history_item_kind_for_transition_to ($state)
   {
     if (($this->unpublished ()) && ($state == Visible))
     {
@@ -482,7 +483,6 @@ class DRAFTABLE_ENTRY extends ENTRY
    return History_item_abandoned;
  }
 
-
     return parent::history_item_kind_for_transition_to ($state);
   }
 
@@ -491,7 +491,7 @@ class DRAFTABLE_ENTRY extends ENTRY
    * @param FOLDER $fldr
    * @param FOLDER_OPERATION_OPTIONS $options
    */
-  function _copy_to ($fldr, $options)
+  protected function _copy_to ($fldr, $options)
   {
     if ($options->copy_as_draft)
     {
@@ -508,7 +508,7 @@ class DRAFTABLE_ENTRY extends ENTRY
    * @return string
    * @access private
    */
-  function _state_icon_name ()
+  protected function _state_icon_name ()
   {
     switch ($this->state)
     {
@@ -529,7 +529,7 @@ class DRAFTABLE_ENTRY extends ENTRY
    * @param object $options
    * @return object
    */
-  function _default_handler_for ($handler_type, $options = null)
+  protected function _default_handler_for ($handler_type, $options = null)
   {
     switch ($handler_type)
     {
@@ -557,7 +557,7 @@ class DRAFTABLE_ENTRY extends ENTRY
    * @param DRAFTABLE_ENTRY $other
    * @access private
    */
-  function _copy_from ($other)
+  protected function _copy_from ($other)
   {
     unset ($this->time_published);
     if (isset($other->time_published))

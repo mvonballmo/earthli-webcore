@@ -57,7 +57,7 @@ class CREATE_FOLDER_PERMISSIONS_FORM extends ID_BASED_FORM
   /**
    * @param APPLICATION $app
    */
-  function CREATE_FOLDER_PERMISSIONS_FORM ($app)
+  public function CREATE_FOLDER_PERMISSIONS_FORM ($app)
   {
     ID_BASED_FORM::ID_BASED_FORM ($app);
 
@@ -75,7 +75,7 @@ class CREATE_FOLDER_PERMISSIONS_FORM extends ID_BASED_FORM
    * @param FOLDER $obj
    * @access private
    */
-  function commit ($obj)
+  public function commit ($obj)
   {
     $security = $obj->security_definition ();
     if ($security->inherited ())
@@ -88,7 +88,7 @@ class CREATE_FOLDER_PERMISSIONS_FORM extends ID_BASED_FORM
     }
   }
 
-  function load_from_object ($obj)
+  public function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
     $this->set_value ('copy_mode', Security_copy_current);
@@ -98,7 +98,7 @@ class CREATE_FOLDER_PERMISSIONS_FORM extends ID_BASED_FORM
    * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_controls ($renderer)
+  protected function _draw_controls ($renderer)
   {
     if (! $this->_object->defines_security ())
     {

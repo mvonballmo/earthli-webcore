@@ -52,32 +52,37 @@ class RECIPE_GRID extends CONTENT_OBJECT_GRID
    * @var string
    */
   public $object_name = 'Recipe';
+
   /**
    * @var string
    */
   public $box_style = 'object-in-list';
+
   /**
    * @var integer
    */
   public $spacing = 4;
+
   /**
    * @var boolean
    */
-  public $show_separator = FALSE;
+  public $show_separator = false;
+
   /**
    * @var boolean
    */
-  public $show_user = TRUE;
+  public $show_user = true;
+
   /**
    * @var boolean
    */
-  public $show_folder = FALSE;
+  public $show_folder = false;
 
   /**
    * @param RECIPE $obj
    * @access private
    */
-  function _draw_box ($obj)
+  protected function _draw_box ($obj)
   {
     $folder = $obj->parent_folder ();
     $creator = $obj->creator ();
@@ -138,7 +143,7 @@ class RECIPE_SUMMARY_GRID extends DRAFTABLE_ENTRY_SUMMARY_GRID
    * @param OBJECT_IN_FOLDER $obj
    * @access private
    */
-  function _text_to_summarize ($obj)
+  protected function _text_to_summarize ($obj)
   {
     return $obj->description . ' ' . $obj->ingredients . ' ' . $obj->instructions;
   }  

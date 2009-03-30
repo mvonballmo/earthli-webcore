@@ -52,7 +52,7 @@ class AUDITABLE_FORM extends RENDERABLE_FORM
   /**
    * @param APPLICATION $app Main application.
    */
-  function AUDITABLE_FORM ($app)
+  public function AUDITABLE_FORM ($app)
   {
     RENDERABLE_FORM::RENDERABLE_FORM ($app);
 
@@ -78,7 +78,7 @@ class AUDITABLE_FORM extends RENDERABLE_FORM
     $field = new DATE_TIME_FIELD ();
     $field->id = 'time_modified';
     $field->title = 'Last modified';
-    $field->visible = FALSE;
+    $field->visible = false;
     $this->add_field ($field);
   }
 
@@ -89,7 +89,7 @@ class AUDITABLE_FORM extends RENDERABLE_FORM
    * @param string $title
    * @param boolean $visible
    */
-  function add_preview ($obj, $title, $visible = TRUE)
+  public function add_preview ($obj, $title, $visible = true)
   {
     if (! $obj->exists ())
     {
@@ -105,7 +105,7 @@ class AUDITABLE_FORM extends RENDERABLE_FORM
    * made during validation or the commit process do not affect the original.
    * @param AUDITABLE $obj Store the form values to this object.
    */
-  function attempt_action ($obj)
+  public function attempt_action ($obj)
   {
     if (! $this->previewing ())
     {
@@ -122,7 +122,7 @@ class AUDITABLE_FORM extends RENDERABLE_FORM
    * @param object $obj Object being validated.
    * @access private
    */
-  function _post_validate ($obj)
+  protected function _post_validate ($obj)
   {
     if ($obj->exists ())
     {
@@ -148,7 +148,7 @@ class AUDITABLE_FORM extends RENDERABLE_FORM
    * @param HISTORY_ITEM $history_item
    * @access private
    */
-  function _adjust_history_item ($history_item)
+  protected function _adjust_history_item ($history_item)
   {
     $history_item->title = $this->value_as_text ('history_item_title');
     $history_item->description = $this->value_as_text ('history_item_description');
@@ -164,7 +164,7 @@ class AUDITABLE_FORM extends RENDERABLE_FORM
    * Load initial properties from this object.
    * @param AUDITABLE $obj
    */
-  function load_from_object ($obj)
+  public function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
     $this->set_value ('time_modified', $obj->time_modified);
@@ -175,13 +175,13 @@ class AUDITABLE_FORM extends RENDERABLE_FORM
    * Load initial properties from the object, but store as a new object.
    * @param AUDITABLE $obj
    */
-  function load_from_clone ($obj)
+  public function load_from_clone ($obj)
   {
     parent::load_from_clone ($obj);
     $this->set_value ('publication_state', History_item_needs_send);
   }
 
-  function load_with_defaults ()
+  public function load_with_defaults ()
   {
     parent::load_with_defaults ();
     $this->set_value ('time_modified', new DATE_TIME ());
@@ -194,7 +194,7 @@ class AUDITABLE_FORM extends RENDERABLE_FORM
    * @param AUDITABLE $obj
    * @access private
    */
-  function commit ($obj)
+  public function commit ($obj)
   {
     if ($this->cloning ())
     {
@@ -210,7 +210,7 @@ class AUDITABLE_FORM extends RENDERABLE_FORM
    * Draws controls for history item notification.
    *  @access private
    */
-  function _draw_history_item_controls ($renderer, $show_initially)
+  protected function _draw_history_item_controls ($renderer, $show_initially)
   {
     $renderer->draw_separator ();
     $description = 'Change history is stored automatically. %s history options.';

@@ -51,13 +51,13 @@ class SUBMIT_SUPPORT_FORM extends SEND_MAIL_FORM
   /**
    * @param CONTEXT $context
    */
-  function SUBMIT_SUPPORT_FORM ($context)
+  public function SUBMIT_SUPPORT_FORM ($context)
   {
     SEND_MAIL_FORM::SEND_MAIL_FORM ($context);
 
-    $this->set_required ('sender_name', FALSE);
-    $this->set_required ('sender_email', FALSE);
-    $this->set_required ('message', TRUE);
+    $this->set_required ('sender_name', false);
+    $this->set_required ('sender_email', false);
+    $this->set_required ('message', true);
 
     $field = $this->field_at ('sender_email');
     $field->description = 'Optional, but lets us follow up if we have any questions.';
@@ -66,7 +66,7 @@ class SUBMIT_SUPPORT_FORM extends SEND_MAIL_FORM
     $field->description = 'Briefly describe the question or problem you\'re having.';
   }
 
-  function load_with_defaults ()
+  public function load_with_defaults ()
   {
     parent::load_with_defaults ();
 
@@ -78,7 +78,7 @@ class SUBMIT_SUPPORT_FORM extends SEND_MAIL_FORM
    * @param object $obj Get renderer for this object.
    * @access private
    */
-  function _make_obj_renderer ($obj)
+  protected function _make_obj_renderer ($obj)
   {
     return null;
   }

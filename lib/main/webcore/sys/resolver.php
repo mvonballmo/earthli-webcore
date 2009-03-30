@@ -61,7 +61,7 @@ define ('Type_info_reg_prefix', '__type_info_');
  */
 class RESOLVER extends RESOURCE_MANAGER
 {
-  function RESOLVER ()
+  public function RESOLVER ()
   {
     RESOURCE_MANAGER::RESOURCE_MANAGER ();
     $this->classes = new OBJECT_FACTORY ();
@@ -76,7 +76,7 @@ class RESOLVER extends RESOURCE_MANAGER
    * @param string $context Distiguishes among multiple similar registrations.
    * @return string
    */
-  function final_class_name ($class_name, $file_name = '', $context = '')
+  public function final_class_name ($class_name, $file_name = '', $context = '')
   {
     return $this->classes->final_class_name ($class_name, $file_name, $context);
   }
@@ -90,7 +90,7 @@ class RESOLVER extends RESOURCE_MANAGER
    * @param string $context Distiguishes among multiple similar registrations.
    * @return object
    */
-  function find_or_create_singleton ($singleton_name, $class_name, $file_name = '', $context = '')
+  public function find_or_create_singleton ($singleton_name, $class_name, $file_name = '', $context = '')
   {
     if (empty ($this->_singletons [$singleton_name]))
     {
@@ -100,7 +100,7 @@ class RESOLVER extends RESOURCE_MANAGER
     return $this->_singletons [$singleton_name];
   }
   
-  function make_object ($id, $class_name, $file_name = '', $context = '')
+  public function make_object ($id, $class_name, $file_name = '', $context = '')
   {
     $Result = $this->find_or_create_singleton($id, $class_name, $file_name, $context);
     return clone_object ($Result);
@@ -113,13 +113,12 @@ class RESOLVER extends RESOURCE_MANAGER
    * @param string $page_name
    * @return string
    */
-  function page_template_for ($page_name)
+  public function page_template_for ($page_name)
   {
     if (isset ($this->_page_templates [$page_name]))
     {
       return $this->_page_templates [$page_name];
     }
-
 
     return $page_name;
   }
@@ -130,7 +129,7 @@ class RESOLVER extends RESOURCE_MANAGER
    * @param string $context
    * @return boolean
    */
-  function is_registered ($class_name, $context = '')
+  public function is_registered ($class_name, $context = '')
   {
     return $this->classes->is_registered ($class_name, $context);
   }
@@ -143,7 +142,7 @@ class RESOLVER extends RESOURCE_MANAGER
    * @param string $file_name Location of the definition for 'class_name'.
    * @param string $context Distiguishes among multiple similar registrations.
    */
-  function register_class ($id, $class_name, $file_name = '', $context = '')
+  public function register_class ($id, $class_name, $file_name = '', $context = '')
   {
     $this->classes->register_class ($id, $class_name, $file_name, $context);
   }
@@ -159,7 +158,7 @@ class RESOLVER extends RESOURCE_MANAGER
    * @param string $class_name Name of the handler class.
    * @param string $file_name Location of the definition for 'class_name'
    */
-  function register_handler ($id, $handler, $class_name, $file_name = '')
+  public function register_handler ($id, $handler, $class_name, $file_name = '')
   {
     $this->classes->register_class ($id, $class_name, $file_name, $handler);
   }
@@ -171,7 +170,7 @@ class RESOLVER extends RESOURCE_MANAGER
    * @param string $default
    * @param string $new
    */
-  function register_page_template ($default, $new)
+  public function register_page_template ($default, $new)
   {
     $this->_page_templates [$default] = $new;
   }
@@ -182,7 +181,7 @@ class RESOLVER extends RESOURCE_MANAGER
    * @param string $class_name
    * @return TYPE_INFO
    */
-  function type_info_for ($class_name, $file_name = '')
+  public function type_info_for ($class_name, $file_name = '')
   {
     /* Resolve the class, then check for type info for that class. */
 
@@ -222,7 +221,7 @@ class RESOLVER extends RESOURCE_MANAGER
    * is created in the constructor.
    * @access private
    */
-  function _initialize_class_registry ()
+  protected function _initialize_class_registry ()
   {
   }
 
@@ -243,6 +242,7 @@ class RESOLVER extends RESOURCE_MANAGER
    * @access private
    */
   protected $_page_templates;
+
   /**
    * @var array[string,object]
    * @access private

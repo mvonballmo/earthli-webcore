@@ -48,6 +48,6 @@ require_once ('news/init.php');
  * @version 3.0.0
  * @since 2.4.0
  */
-$App = $Page->make_application (News_application_id, TRUE, TRUE);
+$App = $Page->make_application (News_application_id, true, true);
 
 ?>

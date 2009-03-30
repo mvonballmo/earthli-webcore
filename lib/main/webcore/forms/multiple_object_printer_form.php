@@ -54,10 +54,12 @@ class MULTIPLE_OBJECT_PRINTER_FORM extends MULTIPLE_OBJECT_ACTION_FORM
    * @var string
    */
   public $method = 'get';
+
   /**
    * @var string
    */
   public $button = 'View printable';
+
   /**
    * @var string
    */
@@ -66,7 +68,7 @@ class MULTIPLE_OBJECT_PRINTER_FORM extends MULTIPLE_OBJECT_ACTION_FORM
   /**
    * @param FOLDER $folder Objects are from this folder.
    */
-  function MULTIPLE_OBJECT_PRINTER_FORM ($folder)
+  public function MULTIPLE_OBJECT_PRINTER_FORM ($folder)
   {
     MULTIPLE_OBJECT_ACTION_FORM::MULTIPLE_OBJECT_ACTION_FORM ($folder);
 
@@ -88,13 +90,13 @@ class MULTIPLE_OBJECT_PRINTER_FORM extends MULTIPLE_OBJECT_ACTION_FORM
    * Load initial properties from this folder.
    * @param FOLDER $obj
    */
-  function load_from_object ($obj)
+  public function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
     $this->load_with_defaults ();
   }
 
-  function load_with_defaults ()
+  public function load_with_defaults ()
   {
     $this->set_value ('show_comments', Print_comments_threaded);
     $this->set_value ('show_users', 1);
@@ -102,26 +104,26 @@ class MULTIPLE_OBJECT_PRINTER_FORM extends MULTIPLE_OBJECT_ACTION_FORM
 
   /**
    * Do nothing with folders.
-    * Redirects to a different page, so there is no action needed here.
-    * @param FOLDER $fldr
-    * @access private
-    */
-  function _folder_run ($fldr) {}
+   * Redirects to a different page, so there is no action needed here.
+   * @param FOLDER $fldr
+   * @access private
+   */
+  protected function _folder_run ($fldr) {}
 
   /**
    * Do nothing with entries.
-    * Redirects to a different page, so there is no action needed here.
-    * @param ENTRY $entry
-    * @access private
-    */
-  function _entry_run ($obj) {}
+   * Redirects to a different page, so there is no action needed here.
+   * @param ENTRY $entry
+   * @access private
+   */
+  protected function _entry_run ($obj) {}
 
   /**
    * Draw a confirmation message for this action.
    * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_message ($renderer)
+  protected function _draw_message ($renderer)
   {
     $renderer->draw_text_row ('', 'To the left are the items you selected. Please select your printing options below and click <span class="reference">View printable</span> to see a preview. Then simply print the preview page from the browser window.');
     $renderer->draw_separator ();
@@ -137,10 +139,10 @@ class MULTIPLE_OBJECT_PRINTER_FORM extends MULTIPLE_OBJECT_ACTION_FORM
    * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_print_options ($renderer)
+  protected function _draw_print_options ($renderer)
   {
     $props = $renderer->make_list_properties ();
-    $props->smart_wrapping = TRUE;
+    $props->smart_wrapping = true;
     $props->add_item ('Don\'t show comments', Print_comments_off);
     $props->add_item ('Show comments threaded', Print_comments_threaded);
     $props->add_item ('Show comments flat', Print_comments_flat);

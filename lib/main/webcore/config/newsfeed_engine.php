@@ -72,6 +72,7 @@ class NEWSFEED_ENGINE extends WEBCORE_OBJECT
    * @var string
    */
   public $format = Newsfeed_format_rss;
+
   /**
    * Type of content in newsfeed items/entries.
    * @var string
@@ -81,7 +82,7 @@ class NEWSFEED_ENGINE extends WEBCORE_OBJECT
   /**
    * @param CONTEXT $context
    */
-  function NEWSFEED_ENGINE ($context)
+  public function NEWSFEED_ENGINE ($context)
   {
     WEBCORE_OBJECT::WEBCORE_OBJECT ($context);
     $this->format = read_var ('format', Newsfeed_format_rss);
@@ -92,7 +93,7 @@ class NEWSFEED_ENGINE extends WEBCORE_OBJECT
    * Return a newsfeed renderer for the given folder.
    * @param OBJECT_IN_FOLDER $obj
    */
-  function make_renderer ($obj)
+  public function make_renderer ($obj)
   {
     $f = $this->_format_with_fallback ();
     switch ($f)
@@ -131,7 +132,7 @@ class NEWSFEED_ENGINE extends WEBCORE_OBJECT
    * @return string
    * @access private
    */
-  function _format_with_fallback ()
+  protected function _format_with_fallback ()
   {
     $supported_formats = array (Newsfeed_format_atom, Newsfeed_format_rss);
     if (in_array ($this->format, $supported_formats))
@@ -151,7 +152,7 @@ class NEWSFEED_ENGINE extends WEBCORE_OBJECT
    * @return string
    * @access private
    */
-  function _content_with_fallback ()
+  protected function _content_with_fallback ()
   {
     $supported_formats = array (Newsfeed_content_html, Newsfeed_content_text);
     if (in_array ($this->content, $supported_formats))

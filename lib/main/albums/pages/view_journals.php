@@ -58,7 +58,7 @@ http://www.earthli.com/software/webcore/albums
 				return 'Journal Entries from ' . $fmt_first_day . ' - ' . $fmt_last_day;
 		}
 
-    $Page->title->subject = format_dates_for_title (FALSE);
+    $Page->title->subject = format_dates_for_title (false);
 		$Page->location->append ("Calendar", "view_calendar.php?id=$folder->id");		
 		$Page->location->append ($folder->format_date ($first_day));
 
@@ -66,7 +66,7 @@ http://www.earthli.com/software/webcore/albums
 ?>
 <div class="box">
   <div class="box-title">
-    <?php echo format_dates_for_title (TRUE); ?>
+    <?php echo format_dates_for_title (true); ?>
   </div>
   <div class="box-body">
   <?php

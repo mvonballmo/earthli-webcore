@@ -51,7 +51,7 @@ class WEBCORE_PAGE_RENDERER extends THEMED_PAGE_RENDERER
   /**
    * @return boolean
    */
-  function browser_supported ()
+  public function browser_supported ()
   {
     $browser = $this->env->browser ();
     return $browser->is (Browser_robot) ||
@@ -64,17 +64,17 @@ class WEBCORE_PAGE_RENDERER extends THEMED_PAGE_RENDERER
   /**
    * @access private
    */
-  function start_display ()
+  public function start_display ()
   {
     $page = $this->page;
 
     if ($page->printable)
     {
-      $page->display_options->use_DHTML = FALSE;
+      $page->display_options->use_DHTML = false;
       $options = $page->template_options; 
-      $options->header_visible = FALSE;
-      $options->show_statistics = FALSE;
-      $options->show_links = FALSE;
+      $options->header_visible = false;
+      $options->show_statistics = false;
+      $options->show_links = false;
     }
 
     parent::start_display ();

@@ -53,18 +53,22 @@ class RECIPE_TYPE_INFO extends DRAFTABLE_ENTRY_TYPE_INFO
    * @var string
    */
   public $id = 'recipe';
+
   /**
    * @var string
    */
   public $singular_title = 'Recipe';
+
   /**
    * @var string
    */
   public $plural_title = 'Recipes';
+
   /**
    * @var string
    */
   public $icon = '{app_icons}buttons/new_recipe';
+
   /**
    * @var string
    */
@@ -85,10 +89,12 @@ class RECIPE_BOOK_TYPE_INFO extends FOLDER_TYPE_INFO
    * @var string
    */
   public $singular_title = 'Recipe book';
+
   /**
    * @var string
    */
   public $plural_title = 'Recipe books';
+
   /**
    * @var string
    */

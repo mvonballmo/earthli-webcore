@@ -57,6 +57,7 @@ class COOKIE extends CLIENT_STORAGE
    * @var string
    */
   public $path = '';
+
   /**
    * Cookies are available from this domain.
    * If no domain is set, it defaults to the domain for the current page.
@@ -69,7 +70,7 @@ class COOKIE extends CLIENT_STORAGE
    * @deprecated Set the {@link $path} property directly.
    * @param string $p
    */
-  function set_path ($p)
+  public function set_path ($p)
   {
     $this->path = $p;
   }
@@ -80,12 +81,14 @@ class COOKIE extends CLIENT_STORAGE
    * @return string
    * @access private
    */
-  function _read ($key)
+  protected function _read ($key)
   {
     if (isset ($_COOKIE [$key]))
     {
       return $_COOKIE [$key];
     }
+    
+    return null;
   }
 
   /**
@@ -94,7 +97,7 @@ class COOKIE extends CLIENT_STORAGE
    * @return boolean
    * @access private
    */
-  function _exists ($key)
+  protected function _exists ($key)
   {
     return isset ($_COOKIE [$key]);
   }
@@ -105,7 +108,7 @@ class COOKIE extends CLIENT_STORAGE
    * @param string $value
    * @access private
    */
-  function _add ($key, $value)
+  protected function _add ($key, $value)
   {
     $_COOKIE [$key] = $value;
   }
@@ -117,7 +120,7 @@ class COOKIE extends CLIENT_STORAGE
    * @param integer
    * @access private
    */
-  function _write ($key, $value)
+  protected function _write ($key, $value)
   {
     setcookie ($key, $value, max (0, $this->expire_date->as_php ()), $this->path, $this->domain);
   }
@@ -128,7 +131,7 @@ class COOKIE extends CLIENT_STORAGE
    * @access private
    * @abstract
    */
-  function _clear ($key)
+  protected function _clear ($key)
   {
     setcookie ($key, '', max (0, time () - (86400)), $this->path, $this->domain);
   }
@@ -140,6 +143,7 @@ class COOKIE extends CLIENT_STORAGE
    * @access private
    */
   protected $_values = array ();
+
   /**
    * Contains cookies when storing multiple values.
    * Use {@link start_multiple_value()} to start storing to a list of
@@ -149,6 +153,7 @@ class COOKIE extends CLIENT_STORAGE
    * @access private
    */
   protected $_multiple_values;
+
   /**
    * Multiple values will be stored to this key.
    * @var string

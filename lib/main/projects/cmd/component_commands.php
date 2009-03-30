@@ -53,7 +53,7 @@ class COMPONENT_COMMANDS extends COMMANDS
   /**
    * @param COMPONENT $comp Configure commands for this object.
    */
-  function COMPONENT_COMMANDS ($comp)
+  public function COMPONENT_COMMANDS ($comp)
   {
     COMMANDS::COMMANDS ($comp->app);
 

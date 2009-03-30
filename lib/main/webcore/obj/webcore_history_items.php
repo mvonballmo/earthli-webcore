@@ -57,7 +57,7 @@ class AUDITABLE_HISTORY_ITEM extends HISTORY_ITEM
    * @param AUDITABLE $new
    * @access private
    */
-  function _record_differences ($orig, $new)
+  protected function _record_differences ($orig, $new)
   {
     parent::_record_differences ($orig, $new);
 
@@ -88,7 +88,7 @@ class CONTENT_OBJECT_HISTORY_ITEM extends AUDITABLE_HISTORY_ITEM
    * @param OBJECT_IN_FOLDER $new
    * @access private
    */
-  function _record_differences ($orig, $new)
+  protected function _record_differences ($orig, $new)
   {
     parent::_record_differences ($orig, $new);
     $this->_record_string_difference ('Title', $orig->title, $new->title);
@@ -115,7 +115,7 @@ class OBJECT_IN_FOLDER_HISTORY_ITEM extends CONTENT_OBJECT_HISTORY_ITEM
    * @param OBJECT_IN_FOLDER $obj
    * @access private
    */
-  function update_object ($obj)
+  public function update_object ($obj)
   {
     parent::update_object ($obj);
     $this->access_id = $obj->parent_folder_id ();
@@ -128,7 +128,7 @@ class OBJECT_IN_FOLDER_HISTORY_ITEM extends CONTENT_OBJECT_HISTORY_ITEM
    * @param OBJECT_IN_FOLDER $new
    * @access private
    */
-  function _record_differences ($orig, $new)
+  protected function _record_differences ($orig, $new)
   {
     parent::_record_differences ($orig, $new);
 
@@ -167,7 +167,7 @@ class OBJECT_IN_FOLDER_HISTORY_ITEM extends CONTENT_OBJECT_HISTORY_ITEM
    * @return string
    * @access private
    */
-  function _supported_kind_as_text ()
+  protected function _supported_kind_as_text ()
   {
     switch ($this->kind)
     {
@@ -188,7 +188,7 @@ class OBJECT_IN_FOLDER_HISTORY_ITEM extends CONTENT_OBJECT_HISTORY_ITEM
    * Return the basic name of this kind's icon.
    * @return string
    */
-  function _kind_icon_name ()
+  protected function _kind_icon_name ()
   {
     switch ($this->kind)
     {
@@ -231,7 +231,7 @@ class FOLDER_HISTORY_ITEM extends OBJECT_IN_FOLDER_HISTORY_ITEM
    * @param FOLDER $new
    * @access private
    */
-  function _record_differences ($orig, $new)
+  protected function _record_differences ($orig, $new)
   {
     parent::_record_differences ($orig, $new);
 
@@ -273,7 +273,7 @@ class ENTRY_HISTORY_ITEM extends OBJECT_IN_FOLDER_HISTORY_ITEM
    * @return string
    * @access private
    */
-  function _supported_kind_as_text ()
+  protected function _supported_kind_as_text ()
   {
     switch ($this->kind)
     {
@@ -294,7 +294,7 @@ class ENTRY_HISTORY_ITEM extends OBJECT_IN_FOLDER_HISTORY_ITEM
    * Return the basic name of this kind's icon.
    * @return string
    */
-  function _kind_icon_name ()
+  protected function _kind_icon_name ()
   {
     switch ($this->kind)
     {
@@ -335,7 +335,7 @@ class COMMENT_HISTORY_ITEM extends OBJECT_IN_FOLDER_HISTORY_ITEM
    * @param COMMENT $new
    * @access private
    */
-  function _record_differences ($orig, $new)
+  protected function _record_differences ($orig, $new)
   {
     parent::_record_differences ($orig, $new);
 
@@ -371,7 +371,7 @@ class ATTACHMENT_HISTORY_ITEM extends OBJECT_IN_FOLDER_HISTORY_ITEM
    * @param COMMENT $new
    * @access private
    */
-  function _record_differences ($orig, $new)
+  protected function _record_differences ($orig, $new)
   {
     parent::_record_differences ($orig, $new);
 
@@ -410,7 +410,7 @@ class USER_HISTORY_ITEM extends CONTENT_OBJECT_HISTORY_ITEM
    * @param USER $obj
    * @access private
    */
-  function update_object ($obj)
+  public function update_object ($obj)
   {
     parent::update_object ($obj);
     $this->access_id = $obj->id;
@@ -423,7 +423,7 @@ class USER_HISTORY_ITEM extends CONTENT_OBJECT_HISTORY_ITEM
    * @param USER $new
    * @access private
    */
-  function _record_differences ($orig, $new)
+  protected function _record_differences ($orig, $new)
   {
     parent::_record_differences ($orig, $new);
 
@@ -492,7 +492,7 @@ class GROUP_HISTORY_ITEM extends CONTENT_OBJECT_HISTORY_ITEM
    * @param GROUP $obj
    * @access private
    */
-  function update_object ($obj)
+  public function update_object ($obj)
   {
     parent::update_object ($obj);
     $this->access_id = $obj->id;

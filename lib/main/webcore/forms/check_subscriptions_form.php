@@ -52,34 +52,39 @@ class CHECK_SUBSCRIPTIONS_FORM extends ID_BASED_FORM
    * @var string
    */
   public $button = 'Go';
+
   /**
    * @var string
    */
   public $button_icon = '{icons}indicators/subscribed';
+
   /**
    * @var string
    */
   public $name = 'subscription_form';
+
   /**
    * To which url is this form submitted?
    * Defaults to the current page.
    * @var string
    */
   public $action = 'view_user_subscriptions.php';
+
   /**
    * @var string
    * @access private
    */
   public $method = 'get';
+
   /**
    * @var boolean
    */
-  public $controls_visible = TRUE;
+  public $controls_visible = true;
 
   /**
    * @param APPLICATION $app Main application.
    */
-  function CHECK_SUBSCRIPTIONS_FORM ($app)
+  public function CHECK_SUBSCRIPTIONS_FORM ($app)
   {
     ID_BASED_FORM::ID_BASED_FORM ($app);
 
@@ -94,7 +99,7 @@ class CHECK_SUBSCRIPTIONS_FORM extends ID_BASED_FORM
    * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_controls ($renderer)
+  protected function _draw_controls ($renderer)
   {
     $renderer->set_width ('13em');
     $renderer->start ();

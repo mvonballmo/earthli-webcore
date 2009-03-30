@@ -57,7 +57,7 @@ class USER_FOLDER_QUERY extends OBJECT_IN_FOLDER_QUERY
   /**
    * @param APPLICATION $app Main application.
    */
-  function USER_FOLDER_QUERY ($app)
+  public function USER_FOLDER_QUERY ($app)
   {
     OBJECT_IN_FOLDER_QUERY::OBJECT_IN_FOLDER_QUERY ($app);
 
@@ -70,7 +70,7 @@ class USER_FOLDER_QUERY extends OBJECT_IN_FOLDER_QUERY
   /**
    * Apply default restrictions and tables.
    */
-  function apply_defaults ()
+  public function apply_defaults ()
   {
     $this->set_select ("perm.*, fldr.*");
     $this->set_order ('fldr.title');
@@ -80,7 +80,7 @@ class USER_FOLDER_QUERY extends OBJECT_IN_FOLDER_QUERY
   /**
    * @return array[FOLDER]
    */
-  function objects ()
+  public function objects ()
   {
     if (! isset ($this->_objects))
     {
@@ -99,7 +99,7 @@ class USER_FOLDER_QUERY extends OBJECT_IN_FOLDER_QUERY
    * @return string
    * @access private
    */
-  function filtered_ids_as_string ($set_names, $types)
+  public function filtered_ids_as_string ($set_names, $types)
   {
     return $this->_filtered_data ('indexed_ids_as_string', $set_names, $types);
   }
@@ -112,7 +112,7 @@ class USER_FOLDER_QUERY extends OBJECT_IN_FOLDER_QUERY
    * @return array[object]
    * @access private
    */
-  function filtered_objects ($set_names, $types)
+  public function filtered_objects ($set_names, $types)
   {
     return $this->_filtered_data ('indexed_objects', $set_names, $types);
   }
@@ -122,7 +122,7 @@ class USER_FOLDER_QUERY extends OBJECT_IN_FOLDER_QUERY
    * @param integer $id
    * @return FOLDER
    */
-  function folder_for_entry_at_id ($id)
+  public function folder_for_entry_at_id ($id)
   {
     $id = $this->validate_as_integer ($id);
     if ($id)
@@ -134,6 +134,8 @@ class USER_FOLDER_QUERY extends OBJECT_IN_FOLDER_QUERY
         return $this->object_at_id ($this->db->f ("folder_id"));
       }
     }
+    
+    return null;
   }
 
   /**
@@ -141,20 +143,24 @@ class USER_FOLDER_QUERY extends OBJECT_IN_FOLDER_QUERY
    * @param integer $id
    * @return FOLDER
    */
-  function folder_for_comment_at_id ($id)
+  public function folder_for_comment_at_id ($id)
   {
     $id = $this->validate_as_integer ($id);
     if ($id)
     {
-      $this->db->logged_query ("SELECT folder_id FROM {$this->app->table_names->entries} entry" .
-                               " INNER JOIN {$this->app->table_names->comments} com on com.entry_id = entry.id" .
-                               " WHERE com.id = $id");
+      $this->db->logged_query (
+      	"SELECT folder_id FROM {$this->app->table_names->entries} entry" .
+        " INNER JOIN {$this->app->table_names->comments} com on com.entry_id = entry.id" .
+        " WHERE com.id = $id"
+      );
 
       if ($this->db->next_record ())
       {
         return $this->object_at_id ($this->db->f ('folder_id'));
       }
     }
+
+    return null;
   }
 
   /**
@@ -163,32 +169,38 @@ class USER_FOLDER_QUERY extends OBJECT_IN_FOLDER_QUERY
    * @param string $type Can be {@link History_item_entry}, {@link History_item_comment}, {@link History_item_folder}, {@link History_item_user} or {@link History_item_group}.
    * @return FOLDER
    */
-  function folder_for_attachment_at_id ($id, $type)
+  public function folder_for_attachment_at_id ($id, $type)
   {
     $id = $this->validate_as_integer ($id);
     if ($id)
     {
-      $type_known = TRUE;
+      $type_known = true;
       switch ($type)
       {
       case History_item_entry:
-        $this->db->logged_query ("SELECT folder_id FROM {$this->app->table_names->entries} host" .
-                                 " INNER JOIN {$this->app->table_names->attachments} a on a.object_id = host.id" .
-                                 " WHERE a.id = $id");
+        $this->db->logged_query (
+        	"SELECT folder_id FROM {$this->app->table_names->entries} host" .
+          " INNER JOIN {$this->app->table_names->attachments} a on a.object_id = host.id" .
+          " WHERE a.id = $id"
+        );
         break;
       case History_item_comment:
-        $this->db->logged_query ("SELECT folder_id FROM {$this->app->table_names->entries} entry" .
-                                 " INNER JOIN {$this->app->table_names->comments} host on host.entry_id = entry.id" .
-                                 " INNER JOIN {$this->app->table_names->attachments} a on a.object_id = host.id" .
-                                 " WHERE a.id = $id");
+        $this->db->logged_query (
+        	"SELECT folder_id FROM {$this->app->table_names->entries} entry" .
+          " INNER JOIN {$this->app->table_names->comments} host on host.entry_id = entry.id" .
+          " INNER JOIN {$this->app->table_names->attachments} a on a.object_id = host.id" .
+          " WHERE a.id = $id"
+        );
         break;
       case History_item_folder:
-        $this->db->logged_query ("SELECT host.id as folder_id FROM {$this->app->table_names->folders} host" .
-                                 " INNER JOIN {$this->app->table_names->attachments} a on a.object_id = host.id" .
-                                 " WHERE a.id = $id");
+        $this->db->logged_query (
+        	"SELECT host.id as folder_id FROM {$this->app->table_names->folders} host" .
+          " INNER JOIN {$this->app->table_names->attachments} a on a.object_id = host.id" .
+          " WHERE a.id = $id"
+        );
         break;
       default:
-        $type_known = FALSE;
+        $type_known = false;
       }
 
       if ($type_known && $this->db->next_record ())
@@ -196,13 +208,15 @@ class USER_FOLDER_QUERY extends OBJECT_IN_FOLDER_QUERY
         return $this->object_at_id ($this->db->f ('folder_id'));
       }
     }
+    
+    return null;
   }
 
   /**
    * @return FOLDER
    * @access private
    */
-  function _make_object ()
+  protected function _make_object ()
   {
     $class_name = $this->app->final_class_name ('FOLDER', 'webcore/obj/folder.php');
     return new $class_name ($this->app);
@@ -212,7 +226,7 @@ class USER_FOLDER_QUERY extends OBJECT_IN_FOLDER_QUERY
    * Prepare security- and filter-based restrictions.
    * @access private
    */
-  function _prepare_restrictions ()
+  protected function _prepare_restrictions ()
   {
     parent::_prepare_restrictions ();
 
@@ -381,7 +395,7 @@ class USER_FOLDER_QUERY extends OBJECT_IN_FOLDER_QUERY
   /**
    * Ensures ordering by security relevance.
    * @access private */  
-  function _add_sorting_for_security ()
+  protected function _add_sorting_for_security ()
   {
     $this->add_order ('perm.kind, perm.importance DESC');
   }
@@ -393,7 +407,7 @@ class USER_FOLDER_QUERY extends OBJECT_IN_FOLDER_QUERY
    * @return array[object]
    * @access private
    */
-  function _filtered_data ($func_name, $set_names, $types)
+  protected function _filtered_data ($func_name, $set_names, $types)
   {
     $arrays_match = is_array ($set_names) && is_array ($types) && (sizeof ($types) == sizeof ($set_names)); 
     $this->assert ($arrays_match, 'Set name and types must be arrays of equal size.', '_filtered_data', 'USER_FOLDER_QUERY');
@@ -440,7 +454,7 @@ class USER_FOLDER_QUERY extends OBJECT_IN_FOLDER_QUERY
    * @return boolean
    * @access private
    */
-  function _is_indexable_object ($obj)
+  protected function _is_indexable_object ($obj)
   {
     $Result = ! isset ($this->_filter_by_sets);
     if (! $Result)
@@ -463,7 +477,7 @@ class USER_FOLDER_QUERY extends OBJECT_IN_FOLDER_QUERY
    * @return string
    * @access private
    */
-  function _count_command_as_SQL ()
+  protected function _count_command_as_SQL ()
   {
     return 'SELECT COUNT(DISTINCT ' . $this->alias . '.' . $this->id . ') FROM ' . $this->_tables;
   }
@@ -471,7 +485,7 @@ class USER_FOLDER_QUERY extends OBJECT_IN_FOLDER_QUERY
   /**
    * @access private
    */
-  function _invalidate ()
+  protected function _invalidate ()
   {
     parent::_invalidate ();
     unset ($this->_used_ids);
@@ -491,7 +505,7 @@ class USER_FOLDER_QUERY extends OBJECT_IN_FOLDER_QUERY
    * @return bool
    * @access private
    */
-  function _is_valid_object ($db)
+  protected function _is_valid_object ($db)
   {
     $id = $db->f ("id");
     $usable = $db->f ("usable");
@@ -522,7 +536,7 @@ class USER_FOLDER_QUERY extends OBJECT_IN_FOLDER_QUERY
    * @param FOLDER $obj
    * @access private
    */
-  function _obj_connect_to_parent ($parent, $obj)
+  protected function _obj_connect_to_parent ($parent, $obj)
   {
     $parent->add_sub_folder ($obj);
   }
@@ -531,7 +545,7 @@ class USER_FOLDER_QUERY extends OBJECT_IN_FOLDER_QUERY
    * @param FOLDER $obj
    * @access private
    */
-  function _obj_set_sub_objects_cached ($obj)
+  protected function _obj_set_sub_objects_cached ($obj)
   {
     $obj->set_sub_folders_cached ();
   }
@@ -541,7 +555,7 @@ class USER_FOLDER_QUERY extends OBJECT_IN_FOLDER_QUERY
    * @param FOLDER $obj
    * @access private
    */
-  function _obj_sub_objects ($obj)
+  protected function _obj_sub_objects ($obj)
   {
     return $obj->sub_folders ();
   }
@@ -551,7 +565,7 @@ class USER_FOLDER_QUERY extends OBJECT_IN_FOLDER_QUERY
    * @return boolean
    * @access private
    */
-  function _visible_objects_available ()
+  protected function _visible_objects_available ()
   {
     $p = $this->login->permissions ();
     return $p->value_for (Privilege_set_folder, Privilege_view) != Privilege_always_denied;
@@ -562,7 +576,7 @@ class USER_FOLDER_QUERY extends OBJECT_IN_FOLDER_QUERY
    * @return boolean
    * @access private
    */
-  function _invisible_objects_available ()
+  protected function _invisible_objects_available ()
   {
     $p = $this->login->permissions ();
     return $p->value_for (Privilege_set_folder, Privilege_view_hidden) != Privilege_always_denied;
@@ -574,14 +588,16 @@ class USER_FOLDER_QUERY extends OBJECT_IN_FOLDER_QUERY
    * @return boolean
    * @access private
    */
-  function _is_content_type ($object_type)
+  protected function _is_content_type ($object_type)
   {
     switch ($object_type)
     {
     case History_item_folder:
     case History_item_entry:
     case History_item_comment:
-      return TRUE;
+      return true;
+    default:
+      return false;
     }
   }
 
@@ -590,18 +606,21 @@ class USER_FOLDER_QUERY extends OBJECT_IN_FOLDER_QUERY
    * @access private
    */
   protected $_num_folders = 0;
+
   /**
    * @var array[string]
    * @see _filtered_data()
    * @access private
    */
   protected $_filter_by_sets;
+
   /**
    * @var integer
    * @see filtered_objects()
    * @access private
    */
   protected $_filter_by_type;
+
   /**
    * Name of the default permission set to use.
    * @var string

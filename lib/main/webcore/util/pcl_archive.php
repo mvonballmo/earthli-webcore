@@ -57,7 +57,7 @@ class PCL_ARCHIVE extends ARCHIVE
   /**
    * @param string $file_name
    */
-  function PCL_ARCHIVE ($file_name)
+  public function PCL_ARCHIVE ($file_name)
   {
     ARCHIVE::ARCHIVE ($file_name);
     $this->register_handler ('PCL_ZIP_FILE', '');
@@ -76,7 +76,7 @@ class PCL_ARCHIVE extends ARCHIVE
  */
 class PCL_ZIP_FILE extends COMPRESSED_FILE
 {
-  function PCL_ZIP_FILE ($file_name)
+  public function PCL_ZIP_FILE ($file_name)
   {
     COMPRESSED_FILE::COMPRESSED_FILE ($file_name);
     $this->_entries = 0;
@@ -85,12 +85,12 @@ class PCL_ZIP_FILE extends COMPRESSED_FILE
   /**
    * @var boolean
    */
-  function is_open ()
+  public function is_open ()
   {
     return $this->_entries;
   }
 
-  function close ()
+  public function close ()
   {
     $this->_zip = null;
     $this->_entries = 0;
@@ -102,7 +102,7 @@ class PCL_ZIP_FILE extends COMPRESSED_FILE
    * @param CALLBACK $file_callback Function prototype: function ({@link COMPRESSED_FILE} $archive, {@link COMPRESSED_FILE_ENTRY} $entry, {@link CALLBACK} $error_callback = null)
    * @param CALLBACK $error_callback Function prototype: function ({@link COMPRESSED_FILE} $archive, string $msg, {@link COMPRESSED_FILE_ENTRY} $entry)
    */
-  function _for_each ($file_callback, $error_callback = null)
+  protected function _for_each ($file_callback, $error_callback = null)
   {
     $opts = global_file_options ();
     $sep = $opts->path_delimiter;
@@ -125,7 +125,7 @@ class PCL_ZIP_FILE extends COMPRESSED_FILE
   /**
    * @access private
    */
-  function _open ()
+  protected function _open ()
   {
     $this->_zip = new PclZip ($this->file_name);
     $this->_entries = $this->_zip->listContent ();
@@ -159,7 +159,7 @@ class PCL_ZIP_ENTRY extends COMPRESSED_FILE_ENTRY
    * @param $PclZip $zip Reference to a object.
    * @param object $entry The entry from which to extract. 
    */
-  function PCL_ZIP_ENTRY ($file, $zip, $entry)
+  public function PCL_ZIP_ENTRY ($file, $zip, $entry)
   {
     COMPRESSED_FILE_ENTRY::COMPRESSED_FILE_ENTRY ($file);
     $this->_zip = $zip;
@@ -173,7 +173,7 @@ class PCL_ZIP_ENTRY extends COMPRESSED_FILE_ENTRY
    * @param CALLBACK $error_callback
    * @access private
    */
-  function _extract_to ($path, $error_callback)
+  protected function _extract_to ($path, $error_callback)
   {
     $path = substr ($path, 0, - strlen ($this->name));
     if (! $this->_zip->extractByIndex ($this->_index, PCLZIP_OPT_PATH, $path))
@@ -188,6 +188,7 @@ class PCL_ZIP_ENTRY extends COMPRESSED_FILE_ENTRY
    * @access private
    */
   protected $_entry;
+
   /**
    * Reference to a value returned from {@link PHP_MANUAL#zip_open()}
    * @var resource

@@ -54,18 +54,22 @@ class ALBUM_TYPE_INFO extends FOLDER_TYPE_INFO
    * @var string
    */
   public $id = 'album';
+
   /**
    * @var string
    */
   public $singular_title = 'Album';
+
   /**
    * @var string
    */
   public $plural_title = 'Albums';
+
   /**
    * @var string
    */
   public $icon = '{app_icons}buttons/new_album';
+
   /**
    * @var string
    */
@@ -86,18 +90,22 @@ class JOURNAL_TYPE_INFO extends ENTRY_TYPE_INFO
    * @var string
    */
   public $id = 'journal';
+
   /**
    * @var string
    */
   public $singular_title = 'Journal';
+
   /**
    * @var string
    */
   public $plural_title = 'Journals';
+
   /**
    * @var string
    */
   public $icon = '{app_icons}buttons/new_journal';
+
   /**
    * @var string
    */
@@ -118,18 +126,22 @@ class PICTURE_TYPE_INFO extends ENTRY_TYPE_INFO
    * @var string
    */
   public $id = 'picture';
+
   /**
    * @var string
    */
   public $singular_title = 'Picture';
+
   /**
    * @var string
    */
   public $plural_title = 'Pictures';
+
   /**
    * @var string
    */
   public $icon = '{app_icons}buttons/new_picture';
+
   /**
    * @var string
    */

@@ -53,7 +53,7 @@ class RECIPE_PANEL_MANAGER_HELPER extends PANEL_MANAGER_HELPER
    * Does nothing by default.
    * @param PANEL_MANAGER $manager
    */
-  function configure ($manager)
+  public function configure ($manager)
   {
     if ($manager->is_panel ('folder'))
     {

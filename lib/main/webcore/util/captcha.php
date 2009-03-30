@@ -47,12 +47,12 @@ http://www.earthli.com/software/webcore
  * @version 3.0.0
  * @since 2.7.1
  */
-class CAPTCHA extends WEBCORE_OBJECT
+abstract class CAPTCHA extends WEBCORE_OBJECT
 {
   /**
    * Automatically generates an initial expression.
    */
-  function CAPTCHA ()
+  public function CAPTCHA ()
   {
     $this->generate ();
   }
@@ -61,20 +61,14 @@ class CAPTCHA extends WEBCORE_OBJECT
    * Create a random expression. 
    * @abstract
    */
-  function generate ()
-  {
-    $this->raise_deferred ('generate', 'CAPTCHA');
-  }
+  public abstract function generate ();
   
   /**
    * Return an HTML representation of the question.
    * @return string
    * @abstract
    */
-  function as_html ()
-  {
-    $this->raise_deferred ('as_html', 'CAPTCHA');
-  }
+  public abstract function as_html ();
   
   /**
    * Encode the question for a form field.
@@ -82,10 +76,7 @@ class CAPTCHA extends WEBCORE_OBJECT
    * @return string
    * @abstract
    */
-  function encode ()
-  {
-    $this->raise_deferred ('encode', 'CAPTCHA');
-  }
+  public abstract function encode ();
   
   /**
    * Restore a question from an encoded value.
@@ -93,10 +84,7 @@ class CAPTCHA extends WEBCORE_OBJECT
    * @param string $text
    * @abstract
    */
-  function decode ($text)
-  {
-    $this->raise_deferred ('decode', 'CAPTCHA');
-  }
+  public abstract function decode ($text);
   
   /**
    * Determine whether the answer matches the question.
@@ -104,10 +92,7 @@ class CAPTCHA extends WEBCORE_OBJECT
    * @return boolean
    * @abstract
    */
-  function validate ($answer)
-  {
-    $this->raise_deferred ('validate', 'CAPTCHA');
-  }
+  public abstract function validate ($answer);
 }
 
 /**
@@ -140,10 +125,12 @@ class NUMERIC_CAPTCHA extends CAPTCHA
    * @var string
    */
   public $operand_left;
+
   /**
    * @var integer
    */
   public $operator;
+
   /**
    * @var string
    */
@@ -152,7 +139,7 @@ class NUMERIC_CAPTCHA extends CAPTCHA
   /**
    * Automatically generates an initial expression.
    */
-  function NUMERIC_CAPTCHA ()
+  public function NUMERIC_CAPTCHA ()
   {
     $this->generate ();
   }
@@ -160,7 +147,7 @@ class NUMERIC_CAPTCHA extends CAPTCHA
   /**
    * Create a random expression.
    */
-  function generate ()
+  public function generate ()
   {
     $this->operand_left = rand (1, 9);
     $this->operation = rand (Captcha_operator_plus, Captcha_operator_times);
@@ -178,7 +165,7 @@ class NUMERIC_CAPTCHA extends CAPTCHA
    * Return the question as HTML.
    * @return string
    */
-  function as_html ()
+  public function as_html ()
   {
     $numbers = array ('zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine');
     $operations = array ('plus', 'minus', 'times');
@@ -189,7 +176,7 @@ class NUMERIC_CAPTCHA extends CAPTCHA
    * Encode the question for a form field.
    * @return string
    */
-  function encode ()
+  public function encode ()
   {
     return $this->operand_left . ',' . $this->operation . ',' . $this->operand_right;
   }
@@ -198,7 +185,7 @@ class NUMERIC_CAPTCHA extends CAPTCHA
    * Restore a question from an encoded value.
    * @param string $text
    */
-  function decode ($text)
+  public function decode ($text)
   {
     $params = explode (',', $text);
     $this->operand_left = $params [0]; 
@@ -211,7 +198,7 @@ class NUMERIC_CAPTCHA extends CAPTCHA
    * @param integer $proposal
    * @return boolean
    */
-  function validate ($proposal)
+  public function validate ($proposal)
   {
     switch ($this->operation)
     {

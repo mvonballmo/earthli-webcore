@@ -53,7 +53,7 @@ class UNIQUE_OBJECT_CACHE extends OBJECT_CACHE
   /**
    * @param QUERY $query List objects from this query.
    */
-  function UNIQUE_OBJECT_CACHE ($query)
+  public function UNIQUE_OBJECT_CACHE ($query)
   {
     $this->_app = $query->app;
     $this->_query = $query;
@@ -66,7 +66,7 @@ class UNIQUE_OBJECT_CACHE extends OBJECT_CACHE
    * If this id is found in the list on which the cache operates, then {@link is_valid()} will return true.
    * @param integer $selected_id
    */
-  function set_selected_id ($selected_id)
+  public function set_selected_id ($selected_id)
   {
     $this->_app->storage->start_multiple_value ($this->_stored_name ('')); 
     parent::set_selected_id ($selected_id);
@@ -79,7 +79,7 @@ class UNIQUE_OBJECT_CACHE extends OBJECT_CACHE
    * @return string
    * @access private
    */
-  function _stored_name ($name)
+  protected function _stored_name ($name)
   {
     if (! isset ($this->_hash_value))
     {
@@ -101,7 +101,7 @@ class UNIQUE_OBJECT_CACHE extends OBJECT_CACHE
    * @return integer
    * @access private
    */
-  function _num_objects_in_list ()
+  protected function _num_objects_in_list ()
   {
     return $this->_query->size ();
   }
@@ -113,7 +113,7 @@ class UNIQUE_OBJECT_CACHE extends OBJECT_CACHE
    * @access private
    * @abstract
    */
-  function _load_objects_at_ids ($ids)
+  protected function _load_objects_at_ids ($ids)
   {
     $this->_query->set_limits (0, 0);
     return $this->_query->objects_at_ids ($ids);
@@ -127,7 +127,7 @@ class UNIQUE_OBJECT_CACHE extends OBJECT_CACHE
    * @access private
    * @abstract
    */
-  function _load_objects_in_range ($first, $count)
+  protected function _load_objects_in_range ($first, $count)
   {
     $this->_query->set_limits ($first, $count);
     return $this->_query->objects ();
@@ -139,7 +139,7 @@ class UNIQUE_OBJECT_CACHE extends OBJECT_CACHE
    * @return string
    * @access private
    */
-  function _read_value ($name)
+  protected function _read_value ($name)
   {
     $Result = $this->_app->storage->value ($this->_stored_name ($name));
     $this->_record ("Read [$name] = [$Result]");
@@ -152,7 +152,7 @@ class UNIQUE_OBJECT_CACHE extends OBJECT_CACHE
    * @param string $value
    * @access private
    */
-  function _write_value ($name, $value)
+  protected function _write_value ($name, $value)
   {
     $this->_app->storage->set_value ($this->_stored_name ($name), $value);
     $this->_record ("Wrote [$name] = [$value]");
@@ -166,7 +166,7 @@ class UNIQUE_OBJECT_CACHE extends OBJECT_CACHE
    * @access private
    * @abstract
    */
-  function _record ($msg, $type = Msg_type_debug_info, $channel = Msg_channel_system)
+  protected function _record ($msg, $type = Msg_type_debug_info, $channel = Msg_channel_system)
   {
     log_message ($msg, $type, $channel);
   }
@@ -178,7 +178,7 @@ class UNIQUE_OBJECT_CACHE extends OBJECT_CACHE
    * @access private
    * @abstract
    */
-  function _start_id_search ($first = 0, $count = 0)
+  protected function _start_id_search ($first = 0, $count = 0)
   {
     // deliberately make a copy of the query
 
@@ -195,7 +195,7 @@ class UNIQUE_OBJECT_CACHE extends OBJECT_CACHE
    * @access private
    * @abstract
    */
-  function _ids_exist ()
+  protected function _ids_exist ()
   {
     return $this->_iteration_db->next_record ();
   }
@@ -207,28 +207,30 @@ class UNIQUE_OBJECT_CACHE extends OBJECT_CACHE
    * @access private
    * @abstract
    */
-  function _load_id ()
+  protected function _load_id ()
   {
     return $this->_iteration_db->f ($this->_query->id);
   }
 
   /**
    * Application to which this cache is attached.
-    * @var APPLICATION
-    * @access private
-    */
+   * @var APPLICATION
+   * @access private
+   */
   protected $_app;
+
   /**
    * Objects for this list are pulled from this query.
-    * @var QUERY
-    * @access private
-    */
+   * @var QUERY
+   * @access private
+   */
   protected $_query;
+
   /**
    * Used during iteration
-    * @var DATABASE
-    * @access private
-    */
+   * @var DATABASE
+   * @access private
+   */
   protected $_iteration_db;
 }
 

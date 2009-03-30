@@ -51,7 +51,7 @@ class SUBMIT_EXCEPTION_FORM extends SEND_MAIL_FORM
   /**
    * @param CONTEXT $context
    */
-  function SUBMIT_EXCEPTION_FORM ($context)
+  public function SUBMIT_EXCEPTION_FORM ($context)
   {
     SEND_MAIL_FORM::SEND_MAIL_FORM ($context);
 
@@ -67,8 +67,8 @@ class SUBMIT_EXCEPTION_FORM extends SEND_MAIL_FORM
     $field->description = 'Include page, form and cookie data. Excludes passwords, but may include other personal information.';
     $this->add_field ($field);
 
-    $this->set_required ('sender_name', FALSE);
-    $this->set_required ('sender_email', FALSE);
+    $this->set_required ('sender_name', false);
+    $this->set_required ('sender_email', false);
 
     $field = $this->field_at ('sender_email');
     $field->description = 'Optional, but lets us follow up if we have any questions.';
@@ -77,15 +77,15 @@ class SUBMIT_EXCEPTION_FORM extends SEND_MAIL_FORM
     $field->description = 'Briefly describe what you were doing when the error occurred (very useful).';
   }
 
-  function load_from_object ($obj)
+  public function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
 
     $this->load_with_defaults ();
 
     $this->set_value ('send_to', $this->context->mail_options->webmaster_address);
-    $this->set_value ('include_browser_info', TRUE);
-    $this->set_value ('include_page_data', TRUE);
+    $this->set_value ('include_browser_info', true);
+    $this->set_value ('include_page_data', true);
 
     $class_name = read_var ('class_name');
     $routine_name = read_var ('routine_name');
@@ -112,7 +112,7 @@ class SUBMIT_EXCEPTION_FORM extends SEND_MAIL_FORM
    * @return EXCEPTION_MAIL_RENDERER
    * @access private
    */
-  function _make_obj_renderer ($obj)
+  protected function _make_obj_renderer ($obj)
   {
     $class_name = $this->context->final_class_name ('EXCEPTION_MAIL_RENDERER', 'webcore/mail/exception_mail_renderer.php');
     return new $class_name ($this->context);
@@ -122,11 +122,11 @@ class SUBMIT_EXCEPTION_FORM extends SEND_MAIL_FORM
    * @return MAIL_OBJECT_RENDERER_OPTIONS
    * @access private
    */
-  function _make_renderer_options ()
+  protected function _make_renderer_options ()
   {
     $class_name = $this->context->final_class_name ('EXCEPTION_RENDERER_OPTIONS', 'webcore/gui/exception_renderer.php');
     $Result = new $class_name ();
-    $Result->show_details = TRUE;
+    $Result->show_details = true;
     $Result->include_page_data = $this->value_for ('include_page_data');
     $Result->include_browser_info = $this->value_for ('include_browser_info');
     $Result->subject = $this->value_for ('subject');
@@ -138,14 +138,16 @@ class SUBMIT_EXCEPTION_FORM extends SEND_MAIL_FORM
    * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_hidden_controls ($renderer)
+  protected function _draw_hidden_controls ($renderer)
   {
     parent::_draw_hidden_controls ($renderer);
 
     $params = $this->_object->as_array ();
 
     foreach ($params as $name => $value)
+    {
       $renderer->draw_hidden_value ($name, $value);
+    }
   }
 
   /**
@@ -154,7 +156,7 @@ class SUBMIT_EXCEPTION_FORM extends SEND_MAIL_FORM
    * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_options ($renderer)
+  protected function _draw_options ($renderer)
   {
     parent::_draw_options ($renderer);
     $renderer->draw_separator ();

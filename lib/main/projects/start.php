@@ -48,6 +48,6 @@ require_once ('projects/init.php');
  * @version 3.0.0
  * @since 1.4.1
  */
-$App = $Page->make_application (Project_application_id, TRUE, TRUE);
+$App = $Page->make_application (Project_application_id, true, true);
 
 ?>

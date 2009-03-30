@@ -53,7 +53,7 @@ class ICON_COMMANDS extends COMMANDS
   /**
    * @param ICON $icon Configure commands for this object.
    */
-  function ICON_COMMANDS ($icon)
+  public function ICON_COMMANDS ($icon)
   {
     COMMANDS::COMMANDS ($icon->app);
     

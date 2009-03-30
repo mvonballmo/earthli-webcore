@@ -27,7 +27,7 @@ http://www.earthli.com/software/webcore
 ****************************************************************************/
 
   $user_query = $App->user_query ();
-  $user_query->include_permissions (TRUE);
+  $user_query->include_permissions (true);
   $name = read_var ('name');
 
   if ($name)

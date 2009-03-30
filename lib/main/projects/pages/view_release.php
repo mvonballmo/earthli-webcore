@@ -80,8 +80,8 @@ http://www.earthli.com/software/webcore/projects
     <?php
       $renderer = $release->handler_for (Handler_html_renderer);
       $options = $renderer->options ();
-      $options->show_users = FALSE;
-      $options->show_as_summary = TRUE;
+      $options->show_users = false;
+      $options->show_as_summary = true;
       $renderer->display ($release);
 
       $panel_manager->display ();

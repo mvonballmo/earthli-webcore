@@ -52,30 +52,37 @@ class ATTACHMENT_GRID extends STANDARD_GRID
    * @var string
    */
   public $box_style = 'chart';
+
   /**
    * @var integer
    */
   public $spacing = '5';
+
   /**
    * @var boolean
    */
-  public $show_separator = FALSE;
+  public $show_separator = false;
+
   /**
    * @var string
    */
   public $object_name = 'Attachment';
+
   /**
    * @var string
    */
   public $width = '';
+
   /**
    * @var boolean
    */
-  public $centered = TRUE;
+  public $centered = true;
+
   /**
    * @var boolean
    */
-  public $even_columns = TRUE;
+  public $even_columns = true;
+
   /**
    * @var string
    */
@@ -83,9 +90,9 @@ class ATTACHMENT_GRID extends STANDARD_GRID
 
   /**
    * @param USER $obj
-    * @access private
-    */
-  function _draw_box ($obj)
+   * @access private
+   */
+  protected function _draw_box ($obj)
   {
 ?>
 <div style="text-align: center">

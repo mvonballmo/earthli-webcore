@@ -53,6 +53,7 @@ class USER_PERMISSIONS_FORM extends PERMISSIONS_FORM
    * @var string
    */
   public $button = 'Save';
+
   /**
    * @var string
    */
@@ -61,14 +62,14 @@ class USER_PERMISSIONS_FORM extends PERMISSIONS_FORM
   /**
    * @param APPLICATION $app Main application.
    */
-  function USER_PERMISSIONS_FORM ($app)
+  public function USER_PERMISSIONS_FORM ($app)
   {
     FORM::FORM ($app);
 
     $field = new TITLE_FIELD ();
     $field->id = 'name';
     $field->title = 'Title';
-    $field->visible = FALSE;
+    $field->visible = false;
     $this->add_field ($field);
 
     $field = new BOOLEAN_FIELD ();
@@ -110,7 +111,7 @@ class USER_PERMISSIONS_FORM extends PERMISSIONS_FORM
    * @param FIELD $field
    * @access private
    */
-  function add_privilege_field ($field)
+  public function add_privilege_field ($field)
   {
     $this->add_field ($field);
     $this->_privilege_fields [] = $field;
@@ -120,7 +121,7 @@ class USER_PERMISSIONS_FORM extends PERMISSIONS_FORM
    * Load initial properties from this user.
    * @param USER $obj
    */
-  function load_from_object ($obj)
+  public function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
 
@@ -135,7 +136,7 @@ class USER_PERMISSIONS_FORM extends PERMISSIONS_FORM
       $idx = 0;
       while ($idx < sizeof ($this->_privilege_fields))
       {
-        $this->_privilege_fields [$idx]->enabled = FALSE;
+        $this->_privilege_fields [$idx]->enabled = false;
         $idx++;
       }
     }
@@ -143,22 +144,26 @@ class USER_PERMISSIONS_FORM extends PERMISSIONS_FORM
     foreach ($this->content_groups as $group)
     {
       foreach ($group->maps as $map)
+      {
         $this->set_value ($map->id (), $permissions->value_for ($map->set_name, $map->type));
+      }
     }
 
     foreach ($this->global_groups as $group)
     {
       foreach ($group->maps as $map)
+      {
         $this->set_value ($map->id (), $permissions->value_for ($map->set_name, $map->type));
+      }
     }
   }
 
   /**
    * Store the form's values as this user's permissions.
-    * @param USER $obj
-    * @access private
-    */
-  function commit ($obj)
+   * @param USER $obj
+   * @access private
+   */
+  public function commit ($obj)
   {
     $permissions = $obj->permissions ();
 
@@ -174,13 +179,17 @@ class USER_PERMISSIONS_FORM extends PERMISSIONS_FORM
       foreach ($this->content_groups as $group)
       {
         foreach ($group->maps as $map)
+        {
           $map->store_to_object ($permissions, $this->value_for ($map->id ()));
+        }
       }
 
       foreach ($this->global_groups as $group)
       {
         foreach ($group->maps as $map)
+        {
           $map->store_to_object ($permissions, $this->value_for ($map->id ()));
+        }
       }
 
       $permissions->store ();
@@ -190,7 +199,7 @@ class USER_PERMISSIONS_FORM extends PERMISSIONS_FORM
   /**
    * @access private
    */
-  function _draw_scripts ()
+  protected function _draw_scripts ()
   {
 ?>
 
@@ -217,7 +226,9 @@ function update_controls ()
 
     <?php
     foreach ($this->_privilege_fields as $field)
+    {
       echo "form.$field->id.disabled = ! use_defaults;\n";
+    }
     ?>
   }
 }
@@ -231,7 +242,7 @@ function update_controls ()
    * @access private
    * @abstract
    */
-  function _draw_permission_controls ($renderer, $formatter)
+  protected function _draw_permission_controls ($renderer, $formatter)
   {
     $renderer->draw_text_row ('', 'The settings on the left can override content permissions, either <em>Granting</em> or <em>Denying</em> them. <em>[Folder]</em> uses the permissions defined in the folder.', 'notes');
     $renderer->draw_separator ();
@@ -269,7 +280,9 @@ function update_controls ()
       {
         $renderer->start_row ($group->title);
         foreach ($group->maps as $map)
+        {
           $this->_draw_tri_permission ($map, $formatter, $renderer, $props);
+        }
         $renderer->finish_row ();
         $renderer->draw_separator ();
       }
@@ -280,7 +293,9 @@ function update_controls ()
       {
         $renderer->start_row ($group->title);
         foreach ($group->maps as $map)
+        {
           $this->_draw_permission ($map, $formatter, $renderer, $props);
+        }
         $renderer->finish_row ();
         $renderer->draw_separator ();
       }
@@ -300,7 +315,7 @@ function update_controls ()
    * @param FORM_LIST_PROPERTIES $props
    * @access private
    */
-  function _draw_tri_permission ($map, $formatter, $renderer, $props)
+  protected function _draw_tri_permission ($map, $formatter, $renderer, $props)
   {
     $id = $map->id ();
     $field = $this->field_at ($id);

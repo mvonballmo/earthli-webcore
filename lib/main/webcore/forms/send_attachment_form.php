@@ -52,14 +52,14 @@ class SEND_ATTACHMENT_FORM extends SEND_OBJECT_IN_FOLDER_FORM
   /**
    * @param APPLICATION $app Main application.
    */
-  function SEND_ATTACHMENT_FORM ($app)
+  public function SEND_ATTACHMENT_FORM ($app)
   {
     SEND_OBJECT_IN_FOLDER_FORM::SEND_OBJECT_IN_FOLDER_FORM ($app);
 
     $field = new TEXT_FIELD ();
     $field->id = 'type';
     $field->title = 'Type';
-    $field->visible = FALSE;
+    $field->visible = false;
     $this->add_field ($field);
   }
 
@@ -67,7 +67,7 @@ class SEND_ATTACHMENT_FORM extends SEND_OBJECT_IN_FOLDER_FORM
    * Load initial properties from this object.
    * @param ATTACHMENT $obj
    */
-  function load_from_object ($obj)
+  public function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
     $this->set_value ('type', $obj->type);

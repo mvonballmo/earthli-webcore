@@ -59,7 +59,7 @@ class TINY_PICTURE_GRID extends CSS_FLOW_GRID
   public $max_width = 100;
   public $max_height = 75;
 
-  function _draw_box ($obj)
+  protected function _draw_box ($obj)
   {
     $url = $obj->thumbnail_location (Force_root_on);
     $is_local = $url->has_local_domain ();

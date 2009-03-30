@@ -51,7 +51,7 @@ require_once ('webcore/sys/resources.php');
  */
 class RESOURCE_TEST_TASK extends TEST_TASK
 {
-  function _check_basic_aliases ($res)
+  protected function _check_basic_aliases ($res)
   {
     $this->_check_equal ('', $res->path_to ('not_an_alias'));    
     $this->_check_equal ('/', $res->path_to ('root'));    
@@ -87,7 +87,7 @@ class RESOURCE_TEST_TASK extends TEST_TASK
     $this->_check_equal ('/external/software/vacation/old_file_large.zip', $res->resolve_file ('{external}vacation/old_file_large'));
   }
   
-  function _check_force_root_override ($page_res, $app_res)
+  protected function _check_force_root_override ($page_res, $app_res)
   {
     $this->_check_equal ('#location_in_page', $app_res->resolve_file ('#location_in_page', Force_root_on));
     $this->_check_equal ('/var/log/mail/mylog.txt', $app_res->resolve_file ('{logs}/mail/mylog.txt', Force_root_on));
@@ -106,7 +106,7 @@ class RESOURCE_TEST_TASK extends TEST_TASK
     $this->_check_equal ('attachments/entry/hello/', $app_res->resolve_path_for_alias ('entry_attachments', 'hello', Force_root_off));
   }
   
-  function _check_force_root_default ($env_res, $page_res, $app_res)
+  protected function _check_force_root_default ($env_res, $page_res, $app_res)
   {
     $page_res->set_path ('attachments', '');
     $page_res->set_path ('entry_attachments', '');
@@ -115,9 +115,9 @@ class RESOURCE_TEST_TASK extends TEST_TASK
 
     /* Test root-resolution using the property. */
 
-    $app_res->resolve_to_root = TRUE;
-    $page_res->resolve_to_root = TRUE;
-    $env_res->resolve_to_root = TRUE;
+    $app_res->resolve_to_root = true;
+    $page_res->resolve_to_root = true;
+    $env_res->resolve_to_root = true;
 
     $this->_check_equal ('#location_in_page', $app_res->resolve_file ('#location_in_page'));
     $this->_check_equal ('/var/log/mail/mylog.txt', $app_res->resolve_file ('{logs}/mail/mylog.txt'));
@@ -153,12 +153,12 @@ class RESOURCE_TEST_TASK extends TEST_TASK
     $this->_check_equal ('http://earthli.com/webcore/albums/fldr/', $app_res->resolve_path ('fldr'));
     $this->_check_equal ('http://earthli.com/fldr/', $app_res->resolve_path ('/fldr'));    
     $this->_check_equal ('http://earthli.com/webcore/albums/', $app_res->resolve_path (''));
-    $page_res->resolve_to_root = FALSE;
+    $page_res->resolve_to_root = false;
     $app_res->root_url = 'webcore/albums/';
     $this->_check_equal ('http://earthli.com/webcore/albums/fldr/', $app_res->resolve_path ('fldr'));
     $this->_check_equal ('http://earthli.com/fldr/', $app_res->resolve_path ('/fldr'));    
     $this->_check_equal ('http://earthli.com/webcore/albums/', $app_res->resolve_path (''));
-    $env_res->resolve_to_root = FALSE;
+    $env_res->resolve_to_root = false;
     $this->_check_equal ('webcore/albums/fldr/', $app_res->resolve_path ('fldr'));
     $this->_check_equal ('/fldr/', $app_res->resolve_path ('/fldr'));    
     $this->_check_equal ('webcore/albums/', $app_res->resolve_path (''));
@@ -167,7 +167,7 @@ class RESOURCE_TEST_TASK extends TEST_TASK
     $this->_check_equal ('webcore/albums/attachments/entry/another/folder/vacation/mypic.tiff', $app_res->resolve_file ('{entry_attachments}/vacation/mypic.tiff'));
   }
   
-  function _execute ()
+  protected function _execute ()
   {
     $env_res = new RESOURCE_MANAGER ();
     $env_res->root_url = 'http://earthli.com';
@@ -183,7 +183,7 @@ class RESOURCE_TEST_TASK extends TEST_TASK
     $page_res->set_path ('attachments', 'attachments');
     $page_res->set_path ('entry_attachments', '{attachments}/entry');
     $page_res->set_path ('logs', '/var/log');
-    $page_res->set_forced_root ('logs', FALSE);
+    $page_res->set_forced_root ('logs', false);
     $page_res->set_extension ('pictures', 'png');
     $page_res->set_extension ('external', 'zip');
     

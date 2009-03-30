@@ -89,6 +89,7 @@ class ATOM_RENDERER extends NEWSFEED_RENDERER
    * @var string
    */
   public $style_sheet = '{styles}atom.css';
+
   /**
    * @var string 
    * The following override is commented because Firefox offers to download
@@ -102,7 +103,7 @@ class ATOM_RENDERER extends NEWSFEED_RENDERER
    * @access private
    * @abstract
    */
-  function _start_display ($time_modified)
+  protected function _start_display ($time_modified)
   {
     parent::_start_display ($time_modified);
 ?>
@@ -126,7 +127,7 @@ class ATOM_RENDERER extends NEWSFEED_RENDERER
    * @access private
    * @abstract
    */
-  function _finish_display ()
+  protected function _finish_display ()
   {
 ?>
 </feed>
@@ -155,7 +156,7 @@ class ENTRY_ATOM_RENDERER extends NEWSFEED_OBJECT_RENDERER
    * @param ENTRY $obj
    * @param OBJECT_RENDERER_OPTIONS $options
    */
-  function display ($obj, $options = null)
+  public function display ($obj, $options = null)
   {
     $t = $this->_publication_date_for ($obj);
     $modifier = $obj->modifier ();
@@ -200,7 +201,7 @@ class ENTRY_ATOM_RENDERER extends NEWSFEED_OBJECT_RENDERER
    * @return DATE_TIME
    * @access private
    */
-  function _publication_date_for ($obj)
+  protected function _publication_date_for ($obj)
   {
     return $obj->time_created;
   }
@@ -221,7 +222,7 @@ class DRAFTABLE_ENTRY_ATOM_RENDERER extends ENTRY_ATOM_RENDERER
    * @return DATE_TIME
    * @access private
    */
-  function _publication_date_for ($obj)
+  protected function _publication_date_for ($obj)
   {
     return $obj->time_published;
   }

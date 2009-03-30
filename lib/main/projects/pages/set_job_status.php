@@ -37,7 +37,7 @@ http://www.earthli.com/software/webcore
     $entry_query->set_type ('job');
     $job = $entry_query->object_at_id ($id);
     $action = $job->new_history_item ();
-    $action->compare_branches = TRUE;
+    $action->compare_branches = true;
     
     $branch_infos = $job->stored_branch_infos ();
     $main_branch_info = $job->main_branch_info ();

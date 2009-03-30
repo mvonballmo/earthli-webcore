@@ -50,12 +50,12 @@ class STATIC_TREE extends HTML_TREE
 {
   /**
    * Specifies the minimum depth before 'plus' or 'ell' icons are drawn.
-    * For statically-rendered trees, the minimum depth of 1 prevents symbols from being drawn in front
-    * of the root items; there is no need for them since they can't be manipulated anyway (unlike the
-    * dynamic tree where they could be used to open/close the branch).
-    * @var integer
-    * @access private
-    */
+   * For statically-rendered trees, the minimum depth of 1 prevents symbols from being drawn in front
+   * of the root items; there is no need for them since they can't be manipulated anyway (unlike the
+   * dynamic tree where they could be used to open/close the branch).
+   * @var integer
+   * @access private
+   */
   protected $_min_depth_for_icons = 1;
 }
 

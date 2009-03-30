@@ -70,13 +70,13 @@ class ARCHIVE
   /**
    * @param string $file_name
    */
-  function ARCHIVE ($file_name)
+  public function ARCHIVE ($file_name)
   {
     $this->register_handler ('ZIP_FILE', '');
     $this->set_file_name ($file_name);
   }
 
-  function set_file_name ($file_name)
+  public function set_file_name ($file_name)
   {
     $this->_handler = null;
     $this->file_name = $file_name;
@@ -90,7 +90,7 @@ class ARCHIVE
    * @param string $class_name
    * @param string $file_name
    */
-  function register_handler ($class_name, $file_name)
+  public function register_handler ($class_name, $file_name)
   {
     $handler = null; // Compiler warning
     $handler->class_name = $class_name;
@@ -102,7 +102,7 @@ class ARCHIVE
    * Is this an archive?
    * @return boolean
    */
-  function readable ()
+  public function readable ()
   {
     $this->_init_handler ();
     return isset ($this->_handler);
@@ -117,7 +117,7 @@ class ARCHIVE
    * COMPRESSED_FILE} $archive, string $msg, {@link COMPRESSED_FILE_ENTRY}
    * $entry)
    */
-  function for_each ($file_callback, $error_callback = null)
+  public function for_each ($file_callback, $error_callback = null)
   {
     $this->_init_handler ();
     if (isset ($this->_handler))
@@ -134,7 +134,7 @@ class ARCHIVE
    * COMPRESSED_FILE} $archive, string $msg, {@link COMPRESSED_FILE_ENTRY}
    * $entry)
    */
-  function extract_to ($path, $error_callback = null)
+  public function extract_to ($path, $error_callback = null)
   {
     $this->_init_handler ();
     if (isset ($this->_handler))
@@ -149,7 +149,7 @@ class ARCHIVE
    * Searches the handlers registered with {@link register_handler()}.
    * @access private
    */
-  function _init_handler ()
+  protected function _init_handler ()
   {
     if (! isset ($this->_handler))
     {
@@ -188,6 +188,7 @@ class ARCHIVE
    * @access private
    */
   protected $_handler;
+
   /**
    * List of archive format handlers.
    * @see ARCHIVE_HANDLER
@@ -214,6 +215,7 @@ class ARCHIVE_HANDLER
    * @var string
    */
   public $class_name;
+
   /**
    * Location of the {@link $class_name}.
    * May be empty if the file is guaranteed to be included.
@@ -234,7 +236,7 @@ class ARCHIVE_HANDLER
  * @since 2.5.0
  * @abstract
  */
-class COMPRESSED_FILE extends RAISABLE
+abstract class COMPRESSED_FILE extends RAISABLE
 {
   /**
    * Can be in any URL usable by PHP.
@@ -245,7 +247,7 @@ class COMPRESSED_FILE extends RAISABLE
   /**
    * @param string $file_name
    */
-  function COMPRESSED_FILE ($file_name)
+  public function COMPRESSED_FILE ($file_name)
   {
     $this->file_name = $file_name;
   }
@@ -253,15 +255,12 @@ class COMPRESSED_FILE extends RAISABLE
   /**
    * @abstract
    */
-  function is_open ()
-  {
-    $this->raise_deferred ('is_open', 'COMPRESSED_FILE_ENTRY');
-  }
+  public abstract function is_open ();
 
   /**
    * @param CALLBACK $error_callback Function prototype: function (string, {@link COMPRESSED_FILE_ENTRY})
    */
-  function open ($error_callback = null)
+  public function open ($error_callback = null)
   {
     $this->_open ();
     if (! $this->is_open () && isset ($error_callback))
@@ -273,17 +272,14 @@ class COMPRESSED_FILE extends RAISABLE
   /**
    * @abstract
    */
-  function close ()
-  {
-    $this->raise_deferred ('close', 'COMPRESSED_FILE_ENTRY');
-  }
+  public abstract function close ();
 
   /**
    * Execute the 'file_callback' for each file entry.
    * @param CALLBACK $file_callback Function prototype: function ({@link COMPRESSED_FILE} $archive, {@link COMPRESSED_FILE_ENTRY} $entry, {@link CALLBACK} $error_callback = null)
    * @param CALLBACK $error_callback Function prototype: function ({@link COMPRESSED_FILE} $archive, string $msg, {@link COMPRESSED_FILE_ENTRY} $entry)
    */
-  function for_each ($file_callback, $error_callback = null)
+  public function for_each ($file_callback, $error_callback = null)
   {
     $this->assert ($this->is_open (), "[$this->file_name] is not open.", 'for_each', 'COMPRESSED_FILE');
     $this->_for_each ($file_callback, $error_callback);
@@ -293,7 +289,7 @@ class COMPRESSED_FILE extends RAISABLE
    * Extract all files to 'path'.
    * @param CALLBACK $error_callback Function prototype: function (string, {@link COMPRESSED_FILE_ENTRY})
    */
-  function extract_to ($path, $error_callback = null)
+  public function extract_to ($path, $error_callback = null)
   {
     $this->_target_path = $path;
     $this->for_each (new CALLBACK_METHOD ('_extract_file', $this), $error_callback);
@@ -307,7 +303,7 @@ class COMPRESSED_FILE extends RAISABLE
    * @param CALLBACK $error_callback Function prototype: function ({@link COMPRESSED_FILE} $archive, string $msg, {@link COMPRESSED_FILE_ENTRY} $entry)
    * @access private
    */
-  function _extract_file ($comp_file, $entry, $error_callback)
+  protected function _extract_file ($comp_file, $entry, $error_callback)
   {
     $entry->extract_to ($this->_target_path, $error_callback);
   }
@@ -317,10 +313,7 @@ class COMPRESSED_FILE extends RAISABLE
    * @access private
    * @abstract
    */
-  function _open ($error_callback = null)
-  {
-    $this->raise_deferred ('open', 'COMPRESSED_FILE_ENTRY');
-  }
+  protected abstract function _open ($error_callback = null);
 
   /**
    * Execute the 'file_callback' for each file entry.
@@ -329,10 +322,7 @@ class COMPRESSED_FILE extends RAISABLE
    * @access private
    * @abstract
    */
-  function _for_each ($file_callback, $error_callback = null)
-  {
-    $this->raise_deferred ('for_each', 'COMPRESSED_FILE');
-  }
+  protected abstract function _for_each ($file_callback, $error_callback = null);
 }
 
 /**
@@ -345,7 +335,7 @@ class COMPRESSED_FILE extends RAISABLE
  * @access private
  * @abstract
  */
-class COMPRESSED_FILE_ENTRY extends RAISABLE
+abstract class COMPRESSED_FILE_ENTRY extends RAISABLE
 {
   /**
    * Name of the entry in the compressed file.
@@ -353,22 +343,26 @@ class COMPRESSED_FILE_ENTRY extends RAISABLE
    * @var string
    */
   public $name;
+
   /**
    * Position of the file in the archive.
    * @var integer
    */
   public $number;
+
   /**
    * Size of file in the archive.
    * May not be available for all compressed file types.
    * @var integer
    */
   public $compressed_size;
+
   /**
    * Uncompressed size of the file.
    * @var integer
    */
   public $size;
+
   /**
    * Location of extracted file.
    * This property holds the last file produced when {@link extract_to()} was called. May be empty.
@@ -379,7 +373,7 @@ class COMPRESSED_FILE_ENTRY extends RAISABLE
   /**
    * @param COMPRESSED_FILE $file
    */
-  function COMPRESSED_FILE_ENTRY ($file)
+  public function COMPRESSED_FILE_ENTRY ($file)
   {
     $this->_file = $file;
   }
@@ -388,7 +382,7 @@ class COMPRESSED_FILE_ENTRY extends RAISABLE
    * Returns  '0' if the compression is not defined.
    * @return integer
    */
-  function compression_percentage ()
+  public function compression_percentage ()
   {
     if (isset ($this->compressed_size))
     {
@@ -410,7 +404,7 @@ class COMPRESSED_FILE_ENTRY extends RAISABLE
    * @param string $path
    * @param CALLBACK $error_callback
    */
-  function extract_to ($path, $error_callback = null)
+  public function extract_to ($path, $error_callback = null)
   {
     $url = new FILE_URL ($path);
     $url->append ($this->name);
@@ -427,10 +421,7 @@ class COMPRESSED_FILE_ENTRY extends RAISABLE
    * @access private
    * @abstract
    */
-  function _extract_to ($file, $error_callback)
-  {
-    $this->raise_deferred ('extract_to', 'COMPRESSED_FILE_ENTRY');
-  }
+  protected abstract function _extract_to ($file, $error_callback);
 
   /**
    * Report an error.
@@ -438,7 +429,7 @@ class COMPRESSED_FILE_ENTRY extends RAISABLE
    * @param string $msg
    * @access private
    */
-  function _report_error ($error_callback, $msg)
+  protected function _report_error ($error_callback, $msg)
   {
     if (isset ($error_callback))
     {
@@ -465,12 +456,12 @@ class COMPRESSED_FILE_ENTRY extends RAISABLE
  */
 class ZIP_FILE extends COMPRESSED_FILE
 {
-  function is_open ()
+  public function is_open ()
   {
     return isset ($this->_handle);
   }
 
-  function close ()
+  public function close ()
   {
     zip_close ($this->_handle);
     $this->_handle = null;
@@ -482,7 +473,7 @@ class ZIP_FILE extends COMPRESSED_FILE
    * @param CALLBACK $file_callback Function prototype: function ({@link COMPRESSED_FILE} $archive, {@link COMPRESSED_FILE_ENTRY} $entry, {@link CALLBACK} $error_callback = null)
    * @param CALLBACK $error_callback Function prototype: function ({@link COMPRESSED_FILE} $archive, string $msg, {@link COMPRESSED_FILE_ENTRY} $entry)
    */
-  function _for_each ($file_callback, $error_callback = null)
+  protected function _for_each ($file_callback, $error_callback = null)
   {
     $opts = global_file_options ();
     $sep = $opts->path_delimiter;
@@ -511,13 +502,13 @@ class ZIP_FILE extends COMPRESSED_FILE
   /**
    * @access private
    */
-  function _open ()
+  protected function _open ()
   {
     $this->_handle = null;
     if (function_exists ('zip_open'))
     {
       $this->_handle = @zip_open ($this->file_name);
-      if ($this->_handle === FALSE)
+      if ($this->_handle === false)
       {
         $this->_handle = null;
       }
@@ -552,7 +543,7 @@ class ZIP_ENTRY extends COMPRESSED_FILE_ENTRY
    * @param resource $zh Handle returned by {@link PHP_MANUAL#zip_open()}
    * @param resource $h Handle returned by {@link PHP_MANUAL#zip_entry_open()}
    */
-  function ZIP_ENTRY ($file, $zh, $h)
+  public function ZIP_ENTRY ($file, $zh, $h)
   {
     COMPRESSED_FILE_ENTRY::COMPRESSED_FILE_ENTRY ($file);
     $this->_zip_handle = $zh;
@@ -565,18 +556,18 @@ class ZIP_ENTRY extends COMPRESSED_FILE_ENTRY
    * @param CALLBACK $error_callback
    * @access private
    */
-  function _extract_to ($path, $error_callback)
+  protected function _extract_to ($path, $error_callback)
   {
     if (zip_entry_open ($this->_zip_handle, $this->_handle))
     {
       $f = @fopen ($path, 'wb');
-      if ($f === FALSE)
+      if ($f === false)
       {
         $this->_report_error ($error_callback, "Could not open destination file [$path].");
       }
       else
       {
-        while (($s = zip_entry_read ($this->_handle, $this->read_block_size)) !== FALSE)
+        while (($s = zip_entry_read ($this->_handle, $this->read_block_size)) !== false)
           fwrite ($f, $s);
         fclose ($f);
       }
@@ -594,6 +585,7 @@ class ZIP_ENTRY extends COMPRESSED_FILE_ENTRY
    * @access private
    */
   protected $_handle;
+
   /**
    * Reference to a value returned from {@link PHP_MANUAL#zip_open()}
    * @var resource

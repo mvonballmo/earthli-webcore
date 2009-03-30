@@ -35,7 +35,7 @@ class UPGRADE_WEBCORE_271_300_TASK extends MIGRATOR_TASK
   public $version_from = '2.7.0';
   public $version_to = '3.0.0';
 
-  function _execute ()
+  protected function _execute ()
   {
     if ($this->db->table_exists ('themes'))
     {

@@ -57,10 +57,12 @@ class PAGE extends CONTEXT
    * @var PAGE_TITLE
    */
   public $title;
+
   /**
    * @var string
    */
   public $doc_type = '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/1998/REC-html40-19980424/strict.dtd">';
+
   /**
    * @var string
    */
@@ -71,30 +73,36 @@ class PAGE extends CONTEXT
    * @var PAGE_ICON_OPTIONS
    */
   public $icon_options;
+
   /**
    * Controls the newsfeed header tags.
    * @var PAGE_NEWSFEED_OPTIONS
    */
   public $newsfeed_options;
+
   /**
    * Controls the meta refresh tag.
    * @var PAGE_REFRESH_OPTIONS
    */
   public $refresh_options;
+
   /**
    * Controls the formatting of the page template.
    * @var PAGE_TEMPLATE_OPTIONS
    * @see DEFAULT_PAGE_TEMPLATE
    */
   public $template_options;
+
   /**
    * @var string
    */
   public $keywords = '';
+
   /**
    * @var string
    */
   public $description = '';
+
   /**
    * @var string
    */
@@ -126,7 +134,8 @@ class PAGE extends CONTEXT
    * Is this page printable?
    * @var boolean
    */
-  public $printable = FALSE;
+  public $printable = false;
+
   /**
    * If true, generated URLs are post-processed to make them relative.
    * Applies only to URLs that are a sub-path of the current path. These are
@@ -135,18 +144,18 @@ class PAGE extends CONTEXT
    * @see path_between()
    * @var boolean
    */
-  public $prefer_relative_urls = TRUE;
+  public $prefer_relative_urls = true;
 
   /**
    * Should access violation errors redirect to another page?
    * @var boolean
    */
-  public $redirect_security_violations = TRUE;
+  public $redirect_security_violations = true;
 
   /**
    * @param ENVIRONMENT $env Global environment.
    */
-  function PAGE ($env)
+  public function PAGE ($env)
   {
     $this->inherit_resources_from ($env);
     $this->resolve_to_root = $env->resolve_to_root;
@@ -154,7 +163,7 @@ class PAGE extends CONTEXT
 
     CONTEXT::CONTEXT ($env);
 
-    $this->is_page = TRUE;
+    $this->is_page = true;
     $this->page = $this;
 
     $class_name = $this->final_class_name ('PAGE_TITLE', 'webcore/gui/page_title.php');
@@ -174,7 +183,7 @@ class PAGE extends CONTEXT
    * Add classes to the {@link $classes} object factory.
    * @access private
    */
-  function _initialize_class_registry ()
+  protected function _initialize_class_registry ()
   {
     parent::_initialize_class_registry ();
     $this->register_class ('PAGE_RENDERER', 'DEFAULT_PAGE_RENDERER', 'webcore/gui/default_page_renderer.php');
@@ -186,7 +195,7 @@ class PAGE extends CONTEXT
    * specific resources are also resolved.
    * @return RESOURCES ()
    */
-  function resources ()
+  public function resources ()
   {
     if (isset ($this->app))
     {
@@ -199,7 +208,7 @@ class PAGE extends CONTEXT
    * Should renderers/grids/etc. use DHTML?
    * @return boolean
    */
-  function dhtml_allowed ()
+  public function dhtml_allowed ()
   {
     return $this->template_options->include_scripts && parent::dhtml_allowed ();
   }
@@ -208,7 +217,7 @@ class PAGE extends CONTEXT
    * Should dates use JavaScript to render local times?
    * @return boolean
    */
-  function local_times_allowed ()
+  public function local_times_allowed ()
   {
     return $this->template_options->include_scripts && parent::local_times_allowed ();
   }
@@ -216,7 +225,7 @@ class PAGE extends CONTEXT
   /**
    * Start painting the page (show the header).
    */
-  function start_display ()
+  public function start_display ()
   {
     $this->_renderer = $this->make_renderer ();
     $this->_renderer->start_display ();
@@ -229,7 +238,7 @@ class PAGE extends CONTEXT
    * @param string $msg
    * @param WEBCORE_OBJECT $context
    */
-  function raise_security_violation ($msg, $context = 0)
+  public function raise_security_violation ($msg, $context = 0)
   {
     if ($this->redirect_security_violations && ! $this->env->ignore_redirects)
     {
@@ -257,7 +266,9 @@ class PAGE extends CONTEXT
           $this->location->append ('Groups', 'view_groups.php');
         }
         elseif (is_a ($context, 'user'))
+        {
           $this->location->append ('Users', 'view_users.php');
+        }
       }
 
       $this->title->subject = 'Access Denied';
@@ -275,7 +286,7 @@ class PAGE extends CONTEXT
    * @param string $msg
    * @param WEBCORE_OBJECT $context
    */
-  function raise_error ($message, $caption = '', $context = 0)
+  public function raise_error ($message, $caption = '', $context = 0)
   {
     if (is_a ($context, 'folder'))
     {
@@ -290,7 +301,9 @@ class PAGE extends CONTEXT
         $this->location->append ('Groups', 'view_groups.php');
       }
       elseif (is_a ($context, 'user'))
+      {
         $this->location->append ('Users', 'view_users.php');
+      }
     }
     
     if (! $caption)
@@ -319,7 +332,7 @@ class PAGE extends CONTEXT
   /**
    * Finish painting the page (show the footer).
    */
-  function finish_display ()
+  public function finish_display ()
   {
     $this->_renderer->finish_display ();
   }
@@ -356,7 +369,7 @@ class PAGE extends CONTEXT
    * create by default.
    * @return APPLICATION
    */
-  function register_application ($id, $engine_name)
+  public function register_application ($id, $engine_name)
   {
     if (! $this->is_registered ('APPLICATION_ENGINE', $id))
     {
@@ -382,7 +395,7 @@ class PAGE extends CONTEXT
    * @see APPLICATION_ENGINE
    * @return APPLICATION
    */
-  function make_application ($id, $set_as_default = FALSE, $start = TRUE)
+  public function make_application ($id, $set_as_default = false, $start = true)
   {
     $class_name = $this->final_class_name ('APPLICATION_ENGINE', 'webcore/config/application_engine.php', $id);
     $engine = new $class_name ();
@@ -409,7 +422,7 @@ class PAGE extends CONTEXT
    * are added to {@link $scripts}.
    * @param string $url location of the file
    */
-  function add_script_file ($url)
+  public function add_script_file ($url)
   {
     if (! isset ($this->scripts) || ! in_array ($url, $this->scripts))
     {
@@ -423,7 +436,7 @@ class PAGE extends CONTEXT
    * added to {@link $styles}.
    * @param string $url location of the file
    */
-  function add_style_sheet ($url)
+  public function add_style_sheet ($url)
   {
     if (! isset ($this->styles) || ! in_array ($url, $this->styles))
     {
@@ -441,7 +454,7 @@ class PAGE extends CONTEXT
    * @see refresh_icon_alias()
    * @param string $alias
    */
-  function add_icon_alias ($resource_manager, $alias)
+  public function add_icon_alias ($resource_manager, $alias)
   {
     $this->_icon_aliases [$alias] = $resource_manager;
     $resource_manager->refresh ($alias);
@@ -455,7 +468,7 @@ class PAGE extends CONTEXT
    * @see add_icon_alias()
    * @param RESOURCE_MANAGER $resource_manager
    */
-  function add_as_icon_listener_to ($resource_manager)
+  public function add_as_icon_listener_to ($resource_manager)
   {
     include_once ('webcore/sys/callback.php');
     $resource_manager->add_listener (new CALLBACK_METHOD ('_on_alias_changed', $this));
@@ -465,7 +478,7 @@ class PAGE extends CONTEXT
    * Add an expiration date to the header
    * @param integer $date A PHP timestamp
    */
-  function set_expire_date ($date)
+  public function set_expire_date ($date)
   {
     $d = date ("D, d M Y H:i:s", $date);
     header ("Expires: $d GMT");
@@ -475,7 +488,7 @@ class PAGE extends CONTEXT
    * Add the modification date to the header
    * @param integer $date A PHP timestamp
    */
-  function set_modified_date ($date)
+  public function set_modified_date ($date)
   {
     $d = date ("D, d M Y H:i:s", $date);
     header ("Last-Modified: $d GMT");
@@ -485,7 +498,7 @@ class PAGE extends CONTEXT
    * Disallows caching in the HTTP header.
    * Sets an expiry date in the past so the client reloads this page.
    */
-  function set_no_caching ()
+  public function set_no_caching ()
   {
     header ("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
     header ("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
@@ -496,9 +509,9 @@ class PAGE extends CONTEXT
    * Flag this page as a printout.
    * The page renderer checks this flag to determine which stylesheets to load.
    */
-  function set_printable ()
+  public function set_printable ()
   {
-    $this->printable = TRUE;
+    $this->printable = true;
   }
 
   /**
@@ -507,7 +520,7 @@ class PAGE extends CONTEXT
    * function to create a renderer when building a custom page.
    * @return PAGE_RENDERER
    */
-  function make_renderer ()
+  public function make_renderer ()
   {
     $class_name = @$this->final_class_name (Custom_page_renderer);
     $error_occurred = ! class_exists ($class_name);
@@ -538,7 +551,7 @@ class PAGE extends CONTEXT
    * @param string $path New path.
    * @access private
    */
-  function _on_alias_changed ($resource_manager, $alias, $path)
+  public function _on_alias_changed ($resource_manager, $alias, $path)
   {
     if (isset ($this->_icon_aliases [$alias]))
     {
@@ -555,7 +568,7 @@ class PAGE extends CONTEXT
    * @param string $path New path.
    * @access private
    */
-  function _on_icon_alias_changed ($resource_manager, $alias, $path)
+  public function _on_icon_alias_changed ($resource_manager, $alias, $path)
   {
   }
   
@@ -568,7 +581,7 @@ class PAGE extends CONTEXT
    * @return string
    * @access private
    */
-  function _finalize_url ($url, $root_override)
+  protected function _finalize_url ($url, $root_override)
   {
     $Result = parent::_finalize_url ($url, $root_override);
     if ($this->prefer_relative_urls && $this->root_url && ! $this->_needs_root ($Result, $root_override))
@@ -587,7 +600,7 @@ class PAGE extends CONTEXT
    * @return boolean
    * @access private
    */
-  function _default_resolve_to_root ()
+  protected function _default_resolve_to_root ()
   {
     return ! $this->env->running_on_declared_host ();
   }
@@ -597,6 +610,7 @@ class PAGE extends CONTEXT
    * @access private
    */
   protected $_renderer;
+
   /**
    * List of path aliases to treat as icon paths.
    * @var array[string]

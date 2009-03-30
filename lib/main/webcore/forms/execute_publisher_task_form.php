@@ -49,6 +49,7 @@ require_once ('webcore/forms/execute_task_form.php');
 class EXECUTE_PUBLISHER_TASK_FORM extends EXECUTE_TASK_FORM
 {
   public $button = 'Publish';
+
   /**
    * @var string
    */
@@ -57,7 +58,7 @@ class EXECUTE_PUBLISHER_TASK_FORM extends EXECUTE_TASK_FORM
   /**
    * @param APPLICATION $app Main application.
    */
-  function EXECUTE_PUBLISHER_TASK_FORM ($app)
+  public function EXECUTE_PUBLISHER_TASK_FORM ($app)
   {
     EXECUTE_TASK_FORM::EXECUTE_TASK_FORM ($app);
 
@@ -68,17 +69,17 @@ class EXECUTE_PUBLISHER_TASK_FORM extends EXECUTE_TASK_FORM
     $this->add_field ($field);
   }
 
-  function load_with_defaults ()
+  public function load_with_defaults ()
   {
     parent::load_with_defaults ();
-    $this->set_value ('preview', FALSE);
+    $this->set_value ('preview', false);
   }
 
   /**
    * Load initial properties from this branch.
    * @param TASK $obj
    */
-  function load_from_object ($obj)
+  public function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
     $this->set_value ('preview', $obj->preview);
@@ -89,7 +90,7 @@ class EXECUTE_PUBLISHER_TASK_FORM extends EXECUTE_TASK_FORM
    * @param TASK $obj
    * @access private
    */
-  function commit ($obj)
+  public function commit ($obj)
   {
     $obj->preview = $this->value_for ('preview');
     parent::commit ($obj);
@@ -100,7 +101,7 @@ class EXECUTE_PUBLISHER_TASK_FORM extends EXECUTE_TASK_FORM
    * @param FORM_LIST_PROPERTIES $props
    * @access private
    */
-  function _add_boolean_options ($props)
+  protected function _add_boolean_options ($props)
   {
     parent::_add_boolean_options ($props);
     $props->add_item ('preview', 1);    

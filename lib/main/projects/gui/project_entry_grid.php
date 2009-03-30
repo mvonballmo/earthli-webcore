@@ -53,44 +53,52 @@ class PROJECT_ENTRY_GRID extends CONTENT_OBJECT_GRID
    * @var string
    */
   public $box_style = 'object-in-list';
+
   /**
    * @var integer
    */
   public $spacing = 4;
+
   /**
    * @var boolean
    */
-  public $even_columns = FALSE;
+  public $even_columns = false;
+
   /**
    * @var boolean
    */
-  public $show_separator = FALSE;
+  public $show_separator = false;
+
   /**
    * @var boolean
    */
-  public $show_user = TRUE;
+  public $show_user = true;
+
   /**
    * @var boolean
    */
-  public $show_folder = FALSE;
+  public $show_folder = false;
+
   /**
    * @var boolean
    */
-  public $show_branch = TRUE;
+  public $show_branch = true;
+
   /**
    * @var boolean
    */
-  public $show_release = TRUE;
+  public $show_release = true;
+
   /**
    * @var boolean
    */
-  public $show_component = TRUE;
+  public $show_component = true;
   
   /**
    * @param PROJECT_ENTRY $obj
    * @access private
    */
-  function _draw_box ($obj)
+  protected function _draw_box ($obj)
   {
     $branch_info = $obj->main_branch_info ();
 ?>
@@ -167,7 +175,7 @@ class PROJECT_ENTRY_GRID extends CONTENT_OBJECT_GRID
    * @param PROJECT_ENTRY $obj
    * @param PROJECT_ENTRY_BRANCH_INFO $branch_info
    */
-  function _draw_context_in_project_for ($obj, $branch_info)
+  protected function _draw_context_in_project_for ($obj, $branch_info)
   {
     if ($this->show_folder || $this->show_branch || $this->show_release || $this->show_component)
     {
@@ -216,7 +224,7 @@ class PROJECT_ENTRY_GRID extends CONTENT_OBJECT_GRID
    * @param PROJECT_ENTRY $obj
    * @param PROJECT_ENTRY_BRANCH_INFO $branch_info
    */
-  function _draw_release_details ($obj, $branch_info)
+  protected function _draw_release_details ($obj, $branch_info)
   {
   }
   
@@ -225,7 +233,7 @@ class PROJECT_ENTRY_GRID extends CONTENT_OBJECT_GRID
    * @param PROJECT_ENTRY $obj
    * @param PROJECT_ENTRY_BRANCH_INFO $branch_info
    */
-  function _draw_user_details ($obj, $branch_info)
+  protected function _draw_user_details ($obj, $branch_info)
   {
   }
   
@@ -234,7 +242,7 @@ class PROJECT_ENTRY_GRID extends CONTENT_OBJECT_GRID
    * @param PROJECT_ENTRY $obj
    * @param PROJECT_ENTRY_BRANCH_INFO $branch_info
    */
-  function _draw_description ($obj)
+  protected function _draw_description ($obj)
   {
   }    
 }
@@ -253,7 +261,7 @@ class PROJECT_ENTRY_SUMMARY_GRID extends ENTRY_SUMMARY_GRID
    * @param PROJECT_ENTRY $obj
    * @access private
    */
-  function _echo_details ($obj)
+  protected function _echo_details ($obj)
   {
 ?>
     <tr>
@@ -279,7 +287,7 @@ class PROJECT_ENTRY_SUMMARY_GRID extends ENTRY_SUMMARY_GRID
    * @param OBJECT_IN_FOLDER $obj
    * @access private
    */
-  function _text_to_summarize ($obj)
+  protected function _text_to_summarize ($obj)
   {
     return $obj->description . ' ' . $obj->extra_description;
   }  

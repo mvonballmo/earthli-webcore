@@ -53,7 +53,7 @@ class SUBSCRIPTION_PANEL extends PANEL
    * @param PANEL_MANAGER $manager Owner of this panel.
    * @param SUBSCRIBER $subscriber Show subscriptions for this user.
    */
-  function SUBSCRIPTION_PANEL ($manager, $subscriber)
+  public function SUBSCRIPTION_PANEL ($manager, $subscriber)
   {
     FORM_PANEL::FORM_PANEL ($manager);
     $this->_subscriber = $subscriber;
@@ -63,7 +63,7 @@ class SUBSCRIPTION_PANEL extends PANEL
    * All the panel to perform processing.
    * Form-based panels will process their forms and possibly redirect.
    */
-  function check () 
+  public function check () 
   {
   }
 
@@ -86,7 +86,7 @@ class FORM_BASED_SUBSCRIPTION_PANEL extends SUBSCRIPTION_PANEL
   /**
    * Process the form for this panel.
    */
-  function check ()
+  public function check ()
   {
     $form = $this->form ();
     $form->process_existing ($this->_subscriber);
@@ -99,7 +99,7 @@ class FORM_BASED_SUBSCRIPTION_PANEL extends SUBSCRIPTION_PANEL
   /**
    * Renders this panel.
    */
-  function display ()
+  public function display ()
   {
     $form = $this->form ();
     $form->display ();
@@ -109,7 +109,7 @@ class FORM_BASED_SUBSCRIPTION_PANEL extends SUBSCRIPTION_PANEL
    * Creates/returns a form for this panel.
    * @access private
    */
-  function form ()
+  public function form ()
   {
     if (! isset ($this->_form))
     {
@@ -124,7 +124,7 @@ class FORM_BASED_SUBSCRIPTION_PANEL extends SUBSCRIPTION_PANEL
    * @access private
    * @abstract
    */
-  function _make_form () 
+  protected function _make_form () 
   { 
     $this->raise_deferred ('_make_form', 'SUBSCRIPTION_PANEL'); 
   }
@@ -149,6 +149,7 @@ class FOLDER_SUBSCRIPTION_PANEL extends FORM_BASED_SUBSCRIPTION_PANEL
    * @var string
    */
   public $id = 'folders';
+
   /**
    * @var string
    */
@@ -158,7 +159,7 @@ class FOLDER_SUBSCRIPTION_PANEL extends FORM_BASED_SUBSCRIPTION_PANEL
    * @param PANEL_MANAGER $manager Owner of this panel.
    * @param SUBSCRIBER $subscriber Show subscriptions for this user.
    */
-  function FOLDER_SUBSCRIPTION_PANEL ($manager, $subscriber)
+  public function FOLDER_SUBSCRIPTION_PANEL ($manager, $subscriber)
   {
     FORM_BASED_SUBSCRIPTION_PANEL::FORM_BASED_SUBSCRIPTION_PANEL ($manager, $subscriber);
     $type_info = $this->app->type_info_for ('FOLDER', 'webcore/obj/folder.php');
@@ -170,15 +171,15 @@ class FOLDER_SUBSCRIPTION_PANEL extends FORM_BASED_SUBSCRIPTION_PANEL
    * Return <code>True</code> to always display a link.
    * @return boolean
    */
-  function informational ()
+  public function informational ()
   {
-    return TRUE;
+    return true;
   }
 
   /**
    * @return integer
    */
-  function num_objects ()
+  public function num_objects ()
   {
     return sizeof ($this->_subscriber->subscribed_ids_for (Subscribe_folder));
   }
@@ -186,7 +187,7 @@ class FOLDER_SUBSCRIPTION_PANEL extends FORM_BASED_SUBSCRIPTION_PANEL
   /**
    * Renders this panel.
    */
-  function display ()
+  public function display ()
   {
 ?>
   <p>You will receive notifications for all activity within subscribed folders. Notifications are sent when a new item is created
@@ -199,7 +200,7 @@ class FOLDER_SUBSCRIPTION_PANEL extends FORM_BASED_SUBSCRIPTION_PANEL
    * @return FOLDER_SUBSCRIPTION_FORM
    * @access private
    */
-  function _make_form ()
+  protected function _make_form ()
   {
     $class_name = $this->app->final_class_name ('FOLDER_SUBSCRIPTION_FORM', 'webcore/forms/folder_subscription_form.php');
     $Result = new $class_name ($this->app);
@@ -221,6 +222,7 @@ class ENTRY_SUBSCRIPTION_PANEL extends FORM_BASED_SUBSCRIPTION_PANEL
    * @var string
    */
   public $id = 'entries';
+
   /**
    * @var string
    */
@@ -231,7 +233,7 @@ class ENTRY_SUBSCRIPTION_PANEL extends FORM_BASED_SUBSCRIPTION_PANEL
    * @param SUBSCRIBER $subscriber Show subscriptions for this user.
    * @param TYPE_INFO $type_info
    */
-  function ENTRY_SUBSCRIPTION_PANEL ($manager, $subscriber, $type_info)
+  public function ENTRY_SUBSCRIPTION_PANEL ($manager, $subscriber, $type_info)
   {
     FORM_BASED_SUBSCRIPTION_PANEL::FORM_BASED_SUBSCRIPTION_PANEL ($manager, $subscriber);
     $this->_type_info = $type_info;
@@ -243,15 +245,15 @@ class ENTRY_SUBSCRIPTION_PANEL extends FORM_BASED_SUBSCRIPTION_PANEL
    * Return <code>True</code> to always display a link.
    * @return boolean
    */
-  function informational ()
+  public function informational ()
   {
-    return TRUE;
+    return true;
   }
 
   /**
    * @return integer
    */
-  function num_objects ()
+  public function num_objects ()
   {
     return sizeof ($this->_subscriber->subscribed_ids_for (Subscribe_entry, $this->id));
   }
@@ -259,7 +261,7 @@ class ENTRY_SUBSCRIPTION_PANEL extends FORM_BASED_SUBSCRIPTION_PANEL
   /**
    * Renders this panel.
    */
-  function display ()
+  public function display ()
   {
 ?>
   <p>You will receive notifications for all activity on subscribed items. Notifications are sent when an item is changed, or when
@@ -273,7 +275,7 @@ class ENTRY_SUBSCRIPTION_PANEL extends FORM_BASED_SUBSCRIPTION_PANEL
    * @return ENTRY_SUBSCRIPTION_FORM
    * @access private
    */
-  function _make_form ()
+  protected function _make_form ()
   {
     $class_name = $this->app->final_class_name ('ENTRY_SUBSCRIPTION_FORM', 'webcore/forms/entry_subscription_form.php', $this->id);
     return new $class_name ($this->app, $this->_type_info);
@@ -299,6 +301,7 @@ class USER_SUBSCRIPTION_PANEL extends FORM_BASED_SUBSCRIPTION_PANEL
    * @var string
    */
   public $id = 'users';
+
   /**
    * @var string
    */
@@ -308,15 +311,15 @@ class USER_SUBSCRIPTION_PANEL extends FORM_BASED_SUBSCRIPTION_PANEL
    * Return <code>True</code> to always display a link.
    * @return boolean
    */
-  function informational ()
+  public function informational ()
   {
-    return TRUE;
+    return true;
   }
 
   /**
    * @return integer
    */
-  function num_objects ()
+  public function num_objects ()
   {
     return sizeof ($this->_subscriber->subscribed_ids_for (Subscribe_user));
   }
@@ -324,7 +327,7 @@ class USER_SUBSCRIPTION_PANEL extends FORM_BASED_SUBSCRIPTION_PANEL
   /**
    * Renders this panel.
    */
-  function display ()
+  public function display ()
   {
 ?>
   <p>You will receive notifications for items created by subscribed users. Notifications are 
@@ -338,7 +341,7 @@ class USER_SUBSCRIPTION_PANEL extends FORM_BASED_SUBSCRIPTION_PANEL
    * @return USER_SUBSCRIPTION_FORM
    * @access private
    */
-  function _make_form ()
+  protected function _make_form ()
   {
     $class_name = $this->app->final_class_name ('USER_SUBSCRIPTION_FORM', 'webcore/forms/user_subscription_form.php');
     return new $class_name ($this->app);
@@ -359,6 +362,7 @@ class USER_SUBSCRIPTION_OPTIONS_PANEL extends FORM_BASED_SUBSCRIPTION_PANEL
    * @var string
    */
   public $id = 'prefs';
+
   /**
    * @var string
    */
@@ -368,16 +372,16 @@ class USER_SUBSCRIPTION_OPTIONS_PANEL extends FORM_BASED_SUBSCRIPTION_PANEL
    * Return <code>True</code> to always display a link.
    * @return boolean
    */
-  function informational ()
+  public function informational ()
   {
-    return TRUE;
+    return true;
   }
 
   /**
    * @return USER_SUBSCRIPTION_OPTIONS_FORM 
    * @access private
    */
-  function _make_form ()
+  protected function _make_form ()
   {
     $class_name = $this->app->final_class_name ('USER_SUBSCRIPTION_OPTIONS_FORM', 'webcore/forms/user_subscription_options_form.php');
     return new $class_name ($this->app);
@@ -397,6 +401,7 @@ class SUBSCRIPTION_SUMMARY_PANEL extends SUBSCRIPTION_PANEL
    * @var string
    */
   public $id = 'summary';
+
   /**
    * @var string
    */
@@ -406,12 +411,12 @@ class SUBSCRIPTION_SUMMARY_PANEL extends SUBSCRIPTION_PANEL
    * Return <code>True</code> to always display a link.
    * @return boolean
    */
-  function informational ()
+  public function informational ()
   {
-    return TRUE;
+    return true;
   }
 
-  function display ()
+  public function display ()
   {
 ?>
   <p>These are settings for <?php echo $this->_subscriber->title_as_html (); ?>.</p>
@@ -578,7 +583,7 @@ class SUBSCRIPTION_SUMMARY_PANEL extends SUBSCRIPTION_PANEL
    * @param string $button
    * @access private
    */
-  function _echo_button_with_description ($desc, $button)
+  protected function _echo_button_with_description ($desc, $button)
   {
   ?>
   <div>
@@ -599,7 +604,7 @@ class SUBSCRIPTION_SUMMARY_PANEL extends SUBSCRIPTION_PANEL
    * Display a summary of this panel?
    * @var PANEL $panel
    */
-  function _is_summarizable ($panel)
+  protected function _is_summarizable ($panel)
   {
     return ($panel->id != 'prefs') && ($panel->id != 'summary') && ($panel->id != Empty_panel_id);
   }
@@ -623,17 +628,17 @@ class SUBSCRIPTION_PANEL_MANAGER extends PANEL_MANAGER
   /**
    * @param SUBSCRIBER $subscriber Show settings for this subscriber.
    */
-  function SUBSCRIPTION_PANEL_MANAGER ($subscriber)
+  public function SUBSCRIPTION_PANEL_MANAGER ($subscriber)
   {
     $this->_subscriber = $subscriber;
-    PANEL_MANAGER::PANEL_MANAGER ($subscriber->app, FALSE);
+    PANEL_MANAGER::PANEL_MANAGER ($subscriber->app, false);
   }
 
   /**
    * Create the set of panels to use.
    * @access private
    */
-  function _add_panels ()
+  protected function _add_panels ()
   {
     $class_name = $this->app->final_class_name ('SUBSCRIPTION_SUMMARY_PANEL');
     $this->add_panel (new $class_name ($this, $this->_subscriber));
@@ -646,7 +651,9 @@ class SUBSCRIPTION_PANEL_MANAGER extends PANEL_MANAGER
     $class_name = $this->app->final_class_name ('ENTRY_SUBSCRIPTION_PANEL');
     $type_infos = $this->app->entry_type_infos ();
     foreach ($type_infos as $type_info)
+    {
       $this->add_panel (new $class_name ($this, $this->_subscriber, $type_info));
+    }
 
     $class_name = $this->app->final_class_name ('USER_SUBSCRIPTION_PANEL');
     $this->add_panel (new $class_name ($this, $this->_subscriber));

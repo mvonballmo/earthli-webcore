@@ -49,12 +49,12 @@ require_once ('webcore/obj/webcore_object.php');
  * @since 2.7.1
  * @abstract
  */
-class TEST_SUITE extends WEBCORE_OBJECT
+abstract class TEST_SUITE extends WEBCORE_OBJECT
 {
   /**
    * @param CONTEXT $context
    */
-  function TEST_SUITE ($context)
+  public function TEST_SUITE ($context)
   {
     WEBCORE_OBJECT::WEBCORE_OBJECT ($context);
     $this->_load ();
@@ -64,7 +64,7 @@ class TEST_SUITE extends WEBCORE_OBJECT
    * @return TEST_TASK
    * @param string $name
    */
-  function test_task_at_name ($name)
+  public function test_task_at_name ($name)
   {
     if (! empty ($this->_tests [$name]))
     {
@@ -75,6 +75,8 @@ class TEST_SUITE extends WEBCORE_OBJECT
         return new $name ($this->page->make_application (Test_harness_application_id));
       }
     }
+    
+    return null;
   }
   
   /**
@@ -83,13 +85,12 @@ class TEST_SUITE extends WEBCORE_OBJECT
    * get an instance of a test.
    * @return array[string]
    */
-  function test_names ()
+  public function test_names ()
   {
     if (! empty ($this->_tests))
     {
       return array_keys ($this->_tests);
     }
-
 
     return array ();
   }
@@ -99,10 +100,7 @@ class TEST_SUITE extends WEBCORE_OBJECT
    * @access private
    * @abstract
    */
-  function _load ()
-  {
-    $this->raise_deferred ('_load', 'TEST_SUITE');
-  }
+  protected abstract function _load ();
 
   /**
    * Map of test classes to their file names.
@@ -126,12 +124,12 @@ class INI_TEST_SUITE extends TEST_SUITE
    * @access private
    * @abstract
    */
-  function _load ()
+  protected function _load ()
   {
     $file_name = $this->context->config_file_name ('tests.ini');
     if ($file_name)
     {
-      $config = parse_ini_file ($file_name, TRUE);
+      $config = parse_ini_file ($file_name, true);
 
       $this->_tests = read_array_index ($config, 'tests');
     }

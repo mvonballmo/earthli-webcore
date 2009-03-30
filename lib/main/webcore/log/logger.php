@@ -123,7 +123,7 @@ define ('Msg_channel_logger', 'Logger');
 /**
  * @see log_message()
  */
-define ('Msg_has_html', TRUE);
+define ('Msg_has_html', true);
 
 $Logger = 0;
 
@@ -136,7 +136,7 @@ $Logger = 0;
  * @param string $type The message type.
  * @param boolean $has_html Does the message contain HTML tags that must be preserved?
  */
-function log_message ($msg, $type = Msg_type_debug_info, $channel = Msg_channel_default, $has_html = FALSE)
+function log_message ($msg, $type = Msg_type_debug_info, $channel = Msg_channel_default, $has_html = false)
 {
   global $Logger;
 
@@ -155,7 +155,7 @@ function log_message ($msg, $type = Msg_type_debug_info, $channel = Msg_channel_
  * @param string $msg The message itself.
  * @param boolean $has_html Does the message contain HTML tags that must be preserved?
  */
-function log_more ($msg, $has_html = FALSE)
+function log_more ($msg, $has_html = false)
 {
   global $Logger;
 
@@ -211,7 +211,7 @@ class LOGGER_FILTER_SETTINGS
    * @param string $type
    * @return boolean
    */
-  function allowed ($channel, $type)
+  public function allowed ($channel, $type)
   {
     $channel = strtolower ($channel);
 
@@ -233,7 +233,7 @@ class LOGGER_FILTER_SETTINGS
    * @see LOGGER_FILTER_SETTINGS::set_channel_enabled ()
    * @param string $type Type of messages to enable/disable.
    */
-  function set_enabled ($type)
+  public function set_enabled ($type)
   {
     $this->_default_filter = $type;
   }
@@ -243,7 +243,7 @@ class LOGGER_FILTER_SETTINGS
    * @param string $channel Channel in which to adjust the filter.
    * @param string $type Type of messages to enable/disable.
    */
-  function set_channel_enabled ($channel, $type)
+  public function set_channel_enabled ($channel, $type)
   {
     $this->_channels [strtolower ($channel)] = $type;
   }
@@ -251,7 +251,7 @@ class LOGGER_FILTER_SETTINGS
   /**
    * Turn all messages back on, clearing channels.
    */
-  function reset ()
+  public function reset ()
   {
     $this->_channels = array ();
     $this->_default_filter = Msg_type_all;
@@ -262,6 +262,7 @@ class LOGGER_FILTER_SETTINGS
    * @access private
    */
   protected $_default_filter = Msg_type_all;
+
   /**
    * @var array
    * @access private
@@ -279,7 +280,7 @@ class LOGGER_FILTER_SETTINGS
  * @since 2.2.1
  * @abstract
  */
-class LOGGER extends LOGGER_CONTAINER
+abstract class LOGGER extends LOGGER_CONTAINER
 {
   /**
    * Sub-logger, can be empty.
@@ -288,7 +289,7 @@ class LOGGER extends LOGGER_CONTAINER
    */
   public $logger;
 
-  function LOGGER ()
+  public function LOGGER ()
   {
     $this->_filter_settings = new LOGGER_FILTER_SETTINGS ();
     $this->set_channel_enabled (Msg_channel_logger, Msg_type_all);
@@ -300,7 +301,7 @@ class LOGGER extends LOGGER_CONTAINER
    * @see LOGGER::set_channel_enabled ()
    * @param string $type Type of messages to enable/disable.
    */
-  function set_enabled ($type)
+  public function set_enabled ($type)
   {
     $this->assert (is_int ($type), "Filter must be an integer (if [$type] is a channel, use 'set_channel_enabled' instead).", 'set_enabled', 'LOGGER');
 
@@ -312,7 +313,7 @@ class LOGGER extends LOGGER_CONTAINER
    * @param string $channel Channel in which to adjust the filter.
    * @param string $type Type of messages to enable/disable.
    */
-  function set_channel_enabled ($channel, $type)
+  public function set_channel_enabled ($channel, $type)
   {
     $this->_filter_settings->set_channel_enabled ($channel, $type);
   }
@@ -320,7 +321,7 @@ class LOGGER extends LOGGER_CONTAINER
   /**
    * Turn all messages back on, clearing channels.
    */
-  function reset ()
+  public function reset ()
   {
     $this->_filter_settings->reset ();
     $this->set_channel_enabled (Msg_channel_logger, Msg_type_all);
@@ -330,7 +331,7 @@ class LOGGER extends LOGGER_CONTAINER
    * Copy this logger's filter settings to the parameter.
    * @param LOGGER $logger
    */
-  function copy_settings_to ($logger)
+  public function copy_settings_to ($logger)
   {
     $logger->_filter_settings = $this->_filter_settings;
   }
@@ -342,7 +343,7 @@ class LOGGER extends LOGGER_CONTAINER
    * @param boolean $has_html Does the message contain HTML tags that must be
    * preserved?
    */
-  function record ($msg, $type = Msg_type_debug_info, $channel = Msg_channel_default, $has_html = FALSE)
+  public function record ($msg, $type = Msg_type_debug_info, $channel = Msg_channel_default, $has_html = false)
   {
     if ($this->_passes_filter ($channel, $type))
     {
@@ -364,7 +365,7 @@ class LOGGER extends LOGGER_CONTAINER
    * @param boolean $has_html Does the message contain HTML tags that must be
    * preserved?
    */
-  function record_more ($msg, $has_html = FALSE)
+  public function record_more ($msg, $has_html = false)
   {
     $this->_record_more ($msg, $has_html);
     if (isset ($this->logger))
@@ -377,7 +378,7 @@ class LOGGER extends LOGGER_CONTAINER
    * Start a new logging block.
    * @param string $title The name of the block.
    */
-  function open_block ($title)
+  public function open_block ($title)
   {
     $this->_block_level++;
     $this->_open_block ($title);
@@ -390,7 +391,7 @@ class LOGGER extends LOGGER_CONTAINER
   /**
    * Close the last open block.
    */
-  function close_block ()
+  public function close_block ()
   {
     $this->_block_level--;
     $this->_close_block ();
@@ -404,7 +405,7 @@ class LOGGER extends LOGGER_CONTAINER
    * Closes the logger output, performing any cleanup.
    * All nested loggers are closed automatically.
    */
-  function close ()
+  public function close ()
   {
     $this->_close ();
     if (isset ($this->logger))
@@ -419,7 +420,7 @@ class LOGGER extends LOGGER_CONTAINER
    * @return string
    * @access private
    */
-  function type_to_string ($type)
+  public function type_to_string ($type)
   {
     switch ($type)
     {
@@ -443,8 +444,7 @@ class LOGGER extends LOGGER_CONTAINER
    * File logs can close their files; Javascript loggers can output to the page.
    * @access private
    */
-  function _close ()
-  {}
+  protected function _close () {}
 
   /**
    * Is the given filter accepted in the given channel?
@@ -453,7 +453,7 @@ class LOGGER extends LOGGER_CONTAINER
    * @return bool
    * @access private
    */
-  function _passes_filter ($channel, $type)
+  protected function _passes_filter ($channel, $type)
   {
     return $this->_filter_settings->allowed ($channel, $type);
   }
@@ -466,10 +466,7 @@ class LOGGER extends LOGGER_CONTAINER
    * @access private
    * @abstract
    */
-  function _record ($msg, $type, $channel, $has_html)
-  {
-    $this->raise_deferred ('_record', 'LOGGER');
-  }
+  protected abstract function _record ($msg, $type, $channel, $has_html);
 
   /**
    * @param string $msg
@@ -478,30 +475,28 @@ class LOGGER extends LOGGER_CONTAINER
    * @access private
    * @abstract
    */
-  function _record_more ($msg, $has_html)
-  {
-    $this->raise_deferred ('_record_more', 'LOGGER');
-  }
+  protected abstract function _record_more ($msg, $has_html);
 
   /**
    * @param string $title
    * @access private
    * @see LOGGER::open_block()
    */
-  function _open_block ($title) {}
+  protected function _open_block ($title) {}
 
   /**
    * @param string $title
    * @access private
    * @see LOGGER::close_block()
    */
-  function _close_block () {}
+  protected function _close_block () {}
 
   /**
    * @var LOGGER_FILTER_SETTINGS
    * @access private
    */
   protected $_filter_settings;
+
   /**
    * Set by {@link record()}.
    * Used by {@link record_more()} to know to which channel the last message was logged.
@@ -509,6 +504,7 @@ class LOGGER extends LOGGER_CONTAINER
    * @access private
    */
   protected $_last_channel;
+
   /**
    * Set by {@link record()}.
    * Used by {@link record_more()} to know which type the last message was.
@@ -516,6 +512,7 @@ class LOGGER extends LOGGER_CONTAINER
    * @access private
    */
   protected $_last_type;
+
   /**
    * How many open blocks are there in this logger?
    * @var integer
@@ -539,7 +536,7 @@ class NULL_LOGGER extends LOGGER
    * @see LOGGER::record()
    * @access private
    */
-  function _record ($msg, $type, $channel, $has_html)
+  protected function _record ($msg, $type, $channel, $has_html)
   {
   }
 
@@ -549,7 +546,7 @@ class NULL_LOGGER extends LOGGER
    * @see LOGGER::record_more()
    * @access private
    */
-  function _record_more ($msg, $has_html)
+  protected function _record_more ($msg, $has_html)
   {
   }
 }

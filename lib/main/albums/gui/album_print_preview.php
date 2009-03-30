@@ -50,9 +50,9 @@ class PICTURE_PRINT_RENDERER extends ENTRY_PRINT_RENDERER
 {
   /**
    * @param PICTURE $entry
-    * @private
-    */
-  function _draw_title ($entry)
+   * @private
+   */
+  protected function _draw_title ($entry)
   {
     // do nothing, title is drawn by renderer
   }
@@ -73,18 +73,19 @@ class ALBUM_PRINT_RENDERER_OPTIONS extends PRINT_RENDERER_OPTIONS
    * Pictures are displayed as thumbnails under the journal entry.
    * @var boolean
    */
-  public $show_pictures = TRUE;
+  public $show_pictures = true;
+
   /**
    * Resize pictures using album options?
    * If this is true, pictures are resized to the same size as they are on the picture's home page.
    * @var boolean
    */
-  public $resize_pictures = TRUE;
+  public $resize_pictures = true;
 
   /**
    * Load values from the HTTP request.
    */
-  function load_from_request ()
+  public function load_from_request ()
   {
     parent::load_from_request ();
     $this->show_pictures = read_var ('show_pictures');
@@ -105,7 +106,7 @@ class ALBUM_PRINT_PREVIEW extends PRINT_PREVIEW
    * @return ALBUM_PRINT_RENDERER_OPTIONS
    * @access private
    */
-  function _make_print_options ()
+  protected function _make_print_options ()
   {
     return new ALBUM_PRINT_RENDERER_OPTIONS ($this->app);
   }
@@ -116,13 +117,12 @@ class ALBUM_PRINT_PREVIEW extends PRINT_PREVIEW
    * @return ENTRY_PRINT_RENDERER
    * @access private
    */
-  function _make_renderer ($class_name)
+  protected function _make_renderer ($class_name)
   {
     if ($class_name == 'PICTURE')
     {
       return new PICTURE_PRINT_RENDERER ($this);
     }
-
 
     return parent::_make_renderer ($class_name);
   }

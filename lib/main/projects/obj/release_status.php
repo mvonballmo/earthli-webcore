@@ -55,6 +55,7 @@ class RELEASE_STATUS
    * @var RELEASE_DATE_STATUS
    */
   public $test;
+
   /**
    * Information about the shipping status of a release.
    * @var RELEASE_DATE_STATUS
@@ -65,7 +66,7 @@ class RELEASE_STATUS
    * @param RELEASE $release
    * @param boolean $text_only Omit all tags if True.
    */
-  function RELEASE_STATUS ($release, $text_only)
+  public function RELEASE_STATUS ($release, $text_only)
   {
     $this->test = new RELEASE_DATE_STATUS ($release, $release->time_tested, $release->time_testing_scheduled, ! $release->planned ());
     $this->ship = new RELEASE_DATE_STATUS ($release, $release->time_shipped, $release->time_scheduled);
@@ -76,7 +77,7 @@ class RELEASE_STATUS
    * Use this function rather than checking the states of {@link $test} and {@link $ship}.
    * @return boolean
    */
-  function is_overdue ()
+  public function is_overdue ()
   {
     return $this->test->overdue || $this->ship->overdue;
   }
@@ -85,11 +86,11 @@ class RELEASE_STATUS
    * Return this status as HTML
    * @return string
    */
-  function as_html ()
+  public function as_html ()
   {
     if (! isset ($this->_html_text))
     {
-      $this->_html_text = $this->_as_text (FALSE);
+      $this->_html_text = $this->_as_text (false);
     }
     return $this->_html_text;
   }
@@ -98,11 +99,11 @@ class RELEASE_STATUS
    * Return this status as plain text.
    * @return string
    */
-  function as_plain_text ()
+  public function as_plain_text ()
   {
     if (! isset ($this->_plain_text))
     {
-      $this->_plain_text = $this->_as_text (TRUE);
+      $this->_plain_text = $this->_as_text (true);
     }
     return $this->_plain_text;
   }
@@ -113,7 +114,7 @@ class RELEASE_STATUS
    * @return string
    * @access private
    */
-  function _as_text ($text_only)
+  protected function _as_text ($text_only)
   {
     if ($this->ship->occurred)
     {
@@ -175,6 +176,7 @@ class RELEASE_STATUS
    * @access private
    */
   protected $_html_text;
+
   /**
    * @var string
    * @access private
@@ -197,6 +199,7 @@ class RELEASE_DATE_STATUS extends WEBCORE_OBJECT
    * @var DATE_TIME
    */
   public $date;
+
   /**
    * The relevant time difference.
    * If {@link $occurred} is True, then this is the difference between scheduled
@@ -205,26 +208,31 @@ class RELEASE_DATE_STATUS extends WEBCORE_OBJECT
    * @var TIME_INTERVAL
    */
   public $difference;
+
   /**
    * Either 'early' or 'late'.
    * @var string
    */
   public $diff_label;
+
   /**
    * True if scheduled time has passed and {@link $occurred} is False.
    * @var boolean
    */
   public $overdue;
+
   /**
    * True if the event occurred.
    * @var boolean
    */
   public $occurred;
+
   /**
    * True if the event is (or was) scheduled.
    * @var boolean
    */
   public $scheduled;
+
   /**
    * Graphic indicator of the status condition.
    * Indicates whether an event has occurred, was skipped or is overdue.
@@ -232,6 +240,7 @@ class RELEASE_DATE_STATUS extends WEBCORE_OBJECT
    * @var string
    */
   public $icon;
+
   /**
    * Text indicator of the status condition.
    * Indicates whether an event has occurred, was skipped or is overdue.
@@ -245,6 +254,7 @@ class RELEASE_DATE_STATUS extends WEBCORE_OBJECT
    * @var DATE_TIME
    */
   public $time_scheduled;
+
   /**
    * Time the event occurred.
    * @var DATE_TIME
@@ -257,7 +267,7 @@ class RELEASE_DATE_STATUS extends WEBCORE_OBJECT
    * @param DATE_TIME $scheduled Time the event is scheduled. Need not be valid.
    * @param boolean $skip_condition Marks an event as skipped if this is true, and the event was scheduled, but has not occurred.
    */
-  function RELEASE_DATE_STATUS ($rel, $occurred, $scheduled, $skip_condition = FALSE)
+  public function RELEASE_DATE_STATUS ($rel, $occurred, $scheduled, $skip_condition = false)
   {
     WEBCORE_OBJECT::WEBCORE_OBJECT ($rel->context);
 
@@ -273,11 +283,11 @@ class RELEASE_DATE_STATUS extends WEBCORE_OBJECT
    * Return this status as HTML
    * @return string
    */
-  function as_html ()
+  public function as_html ()
   {
     if (! isset ($this->_html_text))
     {
-       $this->_html_text = $this->_as_text (FALSE);
+       $this->_html_text = $this->_as_text (false);
       if ($this->icon)
       {
         $this->_html_text = $this->icon . ' ' . $this->_html_text;
@@ -291,11 +301,11 @@ class RELEASE_DATE_STATUS extends WEBCORE_OBJECT
    * Return this status as plain text.
    * @return string
    */
-  function as_plain_text ()
+  public function as_plain_text ()
   {
     if (! isset ($this->_plain_text))
     {
-       $this->_plain_text = $this->_as_text (TRUE);
+       $this->_plain_text = $this->_as_text (true);
       if ($this->text)
       {
         $this->_plain_text = $this->text . ' ' . $this->_plain_text;
@@ -309,12 +319,14 @@ class RELEASE_DATE_STATUS extends WEBCORE_OBJECT
    * @param boolean $text_only Do not use tags when formatting.
    * @return string
    */
-  function date_as_text ($text_only)
+  public function date_as_text ($text_only)
   {
     if (isset ($this->date))
     {
       return $this->_date ($this->date, $text_only);
     }
+    
+    return '';
   }
 
   /**
@@ -322,13 +334,12 @@ class RELEASE_DATE_STATUS extends WEBCORE_OBJECT
    * @param boolean $text_only Do not use tags when formatting.
    * @return string
    */
-  function diff_as_text ($text_only)
+  public function diff_as_text ($text_only)
   {
     if (isset ($this->difference) && ! $this->difference->is_empty ())
     {
       return $this->difference->format (1);
     }
-
 
     return '';
   }
@@ -337,11 +348,11 @@ class RELEASE_DATE_STATUS extends WEBCORE_OBJECT
    * Recalculates the event's status.
    * Call this if you reassign the dates.
    */
-  function refresh ()
+  public function refresh ()
   {
     $this->scheduled = $this->time_scheduled->is_valid ();
     $this->occurred = $this->time_occurred->is_valid ();
-    $this->overdue = FALSE;
+    $this->overdue = false;
     $this->icon = '';
     $this->text = '';
     $this->diff_label = '';
@@ -399,7 +410,7 @@ class RELEASE_DATE_STATUS extends WEBCORE_OBJECT
           }
           else
           {
-            $this->overdue = TRUE;
+            $this->overdue = true;
             $this->icon = $this->context->resolve_icon_as_html ('{icons}indicators/error', 'Overdue', '16px');
             $this->text = 'Overdue';
             $this->difference = $now->diff ($this->time_scheduled);
@@ -416,7 +427,7 @@ class RELEASE_DATE_STATUS extends WEBCORE_OBJECT
    * @return string
    * @access private
    */
-  function _as_text ($text_only)
+  protected function _as_text ($text_only)
   {
     $date_text = $this->date_as_text ($text_only);
     $diff_text = $this->diff_as_text ($text_only);
@@ -462,7 +473,7 @@ class RELEASE_DATE_STATUS extends WEBCORE_OBJECT
    * @return string
    * @access private
    */
-  function _date ($date, $text_only)
+  protected function _date ($date, $text_only)
   {
     $Result = '';
 
@@ -489,16 +500,19 @@ class RELEASE_DATE_STATUS extends WEBCORE_OBJECT
    * @access private
    */
   protected $_release;
+
   /**
    * @var boolean
    * @access private
    */
   protected $_skip_condition;
+
   /**
    * @var string
    * @access private
    */
   protected $_html_text;
+
   /**
    * @var string
    * @access private

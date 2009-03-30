@@ -50,20 +50,21 @@ require_once ('webcore/obj/webcore_object.php');
  * @since 1.7.0
  * @abstract
  */
-class RELEASE_UPDATER extends WEBCORE_OBJECT
+abstract class RELEASE_UPDATER extends WEBCORE_OBJECT
 {
   /**
    * The release to be committed.
    *  @var RELEASE
    */
   public $release;
+
   /**
    * Release belongs to this branch.
    *  @var BRANCH
    */
   public $branch;
 
-  function RELEASE_UPDATER ($release)
+  public function RELEASE_UPDATER ($release)
   {
     WEBCORE_OBJECT::WEBCORE_OBJECT ($release->app);
     $this->release = $release;
@@ -78,10 +79,7 @@ class RELEASE_UPDATER extends WEBCORE_OBJECT
    * @access private
    * @abstract
    */
-  function apply ($sub_history_item_publication_state = History_item_silent)
-  {
-    $this->raise_deferred ('apply', 'RELEASE_UPDATER');
-  }
+  public abstract function apply ($sub_history_item_publication_state = History_item_silent);
 
   /**
    * Return the most likely candidate.
@@ -90,7 +88,7 @@ class RELEASE_UPDATER extends WEBCORE_OBJECT
    * release in this branch.
    * @return RELEASE
    */
-  function replacement_release ()
+  public function replacement_release ()
   {
     if (! isset ($this->_replacement_release))
     {
@@ -140,7 +138,7 @@ class RELEASE_UPDATER extends WEBCORE_OBJECT
    * @param string $applier_func
    * @access private
    */
-  function _apply_to_entries ($entry_query, $sub_history_item_publication_state, $applier_func)
+  protected function _apply_to_entries ($entry_query, $sub_history_item_publication_state, $applier_func)
   {
     $entries = $entry_query->objects ();
 
@@ -149,7 +147,7 @@ class RELEASE_UPDATER extends WEBCORE_OBJECT
     foreach ($entries as $entry)
     {
       $history_item = $entry->new_history_item ();
-      $history_item->compare_branches = TRUE;
+      $history_item->compare_branches = true;
       $history_item->publication_state = $sub_history_item_publication_state;
       unset ($this_branch_info);
 
@@ -185,14 +183,13 @@ class RELEASE_UPDATER extends WEBCORE_OBJECT
    * @return integer
    * @access private
    */
-  function _replacement_release_id ()
+  protected function _replacement_release_id ()
   {
     $rel = $this->replacement_release ();
     if (isset ($rel))
     {
       return $rel->id;
     }
-
 
     return 0;
   }
@@ -212,7 +209,7 @@ class RELEASE_PURGER extends RELEASE_UPDATER
    * Re-assign any entries associated with this {@link RELEASE}.
    * @param string $sub_history_item_publication_state Can be {@link History_item_silent} or {@link History_item_needs_send}.
    */
-  function apply ($sub_history_item_publication_state = History_item_silent)
+  public function apply ($sub_history_item_publication_state = History_item_silent)
   {
     $entry_query = $this->release->entry_query ();
     $this->_apply_to_entries ($entry_query, $sub_history_item_publication_state, '_set_replacement_release');
@@ -223,7 +220,7 @@ class RELEASE_PURGER extends RELEASE_UPDATER
    * @param PROJECT_ENTRY_BRANCH_INFO $branch_info
    * @access private
    */
-  function _set_replacement_release ($branch_info)
+  protected function _set_replacement_release ($branch_info)
   {
     $branch_info->release_id = $this->_replacement_release_id ();
   }
@@ -247,7 +244,7 @@ class RELEASE_SHIPPER extends RELEASE_UPDATER
    */
   public $status_map;
 
-  function RELEASE_SHIPPER ($release)
+  public function RELEASE_SHIPPER ($release)
   {
     RELEASE_UPDATER::RELEASE_UPDATER ($release);
     $this->status_map = $this->app->display_options->job_status_map ();
@@ -258,7 +255,7 @@ class RELEASE_SHIPPER extends RELEASE_UPDATER
    * @param string $sub_history_item_publication_state Can be {@link History_item_silent} or {@link History_item_needs_send}.
    * Update all affected entries.
    */
-  function apply ($sub_history_item_publication_state = History_item_silent)
+  public function apply ($sub_history_item_publication_state = History_item_silent)
   {
     $this->_apply_to_entries ($this->change_query (), $sub_history_item_publication_state, '_set_release');
     $this->_apply_to_entries ($this->closed_job_query (), $sub_history_item_publication_state, '_set_release');
@@ -271,7 +268,7 @@ class RELEASE_SHIPPER extends RELEASE_UPDATER
    * These are {@link CHANGE}s made in this release's {@link BRANCH} that are not assigned to other releases.
    * @return QUERY
    */
-  function change_query ()
+  public function change_query ()
   {
     $Result = $this->branch->change_query ();
     $Result->restrict ('etob.branch_release_id <> ' . $this->release->id);
@@ -286,7 +283,7 @@ class RELEASE_SHIPPER extends RELEASE_UPDATER
    * be assigned to the next pending planned release or left unnassigned.
    * @return QUERY
    */
-  function open_job_query ()
+  public function open_job_query ()
   {
     $Result = $this->release->job_query ();
     $Result->restrict ("jtob.branch_closer_id = 0");
@@ -298,7 +295,7 @@ class RELEASE_SHIPPER extends RELEASE_UPDATER
    * These are {@link JOB}s made in this release's {@link BRANCH} that are not assigned to other releases.
    * @return QUERY
    */
-  function closed_job_query ()
+  public function closed_job_query ()
   {
     $Result = $this->branch->job_query ();
     $Result->restrict ('etob.branch_release_id <> ' . $this->release->id);
@@ -314,7 +311,7 @@ class RELEASE_SHIPPER extends RELEASE_UPDATER
    * application to mark jobs that were tentatively closed as finally closed.
    * @return QUERY
    */
-  function remapped_job_query ()
+  public function remapped_job_query ()
   {
     $Result = $this->branch->job_query ();
     $Result->restrict ("jtob.branch_closer_id > 0");
@@ -327,7 +324,7 @@ class RELEASE_SHIPPER extends RELEASE_UPDATER
    * @param PROJECT_ENTRY_BRANCH_INFO $branch_info
    * @access private
    */
-  function _set_release ($branch_info)
+  protected function _set_release ($branch_info)
   {
     $branch_info->release_id = $this->release->id;
   }
@@ -337,7 +334,7 @@ class RELEASE_SHIPPER extends RELEASE_UPDATER
    * @param PROJECT_ENTRY_BRANCH_INFO $branch_info
    * @access private
    */
-  function _clear_release ($branch_info)
+  protected function _clear_release ($branch_info)
   {
     $branch_info->release_id = 0;
   }
@@ -347,7 +344,7 @@ class RELEASE_SHIPPER extends RELEASE_UPDATER
    * @param PROJECT_ENTRY_BRANCH_INFO $branch_info
    * @access private
    */
-  function _map_status ($branch_info)
+  protected function _map_status ($branch_info)
   {
     $branch_info->status = $this->status_map->to;
   }
@@ -370,12 +367,12 @@ class UPDATE_RELEASE_PREVIEW_SETTINGS extends FORM_PREVIEW_SETTINGS
    * @param QUERY $query
    * @access private
    */
-  function _draw_section ($title, $text, $query)
+  protected function _draw_section ($title, $text, $query)
   {
     $objs = $query->objects ();
     if (sizeof ($objs))
     {
-      $this->_objects_displayed = TRUE;
+      $this->_objects_displayed = true;
   ?>
   <h3><?php echo sizeof ($objs); ?> <?php echo $title; ?></h3>
   <p class="notes">
@@ -391,12 +388,14 @@ class UPDATE_RELEASE_PREVIEW_SETTINGS extends FORM_PREVIEW_SETTINGS
    * @see PROJECT_ENTRY
    * @access private
    */
-  function _draw_entries ($entries, $show_status = FALSE)
+  protected function _draw_entries ($entries, $show_status = false)
   {
     $this->app->display_options->overridden_max_title_size = 100;
     echo '<div style="margin-left: 2em">';
     foreach ($entries as $entry)
+    {
       $this->_draw_entry ($entry, $show_status);
+    }
     echo '</div>';
   }
 
@@ -404,7 +403,7 @@ class UPDATE_RELEASE_PREVIEW_SETTINGS extends FORM_PREVIEW_SETTINGS
    * @param PROJECT_ENTRY $entry
    * @access private
    */
-  function _draw_entry ($entry, $show_status = FALSE)
+  protected function _draw_entry ($entry, $show_status = false)
   {
     $icon = $entry->kind_icon ('16px');
     if ($show_status)
@@ -419,7 +418,7 @@ class UPDATE_RELEASE_PREVIEW_SETTINGS extends FORM_PREVIEW_SETTINGS
    * @var boolean
    * @access private
    */
-  protected $_objects_displayed = FALSE;
+  protected $_objects_displayed = false;
 }
 
 ?>

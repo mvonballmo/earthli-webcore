@@ -53,7 +53,7 @@ class JOB_COMMANDS extends ENTRY_COMMANDS
   /**
    * @param JOB $entry Configure commands for this object.
    */
-  function JOB_COMMANDS ($entry)
+  public function JOB_COMMANDS ($entry)
   {
     ENTRY_COMMANDS::ENTRY_COMMANDS($entry);
 
@@ -78,7 +78,7 @@ class JOB_COMMANDS extends ENTRY_COMMANDS
    * @param JOB $entry
    * @access private
    */
-  function _add_editors ($entry)
+  protected function _add_editors ($entry)
   {
     parent::_add_editors ($entry);
 
@@ -134,7 +134,7 @@ class JOB_COMMANDS extends ENTRY_COMMANDS
    * @param USER $creator Folder belongs to this user (also available as $folder->creator ()).
    * @access private
    */
-  function _add_creators ($entry)
+  protected function _add_creators ($entry)
   {
     parent::_add_creators ($entry);
 

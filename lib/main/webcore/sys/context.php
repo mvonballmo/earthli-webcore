@@ -57,10 +57,12 @@ class CONTEXT extends RESOLVER
    * @var ENVIRONMENT
    */
   public $env;
+
   /**
    * @var COOKIE
    */
   public $cookie;
+
   /**
    * @var DATABASE
    */
@@ -73,6 +75,7 @@ class CONTEXT extends RESOLVER
    * @var CLIENT_STORAGE
    */
   public $storage;
+
   /**
    * Reference to the {@link ENVIRONMENT::$date_time_toolkit}.
    * Provided for convenience.
@@ -82,34 +85,40 @@ class CONTEXT extends RESOLVER
 
   /**
    * Basic mailing options (used when no subscriber is given)
-    * @var CONTEXT_MAIL_OPTIONS
-    */
+   * @var CONTEXT_MAIL_OPTIONS
+   */
   public $mail_options;
+
   /**
    * Settings for the shared database.
-    * @var CONTEXT_DATABASE_OPTIONS
-    */
+   * @var CONTEXT_DATABASE_OPTIONS
+   */
   public $database_options;
+
   /**
    * Conversion settings for forms and text content.
-    * @var TEXT_OPTIONS
-    */
+   * @var TEXT_OPTIONS
+   */
   public $text_options;
+
   /**
    * Display settings for common UI elements.
-    * @var CONTEXT_DISPLAY_OPTIONS
-    */
+   * @var CONTEXT_DISPLAY_OPTIONS
+   */
   public $display_options;
+
   /**
    * Controls how uploaded files are handled.
    * @var CONTEXT_UPLOAD_OPTIONS
    */
   public $upload_options;
+
   /**
    * Aliases uses when storing data to cookie or session.
    * @var CONTEXT_STORAGE_OPTIONS
    */
   public $storage_options;
+
   /**
    * @var EXCEPTION_HANDLER
    */
@@ -119,12 +128,12 @@ class CONTEXT extends RESOLVER
    * Is this context a page (singleton)?
    * @var boolean
    */
-  public $is_page = FALSE;
+  public $is_page = false;
 
   /**
    * @param ENVIRONMENT $env Global environment.
    */
-  function CONTEXT ($env)
+  public function CONTEXT ($env)
   {
     $this->env = $env;
     RESOLVER::RESOLVER ();
@@ -155,7 +164,7 @@ class CONTEXT extends RESOLVER
    * Add classes to the {@link $classes} object factory.
    * @access private
    */
-  function _initialize_class_registry ()
+  protected function _initialize_class_registry ()
   {
     parent::_initialize_class_registry ();
     $this->register_class ('FILE_TYPE_MANAGER', 'INI_FILE_TYPE_MANAGER', 'webcore/util/file_type_manager.php');
@@ -171,7 +180,7 @@ class CONTEXT extends RESOLVER
    * resources with which to resolve paths or files.
    * @return RESOURCES ()
    */
-  function resources ()
+  public function resources ()
   {
     return $this;
   }
@@ -179,7 +188,7 @@ class CONTEXT extends RESOLVER
   /**
    * Call this to make sure {@link $database} is initialized.
    */
-  function ensure_database_exists ()
+  public function ensure_database_exists ()
   {
     if (! isset ($this->database))
     {
@@ -194,10 +203,10 @@ class CONTEXT extends RESOLVER
 
   /**
    * Returns the name and version of the context.
-   * @var boolean $as_html Return HTML-formatted if <code>TRUE</code>.
+   * @var boolean $as_html Return HTML-formatted if <code>true</code>.
    * @return string
    */
-  function description ($as_html = TRUE)
+  public function description ($as_html = true)
   {
     return $this->env->description ($as_html);
   }
@@ -206,7 +215,7 @@ class CONTEXT extends RESOLVER
    * Returns the absolute location of this context.
    * @return string
    */
-  function url ()
+  public function url ()
   {
     return $this->env->url ();
   }
@@ -215,20 +224,16 @@ class CONTEXT extends RESOLVER
    * Should renderers/grids/etc. use DHTML?
    * @return boolean
    */
-  function dhtml_allowed ()
+  public function dhtml_allowed ()
   {
-    if ($this->display_options->use_DHTML)
-    {
-      $browser = $this->env->browser ();
-      return $browser->supports (Browser_DHTML);
-    }
+    return $this->display_options->use_DHTML && $this->env->browser ()->supports (Browser_DHTML);
   }
 
   /**
    * Should dates use JavaScript to render local times?
    * @return boolean
    */
-  function local_times_allowed ()
+  public function local_times_allowed ()
   {
     return $this->display_options->show_local_times;
   }
@@ -239,7 +244,7 @@ class CONTEXT extends RESOLVER
    * @param string $type Can be either Date_time_php or Date_time_iso
    * @return DATE_TIME
    */
-  function make_date_time ($time = 0, $type = null)
+  public function make_date_time ($time = 0, $type = null)
   {
     $Result = new DATE_TIME ($time, $type);
     $this->date_time_toolkit->formatter->show_local_time = $this->local_times_allowed ();
@@ -253,7 +258,7 @@ class CONTEXT extends RESOLVER
    * @param string $icon_url
    * @return string
    */
-  function title_bar_icon ($icon_url)
+  public function title_bar_icon ($icon_url)
   {
     return $this->resolve_icon_as_html ($icon_url, ' ', '32px', 'vertical-align: text-bottom');
   }
@@ -263,7 +268,7 @@ class CONTEXT extends RESOLVER
    * This generates all forms of output for titles, including plain text and as HTML text and link.
    * @return TITLE_FORMATTER
    */
-  function title_formatter ()
+  public function title_formatter ()
   {
     return $this->find_or_create_singleton ('title_formatter', 'TITLE_FORMATTER', 'webcore/util/title_formatter.php');
   }
@@ -274,7 +279,7 @@ class CONTEXT extends RESOLVER
    * many tags like quoting, images, linking, etc.
    * @return HTML_TEXT_MUNGER
    */
-  function html_text_formatter ()
+  public function html_text_formatter ()
   {
     return $this->find_or_create_singleton ('html_text_formatter', 'HTML_TEXT_MUNGER', 'webcore/util/html_munger.php');
   }
@@ -284,7 +289,7 @@ class CONTEXT extends RESOLVER
    * This is specialized for displaying titles in the page.
    * @return HTML_TITLE_MUNGER
    */
-  function html_title_formatter ()
+  public function html_title_formatter ()
   {
     return $this->find_or_create_singleton ('html_title_formatter', 'HTML_TITLE_MUNGER', 'webcore/util/html_munger.php');
   }
@@ -293,7 +298,7 @@ class CONTEXT extends RESOLVER
    * Customizable plain text formatter.
    * @return PLAIN_TEXT_MUNGER
    */
-  function plain_text_formatter ()
+  public function plain_text_formatter ()
   {
     return $this->find_or_create_singleton ('plain_text_formatter', 'PLAIN_TEXT_MUNGER', 'webcore/util/plain_text_munger.php');
   }
@@ -303,7 +308,7 @@ class CONTEXT extends RESOLVER
    * This is specialized for displaying titles in the page.
    * @return PLAIN_TEXT_TITLE_MUNGER
    */
-  function plain_text_title_formatter ()
+  public function plain_text_title_formatter ()
   {
     return $this->find_or_create_singleton ('plain_text_title_formatter', 'PLAIN_TEXT_TITLE_MUNGER', 'webcore/util/plain_text_munger.php');
   }
@@ -315,7 +320,7 @@ class CONTEXT extends RESOLVER
    * @param string $type Can be {@link Tag_validator_single_line} or {@link Tag_validator_multi_line}.
    * @return MUNGER_VALIDATOR
    */
-  function make_tag_validator ($type)
+  public function make_tag_validator ($type)
   {
     switch ($type)
     {
@@ -324,7 +329,7 @@ class CONTEXT extends RESOLVER
       case Tag_validator_multi_line:
         return $this->make_object ($type, 'MUNGER_DEFAULT_TEXT_VALIDATOR', 'webcore/util/munger_validator.php');
       default:
-        $this->raise ("Invalid validator type [$type]", 'tag_validator', 'CONTEXT');
+        throw new UNKNOWN_VALUE_EXCEPTION($type);
     }
   }
 
@@ -334,7 +339,7 @@ class CONTEXT extends RESOLVER
    * @param string $file_name
    * @return string
    */
-  function config_file_name ($file_name)
+  public function config_file_name ($file_name)
   {
     $sep = $this->env->file_options->path_delimiter;
     $extension_path = $this->env->library_path . 'plugins' . $sep . 'config' . $sep;
@@ -351,13 +356,15 @@ class CONTEXT extends RESOLVER
     }
 
     log_message("[$file_name] was not found in [$extension_path;$lib_path].", Msg_type_warning, Msg_channel_system);
+    
+    return '';
   }
 
   /**
    * Returns information on supported file types.
    * @return FILE_TYPE_MANAGER
    */
-  function file_type_manager ()
+  public function file_type_manager ()
   {
     return $this->find_or_create_singleton ('file_type_manager', 'FILE_TYPE_MANAGER', 'webcore/util/file_type_manager.php');
   }
@@ -365,7 +372,7 @@ class CONTEXT extends RESOLVER
   /**
    * @return MAIL_PROVIDER
    */
-  function make_mail_provider ()
+  public function make_mail_provider ()
   {
     $class_name = $this->final_class_name ('MAIL_PROVIDER', 'webcore/mail/mail_provider.php');
     $Result = new $class_name ($this);
@@ -399,7 +406,7 @@ class CONTEXT extends RESOLVER
    * @param FORM $form
    * @return FORM_RENDERER
    */
-  function make_form_renderer ($form)
+  public function make_form_renderer ($form)
   {
     $class_name = $this->final_class_name ('FORM_RENDERER', 'webcore/forms/form_renderer.php');
     return new $class_name ($form);
@@ -409,7 +416,7 @@ class CONTEXT extends RESOLVER
    * Return an object to draw controls.
    * @return CONTROLS_RENDERER
    */
-  function make_controls_renderer ()
+  public function make_controls_renderer ()
   {
     return $this->make_object ('control_renderer', 'CONTROLS_RENDERER', 'webcore/forms/controls_renderer.php');
   }
@@ -418,7 +425,7 @@ class CONTEXT extends RESOLVER
    * Return an object to draw boxes and columns.
    * @return BOX_RENDERER
    */
-  function make_box_renderer ()
+  public function make_box_renderer ()
   {
     return $this->make_object ('box_renderer', 'BOX_RENDERER', 'webcore/gui/box_renderer.php');
   }
@@ -428,7 +435,7 @@ class CONTEXT extends RESOLVER
    * @see make_menu()
    * @return MENU_RENDERER
    */
-  function make_menu_renderer ()
+  public function make_menu_renderer ()
   {
     return $this->make_object ('menu_renderer', 'MENU_RENDERER', 'webcore/gui/menu_renderer.php');
   }
@@ -437,13 +444,12 @@ class CONTEXT extends RESOLVER
    * Return an object to draw trees.
    * @return TREE
    */
-  function make_tree_renderer ()
+  public function make_tree_renderer ()
   {
     if ($this->dhtml_allowed ())
     {
       return $this->make_object ('tree_renderer', 'DYNAMIC_TREE', 'webcore/gui/dynamic_tree.php');
     }
-
 
     return $this->make_object ('tree_renderer', 'STATIC_TREE', 'webcore/gui/static_tree.php');
   }
@@ -453,7 +459,7 @@ class CONTEXT extends RESOLVER
    * @see make_menu_renderer()
    * @return MENU
    */
-  function make_menu ()
+  public function make_menu ()
   {
     return $this->make_object ('menu', 'MENU', 'webcore/gui/menu.php');
   }
@@ -463,7 +469,7 @@ class CONTEXT extends RESOLVER
    * This is an optimization to avoid resolving the class name multiple times.
    * @return COMMAND
    */
-  function make_command ()
+  public function make_command ()
   {
     return $this->make_object ('command', 'COMMAND', 'webcore/cmd/commands.php');
   }
@@ -474,7 +480,7 @@ class CONTEXT extends RESOLVER
    * @param string $name Name for the layer.
    * @return LAYER
    */
-  function make_layer ($name = '')
+  public function make_layer ($name = '')
   {
     $Result = $this->make_object ('layer', 'LAYER', 'webcore/gui/layer.php');
     $Result->name = $name;
@@ -489,7 +495,7 @@ class CONTEXT extends RESOLVER
    * @see CSS_TAG_BUILDER
    * @return CSS_BUILDER|HTML_BUILDER
    */
-  function make_tag_builder ($type)
+  public function make_tag_builder ($type)
   {
     switch ($type)
     {
@@ -498,7 +504,7 @@ class CONTEXT extends RESOLVER
       case Tag_builder_html:
         return $this->make_object ($type, 'HTML_TAG_BUILDER', 'webcore/util/tags.php');
       default:
-        $this->raise ("Invalid validator type [$type]", 'make_tag_builder', 'CONTEXT');
+        throw new UNKNOWN_VALUE_EXCEPTION($type);
     }
   }
 

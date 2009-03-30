@@ -53,7 +53,7 @@ require_once ('webcore/obj/storable.php');
  * @since 2.5.0
  * @access private
  */
-class FOLDER_INHERITABLE_SETTINGS extends STORABLE
+abstract class FOLDER_INHERITABLE_SETTINGS extends STORABLE
 {
   /**
    * Create an history item record when created?
@@ -63,12 +63,12 @@ class FOLDER_INHERITABLE_SETTINGS extends STORABLE
    * @var boolean
    * @access private
    */
-  public $create_history_item_for_self = TRUE;
+  public $create_history_item_for_self = true;
 
   /**
    * @param FOLDER $folder Attached to this folder.
    */
-  function FOLDER_INHERITABLE_SETTINGS ($folder)
+  public function FOLDER_INHERITABLE_SETTINGS ($folder)
   {
     STORABLE::STORABLE ($folder->app);
     $this->attach_to ($folder);
@@ -80,7 +80,7 @@ class FOLDER_INHERITABLE_SETTINGS extends STORABLE
    * determine the defining folder.
    * @return FOLDER
    */
-  function folder ()
+  public function folder ()
   {
     $this->assert (isset ($this->_folder), '\'_folder\' is not set', 'folder', 'FOLDER_SECURITY');
     return $this->_folder;
@@ -90,7 +90,7 @@ class FOLDER_INHERITABLE_SETTINGS extends STORABLE
    * Folder which defines these settings.
    * @return FOLDER
    */
-  function definer ()
+  public function definer ()
   {
     if (! isset ($this->_definer))
     {
@@ -103,7 +103,7 @@ class FOLDER_INHERITABLE_SETTINGS extends STORABLE
   /**
    * @return boolean
    */
-  function exists ()
+  public function exists ()
   {
     return $this->_exists;
   }
@@ -114,7 +114,7 @@ class FOLDER_INHERITABLE_SETTINGS extends STORABLE
    * these settings?
    * @return boolean
    */
-  function inherited ()
+  public function inherited ()
   {
     $field_name = $this->_field_name;
     return $this->_folder->$field_name != $this->_folder->id;
@@ -132,7 +132,7 @@ class FOLDER_INHERITABLE_SETTINGS extends STORABLE
    * <code>True</code>; use {@link apply_changes()} to commit changes later
    * otherwise.
    */
-  function set_inherited ($inherited, $apply_immediately = TRUE)
+  public function set_inherited ($inherited, $apply_immediately = true)
   {
     if ($this->inherited () != $inherited)
     {
@@ -151,10 +151,12 @@ class FOLDER_INHERITABLE_SETTINGS extends STORABLE
       $this->_definer_id = $this->_definer->id;
       $this->_folder->$field_name = $this->_definer->id;
       $this->_exists = $this->exists_in_database ();
-      $this->_changes_pending = TRUE;
+      $this->_changes_pending = true;
     }
     elseif (! $inherited && $this->_stores_data)
-      $this->_changes_pending = TRUE;
+    {
+      $this->_changes_pending = true;
+    }
 
     if ($apply_immediately)
     {
@@ -165,7 +167,7 @@ class FOLDER_INHERITABLE_SETTINGS extends STORABLE
   /**
    * Commit any changes made with {@link set_inherited()}.
    */
-  function apply_changes ()
+  public function apply_changes ()
   {
     if ($this->_changes_pending)
     {
@@ -177,7 +179,7 @@ class FOLDER_INHERITABLE_SETTINGS extends STORABLE
       {
         $this->store ();
       }
-      $this->_changes_pending = FALSE;
+      $this->_changes_pending = false;
     }
   }
 
@@ -185,7 +187,7 @@ class FOLDER_INHERITABLE_SETTINGS extends STORABLE
    * Move these settings to this folder.
    * Simply transfers ownership of internal fields.
    * @param FOLDER $folder */
-  function attach_to ($folder)
+  public function attach_to ($folder)
   {
     $this->_folder = $folder;
     $field_name = $this->_field_name;
@@ -200,17 +202,17 @@ class FOLDER_INHERITABLE_SETTINGS extends STORABLE
   /**
    * @param DATABASE $db
    */
-  function load ($db)
+  public function load ($db)
   {
     parent::load ($db);
     $this->folder_id = $db->f ("folder_id");
-    $this->_exists = TRUE;
+    $this->_exists = true;
   }
 
   /**
    * @param SQL_STORAGE $storage Store values to this object.
    */
-  function store_to ($storage)
+  public function store_to ($storage)
   {
     if ($this->_stores_data)
     {
@@ -218,14 +220,14 @@ class FOLDER_INHERITABLE_SETTINGS extends STORABLE
       $storage->restrict ($tname, 'folder_id');
       $storage->add ($tname, 'folder_id', Field_type_integer, $this->_definer_id, Storage_action_create);
     }
-    $this->_exists = TRUE;
+    $this->_exists = true;
   }
 
   /**
    * Store the object for the first time.
    * @access private
    */
-  function _create ()
+  protected function _create ()
   {
     if ($this->_stores_data)
     {
@@ -242,7 +244,7 @@ class FOLDER_INHERITABLE_SETTINGS extends STORABLE
    * Update an existing object.
    * @access private
    */
-  function _update ()
+  protected function _update ()
   {
     if ($this->_stores_data)
     {
@@ -257,13 +259,15 @@ class FOLDER_INHERITABLE_SETTINGS extends STORABLE
    * @param FOLDER $source_folder
    * @access private
    */
-  function _update_folder_tree ($folders, $source_folder)
+  protected function _update_folder_tree ($folders, $source_folder)
   {
     if (sizeof ($folders))
     {
-      $this->_update_folder_list ($folders, $source_folder, TRUE);
+      $this->_update_folder_list ($folders, $source_folder, true);
       foreach ($folders as $folder)
+      {
         $this->_update_folder_tree ($folder->sub_folders (), $source_folder);
+      }
     }
   }
 
@@ -275,12 +279,14 @@ class FOLDER_INHERITABLE_SETTINGS extends STORABLE
    * @param boolean $creating Flag passed to {@link _update_folder()}.
    * @access private
    */
-  function _update_folder_list ($folders, $source_folder, $creating)
+  protected function _update_folder_list ($folders, $source_folder, $creating)
   {
     if (sizeof ($folders))
     {
       foreach ($folders as $folder)
+      {
         $this->_update_folder ($folder, $source_folder, $creating);
+      }
     }
   }
 
@@ -293,7 +299,7 @@ class FOLDER_INHERITABLE_SETTINGS extends STORABLE
    * @param boolean $creating
    * @access private
    */
-  function _update_folder ($target_folder, $source_folder, $creating)
+  protected function _update_folder ($target_folder, $source_folder, $creating)
   {
     $field_name = $this->_field_name;
 
@@ -325,7 +331,7 @@ class FOLDER_INHERITABLE_SETTINGS extends STORABLE
    * @return FOLDER
    * @access private
    */
-  function parent_definer ()
+  public function parent_definer ()
   {
     $parent = $this->_folder->parent_folder ();
     if (isset ($parent))
@@ -344,7 +350,7 @@ class FOLDER_INHERITABLE_SETTINGS extends STORABLE
    * @param PURGE_OPTIONS $options
    * @access private
    */
-  function _purge ($options)
+  protected function _purge ($options)
   {
     $field_name = $this->_field_name;
 
@@ -359,7 +365,7 @@ class FOLDER_INHERITABLE_SETTINGS extends STORABLE
       $folder_query = $this->login->folder_query ();
       $folder_query->restrict ("$field_name = {$this->_folder->id}");
       $folders = $folder_query->objects ();
-      $this->_update_folder_list ($folders, $this->_definer, FALSE);
+      $this->_update_folder_list ($folders, $this->_definer, false);
 
       $field_name_value = $this->_definer_id;
     }
@@ -376,7 +382,7 @@ class FOLDER_INHERITABLE_SETTINGS extends STORABLE
     }
 
     $this->_folder->$field_name = $field_name_value;
-    $this->_exists = FALSE;
+    $this->_exists = false;
   }
 
   /**
@@ -386,10 +392,7 @@ class FOLDER_INHERITABLE_SETTINGS extends STORABLE
    * @access private
    * @abstract
    */
-  function _history_item_title ($creating)
-  {
-    $this->raise_deferred ('_history_item_title', 'FOLDER_INHERITABLE_SETTINGS');
-  }
+  protected abstract function _history_item_title ($creating);
 
   /**
    * Description for a folder's history item for inheriting this option.
@@ -399,10 +402,7 @@ class FOLDER_INHERITABLE_SETTINGS extends STORABLE
    * @access private
    * @abstract
    */
-  function _history_item_description ($creating, $folder)
-  {
-    $this->raise_deferred ('_history_item_description', 'FOLDER_INHERITABLE_SETTINGS');
-  }
+  protected abstract function _history_item_description ($creating, $folder);
 
   /**
    * Name of the table in which settings are stored.
@@ -413,10 +413,7 @@ class FOLDER_INHERITABLE_SETTINGS extends STORABLE
    * @access private
    * @abstract
    */
-  function _settings_table_name ()
-  {
-    $this->raise_deferred ('_settings_table_name', 'FOLDER_INHERITABLE_OPTIONS');
-  }
+  protected abstract function _settings_table_name ();
 
   /**
    * ID of the folder to which the settings are attached.
@@ -426,24 +423,28 @@ class FOLDER_INHERITABLE_SETTINGS extends STORABLE
    * @var integer
    */
   protected $_definer_id;
+  
   /**
    * Settings are defined in this folder.
    * @var FOLDER
    * @access private
    */
   protected $_definer;
+  
   /**
    * Name of the object field in the folder and database.
    * @var string
    * @access private
    */
   protected $_field_name;
+  
   /**
    * Settings retrieved from this folder.
    *  @access private
    * @var FOLDER
    */
   protected $_folder;
+  
   /**
    * If <code>True</code>, stores to {@link _settings_table_name()}.
    * If <code>False</code>, settings are not automatically saved when {@link
@@ -453,7 +454,8 @@ class FOLDER_INHERITABLE_SETTINGS extends STORABLE
    * @var boolean
    * @access private
    */
-  protected $_stores_data = TRUE;
+  protected $_stores_data = true;
+  
   /**
    * @var boolean
    * @access private

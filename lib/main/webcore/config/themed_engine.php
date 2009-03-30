@@ -57,13 +57,13 @@ class THEMED_ENGINE extends ENGINE
    * used.
    * @var boolean
    */
-  public $use_local_theme = TRUE;
+  public $use_local_theme = true;
 
   /**
    * Register plugins in {@link $classes} during initialization.
    * @access private
    */
-  function _initialize_class_registry ()
+  protected function _initialize_class_registry ()
   {
     parent::_initialize_class_registry ();
     $this->register_class ('PAGE', 'THEMED_PAGE', 'webcore/sys/themed_page.php');
@@ -74,7 +74,7 @@ class THEMED_ENGINE extends ENGINE
    * @param THEMED_PAGE $page
    * @access private
    */
-  function _init_theme ($page)
+  protected function _init_theme ($page)
   {
     $page->default_theme->main_CSS_file_name = '{themes}/ice';
     $page->default_theme->font_name_CSS_file_name = '{styles}fonts/verdana';
@@ -87,7 +87,7 @@ class THEMED_ENGINE extends ENGINE
    * @param PAGE $page
    * @access private
    */
-  function _init_page ($env, $page)
+  protected function _init_page ($env, $page)
   {
     parent::_init_page ($env, $page);
     $this->_init_theme ($page);

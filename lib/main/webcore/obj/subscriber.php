@@ -62,18 +62,21 @@ class SUBSCRIBER extends UNIQUE_OBJECT
    * @var string
    */
   public $email = '';
+
   /**
    * Send messages as HTML or plain text?
    * @var boolean
    */
-  public $send_as_html = TRUE;
+  public $send_as_html = true;
+
   /**
    * Send messages for items modified only by this subscriber?
    * If this subscriber is also a {@link USER} and that user is the only modifier for an item,
    * should a message for that item be sent?
    * @var boolean
    */
-  public $send_own_changes = TRUE;
+  public $send_own_changes = true;
+
   /**
    * Send at most this many objects individually.
    * If there are more than this many objects queued for a subscriber, the objects are grouped
@@ -83,12 +86,14 @@ class SUBSCRIBER extends UNIQUE_OBJECT
    * @var integer
    */
   public $max_individual_messages = 5;
+
   /**
    * Send at most this many objects in one message item.
    * Set this object control the size of generated emails.
    * @var integer
    */
   public $max_items_per_message = 25;
+
   /**
    * Wait this many hours between sending batches of items.
    * If this is 0, content is always sent as soon as the {@link PUBLISHER} processes it. If this is non-zero,
@@ -98,6 +103,7 @@ class SUBSCRIBER extends UNIQUE_OBJECT
    * @var integer
    */
   public $min_hours_to_wait = 0;
+
   /**
    * When were messages last sent to this subscriber?
    * This field is used with {@link $min_hours_to_wait} to determine when messages should once again
@@ -105,20 +111,23 @@ class SUBSCRIBER extends UNIQUE_OBJECT
    * @var DATE_TIME
    */
   public $time_messages_sent;
+
   /**
    * Send multiply-modified item as one message?
    * If an item has been modified several times since the last messages were sent, should all
    * changes be grouped into one message?
    * @var boolean
    */
-  public $group_history_items = TRUE;
+  public $group_history_items = true;
+
   /**
    * Should details of the exact kind of modification be sent?
    * Each modification of an item is recorded with an {@link HISTORY_ITEM}. Should the details of the
    * history item be included in the email?
    * @var boolean
    */
-  public $show_history_items = FALSE;
+  public $show_history_items = false;
+
   /**
    * Should an history item title serve as the email title?
    * Each modification of an item is recorded with an {@link HISTORY_ITEM}. If a message contains only
@@ -128,7 +137,8 @@ class SUBSCRIBER extends UNIQUE_OBJECT
    * subject, along with the object's path.
    * @var boolean
    */
-  public $show_history_item_as_subject = TRUE;
+  public $show_history_item_as_subject = true;
+
   /**
    * List of {@link HISTORY_ITEM}s queued for this subscriber.
    * If a publication cycle is execution by {@link PUBLISHER}, but this user is not 
@@ -141,6 +151,7 @@ class SUBSCRIBER extends UNIQUE_OBJECT
    * @var string
    */
   public $queued_history_item_ids;
+
   /**
    * How much text from an object should be shown?
    * This is a suggestion to the email renderer to limit larger texts. If zero, all text is shown.
@@ -151,7 +162,7 @@ class SUBSCRIBER extends UNIQUE_OBJECT
   /**
    * @param APPLICATION $app
    */
-  function SUBSCRIBER ($app)
+  public function SUBSCRIBER ($app)
   {
     UNIQUE_OBJECT::UNIQUE_OBJECT ($app);
     $this->time_messages_sent = $app->make_date_time ();
@@ -160,7 +171,7 @@ class SUBSCRIBER extends UNIQUE_OBJECT
   /**
    * @return boolean
    */
-  function exists ()
+  public function exists ()
   {
     if ($this->email)
     {
@@ -175,7 +186,7 @@ class SUBSCRIBER extends UNIQUE_OBJECT
    * ordinarily triggered by subscriptions are neither sent nor queued in the {@link $queued_history_item_ids}.
    * @return boolean
    */
-  function enabled ()
+  public function enabled ()
   {
     return $this->min_hours_to_wait != Subscriptions_disabled;
   }
@@ -186,7 +197,7 @@ class SUBSCRIBER extends UNIQUE_OBJECT
    * sent to this user.
    * @return boolean
    */
-  function ready_for_messages ()
+  public function ready_for_messages ()
   {
     if ($this->time_messages_sent->is_valid ())
     {
@@ -200,8 +211,9 @@ class SUBSCRIBER extends UNIQUE_OBJECT
   /**
    * Is this a queued history item for this subscriber?
    * @param integer $id
+   * @return boolean
    */
-  function is_queued_history_item ($id)
+  public function is_queued_history_item ($id)
   {
     if ($this->queued_history_item_ids)
     {
@@ -212,6 +224,8 @@ class SUBSCRIBER extends UNIQUE_OBJECT
 
       return in_array ($id, $this->_queued_history_items);
     }
+    
+    return false;
   }
 
   /**
@@ -220,7 +234,7 @@ class SUBSCRIBER extends UNIQUE_OBJECT
    * queue, to be processed when the subscriber is ready.
    * @param string $id Comma-separated list of history item ids.
    */
-  function add_queued_history_items ($id)
+  public function add_queued_history_items ($id)
   {
     if (isset ($this->queued_history_item_ids) && $this->queued_history_item_ids)
     {
@@ -240,7 +254,7 @@ class SUBSCRIBER extends UNIQUE_OBJECT
    * Remove all queued history items.
    * Also marks the last time messages were sent.
    */
-  function clear_queued_history_items ()
+  public function clear_queued_history_items ()
   {
     $this->queued_history_item_ids = '';
     $this->time_messages_sent->set_now ();
@@ -252,7 +266,7 @@ class SUBSCRIBER extends UNIQUE_OBJECT
    * registered, the associated user object is returned here.
    * @return USER
    */
-  function user ()
+  public function user ()
   {
     if (! isset ($this->_user))
     {
@@ -272,7 +286,7 @@ class SUBSCRIBER extends UNIQUE_OBJECT
    * @param integer $kind Can be any of the {@link Subscribe_constants}.
    * @param boolean $enabled Turn the subscription on or off.
    */
-  function set_subscribed ($obj, $kind, $enabled)
+  public function set_subscribed ($obj, $kind, $enabled)
   {
     if ($enabled)
     {
@@ -292,7 +306,7 @@ class SUBSCRIBER extends UNIQUE_OBJECT
    * @param integer $id Unique id for the subscribed object.
    * @param integer $kind Can be any of the {@link Subscribe_constants}.
    */
-  function subscribe ($id, $kind)
+  public function subscribe ($id, $kind)
   {
     $this->synchronize ();
 
@@ -310,7 +324,7 @@ class SUBSCRIBER extends UNIQUE_OBJECT
    * @param integer $id Unique id for the subscribed object.
    * @param integer $kind Can be any of the {@link Subscribe_constants}.
    */
-  function unsubscribe ($id, $kind)
+  public function unsubscribe ($id, $kind)
   {
     $this->synchronize ();
 
@@ -332,7 +346,7 @@ class SUBSCRIBER extends UNIQUE_OBJECT
    * @param integer $kind Can be any of the {@link Subscribe_constants}.
    * @return boolean
    */
-  function subscribed ($obj, $kind)
+  public function subscribed ($obj, $kind)
   {
     return in_array ($kind, $this->receives_notifications_through ($obj));
   }
@@ -344,7 +358,7 @@ class SUBSCRIBER extends UNIQUE_OBJECT
    * @param AUDITABLE $obj
    * @return array[integer]
    */
-  function receives_notifications_through ($obj)
+  public function receives_notifications_through ($obj)
   {
     $Result = array ();
     if (isset ($this->email) && $obj->exists ())
@@ -363,7 +377,7 @@ class SUBSCRIBER extends UNIQUE_OBJECT
    * Query for all subscriptions for this user.
    * @return SUBSCRIPTION_QUERY
    */
-  function subscription_query ()
+  public function subscription_query ()
   {
     $class_name = $this->app->final_class_name ('SUBSCRIPTION_QUERY', 'webcore/db/subscriber_query.php');
     $Result = new $class_name ($this->app);
@@ -378,7 +392,7 @@ class SUBSCRIBER extends UNIQUE_OBJECT
    * @param string $type Type of entry to find in multiple-entry-type modules.
    * @return array[integer]
    */
-  function subscribed_ids_for ($kind, $type = '')
+  public function subscribed_ids_for ($kind, $type = '')
   {
     $query = $this->subscription_query ();
     
@@ -424,7 +438,7 @@ class SUBSCRIBER extends UNIQUE_OBJECT
    * @param HISTORY_ITEM $history_item
    * @return boolean
    */
-  function wants_notification ($history_item)
+  public function wants_notification ($history_item)
   {
     $Result = $this->send_own_changes;
 
@@ -446,7 +460,7 @@ class SUBSCRIBER extends UNIQUE_OBJECT
    * @param string $type Type of entry to find in multiple-entry-type modules.
    * (used only for entries).
    */
-  function update_subscriptions_for ($kind, $selected_ids, $type = '')
+  public function update_subscriptions_for ($kind, $selected_ids, $type = '')
   {
     $original_ids = $this->subscribed_ids_for ($kind, $type);
     
@@ -476,7 +490,7 @@ class SUBSCRIBER extends UNIQUE_OBJECT
   /**
    * @return string
    */
-  function raw_title ()
+  public function raw_title ()
   {
     return $this->email;
   }
@@ -484,7 +498,7 @@ class SUBSCRIBER extends UNIQUE_OBJECT
   /**
    * @param DATABASE $db Database from which to load values.
    */
-  function load ($db)
+  public function load ($db)
   {
     parent::load ($db);
     $this->send_as_html = $db->f ('send_as_html');
@@ -502,13 +516,13 @@ class SUBSCRIBER extends UNIQUE_OBJECT
     $this->queued_history_item_ids = $db->f ('queued_history_item_ids');
 
     $this->email = $db->f ('email');
-    $this->_read_only = FALSE;
+    $this->_read_only = false;
   }
 
   /**
    * @param SQL_STORAGE $storage Store values to this object.
    */
-  function store_to ($storage)
+  public function store_to ($storage)
   {
     parent::store_to ($storage);
     $tname = $this->_table_name ();
@@ -529,18 +543,18 @@ class SUBSCRIBER extends UNIQUE_OBJECT
     $storage->add ($tname, 'email', Field_type_string, $this->email);
   }
 
-  function store ()
+  public function store ()
   {
     $this->synchronize ();
     parent::store ();
-    $this->_read_only = FALSE;
+    $this->_read_only = false;
   }
 
   /**
    * Name of the home page name for this object.
    * @return string
    */
-  function page_name ()
+  public function page_name ()
   {
     return $this->app->page_names->user_subscriptions_home;
   }
@@ -549,7 +563,7 @@ class SUBSCRIBER extends UNIQUE_OBJECT
    * Arguments to the home page url for this object.
    * @return string
    */
-  function page_arguments ()
+  public function page_arguments ()
   {
     return 'email=' . urlencode ($this->email);
   }
@@ -559,7 +573,7 @@ class SUBSCRIBER extends UNIQUE_OBJECT
    * @return string
    * @access private
    */
-  function _table_name ()
+  protected function _table_name ()
   {
     return $this->app->table_names->subscribers;
   }
@@ -568,7 +582,7 @@ class SUBSCRIBER extends UNIQUE_OBJECT
    * @param PURGE_OPTIONS $options
    * @access private
    */
-  function _purge ($options)
+  protected function _purge ($options)
   {
     if ($this->email)
     {
@@ -587,12 +601,12 @@ class SUBSCRIBER extends UNIQUE_OBJECT
    * is not found, then create the database record.
    * @access private
    */
-  function synchronize ()
+  public function synchronize ()
   {
     $this->assert (! empty ($this->email), "Email for subscriber [$this->id] is empty.", 'synchronize', 'SUBSCRIBER');
     if ($this->_read_only)
     {
-      $this->_read_only = FALSE;
+      $this->_read_only = false;
 
       $this->db->logged_query ("SELECT * FROM {$this->app->table_names->subscribers} WHERE email = '$this->email'");
       if ($this->db->next_record ())
@@ -608,7 +622,8 @@ class SUBSCRIBER extends UNIQUE_OBJECT
    * @var boolean
    * @access private
    */
-  protected $_read_only = TRUE;
+  protected $_read_only = true;
+
   /**
    * Queued history items as an array of ids.
    * @var array[integer]

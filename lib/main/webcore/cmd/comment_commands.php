@@ -53,7 +53,7 @@ class COMMENT_COMMANDS extends COMMANDS
   /**
    * @param COMMENT $comment Configure commands for this object.
    */
-  function COMMENT_COMMANDS ($comment)
+  public function COMMENT_COMMANDS ($comment)
   {
     COMMANDS::COMMANDS ($comment->app);
 
@@ -108,7 +108,7 @@ class COMMENT_COMMANDS extends COMMANDS
     $cmd->title = 'Send';
     $cmd->link = "send_comment.php?id=$comment->id";
     $cmd->icon = '{icons}buttons/send';
-    $cmd->executable = TRUE;
+    $cmd->executable = true;
     $cmd->importance = Command_importance_high - Command_importance_increment;
     $this->append ($cmd);
 

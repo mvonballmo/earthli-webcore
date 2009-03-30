@@ -34,8 +34,8 @@ http://www.earthli.com/software/webcore
     $folder = $folder_query->object_at_id (read_var ('id'));
     if ($folder)
     {
-      $Page->template_options->header_visible = FALSE;
-      $Page->template_options->footer_visible = FALSE;
+      $Page->template_options->header_visible = false;
+      $Page->template_options->footer_visible = false;
       $Page->add_script_file ('{scripts}webcore_forms.js');
       $Page->start_display ();
     ?>
@@ -64,7 +64,9 @@ http://www.earthli.com/software/webcore
   
         $ids = array ();
         foreach ($permissions as $permission)
+        {
           $ids [] = $permission->ref_id;      
+        }
         if (sizeof ($ids))
         {
           $group_query->restrict_by_op ('grp.id', $ids, Operator_not_in);

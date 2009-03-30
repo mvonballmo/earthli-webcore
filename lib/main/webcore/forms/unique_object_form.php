@@ -54,7 +54,7 @@ class UNIQUE_OBJECT_FORM extends STORABLE_FORM
   /**
    * @param CONTEXT $context.
    */
-  function UNIQUE_OBJECT_FORM ($context)
+  public function UNIQUE_OBJECT_FORM ($context)
   {
     STORABLE_FORM::STORABLE_FORM ($context);
 
@@ -62,7 +62,7 @@ class UNIQUE_OBJECT_FORM extends STORABLE_FORM
     $field->id = 'id';
     $field->title = 'ID';
     $field->min_value = 1;
-    $field->visible = FALSE;
+    $field->visible = false;
     $this->add_field ($field);
   }
 
@@ -70,13 +70,13 @@ class UNIQUE_OBJECT_FORM extends STORABLE_FORM
    * Load initial properties from this object.
    * @param UNIQUE_OBJECT $obj
    */
-  function load_from_object ($obj)
+  public function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
     $this->set_value ('id', $obj->id);
   }
 
-  function load_with_defaults ()
+  public function load_with_defaults ()
   {
     parent::load_with_defaults ();
     $this->set_value ('id', read_var ('id'));

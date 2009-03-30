@@ -51,7 +51,7 @@ class FOLDER_USER_PERMISSIONS_FORM extends FOLDER_PERMISSIONS_FORM
   /**
    * @param USER $user Edit this user's folder permissions.
    */
-  function FOLDER_USER_PERMISSIONS_FORM ($user)
+  public function FOLDER_USER_PERMISSIONS_FORM ($user)
   {
     FOLDER_PERMISSIONS_FORM::FOLDER_PERMISSIONS_FORM ($user->app);
 
@@ -60,8 +60,8 @@ class FOLDER_USER_PERMISSIONS_FORM extends FOLDER_PERMISSIONS_FORM
     $field = new TITLE_FIELD ();
     $field->id = 'name';
     $field->title = 'User Name';
-    $field->required = TRUE;
-    $field->visible = FALSE;
+    $field->required = true;
+    $field->visible = false;
     $this->add_field ($field);
   }
 
@@ -69,7 +69,7 @@ class FOLDER_USER_PERMISSIONS_FORM extends FOLDER_PERMISSIONS_FORM
    * Load initial properties from these permissions.
    * @param PERMISSIONS $obj
    */
-  function load_from_object ($obj)
+  public function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
     $this->set_value ('name', $this->_user->title);
@@ -77,10 +77,10 @@ class FOLDER_USER_PERMISSIONS_FORM extends FOLDER_PERMISSIONS_FORM
 
   /**
    * Store the form's values to this set of permissions.
-    * @param PERMISSIONS $obj
-    * @access private
-    */
-  function commit ($obj)
+   * @param PERMISSIONS $obj
+   * @access private
+   */
+  public function commit ($obj)
   {
     $obj->user_id = $this->_user->id;
     $obj->kind = Privilege_kind_user;

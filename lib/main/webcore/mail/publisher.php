@@ -53,39 +53,44 @@ class PUBLISHER extends LOGGABLE
 {
   /**
    * Run without updating the database or sending email.
-    * @var boolean
-    */
-  public $testing = FALSE;
+   * @var boolean
+   */
+  public $testing = false;
+
   /**
    * Show contents of emails when in test mode.
-    * @var boolean
-    */
-  public $preview = FALSE;
+   * @var boolean
+   */
+  public $preview = false;
+
   /**
    * The channel for log messages generated as publication notifications.
-    * @var string
-    */
+   * @var string
+   */
   public $default_channel = Msg_channel_publisher;
+
   /**
    * The type of log messages generated as publication notifications.
-    * @var string
-    */
+   * @var string
+   */
   public $default_type = Msg_type_info;
+
   /**
    * How much of the object descriptions to send?
-    * @var integer
-    */
+   * @var integer
+   */
   public $excerpt_length = 0;
+
   /**
    * Should history item details be included in messages?
    * @var boolean
    */
-  public $include_history_items_in_messages = TRUE;
+  public $include_history_items_in_messages = true;
 
   /**
    * @param MAIL_PROVIDER $provider Publish mail using this provider.
    */
-  function PUBLISHER ($provider)
+  public function PUBLISHER ($provider)
   {
     LOGGABLE::LOGGABLE ($provider->context);
 
@@ -102,7 +107,7 @@ class PUBLISHER extends LOGGABLE
    * Notifications are sent according to user preferences by default.
    * @param HISTORY_ITEM_QUERY $query
    */
-  function publish_history_items ($query)
+  public function publish_history_items ($query)
   {
     $this->app->display_options->overridden_max_title_size = 100;
 
@@ -184,7 +189,9 @@ class PUBLISHER extends LOGGABLE
       /* Build a three-dimensional array of history items, grouping them by [type][object][history_item]. */
 
       foreach ($history_items as $history_item_id => $history_item)
+      {
         $sorted_history_items [$history_item->object_type][$history_item->object_id][] = $history_item;
+      }
 
       /* Build a two-dimensional array of objects, grouping them by [type][object]. */
 
@@ -291,7 +298,7 @@ class PUBLISHER extends LOGGABLE
        * independent of actually sending the messages.
        */
 
-      foreach ($subscriber_records as $email => $subscriber_rec)
+      foreach ($subscriber_records as $subscriber_rec)
       {
         $subscriber = $subscriber_rec->subscriber;
 
@@ -326,7 +333,7 @@ class PUBLISHER extends LOGGABLE
        * objects, we are ready to check subscriber options to build the
        * publisher items that will be sent to the publishing mechanism itself.*/
 
-      foreach ($subscriber_records as $email => $subscriber_rec)
+      foreach ($subscriber_records as $subscriber_rec)
       {
         $subscriber = $subscriber_rec->subscriber;
 
@@ -355,9 +362,9 @@ class PUBLISHER extends LOGGABLE
 
             foreach ($subscriber_rec->objects as $objs_by_folder)
             {
-              foreach ($objs_by_folder as $access_id => $obj_types)
+              foreach ($objs_by_folder as $obj_types)
               {
-                foreach ($obj_types as $obj_id => $obj_rec)
+                foreach ($obj_types as $obj_rec)
                 {
                   /* Retain the last object record for use if the loop ends and there
                      is only one object in the message, we can treat it as a normal
@@ -368,7 +375,9 @@ class PUBLISHER extends LOGGABLE
                   if ($subscriber->show_history_items)
                   {
                     foreach ($obj_rec->history_items as $history_item)
+                    {
                       $item->add_object ($history_item);
+                    }
                   }
 
                   $item->add_main_object ($obj_rec->object);
@@ -404,9 +413,9 @@ class PUBLISHER extends LOGGABLE
           {
             foreach ($subscriber_rec->objects as $objs_by_folder)
             {
-              foreach ($objs_by_folder as $access_id => $obj_types)
+              foreach ($objs_by_folder as $obj_types)
               {
-                foreach ($obj_types as $obj_id => $obj_rec)
+                foreach ($obj_types as $obj_rec)
                 {
                   if ($subscriber->group_history_items)
                   {
@@ -415,7 +424,9 @@ class PUBLISHER extends LOGGABLE
                     if ($subscriber->show_history_items)
                     {
                       foreach ($obj_rec->history_items as $history_item)
+                      {
                         $item->add_object ($history_item);
+                      }
                     }
 
                     $item->add_main_object ($obj_rec->object);
@@ -462,7 +473,7 @@ class PUBLISHER extends LOGGABLE
    * @param array[HISTORY_ITEM] $history_items
    * @access private
    */
-  function _update_publication_status_for ($history_items)
+  protected function _update_publication_status_for ($history_items)
   {
     $table_name = $this->app->table_names->history_items;
     $all_affected_history_item_ids = implode (',', array_keys ($history_items));
@@ -482,7 +493,7 @@ class PUBLISHER extends LOGGABLE
    * @param SUBSCRIBER $subscriber
    * @access private
    */
-  function _clear_queued_history_items_for ($subscriber)
+  protected function _clear_queued_history_items_for ($subscriber)
   {
     $this->record ("$subscriber->email: Cleared queued history items from database.");
     $subscriber->clear_queued_history_items ();
@@ -500,10 +511,11 @@ class PUBLISHER extends LOGGABLE
    * @param array[PUBLISHER_MESSAGE] $items
    * @access private
    */
-  function _send_items ($items)
+  protected function _send_items ($items)
   {
     if (sizeof ($items))
     {
+      $last_subscriber = null;
       $msg = $this->_make_mail_message ();
 
       foreach ($items as $item)
@@ -553,11 +565,11 @@ class PUBLISHER extends LOGGABLE
 
   /**
    * Get a renderer from cache, if possible.
-    * @param PUBLISHABLE $obj
-    * @return MAIL_OBJECT_RENDERER
-    * @access private
-    */
-  function _renderer_for ($obj)
+   * @param PUBLISHABLE $obj
+   * @return MAIL_OBJECT_RENDERER
+   * @access private
+   */
+  protected function _renderer_for ($obj)
   {
     $class_name = strtoupper (get_class ($obj));
     $Result = $this->_renderers [$class_name];
@@ -572,11 +584,11 @@ class PUBLISHER extends LOGGABLE
 
   /**
    * Get the body for this description.
-    * @param PUBLISHER_MESSAGE $item
-    * @return string
-    * @access private
-    */
-  function _body_for ($item)
+   * @param PUBLISHER_MESSAGE $item
+   * @return string
+   * @access private
+   */
+  protected function _body_for ($item)
   {
     $Result = $this->_rendered_bodies [$item->identifier];
     if (! $Result)
@@ -587,7 +599,9 @@ class PUBLISHER extends LOGGABLE
       $mail_renderer->add ($this->_subscription_settings, $this->_renderer_for ($this->_subscription_settings));
 
       foreach ($item->objects as $obj)
+      {
         $mail_renderer->add ($obj, $this->_renderer_for ($obj));
+      }
 
       if ($item->subscriber->send_as_html)
       {
@@ -616,7 +630,7 @@ class PUBLISHER extends LOGGABLE
    * @return string
    * @access private
    */
-  function _replace_aliases ($item, $text)
+  protected function _replace_aliases ($item, $text)
   {
     return str_replace (Subscriber_email_alias, $item->subscriber->email, $text);
   }
@@ -627,7 +641,7 @@ class PUBLISHER extends LOGGABLE
    * @return QUERY
    * @access private
    */
-  function _object_query_for ($object_type)
+  protected function _object_query_for ($object_type)
   {
     switch ($object_type)
     {
@@ -655,7 +669,7 @@ class PUBLISHER extends LOGGABLE
    * @param AUDITABLE $obj
    * @return array[SUBSCRIBER]
    */
-  function _subscribers_for ($history_item, $obj)
+  protected function _subscribers_for ($history_item, $obj)
   {
     $query = $obj->subscriber_query ($history_item);
 
@@ -668,9 +682,9 @@ class PUBLISHER extends LOGGABLE
 
   /**
    * @return MAIL_MESSAGE
-    * @access private
-    */
-  function _make_mail_message ()
+   * @access private
+   */
+  protected function _make_mail_message ()
   {
     $class_name = $this->app->final_class_name ('MAIL_MESSAGE', 'webcore/mail/mail_message.php');
     $Result = new $class_name ($this->context);
@@ -710,16 +724,19 @@ class PUBLISHER_MESSAGE extends WEBCORE_OBJECT
    * @var string
    */
   public $identifier;
+
   /**
    * Subscriber for whom the message should be prepared.
    * @var SUBSCRIBER
    */
   public $subscriber;
+
   /**
    * List of objects to render in the message.
    * @var array[UNIQUE_OBJECT]
    */
   public $objects;
+
   /**
    * How many logical items are represented?
    * The list of objects in this item may all describe the same item or they may describe multiple items.
@@ -734,7 +751,7 @@ class PUBLISHER_MESSAGE extends WEBCORE_OBJECT
    * @param PUBLISHER $publisher
    * @param SUBSCRIBER $subscriber
    */
-  function PUBLISHER_MESSAGE ($publisher, $subscriber)
+  public function PUBLISHER_MESSAGE ($publisher, $subscriber)
   {
     WEBCORE_OBJECT::WEBCORE_OBJECT ($publisher->context);
 
@@ -750,7 +767,7 @@ class PUBLISHER_MESSAGE extends WEBCORE_OBJECT
    * Number of total objects in the body.
    * @return integer
    */
-  function num_objects ()
+  public function num_objects ()
   {
     return isset ($this->objects) && sizeof ($this->objects);
   }
@@ -759,7 +776,7 @@ class PUBLISHER_MESSAGE extends WEBCORE_OBJECT
    * Apply a fixed subject for this message.
    * @param string $text
    */
-  function set_subject ($text)
+  public function set_subject ($text)
   {
     $this->_subject->set_text ($text);
   }
@@ -769,7 +786,7 @@ class PUBLISHER_MESSAGE extends WEBCORE_OBJECT
    * @see add_main_object()
    * @param object $obj
    */
-  function add_object ($obj)
+  public function add_object ($obj)
   {
     $this->objects [] = $obj;
     $this->identifier .= '|' . $obj->id . '|';
@@ -780,7 +797,7 @@ class PUBLISHER_MESSAGE extends WEBCORE_OBJECT
    * @see add_object()
    * @param object $obj
    */
-  function add_main_object ($obj)
+  public function add_main_object ($obj)
   {
     $this->add_object ($obj);
     $this->_subject->add_object ($obj);
@@ -790,7 +807,7 @@ class PUBLISHER_MESSAGE extends WEBCORE_OBJECT
    * Fill out the message body and subject accordingly.
    * @param MAIL_MESSAGE
    */
-  function apply ($msg)
+  public function apply ($msg)
   {
     $msg->set_send_to ($this->subscriber->email);
     $msg->send_as_html = $this->subscriber->send_as_html;
@@ -802,7 +819,7 @@ class PUBLISHER_MESSAGE extends WEBCORE_OBJECT
    * Formats a subject representing the message contents.
    * @return string
    */
-  function subject ()
+  public function subject ()
   {
     return $this->app->title . ': ' . $this->_subject->as_text ();
   }
@@ -811,7 +828,7 @@ class PUBLISHER_MESSAGE extends WEBCORE_OBJECT
    * Formats the message contents into a single text.
    * @return string
    */
-  function body ()
+  public function body ()
   {
     return $this->_publisher->_body_for ($this);
   }
@@ -820,7 +837,7 @@ class PUBLISHER_MESSAGE extends WEBCORE_OBJECT
    * The options used to format this message.
    * @return MAIL_OBJECT_RENDERER_OPTIONS
    */
-  function rendering_options ()
+  public function rendering_options ()
   {
     $class_name = $this->app->final_class_name ('MAIL_OBJECT_RENDERER_OPTIONS', 'webcore/mail/mail_object_renderer.php');
     $Result = new $class_name ();
@@ -835,9 +852,10 @@ class PUBLISHER_MESSAGE extends WEBCORE_OBJECT
 
   /**
    * @var PUBLISHER
-    * @access private
-    */
+   * @access private
+   */
   protected $_publisher;
+
   /**
    * @var PUBLISHER_MESSAGE_SUBJECT
    * @access private
@@ -878,20 +896,20 @@ class SUBSCRIPTION_SETTINGS_MAIL_RENDERER extends MAIL_OBJECT_RENDERER
 {
   /**
    * @param SEND_MAIL_FORM $obj
-    * @param EXCEPTION_MAIL_OBJECT_RENDERER_OPTIONS $options
-    * @return string
-    */
-  function subject ($obj, $options)
+   * @param EXCEPTION_MAIL_OBJECT_RENDERER_OPTIONS $options
+   * @return string
+   */
+  public function subject ($obj, $options)
   {
     return 'Subscription Settings';
   }
 
   /**
    * @param object $obj Parameter is not used.
-    * @param integer $excerpt_length
-    * @access private
-    */
-  function _echo_html_content ($obj, $excerpt_length)
+   * @param integer $excerpt_length
+   * @access private
+   */
+  protected function _echo_html_content ($obj, $excerpt_length)
   {
     $app_root = $this->app->url ();
     echo ("<p class=\"notes\">This email was generated automatically. <a href=\"{$app_root}view_user_subscriptions.php?email=" .
@@ -900,10 +918,10 @@ class SUBSCRIPTION_SETTINGS_MAIL_RENDERER extends MAIL_OBJECT_RENDERER
 
   /**
    * @param SEND_MAIL_FORM $obj
-    * @param integer $excerpt_length
-    * @access private
-    */
-  function _echo_text_content ($obj, $excerpt_length)
+   * @param integer $excerpt_length
+   * @access private
+   */
+  protected function _echo_text_content ($obj, $excerpt_length)
   {
     $link = $this->app->resolve_file ("view_user_subscriptions.php?email=" . Subscriber_email_alias);
     echo $this->_line ("This email was generated automatically. Check your subscription settings:");
@@ -930,7 +948,7 @@ class SUBSCRIPTION_SETTINGS extends RENDERABLE
    * @return object
    * @access private
    */
-  function _default_handler_for ($handler_type, $options = null)
+  protected function _default_handler_for ($handler_type, $options = null)
   {
     switch ($handler_type)
     {

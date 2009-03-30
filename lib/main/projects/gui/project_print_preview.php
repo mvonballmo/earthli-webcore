@@ -53,17 +53,18 @@ class PROJECT_PRINT_RENDERER_OPTIONS extends PRINT_RENDERER_OPTIONS
    * Show {@link CHANGE}s associated with {@link JOB}s?
    * @var boolean
    */
-  public $show_changes = TRUE;
+  public $show_changes = true;
+
   /**
    * Show files when showing {@link CHANGE}s?
    * @var boolean
    */
-  public $show_files = TRUE;
+  public $show_files = true;
 
   /**
    * Load values from the HTTP request.
    */
-  function load_from_request ()
+  public function load_from_request ()
   {
     parent::load_from_request ();
     $this->show_changes = read_var ('show_changes');
@@ -84,7 +85,7 @@ class PROJECT_PRINT_PREVIEW extends PRINT_PREVIEW
    * @return PROJECT_PRINT_RENDERER_OPTIONS
    * @access private
    */
-  function _make_print_options ()
+  protected function _make_print_options ()
   {
     return new PROJECT_PRINT_RENDERER_OPTIONS ($this->app);
   }

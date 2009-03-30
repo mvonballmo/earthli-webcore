@@ -50,9 +50,9 @@ class PROJECT_USER extends USER
 {
   /**
    * @param PROJECT $parent Parent of this project. If empty, new project is at the root.
-    * @return PROJECT Make a new project.
-    */
-  function new_folder ($parent)
+   * @return PROJECT Make a new project.
+   */
+  public function new_folder ($parent)
   {
     $Result = parent::new_folder ($parent);
 
@@ -70,9 +70,9 @@ class PROJECT_USER extends USER
 
   /**
    * All releases visible to this user.
-    * @return PROJECT_USER_RELEASE_QUERY
-    */
-  function all_release_query ()
+   * @return PROJECT_USER_RELEASE_QUERY
+   */
+  public function all_release_query ()
   {
     include_once ('projects/db/project_user_release_query.php');
     return new PROJECT_USER_RELEASE_QUERY ($this->app);
@@ -80,9 +80,9 @@ class PROJECT_USER extends USER
 
   /**
    * All branches visible to this user.
-    * @return PROJECT_USER_BRANCH_QUERY
-    */
-  function all_branch_query ()
+   * @return PROJECT_USER_BRANCH_QUERY
+   */
+  public function all_branch_query ()
   {
     include_once ('projects/db/project_user_branch_query.php');
     return new PROJECT_USER_BRANCH_QUERY ($this->app);
@@ -92,7 +92,7 @@ class PROJECT_USER extends USER
    * Return meta-information about this class.
    * @return ENTRY_TYPE_INFO
    */
-  function type_info ()
+  public function type_info ()
   {
     return $this->context->type_info_for ('USER');
   }

@@ -58,9 +58,9 @@ class DEFAULT_PAGE_RENDERER extends WEBCORE_PAGE_RENDERER
    * shows up in the page footer.
    * @var boolean
    */
-  public $browser_warning_in_header = TRUE;
+  public $browser_warning_in_header = true;
 
-  function _start_body ()
+  protected function _start_body ()
   {
     $page = $this->page;
     $env = $this->env;
@@ -101,7 +101,7 @@ class DEFAULT_PAGE_RENDERER extends WEBCORE_PAGE_RENDERER
         </div>
         <?php
           $this->_handle_client_data_warnings ($options);
-          $this->_handle_browser_warnings ($options, TRUE);
+          $this->_handle_browser_warnings ($options, true);
           if ($page->location->size ())
           {
         ?>
@@ -120,7 +120,7 @@ class DEFAULT_PAGE_RENDERER extends WEBCORE_PAGE_RENDERER
 <?php
   }
 
-  function _finish_body ()
+  protected function _finish_body ()
   {
     $page = $this->page;
     $options = $page->template_options;
@@ -180,7 +180,7 @@ class DEFAULT_PAGE_RENDERER extends WEBCORE_PAGE_RENDERER
 
       echo '<div style="clear: both"></div>';
 
-      $this->_handle_browser_warnings ($options, FALSE);
+      $this->_handle_browser_warnings ($options, false);
     ?>
     </div>
     <?php
@@ -196,7 +196,7 @@ class DEFAULT_PAGE_RENDERER extends WEBCORE_PAGE_RENDERER
    * @return string
    * @access private
 	*/
-  function _login_theme_status ($options)
+  protected function _login_theme_status ($options)
   {
     /* Access the application through the page here since the parent
      * of the renderer is always a PAGE, not an APPLICATION.
@@ -268,6 +268,8 @@ class DEFAULT_PAGE_RENDERER extends WEBCORE_PAGE_RENDERER
 
       return $menu->as_html ();
     }
+    
+    return '';
   }
 
   /**
@@ -276,7 +278,7 @@ class DEFAULT_PAGE_RENDERER extends WEBCORE_PAGE_RENDERER
    * @return string
    * @access private
 	*/
-  function _links_as_text ($options)
+  protected function _links_as_text ($options)
   {
     if ($options->show_links)
     {
@@ -313,7 +315,7 @@ class DEFAULT_PAGE_RENDERER extends WEBCORE_PAGE_RENDERER
    * @return string
    * @access private
 	*/
-  function _versions_as_text ($options)
+  protected function _versions_as_text ($options)
   {
     $versions = array ();
 
@@ -333,7 +335,7 @@ class DEFAULT_PAGE_RENDERER extends WEBCORE_PAGE_RENDERER
    * @return string
    * @access private
 	*/
-  function _page_statistics_as_text ($options)
+  protected function _page_statistics_as_text ($options)
   {
     if ($options->show_statistics)
     {
@@ -380,6 +382,8 @@ class DEFAULT_PAGE_RENDERER extends WEBCORE_PAGE_RENDERER
     {
       return join ($this->page->display_options->menu_separator, $values);
     }
+    
+    return '';
   }
 
   /**
@@ -391,7 +395,7 @@ class DEFAULT_PAGE_RENDERER extends WEBCORE_PAGE_RENDERER
    * @param boolean $in_header True is rendering in the header.
    * @access private 
 	*/
-  function _handle_browser_warnings ($options, $in_header)
+  protected function _handle_browser_warnings ($options, $in_header)
   {
     if (! ($in_header ^ $this->browser_warning_in_header) && $options->check_browser && ! $this->browser_supported ())
     {
@@ -449,7 +453,7 @@ class DEFAULT_PAGE_RENDERER extends WEBCORE_PAGE_RENDERER
    * @param PAGE_TEMPLATE_OPTIONS $options
    * @access private
    */
-  function _handle_client_data_warnings ($options)
+  protected function _handle_client_data_warnings ($options)
   {
     $page = $this->page;
 

@@ -56,7 +56,7 @@ class PROJECT_PUBLISHER extends PUBLISHER
    * @return QUERY
    * @access private
    */
-  function _object_query_for ($object_type)
+  protected function _object_query_for ($object_type)
   {
     switch ($object_type)
     {

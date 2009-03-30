@@ -53,6 +53,7 @@ class PROJECT extends FOLDER
    * @var integer
    */
   public $trunk_id;
+
   /**
    * Use options from the project with this id.
    * @var integer
@@ -61,9 +62,9 @@ class PROJECT extends FOLDER
 
   /**
    * The main code line for this project.
-    * @return BRANCH
-    */
-  function trunk ()
+   * @return BRANCH
+   */
+  public function trunk ()
   {
     if (! isset ($this->_trunk))
     {
@@ -78,7 +79,7 @@ class PROJECT extends FOLDER
    * This returns all releases, regardless of branch.
    * @return PROJECT_RELEASE_QUERY
    */
-  function release_query ()
+  public function release_query ()
   {
     $class_name = $this->app->final_class_name ('PROJECT_RELEASE_QUERY', 'projects/db/project_release_query.php');
     return new $class_name ($this);
@@ -88,7 +89,7 @@ class PROJECT extends FOLDER
    * List of all {@link BRANCH}es in this project.
    * @return PROJECT_BRANCH_QUERY
    */
-  function branch_query ()
+  public function branch_query ()
   {
     $class_name = $this->app->final_class_name ('PROJECT_BRANCH_QUERY', 'projects/db/project_branch_query.php');
     return new $class_name ($this);
@@ -98,7 +99,7 @@ class PROJECT extends FOLDER
    * List of all {@link COMPONENT}s in this project.
    * @return PROJECT_BRANCH_QUERY
    */
-  function component_query ()
+  public function component_query ()
   {
     $class_name = $this->app->final_class_name ('PROJECT_COMPONENT_QUERY', 'projects/db/project_component_query.php');
     return new $class_name ($this);
@@ -109,7 +110,7 @@ class PROJECT extends FOLDER
    * Does not store to the database.
    * @return FOLDER
    */
-  function new_folder ()
+  public function new_folder ()
   {
     $Result = parent::new_folder ();
     $Result->options_id = $this->options_id;
@@ -118,11 +119,11 @@ class PROJECT extends FOLDER
 
   /**
    * Does this project define its own options?
-    * Options can also be inherited from an ancestor project.
-    * @return bool
-    * @see PROJECT_OPTIONS
-    */
-  function defines_options ()
+   * Options can also be inherited from an ancestor project.
+   * @return bool
+   * @see PROJECT_OPTIONS
+   */
+  public function defines_options ()
   {
     return $this->options_id == $this->id;
   }
@@ -133,7 +134,7 @@ class PROJECT extends FOLDER
    * project.
    * @return PROJECT_OPTIONS
    */
-  function options ()
+  public function options ()
   {
     if (! isset ($this->_options))
     {
@@ -153,7 +154,7 @@ class PROJECT extends FOLDER
   /**
    * @param DATABASE $db
    */
-  function load ($db)
+  public function load ($db)
   {
     $this->options_id = $db->f ('options_id');
     $this->trunk_id = $db->f ('trunk_id');
@@ -163,7 +164,7 @@ class PROJECT extends FOLDER
   /**
    * @param SQL_STORAGE $storage Store values to this object.
    */
-  function store_to ($storage)
+  public function store_to ($storage)
   {
     parent::store_to ($storage);
     $tname = $this->_table_name ();
@@ -176,7 +177,7 @@ class PROJECT extends FOLDER
    * @param PROJECT_ENTRY $other
    * @access private
    */
-  function _copy_from ($other)
+  protected function _copy_from ($other)
   {
     unset($this->_options);
     if ($other->exists ())
@@ -193,14 +194,16 @@ class PROJECT extends FOLDER
    * @param PURGE_OPTIONS $options
    * @access private
    */
-  function _purge ($options)
+  protected function _purge ($options)
   {
     $tables = $this->app->table_names;
 
     $branch_query = $this->branch_query ();
     $branches = $branch_query->objects ();
     foreach ($branches as $branch)
+    {
       $branch_ids [] = $branch->id;
+    }
 
     if (sizeof ($branch_ids))
     {
@@ -245,7 +248,7 @@ class PROJECT extends FOLDER
    * @return object
    * @access private
    */
-  function _default_handler_for ($handler_type, $options = null)
+  protected function _default_handler_for ($handler_type, $options = null)
   {
     switch ($handler_type)
     {
@@ -267,9 +270,9 @@ class PROJECT extends FOLDER
 
   /**
    * @return PROJECT_OPTIONS
-    * @access private
-    */
-  function _make_options ()
+   * @access private
+   */
+  protected function _make_options ()
   {
     $class_name = $this->app->final_class_name ('PROJECT_OPTIONS', 'projects/obj/project_options.php');
     return new $class_name ($this);
@@ -284,7 +287,7 @@ class PROJECT extends FOLDER
    * @return CHANGE
    * @access private
    */
-  function _make_change ()
+  protected function _make_change ()
   {
     $class_name = $this->app->final_class_name ('CHANGE', 'projects/obj/change.php');
     return new $class_name ($this->app);
@@ -295,7 +298,7 @@ class PROJECT extends FOLDER
    * @see FOLDER::new_entry()
    * @access private
    */
-  function _make_job ()
+  protected function _make_job ()
   {
     $class_name = $this->app->final_class_name ('JOB', 'projects/obj/job.php');
     return new $class_name ($this->app);
@@ -306,7 +309,7 @@ class PROJECT extends FOLDER
    * @see FOLDER::new_entry()
    * @access private
    */
-  function _make_branch ()
+  protected function _make_branch ()
   {
     $class_name = $this->app->final_class_name ('BRANCH', 'projects/obj/branch.php');
     return new $class_name ($this->app);
@@ -316,7 +319,7 @@ class PROJECT extends FOLDER
    * @return COMPONENT
    * @access private
    */
-  function _make_component ()
+  protected function _make_component ()
   {
     $class_name = $this->app->final_class_name ('COMPONENT', 'projects/obj/component.php');
     return new $class_name ($this->app);
@@ -327,6 +330,7 @@ class PROJECT extends FOLDER
    * @access private
    */
   protected $_trunk;
+
   /**
    * @var PROJECT_OPTIONS
    * @access private
@@ -338,6 +342,7 @@ class PROJECT extends FOLDER
    * @access private
    */
   protected $_branch_cache;
+
   /**
    * @var QUERY_BASED_CACHE
    * @access private

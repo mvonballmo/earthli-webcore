@@ -55,7 +55,7 @@ class MAIL_RENDERER extends RENDERER
    * @param MAIL_RENDERER_STATE $state
    * @access private
    */
-  function _start_rendering ($options, $state)
+  protected function _start_rendering ($options, $state)
   {
     /* Save options to be restored later. */
    
@@ -67,21 +67,21 @@ class MAIL_RENDERER extends RENDERER
     /* Apply required changes to global options. */
     
     $this->context->set_root_behavior (Force_root_on);
-    $this->page->display_options->show_local_times = FALSE;
+    $this->page->display_options->show_local_times = false;
     
     $options = $this->page->template_options;
-    $options->header_visible = TRUE;
-    $options->footer_visible = TRUE;
-    $options->include_scripts = FALSE;
-    $options->show_login = FALSE;
-    $options->show_links = FALSE;
-    $options->check_browser = FALSE;
-    $options->close_logger = FALSE;
-    $options->show_statistics = FALSE;
-    $options->show_last_time_modified = FALSE;
+    $options->header_visible = true;
+    $options->footer_visible = true;
+    $options->include_scripts = false;
+    $options->show_login = false;
+    $options->show_links = false;
+    $options->check_browser = false;
+    $options->close_logger = false;
+    $options->show_statistics = false;
+    $options->show_last_time_modified = false;
     
-    $this->env->date_time_toolkit->formatter->show_local_time = FALSE;
-    $options->show_interactive = FALSE;
+    $this->env->date_time_toolkit->formatter->show_local_time = false;
+    $options->show_interactive = false;
   }
   
   /**
@@ -90,7 +90,7 @@ class MAIL_RENDERER extends RENDERER
    * @param MAIL_RENDERER_STATE $state
    * @access private
    */
-  function _finish_rendering ($options, $state)
+  protected function _finish_rendering ($options, $state)
   {
     $this->context->restore_root_behavior ();
     $this->page->display_options = $state->saved_display_options;
@@ -116,18 +116,21 @@ class MAIL_RENDERER_STATE
    * @var PAGE_DISPLAY_OPTIONS
    */
   public $saved_display_options;
+
   /**
    * Copy of the page's template options.
    * Stored by {@link _start_rendering()} and restored by {@link _finish_rendering()}. 
    * @var PAGE_TEMPLATE_OPTIONS
    */
   public $saved_template_options;
+
   /**
    * Saved value for {@link MAIL_RENDERER_OPTIONS::$show_interactive}. 
    * Stored by {@link _start_rendering()} and restored by {@link _finish_rendering()}. 
    * @var boolean
    */
   public $saved_show_local_time_option;
+
   /**
    * Saved value for {@link MAIL_RENDERER_OPTIONS::$show_interactive}. 
    * Stored by {@link _start_rendering()} and restored by {@link _finish_rendering()}. 

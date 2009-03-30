@@ -57,53 +57,58 @@ class MUNGER_BASE_TEST_TASK extends TEST_TASK
    * Allows you to validate the generated content in an HTML validator.
    * @var boolean
    */
-  public $show_html_output = FALSE;
+  public $show_html_output = false;
+
   /**
    * Show white space for token tests.
    * @var boolean
    */
-  public $show_white_space = FALSE;
+  public $show_white_space = false;
+
   /**
    * Show token output for token tests.
    * @var boolean
    */
-  public $show_tokens = FALSE;
+  public $show_tokens = false;
+
   /**
    * Show output for attribute tests.
    * @var boolean
    */
-  public $show_attributes = FALSE;
+  public $show_attributes = false;
+
   /**
    * Show statistics for the validator tests.
    * @var boolean
    */
-  public $show_validator_stats = FALSE;
+  public $show_validator_stats = false;
+
   /**
    * Show statistics for the munger tests.
    * @var boolean
    */
-  public $show_munger_stats = FALSE;
+  public $show_munger_stats = false;
 
   /**
    * @param CONTEXT $context Pass in an {@link APPLICATION} object.
    */
-  function MUNGER_BASE_TEST_TASK ($context)
+  public function MUNGER_BASE_TEST_TASK ($context)
   {
     TEST_TASK::TEST_TASK ($context);
-    $this->show_html_output = read_var ('show_html_output', FALSE);
-    $this->show_white_space = read_var ('show_white_space', FALSE);
-    $this->show_tokens = read_var ('show_tokens', FALSE);
-    $this->attributes = read_var ('attributes', FALSE);
-    $this->show_validator_stats = read_var ('show_validator_stats', FALSE);
-    $this->show_munger_stats = read_var ('show_munger_stats', FALSE);
+    $this->show_html_output = read_var ('show_html_output', false);
+    $this->show_white_space = read_var ('show_white_space', false);
+    $this->show_tokens = read_var ('show_tokens', false);
+    $this->attributes = read_var ('attributes', false);
+    $this->show_validator_stats = read_var ('show_validator_stats', false);
+    $this->show_munger_stats = read_var ('show_munger_stats', false);
   }
 
-  function _run_tests ()
+  protected function _run_tests ()
   {
 //    $this->_run_beta_tests ();
   }
 
-  function _execute ()
+  protected function _execute ()
   {
     $this->_num_errors = 0;
     $this->_num_tests = 0;
@@ -125,7 +130,7 @@ class MUNGER_BASE_TEST_TASK extends TEST_TASK
     echo $errors;
   }
 
-  function _run_beta_tests ()
+  protected function _run_beta_tests ()
   {
     $this->_validator = new MUNGER_DEFAULT_TEXT_VALIDATOR ();
 //    $this->_munger = new PLAIN_TEXT_MUNGER ();
@@ -186,8 +191,8 @@ don't
 
   $munger = new PLAIN_TEXT_MUNGER ();
 
-  $this->_munger->break_inside_word = TRUE;
-  $this->_munger->force_paragraphs = TRUE;
+  $this->_munger->break_inside_word = true;
+  $this->_munger->force_paragraphs = true;
 
   for ($i = 0; $i < 20; $i++)
   {
@@ -203,7 +208,7 @@ don't
 */
   }
 
-  function _generate_test ($input)
+  protected function _generate_test ($input)
   {
     $output = $this->_munger->transform ($input);
 
@@ -224,7 +229,7 @@ don't
 ";
   }
 
-  function _generate_validation ($input)
+  protected function _generate_validation ($input)
   {
     $this->_validator->validate ($input);
     $input = str_replace ('"', '\"', $input);
@@ -239,13 +244,13 @@ don't
    * Initialize any loggers needed for the process.
    * @access private
    */
-  function _set_up_logging ()
+  protected function _set_up_logging ()
   {
     parent::_set_up_logging ();
     $this->_add_log_channel (Msg_channel_munger);
   }
 
-  function _test_tokens ($input, $expected_token_count)
+  protected function _test_tokens ($input, $expected_token_count)
   {
     $this->_num_tests++;
 
@@ -308,7 +313,7 @@ don't
     }
   }
 
-  function _test_attributes ($input, $expected_prop_count)
+  protected function _test_attributes ($input, $expected_prop_count)
   {
     $this->_num_tests++;
 
@@ -353,7 +358,7 @@ don't
     }
   }
 
-  function _run_validator_test ($input, $errors_expected)
+  protected function _run_validator_test ($input, $errors_expected)
   {
     $this->_num_tests++;
 
@@ -367,7 +372,9 @@ don't
       echo "<div class=\"error\">Error detected</div>";
     }
     elseif ($this->show_validator_stats)
+    {
       echo "<hr style=\"clear: both\">\n";
+    }
 
     if (($errors_generated <> $errors_expected) || $this->show_validator_stats)
     {
@@ -377,12 +384,14 @@ don't
       if ($errors_generated)
       {
         foreach ($this->_validator->errors as $error)
+        {
           echo "$error->message<br>\n";
+        }
       }
     }
   }
 
-  function _run_munger_test ($input, $expected)
+  protected function _run_munger_test ($input, $expected)
   {
     $this->_num_tests++;
 
@@ -397,9 +406,13 @@ don't
 //      $this->_generate_test ($input);
     }
     elseif ($this->show_munger_stats)
+    {
       echo "<hr style=\"clear: both\">\n";
+    }
     elseif ($this->show_html_output)
+    {
       echo $output;
+    }
 
     if ((strcmp($output, $expected) != 0) || $this->show_munger_stats)
     {

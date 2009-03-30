@@ -53,7 +53,7 @@ class ARTICLE_COMMANDS extends DRAFTABLE_ENTRY_COMMANDS
   /**
    * @param ARTICLE $obj Configure commands for this object.
    */
-  function ARTICLE_COMMANDS ($entry)
+  public function ARTICLE_COMMANDS ($entry)
   {
     ENTRY_COMMANDS::ENTRY_COMMANDS ($entry);
 

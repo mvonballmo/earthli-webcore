@@ -62,7 +62,7 @@ class LOGGER_CONTAINER extends RAISABLE
    * @param boolean $copy_settings Copies settings from the current logger if
    * <code>True</code>.
    */
-  function set_logger ($logger, $copy_settings = TRUE)
+  public function set_logger ($logger, $copy_settings = true)
   {
     if ($copy_settings && $this->logger)
     {
@@ -79,7 +79,7 @@ class LOGGER_CONTAINER extends RAISABLE
    * @param boolean $copy_settings Copies settings from the current logger if
    * <code>True</code>.
    */
-  function add_logger ($logger, $copy_settings = TRUE)
+  public function add_logger ($logger, $copy_settings = true)
   {
     if (isset ($this->logger))
     {
@@ -95,7 +95,7 @@ class LOGGER_CONTAINER extends RAISABLE
    * Removes all loggers of this type (or descendant).
    * @param string $class_name
    */
-  function remove_loggers_of_type ($class_name)
+  public function remove_loggers_of_type ($class_name)
   {
     if (isset ($this->logger))
     {
@@ -121,7 +121,7 @@ class LOGGER_CONTAINER extends RAISABLE
    * Indicates that logging is complete.
    * Called {@link LOGGER::close()} on all nested loggers.
    */
-  function close_all ()
+  public function close_all ()
   {
     if (isset ($this->logger))
     {

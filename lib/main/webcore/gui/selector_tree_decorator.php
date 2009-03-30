@@ -60,7 +60,7 @@ class SELECTOR_TREE_DECORATOR extends TREE_DECORATOR
    * @param object $node
    * @param string $text
    */
-  function draw ($node, $text)
+  public function draw ($node, $text)
   {
     $node_info = $this->node_info ();
     $id = $node_info->id ($node);
@@ -88,11 +88,13 @@ class MULTI_SELECTOR_TREE_DECORATOR extends TREE_DECORATOR
    * @var string
    */
   public $control_name;
+
   /**
    * Should child nodes be toggled with the parent?
    * @var boolean
    */
-  public $auto_toggle_children = TRUE;
+  public $auto_toggle_children = true;
+
   /**
    * @var string
    */
@@ -102,7 +104,7 @@ class MULTI_SELECTOR_TREE_DECORATOR extends TREE_DECORATOR
    * @param TREE $tree Decorate this tree.
    * @param array[integer] $selected_node_ids Initially selected node ids
    */
-  function MULTI_SELECTOR_TREE_DECORATOR ($tree, $selected_node_ids)
+  public function MULTI_SELECTOR_TREE_DECORATOR ($tree, $selected_node_ids)
   {
     TREE_DECORATOR::TREE_DECORATOR ($tree);
     $this->selected_node_ids = $selected_node_ids;
@@ -112,7 +114,7 @@ class MULTI_SELECTOR_TREE_DECORATOR extends TREE_DECORATOR
    * Node is about to be rendered.
    * @param object $node
    */
-  function node_found ($node)
+  public function node_found ($node)
   {
     if ($this->auto_toggle_children)
     {
@@ -130,7 +132,7 @@ class MULTI_SELECTOR_TREE_DECORATOR extends TREE_DECORATOR
   /**
    * Called before displaying any nodes.
    */
-  function pre_iterate ()
+  public function pre_iterate ()
   {
     if ($this->auto_toggle_children)
     {
@@ -141,7 +143,7 @@ class MULTI_SELECTOR_TREE_DECORATOR extends TREE_DECORATOR
   /**
    * Called after all nodes have been displayed.
    */
-  function post_iterate ()
+  public function post_iterate ()
   {
     if ($this->auto_toggle_children)
     {
@@ -162,7 +164,7 @@ class MULTI_SELECTOR_TREE_DECORATOR extends TREE_DECORATOR
   }
   ?>
 
-  function _on_click_<?php echo $control_name ?> (ctrl)
+  protected function _on_click_<?php echo $control_name ?> (ctrl)
   {
     var f = document.getElementById ('<?php echo $form_name; ?>');
     var id = ctrl.value;
@@ -193,7 +195,7 @@ class MULTI_SELECTOR_TREE_DECORATOR extends TREE_DECORATOR
    * @param object $node
    * @param string $text
    */
-  function draw ($node, $text)
+  public function draw ($node, $text)
   {
     $control_name = $this->control_name;
     $node_info = $this->node_info ();

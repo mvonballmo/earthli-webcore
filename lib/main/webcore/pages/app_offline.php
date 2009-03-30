@@ -29,8 +29,8 @@ http://www.earthli.com/software/webcore
   $app_name = read_var ('app_name');
 
   $Page->title->subject = $app_name . ' is Offline';
-  $Page->template_options->header_visible = FALSE;
-  $Page->template_options->footer_visible = FALSE;
+  $Page->template_options->header_visible = false;
+  $Page->template_options->footer_visible = false;
   
   $Page->theme->main_CSS_file_name = '{styles}/themes/ice';
   $Page->theme->font_name_CSS_file_name = '{styles}/fonts/verdana'; 

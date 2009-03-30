@@ -234,7 +234,7 @@
     $v_add_path = "";
     $v_remove_path = "";
     $v_remove_all_path = false;
-    $v_options[PCLZIP_OPT_NO_COMPRESSION] = FALSE;
+    $v_options[PCLZIP_OPT_NO_COMPRESSION] = false;
 
     // ----- Look for variable options arguments
     $v_size = func_num_args();
@@ -395,7 +395,7 @@
     $v_add_path = "";
     $v_remove_path = "";
     $v_remove_all_path = false;
-    $v_options[PCLZIP_OPT_NO_COMPRESSION] = FALSE;
+    $v_options[PCLZIP_OPT_NO_COMPRESSION] = false;
 
     // ----- Look for variable options arguments
     $v_size = func_num_args();
@@ -636,7 +636,7 @@
     //--(MAGIC-PclTrace)--//PclTraceFctMessage(__FILE__, __LINE__, 4, "$v_size arguments passed to the method");
 
     // ----- Default values for option
-    $v_options[PCLZIP_OPT_EXTRACT_AS_STRING] = FALSE;
+    $v_options[PCLZIP_OPT_EXTRACT_AS_STRING] = false;
 
     // ----- Look for arguments
     if ($v_size > 0) {
@@ -791,7 +791,7 @@
     //--(MAGIC-PclTrace)--//PclTraceFctMessage(__FILE__, __LINE__, 4, "$v_size arguments passed to the method");
 
     // ----- Default values for option
-    $v_options[PCLZIP_OPT_EXTRACT_AS_STRING] = FALSE;
+    $v_options[PCLZIP_OPT_EXTRACT_AS_STRING] = false;
 
     // ----- Look for arguments
     if ($v_size > 1) {
@@ -839,7 +839,7 @@
           $v_path .= $v_options[PCLZIP_OPT_ADD_PATH];
         }
         if (!isset($v_options[PCLZIP_OPT_EXTRACT_AS_STRING])) {
-          $v_options[PCLZIP_OPT_EXTRACT_AS_STRING] = FALSE;
+          $v_options[PCLZIP_OPT_EXTRACT_AS_STRING] = false;
           //--(MAGIC-PclTrace)--//PclTraceFctMessage(__FILE__, __LINE__, 4, "Option PCLZIP_OPT_EXTRACT_AS_STRING not set.");
         }
         else {
@@ -2279,7 +2279,7 @@
       //--(MAGIC-PclTrace)--//PclTraceFctEnd(__FILE__, __LINE__, PclZip::errorCode(), PclZip::errorInfo());
       return PclZip::errorCode();
     }
-    */
+   */
 
     // ----- Set the file properties
     clearstatcache();

@@ -54,11 +54,13 @@ class LOGGABLE extends WEBCORE_OBJECT
    * @var LOGGER_CONTAINER
    */
   public $logs;
+
   /**
    * {@link record()} uses this channel, by default.
    * @var string
    */
   public $default_channel = Msg_channel_default;
+
   /**
    * {@link record()} uses this type, by default.
    * @var string
@@ -68,7 +70,7 @@ class LOGGABLE extends WEBCORE_OBJECT
   /**
    * @param CONTEXT $context
    */
-  function LOGGABLE ($context)
+  public function LOGGABLE ($context)
   {
     WEBCORE_OBJECT::WEBCORE_OBJECT ($context);
     $this->logs = new LOGGER_CONTAINER ();
@@ -82,7 +84,7 @@ class LOGGABLE extends WEBCORE_OBJECT
    * @param boolean $has_html Does the message contain HTML tags that must be
    * preserved?
    */
-  function record ($msg, $type = '', $channel = '', $has_html = FALSE)
+  public function record ($msg, $type = '', $channel = '', $has_html = false)
   {
     if (isset ($this->logs->logger))
     {
@@ -104,7 +106,7 @@ class LOGGABLE extends WEBCORE_OBJECT
    * @param boolean $has_html Does the message contain HTML tags that must be
    * preserved?
    */
-  function record_more ($msg, $has_html = FALSE)
+  public function record_more ($msg, $has_html = false)
   {
     if (isset ($this->logs->logger))
     {

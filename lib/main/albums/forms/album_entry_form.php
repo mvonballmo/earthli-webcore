@@ -51,15 +51,15 @@ class ALBUM_ENTRY_FORM extends ENTRY_FORM
   /**
    * @param ALBUM $folder Album in which to add or edit the picture.
    */
-  function ALBUM_ENTRY_FORM ($folder)
+  public function ALBUM_ENTRY_FORM ($folder)
   {
     ENTRY_FORM::ENTRY_FORM ($folder);
 
     $field = new DATE_TIME_FIELD ();
     $field->id = 'day';
     $field->title = 'Day';
-    $field->required = TRUE;
-    $field->sticky = TRUE;
+    $field->required = true;
+    $field->sticky = true;
     $this->add_field ($field);
   }
 
@@ -67,13 +67,13 @@ class ALBUM_ENTRY_FORM extends ENTRY_FORM
    * Load initial properties from this picture.
    * @param ALBUM_ENTRY $obj
    */
-  function load_from_object ($obj)
+  public function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
     $this->set_value ('day', $obj->date);
   }
 
-  function load_with_defaults ()
+  public function load_with_defaults ()
   {
     parent::load_with_defaults ();
     $this->load_from_client ('day', $this->_folder->first_day);
@@ -81,10 +81,10 @@ class ALBUM_ENTRY_FORM extends ENTRY_FORM
 
   /**
    * Does this form hold valid data for this picture?
-    * @param ALBUM_ENTRY $obj
-    * @access private
-    */
-  function _post_validate ($obj)
+   * @param ALBUM_ENTRY $obj
+   * @access private
+   */
+  protected function _post_validate ($obj)
   {
     parent::_post_validate ($obj);
 
@@ -102,7 +102,7 @@ class ALBUM_ENTRY_FORM extends ENTRY_FORM
    * @param ALBUM_ENTRY $obj
    * @access private
    */
-  function _store_to_object ($obj)
+  protected function _store_to_object ($obj)
   {
     parent::_store_to_object ($obj);
     $obj->date = $this->value_for ('day');

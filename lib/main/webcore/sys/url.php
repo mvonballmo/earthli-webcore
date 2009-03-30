@@ -106,13 +106,14 @@ class URL_OPTIONS extends FILE_OPTIONS
    * @var array[string,string]
    */
   public $domains;
+
   /**
    * The main domain for this web site.
    * @var string
    */
   public $main_domain;
 
-  function URL_OPTIONS ()
+  public function URL_OPTIONS ()
   {
     $this->domains = array ('http://localhost' => $_SERVER ['DOCUMENT_ROOT']);
   }
@@ -130,7 +131,7 @@ class URL
   /**
    * @param string $text Initial path.
    */
-  function URL ($text)
+  public function URL ($text)
   {
     $this->_text = urldecode ($text);
   }
@@ -138,7 +139,7 @@ class URL
   /**
    * @param string $text Path to use.
    */
-  function set_text ($text)
+  public function set_text ($text)
   {
     $this->_text = $text;
   }
@@ -149,7 +150,7 @@ class URL
    * string is examined and cleaned with {@link PHP_MANUAL#htmlspecialchars}.
    * @return string
    */
-  function as_text ($clean_query_string = FALSE)
+  public function as_text ($clean_query_string = false)
   {
     $Result = $this->_text;
 
@@ -163,7 +164,7 @@ class URL
         foreach ($qs_parts as $qs_part)
         {
           $equal_pos = strpos ($qs_part, '=');
-          if ($equal_pos !== FALSE)
+          if ($equal_pos !== false)
           {
             $new_parts [] = substr ($qs_part, 0, $equal_pos) . '=' . htmlspecialchars (substr ($qs_part, $equal_pos + 1));
           }
@@ -183,7 +184,7 @@ class URL
    * Return the rendered URL, escaped for HTML.
    * @return string
    */
-  function as_html ()
+  public function as_html ()
   {
     return htmlentities ($this->_text);
   }
@@ -192,7 +193,7 @@ class URL
    * Just the domain name, without trailing delimeter.
    * @return string
    */
-  function domain ()
+  public function domain ()
   {
     return extract_domain ($this->_text, $this->options ());
   }
@@ -202,12 +203,12 @@ class URL
    * Trailing '/' is included
    * @return string
    */
-  function path ()
+  public function path ()
   {
     list($text, $args) = $this->_extract_resource_and_args ();
     $slash = $this->path_delimiter ();
     $slash_pos = strrpos ($text, $slash);
-    if ($slash_pos !== FALSE)
+    if ($slash_pos !== false)
     {
       // slash is part of protocol (e.g. http://earthli.com)
       if (($slash_pos != 0) && ($text [$slash_pos - 1] == $slash))
@@ -231,6 +232,8 @@ class URL
         return $text . $slash;
       }
     }
+    
+    return '';
   }
 
   /**
@@ -238,9 +241,8 @@ class URL
    * Trailing '/' is included
    * @return string
    */
-  function path_without_domain ()
+  public function path_without_domain ()
   {
-    $path = $this->path ();
     return strip_domain($this->path(), $this->options());
   }
 
@@ -248,14 +250,14 @@ class URL
    * Just the file name with extension.
    * @return string
    */
-  function name ()
+  public function name ()
   {
     list($text, $args) = $this->_extract_resource_and_args ();
     $slash = $this->path_delimiter ();
     $slash_pos = strrpos ($text, $slash);
     if ($slash_pos >= 0)
     {
-      if ($slash_pos === FALSE)
+      if ($slash_pos === false)
       {
         return $text;
       }
@@ -269,7 +271,6 @@ class URL
       return substr ($text, $slash_pos + 1);
     }
 
-
     return $text;
   }
 
@@ -277,7 +278,7 @@ class URL
    * Return text after the last delimiter.
    * @return string
    */
-  function name_with_query_string ()
+  public function name_with_query_string ()
   {
     list($text, $args) = $this->_extract_resource_and_args ();
     return $this->_text_for_resource_and_args ($this->name (), $args);
@@ -287,7 +288,7 @@ class URL
    * Just the file name without the extension.
    * @return string
    */
-  function name_without_extension ()
+  public function name_without_extension ()
   {
     $name = $this->name ();
     $ext_len = strlen ($this->extension ());
@@ -296,7 +297,6 @@ class URL
       return substr ($name, 0, - $ext_len - 1);
     }
 
-
     return $name;
   }
 
@@ -304,7 +304,7 @@ class URL
    * Just the file extension.
    * @return string
    */
-  function extension ()
+  public function extension ()
   {
     return $this->_extension_for ($this->name ());
   }
@@ -314,13 +314,15 @@ class URL
    * This is the portion after the '?'. Can be empty.
    * @return string
    */
-  function query_string ()
+  public function query_string ()
   {
     $args_pos = strpos ($this->_text, '?');
     if ($args_pos)
     {
       return substr ($this->_text, $args_pos + 1);
     }
+    
+    return '';
   }
 
   /**
@@ -328,7 +330,7 @@ class URL
    * @return char
    * @see options()
    */
-  function path_delimiter ()
+  public function path_delimiter ()
   {
     $opts = $this->options ();
     return $opts->path_delimiter;
@@ -339,7 +341,7 @@ class URL
    * @return FILE_OPTIONS
    * @see path_delimiter()
    */
-  function options ()
+  public function options ()
   {
     return global_url_options ();
   }
@@ -348,7 +350,7 @@ class URL
    * Replace the file extension.
    * @param string $ext
    */
-  function replace_extension ($ext)
+  public function replace_extension ($ext)
   {
     list($text, $args) = $this->_extract_resource_and_args ();
     $curr_ext = $this->_extension_for ($text);
@@ -374,7 +376,7 @@ class URL
    * Add the text to the file name.
    * Used to generate thumbnail names.
    */
-  function append_to_name ($name)
+  public function append_to_name ($name)
   {
     list($text, $args) = $this->_extract_resource_and_args ();
     $parts = explode ('.', $text);
@@ -394,7 +396,7 @@ class URL
    * Replace the file name, preserving extension and query string.
    * @param string $name
    */
-  function replace_name ($name)
+  public function replace_name ($name)
   {
     $path = $this->path ();
     $qs = $this->query_string ();
@@ -415,7 +417,7 @@ class URL
    * Path and query arguments are retained.
    * @param string $name
    */
-  function replace_name_and_extension ($name)
+  public function replace_name_and_extension ($name)
   {
     $path = $this->path ();
     $qs = $this->query_string ();
@@ -430,7 +432,7 @@ class URL
    * Replace the entire query string.
    * @param string $query
    */
-  function replace_query_string ($query)
+  public function replace_query_string ($query)
   {
     $qs = $this->query_string ();
     if ($qs)
@@ -446,7 +448,7 @@ class URL
   /**
    * Removes the file name from the URL.
    */
-  function strip_name ()
+  public function strip_name ()
   {
     $this->_text = $this->path ();
   }
@@ -454,7 +456,7 @@ class URL
   /**
    * Removes the domain from the URL.
    */
-  function strip_domain ()
+  public function strip_domain ()
   {
     $this->_text = strip_domain ($this->_text, $this->options ());
   }
@@ -462,16 +464,16 @@ class URL
   /**
    * Removes the protocol from the URL.
    */
-  function strip_protocol ()
+  public function strip_protocol ()
   {
-    $this->_text = strip_protocol ($this->_text, $this->options ());
+    $this->_text = strip_protocol ($this->_text);
   }
 
   /**
    * Add a url argument.
    * @param string $arg
    */
-  function add_argument ($name, $value)
+  public function add_argument ($name, $value)
   {
     if (is_bool ($value) && ! $value)
     {
@@ -486,11 +488,11 @@ class URL
    * replace_arguments()} instead.
    * @param string $args
    */
-  function add_arguments ($args)
+  public function add_arguments ($args)
   {
     if ($args)
     {
-      if (strpos ($this->_text, '?') !== FALSE)
+      if (strpos ($this->_text, '?') !== false)
       {
         $this->_text .= '&' . $args;
       }
@@ -509,7 +511,7 @@ class URL
    * @param string $args_as_string String of query string-style arguments
    * (key1=value&key2=value...)
    */
-  function replace_arguments ($args_as_string)
+  public function replace_arguments ($args_as_string)
   {
     if ($args_as_string)
     {
@@ -532,7 +534,7 @@ class URL
    * @param string $arg_name
    * @param string $arg_value
    */
-  function replace_argument ($name, $value)
+  public function replace_argument ($name, $value)
   {
     $this->_integrate_into_query_string (array ($name => $value));
   }
@@ -541,7 +543,7 @@ class URL
    * Removes 'num' folders from the path.
    * @param integer $num
    */
-  function go_back ($num = 1)
+  public function go_back ($num = 1)
   {
     $name = $this->name_with_query_string ();
     $this->strip_name ();
@@ -557,7 +559,7 @@ class URL
    * Handles separate merging and resolves all '..' marks
    * @param string $url
    */
-  function append ($url)
+  public function append ($url)
   {
     $opts = $this->options ();
     $is_file = is_file_name ($url, $opts);
@@ -574,7 +576,7 @@ class URL
    * @param string $url
    * @return string
    */
-  function appended_as_text ($url)
+  public function appended_as_text ($url)
   {
     // CLONE
     $copy = $this;
@@ -587,7 +589,7 @@ class URL
    * File name is preserved if present.
    * @param string $folder
    */
-  function append_folder ($folder)
+  public function append_folder ($folder)
   {
     list($text, $args) = $this->_extract_resource_and_args ();
     if ($text)
@@ -605,7 +607,7 @@ class URL
    * Only prepends if the current url is not already fully-qualified
    * @param string $url
    */
-  function prepend ($url)
+  public function prepend ($url)
   {
     if (! $this->has_domain ())
     {
@@ -621,7 +623,7 @@ class URL
    * @param string $domain If not empty, checks for the given domain only.
    * @return boolean
    */
-  function has_domain ($domain = '')
+  public function has_domain ($domain = '')
   {
     return has_domain ($this->_text, $domain, $this->options ());
   }
@@ -631,7 +633,7 @@ class URL
    * @see has_domain()
    * @return boolean
    */
-  function has_local_domain ()
+  public function has_local_domain ()
   {
     return has_local_domain ($this->_text, $this->options ());
   }
@@ -640,7 +642,7 @@ class URL
    * Make sure the path ends in a delimiter.
    * @return string
    */
-  function ensure_ends_with_delimiter ()
+  public function ensure_ends_with_delimiter ()
   {
     if (! $this->ends_with_delimiter ())
     {
@@ -654,7 +656,7 @@ class URL
    * @access private
    * @return boolean
    */
-  function ends_with_delimiter ()
+  public function ends_with_delimiter ()
   {
     return ends_with_delimiter ($this->_text, $this->options ());
   }
@@ -664,10 +666,10 @@ class URL
    * @return array[string] The first entry is the resource, then second is the query string. Either may be empty.
    * @access private
    */
-  function _extract_resource_and_args ()
+  protected function _extract_resource_and_args ()
   {
     $args_pos = strpos ($this->_text, '?');
-    if ($args_pos !== FALSE)
+    if ($args_pos !== false)
     {
       $Result [] = substr ($this->_text, 0, $args_pos);
       $Result [] = substr ($this->_text, $args_pos + 1);
@@ -687,7 +689,7 @@ class URL
    * @param string $args
    * @access private
    */
-  function _text_for_resource_and_args ($text, $args)
+  protected function _text_for_resource_and_args ($text, $args)
   {
     $Result = $text;
 
@@ -711,15 +713,17 @@ class URL
    * @param string $text May have a path, but may not have a query string.
    * @access private
    */
-  function _extension_for ($text)
+  protected function _extension_for ($text)
   {
     $opts = $this->options ();
     $dot_pos = strrpos ($text, '.');
     $sep_pos = strrpos ($text, $opts->path_delimiter);
-    if (($dot_pos !== FALSE) && (($sep_pos === FALSE) || ($dot_pos > $sep_pos)))
+    if (($dot_pos !== false) && (($sep_pos === false) || ($dot_pos > $sep_pos)))
     {
       return substr ($text, $dot_pos + 1);
     }
+    
+    return '';
   }
 
   /**
@@ -729,7 +733,7 @@ class URL
    * query string.
    * @access private
    */
-  function _integrate_into_query_string ($new_args)
+  protected function _integrate_into_query_string ($new_args)
   {
     @list ($url, $query) = explode ('?', $this->_text);
     if (! isset ($query))
@@ -791,7 +795,7 @@ class FILE_URL extends URL
    * @param CONTEXT $context
    * @param string $text Initial path.
    */
-  function FILE_URL ($text)
+  public function FILE_URL ($text)
   {
     URL::URL ($text);
     $this->_text = str_replace ('/', $this->path_delimiter (), $this->_text);
@@ -801,7 +805,7 @@ class FILE_URL extends URL
    * Transform the file name, if necessary, into a legal id for the server file system.
    * @see normalize_path()
    */
-  function normalize ()
+  public function normalize ()
   {
     $this->_text = normalize_path ($this->_text);
   }
@@ -811,7 +815,7 @@ class FILE_URL extends URL
    * @see is_valid_path()
    * @return boolean
    */
-  function is_valid ()
+  public function is_valid ()
   {
     return is_valid_path ($this->_text);
   }
@@ -820,7 +824,7 @@ class FILE_URL extends URL
    * Does the file exist on the server?
    * @return boolean
    */
-  function exists ()
+  public function exists ()
   {
     return file_exists ($this->_text);
   }
@@ -832,7 +836,7 @@ class FILE_URL extends URL
    * to create the file, if one is included in the URL.
    * @param boolean $normalize_allowed If True, illegal file ids are converted before attempting creation.
    */
-  function ensure_path_exists ($normalize_allowed = TRUE)
+  public function ensure_path_exists ($normalize_allowed = true)
   {
     if ($normalize_allowed)
     {
@@ -849,7 +853,7 @@ class FILE_URL extends URL
    * URL does not include a file name.
    * @param boolean $normalize_allowed If True, illegal file ids are converted before attempting creation.
    */
-  function ensure_file_exists ($normalize_allowed = TRUE)
+  public function ensure_file_exists ($normalize_allowed = true)
   {
     if (! is_file ($this->_text))
     {
@@ -867,7 +871,7 @@ class FILE_URL extends URL
    * Return true if there is that path is fully expanded.
    * @return boolean
    */
-  function has_root ()
+  public function has_root ()
   {
     return has_root ($this->_text, $this->options ());
   }
@@ -876,12 +880,12 @@ class FILE_URL extends URL
    * Default options for this object.
    * @return FILE_OPTIONS
    */
-  function options ()
+  public function options ()
   {
     return global_file_options ();
   }
 
-  function write_text_file ($text)
+  public function write_text_file ($text)
   {
     $this->ensure_path_exists ();
     write_text_file ($this->as_text (), $text);
@@ -896,16 +900,18 @@ class FILE_URL extends URL
  * @param string $protocol
  * @return string
  */
-function ensure_has_protocol ($f, $protocol, $opts = null)
+function ensure_has_protocol ($f, $protocol)
 {
-  if (! has_protocol ($f, $protocol, $opts))
+  if (! has_protocol ($f, $protocol))
   {
-    if (has_protocol ($f, $opts))
+    if (has_protocol ($f))
     {
-      strip_protocol ($f, $opts);
+      strip_protocol ($f);
     }
+    
     return $protocol . '://' . $f;
   }
+  
   return $f;
 }
 
@@ -917,13 +923,14 @@ function ensure_has_protocol ($f, $protocol, $opts = null)
  * @param FILE_OPTIONS $opts
  * @return boolean
  */
-function has_protocol ($f, $protocol = '', $opts = null)
+function has_protocol ($f, $protocol = '')
 {
   $Result = strpos ($f, ':') > 0;
   if ($Result && $protocol)
   {
     $Result = strpos ($f, $protocol) === 0;
   }
+  
   return $Result;
 }
 
@@ -931,13 +938,12 @@ function has_protocol ($f, $protocol = '', $opts = null)
  * Remove any drive or domain information.
  * @see has_domain()
  * @param string $f The path to check.
- * @param FILE_OPTIONS $opts
  * @return string
  */
-function strip_protocol ($f, $opts = null)
+function strip_protocol ($f)
 {
   $colon_pos = strpos ($f, ':');
-  if ($colon_pos !== FALSE)
+  if ($colon_pos !== false)
   {
     $f = substr ($f, $colon_pos + 3);
   }
@@ -948,13 +954,12 @@ function strip_protocol ($f, $opts = null)
  * Remove any drive or domain information.
  * @see has_domain()
  * @param string $f The path to check.
- * @param FILE_OPTIONS $opts
  * @return array[string,string]
  */
-function split_protocol ($f, $opts = null)
+function split_protocol ($f)
 {
   $colon_pos = strpos ($f, ':');
-  if ($colon_pos !== FALSE)
+  if ($colon_pos !== false)
   {
     $Result [] = substr ($f, 0, $colon_pos + 3);
     $Result [] = substr ($f, $colon_pos + 3);
@@ -977,7 +982,7 @@ function split_protocol ($f, $opts = null)
 function extract_domain ($f, $opts = null)
 {
   $colon_pos = strpos ($f, ':');
-  if ($colon_pos !== FALSE)
+  if ($colon_pos !== false)
   {
     if (! isset ($opts))
     {
@@ -1002,7 +1007,7 @@ function extract_domain ($f, $opts = null)
     $opts = global_file_options ();
   }
   $slash_pos = strpos ($f, $opts->path_delimiter);
-  if ($slash_pos !== FALSE)
+  if ($slash_pos !== false)
   {
     return substr ($f, 0, $slash_pos);
   }
@@ -1045,7 +1050,7 @@ function has_domain ($f, $domain = '', $opts = null)
 function strip_domain ($f, $opts = null)
 {
   $colon_pos = strpos ($f, ':');
-  if ($colon_pos !== FALSE)
+  if ($colon_pos !== false)
   {
     if (! isset ($opts))
     {
@@ -1083,7 +1088,7 @@ function has_local_domain ($f, $opts = null)
       }
     }
   }
-  return FALSE;
+  return false;
 }
 
 /**
@@ -1160,7 +1165,7 @@ function url_to_file_name ($f, $opts = null)
  * @return string
  * @see ensure_path_exists()
  */
-function url_to_folder ($f, $opts = null, $create_if_not_found = TRUE)
+function url_to_folder ($f, $opts = null, $create_if_not_found = true)
 {
   $Result = url_to_file_name ($f, $opts);
   if ($Result && $create_if_not_found && ! is_dir ($Result))

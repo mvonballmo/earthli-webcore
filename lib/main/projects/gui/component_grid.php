@@ -52,43 +52,48 @@ class COMPONENT_GRID extends STANDARD_GRID
    * @var string
    */
   public $box_style = 'object-in-list';
+
   /**
    * @var string
    */
   public $object_name = 'Component';
+
   /**
    * @var integer
    */
   public $spacing = 4;
+
   /**
    * @var boolean
    */
-  public $even_columns = FALSE;
+  public $even_columns = false;
+
   /**
    * @var boolean
    */
-  public $show_separator = FALSE;
+  public $show_separator = false;
+
   /**
    * @var boolean Show creator/modifier with releases?
    */
-  public $show_user = TRUE;
+  public $show_user = true;
+
   /**
    * @var boolean Show project for release?
    */
-  public $show_folder = FALSE;
+  public $show_folder = false;
+
   /**
    * @var boolean Show branch for release?
    */
-  public $show_branch = FALSE;
+  public $show_branch = false;
 
   /**
    * @param RELEASE $obj
-    * @access private
-    */
-  function _draw_box ($obj)
+   * @access private
+   */
+  protected function _draw_box ($obj)
   {
-    $folder = $obj->parent_folder ();
-    $creator = $obj->creator ();
 ?>
   <div class="grid-title">
     <?php echo $obj->icon_as_html ('32px') . ' ' . $obj->title_as_link (); ?>
@@ -108,7 +113,6 @@ class COMPONENT_GRID extends STANDARD_GRID
     foreach ($entry_types as $type_info)
     {
       $panel_name = strtolower ($type_info->plural_title);
-      $t = $obj->title_formatter ();
       $url->replace_argument ('panel', $panel_name);
       $menu->append ($type_info->plural_title, $url->as_html ());
     }

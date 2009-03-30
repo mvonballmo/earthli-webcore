@@ -85,7 +85,7 @@ class TEXT_OPTIONS
    * @param string $value
    * @return string
    */
-  function convert_to_html_attribute ($value)
+  public function convert_to_html_attribute ($value)
   {
     return $this->convert_to_html_entities ($value, ENT_QUOTES);
   }
@@ -100,12 +100,12 @@ class TEXT_OPTIONS
    * @param string $value
    * @return string
    */
-  function convert_to_html_entities ($value, $quote_style = ENT_NOQUOTES)
+  public function convert_to_html_entities ($value, $quote_style = ENT_NOQUOTES)
   {
     if (is_php_5 ())
     {
       // The fourth parameter "double_encode" is only supported on PHP 5.2.3 and higher
-      //$Result = htmlentities ($value, $quote_style, 'ISO-8859-1', FALSE);
+      //$Result = htmlentities ($value, $quote_style, 'ISO-8859-1', false);
       $Result = htmlentities ($value, $quote_style, 'ISO-8859-1');
     }
     else
@@ -126,7 +126,7 @@ class TEXT_OPTIONS
    * @param string $value
    * @return string
    */
-  function convert_from_html_entities ($value, $quote_style = ENT_QUOTES)
+  public function convert_from_html_entities ($value, $quote_style = ENT_QUOTES)
   {
     /* Extra characters are defined as [char] => [&entity;], so flip the
      * array in order to translate FROM html.

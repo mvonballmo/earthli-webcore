@@ -62,7 +62,7 @@ class OBJECT_LIST_TITLE extends WEBCORE_OBJECT
    * Add an object to the subject.
    * @param WEBCORE_OBJECT $obj
    */
-  function add_object ($obj)
+  public function add_object ($obj)
   {
     $this->num_objects++;
     $type_info = $obj->type_info ();
@@ -81,7 +81,7 @@ class OBJECT_LIST_TITLE extends WEBCORE_OBJECT
    * Any added items are ignored and not used to generate the subject.
    * @param string $text
    */
-  function set_text ($text)
+  public function set_text ($text)
   {
     $this->_text = $text;
   }
@@ -91,7 +91,7 @@ class OBJECT_LIST_TITLE extends WEBCORE_OBJECT
    * If {@link set_text()} was not called, all objects added with {@link add_object()}
    * are combined into a subject line.
    */
-  function as_text ()
+  public function as_text ()
   {
     if ($this->_text)
     {
@@ -99,8 +99,10 @@ class OBJECT_LIST_TITLE extends WEBCORE_OBJECT
     }
     else
     {
-      foreach ($this->_items as $id => $item)
+      foreach ($this->_items as $item)
+      {
         $item_texts [] = $item->as_text ();
+      }
       return join ('/', $item_texts);
     }
   }
@@ -111,6 +113,7 @@ class OBJECT_LIST_TITLE extends WEBCORE_OBJECT
    * @access private
    */
   protected $_text = '';
+
   /**
    * @var array [OBJECT_LIST_TITLE_ITEM]
    * @access private
@@ -135,13 +138,14 @@ class OBJECT_LIST_TITLE_ITEM
    * @var TYPE_INFO
    */
   public $type_info;
+
   /**
    * Number of objects in this item.
    * @var integer
    */
   public $num_objects = 0;
 
-  function as_text ()
+  public function as_text ()
   {
     if ($this->num_objects > 0)
     {
@@ -150,9 +154,10 @@ class OBJECT_LIST_TITLE_ITEM
         return $this->num_objects . ' ' . $this->type_info->plural_title;
       }
 
-
       return $this->num_objects . ' ' . $this->type_info->singular_title;
     }
+    
+    return '';
   }
 }
 

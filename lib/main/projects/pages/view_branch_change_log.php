@@ -55,10 +55,10 @@ http://www.earthli.com/software/webcore/projects
 
     $Page->start_display ();
 
-    $show_all = read_var ('show_all', TRUE);
-    $show_description = read_var ('show_description', TRUE);
-    $show_date = read_var ('show_date', TRUE);
-    $show_user = read_var ('show_user', TRUE);
+    $show_all = read_var ('show_all', true);
+    $show_description = read_var ('show_description', true);
+    $show_date = read_var ('show_date', true);
+    $show_user = read_var ('show_user', true);
 
     if ($printable)
     {

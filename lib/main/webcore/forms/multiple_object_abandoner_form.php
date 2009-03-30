@@ -55,7 +55,7 @@ class MULTIPLE_OBJECT_ABANDONER_FORM extends MULTIPLE_OBJECT_ACTION_FORM
    * @param FOLDER $fldr
    * @access private
    */
-  function _folder_run ($fldr)
+  protected function _folder_run ($fldr)
   {
   }
 
@@ -64,9 +64,9 @@ class MULTIPLE_OBJECT_ABANDONER_FORM extends MULTIPLE_OBJECT_ACTION_FORM
    * @param ENTRY $entry
    * @access private
    */
-  function _entry_run ($entry)
+  protected function _entry_run ($entry)
   {
-    $entry->set_state (Abandoned, TRUE);
+    $entry->set_state (Abandoned, true);
   }
 
   /**
@@ -74,7 +74,7 @@ class MULTIPLE_OBJECT_ABANDONER_FORM extends MULTIPLE_OBJECT_ACTION_FORM
    * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_message ($renderer)
+  protected function _draw_message ($renderer)
   {
     $renderer->draw_text_row ('', 'Are you sure you want to abandon ' . $this->object_list->description () . '?');
     $renderer->draw_separator ();

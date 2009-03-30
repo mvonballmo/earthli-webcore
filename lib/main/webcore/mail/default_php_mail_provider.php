@@ -50,9 +50,9 @@ class DEFAULT_PHP_MAIL_PROVIDER extends MAIL_PROVIDER
 {
   /**
    * @param MAIL_MESSAGE $message
-    * @access private
-    */
-  function _internal_send ($message)
+   * @access private
+   */
+  protected function _internal_send ($message)
   {
     $mailer_id = "PHP " . phpversion ();
     $header = $this->renderer->_line ("From: $message->send_from_name <$message->send_from_address>");
@@ -89,9 +89,10 @@ class DEFAULT_PHP_MAIL_PROVIDER extends MAIL_PROVIDER
 
     ini_set ('SMTP', $this->context->mail_options->SMTP_server);
     ini_set ('sendmail_from', $message->send_from_address);
-    ini_set ('track_errors', TRUE);
+    ini_set ('track_errors', true);
 
     $this->_last_error = '';
+    $php_errormsg = null;
     $result = @mail (implode (',', $message->send_to), $message->subject, $message->body, $header);
     if (isset ($php_errormsg))
     {
@@ -103,18 +104,18 @@ class DEFAULT_PHP_MAIL_PROVIDER extends MAIL_PROVIDER
 
   /**
    * @return string
-    * @access private
-    */
-  function last_error_as_html ()
+   * @access private
+   */
+  public function last_error_as_html ()
   {
     return $this->_last_error;
   }
 
   /**
    * @return string
-    * @access private
-    */
-  function last_error_as_plain_text ()
+   * @access private
+   */
+  public function last_error_as_plain_text ()
   {
     return html_entity_decode ($this->_last_error);
   }

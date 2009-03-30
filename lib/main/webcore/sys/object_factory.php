@@ -61,7 +61,7 @@ class OBJECT_FACTORY extends RAISABLE
    * @param string $file_name Location of the definition for 'class_name'.
    * @param string $context Distiguishes among multiple similar registrations.
    */
-  function register_class ($id, $class_name, $file_name = '', $context = '')
+  public function register_class ($id, $class_name, $file_name = '', $context = '')
   {
     $item = new stdClass();
     $item->class_name = $class_name;
@@ -83,7 +83,7 @@ class OBJECT_FACTORY extends RAISABLE
    * @param string $context Distiguishes among multiple similar registrations. 
    * @return string
    */
-  function final_class_name ($class_name, $file_name = '', $context = '')
+  public function final_class_name ($class_name, $file_name = '', $context = '')
   {
     if ($context)
     {
@@ -104,8 +104,10 @@ class OBJECT_FACTORY extends RAISABLE
     }
     else
     {
-      if ($file_name) 
-        include_once ($file_name);        
+      if ($file_name)
+      {
+        include_once ($file_name);
+      }        
     }
 
     return $class_name;
@@ -118,7 +120,7 @@ class OBJECT_FACTORY extends RAISABLE
    * @param string $context
    * @return boolean
    */
-  function is_registered ($class_name, $context = '')
+  public function is_registered ($class_name, $context = '')
   {
     return isset ($this->_registered_classes [$this->_id_for ($class_name, $context)]);
   }
@@ -131,7 +133,7 @@ class OBJECT_FACTORY extends RAISABLE
    * @param string $context
    * @return string
    */
-  function id_for_class_in_context ($class_name, $context)
+  public function id_for_class_in_context ($class_name, $context)
   {
     return $class_name . '_{' . $context . '}';   
   }
@@ -143,7 +145,7 @@ class OBJECT_FACTORY extends RAISABLE
    * @param string $prefix
    * @return array[string]
    */
-  function classes_with_prefix ($prefix)
+  public function classes_with_prefix ($prefix)
   {
     $prefix = $this->_id_for ($prefix);
     $Result = array ();
@@ -164,7 +166,7 @@ class OBJECT_FACTORY extends RAISABLE
    * @return string
    * @access private
    */
-  function _id_for ($class_name, $context = '')
+  protected function _id_for ($class_name, $context = '')
   {
     if ($context)
     {
@@ -186,7 +188,7 @@ class OBJECT_FACTORY extends RAISABLE
    * @return string 
    * @access private
    */
-  function _load_and_return_class ($class_name, $file_name)
+  protected function _load_and_return_class ($class_name, $file_name)
   {
     /* Include the registered file, if available. Otherwise,
      * include the given file.
@@ -231,6 +233,7 @@ class OBJECT_FACTORY_ITEM
    * @var string
    */
   public $class_name;
+
   /**
    * File name containing the class description.
    * @var string

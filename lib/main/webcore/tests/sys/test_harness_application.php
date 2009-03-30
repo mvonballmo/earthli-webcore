@@ -51,50 +51,62 @@ class TEST_HARNESS_APPLICATION_TABLE_NAMES extends APPLICATION_TABLE_NAMES
    * @var string
    */
   public $users = 'test_harness_users';
+
   /**
    * @var string
    */
   public $groups = 'test_harness_groups';
+
   /**
    * @var string
    */
   public $users_to_groups = 'test_harness_users_to_groups';
+
   /**
    * @var string
    */
   public $folders = 'test_harness_folders';
+
   /**
    * @var string
    */
   public $comments = 'test_harness_comments';
+
   /**
    * @var string
    */
   public $entries = 'test_harness_entries';
+
   /**
    * @var string
    */
   public $user_permissions = 'test_harness_user_permissions';
+
   /**
    * @var string
    */
   public $folder_permissions = 'test_harness_folder_permissions';
+
   /**
    * @var string
    */
   public $subscriptions = 'test_harness_subscriptions';
+
   /**
    * @var string
    */
   public $subscribers = 'test_harness_subscribers';
+
   /**
    * @var string
    */
   public $history_items = 'test_harness_history_items';
+
   /**
    * @var string
    */
   public $searches = 'test_harness_searches';
+
   /**
    * @var string
    */
@@ -114,10 +126,12 @@ class TEST_HARNESS_APPLICATION extends APPLICATION
    * @var string
    */
   public $title = 'earthli Test Harness';
+
   /**
    * @var string
    */
   public $short_title = 'Test Suite';
+
   /**
    * @var integer
    */
@@ -127,7 +141,7 @@ class TEST_HARNESS_APPLICATION extends APPLICATION
    * Add classes to the {@link $classes} object factory.
    * @access private
    */
-  function _initialize_class_registry ()
+  protected function _initialize_class_registry ()
   {
     parent::_initialize_class_registry ();
     $this->register_class ('APPLICATION_TABLE_NAMES', 'TEST_HARNESS_APPLICATION_TABLE_NAMES');

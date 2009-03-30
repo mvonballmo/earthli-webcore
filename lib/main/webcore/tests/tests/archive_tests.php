@@ -51,18 +51,18 @@ require_once ('webcore/util/pcl_archive.php');
  */
 class ARCHIVE_TEST_TASK extends TEST_TASK
 {
-  function process_file ($archive, $entry, $error_callback)
+  public function process_file ($archive, $entry, $error_callback)
   {
     $this->_log ('Found ' . $entry->name . ' (' . file_size_as_text ($entry->size) . ')', Msg_type_info);
     $entry->extract_to ($this->_temp_path, $error_callback);
   }
 
-  function show_error ($archive, $msg, $entry = null)
+  public function show_error ($archive, $msg, $entry = null)
   {
     echo "<div class=\"error\">$msg</div>";
   }
 
-  function _execute ()
+  protected function _execute ()
   {
     $this->_temp_path = $this->context->resolve_path_for_alias (Folder_name_system_temp, 'webcore-tests'); 
  

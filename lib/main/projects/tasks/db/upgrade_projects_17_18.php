@@ -35,7 +35,7 @@ class PROJECT_17_18_MIGRATOR_TASK extends UPGRADE_PER_APP_25_26_TASK
   public $version_from = '1.7.0';
   public $version_to = '1.8.0';
 
-  function _execute ()
+  protected function _execute ()
   {
     log_open_block ("Adding test time to release");
       $this->_query ('ALTER TABLE `project_releases` ADD `time_testing_scheduled` DATETIME AFTER `time_scheduled` ;');

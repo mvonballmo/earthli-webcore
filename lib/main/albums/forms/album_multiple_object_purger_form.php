@@ -51,12 +51,12 @@ class ALBUM_MULTIPLE_OBJECT_PURGER_FORM extends MULTIPLE_OBJECT_PURGER_FORM
   /**
    * @param APPLICATION $app
    */
-  function ALBUM_MULTIPLE_OBJECT_PURGER_FORM ($app)
+  public function ALBUM_MULTIPLE_OBJECT_PURGER_FORM ($app)
   {
     MULTIPLE_OBJECT_PURGER_FORM::MULTIPLE_OBJECT_PURGER_FORM ($app);
 
     $field = $this->field_at ('remove_resources');
-    $field->visible = TRUE;
+    $field->visible = true;
   }
 }
 ?>

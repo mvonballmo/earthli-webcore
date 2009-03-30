@@ -55,7 +55,7 @@ class USER_LIST_COMMANDS extends COMMANDS
   /**
    * @param APPLICATION $app
    */
-  function USER_LIST_COMMANDS ($app)
+  public function USER_LIST_COMMANDS ($app)
   {
     COMMANDS::COMMANDS ($app);
 
@@ -108,11 +108,9 @@ class USER_MANAGEMENT_COMMANDS extends USER_LIST_COMMANDS
   /**
    * @param APPLICATION $app
    */
-  function USER_MANAGEMENT_COMMANDS ($app)
+  public function USER_MANAGEMENT_COMMANDS ($app)
   {
     USER_LIST_COMMANDS::USER_LIST_COMMANDS ($app);
-
-    $cmd = $this->make_command ();
 
     $cmd = $this->make_command ();
     $cmd->id = 'anon_permissions';

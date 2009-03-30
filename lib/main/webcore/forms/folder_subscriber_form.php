@@ -51,6 +51,7 @@ class FOLDER_SUBSCRIBER_FORM extends ID_BASED_FORM
    * @var string
    */
   public $button = 'Save';
+
   /**
    * @var string
    */
@@ -59,7 +60,7 @@ class FOLDER_SUBSCRIBER_FORM extends ID_BASED_FORM
   /**
    * @param FOLDER $folder Update subscribers to this folder.
    */
-  function FOLDER_SUBSCRIBER_FORM ($folder)
+  public function FOLDER_SUBSCRIBER_FORM ($folder)
   {
     ID_BASED_FORM::ID_BASED_FORM ($folder->app);
 
@@ -73,10 +74,10 @@ class FOLDER_SUBSCRIBER_FORM extends ID_BASED_FORM
 
   /**
    * Store the form's values to this folder.
-    * @param FOLDER $obj
-    * @access private
-    */
-  function commit ($obj)
+   * @param FOLDER $obj
+   * @access private
+   */
+  public function commit ($obj)
   {
     $selected_emails = $this->value_for ('subscriber_ids');
 
@@ -95,7 +96,7 @@ class FOLDER_SUBSCRIBER_FORM extends ID_BASED_FORM
    * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_controls ($renderer)
+  protected function _draw_controls ($renderer)
   {
     $query = $this->_folder->subscriber_query ();
 

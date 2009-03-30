@@ -29,8 +29,8 @@ http://www.earthli.com/software/webcore
   require_once ('webcore/init.php');
 
   $Page->add_script_file ('{scripts}webcore_calendar.js');
-  $Page->template_options->header_visible = FALSE;
-  $Page->template_options->footer_visible = FALSE;
+  $Page->template_options->header_visible = false;
+  $Page->template_options->footer_visible = false;
   $Page->start_display ();
 ?>
 <script type="text/javascript">

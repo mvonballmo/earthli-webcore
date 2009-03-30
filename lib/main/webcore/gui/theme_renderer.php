@@ -53,7 +53,7 @@ class THEME_RENDERER extends OBJECT_RENDERER
    * @param THEME $obj
    * @access private
    */
-  function _display_as_html ($obj)
+  protected function _display_as_html ($obj)
   {
 ?>
 <div style="text-align: center">

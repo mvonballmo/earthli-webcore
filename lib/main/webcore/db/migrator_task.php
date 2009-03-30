@@ -63,11 +63,13 @@ class MIGRATOR_TASK extends TASK
    * @access private
    */
   public $info;
+
   /**
    * Log all messages in this channel.
    * @var string
    */
   public $log_channel = Msg_channel_migrate;
+
   /**
    * Version from which this migrator works.
    * The version in the database must match this version or the database will
@@ -77,6 +79,7 @@ class MIGRATOR_TASK extends TASK
    * @see $version_to
    */
   public $version_from = '';
+
   /**
    * Version to which application will be migrated.
    * Version number is updated when the migration finishes.
@@ -84,6 +87,7 @@ class MIGRATOR_TASK extends TASK
    * @see $version_from
    */
   public $version_to = '';
+
   /**
    * Migrate regardless of whether the database has the correct version.
    * This may cause errors in the migration process, as the migration does
@@ -94,7 +98,8 @@ class MIGRATOR_TASK extends TASK
    * @see $version_to
    * @see $version_from
    */
-  public $ignore_from_version = FALSE;
+  public $ignore_from_version = false;
+
   /**
    * Icon to show in the title bar when executing.
    * @var string
@@ -104,7 +109,7 @@ class MIGRATOR_TASK extends TASK
   /**
    * @param FRAMEWORK_INFO
    */
-  function MIGRATOR_TASK ($info)
+  public function MIGRATOR_TASK ($info)
   {
     TASK::TASK ($info->context);
     $this->info = $info;
@@ -115,7 +120,7 @@ class MIGRATOR_TASK extends TASK
    * Return a formatted title for this task.
    * @return string
    */
-  function title_as_text ()
+  public function title_as_text ()
   {
     return 'Migrate ' . $this->info->title . ' from ' . $this->version_from . ' to ' . $this->version_to;
   }
@@ -124,7 +129,7 @@ class MIGRATOR_TASK extends TASK
    * Return a form to display options and execute this task.
    * @return FORM
    */
-  function form ()
+  public function form ()
   {
     $class_name = $this->context->final_class_name ('EXECUTE_MIGRATOR_TASK_FORM', 'webcore/forms/execute_migrator_task_form.php');
     return new $class_name ($this->context);
@@ -135,12 +140,12 @@ class MIGRATOR_TASK extends TASK
    * @return boolean
    * @access private
    */
-  function _can_be_executed ()
+  protected function _can_be_executed ()
   {
-    $Result = FALSE;
+    $Result = false;
     if ($this->ignore_from_version)
     {
-      $Result = TRUE;
+      $Result = true;
     }
     else
     {
@@ -154,7 +159,7 @@ class MIGRATOR_TASK extends TASK
       }
       else
       {
-        $Result = TRUE;
+        $Result = true;
       }
     }
 
@@ -165,7 +170,7 @@ class MIGRATOR_TASK extends TASK
    * Perform cleanup for a process that has run.
    * @access private
    */
-  function _post_execute ()
+  protected function _post_execute ()
   {
     if (! $this->env->num_exceptions_raised)
     {

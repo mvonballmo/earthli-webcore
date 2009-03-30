@@ -52,48 +52,57 @@ class PICTURE_GRID extends ALBUM_ENTRY_GRID
    * @var string
    */
   public $box_style = 'chart';
+
   /**
    * @var string
    */
   public $object_name = 'Picture';
+
   /**
    * @var integer
    */
   public $spacing = 8;
+
   /**
    * @var integer
    */
   public $padding = 0;
+
   /**
    * @var integer
    */
   public $description_length = 100;
+
   /**
    * @var boolean
    */
-  public $show_separator = FALSE;
+  public $show_separator = false;
+
   /**
    * @var boolean
    */
-  public $show_user = FALSE;
+  public $show_user = false;
+
   /**
    * @var boolean
    */
-  public $show_folder = FALSE;
+  public $show_folder = false;
+
   /**
    * @var boolean
    */
-  public $show_controls = TRUE;
+  public $show_controls = true;
+
   /**
    * @var boolean
    */
-  public $show_date = TRUE;
+  public $show_date = true;
 
   /**
    * @param PICTURE $obj
-    * @access private
-    */
-  function _draw_box ($obj)
+   * @access private
+   */
+  protected function _draw_box ($obj)
   {
     $folder = $obj->parent_folder ();
 ?>
@@ -151,6 +160,7 @@ class PICTURE_SUMMARY_GRID extends ENTRY_SUMMARY_GRID
    * @var string
    */
   public $object_name = 'Picture';
+
   /**
    * @var integer
    */
@@ -162,16 +172,16 @@ class PICTURE_SUMMARY_GRID extends ENTRY_SUMMARY_GRID
    * @return integer
    * @access private
    */
-  function _size_of ($obj)
+  protected function _size_of ($obj)
   {
-    return @filesize (url_to_file_name ($obj->full_file_name (TRUE)));
+    return @filesize (url_to_file_name ($obj->full_file_name (true)));
   }
 
   /**
    * @param PICTURE $obj
    * @access private
    */
-  function _echo_header ($obj)
+  protected function _echo_header ($obj)
   {
     $box = $this->app->make_box_renderer ();
     $box->start_column_set ();

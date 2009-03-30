@@ -52,16 +52,17 @@ class THEME_GRID extends STANDARD_GRID
    * @var string
    */
   public $object_name = 'Theme';
+
   /**
    * @var boolean
    */
-  public $is_chooser = FALSE;
+  public $is_chooser = false;
 
   /**
    * @param THEME $obj
-    * @access private
-    */
-  function _draw_box ($obj)
+   * @access private
+   */
+  protected function _draw_box ($obj)
   {
 ?>
   <div style="text-align: center">

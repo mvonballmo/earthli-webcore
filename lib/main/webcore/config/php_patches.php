@@ -53,9 +53,8 @@ if (! function_exists ('is_a'))
     $class_name = strtolower ($class_name);
     if (get_class ($object) == $class_name)
     {
-      return TRUE;
+      return true;
     }
-
 
     return is_subclass_of ($object, $class_name);
   }
@@ -110,6 +109,8 @@ if (! function_exists ('image_type_to_mime_type'))
     case 7:
     case 8:
       return 'image/tiff';
+    default:
+      return 'unknown/unknown';
     }
   }
 }

@@ -52,10 +52,10 @@ class SQL_PROJECT_ENTRY_BRANCH_INFO_STORAGE extends SQL_UNIQUE_STORAGE
 {
   /**
    * @param SQL_TABLE $table
-    * @param integer $action
-    * @param STORABLE $obj
-    */
-  function _commit_table ($table, $action, $obj)
+   * @param integer $action
+   * @param STORABLE $obj
+   */
+  protected function _commit_table ($table, $action, $obj)
   {
     if (($table->name == $obj->_secondary_table_name ()) && ($action == Storage_action_create))
     {

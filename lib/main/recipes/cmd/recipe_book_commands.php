@@ -53,7 +53,7 @@ class RECIPE_BOOK_COMMANDS extends FOLDER_COMMANDS
   /**
    * @param RECIPE_BOOK $folder Configure commands for this object.
    */
-  function RECIPE_BOOK_COMMANDS ($folder)
+  public function RECIPE_BOOK_COMMANDS ($folder)
   {
     FOLDER_COMMANDS::FOLDER_COMMANDS ($folder);
 

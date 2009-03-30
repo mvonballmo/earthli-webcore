@@ -55,25 +55,29 @@ class LAYER extends WEBCORE_OBJECT
 {
   /**
    * Must be unique to the page.
-    * @var string
-    */
+   * @var string
+   */
   public $name = 'layer';
+
   /**
    * Name of a CSS class used as the style for the layer.
-    * @var string
-    */
+   * @var string
+   */
   public $CSS_class = '';
+
   /**
    * Is this layer initially displayed?
-    * @var boolean
-    */
-  public $visible = FALSE;
+   * @var boolean
+   */
+  public $visible = false;
+
   /**
    * CSS style used for the top margin of the layer.
    * Overrides that specified in the {@link $CSS_class} property.
    * @var string
    */
   public $margin_top = '';
+
   /**
    * CSS style used for the left margin of the layer.
    * Overrides that specified in the {@link $CSS_class} property.
@@ -86,7 +90,7 @@ class LAYER extends WEBCORE_OBJECT
    * @see draw_toggle()
    * @return string
    */
-  function toggle_as_html ()
+  public function toggle_as_html ()
   {
     if ($this->context->dhtml_allowed ())
     {
@@ -101,13 +105,15 @@ class LAYER extends WEBCORE_OBJECT
 
       return '<a href="javascript:toggle_visibility(\'' . $this->name . '\')">' . $icon . '</a>';
     }
+    
+    return '';
   }
 
   /**
    * Draw a control to show/hide this layer.
    * @see toggle_as_html()
    */
-  function draw_toggle ()
+  public function draw_toggle ()
   {
     echo $this->toggle_as_html ();
   }
@@ -117,7 +123,7 @@ class LAYER extends WEBCORE_OBJECT
    * All content emitted until {@link finish()} is called will be shown/hidden
    * with this layer.
    */
-  function start ()
+  public function start ()
   {
     if (isset ($this->env->profiler)) $this->env->profiler->start ('ui');
     $css = $this->context->make_tag_builder (Tag_builder_css);
@@ -158,7 +164,7 @@ class LAYER extends WEBCORE_OBJECT
    * Close the container for the layer.
    * Call only after calling {@link start()}.
    */
-  function finish ()
+  public function finish ()
   {
     echo "</div>\n";
   }

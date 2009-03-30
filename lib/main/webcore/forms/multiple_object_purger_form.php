@@ -52,7 +52,7 @@ class MULTIPLE_OBJECT_PURGER_FORM extends MULTIPLE_OBJECT_ACTION_FORM
   /**
    * @param APPLICATION $app
    */
-  function MULTIPLE_OBJECT_PURGER_FORM ($app)
+  public function MULTIPLE_OBJECT_PURGER_FORM ($app)
   {
     MULTIPLE_OBJECT_ACTION_FORM::MULTIPLE_OBJECT_ACTION_FORM ($app);
     
@@ -60,7 +60,7 @@ class MULTIPLE_OBJECT_PURGER_FORM extends MULTIPLE_OBJECT_ACTION_FORM
     $field->id = 'remove_resources';
     $field->title = 'Remove associated files';
     $field->description = 'Leave this unchecked if any other object references the same files (e.g. you are purging a duplicate).';
-    $field->visible = FALSE;
+    $field->visible = false;
     $this->add_field ($field);
   }
 
@@ -69,7 +69,7 @@ class MULTIPLE_OBJECT_PURGER_FORM extends MULTIPLE_OBJECT_ACTION_FORM
    * @param FOLDER $fldr
    * @access private
    */
-  function _folder_run ($fldr)
+  protected function _folder_run ($fldr)
   {
     $fldr->purge ($this->_purge_options_for ($fldr));
   }
@@ -79,7 +79,7 @@ class MULTIPLE_OBJECT_PURGER_FORM extends MULTIPLE_OBJECT_ACTION_FORM
    * @param ENTRY $entry
    * @access private
    */
-  function _entry_run ($entry)
+  protected function _entry_run ($entry)
   {
     $entry->purge ($this->_purge_options_for ($entry));
   }
@@ -90,7 +90,7 @@ class MULTIPLE_OBJECT_PURGER_FORM extends MULTIPLE_OBJECT_ACTION_FORM
    * @return PURGE_OPTIONS
    * @access private
    */
-  function _purge_options_for ($obj)
+  protected function _purge_options_for ($obj)
   {
     $Result = $obj->make_purge_options ();
     $Result->remove_resources = $this->value_for ('remove_resources');
@@ -102,7 +102,7 @@ class MULTIPLE_OBJECT_PURGER_FORM extends MULTIPLE_OBJECT_ACTION_FORM
    * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_message ($renderer)
+  protected function _draw_message ($renderer)
   {
     $renderer->start_row ();
 

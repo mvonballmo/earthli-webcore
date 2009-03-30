@@ -53,7 +53,7 @@ class GROUP_COMMANDS extends COMMANDS
   /**
    * @param GROUP $group Configure commands for this object.
    */
-  function GROUP_COMMANDS ($group)
+  public function GROUP_COMMANDS ($group)
   {
     COMMANDS::COMMANDS ($group->app);
 

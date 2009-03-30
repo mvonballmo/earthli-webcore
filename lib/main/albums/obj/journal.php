@@ -53,16 +53,19 @@ class JOURNAL extends ALBUM_ENTRY
    * @var integer
    */
   public $hi_temp;
+
   /**
    * Low temperature for the day (Celsius).
    * @var integer
    */
   public $lo_temp;
+
   /**
    * Brief description of the weather.
    * @var string
    */
   public $weather;
+
   /**
    * Index into a list of deployment-dependent weather types.
    * @var string
@@ -74,7 +77,7 @@ class JOURNAL extends ALBUM_ENTRY
    * These are the properties defined in the user data file.
    * @see weather_icon()
    */
-  function weather_icon_properties ()
+  public function weather_icon_properties ()
   {
     $props = $this->app->display_options->weather_icons ();
     if (isset ($props [$this->weather_type - 1]))
@@ -95,7 +98,7 @@ class JOURNAL extends ALBUM_ENTRY
    * @param string $size
    * @return string
    */
-  function weather_icon ($size = '30px')
+  public function weather_icon ($size = '30px')
   {
     $props = $this->weather_icon_properties ();
     return $props->icon_as_html ($size);
@@ -105,7 +108,7 @@ class JOURNAL extends ALBUM_ENTRY
    * High and low temperatures formatted as HTML.
    * @return string
    */
-  function temperature_as_html ()
+  public function temperature_as_html ()
   {
     $folder = $this->parent_folder ();
     $lo = $folder->temperature_as_html ($this->lo_temp);
@@ -115,7 +118,6 @@ class JOURNAL extends ALBUM_ENTRY
       return $hi;
     }
 
-
     return "$lo to $hi";
   }
 
@@ -123,13 +125,12 @@ class JOURNAL extends ALBUM_ENTRY
    * High and low temperatures formatted as plain text.
    * @return string
    */
-  function temperature_as_text ()
+  public function temperature_as_text ()
   {
     if ($this->lo_temp == $this->hi_temp)
     {
       return "{$this->hi_temp}°C";
     }
-
 
     return "{$this->lo_temp}°C to {$this->hi_temp}°C";
   }
@@ -140,12 +141,12 @@ class JOURNAL extends ALBUM_ENTRY
    * @param HTML_MUNGER $munger
    * @return string
    */
-  function weather_as_html ($munger = null)
+  public function weather_as_html ($munger = null)
   {
     if (! isset ($munger))
     {
       $munger = $this->html_formatter ();
-      $munger->force_paragraphs = FALSE;
+      $munger->force_paragraphs = false;
     }
 
     return $this->_text_as_html ($this->weather, $munger);
@@ -157,7 +158,7 @@ class JOURNAL extends ALBUM_ENTRY
    * @param PLAIN_TEXT_MUNGER $munger
    * @return string
    */
-  function weather_as_plain_text ($munger = null)
+  public function weather_as_plain_text ($munger = null)
   {
     return $this->_text_as_plain_text ($this->weather, $munger);
   }
@@ -166,7 +167,7 @@ class JOURNAL extends ALBUM_ENTRY
    * Restrict the query to this journal's day only.
    * @param ALBUM_ENTRY_QUERY
    */
-  function adjust_query ($query)
+  public function adjust_query ($query)
   {
     /* Copy instead of taking a reference. */
 
@@ -183,7 +184,7 @@ class JOURNAL extends ALBUM_ENTRY
    * Query for all of the pictures on the same day as this journal.
    * @return ALBUM_ENTRY_QUERY
    */
-  function picture_query ()
+  public function picture_query ()
   {
     $folder = $this->parent_folder ();
     $Result = $folder->entry_query ();
@@ -195,7 +196,7 @@ class JOURNAL extends ALBUM_ENTRY
   /**
    * @param DATABASE $db
    */
-  function load ($db)
+  public function load ($db)
   {
     parent::load ($db);
     $this->lo_temp = $db->f ("lo_temp");
@@ -207,7 +208,7 @@ class JOURNAL extends ALBUM_ENTRY
   /**
    * @param SQL_STORAGE $storage Store values to this object.
    */
-  function store_to ($storage)
+  public function store_to ($storage)
   {
     parent::store_to ($storage);
     $tname =$this->_secondary_table_name ();
@@ -221,7 +222,7 @@ class JOURNAL extends ALBUM_ENTRY
    * Name of the home page name for this object.
    * @return string
    */
-  function page_name ()
+  public function page_name ()
   {
     return $this->app->page_names->journal_home;
   }
@@ -231,7 +232,7 @@ class JOURNAL extends ALBUM_ENTRY
    * @return string
    * @access private
    */
-  function _secondary_table_name ()
+  protected function _secondary_table_name ()
   {
     return $this->app->table_names->journals;
   }
@@ -243,7 +244,7 @@ class JOURNAL extends ALBUM_ENTRY
    * @return object
    * @access private
    */
-  function _default_handler_for ($handler_type, $options = null)
+  protected function _default_handler_for ($handler_type, $options = null)
   {
     switch ($handler_type)
     {

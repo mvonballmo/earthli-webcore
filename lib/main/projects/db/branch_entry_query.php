@@ -51,7 +51,7 @@ class BRANCH_ENTRY_QUERY extends GENERIC_PROJECT_ENTRY_QUERY
   /**
    * @param BRANCH $branch Branch for which entries are retrieved.
    */
-  function BRANCH_ENTRY_QUERY ($branch)
+  public function BRANCH_ENTRY_QUERY ($branch)
   {
     $folder = $branch->parent_folder ();
     GENERIC_PROJECT_ENTRY_QUERY::GENERIC_PROJECT_ENTRY_QUERY ($folder);
@@ -63,7 +63,7 @@ class BRANCH_ENTRY_QUERY extends GENERIC_PROJECT_ENTRY_QUERY
    * If no type is specified, then assume all entries.
    * @param string $type 'job' and 'change' are valid here.
    */
-  function set_type ($type)
+  public function set_type ($type)
   {
     parent::set_type ($type);
 
@@ -98,7 +98,7 @@ class BRANCH_ENTRY_QUERY extends GENERIC_PROJECT_ENTRY_QUERY
    * Prepare security- and filter-based restrictions.
    * @access private
    */
-  function _prepare_restrictions ()
+  protected function _prepare_restrictions ()
   {
     parent::_prepare_restrictions ();
     $this->_calculated_restrictions [] = "etob.branch_id = {$this->_branch->id}";
@@ -109,6 +109,7 @@ class BRANCH_ENTRY_QUERY extends GENERIC_PROJECT_ENTRY_QUERY
    * @access private
    */
   protected $_branch;
+
   /**
    * Name of the default permission set to use.
    * @var string

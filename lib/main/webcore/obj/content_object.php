@@ -47,12 +47,13 @@ require_once ('webcore/obj/auditable.php');
  * @version 3.0.0
  * @since 2.5.0
  */
-class CONTENT_OBJECT extends AUDITABLE
+abstract class CONTENT_OBJECT extends AUDITABLE
 {
   /**
    * @var string
    */
   public $title;
+
   /**
    * @var string
    */
@@ -64,7 +65,7 @@ class CONTENT_OBJECT extends AUDITABLE
    * @param HTML_MUNGER $munger
    * @return string
    */
-  function description_as_html ($munger = null)
+  public function description_as_html ($munger = null)
   {
     return $this->_text_as_html ($this->description, $munger);
   }
@@ -75,7 +76,7 @@ class CONTENT_OBJECT extends AUDITABLE
    * @param PLAIN_TEXT_MUNGER $munger
    * @return string
    */
-  function description_as_plain_text ($munger = null)
+  public function description_as_plain_text ($munger = null)
   {
     return $this->_text_as_plain_text ($this->description, $munger);
   }
@@ -83,7 +84,7 @@ class CONTENT_OBJECT extends AUDITABLE
   /**
    * @return string
    */
-  function raw_title ()
+  public function raw_title ()
   {
     return $this->title;
   }
@@ -91,7 +92,7 @@ class CONTENT_OBJECT extends AUDITABLE
   /**
    * @param DATABASE $db Database from which to load values.
    */
-  function load ($db)
+  public function load ($db)
   {
     parent::load ($db);
     $this->title = $db->f ('title');
@@ -101,7 +102,7 @@ class CONTENT_OBJECT extends AUDITABLE
   /**
    * @param SQL_STORAGE $storage Store values to this object.
    */
-  function store_to ($storage)
+  public function store_to ($storage)
   {
     parent::store_to ($storage);
     $tname = $this->_table_name ();
@@ -116,7 +117,7 @@ class CONTENT_OBJECT extends AUDITABLE
    * @return object
    * @access private
    */
-  function _default_handler_for ($handler_type, $options = null)
+  protected function _default_handler_for ($handler_type, $options = null)
   {
     switch ($handler_type)
     {

@@ -53,7 +53,7 @@ class COMMENT_RENDERER extends CONTENT_OBJECT_RENDERER
    * @param COMMENT $obj
    * @access private
    */
-  function _display_as_html ($obj)
+  protected function _display_as_html ($obj)
   {
     $creator = $obj->creator ();
 ?>
@@ -89,10 +89,10 @@ class COMMENT_RENDERER extends CONTENT_OBJECT_RENDERER
    * @param COMMENT $obj
    * @access private
    */
-  function _display_as_plain_text ($obj)
+  protected function _display_as_plain_text ($obj)
   {
     $this->_echo_plain_text_description ($obj);
-    $this->_echo_plain_text_user_information ($obj, FALSE);
+    $this->_echo_plain_text_user_information ($obj, false);
   }
 
   /**
@@ -100,7 +100,7 @@ class COMMENT_RENDERER extends CONTENT_OBJECT_RENDERER
    * @param COMMENT $obj
    * @access private
    */
-  function _echo_subscribe_status ($obj)
+  protected function _echo_subscribe_status ($obj)
   {
     $this->_echo_html_subscribed_toggle ($obj, 'subscribe_to_comment.php?id=' . $obj->id, Subscribe_comment);
   }
@@ -129,10 +129,10 @@ class COMMENT_LIST_RENDERER extends WEBCORE_OBJECT
 {
   /**
    * @param QUERY $com_query Show comments from this query.
-    * @param ENTRY|COMMENT $obj Entry or comment on whose page to render comments.
-    * @param string $default_mode Default mode for comment display (Can be 'Comment_render_flat' or 'Comment_render_threaded').
-    */
-  function COMMENT_LIST_RENDERER ($com_query, $obj, $default_mode = Comment_render_threaded)
+   * @param ENTRY|COMMENT $obj Entry or comment on whose page to render comments.
+   * @param string $default_mode Default mode for comment display (Can be 'Comment_render_flat' or 'Comment_render_threaded').
+   */
+  public function COMMENT_LIST_RENDERER ($com_query, $obj, $default_mode = Comment_render_threaded)
   {
     WEBCORE_OBJECT::WEBCORE_OBJECT ($obj->app);
 
@@ -149,7 +149,7 @@ class COMMENT_LIST_RENDERER extends WEBCORE_OBJECT
   /**
    * Render the menu selector for switching modes.
    */
-  function display_menu ()
+  public function display_menu ()
   {
     if ($this->_comment_query->size () > 1)
     {
@@ -163,10 +163,10 @@ class COMMENT_LIST_RENDERER extends WEBCORE_OBJECT
       {
       case Comment_render_flat:
         $menu->append ('Show Threaded', $this->_obj->home_page () . "&comment_mode=threaded#comments");
-        $menu->append ('Show Flat', '', '', TRUE);
+        $menu->append ('Show Flat', '', '', true);
         break;
       case Comment_render_threaded:
-        $menu->append ('Show Threaded', '', '', TRUE);
+        $menu->append ('Show Threaded', '', '', true);
         $menu->append ('Show Flat', $this->_obj->home_page () . "&comment_mode=flat#comments");
         break;
       }
@@ -182,7 +182,7 @@ class COMMENT_LIST_RENDERER extends WEBCORE_OBJECT
   /**
    * Render the selected comments in the chosen mode.
    */
-  function display ()
+  public function display ()
   {
     switch ($this->comment_mode)
     {
@@ -206,18 +206,20 @@ class COMMENT_LIST_RENDERER extends WEBCORE_OBJECT
 
   /**
    * @var ENTRY|COMMENT
-    * @access private
-    */
+   * @access private
+   */
   protected $_obj;
+
   /**
    * @var COMMENT
-    * @access private
-    */
+   * @access private
+   */
   protected $_comment;
+
   /**
    * @var QUERY
-    * @access private
-    */
+   * @access private
+   */
   protected $_comment_query;
 }
 ?>

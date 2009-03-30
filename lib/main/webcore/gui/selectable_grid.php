@@ -47,30 +47,32 @@ require_once ('webcore/gui/grid.php');
  * @version 3.0.0
  * @since 2.7.0
  */
-class SELECTABLE_GRID extends STANDARD_GRID
+abstract class SELECTABLE_GRID extends STANDARD_GRID
 {
   /**
    * Name of the selector control.
    * @var string
    */
   public $selector_name = 'ids[]';
+
   /**
    * Show check-box selectors next to items?
    * @var boolean
    */
-  public $items_are_selectable = FALSE;
+  public $items_are_selectable = false;
+
   /**
    * Are the checkboxes enabled at first?
    * @var boolean
    */
-  public $items_are_selected = FALSE;
+  public $items_are_selected = false;
 
   /**
    * Render the start of a single cell.
    * @param object $obj
    * @access private
    */
-  function _start_box ($obj)
+  protected function _start_box ($obj)
   {
     parent::_start_box ($obj);
     if ($this->items_are_selectable)
@@ -84,7 +86,7 @@ class SELECTABLE_GRID extends STANDARD_GRID
     }
   }
   
-  function _finish_box ($obj)
+  protected function _finish_box ($obj)
   {
     if ($this->items_are_selectable)
     {
@@ -100,7 +102,7 @@ class SELECTABLE_GRID extends STANDARD_GRID
    * @param object $obj
    * @access private
    */
-  function _echo_selector ($obj)
+  protected function _echo_selector ($obj)
   {
     if ($this->items_are_selectable)
     {

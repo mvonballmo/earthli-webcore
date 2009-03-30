@@ -57,7 +57,7 @@ class LOCATION_MENU extends MENU
    * application on the page.
    * @see add_root_link()
    */
-  function add_application_link ()
+  public function add_application_link ()
   {
     if (isset ($this->page->app) && $this->page->app->short_title)
     {
@@ -72,7 +72,7 @@ class LOCATION_MENU extends MENU
    * @param boolean $include_application If true, {@link add_application_link()} is called as well.
    * @see add_application_link()
    */
-  function add_root_link ($include_application = TRUE)
+  public function add_root_link ($include_application = true)
   {
     if ($include_application)
     {
@@ -92,7 +92,7 @@ class LOCATION_MENU extends MENU
    * @param string $page_args Add these arguments to the URL's query string.
    * @param string $page_url Replace the folder's home page with this page.
    */
-  function add_folder_link ($folder, $page_args = '', $page_url = '')
+  public function add_folder_link ($folder, $page_args = '', $page_url = '')
   {
     $parent = $folder;
 
@@ -125,7 +125,7 @@ class LOCATION_MENU extends MENU
    * @param string $page_args Add these arguments to the URL's query string.
    * @param string $page_url Replace the folder's home page with this page.
    */
-  function add_folder_text ($folder, $page_args = '', $page_url = '')
+  public function add_folder_text ($folder, $page_args = '', $page_url = '')
   {
     $this->add_folder_link ($folder->parent_folder ());
     $this->add_object_text ($folder);
@@ -135,7 +135,7 @@ class LOCATION_MENU extends MENU
    * Add this object's home page to the location.
    * @param NAMED_OBJECT $obj
    */
-  function add_object_link ($obj, $page_args = '')
+  public function add_object_link ($obj, $page_args = '')
   {
     // Don't allow objects in the list to set the style of the navigation bar.
 
@@ -152,7 +152,7 @@ class LOCATION_MENU extends MENU
    * Add this object's (unlinked) name to the location.
    * @param NAMED_OBJECT $obj
    */
-  function add_object_text ($obj)
+  public function add_object_text ($obj)
   {
     $t = $obj->title_formatter ();
     $t->max_visible_output_chars = 0;

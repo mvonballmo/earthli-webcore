@@ -57,7 +57,7 @@ class PROJECT_ENTRY_HISTORY_ITEM extends ENTRY_HISTORY_ITEM
    * 'removed from branch x' messages in the history item.
    * @var boolean
    */
-  public $compare_branches = FALSE;
+  public $compare_branches = false;
 
   /**
    * Record class-specific differences.
@@ -66,7 +66,7 @@ class PROJECT_ENTRY_HISTORY_ITEM extends ENTRY_HISTORY_ITEM
    * @param PROJECT_ENTRY $new
    * @access private
    */
-  function _record_differences ($orig, $new)
+  protected function _record_differences ($orig, $new)
   {
     parent::_record_differences ($orig, $new);
 
@@ -130,7 +130,7 @@ class PROJECT_ENTRY_HISTORY_ITEM extends ENTRY_HISTORY_ITEM
    * @param PROJECT_ENTRY_BRANCH_INFO $new_branch
    * @access private
    */
-  function _record_branch_differences ($orig_branch, $new_branch)
+  protected function _record_branch_differences ($orig_branch, $new_branch)
   {
     if ($orig_branch->release_id != $new_branch->release_id)
     {
@@ -157,7 +157,7 @@ class JOB_HISTORY_ITEM extends PROJECT_ENTRY_HISTORY_ITEM
    * @param JOB $new
    * @access private
    */
-  function _record_differences ($orig, $new)
+  protected function _record_differences ($orig, $new)
   {
     if ($orig->reporter_id != $new->reporter_id)
     {
@@ -180,7 +180,7 @@ class JOB_HISTORY_ITEM extends PROJECT_ENTRY_HISTORY_ITEM
    * @param PROJECT_ENTRY_BRANCH_INFO $new_branch
    * @access private
    */
-  function _record_branch_differences ($orig_branch, $new_branch)
+  protected function _record_branch_differences ($orig_branch, $new_branch)
   {
     parent::_record_branch_differences ($orig_branch, $new_branch);
 
@@ -219,7 +219,7 @@ class CHANGE_HISTORY_ITEM extends PROJECT_ENTRY_HISTORY_ITEM
    * @param CHANGE $new
    * @access private
    */
-  function _record_differences ($orig, $new)
+  protected function _record_differences ($orig, $new)
   {
     $this->_record_text_difference ('Files', $orig->files, $new->files);
 
@@ -255,7 +255,7 @@ class BRANCH_HISTORY_ITEM extends OBJECT_IN_FOLDER_HISTORY_ITEM
    * @param BRANCH $new
    * @access private
    */
-  function _record_differences ($orig, $new)
+  protected function _record_differences ($orig, $new)
   {
     parent::_record_differences ($orig, $new);
 
@@ -289,7 +289,7 @@ class RELEASE_HISTORY_ITEM extends OBJECT_IN_FOLDER_HISTORY_ITEM
    * @param RELEASE $new
    * @access private
    */
-  function _record_differences ($orig, $new)
+  protected function _record_differences ($orig, $new)
   {
     parent::_record_differences ($orig, $new);
 
@@ -322,7 +322,7 @@ class COMPONENT_HISTORY_ITEM extends OBJECT_IN_FOLDER_HISTORY_ITEM
    * @param COMPONENT $new
    * @access private
    */
-  function _record_differences ($orig, $new)
+  protected function _record_differences ($orig, $new)
   {
     parent::_record_differences ($orig, $new);
 
@@ -347,7 +347,7 @@ class PROJECT_HISTORY_ITEM extends FOLDER_HISTORY_ITEM
    * @param PROJECT $new
    * @access private
    */
-  function _record_differences ($orig, $new)
+  protected function _record_differences ($orig, $new)
   {
     parent::_record_differences ($orig, $new);
 
@@ -387,7 +387,7 @@ class PROJECT_HISTORY_ITEM extends FOLDER_HISTORY_ITEM
    * @return string
    * @access private
    */
-  function _text_for_assignee_options ($options)
+  protected function _text_for_assignee_options ($options)
   {
     return $this->_text_for_user_list_options ($options->assignee_group_type, $options->assignee_group ());
   }
@@ -398,7 +398,7 @@ class PROJECT_HISTORY_ITEM extends FOLDER_HISTORY_ITEM
    * @return string
    * @access private
    */
-  function _text_for_reporter_options ($options)
+  protected function _text_for_reporter_options ($options)
   {
     return $this->_text_for_user_list_options ($options->reporter_group_type, $options->reporter_group ());
   }
@@ -409,7 +409,7 @@ class PROJECT_HISTORY_ITEM extends FOLDER_HISTORY_ITEM
    * @return string
    * @access private
    */
-  function _text_for_user_list_options ($type, $group)
+  protected function _text_for_user_list_options ($type, $group)
   {
     switch ($type)
     {
@@ -419,6 +419,8 @@ class PROJECT_HISTORY_ITEM extends FOLDER_HISTORY_ITEM
       return 'Allow only registered users';
     case Project_user_group:
       return 'Allow only users from ' . $group->title_as_plain_text ();
+    default:
+      throw new UNKNOWN_VALUE_EXCEPTION($type);
     }
   }
 }

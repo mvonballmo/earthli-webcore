@@ -642,7 +642,7 @@ if ($data)
     // been initialized yet
   {
     $this-&gt;_open_buffer ();
-    $this-&gt;_parsing_started = TRUE;
+    $this-&gt;_parsing_started = true;
   }
   $this-&gt;_parsed_buffer .= $data;
 }
@@ -681,7 +681,7 @@ if ($data)
     // not been initialized yet
   {
     $this->_open_buffer ();
-    $this->_parsing_started = TRUE;
+    $this->_parsing_started = true;
   }
   $this->_parsed_buffer .= $data;
 }

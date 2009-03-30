@@ -58,7 +58,7 @@ class USER_SUBSCRIPTION_FORM extends CONTENT_OBJECT_SUBSCRIPTION_FORM
   /**
    * @param APPLICATION $app Main application.
    */
-  function USER_SUBSCRIPTION_FORM ($app)
+  public function USER_SUBSCRIPTION_FORM ($app)
   {
     CONTENT_OBJECT_SUBSCRIPTION_FORM::CONTENT_OBJECT_SUBSCRIPTION_FORM ($app);
     $this->_type_info = $this->app->type_info_for ('USER');
@@ -68,7 +68,7 @@ class USER_SUBSCRIPTION_FORM extends CONTENT_OBJECT_SUBSCRIPTION_FORM
    * @return QUERY
    * @access private
    */
-  function _make_query ()
+  protected function _make_query ()
   {
     return $this->app->user_query ();
   }
@@ -77,11 +77,11 @@ class USER_SUBSCRIPTION_FORM extends CONTENT_OBJECT_SUBSCRIPTION_FORM
    * @return SELECTABLE_GRID
    * @access private
    */
-  function _make_grid ()
+  protected function _make_grid ()
   {
     $class_name = $this->app->final_class_name ('SELECT_USER_GRID', 'webcore/gui/user_grid.php');
     $Result = new $class_name ($this->app);
-    $Result->show_menus = FALSE;
+    $Result->show_menus = false;
     return $Result;
   }
 

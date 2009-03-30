@@ -35,7 +35,7 @@ class PROJECTS_141_15_MIGRATOR_TASK extends UPGRADE_PER_APP_221_23_TASK
   public $version_from = '1.4.1';
   public $version_to = '1.5.0';
 
-  function _execute ()
+  protected function _execute ()
   {
     log_open_block ("Adding [time_needed] to JOB...");
       $this->_query ("ALTER TABLE `project_jobs` ADD `time_needed` DATETIME NOT NULL");

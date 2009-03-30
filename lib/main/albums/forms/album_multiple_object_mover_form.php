@@ -52,11 +52,11 @@ class ALBUM_MULTIPLE_OBJECT_MOVER_FORM extends MULTIPLE_OBJECT_MOVER_FORM
    * Recalculate the target folder's dates after moving objects.
    * @access private
    */
-  function run ()
+  public function run ()
   {
     parent::run ();
-    $this->_folder->refresh_dates (TRUE);
-    $this->_target->refresh_dates (TRUE);
+    $this->_folder->refresh_dates (true);
+    $this->_target->refresh_dates (true);
   }
 }
 ?>

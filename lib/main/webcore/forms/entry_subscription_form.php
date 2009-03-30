@@ -59,7 +59,7 @@ class ENTRY_SUBSCRIPTION_FORM extends CONTENT_OBJECT_SUBSCRIPTION_FORM
    * @param APPLICATION $app Main application.
    * @param TYPE_INFO $type_info
    */
-  function ENTRY_SUBSCRIPTION_FORM ($app, $type_info)
+  public function ENTRY_SUBSCRIPTION_FORM ($app, $type_info)
   {
     CONTENT_OBJECT_SUBSCRIPTION_FORM::CONTENT_OBJECT_SUBSCRIPTION_FORM ($app);
     $this->_type_info = $type_info;
@@ -71,7 +71,7 @@ class ENTRY_SUBSCRIPTION_FORM extends CONTENT_OBJECT_SUBSCRIPTION_FORM
    * @return QUERY
    * @access private
    */
-  function _make_query ()
+  protected function _make_query ()
   {
     $Result = $this->login->all_entry_query ();
     $Result->set_type ($this->_type_info->id);
@@ -82,12 +82,12 @@ class ENTRY_SUBSCRIPTION_FORM extends CONTENT_OBJECT_SUBSCRIPTION_FORM
    * @return SELECTABLE_GRID
    * @access private
    */
-  function _make_grid ()
+  protected function _make_grid ()
   {
     $class_name = $this->app->final_class_name ('ENTRY_SUMMARY_GRID', 'webcore/gui/entry_grid.php', $this->_type_info->id);
     $Result = new $class_name ($this->app);
-    $Result->show_user = TRUE;
-    $Result->show_folder = TRUE;
+    $Result->show_user = true;
+    $Result->show_folder = true;
     return $Result;
   }
 

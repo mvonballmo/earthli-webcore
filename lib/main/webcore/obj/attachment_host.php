@@ -47,14 +47,14 @@ require_once ('webcore/obj/object_in_folder.php');
  * @since 2.5.0
  * @abstract
  */
-class ATTACHMENT_HOST extends OBJECT_IN_FOLDER
+abstract class ATTACHMENT_HOST extends OBJECT_IN_FOLDER
 {
   /**
    * Create a new attachment based on this object.
    * Does not store anything in the database.
    * @return ATTACHMENT
    */
-  function new_attachment ()
+  public function new_attachment ()
   {
     $class_name = $this->context->final_class_name ('ATTACHMENT', 'webcore/obj/attachment.php');
     $Result = new $class_name ($this->context);
@@ -69,7 +69,7 @@ class ATTACHMENT_HOST extends OBJECT_IN_FOLDER
   /**
    * @return ATTACHMENT_QUERY
    */
-  function attachment_query ()
+  public function attachment_query ()
   {
     if (! isset ($this->_attachment_query))
     {
@@ -86,16 +86,16 @@ class ATTACHMENT_HOST extends OBJECT_IN_FOLDER
    * {@link Force_root_on}.
    * @return string
    */
-  function resolve_url ($url, $root_override = null)
+  public function resolve_url ($url, $root_override = null)
   {
     $att_link_key = '{att_link}';
     $att_thumb_key = '{att_thumb}';
 
-    if (strpos ($url, $att_link_key) !== FALSE)
+    if (strpos ($url, $att_link_key) !== false)
     {
       $key = $att_link_key;
     }
-    else if (strpos ($url, $att_thumb_key) !== FALSE)
+    else if (strpos ($url, $att_thumb_key) !== false)
  {
    $key = $att_thumb_key;
  }

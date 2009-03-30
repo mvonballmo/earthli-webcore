@@ -51,7 +51,7 @@ class DYNAMIC_TREE extends HTML_TREE
   /**
    * @param CONTEXT $context
    */
-  function DYNAMIC_TREE ($context)
+  public function DYNAMIC_TREE ($context)
   {
     TREE::TREE ($context);
 
@@ -67,7 +67,7 @@ class DYNAMIC_TREE extends HTML_TREE
    * @param object $node
    * @access private
    */
-  function draw_icon ($kind, $node)
+  public function draw_icon ($kind, $node)
   {
     switch ($kind)
     {
@@ -89,7 +89,7 @@ class DYNAMIC_TREE extends HTML_TREE
    * @param object $node
    * @access private
    */
-  function pre_draw_children ($node)
+  public function pre_draw_children ($node)
   {
     echo "</div>\n<div class=\"tree-node\">";
     $this->_layer->name = 'obj_' . $this->node_info->id ($node);
@@ -103,7 +103,7 @@ class DYNAMIC_TREE extends HTML_TREE
    * @param object $node
    * @access private
    */
-  function post_draw_children ($node)
+  public function post_draw_children ($node)
   {
     $this->_layer->finish ();
   }

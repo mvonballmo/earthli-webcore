@@ -54,25 +54,27 @@ class FOLDER_TREE_NODE_INFO extends TREE_NODE_INFO
    * @var string
    */
   public $page_link = '';
+
   /**
    * Add arguments to this page.
    * These constant arguments are appended to each generated link.
    * @var string
    */
   public $page_args = '';
+
   /**
    * Show the icon for a folder?
    * Overridden in specialized displayers that show other icons.
    * @var boolean
    */
-  public $show_folder_icon = TRUE;
+  public $show_folder_icon = true;
 
   /**
    * Return list of sub-nodes for 'node'.
    * @param FOLDER $node
    * @access private
    */
-  function sub_nodes ($node)
+  public function sub_nodes ($node)
   {
     return $node->sub_folders ();
   }
@@ -82,7 +84,7 @@ class FOLDER_TREE_NODE_INFO extends TREE_NODE_INFO
    * @param PROJECT $node Draw the title for this project.
    * @return string
    */
-  function title_for ($node)
+  public function title_for ($node)
   {
     if ($this->selected ($node))
     {
@@ -126,12 +128,14 @@ class FOLDER_TREE_NODE_INFO extends TREE_NODE_INFO
    * @param PROJECT $node Draw the title for this project.
    * @return string
    */
-  function icon_for ($node)
+  public function icon_for ($node)
   {
     if ($this->show_folder_icon && $node->icon_url)
     {
       return $node->icon_as_html ('16px');
     }
+    
+    return '';
   }
 
   /**
@@ -140,13 +144,12 @@ class FOLDER_TREE_NODE_INFO extends TREE_NODE_INFO
    * @return boolean
    * @access private
    */
-  function closed ($node)
+  public function closed ($node)
   {
     if (! isset ($this->open_nodes) || ! sizeof ($this->open_nodes))
     {
       return $node->id != $this->app->root_folder_id;
     }
-
 
     return parent::closed ($node);
   }
@@ -157,7 +160,7 @@ class FOLDER_TREE_NODE_INFO extends TREE_NODE_INFO
    * @return FOLDER
    * @access private
    */
-  function parent ($node)
+  public function parent ($node)
   {
     return $node->parent_folder ();
   }
@@ -168,7 +171,7 @@ class FOLDER_TREE_NODE_INFO extends TREE_NODE_INFO
    * @return integer
    * @access private
    */
-  function id ($node)
+  public function id ($node)
   {
     return $node->id;
   }
@@ -189,7 +192,7 @@ class EXPLORER_FOLDER_TREE_NODE_INFO extends FOLDER_TREE_NODE_INFO
    * @return boolean
    * @access private
    */
-  function selectable ($node)
+  public function selectable ($node)
   {
     return $this->app->login->is_allowed (Privilege_set_entry, Privilege_create, $node);
   }
@@ -209,13 +212,13 @@ class SECURITY_FOLDER_TREE_NODE_INFO extends FOLDER_TREE_NODE_INFO
    * Overridden in specialized displayers that show other icons.
    * @var boolean
    */
-  public $show_folder_icon = FALSE;
+  public $show_folder_icon = false;
 
   /**
    * Make sure all nodes that define their permissions are visible in the tree.
    * @param array[FOLDER] $nodes
    */
-  function set_defined_nodes_visible ($nodes)
+  public function set_defined_nodes_visible ($nodes)
   {
     if (sizeof ($nodes))
     {
@@ -238,7 +241,7 @@ class SECURITY_FOLDER_TREE_NODE_INFO extends FOLDER_TREE_NODE_INFO
    * @return boolean
    * @access private
    */
-  function visitable ($node)
+  public function visitable ($node)
   {
     return $this->login->is_allowed (Privilege_set_folder, Privilege_secure, $node);
   }
@@ -248,13 +251,12 @@ class SECURITY_FOLDER_TREE_NODE_INFO extends FOLDER_TREE_NODE_INFO
    * @param PROJECT $node Draw the title for this project.
    * @return string
    */
-  function icon_for ($node)
+  public function icon_for ($node)
   {
     if ($node->defines_security ())
     {
       return $this->app->resolve_icon_as_html ('{icons}buttons/security', 'Defines Own Security Settings', '16px');
     }
-
 
     return parent::icon_for ($node);
   }
@@ -271,11 +273,11 @@ class SUBSCRIPTION_FOLDER_TREE_NODE_INFO extends FOLDER_TREE_NODE_INFO
 {
   /**
    * Is this node selectable in this tree?
-    * @param FOLDER $node
-    * @return bool
-    * @access private
-    */
-  function visitable ($node)
+   * @param FOLDER $node
+   * @return bool
+   * @access private
+   */
+  public function visitable ($node)
   {
     return $this->app->login->is_allowed (Privilege_set_folder, Privilege_modify, $node);
   }

@@ -35,7 +35,7 @@ class ALBUMS_280_290_MIGRATOR_TASK extends UPGRADE_PER_APP_260_270_TASK
   public $version_from = '2.8.0';
   public $version_to = '2.9.0';
 
-  function _execute ()
+  protected function _execute ()
   {
     log_open_block ("Cleaning up indexes");
       $this->clean_up_folder_permissions ('album_folder_permissions');

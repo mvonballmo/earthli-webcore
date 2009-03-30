@@ -54,27 +54,33 @@ class EXECUTE_SEARCH_FORM extends ID_BASED_FORM
    * @var string
    */
   public $name = 'search_form';
+
   /**
    * @var string
    * @access private
    */
   public $method = 'get';
+
   /**
    * @var string
    */
   public $button = 'Search';
+
   /**
    * @var string
    */
   public $button_icon = '{icons}buttons/view';
+
   /**
    * @var boolean
    */
-  public $controls_visible = TRUE;
+  public $controls_visible = true;
+
   /**
    * @var string
    */
   public $action = 'search.php';
+
   /**
    * @var string
    */
@@ -88,7 +94,7 @@ class EXECUTE_SEARCH_FORM extends ID_BASED_FORM
    * @param APPLICATION $app Main application.
    * @param SEARCH $search Build the form based on this search object.
    */
-  function EXECUTE_SEARCH_FORM ($app, $search)
+  public function EXECUTE_SEARCH_FORM ($app, $search)
   {
     ID_BASED_FORM::ID_BASED_FORM ($app);
 
@@ -112,14 +118,14 @@ class EXECUTE_SEARCH_FORM extends ID_BASED_FORM
       $this->add_field ($field);
       
       $tsearch = $this->app->make_search ($type);
-      $tsearch->fields->add_fields ($this, FALSE);
+      $tsearch->fields->add_fields ($this, false);
     }
 
     $field = new BOOLEAN_FIELD ();
     $field->id = 'quick_search';
     $field->title = 'Quick Search';
-    $field->visible = FALSE;
-    $field->set_value (TRUE);
+    $field->visible = false;
+    $field->set_value (true);
     $this->add_field ($field);
 
     $field = new ENUMERATED_FIELD ();
@@ -130,7 +136,9 @@ class EXECUTE_SEARCH_FORM extends ID_BASED_FORM
     /* Fill with all the registered search types. */
     $type_infos = $this->app->search_type_infos ();
     foreach ($type_infos as $t)
+    {
       $field->add_value ($t->id);
+    }
     $this->add_field ($field);
 
     /* Set the first entry type as the default search. */
@@ -140,14 +148,14 @@ class EXECUTE_SEARCH_FORM extends ID_BASED_FORM
     }
   }
 
-  function load_with_defaults ()
+  public function load_with_defaults ()
   {
     parent::load_with_defaults ();
     if (isset ($this->_search))
     {
       $this->_search->fields->load_with_defaults ($this);
       $this->set_value ('type', $this->_search->type);
-      $this->set_value ('quick_search', FALSE);
+      $this->set_value ('quick_search', false);
     }
     if ($this->is_field ('folder_search_type'))
     {
@@ -159,13 +167,13 @@ class EXECUTE_SEARCH_FORM extends ID_BASED_FORM
    * Load initial properties from this branch.
    * @param SEARCH $obj
    */
-  function load_from_object ($obj)
+  public function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
     if (isset ($this->_search))
     {
       $this->_search->fields->load_from_object ($this, $obj);
-      $this->set_value ('quick_search', FALSE);
+      $this->set_value ('quick_search', false);
     }
   }
 
@@ -174,7 +182,7 @@ class EXECUTE_SEARCH_FORM extends ID_BASED_FORM
    * @param SEARCH $obj
    * @access private
    */
-  function _post_validate ($obj)
+  protected function _post_validate ($obj)
   {
     parent::_post_validate ($obj);
     if (isset ($this->_search))
@@ -187,7 +195,7 @@ class EXECUTE_SEARCH_FORM extends ID_BASED_FORM
    * Read in values from the {@link $method} array.
    * @access private
    */
-  function _load_from_request ()
+  protected function _load_from_request ()
   {
     parent::_load_from_request ();
     if ($this->value_for ('quick_search'))
@@ -213,7 +221,7 @@ class EXECUTE_SEARCH_FORM extends ID_BASED_FORM
    * @param SEARCH $obj
    * @access private
    */
-  function commit ($obj)
+  public function commit ($obj)
   {
     $this->_search->fields->store_to_object ($this, $obj);
   }
@@ -222,12 +230,12 @@ class EXECUTE_SEARCH_FORM extends ID_BASED_FORM
    * Draw any Javascript that the form needs to enable/disable controls.
    * @access private
    */
-  function _draw_scripts ()
+  protected function _draw_scripts ()
   {
     if (isset ($this->_search))
     {
 ?>
-  function save_search (f)
+  public function save_search (f)
   {
     <?php if ($this->object_exists ()) { ?>
     f.action = 'edit_search.php';
@@ -244,7 +252,7 @@ class EXECUTE_SEARCH_FORM extends ID_BASED_FORM
    * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_controls ($renderer)
+  protected function _draw_controls ($renderer)
   {
     if (! isset ($this->_search))
     {
@@ -260,7 +268,9 @@ class EXECUTE_SEARCH_FORM extends ID_BASED_FORM
         /* Fill with all the registered search types. */
         $type_infos = $this->app->search_type_infos ();
         foreach ($type_infos as $t)
+        {
           $props->add_item ($t->plural_title, $t->id);
+        }
           
         $renderer->draw_drop_down_row ('type', $props);
       

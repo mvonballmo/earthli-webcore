@@ -51,7 +51,7 @@ require_once ('webcore/util/browser.php');
  */
 class BROWSER_TEST_TASK extends TEST_TASK
 {
-  function _execute ()
+  protected function _execute ()
   {
     $this->_test_regular_clients ();
     $this->_test_bots ();
@@ -62,7 +62,7 @@ class BROWSER_TEST_TASK extends TEST_TASK
     $browser->load_from_server ();
   }
 
-  function _test_regular_clients ()
+  protected function _test_regular_clients ()
   {
     $browser = $this->env->browser ();
 
@@ -443,7 +443,7 @@ class BROWSER_TEST_TASK extends TEST_TASK
           $this->_check (!$browser->is (Browser_newsreader), 'Browser should not be a newsreader');
     }
 
-  function _test_bots ()
+  protected function _test_bots ()
   {
     $browser = $this->env->browser ();
 
@@ -598,7 +598,7 @@ class BROWSER_TEST_TASK extends TEST_TASK
           $this->_check ($browser->is (Browser_robot), 'Browser should be a robot.');
   }
 
-  function _test_newsreaders ()
+  protected function _test_newsreaders ()
   {
     $browser = $this->env->browser ();
 
@@ -667,7 +667,7 @@ class BROWSER_TEST_TASK extends TEST_TASK
           $this->_check ($browser->is (Browser_newsreader), 'Browser should be a newsreader');
   }
 
-  function _test_bed ()
+  protected function _test_bed ()
   {
     $browser = $this->env->browser ();
 

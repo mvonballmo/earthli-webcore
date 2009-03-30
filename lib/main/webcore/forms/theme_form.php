@@ -51,20 +51,20 @@ class THEME_FORM extends RENDERABLE_FORM
   /**
    * @param APPLICATION $app Main application.
    */
-  function THEME_FORM ($app)
+  public function THEME_FORM ($app)
   {
     RENDERABLE_FORM::RENDERABLE_FORM ($app);
 
     $field = new MUNGER_TITLE_FIELD ();
     $field->id = 'title';
     $field->title = 'Title';
-    $field->required = TRUE;
+    $field->required = true;
     $this->add_field ($field);
 
     $field = new URI_FIELD ();
     $field->id = 'main_CSS_file_name';
     $field->title = 'Skin CSS';
-    $field->required = TRUE;
+    $field->required = true;
     $field->min_length = 1;
     $field->max_length = 100;
     $this->add_field ($field);
@@ -72,7 +72,7 @@ class THEME_FORM extends RENDERABLE_FORM
     $field = new URI_FIELD ();
     $field->id = 'font_name_CSS_file_name';
     $field->title = 'Font CSS';
-    $field->required = FALSE;
+    $field->required = false;
     $field->min_length = 1;
     $field->max_length = 100;
     $this->add_field ($field);
@@ -80,7 +80,7 @@ class THEME_FORM extends RENDERABLE_FORM
     $field = new URI_FIELD ();
     $field->id = 'font_size_CSS_file_name';
     $field->title = 'Size CSS';
-    $field->required = FALSE;
+    $field->required = false;
     $field->min_length = 1;
     $field->max_length = 100;
     $this->add_field ($field);
@@ -88,7 +88,7 @@ class THEME_FORM extends RENDERABLE_FORM
     $field = new TEXT_FIELD ();
     $field->id = 'icon_set';
     $field->title = 'Icon set';
-    $field->required = FALSE;
+    $field->required = false;
     $field->min_length = 1;
     $field->max_length = 100;
     $this->add_field ($field);
@@ -97,7 +97,7 @@ class THEME_FORM extends RENDERABLE_FORM
     $field->id = 'icon_extension';
     $field->title = 'Extension';
     $field->description = 'Default extension for icons and logos.';
-    $field->required = FALSE;
+    $field->required = false;
     $field->min_length = 1;
     $field->max_length = 5;
     $this->add_field ($field);
@@ -106,7 +106,7 @@ class THEME_FORM extends RENDERABLE_FORM
     $field->id = 'renderer_class_name';
     $field->title = 'Renderer';
     $field->description = 'Name of the PHP class that will render pages.';
-    $field->required = FALSE;
+    $field->required = false;
     $field->min_length = 1;
     $field->max_length = 100;
     $this->add_field ($field);
@@ -116,7 +116,7 @@ class THEME_FORM extends RENDERABLE_FORM
    * Load initial properties from this object.
    * @param UNIQUE_OBJECT $obj
    */
-  function load_from_object ($obj)
+  public function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
     $this->set_value ('title', $obj->title);
@@ -134,7 +134,7 @@ class THEME_FORM extends RENDERABLE_FORM
    * @access private
    * @abstract
    */
-  function _store_to_object ($obj)
+  protected function _store_to_object ($obj)
   {
     $obj->title = $this->value_for ('title');
     $obj->main_CSS_file_name = $this->value_for ('main_CSS_file_name');
@@ -149,7 +149,7 @@ class THEME_FORM extends RENDERABLE_FORM
    * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_controls ($renderer)
+  protected function _draw_controls ($renderer)
   {
     $renderer->start ();
 

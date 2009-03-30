@@ -58,7 +58,7 @@ class FOLDER_ENTRY_QUERY extends OBJECT_IN_SINGLE_FOLDER_QUERY
   /**
    * Apply default restrictions and tables.
    */
-  function apply_defaults () 
+  public function apply_defaults () 
   {
     $this->set_select ('entry.*');
     $this->set_table ($this->app->table_names->entries . ' entry');
@@ -73,14 +73,14 @@ class FOLDER_ENTRY_QUERY extends OBJECT_IN_SINGLE_FOLDER_QUERY
    * entry-types.
    * @param string $type
    */
-  function set_type ($type) {}
+  public function set_type ($type) {}
 
   /**
    * Get the entry for the given comment id.
    * @param integer $id
    * @return ENTRY
    */
-  function object_for_comment_at_id ($id)
+  public function object_for_comment_at_id ($id)
   {
     $id = $this->validate_as_integer ($id);
     if ($id)
@@ -105,7 +105,7 @@ class FOLDER_ENTRY_QUERY extends OBJECT_IN_SINGLE_FOLDER_QUERY
    * @param string $type
    * @return ENTRY
    */
-  function object_for_attachment_at_id ($id, $type)
+  public function object_for_attachment_at_id ($id, $type)
   {
     $id = $this->validate_as_integer ($id);
     if ($id)
@@ -130,15 +130,18 @@ class FOLDER_ENTRY_QUERY extends OBJECT_IN_SINGLE_FOLDER_QUERY
       }
       $this->_end_system_call ();
       $this->_tables = $old_tables;
+      
       return $Result;
     }
+    
+    return null;
   }
 
   /**
    * @return ENTRY
-    * @access private
-    */
-  function _make_object ()
+   * @access private
+   */
+  protected function _make_object ()
   {
     $class_name = $this->app->final_class_name ('ENTRY', 'webcore/obj/entry.php');
     return new $class_name ($this->app);
@@ -148,7 +151,7 @@ class FOLDER_ENTRY_QUERY extends OBJECT_IN_SINGLE_FOLDER_QUERY
    * Prepare security- and filter-based restrictions.
    * @access private
    */
-  function _prepare_restrictions ()
+  protected function _prepare_restrictions ()
   {
     parent::_prepare_restrictions ();
     $this->_calculated_restrictions [] = $this->_sql_folder_id () . " = " . $this->_folder->id;
@@ -159,7 +162,7 @@ class FOLDER_ENTRY_QUERY extends OBJECT_IN_SINGLE_FOLDER_QUERY
    * @param string $calculated_filter
    * @access private
    */
-  function _filter_restriction ($calculated_filter)
+  protected function _filter_restriction ($calculated_filter)
   {
     $Result = parent::_filter_restriction ($calculated_filter);
 
@@ -195,7 +198,7 @@ class FOLDER_ENTRY_QUERY extends OBJECT_IN_SINGLE_FOLDER_QUERY
    * the folder id, it can override here to return the new path to the field.
    * @return string
    */
-  function _sql_folder_id ()
+  protected function _sql_folder_id ()
   {
     return $this->alias . '.folder_id';
   }
@@ -220,7 +223,7 @@ class FOLDER_MULTI_ENTRY_QUERY extends FOLDER_ENTRY_QUERY
   /**
    * @param FOLDER $folder Retrieve entries from this folder.
    */
-  function FOLDER_MULTI_ENTRY_QUERY ($folder)
+  public function FOLDER_MULTI_ENTRY_QUERY ($folder)
   {
     FOLDER_ENTRY_QUERY::FOLDER_ENTRY_QUERY ($folder);
     $this->set_type ('');
@@ -229,7 +232,7 @@ class FOLDER_MULTI_ENTRY_QUERY extends FOLDER_ENTRY_QUERY
   /**
    * Apply default restrictions and tables.
    */
-  function apply_defaults () 
+  public function apply_defaults () 
   {
     parent::apply_defaults ();
     $this->add_select ('entry.type as entry_type');
@@ -239,7 +242,7 @@ class FOLDER_MULTI_ENTRY_QUERY extends FOLDER_ENTRY_QUERY
    * Specify the type of entry to retrieve.
    * @param string $type
    */
-  function set_type ($type)
+  public function set_type ($type)
   {
     if ($type)
     {
@@ -251,7 +254,7 @@ class FOLDER_MULTI_ENTRY_QUERY extends FOLDER_ENTRY_QUERY
    * @return ENTRY
    * @access private
    */
-  function _make_object ()
+  protected function _make_object ()
   {
     return $this->app->make_entry ($this->db->f ('entry_type'));
   }
@@ -269,7 +272,7 @@ class FOLDER_DRAFTABLE_ENTRY_QUERY extends FOLDER_ENTRY_QUERY
   /**
    * Apply default restrictions and tables.
    */
-  function apply_defaults () 
+  public function apply_defaults () 
   {
     parent::apply_defaults ();
     $this->set_day_field ('entry.time_published');
@@ -280,7 +283,7 @@ class FOLDER_DRAFTABLE_ENTRY_QUERY extends FOLDER_ENTRY_QUERY
    * Reset the ordering to show recent items first.
    * @access private
    */
-  function _order_by_recent ()
+  protected function _order_by_recent ()
   {
     if ($this->includes (Unpublished) && ! $this->includes (Visible))
     {

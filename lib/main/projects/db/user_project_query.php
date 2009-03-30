@@ -50,11 +50,11 @@ class USER_PROJECT_QUERY extends USER_FOLDER_QUERY
 {
   /**
    * Retrieves the folder containing the {@link BRANCH} for '$id'.
-    * If the release does not exist or cannot be seen by this user, nothing is returned.
-    * @param integer $id Unique id of the branch to retrieve.
-    * @return PROJECT
-    */
-  function folder_for_branch_at_id ($id)
+   * If the release does not exist or cannot be seen by this user, nothing is returned.
+   * @param integer $id Unique id of the branch to retrieve.
+   * @return PROJECT
+   */
+  public function folder_for_branch_at_id ($id)
   {
     $id = $this->validate_as_integer ($id);
     if ($id)
@@ -72,11 +72,11 @@ class USER_PROJECT_QUERY extends USER_FOLDER_QUERY
 
   /**
    * Retrieves the folder containing the {@link RELEASE} for '$id'.
-    * If the release does not exist or cannot be seen by this user, nothing is returned.
-    * @param integer $id Unique id of the release to retrieve.
-    * @return PROJECT
-    */
-  function folder_for_release_at_id ($id)
+   * If the release does not exist or cannot be seen by this user, nothing is returned.
+   * @param integer $id Unique id of the release to retrieve.
+   * @return PROJECT
+   */
+  public function folder_for_release_at_id ($id)
   {
     $id = $this->validate_as_integer ($id);
     if ($id)
@@ -93,11 +93,11 @@ class USER_PROJECT_QUERY extends USER_FOLDER_QUERY
 
   /**
    * Retrieves the folder containing the {@link COMPONENT} for '$id'.
-    * If the component does not exist or cannot be seen by this user, nothing is returned.
-    * @param integer $id Unique id of the component to retrieve.
-    * @return PROJECT
-    */
-  function folder_for_component_at_id ($id)
+   * If the component does not exist or cannot be seen by this user, nothing is returned.
+   * @param integer $id Unique id of the component to retrieve.
+   * @return PROJECT
+   */
+  public function folder_for_component_at_id ($id)
   {
     $id = $this->validate_as_integer ($id);
     if ($id)
@@ -118,7 +118,7 @@ class USER_PROJECT_QUERY extends USER_FOLDER_QUERY
    * @return boolean
    * @access private
    */
-  function _is_content_type ($object_type)
+  protected function _is_content_type ($object_type)
   {
     return (parent::_is_content_type ($object_type) ||
             ($object_type == History_item_branch) ||

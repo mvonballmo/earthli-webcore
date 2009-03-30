@@ -56,12 +56,14 @@ class MAIL_BODY_RENDERER extends MAIL_RENDERER
    * Some mailers needs hard returns; this is a reasonable default.
    */
   public $html_wrap_limit = 200;
+
   /**
    * @var integer
    * Wrap text at this right margin.
    * Many mailers can't handle unwrapped (or lines longer than 255 characters) plain-text emails.
    */
   public $text_wrap_limit = 72;
+
   /**
    * List of objects in the email.
    * @see MAIL_BODY_RENDERER_OBJECT
@@ -71,11 +73,11 @@ class MAIL_BODY_RENDERER extends MAIL_RENDERER
 
   /**
    * Add an object to be renderered when the full email is rendered.
-    * You can add multiple objects; renderer must be matched with the object.
-    * @param object $obj
-    * @param OBJECT_MAIL_RENDERER $renderer
-    */
-  function add ($obj, $renderer)
+   * You can add multiple objects; renderer must be matched with the object.
+   * @param object $obj
+   * @param OBJECT_MAIL_RENDERER $renderer
+   */
+  public function add ($obj, $renderer)
   {
     $pair = null; // Compiler warning
     $pair->obj = $obj;
@@ -89,7 +91,7 @@ class MAIL_BODY_RENDERER extends MAIL_RENDERER
    * @param MAIL_RENDERER_OPTIONS $options
    * @return string
    */
-  function as_html ($options)
+  public function as_html ($options)
   {
     $state = null; // Compiler warning
     $this->_start_rendering ($options, $state);
@@ -110,7 +112,7 @@ class MAIL_BODY_RENDERER extends MAIL_RENDERER
    * @param MAIL_RENDERER_OPTIONS $options
    * @return string
    */
-  function as_text ($options)
+  public function as_text ($options)
   {
     $state = null; // Compiler warning
     $this->_start_rendering ($options, $state);
@@ -127,10 +129,10 @@ class MAIL_BODY_RENDERER extends MAIL_RENDERER
 
   /**
    * Start of the html email (includes head and body-open tags).
-    * @return string
-    * @access private
-    */
-  function _html_header ()
+   * @return string
+   * @access private
+   */
+  protected function _html_header ()
   {
     if (! isset ($this->_cached_html_header))
     {
@@ -146,14 +148,16 @@ class MAIL_BODY_RENDERER extends MAIL_RENDERER
    * @return string
    * @access private
    */
-  function _html_content ($options)
+  protected function _html_content ($options)
   {
     $Result = '';
 
     if (sizeof ($this->objects))
     {
       foreach ($this->objects as $pair)
+      {
         $Result .= $pair->renderer->html_body ($pair->obj, $options);
+      }
     }
 
     return $Result;
@@ -161,10 +165,10 @@ class MAIL_BODY_RENDERER extends MAIL_RENDERER
 
   /**
    * End of the html email (includes body-close and footer tags).
-    * @return string
-    * @access private
-    */
-  function _html_footer ()
+   * @return string
+   * @access private
+   */
+  protected function _html_footer ()
   {
     if (! isset ($this->_cached_html_footer))
     {
@@ -180,7 +184,7 @@ class MAIL_BODY_RENDERER extends MAIL_RENDERER
    * @return string
    * @access private
    */
-  function _text_content ($options)
+  protected function _text_content ($options)
   {
     $num_objs = sizeof ($this->objects);
     if ($num_objs)
@@ -213,10 +217,10 @@ class MAIL_BODY_RENDERER extends MAIL_RENDERER
 
   /**
    * Default HTML header.
-    * @return string
-    * @access private
-    */
-  function _build_html_header ()
+   * @return string
+   * @access private
+   */
+  protected function _build_html_header ()
   {
     $Result = $this->_line ("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">");
     $Result .= $this->_line ("<html>");
@@ -233,18 +237,18 @@ class MAIL_BODY_RENDERER extends MAIL_RENDERER
 
   /**
    * Override to provide custom HTML head contents.
-    * Include and scripts or style sheets needed to render this HTML email.
-    * @return string
-    * @access private
-    */
-  function _html_head_content () {}
+   * Include and scripts or style sheets needed to render this HTML email.
+   * @return string
+   * @access private
+   */
+  protected function _html_head_content () {}
 
   /**
    * Default HTML footer.
-    * @return string
-    * @access private
-    */
-  function _build_html_footer ()
+   * @return string
+   * @access private
+   */
+  protected function _build_html_footer ()
   {
     $Result = $this->_line ("</body>");
     $Result .= $this->_line ("</html>");
@@ -269,6 +273,7 @@ class MAIL_BODY_RENDERER_OBJECT
    * @var object $obj
    */
   public $obj;
+
   /**
    * @var OBJECT_MAIL_RENDERER
    */

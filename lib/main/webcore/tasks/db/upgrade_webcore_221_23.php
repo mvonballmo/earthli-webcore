@@ -35,7 +35,7 @@ class UPGRADE_WEBCORE_221_23_TASK extends MIGRATOR_TASK
   public $version_from = '2.2.1';
   public $version_to = '2.3.0';
 
-  function _execute ()
+  protected function _execute ()
   {
     log_open_block ("Updating theme table fields...");
       $this->_query ("ALTER TABLE `themes` CHANGE `name` `title` VARCHAR( 100 ) NOT NULL , CHANGE `file` `main_CSS_file_name` VARCHAR( 100 ) NOT NULL , CHANGE `color` `icon_set` VARCHAR( 100 ) NOT NULL , CHANGE `renderer` `renderer_class_name` VARCHAR( 100 ) NOT NULL");

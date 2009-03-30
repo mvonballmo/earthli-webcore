@@ -35,7 +35,7 @@ class ALBUMS_25_26_MIGRATOR_TASK extends UPGRADE_PER_APP_23_24_TASK
   public $version_from = '2.5.0';
   public $version_to = '2.6.0';
 
-  function _execute ()
+  protected function _execute ()
   {
     log_open_block ("Cleaning text for comments...");
       $this->clean_text ('album_comments');

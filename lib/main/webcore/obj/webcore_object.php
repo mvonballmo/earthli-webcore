@@ -57,7 +57,7 @@ class WEBCORE_OBJECT extends RAISABLE
   /**
    * @param CONTEXT $context Page or application object to which this one belongs.
    */
-  function WEBCORE_OBJECT ($context)
+  public function WEBCORE_OBJECT ($context)
   {
     $this->assert (isset ($context), "[context] cannot be empty.", 'WEBCORE_OBJECT', 'WEBCORE_OBJECT');
 
@@ -88,7 +88,7 @@ class WEBCORE_OBJECT extends RAISABLE
    * Return meta-information about this class.
    * @return ENTRY_TYPE_INFO
    */
-  function type_info ()
+  public function type_info ()
   {
     return $this->context->type_info_for (get_class ($this));
   }
@@ -97,7 +97,7 @@ class WEBCORE_OBJECT extends RAISABLE
    * Return a description for use in logging.
    * @return string
    */
-  function instance_description ()
+  public function instance_description ()
   {
     return get_class ($this);
   }
@@ -111,7 +111,7 @@ class WEBCORE_OBJECT extends RAISABLE
    * explicitly use the PHP assignment operator to make a copy of all sub-objects.
    * @return WEBCORE_OBJECT
    */
-  function make_clone ()
+  public function make_clone ()
   {
     if (is_php_5 ())
     {
@@ -129,7 +129,7 @@ class WEBCORE_OBJECT extends RAISABLE
    * objects. In that case, the inner query cannot share a query id with
    * the outer query.
    */
-  function ensure_has_own_database_connection ()
+  public function ensure_has_own_database_connection ()
   {
     $new_db = $this->db->make_clone ();
     unset ($this->db);
@@ -141,12 +141,14 @@ class WEBCORE_OBJECT extends RAISABLE
    * @return EXCEPTION_HANDLER
    * @access private
    */
-  function _exception_handler ()
+  protected function _exception_handler ()
   {
     if (isset ($this->context->exception_handler))
     {
       return $this->context->exception_handler;
     }
+    
+    return null;
   }
 
   /**
@@ -157,7 +159,7 @@ class WEBCORE_OBJECT extends RAISABLE
    * @param WEBCORE_OBJECT $other
    * @access private
    */
-  function _copy_from ($other)
+  protected function _copy_from ($other)
   {
   }
   
@@ -166,48 +168,53 @@ class WEBCORE_OBJECT extends RAISABLE
    * _initialize_clonable_fields()} to create copies of all references not
    * cloned by the default shallow copy.
    */
-  function __clone ()
-  {
-    $this->_copy_from ($this);
-  }
+//  public function __clone ()
+//  {
+//    $this->_copy_from ($this);
+//  }
 
   /**
    * reference to the context (usually a PAGE or APPLICATION)
-    * @var CONTEXT
-    * @access private
-    */
+   * @var CONTEXT
+   * @access private
+   */
   public $context = null;
+
   /**
    * Shortcut to global environment.
-    * @var ENVIRONMENT
-    * @access private
-    */
+   * @var ENVIRONMENT
+   * @access private
+   */
   public $env = null;
+
   /**
    * Shortcut to global page object.
-    * @var PAGE
-    * @access private
-    */
+   * @var PAGE
+   * @access private
+   */
   public $page = null;
+
   /**
    * Reference to the shared database.
-    * @var DATABASE
-    * @access private
-    */
+   * @var DATABASE
+   * @access private
+   */
   public $db = null;
+
   /**
    * Reference to the application.
-    * Can be empty if there is no application.
-    * @var APPLICATION
-    * @access private
-    */
+   * Can be empty if there is no application.
+   * @var APPLICATION
+   * @access private
+   */
   public $app = null;
+
   /**
    * Shortcut to the 'login' in the application.
-    * Can be empty if there is no application.
-    * @var USER
-    * @access private
-    */
+   * Can be empty if there is no application.
+   * @var USER
+   * @access private
+   */
   public $login = null;
 }
 

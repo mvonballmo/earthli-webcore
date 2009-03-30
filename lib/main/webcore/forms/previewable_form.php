@@ -46,7 +46,7 @@ require_once ('webcore/forms/form.php');
  * @subpackage forms-core
  * @abstract
  */
-class PREVIEWABLE_FORM extends FORM
+abstract class PREVIEWABLE_FORM extends FORM
 {
   /**
    * Is previewing enabled?
@@ -54,17 +54,18 @@ class PREVIEWABLE_FORM extends FORM
    * the abstract methods for previewing can enable it.
    * @var boolean
    */
-  public $preview_enabled = FALSE;
+  public $preview_enabled = false;
+
   /**
    * Show the previews before the form?
    * @var boolean
    */
-  public $show_previews_first = TRUE;
+  public $show_previews_first = true;
 
   /**
    * @param CONTEXT $context Attach to this object.
    */
-  function PREVIEWABLE_FORM ($context)
+  public function PREVIEWABLE_FORM ($context)
   {
     $this->_form_based_field_names [] = 'previewing';
 
@@ -75,10 +76,10 @@ class PREVIEWABLE_FORM extends FORM
    * Is this form in preview mode?
    * @return boolean
    */
-  function previewing ()
+  public function previewing ()
   {
     $this->load_from_request ();
-    return $this->value_for ($this->_form_based_field_name ('previewing'));
+    return $this->value_for ($this->form_based_field_name ('previewing'));
   }
 
   /**
@@ -88,7 +89,7 @@ class PREVIEWABLE_FORM extends FORM
    * @param string $title
    * @param boolean $visible
    */
-  function add_preview ($obj, $title, $visible = TRUE)
+  public function add_preview ($obj, $title, $visible = true)
   {
     $settings = $this->_make_preview_settings ($obj);
     $settings->object = $obj;
@@ -103,7 +104,7 @@ class PREVIEWABLE_FORM extends FORM
    * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_form ($renderer)
+  protected function _draw_form ($renderer)
   {
     if ($this->show_previews_first)
     {
@@ -122,12 +123,14 @@ class PREVIEWABLE_FORM extends FORM
    * Displays objects in DHTML preview blocks.
    * Objects can be added to the preview list so that they are renderered before the form.
    */
-  function _draw_previews ()
+  protected function _draw_previews ()
   {
     if (isset ($this->_previews) && sizeof ($this->_previews))
     {
       foreach ($this->_previews as $preview)
+      {
         $preview->display ();
+      }
     }
   }
 
@@ -138,7 +141,7 @@ class PREVIEWABLE_FORM extends FORM
    * @param string $load_action
    * @access private
    */
-  function _set_object ($obj, $load_action)
+  protected function _set_object ($obj, $load_action)
   {
     if (($load_action != Form_load_action_default) && $obj->exists ())
     {
@@ -152,7 +155,7 @@ class PREVIEWABLE_FORM extends FORM
    * @param string $load_action
    * @access private
    */
-  function _process ($obj, $load_action)
+  protected function _process ($obj, $load_action)
   {
     if ($this->previewing ())
     {
@@ -181,10 +184,7 @@ class PREVIEWABLE_FORM extends FORM
    * @access private
    * @abstract
    */
-  function _store_to_object ($obj)
-  {
-    $this->raise_deferred ('_store_to_object', 'PREVIEWABLE_FORM');
-  }
+  protected abstract function _store_to_object ($obj);
 
   /**
    * Make a renderer for this form.
@@ -192,7 +192,7 @@ class PREVIEWABLE_FORM extends FORM
    * form rendering from one spot.
    * @return FORM_RENDERER
    */
-  function make_renderer ()
+  public function make_renderer ()
   {
     $Result = parent::make_renderer ();
     $Result->preview_enabled = $this->preview_enabled;
@@ -206,10 +206,7 @@ class PREVIEWABLE_FORM extends FORM
    * @access private
    * @abstract
    */
-  function _make_preview_settings ($obj)
-  {
-    $this->raise_deferred ('_make_preview_settings', 'PREVIEWABLE_FORM');
-  }
+  protected abstract function _make_preview_settings ($obj);
 
   /**
    * Title for a previewed object.
@@ -217,10 +214,7 @@ class PREVIEWABLE_FORM extends FORM
    * @return string
    * @abstract
    */
-  function _preview_title ($obj)
-  {
-    $this->raise_deferred ('_preview_title', 'PREVIEWABLE_FORM');
-  }
+  protected abstract function _preview_title ($obj);
 
   /**
    * List of objects to render for preview.
@@ -246,7 +240,7 @@ class PREVIEWABLE_ID_BASED_FORM extends PREVIEWABLE_FORM
   /**
    * @param CONTEXT $context
    */
-  function PREVIEWABLE_ID_BASED_FORM ($context)
+  public function PREVIEWABLE_ID_BASED_FORM ($context)
   {
     PREVIEWABLE_FORM::PREVIEWABLE_FORM ($context);
 
@@ -254,11 +248,11 @@ class PREVIEWABLE_ID_BASED_FORM extends PREVIEWABLE_FORM
     $field->id = 'id';
     $field->title = 'ID';
     $field->min_value = 1;
-    $field->visible = FALSE;
+    $field->visible = false;
     $this->add_field ($field);
   }
 
-  function load_with_defaults ()
+  public function load_with_defaults ()
   {
     parent::load_with_defaults ();
     $this->set_value ('id', read_var ('id'));
@@ -268,7 +262,7 @@ class PREVIEWABLE_ID_BASED_FORM extends PREVIEWABLE_FORM
    * Load form fields from this object.
    * @param object $obj
    */
-  function load_from_object ($obj)
+  public function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
     if (isset ($obj->id))
@@ -294,12 +288,14 @@ class FORM_PREVIEW_SETTINGS extends WEBCORE_OBJECT
    * @var string
    */
   public $title;
+
   /**
    * Is the preview initially visible?
    * This will be ignored if the client is not DHTML-capable.
    * @var boolean
    */
   public $visible;
+
   /**
    * Display this object in the preview.
    * @var STORABLE
@@ -309,7 +305,7 @@ class FORM_PREVIEW_SETTINGS extends WEBCORE_OBJECT
   /**
    * Render the preview in the form.
    */
-  function display ()
+  public function display ()
   {
     $layer = $this->context->make_layer ('obj_' . uniqid (rand ()));
     $layer->visible = $this->visible;
@@ -324,16 +320,6 @@ class FORM_PREVIEW_SETTINGS extends WEBCORE_OBJECT
   <?php $layer->finish (); ?>
 </div>
 <?php
-  }
-
-  /**
-   * Render the preview for this object.
-   * @access private
-   * @abstract
-   */
-  function _display ()
-  {
-    $this->raise_deferred ('_display', 'FORM_PREVIEW_SETTINGS');
   }
 }
 

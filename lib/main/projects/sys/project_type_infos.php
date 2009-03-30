@@ -53,14 +53,17 @@ class PROJECT_TYPE_INFO extends FOLDER_TYPE_INFO
    * @var string
    */
   public $id = 'project';
+
   /**
    * @var string
    */
   public $singular_title = 'Project';
+
   /**
    * @var string
    */
   public $plural_title = 'Projects';
+
   /**
    * @var string
    */
@@ -81,18 +84,22 @@ class JOB_TYPE_INFO extends ENTRY_TYPE_INFO
    * @var string
    */
   public $id = 'job';
+
   /**
    * @var string
    */
   public $singular_title = 'Job';
+
   /**
    * @var string
    */
   public $plural_title = 'Jobs';
+
   /**
    * @var string
    */
   public $icon = '{app_icons}buttons/new_job';
+
   /**
    * @var string
    */
@@ -113,18 +120,22 @@ class CHANGE_TYPE_INFO extends ENTRY_TYPE_INFO
    * @var string
    */
   public $id = 'change';
+
   /**
    * @var string
    */
   public $singular_title = 'Change';
+
   /**
    * @var string
    */
   public $plural_title = 'Changes';
+
   /**
    * @var string
    */
   public $icon = '{app_icons}buttons/new_change';
+
   /**
    * @var string
    */
@@ -145,18 +156,22 @@ class BRANCH_TYPE_INFO extends TYPE_INFO
    * @var string
    */
   public $id = 'branch';
+
   /**
    * @var string
    */
   public $singular_title = 'Branch';
+
   /**
    * @var string
    */
   public $plural_title = 'Branchs';
+
   /**
    * @var string
    */
   public $icon = '{app_icons}buttons/new_branch';
+
   /**
    * @var string
    */
@@ -177,18 +192,22 @@ class RELEASE_TYPE_INFO extends TYPE_INFO
    * @var string
    */
   public $id = 'release';
+
   /**
    * @var string
    */
   public $singular_title = 'Release';
+
   /**
    * @var string
    */
   public $plural_title = 'Releases';
+
   /**
    * @var string
    */
   public $icon = '{app_icons}buttons/new_release';
+
   /**
    * @var string
    */

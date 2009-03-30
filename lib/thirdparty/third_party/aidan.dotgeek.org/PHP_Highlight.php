@@ -61,13 +61,13 @@ class PHP_Highlight
      */
     public $tokreplace = array('&nbsp;&nbsp;', '&nbsp;');
 
-    public $link_functions = TRUE;
+    public $link_functions = true;
 
 
     /**
      * Construct
      */
-    function __construct() {
+    protected function __construct() {
         $this->highlight = array(
             'string'    => ini_get('highlight.string'),
             'comment'   => ini_get('highlight.comment'),
@@ -83,7 +83,7 @@ class PHP_Highlight
      *
      * @param   string      $file       The file to load
      */
-    function loadFile($file)
+    public function loadFile($file)
     {
         ob_start ();
           readfile ($file);
@@ -96,7 +96,7 @@ class PHP_Highlight
      *
      * @param   string      $string     The string to load
      */
-    function loadString($string)
+    public function loadString($string)
     {
         $this->source = $string;
     }
@@ -104,7 +104,7 @@ class PHP_Highlight
     /**
      * Parse the loaded string into an array
      */
-    function toArray()
+    public function toArray()
     {
         // Init
         $tokens     = token_get_all($this->source);
@@ -183,7 +183,7 @@ class PHP_Highlight
     /**
      * Convert the source to a HTML ordered list
      */
-    function toList($return = true)
+    public function toList($return = true)
     {
         $source = $this->toArray($this->source);
 
@@ -207,7 +207,7 @@ class PHP_Highlight
     /**
      * Convert the source to simple HTML
      */
-    function toHtml($return = true, $linenum = false, $linenummod = null)
+    public function toHtml($return = true, $linenum = false, $linenummod = null)
     {
         $source = $this->toArray($this->source);
 
@@ -244,7 +244,7 @@ class PHP_Highlight
      *
      * @param   int     $token      The token
      */
-    function _token2color($token = null)
+    protected function _token2color($token = null)
     {
         switch ($token):
             case T_CONSTANT_ENCAPSED_STRING:

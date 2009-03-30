@@ -57,7 +57,7 @@ class SUBSCRIBER_QUERY extends QUERY
   /**
    * Apply default restrictions and tables.
    */
-  function apply_defaults () 
+  public function apply_defaults () 
   {
     $this->set_select ('subscribers.*');
     $this->set_table ($this->app->table_names->subscribers . ' subscribers');
@@ -68,16 +68,16 @@ class SUBSCRIBER_QUERY extends QUERY
    * @param string $name
    * @return USER
    */
-  function object_at_email ($email)
+  public function object_at_email ($email)
   {
     return $this->object_with_field ('email', $email);
   }
 
   /**
    * @return SUBSCRIBER
-    * @access private
-    */
-  function _make_object ()
+   * @access private
+   */
+  protected function _make_object ()
   {
     $class_name = $this->app->final_class_name ('SUBSCRIBER', 'webcore/obj/subscriber.php');
     return new $class_name ($this->app);
@@ -96,7 +96,7 @@ class SUBSCRIPTION_QUERY extends SUBSCRIBER_QUERY
   /**
    * Apply default restrictions and tables.
    */
-  function apply_defaults () 
+  public function apply_defaults () 
   {
     parent::apply_defaults ();
     $this->set_select ('DISTINCT(subscribers.email), subscribers.*');
@@ -107,10 +107,12 @@ class SUBSCRIPTION_QUERY extends SUBSCRIBER_QUERY
    * Restrict to one of the given kind/id combinations.
    * @param array[string][integer] $choices
    */
-  function restrict_kinds ($choices)
+  public function restrict_kinds ($choices)
   {
     foreach ($choices as $kind => $id)
+    {
       $restrictions [] = "(ref_id = $id) AND (kind = '$kind')";
+    }
 
     $this->restrict_to_one_of ($restrictions);
   }

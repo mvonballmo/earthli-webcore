@@ -52,7 +52,8 @@ class ADD_TO_LIST_FORM extends ID_BASED_FORM
   /**
    * @var boolean
    */
-  public $controls_visible = TRUE;
+  public $controls_visible = true;
+
   /**
    * @var string
    */
@@ -63,7 +64,7 @@ class ADD_TO_LIST_FORM extends ID_BASED_FORM
    * @param SEARCH $search
    * @param QUERY $search_query
    */
-  function ADD_TO_LIST_FORM ($app, $search, $search_query)
+  public function ADD_TO_LIST_FORM ($app, $search, $search_query)
   {
     ID_BASED_FORM::ID_BASED_FORM ($app);
 
@@ -72,18 +73,20 @@ class ADD_TO_LIST_FORM extends ID_BASED_FORM
     $search->fields->add_fields ($this);
 
     foreach ($this->_fields as $field)
-      $this->set_visible ($field->id, FALSE);
+    {
+      $this->set_visible ($field->id, false);
+    }
 
     $field = new TEXT_FIELD ();
     $field->id = 'type';
     $field->title = 'Type';
-    $field->visible = FALSE;
+    $field->visible = false;
     $this->add_field ($field);
 
     $field = new ARRAY_FIELD ();
     $field->id = 'object_ids';
     $field->title = 'Objects';
-    $field->visible = FALSE;
+    $field->visible = false;
     $this->add_field ($field);
 
     $field = new BOOLEAN_FIELD ();
@@ -92,16 +95,16 @@ class ADD_TO_LIST_FORM extends ID_BASED_FORM
     $this->add_field ($field);
 
     $field = $this->field_at ('id');
-    $field->visible = TRUE;
+    $field->visible = true;
   }
 
-  function load_with_defaults ()
+  public function load_with_defaults ()
   {
     parent::load_with_defaults ();
     $this->set_value ('type', read_var ('type'));
   }
 
-  function _post_validate ($obj)
+  protected function _post_validate ($obj)
   {
     parent::_post_validate ($obj);
 
@@ -111,7 +114,7 @@ class ADD_TO_LIST_FORM extends ID_BASED_FORM
     }
   }
 
-  function commit ($obj)
+  public function commit ($obj)
   {
     die ('committing form with ' . $this->text_value_for ('object_ids'));
   }
@@ -120,7 +123,7 @@ class ADD_TO_LIST_FORM extends ID_BASED_FORM
    * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_controls ($renderer)
+  protected function _draw_controls ($renderer)
   {
     $renderer->start ();
     $renderer->start_row ();
@@ -129,8 +132,8 @@ class ADD_TO_LIST_FORM extends ID_BASED_FORM
       echo 'Add ';
 
       $props = $renderer->make_list_properties ();
-      $props->add_item ('Entire result set', FALSE);
-      $props->add_item ('Selected items', TRUE);
+      $props->add_item ('Entire result set', false);
+      $props->add_item ('Selected items', true);
       $props->items_per_row = 3;
       echo $renderer->radio_group_as_html ('selected_only', $props);
 
@@ -144,7 +147,7 @@ class ADD_TO_LIST_FORM extends ID_BASED_FORM
     $renderer->finish ();
 
     $grid = $this->_search->grid ();
-    $grid->show_folder = TRUE;
+    $grid->show_folder = true;
     $grid->set_ranges (10, 1);
     $grid->set_query ($this->_search_query);
     $grid->display ();

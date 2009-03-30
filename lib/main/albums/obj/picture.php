@@ -67,7 +67,7 @@ class PICTURE extends ALBUM_ENTRY
    * @return URL
    * @see thumbnail_location()
    */
-  function location ($force_root = FALSE)
+  public function location ($force_root = false)
   {
     $Result = new URL ($this->file_name);
 
@@ -108,7 +108,7 @@ class PICTURE extends ALBUM_ENTRY
    * @return URL
    * @see location()
    */
-  function thumbnail_location ($force_root = FALSE)
+  public function thumbnail_location ($force_root = false)
   {
     $Result = $this->location ($force_root);
     $Result->append_to_name (Picture_thumbnail_suffix);
@@ -121,7 +121,7 @@ class PICTURE extends ALBUM_ENTRY
    * @return string
    * @see full_thumbnail_name()
    */
-  function full_file_name ($force_root = FALSE)
+  public function full_file_name ($force_root = false)
   {
     $url = $this->location ($force_root);
     return $url->as_html ();
@@ -134,7 +134,7 @@ class PICTURE extends ALBUM_ENTRY
    * @return string
    * @see full_file_name()
    */
-  function full_thumbnail_name ($force_root = FALSE)
+  public function full_thumbnail_name ($force_root = false)
   {
     $url = $this->location ($force_root);
     $url->append_to_name (Picture_thumbnail_suffix);
@@ -150,7 +150,7 @@ class PICTURE extends ALBUM_ENTRY
    * @see thumbnail_metrics()
    * @return IMAGE_METRICS
    */
-  function metrics ($apply_folder_size = TRUE, $load_image = TRUE)
+  public function metrics ($apply_folder_size = true, $load_image = true)
   {
     $class_name = $this->app->final_class_name ('IMAGE_METRICS', 'webcore/util/image.php');
     $Result = new $class_name ();
@@ -183,7 +183,7 @@ class PICTURE extends ALBUM_ENTRY
    * <code>True</code>. See {@link IMAGE::set_url()} for more information.
    * @return IMAGE_METRICS
    */
-  function thumbnail_metrics ($load_image = TRUE)
+  public function thumbnail_metrics ($load_image = true)
   {
     $class_name = $this->app->final_class_name ('IMAGE_METRICS', 'webcore/util/image.php');
     $Result = new $class_name ();
@@ -195,7 +195,7 @@ class PICTURE extends ALBUM_ENTRY
   /**
    * @param DATABASE $db
    */
-  function load ($db)
+  public function load ($db)
   {
     parent::load ($db);
     $this->file_name = $db->f ('file_name');
@@ -204,7 +204,7 @@ class PICTURE extends ALBUM_ENTRY
   /**
    * @param SQL_STORAGE $storage Store values to this object.
    */
-  function store_to ($storage)
+  public function store_to ($storage)
   {
     parent::store_to ($storage);
     $storage->add ($this->_secondary_table_name (), 'file_name', Field_type_string, $this->file_name);
@@ -215,7 +215,7 @@ class PICTURE extends ALBUM_ENTRY
    * @return string
    * @access private
    */
-  function preview ()
+  public function preview ()
   {
     return '<img class="frame" src=' . $this->full_thumbnail_name () . " alt=\"$this->title\" style=\"float: left\">";
   }
@@ -224,7 +224,7 @@ class PICTURE extends ALBUM_ENTRY
    * Name of the home page name for this object.
    * @return string
    */
-  function page_name ()
+  public function page_name ()
   {
     return $this->app->page_names->picture_home;
   }
@@ -234,7 +234,7 @@ class PICTURE extends ALBUM_ENTRY
    * @return string
    * @access private
    */
-  function _secondary_table_name ()
+  protected function _secondary_table_name ()
   {
     return $this->app->table_names->pictures;
   }
@@ -246,13 +246,13 @@ class PICTURE extends ALBUM_ENTRY
    * @param FOLDER $fldr
    * @param FOLDER_OPERATION_OPTIONS $options
    */
-  function _move_to ($fldr, $options)
+  protected function _move_to ($fldr, $options)
   {
     if ($options->update_now)
     {
       $parent = $this->parent_folder ();
       $old_location = $parent->location;
-      $old_folder = url_to_folder ($parent->picture_folder_url (TRUE));
+      $old_folder = url_to_folder ($parent->picture_folder_url (true));
     }
 
     parent::_move_to ($fldr, $options);
@@ -261,7 +261,7 @@ class PICTURE extends ALBUM_ENTRY
     {
       if (($old_location == Album_location_type_local) && ($fldr->location == Album_location_type_local))
       {
-        $new_folder = url_to_folder ($fldr->picture_folder_url (TRUE));
+        $new_folder = url_to_folder ($fldr->picture_folder_url (true));
 
         if ($old_folder != $new_folder)
         {
@@ -312,13 +312,13 @@ class PICTURE extends ALBUM_ENTRY
    * @param FOLDER $fldr
    * @param FOLDER_OPERATION_OPTIONS $options
    */
-  function _copy_to ($fldr, $options)
+  protected function _copy_to ($fldr, $options)
   {
     if ($options->update_now)
     {
       $parent = $this->parent_folder ();
       $old_location = $parent->location;
-      $old_folder = url_to_folder ($parent->picture_folder_url (TRUE));
+      $old_folder = url_to_folder ($parent->picture_folder_url (true));
     }
 
     parent::_copy_to ($fldr, $options);
@@ -327,7 +327,7 @@ class PICTURE extends ALBUM_ENTRY
     {
       if (($old_location == Album_location_type_local) && ($fldr->location == Album_location_type_local))
       {
-        $new_folder = url_to_folder ($fldr->picture_folder_url (TRUE));
+        $new_folder = url_to_folder ($fldr->picture_folder_url (true));
 
         if ($old_folder != $new_folder)
         {
@@ -375,17 +375,17 @@ class PICTURE extends ALBUM_ENTRY
    * @param PURGE_OPTIONS $options
    * @access private
    */
-  function _purge ($options)
+  protected function _purge ($options)
   {
     if ($options->remove_resources)
     {
-      $url = $this->location (TRUE);
+      $url = $this->location (true);
       $file_name = url_to_file_name ($url->as_text ());
       if ($file_name)
       {
         @unlink ($file_name);
       }
-      $url = $this->thumbnail_location (TRUE);
+      $url = $this->thumbnail_location (true);
       $file_name = url_to_file_name ($url->as_text ());
       if ($file_name)
       {
@@ -403,7 +403,7 @@ class PICTURE extends ALBUM_ENTRY
    * @return object
    * @access private
    */
-  function _default_handler_for ($handler_type, $options = null)
+  protected function _default_handler_for ($handler_type, $options = null)
   {
     switch ($handler_type)
     {

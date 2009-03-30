@@ -53,7 +53,7 @@ class SECTION_COMMANDS extends FOLDER_COMMANDS
   /**
    * @param SECTION $folder Configure commands for this object.
    */
-  function SECTION_COMMANDS ($folder)
+  public function SECTION_COMMANDS ($folder)
   {
     FOLDER_COMMANDS::FOLDER_COMMANDS ($folder);
 

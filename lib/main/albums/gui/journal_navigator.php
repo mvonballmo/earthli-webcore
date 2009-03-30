@@ -54,7 +54,7 @@ class JOURNAL_NAVIGATOR extends MULTI_TYPE_ENTRY_NAVIGATOR
    * @param QUERY $query
    * @access private
    */
-  function _adjust_query ($query)
+  protected function _adjust_query ($query)
   {
     $calendar = read_var ('calendar');
     $first_day = read_var ('first_day');

@@ -56,41 +56,50 @@ class USER extends CONTENT_OBJECT
    * @var string
    */
   public $password = '';
+
   /**
    * @var string
    */
   public $real_first_name = '';
+
   /**
    * @var string
    */
   public $real_last_name = '';
+
   /**
    * @var string
    */
   public $home_page_url = '';
+
   /**
    * @var string
    */
   public $email = '';
+
   /**
    * @var string
    */
   public $picture_url = '';
+
   /**
    * @var string
    */
   public $signature = '';
+
   /**
    * Location of user's icon.
    * Use {@link icon_as_html()} or {@link expanded_icon_url()} to access this property.
    * @var integer
    */
   public $icon_url = '';
+
   /**
    * @var string
-    * @access private
-    */
+   * @access private
+   */
   public $ip_address;
+
   /**
    * Determines how email is displayed in the interface.
    * Can be {@link User_email_hidden}, {@link User_email_scrambled} or 
@@ -106,7 +115,7 @@ class USER extends CONTENT_OBJECT
    * be used for further validation, since it may have far too many rights.
    * @var boolean
    */
-  public $ad_hoc_login = FALSE;
+  public $ad_hoc_login = false;
 
   /**
    * Icon, renderered as HTML.
@@ -114,7 +123,7 @@ class USER extends CONTENT_OBJECT
    * @var string $size
    * @return string
    */
-  function icon_as_html ($size = '32px')
+  public function icon_as_html ($size = '32px')
   {
     return $this->app->image_as_html ($this->expanded_icon_url ($size), ' ');
   }
@@ -124,12 +133,14 @@ class USER extends CONTENT_OBJECT
    * @param string $size
    * @return string
    */
-  function expanded_icon_url ($size = '32px')
+  public function expanded_icon_url ($size = '32px')
   {
     if ($this->icon_url)
     {
       return $this->app->sized_icon ($this->icon_url, $size);
     }
+    
+    return '';
   }
 
   /**
@@ -138,7 +149,7 @@ class USER extends CONTENT_OBJECT
    * @param HTML_MUNGER $munger
    * @return string
    */
-  function signature_as_html ($munger = null)
+  public function signature_as_html ($munger = null)
   {
     return $this->_text_as_html ($this->signature, $munger);
   }
@@ -149,7 +160,7 @@ class USER extends CONTENT_OBJECT
    * @param PLAIN_TEXT_MUNGER $munger
    * @return string
    */
-  function signature_as_plain_text ($munger = null)
+  public function signature_as_plain_text ($munger = null)
   {
     return $this->_text_as_plain_text ($this->signature, $munger);
   }
@@ -159,7 +170,7 @@ class USER extends CONTENT_OBJECT
    * This varies depending on {@link $email_visibility}.
    * @return string
    */
-  function email_as_text ()
+  public function email_as_text ()
   {
     if (! $this->email)
     {
@@ -189,7 +200,7 @@ class USER extends CONTENT_OBJECT
    * Fully-qualified URl for the user picture. 
    * @return string
    */
-  function full_picture_url ()
+  public function full_picture_url ()
   {
     return $this->context->resolve_file ($this->picture_url);
   }
@@ -208,7 +219,7 @@ class USER extends CONTENT_OBJECT
    * @see OBJECT_IN_FOLDER
    * @return boolean
    */
-  function is_allowed ($set_name, $type, $obj = null)
+  public function is_allowed ($set_name, $type, $obj = null)
   {
     $this->assert (! $this->ad_hoc_login, 'Cannot use an ad-hoc login.', 'is_allowed', 'USER');
 
@@ -253,11 +264,11 @@ class USER extends CONTENT_OBJECT
     {
       if ($user_permissions->allow_privileges->enabled ($set_name, $type))
       {
-        $Result = TRUE;
+        $Result = true;
       }
       else if ($user_permissions->deny_privileges->enabled ($set_name, $type))
  {
-   $Result = FALSE;
+   $Result = false;
  }
       else
       {
@@ -294,7 +305,7 @@ class USER extends CONTENT_OBJECT
    * List of searches available.
    * @return SEARCH_QUERY
    */
-  function search_query ()
+  public function search_query ()
   {
     $class_name = $this->app->final_class_name ('SEARCH_QUERY', 'webcore/db/search_query.php');
     $Result = new $class_name ($this->app);
@@ -306,7 +317,7 @@ class USER extends CONTENT_OBJECT
    * List of groups for this user.
    * @return GROUP_QUERY
    */
-  function group_query ()
+  public function group_query ()
   {
     $class_name = $this->app->final_class_name ('USER_GROUP_QUERY', 'webcore/db/group_query.php');
     $Result = new $class_name ($this->app);
@@ -318,7 +329,7 @@ class USER extends CONTENT_OBJECT
    * Permissions applicable to this user.
    * @return USER_PERMISSIONS
    */
-  function permissions ()
+  public function permissions ()
   {
     $this->assert (isset ($this->_permissions), "Permissions not loaded for [$this->title].", 'permissions', 'USER');
     return $this->_permissions;
@@ -326,9 +337,9 @@ class USER extends CONTENT_OBJECT
 
   /**
    * @param string $p
-    * @access private
-    */
-  function password_matches ($p)
+   * @access private
+   */
+  public function password_matches ($p)
   {
     if (! $this->app->user_options->passwords_are_case_sensitive)
     {
@@ -340,43 +351,42 @@ class USER extends CONTENT_OBJECT
   /**
    * @return boolean
    */
-  function is_anonymous ()
+  public function is_anonymous ()
   {
     return $this->kind != Privilege_kind_registered;
   }
 
   /**
    * @param USER $u
-    * @return bool
-    * @access private
-    */
-  function equals ($u)
+   * @return bool
+   * @access private
+   */
+  public function equals ($u)
   {
     return $u->id == $this->id;
   }
 
   /**
    * A string representing a link to this object's url.
-    * Uses the user-defined object home page and user-defined maximum title length.
-    * @param TITLE_FORMATTER $formatter Optional formatter to use.
-    * @return string
-    */
-  function title_as_link ($formatter = null)
+   * Uses the user-defined object home page and user-defined maximum title length.
+   * @param TITLE_FORMATTER $formatter Optional formatter to use.
+   * @return string
+   */
+  public function title_as_link ($formatter = null)
   {
     if (($this->id != Non_existent_user_id) && $this->login->is_allowed (Privilege_set_user, Privilege_view, $this))
     {
       return parent::title_as_link ($formatter);
     }
 
-
     return $this->title_as_html ($formatter);
   }
 
   /**
    * @param string $p
-    * @access private
-    */
-  function set_password ($p)
+   * @access private
+   */
+  public function set_password ($p)
   {
     if (! $this->app->user_options->passwords_are_case_sensitive)
     {
@@ -387,12 +397,12 @@ class USER extends CONTENT_OBJECT
 
   /**
    * Create a new folder rooted at 'parent'.
-    * Does not store to the database.
-    * @param FOLDER $parent
-    * @return FOLDER
-    * @access private
-    */
-  function new_folder ($parent)
+   * Does not store to the database.
+   * @param FOLDER $parent
+   * @return FOLDER
+   * @access private
+   */
+  public function new_folder ($parent)
   {
     $Result = $this->app->new_folder ();
     $Result->creator_id = $this->id;
@@ -418,10 +428,10 @@ class USER extends CONTENT_OBJECT
 
   /**
    * Build as complete a name as possible from the name fields.
-    * @param boolean $user_name_is_default Return the user name if no other names exist. If false, returns 'N/A' if no other names are found.
-    * @return string
-    */
-  function real_name ($user_name_is_default = FALSE)
+   * @param boolean $user_name_is_default Return the user name if no other names exist. If false, returns 'N/A' if no other names are found.
+   * @return string
+   */
+  public function real_name ($user_name_is_default = false)
   {
     if ($this->is_anonymous ())
     {
@@ -429,7 +439,6 @@ class USER extends CONTENT_OBJECT
       {
         return $this->title;
       }
-
 
       return '(N/A)';
     }
@@ -469,9 +478,9 @@ class USER extends CONTENT_OBJECT
 
   /**
    * All folders viewable by this user.
-    * @return USER_FOLDER_QUERY
-    */
-  function folder_query ()
+   * @return USER_FOLDER_QUERY
+   */
+  public function folder_query ()
   {
     if (! isset ($this->_folder_query))
     {
@@ -491,7 +500,7 @@ class USER extends CONTENT_OBJECT
    * @param boolean $can_fail
    * @return FOLDER
    */
-  function folder_at_id ($id, $can_fail = FALSE)
+  public function folder_at_id ($id, $can_fail = false)
   {
     if ($id)
     {
@@ -522,7 +531,7 @@ class USER extends CONTENT_OBJECT
    * @return QUERY_BASED_CACHE
    * @access private
    */
-  function folder_cache ()
+  public function folder_cache ()
   {
     if (! isset ($this->_folder_cache))
     {
@@ -534,9 +543,9 @@ class USER extends CONTENT_OBJECT
 
   /**
    * All comments viewable by this user.
-    * @return USER_COMMENT_QUERY
-    */
-  function all_comment_query ()
+   * @return USER_COMMENT_QUERY
+   */
+  public function all_comment_query ()
   {
     $class_name = $this->app->final_class_name ('USER_COMMENT_QUERY', 'webcore/db/user_comment_query.php');
     return new $class_name ($this->app);
@@ -544,18 +553,18 @@ class USER extends CONTENT_OBJECT
 
   /**
    * All comments viewable by this user, created by this user.
-    * @return USER_COMMENT_QUERY
-    */
-  function comment_query ()
+   * @return USER_COMMENT_QUERY
+   */
+  public function comment_query ()
   {
     return $this->user_comment_query ($this->id);
   }
 
   /**
    * All comments viewable by this user, created by the user at 'id'.
-    * @return USER_COMMENT_QUERY
-    */
-  function user_comment_query ($id)
+   * @return USER_COMMENT_QUERY
+   */
+  public function user_comment_query ($id)
   {
     $Result = $this->all_comment_query ();
     $Result->restrict ("com.creator_id = $id");
@@ -564,9 +573,9 @@ class USER extends CONTENT_OBJECT
 
   /**
    * All entries viewable by this user.
-    * @return USER_ENTRY_QUERY
-    */
-  function all_entry_query ()
+   * @return USER_ENTRY_QUERY
+   */
+  public function all_entry_query ()
   {
     $class_name = $this->app->final_class_name ('USER_ENTRY_QUERY', 'webcore/db/user_entry_query.php');
     return new $class_name ($this->app);
@@ -574,18 +583,18 @@ class USER extends CONTENT_OBJECT
 
   /**
    * All entries viewable by this user, created by this user.
-    * @return USER_ENTRY_QUERY
-    */
-  function entry_query ()
+   * @return USER_ENTRY_QUERY
+   */
+  public function entry_query ()
   {
     return $this->user_entry_query ($this->id);
   }
 
   /**
    * All entries viewable by this user, created by the user at 'id'.
-    * @return USER_ENTRY_QUERY
-    */
-  function user_entry_query ($id)
+   * @return USER_ENTRY_QUERY
+   */
+  public function user_entry_query ($id)
   {
     $Result = $this->all_entry_query ();
     $Result->restrict ("entry.creator_id = $id");
@@ -596,7 +605,7 @@ class USER extends CONTENT_OBJECT
    * All attachments viewable by this user.
    * @return USER_ATTACHMENT_QUERY
    */
-  function all_attachment_query ()
+  public function all_attachment_query ()
   {
     $class_name = $this->app->final_class_name ('USER_ATTACHMENT_QUERY', 'webcore/db/user_attachment_query.php');
     return new $class_name ($this->app);
@@ -606,7 +615,7 @@ class USER extends CONTENT_OBJECT
    * All entries viewable by this user.
    * @return USER_HISTORY_ITEM_QUERY
    */
-  function all_history_item_query ()
+  public function all_history_item_query ()
   {
     $class_name = $this->app->final_class_name ('USER_HISTORY_ITEM_QUERY', 'webcore/db/user_history_item_query.php');
     return new $class_name ($this->app);
@@ -616,7 +625,7 @@ class USER extends CONTENT_OBJECT
    * All entries viewable by this user, created by this user.
    * @return USER_HISTORY_ITEM_QUERY
    */
-  function created_history_item_query ()
+  public function created_history_item_query ()
   {
     return $this->user_history_item_query ($this->id);
   }
@@ -625,14 +634,14 @@ class USER extends CONTENT_OBJECT
    * All entries viewable by this user, created by the user at 'id'.
    * @return USER_HISTORY_ITEM_QUERY
    */
-  function user_history_item_query ($id)
+  public function user_history_item_query ($id)
   {
     $Result = $this->all_history_item_query ();
     $Result->restrict ("act.user_id = $id");
     return $Result;
   }
 
-  function title_formatter ()
+  public function title_formatter ()
   {
     $Result = parent::title_formatter ();
     $Result->title = $this->real_name ();
@@ -641,10 +650,10 @@ class USER extends CONTENT_OBJECT
 
   /**
    * The associated subscriber for this user.
-    * Will always return an object, but the subscriber does not necessarily exist in the database.
-    * @return SUBSCRIBER
-    */
-  function subscriber ()
+   * Will always return an object, but the subscriber does not necessarily exist in the database.
+   * @return SUBSCRIBER
+   */
+  public function subscriber ()
   {
     $class_name = $this->app->final_class_name ('SUBSCRIBER', 'webcore/obj/subscriber.php');
     $Result = new $class_name ($this->app);
@@ -658,7 +667,7 @@ class USER extends CONTENT_OBJECT
   /**
    * @param DATABASE $db Database from which to load values.
    */
-  function load ($db)
+  public function load ($db)
   {
     parent::load ($db);
     $this->kind = $db->f ('kind');
@@ -691,7 +700,7 @@ class USER extends CONTENT_OBJECT
   /**
    * @param SQL_STORAGE $storage Store values to this object.
    */
-  function store_to ($storage)
+  public function store_to ($storage)
   {
     parent::store_to ($storage);
     $tname =$this->_table_name ();
@@ -722,7 +731,7 @@ class USER extends CONTENT_OBJECT
    * Use the default permissions for this user.
    * Does not load from the database, but retrieves the permissions from the application.
    */
-  function use_default_permissions ()
+  public function use_default_permissions ()
   {
     if ($this->is_anonymous ())
     {
@@ -743,7 +752,7 @@ class USER extends CONTENT_OBJECT
    * Load the permissions defined for this user.
    * If this user uses default permissions, this will have no effect.
    */
-  function load_permissions ()
+  public function load_permissions ()
   {
     if (! isset ($this->_permissions))
     {
@@ -769,7 +778,7 @@ class USER extends CONTENT_OBJECT
    * Name of the home page name for this object.
    * @return string
    */
-  function page_name ()
+  public function page_name ()
   {
     return $this->app->page_names->user_home;
   }
@@ -778,18 +787,18 @@ class USER extends CONTENT_OBJECT
    * Arguments to the home page url for this object.
    * @return string
    */
-  function page_arguments ()
+  public function page_arguments ()
   {
     return 'name=' . urlencode ($this->title);
   }
 
   /**
    * Force a login for creating a user.
-    * This avoids endless recursion trying to find the creator for this user.
-    * @see APPLICATION::force_login_for_user_create()
-    * @access private
-    */
-  function _update_login ()
+   * This avoids endless recursion trying to find the creator for this user.
+   * @see APPLICATION::force_login_for_user_create()
+   * @access private
+   */
+  protected function _update_login ()
   {
     $this->app->force_login_for_user_create ();
   }
@@ -797,7 +806,7 @@ class USER extends CONTENT_OBJECT
   /**
    * @param boolean $update_now Actualize the database?
    */
-  function delete ($update_now = TRUE)
+  public function delete ($update_now = true)
   {
     $this->assert ($this->app->user_options->users_can_be_deleted, 'Users cannot be deleted.', 'delete', 'USER');
     parent::delete ($update_now);
@@ -808,7 +817,7 @@ class USER extends CONTENT_OBJECT
    * @return string
    * @access private
    */
-  function _table_name ()
+  protected function _table_name ()
   {
     return $this->app->table_names->users;
   }
@@ -820,7 +829,7 @@ class USER extends CONTENT_OBJECT
    * @return object
    * @access private
    */
-  function _default_handler_for ($handler_type, $options = null)
+  protected function _default_handler_for ($handler_type, $options = null)
   {
     switch ($handler_type)
     {
@@ -846,7 +855,7 @@ class USER extends CONTENT_OBJECT
    * @param HISTORY_ITEM $history_item Action that generated this request. May be empty.
    * @access private
    */
-  function _prepare_subscription_query ($query, $history_item)
+  protected function _prepare_subscription_query ($query, $history_item)
   {
     $query->restrict ('watch_entries > 0');
     $query->restrict_kinds (array (Subscribe_user => $this->id));
@@ -858,12 +867,14 @@ class USER extends CONTENT_OBJECT
    * @var QUERY_BASED_CACHE
    */
   protected $_folder_cache;
+
   /**
    * Locally-cached query for all visible folders.
    * @var USER_FOLDER_QUERY
    * @access private
    */
   protected $_folder_query;
+
   /**
    * Applicable permissions for this user.
    * May be empty if the user was generated without retrieving permissions. Generally, only the
@@ -872,11 +883,12 @@ class USER extends CONTENT_OBJECT
    * @access private
    */
   protected $_permissions;
+
   /**
    * Can be {@link Privilege_kind_anonymous} or {@link Privilege_kind_registered}.
-    * @var string
-    * @access private
-    */
+   * @var string
+   * @access private
+   */
   public $kind;
 }
 

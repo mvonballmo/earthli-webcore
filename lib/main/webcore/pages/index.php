@@ -66,7 +66,7 @@ http://www.earthli.com/software/webcore
   $panel_manager = new $class_name ($App, $folders);
   $panel = $panel_manager->selected_panel ();
 
-  $Page->location->add_root_link (FALSE);
+  $Page->location->add_root_link (false);
   $Page->location->append ($App->short_title);
 
   $Page->title->subject = $panel->raw_title ();
@@ -99,8 +99,8 @@ http://www.earthli.com/software/webcore
       {
         $renderer = $folder->handler_for (Handler_html_renderer);
         $options = $renderer->options ();
-        $options->show_as_summary = TRUE;
-        $options->show_users = FALSE;
+        $options->show_as_summary = true;
+        $options->show_users = false;
         $renderer->display ($folder);
       }
 
@@ -147,7 +147,7 @@ http://www.earthli.com/software/webcore
       include_once ('webcore/forms/check_subscriptions_form.php');
       $form = new CHECK_SUBSCRIPTIONS_FORM ($App);
       $form->CSS_class = 'search';
-      $form->allow_focus = FALSE;
+      $form->allow_focus = false;
       $form->display ();
     ?>
     </div>

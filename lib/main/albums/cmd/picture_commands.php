@@ -53,7 +53,7 @@ class PICTURE_COMMANDS extends ENTRY_COMMANDS
   /**
    * @param PICTURE $entry Configure commands for this picture.
    */
-  function PICTURE_COMMANDS ($entry)
+  public function PICTURE_COMMANDS ($entry)
   {
     ENTRY_COMMANDS::ENTRY_COMMANDS ($entry);
 

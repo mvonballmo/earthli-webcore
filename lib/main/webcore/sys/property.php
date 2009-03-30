@@ -56,10 +56,12 @@ class PROPERTY_VALUE extends WEBCORE_OBJECT
    * @var integer
    */
   public $value;
+
   /**
    * @var string
    */
   public $title;
+
   /**
    * Name and path of icon.
    * Can contain a location alias that will be resolved with a {@link RESOURCE_MANAGER}.
@@ -72,7 +74,7 @@ class PROPERTY_VALUE extends WEBCORE_OBJECT
    * @param string $size
    * @return string
    */
-  function icon_as_html ($size = '16px')
+  public function icon_as_html ($size = '16px')
   {
     return $this->context->image_as_html ($this->expanded_icon_url ($size), $this->title);
   }
@@ -85,12 +87,14 @@ class PROPERTY_VALUE extends WEBCORE_OBJECT
    * @param string $size
    * @return string
    */
-  function expanded_icon_url ($size = '16px')
+  public function expanded_icon_url ($size = '16px')
   {
     if ($this->icon)
     {
       return $this->context->sized_icon ($this->icon, $size);
     }
+    
+    return '';
   }
 }
 

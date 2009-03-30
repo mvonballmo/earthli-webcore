@@ -51,7 +51,7 @@ class JOURNAL_FORM extends ALBUM_ENTRY_FORM
   /**
    * @param ALBUM $folder Album in which to add or edit the journal entry.
    */
-  function JOURNAL_FORM ($folder)
+  public function JOURNAL_FORM ($folder)
   {
     ALBUM_ENTRY_FORM::ALBUM_ENTRY_FORM ($folder);
 
@@ -72,7 +72,7 @@ class JOURNAL_FORM extends ALBUM_ENTRY_FORM
     $field = new INTEGER_FIELD ();
     $field->id = 'weather_type';
     $field->title = 'Weather Type';
-    $field->required = TRUE;
+    $field->required = true;
     $this->add_field ($field);
 
     $field = new MUNGER_TEXT_FIELD ();
@@ -85,7 +85,7 @@ class JOURNAL_FORM extends ALBUM_ENTRY_FORM
    * Load initial properties from this journal entry.
    * @param JOURNAL $obj
    */
-  function load_from_object ($obj)
+  public function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
     $this->set_value ('weather_type', $obj->weather_type);
@@ -94,7 +94,7 @@ class JOURNAL_FORM extends ALBUM_ENTRY_FORM
     $this->set_value ('hi_temp', $obj->hi_temp);
   }
 
-  function load_with_defaults ()
+  public function load_with_defaults ()
   {
     parent::load_with_defaults ();
     $this->set_value ('weather_type', 1);
@@ -104,10 +104,10 @@ class JOURNAL_FORM extends ALBUM_ENTRY_FORM
 
   /**
    * Does this form hold valid data for this journal entry?
-    * @param JOURNAL $obj
-    * @access private
-    */
-  function _post_validate ($obj)
+   * @param JOURNAL $obj
+   * @access private
+   */
+  protected function _post_validate ($obj)
   {
     parent::_post_validate ($obj);
 
@@ -119,10 +119,10 @@ class JOURNAL_FORM extends ALBUM_ENTRY_FORM
 
   /**
    * Store the form's values to this journal entry.
-    * @param JOURNAL $obj
-    * @access private
-    */
-  function _store_to_object ($obj)
+   * @param JOURNAL $obj
+   * @access private
+   */
+  protected function _store_to_object ($obj)
   {
     $obj->weather = $this->value_as_text ('weather');
     $obj->lo_temp = $this->value_as_text ('lo_temp');
@@ -136,7 +136,7 @@ class JOURNAL_FORM extends ALBUM_ENTRY_FORM
    * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_controls ($renderer)
+  protected function _draw_controls ($renderer)
   {
     $renderer->start ();
     $renderer->draw_text_line_row ('title');
@@ -188,7 +188,7 @@ class JOURNAL_FORM extends ALBUM_ENTRY_FORM
     $renderer->draw_separator ();
     $renderer->draw_submit_button_row ();
 
-    $this->_draw_history_item_controls ($renderer, FALSE);
+    $this->_draw_history_item_controls ($renderer, false);
 
     $renderer->finish ();
   }

@@ -55,7 +55,7 @@ class CONFIGURE_COMMANDS extends COMMANDS
   /**
    * @param APPLICATION_CONFIGURATION_INFO $info
    */
-  function CONFIGURE_COMMANDS ($info)
+  public function CONFIGURE_COMMANDS ($info)
   {
     COMMANDS::COMMANDS ($info->app);
 

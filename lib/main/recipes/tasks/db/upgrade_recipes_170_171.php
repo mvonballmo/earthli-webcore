@@ -35,7 +35,7 @@ class RECIPES_170_171_MIGRATOR_TASK extends UPGRADE_PER_APP_270_271_TASK
   public $version_from = '1.7.0';
   public $version_to = '1.7.1';
 
-  function _execute ()
+  protected function _execute ()
   {
     log_open_block ("Updating fields");
       $this->_update_history_type_for_drafts ('recipe_history_items');

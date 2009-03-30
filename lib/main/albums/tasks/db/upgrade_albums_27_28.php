@@ -35,7 +35,7 @@ class ALBUMS_27_28_MIGRATOR_TASK extends UPGRADE_PER_APP_25_26_TASK
   public $version_from = '2.7.0';
   public $version_to = '2.8.0';
   
-  function _execute ()
+  protected function _execute ()
   {
     log_open_block ("Adding owners to objects");
       $this->add_owner_to_table ('album_attachments');

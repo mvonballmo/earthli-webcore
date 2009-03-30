@@ -50,22 +50,26 @@ class FILE_OPTIONS
    * @var string
    */
   public $path_delimiter = '/';
+
   /**
    * Indicates the current directory in the file system.
    * @var string
    */
   public $current_folder = '.';
+
   /**
    * Separates two lines in a text file.
    * @var string
    */
   public $end_of_line = "\n";
+
   /**
    * Access mode for new folders.
    * Used by {@link ensure_path_exists()}.
    * @var integer
    */
   public $default_access_mode = 0777;
+
   /**
    * List of characters to convert <i>from</i> in a file name.
    * {@link normalize_file_id()} replaces these characters with their
@@ -73,32 +77,38 @@ class FILE_OPTIONS
    * @var string
    */
   public $source_chars = '‰·‡‚ÎÈËÍÔÌÏÓˆÛÚÙ¸˙˘˚ƒ¡¿¬À…» œÕÃŒ÷”“‘‹⁄Ÿ€Ò—Á«';
+
   /**
    * List of characters to convert <i>to</i> in afile name.
    * Each character replaces its corresponding entry in {@link
    * $source_chars} if found in a file name.
    * @var string */
   public $target_chars = 'aaaaeeeeiiiioooouuuuAAAAEEEEIIIIOOOOUUUUnNcC';
+
   /**
    * Longest possible file name.
    * @var integer
    */
   public $max_name_length = 255;
+
   /**
    * String containing all valid file name characters.
    * @var string
    */
   public $valid_file_chars = 'a-zA-Z0-9,._\+\()\-';
+
   /**
    * Collapse successive invalid characters into one replacement character.
    * @var boolean
    */
-  public $collapse_invalid_chars = TRUE;
+  public $collapse_invalid_chars = true;
+
   /**
    * Single character used to replace all invalid file name characters.
    * @var string
    */
   public $replacement_char = '_';
+
   /**
    * Use only lower-case for normalized paths.
    * This avoids path anamolies in case-sensitive file systems (e.g. UNIX-based)
@@ -106,14 +116,14 @@ class FILE_OPTIONS
    * a new directory and/or path.
    * @var boolean
    */
-  public $normalized_ids_are_lower_case = TRUE;
+  public $normalized_ids_are_lower_case = true;
 
   /**
    * Returns true is the path should have a leading separator.
    * Automatically return True for UNIX paths.
    * @return boolean
    */
-  function path_starts_with_delimiter ()
+  public function path_starts_with_delimiter ()
   {
     return $this->path_delimiter == '/';
   }
@@ -328,6 +338,8 @@ function ensure_begins_with_delimiter ($f, $opts = null)
     }
     return $Result;
   }
+  
+  return $f;
 }
 
 /**
@@ -373,8 +385,11 @@ function begins_with_delimiter ($f, $opts = null)
     {
       $opts = global_file_options ();
     }
-    return $f [0] == $opts->path_delimiter;
+    
+    return $f[0] == $opts->path_delimiter;
   }
+  
+  return false;
 }
 
 /**
@@ -395,6 +410,8 @@ function ends_with_delimiter ($f, $opts = null)
     }
     return substr ($f, -1) == $opts->path_delimiter;
   }
+  
+  return $f;
 }
 
 /**
@@ -426,7 +443,7 @@ function has_root ($f, $opts = null)
 function is_file_name ($f, $opts = null)
 {
   $dot_pos = strrpos ($f, '.');
-  if ($dot_pos !== FALSE)
+  if ($dot_pos !== false)
   {
     if (! isset ($opts))
     {
@@ -435,6 +452,8 @@ function is_file_name ($f, $opts = null)
     $slash_pos = strrpos ($f, $opts->path_delimiter);
     return $slash_pos < $dot_pos;
   }
+  
+  return false;
 }
 
 /**
@@ -500,7 +519,9 @@ function normalize_path ($path, $opts = null)
     /* Process all other path parts normally. */
 
     foreach ($parts_to_process as $part)
+    {
       $processed_parts [] = normalize_file_id ($part, $opts);
+    }
 
     $Result = implode ($opts->path_delimiter, $processed_parts);
   }
@@ -546,7 +567,7 @@ function normalize_file_id ($part, $opts = null)
  * @param integer $size
  * @return string
  */
-function file_size_as_text ($size, $force_kb = FALSE)
+function file_size_as_text ($size, $force_kb = false)
 {
   $places = 0;
   while (($size / 1024) > 1)
@@ -565,7 +586,6 @@ function file_size_as_text ($size, $force_kb = FALSE)
       return $size . ' Bytes';
     }
 
-
     return round ($size / 1024, 1) . ' KB';
   case 1:
     return $size . ' KB';
@@ -575,6 +595,8 @@ function file_size_as_text ($size, $force_kb = FALSE)
     return $size . ' GB';
   case 4:
     return $size . ' TB';
+  default:
+    throw new UNKNOWN_VALUE_EXCEPTION($places);
   }
 }
 
@@ -591,28 +613,30 @@ function text_to_file_size ($text)
   {
     return $text;
   }
-  else
+
+  $pieces = null; // Compiler warning
+  if (ereg ('([0-9]+)([MB]|[M]|[GB]|[G]|[KB]|[K])', $text, $pieces))
   {
-    $pieces = null; // Compiler warning
-    if (ereg ('([0-9]+)([MB]|[M]|[GB]|[G]|[KB]|[K])', $text, $pieces))
+    switch ($pieces [2])
     {
-      switch ($pieces [2])
-      {
-      case 'K':
-      case 'KB':
-        return $pieces [1] * 1024;
-      case 'M':
-      case 'MB':
-        return $pieces [1] * pow (1024, 2);
-      case 'G':
-      case 'GB':
-        return $pieces [1] * pow (1024, 3);
-      case 'T':
-      case 'TB':
-        return $pieces [1] * pow (1024, 4);
-      }
+    case 'K':
+    case 'KB':
+      return $pieces [1] * 1024;
+    case 'M':
+    case 'MB':
+      return $pieces [1] * pow (1024, 2);
+    case 'G':
+    case 'GB':
+      return $pieces [1] * pow (1024, 3);
+    case 'T':
+    case 'TB':
+      return $pieces [1] * pow (1024, 4);
+    default:
+      throw new UNKNOWN_VALUE_EXCEPTION($pieces [2]);
     }
   }
+  
+  return $text;
 }
 
 /**
@@ -632,8 +656,11 @@ function is_valid_path ($path, $opts = null)
     {
       $path = strtolower ($path);
     }
+    
     return $path == normalize_path ($path, $opts);
   }
+  
+  return false;
 }
 
 /**
@@ -735,7 +762,7 @@ function temp_folder ()
  * @return array[string]
  * @param FILE_OPTIONS $opts
  */
-function file_list_for ($base_path, $path_to_prepend = '', $recurse = FALSE, $opts = NULL)
+function file_list_for ($base_path, $path_to_prepend = '', $recurse = false, $opts = NULL)
 {
   if (! isset ($opts))
   {
@@ -746,7 +773,7 @@ function file_list_for ($base_path, $path_to_prepend = '', $recurse = FALSE, $op
   $Result = array ();
   if (($handle = opendir ($base_path)))
   {
-    while (($name = readdir ($handle)) !== FALSE)
+    while (($name = readdir ($handle)) !== false)
     {
       if ($name [0] != '.')
       {

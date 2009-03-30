@@ -58,7 +58,7 @@ class CHANGE_GRID extends PROJECT_ENTRY_GRID
    * @param CHANGE $obj
    * @param CHANGE_BRANCH_INFO $branch_info
    */
-  function _draw_release_details ($obj, $branch_info)
+  protected function _draw_release_details ($obj, $branch_info)
   {
     $rel = $branch_info->release ();
     if (isset ($rel))
@@ -77,7 +77,7 @@ class CHANGE_GRID extends PROJECT_ENTRY_GRID
    * @param CHANGE $obj
    * @param CHANGE_BRANCH_INFO $branch_info
    */
-  function _draw_user_details ($obj, $branch_info)
+  protected function _draw_user_details ($obj, $branch_info)
   {
     echo 'Applied ';
     if ($this->show_user)
@@ -93,7 +93,7 @@ class CHANGE_GRID extends PROJECT_ENTRY_GRID
    * @param CHANGE $obj
    * @param CHANGE_BRANCH_INFO $branch_info
    */
-  function _draw_description ($obj)
+  protected function _draw_description ($obj)
   {
     if ($obj->files)
     {

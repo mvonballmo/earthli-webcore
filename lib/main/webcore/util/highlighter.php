@@ -57,20 +57,21 @@ class HIGHLIGHTER extends WEBCORE_OBJECT
    * Only works for PHP 4.3 and higher.
    * @var boolean
    */
-  public $show_line_numbers = TRUE;
+  public $show_line_numbers = true;
+
   /**
    * Links PHP functions to the PHP web site.
    * Only works for PHP 4.3 and higher.
    * @var boolean
    */
-  public $link_functions = TRUE;
+  public $link_functions = true;
 
   /**
    * Syntax-highlight the contents of the current url.
 	 * @see file_as_html()    
    * @return  string
    */
-  function current_as_html ()
+  public function current_as_html ()
   {
     $this->file_as_html (url_to_file_name ($this->env->url (Url_part_no_args)));
   }
@@ -82,7 +83,7 @@ class HIGHLIGHTER extends WEBCORE_OBJECT
    * @param string $file_name Fully-resolved local path.
    * @return string
    */
-  function file_as_html ($file_name)
+  public function file_as_html ($file_name)
   {
     if (function_exists ('token_get_all'))
     {
@@ -91,7 +92,7 @@ class HIGHLIGHTER extends WEBCORE_OBJECT
       $highlighter->__construct (); // PHP 5 class
       $highlighter->link_functions = $this->link_functions;
       $highlighter->loadFile ($file_name);
-      return $highlighter->toHtml (TRUE, $this->show_line_numbers);
+      return $highlighter->toHtml (true, $this->show_line_numbers);
     }
     else
     {

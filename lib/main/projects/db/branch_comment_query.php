@@ -51,7 +51,7 @@ class BRANCH_COMMENT_QUERY extends FOLDER_MULTI_TYPE_COMMENT_QUERY
   /**
    * @param BRANCH $branch Branch for which comments are retrieved.
    */
-  function BRANCH_COMMENT_QUERY ($branch)
+  public function BRANCH_COMMENT_QUERY ($branch)
   {
     $folder = $branch->parent_folder ();
     FOLDER_MULTI_TYPE_COMMENT_QUERY::FOLDER_MULTI_TYPE_COMMENT_QUERY ($folder);
@@ -73,7 +73,7 @@ class BRANCH_COMMENT_QUERY extends FOLDER_MULTI_TYPE_COMMENT_QUERY
    * Prepare security- and filter-based restrictions.
    * @access private
    */
-  function _prepare_restrictions ()
+  protected function _prepare_restrictions ()
   {
     parent::_prepare_restrictions ();
     $this->_calculated_restrictions [] = "etob.branch_id = {$this->_branch->id}";
@@ -86,7 +86,7 @@ class BRANCH_COMMENT_QUERY extends FOLDER_MULTI_TYPE_COMMENT_QUERY
    * @param ENTRY $entry The entry whose properties should be set.
    * @access private
    */
-  function _prepare_entry ($entry)
+  protected function _prepare_entry ($entry)
   {
     parent::_prepare_entry ($entry);
 

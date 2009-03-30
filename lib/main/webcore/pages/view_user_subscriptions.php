@@ -87,7 +87,7 @@ http://www.earthli.com/software/webcore
       </div>
       <div class="side-bar-body">
       <?php
-        $panel_manager->display (TRUE);
+        $panel_manager->display (true);
       ?>
       </div>
     </div>

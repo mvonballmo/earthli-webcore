@@ -55,9 +55,9 @@ class THEME_SELECTOR_FORM extends FORM
 
   /**
    * @param APPLICATION $app Main application.
-    * @param array[THEME] $themes List of available themes.
-    */
-  function THEME_SELECTOR_FORM ($page, $themes)
+   * @param array[THEME] $themes List of available themes.
+   */
+  public function THEME_SELECTOR_FORM ($page, $themes)
   {
     FORM::FORM ($page);
 
@@ -67,7 +67,7 @@ class THEME_SELECTOR_FORM extends FORM
     $field->id = 'page_number';
     $field->title = 'Page Number';
     $field->min_value = 1;
-    $field->visible = FALSE;
+    $field->visible = false;
     $this->add_field ($field);
 
     $field = new TEXT_FIELD ();
@@ -94,10 +94,10 @@ class THEME_SELECTOR_FORM extends FORM
 
   /**
    * Store the form's values as the theme settings.
-    * @param object $obj This parameter is ignored.
-    * @access private
-    */
-  function commit ($obj)
+   * @param object $obj This parameter is ignored.
+   * @access private
+   */
+  public function commit ($obj)
   {
     $this->page->set_theme_font_name ($this->value_for ('font_name_CSS_file_name'));
     $this->page->set_theme_font_size ($this->value_for ('font_size_CSS_file_name'));
@@ -105,7 +105,7 @@ class THEME_SELECTOR_FORM extends FORM
     $this->page->set_theme_dont_apply_to_forms ($this->value_for ('dont_apply_to_forms'));
   }
 
-  function load_with_defaults ()
+  public function load_with_defaults ()
   {
     $this->set_value ('page_number', read_var ('page_number', 1));
     $this->set_value ('dont_apply_to_forms', $this->page->stored_theme->dont_apply_to_forms);
@@ -117,11 +117,11 @@ class THEME_SELECTOR_FORM extends FORM
   /**
    * @access private
    */
-  function _draw_scripts ()
+  protected function _draw_scripts ()
   {
     parent::_draw_scripts ();
 ?>
-  function set_main_theme (name)
+  public function set_main_theme (name)
   {
     <?php echo $this->js_form_name (); ?>.main_CSS_file_name.value = name;
     <?php echo $this->js_form_name (); ?>.submit ();
@@ -133,7 +133,7 @@ class THEME_SELECTOR_FORM extends FORM
    * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_controls ($renderer)
+  protected function _draw_controls ($renderer)
   {
     $renderer->start ();
 
@@ -141,7 +141,9 @@ class THEME_SELECTOR_FORM extends FORM
     $props->on_click_script = 'this.form.submit()';
     $props->add_item ('[Default]', '');
     foreach ($this->_themes as $theme)
+    {
       $props->add_item ($theme->title_as_plain_text (), $theme->id);
+    }
 
     $renderer->draw_drop_down_row ('main_CSS_file_name', $props);
 
@@ -150,7 +152,9 @@ class THEME_SELECTOR_FORM extends FORM
     $props->add_item ('[Default]', '');
     $theme_font_names = $this->page->theme_options->font_names ();
     foreach ($theme_font_names as $name => $url)
+    {
       $props->add_item ($name, $url);
+    }
 
     $renderer->draw_drop_down_row ('font_name_CSS_file_name', $props);
 
@@ -159,7 +163,9 @@ class THEME_SELECTOR_FORM extends FORM
     $props->add_item ('[Default]', '');
     $theme_font_sizes = $this->page->theme_options->font_sizes ();
     foreach ($theme_font_sizes as $name => $url)
+    {
       $props->add_item ($name, $url);
+    }
 
     $renderer->draw_drop_down_row ('font_size_CSS_file_name', $props);
 

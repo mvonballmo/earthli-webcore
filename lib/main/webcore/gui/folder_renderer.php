@@ -53,7 +53,7 @@ class FOLDER_RENDERER extends CONTENT_OBJECT_RENDERER
    * @param FOLDER $obj
    * @access private
    */
-  function _display_as_html ($obj)
+  protected function _display_as_html ($obj)
   {
     $use_table = ! $this->_options->show_as_summary && $obj->icon_url;
     if ($use_table)
@@ -78,13 +78,13 @@ class FOLDER_RENDERER extends CONTENT_OBJECT_RENDERER
    * Shows content (independent of chosen icon).
    * @param FOLDER $obj
    */
-  function _echo_html_content ($obj)
+  protected function _echo_html_content ($obj)
   {
     $this->_echo_html_user_information ($obj);
     $this->_echo_html_descriptions ($obj);
   }
 
-  function _echo_html_descriptions ($obj)
+  protected function _echo_html_descriptions ($obj)
   {
     if ($obj->summary && $this->_options->show_as_summary)
     {
@@ -101,7 +101,7 @@ class FOLDER_RENDERER extends CONTENT_OBJECT_RENDERER
    * @param FOLDER $obj
    * @access private
    */
-  function _echo_subscribe_status ($obj)
+  protected function _echo_subscribe_status ($obj)
   {
     if (! $obj->is_root ())
     {

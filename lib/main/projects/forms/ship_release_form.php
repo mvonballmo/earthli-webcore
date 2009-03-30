@@ -57,7 +57,7 @@ class SHIP_RELEASE_FORM extends AUDITABLE_FORM
   /**
    * @param APPLICATION $app
    */
-  function SHIP_RELEASE_FORM ($app)
+  public function SHIP_RELEASE_FORM ($app)
   {
     AUDITABLE_FORM::AUDITABLE_FORM ($app);
 
@@ -76,10 +76,10 @@ class SHIP_RELEASE_FORM extends AUDITABLE_FORM
 
   /**
    * Store the form's values for this change.
-    * @param RELEASE $obj
-    * @access private
-    */
-  function _store_to_object ($obj)
+   * @param RELEASE $obj
+   * @access private
+   */
+  protected function _store_to_object ($obj)
   {
     switch ($this->value_for ('state'))
     {
@@ -98,7 +98,7 @@ class SHIP_RELEASE_FORM extends AUDITABLE_FORM
   /**
    * @param RELEASE $obj
    */
-  function load_from_object ($obj)
+  public function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
     $this->set_value ('state', Locked);
@@ -106,7 +106,7 @@ class SHIP_RELEASE_FORM extends AUDITABLE_FORM
     $this->add_preview ($obj, 'Ship Release details');
   }
 
-  function load_with_defaults ()
+  public function load_with_defaults ()
   {
     $this->raise ('Cannot ship new releases.', 'load_with_defaults', 'SHIP');
   }
@@ -116,7 +116,7 @@ class SHIP_RELEASE_FORM extends AUDITABLE_FORM
    * @param RELEASE $obj
    * @access private
    */
-  function commit ($obj)
+  public function commit ($obj)
   {
     parent::commit ($obj);
 
@@ -131,7 +131,7 @@ class SHIP_RELEASE_FORM extends AUDITABLE_FORM
    * @return FORM_PREVIEW_SETTINGS
    * @access private
    */
-  function _make_preview_settings ($obj)
+  protected function _make_preview_settings ($obj)
   {
     return new SHIP_RELEASE_PREVIEW_SETTINGS ($this->context);
   }
@@ -140,14 +140,14 @@ class SHIP_RELEASE_FORM extends AUDITABLE_FORM
    * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_controls ($renderer)
+  protected function _draw_controls ($renderer)
   {
     $renderer->start ();
     $renderer->draw_text_row ('', 'Are you sure you want to ship ' . $this->_object->title_as_link () . '?');
     $renderer->draw_separator ();
 
     $props = $renderer->make_list_properties ();
-    $props->show_descriptions = TRUE;
+    $props->show_descriptions = true;
     $props->add_item ($this->app->resolve_icon_as_html ('{app_icons}statuses/working', ' ', '16px') . ' Release to testing', Testing, 'Feature-complete internal release.');
     $props->add_item ($this->app->resolve_icon_as_html ('{icons}buttons/ship', ' ', '16px') . ' Ship', Shipped, 'Jobs and changes can still be added and removed.');
     $props->add_item ($this->app->resolve_icon_as_html ('{icons}indicators/locked', ' ', '16px') . ' Lock', Locked, 'Changes and jobs cannot be added or removed.');
@@ -155,7 +155,7 @@ class SHIP_RELEASE_FORM extends AUDITABLE_FORM
     $renderer->draw_separator ();
 
     $props = $renderer->make_list_properties ();
-    $props->show_descriptions = TRUE;
+    $props->show_descriptions = true;
     $props->add_item ('Publish release only', History_item_silent, 'Generate a single notification indicating that the release has shipped.');
     $props->add_item ('Publish all', History_item_needs_send, 'Generate individual notifications for affected jobs and changes.');
     $renderer->draw_radio_group_row ('sub_history_item_publication_state', $props);
@@ -188,7 +188,7 @@ class SHIP_RELEASE_PREVIEW_SETTINGS extends UPDATE_RELEASE_PREVIEW_SETTINGS
   /**
    * Render the preview for this object.
    */
-  function _display ()
+  protected function _display ()
   {
     $class_name = $this->app->final_class_name ('RELEASE_SHIPPER', 'projects/obj/release_updater.php');
     $committer = new $class_name ($this->object);

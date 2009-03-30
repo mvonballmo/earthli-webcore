@@ -206,7 +206,7 @@ class BROWSER
   /**
    * Calls {@link load_from_server()} by default.
    */
-  function BROWSER ()
+  public function BROWSER ()
   {
     $this->load_from_server ();
   }
@@ -216,7 +216,7 @@ class BROWSER
    * Called automatically from the constructor.
    * @see load_from_string()
    */
-  function load_from_server ()
+  public function load_from_server ()
   {
     $this->load_from_string (read_array_index ($_SERVER, 'HTTP_USER_AGENT'));
   }
@@ -226,7 +226,7 @@ class BROWSER
    * Used primarily for testing.
    * @see load_from_server()
    */
-  function load_from_string ($s)
+  public function load_from_string ($s)
   {
     $this->user_agent_string = $s;
     $tables = $this->_make_user_agent_parse_tables ();
@@ -239,7 +239,7 @@ class BROWSER
    * Performs a reverse name lookup of the {@link ip_address()}.
    * @return string
    */
-  function domain ()
+  public function domain ()
   {
     return @gethostbyaddr ($this->ip_address ());
   }
@@ -250,7 +250,7 @@ class BROWSER
    * @see domain()
    * @return string
    */
-  function ip_address ()
+  public function ip_address ()
   {
     $forwarded = read_array_index ($_SERVER, 'HTTP_X_FORWARDED_FOR');
     $remote_addr = read_array_index ($_SERVER, 'REMOTE_ADDR');
@@ -263,7 +263,6 @@ class BROWSER
    return $remote_addr;
  }
 
-
     return read_array_index ($_SERVER, 'REMOTE_HOST');
   }
 
@@ -271,18 +270,18 @@ class BROWSER
    * Return a description as HTML.
    * @return string
    */
-  function description_as_html ()
+  public function description_as_html ()
   {
-    return $this->_description_as_text (FALSE);
+    return $this->_description_as_text (false);
   }
 
   /**
    * Return a description as plain text.
    * @return string
    */
-  function description_as_plain_text ()
+  public function description_as_plain_text ()
   {
-    return $this->_description_as_text (TRUE);
+    return $this->_description_as_text (true);
   }
 
   /**
@@ -291,7 +290,7 @@ class BROWSER
    * renderers like Gecko, or are rebranded like Opera Composer browsers.
    * @return string
    */
-  function renderer_name ()
+  public function renderer_name ()
   {
     return $this->_ua->renderer_name;
   }
@@ -302,7 +301,7 @@ class BROWSER
    * @see BROWSER::supports()
    * @return string
    */
-  function renderer_version ()
+  public function renderer_version ()
   {
     return $this->_ua->renderer_version;
   }
@@ -313,7 +312,7 @@ class BROWSER
    * Gecko engine, depending on version. MSN uses the IE engine.
    * @return string
    */
-  function name ()
+  public function name ()
   {
     return $this->_ua->name;
   }
@@ -325,7 +324,7 @@ class BROWSER
    * browser they are running. e.g. displaying 'MSN 7.0' instead of 'IE 5.5sp1'.
    * @return string
    */
-  function version ()
+  public function version ()
   {
     return $this->_ua->version;
   }
@@ -336,28 +335,42 @@ class BROWSER
    * a WebCore application.
    * @return string
    */
-  function icon_name ()
+  public function icon_name ()
   {
     $n = strtolower ($this->name ());
 
-    if (strpos ($n, 'opera') !== FALSE)
+    if (strpos ($n, 'opera') !== false)
     {
       $Result = 'opera1_t';
     }
-    elseif (strpos ($n, 'firefox') !== FALSE)
+    elseif (strpos ($n, 'firefox') !== false)
+    {
       $Result = 'firefox';
-    elseif (strpos ($n, 'omniweb') !== FALSE)
+    }
+    elseif (strpos ($n, 'omniweb') !== false)
+    {
       $Result = 'omniweb5';
-    elseif (strpos ($n, 'safari') !== FALSE)
+    }
+    elseif (strpos ($n, 'safari') !== false)
+    {
       $Result = 'safari';
-    elseif (strpos ($n, 'camino') !== FALSE)
+    }
+    elseif (strpos ($n, 'camino') !== false)
+    {
       $Result = 'camino';
-    elseif (strpos ($n, 'internet explorer') !== FALSE)
+    }
+    elseif (strpos ($n, 'internet explorer') !== false)
+    {
       $Result = 'ie';
-    elseif (strpos ($n, 'shiira') !== FALSE)
+    }
+    elseif (strpos ($n, 'shiira') !== false)
+    {
       $Result = 'shiira';
-    elseif (strpos ($n, 'chrome') !== FALSE)
+    }
+    elseif (strpos ($n, 'chrome') !== false)
+    {
       $Result = 'chrome';
+    }
     else
     {
       $Result = '';
@@ -370,7 +383,7 @@ class BROWSER
    * Specific name of the operating system.
    * @return string
    */
-  function system_name ()
+  public function system_name ()
   {
     return $this->_ua->system_name;
   }
@@ -380,7 +393,7 @@ class BROWSER
    * This is specific, like Windows NT 5.1 (Windows 2000) will return 5.1, not 2000.
    * @return string
    */
-  function system_version ()
+  public function system_version ()
   {
     return $this->_ua->system_version;
   }
@@ -390,7 +403,7 @@ class BROWSER
    * The most likely operating system derived from the user agent string.
    * @return string
    */
-  function calculated_system_name ()
+  public function calculated_system_name ()
   {
     return $this->_ua->calculated_system_name;
   }
@@ -406,7 +419,7 @@ class BROWSER
    * </ul>
    * @return string
    */
-  function system_id ()
+  public function system_id ()
   {
     if (isset ($this->_ua->system_name))
     {
@@ -422,7 +435,6 @@ class BROWSER
       return $Result;
     }
 
-
     return $this->_ua->calculated_system_name;
   }
 
@@ -432,7 +444,7 @@ class BROWSER
    * the build date of the Gecko component. (Can be empty)
    * @return DATE_TIME
    */
-  function gecko_date ()
+  public function gecko_date ()
   {
     return $this->_ua->gecko_date;
   }
@@ -444,7 +456,7 @@ class BROWSER
    * @param string $code
    * @return boolean
    */
-  function is ($code)
+  public function is ($code)
   {
     return (isset ($this->_ua->renderer_id) && ($code == $this->_ua->renderer_id))
         || (isset ($this->_ua->os_id) && ($code == $this->_ua->os_id));
@@ -456,7 +468,7 @@ class BROWSER
    * @param integer $code
    * @return boolean
    */
-  function supports ($code)
+  public function supports ($code)
   {
     switch ($code)
     {
@@ -515,7 +527,7 @@ class BROWSER
    * @return string
    * @access private
    */
-  function _description_as_text ($text_only = FALSE)
+  protected function _description_as_text ($text_only = false)
   {
     $app_name = $this->name () . ' ' . $this->version ();
     $eng_name = $this->renderer_name () . ' ' . $this->renderer_version ();
@@ -551,7 +563,7 @@ class BROWSER
    * @return USER_AGENT_PARSE_TABLES
    * @access private
    */
-  function _make_user_agent_parse_tables ()
+  protected function _make_user_agent_parse_tables ()
   {
     return new USER_AGENT_PARSE_TABLES ();
   }
@@ -560,7 +572,7 @@ class BROWSER
    * @return USER_AGENT_PARSER
    * @access private
    */
-  function _make_user_agent_parser ($tables)
+  protected function _make_user_agent_parser ($tables)
   {
     return new USER_AGENT_PARSER ($tables);
   }
@@ -585,44 +597,54 @@ class USER_AGENT_PROPERTIES
    * @var string
    */
   public $name = Browser_unknown;
+
   /**
    * Version of the client application.
    * @var string
    */
   public $version = '';
+
   /**
    * Name of the rendering technology.
    * @var string
    */
   public $renderer_name = Browser_unknown;
+
   /**
    * @var string
    */
   public $renderer_version = '';
+
   /**
    * @var string
    */
   public $renderer_id = Browser_unknown;
+
   /**
    * @var string
    */
   public $system_name = Browser_unknown;
+
   /**
    * @var string
    */
   public $system_version = '';
+
   /**
    * @var string
    */
   public $calculated_system_name = Browser_unknown;
+
   /**
    * @var string
    */
   public $os_id = '';
+
   /**
    * @var DATE_TIME
    */
   public $gecko_date;
+
   /**
    * @var boolean
    */
@@ -632,16 +654,18 @@ class USER_AGENT_PROPERTIES
    * @var integer
    */
   public $major_version = 0;
+
   /**
    * @var integer
    */
   public $minor_version = 0;
+
   /**
    * @var integer
    */
   public $build_number = 0;
 
-  function USER_AGENT_PROPERTIES ()
+  public function USER_AGENT_PROPERTIES ()
   {
     $this->gecko_date = new DATE_TIME ();
     $this->gecko_date->clear ();
@@ -663,12 +687,12 @@ class USER_AGENT_PARSER
   /**
    * @param USER_AGENT_PARSE_TABLES $tables
    */
-  function USER_AGENT_PARSER ($tables)
+  public function USER_AGENT_PARSER ($tables)
   {
     $this->_tables = $tables;
   }
 
-  function make_properties_from ($s)
+  public function make_properties_from ($s)
   {
     $Result = new USER_AGENT_PROPERTIES ();
 
@@ -685,7 +709,7 @@ class USER_AGENT_PARSER
     $system_ids = $this->_tables->system_ids ();
     $renderers = $this->_tables->renderer_ids ();
 
-    $continue_processing = TRUE;
+    $continue_processing = true;
     $idx_id = 0;
     $current_renderer = null;
 
@@ -794,7 +818,7 @@ class USER_AGENT_PARSER
    * @return true
    * @access private
    */
-  function _extract_version ($version)
+  protected function _extract_version ($version)
   {
     $Result = $version;
     if (($Result [0] == 'v') || ($Result [0] == 'V'))
@@ -810,7 +834,7 @@ class USER_AGENT_PARSER
    * @return DATE_TIME
    * @access private
    */
-  function _determine_gecko_date ($version)
+  protected function _determine_gecko_date ($version)
   {
     $parts = null; // Compiler warning
     preg_match ('/([0-9]{4})([0-9]{2})([0-9]{2})/', $version, $parts);
@@ -829,7 +853,7 @@ class USER_AGENT_PARSER
    * @param string $raw_data User agent to examine, in lower-case format.
    * @access private
    */
-  function _determine_os ($props, $raw_data)
+  protected function _determine_os ($props, $raw_data)
   {
     $raw_data = strtolower ($raw_data);
     $props->calculated_system_name = Browser_unknown;
@@ -839,9 +863,11 @@ class USER_AGENT_PARSER
       if ($key)
       {
         $keys = split (',', $key);
-        $match = TRUE;
+        $match = true;
         foreach ($keys as $key)
+        {
           $match = $match && ($this->_contains ($raw_data, $key));
+        }
         if ($match)
         {
           $props->calculated_system_name = $value;
@@ -880,7 +906,7 @@ class USER_AGENT_PARSER
    * @param USER_AGENT_PROPERTIES $props
    * @access private
    */
-  function _determine_robot ($props)
+  protected function _determine_robot ($props)
   {
     if ($props->renderer_id == Browser_unknown)
     {
@@ -901,9 +927,9 @@ class USER_AGENT_PARSER
    * @return bool
    * @access private
    */
-  function _contains ($haystack, $needle)
+  protected function _contains ($haystack, $needle)
   {
-    return strpos ($haystack, $needle) !== FALSE;
+    return strpos ($haystack, $needle) !== false;
   }
 }
 
@@ -930,7 +956,7 @@ class USER_AGENT_PARSE_TABLES
    * @see USER_AGENT_RENDERER_INFO
    * @return array[string,USER_AGENT_RENDERER_INFO]
    */
-  function renderer_ids ()
+  public function renderer_ids ()
   {
     return array (
     	'mozilla' => new USER_AGENT_RENDERER_INFO (Browser_netscape_4, 'Netscape 4.x', User_agent_temporary_renderer),
@@ -965,7 +991,7 @@ class USER_AGENT_PARSE_TABLES
    * list determines which ids are ignored.
    * @return array[string,boolean]
    */
-  function ignored_ids ()
+  public function ignored_ids ()
   {
     return array ('windows' => 1,
                   'windows nt' => 1,
@@ -1007,7 +1033,7 @@ class USER_AGENT_PARSE_TABLES
    * A list of systems known to provide version info in the user agent.
    * @return array[string,string]
    */
-  function system_ids ()
+  public function system_ids ()
   {
     return array ('windows nt' => 'Windows NT',
                   'win 9x' => 'Windows 9x',
@@ -1028,7 +1054,7 @@ class USER_AGENT_PARSE_TABLES
    * in the renderer/browser name to mark unknown browsers as robots.
    * @return array[string,boolean]
    */
-  function robot_names ()
+  public function robot_names ()
   {
     return array ('crawler',
                   'spider',
@@ -1044,7 +1070,7 @@ class USER_AGENT_PARSE_TABLES
    * and 'nt4' both map onto 'Windows NT 4.x').
    * @return array[string,string]
    */
-  function os_ids ()
+  public function os_ids ()
   {
     return array ('win,nt 6.0' => 'Windows Vista',
                   'win,nt 5.1' => 'Windows XP',
@@ -1151,12 +1177,14 @@ class USER_AGENT_RENDERER_INFO
    * @var string
    */
   public $id;
+
   /**
    * Code name for the rendering technology.
    * May be the same as {@link $display_name}.
    * @var string
    */
   public $technology_name;
+
   /**
    * Replacement for the name found in the user agent.
    * Often the renderer is identified by a non-user-friendly id (e.g. MSIE)
@@ -1164,6 +1192,7 @@ class USER_AGENT_RENDERER_INFO
    * if no other name is given.
    */
   public $display_name;
+
   /**
    * Defines the precedence for this renderer during detection.
    * Uses {@link User_agent_temporary_renderer}, {@link
@@ -1180,7 +1209,7 @@ class USER_AGENT_RENDERER_INFO
    * @param string $disp Value for the {@link $display_name}.
    * @param integer $prec Value for the {@link $precedence}.
    */
-  function USER_AGENT_RENDERER_INFO ($id, $tech, $prec, $disp = '')
+  public function USER_AGENT_RENDERER_INFO ($id, $tech, $prec, $disp = '')
   {
     $this->id = $id;
     $this->technology_name = $tech;
@@ -1198,7 +1227,7 @@ class USER_AGENT_RENDERER_INFO
   /**
    * @return boolean
    */
-  function renderer_can_be_overridden ()
+  public function renderer_can_be_overridden ()
   {
     return $this->precedence == User_agent_temporary_renderer;
   }
@@ -1206,7 +1235,7 @@ class USER_AGENT_RENDERER_INFO
   /**
    * @return boolean
    */
-  function browser_can_be_overridden ()
+  public function browser_can_be_overridden ()
   {
     return $this->precedence != User_agent_final_browser;
   }
@@ -1214,7 +1243,7 @@ class USER_AGENT_RENDERER_INFO
   /**
    * @return boolean
    */
-  function continue_processing_ids ()
+  public function continue_processing_ids ()
   {
     return $this->precedence != User_agent_final_browser_abort;
   }
@@ -1227,7 +1256,7 @@ class USER_AGENT_RENDERER_INFO
    * @param string $ver
    * @return boolean
    */
-  function is_mozilla_gecko ($ver)
+  public function is_mozilla_gecko ($ver)
   {
     return ($this->id == Browser_netscape_4) && ($ver [0] > 4);
   }

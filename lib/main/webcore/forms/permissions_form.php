@@ -47,7 +47,7 @@ require_once ('webcore/forms/form.php');
  * @since 2.5.0
  * @abstract
  */
-class PERMISSIONS_FORM extends FORM
+abstract class PERMISSIONS_FORM extends FORM
 {
   /**
    * @var string
@@ -57,16 +57,16 @@ class PERMISSIONS_FORM extends FORM
   /**
    * @access private
    */
-  function _draw_scripts ()
+  protected function _draw_scripts ()
   {
     parent::_draw_scripts ();
 ?>
-  function grant_all_permissions (form)
+  public function grant_all_permissions (form)
   {
     set_all_controls_of_type (form, 'checkbox', 1);
   }
 
-  function grant_no_permissions (form)
+  public function grant_no_permissions (form)
   {
     set_all_controls_of_type (form, 'checkbox', 0);
   }
@@ -77,7 +77,7 @@ class PERMISSIONS_FORM extends FORM
    * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_controls ($renderer)
+  protected function _draw_controls ($renderer)
   {
     $formatter = $this->app->make_permissions_formatter ();
 
@@ -91,7 +91,7 @@ class PERMISSIONS_FORM extends FORM
    * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_buttons ($renderer)
+  protected function _draw_buttons ($renderer)
   {
     $buttons [] = $renderer->javascript_button_as_html ('Grant All', 'grant_all_permissions (this.form)', '{icons}buttons/select');
     $buttons [] = $renderer->javascript_button_as_html ('Grant None', 'grant_no_permissions (this.form)', '{icons}buttons/close');
@@ -110,10 +110,7 @@ class PERMISSIONS_FORM extends FORM
    * @access private
    * @abstract
    */
-  function _draw_permission_controls ($renderer, $formatter)
-  {
-    $this->raise_deferred ('_draw_permission_controls', 'PERMISSIONS_FORM');
-  }
+  protected abstract function _draw_permission_controls ($renderer, $formatter);
 
   /**
    * Draw the permission with icon and title.
@@ -124,7 +121,7 @@ class PERMISSIONS_FORM extends FORM
    * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_permission ($map, $formatter, $renderer)
+  protected function _draw_permission ($map, $formatter, $renderer)
   {
     $id = $map->id ();
     $field = $this->field_at ($id);

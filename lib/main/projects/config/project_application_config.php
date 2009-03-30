@@ -53,7 +53,7 @@ class PROJECT_APPLICATION_DISPLAY_OPTIONS extends APPLICATION_DISPLAY_OPTIONS
    * @see PROPERTY_VALUE
    * @return array[PROPERTY_VALUE]
    */
-  function entry_kinds ()
+  public function entry_kinds ()
   {
     if (! isset ($this->_entry_kinds))
     {
@@ -68,7 +68,7 @@ class PROJECT_APPLICATION_DISPLAY_OPTIONS extends APPLICATION_DISPLAY_OPTIONS
    * @see PROPERTY_VALUE
    * @return array[PROPERTY_VALUE]
    */
-  function job_priorities ()
+  public function job_priorities ()
   {
     if (! isset ($this->_job_priorities))
     {
@@ -83,7 +83,7 @@ class PROJECT_APPLICATION_DISPLAY_OPTIONS extends APPLICATION_DISPLAY_OPTIONS
    * @see JOB_STATUS_VALUE
    * @return array[JOB_STATUS_VALUE]
    */
-  function job_statuses ()
+  public function job_statuses ()
   {
     if (! isset ($this->_job_statuses))
     {
@@ -98,7 +98,7 @@ class PROJECT_APPLICATION_DISPLAY_OPTIONS extends APPLICATION_DISPLAY_OPTIONS
    * @see JOB_STATUS_MAP
    * @return array[JOB_STATUS_MAP]
    */
-  function job_status_map ()
+  public function job_status_map ()
   {
     if (! isset ($this->_job_status_map))
     {
@@ -118,7 +118,7 @@ class PROJECT_APPLICATION_DISPLAY_OPTIONS extends APPLICATION_DISPLAY_OPTIONS
    * @see job_statuses()
    * @return array[JOB_STATUS_MAP]
    */
-  function job_statuses_for ($status)
+  public function job_statuses_for ($status)
   {
     $Result = array ();
 
@@ -155,7 +155,7 @@ class PROJECT_APPLICATION_DISPLAY_OPTIONS extends APPLICATION_DISPLAY_OPTIONS
    * @param string $title
    * @param string $icon
    */
-  function add_entry_kind ($value, $title, $icon)
+  public function add_entry_kind ($value, $title, $icon)
   {
     include_once ('webcore/sys/property.php');
     $kind = new PROPERTY_VALUE ($this->context);
@@ -173,7 +173,7 @@ class PROJECT_APPLICATION_DISPLAY_OPTIONS extends APPLICATION_DISPLAY_OPTIONS
    * @param string $title
    * @param string $icon
    */
-  function add_job_priority ($value, $title, $icon)
+  public function add_job_priority ($value, $title, $icon)
   {
     include_once ('webcore/sys/property.php');
     $priority = new PROPERTY_VALUE ($this->context);
@@ -193,7 +193,7 @@ class PROJECT_APPLICATION_DISPLAY_OPTIONS extends APPLICATION_DISPLAY_OPTIONS
    * @param integer $kind
    * @param integer $level
    */
-  function add_job_status ($value, $title, $icon, $kind, $level)
+  public function add_job_status ($value, $title, $icon, $kind, $level)
   {
     include_once ('projects/obj/job.php');
     $status = new JOB_STATUS_VALUE ($this->context);
@@ -215,7 +215,7 @@ class PROJECT_APPLICATION_DISPLAY_OPTIONS extends APPLICATION_DISPLAY_OPTIONS
    * @param array[integer] $from_statuses
    * @param integer $to_status
    */
-  function set_job_status_mapping ($from_statuses, $to_status)
+  public function set_job_status_mapping ($from_statuses, $to_status)
   {
     $this->_job_status_map = new JOB_STATUS_MAP ($this->context, $from_statuses, $to_status);
   }
@@ -225,7 +225,7 @@ class PROJECT_APPLICATION_DISPLAY_OPTIONS extends APPLICATION_DISPLAY_OPTIONS
    * Called from {@link entry_kinds()}.
    * @access private
    */
-  function _init_entry_kinds ()
+  protected function _init_entry_kinds ()
   {
     $this->add_entry_kind (0, 'Bug fix', 'bug_fix');
     $this->add_entry_kind (1, 'New feature', 'new_feature');
@@ -239,7 +239,7 @@ class PROJECT_APPLICATION_DISPLAY_OPTIONS extends APPLICATION_DISPLAY_OPTIONS
    * Called from {@link job_priorities()}.
    * @access private
    */
-  function _init_job_priorities ()
+  protected function _init_job_priorities ()
   {
     $this->add_job_priority (0, 'Trivial', 'trivial');
     $this->add_job_priority (1, 'Minor (needed eventually)', 'minor');
@@ -253,7 +253,7 @@ class PROJECT_APPLICATION_DISPLAY_OPTIONS extends APPLICATION_DISPLAY_OPTIONS
    * Called from {@link job_statuses()}.
    * @access private
    */
-  function _init_job_statuses ()
+  protected function _init_job_statuses ()
   {
     $this->add_job_status (0, 'Open (New)', 'new', Job_status_kind_open, 0);
     $this->add_job_status (1, 'Reopened', 'reopened', Job_status_kind_open, 1);
@@ -275,7 +275,7 @@ class PROJECT_APPLICATION_DISPLAY_OPTIONS extends APPLICATION_DISPLAY_OPTIONS
    * Called from {@link job_status_map()}.
    * @access private
    */
-  function _init_job_status_map ()
+  protected function _init_job_status_map ()
   {
     /* The mapping below marks 'Patched', 'Fixed' and 'Released' entries as 'Closed' in a shipped release. */
     $this->set_job_status_mapping (array (6, 7, 8), 9);
@@ -287,18 +287,21 @@ class PROJECT_APPLICATION_DISPLAY_OPTIONS extends APPLICATION_DISPLAY_OPTIONS
    * @var array[PROPERTY_VALUE]
    */
   protected $_entry_kinds;
+
   /**
    * List of job priorities.
    * @see PROPERTY_VALUE
    * @var array[PROPERTY_VALUE]
    */
   protected $_job_priorities;
+
   /**
    * List of job statuses.
    * @see JOB_STATUS_VALUE
    * @var array[JOB_STATUS_VALUE]
    */
   protected $_job_statuses;
+
   /**
    * List of job status mappings.
    * @var JOB_STATUS_MAP
@@ -322,6 +325,7 @@ class JOB_STATUS_MAP extends WEBCORE_OBJECT
    * @var string
    */
   public $from;
+
   /**
    * Map statuses in 'map_from' to this status.
    * @var integer
@@ -333,7 +337,7 @@ class JOB_STATUS_MAP extends WEBCORE_OBJECT
    * @param array[integer] $from
    * @param integer $to
    */
-  function JOB_STATUS_MAP ($app, $from, $to)
+  public function JOB_STATUS_MAP ($app, $from, $to)
   {
     WEBCORE_OBJECT::WEBCORE_OBJECT ($app);
 
@@ -345,7 +349,7 @@ class JOB_STATUS_MAP extends WEBCORE_OBJECT
    * The name of the {@link $to} status.
    * @return string
    */
-  function to_status ()
+  public function to_status ()
   {
     $statuses = $this->app->display_options->job_statuses ();
     return $statuses [$this->to];

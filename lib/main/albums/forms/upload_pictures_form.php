@@ -52,12 +52,13 @@ class UPLOAD_PICTURES_FORM extends ID_BASED_FORM
    * @var string
    */
   public $button = 'Upload';
+
   /**
    * @var string
    */
   public $button_icon = '{icons}buttons/upload';
 
-  function UPLOAD_PICTURES_FORM ($folder)
+  public function UPLOAD_PICTURES_FORM ($folder)
   {
     ID_BASED_FORM::ID_BASED_FORM ($folder->context);
 
@@ -67,7 +68,7 @@ class UPLOAD_PICTURES_FORM extends ID_BASED_FORM
     $field->id = 'zipfile';
     $field->title = 'Zip file';
     $field->description = 'Please specify a zip file containing your pictures.';
-    $field->required = TRUE;
+    $field->required = true;
     $field->max_bytes = text_to_file_size ('30MB');
     $this->add_field ($field);
 
@@ -75,7 +76,7 @@ class UPLOAD_PICTURES_FORM extends ID_BASED_FORM
     $field->id = 'title';
     $field->title = 'Title';
     $field->description = 'Each picture entry will have this title. Use {#} to include the picture number and {file} to include the file name without the extension. For example, if the title is \'Picture {#} - {file}\', file1.jpg will have the title \'Picture 1 - file1\').';
-    $field->required = TRUE;
+    $field->required = true;
     $this->add_field ($field);
 
     $field = new BOOLEAN_FIELD ();
@@ -86,7 +87,7 @@ class UPLOAD_PICTURES_FORM extends ID_BASED_FORM
     $field = new DATE_TIME_FIELD ();
     $field->id = 'day';
     $field->title = 'Day';
-    $field->required = TRUE;
+    $field->required = true;
     $this->add_field ($field);
 
     $field = new BOOLEAN_FIELD ();
@@ -104,20 +105,20 @@ class UPLOAD_PICTURES_FORM extends ID_BASED_FORM
     $field = new INTEGER_FIELD ();
     $field->id = 'starting_index';
     $field->title = 'First number';
-    $field->required = TRUE;
+    $field->required = true;
     $field->description = 'Set the next number to use for {#} in the title (if uploading in multiple batches).';
     $field->min_value = 1;
     $this->add_field ($field);
   }
 
-  function load_with_defaults ()
+  public function load_with_defaults ()
   {
     parent::load_with_defaults ();
     $this->set_value ('day', $this->_folder->first_day);
     $this->set_value ('title', 'Picture {#} - {file}');
     $this->set_value ('thumbnail_size', 200);
-    $this->set_value ('create_thumbnail', TRUE);
-    $this->set_value ('read_exif', TRUE);
+    $this->set_value ('create_thumbnail', true);
+    $this->set_value ('read_exif', true);
     $this->set_value ('starting_index', 1);
   }
 
@@ -126,7 +127,7 @@ class UPLOAD_PICTURES_FORM extends ID_BASED_FORM
    * @param object $obj Object from which data was loaded. May be null.
    * @access private
    */
-  function _post_load_data ($obj) 
+  protected function _post_load_data ($obj) 
   {
     parent::_post_load_data ($obj);
     $this->set_enabled ('thumbnail_size', $this->value_for ('create_thumbnail'));
@@ -135,7 +136,7 @@ class UPLOAD_PICTURES_FORM extends ID_BASED_FORM
   /**
    * @access private
    */
-  function commit ($obj)
+  public function commit ($obj)
   {
     include_once ('albums/tasks/batch_create_pictures.php');
     $task = new BATCH_CREATE_PICTURES_TASK ($this->_folder);
@@ -157,25 +158,25 @@ class UPLOAD_PICTURES_FORM extends ID_BASED_FORM
   /**
    * @access private
    */
-  function _draw_scripts ()
+  protected function _draw_scripts ()
   {
     parent::_draw_scripts ();
 ?>
-  function on_click_thumbnail (ctrl)
+  public function on_click_thumbnail (ctrl)
   {
     ctrl.form.thumbnail_size.disabled = ! ctrl.checked;
   }
 <?php
   }
 
-  function _draw_controls ($renderer)
+  protected function _draw_controls ($renderer)
   {
     $renderer->start ();
     $renderer->draw_text_line_row ('title');
     $renderer->draw_text_line_row ('starting_index');
     $renderer->draw_separator ();
     $renderer->start_row ('Day');
-    $renderer->start_block (TRUE);
+    $renderer->start_block (true);
 
       $props = $renderer->make_list_properties ();
       $props->add_item ('Use date stored by a digital camera (if possible)', 1);

@@ -51,9 +51,9 @@ require_once ('webcore/util/image.php');
  */
 class NON_INTERNAL_EXIF_IMAGE extends IMAGE
 {
-  function NON_INTERNAL_EXIF_IMAGE ()
+  public function NON_INTERNAL_EXIF_IMAGE ()
   {
-    IMAGE::IMAGE (FALSE);
+    IMAGE::IMAGE (false);
   }
 }
 
@@ -66,7 +66,7 @@ class NON_INTERNAL_EXIF_IMAGE extends IMAGE
  */
 class EXIF_TEST_TASK extends TEST_TASK
 {
-  function _process_for ($name, $filename)
+  protected function _process_for ($name, $filename)
   {
     $this->_log ("Processing [$filename] for [$name]", Msg_type_info);
     $this_url = new FILE_URL (__FILE__);
@@ -81,7 +81,7 @@ class EXIF_TEST_TASK extends TEST_TASK
     {
       $image = new NON_INTERNAL_EXIF_IMAGE ();
     }
-    $image->set_file ($this_url->as_text (), TRUE);
+    $image->set_file ($this_url->as_text (), true);
     if ($image->properties->time_created->is_valid ())
     {
       $this->_log ('Extracted date/time: ' . $image->properties->time_created->as_iso (), Msg_type_info);
@@ -92,7 +92,7 @@ class EXIF_TEST_TASK extends TEST_TASK
     }
   }
 
-  function _run_tests ()
+  protected function _run_tests ()
   {
     $this->_process_for ('Sean', '105_0531.JPG');
     $this->_process_for ('Diana', 'CIMG0284.JPG');
@@ -104,13 +104,13 @@ class EXIF_TEST_TASK extends TEST_TASK
     $this->_process_for ('Gary (converted)', 'P8090103.jpg');
   }
 
-  function _execute ()
+  protected function _execute ()
   {
     $this->_run_tests ();
 
     /* Turn off PHP exif processing to force the third party fallback. */
   
-    $this->_use_internal_exif = FALSE;  
+    $this->_use_internal_exif = false;  
     $this->_run_tests ();
   }
 
@@ -118,13 +118,13 @@ class EXIF_TEST_TASK extends TEST_TASK
    * Initialize any loggers needed for the process.
    * @access private
    */
-  function _set_up_logging ()
+  protected function _set_up_logging ()
   {
     parent::_set_up_logging ();
     $this->_add_log_channel (Msg_channel_image);
   }
   
-  protected $_use_internal_exif = TRUE;
+  protected $_use_internal_exif = true;
 }
 
 ?>

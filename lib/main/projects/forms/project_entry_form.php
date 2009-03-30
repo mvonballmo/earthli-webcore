@@ -51,7 +51,7 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
   /**
    * @param PROJECT $folder Project in which to add or edit the PROJECT_ENTRY.
    */
-  function PROJECT_ENTRY_FORM ($folder)
+  public function PROJECT_ENTRY_FORM ($folder)
   {
     ENTRY_FORM::ENTRY_FORM ($folder);
 
@@ -67,20 +67,22 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
     $field = new ENUMERATED_FIELD ();
     $field->id = 'kind';
     $field->title = 'Kind';
-    $field->required = TRUE;
-    $field->sticky = TRUE;
+    $field->required = true;
+    $field->sticky = true;
     $kinds = $this->app->display_options->entry_kinds ();
     if (sizeof ($kinds))
     {
       foreach ($kinds as $kind)
+      {
         $field->add_value ($kind->value);
+      }
     }
     $this->add_field ($field);
 
     $field = new INTEGER_FIELD ();
     $field->id = 'component_id';
     $field->title = 'Component';
-    $field->sticky = TRUE;
+    $field->sticky = true;
     $this->add_field ($field);
 
     $branch_query = $this->_folder->branch_query ();
@@ -88,7 +90,9 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
     $this->default_branch_id = $this->_folder->trunk_id;
 
     foreach ($this->branches as $branch)
+    {
       $this->_add_fields_for_branch ($branch);
+    }
 
     $field = new INTEGER_FIELD ();
     $field->id = "main_branch_id";
@@ -108,7 +112,7 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
    * Load initial properties from this PROJECT_ENTRY.
    * @param PROJECT_ENTRY $obj
    */
-  function load_from_object ($obj)
+  public function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
 
@@ -121,11 +125,13 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
 
     $branch_query = $obj->branch_info_query ();
     $branch_infos = $branch_query->indexed_objects ();
-    foreach ($branch_infos as $id => $branch_info)
+    foreach ($branch_infos as $branch_info)
+    {
       $this->_load_from_branch_info ($branch_info);
+    }
   }
 
-  function load_with_defaults ()
+  public function load_with_defaults ()
   {
     parent::load_with_defaults ();
 
@@ -144,13 +150,13 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
    * @param PROJECT_ENTRY $obj
    * @access private
    */
-  function _post_validate ($obj)
+  protected function _post_validate ($obj)
   {
     parent::_post_validate ($obj);
 
     $c = sizeof ($this->branches);
     $i = 0;
-    $selected = FALSE;
+    $selected = false;
 
     while (! $selected && ($i < $c))
     {
@@ -183,7 +189,7 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
    * @param PROJECT_ENTRY $obj
    * @access private
    */
-  function commit ($obj)
+  public function commit ($obj)
   {
     parent::commit ($obj);
     $obj->store_branch_infos ();
@@ -191,10 +197,10 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
 
   /**
    * Store the form's values for this job.
-    * @param PROJECT_ENTRY $obj
-    * @access private
-    */
-  function _store_to_object ($obj)
+   * @param PROJECT_ENTRY $obj
+   * @access private
+   */
+  protected function _store_to_object ($obj)
   {
     $main_branch_id = $this->value_for ('main_branch_id');
 
@@ -226,11 +232,11 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
    * @param integer $release_id
    * @access private
    */
-  function _set_default_branch ($branch_id, $release_id = 0)
+  protected function _set_default_branch ($branch_id, $release_id = 0)
   {
     $this->set_value ('main_branch_id', $branch_id);
-    $this->set_value ("branch_{$branch_id}_enabled", TRUE);
-    $this->set_enabled ("branch_{$branch_id}_release_id", TRUE);
+    $this->set_value ("branch_{$branch_id}_enabled", true);
+    $this->set_enabled ("branch_{$branch_id}_release_id", true);
     $this->set_value ("branch_{$branch_id}_release_id", $release_id);
   }
 
@@ -239,7 +245,7 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
    * @param BRANCH $branch
    * @access private
    */
-  function _add_fields_for_branch ($branch)
+  protected function _add_fields_for_branch ($branch)
   {
     $field = new BOOLEAN_FIELD ();
     $field->id = "branch_{$branch->id}_enabled";
@@ -260,10 +266,10 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
    * @param PROJECT_ENTRY_BRANCH_INFO $branch_info
    * @access private
    */
-  function _load_from_branch_info ($branch_info)
+  protected function _load_from_branch_info ($branch_info)
   {
     $id = $branch_info->branch_id;
-    $show_branch = TRUE;
+    $show_branch = true;
 
     if ($this->cloning ())
     {
@@ -282,7 +288,7 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
     }
 
     $this->set_value ("branch_{$id}_enabled", $show_branch);
-    $this->set_enabled ("branch_{$id}_release_id", TRUE);
+    $this->set_enabled ("branch_{$id}_release_id", true);
     $this->set_value ("branch_{$id}_release_id", $branch_info->release_id);
   }
 
@@ -292,7 +298,7 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
    * @param PROJECT_ENTRY_BRANCH_INFO $branch_info
    * @access private
    */
-  function _store_to_branch_info ($branch_info)
+  protected function _store_to_branch_info ($branch_info)
   {
     $branch_info->release_id = $this->value_for ("branch_{$branch_info->branch_id}_release_id");
   }
@@ -304,10 +310,10 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
    * @param HISTORY_ITEM $history_item
    * @access private
    */
-  function _adjust_history_item ($history_item)
+  protected function _adjust_history_item ($history_item)
   {
     parent::_adjust_history_item ($history_item);
-    $history_item->compare_branches = TRUE;
+    $history_item->compare_branches = true;
   }
 
   /**
@@ -315,7 +321,7 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
    * This should just output some JavaScript code as the body of the 'on_click_branch (ctrl, id)' function.
    * @access private
    */
-  function _draw_branch_scripts ()
+  protected function _draw_branch_scripts ()
   {
 ?>
     var settings = document.getElementById ('branch_' + id + '_settings');
@@ -357,11 +363,11 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
   /**
    * @access private
    */
-  function _draw_scripts ()
+  protected function _draw_scripts ()
   {
     parent::_draw_scripts ();
 ?>
-  function on_click_branch (ctrl, id)
+  public function on_click_branch (ctrl, id)
   {
     <?php $this->_draw_branch_scripts (); ?>
   }
@@ -373,7 +379,7 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
    * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_kind_controls ($renderer)
+  protected function _draw_kind_controls ($renderer)
   {
     $kinds = $this->app->display_options->entry_kinds ();
     if (sizeof ($kinds))
@@ -391,7 +397,7 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
     }
   }
 
-  function _draw_component_controls ($renderer)
+  protected function _draw_component_controls ($renderer)
   {
     $props = $renderer->make_list_properties ();
     $props->add_item ('[None]', 0);
@@ -399,7 +405,9 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
     $component_query = $this->_folder->component_query ();
     $comps = $component_query->objects ();
     foreach ($comps as $comp)
+    {
       $props->add_item ($comp->title_as_plain_text (), $comp->id);
+    }
 
     $renderer->draw_drop_down_row ('component_id', $props);
   }
@@ -410,7 +418,7 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
    * @param RELEASE $release
    * @access private
    */
-  function _branch_is_locked ($branch, $release)
+  protected function _branch_is_locked ($branch, $release)
   {
     return $branch->locked () || (isset ($release) && $release->locked () && ! $this->cloning ());
   }
@@ -424,7 +432,7 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
    * @param RELEASE $release Release in this branch (may be empty).
    * @access private
    */
-  function _draw_branch_info_controls ($branch, $renderer, $visible, $release)
+  protected function _draw_branch_info_controls ($branch, $renderer, $visible, $release)
   {
     if ($this->_branch_is_locked ($branch, $release))
     {
@@ -454,6 +462,8 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
 
       $release_query = $branch->pending_release_query (Release_not_locked);
       $releases = $release_query->objects ();
+      
+      $planned_release = null;
 
       if (sizeof ($releases))
       {
@@ -507,7 +517,7 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
    * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_branch_controls ($renderer)
+  protected function _draw_branch_controls ($renderer)
   {
     if (sizeof ($this->branches))
     {
@@ -587,7 +597,7 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
    * Draws the description with project-specific help-text.
    * @access private
    */
-  function _draw_description_field ()
+  protected function _draw_description_field ()
   {
     $this->_draw_text_box ('description', '35em', '8em'); ?>
     <div class="notes" style="width: 40em">A short description that is shown in change logs and job lists.
@@ -600,7 +610,7 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
    * Draws the extra description with project-specific help-text.
    * @access private
    */
-  function _draw_extra_description_field ()
+  protected function _draw_extra_description_field ()
   {
 //    $this->_draw_button ('Preview', "preview_text (document.$this->name.extra_description)");
     $this->_draw_text_box ('extra_description', '35em', '15em'); ?>

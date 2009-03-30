@@ -54,18 +54,21 @@ class THEME extends RENDERABLE
    * @var string
    */
   public $title;
+
   /**
    * The name of the PHP class to use to render this theme.
-    *  In addition to specifyin icon sets and style sheets, a theme can also specify which renderer
-    * will layout the basic structure of the page (the header/body/footer).
-    * @var string
-    */
+   *  In addition to specifyin icon sets and style sheets, a theme can also specify which renderer
+   * will layout the basic structure of the page (the header/body/footer).
+   * @var string
+   */
   public $renderer_class_name;
+
   /**
    * Name of the CSS Stylesheet for the colors, borders, spacing, etc.
-    * @var string
-    */
+   * @var string
+   */
   public $main_CSS_file_name;
+
   /**
    * Name of the CSS font-face stylesheet to use.
    * The font is completely separated from the stylesheet, so that users can mix and match font-styles
@@ -73,6 +76,7 @@ class THEME extends RENDERABLE
    * @var string
    */
   public $font_name_CSS_file_name;
+
   /**
    * Name of the CSS font-size stylesheet to use.
    * The font is completely separated from the stylesheet, so that users can mix and match font-sizes
@@ -80,18 +84,21 @@ class THEME extends RENDERABLE
    * @var string
    */
   public $font_size_CSS_file_name;
+
   /**
    * Path to icons (appended to {@link Folder_name_icons} folder).
-    * Each theme can provide a specialized set of icons.
-    * @var string
-    */
+   * Each theme can provide a specialized set of icons.
+   * @var string
+   */
   public $icon_set;
+
   /**
    * Default extension for images in this theme.
-    * Specify which set of icons to use within the path.
-    * @var string
-    */
+   * Specify which set of icons to use within the path.
+   * @var string
+   */
   public $icon_extension;
+
   /**
    * @var DATE_TIME
    */
@@ -100,7 +107,7 @@ class THEME extends RENDERABLE
   /**
    * @param CONTEXT $context
    */
-  function THEME ($context)
+  public function THEME ($context)
   {
     RENDERABLE::RENDERABLE ($context);
     $this->time_created = $context->make_date_time ();
@@ -110,7 +117,7 @@ class THEME extends RENDERABLE
    * Return the URL for a thumbnail of this theme.
    * @return string
    */
-  function snapshot_thumbnail_name ()
+  public function snapshot_thumbnail_name ()
   {
     return $this->_resource_name ('snapshot_tn.png');
   }
@@ -119,7 +126,7 @@ class THEME extends RENDERABLE
    * Return the URL for a full-size snapshot of the theme.
    * @return string
    */
-  function snapshot_name ()
+  public function snapshot_name ()
   {
     return $this->_resource_name ('snapshot.png');
   }
@@ -127,7 +134,7 @@ class THEME extends RENDERABLE
   /**
    * @return string
    */
-  function raw_title ()
+  public function raw_title ()
   {
     return $this->title;
   }
@@ -135,7 +142,7 @@ class THEME extends RENDERABLE
   /**
    * @param DATABASE $db Database from which to load values.
    */
-  function load ($db)
+  public function load ($db)
   {
     parent::load ($db);
     $this->title = $db->f ('title');
@@ -151,7 +158,7 @@ class THEME extends RENDERABLE
   /**
    * @param SQL_STORAGE $storage Store values to this object.
    */
-  function store_to ($storage)
+  public function store_to ($storage)
   {
     parent::store_to ($storage);
     $tname = $this->_table_name ();
@@ -169,7 +176,7 @@ class THEME extends RENDERABLE
    * Name of the home page name for this object.
    * @return string
    */
-  function page_name ()
+  public function page_name ()
   {
     return $this->snapshot_name ();
   }
@@ -179,7 +186,7 @@ class THEME extends RENDERABLE
    * @return string
    * @access private
    */
-  function _table_name ()
+  protected function _table_name ()
   {
     return $this->page->theme_options->table_name;
   }
@@ -190,7 +197,7 @@ class THEME extends RENDERABLE
    * @return string
    * @access private
    */
-  function _resource_name ($file_name)
+  protected function _resource_name ($file_name)
   {
     $url = new URL ($this->main_CSS_file_name);
     $url->replace_extension ('');
@@ -205,7 +212,7 @@ class THEME extends RENDERABLE
    * @return object
    * @access private
    */
-  function _default_handler_for ($handler_type, $options = null)
+  protected function _default_handler_for ($handler_type, $options = null)
   {
     switch ($handler_type)
     {

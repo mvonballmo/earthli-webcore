@@ -35,7 +35,7 @@ class RECIPES_15_16_MIGRATOR_TASK extends UPGRADE_PER_APP_25_26_TASK
   public $version_from = '1.5.0';
   public $version_to = '1.6.0';
 
-  function _execute ()
+  protected function _execute ()
   {
     $this->add_attachments ('recipe_attachments', 'recipe_actions');
     $this->add_attachment_permissions('recipe_folder_permissions', 'recipe_user_permissions');

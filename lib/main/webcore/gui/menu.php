@@ -55,7 +55,7 @@ class MENU extends WEBCORE_OBJECT
    * Create a menu in the given context.
    * @param CONTEXT $context
    */  
-  function MENU ($context)
+  public function MENU ($context)
   {
     WEBCORE_OBJECT::WEBCORE_OBJECT ($context);
     
@@ -72,12 +72,14 @@ class MENU extends WEBCORE_OBJECT
    * Number of items in the menu.
    * @return integer
    */
-  function size ()
+  public function size ()
   {
     if (isset ($this->_commands))
     {
       return $this->_commands->size ();
     }
+    
+    return 0;
   }
 
   /**
@@ -85,7 +87,7 @@ class MENU extends WEBCORE_OBJECT
    * @param string $CSS_class
    * @see MENU_RENDERER::display_as_toolbar()
    */
-  function display_as_toolbar ($CSS_class = 'menu-bar-top')
+  public function display_as_toolbar ($CSS_class = 'menu-bar-top')
   {
     if (isset ($this->_commands))
     {
@@ -97,7 +99,7 @@ class MENU extends WEBCORE_OBJECT
    * Render the menu as HTML.
    * @see MENU_RENDERER::display()
    */
-  function display ()
+  public function display ()
   {
     if (isset ($this->_commands))
     {
@@ -109,7 +111,7 @@ class MENU extends WEBCORE_OBJECT
    * Return the menu as HTML.
    * Use {@link display()} to show the menu directly.
    */
-  function as_html ()
+  public function as_html ()
   {
     ob_start ();
       $this->display ();
@@ -126,7 +128,7 @@ class MENU extends WEBCORE_OBJECT
    * @param string $selected Renders as selected without the link if
    * <code>True</code>.
    */
-  function append ($title, $url = '', $icon = '', $selected = FALSE)
+  public function append ($title, $url = '', $icon = '', $selected = false)
   {
     $this->_commands->append ($this->_make_command ($title, $url, $icon, $selected));
   }
@@ -139,7 +141,7 @@ class MENU extends WEBCORE_OBJECT
    * @param string $selected Renders as selected without the link if
    * <code>True</code>.
    */
-  function prepend ($title, $url = '', $icon = '', $selected = FALSE)
+  public function prepend ($title, $url = '', $icon = '', $selected = false)
   {
     $this->_commands->prepend ($this->_make_command ($title, $url, $icon, $selected));
   }
@@ -149,7 +151,7 @@ class MENU extends WEBCORE_OBJECT
    * @param MENU $other
    * @access private
    */
-  function _copy_from ($other)
+  protected function _copy_from ($other)
   {
     $this->renderer = $other->renderer->make_clone ();
     $this->_commands = $other->_commands->make_clone ();
@@ -164,7 +166,7 @@ class MENU extends WEBCORE_OBJECT
    * <code>True</code>.
    * @access private
    */
-  function _make_command ($title, $url, $icon, $selected)
+  protected function _make_command ($title, $url, $icon, $selected)
   {
     $Result = $this->_commands->make_command ();
     $Result->id = 'item_' . mt_rand ();

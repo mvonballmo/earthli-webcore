@@ -53,7 +53,7 @@ class BRANCH_COMMANDS extends COMMANDS
   /**
    * @param BRANCH $obj Configure commands for this branch.
    */
-  function BRANCH_COMMANDS ($obj)
+  public function BRANCH_COMMANDS ($obj)
   {
     COMMANDS::COMMANDS ($obj->app);
 
@@ -97,7 +97,7 @@ class BRANCH_COMMANDS extends COMMANDS
     $cmd->title = 'Print';
     $cmd->link = "view_branch_change_log.php?id=$obj->id&printable=1";
     $cmd->icon = '{icons}buttons/print';
-    $cmd->executable = TRUE;
+    $cmd->executable = true;
     $cmd->importance = Command_importance_high - Command_importance_increment;
     $this->append ($cmd);
 
@@ -115,7 +115,7 @@ class BRANCH_COMMANDS extends COMMANDS
     $cmd->title = 'View change log';
     $cmd->link = "view_branch_change_log.php?id=$obj->id";
     $cmd->icon = '{app_icons}buttons/change_log';
-    $cmd->executable = TRUE;
+    $cmd->executable = true;
     $cmd->importance = Command_importance_high;
     $this->append ($cmd);
 

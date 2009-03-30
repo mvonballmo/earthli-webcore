@@ -52,7 +52,7 @@ class SEND_OBJECT_IN_FOLDER_FORM extends SEND_MULTIPLE_MAIL_FORM
   /**
    * @param APPLICATION $app Main application.
    */
-  function SEND_OBJECT_IN_FOLDER_FORM ($app)
+  public function SEND_OBJECT_IN_FOLDER_FORM ($app)
   {
     SEND_MULTIPLE_MAIL_FORM::SEND_MULTIPLE_MAIL_FORM ($app);
 
@@ -60,7 +60,7 @@ class SEND_OBJECT_IN_FOLDER_FORM extends SEND_MULTIPLE_MAIL_FORM
     $field->id = 'id';
     $field->title = 'ID';
     $field->min_value = 1;
-    $field->visible = FALSE;
+    $field->visible = false;
     $this->add_field ($field);
 
     $field = new INTEGER_FIELD ();
@@ -82,7 +82,7 @@ class SEND_OBJECT_IN_FOLDER_FORM extends SEND_MULTIPLE_MAIL_FORM
    * Load initial properties from this object.
    * @param OBJECT_IN_FOLDER $obj
    */
-  function load_from_object ($obj)
+  public function load_from_object ($obj)
   {
     $folder = $obj->parent_folder ();
     $this->set_value ('id', $obj->id);
@@ -90,7 +90,7 @@ class SEND_OBJECT_IN_FOLDER_FORM extends SEND_MULTIPLE_MAIL_FORM
     $this->load_with_defaults ();
   }
 
-  function load_with_defaults ()
+  public function load_with_defaults ()
   {
     parent::load_with_defaults ();
     $this->set_value ('excerpt_type', 2);
@@ -99,9 +99,9 @@ class SEND_OBJECT_IN_FOLDER_FORM extends SEND_MULTIPLE_MAIL_FORM
 
   /**
    * How much of the object's descriptions does the user wish to send?
-    * @return integer
-    */
-  function excerpt_size ()
+   * @return integer
+   */
+  public function excerpt_size ()
   {
     switch ($this->value_for ('excerpt_type'))
     {
@@ -109,6 +109,8 @@ class SEND_OBJECT_IN_FOLDER_FORM extends SEND_MULTIPLE_MAIL_FORM
       return 0;
     case 2:
       return $this->value_for ('excerpt_size');
+    default:
+      throw new UNKNOWN_VALUE_EXCEPTION($this->value_for ('excerpt_type'));
     }
   }
 
@@ -118,7 +120,7 @@ class SEND_OBJECT_IN_FOLDER_FORM extends SEND_MULTIPLE_MAIL_FORM
    * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_options ($renderer)
+  protected function _draw_options ($renderer)
   {
     parent::_draw_options ($renderer);
 
@@ -140,7 +142,7 @@ class SEND_OBJECT_IN_FOLDER_FORM extends SEND_MULTIPLE_MAIL_FORM
    * @return CONTENT_OBJECT_MAIL_RENDERER
    * @access private
    */
-  function _make_obj_renderer ($obj)
+  protected function _make_obj_renderer ($obj)
   {
     $class_name = $this->context->final_class_name ('CONTENT_OBJECT_MAIL_RENDERER', 'webcore/mail/content_object_mail_renderer.php');
     return new $class_name ($this->context);

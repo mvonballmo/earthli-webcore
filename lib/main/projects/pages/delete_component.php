@@ -44,7 +44,7 @@ http://www.earthli.com/software/webcore/projects
     $form->process_existing ($comp);
     if ($form->committed ())
     {
-      if ($App->login->is_allowed (Privilege_set_component, Privilege_hidden, $folder, $creator))
+      if ($App->login->is_allowed (Privilege_set_component, Privilege_hidden, $folder))
       {
         $App->return_to_referer ($comp->home_page ());
       }

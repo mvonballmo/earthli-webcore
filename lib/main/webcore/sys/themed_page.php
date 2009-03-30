@@ -57,12 +57,14 @@ class THEME_SETTINGS extends WEBCORE_OBJECT
    * @var integer
    */
   public $id = 0;
+
   /**
    * User-friendly title of the theme.
    * This is loaded and stored so that the current theme name can be displayed.
    * @var string
    */
   public $title = 'Default';
+
   /**
    * Name of the class used to render the page layout.
    * This governs where the basic page elements (like header, footer, etc.) are
@@ -72,12 +74,14 @@ class THEME_SETTINGS extends WEBCORE_OBJECT
    * @var string
    */
   public $renderer_class_name = '';
+
   /**
    * Name of the main style sheet.
    * This governs which theme-specific stylesheet is used in a page.
    * @var string
    */
   public $main_CSS_file_name = '{themes}/ice';
+
   /**
    * Name of the font-face stylesheet to use.
    * The font is completely separated from the stylesheet, so that users can mix and match font-styles
@@ -85,6 +89,7 @@ class THEME_SETTINGS extends WEBCORE_OBJECT
    * @var string
    */
   public $font_name_CSS_file_name = '{styles}fonts/verdana';
+
   /**
    * Name of the font-size stylesheet to use.
    * The font is completely separated from the stylesheet, so that users can mix and match font-sizes
@@ -92,12 +97,14 @@ class THEME_SETTINGS extends WEBCORE_OBJECT
    * @var string
    */
   public $font_size_CSS_file_name = '{styles}core/small';
+
   /**
    *  Path to the icons folder.
    * This is always relative to the page's icon folder, specified in {@link PAGE_FOLDER_NAMES}.
    * @var string
    */
   public $icon_set = 'webcore_png';
+
   /**
    *  Default extension to use for icons.
    * Icons should, in general, not specify an extension, so that this default can be appended
@@ -106,6 +113,7 @@ class THEME_SETTINGS extends WEBCORE_OBJECT
    * @var string
    */
   public $icon_extension = 'png';
+
   /**
    * Apply theme to form elements (controls)?
    * If this is false, then an additional CSS style sheet is loaded with each page, that applies
@@ -113,13 +121,13 @@ class THEME_SETTINGS extends WEBCORE_OBJECT
    * to eliminate form styling so that browser page controls look uniform with the browser and/or
    * operating system.
    */
-  public $dont_apply_to_forms = FALSE;
+  public $dont_apply_to_forms = false;
 
   /**
    * Load theme from a client-side storage (cookie).
    * @param STORAGE $storage
    */
-  function load_from_client ($storage)
+  public function load_from_client ($storage)
   {
     $this->id = $storage->value ('theme_id');
     $this->title = $storage->value ('theme_title');
@@ -136,7 +144,7 @@ class THEME_SETTINGS extends WEBCORE_OBJECT
    * Store theme to a client-side storage (cookie).
    * @param STORAGE $storage
    */
-  function store_to_client ($storage)
+  public function store_to_client ($storage)
   {
     $storage->set_value ('theme_id', $this->id);
     $storage->set_value ('theme_title', $this->title);
@@ -149,7 +157,7 @@ class THEME_SETTINGS extends WEBCORE_OBJECT
     $storage->set_value ('theme_dont_apply_to_forms', $this->dont_apply_to_forms);
   }
 
-  function clear ()
+  public function clear ()
   {
     $this->id = 0;
     $this->renderer_class_name = '';
@@ -158,14 +166,14 @@ class THEME_SETTINGS extends WEBCORE_OBJECT
     $this->font_size_CSS_file_name = '';
     $this->icon_set = '';
     $this->icon_extension = '';
-    $this->dont_apply_to_forms = FALSE;
+    $this->dont_apply_to_forms = false;
   }
 
   /**
    * Load any empty values from the default theme.
    * @param THEME_SETTINGS $default
    */
-  function load_missing_values_from ($default)
+  public function load_missing_values_from ($default)
   {
     if (! $this->main_CSS_file_name)
     {
@@ -200,7 +208,7 @@ class THEME_SETTINGS extends WEBCORE_OBJECT
    * @param THEME_SETTINGS $other
    * @return boolean
    */
-  function equals ($other)
+  public function equals ($other)
   {
     return (($this->main_CSS_file_name == $other->main_CSS_file_name)
             && ($this->font_name_CSS_file_name == $other->font_name_CSS_file_name)
@@ -212,7 +220,7 @@ class THEME_SETTINGS extends WEBCORE_OBJECT
    * Copy all values from 'other'.
    * @param THEME_SETTINGS $other
    */
-  function copy_from ($other)
+  public function copy_from ($other)
   {
     $this->id = $other->id;
     $this->title = $other->title;
@@ -237,6 +245,7 @@ class THEME_OPTIONS
    * @var integer
    */
   public $duration = 365;
+
   /**
    * In which database table are themes stored?
    * Theme information is stored in a database table, but is only accessed when the user elects
@@ -248,7 +257,7 @@ class THEME_OPTIONS
   /**
    * A list of the font name themes available.
    */
-  function font_names ()
+  public function font_names ()
   {
     if (! isset ($this->_font_names))
     {
@@ -260,7 +269,7 @@ class THEME_OPTIONS
   /**
    * A list of the font name themes available.
    */
-  function font_sizes ()
+  public function font_sizes ()
   {
     if (! isset ($this->_font_sizes))
     {
@@ -276,7 +285,7 @@ class THEME_OPTIONS
    * @param string $title
    * @param string $file_name
    */
-  function add_font_name ($title, $file_name)
+  public function add_font_name ($title, $file_name)
   {
    $this->_font_names [$title] = $file_name;
   }
@@ -288,7 +297,7 @@ class THEME_OPTIONS
    * @param string $title
    * @param string $file_name
    */
-  function add_font_size ($title, $file_name)
+  public function add_font_size ($title, $file_name)
   {
     $this->_font_sizes [$title] = $file_name;
   }
@@ -298,7 +307,7 @@ class THEME_OPTIONS
    * Called from {@link font_names()}.
    * @access private
    */
-  function _init_font_names ()
+  protected function _init_font_names ()
   {
     $this->add_font_name ('Arial', '{styles}fonts/arial');
     $this->add_font_name ('Courier', '{styles}fonts/courier');
@@ -314,7 +323,7 @@ class THEME_OPTIONS
    * Called from {@link font_sizes()}.
    * @access private
    */
-  function _init_font_sizes ()
+  protected function _init_font_sizes ()
   {
     $this->add_font_size ('Small', '{styles}core/small');
     $this->add_font_size ('Medium', '{styles}core/medium');
@@ -326,6 +335,7 @@ class THEME_OPTIONS
    * @access private
    */
   protected $_font_names;
+
   /**
    * @var array[string,string]
    * @access private
@@ -349,21 +359,25 @@ class THEMED_PAGE extends PAGE
    * @var THEME_SETTINGS
    */
   public $theme;
+
   /**
    * theme settings retrieved from storage.
    * @var THEME_SETTINGS
    */
   public $stored_theme;
+
   /**
    * default theme settings.
    * used with 'stored_theme' to create 'theme'
    * @var THEME_SETTINGS
    */
   public $default_theme;
+
   /**
    * @var THEME_OPTIONS
    */
   public $theme_options;
+
   /**
    * False is the theme could not be loaded.
    * If the storage mechanism changes for themes, {@link validate_theme()} makes
@@ -371,12 +385,12 @@ class THEMED_PAGE extends PAGE
    * False.
    * @var boolean
    */
-  public $stored_theme_is_valid = TRUE;
+  public $stored_theme_is_valid = true;
 
   /**
    * @param ENVIRONMENT $env Global environment.
    */
-  function THEMED_PAGE ($env)
+  public function THEMED_PAGE ($env)
   {
     PAGE::PAGE ($env);
 
@@ -396,7 +410,7 @@ class THEMED_PAGE extends PAGE
 
     if ($browser->is (Browser_ie))
     {
-      $this->default_theme->dont_apply_to_forms = TRUE;
+      $this->default_theme->dont_apply_to_forms = true;
     }
   }
 
@@ -404,7 +418,7 @@ class THEMED_PAGE extends PAGE
    * Add classes to the {@link $classes} object factory.
    * @access private
    */
-  function _initialize_class_registry ()
+  protected function _initialize_class_registry ()
   {
     parent::_initialize_class_registry ();
 
@@ -414,7 +428,7 @@ class THEMED_PAGE extends PAGE
   /**
    * Adjust theme settings to optimize printing.
    */
-  function set_printable ()
+  public function set_printable ()
   {
     parent::set_printable ();
     $this->theme->main_CSS_file_name = '{' . Folder_name_themes . '}/printable';
@@ -425,9 +439,9 @@ class THEMED_PAGE extends PAGE
    * Fill in values for {@link $stored_theme} from the client.
    * Also sets the value of {@link $stored_theme_is_valid}.
    */
-  function load_theme ()
+  public function load_theme ()
   {
-    $this->storage->load_multiple_values ($this->storage_options->theme_settings_name, FALSE);
+    $this->storage->load_multiple_values ($this->storage_options->theme_settings_name, false);
     $this->stored_theme->load_from_client ($this->storage);
     $this->theme = $this->stored_theme;
 
@@ -450,17 +464,17 @@ class THEMED_PAGE extends PAGE
    * the theme is marked as invalid and the default theme is used. The default renderer displays
    * a message to the user to indicate that the theme was reverted.
    */
-  function validate_theme ()
+  public function validate_theme ()
   {
-    if (strpos ($this->theme->main_CSS_file_name, '/') === FALSE)
+    if (strpos ($this->theme->main_CSS_file_name, '/') === false)
     {
       $this->theme->main_CSS_file_name = '';
     }
-    if (strpos ($this->theme->font_name_CSS_file_name, '/') === FALSE)
+    if (strpos ($this->theme->font_name_CSS_file_name, '/') === false)
     {
       $this->theme->font_name_CSS_file_name = '';
     }
-    if (strpos ($this->theme->font_size_CSS_file_name, '/') === FALSE)
+    if (strpos ($this->theme->font_size_CSS_file_name, '/') === false)
     {
       $this->theme->font_size_CSS_file_name = '';
     }
@@ -470,7 +484,7 @@ class THEMED_PAGE extends PAGE
    * All themes for this page.
    * @return THEME_QUERY
    */
-  function theme_query ()
+  public function theme_query ()
   {
     return $this->make_object ('theme_query', 'THEME_QUERY', 'webcore/db/theme_query.php');
   }
@@ -479,7 +493,7 @@ class THEMED_PAGE extends PAGE
    * Set a new stored theme name.
    * @param string $id Name of the new theme (if empty, resets value to default)
    * */
-  function set_theme_main ($id)
+  public function set_theme_main ($id)
   {
     if ($id != $this->stored_theme->id)
     {
@@ -498,13 +512,13 @@ class THEMED_PAGE extends PAGE
 
         /* optional style sheets (maintain default if not specified) */
 
-        $this->_apply_theme_setting ('font_name_CSS_file_name', $theme->font_name_CSS_file_name, FALSE);
-        $this->_apply_theme_setting ('font_size_CSS_file_name', $theme->font_size_CSS_file_name, FALSE);
+        $this->_apply_theme_setting ('font_name_CSS_file_name', $theme->font_name_CSS_file_name, false);
+        $this->_apply_theme_setting ('font_size_CSS_file_name', $theme->font_size_CSS_file_name, false);
 
         /* optional icon styles (maintain default if not specified) */
 
-        $this->_apply_theme_setting ('icon_set', $theme->icon_set, FALSE);
-        $this->_apply_theme_setting ('icon_extension', $theme->icon_extension, FALSE);
+        $this->_apply_theme_setting ('icon_set', $theme->icon_set, false);
+        $this->_apply_theme_setting ('icon_extension', $theme->icon_extension, false);
 
         $this->store_to_client ();
       }
@@ -517,32 +531,32 @@ class THEMED_PAGE extends PAGE
       }
     }
 
-    $this->stored_theme_is_valid = TRUE;
+    $this->stored_theme_is_valid = true;
   }
 
   /**
    * Set a new stored theme font name.
-    * @param string $name Name of the new theme font (if empty, resets value to default)
-    */
-  function set_theme_font_name ($url)
+   * @param string $name Name of the new theme font (if empty, resets value to default)
+   */
+  public function set_theme_font_name ($url)
   {
     $this->_apply_theme_setting ('font_name_CSS_file_name', $url);
   }
 
   /**
    * Set a new stored theme font size.
-    * @param string $size Name of the new theme size (if empty, resets value to default)
-    */
-  function set_theme_font_size ($url)
+   * @param string $size Name of the new theme size (if empty, resets value to default)
+   */
+  public function set_theme_font_size ($url)
   {
     $this->_apply_theme_setting ('font_size_CSS_file_name', $url);
   }
 
   /**
    * Set whether to apply the theme to form controls.
-    * @param string $value
-    */
-  function set_theme_dont_apply_to_forms ($value)
+   * @param string $value
+   */
+  public function set_theme_dont_apply_to_forms ($value)
   {
     $this->_apply_theme_setting ('dont_apply_to_forms', $value);
   }
@@ -551,7 +565,7 @@ class THEMED_PAGE extends PAGE
    * Save the current theme settings to the client.
    * @access private
    */
-  function store_to_client ()
+  public function store_to_client ()
   {
     $this->storage->expire_in_n_days ($this->theme_options->duration);
     $this->storage->start_multiple_value ($this->storage_options->theme_settings_name);
@@ -569,7 +583,7 @@ class THEMED_PAGE extends PAGE
    * @param boolean $store_immediately
    * @access private
    */
-  function _apply_theme_setting ($setting_name, $value, $store_immediately = TRUE)
+  protected function _apply_theme_setting ($setting_name, $value, $store_immediately = true)
   {
     if ($value != $this->stored_theme->$setting_name)
     {
@@ -599,7 +613,7 @@ class THEMED_PAGE extends PAGE
    * @param string $path New path.
    * @access private
    */
-  function _on_icon_alias_changed ($resource_manager, $alias, $path)
+  public function _on_icon_alias_changed ($resource_manager, $alias, $path)
   {
     parent::_on_icon_alias_changed ($resource_manager, $alias, $path);
     if (isset ($this->default_theme))

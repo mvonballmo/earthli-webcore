@@ -55,17 +55,20 @@ class FORM_LIST_ITEM
    * @var string
    */
   public $title = '';
+
   /**
    * Value of item posted with the form.
    * @var string
    */
   public $value;
+
   /**
    * Is this item enabled?
    * This property is not used by all control renderers. If the item is disabled, it is not selectable.
    * @var boolean
    */
-  public $enabled = TRUE;
+  public $enabled = true;
+
   /**
    * Additional non-label text.
    * This text is formatted with the item, but is not enclosed within the label for the control. This
@@ -73,12 +76,14 @@ class FORM_LIST_ITEM
    * @var string
    */
   public $text = '';
+
   /**
    * Descriptive text displayed after the item.
    * This text is not included in the label for the control and is renderered only by the list box in
    * a paragraph following the control and title.
    */
   public $description = '';
+
   /**
    * Script used by this item (if applicable).
    * Some items, like checkboxes or radio buttons can have their own click scripts.
@@ -86,13 +91,14 @@ class FORM_LIST_ITEM
    * @var string
    */
   public $on_click_script = null;
+
   /**
    * Wraps text to the right of the control only.
    * If this is false, text can wrap underneath the control. If True, the control is placed in a block
    * to the left of another block, which contains the text. Overrides the value set in the list properties.
    * @var boolean
    */
-  public $smart_wrapping = FALSE;
+  public $smart_wrapping = false;
 }
 
 /**
@@ -132,18 +138,21 @@ class FORM_LIST_PROPERTIES
    * @var string
    */
   public $width = null;
+
   /**
    * How many items at once should be shown?
    * Used by the list-box.
    * @var integer
    */
   public $height = 5;
+
   /**
    * JavaScript to call when the control is clicked or changed.
    * Used by radio buttons and checkboxes when clicked; used by drop-downs when changed.
    * @var string
    */
   public $on_click_script = null;
+
   /**
    * List of items for this control.
    * Do not add items to this list directly. Use {@link add_item()} instead.
@@ -151,12 +160,14 @@ class FORM_LIST_PROPERTIES
    * @see FORM_LIST_ITEM
    */
   public $items = array ();
+
   /**
    * How many items to show one one line.
    * Only some control types will use this.
    * @var integer
    */
   public $items_per_row = 1;
+
   /**
    * CSS value for the amount of space between rows of items.
    * This property is ignored if 'show_descriptions' is True, since a default spacing is used there
@@ -164,6 +175,7 @@ class FORM_LIST_PROPERTIES
    * @var string
    */
   public $line_spacing = '';
+
   /**
    * Shows the list with descriptions.
    * Only by the radio and check button renderers. If this is True, then
@@ -171,7 +183,8 @@ class FORM_LIST_PROPERTIES
    * and assumed to be equal to one.
    * @var boolean
    */
-  public $show_descriptions = FALSE;
+  public $show_descriptions = false;
+
   /**
    * Should the description immediately follow the control?
    * If the control has a description, it will be displayed immediately after the control,
@@ -179,7 +192,8 @@ class FORM_LIST_PROPERTIES
    * placed under the control. Some controls may ignore this flag.
    * @var boolean
    */
-  public $show_description_on_same_line = FALSE;
+  public $show_description_on_same_line = false;
+
   /**
    * Style to use for the list item title.
    * Used only if {@link $show_descriptions} is True.
@@ -187,19 +201,22 @@ class FORM_LIST_PROPERTIES
    * @var string name of a CSS class.
    */
   public $item_class = '';
+
   /**
    * Style to use for list item descriptions.
    * Used only if {@link $show_descriptions} is True.
    * @var string name of a CSS class.
    */
   public $description_class = 'notes';
+
   /**
    * Wraps text to the right of the control only.
    * If this is false, text can wrap underneath the control. If True, the control is placed in a block
    * to the left of another block, which contains the text.
    * @var boolean
    */
-  public $smart_wrapping = FALSE;
+  public $smart_wrapping = false;
+
   /**
    * Extra CSS class to apply to the control.
    * Control will still have the class "menu-control", but this class is applied
@@ -219,7 +236,7 @@ class FORM_LIST_PROPERTIES
    * @param string $script Called when the item is clicked. Overrides the {@link $on_click_script} for this object.
    * @see FORM_LIST_ITEM
    */
-  function add_item ($title, $value, $description = '', $enabled = TRUE, $text = '', $script = '')
+  public function add_item ($title, $value, $description = '', $enabled = true, $text = '', $script = '')
   {
     $item = new stdClass();
     $item->title = $title;
@@ -228,7 +245,7 @@ class FORM_LIST_PROPERTIES
     $item->text = $text;
     $item->description = $description;
     $item->on_click_script = $script;
-    $item->smart_wrapping = FALSE;
+    $item->smart_wrapping = false;
     $this->items [] = $item;
   }
 
@@ -238,7 +255,7 @@ class FORM_LIST_PROPERTIES
    * @see add_item()
    * @param FORM_LIST_ITEM $item
    */
-  function add_item_object ($item)
+  public function add_item_object ($item)
   {
     $this->items [] = $item;
   }
@@ -253,7 +270,7 @@ class FORM_LIST_PROPERTIES
    * @param $enabled Is the control for this item enabled? Used only by radio buttons and checkboxes.
    * @see FORM_LIST_ITEM
    */
-  function replace_item ($index, $title, $value, $enabled = TRUE, $text = '')
+  public function replace_item ($index, $title, $value, $enabled = true, $text = '')
   {
     $item = $this->items [$index];
     $item->title = $title;
@@ -265,7 +282,7 @@ class FORM_LIST_PROPERTIES
   /**
    * Reset the item list.
    */
-  function clear_items ()
+  public function clear_items ()
   {
     unset ($this->items);
   }
@@ -287,6 +304,7 @@ class FORM_TEXT_CONTROL_OPTIONS
    * @var string
    */
   public $width = null;
+
   /**
    * Should the description immediately follow the control?
    * If the control has a description, it will be displayed immediately after the control,
@@ -294,18 +312,21 @@ class FORM_TEXT_CONTROL_OPTIONS
    * placed under the control. Some controls may ignore this flag.
    * @var boolean
    */
-  public $show_description_on_same_line = FALSE;
+  public $show_description_on_same_line = false;
+
   /**
    * Text to add to the description of the field.
    * This text will be merged with the the {@link FIELD}'s description when displayed.
    * @var string
    */
   public $extra_description = '';
+
   /**
    * Javascript to call when the control's contents change.
    * @var string
    */
   public $on_change_script = null;
+
   /**
    * Extra CSS class to apply to the control.
    * Control will still have the class "text-control", but this class is
@@ -328,31 +349,36 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * Is the form centered in its parent?
    * @var boolean
    */
-  public $centered = TRUE;
+  public $centered = true;
+
   /**
    * Name of the icon to use for the 'required' mark.
    * Preferred over {@link required_text}.
    * @var string
    */
   public $required_icon = '{icons}indicators/required_16px';
+
   /**
    * Text to use to mark a field as 'required'.
    * Used only if {@link required_icon} is empty.
    * @var string
    */
   public $required_text = '*';
+
   /**
    * How wide should controls be by default?
    * Should be specified in legal CSS units. Used by all text controls and the drop-down box.
    * @var string
    */
   public $default_control_width = '35em';
+
   /**
    * How high should controls be by default?
    * Should be specified in legal CSS units. Used only by the text-area.
    * @var string
    */
   public $default_control_height = '8em';
+
   /**
    * How width should date only controls be by default?
    * Should be specified in legal CSS units. Only the {@link date_as_html()} and
@@ -361,6 +387,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * @var string
    */
   public $default_date_width = '8em';
+
   /**
    * How width should date/time controls be by default?
    * Should be specified in legal CSS units. Only the {@link date_as_html()} and
@@ -368,6 +395,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * @var string
    */
   public $default_date_time_width = '12em';
+
   /**
    * Should the form ensure that all form values are submitted?
    * Disabled fields in an HTML form do not submit values. This can often make validation and
@@ -376,42 +404,48 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * @var boolean
    */
   public $submit_all_fields = 1;
+
   /**
    * How wide should the form be?
    * Should be specified in legal CSS units.
    * @var string
    */
   public $width = '35em';
+
   /**
    * Spacing between rows and columns.
    * @var integer
    */
   public $spacing = 0;
+
   /**
    * Padding inside each row.
    * @var integer
    */
   public $padding = 2;
+
   /**
    * Show the icon for required fields?
    * @var boolean
    */
-  public $show_required_mark = TRUE;
+  public $show_required_mark = true;
+
   /**
    * Should this renderer allow previewing?
    * @var boolean
    */
-  public $preview_enabled = FALSE;
+  public $preview_enabled = false;
+
   /**
    * Should this renderer allow drafts?
    * @var boolean
    */
-  public $drafts_enabled = FALSE;
+  public $drafts_enabled = false;
 
   /**
    * @param FORM $form
    */
-  function FORM_RENDERER ($form)
+  public function FORM_RENDERER ($form)
   {
     CONTROLS_RENDERER::CONTROLS_RENDERER ($form->context);
     $this->_form = $form;
@@ -424,7 +458,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * restore_width()}.
    * @param string $css_width
    */
-  function set_width ($css_width)
+  public function set_width ($css_width)
   {
     /* Store the current values. */
     $stored_width = new stdClass();
@@ -441,7 +475,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * Restore width settings changed by {@link set_width()}.
    * Should be paired with a call to {@link set_width()}.
    */
-  function restore_width ()
+  public function restore_width ()
   {
     $stored_width = array_pop ($this->_widths);
     $this->default_control_width = $stored_width->width;
@@ -452,7 +486,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * Return a helper class for creating lists.
    * @return FORM_LIST_PROPERTIES
    */
-  function make_list_properties ()
+  public function make_list_properties ()
   {
     return new FORM_LIST_PROPERTIES ();
   }
@@ -461,7 +495,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * Return a helper class for formatting check boxes.
    * @return CHECK_BOX_ITEM
    */
-  function make_check_properties ($id = '')
+  public function make_check_properties ($id = '')
   {
     $Result = new CHECK_BOX_ITEM ();
     $Result->title = $id;
@@ -472,7 +506,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * Draw any scripts needed by the renderer.
    * Should only be called by the {@link FORM}. Specific forms need never call this function.
    */
-  function draw_scripts ()
+  public function draw_scripts ()
   {
   }
 
@@ -480,10 +514,10 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * Start rendering the form.
    * All rendering calls are now valid.
    */
-  function start ()
+  public function start ()
   {
-    $this->_required_mark_used = FALSE;
-    $this->_column_started = FALSE;
+    $this->_required_mark_used = false;
+    $this->_column_started = false;
 
     if ($this->centered)
     {
@@ -515,7 +549,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * Finish rendering the form.
    * You should no longer call any of the row, column, block or field rendering functions.
    */
-  function finish ()
+  public function finish ()
   {
     if ($this->_required_mark_used)
     {
@@ -540,7 +574,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * @param string $title Label for the row.
    * @param string $CSS_class CSS class assigned to the row's content container.
    */
-  function start_row ($title = '', $CSS_class = '')
+  public function start_row ($title = '', $CSS_class = '')
   {
     if (! $CSS_class)
     {
@@ -567,7 +601,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
   /**
    * Close a row opened with {@link start_row()}.
    */
-  function finish_row ()
+  public function finish_row ()
   {
 ?>
     </td>
@@ -591,7 +625,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * @return LAYER Pass this layer to {@link finish_layer_row()} to close it.
    * @see finish_layer_row()
    */
-  function start_layer_row ($id, $title, $description, $visible = FALSE, $styled = TRUE)
+  public function start_layer_row ($id, $title, $description, $visible = false, $styled = true)
   {
     $browser = $this->env->browser ();
     $use_layer = $browser->supports (Browser_DHTML);
@@ -629,7 +663,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * Should be paired with {@link start_layer_row()}.
    * @see start_layer_row()
    */
-  function finish_layer_row ($layer)
+  public function finish_layer_row ($layer)
   {
     $this->finish_block ();
     if (isset ($layer))
@@ -642,7 +676,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
   /**
    * Add a spacer row to the form.
    */
-  function draw_separator ()
+  public function draw_separator ()
   {
 ?>
   <tr>
@@ -658,7 +692,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * @param $text Text to display.
    * @param $class CSS class used for text.
    */
-  function draw_text_row ($title, $text, $CSS_class = '')
+  public function draw_text_row ($title, $text, $CSS_class = '')
   {
     if (! $CSS_class)
     {
@@ -694,7 +728,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * @param $title.
    * @param $text Text to display.
    */
-  function draw_caution_row ($title, $text)
+  public function draw_caution_row ($title, $text)
   {
     $this->draw_text_row ($title, $this->app->resolve_icon_as_html ('{icons}indicators/warning', 'Warning', '16px') . ' ' . $text, 'caution detail');
   }
@@ -703,7 +737,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * Draw errors for a control onto a separate row in the form.
    * @param string $id Name of field.
    */
-  function draw_error_row ($id, $title = ' ', $width = '')
+  public function draw_error_row ($id, $title = ' ', $width = '')
   {
     if (! $width)
     {
@@ -751,7 +785,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * @param string $width A CSS style for the width to use within the block.
    * Calls {@link set_width()} with the given value.
    */
-  function start_block ($styled = FALSE, $width = null)
+  public function start_block ($styled = false, $width = null)
   {
     if ($styled)
     {
@@ -775,7 +809,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * @param boolean $restore_width Calls {@link restore_width()} if True. Set
    * to True only if a width was passed to {@link start_block()}.
    */
-  function finish_block ($restore_width = FALSE)
+  public function finish_block ($restore_width = false)
   {
     echo "</table>\n";
     if ($restore_width)
@@ -792,7 +826,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * @param string $size CSS dimension controlling amount of indent
    * @see finish_indent()
    */
-  function start_indent ($size = '2em')
+  public function start_indent ($size = '2em')
   {
     echo "<div style=\"margin-left: $size\">\n";
   }
@@ -802,7 +836,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * To be used only when {@link start_indent()} has already been called.
    * @see start_indent()
    */
-  function finish_indent ($size = '2em')
+  public function finish_indent ($size = '2em')
   {
     echo "</div>\n";
   }
@@ -813,11 +847,11 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * called first. Successive calls to this function will create new column content areas until
    * {@link finish_column()} is called to finish the column block.
    */
-  function start_column ($title = '')
+  public function start_column ($title = '')
   {
     if (! $this->_column_started)
     {
-      $this->_column_started = TRUE;
+      $this->_column_started = true;
       $this->start_row ($title);
   ?>
     <table cellspacing="0" cellpadding="0">
@@ -841,9 +875,9 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * Stop generating columns in this content block.
    * Must follow at least one call to {@link start_column()}.
    */
-  function finish_column ()
+  public function finish_column ()
   {
-    $this->_column_started = FALSE;
+    $this->_column_started = false;
     $this->finish_block ();
 ?>
         </td>
@@ -858,7 +892,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * @param string $id
    * @param FORM_TEXT_CONTROL_OPTIONS $options
    */
-  function draw_text_line_row ($id, $options = null, $title = null)
+  public function draw_text_line_row ($id, $options = null, $title = null)
   {
     $this->_draw_field_row ($this->_field_at ($id), $this->text_line_as_html ($id, $options), $title);
   }
@@ -868,7 +902,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * @param string $id
    * @param FORM_TEXT_CONTROL_OPTIONS $options
    */
-  function draw_password_row ($id, $options = null, $title = null)
+  public function draw_password_row ($id, $options = null, $title = null)
   {
     $this->_draw_field_row ($this->_field_at ($id), $this->password_as_html ($id, $options), $title);
   }
@@ -878,7 +912,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * @param string $id
    * @param FORM_TEXT_CONTROL_OPTIONS $options
    */
-  function draw_date_row ($id, $options = null, $title = null)
+  public function draw_date_row ($id, $options = null, $title = null)
   {
     $this->_draw_field_row ($this->_field_at ($id), $this->date_as_html ($id, $options), $title);
   }
@@ -889,7 +923,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * @param FORM_TEXT_CONTROL_OPTIONS $options
    * @param string $title Override the title; used instead of the field title
    */
-  function draw_file_row ($id, $options = null, $title = null)
+  public function draw_file_row ($id, $options = null, $title = null)
   {
     $this->_draw_field_row ($this->_field_at ($id), $this->file_as_html ($id, $options), $title);
   }
@@ -903,7 +937,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * {@link $default_control_height} if not specified.
    * @param string $title Override the title; used instead of the field title
    */
-  function draw_text_box_row ($id, $width = null, $height = null, $title = null)
+  public function draw_text_box_row ($id, $width = null, $height = null, $title = null)
   {
     $this->_draw_field_row ($this->_field_at ($id), $this->text_box_as_html ($id, $width, $height), $title);
   }
@@ -914,7 +948,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * @param FORM_LIST_PROPERTIES $props
    * @param string $title Override the title; used instead of the field title
    */
-  function draw_radio_group_row ($id, $props, $title = null)
+  public function draw_radio_group_row ($id, $props, $title = null)
   {
     $this->_draw_field_row ($this->_field_at ($id), $this->radio_group_as_html ($id, $props), $title);
   }
@@ -925,7 +959,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * @param FORM_LIST_PROPERTIES $props
    * @param string $title Override the title; used instead of the field title
    */
-  function draw_drop_down_row ($id, $props, $title = null)
+  public function draw_drop_down_row ($id, $props, $title = null)
   {
     $this->_draw_field_row ($this->_field_at ($id), $this->drop_down_as_HTML ($id, $props), $title);
   }
@@ -935,7 +969,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * @param string $id
    * @param FORM_LIST_PROPERTIES $props
    */
-  function draw_list_box_row ($id, $props, $title = null)
+  public function draw_list_box_row ($id, $props, $title = null)
   {
     $this->_draw_field_row ($this->_field_at ($id), $this->list_box_as_HTML ($id, $props), $title);
   }
@@ -949,7 +983,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * @param string $props
    * @param string $value Value assigned to the checkbox.
    */
-  function draw_check_boxes_row ($title, $props)
+  public function draw_check_boxes_row ($title, $props)
   {
     $control_text = $this->check_boxes_as_HTML ($props);
     if (! empty ($control_text))
@@ -974,7 +1008,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * @param string $on_click JavaScript to execute when clicked.
    * @param string $value Value assigned to the checkbox.
    */
-  function draw_check_group_row ($id, $props, $title = null)
+  public function draw_check_group_row ($id, $props, $title = null)
   {
     $this->_draw_field_row ($this->_field_at ($id), $this->check_group_as_HTML ($id, $props), $title);
   }
@@ -984,13 +1018,13 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * @param string $id
    * @param CHECK_BOX_ITEM $item Properties used to render this check box.
    */
-  function draw_check_box_row ($id, $item = null, $title = '')
+  public function draw_check_box_row ($id, $item = null, $title = '')
   {
     $field = $this->_field_at ($id);
     if (! isset ($item))
     {
       $item = $this->make_check_properties ();
-      $item->smart_wrapping = TRUE;
+      $item->smart_wrapping = true;
     }
 
     if ($field->description)
@@ -1008,7 +1042,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * 'show_preview' is used if set; otherwise, 'preview' will only be shown if {@link $preview_enabled} is True.
    * @param boolean $show_preview
    */
-  function draw_submit_button_row ($show_preview = null)
+  public function draw_submit_button_row ($show_preview = null)
   {
     if ($this->drafts_enabled)
     {
@@ -1037,7 +1071,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
     $this->draw_buttons_in_row ($buttons);
   }
 
-  function start_button_row ($title = ' ')
+  public function start_button_row ($title = ' ')
   {
     $this->start_row ($title, 'button');
   }
@@ -1046,7 +1080,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * Draw an icon text/browse button row.
    * @param string $field_id Name of the field for the text control.
    */
-  function draw_icon_browser_row ($field_id)
+  public function draw_icon_browser_row ($field_id)
   {
     $this->start_row ('Icon');
       echo $this->text_line_as_HTML ($field_id);
@@ -1063,7 +1097,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * @param FORM_TEXT_CONTROL_OPTIONS $options
    * @return string
    */
-  function text_line_as_html ($id, $options = null)
+  public function text_line_as_html ($id, $options = null)
   {
     return $this->_text_line_as_html ($id, 'text', $options);
   }
@@ -1075,7 +1109,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * @param FORM_TEXT_CONTROL_OPTIONS $options
    * @return string
    */
-  function password_as_html ($id, $options = null)
+  public function password_as_html ($id, $options = null)
   {
     return $this->_text_line_as_html ($id, 'password', $options);
   }
@@ -1089,7 +1123,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * @param FORM_TEXT_CONTROL_OPTIONS $options
    * @return string
    */
-  function date_as_html ($id, $options = null)
+  public function date_as_html ($id, $options = null)
   {
     $field = $this->_field_at ($id);
     $includes_time = $field->parts_to_convert & Date_time_time_part;
@@ -1131,6 +1165,8 @@ class FORM_RENDERER extends CONTROLS_RENDERER
 
       return $Result;
     }
+    
+    return '';
   }
 
   /**
@@ -1140,7 +1176,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * @param string $height Height of the control in valid CSS. Defaults to {@link $default_control_height} if not specified.
    * @return string
    */
-  function text_box_as_html ($id, $width = null, $height = null)
+  public function text_box_as_html ($id, $width = null, $height = null)
   {
     $field = $this->_field_at ($id);
 
@@ -1191,6 +1227,8 @@ class FORM_RENDERER extends CONTROLS_RENDERER
 
       return $this->_control_created ($id, $Result);
     }
+    
+    return '';
   }
 
   /**
@@ -1199,16 +1237,17 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * @param CHECK_BOX_ITEM $item Properties used to render this check box.
    * @return string
    */
-  function check_box_as_html ($id, $item = null)
+  public function check_box_as_html ($id, $item = null)
   {
     if (! isset ($item))
     {
+      $item = new stdClass();
       $item->text = '';
       $item->on_click_script = null;
       $item->value = 1;
       $item->title = $id;
-      $item->enabled = TRUE;
-      $item->smart_wrapping = FALSE;
+      $item->enabled = true;
+      $item->smart_wrapping = false;
     }
     else
     {
@@ -1216,7 +1255,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
     }
 
     $props = $this->make_list_properties ();
-    $props->show_descriptions = TRUE;
+    $props->show_descriptions = true;
     $props->add_item_object ($item);
     return $this->check_boxes_as_html ($props);
   }
@@ -1226,7 +1265,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * @param FORM_LIST_PROPERTIES
    * @return string
    */
-  function check_boxes_as_html ($props)
+  public function check_boxes_as_html ($props)
   {
     return $this->_control_group_as_html ('', $props, 'checkbox');
   }
@@ -1237,7 +1276,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * @param FORM_LIST_PROPERTIES $props
    * @return string
    */
-  function check_group_as_html ($id, $props)
+  public function check_group_as_html ($id, $props)
   {
     return $this->_control_group_as_HTML ($id, $props, 'checkbox');
   }
@@ -1248,7 +1287,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * @param FORM_LIST_PROPERTIES $props
    * @return string
    */
-  function radio_group_as_html ($id, $props)
+  public function radio_group_as_html ($id, $props)
   {
     return $this->_control_group_as_HTML ($id, $props, 'radio');
   }
@@ -1259,7 +1298,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * @param FORM_LIST_PROPERTIES $props
    * @return string
    */
-  function drop_down_as_html ($id, $props)
+  public function drop_down_as_html ($id, $props)
   {
     $field = $this->_field_at ($id);
 
@@ -1296,7 +1335,6 @@ class FORM_RENDERER extends CONTROLS_RENDERER
       }
 
       $Result .= '>';
-      $counter = 0;
 
       $selected_value = $field->value ();
 
@@ -1326,6 +1364,8 @@ class FORM_RENDERER extends CONTROLS_RENDERER
 
       return $this->_control_created ($id, $Result);
     }
+    
+    return '';
   }
 
   /**
@@ -1334,7 +1374,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * @param FORM_LIST_PROPERTIES $props
    * @return string
    */
-  function list_box_as_html ($id, $props)
+  public function list_box_as_html ($id, $props)
   {
     $field = $this->_field_at ($id);
 
@@ -1368,7 +1408,6 @@ class FORM_RENDERER extends CONTROLS_RENDERER
       $Result .= 'style="width: ' . $width . '"';
       $Result .= 'size="' . $props->height . '"';
       $Result .= '>';
-      $counter = 0;
 
       $selected_value = $field->value ();
 
@@ -1395,6 +1434,8 @@ class FORM_RENDERER extends CONTROLS_RENDERER
 
       return $this->_control_created ($id, $Result);
     }
+    
+    return '';
   }
 
   /**
@@ -1405,7 +1446,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * @param FORM_LIST_PROPERTIES $props
    * @return string
    */
-  function file_as_html ($id, $options = null)
+  public function file_as_html ($id, $options = null)
   {
     $field = $this->_field_at ($id);
 
@@ -1474,7 +1515,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * @param string $script Name of the JavaScript function to execute (must conform to 'function(form: form; submit_all_fields: boolean; submit_field_name, preview_field_name: string)').
    * @return string
    */
-  function submit_button_as_html ($title = null, $icon = null, $script = null)
+  public function submit_button_as_html ($title = null, $icon = null, $script = null)
   {
     if (! isset ($title))
     {
@@ -1492,7 +1533,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * Add a hidden field to the form.
    * @param string $id
    */
-  function draw_hidden ($id)
+  public function draw_hidden ($id)
   {
     $field = $this->_form->field_at ($id);
     $value = $field->value ();
@@ -1500,7 +1541,9 @@ class FORM_RENDERER extends CONTROLS_RENDERER
     if (is_array ($value))
     {
       foreach ($value as $val)
+      {
         $this->draw_hidden_value ($name, $val);
+      }
     }
     else
     {
@@ -1513,7 +1556,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * @param string $name
    * @param string $value
    */
-  function draw_hidden_value ($name, $value)
+  public function draw_hidden_value ($name, $value)
   {
     echo '<input type="hidden" name="' . $name . '" value="' . htmlspecialchars ($value) . "\">\n";
   }
@@ -1527,7 +1570,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * @param string $dom_id If set, makes an HTML label around the title with that id.
    * @access private
    */
-  function _draw_field_row ($field, $control_text, $dom_id = '', $title = null)
+  protected function _draw_field_row ($field, $control_text, $dom_id = '', $title = null)
   {
     if ($field->visible)
     {
@@ -1586,7 +1629,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * @param string $tag_name Name of the HTML tag to generate.
    * @access private
    */
-  function _start_control ($field, $tag_name = 'input', $dom_id = null)
+  protected function _start_control ($field, $tag_name = 'input', $dom_id = null)
   {
     if (isset ($dom_id))
     {
@@ -1613,13 +1656,12 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * @return string
    * @access private
    */
-  function _to_html ($field, $quote_style)
+  protected function _to_html ($field, $quote_style)
   {
     if (isset ($this->_num_controls [$field->id]))
     {
       return $field->as_html ($this->_form, $quote_style, $this->_num_controls [$field->id]);
     }
-
 
     return $field->as_html ($this->_form, $quote_style);
   }
@@ -1631,7 +1673,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * @param boolean $can_be_focussed Indicate whether to use this control as initial focus if none is already set.
    * @return string
    */
-  function _control_created ($id, $text, $can_be_focused = TRUE)
+  protected function _control_created ($id, $text, $can_be_focused = true)
   {
     if (! empty ($id))
     {
@@ -1647,9 +1689,9 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * @return string
    * @access private
    */
-  function required_mark ()
+  public function required_mark ()
   {
-    $this->_required_mark_used = TRUE;
+    $this->_required_mark_used = true;
 
     if ($this->required_icon)
     {
@@ -1670,7 +1712,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * @return FIELD
    * @access private
    */
-  function _field_at ($id)
+  protected function _field_at ($id)
   {
     return $this->_form->field_at ($id);
   }
@@ -1687,7 +1729,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * @return string
    * @access private
    */
-  function _text_line_as_html ($id, $type, $options)
+  protected function _text_line_as_html ($id, $type, $options)
   {
     $field = $this->_field_at ($id);
 
@@ -1757,7 +1799,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * @return string
    * @access private
    */
-  function _control_group_as_html ($id, $props, $type)
+  protected function _control_group_as_html ($id, $props, $type)
   {
     if ($id)
     {
@@ -1798,7 +1840,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
       $needs_descriptions = $props->show_descriptions;
       if ($needs_descriptions)
       {
-        $needs_descriptions = FALSE;
+        $needs_descriptions = false;
         foreach ($props->items as $item)
         {
           if ($id)
@@ -1837,7 +1879,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
           $ctrl = $this->_grouped_control_as_HTML ($field, $props, $item, $type, $dom_id);
           if (! $id)
           {
-            $ctrl = $this->_control_created ($id, $ctrl, FALSE);
+            $ctrl = $this->_control_created ($id, $ctrl, false);
           }
 
           if ($needs_descriptions)
@@ -1920,11 +1962,13 @@ class FORM_RENDERER extends CONTROLS_RENDERER
           $Result .= '<div style="margin-left: 2em; margin-top: .5em; width: ' . $width . '"><div class="notes">' . $field->description . '</div></div>';
         }
 
-        $Result = $this->_control_created ($id, $Result, FALSE);
+        $Result = $this->_control_created ($id, $Result, false);
       }
 
       return $Result;
     }
+    
+    return '';
   }
 
   /**
@@ -1939,7 +1983,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * @return string
    * @access private
    */
-  function _grouped_control_as_html ($field, $props, $item, $type, $dom_id)
+  protected function _grouped_control_as_html ($field, $props, $item, $type, $dom_id)
   {
     if ($field->visible)
     {
@@ -1951,7 +1995,9 @@ class FORM_RENDERER extends CONTROLS_RENDERER
         $Result .= ' class="check-box-control"';
       }
       elseif ($type == 'radio')
-         $Result .= ' class="radio-control"';
+      {
+        $Result .= ' class="radio-control"';
+      }
 
       if (! $item->enabled && $field->enabled)
       {
@@ -1963,7 +2009,9 @@ class FORM_RENDERER extends CONTROLS_RENDERER
         $Result .= ' onClick="' . $item->on_click_script . '"';
       }
       elseif (isset ($props) && ! empty ($props->on_click_script))
+      {
         $Result .= ' onClick="' . $props->on_click_script . '"';
+      }
 
       if ($field->selected ($item->value))
       {
@@ -1993,6 +2041,8 @@ class FORM_RENDERER extends CONTROLS_RENDERER
 
       return $Result;
     }
+    
+    return '';
   }
 
   /**
@@ -2000,6 +2050,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * @access private
    */
   protected $_form;
+
   /**
    * Set if the required mark is generated during form construction.
    * The renderer will generate a legend explaining the required mark if the mark
@@ -2007,13 +2058,15 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * @var boolean
    * @access private
    */
-  protected $_required_mark_used = FALSE;
+  protected $_required_mark_used = false;
+
   /**
    * Currently building columns.
    * @var boolean
    * @access private
    */
-  protected $_column_started = FALSE;
+  protected $_column_started = false;
+
   /**
    * Table of used DOM ids.
    * If radio buttons or other group controls are rendered to different parts of a page for the
@@ -2022,6 +2075,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * @access private
    */
   protected $_num_controls = array ();
+
   /**
    * Stack of widths applied with {@link set_width()}.
    * @var array[STORED_WIDTH]
@@ -2046,6 +2100,7 @@ class STORED_WIDTH
    * @var string
    */
   public $width;
+
   /**
    * Stored value for {@link FORM_RENDERER::$default_control_width}.
    * @var string

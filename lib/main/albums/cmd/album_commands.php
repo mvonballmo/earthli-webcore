@@ -53,7 +53,7 @@ class ALBUM_COMMANDS extends FOLDER_COMMANDS
   /**
    * @param ALBUM $folder Configure commands for this object.
    */
-  function ALBUM_COMMANDS ($folder)
+  public function ALBUM_COMMANDS ($folder)
   {
     FOLDER_COMMANDS::FOLDER_COMMANDS ($folder);
 
@@ -69,7 +69,7 @@ class ALBUM_COMMANDS extends FOLDER_COMMANDS
    * @param USER $creator Folder belongs to this user (also available as $folder->creator ()).
    * @access private
    */
-  function _add_viewers ($folder)
+  protected function _add_viewers ($folder)
   {
     parent::_add_viewers ($folder);
 
@@ -91,7 +91,7 @@ class ALBUM_COMMANDS extends FOLDER_COMMANDS
     }
 
     $cmd->icon = '{icons}buttons/print';
-    $cmd->executable = TRUE;
+    $cmd->executable = true;
     $cmd->importance = Command_importance_high;
     $this->append ($cmd);
 
@@ -100,7 +100,7 @@ class ALBUM_COMMANDS extends FOLDER_COMMANDS
     $cmd->title = 'Calendar';
     $cmd->link = "view_calendar.php?id=$folder->id";
     $cmd->icon = '{icons}buttons/calendar';
-    $cmd->executable = TRUE;
+    $cmd->executable = true;
     $cmd->importance = Command_importance_high;
     $this->append ($cmd);
   }
@@ -111,7 +111,7 @@ class ALBUM_COMMANDS extends FOLDER_COMMANDS
    * @param USER $creator Folder belongs to this user (also available as $folder->creator ()).
    * @access private
    */
-  function _add_creators ($folder)
+  protected function _add_creators ($folder)
   {
     $cmd = $this->make_command ();
     $cmd->id = 'new_picture';

@@ -51,7 +51,7 @@ class BRANCH_RELEASE_QUERY extends PROJECT_RELEASE_QUERY
   /**
    * @param BRANCH $branch Branch from which releases are retrieved.
    */
-  function BRANCH_RELEASE_QUERY ($branch)
+  public function BRANCH_RELEASE_QUERY ($branch)
   {
     $folder = $branch->parent_folder ();
     PROJECT_RELEASE_QUERY::PROJECT_RELEASE_QUERY ($folder);
@@ -63,7 +63,7 @@ class BRANCH_RELEASE_QUERY extends PROJECT_RELEASE_QUERY
    * Prepare security- and filter-based restrictions.
    * @access private
    */
-  function _prepare_restrictions ()
+  protected function _prepare_restrictions ()
   {
     parent::_prepare_restrictions ();
     $this->_calculated_restrictions [] = "rel.branch_id = {$this->_branch->id}";

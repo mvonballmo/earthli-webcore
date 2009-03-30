@@ -115,40 +115,44 @@ class ALBUM extends FOLDER
 {
   /**
    * Id of the picture to use for the album.
-    * Must be a picture in this album if not empty.
-    * @var integer
-    * @access private
-    */
+   * Must be a picture in this album if not empty.
+   * @var integer
+   * @access private
+   */
   public $main_picture_id = 0;
+
   /**
    * URL from which pictures are loaded.
-    * @var string
-    * @access private
-    */
+   * @var string
+   * @access private
+   */
   public $url_root;
 
   /**
    * First day of this album.
-    * @var DATE_TIME
-    */
+   * @var DATE_TIME
+   */
   public $first_day;
+
   /**
    * Last day of this album.
-    * @var DATE_TIME
-    */
+   * @var DATE_TIME
+   */
   public $last_day;
 
   /**
    * Show times when displaying dates.
-    * @var boolean
-    */
+   * @var boolean
+   */
   public $show_times;
+
   /**
    * Show temperatures in Celsius.
-    * Shown in Fahrenheit if false.
-    * @var boolean
-    */
+   * Shown in Fahrenheit if false.
+   * @var boolean
+   */
   public $show_celsius = 1;
+
   /**
    * Where are pictures stored?
    * This can be either {@link Album_location_type_remote} or {@link
@@ -159,34 +163,36 @@ class ALBUM extends FOLDER
 
   /**
    * How is the first day maintained?
-    * @see Day_mode_fixed
-    * @var integer
-    * @access private
-    */
+   * @see Day_mode_fixed
+   * @var integer
+   * @access private
+   */
   public $first_day_mode = '';
+
   /**
    * How is the first day maintained?
-    * @see Day_mode_fixed
-    * @var integer
-    * @access private
-    */
+   * @see Day_mode_fixed
+   * @var integer
+   * @access private
+   */
   public $last_day_mode = '';
 
   /**
    * Maximum width of picture when displayed full-size.
-    * @var integer
-    */
+   * @var integer
+   */
   public $max_picture_width;
+
   /**
    * Maximum height of picture when displayed full-size.
-    * @var integer
-    */
+   * @var integer
+   */
   public $max_picture_height;
 
   /**
    * @param ALBUM_APPLICATION $app Main application.
    */
-  function ALBUM ($app)
+  public function ALBUM ($app)
   {
     FOLDER::FOLDER ($app);
 
@@ -201,7 +207,7 @@ class ALBUM extends FOLDER
    * resolved URL.
    * @return string
    */
-  function expanded_url_root ($root_override = null)
+  public function expanded_url_root ($root_override = null)
   {
     return $this->app->resolve_path ($this->url_root, $root_override);
   }
@@ -212,7 +218,7 @@ class ALBUM extends FOLDER
    * resolved URL.
    * @return string
    */
-  function picture_folder_url ($root_override = null)
+  public function picture_folder_url ($root_override = null)
   {
     $url = new URL ($this->expanded_url_root ($root_override));
     $url->append ('images');
@@ -221,10 +227,10 @@ class ALBUM extends FOLDER
 
   /**
    * The picture used to represent this album.
-    * May be empty.
-    * @return PICTURE
-    */
-  function main_picture ()
+   * May be empty.
+   * @return PICTURE
+   */
+  public function main_picture ()
   {
     $pic_query = $this->entry_query ();
     $pic_query->set_type ('picture');
@@ -233,13 +239,13 @@ class ALBUM extends FOLDER
 
   /**
    * Format a date using album options.
-    * Pass in a formatter to customize (toggling local time generation).
-    * @param DATE_TIME $d
-    * @param DATE_TIME_FORMATTER $f
-    * @return string
-    * @access private
-    */
-  function format_date ($d, $f = 0)
+   * Pass in a formatter to customize (toggling local time generation).
+   * @param DATE_TIME $d
+   * @param DATE_TIME_FORMATTER $f
+   * @return string
+   * @access private
+   */
+  public function format_date ($d, $f = 0)
   {
     if (! $f)
     {
@@ -255,20 +261,20 @@ class ALBUM extends FOLDER
       $f->type = Date_time_format_date_only;
     }
 
-    $f->show_local_time = FALSE;
-    $f->show_time_zone = FALSE;
+    $f->show_local_time = false;
+    $f->show_time_zone = false;
 
     return $d->format ($f);
   }
 
   /**
    * Format a temperature as HTML.
-    * Use the Fahrenheit/Celsius formatting option.
-    * @param integer $temp
-    * @return string
-    * @access private
-    */
-  function temperature_as_html ($temp)
+   * Use the Fahrenheit/Celsius formatting option.
+   * @param integer $temp
+   * @return string
+   * @access private
+   */
+  public function temperature_as_html ($temp)
   {
     if ($this->show_celsius)
     {
@@ -288,7 +294,7 @@ class ALBUM extends FOLDER
    * {@link $last_day} on the same day will show up as a single date.
    * @return boolean
    */
-  function is_multi_day ()
+  public function is_multi_day ()
   {
     $parts = Date_time_date_part;
     if ($this->show_times)
@@ -300,11 +306,11 @@ class ALBUM extends FOLDER
   
   /**
    * Does the given date pass the day and day mode filters?
-    * @param DATE_TIME $date
-    * @see $ALBUM::$first_day_mode
-    * @see $ALBUM::$last_day_mode
-    */
-  function is_valid_date ($date)
+   * @param DATE_TIME $date
+   * @see $ALBUM::$first_day_mode
+   * @see $ALBUM::$last_day_mode
+   */
+  public function is_valid_date ($date)
   {
     if ($this->show_times)
     {
@@ -322,7 +328,7 @@ class ALBUM extends FOLDER
              || ($this->last_day_mode == Day_mode_adjust)));
   }
   
-  function date_style ()
+  public function date_style ()
   {
     if ($this->first_day_mode == Day_mode_adjust)
     {
@@ -339,7 +345,6 @@ class ALBUM extends FOLDER
       return Album_is_single_day;
     }
 
-
     return Album_is_span;
   }
 
@@ -348,7 +353,7 @@ class ALBUM extends FOLDER
    * @param string $style Can be one of {@link Album_is_single_day}, {@link Album_is_span}, {@link Album_is_journal} or {@link Album_is_adjusted}.
    * @param DATE_TIME $first_day
    * @param DATE_TIME $last_day */ 
-  function set_date_style ($style, $first_day, $last_day)
+  public function set_date_style ($style, $first_day, $last_day)
   {
     $this->first_day = $first_day;
     $this->last_day = $last_day;
@@ -389,7 +394,7 @@ class ALBUM extends FOLDER
    * @param integer $last
    * @access private
    */
-  function set_day_modes ($first, $last)
+  public function set_day_modes ($first, $last)
   {
     $old_first = $this->first_day_mode;
     $old_last = $this->last_day_mode;
@@ -416,7 +421,7 @@ class ALBUM extends FOLDER
    * @param boolean $update_now Updates the database immediately when
    * <code>True</code>.
    */
-  function refresh_dates ($update_now = FALSE)
+  public function refresh_dates ($update_now = false)
   {
     $this->first_day->set_now ();
     $this->last_day->set_now ();
@@ -459,7 +464,7 @@ class ALBUM extends FOLDER
    * @param boolean $update_now Updates the database immediately when
    * <code>True</code>.
    */
-  function include_entry ($entry, $update_now = TRUE)
+  public function include_entry ($entry, $update_now = true)
   {
     $first_day = $this->first_day->as_php ();
     $last_day = $this->last_day->as_php ();
@@ -502,7 +507,7 @@ class ALBUM extends FOLDER
    * Returns True is the logged-in user has upload rights and the album's {@link $location} is 'local'.
    * @return true
    */
-  function uploads_allowed ()
+  public function uploads_allowed ()
   {
     return $this->location == Album_location_type_local && $this->login->is_allowed (Privilege_set_entry, Privilege_upload, $this);
   }
@@ -519,16 +524,16 @@ class ALBUM extends FOLDER
    * {@link Force_root_on}.
    * @return string
    */
-  function resolve_url ($url, $root_override = null)
+  public function resolve_url ($url, $root_override = null)
   {
     $thumb_key = '{pic_thumb}';
     $pic_key = '{pic_image}';
 
-    if (strpos ($url, $thumb_key) !== FALSE)
+    if (strpos ($url, $thumb_key) !== false)
     {
       $key = $thumb_key;
     }
-    else if (strpos ($url, $pic_key) !== FALSE)
+    else if (strpos ($url, $pic_key) !== false)
  {
    $key = $pic_key;
  }
@@ -575,7 +580,7 @@ class ALBUM extends FOLDER
   /**
    * @param DATABASE $db
    */
-  function load ($db)
+  public function load ($db)
   {
     parent::load ($db);
     $this->location = $db->f ('location');
@@ -605,7 +610,7 @@ class ALBUM extends FOLDER
    * @param ALBUM $other
    * @access private
    */
-  function _copy_from ($other)
+  protected function _copy_from ($other)
   {
     unset ($this->first_day);
     $this->first_day = clone_object ($other->first_day);
@@ -616,7 +621,7 @@ class ALBUM extends FOLDER
   /**
    * @param SQL_STORAGE $storage Store values to this object.
    */
-  function store_to ($storage)
+  public function store_to ($storage)
   {
     parent::store_to ($storage);
     $tname =$this->_table_name ();
@@ -635,10 +640,10 @@ class ALBUM extends FOLDER
 
   /**
    * @return JOURNAL
-    * @see FOLDER::new_entry()
-    * @access private
-    */
-  function _make_journal ()
+   * @see FOLDER::new_entry()
+   * @access private
+   */
+  protected function _make_journal ()
   {
     $class_name = $this->app->final_class_name ('JOURNAL', 'albums/obj/journal.php');
     return new $class_name ($this->app);
@@ -646,10 +651,10 @@ class ALBUM extends FOLDER
 
   /**
    * @return PICTURE
-    * @see FOLDER::new_entry()
-    * @access private
-    */
-  function _make_picture ()
+   * @see FOLDER::new_entry()
+   * @access private
+   */
+  protected function _make_picture ()
   {
     $class_name = $this->app->final_class_name ('PICTURE', 'albums/obj/picture.php');
     return new $class_name ($this->app);
@@ -659,7 +664,7 @@ class ALBUM extends FOLDER
    * @param PURGE_OPTIONS $options
    * @access private
    */
-  function _purge ($options)
+  protected function _purge ($options)
   {
     $tables = $this->app->table_names;
     /* remove associated pictures */
@@ -677,7 +682,7 @@ class ALBUM extends FOLDER
    * @return object
    * @access private
    */
-  function _default_handler_for ($handler_type, $options = null)
+  protected function _default_handler_for ($handler_type, $options = null)
   {
     switch ($handler_type)
     {

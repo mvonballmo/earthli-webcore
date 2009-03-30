@@ -57,7 +57,7 @@ class FRAMEWORK_INFO_QUERY extends QUERY
   /**
    * Apply default restrictions and tables.
    */
-  function apply_defaults () 
+  public function apply_defaults () 
   {
     $this->set_select ('ver.*');
     $this->set_table ($this->app->table_names->versions . ' ver');
@@ -70,7 +70,7 @@ class FRAMEWORK_INFO_QUERY extends QUERY
    * ENVIRONMENT}.
    * @return FRAMEWORK_INFO
    */
-  function info_for ($obj)
+  public function info_for ($obj)
   {
     $this->clear_restrictions ();
     $this->restrict_by_op ('title', $obj->framework_id);
@@ -81,7 +81,7 @@ class FRAMEWORK_INFO_QUERY extends QUERY
    * @return FRAMEWORK_INFO
    * @access private
    */
-  function _make_object ()
+  protected function _make_object ()
   {
     $class_name = $this->context->final_class_name ('FRAMEWORK_INFO', 'webcore/obj/framework_info.php');
     return new $class_name ($this->context);

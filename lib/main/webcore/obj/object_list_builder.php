@@ -55,6 +55,7 @@ class OBJECT_LIST_BUILDER extends WEBCORE_OBJECT
    * @var array[FOLDER]
    */
   public $folders;
+
   /**
    * List of selected entries.
    * Use {@link load_from_request()} to populate.
@@ -65,7 +66,7 @@ class OBJECT_LIST_BUILDER extends WEBCORE_OBJECT
   /**
    * @param FOLDER $folder Objects are from this folder.
    */
-  function OBJECT_LIST_BUILDER ($folder)
+  public function OBJECT_LIST_BUILDER ($folder)
   {
     WEBCORE_OBJECT::WEBCORE_OBJECT ($folder->app);
 
@@ -77,7 +78,7 @@ class OBJECT_LIST_BUILDER extends WEBCORE_OBJECT
   /**
    * @return boolean
    */
-  function has_entries ()
+  public function has_entries ()
   {
     return sizeof ($this->entries) > 0;
   }
@@ -85,7 +86,7 @@ class OBJECT_LIST_BUILDER extends WEBCORE_OBJECT
   /**
    * @return boolean
    */
-  function has_folders ()
+  public function has_folders ()
   {
     return sizeof ($this->folders) > 0;
   }
@@ -94,7 +95,7 @@ class OBJECT_LIST_BUILDER extends WEBCORE_OBJECT
    * Are any folders or entries selected?
    * @return boolean
    */
-  function has_objects ()
+  public function has_objects ()
   {
     return $this->has_folders () || $this->has_entries ();
   }
@@ -104,7 +105,7 @@ class OBJECT_LIST_BUILDER extends WEBCORE_OBJECT
    * e.g. 1 album, 4 pictures and 2 journals
    * @return string
    */
-  function description ()
+  public function description ()
   {
     if (sizeof ($this->_contents))
     {
@@ -112,19 +113,21 @@ class OBJECT_LIST_BUILDER extends WEBCORE_OBJECT
       {
         $last = array_pop ($this->_contents);
         $Result = implode (', ', $this->_contents);
+        
         return $Result . ' and ' . $last;
       }
 
-
       return $this->_contents [0];
     }
+    
+    return '';
   }
   
   /**
    * List of entry ids; used by {@link FORM}s.
    * @return array[integer]
    */
-  function entry_ids ()
+  public function entry_ids ()
   {
     return $this->_entry_ids;
   }
@@ -133,7 +136,7 @@ class OBJECT_LIST_BUILDER extends WEBCORE_OBJECT
    * List of folder ids; used by {@link FORM}s.
    * @return array[integer]
    */
-  function folder_ids ()
+  public function folder_ids ()
   {
     return $this->_folder_ids;
   }
@@ -142,7 +145,7 @@ class OBJECT_LIST_BUILDER extends WEBCORE_OBJECT
    * Read in values from the {@link $method} array.
    * @access private
    */
-  function load_from_request ()
+  public function load_from_request ()
   {
     $this->entries = array ();
     $this->folders = array ();
@@ -221,6 +224,7 @@ class OBJECT_LIST_BUILDER extends WEBCORE_OBJECT
    * @access private
    */
   protected $_folder;
+
   /**
    * Description of the contents of the list builder.
    * Returned by {@link description()}.

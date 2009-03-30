@@ -30,12 +30,12 @@ require_once ('webcore/db/migrator_task.php');
 
 class UPGRADE_PER_APP_270_271_TASK extends MIGRATOR_TASK
 {
-  function _update_history_type_for_drafts ($table_name)
+  protected function _update_history_type_for_drafts ($table_name)
   {
     $this->_query ("ALTER TABLE `news_history_items` CHANGE `kind` `kind` ENUM( 'Created', 'Updated', 'Deleted', 'Restored', 'Hidden', 'Hidden update', 'Locked', 'Published', 'Queued', 'Abandoned', 'Unpublished' ) NOT NULL");
   }
   
-  function _update_draft_state ($table_name)
+  protected function _update_draft_state ($table_name)
   {
     $this->_query ("UPDATE `$table_name` SET state = 50 WHERE state = 18");
     $this->_query ("UPDATE `$table_name` SET time_published='0000-00-00 00:00:00', publisher_id = 0 WHERE state = " . Draft);

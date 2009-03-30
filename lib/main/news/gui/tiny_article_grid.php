@@ -51,9 +51,9 @@ class TINY_ARTICLE_GRID extends CONTENT_OBJECT_GRID
 {
   public $box_style = '';
   public $width = '';
-  public $show_separator = FALSE;
+  public $show_separator = false;
 
-  function _draw_box ($obj)
+  protected function _draw_box ($obj)
   {
     $t = $obj->title_formatter ();
     $t->CSS_class = '';

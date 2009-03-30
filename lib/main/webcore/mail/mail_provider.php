@@ -48,13 +48,14 @@ require_once ('webcore/log/loggable.php');
  * @since 2.2.1
  * @abstract
  */
-class MAIL_PROVIDER extends LOGGABLE
+abstract class MAIL_PROVIDER extends LOGGABLE
 {
   /**
    * Used to implement basic text-display.
    * @var RENDERER
    */
   public $renderer;
+
   /**
    * {@link record()} uses this channel, by default.
    * @var string
@@ -64,7 +65,7 @@ class MAIL_PROVIDER extends LOGGABLE
   /**
    * @param CONTEXT $context
    */
-  function MAIL_PROVIDER ($context)
+  public function MAIL_PROVIDER ($context)
   {
     LOGGABLE::LOGGABLE ($context);
 
@@ -74,10 +75,10 @@ class MAIL_PROVIDER extends LOGGABLE
 
   /**
    * Send the 'message'.
-    * Handles all logging and error messages.
-    * @param MAIL_MESSAGE $message
-    */
-  function send ($message)
+   * Handles all logging and error messages.
+   * @param MAIL_MESSAGE $message
+   */
+  public function send ($message)
   {
     $this->assert (sizeof ($message->send_to) > 0, 'must send to at least one address', 'send', 'MAIL_PROVIDER');
     $this->assert (! empty ($message->subject) && ! empty ($message->body), 'subject and body cannot be empty', 'send', 'MAIL_PROVIDER');
@@ -101,26 +102,26 @@ class MAIL_PROVIDER extends LOGGABLE
 
   /**
    * Contents of the last provider-specific error message.
-    * @return string
-    * @access private
-    * @abstract
-    */
-  function last_error_as_plain_text () { $this->raise_deferred ('last_error_as_plain_text', 'MAIL_PROVIDER'); }
+   * @return string
+   * @access private
+   * @abstract
+   */
+  public abstract function last_error_as_plain_text ();
 
   /**
    * Contents of the last provider-specific error message.
-    * @return string
-    * @access private
-    * @abstract
-    */
-  function last_error_as_html () { $this->raise_deferred ('last_error_as_html', 'MAIL_PROVIDER'); }
+   * @return string
+   * @access private
+   * @abstract
+   */
+  public abstract function last_error_as_html ();
 
   /**
    * @param MAIL_MESSAGE $message
-    * @access private
-    * @abstract
-    */
-  function _internal_send ($message) { $this->raise_deferred ('_inernal_send', 'MAIL_PROVIDER'); }
+   * @access private
+   * @abstract
+   */
+  protected abstract function _internal_send ($message);
 }
 
 ?>

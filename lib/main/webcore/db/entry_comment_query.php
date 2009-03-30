@@ -57,7 +57,7 @@ class ENTRY_COMMENT_QUERY extends COMMENT_QUERY
   /**
    * @param ENTRY $entry Retrieve comments from this entry.
    */
-  function ENTRY_COMMENT_QUERY ($entry)
+  public function ENTRY_COMMENT_QUERY ($entry)
   {
     COMMENT_QUERY::COMMENT_QUERY ($entry->parent_folder ());
     $this->_entry = $entry;
@@ -66,7 +66,7 @@ class ENTRY_COMMENT_QUERY extends COMMENT_QUERY
   /**
    * Apply default restrictions and tables.
    */
-  function apply_defaults () 
+  public function apply_defaults () 
   {
     $this->set_select ('com.*');
     $this->set_order ('com.number');
@@ -79,7 +79,7 @@ class ENTRY_COMMENT_QUERY extends COMMENT_QUERY
    * @param integer $id
    * @return ENTRY
    */
-  function object_for_attachment_at_id ($id)
+  public function object_for_attachment_at_id ($id)
   {
     $id = $this->validate_as_integer ($id);
     if ($id)
@@ -96,6 +96,8 @@ class ENTRY_COMMENT_QUERY extends COMMENT_QUERY
       $this->_tables = $old_tables;
       return $Result;
     }
+    
+    return null;
   }
 
   /**
@@ -103,7 +105,7 @@ class ENTRY_COMMENT_QUERY extends COMMENT_QUERY
    * @return ENTRY
    * @access private
    */
-  function _make_entry ()
+  protected function _make_entry ()
   {
     return $this->_entry;
   }
@@ -111,7 +113,7 @@ class ENTRY_COMMENT_QUERY extends COMMENT_QUERY
   /**
    * @access private
    */
-  function _prepare_restrictions ()
+  protected function _prepare_restrictions ()
   {
     parent::_prepare_restrictions ();
     $this->_calculated_restrictions [] = 'com.entry_id = ' . $this->_entry->id;

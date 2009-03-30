@@ -53,7 +53,7 @@ class CONTENT_OBJECT_RENDERER extends AUDITABLE_RENDERER
    * @param CONTENT_OBJECT $obj
    * @access private
    */
-  function _display_as_html ($obj)
+  protected function _display_as_html ($obj)
   {
     parent::_display_as_html ($obj);
     $this->_echo_html_description ($obj);
@@ -64,7 +64,7 @@ class CONTENT_OBJECT_RENDERER extends AUDITABLE_RENDERER
    * @param CONTENT_OBJECT $obj
    * @access private
    */
-  function _echo_html_description ($obj)
+  protected function _echo_html_description ($obj)
   {
     $this->_echo_text_as_html ($obj, $obj->description);
   }
@@ -74,7 +74,7 @@ class CONTENT_OBJECT_RENDERER extends AUDITABLE_RENDERER
    * @param CONTENT_OBJECT $obj
    * @access private
    */
-  function _display_as_plain_text ($obj)
+  protected function _display_as_plain_text ($obj)
   {
     parent::_display_as_plain_text ($obj);
     $this->_echo_plain_text_description ($obj);
@@ -85,7 +85,7 @@ class CONTENT_OBJECT_RENDERER extends AUDITABLE_RENDERER
    * @param CONTENT_OBJECT $obj
    * @access private
    */
-  function _echo_plain_text_description ($obj)
+  protected function _echo_plain_text_description ($obj)
   {
     $this->_echo_text_as_plain_text ($obj, $obj->description);
   }
@@ -95,7 +95,7 @@ class CONTENT_OBJECT_RENDERER extends AUDITABLE_RENDERER
    * Used standard formatting provided by the {@link NAMED_OBJECT::html_formatter()}
    * and settings from {@link _prepare_formatter()}.
    */
-  function _echo_text_as_html ($obj, $text)
+  protected function _echo_text_as_html ($obj, $text)
   {
     if ($text)
     {
@@ -116,7 +116,7 @@ class CONTENT_OBJECT_RENDERER extends AUDITABLE_RENDERER
    * Used standard formatting provided by the {@link NAMED_OBJECT::plain_text_formatter()}
    * and settings from {@link _prepare_formatter()}.
    */
-  function _echo_text_as_plain_text ($obj, $text)
+  protected function _echo_text_as_plain_text ($obj, $text)
   {
     if ($text)
     {
@@ -132,10 +132,10 @@ class CONTENT_OBJECT_RENDERER extends AUDITABLE_RENDERER
    * @param MUNGER $munger
    * @access private
    */
-  function _prepare_formatter ($munger)
+  protected function _prepare_formatter ($munger)
   {
     $munger->max_visible_output_chars = $this->_options->preferred_text_length;
-    $munger->force_paragraphs = TRUE;
+    $munger->force_paragraphs = true;
   }
 }
 

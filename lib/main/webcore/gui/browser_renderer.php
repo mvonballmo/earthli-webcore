@@ -51,14 +51,14 @@ class BROWSER_RENDERER extends OBJECT_RENDERER
   /**
    * @var boolean
    */
-  public $show_user_agent = FALSE;
+  public $show_user_agent = false;
   
   /**
    * Outputs the object as HTML.
    * @param BROWSER $obj
    * @access private
    */
-  function _display_as_html ($obj)
+  protected function _display_as_html ($obj)
   {
     $browser = $obj;
     
@@ -136,7 +136,7 @@ class BROWSER_RENDERER extends OBJECT_RENDERER
    * @param BROWSER $obj
    * @access private
    */
-  function _display_as_plain_text ($obj)
+  protected function _display_as_plain_text ($obj)
   {
     $browser = $obj;
     
@@ -177,7 +177,7 @@ class BROWSER_RENDERER extends OBJECT_RENDERER
    * @param string $text
    * @return string
    */
-  function _boolean_as_html ($value, $text = '')
+  protected function _boolean_as_html ($value, $text = '')
   {
     if ($value)
     {
@@ -203,7 +203,7 @@ class BROWSER_RENDERER extends OBJECT_RENDERER
    * @param string $text
    * @return string
    */
-  function _boolean_as_text ($value, $text = '')
+  protected function _boolean_as_text ($value, $text = '')
   {
     if ($value)
     {

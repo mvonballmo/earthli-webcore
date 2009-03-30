@@ -54,33 +54,39 @@ class COMMAND
    * @var string
    */
   public $id;
+
   /**
    * Text used for the title of the link.
    * @var string
    */
   public $title = '';
+
   /**
    * Text used inside the link.
    * @var string
    */
   public $text = '';
+
   /**
    * URL to execute the command.
    * @var string
    */
   public $link = '';
+
   /**
    * Name of the image to use for the command when rendered.
    * @var string
    */
   public $icon = '';
+
   /**
    * Can this command be executed?
    * The renderer can decide whether to display this button as disabled or to
    * simply omit it from the list.
    * @var boolean
    */
-  public $executable = TRUE;
+  public $executable = true;
+
   /**
    * Weight used to sort commands in lists.
    * Used by the {@link MENU_RENDERER} to determine which commands are shown
@@ -104,6 +110,7 @@ class COMMAND_GROUP
    * @var string
    */
   public $name;
+
   /**
    * @see COMMAND 
    * @var array[COMMAND]
@@ -116,14 +123,14 @@ class COMMAND_GROUP
    * all.
    * @return boolean
    */
-  function is_empty ()
+  public function is_empty ()
   {
-    $Result = TRUE;
+    $Result = true;
     foreach ($this->commands as $cmd)
     {
       if ($cmd->executable)
       {
-        $Result = FALSE;
+        $Result = false;
         break;
       }
     }
@@ -146,7 +153,7 @@ class COMMANDS extends WEBCORE_OBJECT
    * Return the list of {@link COMMAND_GROUP}s.
    * @return array[COMMAND_GROUP]
    */
-  function groups ()
+  public function groups ()
   {
     return $this->_groups;
   }
@@ -155,7 +162,7 @@ class COMMANDS extends WEBCORE_OBJECT
    * Return the list of all {@link COMMAND}s.
    * @return array[COMMAND]
    */
-  function command_list ()
+  public function command_list ()
   {
     return $this->_ordered_commands;
   }
@@ -164,7 +171,7 @@ class COMMANDS extends WEBCORE_OBJECT
    * How many commands are there?
    * @return integer
    */
-  function size ()
+  public function size ()
   {
     return sizeof ($this->_commands);
   }
@@ -176,7 +183,7 @@ class COMMANDS extends WEBCORE_OBJECT
    * @param string $id
    * @return BUTTON
    */
-  function command_at ($id)
+  public function command_at ($id)
   {
     if (isset ($this->_commands [$id]))
     {
@@ -194,10 +201,10 @@ class COMMANDS extends WEBCORE_OBJECT
    * there is no need to make a drop-down).
    * @return integer
    */
-  function num_executable_commands ()
+  public function num_executable_commands ()
   {
     $Result = 0;
-    foreach ($this->_commands as $id => $cmd)
+    foreach ($this->_commands as $cmd)
     {
       if ($cmd->executable)
       {
@@ -211,7 +218,7 @@ class COMMANDS extends WEBCORE_OBJECT
    * Start another group at the end of the list.
    * @param string $group
    */
-  function append_group ($group)
+  public function append_group ($group)
   {
     $this->_set_current_group ($group);
     $this->_groups [] = $this->_current_group;    
@@ -221,7 +228,7 @@ class COMMANDS extends WEBCORE_OBJECT
    * Start another group at the beginning of the list.
    * @param string $group
    */
-  function prepend_group ($group)
+  public function prepend_group ($group)
   {
     $this->_set_current_group ($group);
     array_unshift ($this->_groups, $this->_current_group);    
@@ -237,7 +244,7 @@ class COMMANDS extends WEBCORE_OBJECT
    * button is added to the current group. If the group does not exist, the
    * group is created with {@link append_group()}.
    */
-  function append ($cmd, $group = '')
+  public function append ($cmd, $group = '')
   {
     $this->_add_command ($cmd, $group);
     $this->_current_group->commands [] = $cmd;
@@ -254,7 +261,7 @@ class COMMANDS extends WEBCORE_OBJECT
    * button is added to the current group. If the group does not exist, the
    * group is created with {@link append_group()}.
    */
-  function prepend ($cmd, $group = '')
+  public function prepend ($cmd, $group = '')
   {
     $this->_add_command ($cmd, $group);
     array_unshift ($this->_current_group->commands, $cmd);
@@ -265,14 +272,14 @@ class COMMANDS extends WEBCORE_OBJECT
    * Disable all commands except those given. 
    * @param array[string] $ids
    */
-  function disable_all_except ($ids)
+  public function disable_all_except ($ids)
   {
     for ($idx = 0; $idx < sizeof ($this->_ordered_commands); $idx++)
     {
       $cmd = $this->_ordered_commands [$idx];
       if (! in_array ($cmd->id, $ids))
       {
-        $cmd->executable = FALSE;
+        $cmd->executable = false;
       }
     }
   }
@@ -286,7 +293,7 @@ class COMMANDS extends WEBCORE_OBJECT
    * group is created with {@link append_group()}.
    * @access private
    */
-  function _add_command ($cmd, $group)
+  protected function _add_command ($cmd, $group)
   {
     if (! isset ($this->_current_group) || (($group != '') && ($group != $this->_current_group->name)))
     {
@@ -300,7 +307,7 @@ class COMMANDS extends WEBCORE_OBJECT
    * @param string $group
    * @access private
    */
-  function _set_current_group ($group)
+  protected function _set_current_group ($group)
   {
     unset($this->_current_group);
     $this->_current_group = new COMMAND_GROUP ();
@@ -313,7 +320,7 @@ class COMMANDS extends WEBCORE_OBJECT
    * @return COMMAND
    * @access private
    */
-  function make_command ()
+  public function make_command ()
   {
     return $this->context->make_command ();
   }
@@ -326,6 +333,7 @@ class COMMANDS extends WEBCORE_OBJECT
    * @access private
    */
   protected $_groups = array ();
+
   /**
    * All commands indexed by {@link COMMAND::$id}.
    * @var array[COMMAND]
@@ -335,6 +343,7 @@ class COMMANDS extends WEBCORE_OBJECT
    * @access private
    */
   protected $_commands = array ();
+
   /**
    * All commands in order.
    * @var array[COMMAND]

@@ -51,7 +51,7 @@ class THEMED_PAGE_RENDERER extends PAGE_RENDERER
   /**
    * Helper function called from {@link _include_styles_and_scripts()}.
    */
-  function display_styles ()
+  public function display_styles ()
   {
     $page = $this->page;
     $theme = $page->theme;
@@ -84,7 +84,7 @@ class THEMED_PAGE_RENDERER extends PAGE_RENDERER
   /**
    * Helper function called from {@link _include_styles_and_scripts()}.
    */
-  function display_scripts ()
+  public function display_scripts ()
   {
     $page = $this->page;
     $script_folder = $page->path_to (Folder_name_scripts);

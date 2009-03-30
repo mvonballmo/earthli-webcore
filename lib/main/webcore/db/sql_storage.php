@@ -80,18 +80,22 @@ class SQL_FIELD
    * @var string
    */
   public $table_id;
+
   /**
    * @var string
    */
   public $id;
+
   /**
    * @var integer
    */
   public $type;
+
   /**
    * @var mixed
    */
   public $value;
+
   /**
    * @var integer
    */
@@ -106,7 +110,7 @@ class SQL_FIELD
    * @param mixed $value The raw value
    * @param integer $action Which actions is this field used for?
    */
-  function SQL_FIELD ($id, $type, $value, $action)
+  public function SQL_FIELD ($id, $type, $value, $action)
   {
     $this->id = $id;
     $this->type = $type;
@@ -119,7 +123,7 @@ class SQL_FIELD
    * @param integer $action
    * @return boolean
    */
-  function needed_for_action ($action)
+  public function needed_for_action ($action)
   {
     return ($this->action & $action);
   }
@@ -128,7 +132,7 @@ class SQL_FIELD
    * Escape the value for use as SQL.
    * @return string
    */
-  function value_for_sql ()
+  public function value_for_sql ()
   {
     switch ($this->type)
     {
@@ -139,15 +143,9 @@ class SQL_FIELD
     case Field_type_string:
       return "'" . addslashes ($this->value) . "'";
     case Field_type_boolean:
-      if ($this->value)
-      {
-        return '1';
-      }
-
-
-      return '0';
+      return ($this->value) ? '1' : '0';
     default:
-      raise ("Unknown data type [$this->type]", 'value_for_sql', 'SQL_FIELD');
+      throw new UNKNOWN_VALUE_EXCEPTION($this->type);
     }
   }
 }
@@ -168,7 +166,7 @@ class SQL_TABLE extends WEBCORE_OBJECT
    * @param CONTEXT $context
    * @param string $name Name of the database table.
    */
-  function SQL_TABLE ($context, $name)
+  public function SQL_TABLE ($context, $name)
   {
     WEBCORE_OBJECT::WEBCORE_OBJECT ($context);
     $this->name = $name;
@@ -182,7 +180,7 @@ class SQL_TABLE extends WEBCORE_OBJECT
    * @param mixed $value
    * @param integer $action
    */
-  function add ($field_id, $field_type, $value, $action)
+  public function add ($field_id, $field_type, $value, $action)
   {
     $class_name = $this->context->final_class_name ('SQL_FIELD');
     $this->fields [$field_id] = new $class_name ($field_id, $field_type, $value, $action);
@@ -192,7 +190,7 @@ class SQL_TABLE extends WEBCORE_OBJECT
    * Restrict on this field (and it's value) when updating.
    * @param string $field_id
    */
-  function restrict ($field_id)
+  public function restrict ($field_id)
   {
     $this->restrictions [] = $field_id;
   }
@@ -202,14 +200,14 @@ class SQL_TABLE extends WEBCORE_OBJECT
    * Raises an exception if the data is not valid.
    * @param integer $action
    */
-  function validate ($action)
+  public function validate ($action)
   {
     foreach ($this->fields as $field)
     {
       if ($field->needed_for_action ($action) && ($field->type == Field_type_integer))
       {
         $field->value = $this->validate_as_integer_silent ($field->value);
-        if ($field->value === FALSE)
+        if ($field->value === false)
         {
           $this->raise ("[$field->value] is not an integer. (setting field [$field->id])", 'validate', 'SQL_TABLE');
         }
@@ -221,7 +219,7 @@ class SQL_TABLE extends WEBCORE_OBJECT
    * Check for existence of field.
    * @return boolean
    */
-  function exists ()
+  public function exists ()
   {
     $restrictions = $this->restrictions_as_sql ();
     $this->assert ($restrictions, 'Cannot check object without a restriction.', 'exists', 'SQL_TABLE');
@@ -231,13 +229,15 @@ class SQL_TABLE extends WEBCORE_OBJECT
     {
       return $this->db->f (0); 
     }
+    
+    return false;
   }
 
   /**
    * Execute the requested action on this table.
    * @param integer $action
    */
-  function commit ($action)
+  public function commit ($action)
   {
     switch ($action)
     {
@@ -254,7 +254,7 @@ class SQL_TABLE extends WEBCORE_OBJECT
    * Create the object specified in the schema.
    * @access private
    */
-  function _create ()
+  protected function _create ()
   {
     $fields = $this->fields_as_sql (Storage_action_create);
 
@@ -268,13 +268,15 @@ class SQL_TABLE extends WEBCORE_OBJECT
    * Update the object specified in the schema.
    * @access private
    */
-  function _update ()
+  protected function _update ()
   {
     $fields = $this->fields_as_sql (Storage_action_update);
     if ($fields)
     {
       foreach ($fields as $key => $value)
+      {
         $pairs [] = "$key = $value";
+      }
       $data = join( ', ', $pairs);
       
       if ($data)
@@ -302,7 +304,7 @@ class SQL_TABLE extends WEBCORE_OBJECT
    * @param string $qs
    * @access private
    */
-  function _query ($qs)
+  protected function _query ($qs)
   {
     $this->db->logged_query ($qs);
   }
@@ -312,7 +314,7 @@ class SQL_TABLE extends WEBCORE_OBJECT
    * @param integer $action
    * @return array[string,string]
    */
-  function fields_as_sql ($action)
+  public function fields_as_sql ($action)
   {
     $Result = '';
     foreach ($this->fields as $id => $field)
@@ -329,9 +331,9 @@ class SQL_TABLE extends WEBCORE_OBJECT
    * Get the restrictions for this table.
    * Used by {@link _update()} and {@link exists()}.
    * @param integer $action
-   * @return array[string,string]
+   * @return string
    */
-  function restrictions_as_sql ()
+  public function restrictions_as_sql ()
   {
     foreach ($this->restrictions as $id)
     {
@@ -344,9 +346,13 @@ class SQL_TABLE extends WEBCORE_OBJECT
     {
       $pairs = array ();
       foreach ($Result as $key => $value)
+      {
         $pairs [] = "($key = $value)";
+      }
       return join (' AND ', $pairs);
     }
+    
+    return '';
   }
 }
 
@@ -365,7 +371,7 @@ class SQL_STORAGE extends WEBCORE_OBJECT
   /**
    * @param CONTEXT $context
    */
-  function SQL_STORAGE ($context)
+  public function SQL_STORAGE ($context)
   {
     $this->raise_if_not_is_a ($context, 'CONTEXT', 'QUERY', 'QUERY');
     $context->ensure_database_exists ();   // storage always need a database
@@ -383,7 +389,7 @@ class SQL_STORAGE extends WEBCORE_OBJECT
    * Storage_action_none}, {@link Storage_action_create}, {@link
    * Storage_action_update}, {@link Storage_action_all}).
    */
-  function add ($table_id, $field_id, $field_type, $value, $action = Storage_action_all)
+  public function add ($table_id, $field_id, $field_type, $value, $action = Storage_action_all)
   {
     $table = $this->_table_at_id ($table_id);
     $table->add ($field_id, $field_type, $value, $action);
@@ -398,7 +404,7 @@ class SQL_STORAGE extends WEBCORE_OBJECT
    * @param string $field_id Restrict updates to objects with this field set to
    * the stored value.
    */
-  function restrict ($table_id, $field_id)
+  public function restrict ($table_id, $field_id)
   {
     $table = $this->_table_at_id ($table_id);
     $table->restrict ($field_id);
@@ -408,7 +414,7 @@ class SQL_STORAGE extends WEBCORE_OBJECT
    * Create the object specified in the schema.
    * @param STORABLE $obj
    */
-  function create_object ($obj)
+  public function create_object ($obj)
   {
     $this->_commit ($obj, Storage_action_create);
   }
@@ -417,7 +423,7 @@ class SQL_STORAGE extends WEBCORE_OBJECT
    * Update the object specified in the schema.
    * @param STORABLE $obj
    */
-  function update_object ($obj)
+  public function update_object ($obj)
   {
     $this->_commit ($obj, Storage_action_update);
   }
@@ -429,21 +435,22 @@ class SQL_STORAGE extends WEBCORE_OBJECT
    * @param STORABLE $obj
    * @return boolean
    */
-  function object_exists ($obj)
+  public function object_exists ($obj)
   {
     $obj->store_to ($this);
 
     if (! empty ($this->_tables))
     {
-      $Result = FALSE;
       foreach ($this->_tables as $table)
       {
         if ($table->exists ())
         {
-          return TRUE;
+          return true;
         }
       }
     }
+    
+    return false;
   }
 
   /**
@@ -452,7 +459,7 @@ class SQL_STORAGE extends WEBCORE_OBJECT
    * @param integer $action
    * @access private
    */
-  function _commit ($obj, $action)
+  protected function _commit ($obj, $action)
   {
     $obj->store_to ($this);
 
@@ -463,14 +470,16 @@ class SQL_STORAGE extends WEBCORE_OBJECT
        * array because foreach doesn't use references.
        */
 
-      foreach ($this->_tables as $table_name => $table)
+      foreach ($this->_tables as $table)
       {
         $table->validate ($action);
         $validated_tables [] = $table;
       }
 
       foreach ($validated_tables as $table)
+      {
         $this->_commit_table ($table, $action, $obj);
+      }
     }
   }
 
@@ -481,7 +490,7 @@ class SQL_STORAGE extends WEBCORE_OBJECT
    * @param STORABLE $obj
    * @access private
    */
-  function _commit_table ($table, $action, $obj)
+  protected function _commit_table ($table, $action, $obj)
   {
     $table->commit ($action);
   }
@@ -492,7 +501,7 @@ class SQL_STORAGE extends WEBCORE_OBJECT
    * @return SQL_TABLE
    * @access private
    */
-  function _table_at_id ($table_id)
+  protected function _table_at_id ($table_id)
   {
     $this->assert (! empty ($table_id), 'table_id cannot be empty.', '_table_at_id', 'SQL_STORAGE');
 

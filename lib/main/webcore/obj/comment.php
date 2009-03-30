@@ -55,6 +55,7 @@ class COMMENT extends ATTACHMENT_HOST
    * @access private
    */
   public $entry_id;
+
   /**
    * The id of the comment above this comment.
    * If this is empty, the comment is a directy annonation of the entry.
@@ -62,6 +63,7 @@ class COMMENT extends ATTACHMENT_HOST
    * @access private
    */
   public $parent_id;
+
   /**
    * This is the nth comment in attached to this entry.
    * Comments are not renumbered when an item is deleted or purged. This can
@@ -70,6 +72,7 @@ class COMMENT extends ATTACHMENT_HOST
    * @var integer
    */
   public $number;
+
   /**
    * Identifies the icon/type of this comment.
    * Kinds can be customized per deployment.
@@ -82,7 +85,7 @@ class COMMENT extends ATTACHMENT_HOST
    * Comment annotates this entry.
    * @return ENTRY
    */
-  function entry ()
+  public function entry ()
   {
     $this->assert (isset ($this->_entry), '_entry is not cached.', 'entry', 'COMMENT');
     return $this->_entry;
@@ -92,7 +95,7 @@ class COMMENT extends ATTACHMENT_HOST
    * The id of the parent folder.
    * @return integer
    */
-  function parent_folder_id ()
+  public function parent_folder_id ()
   {
     if (isset ($this->_parent_folder))
     {
@@ -107,7 +110,7 @@ class COMMENT extends ATTACHMENT_HOST
    * A QUERY for retrieving comments directly attached to this one.
    * @return ENTRY_COMMENT_ENTRY
    */
-  function comment_query ()
+  public function comment_query ()
   {
     $this->assert ($this->exists (), 'Comment does not exist yet.', 'comment_query', 'COMMENT');
 
@@ -128,7 +131,7 @@ class COMMENT extends ATTACHMENT_HOST
    * May also contain the entire tree of sub-comments below this one.
    * @return array[COMMENT]
    */
-  function sub_comments ()
+  public function sub_comments ()
   {
     if (! isset ($this->_sub_comments))
     {
@@ -146,7 +149,7 @@ class COMMENT extends ATTACHMENT_HOST
    * @param COMMENT $c
    * @access private
    */
-  function add_comment ($c)
+  public function add_comment ($c)
   {
     $this->_sub_comments [] = $c;
   }
@@ -158,7 +161,7 @@ class COMMENT extends ATTACHMENT_HOST
    * @param array[COMMENT] $subs
    * @access private
    */
-  function set_sub_comments ($subs)
+  public function set_sub_comments ($subs)
   {
     $this->_sub_comments = $subs;
   }
@@ -170,7 +173,7 @@ class COMMENT extends ATTACHMENT_HOST
    * @param boolean $flag
    * @access private
    */
-  function set_comments_cached ($flag)
+  public function set_comments_cached ($flag)
   {
     $this->_sub_comments = array ();
   }
@@ -180,7 +183,7 @@ class COMMENT extends ATTACHMENT_HOST
    * These are the properties defined in the user data file.
    * @see _project_entry_kinds()
    */
-  function icon_properties ()
+  public function icon_properties ()
   {
     $props = $this->app->display_options->comment_icons ();
     if (isset ($props [$this->kind - 1]))
@@ -200,7 +203,7 @@ class COMMENT extends ATTACHMENT_HOST
    * @param string $size
    * @return string
    */
-  function icon ($size = '15px')
+  public function icon ($size = '15px')
   {
     $props = $this->icon_properties ();
     return $props->icon_as_html ($size);
@@ -212,7 +215,7 @@ class COMMENT extends ATTACHMENT_HOST
    * for this comment; used during object setup when retrieved from database.
    * @param ENTRY $entry
    */
-  function set_entry ($entry)
+  public function set_entry ($entry)
   {
     $this->set_parent_folder ($entry->parent_folder ());
     $this->_entry = $entry;
@@ -222,7 +225,7 @@ class COMMENT extends ATTACHMENT_HOST
   /**
    * @return string
    */
-  function raw_title ()
+  public function raw_title ()
   {
     if (isset ($this->number))
     {
@@ -247,7 +250,7 @@ class COMMENT extends ATTACHMENT_HOST
   /**
    * @param DATABASE $db Database from which to load values.
    */
-  function load ($db)
+  public function load ($db)
   {
     parent::load ($db);
     $this->entry_id = $db->f ("entry_id");
@@ -260,7 +263,7 @@ class COMMENT extends ATTACHMENT_HOST
   /**
    * @param SQL_STORAGE $storage Store values to this object.
    */
-  function store_to ($storage)
+  public function store_to ($storage)
   {
     parent::store_to ($storage);
     $tname =$this->_table_name ();
@@ -274,7 +277,7 @@ class COMMENT extends ATTACHMENT_HOST
    * Name of the home page name for this object.
    * @return string
    */
-  function page_name ()
+  public function page_name ()
   {
     return $this->app->page_names->comment_home;
   }
@@ -282,7 +285,7 @@ class COMMENT extends ATTACHMENT_HOST
   /**
    * @access private
    */
-  function _create ()
+  protected function _create ()
   {
     $this->db->logged_query ("SELECT MAX(number) FROM {$this->app->table_names->comments} WHERE entry_id = $this->entry_id");
     if ($this->db->next_record ())
@@ -301,12 +304,14 @@ class COMMENT extends ATTACHMENT_HOST
    * @param PURGE_OPTIONS $options
    * @access private
    */
-  function _purge ($options)
+  protected function _purge ($options)
   {
     /* remove sub-comments */
     $comments = $this->sub_comments ();
     foreach ($comments as $comment)
+    {
       $comment->purge ($options);
+    }
 
     /* Remove subscriptions */
     $this->db->logged_query ("DELETE LOW_PRIORITY FROM {$this->app->table_names->subscriptions} WHERE ref_id = $this->id AND kind = '" . Subscribe_comment . "'");
@@ -319,7 +324,7 @@ class COMMENT extends ATTACHMENT_HOST
    * @return string
    * @access private
    */
-  function _table_name ()
+  protected function _table_name ()
   {
     return $this->app->table_names->comments;
   }
@@ -329,7 +334,7 @@ class COMMENT extends ATTACHMENT_HOST
    * When a state-change occurs, the state is applied to the comment and all sub-comments.
    * @access private
    */
-  function _state_changed ()
+  protected function _state_changed ()
   {
     if ($this->exists ())
     {
@@ -339,7 +344,7 @@ class COMMENT extends ATTACHMENT_HOST
       while ($i < $c)
       {
         $com = $subs [$i];
-        $com->set_state ($this->state, TRUE);
+        $com->set_state ($this->state, true);
         $i++;
       }
     }
@@ -355,7 +360,7 @@ class COMMENT extends ATTACHMENT_HOST
    * @return string
    * @access private
    */
-  function _object_url ($use_links, $separator = null, $formatter = null)
+  protected function _object_url ($use_links, $separator = null, $formatter = null)
   {
     $Result = parent::_object_url ($use_links, $separator, $formatter);
     $entry = $this->entry ();
@@ -373,7 +378,7 @@ class COMMENT extends ATTACHMENT_HOST
    * Name of the {@link FOLDER_PERMISSIONS} to use for this object.
    * @access private
    */
-  function _privilege_set ()
+  protected function _privilege_set ()
   {
     return Privilege_set_comment;
   }
@@ -385,7 +390,7 @@ class COMMENT extends ATTACHMENT_HOST
    * @return object
    * @access private
    */
-  function _default_handler_for ($handler_type, $options = null)
+  protected function _default_handler_for ($handler_type, $options = null)
   {
     switch ($handler_type)
     {
@@ -411,7 +416,7 @@ class COMMENT extends ATTACHMENT_HOST
    * @param HISTORY_ITEM $history_item Action that generated this request. May be empty.
    * @access private
    */
-  function _prepare_subscription_query ($query, $history_item)
+  protected function _prepare_subscription_query ($query, $history_item)
   {
     $folder = $this->parent_folder ();
 
@@ -425,18 +430,20 @@ class COMMENT extends ATTACHMENT_HOST
 
   /**
    * @var array[COMMENT]
-    * @access private
-    */
+   * @access private
+   */
   protected $_sub_comments;
+
   /**
    * @var ENTRY
-    * @access private
-    */
+   * @access private
+   */
   protected $_entry;
+
   /**
    * @var FOLDER
-    * @access private
-    */
+   * @access private
+   */
   protected $_folder;
 }
  

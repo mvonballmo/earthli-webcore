@@ -46,7 +46,7 @@ require_once ('webcore/obj/named_object.php');
  * @version 3.0.0
  * @since 2.2.1
  */
-class UNIQUE_OBJECT extends NAMED_OBJECT
+abstract class UNIQUE_OBJECT extends NAMED_OBJECT
 {
   /**
    * @var integer
@@ -57,7 +57,7 @@ class UNIQUE_OBJECT extends NAMED_OBJECT
    * Is the object stored in the database?
    * @return boolean
    */
-  function exists ()
+  public function exists ()
   {
     return isset ($this->id) && ($this->id <> 0);
   }
@@ -67,7 +67,7 @@ class UNIQUE_OBJECT extends NAMED_OBJECT
    * @param UNIQUE_OBJECT $obj
    * @return boolean
    */
-  function equals ($obj)
+  public function equals ($obj)
   {
     return isset($obj) && ($obj->id == $this->id);
   }
@@ -76,7 +76,7 @@ class UNIQUE_OBJECT extends NAMED_OBJECT
    * Text to uniquely identify this object.
    * @return string
    */
-  function unique_id ()
+  public function unique_id ()
   {
     return get_class ($this) . '_' . $this->id;
   }
@@ -86,7 +86,7 @@ class UNIQUE_OBJECT extends NAMED_OBJECT
    * Ensures that {@link exists()} returns <code>False</code> and that all auto-
    * generated fields are reset.
    */
-  function initialize_as_new ()
+  public function initialize_as_new ()
   {
     $this->id = 0;
   }
@@ -94,7 +94,7 @@ class UNIQUE_OBJECT extends NAMED_OBJECT
   /**
    * @param DATABASE $db Database from which to load values.
    */
-  function load ($db)
+  public function load ($db)
   {
     $this->id = $db->f ('id');
   }
@@ -102,7 +102,7 @@ class UNIQUE_OBJECT extends NAMED_OBJECT
   /**
    * @param SQL_STORAGE $storage Store values to this object.
    */
-  function store_to ($storage)
+  public function store_to ($storage)
   {
     $tname = $this->_table_name ();
     $storage->restrict ($tname, 'id');
@@ -113,7 +113,7 @@ class UNIQUE_OBJECT extends NAMED_OBJECT
    * Return a description for use in logging.
    * @return string
    */
-  function instance_description ()
+  public function instance_description ()
   {
     $Result = parent::instance_description ();
     if ($this->exists ())
@@ -131,7 +131,7 @@ class UNIQUE_OBJECT extends NAMED_OBJECT
    * Arguments to the home page url for this object.
    * @return string
    */
-  function page_arguments ()
+  public function page_arguments ()
   {
     return 'id=' . $this->id;
   }
@@ -142,16 +142,13 @@ class UNIQUE_OBJECT extends NAMED_OBJECT
    * @access private
    * @abstract
    */
-  function _table_name ()
-  { 
-    $this->raise_deferred ('_table_name', 'UNIQUE_OBJECT'); 
-  }
+  protected abstract function _table_name ();
 
   /**
    * @return SQL_UNIQUE_STORAGE
-    * @access private
-    */
-  function _make_storage ()
+   * @access private
+   */
+  protected function _make_storage ()
   {
     $class_name = $this->context->final_class_name ('SQL_UNIQUE_STORAGE', 'webcore/db/sql_unique_storage.php');
     return new $class_name ($this->context);
@@ -161,7 +158,7 @@ class UNIQUE_OBJECT extends NAMED_OBJECT
    * @param PURGE_OPTIONS $options
    * @access private
    */
-  function _purge ($options)
+  protected function _purge ($options)
   {
     $tname = $this->_table_name ();
     $this->db->logged_query ("DELETE LOW_PRIORITY FROM {$tname} WHERE id = $this->id");

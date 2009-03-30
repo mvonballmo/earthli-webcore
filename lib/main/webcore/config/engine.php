@@ -59,12 +59,14 @@ class ENGINE extends RESOLVER
    * @var ENVIRONMENT
    */
   public $env;
+
   /**
    * Global page for this session.
    * Call {@link init()} to create and initialize.
    * @var PAGE
    */
   public $page;
+
   /**
    * If true, logging is initialized.
    * Override {@link _make_logger()} to create custom logging.
@@ -73,20 +75,21 @@ class ENGINE extends RESOLVER
    * @see _make_text_file_logger()
    * @var boolean
    */
-  public $use_logging = TRUE;
+  public $use_logging = true;
+
   /**
    * If true, checks for and initializes debug mode using
    * {@link apply_debug_settings()}.
    * @var boolean
    */
-  public $use_debug_mode = TRUE;
+  public $use_debug_mode = true;
 
   /**
    * Initialize global objects for this session.
    * Creates {@link $env}, {@link $logger} and {@link $page}; call this
    * before calling {@link run()}.
    */
-  function init ()
+  public function init ()
   {
     /* Create the environment and connect the debugging tools. */
 
@@ -123,7 +126,7 @@ class ENGINE extends RESOLVER
    * Register plugins in {@link $classes} during initialization.
    * @access private
    */
-  function _initialize_class_registry ()
+  protected function _initialize_class_registry ()
   {
     parent::_initialize_class_registry ();
     $this->register_class ('PAGE', 'THEMED_PAGE', 'webcore/sys/themed_page.php');
@@ -138,7 +141,7 @@ class ENGINE extends RESOLVER
    * @return ENVIRONMENT
    * @access private
    */
-  function _make_environment ()
+  protected function _make_environment ()
   {
     $class_name = $this->final_class_name ('ENVIRONMENT', 'webcore/sys/environment.php');
     return new $class_name ();
@@ -159,7 +162,7 @@ class ENGINE extends RESOLVER
    * @param ENVIRONMENT $env
    * @access private
    */
-  function _init_environment ($env)
+  protected function _init_environment ($env)
   {
     $env->title = 'WebCore';
     $env->set_buffered ();
@@ -173,7 +176,7 @@ class ENGINE extends RESOLVER
    * @param ENVIRONMENT $env
    * @access private
    */
-  function _apply_european_settings ($env)
+  protected function _apply_european_settings ($env)
   {
     $env->date_time_toolkit->formatter = new EURO_DATE_TIME_FORMATTER ();
   }
@@ -185,7 +188,7 @@ class ENGINE extends RESOLVER
    * @param ENVIRONMENT $env
    * @access private
    */
-  function _apply_iso_settings ($env)
+  protected function _apply_iso_settings ($env)
   {
     $env->date_time_toolkit->formatter = new ISO_DATE_TIME_FORMATTER ();
   }
@@ -197,7 +200,7 @@ class ENGINE extends RESOLVER
    * {@link _apply_release_settings()}. Release web sites should call
    * <code>_apply_release_settings</code> instead.
    */
-  function _apply_debug_settings ($env)
+  protected function _apply_debug_settings ($env)
   {
     $debug = read_var ('debug');
     if ($debug)
@@ -208,7 +211,7 @@ class ENGINE extends RESOLVER
     {
       $this->_apply_release_settings ($env);
     }
-    $env->debug_enabled = TRUE;
+    $env->debug_enabled = true;
   }
 
   /**
@@ -217,9 +220,9 @@ class ENGINE extends RESOLVER
    * and redirect the exception to an error handler page.
    * @see _apply_debug_settings()
    */
-  function _apply_release_settings ($env)
+  protected function _apply_release_settings ($env)
   {
-    $env->debug_enabled = FALSE;
+    $env->debug_enabled = false;
     set_default_exception_handler (new REDIRECT_EXCEPTION_HANDLER ($env));
   }
 
@@ -238,7 +241,7 @@ class ENGINE extends RESOLVER
    * @return LOGGER
    * @access private
    */
-  function _make_logger ($env)
+  protected function _make_logger ($env)
   {
     $class_name = $this->final_class_name ('LOGGER', 'webcore/log/logger.php');
     return new $class_name ();
@@ -255,7 +258,7 @@ class ENGINE extends RESOLVER
    * @return JS_CONSOLE_LOGGER
    * @access private
    */
-  function _make_console_logger ($env)
+  protected function _make_console_logger ($env)
   {
     $class_name = $this->final_class_name ('JS_CONSOLE_LOGGER', 'webcore/log/js_console_logger.php');
     return new $class_name ($env);
@@ -271,7 +274,7 @@ class ENGINE extends RESOLVER
    * @return ECHO_LOGGER
    * @access private
    */
-  function _make_echo_logger ($env)
+  protected function _make_echo_logger ($env)
   {
     $class_name = $this->final_class_name ('ECHO_LOGGER', 'webcore/log/echo_logger.php');
     return new $class_name ($env);
@@ -291,7 +294,7 @@ class ENGINE extends RESOLVER
    * @return FILE_LOGGER
    * @access private
    */
-  function _make_text_file_logger ($env, $file_name, $is_html = FALSE)
+  protected function _make_text_file_logger ($env, $file_name, $is_html = false)
   {
     $class_name = $this->final_class_name ('FILE_LOGGER', 'webcore/log/file_logger.php');
     $Result = new $class_name ($env);
@@ -318,7 +321,7 @@ class ENGINE extends RESOLVER
    * @param LOGGER $logger
    * @access private
    */
-  function _init_logger ($env, $logger)
+  protected function _init_logger ($env, $logger)
   {
     $logger->set_enabled (Msg_type_error | Msg_type_warning);
     $logger->set_channel_enabled (Msg_channel_default, Msg_type_all);
@@ -331,7 +334,7 @@ class ENGINE extends RESOLVER
    * @return PAGE
    * @access private
    */
-  function _make_page ($env)
+  protected function _make_page ($env)
   {
     $class_name = $this->final_class_name ('PAGE', 'webcore/sys/page.php');
     return new $class_name ($env);
@@ -345,7 +348,7 @@ class ENGINE extends RESOLVER
    * @param PAGE $page
    * @access private
    */
-  function _init_page ($env, $page)
+  protected function _init_page ($env, $page)
   {
     /* Set default properties for the <PAGE_TITLE>. */
 
@@ -392,7 +395,7 @@ class ENGINE extends RESOLVER
 
     /* Set up basic mailing options. */
 
-    $page->mail_options->enabled = FALSE;
+    $page->mail_options->enabled = false;
     $page->mail_options->SMTP_server = $env->default_domain ();
     $page->mail_options->webmaster_address = 'webmaster@' . $env->default_domain ();
     $page->mail_options->send_from_address = 'webmaster@' . $env->default_domain ();

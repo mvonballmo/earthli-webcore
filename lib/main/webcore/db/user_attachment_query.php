@@ -58,7 +58,7 @@ class USER_ATTACHMENT_QUERY extends USER_ENTRY_SUB_OBJECT_QUERY
   /**
    * Apply default restrictions and tables.
    */
-  function apply_defaults () 
+  public function apply_defaults () 
   {
     $this->set_select ($this->alias . '.*');
     $this->set_table ($this->app->table_names->attachments . ' ' . $this->alias);
@@ -76,7 +76,7 @@ class USER_ATTACHMENT_QUERY extends USER_ENTRY_SUB_OBJECT_QUERY
    * @return string
    * @access private
    */
-  function table_for_set ($set_name)
+  public function table_for_set ($set_name)
   {
     switch ($set_name)
     {
@@ -91,7 +91,7 @@ class USER_ATTACHMENT_QUERY extends USER_ENTRY_SUB_OBJECT_QUERY
    * @return ATTACHMENT
    * @access private
    */
-  function _make_object ()
+  protected function _make_object ()
   {
     $class_name = $this->app->final_class_name ('ATTACHMENT', 'webcore/obj/attachment.php');
     return new $class_name ($this->app);
@@ -103,7 +103,7 @@ class USER_ATTACHMENT_QUERY extends USER_ENTRY_SUB_OBJECT_QUERY
    * @param ENTRY $entry
    * @access private
    */
-  function _attach_entry_to_object ($obj, $entry)
+  protected function _attach_entry_to_object ($obj, $entry)
   {
     $obj->set_host ($entry);
   }
@@ -129,7 +129,7 @@ class USER_MULTI_TYPE_ATTACHMENT_QUERY extends USER_ATTACHMENT_QUERY
   /**
    * Apply default restrictions and tables.
    */
-  function apply_defaults () 
+  public function apply_defaults () 
   {
     parent::apply_defaults ();
     $this->add_select ('entry.type as entry_type');
@@ -140,7 +140,7 @@ class USER_MULTI_TYPE_ATTACHMENT_QUERY extends USER_ATTACHMENT_QUERY
    * @return ENTRY
    * @access private
    */
-  function _make_entry ()
+  protected function _make_entry ()
   {
     return $this->app->make_entry ($this->db->f ('entry_type'));
   }
@@ -152,7 +152,7 @@ class USER_MULTI_TYPE_ATTACHMENT_QUERY extends USER_ATTACHMENT_QUERY
    * @param ENTRY $entry The entry whose properties should be set.
    * @access private
    */
-  function _prepare_entry ($entry)
+  protected function _prepare_entry ($entry)
   {
     parent::_prepare_entry ($entry);
     $entry->type = $this->db->f ('entry_type');

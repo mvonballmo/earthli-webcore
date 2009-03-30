@@ -35,7 +35,7 @@ class RECIPES_160_170_MIGRATOR_TASK extends UPGRADE_PER_APP_260_270_TASK
   public $version_from = '1.6.0';
   public $version_to = '1.7.0';
 
-  function _execute ()
+  protected function _execute ()
   {
     log_open_block ("Cleaning up indexes");
       $this->clean_up_folder_permissions ('recipe_folder_permissions');

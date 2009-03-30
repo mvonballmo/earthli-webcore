@@ -53,7 +53,7 @@ class ALBUM_ENTRY_GRID extends CONTENT_OBJECT_GRID
    * @param array[object] $objs
    * @access private
    */
-  function _draw ($objs)
+  protected function _draw ($objs)
   {
     if (sizeof ($objs))
     {
@@ -71,7 +71,7 @@ class ALBUM_ENTRY_GRID extends CONTENT_OBJECT_GRID
    * @return TITLE_FORMATTER
    * @access private
    */
-  function title_formatter ($obj)
+  public function title_formatter ($obj)
   {
     $Result = parent::title_formatter ($obj);
 

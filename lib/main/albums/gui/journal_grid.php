@@ -52,32 +52,37 @@ class JOURNAL_GRID extends ALBUM_ENTRY_GRID
    * @var string
    */
   public $object_name = 'Journal';
+
   /**
    * @var string
    */
   public $box_style = 'object-in-list';
+
   /**
    * @var integer
    */
   public $spacing = 2;
+
   /**
    * @var boolean
    */
-  public $show_separator = FALSE;
+  public $show_separator = false;
+
   /**
    * @var boolean
    */
-  public $show_user = TRUE;
+  public $show_user = true;
+
   /**
    * @var boolean
    */
-  public $show_folder = FALSE;
+  public $show_folder = false;
 
   /**
    * @param JOURNAL $obj
-    * @access private
-    */
-  function _draw_box ($obj)
+   * @access private
+   */
+  protected function _draw_box ($obj)
   {
     $folder = $obj->parent_folder ();
     $creator = $obj->creator ();
@@ -140,7 +145,7 @@ class JOURNAL_SUMMARY_GRID extends ENTRY_SUMMARY_GRID
    * @param JOURNAL $obj
    * @access private
    */
-  function _echo_details ($obj)
+  protected function _echo_details ($obj)
   {
     parent::_echo_details ($obj);
 ?>
@@ -160,7 +165,7 @@ class JOURNAL_SUMMARY_GRID extends ENTRY_SUMMARY_GRID
    * @param OBJECT_IN_FOLDER $obj
    * @access private
    */
-  function _text_to_summarize ($obj)
+  protected function _text_to_summarize ($obj)
   {
     return $obj->description . ' ' . $obj->weather;
   }  

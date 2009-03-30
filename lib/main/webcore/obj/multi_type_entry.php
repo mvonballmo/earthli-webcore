@@ -50,24 +50,25 @@ require_once ('webcore/obj/entry.php');
  * @since 2.2.1
  * @abstract
  */
-class MULTI_TYPE_ENTRY extends ENTRY
+abstract class MULTI_TYPE_ENTRY extends ENTRY
 {
   /**
    * Name of the type of entry.
-    * @var string
-    * @access private
-    */
+   * @var string
+   * @access private
+   */
   public $type;
+
   /**
    * @var integer
-    * @access private
-    */
+   * @access private
+   */
   public $entry_id;
 
   /**
    * @param DATABASE $db Database from which to load values.
    */
-  function load ($db)
+  public function load ($db)
   {
     parent::load ($db);
     $this->type = $db->f ("type");
@@ -77,7 +78,7 @@ class MULTI_TYPE_ENTRY extends ENTRY
   /**
    * @param SQL_STORAGE $storage Store values to this object.
    */
-  function store_to ($storage)
+  public function store_to ($storage)
   {
     parent::store_to ($storage);
     $storage->add ($this->_table_name (), 'type', Field_type_string, $this->type, Storage_action_create);
@@ -88,17 +89,17 @@ class MULTI_TYPE_ENTRY extends ENTRY
 
   /**
    * The name of the 'extra-info' table for this type.
-    * @return string
-    * @access private
-    * @abstract
-    */
-  function _secondary_table_name () { $this->raise_deferred ('_secondary_table_name', 'MULTI_TYPE_ENTRY'); }
+   * @return string
+   * @access private
+   * @abstract
+   */
+  protected abstract function _secondary_table_name ();
 
   /**
    * @return SQL_MULTI_TYPE_ENTRY_STORAGE
-    * @access private
-    */
-  function _make_storage ()
+   * @access private
+   */
+  protected function _make_storage ()
   {
     $class_name = $this->app->final_class_name ('SQL_MULTI_TYPE_ENTRY_STORAGE', 'webcore/db/sql_entry_storage.php');
     return new $class_name ($this->app);
@@ -108,7 +109,7 @@ class MULTI_TYPE_ENTRY extends ENTRY
    * @param PURGE_OPTIONS $options
    * @access private
    */
-  function _purge ($options)
+  protected function _purge ($options)
   {
     $tname = $this->_secondary_table_name ();
     $this->db->logged_query ("DELETE LOW_PRIORITY FROM {$tname} WHERE entry_id = $this->id");

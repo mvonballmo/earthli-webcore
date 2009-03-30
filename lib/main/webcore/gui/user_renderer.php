@@ -53,7 +53,7 @@ class USER_RENDERER extends CONTENT_OBJECT_RENDERER
    * @param USER $obj
    * @access private
    */
-  function _display_as_html ($obj)
+  protected function _display_as_html ($obj)
   {
     $this->_echo_subscribe_status ($obj);
     $main_style = '';
@@ -113,7 +113,7 @@ class USER_RENDERER extends CONTENT_OBJECT_RENDERER
    * @param USER $obj
    * @access private
    */
-  function _echo_properties_as_html ($obj)
+  protected function _echo_properties_as_html ($obj)
   {
 ?>    
   <dl>
@@ -202,7 +202,7 @@ class USER_RENDERER extends CONTENT_OBJECT_RENDERER
    * @param USER $obj
    * @access private
    */
-  function _echo_subscribe_status ($obj)
+  protected function _echo_subscribe_status ($obj)
   {
     $this->_echo_html_subscribed_toggle ($obj, 'subscribe_to_user.php?name=' . $obj->title, Subscribe_user);
   }
@@ -212,7 +212,7 @@ class USER_RENDERER extends CONTENT_OBJECT_RENDERER
    * @param USER $obj
    * @access private
    */
-  function _display_as_plain_text ($obj)
+  protected function _display_as_plain_text ($obj)
   {
     parent::display_as_plain_text ($obj);
   }

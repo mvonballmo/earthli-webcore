@@ -53,7 +53,7 @@ class TEST_HARNESS_APPLICATION_ENGINE extends APPLICATION_ENGINE
    * Register plugins in {@link $classes} during initialization.
    * @access private
    */
-  function _initialize_class_registry ()
+  protected function _initialize_class_registry ()
   {
     parent::_initialize_class_registry ();
     $this->register_class ('APPLICATION', 'TEST_HARNESS_APPLICATION', 'webcore/tests/sys/test_harness_application.php');

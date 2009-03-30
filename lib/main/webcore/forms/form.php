@@ -78,27 +78,30 @@ define ('Form_first_control_for_field', 0);
  * @since 2.2.1
  * @abstract
  */
-class FORM extends WEBCORE_OBJECT
+abstract class FORM extends WEBCORE_OBJECT
 {
   /**
    * Name of the form displayed in the page.
-    * Commonly used with JavaScript. Only needs to be modified if more than one form
-    * per page is displayed. Then this variable is also used to determine which form
-    * was submitted back to the generating page.
-    * @see FORM::set_name()
-    * @var string
-    */
+   * Commonly used with JavaScript. Only needs to be modified if more than one form
+   * per page is displayed. Then this variable is also used to determine which form
+   * was submitted back to the generating page.
+   * @see FORM::set_name()
+   * @var string
+   */
   public $name = 'update_form';
+
   /**
    * Text of the submit button.
-    * @var string
-    */
+   * @var string
+   */
   public $button = Form_default_button_title;
+
   /**
    * Icon for the submit button.
    * @var string
    */
   public $button_icon = '';
+
   /**
    * HTTP submission method.
    * Also determines from where the form reads it's submitted values. The
@@ -110,33 +113,39 @@ class FORM extends WEBCORE_OBJECT
    * @var string
    */
   public $method = 'post';
+
   /**
    * To which url is this form submitted?
    * Defaults to the current page.
    * @var string
    */
   public $action;
+
   /**
    * Location within the target page.
    * Some browsers do not support this feature. It will be left off if
    * {@link Browser_anchors_in_posts} is not supported.
    */
   public $action_anchor;
+
   /**
    * Main form container has this CSS class.
    * @var string
    */
   public $CSS_class = 'basic';
+
   /**
    * Always executes the form as submitted, if set.
    * @var boolean
    */
-  public $assume_submitted = FALSE;
+  public $assume_submitted = false;
+
   /**
    * Should this form set focus to its initial control?
    * @var boolean
    */
-  public $allow_focus = TRUE;
+  public $allow_focus = true;
+
   /**
    * Handles verifying human (vs. robot) input in the form.
    * @var CAPTCHA
@@ -146,7 +155,7 @@ class FORM extends WEBCORE_OBJECT
   /**
    * @param CONTEXT $context Attach to this object.
    */
-  function FORM ($context)
+  public function FORM ($context)
   {
     WEBCORE_OBJECT::WEBCORE_OBJECT ($context);
 
@@ -164,7 +173,7 @@ class FORM extends WEBCORE_OBJECT
     $field = new BOOLEAN_FIELD ();
     $field->id = 'debug';
     $field->title = 'Debug';
-    $field->visible = FALSE;
+    $field->visible = false;
     $this->add_field ($field);
 
     if ($this->_captcha_enabled ())
@@ -174,7 +183,7 @@ class FORM extends WEBCORE_OBJECT
       $field = new INTEGER_FIELD ();
       $field->id = 'verification_answer';
       $field->title = 'Verification';
-      $field->required = TRUE;
+      $field->required = true;
       $field->description = 'Please answer the question above using numerals (not text). This is an anti-spam measure; we apologize for the inconvenience.';
       $this->add_field ($field);
 
@@ -183,7 +192,7 @@ class FORM extends WEBCORE_OBJECT
       $field->title = '';
       $field->min_length = 5;
       $field->max_length = 5;
-      $field->visible = FALSE;
+      $field->visible = false;
       $this->add_field ($field);
     }
   }
@@ -195,22 +204,22 @@ class FORM extends WEBCORE_OBJECT
    * whether it was submitted.
    * @return boolean
    */
-  function submitted ()
+  public function submitted ()
   {
     $Result = $this->assume_submitted;
     if (! $Result)
     {
       $this->load_from_request ();
-      $Result = $this->value_for ($this->_form_based_field_name ('submitted'));
+      $Result = $this->value_for ($this->form_based_field_name ('submitted'));
     }
     return $Result;
   }
 
   /**
    * @return boolean Were the contents of this form committed?
-    * @see FORM::attempt_action()
-    */
-  function committed ()
+   * @see FORM::attempt_action()
+   */
+  public function committed ()
   {
     return $this->_committed;
   }
@@ -219,7 +228,7 @@ class FORM extends WEBCORE_OBJECT
    * Does this form have errors?
    * @return boolean
    */
-  function has_errors ()
+  public function has_errors ()
   {
     return sizeof ($this->_errors) > 0;
   }
@@ -231,7 +240,7 @@ class FORM extends WEBCORE_OBJECT
    * {@link commit()} the form if it has been {@link submitted()}.
    * @param object $obj
    */
-  function process ($obj)
+  public function process ($obj)
   {
     $this->_process ($obj, Form_load_action_default);
   }
@@ -241,7 +250,7 @@ class FORM extends WEBCORE_OBJECT
    * Using the form like this will commit an action not associated with a specific object.
    * This will commit the form if it has been {@link submitted()}.
    */
-  function process_plain ()
+  public function process_plain ()
   {
     $no_obj = null; // Compiler warning
     $this->_process ($no_obj, Form_load_action_default);
@@ -252,7 +261,7 @@ class FORM extends WEBCORE_OBJECT
    * This will commit the form if it has been {@link submitted()}.
    * @param object $obj
    */
-  function process_new ($obj)
+  public function process_new ($obj)
   {
     $this->_process ($obj, Form_load_action_default);
   }
@@ -262,7 +271,7 @@ class FORM extends WEBCORE_OBJECT
    * This will commit the form if it has been {@link submitted()}.
    * @param object $obj
    */
-  function process_existing ($obj)
+  public function process_existing ($obj)
   {
     $this->_process ($obj, Form_load_action_object);
   }
@@ -272,7 +281,7 @@ class FORM extends WEBCORE_OBJECT
    * This is done automatically when {@link attempt_action()} is called.
    * @param object Validate for this object.
    */
-  function validate ($obj)
+  public function validate ($obj)
   {
     $this->load_from_request ();
     $this->_errors = array ();
@@ -326,9 +335,9 @@ class FORM extends WEBCORE_OBJECT
    * the database.
    * @param object $obj Store the form values to this object.
    */
-  function attempt_action ($obj)
+  public function attempt_action ($obj)
   {
-    $this->_committed = FALSE;
+    $this->_committed = false;
     $this->_object = $obj;
     $this->validate ($obj);
     if (! $this->has_errors ())
@@ -337,7 +346,7 @@ class FORM extends WEBCORE_OBJECT
       if (! $this->has_errors ())
       {
         $this->commit ($obj);
-        $this->_committed = TRUE;
+        $this->_committed = true;
         $this->_store_sticky_fields ();
       }
     }
@@ -347,7 +356,7 @@ class FORM extends WEBCORE_OBJECT
    * Load initial properties from this object.
    * @param object $obj
    */
-  function load_from_object ($obj)
+  public function load_from_object ($obj)
   {
     if (isset ($this->captcha))
     {
@@ -358,7 +367,7 @@ class FORM extends WEBCORE_OBJECT
   /**
    * Load default values for a new object.
    */
-  function load_with_defaults ()
+  public function load_with_defaults ()
   {
     if (isset ($this->captcha))
     {
@@ -371,7 +380,7 @@ class FORM extends WEBCORE_OBJECT
    * If no renderer is supplied, the result of {@link make_renderer()} is used.
    * @param FORM_RENDERER $renderer
    */
-  function display ($renderer = null)
+  public function display ($renderer = null)
   {
     /* When debugging forms, it's often nice to see all error messages. It makes it easier to see where
        fields have been drawn, but no call to display that field's errors were made. */
@@ -416,13 +425,15 @@ class FORM extends WEBCORE_OBJECT
   /**
    * Displays errors for all fields in the form.
    */
-  function display_all_errors ()
+  public function display_all_errors ()
   {
     if ($this->has_errors ())
     {
       echo "<div class=\"error\">\n";
       foreach ($this->_fields as $field)
-        $this->_draw_errors ($field->id, FALSE);
+      {
+        $this->_draw_errors ($field->id, false);
+      }
       echo "</div>\n";
     }
   }
@@ -432,7 +443,7 @@ class FORM extends WEBCORE_OBJECT
    * Returns an empty array if no errors are found.
    * @return array[string]
    */
-  function errors_for ($id)
+  public function errors_for ($id)
   {
     if (isset ($this->_errors [$id]))
     {
@@ -450,26 +461,28 @@ class FORM extends WEBCORE_OBJECT
    * Merges results from {@link errors_for()} for all fields.
    * @return array[string]
    */
-  function all_errors ()
+  public function all_errors ()
   {
     $Result = array ();
     if ($this->has_errors ())
     {
       foreach ($this->_fields as $field)
+      {
         $Result = array_merge ($Result, $this->errors_for ($field->id));
+      }
     }
     return $Result;
   }
 
   /**
    * Returns the requested fields as query-string arguments.
-    * Useful when working with forms with method = 'get'. The values that generated
-    * the form can then be retrieved with this function and mapped to other links outside this form.
-    * Pagination in search forms is supported this way.
-    * @param array[string] $field_names Specifies which field values to use. If empty, all values are returned.
-    * @return string
-    */
-  function as_query_string ($field_names = '')
+   * Useful when working with forms with method = 'get'. The values that generated
+   * the form can then be retrieved with this function and mapped to other links outside this form.
+   * Pagination in search forms is supported this way.
+   * @param array[string] $field_names Specifies which field values to use. If empty, all values are returned.
+   * @return string
+   */
+  public function as_query_string ($field_names = '')
   {
     if (! $field_names)
     {
@@ -499,15 +512,17 @@ class FORM extends WEBCORE_OBJECT
 
   /**
    * Change the name of the form.
-    * Do not set the form name manually or the form will not know whether it has been submitted.
-    * @param string $name
-    */
-  function set_name ($name)
+   * Do not set the form name manually or the form will not know whether it has been submitted.
+   * @param string $name
+   */
+  public function set_name ($name)
   {
     if ($this->name != $name)
     {
       foreach ($this->_form_based_field_names as $field_name)
-        $field_names [] = $this->_form_based_field_name ($field_name);
+      {
+        $field_names [] = $this->form_based_field_name ($field_name);
+      }
 
       $idx = 0;
       $count = sizeof ($this->_field_list);
@@ -539,7 +554,7 @@ class FORM extends WEBCORE_OBJECT
    * JavaScript for retrieving the form.
    * @return string
    */
-  function js_form_name ()
+  public function js_form_name ()
   {
     return "document.getElementById ('$this->name')";
   }
@@ -550,7 +565,7 @@ class FORM extends WEBCORE_OBJECT
    * @return FIELD
    * @access private
    */
-  function field_at ($id)
+  public function field_at ($id)
   {
     $this->_verify_id ($id, 'field_at');
     return $this->_fields [$id];
@@ -562,7 +577,7 @@ class FORM extends WEBCORE_OBJECT
    * @return string
    * @access private
    */
-  function value_for ($id)
+  public function value_for ($id)
   {
     $this->_verify_id ($id, 'value_for');
     return $this->_fields [$id]->value ();
@@ -577,7 +592,7 @@ class FORM extends WEBCORE_OBJECT
    * @return UPLOADED_FILE
    * @access private
    */
-  function upload_file_for ($id, $index = Form_first_control_for_field)
+  public function upload_file_for ($id, $index = Form_first_control_for_field)
   {
     $this->_verify_id ($id, 'upload_file_for');
     $file_set = $this->value_for ($id);
@@ -589,6 +604,8 @@ class FORM extends WEBCORE_OBJECT
         return $file;
       }
     }
+    
+    return null;
   }
 
   /**
@@ -596,7 +613,7 @@ class FORM extends WEBCORE_OBJECT
    * @param string $id
    * @return boolean
    */
-  function is_field ($id)
+  public function is_field ($id)
   {
     return array_key_exists ($id, $this->_fields);
   }
@@ -607,7 +624,7 @@ class FORM extends WEBCORE_OBJECT
    * @return boolean
    * @access private
    */
-  function enabled ($id)
+  public function enabled ($id)
   {
     $this->_verify_id ($id, 'enabled');
     return $this->_fields [$id]->enabled;
@@ -619,7 +636,7 @@ class FORM extends WEBCORE_OBJECT
    * @return boolean
    * @access private
    */
-  function required ($id)
+  public function required ($id)
   {
     $this->_verify_id ($id, 'required');
     return $this->_fields [$id]->required;
@@ -627,14 +644,14 @@ class FORM extends WEBCORE_OBJECT
 
   /**
    * Is this value for this field selected?
-    * Only makes sense with array field types, usually connected to arrays of checkboxes.
-    * @see ARRAY_FIELD
-    * @param string $id Must be a valid field id.
-    * @param string $value
-    * @return boolean
-    * @access private
-    */
-  function selected ($id, $value)
+   * Only makes sense with array field types, usually connected to arrays of checkboxes.
+   * @see ARRAY_FIELD
+   * @param string $id Must be a valid field id.
+   * @param string $value
+   * @return boolean
+   * @access private
+   */
+  public function selected ($id, $value)
   {
     $this->_verify_id ($id, 'visible');
     return $this->_fields [$id]->selected ($value);
@@ -646,7 +663,7 @@ class FORM extends WEBCORE_OBJECT
    * @return boolean
    * @access private
    */
-  function visible ($id)
+  public function visible ($id)
   {
     $this->_verify_id ($id, 'visible');
     return $this->_fields [$id]->visible;
@@ -660,7 +677,7 @@ class FORM extends WEBCORE_OBJECT
    * @return string
    * @access private
    */
-  function js_name ($id)
+  public function js_name ($id)
   {
     $this->_verify_id ($id, 'js_name');
     $js_name = $this->_fields [$id]->js_name ();
@@ -675,7 +692,7 @@ class FORM extends WEBCORE_OBJECT
    * @return string
    * @access private
    */
-  function name ($id)
+  public function name ($id)
   {
     $this->_verify_id ($id, 'name');
     return $this->_fields [$id]->js_name ();
@@ -688,7 +705,7 @@ class FORM extends WEBCORE_OBJECT
    * @return string
    * @access private
    */
-  function value_as_text ($id)
+  public function value_as_text ($id)
   {
     $this->_verify_id ($id, 'value_as_text');
     return $this->_fields [$id]->as_text ($this);
@@ -701,7 +718,7 @@ class FORM extends WEBCORE_OBJECT
    * @return boolean
    * @access private
    */
-  function value_is_empty ($id)
+  public function value_is_empty ($id)
   {
     $this->_verify_id ($id, 'value_is_empty');
     return $this->_fields [$id]->is_empty ();
@@ -713,7 +730,7 @@ class FORM extends WEBCORE_OBJECT
    * @param string $value
    * @access private
    */
-  function set_enabled ($id, $value)
+  public function set_enabled ($id, $value)
   {
     $this->_verify_id ($id, 'set_enabled');
     $this->_fields [$id]->enabled = $value;
@@ -725,7 +742,7 @@ class FORM extends WEBCORE_OBJECT
    * @param string $value
    * @access private
    */
-  function set_required ($id, $value)
+  public function set_required ($id, $value)
   {
     $this->_verify_id ($id, 'set_required');
     $this->_fields [$id]->required = $value;
@@ -737,7 +754,7 @@ class FORM extends WEBCORE_OBJECT
    * @param string $value
    * @access private
    */
-  function set_visible ($id, $value)
+  public function set_visible ($id, $value)
   {
     $this->_verify_id ($id, 'set_visible');
     $this->_fields [$id]->visible = $value;
@@ -749,7 +766,7 @@ class FORM extends WEBCORE_OBJECT
    * @param string $value
    * @access private
    */
-  function set_value ($id, $value)
+  public function set_value ($id, $value)
   {
     $this->_verify_id ($id, 'set_value');
     $this->_fields [$id]->set_value ($value);
@@ -761,7 +778,7 @@ class FORM extends WEBCORE_OBJECT
    * @param string $value Default value if none is found.
    * @access private
    */
-  function load_from_client ($id, $value)
+  public function load_from_client ($id, $value)
   {
     $this->_verify_id ($id, 'load_from_client');
     $this->_fields [$id]->load_from_client ($this, $this->context->storage, $value);
@@ -770,7 +787,7 @@ class FORM extends WEBCORE_OBJECT
   /**
    * Load the value of the field at 'id' from the request.
    * @param string $id Must be a valid field id. */
-  function load_from_request_for ($id)
+  public function load_from_request_for ($id)
   {
     $this->_verify_id ($id, 'load_from_request_for');
     $values = $this->_request_array_to_use ();
@@ -781,7 +798,7 @@ class FORM extends WEBCORE_OBJECT
    * Which control has initial focus?
    * @return string
    */
-  function initial_focus ()
+  public function initial_focus ()
   {
     return $this->_initial_focus;
   }
@@ -791,7 +808,7 @@ class FORM extends WEBCORE_OBJECT
    * If 'id' is empty, the form will use the browser-default focus.
    * @param string $id Must be a valid field id.
    */
-  function set_initial_focus ($id)
+  public function set_initial_focus ($id)
   {
     if ($id)
     {
@@ -805,7 +822,7 @@ class FORM extends WEBCORE_OBJECT
    * @param string $type Can be {@link Tag_validator_single_line} or {@link Tag_validator_multi_line}.
    * @return MUNGER_VALIDATOR
    */
-  function tag_validator ($type)
+  public function tag_validator ($type)
   {
     return $this->context->make_tag_validator ($type);
   }
@@ -814,7 +831,7 @@ class FORM extends WEBCORE_OBJECT
    * Return an object that manages uploaded files.
    * @return UPLOADER
    */
-  function uploader ()
+  public function uploader ()
   {
     if (! isset ($this->_uploader))
     {
@@ -829,7 +846,7 @@ class FORM extends WEBCORE_OBJECT
    * Returns True if there are upload fields in the form.
    * @return boolean
    */
-  function contains_uploads ()
+  public function contains_uploads ()
   {
     return sizeof ($this->_upload_fields) > 0;
   }
@@ -841,7 +858,7 @@ class FORM extends WEBCORE_OBJECT
    * @param string $msg The error message *
    * @access private
    */
-  function record_error ($id, $msg, $idx = null)
+  public function record_error ($id, $msg, $idx = null)
   {
     if (isset ($idx))
     {
@@ -861,7 +878,7 @@ class FORM extends WEBCORE_OBJECT
    * @return integer
    * @access private
    */
-  function num_errors ($id, $idx = null)
+  public function num_errors ($id, $idx = null)
   {
     if (isset ($idx))
     {
@@ -880,7 +897,7 @@ class FORM extends WEBCORE_OBJECT
    * @return integer
    * @access private
    */
-  function error_at ($id, $index, $idx = null)
+  public function error_at ($id, $index, $idx = null)
   {
     if (isset ($idx))
     {
@@ -897,7 +914,7 @@ class FORM extends WEBCORE_OBJECT
    * @param FIELD $field
    * @access private
    */
-  function add_field ($field)
+  public function add_field ($field)
   {
     $this->_field_list [] = $field;
     $this->_fields [$field->id] = $field;
@@ -912,7 +929,7 @@ class FORM extends WEBCORE_OBJECT
    * to customize output for the form.
    * @return FORM_RENDERER
    */
-  function make_renderer ()
+  public function make_renderer ()
   {
     return $this->context->make_form_renderer ($this);
   }
@@ -924,7 +941,7 @@ class FORM extends WEBCORE_OBJECT
    * for PHP (set in the INI file for post size).
    * @return integer
    */
-  function max_upload_file_size ()
+  public function max_upload_file_size ()
   {
     if (! isset ($this->_max_upload_file_size))
     {
@@ -932,7 +949,9 @@ class FORM extends WEBCORE_OBJECT
       if ($this->contains_uploads ())
       {
         foreach ($this->_upload_fields as $field)
+        {
           $size = max ($size, $field->max_bytes);
+        }
       }
 
       $uploader = $this->uploader ();
@@ -953,10 +972,10 @@ class FORM extends WEBCORE_OBJECT
 
   /**
    * Does this form represent an existing object?
-    * @return bool
-    * @access private
-    */
-  function object_exists ()
+   * @return bool
+   * @access private
+   */
+  public function object_exists ()
   {
     return isset ($this->_object) && $this->_object->exists ();
   }
@@ -966,12 +985,12 @@ class FORM extends WEBCORE_OBJECT
    * @param boolean $force_reload Will always load, regardless of whether it's
    * already loaded or not.
    */
-  function load_from_request ($force_reload = FALSE)
+  public function load_from_request ($force_reload = false)
   {
     if (! $this->_loaded || $force_reload)
     {
       $this->_load_from_request ();
-      $this->_loaded = TRUE;
+      $this->_loaded = true;
     }
   }
 
@@ -981,7 +1000,7 @@ class FORM extends WEBCORE_OBJECT
    * return array[string]
    * @access private
    */
-  function _request_array_to_use ()
+  protected function _request_array_to_use ()
   {
     switch ($this->method)
     {
@@ -997,13 +1016,25 @@ class FORM extends WEBCORE_OBJECT
   }
 
   /**
+   * Form-specific name for specials fields.
+   * Form properties are named relative to the form to allow more than one form to be submitted and
+   * processed within one page.
+   * @param string $base_name
+   * @return string
+   */
+  public function form_based_field_name ($base_name)
+  {
+    return "{$this->name}_$base_name";
+  }
+
+  /**
    * Read in values from the {@link $method} array.
    * Redefine this function in order to adjust the request data or otherwise
    * react to parameters in the request. Called from {@link
    * load_from_request()}.
    * @access private
    */
-  function _load_from_request ()
+  protected function _load_from_request ()
   {
     $values = $this->_request_array_to_use ();
     $idx = 0;
@@ -1031,7 +1062,7 @@ class FORM extends WEBCORE_OBJECT
    * store their current values on the client.
    * @access private
    */
-  function _store_sticky_fields ()
+  protected function _store_sticky_fields ()
   {
     $s = $this->context->storage;
     $s->expire_in_n_days ($this->context->storage_options->setting_duration);
@@ -1067,7 +1098,7 @@ class FORM extends WEBCORE_OBJECT
    * @param boolean $form_is_valid Will the form be committed?
    * @access private
    */
-  function _process_uploaded_file ($field, $file, $form_is_valid)
+  protected function _process_uploaded_file ($field, $file, $form_is_valid)
   {
     if (! $file->processed && $file->is_valid ())
     {
@@ -1093,7 +1124,7 @@ class FORM extends WEBCORE_OBJECT
    * @param boolean $form_is_valid Will the form be committed?
    * @access private
    */
-  function _move_uploaded_file ($field, $file, $path, $form_is_valid = TRUE)
+  protected function _move_uploaded_file ($field, $file, $path, $form_is_valid = true)
   {
     $file->move_to ($path, $this->_upload_file_copy_mode ($field, $file, $form_is_valid));
   }
@@ -1109,7 +1140,7 @@ class FORM extends WEBCORE_OBJECT
    * @param boolean $form_is_valid Will the form be committed?
    * @access private
    */
-  function _upload_folder_for ($field, $file, $form_is_valid)
+  protected function _upload_folder_for ($field, $file, $form_is_valid)
   {
     $temp_folder = $this->context->upload_options->temp_folder;
     $path = $this->context->resolve_path ($temp_folder, Force_root_on);
@@ -1125,7 +1156,7 @@ class FORM extends WEBCORE_OBJECT
    * @return string Can be {@link Uploaded_file_unique_name} or {@link Uploaded_file_overwrite}.
    * @access private
    */
-  function _upload_file_copy_mode ($field, $file, $form_is_valid)
+  protected function _upload_file_copy_mode ($field, $file, $form_is_valid)
   {
     return Uploaded_file_unique_name;
   }
@@ -1140,10 +1171,10 @@ class FORM extends WEBCORE_OBJECT
    * @param string $load_action
    * @access private
    */
-  function _apply_all_data ($obj, $load_action)
+  protected function _apply_all_data ($obj, $load_action)
   {
     $this->_process_load_action ($obj, $load_action);
-    $this->load_from_request (TRUE);
+    $this->load_from_request (true);
     $this->_post_load_data ($obj);
   }
 
@@ -1153,7 +1184,7 @@ class FORM extends WEBCORE_OBJECT
    * @param string $load_action
    * @access private
    */
-  function _process ($obj, $load_action)
+  protected function _process ($obj, $load_action)
   {
     $this->_load_action = $load_action;
 
@@ -1178,7 +1209,7 @@ class FORM extends WEBCORE_OBJECT
    * @param string $load_action Can be {@link Form_load_action_default} or {@link Form_load_action_object}.
    * @access private
    */
-  function _process_load_action ($obj, $load_action)
+  protected function _process_load_action ($obj, $load_action)
   {
     $this->_object = $obj;
     /* Make sure to load any client-side data for this form. */
@@ -1203,7 +1234,7 @@ class FORM extends WEBCORE_OBJECT
    * @return boolean
    * @access private
    */
-  function _verify_id ($id, $func)
+  protected function _verify_id ($id, $func)
   {
     $this->assert (array_key_exists ($id, $this->_fields), "[$id] is not a field.", $func, 'FORM');
   }
@@ -1218,7 +1249,7 @@ class FORM extends WEBCORE_OBJECT
    * @param object $obj Object being validated.
    * @access private
    */
-  function _pre_validate ($obj) {}
+  protected function _pre_validate ($obj) {}
 
   /**
    * Called after fields are validated.
@@ -1227,7 +1258,7 @@ class FORM extends WEBCORE_OBJECT
    * @param object $obj Object being validated.
    * @access private
    */
-  function _post_validate ($obj)
+  protected function _post_validate ($obj)
   {
     if (isset ($this->captcha))
     {
@@ -1247,7 +1278,7 @@ class FORM extends WEBCORE_OBJECT
    * @param object $obj Object from which data was loaded. May be null.
    * @access private
    */
-  function _post_load_data ($obj) {}
+  protected function _post_load_data ($obj) {}
 
   /**
    * Apply post-validation operations to the object.
@@ -1261,7 +1292,7 @@ class FORM extends WEBCORE_OBJECT
    * @param object $obj
    * @access private
    */
-  function _prepare_for_commit ($obj) {}
+  protected function _prepare_for_commit ($obj) {}
 
   /**
    * Register an upload field in this form.
@@ -1270,7 +1301,7 @@ class FORM extends WEBCORE_OBJECT
    * @param UPLOAD_FILE_FIELD $field
    * @access private
    */
-  function _add_upload_field ($field)
+  protected function _add_upload_field ($field)
   {
     $this->_upload_fields [] = $field;
 
@@ -1282,7 +1313,7 @@ class FORM extends WEBCORE_OBJECT
       $max_field = new INTEGER_FIELD ();
       $max_field->id = Form_max_file_size_field_name;
       $max_field->min_value = 0;
-      $max_field->visible = FALSE;
+      $max_field->visible = false;
       $this->add_field ($max_field);
     }
   }
@@ -1291,16 +1322,16 @@ class FORM extends WEBCORE_OBJECT
    * Return true to use integrated captcha verification.
    * @return boolean
    */
-  function _captcha_enabled ()
+  protected function _captcha_enabled ()
   {
-    return FALSE;
+    return false;
   }
 
   /**
    * Create a human validator for this form.
    * @return CAPTCHA
    */
-  function _make_captcha ()
+  protected function _make_captcha ()
   {
     $class_name = $this->context->final_class_name ('CAPTCHA', 'webcore/util/captcha.php');
     return new $class_name ($this->context);
@@ -1310,9 +1341,9 @@ class FORM extends WEBCORE_OBJECT
    * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_hidden_controls ($renderer)
+  protected function _draw_hidden_controls ($renderer)
   {
-    $sub_field = $this->field_at ($this->_form_based_field_name ('submitted'));
+    $sub_field = $this->field_at ($this->form_based_field_name ('submitted'));
     $old_sub_value = $sub_field->value ();
     $sub_field->set_value (1);
 
@@ -1343,7 +1374,7 @@ class FORM extends WEBCORE_OBJECT
    * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_form ($renderer)
+  protected function _draw_form ($renderer)
   {
     $encoding = '';
     if ($this->contains_uploads ())
@@ -1381,7 +1412,7 @@ class FORM extends WEBCORE_OBJECT
    * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_captcha_controls ($renderer)
+  protected function _draw_captcha_controls ($renderer)
   {
     if (isset ($this->captcha))
     {
@@ -1396,24 +1427,21 @@ class FORM extends WEBCORE_OBJECT
    * @access private
    * @abstract
    */
-  function _draw_controls ($renderer)
-  {
-    $this->raise_deferred ('_draw_controls', 'FORM');
-  }
+  protected abstract function _draw_controls ($renderer);
 
   /**
    * Draw any Javascript that the form needs to enable/disable controls.
    * Include Javascript source or define functions and variables here.
    * @access private
    */
-  function _draw_scripts () {}
+  protected function _draw_scripts () {}
 
   /**
    * Create the JavaScript needed for an icon browser.
    * @param string $id
    * @access private
    */
-  function _draw_icon_browser_script_for ($id)
+  protected function _draw_icon_browser_script_for ($id)
   {
     $this->_verify_id ($id, '_draw_icon_browser_script_for');
     $js_form = $this->js_form_name ();
@@ -1436,7 +1464,7 @@ class FORM extends WEBCORE_OBJECT
    * @param boolean $use_style Surround messages with 'error' style if True.
    * @access private
    */
-  function _draw_errors ($id, $use_style = TRUE)
+  protected function _draw_errors ($id, $use_style = true)
   {
     $errors = $this->errors_for ($id);
     if (sizeof ($errors))
@@ -1446,7 +1474,9 @@ class FORM extends WEBCORE_OBJECT
         echo "<div class=\"error\">\n";
       }
       foreach ($errors as $error)
+      {
         echo '<div>' . $error . '</div>';
+      }
       if ($use_style)
       {
         echo "</div>\n";
@@ -1456,32 +1486,19 @@ class FORM extends WEBCORE_OBJECT
 
   /**
    * Update the name of the form.
-    * @access private
-    */
-  function _update_name ()
+   * @access private
+   */
+  protected function _update_name ()
   {
     foreach ($this->_form_based_field_names as $field_name)
     {
       $field = new BOOLEAN_FIELD ();
-      $field->id = $this->_form_based_field_name ($field_name);
+      $field->id = $this->form_based_field_name ($field_name);
       $field->title = ucfirst ($field_name);
-      $field->set_value(FALSE);
-      $field->visible = FALSE;
+      $field->set_value(false);
+      $field->visible = false;
       $this->add_field ($field);
     }
-  }
-
-  /**
-   * Form-specific name for specials fields.
-   * Form properties are named relative to the form to allow more than one form to be submitted and
-   * processed within one page.
-   * @param string $base_name
-   * @return string
-   * @access private
-   */
-  function _form_based_field_name ($base_name)
-  {
-    return "{$this->name}_$base_name";
   }
 
   /**
@@ -1491,7 +1508,7 @@ class FORM extends WEBCORE_OBJECT
    * @access private
    * @abstract
    */
-  function commit ($obj) {}
+  public function commit ($obj) {}
 
   /**
    * Table of fields indexed by id.
@@ -1500,6 +1517,7 @@ class FORM extends WEBCORE_OBJECT
    * @access private
    */
   protected $_fields = array ();
+
   /**
    * Simple list of all fields.
    * Used for referenced iteration.
@@ -1507,11 +1525,13 @@ class FORM extends WEBCORE_OBJECT
    * @access private
    */
   protected $_field_list = array ();
+
   /**
    * @var array[string]
-    * @access private
-    */
+   * @access private
+   */
   protected $_errors = array ();
+
   /**
    * @var array[UPLOAD_FILE_FIELD]
    * @see UPLOAD_FILE_FIELD
@@ -1521,19 +1541,22 @@ class FORM extends WEBCORE_OBJECT
 
   /**
    * @var bool
-    * @access private
-    */
-  protected $_committed = FALSE;
+   * @access private
+   */
+  protected $_committed = false;
+
   /**
    * @var bool
-    * @access private
-    */
-  protected $_loaded = FALSE;
+   * @access private
+   */
+  protected $_loaded = false;
+
   /**
    * @var object
-    * @access private
-    */
+   * @access private
+   */
   protected $_object;
+
   /**
    * Set when the form is loaded or processed.
    * Can be {@link Form_load_action_default} or {@link Form_load_action_object}.
@@ -1549,6 +1572,7 @@ class FORM extends WEBCORE_OBJECT
    * @access private
    */
   protected $_initial_focus = '';
+
   /**
    * @var integer
    * @access private
@@ -1565,12 +1589,12 @@ class FORM extends WEBCORE_OBJECT
  * @since 2.5.0
  * @abstract
  */
-class ID_BASED_FORM extends FORM
+abstract class ID_BASED_FORM extends FORM
 {
   /**
    * @param APPLICATION $app Main application.
    */
-  function ID_BASED_FORM ($app)
+  public function ID_BASED_FORM ($app)
   {
     FORM::FORM ($app);
 
@@ -1578,11 +1602,11 @@ class ID_BASED_FORM extends FORM
     $field->id = 'id';
     $field->title = 'ID';
     $field->min_value = 1;
-    $field->visible = FALSE;
+    $field->visible = false;
     $this->add_field ($field);
   }
 
-  function load_with_defaults ()
+  public function load_with_defaults ()
   {
     parent::load_with_defaults ();
     $this->set_value ('id', read_var ('id'));
@@ -1592,7 +1616,7 @@ class ID_BASED_FORM extends FORM
    * Load form fields from this object.
    * @param object $obj
    */
-  function load_from_object ($obj)
+  public function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
     if (isset ($obj->id))

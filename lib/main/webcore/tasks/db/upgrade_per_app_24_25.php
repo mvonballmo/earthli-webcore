@@ -187,7 +187,7 @@ define ('View_content', 0x01);
 
 class UPGRADE_PER_APP_24_25_TASK extends MIGRATOR_TASK
 {
-  function update_user_folder_permissions ($table_name, $new_name, $old_name)
+  public function update_user_folder_permissions ($table_name, $new_name, $old_name)
   {
     $this->_query ("UPDATE `$table_name` SET `$new_name` = `$new_name` | " . Privilege_view . " | " . Privilege_view_history . " where `$old_name` & " . View_folder);
     $this->_query ("UPDATE `$table_name` SET `$new_name` = `$new_name` | " . Privilege_create . " where `$old_name` & " . Create_folder);
@@ -198,7 +198,7 @@ class UPGRADE_PER_APP_24_25_TASK extends MIGRATOR_TASK
     $this->_query ("UPDATE `$table_name` SET `$new_name` = `$new_name` | " . Privilege_view_hidden . " where `$old_name` & " . View_invisible);
   }
 
-  function update_user_content_permissions ($table_name, $new_entry_name, $new_comment_name, $old_name)
+  public function update_user_content_permissions ($table_name, $new_entry_name, $new_comment_name, $old_name)
   {
     $this->_query ("UPDATE `$table_name` SET `$new_entry_name` = `$new_entry_name` | " . Privilege_view . " | " . Privilege_view_history . " | " . Privilege_view_hidden . " where `$old_name` & " . View_content);
     $this->_query ("UPDATE `$table_name` SET `$new_entry_name` = `$new_entry_name` | " . Privilege_create . " where `$old_name` & " . Create_content);
@@ -215,7 +215,7 @@ class UPGRADE_PER_APP_24_25_TASK extends MIGRATOR_TASK
     $this->_query ("UPDATE `$table_name` SET `$new_comment_name` = `$new_comment_name` | " . Privilege_view_hidden . " where `$old_name` & " . View_invisible);
   }
 
-  function update_user_group_permissions ($table_name, $new_user_name, $new_group_name, $old_name)
+  public function update_user_group_permissions ($table_name, $new_user_name, $new_group_name, $old_name)
   {
     $this->_query ("UPDATE `$table_name` SET `$new_user_name` = `$new_user_name` | " . Privilege_view . " | " . Privilege_view_history . " | " . Privilege_view_hidden . " where `$old_name` & " . View_user);
     $this->_query ("UPDATE `$table_name` SET `$new_user_name` = `$new_user_name` | " . Privilege_create . " where `$old_name` & " . Create_user);
@@ -231,7 +231,7 @@ class UPGRADE_PER_APP_24_25_TASK extends MIGRATOR_TASK
     $this->_query ("UPDATE `$table_name` SET `$new_group_name` = `$new_group_name` | " . Privilege_purge . " where `$old_name` & " . Purge_group);
   }
 
-  function update_folder_permissions ($table_name)
+  public function update_folder_permissions ($table_name)
   {
     $this->_query ("UPDATE `$table_name` SET `folder_permissions` = `folder_permissions` | " . Privilege_view . " | " . Privilege_view_history . " where `flags` & " . View_folder);
     $this->_query ("UPDATE `$table_name` SET `folder_permissions` = `folder_permissions` | " . Privilege_create . " where `flags` & " . Create_folder);
@@ -256,7 +256,7 @@ class UPGRADE_PER_APP_24_25_TASK extends MIGRATOR_TASK
     $this->_query ("UPDATE `$table_name` SET `entry_permissions` = `entry_permissions` | " . Privilege_view_hidden . " where `flags` & " . View_invisible);
   }
 
-  function update_permissions ($folder_table_name, $user_table_name)
+  public function update_permissions ($folder_table_name, $user_table_name)
   {
     log_open_block ("Updating permissions tables");
       $this->_query ("ALTER TABLE `$user_table_name` ADD `deny_general_permissions` TINYINT UNSIGNED NOT NULL , ADD `deny_folder_permissions` SMALLINT UNSIGNED NOT NULL ,ADD `deny_comment_permissions` SMALLINT UNSIGNED NOT NULL ,ADD `deny_entry_permissions` SMALLINT UNSIGNED NOT NULL");
@@ -294,7 +294,7 @@ class UPGRADE_PER_APP_24_25_TASK extends MIGRATOR_TASK
     log_close_block ();
   }
 
-  function update_subscriptions ($subscribers_table, $subscriptions_table)
+  public function update_subscriptions ($subscribers_table, $subscriptions_table)
   {
     log_open_block ("Updating subcribers table");
       $this->_query ("ALTER TABLE `$subscribers_table` DROP `group_objects`;");
@@ -307,7 +307,7 @@ class UPGRADE_PER_APP_24_25_TASK extends MIGRATOR_TASK
     log_close_block ();
   }
 
-  function update_actions ($actions_table, $comments_table = '', $folders_table = '', $entry_table = '')
+  public function update_actions ($actions_table, $comments_table = '', $folders_table = '', $entry_table = '')
   {
     log_open_block ("Updating actions table");
       $this->_query ("ALTER TABLE `$actions_table` CHANGE `kind` `kind` ENUM( 'Created', 'Updated', 'Deleted', 'Restored', 'Hidden', 'Hidden update', 'Locked', 'Published' ) DEFAULT 'Created' NOT NULL");
@@ -329,7 +329,7 @@ class UPGRADE_PER_APP_24_25_TASK extends MIGRATOR_TASK
     log_close_block ();
   }
 
-  function update_drafting ($entry_table)
+  public function update_drafting ($entry_table)
   {
     log_open_block ("Adding drafting to [$entry_table]");
       $this->_query ("ALTER TABLE $entry_table ADD `publisher_id` INT UNSIGNED NOT NULL;");
@@ -339,7 +339,7 @@ class UPGRADE_PER_APP_24_25_TASK extends MIGRATOR_TASK
     log_close_block ();
   }
 
-  function update_users ($users_table)
+  public function update_users ($users_table)
   {
     log_open_block ("Updating user permissions");
       $this->_query ("UPDATE `$users_table` SET global_permissions = global_permissions | " . Privilege_login);
@@ -347,14 +347,14 @@ class UPGRADE_PER_APP_24_25_TASK extends MIGRATOR_TASK
     log_close_block ();
   }
 
-  function update_folders ($folders_table)
+  public function update_folders ($folders_table)
   {
     log_open_block ("Updating folders table");
       $this->_query ("ALTER TABLE `$folders_table` CHANGE `picture_url` `icon_url` VARCHAR( 250 ) NOT NULL");
     log_close_block ();
   }
 
-  function add_attachments ($table_name, $action_table_name)
+  public function add_attachments ($table_name, $action_table_name)
   {
     log_open_block ("Adding attachments...");
 

@@ -51,9 +51,9 @@ class COMMENT_QUERY extends OBJECT_IN_SINGLE_FOLDER_QUERY
 {
   /**
    * @return COMMENT
-    * @access private
-    */
-  function _make_object ()
+   * @access private
+   */
+  protected function _make_object ()
   {
     $class_name = $this->app->final_class_name ('COMMENT', 'webcore/obj/comment.php');
     return new $class_name ($this->app);
@@ -67,7 +67,7 @@ class COMMENT_QUERY extends OBJECT_IN_SINGLE_FOLDER_QUERY
    * @param COMMENT $obj
    * @access private
    */
-  function _prepare_object ($obj)
+  protected function _prepare_object ($obj)
   {
     parent::_prepare_object ($obj);
     $entry = $this->_make_entry ();
@@ -80,7 +80,7 @@ class COMMENT_QUERY extends OBJECT_IN_SINGLE_FOLDER_QUERY
    * @return ENTRY
    * @access private
    */
-  function _make_entry ()
+  protected function _make_entry ()
   {
     $class_name = $this->app->final_class_name ('ENTRY', 'webcore/obj/entry.php');
     return new $class_name ($this->app);
@@ -95,7 +95,7 @@ class COMMENT_QUERY extends OBJECT_IN_SINGLE_FOLDER_QUERY
    * @param ENTRY $entry The entry whose properties should be set.
    * @access private
    */
-  function _prepare_entry ($entry)
+  protected function _prepare_entry ($entry)
   {
     $entry->set_parent_folder ($this->_folder);
     $entry->id = $this->db->f ('entry_id');
@@ -103,29 +103,29 @@ class COMMENT_QUERY extends OBJECT_IN_SINGLE_FOLDER_QUERY
 
   /**
    * @param COMMENT $parent
-    * @param COMMENT $obj
-    * @access private
-    */
-  function _obj_connect_to_parent ($parent, $obj)
+   * @param COMMENT $obj
+   * @access private
+   */
+  protected function _obj_connect_to_parent ($parent, $obj)
   {
     $parent->add_comment ($obj);
   }
 
   /**
    * @param COMMENT $obj
-    * @access private
-    */
-  function _obj_set_sub_objects_cached ($obj)
+   * @access private
+   */
+  protected function _obj_set_sub_objects_cached ($obj)
   {
-    $obj->set_comments_cached (TRUE);
+    $obj->set_comments_cached (true);
   }
 
   /**
    * @return array[COMMENT]
-    * @param COMMENT $obj
-    * @access private
-    */
-  function _obj_sub_objects ($obj)
+   * @param COMMENT $obj
+   * @access private
+   */
+  protected function _obj_sub_objects ($obj)
   {
     return $obj->sub_comments ();
   }
@@ -135,6 +135,7 @@ class COMMENT_QUERY extends OBJECT_IN_SINGLE_FOLDER_QUERY
    * @access private
    */
   protected $_entry = null;
+
   /**
    * Name of the default permission set to use.
    * @var string

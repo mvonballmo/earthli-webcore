@@ -75,14 +75,16 @@ class TIME_FRAME_SELECTOR extends WEBCORE_OBJECT
 {
   /**
    * Direct user selections to this page.
-    * @var string
-    */
+   * @var string
+   */
   public $page_link;
+
   /**
    * Number of objects to show in the 'recent' time frame.
-    * @var integer
-    */
+   * @var integer
+   */
   public $num_in_recent = 10;
+
   /**
    * Selected time period to which to restrict.
    * This is applied to the query in {@link prepare_query()} and shown as
@@ -96,10 +98,10 @@ class TIME_FRAME_SELECTOR extends WEBCORE_OBJECT
 
   /**
    * @param APPLICATION $app Main application.
-    * @param integer $default Default time frame to show.
-    * @see Time_frame_recent
-    */
-  function TIME_FRAME_SELECTOR ($app, $default = Time_frame_recent)
+   * @param integer $default Default time frame to show.
+   * @see Time_frame_recent
+   */
+  public function TIME_FRAME_SELECTOR ($app, $default = Time_frame_recent)
   {
     WEBCORE_OBJECT::WEBCORE_OBJECT ($app);
     $this->load_period_from_request ($default);
@@ -109,7 +111,7 @@ class TIME_FRAME_SELECTOR extends WEBCORE_OBJECT
   /**
    * Render the time frame choices.
    */
-  function display ()
+  public function display ()
   {
     $this->assert (! empty ($this->page_link), 'Page name cannot be empty.', 'display', 'TIME_FRAME_SELECTOR');
 ?>
@@ -142,9 +144,9 @@ class TIME_FRAME_SELECTOR extends WEBCORE_OBJECT
 
   /**
    * Restrict the query to the time frame.
-    * @param QUERY $query
-    */
-  function prepare_query ($query)
+   * @param QUERY $query
+   */
+  public function prepare_query ($query)
   {
     if (! $query)
     {
@@ -187,7 +189,7 @@ class TIME_FRAME_SELECTOR extends WEBCORE_OBJECT
    * @param string $default
    * @access private
    */
-  function load_period_from_request ($default)
+  public function load_period_from_request ($default)
   {
     $this->period = read_var ('time_frame', $default);
   }

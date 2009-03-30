@@ -57,7 +57,7 @@ class HISTORY_ITEM_QUERY extends QUERY
   /**
    * Apply default restrictions and tables.
    */
-  function apply_defaults () 
+  public function apply_defaults () 
   {
     $this->set_select ('act.*');
     $this->set_order ('time_created DESC');
@@ -68,7 +68,7 @@ class HISTORY_ITEM_QUERY extends QUERY
    * @return HISTORY_ITEM
    * @access private
    */
-  function _make_object ()
+  protected function _make_object ()
   {
     $class_name = $this->app->final_class_name ('HISTORY_ITEM', 'webcore/obj/history_item.php');
     return new $class_name ($this->app);
@@ -88,7 +88,7 @@ class OBJECT_IN_FOLDER_HISTORY_ITEM_QUERY extends HISTORY_ITEM_QUERY
    * @return OBJECT_IN_FOLDER_HISTORY_ITEM
    * @access private
    */
-  function _make_object ()
+  protected function _make_object ()
   {
     $class_name = $this->app->final_class_name ('OBJECT_IN_FOLDER_HISTORY_ITEM', 'webcore/obj/webcore_history_items.php');
     return new $class_name ($this->app);
@@ -108,7 +108,7 @@ class ENTRY_HISTORY_ITEM_QUERY extends HISTORY_ITEM_QUERY
    * @return ENTRY_HISTORY_ITEM
    * @access private
    */
-  function _make_object ()
+  protected function _make_object ()
   {
     $class_name = $this->app->final_class_name ('ENTRY_HISTORY_ITEM', 'webcore/obj/webcore_history_items.php');
     return new $class_name ($this->app);

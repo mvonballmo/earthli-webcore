@@ -123,12 +123,14 @@ class MENU_RENDERER extends WEBCORE_OBJECT
    * @var string
    */
   public $content_mode = Menu_show_all_as_buttons;
+
   /**
    * Rendering mode for commands.
    *  This options is ignored if {@link
    * APPLICATION::dhmtl_allowed()} is <code>False</code>.
    */
   public $display_mode = Menu_horizontal_with_dropdown;
+
   /**
    * Number of commands to show outside of the drop-down.
    * Used only if {@link $display_mode} is {@link Menu_horizontal_with_dropdown}
@@ -140,6 +142,7 @@ class MENU_RENDERER extends WEBCORE_OBJECT
    * @var integer
    */
   public $num_important_commands = 3;
+
   /**
    * Attachment for the menu in its container.
    * Can be {@link Menu_align_default}, {@link Menu_align_left}, {@link
@@ -149,18 +152,21 @@ class MENU_RENDERER extends WEBCORE_OBJECT
    * @var string
    */
   public $alignment = Menu_align_right;
+
   /**
    * Show the word "Commands" for the drop-down?
    * Turned off when using {@link Menu_size_minimal} with {@link set_size()}.
    * @var boolean
    */
-  public $show_commands_title = TRUE;
+  public $show_commands_title = true;
+
   /**
    * Use this separator if {@link Menu_show_as_buttons} is <code>False</code>.
    * Defaults to {@link CONTEXT_DISPLAY_OPTIONS::$menu_separator}.
    * @var string
    */
   public $separator;
+
   /**
    * Target frame for generated links.
    * Use only from within framesets; usually used to target the "_top" frame.
@@ -171,7 +177,7 @@ class MENU_RENDERER extends WEBCORE_OBJECT
   /**
    * @param CONTEXT $context
    */
-  function MENU_RENDERER ($context)
+  public function MENU_RENDERER ($context)
   {
     WEBCORE_OBJECT::WEBCORE_OBJECT ($context);
     $browser = $this->env->browser ();
@@ -187,15 +193,15 @@ class MENU_RENDERER extends WEBCORE_OBJECT
    * Menu_size_standard} or {@link Menu_size_full}. Descendents may add more
    * supported types if desired.
    */
- function set_size ($size_option)
+ public function set_size ($size_option)
  {
     $this->display_mode = Menu_horizontal_with_dropdown;
-    $this->show_commands_title = TRUE;
+    $this->show_commands_title = true;
     switch ($size_option)
     {
     case Menu_size_minimal:
       $this->num_important_commands = 0;
-      $this->show_commands_title = FALSE;
+      $this->show_commands_title = false;
       break;
     case Menu_size_compact:
       $this->num_important_commands = 0;
@@ -220,7 +226,7 @@ class MENU_RENDERER extends WEBCORE_OBJECT
    * @param COMMANDS $commands
    * @param string $CSS_class
    */
-  function display_as_toolbar ($commands, $CSS_class = 'menu-bar-top')
+  public function display_as_toolbar ($commands, $CSS_class = 'menu-bar-top')
   {
     if ($commands->num_executable_commands () > 0)
     {
@@ -240,7 +246,7 @@ class MENU_RENDERER extends WEBCORE_OBJECT
    * down menu.
    * @param COMMANDS $commands
    */
-  function display ($commands)
+  public function display ($commands)
   {
     if (isset ($this->env->profiler)) $this->env->profiler->start ('ui');
     if ($commands->num_executable_commands ())
@@ -249,10 +255,10 @@ class MENU_RENDERER extends WEBCORE_OBJECT
       switch ($this->display_mode)
       {
         case Menu_horizontal:
-          $this->_draw_commands ($commands, FALSE);
+          $this->_draw_commands ($commands, false);
           break;
         case Menu_vertical:
-          $this->_draw_vertical_menu ($commands, FALSE);
+          $this->_draw_vertical_menu ($commands, false);
           break;
         case Menu_horizontal_with_dropdown:
         case Menu_vertical_with_dropdown:
@@ -270,7 +276,7 @@ class MENU_RENDERER extends WEBCORE_OBJECT
    * _start_alignment()}.
    * @access private
    */
-  function _start_alignment ()
+  protected function _start_alignment ()
   {
     switch ($this->alignment)
     {
@@ -297,7 +303,7 @@ class MENU_RENDERER extends WEBCORE_OBJECT
    * _start_alignment()}.
    * @access private
    */
-  function _finish_alignment ()
+  protected function _finish_alignment ()
   {
     echo '</div>' . "\n";
   }
@@ -311,7 +317,7 @@ class MENU_RENDERER extends WEBCORE_OBJECT
    * @param string $CSS_class CSS class used for each {@link COMMAND}.
    * @access private
    */
-  function _draw_commands ($commands, $important_only, $CSS_class = 'menu-button')
+  protected function _draw_commands ($commands, $important_only, $CSS_class = 'menu-button')
   {
     $cmds = $commands->command_list ();
     $num_cmds_to_be_shown = $commands->num_executable_commands (); 
@@ -362,7 +368,7 @@ class MENU_RENDERER extends WEBCORE_OBJECT
    * @return string
    * @access private
    */
-  function _command_as_html ($cmd, $CSS_class)
+  protected function _command_as_html ($cmd, $CSS_class)
   {
     $Result = '';
     
@@ -409,7 +415,9 @@ class MENU_RENDERER extends WEBCORE_OBJECT
         }
       }
       elseif ($CSS_class)
+      {
         $Result = '<span' . $CSS_class . '>' . $Result . '</span>';        
+      }
     }
     
     return $Result;
@@ -423,12 +431,12 @@ class MENU_RENDERER extends WEBCORE_OBJECT
    * @param string $CSS_class Used for the menu container.
    * @access private
    */
-  function _draw_vertical_menu ($commands, $important_only)
+  protected function _draw_vertical_menu ($commands, $important_only)
   {
     echo '    <div class="menu">' . "\n";
     if ($important_only)
     {
-      $this->_draw_commands ($commands, TRUE, 'menu-item');
+      $this->_draw_commands ($commands, true, 'menu-item');
     }
     else
     {
@@ -464,7 +472,7 @@ class MENU_RENDERER extends WEBCORE_OBJECT
    * {@link Menu_vertical_with_dropdown}.
    * @access private
    */
-  function _draw_important_with_dropdown ($commands, $display_mode)
+  protected function _draw_important_with_dropdown ($commands, $display_mode)
   {
     if ($this->context->dhtml_allowed () && ($commands->num_executable_commands () > $this->num_important_commands))
     {
@@ -476,7 +484,7 @@ class MENU_RENDERER extends WEBCORE_OBJECT
         }
         else
         {
-          $this->_draw_vertical_menu ($commands, TRUE);
+          $this->_draw_vertical_menu ($commands, true);
           $this->_draw_dropdown ($commands);
         }
       }
@@ -489,11 +497,11 @@ class MENU_RENDERER extends WEBCORE_OBJECT
     {
       if ($display_mode == Menu_horizontal_with_dropdown)
       {
-        $this->_draw_commands ($commands, FALSE);
+        $this->_draw_commands ($commands, false);
       }
       else
       {
-        $this->_draw_vertical_menu ($commands, FALSE);
+        $this->_draw_vertical_menu ($commands, false);
       }
     }
   }
@@ -505,7 +513,7 @@ class MENU_RENDERER extends WEBCORE_OBJECT
    * @param COMMANDS $commands
    * @access private
    */
-  function _draw_dropdown ($commands)
+  protected function _draw_dropdown ($commands)
   {
     $trigger_class = 'menu-trigger';
     $menu_class = 'menu-dropdown';
@@ -526,7 +534,7 @@ class MENU_RENDERER extends WEBCORE_OBJECT
     echo '  <div class="' . $trigger_class . '"' . $menu_tag . '>' . "\n";
     echo '    <div class="menu-button" style="float: none">' . $trigger . "</div>\n";
     echo '    <div class="' . $menu_class . '">' . "\n";
-    $this->_draw_vertical_menu ($commands, FALSE);
+    $this->_draw_vertical_menu ($commands, false);
     echo '    </div>' . "\n";
     echo '  </div>' . "\n";
 
@@ -542,15 +550,12 @@ class MENU_RENDERER extends WEBCORE_OBJECT
    * @param COMMANDS $commands
    * @access private
    */
-  function _draw_horizontal_with_dropdown ($commands)
+  protected function _draw_horizontal_with_dropdown ($commands)
   {
-    if (! isset ($_menu_box_renderer))
-    {
-      $_menu_box_renderer = $this->context->make_box_renderer ();
-    }
+    $_menu_box_renderer = $this->context->make_box_renderer ();
     $_menu_box_renderer->start_column_set ();
       $_menu_box_renderer->new_column ('padding: 0px');
-        $this->_draw_commands ($commands, TRUE);
+        $this->_draw_commands ($commands, true);
       $_menu_box_renderer->new_column ('padding: 0px');
         $this->_draw_dropdown ($commands);
     $_menu_box_renderer->finish_column_set ();

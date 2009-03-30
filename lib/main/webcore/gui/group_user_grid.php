@@ -52,22 +52,27 @@ class GROUP_USER_GRID extends STANDARD_GRID
    * @var string
    */
   public $object_name = 'user';
+
   /**
    * @var boolean
    */
-  public $show_separator = FALSE;
+  public $show_separator = false;
+
   /**
    * @var boolean
    */
-  public $even_columns = FALSE;
+  public $even_columns = false;
+
   /**
    * @var boolean
    */
-  public $centered = TRUE;
+  public $centered = true;
+
   /**
    * @var string
    */
   public $width = '';
+
   /**
    * @var integer
    */
@@ -76,7 +81,7 @@ class GROUP_USER_GRID extends STANDARD_GRID
   /**
    * @param GROUP $group Show users from this group.
    */
-  function GROUP_USER_GRID ($group)
+  public function GROUP_USER_GRID ($group)
   {
     GRID::GRID ($group->app);
     $this->_group_id = $group->id;
@@ -85,9 +90,9 @@ class GROUP_USER_GRID extends STANDARD_GRID
 
   /**
    * @param USER $obj
-    * @access private
-    */
-  function _draw_box ($obj)
+   * @access private
+   */
+  protected function _draw_box ($obj)
   {
     echo $obj->title_as_link ();
 
@@ -101,7 +106,7 @@ class GROUP_USER_GRID extends STANDARD_GRID
   /**
    * @access private
    */
-  function _draw_footer ()
+  protected function _draw_footer ()
   {
     if ($this->login->is_allowed (Privilege_set_group, Privilege_modify))
     {
@@ -122,7 +127,7 @@ class GROUP_USER_GRID extends STANDARD_GRID
   /**
    * @access private
    */
-  function _draw_empty_grid ()
+  protected function _draw_empty_grid ()
   {
     parent::_draw_empty_grid ();
 

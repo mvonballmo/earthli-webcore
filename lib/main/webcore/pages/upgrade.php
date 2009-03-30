@@ -52,7 +52,7 @@ http://www.earthli.com/software/webcore
       foreach ($files as $f)
       {
         $text = file_get_contents ($path . $f);
-        if (strpos ($text, $version_tag) !== FALSE)
+        if (strpos ($text, $version_tag) !== false)
         {
           $class_names = null;
           $Result = preg_match ('/class ([a-zA-Z_0-9]+) extends/', $text, $class_names);

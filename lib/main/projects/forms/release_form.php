@@ -51,7 +51,7 @@ class RELEASE_FORM extends OBJECT_IN_FOLDER_FORM
   /**
    * @param PROJECT $folder Project in which to add or edit the job.
    */
-  function RELEASE_FORM ($folder)
+  public function RELEASE_FORM ($folder)
   {
     OBJECT_IN_FOLDER_FORM::OBJECT_IN_FOLDER_FORM ($folder);
 
@@ -77,14 +77,14 @@ class RELEASE_FORM extends OBJECT_IN_FOLDER_FORM
     $this->add_field ($field);
   }
 
-  function load_with_defaults ()
+  public function load_with_defaults ()
   {
     parent::load_with_defaults ();
     
     $this->set_value ('state', Planned);
 
     $field = $this->field_at ('id');
-    $field->visible = TRUE;
+    $field->visible = true;
     $field->title = 'Branch';
   }
 
@@ -92,7 +92,7 @@ class RELEASE_FORM extends OBJECT_IN_FOLDER_FORM
    * Load initial properties from this branch.
    * @param BRANCH $obj
    */
-  function load_from_object ($obj)
+  public function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
 
@@ -107,7 +107,7 @@ class RELEASE_FORM extends OBJECT_IN_FOLDER_FORM
    * @param object $obj Object being validated.
    * @access private
    */
-  function _post_validate ($obj)
+  protected function _post_validate ($obj)
   {
     parent::_post_validate ($obj);
 
@@ -125,10 +125,10 @@ class RELEASE_FORM extends OBJECT_IN_FOLDER_FORM
 
   /**
    * Store the form's values for this change.
-    * @param RELEASE $obj
-    * @access private
-    */
-  function _store_to_object ($obj)
+   * @param RELEASE $obj
+   * @access private
+   */
+  protected function _store_to_object ($obj)
   {
     $obj->summary = $this->value_for ('summary');
     $obj->set_time_scheduled ($this->value_for ('time_scheduled'));
@@ -160,7 +160,7 @@ class RELEASE_FORM extends OBJECT_IN_FOLDER_FORM
    * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_controls ($renderer)
+  protected function _draw_controls ($renderer)
   {
     $renderer->start ();
     $renderer->draw_text_line_row ('title');
@@ -173,7 +173,9 @@ class RELEASE_FORM extends OBJECT_IN_FOLDER_FORM
       $props = $renderer->make_list_properties ();
       $props->width = '10em';
       foreach ($branches as $branch)
+      {
         $props->add_item ($branch->title_as_plain_text (), $branch->id);
+      }
 
       $renderer->draw_drop_down_row ('id', $props);
       $renderer->draw_separator ();
@@ -187,12 +189,12 @@ class RELEASE_FORM extends OBJECT_IN_FOLDER_FORM
 
     $renderer->draw_separator ();
     $renderer->start_row ('Status');
-    $renderer->start_block (TRUE);
+    $renderer->start_block (true);
     
     if (! $this->object_exists () || $this->_object->planned ())
     {
       $props = $renderer->make_list_properties ();
-      $props->show_descriptions = TRUE;
+      $props->show_descriptions = true;
       $props->width = '';
       if ($this->visible ('is_visible'))
       {
@@ -205,7 +207,7 @@ class RELEASE_FORM extends OBJECT_IN_FOLDER_FORM
     else
     {
       $props = $renderer->make_list_properties ();
-      $props->show_descriptions = TRUE;
+      $props->show_descriptions = true;
       if ($this->visible ('is_visible'))
       {
         $props->add_item ($this->app->resolve_icon_as_html ('{icons}indicators/invisible', ' ', '16px') . ' Hidden', Hidden, 'Prevent searching or browsing by non-admin users.');
@@ -224,7 +226,7 @@ class RELEASE_FORM extends OBJECT_IN_FOLDER_FORM
     $renderer->draw_text_box_row ('description');
     $renderer->draw_separator ();
     $renderer->draw_submit_button_row ();
-    $this->_draw_history_item_controls ($renderer, FALSE);
+    $this->_draw_history_item_controls ($renderer, false);
     $renderer->finish ();
   }
 

@@ -47,13 +47,13 @@ require_once ('webcore/db/query.php');
  * @since 2.5.0
  * @abstract
  */
-class OBJECT_IN_FOLDER_QUERY extends QUERY
+abstract class OBJECT_IN_FOLDER_QUERY extends HIERARCHICAL_QUERY
 {
   /**
    * Returns if the filter is included in the query.
    * @return boolean
    */
-  function includes ($filter)
+  public function includes ($filter)
   {
     return ($this->_filter & $filter) == $filter;
   }
@@ -63,7 +63,7 @@ class OBJECT_IN_FOLDER_QUERY extends QUERY
    * This works with the {@link OBJECT_IN_OBJECT_IN_FOLDER::$state} property.
    * @param integer $filter
    */
-  function set_filter ($filter)
+  public function set_filter ($filter)
   {
     $this->_invalidate ();
     $this->_filter = $filter;
@@ -74,7 +74,7 @@ class OBJECT_IN_FOLDER_QUERY extends QUERY
    * This works with the {@link OBJECT_IN_FOLDER::$state} property.
    * @param integer $filter
    */
-  function filter_out ($filter)
+  public function filter_out ($filter)
   {
     $this->_invalidate ();
     $this->_filter = $this->_filter & ~$filter;
@@ -84,7 +84,7 @@ class OBJECT_IN_FOLDER_QUERY extends QUERY
    * Prepare security- and filter-based restrictions.
    * @access private
    */
-  function _prepare_restrictions ()
+  protected function _prepare_restrictions ()
   {
     $this->assert (isset ($this->_privilege_set), 'Cannot prepare without a permission set', '_prepare_restrictions', 'OBJECT_IN_FOLDER_QUERY');
 
@@ -118,7 +118,9 @@ class OBJECT_IN_FOLDER_QUERY extends QUERY
           $this->_set_returns_no_data ();
         }
         elseif ($actual_filter != All)
+        {
           $this->_calculated_restrictions [] = $this->_filter_restriction ($actual_filter);
+        }
       }
     }
   }
@@ -128,7 +130,7 @@ class OBJECT_IN_FOLDER_QUERY extends QUERY
    * @return boolean
    * @access private
    */
-  function _visible_objects_available ()
+  protected function _visible_objects_available ()
   {
     $p = $this->login->permissions ();
     return $p->value_for ($this->_privilege_set, Privilege_view) != Privilege_always_denied;
@@ -139,7 +141,7 @@ class OBJECT_IN_FOLDER_QUERY extends QUERY
    * @return boolean
    * @access private
    */
-  function _invisible_objects_available ()
+  protected function _invisible_objects_available ()
   {
     $p = $this->login->permissions ();
     return $p->value_for ($this->_privilege_set, Privilege_view_hidden) != Privilege_always_denied;
@@ -152,7 +154,7 @@ class OBJECT_IN_FOLDER_QUERY extends QUERY
    * @return string
    * @access private
    */
-  function _filter_restriction ($calculated_filter)
+  protected function _filter_restriction ($calculated_filter)
   {
     return "{$this->alias}.state & {$calculated_filter} = {$this->alias}.state";
   }
@@ -163,6 +165,7 @@ class OBJECT_IN_FOLDER_QUERY extends QUERY
    * @access private
    */
   protected $_privilege_set = '';
+
   /**
    * Filter objects by this state.
    * This is taken as a suggestion by {@link _update()} and can be strengthened to exclude more objects.
@@ -180,13 +183,13 @@ class OBJECT_IN_FOLDER_QUERY extends QUERY
  * @since 2.5.0
  * @abstract
  */
-class OBJECT_IN_SINGLE_FOLDER_QUERY extends OBJECT_IN_FOLDER_QUERY
+abstract class OBJECT_IN_SINGLE_FOLDER_QUERY extends OBJECT_IN_FOLDER_QUERY
 {
   /**
    * Builds a query for an object in a folder.
    * @param FOLDER $folder
    */
-  function OBJECT_IN_SINGLE_FOLDER_QUERY ($folder)
+  public function OBJECT_IN_SINGLE_FOLDER_QUERY ($folder)
   {
     OBJECT_IN_FOLDER_QUERY::OBJECT_IN_FOLDER_QUERY ($folder->app);
     $this->_folder = $folder;
@@ -197,7 +200,7 @@ class OBJECT_IN_SINGLE_FOLDER_QUERY extends OBJECT_IN_FOLDER_QUERY
    * @return boolean
    * @access private
    */
-  function _visible_objects_available ()
+  protected function _visible_objects_available ()
   {
     return $this->login->is_allowed ($this->_privilege_set, Privilege_view, $this->_folder, $this->login);
   }
@@ -207,7 +210,7 @@ class OBJECT_IN_SINGLE_FOLDER_QUERY extends OBJECT_IN_FOLDER_QUERY
    * @return boolean
    * @access private
    */
-  function _invisible_objects_available ()
+  protected function _invisible_objects_available ()
   {
     return $this->login->is_allowed ($this->_privilege_set, Privilege_view_hidden, $this->_folder, $this->login);
   }
@@ -218,7 +221,7 @@ class OBJECT_IN_SINGLE_FOLDER_QUERY extends OBJECT_IN_FOLDER_QUERY
    * @param OBJECT_IN_FOLDER $obj
    * @access private
    */
-  function _prepare_object ($obj)
+  protected function _prepare_object ($obj)
   {
     parent::_prepare_object ($obj);
     $obj->set_parent_folder ($this->_folder);

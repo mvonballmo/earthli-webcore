@@ -59,6 +59,7 @@ class APP_WIZARD_TASK extends TASK
    * @var string
    */
   public $icon = '{icons}buttons/create';
+
   /**
    * Log all messages in this channel.
    * @var string
@@ -69,34 +70,42 @@ class APP_WIZARD_TASK extends TASK
    * @var string
    */
   public $app_title;
+
   /**
    * @var string
    */
   public $app_id;
+
   /**
    * @var string
    */
   public $app_prefix;
+
   /**
    * @var string
    */
   public $app_url;
+
   /**
    * @var string
    */
   public $app_folder;
+
   /**
    * @var string
    */
   public $folder_name;
+
   /**
    * @var string
    */
   public $entry_name;
+
   /**
    * @var string
    */
   public $author_name;
+
   /**
    * @var string
    */
@@ -107,7 +116,7 @@ class APP_WIZARD_TASK extends TASK
    * Used as the {@link PAGE_TITLE::$subject} when executed.
    * @return string
    */
-  function title_as_text ()
+  public function title_as_text ()
   {
     return 'Generating application...';
   }
@@ -115,25 +124,25 @@ class APP_WIZARD_TASK extends TASK
   /**
    * @access private
    */
-  function _execute ()
+  protected function _execute ()
   {
     $input_path = $this->env->source_path ();
     $input_path->append ('wizards/new_application');
 
-    $config = parse_ini_file ($input_path->appended_as_text ('config.ini'), TRUE);
+    $config = parse_ini_file ($input_path->appended_as_text ('config.ini'), true);
     $paths = read_array_index ($config, 'recurse_paths');
     $exts = read_array_index ($config, 'extensions');
     
     $files = array ();
     foreach ($paths as $path)
     {
-      $files = array_merge ($files, file_list_for ($input_path->appended_as_text ($path), $path, TRUE));
+      $files = array_merge ($files, file_list_for ($input_path->appended_as_text ($path), $path, true));
     }
 
     $output_path = $this->env->source_path ();
     $output_path->append ('wizards/output/' . $this->app_folder);
     
-    foreach ($files as $index => $file_name)
+    foreach ($files as $file_name)
     {
       $in = $input_path;
       $in->append ($file_name);
@@ -160,7 +169,7 @@ class APP_WIZARD_TASK extends TASK
     }
   }
   
-  function _apply_templates ($text)
+  protected function _apply_templates ($text)
   {
     return str_replace (array ('[[_app_title_]]'
                             , '[[_app_name_]]'

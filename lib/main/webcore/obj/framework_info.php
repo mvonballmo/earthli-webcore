@@ -56,11 +56,13 @@ class FRAMEWORK_INFO extends NAMED_OBJECT
    * @var string
    */
   public $title;
+
   /**
    * Version of the database.
    * @var string
    */
   public $database_version;
+
   /**
    * Version of the software.
    * Set with {@link set_software()}.
@@ -72,7 +74,7 @@ class FRAMEWORK_INFO extends NAMED_OBJECT
    * Does this object exist?
    * @return boolean
    */
-  function exists () 
+  public function exists () 
   {
     return ! $this->_version_not_found && ! empty ($this->database_version); 
   }
@@ -80,7 +82,7 @@ class FRAMEWORK_INFO extends NAMED_OBJECT
   /**
    * @return string
    */
-  function raw_title ()
+  public function raw_title ()
   {
     return $this->title;
   }
@@ -88,7 +90,7 @@ class FRAMEWORK_INFO extends NAMED_OBJECT
   /**
    * @return boolean
    */
-  function needs_upgrade ()
+  public function needs_upgrade ()
   {
     return $this->database_version != $this->software_version; 
   }
@@ -100,7 +102,7 @@ class FRAMEWORK_INFO extends NAMED_OBJECT
    * suffix.
    * @return string
    */
-  function icon_as_html ($size = '16px')
+  public function icon_as_html ($size = '16px')
   {
     if ($this->_version_not_found || ! $this->database_version)
     {
@@ -126,15 +128,16 @@ class FRAMEWORK_INFO extends NAMED_OBJECT
    * Must set the {@link $software_version} first.
    * @return string
    */
-  function message ()
+  public function message ()
   {
     if ($this->_version_not_found || ! $this->database_version)
     {
       return 'Database version not available.';    
     }
     elseif ($this->needs_upgrade ())
+    {
       return 'Database upgrade required.';    
-
+    }
 
     return 'Database is up-to-date.';    
   }
@@ -144,7 +147,7 @@ class FRAMEWORK_INFO extends NAMED_OBJECT
    * @param boolean $use_software_version
    * @return string
    */
-  function description ($use_software_version = TRUE)
+  public function description ($use_software_version = true)
   {
     if ($use_software_version)
     {
@@ -158,7 +161,7 @@ class FRAMEWORK_INFO extends NAMED_OBJECT
    * Set the software version and information.
    * @param mixed $obj An {@link APPLICATION} or an {@link ENVIRONMENT}.
    */
-  function set_software ($obj)
+  public function set_software ($obj)
   {
     $this->title = $obj->framework_id;
     $this->software_version = $obj->version;
@@ -167,7 +170,7 @@ class FRAMEWORK_INFO extends NAMED_OBJECT
   /**
    * @param DATABASE $db Database from which to load values.
    */
-  function load ($db)
+  public function load ($db)
   {
     parent::load ($db);
     $this->title = $db->f ('title');
@@ -178,7 +181,7 @@ class FRAMEWORK_INFO extends NAMED_OBJECT
   /**
    * @param SQL_STORAGE $storage Store values to this object.
    */
-  function store_to ($storage)
+  public function store_to ($storage)
   {
     $tname = $this->app->table_names->versions;
     $storage->add ($tname, 'title', Field_type_string, $this->title);
@@ -190,7 +193,7 @@ class FRAMEWORK_INFO extends NAMED_OBJECT
    * Name of the home page name for this object.
    * @return string
    */
-  function page_name ()
+  public function page_name ()
   {
     return 'index.php';
   }
@@ -201,7 +204,7 @@ class FRAMEWORK_INFO extends NAMED_OBJECT
    * @var boolean 
    * @access private
    */
-  protected $_version_not_found = TRUE;
+  protected $_version_not_found = true;
 }
 
 /**
@@ -219,6 +222,7 @@ class APPLICATION_CONFIGURATION_INFO extends WEBCORE_OBJECT
    * @var FRAMEWORK_INFO
    */
   public $app_info;
+
   /**
    * Version and name of library.
    * @var FRAMEWORK_INFO
@@ -228,7 +232,7 @@ class APPLICATION_CONFIGURATION_INFO extends WEBCORE_OBJECT
   /**
    * @param APPLICATION $app
    */
-  function APPLICATION_CONFIGURATION_INFO ($app)
+  public function APPLICATION_CONFIGURATION_INFO ($app)
   {
     WEBCORE_OBJECT::WEBCORE_OBJECT ($app);
     $this->load_from ($app);
@@ -238,7 +242,7 @@ class APPLICATION_CONFIGURATION_INFO extends WEBCORE_OBJECT
    * Initialize all versions for this app and environment.
    * @param APPLICATION $app
    */
-  function load_from ($obj)
+  public function load_from ($obj)
   {
     if ($this->db->table_exists ($this->app->table_names->versions))
     {
@@ -283,7 +287,7 @@ class APPLICATION_CONFIGURATION_INFO extends WEBCORE_OBJECT
    * @return APPLICATION INFO
    * @access private
    */
-  function _make_object ()
+  protected function _make_object ()
   {
     $class_name = $this->context->final_class_name ('FRAMEWORK_INFO');
     return new $class_name ($this->context);

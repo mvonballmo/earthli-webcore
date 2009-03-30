@@ -53,7 +53,7 @@ class COMPONENT_RENDERER extends CONTENT_OBJECT_RENDERER
    * @param COMPONENT $obj
    * @access private
    */
-  function _display_as_html ($obj)
+  protected function _display_as_html ($obj)
   {
     if ($obj->icon_url)
     {

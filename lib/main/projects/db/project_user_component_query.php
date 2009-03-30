@@ -57,7 +57,7 @@ class PROJECT_USER_COMPONENT_QUERY extends USER_ENTRY_QUERY
   /**
    * Apply default restrictions and tables.
    */
-  function apply_defaults () 
+  public function apply_defaults () 
   {
     $this->set_select ('comp.*');
     $this->set_table ($this->app->table_names->components . ' comp');
@@ -69,7 +69,7 @@ class PROJECT_USER_COMPONENT_QUERY extends USER_ENTRY_QUERY
    * @return COMPONENT
    * @access private
    */
-  function _make_object ()
+  protected function _make_object ()
   {
     $class_name = $this->app->final_class_name ('COMPONENT', 'projects/obj/component.php');
     return new $class_name ($this->app);

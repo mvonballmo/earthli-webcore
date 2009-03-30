@@ -51,7 +51,7 @@ class PROJECT_MULTIPLE_OBJECT_PRINTER_FORM extends MULTIPLE_OBJECT_PRINTER_FORM
   /**
    * @param PROJECT $folder Project from which to print objects.
    */
-  function PROJECT_MULTIPLE_OBJECT_PRINTER_FORM ($folder)
+  public function PROJECT_MULTIPLE_OBJECT_PRINTER_FORM ($folder)
   {
     MULTIPLE_OBJECT_PRINTER_FORM::MULTIPLE_OBJECT_PRINTER_FORM ($folder);
 
@@ -68,7 +68,7 @@ class PROJECT_MULTIPLE_OBJECT_PRINTER_FORM extends MULTIPLE_OBJECT_PRINTER_FORM
     $this->add_field ($field);
   }
 
-  function load_with_defaults ()
+  public function load_with_defaults ()
   {
     parent::load_with_defaults ();
     $this->set_value ('show_changes', 0);
@@ -80,7 +80,7 @@ class PROJECT_MULTIPLE_OBJECT_PRINTER_FORM extends MULTIPLE_OBJECT_PRINTER_FORM
    * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_print_options ($renderer)
+  protected function _draw_print_options ($renderer)
   {
     parent::_draw_print_options ($renderer);
     $renderer->draw_separator ();

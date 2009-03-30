@@ -55,21 +55,25 @@ class PAGE_TITLE extends WEBCORE_OBJECT
    * @var string
    */
   public $separator = ' &gt; ';
+
   /**
    * Starts every page title.
    * @var string
    */
   public $prefix = '..:: ';
+
   /**
    *  Finishes every page title.
    * @var string
    */
   public $suffix = ' ::..';
+
   /**
    * The main area of the page.
    * @var string
    */
   public $group = '';
+
   /**
    * The specific intent of the page.
    * @var string
@@ -80,7 +84,7 @@ class PAGE_TITLE extends WEBCORE_OBJECT
    * Add an object to the page context.
    * @param NAMED_OBJECT $obj
    */
-  function add_object ($obj)
+  public function add_object ($obj)
   {
     $this->_objects [] = $obj;
   }
@@ -89,7 +93,7 @@ class PAGE_TITLE extends WEBCORE_OBJECT
    * Return the rendered page title as text.
    * @return string
    */
-  function as_text ()
+  public function as_text ()
   {
     $opts = $this->context->text_options;
     if ($this->group)
@@ -100,7 +104,9 @@ class PAGE_TITLE extends WEBCORE_OBJECT
     if (isset ($this->_objects) && sizeof ($this->_objects))
     {
       foreach ($this->_objects as $obj)
+      {
         $titles [] = $opts->convert_to_html_entities ($obj->title_as_plain_text ());
+      }
       $objects = join ($this->separator, $titles);
       if (isset ($objects))
       {
@@ -130,7 +136,7 @@ class PAGE_TITLE extends WEBCORE_OBJECT
    * Generally called from a PAGE_RENDERER between HTML title tags.
    * @see PAGE_RENDERER
    */
-  function display ()
+  public function display ()
   {
     echo $this->as_text ();
   }

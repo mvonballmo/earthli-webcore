@@ -53,7 +53,7 @@ class RECIPE_COMMANDS extends DRAFTABLE_ENTRY_COMMANDS
   /**
    * @param RECIPE $entry Configure commands for this object.
    */
-  function RECIPE_COMMANDS ($entry)
+  public function RECIPE_COMMANDS ($entry)
   {
     ENTRY_COMMANDS::ENTRY_COMMANDS ($entry);
 

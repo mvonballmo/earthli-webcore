@@ -35,7 +35,7 @@ class UPGRADE_WEBCORE_260_270_TASK extends MIGRATOR_TASK
   public $version_from = '2.6.0';
   public $version_to = '2.7.0';
 
-  function _execute ()
+  protected function _execute ()
   {
     if (! $this->db->table_exists ('versions'))
     {

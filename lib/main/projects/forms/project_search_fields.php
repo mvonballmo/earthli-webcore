@@ -51,7 +51,7 @@ class SEARCH_PROJECT_ENTRY_FIELDS extends SEARCH_ENTRY_FIELDS
   /**
    * @param APPLICATION $app Main application.
    */
-  function SEARCH_PROJECT_ENTRY_FIELDS ($app)
+  public function SEARCH_PROJECT_ENTRY_FIELDS ($app)
   {
     SEARCH_ENTRY_FIELDS::SEARCH_ENTRY_FIELDS ($app);
 
@@ -59,14 +59,14 @@ class SEARCH_PROJECT_ENTRY_FIELDS extends SEARCH_ENTRY_FIELDS
 
     $this->_add_synced_field ('component_id', 0);
     $this->_add_synced_field ('kind', array_keys ($this->app->display_options->entry_kinds ()));
-    $this->_add_synced_field ('not_kind', FALSE);
+    $this->_add_synced_field ('not_kind', false);
   }
 
   /**
    * Add fields for search properties to this form.
    * @param FORM $form
    */
-  function add_fields ($form)
+  public function add_fields ($form)
   {
     parent::add_fields ($form);
 
@@ -96,7 +96,7 @@ class SEARCH_PROJECT_ENTRY_FIELDS extends SEARCH_ENTRY_FIELDS
    * List of sortable values
    * @return array[string, string]
    */
-  function _sort_values ()
+  protected function _sort_values ()
   {
     $Result = parent::_sort_values ();
     $Result ['kind'] = 'Kind';
@@ -109,7 +109,7 @@ class SEARCH_PROJECT_ENTRY_FIELDS extends SEARCH_ENTRY_FIELDS
    * @param QUERY $query
    * @param object $obj
    */
-  function apply_to_query ($query, $obj)
+  public function apply_to_query ($query, $obj)
   {
     parent::apply_to_query ($query, $obj);
 
@@ -150,7 +150,7 @@ class SEARCH_PROJECT_ENTRY_FIELDS extends SEARCH_ENTRY_FIELDS
    * @return string
    * @access private
    */
-  function _restrictions_as_text ($obj)
+  protected function _restrictions_as_text ($obj)
   {
     $Result = parent::_restrictions_as_text ($obj);
 
@@ -175,7 +175,9 @@ class SEARCH_PROJECT_ENTRY_FIELDS extends SEARCH_ENTRY_FIELDS
       $param_kinds = $obj->parameters ['kind'];
 
       foreach ($param_kinds as $kind_id)
+      {
         $kind_text [] = $kinds [$kind_id]->title;
+      }
 
       if ($obj->parameters ['not_kind'])
       {
@@ -196,7 +198,7 @@ class SEARCH_PROJECT_ENTRY_FIELDS extends SEARCH_ENTRY_FIELDS
    * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_date_fields ($form, $renderer)
+  protected function _draw_date_fields ($form, $renderer)
   {
     $renderer->draw_check_box_row ('not_kind');
 
@@ -234,7 +236,7 @@ class SEARCH_JOB_FIELDS extends SEARCH_PROJECT_ENTRY_FIELDS
   /**
    * @param APPLICATION $app Main application.
    */
-  function SEARCH_JOB_FIELDS ($app)
+  public function SEARCH_JOB_FIELDS ($app)
   {
     SEARCH_PROJECT_ENTRY_FIELDS::SEARCH_PROJECT_ENTRY_FIELDS ($app);
   }
@@ -252,18 +254,18 @@ class SEARCH_CHANGE_FIELDS extends SEARCH_PROJECT_ENTRY_FIELDS
   /**
    * @param APPLICATION $app Main application.
    */
-  function SEARCH_CHANGE_FIELDS ($app)
+  public function SEARCH_CHANGE_FIELDS ($app)
   {
     SEARCH_PROJECT_ENTRY_FIELDS::SEARCH_PROJECT_ENTRY_FIELDS ($app);
 
-    $this->_add_text ('files', 'Files', FALSE, FALSE, 'chng');
+    $this->_add_text ('files', 'Files', false, false, 'chng');
   }
 
   /**
    * Add fields for search properties to this form.
    * @param FORM $form
    */
-  function add_fields ($form)
+  public function add_fields ($form)
   {
     parent::add_fields ($form);
   }
@@ -273,7 +275,7 @@ class SEARCH_CHANGE_FIELDS extends SEARCH_PROJECT_ENTRY_FIELDS
    * @param QUERY $query
    * @param object $obj
    */
-  function apply_to_query ($query, $obj)
+  public function apply_to_query ($query, $obj)
   {
     parent::apply_to_query ($query, $obj);
   }
@@ -284,7 +286,7 @@ class SEARCH_CHANGE_FIELDS extends SEARCH_PROJECT_ENTRY_FIELDS
    * @return string
    * @access private
    */
-  function _restrictions_as_text ($obj)
+  protected function _restrictions_as_text ($obj)
   {
     $Result = parent::_restrictions_as_text ($obj);
     return $Result;
@@ -295,7 +297,7 @@ class SEARCH_CHANGE_FIELDS extends SEARCH_PROJECT_ENTRY_FIELDS
    * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_date_fields ($form, $renderer)
+  protected function _draw_date_fields ($form, $renderer)
   {
     parent::_draw_date_fields ($form, $renderer);
   }

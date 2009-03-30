@@ -57,7 +57,7 @@ class PROJECT_RELEASE_QUERY extends FOLDER_ENTRY_QUERY
   /**
    * Apply default restrictions and tables.
    */
-  function apply_defaults () 
+  public function apply_defaults () 
   {
     $this->set_select ('rel.*, bra.folder_id as branch_folder_id, bra.title as branch_title, bra.id as branch_id, bra.state as branch_state');
     $this->set_table ($this->app->table_names->releases . ' rel');
@@ -72,7 +72,7 @@ class PROJECT_RELEASE_QUERY extends FOLDER_ENTRY_QUERY
    * @param integer $filter Use {@link Release_not_locked} or {@link
    * Release_is_pending}.
    */
-  function set_up_pending ($filter = Release_is_pending)
+  public function set_up_pending ($filter = Release_is_pending)
   {
     $this->set_filter ($filter);
     $this->add_select ('rel.state = ' . Shipped . ' as release_is_shipped');
@@ -82,9 +82,9 @@ class PROJECT_RELEASE_QUERY extends FOLDER_ENTRY_QUERY
 
   /**
    * @return RELEASE
-    * @access private
-    */
-  function _make_object ()
+   * @access private
+   */
+  protected function _make_object ()
   {
     $class_name = $this->app->final_class_name ('RELEASE', 'projects/obj/release.php');
     return new $class_name ($this->app);
@@ -95,7 +95,7 @@ class PROJECT_RELEASE_QUERY extends FOLDER_ENTRY_QUERY
    * @param RELEASE
    * @access private
    */
-  function _prepare_object ($obj)
+  protected function _prepare_object ($obj)
   {
     parent::_prepare_object ($obj);
 
@@ -115,7 +115,7 @@ class PROJECT_RELEASE_QUERY extends FOLDER_ENTRY_QUERY
    * we return it from the branch table instead.
    * @return string
    */
-  function _sql_folder_id ()
+  protected function _sql_folder_id ()
   {
     return 'bra.folder_id';
   }

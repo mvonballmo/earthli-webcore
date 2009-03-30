@@ -57,7 +57,7 @@ class PROJECT_USER_BRANCH_QUERY extends USER_ENTRY_QUERY
   /**
    * Apply default restrictions and tables.
    */
-  function apply_defaults () 
+  public function apply_defaults () 
   {
     $this->set_select ('bra.*');
     $this->set_table ($this->app->table_names->branches . ' bra');
@@ -70,7 +70,7 @@ class PROJECT_USER_BRANCH_QUERY extends USER_ENTRY_QUERY
    * @return BRANCH
    * @access private
    */
-  function _make_object ()
+  protected function _make_object ()
   {
     $class_name = $this->app->final_class_name ('BRANCH', 'projects/obj/branch.php');
     return new $class_name ($this->app);

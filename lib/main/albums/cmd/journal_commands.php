@@ -53,7 +53,7 @@ class JOURNAL_COMMANDS extends ENTRY_COMMANDS
   /**
    * @param JOURNAL $entry Configure commands for this journal entry.
    */
-  function JOURNAL_COMMANDS ($entry)
+  public function JOURNAL_COMMANDS ($entry)
   {
     ENTRY_COMMANDS::ENTRY_COMMANDS ($entry);
 

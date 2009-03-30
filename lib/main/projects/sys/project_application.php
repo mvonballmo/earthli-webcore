@@ -53,18 +53,22 @@ class PROJECT_APPLICATION_PAGE_NAMES extends APPLICATION_PAGE_NAMES
    * @var string
    */
   public $change_home = 'view_change.php';
+
   /**
    * @var string
    */
   public $job_home = 'view_job.php';
+
   /**
    * @var string
    */
   public $release_home = 'view_release.php';
+
   /**
    * @var string
    */
   public $branch_home = 'view_branch.php';
+
   /**
    * @var string
    */
@@ -83,78 +87,97 @@ class PROJECT_APPLICATION_TABLE_NAMES extends APPLICATION_TABLE_NAMES
    * @var string
    */
   public $folders = 'project_folders';
+
   /**
    * @var string
    */
   public $comments = 'project_comments';
+
   /**
    * @var string
    */
   public $entries = 'project_entries';
+
   /**
    * @var string
    */
   public $user_permissions = 'project_user_permissions';
+
   /**
    * @var string
    */
   public $folder_permissions = 'project_folder_permissions';
+
   /**
    * @var string
    */
   public $folder_options = 'project_options';
+
   /**
    * @var string
    */
   public $jobs = 'project_jobs';
+
   /**
    * @var string
    */
   public $changes = 'project_changes';
+
   /**
    * @var string
    */
   public $releases = 'project_releases';
+
   /**
    * @var string
    */
   public $branches = 'project_branches';
+
   /**
    * @var string
    */
   public $components = 'project_components';
+
   /**
    * @var string
    */
   public $entries_to_branches = 'project_entries_to_branches';
+
   /**
    * @var string
    */
   public $changes_to_branches = 'project_changes_to_branches';
+
   /**
    * @var string
    */
   public $jobs_to_branches = 'project_jobs_to_branches';
+
   /**
    * @var string
    */
   public $branches_to_releases = 'project_branches_to_releases';
+
   /**
    * @var string
    */
   public $subscriptions = 'project_subscriptions';
+
   /**
    * @var string
    */
   public $subscribers = 'project_subscribers';
+
   /**
    * @var string
    */
   public $history_items = 'project_history_items';
+
   /**
    * @var string
    */
   public $searches = 'project_searches';
+
   /**
    * @var string
    */
@@ -175,6 +198,7 @@ class PROJECT_APPLICATION_XML_OPTIONS
    * @var string
    */
   public $log_file_name = '';
+
   /**
    * Location of project settings export file.
    * The list of projects and change types can be exported to a file. This is for integrtion with systems
@@ -182,6 +206,7 @@ class PROJECT_APPLICATION_XML_OPTIONS
    * @var string
    */
   public $export_file_name = '';
+
   /**
    * Location of changes files.
    * Changes can be exported to XML file; projects will load these changes from here.
@@ -204,23 +229,28 @@ class PROJECT_APPLICATION extends APPLICATION
    * @var string
    */
   public $title = 'earthli Projects';
+
   /**
    * @var string
    */
   public $short_title = 'Projects';
+
   /**
    * @var string
    */
   public $icon = '{app_icons}app/projects';
+
   /**
    * @var string
    */
   public $support_url = 'http://earthli.com/software/webcore/app_projects.php';
+
   /**
    * Unique ID for this framework.
    * @var string
    */
   public $framework_id = 'com.earthli.projects';
+
   /**
    * @var integer
    */
@@ -229,7 +259,7 @@ class PROJECT_APPLICATION extends APPLICATION
   /**
    * @param PAGE $page Page to which this application is attached.
    */
-  function PROJECT_APPLICATION ($page)
+  public function PROJECT_APPLICATION ($page)
   {
     APPLICATION::APPLICATION ($page);
 
@@ -245,7 +275,7 @@ class PROJECT_APPLICATION extends APPLICATION
    * Add classes to the {@link $classes} object factory.
    * @access private
    */
-  function _initialize_class_registry ()
+  protected function _initialize_class_registry ()
   {
     parent::_initialize_class_registry ();
     $this->register_class ('FOLDER', 'PROJECT', 'projects/obj/project.php');
@@ -285,7 +315,7 @@ class PROJECT_APPLICATION extends APPLICATION
    * Name used for version information.
    * @return string
    */
-  function name ()
+  public function name ()
   {
     return 'earthli Projects';
   }
@@ -297,7 +327,7 @@ class PROJECT_APPLICATION extends APPLICATION
    * @param integer $id
    * @return BRANCH
    */
-  function branch_at_id ($id)
+  public function branch_at_id ($id)
   {
     if (! isset ($this->_branch_cache))
     {
@@ -314,7 +344,7 @@ class PROJECT_APPLICATION extends APPLICATION
    * @param integer $id
    * @return RELEASE
    */
-  function release_at_id ($id)
+  public function release_at_id ($id)
   {
     if (! isset ($this->_release_cache))
     {
@@ -332,7 +362,7 @@ class PROJECT_APPLICATION extends APPLICATION
    * @param integer $id
    * @return COMPONENT
    */
-  function component_at_id ($id)
+  public function component_at_id ($id)
   {
     if (! isset ($this->_component_cache))
     {
@@ -348,7 +378,7 @@ class PROJECT_APPLICATION extends APPLICATION
    * @return string
    * @access private
    */
-  function _source_path ()
+  protected function _source_path ()
   {
     return __FILE__;
   }

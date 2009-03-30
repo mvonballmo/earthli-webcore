@@ -54,18 +54,22 @@ class ARTICLE_TYPE_INFO extends DRAFTABLE_ENTRY_TYPE_INFO
    * @var string
    */
   public $id = 'article';
+
   /**
    * @var string
    */
   public $singular_title = 'Article';
+
   /**
    * @var string
    */
   public $plural_title = 'Articles';
+
   /**
    * @var string
    */
   public $icon = '{app_icons}buttons/new_article';
+
   /**
    * @var string
    */
@@ -86,18 +90,22 @@ class SECTION_TYPE_INFO extends TYPE_INFO
    * @var string
    */
   public $id = 'section';
+
   /**
    * @var string
    */
   public $singular_title = 'Section';
+
   /**
    * @var string
    */
   public $plural_title = 'Sections';
+
   /**
    * @var string
    */
   public $icon = '{icons}buttons/new_folder';
+
   /**
    * @var string
    */

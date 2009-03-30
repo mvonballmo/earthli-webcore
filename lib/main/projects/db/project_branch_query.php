@@ -57,7 +57,7 @@ class PROJECT_BRANCH_QUERY extends OBJECT_IN_SINGLE_FOLDER_QUERY
   /**
    * Apply default restrictions and tables.
    */
-  function apply_defaults () 
+  public function apply_defaults () 
   {
     $this->set_select ('bra.*');
     $this->set_table ($this->app->table_names->branches . ' bra');
@@ -68,7 +68,7 @@ class PROJECT_BRANCH_QUERY extends OBJECT_IN_SINGLE_FOLDER_QUERY
    * @return BRANCH
    * @access private
    */
-  function _make_object ()
+  protected function _make_object ()
   {
     $class_name = $this->app->final_class_name ('BRANCH', 'projects/obj/branch.php');
     return new $class_name ($this->app);
@@ -78,7 +78,7 @@ class PROJECT_BRANCH_QUERY extends OBJECT_IN_SINGLE_FOLDER_QUERY
    * Prepare security- and filter-based restrictions.
    * @access private
    */
-  function _prepare_restrictions ()
+  protected function _prepare_restrictions ()
   {
     parent::_prepare_restrictions ();
     $this->_calculated_restrictions [] = 'bra.folder_id = ' . $this->_folder->id;

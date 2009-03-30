@@ -51,24 +51,24 @@ class RENDERER extends WEBCORE_OBJECT
 {
   /**
    * Returns a plain text line.
-    * There is a newline at the end, but no extra spacing as in {@link _par()}.
-    * @param string $text
-    * @return string
-    * @access private
-    */
-  function _line ($text = '')
+   * There is a newline at the end, but no extra spacing as in {@link _par()}.
+   * @param string $text
+   * @return string
+   * @access private
+   */
+  protected function _line ($text = '')
   {
     return $text . $this->env->file_options->end_of_line;
   }
 
   /**
    * Returns a plain text paragraph.
-    * Makes space at the bottom of the text.
-    * @param string $text
-    * @return string
-    * @access private
-    */
-  function _par ($text = '')
+   * Makes space at the bottom of the text.
+   * @param string $text
+   * @return string
+   * @access private
+   */
+  protected function _par ($text = '')
   {
     return $text . $this->env->file_options->end_of_line . $this->env->file_options->end_of_line;
   }
@@ -81,7 +81,7 @@ class RENDERER extends WEBCORE_OBJECT
    * @return string
    * @access private
    */
-  function _sep ($char = '-', $len = 72)
+  protected function _sep ($char = '-', $len = 72)
   {
     return $this->_line (str_repeat ($char, $len));
   }
@@ -93,7 +93,7 @@ class RENDERER extends WEBCORE_OBJECT
    * @return string
    * @access private
    */
-  function _time ($t, $type = null)
+  protected function _time ($t, $type = null)
   {
     $f = $t->formatter ();
     $f->clear_flags ();
@@ -122,12 +122,12 @@ class TEXT_TABLE_RENDERER
    * If true, labels are aligned to the right.
    * @var @boolean
    */
-  public $right_aligned = TRUE;
+  public $right_aligned = true;
 
   /**
    * @param RENDERER $renderer Use this renderer to display the finished table.
    */
-  function TEXT_TABLE_RENDERER ($renderer)
+  public function TEXT_TABLE_RENDERER ($renderer)
   {
     $this->_renderer = $renderer;
   }
@@ -137,7 +137,7 @@ class TEXT_TABLE_RENDERER
    * @param string $label
    * @param string $content
    */
-  function add_item ($label, $content)
+  public function add_item ($label, $content)
   {
     $item = null; // Compiler warning
     $item->label = $label;
@@ -149,7 +149,7 @@ class TEXT_TABLE_RENDERER
   /**
    * Add an empty row.
    */
-  function add_separator ()
+  public function add_separator ()
   {
     $this->add_item ('', '');
   }
@@ -157,7 +157,7 @@ class TEXT_TABLE_RENDERER
   /**
    * Show the finished table.
    */
-  function display ()
+  public function display ()
   {
     foreach ($this->_items as $item)
     {
@@ -191,6 +191,7 @@ class TEXT_TABLE_RENDERER
    * @access private
    */
   protected $_max_label_length = 0;
+
   /**
    * List of label/column pairs in the table.
    * @var array[string][string]

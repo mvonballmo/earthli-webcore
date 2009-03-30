@@ -52,7 +52,7 @@ class ALBUM_APPLICATION_DISPLAY_OPTIONS extends APPLICATION_DISPLAY_OPTIONS
    * @see PROPERTY_VALUE
    * @return array[PROPERTY_VALUE]
    */
-  function weather_icons ()
+  public function weather_icons ()
   {
     if (! isset ($this->_weather_icons))
     {
@@ -67,7 +67,7 @@ class ALBUM_APPLICATION_DISPLAY_OPTIONS extends APPLICATION_DISPLAY_OPTIONS
    * @param string $icon Location of an image.
    * @param integer $value Value stored in the database.
    */
-  function add_weather_icon ($value, $title, $icon)
+  public function add_weather_icon ($value, $title, $icon)
   {
     include_once ('webcore/sys/property.php');
     $prop = new PROPERTY_VALUE ($this->context);
@@ -82,7 +82,7 @@ class ALBUM_APPLICATION_DISPLAY_OPTIONS extends APPLICATION_DISPLAY_OPTIONS
    * Called from {@link weather_icons()}.
    * @access private
    */
-  function _init_weather_icons ()
+  protected function _init_weather_icons ()
   {
     $this->add_weather_icon (0, 'Sunny', 'sunny');
     $this->add_weather_icon (1, 'Mostly Sunny', 'mostly_sunny');

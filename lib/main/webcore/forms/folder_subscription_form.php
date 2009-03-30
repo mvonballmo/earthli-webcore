@@ -60,7 +60,7 @@ class FOLDER_SUBSCRIPTION_FORM extends SUBSCRIPTION_FORM
    * @param SUBSCRIBER $obj
    * @access private
    */
-  function commit ($obj)
+  public function commit ($obj)
   {
     $obj->update_subscriptions_for (Subscribe_folder, $this->value_for ('ids'));
   }
@@ -69,7 +69,7 @@ class FOLDER_SUBSCRIPTION_FORM extends SUBSCRIPTION_FORM
    * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_controls ($renderer)
+  protected function _draw_controls ($renderer)
   {
     if ($this->object_exists ())
     {
@@ -85,13 +85,13 @@ class FOLDER_SUBSCRIPTION_FORM extends SUBSCRIPTION_FORM
 
     include_once ('webcore/gui/folder_tree_node_info.php');
     $tree_node_info = new FOLDER_TREE_NODE_INFO ($this->app);
-    $tree_node_info->nodes_are_links = FALSE;
+    $tree_node_info->nodes_are_links = false;
 
     include_once ('webcore/gui/selector_tree_decorator.php');
     $decorator = new MULTI_SELECTOR_TREE_DECORATOR ($tree, $selected_folder_ids);
     $decorator->control_name = 'ids';
     $decorator->form_name = $this->name;
-    $decorator->auto_toggle_children = TRUE;
+    $decorator->auto_toggle_children = true;
 
     $tree->node_info = $tree_node_info;
     $tree->decorator = $decorator;

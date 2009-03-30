@@ -50,15 +50,15 @@ class DELETE_BRANCH_FORM extends DELETE_OBJECT_IN_FOLDER_FORM
 {
   /**
    * Delete the given object.
-    * @param BRANCH $obj
-    * @access private
-    */
-  function commit ($obj)
+   * @param BRANCH $obj
+   * @access private
+   */
+  public function commit ($obj)
   {
     if ($this->value_for ('purge'))
     {
       $options = new PURGE_OPTIONS ();
-      $options->sub_history_item_publication_state = FALSE;
+      $options->sub_history_item_publication_state = false;
       $obj->purge ($options);
     }
     else

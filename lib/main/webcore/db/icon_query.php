@@ -57,7 +57,7 @@ class ICON_QUERY extends QUERY
   /**
    * Apply default restrictions and tables.
    */
-  function apply_defaults () 
+  public function apply_defaults () 
   {
     $this->set_select ('icon.*');
     $this->set_table ($this->app->table_names->icons . ' icon');
@@ -66,9 +66,9 @@ class ICON_QUERY extends QUERY
 
   /**
    * @return ICON
-    * @access private
-    */
-  function _make_object ()
+   * @access private
+   */
+  protected function _make_object ()
   {
     $class_name = $this->app->final_class_name ('ICON', 'webcore/obj/icon.php');
     return new $class_name ($this->app);

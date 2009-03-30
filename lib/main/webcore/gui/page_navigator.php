@@ -60,12 +60,14 @@ class PAGE_NAVIGATOR extends WEBCORE_OBJECT
    * @var integer
    */
   public $page_number = 0;
+
   /**
    * Retrieve the page number from this request variable.
    * Only used if {@link PAGE_NAVIGATOR::$page_number} is 0.
    * @var string
    */
   public $page_number_var_name = 'page_number';
+
   /**
    * Page to which the navigator should link.
    * Specify a url that ends in 'var=', where 'var' is the name of the query string variable used to hold the
@@ -73,26 +75,31 @@ class PAGE_NAVIGATOR extends WEBCORE_OBJECT
    * @var string
    */
   public $page_link;
+
   /**
    * Optional page anchor for the page_link.
    * @var string
    */
   public $page_anchor = 'pages';
+
   /**
    * Inserted between page numbers.
    * @var string
    */
   public $separator = '&nbsp;&bull;&nbsp';
+
   /**
    * Inserted after first/previous links and before page numbers.
    * @var string
    */
   public $begin_block = '&nbsp;';
+
   /**
    * Inserted after page numbers and before next/last links.
    * @var string
    */
   public $end_block = '&nbsp;';
+
   /**
    * Number of page numbers to display at once.
    * Pages displayed will be centered on the current page if this number is exceeded. For example, if
@@ -101,6 +108,7 @@ class PAGE_NAVIGATOR extends WEBCORE_OBJECT
    * @var integer
    */
   public $pages_to_show = 7;
+
   /**
    * Offset the actual page number by this amount when displayed.
    * Useful when rendering things other than pages. For example, the calendar uses this offset to
@@ -108,6 +116,7 @@ class PAGE_NAVIGATOR extends WEBCORE_OBJECT
    * @var integer
    */
   public $page_offset = 0;
+
   /**
    * Name used when displaying total pages.
    * If there are more pages than 'pages_to_show', the navigator indicates the total number of pages
@@ -115,18 +124,19 @@ class PAGE_NAVIGATOR extends WEBCORE_OBJECT
    * @var string
    */
   public $entry_type = 'Pages';
+
   /**
    * Show the total number of pages?
    * @var boolean
    */
-  public $show_total = TRUE;
+  public $show_total = true;
 
   /**
    * @param CONTEXT $context
-    * @param integer $num_total_objects Total number of objects that need to be displayed.
-    * @param integer $num_objects_per_page Number of objects to show per page.
-    */
-  function PAGE_NAVIGATOR ($context, $num_total_objects = 0, $num_objects_per_page = 0)
+   * @param integer $num_total_objects Total number of objects that need to be displayed.
+   * @param integer $num_objects_per_page Number of objects to show per page.
+   */
+  public function PAGE_NAVIGATOR ($context, $num_total_objects = 0, $num_objects_per_page = 0)
   {
     WEBCORE_OBJECT::WEBCORE_OBJECT ($context);
     $this->separator = $context->display_options->page_separator;
@@ -144,7 +154,7 @@ class PAGE_NAVIGATOR extends WEBCORE_OBJECT
    * @param integer $num_total_objects
    * @param integer $num_objects_per_page
    */
-  function set_ranges ($num_total_objects, $num_objects_per_page)
+  public function set_ranges ($num_total_objects, $num_objects_per_page)
   {
     $this->assert ($num_objects_per_page > 0, "'num_objects_per_page' must be greater than 0.", 'set_ranges', 'PAGE_NAVIGATOR');
 
@@ -174,7 +184,7 @@ class PAGE_NAVIGATOR extends WEBCORE_OBJECT
   /**
    * Render the navigator.
    */
-  function display ()
+  public function display ()
   {
     echo $this->as_html ();
   }
@@ -183,7 +193,7 @@ class PAGE_NAVIGATOR extends WEBCORE_OBJECT
    * Return navigator as HTML.
    * @return string
    */
-  function as_html ()
+  public function as_html ()
   {
     if (! isset ($this->_output))
     {
@@ -197,7 +207,7 @@ class PAGE_NAVIGATOR extends WEBCORE_OBJECT
    * @see last_item_index()
    * @return integer
    */
-  function first_item_index ()
+  public function first_item_index ()
   {
     return $this->_page_size * ($this->page_number - $this->page_offset - 1) + 1;
   }
@@ -207,7 +217,7 @@ class PAGE_NAVIGATOR extends WEBCORE_OBJECT
    * @see first_item_index()
    * @return integer
    */
-  function last_item_index ()
+  public function last_item_index ()
   {
     return min ($this->first_item_index () + $this->_page_size - 1, $this->num_items ());
   }
@@ -217,7 +227,7 @@ class PAGE_NAVIGATOR extends WEBCORE_OBJECT
    * @see num_pages()
    * @return integer
    */
-  function num_items ()
+  public function num_items ()
   {
     return $this->_item_count;
   }
@@ -227,7 +237,7 @@ class PAGE_NAVIGATOR extends WEBCORE_OBJECT
    * @see num_items()
    * @return integer
    */
-  function num_pages ()
+  public function num_pages ()
   {
     return $this->_count;
   }
@@ -237,7 +247,7 @@ class PAGE_NAVIGATOR extends WEBCORE_OBJECT
    * @param integer $page_num
    * @access private
    */
-  function _make_page_link ($page_num)
+  protected function _make_page_link ($page_num)
   {
     $this->_url->replace_argument ($this->page_number_var_name, $page_num);
     $Result = $this->_url->as_html ();
@@ -252,7 +262,7 @@ class PAGE_NAVIGATOR extends WEBCORE_OBJECT
    * Generate the navigator text to an internal buffer.
    * @access private
    */
-  function _generate ()
+  protected function _generate ()
   {
     $this->_output = '';
     $this->_url = new URL ($this->page_link);
@@ -366,12 +376,14 @@ class PAGE_NAVIGATOR extends WEBCORE_OBJECT
    * @access private
    */
   protected $_output;
+
   /**
    * How many objects per page?
    * @var integer
    * @access private
    */
   protected $_page_size;
+
   /**
    * How many pages are needed to display all objects?
    * @see set_ranges()
@@ -379,6 +391,7 @@ class PAGE_NAVIGATOR extends WEBCORE_OBJECT
    * @access private
    */
   protected $_count;
+
   /**
    * Number of objects to navigate.
    * @see set_ranges()
@@ -386,6 +399,7 @@ class PAGE_NAVIGATOR extends WEBCORE_OBJECT
    * @access private
    */
   protected $_item_count;
+
   /**
    * Used internally to generate links.
    * @var URL

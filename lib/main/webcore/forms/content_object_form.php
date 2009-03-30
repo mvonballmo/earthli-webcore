@@ -51,14 +51,14 @@ class CONTENT_OBJECT_FORM extends AUDITABLE_FORM
   /**
    * @param APPLICATION $app
    */
-  function CONTENT_OBJECT_FORM ($app)
+  public function CONTENT_OBJECT_FORM ($app)
   {
     AUDITABLE_FORM::AUDITABLE_FORM ($app);
 
     $field = new MUNGER_TITLE_FIELD ();
     $field->id = 'title';
     $field->title = 'Title';
-    $field->required = TRUE;
+    $field->required = true;
     $this->add_field ($field);
 
     $field = new MUNGER_TEXT_FIELD ();
@@ -69,10 +69,10 @@ class CONTENT_OBJECT_FORM extends AUDITABLE_FORM
 
   /**
    * Store the form's values to this object.
-    * @param CONTENT_OBJECT $obj
-    * @access private
-    */
-  function _store_to_object ($obj)
+   * @param CONTENT_OBJECT $obj
+   * @access private
+   */
+  protected function _store_to_object ($obj)
   {
     $obj->title = $this->value_as_text ('title');
     $obj->description = $this->value_as_text ('description');
@@ -82,7 +82,7 @@ class CONTENT_OBJECT_FORM extends AUDITABLE_FORM
    * Load initial properties from this object.
    * @param CONTENT_OBJECT $obj
    */
-  function load_from_object ($obj)
+  public function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
 
@@ -94,7 +94,7 @@ class CONTENT_OBJECT_FORM extends AUDITABLE_FORM
    * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_controls ($renderer)
+  protected function _draw_controls ($renderer)
   {
     $renderer->start ();
     $renderer->draw_text_line_row ('title');
@@ -102,7 +102,7 @@ class CONTENT_OBJECT_FORM extends AUDITABLE_FORM
     $renderer->draw_text_box_row ('description');
     $renderer->draw_separator ();
     $renderer->draw_submit_button_row ();
-    $this->_draw_history_item_controls ($renderer, FALSE);
+    $this->_draw_history_item_controls ($renderer, false);
     $renderer->finish ();
   }
 
@@ -112,6 +112,7 @@ class CONTENT_OBJECT_FORM extends AUDITABLE_FORM
    * @access private
    */
   protected $_privilege_set;
+
   /**
    * Folder containing the object being edited/created.
    * @var FOLDER

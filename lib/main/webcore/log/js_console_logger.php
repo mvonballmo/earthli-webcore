@@ -56,57 +56,65 @@ class JS_CONSOLE_LOGGER extends TEXT_OUTPUT_LOGGER
    * @var integer
    */
   public $height = 600;
+
   /**
    * Height of the popup console.
    * @var integer
    */
   public $width = 300;
+
   /**
    * Name of the external style sheet to apply.
    * File name is resolves using {@link RESOURCE_MANAGER::resolve_file()}.
    * @var string
    */
   public $CSS_file_name;
+
   /**
    * Font to use. Use any valid CSS font-size.
    * @var string
    */
   public $font_size = '10pt';
+
   /**
    * Background color. Use any valid CSS color.
    * @var string
    */
   public $bg_color = 'black';
+
   /**
    * Foreground color. Use any valid CSS color.
    * @var string
    */
   public $fg_color = 'white';
+
   /**
    * Title for the console window.
    * @var string
    */
   public $title = 'earthli WebCore Console';
+
   /**
    * Show the time with each log item?
-   * Sets the default to FALSE (not really useful for live debugging).
+   * Sets the default to false (not really useful for live debugging).
    * @var boolean
    */
-  public $show_time = FALSE;
+  public $show_time = false;
+
   /**
    * Show the date with each log item?
-   * Sets the default to FALSE (not really useful for live debugging).
+   * Sets the default to false (not really useful for live debugging).
    * @var boolean
    */
-  public $show_date = FALSE;
+  public $show_date = false;
 
   /**
    * @param ENVIRONMENT $env Requires the global environment to check JavaScript capabilities.
    */
-  function JS_CONSOLE_LOGGER ($env)
+  public function JS_CONSOLE_LOGGER ($env)
   {
     TEXT_OUTPUT_LOGGER::TEXT_OUTPUT_LOGGER ($env);
-    $this->set_is_html (TRUE);
+    $this->set_is_html (true);
     $this->env = $env;
     $this->CSS_file_name = $env->logger_style_sheet;
   }
@@ -114,7 +122,7 @@ class JS_CONSOLE_LOGGER extends TEXT_OUTPUT_LOGGER
   /**
    * Remove all logged messages.
    */
-  function clear ()
+  public function clear ()
   {
     $this->_messages = array ();
   }
@@ -125,7 +133,7 @@ class JS_CONSOLE_LOGGER extends TEXT_OUTPUT_LOGGER
    * of messages in a relatively convenient (and standards-compliant) spot.
    * @access private
    */
-  function _close ()
+  protected function _close ()
   {
     if (sizeof ($this->_messages) > 0)
     {
@@ -164,13 +172,13 @@ class JS_CONSOLE_LOGGER extends TEXT_OUTPUT_LOGGER
 
   /**
    * Stores the message for later display.
-    * Handles HTML/new line conversions and sets a flag if the message should trigger the popup window.
-    * @param string $msg
-    * @param string $type
-    * @param boolean $has_html
-    * @access private
-    */
-  function _record ($msg, $type, $channel, $has_html)
+   * Handles HTML/new line conversions and sets a flag if the message should trigger the popup window.
+   * @param string $msg
+   * @param string $type
+   * @param boolean $has_html
+   * @access private
+   */
+  protected function _record ($msg, $type, $channel, $has_html)
   {
     $this->_log_info->channel = $channel;
     $this->_log_info->type = $type;
@@ -179,12 +187,12 @@ class JS_CONSOLE_LOGGER extends TEXT_OUTPUT_LOGGER
 
   /**
    * Stores the message for later display.
-    * Handles HTML/new line conversions.
-    * @param string $msg
-    * @param boolean $has_html
-    * @access private
-    */
-  function _record_more ($msg, $has_html)
+   * Handles HTML/new line conversions.
+   * @param string $msg
+   * @param boolean $has_html
+   * @access private
+   */
+  protected function _record_more ($msg, $has_html)
   {
     $this->_log_info = $this->_messages [sizeof ($this->_messages) - 1];
     parent::_record_more ($msg, $has_html);
@@ -197,7 +205,7 @@ class JS_CONSOLE_LOGGER extends TEXT_OUTPUT_LOGGER
    * @return string
    * @access private
    */
-  function _prepare ($msg)
+  protected function _prepare ($msg)
   {
     $Result = parent::_prepare ($msg);
     $Result = str_replace ("\\", "\\\\", $Result);
@@ -213,7 +221,7 @@ class JS_CONSOLE_LOGGER extends TEXT_OUTPUT_LOGGER
    * @param string $msg
    * @access private
    */
-  function _output ($msg)
+  protected function _output ($msg)
   {
     $this->_log_info->message = $msg;
     $this->_messages [] = $this->_log_info;
@@ -225,7 +233,7 @@ class JS_CONSOLE_LOGGER extends TEXT_OUTPUT_LOGGER
    * @param string $class CSS class to use for the message.
    * @access private
    */
-  function _format_html_tag ($text, $class)
+  protected function _format_html_tag ($text, $class)
   {
     return "<span class=\\\"$class\\\">$text</span>";
   }
@@ -236,6 +244,7 @@ class JS_CONSOLE_LOGGER extends TEXT_OUTPUT_LOGGER
    * @access private
    */
   public $env = null;
+
   /**
    * @var array[object]
    * @access private

@@ -49,21 +49,21 @@ require_once ('webcore/gui/object_list_title.php');
  */
 class CHANGE_LOG extends WEBCORE_OBJECT
 {
-  public $show_date = FALSE;
-  public $show_description = FALSE;
-  public $show_user = TRUE;
+  public $show_date = false;
+  public $show_description = false;
+  public $show_user = true;
   
   /**
    * Display the jobs, changes and releases given.
-    * if there are jobs and changes not associated with a release, show first those jobs,
-    * then those changes. Then, for each release in the list, show the release details, then
-    * the list of associated jobs (from the list) and the list of assocated changes (from the
-    * list).
-    * @param array[JOB] $jobs
-    * @param array[CHANGE] $chngs
-    * @param array[RELEASE] $rels
-    */
-  function display ($jobs, $chngs, $rels)
+   * if there are jobs and changes not associated with a release, show first those jobs,
+   * then those changes. Then, for each release in the list, show the release details, then
+   * the list of associated jobs (from the list) and the list of assocated changes (from the
+   * list).
+   * @param array[JOB] $jobs
+   * @param array[CHANGE] $chngs
+   * @param array[RELEASE] $rels
+   */
+  public function display ($jobs, $chngs, $rels)
   {
     $this->app->display_options->overridden_max_title_size = 150;
     $this->app->date_time_toolkit->formatter->set_default_formatter (Date_time_format_short_date);
@@ -110,7 +110,7 @@ class CHANGE_LOG extends WEBCORE_OBJECT
    * @param array[CHANGE] $chngs
    * @param RELEASE $rel
    */
-  function display_release ($jobs, $chngs, $rel)
+  public function display_release ($jobs, $chngs, $rel)
   {
     $this->app->display_options->overridden_max_title_size = 150;
     $this->app->date_time_toolkit->formatter->set_default_formatter (Date_time_format_short_date);
@@ -133,7 +133,7 @@ class CHANGE_LOG extends WEBCORE_OBJECT
    * @param string $label Identifies the type of entry in the heading.
    * @access private
    */
-  function _display_entries ($entries, $release_id, $entry_idx, $draw_entry, $label)
+  protected function _display_entries ($entries, $release_id, $entry_idx, $draw_entry, $label)
   {
     unset ($this->curr_day);
     unset ($this->comp_id);
@@ -147,7 +147,6 @@ class CHANGE_LOG extends WEBCORE_OBJECT
 
       if ($branch_info->release_id == $release_id)
       {
-        $orig_entry_idx = $entry_idx;
         ob_start ();
           $old_idx = $entry_idx;
           while (($entry_idx < $entry_count) && ($branch_info->release_id == $release_id))
@@ -180,7 +179,7 @@ class CHANGE_LOG extends WEBCORE_OBJECT
     }
   }
   
-  function _draw_component_break ($entry)
+  protected function _draw_component_break ($entry)
   {
     if (! isset ($this->comp_id) || ($this->comp_id != $entry->component_id))
     {      
@@ -196,7 +195,7 @@ class CHANGE_LOG extends WEBCORE_OBJECT
     }    
   }
   
-  function comp_name_for ($entry)
+  public function comp_name_for ($entry)
   {
     if (! $entry->component_id)
     {
@@ -220,10 +219,10 @@ class CHANGE_LOG extends WEBCORE_OBJECT
 
   /**
    * Draw a job or a change in the list.
-    * @param JOB $job
-    * @access private
-    */
-  function _draw_entry ($entry, $user, $time)
+   * @param JOB $job
+   * @access private
+   */
+  protected function _draw_entry ($entry, $user, $time)
   {
     $this->_draw_component_break ($entry);
 
@@ -256,7 +255,7 @@ class CHANGE_LOG extends WEBCORE_OBJECT
     if ($this->show_description)
     {
       $munger = $entry->html_formatter ();
-      $munger->force_paragraphs = FALSE;
+      $munger->force_paragraphs = false;
       $desc = $entry->description_as_html ($munger);
       echo "<dd class=\"detail\">\n$desc</dd>\n";
     }  
@@ -264,10 +263,10 @@ class CHANGE_LOG extends WEBCORE_OBJECT
 
   /**
    * Draw a job in the list.
-    * @param JOB $job
-    * @access private
-    */
-  function _draw_job ($job)
+   * @param JOB $job
+   * @access private
+   */
+  protected function _draw_job ($job)
   {
     $branch_info = $job->main_branch_info ();
     $this->_draw_entry ($job, $branch_info->closer (), $branch_info->time_closed);
@@ -275,24 +274,24 @@ class CHANGE_LOG extends WEBCORE_OBJECT
   
   /**
    * Draw a change in the list.
-    * @param CHANGE $chng
-    * @access private
-    */
-  function _draw_change ($chng)
+   * @param CHANGE $chng
+   * @access private
+   */
+  protected function _draw_change ($chng)
   {
     $this->_draw_entry ($chng, $chng->creator (), $chng->time_created);
   }
 
   /**
    * Draw a release in the list.
-    * If the job and changes counts are 0, then assume that the entries for
-    * that release weren't in the list and retrieve the counts.
-    * @param RELEASE $rel
-    * @param integer $num_jobs Number of jobs in this release. Can be empty.
-    * @param integer $num_chngs Number of changes in this release. Can be empty.
-    * @access private
-    */
-  function _draw_release ($rel, $num_jobs, $num_chngs)
+   * If the job and changes counts are 0, then assume that the entries for
+   * that release weren't in the list and retrieve the counts.
+   * @param RELEASE $rel
+   * @param integer $num_jobs Number of jobs in this release. Can be empty.
+   * @param integer $num_chngs Number of changes in this release. Can be empty.
+   * @access private
+   */
+  protected function _draw_release ($rel, $num_jobs, $num_chngs)
   {
     if (! $num_chngs)
     {
@@ -335,8 +334,7 @@ class CHANGE_LOG extends WEBCORE_OBJECT
     </p>
 <?php
     $munger = $rel->html_formatter ();
-    $munger->force_paragraphs = TRUE;
-    $desc = $rel->description_as_html ($munger);
+    $munger->force_paragraphs = true;
 ?>
   </div>
 <?php

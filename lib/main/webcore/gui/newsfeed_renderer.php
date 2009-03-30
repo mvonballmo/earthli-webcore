@@ -59,34 +59,40 @@ require_once ('webcore/gui/default_page_renderer.php');
  * @version 3.0.0
  * @since 2.7.1
  */
-class NEWSFEED_RENDERER extends WEBCORE_OBJECT
+abstract class NEWSFEED_RENDERER extends WEBCORE_OBJECT
 {
   /**
    * @var PAGE_TITLE
    */
   public $title;
+
   /**
    * @var string
    */
   public $base_url;
+
   /**
    * @var string
    */
   public $description = '';
+
   /**
    * @var string
    */
   public $language = 'en-us';
+
   /**
    * @var string
    */
   public $style_sheet = '{styles}newsfeed.css';
+
   /**
    * Image to display with the RSS feed.
    * Initialized to the {@link PAGE_TEMPLATE_OPTIONS::$icon} in the constructor.
    * @var string
    */
   public $icon_file;
+
   /**
    * Copyright notice to display with the RSS feed.
    * Initialized to the {@link PAGE_TEMPLATE_OPTIONS::$copyright} in the
@@ -94,22 +100,26 @@ class NEWSFEED_RENDERER extends WEBCORE_OBJECT
    * @var string
    */
   public $copyright;
+
   /**
    * The name of the generator for the RSS.
    * Initialized to the {@link CONTEXT::title()} in the constructor.
    * @var string
    */
   public $generator;
+
   /**
    * Content is rendered as HTML if <code>True</code>.
    * @var boolean
    */
-  public $html = FALSE;
+  public $html = false;
+
   /**
    * The content=type to use for the HTTP response.
    * @var string
    */
   public $content_type = 'application/xml';
+
   /**
    * The character set to use for the HTTP response.
    * @var string
@@ -119,7 +129,7 @@ class NEWSFEED_RENDERER extends WEBCORE_OBJECT
   /**
    * @param CONTEXT $context
    */
-  function NEWSFEED_RENDERER ($context)
+  public function NEWSFEED_RENDERER ($context)
   {
     WEBCORE_OBJECT::WEBCORE_OBJECT ($context);
 
@@ -141,7 +151,7 @@ class NEWSFEED_RENDERER extends WEBCORE_OBJECT
    * on the {@link $html} flag or other properties.
    * @param CONTENT_OBJECT $obj
    */
-  function set_description_from ($obj)
+  public function set_description_from ($obj)
   {
     if ($this->html)
     {
@@ -162,7 +172,7 @@ class NEWSFEED_RENDERER extends WEBCORE_OBJECT
    * NEWSFEED_OBJECT_RENDERER}.
    * @param QUERY $query
    */
-  function display ($query)
+  public function display ($query)
   {
     $this->_prepare_globals ();
 
@@ -213,7 +223,9 @@ class NEWSFEED_RENDERER extends WEBCORE_OBJECT
 
       $renderer = $objs [0]->handler_for ($this->_handler_type);
       foreach ($objs as $obj)
+      {
         $renderer->display ($obj, $options);
+      }
     }
 
     $this->finish_display ();
@@ -223,7 +235,7 @@ class NEWSFEED_RENDERER extends WEBCORE_OBJECT
    * Start the RSS feed (show the header)
    * @param DATE_TIME $time_modified
    */
-  function start_display ($time_modified)
+  public function start_display ($time_modified)
   {
     $this->assert (! empty ($this->content_type), 'Content type cannot be empty.', 'start_display', 'NEWSFEED_RENDERER');
 
@@ -241,7 +253,7 @@ class NEWSFEED_RENDERER extends WEBCORE_OBJECT
   /**
    * Finish the RSS feed (show the footer)
    */
-  function finish_display ()
+  public function finish_display ()
   {
     $this->_finish_display ();
   }
@@ -251,7 +263,7 @@ class NEWSFEED_RENDERER extends WEBCORE_OBJECT
    * @param DATE_TIME $time_modified
    * @access private
    */
-  function _start_display ($time_modified)
+  protected function _start_display ($time_modified)
   {
     if (! empty ($this->character_set))
     {
@@ -269,10 +281,7 @@ class NEWSFEED_RENDERER extends WEBCORE_OBJECT
    * @access private
    * @abstract
    */
-  function _finish_display ()
-  {
-    $this->raise_deferred ('_finish_display', 'NEWSFEED_READER');
-  }
+  protected abstract function _finish_display ();
 
   /**
    * Adjust the query for RSS display.
@@ -280,7 +289,7 @@ class NEWSFEED_RENDERER extends WEBCORE_OBJECT
    * @param QUERY $query
    * @access private
    */
-  function _prepare_query ($query)
+  protected function _prepare_query ($query)
   {
     $query->set_filter (Visible);
     $this->_prepare_sort ($query);
@@ -295,7 +304,7 @@ class NEWSFEED_RENDERER extends WEBCORE_OBJECT
    * @param QUERY $query
    * @access private
    */
-  function _prepare_sort ($query)
+  protected function _prepare_sort ($query)
   {
     $query->set_order ('entry.time_created DESC');
   }
@@ -305,40 +314,40 @@ class NEWSFEED_RENDERER extends WEBCORE_OBJECT
    * Called from {@link display()}.
    * @access private
    */
-  function _prepare_globals ()
+  protected function _prepare_globals ()
   {
     /* Make all URLs absolute. */
     $this->context->set_root_behavior (Force_root_on);
 
     $opts = $this->context->display_options;
     $opts->overridden_max_title_size = 150;
-    $opts->use_DHTML = FALSE;
-    $opts->show_local_times = FALSE;
+    $opts->use_DHTML = false;
+    $opts->show_local_times = false;
 
     $opts = $this->page->template_options;
 
     /* No Javascript in newsfeeds and no browser check. */
-    $opts->include_scripts = FALSE;
-    $opts->check_browser = FALSE;
+    $opts->include_scripts = false;
+    $opts->check_browser = false;
 
     /* Remove footer details, but keep contact/support/privacy links */
-    $opts->show_statistics = FALSE;
-    $opts->show_last_time_modified = FALSE;
-    $opts->show_links = TRUE;
+    $opts->show_statistics = false;
+    $opts->show_last_time_modified = false;
+    $opts->show_links = true;
     /* Remove header links */
-    $opts->show_login = FALSE;
+    $opts->show_login = false;
     $opts->settings_url = '';
     $opts->show_source_url = '';
     /* Just remove the header entirely (options above have effect only if this
      * is toggled back to true.
      */
-    $opts->header_visible = FALSE;
+    $opts->header_visible = false;
 
     include_once ('webcore/util/plain_text_munger.php');
     $munger = $this->context->html_text_formatter ();
-    $munger->register_replacer ('fn', new NEWSFEED_FOOTNOTE_REFERENCE_REPLACER ($this), FALSE);
+    $munger->register_replacer ('fn', new NEWSFEED_FOOTNOTE_REFERENCE_REPLACER ($this), false);
     $munger->register_replacer ('ft', new NEWSFEED_FOOTNOTE_TEXT_REPLACER ($this));
-    $munger->register_replacer ('media', new NEWSFEED_MEDIA_REPLACER ($this), FALSE);
+    $munger->register_replacer ('media', new NEWSFEED_MEDIA_REPLACER ($this), false);
   }
 
   /**
@@ -347,7 +356,7 @@ class NEWSFEED_RENDERER extends WEBCORE_OBJECT
    * @return string
    * @access private
    */
-  function _as_xml ($text)
+  protected function _as_xml ($text)
   {
     return $this->context->text_options->convert_to_html_entities ($text);
   }
@@ -376,7 +385,7 @@ class NEWSFEED_OBJECT_RENDERER extends HANDLER_RENDERER
    * @param OBJECT_RENDERER_OPTIONS $options
    * @access private
    */
-  function _content_for ($obj, $options = null)
+  protected function _content_for ($obj, $options = null)
   {
     if (isset ($options))
     {
@@ -389,7 +398,7 @@ class NEWSFEED_OBJECT_RENDERER extends HANDLER_RENDERER
 
     $renderer = $obj->handler_for ($handler_type);
     $obj_options = $renderer->options ();
-    $obj_options->show_interactive = FALSE;
+    $obj_options->show_interactive = false;
     $obj_options->preferred_text_length = $options->preferred_text_length;
     $Result = $renderer->display_to_string ($obj);
 
@@ -414,7 +423,7 @@ class NEWSFEED_OBJECT_RENDERER extends HANDLER_RENDERER
    * @return boolean
    * @access private
    */
-  function _is_html ($options)
+  protected function _is_html ($options)
   {
     if (isset ($options))
     {
@@ -422,7 +431,7 @@ class NEWSFEED_OBJECT_RENDERER extends HANDLER_RENDERER
     }
     else
     {
-      $Result = FALSE;
+      $Result = false;
     }
     return $Result;
   }
@@ -433,7 +442,7 @@ class NEWSFEED_OBJECT_RENDERER extends HANDLER_RENDERER
    * @return string
    * @access private
    */
-  function _as_xml ($text)
+  protected function _as_xml ($text)
   {
     return $this->context->text_options->convert_to_html_entities ($text);
   }
@@ -458,11 +467,13 @@ class NEWSFEEDER_RENDERER_OPTIONS extends OBJECT_RENDERER_OPTIONS
    * @var string
    */
   public $handler_type;
+
   /**
    * Language code to use for output in this feed.
    * @var string
    */
   public $language = 'en-us';
+
   /**
    * Page renderer to use for an HTML envelope.
    * If HTML output is needed, renderers should call {@link
@@ -492,7 +503,7 @@ class NEWSFEED_MEDIA_REPLACER extends HTML_MEDIA_REPLACER
    * @return string
    * @access private
    */
-  function _movie_as_text ($src, $type, $attrs)
+  protected function _movie_as_text ($src, $type, $attrs)
   {
     return $this->_default_movie_link ($src);
   }
@@ -513,7 +524,7 @@ class NEWSFEED_PAGE_RENDERER extends DEFAULT_PAGE_RENDERER
    * Display only style sheets in a newsfeed (to provide correct formatting, but
    * no other "confusing" elements for non-conforming newsreaders.
    */
-  function display_head ()
+  public function display_head ()
   {
     $this->display_styles_and_scripts ();
   }
@@ -521,7 +532,7 @@ class NEWSFEED_PAGE_RENDERER extends DEFAULT_PAGE_RENDERER
   /**
    * Override to suppress writing the document type.
    */
-  function display_doc_type ()
+  public function display_doc_type ()
   {
   }
 }
@@ -543,13 +554,12 @@ class NEWSFEED_FOOTNOTE_TEXT_REPLACER extends HTML_FOOTNOTE_TEXT_REPLACER
    * @return string
    * @access private
    */
-  function _format_text ($token, $info)
+  protected function _format_text ($token, $info)
   {
     if (! $token->is_start_tag ())
     {
       return '</div>';
     }
-
 
     return parent::_format_text ($token, $info);
   }
@@ -572,7 +582,7 @@ class NEWSFEED_FOOTNOTE_REFERENCE_REPLACER extends MUNGER_FOOTNOTE_REFERENCE_REP
    * @return string
    * @access private
    */
-  function _format_reference ($token, $info)
+  protected function _format_reference ($token, $info)
   {
     return " [$info->number]";
   }

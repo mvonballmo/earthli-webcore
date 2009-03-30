@@ -57,7 +57,7 @@ class FOLDER_COMMENT_QUERY extends COMMENT_QUERY
   /**
    * Apply default restrictions and tables.
    */
-  function apply_defaults () 
+  public function apply_defaults () 
   {
     $table_names = $this->app->table_names;
     $this->set_select ('com.*, entry.state as entry_state, entry.title as entry_title');
@@ -71,7 +71,7 @@ class FOLDER_COMMENT_QUERY extends COMMENT_QUERY
    * Prepare security- and filter-based restrictions.
    * @access private
    */
-  function _prepare_restrictions ()
+  protected function _prepare_restrictions ()
   {
     parent::_prepare_restrictions ();
     $this->_calculated_restrictions [] = 'entry.folder_id = ' . $this->_folder->id;
@@ -82,7 +82,7 @@ class FOLDER_COMMENT_QUERY extends COMMENT_QUERY
    * @param string $calculated_filter
    * @access private
    */
-  function _filter_restriction ($calculated_filter)
+  protected function _filter_restriction ($calculated_filter)
   {
     $Result = parent::_filter_restriction ($calculated_filter);
 
@@ -114,7 +114,7 @@ class FOLDER_COMMENT_QUERY extends COMMENT_QUERY
    * @param ENTRY $entry The entry whose properties should be set.
    * @access private
    */
-  function _prepare_entry ($entry)
+  protected function _prepare_entry ($entry)
   {
     parent::_prepare_entry ($entry);
     $entry->title = $this->db->f ('entry_title');
@@ -134,7 +134,7 @@ class FOLDER_MULTI_TYPE_COMMENT_QUERY extends FOLDER_COMMENT_QUERY
   /**
    * Apply default restrictions and tables.
    */
-  function apply_defaults () 
+  public function apply_defaults () 
   {
     parent::apply_defaults ();
     $this->add_select ('entry.type as entry_type');
@@ -145,7 +145,7 @@ class FOLDER_MULTI_TYPE_COMMENT_QUERY extends FOLDER_COMMENT_QUERY
    * @return ENTRY
    * @access private
    */
-  function _make_entry ()
+  protected function _make_entry ()
   {
     return $this->app->make_entry ($this->db->f ('entry_type'));
   }
@@ -157,7 +157,7 @@ class FOLDER_MULTI_TYPE_COMMENT_QUERY extends FOLDER_COMMENT_QUERY
    * @param ENTRY $entry The entry whose properties should be set.
    * @access private
    */
-  function _prepare_entry ($entry)
+  protected function _prepare_entry ($entry)
   {
     parent::_prepare_entry ($entry);
     $entry->type = $this->db->f ('entry_type');

@@ -52,9 +52,9 @@ class PROFILER_TIMER extends RAISABLE
 {
   /**
    * Is this timer enabled?
-    * @return boolean
-    */
-  function running ()
+   * @return boolean
+   */
+  public function running ()
   {
     return isset ($this->_start_time);
   }
@@ -63,7 +63,7 @@ class PROFILER_TIMER extends RAISABLE
    * Return how much time has elapsed in this timer.
    * @param string $rounded_to Round to this many digits.
    */
-  function elapsed ($rounded_to)
+  public function elapsed ($rounded_to)
   {
     $Result = $this->_elapsed;
     if (isset ($this->_start_time))
@@ -77,7 +77,7 @@ class PROFILER_TIMER extends RAISABLE
   /**
    * Reset elapsed time and start timing again.
    */
-  function restart ()
+  public function restart ()
   {
     $this->_elapsed = 0;
     $this->_num_starts = 0;
@@ -88,7 +88,7 @@ class PROFILER_TIMER extends RAISABLE
    * Start tracking time.
    * Will be added to current elapsed time.
    */
-  function start ()
+  public function start ()
   {
     if (! $this->_num_starts)
     {
@@ -100,7 +100,7 @@ class PROFILER_TIMER extends RAISABLE
   /**
    * Stop tracking time.
    */
-  function stop ()
+  public function stop ()
   {
     $this->_num_starts--;
     if (! $this->_num_starts)
@@ -112,10 +112,10 @@ class PROFILER_TIMER extends RAISABLE
 
   /**
    * Makes a single value out of the PHP 'microtime' function.
-    * @return real
-    * @access private
-    */
-  function _current_time ()
+   * @return real
+   * @access private
+   */
+  protected function _current_time ()
   {
     list ($usec, $sec) = explode (' ', microtime ());
     return ((float) $usec + (float) $sec);
@@ -127,12 +127,14 @@ class PROFILER_TIMER extends RAISABLE
    * @access private
    */
   protected $_start_time;
+
   /**
    * How much time has elapsed in this timer?
    * @var real
    * @access private
    */
   protected $_elapsed = 0;
+
   /**
    * How many times has {@link start()} been called without {@link stop()}?
    * @var integer
@@ -160,19 +162,19 @@ class PROFILER extends RAISABLE
    * Has a timer with this name been started?
    * @param string $id
    */
-  function exists ($id)
+  public function exists ($id)
   {
     return isset ($this->_timers [$id]);
   }
 
   /**
    * Returns the elasped time, in seconds.
-    * If timer is running, it is not stopped.
-    * @param string $id
-    * @param string $rounded_to Round to this many digits.
-    * @return float
-    */
-  function elapsed ($id, $rounded_to = 3)
+   * If timer is running, it is not stopped.
+   * @param string $id
+   * @param string $rounded_to Round to this many digits.
+   * @return float
+   */
+  public function elapsed ($id, $rounded_to = 3)
   {
     $timer = $this->_existing_timer ($id);
     if (isset ($timer))
@@ -180,16 +182,15 @@ class PROFILER extends RAISABLE
       return $timer->elapsed ($rounded_to);
     }
 
-
     return 0;
   }
 
   /**
    * Is this timer enabled?
-    * @param string $id
-    * @return boolean
-    */
-  function running ($id)
+   * @param string $id
+   * @return boolean
+   */
+  public function running ($id)
   {
     $timer = $this->_existing_timer ($id);
     if (isset ($timer))
@@ -197,15 +198,14 @@ class PROFILER extends RAISABLE
       return $timer->running ();
     }
 
-
-    return FALSE;
+    return false;
   }
 
   /**
    * Continues this timer, appending to the existing count (if any).
-    * @param string $id
-    */
-  function start ($id)
+   * @param string $id
+   */
+  public function start ($id)
   {
     if (! isset ($this->_timers [$id]))
     {
@@ -216,9 +216,9 @@ class PROFILER extends RAISABLE
 
   /**
    * Starts this timer, resetting to 0 first.
-    * @param string $id
-    */
-  function restart ($id)
+   * @param string $id
+   */
+  public function restart ($id)
   {
     if (! isset ($this->_timers [$id]))
     {
@@ -229,10 +229,10 @@ class PROFILER extends RAISABLE
 
   /**
    * Stop this timer.
-    * Raises exception if this timer was not started.
-    * @param string $id
-    */
-  function stop ($id)
+   * Raises exception if this timer was not started.
+   * @param string $id
+   */
+  public function stop ($id)
   {
     $timer = $this->_existing_timer ($id);
     if (isset ($timer))
@@ -248,7 +248,7 @@ class PROFILER extends RAISABLE
    * @var strind id
    * @access private
    */
-  function _existing_timer ($id)
+  protected function _existing_timer ($id)
   {
     if (! isset ($this->_timers [$id]))
     {

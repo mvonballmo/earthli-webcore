@@ -52,7 +52,7 @@ require_once ('webcore/obj/webcore_object.php');
  * @since 2.2.1
  * @abstract
  */
-class CALENDAR extends WEBCORE_OBJECT
+abstract class CALENDAR extends WEBCORE_OBJECT
 {
   /**
    * First day to render.
@@ -60,6 +60,7 @@ class CALENDAR extends WEBCORE_OBJECT
    * @var DATE_TIME
    */
   public $first_day;
+
   /**
    * Last day to render.
    * Treat as a read-only property; set only with {@link set_ranges()}.
@@ -70,7 +71,7 @@ class CALENDAR extends WEBCORE_OBJECT
   /**
    * @param APPLICATION $app Main application.
    */
-  function CALENDAR ($app)
+  public function CALENDAR ($app)
   {
     WEBCORE_OBJECT::WEBCORE_OBJECT ($app);
 
@@ -85,7 +86,7 @@ class CALENDAR extends WEBCORE_OBJECT
    * @param DATE_TIME $first_day
    * @param DATE_TIME $last_day
    */
-  function set_ranges ($first_day, $last_day)
+  public function set_ranges ($first_day, $last_day)
   {
     $first_day->set_time_from_iso ('00:00:00');
     $last_day->set_time_from_iso ('23:59:59');
@@ -152,11 +153,11 @@ class CALENDAR extends WEBCORE_OBJECT
 
   /**
    * Render all the days speficied in the range.
-    * Set the range with 'set_ranges'. If the calendar spans more than a year, then use the
-    * page number to navigate between years.
-    * @see CALENDAR::set_ranges()
-    */
-  function display ()
+   * Set the range with 'set_ranges'. If the calendar spans more than a year, then use the
+   * page number to navigate between years.
+   * @see CALENDAR::set_ranges()
+   */
+  public function display ()
   {
     // get the first day of the month that 'first_day' falls on
     // and the last day of the month that 'last_day' falls on
@@ -167,7 +168,7 @@ class CALENDAR extends WEBCORE_OBJECT
 
     $this->start_year ($this->curr_year);
 
-    $month_displayed = FALSE;
+    $month_displayed = false;
 
     while ((($this->curr_year * 12) + $this->curr_month) <= (($this->last_year * 12) + $this->last_month))
     {
@@ -222,12 +223,12 @@ class CALENDAR extends WEBCORE_OBJECT
 
   /**
    * Renders the specified month.
-    * Months are 1-based.
-    * @param integer $month
-    * @param integer $year
-    * @access private
-    */
-  function build_month ($month, $year)
+   * Months are 1-based.
+   * @param integer $month
+   * @param integer $year
+   * @access private
+   */
+  public function build_month ($month, $year)
   {
     if (isset ($this->_first_empty_month))
     {
@@ -294,13 +295,13 @@ class CALENDAR extends WEBCORE_OBJECT
 
   /**
    * Does the specified month contain anything?
-    * @param integer $month
-    * @param integer $year
-    * @access private
-    */
-  function month_has_content ($month, $year)
+   * @param integer $month
+   * @param integer $year
+   * @access private
+   */
+  public function month_has_content ($month, $year)
   {
-    return TRUE;
+    return true;
   }
   /**
    * Render the given months as completely empty.
@@ -310,98 +311,105 @@ class CALENDAR extends WEBCORE_OBJECT
    * Descendants should call this method in order to clear the internal variables.
    * @access private
    */
-  function make_empty_months ()
+  public function make_empty_months ()
   {
     unset ($this->_first_empty_month,
            $this->_last_empty_month,
            $this->_first_empty_year,
            $this->_last_empty_year);
   }
-  /**
+  
+	/**
    * A day of the week with no date for that month.
-    * @access private
-    * @abstract
-    */
-  function make_blank () { $this->raise_deferred ('make_blank', 'CALENDAR'); }
+   * @access private
+   * @abstract
+   */
+  public abstract function make_blank ();
+  
   /**
    * Render a day of the month.
-    * @param integer $day
-    * @param integer $week
-    * @param integer $month
-    * @param integer $year
-    * @access private
-    * @abstract
-    */
-  function make_day ($day, $week, $month, $year) { $this->raise_deferred ('make_day', 'CALENDAR'); }
+   * @param integer $day
+   * @param integer $week
+   * @param integer $month
+   * @param integer $year
+   * @access private
+   * @abstract
+   */
+  public abstract function make_day ($day, $week, $month, $year);
+  
   /**
    * Render the page navigator.
-    * @access private
-    * @abstract
-    */
-  function _draw_paginator () { $this->raise_deferred ('_draw_paginator', 'CALENDAR'); }
+   * @access private
+   * @abstract
+   */
+  protected abstract function _draw_paginator ();
 
   /**
    * A new week is beginning.
-    * @param integer $week
-    * @param integer $month
-    * @param integer $year
-    * @access private
-    */
-  function start_week ($week, $month, $year) {}
-  /**
+   * @param integer $week
+   * @param integer $month
+   * @param integer $year
+   * @access private
+   */
+  public function start_week ($week, $month, $year) {}
+  
+	/**
    * A week has just completed.
-    * @param integer $week
-    * @param integer $month
-    * @param integer $year
-    * @access private
-    */
-  function finish_week ($week, $month, $year) {}
+   * @param integer $week
+   * @param integer $month
+   * @param integer $year
+   * @access private
+   */
+  public function finish_week ($week, $month, $year) {}
 
   /**
    * A new month is beginning.
-    * @param integer $month
-    * @param integer $year
-    * @access private
-    */
-  function start_month ($month, $year) {}
-  /**
+   * @param integer $month
+   * @param integer $year
+   * @access private
+   */
+  public function start_month ($month, $year) {}
+  
+	/**
    * A month has just completed.
-    * @param integer $month
-    * @param integer $year
-    * @access private
-    */
-  function finish_month ($month, $year) {}
+   * @param integer $month
+   * @param integer $year
+   * @access private
+   */
+  public function finish_month ($month, $year) {}
 
   /**
    * A new year is beginning.
-    * @param integer $year
-    * @access private
-    */
-  function start_year ($year) {}
+   * @param integer $year
+   * @access private
+   */
+  public function start_year ($year) {}
+
   /**
    * A year has just completed.
-    * @param integer $year
-    * @access private
-    */
-  function finish_year ($year) {}
+   * @param integer $year
+   * @access private
+   */
+  public function finish_year ($year) {}
 
   /**
    * Calendar is being rendered.
-    * @access private
-    */
-  function start_calendar () {}
-  /**
+   * @access private
+   */
+  public function start_calendar () {}
+  
+	/**
    * Calendar is finished rendering.
-    * @access private
-    */
-  function finish_calendar () {}
+   * @access private
+   */
+  public function finish_calendar () {}
 
   /**
    * Called when the page is set before rendering.
-    * Hook this event to perform any necessary processing before the calendar is rendered.
-    * @access private
-    */
-  function _page_changed () {}
+   * Hook this event to perform any necessary processing before the calendar is rendered.
+   * @access private
+   */
+  protected function _page_changed () {}
 
   /**
    * First month of current data-free range in calendar.
@@ -410,6 +418,7 @@ class CALENDAR extends WEBCORE_OBJECT
    * @access private
    */
   protected $_first_empty_month;
+  
   /**
    * Last month of current data-free range in calendar.
    * @see CALENDAR::make_empty_months()
@@ -417,6 +426,7 @@ class CALENDAR extends WEBCORE_OBJECT
    * @access private
    */
   protected $_last_empty_month;
+  
   /**
    * First year of current data-free range in calendar.
    * @see CALENDAR::make_empty_months()
@@ -424,6 +434,7 @@ class CALENDAR extends WEBCORE_OBJECT
    * @access private
    */
   protected $_first_empty_year;
+  
   /**
    * Last year of current data-free range in calendar.
    * @see CALENDAR::make_empty_months()
@@ -432,4 +443,5 @@ class CALENDAR extends WEBCORE_OBJECT
    */
   protected $_last_empty_year;
 }
+
 ?>

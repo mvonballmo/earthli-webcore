@@ -52,7 +52,7 @@ class EXCEPTION_MAIL_RENDERER extends RENDERER_BASED_MAIL_RENDERER
    * @return EXCEPTION_RENDERER
    * @access private
    */
-  function _make_renderer ()
+  protected function _make_renderer ()
   {
     $class_name = $this->context->final_class_name ('EXCEPTION_RENDERER', 'webcore/gui/exception_renderer.php');
     return new $class_name ($this->context);

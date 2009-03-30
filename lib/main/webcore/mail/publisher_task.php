@@ -56,28 +56,33 @@ class PUBLISHER_TASK extends TASK
    * @var string
    */
   public $page_title = 'Publish Queued Content';
+
   /**
    * Log all messages in this channel.
    * @var string
    */
   public $log_channel = Msg_channel_publisher;
+
   /**
    * Shows generated mails on the fly if set.
    * @var boolean
    */
-  public $preview = FALSE;
+  public $preview = false;
+
   /**
    * Publish only the given entry history item type, if set.
    * Can contain any of the {@link History_item_state_constants}.
    * @var array[string]
    */
   public $entry_filter;
+
   /**
    * Publish only the given entry history item type, if set.
    * Can contain any of the {@link History_item_state_constants}.
    * @var array[string]
    */
   public $comment_filter;
+
   /**
    * Icon to show in the title bar when executing.
    * @var string
@@ -88,7 +93,7 @@ class PUBLISHER_TASK extends TASK
    * Return a formatted title for this task.
    * @return string
    */
-  function title_as_text ()
+  public function title_as_text ()
   {
     return 'Publish Notifications for ' . $this->app->title;
   }
@@ -97,7 +102,7 @@ class PUBLISHER_TASK extends TASK
    * Return a form to display options and execute this task.
    * @return FORM
    */
-  function form ()
+  public function form ()
   {
     $class_name = $this->context->final_class_name ('EXECUTE_PUBLISHER_TASK_FORM', 'webcore/forms/execute_publisher_task_form.php');
     return new $class_name ($this->context);
@@ -108,7 +113,7 @@ class PUBLISHER_TASK extends TASK
    * Log in as the publishing user, then call {@link _publish()}.
    * @access private
    */
-  function _execute ()
+  protected function _execute ()
   {
     /* Log in as a user that can see all objects that need sending
        If the impersonation fails, it throws an exception. */
@@ -133,13 +138,12 @@ class PUBLISHER_TASK extends TASK
    * @param PUBLISHER $publisher
    * @access private
    */
-  function _publish ($publisher)
+  protected function _publish ($publisher)
   {
     $history_item_query = $this->login->all_history_item_query ();
     if ($this->entry_filter || $this->comment_filter)
     {
       $filters = array ();
-      $all_kinds = array ();
 
 /*
       $entry_types = array ();
@@ -147,7 +151,9 @@ class PUBLISHER_TASK extends TASK
       if (sizeof ($entry_type_infos) > 1)
       {
         foreach ($entry_type_infos as $type_info)
+        {
           $entry_types [] = $type_info->id;
+        }
       }
       else
       {

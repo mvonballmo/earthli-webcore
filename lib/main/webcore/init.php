@@ -45,7 +45,7 @@ if (! isset ($WebCore_init_profiler))
    * @since 2.7.0
    * @global boolean
    */
-  $WebCore_init_profiler = TRUE;
+  $WebCore_init_profiler = true;
 }
 
 if ($WebCore_init_profiler)

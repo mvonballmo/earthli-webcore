@@ -30,7 +30,7 @@ require_once ('webcore/db/migrator_task.php');
 
 class UPGRADE_PER_APP_23_24_TASK extends MIGRATOR_TASK
 {
-  function _create_actions ($obj_type, $table_name)
+  protected function _create_actions ($obj_type, $table_name)
   {
     global $Page;
 
@@ -87,7 +87,7 @@ class UPGRADE_PER_APP_23_24_TASK extends MIGRATOR_TASK
     }
   }
 
-  function clean_text ($table_name)
+  public function clean_text ($table_name)
   {
     $this->_query ("UPDATE $table_name SET title = REPLACE(title, '&gt;', '>'), description = REPLACE(description, '&gt;', '>');");
     $this->_query ("UPDATE $table_name SET title = REPLACE(title, ' &lt; ', ' < '), description = REPLACE(description, ' &lt; ', ' < ');");

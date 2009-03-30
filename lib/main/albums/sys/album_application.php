@@ -50,6 +50,7 @@ class ALBUM_APPLICATION_PAGE_NAMES extends APPLICATION_PAGE_NAMES
    * @var string
    */
   public $picture_home = 'view_picture.php';
+
   /**
    * @var string
    */
@@ -66,46 +67,57 @@ class ALBUM_APPLICATION_TABLE_NAMES extends APPLICATION_TABLE_NAMES
    * @var string
    */
   public $folders = 'album_folders';
+
   /**
    * @var string
    */
   public $comments = 'album_comments';
+
   /**
    * @var string
    */
   public $entries = 'album_entries';
+
   /**
    * @var string
    */
   public $journals = 'album_journal';
+
   /**
    * @var string
    */
   public $pictures = 'album_pictures';
+
   /**
    * @var string
    */
   public $user_permissions = 'album_user_permissions';
+
   /**
    * @var string
    */
   public $folder_permissions = 'album_folder_permissions';
+
   /**
    * @var string
    */
   public $subscriptions = 'album_subscriptions';
+
   /**
    * @var string
    */
   public $subscribers = 'album_subscribers';
+
   /**
    * @var string
    */
   public $history_items = 'album_history_items';
+
   /**
    * @var string
    */
   public $searches = 'album_searches';
+
   /**
    * @var string
    */
@@ -122,6 +134,7 @@ class ALBUM_APPLICATION_PICTURE_OPTIONS
    * @var integer
    */
   public $default_max_picture_height = 480;
+
   /**
    * @var integer
    */
@@ -142,23 +155,28 @@ class ALBUM_APPLICATION extends APPLICATION
    * @var string
    */
   public $title = 'earthli Albums';
+
   /**
    * @var string
    */
   public $short_title = 'Albums';
+
   /**
    * @var string
    */
   public $icon = '{app_icons}app/albums';
+
   /**
    * @var string
    */
   public $support_url = 'http://earthli.com/software/webcore/app_albums.php';
+
   /**
    * Unique ID for this framework.
    * @var string
    */
   public $framework_id = 'com.earthli.albums';
+
   /**
    * @var integer
    */
@@ -167,7 +185,7 @@ class ALBUM_APPLICATION extends APPLICATION
   /**
    * @param PAGE $page Page to which this application is attached.
    */
-  function ALBUM_APPLICATION ($page)
+  public function ALBUM_APPLICATION ($page)
   {
     APPLICATION::APPLICATION ($page);
 
@@ -184,7 +202,7 @@ class ALBUM_APPLICATION extends APPLICATION
    * Add classes to the {@link $classes} object factory.
    * @access private
    */
-  function _initialize_class_registry ()
+  protected function _initialize_class_registry ()
   {
     parent::_initialize_class_registry ();
 
@@ -225,7 +243,7 @@ class ALBUM_APPLICATION extends APPLICATION
    * Name used for version information.
    * @return string
    */
-  function name ()
+  public function name ()
   {
     return 'earthli Albums';
   }
@@ -236,7 +254,7 @@ class ALBUM_APPLICATION extends APPLICATION
    * @return string
    * @access private
    */
-  function _source_path ()
+  protected function _source_path ()
   {
     return __FILE__;
   }

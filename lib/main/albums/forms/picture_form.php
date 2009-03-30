@@ -56,7 +56,7 @@ class PICTURE_FORM extends ALBUM_ENTRY_FORM
   /**
    * @param ALBUM $folder Album in which to add or edit the picture.
    */
-  function PICTURE_FORM ($folder)
+  public function PICTURE_FORM ($folder)
   {
     ALBUM_ENTRY_FORM::ALBUM_ENTRY_FORM ($folder);
 
@@ -76,7 +76,7 @@ class PICTURE_FORM extends ALBUM_ENTRY_FORM
     $field = new BOOLEAN_FIELD ();
     $field->id = 'create_thumbnail';
     $field->title = 'Create a thumbnail';
-    $field->sticky = TRUE;
+    $field->sticky = true;
     $this->add_field ($field);
 
     $field = new INTEGER_FIELD ();
@@ -84,66 +84,66 @@ class PICTURE_FORM extends ALBUM_ENTRY_FORM
     $field->title = 'Thumbnail size';
     $field->min_value = 32;
     $field->max_value = 400;
-    $field->sticky = TRUE;
+    $field->sticky = true;
     $this->add_field ($field);
 
     $field = new BOOLEAN_FIELD ();
     $field->id = 'overwrite';
     $field->title = 'Overwrite existing file';
-    $field->sticky = TRUE;
+    $field->sticky = true;
     $this->add_field ($field);
 
     $field = new BOOLEAN_FIELD ();
     $field->id = 'read_exif';
     $field->title = 'Read EXIF info';
-    $field->sticky = TRUE;
+    $field->sticky = true;
     $this->add_field ($field);
 
     $field = new BOOLEAN_FIELD ();
     $field->id = 'use_upload';
-    $field->sticky = TRUE;
+    $field->sticky = true;
     $this->add_field ($field);
 
     $field = $this->field_at ('day');
-    $field->required = FALSE;
+    $field->required = false;
   }
 
   /**
    * Load initial properties from this picture.
    * @param PICTURE $obj
    */
-  function load_from_object ($obj)
+  public function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
     $this->set_value ('thumbnail_size', 200);
     $this->set_value ('file_name', $obj->file_name);
     $this->set_required ('file_name', ! $this->_folder->uploads_allowed ());
-    $this->set_value ('overwrite', TRUE);
-    $this->set_value ('use_upload', FALSE);
-    $this->set_value ('create_thumbnail', FALSE);
-    $this->set_value ('read_exif', FALSE);
+    $this->set_value ('overwrite', true);
+    $this->set_value ('use_upload', false);
+    $this->set_value ('create_thumbnail', false);
+    $this->set_value ('read_exif', false);
   }
 
   /**
    * Load initial properties from the object, but store as a new object.
    * @param STORABLE $obj
    */
-  function load_from_clone ($obj)
+  public function load_from_clone ($obj)
   {
     parent::load_from_clone ($obj);
     $this->set_value ('create_thumbnail', $this->_folder->uploads_allowed ());
   }
 
-  function load_with_defaults ()
+  public function load_with_defaults ()
   {
     parent::load_with_defaults ();
     $this->set_required ('file_name', ! $this->_folder->uploads_allowed ());
 
     $this->load_from_client ('thumbnail_size', 200);
-    $this->load_from_client ('overwrite', TRUE);
+    $this->load_from_client ('overwrite', true);
     $this->load_from_client ('create_thumbnail', $this->_folder->uploads_allowed ());
     $this->load_from_client ('use_upload', $this->_folder->uploads_allowed ());
-    $this->load_from_client ('read_exif', TRUE);
+    $this->load_from_client ('read_exif', true);
   }
 
   /**
@@ -151,7 +151,7 @@ class PICTURE_FORM extends ALBUM_ENTRY_FORM
    * @param object $obj Object from which data was loaded. May be null.
    * @access private
    */
-  function _post_load_data ($obj)
+  protected function _post_load_data ($obj)
   {
     parent::_post_load_data ($obj);
     $this->set_enabled ('thumbnail_size', $this->value_for ('create_thumbnail'));
@@ -165,7 +165,7 @@ class PICTURE_FORM extends ALBUM_ENTRY_FORM
    * @return string
    * @access private
    */
-  function _selected_file_name ()
+  protected function _selected_file_name ()
   {
     if ($this->value_for ('use_upload'))
     {
@@ -176,7 +176,6 @@ class PICTURE_FORM extends ALBUM_ENTRY_FORM
       }
     }
 
-
     return $this->value_as_text ('file_name');
   }
 
@@ -185,7 +184,7 @@ class PICTURE_FORM extends ALBUM_ENTRY_FORM
    * @param object $obj Object being validated.
    * @access private
    */
-  function _prepare_for_commit ($obj)
+  protected function _prepare_for_commit ($obj)
   {
     parent::_prepare_for_commit ($obj);
 
@@ -219,7 +218,7 @@ class PICTURE_FORM extends ALBUM_ENTRY_FORM
    * @param PICTURE $obj
    * @access private
    */
-  function _store_to_object ($obj)
+  protected function _store_to_object ($obj)
   {
     parent::_store_to_object ($obj);
 
@@ -241,7 +240,7 @@ class PICTURE_FORM extends ALBUM_ENTRY_FORM
    * @param PICTURE $obj
    * @access private
    */
-  function _pre_validate ($obj)
+  protected function _pre_validate ($obj)
   {
     parent::_pre_validate ($obj);
     $use_upload = $this->value_for ('use_upload');
@@ -254,7 +253,7 @@ class PICTURE_FORM extends ALBUM_ENTRY_FORM
    * @param PICTURE $obj
    * @access private
    */
-  function _post_validate ($obj)
+  protected function _post_validate ($obj)
   {
     parent::_post_validate ($obj);
 
@@ -271,7 +270,7 @@ class PICTURE_FORM extends ALBUM_ENTRY_FORM
       {
         $class_name = $this->context->final_class_name ('IMAGE', 'webcore/util/image.php');
         $img = new $class_name ();
-        $img->set_file ($file_name, TRUE);
+        $img->set_file ($file_name, true);
         if ($img->properties->exists () && $img->properties->time_created->is_valid ())
         {
           $this->_exif_date = $img->properties->time_created;
@@ -297,13 +296,12 @@ class PICTURE_FORM extends ALBUM_ENTRY_FORM
    * @return string Can be {@link Uploaded_file_unique_name} or {@link Uploaded_file_overwrite}.
    * @access private
    */
-  function _upload_file_copy_mode ($field, $file, $form_is_valid)
+  protected function _upload_file_copy_mode ($field, $file, $form_is_valid)
   {
     if (! $this->previewing () && $this->value_for ('overwrite'))
     {
       return Uploaded_file_overwrite;
     }
-
 
     return Uploaded_file_unique_name;
   }
@@ -311,11 +309,11 @@ class PICTURE_FORM extends ALBUM_ENTRY_FORM
   /**
    * @access private
    */
-  function _draw_scripts ()
+  protected function _draw_scripts ()
   {
     parent::_draw_scripts ();
 ?>
-  function upload_file_changed (ctrl)
+  public function upload_file_changed (ctrl)
   {
     if (ctrl.value)
     {
@@ -325,7 +323,7 @@ class PICTURE_FORM extends ALBUM_ENTRY_FORM
     }
   }
 
-  function file_name_changed (ctrl)
+  public function file_name_changed (ctrl)
   {
     if (ctrl.value)
     {
@@ -334,7 +332,7 @@ class PICTURE_FORM extends ALBUM_ENTRY_FORM
     }
   }
 
-  function file_option_changed (ctrl)
+  public function file_option_changed (ctrl)
   {
     var is_uploading = is_selected (ctrl, 1);
     ctrl.form.file_name.disabled = is_uploading;
@@ -342,12 +340,12 @@ class PICTURE_FORM extends ALBUM_ENTRY_FORM
     ctrl.form.overwrite.disabled = ! is_uploading;
   }
 
-  function on_click_thumbnail (ctrl)
+  public function on_click_thumbnail (ctrl)
   {
     ctrl.form.thumbnail_size.disabled = ! ctrl.checked;
   }
 
-  function on_date_changed (ctrl)
+  public function on_date_changed (ctrl)
   {
     ctrl.form.day.disabled = is_selected (ctrl, 1);
   }
@@ -358,7 +356,7 @@ class PICTURE_FORM extends ALBUM_ENTRY_FORM
    * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_thumbnail_options ($renderer, $row_title)
+  protected function _draw_thumbnail_options ($renderer, $row_title)
   {
     $options = new FORM_TEXT_CONTROL_OPTIONS ();
     $options->width = '4em';
@@ -377,7 +375,7 @@ class PICTURE_FORM extends ALBUM_ENTRY_FORM
    * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_controls ($renderer)
+  protected function _draw_controls ($renderer)
   {
     $file_set = $this->value_for ('upload_file');
 
@@ -410,7 +408,7 @@ class PICTURE_FORM extends ALBUM_ENTRY_FORM
         $options->width = '30em';
 
         $renderer->start_row ('Picture');
-        $renderer->start_block (TRUE);
+        $renderer->start_block (true);
 
         $props = $renderer->make_list_properties ();
         $props->width = '30em';
@@ -466,7 +464,7 @@ class PICTURE_FORM extends ALBUM_ENTRY_FORM
     $renderer->draw_separator ();
 
     $renderer->start_row ('Day');
-    $renderer->start_block (TRUE);
+    $renderer->start_block (true);
 
     if (!$this->object_exists ())
     {
@@ -506,7 +504,7 @@ class PICTURE_FORM extends ALBUM_ENTRY_FORM
     $renderer->draw_text_box_row ('description', $renderer->default_control_width, '15em');
 
     $renderer->draw_submit_button_row ();
-    $this->_draw_history_item_controls ($renderer, FALSE);
+    $this->_draw_history_item_controls ($renderer, false);
 
     $renderer->finish ();
   }

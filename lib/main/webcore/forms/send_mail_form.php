@@ -48,17 +48,19 @@ require_once ('webcore/forms/previewable_form.php');
  * @since 2.2.1
  * @abstract
  */
-class SEND_MAIL_FORM extends PREVIEWABLE_FORM
+abstract class SEND_MAIL_FORM extends PREVIEWABLE_FORM
 {
   /**
    * Enable previewing for these forms.
    * @var boolean
    */
-  public $preview_enabled = TRUE;
+  public $preview_enabled = true;
+  
   /**
    * @var string
    */
   public $button = 'Send';
+  
   /**
    * @var string
    */
@@ -67,14 +69,14 @@ class SEND_MAIL_FORM extends PREVIEWABLE_FORM
   /**
    * @param CONTEXT $context
    */
-  function SEND_MAIL_FORM ($context)
+  public function SEND_MAIL_FORM ($context)
   {
     PREVIEWABLE_FORM::PREVIEWABLE_FORM ($context);
 
     $field = new MUNGER_TITLE_FIELD ();
     $field->id = 'subject';
     $field->title = 'Subject';
-    $field->required = TRUE;
+    $field->required = true;
     $this->add_field ($field);
 
     $field = new MUNGER_TEXT_FIELD ();
@@ -86,20 +88,20 @@ class SEND_MAIL_FORM extends PREVIEWABLE_FORM
     $field = new EMAIL_FIELD ();
     $field->id = 'sender_email';
     $field->title = 'Sender email';
-    $field->required = TRUE;
+    $field->required = true;
     $this->add_field ($field);
 
     $field = new TITLE_FIELD ();
     $field->id = 'sender_name';
     $field->title = 'Sender name';
-    $field->required = TRUE;
+    $field->required = true;
     $this->add_field ($field);
 
     $field = new EMAIL_FIELD ();
     $field->id = 'send_to';
     $field->title = 'Send to email';
-    $field->required = TRUE;
-    $field->visible = FALSE;
+    $field->required = true;
+    $field->visible = false;
     $this->add_field ($field);
 
     $field = new BOOLEAN_FIELD ();
@@ -112,12 +114,12 @@ class SEND_MAIL_FORM extends PREVIEWABLE_FORM
    * Get a mail renderer for this object.
    * @return MAIL_OBJECT_RENDERER
    */
-  function mail_renderer ($obj)
+  public function mail_renderer ($obj)
   {
     return $this->_make_obj_renderer ($obj);
   }
 
-  function load_with_defaults ()
+  public function load_with_defaults ()
   {
     parent::load_with_defaults ();
     
@@ -139,7 +141,7 @@ class SEND_MAIL_FORM extends PREVIEWABLE_FORM
    * @access private
    * @abstract
    */
-  function _store_to_object ($obj)
+  protected function _store_to_object ($obj)
   {
   }
 
@@ -147,7 +149,7 @@ class SEND_MAIL_FORM extends PREVIEWABLE_FORM
    * Return true to use integrated captcha verification.
    * @return boolean
    */
-  function _captcha_enabled ()
+  protected function _captcha_enabled ()
   {
     return ! isset ($this->login) || $this->login->is_anonymous ();
   }
@@ -159,7 +161,7 @@ class SEND_MAIL_FORM extends PREVIEWABLE_FORM
    * @param object $obj
    * @access private
    */
-  function commit ($obj)
+  public function commit ($obj)
   {
     $provider = $this->context->make_mail_provider ();
     $this->send_mail ($provider, $this->make_message ($obj));
@@ -172,7 +174,7 @@ class SEND_MAIL_FORM extends PREVIEWABLE_FORM
    * @return MAIL_MESSAGE
    * @access private
    */
-  function make_message ($obj)
+  public function make_message ($obj)
   {
     $class_name = $this->context->final_class_name ('MAIL_MESSAGE', 'webcore/mail/mail_message.php');
     $Result = new $class_name ($this->context);
@@ -231,7 +233,7 @@ class SEND_MAIL_FORM extends PREVIEWABLE_FORM
    * @param MAIL_MESSAGE $msg
    * @access private
    */
-  function send_mail ($provider, $msg)
+  public function send_mail ($provider, $msg)
   {
     $msg->set_send_to ($this->value_for ('send_to'));
     $msg->send ($provider);
@@ -239,9 +241,9 @@ class SEND_MAIL_FORM extends PREVIEWABLE_FORM
 
   /**
    * @return integer
-    * @access private
-    */
-  function excerpt_size () { return 0; }
+   * @access private
+   */
+  public function excerpt_size () { return 0; }
 
   /**
    * @param object $obj Get renderer for this object.
@@ -249,10 +251,7 @@ class SEND_MAIL_FORM extends PREVIEWABLE_FORM
    * @access private
    * @abstract
    */
-  function _make_obj_renderer ($obj) 
-  { 
-    $this->raise_deferred ('_make_obj_renderer', 'SEND_MAIL_FORM'); 
-  }
+  protected abstract function _make_obj_renderer ($obj);
 
   /**
    * Return a preview for the given object.
@@ -260,7 +259,7 @@ class SEND_MAIL_FORM extends PREVIEWABLE_FORM
    * @return FORM_PREVIEW_SETTINGS
    * @access private
    */
-  function _make_preview_settings ($obj)
+  protected function _make_preview_settings ($obj)
   {
     $Result = new SEND_MAIL_FORM_PREVIEW_SETTINGS ($this->context);
     $Result->obj_renderer = $this->_make_obj_renderer ($obj);
@@ -274,12 +273,12 @@ class SEND_MAIL_FORM extends PREVIEWABLE_FORM
    * @return MAIL_OBJECT_RENDERER_OPTIONS
    * @access private
    */
-  function _make_renderer_options ()
+  protected function _make_renderer_options ()
   {
     $class_name = $this->context->final_class_name ('MAIL_OBJECT_RENDERER_OPTIONS', 'webcore/mail/mail_object_renderer.php');
     $Result = new $class_name ();
     $Result->preferred_text_length = $this->excerpt_size ();
-    $Result->show_interactive = FALSE;
+    $Result->show_interactive = false;
     return $Result;
   }
 
@@ -288,7 +287,7 @@ class SEND_MAIL_FORM extends PREVIEWABLE_FORM
    * @param object $obj
    * @return string
    */
-  function _preview_title ($obj)
+  protected function _preview_title ($obj)
   {
     $munger = $this->context->html_title_formatter ();
     return 'Preview of ' . $munger->transform ($this->value_for ('subject'));
@@ -300,7 +299,7 @@ class SEND_MAIL_FORM extends PREVIEWABLE_FORM
    * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_options ($renderer)
+  protected function _draw_options ($renderer)
   {
     if ($this->visible ('send_as_html'))
     {
@@ -317,7 +316,7 @@ class SEND_MAIL_FORM extends PREVIEWABLE_FORM
    * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_controls ($renderer)
+  protected function _draw_controls ($renderer)
   {
     $renderer->set_width ('25em');
     $renderer->default_control_height = '6em';
@@ -359,11 +358,13 @@ class SEND_MAIL_FORM_PREVIEW_SETTINGS extends FORM_PREVIEW_SETTINGS
    * @var MAIL_OBJECT_RENDERER_OPTIONS
    */
   public $options;
+
   /**
    * Renders the {@link $object}.
    * @var MAIL_OBJECT_RENDERER
    */
   public $obj_renderer;
+
   /**
    * Renders HTML if <code>True</code>, otherwise plain text.
    * @var boolean
@@ -373,7 +374,7 @@ class SEND_MAIL_FORM_PREVIEW_SETTINGS extends FORM_PREVIEW_SETTINGS
   /**
    * Render the preview for this object.
    */
-  function _display ()
+  protected function _display ()
   {
     $class_name = $this->context->final_class_name ('SEND_MAIL_FORM_RENDERER', 'webcore/mail/send_mail_form_renderer.php');
     $send_mail_renderer = new $class_name ($this->context);

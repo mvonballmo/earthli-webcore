@@ -48,36 +48,40 @@ require_once ('webcore/log/logger.php');
  * @since 2.3.0
  * @abstract
  */
-class TEXT_OUTPUT_LOGGER extends LOGGER
+abstract class TEXT_OUTPUT_LOGGER extends LOGGER
 {
   /**
    * Show the day with each log item?
    * @var boolean
    */
-  public $show_date = TRUE;
+  public $show_date = true;
+
   /**
    * Show the time with each log item?
    * @var boolean
    */
-  public $show_time = TRUE;
+  public $show_time = true;
+
   /**
    * Show the message type with each log item?
    * @var boolean
    */
-  public $show_type = TRUE;
+  public $show_type = true;
+
   /**
    * Show the originating channel?
    * It can be useful to shut this off if a logger only has one channel open.
    * @var boolean
    */
-  public $show_channel = TRUE;
+  public $show_channel = true;
+
   /**
    * Empty messages are replaced with this string (makes it easier to see empty messages).
-    * @var string
-    */
+   * @var string
+   */
   public $empty_message = '---';
 
-  function set_is_html ($value = TRUE)
+  public function set_is_html ($value = true)
   {
     $this->_is_html = $value;
 
@@ -95,11 +99,11 @@ class TEXT_OUTPUT_LOGGER extends LOGGER
 
   /**
    * Adds spaces to the left side of 's'
-    * @param string $s
-    * @param string $chars Number of chars to pad to.
-    * @access private
-    */
-  function _pad_left ($s, $chars)
+   * @param string $s
+   * @param string $chars Number of chars to pad to.
+   * @access private
+   */
+  protected function _pad_left ($s, $chars)
   {
     return str_repeat ($this->_space, $chars - strlen ($s)) . $s;
   }
@@ -112,7 +116,7 @@ class TEXT_OUTPUT_LOGGER extends LOGGER
    * @param boolean $has_html
    * @access private
    */
-  function _record ($msg, $type, $channel, $has_html)
+  protected function _record ($msg, $type, $channel, $has_html)
   {
     $this->_output ($this->_format_initial ($msg, $type, $channel, $has_html));
   }
@@ -123,7 +127,7 @@ class TEXT_OUTPUT_LOGGER extends LOGGER
    * @param boolean $has_html
    * @access private
    */
-  function _record_more ($msg, $has_html)
+  protected function _record_more ($msg, $has_html)
   {
     $this->_output ($this->_format_more ($msg, $has_html));
   }
@@ -133,7 +137,7 @@ class TEXT_OUTPUT_LOGGER extends LOGGER
    * @param string $title
    * @access private
    */
-  function _open_block ($title)
+  protected function _open_block ($title)
   {
     $this->_output ($this->_format_block ($title));
   }
@@ -147,7 +151,7 @@ class TEXT_OUTPUT_LOGGER extends LOGGER
    * @param boolean $has_html
    * @access private
    */
-  function _format_initial ($msg, $type, $channel, $has_html)
+  protected function _format_initial ($msg, $type, $channel, $has_html)
   {
     $header = $this->_format_header ($type, $channel);
     $this->_last_header_length = strlen ($header);
@@ -163,7 +167,7 @@ class TEXT_OUTPUT_LOGGER extends LOGGER
    * @param boolean $has_html
    * @access private
    */
-  function _format_more ($msg, $has_html)
+  protected function _format_more ($msg, $has_html)
   {
     return $this->_format_message ($this->_prepare ($this->_pad_left ('', $this->_last_header_length) . $this->_convert_to_text ($msg, $has_html)));
   }
@@ -175,7 +179,7 @@ class TEXT_OUTPUT_LOGGER extends LOGGER
    * @return string
    * @access private
    */
-  function _format_header ($type, $channel)
+  protected function _format_header ($type, $channel)
   {
     $header_parts = array ();
 
@@ -229,7 +233,7 @@ class TEXT_OUTPUT_LOGGER extends LOGGER
    * @param string $title
    * @access private
    */
-  function _format_block ($title)
+  protected function _format_block ($title)
   {
     if ($this->_is_html)
     {
@@ -250,7 +254,7 @@ class TEXT_OUTPUT_LOGGER extends LOGGER
    * @return string
    * @access private
    */
-  function _format_message ($msg)
+  protected function _format_message ($msg)
   {
     if ($this->_is_html)
     {
@@ -272,7 +276,7 @@ class TEXT_OUTPUT_LOGGER extends LOGGER
    * @return string
    * @access private
    */
-  function _convert_to_text ($msg, $has_html)
+  protected function _convert_to_text ($msg, $has_html)
   {
     if (is_object ($msg) || is_array ($msg))
     {
@@ -296,11 +300,17 @@ class TEXT_OUTPUT_LOGGER extends LOGGER
         $msg = $this->empty_message;
       }
       elseif ($msg === '')
+      {
         $msg = "'" . $this->empty_message . "'";
-      elseif ($msg === FALSE)
-        $msg = 'FALSE';
-      elseif ($msg === TRUE)
-        $msg = 'TRUE';
+      }
+      elseif ($msg === false)
+      {
+        $msg = 'false';
+      }
+      elseif ($msg === true)
+      {
+        $msg = 'true';
+      }
       else
       {
         if ($this->_is_html)
@@ -327,7 +337,7 @@ class TEXT_OUTPUT_LOGGER extends LOGGER
    * @return string
    * @access private
    */
-  function _prepare ($msg)
+  protected function _prepare ($msg)
   {
     return $msg;
   }
@@ -338,10 +348,7 @@ class TEXT_OUTPUT_LOGGER extends LOGGER
    * @access private
    * @abstract
    */
-  function _output ($msg)
-  {
-    $this->raise_deferred ('_output', 'TEXT_OUTPUT_LOGGER');
-  }
+  protected abstract function _output ($msg);
 
   /**
    * Wrap output in an HTML tag.
@@ -349,7 +356,7 @@ class TEXT_OUTPUT_LOGGER extends LOGGER
    * @param string $class CSS class to use for the message.
    * @access private
    */
-  function _format_html_tag ($text, $class)
+  protected function _format_html_tag ($text, $class)
   {
     return "<span class=\"$class\">$text</span>";
   }
@@ -360,7 +367,7 @@ class TEXT_OUTPUT_LOGGER extends LOGGER
    * @return string
    * @access private
    */
-  function _CSS_class_for_type ($type)
+  protected function _CSS_class_for_type ($type)
   {
     switch ($type)
     {
@@ -374,6 +381,8 @@ class TEXT_OUTPUT_LOGGER extends LOGGER
       return 'log-warning';
     case Msg_type_error:
       return 'log-error';
+    default:
+      throw new UNKNOWN_VALUE_EXCEPTION("Unknown value [$type].");
     }
   }
 
@@ -384,24 +393,28 @@ class TEXT_OUTPUT_LOGGER extends LOGGER
    * @access private
    */
   protected $_last_header_length;
+
   /**
    * Symbol to demarcate lines.
    * @var string
    * @access private
    */
   protected $_new_line = "\n";
+
   /**
    * Symbol to make a single space in the text output format.
    * @var string
    * @access private
    */
   protected $_space = ' ';
+
   /**
    * Set by {@link set_is_html()}.
    * @var boolean
    * @access private
    */
-  protected $_is_html = FALSE;
+  protected $_is_html = false;
+
   /**
    * Number of open blocks in the log.
    * @var integer

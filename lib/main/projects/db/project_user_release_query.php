@@ -57,7 +57,7 @@ class PROJECT_USER_RELEASE_QUERY extends USER_ENTRY_QUERY
   /**
    * Apply default restrictions and tables.
    */
-  function apply_defaults () 
+  public function apply_defaults () 
   {
     $this->set_select ('rel.*, bra.folder_id as branch_folder_id, bra.title as branch_title, bra.id as branch_id, bra.state as branch_state');
     $this->set_table ($this->app->table_names->releases . ' rel');
@@ -70,7 +70,7 @@ class PROJECT_USER_RELEASE_QUERY extends USER_ENTRY_QUERY
    * @return RELEASE
    * @access private
    */
-  function _make_object ()
+  protected function _make_object ()
   {
     $class_name = $this->app->final_class_name ('RELEASE', 'projects/obj/release.php');
     return new $class_name ($this->app);
@@ -81,7 +81,7 @@ class PROJECT_USER_RELEASE_QUERY extends USER_ENTRY_QUERY
    * @param RELEASE
    * @access private
    */
-  function _prepare_object ($obj)
+  protected function _prepare_object ($obj)
   {
     // build the branch first.
 

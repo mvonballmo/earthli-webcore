@@ -52,7 +52,7 @@ class GROUP extends CONTENT_OBJECT
    * Query for the users in this group.
    * @return GROUP_USER_QUERY
    */
-  function user_query ()
+  public function user_query ()
   {
     $class_name = $this->app->final_class_name ('GROUP_USER_QUERY', 'webcore/db/group_user_query.php');
     return new $class_name ($this);
@@ -63,7 +63,7 @@ class GROUP extends CONTENT_OBJECT
    * Does not check whether the user is already a member of the group.
    * @param USER $user
    */
-  function add_user ($user)
+  public function add_user ($user)
   {
     $this->db->logged_query ("INSERT INTO {$this->app->table_names->users_to_groups} (group_id, user_id)" .
                              " VALUES ($this->id, $user->id)");
@@ -86,7 +86,7 @@ class GROUP extends CONTENT_OBJECT
    * Does not check whether the user is a member of the group.
    * @param USER $user
    */
-  function remove_user ($user)
+  public function remove_user ($user)
   {
     $this->db->logged_query ("DELETE FROM {$this->app->table_names->users_to_groups} WHERE user_id = $user->id");
 
@@ -107,7 +107,7 @@ class GROUP extends CONTENT_OBJECT
    * Name of the home page name for this object.
    * @return string
    */
-  function page_name ()
+  public function page_name ()
   {
     return $this->app->page_names->group_home;
   }
@@ -117,7 +117,7 @@ class GROUP extends CONTENT_OBJECT
    * @return string
    * @access private
    */
-  function _table_name ()
+  protected function _table_name ()
   {
     return $this->app->table_names->groups;
   }
@@ -129,7 +129,7 @@ class GROUP extends CONTENT_OBJECT
    * @return object
    * @access private
    */
-  function _default_handler_for ($handler_type, $options = null)
+  protected function _default_handler_for ($handler_type, $options = null)
   {
     switch ($handler_type)
     {

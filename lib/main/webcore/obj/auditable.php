@@ -52,7 +52,7 @@ require_once ('webcore/obj/renderable.php');
  * @since 2.4.0
  * @abstract
  */
-class AUDITABLE extends RENDERABLE
+abstract class AUDITABLE extends RENDERABLE
 {
   /**
    * Time the object was created.
@@ -60,6 +60,7 @@ class AUDITABLE extends RENDERABLE
    * @var DATE_TIME
    */
   public $time_created;
+
   /**
    * Last time the object was modified
    * Cached within the object for quick retrieval.
@@ -74,6 +75,7 @@ class AUDITABLE extends RENDERABLE
    * @see creator()
    */
   public $creator_id;
+
   /**
    * ID of the user that last modified the object.
    * @var integer
@@ -84,7 +86,7 @@ class AUDITABLE extends RENDERABLE
   /**
    * @param APPLICATION $app Main application.
    */
-  function AUDITABLE ($app)
+  public function AUDITABLE ($app)
   {
     RENDERABLE::RENDERABLE ($app);
 
@@ -96,7 +98,7 @@ class AUDITABLE extends RENDERABLE
    * Has this object been changed since it was created?
    * @return boolean
    */
-  function modified ()
+  public function modified ()
   {
     return ! $this->time_created->equals ($this->time_modified);
   }
@@ -104,7 +106,7 @@ class AUDITABLE extends RENDERABLE
   /**
    * @return USER
    */
-  function creator ()
+  public function creator ()
   {
     return $this->app->user_at_id ($this->creator_id);
   }
@@ -112,7 +114,7 @@ class AUDITABLE extends RENDERABLE
   /**
    * @return USER
    */
-  function modifier ()
+  public function modifier ()
   {
     return $this->app->user_at_id ($this->modifier_id);
   }
@@ -126,7 +128,7 @@ class AUDITABLE extends RENDERABLE
    * @param SUBSCRIBER $subscriber
    * @return string
    */
-  function title_for_history_item ($obj, $subscriber)
+  public function title_for_history_item ($obj, $subscriber)
   {
     $type_info = $this->type_info ();
     $type_info->singular_title;
@@ -155,7 +157,7 @@ class AUDITABLE extends RENDERABLE
    * State of item when created.
    * @return string
    */
-  function history_item_kind_for_new ()
+  public function history_item_kind_for_new ()
   {
     return History_item_created;
   }
@@ -165,7 +167,7 @@ class AUDITABLE extends RENDERABLE
    * @param HISTORY_ITEM $history_item Action that generated this request. May be empty.
    * @return SUBSCRIPTION_QUERY
    */
-  function subscriber_query ($history_item = null)
+  public function subscriber_query ($history_item = null)
   {
     if (! isset ($this->_subscriber_query))
     {
@@ -179,9 +181,9 @@ class AUDITABLE extends RENDERABLE
 
   /**
    * Query for history items for this user.
-    * @return HISTORY_ITEM_QUERY
-    */
-  function history_item_query ()
+   * @return HISTORY_ITEM_QUERY
+   */
+  public function history_item_query ()
   {
     $Result = $this->_make_history_item_query ();
     $Result->restrict ("object_id = $this->id");
@@ -196,7 +198,7 @@ class AUDITABLE extends RENDERABLE
    * Return an class-specific object which can be used with {@link store_audited()}.
    * @return HISTORY_ITEM
    */
-  function new_history_item ()
+  public function new_history_item ()
   {
     $Result = $this->handler_for (Handler_history_item);
     $Result->user_id = $this->login->id;
@@ -207,7 +209,7 @@ class AUDITABLE extends RENDERABLE
   /**
    * Set up this object so it will {@link store()} a new object.
    */
-  function initialize_as_new ()
+  public function initialize_as_new ()
   {
     parent::initialize_as_new ();
     $this->time_created->clear ();
@@ -217,7 +219,7 @@ class AUDITABLE extends RENDERABLE
   /**
    * @param DATABASE $db Database from which to load values.
    */
-  function load ($db)
+  public function load ($db)
   {
     parent::load ($db);
     $this->time_created->set_from_iso ($db->f ('time_created'));
@@ -231,20 +233,20 @@ class AUDITABLE extends RENDERABLE
    * The object is only stored if there are differences from 'history item'.
    * @param HISTORY_ITEM $history_item
    */
-  function store_as_is_if_different ($history_item)
+  public function store_as_is_if_different ($history_item)
   {
     $this->_store_if_different ($history_item, 'store_as_is');
   }
 
   /**
    * Store this object without updating audit information.
-    * this function should *only* be used when importing an object from
-    * an external source. For example, if there are objects from another
-    * WebCore system, or if there are objects externally generated and
-    * verified by an XML importer. Using this function makes the assumption
-    * that the 'creator' and 'modifier' have been properly set already.
-    */
-  function store_as_is ()
+   * this function should *only* be used when importing an object from
+   * an external source. For example, if there are objects from another
+   * WebCore system, or if there are objects externally generated and
+   * verified by an XML importer. Using this function makes the assumption
+   * that the 'creator' and 'modifier' have been properly set already.
+   */
+  public function store_as_is ()
   {
     parent::store ();
   }
@@ -254,7 +256,7 @@ class AUDITABLE extends RENDERABLE
    * The object is only stored if there are differences from 'history item'.
    * @param HISTORY_ITEM $history_item
    */
-  function store_if_different ($history_item)
+  public function store_if_different ($history_item)
   {
     $this->_store_if_different ($history_item, 'store');
   }
@@ -262,7 +264,7 @@ class AUDITABLE extends RENDERABLE
   /**
    * @param SQL_STORAGE $storage Store values to this object.
    */
-  function store_to ($storage)
+  public function store_to ($storage)
   {
     parent::store_to ($storage);
     $tname = $this->_table_name ();
@@ -275,7 +277,7 @@ class AUDITABLE extends RENDERABLE
   /* Final preparation before storing to the database.
    * @access private
    */
-  function _pre_store ()
+  protected function _pre_store ()
   {
     parent::_pre_store ();
 
@@ -297,7 +299,7 @@ class AUDITABLE extends RENDERABLE
    * @param string $store_func_name
    * @access private
    */
-  function _store_if_different ($history_item, $store_func_name)
+  protected function _store_if_different ($history_item, $store_func_name)
   {
     $history_item->record_differences ($this);
 
@@ -324,7 +326,7 @@ class AUDITABLE extends RENDERABLE
    * @param AUDITABLE $other
    * @access private
    */
-  function _copy_from ($other)
+  protected function _copy_from ($other)
   {
     unset ($this->time_created);
     $this->time_created = clone_object ($other->time_created);
@@ -336,7 +338,7 @@ class AUDITABLE extends RENDERABLE
    * @param PURGE_OPTIONS $options
    * @access private
    */
-  function _purge ($options)
+  protected function _purge ($options)
   {
     /* Remove history items for self */
     $history_item = $this->handler_for (Handler_history_item);
@@ -352,7 +354,7 @@ class AUDITABLE extends RENDERABLE
    * @return HISTORY_ITEM_QUERY
    * @access private
    */
-  function _make_history_item_query ()
+  protected function _make_history_item_query ()
   {
     include_once ('webcore/db/history_item_query.php');
     return new HISTORY_ITEM_QUERY ($this->app);
@@ -364,9 +366,9 @@ class AUDITABLE extends RENDERABLE
    * @param HISTORY_ITEM $history_item Action that generated this request. May be empty.
    * @access private
    */
-  function _prepare_subscription_query ($query, $history_item)
+  protected function _prepare_subscription_query ($query, $history_item)
   {
-    $this->raise_deferred ('_prepare_subscription_query', 'AUDITABLE');
+    // NOP
   }
 
   /**

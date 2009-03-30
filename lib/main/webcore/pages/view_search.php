@@ -66,7 +66,7 @@ http://www.earthli.com/software/webcore
   <?php
 
     $grid = $search->grid ();
-    $grid->show_folder = TRUE;
+    $grid->show_folder = true;
     $grid->set_ranges (10, 1);
     $grid->set_query ($search_query);
     $grid->display ();

@@ -52,32 +52,37 @@ class ICON_GRID extends STANDARD_GRID
    * @var string
    */
   public $box_style = '';
+
   /**
    * @var string
    */
   public $object_name = 'Icon';
+
   /**
    * @var string
    */
   public $width = '';
+
   /**
    * @var boolean
    */
-  public $centered = TRUE;
+  public $centered = true;
+
   /**
    * @var boolean
    */
-  public $even_columns = TRUE;
+  public $even_columns = true;
+
   /**
    * @var boolean
    */
-  public $is_chooser = FALSE;
+  public $is_chooser = false;
 
   /**
    * Draw JavaScripts used by this grid.
    * @access private
    */
-  function _draw_scripts ()
+  protected function _draw_scripts ()
   {
     parent::_draw_scripts ();
 ?>
@@ -90,7 +95,7 @@ class ICON_GRID extends STANDARD_GRID
    * @param ICON $obj
    * @access private
    */
-  function _draw_box ($obj)
+  protected function _draw_box ($obj)
   {
 ?>
 <div style="text-align: center">

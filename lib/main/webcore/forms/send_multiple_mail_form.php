@@ -50,14 +50,14 @@ class SEND_MULTIPLE_MAIL_FORM extends SEND_MAIL_FORM
 {
   /**
    * @var bool
-    * @access private
-    */
-  public $show_send_to = FALSE;
+   * @access private
+   */
+  public $show_send_to = false;
 
   /**
    * @param APPLICATION $app Main application.
    */
-  function SEND_MULTIPLE_MAIL_FORM ($app)
+  public function SEND_MULTIPLE_MAIL_FORM ($app)
   {
     SEND_MAIL_FORM::SEND_MAIL_FORM ($app);
 
@@ -65,7 +65,7 @@ class SEND_MULTIPLE_MAIL_FORM extends SEND_MAIL_FORM
     $field->id = 'recipients';
     $field->title = 'Recipients';
     $field->description = 'Type each email on its own line.';
-    $field->required = TRUE;
+    $field->required = true;
     $field->tag_validator_type = Tag_validator_none;
     $this->add_field ($field);
 
@@ -78,10 +78,10 @@ class SEND_MULTIPLE_MAIL_FORM extends SEND_MAIL_FORM
     $this->add_field ($field);
 
     $field = $this->field_at ('send_to');
-    $field->required = FALSE;
+    $field->required = false;
   }
 
-  function load_with_defaults ()
+  public function load_with_defaults ()
   {
     parent::load_with_defaults ();
     $this->set_value ('email_type', 'single_mail');
@@ -89,13 +89,13 @@ class SEND_MULTIPLE_MAIL_FORM extends SEND_MAIL_FORM
 
   /**
    * Called after fields are validated.
-    * Anonymous users are limited to sending 'max_anonymous_recipients' emails at a time.
-    * Registered users are limited to sending 'max_registered_recipients' emails at a time.
-    * @see APPLICATION::$mail_options
-    * @param object $obj This parameter is ignored.
-    * @access private
-    */
-  function _post_validate ($obj)
+   * Anonymous users are limited to sending 'max_anonymous_recipients' emails at a time.
+   * Registered users are limited to sending 'max_registered_recipients' emails at a time.
+   * @see APPLICATION::$mail_options
+   * @param object $obj This parameter is ignored.
+   * @access private
+   */
+  protected function _post_validate ($obj)
   {
     parent::_post_validate ($obj);
 
@@ -119,7 +119,7 @@ class SEND_MULTIPLE_MAIL_FORM extends SEND_MAIL_FORM
    * @param MAIL_MESSAGE $msg
    * @access private
    */
-  function send_mail ($provider, $msg)
+  public function send_mail ($provider, $msg)
   {
     if ($this->value_for ('email_type') == 'single_mail')
     {
@@ -142,7 +142,7 @@ class SEND_MULTIPLE_MAIL_FORM extends SEND_MAIL_FORM
    * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_options ($renderer)
+  protected function _draw_options ($renderer)
   {
     parent::_draw_options ($renderer);
 

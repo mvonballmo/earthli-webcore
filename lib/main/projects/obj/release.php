@@ -52,30 +52,35 @@ class RELEASE extends OBJECT_IN_FOLDER
 {
   /**
    * This release belongs to this branch.
-    * @var integer
-    * @see RELEASE::branch()
-    */
+   * @var integer
+   * @see RELEASE::branch()
+   */
   public $branch_id;
+
   /**
    * Scheduled release date.
-    * @var DATE_TIME
-    */
+   * @var DATE_TIME
+   */
   public $time_scheduled;
+
   /**
    * Scheduled internal testing date.
-    * @var DATE_TIME
-    */
+   * @var DATE_TIME
+   */
   public $time_testing_scheduled;
+
   /**
    * Actual internal testing date.
    * @var DATE_TIME
    */
   public $time_tested;
+
   /**
    * Actual release date.
    * @var DATE_TIME
    */
   public $time_shipped;
+
   /**
    * Next due date (testing or release).
    * @var DATE_TIME
@@ -85,7 +90,7 @@ class RELEASE extends OBJECT_IN_FOLDER
   /**
    * @param PROJECT_APPLICATION $app Main application.
    */
-  function RELEASE ($app)
+  public function RELEASE ($app)
   {
     OBJECT_IN_FOLDER::OBJECT_IN_FOLDER ($app);
 
@@ -100,22 +105,22 @@ class RELEASE extends OBJECT_IN_FOLDER
     $this->time_shipped->clear ();
   }
 
-  function planned ()
+  public function planned ()
   {
     return ! $this->time_shipped->is_valid ();
   }
 
-  function shipped ()
+  public function shipped ()
   {
     return $this->state == Shipped;
   }
 
   /**
    * The state of this object as a string.
-    * Useful for formatting titles and object descriptions.
-    * @return string
-    */
-  function state_as_string ()
+   * Useful for formatting titles and object descriptions.
+   * @return string
+   */
+  public function state_as_string ()
   {
     switch ($this->state)
     {
@@ -136,7 +141,7 @@ class RELEASE extends OBJECT_IN_FOLDER
    * Set the due date.
    * @param DATE_TIME $t
    */
-  function set_time_scheduled ($t)
+  public function set_time_scheduled ($t)
   {
     if ($t)
     {
@@ -154,7 +159,7 @@ class RELEASE extends OBJECT_IN_FOLDER
    * Set the release-to-testing date.
    * @param DATE_TIME $t
    */
-  function set_time_testing_scheduled ($t)
+  public function set_time_testing_scheduled ($t)
   {
     if ($t)
     {
@@ -175,7 +180,7 @@ class RELEASE extends OBJECT_IN_FOLDER
    * @param DATE_TIME $date
    * @return DATE_TIME
    */
-  function warning_time ($date)
+  public function warning_time ($date)
   {
     $fldr = $this->parent_folder ();
     $options = $fldr->options ();
@@ -188,7 +193,7 @@ class RELEASE extends OBJECT_IN_FOLDER
     }
   }
 
-  function _update_next_deadline ()
+  protected function _update_next_deadline ()
   {
     $rel_valid = $this->time_scheduled->is_valid ();
     $test_valid  = $this->time_testing_scheduled->is_valid ();
@@ -226,9 +231,9 @@ class RELEASE extends OBJECT_IN_FOLDER
 
   /**
    * List of all entries (jobs or changes) for this release.
-    * @return BRANCH_ENTRY_QUERY
-    */
-  function entry_query ()
+   * @return BRANCH_ENTRY_QUERY
+   */
+  public function entry_query ()
   {
     $class_name = $this->app->final_class_name ('BRANCH_ENTRY_QUERY', 'projects/db/branch_entry_query.php');
     $Result = new $class_name ($this->branch ());
@@ -238,9 +243,9 @@ class RELEASE extends OBJECT_IN_FOLDER
 
   /**
    * List of all changes for this release.
-    * @return PROJECT_ENTRY_QUERY
-    */
-  function change_query ()
+   * @return PROJECT_ENTRY_QUERY
+   */
+  public function change_query ()
   {
     $Result = $this->entry_query ();
     $Result->set_type ('change');
@@ -249,9 +254,9 @@ class RELEASE extends OBJECT_IN_FOLDER
 
   /**
    * List of all jobs for this release.
-    * @return PROJECT_ENTRY_QUERY
-    */
-  function job_query ()
+   * @return PROJECT_ENTRY_QUERY
+   */
+  public function job_query ()
   {
     $Result = $this->entry_query ();
     $Result->set_type ('job');
@@ -260,9 +265,9 @@ class RELEASE extends OBJECT_IN_FOLDER
 
   /**
    * List of all {@link COMMENT}s for this branch.
-    * @return BRANCH_COMMENT_QUERY
-    */
-  function comment_query ()
+   * @return BRANCH_COMMENT_QUERY
+   */
+  public function comment_query ()
   {
     $class_name = $this->app->final_class_name ('BRANCH_COMMENT_QUERY', 'projects/db/branch_comment_query.php');
     $Result = new $class_name ($this->branch ());
@@ -272,9 +277,9 @@ class RELEASE extends OBJECT_IN_FOLDER
 
   /**
    * The branch on which this release occurred (or is planned).
-    * @return BRANCH
-    */
-  function branch ()
+   * @return BRANCH
+   */
+  public function branch ()
   {
     $this->assert (isset ($this->_branch), '_branch is not cached.', 'branch', 'RELEASE');
     return $this->_branch;
@@ -284,7 +289,7 @@ class RELEASE extends OBJECT_IN_FOLDER
    * Current overall status as a set of properties.
    * @return RELEASE_STATUS
    */
-  function status ()
+  public function status ()
   {
     if (! isset ($this->_status))
     {
@@ -296,7 +301,7 @@ class RELEASE extends OBJECT_IN_FOLDER
   /**
    * @return TITLE_FORMATTER
    */
-  function title_formatter ()
+  public function title_formatter ()
   {
     $Result = parent::title_formatter ();
     $status = $this->status ();
@@ -312,7 +317,7 @@ class RELEASE extends OBJECT_IN_FOLDER
    * forms and to prevent new jobs and changes from being added.
    * @param boolean $update_now Actualize the database?
    */
-  function ship ($update_now = TRUE)
+  public function ship ($update_now = true)
   {
     if (! $this->shipped ())
     {
@@ -327,7 +332,7 @@ class RELEASE extends OBJECT_IN_FOLDER
    * The release is not yet shipped, but should be feature-complete.
    * @param boolean $update_now Actualize the database?
    */
-  function test ($update_now = TRUE)
+  public function test ($update_now = true)
   {
     if ($this->planned ())
     {
@@ -342,7 +347,7 @@ class RELEASE extends OBJECT_IN_FOLDER
    * The release has been set back to planning stages. Clears testing and shipping times.
    * @param boolean $update_now Actualize the database?
    */
-  function plan ($update_now = TRUE)
+  public function plan ($update_now = true)
   {
     if ($this->planned ())
     {
@@ -358,7 +363,7 @@ class RELEASE extends OBJECT_IN_FOLDER
    * Jobs and changes can no longer be added to this release, nor can they be taken away.
    * @param boolean $update_now Actualize the database?
    */
-  function lock ($update_now = TRUE)
+  public function lock ($update_now = true)
   {
     $this->ship ($update_now);
     parent::lock ($update_now);
@@ -367,7 +372,7 @@ class RELEASE extends OBJECT_IN_FOLDER
   /**
    * @param DATABASE $db
    */
-  function load ($db)
+  public function load ($db)
   {
     parent::load ($db);
     $this->branch_id = $db->f ('branch_id');
@@ -382,7 +387,7 @@ class RELEASE extends OBJECT_IN_FOLDER
   /**
    * @param SQL_STORAGE $storage Store values to this object.
    */
-  function store_to ($storage)
+  public function store_to ($storage)
   {
     parent::store_to ($storage);
     $tname =$this->_table_name ();
@@ -399,7 +404,7 @@ class RELEASE extends OBJECT_IN_FOLDER
    * Name of the home page name for this object.
    * @return string
    */
-  function page_name ()
+  public function page_name ()
   {
     return $this->app->page_names->release_home;
   }
@@ -412,7 +417,7 @@ class RELEASE extends OBJECT_IN_FOLDER
    * @return string
    * @access private
    */
-  function _object_url ($use_links, $separator = null, $formatter = null)
+  protected function _object_url ($use_links, $separator = null, $formatter = null)
   {
     $Result = parent::_object_url ($use_links, $separator, $formatter);
     $branch = $this->branch ();
@@ -431,7 +436,7 @@ class RELEASE extends OBJECT_IN_FOLDER
    * @param RELEASE $other
    * @access private
    */
-  function _copy_from ($other)
+  protected function _copy_from ($other)
   {
     unset ($this->time_scheduled);
     $this->time_scheduled = clone_object ($other->time_scheduled);
@@ -449,7 +454,7 @@ class RELEASE extends OBJECT_IN_FOLDER
    * @param PURGE_OPTIONS $options
    * @access private
    */
-  function _purge ($options)
+  protected function _purge ($options)
   {
     include_once ('projects/obj/release_updater.php');
     $purger = new RELEASE_PURGER ($this);
@@ -463,7 +468,7 @@ class RELEASE extends OBJECT_IN_FOLDER
    * @return string
    * @access private
    */
-  function _table_name ()
+  protected function _table_name ()
   {
     return $this->app->table_names->releases;
   }
@@ -472,7 +477,7 @@ class RELEASE extends OBJECT_IN_FOLDER
    * @return string
    * @access private
    */
-  function _state_icon_name ()
+  protected function _state_icon_name ()
   {
     switch ($this->state)
     {
@@ -493,7 +498,7 @@ class RELEASE extends OBJECT_IN_FOLDER
    * @param boolean $text_only Omit all tags if True.
    * @access private
    */
-  function _date_as_text ($date, $text_only)
+  protected function _date_as_text ($date, $text_only)
   {
     $Result = '';
 
@@ -519,10 +524,19 @@ class RELEASE extends OBJECT_IN_FOLDER
    * @return RELEASE_STATUS
    * @access private
    */
-  function _make_status ($text_only = FALSE)
+  protected function _make_status ($text_only = false)
   {
     include_once ('projects/obj/release_status.php');
     return new RELEASE_STATUS ($this, $text_only);
+  }
+
+  /**
+   * Name of the {@link FOLDER_PERMISSIONS} to use for this object.
+   * @access private
+   */
+  protected function _privilege_set ()
+  {
+    return Privilege_set_entry;
   }
 
   /**
@@ -532,7 +546,7 @@ class RELEASE extends OBJECT_IN_FOLDER
    * @return object
    * @access private
    */
-  function _default_handler_for ($handler_type, $options = null)
+  protected function _default_handler_for ($handler_type, $options = null)
   {
     switch ($handler_type)
     {
@@ -558,7 +572,7 @@ class RELEASE extends OBJECT_IN_FOLDER
    * @param HISTORY_ITEM $history_item Action that generated this request. May be empty.
    * @access private
    */
-  function _prepare_subscription_query ($query, $history_item)
+  protected function _prepare_subscription_query ($query, $history_item)
   {
     $branch = $this->branch ();
 

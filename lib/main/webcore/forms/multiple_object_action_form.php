@@ -48,18 +48,20 @@ require_once ('webcore/obj/object_list_builder.php');
  * @since 2.2.1
  * @abstract
  */
-class MULTIPLE_OBJECT_ACTION_FORM extends ID_BASED_FORM
+abstract class MULTIPLE_OBJECT_ACTION_FORM extends ID_BASED_FORM
 {
   /**
    * Holds information on the selected folders and entries.
    * @var OBJECT_LIST_BUILDER
    */
   public $object_list;
+
   /**
    * @var string
    * @access private
    */
   public $method = 'request';
+
   /**
    * @var string
    */
@@ -68,7 +70,7 @@ class MULTIPLE_OBJECT_ACTION_FORM extends ID_BASED_FORM
   /**
    * @param FOLDER $folder Objects are from this folder.
    */
-  function MULTIPLE_OBJECT_ACTION_FORM ($folder)
+  public function MULTIPLE_OBJECT_ACTION_FORM ($folder)
   {
     ID_BASED_FORM::ID_BASED_FORM ($folder->app);
 
@@ -77,13 +79,13 @@ class MULTIPLE_OBJECT_ACTION_FORM extends ID_BASED_FORM
     $field = new ARRAY_FIELD ();
     $field->id = 'folder_ids';
     $field->title = 'Folders';
-    $field->visible = FALSE;
+    $field->visible = false;
     $this->add_field ($field);
 
     $field = new ARRAY_FIELD ();
     $field->id = 'entry_ids';
     $field->title = 'Entries';
-    $field->visible = FALSE;
+    $field->visible = false;
     $this->add_field ($field);
 
     $this->object_list = new OBJECT_LIST_BUILDER ($folder);    
@@ -94,7 +96,7 @@ class MULTIPLE_OBJECT_ACTION_FORM extends ID_BASED_FORM
    * @param object $obj This parameter is ignored.
    * @access private
    */
-  function commit ($obj)
+  public function commit ($obj)
   {
     if ($this->object_list->has_folders ())
     {
@@ -111,7 +113,7 @@ class MULTIPLE_OBJECT_ACTION_FORM extends ID_BASED_FORM
    * Read in values from the {@link $method} array.
    * @access private
    */
-  function _load_from_request ()
+  protected function _load_from_request ()
   {
     parent::_load_from_request ();
     $this->object_list->load_from_request ();
@@ -123,7 +125,7 @@ class MULTIPLE_OBJECT_ACTION_FORM extends ID_BASED_FORM
    * Execute action for all selected folders.
    * @access private
    */
-  function _folders_run ()
+  protected function _folders_run ()
   {
     $i = 0;
     $c = sizeof ($this->object_list->folders);
@@ -138,7 +140,7 @@ class MULTIPLE_OBJECT_ACTION_FORM extends ID_BASED_FORM
    * Execute action for all selected entries.
    * @access private
    */
-  function _entries_run ()
+  protected function _entries_run ()
   {
     $i = 0;
     $c = sizeof ($this->object_list->entries);
@@ -155,7 +157,7 @@ class MULTIPLE_OBJECT_ACTION_FORM extends ID_BASED_FORM
    * @access private
    * @abstract
    */
-  function _folder_run ($fldr) { $this->raise_deferred ('_folder_run', 'MULTIPLE_OBJECT_ACTION_FORM'); }
+  protected abstract function _folder_run ($fldr);
 
   /**
    * Execute action for a single entry.
@@ -163,7 +165,7 @@ class MULTIPLE_OBJECT_ACTION_FORM extends ID_BASED_FORM
    * @access private
    * @abstract
    */
-  function _entry_run ($entry) { $this->raise_deferred ('_entry_run', 'MULTIPLE_OBJECT_ACTION_FORM'); }
+  protected abstract function _entry_run ($entry);
 
   /**
    * Displays the list of selected entries and folders.
@@ -171,7 +173,7 @@ class MULTIPLE_OBJECT_ACTION_FORM extends ID_BASED_FORM
    * still make use of this pre-built list.
    * @access private
    */
-  function _draw_selected_objects ()
+  protected function _draw_selected_objects ()
   {
 ?>
 <div class="chart">
@@ -240,16 +242,13 @@ class MULTIPLE_OBJECT_ACTION_FORM extends ID_BASED_FORM
    * @access private
    * @abstract
    */
-  function _draw_message ($renderer)
-  {
-    $this->raise_deferred ('_draw_message', 'MULTIPLE_OBJECT_ACTION_FORM');
-  }
+  protected abstract function _draw_message ($renderer);
 
   /**
    * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_controls ($renderer)
+  protected function _draw_controls ($renderer)
   {
     $renderer->set_width ('');
 
@@ -280,6 +279,7 @@ class MULTIPLE_OBJECT_ACTION_FORM extends ID_BASED_FORM
    * @access private
    */
   public $folders;
+
   /**
    * List of selected entries.
    * Available only when not submitted.

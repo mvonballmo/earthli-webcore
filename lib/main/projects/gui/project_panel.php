@@ -52,20 +52,22 @@ class RELEASE_PANEL extends QUERY_PANEL
    * @var string
    */
   public $id = 'release';
+
   /**
    * @var string
    */
   public $title = 'Releases';
+
   /**
    * @var boolean
    */
-  public $uses_time_selector = FALSE;
+  public $uses_time_selector = false;
 
   /**
    * @return RELEASE_GRID
    * @access private
    */
-  function _make_grid ()
+  protected function _make_grid ()
   {
     include_once ('projects/gui/release_grid.php');
     return new RELEASE_GRID ($this->app);
@@ -85,20 +87,22 @@ class BRANCH_PANEL extends QUERY_PANEL
    * @var string
    */
   public $id = 'branch';
+
   /**
    * @var string
    */
   public $title = 'Branches';
+
   /**
    * @var boolean
    */
-  public $uses_time_selector = FALSE;
+  public $uses_time_selector = false;
 
   /**
    * @return BRANCH_GRID
    * @access private
    */
-  function _make_grid ()
+  protected function _make_grid ()
   {
     include_once ('projects/gui/branch_grid.php');
     return new BRANCH_GRID ($this->app);
@@ -118,20 +122,22 @@ class COMPONENT_PANEL extends QUERY_PANEL
    * @var string
    */
   public $id = 'component';
+
   /**
    * @var string
    */
   public $title = 'Components';
+
   /**
    * @var boolean
    */
-  public $uses_time_selector = FALSE;
+  public $uses_time_selector = false;
 
   /**
    * @return COMPONENT_GRID
    * @access private
    */
-  function _make_grid ()
+  protected function _make_grid ()
   {
     include_once ('projects/gui/component_grid.php');
     return new COMPONENT_GRID ($this->app);
@@ -168,7 +174,7 @@ function restrict_to_scheduled ($query)
   $query->restrict ('not ISNULL(rel_sched.time_next_deadline)');
   $query->restrict ('rel_sched.time_next_deadline <> \'\'');
   $query->restrict ('rel_sched.time_next_deadline <> \'00-00-0000 00:00:00\'');
-  $query->add_order ('rel_sched.time_next_deadline ASC', TRUE);
+  $query->add_order ('rel_sched.time_next_deadline ASC', true);
   $query->store_order_as_recent ();
 }
 
@@ -187,19 +193,21 @@ class PROJECT_PANEL_OPTIONS extends PANEL_OPTIONS
    * Does not apply to all grids.
    * @var boolean
    */
-  public $show_branch = TRUE;
+  public $show_branch = true;
+
   /**
    * Show release info with objects in the grid?
    * Does not apply to all grids.
    * @var boolean
    */
-  public $show_release = TRUE;
+  public $show_release = true;
+
   /**
    * Show component info with objects in the grid?
    * Does not apply to all grids.
    * @var boolean
    */
-  public $show_component = TRUE;
+  public $show_component = true;
 }
 
 /**
@@ -216,7 +224,7 @@ class PROJECT_INDEX_PANEL_MANAGER extends INDEX_PANEL_MANAGER
    * @return PROJECT_PANEL_OPTIONS
    * @access private
    */
-  function _make_options ()
+  protected function _make_options ()
   {
     return new PROJECT_PANEL_OPTIONS ();
   }
@@ -225,7 +233,7 @@ class PROJECT_INDEX_PANEL_MANAGER extends INDEX_PANEL_MANAGER
    * Create the set of panels to use.
    * @access private
    */
-  function _add_panels ()
+  protected function _add_panels ()
   {
     parent::_add_panels ();
 
@@ -309,7 +317,7 @@ class PROJECT_FOLDER_PANEL_MANAGER extends FOLDER_PANEL_MANAGER
    * @return PROJECT_PANEL_OPTIONS
    * @access private
    */
-  function _make_options ()
+  protected function _make_options ()
   {
     return new PROJECT_PANEL_OPTIONS ();
   }
@@ -318,7 +326,7 @@ class PROJECT_FOLDER_PANEL_MANAGER extends FOLDER_PANEL_MANAGER
    * Create the set of panels to use.
    * @access private
    */
-  function _add_panels ()
+  protected function _add_panels ()
   {
     parent::_add_panels ();
 
@@ -368,7 +376,7 @@ class PROJECT_FOLDER_PANEL_MANAGER extends FOLDER_PANEL_MANAGER
       $panel = new $job_panel_class_name ($this, $scheduled_job_query, $job_type_info);
       $panel->id = 'scheduled_jobs';
       $panel->title = 'Scheduled jobs';
-      $panel->show_folder = TRUE;
+      $panel->show_folder = true;
       $this->add_panel ($panel);
   
       $open_job_query = $job_query;
@@ -417,7 +425,7 @@ class PROJECT_USER_PANEL_MANAGER extends USER_PANEL_MANAGER
    * @return PROJECT_PANEL_OPTIONS
    * @access private
    */
-  function _make_options ()
+  protected function _make_options ()
   {
     return new PROJECT_PANEL_OPTIONS ();
   }
@@ -426,7 +434,7 @@ class PROJECT_USER_PANEL_MANAGER extends USER_PANEL_MANAGER
    * Create the set of panels to use.
    * @access private
    */
-  function _add_panels ()
+  protected function _add_panels ()
   {
     parent::_add_panels ();
 
@@ -505,7 +513,7 @@ class PROJECT_BRANCH_PANEL_MANAGER extends WEBCORE_PANEL_MANAGER
    * @return PROJECT_PANEL_OPTIONS
    * @access private
    */
-  function _make_options ()
+  protected function _make_options ()
   {
     return new PROJECT_PANEL_OPTIONS ();
   }
@@ -514,16 +522,16 @@ class PROJECT_BRANCH_PANEL_MANAGER extends WEBCORE_PANEL_MANAGER
    * Initialize the panel options.
    * @param PANEL_OPTIONS $options
    */
-  function _init_options ($options)
+  protected function _init_options ($options)
   {
-    $options->show_folder = FALSE;
-    $options->show_branch = FALSE;
+    $options->show_folder = false;
+    $options->show_branch = false;
   }
   
   /**
    * @param PROJECT $folder Project for which to show panels.
    */
-  function PROJECT_BRANCH_PANEL_MANAGER ($branch)
+  public function PROJECT_BRANCH_PANEL_MANAGER ($branch)
   {
     $this->_branch = $branch;
     WEBCORE_PANEL_MANAGER::WEBCORE_PANEL_MANAGER ($branch->app);
@@ -533,7 +541,7 @@ class PROJECT_BRANCH_PANEL_MANAGER extends WEBCORE_PANEL_MANAGER
    * Create the set of panels to use.
    * @access private
    */
-  function _add_panels ()
+  protected function _add_panels ()
   {
     parent::_add_panels ();
 
@@ -633,7 +641,7 @@ class PROJECT_RELEASE_PANEL_MANAGER extends WEBCORE_PANEL_MANAGER
    * @return PROJECT_PANEL_OPTIONS
    * @access private
    */
-  function _make_options ()
+  protected function _make_options ()
   {
     return new PROJECT_PANEL_OPTIONS ();
   }
@@ -642,17 +650,17 @@ class PROJECT_RELEASE_PANEL_MANAGER extends WEBCORE_PANEL_MANAGER
    * Initialize the panel options.
    * @param PANEL_OPTIONS $options
    */
-  function _init_options ($options)
+  protected function _init_options ($options)
   {
-    $options->show_folder = FALSE;
-    $options->show_branch = FALSE;
-    $options->show_release = FALSE;
+    $options->show_folder = false;
+    $options->show_branch = false;
+    $options->show_release = false;
   }
 
   /**
    * @param PROJECT $folder Project for which to show panels.
    */
-  function PROJECT_RELEASE_PANEL_MANAGER ($release)
+  public function PROJECT_RELEASE_PANEL_MANAGER ($release)
   {
     $this->_release = $release;
     WEBCORE_PANEL_MANAGER::WEBCORE_PANEL_MANAGER ($release->app);
@@ -662,7 +670,7 @@ class PROJECT_RELEASE_PANEL_MANAGER extends WEBCORE_PANEL_MANAGER
    * Create the set of panels to use.
    * @access private
    */
-  function _add_panels ()
+  protected function _add_panels ()
   {
     parent::_add_panels ();
 
@@ -741,7 +749,7 @@ class PROJECT_COMPONENT_PANEL_MANAGER extends WEBCORE_PANEL_MANAGER
    * @return PROJECT_PANEL_OPTIONS
    * @access private
    */
-  function _make_options ()
+  protected function _make_options ()
   {
     return new PROJECT_PANEL_OPTIONS ();
   }
@@ -750,16 +758,16 @@ class PROJECT_COMPONENT_PANEL_MANAGER extends WEBCORE_PANEL_MANAGER
    * Initialize the panel options.
    * @param PANEL_OPTIONS $options
    */
-  function _init_options ($options)
+  protected function _init_options ($options)
   {
-    $options->show_folder = FALSE;
-    $options->show_component = FALSE;
+    $options->show_folder = false;
+    $options->show_component = false;
   }
 
   /**
    * @param PROJECT $folder Project for which to show panels.
    */
-  function PROJECT_COMPONENT_PANEL_MANAGER ($component)
+  public function PROJECT_COMPONENT_PANEL_MANAGER ($component)
   {
     $this->_component = $component;
     WEBCORE_PANEL_MANAGER::WEBCORE_PANEL_MANAGER ($component->app);
@@ -769,7 +777,7 @@ class PROJECT_COMPONENT_PANEL_MANAGER extends WEBCORE_PANEL_MANAGER
    * Create the set of panels to use.
    * @access private
    */
-  function _add_panels ()
+  protected function _add_panels ()
   {
     parent::_add_panels ();
 

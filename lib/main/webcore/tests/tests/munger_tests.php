@@ -51,7 +51,7 @@ require_once ('webcore/tests/tests/munger_base_tests.php');
  */
 class MUNGER_TEST_TASK extends MUNGER_BASE_TEST_TASK
 {
-  function _run_tests ()
+  protected function _run_tests ()
   {
     parent::_run_tests ();
 //    $this->_run_token_tests ();
@@ -61,7 +61,7 @@ class MUNGER_TEST_TASK extends MUNGER_BASE_TEST_TASK
     $this->_run_html_tests ();
   }
 
-  function _run_token_tests ()
+  protected function _run_token_tests ()
   {
     $this->_test_tokens ('<a href="/earthli/index.php">home</a> <p>This is the home page.</p> Hello. I think 8 > 5 && 5 < 8.', 8);
     $this->_test_tokens ('<a href="/earthli/index.php">home</a> <p>This is the home page.</p> Hello. I think 8 > 5 <a href="whatever.php">&&</a> 5 < 8.', 12);
@@ -76,7 +76,7 @@ class MUNGER_TEST_TASK extends MUNGER_BASE_TEST_TASK
     $this->_test_tokens ("This is the home page (where 8<5 ). This is the home page (where 8<5 ). This is the home page (where 8<5 ). This is the home page (where 8<5 ). This is the home page (where 8<5 ). This is the home page (where 8<5 ). This is the home page (where 8<5 ). This is the home page (where 8<5 ). This is the home page (where 8<5 ). This is the home page (where 8<5 ). This is the home page (where 8<5 ). This is the home page (where 8<5 ). This is the home page (where 8<5 ). This is the home page (where 8<5 ). This is the home page (where 8<5 ). This is the home page (where 8<5 ). This is the home page (where 8<5 ). This is the home page (where 8<5 ). This is the home page (where 8<5 ). This is the home page (where 8<5 ). This is the home page (where 8<5 ). This is the home page (where 8<5 ). This is the home page (where 8<5 ). This is the home page (where 8<5 ). This is the home page (where 8<5 ). This is the home page (where 8<5 ). This is the home page (where 8<5 ). This is the home page (where 8<5 ). This is the home page (where 8<5 ). This is the home page (where 8<5 ). This is the home page (where 8<5 ). This is the home page (where 8<5 ). This is the home page (where 8<5 ). This is the home page (where 8<5 ). This is the home page (where 8<5 ). This is the home page (where 8<5 ). This is the home page (where 8<5 ). This is the home page (where 8<5 ). This is the home page (where 8<5 ). This is the home page (where 8<5 ). This is the home page (where 8<5 ). This is the home page (where 8<5 ). This is the home page (where 8<5 ). This is the home page (where 8<5 ). This is the home page (where 8<5 ). This is the home page (where 8<5 ). This is the home page (where 8<5 ). This is the home page (where 8<5 ). This is the home page (where 8<5 ). This is the home page (where 8<5 ). This is the home page (where 8<5 ). This is the home page (where 8<5 ). This is the home page (where 8<5 ). This is the home page (where 8<5 ). This is the home page (where 8<5 ). This is the home page (where 8<5 ). This is the home page (where 8<5 ). This is the home page (where 8<5 ). This is the home page (where 8<5 ). This is the home page (where 8<5 ). This is the home page (where 8<5 ). This is the home page (where 8<5 ). This is the home page (where 8<5 ). This is the home page (where 8<5 ). This is the home page (where 8<5 ). This is the home page (where 8<5 ). This is the home page (where 8<5 ). This is the home page (where 8<5 ). This is the home page (where 8<5 ). This is the home page (where 8<5 ). This is the home page (where 8<5 ). This is the home page (where 8<5 ). This is the home page (where 8<5 ). This is the home page (where 8<5 ). This is the home page (where 8<5 ). This is the home page (where 8<5 ). This is the home page (where 8<5 ). This is the home page (where 8<5 ). This is the home page (where 8<5 ). This is the home page (where 8<5 ). This is the home page (where 8<5 ). This is the home page (where 8<5 ). This is the home page (where 8<5 ). This is the home page (where 8<5 ). This is the home page (where 8<5 ).", 1);
   }
 
-  function _run_attribute_tests ()
+  protected function _run_attribute_tests ()
   {
     $this->_test_attributes ('<a href="/earthli/index.php">', 1);
     $this->_test_attributes ('<a href="/earthli/index.php" title=" This is my title. ">', 2);
@@ -84,7 +84,7 @@ class MUNGER_TEST_TASK extends MUNGER_BASE_TEST_TASK
     $this->_test_attributes ("<a\nhref=\"/earthli/index.php\"\ntitle=\"This is the &quot;title&quot;...\n\n\t\t\"\n>", 2);
   }
 
-  function _run_validator_tests ()
+  protected function _run_validator_tests ()
   {
     $this->_validator = new MUNGER_DEFAULT_TEXT_VALIDATOR ();
     $this->_run_validator_test ("<span class=\"notes\">Test</span>", 0);
@@ -97,10 +97,10 @@ class MUNGER_TEST_TASK extends MUNGER_BASE_TEST_TASK
     $this->_run_validator_test ("<bq quote_style=\"none\">Content</bq>\r\n<bq quote_style=\"single\">Content</bq>\r\n<bq quote_style=\"multiple\">Content</bq>", 0);
   }
 
-  function _run_plain_text_tests ()
+  protected function _run_plain_text_tests ()
   {
     $old_show_html_output = $this->show_html_output;
-    $this->show_html_output = FALSE;
+    $this->show_html_output = false;
 
     $this->_munger = new PLAIN_TEXT_MUNGER ();
     $this->_munger->right_margin = 80;
@@ -108,7 +108,7 @@ class MUNGER_TEST_TASK extends MUNGER_BASE_TEST_TASK
     include('webcore/tests/tests/plain_text_munger_tests.php');
   }
 
-  function _run_html_tests ()
+  protected function _run_html_tests ()
   {
     include('webcore/tests/tests/html_munger_tests.php');
   }

@@ -63,7 +63,7 @@ define ('Msg_channel_client', 'Storage');
  * @since 2.7.0
  * @abstract
  */
-class CLIENT_STORAGE extends RAISABLE
+abstract class CLIENT_STORAGE extends RAISABLE
 {
   /**
    * Set values expire on this day.
@@ -73,13 +73,14 @@ class CLIENT_STORAGE extends RAISABLE
    * @var DATE_TIME
    */
   public $expire_date;
+
   /**
    * Identifier to prepend when storing or retrieving values.
    * @var string
    */
   public $prefix = '';
   
-  function CLIENT_STORAGE ()
+  public function CLIENT_STORAGE ()
   {
     $this->expire_date = new DATE_TIME ();
     $this->expire_when_session_ends ();
@@ -92,7 +93,7 @@ class CLIENT_STORAGE extends RAISABLE
    * @param string $key
    * @return string
    */
-  function value ($key)
+  public function value ($key)
   {
     if (isset ($this->_values [$key]))
     {
@@ -112,7 +113,7 @@ class CLIENT_STORAGE extends RAISABLE
    * @param string $key
    * @return boolean
    */
-  function exists_on_client ($key)
+  public function exists_on_client ($key)
   {
     return $this->_exists ($this->prefix . $key);    
   }
@@ -123,7 +124,7 @@ class CLIENT_STORAGE extends RAISABLE
    * @param string $key
    * @param string $value
    */
-  function set_value ($key, $value)
+  public function set_value ($key, $value)
   {
     if (isset ($this->_multiple_values))
     {
@@ -156,7 +157,7 @@ class CLIENT_STORAGE extends RAISABLE
    * Removes the value at 'key' from the client.
    * @param string $key
    */
-  function clear_value ($key)
+  public function clear_value ($key)
   {
     $this->_values [$key] = '';
     $this->_clear ($this->prefix . $key);
@@ -168,7 +169,7 @@ class CLIENT_STORAGE extends RAISABLE
    * @see expire_when_session_ends()
    * @param integer $days
    */
-  function expire_in_n_days ($days)
+  public function expire_in_n_days ($days)
   {
     $this->expire_date->set_from_php (time () + ($days * 86400));
   }
@@ -176,7 +177,7 @@ class CLIENT_STORAGE extends RAISABLE
   /**
    * Values will expire when the browser is closed.
    */
-  function expire_when_session_ends ()
+  public function expire_when_session_ends ()
   {
     $this->expire_date->clear ();
   }
@@ -193,12 +194,11 @@ class CLIENT_STORAGE extends RAISABLE
    * @param string $key Load all settings stored in this key.
    * @param boolean $prepend_key Prepends the key to all loaded values.
    */
-  function load_multiple_values ($key, $prepend_key = TRUE)
+  public function load_multiple_values ($key, $prepend_key = true)
   {
     if ($this->exists_on_client ($key))
     {
       $raw_data = $this->value ($key);
-      $Result = array ();
       $pairs = explode ('|', $raw_data);
       foreach ($pairs as $pair) 
       {
@@ -219,7 +219,7 @@ class CLIENT_STORAGE extends RAISABLE
    * @see finish_multiple_value()
    * @param string $key Store the accumulated settings under this key.
    */
-  function start_multiple_value ($key)
+  public function start_multiple_value ($key)
   {
     $this->_multiple_value_key = $key;
     $this->_multiple_values = array ();
@@ -231,7 +231,7 @@ class CLIENT_STORAGE extends RAISABLE
    * individual settings.
    * @see start_multiple_value()
    */
-  function finish_multiple_value ()
+  public function finish_multiple_value ()
   {
     if (! empty ($this->_multiple_values))
     {
@@ -252,10 +252,7 @@ class CLIENT_STORAGE extends RAISABLE
    * @access private
    * @abstract
    */
-  function _read ($key)
-  {
-    $this->raise_deferred ('_read', 'CLIENT_STORAGE');
-  }
+  protected abstract function _read ($key);
   
   /**
    * Is this value in local storage?
@@ -264,10 +261,7 @@ class CLIENT_STORAGE extends RAISABLE
    * @access private
    * @abstract
    */
-  function _exists ($key)
-  {
-    $this->raise_deferred ('_exists', 'CLIENT_STORAGE');
-  }
+  protected abstract function _exists ($key);
 
   /**
    * Add the requested value to storage.
@@ -278,10 +272,7 @@ class CLIENT_STORAGE extends RAISABLE
    * @access private
    * @abstract
    */
-  function _add ($key, $value)
-  {
-    $this->raise_deferred ('_add', 'CLIENT_STORAGE');
-  }
+  protected abstract function _add ($key, $value);
   
   /**
    * Store the requested value to client storage.
@@ -290,10 +281,7 @@ class CLIENT_STORAGE extends RAISABLE
    * @access private
    * @abstract
    */
-  function _write ($key, $value)
-  {
-    $this->raise_deferred ('_write', 'CLIENT_STORAGE');
-  }
+  protected abstract function _write ($key, $value);
 
   /**
    * Remove the requested value from client storage.
@@ -301,10 +289,7 @@ class CLIENT_STORAGE extends RAISABLE
    * @access private
    * @abstract
    */
-  function _clear ($key)
-  {
-    $this->raise_deferred ('_clear', 'CLIENT_STORAGE');
-  }
+  protected abstract function _clear ($key);
   
   /**
    * Maintains the local buffer to the client storage.
@@ -315,6 +300,7 @@ class CLIENT_STORAGE extends RAISABLE
    * @access private
    */
   protected $_values = array ();
+  
   /**
    * Contains settings when storing multiple values.
    * Use {@link start_multiple_value()} to start storing to a list of
@@ -324,6 +310,7 @@ class CLIENT_STORAGE extends RAISABLE
    * @access private
    */
   protected $_multiple_values;
+  
   /**
    * Multiple values will be stored to this key.
    * @var string

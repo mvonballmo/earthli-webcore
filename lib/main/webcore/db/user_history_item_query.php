@@ -51,7 +51,7 @@ class USER_HISTORY_ITEM_QUERY extends HISTORY_ITEM_QUERY
   /**
    * @param APPLICATION $app Main application.
    */
-  function USER_HISTORY_ITEM_QUERY ($app)
+  public function USER_HISTORY_ITEM_QUERY ($app)
   {
     HISTORY_ITEM_QUERY::HISTORY_ITEM_QUERY ($app);
     $this->add_table ("{$this->app->table_names->folders} fldr", 'act.access_id = fldr.id');
@@ -61,7 +61,7 @@ class USER_HISTORY_ITEM_QUERY extends HISTORY_ITEM_QUERY
   /**
    * @access private
    */
-  function _prepare_restrictions ()
+  protected function _prepare_restrictions ()
   {
     parent::_prepare_restrictions ();
 
@@ -88,12 +88,14 @@ class USER_HISTORY_ITEM_QUERY extends HISTORY_ITEM_QUERY
    * @return string
    * @access private
    */
-  function table_for_set ($set_name)
+  public function table_for_set ($set_name)
   {
     switch ($set_name)
     {
       case Privilege_set_folder:
         return 'fldr';
+      default:
+        throw new UNKNOWN_VALUE_EXCEPTION($set_name);
     }
   }
 
@@ -102,7 +104,7 @@ class USER_HISTORY_ITEM_QUERY extends HISTORY_ITEM_QUERY
    * @param HISTORY_ITEM $obj
    * @access private
    */
-  function _prepare_object ($obj)
+  protected function _prepare_object ($obj)
   {
     $obj->set_parent_folder ($this->login->folder_at_id ($obj->access_id));
   }
@@ -111,7 +113,7 @@ class USER_HISTORY_ITEM_QUERY extends HISTORY_ITEM_QUERY
    * @return HISTORY_ITEM
    * @access private
    */
-  function _make_object ()
+  protected function _make_object ()
   {
     include_once ('webcore/obj/webcore_history_items.php');
 

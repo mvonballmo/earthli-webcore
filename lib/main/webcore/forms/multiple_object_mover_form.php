@@ -54,19 +54,19 @@ class MULTIPLE_OBJECT_MOVER_FORM extends MULTIPLE_OBJECT_ACTION_FORM
    * If <code>True</code>, makes copies of the objects instead.
    * @var boolean
    */
-  public $copy = FALSE;
+  public $copy = false;
   
   /**
    * @param FOLDER $folder Objects are from this folder.
    */
-  function MULTIPLE_OBJECT_MOVER_FORM ($folder)
+  public function MULTIPLE_OBJECT_MOVER_FORM ($folder)
   {
     MULTIPLE_OBJECT_ACTION_FORM::MULTIPLE_OBJECT_ACTION_FORM ($folder);
 
     $field = new INTEGER_FIELD ();
     $field->id = 'selected_folder_id';
     $field->title = 'Target';
-    $field->required = TRUE;
+    $field->required = true;
     $field->min_value = 1;
     $this->add_field ($field);
 
@@ -79,7 +79,7 @@ class MULTIPLE_OBJECT_MOVER_FORM extends MULTIPLE_OBJECT_ACTION_FORM
     $field = new BOOLEAN_FIELD ();
     $field->id = 'copy_as_draft';
     $field->title = 'Copy as Draft';
-    $field->visible = FALSE;
+    $field->visible = false;
     $field->description = 'If checked, copied entries are stored as drafts instead of published.';
     $this->add_field ($field);
   }
@@ -88,14 +88,14 @@ class MULTIPLE_OBJECT_MOVER_FORM extends MULTIPLE_OBJECT_ACTION_FORM
    * Read in values from the {@link $method} array.
    * @access private
    */
-  function _load_from_request ()
+  protected function _load_from_request ()
   {
     parent::_load_from_request ();
     $this->set_visible ('maintain_permissions', $this->object_list->has_folders ());
     $this->set_visible ('copy_as_draft', $this->copy);
   }
 
-  function run ()
+  public function run ()
   {
     if ($this->_target)
     {
@@ -109,7 +109,7 @@ class MULTIPLE_OBJECT_MOVER_FORM extends MULTIPLE_OBJECT_ACTION_FORM
    * @return FOLDER_OPERATION_OPTIONS
    * @access private
    */
-  function _move_options_for ($obj)
+  protected function _move_options_for ($obj)
   {
     $Result = $obj->make_move_options ();
     $Result->maintain_permissions = $this->value_for ('maintain_permissions');
@@ -117,7 +117,7 @@ class MULTIPLE_OBJECT_MOVER_FORM extends MULTIPLE_OBJECT_ACTION_FORM
     return $Result;
   }
   
-  function _post_validate ($obj)
+  protected function _post_validate ($obj)
   {
     parent::_post_validate ($obj);
     $folder_query = $this->app->login->folder_query ();
@@ -127,7 +127,9 @@ class MULTIPLE_OBJECT_MOVER_FORM extends MULTIPLE_OBJECT_ACTION_FORM
       $this->record_error ('selected_folder_id', 'Please choose a valid folder.');
     }
     elseif (! $this->copy && $this->_folder->equals ($this->_target))
+    {
       $this->record_error ('selected_folder_id', 'You cannot move to the same folder.');
+    }
     elseif (($this->object_list->has_folders () && ! $this->app->login->is_allowed (Privilege_set_folder, Privilege_create, $this->_target)) ||
             ($this->object_list->has_entries () && ! $this->app->login->is_allowed (Privilege_set_entry, Privilege_create, $this->_target)))
       $this->record_error ('selected_folder_id', 'You are not allowed to add to that folder.');
@@ -141,7 +143,7 @@ class MULTIPLE_OBJECT_MOVER_FORM extends MULTIPLE_OBJECT_ACTION_FORM
    * @param FOLDER $fldr
    * @access private
    */
-  function _folder_run ($fldr)
+  protected function _folder_run ($fldr)
   {
     $opts = $this->_move_options_for ($fldr);
     if ($this->copy)
@@ -159,7 +161,7 @@ class MULTIPLE_OBJECT_MOVER_FORM extends MULTIPLE_OBJECT_ACTION_FORM
    * @param ENTRY $entry
    * @access private
    */
-  function _entry_run ($entry)
+  protected function _entry_run ($entry)
   {
     $opts = $this->_move_options_for ($entry);
     if ($this->copy)
@@ -177,7 +179,7 @@ class MULTIPLE_OBJECT_MOVER_FORM extends MULTIPLE_OBJECT_ACTION_FORM
    * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_controls ($renderer)
+  protected function _draw_controls ($renderer)
   {
     parent::_draw_controls ($renderer);
   }
@@ -187,7 +189,7 @@ class MULTIPLE_OBJECT_MOVER_FORM extends MULTIPLE_OBJECT_ACTION_FORM
    * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_message ($renderer)
+  protected function _draw_message ($renderer)
   {
     if ($this->copy)
     {
@@ -221,7 +223,7 @@ class MULTIPLE_OBJECT_MOVER_FORM extends MULTIPLE_OBJECT_ACTION_FORM
     $tree_node_info = new EXPLORER_FOLDER_TREE_NODE_INFO ($this->context);
     $tree_node_info->set_visible_node ($this->_folder);
     $tree_node_info->set_selected_node ($this->_folder);
-    $tree_node_info->nodes_are_links = FALSE;
+    $tree_node_info->nodes_are_links = false;
 
     include_once ('webcore/gui/selector_tree_decorator.php');
     $decorator = new SELECTOR_TREE_DECORATOR ($tree);
@@ -261,12 +263,12 @@ class MULTIPLE_DRAFTABLE_OBJECT_MOVER_FORM extends MULTIPLE_OBJECT_MOVER_FORM
    * @param FOLDER $folder Objects are from this folder.
    * @param FOLDER $target Move objects to this folder.
    */
-  function MULTIPLE_DRAFTABLE_OBJECT_MOVER_FORM ($folder)
+  public function MULTIPLE_DRAFTABLE_OBJECT_MOVER_FORM ($folder)
   {
     MULTIPLE_OBJECT_MOVER_FORM::MULTIPLE_OBJECT_MOVER_FORM ($folder);
 
     $field = $this->field_at ('copy_as_draft');
-    $field->visible = TRUE;
+    $field->visible = true;
   }
 }
 

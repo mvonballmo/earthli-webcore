@@ -54,11 +54,10 @@ class PICTURE_NAVIGATOR extends MULTI_TYPE_ENTRY_NAVIGATOR
    * @param QUERY $query
    * @access private
    */
-  function _adjust_query ($query)
+  protected function _adjust_query ($query)
   {
     parent::_adjust_query ($query);
 
-    $calendar = read_var ('calendar');
     $journal = read_var ('journal');
     $first_day = read_var ('first_day');
     $last_day = read_var ('last_day');

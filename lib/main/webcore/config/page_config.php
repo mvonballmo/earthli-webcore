@@ -50,20 +50,23 @@ class PAGE_TITLE_OPTIONS
 {
   /**
    * Separates objects added to the title.
-    * Also separates the object list from the group and subject.
-    * @var string
-    */
+   * Also separates the object list from the group and subject.
+   * @var string
+   */
   public $separator = ' &gt; ';
+
   /**
    * Starts every page title.
-    * @var string
-    */
+   * @var string
+   */
   public $prefix = '..:: ';
+
   /**
    *  Finishes every page title.
-    * @var string
-    */
+   * @var string
+   */
   public $suffix = ' ::..';
+
   /**
    * @var string
    */
@@ -82,18 +85,20 @@ class PAGE_REFRESH_OPTIONS
   /**
    * @var boolean
    */
-  public $enabled = FALSE;
+  public $enabled = false;
+
   /**
    * @var string
    */
   public $url;
+
   /**
    * Given in seconds.
-    * @var integer
-    */
+   * @var integer
+   */
   public $duration = 5;
 
-  function display ()
+  public function display ()
   {
     if ($this->enabled)
     {
@@ -115,7 +120,7 @@ class PAGE_REFRESH_OPTIONS
   /**
    * @param PAGE $page
    */
-  function PAGE_REFRESH_OPTIONS ($page)
+  public function PAGE_REFRESH_OPTIONS ($page)
   {
     $this->page  = $page;
   }
@@ -139,13 +144,15 @@ class PAGE_ICON_OPTIONS
   /**
    * @var boolean
    */
-  public $enabled = TRUE;
+  public $enabled = true;
+
   /**
    * Standard mime type For example, "image/png" or "image/x-icon". Mime type 
    * should match the file give in {@link $file_name}.
    * @var string
    */
   public $mime_type = 'image/x-icon';
+
   /**
    * URL of the icon for this page.
    * Locations can be absolute or relative to resource locations defined in the
@@ -157,7 +164,7 @@ class PAGE_ICON_OPTIONS
   /**
    * @param PAGE $page
    */
-  function PAGE_ICON_OPTIONS ($page)
+  public function PAGE_ICON_OPTIONS ($page)
   {
     $this->page = $page;
   }
@@ -165,7 +172,7 @@ class PAGE_ICON_OPTIONS
   /**
    * Render the settings as HTML.
    */
-  function display ()
+  public function display ()
   {
     if ($this->enabled)
     {
@@ -192,12 +199,14 @@ class PAGE_NEWSFEED_OPTIONS
   /**
    * @var boolean
    */
-  public $enabled = TRUE;
+  public $enabled = true;
+
   /**
    * Name of the feed presented to the user when subscribing.
    * @var PAGE_TITLE
    */
   public $title;
+
   /**
    * URL of the newsfeed.
    * Locations can be absolute or relative to resource locations defined in the
@@ -209,7 +218,7 @@ class PAGE_NEWSFEED_OPTIONS
   /**
    * @param PAGE $page
    */
-  function PAGE_NEWSFEED_OPTIONS ($page)
+  public function PAGE_NEWSFEED_OPTIONS ($page)
   {
     $this->page = $page;
     $class_name = $page->final_class_name ('PAGE_TITLE', 'webcore/gui/page_title.php');
@@ -221,7 +230,7 @@ class PAGE_NEWSFEED_OPTIONS
   /**
    * Render the settings as HTML.
    */
-  function display ()
+  public function display ()
   {
     if ($this->enabled && $this->file_name)
     {
@@ -262,18 +271,20 @@ class PAGE_TEMPLATE_OPTIONS
    * Show the standard header for this page?
    * @var boolean
    */
-  public $header_visible = TRUE;
+  public $header_visible = true;
+
   /**
    * Show the standard footer for this page?
    * @var boolean
    */
-  public $footer_visible = TRUE;
+  public $footer_visible = true;
   
   /**
    * Include JavaScript files in this page?
    * @var boolean
    */
-  public $include_scripts = TRUE;
+  public $include_scripts = true;
+
   /**
    * JavaScript to execute when the page is loaded.
    * @var string
@@ -285,27 +296,32 @@ class PAGE_TEMPLATE_OPTIONS
    * @var string
    */
   public $title = '';
+
   /**
    * Icon that represents the page content. Paths are resolved relative to the
    * {@link Folder_name_icons} folder in the {@link PAGE}.
    * @var string
    */
   public $icon = '';
+
   /**
    * Text of the copyright message for this page.
    * @var string
    */
   public $copyright = '';
+
   /**
    * URL to the location of the site logo.
    * @var string
    */
   public $logo_file = '';
+
   /**
    * Alternate text for the site logo.
    * @var string
    */
   public $logo_title = '';
+
   /**
    * Describes the main application embedded in the page.
    * Generally includes the {@link APPLICATION::$short_title},
@@ -320,12 +336,14 @@ class PAGE_TEMPLATE_OPTIONS
    * Show the log-in information on this page?
    * @var boolean
    */
-  public $show_login = TRUE;
+  public $show_login = true;
+
   /**
    * Show the update time for the file itself?
    * @var boolean
    */
-  public $show_last_time_modified = TRUE;
+  public $show_last_time_modified = true;
+
   /**
    * Show statistics gathered during page generation?
    * The WebCore keeps track of number of objects created, queries issued and
@@ -333,50 +351,58 @@ class PAGE_TEMPLATE_OPTIONS
    * ENVIRONMENT}).
    * @var boolean
    */
-  public $show_statistics = TRUE;
+  public $show_statistics = true;
+
   /**
    * Show the Contact/Support/Privacy links.
    * Toggle this value to turn off rendering off all extra links in the
    * template.
    * @var boolean
    */
-  public $show_links = TRUE;
+  public $show_links = true;
+
   /**
    * Show the library and application versions? 
    * @var boolean
    */
-  public $show_versions = TRUE;
+  public $show_versions = true;
   
   /**
    * Link to change theme settings.
    * @var string
    */
   public $settings_url = '{pages}settings.php';
+
   /**
    * Link to view browser properties.
    * @var string
    */
   public $browser_url = '{pages}browser.php';
+
   /**
    * Link to show current page source.
    * @var string
    */
   public $show_source_url = '{pages}show_source.php';
+
   /**
    * Link to show site/application privacy policy. 
    * @var string
    */
   public $privacy_url = '{pages}privacy.php';
+
   /**
    * Link to show support options. 
    * @var string
    */
   public $support_url = '{pages}support.php';
+
   /**
    * Link to show contact options. 
    * @var string
    */
   public $contact_url = '{pages}contact.php';
+
   /**
    * Link to show site/application copyright policy. 
    * @var string
@@ -392,12 +418,13 @@ class PAGE_TEMPLATE_OPTIONS
    * @see THEMED_MAIL_BODY_RENDERER
    * @var boolean
    */
-  public $close_logger = TRUE;
+  public $close_logger = true;
+
   /**
    * Check the browser and report errors?
    * @var boolean
    */
-  public $check_browser = TRUE;
+  public $check_browser = true;
 }
 
 /**

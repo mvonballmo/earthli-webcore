@@ -51,7 +51,7 @@ class GROUP_USER_QUERY extends USER_QUERY
   /**
    * @param GROUP $group Retrieve users in this group.
    */
-  function GROUP_USER_QUERY ($group)
+  public function GROUP_USER_QUERY ($group)
   {
     USER_QUERY::USER_QUERY ($group->app);
 
@@ -63,15 +63,15 @@ class GROUP_USER_QUERY extends USER_QUERY
   /**
    * @access private
    */
-  function _prepare_restrictions ()
+  protected function _prepare_restrictions ()
   {
     $this->_calculated_restrictions [] = 'utg.group_id = ' . $this->_group->id;;
   }
 
   /**
    * @var GROUP
-    * @access private
-    */
+   * @access private
+   */
   protected $_group;
 }
 ?>

@@ -57,7 +57,7 @@ class RECIPE_HISTORY_ITEM extends ENTRY_HISTORY_ITEM
    * @param RECIPE $new
    * @access private
    */
-  function _record_differences ($orig, $new)
+  protected function _record_differences ($orig, $new)
   {
     parent::_record_differences ($orig, $new);
 

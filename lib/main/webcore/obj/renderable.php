@@ -48,7 +48,7 @@ require_once ('webcore/obj/unique_object.php');
  * @since 2.5.0
  * @abstract
  */
-class RENDERABLE extends UNIQUE_OBJECT
+abstract class RENDERABLE extends UNIQUE_OBJECT
 {
   /**
    * Return handler objects for different tasks.
@@ -65,7 +65,7 @@ class RENDERABLE extends UNIQUE_OBJECT
    * OBJECT_RENDERER_OPTIONS} here.
    * @return object
    */
-  function handler_for ($handler_type, $options = null)
+  public function handler_for ($handler_type, $options = null)
   {
     $base_name = $this->_base_name ();
     $class_name = $this->context->final_class_name ($base_name, '', $handler_type);
@@ -101,7 +101,7 @@ class RENDERABLE extends UNIQUE_OBJECT
    * @return object
    * @access private
    */
-  function _default_handler_for ($handler_type, $options = null)
+  protected function _default_handler_for ($handler_type, $options = null)
   {
     switch ($handler_type)
     {
@@ -123,7 +123,7 @@ class RENDERABLE extends UNIQUE_OBJECT
    * @return string
    * @access private
    */
-  function _base_name ()
+  protected function _base_name ()
   {
     return get_class ($this);
   }

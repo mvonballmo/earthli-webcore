@@ -51,15 +51,18 @@ class PROJECT_GRID extends FOLDER_GRID
   /**
    * @var boolean
    */
-  public $show_separator = FALSE;
+  public $show_separator = false;
+
   /**
    * @var string
    */
   public $object_name = 'Project';
+
   /**
    * @var string
    */
   public $box_style = 'chart';
+
   /**
    * @var integer
    */
@@ -67,9 +70,9 @@ class PROJECT_GRID extends FOLDER_GRID
 
   /**
    * @param PROJECT $obj
-    * @access private
-    */
-  function _draw_box ($obj)
+   * @access private
+   */
+  protected function _draw_box ($obj)
   {
 ?>
   <div class="chart-title" style="text-align: center">

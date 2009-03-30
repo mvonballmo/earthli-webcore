@@ -52,7 +52,7 @@ class COMPONENT_FORM extends OBJECT_IN_FOLDER_FORM
   /**
    * @param APPLICATION $folder
    */
-  function COMPONENT_FORM ($folder)
+  public function COMPONENT_FORM ($folder)
   {
     OBJECT_IN_FOLDER_FORM::OBJECT_IN_FOLDER_FORM ($folder);
 
@@ -66,7 +66,7 @@ class COMPONENT_FORM extends OBJECT_IN_FOLDER_FORM
    * Load initial properties from this object.
    * @param UNIQUE_OBJECT $obj
    */
-  function load_from_object ($obj)
+  public function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
     $icon_url = read_var ('icon_url');
@@ -80,7 +80,7 @@ class COMPONENT_FORM extends OBJECT_IN_FOLDER_FORM
     }
   }
 
-  function load_with_defaults ()
+  public function load_with_defaults ()
   {
     parent::load_with_defaults ();
 
@@ -97,7 +97,7 @@ class COMPONENT_FORM extends OBJECT_IN_FOLDER_FORM
    * @access private
    * @abstract
    */
-  function _store_to_object ($obj)
+  protected function _store_to_object ($obj)
   {
     parent::_store_to_object ($obj);
     $obj->icon_url = $this->value_for ('icon_url');
@@ -106,7 +106,7 @@ class COMPONENT_FORM extends OBJECT_IN_FOLDER_FORM
   /**
    * @access private
    */
-  function _draw_scripts ()
+  protected function _draw_scripts ()
   {
     parent::_draw_scripts ();
     $this->_draw_icon_browser_script_for ('icon_url');
@@ -116,7 +116,7 @@ class COMPONENT_FORM extends OBJECT_IN_FOLDER_FORM
    * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_controls ($renderer)
+  protected function _draw_controls ($renderer)
   {
     $renderer->start ();
     $renderer->draw_text_line_row ('title');
@@ -126,7 +126,7 @@ class COMPONENT_FORM extends OBJECT_IN_FOLDER_FORM
     $renderer->draw_text_box_row ('description');
     $renderer->draw_submit_button_row ();
 
-    $this->_draw_history_item_controls ($renderer, FALSE);
+    $this->_draw_history_item_controls ($renderer, false);
     $renderer->finish ();
   }
 

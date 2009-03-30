@@ -57,7 +57,7 @@ class HTML_BLOCK_TRANSFORMER extends MUNGER_BLOCK_TRANSFORMER
    * the first and last newlines in the text.
    * @var boolean
    */
-  public $strict_newlines = FALSE;
+  public $strict_newlines = false;
 
   /**
    * Transform given newlines to HTML boxes.
@@ -66,9 +66,9 @@ class HTML_BLOCK_TRANSFORMER extends MUNGER_BLOCK_TRANSFORMER
    * @return string
    * @access private
    */
-  function _apply_transform ($munger, $text)
+  protected function _apply_transform ($munger, $text)
   {
-    if (strpos ($text, "\n") !== FALSE)
+    if (strpos ($text, "\n") !== false)
     {
       $text = $this->_trim ($text);
 
@@ -106,7 +106,7 @@ class HTML_BLOCK_TRANSFORMER extends MUNGER_BLOCK_TRANSFORMER
    * @return string
    * @access private
    */
-  function _trim ($text)
+  protected function _trim ($text)
   {
     $len = strlen ($text);
     $first_char = 0;
@@ -173,7 +173,7 @@ class HTML_BLOCK_TRANSFORMER extends MUNGER_BLOCK_TRANSFORMER
    * @return string
    * @access private
    */
-  function _apply_simple_transform ($munger, $text)
+  protected function _apply_simple_transform ($munger, $text)
   {
     return $text;
   }
@@ -195,7 +195,7 @@ class HTML_QUOTE_TRANSFORMER extends HTML_BLOCK_TRANSFORMER
    * @param boolean $value True if the transformer is being activated.
    * @param MUNGER_TOKEN $token Token that caused the activation.
    */
-  function activate ($munger, $value, $token)
+  public function activate ($munger, $value, $token)
   {
     parent::activate ($munger, $value, $token);
     if ($value)
@@ -211,7 +211,7 @@ class HTML_QUOTE_TRANSFORMER extends HTML_BLOCK_TRANSFORMER
    * @return string
    * @access private
    */
-  function _apply_transform ($munger, $text)
+  protected function _apply_transform ($munger, $text)
   {
     $text = $this->_apply_quotes ($text, $this->_quote_style, '&ldquo;', '&rdquo;');
     return parent::_apply_transform ($munger, $text);
@@ -240,7 +240,7 @@ class HTML_PARAGRAPH_TRANSFORMER extends HTML_BLOCK_TRANSFORMER
    * the first and last newlines in the text.
    * @var boolean
    */
-  public $strict_newlines = TRUE;
+  public $strict_newlines = true;
 
   /**
    * Transform text without newlines.
@@ -248,13 +248,12 @@ class HTML_PARAGRAPH_TRANSFORMER extends HTML_BLOCK_TRANSFORMER
    * @param string $text
    * @return string
    */
-  function _apply_simple_transform ($munger, $text)
+  protected function _apply_simple_transform ($munger, $text)
   {
     if (($this->_buffer_state != Munger_only_data_block) || $munger->force_paragraphs)
     {
       return '<p>' . $text . "</p>\n";
     }
-
 
     return $text;
   }
@@ -277,7 +276,7 @@ class HTML_GESHI_CODE_TRANSFORMER extends MUNGER_TRANSFORMER
    * @return string
    * @access private
    */
-  function _apply_transform ($munger, $text)
+  protected function _apply_transform ($munger, $text)
   {
 //    include_once ('third_party/geshi/geshi.php');
     $geshi = new GeSHi($text, 'java');
@@ -301,12 +300,14 @@ class HTML_LIST_TRANSFORMER_ITEM
    * @var array[string]
    */
   public $items;
+
   /**
    * Is this list part of a previous list?
    * If True, it does not need to open an item tag.
    * @var boolean
    */
   public $was_open;
+
   /**
    * Is the last item in this list open?
    * If True, it does not need to close the last item tag.
@@ -331,7 +332,7 @@ class HTML_LIST_TRANSFORMER extends MUNGER_LIST_TRANSFORMER
    * @return string
    * @access private
    */
-  function _item_to_text ($item)
+  protected function _item_to_text ($item)
   {
     $Result = join ("</li>\n<li>", $item->items);
     if ($item->is_open && ! $item->was_open)
@@ -339,9 +340,13 @@ class HTML_LIST_TRANSFORMER extends MUNGER_LIST_TRANSFORMER
       $Result = "\n<li>" . $Result;
     }
     elseif ($item->was_open && ! $item->is_open)
+    {
       $Result = $Result . '</li>';
+    }
     elseif (! $item->is_open)
+    {
       $Result = "\n<li>" . $Result . '</li>';
+    }
     return str_replace ("<li></li>", "<li>&nbsp;</li>", $Result);
   }
 
@@ -352,12 +357,13 @@ class HTML_LIST_TRANSFORMER extends MUNGER_LIST_TRANSFORMER
    * @return HTML_LIST_TRANSFORMER_ITEM
    * @access private
    */
-  function _make_item ($text, $item_was_open)
+  protected function _make_item ($text, $item_was_open)
   {
-    $Result = null; // Compiler warning
+    $Result = new stdClass();
     $Result->items = explode ("\n", ltrim ($text, " \t"));
     $Result->was_open = $item_was_open;
     $Result->is_open = $this->_item_is_open;
+    
     return $Result;
   }
 
@@ -369,7 +375,7 @@ class HTML_LIST_TRANSFORMER extends MUNGER_LIST_TRANSFORMER
    * @return string
    * @access private
    */
-  function _transform_to_list ($munger, $text, $item_was_open)
+  protected function _transform_to_list ($munger, $text, $item_was_open)
   {
     if ($this->_buffer_state == Munger_only_data_block)
     {
@@ -405,7 +411,7 @@ class HTML_LIST_TRANSFORMER extends MUNGER_LIST_TRANSFORMER
    * @param string
    * @access private
    */
-  function _transformer_text ($munger, $text)
+  protected function _transformer_text ($munger, $text)
   {
     $text = parent::_transformer_text ($munger, $text);
     if ($this->_last_item)
@@ -450,7 +456,6 @@ class HTML_LIST_TRANSFORMER extends MUNGER_LIST_TRANSFORMER
       return $Result;
     }
 
-
     return "\n<li>" . $text . "</li>";
   }
 
@@ -477,7 +482,7 @@ class HTML_DEFINITION_LIST_TRANSFORMER extends MUNGER_DEFINITION_LIST_TRANSFORME
    * @param boolean $value True if the transformer is being activated.
    * @param MUNGER_TOKEN $token Token that caused the activation.
    */
-  function activate ($munger, $value, $token)
+  public function activate ($munger, $value, $token)
   {
     parent::activate ($munger, $value, $token);
     $attrs = $token->attributes ();
@@ -492,13 +497,12 @@ class HTML_DEFINITION_LIST_TRANSFORMER extends MUNGER_DEFINITION_LIST_TRANSFORME
    * @param string $line
    * @access private
    */
-  function _build_as_definition_term ($munger, $line)
+  protected function _build_as_definition_term ($munger, $line)
   {
     if ($this->_term_class)
     {
       return "<dt class=\"$this->_term_class\">$line</dt>\n";
     }
-
 
     return "<dt>$line</dt>\n";
   }
@@ -510,13 +514,12 @@ class HTML_DEFINITION_LIST_TRANSFORMER extends MUNGER_DEFINITION_LIST_TRANSFORME
    * @param string $line
    * @access private
    */
-  function _build_as_definition_body ($munger, $line)
+  protected function _build_as_definition_body ($munger, $line)
   {
     if ($this->_definition_class)
     {
       return "<dd class=\"$this->_definition_class\">$line</dd>\n";
     }
-
 
     return "<dd>$line</dd>\n";
   }
@@ -526,6 +529,7 @@ class HTML_DEFINITION_LIST_TRANSFORMER extends MUNGER_DEFINITION_LIST_TRANSFORME
    * @access private
    */
   protected $_term_class;
+
   /**
    * @var string
    * @access private
@@ -549,7 +553,7 @@ class HTML_BASIC_REPLACER extends MUNGER_BASIC_REPLACER
    * @param MUNGER_TOKEN $token
    * @return string
    */
-  function transform ($munger, $token)
+  public function transform ($munger, $token)
   {
     $Result = parent::transform ($munger, $token);
 
@@ -584,7 +588,7 @@ class HTML_FOOTNOTE_REFERENCE_REPLACER extends MUNGER_FOOTNOTE_REFERENCE_REPLACE
    * @return string
    * @access private
    */
-  function _format_reference ($token, $info)
+  protected function _format_reference ($token, $info)
   {
     return '<a href="#' . $info->name_to . '" id="' . $info->name_from . '" class="footnote-number" title="Jump to footnote.">[' . $info->number . ']</a>';
   }
@@ -607,13 +611,12 @@ class HTML_FOOTNOTE_TEXT_REPLACER extends MUNGER_FOOTNOTE_TEXT_REPLACER
    * @return string
    * @access private
    */
-  function _format_text ($token, $info)
+  protected function _format_text ($token, $info)
   {
     if ($token->is_start_tag ())
     {
       return '<div class="footnote-reference"><span id="' . $info->name_to . '" class="footnote-number">' . $info->number . '</span> ';
     }
-
 
     return '<a href="#' . $info->name_from . '" class="footnote-return" title="Jump back to reference.">&#8617;</a></div>';
   }
@@ -664,7 +667,7 @@ class HTML_PUNCTUATION_CONVERTER extends MUNGER_CONVERTER
    * @return string
    * @access private
    */
-  function _convert ($munger, $text)
+  protected function _convert ($munger, $text)
   {
     return strtr ($text, $this->punctuation_table);
   }
@@ -685,6 +688,7 @@ class HTML_SMART_QUOTE_CONVERTER extends MUNGER_CONVERTER
    * A quote after one of these characters should be a left quote.
    */
   public $white_space_chars = array (' ', "\n", "\t");
+
   /**
    * Characters that are followed by left quotes.
    * A quote after a non white-space character is converted to a right quote,
@@ -695,12 +699,12 @@ class HTML_SMART_QUOTE_CONVERTER extends MUNGER_CONVERTER
    */
   public $left_chars = array ('(', '[', '{', '<', '=', ';', '.', ',', '"', '\''/*0x00AB, 0x3008, 0x300A*/);
 
-  function reset()
+  public function reset()
   {
     parent::reset();
     $this->_last_char = null;
-    $this->_double_quote_open = FALSE;
-    $this->_single_quote_open = FALSE;
+    $this->_double_quote_open = false;
+    $this->_single_quote_open = false;
   }
   
   /**
@@ -710,18 +714,17 @@ class HTML_SMART_QUOTE_CONVERTER extends MUNGER_CONVERTER
    * @return string
    * @access private
    */
-  function _convert ($munger, $text)
+  protected function _convert ($munger, $text)
   {
     if ($text)
     {
       $Result = '';
-      $quote_pos = strpos ($text, '"', "");
 
       $last = $this->_last_char;
       if (empty ($last))
       {
         $last = substr($munger->current_raw_text (), -1);
-        if ($last === FALSE)
+        if ($last === false)
         {
           $last = null;
         }
@@ -731,6 +734,7 @@ class HTML_SMART_QUOTE_CONVERTER extends MUNGER_CONVERTER
        * with an optional, non-quote piece at the beginning.
        */
       $pattern = '/([^"\']+|["\'][^"\']*)/';
+      $segments = null;
       preg_match_all ($pattern, $text, $segments);
       $segments = $segments [0];
 
@@ -764,19 +768,19 @@ class HTML_SMART_QUOTE_CONVERTER extends MUNGER_CONVERTER
             // 9'
             $Result .= $char;
           }
-          elseif (! isset ($last) || ($last === '') || in_array ($last, $this->white_space_chars)
-            || ((in_array ($last, $this->left_chars) && (($char != '"') || !$this->_double_quote_open)) && (($char != '\'') || !$this->_single_quote_open)))
+          elseif (! isset ($last) || ($last === '') || in_array ($last, $this->white_space_chars) || 
+            ((in_array ($last, $this->left_chars) && (($char != '"') || !$this->_double_quote_open)) && (($char != '\'') || !$this->_single_quote_open)))
           {
             // Add left quote
             if ($char == '"')
             {
               $Result .= '&ldquo;';
-              $this->_double_quote_open = TRUE;
+              $this->_double_quote_open = true;
             }
             else
             {
               $Result .= '&lsquo;';
-              $this->_single_quote_open = TRUE;
+              $this->_single_quote_open = true;
             }
           }
           else
@@ -785,12 +789,12 @@ class HTML_SMART_QUOTE_CONVERTER extends MUNGER_CONVERTER
             if ($char == '"')
             {
               $Result .= '&rdquo;';
-              $this->_double_quote_open = FALSE;
+              $this->_double_quote_open = false;
             }
             else
             {
               $Result .= '&rsquo;';
-              $this->_single_quote_open = FALSE;
+              $this->_single_quote_open = false;
             }
           }
 
@@ -803,7 +807,7 @@ class HTML_SMART_QUOTE_CONVERTER extends MUNGER_CONVERTER
         }
 
         $last = substr ($segment, -1);
-        if ($last === FALSE)
+        if ($last === false)
         {
           $last = null;
         }
@@ -823,9 +827,9 @@ class HTML_SMART_QUOTE_CONVERTER extends MUNGER_CONVERTER
    */
   protected $_last_char = '';
 
-  protected $_double_quote_open = FALSE;
+  protected $_double_quote_open = false;
 
-  protected $_single_quote_open = FALSE;
+  protected $_single_quote_open = false;
 }
 
 /**
@@ -857,7 +861,7 @@ class HTML_LIGATURE_CONVERTER extends MUNGER_CONVERTER
    * @return string
    * @access private
    */
-  function _convert ($munger, $text)
+  protected function _convert ($munger, $text)
   {
     return strtr ($text, $this->punctuation_table);
   }
@@ -879,6 +883,7 @@ class HTML_HIGHLIGHT_CONVERTER extends MUNGER_CONVERTER
    * @var string
    */
   public $highlight_prefix = '<span class="highlight">';
+
   /**
    * Close each highlighted section with this text.
    * @var string
@@ -892,7 +897,7 @@ class HTML_HIGHLIGHT_CONVERTER extends MUNGER_CONVERTER
    * @return string
    * @access private
    */
-  function _convert ($munger, $text)
+  protected function _convert ($munger, $text)
   {
     if ($munger->highlighted_words)
     {
@@ -921,16 +926,19 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
    * @var string
    */
   public $main_tag = 'div';
+
   /**
    * True if the main tag is a block element.
    * @var boolean
    */
-  public $is_block = TRUE;
+  public $is_block = true;
+
   /**
    * True if the main tag has an end tag.
    * @var boolean
    */
-  public $has_end_tag = TRUE;
+  public $has_end_tag = true;
+
   /**
    * Default classes for the inner container.
    * @var string
@@ -943,7 +951,7 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
    * @param MUNGER_TOKEN $token
    * @return string
    */
-  function transform ($munger, $token)
+  public function transform ($munger, $token)
   {
     if ($token->is_start_tag ())
     {
@@ -978,7 +986,7 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
    * @return string
    * @access private
    */
-  function _open_outer_area ($munger, $attrs, $is_block)
+  protected function _open_outer_area ($munger, $attrs, $is_block)
   {
     $outer_css = $munger->make_style_builder ();
 
@@ -1008,7 +1016,9 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
           $clear = 'left';
         }
         elseif ($alignment == 'right-column')
+        {
           $clear = 'right';
+        }
         break;
     }
 
@@ -1111,7 +1121,7 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
    * @return string
    * @access private
    */
-  function _close_outer_area ($munger, $is_block)
+  protected function _close_outer_area ($munger, $is_block)
   {
     $Result = $this->_close_inner_area ($munger);
 
@@ -1135,7 +1145,7 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
    * @return boolean
    * @access private
    */
-  function _has_outer_area ()
+  protected function _has_outer_area ()
   {
     return $this->_caption;
   }
@@ -1157,7 +1167,7 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
    * @return string
    * @access private
    */
-  function _open_inner_area ($munger, $attrs, $outer_css, $inner_css, $inner_class)
+  protected function _open_inner_area ($munger, $attrs, $outer_css, $inner_css, $inner_class)
   {
     $builder = $munger->make_tag_builder ($this->main_tag);
     $builder->add_attribute ('class', $inner_class);
@@ -1176,7 +1186,7 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
    * @return string
    * @access private
    */
-  function _close_inner_area ($munger)
+  protected function _close_inner_area ($munger)
   {
     return '</' . $this->main_tag . '>';
   }
@@ -1189,7 +1199,7 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
    * @return string
    * @access private
    */
-  function _calculate_width ($munger, $attrs)
+  protected function _calculate_width ($munger, $attrs)
   {
     return read_array_index ($attrs, 'width');
   }
@@ -1203,7 +1213,7 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
    * @return string
    * @access private
    */
-  function _read_attribute ($attrs, $index)
+  protected function _read_attribute ($attrs, $index)
   {
     return $this->_convert_to_attribute (read_array_index ($attrs, $index));
   }
@@ -1214,7 +1224,7 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
    * @return string
    * @access private
    */
-  function _convert_to_attribute ($value)
+  protected function _convert_to_attribute ($value)
   {
     $text_options = global_text_options ();
     return $text_options->convert_to_html_attribute($value);
@@ -1231,7 +1241,7 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
    * @return string
    * @access private
    */
-  function _calculate_caption ($munger, $attrs)
+  protected function _calculate_caption ($munger, $attrs)
   {
     $caption = $this->_read_attribute ($attrs, 'caption');
     $author = $this->_read_attribute ($attrs, 'author');
@@ -1245,9 +1255,13 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
         $caption = '<a href="' . $href . '">' . $caption . '</a>';
       }
       elseif ($date)
+      {
         $date = '<a href="' . $href . '">' . $date . '</a>';
+      }
       elseif ($author)
+      {
         $author = '<a href="' . $href . '">' . $author . '</a>';
+      }
     }
 
     $source = $this->_calculate_source ($attrs, $href);
@@ -1262,7 +1276,7 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
    * @return string
    * @access private
    */
-  function _calculate_source ($attrs, $href)
+  protected function _calculate_source ($attrs, $href)
   {
     $Result = $this->_read_attribute ($attrs, 'source');
     if ($Result && $href)
@@ -1284,7 +1298,7 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
    * @return string
    * @access private
    */
-  function _calculate_suffix ($caption, $author, $date, $source)
+  protected function _calculate_suffix ($caption, $author, $date, $source)
   {
     $Result = $caption;
     if ($author)
@@ -1332,7 +1346,7 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
    * @return string
    * @access private
    */
-  function _url_for_source ($attrs)
+  protected function _url_for_source ($attrs)
   {
     return read_array_index ($attrs, 'href');
   }
@@ -1361,7 +1375,7 @@ class HTML_DIV_REPLACER extends HTML_BASE_REPLACER
   /**
    * @param string $classes
    */
-  function HTML_DIV_REPLACER ($classes = '')
+  public function HTML_DIV_REPLACER ($classes = '')
   {
     $this->css_classes = $classes;
   }
@@ -1426,7 +1440,7 @@ class HTML_BOX_REPLACER extends HTML_DIV_REPLACER
    * @return string
    * @access private
    */
-  function _open_inner_area ($munger, $attrs, $outer_css, $inner_css, $inner_class)
+  protected function _open_inner_area ($munger, $attrs, $outer_css, $inner_css, $inner_class)
   {
     $builder = $munger->make_tag_builder ($this->main_tag);
     $builder->add_attribute ('class', 'chart');
@@ -1462,7 +1476,7 @@ class HTML_BOX_REPLACER extends HTML_DIV_REPLACER
    * @return string
    * @access private
    */
-  function _close_inner_area ($munger)
+  protected function _close_inner_area ($munger)
   {
     return '</' . $this->main_tag . '></' . $this->main_tag . '>';
   }
@@ -1496,7 +1510,7 @@ class HTML_MUNGER_CODE_REPLACER extends HTML_PREFORMATTED_BLOCK_REPLACER
    * @return string
    * @access private
    */
-  function _open_inner_area ($munger, $attrs, $outer_css, $inner_css, $inner_class)
+  protected function _open_inner_area ($munger, $attrs, $outer_css, $inner_css, $inner_class)
   {
 ////    return parent::_open_inner_area ($attrs, $outer_css, $inner_css, $inner_class) . '<textarea name="code" class="java" rows="15" cols="100">';
     return parent::_open_inner_area ($munger, $attrs, $outer_css, $inner_css, $inner_class) . '<code>';
@@ -1508,7 +1522,7 @@ class HTML_MUNGER_CODE_REPLACER extends HTML_PREFORMATTED_BLOCK_REPLACER
    * @return string
    * @access private
    */
-  function _close_inner_area ($munger)
+  protected function _close_inner_area ($munger)
   {
     return '</code>' . parent::_close_inner_area ($munger);
   }
@@ -1535,12 +1549,13 @@ class HTML_INLINE_ASSET_REPLACER extends HTML_BASE_REPLACER
    * True if the main tag is a block element.
    * @var boolean
    */
-  public $is_block = FALSE;
+  public $is_block = false;
+
   /**
    * True if the main tag has an end tag.
    * @var boolean
    */
-  public $has_end_tag = FALSE;
+  public $has_end_tag = false;
 
   /**
    * Render the closing tag.
@@ -1549,7 +1564,7 @@ class HTML_INLINE_ASSET_REPLACER extends HTML_BASE_REPLACER
    * @return string
    * @access private
    */
-  function _close_inner_area ($munger)
+  protected function _close_inner_area ($munger)
   {
     return '';
   }
@@ -1560,7 +1575,7 @@ class HTML_INLINE_ASSET_REPLACER extends HTML_BASE_REPLACER
    * @return string
    * @access private
    */
-  function _url_for_source ($attrs)
+  protected function _url_for_source ($attrs)
   {
     $attachment_name = read_array_index ($attrs, 'attachment');
     if ($attachment_name)
@@ -1604,7 +1619,7 @@ class HTML_IMAGE_REPLACER extends HTML_INLINE_ASSET_REPLACER
    * @return string
    * @access private
    */
-  function _open_inner_area ($munger, $attrs, $outer_css, $inner_css, $inner_class)
+  protected function _open_inner_area ($munger, $attrs, $outer_css, $inner_css, $inner_class)
   {
     $attachment_name = read_array_index ($attrs, 'attachment');
     if ($attachment_name)
@@ -1653,7 +1668,7 @@ class HTML_IMAGE_REPLACER extends HTML_INLINE_ASSET_REPLACER
    * @return string
    * @access private
    */
-  function _calculate_width ($munger, $attrs)
+  protected function _calculate_width ($munger, $attrs)
   {
     /* Prefer scale over width, discarding invalid scale values.
      * Retrieve width from the image only if scale is set or
@@ -1704,7 +1719,9 @@ class HTML_IMAGE_REPLACER extends HTML_INLINE_ASSET_REPLACER
           }
         }
         elseif ($scale)
+        {
           $Result = $scale . '%';
+        }
       }
     }
 
@@ -1740,7 +1757,7 @@ class HTML_MEDIA_REPLACER extends HTML_INLINE_ASSET_REPLACER
    * @return string
    * @access private
    */
-  function _open_inner_area ($munger, $attrs, $outer_css, $inner_css, $inner_class)
+  protected function _open_inner_area ($munger, $attrs, $outer_css, $inner_css, $inner_class)
   {
     /* Get the source URL and format it according to media type. */
     $attachment_name = read_array_index ($attrs, 'attachment');
@@ -1764,7 +1781,7 @@ class HTML_MEDIA_REPLACER extends HTML_INLINE_ASSET_REPLACER
    * @return string
    * @access private
    */
-  function _calculate_width ($munger, $attrs)
+  protected function _calculate_width ($munger, $attrs)
   {
     return read_array_index ($attrs, 'width', '450px');
   }
@@ -1783,7 +1800,7 @@ class HTML_MEDIA_REPLACER extends HTML_INLINE_ASSET_REPLACER
    * @return string
    * @access private
    */
-  function _render_asset ($munger, $src, $attrs, $inner_css, $outer_css, $inner_class)
+  protected function _render_asset ($munger, $src, $attrs, $inner_css, $outer_css, $inner_class)
   {
     return $this->_asset_as_movie ($munger, $src, $attrs, $inner_css, $outer_css, $inner_class);
   }
@@ -1802,7 +1819,7 @@ class HTML_MEDIA_REPLACER extends HTML_INLINE_ASSET_REPLACER
    * @return string
    * @access private
    */
-  function _asset_as_movie ($munger, $src, $attrs, $inner_css, $outer_css, $inner_class)
+  protected function _asset_as_movie ($munger, $src, $attrs, $inner_css, $outer_css, $inner_class)
   {
     $builder = $munger->make_tag_builder ('embed');
     $builder->add_array_attribute ('title', $attrs);
@@ -1824,7 +1841,7 @@ class HTML_MEDIA_REPLACER extends HTML_INLINE_ASSET_REPLACER
    * @return string
    * @access private
    */
-  function _asset_as_link ($src)
+  protected function _asset_as_link ($src)
   {
     return '<a href="' . $src . '">Click to play movie</a>';
   }
@@ -1853,7 +1870,7 @@ class HTML_LINK_REPLACER extends HTML_BASE_REPLACER
    * @param MUNGER_TOKEN $token
    * @return string
    */
-  function transform ($munger, $token)
+  public function transform ($munger, $token)
   {
     if ($token->is_start_tag ())
     {
@@ -1875,7 +1892,6 @@ class HTML_LINK_REPLACER extends HTML_BASE_REPLACER
       return $builder->as_html ();
     }
 
-
     return '</a>' . $this->_suffix;
   }
 
@@ -1890,6 +1906,7 @@ class HTML_LINK_REPLACER extends HTML_BASE_REPLACER
    * @access private
    */
   protected $_source;
+
   /**
    * Name to show as author of link.
    * If this is specified, this text is shown with an 'author' style after the link.
@@ -1900,6 +1917,7 @@ class HTML_LINK_REPLACER extends HTML_BASE_REPLACER
    * @access private
    */
   protected $_author;
+
   /**
    * Actual contents of the link.
    * Maintained internally to use when formatting the {@link $_source} property.
@@ -1927,7 +1945,7 @@ class HTML_ANCHOR_REPLACER extends MUNGER_REPLACER
    * @param MUNGER_TOKEN $token
    * @return string
    */
-  function transform ($munger, $token)
+  public function transform ($munger, $token)
   {
     $attrs = $token->attributes ();
 
@@ -1963,7 +1981,7 @@ class HTML_HEADING_REPLACER extends MUNGER_REPLACER
    * @param MUNGER_TOKEN $token
    * @return string
    */
-  function transform ($munger, $token)
+  public function transform ($munger, $token)
   {
     if ($token->is_start_tag ())
     {
@@ -1978,7 +1996,6 @@ class HTML_HEADING_REPLACER extends MUNGER_REPLACER
 
       return "<h$this->_level>";
     }
-
 
     return "</h$this->_level>";
   }
@@ -2005,11 +2022,13 @@ class HTML_MUNGER extends MUNGER
    * @var string
    */
   public $complete_text_url;
+
   /**
    * Space-separated list of words to highlight.
    * @var string
    */
   public $highlighted_words = '';
+
   /**
    * @var string
    */
@@ -2020,7 +2039,7 @@ class HTML_MUNGER extends MUNGER
    * @param string $name Name of the tag to start creating.
    * @return HTML_TAG_BUILDER
    */
-  function make_tag_builder ($name)
+  public function make_tag_builder ($name)
   {
     $Result = new HTML_TAG_BUILDER ();
     $Result->set_name ($name);
@@ -2033,7 +2052,7 @@ class HTML_MUNGER extends MUNGER
    * @param string $name Initialize with this CSS fragment.
    * @return CSS_STYLE_BUILDER
    */
-  function make_style_builder ($css = '')
+  public function make_style_builder ($css = '')
   {
     $Result = new CSS_STYLE_BUILDER ();
     $Result->set_text ($css);
@@ -2049,7 +2068,7 @@ class HTML_MUNGER extends MUNGER
    * {@link Force_root_on}.
    * @return string
    */
-  function resolve_url ($url, $root_override = null)
+  public function resolve_url ($url, $root_override = null)
   {
     return parent::resolve_url ($url, $root_override);
   }
@@ -2059,7 +2078,7 @@ class HTML_MUNGER extends MUNGER
    * The ellipses are shown before the tag stack is dumped to ensure deep nesting.
    * @access private
    */
-  function _truncate ()
+  protected function _truncate ()
   {
     $this->_add_text_to_output ('...' . $this->_link ());
     parent::_truncate ();
@@ -2069,7 +2088,7 @@ class HTML_MUNGER extends MUNGER
    * @param string $name
    * @access private
    */
-  function _add_as_end_tag_to_output ($name)
+  protected function _add_as_end_tag_to_output ($name)
   {
     $t = $this->_current_tokenizer ();
     $this->_add_text_to_output ($t->open_tag_char . $t->end_tag_char . $name . $t->close_tag_char);
@@ -2083,7 +2102,7 @@ class HTML_MUNGER extends MUNGER
    * @return string
    * @access private
    */
-  function _link ()
+  protected function _link ()
   {
     if ($this->complete_text_url)
     {
@@ -2104,23 +2123,23 @@ class HTML_MUNGER extends MUNGER
  */
 class HTML_BASE_MUNGER extends HTML_MUNGER
 {
-  function HTML_BASE_MUNGER ()
+  public function HTML_BASE_MUNGER ()
   {
     HTML_MUNGER::HTML_MUNGER ();
 
-    $this->register_replacer ('macro', new MUNGER_MACRO_REPLACER (), FALSE);
+    $this->register_replacer ('macro', new MUNGER_MACRO_REPLACER (), false);
     $this->register_replacer ('c', new MUNGER_BASIC_REPLACER ('<code>', '</code>'));
     $this->register_replacer ('i', new MUNGER_BASIC_REPLACER ('<em>', '</em>'));
     $this->register_replacer ('b', new MUNGER_BASIC_REPLACER ('<strong>', '</strong>'));
     $this->register_replacer ('n', new MUNGER_BASIC_REPLACER ('<span class="notes">', '</span>'));
     $this->register_replacer ('hl', new MUNGER_BASIC_REPLACER ('<span class="highlight">', '</span>'));
 
-    $this->register_known_tag ('span', TRUE);
-    $this->register_known_tag ('var', TRUE);  // program variables
-    $this->register_known_tag ('kbd', TRUE);  // keyboard input
-    $this->register_known_tag ('dfn', TRUE);  // defining instance of a term
-    $this->register_known_tag ('abbr', TRUE);  // abbreviation
-    $this->register_known_tag ('cite', TRUE);  // citations of other sources
+    $this->register_known_tag ('span', true);
+    $this->register_known_tag ('var', true);  // program variables
+    $this->register_known_tag ('kbd', true);  // keyboard input
+    $this->register_known_tag ('dfn', true);  // defining instance of a term
+    $this->register_known_tag ('abbr', true);  // abbreviation
+    $this->register_known_tag ('cite', true);  // citations of other sources
 
     $this->register_converter ('tags', new MUNGER_HTML_CONVERTER ());
     $this->register_converter ('quotes', new HTML_SMART_QUOTE_CONVERTER ());
@@ -2139,7 +2158,7 @@ class HTML_BASE_MUNGER extends HTML_MUNGER
  */
 class HTML_TEXT_MUNGER extends HTML_BASE_MUNGER
 {
-  function HTML_TEXT_MUNGER ()
+  public function HTML_TEXT_MUNGER ()
   {
     HTML_BASE_MUNGER::HTML_BASE_MUNGER ();
 
@@ -2149,7 +2168,7 @@ class HTML_TEXT_MUNGER extends HTML_BASE_MUNGER
     $list_transformer = new HTML_LIST_TRANSFORMER ();
     $block_transformer = new HTML_BLOCK_TRANSFORMER ();
     $quote_transformer = new HTML_QUOTE_TRANSFORMER ();
-    $geshi_transformer = new HTML_GESHI_CODE_TRANSFORMER ();
+//    $geshi_transformer = new HTML_GESHI_CODE_TRANSFORMER ();
 
     $this->register_transformer ('ul', $list_transformer);
     $this->register_transformer ('ol', $list_transformer);
@@ -2163,12 +2182,12 @@ class HTML_TEXT_MUNGER extends HTML_BASE_MUNGER
     $this->register_transformer ('pre', $nop_transformer);
     $this->register_transformer ('h', $nop_transformer);
 
-    $this->register_replacer ('page', new MUNGER_PAGE_REPLACER (), FALSE);
+    $this->register_replacer ('page', new MUNGER_PAGE_REPLACER (), false);
     $this->register_replacer ('iq', new MUNGER_BASIC_REPLACER ('<span class="quote-inline">&ldquo;', '&rdquo;</span>'));
     $this->register_replacer ('bq', new HTML_BLOCK_QUOTE_REPLACER ('quote quote-block'));
     $this->register_replacer ('pullquote', new HTML_BLOCK_QUOTE_REPLACER ('quote pullquote'));
     $this->register_replacer ('abstract', new HTML_BLOCK_QUOTE_REPLACER ('quote abstract'));
-    $this->register_replacer ('hr', new HTML_BASIC_REPLACER ('<span class="horizontal-separator" style="display: block"></span>', ''), FALSE);
+    $this->register_replacer ('hr', new HTML_BASIC_REPLACER ('<span class="horizontal-separator" style="display: block"></span>', ''), false);
     $this->register_replacer ('div', new HTML_DIV_REPLACER ());
     $this->register_replacer ('box', new HTML_BOX_REPLACER ());
     $this->register_replacer ('code', new HTML_MUNGER_CODE_REPLACER ());
@@ -2176,15 +2195,15 @@ class HTML_TEXT_MUNGER extends HTML_BASE_MUNGER
     $this->register_replacer ('dl', new MUNGER_BASIC_REPLACER ('<dl>', '</dl>'));
     $this->register_replacer ('clear', new MUNGER_BASIC_REPLACER ('<span style="display: block; clear: both"></span>', ''));
     $this->register_replacer ('a', new HTML_LINK_REPLACER ());
-    $this->register_replacer ('anchor', new HTML_ANCHOR_REPLACER (), FALSE);
+    $this->register_replacer ('anchor', new HTML_ANCHOR_REPLACER (), false);
     $this->register_replacer ('h', new HTML_HEADING_REPLACER ());
-    $this->register_replacer ('img', new HTML_IMAGE_REPLACER (), FALSE);
-    $this->register_replacer ('media', new HTML_MEDIA_REPLACER (), FALSE);
-    $this->register_replacer ('fn', new HTML_FOOTNOTE_REFERENCE_REPLACER (), FALSE);
+    $this->register_replacer ('img', new HTML_IMAGE_REPLACER (), false);
+    $this->register_replacer ('media', new HTML_MEDIA_REPLACER (), false);
+    $this->register_replacer ('fn', new HTML_FOOTNOTE_REFERENCE_REPLACER (), false);
     $this->register_replacer ('ft', new HTML_FOOTNOTE_TEXT_REPLACER ());
 
     $lig = new HTML_LIGATURE_CONVERTER ();
-    $lig->enabled = FALSE;
+    $lig->enabled = false;
     $this->register_converter ('ligature', $lig);
 
   }
@@ -2203,13 +2222,14 @@ class HTML_TITLE_MUNGER extends HTML_BASE_MUNGER
   /**
    * @var boolean
    */
-  public $strip_unknown_tags = FALSE;
+  public $strip_unknown_tags = false;
+
   /**
    * @var boolean
    */
-  public $force_paragraphs = FALSE;
+  public $force_paragraphs = false;
 
-  function HTML_TITLE_MUNGER ()
+  public function HTML_TITLE_MUNGER ()
   {
     HTML_BASE_MUNGER::HTML_BASE_MUNGER ();
     $this->_default_transformer = new MUNGER_NOP_TRANSFORMER ();

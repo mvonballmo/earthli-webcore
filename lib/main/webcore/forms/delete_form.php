@@ -54,23 +54,24 @@ class DELETE_FORM extends ID_BASED_FORM
    * @var string
    */
   public $button = 'Yes';
+
   /**
    * Show the object's name as a link when displayed?
-    * @var boolean
-    */
-  public $show_object_as_link = TRUE;
+   * @var boolean
+   */
+  public $show_object_as_link = true;
 
   /**
    * Delete the given object.
-    * @param UNIQUE_OBJECT $obj
-    * @access private
-    */
-  function commit ($obj)
+   * @param UNIQUE_OBJECT $obj
+   * @access private
+   */
+  public function commit ($obj)
   {
     $obj->purge ();
   }
 
-  function load_with_defaults ()
+  public function load_with_defaults ()
   {
     $this->raise ('Cannot use delete form for new objects.', 'load_with_defaults', 'DELETE_FORM');
   }
@@ -79,7 +80,7 @@ class DELETE_FORM extends ID_BASED_FORM
    * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_controls ($renderer)
+  protected function _draw_controls ($renderer)
   {
     $renderer->start ();
     $renderer->start_row ();
@@ -109,22 +110,24 @@ class DELETE_OBJECT_FORM extends PURGE_OBJECT_FORM
    * @var string
    */
   public $button = 'Yes';
+
   /**
    * Show the object's name as a link when displayed?
-    * @var boolean
-    */
-  public $show_object_as_link = TRUE;
+   * @var boolean
+   */
+  public $show_object_as_link = true;
+
   /**
    * Show the previews before the form?
    * @var boolean
    */
-  public $show_previews_first = FALSE;
+  public $show_previews_first = false;
 
   /**
    * @param APPLICATION $app Main application.
    * @param string $set_name
    */
-  function DELETE_OBJECT_FORM ($app, $set_name)
+  public function DELETE_OBJECT_FORM ($app, $set_name)
   {
     PURGE_OBJECT_FORM::PURGE_OBJECT_FORM ($app);
 
@@ -138,10 +141,10 @@ class DELETE_OBJECT_FORM extends PURGE_OBJECT_FORM
 
   /**
    * Delete the given object.
-    * @param OBJECT_IN_FOLDER $obj
-    * @access private
-    */
-  function commit ($obj)
+   * @param OBJECT_IN_FOLDER $obj
+   * @access private
+   */
+  public function commit ($obj)
   {
     if ($this->value_for ('purge'))
     {
@@ -157,12 +160,12 @@ class DELETE_OBJECT_FORM extends PURGE_OBJECT_FORM
    * Load initial properties from this object.
    * @param OBJECT_IN_FOLDER $obj
    */
-  function load_from_object ($obj)
+  public function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
     $this->set_visible ('purge', $this->_is_purge_visible ($obj));
     $this->set_visible ('remove_resources', $this->_is_purge_visible ($obj));
-    $this->set_enabled ('remove_resources', FALSE);
+    $this->set_enabled ('remove_resources', false);
 
     $type_info = $this->_object->type_info ();
     $field = $this->field_at ('purge');
@@ -174,7 +177,7 @@ class DELETE_OBJECT_FORM extends PURGE_OBJECT_FORM
       $field->description = 'This ' . $type_info->singular_title . ' will be marked as deleted and hidden from you. Purging removes it permanently and cannot be undone.';
   }
 
-  function load_with_defaults ()
+  public function load_with_defaults ()
   {
     $this->raise ('Cannot use delete form for new objects.', 'load_with_defaults', 'DELETE_OBJECT_FORM');
   }
@@ -185,7 +188,7 @@ class DELETE_OBJECT_FORM extends PURGE_OBJECT_FORM
    * @return boolean
    * @access private
    */
-  function _is_purge_visible ($obj)
+  protected function _is_purge_visible ($obj)
   {
     return $this->login->is_allowed ($this->_privilege_set, Privilege_purge, $obj);
   }
@@ -193,11 +196,11 @@ class DELETE_OBJECT_FORM extends PURGE_OBJECT_FORM
   /**
    * @access private
    */
-  function _draw_scripts ()
+  protected function _draw_scripts ()
   {
     parent::_draw_scripts ();
 ?>
-  function on_click_purge (ctrl)
+  public function on_click_purge (ctrl)
   {
     enable_item (ctrl.form.remove_resources, 0, is_selected (ctrl, 1));
   }
@@ -208,7 +211,7 @@ class DELETE_OBJECT_FORM extends PURGE_OBJECT_FORM
    * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_controls ($renderer)
+  protected function _draw_controls ($renderer)
   {
     $renderer->start ();
 
@@ -221,7 +224,7 @@ class DELETE_OBJECT_FORM extends PURGE_OBJECT_FORM
     if ($this->visible ('purge'))
     {
       $props = $renderer->make_list_properties ();
-      $props->show_descriptions = TRUE;
+      $props->show_descriptions = true;
    
       $check_props = $renderer->make_check_properties ('purge');
       $check_props->on_click_script = 'on_click_purge (this)';
@@ -260,7 +263,7 @@ class DELETE_OBJECT_IN_FOLDER_FORM extends DELETE_OBJECT_FORM
    * @param FOLDER $folder Deleting content from this folder.
    * @param string $set_name
    */
-  function DELETE_OBJECT_IN_FOLDER_FORM ($folder, $set_name)
+  public function DELETE_OBJECT_IN_FOLDER_FORM ($folder, $set_name)
   {
     DELETE_OBJECT_FORM::DELETE_OBJECT_FORM ($folder->app, $set_name);
     $this->_folder = $folder;

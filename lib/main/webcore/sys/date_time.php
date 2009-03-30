@@ -99,7 +99,7 @@ class DATE_TIME_TOOLKIT
    */
   public $formatter;
 
-  function DATE_TIME_TOOLKIT ()
+  public function DATE_TIME_TOOLKIT ()
   {
     $this->register_converter (new US_DATE_TIME_CONVERTER ());
     $this->register_converter (new EURO_DATE_TIME_CONVERTER ());
@@ -114,7 +114,7 @@ class DATE_TIME_TOOLKIT
    * The conversion string should be compatible with the PHP 'ereg' function.
    * @param DATE_TIME_CONVERTER $converter
    */
-  function register_converter ($converter)
+  public function register_converter ($converter)
   {
     $this->_converters [] = $converter;
   }
@@ -125,7 +125,7 @@ class DATE_TIME_TOOLKIT
    * @param integer $parts Which parts of the text should be converted?
    * @return integer
    */
-  function text_to_php ($t, $parts = Date_time_both_parts)
+  public function text_to_php ($t, $parts = Date_time_both_parts)
   {
     $Result = Date_time_unassigned;
     $idx = 0;
@@ -169,17 +169,20 @@ class DATE_TIME_FORMATTER extends RAISABLE
    * @see Date_time_format_short_date
    */
   public $type;
+
   /**
    * Show adjusted to local time? (uses JavaScript)
    * @var boolean
    */
-  public $show_local_time = TRUE;
+  public $show_local_time = true;
+
   /**
    * Show the time zone in the result?
    * Will only be shown if {@link $show_local_time} is False.
    * @var boolean
    */
-  public $show_time_zone = TRUE;
+  public $show_time_zone = true;
+
   /**
    * Time-zone to show for non-local times.
    * If the time is shown without JavaScript, this time zone is appended to indicate the
@@ -187,19 +190,20 @@ class DATE_TIME_FORMATTER extends RAISABLE
    * @var string
    */
   public $time_zone_id = 'GMT-5';
+
   /**
    * Wrap the formatted output in CSS.
    * This wraps a 'span' tag around the date with class = 'date-time'.
    * @var boolean
    */
-  public $show_CSS = TRUE;
+  public $show_CSS = true;
 
   /**
    * Set the format string for a date time type.
    * @param integer $type
    * @param string $format_string
    */
-  function register_formatter ($type, $format_string)
+  public function register_formatter ($type, $format_string)
   {
     $this->_format_strings [$type] = $format_string;
   }
@@ -209,7 +213,7 @@ class DATE_TIME_FORMATTER extends RAISABLE
    * @param string $type
    * @return string
    */
-  function format_string_for ($type)
+  public function format_string_for ($type)
   {
     return $this->_format_strings [$type];
   }
@@ -218,7 +222,7 @@ class DATE_TIME_FORMATTER extends RAISABLE
    * Set the default format type for this formatter (used when no type is assigned)
    * @param integer $type
    */
-  function set_default_formatter ($type)
+  public function set_default_formatter ($type)
   {
     $this->assert (! empty ($this->_format_strings [$type]), "[$type] is not a registered date time format.", 'set_default_formatter', 'DATE_TIME_FORMATTER');
     $this->_default_format_type = $type;
@@ -231,7 +235,7 @@ class DATE_TIME_FORMATTER extends RAISABLE
    * @param integer $php_time
    * @return string
    */
-  function date_time_to_text ($php_time)
+  public function date_time_to_text ($php_time)
   {
     if (isset ($this->type))
     {
@@ -274,7 +278,6 @@ class DATE_TIME_FORMATTER extends RAISABLE
       return "<span class=\"date-time\">$Result</span>";
     }
 
-
     return $Result;
   }
 
@@ -283,7 +286,7 @@ class DATE_TIME_FORMATTER extends RAISABLE
    * Calls {@link clear_flags()} to remove all markup and format as plain text.
    * @param integer $type Can be any of the registered {@link $type}s.
    */
-  function set_type_and_clear_flags ($type)
+  public function set_type_and_clear_flags ($type)
   {
     $this->type = $type;
     $this->clear_flags ();
@@ -294,11 +297,11 @@ class DATE_TIME_FORMATTER extends RAISABLE
    * Useful for plain text and debugging output. Sets {@link $show_local_time},
    * {@link $show_CSS} and {@link $show_time_zone} to False.
    */
-  function clear_flags ()
+  public function clear_flags ()
   {
-    $this->show_CSS = FALSE;
-    $this->show_local_time = FALSE;
-    $this->show_time_zone = FALSE;
+    $this->show_CSS = false;
+    $this->show_local_time = false;
+    $this->show_time_zone = false;
   }
 
   /**
@@ -307,6 +310,7 @@ class DATE_TIME_FORMATTER extends RAISABLE
    * @access private
    */
   protected $_default_format_type;
+
   /**
    * List of registered output formats.
    * @var array[string]
@@ -324,7 +328,7 @@ class DATE_TIME_FORMATTER extends RAISABLE
  */
 class US_DATE_TIME_FORMATTER extends DATE_TIME_FORMATTER
 {
-  function US_DATE_TIME_FORMATTER ()
+  public function US_DATE_TIME_FORMATTER ()
   {
     $this->register_formatter (Date_time_format_date_and_time, 'M j, Y H:i:s');
     $this->register_formatter (Date_time_format_date_only, 'M j, Y');
@@ -344,7 +348,7 @@ class US_DATE_TIME_FORMATTER extends DATE_TIME_FORMATTER
  */
 class EURO_DATE_TIME_FORMATTER extends DATE_TIME_FORMATTER
 {
-  function EURO_DATE_TIME_FORMATTER ()
+  public function EURO_DATE_TIME_FORMATTER ()
   {
     $this->register_formatter (Date_time_format_date_and_time, 'j. M Y H:i:s');
     $this->register_formatter (Date_time_format_date_only, 'j. M Y');
@@ -364,7 +368,7 @@ class EURO_DATE_TIME_FORMATTER extends DATE_TIME_FORMATTER
  */
 class ISO_DATE_TIME_FORMATTER extends DATE_TIME_FORMATTER
 {
-  function ISO_DATE_TIME_FORMATTER ()
+  public function ISO_DATE_TIME_FORMATTER ()
   {
     $this->register_formatter (Date_time_format_date_and_time, 'M j, Y H:i:s');
     $this->register_formatter (Date_time_format_date_only, 'M j, Y');
@@ -389,14 +393,17 @@ class DATE_TIME_CONVERTER extends RAISABLE
    * @var string
    */
   public $ereg_string;
+
   /**
    * @var integer
    */
   public $month_pos;
+
   /**
    * @var integer
    */
   public $day_pos;
+
   /**
    * @var integer
    */
@@ -409,7 +416,7 @@ class DATE_TIME_CONVERTER extends RAISABLE
    * @return integer
    * @abstract
    */
-  function text_to_php ($value, $parts = Date_time_both_parts)
+  public function text_to_php ($value, $parts = Date_time_both_parts)
   {
     $arr = null; // Compiler warning
     if (ereg ($this->ereg_text, $value, $arr))
@@ -424,7 +431,6 @@ class DATE_TIME_CONVERTER extends RAISABLE
         return mktime (0, 0, 0, $arr [$this->month_pos], $arr [$this->day_pos], $arr [$this->year_pos]);
       }
     }
-
 
     return Date_time_unassigned;
   }
@@ -444,14 +450,17 @@ class US_DATE_TIME_CONVERTER extends DATE_TIME_CONVERTER
    * @var string
    */
   public $ereg_text = '^(([0-9]{1,2})/([0-9]{1,2})/([0-9]{4}))?[ ]?(([0-9]{1,2}):([0-9]{1,2}):([0-9]{1,2}))?$';
+
   /**
    * @var integer
    */
   public $month_pos = 2;
+
   /**
    * @var integer
    */
   public $day_pos = 3;
+
   /**
    * @var integer
    */
@@ -472,14 +481,17 @@ class EURO_DATE_TIME_CONVERTER extends DATE_TIME_CONVERTER
    * @var string
    */
   public $ereg_text = '^(([0-9]{1,2})\.([0-9]{1,2})\.([0-9]{4}))?[ ]?(([0-9]{1,2}):([0-9]{1,2}):([0-9]{1,2}))?$';
+
   /**
    * @var integer
    */
   public $month_pos = 3;
+
   /**
    * @var integer
    */
   public $day_pos = 2;
+
   /**
    * @var integer
    */
@@ -500,14 +512,17 @@ class ISO_DATE_TIME_CONVERTER extends DATE_TIME_CONVERTER
    * @var string
    */
   public $ereg_text = '^(([0-9]{4})-([0-9]{1,2})-([0-9]{1,2}))?[ ]?(([0-9]{1,2}):([0-9]{1,2}):([0-9]{1,2}))?$';
+
   /**
    * @var integer
    */
   public $month_pos = 3;
+
   /**
    * @var integer
    */
   public $day_pos = 4;
+
   /**
    * @var integer
    */
@@ -528,14 +543,17 @@ class EXIF_DATE_TIME_CONVERTER extends DATE_TIME_CONVERTER
    * @var string
    */
   public $ereg_text = '^(([0-9]{4}):([0-9]{1,2}):([0-9]{1,2}))?[ ]?(([0-9]{1,2}):([0-9]{1,2}):([0-9]{1,2}))?$';
+
   /**
    * @var integer
    */
   public $month_pos = 3;
+
   /**
    * @var integer
    */
   public $day_pos = 4;
+
   /**
    * @var integer
    */
@@ -565,7 +583,7 @@ class DATE_TIME extends RAISABLE
    * @param string $type Can be either {@link Date_time_php} or {@link
    * Date_time_iso}.
    */
-  function DATE_TIME ($time = 0, $type = null)
+  public function DATE_TIME ($time = 0, $type = null)
   {
     if (! $time)
     {
@@ -599,7 +617,7 @@ class DATE_TIME extends RAISABLE
   /**
    * @return boolean
    */
-  function is_valid ()
+  public function is_valid ()
   {
     return $this->as_php () <> Date_time_unassigned;
   }
@@ -608,7 +626,7 @@ class DATE_TIME extends RAISABLE
    * Returns this object as a PHP timestamp.
    * @return integer
    */
-  function as_php ()
+  public function as_php ()
   {
     if (($this->_php_time == Date_time_unassigned) && ! empty($this->_iso_time))
     {
@@ -626,7 +644,7 @@ class DATE_TIME extends RAISABLE
    * Example: 2000-12-21 16:01:07
    * @return string
    */
-  function as_iso ()
+  public function as_iso ()
   {
     if ($this->_iso_time == Date_time_unassigned)
     {
@@ -645,7 +663,7 @@ class DATE_TIME extends RAISABLE
    * Example: Thu, 21 Dec 2000 16:01:07 +0200
    * @return string
    */
-  function as_RFC_2822 ()
+  public function as_RFC_2822 ()
   {
     return date ('r', $this->as_php ());
   }
@@ -656,7 +674,7 @@ class DATE_TIME extends RAISABLE
    * Example: 2000-12-21T16:01:07+02:00
    * @return string
    */
-  function as_RFC_3339 ()
+  public function as_RFC_3339 ()
   {
     /* The 'c' or DATE_ATOM parameter is not supported in PHP 4. */
     $Result = date ('Y-m-d\TH:i:sO', $this->as_php ());
@@ -667,7 +685,7 @@ class DATE_TIME extends RAISABLE
    * Sets the date and time from an ISO-formatted string.
    * @param string $t
    */
-  function set_from_iso ($t)
+  public function set_from_iso ($t)
   {
     $this->_iso_time = $t;
     $this->_php_time = Date_time_unassigned;
@@ -677,7 +695,7 @@ class DATE_TIME extends RAISABLE
    * Sets the date and time from a PHP timestamp.
    * @param string $t
    */
-  function set_from_php ($t)
+  public function set_from_php ($t)
   {
     $this->_php_time = $t;
     $this->_iso_time = Date_time_unassigned;
@@ -687,7 +705,7 @@ class DATE_TIME extends RAISABLE
    * Sets the time from an ISO-formatted string.
    * @param string $t
    */
-  function set_time_from_iso ($t)
+  public function set_time_from_iso ($t)
   {
     if ($this->_iso_time == Date_time_unassigned)
     {
@@ -706,13 +724,13 @@ class DATE_TIME extends RAISABLE
    * @param integer $parts Can be {@link Date_time_time_part}, {@link
    * Date_time_date_part} or {@link Date_time_both_parts}.
    */
-  function set_from_text ($t, $parts = Date_time_both_parts)
+  public function set_from_text ($t, $parts = Date_time_both_parts)
   {
     $toolkit = $this->toolkit ();
     $this->set_from_php ($toolkit->text_to_php ($t, $parts));
   }
 
-  function set_now ()
+  public function set_now ()
   {
     $this->set_from_php (time ());
   }
@@ -721,7 +739,7 @@ class DATE_TIME extends RAISABLE
    * Clear the time.
    * This ensures that {@link is_valid()} returns false.
    */
-  function clear ()
+  public function clear ()
   {
     $this->_iso_time = '';
     $this->_php_time = Date_time_unassigned;
@@ -735,7 +753,7 @@ class DATE_TIME extends RAISABLE
    * @param DATE_TIME_FORMATTER $formatter Pass in the formatter to use.
    * @return string
    */
-  function format ($formatter = 0)
+  public function format ($formatter = 0)
   {
     if (! $formatter)
     {
@@ -748,7 +766,7 @@ class DATE_TIME extends RAISABLE
    * Format the date without any highlighting.
    * @return string
    */
-  function format_plain ()
+  public function format_plain ()
   {
     $formatter = $this->formatter ();
     $formatter->clear_flags ();
@@ -762,7 +780,7 @@ class DATE_TIME extends RAISABLE
    * @param int $parts Can be {@link Date_time_date_part}, {@link Date_time_time_part} or {@link Date_time_both_parts}.
    * @return boolean
    */
-  function equals ($other, $parts = Date_time_both_parts)
+  public function equals ($other, $parts = Date_time_both_parts)
   {
     return $this->_compare_to ($other, Operator_equal, $parts);
   }
@@ -774,7 +792,7 @@ class DATE_TIME extends RAISABLE
    * @param int $parts Can be {@link Date_time_date_part}, {@link Date_time_time_part} or {@link Date_time_both_parts}.
    * @return boolean
    */
-  function less_than_equal ($other, $parts = Date_time_both_parts)
+  public function less_than_equal ($other, $parts = Date_time_both_parts)
   {
     return $this->_compare_to ($other, Operator_less_than_equal, $parts);
   }
@@ -786,7 +804,7 @@ class DATE_TIME extends RAISABLE
    * @param int $parts Can be {@link Date_time_date_part}, {@link Date_time_time_part} or {@link Date_time_both_parts}.
    * @return boolean
    */
-  function less_than ($other, $parts = Date_time_both_parts)
+  public function less_than ($other, $parts = Date_time_both_parts)
   {
     return $this->_compare_to ($other, Operator_less_than, $parts);
   }
@@ -796,8 +814,7 @@ class DATE_TIME extends RAISABLE
    * This is useful for building calendars. Handles leap years.
    * @return integer
    */
-  function last_legal_day ()
-    // find the last day of the given month
+  public function last_legal_day ()
   {
     $t = $this->as_php ();
     $month = date ('n', $t);
@@ -820,8 +837,9 @@ class DATE_TIME extends RAISABLE
       if (checkdate ($month, 29, date ('Y', $t)))    // check if the year is a leap year
         return 29;
 
-
       return 28;
+    default:
+      throw new UNKNOWN_VALUE_EXCEPTION($month);
     }
   }
 
@@ -830,8 +848,7 @@ class DATE_TIME extends RAISABLE
    * @param DATE_TIME $other
    * @return TIME_INTERVAL
    */
-  function diff ($other)
-    // find out the difference between this date and 'other'
+  public function diff ($other)
   {
     return new TIME_INTERVAL ($this, $other);
   }
@@ -841,7 +858,7 @@ class DATE_TIME extends RAISABLE
    * @see toolkit()
    * @return DATE_TIME_FORMATTER
    */
-  function formatter ()
+  public function formatter ()
   {
     $toolkit = $this->toolkit ();
     return $toolkit->formatter;
@@ -856,7 +873,7 @@ class DATE_TIME extends RAISABLE
    * @see use_toolkit()
    * @return DATE_TIME_TOOLKIT
    */
-  function toolkit ()
+  public function toolkit ()
   {
     if (isset ($this->_toolkit))
     {
@@ -874,7 +891,7 @@ class DATE_TIME extends RAISABLE
    * @param DATE_TIME_TOOLKIT $toolkit
    * @see toolkit()
    */
-  function use_toolkit ($toolkit)
+  public function use_toolkit ($toolkit)
   {
     $this->_toolkit = $toolkit;
   }
@@ -886,7 +903,7 @@ class DATE_TIME extends RAISABLE
    * @param int $parts Can be {@link Date_time_date_part}, {@link Date_time_time_part} or {@link Date_time_both_parts}.
    * @return boolean
    */
-  function _compare_to ($other, $operator, $parts)
+  protected function _compare_to ($other, $operator, $parts)
   {
     switch ($parts)
     {
@@ -936,11 +953,13 @@ class DATE_TIME extends RAISABLE
    *  @access private
    */
   protected $_php_time = Date_time_unassigned;
+
   /**
    * @var string
    *  @access private
    */
   protected $_iso_time = Date_time_unassigned;
+
   /**
    * Context-specific toolkit.
    * May be empty.
@@ -964,22 +983,21 @@ class TIME_INTERVAL
 {
   /**
    * @param DATE_TIME $t1
-    * @param DATE_TIME $t2
-    */
-  function TIME_INTERVAL ($t1, $t2)
+   * @param DATE_TIME $t2
+   */
+  public function TIME_INTERVAL ($t1, $t2)
   {
     $php_t1 = $t1->as_php ();
     $php_t2 = $t2->as_php ();
 
     $this->_total_seconds = $php_t1 - $php_t2;
-    $s = $this->_total_seconds;
   }
 
   /**
    * Is this interval empty (0 seconds)?
    * @return boolean
    */
-  function is_empty ()
+  public function is_empty ()
   {
     return $this->_total_seconds == 0;
   }
@@ -989,7 +1007,7 @@ class TIME_INTERVAL
    * @param TIME_INTERVAL $other
    * @return boolean
    */
-  function equals ($other)
+  public function equals ($other)
   {
     return $this->_total_seconds == $other->_total_seconds;
   }
@@ -1000,7 +1018,7 @@ class TIME_INTERVAL
    * @param integer $num_significant_units Shows only this many units.
    * @param boolean $long_names Uses the full English name rather than abbreviations
    */
-  function format ($num_significant_units = 2, $long_names = TRUE, $decimal_places = 0)
+  public function format ($num_significant_units = 2, $long_names = true, $decimal_places = 0)
   {
     /* Build some constants to use for conversions. */
 

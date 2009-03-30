@@ -46,12 +46,12 @@ require_once ('webcore/db/object_in_folder_query.php');
  * @version 3.0.0
  * @since 2.7.0
  */
-class USER_ENTRY_SUB_OBJECT_QUERY extends OBJECT_IN_FOLDER_QUERY
+abstract class USER_ENTRY_SUB_OBJECT_QUERY extends OBJECT_IN_FOLDER_QUERY
 {
   /**
    * Apply default restrictions and tables.
    */
-  function apply_defaults () 
+  public function apply_defaults () 
   {
     $this->add_select ('fldr.id as folder_id, entry.id as entry_id, entry.title as entry_title, entry.state as entry_state');
   }
@@ -60,7 +60,7 @@ class USER_ENTRY_SUB_OBJECT_QUERY extends OBJECT_IN_FOLDER_QUERY
    * Prepare security- and filter-based restrictions.
    * @access private
    */
-  function _prepare_restrictions ()
+  protected function _prepare_restrictions ()
   {
     parent::_prepare_restrictions ();
 
@@ -88,7 +88,7 @@ class USER_ENTRY_SUB_OBJECT_QUERY extends OBJECT_IN_FOLDER_QUERY
    * @return string
    * @access private
    */
-  function table_for_set ($set_name)
+  public function table_for_set ($set_name)
   {
     switch ($set_name)
     {
@@ -96,6 +96,8 @@ class USER_ENTRY_SUB_OBJECT_QUERY extends OBJECT_IN_FOLDER_QUERY
         return 'fldr';
       case Privilege_set_entry:
         return 'entry';
+      default:
+        throw new UNKNOWN_VALUE_EXCEPTION($set_name);
     }
   }
 
@@ -104,7 +106,7 @@ class USER_ENTRY_SUB_OBJECT_QUERY extends OBJECT_IN_FOLDER_QUERY
    * @access private
    * @return ENTRY
    */
-  function _make_entry ()
+  protected function _make_entry ()
   {
     $class_name = $this->app->final_class_name ('ENTRY', 'webcore/obj/entry.php');
     return new $class_name ($this->app);
@@ -119,7 +121,7 @@ class USER_ENTRY_SUB_OBJECT_QUERY extends OBJECT_IN_FOLDER_QUERY
    * @param ENTRY $entry The entry whose properties should be set.
    * @access private
    */
-  function _prepare_entry ($entry)
+  protected function _prepare_entry ($entry)
   {
     $db = $this->db;
     $entry->id = $db->f ('entry_id');
@@ -136,7 +138,7 @@ class USER_ENTRY_SUB_OBJECT_QUERY extends OBJECT_IN_FOLDER_QUERY
    * @param OBJECT_IN_FOLDER $obj
    * @access private
    */
-  function _prepare_object ($obj)
+  protected function _prepare_object ($obj)
   {
     $entry = $this->_make_entry ();
     $this->_prepare_entry ($entry);
@@ -150,10 +152,7 @@ class USER_ENTRY_SUB_OBJECT_QUERY extends OBJECT_IN_FOLDER_QUERY
    * @access private
    * @abstract
    */
-  function _attach_entry_to_object ($obj, $entry)
-  {
-    $this->raise_deferred ('_attach_entry_to_object', 'USER_ENTRY_SUB_OBJECT_QUERY');
-  }  
+  protected abstract function _attach_entry_to_object ($obj, $entry);  
 }
 
 ?>

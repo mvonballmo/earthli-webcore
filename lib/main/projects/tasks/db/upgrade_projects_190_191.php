@@ -35,7 +35,7 @@ class PROJECT_190_191_MIGRATOR_TASK extends UPGRADE_PER_APP_270_271_TASK
   public $version_from = '1.9.0';
   public $version_to = '1.9.1';
 
-  function _execute ()
+  protected function _execute ()
   {
     log_open_block ("Add features");
       $this->_query ('ALTER TABLE `project_options` ADD `reporter_group_type` TINYINT DEFAULT \'0\' NOT NULL AFTER `assignee_group_id`');

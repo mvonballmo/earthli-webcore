@@ -61,8 +61,8 @@ http://www.earthli.com/software/webcore
     <?php
       $renderer = $comp->handler_for (Handler_html_renderer);
       $options = $renderer->options ();
-      $options->show_as_summary = TRUE;
-      $options->show_users = FALSE;
+      $options->show_as_summary = true;
+      $options->show_users = false;
       $renderer->display_as_html ($comp);
 
       $panel_manager->display ();

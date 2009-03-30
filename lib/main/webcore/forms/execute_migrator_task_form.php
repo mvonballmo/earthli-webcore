@@ -49,6 +49,7 @@ require_once ('webcore/forms/execute_task_form.php');
 class EXECUTE_MIGRATOR_TASK_FORM extends EXECUTE_TASK_FORM
 {
   public $button = 'Upgrade';
+
   /**
    * @var string
    */
@@ -57,7 +58,7 @@ class EXECUTE_MIGRATOR_TASK_FORM extends EXECUTE_TASK_FORM
   /**
    * @param FRAMEWORK_INFO $app Main application.
    */
-  function EXECUTE_MIGRATOR_TASK_FORM ($app)
+  public function EXECUTE_MIGRATOR_TASK_FORM ($app)
   {
     EXECUTE_TASK_FORM::EXECUTE_TASK_FORM ($app);
 
@@ -69,14 +70,14 @@ class EXECUTE_MIGRATOR_TASK_FORM extends EXECUTE_TASK_FORM
 
     $field = new BOOLEAN_FIELD ();
     $field->id = 'framework';
-    $field->visible = FALSE;
+    $field->visible = false;
     $this->add_field ($field);
   }
 
-  function load_with_defaults ()
+  public function load_with_defaults ()
   {
     parent::load_with_defaults ();
-    $this->set_value ('ignore_from_version', FALSE);
+    $this->set_value ('ignore_from_version', false);
     $this->set_value ('framework', read_var ('framework'));
   }
 
@@ -84,7 +85,7 @@ class EXECUTE_MIGRATOR_TASK_FORM extends EXECUTE_TASK_FORM
    * Load initial properties from this task.
    * @param MIGRATOR_TASK $obj
    */
-  function load_from_object ($obj)
+  public function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
     $this->set_value ('ignore_from_version', $obj->ignore_from_version);
@@ -97,7 +98,7 @@ class EXECUTE_MIGRATOR_TASK_FORM extends EXECUTE_TASK_FORM
    * @param TASK $obj
    * @access private
    */
-  function commit ($obj)
+  public function commit ($obj)
   {
     $obj->ignore_from_version = $this->value_for ('ignore_from_version');
     parent::commit ($obj);
@@ -108,7 +109,7 @@ class EXECUTE_MIGRATOR_TASK_FORM extends EXECUTE_TASK_FORM
    * @param FORM_LIST_PROPERTIES $props
    * @access private
    */
-  function _add_boolean_options ($props)
+  protected function _add_boolean_options ($props)
   {
     $props->add_item ('testing', 1);    
     $props->add_item ('stop_on_error', 1);    
@@ -121,7 +122,7 @@ class EXECUTE_MIGRATOR_TASK_FORM extends EXECUTE_TASK_FORM
    * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_options ($renderer)
+  protected function _draw_options ($renderer)
   {
     if (! $this->_object->info->exists ())
     {

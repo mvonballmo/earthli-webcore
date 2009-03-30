@@ -52,6 +52,7 @@ class FOLDER_USER_PERMISSIONS_CREATE_FORM extends FOLDER_PERMISSIONS_FORM
    * @var string
    */
   public $button = 'Add';
+
   /**
    * @var string
    */
@@ -59,9 +60,9 @@ class FOLDER_USER_PERMISSIONS_CREATE_FORM extends FOLDER_PERMISSIONS_FORM
 
   /**
    * @param FOLDER $folder Folder for which permissions are defined.
-    * @param USER_QUERY $user_query Retrieve user with this query.
-    */
-  function FOLDER_USER_PERMISSIONS_CREATE_FORM ($folder, $user_query)
+   * @param USER_QUERY $user_query Retrieve user with this query.
+   */
+  public function FOLDER_USER_PERMISSIONS_CREATE_FORM ($folder, $user_query)
   {
     FOLDER_PERMISSIONS_FORM::FOLDER_PERMISSIONS_FORM ($folder->app);
 
@@ -71,16 +72,16 @@ class FOLDER_USER_PERMISSIONS_CREATE_FORM extends FOLDER_PERMISSIONS_FORM
     $field = new TITLE_FIELD ();
     $field->id = 'title';
     $field->title = 'User Name';
-    $field->required = TRUE;
+    $field->required = true;
     $this->add_field ($field);
   }
 
   /**
    * Called after fields are validated.
-    * @param PERMISSIONS $obj
-    * @access private
-    */
-  function _post_validate ($obj)
+   * @param PERMISSIONS $obj
+   * @access private
+   */
+  protected function _post_validate ($obj)
   {
     parent::_post_validate ($obj);
 
@@ -109,10 +110,10 @@ class FOLDER_USER_PERMISSIONS_CREATE_FORM extends FOLDER_PERMISSIONS_FORM
 
   /**
    * Store the form's values to this set of permissions.
-    * @param PERMISSIONS $obj
-    * @access private
-    */
-  function commit ($obj)
+   * @param PERMISSIONS $obj
+   * @access private
+   */
+  public function commit ($obj)
   {
     $obj->ref_id = $this->_user->id;
     $obj->kind = Privilege_kind_user;
@@ -120,7 +121,7 @@ class FOLDER_USER_PERMISSIONS_CREATE_FORM extends FOLDER_PERMISSIONS_FORM
     parent::commit ($obj);
   }
 
-  function load_with_defaults ()
+  public function load_with_defaults ()
   {
     parent::load_with_defaults ();
     
@@ -131,7 +132,7 @@ class FOLDER_USER_PERMISSIONS_CREATE_FORM extends FOLDER_PERMISSIONS_FORM
   /**
    * @access private
    */
-  function _draw_scripts ()
+  protected function _draw_scripts ()
   {
     parent::_draw_scripts ();
     $js_form = $this->js_form_name ();
@@ -151,7 +152,7 @@ class FOLDER_USER_PERMISSIONS_CREATE_FORM extends FOLDER_PERMISSIONS_FORM
    * @access private
    * @abstract
    */
-  function _draw_permission_controls ($renderer, $formatter)
+  protected function _draw_permission_controls ($renderer, $formatter)
   {
     $options = new FORM_TEXT_CONTROL_OPTIONS ();
     $options->width = '20em';

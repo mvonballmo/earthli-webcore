@@ -30,7 +30,7 @@ require_once ('webcore/db/migrator_task.php');
 
 class UPGRADE_PER_APP_260_270_TASK extends MIGRATOR_TASK
 {
-  function clean_up_folder_permissions ($table)
+  public function clean_up_folder_permissions ($table)
   {
     if (! $this->db->table_has_primary_index ($table))
     {
@@ -40,23 +40,23 @@ class UPGRADE_PER_APP_260_270_TASK extends MIGRATOR_TASK
     }
   }
   
-  function clean_up_id_indexes ($table)
+  public function clean_up_id_indexes ($table)
   {
     $this->_query ('ALTER TABLE `' . $table . '` DROP INDEX `id`'); 
   }
   
-  function clean_up_user_permissions ($table)
+  public function clean_up_user_permissions ($table)
   {
     $this->_query ('ALTER TABLE `' . $table . '` ADD PRIMARY KEY ( `user_id` );');
     $this->_query ('ALTER TABLE `' . $table . '` DROP INDEX `user_id`'); 
   }
   
-  function clean_up_subscriptions ($table)
+  public function clean_up_subscriptions ($table)
   {
     $this->_query ('ALTER TABLE `' . $table . '` ADD PRIMARY KEY ( `subscriber_id` , `kind` , `ref_id` ) ;');
   }
   
-  function rename_subscriber_fields ($table)
+  public function rename_subscriber_fields ($table)
   {
     $this->_query ("ALTER TABLE  `" . $table . "` CHANGE  `group_actions`  `group_history_items` TINYINT( 4 ) NOT NULL DEFAULT  '0'," .
       "CHANGE  `show_actions`  `show_history_items` TINYINT( 3 ) UNSIGNED NOT NULL DEFAULT  '0'," .
@@ -64,18 +64,18 @@ class UPGRADE_PER_APP_260_270_TASK extends MIGRATOR_TASK
       "CHANGE  `queued_action_ids`  `queued_history_item_ids` TEXT CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL");    
   }
   
-  function rename_action_table ($old_name, $new_name)
+  public function rename_action_table ($old_name, $new_name)
   {
     $this->_query ("ALTER TABLE  `" . $old_name . "` RENAME  `" . $new_name . "` ;");
   }
   
-  function add_full_text_to_comments ($table_name)
+  public function add_full_text_to_comments ($table_name)
   {
     $this->_query ("ALTER TABLE `$table_name` ADD FULLTEXT (`title`)");
     $this->_query ("ALTER TABLE `$table_name` ADD FULLTEXT (`description`)");
   }
   
-  function add_folder_id_index ($table_name)
+  public function add_folder_id_index ($table_name)
   {
     $this->_query ("ALTER TABLE  `$table_name` ADD INDEX (  `folder_id` )");
   }
@@ -85,7 +85,7 @@ class UPGRADE_PER_APP_260_270_TASK extends MIGRATOR_TASK
    * {@link _can_be_executed()} has returned True.
    * @access private
    */
-  function _pre_execute ()
+  protected function _pre_execute ()
   {
     if (! $this->db->table_exists ('versions'))
     {

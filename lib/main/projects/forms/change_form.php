@@ -56,7 +56,7 @@ class CHANGE_FORM extends PROJECT_ENTRY_FORM
   /**
    * @param PROJECT $folder Project in which to add or edit the change.
    */
-  function CHANGE_FORM ($folder)
+  public function CHANGE_FORM ($folder)
   {
     PROJECT_ENTRY_FORM::PROJECT_ENTRY_FORM ($folder);
 
@@ -64,7 +64,7 @@ class CHANGE_FORM extends PROJECT_ENTRY_FORM
     $field->id = 'job_id';
     $field->title = 'Job';
     $field->min_value = 0;
-    $field->sticky = TRUE;
+    $field->sticky = true;
     $this->add_field ($field);
 
     $field = new TEXT_FIELD ();
@@ -74,10 +74,10 @@ class CHANGE_FORM extends PROJECT_ENTRY_FORM
     $field->max_length = 65535;
     $this->add_field ($field);
 
-    $this->_fields ['title']->required = FALSE;
+    $this->_fields ['title']->required = false;
   }
 
-  function load_with_defaults ()
+  public function load_with_defaults ()
   {
     parent::load_with_defaults ();
 
@@ -104,7 +104,7 @@ class CHANGE_FORM extends PROJECT_ENTRY_FORM
    * Load initial properties from this change.
    * @param CHANGE $obj
    */
-  function load_from_object ($obj)
+  public function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
 
@@ -124,10 +124,10 @@ class CHANGE_FORM extends PROJECT_ENTRY_FORM
 
   /**
    * Store the form's values for this change.
-    * @param CHANGE $obj
-    * @access private
-    */
-  function _store_to_object ($obj)
+   * @param CHANGE $obj
+   * @access private
+   */
+  protected function _store_to_object ($obj)
   {
     $obj->job_id = $this->value_for ('job_id');
     $obj->files = $this->value_for ('files');
@@ -140,7 +140,7 @@ class CHANGE_FORM extends PROJECT_ENTRY_FORM
    * @param CHANGE $obj
    * @access private
    */
-  function _post_validate ($obj)
+  protected function _post_validate ($obj)
   {
     parent::_post_validate ($obj);
 
@@ -152,11 +152,11 @@ class CHANGE_FORM extends PROJECT_ENTRY_FORM
 
   /**
    * Retrieve the valid jobs for this change.
-    * Only jobs that were either created before or closed after this change was created are available.
-    * @return PROJECT_ENTRY_QUERY
-    * @access private
-    */
-  function job_query ()
+   * Only jobs that were either created before or closed after this change was created are available.
+   * @return PROJECT_ENTRY_QUERY
+   * @access private
+   */
+  public function job_query ()
   {
     if (! isset ($this->_job_query))
     {
@@ -182,11 +182,11 @@ class CHANGE_FORM extends PROJECT_ENTRY_FORM
 
   /**
    * Retrieve the job for 'id'
-    * If the job cannot be assigned to this change or it's not visible, returns empty.
-    * @return JOB
-    * @access private
-    */
-  function job_at ($id)
+   * If the job cannot be assigned to this change or it's not visible, returns empty.
+   * @return JOB
+   * @access private
+   */
+  public function job_at ($id)
   {
     $job_query = $this->job_query ();
     return $job_query->object_at_id ($id);
@@ -196,7 +196,7 @@ class CHANGE_FORM extends PROJECT_ENTRY_FORM
    * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_controls ($renderer)
+  protected function _draw_controls ($renderer)
   {
     $renderer->start ();
     $renderer->draw_text_line_row ('title');
@@ -301,7 +301,7 @@ class CHANGE_FORM extends PROJECT_ENTRY_FORM
     $renderer->draw_submit_button_row ();
 
     $renderer->draw_separator ();
-    $this->_draw_history_item_controls ($renderer, FALSE);
+    $this->_draw_history_item_controls ($renderer, false);
 
     $renderer->finish ();
   }

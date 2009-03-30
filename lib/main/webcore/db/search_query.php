@@ -57,7 +57,7 @@ class SEARCH_QUERY extends QUERY
   /**
    * Apply default restrictions and tables.
    */
-  function apply_defaults () 
+  public function apply_defaults () 
   {
     $this->set_select ('search.*');
     $this->set_table ($this->app->table_names->searches . ' search');
@@ -68,7 +68,7 @@ class SEARCH_QUERY extends QUERY
    * @return SEARCH
    * @access private
    */
-  function _make_object ()
+  protected function _make_object ()
   {
     return $this->app->make_search ($this->db->f ('type'));
   }

@@ -57,17 +57,20 @@ class SELECT_LIST extends LIST_GRID
    * @var string
    */
   public $toggle_image = '{icons}tree/collapse';
+
   /**
    * Title used for the select/deselect all button.
    * @var string
    */
   public $toggle_title = 'Select/Deselect All';
+
   /**
    * Name of the form embedded in the list.
    * This form is used to submit the selected rows to a worker page.
    * @var string
    */
   public $form_name = 'update_form';
+
   /**
    * Name assigned to the selector controls.
    * @var string
@@ -77,7 +80,7 @@ class SELECT_LIST extends LIST_GRID
   /**
    * @access private
    */
-  function _draw_header ()
+  protected function _draw_header ()
   {
     $col = '<div style="text-align: center">';
     $col .= "<a href=\"javascript:toggle_selected (document.getElementById('$this->form_name')['{$this->control_name}[]'])\" title=\"$this->toggle_title\">";
@@ -98,7 +101,7 @@ class SELECT_LIST extends LIST_GRID
   /**
    * @access private
    */
-  function _draw_selector ($obj)
+  protected function _draw_selector ($obj)
   {
 ?><input type="checkbox" name="<?php echo $this->control_name; ?>[]" value="<?php echo $obj->id; ?>" id="<?php echo $this->control_name . '_' . $this->_num_rows; ?>">
 <?php
@@ -110,7 +113,7 @@ class SELECT_LIST extends LIST_GRID
    * @param integer $index
    * @access private
    */
-  function _draw_column_contents ($obj, $index)
+  protected function _draw_column_contents ($obj, $index)
   {
     switch ($index)
     {

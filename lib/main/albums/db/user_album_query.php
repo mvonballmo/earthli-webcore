@@ -51,7 +51,7 @@ class USER_ALBUM_QUERY extends USER_FOLDER_QUERY
   /**
    * Apply default restrictions and tables.
    */
-  function apply_defaults ()
+  public function apply_defaults ()
   {
     parent::apply_defaults();
     $this->add_order ('fldr.first_day DESC', true);

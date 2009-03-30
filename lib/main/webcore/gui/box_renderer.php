@@ -52,7 +52,7 @@ class BOX_RENDERER extends WEBCORE_OBJECT
   /**
    * @param CONTEXT $context
    */
-  function BOX_RENDERER ($context)
+  public function BOX_RENDERER ($context)
   {
     WEBCORE_OBJECT::WEBCORE_OBJECT ($context);
     $browser = $this->env->browser ();
@@ -64,7 +64,7 @@ class BOX_RENDERER extends WEBCORE_OBJECT
    * Call {@link new_column()} to make columns in the set. Call {@link
    * finish_column_set()} to close.
    */
-  function start_column_set ()
+  public function start_column_set ()
   {
     if ($this->_supports_css_tables)
     {
@@ -81,7 +81,7 @@ class BOX_RENDERER extends WEBCORE_OBJECT
    * Closes a previously opened column automatically.
    * @param string $CSS_style Use this style for the column.
    */
-  function new_column ($CSS_style = '')
+  public function new_column ($CSS_style = '')
   {
     if ($this->_column_started)
     {
@@ -106,14 +106,14 @@ class BOX_RENDERER extends WEBCORE_OBJECT
       
     echo '  <' . $tag_name . ' style="' . $style . '">' . "\n";
 
-    $this->_column_started = TRUE; 
+    $this->_column_started = true; 
   }
   
   /**
    * Close a set opened with {@link start_column_set()}.
    * Closes a previously opened column automatically.
    */
-  function finish_column_set ()
+  public function finish_column_set ()
   {
     if ($this->_column_started)
     {
@@ -136,7 +136,7 @@ class BOX_RENDERER extends WEBCORE_OBJECT
    * <code>new_column()</code> when needed.
    * @access private
    */
-  function _close_column ()
+  protected function _close_column ()
   {
     if ($this->_supports_css_tables)
     {
@@ -158,7 +158,7 @@ class BOX_RENDERER extends WEBCORE_OBJECT
    * @var boolean 
    * @access private
    */
-  protected $_column_started = FALSE;
+  protected $_column_started = false;
 }
 
 ?>

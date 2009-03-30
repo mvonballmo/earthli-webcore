@@ -74,42 +74,50 @@ class APPLICATION extends CONTEXT
    * @var string
    */
   public $title = 'WebCore Application';
+
   /**
    * Displayed in the banner by the {@link DEFAULT_PAGE_RENDERER}.
    * @var string
    */
   public $short_title = 'WebCore';
+
   /**
    * Unique ID for this framework.
    * Change only in descendents; used for versioning and migration.
    * @var string
    */
   public $framework_id = 'com.earthli.generic-app';
+
   /**
    * @var integer
    */
   public $version = '1.0';
+
   /**
    * @var string
    */
   public $icon = '{icons}products/webcore';
+
   /**
    * Home page for the application.
    * Used to format the application info for support requests.
    * @var string
    */
   public $support_url = 'http://earthli.com/software/webcore/';
+
   /**
    * Id of the folder that serves as the tree root (can be empty)
    * @var integer
    */
   public $root_folder_id = 1;
+
   /**
    * Is this application online?
    * Call {@link set_offline()} to change this value.
    * @var boolean
    */
-  public $offline = FALSE;
+  public $offline = false;
+
   /**
    * Text to display as having been searched.
    * @var string
@@ -121,6 +129,7 @@ class APPLICATION extends CONTEXT
    * @var PAGE
    */
   public $page;
+
   /**
    * The logged-in user (can be anonymous)
    * @var USER
@@ -129,34 +138,40 @@ class APPLICATION extends CONTEXT
 
   /**
    * Map the physical table names to the aliases used by the WebCore.
-    * @var APPLICATION_TABLE_NAMES
-    */
+   * @var APPLICATION_TABLE_NAMES
+   */
   public $table_names;
+
   /**
    * Map the physical page names to the aliases used by the WebCore.
-    * @var APPLICATION_PAGE_NAMES
-    */
+   * @var APPLICATION_PAGE_NAMES
+   */
   public $page_names;
+
   /**
    * Application-specific display settings.
-    * @var APPLICATION_DISPLAY_OPTIONS
-    */
+   * @var APPLICATION_DISPLAY_OPTIONS
+   */
   public $display_options;
+
   /**
    * Options related to users.
-    * @var APPLICATION_USER_OPTIONS
-    */
+   * @var APPLICATION_USER_OPTIONS
+   */
   public $user_options;
+
   /**
    * Additional mailing options (added to those declared in CONTEXT).
-    * @var APPLICATION_MAIL_OPTIONS
-    */
+   * @var APPLICATION_MAIL_OPTIONS
+   */
   public $mail_options;
+
   /**
    * Options used to build anonymous user names.
-    * @var APPLICATION_ANON_OPTIONS
-    */
+   * @var APPLICATION_ANON_OPTIONS
+   */
   public $anon_options;
+
   /**
    * @var array[integer]
    */
@@ -165,7 +180,7 @@ class APPLICATION extends CONTEXT
   /**
    * @param PAGE $page Page to which this application is attached.
    */
-  function APPLICATION ($page)
+  public function APPLICATION ($page)
   {
     $this->page = $page;
     $this->inherit_resources_from ($page);
@@ -207,7 +222,7 @@ class APPLICATION extends CONTEXT
    * Add classes to the {@link $classes} object factory.
    * @access private
    */
-  function _initialize_class_registry ()
+  protected function _initialize_class_registry ()
   {
     parent::_initialize_class_registry ();
 
@@ -223,7 +238,7 @@ class APPLICATION extends CONTEXT
    * Name used for version information.
    * @return string
    */
-  function name ()
+  public function name ()
   {
     return 'earthli Application';
   }
@@ -232,7 +247,7 @@ class APPLICATION extends CONTEXT
    * Name and version of the application.
    * @return string
    */
-  function description ()
+  public function description ()
   {
     return $this->title . ' ' . $this->version;
   }
@@ -241,7 +256,7 @@ class APPLICATION extends CONTEXT
    * Full path to the install location of this application.
    * @return FILE_URL
    */
-  function source_path ()
+  public function source_path ()
   {
     $Result = new FILE_URL (realpath ($this->_source_path ()));
     $Result->strip_name ();
@@ -253,7 +268,7 @@ class APPLICATION extends CONTEXT
    * Should renderers/grids/etc. use DHTML?
    * @return boolean
    */
-  function dhtml_allowed ()
+  public function dhtml_allowed ()
   {
     return $this->page->template_options->include_scripts && parent::dhtml_allowed ();
   }
@@ -262,7 +277,7 @@ class APPLICATION extends CONTEXT
    * Should dates use JavaScript to render local times?
    * @return boolean
    */
-  function local_times_allowed ()
+  public function local_times_allowed ()
   {
     return $this->page->template_options->include_scripts && parent::local_times_allowed ();
   }
@@ -271,7 +286,7 @@ class APPLICATION extends CONTEXT
    * Query that can see all groups in the application
    * @return GROUP_QUERY
    */
-  function group_query ()
+  public function group_query ()
   {
     return $this->make_object ('group_query', 'GROUP_QUERY', 'webcore/db/group_query.php');
   }
@@ -280,7 +295,7 @@ class APPLICATION extends CONTEXT
    * Query that can see all users in the application
    * @return USER_QUERY
    */
-  function user_query ()
+  public function user_query ()
   {
     return $this->make_object ('user_query', 'USER_QUERY', 'webcore/db/user_query.php');
   }
@@ -289,7 +304,7 @@ class APPLICATION extends CONTEXT
    * Query that can see all users in the application
    * @return SUBSCRIBER_QUERY
    */
-  function subscriber_query ()
+  public function subscriber_query ()
   {
     return $this->make_object ('subscriber_query', 'SUBSCRIBER_QUERY', 'webcore/db/subscriber_query.php');
   }
@@ -298,7 +313,7 @@ class APPLICATION extends CONTEXT
    * All icons available to this application.
    * @return ICON_QUERY
    */
-  function icon_query ()
+  public function icon_query ()
   {
     return $this->make_object ('icon_query', 'ICON_QUERY', 'webcore/db/icon_query.php');
   }
@@ -307,7 +322,7 @@ class APPLICATION extends CONTEXT
    * All themes available to this application.
    * @return THEME_QUERY
    */
-  function theme_query ()
+  public function theme_query ()
   {
     return $this->make_object ('theme_query', 'APPLICATION_THEME_QUERY', 'webcore/db/theme_query.php');
   }
@@ -320,7 +335,7 @@ class APPLICATION extends CONTEXT
    * @param string $kind
    * @return USER
    */
-  function new_user ($kind = Privilege_kind_registered)
+  public function new_user ($kind = Privilege_kind_registered)
   {
     $Result = $this->_make_user ();
     $Result->kind = $kind;
@@ -346,7 +361,7 @@ class APPLICATION extends CONTEXT
    * Does not store to the database.
    * @return SUBSCRIBER
    */
-  function new_subscriber ()
+  public function new_subscriber ()
   {
     $class_name = $this->final_class_name ('SUBSCRIBER', 'webcore/obj/subscriber.php');
     return new $class_name ($this);
@@ -357,7 +372,7 @@ class APPLICATION extends CONTEXT
    * Does not store to database.
    * @return GROUP
    */
-  function new_group ()
+  public function new_group ()
   {
     $class_name = $this->final_class_name ('GROUP', 'webcore/obj/group.php');
     return new $class_name ($this);
@@ -365,10 +380,10 @@ class APPLICATION extends CONTEXT
 
   /**
    * Create a new folder object.
-    * Does not store to the database.
-    * @return FOLDER
-    */
-  function new_folder ()
+   * Does not store to the database.
+   * @return FOLDER
+   */
+  public function new_folder ()
   {
     $class_name = $this->final_class_name ('FOLDER', 'webcore/obj/folder.php');
     $Result = new $class_name ($this);
@@ -380,9 +395,9 @@ class APPLICATION extends CONTEXT
    * Run the application in offline mode.
    * Users without {@link Privilege_offline} will be automatically redirected to an offline page.
    */
-  function set_offline ()
+  public function set_offline ()
   {
-    $this->offline = TRUE;
+    $this->offline = true;
     if (isset ($this->login))
     {
       $this->_enforce_offline ();
@@ -392,7 +407,7 @@ class APPLICATION extends CONTEXT
   /**
    * Call this function before accessing the {@link $login} property.
    */
-  function load_login ()
+  public function load_login ()
   {
     $this->set_login ($this->_logged_in_user ());
 
@@ -409,11 +424,11 @@ class APPLICATION extends CONTEXT
    * to be created if one doesn't already exist.
    * @see force_login_for_user_create()
    */
-  function force_login ()
+  public function force_login ()
   {
     if ($this->login->id == Anon_user_id)
     {
-      $this->set_login ($this->_logged_in_user (TRUE));
+      $this->set_login ($this->_logged_in_user (true));
     }
   }
 
@@ -426,12 +441,12 @@ class APPLICATION extends CONTEXT
    * APPLICATION_USER_OPTIONS::$default_user_creator_id}.
    * @see force_login()
    */
-  function force_login_for_user_create ()
+  public function force_login_for_user_create ()
   {
     if ($this->login->id == Anon_user_id)
     {
-      $this->set_login ($this->user_at_id ($this->user_options->default_user_creator_id, TRUE));
-      $this->login->ad_hoc_login = TRUE;
+      $this->set_login ($this->user_at_id ($this->user_options->default_user_creator_id, true));
+      $this->login->ad_hoc_login = true;
     }
   }
 
@@ -444,7 +459,7 @@ class APPLICATION extends CONTEXT
    * @param USER $user Log in as this user
    * @param boolean $remember Remember this login between sessions?
    */
-  function log_in ($user, $remember)
+  public function log_in ($user, $remember)
   {
     if (isset ($user) && ! $user->is_allowed (Privilege_set_global, Privilege_login))
     {
@@ -470,7 +485,7 @@ class APPLICATION extends CONTEXT
    * {@link impersonate()}.
    * @param USER $user
    */
-  function set_login ($user)
+  public function set_login ($user)
   {
     $this->login = $user;
 
@@ -490,14 +505,14 @@ class APPLICATION extends CONTEXT
    * @param string $name Name of the user you want to impersonate
    * @param string $password Password for that user
    */
-  function impersonate ($name, $password)
+  public function impersonate ($name, $password)
   {
     if ($name)
     {
       $user_query = $this->user_query ();
-      $user_query->include_permissions (TRUE);
+      $user_query->include_permissions (true);
       $user = $user_query->object_at_name ($name);
-      $user_query->include_permissions (FALSE);
+      $user_query->include_permissions (false);
     }
 
     if ($user)
@@ -521,7 +536,7 @@ class APPLICATION extends CONTEXT
    * Log out the current user.
    * Application will then only have anonymous rights.
    */
-  function log_out ()
+  public function log_out ()
   {
     $this->storage->clear_value ($this->storage_options->login_user_name);
   }
@@ -530,13 +545,13 @@ class APPLICATION extends CONTEXT
    * Get the user for this id.
    * Returns empty if not found. Returns {@link non_existent_user()} if the ID is empty.
    * @param integer $id The id of the user to retrieve.
-   * @param boolean $include_permissions If TRUE, returns user permissions as
+   * @param boolean $include_permissions If true, returns user permissions as
    * well (requires more processing).
-   * @param boolean $allow_null If TRUE, returns NULL if the user is not found,
+   * @param boolean $allow_null If true, returns NULL if the user is not found,
    * otherwise, returns {@link non_existent_user()}.
    * @return USER
    */
-  function user_at_id ($id, $include_permissions = FALSE, $allow_null = FALSE)
+  public function user_at_id ($id, $include_permissions = false, $allow_null = false)
   {
     $Result = null;
 
@@ -569,7 +584,7 @@ class APPLICATION extends CONTEXT
    * Return a user representing a generic anonymous user
    * @return USER
    */
-  function non_existent_user ()
+  public function non_existent_user ()
   {
     if (! isset ($this->_non_existent_user))
     {
@@ -586,7 +601,7 @@ class APPLICATION extends CONTEXT
    * Return a user representing a generic anonymous user
    * @return USER
    */
-  function anon_user ()
+  public function anon_user ()
   {
     if (! isset ($this->_anon_user))
     {
@@ -611,7 +626,7 @@ class APPLICATION extends CONTEXT
    * Used primarily for reading global permissions.
    * @return USER
    */
-  function global_user ()
+  public function global_user ()
   {
     if (! isset ($this->_global_user))
     {
@@ -636,7 +651,7 @@ class APPLICATION extends CONTEXT
    * several pages. For example, an object can be edited from its own page and from a list in which it
    * appears. The edit page uses the referer link to determine which page to return to when done editing.
    */
-  function set_referer ()
+  public function set_referer ()
   {
     $this->storage->set_value ($this->storage_options->return_to_page_name, $this->env->url (Url_part_all));
   }
@@ -648,7 +663,7 @@ class APPLICATION extends CONTEXT
    * @see html_title_formatter ()
    * @param string $text
    */
-  function set_search_text ($text)
+  public function set_search_text ($text)
   {
     $this->search_text = $text;
     $munger = $this->html_text_formatter ();
@@ -663,7 +678,7 @@ class APPLICATION extends CONTEXT
    * which the user requested the form.
    * @param string $fallback_url
    */
-  function return_to_referer ($fallback_url)
+  public function return_to_referer ($fallback_url)
   {
     $stored_url = $this->storage->value ($this->storage_options->return_to_page_name);
     if ($stored_url)
@@ -686,7 +701,7 @@ class APPLICATION extends CONTEXT
    * @param string $alias Can be {@link Folder_name_application}, {@link Folder_name_attachments}, {@link Folder_name_resources}, {@link Folder_name_pages}, {@link Folder_name_icons}, {@link Folder_name_scripts} or {$link Folder_name_styles}.
    * @param string $path
    */
-  function set_path ($alias, $path)
+  public function set_path ($alias, $path)
   {
     parent::set_path ($alias, $path);
     switch ($alias)
@@ -701,7 +716,7 @@ class APPLICATION extends CONTEXT
    * The URL for this application
    * @return string
    */
-  function url ()
+  public function url ()
   {
     return $this->path_to (Folder_name_application, Force_root_on);
   }
@@ -713,13 +728,12 @@ class APPLICATION extends CONTEXT
    * @param string $entry_type request the size for this object type
    * @return integer
    */
-  function max_title_size ($entry_type = '')
+  public function max_title_size ($entry_type = '')
   {
     if ($entry_type && isset ($this->max_title_sizes [$entry_type]))
     {
       return $this->max_title_sizes [$entry_type];
     }
-
 
     return $this->display_options->default_max_title_size;
   }
@@ -730,7 +744,7 @@ class APPLICATION extends CONTEXT
    * to retrieve a publisher capable of sending all the needed information.
    * @return PUBLISHER
    */
-  function make_publisher ()
+  public function make_publisher ()
   {
     $class_name = $this->final_class_name ('PUBLISHER', 'webcore/mail/publisher.php');
     return new $class_name ($this->make_mail_provider ());
@@ -742,7 +756,7 @@ class APPLICATION extends CONTEXT
    * it defines.
    * @return CONTENT_PRIVILEGES
    */
-  function make_privileges ()
+  public function make_privileges ()
   {
     include_once ('webcore/sys/permissions.php');
     return new SINGLE_ENTRY_PRIVILEGES ($this);
@@ -757,7 +771,7 @@ class APPLICATION extends CONTEXT
    * and defining a new set of {@link PRIVILEGE_GROUP}s and {@link PRIVILEGE_MAP}s.
    * @return CONTENT_PRIVILEGES
    */
-  function make_permissions_formatter ()
+  public function make_permissions_formatter ()
   {
     $class_name = $this->final_class_name ('PERMISSIONS_FORMATTER', 'webcore/sys/security.php');
     return new $class_name ($this);
@@ -789,7 +803,7 @@ class APPLICATION extends CONTEXT
    * @param string $search_class Name of the search class to use.
    * @param string $search_file Location of the search class definition.
    */
-  function register_search ($obj_type, $base_class, $search_class, $search_file = '')
+  public function register_search ($obj_type, $base_class, $search_class, $search_file = '')
   {
     $this->_searches [$obj_type] = $base_class;
     $this->classes->register_class (App_search_reg_prefix . $obj_type, $search_class, $search_file);
@@ -800,7 +814,7 @@ class APPLICATION extends CONTEXT
    * @param string $type
    * @return SEARCH
    */
-  function make_search ($type)
+  public function make_search ($type)
   {
     return $this->_make_special_registered_type ($type, App_search_reg_prefix);
   }
@@ -829,7 +843,7 @@ class APPLICATION extends CONTEXT
    * @param string $entry_class Name of the entry class to use.
    * @param string $entry_file Location of the entry class definition.
    */
-  function register_entry_class ($obj_type, $entry_class, $entry_file)
+  public function register_entry_class ($obj_type, $entry_class, $entry_file)
   {
     $this->register_class (App_entry_reg_prefix . $obj_type, $entry_class, $entry_file);
   }
@@ -840,7 +854,7 @@ class APPLICATION extends CONTEXT
    * @param string $type
    * @return ENTRY
    */
-  function make_entry ($type)
+  public function make_entry ($type)
   {
     return $this->_make_special_registered_type ($type, App_entry_reg_prefix);
   }
@@ -850,14 +864,16 @@ class APPLICATION extends CONTEXT
    * @return array[string,TYPE_INFO]
    * @see TYPE_INFO
    */
-  function entry_type_infos ()
+  public function entry_type_infos ()
   {
     if (! isset ($this->_entry_type_infos))
     {
       $this->_entry_type_infos = array ();
       $entry_classes = $this->classes->classes_with_prefix (App_entry_reg_prefix);
       foreach ($entry_classes as $class_name)
+      {
         $this->_entry_type_infos [] = $this->type_info_for ($class_name);
+      }
     }
 
     return $this->_entry_type_infos;
@@ -868,7 +884,7 @@ class APPLICATION extends CONTEXT
    * @param string $type
    * @return TYPE_INFO
    */
-  function search_type_info_for ($type)
+  public function search_type_info_for ($type)
   {
     return $this->type_info_for ($this->_searches [$type]);
   }
@@ -878,11 +894,14 @@ class APPLICATION extends CONTEXT
    * @return array[string,TYPE_INFO]
    * @see TYPE_INFO
    */
-  function search_type_infos ()
+  public function search_type_infos ()
   {
     $Result = array ();
-    foreach ($this->_searches as $id => $class_name)
+    foreach ($this->_searches as $class_name)
+    {
       $Result [] = $this->type_info_for ($class_name);
+    }
+    
     return $Result;
   }
 
@@ -892,7 +911,7 @@ class APPLICATION extends CONTEXT
    * @return string
    * @access private
    */
-  function _source_path ()
+  protected function _source_path ()
   {
     return __FILE__;
   }
@@ -902,7 +921,7 @@ class APPLICATION extends CONTEXT
    * @return QUERY_BASED_CACHE
    * @access private
    */
-  function user_cache ()
+  public function user_cache ()
   {
     if (! isset ($this->_user_cache))
     {
@@ -917,7 +936,7 @@ class APPLICATION extends CONTEXT
    * Redirect to the offline page, if necessary.
    * @access private
    */
-  function _enforce_offline ()
+  protected function _enforce_offline ()
   {
     if (! isset ($this->login) || ! $this->login->is_allowed (Privilege_set_global, Privilege_offline))
     {
@@ -936,7 +955,7 @@ class APPLICATION extends CONTEXT
    * @return string
    * @access private
    */
-  function _make_anon_name ()
+  protected function _make_anon_name ()
   {
     $opts = $this->anon_options;
     $browser = $this->env->browser ();
@@ -963,7 +982,7 @@ class APPLICATION extends CONTEXT
    * @return boolean
    * @access private
    */
-  function _default_resolve_to_root ()
+  protected function _default_resolve_to_root ()
   {
     if ($this->env->running_on_declared_host ())
     {
@@ -989,7 +1008,7 @@ class APPLICATION extends CONTEXT
    * @return USER
    * @access private
    */
-  function _make_user ()
+  protected function _make_user ()
   {
     $class_name = $this->final_class_name ('USER', 'webcore/obj/user.php');
     return new $class_name ($this);
@@ -1006,7 +1025,7 @@ class APPLICATION extends CONTEXT
    * @return USER
    * @access private
    */
-  function _logged_in_user ($force = FALSE)
+  protected function _logged_in_user ($force = false)
   {
     $info_name = $this->storage_options->login_user_name;
     $user_info = $this->storage->value ($info_name);
@@ -1025,9 +1044,9 @@ class APPLICATION extends CONTEXT
 
       if ($ip_address)
       {
-        $user_query->include_permissions (TRUE);
+        $user_query->include_permissions (true);
         $Result = $user_query->object_with_fields (array ('ip_address', 'kind'), array(ip2long ($ip_address), 'anonymous'));
-        $user_query->include_permissions (FALSE);
+        $user_query->include_permissions (false);
 
         if ($Result)
         {
@@ -1075,7 +1094,7 @@ class APPLICATION extends CONTEXT
    * @return string
    * @access private
    */
-  function _encode_user ($user)
+  protected function _encode_user ($user)
   {
     return $user->title . '|' . $user->password;
   }
@@ -1087,24 +1106,28 @@ class APPLICATION extends CONTEXT
    * @param string $user_id Unique identifier created with '_encode_user'.
    * @return USER
    */
-  function _decode_user ($user_id)
+  protected function _decode_user ($user_id)
   {
     $params = explode ('|', $user_id);
     if (sizeof ($params) == 2)
     {
       $user_query = $this->user_query ();
-      $user_query->include_permissions (TRUE);
+      $user_query->include_permissions (true);
       $user_query->restrict ("title = '{$params[0]}'");
       $user_query->restrict ("password = '{$params[1]}'");
       $Result = $user_query->first_object ();
-      $user_query->include_permissions (FALSE);
+      $user_query->include_permissions (false);
+      
       if (isset ($Result))
       {
         $cache = $this->user_cache ();
         $cache->add_object ($Result);
       }
+      
       return $Result;
     }
+    
+    return null;
   }
 
   /**
@@ -1114,7 +1137,7 @@ class APPLICATION extends CONTEXT
    * @return object
    * @access private
    */
-  function _make_special_registered_type ($type, $type_prefix)
+  protected function _make_special_registered_type ($type, $type_prefix)
   {
     /* First, retrieve the actual handler from the registry.
      * Then, check for an override of the default handler.
@@ -1129,7 +1152,6 @@ class APPLICATION extends CONTEXT
       $this->raise ("Unknown [$type_prefix] type [$type]", '_make_special_registered_type', 'APPLICATION');
     }
 
-
     return new $class_name ($this);
   }
 
@@ -1138,11 +1160,13 @@ class APPLICATION extends CONTEXT
    * @var USER
    */
   protected $_anon_user;
+
   /**
    * @access private
    * @var USER
    */
   protected $_global_user;
+
   /**
    * @access private
    * @var USER
@@ -1164,12 +1188,14 @@ class APPLICATION extends CONTEXT
    * @access private
    */
   protected $_entry_classes;
+
   /**
    * Cached list of {@link TYPE_INFO} objects.
    * @var array[TYPE_INFO]
    * @see entry_type_infos()
    * @access private*/
   protected $_entry_type_infos;
+
   /**
    * Map from a search name to a class name.
    * Used to get type information for the object being searched.
@@ -1178,6 +1204,7 @@ class APPLICATION extends CONTEXT
    * @access private
    */
   protected $_searches;
+
   /**
    * @var array[string]
    * @access private
@@ -1198,7 +1225,7 @@ class DRAFTABLE_APPLICATION extends APPLICATION
    * Add classes to the {@link $classes} object factory.
    * @access private
    */
-  function _initialize_class_registry ()
+  protected function _initialize_class_registry ()
   {
     parent::_initialize_class_registry ();
     $this->register_class ('ENTRY', 'DRAFTABLE_ENTRY', 'webcore/obj/entry.php');

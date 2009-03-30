@@ -41,21 +41,24 @@ require_once ('webcore/forms/form.php');
 
 /**
  * Base class for all forms that update information for {@link SUBSCRIBER}s.
+ * @abstract
  * @package webcore
  * @subpackage forms
  * @version 3.0.0
  * @since 2.2.1
  */
-class SUBSCRIPTION_FORM extends FORM
+abstract class SUBSCRIPTION_FORM extends FORM
 {
   /**
    * @var string
    */
   public $button = 'Save';
+
   /**
    * @var string
    */
   public $button_icon = '{icons}buttons/save';
+
   /**
    * Name of the panel in which the form is displayed.
    * Since these types of forms are displayed within panels, the page has to
@@ -69,22 +72,22 @@ class SUBSCRIPTION_FORM extends FORM
 
   /**
    * @param APPLICATION $app Main application.
-    * @param SUBSCRIBER $subscriber Edit subscriptions for this user.
-    */
-  function SUBSCRIPTION_FORM ($app)
+   * @param SUBSCRIBER $subscriber Edit subscriptions for this user.
+   */
+  public function SUBSCRIPTION_FORM ($app)
   {
     FORM::FORM ($app);
 
     $field = new EMAIL_FIELD ();
     $field->id = 'email';
     $field->title = 'Email';
-    $field->visible = FALSE;
+    $field->visible = false;
     $this->add_field ($field);
 
     $field = new TEXT_FIELD ();
     $field->id = 'panel';
     $field->title = 'Panel';
-    $field->visible = FALSE;
+    $field->visible = false;
     $this->add_field ($field);
 
     $field = new ARRAY_FIELD ();
@@ -98,14 +101,14 @@ class SUBSCRIPTION_FORM extends FORM
    * Load initial properties from this user.
    * @param SUBSCRIBER $obj
    */
-  function load_from_object ($obj)
+  public function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
     $this->set_value ('email', $obj->email);
     $this->set_value ('panel', $this->panel_name);
   }
 
-  function load_with_defaults ()
+  public function load_with_defaults ()
   {
     parent::load_with_defaults ();
     $this->set_value ('email', read_var ('email'));
@@ -114,19 +117,20 @@ class SUBSCRIPTION_FORM extends FORM
 
 /**
  * Provides support for subscribable {@link CONTENT_OBJECT}s.
+ * @abstract 
  * @package webcore
  * @subpackage forms
  * @version 3.0.0
  * @since 2.7.0
  */
-class CONTENT_OBJECT_SUBSCRIPTION_FORM extends SUBSCRIPTION_FORM
+abstract class CONTENT_OBJECT_SUBSCRIPTION_FORM extends SUBSCRIPTION_FORM
 {
   /**
    * Updates the user's entry subscriptions.
    * @param SUBSCRIBER $obj
    * @access private
    */
-  function commit ($obj)
+  public function commit ($obj)
   {
     $obj->update_subscriptions_for ($this->_sub_type, $this->value_for ('ids'), $this->_type);
   }
@@ -135,7 +139,7 @@ class CONTENT_OBJECT_SUBSCRIPTION_FORM extends SUBSCRIPTION_FORM
    * @param FORM_RENDERER $renderer
    * @access private
    */
-  function _draw_controls ($renderer)
+  protected function _draw_controls ($renderer)
   {
     $size = 0;
     
@@ -155,8 +159,8 @@ class CONTENT_OBJECT_SUBSCRIPTION_FORM extends SUBSCRIPTION_FORM
       $grid = $this->_make_grid ();
       $grid->set_ranges ($size, 1);
       $grid->set_query ($query);
-      $grid->items_are_selectable = TRUE;
-      $grid->items_are_selected = TRUE;
+      $grid->items_are_selectable = true;
+      $grid->items_are_selected = true;
       $grid->width = '';
 
       $ctrl_name = $this->js_name ('ids');
@@ -198,20 +202,14 @@ class CONTENT_OBJECT_SUBSCRIPTION_FORM extends SUBSCRIPTION_FORM
    * @access private
    * @abstract
    */
-  function _make_query ()
-  {
-    $this->raise_deferred ('_make_query', 'CONTENT_OBJECT_SUBSCRIPTION_FORM');
-  }
+  protected abstract function _make_query ();
   
   /**
    * @return SELECTABLE_GRID
    * @access private
    * @abstract
    */
-  function _make_grid ()
-  {
-    $this->raise_deferred ('_make_grid', 'CONTENT_OBJECT_SUBSCRIPTION_FORM');
-  }
+  protected abstract function _make_grid ();
   
   /**
    * Used to format type-specific text output.
@@ -219,12 +217,14 @@ class CONTENT_OBJECT_SUBSCRIPTION_FORM extends SUBSCRIPTION_FORM
    * @access private
    */
   protected $_type_info;
+
   /**
    * Used by {@link ENTRY} subscriptions.
    * @var string 
    * @access private
    */
   protected $_type = '';
+
   /**
    * Type of subscriptions to manage.
    * @var string

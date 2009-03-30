@@ -35,7 +35,7 @@ class NEWS_280_281_MIGRATOR_TASK extends UPGRADE_PER_APP_270_271_TASK
   public $version_from = '2.8.0';
   public $version_to = '2.8.1';
 
-  function _execute ()
+  protected function _execute ()
   {
     log_open_block ("Updating fields");
       $this->_update_history_type_for_drafts ('news_history_items');

@@ -53,7 +53,7 @@ class NEWS_PANEL_MANAGER_HELPER extends PANEL_MANAGER_HELPER
    * Does nothing by default.
    * @param PANEL_MANAGER $manager
    */
-  function configure ($manager)
+  public function configure ($manager)
   {
 ////    $panel = $manager->panel_at ('article');
 ////    $panel->default_time_frame = Time_frame_last_month;

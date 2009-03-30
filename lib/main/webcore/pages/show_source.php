@@ -73,7 +73,7 @@ http://www.earthli.com/software/webcore
 
         $text_to_search = $page_text;
         $template_start = strpos ($text_to_search, Start_of_template);
-        while ($template_start !== FALSE)
+        while ($template_start !== false)
         {
           $template_end = strpos ($text_to_search, End_of_template, $template_start);
           $template_name = substr ($text_to_search, $template_start, $template_end - $template_start + strlen (End_of_template));

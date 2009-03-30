@@ -35,7 +35,7 @@ class ALBUMS_26_27_MIGRATOR_TASK extends UPGRADE_PER_APP_24_25_TASK
   public $version_from = '2.6.0';
   public $version_to = '2.7.0';
 
-  function _execute ()
+  protected function _execute ()
   {
     $this->add_attachments ('album_attachments', 'album_actions');
 

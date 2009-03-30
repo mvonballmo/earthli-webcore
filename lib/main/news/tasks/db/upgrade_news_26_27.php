@@ -35,7 +35,7 @@ class NEWS_26_27_MIGRATOR_TASK extends UPGRADE_PER_APP_25_26_TASK
   public $version_from = '2.6.0';
   public $version_to = '2.7.0';
 
-  function _execute ()
+  protected function _execute ()
   {
     log_open_block ("Adding owners to objects");
       $this->add_owner_to_table ('news_attachments');

@@ -49,12 +49,12 @@ require_once ('webcore/obj/webcore_object.php');
  * @since 2.5.0
  * @abstract
  */
-class FILE_TYPE_MANAGER extends WEBCORE_OBJECT
+abstract class FILE_TYPE_MANAGER extends WEBCORE_OBJECT
 {
   /**
    * @param CONTEXT $context
    */
-  function FILE_TYPE_MANAGER ($context)
+  public function FILE_TYPE_MANAGER ($context)
   {
     WEBCORE_OBJECT::WEBCORE_OBJECT ($context);
     $this->_load ();
@@ -69,16 +69,16 @@ class FILE_TYPE_MANAGER extends WEBCORE_OBJECT
    * @param string $size
    * @return string
    */
-  function icon_as_html ($mime_type, $extension, $size = '32px')
+  public function icon_as_html ($mime_type, $extension, $size = '32px')
   {
     if ($mime_type)
     {
       $title = $mime_type;
     }
     else if ($extension)
- {
-   $title = $extension;
- }
+    {
+      $title = $extension;
+    }
     else
     {
       $title = ' ';
@@ -95,7 +95,7 @@ class FILE_TYPE_MANAGER extends WEBCORE_OBJECT
    * @param string $size
    * @return string
    */
-  function expanded_icon_url ($mime_type, $extension, $size = '32px')
+  public function expanded_icon_url ($mime_type, $extension, $size = '32px')
   {
     return $this->context->sized_icon ($this->icon_url ($mime_type, $extension), $size);
   }
@@ -106,17 +106,16 @@ class FILE_TYPE_MANAGER extends WEBCORE_OBJECT
    * @param string $extension
    * @return string
    */
-  function icon_url ($mime_type, $extension)
+  public function icon_url ($mime_type, $extension)
   {
     if (isset ($this->_mime_types [$mime_type]))
     {
       return $this->_mime_types [$mime_type];
     }
     else if (isset ($this->_extensions [$extension]))
- {
-   return $this->_extensions [$extension];
- }
-
+    {
+      return $this->_extensions [$extension];
+    }
 
     return $this->_default_icon_url;
   }
@@ -126,10 +125,7 @@ class FILE_TYPE_MANAGER extends WEBCORE_OBJECT
    * @access private
    * @abstract
    */
-  function _load ()
-  {
-    $this->raise_deferred ('_load', 'FILE_TYPE_MANAGER');
-  }
+  protected abstract function _load ();
 
   /**
    * Icon url used when an unregistered type is requested.
@@ -137,12 +133,14 @@ class FILE_TYPE_MANAGER extends WEBCORE_OBJECT
    * @access private
    */
   protected $_default_icon_url;
+  
   /**
    * Maps mime types to icon urls.
    * @var array[string,string]
    * @access private
    */
   protected $_mime_types;
+  
   /**
    * Maps extensions to icon urls.
    * @var array[string,string]
@@ -165,12 +163,12 @@ class INI_FILE_TYPE_MANAGER extends FILE_TYPE_MANAGER
    * @access private
    * @abstract
    */
-  function _load ()
+  protected function _load ()
   {
     $file_name = $this->context->config_file_name ('file_types.ini');
     if ($file_name)
     {
-      $config = parse_ini_file ($file_name, TRUE);
+      $config = parse_ini_file ($file_name, true);
 
       $this->_extensions = read_array_index ($config, 'extensions');
       $this->_mime_types = read_array_index ($config, 'mime_types');

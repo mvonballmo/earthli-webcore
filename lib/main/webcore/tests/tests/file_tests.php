@@ -51,20 +51,20 @@ require_once ('webcore/sys/files.php');
  */
 class FILE_TEST_TASK extends TEST_TASK
 {
-  function _execute ()
+  protected function _execute ()
   {
     $file_options = global_file_options();
     $delimiter = $file_options->path_delimiter;
 
-    $this->_check_equal (FALSE, begins_with_delimiter ('path/to/the/folder/'));
-    $this->_check_equal (TRUE, begins_with_delimiter ($delimiter . 'path/to/the/folder/'));
-    $this->_check_equal (TRUE, ends_with_delimiter ('path/to/the/folder' . $file_options->path_delimiter));
-    $this->_check_equal (FALSE, ends_with_delimiter ('path/to/the/folder'));
+    $this->_check_equal (false, begins_with_delimiter ('path/to/the/folder/'));
+    $this->_check_equal (true, begins_with_delimiter ($delimiter . 'path/to/the/folder/'));
+    $this->_check_equal (true, ends_with_delimiter ('path/to/the/folder' . $file_options->path_delimiter));
+    $this->_check_equal (false, ends_with_delimiter ('path/to/the/folder'));
 
-    $this->_check_equal (TRUE, begins_with_delimiter (ensure_begins_with_delimiter ('path/to/the/folder/')));
-    $this->_check_equal (TRUE, begins_with_delimiter (ensure_begins_with_delimiter ('/path/to/the/folder/')));
-    $this->_check_equal (TRUE, ends_with_delimiter (ensure_ends_with_delimiter ('path/to/the/folder/')));
-    $this->_check_equal (TRUE, ends_with_delimiter (ensure_ends_with_delimiter ('path/to/the/folder')));
+    $this->_check_equal (true, begins_with_delimiter (ensure_begins_with_delimiter ('path/to/the/folder/')));
+    $this->_check_equal (true, begins_with_delimiter (ensure_begins_with_delimiter ('/path/to/the/folder/')));
+    $this->_check_equal (true, ends_with_delimiter (ensure_ends_with_delimiter ('path/to/the/folder/')));
+    $this->_check_equal (true, ends_with_delimiter (ensure_ends_with_delimiter ('path/to/the/folder')));
 
     $this->_check_equal ('untergeordnet_asthetisch', normalize_file_id ('Untergeordnet Ästhetisch'));
 
@@ -72,17 +72,17 @@ class FILE_TEST_TASK extends TEST_TASK
 
     $input_path->append ('../../../templates/wizards/new_application');
 
-    $files = file_list_for ($input_path->as_text (), '', TRUE);
+    $files = file_list_for ($input_path->as_text (), '', true);
     $this->_check_equal (140, sizeof ($files));
     $this->_check_equal ('code' . $delimiter . 'cmd' . $delimiter . '[[_entry_name_lc_]]_commands.php', $files [0]);
-    $files = file_list_for ($input_path->as_text (), '', FALSE);
+    $files = file_list_for ($input_path->as_text (), '', false);
     $this->_check_equal (1, sizeof ($files));
     $this->_check_equal ('config.ini', $files [0]);
 
-    $files = file_list_for ($input_path->as_text (), 'my/new/files', TRUE);
+    $files = file_list_for ($input_path->as_text (), 'my/new/files', true);
     $this->_check_equal (140, sizeof ($files));
     $this->_check_equal ('my' . $delimiter . 'new' . $delimiter . 'files' . $delimiter . 'code' . $delimiter . 'cmd' . $delimiter . '[[_entry_name_lc_]]_commands.php', $files [0]);
-    $files = file_list_for ($input_path->as_text (), 'my/new/files', FALSE);
+    $files = file_list_for ($input_path->as_text (), 'my/new/files', false);
     $this->_check_equal (1, sizeof ($files));
     $this->_check_equal ('my' . $delimiter . 'new' . $delimiter . 'files' . $delimiter . 'config.ini', $files [0]);
   }

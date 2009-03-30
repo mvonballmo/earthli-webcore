@@ -52,29 +52,33 @@ class PRINTABLE_COMMENT_GRID extends STANDARD_GRID
    * @var string
    */
   public $object_name = 'comment';
+
   /**
    * @var boolean
    */
-  public $show_separator = FALSE;
+  public $show_separator = false;
+
   /**
    * @var boolean
    */
-  public $show_controls = TRUE;
+  public $show_controls = true;
+
   /**
    * Paginate this set of comments?
-    * @var boolean
-    */
-  public $show_paginated = TRUE;
+   * @var boolean
+   */
+  public $show_paginated = true;
+
   /**
    * @var boolean
    */
-  public $show_user_info = TRUE;
+  public $show_user_info = true;
 
   /**
    * @param APPLICATION $application
    * @param COMMENT $comment Comments belong to this comment (can be empty).
    */
-  function PRINTABLE_COMMENT_GRID ($app, $comment)
+  public function PRINTABLE_COMMENT_GRID ($app, $comment)
   {
     GRID::GRID ($app);
     $this->_comment = $comment;
@@ -84,7 +88,7 @@ class PRINTABLE_COMMENT_GRID extends STANDARD_GRID
    * Show the paginator only if not printing.
    * @access private
    */
-  function _draw_paginator ()
+  protected function _draw_paginator ()
   {
     if ($this->_show_paginator)
     {
@@ -94,16 +98,17 @@ class PRINTABLE_COMMENT_GRID extends STANDARD_GRID
 
   /**
    * Show only the comment tree based on this comment.
-    * If empty, shows all comments from '_entry'.
-    * @var COMMENT
-    * @access private
-    */
+   * If empty, shows all comments from '_entry'.
+   * @var COMMENT
+   * @access private
+   */
   protected $_comment;
+
   /**
    * @var boolean
-    * @access private
-    */
-  protected $_show_paginator = FALSE;
+   * @access private
+   */
+  protected $_show_paginator = false;
 
 }
 ?>
