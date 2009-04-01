@@ -149,6 +149,11 @@ define ('Browser_robot', 'robot');
 define ('Browser_newsreader', 'newsreader');
 
 /**
+ * Browser is a previewer, like the bot Facebook uses to generate previews for linked URLs.
+ */
+define ('Browser_previewer', 'previewer');
+
+/**
  * Browser is running on Win32.
  */
 define ('Browser_os_windows', 'windows');
@@ -861,27 +866,31 @@ class USER_AGENT_PARSE_TABLES
    */
   function renderer_ids ()
   {
-    return array ('mozilla' => new USER_AGENT_RENDERER_INFO (Browser_netscape_4, 'Netscape 4.x', User_agent_temporary_renderer),
-                  'msie' => new USER_AGENT_RENDERER_INFO (Browser_ie, 'Trident (IE)', User_agent_temporary_renderer, 'Internet Explorer'),
-                  'rv' => new USER_AGENT_RENDERER_INFO (Browser_gecko, 'Gecko', User_agent_temporary_renderer, 'Mozilla'),
-                  'gecko' => new USER_AGENT_RENDERER_INFO (Browser_gecko, 'Gecko', User_agent_temporary_renderer, 'Mozilla'),
-                  'shiira' => new USER_AGENT_RENDERER_INFO (Browser_khtml, 'Webcore', User_agent_final_browser_abort, 'Shiira'),
-                  'applewebkit' => new USER_AGENT_RENDERER_INFO (Browser_khtml, 'Webcore', User_agent_final_renderer),
-                  'netscape6' => new USER_AGENT_RENDERER_INFO (Browser_gecko, 'Netscape', User_agent_final_browser),
-                  'chrome' => new USER_AGENT_RENDERER_INFO (Browser_khtml, 'Google Chrome', User_agent_final_browser_abort),
-                  'opera' => new USER_AGENT_RENDERER_INFO (Browser_opera, 'Presto (Opera)', User_agent_final_browser, 'Opera'),
-                  'konqueror' => new USER_AGENT_RENDERER_INFO (Browser_khtml, 'KHTML', User_agent_final_browser, 'Konqueror'),
-                  'omniweb' => new USER_AGENT_RENDERER_INFO (Browser_omniweb, 'OmniWeb', User_agent_final_browser),
-                  'webtv' => new USER_AGENT_RENDERER_INFO (Browser_webtv, 'WebTV', User_agent_final_browser),
-                  'googlebot' => new USER_AGENT_RENDERER_INFO (Browser_robot, 'Google Robot', User_agent_final_browser),
-                  'msnbot' => new USER_AGENT_RENDERER_INFO (Browser_robot, 'MSN Robot', User_agent_final_browser),
-                  'yahooseeker' => new USER_AGENT_RENDERER_INFO (Browser_robot, 'Yahoo Robot', User_agent_final_browser),
-                  'googlebot-image' => new USER_AGENT_RENDERER_INFO (Browser_robot, 'Google Robot', User_agent_final_browser),
-                  'lynx' => new USER_AGENT_RENDERER_INFO (Browser_text, 'Text', User_agent_final_browser, 'Lynx'),
-                  'icab' => new USER_AGENT_RENDERER_INFO (Browser_icab, 'iCab', User_agent_final_browser),
-                  'applesyndication' => new USER_AGENT_RENDERER_INFO (Browser_newsreader, 'Safari Newsreader', User_agent_final_browser),
-                  'yahoofeedseeker' => new USER_AGENT_RENDERER_INFO (Browser_newsreader, 'Yahoo Newsreader', User_agent_final_browser),
-                  );
+    return array (
+    	'mozilla' => new USER_AGENT_RENDERER_INFO (Browser_netscape_4, 'Netscape 4.x', User_agent_temporary_renderer),
+			'msie' => new USER_AGENT_RENDERER_INFO (Browser_ie, 'Trident (IE)', User_agent_temporary_renderer, 'Internet Explorer'),
+			'rv' => new USER_AGENT_RENDERER_INFO (Browser_gecko, 'Gecko', User_agent_temporary_renderer, 'Mozilla'),
+			'gecko' => new USER_AGENT_RENDERER_INFO (Browser_gecko, 'Gecko', User_agent_temporary_renderer, 'Mozilla'),
+			'shiira' => new USER_AGENT_RENDERER_INFO (Browser_khtml, 'Webcore', User_agent_final_browser_abort, 'Shiira'),
+			'applewebkit' => new USER_AGENT_RENDERER_INFO (Browser_khtml, 'Webcore', User_agent_final_renderer),
+			'netscape6' => new USER_AGENT_RENDERER_INFO (Browser_gecko, 'Netscape', User_agent_final_browser),
+			'chrome' => new USER_AGENT_RENDERER_INFO (Browser_khtml, 'Google Chrome', User_agent_final_browser_abort),
+			'opera' => new USER_AGENT_RENDERER_INFO (Browser_opera, 'Presto (Opera)', User_agent_final_browser, 'Opera'),
+			'konqueror' => new USER_AGENT_RENDERER_INFO (Browser_khtml, 'KHTML', User_agent_final_browser, 'Konqueror'),
+			'omniweb' => new USER_AGENT_RENDERER_INFO (Browser_omniweb, 'OmniWeb', User_agent_final_browser),
+			'webtv' => new USER_AGENT_RENDERER_INFO (Browser_webtv, 'WebTV', User_agent_final_browser),
+			'googlebot' => new USER_AGENT_RENDERER_INFO (Browser_robot, 'Google Robot', User_agent_final_browser),
+			'msnbot' => new USER_AGENT_RENDERER_INFO (Browser_robot, 'MSN Robot', User_agent_final_browser),
+			'yahooseeker' => new USER_AGENT_RENDERER_INFO (Browser_robot, 'Yahoo Robot', User_agent_final_browser),
+			'googlebot-image' => new USER_AGENT_RENDERER_INFO (Browser_robot, 'Google Robot', User_agent_final_browser),
+			'lynx' => new USER_AGENT_RENDERER_INFO (Browser_text, 'Text', User_agent_final_browser, 'Lynx'),
+			'icab' => new USER_AGENT_RENDERER_INFO (Browser_icab, 'iCab', User_agent_final_browser),
+			'applesyndication' => new USER_AGENT_RENDERER_INFO (Browser_newsreader, 'Safari Newsreader', User_agent_final_browser),
+			'yahoofeedseeker' => new USER_AGENT_RENDERER_INFO (Browser_newsreader, 'Yahoo Newsreader', User_agent_final_browser),
+			'newsgatoronline' => new USER_AGENT_RENDERER_INFO (Browser_newsreader, 'NewsGator', User_agent_final_browser),
+			'bloglines' => new USER_AGENT_RENDERER_INFO (Browser_newsreader, 'Bloglines', User_agent_final_browser),
+			'facebookexternalhit' => new USER_AGENT_RENDERER_INFO (Browser_previewer, 'Facebook Preview', User_agent_final_browser),
+    );
   }
 
   /**
@@ -921,7 +930,7 @@ class USER_AGENT_PARSE_TABLES
                   'cldc' => 1,                  // Nokia phone
                   'midp' => 1,                  // Nokia phone
                   'views' => 1,                 // Newsfeed readers
-                  'users' => 1                 // Newsfeed readers
+                  'users' => 1                  // Newsfeed readers
                   );
   }
 

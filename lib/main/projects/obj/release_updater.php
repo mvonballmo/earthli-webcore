@@ -96,7 +96,7 @@ class RELEASE_UPDATER extends WEBCORE_OBJECT
     {
       $release_query = $this->branch->release_query ();
       $release_query->set_order ('rel.time_next_deadline ASC');
-      $releases =& $release_query->objects ();
+      $releases = $release_query->objects ();
 
       /* Look for this release in the list of releases for this branch. If it's found,
          get the next release in the list, if it exists. If there is no newer release,
@@ -361,7 +361,7 @@ class UPDATE_RELEASE_PREVIEW_SETTINGS extends FORM_PREVIEW_SETTINGS
    */
   function _draw_section ($title, $text, &$query)
   {
-    $objs =& $query->objects ();
+    $objs = $query->objects ();
     if (sizeof ($objs))
     {
       $this->_objects_displayed = TRUE;
