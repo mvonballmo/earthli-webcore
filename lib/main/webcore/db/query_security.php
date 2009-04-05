@@ -168,7 +168,9 @@ class QUERY_SECURITY_RESTRICTION extends WEBCORE_OBJECT
     $this->_set_names = $set_names;
     $permissions = $this->login->permissions ();
     for ($idx_set = 0; $idx_set < sizeof ($set_names); $idx_set++)
+    {
       $privs [] = $permissions->value_for ($set_names [$idx_set], Privilege_view);
+    }
 
     if (! in_array (Privilege_always_denied, $privs))
     {

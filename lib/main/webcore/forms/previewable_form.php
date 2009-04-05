@@ -235,7 +235,7 @@ abstract class PREVIEWABLE_FORM extends FORM
  * @since 2.5.0
  * @abstract
  */
-class PREVIEWABLE_ID_BASED_FORM extends PREVIEWABLE_FORM
+abstract class PREVIEWABLE_ID_BASED_FORM extends PREVIEWABLE_FORM
 {
   /**
    * @param CONTEXT $context

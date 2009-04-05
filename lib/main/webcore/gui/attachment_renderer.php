@@ -202,10 +202,10 @@ class ATTACHMENT_RENDERER extends CONTENT_OBJECT_RENDERER
     $file_name = url_to_file_name ($file_url);
     $file_url = htmlentities ($file_url);
 
-    echo $this->_line ('[Name]: ' . $obj->original_file_name);
-    echo $this->_line ('[Size]: ' . file_size_as_text ($obj->size));
-    echo $this->_line ('[Type]: ' . $obj->mime_type);
-    echo $this->_par (' [URL]: <' . $file_url . '>');
+    echo $this->line ('[Name]: ' . $obj->original_file_name);
+    echo $this->line ('[Size]: ' . file_size_as_text ($obj->size));
+    echo $this->line ('[Type]: ' . $obj->mime_type);
+    echo $this->par (' [URL]: <' . $file_url . '>');
 
     $this->_echo_plain_text_description ($obj);
 
@@ -237,13 +237,13 @@ class ATTACHMENT_RENDERER extends CONTENT_OBJECT_RENDERER
   {
     $class_name = $this->app->final_class_name ('ARCHIVE', 'webcore/util/archive.php');
     $archive = new $class_name ($file_name);      
-    echo $this->_line ('[Files]');
-    echo $this->_sep ();
+    echo $this->line ('[Files]');
+    echo $this->sep ();
     $this->_longest_name = 0;
     $archive->for_each (new CALLBACK_METHOD ('list_file_as_text', $this));
     foreach ($this->_file_entries as $entry)
     {
-      echo $this->_line ($entry->name . str_repeat (' ', $this->_longest_name - strlen ($entry->name)) . ' (' . file_size_as_text ($entry->size) . ')');
+      echo $this->line ($entry->name . str_repeat (' ', $this->_longest_name - strlen ($entry->name)) . ' (' . file_size_as_text ($entry->size) . ')');
     }
   }
   

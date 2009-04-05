@@ -72,7 +72,7 @@ class ATTACHMENT_QUERY extends OBJECT_IN_SINGLE_FOLDER_QUERY
     $this->set_select ('att.*');
     $this->set_order ('att.time_created');
     $this->set_table ($this->app->table_names->attachments . ' att');
-    $this->add_table ($this->_host->_table_name () . ' host', 'att.object_id = host.id');
+    $this->add_table ($this->_host->table_name () . ' host', 'att.object_id = host.id');
   }
 
   /**

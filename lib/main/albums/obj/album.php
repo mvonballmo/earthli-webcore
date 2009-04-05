@@ -624,7 +624,7 @@ class ALBUM extends FOLDER
   public function store_to ($storage)
   {
     parent::store_to ($storage);
-    $tname =$this->_table_name ();
+    $tname =$this->table_name ();
     $storage->add ($tname, 'location', Field_type_string, $this->location);
     $storage->add ($tname, 'url_root', Field_type_string, $this->url_root);
     $storage->add ($tname, 'show_times', Field_type_integer, $this->show_times);

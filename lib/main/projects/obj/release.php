@@ -390,7 +390,7 @@ class RELEASE extends OBJECT_IN_FOLDER
   public function store_to ($storage)
   {
     parent::store_to ($storage);
-    $tname =$this->_table_name ();
+    $tname =$this->table_name ();
     $storage->add ($tname, 'branch_id', Field_type_integer, $this->branch_id, Storage_action_create);
     $storage->add ($tname, 'summary', Field_type_string, $this->summary);
     $storage->add ($tname, 'time_next_deadline', Field_type_date_time, $this->time_next_deadline);
@@ -468,7 +468,7 @@ class RELEASE extends OBJECT_IN_FOLDER
    * @return string
    * @access private
    */
-  protected function _table_name ()
+  public function table_name ()
   {
     return $this->app->table_names->releases;
   }

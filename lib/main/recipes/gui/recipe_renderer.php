@@ -93,19 +93,19 @@ class RECIPE_RENDERER extends DRAFTABLE_ENTRY_RENDERER
 
     if ($entry->originator)
     {
-      echo $this->_par ("From the kitchen of $entry->originator");
+      echo $this->par ("From the kitchen of $entry->originator");
     }
 
     $this->_echo_plain_text_description ($entry);
 
     if (! $this->_options->preferred_text_length)
     {
-      echo $this->_line ('Ingredients');
-      echo $this->_line ($this->_sep ());
+      echo $this->line ('Ingredients');
+      echo $this->line ($this->sep ());
       echo $entry->ingredients_as_plain_text ();
-      echo $this->_line ();
-      echo $this->_line ('Instructions');
-      echo $this->_line ($this->_sep ());
+      echo $this->line ();
+      echo $this->line ('Instructions');
+      echo $this->line ($this->sep ());
       echo $entry->instructions_as_plain_text ();
     }
   }

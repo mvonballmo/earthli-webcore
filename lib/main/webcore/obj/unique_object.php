@@ -104,7 +104,7 @@ abstract class UNIQUE_OBJECT extends NAMED_OBJECT
    */
   public function store_to ($storage)
   {
-    $tname = $this->_table_name ();
+    $tname = $this->table_name ();
     $storage->restrict ($tname, 'id');
     $storage->add ($tname, 'id', Field_type_integer, $this->id, Storage_action_none);
   }
@@ -142,7 +142,7 @@ abstract class UNIQUE_OBJECT extends NAMED_OBJECT
    * @access private
    * @abstract
    */
-  protected abstract function _table_name ();
+  protected abstract function table_name ();
 
   /**
    * @return SQL_UNIQUE_STORAGE
@@ -160,7 +160,7 @@ abstract class UNIQUE_OBJECT extends NAMED_OBJECT
    */
   protected function _purge ($options)
   {
-    $tname = $this->_table_name ();
+    $tname = $this->table_name ();
     $this->db->logged_query ("DELETE LOW_PRIORITY FROM {$tname} WHERE id = $this->id");
     $this->id = 0;
   }

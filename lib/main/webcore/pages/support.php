@@ -34,7 +34,9 @@ http://www.earthli.com/software/webcore
 
   $class_name = $Page->final_class_name ('SUBMIT_SUPPORT_FORM', 'webcore/forms/submit_support_form.php');
   $form = new $class_name ($Page);
-    
+
+  $browser = $Env->browser();
+  
   $form->process ($browser);
   if ($form->committed ())
   {

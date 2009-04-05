@@ -47,7 +47,7 @@ require_once ('webcore/forms/renderable_form.php');
  * @since 2.4.0
  * @abstract
  */
-class AUDITABLE_FORM extends RENDERABLE_FORM
+abstract class AUDITABLE_FORM extends RENDERABLE_FORM
 {
   /**
    * @param APPLICATION $app Main application.

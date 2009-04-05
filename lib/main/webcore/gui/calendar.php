@@ -246,7 +246,9 @@ abstract class CALENDAR extends WEBCORE_OBJECT
     $day_of_week = date ("w", $first_day);
 
     for ($i = 0; $i < $day_of_week; $i++)
+    {
       $this->make_blank ();
+    }
 
     $day_num = date ("j", $first_day);
 
@@ -285,7 +287,9 @@ abstract class CALENDAR extends WEBCORE_OBJECT
     if ($day_of_week % Days_in_week != 0)
     {
       for ($i = $day_of_week; $i % Days_in_week != 0; $i++)
+      {
         $this->make_blank ();
+      }
 
       $this->finish_week ($week, $month, $year);
     }

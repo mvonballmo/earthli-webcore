@@ -129,7 +129,7 @@ class ALBUM_RENDERER extends FOLDER_RENDERER
     {
       $f = $obj->first_day->formatter ();
       $f->clear_flags ();
-      echo $this->_line ($obj->format_date ($obj->first_day, $f) . ' - ' . $obj->format_date ($obj->last_day, $f));
+      echo $this->line ($obj->format_date ($obj->first_day, $f) . ' - ' . $obj->format_date ($obj->last_day, $f));
     }
     parent::_display_as_plain_text ($obj);
   }

@@ -89,7 +89,7 @@ abstract class MAIL_OBJECT_RENDERER extends MAIL_RENDERER
    */
   protected function _body ($obj, $options, $func)
   {
-    $state = null;  // Compiler warning
+    $state = new stdClass();
     $this->_start_rendering ($options, $state);
 
     ob_start ();

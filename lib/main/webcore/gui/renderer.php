@@ -54,9 +54,8 @@ class RENDERER extends WEBCORE_OBJECT
    * There is a newline at the end, but no extra spacing as in {@link _par()}.
    * @param string $text
    * @return string
-   * @access private
    */
-  protected function _line ($text = '')
+  public function line ($text = '')
   {
     return $text . $this->env->file_options->end_of_line;
   }
@@ -66,9 +65,8 @@ class RENDERER extends WEBCORE_OBJECT
    * Makes space at the bottom of the text.
    * @param string $text
    * @return string
-   * @access private
    */
-  protected function _par ($text = '')
+  public function par ($text = '')
   {
     return $text . $this->env->file_options->end_of_line . $this->env->file_options->end_of_line;
   }
@@ -79,11 +77,10 @@ class RENDERER extends WEBCORE_OBJECT
    * @param string $char
    * @param integer $len
    * @return string
-   * @access private
    */
-  protected function _sep ($char = '-', $len = 72)
+  public function sep ($char = '-', $len = 72)
   {
-    return $this->_line (str_repeat ($char, $len));
+    return $this->line (str_repeat ($char, $len));
   }
 
   /**
@@ -91,9 +88,8 @@ class RENDERER extends WEBCORE_OBJECT
    * @param DATE_TIME $t
    * @param integer $type Override the default formatting type.
    * @return string
-   * @access private
    */
-  protected function _time ($t, $type = null)
+  public function time ($t, $type = null)
   {
     $f = $t->formatter ();
     $f->clear_flags ();

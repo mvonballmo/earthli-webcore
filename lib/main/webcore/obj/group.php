@@ -117,7 +117,7 @@ class GROUP extends CONTENT_OBJECT
    * @return string
    * @access private
    */
-  protected function _table_name ()
+  public function table_name ()
   {
     return $this->app->table_names->groups;
   }

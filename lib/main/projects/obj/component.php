@@ -166,7 +166,7 @@ class COMPONENT extends OBJECT_IN_FOLDER
   public function store_to ($storage)
   {
     parent::store_to ($storage);
-    $tname =$this->_table_name ();
+    $tname =$this->table_name ();
     $fldr_id = $this->parent_folder_id ();
     $storage->add ($tname, 'folder_id', Field_type_integer, $fldr_id, Storage_action_create);
     $storage->add ($tname, 'icon_url', Field_type_string, $this->icon_url);
@@ -186,7 +186,7 @@ class COMPONENT extends OBJECT_IN_FOLDER
    * @return string
    * @access private
    */
-  protected function _table_name ()
+  public function table_name ()
   {
     return $this->app->table_names->components;
   }

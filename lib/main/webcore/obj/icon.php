@@ -93,7 +93,7 @@ class ICON extends RENDERABLE
   public function store_to ($storage)
   {
     parent::store_to ($storage);
-    $tname = $this->_table_name ();
+    $tname = $this->table_name ();
     $storage->add ($tname, 'title', Field_type_string, $this->title);
     $storage->add ($tname, 'category', Field_type_string, $this->category);
     $storage->add ($tname, 'url', Field_type_string, $this->url);
@@ -130,7 +130,7 @@ class ICON extends RENDERABLE
    * @return string
    * @access private
    */
-  protected function _table_name ()
+  public function table_name ()
   {
     return $this->app->table_names->icons;
   }

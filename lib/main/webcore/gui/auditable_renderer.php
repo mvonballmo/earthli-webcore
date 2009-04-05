@@ -185,14 +185,14 @@ class AUDITABLE_RENDERER extends OBJECT_RENDERER
     {
       if (! $top_aligned)
       {
-        echo $this->_sep ();
+        echo $this->sep ();
       }
 
       $this->_echo_plain_text_users ($obj);
 
       if ($top_aligned)
       {
-        echo $this->_line ($this->_sep ());
+        echo $this->line ($this->sep ());
       }
     }
   }
@@ -222,7 +222,7 @@ class AUDITABLE_RENDERER extends OBJECT_RENDERER
    */
   protected function _echo_plain_text_user ($caption, $user, $time)
   {
-    echo $this->_line ($caption . ' by ' . $user->title_as_plain_text () . ' on ' . $this->_time ($time));
+    echo $this->line ($caption . ' by ' . $user->title_as_plain_text () . ' on ' . $this->time ($time));
   }
 }
 

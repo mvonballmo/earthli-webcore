@@ -203,16 +203,16 @@ abstract class PROJECT_ENTRY_RENDERER extends ENTRY_RENDERER
         $this->_echo_plain_text_branch_release_info ($branch_info);
       }
 
-      echo $this->_line ();
+      echo $this->line ();
 
       if (isset ($status))
       {
-        echo '    ' . $this->_line ($status->as_plain_text ());
+        echo '    ' . $this->line ($status->as_plain_text ());
       }
 
       $this->_echo_plain_text_branch_info ($entry, $branch_info);
 
-      echo $this->_par ('');
+      echo $this->par ('');
     }
   }
 
@@ -226,7 +226,7 @@ abstract class PROJECT_ENTRY_RENDERER extends ENTRY_RENDERER
    */
   protected function _echo_plain_text_user ($caption, $user, $time)
   {
-    echo $this->_line ('[' . $caption . ']: ' . $this->_time ($time) . ' by ' . $user->title_as_plain_text ());
+    echo $this->line ('[' . $caption . ']: ' . $this->time ($time) . ' by ' . $user->title_as_plain_text ());
   }
 
   /**
@@ -240,8 +240,8 @@ abstract class PROJECT_ENTRY_RENDERER extends ENTRY_RENDERER
     {
       if ($entry->description)
       {
-        echo $this->_sep ();
-        echo $this->_line ();
+        echo $this->sep ();
+        echo $this->line ();
       }
       echo $entry->extra_description_as_plain_text ();
     }

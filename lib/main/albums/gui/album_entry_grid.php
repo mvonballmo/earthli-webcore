@@ -46,7 +46,7 @@ require_once ('webcore/gui/entry_grid.php');
  * @version 3.0.0
  * @since 2.7.0
  */
-class ALBUM_ENTRY_GRID extends CONTENT_OBJECT_GRID
+abstract class ALBUM_ENTRY_GRID extends CONTENT_OBJECT_GRID
 {
   /**
    * Render the grid itself.

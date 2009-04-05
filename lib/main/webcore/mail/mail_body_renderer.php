@@ -204,7 +204,7 @@ class MAIL_BODY_RENDERER extends MAIL_RENDERER
 
           if ($obj_idx < $num_objs - 1)
           {
-            $Result .= $this->_line ($this->_sep ('='));
+            $Result .= $this->line ($this->sep ('='));
           }
         }
 
@@ -222,15 +222,15 @@ class MAIL_BODY_RENDERER extends MAIL_RENDERER
    */
   protected function _build_html_header ()
   {
-    $Result = $this->_line ("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">");
-    $Result .= $this->_line ("<html>");
-    $Result .= $this->_line ("<head>");
-    $Result .= $this->_line ("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=iso-8859-1\">");
+    $Result = $this->line ("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">");
+    $Result .= $this->line ("<html>");
+    $Result .= $this->line ("<head>");
+    $Result .= $this->line ("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=iso-8859-1\">");
 
     $Result .= $this->_html_head_content ();
 
-    $Result .= $this->_line ("</head>");
-    $Result .= $this->_line ("<body>");
+    $Result .= $this->line ("</head>");
+    $Result .= $this->line ("<body>");
 
     return $Result;
   }
@@ -250,8 +250,8 @@ class MAIL_BODY_RENDERER extends MAIL_RENDERER
    */
   protected function _build_html_footer ()
   {
-    $Result = $this->_line ("</body>");
-    $Result .= $this->_line ("</html>");
+    $Result = $this->line ("</body>");
+    $Result .= $this->line ("</html>");
 
     return $Result;
   }

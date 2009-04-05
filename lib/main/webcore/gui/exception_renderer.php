@@ -266,8 +266,8 @@ class EXCEPTION_RENDERER extends OBJECT_RENDERER
     $error_message = $obj->message;
     $browser = $this->env->browser ();
 
-    echo $this->_par ($error_message);
-    echo $this->_sep ();
+    echo $this->par ($error_message);
+    echo $this->sep ();
 
     $table = new TEXT_TABLE_RENDERER ($this);
 
@@ -325,7 +325,7 @@ class EXCEPTION_RENDERER extends OBJECT_RENDERER
 
     $table->display ();
 
-    echo $this->_line ();
+    echo $this->line ();
 
     if ($this->_options->include_page_data)
     {
@@ -346,9 +346,9 @@ class EXCEPTION_RENDERER extends OBJECT_RENDERER
   {
     if (sizeof ($arr))
     {
-      echo $this->_par ($title . ':');
+      echo $this->par ($title . ':');
       print_r ($arr);
-      echo $this->_line ();
+      echo $this->line ();
     }
   }
 

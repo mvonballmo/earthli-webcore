@@ -87,13 +87,13 @@ class JOURNAL_RENDERER extends ENTRY_RENDERER
   protected function _display_as_plain_text ($entry)
   {
     $props = $entry->weather_icon_properties ();
-    echo $this->_line ($props->title);
-    echo $this->_line ($entry->temperature_as_text ());
-    echo $this->_line ($entry->weather_as_plain_text ());
+    echo $this->line ($props->title);
+    echo $this->line ($entry->temperature_as_text ());
+    echo $this->line ($entry->weather_as_plain_text ());
 
     $this->_echo_plain_text_description ($entry);
 
-    echo $this->_sep ();
+    echo $this->sep ();
     $this->_echo_plain_text_user_information ($entry, 'info-box-bottom');
   }
 

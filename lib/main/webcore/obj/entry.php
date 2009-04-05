@@ -110,7 +110,7 @@ class ENTRY extends ATTACHMENT_HOST
   public function store_to ($storage)
   {
     parent::store_to ($storage);
-    $tname =$this->_table_name ();
+    $tname =$this->table_name ();
     $fldr_id = $this->parent_folder_id ();
     $storage->add ($tname, 'folder_id', Field_type_integer, $fldr_id);
   }
@@ -165,7 +165,7 @@ class ENTRY extends ATTACHMENT_HOST
    * @return string
    * @access private
    */
-  protected function _table_name ()
+  public function table_name ()
   {
     return $this->app->table_names->entries;
   }
@@ -428,7 +428,7 @@ class DRAFTABLE_ENTRY extends ENTRY
   public function store_to ($storage)
   {
     parent::store_to ($storage);
-    $tname =$this->_table_name ();
+    $tname =$this->table_name ();
 
     if ($this->unpublished ())
     {

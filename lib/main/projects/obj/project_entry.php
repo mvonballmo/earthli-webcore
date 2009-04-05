@@ -310,7 +310,7 @@ abstract class PROJECT_ENTRY extends MULTI_TYPE_ENTRY
   public function store_to ($storage)
   {
     parent::store_to ($storage);
-    $tname =$this->_table_name ();
+    $tname =$this->table_name ();
     $storage->add ($tname, 'extra_description', Field_type_string, $this->extra_description);
     $storage->add ($tname, 'kind', Field_type_integer, $this->kind);
     $storage->add ($tname, 'component_id', Field_type_integer, $this->component_id);
@@ -573,7 +573,7 @@ abstract class PROJECT_ENTRY_BRANCH_INFO extends UNIQUE_OBJECT
     }
 
     parent::store_to ($storage);
-    $tname = $this->_table_name ();
+    $tname = $this->table_name ();
     $storage->add ($tname, 'entry_id', Field_type_integer, $this->entry_id);
     $storage->add ($tname, 'branch_id', Field_type_integer, $this->branch_id);
     $storage->add ($tname, 'branch_release_id', Field_type_integer, $this->release_id);
@@ -588,7 +588,7 @@ abstract class PROJECT_ENTRY_BRANCH_INFO extends UNIQUE_OBJECT
    * @return string
    * @access private
    */
-  protected function _table_name ()
+  public function table_name ()
   {
     return $this->app->table_names->entries_to_branches;
   }

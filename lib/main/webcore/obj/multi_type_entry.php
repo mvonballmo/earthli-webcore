@@ -81,7 +81,7 @@ abstract class MULTI_TYPE_ENTRY extends ENTRY
   public function store_to ($storage)
   {
     parent::store_to ($storage);
-    $storage->add ($this->_table_name (), 'type', Field_type_string, $this->type, Storage_action_create);
+    $storage->add ($this->table_name (), 'type', Field_type_string, $this->type, Storage_action_create);
     $tname = $this->_secondary_table_name ();
     $storage->add ($tname, 'entry_id', Field_type_integer, $this->entry_id, Storage_action_create);
     $storage->restrict ($tname, 'entry_id');

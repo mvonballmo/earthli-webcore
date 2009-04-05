@@ -191,12 +191,12 @@ class CHANGE_RENDERER extends PROJECT_ENTRY_RENDERER
    */
   protected function _display_as_plain_text ($entry)
   {
-    echo $this->_line ('[Kind]: ' . $entry->kind_as_text ());
+    echo $this->line ('[Kind]: ' . $entry->kind_as_text ());
 
     $job = $entry->job ();
     if (isset ($job))
     {
-      echo $this->_line ('[Job]: ' . $job->title_as_plain_text ());
+      echo $this->line ('[Job]: ' . $job->title_as_plain_text ());
     }
 
     $this->_echo_plain_text_user_information ($entry);
@@ -213,7 +213,7 @@ class CHANGE_RENDERER extends PROJECT_ENTRY_RENDERER
   protected function _echo_plain_text_branch_info ($entry, $branch_info)
   {
     $applier = $branch_info->applier ();
-    echo '    Applied ' . $this->_time ($branch_info->time_applied) . ' by ' . $applier->title_as_plain_text ();
+    echo '    Applied ' . $this->time ($branch_info->time_applied) . ' by ' . $applier->title_as_plain_text ();
   }
 
   /**

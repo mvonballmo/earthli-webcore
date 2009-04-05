@@ -142,7 +142,7 @@ class BROWSER_RENDERER extends OBJECT_RENDERER
     
     if ($this->show_user_agent)
     {
-      echo $this->_par ($browser->user_agent_string);
+      echo $this->par ($browser->user_agent_string);
     }
     $table = new TEXT_TABLE_RENDERER ($this);
 

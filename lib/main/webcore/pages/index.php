@@ -56,6 +56,8 @@ http://www.earthli.com/software/webcore
     $folders = $folder_query->root_tree ($App->root_folder_id);
     $folder = $folder_query->object_at_id ($App->root_folder_id);
   }
+  
+  $folder_query->clear_restrictions();
 
   if (! sizeof ($folders) && $App->login->is_anonymous ())
   {

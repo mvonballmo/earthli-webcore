@@ -99,7 +99,6 @@ class MUNGER_TEST_TASK extends MUNGER_BASE_TEST_TASK
 
   protected function _run_plain_text_tests ()
   {
-    $old_show_html_output = $this->show_html_output;
     $this->show_html_output = false;
 
     $this->_munger = new PLAIN_TEXT_MUNGER ();

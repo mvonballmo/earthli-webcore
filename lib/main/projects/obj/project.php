@@ -167,7 +167,7 @@ class PROJECT extends FOLDER
   public function store_to ($storage)
   {
     parent::store_to ($storage);
-    $tname = $this->_table_name ();
+    $tname = $this->table_name ();
     $storage->add ($tname, 'options_id', Field_type_integer, $this->options_id);
     $storage->add ($tname, 'trunk_id', Field_type_integer, $this->trunk_id);
   }

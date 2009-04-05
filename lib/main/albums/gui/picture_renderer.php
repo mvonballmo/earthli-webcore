@@ -70,8 +70,8 @@ class PICTURE_RENDERER extends ENTRY_RENDERER
     $folder = $entry->parent_folder ();
     $f = $entry->date->formatter ();
     $f->clear_flags ();
-    echo $this->_line ($folder->format_date ($entry->date, $f));
-    echo $this->_line ('<' . $entry->full_file_name () . '>');
+    echo $this->line ($folder->format_date ($entry->date, $f));
+    echo $this->line ('<' . $entry->full_file_name () . '>');
     parent::_display_as_plain_text ($entry);
   }
 

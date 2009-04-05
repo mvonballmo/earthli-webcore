@@ -267,7 +267,7 @@ abstract class AUDITABLE extends RENDERABLE
   public function store_to ($storage)
   {
     parent::store_to ($storage);
-    $tname = $this->_table_name ();
+    $tname = $this->table_name ();
     $storage->add ($tname, 'time_created', Field_type_date_time, $this->time_created, Storage_action_create);
     $storage->add ($tname, 'creator_id', Field_type_integer, $this->creator_id, Storage_action_create);
     $storage->add ($tname, 'time_modified', Field_type_date_time, $this->time_modified);

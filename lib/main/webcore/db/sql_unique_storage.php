@@ -60,9 +60,9 @@ class SQL_UNIQUE_STORAGE extends SQL_STORAGE
   {
     parent::_commit_table ($table, $action, $obj);
 
-    if ($table->name == $obj->_table_name () && ($action == Storage_action_create))
+    if ($table->name == $obj->table_name () && ($action == Storage_action_create))
     {
-      $this->db->logged_query ('SELECT id FROM ' . $obj->_table_name () . ' ORDER BY id DESC LIMIT 1');
+      $this->db->logged_query ('SELECT id FROM ' . $obj->table_name () . ' ORDER BY id DESC LIMIT 1');
         // get the last record created
       $this->db->next_record ();
       $obj->id = $this->db->f ("id");

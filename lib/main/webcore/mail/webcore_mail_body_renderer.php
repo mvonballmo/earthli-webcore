@@ -227,7 +227,7 @@ class MAIL_TOC_ENTRY_RENDERER extends RENDERER
    */
   public function pair_as_plain_text_for_table ($pair, $indent)
   {
-    return $this->_line ($indent . $pair->obj->title_as_plain_text ());
+    return $this->line ($indent . $pair->obj->title_as_plain_text ());
   }
 
   /**
@@ -269,11 +269,11 @@ class MAIL_TOC_ENTRY_RENDERER extends RENDERER
     $Result = '';
     if (isset ($this->main_pair))
     {
-      $Result .= $this->_line ($this->pair_as_plain_text_item ($this->main_pair, $options));
+      $Result .= $this->line ($this->pair_as_plain_text_item ($this->main_pair, $options));
     }
     foreach ($this->pairs as $pair)
     {
-      $Result .= $this->_line ($this->pair_as_plain_text_item ($pair, $options));
+      $Result .= $this->line ($this->pair_as_plain_text_item ($pair, $options));
     }
     return $Result;
   }
@@ -427,12 +427,12 @@ class MAIL_TOC_GROUP_RENDERER extends RENDERER
   {
     if (isset ($this->folder))
     {
-      $Result = $this->_line ($this->subject->as_text () . ' in ' . $this->folder->title_as_plain_text ());
+      $Result = $this->line ($this->subject->as_text () . ' in ' . $this->folder->title_as_plain_text ());
       foreach ($this->entries as $entry)
       {
         $Result .= $entry->as_plain_text_for_table ();
       }
-      $Result .= $this->_line ();
+      $Result .= $this->line ();
 
       return $Result;
     }
@@ -451,12 +451,12 @@ class MAIL_TOC_GROUP_RENDERER extends RENDERER
 
     if (isset ($this->folder))
     {
-      $Result = $this->_line ();
-      $Result .= $this->_line ();
-      $Result .= $this->_sep ('=');
-      $Result .= $this->_line ($this->folder->title_as_plain_text ());
-      $Result .= $this->_sep ('=');
-      $Result .= $this->_line ();
+      $Result = $this->line ();
+      $Result .= $this->line ();
+      $Result .= $this->sep ('=');
+      $Result .= $this->line ($this->folder->title_as_plain_text ());
+      $Result .= $this->sep ('=');
+      $Result .= $this->line ();
     }
 
     $idx = 0;
@@ -464,8 +464,8 @@ class MAIL_TOC_GROUP_RENDERER extends RENDERER
     {
       if ($idx != 0)
       {
-        $Result .= $this->_par ();
-        $Result .= $this->_line ($this->_sep ('='));
+        $Result .= $this->par ();
+        $Result .= $this->line ($this->sep ('='));
       }
       $idx++;
       $Result .= $entry->as_plain_text_for_items ($options);
@@ -598,7 +598,7 @@ class MAIL_TOC_RENDERER extends RENDERER
    */
   public function table_as_plain_text ($options)
   {
-    $Result = $this->_par ("There are [{$options->content_summary}] items in this email.");
+    $Result = $this->par ("There are [{$options->content_summary}] items in this email.");
     foreach ($this->groups as $group)
     {
       $Result .= $group->as_plain_text_for_table ();

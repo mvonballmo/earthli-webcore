@@ -49,7 +49,7 @@ require_once ('webcore/forms/storable_form.php');
  * @since 2.5.0
  * @abstract
  */
-class UNIQUE_OBJECT_FORM extends STORABLE_FORM
+abstract class UNIQUE_OBJECT_FORM extends STORABLE_FORM
 {
   /**
    * @param CONTEXT $context.

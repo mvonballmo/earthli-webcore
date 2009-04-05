@@ -147,7 +147,7 @@ class BRANCH_RENDERER extends CONTENT_OBJECT_RENDERER
     if (isset ($release))
     {
       $branch = $release->branch ();
-      echo $this->_par ($branch->title_as_link () . $this->app->display_options->object_separator . $release->title_as_link ());
+      echo $this->par ($branch->title_as_link () . $this->app->display_options->object_separator . $release->title_as_link ());
     }
 
     echo $obj->description_as_plain_text ();

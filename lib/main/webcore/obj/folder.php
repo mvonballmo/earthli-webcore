@@ -457,7 +457,7 @@ class FOLDER extends ATTACHMENT_HOST
   public function store_to ($storage)
   {
     parent::store_to ($storage);
-    $tname =$this->_table_name ();
+    $tname =$this->table_name ();
     $storage->add ($tname, 'parent_id', Field_type_integer, $this->parent_id);
     $storage->add ($tname, 'root_id', Field_type_integer, $this->root_id);
     $storage->add ($tname, 'permissions_id', Field_type_integer, $this->permissions_id);
@@ -687,7 +687,7 @@ class FOLDER extends ATTACHMENT_HOST
    * @return string
    * @access private
    */
-  protected function _table_name ()
+  public function table_name ()
   {
     return $this->app->table_names->folders;
   }

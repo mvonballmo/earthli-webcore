@@ -91,7 +91,7 @@ abstract class ALBUM_ENTRY extends MULTI_TYPE_ENTRY
   public function store_to ($storage)
   {
     parent::store_to ($storage);
-    $storage->add ($this->_table_name (), 'date', Field_type_date_time, $this->date);
+    $storage->add ($this->table_name (), 'date', Field_type_date_time, $this->date);
     
     $folder = $this->parent_folder ();
     $folder->include_entry ($this);

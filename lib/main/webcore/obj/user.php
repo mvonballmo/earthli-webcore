@@ -485,7 +485,7 @@ class USER extends CONTENT_OBJECT
     if (! isset ($this->_folder_query))
     {
       $class_name = $this->app->final_class_name ('USER_FOLDER_QUERY', 'webcore/db/user_folder_query.php');
-      $this->_folder_query = new $class_name ($this->app);
+      return new $class_name ($this->app);
     }
 
     return $this->_folder_query;
@@ -703,7 +703,7 @@ class USER extends CONTENT_OBJECT
   public function store_to ($storage)
   {
     parent::store_to ($storage);
-    $tname =$this->_table_name ();
+    $tname =$this->table_name ();
 
     if ($this->ip_address)
     {
@@ -817,7 +817,7 @@ class USER extends CONTENT_OBJECT
    * @return string
    * @access private
    */
-  protected function _table_name ()
+  public function table_name ()
   {
     return $this->app->table_names->users;
   }

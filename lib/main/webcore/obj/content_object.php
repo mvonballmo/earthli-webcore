@@ -105,7 +105,7 @@ abstract class CONTENT_OBJECT extends AUDITABLE
   public function store_to ($storage)
   {
     parent::store_to ($storage);
-    $tname = $this->_table_name ();
+    $tname = $this->table_name ();
     $storage->add ($tname, 'title', Field_type_string, $this->title);
     $storage->add ($tname, 'description', Field_type_string, $this->description);
   }

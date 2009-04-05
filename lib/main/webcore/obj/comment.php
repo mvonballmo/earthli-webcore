@@ -266,7 +266,7 @@ class COMMENT extends ATTACHMENT_HOST
   public function store_to ($storage)
   {
     parent::store_to ($storage);
-    $tname =$this->_table_name ();
+    $tname =$this->table_name ();
     $storage->add ($tname, 'entry_id', Field_type_integer, $this->entry_id, Storage_action_create);
     $storage->add ($tname, 'parent_id', Field_type_integer, $this->parent_id, Storage_action_create);
     $storage->add ($tname, 'number', Field_type_integer, $this->number, Storage_action_create);
@@ -324,7 +324,7 @@ class COMMENT extends ATTACHMENT_HOST
    * @return string
    * @access private
    */
-  protected function _table_name ()
+  public function table_name ()
   {
     return $this->app->table_names->comments;
   }

@@ -90,8 +90,8 @@ class SEND_MAIL_FORM_RENDERER extends MAIL_OBJECT_RENDERER
     if ($obj->value_for ('message'))
     {
       $munger = $this->context->plain_text_formatter ();
-      echo $this->_line ($munger->transform ($obj->value_for ('message')));
-      echo $this->_par ('- ' . $obj->value_for ('sender_name'));
+      echo $this->line ($munger->transform ($obj->value_for ('message')));
+      echo $this->par ('- ' . $obj->value_for ('sender_name'));
     }
   }
 }

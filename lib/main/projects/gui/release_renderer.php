@@ -102,8 +102,8 @@ class RELEASE_RENDERER extends CONTENT_OBJECT_RENDERER
   protected function _display_as_plain_text(& $obj) 
   {
     $status = $obj->status ();
-    echo $this->_line ('Test Date: ' . $status->test->as_plain_text ());
-    echo $this->_par ('Ship Date: ' . $status->ship->as_plain_text ());
+    echo $this->line ('Test Date: ' . $status->test->as_plain_text ());
+    echo $this->par ('Ship Date: ' . $status->ship->as_plain_text ());
     
     echo $this->_echo_plain_text_description($obj);
     $this->_echo_plain_text_user_information($obj);

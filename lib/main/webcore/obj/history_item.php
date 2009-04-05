@@ -402,7 +402,7 @@ class HISTORY_ITEM extends RENDERABLE
     }
 
     parent::store_to ($storage);
-    $tname = $this->_table_name ();
+    $tname = $this->table_name ();
     $storage->add ($tname, 'object_type', Field_type_string, $this->object_type, Storage_action_create);
     $storage->add ($tname, 'object_id', Field_type_integer, $this->object_id, Storage_action_create);
     $storage->add ($tname, 'user_id', Field_type_integer, $this->user_id, Storage_action_create);
@@ -610,7 +610,7 @@ class HISTORY_ITEM extends RENDERABLE
    * @return string
    * @access private
    */
-  protected function _table_name ()
+  public function table_name ()
   {
     return $this->app->table_names->history_items;
   }

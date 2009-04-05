@@ -122,7 +122,7 @@ class CONTENT_OBJECT_RENDERER extends AUDITABLE_RENDERER
     {
       $munger = $obj->plain_text_formatter ();
       $this->_prepare_formatter ($munger);
-      echo $this->_line ($munger->transform ($text, $obj));
+      echo $this->line ($munger->transform ($text, $obj));
     }
   }
 

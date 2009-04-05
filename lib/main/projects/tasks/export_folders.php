@@ -39,7 +39,9 @@ http://www.earthli.com/software/webcore/projects
         // format it as a tree
 
         for ($i = 0; $i < $depth; $i++)
+        {
           fwrite ($fhandle, '  ');
+        }
 
         // export the folder
 

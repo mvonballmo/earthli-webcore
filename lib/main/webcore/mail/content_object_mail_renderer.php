@@ -82,11 +82,11 @@ class CONTENT_OBJECT_MAIL_RENDERER extends MAIL_OBJECT_RENDERER
   {
     $f = $obj->title_formatter ();
     $f->max_visible_output_chars = 0;
-    echo $this->_line ($obj->title_as_plain_text ($f));
-    echo $this->_sep ();
-    echo $this->_line ($obj->object_url_as_text ($this->app->mail_options->object_separator));
-    echo $this->_line ('<' . $obj->home_page () . '>');
-    echo $this->_sep ();
+    echo $this->line ($obj->title_as_plain_text ($f));
+    echo $this->sep ();
+    echo $this->line ($obj->object_url_as_text ($this->app->mail_options->object_separator));
+    echo $this->line ('<' . $obj->home_page () . '>');
+    echo $this->sep ();
 
     $renderer = $obj->handler_for (Handler_text_renderer, $options);
     $renderer->display ($obj);

@@ -52,7 +52,7 @@ define ('Form_load_action_clone', 'clone');
  * @since 2.5.0
  * @abstract
  */
-class STORABLE_FORM extends PREVIEWABLE_FORM
+abstract class STORABLE_FORM extends PREVIEWABLE_FORM
 {
   /**
    * Is a clone operation loaded?

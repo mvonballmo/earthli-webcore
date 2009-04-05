@@ -48,7 +48,7 @@ require_once ('webcore/forms/unique_object_form.php');
  * @since 2.5.0
  * @abstract
  */
-class RENDERABLE_FORM extends UNIQUE_OBJECT_FORM
+abstract class RENDERABLE_FORM extends UNIQUE_OBJECT_FORM
 {
   /**
    * Enable previewing for these forms.

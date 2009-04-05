@@ -924,8 +924,8 @@ class SUBSCRIPTION_SETTINGS_MAIL_RENDERER extends MAIL_OBJECT_RENDERER
   protected function _echo_text_content ($obj, $excerpt_length)
   {
     $link = $this->app->resolve_file ("view_user_subscriptions.php?email=" . Subscriber_email_alias);
-    echo $this->_line ("This email was generated automatically. Check your subscription settings:");
-    echo $this->_line ("<$link>");
+    echo $this->line ("This email was generated automatically. Check your subscription settings:");
+    echo $this->line ("<$link>");
   }
 }
 

@@ -55,27 +55,27 @@ class DEFAULT_PHP_MAIL_PROVIDER extends MAIL_PROVIDER
   protected function _internal_send ($message)
   {
     $mailer_id = "PHP " . phpversion ();
-    $header = $this->renderer->_line ("From: $message->send_from_name <$message->send_from_address>");
-    $header .= $this->renderer->_line ("X-Sender: <$message->send_from_address>");
-    $header .= $this->renderer->_line ("X-Mailer: <$mailer_id>");
-    $header .= $this->renderer->_line ("X-Priority: $message->priority");
-    $header .= $this->renderer->_line ("Return-Path: <$message->return_path_address>");
-    $header .= $this->renderer->_line ("MIME-Version: 1.0");
+    $header = $this->renderer->line ("From: $message->send_from_name <$message->send_from_address>");
+    $header .= $this->renderer->line ("X-Sender: <$message->send_from_address>");
+    $header .= $this->renderer->line ("X-Mailer: <$mailer_id>");
+    $header .= $this->renderer->line ("X-Priority: $message->priority");
+    $header .= $this->renderer->line ("Return-Path: <$message->return_path_address>");
+    $header .= $this->renderer->line ("MIME-Version: 1.0");
     if ($message->send_as_html)
     {
-      $header .= $this->renderer->_line ("Content-Type: text/html; charset=iso-8859-1");
+      $header .= $this->renderer->line ("Content-Type: text/html; charset=iso-8859-1");
     }
     else
     {
-      $header .= $this->renderer->_line ("Content-Type: text/plain");
+      $header .= $this->renderer->line ("Content-Type: text/plain");
     }
     if (sizeof ($message->cc))
     {
-      $header .= $this->renderer->_line ("Cc: " . implode (",", $message->cc));
+      $header .= $this->renderer->line ("Cc: " . implode (",", $message->cc));
     }
     if (sizeof ($message->bcc))
     {
-      $header .= $this->renderer->_line ("Bcc: " . implode (",", $message->bcc));
+      $header .= $this->renderer->line ("Bcc: " . implode (",", $message->bcc));
     }
     if (sizeof ($message->custom_headers))
     {

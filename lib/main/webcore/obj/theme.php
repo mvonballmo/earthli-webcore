@@ -161,7 +161,7 @@ class THEME extends RENDERABLE
   public function store_to ($storage)
   {
     parent::store_to ($storage);
-    $tname = $this->_table_name ();
+    $tname = $this->table_name ();
     $storage->add ($tname, 'title', Field_type_string, $this->title);
     $storage->add ($tname, 'renderer_class_name', Field_type_string, $this->renderer_class_name);
     $storage->add ($tname, 'main_CSS_file_name', Field_type_string, $this->main_CSS_file_name);
@@ -186,7 +186,7 @@ class THEME extends RENDERABLE
    * @return string
    * @access private
    */
-  protected function _table_name ()
+  public function table_name ()
   {
     return $this->page->theme_options->table_name;
   }

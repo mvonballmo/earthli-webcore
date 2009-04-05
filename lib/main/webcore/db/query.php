@@ -608,7 +608,7 @@ abstract class QUERY extends WEBCORE_OBJECT
 
     if ($id > 0)
     {
-      $Result = false;
+      $Result = null;
 
       if (isset ($this->_objects))
       {
@@ -626,14 +626,18 @@ abstract class QUERY extends WEBCORE_OBJECT
 
       $this->_start_system_call ($this->alias . '.' . $this->id . '=' . $id);
       $objs = $this->objects ();
-      $Result = $objs [0];
+      
+      if (!empty($objs))
+      {
+        $Result = $objs [0];
+      }
+      
       $this->_end_system_call ();
 
       return $Result;
     }
 
-    global $Null_reference;
-    return $Null_reference;
+    return null;
   }
 
   /**
@@ -1116,7 +1120,10 @@ abstract class QUERY extends WEBCORE_OBJECT
    * @return integer
    * @access private
    */
-  protected function _id_for_object ($obj) { return $obj->id; }
+  protected function _id_for_object ($obj) 
+  { 
+    return $obj->id; 
+  }
 
   /**
    * Used internally to signal that parameters are updated for a system-initiated retrieval.
@@ -1552,7 +1559,8 @@ class QUERY_BASED_CACHE extends RAISABLE
     }
     
     $Result = $this->query->object_at_id ($id);
-    $this->_cache [$Result->id] = $Result;
+    
+    $this->add_object($Result);
 
     return $Result;
   }
@@ -1564,7 +1572,10 @@ class QUERY_BASED_CACHE extends RAISABLE
    */
   public function add_object ($obj)
   {
-    $this->_cache [$obj->id] = $obj;
+    if (isset($obj))
+    {
+      $this->_cache [$obj->id] = $obj;
+    }
   }
 
   /**

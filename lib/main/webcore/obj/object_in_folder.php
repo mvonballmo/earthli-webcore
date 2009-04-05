@@ -445,7 +445,7 @@ abstract class OBJECT_IN_FOLDER extends CONTENT_OBJECT
   public function store_to ($storage)
   {
     parent::store_to ($storage);
-    $tname = $this->_table_name ();
+    $tname = $this->table_name ();
     $storage->add ($tname, 'state', Field_type_integer, $this->state);
     $storage->add ($tname, 'owner_id', Field_type_integer, $this->owner_id);
   }

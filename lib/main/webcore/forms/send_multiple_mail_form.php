@@ -46,7 +46,7 @@ require_once ('webcore/forms/send_mail_form.php');
  * @version 3.0.0
  * @since 2.2.1
  */
-class SEND_MULTIPLE_MAIL_FORM extends SEND_MAIL_FORM
+abstract class SEND_MULTIPLE_MAIL_FORM extends SEND_MAIL_FORM
 {
   /**
    * @var bool

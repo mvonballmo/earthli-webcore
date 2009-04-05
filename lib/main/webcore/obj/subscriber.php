@@ -525,7 +525,7 @@ class SUBSCRIBER extends UNIQUE_OBJECT
   public function store_to ($storage)
   {
     parent::store_to ($storage);
-    $tname = $this->_table_name ();
+    $tname = $this->table_name ();
     $storage->add ($tname, 'send_as_html', Field_type_boolean, $this->send_as_html);
     $storage->add ($tname, 'preferred_text_length', Field_type_integer, $this->preferred_text_length);
     $storage->add ($tname, 'send_own_changes', Field_type_boolean, $this->send_own_changes);
@@ -573,7 +573,7 @@ class SUBSCRIBER extends UNIQUE_OBJECT
    * @return string
    * @access private
    */
-  protected function _table_name ()
+  public function table_name ()
   {
     return $this->app->table_names->subscribers;
   }

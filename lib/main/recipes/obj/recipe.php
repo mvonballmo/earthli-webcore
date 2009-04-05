@@ -190,7 +190,7 @@ class RECIPE extends DRAFTABLE_ENTRY
   public function store_to ($storage)
   {
     parent::store_to ($storage);
-    $tname = $this->_table_name ();
+    $tname = $this->table_name ();
     $storage->add ($tname, 'picture_url', Field_type_string, $this->picture_url);
     $storage->add ($tname, 'originator', Field_type_string, $this->originator);
     $storage->add ($tname, 'ingredients', Field_type_string, $this->ingredients);

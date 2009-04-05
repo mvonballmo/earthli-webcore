@@ -58,7 +58,7 @@ class HISTORY_ITEM_RENDERER extends OBJECT_RENDERER
     $creator = $obj->creator ();
 ?>
   <p class="detail">
-    <?php echo $obj->kind_as_icon () . ' ' . $creator->title_as_link () . ' - ' . $this->_time ($obj->time_created); ?>
+    <?php echo $obj->kind_as_icon () . ' ' . $creator->title_as_link () . ' - ' . $this->time ($obj->time_created); ?>
   </p>
 <?php
     if (! $obj->description && ! $obj->system_description)
@@ -88,18 +88,18 @@ class HISTORY_ITEM_RENDERER extends OBJECT_RENDERER
   protected function _display_as_plain_text ($obj)
   {
     $creator = $obj->creator ();
-    echo $this->_line (ucfirst ($obj->kind_as_text ()) . ' by ' . $creator->title_as_plain_text () . ' - ' . $this->_time ($obj->time_created));
-    echo $this->_line ($this->_sep ());
+    echo $this->line (ucfirst ($obj->kind_as_text ()) . ' by ' . $creator->title_as_plain_text () . ' - ' . $this->time ($obj->time_created));
+    echo $this->line ($this->sep ());
 
     if (! $obj->description && ! $obj->system_description)
     {
       switch ($obj->kind)
       {
       case History_item_created:
-        echo $this->_line ('Created.');
+        echo $this->line ('Created.');
         break;
       case History_item_deleted:
-        echo $this->_line ('Deleted.');
+        echo $this->line ('Deleted.');
         break;
       }
     }
@@ -107,7 +107,7 @@ class HISTORY_ITEM_RENDERER extends OBJECT_RENDERER
     {
       if ($obj->description)
       {
-        echo $this->_line ($obj->description_as_plain_text ());
+        echo $this->line ($obj->description_as_plain_text ());
       }
 
       echo $obj->system_description_as_plain_text ();
