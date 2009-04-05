@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2008 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package webcore
  * @subpackage renderer
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.5.0
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2008 Marco Von Ballmoos
+Copyright (c) 2002-2009 Marco Von Ballmoos
 
 This file is part of earthli WebCore.
 
@@ -43,7 +43,7 @@ require_once ('webcore/obj/webcore_object.php');
  * Rendering functions for text and HTML.
  * @package webcore
  * @subpackage renderer
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.5.0
  * @abstract
  */
@@ -108,7 +108,7 @@ class RENDERER extends WEBCORE_OBJECT
  * {@link display()} to write out the table.
  * @package webcore
  * @subpackage renderer
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.5.0
  * @access private
  */

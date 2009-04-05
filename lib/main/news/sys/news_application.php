@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2008 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package news
  * @subpackage sys
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.4.0
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2008 Marco Von Ballmoos
+Copyright (c) 2002-2009 Marco Von Ballmoos
 
 This file is part of earthli News.
 
@@ -114,7 +114,7 @@ class NEWS_APPLICATION_TABLE_NAMES extends APPLICATION_TABLE_NAMES
  * Includes a 'draft' mode for unfinished work.
  * @package news
  * @subpackage sys
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.4.0
  */
 class NEWS_APPLICATION extends DRAFTABLE_APPLICATION

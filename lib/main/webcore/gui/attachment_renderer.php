@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2007 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package webcore
  * @subpackage renderer
- * @version 2.8.0
+ * @version 3.1.0
  * @since 2.5.0
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2007 Marco Von Ballmoos
+Copyright (c) 2002-2009 Marco Von Ballmoos
 
 This file is part of earthli WebCore.
 
@@ -43,7 +43,7 @@ require_once ('webcore/gui/content_object_renderer.php');
  * Render details for {@link ATTACHMENT}s.
  * @package webcore
  * @subpackage renderer
- * @version 2.8.0
+ * @version 3.1.0
  * @since 2.5.0
  */
 class ATTACHMENT_RENDERER extends CONTENT_OBJECT_RENDERER

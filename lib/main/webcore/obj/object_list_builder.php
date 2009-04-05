@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2008 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package webcore
  * @subpackage obj
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.7.1
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2008 Marco Von Ballmoos
+Copyright (c) 2002-2009 Marco Von Ballmoos
 
 This file is part of earthli WebCore.
 
@@ -44,7 +44,7 @@ require_once ('webcore/forms/form.php');
  * Used by the {@link MULTIPLE_OBJECT_ACTION_FORM} and {@link PRINT_PREVIEW}.
  * @package webcore
  * @subpackage obj
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.7.1
  */
 class OBJECT_LIST_BUILDER extends WEBCORE_OBJECT

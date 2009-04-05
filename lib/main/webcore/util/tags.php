@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2008 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package webcore
  * @subpackage text
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.7.0
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2008 Marco Von Ballmoos
+Copyright (c) 2002-2009 Marco Von Ballmoos
 
 This file is part of earthli WebCore.
 
@@ -40,7 +40,7 @@ http://www.earthli.com/software/webcore
  * Creates an HTML tag string.
  * @package webcore
  * @subpackage text
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.5.0
  */
 class HTML_TAG_BUILDER
@@ -99,7 +99,7 @@ class HTML_TAG_BUILDER
  * Creates a CSS style for use as a tag property.
  * @package webcore
  * @subpackage text
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.6.1
  */
 class CSS_STYLE_BUILDER

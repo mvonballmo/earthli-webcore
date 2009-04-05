@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2008 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package projects
  * @subpackage db
- * @version 3.0.0
+ * @version 3.1.0
  * @since 1.4.1
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2008 Marco Von Ballmoos
+Copyright (c) 2002-2009 Marco Von Ballmoos
 
 This file is part of earthli Projects.
 
@@ -43,7 +43,7 @@ require_once ('webcore/db/user_entry_query.php');
  * Retrieves {@link RELEASE}s visible to a {@link PROJECT_USER}.
  * @package projects
  * @subpackage db
- * @version 3.0.0
+ * @version 3.1.0
  * @since 1.4.1
  */
 class PROJECT_USER_RELEASE_QUERY extends USER_ENTRY_QUERY

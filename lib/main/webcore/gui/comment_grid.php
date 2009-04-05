@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2008 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package webcore
  * @subpackage grid
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.2.1
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2008 Marco Von Ballmoos
+Copyright (c) 2002-2009 Marco Von Ballmoos
 
 This file is part of earthli WebCore.
 
@@ -44,7 +44,7 @@ require_once ('webcore/gui/object_in_folder_grid.php');
  * Shows associated folder, entry and creator information.
  * @package webcore
  * @subpackage grid
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.2.1
  */
 class COMMENT_GRID extends SELECTABLE_GRID
@@ -159,7 +159,7 @@ class COMMENT_GRID extends SELECTABLE_GRID
  * Displays {@link COMMENTS}s for a {@link SEARCH}.
  * @package webcore
  * @subpackage grid
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.7.0
  */
 class SELECT_COMMENT_GRID extends OBJECT_IN_FOLDER_SUMMARY_GRID

@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2007 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package webcore
  * @subpackage log
- * @version 2.8.0
+ * @version 3.1.0
  * @since 2.2.1
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2007 Marco Von Ballmoos
+Copyright (c) 2002-2009 Marco Von Ballmoos
 
 This file is part of earthli WebCore.
 
@@ -46,7 +46,7 @@ require_once ('webcore/log/text_output_logger.php');
  * if the page fails to load completely.
  * @package webcore
  * @subpackage log
- * @version 2.8.0
+ * @version 3.1.0
  * @since 2.2.1
  */
 class JS_CONSOLE_LOGGER extends TEXT_OUTPUT_LOGGER

@@ -1,19 +1,19 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2008 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package projects
  * @subpackage command
- * @version 3.0.0
+ * @version 3.1.0
  * @since 1.9.0
  * @access private
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2008 Marco Von Ballmoos
+Copyright (c) 2002-2009 Marco Von Ballmoos
 
 This file is part of earthli Projects.
 
@@ -44,7 +44,7 @@ require_once ('webcore/cmd/commands.php');
  * Return the commands for a {@link CHANGE_LOG}.
  * @package projects
  * @subpackage command
- * @version 3.0.0
+ * @version 3.1.0
  * @since 1.9.0
  * @access private
  */
@@ -134,7 +134,7 @@ class CHANGE_LOG_COMMANDS extends COMMANDS
  * Return the commands for a {@link CHANGE_LOG} for a {@link BRANCH}.
  * @package projects
  * @subpackage command
- * @version 3.0.0
+ * @version 3.1.0
  * @since 1.9.0
  * @access private
  */

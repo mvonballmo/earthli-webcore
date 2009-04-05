@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2008 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package webcore
  * @subpackage gui
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.2.1
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2008 Marco Von Ballmoos
+Copyright (c) 2002-2009 Marco Von Ballmoos
 
 This file is part of earthli WebCore.
 
@@ -68,7 +68,7 @@ define ('Time_frame_all', 'all');
  * available time frames as a {@link MENU}.
  * @package webcore
  * @subpackage gui
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.2.1
  */
 class TIME_FRAME_SELECTOR extends WEBCORE_OBJECT

@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2008 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package webcore
  * @subpackage db
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.2.1
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2008 Marco Von Ballmoos
+Copyright (c) 2002-2009 Marco Von Ballmoos
 
 This file is part of earthli WebCore.
 
@@ -43,7 +43,7 @@ require_once ('webcore/db/query.php');
  * Return {@link SUBSCRIBER}s (which may or may not correspond to {@link USER}s).
  * @package webcore
  * @subpackage db
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.2.1
  */
 class SUBSCRIBER_QUERY extends QUERY
@@ -88,7 +88,7 @@ class SUBSCRIBER_QUERY extends QUERY
  * Return a list of subscriptions.
  * @package webcore
  * @subpackage db
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.2.1
  */
 class SUBSCRIPTION_QUERY extends SUBSCRIBER_QUERY

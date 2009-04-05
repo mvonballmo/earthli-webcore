@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2008 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package albums
  * @subpackage gui
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.5.0
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2008 Marco Von Ballmoos
+Copyright (c) 2002-2009 Marco Von Ballmoos
 
 This file is part of earthli Albums.
 
@@ -44,7 +44,7 @@ require_once ('webcore/gui/grid.php');
  * Use only from the {@link ALBUM_FORM} to select a main picture.
  * @package albums
  * @subpackage gui
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.5.0
  */
 class SIMPLE_PICTURE_GRID extends STANDARD_GRID

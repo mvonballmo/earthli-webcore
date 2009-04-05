@@ -1,19 +1,19 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2008 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package webcore
  * @subpackage util
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.5.0
  * @access private
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2008 Marco Von Ballmoos
+Copyright (c) 2002-2009 Marco Von Ballmoos
 
 This file is part of earthli WebCore.
 
@@ -48,7 +48,7 @@ require_once ('third_party/pclzip-2-1/pclzip.lib.php');
  * missing.
  * @package webcore
  * @subpackage util
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.5.0
  * @access private
  */
@@ -70,7 +70,7 @@ class PCL_ARCHIVE extends ARCHIVE
  * installed on the server.
  * @package webcore
  * @subpackage util
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.5.0
  * @access private
  */
@@ -142,7 +142,7 @@ class PCL_ZIP_FILE extends COMPRESSED_FILE
  * A single entry found in a {@link PCL_ZIP_FILE}.
  * @package webcore
  * @subpackage util
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.5.0
  * @access private
  */

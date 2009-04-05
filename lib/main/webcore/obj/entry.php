@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2008 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package webcore
  * @subpackage obj
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.2.1
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2008 Marco Von Ballmoos
+Copyright (c) 2002-2009 Marco Von Ballmoos
 
 This file is part of earthli WebCore.
 
@@ -43,7 +43,7 @@ require_once ('webcore/obj/attachment_host.php');
  * Main object in a WebCore {@link APPLICATION}.
  * @package webcore
  * @subpackage obj
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.2.1
  */
 class ENTRY extends ATTACHMENT_HOST
@@ -300,7 +300,7 @@ class ENTRY extends ATTACHMENT_HOST
  * An {@link ENTRY} with support for an {@link Unpublished} status.
  * @package webcore
  * @subpackage obj
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.5.0
  */
 class DRAFTABLE_ENTRY extends ENTRY

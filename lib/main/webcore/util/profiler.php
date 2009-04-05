@@ -1,19 +1,19 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2008 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package webcore
  * @subpackage util
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.2.1
  * @access private
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2008 Marco Von Ballmoos
+Copyright (c) 2002-2009 Marco Von Ballmoos
 
 This file is part of earthli WebCore.
 
@@ -44,7 +44,7 @@ require_once ('webcore/sys/system.php');
  * Maintains a time for a channel in the {@link PROFILER}.
  * @package webcore
  * @subpackage util
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.2.1
  * @access private
  */
@@ -151,7 +151,7 @@ class PROFILER_TIMER extends RAISABLE
  * and the time for processing the entire page.
  * @package webcore
  * @subpackage util
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.2.1
  * @see PROFILER_TIMER
  * @access private

@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2008 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package webcore
  * @subpackage forms
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.2.1
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2008 Marco Von Ballmoos
+Copyright (c) 2002-2009 Marco Von Ballmoos
 
 This file is part of earthli WebCore.
 
@@ -44,7 +44,7 @@ require_once ('webcore/forms/previewable_form.php');
  * Handles setting up the {@link MAIL_PROVIDER} and {@link MAIL_RENDERER}s for descendant classes.
  * @package webcore
  * @subpackage forms
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.2.1
  * @abstract
  */
@@ -348,7 +348,7 @@ abstract class SEND_MAIL_FORM extends PREVIEWABLE_FORM
  * Represents an object to preview in a form.
  * @package webcore
  * @subpackage forms
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.5.0
  */
 class SEND_MAIL_FORM_PREVIEW_SETTINGS extends FORM_PREVIEW_SETTINGS

@@ -1,19 +1,19 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2008 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package webcore
  * @subpackage history
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.4.0
  * @access private
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2008 Marco Von Ballmoos
+Copyright (c) 2002-2009 Marco Von Ballmoos
 
 This file is part of earthli WebCore.
 
@@ -44,7 +44,7 @@ require_once ('webcore/obj/history_item.php');
  * Manages the audit trail of a basic {@link AUDITABLE} object.
  * @package webcore
  * @subpackage history
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.5.0
  * @access private
  */
@@ -75,7 +75,7 @@ class AUDITABLE_HISTORY_ITEM extends HISTORY_ITEM
  * Adds support for differencing the title and description.
  * @package webcore
  * @subpackage history
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.5.0
  * @access private
  */
@@ -102,7 +102,7 @@ class CONTENT_OBJECT_HISTORY_ITEM extends AUDITABLE_HISTORY_ITEM
  * {@link History_item_hidden}, {@link History_item_hidden_update} history item kinds.
  * @package webcore
  * @subpackage history
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.5.0
  * @access private
  */
@@ -212,7 +212,7 @@ class OBJECT_IN_FOLDER_HISTORY_ITEM extends CONTENT_OBJECT_HISTORY_ITEM
  * Manages the audit trail of a {@link FOLDER}.
  * @package webcore
  * @subpackage history
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.4.0
  * @access private
  */
@@ -256,7 +256,7 @@ class FOLDER_HISTORY_ITEM extends OBJECT_IN_FOLDER_HISTORY_ITEM
  * Adds support for the {@link History_item_published} history item kind.
  * @package webcore
  * @subpackage history
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.4.0
  * @access private
  */
@@ -316,7 +316,7 @@ class ENTRY_HISTORY_ITEM extends OBJECT_IN_FOLDER_HISTORY_ITEM
  * Manages the audit trail of a {@link COMMENT}.
  * @package webcore
  * @subpackage history
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.4.0
  * @access private
  */
@@ -352,7 +352,7 @@ class COMMENT_HISTORY_ITEM extends OBJECT_IN_FOLDER_HISTORY_ITEM
  * Manages the audit trail of an {@link ATTACHMENT}.
  * @package webcore
  * @subpackage history
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.5.0
  * @access private
  */
@@ -393,7 +393,7 @@ class ATTACHMENT_HISTORY_ITEM extends OBJECT_IN_FOLDER_HISTORY_ITEM
  * Manages the audit trail of a {@link USER}.
  * @package webcore
  * @subpackage history
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.4.0
  * @access private
  */
@@ -475,7 +475,7 @@ class USER_HISTORY_ITEM extends CONTENT_OBJECT_HISTORY_ITEM
  * Manages the audit trail of a {@link GROUP}.
  * @package webcore
  * @subpackage history
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.4.0
  * @access private
  */

@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2008 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.5.0
  * @package webcore
  * @subpackage config
@@ -12,7 +12,7 @@
 
 /****************************************************************************
 
-Copyright (c) 2002-2008 Marco Von Ballmoos
+Copyright (c) 2002-2009 Marco Von Ballmoos
 
 This file is part of earthli WebCore.
 
@@ -43,7 +43,7 @@ require_once ('webcore/config/context_config.php');
  * @see PAGE_TITLE, PAGE::$page_title
  * @package webcore
  * @subpackage config
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.2.1
  */
 class PAGE_TITLE_OPTIONS
@@ -77,7 +77,7 @@ class PAGE_TITLE_OPTIONS
  * @see PAGE::$refresh_options
  * @package webcore
  * @subpackage config
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.2.1
  */
 class PAGE_REFRESH_OPTIONS
@@ -136,7 +136,7 @@ class PAGE_REFRESH_OPTIONS
  * @see PAGE::$icon_options
  * @package webcore
  * @subpackage config
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.2.1
  */
 class PAGE_ICON_OPTIONS
@@ -192,7 +192,7 @@ class PAGE_ICON_OPTIONS
  * @see PAGE::$newsfeed_options
  * @package webcore
  * @subpackage config
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.7.0*/
 class PAGE_NEWSFEED_OPTIONS
 {
@@ -262,7 +262,7 @@ class PAGE_NEWSFEED_OPTIONS
  * @see PAGE::$template_options
  * @package webcore
  * @subpackage config
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.6.0
  */
 class PAGE_TEMPLATE_OPTIONS
@@ -434,7 +434,7 @@ class PAGE_TEMPLATE_OPTIONS
  * may already be in use, so change those when initializing the {@link PAGE}.
  * @package webcore
  * @subpackage config
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.2.1
  */
 class PAGE_STORAGE_OPTIONS extends CONTEXT_STORAGE_OPTIONS

@@ -1,19 +1,19 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2008 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package webcore
  * @subpackage command
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.7.0
  * @access private
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2008 Marco Von Ballmoos
+Copyright (c) 2002-2009 Marco Von Ballmoos
 
 This file is part of earthli WebCore.
 
@@ -46,7 +46,7 @@ require_once ('webcore/cmd/commands.php');
  * page.
  * @package webcore
  * @subpackage command
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.7.0
  * @access private
  */
@@ -124,7 +124,7 @@ class EXPLORER_COMMANDS extends COMMANDS
  * applications that use {@link DRAFTABLE_ENTRY}s.
  * @package webcore
  * @subpackage command
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.7.1
  * @access private
  */

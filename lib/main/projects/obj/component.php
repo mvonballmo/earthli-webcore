@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2008 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package projects
  * @subpackage obj
- * @version 3.0.0
+ * @version 3.1.0
  * @since 1.7.0
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2008 Marco Von Ballmoos
+Copyright (c) 2002-2009 Marco Von Ballmoos
 
 This file is part of earthli Projects.
 
@@ -44,7 +44,7 @@ require_once ('webcore/obj/object_in_folder.php');
  * {@link JOB}s and {@link CHANGE}s can be assigned to components in a project.
  * @package projects
  * @subpackage obj
- * @version 3.0.0
+ * @version 3.1.0
  * @since 1.7.0
  */
 class COMPONENT extends OBJECT_IN_FOLDER
@@ -254,7 +254,7 @@ class COMPONENT extends OBJECT_IN_FOLDER
  * Used when purging components.
  * @package projects
  * @subpackage obj
- * @version 3.0.0
+ * @version 3.1.0
  * @since 1.7.0
  * @access private
  */

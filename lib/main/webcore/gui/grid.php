@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2008 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package webcore
  * @subpackage grid
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.2.1
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2008 Marco Von Ballmoos
+Copyright (c) 2002-2009 Marco Von Ballmoos
 
 This file is part of earthli WebCore.
 
@@ -45,7 +45,7 @@ require_once ('webcore/obj/webcore_object.php');
  * query has more objects than will fit, it automatically handles showing pages of grids.
  * @package webcore
  * @subpackage grid
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.2.1
  * @abstract
  */
@@ -620,7 +620,7 @@ abstract class GRID extends WEBCORE_OBJECT
  * Use the {@link CSS_FLOW_GRID} to allow the grid to resize smaller, if needed.
  * @package webcore
  * @subpackage grid
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.6.0
  * @abstract
  */
@@ -730,7 +730,7 @@ abstract class HTML_TABLE_GRID extends GRID
  * for a container that enforces number of columns.
  * @package webcore
  * @subpackage grid
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.6.0
  * @abstract
  */
@@ -870,7 +870,7 @@ abstract class CSS_FLOW_GRID extends GRID
  * @see HTML_TABLE_GRID
  * @package webcore
  * @subpackage grid
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.6.0
  * @abstract
  */

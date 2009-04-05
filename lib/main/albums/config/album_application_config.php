@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2008 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package albums
  * @subpackage config
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.9.0
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2008 Marco Von Ballmoos
+Copyright (c) 2002-2009 Marco Von Ballmoos
 
 This file is part of earthli Albums.
 
@@ -42,7 +42,7 @@ require_once ('webcore/config/application_config.php');
 /**
  * @package albums
  * @subpackage config
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.9.0
  */
 class ALBUM_APPLICATION_DISPLAY_OPTIONS extends APPLICATION_DISPLAY_OPTIONS

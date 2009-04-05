@@ -1,19 +1,19 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2007 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package webcore
  * @subpackage forms-core
- * @version 2.8.0
+ * @version 3.1.0
  * @since 2.5.0
  * @access private
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2007 Marco Von Ballmoos
+Copyright (c) 2002-2009 Marco Von Ballmoos
 
 This file is part of earthli WebCore.
 
@@ -44,7 +44,7 @@ require_once ('webcore/forms/controls_renderer.php');
  * Properties for an item in a list.
  * @package webcore
  * @subpackage forms-core
- * @version 2.8.0
+ * @version 3.1.0
  * @since 2.5.0
  * @access private
  */
@@ -105,7 +105,7 @@ class FORM_LIST_ITEM
  * Properties for a check box.
  * @package webcore
  * @subpackage forms-core
- * @version 2.8.0
+ * @version 3.1.0
  * @since 2.6.0
  * @access private
  */
@@ -126,7 +126,7 @@ class CHECK_BOX_ITEM extends FORM_LIST_ITEM
  * $show_descriptions} to true if you pass descriptions to {@link add_item()}.
  * @package webcore
  * @subpackage forms-core
- * @version 2.8.0
+ * @version 3.1.0
  * @since 2.5.0
  * @access private
  */
@@ -292,7 +292,7 @@ class FORM_LIST_PROPERTIES
  * Passed as a parameter to several rendering functions in {@link FORM_RENDERER}.
  * @package webcore
  * @subpackage forms-core
- * @version 2.8.0
+ * @version 3.1.0
  * @since 2.5.0
  * @access private
  */
@@ -339,7 +339,7 @@ class FORM_TEXT_CONTROL_OPTIONS
  * Helper class for painting {@link FORM}s.
  * @package webcore
  * @subpackage forms-core
- * @version 2.8.0
+ * @version 3.1.0
  * @since 2.5.0
  * @access private
  */
@@ -2089,7 +2089,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
  * @see FORM::set_width()
  * @package webcore
  * @subpackage forms-core
- * @version 2.8.0
+ * @version 3.1.0
  * @since 2.7.0
  * @access private
  */

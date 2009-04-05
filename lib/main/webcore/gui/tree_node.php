@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2008 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package webcore
  * @subpackage tree
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.2.1
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2008 Marco Von Ballmoos
+Copyright (c) 2002-2009 Marco Von Ballmoos
 
 This file is part of earthli WebCore.
 
@@ -40,7 +40,7 @@ http://www.earthli.com/software/webcore
  * Simple node implementation with link and text.
  * @package webcore
  * @subpackage tree
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.2.1
  */
 class TREE_NODE
@@ -141,7 +141,7 @@ require_once ('webcore/gui/tree.php');
  * Handles tree-rendering for {@link TREE_NODE}s.
  * @package webcore
  * @subpackage tree
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.2.1
  */
 class GENERIC_TREE_NODE_INFO extends TREE_NODE_INFO

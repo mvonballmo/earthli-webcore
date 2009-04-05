@@ -1,19 +1,19 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2008 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package projects
  * @subpackage db
- * @version 3.0.0
+ * @version 3.1.0
  * @since 1.4.1
  * @access private
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2008 Marco Von Ballmoos
+Copyright (c) 2002-2009 Marco Von Ballmoos
 
 This file is part of earthli Projects.
 
@@ -44,7 +44,7 @@ require_once ('webcore/db/sql_unique_storage.php');
  * Specialized storage for {@link JOB_BRANCH_INFO} objects.
  * @package projects
  * @subpackage db
- * @version 3.0.0
+ * @version 3.1.0
  * @since 1.4.1
  * @access private
  */

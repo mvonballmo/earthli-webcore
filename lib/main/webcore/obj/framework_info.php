@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2008 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package webcore
  * @subpackage obj
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.7.0
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2008 Marco Von Ballmoos
+Copyright (c) 2002-2009 Marco Von Ballmoos
 
 This file is part of earthli WebCore.
 
@@ -44,7 +44,7 @@ require_once ('webcore/obj/named_object.php');
  * This can be an {@link APPLICATION} or an {@link ENVIRONMENT}.
  * @package webcore
  * @subpackage obj
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.7.0
  */
 class FRAMEWORK_INFO extends NAMED_OBJECT
@@ -212,7 +212,7 @@ class FRAMEWORK_INFO extends NAMED_OBJECT
  * Used to display the information in the configuration page.
  * @package webcore
  * @subpackage obj
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.7.0
  */
 class APPLICATION_CONFIGURATION_INFO extends WEBCORE_OBJECT

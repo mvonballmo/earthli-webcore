@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2008 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package webcore
  * @subpackage renderer
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.6.0
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2008 Marco Von Ballmoos
+Copyright (c) 2002-2009 Marco Von Ballmoos
 
 This file is part of earthli WebCore.
 
@@ -43,7 +43,7 @@ require_once ('webcore/gui/object_renderer.php');
  * Renders the contents of an {@link EXCEPTION_SIGNATURE}.
  * @package webcore
  * @subpackage renderer
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.6.0
  */
 class EXCEPTION_RENDERER extends OBJECT_RENDERER
@@ -366,7 +366,7 @@ class EXCEPTION_RENDERER extends OBJECT_RENDERER
  * Options used with the {@link EXCEPTION_RENDERER}.
  * @package webcore
  * @subpackage renderer
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.6.0
  * @access private
  */

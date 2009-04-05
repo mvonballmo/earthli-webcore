@@ -2,17 +2,17 @@
 
 /**
  * Including this file creates and assigns a global albums application.
- * @copyright Copyright (c) 2002-2008 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package albums
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.8.0
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2008 Marco Von Ballmoos
+Copyright (c) 2002-2009 Marco Von Ballmoos
 
 This file is part of earthli Albums.
 
@@ -45,7 +45,7 @@ require_once ('albums/init.php');
  * {@link ENVIRONMENT::register_application()} for help on customizing the
  * application creation and initialization.
  * @global ALBUM_APPLICATION $App
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.5.0
  */
 $App = $Page->make_application (Album_application_id, true, true);

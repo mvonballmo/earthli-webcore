@@ -1,19 +1,19 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2008 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package webcore
  * @subpackage sys
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.5.0
  * @access private
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2008 Marco Von Ballmoos
+Copyright (c) 2002-2009 Marco Von Ballmoos
 
 This file is part of earthli WebCore.
 
@@ -44,7 +44,7 @@ http://www.earthli.com/software/webcore
  * {@link CALLBACK_METHOD}.
  * @package webcore
  * @subpackage sys
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.5.0
  * @access private
  */
@@ -98,7 +98,7 @@ class CALLBACK
  * callback to a specific object.
  * @package webcore
  * @subpackage sys
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.5.0
  * @access private
  */
@@ -152,7 +152,7 @@ class CALLBACK_METHOD extends CALLBACK
  * Manages and executes a list of {@link CALLBACK}s.
  * @package webcore
  * @subpackage sys
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.7.0
  * @access private
  */

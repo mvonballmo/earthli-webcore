@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2008 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package webcore
  * @subpackage forms
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.5.0
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2008 Marco Von Ballmoos
+Copyright (c) 2002-2009 Marco Von Ballmoos
 
 This file is part of earthli WebCore.
 
@@ -43,7 +43,7 @@ require_once ('webcore/forms/content_object_form.php');
  * Base form for {@link OBJECT_IN_FOLDER} objects.
  * @package webcore
  * @subpackage forms
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.5.0
  */
 class OBJECT_IN_FOLDER_FORM extends CONTENT_OBJECT_FORM
@@ -179,7 +179,7 @@ class OBJECT_IN_FOLDER_FORM extends CONTENT_OBJECT_FORM
  * Base form for {@link ATTACHMENT_HOST} objects.
  * @package webcore
  * @subpackage forms
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.7.1
  */
 class ATTACHMENT_HOST_FORM extends OBJECT_IN_FOLDER_FORM
@@ -356,7 +356,7 @@ class ATTACHMENT_HOST_FORM extends OBJECT_IN_FOLDER_FORM
  * Base form for {@link ENTRY} objects.
  * @package webcore
  * @subpackage forms
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.5.0
  */
 class ENTRY_FORM extends ATTACHMENT_HOST_FORM
@@ -373,7 +373,7 @@ class ENTRY_FORM extends ATTACHMENT_HOST_FORM
  * Base form for {@link DRAFTABLE_ENTRY} objects.
  * @package webcore
  * @subpackage forms
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.5.0
  */
 class DRAFTABLE_ENTRY_FORM extends ENTRY_FORM

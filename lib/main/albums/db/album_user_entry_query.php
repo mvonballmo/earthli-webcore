@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2008 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package albums
  * @subpackage db
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.5.0
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2008 Marco Von Ballmoos
+Copyright (c) 2002-2009 Marco Von Ballmoos
 
 This file is part of earthli Albums.
 
@@ -44,7 +44,7 @@ require_once ('albums/db/album_query_toolkit.php');
  * Retrieves {@link PICTURE}s or {@link JOURNAL}s visible to an {@link USER}.
  * @package albums
  * @subpackage db
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.5.0
  */
 class ALBUM_USER_ENTRY_QUERY extends USER_MULTI_ENTRY_QUERY

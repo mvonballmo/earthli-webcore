@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2008 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package webcore
  * @subpackage history
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.4.0
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2008 Marco Von Ballmoos
+Copyright (c) 2002-2009 Marco Von Ballmoos
 
 This file is part of earthli WebCore.
 
@@ -45,7 +45,7 @@ require_once ('webcore/obj/renderable.php');
  * item is recorded to the database, recording which information was changed, by
  * whom and when.
  * @package webcore
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.4.0
 f * @subpackage history
  */

@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2008 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package webcore
  * @subpackage gui
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.2.1
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2008 Marco Von Ballmoos
+Copyright (c) 2002-2009 Marco Von Ballmoos
 
 This file is part of earthli WebCore.
 
@@ -48,7 +48,7 @@ require_once ('webcore/util/tags.php');
  * <c>False</c>, the layer cannot be toggled and is always {@link $visible}.
  * @package webcore
  * @subpackage gui
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.2.1
  */
 class LAYER extends WEBCORE_OBJECT

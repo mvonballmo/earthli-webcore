@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2007 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package webcore
  * @subpackage grid
- * @version 2.8.0
+ * @version 3.1.0
  * @since 2.2.1
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2007 Marco Von Ballmoos
+Copyright (c) 2002-2009 Marco Von Ballmoos
 
 This file is part of earthli WebCore.
 
@@ -44,7 +44,7 @@ require_once ('webcore/gui/grid.php');
  * Used when creating user permissions to select a user.
  * @package webcore
  * @subpackage grid
- * @version 2.8.0
+ * @version 3.1.0
  * @since 2.2.1
  */
 class USER_BROWSER_GRID extends STANDARD_GRID

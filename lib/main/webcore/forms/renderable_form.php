@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2008 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package webcore
  * @subpackage forms
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.5.0
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2008 Marco Von Ballmoos
+Copyright (c) 2002-2009 Marco Von Ballmoos
 
 This file is part of earthli WebCore.
 
@@ -44,7 +44,7 @@ require_once ('webcore/forms/unique_object_form.php');
  * Manages a list of {@link FIELD}s to validate and display controls.
  * @package webcore
  * @subpackage forms
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.5.0
  * @abstract
  */
@@ -80,11 +80,11 @@ abstract class RENDERABLE_FORM extends UNIQUE_OBJECT_FORM
 
 /**
  * Represents an object to preview in a form.
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.5.0
  * @package webcore
  * @subpackage forms
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.5.0
  */
 class RENDERABLE_FORM_PREVIEW_SETTINGS extends FORM_PREVIEW_SETTINGS

@@ -1,19 +1,19 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2008 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package webcore
  * @subpackage sys
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.7.0
  * @access private
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2008 Marco Von Ballmoos
+Copyright (c) 2002-2009 Marco Von Ballmoos
 
 This file is part of earthli WebCore.
 
@@ -44,7 +44,7 @@ require_once ('webcore/sys/system.php');
  * Describes the {@link FOLDER} class.
  * @package webcore
  * @subpackage sys
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.5.0
  * @access private
  */
@@ -80,7 +80,7 @@ class FOLDER_TYPE_INFO extends TYPE_INFO
  * Describes the {@link ENTRY} class.
  * @package webcore
  * @subpackage sys
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.7.1
  * @access private
  */
@@ -121,7 +121,7 @@ class ENTRY_TYPE_INFO extends TYPE_INFO
  * Describes the {@link DRAFTABLE_ENTRY} class.
  * @package webcore
  * @subpackage sys
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.7.1
  * @access private
  */
@@ -137,7 +137,7 @@ class DRAFTABLE_ENTRY_TYPE_INFO extends ENTRY_TYPE_INFO
  * Describes the {@link COMMENT} class.
  * @package webcore
  * @subpackage sys
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.5.0
  * @access private
  */
@@ -173,7 +173,7 @@ class COMMENT_TYPE_INFO extends TYPE_INFO
  * Describes the {@link USER} class.
  * @package webcore
  * @subpackage sys
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.5.0
  * @access private
  */
@@ -204,7 +204,7 @@ class USER_TYPE_INFO extends TYPE_INFO
  * Describes the {@link GROUP} class.
  * @package webcore
  * @subpackage sys
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.5.0
  * @access private
  */

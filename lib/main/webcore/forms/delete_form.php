@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2008 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package webcore
  * @subpackage forms
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.2.1
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2008 Marco Von Ballmoos
+Copyright (c) 2002-2009 Marco Von Ballmoos
 
 This file is part of earthli WebCore.
 
@@ -45,7 +45,7 @@ require_once ('webcore/forms/purge_form.php');
  * The object needs a name so the form can identify it in the 'are you sure?' text.
  * @package webcore
  * @subpackage forms
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.2.1
  */
 class DELETE_FORM extends ID_BASED_FORM
@@ -101,7 +101,7 @@ class DELETE_FORM extends ID_BASED_FORM
  * have a state flag that allows them to be marked as deleted without purging from the database.
  * @package webcore
  * @subpackage forms
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.5.0
  */
 class DELETE_OBJECT_FORM extends PURGE_OBJECT_FORM
@@ -254,7 +254,7 @@ class DELETE_OBJECT_FORM extends PURGE_OBJECT_FORM
  * Deleting marks a database object as deleted, but does not remove it from the database.
  * @package webcore
  * @subpackage forms
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.5.0
  */
 class DELETE_OBJECT_IN_FOLDER_FORM extends DELETE_OBJECT_FORM

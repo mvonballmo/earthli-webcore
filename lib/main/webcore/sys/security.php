@@ -1,19 +1,19 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2008 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package webcore
  * @subpackage security
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.5.0
  * @access private
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2008 Marco Von Ballmoos
+Copyright (c) 2002-2009 Marco Von Ballmoos
 
 This file is part of earthli WebCore.
 
@@ -58,7 +58,7 @@ define ("Security_create_admin", 2);
  * Used by {@link FOLDER}s to determine a {@link USER}'s rights.
  * @package webcore
  * @subpackage security
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.5.0
  * @access private
  */
@@ -318,7 +318,7 @@ class FOLDER_PERMISSIONS extends NAMED_OBJECT
  * @see FOLDER::security()
  * @package webcore
  * @subpackage security
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.5.0
  * @access private
  */
@@ -694,7 +694,7 @@ class FOLDER_SECURITY extends FOLDER_INHERITABLE_SETTINGS
  * administer.
  * @package webcore
  * @subpackage security
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.5.0
  * @access private
  */
@@ -892,7 +892,7 @@ class PERMISSIONS_FORMATTER extends WEBCORE_OBJECT
  * Describes a group of displayed privileges.
  * @package webcore
  * @subpackage security
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.5.0
  * @access private
  */
@@ -937,7 +937,7 @@ class PRIVILEGE_GROUP
  * Contains a list of privilege set/type pairs to which this privilege maps.
  * @package webcore
  * @subpackage security
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.5.0
  * @access private
  */

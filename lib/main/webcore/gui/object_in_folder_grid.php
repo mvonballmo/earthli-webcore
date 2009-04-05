@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2008 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package webcore
  * @subpackage grid
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.7.0
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2008 Marco Von Ballmoos
+Copyright (c) 2002-2009 Marco Von Ballmoos
 
 This file is part of earthli WebCore.
 
@@ -44,7 +44,7 @@ require_once ('webcore/gui/content_object_grid.php');
  * Used to display the results of a {@link SEARCH} and subscription lists.
  * @package webcore
  * @subpackage gui
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.7.0
  */
 class OBJECT_IN_FOLDER_SUMMARY_GRID extends CONTENT_OBJECT_GRID

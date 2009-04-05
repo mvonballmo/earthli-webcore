@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2008 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package projects
  * @subpackage forms
- * @version 3.0.0
+ * @version 3.1.0
  * @since 1.4.1
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2008 Marco Von Ballmoos
+Copyright (c) 2002-2009 Marco Von Ballmoos
 
 This file is part of earthli Projects.
 
@@ -43,7 +43,7 @@ require_once ('projects/forms/project_entry_form.php');
  * Edit or create a {@link JOB}.
  * @package projects
  * @subpackage forms
- * @version 3.0.0
+ * @version 3.1.0
  * @since 1.4.1
  */
 class JOB_FORM extends PROJECT_ENTRY_FORM

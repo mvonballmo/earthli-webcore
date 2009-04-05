@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2008 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package projects
  * @subpackage gui
- * @version 3.0.0
+ * @version 3.1.0
  * @since 1.4.1
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2008 Marco Von Ballmoos
+Copyright (c) 2002-2009 Marco Von Ballmoos
 
 This file is part of earthli Projects.
 
@@ -43,7 +43,7 @@ require_once ('webcore/gui/print_preview.php');
  * Handle printing entries in an {@link ALBUM}.
  * @package projects
  * @subpackage gui
- * @version 3.0.0
+ * @version 3.1.0
  * @since 1.7.0
  * @access private
  */
@@ -76,7 +76,7 @@ class PROJECT_PRINT_RENDERER_OPTIONS extends PRINT_RENDERER_OPTIONS
  * Handle printing {@link CHANGE}s and {@link JOB}s in {@link PROJECT}s.
  * @package projects
  * @subpackage gui
- * @version 3.0.0
+ * @version 3.1.0
  * @since 1.4.1
  */
 class PROJECT_PRINT_PREVIEW extends PRINT_PREVIEW

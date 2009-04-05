@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2008 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package webcore
  * @subpackage mail
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.2.1
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2008 Marco Von Ballmoos
+Copyright (c) 2002-2009 Marco Von Ballmoos
 
 This file is part of earthli WebCore.
 
@@ -43,7 +43,7 @@ require_once ('webcore/gui/renderer.php');
  * Base class for all email rendering.
  * @package webcore
  * @subpackage mail
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.2.1
  */
 class MAIL_RENDERER extends RENDERER
@@ -104,7 +104,7 @@ class MAIL_RENDERER extends RENDERER
  * Stores the state of an application for a {@link MAIL_RENDERER}.
  * @package webcore
  * @subpackage mail
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.6.0 
  * @access private
  */

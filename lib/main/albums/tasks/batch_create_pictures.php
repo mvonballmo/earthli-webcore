@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2007 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package albums
  * @subpackage tasks
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.8.0
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2007 Marco Von Ballmoos
+Copyright (c) 2002-2009 Marco Von Ballmoos
 
 This file is part of earthli Albums.
 
@@ -44,7 +44,7 @@ require_once ('webcore/sys/task.php');
  * Used by the {@link UPLOAD_PICTURE_FORM}.
  * @package albums
  * @subpackage forms
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.8.0
  * @access private
  */

@@ -1,19 +1,19 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2008 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package news
  * @subpackage command
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.8.0
  * @access private
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2008 Marco Von Ballmoos
+Copyright (c) 2002-2009 Marco Von Ballmoos
 
 This file is part of earthli News.
 
@@ -44,7 +44,7 @@ require_once ('webcore/cmd/folder_commands.php');
  * Return the commands for a {@link SECTION}.
  * @package news
  * @subpackage command
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.8.0
  * @access private
  */

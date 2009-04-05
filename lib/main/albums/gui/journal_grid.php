@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2008 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package albums
  * @subpackage gui
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.5.0
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2008 Marco Von Ballmoos
+Copyright (c) 2002-2009 Marco Von Ballmoos
 
 This file is part of earthli Albums.
 
@@ -43,7 +43,7 @@ require_once ('albums/gui/album_entry_grid.php');
  * Display {@link JOURNAL}s from a {@link QUERY}.
  * @package albums
  * @subpackage gui
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.5.0
  */
 class JOURNAL_GRID extends ALBUM_ENTRY_GRID
@@ -130,7 +130,7 @@ class JOURNAL_GRID extends ALBUM_ENTRY_GRID
  * Display {@link JOURNAL}s from a {@link QUERY}.
  * @package albums
  * @subpackage gui
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.5.0
  */
 class JOURNAL_SUMMARY_GRID extends ENTRY_SUMMARY_GRID

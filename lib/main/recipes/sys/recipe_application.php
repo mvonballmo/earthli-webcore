@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2008 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package recipes
  * @subpackage sys
- * @version 3.0.0
+ * @version 3.1.0
  * @since 1.3.0
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2008 Marco Von Ballmoos
+Copyright (c) 2002-2009 Marco Von Ballmoos
 
 This file is part of earthli Recipes.
 
@@ -43,7 +43,7 @@ require_once ('recipes/sys/recipe_type_infos.php');
 /**
  * @package recipes
  * @subpackage sys
- * @version 3.0.0
+ * @version 3.1.0
  * @since 1.3.0
  */
 class RECIPE_APPLICATION_PAGE_NAMES extends APPLICATION_PAGE_NAMES
@@ -57,7 +57,7 @@ class RECIPE_APPLICATION_PAGE_NAMES extends APPLICATION_PAGE_NAMES
 /**
  * @package recipes
  * @subpackage sys
- * @version 3.0.0
+ * @version 3.1.0
  * @since 1.3.0
  */
 class RECIPE_APPLICATION_TABLE_NAMES extends APPLICATION_TABLE_NAMES
@@ -117,7 +117,7 @@ class RECIPE_APPLICATION_TABLE_NAMES extends APPLICATION_TABLE_NAMES
  * A WebCore application that lets users enter {@link RECIPE}s.
  * @package recipes
  * @subpackage sys
- * @version 3.0.0
+ * @version 3.1.0
  * @since 1.3.0
  */
 class RECIPE_APPLICATION extends DRAFTABLE_APPLICATION

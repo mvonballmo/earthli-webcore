@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2008 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package webcore
  * @subpackage util
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.5.0
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2008 Marco Von Ballmoos
+Copyright (c) 2002-2009 Marco Von Ballmoos
 
 This file is part of earthli WebCore.
 
@@ -102,7 +102,7 @@ define ('Form_max_file_size_field_name', 'MAX_FILE_SIZE');
  * Represents a file uploaded by PHP.
  * @package webcore
  * @subpackage util
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.5.0
  */
 class UPLOADED_FILE extends RAISABLE
@@ -389,7 +389,7 @@ class UPLOADED_FILE extends RAISABLE
  * were actually associated with the input name.
  * @package webcore
  * @subpackage util
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.5.0
  */
 class UPLOADED_FILE_SET
@@ -521,7 +521,7 @@ class UPLOADED_FILE_SET
  * amount of re-uploading a user must do when a form cannot be committed.
  * @package webcore
  * @subpackage util
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.5.0
  */
 class UPLOADER extends RAISABLE

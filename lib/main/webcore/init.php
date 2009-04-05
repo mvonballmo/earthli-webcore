@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2008 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package webcore
  * @subpackage config
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.2.1
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2008 Marco Von Ballmoos
+Copyright (c) 2002-2009 Marco Von Ballmoos
 
 This file is part of earthli WebCore.
 
@@ -41,7 +41,7 @@ if (! isset ($WebCore_init_profiler))
   /**
    * Set this value to <code>False</code> to prevent the initialization
    * of the global {@link $Profiler}.
-   * @version 3.0.0
+   * @version 3.1.0
    * @since 2.7.0
    * @global boolean
    */
@@ -57,7 +57,7 @@ if ($WebCore_init_profiler)
    * Used for profiling, or timing, applications.
    * This object is instantiated first, so that it records the page loading time
    * as accurately as possible. The "global" timer is started immediately.
-   * @version 3.0.0
+   * @version 3.1.0
    * @since 2.2.1
    * @global PROFILER $Profiler
    * @access private
@@ -90,7 +90,7 @@ else
  * @see $Page
  * @see $Logger
  * @see $Profiler
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.7.0
  * @global ENGINE $Engine
  */
@@ -103,7 +103,7 @@ $Engine->init ();
  * @see $Page
  * @see $Logger
  * @see $Profiler
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.2.1
  * @global ENVIRONMENT $Env
  */
@@ -115,7 +115,7 @@ $Env = $Engine->env;
  * @see $Env
  * @see $Logger
  * @see $Profiler
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.2.1
  * @global PAGE $Page
  */
@@ -128,7 +128,7 @@ $Page = $Engine->page;
  * @see $Env
  * @see $Page
  * @see $Profiler
- * @version 3.0.0
+ * @version 3.1.0
  * @since  2.2.1
  * @global LOGGER $Logger
  * @access private

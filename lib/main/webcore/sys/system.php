@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2008 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package webcore
  * @subpackage sys
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.6.0
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2008 Marco Von Ballmoos
+Copyright (c) 2002-2009 Marco Von Ballmoos
 
 This file is part of earthli WebCore.
 
@@ -98,7 +98,7 @@ $Null_reference = null;
 
 /**
  * Retrieves an array index without triggering a PHP notice.
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.2.1
  * @param array $arr
  * @param string $index
@@ -121,7 +121,7 @@ function read_array_index ($arr, $index, $default_value = '')
  * If the actual value in the request is the empty string and the default value is not, then use
  * the default value. This makes the assumption that an explicitly empty value is the same as not
  * passing a value at all.
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.2.1
  * @param string $var_name
  * @param string $default_value
@@ -163,7 +163,7 @@ function read_vars ($indexes)
 
 /**
  * Remove empty entries from an array.
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.2.1
  * @param array $arr
  * @return array
@@ -191,7 +191,7 @@ function trim_array ($arr)
  * @param string $class_name The name of the class where the error occurred (can be empty)
  * @param object $obj Reference to the object where the error occurred (can be empty)
  * @param EXCEPTION_HANDLER $handler The handler for this exception (can be empty)
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.2.1
  * @see set_default_exception_handler()
  * @see EXCEPTION_HANDLER
@@ -214,7 +214,7 @@ function raise ($message, $routine_name = '', $class_name = '', $obj = null, $ha
 /**
  * Sets the default exception handler for the page.
  * @param EXCEPTION_HANDLER $handler The default exception handler
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.2.1
  * @see raise()
  */
@@ -315,7 +315,7 @@ class METHOD_NOT_IMPLEMENTED_EXCEPTION extends Exception
  * This allows groups of classes to use different exception handlers.
  * @package webcore
  * @subpackage sys
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.2.1
  */
 class RAISABLE
@@ -446,7 +446,7 @@ class RAISABLE
  * @see function raise()
  * @package webcore
  * @subpackage sys
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.2.1
  */
 class EXCEPTION_HANDLER
@@ -508,7 +508,7 @@ class EXCEPTION_HANDLER
  * Used to be able to generically handle lists of varying entries.
  * @package webcore
  * @subpackage sys
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.5.0
  * @access private
  */

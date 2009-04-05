@@ -2,18 +2,18 @@
 
 /**
  * Including this file creates and assigns a global tests application.
- * @copyright Copyright (c) 2002-2008 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package webcore
  * @subpackage tests
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.6.0
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2008 Marco Von Ballmoos
+Copyright (c) 2002-2009 Marco Von Ballmoos
 
 This file is part of earthli WebCore.
 
@@ -46,7 +46,7 @@ require_once ('webcore/tests/init.php');
  * {@link ENVIRONMENT::register_application()} for help on customizing the
  * application creation and initialization.
  * @global TEST_HARNESS_APPLICATION $App
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.6.0
  */
 $App = $Page->make_application (Test_harness_application_id, true, true);

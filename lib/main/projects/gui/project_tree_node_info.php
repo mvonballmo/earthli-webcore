@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2008 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package projects
  * @subpackage gui
- * @version 3.0.0
+ * @version 3.1.0
  * @since 1.4.1
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2008 Marco Von Ballmoos
+Copyright (c) 2002-2009 Marco Von Ballmoos
 
 This file is part of earthli Projects.
 
@@ -46,7 +46,7 @@ require_once ('webcore/gui/folder_tree_node_info.php');
  * that define their own options.
  * @package projects
  * @subpackage gui
- * @version 3.0.0
+ * @version 3.1.0
  * @since 1.4.1
  * @see PROJECT::defines_options ()
  */

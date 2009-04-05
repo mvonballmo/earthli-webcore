@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2007 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package news
  * @subpackage gui
- * @version 2.9.0
+ * @version 3.1.0
  * @since 2.4.0
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2007 Marco Von Ballmoos
+Copyright (c) 2002-2009 Marco Von Ballmoos
 
 This file is part of earthli News.
 
@@ -43,7 +43,7 @@ require_once ('webcore/gui/panel.php');
  * Performs setup for various {@link PANEL_MANAGER}s.
  * @package news
  * @subpackage gui
- * @version 2.9.0
+ * @version 3.1.0
  * @since 2.8.1
  */
 class NEWS_PANEL_MANAGER_HELPER extends PANEL_MANAGER_HELPER

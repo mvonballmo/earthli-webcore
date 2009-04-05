@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2008 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package webcore
  * @subpackage db
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.2.1
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2008 Marco Von Ballmoos
+Copyright (c) 2002-2009 Marco Von Ballmoos
 
 This file is part of earthli WebCore.
 
@@ -43,7 +43,7 @@ require_once ('webcore/db/object_in_folder_query.php');
  * Return {@link ENTRY}s for a {@link FOLDER}.
  * @package webcore
  * @subpackage db
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.2.1
  * @abstract
  */
@@ -215,7 +215,7 @@ class FOLDER_ENTRY_QUERY extends OBJECT_IN_SINGLE_FOLDER_QUERY
  * Return {@link ENTRY}s for a {@link FOLDER} in a multi entry-type application.
  * @package webcore
  * @subpackage db
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.2.1
  */
 class FOLDER_MULTI_ENTRY_QUERY extends FOLDER_ENTRY_QUERY
@@ -264,7 +264,7 @@ class FOLDER_MULTI_ENTRY_QUERY extends FOLDER_ENTRY_QUERY
  * Retrieves {@link DRAFTABLE_ENTRY}s related to a particular {@link FOLDER}.
  * @package webcore
  * @subpackage db
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.7.1
  */
 class FOLDER_DRAFTABLE_ENTRY_QUERY extends FOLDER_ENTRY_QUERY

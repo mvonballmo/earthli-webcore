@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2008 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package projects
  * @subpackage config
- * @version 3.0.0
+ * @version 3.1.0
  * @since 1.9.0
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2008 Marco Von Ballmoos
+Copyright (c) 2002-2009 Marco Von Ballmoos
 
 This file is part of earthli Projects.
 
@@ -44,7 +44,7 @@ include_once ('webcore/config/application_engine.php');
  * Inherit from this class to customize startup for the application.
  * @package projects
  * @subpackage config
- * @version 3.0.0
+ * @version 3.1.0
  * @since 1.9.0
  */
 class PROJECT_APPLICATION_ENGINE extends APPLICATION_ENGINE

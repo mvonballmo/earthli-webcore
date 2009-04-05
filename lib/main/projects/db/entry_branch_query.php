@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2008 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package projects
  * @subpackage db
- * @version 3.0.0
+ * @version 3.1.0
  * @since 1.4.1
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2008 Marco Von Ballmoos
+Copyright (c) 2002-2009 Marco Von Ballmoos
 
 This file is part of earthli Projects.
 
@@ -43,7 +43,7 @@ require_once ('webcore/db/query.php');
  * Retrieves {@link PROJECT_ENTRY_BRANCH_INFO}s for a particular {@link PROJECT_ENTRY}.
  * @package projects
  * @subpackage db
- * @version 3.0.0
+ * @version 3.1.0
  * @since 1.4.1
  */
 class PROJECT_ENTRY_BRANCH_INFO_QUERY extends QUERY
@@ -142,7 +142,7 @@ class PROJECT_ENTRY_BRANCH_INFO_QUERY extends QUERY
  * Retrieves {@link JOB_BRANCH_INFO}es for a particular {@link JOB}.
  * @package projects
  * @subpackage db
- * @version 3.0.0
+ * @version 3.1.0
  * @since 1.4.1
  */
 class JOB_BRANCH_INFO_QUERY extends PROJECT_ENTRY_BRANCH_INFO_QUERY
@@ -172,7 +172,7 @@ class JOB_BRANCH_INFO_QUERY extends PROJECT_ENTRY_BRANCH_INFO_QUERY
  * Retrieves {@link CHANGE_BRANCH_INFO}es for a particular {@link CHANGE}.
  * @package projects
  * @subpackage db
- * @version 3.0.0
+ * @version 3.1.0
  * @since 1.4.1
  */
 class CHANGE_BRANCH_INFO_QUERY extends PROJECT_ENTRY_BRANCH_INFO_QUERY

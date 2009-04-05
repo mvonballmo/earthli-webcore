@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2008 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package projects
  * @subpackage db
- * @version 3.0.0
+ * @version 3.1.0
  * @since 1.4.1
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2008 Marco Von Ballmoos
+Copyright (c) 2002-2009 Marco Von Ballmoos
 
 This file is part of earthli Projects.
 
@@ -43,7 +43,7 @@ require_once ('webcore/db/object_in_folder_query.php');
  * Retrieves {@link BRANCH}es for a particular {@link PROJECT}.
  * @package projects
  * @subpackage db
- * @version 3.0.0
+ * @version 3.1.0
  * @since 1.4.1
  */
 class PROJECT_BRANCH_QUERY extends OBJECT_IN_SINGLE_FOLDER_QUERY

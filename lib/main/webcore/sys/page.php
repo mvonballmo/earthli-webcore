@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2008 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package webcore
  * @subpackage sys
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.2.1
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2008 Marco Von Ballmoos
+Copyright (c) 2002-2009 Marco Von Ballmoos
 
 This file is part of earthli WebCore.
 
@@ -48,7 +48,7 @@ require_once ('webcore/sys/context.php');
  * and other rendering delegation.
  * @package webcore
  * @subpackage sys
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.2.1
  */
 class PAGE extends CONTEXT
@@ -390,7 +390,7 @@ class PAGE extends CONTEXT
    * @param boolean $set_as_default Calls {@link APPLICATION_ENGINE::
    * set_as_main_for()} using {@link $Page} if True.
    * 
-   * @version 3.0.0
+   * @version 3.1.0
    * @since 2.7.0
    * @see APPLICATION_ENGINE
    * @return APPLICATION

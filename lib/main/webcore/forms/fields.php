@@ -1,10 +1,10 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2008 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.2.1
  * @package webcore
  * @subpackage forms-core
@@ -13,7 +13,7 @@
 
 /****************************************************************************
 
-Copyright (c) 2002-2008 Marco Von Ballmoos
+Copyright (c) 2002-2009 Marco Von Ballmoos
 
 This file is part of earthli WebCore.
 
@@ -41,7 +41,7 @@ http://www.earthli.com/software/webcore
  * Base class for different types of form fields.
  * @package webcore
  * @subpackage forms-core
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.2.1
  * @see FORM
  * @access private
@@ -297,7 +297,7 @@ class FIELD extends RAISABLE
  * @see FORM
  * @package webcore
  * @subpackage forms-core
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.2.1
  * @access private
  */
@@ -369,7 +369,7 @@ class INTEGER_FIELD extends FIELD
  * @package webcore
  * @subpackage forms-core
  * @access private
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.7.0
  */
 class FLOAT_FIELD extends INTEGER_FIELD
@@ -381,7 +381,7 @@ class FLOAT_FIELD extends INTEGER_FIELD
  * @see FORM
  * @package webcore
  * @subpackage forms-core
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.2.1
  * @access private
  */
@@ -422,7 +422,7 @@ class BOOLEAN_FIELD extends FIELD
  * @see FORM
  * @package webcore
  * @subpackage forms-core
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.2.1
  * @access private
  */
@@ -540,7 +540,7 @@ class TEXT_FIELD extends FIELD
  * @see FORM
  * @package webcore
  * @subpackage forms-core
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.7.1
  * @access private
  */
@@ -574,7 +574,7 @@ class EMAIL_FIELD extends TEXT_FIELD
  * @see FORM
  * @package webcore
  * @subpackage forms-core
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.7.1
  * @access private
  */
@@ -607,7 +607,7 @@ class TITLE_FIELD extends TEXT_FIELD
  * @see FORM
  * @package webcore
  * @subpackage forms-core
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.7.1
  * @access private
  */
@@ -640,7 +640,7 @@ class URI_FIELD extends TEXT_FIELD
  * @see FORM
  * @package webcore
  * @subpackage forms-core
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.2.1
  * @access private
  */
@@ -663,7 +663,7 @@ class MUNGER_TEXT_FIELD extends TEXT_FIELD
  * @see FORM
  * @package webcore
  * @subpackage forms-core
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.2.1
  * @access private
  */
@@ -681,7 +681,7 @@ class MUNGER_STRING_FIELD extends TEXT_FIELD
  * @see FORM
  * @package webcore
  * @subpackage forms-core
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.2.1
  * @access private
  */
@@ -879,7 +879,7 @@ class DATE_TIME_FIELD extends FIELD
  * @see FORM
  * @package webcore
  * @subpackage forms-core
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.2.1
  * @access private
  */
@@ -1026,7 +1026,7 @@ class ARRAY_FIELD extends FIELD
  * @see FORM
  * @package webcore
  * @subpackage forms-core
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.2.1
  * @access private
  */

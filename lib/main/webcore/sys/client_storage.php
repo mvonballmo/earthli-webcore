@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2008 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package webcore
  * @subpackage sys
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.7.0
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2008 Marco Von Ballmoos
+Copyright (c) 2002-2009 Marco Von Ballmoos
 
 This file is part of earthli WebCore.
 
@@ -59,7 +59,7 @@ define ('Msg_channel_client', 'Storage');
  * @see COOKIE
  * @package webcore
  * @subpackage sys
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.7.0
  * @abstract
  */

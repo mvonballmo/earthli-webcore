@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2008 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package albums
  * @subpackage gui
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.7.0
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2008 Marco Von Ballmoos
+Copyright (c) 2002-2009 Marco Von Ballmoos
 
 This file is part of earthli Albums.
 
@@ -44,7 +44,7 @@ require_once ('webcore/gui/location_renderer.php');
  * Render details for a {@link PICTURE}.
  * @package albums
  * @subpackage gui
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.7.0
  */
 class PICTURE_RENDERER extends ENTRY_RENDERER
@@ -151,7 +151,7 @@ class PICTURE_RENDERER extends ENTRY_RENDERER
  * Renders a location for a {@link PROJECT_ENTRY} into a {@link PAGE}.
  * @package albums
  * @subpackage gui
- * @version 3.0.0
+ * @version 3.1.0
  * @since 1.9.1
  */
 class PICTURE_LOCATION_RENDERER extends OBJECT_IN_FOLDER_LOCATION_RENDERER

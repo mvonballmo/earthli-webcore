@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2007 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package webcore
  * @subpackage grid
- * @version 2.8.0
+ * @version 3.1.0
  * @since 2.2.1
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2007 Marco Von Ballmoos
+Copyright (c) 2002-2009 Marco Von Ballmoos
 
 This file is part of earthli WebCore.
 
@@ -43,7 +43,7 @@ require_once ('webcore/gui/content_object_grid.php');
  * Displays {@link USER}s from a {@link QUERY}.
  * @package webcore
  * @subpackage grid
- * @version 2.8.0
+ * @version 3.1.0
  * @since 2.2.1
  */
 class USER_GRID extends CONTENT_OBJECT_GRID
@@ -126,7 +126,7 @@ class USER_GRID extends CONTENT_OBJECT_GRID
  * Displays {@link USER}s for a {@link SEARCH}.
  * @package webcore
  * @subpackage grid
- * @version 2.8.0
+ * @version 3.1.0
  * @since 2.7.0
  */
 class SELECT_USER_GRID extends USER_GRID

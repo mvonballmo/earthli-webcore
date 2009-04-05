@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2008 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package webcore
  * @subpackage db
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.2.1
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2008 Marco Von Ballmoos
+Copyright (c) 2002-2009 Marco Von Ballmoos
 
 This file is part of earthli WebCore.
 
@@ -70,7 +70,7 @@ define ('Msg_channel_sql', '__sql');
  * Describes a field in a physical database.
  * @package webcore
  * @subpackage db
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.2.1
  * @access private
  */
@@ -154,7 +154,7 @@ class SQL_FIELD
  * Describes a table in a physical database.
  * @package webcore
  * @subpackage db
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.2.1
  * @access private
  */
@@ -362,7 +362,7 @@ class SQL_TABLE extends WEBCORE_OBJECT
  * @see STORABLE
  * @package webcore
  * @subpackage db
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.2.1
  * @access private
  */

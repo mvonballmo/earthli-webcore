@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2008 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package webcore
  * @subpackage grid
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.2.1
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2008 Marco Von Ballmoos
+Copyright (c) 2002-2009 Marco Von Ballmoos
 
 This file is part of earthli WebCore.
 
@@ -43,7 +43,7 @@ require_once ('webcore/gui/flat_comment_grid.php');
  * Displays {@link COMMENT}s from a {@link QUERY}, threaded to show nesting.
  * @package webcore
  * @subpackage grid
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.2.1
  */
 class THREADED_COMMENT_GRID extends FLAT_COMMENT_GRID

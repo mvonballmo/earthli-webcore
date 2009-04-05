@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2008 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package webcore
  * @subpackage forms
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.7.0
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2008 Marco Von Ballmoos
+Copyright (c) 2002-2009 Marco Von Ballmoos
 
 This file is part of earthli Webcore.
 
@@ -43,7 +43,7 @@ require_once ('webcore/forms/subscription_form.php');
  * Display a list of {@link USER}s to which a {@link SUBSCRIBER} is subscribed.
  * @package webcore
  * @subpackage forms
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.7.0
  */
 class USER_SUBSCRIPTION_FORM extends CONTENT_OBJECT_SUBSCRIPTION_FORM

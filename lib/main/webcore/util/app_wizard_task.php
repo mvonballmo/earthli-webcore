@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2008 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package webcore
  * @subpackage util
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.7.1
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2008 Marco Von Ballmoos
+Copyright (c) 2002-2009 Marco Von Ballmoos
 
 This file is part of earthli WebCore.
 
@@ -49,7 +49,7 @@ define ('Msg_channel_app_wizard', 'Wizard');
  * Builds a new webcore application.
  * @package webcore
  * @subpackage tests
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.6.0
  */
 class APP_WIZARD_TASK extends TASK

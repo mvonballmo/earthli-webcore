@@ -2,19 +2,19 @@
 
 /**
  * WebCore Testsuite Component.
- * @copyright Copyright (c) 2002-2008 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package webcore
  * @subpackage tests
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.7.0
  * @access private
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2008 Marco Von Ballmoos
+Copyright (c) 2002-2009 Marco Von Ballmoos
 
 This file is part of earthli WebCore.
 
@@ -45,7 +45,7 @@ require_once ('webcore/util/image.php');
 /**
  * @package webcore
  * @subpackage tests
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.7.0
  * @access private
  */

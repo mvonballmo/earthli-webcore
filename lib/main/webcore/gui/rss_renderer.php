@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2008 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package webcore
  * @subpackage newsfeed
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.7.0
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2008 Marco Von Ballmoos
+Copyright (c) 2002-2009 Marco Von Ballmoos
 
 This file is part of earthli WebCore.
 
@@ -47,7 +47,7 @@ require_once ('webcore/gui/newsfeed_renderer.php');
  * @see ATOM_RENDERER
  * @package webcore
  * @subpackage newsfeed
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.7.0
  */
 class RSS_RENDERER extends NEWSFEED_RENDERER
@@ -139,7 +139,7 @@ class RSS_RENDERER extends NEWSFEED_RENDERER
  * Render an {@link ENTRY} as an RSS item.
  * @package webcore
  * @subpackage newsfeed
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.7.0
  */
 class ENTRY_RSS_RENDERER extends NEWSFEED_OBJECT_RENDERER
@@ -180,7 +180,7 @@ class ENTRY_RSS_RENDERER extends NEWSFEED_OBJECT_RENDERER
  * Render a {@link DRAFTABLE_ENTRY} as an RSS item.
  * @package webcore
  * @subpackage newsfeed
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.7.0
  */
 class DRAFTABLE_ENTRY_RSS_RENDERER extends ENTRY_RSS_RENDERER

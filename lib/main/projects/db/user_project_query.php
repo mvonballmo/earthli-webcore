@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2007 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package projects
  * @subpackage db
- * @version 2.0.0
+ * @version 3.1.0
  * @since 1.4.1
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2007 Marco Von Ballmoos
+Copyright (c) 2002-2009 Marco Von Ballmoos
 
 This file is part of earthli Projects.
 
@@ -43,7 +43,7 @@ require_once ('webcore/db/user_folder_query.php');
  * Retrieves {@link PROJECT}s visible to a {@link PROJECT_USER}.
  * @package projects
  * @subpackage db
- * @version 2.0.0
+ * @version 3.1.0
  * @since 1.4.1
  */
 class USER_PROJECT_QUERY extends USER_FOLDER_QUERY

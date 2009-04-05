@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2008 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package webcore
  * @subpackage panels
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.2.1
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2008 Marco Von Ballmoos
+Copyright (c) 2002-2009 Marco Von Ballmoos
 
 This file is part of earthli WebCore.
 
@@ -78,7 +78,7 @@ define ('Panel_all', 3);
  * @see PANEL
  * @package webcore
  * @subpackage panels
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.2.1
  */
 class PANEL_MANAGER extends WEBCORE_OBJECT
@@ -487,7 +487,7 @@ class PANEL_MANAGER extends WEBCORE_OBJECT
  * explicitly overriding each type).
  * @package webcore
  * @subpackage panels
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.7.1
  */
 class PANEL_MANAGER_HELPER extends WEBCORE_OBJECT
@@ -511,7 +511,7 @@ class PANEL_MANAGER_HELPER extends WEBCORE_OBJECT
  * informational()}.
  * @package webcore
  * @subpackage panels
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.2.1
  * @abstract
  */
@@ -664,7 +664,7 @@ abstract class PANEL extends WEBCORE_OBJECT
  * {@link PANEL::display()} method.
  * @package webcore
  * @subpackage panels
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.7.0
  * @access private
  */
@@ -720,7 +720,7 @@ class PANEL_OPTIONS
  * FOLDER_PANEL}s.
  * @package webcore
  * @subpackage panels
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.7.0
  */
 class WEBCORE_PANEL_MANAGER extends PANEL_MANAGER
@@ -847,7 +847,7 @@ class WEBCORE_PANEL_MANAGER extends PANEL_MANAGER
  * application's home page.
  * @package webcore
  * @subpackage panels
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.7.0
  */
 class INDEX_PANEL_MANAGER extends WEBCORE_PANEL_MANAGER
@@ -927,7 +927,7 @@ class INDEX_PANEL_MANAGER extends WEBCORE_PANEL_MANAGER
  * {@link FOLDER}'s home page.
  * @package webcore
  * @subpackage panels
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.7.0
  */
 class FOLDER_PANEL_MANAGER extends WEBCORE_PANEL_MANAGER
@@ -978,7 +978,7 @@ class FOLDER_PANEL_MANAGER extends WEBCORE_PANEL_MANAGER
  * {@link USER}'s home page.
  * @package webcore
  * @subpackage panels
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.7.0
  */
 class USER_PANEL_MANAGER extends WEBCORE_PANEL_MANAGER
@@ -1026,7 +1026,7 @@ class USER_PANEL_MANAGER extends WEBCORE_PANEL_MANAGER
  * The default panel if there is no other content.
  * @package webcore
  * @subpackage panels
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.2.1
  */
 class EMPTY_PANEL extends PANEL
@@ -1064,7 +1064,7 @@ class EMPTY_PANEL extends PANEL
  * A panel that uses a {@link GRID} to display content.
  * @package webcore
  * @subpackage panels
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.2.1
  * @abstract
  */
@@ -1117,7 +1117,7 @@ abstract class GRID_PANEL extends PANEL
  * A grid panel that displays the results of a {@link QUERY}.
  * @package webcore
  * @subpackage panels
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.2.1
  * @abstract
  */
@@ -1170,7 +1170,7 @@ abstract class QUERY_PANEL extends GRID_PANEL
  * Shows {@link HISTORY_ITEM}s from a {@link QUERY} in a grid.
  * @package webcore
  * @subpackage panels
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.2.1
  */
 class HISTORY_ITEM_PANEL extends QUERY_PANEL
@@ -1200,7 +1200,7 @@ class HISTORY_ITEM_PANEL extends QUERY_PANEL
  * Shows {@link COMMENT}s from a {@link QUERY} in a grid.
  * @package webcore
  * @subpackage panels
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.2.1
  */
 class COMMENT_PANEL extends QUERY_PANEL
@@ -1235,7 +1235,7 @@ class COMMENT_PANEL extends QUERY_PANEL
  * Shows {@link GROUP}s from a {@link QUERY} in a grid.
  * @package webcore
  * @subpackage panels
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.5.0
  */
 class GROUP_PANEL extends QUERY_PANEL
@@ -1290,7 +1290,7 @@ class GROUP_PANEL extends QUERY_PANEL
  * Shows {@link USER}s from a {@link QUERY} in a {@link GRID}.
  * @package webcore
  * @subpackage panels
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.5.0
  */
 class USER_PANEL extends QUERY_PANEL
@@ -1355,7 +1355,7 @@ class USER_PANEL extends QUERY_PANEL
  * Shows {@link THEME}s from a {@link QUERY} in a grid.
  * @package webcore
  * @subpackage panels
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.7.0
  */
 class THEME_PANEL extends QUERY_PANEL
@@ -1422,7 +1422,7 @@ class THEME_PANEL extends QUERY_PANEL
  * Shows {@link ICON}s from a {@link QUERY} in a grid.
  * @package webcore
  * @subpackage panels
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.7.0
  */
 class ICON_PANEL extends QUERY_PANEL
@@ -1489,7 +1489,7 @@ class ICON_PANEL extends QUERY_PANEL
  * Shows {@link ENTRY}s from a {@link QUERY} in a {@link GRID}.
  * @package webcore
  * @subpackage panels
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.7.0
  */
 class ENTRY_PANEL extends QUERY_PANEL
@@ -1541,7 +1541,7 @@ class ENTRY_PANEL extends QUERY_PANEL
  * Shows {@link FOLDER}s in a grid.
  * @package webcore
  * @subpackage panels
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.2.1
  */
 class FOLDER_PANEL extends GRID_PANEL
@@ -1666,7 +1666,7 @@ class FOLDER_PANEL extends GRID_PANEL
  * Displays a {@link FORM} within a panel.
  * @package webcore
  * @subpackage panels
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.2.1
  * @abstract
  */
@@ -1691,7 +1691,7 @@ abstract class FORM_PANEL extends PANEL
  * Displays a summary of all user information.
  * @package webcore
  * @subpackage panels
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.7.0
  */
 class USER_SUMMARY_PANEL extends PANEL

@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2008 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package webcore
  * @subpackage forms
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.2.1
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2008 Marco Von Ballmoos
+Copyright (c) 2002-2009 Marco Von Ballmoos
 
 This file is part of earthli Webcore.
 
@@ -44,7 +44,7 @@ require_once ('webcore/forms/form.php');
  * @abstract
  * @package webcore
  * @subpackage forms
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.2.1
  */
 abstract class SUBSCRIPTION_FORM extends FORM
@@ -120,7 +120,7 @@ abstract class SUBSCRIPTION_FORM extends FORM
  * @abstract 
  * @package webcore
  * @subpackage forms
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.7.0
  */
 abstract class CONTENT_OBJECT_SUBSCRIPTION_FORM extends SUBSCRIPTION_FORM

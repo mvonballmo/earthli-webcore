@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2008 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package recipes
  * @subpackage obj
- * @version 3.0.0
+ * @version 3.1.0
  * @since 1.3.0
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2008 Marco Von Ballmoos
+Copyright (c) 2002-2009 Marco Von Ballmoos
 
 This file is part of earthli Recipes.
 
@@ -43,7 +43,7 @@ require_once ('webcore/obj/entry.php');
  * Contains all the information about a recipe.
  * @package recipes
  * @subpackage obj
- * @version 3.0.0
+ * @version 3.1.0
  * @since 1.3.0
  */
 class RECIPE extends DRAFTABLE_ENTRY

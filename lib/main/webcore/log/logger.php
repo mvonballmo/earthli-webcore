@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2008 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package webcore
  * @subpackage log
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.2.1
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2008 Marco Von Ballmoos
+Copyright (c) 2002-2009 Marco Von Ballmoos
 
 This file is part of earthli WebCore.
 
@@ -199,7 +199,7 @@ function log_close_block ()
  * Separated from the logger to facilitate sharing.
  * @package webcore
  * @subpackage log
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.2.1
  * @access private
  */
@@ -276,7 +276,7 @@ class LOGGER_FILTER_SETTINGS
  * with other loggers.
  * @package webcore
  * @subpackage log
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.2.1
  * @abstract
  */
@@ -524,7 +524,7 @@ abstract class LOGGER extends LOGGER_CONTAINER
  * Does not record messages; records to null output.
  * @package webcore
  * @subpackage log
- * @version 3.0.0
+ * @version 3.1.0
  * @since 2.7.0
  */
 class NULL_LOGGER extends LOGGER
