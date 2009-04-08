@@ -156,12 +156,12 @@ function print_r_capture ($mixed)
  * Insert an item into a classic array.
  * Provides functionality mysteriously missing from PHP itself. Does not check
  * whether the index is valid for the given array.
- * @param array $array Original array
+ * @param array &$array Original array
  * @param integer $index Index into array
  * @param mixed $value Value to insert at 'index'
  * @return array
  */
-function array_insert ($array, $index, $value)
+function array_insert (&$array, $index, $value)
 {
   $array = array_merge (array_slice ($array, 0, $index), array ($value), array_slice ($array, $index));
 }

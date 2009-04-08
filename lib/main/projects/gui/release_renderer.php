@@ -53,7 +53,7 @@ class RELEASE_RENDERER extends CONTENT_OBJECT_RENDERER
    * @param RELEASE $obj
    * @access private
    */
-  protected function _display_as_html(& $obj)
+  protected function _display_as_html($obj)
   {
     if ($this->_options->show_as_summary)
     {
@@ -85,7 +85,7 @@ class RELEASE_RENDERER extends CONTENT_OBJECT_RENDERER
    * Shows testing/ship dates for a release in HTML.
    * @param RELEASE $obj
    */
-  protected function _echo_details_as_html(& $obj) 
+  protected function _echo_details_as_html($obj) 
   {
     echo '<div class="info-box-top">';
     $status = $obj->status ();
@@ -99,7 +99,7 @@ class RELEASE_RENDERER extends CONTENT_OBJECT_RENDERER
    * @param object $obj
    * @access private
    */
-  protected function _display_as_plain_text(& $obj) 
+  protected function _display_as_plain_text($obj) 
   {
     $status = $obj->status ();
     echo $this->line ('Test Date: ' . $status->test->as_plain_text ());

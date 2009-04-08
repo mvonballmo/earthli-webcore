@@ -107,6 +107,13 @@ http://www.earthli.com/software/webcore
   }
   else
   {
-    $Page->raise_security_violation ('You are not allowed to see this user.', $user);
+    if (isset($user))
+    {
+      $Page->raise_security_violation ('You are not allowed to see this user.', $user);
+    }
+    else 
+    {
+      $Page->raise_error ('Please specify a user.', 'Invalid parameters');
+    }
   }
 ?>
