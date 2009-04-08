@@ -114,6 +114,20 @@ class FOLDER_COMMANDS extends COMMANDS
                         && ! $folder->is_root ());
     $cmd->importance = Command_importance_high - 2 * Command_importance_increment;
     $this->append ($cmd);
+
+    $parent_id = $folder->parent_folder_id ();
+    
+    if ($parent_id != 0)
+    {
+      $cmd = $this->make_command ();
+      $cmd->id = 'move';
+      $cmd->title = 'Move';
+      $cmd->link = "multiple_move.php?id=$parent_id&folder_ids=$folder->id";
+      $cmd->icon = '{icons}buttons/move';
+      $cmd->executable = $this->login->is_allowed (Privilege_set_folder, Privilege_modify, $folder);
+      $cmd->importance = Command_importance_high - 2 * Command_importance_increment;
+      $this->append ($cmd);
+    }
   }
 
   /**

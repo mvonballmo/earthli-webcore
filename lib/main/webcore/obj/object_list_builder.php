@@ -160,7 +160,6 @@ class OBJECT_LIST_BUILDER extends WEBCORE_OBJECT
       $this->_contents [] = $folder_info->format_amount (sizeof ($this->folders));
     }
 
-    $this->_contents = array ();
     $entry_types = $this->app->entry_type_infos ();
 
     /* If the generic array is not set, search for type-specific ones. */
