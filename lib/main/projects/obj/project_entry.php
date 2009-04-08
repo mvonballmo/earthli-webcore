@@ -578,7 +578,7 @@ abstract class PROJECT_ENTRY_BRANCH_INFO extends UNIQUE_OBJECT
     $storage->add ($tname, 'branch_id', Field_type_integer, $this->branch_id);
     $storage->add ($tname, 'branch_release_id', Field_type_integer, $this->release_id);
 
-    $tname = $this->_secondary_table_name ();
+    $tname = $this->secondary_table_name ();
     $storage->restrict ($tname, 'entry_to_branch_id');
     $storage->add ($tname, 'entry_to_branch_id', Field_type_integer, $this->entry_to_branch_id, Storage_action_create);
   }
@@ -610,7 +610,7 @@ abstract class PROJECT_ENTRY_BRANCH_INFO extends UNIQUE_OBJECT
   protected function _purge ($options)
   {
     parent::_purge ($options);
-    $tname = $this->_secondary_table_name ();
+    $tname = $this->secondary_table_name ();
     $this->db->logged_query ("DELETE FROM {$tname} WHERE entry_to_branch_id = {$this->entry_to_branch_id}");
   }
 

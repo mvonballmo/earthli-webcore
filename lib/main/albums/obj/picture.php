@@ -207,7 +207,7 @@ class PICTURE extends ALBUM_ENTRY
   public function store_to ($storage)
   {
     parent::store_to ($storage);
-    $storage->add ($this->_secondary_table_name (), 'file_name', Field_type_string, $this->file_name);
+    $storage->add ($this->secondary_table_name (), 'file_name', Field_type_string, $this->file_name);
   }
 
   /**
@@ -234,7 +234,7 @@ class PICTURE extends ALBUM_ENTRY
    * @return string
    * @access private
    */
-  protected function _secondary_table_name ()
+  public function secondary_table_name ()
   {
     return $this->app->table_names->pictures;
   }

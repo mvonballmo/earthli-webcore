@@ -285,7 +285,7 @@ class JOB extends PROJECT_ENTRY
   public function store_to ($storage)
   {
     parent::store_to ($storage);
-    $tname = $this->_secondary_table_name ();
+    $tname = $this->secondary_table_name ();
     $storage->add ($tname, 'time_needed', Field_type_date_time, $this->time_needed);
     $storage->add ($tname, 'time_assignee_changed', Field_type_date_time, $this->time_assignee_changed);
     $storage->add ($tname, 'assignee_id', Field_type_integer, $this->assignee_id);
@@ -326,7 +326,7 @@ class JOB extends PROJECT_ENTRY
    * @return string
    * @access private
    */
-  protected function _secondary_table_name ()
+  public function secondary_table_name ()
   {
     return $this->app->table_names->jobs;
   }
@@ -723,7 +723,7 @@ class JOB_BRANCH_INFO extends PROJECT_ENTRY_BRANCH_INFO
    * @return string
    * @access private
    */
-  protected function _secondary_table_name ()
+  public function secondary_table_name ()
   {
     return $this->app->table_names->jobs_to_branches;
   }
@@ -735,7 +735,7 @@ class JOB_BRANCH_INFO extends PROJECT_ENTRY_BRANCH_INFO
   public function store_to ($storage)
   {
     parent::store_to ($storage);
-    $tname = $this->_secondary_table_name ();
+    $tname = $this->secondary_table_name ();
     $storage->add ($tname, 'branch_status', Field_type_integer, $this->status);
     $storage->add ($tname, 'branch_priority', Field_type_integer, $this->priority);
     $storage->add ($tname, 'branch_closer_id', Field_type_integer, $this->closer_id);

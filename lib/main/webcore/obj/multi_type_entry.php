@@ -82,7 +82,7 @@ abstract class MULTI_TYPE_ENTRY extends ENTRY
   {
     parent::store_to ($storage);
     $storage->add ($this->table_name (), 'type', Field_type_string, $this->type, Storage_action_create);
-    $tname = $this->_secondary_table_name ();
+    $tname = $this->secondary_table_name ();
     $storage->add ($tname, 'entry_id', Field_type_integer, $this->entry_id, Storage_action_create);
     $storage->restrict ($tname, 'entry_id');
   }
@@ -93,7 +93,7 @@ abstract class MULTI_TYPE_ENTRY extends ENTRY
    * @access private
    * @abstract
    */
-  protected abstract function _secondary_table_name ();
+  public abstract function secondary_table_name ();
 
   /**
    * @return SQL_MULTI_TYPE_ENTRY_STORAGE
@@ -111,7 +111,7 @@ abstract class MULTI_TYPE_ENTRY extends ENTRY
    */
   protected function _purge ($options)
   {
-    $tname = $this->_secondary_table_name ();
+    $tname = $this->secondary_table_name ();
     $this->db->logged_query ("DELETE LOW_PRIORITY FROM {$tname} WHERE entry_id = $this->id");
     parent::_purge ($options);
   }

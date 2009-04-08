@@ -758,9 +758,6 @@ class WEBCORE_PANEL_MANAGER extends PANEL_MANAGER
       $query_for_type->set_type ($type_info->id);
       $class_name = $this->app->final_class_name ('ENTRY_PANEL', '', $type_info->id);
       $this->_add_entry_panel_for ($query_for_type, $type_info, $class_name);
-
-      // HACK: This is required for PHP4
-      unset($query_for_type);
     }
   }
 

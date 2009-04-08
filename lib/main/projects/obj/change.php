@@ -157,7 +157,7 @@ class CHANGE extends PROJECT_ENTRY
   public function store_to ($storage)
   {
     parent::store_to ($storage);
-    $tname =$this->_secondary_table_name ();
+    $tname =$this->secondary_table_name ();
     $storage->add ($tname, 'number', Field_type_integer, $this->number, Storage_action_create);
     $storage->add ($tname, 'job_id', Field_type_integer, $this->job_id);
     $storage->add ($tname, 'files', Field_type_string, $this->files);
@@ -192,7 +192,7 @@ class CHANGE extends PROJECT_ENTRY
    * @return string
    * @access private
    */
-  protected function _secondary_table_name ()
+  public function secondary_table_name ()
   {
     return $this->app->table_names->changes;
   }
@@ -339,7 +339,7 @@ class CHANGE_BRANCH_INFO extends PROJECT_ENTRY_BRANCH_INFO
    * @return string
    * @access private
    */
-  protected function _secondary_table_name ()
+  public function secondary_table_name ()
   {
     return $this->app->table_names->changes_to_branches;
   }
@@ -351,7 +351,7 @@ class CHANGE_BRANCH_INFO extends PROJECT_ENTRY_BRANCH_INFO
   public function store_to ($storage)
   {
     parent::store_to ($storage);
-    $tname = $this->_secondary_table_name ();
+    $tname = $this->secondary_table_name ();
     $storage->add ($tname, 'branch_applier_id', Field_type_integer, $this->applier_id);
     $storage->add ($tname, 'branch_time_applied', Field_type_date_time, $this->time_applied);
   }

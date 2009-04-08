@@ -211,7 +211,7 @@ class JOURNAL extends ALBUM_ENTRY
   public function store_to ($storage)
   {
     parent::store_to ($storage);
-    $tname =$this->_secondary_table_name ();
+    $tname =$this->secondary_table_name ();
     $storage->add ($tname, 'weather', Field_type_string, $this->weather);
     $storage->add ($tname, 'lo_temp', Field_type_integer, $this->lo_temp);
     $storage->add ($tname, 'hi_temp', Field_type_integer, $this->hi_temp);
@@ -232,7 +232,7 @@ class JOURNAL extends ALBUM_ENTRY
    * @return string
    * @access private
    */
-  protected function _secondary_table_name ()
+  public function secondary_table_name ()
   {
     return $this->app->table_names->journals;
   }

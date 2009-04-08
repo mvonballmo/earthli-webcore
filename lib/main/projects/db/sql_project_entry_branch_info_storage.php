@@ -57,7 +57,7 @@ class SQL_PROJECT_ENTRY_BRANCH_INFO_STORAGE extends SQL_UNIQUE_STORAGE
    */
   protected function _commit_table ($table, $action, $obj)
   {
-    if (($table->name == $obj->_secondary_table_name ()) && ($action == Storage_action_create))
+    if (($table->name == $obj->secondary_table_name ()) && ($action == Storage_action_create))
     {
       $obj->entry_to_branch_id = $obj->id;
     }
