@@ -94,16 +94,15 @@ class RESOLVER extends RESOURCE_MANAGER
   {
     if (empty ($this->_singletons [$singleton_name]))
     {
-      $class_name = $this->final_class_name ($class_name, $file_name, $context);
-      $this->_singletons [$singleton_name] = new $class_name ($this);
+      $this->_singletons [$singleton_name] = $this->make_object($singleton_name, $class_name, $file_name, $context);
     }
     return $this->_singletons [$singleton_name];
   }
   
   public function make_object ($id, $class_name, $file_name = '', $context = '')
   {
-    $Result = $this->find_or_create_singleton($id, $class_name, $file_name, $context);
-    return clone_object ($Result);
+    $class_name = $this->final_class_name ($class_name, $file_name, $context);
+    return new $class_name ($this);
   }
 
   /**
