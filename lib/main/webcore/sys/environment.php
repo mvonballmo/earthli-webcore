@@ -314,7 +314,7 @@ class ENVIRONMENT extends RESOLVER
    */
   public function is_http_server ()
   {
-    return ! $this->run_as_console && read_array_index ($_SERVER, 'HTTP_USER_AGENT') <> '';
+    return ! $this->run_as_console && read_array_index ($_SERVER, 'HTTP_USER_AGENT') != '';
   }
 
   /**

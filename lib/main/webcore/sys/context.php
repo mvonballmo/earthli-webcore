@@ -270,7 +270,7 @@ class CONTEXT extends RESOLVER
    */
   public function title_formatter ()
   {
-    return $this->find_or_create_singleton ('title_formatter', 'TITLE_FORMATTER', 'webcore/util/title_formatter.php');
+    return $this->make_object ('title_formatter', 'TITLE_FORMATTER', 'webcore/util/title_formatter.php');
   }
 
   /**
@@ -281,7 +281,7 @@ class CONTEXT extends RESOLVER
    */
   public function html_text_formatter ()
   {
-    return $this->find_or_create_singleton ('html_text_formatter', 'HTML_TEXT_MUNGER', 'webcore/util/html_munger.php');
+    return $this->make_object ('html_text_formatter', 'HTML_TEXT_MUNGER', 'webcore/util/html_munger.php');
   }
 
   /**
@@ -291,7 +291,7 @@ class CONTEXT extends RESOLVER
    */
   public function html_title_formatter ()
   {
-    return $this->find_or_create_singleton ('html_title_formatter', 'HTML_TITLE_MUNGER', 'webcore/util/html_munger.php');
+    return $this->make_object ('html_title_formatter', 'HTML_TITLE_MUNGER', 'webcore/util/html_munger.php');
   }
 
   /**
@@ -300,7 +300,7 @@ class CONTEXT extends RESOLVER
    */
   public function plain_text_formatter ()
   {
-    return $this->find_or_create_singleton ('plain_text_formatter', 'PLAIN_TEXT_MUNGER', 'webcore/util/plain_text_munger.php');
+    return $this->make_object ('plain_text_formatter', 'PLAIN_TEXT_MUNGER', 'webcore/util/plain_text_munger.php');
   }
 
   /**
@@ -310,7 +310,7 @@ class CONTEXT extends RESOLVER
    */
   public function plain_text_title_formatter ()
   {
-    return $this->find_or_create_singleton ('plain_text_title_formatter', 'PLAIN_TEXT_TITLE_MUNGER', 'webcore/util/plain_text_munger.php');
+    return $this->make_object ('plain_text_title_formatter', 'PLAIN_TEXT_TITLE_MUNGER', 'webcore/util/plain_text_munger.php');
   }
 
   /**
@@ -366,7 +366,7 @@ class CONTEXT extends RESOLVER
    */
   public function file_type_manager ()
   {
-    return $this->find_or_create_singleton ('file_type_manager', 'FILE_TYPE_MANAGER', 'webcore/util/file_type_manager.php');
+    return $this->make_object ('file_type_manager', 'FILE_TYPE_MANAGER', 'webcore/util/file_type_manager.php');
   }
 
   /**

@@ -205,7 +205,7 @@ class SUBSCRIBER extends UNIQUE_OBJECT
       return ($php_time_sent + ($this->min_hours_to_wait * 3600)) < time ();
     }
 
-    return $this->min_hours_to_wait <> Subscriptions_disabled;
+    return $this->min_hours_to_wait != Subscriptions_disabled;
   }
 
   /**

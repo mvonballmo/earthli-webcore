@@ -619,7 +619,7 @@ class DATE_TIME extends RAISABLE
    */
   public function is_valid ()
   {
-    return $this->as_php () <> Date_time_unassigned;
+    return $this->as_php () != Date_time_unassigned;
   }
 
   /**
@@ -628,7 +628,7 @@ class DATE_TIME extends RAISABLE
    */
   public function as_php ()
   {
-    if (($this->_php_time == Date_time_unassigned) && ! empty($this->_iso_time))
+    if (($this->_php_time == Date_time_unassigned) && ($this->_iso_time != Date_time_unassigned))
     {
       $regs = null; // Compiler warning
       ereg ("([0-9]{4})-([0-9]{1,2})-([0-9]{1,2})( ([0-9]{1,2}):([0-9]{1,2}):([0-9]{1,2}))", $this->_iso_time, $regs);
@@ -646,11 +646,12 @@ class DATE_TIME extends RAISABLE
    */
   public function as_iso ()
   {
-    if ($this->_iso_time == Date_time_unassigned)
+    if (($this->_iso_time == Date_time_unassigned) && ($this->_php_time != Date_time_unassigned))
     {
-      if ($this->_php_time > 0)
+      $this->_iso_time = date ("Y-m-d H:i:s", $this->_php_time);
+      if (! isset($this->_iso_time))
       {
-        $this->_iso_time = date ("Y-m-d H:i:s", $this->_php_time);
+        $this->_iso_time = Date_time_unassigned;
       }
     }
 
@@ -687,7 +688,7 @@ class DATE_TIME extends RAISABLE
    */
   public function set_from_iso ($t)
   {
-    $this->_iso_time = $t;
+    $this->_iso_time = (isset($t) && ($t != '0000-00-00 00:00:00')) ? $t : Date_time_unassigned;
     $this->_php_time = Date_time_unassigned;
   }
 
@@ -741,7 +742,7 @@ class DATE_TIME extends RAISABLE
    */
   public function clear ()
   {
-    $this->_iso_time = '';
+    $this->_iso_time = Date_time_unassigned;
     $this->_php_time = Date_time_unassigned;
   }
 

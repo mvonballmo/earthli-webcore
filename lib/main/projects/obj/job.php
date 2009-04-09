@@ -493,6 +493,9 @@ class JOB_BRANCH_INFO extends PROJECT_ENTRY_BRANCH_INFO
     else
     {
       $now = new DATE_TIME ();
+      $now_as_iso = $now->as_iso();
+      $tc = new DATE_TIME($this->_entry->time_created->as_php());
+      $tc_as_iso = $tc->as_iso();
       return $now->diff ($this->_entry->time_created);
     }
   }

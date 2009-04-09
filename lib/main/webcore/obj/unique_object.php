@@ -59,7 +59,7 @@ abstract class UNIQUE_OBJECT extends NAMED_OBJECT
    */
   public function exists ()
   {
-    return isset ($this->id) && ($this->id <> 0);
+    return isset ($this->id) && ($this->id != 0);
   }
   
   /**

@@ -1431,7 +1431,7 @@ abstract class MUNGER_LIST_TRANSFORMER extends MUNGER_TRANSFORMER
       $num_chars = -1;
     }
 
-    if (($first_char > 0) || ($num_chars <> $len))
+    if (($first_char > 0) || ($num_chars != $len))
     {
       $text = substr($text, $first_char, $num_chars);
     }

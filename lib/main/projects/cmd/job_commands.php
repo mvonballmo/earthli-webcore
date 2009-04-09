@@ -97,7 +97,7 @@ class JOB_COMMANDS extends ENTRY_COMMANDS
     $cmd->importance = Command_importance_high + Command_importance_increment;
     $cmd->executable = ! $locked
                        && ! $branch_info->is_closed ()
-                       && ($branch_info->status <> 3)
+                       && ($branch_info->status != 3)
                        && $this->login->is_allowed (Privilege_set_entry, Privilege_modify, $entry);
     $this->append ($cmd);
 
@@ -109,7 +109,7 @@ class JOB_COMMANDS extends ENTRY_COMMANDS
     $cmd->importance = Command_importance_high + Command_importance_increment;
     $cmd->executable = ! $locked
                        && ! $branch_info->is_closed ()
-                       && ($branch_info->status <> 7)
+                       && ($branch_info->status != 7)
                        && $this->login->is_allowed (Privilege_set_entry, Privilege_modify, $entry);
     $this->append ($cmd);
 
@@ -121,7 +121,7 @@ class JOB_COMMANDS extends ENTRY_COMMANDS
     $cmd->importance = Command_importance_high + Command_importance_increment;
     $cmd->executable = ! $locked
                        && $branch_info->is_closed ()
-                       && ($branch_info->status <> 1)
+                       && ($branch_info->status != 1)
                        && $this->login->is_allowed (Privilege_set_entry, Privilege_modify, $entry);
     $this->append ($cmd);
   }

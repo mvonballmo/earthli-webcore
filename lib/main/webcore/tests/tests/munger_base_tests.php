@@ -365,7 +365,7 @@ don't
     $this->_validator->validate ($input);
 
     $errors_generated = sizeof ($this->_validator->errors);
-    if ($errors_generated <> $errors_expected)
+    if ($errors_generated != $errors_expected)
     {
       $this->_num_errors++;
       echo "<hr style=\"clear: both\">\n";
@@ -376,7 +376,7 @@ don't
       echo "<hr style=\"clear: both\">\n";
     }
 
-    if (($errors_generated <> $errors_expected) || $this->show_validator_stats)
+    if (($errors_generated != $errors_expected) || $this->show_validator_stats)
     {
       echo "<h4>Input</h4>";
       echo "$input\n";
