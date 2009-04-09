@@ -51,7 +51,7 @@ define ('Msg_channel_test', 'Test');
  * @version 3.1.0
  * @since 2.6.0
  */
-class TEST_TASK extends TASK
+abstract class TEST_TASK extends TASK
 {
   /**
    * Icon to show in the title bar when executing.

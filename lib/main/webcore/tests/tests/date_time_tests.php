@@ -237,6 +237,35 @@ class DATE_TIME_TEST_TASK extends TEST_TASK
     $this->_check_equal ('1.94 weeks', $diff->format (1, true, 2));
   }
   
+  protected function _execute_unassigned_tests ()
+  {
+    $from_date = $this->context->make_date_time ('2005-01-01 00:00:00');
+    $from_date->clear ();
+    
+    $this->_check_equal (Date_time_unassigned, $from_date->as_iso ());
+    $this->_check_equal (Date_time_unassigned, $from_date->as_php ());
+    
+    $from_date->set_from_php(Date_time_unassigned);
+
+    $this->_check_equal (Date_time_unassigned, $from_date->as_iso ());
+    $this->_check_equal (Date_time_unassigned, $from_date->as_php ());
+    
+    $from_date->set_from_iso(Date_time_unassigned);
+
+    $this->_check_equal (Date_time_unassigned, $from_date->as_iso ());
+    $this->_check_equal (Date_time_unassigned, $from_date->as_php ());
+
+    $from_date->set_from_iso('0000-00-00 00:00:00');
+
+    $this->_check_equal (Date_time_unassigned, $from_date->as_iso ());
+    $this->_check_equal (Date_time_unassigned, $from_date->as_php ());
+
+    $from_date->set_from_iso(null);
+
+    $this->_check_equal (Date_time_unassigned, $from_date->as_iso ());
+    $this->_check_equal (Date_time_unassigned, $from_date->as_php ());
+  }
+  
   protected function _execute_testbed ()
   {
   }
@@ -248,6 +277,7 @@ class DATE_TIME_TEST_TASK extends TEST_TASK
 
     $this->_execute_all ();
     $this->_execute_testbed ();
+    $this->_execute_unassigned_tests ();
   }
 }
 
