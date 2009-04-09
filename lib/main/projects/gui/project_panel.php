@@ -256,14 +256,14 @@ class PROJECT_INDEX_PANEL_MANAGER extends INDEX_PANEL_MANAGER
     $job_query = $this->login->all_entry_query ();
     $job_query->set_type ('job');
 
-    $in_progress_job_query = $job_query;
+    $in_progress_job_query = clone($job_query);
     $in_progress_job_query->restrict ("status = 3");
     $panel = new $job_panel_class_name ($this, $in_progress_job_query, $job_type_info);
     $panel->id = 'in_progress_jobs';
     $panel->title = 'Jobs in progress';
     $this->add_panel ($panel);
 
-    $scheduled_job_query = $job_query;
+    $scheduled_job_query = clone($job_query);
     restrict_to_open ($scheduled_job_query);
     restrict_to_scheduled ($scheduled_job_query);
     $scheduled_job_query->restrict ("closer_id = 0");
@@ -272,7 +272,7 @@ class PROJECT_INDEX_PANEL_MANAGER extends INDEX_PANEL_MANAGER
     $panel->title = 'Scheduled jobs';
     $this->add_panel ($panel);
 
-    $open_job_query = $job_query;
+    $open_job_query = clone($job_query);
     $open_job_query->restrict ("closer_id = 0");
     restrict_to_open ($open_job_query);
     $panel = new $job_panel_class_name ($this, $open_job_query, $job_type_info);
@@ -280,14 +280,14 @@ class PROJECT_INDEX_PANEL_MANAGER extends INDEX_PANEL_MANAGER
     $panel->title = 'Open jobs';
     $this->add_panel ($panel);
 
-    $closed_job_query = $job_query;
+    $closed_job_query = clone($job_query);
     restrict_to_closed ($closed_job_query);
     $panel = new $job_panel_class_name ($this, $closed_job_query, $job_type_info);
     $panel->id = 'closed_jobs';
     $panel->title = 'Closed jobs';
     $this->add_panel ($panel);
 
-    $unassigned_job_query = $job_query;
+    $unassigned_job_query = clone($job_query);
     $unassigned_job_query->restrict ("assignee_id = 0");
     $panel = new $job_panel_class_name ($this, $unassigned_job_query, $job_type_info);
     $panel->id = 'unassigned_jobs';
@@ -363,14 +363,14 @@ class PROJECT_FOLDER_PANEL_MANAGER extends FOLDER_PANEL_MANAGER
   
       $this->add_panels_after ('job');
   
-      $in_progress_job_query = $job_query;
+      $in_progress_job_query = clone($job_query);
       $in_progress_job_query->restrict ("status = 3");
       $panel = new $job_panel_class_name ($this, $in_progress_job_query, $job_type_info);
       $panel->id = 'in_progress_jobs';
       $panel->title = 'Jobs in progress';
       $this->add_panel ($panel);
   
-      $scheduled_job_query = $job_query;
+      $scheduled_job_query = clone($job_query);
       restrict_to_open ($scheduled_job_query);
       restrict_to_scheduled ($scheduled_job_query);
       $panel = new $job_panel_class_name ($this, $scheduled_job_query, $job_type_info);
@@ -379,21 +379,21 @@ class PROJECT_FOLDER_PANEL_MANAGER extends FOLDER_PANEL_MANAGER
       $panel->show_folder = true;
       $this->add_panel ($panel);
   
-      $open_job_query = $job_query;
+      $open_job_query = clone($job_query);
       restrict_to_open ($open_job_query);
       $panel = new $job_panel_class_name ($this, $open_job_query, $job_type_info);
       $panel->id = 'open_jobs';
       $panel->title = 'Open jobs';
       $this->add_panel ($panel);
   
-      $closed_job_query = $job_query;
+      $closed_job_query = clone($job_query);
       restrict_to_closed ($closed_job_query);
       $panel = new $job_panel_class_name ($this, $closed_job_query, $job_type_info);
       $panel->id = 'closed_jobs';
       $panel->title = 'Closed jobs';
       $this->add_panel ($panel);
   
-      $unassigned_job_query = $job_query;
+      $unassigned_job_query = clone($job_query);
       $unassigned_job_query->restrict ("assignee_id = 0");
       $panel = new $job_panel_class_name ($this, $unassigned_job_query, $job_type_info);
       $panel->id = 'unassigned_jobs';
@@ -448,7 +448,7 @@ class PROJECT_USER_PANEL_MANAGER extends USER_PANEL_MANAGER
     $all_jobs_query->set_type ('job');
     $user_id = $this->_user->id;
 
-    $in_progress_job_query = $all_jobs_query;
+    $in_progress_job_query = clone($job_query);
     $in_progress_job_query->restrict ('assignee_id = ' . $user_id);
     $in_progress_job_query->restrict ('status = 3');
     $panel = new $job_panel_class_name ($this, $in_progress_job_query, $job_type_info);
@@ -456,7 +456,7 @@ class PROJECT_USER_PANEL_MANAGER extends USER_PANEL_MANAGER
     $panel->title = 'Jobs in progress';
     $this->add_panel ($panel);
 
-    $scheduled_job_query = $all_jobs_query;
+    $scheduled_job_query = clone($job_query);
     restrict_to_open ($scheduled_job_query);
     restrict_to_scheduled ($scheduled_job_query);
     $scheduled_job_query->restrict ('assignee_id = ' . $user_id);
@@ -465,7 +465,7 @@ class PROJECT_USER_PANEL_MANAGER extends USER_PANEL_MANAGER
     $panel->title = 'Scheduled jobs';
     $this->add_panel ($panel);
 
-    $assigned_job_query = $all_jobs_query;
+    $assigned_job_query = clone($job_query);
     $assigned_job_query->restrict ('assignee_id = ' . $user_id);
     restrict_to_open ($assigned_job_query);
     $panel = new $job_panel_class_name ($this, $assigned_job_query, $job_type_info);
@@ -473,7 +473,7 @@ class PROJECT_USER_PANEL_MANAGER extends USER_PANEL_MANAGER
     $panel->title = 'Assigned jobs';
     $this->add_panel ($panel);
 
-    $closed_job_query = $all_jobs_query;
+    $closed_job_query = clone($job_query);
     $closed_job_query->restrict ('closer_id = ' . $user_id);
     $closed_job_query->set_order ('job.time_closed DESC');
     $closed_job_query->store_order_as_recent ();
@@ -482,7 +482,7 @@ class PROJECT_USER_PANEL_MANAGER extends USER_PANEL_MANAGER
     $panel->title = 'Closed jobs';
     $this->add_panel ($panel);
 
-    $reported_job_query = $all_jobs_query;
+    $reported_job_query = clone($job_query);
     $reported_job_query->restrict ('reporter_id = ' . $user_id);
     $reported_job_query->restrict ('entry.creator_id <> ' . $user_id);
     $panel = new $job_panel_class_name ($this, $reported_job_query, $job_type_info);
@@ -570,14 +570,14 @@ class PROJECT_BRANCH_PANEL_MANAGER extends WEBCORE_PANEL_MANAGER
     $job_type_info = $this->app->type_info_for ('JOB', 'projects/obj/job.php');
     $job_query = $this->_branch->job_query ();
 
-    $in_progress_job_query = $job_query;
+    $in_progress_job_query = clone($job_query);
     $in_progress_job_query->restrict ("jtob.branch_status = 3");
     $panel = new $job_panel_class_name ($this, $in_progress_job_query, $job_type_info);
     $panel->id = 'in_progress_jobs';
     $panel->title = 'Jobs in progress';
     $this->add_panel ($panel);
 
-    $scheduled_job_query = $job_query;
+    $scheduled_job_query = clone($job_query);
     $scheduled_job_query->restrict ("jtob.branch_closer_id = 0");
     restrict_to_scheduled ($scheduled_job_query);
     $panel = new $job_panel_class_name ($this, $scheduled_job_query, $job_type_info);
@@ -585,21 +585,21 @@ class PROJECT_BRANCH_PANEL_MANAGER extends WEBCORE_PANEL_MANAGER
     $panel->title = 'Scheduled jobs';
     $this->add_panel ($panel);
 
-    $open_job_query = $job_query;
+    $open_job_query = clone($job_query);
     $open_job_query->restrict ("jtob.branch_closer_id = 0");
     $panel = new $job_panel_class_name ($this, $open_job_query, $job_type_info);
     $panel->id = 'open_jobs';
     $panel->title = 'Open jobs';
     $this->add_panel ($panel);
 
-    $unassigned_job_query = $job_query;
+    $unassigned_job_query = clone($job_query);
     $unassigned_job_query->restrict ("assignee_id = 0");
     $panel = new $job_panel_class_name ($this, $unassigned_job_query, $job_type_info);
     $panel->id = 'unassigned_jobs';
     $panel->title = 'Unassigned jobs';
     $this->add_panel ($panel);
 
-    $closed_job_query = $job_query;
+    $closed_job_query = clone($job_query);
     $closed_job_query->restrict ("jtob.branch_closer_id <> 0");
     $closed_job_query->set_order ('jtob.branch_time_closed DESC');
     $panel = new $job_panel_class_name ($this, $closed_job_query, $job_type_info);
@@ -688,28 +688,28 @@ class PROJECT_RELEASE_PANEL_MANAGER extends WEBCORE_PANEL_MANAGER
     $job_type_info = $this->app->type_info_for ('JOB', 'projects/obj/job.php');
     $job_query = $this->_release->job_query ();
 
-    $in_progress_job_query = $job_query;
+    $in_progress_job_query = clone($job_query);
     $in_progress_job_query->restrict ("jtob.branch_status = 3");
     $panel = new $job_panel_class_name ($this, $in_progress_job_query, $job_type_info);
     $panel->id = 'in_progress_jobs';
     $panel->title = 'Jobs in progress';
     $this->add_panel ($panel);
 
-    $open_job_query = $job_query;
+    $open_job_query = clone($job_query);
     $open_job_query->restrict ("jtob.branch_closer_id = 0");
     $panel = new $job_panel_class_name ($this, $open_job_query, $job_type_info);
     $panel->id = 'open_jobs';
     $panel->title = 'Open jobs';
     $this->add_panel ($panel);
 
-    $unassigned_job_query = $job_query;
+    $unassigned_job_query = clone($job_query);
     $unassigned_job_query->restrict ("assignee_id = 0");
     $panel = new $job_panel_class_name ($this, $unassigned_job_query, $job_type_info);
     $panel->id = 'unassigned_jobs';
     $panel->title = 'Unassigned jobs';
     $this->add_panel ($panel);
 
-    $closed_job_query = $job_query;
+    $closed_job_query = clone($job_query);
     $closed_job_query->restrict ("jtob.branch_closer_id <> 0");
     $closed_job_query->set_order ('jtob.branch_time_closed DESC');
     $closed_job_query->store_order_as_recent ();
@@ -789,14 +789,14 @@ class PROJECT_COMPONENT_PANEL_MANAGER extends WEBCORE_PANEL_MANAGER
     $job_type_info = $this->app->type_info_for ('JOB', 'projects/obj/job.php');
     $job_query = $this->_component->job_query ();
 
-    $in_progress_job_query = $job_query;
+    $in_progress_job_query = clone($job_query);
     $in_progress_job_query->restrict ("status = 3");
     $panel = new $job_panel_class_name ($this, $in_progress_job_query, $job_type_info);
     $panel->id = 'in_progress_jobs';
     $panel->title = 'Jobs in progress';
     $this->add_panel ($panel);
 
-    $scheduled_job_query = $job_query;
+    $scheduled_job_query = clone($job_query);
     restrict_to_open ($scheduled_job_query);
     restrict_to_scheduled ($scheduled_job_query);
     $panel = new $job_panel_class_name ($this, $scheduled_job_query, $job_type_info);
@@ -804,21 +804,21 @@ class PROJECT_COMPONENT_PANEL_MANAGER extends WEBCORE_PANEL_MANAGER
     $panel->title = 'Scheduled jobs';
     $this->add_panel ($panel);
 
-    $open_job_query = $job_query;
+    $open_job_query = clone($job_query);
     restrict_to_open ($open_job_query);
     $panel = new $job_panel_class_name ($this, $open_job_query, $job_type_info);
     $panel->id = 'open_jobs';
     $panel->title = 'Open jobs';
     $this->add_panel ($panel);
 
-    $unassigned_job_query = $job_query;
+    $unassigned_job_query = clone($job_query);
     $unassigned_job_query->restrict ("assignee_id = 0");
     $panel = new $job_panel_class_name ($this, $unassigned_job_query, $job_type_info);
     $panel->id = 'unassigned_jobs';
     $panel->title = 'Unassigned jobs';
     $this->add_panel ($panel);
 
-    $closed_job_query = $job_query;
+    $closed_job_query = clone($job_query);
     restrict_to_closed ($closed_job_query);
     $panel = new $job_panel_class_name ($this, $closed_job_query, $job_type_info);
     $panel->id = 'closed_jobs';
