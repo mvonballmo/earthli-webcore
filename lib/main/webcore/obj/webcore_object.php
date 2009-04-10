@@ -72,8 +72,12 @@ class WEBCORE_OBJECT extends RAISABLE
     else
     {
       $this->app = $context;
-      $this->page = $context->page;
-      $this->login = $context->login;
+      
+      // Take a reference to a reference so that updates to the "login" or "page" on the application
+      // automatically apply to all objects created in that application.
+      
+      $this->page =& $context->page;
+      $this->login =& $context->login;
     }
 
     $this->env->num_webcore_objects++;

@@ -88,7 +88,6 @@ class ENTRY extends ATTACHMENT_HOST
   public function new_comment ($parent_id)
   {
     $Result = $this->_make_comment ();
-    $Result->entry_id = $this->id;
     $Result->parent_id = $parent_id;
     return $Result;
   }

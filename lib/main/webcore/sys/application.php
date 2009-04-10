@@ -487,14 +487,11 @@ class APPLICATION extends CONTEXT
    */
   public function set_login ($user)
   {
+    // Setting the application's login automatically changes the login for all WEBCORE_OBJECTs
+    // that are attached to this application (because the login for a WEBCORE_OBJECT is a 
+    // reference to a reference to the login for the application instead of a simpe reference.
+    
     $this->login = $user;
-
-    /* Since this user might have been created without a login,
-     * it has no reference to the application's user. Update the
-     * login variable manually.
-     */
-
-    $user->login = $user;
   }
 
   /**
@@ -1028,14 +1025,30 @@ class APPLICATION extends CONTEXT
   protected function _logged_in_user ($force = false)
   {
     $info_name = $this->storage_options->login_user_name;
+    
+    $Result = null;
+
+    /* Read the user's information from the storage, if present. */
+    
     $user_info = $this->storage->value ($info_name);
-
-    /* no login yet, so find out if this ip address already has a recorded
-     * anonymous user. Anonymous users are recorded when they create content.
-     */
-
-    if (! isset ($user_info))
+    if (!empty($user_info))
     {
+      $Result = $this->_decode_user ($user_info);
+    }
+    
+    /* Enforce login privilege. If not allowed to log in, log them back out. */
+
+    if (isset ($Result) && ! $Result->is_allowed (Privilege_set_global, Privilege_login))
+    {
+      unset ($Result);
+    }
+
+    if (! isset ($Result))
+    {
+      /* no login yet, so find out if this ip address already has a recorded
+       * anonymous user. Anonymous users are recorded when they create content.
+       */
+      
       $user_query = $this->user_query ();
       $browser = $this->env->browser ();
       $ip_address = $browser->ip_address ();
@@ -1047,33 +1060,20 @@ class APPLICATION extends CONTEXT
         $user_query->include_permissions (true);
         $Result = $user_query->object_with_fields (array ('ip_address', 'kind'), array(ip2long ($ip_address), 'anonymous'));
         $user_query->include_permissions (false);
-
-        if ($Result)
-        {
-          $cache = $this->user_cache ();
-          $cache->add_object ($Result);
-        }
-        elseif ($force)
+        
+        if (! isset($Result) && $force)
         {
           $Result = $this->new_user (Privilege_kind_anonymous);
           $history_item = $Result->new_history_item ();
           $Result->store_if_different ($history_item);
-
-          $cache = $this->user_cache ();
-          $cache->add_object ($Result);
         }
+
+        /* Do not enforce login privileges for anonymous users, as they should always
+				 * be logged in as their ip-address, if possible. */
+
+        $cache = $this->user_cache ();
+        $cache->add_object ($Result);
       }
-    }
-    else
-    {
-      $Result = $this->_decode_user ($user_info);
-    }
-
-    /* Enforce login privilege. If not allowed to log in, log them back out. */
-
-    if (isset ($Result) && ! $Result->is_allowed (Privilege_set_global, Privilege_login))
-    {
-      unset ($Result);
     }
 
     /* No user found, use the anonymous */

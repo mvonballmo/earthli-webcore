@@ -46,7 +46,7 @@ require_once ('webcore/gui/grid.php');
  * @version 3.1.0
  * @since 2.2.1
  */
-class PRINTABLE_COMMENT_GRID extends STANDARD_GRID
+abstract class PRINTABLE_COMMENT_GRID extends STANDARD_GRID
 {
   /**
    * @var string

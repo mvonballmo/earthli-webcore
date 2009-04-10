@@ -505,15 +505,26 @@ class SQL_STORAGE extends WEBCORE_OBJECT
   {
     $this->assert (! empty ($table_id), 'table_id cannot be empty.', '_table_at_id', 'SQL_STORAGE');
 
-    $Result = $this->_tables [$table_id];
-    if (! $Result)
+    $Result = (isset($this->_tables)) ? $this->_tables [$table_id] : null;
+    
+    if (! isset($Result))
     {
       $class_name = $this->context->final_class_name ('SQL_TABLE');
       $Result = new $class_name ($this->context, $table_id);
       $this->_tables [$table_id] = $Result;
     }
+    
     return $Result;
   }
+  
+  /**
+   * List of tables registered with this object.
+   * 
+   * Filled by calls to {@link add()}.
+   * 
+   * @var array[SQL_TABLE]
+   */
+  private $_tables;
 }
 
 ?>
