@@ -196,6 +196,7 @@ class APPLICATION extends CONTEXT
     $page->add_icon_alias ($this, Folder_name_app_icons);
 
     $this->set_path (Folder_name_application, '/');
+    $this->set_path (Folder_name_functions, '{' . Folder_name_application . '}');
     $this->set_path (Folder_name_attachments, '{' . Folder_name_data . '}attachments');
     $this->set_path (Folder_name_app_icons, '{' . Folder_name_application . '}icons');
     $this->set_path (Folder_name_app_styles, '{' . Folder_name_application . '}styles');

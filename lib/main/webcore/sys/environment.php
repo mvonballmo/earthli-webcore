@@ -246,7 +246,8 @@ class ENVIRONMENT extends RESOLVER
     $this->set_path (Folder_name_resources, '{' . Folder_name_root . '}');
     $this->set_path (Folder_name_apps, '{' . Folder_name_root . '}');
     $this->set_path (Folder_name_data, '{' . Folder_name_root . '}data');
-    $this->set_path (Folder_name_pages, '{' . Folder_name_resources . '}pages');
+    $this->set_path (Folder_name_pages, '{' . Folder_name_resources . '}');
+    $this->set_path (Folder_name_functions, '{' . Folder_name_pages . '}');
     $this->set_path (Folder_name_icons, '{' . Folder_name_resources . '}icons');
     $this->set_path (Folder_name_themes, '{' . Folder_name_resources . '}themes');
     $this->set_path (Folder_name_styles, '{' . Folder_name_resources . '}styles');

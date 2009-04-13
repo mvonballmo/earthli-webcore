@@ -121,7 +121,7 @@ class STORED_OPTION extends WEBCORE_OBJECT
    */
   protected function _url_for_value ($value)
   {
-		$set_option_path = $this->context->resolve_file ('{' . Folder_name_pages . '}set_option.php');
+		$set_option_path = $this->context->resolve_file ('{' . Folder_name_functions . '}set_option.php');
     $Result = new URL ($set_option_path);
     $Result->add_argument ('opt_name', $this->name);
     $Result->add_argument ('opt_value', $value);
@@ -137,6 +137,7 @@ class STORED_OPTION extends WEBCORE_OBJECT
       $last_page = $url->as_text ();
     }
     $Result->add_argument ('last_page', $last_page);
+    
     return $Result;
   }
 

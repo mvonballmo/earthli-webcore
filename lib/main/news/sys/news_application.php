@@ -159,8 +159,6 @@ class NEWS_APPLICATION extends DRAFTABLE_APPLICATION
 
     $this->set_path (Folder_name_application, '{' . Folder_name_apps . '}news');
     $this->set_path (Folder_name_attachments, '{' . Folder_name_data . '}news/attachments');
-
-    $this->storage_options->return_to_page_name = 'news_page';
   }
 
   /**

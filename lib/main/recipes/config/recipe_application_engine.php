@@ -73,6 +73,8 @@ class RECIPE_APPLICATION_ENGINE extends APPLICATION_ENGINE
     $app->mail_options->log_file_name = '{logs}recipes_mail.log';
     $app->mail_options->entry_publication_filter = array (History_item_published);
     $app->mail_options->comment_publication_filter = array (History_item_created);
+
+    $app->storage->prefix = 'webcore_recipes_';
   }
 }
 

@@ -34,25 +34,25 @@ http://www.earthli.com/software/webcore
   
   if (isset ($App) && ! $opt_page_context)
   {
-    $Toolkit = $App;
+    $context = $App;
   }
   else
   {
-    $Toolkit = $Page;
+    $context = $Page;
   }
 
   if ($last_page && $opt_name)
   {
     if (is_numeric ($opt_duration))
     {
-      $Toolkit->storage->expire_in_n_days ($opt_duration);
+      $context->storage->expire_in_n_days ($opt_duration);
     }
     else
     {
-      $Toolkit->storage->expire_in_n_days ($Toolkit->storage_options->setting_duration);
+      $context->storage->expire_in_n_days ($context->storage_options->setting_duration);
     }
     
-    $Toolkit->storage->set_value ($opt_name, $opt_value);
+    $context->storage->set_value ($opt_name, $opt_value);
     $Env->redirect_root ($last_page);
   }
   else

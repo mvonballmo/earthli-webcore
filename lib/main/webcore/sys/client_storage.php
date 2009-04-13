@@ -103,6 +103,7 @@ abstract class CLIENT_STORAGE extends RAISABLE
     {
       $Result = $this->_read ($this->prefix . $key);
     }
+
     return $Result;
   }
   

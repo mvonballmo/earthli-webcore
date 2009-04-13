@@ -2595,7 +2595,7 @@ class MUNGER extends MUNGER_PARSER
   {
     if ($num > sizeof($this->_footnote_infos))
     {
-      $info = null; // compiler warning
+      $info = new stdClass();
       $n = 'footnote_' . $this->unique_id_for_context() . '_' . $num;
       $info->name_from = $n . '_ref';
       $info->name_to = $n . '_body';

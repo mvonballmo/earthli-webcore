@@ -46,6 +46,7 @@ define ('Unassigned', -1);
  * @see ENVIRONMENT::set_os()
  */
 define ('Os_unix', 0);
+
 /**
  * Operating system constant for Windows.
  * @see Os_unix
@@ -57,11 +58,13 @@ define ('Os_win', 1);
  * The unique id for an anonymous user.
  */
 define ('Anon_user_id', 0);
+
 /**
  * The unique id for the 'global' user.
   * @access private
   */
 define ('All_users_id', 0x7FFFFFFF);
+
 /**
  * The unique id for non-existent users.
  * This id is used when a request is made for a user that no longer exists or is invisible.
@@ -77,14 +80,17 @@ define ('Custom_page_renderer', 'CUSTOM_PAGE_RENDERER');
  * Permissions for anonymous users.
  */
 define ('Privilege_kind_anonymous', 'anonymous');
+
 /**
  * Permissions for registered users.
  */
 define ('Privilege_kind_registered', 'registered');
+
 /**
  * Permissions for an individual user.
  */
 define ('Privilege_kind_user', 'user');
+
 /**
  * Permissions for a group.
  */
@@ -108,41 +114,49 @@ define ('Privilege_kind_group', 'group');
  * @access private
  */
 define ('Privilege_set_constants', '');
+
 /**
  * Permission set for application-level tasks.
  * Constant must match name of field in SQL.
  */
 define ('Privilege_set_global', 'global_permissions');
+
 /**
  * Permission set for miscellanous tasks.
  * Constant must match name of field in SQL.
  */
 define ('Privilege_set_general', 'general_permissions');
+
 /**
  * Permission set applied to a {@link FOLDER}.
  * Constant must match name of field in SQL.
  */
 define ('Privilege_set_folder', 'folder_permissions');
+
 /**
  * Permission set applied to a {@link COMMENT}.
  * Constant must match name of field in SQL.
  */
 define ('Privilege_set_comment', 'comment_permissions');
+
 /**
  * Permission set applied to a {@link ENTRY}.
  * Constant must match name of field in SQL.
  */
 define ('Privilege_set_entry', 'entry_permissions');
+
 /**
  * Permission set applied to a {@link GROUP}.
  * Constant must match name of field in SQL.
  */
 define ('Privilege_set_group', 'group_permissions');
+
 /**
  * Permission set applied to a {@link USER}.
  * Constant must match name of field in SQL.
  */
 define ('Privilege_set_user', 'user_permissions');
+
 /**
  * Permission set applied to an {@link ATTACHMENT}.
  * Constant must match name of field in SQL.
@@ -171,35 +185,43 @@ define ('Privilege_range_object', 'object');
  * Permission to view an object.
  */
 define ('Privilege_view', 0x01);
+
 /**
  * Permission to view object histor.
  */
 define ('Privilege_view_history', 0x02);
+
 /**
  * Permission to view hidden objects.
  */
 define ('Privilege_view_hidden', 0x04);
+
 /**
  * Permission to create an object.
  */
 define ('Privilege_create', 0x08);
+
 /**
  * Permission to modify an object.
  */
 define ('Privilege_modify', 0x10);
+
 /**
  * Permission to delete an object.
  */
 define ('Privilege_delete', 0x20);
+
 /**
  * Permission to purge an object.
  */
 define ('Privilege_purge', 0x40);
+
 /**
  * Permission to secure an object.
  * Currently only used for {@link USER}s and {@link FOLDER}s.
  */
 define ('Privilege_secure', 0x80);
+
 /**
  * Permission to upload content.
  * Generally used to determine if a user can create attachments for the object.
@@ -232,21 +254,25 @@ define ('Privilege_range_global', 'global');
  * site with special users. Users with this privilege can always access the site.
  */
 define ('Privilege_offline', 0x01);
+
 /**
  * Permission to change subscriptions.
  * Applies to all subscriptions, regardless of object type.
  */
 define ('Privilege_subscribe', 0x02);
+
 /**
  * Permission to change passwords.
  * Applies to all passwords, regardless of object type.
  */
 define ('Privilege_password', 0x04);
+
 /**
  * Permission to add/modify resources.
  * Used for icons and themes.
  */
 define ('Privilege_resources', 0x08);
+
 /**
  * Permissions to log in.
  */
@@ -265,11 +291,13 @@ define ('Privilege_configure', 0x40);
  * Folder/content settings are ignored.
  */
 define ('Privilege_always_denied', 0x00);
+
 /**
  * Permission is always granted.
  * Folder/content settings are ignored.
  */
 define ('Privilege_always_granted', 0x01);
+
 /**
  * Permission is controlled by content.
  */
@@ -279,10 +307,12 @@ define ('Privilege_controlled_by_content', 0x02);
  * Action was recorded without triggering notifications.
  */
 define ('History_item_silent', 'silent');
+
 /**
  * Action was recorded and notifications were sent.
  */
 define ('History_item_sent', 'sent');
+
 /**
  * Action was recorded; notifications are pending.
  */
@@ -302,59 +332,70 @@ define ('History_item_needs_send', 'queued');
  * @access private
  */
 define ('History_item_state_constants', '');
+
 /**
  * Object was created.
  * @access private
  */
 define ('History_item_created', 'Created');
+
 /**
  * Object was updated.
  * @access private
  */
 define ('History_item_updated', 'Updated');
+
 /**
  * Object was deleted.
  * @access private
  */
 define ('History_item_deleted', 'Deleted');
+
 /**
  * Object was restored from deletion or hidden status.
  * @access private
  */
 define ('History_item_restored', 'Restored');
+
 /**
  * Object was hidden from non-admin users.
  * @access private
  */
 define ('History_item_hidden', 'Hidden');
+
 /**
  * Object was updated while hidden
  * @access private
  */
 define ('History_item_hidden_update', 'Hidden update');
+
 /**
  * Object was made visible for all users.
  * Its state changed from {@link Unpublished} to {@link Visible}.
  * @access private
  */
 define ('History_item_published', 'Published');
+
 /**
  * Object was revoked (taken back to draft).
  * Its state changed from {@link Visible} to {@link Unpublished}.
  * @access private
  */
 define ('History_item_unpublished', 'Unpublished');
+
 /**
  * Object was locked.
  * @access private
  */
 define ('History_item_locked', 'Locked');
+
 /**
  * Object was abandoned.
  * Its state changed from {@link Unpublished} to {@link Abandoned}.
  * @access private
  */
 define ('History_item_abandoned', 'Abandoned');
+
 /**
  * Object was queued.
  * Its state changed from {@link Unpublished} to {@link Queued}.
@@ -367,26 +408,31 @@ define ('History_item_queued', 'Queued');
  * @access private
  */
 define ('History_item_user', 'user');
+
 /**
  * A history item for a {@link FOLDER}.
  * @access private
  */
 define ('History_item_folder', 'folder');
+
 /**
  * A history item for an {@link ENTRY}.
  * @access private
  */
 define ('History_item_entry', 'entry');
+
 /**
  * A history item for a {@link COMMENT}.
  * @access private
  */
 define ('History_item_comment', 'comment');
+
 /**
  * A history item for a {@link GROUP}.
  * @access private
  */
 define ('History_item_group', 'group');
+
 /**
  * A history item for a {@link ATTACHMENT}.
  * @access private
@@ -403,21 +449,25 @@ define ('History_item_attachment', 'attachment');
  * @access private
  */
 define ('Subscribe_constants', '');
+
 /**
  * Subscription for an entire folder.
  * @access private
  */
 define ('Subscribe_folder', 'folder');
+
 /**
  * Subscription for a single entry.
  * @access private
  */
 define ('Subscribe_entry', 'entry');
+
 /**
  * Subscription for a single comment.
  * @access private
  */
 define ('Subscribe_comment', 'comment');
+
 /**
  * Subscription for all content created by a user.
  * @access private
@@ -426,6 +476,7 @@ define ('Subscribe_user', 'user');
 
 /** Forces full expansion of urls in {@link RESOURCE_MANAGER} functions.*/
 define ('Force_root_on', true);
+
 /** Prevents full expansion of urls in {@link RESOURCE_MANAGER} functions.*/
 define ('Force_root_off', false);
 
@@ -435,6 +486,7 @@ define ('Force_root_off', false);
  * RESOURCE_MANAGER}.
  */
 define ('Folder_name_logs', 'logs');
+
 /**
  * Special folder that maps to the local file system.
  * Local folders should always use this as a root to avoid mapping to a URL
@@ -443,62 +495,80 @@ define ('Folder_name_logs', 'logs');
  * RESOURCE_MANAGER}.
  */
 define ('Folder_name_local', 'local');
+
 /**
  * Server system temporary folder.
  * Use as an alias with the {@link RESOURCE_MANAGER}.
  */
 define ('Folder_name_system_temp', 'systemp');
+
 /**
  * User data.
  * Use as an alias with the {@link RESOURCE_MANAGER}.
  */
 define ('Folder_name_data', 'data');
+
 /**
  * Root of the site managed by the WebCore.
  * Use as an alias with the {@link RESOURCE_MANAGER}.
  */
 define ('Folder_name_root', 'root');
+
 /**
  * Base folder for all applications  managed by the WebCore.
  * Use as an alias with the {@link RESOURCE_MANAGER}.
  */
 define ('Folder_name_apps', 'apps');
+
 /**
  * Base folder for all resources managed by the WebCore.
  * Use as an alias with the {@link RESOURCE_MANAGER}.
  */
 define ('Folder_name_resources', 'resources');
+
 /**
  * Base folder for all pages shared by WebCore applications.
- * Examples are the browser checker, global theme setter and error
+ * Examples are the browser checker, global theme setter and error.
  * Use as an alias with the {@link RESOURCE_MANAGER}.
  */
 define ('Folder_name_pages', 'pages');
+
+/**
+ * Base folder for all pages representing context-dependent functions. 
+ * Use as an alias with the {@link RESOURCE_MANAGER}.
+ */
+define ('Folder_name_functions', 'functions');
+
 /**
  * Base folder for icon resources.
  * Use as an alias with the {@link RESOURCE_MANAGER}.
  */
 define ('Folder_name_icons', 'icons');
+
 /**
  * Base folder for JavaScript files.
  * Use as an alias with the {@link RESOURCE_MANAGER}.
  */
 define ('Folder_name_scripts', 'scripts');
+
 /**
  * Base folder for CSS style sheets.
  * Use as an alias with the {@link RESOURCE_MANAGER}.
  */
 define ('Folder_name_styles', 'styles');
+
 /**
  * Base folder for web site themes.
  * Use as an alias with the {@link RESOURCE_MANAGER}.
  */
 define ('Folder_name_themes', 'themes');
 /**
- * Applications store attachments in a hierarchy under this folder.
+
+ *  * Applications store attachments in a hierarchy under this folder.
  * Use as an alias with the {@link RESOURCE_MANAGER}.
  */
 define ('Folder_name_attachments', 'attachments');
+
 /**
  * Base folder for all application-specific resources.
  * Use as an alias with the {@link RESOURCE_MANAGER}.
