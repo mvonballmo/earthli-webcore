@@ -137,7 +137,7 @@ abstract class STORABLE_FORM extends PREVIEWABLE_FORM
 
     if ($load_action == Form_load_action_clone)
     {
-      $clone = $obj->make_clone ();
+      $clone = clone($obj);
       $this->load_from_clone ($clone);
     }
     else

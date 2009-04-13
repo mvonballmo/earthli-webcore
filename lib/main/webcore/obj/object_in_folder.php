@@ -617,17 +617,10 @@ abstract class OBJECT_IN_FOLDER extends CONTENT_OBJECT
    * @param OBJECT_IN_FOLDER $other
    * @access private
    */
-  protected function _copy_from ($other)
+  protected function copy_from ($other)
   {
-    unset ($this->_parent_folder);
-    if (isset ($other->_parent_folder))
-    {
-      $this->_parent_folder = $other->_parent_folder->make_clone ();
-    }
-    else
-    {
-      $this->_parent_folder = null;
-    }
+    parent::copy_from($other);
+    $this->_parent_folder = $other->_parent_folder;
   }
 
   /**

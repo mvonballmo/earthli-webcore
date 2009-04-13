@@ -436,18 +436,14 @@ class RELEASE extends OBJECT_IN_FOLDER
    * @param RELEASE $other
    * @access private
    */
-  protected function _copy_from ($other)
+  protected function copy_from ($other)
   {
-    unset ($this->time_scheduled);
-    $this->time_scheduled = clone_object ($other->time_scheduled);
-    unset ($this->time_shipped);
-    $this->time_shipped = clone_object ($other->time_shipped);
-    unset ($this->time_tested);
-    $this->time_tested = clone_object ($other->time_tested);
-    unset ($this->time_testing_scheduled);
-    $this->time_testing_scheduled = clone_object ($other->time_testing_scheduled);
-    unset ($this->time_next_deadline);
-    $this->time_next_deadline = clone_object ($other->time_next_deadline);
+    parent::copy_from($other);
+    $this->time_scheduled = clone ($other->time_scheduled);
+    $this->time_shipped = clone ($other->time_shipped);
+    $this->time_tested = clone ($other->time_tested);
+    $this->time_testing_scheduled = clone ($other->time_testing_scheduled);
+    $this->time_next_deadline = clone ($other->time_next_deadline);
   }
 
   /**

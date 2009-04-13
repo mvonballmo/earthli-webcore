@@ -151,10 +151,10 @@ class MENU extends WEBCORE_OBJECT
    * @param MENU $other
    * @access private
    */
-  protected function _copy_from ($other)
+  protected function copy_from ($other)
   {
-    $this->renderer = $other->renderer->make_clone ();
-    $this->_commands = $other->_commands->make_clone ();
+    $this->renderer = clone($other->renderer);
+    $this->_commands = clone($other->_commands);
   }
   
   /**

@@ -76,7 +76,7 @@ class MUNGER_VALIDATOR_TAG
    */
   public function MUNGER_VALIDATOR_TAG ($token, $line_number, $column)
   {
-    $this->token = clone_object($token);
+    $this->token = clone($token);
     $this->line_number = $line_number;
     $this->column = $column;
   }

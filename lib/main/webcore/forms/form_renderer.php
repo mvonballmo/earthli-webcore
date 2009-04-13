@@ -1863,7 +1863,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
         if (! $id)
         {
           $field = $this->_field_at ($item->title);
-          $item = clone_object($item);
+          $item = clone($item);
           $item->title = $field->title;
           $item->description = $field->description;
           $item->enabled = $field->enabled;

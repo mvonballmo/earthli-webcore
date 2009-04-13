@@ -348,11 +348,10 @@ abstract class PROJECT_ENTRY extends MULTI_TYPE_ENTRY
    * @param PROJECT_ENTRY $other
    * @access private
    */
-  protected function _copy_from ($other)
+  protected function copy_from ($other)
   {
-    parent::_copy_from ($other);
-    unset ($this->_main_branch_info);
-    $this->_main_branch_info = $other->_main_branch_info->make_clone ();
+    parent::copy_from ($other);
+    $this->_main_branch_info = clone($other->_main_branch_info);
   }
 
   /**
@@ -516,7 +515,7 @@ abstract class PROJECT_ENTRY_BRANCH_INFO extends UNIQUE_OBJECT
   {
     // Deliberately break the reference here (avoids a copy bug)
 
-    $this->_branch = $branch->make_clone ();
+    $this->_branch = clone($branch);
     $this->branch_id = $branch->id;
   }
 

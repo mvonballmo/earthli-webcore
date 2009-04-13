@@ -177,17 +177,10 @@ class PROJECT extends FOLDER
    * @param PROJECT_ENTRY $other
    * @access private
    */
-  protected function _copy_from ($other)
+  protected function copy_from ($other)
   {
-    unset($this->_options);
-    if ($other->exists ())
-    {
-      $this->_options = $other->options ();
-    }
-    else
-    {
-      $this->_options = null;
-    }
+    parent::copy_from($other);
+    $this->_options = clone($other->options ());
   }
   
   /**

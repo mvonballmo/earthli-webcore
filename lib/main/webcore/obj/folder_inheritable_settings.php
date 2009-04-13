@@ -145,8 +145,6 @@ abstract class FOLDER_INHERITABLE_SETTINGS extends STORABLE
         $this->_definer = $this->parent_definer ();
       }
 
-      $this->_definer = clone_object($this->_definer);
-
       $field_name = $this->_field_name;
       $this->_definer_id = $this->_definer->id;
       $this->_folder->$field_name = $this->_definer->id;

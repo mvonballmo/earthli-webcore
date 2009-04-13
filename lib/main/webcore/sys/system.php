@@ -233,21 +233,6 @@ function is_php_5 ()
   return version_compare (phpversion (), '5.0', ">=");
 }
 
-function clone_object ($obj)
-{
-  if (is_php_5 ())
-  {
-    return clone ($obj);
-  }
-  
-	if (is_a ($obj, 'WEBCORE_OBJECT'))
-	{
-    return $obj->make_clone ();
-	}
-
-  return $obj;
-}
-
 /**
  * Called when PHP encounters an error.
  * Only used if {@link hook_php_error_handler()} is called to override PHP

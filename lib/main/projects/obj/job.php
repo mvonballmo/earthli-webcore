@@ -315,10 +315,10 @@ class JOB extends PROJECT_ENTRY
    * @param JOB $other
    * @access private
    */
-  protected function _copy_from ($other)
+  protected function copy_from ($other)
   {
-    unset ($this->time_needed);
-    $this->time_needed = $other->time_needed;
+    parent::copy_from($other);
+    $this->time_needed = clone($other->time_needed);
   }
 
   /**

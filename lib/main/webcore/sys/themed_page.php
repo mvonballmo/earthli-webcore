@@ -222,6 +222,7 @@ class THEME_SETTINGS extends WEBCORE_OBJECT
    */
   public function copy_from ($other)
   {
+    parent::copy_from($other);
     $this->id = $other->id;
     $this->title = $other->title;
     $this->main_CSS_file_name = $other->main_CSS_file_name;

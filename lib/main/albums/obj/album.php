@@ -610,12 +610,11 @@ class ALBUM extends FOLDER
    * @param ALBUM $other
    * @access private
    */
-  protected function _copy_from ($other)
+  protected function copy_from ($other)
   {
-    unset ($this->first_day);
-    $this->first_day = clone_object ($other->first_day);
-    unset ($this->last_day);
-    $this->last_day = clone_object ($other->last_day);
+    parent::copy_from($other);
+    $this->first_day = clone ($other->first_day);
+    $this->last_day = clone ($other->last_day);
   }
   
   /**

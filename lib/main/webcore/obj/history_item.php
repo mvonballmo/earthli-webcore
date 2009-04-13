@@ -292,7 +292,7 @@ class HISTORY_ITEM extends RENDERABLE
     // deliberately make a copy here, so the reference is broken and the object can later be used
     // to compare against another object to see whether it has changed.
 
-    $this->_object = $obj->make_clone ();
+    $this->_object = clone($obj);
   }
 
   /**

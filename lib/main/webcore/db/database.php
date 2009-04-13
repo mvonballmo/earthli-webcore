@@ -207,25 +207,21 @@ class DATABASE extends DB_Sql
   }
 
   /**
-   * Make a copy of this connection description.
-   * This avoids copying the database connection state if another connection
-   * needs to opened. Defined here to simulate Zend 2.0 features.
-   * @return DATABASE
+   * Called in PHP5 when cloning an object. Calls {@link copy_from()} to create copies of all 
+   * references not cloned by the default shallow copy.
    */
-  public function make_clone ()
+  function __clone ()
   {
-    $Result = new DATABASE ($this->env);
-    $Result->Host = $this->Host;
-    $Result->User = $this->User;
-    $Result->Password = $this->Password;
-    $Result->Database = $this->Database;
-    $Result->_query_texts = $this->_query_texts;
     $Result->Link_ID = 0;
     $Result->Query_ID = 0;
 
-    return $Result;
+//    $Result->Host = $this->Host;
+//    $Result->User = $this->User;
+//    $Result->Password = $this->Password;
+//    $Result->Database = $this->Database;
+//    $Result->_query_texts = $this->_query_texts;
   }
-
+  
   /**
    * Used for duplicate query checking.
    * @var array[string]

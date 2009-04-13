@@ -754,7 +754,7 @@ class WEBCORE_PANEL_MANAGER extends PANEL_MANAGER
 
     foreach ($type_infos as $type_info)
     {
-      $query_for_type = $query->make_clone ();
+      $query_for_type = clone($query);
       $query_for_type->set_type ($type_info->id);
       $class_name = $this->app->final_class_name ('ENTRY_PANEL', '', $type_info->id);
       $this->_add_entry_panel_for ($query_for_type, $type_info, $class_name);
@@ -804,7 +804,7 @@ class WEBCORE_PANEL_MANAGER extends PANEL_MANAGER
    */
   protected function _add_draft_panels_for ($query, $type_info, $panel_class_name)
   {
-    $draft_query = $query->make_clone ();
+    $draft_query = clone($query);
     $draft_query->set_filter (Draft);
     $draft_query->set_day_field ('entry.time_created');
     $panel = new $panel_class_name ($this, $draft_query, $type_info);
@@ -813,7 +813,7 @@ class WEBCORE_PANEL_MANAGER extends PANEL_MANAGER
     $panel->state = Draft;
     $this->add_panel ($panel);
 
-    $queued_query = $query->make_clone ();
+    $queued_query = clone($query);
     $queued_query->set_filter (Queued);
     $draft_query->set_day_field ('entry.time_created');
     $panel = new $panel_class_name ($this, $queued_query, $type_info);
@@ -822,7 +822,7 @@ class WEBCORE_PANEL_MANAGER extends PANEL_MANAGER
     $panel->state = Queued;
     $this->add_panel ($panel);
 
-    $abandoned_query = $query->make_clone ();
+    $abandoned_query = clone($query);
     $abandoned_query->set_filter (Abandoned);
     $draft_query->set_day_field ('entry.time_created');
     $panel = new $panel_class_name ($this, $abandoned_query, $type_info);

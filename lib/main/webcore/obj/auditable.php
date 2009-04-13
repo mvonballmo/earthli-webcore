@@ -326,12 +326,11 @@ abstract class AUDITABLE extends RENDERABLE
    * @param AUDITABLE $other
    * @access private
    */
-  protected function _copy_from ($other)
+  protected function copy_from ($other)
   {
-    unset ($this->time_created);
-    $this->time_created = clone_object ($other->time_created);
-    unset ($this->time_modified);
-    $this->time_modified = clone_object ($other->time_modified);
+    parent::copy_from($other);
+    $this->time_created = clone ($other->time_created);
+    $this->time_modified = clone ($other->time_modified);
   }
 
   /**

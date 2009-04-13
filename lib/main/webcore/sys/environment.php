@@ -417,7 +417,7 @@ class ENVIRONMENT extends RESOLVER
       }
     }
 
-    $url = clone_object ($this->_url); // make a copy so it can be modified below.
+    $url = clone ($this->_url);
 
     switch ($parts)
     {

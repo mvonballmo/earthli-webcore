@@ -182,7 +182,7 @@ class UNIQUE_OBJECT_CACHE extends OBJECT_CACHE
   {
     // deliberately make a copy of the query
 
-    $q = $this->_query->make_clone ();
+    $q = clone($this->_query);
     $q->set_limits ($first, $count);
     $q->set_select ($q->alias . '.' . $q->id);
     $this->_iteration_db = $q->raw_output ();

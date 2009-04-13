@@ -547,7 +547,7 @@ class QUERY_SECURITY_RESTRICTION_SET
       {
         foreach ($other_items as $other_item)
         {
-          $other_clone = clone_object($other_item);
+          $other_clone = clone($other_item);
           $other_clone->append ($item);
           $Result [] = $other_clone;
         }

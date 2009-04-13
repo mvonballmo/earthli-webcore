@@ -459,6 +459,7 @@ class USER_PERMISSIONS extends STORABLE
    */
   public function copy_from ($other)
   {
+    parent::copy_from($other);
     $this->global_privileges = $other->global_privileges;
     $this->allow_privileges = $other->allow_privileges;
     $this->deny_privileges = $other->deny_privileges;

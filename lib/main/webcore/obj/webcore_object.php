@@ -107,27 +107,6 @@ class WEBCORE_OBJECT extends RAISABLE
   }
 
   /**
-   * Deep-copy this object.
-   * If you simply make a copy of the object, references to aggregated objects are retained because
-   * PHP only makes a shallow copy. Imagine you have variable 'a1' of class A with a property 'b' of class B and some integer
-   * and string properties. If you simply use PHP's copy mechanism like this 'a2 = a1', you get a2 with all simple properties
-   * copied. However, a2 and a1 share the reference to 'b' because PHP only copies the reference. In this function, you should
-   * explicitly use the PHP assignment operator to make a copy of all sub-objects.
-   * @return WEBCORE_OBJECT
-   */
-  public function make_clone ()
-  {
-    if (is_php_5 ())
-    {
-      return clone ($this);
-    }
-
-    $Result = $this;
-    $Result->_copy_from ($this);
-    return $Result;
-  }
-
-  /**
    * Any queries initiated by this object run in a separate connection.
    * This is necessary when querying from within a loop over other queries
    * objects. In that case, the inner query cannot share a query id with
@@ -135,9 +114,7 @@ class WEBCORE_OBJECT extends RAISABLE
    */
   public function ensure_has_own_database_connection ()
   {
-    $new_db = $this->db->make_clone ();
-    unset ($this->db);
-    $this->db = $new_db;
+    $this->db = clone($this->db);
   }
 
   /**
@@ -163,19 +140,18 @@ class WEBCORE_OBJECT extends RAISABLE
    * @param WEBCORE_OBJECT $other
    * @access private
    */
-  protected function _copy_from ($other)
+  protected function copy_from ($other)
   {
   }
   
   /**
-   * Called in PHP5 when cloning an object. Calls {@link
-   * _initialize_clonable_fields()} to create copies of all references not
-   * cloned by the default shallow copy.
+   * Called in PHP5 when cloning an object. Calls {@link copy_from()} to create copies of all 
+   * references not cloned by the default shallow copy.
    */
-//  public function __clone ()
-//  {
-//    $this->_copy_from ($this);
-//  }
+  function __clone ()
+  {
+    $this->copy_from ($this);
+  }
 
   /**
    * reference to the context (usually a PAGE or APPLICATION)

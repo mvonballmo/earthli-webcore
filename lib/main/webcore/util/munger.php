@@ -1635,7 +1635,7 @@ class MUNGER_TAG
    */
   public function MUNGER_TAG($token, $transformer, $text)
   {
-    $this->token = clone_object($token);
+    $this->token = clone($token);
     $this->transformer = $transformer;
     $this->text = $text;
   }

@@ -102,10 +102,10 @@ abstract class ALBUM_ENTRY extends MULTI_TYPE_ENTRY
    * @param ALBUM_ENTRY $other
    * @access private
    */
-  protected function _copy_from ($other)
+  protected function copy_from ($other)
   {
-    unset ($this->date);
-    $this->date = clone_object ($other->date);
+    parent::copy_from($other);
+    $this->date = clone ($other->date);
   }
   
   /**

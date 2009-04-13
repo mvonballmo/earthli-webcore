@@ -556,13 +556,10 @@ class DRAFTABLE_ENTRY extends ENTRY
    * @param DRAFTABLE_ENTRY $other
    * @access private
    */
-  protected function _copy_from ($other)
+  protected function copy_from ($other)
   {
-    unset ($this->time_published);
-    if (isset($other->time_published))
-    {
-      $this->time_published = clone_object ($other->time_published);
-    }
+    parent::copy_from($other);
+    $this->time_published = clone ($other->time_published);
   }
 }
 

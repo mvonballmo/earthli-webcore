@@ -759,7 +759,7 @@ class USER extends CONTENT_OBJECT
       /* Ensure the query executes from a separate connection in case the main database is
          iterating another query. */
 
-      $db = $this->db->make_clone ();
+      $db = clone($this->db);
       $db->logged_query ("SELECT * FROM {$this->app->table_names->user_permissions} WHERE user_id = $this->id");
       if ($db->next_record ())
       {
