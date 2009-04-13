@@ -281,14 +281,21 @@ abstract class AUDITABLE extends RENDERABLE
   {
     parent::_pre_store ();
 
-    $this->modifier_id = $this->login->id;
-    $this->time_modified->set_now ();
-
     if (! $this->exists ())
     {
+      $this->modifier_id = $this->login->id;
+      $this->time_modified->set_now ();
+      
       $this->creator_id = $this->login->id;
       $this->time_created->set_now ();
     }
+    elseif ($this->state != Abandoned)
+    {
+      // Abandoned items should be abandoned "in-place"; the abandoner is retained in the item's history.
+      
+      $this->modifier_id = $this->login->id;
+      $this->time_modified->set_now ();
+    } 
   }
 
   /**

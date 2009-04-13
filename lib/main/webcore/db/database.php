@@ -212,8 +212,8 @@ class DATABASE extends DB_Sql
    */
   function __clone ()
   {
-    $Result->Link_ID = 0;
-    $Result->Query_ID = 0;
+    $this->Link_ID = 0;
+    $this->Query_ID = 0;
 
 //    $Result->Host = $this->Host;
 //    $Result->User = $this->User;
