@@ -89,6 +89,11 @@ abstract class STORABLE_FORM extends PREVIEWABLE_FORM
    */
   protected function _prepare_for_commit ($obj)
   {
+    if ($this->cloning())
+    {
+      $obj->initialize_as_new();
+    }
+    
     $this->_store_to_object ($obj);
   }
 
@@ -100,11 +105,6 @@ abstract class STORABLE_FORM extends PREVIEWABLE_FORM
    */
   public function commit ($obj)
   {
-    if ($this->cloning ())
-    {
-      $obj->initialize_as_new ();
-    }
-
     $obj->store ();
   }
 
@@ -137,8 +137,7 @@ abstract class STORABLE_FORM extends PREVIEWABLE_FORM
 
     if ($load_action == Form_load_action_clone)
     {
-      $clone = clone($obj);
-      $this->load_from_clone ($clone);
+      $this->load_from_clone ($obj);
     }
     else
     {

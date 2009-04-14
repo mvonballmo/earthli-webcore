@@ -38,41 +38,47 @@ http://www.earthli.com/software/webcore
   if (isset ($folder))
   {
     $entry_query = $folder->entry_query ();
-    $clone = $entry_query->object_at_id ($id);
-    $entry = $folder->new_object ($entry_type_info->id);
+    $entry = $entry_query->object_at_id ($id);
   }
 
-  if (isset ($clone) && isset ($entry) && $App->login->is_allowed (Privilege_set_entry, Privilege_create, $folder))
+  if (isset ($entry) && $App->login->is_allowed (Privilege_set_entry, Privilege_create, $folder))
   {
     $class_name = $App->final_class_name ('ENTRY_FORM', 'webcore/forms/object_in_folder_form.php', $entry_type_info->id);
     $form = new $class_name ($folder);
 
     include_once ('webcore/util/options.php');
     $opt_stay_on_page = new STORED_OPTION ($App, "stay_on_{$entry_type_info->id}_page");
-    $opt_stay_on_page->add_argument ('id', $clone->id);
+    $opt_stay_on_page->add_argument ('id', $entry->id);
 
-    $form->process_clone ($clone);
+    $form->process_clone ($entry);
     if ($form->committed ())
-    {
-      if ($opt_stay_on_page->value ())
+    {      
+      if ($form->is_field ('quick_save') && $form->value_for ('quick_save'))
       {
-        $url = new URL ($clone->home_page ());
-        $url->replace_name_and_extension ($Env->url (Url_part_file_name));
-        $url->replace_argument ('last_id', $clone->id);
-        $Env->redirect_local ($url->as_text ());
+        $Env->redirect_local ($entry_type_info->edit_page . '?id=' . $entry->id);
       }
       else
       {
-        $Env->redirect_local ($clone->home_page ());
+        if ($opt_stay_on_page->value ())
+        {
+          $url = new URL ($entry->home_page ());
+          $url->replace_name_and_extension ($Env->url (Url_part_file_name));
+          $url->replace_argument ('last_id', $entry->id);
+          $Env->redirect_local ($url->as_text ());
+        }
+        else
+        {
+          $Env->redirect_local ($entry->home_page ());
+        }
       }
     }
 
     $Page->title->add_object ($folder);
-    $Page->title->add_object ($clone);
+    $Page->title->add_object ($entry);
     $Page->title->subject = 'Clone';
 
     $Page->location->add_folder_link ($folder);
-    $Page->location->add_object_link ($clone);
+    $Page->location->add_object_link ($entry);
     $Page->location->append ($Page->title->subject);
 
     $Page->start_display ();

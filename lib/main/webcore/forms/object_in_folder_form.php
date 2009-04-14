@@ -425,30 +425,6 @@ class DRAFTABLE_ENTRY_FORM extends ENTRY_FORM
   }
 
   /**
-   * Load initial properties from the object, but store as a new object.
-   * @param DRAFTABLE_ENTRY $obj
-   */
-  public function load_from_clone ($obj)
-  {
-    $obj->time_published->clear ();
-    $obj->publisher_id = 0;
-    $obj->state = Draft;
-    parent::load_from_clone ($obj);
-  }
-
-  /**
-   * Execute the form on a cloned object.
-   * This will commit the form if it has been {@link submitted()}.
-   * @param object $obj Object being copied.
-   */
-  public function process_clone ($obj)
-  {
-    $obj->time_published->clear ();
-    $obj->publisher_id = 0;
-    parent::process_clone ($obj);
-  }
-
-  /**
    * Store the form's values to this article.
    * @param DRAFTABLE_ENTRY $obj
    * @access private

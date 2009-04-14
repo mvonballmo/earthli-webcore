@@ -408,6 +408,8 @@ class DRAFTABLE_ENTRY extends ENTRY
   {
     parent::initialize_as_new ();
     $this->time_published->clear ();
+    $this->publisher_id = 0;
+    $this->state = Draft;
   }
 
   /**
@@ -428,18 +430,6 @@ class DRAFTABLE_ENTRY extends ENTRY
   {
     parent::store_to ($storage);
     $tname =$this->table_name ();
-
-    if ($this->unpublished ())
-    {
-      $this->time_published->clear ();
-      $this->publisher_id = 0;
-    }
-    elseif (! $this->time_published->is_valid ())
-    {
-      $this->time_published->set_now ();
-      $this->publisher_id = $this->login->id;
-    }
-
     $storage->add ($tname, 'time_published', Field_type_date_time, $this->time_published);
     $storage->add ($tname, 'publisher_id', Field_type_integer, $this->publisher_id);
   }
@@ -469,20 +459,42 @@ class DRAFTABLE_ENTRY extends ENTRY
     {
       return History_item_published;
     }
-    else if (($state & Unpublished) && $this->visible ())
- {
-   return History_item_unpublished;
- }
-    else if ($state == Queued)
- {
-   return History_item_queued;
- }
-    else if ($state == Abandoned)
- {
-   return History_item_abandoned;
- }
+    
+    if (($state & Unpublished) && $this->visible ())
+    {
+      return History_item_unpublished;
+    }
+    
+    if ($state == Queued)
+    {
+      return History_item_queued;
+    }
+    
+    if ($state == Abandoned)
+    {
+      return History_item_abandoned;
+    }
 
     return parent::history_item_kind_for_transition_to ($state);
+  }
+
+  /* Final preparation before storing to the database.
+   * @access private
+   */
+  protected function _pre_store ()
+  {
+    parent::_pre_store ();
+
+    if ($this->unpublished ())
+    {
+      $this->time_published->clear ();
+      $this->publisher_id = 0;
+    }
+    elseif (! $this->time_published->is_valid ())
+    {
+      $this->time_published->set_now ();
+      $this->publisher_id = $this->login->id;
+    }
   }
 
   /**
