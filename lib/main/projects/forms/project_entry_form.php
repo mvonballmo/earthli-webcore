@@ -367,7 +367,7 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
   {
     parent::_draw_scripts ();
 ?>
-  public function on_click_branch (ctrl, id)
+  function on_click_branch (ctrl, id)
   {
     <?php $this->_draw_branch_scripts (); ?>
   }

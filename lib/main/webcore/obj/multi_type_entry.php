@@ -66,6 +66,15 @@ abstract class MULTI_TYPE_ENTRY extends ENTRY
   public $entry_id;
 
   /**
+   * Set up this object so it will {@link store()} a new object.
+   */
+  public function initialize_as_new ()
+  {
+    parent::initialize_as_new ();
+    $this->entry_id = 0;
+  }
+
+  /**
    * @param DATABASE $db Database from which to load values.
    */
   public function load ($db)

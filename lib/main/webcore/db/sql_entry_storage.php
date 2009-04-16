@@ -59,10 +59,15 @@ class SQL_MULTI_TYPE_ENTRY_STORAGE extends SQL_UNIQUE_STORAGE
   {
     if (($table->name == $obj->secondary_table_name ()) && ($action == Storage_action_create))
     {
+      $table->update ('entry_id', $obj->entry_id);
+    }
+    
+    parent::_commit_table ($table, $action, $obj);
+
+    if (($table->name == $obj->table_name ()) && ($action == Storage_action_create))
+    {
       $obj->entry_id = $obj->id;
     }
-
-    parent::_commit_table ($table, $action, $obj);
   }
 }
 

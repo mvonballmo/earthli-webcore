@@ -304,7 +304,7 @@ class ATTACHMENT_HOST_FORM extends OBJECT_IN_FOLDER_FORM
     }
 ?>
 
-    public function on_insert_attachment ()
+    function on_insert_attachment ()
     {
       f = <?php echo $this->js_form_name (); ?>;
       caption_text = attachments [f.attachments.value].replace (/"/g, "'");

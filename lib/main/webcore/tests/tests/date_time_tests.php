@@ -266,6 +266,87 @@ class DATE_TIME_TEST_TASK extends TEST_TASK
     $this->_check_equal (Date_time_unassigned, $from_date->as_php ());
   }
   
+  protected function _execute_converter_tests ()
+  {
+    $php_time = mktime(12, 10, 01, 5, 4, 2007);
+    $php_time_no_time = mktime(0, 0, 0, 5, 4, 2007);
+    $php_time_no_date = mktime(12, 10, 01, date('m'), date('d'), date('Y'));
+    $date = $this->context->make_date_time();
+    $no_date = $this->context->make_date_time($php_time_no_date)->as_iso();
+
+    $date->set_from_text ('', Date_time_both_parts);
+    
+    $this->_check_equal(Date_time_unassigned, $date->as_iso ());
+    $this->_check_equal(Date_time_unassigned, $date->as_php ());
+
+    // Check setting both date and time
+    
+    $date->set_from_text ('2007-05-04 12:10:01', Date_time_both_parts);
+    
+    $this->_check_equal('2007-05-04 12:10:01', $date->as_iso ());
+    $this->_check_equal($php_time, $date->as_php ());
+
+    $date->set_from_text ('05/04/2007 12:10:01', Date_time_both_parts);
+    
+    $this->_check_equal('2007-05-04 12:10:01', $date->as_iso ());
+    $this->_check_equal($php_time, $date->as_php ());
+
+    $date->set_from_text ('04.05.2007 12:10:01', Date_time_both_parts);
+    
+    $this->_check_equal('2007-05-04 12:10:01', $date->as_iso ());
+    $this->_check_equal($php_time, $date->as_php ());
+    
+    $date->set_from_text ('2007:05:04 12:10:01', Date_time_both_parts);
+    
+    $this->_check_equal('2007-05-04 12:10:01', $date->as_iso ());
+    $this->_check_equal($php_time, $date->as_php ());
+
+    // Check setting only the date
+    
+    $date->set_from_text ('2007-05-04 14:20:02', Date_time_date_part);
+    
+    $this->_check_equal('2007-05-04 00:00:00', $date->as_iso ());
+    $this->_check_equal($php_time_no_time, $date->as_php ());
+
+    $date->set_from_text ('05/04/2007 14:20:02', Date_time_date_part);
+    
+    $this->_check_equal('2007-05-04 00:00:00', $date->as_iso ());
+    $this->_check_equal($php_time_no_time, $date->as_php ());
+
+    $date->set_from_text ('04.05.2007 14:20:02', Date_time_date_part);
+    
+    $this->_check_equal('2007-05-04 00:00:00', $date->as_iso ());
+    $this->_check_equal($php_time_no_time, $date->as_php ());
+    
+    $date->set_from_text ('2007:05:04 14:20:02', Date_time_date_part);
+    
+    $this->_check_equal('2007-05-04 00:00:00', $date->as_iso ());
+    $this->_check_equal($php_time_no_time, $date->as_php ());
+
+    // Check setting only the time
+    
+    $date->set_from_text ('2007-06-07 12:10:01', Date_time_time_part);
+    
+    $this->_check_equal($no_date, $date->as_iso ());
+    $this->_check_equal($php_time_no_date, $date->as_php ());
+
+    $date->set_from_text ('06/07/2007 12:10:01', Date_time_time_part);
+    
+    $this->_check_equal($no_date, $date->as_iso ());
+    $this->_check_equal($php_time_no_date, $date->as_php ());
+
+    $date->set_from_text ('07.06.2007 12:10:01', Date_time_time_part);
+    
+    $this->_check_equal($no_date, $date->as_iso ());
+    $this->_check_equal($php_time_no_date, $date->as_php ());
+    
+    $date->set_from_text ('2007:06:07 12:10:01', Date_time_time_part);
+    
+    $this->_check_equal($no_date, $date->as_iso ());
+    $this->_check_equal($php_time_no_date, $date->as_php ());
+    
+  }
+  
   protected function _execute_testbed ()
   {
   }
@@ -278,6 +359,7 @@ class DATE_TIME_TEST_TASK extends TEST_TASK
     $this->_execute_all ();
     $this->_execute_testbed ();
     $this->_execute_unassigned_tests ();
+    $this->_execute_converter_tests ();
   }
 }
 

@@ -127,17 +127,18 @@ class DATE_TIME_TOOLKIT
    */
   public function text_to_php ($t, $parts = Date_time_both_parts)
   {
-    $Result = Date_time_unassigned;
-    $idx = 0;
-    $count = sizeof ($this->_converters);
-
-    while (($Result == Date_time_unassigned) && ($idx < $count))
+    if (empty($t)) { return Date_time_unassigned; }
+    
+    foreach ($this->_converters as $converter)
     {
-      $Result = $this->_converters [$idx]->text_to_php ($t, $parts);
-      $idx++;
+      $Result = $converter->text_to_php ($t, $parts);
+      if ($Result != Date_time_unassigned)
+      {
+        return $Result;
+      }
     }
-
-    return $Result;
+    
+    return Date_time_unassigned;
   }
 
   /**
@@ -386,13 +387,13 @@ class ISO_DATE_TIME_FORMATTER extends DATE_TIME_FORMATTER
  * @version 3.1.0
  * @since 2.5.0
  */
-class DATE_TIME_CONVERTER extends RAISABLE
+abstract class DATE_TIME_CONVERTER extends RAISABLE
 {
   /**
-   * Used with the PHP 'ereg' function.
+   * Matched against candidate strings in {@link text_to_php()} using {@link PHP_MANUAL#preg_match}.
    * @var string
    */
-  public $ereg_string;
+  public $match_expression;
 
   /**
    * @var integer
@@ -419,7 +420,7 @@ class DATE_TIME_CONVERTER extends RAISABLE
   public function text_to_php ($value, $parts = Date_time_both_parts)
   {
     $arr = null; // Compiler warning
-    if (ereg ($this->ereg_text, $value, $arr))
+    if (preg_match ($this->match_expression, $value, $arr))
     {
       switch ($parts)
       {
@@ -446,10 +447,10 @@ class DATE_TIME_CONVERTER extends RAISABLE
 class US_DATE_TIME_CONVERTER extends DATE_TIME_CONVERTER
 {
   /**
-   * Used by {@link PHP_MANUAL#ereg} to get date and time.
+   * Matched against candidate strings in {@link text_to_php()} using {@link PHP_MANUAL#preg_match}.
    * @var string
    */
-  public $ereg_text = '^(([0-9]{1,2})/([0-9]{1,2})/([0-9]{4}))?[ ]?(([0-9]{1,2}):([0-9]{1,2}):([0-9]{1,2}))?$';
+  public $match_expression = '&^(([0-9]{1,2})/([0-9]{1,2})/([0-9]{4}))?[ ]?(([0-9]{1,2}):([0-9]{1,2}):([0-9]{1,2}))?$&';
 
   /**
    * @var integer
@@ -477,10 +478,10 @@ class US_DATE_TIME_CONVERTER extends DATE_TIME_CONVERTER
 class EURO_DATE_TIME_CONVERTER extends DATE_TIME_CONVERTER
 {
   /**
-   * Used by {@link PHP_MANUAL#ereg} to get date and time.
+   * Matched against candidate strings in {@link text_to_php()} using {@link PHP_MANUAL#preg_match}.
    * @var string
    */
-  public $ereg_text = '^(([0-9]{1,2})\.([0-9]{1,2})\.([0-9]{4}))?[ ]?(([0-9]{1,2}):([0-9]{1,2}):([0-9]{1,2}))?$';
+  public $match_expression = '/^(([0-9]{1,2})\.([0-9]{1,2})\.([0-9]{4}))?[ ]?(([0-9]{1,2}):([0-9]{1,2}):([0-9]{1,2}))?$/';
 
   /**
    * @var integer
@@ -508,10 +509,10 @@ class EURO_DATE_TIME_CONVERTER extends DATE_TIME_CONVERTER
 class ISO_DATE_TIME_CONVERTER extends DATE_TIME_CONVERTER
 {
   /**
-   * Used by {@link PHP_MANUAL#ereg} to get date and time.
+   * Matched against candidate strings in {@link text_to_php()} using {@link PHP_MANUAL#preg_match}.
    * @var string
    */
-  public $ereg_text = '^(([0-9]{4})-([0-9]{1,2})-([0-9]{1,2}))?[ ]?(([0-9]{1,2}):([0-9]{1,2}):([0-9]{1,2}))?$';
+  public $match_expression = '/^(([0-9]{4})-([0-9]{1,2})-([0-9]{1,2}))?[ ]?(([0-9]{1,2}):([0-9]{1,2}):([0-9]{1,2}))?$/';
 
   /**
    * @var integer
@@ -539,10 +540,10 @@ class ISO_DATE_TIME_CONVERTER extends DATE_TIME_CONVERTER
 class EXIF_DATE_TIME_CONVERTER extends DATE_TIME_CONVERTER
 {
   /**
-   * Used by {@link PHP_MANUAL#ereg} to get date and time.
+   * Matched against candidate strings in {@link text_to_php()} using {@link PHP_MANUAL#preg_match}.
    * @var string
    */
-  public $ereg_text = '^(([0-9]{4}):([0-9]{1,2}):([0-9]{1,2}))?[ ]?(([0-9]{1,2}):([0-9]{1,2}):([0-9]{1,2}))?$';
+  public $match_expression = '/^(([0-9]{4}):([0-9]{1,2}):([0-9]{1,2}))?[ ]?(([0-9]{1,2}):([0-9]{1,2}):([0-9]{1,2}))?$/';
 
   /**
    * @var integer

@@ -523,7 +523,7 @@ class JOB_FORM extends PROJECT_ENTRY_FORM
     Assign this job to one or more of the following branches.
   </p>
 <?php
-      $this->_draw_branch_controls ($renderer);
+    $this->_draw_branch_controls ($renderer);
     $renderer->finish_row ();
 
     $renderer->draw_separator ();
@@ -570,4 +570,5 @@ class JOB_FORM extends PROJECT_ENTRY_FORM
     $renderer->finish ();
   }
 }
+
 ?>

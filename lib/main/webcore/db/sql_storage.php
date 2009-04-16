@@ -139,7 +139,14 @@ class SQL_FIELD
     case Field_type_integer:
       return $this->value;
     case Field_type_date_time:
-      return "'" . $this->value->as_iso () . "'";
+    {
+      $iso_time = $this->value->as_iso ();
+      if ($iso_time == Date_time_unassigned)
+      {
+        $iso_time = '0000-00-00 00:00:00';
+      }
+      return "'" . $iso_time . "'";
+    }
     case Field_type_string:
       return "'" . addslashes ($this->value) . "'";
     case Field_type_boolean:
@@ -160,7 +167,30 @@ class SQL_FIELD
  */
 class SQL_TABLE extends WEBCORE_OBJECT
 {
+  /**
+   * The name of the table in the database.
+   *
+   * @var string
+   */
   public $name;
+  
+  /**
+   * The list of fields in this table.
+   *
+   * @var array[SQL_FIELD]
+   * 
+   * @see add()
+   */
+  public $fields;
+
+  /**
+   * The list of restrictions in this table.
+   *
+   * @var array[string]
+   * 
+   * @see restrict()
+   */
+  public $restrictions;
 
   /**
    * @param CONTEXT $context
@@ -174,6 +204,7 @@ class SQL_TABLE extends WEBCORE_OBJECT
 
   /**
    * Add a field to the table schema.
+   * 
    * @see SQL_FIELD
    * @param string $field_id
    * @param integer $field_type
@@ -184,6 +215,17 @@ class SQL_TABLE extends WEBCORE_OBJECT
   {
     $class_name = $this->context->final_class_name ('SQL_FIELD');
     $this->fields [$field_id] = new $class_name ($field_id, $field_type, $value, $action);
+  }
+  
+  /**
+   * Update the value of an existing field.
+   *
+   * @param string $field_id
+   * @param mixed $value
+   */
+  public function update ($field_id, $value)
+  {
+    $this->fields [$field_id]->value = $value;
   }
 
   /**
@@ -251,6 +293,52 @@ class SQL_TABLE extends WEBCORE_OBJECT
   }
 
   /**
+   * Get the fields and values for this action.
+   * @param integer $action
+   * @return array[string,string]
+   */
+  public function fields_as_sql ($action)
+  {
+    $Result = '';
+    foreach ($this->fields as $id => $field)
+    {
+      if ($field->needed_for_action ($action))
+      {
+        $Result [$id] = $field->value_for_sql ();
+      }
+    }
+    return $Result;
+  }
+
+  /**
+   * Get the restrictions for this table.
+   * Used by {@link _update()} and {@link exists()}.
+   * @param integer $action
+   * @return string
+   */
+  public function restrictions_as_sql ()
+  {
+    foreach ($this->restrictions as $id)
+    {
+      $field = $this->fields [$id];
+      $this->assert (isset ($field), 'restriction on non-existent field [$id]', 'restrictions_as_sql', 'SQL_TABLE');
+      $Result [$id] = $field->value_for_sql ();
+    }
+    
+    if (! empty ($Result))
+    {
+      $pairs = array ();
+      foreach ($Result as $key => $value)
+      {
+        $pairs [] = "($key = $value)";
+      }
+      return join (' AND ', $pairs);
+    }
+    
+    return '';
+  }
+  
+  /**
    * Create the object specified in the schema.
    * @access private
    */
@@ -307,52 +395,6 @@ class SQL_TABLE extends WEBCORE_OBJECT
   protected function _query ($qs)
   {
     $this->db->logged_query ($qs);
-  }
-
-  /**
-   * Get the fields and values for this action.
-   * @param integer $action
-   * @return array[string,string]
-   */
-  public function fields_as_sql ($action)
-  {
-    $Result = '';
-    foreach ($this->fields as $id => $field)
-    {
-      if ($field->needed_for_action ($action))
-      {
-        $Result [$id] = $field->value_for_sql ();
-      }
-    }
-    return $Result;
-  }
-
-  /**
-   * Get the restrictions for this table.
-   * Used by {@link _update()} and {@link exists()}.
-   * @param integer $action
-   * @return string
-   */
-  public function restrictions_as_sql ()
-  {
-    foreach ($this->restrictions as $id)
-    {
-      $field = $this->fields [$id];
-      $this->assert (isset ($field), 'restriction on non-existent field [$id]', 'restrictions_as_sql', 'SQL_TABLE');
-      $Result [$id] = $field->value_for_sql ();
-    }
-    
-    if (! empty ($Result))
-    {
-      $pairs = array ();
-      foreach ($Result as $key => $value)
-      {
-        $pairs [] = "($key = $value)";
-      }
-      return join (' AND ', $pairs);
-    }
-    
-    return '';
   }
 }
 
@@ -505,7 +547,7 @@ class SQL_STORAGE extends WEBCORE_OBJECT
   {
     $this->assert (! empty ($table_id), 'table_id cannot be empty.', '_table_at_id', 'SQL_STORAGE');
 
-    $Result = (isset($this->_tables)) ? $this->_tables [$table_id] : null;
+    $Result = (isset($this->_tables) && isset($this->_tables[$table_id])) ? $this->_tables [$table_id] : null;
     
     if (! isset($Result))
     {
