@@ -109,9 +109,15 @@ abstract class AUDITABLE_FORM extends RENDERABLE_FORM
   {
     if (! $this->previewing ())
     {
+      if ($this->cloning())
+      {
+        $obj->initialize_as_new();
+      }
+      
       $this->_history_item = $obj->new_history_item ();
       $this->_adjust_history_item ($this->_history_item);
     }
+    
     parent::attempt_action ($obj);
   }
 
@@ -196,14 +202,7 @@ abstract class AUDITABLE_FORM extends RENDERABLE_FORM
    */
   public function commit ($obj)
   {
-    if ($this->cloning ())
-    {
-      parent::commit ($obj);
-    }
-    else
-    {
-      $obj->store_if_different ($this->_history_item);
-    }
+    $obj->store_if_different ($this->_history_item);
   }
 
   /**
@@ -232,6 +231,13 @@ abstract class AUDITABLE_FORM extends RENDERABLE_FORM
       $renderer->restore_width ();
     $renderer->finish_layer_row ($layer);
   }
+  
+  /**
+   * Reference to the history item stored with the main object.
+   *
+   * @var HISTORY_ITEM
+   */
+  protected $_history_item;
 }
 
 ?>

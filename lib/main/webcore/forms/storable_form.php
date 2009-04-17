@@ -89,11 +89,6 @@ abstract class STORABLE_FORM extends PREVIEWABLE_FORM
    */
   protected function _prepare_for_commit ($obj)
   {
-    if ($this->cloning())
-    {
-      $obj->initialize_as_new();
-    }
-    
     $this->_store_to_object ($obj);
   }
 
