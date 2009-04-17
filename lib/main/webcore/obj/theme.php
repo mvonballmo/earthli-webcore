@@ -37,7 +37,7 @@ http://www.earthli.com/software/webcore
 ****************************************************************************/
 
 /***/
-require_once ('webcore/obj/renderable.php');
+require_once ('webcore/obj/unique_object.php');
 
 /**
  * Skin for a web page.
@@ -47,7 +47,7 @@ require_once ('webcore/obj/renderable.php');
  * @version 3.1.0
  * @since 2.2.1
  */
-class THEME extends RENDERABLE
+class THEME extends UNIQUE_OBJECT
 {
   /**
    * English name of the the theme.

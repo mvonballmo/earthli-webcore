@@ -37,7 +37,7 @@ http://www.earthli.com/software/webcore
 ****************************************************************************/
 
 /** */
-require_once ('webcore/obj/renderable.php');
+require_once ('webcore/obj/unique_object.php');
 
 /**
  * An icon used by {@link FOLDER}s or {@link USER}s.
@@ -48,7 +48,7 @@ require_once ('webcore/obj/renderable.php');
  * @version 3.1.0
  * @since 2.5.0
  */
-class ICON extends RENDERABLE
+class ICON extends UNIQUE_OBJECT
 {
   /**
    * @var string

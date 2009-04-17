@@ -95,7 +95,7 @@ class PUBLISHER extends LOGGABLE
     LOGGABLE::LOGGABLE ($provider->context);
 
     $this->provider = $provider;
-    $this->logs->set_logger ($provider->logger);
+    $this->logs->set_logger ($provider->logs->logger);
 
     $this->excerpt_length = $this->app->mail_options->excerpt_length;
 
@@ -467,6 +467,45 @@ class PUBLISHER extends LOGGABLE
   }
 
   /**
+   * Get the body for this description.
+   * @param PUBLISHER_MESSAGE $item
+   * @return string
+   * @access private
+   */
+  public function body_for ($item)
+  {
+    if (isset ($this->_rendered_bodies) && isset ($this->_rendered_bodies [$item->identifier]))
+    {
+      $Result = $this->_rendered_bodies [$item->identifier];
+    }
+    else
+    {
+      $class_name = $this->app->final_class_name ('WEBCORE_MAIL_BODY_RENDERER', 'webcore/mail/webcore_mail_body_renderer.php');
+      $mail_renderer = new $class_name ($this->context);
+
+      $mail_renderer->add ($this->_subscription_settings, $this->_renderer_for ($this->_subscription_settings));
+
+      foreach ($item->objects as $obj)
+      {
+        $mail_renderer->add ($obj, $this->_renderer_for ($obj));
+      }
+
+      if ($item->subscriber->send_as_html)
+      {
+        $Result = $mail_renderer->as_html ($item->rendering_options ());
+      }
+      else
+      {
+        $Result = $mail_renderer->as_text ($item->rendering_options ());
+      }
+
+      $this->_renderered_bodies [$item->identifier] = $Result;
+    }
+
+    return $this->_replace_aliases ($item, $Result);
+  }
+
+  /**
    * Mark the given records as published in the database.
    * Called from {@link publish_history_items()} once all interested subscribers have
    * been updated with the history item ids.
@@ -572,50 +611,14 @@ class PUBLISHER extends LOGGABLE
   protected function _renderer_for ($obj)
   {
     $class_name = strtoupper (get_class ($obj));
-    $Result = $this->_renderers [$class_name];
-    if (! $Result)
+    if (isset($this->_renderers [$class_name]))
     {
-      $Result = $obj->handler_for (Handler_mail);
-      $this->_renderers [$class_name] = $Result;
+      return $this->_renderers [$class_name];
     }
 
+    $Result = $obj->handler_for (Handler_mail);
+    $this->_renderers [$class_name] = $Result;
     return $Result;
-  }
-
-  /**
-   * Get the body for this description.
-   * @param PUBLISHER_MESSAGE $item
-   * @return string
-   * @access private
-   */
-  protected function _body_for ($item)
-  {
-    $Result = $this->_rendered_bodies [$item->identifier];
-    if (! $Result)
-    {
-      $class_name = $this->app->final_class_name ('WEBCORE_MAIL_BODY_RENDERER', 'webcore/mail/webcore_mail_body_renderer.php');
-      $mail_renderer = new $class_name ($this->context);
-
-      $mail_renderer->add ($this->_subscription_settings, $this->_renderer_for ($this->_subscription_settings));
-
-      foreach ($item->objects as $obj)
-      {
-        $mail_renderer->add ($obj, $this->_renderer_for ($obj));
-      }
-
-      if ($item->subscriber->send_as_html)
-      {
-        $Result = $mail_renderer->as_html ($item->rendering_options ());
-      }
-      else
-      {
-        $Result = $mail_renderer->as_text ($item->rendering_options ());
-      }
-
-      $this->_renderered_bodies [$item->identifier] = $Result;
-    }
-
-    return $this->_replace_aliases ($item, $Result);
   }
 
   /**
@@ -830,7 +833,7 @@ class PUBLISHER_MESSAGE extends WEBCORE_OBJECT
    */
   public function body ()
   {
-    return $this->_publisher->_body_for ($this);
+    return $this->_publisher->body_for ($this);
   }
 
   /**

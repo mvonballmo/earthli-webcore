@@ -37,7 +37,7 @@ http://www.earthli.com/software/webcore
 ****************************************************************************/
 
 /** */
-require_once ('webcore/obj/unique_object.php');
+require_once ('webcore/obj/webcore_object.php');
 
 /**
  * An object which can be rendered in different ways.
@@ -48,7 +48,7 @@ require_once ('webcore/obj/unique_object.php');
  * @since 2.5.0
  * @abstract
  */
-abstract class RENDERABLE extends UNIQUE_OBJECT
+abstract class RENDERABLE extends WEBCORE_OBJECT
 {
   /**
    * Return handler objects for different tasks.

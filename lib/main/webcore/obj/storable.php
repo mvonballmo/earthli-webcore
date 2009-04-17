@@ -37,7 +37,7 @@ http://www.earthli.com/software/webcore
 ****************************************************************************/
 
 /** */
-require_once ('webcore/obj/webcore_object.php');
+require_once ('webcore/obj/renderable.php');
 
 /**
  * A WebCore object which can be stored to a database.
@@ -47,7 +47,7 @@ require_once ('webcore/obj/webcore_object.php');
  * @since 2.2.1
  * @abstract
  */
-abstract class STORABLE extends WEBCORE_OBJECT
+abstract class STORABLE extends RENDERABLE
 {
   /**
    * Does this object exist?

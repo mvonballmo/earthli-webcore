@@ -55,7 +55,7 @@ class MAIL_RENDERER extends RENDERER
    * @param MAIL_RENDERER_STATE $state
    * @access private
    */
-  protected function _start_rendering ($options, $state)
+  protected function _start_rendering ($options, &$state)
   {
     /* Save options to be restored later. */
    

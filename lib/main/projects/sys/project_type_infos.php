@@ -214,4 +214,15 @@ class RELEASE_TYPE_INFO extends TYPE_INFO
   public $edit_page = 'edit_release.php';
 }
 
+/**
+ * Describes the {@link PROJECT_COMMENT} class.
+ * @package projects
+ * @subpackage sys
+ * @version 3.1.0
+ * @since 3.1.0
+ * @access private
+ */
+class PROJECT_COMMENT_TYPE_INFO extends COMMENT_TYPE_INFO 
+{ }
+
 ?>

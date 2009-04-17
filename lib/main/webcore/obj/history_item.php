@@ -37,7 +37,7 @@ http://www.earthli.com/software/webcore
 ****************************************************************************/
 
 /** */
-require_once ('webcore/obj/renderable.php');
+require_once ('webcore/obj/unique_object.php');
 
 /**
  * Records a change made in the {@link APPLICATION}.
@@ -49,7 +49,7 @@ require_once ('webcore/obj/renderable.php');
  * @since 2.4.0
 f * @subpackage history
  */
-class HISTORY_ITEM extends RENDERABLE
+class HISTORY_ITEM extends UNIQUE_OBJECT
 {
   /**
    * Which kind of object is this?

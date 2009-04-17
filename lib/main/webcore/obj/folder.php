@@ -632,6 +632,7 @@ class FOLDER extends ATTACHMENT_HOST
     $this->permissions_id = 0;
     $this->parent_id = 0;
     $this->root_id = 0;
+    
     parent::_purge ($options);
   }
 

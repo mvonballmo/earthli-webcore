@@ -199,6 +199,21 @@ class FRAMEWORK_INFO extends NAMED_OBJECT
   }
   
   /**
+   * Remove the object from the database.
+   * Called from {@link purge()} which already checks that the object is
+   * in the database (using {@link exists()}).
+   * @param PURGE_OPTIONS $options
+   * @access private
+   * @abstract
+   */
+  protected function _purge ($options)
+  {
+    $tname = $this->table_name ();
+    $this->db->logged_query ("DELETE LOW_PRIORITY FROM {$tname} WHERE title = '$this->title'");
+    $this->database_version = null;
+  }
+  
+  /**
    * Set when reading from the database. Will cause {@link exists()} to return
    * <code>False</code> even if {@link $database_version} is set later.
    * @var boolean 

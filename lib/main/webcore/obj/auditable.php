@@ -37,7 +37,7 @@ http://www.earthli.com/software/webcore
 ****************************************************************************/
 
 /** */
-require_once ('webcore/obj/renderable.php');
+require_once ('webcore/obj/unique_object.php');
 
 /**
  * An object which tracks a change history.
@@ -52,7 +52,7 @@ require_once ('webcore/obj/renderable.php');
  * @since 2.4.0
  * @abstract
  */
-abstract class AUDITABLE extends RENDERABLE
+abstract class AUDITABLE extends UNIQUE_OBJECT
 {
   /**
    * Time the object was created.
@@ -88,7 +88,7 @@ abstract class AUDITABLE extends RENDERABLE
    */
   public function AUDITABLE ($app)
   {
-    RENDERABLE::RENDERABLE ($app);
+    UNIQUE_OBJECT::UNIQUE_OBJECT ($app);
 
     $this->time_created = $app->make_date_time ();
     $this->time_modified = $app->make_date_time ();

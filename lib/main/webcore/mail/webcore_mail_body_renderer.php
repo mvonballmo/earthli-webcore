@@ -318,6 +318,12 @@ class MAIL_TOC_GROUP_RENDERER extends RENDERER
    * @var MAIL_TOC_RENDERER
    */
   public $toc;
+  
+  /**
+   * The subject for this table-of-contents group.
+   * @var PUBLISHER_MESSAGE_SUBJECT
+   */
+  public $subject;
 
   /**
    * Create a table of contents group.
