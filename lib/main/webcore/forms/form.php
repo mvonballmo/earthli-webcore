@@ -432,7 +432,7 @@ abstract class FORM extends WEBCORE_OBJECT
       echo "<div class=\"error\">\n";
       foreach ($this->_fields as $field)
       {
-        $this->_draw_errors ($field->id, false);
+        $this->draw_errors ($field->id, false);
       }
       echo "</div>\n";
     }
@@ -995,6 +995,30 @@ abstract class FORM extends WEBCORE_OBJECT
   }
 
   /**
+   * Register an upload field in this form.
+   * Used internally by {@link UPLOAD_FILE_FIELD} so that the form is aware of all uploaders
+   * in it and can properly calculate the {@link max_upload_file_size()}.
+   * @param UPLOAD_FILE_FIELD $field
+   * @access private
+   */
+  public function add_upload_field ($field)
+  {
+    $this->_upload_fields [] = $field;
+
+    if (! isset ($this->_fields [Form_max_file_size_field_name]))
+    {
+      // Do not use the local name "field" because it is assigned
+      // to the argument in PHP4.
+
+      $max_field = new INTEGER_FIELD ();
+      $max_field->id = Form_max_file_size_field_name;
+      $max_field->min_value = 0;
+      $max_field->visible = false;
+      $this->add_field ($max_field);
+    }
+  }
+
+  /**
    * Return the correct PHP global array for values.
    * Used by {@link _load_from_request()}.
    * return array[string]
@@ -1295,30 +1319,6 @@ abstract class FORM extends WEBCORE_OBJECT
   protected function _prepare_for_commit ($obj) {}
 
   /**
-   * Register an upload field in this form.
-   * Used internally by {@link UPLOAD_FILE_FIELD} so that the form is aware of all uploaders
-   * in it and can properly calculate the {@link max_upload_file_size()}.
-   * @param UPLOAD_FILE_FIELD $field
-   * @access private
-   */
-  protected function _add_upload_field ($field)
-  {
-    $this->_upload_fields [] = $field;
-
-    if (! isset ($this->_fields [Form_max_file_size_field_name]))
-    {
-      // Do not use the local name "field" because it is assigned
-      // to the argument in PHP4.
-
-      $max_field = new INTEGER_FIELD ();
-      $max_field->id = Form_max_file_size_field_name;
-      $max_field->min_value = 0;
-      $max_field->visible = false;
-      $this->add_field ($max_field);
-    }
-  }
-
-  /**
    * Return true to use integrated captcha verification.
    * @return boolean
    */
@@ -1464,7 +1464,7 @@ abstract class FORM extends WEBCORE_OBJECT
    * @param boolean $use_style Surround messages with 'error' style if True.
    * @access private
    */
-  protected function _draw_errors ($id, $use_style = true)
+  public function draw_errors ($id, $use_style = true)
   {
     $errors = $this->errors_for ($id);
     if (sizeof ($errors))

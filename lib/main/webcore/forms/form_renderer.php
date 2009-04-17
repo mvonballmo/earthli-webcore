@@ -760,7 +760,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
   ?>
   <tr>
     <td class="form-<?php echo $this->_form->CSS_class; ?>-label"><?php echo $title; ?></td>
-    <td class="form-<?php echo $this->_form->CSS_class; ?>-content" style="width: <?php echo $width; ?>"><?php $this->_form->_draw_errors ($id); ?></td>
+    <td class="form-<?php echo $this->_form->CSS_class; ?>-content" style="width: <?php echo $width; ?>"><?php $this->_form->draw_errors ($id); ?></td>
   </tr>
   <?php
       }
@@ -768,7 +768,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
       {
   ?>
   <tr>
-    <td colspan="2" class="form-<?php echo $this->_form->CSS_class; ?>-content" style="width: <?php echo $width; ?>"><?php $this->_form->_draw_errors ($id); ?></td>
+    <td colspan="2" class="form-<?php echo $this->_form->CSS_class; ?>-content" style="width: <?php echo $width; ?>"><?php $this->_form->draw_errors ($id); ?></td>
   </tr>
   <?php
       }

@@ -1242,7 +1242,7 @@ class UPLOAD_FILE_FIELD extends FIELD
   {
     $this->_uploader = $form->uploader ();
     $this->_form = $form;
-    $form->_add_upload_field ($this);
+    $form->add_upload_field ($this);
   }
 
   /**
