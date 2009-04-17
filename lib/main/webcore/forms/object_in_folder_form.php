@@ -416,7 +416,7 @@ class DRAFTABLE_ENTRY_FORM extends ENTRY_FORM
   public function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
-    $this->set_value ('draft', $obj->unpublished ());
+    $this->set_value ('draft', $obj->unpublished () || $this->cloning ());
     if ($obj->unpublished ())
     {
       $this->set_value ('is_visible', true);
