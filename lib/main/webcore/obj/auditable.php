@@ -132,7 +132,7 @@ abstract class AUDITABLE extends UNIQUE_OBJECT
   {
     $type_info = $this->type_info ();
     $type_info->singular_title;
-    $kind = $obj->_supported_kind_as_text ();
+    $kind = $obj->supported_kind_as_text ();
     if ($kind)
     {
       $Result = $type_info->singular_title . ' ' . $kind;

@@ -41,6 +41,27 @@ http://www.earthli.com/software/webcore
 require_once ('webcore/sys/system.php');
 
 /**
+ * Describes the {@link UNIQUE_OBJECT} class.
+ * @package webcore
+ * @subpackage sys
+ * @version 3.1.0
+ * @since 3.1.0
+ * @access private
+ */
+class UNIQUE_OBJECT_TYPE_INFO extends TYPE_INFO
+{
+	/**
+   * Gets a unique id for the given object.
+   *
+   * @param WEBCORE_OBJECT $obj
+   */
+  public function unique_id ($obj)
+  {
+    return $obj->id;
+  }
+}
+
+/**
  * Describes the {@link FOLDER} class.
  * @package webcore
  * @subpackage sys
@@ -48,7 +69,7 @@ require_once ('webcore/sys/system.php');
  * @since 2.5.0
  * @access private
  */
-class FOLDER_TYPE_INFO extends TYPE_INFO
+class FOLDER_TYPE_INFO extends UNIQUE_OBJECT_TYPE_INFO
 {
   /**
    * @var string
@@ -84,7 +105,7 @@ class FOLDER_TYPE_INFO extends TYPE_INFO
  * @since 2.7.1
  * @access private
  */
-class ENTRY_TYPE_INFO extends TYPE_INFO
+class ENTRY_TYPE_INFO extends UNIQUE_OBJECT_TYPE_INFO
 {
   /**
    * @var string
@@ -141,7 +162,7 @@ class DRAFTABLE_ENTRY_TYPE_INFO extends ENTRY_TYPE_INFO
  * @since 2.5.0
  * @access private
  */
-class COMMENT_TYPE_INFO extends TYPE_INFO
+class COMMENT_TYPE_INFO extends UNIQUE_OBJECT_TYPE_INFO
 {
   /**
    * @var string
@@ -177,7 +198,7 @@ class COMMENT_TYPE_INFO extends TYPE_INFO
  * @since 2.5.0
  * @access private
  */
-class USER_TYPE_INFO extends TYPE_INFO
+class USER_TYPE_INFO extends UNIQUE_OBJECT_TYPE_INFO
 {
   /**
    * @var string
@@ -208,7 +229,7 @@ class USER_TYPE_INFO extends TYPE_INFO
  * @since 2.5.0
  * @access private
  */
-class GROUP_TYPE_INFO extends TYPE_INFO
+class GROUP_TYPE_INFO extends UNIQUE_OBJECT_TYPE_INFO
 {
   /**
    * @var string

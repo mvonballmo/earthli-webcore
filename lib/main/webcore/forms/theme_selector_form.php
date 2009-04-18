@@ -121,7 +121,7 @@ class THEME_SELECTOR_FORM extends FORM
   {
     parent::_draw_scripts ();
 ?>
-  public function set_main_theme (name)
+  function set_main_theme (name)
   {
     <?php echo $this->js_form_name (); ?>.main_CSS_file_name.value = name;
     <?php echo $this->js_form_name (); ?>.submit ();

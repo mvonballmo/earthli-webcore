@@ -200,7 +200,7 @@ class DELETE_OBJECT_FORM extends PURGE_OBJECT_FORM
   {
     parent::_draw_scripts ();
 ?>
-  public function on_click_purge (ctrl)
+  function on_click_purge (ctrl)
   {
     enable_item (ctrl.form.remove_resources, 0, is_selected (ctrl, 1));
   }

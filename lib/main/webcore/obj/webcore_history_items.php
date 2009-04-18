@@ -165,9 +165,8 @@ class OBJECT_IN_FOLDER_HISTORY_ITEM extends CONTENT_OBJECT_HISTORY_ITEM
   /**
    * Returns text only if this history item uses that kind.
    * @return string
-   * @access private
    */
-  protected function _supported_kind_as_text ()
+  public function supported_kind_as_text ()
   {
     switch ($this->kind)
     {
@@ -180,7 +179,7 @@ class OBJECT_IN_FOLDER_HISTORY_ITEM extends CONTENT_OBJECT_HISTORY_ITEM
     case History_item_locked:
       return 'locked';
     default:
-      return parent::_supported_kind_as_text ();
+      return parent::supported_kind_as_text ();
     }
   }
 
@@ -271,9 +270,8 @@ class ENTRY_HISTORY_ITEM extends OBJECT_IN_FOLDER_HISTORY_ITEM
   /**
    * Returns text only if this history item uses that kind.
    * @return string
-   * @access private
    */
-  protected function _supported_kind_as_text ()
+  public function supported_kind_as_text ()
   {
     switch ($this->kind)
     {
@@ -286,7 +284,7 @@ class ENTRY_HISTORY_ITEM extends OBJECT_IN_FOLDER_HISTORY_ITEM
     case History_item_unpublished:
       return 'unpublished';
     default:
-      return parent::_supported_kind_as_text ();
+      return parent::supported_kind_as_text ();
     }
   }
 

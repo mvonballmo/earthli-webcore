@@ -220,7 +220,7 @@ class ATTACHMENT_FORM extends OBJECT_IN_FOLDER_FORM
   {
     parent::_draw_scripts ();
 ?>
-  public function upload_file_changed (ctrl)
+  function upload_file_changed (ctrl)
   {
     if (ctrl.value)
     {
@@ -228,7 +228,7 @@ class ATTACHMENT_FORM extends OBJECT_IN_FOLDER_FORM
     }
   }
 
-  public function on_click_thumbnail (ctrl)
+  function on_click_thumbnail (ctrl)
   {
     ctrl.form.thumbnail_size.disabled = ! ctrl.checked;
   }

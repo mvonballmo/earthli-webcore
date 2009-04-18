@@ -235,7 +235,7 @@ class EXECUTE_SEARCH_FORM extends ID_BASED_FORM
     if (isset ($this->_search))
     {
 ?>
-  public function save_search (f)
+  function save_search (f)
   {
     <?php if ($this->object_exists ()) { ?>
     f.action = 'edit_search.php';

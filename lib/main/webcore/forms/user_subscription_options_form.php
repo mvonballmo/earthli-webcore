@@ -315,24 +315,24 @@ class USER_SUBSCRIPTION_OPTIONS_FORM extends SUBSCRIPTION_FORM
   {
     parent::_draw_scripts ();
 ?>
-  public function on_show_history_items (ctrl)
+  function on_show_history_items (ctrl)
   {
     ctrl.form.group_history_items.disabled = ! ctrl.checked;
   }
 
-  public function on_group_objects (ctrl)
+  function on_group_objects (ctrl)
   {
     ctrl.form.max_individual_messages.disabled = is_selected (ctrl, 0);
     enable_items (ctrl.form.split_objects, ! is_selected (ctrl, 0));
     ctrl.form.max_items_per_message.disabled = is_selected (ctrl, 0) || is_selected (ctrl.form.split_objects, 0);
   }
 
-  public function on_split_objects (ctrl)
+  function on_split_objects (ctrl)
   {
     ctrl.form.max_items_per_message.disabled = is_selected (ctrl, 0);
   }
 
-  public function on_min_hours_to_wait (ctrl)
+  function on_min_hours_to_wait (ctrl)
   {
     var enabled = (ctrl.value != <?php echo Subscriptions_disabled; ?>);
 
@@ -351,7 +351,7 @@ class USER_SUBSCRIPTION_OPTIONS_FORM extends SUBSCRIPTION_FORM
     ctrl.form.show_history_item_as_subject.disabled = ! enabled;
   }
 
-  public function on_change_text_option (ctrl)
+  function on_change_text_option (ctrl)
   {
     ctrl.form.preferred_text_length.disabled = is_selected (ctrl, 0);
   }

@@ -183,7 +183,7 @@ abstract class PROJECT_ENTRY_RENDERER extends ENTRY_RENDERER
 
       if ($is_main_branch)
       {
-        echo '* ';
+        echo "\x95 ";
       }
       else
       {

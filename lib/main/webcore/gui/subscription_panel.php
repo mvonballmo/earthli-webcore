@@ -47,7 +47,7 @@ require_once ('webcore/gui/panel.php');
  * @since 2.2.1
  * @abstract
  */
-class SUBSCRIPTION_PANEL extends PANEL
+abstract class SUBSCRIPTION_PANEL extends PANEL
 {
   /**
    * @param PANEL_MANAGER $manager Owner of this panel.

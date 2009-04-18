@@ -61,12 +61,12 @@ abstract class PERMISSIONS_FORM extends FORM
   {
     parent::_draw_scripts ();
 ?>
-  public function grant_all_permissions (form)
+  function grant_all_permissions (form)
   {
     set_all_controls_of_type (form, 'checkbox', 1);
   }
 
-  public function grant_no_permissions (form)
+  function grant_no_permissions (form)
   {
     set_all_controls_of_type (form, 'checkbox', 0);
   }

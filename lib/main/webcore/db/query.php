@@ -738,7 +738,12 @@ abstract class QUERY extends WEBCORE_OBJECT
   public function object_with_field ($field, $value)
   {
     $objs = $this->objects_with_field ($field, $value);
-    return $objs [0];
+    if (! empty($objs))
+    {
+      return $objs [0];
+    }
+    
+    return null;
   }
 
   /**

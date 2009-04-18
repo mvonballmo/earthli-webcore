@@ -315,7 +315,7 @@ class ALBUM_FORM extends FOLDER_FORM
     $js_form = $this->js_form_name ();
 ?>
 
-  public function PICTURE_VALUE_FIELD ()
+  function PICTURE_VALUE_FIELD ()
   {
   }
   PICTURE_VALUE_FIELD.prototype = new OBJECT_VALUE_FIELD;
@@ -357,7 +357,7 @@ class ALBUM_FORM extends FOLDER_FORM
   field.height = 700;
   field.page_name = 'browse_picture.php';
 
-  public function on_day_mode_changed (ctrl)
+  function on_day_mode_changed (ctrl)
   {
     var form = <?php echo $this->js_form_name (); ?>;
     var now_as_text = format_date_time (new Date (), '<?php echo $this->app->date_time_toolkit->formatter->format_string_for (Date_time_format_short_date); ?>');
@@ -387,7 +387,7 @@ class ALBUM_FORM extends FOLDER_FORM
     }
   }
 
-  public function on_pic_size_constraint_changed (ctrl)
+  function on_pic_size_constraint_changed (ctrl)
   {
     var ctrls_disabled = ! ctrl.checked;
     var form = <?php echo $this->js_form_name (); ?>;
@@ -396,7 +396,7 @@ class ALBUM_FORM extends FOLDER_FORM
     form.max_picture_height.disabled = ctrls_disabled;
   }
 
-  public function ensure_trailing_delimiter (path)
+  function ensure_trailing_delimiter (path)
   {
     if (path.charAt (path.length - 1) != '/')
     {
@@ -405,7 +405,7 @@ class ALBUM_FORM extends FOLDER_FORM
     return path;
   }
 
-  public function on_url_root_changed (ctrl)
+  function on_url_root_changed (ctrl)
   {
     ctrl.value = ensure_trailing_delimiter (ctrl.value.toLowerCase ());
   }
@@ -426,7 +426,7 @@ class ALBUM_FORM extends FOLDER_FORM
   var parent_url_root = "<?php echo $parent_url_root; ?>";
   var last_title = "<?php echo $this->value_for ('title'); ?>";
 
-  public function normalize_string (s)
+  function normalize_string (s)
   {
     if (s)
     {
@@ -441,7 +441,7 @@ class ALBUM_FORM extends FOLDER_FORM
     return s.toLowerCase ();
   }
 
-  public function on_title_changed (ctrl)
+  function on_title_changed (ctrl)
   {
     /* Basically, if the current url root (path) is the same as the one that
        would be automatically set (based on the previous title), then keep the

@@ -260,7 +260,7 @@ class PROJECT_FORM extends FOLDER_FORM
   {
     parent::_draw_scripts ();
 ?>
-  public function on_inherit_changed (ctrl)
+  function on_inherit_changed (ctrl)
   {
     var ctrls_disabled = is_selected (ctrl, 0);
     enable_items( ctrl.form.assignee_group_type, ! ctrls_disabled);
@@ -270,13 +270,13 @@ class PROJECT_FORM extends FOLDER_FORM
     on_group_type_changed (ctrl.form.reporter_group_type, ctrl.form.reporter_group_id);
   }
 
-  public function on_group_type_changed (ctrl, group_ctrl)
+  function on_group_type_changed (ctrl, group_ctrl)
   {
     var ctrls_disabled = ! is_selected (ctrl, <?php echo Project_user_group; ?>);
     group_ctrl.disabled = ctrls_disabled;
   }
   
-  public function on_organizational_changed (ctrl)
+  function on_organizational_changed (ctrl)
   {
     ctrl.form.trunk_id.disabled = ctrl.checked;
   }

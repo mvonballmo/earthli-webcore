@@ -125,16 +125,23 @@ class MAIL_TOC_ENTRY_RENDERER extends RENDERER
     }
   }
 
+  /**
+   * Gets a unique identifier for the given object.
+   *
+   * @param WEBCORE_OBJECT $obj
+   * @return string
+   */
   public function location_for_obj ($obj)
   {
     $type_info = $obj->type_info ();
-    return $type_info->id . '_' . $obj->id;
+    return $type_info->id . '_' . $type_info->unique_id($obj);
   }
 
   /**
    * Render an item in the TOC as HTML.
    * Displays the item's title with an anchor to link directly to that item's body.
    * Called from {@link as_html_for_table()}.
+   * 
    * @param MAIL_BODY_RENDERER_OBJECT $pair
    */
   public function pair_as_html_for_table ($pair)
@@ -239,11 +246,11 @@ class MAIL_TOC_ENTRY_RENDERER extends RENDERER
     $Result = '';
     if (isset ($this->main_pair))
     {
-      $Result = $this->pair_as_plain_text_for_table ($this->main_pair, '   ');
+      $Result = $this->pair_as_plain_text_for_table ($this->main_pair, " \x95 ");
     }
     foreach ($this->pairs as $pair)
     {
-      $Result .= $this->pair_as_plain_text_for_table ($pair, '      ');
+      $Result .= $this->pair_as_plain_text_for_table ($pair, "    \x95 ");
     }
     return $Result;
   }

@@ -162,7 +162,7 @@ class UPLOAD_PICTURES_FORM extends ID_BASED_FORM
   {
     parent::_draw_scripts ();
 ?>
-  public function on_click_thumbnail (ctrl)
+  function on_click_thumbnail (ctrl)
   {
     ctrl.form.thumbnail_size.disabled = ! ctrl.checked;
   }

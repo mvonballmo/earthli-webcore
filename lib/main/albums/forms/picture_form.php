@@ -313,7 +313,7 @@ class PICTURE_FORM extends ALBUM_ENTRY_FORM
   {
     parent::_draw_scripts ();
 ?>
-  public function upload_file_changed (ctrl)
+  function upload_file_changed (ctrl)
   {
     if (ctrl.value)
     {
@@ -323,7 +323,7 @@ class PICTURE_FORM extends ALBUM_ENTRY_FORM
     }
   }
 
-  public function file_name_changed (ctrl)
+  function file_name_changed (ctrl)
   {
     if (ctrl.value)
     {
@@ -332,7 +332,7 @@ class PICTURE_FORM extends ALBUM_ENTRY_FORM
     }
   }
 
-  public function file_option_changed (ctrl)
+  function file_option_changed (ctrl)
   {
     var is_uploading = is_selected (ctrl, 1);
     ctrl.form.file_name.disabled = is_uploading;
@@ -340,12 +340,12 @@ class PICTURE_FORM extends ALBUM_ENTRY_FORM
     ctrl.form.overwrite.disabled = ! is_uploading;
   }
 
-  public function on_click_thumbnail (ctrl)
+  function on_click_thumbnail (ctrl)
   {
     ctrl.form.thumbnail_size.disabled = ! ctrl.checked;
   }
 
-  public function on_date_changed (ctrl)
+  function on_date_changed (ctrl)
   {
     ctrl.form.day.disabled = is_selected (ctrl, 1);
   }

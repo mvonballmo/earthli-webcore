@@ -148,7 +148,7 @@ class HISTORY_ITEM extends UNIQUE_OBJECT
    */
   public function kind_as_text ()
   {
-    $Result = $this->_supported_kind_as_text ();
+    $Result = $this->supported_kind_as_text ();
     if (! $Result)
     {
       $Result = 'updated';
@@ -567,8 +567,8 @@ class HISTORY_ITEM extends UNIQUE_OBJECT
    */
   protected function _make_default_title ()
   {
-    $Result = $this->_supported_kind_as_text ();
-    if (isset ($Result))
+    $Result = $this->supported_kind_as_text ();
+    if (!empty ($Result))
     {
       $Result = ucfirst ($Result);
     }
@@ -618,9 +618,8 @@ class HISTORY_ITEM extends UNIQUE_OBJECT
   /**
    * Returns text only if this history item uses that kind.
    * @return string
-   * @access private
    */
-  protected function _supported_kind_as_text ()
+  public function supported_kind_as_text ()
   {
     switch ($this->kind)
     {

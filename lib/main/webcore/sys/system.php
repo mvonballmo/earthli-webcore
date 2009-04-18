@@ -552,6 +552,16 @@ class TYPE_INFO
     }
     return $Result;
   }
+
+  /**
+   * Gets a unique id for the given object.
+   *
+   * @param WEBCORE_OBJECT $obj
+   */
+  public function unique_id ($obj)
+  {
+    return '';
+  }
 }
 
 ?>
