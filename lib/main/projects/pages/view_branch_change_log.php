@@ -101,7 +101,7 @@ http://www.earthli.com/software/webcore/projects
       $entry_query->restrict ('((ctob.branch_applier_id <> 0) OR (jtob.branch_closer_id <> 0)) AND NOT ((ctob.branch_applier_id <> 0) AND (jtob.branch_closer_id <> 0))');
       $entry_query->restrict ('etob.branch_release_id = 0');
       $entry_query->set_order ('comp.title ASC, entry.kind, time_to_use DESC');
-      $entries =& $entry_query->objects ();
+      $entries = $entry_query->objects ();
     }
     else
       $entries = array ();

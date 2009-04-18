@@ -71,7 +71,7 @@ class ICON extends RENDERABLE
    */
   function icon_as_html ($size = '100px')
   {
-    return $this->context->image_as_html ($this->_home_page (), $this->title, $size);
+    return $this->context->image_as_html ($this->home_page (), $this->title, $size);
   }
 
   /**
