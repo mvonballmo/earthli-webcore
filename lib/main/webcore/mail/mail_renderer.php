@@ -59,8 +59,8 @@ class MAIL_RENDERER extends RENDERER
   {
     /* Save options to be restored later. */
    
-    $state->saved_display_options = $this->page->display_options;
-    $state->saved_template_options = $this->page->template_options; 
+    $state->saved_display_options = clone($this->page->display_options);
+    $state->saved_template_options = clone($this->page->template_options); 
     $state->saved_show_interactive_option = $options->show_interactive;
     $state->saved_show_local_time_option = $this->env->date_time_toolkit->formatter->show_local_time;
     
@@ -79,9 +79,9 @@ class MAIL_RENDERER extends RENDERER
     $options->close_logger = false;
     $options->show_statistics = false;
     $options->show_last_time_modified = false;
+    $options->show_interactive = false;
     
     $this->env->date_time_toolkit->formatter->show_local_time = false;
-    $options->show_interactive = false;
   }
   
   /**
