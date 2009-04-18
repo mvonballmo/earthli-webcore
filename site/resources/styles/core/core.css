@@ -766,7 +766,7 @@ blockquote p:first-child, .side-bar-body p:first-child, .chart-body p:first-chil
 {
   border-bottom: 1px solid #000000;
   empty-cells: show;
-  height: .1em
+  height: .1em;
   clear: both;
 }
 
