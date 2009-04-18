@@ -301,8 +301,7 @@ class USER_FOLDER_QUERY extends OBJECT_IN_FOLDER_QUERY
       else
       {
         // only those folders for which folder permissions allow this user are returned
-      }
-      {
+        
         $join_type = "INNER";
 
         if ($invis == Privilege_always_denied)
@@ -357,7 +356,9 @@ class USER_FOLDER_QUERY extends OBJECT_IN_FOLDER_QUERY
       if (! $this->_returns_no_data ())
       {
         $this->add_select ("($usable) AS usable");
-
+        
+        $this->_usable_restriction = $usable;
+        
         $this->_tables = "{$this->app->table_names->folders} fldr" .
                          " $join_type JOIN {$this->app->table_names->folder_permissions} perm ON perm.folder_id = fldr.permissions_id" .
                          " LEFT JOIN {$this->app->table_names->groups} grp on perm.ref_id = grp.id" .
@@ -528,6 +529,19 @@ class USER_FOLDER_QUERY extends OBJECT_IN_FOLDER_QUERY
       }
     }
     
+    return $Result;
+  }
+
+  /**
+   * Return the list of restrictions for calculating size.
+   * @see _prepare_restrictions()
+   * @return array[string]
+   * @access private
+   */
+  protected function _count_restrictions ()
+  {
+    $Result = parent::_count_restrictions ();
+    $Result [] = $this->_usable_restriction;
     return $Result;
   }
 

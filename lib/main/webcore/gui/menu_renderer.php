@@ -47,12 +47,14 @@ require_once ('webcore/obj/webcore_object.php');
  * @see Menu_vertical_with_dropdown
  */
 define ('Menu_horizontal', 'h');
+
 /**
  * Shows all commands in a list. 
  * Used by the {@link MENU_RENDERER}.
  * @see Menu_horizontal
  */
 define ('Menu_vertical', 'v');
+
 /**
  * Shows some commands in a line; uses a dropdown for others.
  * The drop-down list is displayed with CSS for compliant browsers and emulated
@@ -62,6 +64,7 @@ define ('Menu_vertical', 'v');
  * @see Menu_horizontal
  */
 define ('Menu_horizontal_with_dropdown', 'hd');
+
 /**
  * Shows some commands in a list; uses a dropdown for others.
  * The drop-down list is displayed with CSS for compliant browsers and emulated
@@ -78,12 +81,14 @@ define ('Menu_vertical_with_dropdown', 'vd');
  * @see Menu_show_all_as_buttons
  */
 define ('Menu_show_icon', 1);
+
 /**
  * Show the title for {@link COMMAND}s.
  * Used by the {@link MENU_RENDERER}.
  * @see Menu_show_all_as_buttons
  */
 define ('Menu_show_title', 2);
+
 /**
  * Show {@link COMMAND}s as buttons.
  * Used by the {@link MENU_RENDERER}. If <code>False</code>, the commands are
@@ -91,6 +96,7 @@ define ('Menu_show_title', 2);
  * @see Menu_show_all_as_buttons
  */
 define ('Menu_show_as_buttons', 4);
+
 /**
  * All menu display options.
  * Used by the {@link MENU_RENDERER}.
@@ -99,6 +105,7 @@ define ('Menu_show_as_buttons', 4);
  * @see Menu_show_as_buttons
  */
 define ('Menu_show_all_as_buttons', 7);
+
 /**
  * All menu display options.
  * Used by the {@link MENU}.
@@ -396,6 +403,10 @@ class MENU_RENDERER extends WEBCORE_OBJECT
         if ($this->target)
         {
           $tag .= ' target="' . $this->target . '"';
+        }
+        if ($cmd->on_click)
+        {
+          $tag .= ' onclick="' .  $cmd->on_click . '"';
         }
         $tag .= '>';
           

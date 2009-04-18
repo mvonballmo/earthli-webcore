@@ -78,6 +78,12 @@ class COMMAND
    * @var string
    */
   public $icon = '';
+  
+  /**
+   * JavaScript to execute when clicked.
+   * @var string
+   */
+  public $on_click = '';
 
   /**
    * Can this command be executed?

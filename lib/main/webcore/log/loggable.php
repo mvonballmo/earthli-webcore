@@ -80,7 +80,7 @@ class LOGGABLE extends WEBCORE_OBJECT
    * Record a message to the logger, if one exists.
    * @param string $msg
    * @param string $channel
-   * @param string $type
+   * @param integer $type
    * @param boolean $has_html Does the message contain HTML tags that must be
    * preserved?
    */

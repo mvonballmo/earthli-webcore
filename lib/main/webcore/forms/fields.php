@@ -505,7 +505,7 @@ class TEXT_FIELD extends FIELD
             $from_col = $error->column;
             $to_col = $error->column + strlen ($error->token->data ());
             $js = "select_line_column_range (this.document.getElementById ('$name'), $line, $from_col, $line, $to_col)";
-            $position = "$this->title [<a href=\"javascript:$js\">line $line, char $from_col</a>]";
+            $position = "$this->title [<a href=\"#\" onclick=\"javascript:$js\">line $line, char $from_col</a>]";
             $form->record_error ($this->id, $position . ' ' . htmlspecialchars ($msg));
           }
         }

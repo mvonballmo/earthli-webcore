@@ -94,7 +94,7 @@ class FILE_LOGGER extends TEXT_OUTPUT_LOGGER
         $this->record ('Log closed', Msg_type_info, Msg_channel_logger);
       }
       @fclose ($this->_file_handle);
-      unset ($this->_file_handle);
+      $this->_file_handle = null;
     }
   }
 

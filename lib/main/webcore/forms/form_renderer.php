@@ -704,7 +704,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
   ?>
   <tr>
     <td class="form-<?php echo $this->_form->CSS_class; ?>-label"><?php echo $title; ?></td>
-    <td class="<?php echo $CSS_class; ?>" style="width: <?php echo $this->width; ?>">
+    <td class="<?php echo $CSS_class; ?>" <?php if (! empty($this->width)) { ?>style="width: <?php echo $this->width; ?>"<?php } ?>>
       <?php echo $text; ?>
     </td>
   </tr>
@@ -714,7 +714,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
     {
   ?>
   <tr>
-    <td colspan="2" class="<?php echo $CSS_class; ?>" style="width: <?php echo $this->width; ?>">
+    <td colspan="2" class="<?php echo $CSS_class; ?>" <?php if (! empty($this->width)) { ?>style="width: <?php echo $this->width; ?>"<?php } ?>>
       <?php echo $text; ?>
     </td>
   </tr>

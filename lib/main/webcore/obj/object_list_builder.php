@@ -107,7 +107,7 @@ class OBJECT_LIST_BUILDER extends WEBCORE_OBJECT
    */
   public function description ()
   {
-    if (sizeof ($this->_contents))
+    if (isset($this->_contents) && sizeof ($this->_contents))
     {
       if (sizeof ($this->_contents) > 1)
       {

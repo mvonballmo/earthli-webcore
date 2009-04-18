@@ -83,7 +83,7 @@ class SELECT_LIST extends LIST_GRID
   protected function _draw_header ()
   {
     $col = '<div style="text-align: center">';
-    $col .= "<a href=\"javascript:toggle_selected (document.getElementById('$this->form_name')['{$this->control_name}[]'])\" title=\"$this->toggle_title\">";
+    $col .= "<a href=\"#\" onclick=\"toggle_selected (document.getElementById('$this->form_name')['{$this->control_name}[]'])\" title=\"$this->toggle_title\">";
     if ($this->toggle_image)
     {
       $col .= $this->app->resolve_icon_as_html ($this->toggle_image, $this->toggle_title);
@@ -103,7 +103,7 @@ class SELECT_LIST extends LIST_GRID
    */
   protected function _draw_selector ($obj)
   {
-?><input type="checkbox" name="<?php echo $this->control_name; ?>[]" value="<?php echo $obj->id; ?>" id="<?php echo $this->control_name . '_' . $this->_num_rows; ?>">
+?><input type="checkbox" name="<?php echo $this->control_name; ?>[]" value="<?php echo $obj->id; ?>" id="<?php echo $this->control_name . '_' . $obj->id; ?>">
 <?php
   }
 

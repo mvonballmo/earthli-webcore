@@ -112,7 +112,7 @@ abstract class TEXT_OUTPUT_LOGGER extends LOGGER
    * Processes the message and passes it on to {@link TEXT_OUTPUT_LOGGER::output()}.
    * @param string $msg
    * @param string $channel
-   * @param string $type
+   * @param integer $type
    * @param boolean $has_html
    * @access private
    */
@@ -146,7 +146,7 @@ abstract class TEXT_OUTPUT_LOGGER extends LOGGER
    * Formats a message from {@link TEXT_OUTPUT_LOGGER::_record()}.
    * This is separated in order to allow descendants to override with their own formatting.
    * @param string $msg
-   * @param string $type
+   * @param integer $type
    * @param string $channel
    * @param boolean $has_html
    * @access private
@@ -174,7 +174,7 @@ abstract class TEXT_OUTPUT_LOGGER extends LOGGER
 
   /**
    * Formats the initial header with type and channel.
-   * @param string $type
+   * @param integer $type
    * @param string $channel
    * @return string
    * @access private
@@ -200,9 +200,9 @@ abstract class TEXT_OUTPUT_LOGGER extends LOGGER
       }
     }
     else if ($this->show_time)
- {
-   $header_parts [] = date ('H:i:s');
- }
+    {
+      $header_parts [] = date ('H:i:s');
+    }
 
     if ($this->show_type)
     {
@@ -363,7 +363,7 @@ abstract class TEXT_OUTPUT_LOGGER extends LOGGER
 
   /**
    * CSS class to use for the given message type.
-   * @param string $type
+   * @param integer $type
    * @return string
    * @access private
    */

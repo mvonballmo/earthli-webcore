@@ -133,7 +133,7 @@ $Logger = 0;
  * @see log_more()
  * @param string $msg The message itself.
  * @param string $channel The channel to which the message belongs.
- * @param string $type The message type.
+ * @param integer $type The message type.
  * @param boolean $has_html Does the message contain HTML tags that must be preserved?
  */
 function log_message ($msg, $type = Msg_type_debug_info, $channel = Msg_channel_default, $has_html = false)
@@ -208,7 +208,7 @@ class LOGGER_FILTER_SETTINGS
   /**
    * Is the given filter accepted in the given channel?
    * @param string $channel
-   * @param string $type
+   * @param integer $type
    * @return boolean
    */
   public function allowed ($channel, $type)
@@ -231,7 +231,7 @@ class LOGGER_FILTER_SETTINGS
    * Adjust the default filter.
    * Used only when there is no channel-specific filter assigned.
    * @see LOGGER_FILTER_SETTINGS::set_channel_enabled ()
-   * @param string $type Type of messages to enable/disable.
+   * @param integer $type Type of messages to enable/disable.
    */
   public function set_enabled ($type)
   {
@@ -241,7 +241,7 @@ class LOGGER_FILTER_SETTINGS
   /**
    * Adjust the filter for a particular channel.
    * @param string $channel Channel in which to adjust the filter.
-   * @param string $type Type of messages to enable/disable.
+   * @param integer $type Type of messages to enable/disable.
    */
   public function set_channel_enabled ($channel, $type)
   {
@@ -299,7 +299,7 @@ abstract class LOGGER extends LOGGER_CONTAINER
    * Adjust the default filter.
    * Used only when there is no channel-specific filter assigned.
    * @see LOGGER::set_channel_enabled ()
-   * @param string $type Type of messages to enable/disable.
+   * @param integer $type Type of messages to enable/disable.
    */
   public function set_enabled ($type)
   {
@@ -311,7 +311,7 @@ abstract class LOGGER extends LOGGER_CONTAINER
   /**
    * Adjust the filter for a particular channel.
    * @param string $channel Channel in which to adjust the filter.
-   * @param string $type Type of messages to enable/disable.
+   * @param integer $type Type of messages to enable/disable.
    */
   public function set_channel_enabled ($channel, $type)
   {
@@ -339,7 +339,7 @@ abstract class LOGGER extends LOGGER_CONTAINER
   /**
    * Records the message to the global logger if one exists.
    * @param string $msg The message itself.
-   * @param string $type The message type.
+   * @param integer $type The message type.
    * @param boolean $has_html Does the message contain HTML tags that must be
    * preserved?
    */
@@ -416,7 +416,7 @@ abstract class LOGGER extends LOGGER_CONTAINER
 
   /**
    * Returns a generic title for a given message type.
-   * @param string $type
+   * @param integer $type
    * @return string
    * @access private
    */
@@ -449,7 +449,7 @@ abstract class LOGGER extends LOGGER_CONTAINER
   /**
    * Is the given filter accepted in the given channel?
    * @param string $channel
-   * @param string $type
+   * @param integer $type
    * @return bool
    * @access private
    */
@@ -460,7 +460,7 @@ abstract class LOGGER extends LOGGER_CONTAINER
 
   /**
    * @param string $msg
-   * @param string $type
+   * @param integer $type
    * @param boolean $has_html
    * @see LOGGER::record()
    * @access private
@@ -508,7 +508,7 @@ abstract class LOGGER extends LOGGER_CONTAINER
   /**
    * Set by {@link record()}.
    * Used by {@link record_more()} to know which type the last message was.
-   * @var string
+   * @var integer
    * @access private
    */
   protected $_last_type;
@@ -516,6 +516,7 @@ abstract class LOGGER extends LOGGER_CONTAINER
   /**
    * How many open blocks are there in this logger?
    * @var integer
+   * @access private
    */
   protected $_block_level = 0;
 }
@@ -531,7 +532,7 @@ class NULL_LOGGER extends LOGGER
 {
   /**
    * @param string $msg
-   * @param string $type
+   * @param integer $type
    * @param boolean $has_html
    * @see LOGGER::record()
    * @access private

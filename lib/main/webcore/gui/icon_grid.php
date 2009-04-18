@@ -103,7 +103,7 @@ class ICON_GRID extends STANDARD_GRID
     <?php
       if ($this->is_chooser)
       {
-        echo '<a href="javascript:picker.select_value (\'' . $obj->url . '\')">';
+        echo '<a href="#" onclick="picker.select_value (\'' . $obj->url . '\')">';
         echo $obj->icon_as_html ();
         echo '</a>';
       }

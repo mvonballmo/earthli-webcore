@@ -55,7 +55,7 @@ abstract class SUBSCRIPTION_PANEL extends PANEL
    */
   public function SUBSCRIPTION_PANEL ($manager, $subscriber)
   {
-    FORM_PANEL::FORM_PANEL ($manager);
+    PANEL::PANEL ($manager);
     $this->_subscriber = $subscriber;
   }
 

@@ -63,7 +63,8 @@ class EXPLORER_COMMANDS extends COMMANDS
     $cmd = $this->make_command ();
     $cmd->id = 'print';
     $cmd->title = 'Print';
-    $cmd->link = "javascript:submit_explorer_form ('$form_name', 'multiple_print.php')";
+    $cmd->link = '#';
+    $cmd->on_click = "submit_explorer_form ('$form_name', 'multiple_print.php')";
     $cmd->icon = '{icons}buttons/print';
     $cmd->executable = true;
     $this->append ($cmd);
@@ -71,7 +72,8 @@ class EXPLORER_COMMANDS extends COMMANDS
     $cmd = $this->make_command ();
     $cmd->id = 'move';
     $cmd->title = 'Move';
-    $cmd->link = "javascript:submit_explorer_form ('$form_name', 'multiple_move.php')";
+    $cmd->link = '#';
+    $cmd->on_click = "submit_explorer_form ('$form_name', 'multiple_move.php')";
     $cmd->icon = '{icons}buttons/move';
     $cmd->executable = ($this->app->login->is_allowed (Privilege_set_folder, Privilege_delete, $folder)
                         || $this->app->login->is_allowed (Privilege_set_entry, Privilege_delete, $folder));
@@ -80,7 +82,8 @@ class EXPLORER_COMMANDS extends COMMANDS
     $cmd = $this->make_command ();
     $cmd->id = 'copy';
     $cmd->title = 'Copy';
-    $cmd->link = "javascript:submit_explorer_form ('$form_name', 'multiple_copy.php')";
+    $cmd->link = '#';
+    $cmd->on_click = "submit_explorer_form ('$form_name', 'multiple_copy.php')";
     $cmd->icon = '{icons}buttons/copy';
     $cmd->executable = true;
     $this->append ($cmd);
@@ -88,7 +91,8 @@ class EXPLORER_COMMANDS extends COMMANDS
     $cmd = $this->make_command ();
     $cmd->id = 'delete';
     $cmd->title = 'Delete';
-    $cmd->link = "javascript:submit_explorer_form ('$form_name', 'multiple_delete.php')";
+    $cmd->link = '#';
+    $cmd->on_click = "submit_explorer_form ('$form_name', 'multiple_delete.php')";
     $cmd->icon = '{icons}buttons/delete';
     $cmd->importance = Command_importance_low;
     $cmd->executable = ($this->app->login->is_allowed (Privilege_set_folder, Privilege_delete, $folder)
@@ -98,7 +102,8 @@ class EXPLORER_COMMANDS extends COMMANDS
     $cmd = $this->make_command ();
     $cmd->id = 'restore';
     $cmd->title = 'Restore';
-    $cmd->link = "javascript:submit_explorer_form ('$form_name', 'multiple_restore.php')";
+    $cmd->link = '#';
+    $cmd->on_click = "submit_explorer_form ('$form_name', 'multiple_restore.php')";
     $cmd->icon = '{icons}buttons/restore';
     $cmd->importance = Command_importance_low;
     $cmd->executable = ($this->app->login->is_allowed (Privilege_set_folder, Privilege_view_hidden, $folder)
@@ -109,7 +114,8 @@ class EXPLORER_COMMANDS extends COMMANDS
     $cmd = $this->make_command ();
     $cmd->id = 'purge';
     $cmd->title = 'Purge';
-    $cmd->link = "javascript:submit_explorer_form ('$form_name', 'multiple_purge.php')";
+    $cmd->link = '#';
+    $cmd->on_click = "submit_explorer_form ('$form_name', 'multiple_purge.php')";
     $cmd->icon = '{icons}buttons/purge';
     $cmd->importance = Command_importance_low;
     $cmd->executable = ($this->app->login->is_allowed (Privilege_set_folder, Privilege_purge, $folder)
@@ -141,7 +147,8 @@ class DRAFTABLE_EXPLORER_COMMANDS extends EXPLORER_COMMANDS
     $cmd = $this->make_command ();
     $cmd->id = 'publish';
     $cmd->title = 'Publish';
-    $cmd->link = "javascript:submit_explorer_form ('$form_name', 'multiple_publish.php')";
+    $cmd->link = '#';
+    $cmd->on_click = "submit_explorer_form ('$form_name', 'multiple_publish.php')";
     $cmd->icon = '{icons}buttons/ship';
     $cmd->executable = $this->app->login->is_allowed (Privilege_set_entry, Privilege_modify, $folder);
     $this->append ($cmd);
@@ -149,7 +156,8 @@ class DRAFTABLE_EXPLORER_COMMANDS extends EXPLORER_COMMANDS
     $cmd = $this->make_command ();
     $cmd->id = 'queue';
     $cmd->title = 'Queue';
-    $cmd->link = "javascript:submit_explorer_form ('$form_name', 'multiple_queue.php')";
+    $cmd->link = '#';
+    $cmd->on_click = "submit_explorer_form ('$form_name', 'multiple_queue.php')";
     $cmd->icon = '{icons}buttons/queue';
     $cmd->executable = $this->app->login->is_allowed (Privilege_set_entry, Privilege_modify, $folder);
     $this->append ($cmd);
@@ -157,7 +165,8 @@ class DRAFTABLE_EXPLORER_COMMANDS extends EXPLORER_COMMANDS
     $cmd = $this->make_command ();
     $cmd->id = 'abandon';
     $cmd->title = 'Abandon';
-    $cmd->link = "javascript:submit_explorer_form ('$form_name', 'multiple_abandon.php')";
+    $cmd->link = '#';
+    $cmd->on_click = "submit_explorer_form ('$form_name', 'multiple_abandon.php')";
     $cmd->icon = '{icons}buttons/abandon';
     $cmd->executable = $this->app->login->is_allowed (Privilege_set_entry, Privilege_modify, $folder);
     $this->append ($cmd);

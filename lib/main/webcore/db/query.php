@@ -997,14 +997,18 @@ abstract class QUERY extends WEBCORE_OBJECT
     $this->_objects_SQL = $this->_objects_command_as_SQL ();
     $this->_count_SQL = $this->_count_command_as_SQL ();
 
-    $restrictions = $this->_restrictions ();
+    $restrictions = $this->_object_restrictions ();
     if ($restrictions)
     {
-      $restrictions_as_string = '(' . implode (') AND (', $restrictions) . ')';
-      $this->_objects_SQL .= ' WHERE ' . $restrictions_as_string;
-      $this->_count_SQL .= ' WHERE ' . $restrictions_as_string;
+      $this->_objects_SQL .= ' WHERE (' . implode (') AND (', $restrictions) . ')';
     }
 
+    $restrictions = $this->_count_restrictions ();
+    if ($restrictions)
+    {
+      $this->_count_SQL .= ' WHERE (' . implode (') AND (', $restrictions) . ')';
+    }
+    
     if ($this->_order)
     {
       $this->_objects_SQL .= ' ORDER BY ' . $this->_order;
@@ -1014,6 +1018,28 @@ abstract class QUERY extends WEBCORE_OBJECT
     {
       $this->_objects_SQL .= " LIMIT $this->_first_record, $this->_num_records";
     }
+  }
+  
+  /**
+   * Return the list of restrictions for retrieving objects.
+   * @see _prepare_restrictions()
+   * @return array[string]
+   * @access private
+   */
+  protected function _object_restrictions ()
+  {
+    return $this->_restrictions ();
+  }
+
+  /**
+   * Return the list of restrictions for calculating size.
+   * @see _prepare_restrictions()
+   * @return array[string]
+   * @access private
+   */
+  protected function _count_restrictions ()
+  {
+    return $this->_restrictions ();
   }
 
   /**

@@ -80,7 +80,7 @@ class THEME_GRID extends STANDARD_GRID
       if ($this->is_chooser)
       {
     ?>
-      <a href="javascript:set_main_theme ('<?php echo $obj->id; ?>')" title="Choose this theme"><img class="frame" src="<?php echo $obj->snapshot_thumbnail_name (); ?>" alt="<?php echo $obj->title_as_plain_text (); ?>"></a>
+      <a href="#" onclick="set_main_theme ('<?php echo $obj->id; ?>')" title="Choose this theme"><img class="frame" src="<?php echo $obj->snapshot_thumbnail_name (); ?>" alt="<?php echo $obj->title_as_plain_text (); ?>"></a>
     <?php
       }
       else

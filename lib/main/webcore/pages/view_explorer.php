@@ -35,7 +35,10 @@ http://www.earthli.com/software/webcore
 
     $Page->title->subject = 'Explore ' . $folder->title_as_plain_text ();
     $parent = $folder->parent_folder ();
-    $Page->location->add_folder_link ($parent, '', 'view_explorer.php');
+    if (isset ($parent))
+    {
+      $Page->location->add_folder_link ($parent, '', 'view_explorer.php');
+    }
     $Page->location->add_object_link ($folder);
     $Page->location->append ('Explorer');
 
@@ -116,8 +119,9 @@ http://www.earthli.com/software/webcore
       }
     ?>
       <form id="<?php echo $form_name; ?>" method="post" action="">
-      <input type="hidden" name="id" value="<?php echo $folder->id; ?>">
-      <input type="hidden" name="debug" value="<?php echo read_var ('debug'); ?>">
+	      <div>
+          <input type="hidden" name="id" value="<?php echo $folder->id; ?>">
+          <input type="hidden" name="debug" value="<?php echo read_var ('debug'); ?>">
     <?php
       $folder_query->restrict ("parent_id = $folder->id");
       $num_folders = $folder_query->size ();
@@ -175,6 +179,7 @@ http://www.earthli.com/software/webcore
         }
       }
     ?>
+    		</div>
       </form>
 <?php
       if (isset ($box))

@@ -61,7 +61,7 @@ class JS_CONSOLE_LOGGER extends TEXT_OUTPUT_LOGGER
    * Height of the popup console.
    * @var integer
    */
-  public $width = 300;
+  public $width = 600;
 
   /**
    * Name of the external style sheet to apply.
@@ -139,7 +139,8 @@ class JS_CONSOLE_LOGGER extends TEXT_OUTPUT_LOGGER
     {
   ?>
   <script type="text/javascript">
-  var console = window.open ("", "_console", "width=$this->width,height=$this->height,screenX=0,screenY=30,resizable=yes,scrollbars=yes");
+  <!--
+  var console = window.open ("", "_console", "width=<?php echo $this->width; ?>,height=<?php echo $this->height; ?>,screenX=0,screenY=30,resizable=yes,scrollbars=yes");
   console.document.open();
 <?php
       if ($this->CSS_file_name)
@@ -152,19 +153,21 @@ class JS_CONSOLE_LOGGER extends TEXT_OUTPUT_LOGGER
         $style_sheet_info = '';
       }
 ?>
-  console.document.write ("<html><head><title><?php echo $this->title; ?></title><?php echo $style_sheet_info; ?></head><body class=\"log-box\">");
-  console.document.write ("<p class=\"log-start\">Log started for [<?php echo $this->env->url (Url_part_file_name); ?>] at [<?php echo date ("Y-n-j H:i:s", time ()); ?>]</p>");
+  console.document.write ("<html><head><title><?php echo $this->title; ?><\/title><?php echo $style_sheet_info; ?><\/head><body class=\"log-box\">");
+  console.document.write ("<p class=\"log-start\">Log started for [<?php echo $this->env->url (Url_part_file_name); ?>] at [<?php echo date ("Y-n-j H:i:s", time ()); ?>]<\/p>");
 <?php
       foreach ($this->_messages as $msg)
       {
+        $js_msg = preg_replace("&([^\\\\])/&", "\\1\\/", $msg->message);
 ?>
-  console.document.write ("<?php echo $msg->message; ?><br>\n");
+  console.document.write ("<?php echo $js_msg; ?><br>\n");
 <?php
       }
 ?>
-  console.document.write ("<p class=\"log-finish\">Log finished [<?php echo date ("Y-n-j H:i:s", time ()); ?>]</p>");
-  console.document.write ("</body></html>");
+  console.document.write ("<p class=\"log-finish\">Log finished [<?php echo date ("Y-n-j H:i:s", time ()); ?>]<\/p>");
+  console.document.write ("<\/body><\/html>");
   console.document.close();
+	//-->
 </script>
 <?php
     }
@@ -174,7 +177,7 @@ class JS_CONSOLE_LOGGER extends TEXT_OUTPUT_LOGGER
    * Stores the message for later display.
    * Handles HTML/new line conversions and sets a flag if the message should trigger the popup window.
    * @param string $msg
-   * @param string $type
+   * @param integer $type
    * @param boolean $has_html
    * @access private
    */
@@ -224,7 +227,7 @@ class JS_CONSOLE_LOGGER extends TEXT_OUTPUT_LOGGER
   protected function _output ($msg)
   {
     $this->_log_info->message = $msg;
-    $this->_messages [] = $this->_log_info;
+    $this->_messages [] = clone($this->_log_info);
   }
 
   /**
@@ -244,12 +247,43 @@ class JS_CONSOLE_LOGGER extends TEXT_OUTPUT_LOGGER
    * @access private
    */
   public $env = null;
+  
+  /**
+   * The buffer for the message currently being processed.
+   *
+   * @var LOG_INFO
+   */
+  protected $_log_info;
 
   /**
-   * @var array[object]
+   * @var array[LOG_INFO]
    * @access private
    */
   protected $_messages = array ();
+}
+
+class LOG_INFO
+{
+  /**
+   * Channel to which the message was recorded.
+   *
+   * @var string
+   */
+  public $channel;
+  
+  /**
+   * The text of the recorded message.
+   *
+   * @var string
+   */
+  public $message;
+  
+  /**
+   * The type of the recorded message.
+   *
+   * @var integer
+   */
+  public $type;
 }
 
 ?>
