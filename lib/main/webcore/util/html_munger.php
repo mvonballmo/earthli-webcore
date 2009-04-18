@@ -2187,7 +2187,7 @@ class HTML_TEXT_MUNGER extends HTML_BASE_MUNGER
     $this->register_replacer ('bq', new HTML_BLOCK_QUOTE_REPLACER ('quote quote-block'));
     $this->register_replacer ('pullquote', new HTML_BLOCK_QUOTE_REPLACER ('quote pullquote'));
     $this->register_replacer ('abstract', new HTML_BLOCK_QUOTE_REPLACER ('quote abstract'));
-    $this->register_replacer ('hr', new HTML_BASIC_REPLACER ('<span class="horizontal-separator" style="display: block"></span>', ''), false);
+    $this->register_replacer ('hr', new HTML_BASIC_REPLACER ('<span class="horizontal-separator"></span>', ''), false);
     $this->register_replacer ('div', new HTML_DIV_REPLACER ());
     $this->register_replacer ('box', new HTML_BOX_REPLACER ());
     $this->register_replacer ('code', new HTML_MUNGER_CODE_REPLACER ());
