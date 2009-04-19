@@ -354,7 +354,7 @@ class ATTACHMENT extends OBJECT_IN_FOLDER
   {
     if ($options->remove_resources)
     {
-      @unlink ($this->file_name);
+      @unlink ($this->full_file_name());
       if ($this->is_image)
       {
         @unlink ($this->thumbnail_file_name ());

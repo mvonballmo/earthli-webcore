@@ -360,8 +360,6 @@ class FOLDER_SECURITY extends FOLDER_INHERITABLE_SETTINGS
         }
       }
 
-      log_message("Loading permissions.");
-
       $this->_ensure_default_permissions_are_stored();
     }
   }

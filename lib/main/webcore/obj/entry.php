@@ -151,9 +151,15 @@ class ENTRY extends ATTACHMENT_HOST
    */
   protected function _purge ($options)
   {
-    /* Remove comments */
-    $this->db->logged_query ("DELETE LOW_PRIORITY FROM {$this->app->table_names->comments} WHERE entry_id = $this->id");
-    /* Remove subscriptions */
+    $comment_query = $this->comment_query ();
+    $comments = $comment_query->objects ();
+    
+    foreach ($comments as &$comment)
+    {
+      $comment->purge ($options);
+    }
+        
+		/* Remove subscriptions */
     $this->db->logged_query ("DELETE LOW_PRIORITY FROM {$this->app->table_names->subscriptions} WHERE ref_id = $this->id AND kind = '" . Subscribe_entry . "'");
 
     parent::_purge ($options);

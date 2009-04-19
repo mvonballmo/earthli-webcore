@@ -76,6 +76,7 @@ abstract class ATTACHMENT_HOST extends OBJECT_IN_FOLDER
       $class_name = $this->context->final_class_name ('ATTACHMENT_QUERY', 'webcore/db/attachment_query.php');
       $this->_attachment_query = new $class_name ($this);
     }
+    
     return $this->_attachment_query;
   }
 
@@ -96,9 +97,9 @@ abstract class ATTACHMENT_HOST extends OBJECT_IN_FOLDER
       $key = $att_link_key;
     }
     else if (strpos ($url, $att_thumb_key) !== false)
- {
-   $key = $att_thumb_key;
- }
+    {
+      $key = $att_thumb_key;
+    }
 
     if (isset ($key))
     {
@@ -116,6 +117,23 @@ abstract class ATTACHMENT_HOST extends OBJECT_IN_FOLDER
     }
     
     return parent::resolve_url ($url, $root_override);
+  }
+
+  /**
+   * @param PURGE_OPTIONS $options
+   * @access private
+   */
+  protected function _purge ($options)
+  {
+    $attachment_query = $this->attachment_query ();
+    $attachments = $attachment_query->objects ();
+    
+    foreach ($attachments as &$attachment)
+    {
+      $attachment->purge ($options);
+    }
+    
+    parent::_purge ($options);
   }
 
   /**
