@@ -1465,10 +1465,9 @@ abstract class HIERARCHICAL_QUERY extends QUERY
         $parents = $this->indexed_objects ();
       }
 
-      $obj = $parents [$sub_folder_id];
-      if ($obj)
+      if (isset ($parents [$sub_folder_id]))
       {
-        return $this->_obj_sub_objects ($obj);
+        return $this->_obj_sub_objects ($parents [$sub_folder_id]);
       }
     }
 

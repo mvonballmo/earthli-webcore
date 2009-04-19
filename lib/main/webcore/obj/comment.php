@@ -136,7 +136,7 @@ class COMMENT extends ATTACHMENT_HOST
     if (! isset ($this->_sub_comments))
     {
       $comment_query = $this->comment_query ();
-      $this->_sub_comments = $comment_query->tree ($this->id);
+      $this->_sub_comments = $comment_query->objects ();
     }
 
     return $this->_sub_comments;
