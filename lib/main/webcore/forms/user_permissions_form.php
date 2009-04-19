@@ -133,11 +133,9 @@ class USER_PERMISSIONS_FORM extends PERMISSIONS_FORM
 
     if (! $permissions->exists ())
     {
-      $idx = 0;
-      while ($idx < sizeof ($this->_privilege_fields))
+      foreach ($this->_privilege_fields as &$field)
       {
-        $this->_privilege_fields [$idx]->enabled = false;
-        $idx++;
+        $field->enabled = false;
       }
     }
 

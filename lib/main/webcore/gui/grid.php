@@ -311,18 +311,17 @@ abstract class GRID extends WEBCORE_OBJECT
    */
   protected function _draw_cells ($objs)
   {
-    $i = 0;
-    $c = sizeof ($objs);
+    $index = 0;
     $remainder = 0;
-
-    while ($i < $c)
+    $count = sizeof ($objs);
+    
+    foreach ($objs as &$obj)
     {
-      $obj = $objs [$i];
-      $remainder = $i % $this->_num_columns;
+      $remainder = $index % $this->_num_columns;
 
       if ($remainder == 0)
       {
-        if ($this->show_page_breaks && ($i % $this->rows_per_printed_page == 0))
+        if ($this->show_page_breaks && ($index % $this->rows_per_printed_page == 0))
         {
           $this->_draw_page_break ();
         }
@@ -337,15 +336,13 @@ abstract class GRID extends WEBCORE_OBJECT
       if ($remainder == $this->_num_columns - 1)
       {
         $this->_finish_row ($obj);
-        if (($i < $c - 1) && $this->show_separator)
+        if (($index < $count - 1) && $this->show_separator)
         {
           $this->_draw_separator ();
         }
       }
-
-      $i++;
     }
-
+    
     // if there were fewer than 'num_columns' cells in the last row
 
     if ($remainder < $this->_num_columns - 1)

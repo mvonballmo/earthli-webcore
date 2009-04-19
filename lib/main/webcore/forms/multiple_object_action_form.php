@@ -127,12 +127,9 @@ abstract class MULTIPLE_OBJECT_ACTION_FORM extends ID_BASED_FORM
    */
   protected function _folders_run ()
   {
-    $i = 0;
-    $c = sizeof ($this->object_list->folders);
-    while ($i < $c)
+    foreach ($this->object_list->folders as &$folder)
     {
-      $this->_folder_run ($this->object_list->folders [$i]);
-      $i++;
+      $this->_folder_run ($folder);
     }
   }
 
@@ -142,12 +139,9 @@ abstract class MULTIPLE_OBJECT_ACTION_FORM extends ID_BASED_FORM
    */
   protected function _entries_run ()
   {
-    $i = 0;
-    $c = sizeof ($this->object_list->entries);
-    while ($i < $c)
+    foreach ($this->object_list->entries as &$entry)
     {
-      $this->_entry_run ($this->object_list->entries [$i]);
-      $i++;
+      $this->_entry_run ($entry);
     }
   }
 
@@ -179,38 +173,34 @@ abstract class MULTIPLE_OBJECT_ACTION_FORM extends ID_BASED_FORM
 <div class="chart">
   <div class="chart-body" style="white-space: nowrap">
   <?php
-    $c = sizeof ($this->object_list->folders);
+    $count = sizeof ($this->object_list->folders);
 
-    if ($c)
+    if ($count)
     {
       $folder_info = $this->app->type_info_for ('FOLDER');
       echo '<h3>' . $folder_info->plural_title . '</h3>';
       echo '<p>';
-      $i = 0;
-
-      while ($i < $c)
+      
+      foreach ($this->object_list->folders as &$folder)
       {
-        $fldr = $this->object_list->folders [$i];
-        echo $fldr->title_as_link () . "<br>";
-        $i++;
+        echo $folder->title_as_link () . "<br>";
       }
+
       echo '</p>';
     }
 
-    $c = sizeof ($this->object_list->entries);
-    if ($c)
+    $count = sizeof ($this->object_list->entries);
+    if ($count)
     {
       $current_type = 'none';
-      $i = 0;
-
-      while ($i < $c)
+      $index = 0;
+      foreach ($this->object_list->entries as &$entry)
       {
-        $entry = $this->object_list->entries [$i];
         $type_info = $entry->type_info ();
 
         if ($type_info->plural_title != $current_type)
         {
-          if ($i != 0)
+          if ($index != 0)
           {
             echo '</p>';
           }
@@ -218,16 +208,17 @@ abstract class MULTIPLE_OBJECT_ACTION_FORM extends ID_BASED_FORM
           echo "<h3>{$type_info->plural_title}</h3>\n";
           echo '<p>';
         }
-        if ($i < $c - 1)
+        
+        echo $entry->title_as_link ();
+        
+        if ($index < $count - 1)
         {
-          echo $entry->title_as_link () . "<br>\n";
+          echo "<br>\n";
         }
-        else
-        {
-          echo $entry->title_as_link ();
-        }
-        $i++;
+        
+        $index += 1;
       }
+
       echo "</p>\n";
     }
   ?>

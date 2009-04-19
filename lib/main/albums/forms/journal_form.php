@@ -156,7 +156,7 @@ class JOURNAL_FORM extends ALBUM_ENTRY_FORM
       $i = 0;
       foreach ($icons as $icon)
       {
-        $i++;
+        $i += 1;
         $props->add_item ($icon->icon_as_html ('30px'), $i);
       }
 

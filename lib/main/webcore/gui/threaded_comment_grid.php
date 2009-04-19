@@ -145,22 +145,18 @@ class THREADED_COMMENT_GRID extends FLAT_COMMENT_GRID
    */
   protected function _draw_comments ($objs, $depth)
   {
-    $c = sizeof ($objs);
-    $i = 0;
     if ($depth > 0)
     {
 ?>
     <div class="comment-block">
 <?php
     }
-    $depth++;
-    while ($i < $c)
+    $depth += 1;
+    foreach ($objs as &$obj)
     {
-      $obj = $objs [$i];
       $this->_draw_comment ($obj, $depth);
-      $i++;
     }
-    $depth--;
+    $depth -= 1;
     if ($depth > 0)
     {
 ?>

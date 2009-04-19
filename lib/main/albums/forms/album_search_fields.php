@@ -207,7 +207,7 @@ class SEARCH_JOURNAL_FIELDS extends SEARCH_ENTRY_FIELDS
     $icons = $this->app->display_options->weather_icons ();
     foreach ($icons as $icon)
     {
-      $i++;
+      $i += 1;
       $props->add_item ($icon->icon_as_html ('20px'), $i);
     }
     $renderer->draw_check_group_row ('weather_type', $props);

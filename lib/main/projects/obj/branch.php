@@ -277,7 +277,7 @@ class BRANCH extends OBJECT_IN_FOLDER
           $new_trunk = $branches [$idx];
         }
 
-        $idx++;
+        $idx += 1;
       }
 
       if (isset ($new_trunk))

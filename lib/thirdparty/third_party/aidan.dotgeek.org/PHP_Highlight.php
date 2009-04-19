@@ -67,7 +67,7 @@ class PHP_Highlight
     /**
      * Construct
      */
-    protected function __construct() {
+    public function __construct() {
         $this->highlight = array(
             'string'    => ini_get('highlight.string'),
             'comment'   => ini_get('highlight.comment'),

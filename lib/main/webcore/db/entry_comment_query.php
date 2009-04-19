@@ -111,6 +111,7 @@ class ENTRY_COMMENT_QUERY extends COMMENT_QUERY
   }
 
   /**
+   * @return array[string]
    * @access private
    */
   protected function _prepare_restrictions ()

@@ -192,13 +192,13 @@ abstract class CALENDAR extends WEBCORE_OBJECT
 
       if ($this->curr_month < Months_in_year)
       {
-        $this->curr_month++;
+        $this->curr_month += 1;
       }
       else
       {
         $this->finish_year ($this->curr_year);
         $this->curr_month = 1;
-        $this->curr_year++;
+        $this->curr_year += 1;
 
         if ($this->curr_year <= $this->last_year)
         {
@@ -257,10 +257,10 @@ abstract class CALENDAR extends WEBCORE_OBJECT
     if ($day_of_week % Days_in_week == Days_in_week - 1)
     {
       $this->finish_week ($week, $month, $year);
-      $week++;
+      $week += 1;
     }
 
-    $day_of_week++;
+    $day_of_week += 1;
     $index = 1;
     $day_num = date ("j", $first_day + ($index * Seconds_in_day));
 
@@ -276,11 +276,11 @@ abstract class CALENDAR extends WEBCORE_OBJECT
       if ($day_of_week % Days_in_week == Days_in_week - 1)
       {
         $this->finish_week ($week, $month, $year);
-        $week++;
+        $week += 1;
       }
 
-      $day_of_week++;
-      $index++;
+      $day_of_week += 1;
+      $index += 1;
       $day_num = date ("j", $first_day + ($index * Seconds_in_day));
     }
 
@@ -307,6 +307,7 @@ abstract class CALENDAR extends WEBCORE_OBJECT
   {
     return true;
   }
+  
   /**
    * Render the given months as completely empty.
    * This is only called if 'month_has_content' has returned false for one or more

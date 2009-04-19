@@ -710,20 +710,20 @@ class USER_AGENT_PARSER
     $renderers = $this->_tables->renderer_ids ();
 
     $continue_processing = true;
-    $idx_id = 0;
+    $index = 0;
     $current_renderer = null;
 
-    while ($continue_processing && ($idx_id < sizeof ($ids)))
+    while ($continue_processing && ($index < sizeof ($ids)))
     {
-      $ver = $this->_extract_version ($vers [$idx_id]);
-      $id = strtolower ($ids [$idx_id]);
+      $ver = $this->_extract_version ($vers [$index]);
+      $id = strtolower ($ids [$index]);
       
       // Remove the trailing version marker if needed
       
       if (strcasecmp(substr($id, -2), ' v') == 0)
       {
         $id = substr($id, 0, -2);
-        $ids [$idx_id] = substr($ids [$idx_id], 0, -2);
+        $ids [$index] = substr($ids [$index], 0, -2);
       }
 
       // Don't bother processing ids only one character long
@@ -777,7 +777,7 @@ class USER_AGENT_PARSER
             }
             else
             {
-              $Result->name = $ids [$idx_id]; // Use the id in original case
+              $Result->name = $ids [$index]; // Use the id in original case
             }
           }
         }
@@ -789,7 +789,7 @@ class USER_AGENT_PARSER
         }
       }
       
-      $idx_id++;
+      $index += 1;
     }
 
     if (! empty ($current_renderer))

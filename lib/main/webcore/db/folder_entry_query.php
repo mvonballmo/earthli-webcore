@@ -95,8 +95,7 @@ class FOLDER_ENTRY_QUERY extends OBJECT_IN_SINGLE_FOLDER_QUERY
       }
     }
     
-    global $Null_reference;
-    return $Null_reference;
+    return null;
   }
 
   /**

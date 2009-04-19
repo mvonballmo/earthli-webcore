@@ -339,9 +339,7 @@ abstract class FOLDER_INHERITABLE_SETTINGS extends STORABLE
       return $folder_query->object_at_id ($parent->$field_name);
     }
 
-    $null_reference = null;
-
-    return $null_reference;
+    return null;
   }
 
   /**

@@ -380,7 +380,7 @@ abstract class LOGGER extends LOGGER_CONTAINER
    */
   public function open_block ($title)
   {
-    $this->_block_level++;
+    $this->_block_level += 1;
     $this->_open_block ($title);
     if (isset ($this->logger))
     {
@@ -393,7 +393,7 @@ abstract class LOGGER extends LOGGER_CONTAINER
    */
   public function close_block ()
   {
-    $this->_block_level--;
+    $this->_block_level -= 1;
     $this->_close_block ();
     if (isset ($this->logger))
     {

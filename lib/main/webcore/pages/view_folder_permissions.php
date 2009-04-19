@@ -143,10 +143,10 @@ http://www.earthli.com/software/webcore
       <td></td>
       <td></td>
     <?php
-        $idx = 1;
+        $index = 1;
         foreach ($privilege_groups as $group)
         {
-          if ($idx % 2)
+          if ($index % 2)
           {
             $bg_style = '; background-image: url(' . $App->resolve_file ('{icons}shades/5_percent_black') . ')';
           }
@@ -157,7 +157,7 @@ http://www.earthli.com/software/webcore
     ?>
     <td class="detail" style="padding-right: 1em<?php echo $bg_style; ?>"><?php echo $group->title; ?></td>
     <?php
-          $idx++;
+          $index += 1;
         }
     ?>
     </tr>
@@ -172,10 +172,10 @@ http://www.earthli.com/software/webcore
     ?>
       <td class="label"><?php echo $title; ?></td>
       <?php
-          $idx = 1;
+          $index = 1;
           foreach ($privilege_groups as $group)
           {
-            if ($idx % 2)
+            if ($index % 2)
             {
               $bg_style = '; background-image: url(' . $App->resolve_file ('{icons}shades/5_percent_black') . ')';
             }
@@ -200,7 +200,7 @@ http://www.earthli.com/software/webcore
       ?>
       </td>
       <?php
-          $idx++;
+          $index += 1;
         }
       }
 

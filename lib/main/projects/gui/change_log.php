@@ -161,7 +161,7 @@ class CHANGE_LOG extends WEBCORE_OBJECT
               $this->_draw_change ($entry);
             }
             $title->add_object ($entries [$entry_idx]);
-            $entry_idx++;
+            $entry_idx += 1;
             if ($entry_idx < $entry_count)
             {
               $branch_info = $entries [$entry_idx]->main_branch_info ();

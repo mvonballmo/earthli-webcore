@@ -227,25 +227,25 @@ class PRINT_PREVIEW extends WEBCORE_OBJECT
     $dhtml_opt = $this->app->display_options->use_DHTML;
     $this->app->display_options->use_DHTML = false;
 
-    $i = 0;
-    $c = sizeof ($entries);
+    $count = sizeof ($entries);
 
-    if ($c)
+    if ($count)
     {
       $this->_draw_start ();
 
-      while ($i < $c)
+      $index = 0;
+      foreach ($entries as &$entry)
       {
-        $entry = $entries [$i];
         $this->draw_object ($entry);
-        $i++;
-
-        if ($i <= $c - 1)
+        
+        if ($index < $count - 1)
         {
           $this->_draw_separator ();
         }
+        
+        $index += 1;
       }
-
+      
       $this->_draw_finish ();
     }
 

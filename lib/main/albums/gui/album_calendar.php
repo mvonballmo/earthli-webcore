@@ -121,15 +121,13 @@ class ALBUM_CALENDAR extends BASIC_CALENDAR
 
     if (! $Result)
     {
-      $i = 0;
-      $c = sizeof ($this->_albums);
-      while ($i < $c)
+      foreach ($this->_albums as &$album)
       {
-        $album = $this->_albums [$i];
         if ((($php_first_day <= $album->first_day->as_php ()) && ($album->first_day->as_php () <= $php_last_day)) ||
             (($php_first_day <= $album->last_day->as_php ()) && ($album->last_day->as_php () <= $php_last_day)))
+        {
           $Result = true;
-        $i++;
+        }        
       }
     }
 
@@ -164,7 +162,7 @@ class ALBUM_CALENDAR extends BASIC_CALENDAR
 
         while ($pic_date && ($php_first_day <= $php_pic_date) && ($php_pic_date <= $php_last_day))
         {
-          $num_pics++;  // just count the number of pictures
+          $num_pics += 1;  // just count the number of pictures
           next ($this->_pic_dates);
           $pic_date = current ($this->_pic_dates);
           if ($pic_date)
@@ -200,11 +198,8 @@ class ALBUM_CALENDAR extends BASIC_CALENDAR
 
     // find all of the albums for this day
 
-    $i = 0;
-    $c = sizeof ($this->_albums);
-    while ($i < $c)
+    foreach ($albums as &$album)
     {
-      $album = $this->_albums [$i];
       $d = $album->first_day->as_php ();
       $php_first_album_day = mktime (0, 0, 0, date ("n", $d), date ("j", $d), date ("Y", $d));
       $d = $album->last_day->as_php ();
@@ -213,9 +208,8 @@ class ALBUM_CALENDAR extends BASIC_CALENDAR
       {
         $albums [] = $album;
       }
-      $i++;
     }
-
+    
     if ($num_pics || isset ($jrnls) || isset ($albums))
     {
 ?>
@@ -250,16 +244,12 @@ class ALBUM_CALENDAR extends BASIC_CALENDAR
 
             if (isset ($albums))
             {
-              $i = 0;
-              $c = sizeof ($albums);
-              while ($i < $c)
+              foreach ($albums as &$album)
               {
-                $album = $albums [$i];
                 $t = $album->title_formatter ();
                 $t->set_name ('view_calendar.php');
                 $t->text = "[$t->text]";
                 echo $album->title_as_link ($t) . '<br>';
-                $i++;
               }
             }
 
@@ -282,16 +272,12 @@ class ALBUM_CALENDAR extends BASIC_CALENDAR
               }
               else
               {
-                while ($i < $c)
-                {
-                  $jrnl = $jrnls [$i];
-                  $t = $jrnl->title_formatter ();
-                  $t->add_argument ('calendar', '1');
-                  $t->add_argument ('journal', $jrnl->id);
-                  echo $jrnl->title_as_link ($t);
-                  echo "<br>\n";
-                  $i++;
-                }
+                $jrnl = $jrnls [0];
+                $t = $jrnl->title_formatter ();
+                $t->add_argument ('calendar', '1');
+                $t->add_argument ('journal', $jrnl->id);
+                echo $jrnl->title_as_link ($t);
+                echo "<br>\n";
               }
             }
           ?>

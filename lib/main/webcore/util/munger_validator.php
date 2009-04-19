@@ -347,13 +347,11 @@ class MUNGER_VALIDATOR extends MUNGER_PARSER
       $col = $this->_column;
     }
 
-    $col++;
-
     $error = new MUNGER_VALIDATION_ERROR ();
     $error->message = $msg;
     $error->token = $token;
     $error->line_number = $line;
-    $error->column = $col;
+    $error->column = $col + 1;
 
     $this->errors [] = $error;
   }
@@ -374,7 +372,7 @@ class MUNGER_VALIDATOR extends MUNGER_PARSER
 
       while ($pos !== false)
       {
-        $this->_line_number++;
+        $this->_line_number += 1;
         $this->_column = 1;
         $pos = strpos ($text, "\n", $last_pos);
         if ($pos !== false)

@@ -1060,7 +1060,7 @@ class TIME_INTERVAL
       {
         if ($num_significant_units_found < $num_significant_units)
         {
-          $num_significant_units_found++;
+          $num_significant_units_found += 1;
           if ($num_significant_units_found == $num_significant_units)
           {
             $idx_least_significant = $idx_unit;
@@ -1068,7 +1068,7 @@ class TIME_INTERVAL
         }
       }
       $s -= $unit * $unit_size;
-      $idx_unit++;
+      $idx_unit += 1;
     }
 
     /* Add seconds to the end of the array in the same way as described above. */
@@ -1079,7 +1079,7 @@ class TIME_INTERVAL
     {
       if ($num_significant_units_found < $num_significant_units)
       {
-        $num_significant_units_found++;
+        $num_significant_units_found += 1;
         if ($num_significant_units_found == $num_significant_units)
         {
           $idx_least_significant = sizeof($units) - 1;
@@ -1161,7 +1161,7 @@ class TIME_INTERVAL
           if ($unit == $max_unit)
           {
             $units [$idx_unit] = 0;
-            $units [$idx_unit - 1]++;
+            $units [$idx_unit - 1] += 1;
           }
         }
         else
@@ -1170,7 +1170,7 @@ class TIME_INTERVAL
           if ($fraction >= 0.5)
           {
             $units [$idx_unit] = 0;
-            $units [$idx_unit - 1]++;
+            $units [$idx_unit - 1] += 1;
           }
         }
         $idx_unit--;
@@ -1224,7 +1224,7 @@ class TIME_INTERVAL
         }
       }
 
-      $idx_unit++;
+      $idx_unit += 1;
     }
 
     $Result = implode (' ', $formatted_units);

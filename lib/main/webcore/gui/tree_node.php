@@ -54,7 +54,7 @@ class TREE_NODE
   public function TREE_NODE ($title, $link = '', $closed = true, $target = '')
   {
     static $id;
-    $id++;
+    $id += 1;
 
     $this->_id = $id;
     $this->_title = $title;

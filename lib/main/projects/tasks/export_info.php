@@ -28,7 +28,7 @@ http://www.earthli.com/software/webcore/projects
 
   function process_folders ($folders, $depth)
   {
-    $depth++;
+    $depth += 1;
 
     global $fhandle;
 
@@ -64,7 +64,7 @@ http://www.earthli.com/software/webcore/projects
       }
     }
 
-    $depth--;
+    $depth -= 1;
   }
 
   require_once ('projects/init.php');

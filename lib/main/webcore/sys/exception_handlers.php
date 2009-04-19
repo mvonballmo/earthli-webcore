@@ -65,7 +65,7 @@ class ENVIRONMENT_EXCEPTION_HANDLER extends EXCEPTION_HANDLER
    */
   public function raise ($message, $routine_name, $class_name, $obj)
   {
-    $this->env->num_exceptions_raised++;
+    $this->env->num_exceptions_raised += 1;
     parent::raise ($message, $routine_name, $class_name, $obj);
   }
 }

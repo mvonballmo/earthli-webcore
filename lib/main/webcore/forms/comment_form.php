@@ -167,7 +167,7 @@ class COMMENT_FORM extends ATTACHMENT_HOST_FORM
 
       foreach ($icons as $icon)
       {
-        $i++;
+        $i += 1;
         $props->add_item ($icon->icon_as_html ('15px'), $i);
       }
 

@@ -285,7 +285,7 @@ class MUNGER_TOKEN
               $Result[$attr_name] = $attrs[$attr_idx];
             }
 
-            $attr_idx++;
+            $attr_idx += 1;
           }
         }
       }
@@ -577,15 +577,15 @@ class MUNGER_TOKENIZER extends RAISABLE
             }
             else
             {
-              $this->_pos++;
+              $this->_pos += 1;
               $this->_set_current_token($this->_pos, 1, Munger_token_text);
-              $this->_pos++;
+              $this->_pos += 1;
               $this->_start_of_text_block = $this->_pos;
             }
           }
           else
           {
-            $this->_pos++;
+            $this->_pos += 1;
             $this->read_next_token();
           }
         }
@@ -1715,9 +1715,9 @@ class MUNGER_PARSER extends RAISABLE
       $text = substr($token->data(), 1);
       $token->resize(1, Munger_token_text);
       $this->_transform_as_text($token);
-      $this->_nesting_level++;
+      $this->_nesting_level += 1;
       $this->_process_current_nesting_level($text);
-      $this->_nesting_level--;
+      $this->_nesting_level -= 1;
     }
     elseif ($token->is_start_tag()) 
     {
@@ -2023,7 +2023,7 @@ class MUNGER extends MUNGER_PARSER
    */
   public function inc_footnote_references()
   {
-    $this->_num_footnote_references++;
+    $this->_num_footnote_references += 1;
     $this->_add_footnote_if_needed($this->_num_footnote_references);
   }
 
@@ -2036,7 +2036,7 @@ class MUNGER extends MUNGER_PARSER
    */
   public function inc_footnote_texts()
   {
-    $this->_num_footnote_texts++;
+    $this->_num_footnote_texts += 1;
     $this->_add_footnote_if_needed($this->_num_footnote_texts);
   }
 
@@ -2211,7 +2211,7 @@ class MUNGER extends MUNGER_PARSER
     {
       $t = $this->_current_tokenizer();
       $t->abort();
-      $this->_nesting_level--;
+      $this->_nesting_level -= 1;
     }
     $this->_nesting_level = 0;
     $this->_close_open_tags();

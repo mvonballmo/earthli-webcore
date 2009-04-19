@@ -288,7 +288,7 @@ abstract class TREE extends WEBCORE_OBJECT
    */
   public function iterate_node ($node, $is_last)
   {
-    $this->_depth++;
+    $this->_depth += 1;
     if ($node)
     {
       $this->start_node ($node, $is_last);
@@ -352,7 +352,7 @@ abstract class TREE extends WEBCORE_OBJECT
 
       array_pop ($this->_stack);
     }
-    $this->_depth--;
+    $this->_depth -= 1;
   }
 
   /**
@@ -362,17 +362,17 @@ abstract class TREE extends WEBCORE_OBJECT
    */
   public function iterate_nodes ($nodes)
   {
-    $c = count ($nodes);
-    $i = 0;
-    while ($i < $c)
+    $count = count ($nodes);
+    $index = 0;
+    while ($index < $count)
     {
-      $node = $nodes [$i];
+      $node = $nodes [$index];
       if (isset ($this->decorator))
       {
         $this->decorator->node_found ($node);
       }
-      $this->iterate_node ($node, $i == $c - 1);
-      $i++;
+      $this->iterate_node ($node, $index == $count - 1);
+      $index += 1;
     }
   }
 

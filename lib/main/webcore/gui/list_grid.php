@@ -105,22 +105,22 @@ abstract class LIST_GRID extends STANDARD_GRID
    */
   protected function _draw_box ($obj)
   {
-    $i = 0;
-    $c = sizeof ($this->_columns);
-    while ($i < $c)
+    $index = 0;
+    $count = sizeof ($this->_columns);
+    while ($index < $count)
     {
-      if ($i > 0)
+      if ($index > 0)
       {
-        echo '<td style="vertical-align: top; text-align: ' . $this->_columns [$i]->alignment . '">';
+        echo '<td style="vertical-align: top; text-align: ' . $this->_columns [$index]->alignment . '">';
       }
-      $this->_draw_column_contents ($obj, $i);
-      if (($i < $c - 1) && ($this->use_spacers))
+      $this->_draw_column_contents ($obj, $index);
+      if (($index < $count - 1) && ($this->use_spacers))
       {
         echo '</td>';
         $this->_draw_spacer ('td');
       }
 
-      $i++;
+      $index += 1;
     }
   }
 
@@ -129,20 +129,20 @@ abstract class LIST_GRID extends STANDARD_GRID
    */
   protected function _draw_header ()
   {
-    $i = 0;
-    $c = sizeof ($this->_columns);
-    if ($c > 0)
+    $index = 0;
+    $count = sizeof ($this->_columns);
+    if ($count > 0)
     {
       echo "<tr>\n";
-      while ($i < $c)
+      while ($index < $count)
       {
-        echo '<th style="text-align: ' . $this->_columns [$i]->alignment . '">' . $this->_columns [$i]->name . "</th>\n";
-        if (($i < $c - 1) && ($this->use_spacers))
+        echo '<th style="text-align: ' . $this->_columns [$index]->alignment . '">' . $this->_columns [$index]->name . "</th>\n";
+        if (($index < $count - 1) && ($this->use_spacers))
         {
           $this->_draw_spacer ('th');
         }
   
-        $i++;
+        $index += 1;
       }
       echo "</tr>\n";
     }

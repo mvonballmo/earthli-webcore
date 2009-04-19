@@ -208,11 +208,11 @@ class SEARCH_PROJECT_ENTRY_FIELDS extends SEARCH_ENTRY_FIELDS
       $props = $renderer->make_list_properties ();
       $props->items_per_row = 1;
       $props->line_spacing = '.15em';
-      $i = 0;
+      $index = 0;
       foreach ($kinds as $kind)
       {
-        $props->add_item ($kind->icon_as_html ('20px') . ' ' . $kind->title, $i);
-        $i++;
+        $props->add_item ($kind->icon_as_html ('20px') . ' ' . $kind->title, $index);
+        $index += 1;
       }
       $renderer->draw_check_group_row ('kind', $props);
     }

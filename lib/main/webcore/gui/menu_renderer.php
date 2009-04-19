@@ -360,7 +360,7 @@ class MENU_RENDERER extends WEBCORE_OBJECT
           }
           echo '  ' . $this->_command_as_html ($cmd, '') . "\n";
         }
-        $idx_cmd++;
+        $idx_cmd += 1;
         if ($idx_cmd == $num_cmds_to_be_shown)
         {
           break;

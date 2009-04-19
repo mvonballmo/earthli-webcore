@@ -147,8 +147,7 @@ abstract class PROJECT_ENTRY extends MULTI_TYPE_ENTRY
       return $this->_component;
     }
 
-    global $Null_reference;
-    return $Null_reference;
+    return null;
   }
 
   /**

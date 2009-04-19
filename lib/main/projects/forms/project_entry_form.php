@@ -154,15 +154,15 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
   {
     parent::_post_validate ($obj);
 
-    $c = sizeof ($this->branches);
-    $i = 0;
+    $count = sizeof ($this->branches);
+    $index = 0;
     $selected = false;
 
-    while (! $selected && ($i < $c))
+    while (! $selected && ($index < $count))
     {
-      $branch = $this->branches [$i];
+      $branch = $this->branches [$index];
       $selected = ($this->value_for ("branch_{$branch->id}_enabled") > 0);
-      $i++;
+      $index += 1;
     }
 
     if (! $selected)
@@ -387,11 +387,11 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
       $props = $renderer->make_list_properties ();
       $props->items_per_row = 1;
       $props->line_spacing = '.25em';
-      $i = 0;
-      foreach ($kinds as $kind)
+      $index = 0;
+      foreach ($kinds as &$kind)
       {
-        $props->add_item ($kind->icon_as_html ('20px') . ' ' . $kind->title, $i);
-        $i++;
+        $props->add_item ($kind->icon_as_html ('20px') . ' ' . $kind->title, $index);
+        $index += 1;
       }
       $renderer->draw_radio_group_row ('kind', $props);
     }

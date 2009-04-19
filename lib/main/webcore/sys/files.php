@@ -572,7 +572,7 @@ function file_size_as_text ($size, $force_kb = false)
   $places = 0;
   while (($size / 1024) > 1)
   {
-    $places++;
+    $places += 1;
     $size = $size / 1024;
   }
 

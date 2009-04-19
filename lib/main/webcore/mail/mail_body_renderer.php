@@ -186,15 +186,15 @@ class MAIL_BODY_RENDERER extends MAIL_RENDERER
    */
   protected function _text_content ($options)
   {
-    $num_objs = sizeof ($this->objects);
-    if ($num_objs)
+    $count = sizeof ($this->objects);
+    if ($count)
     {
-      $obj_idx = 0;
+      $index = 0;
       $Result = '';
 
-      while ($obj_idx < $num_objs)
+      while ($index < $count)
       {
-        $pair = $this->objects [$obj_idx];
+        $pair = $this->objects [$index];
 
         $obj_text = $pair->renderer->text_body ($pair->obj, $options);
 
@@ -202,13 +202,13 @@ class MAIL_BODY_RENDERER extends MAIL_RENDERER
         {
           $Result .= $obj_text;
 
-          if ($obj_idx < $num_objs - 1)
+          if ($index < $count - 1)
           {
             $Result .= $this->line ($this->sep ('='));
           }
         }
 
-        $obj_idx++;
+        $index += 1;
       }
     }
 

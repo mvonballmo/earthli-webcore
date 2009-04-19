@@ -288,14 +288,11 @@ abstract class FORM extends WEBCORE_OBJECT
 
     $this->_pre_validate ($obj);
 
-    $idx = 0;
-    $count = sizeof ($this->_field_list);
-    while ($idx < $count)
+    foreach ($this->_field_list as &$field)
     {
-      $this->_field_list [$idx]->validate ($this);
-      $idx++;
+      $field->validate ($this);
     }
-
+    
     $this->_post_validate ($obj);
 
     /* Since each file upload in a form is its own transaction, we have to process the uploads
@@ -305,12 +302,9 @@ abstract class FORM extends WEBCORE_OBJECT
     if ($this->contains_uploads ())
     {
       $form_is_valid = ! $this->has_errors ();
-      $idx_field = 0;
-      $num_upload_fields = sizeof ($this->_upload_fields);
-
-      while ($idx_field < $num_upload_fields)
+      
+      foreach ($this->_upload_fields as &$field)
       {
-        $field = $this->_upload_fields [$idx_field];
         if ($this->num_errors ($field->id) == 0)
         {
           $idx_file = 0;
@@ -321,10 +315,9 @@ abstract class FORM extends WEBCORE_OBJECT
             {
               $this->_process_uploaded_file ($field, $field->file_at ($idx_file), $form_is_valid);
             }
-            $idx_file++;
+            $idx_file += 1;
           }
         }
-        $idx_field++;
       }
     }
   }
@@ -540,7 +533,7 @@ abstract class FORM extends WEBCORE_OBJECT
             }
           }
         }
-        $idx++;
+        $idx += 1;
       }
 
       unset ($this->_fields [$field_name]);
@@ -1061,15 +1054,12 @@ abstract class FORM extends WEBCORE_OBJECT
   protected function _load_from_request ()
   {
     $values = $this->_request_array_to_use ();
-    $idx = 0;
-    $count = sizeof ($this->_field_list);
-    while ($idx < $count)
+    
+    foreach ($this->_field_list as &$field)
     {
-      $field = $this->_field_list [$idx];
       $field->set_value_from_request ($values);
-      $idx++;
     }
-
+    
     if (isset ($this->captcha))
     {
       $question = $this->value_for ('verification_question');

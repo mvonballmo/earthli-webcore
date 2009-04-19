@@ -1163,8 +1163,7 @@ class UPLOAD_FILE_FIELD extends FIELD
       return $this->_value->files [$idx];
     }
 
-    global $Null_reference;
-    return $Null_reference;
+    return null;
   }
 
   /**
@@ -1211,7 +1210,7 @@ class UPLOAD_FILE_FIELD extends FIELD
     if ($this->continue_validating ($form))
     {
       $idx = 0;
-      foreach ($this->_value->files as $file)
+      foreach ($this->_value->files as &$file)
       {
         if (! $file->is_valid ())
         {
@@ -1228,7 +1227,7 @@ class UPLOAD_FILE_FIELD extends FIELD
           }
         }
 
-        $idx++;
+        $idx += 1;
       }
     }
   }

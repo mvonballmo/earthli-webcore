@@ -514,14 +514,10 @@ class FOLDER extends ATTACHMENT_HOST
   {
     if ($this->exists ())
     {
-      $subs = $this->sub_folders ();
-      $c = sizeof ($subs);
-      $i = 0;
-      while ($i < $c)
+      $sub_folders = $this->sub_folders ();
+      foreach ($sub_folders as &$folder)
       {
-        $f = $subs [$i];
-        $f->set_state ($this->state, true);
-        $i++;
+        $folder->set_state ($this->state, true);
       }
     }
 

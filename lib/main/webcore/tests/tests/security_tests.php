@@ -609,11 +609,11 @@ class SECURITY_TEST_TASK extends BASELINE_DATA_TEST_TASK
 
         $this->_check_equal ($exp_entry, $entry_query->size ());
 
-    $com_query = $this->app->login->all_comment_query ();
+//    $com_query = $this->app->login->all_comment_query ();
 
-//          $this->_check_equal ($exp_comment, $com_query->size ());
+//        $this->_check_equal ($exp_comment, $com_query->size ());
 
-    $this->_users_tested++;
+    $this->_users_tested += 1;
   }
 }
 

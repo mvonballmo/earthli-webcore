@@ -196,8 +196,7 @@ class COMMANDS extends WEBCORE_OBJECT
       return $this->_commands [$id];
     }
       
-    global $Null_reference;  
-    return $Null_reference;
+    return null;
   }
 
   /**
@@ -214,7 +213,7 @@ class COMMANDS extends WEBCORE_OBJECT
     {
       if ($cmd->executable)
       {
-        $Result++;
+        $Result += 1;
       }
     }
     return $Result;
@@ -280,9 +279,8 @@ class COMMANDS extends WEBCORE_OBJECT
    */
   public function disable_all_except ($ids)
   {
-    for ($idx = 0; $idx < sizeof ($this->_ordered_commands); $idx++)
+    foreach ($this->_ordered_commands as &$cmd)
     {
-      $cmd = $this->_ordered_commands [$idx];
       if (! in_array ($cmd->id, $ids))
       {
         $cmd->executable = false;

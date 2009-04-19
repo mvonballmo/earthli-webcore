@@ -176,8 +176,8 @@ don't
 //'5'9\"',
 //";
 
-//$result = <<<EORESULT
-//EORESULT;
+$result = <<<EORESULT
+EORESULT;
 
     $this->_munger->max_visible_output_chars = 0;
 
@@ -186,26 +186,6 @@ don't
     $this->_run_munger_test ($s, $result);
 //    $this->_run_validator_test ($s, 3);
 
-/*
-  // Used for generating iterative tests.
-
-  $munger = new PLAIN_TEXT_MUNGER ();
-
-  $this->_munger->break_inside_word = true;
-  $this->_munger->force_paragraphs = true;
-
-  for ($i = 0; $i < 20; $i++)
-  {
-    $this->_munger->max_visible_output_chars = $i;
-    generate_test ('This is my name.');
-  }
-
-  for ($i = 0; $i < 85; $i++)
-  {
-    $this->_munger->max_visible_output_chars = $i;
-    generate_test ("This <a href=\"something.php\">is</a> my\nfirst <a href=\"something.php\">name</a> here.", $i);
-  }
-*/
   }
 
   protected function _generate_test ($input)
@@ -252,7 +232,7 @@ don't
 
   protected function _test_tokens ($input, $expected_token_count)
   {
-    $this->_num_tests++;
+    $this->_num_tests += 1;
 
     $munger = new MUNGER_TOKENIZER ();
     $munger->set_input ($input);
@@ -261,7 +241,7 @@ don't
 
     while ($munger->tokens_available ())
     {
-      $count++;
+      $count += 1;
       $munger->read_next_token ();
       $token = $munger->current_token ();
       if ($this->show_tokens)
@@ -300,7 +280,7 @@ don't
 
     if ($count != $expected_token_count)
     {
-      $this->_num_errors++;
+      $this->_num_errors += 1;
       echo "<div class=\"error\">Error detected</div>";
       echo "<h4>Input</h4>";
       echo "<p>" . htmlspecialchars ($input) . "</p>\n";
@@ -315,7 +295,7 @@ don't
 
   protected function _test_attributes ($input, $expected_prop_count)
   {
-    $this->_num_tests++;
+    $this->_num_tests += 1;
 
     $munger = new MUNGER_TOKENIZER ();
     $munger->set_input ($input);
@@ -327,7 +307,7 @@ don't
 
       if (! $token->type == Munger_token_start_tag)
       {
-        $this->_num_errors++;
+        $this->_num_errors += 1;
         echo "<hr style=\"clear: both\">\n";
         echo "<div class=\"error\">Error detected</div>";
         echo "<h4>Input</h4>";
@@ -348,7 +328,7 @@ don't
 
       if ($count != $expected_prop_count)
       {
-        $this->_num_errors++;
+        $this->_num_errors += 1;
         echo "<hr style=\"clear: both\">\n";
         echo "<div class=\"error\">Error detected</div>";
         echo "<h4>Input</h4>";
@@ -360,14 +340,14 @@ don't
 
   protected function _run_validator_test ($input, $errors_expected)
   {
-    $this->_num_tests++;
+    $this->_num_tests += 1;
 
     $this->_validator->validate ($input);
 
     $errors_generated = sizeof ($this->_validator->errors);
     if ($errors_generated != $errors_expected)
     {
-      $this->_num_errors++;
+      $this->_num_errors += 1;
       echo "<hr style=\"clear: both\">\n";
       echo "<div class=\"error\">Error detected</div>";
     }
@@ -393,14 +373,14 @@ don't
 
   protected function _run_munger_test ($input, $expected)
   {
-    $this->_num_tests++;
+    $this->_num_tests += 1;
 
     $this->page->root_url = '/earthli/tests/';
     $output = $this->_munger->transform ($input, $this->page);
     
     if ((strcmp($output, $expected) != 0))
     {
-      $this->_num_errors++;
+      $this->_num_errors += 1;
       echo "<hr style=\"clear: both\">\n";
       echo "<div class=\"error\">Error detected</div>";
 //      $this->_generate_test ($input);

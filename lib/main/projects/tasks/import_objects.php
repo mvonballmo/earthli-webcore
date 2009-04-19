@@ -67,7 +67,7 @@ http://www.earthli.com/software/webcore/projects
     log_message ("$msg [line $num]", $type, Msg_channel_xml);
     if ($type == Msg_type_error)
     {
-      $errors_occurred++;
+      $errors_occurred += 1;
     }
   }
 
@@ -275,12 +275,12 @@ http://www.earthli.com/software/webcore/projects
         $action = 'Found';
       }
 
-      $c = sizeof ($objs);
-      log_message ("[$c] changes found. Importing...", Msg_type_info, Msg_channel_xml);
-      $i = 0;
-      while ($i < $c)
+      $count = sizeof ($objs);
+      log_message ("[$count] changes found. Importing...", Msg_type_info, Msg_channel_xml);
+      $index = 0;
+      while ($index < $count)
       {
-        $obj = $objs [$i];
+        $obj = $objs [$index];
         $folder = $obj->parent_folder ();
         $creator = $obj->creator ();
         if ($commit)
@@ -310,7 +310,7 @@ http://www.earthli.com/software/webcore/projects
           $branch_info->store ();
         }
         log_message ("$action [" . $obj->title_as_plain_text () . "] into [" . $folder->title_as_plain_text () . "] by [" . $creator->title_as_plain_text () . "] on [" . $obj->time_created->format () . "]", Msg_type_info, Msg_channel_xml);
-        $i++;
+        $index += 1;
       }
 
       // close the file and delete it

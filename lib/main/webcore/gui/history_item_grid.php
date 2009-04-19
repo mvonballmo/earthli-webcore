@@ -128,7 +128,7 @@ class HISTORY_ITEM_GRID extends STANDARD_GRID
    */
   protected function _draw_box ($obj)
   {
-    $this->_item_number++;
+    $this->_item_number += 1;
     $creator = $obj->creator ();
     
     $layer = $this->context->make_layer ('obj_' . $obj->id);

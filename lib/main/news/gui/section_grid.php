@@ -85,16 +85,14 @@ class SECTION_GRID extends FOLDER_GRID
     {
       $entry_query->set_limits (0, 10);
       $entries = $entry_query->objects ();
-      $i = 0;
-      $c = sizeof ($entries);
-      if ($c)
+      $count = sizeof ($entries);
+      if ($count)
       {
   ?>
     <ul class="detail" style="padding: 0em; margin: 0px; margin-top: 1em; margin-left: 2em">
   <?php
-        while ($i < $c)
+        foreach ($entries as &$entry)
         {
-          $entry = $entries [$i];
           $t = $entry->title_formatter ();
           $f = $entry->time_created->formatter ();
           $f->type = Date_time_format_short_date;
@@ -105,8 +103,8 @@ class SECTION_GRID extends FOLDER_GRID
         <?php echo $entry->title_as_link ($t); ?>
       </li>
   <?php
-          $i++;
         }
+
         if ($size > 10)
         {
           echo "<li style=\"margin-bottom: 0px\">[<a href=\"view_folder.php?id=$obj->id\">More</a>]</li>\n";

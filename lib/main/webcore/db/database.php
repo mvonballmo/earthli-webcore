@@ -164,7 +164,7 @@ class DATABASE extends DB_Sql
       {
         $count = $this->_query_texts [$qs];
         log_message ("The query [$qs] has already been executed [$count] times.", Msg_type_debug_warning, Msg_channel_database);
-        $this->_query_texts [$qs]++;
+        $this->_query_texts [$qs] += 1;
       }
       else
       {
@@ -183,7 +183,7 @@ class DATABASE extends DB_Sql
       DB_Sql::query ($qs);
     }
 
-    $this->env->num_queries_executed++;
+    $this->env->num_queries_executed += 1;
   }
 
   /**

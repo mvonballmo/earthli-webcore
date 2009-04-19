@@ -117,6 +117,7 @@ class JS_CONSOLE_LOGGER extends TEXT_OUTPUT_LOGGER
     $this->set_is_html (true);
     $this->env = $env;
     $this->CSS_file_name = $env->logger_style_sheet;
+    $this->_log_info = new LOG_INFO();
   }
 
   /**

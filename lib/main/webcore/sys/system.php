@@ -91,12 +91,6 @@ define ('Var_type_cookie', '_COOKIE');
 define ('Var_type_upload', '_FILES');
 
 /**
- *
- * Used by functions that return references to null.
- */
-$Null_reference = null;
-
-/**
  * Retrieves an array index without triggering a PHP notice.
  * @version 3.1.0
  * @since 2.2.1

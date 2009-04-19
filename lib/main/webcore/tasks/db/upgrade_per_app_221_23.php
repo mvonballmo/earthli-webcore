@@ -45,12 +45,8 @@ class UPGRADE_PER_APP_221_23_TASK extends MIGRATOR_TASK
       unset($obj);
     }
 
-    $i = 0;
-    $c = sizeof ($folders);
-
-    while ($i < $c)
+    foreach ($folders as &$folder)
     {
-      $folder = $folders [$i];
       if ($folder->parent_id)
       {
         $parent = $folder_map [$folder->parent_id];
@@ -61,10 +57,8 @@ class UPGRADE_PER_APP_221_23_TASK extends MIGRATOR_TASK
       {
         $roots [] = $folder;
       }
-
-      $i++;
     }
-
+    
     build_folder_tree ($roots, $table_name);
   }
 

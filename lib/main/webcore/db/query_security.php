@@ -111,14 +111,14 @@ class QUERY_SECURITY_RESTRICTION extends WEBCORE_OBJECT
       {
         if (sizeof ($item->states))
         {
-          $idx_state = 0;
+          $state_index = 0;
           foreach ($item->states as $state)
           {
             if ($state)
             {
-              $parts [] = $this->_format_state ($item, $state, $idx_state);
+              $parts [] = $this->_format_state ($item, $state, $state_index);
             }
-            $idx_state++;
+            $state_index += 1;
           }
         }
 
@@ -167,20 +167,22 @@ class QUERY_SECURITY_RESTRICTION extends WEBCORE_OBJECT
   {
     $this->_set_names = $set_names;
     $permissions = $this->login->permissions ();
-    for ($idx_set = 0; $idx_set < sizeof ($set_names); $idx_set++)
+    
+    foreach ($set_names as &$set_name)
     {
-      $privs [] = $permissions->value_for ($set_names [$idx_set], Privilege_view);
+      $privs [] = $permissions->value_for ($set_name, Privilege_view);
     }
-
+    
     if (! in_array (Privilege_always_denied, $privs))
     {
       $this->_vis_sets = array ();
       $this->_vis_privs = array ();
-      for ($idx_priv = 0; $idx_priv < sizeof ($privs); $idx_priv++)
+      
+      for ($priv_index = 0; $priv_index < sizeof ($privs); $priv_index++)
       {
-        if ($privs [$idx_priv] != Privilege_always_granted)
+        if ($privs [$priv_index] != Privilege_always_granted)
         {
-          $this->_vis_sets [] = $set_names[ $idx_priv ];
+          $this->_vis_sets [] = $set_names[$priv_index];
           $this->_vis_privs [] = Privilege_view;
         }
       }

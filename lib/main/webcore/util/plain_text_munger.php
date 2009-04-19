@@ -618,16 +618,17 @@ class PLAIN_TEXT_LIST_TRANSFORMER extends MUNGER_LIST_TRANSFORMER
     $text = ltrim ($text, " \t");  // right side is already trimmed in 'apply_transform'.
 
     $lines = explode ("\n", $text);
-    $idx = 0;
+    
+    $index = 0;
     $count = sizeof ($lines);
-    while ($idx < $count)
+    while ($index < $count)
     {
-      $Result .= $munger->wrap (ltrim ($lines [$idx]), $this->_indent + strlen ($this->_last_mark));
-      if ($idx < $count - 1)
+      $Result .= $munger->wrap (ltrim ($lines [$index]), $this->_indent + strlen ($this->_last_mark));
+      if ($index < $count - 1)
       {
         $Result .= $this->_make_mark ();
       }
-      $idx++;
+      $index += 1;
     }
 
     return $Result;
@@ -698,7 +699,7 @@ class PLAIN_TEXT_NUMERIC_LIST_TRANSFORMER extends PLAIN_TEXT_LIST_TRANSFORMER
   {
     if (! isset ($mark))
     {
-      $this->_current_mark++;
+      $this->_current_mark += 1;
       $mark = $this->_current_mark . '.';
     }
     else
@@ -1007,13 +1008,13 @@ class TEXT_MUNGER extends MUNGER
 
   public function increase_indent_by ($num_spaces)
   {
-    $this->num_indents++;
+    $this->num_indents += 1;
     $this->num_spaces += $num_spaces;
   }
 
   public function decrease_indent_by ($num_spaces)
   {
-    $this->num_indents--;
+    $this->num_indents -= 1;
     $this->num_spaces -= $num_spaces;
     if ($this->num_spaces < 0)
     {

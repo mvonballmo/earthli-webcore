@@ -338,14 +338,10 @@ class COMMENT extends ATTACHMENT_HOST
   {
     if ($this->exists ())
     {
-      $subs = $this->sub_comments ();
-      $c = sizeof ($subs);
-      $i = 0;
-      while ($i < $c)
+      $sub_comments = $this->sub_comments (); 
+      foreach ($sub_comments as &$com)
       {
-        $com = $subs [$i];
         $com->set_state ($this->state, true);
-        $i++;
       }
     }
 

@@ -80,7 +80,7 @@ class WEBCORE_OBJECT extends RAISABLE
       $this->login =& $context->login;
     }
 
-    $this->env->num_webcore_objects++;
+    $this->env->num_webcore_objects += 1;
 
     if ($this->env->log_class_names)
     {

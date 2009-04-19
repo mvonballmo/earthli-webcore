@@ -277,7 +277,7 @@ class PUBLISHER extends LOGGABLE
                        */
 
                       $subscriber_records [$subscriber->email]->history_items [$history_item->id] = $history_item;
-                      $subscriber_records [$subscriber->email]->num_objects++;
+                      $subscriber_records [$subscriber->email]->num_objects += 1;
                       $subscriber_records [$subscriber->email]->objects [$history_item->access_id][$object_type][$object_id]->object = $obj;
                       $subscriber_records [$subscriber->email]->objects [$history_item->access_id][$object_type][$object_id]->history_items [] = $history_item;
                     }
@@ -381,7 +381,7 @@ class PUBLISHER extends LOGGABLE
                   }
 
                   $item->add_main_object ($obj_rec->object);
-                  $num_objects_in_message++;
+                  $num_objects_in_message += 1;
 
                   if ($num_objects_in_message == $subscriber->max_items_per_message)
                   {

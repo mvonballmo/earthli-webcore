@@ -657,8 +657,7 @@ abstract class QUERY extends WEBCORE_OBJECT
       return $objs [0];
     }
 
-    global $Null_reference;
-    return $Null_reference;
+    return null;
   }
 
   /**
@@ -716,11 +715,11 @@ abstract class QUERY extends WEBCORE_OBJECT
     $this->assert ($arrays_match, 'both fields and values must be the same size', 'objects_with_fields', 'QUERY');
 
     $operations = array ();
-    $idx = 0;
-    while ($idx < sizeof ($fields))
+    $index = 0;
+    while ($index < sizeof ($fields))
     {
-      $operations [] = $fields[$idx] . ' ' . $operator . ' \'' . addslashes ($values[$idx]) . '\'';
-      $idx++;
+      $operations [] = $fields[$index] . ' ' . $operator . ' \'' . addslashes ($values[$index]) . '\'';
+      $index += 1;
     }
     $this->_start_system_call ('(' . implode (') AND (', $operations) . ')');
     $Result = $this->objects ();
@@ -778,16 +777,12 @@ abstract class QUERY extends WEBCORE_OBJECT
       $this->_indexed_objects = array ();
 
       $objs = $this->objects ();
-      $i = 0;
-      $c = sizeof ($objs);
-      while ($i < $c)
+      foreach ($objs as &$obj)
       {
-        $obj = $objs [$i];
         if ($this->_is_indexable_object ($obj))
         {
           $this->_indexed_objects [$this->_id_for_object ($obj)] = $obj;
         }
-        $i++;
       }
     }
 
@@ -1392,6 +1387,15 @@ abstract class QUERY extends WEBCORE_OBJECT
   protected $_object_tree;
 }
 
+/**
+ * A query that supports returning objects in a hierarchy.
+ * 
+ * @package webcore
+ * @subpackage db
+ * @version 3.1.0
+ * @since 3.1.0
+ * @abstract
+ */
 abstract class HIERARCHICAL_QUERY extends QUERY 
 {
   /**
@@ -1427,15 +1431,12 @@ abstract class HIERARCHICAL_QUERY extends QUERY
         $parents = $this->indexed_objects ();
       }
 
-      $i = 0;
-      $c = sizeof ($objs);
-      while ($i < $c)
+      // Search all objects, adding those without parents to the
+      // root (_object_tree), otherwise, adding them into the
+      // hierarchy at the appropriate point.
+      
+      foreach ($objs as &$obj)
       {
-        // Search all objects, adding those without parents to the
-        // root (_object_tree), otherwise, adding them into the
-        // hierarchy at the appropriate point.
-
-        $obj = $objs [$i];
         $parent_id = $this->_parent_id_for_object ($obj);
         if ($parent_id)
         {
@@ -1454,8 +1455,6 @@ abstract class HIERARCHICAL_QUERY extends QUERY
         }
 
         $this->_obj_set_sub_objects_cached ($obj);
-
-        $i++;
       }
     }
 
@@ -1693,7 +1692,7 @@ class QUERY_ITERATOR extends RAISABLE
   {
     if ($this->_item_index < sizeof ($this->_objects) - 1)
     {
-      $this->_item_index++;
+      $this->_item_index += 1;
     }
     else
     {

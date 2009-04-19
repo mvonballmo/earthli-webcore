@@ -163,7 +163,7 @@ class PAGE_NAVIGATOR extends WEBCORE_OBJECT
     $this->_count = floor ($num_total_objects / $num_objects_per_page);
     if (($num_total_objects % $num_objects_per_page > 0) && ($num_objects_per_page > 1))
     {
-      $this->_count++;
+      $this->_count += 1;
     }
 
     if (! $this->page_number)
@@ -316,19 +316,19 @@ class PAGE_NAVIGATOR extends WEBCORE_OBJECT
         $last_page = $first_page + $this->pages_to_show - 1;
       }
 
-      for ($i = $first_page; $i <= $last_page; $i++)
+      for ($index = $first_page; $index <= $last_page; $index++)
       {
-        $page_text = $i + $this->page_offset;
-        if ($i == $this->page_number)
+        $page_text = $index + $this->page_offset;
+        if ($index == $this->page_number)
         {
           $this->_output .= "<span class=\"selected\">$page_text</span>";
         }
         else
         {
-          $this->_output .= "<a href=\"" . $this->_make_page_link ($i) . "\">$page_text</a>";
+          $this->_output .= "<a href=\"" . $this->_make_page_link ($index) . "\">$page_text</a>";
         }
 
-        if ($i < $last_page)
+        if ($index < $last_page)
         {
           $this->_output .= $this->separator;
         }

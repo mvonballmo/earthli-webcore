@@ -167,8 +167,8 @@ class PANEL_MANAGER extends WEBCORE_OBJECT
     {
       return $this->_panels [$this->selected_panel_id];
     }
-    global $Null_reference;
-    return $Null_reference;
+
+    return null;
   }
 
   /**
@@ -214,7 +214,7 @@ class PANEL_MANAGER extends WEBCORE_OBJECT
     if (isset ($this->_location_add_index))
     {
       $this->_move_panel_to ($panel->id, $this->_location_add_index, $this->_location_order);
-      $this->_location_add_index++;
+      $this->_location_add_index += 1;
     }
     else
     {
@@ -224,7 +224,7 @@ class PANEL_MANAGER extends WEBCORE_OBJECT
     if (isset ($this->_selection_add_index))
     {
       $this->_move_panel_to ($panel->id, $this->_selection_add_index, $this->_selection_order);
-      $this->_selection_add_index++;
+      $this->_selection_add_index += 1;
     }
     else
     {

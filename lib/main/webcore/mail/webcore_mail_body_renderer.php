@@ -109,7 +109,7 @@ class MAIL_TOC_ENTRY_RENDERER extends RENDERER
   {
     if (! isset ($this->main_pair) && is_a ($pair->obj, 'OBJECT_IN_FOLDER'))
     {
-      $this->toc->num_entries++;
+      $this->toc->num_entries += 1;
       $this->group->subject->add_object ($pair->obj);
       $this->_obj_id = $pair->obj->id;
       $this->main_pair = $pair;
@@ -472,15 +472,15 @@ class MAIL_TOC_GROUP_RENDERER extends RENDERER
       $Result .= $this->line ();
     }
 
-    $idx = 0;
+    $index = 0;
     foreach ($this->entries as $entry)
     {
-      if ($idx != 0)
+      if ($index != 0)
       {
         $Result .= $this->par ();
         $Result .= $this->line ($this->sep ('='));
       }
-      $idx++;
+      $index += 1;
       $Result .= $entry->as_plain_text_for_items ($options);
     }
 
@@ -496,7 +496,7 @@ class MAIL_TOC_GROUP_RENDERER extends RENDERER
   public function new_entry ($obj)
   {
     $Result = $this->_make_entry ($obj);
-    $this->num_entries++;
+    $this->num_entries += 1;
     $this->entries [] = $Result;
     return $Result;
   }

@@ -564,15 +564,7 @@ class APPLICATION extends CONTEXT
 
     if (empty ($Result))
     {
-      if ($allow_null)
-      {
-        global $Null_reference;
-        $Result = $Null_reference;
-      }
-      else
-      {
-        $Result = $this->non_existent_user ();
-      }
+      $Result = $allow_null ? null : $this->non_existent_user (); 
     }
 
     return $Result;

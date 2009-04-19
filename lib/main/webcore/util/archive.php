@@ -174,7 +174,7 @@ class ARCHIVE
           {
             $this->_handler = null;
           }
-          $idx_handler++;
+          $idx_handler += 1;
         }
       }
     }
@@ -484,7 +484,7 @@ class ZIP_FILE extends COMPRESSED_FILE
       $size = zip_entry_filesize ($zip_entry);
       if ($size > 0)
       {
-        $file_num++;
+        $file_num += 1;
 
         $entry = new ZIP_ENTRY ($this, $this->_handle, $zip_entry, $opts);
         $entry->name = str_replace ('/', $sep, zip_entry_name ($zip_entry));

@@ -100,23 +100,23 @@ abstract class RELEASE_UPDATER extends WEBCORE_OBJECT
          get the next release in the list, if it exists. If there is no newer release,
          relegate all jobs and changes back to 'unassigned' release. */
 
-      $idx = 0;
-      $curr_idx = 0;
-      while (! $curr_idx && ($idx < sizeof ($releases)))
+      $index = 0;
+      $current_index = 0;
+      while (! $current_index && ($index < sizeof ($releases)))
       {
-        if ($releases [$idx]->id == $this->release->id)
+        if ($releases [$index]->id == $this->release->id)
         {
-          $curr_idx = $idx;
+          $current_index = $index;
         }
-        $idx++;
+        $index += 1;
       }
 
-      while (! isset ($this->_replacement_release) && ($curr_idx > 0))
+      while (! isset ($this->_replacement_release) && ($current_index > 0))
       {
-        $curr_idx--;
-        if ($releases [$curr_idx]->planned ())
+        $current_index--;
+        if ($releases [$current_index]->planned ())
         {
-          $this->_replacement_release = $releases [$curr_idx];
+          $this->_replacement_release = $releases [$current_index];
         }
       }
 

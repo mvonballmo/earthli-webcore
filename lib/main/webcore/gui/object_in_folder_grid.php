@@ -183,7 +183,7 @@ class OBJECT_IN_FOLDER_SUMMARY_GRID extends CONTENT_OBJECT_GRID
       echo $folder->title_as_link ();
       echo '<br>';
       $folder = $folder->parent_folder ();
-      $depth++;
+      $depth += 1;
     }
   }
 }

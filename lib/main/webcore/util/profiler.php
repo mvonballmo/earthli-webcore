@@ -94,7 +94,7 @@ class PROFILER_TIMER extends RAISABLE
     {
       $this->_start_time = $this->_current_time ();
     }
-    $this->_num_starts++;
+    $this->_num_starts += 1;
   }
 
   /**
@@ -102,7 +102,7 @@ class PROFILER_TIMER extends RAISABLE
    */
   public function stop ()
   {
-    $this->_num_starts--;
+    $this->_num_starts -= 1;
     if (! $this->_num_starts)
     {
       $this->_elapsed += $this->_current_time () - $this->_start_time;

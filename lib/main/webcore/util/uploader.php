@@ -470,12 +470,9 @@ class UPLOADED_FILE_SET
    */
   public function move_to ($path, $options = Uploaded_file_unique_name)
   {
-    $idx_file = 0;
-    $cnt_file = $this->size ();
-    while ($idx_file < $cnt_file)
+    foreach ($this->files as &$file)
     {
-      $this->files [$idx_file]->move_to ($path, $options);
-      $idx_file++;
+      $file->move_to ($path, $options);
     }
   }
 

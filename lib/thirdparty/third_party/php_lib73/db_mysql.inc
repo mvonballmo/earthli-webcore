@@ -13,32 +13,32 @@ class DB_Sql
 {
   
   /* public: connection parameters */
-  var $Host = "";
-  var $Database = "";
-  var $User = "";
-  var $Password = "";
+  public $Host = "";
+  public $Database = "";
+  public $User = "";
+  public $Password = "";
   
   /* public: configuration parameters */
-  var $Auto_Free = 0; ## Set to 1 for automatic mysql_free_result()
-  var $Debug = 0; ## Set to 1 for debugging messages.
-  var $Halt_On_Error = "yes"; ## "yes" (halt with message), "no" (ignore errors quietly), "report" (ignore errror, but spit a warning)
-  var $Seq_Table = "db_sequence";
+  public $Auto_Free = 0; ## Set to 1 for automatic mysql_free_result()
+  public $Debug = 0; ## Set to 1 for debugging messages.
+  public $Halt_On_Error = "yes"; ## "yes" (halt with message), "no" (ignore errors quietly), "report" (ignore errror, but spit a warning)
+  public $Seq_Table = "db_sequence";
   
   /* public: result array and current row number */
-  var $Record = array ();
-  var $Row;
+  public $Record = array ();
+  public $Row;
   
   /* public: current error number and error text */
-  var $Errno = 0;
-  var $Error = "";
+  public $Errno = 0;
+  public $Error = "";
   
   /* public: this is an api revision, not a CVS revision. */
-  var $type = "mysql";
-  var $revision = "1.2";
+  public $type = "mysql";
+  public $revision = "1.2";
   
   /* private: link and query handles */
-  var $Link_ID = 0;
-  var $Query_ID = 0;
+  private $Link_ID = 0;
+  private $Query_ID = 0;
 
   /* public: constructor */
   function DB_Sql ($query = "")
@@ -307,7 +307,6 @@ class DB_Sql
   /* public: return table metadata */
   function metadata ($table = '', $full = false)
   {
-    $count = 0;
     $id = 0;
     $res = array ();
     
@@ -412,7 +411,7 @@ class DB_Sql
   {
     $this->query ("SHOW TABLES");
     $i = 0;
-    while ($info = mysql_fetch_row ($this->Query_ID))
+    while (($info = mysql_fetch_row ($this->Query_ID)))
     {
       $return [$i] ["table_name"] = $info [0];
       $return [$i] ["tablespace_name"] = $this->Database;
@@ -422,4 +421,5 @@ class DB_Sql
     return $return;
   }
 }
+
 ?>

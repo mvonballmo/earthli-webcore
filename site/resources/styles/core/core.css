@@ -838,7 +838,12 @@ blockquote p:first-child, .side-bar-body p:first-child, .chart-body p:first-chil
 .tree-node 
 {
   white-space: nowrap;
-  margin-bottom: .1em;
+  margin-bottom: .2em;
+}
+
+.tree-node img
+{
+	padding-right: .25em;
 }
 
 .message-box 

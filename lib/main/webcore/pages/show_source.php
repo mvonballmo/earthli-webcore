@@ -100,7 +100,7 @@ http://www.earthli.com/software/webcore
     ?>
         <li><a href="#template_source_<?php echo $idx; ?>"><?php echo $tname; ?></a></li>
     <?php
-            $idx++;
+            $idx += 1;
           }
     ?>
       </ul>
@@ -115,7 +115,7 @@ http://www.earthli.com/software/webcore
     <p>Source for template: <span class="field"><?php echo $tname; ?></span></p>
     <?php
             draw_source ($ttext);
-            $idx++;
+            $idx += 1;
           }
         }
         else

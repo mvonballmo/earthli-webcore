@@ -467,7 +467,7 @@ class USER_FOLDER_QUERY extends OBJECT_IN_FOLDER_QUERY
         while ($Result && ($idx_set < sizeof ($this->_filter_by_sets)))
         {
           $Result = $this->login->is_allowed ($this->_filter_by_sets [$idx_set], $this->_filter_by_types [$idx_set], $obj);
-          $idx_set++;
+          $idx_set += 1;
         }
       }
     }
@@ -519,11 +519,11 @@ class USER_FOLDER_QUERY extends OBJECT_IN_FOLDER_QUERY
       {
         if ($this->_num_folders_counted < $this->_first_folder)
         {
-          $this->_num_folders_counted++;
+          $this->_num_folders_counted += 1;
         }
         else
         {
-          $this->_num_folders_counted++;
+          $this->_num_folders_counted += 1;
           $Result = $this->_num_folders_counted <= $this->_first_folder + $this->_num_folders;
         }
       }

@@ -64,7 +64,7 @@ class OBJECT_LIST_TITLE extends WEBCORE_OBJECT
    */
   public function add_object ($obj)
   {
-    $this->num_objects++;
+    $this->num_objects += 1;
     $type_info = $obj->type_info ();
     if (! isset ($this->_items [$type_info->id]))
     {
@@ -73,7 +73,7 @@ class OBJECT_LIST_TITLE extends WEBCORE_OBJECT
       $this->_items [$type_info->id] = $item;
     }
 
-    $this->_items [$type_info->id]->num_objects++;
+    $this->_items [$type_info->id]->num_objects += 1;
   }
 
   /**

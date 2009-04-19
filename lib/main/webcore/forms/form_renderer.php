@@ -1505,7 +1505,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
       $options->extra_description = $saved_desc;
     }
 
-    $this->_num_controls [$id]++;
+    $this->_num_controls [$id] += 1;
     return $Result;
   }
 
@@ -1858,7 +1858,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
 
       foreach ($props->items as $item)
       {
-        $counter++;
+        $counter += 1;
 
         if (! $id)
         {
