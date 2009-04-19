@@ -71,6 +71,8 @@ http://www.earthli.com/software/webcore
   $Page->location->add_root_link (false);
   $Page->location->append ($App->short_title);
 
+  $Page->add_script_file ('{scripts}webcore_forms.js');
+  
   $Page->title->subject = $panel->raw_title ();
 
   $Page->newsfeed_options->title->subject = $App->title;

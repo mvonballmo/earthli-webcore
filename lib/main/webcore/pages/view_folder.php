@@ -48,6 +48,8 @@ http://www.earthli.com/software/webcore/albums
     $Page->title->add_object ($folder);
     $Page->title->subject = $panel->raw_title();
 
+    $Page->add_script_file ('{scripts}webcore_forms.js');
+    
     $Page->newsfeed_options->title->group = $App->title;
     $Page->newsfeed_options->title->add_object ($folder);
     $Page->newsfeed_options->file_name = '{app}/view_folder_rss.php?id=' . $folder->id;
