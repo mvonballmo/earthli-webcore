@@ -70,9 +70,9 @@ abstract class MULTIPLE_OBJECT_ACTION_FORM extends ID_BASED_FORM
   /**
    * @param FOLDER $folder Objects are from this folder.
    */
-  public function MULTIPLE_OBJECT_ACTION_FORM ($folder)
+  public function __construct ($folder)
   {
-    ID_BASED_FORM::ID_BASED_FORM ($folder->app);
+    parent::__construct ($folder->app);
 
     $this->_folder = $folder;
 

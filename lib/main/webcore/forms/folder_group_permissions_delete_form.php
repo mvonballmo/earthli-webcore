@@ -53,9 +53,9 @@ class FOLDER_GROUP_PERMISSIONS_DELETE_FORM extends DELETE_FORM
   /**
    * @param APPLICATION $app Main application.
    */
-  public function FOLDER_GROUP_PERMISSIONS_DELETE_FORM ($app)
+  public function __construct ($app)
   {
-    DELETE_FORM::DELETE_FORM ($app);
+    parent::__construct ($app);
 
     $field = new INTEGER_FIELD ();
     $field->id = 'group_id';

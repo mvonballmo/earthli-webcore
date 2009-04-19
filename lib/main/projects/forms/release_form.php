@@ -51,9 +51,9 @@ class RELEASE_FORM extends OBJECT_IN_FOLDER_FORM
   /**
    * @param PROJECT $folder Project in which to add or edit the job.
    */
-  public function RELEASE_FORM ($folder)
+  public function __construct ($folder)
   {
-    OBJECT_IN_FOLDER_FORM::OBJECT_IN_FOLDER_FORM ($folder);
+    parent::__construct ($folder);
 
     $field = new INTEGER_FIELD ();
     $field->id = 'state';

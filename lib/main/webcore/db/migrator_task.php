@@ -109,9 +109,9 @@ class MIGRATOR_TASK extends TASK
   /**
    * @param FRAMEWORK_INFO
    */
-  public function MIGRATOR_TASK ($info)
+  public function __construct ($info)
   {
-    TASK::TASK ($info->context);
+    parent::__construct ($info->context);
     $this->info = $info;
     $this->ignore_from_version = ! $this->info->exists ();
   }

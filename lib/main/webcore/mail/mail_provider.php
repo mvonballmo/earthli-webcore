@@ -65,9 +65,9 @@ abstract class MAIL_PROVIDER extends LOGGABLE
   /**
    * @param CONTEXT $context
    */
-  public function MAIL_PROVIDER ($context)
+  public function __construct ($context)
   {
-    LOGGABLE::LOGGABLE ($context);
+    parent::__construct ($context);
 
     $class_name = $this->context->final_class_name ('RENDERER', 'webcore/gui/renderer.php');
     $this->renderer = new $class_name ($context);

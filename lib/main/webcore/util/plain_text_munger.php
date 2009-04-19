@@ -395,7 +395,7 @@ class PLAIN_TEXT_MEDIA_REPLACER extends MUNGER_REPLACER
   /**
    * @param string $default_title
    */
-  public function PLAIN_TEXT_MEDIA_REPLACER ($default_title)
+  public function __construct ($default_title)
   {
     $this->_default_title = $default_title;
   }
@@ -1116,9 +1116,9 @@ class TEXT_MUNGER extends MUNGER
  */
 class PLAIN_TEXT_MUNGER extends TEXT_MUNGER
 {
-  public function PLAIN_TEXT_MUNGER ()
+  public function __construct ()
   {
-    TEXT_MUNGER::TEXT_MUNGER ();
+    parent::__construct ();
 
     $this->_default_transformer = new PLAIN_TEXT_PARAGRAPH_TRANSFORMER ();
     $block_transformer = new PLAIN_TEXT_BLOCK_TRANSFORMER ();
@@ -1175,9 +1175,9 @@ class PLAIN_TEXT_TITLE_MUNGER extends TEXT_MUNGER
    */
   public $force_paragraphs = false;
 
-  public function PLAIN_TEXT_TITLE_MUNGER ()
+  public function __construct ()
   {
-    TEXT_MUNGER::TEXT_MUNGER ();
+    parent::__construct ();
 
     $this->_default_transformer = new MUNGER_NOP_TRANSFORMER ();
     $this->register_known_tag ('macro', true);

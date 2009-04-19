@@ -128,9 +128,9 @@ class HISTORY_ITEM extends UNIQUE_OBJECT
   /**
    * @param APPLICATION $app Application for this history item
    */
-  public function HISTORY_ITEM ($app)
+  public function __construct ($app)
   {
-    RENDERABLE::RENDERABLE ($app);
+    parent::__construct ($app);
     $this->time_created = $app->make_date_time ();
   }
 

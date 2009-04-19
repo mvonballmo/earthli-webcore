@@ -53,9 +53,9 @@ class THEME_COMMANDS extends COMMANDS
   /**
    * @param THEME $theme Configure commands for this object.
    */
-  public function THEME_COMMANDS ($theme)
+  public function __construct ($theme)
   {
-    COMMANDS::COMMANDS ($theme->context);
+    parent::__construct ($theme->context);
 
     $cmd = $this->make_command ();
     $cmd->id = 'edit';

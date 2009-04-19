@@ -129,9 +129,9 @@ abstract class NEWSFEED_RENDERER extends WEBCORE_OBJECT
   /**
    * @param CONTEXT $context
    */
-  public function NEWSFEED_RENDERER ($context)
+  public function __construct ($context)
   {
-    WEBCORE_OBJECT::WEBCORE_OBJECT ($context);
+    parent::__construct ($context);
 
     $class_name = $this->page->final_class_name ('PAGE_TITLE', 'webcore/gui/page_title.php');
     $this->title = new $class_name ($this->page);

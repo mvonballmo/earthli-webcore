@@ -136,9 +136,9 @@ class PAGE_NAVIGATOR extends WEBCORE_OBJECT
    * @param integer $num_total_objects Total number of objects that need to be displayed.
    * @param integer $num_objects_per_page Number of objects to show per page.
    */
-  public function PAGE_NAVIGATOR ($context, $num_total_objects = 0, $num_objects_per_page = 0)
+  public function __construct ($context, $num_total_objects = 0, $num_objects_per_page = 0)
   {
-    WEBCORE_OBJECT::WEBCORE_OBJECT ($context);
+    parent::__construct ($context);
     $this->separator = $context->display_options->page_separator;
     if ($num_objects_per_page > 0)
     {

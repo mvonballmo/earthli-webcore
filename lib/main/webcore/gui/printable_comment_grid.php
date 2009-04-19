@@ -78,9 +78,9 @@ abstract class PRINTABLE_COMMENT_GRID extends STANDARD_GRID
    * @param APPLICATION $application
    * @param COMMENT $comment Comments belong to this comment (can be empty).
    */
-  public function PRINTABLE_COMMENT_GRID ($app, $comment)
+  public function __construct ($app, $comment)
   {
-    GRID::GRID ($app);
+    parent::__construct ($app);
     $this->_comment = $comment;
   }
 

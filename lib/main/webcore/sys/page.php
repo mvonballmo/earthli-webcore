@@ -155,13 +155,13 @@ class PAGE extends CONTEXT
   /**
    * @param ENVIRONMENT $env Global environment.
    */
-  public function PAGE ($env)
+  public function __construct ($env)
   {
     $this->inherit_resources_from ($env);
     $this->resolve_to_root = $env->resolve_to_root;
     $this->root_url = $env->url (Url_part_path);
 
-    CONTEXT::CONTEXT ($env);
+    parent::__construct ($env);
 
     $this->is_page = true;
     $this->page = $this;

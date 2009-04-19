@@ -51,10 +51,10 @@ class BRANCH_ENTRY_QUERY extends GENERIC_PROJECT_ENTRY_QUERY
   /**
    * @param BRANCH $branch Branch for which entries are retrieved.
    */
-  public function BRANCH_ENTRY_QUERY ($branch)
+  public function __construct ($branch)
   {
     $folder = $branch->parent_folder ();
-    GENERIC_PROJECT_ENTRY_QUERY::GENERIC_PROJECT_ENTRY_QUERY ($folder);
+    parent::__construct ($folder);
     $this->_branch = $branch;
   }
 

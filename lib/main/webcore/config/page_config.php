@@ -120,7 +120,7 @@ class PAGE_REFRESH_OPTIONS
   /**
    * @param PAGE $page
    */
-  public function PAGE_REFRESH_OPTIONS ($page)
+  public function __construct ($page)
   {
     $this->page  = $page;
   }
@@ -164,7 +164,7 @@ class PAGE_ICON_OPTIONS
   /**
    * @param PAGE $page
    */
-  public function PAGE_ICON_OPTIONS ($page)
+  public function __construct ($page)
   {
     $this->page = $page;
   }
@@ -218,7 +218,7 @@ class PAGE_NEWSFEED_OPTIONS
   /**
    * @param PAGE $page
    */
-  public function PAGE_NEWSFEED_OPTIONS ($page)
+  public function __construct ($page)
   {
     $this->page = $page;
     $class_name = $page->final_class_name ('PAGE_TITLE', 'webcore/gui/page_title.php');

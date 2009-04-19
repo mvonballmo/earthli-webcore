@@ -180,12 +180,12 @@ class APPLICATION extends CONTEXT
   /**
    * @param PAGE $page Page to which this application is attached.
    */
-  public function APPLICATION ($page)
+  public function __construct ($page)
   {
     $this->page = $page;
     $this->inherit_resources_from ($page);
 
-    CONTEXT::CONTEXT ($page->env);
+    parent::__construct ($page->env);
 
     $this->mail_options->copy_from ($page->mail_options);
     $this->display_options->copy_from ($page->display_options);

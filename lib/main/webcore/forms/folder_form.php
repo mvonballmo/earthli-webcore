@@ -51,9 +51,9 @@ class FOLDER_FORM extends OBJECT_IN_FOLDER_FORM
   /**
    * @param FOLDER $folder Edit this folder.
    */
-  public function FOLDER_FORM ($folder)
+  public function __construct ($folder)
   {
-    OBJECT_IN_FOLDER_FORM::OBJECT_IN_FOLDER_FORM ($folder);
+    parent::__construct ($folder);
 
     $field = new URI_FIELD ();
     $field->id = 'icon_url';

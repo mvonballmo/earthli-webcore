@@ -57,9 +57,9 @@ class USER_FOLDER_QUERY extends OBJECT_IN_FOLDER_QUERY
   /**
    * @param APPLICATION $app Main application.
    */
-  public function USER_FOLDER_QUERY ($app)
+  public function __construct ($app)
   {
-    OBJECT_IN_FOLDER_QUERY::OBJECT_IN_FOLDER_QUERY ($app);
+    parent::__construct ($app);
 
     /* Folders may be loaded as another query is executing;
      * make sure not to execute in the existing connection.

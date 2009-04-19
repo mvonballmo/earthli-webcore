@@ -185,9 +185,9 @@ class ALBUM_APPLICATION extends APPLICATION
   /**
    * @param PAGE $page Page to which this application is attached.
    */
-  public function ALBUM_APPLICATION ($page)
+  public function __construct ($page)
   {
-    APPLICATION::APPLICATION ($page);
+    parent::__construct ($page);
 
     $this->set_path (Folder_name_application, '{' . Folder_name_apps . '}albums');
     $this->set_path (Folder_name_attachments, '{' . Folder_name_data . '}albums/attachments');

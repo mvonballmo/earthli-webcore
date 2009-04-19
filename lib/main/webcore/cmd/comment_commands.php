@@ -53,9 +53,9 @@ class COMMENT_COMMANDS extends COMMANDS
   /**
    * @param COMMENT $comment Configure commands for this object.
    */
-  public function COMMENT_COMMANDS ($comment)
+  public function __construct ($comment)
   {
-    COMMANDS::COMMANDS ($comment->app);
+    parent::__construct ($comment->app);
 
     $cmd = $this->make_command ();
     $cmd->id = 'reply';

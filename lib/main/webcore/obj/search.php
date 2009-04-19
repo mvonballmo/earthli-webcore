@@ -118,9 +118,9 @@ abstract class SEARCH extends CONTENT_OBJECT
    * @param APPLICATION $app Main application.
    * @param SEARCH_OBJECT_FIELDS $fields
    */
-  public function SEARCH ($app, $fields)
+  public function __construct ($app, $fields)
   {
-    CONTENT_OBJECT::CONTENT_OBJECT ($app);
+    parent::__construct ($app);
     $this->fields = $fields;
   }
 
@@ -404,10 +404,10 @@ class COMMENT_SEARCH extends OBJECT_IN_FOLDER_SEARCH
   /**
    * @param APPLICATION $app Main application.
    */
-  public function COMMENT_SEARCH ($app)
+  public function __construct ($app)
   {
     $class_name = $app->final_class_name ('SEARCH_OBJECT_IN_FOLDER_FIELDS', 'webcore/forms/search_fields.php');
-    OBJECT_IN_FOLDER_SEARCH::OBJECT_IN_FOLDER_SEARCH ($app, new $class_name ($app));
+    parent::__construct ($app, new $class_name ($app));
   }
 
   /**
@@ -455,10 +455,10 @@ class GROUP_SEARCH extends SEARCH
   /**
    * @param APPLICATION $app Main application.
    */
-  public function GROUP_SEARCH ($app)
+  public function __construct ($app)
   {
     $class_name = $app->final_class_name ('SEARCH_AUDITABLE_FIELDS', 'webcore/forms/search_fields.php');
-    SEARCH::SEARCH ($app, new $class_name ($app));
+    parent::__construct ($app, new $class_name ($app));
   }
 
   /**
@@ -501,10 +501,10 @@ class USER_SEARCH extends SEARCH
   /**
    * @param APPLICATION $app Main application.
    */
-  public function USER_SEARCH ($app)
+  public function __construct ($app)
   {
     $class_name = $app->final_class_name ('SEARCH_USER_OBJECT_FIELDS', 'webcore/forms/search_fields.php');
-    SEARCH::SEARCH ($app, new $class_name ($app));
+    parent::__construct ($app, new $class_name ($app));
   }
 
   /**
@@ -547,10 +547,10 @@ class FOLDER_SEARCH extends OBJECT_IN_FOLDER_SEARCH
   /**
    * @param APPLICATION $app Main application.
    */
-  public function FOLDER_SEARCH ($app)
+  public function __construct ($app)
   {
     $class_name = $app->final_class_name ('SEARCH_FOLDER_FIELDS', 'webcore/forms/search_fields.php');
-    OBJECT_IN_FOLDER_SEARCH::OBJECT_IN_FOLDER_SEARCH ($app, new $class_name ($app));
+    parent::__construct ($app, new $class_name ($app));
   }
 
   /**

@@ -165,9 +165,9 @@ class USER_MULTI_ENTRY_QUERY extends USER_ENTRY_QUERY
   /**
    * @param ALBUM_APPLICATION $app Main application.
    */
-  public function USER_MULTI_ENTRY_QUERY ($app)
+  public function __construct ($app)
   {
-    USER_ENTRY_QUERY::USER_ENTRY_QUERY ($app);
+    parent::__construct ($app);
     $this->set_type ('');
   }
 

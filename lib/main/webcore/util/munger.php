@@ -168,7 +168,7 @@ class MUNGER_TOKEN
    * @param MUNGER_TOKENIZER $owner
    * @param string $data
    */
-  public function MUNGER_TOKEN($owner, $data)
+  public function __construct($owner, $data)
   {
     $this->_owner = $owner;
     $this->_input = $data;
@@ -464,7 +464,7 @@ class MUNGER_TOKENIZER extends RAISABLE
    */
   public $end_tag_char = '/';
 
-  public function MUNGER_TOKENIZER()
+  public function __construct()
   {
     $this->_current_token = $this->_make_token();
   }
@@ -831,7 +831,7 @@ class MUNGER_BASIC_REPLACER extends MUNGER_REPLACER
    * @param string $start_tag
    * @param string $end_tag
    */
-  public function MUNGER_BASIC_REPLACER($start_tag, $end_tag)
+  public function __construct($start_tag, $end_tag)
   {
     $this->_start_tag = $start_tag;
     $this->_end_tag = $end_tag;
@@ -1633,7 +1633,7 @@ class MUNGER_TAG
    * @param MUNGER_TOKEN $token
    * @param MUNGER_TRANSFORMER $transformer
    */
-  public function MUNGER_TAG($token, $transformer, $text)
+  public function __construct($token, $transformer, $text)
   {
     $this->token = clone($token);
     $this->transformer = $transformer;
@@ -1652,7 +1652,7 @@ class MUNGER_TAG
  */
 class MUNGER_PARSER extends RAISABLE
 {
-  public function MUNGER_PARSER()
+  public function __construct()
   {
   }
 

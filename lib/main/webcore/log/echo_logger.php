@@ -60,9 +60,9 @@ class ECHO_LOGGER extends TEXT_OUTPUT_LOGGER
    * to {@link set_is_html()}.
    * @param ENVIRONMENT $env
    */
-  public function ECHO_LOGGER ($env)
+  public function __construct ($env)
   {
-    TEXT_OUTPUT_LOGGER::TEXT_OUTPUT_LOGGER ();
+    parent::__construct ();
     $this->set_is_html ($env->is_http_server ());
   }
 

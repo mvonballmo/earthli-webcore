@@ -51,9 +51,9 @@ class DYNAMIC_TREE extends HTML_TREE
   /**
    * @param CONTEXT $context
    */
-  public function DYNAMIC_TREE ($context)
+  public function __construct ($context)
   {
-    TREE::TREE ($context);
+    parent::__construct ($context);
 
     /* Make a copy. */    
     $this->_layer = $context->make_layer ();

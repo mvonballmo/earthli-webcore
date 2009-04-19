@@ -94,9 +94,9 @@ class EXECUTE_SEARCH_FORM extends ID_BASED_FORM
    * @param APPLICATION $app Main application.
    * @param SEARCH $search Build the form based on this search object.
    */
-  public function EXECUTE_SEARCH_FORM ($app, $search)
+  public function __construct ($app, $search)
   {
-    ID_BASED_FORM::ID_BASED_FORM ($app);
+    parent::__construct ($app);
 
     $this->_search = $search;
     

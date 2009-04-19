@@ -225,14 +225,14 @@ class ENVIRONMENT extends RESOLVER
    */
   public $logger_style_sheet = '{styles}/log.css';
 
-  public function ENVIRONMENT ()
+  public function __construct ()
   {
     $this->date_time_toolkit = global_date_time_toolkit ();
     $this->file_options = global_file_options ();
     $this->url_options = global_url_options ();
     $this->logs = new LOGGER_CONTAINER ();
 
-    RESOLVER::RESOLVER ();
+    parent::__construct ();
 
     $this->auto_detect_os ();
 

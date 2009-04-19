@@ -53,9 +53,9 @@ class SECTION_COMMANDS extends FOLDER_COMMANDS
   /**
    * @param SECTION $folder Configure commands for this object.
    */
-  public function SECTION_COMMANDS ($folder)
+  public function __construct ($folder)
   {
-    FOLDER_COMMANDS::FOLDER_COMMANDS ($folder);
+    parent::__construct ($folder);
 
     $cmd = $this->command_at ('new');
     $cmd->title = 'New section';

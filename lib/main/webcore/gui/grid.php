@@ -149,9 +149,9 @@ abstract class GRID extends WEBCORE_OBJECT
   /**
    * @param APPLICATION $app Main application.
    */
-  public function GRID ($app)
+  public function __construct ($app)
   {
-    WEBCORE_OBJECT::WEBCORE_OBJECT ($app);
+    parent::__construct ($app);
     include_once ('webcore/gui/page_navigator.php');
     $this->paginator = new PAGE_NAVIGATOR ($app);
   }

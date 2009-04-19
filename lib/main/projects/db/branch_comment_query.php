@@ -51,10 +51,10 @@ class BRANCH_COMMENT_QUERY extends FOLDER_MULTI_TYPE_COMMENT_QUERY
   /**
    * @param BRANCH $branch Branch for which comments are retrieved.
    */
-  public function BRANCH_COMMENT_QUERY ($branch)
+  public function __construct ($branch)
   {
     $folder = $branch->parent_folder ();
-    FOLDER_MULTI_TYPE_COMMENT_QUERY::FOLDER_MULTI_TYPE_COMMENT_QUERY ($folder);
+    parent::__construct ($folder);
     $this->_branch = $branch;
 
     $table_names = $this->app->table_names;

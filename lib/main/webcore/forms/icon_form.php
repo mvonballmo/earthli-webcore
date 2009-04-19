@@ -51,9 +51,9 @@ class ICON_FORM extends RENDERABLE_FORM
   /**
    * @param APPLICATION $app Main application.
    */
-  public function ICON_FORM ($app)
+  public function __construct ($app)
   {
-    UNIQUE_OBJECT_FORM::UNIQUE_OBJECT_FORM ($app);
+    parent::__construct ($app);
 
     $field = new MUNGER_TITLE_FIELD ();
     $field->id = 'title';

@@ -51,9 +51,9 @@ class PROJECT_FORM extends FOLDER_FORM
   /**
    * @param PROJECT $folder Project to edit or project in which to add.
    */
-  public function PROJECT_FORM ($folder)
+  public function __construct ($folder)
   {
-    FOLDER_FORM::FOLDER_FORM ($folder);
+    parent::__construct ($folder);
 
     $field = new BOOLEAN_FIELD ();
     $field->id = 'defines_options';

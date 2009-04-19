@@ -55,9 +55,9 @@ class MENU extends WEBCORE_OBJECT
    * Create a menu in the given context.
    * @param CONTEXT $context
    */  
-  public function MENU ($context)
+  public function __construct ($context)
   {
-    WEBCORE_OBJECT::WEBCORE_OBJECT ($context);
+    parent::__construct ($context);
     
     $this->renderer = $this->context->make_menu_renderer ();
     $this->renderer->set_size (Menu_size_full);

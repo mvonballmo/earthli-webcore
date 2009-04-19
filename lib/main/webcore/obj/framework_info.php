@@ -247,9 +247,9 @@ class APPLICATION_CONFIGURATION_INFO extends WEBCORE_OBJECT
   /**
    * @param APPLICATION $app
    */
-  public function APPLICATION_CONFIGURATION_INFO ($app)
+  public function __construct ($app)
   {
-    WEBCORE_OBJECT::WEBCORE_OBJECT ($app);
+    parent::__construct ($app);
     $this->load_from ($app);
   }
   

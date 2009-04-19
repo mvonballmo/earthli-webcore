@@ -51,9 +51,9 @@ class THEME_FORM extends RENDERABLE_FORM
   /**
    * @param APPLICATION $app Main application.
    */
-  public function THEME_FORM ($app)
+  public function __construct ($app)
   {
-    RENDERABLE_FORM::RENDERABLE_FORM ($app);
+    parent::__construct ($app);
 
     $field = new MUNGER_TITLE_FIELD ();
     $field->id = 'title';

@@ -51,9 +51,9 @@ class SEARCH_RECIPE_FIELDS extends SEARCH_DRAFTABLE_FIELDS
   /**
    * @param APPLICATION $app Main application.
    */
-  public function SEARCH_RECIPE_FIELDS ($app)
+  public function __construct ($app)
   {
-    SEARCH_DRAFTABLE_FIELDS::SEARCH_DRAFTABLE_FIELDS ($app);
+    parent::__construct ($app);
 
     $this->_add_text ('originator', 'Originator');
     $this->_add_text ('ingredients', 'Ingredients');

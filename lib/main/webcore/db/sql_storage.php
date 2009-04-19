@@ -110,7 +110,7 @@ class SQL_FIELD
    * @param mixed $value The raw value
    * @param integer $action Which actions is this field used for?
    */
-  public function SQL_FIELD ($id, $type, $value, $action)
+  public function __construct ($id, $type, $value, $action)
   {
     $this->id = $id;
     $this->type = $type;
@@ -196,9 +196,9 @@ class SQL_TABLE extends WEBCORE_OBJECT
    * @param CONTEXT $context
    * @param string $name Name of the database table.
    */
-  public function SQL_TABLE ($context, $name)
+  public function __construct ($context, $name)
   {
-    WEBCORE_OBJECT::WEBCORE_OBJECT ($context);
+    parent::__construct ($context);
     $this->name = $name;
   }
 
@@ -413,11 +413,11 @@ class SQL_STORAGE extends WEBCORE_OBJECT
   /**
    * @param CONTEXT $context
    */
-  public function SQL_STORAGE ($context)
+  public function __construct ($context)
   {
     $this->raise_if_not_is_a ($context, 'CONTEXT', 'QUERY', 'QUERY');
     $context->ensure_database_exists ();   // storage always need a database
-    WEBCORE_OBJECT::WEBCORE_OBJECT ($context);
+    parent::__construct ($context);
   }
   
   /**

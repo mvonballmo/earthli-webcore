@@ -72,9 +72,9 @@ abstract class SEARCH_FIELDS extends WEBCORE_OBJECT
    * @param CONTEXT $context
    * @param string $base_name
    */
-  public function SEARCH_FIELDS ($context, $base_name, $title = '', $sortable = true, $table_name = '')
+  public function __construct ($context, $base_name, $title = '', $sortable = true, $table_name = '')
   {
-    WEBCORE_OBJECT::WEBCORE_OBJECT ($context);
+    parent::__construct ($context);
 
     if (! $title)
     {
@@ -919,9 +919,9 @@ class SEARCH_OBJECT_FIELDS extends WEBCORE_OBJECT
   /**
    * @param CONTEXT $context
    */
-  public function SEARCH_OBJECT_FIELDS ($context)
+  public function __construct ($context)
   {
-    WEBCORE_OBJECT::WEBCORE_OBJECT ($context);
+    parent::__construct ($context);
     $this->_add_synced_field ('search_text', '');
   }
 
@@ -1457,9 +1457,9 @@ class SEARCH_AUDITABLE_FIELDS extends SEARCH_OBJECT_FIELDS
   /**
    * @param CONTEXT $context
    */
-  public function SEARCH_AUDITABLE_FIELDS ($context)
+  public function __construct ($context)
   {
-    SEARCH_OBJECT_FIELDS::SEARCH_OBJECT_FIELDS ($context);
+    parent::__construct ($context);
 
     $this->_add_text ('title', 'Title', true);
 
@@ -1490,9 +1490,9 @@ class SEARCH_CONTENT_OBJECT_FIELDS extends SEARCH_AUDITABLE_FIELDS
   /**
    * @param CONTEXT $context
    */
-  public function SEARCH_CONTENT_OBJECT_FIELDS ($context)
+  public function __construct ($context)
   {
-    SEARCH_AUDITABLE_FIELDS::SEARCH_AUDITABLE_FIELDS ($context);
+    parent::__construct ($context);
 
     $this->_add_text ('description', 'Description', false);
   }
@@ -1516,9 +1516,9 @@ class SEARCH_OBJECT_IN_FOLDER_FIELDS extends SEARCH_CONTENT_OBJECT_FIELDS
   /**
    * @param CONTEXT $context
    */
-  public function SEARCH_OBJECT_IN_FOLDER_FIELDS ($context)
+  public function __construct ($context)
   {
-    SEARCH_CONTENT_OBJECT_FIELDS::SEARCH_CONTENT_OBJECT_FIELDS ($context);
+    parent::__construct ($context);
 
     $this->_add_synced_field ('state', Visible);
     $this->_add_synced_field ('not_state', false);
@@ -1854,9 +1854,9 @@ class SEARCH_DRAFTABLE_FIELDS extends SEARCH_ENTRY_FIELDS
   /**
    * @param APPLICATION $app Main application.
    */
-  public function SEARCH_DRAFTABLE_FIELDS ($app)
+  public function __construct ($app)
   {
-    SEARCH_ENTRY_FIELDS::SEARCH_ENTRY_FIELDS ($app);
+    parent::__construct ($app);
 
     $this->_add_date ('time_published', 'Published');
     $this->_add_user ('publisher_id', 'Publisher');
@@ -1889,9 +1889,9 @@ class SEARCH_USER_OBJECT_FIELDS extends SEARCH_CONTENT_OBJECT_FIELDS
   /**
    * @param APPLICATION $app Main application.
    */
-  public function SEARCH_USER_OBJECT_FIELDS ($app)
+  public function __construct ($app)
   {
-    SEARCH_CONTENT_OBJECT_FIELDS::SEARCH_CONTENT_OBJECT_FIELDS ($app);
+    parent::__construct ($app);
 
     $this->_add_text ('real_first_name', 'First name');
     $this->_add_text ('real_last_name', 'Last name');
@@ -2006,9 +2006,9 @@ class SEARCH_FOLDER_FIELDS extends SEARCH_OBJECT_IN_FOLDER_FIELDS
   /**
    * @param APPLICATION $app Main application.
    */
-  public function SEARCH_FOLDER_FIELDS ($app)
+  public function __construct ($app)
   {
-    SEARCH_OBJECT_IN_FOLDER_FIELDS::SEARCH_OBJECT_IN_FOLDER_FIELDS ($app);
+    parent::__construct ($app);
 
     $this->_add_text ('summary', 'Summary');
   }

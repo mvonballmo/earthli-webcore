@@ -107,9 +107,9 @@ class THEME extends UNIQUE_OBJECT
   /**
    * @param CONTEXT $context
    */
-  public function THEME ($context)
+  public function __construct ($context)
   {
-    RENDERABLE::RENDERABLE ($context);
+    parent::__construct ($context);
     $this->time_created = $context->make_date_time ();
   }
 

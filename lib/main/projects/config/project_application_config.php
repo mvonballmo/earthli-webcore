@@ -337,9 +337,9 @@ class JOB_STATUS_MAP extends WEBCORE_OBJECT
    * @param array[integer] $from
    * @param integer $to
    */
-  public function JOB_STATUS_MAP ($app, $from, $to)
+  public function __construct ($app, $from, $to)
   {
-    WEBCORE_OBJECT::WEBCORE_OBJECT ($app);
+    parent::__construct ($app);
 
     $this->from = join (',', $from);
     $this->to = $to;

@@ -82,9 +82,9 @@ class NEWSFEED_ENGINE extends WEBCORE_OBJECT
   /**
    * @param CONTEXT $context
    */
-  public function NEWSFEED_ENGINE ($context)
+  public function __construct ($context)
   {
-    WEBCORE_OBJECT::WEBCORE_OBJECT ($context);
+    parent::__construct ($context);
     $this->format = read_var ('format', Newsfeed_format_rss);
     $this->content = read_var ('content', Newsfeed_content_html);
   }

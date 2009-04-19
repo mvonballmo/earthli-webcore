@@ -52,9 +52,9 @@ class MULTIPLE_OBJECT_PURGER_FORM extends MULTIPLE_OBJECT_ACTION_FORM
   /**
    * @param APPLICATION $app
    */
-  public function MULTIPLE_OBJECT_PURGER_FORM ($app)
+  public function __construct ($app)
   {
-    MULTIPLE_OBJECT_ACTION_FORM::MULTIPLE_OBJECT_ACTION_FORM ($app);
+    parent::__construct ($app);
     
     $field = new BOOLEAN_FIELD ();
     $field->id = 'remove_resources';

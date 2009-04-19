@@ -52,9 +52,9 @@ class SEND_OBJECT_IN_FOLDER_FORM extends SEND_MULTIPLE_MAIL_FORM
   /**
    * @param APPLICATION $app Main application.
    */
-  public function SEND_OBJECT_IN_FOLDER_FORM ($app)
+  public function __construct ($app)
   {
-    SEND_MULTIPLE_MAIL_FORM::SEND_MULTIPLE_MAIL_FORM ($app);
+    parent::__construct ($app);
 
     $field = new INTEGER_FIELD ();
     $field->id = 'id';

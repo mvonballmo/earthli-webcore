@@ -133,10 +133,10 @@ class CONTEXT extends RESOLVER
   /**
    * @param ENVIRONMENT $env Global environment.
    */
-  public function CONTEXT ($env)
+  public function __construct ($env)
   {
     $this->env = $env;
-    RESOLVER::RESOLVER ();
+    parent::__construct ();
 
     $this->date_time_toolkit = $this->env->date_time_toolkit;
 

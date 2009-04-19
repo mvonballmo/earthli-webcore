@@ -61,9 +61,9 @@ class EXECUTE_TEST_SUITE_FORM extends FORM
   /**
    * @param CONTEXT $context
    */
-  public function EXECUTE_TEST_SUITE_FORM ($context)
+  public function __construct ($context)
   {
-    FORM::FORM ($context);
+    parent::__construct ($context);
 
     $field = new TEXT_FIELD ();
     $field->id = 'test_name';

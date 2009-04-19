@@ -82,9 +82,9 @@ class USER_BROWSER_GRID extends STANDARD_GRID
   /**
    * @param CONTEXT $context
    */
-  public function USER_BROWSER_GRID ($context)
+  public function __construct ($context)
   {
-    GRID::GRID ($context);
+    parent::__construct ($context);
     $this->_controls_renderer = $this->app->make_controls_renderer ();
   }
 

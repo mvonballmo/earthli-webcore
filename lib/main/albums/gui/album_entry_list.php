@@ -51,9 +51,9 @@ class ALBUM_ENTRY_LIST extends SELECT_LIST
   /**
    * @param ALBUM_APPLICATION $app Main application.
    */
-  public function ALBUM_ENTRY_LIST ($app)
+  public function __construct ($app)
   {
-    SELECT_LIST::SELECT_LIST ($app);
+    parent::__construct ($app);
     $this->append_column ('Name');
     $this->append_column ('Date');
   }

@@ -51,10 +51,10 @@ class BRANCH_RELEASE_QUERY extends PROJECT_RELEASE_QUERY
   /**
    * @param BRANCH $branch Branch from which releases are retrieved.
    */
-  public function BRANCH_RELEASE_QUERY ($branch)
+  public function __construct ($branch)
   {
     $folder = $branch->parent_folder ();
-    PROJECT_RELEASE_QUERY::PROJECT_RELEASE_QUERY ($folder);
+    parent::__construct ($folder);
     $this->_branch = $branch;
     $this->set_order ('time_created DESC');
   }

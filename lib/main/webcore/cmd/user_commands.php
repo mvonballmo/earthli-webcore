@@ -53,9 +53,9 @@ class USER_COMMANDS extends COMMANDS
   /**
    * @param USER $user Configure commands for this object.
    */
-  public function USER_COMMANDS ($user)
+  public function __construct ($user)
   {
-    COMMANDS::COMMANDS ($user->app);
+    parent::__construct ($user->app);
 
     $title = urlencode ($user->title);
 

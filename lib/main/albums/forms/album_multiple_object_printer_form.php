@@ -51,7 +51,7 @@ class ALBUM_MULTIPLE_OBJECT_PRINTER_FORM extends MULTIPLE_OBJECT_PRINTER_FORM
   /**
    * @param ALBUM $folder Print objects from this album.
    */
-  public function ALBUM_MULTIPLE_OBJECT_PRINTER_FORM ($folder)
+  public function __construct ($folder)
   {
     parent::MULTIPLE_OBJECT_PRINTER_FORM ($folder);
 

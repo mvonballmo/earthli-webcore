@@ -53,9 +53,9 @@ class GROUP_COMMANDS extends COMMANDS
   /**
    * @param GROUP $group Configure commands for this object.
    */
-  public function GROUP_COMMANDS ($group)
+  public function __construct ($group)
   {
-    COMMANDS::COMMANDS ($group->app);
+    parent::__construct ($group->app);
 
     $cmd = $this->make_command ();
     $cmd->id = 'edit';

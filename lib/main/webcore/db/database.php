@@ -77,7 +77,7 @@ class DATABASE extends DB_Sql
   /**
    * @param ENVIRONMENT $env Global environment.
    */
-  public function DATABASE ($env)
+  public function __construct ($env)
   {
     $this->env = $env;
     $this->Halt_On_Error = "no";

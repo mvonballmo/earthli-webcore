@@ -155,9 +155,9 @@ abstract class FORM extends WEBCORE_OBJECT
   /**
    * @param CONTEXT $context Attach to this object.
    */
-  public function FORM ($context)
+  public function __construct ($context)
   {
-    WEBCORE_OBJECT::WEBCORE_OBJECT ($context);
+    parent::__construct ($context);
 
     $this->page->add_script_file ('{scripts}webcore_forms.js');
 
@@ -1584,9 +1584,9 @@ abstract class ID_BASED_FORM extends FORM
   /**
    * @param APPLICATION $app Main application.
    */
-  public function ID_BASED_FORM ($app)
+  public function __construct ($app)
   {
-    FORM::FORM ($app);
+    parent::__construct ($app);
 
     $field = new INTEGER_FIELD ();
     $field->id = 'id';

@@ -57,9 +57,9 @@ class JOB_SEARCH extends MULTI_ENTRY_SEARCH
   /**
    * @param APPLICATION $app Main application.
    */
-  public function JOB_SEARCH ($app)
+  public function __construct ($app)
   {
-    MULTI_ENTRY_SEARCH::MULTI_ENTRY_SEARCH ($app, new SEARCH_JOB_FIELDS ($app));
+    parent::__construct ($app, new SEARCH_JOB_FIELDS ($app));
   }
 }
 
@@ -80,9 +80,9 @@ class CHANGE_SEARCH extends MULTI_ENTRY_SEARCH
   /**
    * @param APPLICATION $app Main application.
    */
-  public function CHANGE_SEARCH ($app)
+  public function __construct ($app)
   {
-    MULTI_ENTRY_SEARCH::MULTI_ENTRY_SEARCH ($app, new SEARCH_CHANGE_FIELDS ($app));
+    parent::__construct ($app, new SEARCH_CHANGE_FIELDS ($app));
   }
 }
 

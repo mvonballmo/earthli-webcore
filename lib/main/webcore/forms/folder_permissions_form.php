@@ -62,9 +62,9 @@ class FOLDER_PERMISSIONS_FORM extends PERMISSIONS_FORM
   /**
    * @param APPLICATION $app Main application.
    */
-  public function FOLDER_PERMISSIONS_FORM ($app)
+  public function __construct ($app)
   {
-    PERMISSIONS_FORM::PERMISSIONS_FORM ($app);
+    parent::__construct ($app);
 
     $field = new INTEGER_FIELD ();
     $field->id = 'id';

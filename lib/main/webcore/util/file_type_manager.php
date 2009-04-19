@@ -54,9 +54,9 @@ abstract class FILE_TYPE_MANAGER extends WEBCORE_OBJECT
   /**
    * @param CONTEXT $context
    */
-  public function FILE_TYPE_MANAGER ($context)
+  public function __construct ($context)
   {
-    WEBCORE_OBJECT::WEBCORE_OBJECT ($context);
+    parent::__construct ($context);
     $this->_load ();
   }
 

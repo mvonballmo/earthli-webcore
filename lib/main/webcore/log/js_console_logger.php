@@ -111,9 +111,9 @@ class JS_CONSOLE_LOGGER extends TEXT_OUTPUT_LOGGER
   /**
    * @param ENVIRONMENT $env Requires the global environment to check JavaScript capabilities.
    */
-  public function JS_CONSOLE_LOGGER ($env)
+  public function __construct ($env)
   {
-    TEXT_OUTPUT_LOGGER::TEXT_OUTPUT_LOGGER ($env);
+    parent::__construct ($env);
     $this->set_is_html (true);
     $this->env = $env;
     $this->CSS_file_name = $env->logger_style_sheet;

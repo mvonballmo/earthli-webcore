@@ -101,9 +101,9 @@ class FOLDER_PERMISSIONS extends NAMED_OBJECT
   /**
    * @param APPLICATION $app Main application.
    */
-  public function FOLDER_PERMISSIONS ($app)
+  public function __construct ($app)
   {
-    NAMED_OBJECT::NAMED_OBJECT ($app);
+    parent::__construct ($app);
     $this->privileges = $app->make_privileges ();
   }
 
@@ -703,9 +703,9 @@ class PERMISSIONS_FORMATTER extends WEBCORE_OBJECT
   /**
    * @param APPLICATION $app Main application.
    */
-  public function PERMISSIONS_FORMATTER ($app)
+  public function __construct ($app)
   {
-    WEBCORE_OBJECT::WEBCORE_OBJECT ($app);
+    parent::__construct ($app);
 
     $this->_register_formatter (Privilege_range_object, Privilege_view, '{icons}buttons/view', 'View');
     $this->_register_formatter (Privilege_range_object, Privilege_view_history, '{icons}buttons/history', 'View history');
@@ -912,7 +912,7 @@ class PRIVILEGE_GROUP
   /**
    * @param string $t Title of the group.
    */
-  public function PRIVILEGE_GROUP ($t)
+  public function __construct ($t)
   {
     $this->title = $t;
   }
@@ -968,7 +968,7 @@ class PRIVILEGE_MAP
    * @param string $range Can be {@link Privilege_range_object} or {@link
    * Privilege_range_global}.
    */
-  public function PRIVILEGE_MAP ($set_name, $type, $range)
+  public function __construct ($set_name, $type, $range)
   {
     $this->set_name = $set_name;
     $this->type = $type;

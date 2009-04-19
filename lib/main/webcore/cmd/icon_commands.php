@@ -53,9 +53,9 @@ class ICON_COMMANDS extends COMMANDS
   /**
    * @param ICON $icon Configure commands for this object.
    */
-  public function ICON_COMMANDS ($icon)
+  public function __construct ($icon)
   {
-    COMMANDS::COMMANDS ($icon->app);
+    parent::__construct ($icon->app);
     
     $cmd = $this->make_command ();
     $cmd->id = 'edit';

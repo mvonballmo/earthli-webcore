@@ -71,11 +71,11 @@ abstract class QUERY extends WEBCORE_OBJECT
   /**
    * @param CONTEXT $context Attach the query to this object.
    */
-  public function QUERY ($context)
+  public function __construct ($context)
   {
     $this->raise_if_not_is_a ($context, 'CONTEXT', 'QUERY', 'QUERY');
     $context->ensure_database_exists ();   // queries always need a database
-    WEBCORE_OBJECT::WEBCORE_OBJECT ($context);
+    parent::__construct ($context);
 
     $this->_restrictions = array ();
     $this->_system_restrictions = array ();
@@ -1567,7 +1567,7 @@ class QUERY_BASED_CACHE extends RAISABLE
 	/**
    * @param QUERY $query Retrieve objects using this query.
    */
-  public function QUERY_BASED_CACHE ($query)
+  public function __construct ($query)
   {
     /* Make sure the query is its own reference, so changes to the
        query elsewhere don't affect which objects can be returned. */
@@ -1636,7 +1636,7 @@ class QUERY_ITERATOR extends RAISABLE
   /**
    * @param QUERY $query Retrieve objects using this query.
    */
-  public function QUERY_ITERATOR ($query)
+  public function __construct ($query)
   {
     /* Make sure the query is its own reference, so changes to the
        query elsewhere don't affect which objects can be returned. */

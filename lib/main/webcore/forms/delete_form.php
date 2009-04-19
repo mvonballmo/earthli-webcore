@@ -127,9 +127,9 @@ class DELETE_OBJECT_FORM extends PURGE_OBJECT_FORM
    * @param APPLICATION $app Main application.
    * @param string $set_name
    */
-  public function DELETE_OBJECT_FORM ($app, $set_name)
+  public function __construct ($app, $set_name)
   {
-    PURGE_OBJECT_FORM::PURGE_OBJECT_FORM ($app);
+    parent::__construct ($app);
 
     $this->_privilege_set = $set_name;
 
@@ -263,9 +263,9 @@ class DELETE_OBJECT_IN_FOLDER_FORM extends DELETE_OBJECT_FORM
    * @param FOLDER $folder Deleting content from this folder.
    * @param string $set_name
    */
-  public function DELETE_OBJECT_IN_FOLDER_FORM ($folder, $set_name)
+  public function __construct ($folder, $set_name)
   {
-    DELETE_OBJECT_FORM::DELETE_OBJECT_FORM ($folder->app, $set_name);
+    parent::__construct ($folder->app, $set_name);
     $this->_folder = $folder;
   }
 

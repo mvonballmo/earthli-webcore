@@ -53,9 +53,9 @@ class PICTURE_COMMANDS extends ENTRY_COMMANDS
   /**
    * @param PICTURE $entry Configure commands for this picture.
    */
-  public function PICTURE_COMMANDS ($entry)
+  public function __construct ($entry)
   {
-    ENTRY_COMMANDS::ENTRY_COMMANDS ($entry);
+    parent::__construct ($entry);
 
     $cmd = $this->command_at ('edit');
     $cmd->link = "edit_picture.php?id=$entry->id";

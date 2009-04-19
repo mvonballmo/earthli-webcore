@@ -61,9 +61,9 @@ class USER_SUBSCRIPTION_OPTIONS_FORM extends SUBSCRIPTION_FORM
   /**
    * @param APPLICATION $app Main application.
    */
-  public function USER_SUBSCRIPTION_OPTIONS_FORM ($app)
+  public function __construct ($app)
   {
-    SUBSCRIPTION_FORM::SUBSCRIPTION_FORM ($app);
+    parent::__construct ($app);
 
     $field = new EMAIL_FIELD ();
     $field->id = 'new_email';

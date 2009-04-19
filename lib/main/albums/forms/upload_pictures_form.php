@@ -58,9 +58,9 @@ class UPLOAD_PICTURES_FORM extends ID_BASED_FORM
    */
   public $button_icon = '{icons}buttons/upload';
 
-  public function UPLOAD_PICTURES_FORM ($folder)
+  public function __construct ($folder)
   {
-    ID_BASED_FORM::ID_BASED_FORM ($folder->context);
+    parent::__construct ($folder->context);
 
     $this->_folder = $folder;
 

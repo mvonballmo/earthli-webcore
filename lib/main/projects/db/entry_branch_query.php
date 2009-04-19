@@ -57,9 +57,9 @@ class PROJECT_ENTRY_BRANCH_INFO_QUERY extends QUERY
   /**
    * @param ENTRY $entry Entry for which branches are retrieved.
    */
-  public function PROJECT_ENTRY_BRANCH_INFO_QUERY ($entry)
+  public function __construct ($entry)
   {
-    QUERY::QUERY ($entry->app);
+    parent::__construct ($entry->app);
     $this->_entry = $entry;
   }
 
@@ -150,9 +150,9 @@ class JOB_BRANCH_INFO_QUERY extends PROJECT_ENTRY_BRANCH_INFO_QUERY
   /**
    * @param ENTRY $entry Entry for which branches are retrieved.
    */
-  public function JOB_BRANCH_INFO_QUERY ($entry)
+  public function __construct ($entry)
   {
-    PROJECT_ENTRY_BRANCH_INFO_QUERY::PROJECT_ENTRY_BRANCH_INFO_QUERY ($entry);
+    parent::__construct ($entry);
     $this->add_select ('jtob.*');
     $this->add_table ("{$this->app->table_names->jobs_to_branches} jtob", 'etob.id = jtob.entry_to_branch_id');
   }
@@ -180,9 +180,9 @@ class CHANGE_BRANCH_INFO_QUERY extends PROJECT_ENTRY_BRANCH_INFO_QUERY
   /**
    * @param ENTRY $entry Entry for which branches are retrieved.
    */
-  public function CHANGE_BRANCH_INFO_QUERY ($entry)
+  public function __construct ($entry)
   {
-    PROJECT_ENTRY_BRANCH_INFO_QUERY::PROJECT_ENTRY_BRANCH_INFO_QUERY ($entry);
+    parent::__construct ($entry);
     $this->add_select ('ctob.*');
     $this->add_table ("{$this->app->table_names->changes_to_branches} ctob", 'etob.id = ctob.entry_to_branch_id');
   }

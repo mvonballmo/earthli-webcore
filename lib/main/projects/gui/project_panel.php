@@ -531,10 +531,10 @@ class PROJECT_BRANCH_PANEL_MANAGER extends WEBCORE_PANEL_MANAGER
   /**
    * @param PROJECT $folder Project for which to show panels.
    */
-  public function PROJECT_BRANCH_PANEL_MANAGER ($branch)
+  public function __construct ($branch)
   {
     $this->_branch = $branch;
-    WEBCORE_PANEL_MANAGER::WEBCORE_PANEL_MANAGER ($branch->app);
+    parent::__construct ($branch->app);
   }
   
   /**
@@ -660,10 +660,10 @@ class PROJECT_RELEASE_PANEL_MANAGER extends WEBCORE_PANEL_MANAGER
   /**
    * @param PROJECT $folder Project for which to show panels.
    */
-  public function PROJECT_RELEASE_PANEL_MANAGER ($release)
+  public function __construct ($release)
   {
     $this->_release = $release;
-    WEBCORE_PANEL_MANAGER::WEBCORE_PANEL_MANAGER ($release->app);
+    parent::__construct ($release->app);
   }
 
   /**
@@ -767,10 +767,10 @@ class PROJECT_COMPONENT_PANEL_MANAGER extends WEBCORE_PANEL_MANAGER
   /**
    * @param PROJECT $folder Project for which to show panels.
    */
-  public function PROJECT_COMPONENT_PANEL_MANAGER ($component)
+  public function __construct ($component)
   {
     $this->_component = $component;
-    WEBCORE_PANEL_MANAGER::WEBCORE_PANEL_MANAGER ($component->app);
+    parent::__construct ($component->app);
   }
 
   /**

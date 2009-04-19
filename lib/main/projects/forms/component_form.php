@@ -52,9 +52,9 @@ class COMPONENT_FORM extends OBJECT_IN_FOLDER_FORM
   /**
    * @param APPLICATION $folder
    */
-  public function COMPONENT_FORM ($folder)
+  public function __construct ($folder)
   {
-    OBJECT_IN_FOLDER_FORM::OBJECT_IN_FOLDER_FORM ($folder);
+    parent::__construct ($folder);
 
     $field = new URI_FIELD ();
     $field->id = 'icon_url';

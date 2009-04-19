@@ -57,9 +57,9 @@ class PCL_ARCHIVE extends ARCHIVE
   /**
    * @param string $file_name
    */
-  public function PCL_ARCHIVE ($file_name)
+  public function __construct ($file_name)
   {
-    ARCHIVE::ARCHIVE ($file_name);
+    parent::__construct ($file_name);
     $this->register_handler ('PCL_ZIP_FILE', '');
   }
 }
@@ -76,9 +76,9 @@ class PCL_ARCHIVE extends ARCHIVE
  */
 class PCL_ZIP_FILE extends COMPRESSED_FILE
 {
-  public function PCL_ZIP_FILE ($file_name)
+  public function __construct ($file_name)
   {
-    COMPRESSED_FILE::COMPRESSED_FILE ($file_name);
+    parent::__construct ($file_name);
     $this->_entries = 0;
   }
 
@@ -159,9 +159,9 @@ class PCL_ZIP_ENTRY extends COMPRESSED_FILE_ENTRY
    * @param $PclZip $zip Reference to a object.
    * @param object $entry The entry from which to extract. 
    */
-  public function PCL_ZIP_ENTRY ($file, $zip, $entry)
+  public function __construct ($file, $zip, $entry)
   {
-    COMPRESSED_FILE_ENTRY::COMPRESSED_FILE_ENTRY ($file);
+    parent::__construct ($file);
     $this->_zip = $zip;
     $this->_entry = $entry;
     $this->_index = $entry ['index'];

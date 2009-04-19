@@ -72,9 +72,9 @@ class EXECUTE_TASK_FORM extends FORM
   /**
    * @param APPLICATION $app Main application.
    */
-  public function EXECUTE_TASK_FORM ($app)
+  public function __construct ($app)
   {
-    FORM::FORM ($app);
+    parent::__construct ($app);
 
     $field = new TEXT_FIELD ();
     $field->id = 'test_name';

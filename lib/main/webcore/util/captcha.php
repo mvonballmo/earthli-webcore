@@ -52,7 +52,7 @@ abstract class CAPTCHA extends WEBCORE_OBJECT
   /**
    * Automatically generates an initial expression.
    */
-  public function CAPTCHA ()
+  public function __construct ()
   {
     $this->generate ();
   }
@@ -139,7 +139,7 @@ class NUMERIC_CAPTCHA extends CAPTCHA
   /**
    * Automatically generates an initial expression.
    */
-  public function NUMERIC_CAPTCHA ()
+  public function __construct ()
   {
     $this->generate ();
   }

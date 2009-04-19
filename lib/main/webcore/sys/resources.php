@@ -109,7 +109,7 @@ class RESOURCE_MANAGER extends RAISABLE
    */
   public $caching_enabled = true;
 
-  public function RESOURCE_MANAGER ()
+  public function __construct ()
   {
     $this->_url_options = global_url_options ();
     $this->_text_options = global_text_options ();

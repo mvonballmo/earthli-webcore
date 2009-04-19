@@ -53,9 +53,9 @@ class ALBUM_COMMANDS extends FOLDER_COMMANDS
   /**
    * @param ALBUM $folder Configure commands for this object.
    */
-  public function ALBUM_COMMANDS ($folder)
+  public function __construct ($folder)
   {
-    FOLDER_COMMANDS::FOLDER_COMMANDS ($folder);
+    parent::__construct ($folder);
 
     $cmd = $this->command_at ('new');
     $cmd->icon = '{app_icons}buttons/new_album';

@@ -51,9 +51,9 @@ class FOLDER_GROUP_PERMISSIONS_FORM extends FOLDER_PERMISSIONS_FORM
   /**
    * @param GROUP $group Edit this group's permissions.
    */
-  public function FOLDER_GROUP_PERMISSIONS_FORM ($group)
+  public function __construct ($group)
   {
-    FOLDER_PERMISSIONS_FORM::FOLDER_PERMISSIONS_FORM ($group->app);
+    parent::__construct ($group->app);
 
     $this->_group = $group;
 

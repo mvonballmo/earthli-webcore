@@ -51,9 +51,9 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
   /**
    * @param PROJECT $folder Project in which to add or edit the PROJECT_ENTRY.
    */
-  public function PROJECT_ENTRY_FORM ($folder)
+  public function __construct ($folder)
   {
-    ENTRY_FORM::ENTRY_FORM ($folder);
+    parent::__construct ($folder);
 
     $field = new MUNGER_TEXT_FIELD ();
     $field->id = 'extra_description';

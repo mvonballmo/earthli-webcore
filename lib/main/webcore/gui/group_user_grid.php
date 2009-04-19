@@ -81,9 +81,9 @@ class GROUP_USER_GRID extends STANDARD_GRID
   /**
    * @param GROUP $group Show users from this group.
    */
-  public function GROUP_USER_GRID ($group)
+  public function __construct ($group)
   {
-    GRID::GRID ($group->app);
+    parent::__construct ($group->app);
     $this->_group_id = $group->id;
     $this->_controls_renderer = $this->app->make_controls_renderer ();
   }

@@ -51,9 +51,9 @@ class ALBUM_FORM extends FOLDER_FORM
   /**
    * @param ALBUM $folder Album to edit or create.
    */
-  public function ALBUM_FORM ($folder)
+  public function __construct ($folder)
   {
-    FOLDER_FORM::FOLDER_FORM ($folder);
+    parent::__construct ($folder);
 
     $field = new URI_FIELD ();
     $field->id = 'url_root';

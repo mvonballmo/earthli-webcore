@@ -123,7 +123,7 @@ class TEXT_TABLE_RENDERER
   /**
    * @param RENDERER $renderer Use this renderer to display the finished table.
    */
-  public function TEXT_TABLE_RENDERER ($renderer)
+  public function __construct ($renderer)
   {
     $this->_renderer = $renderer;
   }

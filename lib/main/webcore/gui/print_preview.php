@@ -74,9 +74,9 @@ class ENTRY_PRINT_RENDERER extends WEBCORE_OBJECT
   /**
    * @param PRINT_PREVIEW $preview Render an entry for this print preview.
    */
-  public function ENTRY_PRINT_RENDERER ($preview)
+  public function __construct ($preview)
   {
-    WEBCORE_OBJECT::WEBCORE_OBJECT ($preview->app);
+    parent::__construct ($preview->app);
     $this->preview = $preview;
   }
 
@@ -210,9 +210,9 @@ class PRINT_PREVIEW extends WEBCORE_OBJECT
    */
   public $options;
 
-  public function PRINT_PREVIEW ($app)
+  public function __construct ($app)
   {
-    WEBCORE_OBJECT::WEBCORE_OBJECT ($app);
+    parent::__construct ($app);
 
     $this->options = $this->_make_print_options ();
     $this->options->load_from_request ();

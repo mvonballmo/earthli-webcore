@@ -75,9 +75,9 @@ class JOB extends PROJECT_ENTRY
   /**
    * @param PROJECT_APPLICATION $app Main application.
    */
-  public function JOB ($app)
+  public function __construct ($app)
   {
-    PROJECT_ENTRY::PROJECT_ENTRY ($app);
+    parent::__construct ($app);
 
     $this->time_needed = $app->make_date_time ();
     $this->time_assignee_changed = $app->make_date_time ();
@@ -462,9 +462,9 @@ class JOB_BRANCH_INFO extends PROJECT_ENTRY_BRANCH_INFO
   /**
    * @param JOB $entry Branch info is attached to this job.
    */
-  public function JOB_BRANCH_INFO ($entry)
+  public function __construct ($entry)
   {
-    PROJECT_ENTRY_BRANCH_INFO::PROJECT_ENTRY_BRANCH_INFO ($entry);
+    parent::__construct ($entry);
 
     $this->time_closed = $this->app->make_date_time ();
     $this->time_status_changed = $this->app->make_date_time ();

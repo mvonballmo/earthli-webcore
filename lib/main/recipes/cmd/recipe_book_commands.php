@@ -53,9 +53,9 @@ class RECIPE_BOOK_COMMANDS extends FOLDER_COMMANDS
   /**
    * @param RECIPE_BOOK $folder Configure commands for this object.
    */
-  public function RECIPE_BOOK_COMMANDS ($folder)
+  public function __construct ($folder)
   {
-    FOLDER_COMMANDS::FOLDER_COMMANDS ($folder);
+    parent::__construct ($folder);
 
     $cmd = $this->command_at ('new');
     $cmd->title = 'New recipe book';

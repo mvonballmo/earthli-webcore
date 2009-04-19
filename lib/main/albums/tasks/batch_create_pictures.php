@@ -112,9 +112,9 @@ class BATCH_CREATE_PICTURES_TASK extends TASK
   /**
    * @param FOLDER $folder Create pictures in this folder.
    */
-  public function BATCH_CREATE_PICTURES_TASK ($folder)
+  public function __construct ($folder)
   {
-    TASK::TASK ($folder->context);
+    parent::__construct ($folder->context);
     $this->_folder = $folder;
   }
 

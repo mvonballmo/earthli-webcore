@@ -61,9 +61,9 @@ class PERMISSIONS_INHERITANCE_FORM extends ID_BASED_FORM
   /**
    * @param APPLICATION $app Main application.
    */
-  public function PERMISSIONS_INHERITANCE_FORM ($app)
+  public function __construct ($app)
   {
-    ID_BASED_FORM::ID_BASED_FORM ($app);
+    parent::__construct ($app);
 
     $field = new BOOLEAN_FIELD ();
     $field->id = 'defined';

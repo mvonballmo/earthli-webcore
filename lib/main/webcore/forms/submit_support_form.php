@@ -51,9 +51,9 @@ class SUBMIT_SUPPORT_FORM extends SEND_MAIL_FORM
   /**
    * @param CONTEXT $context
    */
-  public function SUBMIT_SUPPORT_FORM ($context)
+  public function __construct ($context)
   {
-    SEND_MAIL_FORM::SEND_MAIL_FORM ($context);
+    parent::__construct ($context);
 
     $this->set_required ('sender_name', false);
     $this->set_required ('sender_email', false);

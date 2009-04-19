@@ -52,9 +52,9 @@ class SEND_ATTACHMENT_FORM extends SEND_OBJECT_IN_FOLDER_FORM
   /**
    * @param APPLICATION $app Main application.
    */
-  public function SEND_ATTACHMENT_FORM ($app)
+  public function __construct ($app)
   {
-    SEND_OBJECT_IN_FOLDER_FORM::SEND_OBJECT_IN_FOLDER_FORM ($app);
+    parent::__construct ($app);
 
     $field = new TEXT_FIELD ();
     $field->id = 'type';

@@ -51,9 +51,9 @@ class SEARCH_PROJECT_ENTRY_FIELDS extends SEARCH_ENTRY_FIELDS
   /**
    * @param APPLICATION $app Main application.
    */
-  public function SEARCH_PROJECT_ENTRY_FIELDS ($app)
+  public function __construct ($app)
   {
-    SEARCH_ENTRY_FIELDS::SEARCH_ENTRY_FIELDS ($app);
+    parent::__construct ($app);
 
     $this->_add_text ('extra_description', 'Extra description');
 
@@ -236,9 +236,9 @@ class SEARCH_JOB_FIELDS extends SEARCH_PROJECT_ENTRY_FIELDS
   /**
    * @param APPLICATION $app Main application.
    */
-  public function SEARCH_JOB_FIELDS ($app)
+  public function __construct ($app)
   {
-    SEARCH_PROJECT_ENTRY_FIELDS::SEARCH_PROJECT_ENTRY_FIELDS ($app);
+    parent::__construct ($app);
   }
 }
 
@@ -254,9 +254,9 @@ class SEARCH_CHANGE_FIELDS extends SEARCH_PROJECT_ENTRY_FIELDS
   /**
    * @param APPLICATION $app Main application.
    */
-  public function SEARCH_CHANGE_FIELDS ($app)
+  public function __construct ($app)
   {
-    SEARCH_PROJECT_ENTRY_FIELDS::SEARCH_PROJECT_ENTRY_FIELDS ($app);
+    parent::__construct ($app);
 
     $this->_add_text ('files', 'Files', false, false, 'chng');
   }

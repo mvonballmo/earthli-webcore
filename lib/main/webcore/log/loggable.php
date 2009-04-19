@@ -70,9 +70,9 @@ class LOGGABLE extends WEBCORE_OBJECT
   /**
    * @param CONTEXT $context
    */
-  public function LOGGABLE ($context)
+  public function __construct ($context)
   {
-    WEBCORE_OBJECT::WEBCORE_OBJECT ($context);
+    parent::__construct ($context);
     $this->logs = new LOGGER_CONTAINER ();
   }
 

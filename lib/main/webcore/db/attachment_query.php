@@ -57,11 +57,11 @@ class ATTACHMENT_QUERY extends OBJECT_IN_SINGLE_FOLDER_QUERY
   /**
    * @param ATTACHMENT_HOST $host
    */
-  public function ATTACHMENT_QUERY ($host)
+  public function __construct ($host)
   {
     $this->_host = $host;
     $folder = $host->parent_folder ();
-    OBJECT_IN_SINGLE_FOLDER_QUERY::OBJECT_IN_SINGLE_FOLDER_QUERY ($folder);
+    parent::__construct ($folder);
   }
 
   /**

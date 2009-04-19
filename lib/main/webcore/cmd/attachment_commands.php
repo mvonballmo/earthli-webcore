@@ -53,9 +53,9 @@ class ATTACHMENT_COMMANDS extends COMMANDS
   /**
    * @param ATTACHMENT $attachment Configure commands for this attachment.
    */
-  public function ATTACHMENT_COMMANDS ($attachment)
+  public function __construct ($attachment)
   {
-    COMMANDS::COMMANDS ($attachment->app);
+    parent::__construct ($attachment->app);
 
     $cmd = $this->make_command ();
     $cmd->id = 'edit';

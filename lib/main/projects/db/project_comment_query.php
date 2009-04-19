@@ -51,9 +51,9 @@ class PROJECT_COMMENT_QUERY extends FOLDER_MULTI_TYPE_COMMENT_QUERY
   /**
    * @param FOLDER $folder Folder from which comments are retrieved.
    */
-  public function PROJECT_COMMENT_QUERY ($folder)
+  public function __construct ($folder)
   {
-    FOLDER_MULTI_TYPE_COMMENT_QUERY::FOLDER_MULTI_TYPE_COMMENT_QUERY ($folder);
+    parent::__construct ($folder);
 
     $this->add_select ('entry.kind as entry_kind, chng.number as chng_number, chng.job_id as chng_job_id' .
                        ', job.status as job_status, job.priority as job_priority, job.closer_id as job_closer_id' .

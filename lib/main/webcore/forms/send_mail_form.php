@@ -69,9 +69,9 @@ abstract class SEND_MAIL_FORM extends PREVIEWABLE_FORM
   /**
    * @param CONTEXT $context
    */
-  public function SEND_MAIL_FORM ($context)
+  public function __construct ($context)
   {
-    PREVIEWABLE_FORM::PREVIEWABLE_FORM ($context);
+    parent::__construct ($context);
 
     $field = new MUNGER_TITLE_FIELD ();
     $field->id = 'subject';

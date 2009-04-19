@@ -59,9 +59,9 @@ class MULTIPLE_OBJECT_MOVER_FORM extends MULTIPLE_OBJECT_ACTION_FORM
   /**
    * @param FOLDER $folder Objects are from this folder.
    */
-  public function MULTIPLE_OBJECT_MOVER_FORM ($folder)
+  public function __construct ($folder)
   {
-    MULTIPLE_OBJECT_ACTION_FORM::MULTIPLE_OBJECT_ACTION_FORM ($folder);
+    parent::__construct ($folder);
 
     $field = new INTEGER_FIELD ();
     $field->id = 'selected_folder_id';
@@ -263,9 +263,9 @@ class MULTIPLE_DRAFTABLE_OBJECT_MOVER_FORM extends MULTIPLE_OBJECT_MOVER_FORM
    * @param FOLDER $folder Objects are from this folder.
    * @param FOLDER $target Move objects to this folder.
    */
-  public function MULTIPLE_DRAFTABLE_OBJECT_MOVER_FORM ($folder)
+  public function __construct ($folder)
   {
-    MULTIPLE_OBJECT_MOVER_FORM::MULTIPLE_OBJECT_MOVER_FORM ($folder);
+    parent::__construct ($folder);
 
     $field = $this->field_at ('copy_as_draft');
     $field->visible = true;

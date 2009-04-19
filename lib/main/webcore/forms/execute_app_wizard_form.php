@@ -66,9 +66,9 @@ class EXECUTE_APP_WIZARD_FORM extends FORM
   /**
    * @param CONTEXT $context
    */
-  public function EXECUTE_APP_WIZARD_FORM ($context)
+  public function __construct ($context)
   {
-    FORM::FORM ($context);
+    parent::__construct ($context);
 
     $field = new TEXT_FIELD ();
     $field->id = 'app_title';

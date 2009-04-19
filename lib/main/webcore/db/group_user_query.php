@@ -51,9 +51,9 @@ class GROUP_USER_QUERY extends USER_QUERY
   /**
    * @param GROUP $group Retrieve users in this group.
    */
-  public function GROUP_USER_QUERY ($group)
+  public function __construct ($group)
   {
-    USER_QUERY::USER_QUERY ($group->app);
+    parent::__construct ($group->app);
 
     $this->_group = $group;
 

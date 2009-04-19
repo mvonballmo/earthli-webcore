@@ -53,9 +53,9 @@ abstract class SUBSCRIPTION_PANEL extends PANEL
    * @param PANEL_MANAGER $manager Owner of this panel.
    * @param SUBSCRIBER $subscriber Show subscriptions for this user.
    */
-  public function SUBSCRIPTION_PANEL ($manager, $subscriber)
+  public function __construct ($manager, $subscriber)
   {
-    PANEL::PANEL ($manager);
+    parent::__construct ($manager);
     $this->_subscriber = $subscriber;
   }
 
@@ -159,9 +159,9 @@ class FOLDER_SUBSCRIPTION_PANEL extends FORM_BASED_SUBSCRIPTION_PANEL
    * @param PANEL_MANAGER $manager Owner of this panel.
    * @param SUBSCRIBER $subscriber Show subscriptions for this user.
    */
-  public function FOLDER_SUBSCRIPTION_PANEL ($manager, $subscriber)
+  public function __construct ($manager, $subscriber)
   {
-    FORM_BASED_SUBSCRIPTION_PANEL::FORM_BASED_SUBSCRIPTION_PANEL ($manager, $subscriber);
+    parent::__construct ($manager, $subscriber);
     $type_info = $this->app->type_info_for ('FOLDER', 'webcore/obj/folder.php');
     $this->id = $type_info->id;
     $this->title = $type_info->plural_title;
@@ -233,9 +233,9 @@ class ENTRY_SUBSCRIPTION_PANEL extends FORM_BASED_SUBSCRIPTION_PANEL
    * @param SUBSCRIBER $subscriber Show subscriptions for this user.
    * @param TYPE_INFO $type_info
    */
-  public function ENTRY_SUBSCRIPTION_PANEL ($manager, $subscriber, $type_info)
+  public function __construct ($manager, $subscriber, $type_info)
   {
-    FORM_BASED_SUBSCRIPTION_PANEL::FORM_BASED_SUBSCRIPTION_PANEL ($manager, $subscriber);
+    parent::__construct ($manager, $subscriber);
     $this->_type_info = $type_info;
     $this->id = $type_info->id;
     $this->title = $type_info->plural_title;
@@ -628,10 +628,10 @@ class SUBSCRIPTION_PANEL_MANAGER extends PANEL_MANAGER
   /**
    * @param SUBSCRIBER $subscriber Show settings for this subscriber.
    */
-  public function SUBSCRIPTION_PANEL_MANAGER ($subscriber)
+  public function __construct ($subscriber)
   {
     $this->_subscriber = $subscriber;
-    PANEL_MANAGER::PANEL_MANAGER ($subscriber->app, false);
+    parent::__construct ($subscriber->app, false);
   }
 
   /**

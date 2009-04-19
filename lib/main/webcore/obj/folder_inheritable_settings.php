@@ -68,9 +68,9 @@ abstract class FOLDER_INHERITABLE_SETTINGS extends STORABLE
   /**
    * @param FOLDER $folder Attached to this folder.
    */
-  public function FOLDER_INHERITABLE_SETTINGS ($folder)
+  public function __construct ($folder)
   {
-    STORABLE::STORABLE ($folder->app);
+    parent::__construct ($folder->app);
     $this->attach_to ($folder);
   }
 

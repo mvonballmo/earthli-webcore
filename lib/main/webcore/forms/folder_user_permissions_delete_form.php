@@ -53,9 +53,9 @@ class FOLDER_USER_PERMISSIONS_DELETE_FORM extends DELETE_FORM
   /**
    * @param USER $user Delete this user's folder permissions.
    */
-  public function FOLDER_USER_PERMISSIONS_DELETE_FORM ($user)
+  public function __construct ($user)
   {
-    DELETE_FORM::DELETE_FORM ($user->app);
+    parent::__construct ($user->app);
 
     $this->_user = $user;
 

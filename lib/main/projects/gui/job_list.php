@@ -62,9 +62,9 @@ class JOB_LIST extends SELECT_LIST
   /**
    * @param PROJECT_APPLICATION $app Main application.
    */
-  public function JOB_LIST ($app)
+  public function __construct ($app)
   {
-    SELECT_LIST::SELECT_LIST ($app);
+    parent::__construct ($app);
     $this->append_column ('Name');
     $this->append_column ('Age');
     $this->append_column ('Priority');

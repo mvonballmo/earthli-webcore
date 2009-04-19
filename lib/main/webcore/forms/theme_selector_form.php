@@ -57,9 +57,9 @@ class THEME_SELECTOR_FORM extends FORM
    * @param APPLICATION $app Main application.
    * @param array[THEME] $themes List of available themes.
    */
-  public function THEME_SELECTOR_FORM ($page, $themes)
+  public function __construct ($page, $themes)
   {
-    FORM::FORM ($page);
+    parent::__construct ($page);
 
     $this->_themes = $themes;
 

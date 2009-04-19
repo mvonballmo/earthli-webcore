@@ -113,7 +113,7 @@ class URL_OPTIONS extends FILE_OPTIONS
    */
   public $main_domain;
 
-  public function URL_OPTIONS ()
+  public function __construct ()
   {
     $this->domains = array ('http://localhost' => $_SERVER ['DOCUMENT_ROOT']);
   }
@@ -131,7 +131,7 @@ class URL
   /**
    * @param string $text Initial path.
    */
-  public function URL ($text)
+  public function __construct ($text)
   {
     $this->_text = urldecode ($text);
   }
@@ -795,9 +795,9 @@ class FILE_URL extends URL
    * @param CONTEXT $context
    * @param string $text Initial path.
    */
-  public function FILE_URL ($text)
+  public function __construct ($text)
   {
-    URL::URL ($text);
+    parent::__construct ($text);
     $this->_text = str_replace ('/', $this->path_delimiter (), $this->_text);
   }
 

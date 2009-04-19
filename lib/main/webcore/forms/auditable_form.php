@@ -52,9 +52,9 @@ abstract class AUDITABLE_FORM extends RENDERABLE_FORM
   /**
    * @param APPLICATION $app Main application.
    */
-  public function AUDITABLE_FORM ($app)
+  public function __construct ($app)
   {
-    RENDERABLE_FORM::RENDERABLE_FORM ($app);
+    parent::__construct ($app);
 
     $field = new ENUMERATED_FIELD ();
     $field->id = 'publication_state';

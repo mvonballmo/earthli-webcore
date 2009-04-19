@@ -112,9 +112,9 @@ class PANEL_MANAGER extends WEBCORE_OBJECT
    * @param APPLICATION $app Main application.
    * @param boolean $show_time_menu Show a TIME_FRAME_SELECTOR with the panels?
    */
-  public function PANEL_MANAGER ($app, $show_time_menu = true)
+  public function __construct ($app, $show_time_menu = true)
   {
-    WEBCORE_OBJECT::WEBCORE_OBJECT ($app);
+    parent::__construct ($app);
 
     if ($show_time_menu)
     {
@@ -555,9 +555,9 @@ abstract class PANEL extends WEBCORE_OBJECT
   /**
    * @param PANEL_MANAGER $manager Owner of this panel.
    */
-  public function PANEL ($manager)
+  public function __construct ($manager)
   {
-    WEBCORE_OBJECT::WEBCORE_OBJECT ($manager->app);
+    parent::__construct ($manager->app);
     $this->_panel_manager = $manager;
   }
 
@@ -853,10 +853,10 @@ class INDEX_PANEL_MANAGER extends WEBCORE_PANEL_MANAGER
    * @param array[FOLDER] $folders Show panels for these folders.
    * @see FOLDER
    */
-  public function INDEX_PANEL_MANAGER ($app, $folders)
+  public function __construct ($app, $folders)
   {
     $this->_folders = $folders;
-    WEBCORE_PANEL_MANAGER::WEBCORE_PANEL_MANAGER ($app);
+    parent::__construct ($app);
   }
 
   /**
@@ -928,11 +928,11 @@ class INDEX_PANEL_MANAGER extends WEBCORE_PANEL_MANAGER
  */
 class FOLDER_PANEL_MANAGER extends WEBCORE_PANEL_MANAGER
 {
-  public function FOLDER_PANEL_MANAGER ($folder)
+  public function __construct ($folder)
   {
     $this->_folder = $folder;
 
-    WEBCORE_PANEL_MANAGER::WEBCORE_PANEL_MANAGER ($folder->app);
+    parent::__construct ($folder->app);
 
     $this->page_link = $folder->replace_page_arguments ($this->page_link);
   }
@@ -979,11 +979,11 @@ class FOLDER_PANEL_MANAGER extends WEBCORE_PANEL_MANAGER
  */
 class USER_PANEL_MANAGER extends WEBCORE_PANEL_MANAGER
 {
-  public function USER_PANEL_MANAGER ($user)
+  public function __construct ($user)
   {
     $this->_user = $user;
 
-    WEBCORE_PANEL_MANAGER::WEBCORE_PANEL_MANAGER ($user->app);
+    parent::__construct ($user->app);
 
     $this->page_link = $user->replace_page_arguments ($this->page_link);
   }
@@ -1133,9 +1133,9 @@ abstract class QUERY_PANEL extends GRID_PANEL
    * @param PANEL_MANAGER $manager Owner of this panel.
    * @param QUERY $query Show objects from this query.
    */
-  public function QUERY_PANEL ($manager, $query)
+  public function __construct ($manager, $query)
   {
-    GRID_PANEL::GRID_PANEL ($manager);
+    parent::__construct ($manager);
     $this->query = $query;
   }
 
@@ -1255,9 +1255,9 @@ class GROUP_PANEL extends QUERY_PANEL
    * @param PANEL_MANAGER $manager Owner of this panel.
    * @param QUERY $query Show objects from this query.
    */
-  public function GROUP_PANEL ($manager, $query)
+  public function __construct ($manager, $query)
   {
-    QUERY_PANEL::QUERY_PANEL ($manager, $query);
+    parent::__construct ($manager, $query);
     $this->visible = $this->app->login->is_allowed (Privilege_set_group, Privilege_view);
   }
 
@@ -1310,9 +1310,9 @@ class USER_PANEL extends QUERY_PANEL
    * @param PANEL_MANAGER $manager Owner of this panel.
    * @param QUERY $query Show objects from this query.
    */
-  public function USER_PANEL ($manager, $query)
+  public function __construct ($manager, $query)
   {
-    QUERY_PANEL::QUERY_PANEL ($manager, $query);
+    parent::__construct ($manager, $query);
     $this->visible = $this->app->login->is_allowed (Privilege_set_user, Privilege_view);
   }
 
@@ -1387,9 +1387,9 @@ class THEME_PANEL extends QUERY_PANEL
    * @param PANEL_MANAGER $manager Owner of this panel.
    * @param QUERY $query Show objects from this query.
    */
-  public function THEME_PANEL ($manager, $query)
+  public function __construct ($manager, $query)
   {
-    QUERY_PANEL::QUERY_PANEL ($manager, $query);
+    parent::__construct ($manager, $query);
     $this->visible = $this->app->login->is_allowed (Privilege_set_global, Privilege_resources);
   }
 
@@ -1454,9 +1454,9 @@ class ICON_PANEL extends QUERY_PANEL
    * @param PANEL_MANAGER $manager Owner of this panel.
    * @param QUERY $query Show objects from this query.
    */
-  public function ICON_PANEL ($manager, $query)
+  public function __construct ($manager, $query)
   {
-    QUERY_PANEL::QUERY_PANEL ($manager, $query);
+    parent::__construct ($manager, $query);
     $this->visible = $this->app->login->is_allowed (Privilege_set_global, Privilege_resources);
   }
 
@@ -1504,9 +1504,9 @@ class ENTRY_PANEL extends QUERY_PANEL
    * @param PANEL_MANAGER $manager Owner of this panel.
    * @param QUERY $query Show objects from this query.
    */
-  public function ENTRY_PANEL ($manager, $query, $type_info = null)
+  public function __construct ($manager, $query, $type_info = null)
   {
-    QUERY_PANEL::QUERY_PANEL ($manager, $query);
+    parent::__construct ($manager, $query);
     if (! isset ($type_info))
     {
       $type_info = $this->app->type_info_for ('ENTRY', 'webcore/obj/entry.php');
@@ -1573,9 +1573,9 @@ class FOLDER_PANEL extends GRID_PANEL
    * @param array[FOLDER] $folders Show this list of folders in this panel.
    * @see FOLDER
    */
-  public function FOLDER_PANEL ($manager, $folders)
+  public function __construct ($manager, $folders)
   {
-    PANEL::PANEL ($manager);
+    parent::__construct ($manager);
     $this->folders = $folders;
     $type_info = $this->app->type_info_for ('FOLDER', 'webcore/obj/folder.php');
     $this->id = $type_info->id;
@@ -1706,9 +1706,9 @@ class USER_SUMMARY_PANEL extends PANEL
    * @param USER_PANEL_MANAGER $panel_manager
    * @param USER $user
    */
-  public function USER_SUMMARY_PANEL ($panel_manager, $user)
+  public function __construct ($panel_manager, $user)
   {
-    PANEL::PANEL ($panel_manager);
+    parent::__construct ($panel_manager);
     $this->_user = $user;
   }
 

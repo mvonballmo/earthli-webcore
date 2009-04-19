@@ -75,9 +75,9 @@ class ALBUM_CALENDAR extends BASIC_CALENDAR
   /**
    * @param ALBUM $folder Show calendar for this album.
    */
-  public function ALBUM_CALENDAR ($album)
+  public function __construct ($album)
   {
-    BASIC_CALENDAR::BASIC_CALENDAR ($album->app);
+    parent::__construct ($album->app);
 
     $this->album = $album;
     $this->set_ranges ($album->first_day, $album->last_day);

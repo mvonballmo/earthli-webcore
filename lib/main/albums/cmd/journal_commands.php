@@ -53,9 +53,9 @@ class JOURNAL_COMMANDS extends ENTRY_COMMANDS
   /**
    * @param JOURNAL $entry Configure commands for this journal entry.
    */
-  public function JOURNAL_COMMANDS ($entry)
+  public function __construct ($entry)
   {
-    ENTRY_COMMANDS::ENTRY_COMMANDS ($entry);
+    parent::__construct ($entry);
 
     $cmd = $this->command_at ('edit');
     $cmd->link = "edit_journal.php?id=$entry->id";

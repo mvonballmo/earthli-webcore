@@ -84,9 +84,9 @@ class CHECK_SUBSCRIPTIONS_FORM extends ID_BASED_FORM
   /**
    * @param APPLICATION $app Main application.
    */
-  public function CHECK_SUBSCRIPTIONS_FORM ($app)
+  public function __construct ($app)
   {
-    ID_BASED_FORM::ID_BASED_FORM ($app);
+    parent::__construct ($app);
 
     $field = new EMAIL_FIELD ();
     $field->id = 'email';

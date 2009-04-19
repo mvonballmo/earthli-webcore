@@ -51,9 +51,9 @@ class ALBUM_ENTRY_FORM extends ENTRY_FORM
   /**
    * @param ALBUM $folder Album in which to add or edit the picture.
    */
-  public function ALBUM_ENTRY_FORM ($folder)
+  public function __construct ($folder)
   {
-    ENTRY_FORM::ENTRY_FORM ($folder);
+    parent::__construct ($folder);
 
     $field = new DATE_TIME_FIELD ();
     $field->id = 'day';

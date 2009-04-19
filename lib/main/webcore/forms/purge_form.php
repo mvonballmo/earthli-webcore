@@ -70,9 +70,9 @@ class PURGE_OBJECT_FORM extends RENDERABLE_FORM
   /**
    * @param APPLICATION $app
    */
-  public function PURGE_OBJECT_FORM ($app)
+  public function __construct ($app)
   {
-    RENDERABLE_FORM::RENDERABLE_FORM ($app);
+    parent::__construct ($app);
     
     $field = new BOOLEAN_FIELD ();
     $field->id = 'remove_resources';

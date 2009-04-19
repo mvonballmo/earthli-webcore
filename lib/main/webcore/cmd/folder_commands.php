@@ -53,9 +53,9 @@ class FOLDER_COMMANDS extends COMMANDS
   /**
    * @param FOLDER $folder Return commands for this object.
    */
-  public function FOLDER_COMMANDS ($folder)
+  public function __construct ($folder)
   {
-    COMMANDS::COMMANDS ($folder->app);
+    parent::__construct ($folder->app);
 
     $this->append_group ('Edit');
     $this->_add_editors ($folder);

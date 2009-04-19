@@ -51,9 +51,9 @@ class COMMENT_FORM extends ATTACHMENT_HOST_FORM
   /**
    * @param FOLDER $folder Object belongs in this folder.
    */
-  public function COMMENT_FORM ($folder)
+  public function __construct ($folder)
   {
-    ATTACHMENT_HOST_FORM::ATTACHMENT_HOST_FORM ($folder);
+    parent::__construct ($folder);
 
     // make title optional for comments
 

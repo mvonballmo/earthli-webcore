@@ -51,9 +51,9 @@ class RECIPE_FORM extends DRAFTABLE_ENTRY_FORM
   /**
    * @param RECIPE_BOOK $folder Add or create recipes in this recipe book.
    */
-  public function RECIPE_FORM ($folder)
+  public function __construct ($folder)
   {
-    DRAFTABLE_ENTRY_FORM::DRAFTABLE_ENTRY_FORM ($folder);
+    parent::__construct ($folder);
 
     $field = new MUNGER_TITLE_FIELD ();
     $field->id = 'originator';

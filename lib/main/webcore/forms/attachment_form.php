@@ -56,10 +56,10 @@ class ATTACHMENT_FORM extends OBJECT_IN_FOLDER_FORM
   /**
    * @param ENTRY $entry Will be attached to this object.
    */
-  public function ATTACHMENT_FORM ($entry)
+  public function __construct ($entry)
   {
     $folder = $entry->parent_folder ();
-    OBJECT_IN_FOLDER_FORM::OBJECT_IN_FOLDER_FORM ($folder);
+    parent::__construct ($folder);
 
     $this->_entry = $entry;
 

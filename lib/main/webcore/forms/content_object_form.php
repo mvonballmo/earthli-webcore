@@ -51,9 +51,9 @@ class CONTENT_OBJECT_FORM extends AUDITABLE_FORM
   /**
    * @param APPLICATION $app
    */
-  public function CONTENT_OBJECT_FORM ($app)
+  public function __construct ($app)
   {
-    AUDITABLE_FORM::AUDITABLE_FORM ($app);
+    parent::__construct ($app);
 
     $field = new MUNGER_TITLE_FIELD ();
     $field->id = 'title';

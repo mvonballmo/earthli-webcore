@@ -153,9 +153,9 @@ class NEWS_APPLICATION extends DRAFTABLE_APPLICATION
   /**
    * @param PAGE $page Page to which this application is attached.
    */
-  public function NEWS_APPLICATION ($page)
+  public function __construct ($page)
   {
-    APPLICATION::APPLICATION ($page);
+    parent::__construct ($page);
 
     $this->set_path (Folder_name_application, '{' . Folder_name_apps . '}news');
     $this->set_path (Folder_name_attachments, '{' . Folder_name_data . '}news/attachments');

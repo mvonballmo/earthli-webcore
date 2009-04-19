@@ -58,9 +58,9 @@ class EXECUTE_MIGRATOR_TASK_FORM extends EXECUTE_TASK_FORM
   /**
    * @param FRAMEWORK_INFO $app Main application.
    */
-  public function EXECUTE_MIGRATOR_TASK_FORM ($app)
+  public function __construct ($app)
   {
-    EXECUTE_TASK_FORM::EXECUTE_TASK_FORM ($app);
+    parent::__construct ($app);
 
     $field = new BOOLEAN_FIELD ();
     $field->id = 'ignore_from_version';

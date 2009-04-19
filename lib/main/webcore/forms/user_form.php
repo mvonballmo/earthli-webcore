@@ -52,9 +52,9 @@ class USER_FORM extends CONTENT_OBJECT_FORM
   /**
    * @param APPLICATION $app Main application.
    */
-  public function USER_FORM ($app)
+  public function __construct ($app)
   {
-    CONTENT_OBJECT_FORM::CONTENT_OBJECT_FORM ($app);
+    parent::__construct ($app);
 
     $field = new TEXT_FIELD ();
     $field->id = 'name';

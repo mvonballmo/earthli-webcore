@@ -51,7 +51,7 @@ class TREE_NODE
    * @param boolean $closed Is this node closed by default?
    * @param string $target Target the link to this frame.
    */
-  public function TREE_NODE ($title, $link = '', $closed = true, $target = '')
+  public function __construct ($title, $link = '', $closed = true, $target = '')
   {
     static $id;
     $id += 1;

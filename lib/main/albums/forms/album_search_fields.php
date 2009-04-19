@@ -51,9 +51,9 @@ class SEARCH_PICTURE_FIELDS extends SEARCH_ENTRY_FIELDS
   /**
    * @param APPLICATION $app Main application.
    */
-  public function SEARCH_PICTURE_FIELDS ($app)
+  public function __construct ($app)
   {
-    SEARCH_ENTRY_FIELDS::SEARCH_ENTRY_FIELDS ($app);
+    parent::__construct ($app);
 
     $this->_add_text ('file_name', 'File name', false, false, 'pic');
   }
@@ -71,9 +71,9 @@ class SEARCH_JOURNAL_FIELDS extends SEARCH_ENTRY_FIELDS
   /**
    * @param APPLICATION $app Main application.
    */
-  public function SEARCH_JOURNAL_FIELDS ($app)
+  public function __construct ($app)
   {
-    SEARCH_ENTRY_FIELDS::SEARCH_ENTRY_FIELDS ($app);
+    parent::__construct ($app);
 
     $this->_add_text ('weather', 'Weather', false, false, 'jrnl');
 

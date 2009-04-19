@@ -57,9 +57,9 @@ class RECIPE_SEARCH extends ENTRY_SEARCH
   /**
    * @param APPLICATION $app Main application.
    */
-  public function RECIPE_SEARCH ($app)
+  public function __construct ($app)
   {
-    ENTRY_SEARCH::ENTRY_SEARCH ($app, new SEARCH_RECIPE_FIELDS ($app));
+    parent::__construct ($app, new SEARCH_RECIPE_FIELDS ($app));
   }
 }
 

@@ -162,9 +162,9 @@ class SUBSCRIBER extends UNIQUE_OBJECT
   /**
    * @param APPLICATION $app
    */
-  public function SUBSCRIBER ($app)
+  public function __construct ($app)
   {
-    UNIQUE_OBJECT::UNIQUE_OBJECT ($app);
+    parent::__construct ($app);
     $this->time_messages_sent = $app->make_date_time ();
   }
 

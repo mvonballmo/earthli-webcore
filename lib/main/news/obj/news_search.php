@@ -57,9 +57,9 @@ class ARTICLE_SEARCH extends ENTRY_SEARCH
   /**
    * @param APPLICATION $app Main application.
    */
-  public function ARTICLE_SEARCH ($app)
+  public function __construct ($app)
   {
-    ENTRY_SEARCH::ENTRY_SEARCH ($app, new SEARCH_DRAFTABLE_FIELDS ($app));
+    parent::__construct ($app, new SEARCH_DRAFTABLE_FIELDS ($app));
   }
 }
 

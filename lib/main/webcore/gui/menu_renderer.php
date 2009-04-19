@@ -184,9 +184,9 @@ class MENU_RENDERER extends WEBCORE_OBJECT
   /**
    * @param CONTEXT $context
    */
-  public function MENU_RENDERER ($context)
+  public function __construct ($context)
   {
-    WEBCORE_OBJECT::WEBCORE_OBJECT ($context);
+    parent::__construct ($context);
     $browser = $this->env->browser ();
     $this->_supports_css_2 = $browser->supports (Browser_CSS_2);
     $this->_is_ie = $browser->is (Browser_ie);

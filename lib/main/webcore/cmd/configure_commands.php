@@ -55,9 +55,9 @@ class CONFIGURE_COMMANDS extends COMMANDS
   /**
    * @param APPLICATION_CONFIGURATION_INFO $info
    */
-  public function CONFIGURE_COMMANDS ($info)
+  public function __construct ($info)
   {
-    COMMANDS::COMMANDS ($info->app);
+    parent::__construct ($info->app);
 
     $cmd = $this->make_command ();
     $cmd->id = 'publish';

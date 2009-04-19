@@ -63,9 +63,9 @@ class PERMISSIONS_QUERY extends QUERY
   /**
    * @param APPLICATION $app Main application.
    */
-  public function PERMISSIONS_QUERY ($app)
+  public function __construct ($app)
   {
-    QUERY::QUERY ($app);
+    parent::__construct ($app);
 
     $this->_select = 'perm.*';
     $this->_order = 'kind DESC, importance DESC';
@@ -125,9 +125,9 @@ class FOLDER_PERMISSIONS_QUERY extends PERMISSIONS_QUERY
   /**
    * @param FOLDER $folder Retrieve permissions for this folder.
    */
-  public function FOLDER_PERMISSIONS_QUERY ($folder)
+  public function __construct ($folder)
   {
-    PERMISSIONS_QUERY::PERMISSIONS_QUERY ($folder->app);
+    parent::__construct ($folder->app);
     $this->_folder = $folder;
   }
 

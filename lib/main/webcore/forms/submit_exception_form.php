@@ -51,9 +51,9 @@ class SUBMIT_EXCEPTION_FORM extends SEND_MAIL_FORM
   /**
    * @param CONTEXT $context
    */
-  public function SUBMIT_EXCEPTION_FORM ($context)
+  public function __construct ($context)
   {
-    SEND_MAIL_FORM::SEND_MAIL_FORM ($context);
+    parent::__construct ($context);
 
     $field = new BOOLEAN_FIELD ();
     $field->id = 'include_browser_info';

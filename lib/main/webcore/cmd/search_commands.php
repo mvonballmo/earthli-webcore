@@ -53,9 +53,9 @@ class SEARCH_COMMANDS extends COMMANDS
   /**
    * @param SEARCH $search Configure commands for this object.
    */
-  public function SEARCH_COMMANDS ($search)
+  public function __construct ($search)
   {
-    COMMANDS::COMMANDS ($search->app);
+    parent::__construct ($search->app);
 
     $cmd = $this->make_command ();
     $cmd->id = 'edit';

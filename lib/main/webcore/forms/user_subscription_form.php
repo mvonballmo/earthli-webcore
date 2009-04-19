@@ -58,9 +58,9 @@ class USER_SUBSCRIPTION_FORM extends CONTENT_OBJECT_SUBSCRIPTION_FORM
   /**
    * @param APPLICATION $app Main application.
    */
-  public function USER_SUBSCRIPTION_FORM ($app)
+  public function __construct ($app)
   {
-    CONTENT_OBJECT_SUBSCRIPTION_FORM::CONTENT_OBJECT_SUBSCRIPTION_FORM ($app);
+    parent::__construct ($app);
     $this->_type_info = $this->app->type_info_for ('USER');
   }
 

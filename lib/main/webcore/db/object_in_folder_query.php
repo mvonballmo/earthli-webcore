@@ -189,9 +189,9 @@ abstract class OBJECT_IN_SINGLE_FOLDER_QUERY extends OBJECT_IN_FOLDER_QUERY
    * Builds a query for an object in a folder.
    * @param FOLDER $folder
    */
-  public function OBJECT_IN_SINGLE_FOLDER_QUERY ($folder)
+  public function __construct ($folder)
   {
-    OBJECT_IN_FOLDER_QUERY::OBJECT_IN_FOLDER_QUERY ($folder->app);
+    parent::__construct ($folder->app);
     $this->_folder = $folder;
   }
 

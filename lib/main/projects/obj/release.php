@@ -90,9 +90,9 @@ class RELEASE extends OBJECT_IN_FOLDER
   /**
    * @param PROJECT_APPLICATION $app Main application.
    */
-  public function RELEASE ($app)
+  public function __construct ($app)
   {
-    OBJECT_IN_FOLDER::OBJECT_IN_FOLDER ($app);
+    parent::__construct ($app);
 
     $this->time_scheduled = $app->make_date_time ();
     $this->time_testing_scheduled = $app->make_date_time ();

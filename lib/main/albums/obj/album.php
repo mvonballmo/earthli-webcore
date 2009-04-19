@@ -192,9 +192,9 @@ class ALBUM extends FOLDER
   /**
    * @param ALBUM_APPLICATION $app Main application.
    */
-  public function ALBUM ($app)
+  public function __construct ($app)
   {
-    FOLDER::FOLDER ($app);
+    parent::__construct ($app);
 
     include_once ('webcore/sys/date_time.php');
     $this->first_day = $app->make_date_time ();

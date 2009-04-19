@@ -56,9 +56,9 @@ class EXPLORER_COMMANDS extends COMMANDS
    * @param FOLDER $folder Configure commands for this object.
    * @param string $form_name Commands are created using this form name.
    */
-  public function EXPLORER_COMMANDS ($folder, $form_name)
+  public function __construct ($folder, $form_name)
   {
-    COMMANDS::COMMANDS ($folder->app);
+    parent::__construct ($folder->app);
 
     $cmd = $this->make_command ();
     $cmd->id = 'print';
@@ -140,9 +140,9 @@ class DRAFTABLE_EXPLORER_COMMANDS extends EXPLORER_COMMANDS
    * @param FOLDER $folder Configure commands for this object.
    * @param string $form_name Commands are created using this form name.
    */
-  public function DRAFTABLE_EXPLORER_COMMANDS ($folder, $form_name)
+  public function __construct ($folder, $form_name)
   {
-    EXPLORER_COMMANDS::EXPLORER_COMMANDS ($folder, $form_name);
+    parent::__construct ($folder, $form_name);
 
     $cmd = $this->make_command ();
     $cmd->id = 'publish';

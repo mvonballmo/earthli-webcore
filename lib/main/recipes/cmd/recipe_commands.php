@@ -53,9 +53,9 @@ class RECIPE_COMMANDS extends DRAFTABLE_ENTRY_COMMANDS
   /**
    * @param RECIPE $entry Configure commands for this object.
    */
-  public function RECIPE_COMMANDS ($entry)
+  public function __construct ($entry)
   {
-    ENTRY_COMMANDS::ENTRY_COMMANDS ($entry);
+    parent::__construct ($entry);
 
     $cmd = $this->command_at ('edit');
     $cmd->link = "edit_recipe.php?id=$entry->id";

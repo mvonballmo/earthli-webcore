@@ -52,9 +52,9 @@ class BOX_RENDERER extends WEBCORE_OBJECT
   /**
    * @param CONTEXT $context
    */
-  public function BOX_RENDERER ($context)
+  public function __construct ($context)
   {
-    WEBCORE_OBJECT::WEBCORE_OBJECT ($context);
+    parent::__construct ($context);
     $browser = $this->env->browser ();
     $this->_supports_css_tables = $browser->supports (Browser_CSS_Tables);
   }

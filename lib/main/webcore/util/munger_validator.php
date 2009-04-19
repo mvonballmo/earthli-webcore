@@ -74,7 +74,7 @@ class MUNGER_VALIDATOR_TAG
    * @param integer $line_number
    * @param integer $column
    */
-  public function MUNGER_VALIDATOR_TAG ($token, $line_number, $column)
+  public function __construct ($token, $line_number, $column)
   {
     $this->token = clone($token);
     $this->line_number = $line_number;
@@ -109,7 +109,7 @@ class MUNGER_VALIDATOR_TAG_INFO
    * @param boolean $has_end_tag
    * @param array[string] $properties
    */
-  public function MUNGER_VALIDATOR_TAG_INFO ($has_end_tag, $properties = null)
+  public function __construct ($has_end_tag, $properties = null)
   {
     $this->has_end_tag = $has_end_tag;
 
@@ -420,9 +420,9 @@ class MUNGER_VALIDATOR extends MUNGER_PARSER
  */
 class MUNGER_BASE_VALIDATOR extends MUNGER_VALIDATOR
 {
-  public function MUNGER_BASE_VALIDATOR ()
+  public function __construct ()
   {
-    MUNGER_VALIDATOR::MUNGER_VALIDATOR ();
+    parent::__construct ();
 
     $standard_tag_info = new MUNGER_VALIDATOR_TAG_INFO (true, array ('class', 'style', 'title'));
     $this->register_known_tag ('macro', new MUNGER_VALIDATOR_TAG_INFO (false, array('convert')));
@@ -460,9 +460,9 @@ class MUNGER_DEFAULT_TITLE_VALIDATOR extends MUNGER_BASE_VALIDATOR
  */
 class MUNGER_DEFAULT_TEXT_VALIDATOR extends MUNGER_BASE_VALIDATOR
 {
-  public function MUNGER_DEFAULT_TEXT_VALIDATOR ()
+  public function __construct ()
   {
-    MUNGER_BASE_VALIDATOR::MUNGER_BASE_VALIDATOR ();
+    parent::__construct ();
 
     $standard_tag_info = new MUNGER_VALIDATOR_TAG_INFO (true);
     $base_tag_props = array ('class', 'style', 'author', 'href', 'source', 'date');

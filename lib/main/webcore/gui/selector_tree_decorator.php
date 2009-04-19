@@ -104,9 +104,9 @@ class MULTI_SELECTOR_TREE_DECORATOR extends TREE_DECORATOR
    * @param TREE $tree Decorate this tree.
    * @param array[integer] $selected_node_ids Initially selected node ids
    */
-  public function MULTI_SELECTOR_TREE_DECORATOR ($tree, $selected_node_ids)
+  public function __construct ($tree, $selected_node_ids)
   {
-    TREE_DECORATOR::TREE_DECORATOR ($tree);
+    parent::__construct ($tree);
     $this->selected_node_ids = $selected_node_ids;
   }
 

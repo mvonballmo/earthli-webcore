@@ -146,7 +146,7 @@ class CONTEXT_DISPLAY_OPTIONS
   /**
    * @param CONTEXT $context
    */
-  public function CONTEXT_DISPLAY_OPTIONS ($context)
+  public function __construct ($context)
   {
     $this->context = $context;
   }

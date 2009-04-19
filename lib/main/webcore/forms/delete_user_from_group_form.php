@@ -56,9 +56,9 @@ class DELETE_USER_FROM_GROUP_FORM extends ID_BASED_FORM
   /**
    * @param USER $user Delete this user.
    */
-  public function DELETE_USER_FROM_GROUP_FORM ($user)
+  public function __construct ($user)
   {
-    ID_BASED_FORM::ID_BASED_FORM ($user->app);
+    parent::__construct ($user->app);
 
     $this->_user = $user;
 

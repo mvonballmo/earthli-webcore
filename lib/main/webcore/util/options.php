@@ -58,9 +58,9 @@ class STORED_OPTION extends WEBCORE_OBJECT
    * @param CONTEXT $context
    * @param string $name
    */
-  public function STORED_OPTION ($context, $name)
+  public function __construct ($context, $name)
   {
-    WEBCORE_OBJECT::WEBCORE_OBJECT ($context);
+    parent::__construct ($context);
     $this->name = $name;
   }
 

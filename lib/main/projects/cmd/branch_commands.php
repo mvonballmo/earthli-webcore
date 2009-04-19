@@ -53,9 +53,9 @@ class BRANCH_COMMANDS extends COMMANDS
   /**
    * @param BRANCH $obj Configure commands for this branch.
    */
-  public function BRANCH_COMMANDS ($obj)
+  public function __construct ($obj)
   {
-    COMMANDS::COMMANDS ($obj->app);
+    parent::__construct ($obj->app);
 
     $cmd = $this->make_command ();
     $this->append_group ('Edit');

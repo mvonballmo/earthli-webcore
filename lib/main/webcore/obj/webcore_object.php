@@ -57,7 +57,7 @@ class WEBCORE_OBJECT extends RAISABLE
   /**
    * @param CONTEXT $context Page or application object to which this one belongs.
    */
-  public function WEBCORE_OBJECT ($context)
+  public function __construct ($context)
   {
     $this->assert (isset ($context), "[context] cannot be empty.", 'WEBCORE_OBJECT', 'WEBCORE_OBJECT');
 

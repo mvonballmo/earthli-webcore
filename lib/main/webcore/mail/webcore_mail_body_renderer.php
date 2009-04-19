@@ -72,9 +72,9 @@ class MAIL_TOC_ENTRY_RENDERER extends RENDERER
    * Create a table of contents group.
    * @param MAIL_TOC_RENDERER $toc
    */
-  public function MAIL_TOC_ENTRY_RENDERER ($toc, $group)
+  public function __construct ($toc, $group)
   {
-    RENDERER::RENDERER ($toc->context);
+    parent::__construct ($toc->context);
     $this->toc = $toc;
     $this->group = $group;
   }
@@ -337,9 +337,9 @@ class MAIL_TOC_GROUP_RENDERER extends RENDERER
    * @param MAIL_TOC_RENDERER $toc
    * @param object $obj
    */
-  public function MAIL_TOC_GROUP_RENDERER ($toc, $obj)
+  public function __construct ($toc, $obj)
   {
-    RENDERER::RENDERER ($toc->context);
+    parent::__construct ($toc->context);
     $this->subject = new PUBLISHER_MESSAGE_SUBJECT ($toc->context);
     $this->toc = $toc;
     if (is_a ($obj, 'OBJECT_IN_FOLDER'))
@@ -543,9 +543,9 @@ class MAIL_TOC_RENDERER extends RENDERER
    * @param CONTEXT $context
    * @param array[MAIL_BODY_RENDERER_OBJECT] $pairs
    */
-  public function MAIL_TOC_RENDERER ($context, $pairs)
+  public function __construct ($context, $pairs)
   {
-    RENDERER::RENDERER ($context);
+    parent::__construct ($context);
 
     $entry = null;
     $group = null;

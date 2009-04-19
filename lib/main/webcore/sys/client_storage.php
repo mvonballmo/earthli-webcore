@@ -80,7 +80,7 @@ abstract class CLIENT_STORAGE extends RAISABLE
    */
   public $prefix = '';
   
-  public function CLIENT_STORAGE ()
+  public function __construct ()
   {
     $this->expire_date = new DATE_TIME ();
     $this->expire_when_session_ends ();

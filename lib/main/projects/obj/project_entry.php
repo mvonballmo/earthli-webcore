@@ -82,9 +82,9 @@ abstract class PROJECT_ENTRY extends MULTI_TYPE_ENTRY
   /**
    * @param PROJECT_APPLICATION $app Main application.
    */
-  public function PROJECT_ENTRY ($app)
+  public function __construct ($app)
   {
-    MULTI_TYPE_ENTRY::MULTI_TYPE_ENTRY ($app);
+    parent::__construct ($app);
 
     $this->_main_branch_info = $this->_make_branch_info ();
   }
@@ -452,9 +452,9 @@ abstract class PROJECT_ENTRY_BRANCH_INFO extends UNIQUE_OBJECT
   /**
    * @param PROJECT_ENTRY $entry Branch info is attached to this project entry.
    */
-  public function PROJECT_ENTRY_BRANCH_INFO ($entry)
+  public function __construct ($entry)
   {
-    UNIQUE_OBJECT::UNIQUE_OBJECT ($entry->app);
+    parent::__construct ($entry->app);
     $this->_entry = $entry;
   }
 

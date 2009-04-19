@@ -222,9 +222,9 @@ class FOLDER_MULTI_ENTRY_QUERY extends FOLDER_ENTRY_QUERY
   /**
    * @param FOLDER $folder Retrieve entries from this folder.
    */
-  public function FOLDER_MULTI_ENTRY_QUERY ($folder)
+  public function __construct ($folder)
   {
-    FOLDER_ENTRY_QUERY::FOLDER_ENTRY_QUERY ($folder);
+    parent::__construct ($folder);
     $this->set_type ('');
   }
   

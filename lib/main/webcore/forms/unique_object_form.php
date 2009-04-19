@@ -54,9 +54,9 @@ abstract class UNIQUE_OBJECT_FORM extends STORABLE_FORM
   /**
    * @param CONTEXT $context.
    */
-  public function UNIQUE_OBJECT_FORM ($context)
+  public function __construct ($context)
   {
-    STORABLE_FORM::STORABLE_FORM ($context);
+    parent::__construct ($context);
 
     $field = new INTEGER_FIELD ();
     $field->id = 'id';

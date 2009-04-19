@@ -53,9 +53,9 @@ class RELEASE_COMMANDS extends COMMANDS
   /**
    * @param RELEASE $obj Configure commands for this object.
    */
-  public function RELEASE_COMMANDS ($obj)
+  public function __construct ($obj)
   {
-    COMMANDS::COMMANDS ($obj->app);
+    parent::__construct ($obj->app);
 
     $this->append_group ('Edit');
 

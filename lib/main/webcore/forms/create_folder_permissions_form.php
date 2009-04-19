@@ -57,9 +57,9 @@ class CREATE_FOLDER_PERMISSIONS_FORM extends ID_BASED_FORM
   /**
    * @param APPLICATION $app
    */
-  public function CREATE_FOLDER_PERMISSIONS_FORM ($app)
+  public function __construct ($app)
   {
-    ID_BASED_FORM::ID_BASED_FORM ($app);
+    parent::__construct ($app);
 
     $field = new ENUMERATED_FIELD ();
     $field->id = 'copy_mode';

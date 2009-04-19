@@ -51,9 +51,9 @@ class USER_HISTORY_ITEM_QUERY extends HISTORY_ITEM_QUERY
   /**
    * @param APPLICATION $app Main application.
    */
-  public function USER_HISTORY_ITEM_QUERY ($app)
+  public function __construct ($app)
   {
-    HISTORY_ITEM_QUERY::HISTORY_ITEM_QUERY ($app);
+    parent::__construct ($app);
     $this->add_table ("{$this->app->table_names->folders} fldr", 'act.access_id = fldr.id');
     $this->restrict ('NOT (act.object_type = \'' . History_item_user . '\') AND NOT (act.object_type = \'' . History_item_group . '\')');
   }

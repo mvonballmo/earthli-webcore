@@ -66,9 +66,9 @@ class OBJECT_LIST_BUILDER extends WEBCORE_OBJECT
   /**
    * @param FOLDER $folder Objects are from this folder.
    */
-  public function OBJECT_LIST_BUILDER ($folder)
+  public function __construct ($folder)
   {
-    WEBCORE_OBJECT::WEBCORE_OBJECT ($folder->app);
+    parent::__construct ($folder->app);
 
     $this->_folder = $folder;
     $this->entries = array ();

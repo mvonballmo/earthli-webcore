@@ -90,9 +90,9 @@ class PUBLISHER extends LOGGABLE
   /**
    * @param MAIL_PROVIDER $provider Publish mail using this provider.
    */
-  public function PUBLISHER ($provider)
+  public function __construct ($provider)
   {
-    LOGGABLE::LOGGABLE ($provider->context);
+    parent::__construct ($provider->context);
 
     $this->provider = $provider;
     $this->logs->set_logger ($provider->logs->logger);
@@ -754,9 +754,9 @@ class PUBLISHER_MESSAGE extends WEBCORE_OBJECT
    * @param PUBLISHER $publisher
    * @param SUBSCRIBER $subscriber
    */
-  public function PUBLISHER_MESSAGE ($publisher, $subscriber)
+  public function __construct ($publisher, $subscriber)
   {
-    WEBCORE_OBJECT::WEBCORE_OBJECT ($publisher->context);
+    parent::__construct ($publisher->context);
 
     $this->_publisher = $publisher;
     $this->subscriber = $subscriber;

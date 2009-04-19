@@ -83,7 +83,7 @@ class IMAGE extends RAISABLE
   /**
    * @param boolean $use_internal_exif Use the PHP function {@link PHP_MANUAL#exif_read_data} if available.
    */
-  public function IMAGE ($use_internal_exif = true)
+  public function __construct ($use_internal_exif = true)
   {
     $this->properties = new IMAGE_PROPERTIES ($use_internal_exif);
   }
@@ -450,7 +450,7 @@ class IMAGE_PROPERTIES
   /**
    * @param boolean $use_internal_exif Use the PHP function {@link PHP_MANUAL#exif_read_data} if available.
    */
-  public function IMAGE_PROPERTIES ($use_internal_exif = true)
+  public function __construct ($use_internal_exif = true)
   {
     $this->time_created = new DATE_TIME ();
     $this->time_created->clear ();

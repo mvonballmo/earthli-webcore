@@ -157,9 +157,9 @@ class RECIPE_APPLICATION extends DRAFTABLE_APPLICATION
    * @param PAGE $page Page to which this application is attached.
    * @access private
    */
-  public function RECIPE_APPLICATION ($page)
+  public function __construct ($page)
   {
-    APPLICATION::APPLICATION ($page);
+    parent::__construct ($page);
 
     $this->set_path (Folder_name_application, '{' . Folder_name_apps . '}recipes');
     $this->set_path (Folder_name_attachments, '{' . Folder_name_data . '}recipes/attachments');

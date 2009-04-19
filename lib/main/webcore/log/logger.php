@@ -289,7 +289,7 @@ abstract class LOGGER extends LOGGER_CONTAINER
    */
   public $logger;
 
-  public function LOGGER ()
+  public function __construct ()
   {
     $this->_filter_settings = new LOGGER_FILTER_SETTINGS ();
     $this->set_channel_enabled (Msg_channel_logger, Msg_type_all);

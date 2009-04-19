@@ -72,9 +72,9 @@ class TEXT_STRIPPER extends TEXT_MUNGER
    */
   public $force_paragraphs = true;
   
-  public function TEXT_STRIPPER ()
+  public function __construct ()
   {
-    TEXT_MUNGER::TEXT_MUNGER ();
+    parent::__construct ();
     $this->_default_transformer = new MUNGER_NOP_TRANSFORMER ($this);
   }
 }

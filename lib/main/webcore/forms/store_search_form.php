@@ -57,9 +57,9 @@ class STORE_SEARCH_FORM extends RENDERABLE_FORM
   /**
    * @param APPLICATION $app Main application.
    */
-  public function STORE_SEARCH_FORM ($app, $fields)
+  public function __construct ($app, $fields)
   {
-    RENDERABLE_FORM::RENDERABLE_FORM ($app);
+    parent::__construct ($app);
 
     $this->_search_fields = $fields;
     $this->_search_fields->add_fields ($this);

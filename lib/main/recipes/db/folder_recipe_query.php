@@ -51,9 +51,9 @@ class FOLDER_RECIPE_QUERY extends FOLDER_ENTRY_QUERY
   /**
    * @param RECIPE_BOOK $folder Retrieve recipes from this recipe book.
    */
-  public function FOLDER_RECIPE_QUERY ($folder)
+  public function __construct ($folder)
   {
-    FOLDER_ENTRY_QUERY::FOLDER_ENTRY_QUERY ($folder);
+    parent::__construct ($folder);
     $this->_order = 'entry.title';
   }
 }

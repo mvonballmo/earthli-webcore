@@ -259,9 +259,9 @@ class PROJECT_APPLICATION extends APPLICATION
   /**
    * @param PAGE $page Page to which this application is attached.
    */
-  public function PROJECT_APPLICATION ($page)
+  public function __construct ($page)
   {
-    APPLICATION::APPLICATION ($page);
+    parent::__construct ($page);
 
     $this->xml_options = new PROJECT_APPLICATION_XML_OPTIONS ();
 

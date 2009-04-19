@@ -57,9 +57,9 @@ class ENTRY_COMMENT_QUERY extends COMMENT_QUERY
   /**
    * @param ENTRY $entry Retrieve comments from this entry.
    */
-  public function ENTRY_COMMENT_QUERY ($entry)
+  public function __construct ($entry)
   {
-    COMMENT_QUERY::COMMENT_QUERY ($entry->parent_folder ());
+    parent::__construct ($entry->parent_folder ());
     $this->_entry = $entry;
   }
 

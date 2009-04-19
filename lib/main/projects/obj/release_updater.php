@@ -64,9 +64,9 @@ abstract class RELEASE_UPDATER extends WEBCORE_OBJECT
    */
   public $branch;
 
-  public function RELEASE_UPDATER ($release)
+  public function __construct ($release)
   {
-    WEBCORE_OBJECT::WEBCORE_OBJECT ($release->app);
+    parent::__construct ($release->app);
     $this->release = $release;
     $this->branch = $release->branch ();
   }
@@ -244,9 +244,9 @@ class RELEASE_SHIPPER extends RELEASE_UPDATER
    */
   public $status_map;
 
-  public function RELEASE_SHIPPER ($release)
+  public function __construct ($release)
   {
-    RELEASE_UPDATER::RELEASE_UPDATER ($release);
+    parent::__construct ($release);
     $this->status_map = $this->app->display_options->job_status_map ();
   }
 

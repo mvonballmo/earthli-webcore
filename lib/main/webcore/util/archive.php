@@ -70,7 +70,7 @@ class ARCHIVE
   /**
    * @param string $file_name
    */
-  public function ARCHIVE ($file_name)
+  public function __construct ($file_name)
   {
     $this->register_handler ('ZIP_FILE', '');
     $this->set_file_name ($file_name);
@@ -247,7 +247,7 @@ abstract class COMPRESSED_FILE extends RAISABLE
   /**
    * @param string $file_name
    */
-  public function COMPRESSED_FILE ($file_name)
+  public function __construct ($file_name)
   {
     $this->file_name = $file_name;
   }
@@ -373,7 +373,7 @@ abstract class COMPRESSED_FILE_ENTRY extends RAISABLE
   /**
    * @param COMPRESSED_FILE $file
    */
-  public function COMPRESSED_FILE_ENTRY ($file)
+  public function __construct ($file)
   {
     $this->_file = $file;
   }
@@ -543,9 +543,9 @@ class ZIP_ENTRY extends COMPRESSED_FILE_ENTRY
    * @param resource $zh Handle returned by {@link PHP_MANUAL#zip_open()}
    * @param resource $h Handle returned by {@link PHP_MANUAL#zip_entry_open()}
    */
-  public function ZIP_ENTRY ($file, $zh, $h)
+  public function __construct ($file, $zh, $h)
   {
-    COMPRESSED_FILE_ENTRY::COMPRESSED_FILE_ENTRY ($file);
+    parent::__construct ($file);
     $this->_zip_handle = $zh;
     $this->_handle = $h;
   }

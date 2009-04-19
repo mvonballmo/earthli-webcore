@@ -66,7 +66,7 @@ class RELEASE_STATUS
    * @param RELEASE $release
    * @param boolean $text_only Omit all tags if True.
    */
-  public function RELEASE_STATUS ($release, $text_only)
+  public function __construct ($release, $text_only)
   {
     $this->test = new RELEASE_DATE_STATUS ($release, $release->time_tested, $release->time_testing_scheduled, ! $release->planned ());
     $this->ship = new RELEASE_DATE_STATUS ($release, $release->time_shipped, $release->time_scheduled);
@@ -267,9 +267,9 @@ class RELEASE_DATE_STATUS extends WEBCORE_OBJECT
    * @param DATE_TIME $scheduled Time the event is scheduled. Need not be valid.
    * @param boolean $skip_condition Marks an event as skipped if this is true, and the event was scheduled, but has not occurred.
    */
-  public function RELEASE_DATE_STATUS ($rel, $occurred, $scheduled, $skip_condition = false)
+  public function __construct ($rel, $occurred, $scheduled, $skip_condition = false)
   {
-    WEBCORE_OBJECT::WEBCORE_OBJECT ($rel->context);
+    parent::__construct ($rel->context);
 
     $this->_release = $rel;
     $this->time_occurred = $occurred;

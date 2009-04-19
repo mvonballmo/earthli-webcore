@@ -60,9 +60,9 @@ class FOLDER_SUBSCRIBER_FORM extends ID_BASED_FORM
   /**
    * @param FOLDER $folder Update subscribers to this folder.
    */
-  public function FOLDER_SUBSCRIBER_FORM ($folder)
+  public function __construct ($folder)
   {
-    ID_BASED_FORM::ID_BASED_FORM ($folder->app);
+    parent::__construct ($folder->app);
 
     $this->_folder = $folder;
 

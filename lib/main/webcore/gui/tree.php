@@ -576,9 +576,9 @@ class TREE_DECORATOR extends WEBCORE_OBJECT
   /**
    * @param TREE $tree Decorate this tree.
    */
-  public function TREE_DECORATOR ($tree)
+  public function __construct ($tree)
   {
-    WEBCORE_OBJECT::WEBCORE_OBJECT ($tree->app);
+    parent::__construct ($tree->app);
     $this->tree = $tree;
   }
 

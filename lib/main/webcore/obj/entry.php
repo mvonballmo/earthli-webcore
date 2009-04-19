@@ -324,9 +324,9 @@ class DRAFTABLE_ENTRY extends ENTRY
   /**
    * @param APPLICATION $app Main application.
    */
-  public function DRAFTABLE_ENTRY ($app)
+  public function __construct ($app)
   {
-    ENTRY::ENTRY ($app);
+    parent::__construct ($app);
 
     $this->time_published = $app->make_date_time ();
     $this->time_published->clear ();

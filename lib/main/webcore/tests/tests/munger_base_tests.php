@@ -92,9 +92,9 @@ class MUNGER_BASE_TEST_TASK extends TEST_TASK
   /**
    * @param CONTEXT $context Pass in an {@link APPLICATION} object.
    */
-  public function MUNGER_BASE_TEST_TASK ($context)
+  public function __construct ($context)
   {
-    TEST_TASK::TEST_TASK ($context);
+    parent::__construct ($context);
     $this->show_html_output = read_var ('show_html_output', false);
     $this->show_white_space = read_var ('show_white_space', false);
     $this->show_tokens = read_var ('show_tokens', false);

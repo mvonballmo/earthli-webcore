@@ -56,9 +56,9 @@ class PICTURE_FORM extends ALBUM_ENTRY_FORM
   /**
    * @param ALBUM $folder Album in which to add or edit the picture.
    */
-  public function PICTURE_FORM ($folder)
+  public function __construct ($folder)
   {
-    ALBUM_ENTRY_FORM::ALBUM_ENTRY_FORM ($folder);
+    parent::__construct ($folder);
 
     $field = new TEXT_FIELD ();
     $field->id = 'file_name';

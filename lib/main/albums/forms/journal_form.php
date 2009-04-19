@@ -51,9 +51,9 @@ class JOURNAL_FORM extends ALBUM_ENTRY_FORM
   /**
    * @param ALBUM $folder Album in which to add or edit the journal entry.
    */
-  public function JOURNAL_FORM ($folder)
+  public function __construct ($folder)
   {
-    ALBUM_ENTRY_FORM::ALBUM_ENTRY_FORM ($folder);
+    parent::__construct ($folder);
 
     $field = new INTEGER_FIELD ();
     $field->id = 'lo_temp';

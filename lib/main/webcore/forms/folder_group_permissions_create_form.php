@@ -62,9 +62,9 @@ class FOLDER_GROUP_PERMISSIONS_CREATE_FORM extends FOLDER_PERMISSIONS_FORM
    * @param FOLDER $folder Folder for which permissions are defined.
    * @param GROUP_QUERY $group_query Retrieve groups with this query.
    */
-  public function FOLDER_GROUP_PERMISSIONS_CREATE_FORM ($folder, $group_query)
+  public function __construct ($folder, $group_query)
   {
-    FOLDER_PERMISSIONS_FORM::FOLDER_PERMISSIONS_FORM ($folder->app);
+    parent::__construct ($folder->app);
 
     $this->_folder = $folder;
     $this->_group_query = $group_query;

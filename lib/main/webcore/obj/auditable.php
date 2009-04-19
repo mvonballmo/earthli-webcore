@@ -86,9 +86,9 @@ abstract class AUDITABLE extends UNIQUE_OBJECT
   /**
    * @param APPLICATION $app Main application.
    */
-  public function AUDITABLE ($app)
+  public function __construct ($app)
   {
-    UNIQUE_OBJECT::UNIQUE_OBJECT ($app);
+    parent::__construct ($app);
 
     $this->time_created = $app->make_date_time ();
     $this->time_modified = $app->make_date_time ();

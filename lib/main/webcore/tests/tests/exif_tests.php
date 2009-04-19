@@ -51,9 +51,9 @@ require_once ('webcore/util/image.php');
  */
 class NON_INTERNAL_EXIF_IMAGE extends IMAGE
 {
-  public function NON_INTERNAL_EXIF_IMAGE ()
+  public function __construct ()
   {
-    IMAGE::IMAGE (false);
+    parent::__construct (false);
   }
 }
 

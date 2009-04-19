@@ -68,9 +68,9 @@ class MULTIPLE_OBJECT_PRINTER_FORM extends MULTIPLE_OBJECT_ACTION_FORM
   /**
    * @param FOLDER $folder Objects are from this folder.
    */
-  public function MULTIPLE_OBJECT_PRINTER_FORM ($folder)
+  public function __construct ($folder)
   {
-    MULTIPLE_OBJECT_ACTION_FORM::MULTIPLE_OBJECT_ACTION_FORM ($folder);
+    parent::__construct ($folder);
 
     $field = new INTEGER_FIELD ();
     $field->id = 'show_comments';

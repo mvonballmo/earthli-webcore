@@ -61,9 +61,9 @@ define ('Type_info_reg_prefix', '__type_info_');
  */
 class RESOLVER extends RESOURCE_MANAGER
 {
-  public function RESOLVER ()
+  public function __construct ()
   {
-    RESOURCE_MANAGER::RESOURCE_MANAGER ();
+    parent::__construct ();
     $this->classes = new OBJECT_FACTORY ();
     $this->_initialize_class_registry ();    
   }

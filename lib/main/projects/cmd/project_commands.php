@@ -53,9 +53,9 @@ class PROJECT_COMMANDS extends FOLDER_COMMANDS
   /**
    * @param PROJECT $folder Configure commands for this object.
    */
-  public function PROJECT_COMMANDS ($folder)
+  public function __construct ($folder)
   {
-    FOLDER_COMMANDS::FOLDER_COMMANDS ($folder);
+    parent::__construct ($folder);
 
     $cmd = $this->command_at ('new');
     $cmd->title = 'New project';

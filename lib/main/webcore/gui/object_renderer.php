@@ -60,9 +60,9 @@ class HANDLER_RENDERER extends RENDERER
    * @param CONTEXT $context
    * @param OBJECT_RENDERER_OPTIONS $options
    */
-  public function HANDLER_RENDERER ($context, $options = null)
+  public function __construct ($context, $options = null)
   {
-    RENDERER::RENDERER ($context);
+    parent::__construct ($context);
     if (isset ($options))
     {
       $this->_options = $options;

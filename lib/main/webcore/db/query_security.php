@@ -61,9 +61,9 @@ class QUERY_SECURITY_RESTRICTION extends WEBCORE_OBJECT
   /**
    * @param QUERY $query Query to which the restriction is applied.
    */
-  public function QUERY_SECURITY_RESTRICTION ($query)
+  public function __construct ($query)
   {
-    WEBCORE_OBJECT::WEBCORE_OBJECT ($query->context);
+    parent::__construct ($query->context);
     $this->_query = $query;
   }
 
@@ -359,7 +359,7 @@ class QUERY_SECURITY_RESTRICTION_SET_ITEM
    * @param integer $state Initial state to include in {@link $states}.
    * @param string $set_name Initial set to include in {@link $sets}.
    */
-  public function QUERY_SECURITY_RESTRICTION_SET_ITEM ($set, $state = null, $set_name = null)
+  public function __construct ($set, $state = null, $set_name = null)
   {
     $this->update_draft_status ($set);
     $this->sets = array ();
@@ -448,7 +448,7 @@ class QUERY_SECURITY_RESTRICTION_SET
    * @param string $name
    * @param integer $privielege
    */
-  public function QUERY_SECURITY_RESTRICTION_SET ($name, $privilege)
+  public function __construct ($name, $privilege)
   {
     $this->name = $name;
     $this->privilege = $privilege;

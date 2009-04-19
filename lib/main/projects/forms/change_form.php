@@ -56,9 +56,9 @@ class CHANGE_FORM extends PROJECT_ENTRY_FORM
   /**
    * @param PROJECT $folder Project in which to add or edit the change.
    */
-  public function CHANGE_FORM ($folder)
+  public function __construct ($folder)
   {
-    PROJECT_ENTRY_FORM::PROJECT_ENTRY_FORM ($folder);
+    parent::__construct ($folder);
 
     $field = new INTEGER_FIELD ();
     $field->id = 'job_id';

@@ -445,9 +445,9 @@ class FORM_RENDERER extends CONTROLS_RENDERER
   /**
    * @param FORM $form
    */
-  public function FORM_RENDERER ($form)
+  public function __construct ($form)
   {
-    CONTROLS_RENDERER::CONTROLS_RENDERER ($form->context);
+    parent::__construct ($form->context);
     $this->_form = $form;
     $this->default_control_properties = new FORM_LIST_ITEM ();
   }

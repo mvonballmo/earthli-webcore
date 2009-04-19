@@ -57,9 +57,9 @@ abstract class SEND_MULTIPLE_MAIL_FORM extends SEND_MAIL_FORM
   /**
    * @param APPLICATION $app Main application.
    */
-  public function SEND_MULTIPLE_MAIL_FORM ($app)
+  public function __construct ($app)
   {
-    SEND_MAIL_FORM::SEND_MAIL_FORM ($app);
+    parent::__construct ($app);
 
     $field = new TEXT_FIELD ();
     $field->id = 'recipients';

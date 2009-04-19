@@ -74,9 +74,9 @@ abstract class SUBSCRIPTION_FORM extends FORM
    * @param APPLICATION $app Main application.
    * @param SUBSCRIBER $subscriber Edit subscriptions for this user.
    */
-  public function SUBSCRIPTION_FORM ($app)
+  public function __construct ($app)
   {
-    FORM::FORM ($app);
+    parent::__construct ($app);
 
     $field = new EMAIL_FIELD ();
     $field->id = 'email';

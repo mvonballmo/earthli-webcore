@@ -206,7 +206,7 @@ class BROWSER
   /**
    * Calls {@link load_from_server()} by default.
    */
-  public function BROWSER ()
+  public function __construct ()
   {
     $this->load_from_server ();
   }
@@ -665,7 +665,7 @@ class USER_AGENT_PROPERTIES
    */
   public $build_number = 0;
 
-  public function USER_AGENT_PROPERTIES ()
+  public function __construct ()
   {
     $this->gecko_date = new DATE_TIME ();
     $this->gecko_date->clear ();
@@ -687,7 +687,7 @@ class USER_AGENT_PARSER
   /**
    * @param USER_AGENT_PARSE_TABLES $tables
    */
-  public function USER_AGENT_PARSER ($tables)
+  public function __construct ($tables)
   {
     $this->_tables = $tables;
   }
@@ -1209,7 +1209,7 @@ class USER_AGENT_RENDERER_INFO
    * @param string $disp Value for the {@link $display_name}.
    * @param integer $prec Value for the {@link $precedence}.
    */
-  public function USER_AGENT_RENDERER_INFO ($id, $tech, $prec, $disp = '')
+  public function __construct ($id, $tech, $prec, $disp = '')
   {
     $this->id = $id;
     $this->technology_name = $tech;

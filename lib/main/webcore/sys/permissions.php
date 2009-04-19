@@ -234,7 +234,7 @@ class CONTENT_PRIVILEGES extends PRIVILEGES
    */
   public $comment_privileges;
 
-  public function CONTENT_PRIVILEGES ()
+  public function __construct ()
   {
     $this->general_privileges = new BITS ();
     $this->_register_privileges (Privilege_set_general, $this->general_privileges);
@@ -270,9 +270,9 @@ class SINGLE_ENTRY_PRIVILEGES extends CONTENT_PRIVILEGES
    */
   public $entry_privileges;
 
-  public function SINGLE_ENTRY_PRIVILEGES ()
+  public function __construct ()
   {
-    CONTENT_PRIVILEGES::CONTENT_PRIVILEGES ();
+    parent::__construct ();
 
     include_once ('webcore/sys/bits.php');
     $this->entry_privileges = new BITS ();
@@ -306,7 +306,7 @@ class GLOBAL_PRIVILEGES extends PRIVILEGES
    */
   public $group_privileges;
 
-  public function GLOBAL_PRIVILEGES ()
+  public function __construct ()
   {
     $this->general_privileges = new BITS ();
     $this->_register_privileges (Privilege_set_global, $this->general_privileges);
@@ -360,9 +360,9 @@ class USER_PERMISSIONS extends STORABLE
   /**
    * @param APPLICATION $app Main application.
    */
-  public function USER_PERMISSIONS ($app)
+  public function __construct ($app)
   {
-    STORABLE::STORABLE ($app);
+    parent::__construct ($app);
 
     $this->global_privileges = new GLOBAL_PRIVILEGES ();
     $this->allow_privileges = $app->make_privileges ();

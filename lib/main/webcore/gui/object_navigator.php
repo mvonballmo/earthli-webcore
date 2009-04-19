@@ -116,9 +116,9 @@ class OBJECT_NAVIGATOR extends WEBCORE_OBJECT
   /**
    * @param CONTEXT $context
    */
-  public function OBJECT_NAVIGATOR ($context)
+  public function __construct ($context)
   {
-    WEBCORE_OBJECT::WEBCORE_OBJECT ($context);
+    parent::__construct ($context);
 
     $opts = $context->display_options;
     $this->window_size = $opts->objects_to_show;

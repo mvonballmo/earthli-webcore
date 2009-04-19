@@ -51,7 +51,7 @@ class ENVIRONMENT_EXCEPTION_HANDLER extends EXCEPTION_HANDLER
   /**
    * @param ENVIRONMENT $env Global environment.
    */
-  public function HTML_EXCEPTION_HANDLER ($env)
+  public function __construct ($env)
   {
     $this->env = $env;
   }
@@ -119,9 +119,9 @@ class LOGGER_EXCEPTION_HANDLER extends HTML_EXCEPTION_HANDLER
   /**
    * Constructs a default instance; seems to be required for PHP5.
    */
-  public function LOGGER_EXCEPTION_HANDLER($env)
+  public function __construct($env)
   {
-    HTML_EXCEPTION_HANDLER::HTML_EXCEPTION_HANDLER($env);
+    parent::__construct($env);
   }
 
   /**
@@ -165,7 +165,7 @@ class REDIRECT_EXCEPTION_HANDLER extends HTML_EXCEPTION_HANDLER
    * @param ENVIRONMENT $env Global environment.
    * @param string $handler_url Redirect exceptions to this url.
    */
-  public function REDIRECT_EXCEPTION_HANDLER ($env)
+  public function __construct ($env)
   {
     if (! $env->exception_handler_page)
     {

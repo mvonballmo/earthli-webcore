@@ -64,9 +64,9 @@ class ADD_TO_LIST_FORM extends ID_BASED_FORM
    * @param SEARCH $search
    * @param QUERY $search_query
    */
-  public function ADD_TO_LIST_FORM ($app, $search, $search_query)
+  public function __construct ($app, $search, $search_query)
   {
-    ID_BASED_FORM::ID_BASED_FORM ($app);
+    parent::__construct ($app);
 
     $this->_search = $search;
     $this->_search_query = $search_query;

@@ -391,9 +391,9 @@ class THEMED_PAGE extends PAGE
   /**
    * @param ENVIRONMENT $env Global environment.
    */
-  public function THEMED_PAGE ($env)
+  public function __construct ($env)
   {
-    PAGE::PAGE ($env);
+    parent::__construct ($env);
 
     $class_name = $this->final_class_name ('THEME_OPTIONS');
     $this->theme_options = new $class_name ();

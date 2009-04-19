@@ -62,9 +62,9 @@ class USER_PERMISSIONS_FORM extends PERMISSIONS_FORM
   /**
    * @param APPLICATION $app Main application.
    */
-  public function USER_PERMISSIONS_FORM ($app)
+  public function __construct ($app)
   {
-    FORM::FORM ($app);
+    parent::__construct ($app);
 
     $field = new TITLE_FIELD ();
     $field->id = 'name';

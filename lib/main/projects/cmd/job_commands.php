@@ -53,9 +53,9 @@ class JOB_COMMANDS extends ENTRY_COMMANDS
   /**
    * @param JOB $entry Configure commands for this object.
    */
-  public function JOB_COMMANDS ($entry)
+  public function __construct ($entry)
   {
-    ENTRY_COMMANDS::ENTRY_COMMANDS($entry);
+    parent::__construct($entry);
 
     $cmd = $this->command_at ('edit');
     $cmd->link = "edit_job.php?id=$entry->id";

@@ -56,9 +56,9 @@ class JOB_FORM extends PROJECT_ENTRY_FORM
   /**
    * @param PROJECT $folder Project in which to add or edit the job.
    */
-  public function JOB_FORM ($folder)
+  public function __construct ($folder)
   {
-    PROJECT_ENTRY_FORM::PROJECT_ENTRY_FORM ($folder);
+    parent::__construct ($folder);
 
     $field = new DATE_FIELD ();
     $field->id = 'time_needed';

@@ -163,7 +163,7 @@ class UPLOADED_FILE extends RAISABLE
    * @param string $temp_name Name of the file as uploaded.
    * @param integer $error Error code.
    */
-  public function UPLOADED_FILE ($uploader, $name, $size, $mime_type, $temp_name, $error)
+  public function __construct ($uploader, $name, $size, $mime_type, $temp_name, $error)
   {
     $this->_uploader = $uploader;
     $this->name = $name;
@@ -405,7 +405,7 @@ class UPLOADED_FILE_SET
    * @param UPLOADER $uploader Attached to this uploader.
    * @param string $field_name Name of the field for which this set was submitted.
    */
-  public function UPLOADED_FILE_SET ($uploader, $field_name)
+  public function __construct ($uploader, $field_name)
   {
     $this->_uploader = $uploader;
 
@@ -576,7 +576,7 @@ class UPLOADER extends RAISABLE
    */
   public $stored_info_name = 'webcore_saved_uploads';
 
-  public function UPLOADER ()
+  public function __construct ()
   {
     $this->load_from_request ();
   }

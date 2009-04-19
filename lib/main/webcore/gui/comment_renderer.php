@@ -132,9 +132,9 @@ class COMMENT_LIST_RENDERER extends WEBCORE_OBJECT
    * @param ENTRY|COMMENT $obj Entry or comment on whose page to render comments.
    * @param string $default_mode Default mode for comment display (Can be 'Comment_render_flat' or 'Comment_render_threaded').
    */
-  public function COMMENT_LIST_RENDERER ($com_query, $obj, $default_mode = Comment_render_threaded)
+  public function __construct ($com_query, $obj, $default_mode = Comment_render_threaded)
   {
-    WEBCORE_OBJECT::WEBCORE_OBJECT ($obj->app);
+    parent::__construct ($obj->app);
 
     $this->_comment_query = $com_query;
     $this->_obj = $obj;

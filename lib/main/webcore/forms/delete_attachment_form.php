@@ -53,9 +53,9 @@ class DELETE_ATTACHMENT_FORM extends DELETE_OBJECT_IN_FOLDER_FORM
    * @param FOLDER $folder Deleting content from this folder.
    * @param string $set_name
    */
-  public function DELETE_ATTACHMENT_FORM ($folder, $set_name)
+  public function __construct ($folder, $set_name)
   {
-    DELETE_OBJECT_IN_FOLDER_FORM::DELETE_OBJECT_IN_FOLDER_FORM ($folder, $set_name);
+    parent::__construct ($folder, $set_name);
 
     $field = new TEXT_FIELD ();
     $field->id = 'type';

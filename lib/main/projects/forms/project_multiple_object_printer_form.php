@@ -51,9 +51,9 @@ class PROJECT_MULTIPLE_OBJECT_PRINTER_FORM extends MULTIPLE_OBJECT_PRINTER_FORM
   /**
    * @param PROJECT $folder Project from which to print objects.
    */
-  public function PROJECT_MULTIPLE_OBJECT_PRINTER_FORM ($folder)
+  public function __construct ($folder)
   {
-    MULTIPLE_OBJECT_PRINTER_FORM::MULTIPLE_OBJECT_PRINTER_FORM ($folder);
+    parent::__construct ($folder);
 
     $field = new BOOLEAN_FIELD ();
     $field->id = 'show_changes';

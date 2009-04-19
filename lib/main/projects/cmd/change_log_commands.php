@@ -53,9 +53,9 @@ class CHANGE_LOG_COMMANDS extends COMMANDS
   /**
    * @param APPLICATION $app
    */
-  public function CHANGE_LOG_COMMANDS ($app)
+  public function __construct ($app)
   {
-    COMMANDS::COMMANDS ($app);
+    parent::__construct ($app);
 
     $cmd = $this->make_command ();
     $cmd->id = 'print';
@@ -143,9 +143,9 @@ class BRANCH_CHANGE_LOG_COMMANDS extends CHANGE_LOG_COMMANDS
   /**
    * @param APPLICATION $app
    */
-  public function BRANCH_CHANGE_LOG_COMMANDS ($app)
+  public function __construct ($app)
   {
-    CHANGE_LOG_COMMANDS::CHANGE_LOG_COMMANDS ($app);
+    parent::__construct ($app);
 
     $show_all = read_var ('show_all', 1);
 

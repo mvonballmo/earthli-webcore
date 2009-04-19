@@ -59,7 +59,7 @@ class CALLBACK
   /**
    * @var string
    */
-  public function CALLBACK ($name)
+  public function __construct ($name)
   {
     $this->name = $name;
   }
@@ -108,9 +108,9 @@ class CALLBACK_METHOD extends CALLBACK
    * @param string $name
    * @param object $obj
    */
-  public function CALLBACK_METHOD ($name, $obj)
+  public function __construct ($name, $obj)
   {
-    CALLBACK::CALLBACK ($name);
+    parent::__construct ($name);
     $this->_obj = $obj;
   }
 

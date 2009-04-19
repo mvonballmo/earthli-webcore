@@ -1375,7 +1375,7 @@ class HTML_DIV_REPLACER extends HTML_BASE_REPLACER
   /**
    * @param string $classes
    */
-  public function HTML_DIV_REPLACER ($classes = '')
+  public function __construct ($classes = '')
   {
     $this->css_classes = $classes;
   }
@@ -2123,9 +2123,9 @@ class HTML_MUNGER extends MUNGER
  */
 class HTML_BASE_MUNGER extends HTML_MUNGER
 {
-  public function HTML_BASE_MUNGER ()
+  public function __construct ()
   {
-    HTML_MUNGER::HTML_MUNGER ();
+    parent::__construct ();
 
     $this->register_replacer ('macro', new MUNGER_MACRO_REPLACER (), false);
     $this->register_replacer ('c', new MUNGER_BASIC_REPLACER ('<code>', '</code>'));
@@ -2158,9 +2158,9 @@ class HTML_BASE_MUNGER extends HTML_MUNGER
  */
 class HTML_TEXT_MUNGER extends HTML_BASE_MUNGER
 {
-  public function HTML_TEXT_MUNGER ()
+  public function __construct ()
   {
-    HTML_BASE_MUNGER::HTML_BASE_MUNGER ();
+    parent::__construct ();
 
     $this->_default_transformer = new HTML_PARAGRAPH_TRANSFORMER ();
 
@@ -2229,9 +2229,9 @@ class HTML_TITLE_MUNGER extends HTML_BASE_MUNGER
    */
   public $force_paragraphs = false;
 
-  public function HTML_TITLE_MUNGER ()
+  public function __construct ()
   {
-    HTML_BASE_MUNGER::HTML_BASE_MUNGER ();
+    parent::__construct ();
     $this->_default_transformer = new MUNGER_NOP_TRANSFORMER ();
   }
 }

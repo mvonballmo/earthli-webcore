@@ -53,9 +53,9 @@ class ARTICLE_COMMANDS extends DRAFTABLE_ENTRY_COMMANDS
   /**
    * @param ARTICLE $obj Configure commands for this object.
    */
-  public function ARTICLE_COMMANDS ($entry)
+  public function __construct ($entry)
   {
-    ENTRY_COMMANDS::ENTRY_COMMANDS ($entry);
+    parent::__construct ($entry);
 
     $cmd = $this->command_at ('edit');
     $cmd->link = "edit_article.php?id=$entry->id";

@@ -62,9 +62,9 @@ class FOLDER_USER_PERMISSIONS_CREATE_FORM extends FOLDER_PERMISSIONS_FORM
    * @param FOLDER $folder Folder for which permissions are defined.
    * @param USER_QUERY $user_query Retrieve user with this query.
    */
-  public function FOLDER_USER_PERMISSIONS_CREATE_FORM ($folder, $user_query)
+  public function __construct ($folder, $user_query)
   {
-    FOLDER_PERMISSIONS_FORM::FOLDER_PERMISSIONS_FORM ($folder->app);
+    parent::__construct ($folder->app);
 
     $this->_folder = $folder;
     $this->_user_query = $user_query;

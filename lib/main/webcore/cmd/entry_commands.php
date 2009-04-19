@@ -53,9 +53,9 @@ class ENTRY_COMMANDS extends COMMANDS
   /**
    * @param ENTRY $entry Configure commands for this object.
    */
-  public function ENTRY_COMMANDS ($entry)
+  public function __construct ($entry)
   {
-    COMMANDS::COMMANDS ($entry->app);
+    parent::__construct ($entry->app);
 
     $this->append_group ('Edit');
     $this->_add_editors ($entry);

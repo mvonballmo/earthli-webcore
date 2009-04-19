@@ -65,11 +65,11 @@ abstract class PREVIEWABLE_FORM extends FORM
   /**
    * @param CONTEXT $context Attach to this object.
    */
-  public function PREVIEWABLE_FORM ($context)
+  public function __construct ($context)
   {
     $this->_form_based_field_names [] = 'previewing';
 
-    FORM::FORM ($context);
+    parent::__construct ($context);
   }
 
   /**
@@ -240,9 +240,9 @@ abstract class PREVIEWABLE_ID_BASED_FORM extends PREVIEWABLE_FORM
   /**
    * @param CONTEXT $context
    */
-  public function PREVIEWABLE_ID_BASED_FORM ($context)
+  public function __construct ($context)
   {
-    PREVIEWABLE_FORM::PREVIEWABLE_FORM ($context);
+    parent::__construct ($context);
 
     $field = new INTEGER_FIELD ();
     $field->id = 'id';

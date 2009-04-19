@@ -53,9 +53,9 @@ class COMPONENT_COMMANDS extends COMMANDS
   /**
    * @param COMPONENT $comp Configure commands for this object.
    */
-  public function COMPONENT_COMMANDS ($comp)
+  public function __construct ($comp)
   {
-    COMMANDS::COMMANDS ($comp->app);
+    parent::__construct ($comp->app);
 
     $cmd = $this->make_command ();
     $cmd->id = 'edit';

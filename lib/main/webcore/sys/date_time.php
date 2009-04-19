@@ -99,7 +99,7 @@ class DATE_TIME_TOOLKIT
    */
   public $formatter;
 
-  public function DATE_TIME_TOOLKIT ()
+  public function __construct ()
   {
     $this->register_converter (new US_DATE_TIME_CONVERTER ());
     $this->register_converter (new EURO_DATE_TIME_CONVERTER ());
@@ -329,7 +329,7 @@ class DATE_TIME_FORMATTER extends RAISABLE
  */
 class US_DATE_TIME_FORMATTER extends DATE_TIME_FORMATTER
 {
-  public function US_DATE_TIME_FORMATTER ()
+  public function __construct ()
   {
     $this->register_formatter (Date_time_format_date_and_time, 'M j, Y H:i:s');
     $this->register_formatter (Date_time_format_date_only, 'M j, Y');
@@ -349,7 +349,7 @@ class US_DATE_TIME_FORMATTER extends DATE_TIME_FORMATTER
  */
 class EURO_DATE_TIME_FORMATTER extends DATE_TIME_FORMATTER
 {
-  public function EURO_DATE_TIME_FORMATTER ()
+  public function __construct ()
   {
     $this->register_formatter (Date_time_format_date_and_time, 'j. M Y H:i:s');
     $this->register_formatter (Date_time_format_date_only, 'j. M Y');
@@ -369,7 +369,7 @@ class EURO_DATE_TIME_FORMATTER extends DATE_TIME_FORMATTER
  */
 class ISO_DATE_TIME_FORMATTER extends DATE_TIME_FORMATTER
 {
-  public function ISO_DATE_TIME_FORMATTER ()
+  public function __construct ()
   {
     $this->register_formatter (Date_time_format_date_and_time, 'M j, Y H:i:s');
     $this->register_formatter (Date_time_format_date_only, 'M j, Y');
@@ -584,7 +584,7 @@ class DATE_TIME extends RAISABLE
    * @param string $type Can be either {@link Date_time_php} or {@link
    * Date_time_iso}.
    */
-  public function DATE_TIME ($time = 0, $type = null)
+  public function __construct ($time = 0, $type = null)
   {
     if (! $time)
     {
@@ -987,7 +987,7 @@ class TIME_INTERVAL
    * @param DATE_TIME $t1
    * @param DATE_TIME $t2
    */
-  public function TIME_INTERVAL ($t1, $t2)
+  public function __construct ($t1, $t2)
   {
     $php_t1 = $t1->as_php ();
     $php_t2 = $t2->as_php ();

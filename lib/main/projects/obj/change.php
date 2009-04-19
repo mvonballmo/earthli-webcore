@@ -308,9 +308,9 @@ class CHANGE_BRANCH_INFO extends PROJECT_ENTRY_BRANCH_INFO
   /**
    * @param CHANGE $entry Branch info is attached to this job.
    */
-  public function CHANGE_BRANCH_INFO ($entry)
+  public function __construct ($entry)
   {
-    PROJECT_ENTRY_BRANCH_INFO::PROJECT_ENTRY_BRANCH_INFO ($entry);
+    parent::__construct ($entry);
 
     $this->time_applied = $this->app->make_date_time ();
   }

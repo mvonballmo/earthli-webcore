@@ -53,7 +53,7 @@ class UNIQUE_OBJECT_CACHE extends OBJECT_CACHE
   /**
    * @param QUERY $query List objects from this query.
    */
-  public function UNIQUE_OBJECT_CACHE ($query)
+  public function __construct ($query)
   {
     $this->_app = $query->app;
     $this->_query = $query;

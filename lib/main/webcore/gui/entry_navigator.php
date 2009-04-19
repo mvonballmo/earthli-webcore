@@ -51,9 +51,9 @@ class ENTRY_NAVIGATOR extends OBJECT_NAVIGATOR
   /**
    * @param ENTRY $entry
    */
-  public function ENTRY_NAVIGATOR ($entry)
+  public function __construct ($entry)
   {
-    OBJECT_NAVIGATOR::OBJECT_NAVIGATOR ($entry->context);
+    parent::__construct ($entry->context);
     $this->_entry = $entry;
   }
 
