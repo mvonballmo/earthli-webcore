@@ -106,8 +106,8 @@ class SEARCH_PROJECT_ENTRY_FIELDS extends SEARCH_ENTRY_FIELDS
 
   /**
    * Restrict the query by these fields.
-   * @param QUERY $query
-   * @param object $obj
+   * @param QUERY $query The query to which to apply parameters.
+   * @param object $obj The object from which to extract parameters.
    */
   public function apply_to_query ($query, $obj)
   {

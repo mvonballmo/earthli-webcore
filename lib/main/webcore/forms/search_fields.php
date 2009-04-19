@@ -147,8 +147,8 @@ abstract class SEARCH_FIELDS extends WEBCORE_OBJECT
 
   /**
    * Restrict the query by these fields.
-   * @param QUERY $query
-   * @param object $obj
+   * @param QUERY $query The query to which to apply parameters.
+   * @param object $obj The object from which to extract parameters.
    * @abstract
    */
   public function apply_to_query ($query, $obj)
@@ -267,6 +267,8 @@ class SEARCH_DATE_FIELDS extends SEARCH_FIELDS
       {
         return join (' and ', $clauses);
       }
+      
+      return ''; 
     default:
       throw new UNKNOWN_VALUE_EXCEPTION($obj->parameters [$this->search_type_name ()]);
     }
@@ -349,8 +351,8 @@ class SEARCH_DATE_FIELDS extends SEARCH_FIELDS
 
   /**
    * Restrict the query by these fields.
-   * @param QUERY $query
-   * @param object $obj
+   * @param QUERY $query The query to which to apply parameters.
+   * @param object $obj The object from which to extract parameters.
    */
   public function apply_to_query ($query, $obj)
   {
@@ -729,8 +731,9 @@ class SEARCH_TEXT_FIELDS extends SEARCH_FIELDS
    * Restrict the query by these fields.
    * @param QUERY $query
    * @param object $obj
+   * @param array[string]
    */
-  public function apply_to_query ($query, $obj, $fields)
+  public function apply_to_query ($query, $obj, &$fields)
   {
     if ($obj->parameters [$this->base_name])
     {
@@ -853,10 +856,11 @@ class SORT_FIELDS extends SEARCH_FIELDS
 
   /**
    * Restrict the query by these fields.
-   * @param QUERY $query
-   * @param object $obj
+   * @param QUERY $query The query to which to apply parameters.
+   * @param object $obj The object from which to extract parameters.
+   * @param array[string] &$orders Add orderings to this list.
    */
-  public function apply_to_query ($query, $obj, $orders)
+  public function apply_to_query ($query, $obj, &$orders)
   {
     $sort = $obj->parameters [$this->sort_name ()];
     if ($sort)
@@ -991,7 +995,7 @@ class SEARCH_OBJECT_FIELDS extends WEBCORE_OBJECT
    */
   public function load_from_object ($form, $obj)
   {
-    foreach ($this->_synced_fields as $name => $value)
+    foreach (array_keys ($this->_synced_fields) as $name)
     {
       $form->set_value ($name, $obj->parameters [$name]);
     }
@@ -1022,7 +1026,7 @@ class SEARCH_OBJECT_FIELDS extends WEBCORE_OBJECT
    */
   public function store_to_object ($form, $obj)
   {
-    foreach ($this->_synced_fields as $name => $value)
+    foreach (array_keys ($this->_synced_fields) as $name)
     {
       $obj->parameters [$name] = $form->value_for ($name);
     }
@@ -1095,7 +1099,7 @@ class SEARCH_OBJECT_FIELDS extends WEBCORE_OBJECT
 
     $props = $renderer->make_list_properties ();
 
-    foreach ($this->_texts as $id => $text)
+    foreach (array_keys ($this->_texts) as $id)
     {
       $props->add_item ($id, 1);
     }
@@ -1546,7 +1550,7 @@ class SEARCH_OBJECT_IN_FOLDER_FIELDS extends SEARCH_CONTENT_OBJECT_FIELDS
     $field->title = 'State';
     $field->add_value (0);
     $states = $this->_states ();
-    foreach ($states as $state => $state_title)
+    foreach (array_keys ($states) as $state)
     {
       $field->add_value ($state);
     }

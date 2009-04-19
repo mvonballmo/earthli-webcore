@@ -1946,7 +1946,7 @@ class MUNGER extends MUNGER_PARSER
    * @see MUNGER_CONVERTER
    * @return array[string,MUNGER_CONVERTER]
    */
-  public function  converters()
+  public function converters()
   {
     return $this->_converters;
   }
@@ -2123,7 +2123,7 @@ class MUNGER extends MUNGER_PARSER
     $this->_nesting_level = 0;
     $this->_current_transformer = $this->_default_transformer;
     
-    foreach ($this->_converters as $converter)
+    foreach ($this->_converters as &$converter)
     {
       $converter->reset();
     }
@@ -2520,12 +2520,9 @@ class MUNGER extends MUNGER_PARSER
    */
   protected function _as_output_text($text)
   {
-    if (isset ($this->_converters))
+    foreach ($this->_converters as $converter)
     {
-      foreach ($this->_converters as $converter)
-      {
-        $text = $converter->convert($this, $text);
-      }
+      $text = $converter->convert($this, $text);
     }
 
     return $text;
@@ -2631,7 +2628,7 @@ class MUNGER extends MUNGER_PARSER
    * @see MUNGER_CONVERTER
    * @access private
    */
-  protected $_converters;
+  protected $_converters = array();
 
   /**
    * The first transformer for any piece of text.

@@ -341,6 +341,8 @@ abstract class GRID extends WEBCORE_OBJECT
           $this->_draw_separator ();
         }
       }
+      
+      $index += 1;
     }
     
     // if there were fewer than 'num_columns' cells in the last row

@@ -63,8 +63,6 @@ class IMAGE_TEST_TASK extends TEST_TASK
   {
     $this->page->prefer_relative_urls = false;
     $local_url = $this->context->resolve_file ('{icons}/buttons/blank_16px.png');
-    $root_url = $this->context->path_to (Folder_name_root);
-    $image_file_name = substr ($local_url, strlen ($root_url));
     $local_url_with_domain = $this->env->resolve_file ($local_url, Force_root_on);
     $local_path = url_to_file_name ($local_url_with_domain);
 

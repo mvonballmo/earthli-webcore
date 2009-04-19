@@ -164,7 +164,7 @@ class MULTI_SELECTOR_TREE_DECORATOR extends TREE_DECORATOR
   }
   ?>
 
-  protected function _on_click_<?php echo $control_name ?> (ctrl)
+  function _on_click_<?php echo $control_name ?> (ctrl)
   {
     var f = document.getElementById ('<?php echo $form_name; ?>');
     var id = ctrl.value;
