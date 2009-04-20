@@ -326,7 +326,7 @@ class DRAFTABLE_ENTRY extends ENTRY
    * @var integer
    */
   public $state = Draft;
-
+  
   /**
    * @param APPLICATION $app Main application.
    */
@@ -499,7 +499,14 @@ class DRAFTABLE_ENTRY extends ENTRY
     elseif (! $this->time_published->is_valid ())
     {
       $this->time_published->set_now ();
-      $this->publisher_id = $this->login->id;
+      if ($this->update_modifier_on_change)
+      {
+        $this->publisher_id = $this->login->id;
+      }
+      else
+      {
+        $this->publisher_id = $this->modifier_id;
+      }
     }
   }
 

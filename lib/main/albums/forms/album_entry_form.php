@@ -73,6 +73,9 @@ class ALBUM_ENTRY_FORM extends ENTRY_FORM
     $this->set_value ('day', $obj->date);
   }
 
+  /**
+   * Initialize the form's fields with default values and visibilities.
+   */
   public function load_with_defaults ()
   {
     parent::load_with_defaults ();

@@ -108,6 +108,9 @@ abstract class SUBSCRIPTION_FORM extends FORM
     $this->set_value ('panel', $this->panel_name);
   }
 
+  /**
+   * Initialize the form's fields with default values and visibilities.
+   */
   public function load_with_defaults ()
   {
     parent::load_with_defaults ();

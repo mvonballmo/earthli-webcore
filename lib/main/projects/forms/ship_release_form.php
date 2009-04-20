@@ -81,6 +81,8 @@ class SHIP_RELEASE_FORM extends AUDITABLE_FORM
    */
   protected function _store_to_object ($obj)
   {
+    parent::_store_to_object ($obj);
+    
     switch ($this->value_for ('state'))
     {
     case Testing:
@@ -106,6 +108,9 @@ class SHIP_RELEASE_FORM extends AUDITABLE_FORM
     $this->add_preview ($obj, 'Ship Release details');
   }
 
+  /**
+   * Initialize the form's fields with default values and visibilities.
+   */
   public function load_with_defaults ()
   {
     $this->raise ('Cannot ship new releases.', 'load_with_defaults', 'SHIP');

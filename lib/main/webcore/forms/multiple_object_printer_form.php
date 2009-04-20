@@ -87,15 +87,8 @@ class MULTIPLE_OBJECT_PRINTER_FORM extends MULTIPLE_OBJECT_ACTION_FORM
   }
 
   /**
-   * Load initial properties from this folder.
-   * @param FOLDER $obj
+   * Initialize the form's fields with default values and visibilities.
    */
-  public function load_from_object ($obj)
-  {
-    parent::load_from_object ($obj);
-    $this->load_with_defaults ();
-  }
-
   public function load_with_defaults ()
   {
     $this->set_value ('show_comments', Print_comments_threaded);

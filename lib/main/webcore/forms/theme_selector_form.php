@@ -105,6 +105,9 @@ class THEME_SELECTOR_FORM extends FORM
     $this->page->set_theme_dont_apply_to_forms ($this->value_for ('dont_apply_to_forms'));
   }
 
+  /**
+   * Initialize the form's fields with default values and visibilities.
+   */
   public function load_with_defaults ()
   {
     $this->set_value ('page_number', read_var ('page_number', 1));

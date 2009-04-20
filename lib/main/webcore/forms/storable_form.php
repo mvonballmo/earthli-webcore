@@ -83,16 +83,6 @@ abstract class STORABLE_FORM extends PREVIEWABLE_FORM
   }
 
   /**
-   * Validate the form and apply data to the object.
-   * @param object $obj
-   * @access private
-   */
-  protected function _prepare_for_commit ($obj)
-  {
-    $this->_store_to_object ($obj);
-  }
-
-  /**
    * Execute the form.
    * The form has been validated and can be executed.
    * @param STORABLE $obj
@@ -101,6 +91,16 @@ abstract class STORABLE_FORM extends PREVIEWABLE_FORM
   public function commit ($obj)
   {
     $obj->store ();
+  }
+
+  /**
+   * Validate the form and apply data to the object.
+   * @param object $obj
+   * @access private
+   */
+  protected function _prepare_for_commit ($obj)
+  {
+    $this->_store_to_object ($obj);
   }
 
   /**

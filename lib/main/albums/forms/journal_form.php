@@ -94,6 +94,9 @@ class JOURNAL_FORM extends ALBUM_ENTRY_FORM
     $this->set_value ('hi_temp', $obj->hi_temp);
   }
 
+  /**
+   * Initialize the form's fields with default values and visibilities.
+   */
   public function load_with_defaults ()
   {
     parent::load_with_defaults ();

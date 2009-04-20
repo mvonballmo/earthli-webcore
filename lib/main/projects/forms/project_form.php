@@ -133,6 +133,9 @@ class PROJECT_FORM extends FOLDER_FORM
     $this->_set_up_options ();
   }
 
+  /**
+   * Initialize the form's fields with default values and visibilities.
+   */
   public function load_with_defaults ()
   {
     parent::load_with_defaults ();

@@ -74,6 +74,9 @@ class EXECUTE_MIGRATOR_TASK_FORM extends EXECUTE_TASK_FORM
     $this->add_field ($field);
   }
 
+  /**
+   * Initialize the form's fields with default values and visibilities.
+   */
   public function load_with_defaults ()
   {
     parent::load_with_defaults ();
@@ -89,7 +92,6 @@ class EXECUTE_MIGRATOR_TASK_FORM extends EXECUTE_TASK_FORM
   {
     parent::load_from_object ($obj);
     $this->set_value ('ignore_from_version', $obj->ignore_from_version);
-    $this->set_value ('framework', read_var ('framework'));
     $this->set_enabled ('ignore_from_version', $obj->info->exists ());
   }
 

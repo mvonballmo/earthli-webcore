@@ -131,6 +131,9 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
     }
   }
 
+  /**
+   * Initialize the form's fields with default values and visibilities.
+   */
   public function load_with_defaults ()
   {
     parent::load_with_defaults ();

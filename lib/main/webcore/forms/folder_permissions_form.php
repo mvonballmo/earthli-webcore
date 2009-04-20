@@ -106,6 +106,9 @@ class FOLDER_PERMISSIONS_FORM extends PERMISSIONS_FORM
     $obj->store ();
   }
 
+  /**
+   * Initialize the form's fields with default values and visibilities.
+   */
   public function load_with_defaults ()
   {
     parent::load_with_defaults ();

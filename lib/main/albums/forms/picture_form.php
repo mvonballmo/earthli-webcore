@@ -134,6 +134,9 @@ class PICTURE_FORM extends ALBUM_ENTRY_FORM
     $this->set_value ('create_thumbnail', $this->_folder->uploads_allowed ());
   }
 
+  /**
+   * Initialize the form's fields with default values and visibilities.
+   */
   public function load_with_defaults ()
   {
     parent::load_with_defaults ();

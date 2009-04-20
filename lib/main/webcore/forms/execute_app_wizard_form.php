@@ -134,6 +134,9 @@ class EXECUTE_APP_WIZARD_FORM extends FORM
     $this->add_field ($field);
   }
   
+  /**
+   * Initialize the form's fields with default values and visibilities.
+   */
   public function load_with_defaults ()
   {
     $this->load_from_client ('app_title', '');
@@ -147,12 +150,6 @@ class EXECUTE_APP_WIZARD_FORM extends FORM
     $this->load_from_client ('author_email', '');
   }
   
-  public function load_from_object ($obj)
-  {
-    parent::load_from_object ($obj);
-    $this->load_with_defaults ();
-  }
-
   /**
    * Execute the form.
    * @param TASK $obj

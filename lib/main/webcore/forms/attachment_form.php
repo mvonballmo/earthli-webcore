@@ -105,13 +105,13 @@ class ATTACHMENT_FORM extends OBJECT_IN_FOLDER_FORM
   public function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
-    $this->load_from_client ('thumbnail_size', 200);
-    $this->load_from_client ('overwrite', true);
-    $this->load_from_client ('create_thumbnail', true);
     $this->set_value ('type', $obj->type);
     $this->set_required ('file_name', false);
   }
 
+  /**
+   * Initialize the form's fields with default values and visibilities.
+   */
   public function load_with_defaults ()
   {
     parent::load_with_defaults ();

@@ -80,6 +80,13 @@ abstract class AUDITABLE_FORM extends RENDERABLE_FORM
     $field->title = 'Last modified';
     $field->visible = false;
     $this->add_field ($field);
+    
+    $field = new BOOLEAN_FIELD ();
+    $field->id = 'update_modifier_on_change';
+    $field->title = 'Update Modifier';
+    $field->description = 'Set the modifier of this object to the currently logged-in user; turn off to maintain the existing user as modifier.';
+    $field->visible = false;
+    $this->add_field ($field);
   }
 
   /**
@@ -174,24 +181,17 @@ abstract class AUDITABLE_FORM extends RENDERABLE_FORM
   {
     parent::load_from_object ($obj);
     $this->set_value ('time_modified', $obj->time_modified);
-    $this->set_value ('publication_state', History_item_needs_send);
   }
 
   /**
-   * Load initial properties from the object, but store as a new object.
-   * @param AUDITABLE $obj
+   * Initialize the form's fields with default values and visibilities.
    */
-  public function load_from_clone ($obj)
-  {
-    parent::load_from_clone ($obj);
-    $this->set_value ('publication_state', History_item_needs_send);
-  }
-
   public function load_with_defaults ()
   {
     parent::load_with_defaults ();
     $this->set_value ('time_modified', new DATE_TIME ());
     $this->set_value ('publication_state', History_item_needs_send);
+    $this->set_value ('update_modifier_on_change', true);
   }
 
   /**
@@ -203,6 +203,17 @@ abstract class AUDITABLE_FORM extends RENDERABLE_FORM
   public function commit ($obj)
   {
     $obj->store_if_different ($this->_history_item);
+  }
+
+  /**
+   * Store the form's values to this object.
+   * @param AUDITABLE $obj
+   * @access private
+   * @abstract
+   */
+  protected function _store_to_object ($obj)
+  {
+    $obj->update_modifier_on_change = $this->value_for ('update_modifier_on_change');
   }
 
   /**

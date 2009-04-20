@@ -108,6 +108,9 @@ class PURGE_OBJECT_FORM extends RENDERABLE_FORM
     $field->description = '<strong>Uncheck</strong> if this is a duplicate (e.g. another ' . $type_info->singular_title . ' uses the same files).';
   }
 
+  /**
+   * Initialize the form's fields with default values and visibilities.
+   */
   public function load_with_defaults ()
   {
     $this->raise ('Cannot use purge form for new objects.', 'load_with_defaults', 'PURGE_OBJECT_FORM');

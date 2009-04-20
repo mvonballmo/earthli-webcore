@@ -81,6 +81,9 @@ abstract class SEND_MULTIPLE_MAIL_FORM extends SEND_MAIL_FORM
     $field->required = false;
   }
 
+  /**
+   * Initialize the form's fields with default values and visibilities.
+   */
   public function load_with_defaults ()
   {
     parent::load_with_defaults ();

@@ -74,6 +74,8 @@ class CONTENT_OBJECT_FORM extends AUDITABLE_FORM
    */
   protected function _store_to_object ($obj)
   {
+    parent::_store_to_object ($obj);
+    
     $obj->title = $this->value_as_text ('title');
     $obj->description = $this->value_as_text ('description');
   }

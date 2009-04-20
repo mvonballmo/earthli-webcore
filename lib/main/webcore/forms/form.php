@@ -351,14 +351,14 @@ abstract class FORM extends WEBCORE_OBJECT
    */
   public function load_from_object ($obj)
   {
-    if (isset ($this->captcha))
-    {
-      $this->set_value ('verification_question', $this->captcha->encode ());
-    }
+    $this->load_with_defaults ();
   }
 
   /**
-   * Load default values for a new object.
+   * Initialize the form's fields with default values and visibilities.
+   * 
+   * Called when the form is loaded for a new object or when {@link load_from_object()} 
+   * is called to initialize the form before copying object values over the defaults.
    */
   public function load_with_defaults ()
   {

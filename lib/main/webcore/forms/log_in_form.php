@@ -146,6 +146,9 @@ class LOG_IN_FORM extends FORM
     }
   }
 
+  /**
+   * Initialize the form's fields with default values and visibilities.
+   */
   public function load_with_defaults ()
   {
     $this->set_value ('last_page', urlencode (read_var ('last_page')));

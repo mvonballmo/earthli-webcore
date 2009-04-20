@@ -96,9 +96,11 @@ class OBJECT_IN_FOLDER_FORM extends CONTENT_OBJECT_FORM
     parent::load_from_object ($obj);
 
     $this->set_value ('is_visible', $obj->visible ());
-    $this->set_visible ('is_visible', $this->_visible_allowed ());
   }
 
+  /**
+   * Initialize the form's fields with default values and visibilities.
+   */
   public function load_with_defaults ()
   {
     parent::load_with_defaults ();

@@ -98,6 +98,9 @@ class ADD_TO_LIST_FORM extends ID_BASED_FORM
     $field->visible = true;
   }
 
+  /**
+   * Initialize the form's fields with default values and visibilities.
+   */
   public function load_with_defaults ()
   {
     parent::load_with_defaults ();

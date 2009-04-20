@@ -71,6 +71,9 @@ class DELETE_FORM extends ID_BASED_FORM
     $obj->purge ();
   }
 
+  /**
+   * Initialize the form's fields with default values and visibilities.
+   */
   public function load_with_defaults ()
   {
     $this->raise ('Cannot use delete form for new objects.', 'load_with_defaults', 'DELETE_FORM');
@@ -177,6 +180,9 @@ class DELETE_OBJECT_FORM extends PURGE_OBJECT_FORM
       $field->description = 'This ' . $type_info->singular_title . ' will be marked as deleted and hidden from you. Purging removes it permanently and cannot be undone.';
   }
 
+  /**
+   * Initialize the form's fields with default values and visibilities.
+   */
   public function load_with_defaults ()
   {
     $this->raise ('Cannot use delete form for new objects.', 'load_with_defaults', 'DELETE_OBJECT_FORM');

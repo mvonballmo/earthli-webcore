@@ -148,15 +148,20 @@ class EXECUTE_SEARCH_FORM extends ID_BASED_FORM
     }
   }
 
+  /**
+   * Initialize the form's fields with default values and visibilities.
+   */
   public function load_with_defaults ()
   {
     parent::load_with_defaults ();
+    
     if (isset ($this->_search))
     {
       $this->_search->fields->load_with_defaults ($this);
       $this->set_value ('type', $this->_search->type);
       $this->set_value ('quick_search', false);
     }
+
     if ($this->is_field ('folder_search_type'))
     {
       $this->set_value ('folder_search_type', Search_user_context_none);
@@ -173,7 +178,6 @@ class EXECUTE_SEARCH_FORM extends ID_BASED_FORM
     if (isset ($this->_search))
     {
       $this->_search->fields->load_from_object ($this, $obj);
-      $this->set_value ('quick_search', false);
     }
   }
 

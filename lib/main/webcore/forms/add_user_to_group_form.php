@@ -107,15 +107,8 @@ class ADD_USER_TO_GROUP_FORM extends ID_BASED_FORM
   }
 
   /**
-   * Load initial properties from this object.
-   * @param GROUP $obj
+   * Initialize the form's fields with default values and visibilities.
    */
-  public function load_from_object ($obj)
-  {
-    parent::load_from_object ($obj);
-    $this->set_value ('name', read_var ('name'));
-  }
-
   public function load_with_defaults ()
   {
     parent::load_with_defaults ();

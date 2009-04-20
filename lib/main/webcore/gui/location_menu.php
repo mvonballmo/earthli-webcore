@@ -96,7 +96,7 @@ class LOCATION_MENU extends MENU
   {
     $parent = $folder;
 
-    while ($parent->id && ! $parent->is_root ())
+    while (! empty($parent->id) && ! $parent->is_root ())
     {
       $t = $parent->title_formatter ();
       $t->CSS_class = 'nav-item';

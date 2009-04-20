@@ -117,6 +117,9 @@ class EXECUTE_TASK_FORM extends FORM
     $field->description = 'Show all debugging output from all sub-systems. Similar to "verbose".';
   }
 
+  /**
+   * Initialize the form's fields with default values and visibilities.
+   */
   public function load_with_defaults ()
   {
     parent::load_with_defaults ();

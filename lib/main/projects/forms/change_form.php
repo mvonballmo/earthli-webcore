@@ -77,6 +77,9 @@ class CHANGE_FORM extends PROJECT_ENTRY_FORM
     $this->_fields ['title']->required = false;
   }
 
+  /**
+   * Initialize the form's fields with default values and visibilities.
+   */
   public function load_with_defaults ()
   {
     parent::load_with_defaults ();

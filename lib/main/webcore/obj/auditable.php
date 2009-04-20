@@ -84,6 +84,13 @@ abstract class AUDITABLE extends UNIQUE_OBJECT
   public $modifier_id;
 
   /**
+   * If true, the modifier is automatically set to the {@link $login} when changes are made.
+   *
+   * @var boolean
+   */
+  public $update_modifier_on_change = true;
+
+  /**
    * @param APPLICATION $app Main application.
    */
   public function __construct ($app)
@@ -293,7 +300,11 @@ abstract class AUDITABLE extends UNIQUE_OBJECT
     {
       // Abandoned items should be abandoned "in-place"; the abandoner is retained in the item's history.
       
-      $this->modifier_id = $this->login->id;
+      if ($this->update_modifier_on_change)
+      {
+        $this->modifier_id = $this->login->id;
+      }
+      
       $this->time_modified->set_now ();
     } 
   }

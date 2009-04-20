@@ -82,6 +82,9 @@ class STORE_SEARCH_FORM extends RENDERABLE_FORM
     $this->add_field ($field);
   }
 
+  /**
+   * Initialize the form's fields with default values and visibilities.
+   */
   public function load_with_defaults ()
   {
     parent::load_with_defaults ();

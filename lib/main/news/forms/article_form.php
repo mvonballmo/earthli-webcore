@@ -49,6 +49,38 @@ require_once ('webcore/forms/object_in_folder_form.php');
 class ARTICLE_FORM extends DRAFTABLE_ENTRY_FORM
 {
   /**
+   * @param CONTEXT $context Attach to this object.
+   */
+  public function __construct ($context)
+  {
+    parent::__construct ($context);
+
+    $this->field_at('update_modifier_on_change')->visible = true;
+  }
+
+  /**
+   * Draw options between the title and description.
+   * This is a good place for controls that add content to the description
+   * (toolbars, etc.).
+   * @param FORM_RENDERER $renderer
+   * @access private
+   */
+  protected function _draw_options ($renderer)
+  {
+    $renderer->draw_check_box_row ('update_modifier_on_change');
+  }
+  
+  /**
+   * Return true if there are options to be drawn by {@link _draw_options()}.
+   * @return boolean 
+   * @access private
+   */
+  protected function _has_options ()
+  {
+    return $this->object_exists () || parent::_has_options(); 
+  }
+    
+  /**
    * @param FORM_RENDERER $renderer
    * @access private
    */

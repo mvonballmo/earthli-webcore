@@ -80,6 +80,9 @@ class COMPONENT_FORM extends OBJECT_IN_FOLDER_FORM
     }
   }
 
+  /**
+   * Initialize the form's fields with default values and visibilities.
+   */
   public function load_with_defaults ()
   {
     parent::load_with_defaults ();

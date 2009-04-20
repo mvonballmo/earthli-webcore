@@ -65,6 +65,9 @@ class SUBMIT_BROWSER_FORM extends SEND_MAIL_FORM
     $field->description = 'Briefly describe the problem with our browser detection (very useful).';
   }
 
+  /**
+   * Initialize the form's fields with default values and visibilities.
+   */
   public function load_with_defaults ()
   {
     parent::load_with_defaults ();
