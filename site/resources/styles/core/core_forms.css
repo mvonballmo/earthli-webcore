@@ -44,5 +44,7 @@ http://www.earthli.com/software/webcore
 input[type="radio"], input[type="checkbox"]
 {
 	vertical-align: middle;
+	margin: 0px;
+	padding: 0px;
 }
 

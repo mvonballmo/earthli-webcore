@@ -59,6 +59,7 @@ abstract class AUDITABLE_FORM extends RENDERABLE_FORM
     $field = new ENUMERATED_FIELD ();
     $field->id = 'publication_state';
     $field->title = 'Notifications';
+    $field->add_value (History_item_default);
     $field->add_value (History_item_silent);
     $field->add_value (History_item_needs_send);
     $this->add_field ($field);
@@ -122,7 +123,6 @@ abstract class AUDITABLE_FORM extends RENDERABLE_FORM
       }
       
       $this->_history_item = $obj->new_history_item ();
-      $this->_adjust_history_item ($this->_history_item);
     }
     
     parent::attempt_action ($obj);
@@ -157,19 +157,26 @@ abstract class AUDITABLE_FORM extends RENDERABLE_FORM
 
   /**
    * Configure the history item's properties.
-   * Applies form values to the history item.
-   * @param HISTORY_ITEM $history_item
+   * Applies form values to the history item and adjusts the publication state 
+   * depending on the state of the object.
+   * 
+   * @param AUDITABLE $obj The object to be stored.
+   * @param HISTORY_ITEM $history_item The history item to be stored.
    * @access private
    */
-  protected function _adjust_history_item ($history_item)
+  protected function _adjust_history_item ($obj, $history_item)
   {
     $history_item->title = $this->value_as_text ('history_item_title');
     $history_item->description = $this->value_as_text ('history_item_description');
 
     $pub_state = $this->value_for ('publication_state');
-    if ($pub_state)
+    switch ($pub_state)
     {
-      $history_item->publication_state = $pub_state;
+      case History_item_default:
+        $history_item->publication_state = History_item_queued;
+        break;
+      default:
+        $history_item->publication_state = $pub_state;
     }
   }
 
@@ -190,7 +197,7 @@ abstract class AUDITABLE_FORM extends RENDERABLE_FORM
   {
     parent::load_with_defaults ();
     $this->set_value ('time_modified', new DATE_TIME ());
-    $this->set_value ('publication_state', History_item_needs_send);
+    $this->set_value ('publication_state', History_item_default);
     $this->set_value ('update_modifier_on_change', true);
   }
 
@@ -202,6 +209,7 @@ abstract class AUDITABLE_FORM extends RENDERABLE_FORM
    */
   public function commit ($obj)
   {
+    $this->_adjust_history_item ($obj, $this->_history_item);
     $obj->store_if_different ($this->_history_item);
   }
 
@@ -218,7 +226,9 @@ abstract class AUDITABLE_FORM extends RENDERABLE_FORM
 
   /**
    * Draws controls for history item notification.
-   *  @access private
+   * @param FORM_RENDERER $renderer
+   * @param boolean $show_initially
+   * @access private
    */
   protected function _draw_history_item_controls ($renderer, $show_initially)
   {
@@ -227,8 +237,10 @@ abstract class AUDITABLE_FORM extends RENDERABLE_FORM
     $layer = $renderer->start_layer_row ('history', 'History', $description);
       $renderer->set_width ('25em');
       $props = $renderer->make_list_properties ();
-      $props->add_item ('Publish', History_item_needs_send);
-      $props->add_item ('Do not publish', History_item_silent);
+      $props->show_descriptions = true;
+      $props->add_item ('Default', History_item_default, 'Let the system decide whether to send notifications for this change.');
+      $props->add_item ('Publish', History_item_needs_send, 'Send notifications for this change.');
+      $props->add_item ('Do not publish', History_item_silent, 'Do not send notifications for this change');
       $renderer->draw_radio_group_row ('publication_state', $props);
 
       $renderer->draw_separator ();

@@ -310,12 +310,13 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
    * Configure the history item's properties.
    * Makes sure that the branch information is compared when the main object is
    * stored.
+   * @param AUDITABLE $obj The object to be stored.
    * @param HISTORY_ITEM $history_item
    * @access private
    */
-  protected function _adjust_history_item ($history_item)
+  protected function _adjust_history_item ($obj, $history_item)
   {
-    parent::_adjust_history_item ($history_item);
+    parent::_adjust_history_item ($obj, $history_item);
     $history_item->compare_branches = true;
   }
 

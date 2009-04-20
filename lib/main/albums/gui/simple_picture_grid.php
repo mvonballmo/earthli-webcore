@@ -89,7 +89,7 @@ class SIMPLE_PICTURE_GRID extends STANDARD_GRID
     $title = $obj->title_as_plain_text () . " (" . $album->format_date ($obj->date, $f) . ")";
     $thumbnail = $obj->full_thumbnail_name ();
 ?>
-  <a href="#" onclick="picker.select_value('<?php echo $obj->id ?>|<?php echo $thumbnail; ?>')"><img class="frame" src="<?php echo $thumbnail; ?>" alt="<?php echo $title; ?>"></a>
+  <a href="#" onclick="picker.select_value('<?php echo $obj->id ?>|<?php echo $thumbnail; ?>'); return false;"><img class="frame" src="<?php echo $thumbnail; ?>" alt="<?php echo $title; ?>"></a>
 <?php
   }
 }

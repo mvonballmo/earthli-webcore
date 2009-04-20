@@ -212,7 +212,7 @@ http://www.earthli.com/software/webcore
       <p id="report_form">If you think you shouldn't be getting a warning (e.g. all technologies listed above
         are supported) or if there is some other problem, you can:</p>
         <ul>
-          <li><a href="#" onclick="<?php echo $form->js_form_name (); ?>.submit()">send</a> just your browser information</li>
+          <li><a href="#" onclick="<?php echo $form->js_form_name (); ?>.submit(); return false;">send</a> just your browser information</li>
           <li>fill out the form below to provide more information</li>
         </ul>
       <?php

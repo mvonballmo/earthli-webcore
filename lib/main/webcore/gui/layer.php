@@ -103,7 +103,7 @@ class LAYER extends WEBCORE_OBJECT
         $icon = $this->context->resolve_icon_as_html ('{icons}tree/expand', '[+]', '', 'vertical-align: middle', "{$this->name}_image");
       }
 
-      return '<a href="#" onclick="toggle_visibility(\'' . $this->name . '\')">' . $icon . '</a>';
+      return '<a href="#" onclick="toggle_visibility(\'' . $this->name . '\'); return false;">' . $icon . '</a>';
     }
     
     return '';

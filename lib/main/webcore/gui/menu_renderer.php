@@ -406,7 +406,7 @@ class MENU_RENDERER extends WEBCORE_OBJECT
         }
         if ($cmd->on_click)
         {
-          $tag .= ' onclick="' .  $cmd->on_click . '"';
+          $tag .= ' onclick="' .  $cmd->on_click . '; return false;"';
         }
         $tag .= '>';
           

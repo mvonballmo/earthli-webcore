@@ -110,6 +110,31 @@ class OBJECT_IN_FOLDER_FORM extends CONTENT_OBJECT_FORM
   }
 
   /**
+   * Configure the history item's properties.
+   * Prevents history items for invisible objects from queuing when the user hasn't expressed a preference.
+   * 
+   * @param OBJECT_IN_FOLDER $obj The object to be stored.
+   * @param HISTORY_ITEM $history_item
+   * @access private
+   */
+  protected function _adjust_history_item ($obj, $history_item)
+  {
+    parent::_adjust_history_item ($obj, $history_item);
+    $pub_state = $this->value_for ('publication_state');
+    if ($pub_state == History_item_default)
+    {
+      if ($obj->visible())
+      {
+        $history_item->publication_state = History_item_queued;
+      }
+      else 
+      {
+        $history_item->publication_state = History_item_silent;
+      }
+    }
+  }
+
+  /**
    * Can the current user see invisible objects of this type?
    * @return boolean
    * @access private
@@ -423,6 +448,10 @@ class DRAFTABLE_ENTRY_FORM extends ENTRY_FORM
     {
       $this->set_value ('is_visible', true);
       $this->set_visible ('is_visible', false);
+    }
+    else
+    {
+      $this->set_visible ('is_visible', true);
     }
   }
 

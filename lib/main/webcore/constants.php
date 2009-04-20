@@ -304,6 +304,12 @@ define ('Privilege_always_granted', 0x01);
 define ('Privilege_controlled_by_content', 0x02);
 
 /**
+ * User did not specify a preference; {@link History_item_silent} or 
+ * {@link History_item_queued} will be used based on context.
+ */
+define ('History_item_default', 'default');
+
+/**
  * Action was recorded without triggering notifications.
  */
 define ('History_item_silent', 'silent');

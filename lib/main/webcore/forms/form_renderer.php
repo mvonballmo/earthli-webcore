@@ -1130,7 +1130,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
 
     if (! isset ($options))
     {
-      $options = default_text_options ();
+      $options = clone(default_text_options ());
       if ($includes_time)
       {
         $options->width = $this->default_date_time_width;
@@ -1452,7 +1452,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
 
     if (! isset ($options))
     {
-      $options = default_text_options ();
+      $options = clone(default_text_options ());
     }
 
     if (isset ($options->width))

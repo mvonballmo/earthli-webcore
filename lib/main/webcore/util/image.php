@@ -892,7 +892,7 @@ class IMAGE_METRICS
     {
       if ($this->was_resized)
       {
-        $Result = "<a href=\"#\" onclick=\"open_image ('{$this->url}', {$this->original_width}, {$this->original_height})\">$Result</a>";
+        $Result = "<a href=\"#\" onclick=\"open_image ('{$this->url}', {$this->original_width}, {$this->original_height}); return false;\">$Result</a>";
       }
 
       return $Result;
