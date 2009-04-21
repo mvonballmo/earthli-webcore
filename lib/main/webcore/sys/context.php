@@ -131,6 +131,12 @@ class CONTEXT extends RESOLVER
   public $is_page = false;
 
   /**
+   * Text to display as having been searched.
+   * @var string
+   */
+  public $search_text = '';
+
+  /**
    * @param ENVIRONMENT $env Global environment.
    */
   public function __construct ($env)
@@ -264,6 +270,18 @@ class CONTEXT extends RESOLVER
   }
 
   /**
+   * Set the text to highlight in this context.
+   * All HTML formatters will have these words automatically set so that they are highlighted.
+   * @see html_text_formatter ()
+   * @see html_title_formatter ()
+   * @param string $text
+   */
+  public function set_search_text ($text)
+  {
+    $this->search_text = $text;
+  }
+
+  /**
    * Customizable title formatter.
    * This generates all forms of output for titles, including plain text and as HTML text and link.
    * @return TITLE_FORMATTER
@@ -281,7 +299,10 @@ class CONTEXT extends RESOLVER
    */
   public function html_text_formatter ()
   {
-    return $this->make_object ('html_text_formatter', 'HTML_TEXT_MUNGER', 'webcore/util/html_munger.php');
+    $Result = $this->make_object ('html_text_formatter', 'HTML_TEXT_MUNGER', 'webcore/util/html_munger.php');
+    $Result->highlighted_words = $this->search_text;
+
+    return $Result;
   }
 
   /**
@@ -291,7 +312,10 @@ class CONTEXT extends RESOLVER
    */
   public function html_title_formatter ()
   {
-    return $this->make_object ('html_title_formatter', 'HTML_TITLE_MUNGER', 'webcore/util/html_munger.php');
+    $Result = $this->make_object ('html_title_formatter', 'HTML_TITLE_MUNGER', 'webcore/util/html_munger.php');
+    $Result->highlighted_words = $this->search_text;
+
+    return $Result;
   }
 
   /**

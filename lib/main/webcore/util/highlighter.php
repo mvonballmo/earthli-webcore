@@ -54,14 +54,12 @@ class HIGHLIGHTER extends WEBCORE_OBJECT
 {
   /**
    * Generates line numbers for each source line.
-   * Only works for PHP 4.3 and higher.
    * @var boolean
    */
   public $show_line_numbers = true;
 
   /**
    * Links PHP functions to the PHP web site.
-   * Only works for PHP 4.3 and higher.
    * @var boolean
    */
   public $link_functions = true;
@@ -89,7 +87,6 @@ class HIGHLIGHTER extends WEBCORE_OBJECT
     {
       include_once ('third_party/aidan.dotgeek.org/PHP_Highlight.php');
       $highlighter = new PHP_Highlight ();
-      $highlighter->__construct (); // PHP 5 class
       $highlighter->link_functions = $this->link_functions;
       $highlighter->loadFile ($file_name);
       return $highlighter->toHtml (true, $this->show_line_numbers);

@@ -50,7 +50,7 @@ abstract class CONTENT_OBJECT_GRID extends SELECTABLE_GRID
 {
   /**
    * Used to draw the entry's title in each cell.
-   * @param CONTENT_OBJECT_GRID $obj
+   * @param CONTENT_OBJECT $obj
    * @return TITLE_FORMATTER
    * @access private
    */

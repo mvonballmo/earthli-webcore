@@ -2832,12 +2832,14 @@ class REGULAR_EXPRESSION
         }
         else
         {
-          /* No offset available in PHP 4. */
-          $space = $start_pos - $context_size;
-          while (($space != 0) && ($text[$space] != ' '))
-          {
-            $space--;
-          }
+          // Search backwards from a specific position in the string; specify
+          // that position as a negative value to ensure the search is in the
+          // the left-hand part of the string.
+          
+          $offset = (strlen($text) - ($start_pos - $context_size));
+          $space = strrpos ($text, ' ', - $offset);
+          if ($space === false) { $space = 0; }
+          
           $includes_head = ($space === 0);
           $prefix = substr($text, $space, $start_pos - $space);
         }
@@ -2849,7 +2851,8 @@ class REGULAR_EXPRESSION
       {
         $suffix = substr($text, $end_pos +5, $context_size);
         $end_pos = $end_pos + $context_size;
-      } else
+      } 
+      else
       {
         $space = @ strpos($text, ' ', $end_pos +5 + $context_size);
         if ($space === false)

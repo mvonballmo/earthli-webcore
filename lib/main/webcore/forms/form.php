@@ -901,9 +901,8 @@ abstract class FORM extends WEBCORE_OBJECT
 
   /**
    * Add a field to the form.
-   * Almost always called from the {@link FORM} constructor. The parameter
-   * is explicitly not a reference for PHP4; call this function only after
-   * setting all properties of the field. In PHP5, normal semantics apply.
+   * Almost always called from the {@link FORM} constructor. Call this function only after
+   * setting all properties of the field.
    * @param FIELD $field
    * @access private
    */
@@ -1000,9 +999,6 @@ abstract class FORM extends WEBCORE_OBJECT
 
     if (! isset ($this->_fields [Form_max_file_size_field_name]))
     {
-      // Do not use the local name "field" because it is assigned
-      // to the argument in PHP4.
-
       $max_field = new INTEGER_FIELD ();
       $max_field->id = Form_max_file_size_field_name;
       $max_field->min_value = 0;

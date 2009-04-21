@@ -86,9 +86,6 @@ class JOB_GRID extends PROJECT_ENTRY_GRID
    */
   protected function _draw_user_details ($obj, $branch_info)
   {
-    // PHP 4.4x HACK
-//    $branch_info->_entry = $obj;
-
     $is_closed = $branch_info->is_closed ();
 
     $time_open = $branch_info->age ();

@@ -667,7 +667,7 @@ class DATE_TIME extends RAISABLE
    */
   public function as_RFC_2822 ()
   {
-    return date ('r', $this->as_php ());
+    return date (DATE_RFC2822, $this->as_php ());
   }
 
   /**
@@ -678,9 +678,7 @@ class DATE_TIME extends RAISABLE
    */
   public function as_RFC_3339 ()
   {
-    /* The 'c' or DATE_ATOM parameter is not supported in PHP 4. */
-    $Result = date ('Y-m-d\TH:i:sO', $this->as_php ());
-    return substr ($Result, 0, -2) . ':' . substr ($Result, -2 );
+    return date(DATE_ATOM, $this->as_php ());
   }
 
   /**

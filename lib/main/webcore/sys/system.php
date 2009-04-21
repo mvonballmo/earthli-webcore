@@ -222,11 +222,6 @@ function hook_php_error_handler ()
   set_error_handler ('__php_error_handler');
 }
 
-function is_php_5 ()
-{
-  return version_compare (phpversion (), '5.0', ">=");
-}
-
 /**
  * Called when PHP encounters an error.
  * Only used if {@link hook_php_error_handler()} is called to override PHP

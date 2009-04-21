@@ -119,12 +119,6 @@ class APPLICATION extends CONTEXT
   public $offline = false;
 
   /**
-   * Text to display as having been searched.
-   * @var string
-   */
-  public $search_text = '';
-
-  /**
    * Page in which this application is anchored.
    * @var PAGE
    */
@@ -644,22 +638,6 @@ class APPLICATION extends CONTEXT
   public function set_referer ()
   {
     $this->storage->set_value ($this->storage_options->return_to_page_name, $this->env->url (Url_part_all));
-  }
-
-  /**
-   * Set the text to highlight in this application.
-   * All HTML formatters are updated so that the given words are highlighted.
-   * @see html_text_formatter ()
-   * @see html_title_formatter ()
-   * @param string $text
-   */
-  public function set_search_text ($text)
-  {
-    $this->search_text = $text;
-    $munger = $this->html_text_formatter ();
-    $munger->highlighted_words = $text;
-    $munger = $this->html_title_formatter ();
-    $munger->highlighted_words = $text;
   }
 
   /**
