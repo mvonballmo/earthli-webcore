@@ -495,6 +495,23 @@ class DRAFTABLE_ENTRY extends ENTRY
     {
       $this->time_published->clear ();
       $this->publisher_id = 0;
+      
+      if ($this->_state_when_loaded != $this->state)
+      {
+        // State changed; check history items and revoke notification for published items
+        
+        $history_item_query = $this->history_item_query ();
+        $history_items = $history_item_query->objects ();
+        
+        foreach ($history_items as &$history_item)
+        {
+          if (($history_item->kind == History_item_published) && ($history_item->publication_state == History_item_needs_send))
+          {
+            $history_item->publication_state = History_item_silent;
+            $history_item->store();
+          }
+        }
+      }
     }
     elseif (! $this->time_published->is_valid ())
     {

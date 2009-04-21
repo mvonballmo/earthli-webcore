@@ -437,6 +437,7 @@ abstract class OBJECT_IN_FOLDER extends CONTENT_OBJECT
     $this->state = $db->f ('state');
     $this->owner_id = $db->f ('owner_id');
     $this->_stored_state = $this->state;
+    $this->_state_when_loaded = $this->state;
   }
 
   /**

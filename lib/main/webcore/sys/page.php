@@ -399,19 +399,18 @@ class PAGE extends CONTEXT
   {
     $class_name = $this->final_class_name ('APPLICATION_ENGINE', 'webcore/config/application_engine.php', $id);
     $engine = new $class_name ();
+    
     $engine->init ($this);
+    
     if ($set_as_default)
     {
       $engine->set_main_app_for ($this);
     }
+    
     if ($start)
     {
       $engine->start ();
     }
-
-      /* HACK: This reference has to be patched for 4.4.x; can't figure out a better way yet. */
-            
-    $this->location->page->app = $engine->app;
       
     return $engine->app;
   }
