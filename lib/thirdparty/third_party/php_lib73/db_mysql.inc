@@ -37,8 +37,8 @@ class DB_Sql
   public $revision = "1.2";
   
   /* private: link and query handles */
-  private $Link_ID = 0;
-  private $Query_ID = 0;
+  protected $Link_ID = 0;
+  protected $Query_ID = 0;
 
   /* public: constructor */
   function DB_Sql ($query = "")
