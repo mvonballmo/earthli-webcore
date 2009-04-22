@@ -154,7 +154,7 @@ class ENTRY_ATOM_RENDERER extends NEWSFEED_OBJECT_RENDERER
   /**
    * Draws the RSS item for this entry.
    * @param ENTRY $obj
-   * @param OBJECT_RENDERER_OPTIONS $options
+   * @param NEWSFEEDER_RENDERER_OPTIONS $options
    */
   public function display ($obj, $options = null)
   {
@@ -171,17 +171,19 @@ class ENTRY_ATOM_RENDERER extends NEWSFEED_OBJECT_RENDERER
     {
       $munger = $obj->plain_text_formatter ();
     }
-      
+    
+    $language = isset($options) ? $options->language : 'en-us'; 
+          
     $munger->max_visible_output_chars = 300;
     $summary = $munger->transform ($obj->description, $obj);
 ?>
   <entry>
-    <?php _echo_atom_text_tag ('title', $obj->title_as_plain_text (), $this->language, $this->html); ?>
+    <?php _echo_atom_text_tag ('title', $obj->title_as_plain_text (), $language, $html); ?>
     <id><?php echo $this->_as_xml ($obj->home_page (Force_root_on)); ?></id>
     <link href="<?php echo $this->_as_xml ($obj->home_page (Force_root_on)); ?>"/>
     <updated><?php echo $t->as_RFC_3339 (); ?></updated>
     <author>
-      <?php _echo_atom_text_tag ('name', $modifier->real_name (), $this->language, $this->html); ?>
+      <?php _echo_atom_text_tag ('name', $modifier->real_name (), $language, $html); ?>
 <?php if (! empty ($modifier->home_page_url)) { ?>
       <uri><?php echo $this->_as_xml ($modifier->home_page_url); ?></uri>
 <?php } ?>
@@ -189,8 +191,8 @@ class ENTRY_ATOM_RENDERER extends NEWSFEED_OBJECT_RENDERER
       <email><?php echo $this->_as_xml ($modifier->email_as_text ()); ?></email>
 <?php } ?>
     </author>
-    <?php _echo_atom_text_tag ('summary', $summary, $options->language, $html); ?>
-    <?php _echo_atom_text_tag ('content', $content, $options->language, $html); ?>
+    <?php _echo_atom_text_tag ('summary', $summary, $language, $html); ?>
+    <?php _echo_atom_text_tag ('content', $content, $language, $html); ?>
   </entry>
 <?php
   }

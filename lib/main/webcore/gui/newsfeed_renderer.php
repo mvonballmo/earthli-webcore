@@ -342,12 +342,8 @@ abstract class NEWSFEED_RENDERER extends WEBCORE_OBJECT
      * is toggled back to true.
      */
     $opts->header_visible = false;
-
-    include_once ('webcore/util/plain_text_munger.php');
-    $munger = $this->context->html_text_formatter ();
-    $munger->register_replacer ('fn', new NEWSFEED_FOOTNOTE_REFERENCE_REPLACER ($this), false);
-    $munger->register_replacer ('ft', new NEWSFEED_FOOTNOTE_TEXT_REPLACER ($this));
-    $munger->register_replacer ('media', new NEWSFEED_MEDIA_REPLACER ($this), false);
+    
+    $this->context->register_class ('HTML_TEXT_MUNGER', 'NEWSFEED_HTML_TEXT_MUNGER');
   }
 
   /**
@@ -427,13 +423,10 @@ class NEWSFEED_OBJECT_RENDERER extends HANDLER_RENDERER
   {
     if (isset ($options))
     {
-      $Result = $options->handler_type == Handler_html_renderer;
+      return $options->handler_type == Handler_html_renderer;
     }
-    else
-    {
-      $Result = false;
-    }
-    return $Result;
+
+    return false;
   }
 
   /**
@@ -537,6 +530,18 @@ class NEWSFEED_PAGE_RENDERER extends DEFAULT_PAGE_RENDERER
   }
 }
 
+class NEWSFEED_HTML_TEXT_MUNGER extends HTML_TEXT_MUNGER
+{
+  public function __construct ()
+  {
+    parent::__construct ();
+
+    $this->register_replacer ('fn', new NEWSFEED_FOOTNOTE_REFERENCE_REPLACER (), false);
+    $this->register_replacer ('ft', new NEWSFEED_FOOTNOTE_TEXT_REPLACER ());
+    $this->register_replacer ('media', new NEWSFEED_MEDIA_REPLACER (), false);
+  }
+}
+
 /**
  * Links a block of text to a previous footnote reference.
  * @package webcore
@@ -577,12 +582,14 @@ class NEWSFEED_FOOTNOTE_REFERENCE_REPLACER extends MUNGER_FOOTNOTE_REFERENCE_REP
 {
   /**
    * Format the reference to the given footnote number.
-   * @param MUNGER_TOKEN $token
-   * @param MUNGER_FOOTNOTE_INFO $info
+   * 
+   * @param MUNGER $munger The munger that generated the call; cannot be null.
+   * @param MUNGER_TOKEN $token The token being processed; cannot be null.
+   * @param MUNGER_FOOTNOTE_INFO $info The footnote to format; cannot be null.
    * @return string
    * @access private
    */
-  protected function _format_reference ($token, $info)
+  protected function _format_reference ($munger, $token, $info)
   {
     return " [$info->number]";
   }

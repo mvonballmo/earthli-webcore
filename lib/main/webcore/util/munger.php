@@ -346,9 +346,9 @@ class MUNGER_TOKEN
    */
   public function set_properties($first, $size, $type)
   {
-    unset ($this->_data);
-    unset ($this->_tag_data);
-    unset ($this->_name);
+    $this->_data = null;
+    $this->_tag_data = null;
+    $this->_name = null;
     $this->_first = $first;
     $this->size = $size;
     $this->type = $type;
@@ -362,9 +362,9 @@ class MUNGER_TOKEN
    */
   public function resize($size, $type)
   {
-    unset ($this->_data);
-    unset ($this->_tag_data);
-    unset ($this->_name);
+    $this->_data = null;
+    $this->_tag_data = null;
+    $this->_name = null;
     $this->size = $size;
     $this->type = $type;
   }
@@ -979,7 +979,7 @@ abstract class MUNGER_FOOTNOTE_REFERENCE_REPLACER extends MUNGER_REPLACER
   /**
    * Convert the given token to the output format.
    * @param MUNGER $munger The transformation context.
-   * @param MUNGER_TOKEN $token
+   * @param MUNGER_TOKEN $token The token being processed; cannot be null.
    * @return string
    */
   public function transform($munger, $token)
@@ -988,7 +988,7 @@ abstract class MUNGER_FOOTNOTE_REFERENCE_REPLACER extends MUNGER_REPLACER
     {
       $munger->inc_footnote_references();
       $info = $munger->current_reference_footnote_info();
-      return $this->_format_reference($token, $info);
+      return $this->_format_reference($munger, $token, $info);
     }
     
     return '';
@@ -996,13 +996,15 @@ abstract class MUNGER_FOOTNOTE_REFERENCE_REPLACER extends MUNGER_REPLACER
 
   /**
    * Format the reference to the given footnote number.
-   * @param MUNGER_TOKEN $token
-   * @param MUNGER_FOOTNOTE_INFO $info
+   * 
+   * @param MUNGER $munger The munger that generated the call; cannot be null.
+   * @param MUNGER_TOKEN $token The token being processed; cannot be null.
+   * @param MUNGER_FOOTNOTE_INFO $info The footnote to format; cannot be null.
    * @return string
    * @access private
    * @abstract
    */
-  protected abstract function _format_reference($token, $info);
+  protected abstract function _format_reference($munger, $token, $info);
 }
 
 /**
@@ -2732,17 +2734,24 @@ class MUNGER extends MUNGER_PARSER
  */
 class MUNGER_FOOTNOTE_INFO
 {
-  /**
+  /** 
+   * The unique identifier for the footnote description.
+   * Used in the link to "jump to" the description from a reference.
+   * 
    * @var string
    */
   public $name_to;
 
-  /**
+  /** 
+   * The unique identifier for the footnote reference.
+   * Used in the link to "jump back" to the reference from the description.
+   *   
    * @var string
    */
   public $name_from;
 
-  /**
+  /** The number of the footnote.
+   * 
    * @var integer
    */
   public $number;

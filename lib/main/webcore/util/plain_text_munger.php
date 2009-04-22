@@ -481,12 +481,13 @@ class PLAIN_TEXT_FOOTNOTE_REFERENCE_REPLACER extends MUNGER_FOOTNOTE_REFERENCE_R
 {
   /**
    * Format the reference to the given footnote number.
-   * @param MUNGER_TOKEN $token
-   * @param MUNGER_FOOTNOTE_INFO $info
+   * @param MUNGER $munger The munger that generated the call; cannot be null.
+   * @param MUNGER_TOKEN $token The token being processed; cannot be null.
+   * @param MUNGER_FOOTNOTE_INFO $info The footnote to format; cannot be null.
    * @return string
    * @access private
    */
-  protected function _format_reference ($token, $info)
+  protected function _format_reference ($munger, $token, $info)
   {
     return " [$info->number]";
   }
