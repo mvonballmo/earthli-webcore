@@ -284,7 +284,7 @@ class FORM_LIST_PROPERTIES
    */
   public function clear_items ()
   {
-    unset ($this->items);
+    $this->items = null;
   }
 }
 

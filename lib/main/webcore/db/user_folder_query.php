@@ -417,7 +417,7 @@ class USER_FOLDER_QUERY extends OBJECT_IN_FOLDER_QUERY
        has been applied. Clear the generated list internally so that it isn't
        returned when calling 'indexed_objects'. */
 
-    unset ($this->_indexed_objects);
+    $this->_indexed_objects = null;
     $this->_filter_by_sets = $set_names;
     $this->_filter_by_types = $types;
     $this->_calculated_restrictions [] =  'fldr.id = fldr.permissions_id';
@@ -443,9 +443,9 @@ class USER_FOLDER_QUERY extends OBJECT_IN_FOLDER_QUERY
 */
     $Result = $this->$func_name ();
 
-    unset ($this->_filter_by_sets);
-    unset ($this->_filter_by_type);
-    unset ($this->_indexed_objects);
+    $this->_filter_by_sets = null;
+    $this->_filter_by_type = null;
+    $this->_indexed_objects = null;
 
     return $Result;
   }
@@ -489,7 +489,7 @@ class USER_FOLDER_QUERY extends OBJECT_IN_FOLDER_QUERY
   protected function _invalidate ()
   {
     parent::_invalidate ();
-    unset ($this->_used_ids);
+    $this->_used_ids = null;
   }
 
   /**

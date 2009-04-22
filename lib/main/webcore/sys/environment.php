@@ -511,12 +511,11 @@ class ENVIRONMENT extends RESOLVER
     $this->default_domain = $default_domain;
     if (isset($domains))
     {
-      unset($this->url_options->domains);
       $this->url_options->domains = $domains;
       $keys = array_keys($domains);
       $this->url_options->main_domain = $keys[0];
     }
-    unset($this->_running_on_declared_host);
+    $this->_running_on_declared_host = null;
   }
   
   /**

@@ -38,11 +38,11 @@ class UPGRADE_PER_APP_221_23_TASK extends MIGRATOR_TASK
     $folders = array ();
     while ($Page->database->next_record ())
     {
+      $obj = new stdClass();
       $obj->id = $Page->database->f ('id');
       $obj->parent_id = $Page->database->f ('parent_id');
       $folders [] = $obj;
       $folder_map [$obj->id] = $obj;
-      unset($obj);
     }
 
     foreach ($folders as &$folder)

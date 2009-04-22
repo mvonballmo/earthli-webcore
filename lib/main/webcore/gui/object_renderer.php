@@ -103,7 +103,7 @@ class HANDLER_RENDERER extends RENDERER
   {
     ob_start ();
       $this->display ($obj, $options);
-    $Result = ob_get_contents ();
+      $Result = ob_get_contents ();
     ob_end_clean ();
     return $Result;
   }

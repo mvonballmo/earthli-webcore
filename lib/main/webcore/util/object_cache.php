@@ -279,9 +279,9 @@ abstract class OBJECT_CACHE extends RAISABLE
       $this->_record ("Rebuilding list...");
 
       $i = 0;
-      unset ($index_of_selected_id);
-      unset ($first_id);
-      unset ($last_id);
+      $index_of_selected_id = null;
+      $first_id = null;
+      $last_id = null;
 
       $ids = array ();
       $this->_start_id_search ();

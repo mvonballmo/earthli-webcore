@@ -565,11 +565,11 @@ abstract class QUERY extends WEBCORE_OBJECT
             $obj->load ($this->db);
             $this->_prepare_object ($obj);
             $this->_objects [] = $obj;
+
             if ($this->env->log_class_names)
             {
               log_message ("Loaded [" . $obj->instance_description () . ']', Msg_type_debug_info, Msg_channel_system);
             }
-            unset($obj);
           }
         }
       }
@@ -893,7 +893,7 @@ abstract class QUERY extends WEBCORE_OBJECT
           }
           else
           {
-            unset ($Result);
+            $Result = null;
             break;
           }
         }
@@ -1074,10 +1074,10 @@ abstract class QUERY extends WEBCORE_OBJECT
     if (! $this->_preparing_query)
     {
       $this->_prepared = false;
-      unset ($this->_objects);
-      unset ($this->_num_objects);
-      unset ($this->_indexed_objects);
-      unset ($this->_object_tree);
+      $this->_objects = null;
+      $this->_num_objects = null;
+      $this->_indexed_objects = null;
+      $this->_object_tree = null;
       $this->_system_call = false;
       $this->_system_restrictions = array ();
       $this->_calculated_restrictions = array ();
@@ -1717,7 +1717,7 @@ class QUERY_ITERATOR extends RAISABLE
     }
     else
     {
-      unset ($this->_item_index);
+      $this->_item_index = null;
     }
   }
 

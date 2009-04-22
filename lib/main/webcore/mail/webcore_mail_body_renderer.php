@@ -558,7 +558,7 @@ class MAIL_TOC_RENDERER extends RENDERER
       if (! isset ($group) || ! $group->accepts_item ($obj))
       {
         $group = $this->new_group ($obj);
-        unset ($entry);
+        $entry = null;
       }
 
       if (! isset ($entry) || ! $entry->accepts_item ($obj))

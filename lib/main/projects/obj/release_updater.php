@@ -149,7 +149,7 @@ abstract class RELEASE_UPDATER extends WEBCORE_OBJECT
       $history_item = $entry->new_history_item ();
       $history_item->compare_branches = true;
       $history_item->publication_state = $sub_history_item_publication_state;
-      unset ($this_branch_info);
+      $this_branch_info = null;
 
       $branch_infos = $entry->stored_branch_infos ();
 

@@ -136,7 +136,8 @@ class CHANGE_LOG extends WEBCORE_OBJECT
   protected function _display_entries ($entries, $release_id, $entry_idx, $draw_entry, $label)
   {
     unset ($this->curr_day);
-    unset ($this->comp_id);
+    unset ($this->_component_id);
+    
     $entry_count = sizeof ($entries);
 
     $title = new OBJECT_LIST_TITLE ($this->context);
@@ -179,11 +180,16 @@ class CHANGE_LOG extends WEBCORE_OBJECT
     }
   }
   
+  /**
+   * Draw the component for the given entry if different from the last entry's component.
+   *
+   * @param PROJECT_ENTRY $entry
+   */
   protected function _draw_component_break ($entry)
   {
-    if (! isset ($this->comp_id) || ($this->comp_id != $entry->component_id))
+    if (! isset ($this->_component_id) || ($this->_component_id != $entry->component_id))
     {      
-      if (isset ($this->comp_id))
+      if (isset ($this->_component_id))
       {
         echo "</dl></blockquote>\n";
         echo '<div class="horizontal-separator"></div>';
@@ -191,7 +197,7 @@ class CHANGE_LOG extends WEBCORE_OBJECT
       
       echo "<h3>" . $this->comp_name_for ($entry) . "</h3>\n<blockquote><dl>\n";
 
-      $this->comp_id = $entry->component_id;
+      $this->_component_id = $entry->component_id;
     }    
   }
   
@@ -199,27 +205,27 @@ class CHANGE_LOG extends WEBCORE_OBJECT
   {
     if (! $entry->component_id)
     {
-      $Result = '(no component)';
+      return '(no component)';
     }
-    else
+
+    if (! isset ($this->_components))
     {
-      if (! isset ($this->_components))
-      {
-        $folder = $entry->parent_folder ();
-        $component_query = $folder->component_query ();
-        $components = $component_query->indexed_objects ();
-      }
-      
-      $component = $components [$entry->component_id];
-      $Result = $component->icon_as_html ('20px') . ' ' . $component->title_as_link ();
+      $folder = $entry->parent_folder ();
+      $component_query = $folder->component_query ();
+      $this->_components = $component_query->indexed_objects ();
     }
     
-    return $Result;
+    $component = $this->_components [$entry->component_id];
+    
+    return $component->icon_as_html ('20px') . ' ' . $component->title_as_link ();
   }
 
   /**
-   * Draw a job or a change in the list.
-   * @param JOB $job
+   * Draw the given project entry in the list.
+   * 
+   * @param PROJECT_ENTRY $entry
+   * @param USER $entry
+   * @param DATE_TIME $time
    * @access private
    */
   protected function _draw_entry ($entry, $user, $time)
@@ -339,5 +345,19 @@ class CHANGE_LOG extends WEBCORE_OBJECT
   </div>
 <?php
   }
+  
+  /**
+   * List of components available for the folder being rendered.
+   *
+   * @var array[COMPONENT]
+   */
+  protected $_components;
+  
+  /**
+   * The component id of the last rendered entry; used to detected when the component changes.
+   *
+   * @var integer
+   */
+  protected $_component_id;
 }
 ?>

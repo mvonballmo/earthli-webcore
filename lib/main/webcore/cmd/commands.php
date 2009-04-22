@@ -313,7 +313,6 @@ class COMMANDS extends WEBCORE_OBJECT
    */
   protected function _set_current_group ($group)
   {
-    unset($this->_current_group);
     $this->_current_group = new COMMAND_GROUP ();
     $this->_current_group->name = $group;
   }

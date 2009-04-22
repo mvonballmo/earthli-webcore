@@ -726,9 +726,13 @@ class RESOURCE_MANAGER extends RAISABLE
    * $anchor_delimiter} (assumes the link will be resolvable in page context).
    * or if it starts with a delimiter and the root does not have a domain, no
    * root can be prepended. If the url is empty, the root can be prepended.
+   * 
    * @see _finalize_url()
-   * @param string $url
+   * 
+   * @param string $url The url to resolve.
+   * @param bool $root_override If null, no override is applied; if true, the root is applied; otherwise, no root is applied.
    * @return boolean
+   * 
    * @access private
    */
   protected function _needs_root ($url, $root_override)

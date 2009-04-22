@@ -307,7 +307,7 @@ class BRANCH extends OBJECT_IN_FOLDER
       $history_item->compare_branches = true;
       $history_item->publication_state = $options->sub_history_item_publication_state;
       $branch_infos = $entry->stored_branch_infos ();
-      unset ($main_branch_info);
+      $main_branch_info = null;
 
       /* The check should actually be for equals to 1, but if an entry has no branch information
          because of corruption, we can clean that up here and re-assign the entry to the trunk. */

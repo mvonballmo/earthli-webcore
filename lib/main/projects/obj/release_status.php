@@ -356,8 +356,8 @@ class RELEASE_DATE_STATUS extends WEBCORE_OBJECT
     $this->icon = '';
     $this->text = '';
     $this->diff_label = '';
-    unset ($this->_html_text);
-    unset ($this->_plain_text);
+    $this->_html_text = null;
+    $this->_plain_text = null;
 
     if ($this->occurred)
     {
