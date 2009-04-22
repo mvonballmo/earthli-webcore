@@ -239,11 +239,11 @@ class PAGE_NEWSFEED_OPTIONS
       $rss_plain = new URL ($url);
       $rss_plain->replace_argument ('format', 'rss');
       $rss_plain->replace_argument ('content', 'text');
-      $rss_html = $rss_plain;
+      $rss_html = clone($rss_plain);
       $rss_html->replace_argument ('content', 'html');
-      $atom_plain = $rss_plain;
+      $atom_plain = clone($rss_plain);
       $atom_plain->replace_argument ('format', 'atom');
-      $atom_html = $rss_html;
+      $atom_html = clone($rss_html);
       $atom_html->replace_argument ('format', 'atom');
 ?>
   <link rel="alternate" title="<?php echo $title; ?> (RSS/Plain text)" href="<?php echo $rss_plain->as_html (); ?>" type="application/rss+xml">
