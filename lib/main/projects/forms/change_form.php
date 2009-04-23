@@ -64,7 +64,6 @@ class CHANGE_FORM extends PROJECT_ENTRY_FORM
     $field->id = 'job_id';
     $field->title = 'Job';
     $field->min_value = 0;
-    $field->sticky = true;
     $this->add_field ($field);
 
     $field = new TEXT_FIELD ();
