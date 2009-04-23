@@ -84,7 +84,7 @@ class CALLBACK
       return $name ($args[0], $args[1]);
     case 3:
       return $name ($args[0], $args[1], $args[2]);
-    case 3:
+    case 4:
       return $name ($args[0], $args[1], $args[2], $args[3]);
     default:
       throw new UNKNOWN_VALUE_EXCEPTION($num_args);
@@ -134,7 +134,7 @@ class CALLBACK_METHOD extends CALLBACK
       return $this->_obj->$name ($args[0], $args[1]);
     case 3:
       return $this->_obj->$name ($args[0], $args[1], $args[2]);
-    case 3:
+    case 4:
       return $this->_obj->$name ($args[0], $args[1], $args[2], $args[3]);
     default:
       throw new UNKNOWN_VALUE_EXCEPTION($num_args);

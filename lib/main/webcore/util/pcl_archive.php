@@ -125,7 +125,7 @@ class PCL_ZIP_FILE extends COMPRESSED_FILE
   /**
    * @access private
    */
-  protected function _open ()
+  protected function _open ($error_callback = null)
   {
     $this->_zip = new PclZip ($this->file_name);
     $this->_entries = $this->_zip->listContent ();

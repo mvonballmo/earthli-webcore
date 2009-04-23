@@ -139,7 +139,7 @@ class BATCH_CREATE_PICTURES_TASK extends TASK
     $archive = new $class_name ($this->archive_file_name);
 
     log_open_block ('Extracting files from archive...');
-      $this->_folder_url = url_to_file_name ($this->_folder->picture_folder_url ());
+      $this->_target_directory = url_to_file_name ($this->_folder->picture_folder_url (Force_root_on));
       $this->_num_pictures_imported = 0;
       $archive->for_each (new CALLBACK_METHOD ('process_image', $this), new CALLBACK_METHOD ('show_error', $this));
     log_close_block ();
@@ -181,7 +181,7 @@ class BATCH_CREATE_PICTURES_TASK extends TASK
   public function process_image ($archive, $entry, $error_callback)
   {
     log_open_block ("Extracting [$entry->name]...");
-    $entry->extract_to ($this->_folder_url, $error_callback);
+    $entry->extract_to ($this->_target_directory, $error_callback);
 
     $class_name = $this->app->final_class_name ('IMAGE', 'webcore/util/image.php');
     $img = new $class_name ();
@@ -273,7 +273,7 @@ class BATCH_CREATE_PICTURES_TASK extends TASK
    * @var string
    * @access private
    */
-  protected $_folder_url;
+  protected $_target_directory;
 
   /**
    * @var integer

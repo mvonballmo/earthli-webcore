@@ -258,6 +258,10 @@ abstract class COMPRESSED_FILE extends RAISABLE
   public abstract function is_open ();
 
   /**
+   * Open the {@link $file_name} for reading.
+   * 
+   * If it cannot be opened, an error is recorded to the given 'error_callback'. 
+   * 
    * @param CALLBACK $error_callback Function prototype: function (string, {@link COMPRESSED_FILE_ENTRY})
    */
   public function open ($error_callback = null)
@@ -309,6 +313,8 @@ abstract class COMPRESSED_FILE extends RAISABLE
   }
 
   /**
+   * Opens the file using the implementation-specific underlying driver.
+   * 
    * @param CALLBACK $error_callback Function prototype: function (string, {@link COMPRESSED_FILE_ENTRY})
    * @access private
    * @abstract
@@ -476,7 +482,6 @@ class ZIP_FILE extends COMPRESSED_FILE
   protected function _for_each ($file_callback, $error_callback = null)
   {
     $opts = global_file_options ();
-    $sep = $opts->path_delimiter;
     $file_num = 0;
 
     while (($zip_entry = zip_read ($this->_handle)))
@@ -487,7 +492,7 @@ class ZIP_FILE extends COMPRESSED_FILE
         $file_num += 1;
 
         $entry = new ZIP_ENTRY ($this, $this->_handle, $zip_entry, $opts);
-        $entry->name = str_replace ('/', $sep, zip_entry_name ($zip_entry));
+        $entry->name = normalize_path (zip_entry_name ($zip_entry), $opts);
         $entry->number = $file_num;
         $entry->size = $size;
         $entry->compressed_size = zip_entry_compressedsize ($zip_entry);
@@ -500,9 +505,12 @@ class ZIP_FILE extends COMPRESSED_FILE
   }
 
   /**
+   * Opens the file using the implementation-specific underlying driver.
+   * 
+   * @param CALLBACK $error_callback Function prototype: function (string, {@link COMPRESSED_FILE_ENTRY})
    * @access private
    */
-  protected function _open ()
+  protected function _open ($error_callback = null)
   {
     $this->_handle = null;
     if (function_exists ('zip_open'))
@@ -567,8 +575,12 @@ class ZIP_ENTRY extends COMPRESSED_FILE_ENTRY
       }
       else
       {
-        while (($s = zip_entry_read ($this->_handle, $this->read_block_size)) !== false)
-          fwrite ($f, $s);
+        $data = zip_entry_read ($this->_handle, $this->read_block_size);
+        while ($data != false)
+        {
+          fwrite ($f, $data);
+          $data = zip_entry_read ($this->_handle, $this->read_block_size);
+        }
         fclose ($f);
       }
       zip_entry_close ($this->_handle);
