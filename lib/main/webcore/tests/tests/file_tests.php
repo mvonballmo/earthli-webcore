@@ -67,7 +67,25 @@ class FILE_TEST_TASK extends TEST_TASK
     $this->_check_equal (true, ends_with_delimiter (ensure_ends_with_delimiter ('path/to/the/folder')));
 
     $this->_check_equal ('untergeordnet_asthetisch', normalize_file_id ('Untergeordnet Ästhetisch'));
-
+    $this->_check_equal ('untergeordnet_asthetisch', normalize_file_id ('Untergeordnet    Ästhetisch'));
+    $this->_check_equal ('aaaaeeeeiiiioooouuuuaaaaeeeeiiiioooouuuunncc', normalize_file_id ('äáàâëéèêïíìîöóòôüúùûÄÁÀÂËÉÈÊÏÍÌÎÖÓÒÔÜÚÙÛñÑçÇ'));
+    
+    $opts = global_file_options ();
+    $opts->normalized_ids_are_lower_case = false;
+    
+    $this->_check_equal ('Untergeordnet_Asthetisch', normalize_file_id ('Untergeordnet Ästhetisch'));
+    $this->_check_equal ('Untergeordnet_Asthetisch', normalize_file_id ('Untergeordnet    Ästhetisch'));
+    $this->_check_equal ('aaaaeeeeiiiioooouuuuAAAAEEEEIIIIOOOOUUUUnNcC', normalize_file_id ('äáàâëéèêïíìîöóòôüúùûÄÁÀÂËÉÈÊÏÍÌÎÖÓÒÔÜÚÙÛñÑçÇ'));
+    
+    $this->_check_equal (4096, text_to_file_size ('4KB'));
+    $this->_check_equal (4096, text_to_file_size ('4K'));
+    $this->_check_equal (4096 * 1024, text_to_file_size ('4MB'));
+    $this->_check_equal (4096 * 1024, text_to_file_size ('4M'));
+    $this->_check_equal (4096 * 1024 * 1024, text_to_file_size ('4GB'));
+    $this->_check_equal (4096 * 1024 * 1024, text_to_file_size ('4G'));
+    $this->_check_equal (4096 * 1024 * 1024 * 1024, text_to_file_size ('4TB'));
+    $this->_check_equal (4096 * 1024 * 1024 * 1024, text_to_file_size ('4T'));
+    
     $input_path = $this->env->source_path ();
 
     $input_path->append ('../../../templates/wizards/new_application');

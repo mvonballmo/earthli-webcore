@@ -548,17 +548,26 @@ function normalize_file_id ($part, $opts = null)
   {
     $opts = global_file_options ();
   }
+  
+  // Enforce name length
   $Result = substr ($part, 0, $opts->max_name_length);
+  
+  // Try to replace invalid chars with similar-looking replacements
   $Result = strtr ($Result, $opts->source_chars, $opts->target_chars);
-  $Result = ereg_replace ('[^' . $opts->valid_file_chars . ']', $opts->replacement_char, $Result);
+  
+  // Replace all remaining invalid characters with a standard replacement
+  $Result = preg_replace ('/[^' . $opts->valid_file_chars . ']/', $opts->replacement_char, $Result);
+  
   if ($opts->collapse_invalid_chars)
   {
-    $Result = ereg_replace ('[' . $opts->replacement_char . ']+', $opts->replacement_char, $Result);
+    $Result = preg_replace ('/[' . $opts->replacement_char . ']+/', $opts->replacement_char, $Result);
   }
+  
   if ($opts->normalized_ids_are_lower_case)
   {
     $Result = strtolower ($Result);
   }
+  
   return $Result;
 }
 
@@ -616,7 +625,7 @@ function text_to_file_size ($text)
   }
 
   $pieces = null; // Compiler warning
-  if (ereg ('([0-9]+)([MB]|[M]|[GB]|[G]|[KB]|[K])', $text, $pieces))
+  if (preg_match ('/([0-9]+)([MB]|[M]|[GB]|[G]|[KB]|[K]|[TB]|[T])/', $text, $pieces))
   {
     switch ($pieces [2])
     {
@@ -769,7 +778,8 @@ function file_list_for ($base_path, $path_to_prepend = '', $recurse = false, $op
   {
     $opts = global_file_options ();
   }
-  $$base_path = ensure_ends_with_delimiter ($base_path, $opts);
+  
+  $base_path = ensure_ends_with_delimiter ($base_path, $opts);
 
   $Result = array ();
   if (($handle = opendir ($base_path)))
@@ -793,6 +803,7 @@ function file_list_for ($base_path, $path_to_prepend = '', $recurse = false, $op
     }
     closedir ($handle);
   }
+  
   return $Result;
 }
 

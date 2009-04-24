@@ -626,7 +626,7 @@ class MUNGER_TOKENIZER extends RAISABLE
    */
   protected function _is_tag_character($char)
   {
-    return ereg('[/a-zA-Z_]', $char);
+    return preg_match('[/a-zA-Z_]', $char);
   }
 
   /**
