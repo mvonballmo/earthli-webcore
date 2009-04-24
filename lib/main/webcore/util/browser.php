@@ -698,9 +698,7 @@ class USER_AGENT_PARSER
 
     $parts = null; // Compiler warning
     
-//    preg_match_all ('/([a-zA-Z][ \-&a-zA-Z]*)[-\/: ]?[vV]?([0-9][0-9a-z]*([\.-][0-9][0-9a-z]*)*)/', $s, $parts);
     preg_match_all ('/([a-zA-Z]|[a-zA-Z]+[0-9]+|[a-zA-Z]+[ 0-9]+[a-zA-Z]|[a-zA-Z][ \-&a-zA-Z]*[a-zA-Z])[-\/: ]?[vV]?([0-9][0-9a-z]*([\.-][0-9][0-9a-z]*)*)/', $s, $parts);
-//    preg_match_all ('/(\w[-&\w ]*[-&\w]*)[-\/: ]([vV]?[0-9][0-9a-z]*([\.-][0-9][0-9a-z]*)*)/', $s, $parts);
 
     $ids = $parts [1];
     $vers = $parts [2];

@@ -209,7 +209,9 @@ abstract class STORABLE extends RENDERABLE
   {
     $this->db->logged_query ("SELECT to_table.$to_field FROM $to_table to_table LEFT JOIN $from_table from_table ON to_table.$to_field = from_table.$from_field WHERE ISNULL(from_table.$from_field) AND $condition");
     while ($this->db->next_record ())
+    {
       $ids [] = $this->db->f (0);
+    }
 
     if (isset ($ids) && sizeof ($ids))
     {

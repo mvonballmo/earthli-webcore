@@ -368,7 +368,9 @@ class SUBSCRIBER extends UNIQUE_OBJECT
       $query->set_select ('subs.kind as subkind');
       $db = $query->raw_output ();
       while ($db->next_record ())
+      {
         $Result [] = $db->f ('subkind');
+      }
     }
     return $Result;
   }

@@ -111,7 +111,7 @@ class DATE_TIME_TOOLKIT
 
   /**
    * Register a conversion format.
-   * The conversion string should be compatible with the PHP 'ereg' function.
+   * 
    * @param DATE_TIME_CONVERTER $converter
    */
   public function register_converter ($converter)
@@ -631,9 +631,16 @@ class DATE_TIME extends RAISABLE
   {
     if (($this->_php_time == Date_time_unassigned) && ($this->_iso_time != Date_time_unassigned))
     {
-      $regs = null; // Compiler warning
-      ereg ("([0-9]{4})-([0-9]{1,2})-([0-9]{1,2})( ([0-9]{1,2}):([0-9]{1,2}):([0-9]{1,2}))", $this->_iso_time, $regs);
-      $this->_php_time = mktime ($regs [5], $regs [6], $regs [7], $regs [2], $regs [3], $regs [1]);
+      $parts = null; // Compiler warning
+      preg_match ('/([0-9]{4})-([0-9]{1,2})-([0-9]{1,2})( ([0-9]{1,2}):([0-9]{1,2}):([0-9]{1,2}))/', $this->_iso_time, $parts);
+      if (sizeof ($parts))
+      {
+        $this->_php_time = mktime ($parts [5], $parts [6], $parts [7], $parts [2], $parts [3], $parts [1]);
+      }
+      else
+      {
+        $this->_iso_time = Date_time_unassigned;
+      }
     }
 
     return $this->_php_time;

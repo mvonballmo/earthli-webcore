@@ -44,7 +44,9 @@ class PROJECTS_15_16_MIGRATOR_TASK extends UPGRADE_PER_APP_23_24_TASK
       $changes = array ();
 
       while ($Page->database->next_record ())
+      {
         $changes [$Page->database->f ('entry_to_branch_id')] = array ($Page->database->f ('time_created'),
+      }
                                                                       $Page->database->f ('creator_id'),
                                                                       $Page->database->f ('entry_id'));
 

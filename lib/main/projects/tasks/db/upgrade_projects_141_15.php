@@ -72,7 +72,9 @@ class PROJECTS_141_15_MIGRATOR_TASK extends UPGRADE_PER_APP_221_23_TASK
 
       $folder_ids = array ();
       while ($Page->database->next_record ())
+      {
         $folder_ids [] = $Page->database->f ('id');
+      }
 
       $branch_map = array ();
       foreach ($folder_ids as $id)
@@ -89,7 +91,9 @@ class PROJECTS_141_15_MIGRATOR_TASK extends UPGRADE_PER_APP_221_23_TASK
 
       $release_ids = array ();
       while ($Page->database->next_record ())
+      {
         $release_ids [$Page->database->f ('id')] = $Page->database->f ('branch_id');
+      }
     log_close_block ();
 
     log_open_block ("Mapping releases to [Dev] branches...");
@@ -114,7 +118,9 @@ class PROJECTS_141_15_MIGRATOR_TASK extends UPGRADE_PER_APP_221_23_TASK
 
       $change_ids = array ();
       while ($Page->database->next_record ())
+      {
         $change_ids [$Page->database->f ('id')] = array ($Page->database->f ('folder_id'),
+      }
                                                          $Page->database->f ('revision_id'),
                                                          $Page->database->f ('time_created'),
                                                          $Page->database->f ('creator_id'));
@@ -178,7 +184,9 @@ class PROJECTS_141_15_MIGRATOR_TASK extends UPGRADE_PER_APP_221_23_TASK
 
       $job_ids = array ();
       while ($Page->database->next_record ())
+      {
         $job_ids [$Page->database->f ('id')] = array ($Page->database->f ('folder_id'),
+      }
                                                       $Page->database->f ('revision_id'),
                                                       $Page->database->f ('status'),
                                                       $Page->database->f ('priority'),

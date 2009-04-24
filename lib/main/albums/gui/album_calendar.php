@@ -327,7 +327,9 @@ class ALBUM_CALENDAR extends BASIC_CALENDAR
     if ($pic_db)
     {
       while ($pic_db->next_record ())
+      {
         $this->_pic_dates [] = new DATE_TIME ($pic_db->f ('date'), Date_time_iso);
+      }
     }
   }
 }

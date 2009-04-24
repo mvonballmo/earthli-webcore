@@ -139,21 +139,20 @@ class FILE_OPTIONS
  */
 function make_canonical ($path, $opts = null)
 {
-  if (! isset ($opts))
-  {
-    $opts = global_file_options ();
+  if (! isset ($opts)) 
+  { 
+    $opts = global_file_options (); 
   }
+  
   $sep = $opts->path_delimiter;
   $curr = $opts->current_folder;
+  
   if ($path == $curr . $sep)
   {
-    $Result = '';
+    return '';
   }
-  else
-  {
-    $Result = preg_replace (array ("/\\//", "/\\//", "/[^\\$curr]\\$curr\\$sep/"), array ($sep, $sep, ''), $path);
-  }
-  return $Result;
+  
+  return preg_replace (array ("/\\//", "/\\//", "/[^\\$curr]\\$curr\\$sep/"), array ($sep, $sep, ''), $path);
 }
 
 /**
@@ -185,7 +184,9 @@ function join_paths ($path1, $path2, $opts = null)
       $bases = explode ($sep, $path1);
 
       while (isset ($bases [sizeof ($bases) - 1]) && ($bases [sizeof ($bases) - 1] == ''))
+      {
         array_pop ($bases);
+      }
 
       if (sizeof ($bases))
       {
@@ -773,7 +774,7 @@ function file_list_for ($base_path, $path_to_prepend = '', $recurse = false, $op
   $Result = array ();
   if (($handle = opendir ($base_path)))
   {
-    while (($name = readdir ($handle)) !== false)
+    while (($name = readdir ($handle)) != false)
     {
       if ($name [0] != '.')
       {

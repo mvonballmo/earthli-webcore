@@ -108,7 +108,9 @@ http://www.earthli.com/software/webcore/projects
   echo "<p>Building subscriber table</p>";
   $Page->database->query ("SELECT DISTINCT email FROM project_subscriptions");
   while ($Page->database->next_record ())
+  {
     $emails [] = $Page->database->f ('email');
+  }
 
   foreach ($emails as $email)
   {
@@ -122,7 +124,9 @@ http://www.earthli.com/software/webcore/projects
   $Page->database->query ("SELECT id, email FROM project_subscribers");
   $emails = array ();
   while ($Page->database->next_record ())
+  {
     $emails [$Page->database->f ('id')] = $Page->database->f ('email');
+  }
 
   foreach ($emails as $id => $email)
   {

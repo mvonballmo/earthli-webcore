@@ -108,7 +108,9 @@ class THREADED_COMMENT_GRID extends FLAT_COMMENT_GRID
           {
             $com_ids = array ();
             while ($db->next_record ())
+            {
               $com_ids [$db->f ("id")] = $db->f ("id");
+            }
 
             if (sizeof ($com_ids) > 0)
             {
