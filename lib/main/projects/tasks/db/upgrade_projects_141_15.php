@@ -120,10 +120,10 @@ class PROJECTS_141_15_MIGRATOR_TASK extends UPGRADE_PER_APP_221_23_TASK
       while ($Page->database->next_record ())
       {
         $change_ids [$Page->database->f ('id')] = array ($Page->database->f ('folder_id'),
-      }
                                                          $Page->database->f ('revision_id'),
                                                          $Page->database->f ('time_created'),
                                                          $Page->database->f ('creator_id'));
+      }
 
       foreach ($change_ids as $id => $other_ids)
       {
@@ -186,13 +186,13 @@ class PROJECTS_141_15_MIGRATOR_TASK extends UPGRADE_PER_APP_221_23_TASK
       while ($Page->database->next_record ())
       {
         $job_ids [$Page->database->f ('id')] = array ($Page->database->f ('folder_id'),
-      }
                                                       $Page->database->f ('revision_id'),
                                                       $Page->database->f ('status'),
                                                       $Page->database->f ('priority'),
                                                       $Page->database->f ('closer_id'),
                                                       $Page->database->f ('owner_id'),
                                                       $Page->database->f ('time_closed'));
+      }
 
       foreach ($job_ids as $id => $other_ids)
       {
