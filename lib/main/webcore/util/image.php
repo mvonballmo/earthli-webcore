@@ -563,23 +563,14 @@ class IMAGE_PROPERTIES
     }
     else
     {
-      /* Use a slow and dirty function to extract only the date.
-         Reading EXIF in PHP is extremely slow (byte-based), so we
-         skip over all info until the date is found, then get out
-         as quickly as possible. Based on code found in the "phpExifRW"
-         library, but massively stripped down for speed. */
+      // Older versions used to have a non-native, PHP-based reader for EXIF data, but
+		  // it was byte-based and read a lot of the image data into memory, which doesn't work
+		  // so well with the larger pictures available today (ca. 2009) as opposed to the when
+		  // the code was written (ca. 2001). If you want to read EXIF information, you have to
+		  // have the PHP extension enabled, which is nearly a given these days, as opposed to
+		  // 8 years ago, when it was a rarity.
 
-      log_message ('Using fallback to read EXIF for [' . $name . ']', Msg_type_debug_warning, Msg_channel_image);
-
-      include_once ('third_party/phpExifRW/exif.inc');
-      $er = new phpExifRW($name);
-      if (! $er->errno)
-      {
-        $er->ImageReadMode = 1;
-        $er->processFile();
-        $this->time_created = $this->_time_from_exif (read_array_index ($er->ImageInfo, TAG_DATETIME_ORIGINAL));
-        $this->_read_image_info ($name);
-      }
+      log_message ('No fallback available for reading EXIF information from [' . $name . ']', Msg_type_debug_warning, Msg_channel_image);
     }
 
     if ($this->exists () && isset ($Profiler))
