@@ -120,11 +120,21 @@ class MUNGER_BASE_TEST_TASK extends TEST_TASK
 
     if (! $this->_num_errors)
     {
-      echo "<p>Congratulations! All [$this->_num_tests] tests have completed successfully.</p>";
+      echo "<p>" . 
+        $this->context->resolve_icon_as_html("{icons}/indicators/error", "info", "20px") . 
+      	" Congratulations! All [$this->_num_tests] tests have completed successfully.</p>";
+    }
+    elseif ($this->_num_ignored == $this->_num_errors)
+    {
+      echo "<p>" . 
+        $this->context->resolve_icon_as_html("{icons}/indicators/warning", "info", "20px") . 
+      	" Congratulations! You passed [$this->_num_tests] tests; [$this->_num_ignored] errors were ignored.</p>";
     }
     else
     {
-      echo "<p class=\"error\">Oops! You failed [$this->_num_errors] of [$this->_num_tests] tests.</p>";
+      echo "<p class=\"error\">" . 
+        $this->context->resolve_icon_as_html("{icons}/indicators/error", "error", "20px") . 
+      	" You failed [$this->_num_errors] of [$this->_num_tests] tests; [$this->_num_ignored] errors were ignored.</p>";
     }
 
     echo $errors;
@@ -371,7 +381,7 @@ EORESULT;
     }
   }
 
-  protected function _run_munger_test ($input, $expected)
+  protected function _run_munger_test ($input, $expected, $ignore = false)
   {
     $this->_num_tests += 1;
 
@@ -381,9 +391,16 @@ EORESULT;
     if ((strcmp($output, $expected) != 0))
     {
       $this->_num_errors += 1;
-      echo "<hr style=\"clear: both\">\n";
-      echo "<div class=\"error\">Error detected</div>";
-//      $this->_generate_test ($input);
+      if ($ignore)
+      {
+        $this->_num_ignored += 1;
+      }
+      else 
+      {
+        echo "<hr style=\"clear: both\">\n";
+        echo "<div class=\"error\">Error detected</div>";
+//        $this->_generate_test ($input);
+      }
     }
     elseif ($this->show_munger_stats)
     {
@@ -394,23 +411,43 @@ EORESULT;
       echo $output;
     }
 
-    if ((strcmp($output, $expected) != 0) || $this->show_munger_stats)
+    if (((strcmp($output, $expected) != 0) || $this->show_munger_stats) && !$ignore)
     {
       echo "<p>[" . get_class ($this->_munger) . "]: Force pars = [" . $this->_munger->force_paragraphs . "], Max chars = [" . $this->_munger->max_visible_output_chars . "], Break word = [" . $this->_munger->break_inside_word . "]</p>\n\n";
-//      echo "<h4>Input</h4>\n\n";
-//      echo "[$input]\n\n";
-//      echo "<h4>Expected output</h4>\n\n[";
-//      echo "$expected";
-//      echo "]\n\n<h4>Actual output</h4>\n\n[";
-//      echo "$output]\n\n";
+      echo "<h4>Input</h4>\n\n";
+      echo "[$input]\n\n";
+      echo "<h4>Expected output</h4>\n\n[";
+      echo "$expected";
+      echo "]\n\n<h4>Actual output</h4>\n\n[";
+      echo "$output]\n\n";
             
       $expected_file = "d:\\expected.txt";
       $actual_file = "d:\\actual.txt";
       write_text_file($expected_file, $expected);
       write_text_file($actual_file, $output);
-//      
     }
   }
+  
+  /**
+   * Number of errors encountered during the last testing run.
+   *
+   * @var integer
+   */
+  protected $_num_errors;
+  
+  /**
+   * Number of tests in the last testing run.
+   *
+   * @var integer
+   */
+  protected $_num_tests;
+
+  /**
+   * Number of errors ignored during the last testing run.
+   *
+   * @var integer
+   */
+  protected $_num_ignored;
 }
 
 ?>

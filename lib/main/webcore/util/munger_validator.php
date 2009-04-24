@@ -134,7 +134,7 @@ class MUNGER_VALIDATOR_TAG_INFO
     {
       if (! isset ($this->properties [$key]))
       {
-        $validator->_add_error ('Invalid attribute [' . $key . '] for [' . $token->name() . ']', $token);
+        $validator->add_error ('Invalid attribute [' . $key . '] for [' . $token->name() . ']', $token);
       }
     }
   }
@@ -225,7 +225,7 @@ class MUNGER_VALIDATOR extends MUNGER_PARSER
       $name = $tag->token->name ();
       if (isset($this->_known_tags [$name]) && $this->_known_tags [$name]->has_end_tag)
       {
-        $this->_add_error ('Missing end tag for [' . $tag->token->name() . '].', $tag->token, $tag->line_number, $tag->column);
+        $this->add_error ('Missing end tag for [' . $tag->token->name() . '].', $tag->token, $tag->line_number, $tag->column);
       }
     }
     usort ($this->errors, 'sort_validation_errors');
@@ -300,7 +300,7 @@ class MUNGER_VALIDATOR extends MUNGER_PARSER
         {
           if (! $tag->token->matches ($token))
           {
-            $this->_add_error ('Unexpected end tag ' . $tag->token->name() . '.', $token);
+            $this->add_error ('Unexpected end tag ' . $tag->token->name() . '.', $token);
             /* Put the tag back on the stack, so it can be matched if the correct
              * tag shows up.
              */
@@ -309,12 +309,12 @@ class MUNGER_VALIDATOR extends MUNGER_PARSER
         }
         else
         {
-          $this->_add_error ('Unexpected end tag [' . $name . '] (no tags are open).', $token);
+          $this->add_error ('Unexpected end tag [' . $name . '] (no tags are open).', $token);
         }
       }
       else
       {
-        $this->_add_error ('Tag [' . $name . '] cannot have an end tag.', $token);
+        $this->add_error ('Tag [' . $name . '] cannot have an end tag.', $token);
       }
     }
   }
@@ -326,9 +326,7 @@ class MUNGER_VALIDATOR extends MUNGER_PARSER
   {
   }
 
-  /** Add an error to the result.
-  /** Add an error to the result.
-  /**
+  /** 
    * Add an error to the result.
    * @param string $msg
    * @param MUNGER_TOKEN $token
@@ -336,7 +334,7 @@ class MUNGER_VALIDATOR extends MUNGER_PARSER
    * @param integer $col
    * @access private
    */
-  protected function _add_error ($msg, $token, $line = null, $col = null)
+  public function add_error ($msg, $token, $line = null, $col = null)
   {
     if (! isset ($line))
     {

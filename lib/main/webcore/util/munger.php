@@ -626,7 +626,7 @@ class MUNGER_TOKENIZER extends RAISABLE
    */
   protected function _is_tag_character($char)
   {
-    return preg_match('[/a-zA-Z_]', $char);
+    return preg_match('&[/a-zA-Z_]&', $char);
   }
 
   /**
@@ -1666,7 +1666,8 @@ class MUNGER_PARSER extends RAISABLE
   protected function _process($input)
   {
     $this->_nesting_level = 0;
-    $this->_process_current_nesting_level($this->_prepare_input($input));
+    $prepared_input = $this->_prepare_input($input);
+    $this->_process_current_nesting_level($prepared_input);
   }
 
   protected function _process_current_nesting_level($input)

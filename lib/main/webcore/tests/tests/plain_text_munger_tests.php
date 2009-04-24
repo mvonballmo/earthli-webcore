@@ -1194,8 +1194,8 @@ $this->_run_munger_test (
   "This
 
   * 1.1
-   * 2.1
-   * 2.2
+    * 2.1
+    * 2.2
   * 1.2
 
 "
@@ -1224,11 +1224,11 @@ $this->_run_munger_test (
   * 
   * 1.1
   * 
-   * 
-   * 2.1
-   * 
-   * 2.2
-   * 
+    * 
+    * 2.1
+    * 
+    * 2.2
+    * 
   * 
   * 1.2
   * 
@@ -1248,8 +1248,8 @@ $this->_run_munger_test (
   "This
 
   * 1.1
-   * 2.1
-   * 2.2
+    * 2.1
+    * 2.2
     1.2
 
 "
@@ -1276,12 +1276,12 @@ $this->_run_munger_test (
   "This
 
   * 1.1
-   * 2.1
+    * 2.1
       * 3.1
         * 4.1
         * 4.2
       * 3.2
-   * 2.2
+    * 2.2
   * 1.2
 
 "
@@ -1304,10 +1304,10 @@ $this->_run_munger_test (
   "This
 
   * 1.1
-   * 2.1
+    * 2.1
       * 3.1
       * 3.2
-   * 2.2
+    * 2.2
   * 1.2
 
 "
@@ -1337,10 +1337,10 @@ This
 This
 
   * 1.1
-   * 2.1
+    * 2.1
       * 3.1
       * 3.2
-   * 2.2
+    * 2.2
   * 1.2
 
 "
@@ -1369,10 +1369,10 @@ This
 This
 
   * 1.1
-   * 2.1
+    * 2.1
       * 3.1
       * 3.2
-   * 2.2
+    * 2.2
   * 1.2
 
 "
@@ -1400,10 +1400,10 @@ Final Text.
 This
 
   * 1.1
-   * 2.1
+    * 2.1
       * 3.1
       * 3.2
-   * 2.2
+    * 2.2
   * 1.2
 
 Final Text.
@@ -1433,10 +1433,10 @@ Final Text.
 This
 
   * 1.1
-   * 2.1
+    * 2.1
       * 3.1
       * 3.2
-   * 2.2
+    * 2.2
   * 1.2
 
 Final Text.
@@ -1468,10 +1468,10 @@ Final Text.
 This
 
   * 1.1
-   * 2.1
+    * 2.1
       * 3.1
       * 3.2
-   * 2.2
+    * 2.2
   * 1.2
 
 Final Text.
@@ -1508,13 +1508,13 @@ Par5\r
 
   * 1.1
   * 1.2
-   * 2.1
+    * 2.1
       * 3.1
       * 3.2
       * 3.3
       * 
       2.2
-   * 2.3
+    * 2.3
       * 3.1
       * 3.2
         * 4.1
@@ -1588,13 +1588,13 @@ Par5\r
   pre1.4
   * 1.1
   * 1.2
-   * 2.1
+    * 2.1
       * 3.1
       * 3.2
       * 3.3
       * 
       2.2
-   * 2.3
+    * 2.3
       * 3.1
       * 3.2
         * 4.1
@@ -1644,8 +1644,8 @@ Put your test text here.\r
 Put your test text here.
 
   * one/one
-   * two/one
-   * two/two
+    * two/one
+    * two/two
       * three/one
       two/three
   * one/two
@@ -1698,10 +1698,10 @@ Put your test text here.\r
 Put your test text here.
 
   * one/one
-   * two/one
-   * two/two
+    * two/one
+    * two/two
       * three/one
-   * two/three
+    * two/three
   * one/two
   * one/three
 
@@ -2408,8 +2408,8 @@ $this->_run_munger_test (
 
   * 
   * \"is\" <something.php> my
-   * first
-   * \"name\" <something.php>
+    * first
+    * \"name\" <something.php>
   * here.
 "
 );
@@ -2427,8 +2427,8 @@ $this->_run_munger_test (
 
   * 
   * \"is\" <something.php> my
-   * first
-   * \"name\" <something.php>
+    * first
+    * \"name\" <something.php>
   * here.
 "
 );
@@ -2459,8 +2459,8 @@ $this->_run_munger_test (
   "This
 
   * \"is\" <something.php> my
-   * first
-   * \"name\" <something.php>
+    * first
+    * \"name\" <something.php>
   * here.
 "
 );
@@ -2476,8 +2476,8 @@ $this->_run_munger_test (
   "This
 
   * \"is\" <something.php> my
-   * first
-   * \"name\" <something.php>
+    * first
+    * \"name\" <something.php>
   * here.
 "
 );

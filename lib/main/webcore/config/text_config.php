@@ -92,10 +92,11 @@ class TEXT_OPTIONS
 
   /**
    * Convert all characters to HTML entities.
-   * Called when displayed stored, normalized text as HTML. First converts all
-   * characters found in {@link $html_entity_translations} and then calls {@link
+   * 
+   * Called when displaying stored, normalized text as HTML. First calls {@link
    * PHP_MANUAL#get_html_translation_table} to perform the standard
-   * translations.
+   * translations, then converts all characters found in {@link $html_entity_translations}.
+   * 
    * @see convert_from_html_entities()
    * @param string $value
    * @return string
@@ -110,10 +111,12 @@ class TEXT_OPTIONS
 
   /**
    * Convert all HTML entities to characters.
+   * 
    * Called to normalize submitted HTML text. First converts all characters
    * found in {@link $html_entity_translations}, then uses {@link
    * PHP_MANUAL#get_html_translation_table} to perform the standard
    * translations.
+   * 
    * @see convert_to_html_entities()
    * @param string $value
    * @return string
