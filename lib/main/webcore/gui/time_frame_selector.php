@@ -105,7 +105,7 @@ class TIME_FRAME_SELECTOR extends WEBCORE_OBJECT
   {
     parent::__construct ($app);
     $this->load_period_from_request ($default);
-    $this->page_link = $app->env->url (Url_part_all);
+    $this->page_link = $app->env->url (Url_part_no_host_path);
   }
 
   /**

@@ -163,6 +163,7 @@ class FIELD extends RAISABLE
 
   /**
    * Convert the {@link value()} to text.
+   * 
    * @param FORM $form Not used here, but used by descendents.
    * @param mixed $value Optional parameter used by some fields to distinguish between different components of the value.
    * @return string

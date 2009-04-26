@@ -120,8 +120,8 @@ class PANEL_MANAGER extends WEBCORE_OBJECT
     {
       $this->time_menu = new TIME_FRAME_SELECTOR ($app);
     }
-
-    $this->page_link = $app->env->url (Url_part_all);
+    
+    $this->page_link = $app->env->url (Url_part_no_host_path);
     $this->options = $this->_make_options ();
     $this->_init_options ($this->options);
 

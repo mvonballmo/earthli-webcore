@@ -53,38 +53,26 @@ class FILE_TEST_TASK extends TEST_TASK
 {
   protected function _execute ()
   {
+    $this->_test_normalized_ids();
+    $this->_test_delimiters();
+    $this->_test_file_sizes();
+    $this->_test_file_lists();
+
+    $file_options = global_file_options();
+    $old_delimiter = $file_options->path_delimiter;
+    $file_options->path_delimiter = '/';
+    
+    $this->_test_make_canonical();
+    $this->_test_path_between();
+    $this->_test_join_paths();
+    
+    $file_options->path_delimiter = $old_delimiter;
+  }
+  
+  private function _test_file_lists()
+  {
     $file_options = global_file_options();
     $delimiter = $file_options->path_delimiter;
-
-    $this->_check_equal (false, begins_with_delimiter ('path/to/the/folder/'));
-    $this->_check_equal (true, begins_with_delimiter ($delimiter . 'path/to/the/folder/'));
-    $this->_check_equal (true, ends_with_delimiter ('path/to/the/folder' . $file_options->path_delimiter));
-    $this->_check_equal (false, ends_with_delimiter ('path/to/the/folder'));
-
-    $this->_check_equal (true, begins_with_delimiter (ensure_begins_with_delimiter ('path/to/the/folder/')));
-    $this->_check_equal (true, begins_with_delimiter (ensure_begins_with_delimiter ('/path/to/the/folder/')));
-    $this->_check_equal (true, ends_with_delimiter (ensure_ends_with_delimiter ('path/to/the/folder/')));
-    $this->_check_equal (true, ends_with_delimiter (ensure_ends_with_delimiter ('path/to/the/folder')));
-
-    $this->_check_equal ('untergeordnet_asthetisch', normalize_file_id ('Untergeordnet Ästhetisch'));
-    $this->_check_equal ('untergeordnet_asthetisch', normalize_file_id ('Untergeordnet    Ästhetisch'));
-    $this->_check_equal ('aaaaeeeeiiiioooouuuuaaaaeeeeiiiioooouuuunncc', normalize_file_id ('äáàâëéèêïíìîöóòôüúùûÄÁÀÂËÉÈÊÏÍÌÎÖÓÒÔÜÚÙÛñÑçÇ'));
-    
-    $opts = global_file_options ();
-    $opts->normalized_ids_are_lower_case = false;
-    
-    $this->_check_equal ('Untergeordnet_Asthetisch', normalize_file_id ('Untergeordnet Ästhetisch'));
-    $this->_check_equal ('Untergeordnet_Asthetisch', normalize_file_id ('Untergeordnet    Ästhetisch'));
-    $this->_check_equal ('aaaaeeeeiiiioooouuuuAAAAEEEEIIIIOOOOUUUUnNcC', normalize_file_id ('äáàâëéèêïíìîöóòôüúùûÄÁÀÂËÉÈÊÏÍÌÎÖÓÒÔÜÚÙÛñÑçÇ'));
-    
-    $this->_check_equal (4096, text_to_file_size ('4KB'));
-    $this->_check_equal (4096, text_to_file_size ('4K'));
-    $this->_check_equal (4096 * 1024, text_to_file_size ('4MB'));
-    $this->_check_equal (4096 * 1024, text_to_file_size ('4M'));
-    $this->_check_equal (4096 * 1024 * 1024, text_to_file_size ('4GB'));
-    $this->_check_equal (4096 * 1024 * 1024, text_to_file_size ('4G'));
-    $this->_check_equal (4096 * 1024 * 1024 * 1024, text_to_file_size ('4TB'));
-    $this->_check_equal (4096 * 1024 * 1024 * 1024, text_to_file_size ('4T'));
     
     $input_path = $this->env->source_path ();
 
@@ -103,6 +91,149 @@ class FILE_TEST_TASK extends TEST_TASK
     $files = file_list_for ($input_path->as_text (), 'my/new/files', false);
     $this->_check_equal (1, sizeof ($files));
     $this->_check_equal ('my' . $delimiter . 'new' . $delimiter . 'files' . $delimiter . 'config.ini', $files [0]);
+  }
+  
+  private function _test_normalized_ids()
+  {
+    $this->_check_equal ('untergeordnet_asthetisch', normalize_file_id ('Untergeordnet Ästhetisch'));
+    $this->_check_equal ('untergeordnet_asthetisch', normalize_file_id ('Untergeordnet    Ästhetisch'));
+    $this->_check_equal ('aaaaeeeeiiiioooouuuuaaaaeeeeiiiioooouuuunncc', normalize_file_id ('äáàâëéèêïíìîöóòôüúùûÄÁÀÂËÉÈÊÏÍÌÎÖÓÒÔÜÚÙÛñÑçÇ'));
+    
+    $opts = global_file_options ();
+    $opts->normalized_ids_are_lower_case = false;
+    
+    $this->_check_equal ('Untergeordnet_Asthetisch', normalize_file_id ('Untergeordnet Ästhetisch'));
+    $this->_check_equal ('Untergeordnet_Asthetisch', normalize_file_id ('Untergeordnet    Ästhetisch'));
+    $this->_check_equal ('aaaaeeeeiiiioooouuuuAAAAEEEEIIIIOOOOUUUUnNcC', normalize_file_id ('äáàâëéèêïíìîöóòôüúùûÄÁÀÂËÉÈÊÏÍÌÎÖÓÒÔÜÚÙÛñÑçÇ'));
+  }
+  
+  private function _test_file_sizes()
+  {
+    $this->_check_equal (4096, text_to_file_size ('4KB'));
+    $this->_check_equal (4096, text_to_file_size ('4K'));
+    $this->_check_equal (4096 * 1024, text_to_file_size ('4MB'));
+    $this->_check_equal (4096 * 1024, text_to_file_size ('4M'));
+    $this->_check_equal (4096 * 1024 * 1024, text_to_file_size ('4GB'));
+    $this->_check_equal (4096 * 1024 * 1024, text_to_file_size ('4G'));
+    $this->_check_equal (4096 * 1024 * 1024 * 1024, text_to_file_size ('4TB'));
+    $this->_check_equal (4096 * 1024 * 1024 * 1024, text_to_file_size ('4T'));
+  }
+  
+  private function _test_delimiters()
+  {
+    $file_options = global_file_options();
+    $delimiter = $file_options->path_delimiter;
+    
+    $this->_check_equal (false, begins_with_delimiter ('path/to/the/folder/'));
+    $this->_check_equal (true, begins_with_delimiter ($delimiter . 'path/to/the/folder/'));
+    $this->_check_equal (true, ends_with_delimiter ('path/to/the/folder' . $file_options->path_delimiter));
+    $this->_check_equal (false, ends_with_delimiter ('path/to/the/folder'));
+
+    $this->_check_equal (true, begins_with_delimiter (ensure_begins_with_delimiter ('path/to/the/folder/')));
+    $this->_check_equal (true, begins_with_delimiter (ensure_begins_with_delimiter ('/path/to/the/folder/')));
+    $this->_check_equal (true, ends_with_delimiter (ensure_ends_with_delimiter ('path/to/the/folder/')));
+    $this->_check_equal (true, ends_with_delimiter (ensure_ends_with_delimiter ('path/to/the/folder')));
+  }
+  
+  private function _test_make_canonical()
+  {
+    $this->_check_equal ('/a/b/c/', make_canonical ('/a/b/c/'));
+    $this->_check_equal ('/a/b/c/', make_canonical ('/a/./b/c/'));
+    $this->_check_equal ('/a/b/c/', make_canonical ('/a/././b/c/'));
+    
+    $this->_check_equal ('a/b/c/', make_canonical ('./a/b/c/'));
+    $this->_check_equal ('a/b/c/', make_canonical ('./a/./b/c/'));
+    $this->_check_equal ('a/b/c/', make_canonical ('./a/././b/c/'));
+
+    $this->_check_equal ('a/b/c/', make_canonical ('././a/b/c/'));
+    $this->_check_equal ('a/b/c/', make_canonical ('././a/./b/c/'));
+    $this->_check_equal ('a/b/c/', make_canonical ('././a/././b/c/'));
+    
+    $this->_check_equal ('/a/b/c/', make_canonical ('/a/b/c/.'));
+    $this->_check_equal ('/a/b/c/', make_canonical ('/a/./b/c/.'));
+    $this->_check_equal ('/a/b/c/', make_canonical ('/a/././b/c/.'));
+    
+    $this->_check_equal ('a/b/c/', make_canonical ('a/b/c/.'));
+    $this->_check_equal ('a/b/c/', make_canonical ('a/./b/c/.'));
+    $this->_check_equal ('a/b/c/', make_canonical ('a/././b/c/.'));
+    
+    $this->_check_equal ('a/b/c/', make_canonical ('a/b/c/./.'));
+    $this->_check_equal ('a/b/c/', make_canonical ('a/./b/c/./.'));
+    $this->_check_equal ('a/b/c/', make_canonical ('a/././b/c/./.'));
+  }
+  
+  private function _test_path_between()
+  {
+    $this->_check_equal ('./', path_between ('/a/b/c/', '/a/b/c/'));
+    $this->_check_equal ('.', path_between ('/a/b/c/', '/a/b/c'));
+    $this->_check_equal ('./', path_between ('/a/b/c', '/a/b/c/'));
+
+    $this->_check_equal ('../', path_between ('/a/b/c/', '/a/b/'));
+    $this->_check_equal ('..', path_between ('/a/b/c/', '/a/b'));
+    $this->_check_equal ('../', path_between ('/a/b/c', '/a/b/'));
+
+    $this->_check_equal ('../../', path_between ('/a/b/c/', '/a/'));
+    $this->_check_equal ('../..', path_between ('/a/b/c/', '/a'));
+    $this->_check_equal ('../../', path_between ('/a/b/c', '/a/'));
+
+    $this->_check_equal ('c/', path_between ('/a/b/', '/a/b/c/'));
+    $this->_check_equal ('c', path_between ('/a/b/', '/a/b/c'));
+    $this->_check_equal ('c/', path_between ('/a/b', '/a/b/c/'));
+
+    $this->_check_equal ('b/c/', path_between ('/a/', '/a/b/c/'));
+    $this->_check_equal ('b/c', path_between ('/a/', '/a/b/c'));
+    $this->_check_equal ('b/c/', path_between ('/a', '/a/b/c/'));
+
+    $this->_check_equal ('../../b/c/', path_between ('/a/d/c/', '/a/b/c/'));
+    $this->_check_equal ('../../b/c', path_between ('/a/d/c/', '/a/b/c'));
+    $this->_check_equal ('../../b/c/', path_between ('/a/d/c', '/a/b/c/'));
+
+    $this->_check_equal ('../b/c/', path_between ('/a/d/', '/a/b/c/'));
+    $this->_check_equal ('../b/c', path_between ('/a/d/', '/a/b/c'));
+    $this->_check_equal ('../b/c/', path_between ('/a/d', '/a/b/c/'));
+    
+    $this->_check_equal ('../c/d/', path_between ('/a/b/e/', '/a/b/c/d/'));
+    $this->_check_equal ('../c/d', path_between ('/a/b/e/', '/a/b/c/d'));
+    $this->_check_equal ('../c/d/', path_between ('/a/b/e', '/a/b/c/d/'));
+
+    $this->_check_equal ('/e/b/c/', path_between ('/a/d/c/', '/e/b/c/'));
+    $this->_check_equal ('/e/b/c', path_between ('/a/d/c/', '/e/b/c'));
+    $this->_check_equal ('/e/b/c/', path_between ('/a/d/c', '/e/b/c/'));
+
+    $this->_check_equal ('./', path_between ('/a/b/c/', '/a/b/c/'));
+    $this->_check_equal ('.', path_between ('/a/b/c/', '/a/./b/c'));
+    $this->_check_equal ('./', path_between ('/a/b/c/', '/a/././b/c/'));
+    
+    $this->_check_equal ('a/b/c/', path_between ('/a/b/c/', 'a/b/c/'));
+    $this->_check_equal ('a/b/c', path_between ('/a/b/c/', 'a/./b/c'));
+    $this->_check_equal ('a/b/c/', path_between ('/a/b/c/', 'a/././b/c/'));
+  }
+  
+private  function _test_join_paths()
+  {
+    $this->_check_equal ('/a/b/c/d/', join_paths ('/a/', 'b/././c/d/'));
+    $this->_check_equal ('a/b/c/d/', join_paths ('a/', 'b/././c/d/'));
+    $this->_check_equal ('/a/b/c/d', join_paths ('/a/', 'b/././c/d'));
+
+    $this->_check_equal ('/a/b/c/d/', join_paths ('/a', 'b/././c/d/'));
+    $this->_check_equal ('a/b/c/d/', join_paths ('a', 'b/././c/d/'));
+    $this->_check_equal ('/a/b/c/d', join_paths ('/a', 'b/././c/d'));
+    
+    $this->_check_equal ('/a/b/c/d/', join_paths ('/a', '/b/././c/d/'));
+    $this->_check_equal ('a/b/c/d/', join_paths ('a', '/b/././c/d/'));
+    $this->_check_equal ('/a/b/c/d', join_paths ('/a', '/b/././c/d'));
+    
+    $this->_check_equal ('/a/b/c/d/', join_paths ('/a/', '/b/././c/d/'));
+    $this->_check_equal ('a/b/c/d/', join_paths ('a/', '/b/././c/d/'));
+    $this->_check_equal ('/a/b/c/d', join_paths ('/a/', '/b/././c/d'));
+    
+    $this->_check_equal ('/a/b/c/d/', join_paths ('/a/b/c/', '../../b/././c/d/'));
+    $this->_check_equal ('a/b/c/d/', join_paths ('a/b/c/', '../../b/././c/d/'));
+    $this->_check_equal ('/a/b/c/d', join_paths ('/a/b/c/', '../../b/././c/d'));
+
+    $this->_check_equal ('/a/b/c/d/', join_paths ('/a/b/c', '../../b/././c/d/'));
+    $this->_check_equal ('a/b/c/d/', join_paths ('a/b/c', '../../b/././c/d/'));
+    $this->_check_equal ('/a/b/c/d', join_paths ('/a/b/c', '../../b/././c/d'));
   }
 }
 

@@ -43,18 +43,22 @@ require_once ('webcore/sys/files.php');
  * Return the host for a URL.
  */
 define ('Url_part_host', 0x01);
+
 /**
  * Return the path for a URL (Not including the host).
  */
 define ('Url_part_path', 0x02);
+
 /**
  * Return the name of the file for a URL (not including extension).
  */
 define ('Url_part_name', 0x04);
+
 /**
  * Return the extension for a URL.
  */
 define ('Url_part_ext', 0x08);
+
 /**
  * Return the query string for a URL.
  */
@@ -64,22 +68,27 @@ define ('Url_part_args', 0x10);
  * Return the name and extension for a URL.
  */
 define ('Url_part_file_name', 0x0C);
+
 /**
  * Return the file name and arguments for a URL.
  */
 define ('Url_part_no_host_path', 0x1C);
+
 /**
  * Return the path and file name for a URL.
  */
 define ('Url_part_no_host_args', 0x0E);
+
 /**
  * Return the path, file name and arguments for a URL.
  */
 define ('Url_part_no_host', 0x1E);
+
 /**
  * Return the entire URL without the query string.
  */
 define ('Url_part_no_args', 0x0F);
+
 /**
  * Return the entire URL.
  */
@@ -615,6 +624,12 @@ class URL
       $this->_text = $url;
       $this->append ($base);
     }
+  }
+  
+  public function make_relative_to ($url)
+  {
+    list($text, $args) = $this->_extract_resource_and_args ();    
+    $this->_text = $this->_text_for_resource_and_args (path_between ($url, $text), $args);
   }
 
   /**

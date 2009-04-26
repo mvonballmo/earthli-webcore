@@ -58,7 +58,7 @@ abstract class ALBUM_ENTRY_GRID extends CONTENT_OBJECT_GRID
     if (sizeof ($objs))
     {
       $this->_url = new URL ($objs [0]->home_page ());
-      $url = new URL ($this->env->url (Url_part_all));
+      $url = new URL ($this->env->url (Url_part_no_host_path));
       $this->_url->replace_arguments ($url->query_string ());
     }
 

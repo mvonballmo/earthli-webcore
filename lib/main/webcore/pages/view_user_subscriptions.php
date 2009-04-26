@@ -65,7 +65,7 @@ http://www.earthli.com/software/webcore
       }
 			else
 			{
-				$url = new URL($Env->url(Url_part_all));
+				$url = new URL($Env->url(Url_part_no_host_path));
 				$url->replace_argument ('panel', 'summary');
 				$Page->location->append ($email, $url->as_text ());
 			}

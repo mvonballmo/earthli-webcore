@@ -555,7 +555,7 @@ class SUBSCRIPTION_SUMMARY_PANEL extends SUBSCRIPTION_PANEL
   </ul>
   <?php
       }
-    $url = new URL ($this->env->url (Url_part_all));
+    $url = new URL ($this->env->url (Url_part_no_host_path));
     $url->replace_argument ('panel', 'prefs');
 
     $renderer = $this->context->make_controls_renderer ();

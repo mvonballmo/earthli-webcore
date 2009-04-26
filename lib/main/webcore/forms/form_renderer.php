@@ -833,7 +833,10 @@ class FORM_RENDERER extends CONTROLS_RENDERER
 
   /**
    * Closes a left indent.
+   * 
    * To be used only when {@link start_indent()} has already been called.
+   * 
+   * @param $size The size of the indent; not used here, but may be used by descendents.
    * @see start_indent()
    */
   public function finish_indent ($size = '2em')
@@ -843,9 +846,12 @@ class FORM_RENDERER extends CONTROLS_RENDERER
 
   /**
    * Start a new set of columns in an open block.
+   * 
    * Starting a column block automatically starts a new row, so {@link start_row()} should not be
    * called first. Successive calls to this function will create new column content areas until
    * {@link finish_column()} is called to finish the column block.
+   * 
+   * @param string $title The title to use for this column; can be empty.
    */
   public function start_column ($title = '')
   {
@@ -873,6 +879,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
 
   /**
    * Stop generating columns in this content block.
+   * 
    * Must follow at least one call to {@link start_column()}.
    */
   public function finish_column ()
@@ -889,8 +896,10 @@ class FORM_RENDERER extends CONTROLS_RENDERER
 
   /**
    * Draw a single-line text control onto a separate row in the form.
-   * @param string $id
-   * @param FORM_TEXT_CONTROL_OPTIONS $options
+   * 
+   * @param string $id The id of the field to render.
+   * @param FORM_TEXT_CONTROL_OPTIONS $options Override the default text control rendering; can be null.
+   * @param string $title If non-empty, used instead of the field title; can be null.
    */
   public function draw_text_line_row ($id, $options = null, $title = null)
   {
@@ -899,8 +908,10 @@ class FORM_RENDERER extends CONTROLS_RENDERER
 
   /**
    * Draw a single-line password onto a separate row in the form.
-   * @param string $id
-   * @param FORM_TEXT_CONTROL_OPTIONS $options
+   * 
+   * @param string $id The id of the field to render.
+   * @param FORM_TEXT_CONTROL_OPTIONS $options Override the default text control rendering; can be null.
+   * @param string $title If non-empty, used instead of the field title; can be null.
    */
   public function draw_password_row ($id, $options = null, $title = null)
   {
@@ -909,8 +920,10 @@ class FORM_RENDERER extends CONTROLS_RENDERER
 
   /**
    * Draw a validating date control onto a separate row in the form.
-   * @param string $id
-   * @param FORM_TEXT_CONTROL_OPTIONS $options
+   * 
+   * @param string $id The id of the field to render.
+   * @param FORM_TEXT_CONTROL_OPTIONS $options Override the default text control rendering; can be null.
+   * @param string $title If non-empty, used instead of the field title; can be null.
    */
   public function draw_date_row ($id, $options = null, $title = null)
   {
@@ -919,9 +932,10 @@ class FORM_RENDERER extends CONTROLS_RENDERER
 
   /**
    * Draw a file upload control onto a separate row in the form.
-   * @param string $id
-   * @param FORM_TEXT_CONTROL_OPTIONS $options
-   * @param string $title Override the title; used instead of the field title
+   * 
+   * @param string $id The id of the field to render.
+   * @param FORM_TEXT_CONTROL_OPTIONS $options Override the default text control rendering; can be null.
+   * @param string $title If non-empty, used instead of the field title; can be null.
    */
   public function draw_file_row ($id, $options = null, $title = null)
   {
@@ -930,12 +944,13 @@ class FORM_RENDERER extends CONTROLS_RENDERER
 
   /**
    * Render a text-box field onto a separate row in the form.
-   * @param string $id Name of field.
-   * @param string $width Width of the control in valid CSS. Defaults to {@link
+   * 
+   * @param string $id The id of the field to render.
+   * @param string $width Width of the control in valid CSS; defaults to {@link
    * $default_control_width} if not specified.
-   * @param string $height Height of the control in valid CSS. Defaults to
+   * @param string $height Height of the control in valid CSS; defaults to
    * {@link $default_control_height} if not specified.
-   * @param string $title Override the title; used instead of the field title
+   * @param string $title If non-empty, used instead of the field title; can be null.
    */
   public function draw_text_box_row ($id, $width = null, $height = null, $title = null)
   {

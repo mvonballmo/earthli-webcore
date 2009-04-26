@@ -131,8 +131,10 @@ class FILE_OPTIONS
 
 /**
  * Get the collapsed, absolute representation.
+ * 
  * Removes any references to the {@link FILE_OPTIONS::$current_folder} and
  * converts folder separators to the {@link FILE_OPTIONS::$path_delimiter}.
+ * 
  * @param string $path
  * @param FILE_OPTIONS $opts
  * @return string
@@ -146,19 +148,40 @@ function make_canonical ($path, $opts = null)
   
   $sep = $opts->path_delimiter;
   $curr = $opts->current_folder;
-  
-  if ($path == $curr . $sep)
+    
+  // '\' is a reserved character in PCRE (introduces an escaped character); escape it.
+  if ($sep == '\\')
   {
-    return '';
+    $sep = '\\' . $sep;
   }
   
-  return preg_replace (array ("/\\//", "/\\//", "/[^\\$curr]\\$curr\\$sep/"), array ($sep, $sep, ''), $path);
+  // '.' is a reserved character in PCRE (matches any character but a newline); escape it.
+  if ($curr == '.')
+  {
+    $curr = '\\' . $curr;
+  }
+  
+  return preg_replace (
+    array (
+    	"&\\\\|/&",                          // Find '/' and '\' separators 
+    	"&([^$curr]|^)(?:[$curr][$sep])+&",  // Find chain of leading or embedded './' that are not '../' 
+    	"&(?:[$sep][$curr])+$&"              // Find chain of trailing '/.'
+    ), 
+    array (
+      $sep,                                // Replace with the given separator
+      '\1',                                // Remove the chain of './' 
+      $sep                                 // Replace with a single separator
+    ), 
+    $path
+  );
 }
 
 /**
  * Append 'path2' to 'path1'.
+ * 
  * Resolves all '..' marks contained in 'path2', removing folders from the end of 'path1'
  * as necessary. 'path2' will be adjusted to conform to the delimiter used.
+ * 
  * @param string $path1
  * @param string $path2
  * @param FILE_OPTIONS $opts
@@ -277,8 +300,6 @@ function join_paths ($path1, $path2, $opts = null)
  */
 function path_between ($from, $to, $opts = null)
 {
-  $Result = $to;
-
   if (! isset ($opts))
   {
     $opts = global_file_options ();
@@ -286,28 +307,96 @@ function path_between ($from, $to, $opts = null)
 
   $from = make_canonical ($from, $opts);
   $to = make_canonical ($to, $opts);
-
-  if ($to)
+  
+    
+  if (empty($to) || empty($from))
   {
-    if (strpos ($from, $to) === 0)
+    return $to;
+  }
+  
+  $Result = $to;
+  
+  if (strpos ($from, $to) === 0)
+  {
+    // target is subset of source
+    
+    if (strlen ($from) != strlen ($to))
     {
-      if (strlen ($from) != strlen ($to))
+      $Result = '';
+      $sub_url = substr ($from, strlen ($to));
+      $sub_folders = explode ($opts->path_delimiter, $sub_url);
+      foreach ($sub_folders as $f)
       {
-        $Result = '';
-        $sub_url = substr ($from, strlen ($to));
-        $sub_folders = explode ($opts->path_delimiter, $sub_url);
-        foreach ($sub_folders as $f)
+        if ($f)
         {
-          if ($f)
-          {
-            $Result .= '..' . $opts->path_delimiter;
-          }
+          $Result .= '..' . $opts->path_delimiter;
+        }
+      }
+      
+      if ($Result == '')
+      {
+        $Result = $opts->current_folder;
+      }
+      elseif (ends_with_delimiter($Result, $opts) && !ends_with_delimiter($to))
+      {
+        $Result = substr($Result, 0, -1);
+      }
+    }
+    else 
+    {
+      $Result = $opts->current_folder . $opts->path_delimiter;
+    }
+  }
+  else if (strpos ($to, $from) === 0)
+  {
+    // source is subset of target
+    
+    $Result = substr ($to, strlen ($from));
+
+    if ((strlen($Result) > 1) && ($Result[0] == $opts->path_delimiter))
+    {
+      $Result = substr($Result, 1);
+    }
+    elseif ($Result == $opts->path_delimiter)
+    {
+      $Result = $opts->current_folder . $opts->path_delimiter; 
+    }
+  }
+  elseif (($from[0] == $to[0]) && ($from[0] == $opts->path_delimiter))
+  {
+    // check for partial containment of rooted paths
+    
+    $to_folders = split ($opts->path_delimiter, trim($to, $opts->path_delimiter));
+    $from_folders = split ($opts->path_delimiter, trim($from, $opts->path_delimiter));
+    
+    $common_root_folder_count = 0;
+    $count = min(array(sizeof($to_folders), sizeof($from_folders)));
+    
+    for ($index = 0; $index < $count; $index += 1)
+    {
+      if ($from_folders[$index] != '')
+      {
+        if ($to_folders[$index] == $from_folders[$index])
+        {
+          $common_root_folder_count += 1;
+        }
+        else 
+        {
+          break;
         }
       }
     }
-    else if (strpos ($to, $from) === 0)
+    
+    if ($common_root_folder_count > 0)
     {
-      $Result = substr ($to, strlen ($from));
+      $leader = str_repeat('..' . $opts->path_delimiter, sizeof($from_folders) - $common_root_folder_count);
+
+      $Result = $leader . join($opts->path_delimiter, array_slice($to_folders, $common_root_folder_count));
+      
+      if (ends_with_delimiter($to, $opts))
+      {
+        $Result .= $opts->path_delimiter;
+      }
     }
   }
 
@@ -782,7 +871,7 @@ function file_list_for ($base_path, $path_to_prepend = '', $recurse = false, $op
   $base_path = ensure_ends_with_delimiter ($base_path, $opts);
 
   $Result = array ();
-  if (($handle = opendir ($base_path)))
+  if (($handle = @opendir ($base_path)))
   {
     while (($name = readdir ($handle)) != false)
     {
