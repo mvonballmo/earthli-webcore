@@ -725,7 +725,7 @@ blockquote p:first-child, .side-bar-body p:first-child, .chart-body p:first-chil
 .footnote-number 
 {
   vertical-align: super;
-  font-size: 85%;
+  font-size: 75%;
   line-height: 1em;
 }
 
@@ -738,14 +738,18 @@ blockquote p:first-child, .side-bar-body p:first-child, .chart-body p:first-chil
 {
   display: block;
   margin-top: .5em;
-  margin-left: 1.5em;
+  margin-left: 2em;
   margin-bottom: .5em;
 }
 
 .footnote-reference .footnote-number:first-child
 {
   float: left;
-  margin-left: -1.5em;
+  vertical-align: baseline;
+  font-size: 100%;
+  line-height: 150%;
+  margin-left: -2em;
+  margin-top: .3em;
 }
 
 /* @end */

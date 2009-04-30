@@ -99,35 +99,41 @@ class ATOM_RENDERER extends NEWSFEED_RENDERER
 
   /**
    * Called from {@link start_display()}.
+   * 
    * @param DATE_TIME $time_modified
+   * @param NEWSFEED_RENDERER_OPTIONS $options
    * @access private
    * @abstract
    */
-  protected function _start_display ($time_modified)
+  protected function _start_display ($time_modified, $options)
   {
-    parent::_start_display ($time_modified);
+    parent::_start_display ($time_modified, $options);
+    
+    $html = isset($options) && ($options->handler_type == Handler_html_renderer);
 ?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <generator uri="<?php echo $this->base_url; ?>" version="<?php echo $this->context->version; ?>">
     <?php echo $this->_as_xml ($this->generator); ?>
 
   </generator>
-  <?php _echo_atom_text_tag ('title', $this->title->as_text (), $this->language, $this->html); ?>
+  <?php _echo_atom_text_tag ('title', $this->title->as_text (), $this->language, $html); ?>
   <id><?php echo $this->_as_xml ($this->base_url); ?></id>
   <link rel="self" href="<?php echo $this->_as_xml ($this->env->url (Url_part_all)); ?>"/>
   <updated><?php echo $time_modified->as_RFC_3339 (); ?></updated>
   <icon><?php echo $this->context->sized_icon ($this->icon_file, '100px'); ?></icon>
-  <?php _echo_atom_text_tag ('subtitle', $this->description, $this->language, $this->html); ?>
-  <?php _echo_atom_text_tag ('rights', $this->copyright, $this->language, $this->html); ?>
+  <?php _echo_atom_text_tag ('subtitle', $this->description, $this->language, $html); ?>
+  <?php _echo_atom_text_tag ('rights', $this->copyright, $this->language, $html); ?>
 <?php
   }
 
   /**
    * Called from {@link finish_display()}.
+   * 
+	 * @param NEWSFEED_RENDERER_OPTIONS $options
    * @access private
    * @abstract
    */
-  protected function _finish_display ()
+  protected function _finish_display ($options)
   {
 ?>
 </feed>
@@ -162,16 +168,7 @@ class ENTRY_ATOM_RENDERER extends NEWSFEED_OBJECT_RENDERER
     $modifier = $obj->modifier ();
     $content = $this->_content_for ($obj, $options);
     $html = $this->_is_html($options);
-
-    if ($html)
-    {
-      $munger = $obj->html_formatter ();
-    }
-    else
-    {
-      $munger = $obj->plain_text_formatter ();
-    }
-    
+    $munger = $this->_make_formatter ($obj, $options);
     $language = isset($options) ? $options->language : 'en-us'; 
           
     $munger->max_visible_output_chars = 300;

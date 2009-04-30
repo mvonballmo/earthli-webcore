@@ -86,13 +86,15 @@ class RSS_RENDERER extends NEWSFEED_RENDERER
   
   /**
    * Called from {@link start_display()}.
+   * 
    * @param DATE_TIME $time_modified
+   * @param NEWSFEED_RENDERER_OPTIONS $options
    * @access private
    * @abstract
    */
-  protected function _start_display ($time_modified)
+  protected function _start_display ($time_modified, $options)
   {
-    parent::_start_display ($time_modified);
+    parent::_start_display ($time_modified, $options);
 ?>
 <rss version="2.0">
   <channel>

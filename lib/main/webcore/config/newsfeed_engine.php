@@ -37,24 +37,8 @@ http://www.earthli.com/software/webcore
 ****************************************************************************/
 
 /** */
-include_once ('webcore/obj/webcore_object.php');
-
-/**
- * Used by {@link NEWSFEED_ENGINE::make_renderer()}.
- */
-define ('Newsfeed_format_rss', 'rss');
-/**
- * Used by {@link NEWSFEED_ENGINE::make_renderer()}.
- */
-define ('Newsfeed_format_atom', 'atom');
-/**
- * Used by {@link NEWSFEED_ENGINE::make_renderer()}.
- */
-define ('Newsfeed_content_html', 'html');
-/**
- * Used by {@link NEWSFEED_ENGINE::make_renderer()}.
- */
-define ('Newsfeed_content_text', 'text');
+require_once ('webcore/constants.php');
+require_once ('webcore/obj/webcore_object.php');
 
 /**
  * Creates newsfeed renderers from a request.
@@ -71,7 +55,7 @@ class NEWSFEED_ENGINE extends WEBCORE_OBJECT
    * Type of newsfeed to create with {@link make_renderer()}.
    * @var string
    */
-  public $format = Newsfeed_format_rss;
+  public $format = Newsfeed_format_atom;
 
   /**
    * Type of content in newsfeed items/entries.
@@ -108,8 +92,7 @@ class NEWSFEED_ENGINE extends WEBCORE_OBJECT
 
     $Result = new $class_name ($this->context);
   
-    $c = $this->_content_with_fallback ();
-    $Result->html = $c == Newsfeed_content_html;
+    $Result->article_format = $this->_content_with_fallback ();
     $Result->set_description_from ($obj);
     
     if (is_a ($obj, 'FOLDER'))
@@ -154,7 +137,7 @@ class NEWSFEED_ENGINE extends WEBCORE_OBJECT
    */
   protected function _content_with_fallback ()
   {
-    $supported_formats = array (Newsfeed_content_html, Newsfeed_content_text);
+    $supported_formats = array (Newsfeed_content_full_html, Newsfeed_content_html, Newsfeed_content_text);
     if (in_array ($this->content, $supported_formats))
     {
       $Result = $this->content;

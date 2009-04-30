@@ -617,7 +617,7 @@ class HTML_FOOTNOTE_TEXT_REPLACER extends MUNGER_FOOTNOTE_TEXT_REPLACER
   {
     if ($token->is_start_tag ())
     {
-      return '<div class="footnote-reference"><span id="' . $info->name_to . '" class="footnote-number">' . $info->number . '</span> ';
+      return '<div class="footnote-reference"><span id="' . $info->name_to . '" class="footnote-number">[' . $info->number . ']</span> ';
     }
 
     return '<a href="#' . $info->name_from . '" class="footnote-return" title="Jump back to reference.">&#8617;</a></div>';

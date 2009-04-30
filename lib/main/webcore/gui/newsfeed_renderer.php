@@ -109,10 +109,10 @@ abstract class NEWSFEED_RENDERER extends WEBCORE_OBJECT
   public $generator;
 
   /**
-   * Content is rendered as HTML if <code>True</code>.
+   * Describes the format of the newsfeed articles.
    * @var boolean
    */
-  public $html = false;
+  public $article_format = Newsfeed_content_full_html;
 
   /**
    * The content=type to use for the HTTP response.
@@ -153,13 +153,15 @@ abstract class NEWSFEED_RENDERER extends WEBCORE_OBJECT
    */
   public function set_description_from ($obj)
   {
-    if ($this->html)
+    switch ($this->article_format)
     {
-      $this->description = $obj->description_as_html ();
-    }
-    else
-    {
-      $this->description = $obj->description_as_plain_text ();
+      case Newsfeed_content_html:
+      case Newsfeed_content_full_html:
+        $this->description = $obj->description_as_html ();
+        break;
+      case Newsfeed_content_text:
+        $this->description = $obj->description_as_plain_text ();
+        break;
     }
   }
 
@@ -192,30 +194,38 @@ abstract class NEWSFEED_RENDERER extends WEBCORE_OBJECT
       }
     }
 
-    $this->start_display ($time_modified);
+    /* Determine the handler to use for rendering the actual content of the
+     * item. Each newsfeed item renderer can determine how it interprets this
+     * hint. For items that render as HTML, a special page renderer is
+     * provided which items should use to wrap their content.
+     */
+
+    $class_name = $this->context->final_class_name ('NEWSFEEDER_RENDERER_OPTIONS');
+    $options = new $class_name ();
+
+    $options->language = $this->language;
+    $options->use_envelope = false;
+    
+    switch ($this->article_format)
+    {
+      case Newsfeed_content_html:
+        $options->handler_type = Handler_html_renderer;
+        break;
+      case Newsfeed_content_full_html:
+        $options->use_envelope = true;
+        $options->handler_type = Handler_html_renderer;
+        $class_name = $this->context->final_class_name ('NEWSFEED_PAGE_RENDERER');
+        $options->page_renderer = new $class_name ($this->context);
+        break;
+      case Newsfeed_content_text:
+        $options->handler_type = Handler_text_renderer;
+        break;
+    }
+
+    $this->start_display ($time_modified, $options);
 
     if (sizeof ($objs))
     {
-      /* Determine the handler to use for rendering the actual content of the
-       * item. Each newsfeed item renderer can determine how it interprets this
-       * hint. For items that render as HTML, a special page renderer is
-       * provided which items should use to wrap their content.
-       */
-
-      $class_name = $this->context->final_class_name ('NEWSFEEDER_RENDERER_OPTIONS');
-      $options = new $class_name ();
-      if ($this->html)
-      {
-        $options->handler_type = Handler_html_renderer;
-      }
-      else
-      {
-        $options->handler_type = Handler_text_renderer;
-      }
-      $options->language = $this->language;
-      $class_name = $this->context->final_class_name ('NEWSFEED_PAGE_RENDERER');
-      $options->page_renderer = new $class_name ($this->context);
-
       /* The renderer is assumed to be stateless, so use the same one
        * for all objects. We use the renderer returned by the first
        * element.
@@ -228,14 +238,16 @@ abstract class NEWSFEED_RENDERER extends WEBCORE_OBJECT
       }
     }
 
-    $this->finish_display ();
+    $this->finish_display ($options);
   }
 
   /**
-   * Start the RSS feed (show the header)
+   * Start the RSS feed (show the header).
+   * 
    * @param DATE_TIME $time_modified
+   * @param NEWSFEED_RENDERER_OPTIONS $options
    */
-  public function start_display ($time_modified)
+  public function start_display ($time_modified, $options)
   {
     $this->assert (! empty ($this->content_type), 'Content type cannot be empty.', 'start_display', 'NEWSFEED_RENDERER');
 
@@ -247,23 +259,27 @@ abstract class NEWSFEED_RENDERER extends WEBCORE_OBJECT
     }
     header ($type);
 
-    $this->_start_display ($time_modified);
+    $this->_start_display ($time_modified, $options);
   }
 
   /**
    * Finish the RSS feed (show the footer)
+   * 
+   * @param NEWSFEED_RENDERER_OPTIONS $options
    */
-  public function finish_display ()
+  public function finish_display ($options)
   {
-    $this->_finish_display ();
+    $this->_finish_display ($options);
   }
 
   /**
    * Called from {@link start_display()}.
+   * 
    * @param DATE_TIME $time_modified
+   * @param NEWSFEED_RENDERER_OPTIONS $options
    * @access private
    */
-  protected function _start_display ($time_modified)
+  protected function _start_display ($time_modified, $options)
   {
     if (! empty ($this->character_set))
     {
@@ -278,10 +294,12 @@ abstract class NEWSFEED_RENDERER extends WEBCORE_OBJECT
 
   /**
    * Called from {@link finish_display()}.
+   * 
+   * @param NEWSFEED_RENDERER_OPTIONS $options
    * @access private
    * @abstract
    */
-  protected abstract function _finish_display ();
+  protected abstract function _finish_display ($options);
 
   /**
    * Adjust the query for RSS display.
@@ -334,6 +352,7 @@ abstract class NEWSFEED_RENDERER extends WEBCORE_OBJECT
     $opts->show_statistics = false;
     $opts->show_last_time_modified = false;
     $opts->show_links = true;
+    
     /* Remove header links */
     $opts->show_login = false;
     $opts->settings_url = '';
@@ -378,7 +397,7 @@ class NEWSFEED_OBJECT_RENDERER extends HANDLER_RENDERER
   /**
    * Return the appropriate renderer for the given object and options.
    * @param RENDERABLE $obj
-   * @param OBJECT_RENDERER_OPTIONS $options
+   * @param NEWSFEEDER_RENDERER_OPTIONS $options
    * @access private
    */
   protected function _content_for ($obj, $options = null)
@@ -386,10 +405,12 @@ class NEWSFEED_OBJECT_RENDERER extends HANDLER_RENDERER
     if (isset ($options))
     {
       $handler_type = $options->handler_type;
+      $use_envelope = $options->use_envelope;
     }
     else
     {
       $handler_type = Handler_text_renderer;
+      $use_envelope = false;
     }
 
     $renderer = $obj->handler_for ($handler_type);
@@ -398,8 +419,7 @@ class NEWSFEED_OBJECT_RENDERER extends HANDLER_RENDERER
     $obj_options->preferred_text_length = $options->preferred_text_length;
     $Result = $renderer->display_to_string ($obj);
 
-    /* Wrap html content in an HTML page if supported.  */
-    if ($this->_is_html ($options))
+    if ($use_envelope && ($handler_type == Handler_html_renderer))
     {
       $browser = $this->env->browser ();
       if ($browser->supports (Browser_extended_HTML_newsfeeds))
@@ -414,19 +434,33 @@ class NEWSFEED_OBJECT_RENDERER extends HANDLER_RENDERER
   }
 
   /**
-   * Determine whether HTML is being rendered.
+   * Return a {@link MUNGER} for the given object.
+   * 
+   * @param NAMED_OBJECT $obj
+   * @param OBJECT_RENDERER_OPTIONS $options
+   * @return MUNGER
+   * @access private
+   */
+  protected function _make_formatter ($obj, $options)
+  {
+    if ($this->_is_html ($options))
+    {
+      return $obj->html_formatter ();
+    }
+
+    return $obj->plain_text_formatter ();
+  }
+  
+  /**
+   * Returns true if the content is to be rendered as HTML.
+   *
    * @param OBJECT_RENDERER_OPTIONS $options
    * @return boolean
    * @access private
    */
   protected function _is_html ($options)
   {
-    if (isset ($options))
-    {
-      return $options->handler_type == Handler_html_renderer;
-    }
-
-    return false;
+    return isset ($options) && ($options->handler_type == Handler_html_renderer);
   }
 
   /**
@@ -453,25 +487,40 @@ class NEWSFEEDER_RENDERER_OPTIONS extends OBJECT_RENDERER_OPTIONS
 {
   /**
    * Which handler should be used to render sub-items?
+   * 
    * Newsfeed items will generally wrap another renderer with feed-specific
    * tags. The renderer for the item should get a handler for this type (or
    * at least use the type to determine whick kind of custom content it will
    * render. Can be any of the {@link Handler_constants}.
+   * 
    * @var string
    */
   public $handler_type;
 
   /**
    * Language code to use for output in this feed.
+   * 
    * @var string
    */
   public $language = 'en-us';
+  
+  /**
+   * Should content be wrapped in an header and footer?
+   * 
+   * The HTML renderer, for example, wraps content in a fully valid HTML page
+   * when this value is true.
+   *
+   * @var boolean
+   */
+  public $use_envelope = true;
 
   /**
    * Page renderer to use for an HTML envelope.
+   * 
    * If HTML output is needed, renderers should call {@link
    * PAGE_RENDERER::start_display_as_text()} and {@link PAGE_RENDERER::
    * finish_display_as_text()} before and after the entry's content.
+   * 
    * @var PAGE_RENDERER
    */
   public $page_renderer;

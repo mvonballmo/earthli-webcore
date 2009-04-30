@@ -202,6 +202,30 @@ class PAGE_NEWSFEED_OPTIONS
   public $enabled = true;
 
   /**
+   * List of supported newsfeed formats.
+   * 
+   * Can contain any of the formats listed with the {@link Newsfeed_constants}.
+   *
+   * @var array[string,string]
+   */
+  public $formats = array(
+    Newsfeed_format_atom => "RSS", Newsfeed_format_rss => "Atom"
+  );
+
+  /**
+   * List of supported newsfeed content formats.
+   * 
+   * Can contain any of the content formats listed with the {@link Newsfeed_constants}.
+   *
+   * @var array[string]
+   */
+  public $content_formats = array(
+    Newsfeed_content_text => "Plain text", 
+    Newsfeed_content_html => "Simple html",
+    Newsfeed_content_full_html => "Styled html"
+  );
+
+  /**
    * Name of the feed presented to the user when subscribing.
    * @var PAGE_TITLE
    */
@@ -235,22 +259,19 @@ class PAGE_NEWSFEED_OPTIONS
     if ($this->enabled && $this->file_name)
     {
       $title = $this->title->as_text ();
-      $url = $this->page->resolve_file ($this->file_name, Force_root_on);
-      $rss_plain = new URL ($url);
-      $rss_plain->replace_argument ('format', 'rss');
-      $rss_plain->replace_argument ('content', 'text');
-      $rss_html = clone($rss_plain);
-      $rss_html->replace_argument ('content', 'html');
-      $atom_plain = clone($rss_plain);
-      $atom_plain->replace_argument ('format', 'atom');
-      $atom_html = clone($rss_html);
-      $atom_html->replace_argument ('format', 'atom');
+      $url = new URL ($this->page->resolve_file ($this->file_name, Force_root_on));
+      
+      foreach ($this->formats as $format => $format_title)
+      {
+        foreach ($this->content_formats as $content => $content_title)
+        {
+          $url->replace_argument ('format', $format);
+          $url->replace_argument ('content', $content);
 ?>
-  <link rel="alternate" title="<?php echo $title; ?> (RSS/Plain text)" href="<?php echo $rss_plain->as_html (); ?>" type="application/rss+xml">
-  <link rel="alternate" title="<?php echo $title; ?> (RSS/HTML)" href="<?php echo $rss_html->as_html ();; ?>" type="application/rss+xml">
-  <link rel="alternate" title="<?php echo $title; ?> (Atom/Plain text)" href="<?php echo $atom_plain->as_html ();; ?>" type="application/atom+xml">
-  <link rel="alternate" title="<?php echo $title; ?> (Atom/HTML)" href="<?php echo $atom_html->as_html ();; ?>" type="application/atom+xml">
+  <link rel="alternate" title="<?php echo $title; ?> (<?php echo $format_title; ?>/<?php echo $content_title; ?>)" href="<?php echo $url->as_html (); ?>" type="application/rss+xml">
 <?php
+        }
+      }
     }
   }
 }

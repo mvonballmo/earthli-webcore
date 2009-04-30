@@ -480,10 +480,14 @@ define ('Subscribe_comment', 'comment');
  */
 define ('Subscribe_user', 'user');
 
-/** Forces full expansion of urls in {@link RESOURCE_MANAGER} functions.*/
+/** 
+ * Forces full expansion of urls in {@link RESOURCE_MANAGER} functions.
+ */
 define ('Force_root_on', true);
 
-/** Prevents full expansion of urls in {@link RESOURCE_MANAGER} functions.*/
+/** 
+ * Prevents full expansion of urls in {@link RESOURCE_MANAGER} functions.
+ */
 define ('Force_root_off', false);
 
 /**
@@ -568,9 +572,9 @@ define ('Folder_name_styles', 'styles');
  * Use as an alias with the {@link RESOURCE_MANAGER}.
  */
 define ('Folder_name_themes', 'themes');
-/**
 
- *  * Applications store attachments in a hierarchy under this folder.
+/**
+ * Applications store attachments in a hierarchy under this folder.
  * Use as an alias with the {@link RESOURCE_MANAGER}.
  */
 define ('Folder_name_attachments', 'attachments');
@@ -580,16 +584,19 @@ define ('Folder_name_attachments', 'attachments');
  * Use as an alias with the {@link RESOURCE_MANAGER}.
  */
 define ('Folder_name_application', 'app');
+
 /**
  * Base folder for all application-specific icons.
  * Use as an alias with the {@link RESOURCE_MANAGER}.
  */
 define ('Folder_name_app_icons', 'app_icons');
+
 /**
  * Base folder for all application-specific styles.
  * Use as an alias with the {@link RESOURCE_MANAGER}.
  */
 define ('Folder_name_app_styles', 'app_styles');
+
 /**
  * Base folder for all application-specific scripts.
  * Use as an alias with the {@link RESOURCE_MANAGER}.
@@ -604,6 +611,7 @@ define ('Folder_name_app_scripts', 'app_scripts');
  * @see Command_importance_default
  */
 define ('Command_importance_increment', 100);
+
 /**
  * Low sorting weight for a command (prevents display).
  * Used by the UI to determine which commands should be shown in a context.
@@ -619,6 +627,7 @@ define ('Command_importance_low', 0);
  * @see Command_importance_high
  */
 define ('Command_importance_default', 500);
+
 /**
  * High sorting weight for a command (forces display).
  * Used by the UI to determine which commands should be shown in a context.
@@ -633,12 +642,14 @@ define ('Command_importance_high', 1000);
  * @see Menu_size_standard
  */
 define ('Menu_size_minimal', 'minimal');
+
 /**
  * Show the menu without important items.
  * Menu items are only available from a drop-down menu.
  * @see Menu_size_standard
  */
 define ('Menu_size_compact', 'compact');
+
 /**
  * Show some, but not all menu items.
  * The most important items are visible, and all menu items are available in a
@@ -650,12 +661,14 @@ define ('Menu_size_compact', 'compact');
  * @see Menu_size_full
  */
 define ('Menu_size_standard', 'standard');
+
 /**
  * Show all menu items as icons only.
  * Does not use a dropdown menu.
  * @see Menu_size_standard
  */
 define ('Menu_size_toolbar', 'toolbar');
+
 /**
  * Show all menu items.
  * Does not use a dropdown menu.
@@ -672,24 +685,28 @@ define ('Menu_size_full', 'full');
  * @see Menu_align_center
  */
 define ('Menu_align_default', 'default');
+
 /**
  * Menu is floated to the left of content.
  * This differs from {@link Menu_align_default} as it is not in the normal text
  * flow. Used by the {@link MENU_RENDERER}.
  */
 define ('Menu_align_left', 'left');
+
 /**
  * Menu is floated to the right of content.
  * Used  by the {@link MENU_RENDERER}.
  * @see Menu_align_default
  */
 define ('Menu_align_right', 'right');
+
 /**
  * Menu is centered in its container.
  * Used  by the {@link MENU_RENDERER}.
  * @see Menu_align_default
  */
 define ('Menu_align_center', 'center');
+
 /**
  * Menu integrates in text flow of its container.
  * Used  by the {@link MENU_RENDERER}.
@@ -712,66 +729,79 @@ define ('Menu_align_inline', 'inline');
  * @see Handler_navigator
  */
 define ('Handler_constants', '');
+
 /**
  * Return a print format renderer.
  * @see Handler_constants
  */
 define ('Handler_print_renderer', 'print');
+
 /**
  * Return an html format renderer.
  * @see Handler_constants
  */
 define ('Handler_html_renderer', 'html');
+
 /**
  * Return a plain text format renderer.
  * @see Handler_constants
  */
 define ('Handler_text_renderer', 'text');
+
 /**
  * Return a pdf format renderer.
  * @see Handler_constants
  */
 define ('Handler_pdf_renderer', 'pdf');
+
 /**
  * Return an rss format renderer.
  * @see Handler_constants
  */
 define ('Handler_rss_renderer', 'rss');
+
 /**
  * Return an atom format renderer.
  * @see Handler_constants
  */
 define ('Handler_atom_renderer', 'atom');
+
 /**
  * Return a {@link MAIL_OBJECT_RENDERER}.
  * @see Handler_constants
  */
 define ('Handler_mail', 'mail');
+
 /**
  * Return a {@link HISTORY_ITEM}.
  * @see Handler_constants
  */
 define ('Handler_history_item', 'history');
+
 /**
  * Return a set of {@link COMMANDS}.
  * @see Handler_constants
  */
 define ('Handler_commands', 'commands');
+
 /**
  * Return a {@link MENU_RENDERER}.
  * @see Handler_constants
  */
 define ('Handler_menu', 'menu');
+
 /**
  * Return an {@link OBJECT_NAVIGATOR}.
  * @see Handler_constants
  */
 define ('Handler_navigator', 'navigator');
+
 /**
  * Return an {@link OBJECT_LOCATION}.
  * @see Handler_constants
  */
 define ('Handler_location', 'location');
+
 /**
  * Return a renderer for associated content.
  * This is content that is not shown with the object body by default, but can be
@@ -785,6 +815,7 @@ define ('Handler_associated_data', 'associated_data');
  * Defines a filter that retrieves all objects.
  */
 define ('All', 0xFF);
+
 /**
  * Defines a filter that retrieves no objects.
  */
@@ -796,6 +827,7 @@ define ('None', 0x00);
   * @access private
   */
 define ('Visible', 0x01);
+
 /**
  * Object is visible, but not modifiable.
  * Interpretation of the locked flag is up to the individual object.
@@ -811,16 +843,19 @@ define ('Locked', 0x05);
  * @access private
  */
 define ('Invisible', 0x02);
+
 /**
  * Marks an object as deleted.
  */
 define ('Deleted', 0x06);
+
 /**
  * Marks an object as hidden.
  * This allows two levels of objects, with the 'View_invisible' right granted to
  * moderator or administrator users.
  */
 define ('Hidden', 0x0A);
+
 /**
  * Entry is not ready for general viewing.
  * Mark objects as unpublished so that users can keep work-in-progress in the
@@ -828,12 +863,14 @@ define ('Hidden', 0x0A);
  * unpublished work from all users.
  */
 define ('Unpublished', 0x12);
+
 /**
  * Entry is in-progress.
  * Specialization of {@link Unpublished}. Entries are in this state when
  * created.
  */
 define ('Draft', 0x32);
+
 /**
  * Entry is ready for review and publishing.
  * Specialization of {@link Unpublished}. Mark objects as queued when a draft is
@@ -841,6 +878,7 @@ define ('Draft', 0x32);
  * publish objects can make it {@link Visible}.
  */
 define ('Queued', 0x52);
+
 /**
  * Entry was not (and will not be) published.
  * Mark objects as abandoned if they are to be permanently archived drafts. This
@@ -855,17 +893,60 @@ define ('Abandoned', 0x92);
  * @access private
  */
 define ('Msg_channel_publisher', 'Publisher');
+
 /**
  * Messages from {@link MAIL_PROVIDER}s are sent on this channel.
  * Used with {@link log_message()}.
  * @access private
  */
 define ('Msg_channel_mail', 'Mail');
+
 /**
  * Messages from the {@link NEWSFEED_ENGINE} are sent on this channel.
  * Used with {@link log_message()}.
  * @access private
  */
 define ('Msg_channel_newsfeed', 'Newsfeed');
+
+/**
+ * Used with a {@link NEWSFEED_ENGINE}.
+ * This is a placeholder for documentation only. Do not use this constant.
+ * 
+ * @see Newsfeed_format_rss
+ * @see Newsfeed_format_atom
+ * @see Newsfeed_content_html
+ * @see Newsfeed_content_text
+ * @see Newsfeed_content_full_html
+ */
+define ('Newsfeed_constants', '');
+
+/**
+ * Used by {@link NEWSFEED_ENGINE::make_renderer()}.
+ */
+define ('Newsfeed_format_rss', 'rss');
+
+/**
+ * Used by {@link NEWSFEED_ENGINE::make_renderer()}.
+ */
+define ('Newsfeed_format_atom', 'atom');
+
+/**
+ * Newsfeed articles are rendered as HTML fragments.
+ * 
+ * Used by {@link NEWSFEED_ENGINE::make_renderer()}.
+ */
+define ('Newsfeed_content_html', 'html');
+
+/**
+ * Newsfeed articles are rendered as valid and complete HTML documents.
+ * 
+ * Used by {@link NEWSFEED_ENGINE::make_renderer()}.
+ */
+define ('Newsfeed_content_full_html', 'full_html');
+
+/**
+ * Used by {@link NEWSFEED_ENGINE::make_renderer()}.
+ */
+define ('Newsfeed_content_text', 'text');
 
 ?>
