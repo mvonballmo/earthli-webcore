@@ -37,7 +37,7 @@ http://www.earthli.com/software/webcore/projects
 ****************************************************************************/
 
 /** */
-require_once ('webcore/gui/entry_navigator.php');
+require_once ('projects/gui/project_entry_navigator.php');
 
 /**
  * Display a list of {@link JOB}s 'around' the current one.
@@ -46,7 +46,7 @@ require_once ('webcore/gui/entry_navigator.php');
  * @version 3.1.0
  * @since 1.4.1
  */
-class JOB_NAVIGATOR extends MULTI_TYPE_ENTRY_NAVIGATOR
+class JOB_NAVIGATOR extends PROJECT_ENTRY_NAVIGATOR
 {
   /**
    * Modify the query to navigate.
@@ -72,8 +72,9 @@ class JOB_NAVIGATOR extends MULTI_TYPE_ENTRY_NAVIGATOR
     $branch_info = $obj->main_branch_info ();
     if ($branch_info->is_closed ())
     {
-      $Result = "<span class=\"locked\">$Result</span>";
+      return "<span class=\"locked\">$Result</span>";
     }
+    
     return $Result;
   }
 
@@ -87,6 +88,7 @@ class JOB_NAVIGATOR extends MULTI_TYPE_ENTRY_NAVIGATOR
     $Result = parent::_formatter_for_object ($obj);
     $branch_info = $obj->main_branch_info ();
     $Result->title = $branch_info->status_as_text () . ' - ' . $branch_info->priority_as_text ();
+     
     return $Result;
   }
 }

@@ -46,7 +46,7 @@ http://www.earthli.com/software/webcore
   $Page->location->append ('Configure', 'configure.php');
   $Page->location->append ($Page->title->subject);
 
-  $Page->add_style_sheet ('{styles}log.css');
+  $Page->add_style_sheet ($Env->logger_style_sheet);
   $Page->start_display ();
 ?>
   <div class="box">

@@ -411,7 +411,9 @@ abstract class CALENDAR extends WEBCORE_OBJECT
 
   /**
    * Called when the page is set before rendering.
+   * 
    * Hook this event to perform any necessary processing before the calendar is rendered.
+   * 
    * @access private
    */
   protected function _page_changed () {}

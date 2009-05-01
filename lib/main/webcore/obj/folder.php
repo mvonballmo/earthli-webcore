@@ -294,6 +294,10 @@ class FOLDER extends ATTACHMENT_HOST
   public function set_sub_folders_cached ()
   {
     $this->_sub_folders_cached = true;
+    if (! isset($this->_sub_folders))
+    {
+      $this->_sub_folders = array();
+    }
   }
 
   /**

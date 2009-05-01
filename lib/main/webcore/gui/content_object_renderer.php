@@ -94,6 +94,10 @@ class CONTENT_OBJECT_RENDERER extends AUDITABLE_RENDERER
    * Emit a piece of text as plain text.
    * Used standard formatting provided by the {@link NAMED_OBJECT::html_formatter()}
    * and settings from {@link _prepare_formatter()}.
+   * 
+   * @param NAMED_OBJECT $obj
+   * @param string $text
+   * @private
    */
   protected function _echo_text_as_html ($obj, $text)
   {
@@ -115,6 +119,10 @@ class CONTENT_OBJECT_RENDERER extends AUDITABLE_RENDERER
    * Emit a piece of text as plain text.
    * Used standard formatting provided by the {@link NAMED_OBJECT::plain_text_formatter()}
    * and settings from {@link _prepare_formatter()}.
+   * 
+   * @param NAMED_OBJECT $obj
+   * @param string $text
+   * @private
    */
   protected function _echo_text_as_plain_text ($obj, $text)
   {
@@ -122,6 +130,7 @@ class CONTENT_OBJECT_RENDERER extends AUDITABLE_RENDERER
     {
       $munger = $obj->plain_text_formatter ();
       $this->_prepare_formatter ($munger);
+      $munger->right_margin = $this->_options->right_margin;
       echo $this->line ($munger->transform ($text, $obj));
     }
   }
@@ -129,6 +138,7 @@ class CONTENT_OBJECT_RENDERER extends AUDITABLE_RENDERER
   /**
    * Apply default formatting properties.
    * Used by both the HTML and plain text formatters.
+   * 
    * @param MUNGER $munger
    * @access private
    */

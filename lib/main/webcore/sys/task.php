@@ -272,7 +272,7 @@ abstract class TASK extends WEBCORE_OBJECT
       if ($this->owns_page)
       {
         $this->page->title->subject = $this->title_as_text ();
-        $this->page->add_style_sheet ('{styles}log.css');
+        $this->page->add_style_sheet ($this->env->logger_style_sheet);
         $this->page->start_display ();
         echo "<div class=\"box\"><div class=\"box-title\">{$this->page->title->subject}</div><div class=\"box-body\">";
       }

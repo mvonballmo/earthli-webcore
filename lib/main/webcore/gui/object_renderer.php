@@ -230,40 +230,56 @@ class OBJECT_RENDERER_OPTIONS
 {
   /**
    * Limit text to this length.
+   * 
    * Renderers will interpret this option differently. Some will treat this as a flag to
    * omit more detailed information and include only the description block (limited to this
    * many characters).
+   * 
    * @var integer
    */
   public $preferred_text_length = 0;
 
   /**
    * Show users and create/modify times?
+   * 
    * @var boolean
    */
   public $show_users = true;
 
   /**
    * Show only details for a summary.
+   * 
    * This should be optimized for tall, skinny viewing and contain less text.
+   * 
    * @var boolean
    */
   public $show_as_summary = false;
 
   /**
    * Show buttons/etc.
+   * 
    * Set to false when rendering in an email/printing or other non-interactive media.
+   * 
+   * @var boolean
    */
   public $show_interactive = true;
+  
+  /**
+   * Wrap text at this margin for text-based formats.
+   *
+   * @var integer
+   */
+  public $right_margin = 80;
 
   /**
    * Load values from the HTTP request.
    */
   public function load_from_request ()
   {
-    $this->preferred_text_length = read_var ('preferred_text_length');
-    $this->show_users = read_var ('show_users');
-    $this->show_as_summary = read_var ('show_as_summary');
+    $this->preferred_text_length = read_var ('preferred_text_length', $this->preferred_text_length);
+    $this->show_users = read_var ('show_users', $this->show_users);
+    $this->show_as_summary = read_var ('show_as_summary', $this->show_as_summary);
+    $this->right_margin = read_var ('right_margin', $this->right_margin);
   }
 }
 

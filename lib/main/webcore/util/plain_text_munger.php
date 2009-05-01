@@ -505,18 +505,22 @@ class PLAIN_TEXT_FOOTNOTE_TEXT_REPLACER extends MUNGER_FOOTNOTE_TEXT_REPLACER
 {
   /**
    * Format the text for the given footnote number.
-   * @param MUNGER_TOKEN $token
+   * 
+   * @param MUNGER $munger The transformation context.
+   * @param MUNGER_TOKEN $token The token that triggered the transformation.
    * @param MUNGER_FOOTNOTE_INFO $info
    * @return string
    * @access private
    */
-  protected function _format_text ($token, $info)
+  protected function _format_text ($munger, $token, $info)
   {
     if ($token->is_start_tag ())
     {
+      $munger->increase_indent_by (4);
       return "[$info->number] ";
     }
     
+    $munger->decrease_indent_by (4);
     return '';
   }
 }
@@ -1109,13 +1113,46 @@ class TEXT_MUNGER extends MUNGER
 }
 
 /**
- * Converts tagged text to formatted plain text.
+ * Converts tagged text to formatted plain text with a base set of tags and converters.
+ * 
+ * @package webcore
+ * @subpackage text
+ * @version 3.1.0
+ * @since 3.1.0
+ */
+class PLAIN_TEXT_BASE_MUNGER extends TEXT_MUNGER
+{
+  public function __construct ()
+  {
+    parent::__construct ();
+
+    $this->register_known_tag ('macro', true);
+    $this->register_known_tag ('i', true);
+    $this->register_known_tag ('b', true);
+    $this->register_known_tag ('n', true);
+    $this->register_known_tag ('c', true);
+    $this->register_known_tag ('hl', true);
+    $this->register_known_tag ('span', true);
+    $this->register_known_tag ('var', true);  // program variables
+    $this->register_known_tag ('kbd', true);  // keyboard input
+    $this->register_known_tag ('dfn', true);  // defining instance of a term
+    $this->register_known_tag ('abbr', true);  // abbreviation
+    $this->register_known_tag ('cite', true);  // citations of other sources
+    
+    $this->register_converter ('tags', new MUNGER_HTML_CONVERTER ());
+    $this->register_converter ('punctuation', new PLAIN_TEXT_PUNCTUATION_CONVERTER ());
+  }
+}
+
+/**
+ * Formats "munger"-formatted text to plain text.
+ * 
  * @package webcore
  * @subpackage text
  * @version 3.1.0
  * @since 2.4.0
  */
-class PLAIN_TEXT_MUNGER extends TEXT_MUNGER
+class PLAIN_TEXT_MUNGER extends PLAIN_TEXT_BASE_MUNGER
 {
   public function __construct ()
   {
@@ -1146,30 +1183,23 @@ class PLAIN_TEXT_MUNGER extends TEXT_MUNGER
     $this->register_replacer ('fn', new PLAIN_TEXT_FOOTNOTE_REFERENCE_REPLACER (), false);
     $this->register_replacer ('ft', new PLAIN_TEXT_FOOTNOTE_TEXT_REPLACER ());
 
-    $this->register_known_tag ('i', true);
-    $this->register_known_tag ('n', true);
-    $this->register_known_tag ('b', true);
-    $this->register_known_tag ('c', true);
-    $this->register_known_tag ('hl', true);
-    $this->register_known_tag ('span', true);
     $this->register_known_tag ('hr', true);
     $this->register_known_tag ('cb', true);
     $this->register_known_tag ('anchor', true);
-
-    $this->register_converter ('tags', new MUNGER_HTML_CONVERTER ());
-    $this->register_converter ('punctuation', new PLAIN_TEXT_PUNCTUATION_CONVERTER ());
   }
 }
 
 /**
- * Formats single-line texts to HTML.
- * HTML paragraphs and other blocks are not generated with this formatter.
+ * Formats single-line "munger"-formatted text to plain text.
+ * 
+ * All blocks and most formatting tags are removed.
+ * 
  * @package webcore
  * @subpackage text
  * @version 3.1.0
  * @since 2.6.1
  */
-class PLAIN_TEXT_TITLE_MUNGER extends TEXT_MUNGER
+class PLAIN_TEXT_TITLE_MUNGER extends PLAIN_TEXT_BASE_MUNGER
 {
   /**
    * @var boolean
@@ -1181,14 +1211,6 @@ class PLAIN_TEXT_TITLE_MUNGER extends TEXT_MUNGER
     parent::__construct ();
 
     $this->_default_transformer = new MUNGER_NOP_TRANSFORMER ();
-    $this->register_known_tag ('macro', true);
-    $this->register_known_tag ('i', true);
-    $this->register_known_tag ('b', true);
-    $this->register_known_tag ('c', true);
-    $this->register_known_tag ('hl', true);
-
-    $this->register_converter ('tags', new MUNGER_HTML_CONVERTER ());
-    $this->register_converter ('punctuation', new PLAIN_TEXT_PUNCTUATION_CONVERTER ());
   }
 }
 

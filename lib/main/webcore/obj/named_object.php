@@ -224,8 +224,8 @@ abstract class NAMED_OBJECT extends STORABLE
   }
 
   /**
-   * Returns an HTML formatter customized for this object.
-   * @return HTML_MUNGER
+   * Returns a plain text formatter customized for this object.
+   * @return TEXT_MUNGER
    */
   public function plain_text_formatter ()
   {

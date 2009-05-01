@@ -55,24 +55,6 @@ class ALBUM_CALENDAR extends BASIC_CALENDAR
   public $album;
 
   /**
-   * @var array[ALBUM]
-   * @access private
-   */
-  protected $_albums;
-
-  /**
-   * @var array[JOURNAL]
-   * @access private
-   */
-  protected $_journals;
-
-  /**
-   * @var array[DATE_TIME]
-   * @access private
-   */
-  protected $_pic_dates;
-
-  /**
    * @param ALBUM $folder Show calendar for this album.
    */
   public function __construct ($album)
@@ -198,7 +180,7 @@ class ALBUM_CALENDAR extends BASIC_CALENDAR
 
     // find all of the albums for this day
 
-    foreach ($albums as &$album)
+    foreach ($this->_albums as &$album)
     {
       $d = $album->first_day->as_php ();
       $php_first_album_day = mktime (0, 0, 0, date ("n", $d), date ("j", $d), date ("Y", $d));
@@ -257,10 +239,7 @@ class ALBUM_CALENDAR extends BASIC_CALENDAR
 
             if (isset ($jrnls))
             {
-              $i = 0;
-              $c = sizeof ($jrnls);
-
-              if ($c > 1)
+              if (sizeof ($jrnls) > 1)
               {
                 // too many journal entries to list
                 
@@ -306,6 +285,10 @@ class ALBUM_CALENDAR extends BASIC_CALENDAR
   }
 
   /**
+   * Called when the page is set before rendering.
+   * 
+   * This calendar caches the pictures and journals for the new page.
+   * 
    * @access private
    */
   protected function _page_changed ()
@@ -332,5 +315,24 @@ class ALBUM_CALENDAR extends BASIC_CALENDAR
       }
     }
   }
+
+  /**
+   * @var array[ALBUM]
+   * @access private
+   */
+  protected $_albums;
+
+  /**
+   * @var array[JOURNAL]
+   * @access private
+   */
+  protected $_journals;
+
+  /**
+   * @var array[DATE_TIME]
+   * @access private
+   */
+  protected $_pic_dates;
 }
+
 ?>

@@ -107,21 +107,21 @@ http://www.earthli.com/software/webcore
       $box->new_column ('width: 75%');
     }     
 ?>
-      <div class="box">
-        <div class="box-title">
+	<div class="box">
+    <div class="box-title">
 <?php
     $t = $entry->title_formatter ();
     $t->max_visible_output_chars = 0;
     echo $entry->title_as_html ($t);
 ?>
-        </div>
-        <div class="box-body">
+    </div>
+    <div class="box-body">
 <?php      
     $renderer = $entry->handler_for (Handler_html_renderer);
     $renderer->display ($entry);
 ?>
-        </div>
-      </div>
+    </div>
+  </div>
 <?php
     if ($need_side_panel)
     {

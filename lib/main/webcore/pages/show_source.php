@@ -42,7 +42,7 @@ http://www.earthli.com/software/webcore
 
   $Page->location->add_root_link ();
   $Page->location->append ('View source');
-  $Page->add_style_sheet ('{styles}log.css');
+  $Page->add_style_sheet ($Env->logger_style_sheet);
   $Page->start_display ();
 ?>
 <div class="box">

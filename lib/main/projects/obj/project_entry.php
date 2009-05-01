@@ -381,6 +381,9 @@ abstract class PROJECT_ENTRY extends MULTI_TYPE_ENTRY
       case Handler_location:
         include_once ('projects/gui/project_entry_renderer.php');
         return new PROJECT_ENTRY_LOCATION_RENDERER ($this->context);
+      case Handler_navigator:
+        include_once ('projects/gui/project_entry_navigator.php');
+        return new PROJECT_ENTRY_NAVIGATOR ($this);
       default:
         return parent::_default_handler_for ($handler_type, $options);
     }

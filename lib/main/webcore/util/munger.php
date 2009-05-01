@@ -1023,7 +1023,7 @@ abstract class MUNGER_FOOTNOTE_TEXT_REPLACER extends MUNGER_REPLACER
   /**
    * Convert the given token to the output format.
    * @param MUNGER $munger The transformation context.
-   * @param MUNGER_TOKEN $token
+   * @param MUNGER_TOKEN $token The token that triggered the transformation.
    * @return string
    */
   public function transform($munger, $token)
@@ -1032,20 +1032,23 @@ abstract class MUNGER_FOOTNOTE_TEXT_REPLACER extends MUNGER_REPLACER
     {
       $munger->inc_footnote_texts();
     }
+    
     $info = $munger->current_text_footnote_info();
     
-    return $this->_format_text($token, $info);
+    return $this->_format_text($munger, $token, $info);
   }
 
   /**
    * Format the text for the given footnote number.
-   * @param MUNGER_TOKEN $token
+   * 
+   * @param MUNGER $munger The transformation context.
+   * @param MUNGER_TOKEN $token The token that triggered the transformation.
    * @param MUNGER_FOOTNOTE_INFO $info
    * @return string
    * @access private
    * @abstract
    */
-  protected abstract function _format_text($token, $info);
+  protected abstract function _format_text($munger, $token, $info);
 }
 
 /**
@@ -1994,7 +1997,7 @@ class MUNGER extends MUNGER_PARSER
    */
   public function unique_id_for_context()
   {
-    if (isset ($this->_context_object))
+    if (isset ($this->_context_object) && method_exists($this->_context_object, "unique_id"))
     {
       return $this->_context_object->unique_id();
     }
