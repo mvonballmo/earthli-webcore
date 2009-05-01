@@ -2131,20 +2131,19 @@ class HTML_BASE_MUNGER extends HTML_MUNGER
   {
     parent::__construct ();
 
-    $this->register_replacer ('macro', new MUNGER_MACRO_REPLACER (), false);
-    $this->register_replacer ('c', new MUNGER_BASIC_REPLACER ('<code>', '</code>'));
+    $this->register_known_tag ('span', true);
     $this->register_replacer ('i', new MUNGER_BASIC_REPLACER ('<em>', '</em>'));
     $this->register_replacer ('b', new MUNGER_BASIC_REPLACER ('<strong>', '</strong>'));
     $this->register_replacer ('n', new MUNGER_BASIC_REPLACER ('<span class="notes">', '</span>'));
+    $this->register_replacer ('c', new MUNGER_BASIC_REPLACER ('<code>', '</code>'));
     $this->register_replacer ('hl', new MUNGER_BASIC_REPLACER ('<span class="highlight">', '</span>'));
-
-    $this->register_known_tag ('span', true);
     $this->register_known_tag ('var', true);  // program variables
     $this->register_known_tag ('kbd', true);  // keyboard input
     $this->register_known_tag ('dfn', true);  // defining instance of a term
     $this->register_known_tag ('abbr', true);  // abbreviation
     $this->register_known_tag ('cite', true);  // citations of other sources
-
+    $this->register_replacer ('macro', new MUNGER_MACRO_REPLACER (), false);
+    
     $this->register_converter ('tags', new MUNGER_HTML_CONVERTER ());
     $this->register_converter ('quotes', new HTML_SMART_QUOTE_CONVERTER ());
     $this->register_converter ('punctuation', new HTML_PUNCTUATION_CONVERTER ());
@@ -2174,38 +2173,39 @@ class HTML_TEXT_MUNGER extends HTML_BASE_MUNGER
     $quote_transformer = new HTML_QUOTE_TRANSFORMER ();
 //    $geshi_transformer = new HTML_GESHI_CODE_TRANSFORMER ();
 
+
+    $this->register_transformer ('h', $nop_transformer);
+    $this->register_replacer ('h', new HTML_HEADING_REPLACER ());
+    $this->register_transformer ('div', $block_transformer);
+    $this->register_replacer ('div', new HTML_DIV_REPLACER ());
+    $this->register_replacer ('clear', new MUNGER_BASIC_REPLACER ('<span style="display: block; clear: both"></span>', ''));
+    $this->register_transformer ('pre', $nop_transformer);
+    $this->register_replacer ('pre', new HTML_PREFORMATTED_BLOCK_REPLACER ());
+    $this->register_transformer ('box', $block_transformer);
+    $this->register_replacer ('box', new HTML_BOX_REPLACER ());
+    $this->register_transformer ('code', $nop_transformer);
+    $this->register_replacer ('code', new HTML_MUNGER_CODE_REPLACER ());
+    $this->register_replacer ('iq', new MUNGER_BASIC_REPLACER ('<span class="quote-inline">&ldquo;', '&rdquo;</span>'));
+    $this->register_transformer ('bq', $quote_transformer);
+    $this->register_replacer ('bq', new HTML_BLOCK_QUOTE_REPLACER ('quote quote-block'));
+    $this->register_transformer ('pullquote', $quote_transformer);
+    $this->register_replacer ('pullquote', new HTML_BLOCK_QUOTE_REPLACER ('quote pullquote'));
+    $this->register_transformer ('abstract', $quote_transformer);
+    $this->register_replacer ('abstract', new HTML_BLOCK_QUOTE_REPLACER ('quote abstract'));
     $this->register_transformer ('ul', $list_transformer);
     $this->register_transformer ('ol', $list_transformer);
     $this->register_transformer ('dl', new HTML_DEFINITION_LIST_TRANSFORMER ());
-    $this->register_transformer ('box', $block_transformer);
-    $this->register_transformer ('bq', $quote_transformer);
-    $this->register_transformer ('pullquote', $quote_transformer);
-    $this->register_transformer ('div', $block_transformer);
-    $this->register_transformer ('code', $nop_transformer);
-    $this->register_transformer ('ft', $block_transformer);
-    $this->register_transformer ('pre', $nop_transformer);
-    $this->register_transformer ('h', $nop_transformer);
-
-    $this->register_replacer ('page', new MUNGER_PAGE_REPLACER (), false);
-    $this->register_replacer ('iq', new MUNGER_BASIC_REPLACER ('<span class="quote-inline">&ldquo;', '&rdquo;</span>'));
-    $this->register_replacer ('bq', new HTML_BLOCK_QUOTE_REPLACER ('quote quote-block'));
-    $this->register_replacer ('pullquote', new HTML_BLOCK_QUOTE_REPLACER ('quote pullquote'));
-    $this->register_replacer ('abstract', new HTML_BLOCK_QUOTE_REPLACER ('quote abstract'));
-    $this->register_replacer ('hr', new HTML_BASIC_REPLACER ('<span class="horizontal-separator"></span>', ''), false);
-    $this->register_replacer ('div', new HTML_DIV_REPLACER ());
-    $this->register_replacer ('box', new HTML_BOX_REPLACER ());
-    $this->register_replacer ('code', new HTML_MUNGER_CODE_REPLACER ());
-    $this->register_replacer ('pre', new HTML_PREFORMATTED_BLOCK_REPLACER ());
     $this->register_replacer ('dl', new MUNGER_BASIC_REPLACER ('<dl>', '</dl>'));
-    $this->register_replacer ('clear', new MUNGER_BASIC_REPLACER ('<span style="display: block; clear: both"></span>', ''));
+    $this->register_replacer ('fn', new HTML_FOOTNOTE_REFERENCE_REPLACER (), false);
+    $this->register_transformer ('ft', $block_transformer);
+    $this->register_replacer ('ft', new HTML_FOOTNOTE_TEXT_REPLACER ());
+    $this->register_replacer ('hr', new HTML_BASIC_REPLACER ('<span class="horizontal-separator"></span>', ''), false);
     $this->register_replacer ('a', new HTML_LINK_REPLACER ());
     $this->register_replacer ('anchor', new HTML_ANCHOR_REPLACER (), false);
-    $this->register_replacer ('h', new HTML_HEADING_REPLACER ());
     $this->register_replacer ('img', new HTML_IMAGE_REPLACER (), false);
     $this->register_replacer ('media', new HTML_MEDIA_REPLACER (), false);
-    $this->register_replacer ('fn', new HTML_FOOTNOTE_REFERENCE_REPLACER (), false);
-    $this->register_replacer ('ft', new HTML_FOOTNOTE_TEXT_REPLACER ());
-
+    $this->register_replacer ('page', new MUNGER_PAGE_REPLACER (), false);
+    
     $lig = new HTML_LIGATURE_CONVERTER ();
     $lig->enabled = false;
     $this->register_converter ('ligature', $lig);

@@ -5,6 +5,105 @@ $image_output_url = $this->env->resolve_file($image_input_url);
 
 $this->_munger = new HTML_TEXT_MUNGER ();
 
+$this->_run_munger_test (
+  "<span class=\"test\">span</span>
+<i>italics</i>
+<b>bold</b>
+<n>notes</n>
+<c>code</c>
+<hl>highlight</hl>
+<var>variable</var>
+<kbd>keyboard</kbd>
+<dfn>definition</dfn>
+<abbr>abbreviation</abbr>
+<cite>citation</cite>
+<macro>(macro)
+<h>This is a section header</h>
+<div>A simple documentation division in the text flow.</div>
+<clear>Cleared a floating element
+<pre>This is preformatted text.</pre>
+<box>A simple box in the text flow.</box>
+<code>if (SomeCondition)
+{
+  foreach (var item in Items)
+  {
+    RunSomeBackupProcess(item);
+  }
+}</code>
+<iq>inline quote</iq>
+<bq>This is a famous citation</bq>
+<pullquote>This is a pullquote</pullquote>
+<abstract>This is an abstract</abstract>
+<ul>
+  Item 1
+  Item 2
+  Item 3
+</ul>
+<ol>
+  Item 1
+  Item 2
+  Item 3
+</ol>
+<dl>
+  Term #1
+  Definition #1, with enough text so that the definition will wrap and we can verify that the margin is respected.
+  Term #2
+  Definition #2, with enough text so that the definition will wrap and we can verify that the margin is respected.
+  Term #3
+  Definition #3, with enough text so that the definition will wrap and we can verify that the margin is respected.
+</dl>
+Footnote reference.<fn>\r
+<ft>This is the first footnote.</ft>
+<hr>
+<a>link</a>
+<anchor id=\"somepoint\">(anchor)
+<img src=\"{icons}indicators/error_16px\">(image)
+<media src=\"\">(media)
+<page>That was a page marker.
+",
+  "<p><span class=\"test\">span</span><br>
+<em>italics</em><br>
+<strong>bold</strong><br>
+<span class=\"notes\">notes</span><br>
+<code>code</code><br>
+<span class=\"highlight\">highlight</span><br>
+<var>variable</var><br>
+<kbd>keyboard</kbd><br>
+<dfn>definition</dfn><br>
+<abbr>abbreviation</abbr><br>
+<cite>citation</cite><br>
+(macro)</p>
+<h3>This is a section header</h3><div>A simple documentation division in the text flow.</div><p><span style=\"display: block; clear: both\"></span>Cleared a floating element</p>
+<pre>This is preformatted text.</pre><div class=\"chart\"><div class=\"chart-body\">A simple box in the text flow.</div></div><pre><code>if (SomeCondition)
+{
+  foreach (var item in Items)
+  {
+    RunSomeBackupProcess(item);
+  }
+}</code></pre><p><span class=\"quote-inline\">&ldquo;inline quote&rdquo;</span></p>
+<div class=\"quote quote-block\">&ldquo;This is a famous citation&rdquo;</div><div class=\"quote pullquote\">&ldquo;This is a pullquote&rdquo;</div><div class=\"quote abstract\">&ldquo;This is an abstract&rdquo;</div><ul>
+<li>Item 1</li>
+<li>  Item 2</li>
+<li>  Item 3</li></ul><ol>
+<li>Item 1</li>
+<li>  Item 2</li>
+<li>  Item 3</li></ol><dl><dt>Term #1</dt>
+<dd>Definition #1, with enough text so that the definition will wrap and we can verify that the margin is respected.</dd>
+<dt>Term #2</dt>
+<dd>Definition #2, with enough text so that the definition will wrap and we can verify that the margin is respected.</dd>
+<dt>Term #3</dt>
+<dd>Definition #3, with enough text so that the definition will wrap and we can verify that the margin is respected.</dd>
+</dl><p>Footnote reference.<a href=\"#footnote_THEMED_PAGE_1_body\" id=\"footnote_THEMED_PAGE_1_ref\" class=\"footnote-number\" title=\"Jump to footnote.\">[1]</a></p>
+<div class=\"footnote-reference\"><span id=\"footnote_THEMED_PAGE_1_body\" class=\"footnote-number\">[1]</span> This is the first footnote.<a href=\"#footnote_THEMED_PAGE_1_ref\" class=\"footnote-return\" title=\"Jump back to reference.\">&#8617;</a></div><p><span class=\"horizontal-separator\"></span><br>
+<a>link</a><br>
+<span id=\"somepoint\"></span>(anchor)<br>
+<img src=\"/resources/icons/webcore_png/indicators/error_16px.png\" alt=\" \">(image)<br>
+<embed type=\"application/x-shockwave-flash\" pluginspage=\"http://www.macromedia.com/go/getflashplayer\" style=\"width: 450px; height: 350px\"></embed>(media)<br>
+That was a page marker.<br>
+&nbsp;</p>
+"
+);
+
 // The following tests fails
 $this->_run_munger_test (
   "\"buy 20\" rims\"",
@@ -1776,8 +1875,8 @@ heading</h3>"
 
 $this->_munger->max_visible_output_chars = 0;
 $this->_run_munger_test (
-  "<a href=\"/earthli/index.php\">home</a> <p>This is the home page.</p> Hello. I think 8 > 5 && 5 < 8.",
-  "<a href=\"/earthli/index.php\">home</a> &lt;p&gt;This is the home page.&lt;/p&gt; Hello. I think 8 &gt; 5 &amp;&amp; 5 &lt; 8."
+  "<a href=\"/../index.php\">home</a> <p>This is the home page.</p> Hello. I think 8 > 5 && 5 < 8.",
+  "<a href=\"/../index.php\">home</a> &lt;p&gt;This is the home page.&lt;/p&gt; Hello. I think 8 &gt; 5 &amp;&amp; 5 &lt; 8."
 );
 
 

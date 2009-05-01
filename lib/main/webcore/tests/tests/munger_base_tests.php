@@ -140,62 +140,130 @@ class MUNGER_BASE_TEST_TASK extends TEST_TASK
     echo $errors;
   }
 
-  protected function _run_beta_tests ()
+  public function run_beta_tests ()
   {
-    $this->_validator = new MUNGER_DEFAULT_TEXT_VALIDATOR ();
-//    $this->_munger = new PLAIN_TEXT_MUNGER ();
-    $this->_munger = new HTML_TEXT_MUNGER ();
+    $this->_munger = new PLAIN_TEXT_MUNGER ();
+    $this->_munger->right_margin = 80;
+    
+    
+$this->_run_munger_test (
+  "<span class=\"test\">span</span>
+<i>italics</i>
+<b>bold</b>
+<n>notes</n>
+<c>code</c>
+<hl>highlight</hl>
+<var>variable</var>
+<kbd>keyboard</kbd>
+<dfn>definition</dfn>
+<abbr>abbreviation</abbr>
+<cite>citation</cite>
+<macro>(macro)
+<h>This is a section header</h>
+<div>A simple documentation division in the text flow.</div>
+<clear>Cleared a floating element
+<pre>This is preformatted text.</pre>
+<box>A simple box in the text flow.</box>
+<code>if (SomeCondition)
+{
+  foreach (var item in Items)
+  {
+    RunSomeBackupProcess(item);
+  }
+}</code>
+<iq>inline quote</iq>
+<bq>This is a famous citation</bq>
+<pullquote>This is a pullquote</pullquote>
+<abstract>This is an abstract</abstract>
+<ul>
+  Item 1
+  Item 2
+</ul>
+<ol>
+  Item 1
+  Item 2
+</ol>
+<dl>
+  Term #1
+  Definition #1, with enough text so that the definition will wrap and we can verify that the margin is respected.
+  Term #2
+  Definition #2, with enough text so that the definition will wrap and we can verify that the margin is respected.
+</dl>
+Footnote reference.<fn>\r
+<ft>This is the first footnote.</ft>
+<hr>
+<a>link</a>
+<anchor>(anchor)
+<img>(image)
+<media>(media)
+<page>That was a page marker.
+",
+  "span
+italics
+bold
+notes
+code
+highlight
+variable
+keyboard
+definition
+abbreviation
+citation
+(macro)
 
-//$s = <<<EOD
-//EOD;
+[This is a section header]
 
-$s = "'Single-quoted', \"double-quoted\",
-'<a href=\"test.html\">Test</a>', \"<a href=\"test.html\">Test</a>\",
-'<box>Test</box>', \"<box>Test</box>\"
-'Single-quoted',
-\"double-quoted\",
-\t'Single-quoted',
-\t\"double-quoted\",
-('Single-quoted'),
-(\"double-quoted\"),
-['Single-quoted'],
-[\"double-quoted\"],
-{'Single-quoted'},
-{\"double-quoted\"},
-<'Single-quoted'>,
-<\"double-quoted\">,
-='Single-quoted',
-=\"double-quoted\",
-5'9\",
-'5'9\"',
-\"5'9\"\",
-\$5'000'000'000,00,
-'\$5'000'000'000,00',
-\"\$5'000'000'000,00\",
-500'000,
-'500'000',
-\"500'000\",
-don't
-'don't',
-\"don't\",
-'\"nested\"'
-\"'nested'\"
-";
+A simple documentation division in the text flow.
 
-//$s = "
-//'5'9\"',
-//";
+Cleared a floating element
 
-$result = <<<EORESULT
-EORESULT;
+This is preformatted text.
 
-    $this->_munger->max_visible_output_chars = 0;
+A simple box in the text flow.
 
-//    $this->_generate_validation ($s);
-//    $this->_generate_test ($s);
-    $this->_run_munger_test ($s, $result);
-//    $this->_run_validator_test ($s, 3);
+if (SomeCondition)
+{
+  foreach (var item in Items)
+  {
+    RunSomeBackupProcess(item);
+  }
+}
 
+\"inline quote\"
+
+\"This is a famous citation\"
+
+\"This is a pullquote\"
+
+\"This is an abstract\"
+
+  * Item 1
+  * Item 2
+
+   1. Item 1
+   2. Item 2
+
+Term #1
+
+   Definition #1, with enough text so that the definition will wrap and we can
+   verify that the margin is respected.
+
+Term #2
+
+   Definition #2, with enough text so that the definition will wrap and we can
+   verify that the margin is respected.
+
+Footnote reference. [1]
+[1] This is the first footnote.
+--------------------------------------------------------------------------------
+
+\"link\" <>
+(anchor)
+[image](image)
+[media](media)
+That was a page marker.
+"
+);
   }
 
   protected function _generate_test ($input)

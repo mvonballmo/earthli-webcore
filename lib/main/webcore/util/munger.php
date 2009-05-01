@@ -1997,9 +1997,14 @@ class MUNGER extends MUNGER_PARSER
    */
   public function unique_id_for_context()
   {
-    if (isset ($this->_context_object) && method_exists($this->_context_object, "unique_id"))
+    if (isset ($this->_context_object))
     {
-      return $this->_context_object->unique_id();
+      if (method_exists($this->_context_object, "unique_id"))
+      {
+        return $this->_context_object->unique_id();
+      }
+      
+      return get_class($this->_context_object);
     }
     
     return rand();
@@ -2230,7 +2235,7 @@ class MUNGER extends MUNGER_PARSER
    * @param string $title
    * @access private
    */
-  protected function _start_page($title)
+  public function _start_page($title)
   {
     if ($this->_paginated)
     {
@@ -2248,7 +2253,7 @@ class MUNGER extends MUNGER_PARSER
    * @param string $title
    * @access private
    */
-  protected function _finish_page()
+  public function _finish_page()
   {
     $output = $this->_current_transformer->data($this);
     $this->_current_transformer->clear();

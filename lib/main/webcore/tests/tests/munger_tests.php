@@ -69,7 +69,15 @@ class MUNGER_TEST_TASK extends MUNGER_BASE_TEST_TASK
     $this->_test_tokens ('<<f<<s', 4);
     $this->_test_tokens ('<<<<<<f<<s<<G<<4<<<e><', 13);
     $this->_test_tokens ('<<<f><<s', 4);
-    $this->_test_tokens ("<ul>\n<ul>\n<a href=\"/earthli/index.php\">home</a>\n</ul>\n <p>This is the home page.</p> Hello. I think 8 > 5 <a href=\"whatever.php\">&&</a> 5 < 8.\n</ul>\n\n", 20);
+    $this->_test_tokens ("<ul>
+<ul>
+<a href=\"/earthli/index.php\">home</a>
+</ul>
+ <p>This is the home page.</p> Hello. I think 8 > 5 <a href=\"whatever.php\">&&</a> 5 < 8.
+</ul>
+
+", 20);
+    
     $this->_test_tokens ("", 1);
     $this->_test_tokens ("This is the home page. This is the home page. This is the home page. This is the home page. This is the home page. This is the home page. This is the home page. This is the home page. This is the home page. This is the home page. This is the home page. This is the home page. This is the home page. This is the home page. This is the home page. This is the home page. This is the home page. This is the home page. This is the home page. This is the home page. This is the home page. This is the home page. This is the home page. This is the home page. This is the home page. This is the home page. This is the home page. This is the home page. This is the home page. This is the home page. This is the home page. This is the home page. This is the home page. This is the home page. This is the home page. This is the home page. This is the home page. This is the home page. This is the home page. This is the home page. This is the home page. This is the home page. This is the home page. This is the home page. This is the home page. This is the home page. This is the home page. This is the home page. This is the home page. This is the home page. This is the home page. This is the home page. This is the home page. This is the home page. This is the home page. This is the home page. This is the home page. This is the home page. This is the home page. This is the home page. This is the home page. This is the home page. This is the home page. This is the home page. This is the home page. This is the home page. This is the home page. This is the home page. This is the home page. This is the home page. This is the home page. This is the home page. This is the home page. This is the home page. This is the home page. This is the home page. This is the home page. This is the home page. This is the home page. This is the home page. This is the home page. This is the home page. This is the home page. This is the home page. This is the home page.", 1);
     $this->_test_tokens ("This is the home page (where 8 < 5 ). This is the home page (where 8 < 5 ). This is the home page (where 8 < 5 ). This is the home page (where 8 < 5 ). This is the home page (where 8 < 5 ). This is the home page (where 8 < 5 ). This is the home page (where 8 < 5 ). This is the home page (where 8 < 5 ). This is the home page (where 8 < 5 ). This is the home page (where 8 < 5 ). This is the home page (where 8 < 5 ). This is the home page (where 8 < 5 ). This is the home page (where 8 < 5 ). This is the home page (where 8 < 5 ). This is the home page (where 8 < 5 ). This is the home page (where 8 < 5 ). This is the home page (where 8 < 5 ). This is the home page (where 8 < 5 ). This is the home page (where 8 < 5 ). This is the home page (where 8 < 5 ). This is the home page (where 8 < 5 ). This is the home page (where 8 < 5 ). This is the home page (where 8 < 5 ). This is the home page (where 8 < 5 ). This is the home page (where 8 < 5 ). This is the home page (where 8 < 5 ). This is the home page (where 8 < 5 ). This is the home page (where 8 < 5 ). This is the home page (where 8 < 5 ). This is the home page (where 8 < 5 ). This is the home page (where 8 < 5 ). This is the home page (where 8 < 5 ). This is the home page (where 8 < 5 ). This is the home page (where 8 < 5 ). This is the home page (where 8 < 5 ). This is the home page (where 8 < 5 ). This is the home page (where 8 < 5 ). This is the home page (where 8 < 5 ). This is the home page (where 8 < 5 ). This is the home page (where 8 < 5 ). This is the home page (where 8 < 5 ). This is the home page (where 8 < 5 ). This is the home page (where 8 < 5 ). This is the home page (where 8 < 5 ). This is the home page (where 8 < 5 ). This is the home page (where 8 < 5 ). This is the home page (where 8 < 5 ). This is the home page (where 8 < 5 ). This is the home page (where 8 < 5 ). This is the home page (where 8 < 5 ). This is the home page (where 8 < 5 ). This is the home page (where 8 < 5 ). This is the home page (where 8 < 5 ). This is the home page (where 8 < 5 ). This is the home page (where 8 < 5 ). This is the home page (where 8 < 5 ). This is the home page (where 8 < 5 ). This is the home page (where 8 < 5 ). This is the home page (where 8 < 5 ). This is the home page (where 8 < 5 ). This is the home page (where 8 < 5 ). This is the home page (where 8 < 5 ). This is the home page (where 8 < 5 ). This is the home page (where 8 < 5 ). This is the home page (where 8 < 5 ). This is the home page (where 8 < 5 ). This is the home page (where 8 < 5 ). This is the home page (where 8 < 5 ). This is the home page (where 8 < 5 ). This is the home page (where 8 < 5 ). This is the home page (where 8 < 5 ). This is the home page (where 8 < 5 ). This is the home page (where 8 < 5 ). This is the home page (where 8 < 5 ). This is the home page (where 8 < 5 ). This is the home page (where 8 < 5 ). This is the home page (where 8 < 5 ). This is the home page (where 8 < 5 ). This is the home page (where 8 < 5 ). This is the home page (where 8 < 5 ). This is the home page (where 8 < 5 ). This is the home page (where 8 < 5 ). This is the home page (where 8 < 5 ). This is the home page (where 8 < 5 ). This is the home page (where 8 < 5 ).", 1);
@@ -81,7 +89,12 @@ class MUNGER_TEST_TASK extends MUNGER_BASE_TEST_TASK
     $this->_test_attributes ('<a href="/earthli/index.php">', 1);
     $this->_test_attributes ('<a href="/earthli/index.php" title=" This is my title. ">', 2);
     $this->_test_attributes ('<a    href="/earthli/index.php"    >', 1);
-    $this->_test_attributes ("<a\nhref=\"/earthli/index.php\"\ntitle=\"This is the &quot;title&quot;...\n\n\t\t\"\n>", 2);
+    $this->_test_attributes ("<a
+href=\"/earthli/index.php\"
+title=\"This is the &quot;title&quot;...
+
+\t\t\"
+>", 2);
   }
 
   protected function _run_validator_tests ()
@@ -93,8 +106,110 @@ class MUNGER_TEST_TASK extends MUNGER_BASE_TEST_TASK
     $this->_run_validator_test ("Try <div><n>Bla</div> and no error occurs.", 3);
     $this->_run_validator_test ("<div class=\"notes\" align=\"center\" width=\"100px\">Test</span>", 2);
     $this->_run_validator_test ("<div class=\"notes\" align=\"center\" width=\"100px\">Test</div>", 0);
-    $this->_run_validator_test ("\r\nTesting headings.\r\n\r\n\r\nTesting headings.\r\n\r\n<h level=\"1\"><b style=\"width: 50px\">H1 heading</h>\r\n\r\nHere's some text under this heading\r\nHere's some text under this heading\r\nHere's some text under this heading\r\nHere's some text under this heading\r\nHere's some text under this heading\r\nHere's some text under this heading\r\nHere's some text under this heading\r\n\r\n<h>Normal title</h></p>\r\n\r\nHere's some text under this heading (level 3).\r\n\r\n<h level=\"high\">Bogus heading</h>\r\nHere's some text under this heading\r\nHere's some text under this heading\r\nHere's some text under this heading\r\n\r\n<h level=\"1\"><b styl=\"width: 50px\">H1 heading</h>\r\n\r\nHere's some text under this heading\r\n\r\n<h>Normal title</h></p>\r\n\r\nHere's some text under this heading (level 3).\r\n\r\n<h level=\"high\">Bogus heading</h>\r\n\r\n\r\nHere's some text under this heading (level 3).\r\nHere's some text under this heading (level 3).\r\nHere's some text under this heading (level 3).\r\nHere's some text under this heading (level 3).\r\nHere's some text under this heading (level 3).\r\n\r\n\r\n<h>Multi-line\r\nheading</h2>\r\n\r\n", 8);
-    $this->_run_validator_test ("<bq quote_style=\"none\">Content</bq>\r\n<bq quote_style=\"single\">Content</bq>\r\n<bq quote_style=\"multiple\">Content</bq>", 0);
+    $this->_run_validator_test ("\r
+Testing headings.\r
+\r
+\r
+Testing headings.\r
+\r
+<h level=\"1\"><b style=\"width: 50px\">H1 heading</h>\r
+\r
+Here's some text under this heading\r
+Here's some text under this heading\r
+Here's some text under this heading\r
+Here's some text under this heading\r
+Here's some text under this heading\r
+Here's some text under this heading\r
+Here's some text under this heading\r
+\r
+<h>Normal title</h></p>\r
+\r\nHere's some text under this heading (level 3).\r
+\r
+<h level=\"high\">Bogus heading</h>\r
+Here's some text under this heading\r
+Here's some text under this heading\r
+Here's some text under this heading\r
+\r
+<h level=\"1\"><b styl=\"width: 50px\">H1 heading</h>\r
+\r
+Here's some text under this heading\r
+\r
+<h>Normal title</h></p>\r
+\r
+Here's some text under this heading (level 3).\r
+\r
+<h level=\"high\">Bogus heading</h>\r
+\r
+\r
+Here's some text under this heading (level 3).\r
+Here's some text under this heading (level 3).\r
+Here's some text under this heading (level 3).\r
+Here's some text under this heading (level 3).\r
+Here's some text under this heading (level 3).\r
+\r
+\r
+<h>Multi-line\r
+heading</h2>\r
+\r
+", 8);
+    
+    $this->_run_validator_test ("<bq quote_style=\"none\">Content</bq>\r
+<bq quote_style=\"single\">Content</bq>\r
+<bq quote_style=\"multiple\">Content</bq>", 0);
+    
+    $this->_run_validator_test ("
+<span class=\"test\">span</span>
+<i>italics</i>
+<b>bold</b>
+<n>notes</n>
+<c>code</c>
+<hl>highlight</hl>
+<var>variable</var>
+<kbd>keyboard</kbd>
+<dfn>definition</dfn>
+<abbr>abbreviation</abbr>
+<cite>citation</cite>
+<macro>(macro)
+<h>This is a section header</h>
+<div>A simple documentation division in the text flow.</div>
+<clear>Cleared a floating element
+<pre>This is preformatted text.</pre>
+<box>A simple box in the text flow.</box>
+<code>if (SomeCondition)
+{
+  foreach (var item in Items)
+  {
+    RunSomeBackupProcess(item);
+  }
+}</code>
+<iq>inline quote</iq>
+<bq>This is a famous citation</bq>
+<pullquote>This is a pullquote</pullquote>
+<abstract>This is an abstract</abstract>
+<ul>
+  Item 1
+  Item 2
+</ul>
+<ol>
+  Item 1
+  Item 2
+</ol>
+<dl>
+  Term #1
+  Definition #1, with enough text so that the definition will wrap and we can verify that the margin is respected.
+  Term #2
+  Definition #2, with enough text so that the definition will wrap and we can verify that the margin is respected.
+</dl>
+Footnote reference.<fn>\r
+<ft>This is the first footnote.</ft>
+<hr>
+<a>link</a>
+<anchor>(anchor)
+<img>(image)
+<media>(media)
+<page>That was a page marker.
+", 0);
+    
   }
 
   protected function _run_plain_text_tests ()

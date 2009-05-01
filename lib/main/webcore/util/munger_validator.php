@@ -423,18 +423,18 @@ class MUNGER_BASE_VALIDATOR extends MUNGER_VALIDATOR
     parent::__construct ();
 
     $standard_tag_info = new MUNGER_VALIDATOR_TAG_INFO (true, array ('class', 'style', 'title'));
-    $this->register_known_tag ('macro', new MUNGER_VALIDATOR_TAG_INFO (false, array('convert')));
     $this->register_known_tag ('span', $standard_tag_info);
     $this->register_known_tag ('i', $standard_tag_info);
     $this->register_known_tag ('b', $standard_tag_info);
+    $this->register_known_tag ('n', $standard_tag_info);
     $this->register_known_tag ('c', $standard_tag_info);
     $this->register_known_tag ('hl', $standard_tag_info);
     $this->register_known_tag ('var', $standard_tag_info);
+    $this->register_known_tag ('kbd', $standard_tag_info);
     $this->register_known_tag ('dfn', $standard_tag_info);
     $this->register_known_tag ('abbr', $standard_tag_info);
-    $this->register_known_tag ('kbd', $standard_tag_info);
     $this->register_known_tag ('cite', $standard_tag_info);
-    $this->register_known_tag ('n', $standard_tag_info);
+    $this->register_known_tag ('macro', new MUNGER_VALIDATOR_TAG_INFO (false, array('convert')));
   }
 }
 
@@ -469,27 +469,27 @@ class MUNGER_DEFAULT_TEXT_VALIDATOR extends MUNGER_BASE_VALIDATOR
     $quote_tag_info = new MUNGER_VALIDATOR_TAG_INFO (true, array_merge ($div_tag_props, array ('quote_style')));
     $asset_tag_props = array_merge ($div_tag_props, array ('title', 'src', 'format', 'attachment'));
 
-    $this->register_known_tag ('page', new MUNGER_VALIDATOR_TAG_INFO (false, array ('title')));
     $this->register_known_tag ('h', new MUNGER_VALIDATOR_TAG_INFO (true, array ('level')));
-    $this->register_known_tag ('iq', new MUNGER_VALIDATOR_TAG_INFO (true, array ('author', 'source')));
-    $this->register_known_tag ('anchor', new MUNGER_VALIDATOR_TAG_INFO (false, array ('id')));
+    $this->register_known_tag ('div', $div_tag_info);
+    $this->register_known_tag ('clear', new MUNGER_VALIDATOR_TAG_INFO (false));
     $this->register_known_tag ('pre', $div_tag_info);
     $this->register_known_tag ('box', new MUNGER_VALIDATOR_TAG_INFO (true, array_merge ($div_tag_props, array ('title'))));
     $this->register_known_tag ('code', $div_tag_info);
+    $this->register_known_tag ('iq', new MUNGER_VALIDATOR_TAG_INFO (true, array ('author', 'source')));
     $this->register_known_tag ('bq', $quote_tag_info);
     $this->register_known_tag ('pullquote', $quote_tag_info);
     $this->register_known_tag ('abstract', $quote_tag_info);
-    $this->register_known_tag ('div', $div_tag_info);
-    $this->register_known_tag ('clear', new MUNGER_VALIDATOR_TAG_INFO (false));
     $this->register_known_tag ('ul', $standard_tag_info);
     $this->register_known_tag ('ol', $standard_tag_info);
-    $this->register_known_tag ('ft', $standard_tag_info);
     $this->register_known_tag ('dl', new MUNGER_VALIDATOR_TAG_INFO (true, array ('dt_class', 'dd_class', 'style')));
     $this->register_known_tag ('fn', new MUNGER_VALIDATOR_TAG_INFO (false));
+    $this->register_known_tag ('ft', $standard_tag_info);
     $this->register_known_tag ('hr', new MUNGER_VALIDATOR_TAG_INFO (false, array ('style')));
     $this->register_known_tag ('a', new MUNGER_VALIDATOR_TAG_INFO (true, array_merge ($base_tag_props, array ('title'))));
+    $this->register_known_tag ('anchor', new MUNGER_VALIDATOR_TAG_INFO (false, array ('id')));
     $this->register_known_tag ('img', new MUNGER_VALIDATOR_TAG_INFO (false, array_merge ($asset_tag_props, array ('scale'))));
     $this->register_known_tag ('media', new MUNGER_VALIDATOR_TAG_INFO (false, array_merge ($asset_tag_props, array ('height', 'args'))));
+    $this->register_known_tag ('page', new MUNGER_VALIDATOR_TAG_INFO (false, array ('title')));
   }
 }
 

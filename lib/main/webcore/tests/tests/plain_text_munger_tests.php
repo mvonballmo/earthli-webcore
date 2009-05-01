@@ -4,6 +4,162 @@ $old_show_html_output = $this->show_html_output;
 $this->show_html_output = false;
 
 $this->_run_munger_test (
+  "<span class=\"test\">span</span>
+<i>italics</i>
+<b>bold</b>
+<n>notes</n>
+<c>code</c>
+<hl>highlight</hl>
+<var>variable</var>
+<kbd>keyboard</kbd>
+<dfn>definition</dfn>
+<abbr>abbreviation</abbr>
+<cite>citation</cite>
+<macro>(macro)
+<h>This is a section header</h>
+<div>A simple documentation division in the text flow.</div>
+<clear>Cleared a floating element
+<pre>This is preformatted text.</pre>
+<box>A simple box in the text flow.</box>
+<code>if (SomeCondition)
+{
+  foreach (var item in Items)
+  {
+    RunSomeBackupProcess(item);
+  }
+}</code>
+<iq>inline quote</iq>
+<bq>This is a famous citation</bq>
+<pullquote>This is a pullquote</pullquote>
+<abstract>This is an abstract</abstract>
+<ul>
+  Item 1
+  Item 2
+</ul>
+<ol>
+  Item 1
+  Item 2
+</ol>
+<dl>
+  Term #1
+  Definition #1, with enough text so that the definition will wrap and we can verify that the margin is respected.
+  Term #2
+  Definition #2, with enough text so that the definition will wrap and we can verify that the margin is respected.
+</dl>
+Footnote reference.<fn>\r
+<ft>This is the first footnote.</ft>
+<hr>
+<a>link</a>
+<anchor>(anchor)
+<img>(image)
+<media>(media)
+<page>That was a page marker.
+",
+  "span
+italics
+bold
+notes
+code
+highlight
+variable
+keyboard
+definition
+abbreviation
+citation
+(macro)
+
+[This is a section header]
+
+A simple documentation division in the text flow.
+
+Cleared a floating element
+
+This is preformatted text.
+
+A simple box in the text flow.
+
+if (SomeCondition)
+{
+  foreach (var item in Items)
+  {
+    RunSomeBackupProcess(item);
+  }
+}
+
+\"inline quote\"
+
+\"This is a famous citation\"
+
+\"This is a pullquote\"
+
+\"This is an abstract\"
+
+  * Item 1
+  * Item 2
+
+   1. Item 1
+   2. Item 2
+
+Term #1
+
+   Definition #1, with enough text so that the definition will wrap and we can
+   verify that the margin is respected.
+
+Term #2
+
+   Definition #2, with enough text so that the definition will wrap and we can
+   verify that the margin is respected.
+
+Footnote reference. [1]
+[1] This is the first footnote.
+--------------------------------------------------------------------------------
+
+\"link\" <>
+(anchor)
+[image](image)
+[media](media)
+That was a page marker.
+"
+);
+
+$this->_run_munger_test (
+  "This is just some random filler text that precedes a footnote. It should be long enough so that it wraps on its own, to see whether normal text wraps; the footnote below will also be quite long and should also wrap (the purpose of this test).<fn>\r
+\r
+<hr>\r
+\r
+<ft>This is the first footnote. It should be long enough for the text to wrap at least once or twice, at least. Otherwise, it will be difficult to determine whether or not the footnote number is aligned properly, since it has been widened through the addition of square brackets around it.</ft>",
+  "This is just some random filler text that precedes a footnote. It should be long
+enough so that it wraps on its own, to see whether normal text wraps; the 
+footnote below will also be quite long and should also wrap (the purpose of this 
+test). [1]
+
+--------------------------------------------------------------------------------
+
+[1] This is the first footnote. It should be long enough for the text to wrap
+    at least once or twice, at least. Otherwise, it will be difficult to
+    determine whether or not the footnote number is aligned properly, since it
+    has been widened through the addition of square brackets around it.
+"
+);
+
+$this->_run_munger_test (
+  "This is non-wrapping text.<fn>\r
+\r
+<hr>\r
+\r
+<ft>This is the first footnote. It should be long enough for the text to wrap at least once or twice, at least. Otherwise, it will be difficult to determine whether or not the footnote number is aligned properly, since it has been widened through the addition of square brackets around it.</ft>",
+  "This is non-wrapping text. [1]
+
+--------------------------------------------------------------------------------
+
+[1] This is the first footnote. It should be long enough for the text to wrap
+    at least once or twice, at least. Otherwise, it will be difficult to
+    determine whether or not the footnote number is aligned properly, since it
+    has been widened through the addition of square brackets around it.
+"
+);
+
+$this->_run_munger_test (
   "<bq quote_style=\"none\">First Paragraph
 
 Second Paragraph</bq>",
@@ -12,6 +168,7 @@ Second Paragraph</bq>",
 Second Paragraph
 "
 );
+
 $this->_run_munger_test (
   "<bq quote_style=\"single\">First Paragraph
 
@@ -21,6 +178,7 @@ Second Paragraph</bq>",
 Second Paragraph\"
 "
 );
+
 $this->_run_munger_test (
   "<bq quote_style=\"multiple\">First Paragraph
 
@@ -30,6 +188,7 @@ Second Paragraph</bq>",
 \"Second Paragraph\"
 "
 );
+
 $this->_run_munger_test (
   "<bq quote_style=\"multiple\">First Paragraph
 
@@ -2551,8 +2710,8 @@ $this->_munger->force_paragraphs = false;
 
 $this->_run_munger_test (
   "<a href=\"/earthli/index.php\">home</a> <p>This is the home page.</p> Hello. I think 8 > 5 && 5 < 8.",
-  "\"home\" </earthli/index.php> <p>This is the home page.</p> Hello. I think 8 > 5
-&& 5 < 8.
+  "\"home\" <../index.php> <p>This is the home page.</p> Hello. I think 8 > 5 && 5 <
+8.
 "
 );
 

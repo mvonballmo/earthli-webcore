@@ -1126,18 +1126,18 @@ class PLAIN_TEXT_BASE_MUNGER extends TEXT_MUNGER
   {
     parent::__construct ();
 
-    $this->register_known_tag ('macro', true);
+    $this->register_known_tag ('span', true);
     $this->register_known_tag ('i', true);
     $this->register_known_tag ('b', true);
     $this->register_known_tag ('n', true);
     $this->register_known_tag ('c', true);
     $this->register_known_tag ('hl', true);
-    $this->register_known_tag ('span', true);
     $this->register_known_tag ('var', true);  // program variables
     $this->register_known_tag ('kbd', true);  // keyboard input
     $this->register_known_tag ('dfn', true);  // defining instance of a term
     $this->register_known_tag ('abbr', true);  // abbreviation
     $this->register_known_tag ('cite', true);  // citations of other sources
+    $this->register_replacer ('macro', new MUNGER_MACRO_REPLACER (), false);
     
     $this->register_converter ('tags', new MUNGER_HTML_CONVERTER ());
     $this->register_converter ('punctuation', new PLAIN_TEXT_PUNCTUATION_CONVERTER ());
@@ -1161,31 +1161,29 @@ class PLAIN_TEXT_MUNGER extends PLAIN_TEXT_BASE_MUNGER
     $this->_default_transformer = new PLAIN_TEXT_PARAGRAPH_TRANSFORMER ();
     $block_transformer = new PLAIN_TEXT_BLOCK_TRANSFORMER ();
 
+    $this->register_transformer ('h', new MUNGER_NOP_TRANSFORMER ());
+    $this->register_replacer ('h', new MUNGER_BASIC_REPLACER ('[', ']'));
+    $this->register_transformer ('div', $block_transformer);
+    $this->register_known_tag ('clear', true);
+    $this->register_transformer ('pre', new PLAIN_TEXT_PREFORMATTED_TRANSFORMER ());
+    $this->register_transformer ('box', $block_transformer);
+    $this->register_replacer ('box', new PLAIN_TEXT_BOX_REPLACER ());
+    $this->register_transformer ('code', $block_transformer);
+    $this->register_replacer ('iq', new MUNGER_BASIC_REPLACER ('"', '"'));
+    $this->register_transformer ('bq', new PLAIN_TEXT_QUOTE_TRANSFORMER ());
+    $this->register_transformer ('pullquote', new PLAIN_TEXT_QUOTE_TRANSFORMER ());
+    $this->register_transformer ('abstract', new PLAIN_TEXT_QUOTE_TRANSFORMER ());
     $this->register_transformer ('ul', new PLAIN_TEXT_LIST_TRANSFORMER ());
     $this->register_transformer ('ol', new PLAIN_TEXT_NUMERIC_LIST_TRANSFORMER ());
     $this->register_transformer ('dl', new PLAIN_TEXT_DEFINITION_LIST_TRANSFORMER ());
-    $this->register_transformer ('box', $block_transformer);
-    $this->register_transformer ('div', $block_transformer);
-    $this->register_transformer ('code', $block_transformer);
-    $this->register_transformer ('bq', new PLAIN_TEXT_QUOTE_TRANSFORMER ());
-    $this->register_transformer ('pre', new PLAIN_TEXT_PREFORMATTED_TRANSFORMER ());
-    $this->register_transformer ('h', new MUNGER_NOP_TRANSFORMER ());
-
-    $this->register_replacer ('macro', new MUNGER_MACRO_REPLACER (), false);
-    $this->register_replacer ('page', new MUNGER_PAGE_REPLACER ());
-    $this->register_replacer ('hr', new PLAIN_TEXT_HORIZONTAL_RULE_REPLACER ());
-    $this->register_replacer ('iq', new MUNGER_BASIC_REPLACER ('"', '"'));
-    $this->register_replacer ('h', new MUNGER_BASIC_REPLACER ('[', ']'));
-    $this->register_replacer ('box', new PLAIN_TEXT_BOX_REPLACER ());
-    $this->register_replacer ('a', new PLAIN_TEXT_LINK_REPLACER ());
-    $this->register_replacer ('img', new PLAIN_TEXT_MEDIA_REPLACER ('image'), false);
-    $this->register_replacer ('media', new PLAIN_TEXT_MEDIA_REPLACER ('media'), false);
     $this->register_replacer ('fn', new PLAIN_TEXT_FOOTNOTE_REFERENCE_REPLACER (), false);
     $this->register_replacer ('ft', new PLAIN_TEXT_FOOTNOTE_TEXT_REPLACER ());
-
-    $this->register_known_tag ('hr', true);
-    $this->register_known_tag ('cb', true);
+    $this->register_replacer ('hr', new PLAIN_TEXT_HORIZONTAL_RULE_REPLACER ());
+    $this->register_replacer ('a', new PLAIN_TEXT_LINK_REPLACER ());
     $this->register_known_tag ('anchor', true);
+    $this->register_replacer ('img', new PLAIN_TEXT_MEDIA_REPLACER ('image'), false);
+    $this->register_replacer ('media', new PLAIN_TEXT_MEDIA_REPLACER ('media'), false);
+    $this->register_replacer ('page', new MUNGER_PAGE_REPLACER ());
   }
 }
 
