@@ -660,8 +660,8 @@ class HTML_PUNCTUATION_CONVERTER extends MUNGER_CONVERTER
                                  , '(i-)' => '&#305;'     // Turkish i without dot
                                  , '(g-)' => '&#287;'     // Turkish g (silent)
                                  , '(I.)' => '&#304;'     // Turkish I with dot
-																 , '(Z-)' => '&#381;'			// Slavic Z with a caron		
-																 , '(z-)' => '&#382;'			// Slavic z with a caron		
+                                 , '(Z-)' => '&#381;'      // Slavic Z with a caron    
+                                 , '(z-)' => '&#382;'      // Slavic z with a caron    
                                  );
 
   /**
@@ -1208,7 +1208,7 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
     return read_array_index ($attrs, 'width');
   }
 
-	/**
+  /**
    * Read a value from the attributes list and convert it for placement
    * within an HTML tag attribute value.
    * @param array[string,string] $attrs List of attributes for the tag
@@ -1222,7 +1222,7 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
     return $this->_convert_to_attribute (read_array_index ($attrs, $index));
   }
 
-	/**
+  /**
    * Convert a value for placement within an HTML tag attribute value.
    * @param string $value The value to convert.
    * @return string

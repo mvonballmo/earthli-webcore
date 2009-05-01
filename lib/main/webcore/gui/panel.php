@@ -180,22 +180,22 @@ class PANEL_MANAGER extends WEBCORE_OBJECT
   public function ordered_panels ($flag)
   {
     switch ($flag)
-  	{
-  	  case Panel_location:
-  	    $panel_ids = $this->_location_order;
-  	    break;
-  	  case Panel_selection:
-  	    $panel_ids = $this->_selection_order;
-  	    break;
-  	  default:
-  	    $this->raise ('Unknown flag [' . $flag . ']', 'ordered_panels', 'PANEL_MANAGER');
-  	}
+    {
+      case Panel_location:
+        $panel_ids = $this->_location_order;
+        break;
+      case Panel_selection:
+        $panel_ids = $this->_selection_order;
+        break;
+      default:
+        $this->raise ('Unknown flag [' . $flag . ']', 'ordered_panels', 'PANEL_MANAGER');
+    }
 
-  	$Result = array ();
-  	foreach ($panel_ids as $id)
-  	  $Result [] = $this->_panels [$id];
+    $Result = array ();
+    foreach ($panel_ids as $id)
+      $Result [] = $this->_panels [$id];
 
-  	return $Result;
+    return $Result;
   }
 
   /**

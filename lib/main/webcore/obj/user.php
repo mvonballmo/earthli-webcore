@@ -190,7 +190,7 @@ class USER extends CONTENT_OBJECT
         $Result = $this->email;
         break;
       default:
-	    $Result = '[none]';
+      $Result = '[none]';
       }
     }    
     return $Result;

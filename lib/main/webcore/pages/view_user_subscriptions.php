@@ -63,12 +63,12 @@ http://www.earthli.com/software/webcore
         $Page->location->append ('Users', 'view_users.php');
         $Page->location->add_object_link ($user);
       }
-			else
-			{
-				$url = new URL($Env->url(Url_part_no_host_path));
-				$url->replace_argument ('panel', 'summary');
-				$Page->location->append ($email, $url->as_text ());
-			}
+      else
+      {
+        $url = new URL($Env->url(Url_part_no_host_path));
+        $url->replace_argument ('panel', 'summary');
+        $Page->location->append ($email, $url->as_text ());
+      }
       $Page->location->append ($Page->title->subject);
 
       $class_name = $App->final_class_name ('SUBSCRIPTION_PANEL_MANAGER', 'webcore/gui/subscription_panel.php');

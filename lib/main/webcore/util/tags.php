@@ -135,7 +135,7 @@ class CSS_STYLE_BUILDER
         $this->_text .= '; ';
       }
        
-			$text_options = global_text_options ();
+      $text_options = global_text_options ();
  
       $this->_text .= $name . ': ' . $text_options->convert_to_html_attribute ($value);
     }

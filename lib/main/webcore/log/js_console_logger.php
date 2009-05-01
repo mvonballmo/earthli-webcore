@@ -168,7 +168,7 @@ class JS_CONSOLE_LOGGER extends TEXT_OUTPUT_LOGGER
   console.document.write ("<p class=\"log-finish\">Log finished [<?php echo date ("Y-n-j H:i:s", time ()); ?>]<\/p>");
   console.document.write ("<\/body><\/html>");
   console.document.close();
-	//-->
+  //-->
 </script>
 <?php
     }

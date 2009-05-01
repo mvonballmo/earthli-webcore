@@ -846,7 +846,7 @@ class PUBLISHER_MESSAGE extends WEBCORE_OBJECT
     $Result = new $class_name ();
     if (! $Result->ignore_subscriber_preferred_text_length)
     {
-      	$Result->preferred_text_length = $this->subscriber->preferred_text_length;
+        $Result->preferred_text_length = $this->subscriber->preferred_text_length;
     }
     $Result->num_items = $this->num_items;
     $Result->content_summary = $this->_subject->as_text ();

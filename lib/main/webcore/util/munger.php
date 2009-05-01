@@ -213,7 +213,7 @@ class MUNGER_TOKEN
 
     if (isset($this->_name))
     { 
-    	return strtolower($this->_name);
+      return strtolower($this->_name);
     }
     
     return '';
@@ -309,7 +309,7 @@ class MUNGER_TOKEN
       }
       elseif ($this->is_end_tag()) 
       {
-      	$this->_tag_data = substr($this->_input, $this->_first + 2, $this->size - 3);
+        $this->_tag_data = substr($this->_input, $this->_first + 2, $this->size - 3);
       }
     }
 
@@ -1074,7 +1074,7 @@ abstract class MUNGER_TRANSFORMER extends MUNGER_TOOL
     if ($this->_buffer_state != Munger_only_data_block)
     {
       $this->_buffer_state = Munger_last_data_block;
-   	}
+     }
 
     $this->_process_raw_text($munger);
 

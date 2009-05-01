@@ -159,7 +159,7 @@ class ENTRY extends ATTACHMENT_HOST
       $comment->purge ($options);
     }
         
-		/* Remove subscriptions */
+    /* Remove subscriptions */
     $this->db->logged_query ("DELETE LOW_PRIORITY FROM {$this->app->table_names->subscriptions} WHERE ref_id = $this->id AND kind = '" . Subscribe_entry . "'");
 
     parent::_purge ($options);

@@ -260,7 +260,7 @@ abstract class NAMED_OBJECT extends STORABLE
    */
   public abstract function raw_title ();
   
-	/**
+  /**
    * Render the location within the object hierarchy.
    * Return the scope of this object within the system, ending with the object itself. The path can be
    * rendered as plain text or with each portion linked to the object's home page.

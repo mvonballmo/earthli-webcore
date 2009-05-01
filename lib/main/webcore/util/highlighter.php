@@ -66,7 +66,7 @@ class HIGHLIGHTER extends WEBCORE_OBJECT
 
   /**
    * Syntax-highlight the contents of the current url.
-	 * @see file_as_html()    
+   * @see file_as_html()    
    * @return  string
    */
   public function current_as_html ()

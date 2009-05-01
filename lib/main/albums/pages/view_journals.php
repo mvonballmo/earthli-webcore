@@ -25,44 +25,44 @@ For more information about the earthli Albums, visit:
 http://www.earthli.com/software/webcore/albums
 
 ****************************************************************************/
-	
-	$folder_query = $App->login->folder_query ();
-	$folder = $folder_query->object_at_id (read_var ('id'));
+  
+  $folder_query = $App->login->folder_query ();
+  $folder = $folder_query->object_at_id (read_var ('id'));
 
-	if (isset ($folder)
+  if (isset ($folder)
       && $App->login->is_allowed (Privilege_set_folder, Privilege_view, $folder)
       && $App->login->is_allowed (Privilege_set_entry, Privilege_view, $folder))
-	{
-		$App->set_referer ();
-		
-		$Page->title->add_object ($folder);
-		$Page->location->add_folder_link ($folder);
-		
-		$first_day = $App->make_date_time (read_var ('first_day'), Date_time_iso);
-		$last_day = $App->make_date_time (read_var ('last_day'), Date_time_iso);
+  {
+    $App->set_referer ();
+    
+    $Page->title->add_object ($folder);
+    $Page->location->add_folder_link ($folder);
+    
+    $first_day = $App->make_date_time (read_var ('first_day'), Date_time_iso);
+    $last_day = $App->make_date_time (read_var ('last_day'), Date_time_iso);
 
-		function format_dates_for_title ($use_CSS)
-		{
+    function format_dates_for_title ($use_CSS)
+    {
       global $folder;
       global $first_day;
       global $last_day;
 
-			$formatter = $first_day->formatter ();
-			$formatter->show_CSS = $use_CSS;
-			$fmt_first_day = $folder->format_date ($first_day, $formatter);
-			$fmt_last_day = $folder->format_date ($last_day, $formatter);
+      $formatter = $first_day->formatter ();
+      $formatter->show_CSS = $use_CSS;
+      $fmt_first_day = $folder->format_date ($first_day, $formatter);
+      $fmt_last_day = $folder->format_date ($last_day, $formatter);
 
-			if ($first_day->equals ($last_day))
-				return 'Journal Entries from ' . $fmt_first_day;
-			else
-				return 'Journal Entries from ' . $fmt_first_day . ' - ' . $fmt_last_day;
-		}
+      if ($first_day->equals ($last_day))
+        return 'Journal Entries from ' . $fmt_first_day;
+      else
+        return 'Journal Entries from ' . $fmt_first_day . ' - ' . $fmt_last_day;
+    }
 
     $Page->title->subject = format_dates_for_title (false);
-		$Page->location->append ("Calendar", "view_calendar.php?id=$folder->id");		
-		$Page->location->append ($folder->format_date ($first_day));
+    $Page->location->append ("Calendar", "view_calendar.php?id=$folder->id");    
+    $Page->location->append ($folder->format_date ($first_day));
 
-		$Page->start_display ();
+    $Page->start_display ();
 ?>
 <div class="box">
   <div class="box-title">
@@ -83,11 +83,11 @@ http://www.earthli.com/software/webcore/albums
     $grid->set_query ($jrnl_query);
     $grid->display ();
   ?>
-	</div>
+  </div>
 </div>
 <?php
-		$Page->finish_display ();
-	}
-	else
-		$Page->raise_security_violation ('You are not allowed to view journal entries for this folder.', $folder);
+    $Page->finish_display ();
+  }
+  else
+    $Page->raise_security_violation ('You are not allowed to view journal entries for this folder.', $folder);
 ?>

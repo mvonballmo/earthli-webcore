@@ -564,11 +564,11 @@ class IMAGE_PROPERTIES
     else
     {
       // Older versions used to have a non-native, PHP-based reader for EXIF data, but
-		  // it was byte-based and read a lot of the image data into memory, which doesn't work
-		  // so well with the larger pictures available today (ca. 2009) as opposed to the when
-		  // the code was written (ca. 2001). If you want to read EXIF information, you have to
-		  // have the PHP extension enabled, which is nearly a given these days, as opposed to
-		  // 8 years ago, when it was a rarity.
+      // it was byte-based and read a lot of the image data into memory, which doesn't work
+      // so well with the larger pictures available today (ca. 2009) as opposed to the when
+      // the code was written (ca. 2001). If you want to read EXIF information, you have to
+      // have the PHP extension enabled, which is nearly a given these days, as opposed to
+      // 8 years ago, when it was a rarity.
 
       log_message ('No fallback available for reading EXIF information from [' . $name . ']', Msg_type_debug_warning, Msg_channel_image);
     }

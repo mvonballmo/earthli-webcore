@@ -119,7 +119,7 @@ http://www.earthli.com/software/webcore
       }
     ?>
       <form id="<?php echo $form_name; ?>" method="post" action="">
-	      <div>
+        <div>
           <input type="hidden" name="id" value="<?php echo $folder->id; ?>">
           <input type="hidden" name="debug" value="<?php echo read_var ('debug'); ?>">
     <?php
@@ -179,7 +179,7 @@ http://www.earthli.com/software/webcore
         }
       }
     ?>
-    		</div>
+        </div>
       </form>
 <?php
       if (isset ($box))

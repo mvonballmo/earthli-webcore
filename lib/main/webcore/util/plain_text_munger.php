@@ -230,10 +230,10 @@ class PLAIN_TEXT_PARAGRAPH_TRANSFORMER extends PLAIN_TEXT_BLOCK_TRANSFORMER
     $Result = parent::data ($munger);
 
     if ($Result && 
-    	  (
-    			($munger->force_paragraphs || (strpos ($Result, "\n") !== false)) &&
-     			(substr ($Result, -1) != "\n"))
-     	 	)
+        (
+          ($munger->force_paragraphs || (strpos ($Result, "\n") !== false)) &&
+           (substr ($Result, -1) != "\n"))
+          )
     {
       $Result .= "\n";
     }

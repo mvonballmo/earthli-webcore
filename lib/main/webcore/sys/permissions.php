@@ -510,7 +510,7 @@ class USER_PERMISSIONS extends STORABLE
    */
   protected function _purge($options) 
   {
-  	$this->delete();
+    $this->delete();
   }
   
 

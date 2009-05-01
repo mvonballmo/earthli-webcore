@@ -81,7 +81,7 @@ class BROWSER_TEST_TASK extends TEST_TASK
           $this->_check (!$browser->is (Browser_robot), 'Browser should not be a robot.');
           $this->_check (!$browser->is (Browser_previewer), "Browser should not be a previewer.");
           
-		$browser->load_from_string ('facebookexternalhit/1.0 (+http://www.facebook.com/externalhit_uatext.php)');
+    $browser->load_from_string ('facebookexternalhit/1.0 (+http://www.facebook.com/externalhit_uatext.php)');
 
           $this->_check_equal ('facebookexternalhit/1.0 (+http://www.facebook.com/externalhit_uatext.php)', $browser->user_agent_string);
           $this->_check_equal ('Unknown', $browser->system_id ());

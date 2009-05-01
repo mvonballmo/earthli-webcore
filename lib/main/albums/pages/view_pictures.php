@@ -26,54 +26,54 @@ http://www.earthli.com/software/webcore/albums
 
 ****************************************************************************/
 
-	$folder_query = $App->login->folder_query ();
-	$folder = $folder_query->object_at_id (read_var ('id'));
+  $folder_query = $App->login->folder_query ();
+  $folder = $folder_query->object_at_id (read_var ('id'));
 
-	if (isset ($folder)
+  if (isset ($folder)
       && $App->login->is_allowed (Privilege_set_folder, Privilege_view, $folder)
       && $App->login->is_allowed (Privilege_set_entry, Privilege_view, $folder))
-	{
-		$App->set_referer ();
+  {
+    $App->set_referer ();
 
-		$Page->title->add_object ($folder);
-		$Page->location->add_folder_link ($folder);
+    $Page->title->add_object ($folder);
+    $Page->location->add_folder_link ($folder);
 
-		$first_day = $App->make_date_time (read_var ('first_day'), Date_time_iso);
-		$last_day = $App->make_date_time (read_var ('last_day'), Date_time_iso);
-		$calendar = read_var ('calendar');
-		$journal = read_var ('journal');
-		$page_number = read_var ('page_number');
+    $first_day = $App->make_date_time (read_var ('first_day'), Date_time_iso);
+    $last_day = $App->make_date_time (read_var ('last_day'), Date_time_iso);
+    $calendar = read_var ('calendar');
+    $journal = read_var ('journal');
+    $page_number = read_var ('page_number');
 
-		$df = $first_day->formatter ();
+    $df = $first_day->formatter ();
     $df->show_CSS = false;
 
-		if ($first_day->equals ($last_day, Date_time_date_part))
-			$Page->title->subject = 'Pictures from ' . $folder->format_date ($first_day, $df);
-		else
-			$Page->title->subject = 'Pictures from ' . $folder->format_date ($first_day, $df) . ' - ' . $folder->format_date ($last_day, $df);
+    if ($first_day->equals ($last_day, Date_time_date_part))
+      $Page->title->subject = 'Pictures from ' . $folder->format_date ($first_day, $df);
+    else
+      $Page->title->subject = 'Pictures from ' . $folder->format_date ($first_day, $df) . ' - ' . $folder->format_date ($last_day, $df);
 
-		if ($calendar)
-			$Page->location->append ("Calendar", "view_calendar.php?id=$folder->id");
+    if ($calendar)
+      $Page->location->append ("Calendar", "view_calendar.php?id=$folder->id");
 
-		if ($journal)
-		{
-			$jrnl_query = $folder->entry_query ();
-			$jrnl = $jrnl_query->object_at_id ($journal);
-			$Page->location->append ($jrnl->title, "view_journal.php?id=$jrnl->id&amp;calendar=$calendar&amp;page_number=$page_number");
-		}
+    if ($journal)
+    {
+      $jrnl_query = $folder->entry_query ();
+      $jrnl = $jrnl_query->object_at_id ($journal);
+      $Page->location->append ($jrnl->title, "view_journal.php?id=$jrnl->id&amp;calendar=$calendar&amp;page_number=$page_number");
+    }
 
-		if ($calendar)
-			$Page->location->append ($folder->format_date ($first_day));
-		else
-			$Page->location->append ("Pictures");
+    if ($calendar)
+      $Page->location->append ($folder->format_date ($first_day));
+    else
+      $Page->location->append ("Pictures");
 
-		$Page->start_display ();
+    $Page->start_display ();
 ?>
 <div class="box">
   <div class="box-title">
     <?php echo $Page->title->subject; ?>
-	</div>
-	<div class="box-body">
+  </div>
+  <div class="box-body">
   <?php
     $pic_query = $folder->entry_query ();
     $pic_query->set_type ('picture');
@@ -88,11 +88,11 @@ http://www.earthli.com/software/webcore/albums
     $grid->set_query ($pic_query);
     $grid->display ();
   ?>
-	</div>
+  </div>
 </div>
 <?php
-		$Page->finish_display ();
-	}
-	else
-		$Page->raise_security_violation ('You are not allowed to view pictures for this folder.', $folder);
+    $Page->finish_display ();
+  }
+  else
+    $Page->raise_security_violation ('You are not allowed to view pictures for this folder.', $folder);
 ?>

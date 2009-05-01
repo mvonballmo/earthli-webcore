@@ -562,7 +562,7 @@ class SUBSCRIPTION_SUMMARY_PANEL extends SUBSCRIPTION_PANEL
     $button = $renderer->button_as_html ('Change...', $url->as_text (), '{icons}buttons/edit');
     $this->_echo_button_with_description ('', $button);
 
-	$panels = $this->_panel_manager->ordered_panels (Panel_location);
+  $panels = $this->_panel_manager->ordered_panels (Panel_location);
     foreach ($panels as $panel)
     {
       if ($this->_is_summarizable ($panel))

@@ -324,7 +324,7 @@ abstract class CALENDAR extends WEBCORE_OBJECT
            $this->_last_empty_year);
   }
   
-	/**
+  /**
    * A day of the week with no date for that month.
    * @access private
    * @abstract
@@ -358,7 +358,7 @@ abstract class CALENDAR extends WEBCORE_OBJECT
    */
   public function start_week ($week, $month, $year) {}
   
-	/**
+  /**
    * A week has just completed.
    * @param integer $week
    * @param integer $month
@@ -375,7 +375,7 @@ abstract class CALENDAR extends WEBCORE_OBJECT
    */
   public function start_month ($month, $year) {}
   
-	/**
+  /**
    * A month has just completed.
    * @param integer $month
    * @param integer $year
@@ -403,7 +403,7 @@ abstract class CALENDAR extends WEBCORE_OBJECT
    */
   public function start_calendar () {}
   
-	/**
+  /**
    * Calendar is finished rendering.
    * @access private
    */

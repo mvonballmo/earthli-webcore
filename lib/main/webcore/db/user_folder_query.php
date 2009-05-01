@@ -149,7 +149,7 @@ class USER_FOLDER_QUERY extends OBJECT_IN_FOLDER_QUERY
     if ($id)
     {
       $this->db->logged_query (
-      	"SELECT folder_id FROM {$this->app->table_names->entries} entry" .
+        "SELECT folder_id FROM {$this->app->table_names->entries} entry" .
         " INNER JOIN {$this->app->table_names->comments} com on com.entry_id = entry.id" .
         " WHERE com.id = $id"
       );
@@ -179,14 +179,14 @@ class USER_FOLDER_QUERY extends OBJECT_IN_FOLDER_QUERY
       {
       case History_item_entry:
         $this->db->logged_query (
-        	"SELECT folder_id FROM {$this->app->table_names->entries} host" .
+          "SELECT folder_id FROM {$this->app->table_names->entries} host" .
           " INNER JOIN {$this->app->table_names->attachments} a on a.object_id = host.id" .
           " WHERE a.id = $id"
         );
         break;
       case History_item_comment:
         $this->db->logged_query (
-        	"SELECT folder_id FROM {$this->app->table_names->entries} entry" .
+          "SELECT folder_id FROM {$this->app->table_names->entries} entry" .
           " INNER JOIN {$this->app->table_names->comments} host on host.entry_id = entry.id" .
           " INNER JOIN {$this->app->table_names->attachments} a on a.object_id = host.id" .
           " WHERE a.id = $id"
@@ -194,7 +194,7 @@ class USER_FOLDER_QUERY extends OBJECT_IN_FOLDER_QUERY
         break;
       case History_item_folder:
         $this->db->logged_query (
-        	"SELECT host.id as folder_id FROM {$this->app->table_names->folders} host" .
+          "SELECT host.id as folder_id FROM {$this->app->table_names->folders} host" .
           " INNER JOIN {$this->app->table_names->attachments} a on a.object_id = host.id" .
           " WHERE a.id = $id"
         );

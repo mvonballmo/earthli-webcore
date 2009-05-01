@@ -1040,7 +1040,7 @@ class APPLICATION extends CONTEXT
         }
 
         /* Do not enforce login privileges for anonymous users, as they should always
-				 * be logged in as their ip-address, if possible. */
+         * be logged in as their ip-address, if possible. */
 
         $cache = $this->user_cache ();
         $cache->add_object ($Result);

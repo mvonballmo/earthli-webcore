@@ -163,9 +163,9 @@ function make_canonical ($path, $opts = null)
   
   return preg_replace (
     array (
-    	"&\\\\|/&",                          // Find '/' and '\' separators 
-    	"&([^$curr]|^)(?:[$curr][$sep])+&",  // Find chain of leading or embedded './' that are not '../' 
-    	"&(?:[$sep][$curr])+$&"              // Find chain of trailing '/.'
+      "&\\\\|/&",                          // Find '/' and '\' separators 
+      "&([^$curr]|^)(?:[$curr][$sep])+&",  // Find chain of leading or embedded './' that are not '../' 
+      "&(?:[$sep][$curr])+$&"              // Find chain of trailing '/.'
     ), 
     array (
       $sep,                                // Replace with the given separator

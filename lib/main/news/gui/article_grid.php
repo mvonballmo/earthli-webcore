@@ -179,7 +179,7 @@ class BASE_ARTICLE_GRID extends CONTENT_OBJECT_GRID
   </div>
 <?php
     }
-  }	
+  }  
 }
 
 /**

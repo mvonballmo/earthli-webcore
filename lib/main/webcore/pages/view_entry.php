@@ -107,7 +107,7 @@ http://www.earthli.com/software/webcore
       $box->new_column ('width: 75%');
     }     
 ?>
-	<div class="box">
+  <div class="box">
     <div class="box-title">
 <?php
     $t = $entry->title_formatter ();

@@ -50,7 +50,7 @@ require_once ('webcore/sys/system.php');
  */
 class UNIQUE_OBJECT_TYPE_INFO extends TYPE_INFO
 {
-	/**
+  /**
    * Gets a unique id for the given object.
    *
    * @param WEBCORE_OBJECT $obj

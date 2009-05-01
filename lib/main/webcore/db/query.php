@@ -1563,7 +1563,7 @@ class QUERY_BASED_CACHE extends RAISABLE
    */
   public $query;
   
-	/**
+  /**
    * @param QUERY $query Retrieve objects using this query.
    */
   public function __construct ($query)

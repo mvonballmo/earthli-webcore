@@ -114,7 +114,7 @@ class MUNGER_BASE_TEST_TASK extends TEST_TASK
     $this->_num_tests = 0;
     ob_start ();
 //      $this->_run_beta_tests ();
-			$this->_run_tests ();
+      $this->_run_tests ();
       $errors = ob_get_contents ();
     ob_end_clean ();
 
@@ -122,19 +122,19 @@ class MUNGER_BASE_TEST_TASK extends TEST_TASK
     {
       echo "<p>" . 
         $this->context->resolve_icon_as_html("{icons}/indicators/error", "info", "20px") . 
-      	" Congratulations! All [$this->_num_tests] tests have completed successfully.</p>";
+        " Congratulations! All [$this->_num_tests] tests have completed successfully.</p>";
     }
     elseif ($this->_num_ignored == $this->_num_errors)
     {
       echo "<p>" . 
         $this->context->resolve_icon_as_html("{icons}/indicators/warning", "info", "20px") . 
-      	" Congratulations! You passed [$this->_num_tests] tests; [$this->_num_ignored] errors were ignored.</p>";
+        " Congratulations! You passed [$this->_num_tests] tests; [$this->_num_ignored] errors were ignored.</p>";
     }
     else
     {
       echo "<p class=\"error\">" . 
         $this->context->resolve_icon_as_html("{icons}/indicators/error", "error", "20px") . 
-      	" You failed [$this->_num_errors] of [$this->_num_tests] tests; [$this->_num_ignored] errors were ignored.</p>";
+        " You failed [$this->_num_errors] of [$this->_num_tests] tests; [$this->_num_ignored] errors were ignored.</p>";
     }
 
     echo $errors;

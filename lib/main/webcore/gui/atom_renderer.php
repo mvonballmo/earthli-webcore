@@ -129,7 +129,7 @@ class ATOM_RENDERER extends NEWSFEED_RENDERER
   /**
    * Called from {@link finish_display()}.
    * 
-	 * @param NEWSFEED_RENDERER_OPTIONS $options
+   * @param NEWSFEED_RENDERER_OPTIONS $options
    * @access private
    * @abstract
    */
