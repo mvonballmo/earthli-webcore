@@ -360,7 +360,13 @@ class HTML_LIST_TRANSFORMER extends MUNGER_LIST_TRANSFORMER
   protected function _make_item ($text, $item_was_open)
   {
     $Result = new stdClass();
-    $Result->items = explode ("\n", ltrim ($text, " \t"));
+    $Result->items = explode ("\n", $text);
+    
+    foreach ($Result->items as &$item)
+    {
+      $item = ltrim ($item, " \t");
+    }
+    
     $Result->was_open = $item_was_open;
     $Result->is_open = $this->_item_is_open;
     
