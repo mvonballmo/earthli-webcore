@@ -6,6 +6,18 @@ $image_output_url = $this->env->resolve_file($image_input_url);
 $this->_munger = new HTML_TEXT_MUNGER ();
 
 $this->_run_munger_test (
+  "<ul>
+  Item 1
+  Item 2
+  Item 3
+</ul>",
+  "<ul>
+<li>Item 1</li>
+<li>Item 2</li>
+<li>Item 3</li></ul>"
+);
+
+$this->_run_munger_test (
   "<span class=\"test\">span</span>
 <i>italics</i>
 <b>bold</b>
@@ -83,11 +95,11 @@ Footnote reference.<fn>\r
 }</code></pre><p><span class=\"quote-inline\">&ldquo;inline quote&rdquo;</span></p>
 <div class=\"quote quote-block\">&ldquo;This is a famous citation&rdquo;</div><div class=\"quote pullquote\">&ldquo;This is a pullquote&rdquo;</div><div class=\"quote abstract\">&ldquo;This is an abstract&rdquo;</div><ul>
 <li>Item 1</li>
-<li>  Item 2</li>
-<li>  Item 3</li></ul><ol>
+<li>Item 2</li>
+<li>Item 3</li></ul><ol>
 <li>Item 1</li>
-<li>  Item 2</li>
-<li>  Item 3</li></ol><dl><dt>Term #1</dt>
+<li>Item 2</li>
+<li>Item 3</li></ol><dl><dt>Term #1</dt>
 <dd>Definition #1, with enough text so that the definition will wrap and we can verify that the margin is respected.</dd>
 <dt>Term #2</dt>
 <dd>Definition #2, with enough text so that the definition will wrap and we can verify that the margin is respected.</dd>
@@ -1529,14 +1541,14 @@ Put your test text here.</p>
 <li>three/one</li></ul></div></li>
 <li>two/three</li></ul></div></li>
 <li>one/two</li>
-<li>  one/three</li></ul><ol>
+<li>one/three</li></ul><ol>
 <li><div>one/one<ol>
 <li>two/one</li>
 <li><div>two/two<ol>
 <li>three/one</li></ol></div></li>
 <li>two/three</li></ol></div></li>
 <li>one/two</li>
-<li>  one/three</li></ol>"
+<li>one/three</li></ol>"
 );
 
 $this->_run_munger_test (
@@ -1576,13 +1588,13 @@ Put your test text here.</p>
 <li><div>two/two<ul>
 <li>three/one</li></ul></div>two/three</li></ul></div></li>
 <li>one/two</li>
-<li>  one/three</li></ul><ol>
+<li>one/three</li></ul><ol>
 <li><div>one/one<ol>
 <li>two/one
 <li><div>two/two<ol>
 <li>three/one</li></ol></div>two/three</li></ol></div></li>
 <li>one/two</li>
-<li>  one/three</li></ol>"
+<li>one/three</li></ol>"
 );
 
 
@@ -2062,7 +2074,7 @@ first
 <li>&nbsp;</li>
 <li><a href=\"something.php\">is</a> my</li>
 <li>first</li>
-<li> <a href=\"something.php\"><span class=\"highlight\">name</span></a></li></ul><p> <span class=\"highlight\">here</span>.</p>\n"
+<li><a href=\"something.php\"><span class=\"highlight\">name</span></a></li></ul><p> <span class=\"highlight\">here</span>.</p>\n"
 );
 
 
@@ -2078,7 +2090,7 @@ $this->_run_munger_test (
 <li>&nbsp;</li>
 <li><div><a href=\"something.php\">is</a> my<ul>
 <li>first</li>
-<li> <a href=\"something.php\"><span class=\"highlight\">name</span></a></li></ul></div></li>
+<li><a href=\"something.php\"><span class=\"highlight\">name</span></a></li></ul></div></li>
 <li><span class=\"highlight\">here</span>.</li></ul>"
 );
 
@@ -2095,7 +2107,7 @@ $this->_run_munger_test (
 <li>&nbsp;</li>
 <li><div><a href=\"something.php\">is</a> my<ul>
 <li>first</li>
-<li> <a href=\"something.php\"><span class=\"highlight\">name</span></a></li></ul></div></li>
+<li><a href=\"something.php\"><span class=\"highlight\">name</span></a></li></ul></div></li>
 <li><span class=\"highlight\">here</span>.</li></ul>"
 );
 
@@ -2111,7 +2123,7 @@ $this->_run_munger_test (
 <li>
 <li><div><a href=\"something.php\">is</a> my<ul>
 <li>first</li>
-<li> <a href=\"something.php\"><span class=\"highlight\">name</span></a></li></ul></div><span class=\"highlight\">here</span>.</li></ul>"
+<li><a href=\"something.php\"><span class=\"highlight\">name</span></a></li></ul></div><span class=\"highlight\">here</span>.</li></ul>"
 );
 
 
@@ -2125,7 +2137,7 @@ first
 <ul>
 <li><a href=\"something.php\">is</a> my</li>
 <li>first</li>
-<li> <a href=\"something.php\"><span class=\"highlight\">name</span></a></li></ul><p> <span class=\"highlight\">here</span>.</p>\n"
+<li><a href=\"something.php\"><span class=\"highlight\">name</span></a></li></ul><p> <span class=\"highlight\">here</span>.</p>\n"
 );
 
 
@@ -2140,7 +2152,7 @@ $this->_run_munger_test (
 <ul>
 <li><div><a href=\"something.php\">is</a> my<ul>
 <li>first</li>
-<li> <a href=\"something.php\"><span class=\"highlight\">name</span></a></li></ul></div></li>
+<li><a href=\"something.php\"><span class=\"highlight\">name</span></a></li></ul></div></li>
 <li><span class=\"highlight\">here</span>.</li></ul>"
 );
 
@@ -2156,7 +2168,7 @@ $this->_run_munger_test (
 <ul>
 <li><div><a href=\"something.php\">is</a> my<ul>
 <li>first</li>
-<li> <a href=\"something.php\"><span class=\"highlight\">name</span></a></li></ul></div></li>
+<li><a href=\"something.php\"><span class=\"highlight\">name</span></a></li></ul></div></li>
 <li><span class=\"highlight\">here</span>.</li></ul>"
 );
 

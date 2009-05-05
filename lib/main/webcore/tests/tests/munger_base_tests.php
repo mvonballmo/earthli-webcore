@@ -144,126 +144,29 @@ class MUNGER_BASE_TEST_TASK extends TEST_TASK
   {
     $this->_munger = new PLAIN_TEXT_MUNGER ();
     $this->_munger->right_margin = 80;
-    
-    
+
 $this->_run_munger_test (
-  "<span class=\"test\">span</span>
-<i>italics</i>
-<b>bold</b>
-<n>notes</n>
-<c>code</c>
-<hl>highlight</hl>
-<var>variable</var>
-<kbd>keyboard</kbd>
-<dfn>definition</dfn>
-<abbr>abbreviation</abbr>
-<cite>citation</cite>
-<macro>(macro)
-<h>This is a section header</h>
-<div>A simple documentation division in the text flow.</div>
-<clear>Cleared a floating element
-<pre>This is preformatted text.</pre>
-<box>A simple box in the text flow.</box>
-<code>if (SomeCondition)
-{
-  foreach (var item in Items)
-  {
-    RunSomeBackupProcess(item);
-  }
-}</code>
-<iq>inline quote</iq>
-<bq>This is a famous citation</bq>
-<pullquote>This is a pullquote</pullquote>
-<abstract>This is an abstract</abstract>
-<ul>
-  Item 1
-  Item 2
-</ul>
-<ol>
-  Item 1
-  Item 2
-</ol>
-<dl>
-  Term #1
-  Definition #1, with enough text so that the definition will wrap and we can verify that the margin is respected.
-  Term #2
-  Definition #2, with enough text so that the definition will wrap and we can verify that the margin is respected.
-</dl>
-Footnote reference.<fn>\r
-<ft>This is the first footnote.</ft>
-<hr>
-<a>link</a>
-<anchor>(anchor)
-<img>(image)
-<media>(media)
-<page>That was a page marker.
+  "<dl dt_class=\"field\">\r
+Afghanistan\r
+<div>\r
+This is a picture-perfect example of a country that benefitted from the freedom that America oozes from it's pores as it strides through the benighted world, bestowing freedom and compassion with a kind paternal hand. Bush touted their recent elections as an astounding success; <a href=\"http://www.registerguard.com/news/2004/10/19/ed.edit.afghanistan.phn.1019.html\" title=\"Afghanistan's election: U.S., allies must fulfill long-term commitment\">Afghanistan's election</a> gives a brief run-down of the country's situation:
+</div>
 ",
-  "span
-italics
-bold
-notes
-code
-highlight
-variable
-keyboard
-definition
-abbreviation
-citation
-(macro)
+  "Afghanistan
 
-[This is a section header]
-
-A simple documentation division in the text flow.
-
-Cleared a floating element
-
-This is preformatted text.
-
-A simple box in the text flow.
-
-if (SomeCondition)
-{
-  foreach (var item in Items)
-  {
-    RunSomeBackupProcess(item);
-  }
-}
-
-\"inline quote\"
-
-\"This is a famous citation\"
-
-\"This is a pullquote\"
-
-\"This is an abstract\"
-
-  * Item 1
-  * Item 2
-
-   1. Item 1
-   2. Item 2
-
-Term #1
-
-   Definition #1, with enough text so that the definition will wrap and we can
-   verify that the margin is respected.
-
-Term #2
-
-   Definition #2, with enough text so that the definition will wrap and we can
-   verify that the margin is respected.
-
-Footnote reference. [1]
-[1] This is the first footnote.
---------------------------------------------------------------------------------
-
-\"link\" <>
-(anchor)
-[image](image)
-[media](media)
-That was a page marker.
+   This is a picture-perfect example of a country that benefitted from the
+   freedom that America oozes from it's pores as it strides through the
+   benighted world, bestowing freedom and compassion with a kind paternal hand.
+   Bush touted their recent elections as an astounding success; \"Afghanistan's
+   election\"
+   <http://www.registerguard.com/news/2004/10/19/ed.edit.afghanistan.phn.1019.html>
+   (Afghanistan's election: U.S., allies must fulfill long-term commitment)
+   gives a brief run-down of the country's situation:
+   
 "
 );
+    
+    
   }
 
   protected function _generate_test ($input)
@@ -493,6 +396,11 @@ That was a page marker.
       $actual_file = "d:\\actual.txt";
       write_text_file($expected_file, $expected);
       write_text_file($actual_file, $output);
+      
+      if ($this->stop_on_error)
+      {
+        $this->_abort("Halting on error");
+      }
     }
   }
   

@@ -1064,8 +1064,10 @@ abstract class MUNGER_TRANSFORMER extends MUNGER_TOOL
 {
   /**
    * Returns transformed content.
+   * 
    * Guarantees that all content added with {@link add_text()} or {@link add_transformer()} is
    * transformed and merged correctly.
+   * 
    * @param MUNGER $munger The data context.
    * @return string
    */
@@ -1074,7 +1076,7 @@ abstract class MUNGER_TRANSFORMER extends MUNGER_TOOL
     if ($this->_buffer_state != Munger_only_data_block)
     {
       $this->_buffer_state = Munger_last_data_block;
-     }
+    }
 
     $this->_process_raw_text($munger);
 
@@ -1123,8 +1125,10 @@ abstract class MUNGER_TRANSFORMER extends MUNGER_TOOL
     }
 
     $this->_process_raw_text($munger);
-
-    $this->_processed_text .= $this->_transformer_text($munger, $start_text . $transformer->data($munger) . $end_text);
+    
+    $data = $transformer->data($munger);
+    $new_text = $this->_transformer_text($munger, $start_text . $data . $end_text);
+    $this->_processed_text = $this->_merge_text ($this->_processed_text, $new_text);
   }
 
   /**
@@ -1160,9 +1164,24 @@ abstract class MUNGER_TRANSFORMER extends MUNGER_TOOL
   {
     if ($this->_raw_text)
     {
-      $this->_processed_text .= $this->_apply_transform($munger, $this->_raw_text);
+      $this->_processed_text = $this->_merge_text ($this->_processed_text, $this->_apply_transform($munger, $this->_raw_text));
       $this->_raw_text = '';
     }
+  }
+  
+  /**
+   * Add the new text to the existing text.
+   * 
+   * Override this function in order to elide or introduce newlines where needed.
+   *
+   * @param string $existing_text
+   * @param string $new_text
+   * @return string
+   * @access private
+   */
+  protected function _merge_text($existing_text, $new_text)
+  {
+    return $existing_text . $new_text;
   }
 
   /**
@@ -1317,20 +1336,24 @@ abstract class MUNGER_BLOCK_TRANSFORMER extends MUNGER_TRANSFORMER
 {
   /**
    * Should every newline be used?
+   * 
    * If False, if the first or last character in a block is a newline, it is assumed to be
    * there for spacing away from the tag and is dropped.
+   * 
    * @var boolean
    */
   public $strict_newlines = false;
 
   /**
    * Remove newlines according to tagging rules.
+   * 
    * This layouter does its best to generate conforming text. It tracks the state of the buffer
    * within this block and applies formatting for newlines appropriately. Text is treated differently
    * depending on which other structures the block contains. If the text is a single line in the block,
    * then paragraph tags are only generated if desired (force_paragraphs is on). If the text is the first
    * in a series of text and nested blocks, it formats its newlines differently and will generate paragraph
    * tags.
+   * 
    * @param string $text
    * @return string
    * @abstract
@@ -1370,13 +1393,18 @@ abstract class MUNGER_BLOCK_TRANSFORMER extends MUNGER_TRANSFORMER
   {
     switch ($quote_style)
     {
-      case Munger_quote_style_default :
+      case Munger_quote_style_default:
+      {
         $text = str_replace("\n\n", "\n\n" . $open_quote, $text);
         return $open_quote . $text . $close_quote;
-      case Munger_quote_style_multiple :
+      }
+      case Munger_quote_style_multiple:
+      {
         $text = str_replace("\n\n", $close_quote . "\n\n" . $open_quote, $text);
         return $open_quote . $text . $close_quote;
-      case Munger_quote_style_single :
+      }
+      case Munger_quote_style_single:
+      {
         switch ($this->_buffer_state)
         {
           case Munger_first_data_block:
@@ -1388,7 +1416,8 @@ abstract class MUNGER_BLOCK_TRANSFORMER extends MUNGER_TRANSFORMER
           case Munger_last_data_block:
             return $text . $close_quote;
         }
-      default :
+      }
+      default:
         return $text;
     }
   }
@@ -2395,7 +2424,8 @@ class MUNGER extends MUNGER_PARSER
           }
         } while (isset ($tag) && !$matches);
       }
-    } else
+    } 
+    else
     {
       if (!$this->strip_unknown_tags)
       {
@@ -2418,7 +2448,8 @@ class MUNGER extends MUNGER_PARSER
       $tag->transformer->add_transformer($this, $this->_current_transformer, $tag->text, $this->_tag_as_text($token));
       $this->_current_transformer->activate($this, false, $token);
       $this->_current_transformer = $tag->transformer;
-    } else
+    } 
+    else
     {
       $this->_add_text_to_output($this->_tag_as_text($token));
     }
