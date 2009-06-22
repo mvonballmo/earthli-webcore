@@ -119,6 +119,29 @@ Footnote reference. [1]
 [image](image)
 [media](media)
 That was a page marker.
+",
+  true /* ignore error */
+);
+
+$this->_run_munger_test (
+  "<dl dt_class=\"field\">
+Term #1
+<div>Line #1.1
+
+Line #1.2
+</div>
+Term #2
+Line #2.1
+</dl>",
+  "Term #1
+
+   Line #1.1
+
+   Line #1.2
+
+Term #2
+
+   Line #2.1
 "
 );
 
@@ -129,17 +152,18 @@ $this->_run_munger_test (
 \r
 <ft>This is the first footnote. It should be long enough for the text to wrap at least once or twice, at least. Otherwise, it will be difficult to determine whether or not the footnote number is aligned properly, since it has been widened through the addition of square brackets around it.</ft>",
   "This is just some random filler text that precedes a footnote. It should be long
-enough so that it wraps on its own, to see whether normal text wraps; the 
-footnote below will also be quite long and should also wrap (the purpose of this 
+enough so that it wraps on its own, to see whether normal text wraps; the
+footnote below will also be quite long and should also wrap (the purpose of this
 test). [1]
 
 --------------------------------------------------------------------------------
 
-[1] This is the first footnote. It should be long enough for the text to wrap
-    at least once or twice, at least. Otherwise, it will be difficult to
-    determine whether or not the footnote number is aligned properly, since it
-    has been widened through the addition of square brackets around it.
-"
+[1] This is the first footnote. It should be long enough for the text to wrap at
+    least once or twice, at least. Otherwise, it will be difficult to determine
+    whether or not the footnote number is aligned properly, since it has been
+    widened through the addition of square brackets around it.
+",
+  true /* ignore error */
 );
 
 $this->_run_munger_test (
@@ -152,10 +176,10 @@ $this->_run_munger_test (
 
 --------------------------------------------------------------------------------
 
-[1] This is the first footnote. It should be long enough for the text to wrap
-    at least once or twice, at least. Otherwise, it will be difficult to
-    determine whether or not the footnote number is aligned properly, since it
-    has been widened through the addition of square brackets around it.
+[1] This is the first footnote. It should be long enough for the text to wrap at
+    least once or twice, at least. Otherwise, it will be difficult to determine
+    whether or not the footnote number is aligned properly, since it has been
+    widened through the addition of square brackets around it.
 "
 );
 

@@ -671,20 +671,21 @@ class BROWSER_TEST_TASK extends TEST_TASK
   {
     $browser = $this->env->browser ();
 
-    $browser->load_from_string ('WWWeasel Robot v1.00 (http://wwweasel.de)');
+    $browser->load_from_string ('Opera/9.80 (X11; Linux i686; U; en) Presto/2.2.15 Version/10.0');
 
-          $this->_check_equal ('WWWeasel Robot v1.00 (http://wwweasel.de)', $browser->user_agent_string);
-          $this->_check_equal ('Unknown', $browser->system_id ());
-          $this->_check_equal ('Unknown', $browser->calculated_system_name ());
-          $this->_check_equal ('Unknown', $browser->system_name ());
+          $this->_check_equal ('Opera/9.80 (X11; Linux i686; U; en) Presto/2.2.15 Version/10.0', $browser->user_agent_string);
+          $this->_check_equal ('Linux', $browser->system_id ());
+          $this->_check_equal ('Linux', $browser->calculated_system_name ());
+          $this->_check_equal ('Linux', $browser->system_name ());
           $this->_check_equal ('', $browser->system_version ());
-          $this->_check_equal ('WWWeasel Robot', $browser->name ());
-          $this->_check_equal ('1.00', $browser->version ());
-          $this->_check_equal ('Unknown', $browser->renderer_name ());
-          $this->_check_equal ('', $browser->renderer_version ());
+          $this->_check_equal ('Opera', $browser->name ());
+          $this->_check_equal ('10.0', $browser->version ());
+          $this->_check_equal ('Presto', $browser->renderer_name ());
+          $this->_check_equal ('2.2.15', $browser->renderer_version ());
           $date = $browser->gecko_date ();
           $this->_check (!$date->is_valid (), 'Date should not be valid');
-          $this->_check ($browser->is (Browser_robot), 'Browser should be a robot.');
+          $this->_check (!$browser->is (Browser_robot), 'Browser should not be a robot.');
+          $this->_check (!$browser->is (Browser_newsreader), 'Browser should not be a newsreader');
   }
 }
 

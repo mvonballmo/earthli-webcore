@@ -83,14 +83,14 @@ class PLAIN_TEXT_BLOCK_TRANSFORMER extends MUNGER_BLOCK_TRANSFORMER
 
     switch ($this->_buffer_state)
     {
-    case Munger_first_data_block:
-    case Munger_only_data_block:
+//    case Munger_first_data_block:
+//    case Munger_only_data_block:
+      case Munger_middle_data_block:
       if (! $this->strict_newlines && ($len > 0) && ($text [0] == "\n"))
       {
         $first_char = 1;
       }
       break;
-
     }
 
     switch ($this->_buffer_state)
@@ -214,8 +214,10 @@ class PLAIN_TEXT_PARAGRAPH_TRANSFORMER extends PLAIN_TEXT_BLOCK_TRANSFORMER
 {
   /**
    * Should every newline be used?
+   * 
    * Since the default formatter does not have start and end tags, it also does not ignore
    * the first and last newlines in the text.
+   * 
    * @var boolean
    */
   public $strict_newlines = true;
@@ -723,6 +725,64 @@ class PLAIN_TEXT_NUMERIC_LIST_TRANSFORMER extends PLAIN_TEXT_LIST_TRANSFORMER
   protected $_current_mark = 0;
 }
 
+class PLAIN_TEXT_FOOTNOTE_TEXT_TRANSFORMER extends PLAIN_TEXT_LIST_TRANSFORMER
+{
+  /**
+   * Amount to indent at each level.
+   * @var string
+   */
+  public $spaces_to_indent = 3;
+
+  /**
+   * Set this as the active or inactive transformer.
+   * @param MUNGER $munger Activation context.
+   * @param boolean $value True if the transformer is being activated.
+   * @param MUNGER_TOKEN $token Token that caused the activation.
+   */
+  public function activate ($munger, $value, $token)
+  {
+    parent::activate ($munger, $value, $token);
+    $this->_indent = 0;
+  }
+    
+  /**
+   * Create the 'mark' for the bullet.
+   * Uses the {@link $default_mark} if none is specified.  Spacing is added to adjust for the
+   * depth of this list and all parent lists.
+   * @param string $mark Optional mark to use instead of the default.
+   * @access private
+   */
+  protected function _make_mark ($mark = null)
+  {
+    if (! isset ($mark))
+    {
+      $this->_current_mark += 1;
+      
+      if ($this->_current_mark == 1)
+      {
+        $mark = '[' . $this->_current_mark . ']';
+      }
+      else 
+      {
+        $mark = str_repeat (' ', strlen ($this->_current_mark));
+      }
+    }
+    else
+    {
+      $mark = str_repeat (' ', strlen ($this->_current_mark));
+    }
+
+    return parent::_make_mark ($mark);
+  }
+
+  /**
+   * Current item number within this list.
+   * @var integer
+   * @access private
+   */
+  protected $_current_mark = 0;
+}
+
 /**
  * Generates an HTML definition list.
  * Generates alternating defition terms and definitions for newlines in the text.
@@ -768,6 +828,29 @@ class PLAIN_TEXT_DEFINITION_LIST_TRANSFORMER extends MUNGER_DEFINITION_LIST_TRAN
   public function data ($munger)
   {
     return rtrim (parent::data ($munger));
+  }
+  
+  /**
+   * Add the new text to the existing text.
+   * 
+   * Overridden to ensure that there are only two newlines between elements; nested blocks can possibly
+   * introduce extra newlines when end tags are introduced.
+   *
+   * @param string $existing_text
+   * @param string $new_text
+   * @return string
+   * @access private
+   */
+  protected function _merge_text($existing_text, $new_text)
+  {
+    if (!empty($existing_text))
+    {
+      $existing_text = rtrim ($existing_text, "\n");
+      $new_text = ltrim ($new_text, "\n");
+      $existing_text .= "\n\n";
+    }  
+    
+    return $existing_text . $new_text;
   }
 
   /**
@@ -1052,7 +1135,7 @@ class TEXT_MUNGER extends MUNGER
         $non_indent_text = ltrim ($non_indent_text);
         $newline_pos = strpos ($non_indent_text, "\n");
         $space_pos = strpos ($non_indent_text, ' ');
-        $wrap_needed = ($space_pos < $newline_pos) && ($newline_pos > $desired_width);
+        $wrap_needed = (($space_pos < $newline_pos) && ($newline_pos > $desired_width)) || ($newline_pos === false);
       }
     }
 
@@ -1061,8 +1144,16 @@ class TEXT_MUNGER extends MUNGER
       $text = wordwrap ($text, $desired_width);
       if ($left_margin)
       {
-        $text = str_replace ("\n", "\n" . str_repeat (' ', $left_margin), $text);
+        //$text = str_replace ("\n", "\n" . str_repeat (' ', $left_margin), $text);
+        
+        $text = preg_replace("/\n([^\n])/", "\n" . str_repeat (' ', $left_margin) . "\\1", $text);
       }
+    }
+    elseif ($left_margin)
+    {
+      //$text = str_replace ("\n", "\n" . str_repeat (' ', $left_margin), $text);
+      
+      $text = preg_replace("/\n([^\n])/", "\n" . str_repeat (' ', $left_margin) . "\\1", $text);
     }
 
     return $text;
@@ -1161,7 +1252,7 @@ class PLAIN_TEXT_MUNGER extends PLAIN_TEXT_BASE_MUNGER
     $this->_default_transformer = new PLAIN_TEXT_PARAGRAPH_TRANSFORMER ();
     $block_transformer = new PLAIN_TEXT_BLOCK_TRANSFORMER ();
 
-    $this->register_transformer ('h', new MUNGER_NOP_TRANSFORMER ());
+    $this->register_transformer ('h', $block_transformer);
     $this->register_replacer ('h', new MUNGER_BASIC_REPLACER ('[', ']'));
     $this->register_transformer ('div', $block_transformer);
     $this->register_known_tag ('clear', true);
@@ -1177,7 +1268,8 @@ class PLAIN_TEXT_MUNGER extends PLAIN_TEXT_BASE_MUNGER
     $this->register_transformer ('ol', new PLAIN_TEXT_NUMERIC_LIST_TRANSFORMER ());
     $this->register_transformer ('dl', new PLAIN_TEXT_DEFINITION_LIST_TRANSFORMER ());
     $this->register_replacer ('fn', new PLAIN_TEXT_FOOTNOTE_REFERENCE_REPLACER (), false);
-    $this->register_replacer ('ft', new PLAIN_TEXT_FOOTNOTE_TEXT_REPLACER ());
+    //$this->register_replacer ('ft', new PLAIN_TEXT_FOOTNOTE_TEXT_REPLACER ());
+    $this->register_transformer('ft', new PLAIN_TEXT_FOOTNOTE_TEXT_TRANSFORMER());
     $this->register_replacer ('hr', new PLAIN_TEXT_HORIZONTAL_RULE_REPLACER ());
     $this->register_replacer ('a', new PLAIN_TEXT_LINK_REPLACER ());
     $this->register_known_tag ('anchor', true);
