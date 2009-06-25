@@ -603,19 +603,20 @@ class NEWSFEED_FOOTNOTE_TEXT_REPLACER extends HTML_FOOTNOTE_TEXT_REPLACER
 {
   /**
    * Format the text for the given footnote number.
+   * @param MUNGER $munger The transformation context.
    * @param MUNGER_TOKEN $token
    * @param MUNGER_FOOTNOTE_INFO $info
    * @return string
    * @access private
    */
-  protected function _format_text ($token, $info)
+  protected function _format_text ($munger, $token, $info)
   {
     if (! $token->is_start_tag ())
     {
       return '</div>';
     }
 
-    return parent::_format_text ($token, $info);
+    return parent::_format_text ($munger, $token, $info);
   }
 }
 
