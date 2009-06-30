@@ -413,7 +413,7 @@ class ALBUM_FORM extends FOLDER_FORM
     ctrl.value = ensure_trailing_delimiter (ctrl.value.toLowerCase ());
   }
   
-  public function on_url_root_enabled_changed (ctrl)
+  function on_url_root_enabled_changed (ctrl)
   {
     var form = <?php echo $this->js_form_name (); ?>;
     form.url_root.disabled = ! ctrl.checked;

@@ -50,7 +50,7 @@ http://www.earthli.com/software/webcore/albums
       $controls_renderer = $App->make_controls_renderer ();
       echo '<div style="text-align: center">';
       echo $controls_renderer->javascript_button_as_html ('Clear', "picker.select_value ('0')", '{icons}buttons/delete' );
-      echo $controls_renderer->javascript_button_as_html ('Cancel', "picker.select_value ('')", '{icons}buttons/close' );
+      echo $controls_renderer->javascript_button_as_html ('Cancel', "window.close()", '{icons}buttons/close' );
       echo '</div>';
       
       $pic_query = $folder->entry_query ();

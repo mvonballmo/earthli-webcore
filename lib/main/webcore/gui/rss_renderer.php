@@ -118,10 +118,12 @@ class RSS_RENDERER extends NEWSFEED_RENDERER
 
   /**
    * Called from {@link finish_display()}.
+   *
+   * @param NEWSFEED_RENDERER_OPTIONS $options
    * @access private
    * @abstract
    */
-  protected function _finish_display ()
+  protected function _finish_display ($options)
   {
 ?>
   </channel>
