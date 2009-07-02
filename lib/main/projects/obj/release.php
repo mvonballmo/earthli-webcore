@@ -391,7 +391,7 @@ class RELEASE extends OBJECT_IN_FOLDER
   {
     parent::store_to ($storage);
     $tname =$this->table_name ();
-    $storage->add ($tname, 'branch_id', Field_type_integer, $this->branch_id, Storage_action_create);
+    $storage->add ($tname, 'branch_id', Field_type_integer, $this->branch_id);
     $storage->add ($tname, 'summary', Field_type_string, $this->summary);
     $storage->add ($tname, 'time_next_deadline', Field_type_date_time, $this->time_next_deadline);
     $storage->add ($tname, 'time_scheduled', Field_type_date_time, $this->time_scheduled);

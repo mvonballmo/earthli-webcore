@@ -296,6 +296,11 @@ class RELEASE_HISTORY_ITEM extends OBJECT_IN_FOLDER_HISTORY_ITEM
     $this->_record_text_difference ('Summary', $orig->summary, $new->summary);
     $this->_record_time_difference ('Ship date', $orig->time_scheduled, $new->time_scheduled);
     $this->_record_time_difference ('Test date', $orig->time_testing_scheduled, $new->time_testing_scheduled);
+
+    if ($orig->branch_id != $new->branch_id)
+    {
+      $this->_record_object_difference ('Branch', $orig->branch (), $new->branch (), '(no branch)', '\'', '\'');
+    }
   }
 }
 

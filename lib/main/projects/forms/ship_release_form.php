@@ -105,15 +105,9 @@ class SHIP_RELEASE_FORM extends AUDITABLE_FORM
     parent::load_from_object ($obj);
     $this->set_value ('state', Locked);
     $this->set_value ('sub_history_item_publication_state', History_item_silent);
+    $this->set_value ('publication_state', History_item_default);
+    $this->set_visible ('publication_state', false);
     $this->add_preview ($obj, 'Ship Release details');
-  }
-
-  /**
-   * Initialize the form's fields with default values and visibilities.
-   */
-  public function load_with_defaults ()
-  {
-    $this->raise ('Cannot ship new releases.', 'load_with_defaults', 'SHIP');
   }
 
   /**

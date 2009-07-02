@@ -191,6 +191,8 @@ class HISTORY_ITEM extends UNIQUE_OBJECT
     case History_item_needs_send:
       $icon_name = '{icons}indicators/queued_for_publication';
       break;
+    default:
+      throw new UNKNOWN_VALUE_EXCEPTION($this->publication_state);
     }
 
     return $this->app->resolve_icon_as_html ($icon_name, $this->publication_state_as_text (), $size);

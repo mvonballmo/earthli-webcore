@@ -41,6 +41,7 @@ require_once ('webcore/forms/object_in_folder_form.php');
 
 /**
  * Edit or create a {@link RELEASE}.
+ * 
  * @package projects
  * @subpackage forms
  * @version 3.1.0
@@ -49,7 +50,7 @@ require_once ('webcore/forms/object_in_folder_form.php');
 class RELEASE_FORM extends OBJECT_IN_FOLDER_FORM
 {
   /**
-   * @param PROJECT $folder Project in which to add or edit the job.
+   * @param PROJECT $folder Project in which to add or edit the release.
    */
   public function __construct ($folder)
   {
@@ -75,6 +76,14 @@ class RELEASE_FORM extends OBJECT_IN_FOLDER_FORM
     $field->title = 'Summary';
     $field->max_length = 65535;
     $this->add_field ($field);
+
+    $field = new INTEGER_FIELD ();
+    $field->id = 'branch_id';
+    $field->title = 'Branch';
+    $this->add_field ($field);
+    
+    $branch_query = $folder->branch_query ();
+    $this->_branches = $branch_query->objects ();
   }
 
   /**
@@ -85,15 +94,25 @@ class RELEASE_FORM extends OBJECT_IN_FOLDER_FORM
     parent::load_with_defaults ();
     
     $this->set_value ('state', Planned);
-
-    $field = $this->field_at ('id');
-    $field->visible = true;
-    $field->title = 'Branch';
+    
+    $branch_id = read_var ('id');
+    if (empty ($branch_id))
+    {
+      if (! empty($this->_branches))
+      {
+        $this->set_value ('branch_id', $this->_branches[0]->id);
+      }
+    }
+    else
+    {
+      $this->set_value ('branch_id', $branch_id);
+    }
   }
 
   /**
    * Load initial properties from this branch.
-   * @param BRANCH $obj
+   * 
+   * @param RELEASE $obj
    */
   public function load_from_object ($obj)
   {
@@ -103,10 +122,14 @@ class RELEASE_FORM extends OBJECT_IN_FOLDER_FORM
     $this->set_value ('summary', $obj->summary);
     $this->set_value ('time_scheduled', $obj->time_scheduled);
     $this->set_value ('time_testing_scheduled', $obj->time_testing_scheduled);
+    $this->set_value ('branch_id', $obj->branch_id);
+
+    $this->set_visible('branch_id', false);
   }
 
   /**
    * Called after fields are validated.
+   * 
    * @param object $obj Object being validated.
    * @access private
    */
@@ -136,6 +159,7 @@ class RELEASE_FORM extends OBJECT_IN_FOLDER_FORM
     $obj->summary = $this->value_for ('summary');
     $obj->set_time_scheduled ($this->value_for ('time_scheduled'));
     $obj->set_time_testing_scheduled ($this->value_for ('time_testing_scheduled'));
+    $obj->branch_id = $this->value_for ('branch_id');
 
     parent::_store_to_object ($obj);
 
@@ -169,18 +193,16 @@ class RELEASE_FORM extends OBJECT_IN_FOLDER_FORM
     $renderer->draw_text_line_row ('title');
     $renderer->draw_separator ();
 
-    if ($this->visible ('id'))
+    if ($this->visible ('branch_id'))
     {
-      $branch_query = $this->_folder->branch_query ();
-      $branches = $branch_query->objects ();
       $props = $renderer->make_list_properties ();
       $props->width = '10em';
-      foreach ($branches as $branch)
+      foreach ($this->_branches as $branch)
       {
         $props->add_item ($branch->title_as_plain_text (), $branch->id);
       }
 
-      $renderer->draw_drop_down_row ('id', $props);
+      $renderer->draw_drop_down_row ('branch_id', $props);
       $renderer->draw_separator ();
     }
 
@@ -235,9 +257,17 @@ class RELEASE_FORM extends OBJECT_IN_FOLDER_FORM
 
   /**
    * Name of the default permission set to use.
+   * 
    * @var string
    * @access private
    */
   protected $_privilege_set = Privilege_set_folder;
+  
+  /**
+   * Cached list of branches for the folder in which the release resides.
+   *
+   * @var array[BRANCH]
+   */
+  protected $_branches;
 }
 ?>
