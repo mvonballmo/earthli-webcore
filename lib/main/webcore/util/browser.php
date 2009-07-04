@@ -112,6 +112,12 @@ define ('Browser_khtml', 'khtml');
 define ('Browser_opera', 'opera');
 
 /**
+ * Browser uses the newer Opera renderer; version numbers changed from  
+ * browsers identified as {@link Browser_opera}.
+ */
+define ('Browser_presto', 'presto');
+
+/**
  * Browser uses the WebTV renderer.
  */
 define ('Browser_webtv', 'webtv');
@@ -475,11 +481,13 @@ class BROWSER
     case Browser_DHTML:
       return (($this->is (Browser_gecko)) ||
               ($this->is (Browser_opera) && ($this->_ua->major_version >= 7)) ||
+              ($this->is (Browser_presto)) ||
               ($this->is (Browser_ie) && $this->_ua->major_version >= 5) ||
               ($this->is (Browser_khtml)));
 
     case Browser_alpha_PNG:
       return (($this->is (Browser_gecko)) ||
+              ($this->is (Browser_presto)) ||
               ($this->is (Browser_opera) && (($this->_ua->major_version >= 6) ||
                                              ($this->is (Browser_os_mac) && ($this->_ua->major_version >= 5)))) ||
               ($this->is (Browser_ie) && (($this->is (Browser_os_mac) && ($this->_ua->major_version >= 5)) ||
@@ -489,17 +497,21 @@ class BROWSER
 
     case Browser_CSS_1:
       return (($this->is (Browser_gecko)) ||
+              ($this->is (Browser_presto)) ||
               ($this->is (Browser_opera) && ($this->_ua->major_version >= 4)) ||
               ($this->is (Browser_ie) && ($this->_ua->major_version >= 5)) ||
               ($this->is (Browser_khtml)));
 
     case Browser_CSS_2:
       return (($this->is (Browser_gecko)) ||
+              ($this->is (Browser_presto)) ||
               ($this->is (Browser_opera) && ($this->_ua->major_version >= 7)) ||
               ($this->is (Browser_khtml)) ||
               ($this->is (Browser_omniweb) && (($this->_ua->major_version >= 5) || (($this->_ua->major_version >= 4) && ($this->_ua->minor_version >= 5)))));
+              
     case Browser_CSS_Tables:
       return (($this->is (Browser_opera) && ($this->_ua->major_version >= 7)) ||
+              ($this->is (Browser_presto)) ||
               ($this->is (Browser_omniweb) && (($this->_ua->major_version >= 5) || (($this->_ua->major_version >= 4) && ($this->_ua->minor_version >= 5)))));
 
     case Browser_JavaScript:
@@ -512,7 +524,8 @@ class BROWSER
       return ! ($this->is (Browser_ie) && $this->is (Browser_os_mac));
 
     case Browser_DOM_2:
-      return $this->is (Browser_opera) && ($this->_ua->major_version >= 9);
+      return $this->is (Browser_opera) && ($this->_ua->major_version >= 9) ||
+             $this->is (Browser_presto);
 
     case Browser_extended_HTML_newsfeeds:
       return true;
@@ -965,7 +978,9 @@ class USER_AGENT_PARSE_TABLES
       'applewebkit' => new USER_AGENT_RENDERER_INFO (Browser_khtml, 'Webcore', User_agent_final_renderer),
       'netscape6' => new USER_AGENT_RENDERER_INFO (Browser_gecko, 'Netscape', User_agent_final_browser),
       'chrome' => new USER_AGENT_RENDERER_INFO (Browser_khtml, 'Google Chrome', User_agent_final_browser_abort),
-      'opera' => new USER_AGENT_RENDERER_INFO (Browser_opera, 'Presto (Opera)', User_agent_final_browser, 'Opera'),
+      'opera' => new USER_AGENT_RENDERER_INFO (Browser_opera, 'Presto (Opera)', User_agent_temporary_renderer, 'Opera'),
+      'presto' => new USER_AGENT_RENDERER_INFO (Browser_presto, 'Presto (Opera)', User_agent_final_renderer, 'Opera'),
+      'version' => new USER_AGENT_RENDERER_INFO (Browser_presto, 'Presto (Opera)', User_agent_final_browser, 'Opera'),
       'konqueror' => new USER_AGENT_RENDERER_INFO (Browser_khtml, 'KHTML', User_agent_final_browser, 'Konqueror'),
       'omniweb' => new USER_AGENT_RENDERER_INFO (Browser_omniweb, 'OmniWeb', User_agent_final_browser),
       'webtv' => new USER_AGENT_RENDERER_INFO (Browser_webtv, 'WebTV', User_agent_final_browser),

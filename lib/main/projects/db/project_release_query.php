@@ -38,6 +38,7 @@ http://www.earthli.com/software/webcore/projects
 
 /** */
 require_once ('webcore/db/folder_entry_query.php');
+require_once ('projects/db/project_query_toolkit.php');
 
 /**
  * Retrieves {@link RELEASE} related to a particular {@link PROJECT}.
@@ -62,7 +63,7 @@ class PROJECT_RELEASE_QUERY extends FOLDER_ENTRY_QUERY
     $this->set_select ('rel.*, bra.folder_id as branch_folder_id, bra.title as branch_title, bra.id as branch_id, bra.state as branch_state');
     $this->set_table ($this->app->table_names->releases . ' rel');
     $this->add_table ($this->app->table_names->branches . ' bra', 'rel.branch_id = bra.id');
-    $this->set_order ('bra.id, time_created DESC');
+    release_query_order($this);
   }
 
   /**
@@ -75,9 +76,7 @@ class PROJECT_RELEASE_QUERY extends FOLDER_ENTRY_QUERY
   public function set_up_pending ($filter = Release_is_pending)
   {
     $this->set_filter ($filter);
-    $this->add_select ('rel.state = ' . Shipped . ' as release_is_shipped');
-    $this->add_select ('ISNULL(time_next_deadline) OR (time_next_deadline = \'0000-00-00 00:00:00\') as deadline_is_empty');
-    $this->set_order ('release_is_shipped ASC, deadline_is_empty ASC, time_next_deadline ASC');
+    release_query_order($this);
   }
 
   /**

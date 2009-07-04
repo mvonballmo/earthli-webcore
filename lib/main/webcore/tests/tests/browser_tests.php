@@ -680,7 +680,7 @@ class BROWSER_TEST_TASK extends TEST_TASK
           $this->_check_equal ('', $browser->system_version ());
           $this->_check_equal ('Opera', $browser->name ());
           $this->_check_equal ('10.0', $browser->version ());
-          $this->_check_equal ('Presto', $browser->renderer_name ());
+          $this->_check_equal ('Presto (Opera)', $browser->renderer_name ());
           $this->_check_equal ('2.2.15', $browser->renderer_version ());
           $date = $browser->gecko_date ();
           $this->_check (!$date->is_valid (), 'Date should not be valid');

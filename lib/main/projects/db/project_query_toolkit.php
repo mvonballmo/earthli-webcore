@@ -87,4 +87,11 @@ function project_query_order_by_recent ($query, $type)
   }
 }
 
+function release_query_order ($query)
+{
+  $query->add_select ('((rel.state = ' . Shipped . ') or (rel.state = ' . Locked . ')) as release_is_shipped');
+  $query->add_select ('ISNULL(time_next_deadline) OR (time_next_deadline = \'0000-00-00 00:00:00\') as deadline_is_empty');
+  $query->set_order ('bra.id, release_is_shipped ASC, time_shipped DESC, deadline_is_empty ASC, time_next_deadline ASC');
+}
+
 ?>

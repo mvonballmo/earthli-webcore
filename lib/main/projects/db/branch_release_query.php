@@ -38,6 +38,7 @@ http://www.earthli.com/software/webcore/projects
 
 /** */
 require_once ('projects/db/project_release_query.php');
+require_once ('projects/db/project_query_toolkit.php');
 
 /**
  * Retrieves {@link RELEASE}s for a particular {@link BRANCH}.
@@ -56,7 +57,7 @@ class BRANCH_RELEASE_QUERY extends PROJECT_RELEASE_QUERY
     $folder = $branch->parent_folder ();
     parent::__construct ($folder);
     $this->_branch = $branch;
-    $this->set_order ('time_created DESC');
+    release_query_order($this);
   }
 
   /**
