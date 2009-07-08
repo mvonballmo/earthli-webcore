@@ -96,29 +96,34 @@ class PAGE_TITLE extends WEBCORE_OBJECT
   public function as_text ()
   {
     $opts = $this->context->text_options;
-    if ($this->group)
-    {
-      $pieces [] = $opts->convert_to_html_entities ($this->group);
-    }
-
-    if (isset ($this->_objects) && sizeof ($this->_objects))
-    {
-      foreach ($this->_objects as $obj)
-      {
-        $titles [] = $opts->convert_to_html_entities ($obj->title_as_plain_text ());
-      }
-      $objects = join ($this->separator, $titles);
-      if (isset ($objects))
-      {
-        $pieces [] = $objects;
-      }
-    }
-
+    
     if ($this->subject)
     {
       $pieces [] = $opts->convert_to_html_entities ($this->subject);
     }
+    
+    if (!empty($this->_objects))
+    {
+      $objs = array_reverse($this->_objects);
+      
+      foreach ($objs as $obj)
+      {
+        $titles [] = $opts->convert_to_html_entities ($obj->title_as_plain_text ());
+      }
+      
+      $text = join ($this->separator, $titles);
+      
+      if (! empty($text))
+      {
+        $pieces [] = $text;
+      }
+    }
 
+    if ($this->group)
+    {
+      $pieces [] = $opts->convert_to_html_entities ($this->group);
+    }
+    
     if (isset ($pieces))
     {
       $Result = $this->prefix . join ($this->separator, $pieces) . $this->suffix;
