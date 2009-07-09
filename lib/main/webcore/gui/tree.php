@@ -294,7 +294,7 @@ abstract class TREE extends WEBCORE_OBJECT
       $this->start_node ($node, $is_last);
 
       $nodes = $this->node_info->sub_nodes ($node);
-      $has_children = isset ($nodes);
+      $has_children = !empty ($nodes);
 
       if (count ($this->_stack))
       {
