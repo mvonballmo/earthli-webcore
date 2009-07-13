@@ -178,6 +178,16 @@ function restrict_to_scheduled ($query)
   $query->store_order_as_recent ();
 }
 
+/**
+ * Adds restrictions for finding only unscheduled jobs.
+ * 
+ * @param QUERY $query The query to adjust; cannot be null.
+ * @access private
+ */
+function restrict_to_unscheduled ($query)
+{
+  $query->restrict('entry.release_id = 0');  
+}
 
 /**
  * Options used by the project {@link PANEL_MANAGER}s.
@@ -266,10 +276,19 @@ class PROJECT_INDEX_PANEL_MANAGER extends INDEX_PANEL_MANAGER
     $scheduled_job_query = clone($job_query);
     restrict_to_open ($scheduled_job_query);
     restrict_to_scheduled ($scheduled_job_query);
-    $scheduled_job_query->restrict ("closer_id = 0");
     $panel = new $job_panel_class_name ($this, $scheduled_job_query, $job_type_info);
     $panel->id = 'scheduled_jobs';
     $panel->title = 'Scheduled jobs';
+    $panel->show_folder = true;
+    $this->add_panel ($panel);
+
+    $unscheduled_job_query = clone($job_query);
+    restrict_to_open ($unscheduled_job_query);
+    restrict_to_unscheduled ($unscheduled_job_query);
+    $panel = new $job_panel_class_name ($this, $unscheduled_job_query, $job_type_info);
+    $panel->id = 'unscheduled_jobs';
+    $panel->title = 'Unscheduled jobs';
+    $panel->show_folder = true;
     $this->add_panel ($panel);
 
     $open_job_query = clone($job_query);
@@ -376,9 +395,16 @@ class PROJECT_FOLDER_PANEL_MANAGER extends FOLDER_PANEL_MANAGER
       $panel = new $job_panel_class_name ($this, $scheduled_job_query, $job_type_info);
       $panel->id = 'scheduled_jobs';
       $panel->title = 'Scheduled jobs';
-      $panel->show_folder = true;
       $this->add_panel ($panel);
   
+      $unscheduled_job_query = clone($job_query);
+      restrict_to_open ($unscheduled_job_query);
+      restrict_to_unscheduled ($unscheduled_job_query);
+      $panel = new $job_panel_class_name ($this, $unscheduled_job_query, $job_type_info);
+      $panel->id = 'unscheduled_jobs';
+      $panel->title = 'Unscheduled jobs';
+      $this->add_panel ($panel);
+        
       $open_job_query = clone($job_query);
       restrict_to_open ($open_job_query);
       $panel = new $job_panel_class_name ($this, $open_job_query, $job_type_info);
@@ -463,6 +489,14 @@ class PROJECT_USER_PANEL_MANAGER extends USER_PANEL_MANAGER
     $panel = new $job_panel_class_name ($this, $scheduled_job_query, $job_type_info);
     $panel->id = 'scheduled_jobs';
     $panel->title = 'Scheduled jobs';
+    $this->add_panel ($panel);
+
+    $unscheduled_job_query = clone($job_query);
+    restrict_to_open ($unscheduled_job_query);
+    restrict_to_unscheduled ($unscheduled_job_query);
+    $panel = new $job_panel_class_name ($this, $unscheduled_job_query, $job_type_info);
+    $panel->id = 'unscheduled_jobs';
+    $panel->title = 'Unscheduled jobs';
     $this->add_panel ($panel);
 
     $assigned_job_query = clone($job_query);
@@ -585,6 +619,14 @@ class PROJECT_BRANCH_PANEL_MANAGER extends WEBCORE_PANEL_MANAGER
     $panel->title = 'Scheduled jobs';
     $this->add_panel ($panel);
 
+    $unscheduled_job_query = clone($job_query);
+    $unscheduled_job_query->restrict ("jtob.branch_closer_id = 0");
+    restrict_to_unscheduled ($unscheduled_job_query);
+    $panel = new $job_panel_class_name ($this, $unscheduled_job_query, $job_type_info);
+    $panel->id = 'unscheduled_jobs';
+    $panel->title = 'Unscheduled jobs';
+    $this->add_panel ($panel);
+    
     $open_job_query = clone($job_query);
     $open_job_query->restrict ("jtob.branch_closer_id = 0");
     $panel = new $job_panel_class_name ($this, $open_job_query, $job_type_info);
@@ -804,6 +846,14 @@ class PROJECT_COMPONENT_PANEL_MANAGER extends WEBCORE_PANEL_MANAGER
     $panel->title = 'Scheduled jobs';
     $this->add_panel ($panel);
 
+    $unscheduled_job_query = clone($job_query);
+    restrict_to_open ($unscheduled_job_query);
+    restrict_to_unscheduled ($unscheduled_job_query);
+    $panel = new $job_panel_class_name ($this, $unscheduled_job_query, $job_type_info);
+    $panel->id = 'unscheduled_jobs';
+    $panel->title = 'Unscheduled jobs';
+    $this->add_panel ($panel);
+    
     $open_job_query = clone($job_query);
     restrict_to_open ($open_job_query);
     $panel = new $job_panel_class_name ($this, $open_job_query, $job_type_info);
