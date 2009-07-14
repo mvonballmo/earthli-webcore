@@ -1985,6 +1985,26 @@ class MUNGER extends MUNGER_PARSER
   {
     return $this->_converters;
   }
+  
+  /**
+   * Set a converter's enabled state, returning the previous state.
+   *
+   * @param string $name The name of the converter.
+   * @param boolean $value The value to set.
+   * @return boolean
+   */
+  public function set_converter_enabled($name, $value)
+  {
+    if (isset($this->_converters) && isset($this->_converters[$name]))
+    {
+      $Result = $this->_converters[$name]->enabled;
+      $this->_converters[$name]->enabled = $value;
+      
+      return $Result;
+    }
+    
+    return false;
+  }
 
   /**
    * Add a tag that will be accepted by the munger.

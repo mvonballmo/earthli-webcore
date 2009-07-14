@@ -1523,6 +1523,9 @@ class HTML_MUNGER_CODE_REPLACER extends HTML_PREFORMATTED_BLOCK_REPLACER
   protected function _open_inner_area ($munger, $attrs, $outer_css, $inner_css, $inner_class)
   {
 ////    return parent::_open_inner_area ($attrs, $outer_css, $inner_css, $inner_class) . '<textarea name="code" class="java" rows="15" cols="100">';
+
+    $this->_quotes_were_enabled = $munger->set_converter_enabled('quotes', false);
+
     return parent::_open_inner_area ($munger, $attrs, $outer_css, $inner_css, $inner_class) . '<code>';
   }
 
@@ -1534,9 +1537,12 @@ class HTML_MUNGER_CODE_REPLACER extends HTML_PREFORMATTED_BLOCK_REPLACER
    */
   protected function _close_inner_area ($munger)
   {
+    $munger->set_converter_enabled('quotes', $this->_quotes_were_enabled);
+        
     return '</code>' . parent::_close_inner_area ($munger);
   }
 
+  protected $_quotes_were_enabled;
   protected $_use_highlighting;
 }
 

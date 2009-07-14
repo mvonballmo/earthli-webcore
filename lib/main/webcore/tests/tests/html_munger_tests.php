@@ -6,6 +6,13 @@ $image_output_url = $this->env->resolve_file($image_input_url);
 $this->_munger = new HTML_TEXT_MUNGER ();
 
 $this->_run_munger_test (
+  "\"String\" == 'string'<code>\"String\" == 'string'</code>\"String\" == 'string'",
+  "<p>&ldquo;String&rdquo; == &lsquo;string&rsquo;</p>
+<pre><code>\"String\" == 'string'</code></pre><p>&ldquo;String&rdquo; == &lsquo;string&rsquo;</p>
+"
+);
+
+$this->_run_munger_test (
   "<ul>
   Item 1
   Item 2
