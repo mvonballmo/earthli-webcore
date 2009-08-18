@@ -57,6 +57,7 @@ class MUNGER_TEST_TASK extends MUNGER_BASE_TEST_TASK
     $this->_run_token_tests ();
     $this->_run_attribute_tests ();
     $this->_run_validator_tests ();
+    $this->_run_sanitize_words_tests();
     $this->_run_plain_text_tests ();
     $this->_run_html_tests ();
   }
@@ -210,6 +211,23 @@ Footnote reference.<fn>\r
 <page>That was a page marker.
 ", 0);
     
+  }
+  
+  protected function _run_sanitize_words_tests ()
+  {
+    $this->_num_tests += 1;
+
+    $this->_check_equal('\/', REGULAR_EXPRESSION::sanitize_words("/"));
+    $this->_check_equal('\\', REGULAR_EXPRESSION::sanitize_words("\\"));
+    $this->_check_equal('\|', REGULAR_EXPRESSION::sanitize_words("|"));
+    $this->_check_equal('\(', REGULAR_EXPRESSION::sanitize_words("("));
+    $this->_check_equal('\)', REGULAR_EXPRESSION::sanitize_words(")"));
+    $this->_check_equal('\[', REGULAR_EXPRESSION::sanitize_words("["));
+    $this->_check_equal('\]', REGULAR_EXPRESSION::sanitize_words("]"));
+    $this->_check_equal('\.', REGULAR_EXPRESSION::sanitize_words("."));
+    $this->_check_equal('\*', REGULAR_EXPRESSION::sanitize_words("*"));
+    $this->_check_equal('\+', REGULAR_EXPRESSION::sanitize_words("+"));
+    $this->_check_equal('\(\.\*\[a\|b\]\+\)', REGULAR_EXPRESSION::sanitize_words("(.*[a|b]+)"));
   }
 
   protected function _run_plain_text_tests ()

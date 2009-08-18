@@ -2829,6 +2829,7 @@ class REGULAR_EXPRESSION
   /**
    * Apply a prefix and suffix to a set of words in the given text.
    * Used by the {@link HTML_MUNGER} to provide search term highlighting.
+   * 
    * @param string $text Text to search.
    * @param string $phrase Space-separated list of words.
    * @param string $prefix Prepended to each found word.
@@ -2839,9 +2840,7 @@ class REGULAR_EXPRESSION
   {
     if ($phrase)
     {
-      /* Replace all the Perl special characters. Each is separated by '|'. */
-
-      $preg_phrase = preg_replace('/([\\|\(|\)|\[|\]|\.])/', '\\\1', $phrase);
+      $preg_phrase = REGULAR_EXPRESSION::sanitize_words($phrase);
 
       /* Break into separate words and build a list of regular expressions. */
 
@@ -2858,6 +2857,20 @@ class REGULAR_EXPRESSION
     }
 
     return $text;
+  }
+  
+  /**
+   * Return a Perl-compatible version of the given phrase with all regular-expression
+   * special characters escaped.
+   *
+   * @param string $phrase The phrase to sanitize.
+   * @return string
+   */
+  public static function sanitize_words ($phrase)
+  {
+    /* Each special character is separated by a '|'. */
+    
+    return preg_replace('/([\\|\(|\)|\[|\]|\.|\/|\||\*|\+])/', '\\\\$1', $phrase);
   }
 
   /**

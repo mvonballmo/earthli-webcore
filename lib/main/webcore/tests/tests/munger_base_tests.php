@@ -351,7 +351,7 @@ This is a picture-perfect example of a country that benefitted from the freedom 
       }
     }
   }
-
+  
   protected function _run_munger_test ($input, $expected, $ignore = false)
   {
     $this->_num_tests += 1;

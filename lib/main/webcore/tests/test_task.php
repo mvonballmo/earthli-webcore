@@ -109,15 +109,16 @@ abstract class TEST_TASK extends TASK
   /**
    * {@link _log()} an error if the values are not equal.
    * Records a debug message indicating success otherwise.
-   * @param mixed $value1
-   * @param mixed $value2
+   * 
+   * @param mixed $expected
+   * @param mixed $actual
    */
-  protected function _check_equal ($value1, $value2)
+  protected function _check_equal ($expected, $actual)
   {
-    if ($value1 != $value2)
+    if ($expected != $actual)
     {
-      $this->_log ("Expected [$value1]", Msg_type_error);
-      $this->_log_more ("Received [$value2]");
+      $this->_log ("Expected [$expected]", Msg_type_error);
+      $this->_log_more ("Received [$actual]");
 
       if ($this->stop_on_error)
       {
@@ -126,7 +127,7 @@ abstract class TEST_TASK extends TASK
     }
     else
     {
-      $this->_log ("Expected and got [$value1].", Msg_type_debug_info);
+      $this->_log ("Expected and got [$expected].", Msg_type_debug_info);
     }
   }
 }
