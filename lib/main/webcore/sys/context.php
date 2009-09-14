@@ -175,7 +175,6 @@ class CONTEXT extends RESOLVER
     parent::_initialize_class_registry ();
     $this->register_class ('FILE_TYPE_MANAGER', 'INI_FILE_TYPE_MANAGER', 'webcore/util/file_type_manager.php');
     $this->register_class ('MAIL_PROVIDER', 'DEFAULT_PHP_MAIL_PROVIDER', 'webcore/mail/default_php_mail_provider.php');
-    $this->register_class ('ARCHIVE', 'PCL_ARCHIVE', 'webcore/util/pcl_archive.php');
     $this->register_class ('TEST_SUITE', 'INI_TEST_SUITE', 'webcore/util/test_suite.php');
     $this->register_class ('CAPTCHA', 'NUMERIC_CAPTCHA', 'webcore/util/captcha.php');
   }

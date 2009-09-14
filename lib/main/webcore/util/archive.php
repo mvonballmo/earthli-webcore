@@ -50,9 +50,7 @@ require_once ('webcore/sys/files.php');
  * set_file_name()} or passed to the constructor. If the file is readable, use
  * {@link extract_to()} and {@link for_each()} to manipulate the contents.
  *
- * The zip format is supported natively through the PHP zip functions. Older
- * versions of PHP can use the {@link PCL_ARCHIVE}, which uses a third party
- * library to read zip files.
+ * The zip format is supported natively through the PHP zip functions.
  *
  * @package webcore
  * @subpackage util
