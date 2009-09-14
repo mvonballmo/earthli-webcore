@@ -307,7 +307,7 @@ abstract class COMPRESSED_FILE extends RAISABLE
    * @param CALLBACK $error_callback Function prototype: function ({@link COMPRESSED_FILE} $archive, string $msg, {@link COMPRESSED_FILE_ENTRY} $entry)
    * @access private
    */
-  protected function _extract_file ($comp_file, $entry, $error_callback)
+  public function _extract_file ($comp_file, $entry, $error_callback)
   {
     $entry->extract_to ($this->_target_path, $error_callback);
   }

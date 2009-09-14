@@ -40,7 +40,7 @@ http://www.earthli.com/software/webcore
 
 /** */
 require_once ('webcore/tests/test_task.php');
-require_once ('webcore/util/pcl_archive.php');
+require_once ('webcore/util/archive.php');
 
 /**
  * @package webcore
@@ -71,10 +71,10 @@ class ARCHIVE_TEST_TASK extends TEST_TASK
     $this_url->append_folder ('archives');
     $this_url->replace_name_and_extension ('oz_pics.zip');
 
-    $archive = new PCL_ARCHIVE ($this_url->as_text ());
+    $archive = new ARCHIVE ($this_url->as_text ());
     $archive->for_each (new CALLBACK_METHOD ('process_file', $this), new CALLBACK_METHOD ('show_error', $this));
    
-    $zip = new PCL_ZIP_FILE ($this_url->as_text ());
+    $zip = new ZIP_FILE ($this_url->as_text ());
   
     $zip->open ();
     $zip->for_each (new CALLBACK_METHOD ('process_file', $this), new CALLBACK_METHOD ('show_error', $this));

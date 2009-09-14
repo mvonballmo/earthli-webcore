@@ -171,10 +171,10 @@ class JOURNAL extends ALBUM_ENTRY
   {
     /* Copy instead of taking a reference. */
 
-    $first_day = $this->date;
+    $first_day = clone($this->date);
     $first_day->set_time_from_iso ('00:00:00');
 
-    $last_day = $this->date;
+    $last_day = clone($this->date);
     $last_day->set_time_from_iso ('23:59:59');
 
     $query->set_days ($first_day->as_iso (), $last_day->as_iso ());
