@@ -27,7 +27,5 @@ http://www.earthli.com/software/webcore/projects
 ****************************************************************************/
   
   require_once ('projects/start.php');
-  require_once ('projects/gui/project_print_preview.php');
-  $preview_class_name = 'PROJECT_PRINT_PREVIEW';
   require_once ($App->page_template_for ('webcore/pages/print_preview.php'));
 ?>

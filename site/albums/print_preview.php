@@ -27,7 +27,5 @@ http://www.earthli.com/software/webcore/albums
 ****************************************************************************/
   
   require_once ('albums/start.php');
-  require_once ('albums/gui/album_print_preview.php');
-  $preview_class_name = 'ALBUM_PRINT_PREVIEW';
   require_once ($App->page_template_for ('webcore/pages/print_preview.php'));
 ?>

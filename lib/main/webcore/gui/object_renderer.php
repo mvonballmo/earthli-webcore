@@ -188,6 +188,7 @@ abstract class OBJECT_RENDERER extends HANDLER_RENDERER
 
   /**
    * Outputs the object in printable format.
+   * 
    * @param RENDERABLE $obj
    * @param OBJECT_RENDERER_OPTIONS $options
    */
@@ -197,12 +198,13 @@ abstract class OBJECT_RENDERER extends HANDLER_RENDERER
     {
       $this->_options = $options;
     }
-    $this->_options->show_interactive = false;    
-    $this->display_as_html ($obj, $options);
+    $this->_options->show_interactive = false; 
+    $this->_display_as_printable($obj);
   }
 
   /**
    * Outputs the object as HTML.
+   * 
    * @param RENDERABLE $obj
    * @access private
    * @abstract
@@ -211,15 +213,29 @@ abstract class OBJECT_RENDERER extends HANDLER_RENDERER
 
   /**
    * Outputs the object as plain text.
+   * 
    * @param RENDERABLE $obj
    * @access private
    * @abstract
    */
   protected abstract function _display_as_plain_text ($obj);
+  
+  /**
+   * Outputs the object in printable format.
+   * 
+   * @param RENDERABLE $obj
+   * @access private
+   * @abstract
+   */
+  protected function _display_as_printable ($obj)
+  {
+    $this->_display_as_html ($obj);
+  }
 }
 
 /**
  * Rendering options passed to an {@link OBJECT_RENDERER}.
+ * 
  * @package webcore
  * @subpackage renderer
  * @version 3.1.0

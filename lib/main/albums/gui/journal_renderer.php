@@ -104,7 +104,7 @@ class JOURNAL_RENDERER extends ENTRY_RENDERER
    */
   protected function _display_as_printable ($entry)
   {
-    parent::display_as_printable ($entry);
+    parent::_display_as_printable ($entry);
 
     if ($this->_options->show_pictures)
     {

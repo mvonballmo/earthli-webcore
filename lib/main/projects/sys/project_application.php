@@ -291,6 +291,7 @@ class PROJECT_APPLICATION extends APPLICATION
     $this->register_class ('ENTRY_FORM', 'CHANGE_FORM', 'projects/forms/change_form.php', 'change');
     $this->register_class ('FOLDER_FORM', 'PROJECT_FORM', 'projects/forms/project_form.php');
     $this->register_class ('MULTIPLE_OBJECT_PRINTER_FORM', 'PROJECT_MULTIPLE_OBJECT_PRINTER_FORM', 'projects/forms/project_multiple_object_printer_form.php', 'change');
+    $this->register_class ('PRINT_PREVIEW', 'PROJECT_PRINT_PREVIEW', 'projects/gui/project_print_preview.php');
     $this->register_class ('ENTRY_SUMMARY_GRID', 'JOB_SUMMARY_GRID', 'projects/gui/job_grid.php', 'job');
     $this->register_class ('ENTRY_SUMMARY_GRID', 'CHANGE_SUMMARY_GRID', 'projects/gui/change_grid.php', 'change');
     $this->register_class ('ENTRY_LIST', 'JOB_LIST', 'projects/gui/job_list.php', 'job');

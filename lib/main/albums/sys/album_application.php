@@ -220,6 +220,7 @@ class ALBUM_APPLICATION extends APPLICATION
     $this->register_class ('MULTIPLE_OBJECT_MOVER_FORM', 'ALBUM_MULTIPLE_OBJECT_MOVER_FORM', 'albums/forms/album_multiple_object_mover_form.php');
     $this->register_class ('MULTIPLE_OBJECT_PRINTER_FORM', 'ALBUM_MULTIPLE_OBJECT_PRINTER_FORM', 'albums/forms/album_multiple_object_printer_form.php');
     $this->register_class ('MULTIPLE_OBJECT_PURGER_FORM', 'ALBUM_MULTIPLE_OBJECT_PURGER_FORM', 'albums/forms/album_multiple_object_purger_form.php');
+    $this->register_class ('PRINT_PREVIEW', 'ALBUM_PRINT_PREVIEW', 'albums/gui/album_print_preview.php');
     $this->register_class ('ENTRY_SUMMARY_GRID', 'PICTURE_SUMMARY_GRID', 'albums/gui/picture_grid.php', 'picture');
     $this->register_class ('ENTRY_SUMMARY_GRID', 'JOURNAL_SUMMARY_GRID', 'albums/gui/journal_grid.php', 'journal');
     $this->register_class ('ENTRY_LIST', 'ALBUM_ENTRY_LIST', 'albums/gui/album_entry_list.php');
