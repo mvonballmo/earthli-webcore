@@ -121,11 +121,23 @@ abstract class AUDITABLE_FORM extends RENDERABLE_FORM
       {
         $obj->initialize_as_new();
       }
-      
-      $this->_history_item = $obj->new_history_item ();
     }
     
     parent::attempt_action ($obj);
+  }
+
+  /**
+   * Set the internal object of the form.
+   * If the object is being created or cloned, it is not set by default.
+   * @param object $obj
+   * @param string $load_action
+   * @access private
+   */
+  protected function _set_object ($obj, $load_action)
+  {
+    parent::_set_object($obj, $load_action);
+
+    $this->_history_item = $obj->new_history_item ();
   }
 
   /**
@@ -181,16 +193,6 @@ abstract class AUDITABLE_FORM extends RENDERABLE_FORM
   }
 
   /**
-   * Load initial properties from this object.
-   * @param AUDITABLE $obj
-   */
-  public function load_from_object ($obj)
-  {
-    parent::load_from_object ($obj);
-    $this->set_value ('time_modified', $obj->time_modified);
-  }
-
-  /**
    * Initialize the form's fields with default values and visibilities.
    */
   public function load_with_defaults ()
@@ -199,6 +201,22 @@ abstract class AUDITABLE_FORM extends RENDERABLE_FORM
     $this->set_value ('time_modified', new DATE_TIME ());
     $this->set_value ('publication_state', History_item_default);
     $this->set_value ('update_modifier_on_change', true);
+  }
+
+  /**
+   * Load initial properties from this object.
+   * @param AUDITABLE $obj
+   */
+  public function load_from_object ($obj)
+  {
+    parent::load_from_object ($obj);
+    $this->set_value ('time_modified', $obj->time_modified);
+    
+    if (isset($this->_history_item))
+    {
+      $this->_history_item->record_differences ($obj);
+      $this->add_preview ($this->_history_item, 'Modifications', $this->previewing());
+    }
   }
 
   /**
