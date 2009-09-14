@@ -53,7 +53,7 @@ class ALBUM_MULTIPLE_OBJECT_PRINTER_FORM extends MULTIPLE_OBJECT_PRINTER_FORM
    */
   public function __construct ($folder)
   {
-    parent::MULTIPLE_OBJECT_PRINTER_FORM ($folder);
+    parent::__construct($folder);
 
     $field = new BOOLEAN_FIELD ();
     $field->id = 'show_pictures';

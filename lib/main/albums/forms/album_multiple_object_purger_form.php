@@ -59,4 +59,5 @@ class ALBUM_MULTIPLE_OBJECT_PURGER_FORM extends MULTIPLE_OBJECT_PURGER_FORM
     $field->visible = true;
   }
 }
+
 ?>

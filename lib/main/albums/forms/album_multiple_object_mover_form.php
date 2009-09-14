@@ -59,4 +59,5 @@ class ALBUM_MULTIPLE_OBJECT_MOVER_FORM extends MULTIPLE_OBJECT_MOVER_FORM
     $this->_target->refresh_dates (true);
   }
 }
+
 ?>
