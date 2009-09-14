@@ -1405,42 +1405,7 @@ class HTML_BLOCK_QUOTE_REPLACER extends HTML_DIV_REPLACER
    * Overriding this with "blockquote" has strange effects, therefore it has
    * been set back to the inherited "div" value.
    * @var string */
-  public $main_tag = 'blockquote';
-  
-  /**
-   * Render the open tag.
-   * Called by {@link _open_outer_area()} with parameters containing pre-
-   * calculated values for common values. Should be closed with {@link
-   * _close_inner_area()}.
-   * @param MUNGER $munger The transformation context.
-   * @param array[string,string] $attrs List of attributes for the tag
-   * (retrieved from the token).
-   * @param CSS_STYLE_BUILDER $outer_css Styles intended for the bounding
-   * container; includes alignment and width.
-   * @param CSS_STYLE_BUILDER $inner_css Styles intended for the inner
-   * container; includes additional style and properties.
-   * @param $inner_class CSS classes to apply to the inner container.
-   * @see _close_inner_area()
-   * @return string
-   * @access private
-   */
-  protected function _open_inner_area ($munger, $attrs, $outer_css, $inner_css, $inner_class)
-  {
-    return parent::_open_inner_area ($munger, $attrs, $outer_css, $inner_css, $inner_class) . '<p>';
-  }
-
-  /**
-   * Render the closing tag.
-   * Called by {@link _close_outer_area()}.
-   * @see _open_inner_area()
-   * @param MUNGER $munger The transformation context.
-   * @return string
-   * @access private
-   */
-  protected function _close_inner_area ($munger)
-  {
-    return '</p>' . parent::_close_inner_area ($munger); 
-  }
+  public $main_tag = 'div';  
 }
 
 /**

@@ -143,7 +143,10 @@ abstract class PREVIEWABLE_FORM extends FORM
    */
   protected function _set_object ($obj, $load_action)
   {
-    $this->_object = $obj;
+    if (($load_action != Form_load_action_default) && $obj->exists ())
+    {
+      $this->_object = $obj;
+    }
   }
 
   /**
@@ -156,10 +159,7 @@ abstract class PREVIEWABLE_FORM extends FORM
   {
     if ($this->previewing ())
     {
-      if (($load_action != Form_load_action_default) && $obj->exists ())
-      {
-        $this->_set_object ($obj, $load_action);
-      }
+      $this->_set_object ($obj, $load_action);
       $this->validate ($obj);
 
       if (sizeof ($this->_errors) == 0)
