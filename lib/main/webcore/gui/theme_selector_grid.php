@@ -62,9 +62,10 @@ class THEME_SELECTOR_GRID extends THEME_GRID
    */
   protected function _draw_box ($obj)
   {
+		$setter_url = $this->page->resolve_file ('{pages}set_theme_options.php');
 ?>
   <div style="text-align: center">
-    <a title="Switch to this theme" href="set_theme_options.php?last_page=<?php echo urlencode ($this->env->url ()); ?>&amp;main_CSS_file_name=<?php echo $obj->id; ?>"><?php echo $obj->title_as_plain_text (); ?></a>
+    <a title="Switch to this theme" href="<?php echo $setter_url; ?>?last_page=<?php echo urlencode ($this->env->url ()); ?>&amp;main_CSS_file_name=<?php echo $obj->id; ?>"><?php echo $obj->title_as_plain_text (); ?></a>
   </div>
 <?php
   }
