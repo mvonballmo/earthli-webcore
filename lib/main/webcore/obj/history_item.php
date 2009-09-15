@@ -362,6 +362,29 @@ class HISTORY_ITEM extends UNIQUE_OBJECT
       $this->_record_differences ($this->_object, $obj);
     }
   }
+  
+  /**
+   * Assign the {@link $title} and {@link $system_description} if not already assigned.
+   */
+  public function prepare_for_storage ()
+  {
+    // flatten the differences list into text (if this history item is being created)
+
+    if (! $this->exists ())
+    {
+      if (isset ($this->_differences))
+      {
+        $this->system_description = implode ("\n", $this->_differences);
+      }
+    }
+
+    // Assign a default title, if needed.
+
+    if (! isset ($this->title) || ! $this->title)
+    {
+      $this->title = $this->_make_default_title ();
+    }
+  }
 
   /**
    * @param DATABASE $db Database from which to load values.
@@ -386,22 +409,7 @@ class HISTORY_ITEM extends UNIQUE_OBJECT
    */
   public function store_to ($storage)
   {
-    // flatten the differences list into text (if this history item is being created)
-
-    if (! $this->exists ())
-    {
-      if (isset ($this->_differences))
-      {
-        $this->system_description = implode ("\n", $this->_differences);
-      }
-    }
-
-    // Assign a default title, if needed.
-
-    if (! isset ($this->title) || ! $this->title)
-    {
-      $this->title = $this->_make_default_title ();
-    }
+    $this->prepare_for_storage ();
 
     parent::store_to ($storage);
     $tname = $this->table_name ();

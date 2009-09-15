@@ -121,6 +121,8 @@ abstract class AUDITABLE_FORM extends RENDERABLE_FORM
       {
         $obj->initialize_as_new();
       }
+      
+      $this->_history_item = $obj->new_history_item ();
     }
     
     parent::attempt_action ($obj);
@@ -215,6 +217,7 @@ abstract class AUDITABLE_FORM extends RENDERABLE_FORM
     if (isset($this->_history_item))
     {
       $this->_history_item->record_differences ($obj);
+      $this->_history_item->prepare_for_storage ();
       $this->add_preview ($this->_history_item, 'Modifications', $this->previewing());
     }
   }
