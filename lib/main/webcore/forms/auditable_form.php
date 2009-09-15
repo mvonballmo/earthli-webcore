@@ -218,6 +218,10 @@ abstract class AUDITABLE_FORM extends RENDERABLE_FORM
     {
       $this->_history_item->record_differences ($obj);
       $this->_history_item->prepare_for_storage ();
+      if (empty ($this->_history_item->system_description))
+      {
+        $this->_history_item->system_description = 'No changes.';
+      }
       $this->add_preview ($this->_history_item, 'Modifications', $this->previewing());
     }
   }
