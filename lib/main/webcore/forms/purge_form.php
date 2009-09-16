@@ -109,14 +109,6 @@ class PURGE_OBJECT_FORM extends RENDERABLE_FORM
   }
 
   /**
-   * Initialize the form's fields with default values and visibilities.
-   */
-  public function load_with_defaults ()
-  {
-    $this->raise ('Cannot use purge form for new objects.', 'load_with_defaults', 'PURGE_OBJECT_FORM');
-  }
-  
-  /**
    * Apply form properties to the purge options for the object.
    * @param PURGE_OPTIONS $options
    * @access private

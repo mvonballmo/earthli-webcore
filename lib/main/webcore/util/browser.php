@@ -723,6 +723,7 @@ class USER_AGENT_PARSER
     $continue_processing = true;
     $index = 0;
     $current_renderer = null;
+    $browser_is_final = false;
 
     while ($continue_processing && ($index < sizeof ($ids)))
     {
@@ -769,7 +770,7 @@ class USER_AGENT_PARSER
   
         if (! isset ($ignored_ids [$id]) && !isset($system_ids[$id]))
         {
-          if (empty ($current_renderer) || $current_renderer->browser_can_be_overridden ())
+          if (!$browser_is_final && (empty ($current_renderer) || $current_renderer->browser_can_be_overridden ()))
           {
             $Result->version = $ver;
             if (isset ($renderers [$id]))
@@ -784,6 +785,11 @@ class USER_AGENT_PARSER
                 $Result->name = $renderer->display_name;
               }
   
+              if ($current_renderer->precedence == User_agent_final_browser_temporary_renderer)
+              {
+                $browser_is_final = true;
+              }
+              
               $continue_processing = $renderer->continue_processing_ids ();
             }
             else
@@ -978,6 +984,7 @@ class USER_AGENT_PARSE_TABLES
       'applewebkit' => new USER_AGENT_RENDERER_INFO (Browser_khtml, 'Webcore', User_agent_final_renderer),
       'netscape6' => new USER_AGENT_RENDERER_INFO (Browser_gecko, 'Netscape', User_agent_final_browser),
       'chrome' => new USER_AGENT_RENDERER_INFO (Browser_khtml, 'Google Chrome', User_agent_final_browser_abort),
+      'opera mini' => new USER_AGENT_RENDERER_INFO (Browser_opera, 'Presto (Opera)', User_agent_final_browser_temporary_renderer, 'Opera Mini'),
       'opera' => new USER_AGENT_RENDERER_INFO (Browser_opera, 'Presto (Opera)', User_agent_temporary_renderer, 'Opera'),
       'presto' => new USER_AGENT_RENDERER_INFO (Browser_presto, 'Presto (Opera)', User_agent_final_renderer, 'Opera'),
       'version' => new USER_AGENT_RENDERER_INFO (Browser_presto, 'Presto (Opera)', User_agent_final_browser, 'Opera'),
@@ -1172,6 +1179,14 @@ define ('User_agent_final_browser', 3);
 define ('User_agent_final_browser_abort', 4);
 
 /**
+ * Marks a final browser name, but overridable renderer.
+ * The browser name is definite, but the renderer can still be overridden. The
+ * "Opera Mini" browser works this way in that it places the renderer name and
+ * version at the end. 
+ */
+define ('User_agent_final_browser_temporary_renderer', 5);
+
+/**
  * Properties for a registered renderer.
  * The {@link USER_AGENT_PROPERTIES::_renderer_ids()} function returns an array
  * of these to use during detection.
@@ -1242,7 +1257,7 @@ class USER_AGENT_RENDERER_INFO
    */
   public function renderer_can_be_overridden ()
   {
-    return $this->precedence == User_agent_temporary_renderer;
+    return ($this->precedence == User_agent_temporary_renderer) || ($this->precedence == User_agent_final_browser_temporary_renderer);
   }
 
   /**
@@ -1250,7 +1265,7 @@ class USER_AGENT_RENDERER_INFO
    */
   public function browser_can_be_overridden ()
   {
-    return $this->precedence != User_agent_final_browser;
+    return ($this->precedence != User_agent_final_browser);
   }
 
   /**
