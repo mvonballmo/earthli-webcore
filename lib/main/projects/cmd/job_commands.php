@@ -102,6 +102,18 @@ class JOB_COMMANDS extends ENTRY_COMMANDS
     $this->append ($cmd);
 
     $cmd = $this->make_command ();
+    $cmd->id = 'work';
+    $cmd->title = 'Stop working';
+    $cmd->link = "set_job_status.php?id=$entry->id&status=4&branch_id=$branch_info->branch_id&last_page=$last_page";
+    $cmd->icon = '{app_icons}statuses/stopped';
+    $cmd->importance = Command_importance_high + Command_importance_increment;
+    $cmd->executable = ! $locked
+                       && ! $branch_info->is_closed ()
+                       && ($branch_info->status == 3)
+                       && $this->login->is_allowed (Privilege_set_entry, Privilege_modify, $entry);
+    $this->append ($cmd);
+    
+    $cmd = $this->make_command ();
     $cmd->id = 'fix';
     $cmd->title = 'Mark as fixed';
     $cmd->link = "set_job_status.php?id=$entry->id&status=7&branch_id=$branch_info->branch_id&last_page=$last_page";
