@@ -64,6 +64,51 @@ class TREE_NODE
   }
 
   /**
+   * The unique identifier.
+   *
+   * @return string
+   */
+  public function id ()
+  {
+    return $this->_id;
+  }
+  
+  /**
+   * The user-readable title.
+   *
+   * @return string
+   */
+  public function title ()
+  {
+    return $this->_title;
+  }
+  
+  /**
+   * true if the node's children are hidden; otherwise, false. 
+   *
+   * @return boolean
+   */
+  public function closed ()
+  {
+    return $this->_closed;
+  }
+  
+  /**
+   * The parent of this node; can be null.
+   *
+   * @return TREE_NODE
+   */
+  public function parent_node ()
+  {
+    return $this->_parent;
+  }
+  
+  public function children ()
+  {
+    return $this->_nodes;
+  }
+  
+  /**
    * Add the given 'node' as a child.
    * @param TREE_NODE $node
    */
@@ -91,9 +136,10 @@ class TREE_NODE
 
     return $this->_title;
   }
-
+  
   /**
    * Display text.
+   * 
    * @var string
    * @access private
    */
@@ -101,6 +147,7 @@ class TREE_NODE
 
   /**
    * URL for the link.
+   * 
    * @var string
    * @access private
    */
@@ -108,6 +155,7 @@ class TREE_NODE
 
   /**
    * Direct links to this target.
+   * 
    * @var string
    * @access private
    */
@@ -115,6 +163,7 @@ class TREE_NODE
 
   /**
    * Used by the tree to toggle DHTML sections.
+   * 
    * @var integer
    * @access private
    */
@@ -122,13 +171,22 @@ class TREE_NODE
 
   /**
    * Optional parent node.
+   * 
    * @var TREE_NODE
    * @access private
    */
   protected $_parent;
+  
+  /**
+   * Optional list of child nodes.
+   *
+   * @var array[TREE_NODE]
+   */
+  protected $_nodes;
 
   /**
    * Is this node closed initially?
+   * 
    * @var boolean
    * @access private
    */
@@ -153,7 +211,7 @@ class GENERIC_TREE_NODE_INFO extends TREE_NODE_INFO
    */
   public function sub_nodes ($node)
   {
-    return $node->_nodes;
+    return $node->children();
   }
 
   /**
@@ -175,7 +233,7 @@ class GENERIC_TREE_NODE_INFO extends TREE_NODE_INFO
    */
   public function closed ($node)
   {
-    return $node->_closed;
+    return $node->closed();
   }
 
   /**
@@ -186,7 +244,7 @@ class GENERIC_TREE_NODE_INFO extends TREE_NODE_INFO
    */
   public function parent ($node)
   {
-    return $node->_parent;
+    return $node->parent_node();
   }
 
   /**
@@ -197,7 +255,8 @@ class GENERIC_TREE_NODE_INFO extends TREE_NODE_INFO
    */
   public function id ($node)
   {
-    return $node->_id;
+    return $node->id();
   }
 }
+
 ?>
