@@ -6,7 +6,7 @@
  * @filesource
  * @package recipes
  * @subpackage gui
- * @version 3.1.0
+ * @version 3.2.0
  * @since 1.3.0
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/gui/entry_grid.php');
  * Display {@link RECIPE}s from a {@link QUERY}.
  * @package recipes
  * @subpackage gui
- * @version 3.1.0
+ * @version 3.2.0
  * @since 1.3.0
  */
 class RECIPE_GRID extends CONTENT_OBJECT_GRID
@@ -128,7 +128,7 @@ class RECIPE_GRID extends CONTENT_OBJECT_GRID
  * Display {@link RECIPE}s from a {@link QUERY}.
  * @package recipes
  * @subpackage gui
- * @version 3.1.0
+ * @version 3.2.0
  * @since 1.3.0
  */
 class RECIPE_SUMMARY_GRID extends DRAFTABLE_ENTRY_SUMMARY_GRID

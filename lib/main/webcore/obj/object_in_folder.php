@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage obj
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.5.0
  */
 
@@ -53,7 +53,7 @@ define ('Defer_database_update', false);
  * also have a {@link $title} and a {@link $description}.
  * @package webcore
  * @subpackage obj
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.5.0
  */
 abstract class OBJECT_IN_FOLDER extends CONTENT_OBJECT
@@ -645,7 +645,7 @@ abstract class OBJECT_IN_FOLDER extends CONTENT_OBJECT
  * @see OBJECT_IN_FOLDER::move_to()
  * @package webcore
  * @subpackage obj
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.5.0
  */
 class FOLDER_OPERATION_OPTIONS

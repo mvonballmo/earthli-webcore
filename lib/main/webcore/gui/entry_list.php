@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage grid
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.2.1
  */
 
@@ -44,7 +44,7 @@ require_once ('webcore/gui/select_list.php');
  * Used with the explorer view.
  * @package webcore
  * @subpackage grid
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.2.1
  */
 class ENTRY_LIST extends SELECT_LIST

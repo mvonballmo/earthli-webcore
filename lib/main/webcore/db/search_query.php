@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage db
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.5.0
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/db/query.php');
  * Return a list of {@link SEARCH} objects.
  * @package webcore
  * @subpackage db
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.5.0
  */
 class SEARCH_QUERY extends QUERY

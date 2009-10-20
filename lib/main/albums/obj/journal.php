@@ -6,7 +6,7 @@
  * @filesource
  * @package albums
  * @subpackage obj
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.5.0
  */
 
@@ -43,7 +43,7 @@ require_once ('albums/obj/album_entry.php');
  * The weather and description from a {@link JOURNAL}.
  * @package albums
  * @subpackage obj
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.5.0
  */
 class JOURNAL extends ALBUM_ENTRY

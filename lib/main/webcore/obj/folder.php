@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage obj
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.2.1
  */
 
@@ -44,7 +44,7 @@ require_once ('webcore/obj/attachment_host.php');
  * Maintains security rights and lists of {@link ENTRY}s.
  * @package webcore
  * @subpackage obj
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.2.1
  */
 class FOLDER extends ATTACHMENT_HOST

@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage forms
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.4.0
  */
 
@@ -45,7 +45,7 @@ require_once ('webcore/forms/storable_form.php');
  * from a unique object.
  * @package webcore
  * @subpackage forms
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.5.0
  * @abstract
  */

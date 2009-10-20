@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage tree
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.2.1
  */
 
@@ -40,7 +40,7 @@ http://www.earthli.com/software/webcore
  * Simple node implementation with link and text.
  * @package webcore
  * @subpackage tree
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.2.1
  */
 class TREE_NODE
@@ -199,7 +199,7 @@ require_once ('webcore/gui/tree.php');
  * Handles tree-rendering for {@link TREE_NODE}s.
  * @package webcore
  * @subpackage tree
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.2.1
  */
 class GENERIC_TREE_NODE_INFO extends TREE_NODE_INFO

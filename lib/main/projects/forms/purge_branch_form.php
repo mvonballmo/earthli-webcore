@@ -6,7 +6,7 @@
  * @filesource
  * @package projects
  * @subpackage forms
- * @version 3.1.0
+ * @version 3.2.0
  * @since 1.7.0
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/forms/purge_form.php');
  * Handles deletion of a {@link BRANCH}.
  * @package projects
  * @subpackage forms
- * @version 3.1.0
+ * @version 3.2.0
  * @since 1.7.0
  */
 class PURGE_BRANCH_FORM extends PURGE_OBJECT_FORM

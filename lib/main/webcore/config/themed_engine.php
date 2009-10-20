@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage config
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.7.0
  */
 
@@ -44,7 +44,7 @@ include_once ('webcore/config/engine.php');
  * Create and initializes a {@link THEMED_PAGE} instead of a {@link PAGE}.
  * @package webcore
  * @subpackage config
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.7.0
  */
 class THEMED_ENGINE extends ENGINE

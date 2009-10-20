@@ -6,7 +6,7 @@
  * @filesource
  * @package albums
  * @subpackage command
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.9.0
  * @access private
  */
@@ -44,7 +44,7 @@ require_once ('webcore/cmd/folder_commands.php');
  * Commands which apply to an {@link ALBUM}.
  * @package albums
  * @subpackage command
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.9.0
  * @access private
  */

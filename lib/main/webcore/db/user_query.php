@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage db
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.2.1
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/db/query.php');
  * Return {@link USER} for an {@link APPLICATION}.
  * @package webcore
  * @subpackage db
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.2.1
  * @abstract
  */

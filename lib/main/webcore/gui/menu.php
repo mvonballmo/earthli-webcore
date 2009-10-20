@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage gui
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.2.1
  */
 
@@ -43,7 +43,7 @@ http://www.earthli.com/software/webcore
  * to add items.
  * @package webcore
  * @subpackage gui
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.2.1
  */
 class MENU extends WEBCORE_OBJECT

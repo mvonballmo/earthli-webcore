@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage gui
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.5.0
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/gui/content_object_renderer.php');
  * Render details for {@link FOLDER}s.
  * @package webcore
  * @subpackage renderer
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.5.0
  */
 class FOLDER_RENDERER extends CONTENT_OBJECT_RENDERER

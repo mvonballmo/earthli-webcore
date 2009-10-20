@@ -6,7 +6,7 @@
  * @filesource
  * @package albums
  * @subpackage gui
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.7.0
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/gui/entry_grid.php');
  * Display {@link ALBUM_ENTRY}s from a {@link QUERY}.
  * @package albums
  * @subpackage gui
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.7.0
  */
 abstract class ALBUM_ENTRY_GRID extends CONTENT_OBJECT_GRID

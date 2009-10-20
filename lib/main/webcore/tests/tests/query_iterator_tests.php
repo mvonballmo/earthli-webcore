@@ -7,7 +7,7 @@
  * @filesource
  * @package webcore
  * @subpackage tests
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.7.0
  * @access private
  */
@@ -44,7 +44,7 @@ require_once ('webcore/tests/baseline_data_test_task.php');
 /**
  * @package webcore
  * @subpackage tests
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.7.0
  * @access private
  */

@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage grid
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.6.0
  */
 
@@ -45,7 +45,7 @@ require_once ('webcore/gui/theme_grid.php');
  * theme for the browser.
  * @package webcore
  * @subpackage grid
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.6.0
  */
 class THEME_SELECTOR_GRID extends THEME_GRID

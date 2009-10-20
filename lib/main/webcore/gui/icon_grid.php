@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage grid
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.5.0
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/gui/grid.php');
  * Displays {@link ICON}s from a {@link QUERY}.
  * @package webcore
  * @subpackage grid
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.5.0
  */
 class ICON_GRID extends STANDARD_GRID

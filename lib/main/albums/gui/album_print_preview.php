@@ -6,7 +6,7 @@
  * @filesource
  * @package albums
  * @subpackage gui
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.5.0
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/gui/print_preview.php');
  * Render a {@link PICTURE} for printing.
  * @package albums
  * @subpackage gui
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.5.0
  */
 class PICTURE_PRINT_RENDERER extends ENTRY_PRINT_RENDERER
@@ -62,7 +62,7 @@ class PICTURE_PRINT_RENDERER extends ENTRY_PRINT_RENDERER
  * Handle printing entries in an {@link ALBUM}.
  * @package albums
  * @subpackage gui
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.7.0
  * @access private
  */
@@ -97,7 +97,7 @@ class ALBUM_PRINT_RENDERER_OPTIONS extends PRINT_RENDERER_OPTIONS
  * Handle printing entries in an {@link ALBUM}.
  * @package albums
  * @subpackage gui
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.5.0
  */
 class ALBUM_PRINT_PREVIEW extends PRINT_PREVIEW

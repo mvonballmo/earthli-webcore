@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage command
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.7.0
  * @access private
  */
@@ -44,7 +44,7 @@ require_once ('webcore/cmd/commands.php');
  * Return the commands for an {@link ENTRY}.
  * @package webcore
  * @subpackage command
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.7.0
  * @access private
  */
@@ -214,7 +214,7 @@ class ENTRY_COMMANDS extends COMMANDS
  * Return the commands for an {@link DRAFTABLE_ENTRY}.
  * @package webcore
  * @subpackage command
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.7.1
  * @access private
  */

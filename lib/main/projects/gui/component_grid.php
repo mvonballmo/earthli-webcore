@@ -6,7 +6,7 @@
  * @filesource
  * @package projects
  * @subpackage gui
- * @version 3.1.0
+ * @version 3.2.0
  * @since 1.4.1
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/gui/grid.php');
  * Display a list of {@link COMPONENT}s from a {@link QUERY}.
  * @package projects
  * @subpackage gui
- * @version 3.1.0
+ * @version 3.2.0
  * @since 1.7.0
  */
 class COMPONENT_GRID extends STANDARD_GRID

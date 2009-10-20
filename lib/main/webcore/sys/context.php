@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage sys
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.2.1
  */
 
@@ -48,7 +48,7 @@ require_once ('webcore/sys/resolver.php');
  * Base class for {@link PAGE}s and {@link APPLICATION}s.
  * @package webcore
  * @subpackage sys
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.2.1
  */
 class CONTEXT extends RESOLVER

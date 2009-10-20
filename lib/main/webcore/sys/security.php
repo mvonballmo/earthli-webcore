@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage security
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.5.0
  * @access private
  */
@@ -58,7 +58,7 @@ define ("Security_create_admin", 2);
  * Used by {@link FOLDER}s to determine a {@link USER}'s rights.
  * @package webcore
  * @subpackage security
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.5.0
  * @access private
  */
@@ -318,7 +318,7 @@ class FOLDER_PERMISSIONS extends NAMED_OBJECT
  * @see FOLDER::security()
  * @package webcore
  * @subpackage security
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.5.0
  * @access private
  */
@@ -692,7 +692,7 @@ class FOLDER_SECURITY extends FOLDER_INHERITABLE_SETTINGS
  * administer.
  * @package webcore
  * @subpackage security
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.5.0
  * @access private
  */
@@ -890,7 +890,7 @@ class PERMISSIONS_FORMATTER extends WEBCORE_OBJECT
  * Describes a group of displayed privileges.
  * @package webcore
  * @subpackage security
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.5.0
  * @access private
  */
@@ -935,7 +935,7 @@ class PRIVILEGE_GROUP
  * Contains a list of privilege set/type pairs to which this privilege maps.
  * @package webcore
  * @subpackage security
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.5.0
  * @access private
  */

@@ -6,7 +6,7 @@
  * @filesource
  * @package projects
  * @subpackage db
- * @version 3.1.0
+ * @version 3.2.0
  * @since 1.4.1
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/db/user_entry_query.php');
  * Retrieves {@link BRANCH}es visible to a {@link PROJECT_USER}.
  * @package projects
  * @subpackage db
- * @version 3.1.0
+ * @version 3.2.0
  * @since 1.4.1
  */
 class PROJECT_USER_BRANCH_QUERY extends USER_ENTRY_QUERY

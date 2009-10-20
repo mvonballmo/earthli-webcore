@@ -6,7 +6,7 @@
  * @filesource
  * @package projects
  * @subpackage obj
- * @version 3.1.0
+ * @version 3.2.0
  * @since 1.4.1
  * @access private
  */
@@ -44,7 +44,7 @@ require_once ('webcore/obj/webcore_history_items.php');
  * Manages the audit trail of a {@link PROJECT_ENTRY}.
  * @package projects
  * @subpackage obj
- * @version 3.1.0
+ * @version 3.2.0
  * @since 1.4.1
  * @access private
  */
@@ -144,7 +144,7 @@ class PROJECT_ENTRY_HISTORY_ITEM extends ENTRY_HISTORY_ITEM
  * Manages the audit trail of a {@link JOB}.
  * @package projects
  * @subpackage obj
- * @version 3.1.0
+ * @version 3.2.0
  * @since 1.4.1
  * @access private
  */
@@ -206,7 +206,7 @@ class JOB_HISTORY_ITEM extends PROJECT_ENTRY_HISTORY_ITEM
  * Manages the audit trail of a {@link CHANGE}.
  * @package projects
  * @subpackage obj
- * @version 3.1.0
+ * @version 3.2.0
  * @since 1.4.1
  * @access private
  */
@@ -236,7 +236,7 @@ class CHANGE_HISTORY_ITEM extends PROJECT_ENTRY_HISTORY_ITEM
  * Manages the audit trail of a {@link BRANCH}.
  * @package projects
  * @subpackage obj
- * @version 3.1.0
+ * @version 3.2.0
  * @since 1.4.1
  * @access private
  */
@@ -270,7 +270,7 @@ class BRANCH_HISTORY_ITEM extends OBJECT_IN_FOLDER_HISTORY_ITEM
  * Manages the audit trail of a {@link RELEASE}.
  * @package projects
  * @subpackage obj
- * @version 3.1.0
+ * @version 3.2.0
  * @since 1.4.1
  * @access private
  */
@@ -308,7 +308,7 @@ class RELEASE_HISTORY_ITEM extends OBJECT_IN_FOLDER_HISTORY_ITEM
  * Manages the audit trail of a {@link COMPONENT}.
  * @package projects
  * @subpackage obj
- * @version 3.1.0
+ * @version 3.2.0
  * @since 1.7.0
  * @access private
  */
@@ -339,7 +339,7 @@ class COMPONENT_HISTORY_ITEM extends OBJECT_IN_FOLDER_HISTORY_ITEM
  * Manages the audit trail of a {@link PROJECT}.
  * @package projects
  * @subpackage obj
- * @version 3.1.0
+ * @version 3.2.0
  * @since 1.4.1
  * @access private
  */

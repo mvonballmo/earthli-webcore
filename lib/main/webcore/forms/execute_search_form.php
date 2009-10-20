@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage forms
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.5.0
  */
 
@@ -45,7 +45,7 @@ require_once ('webcore/obj/search.php');
  * Create a filter for objects in a WebCore application.
  * @package webcore
  * @subpackage forms
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.5.0
  */
 class EXECUTE_SEARCH_FORM extends ID_BASED_FORM

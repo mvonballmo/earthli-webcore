@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage renderer
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.7.0
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/gui/object_renderer.php');
  * Renders an {@link ICON} as HTML.
  * @package webcore
  * @subpackage renderer
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.7.0
  */
 class ICON_RENDERER extends OBJECT_RENDERER

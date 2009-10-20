@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage forms
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.2.1
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/forms/folder_permissions_form.php');
  * Update {@link PERMISSIONS} for a {@link GROUP} in a {@link FOLDER}.
  * @package webcore
  * @subpackage forms
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.2.1
  */
 class FOLDER_GROUP_PERMISSIONS_FORM extends FOLDER_PERMISSIONS_FORM

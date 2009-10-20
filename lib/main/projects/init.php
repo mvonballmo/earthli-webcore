@@ -8,7 +8,7 @@
  * @author Marco Von Ballmoos
  * @filesource
  * @package projects
- * @version 3.1.0
+ * @version 3.2.0
  * @since 1.4.1
  */
 

@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage util
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.5.0
  */
 
@@ -70,7 +70,7 @@ define ('Image_type_PNG', 3);
  * an image as HTML with constrained dimensions.
  * @package webcore
  * @subpackage util
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.5.0
  */
 class IMAGE extends RAISABLE
@@ -345,7 +345,7 @@ class IMAGE extends RAISABLE
  * will be available for all cameras.
  * @package webcore
  * @subpackage util
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.5.0
  */
 class IMAGE_PROPERTIES
@@ -690,7 +690,7 @@ class IMAGE_PROPERTIES
  * get the image in its current size (a link is added if the image has been resized).
  * @package webcore
  * @subpackage util
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.5.0
  */
 class IMAGE_METRICS
@@ -934,7 +934,7 @@ class IMAGE_METRICS
  * get the image in its current size (a link is added if the image has been resized).
  * @package webcore
  * @subpackage util
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.7.0
  */
 class THUMBNAIL_CREATOR extends WEBCORE_OBJECT

@@ -6,7 +6,7 @@
  * @author Marco Von Ballmoos
  * @filesource
  * @package albums
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.8.0
  */
 
@@ -45,7 +45,7 @@ require_once ('albums/init.php');
  * {@link ENVIRONMENT::register_application()} for help on customizing the
  * application creation and initialization.
  * @global ALBUM_APPLICATION $App
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.5.0
  */
 $App = $Page->make_application (Album_application_id, true, true);

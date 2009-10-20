@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage command
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.7.0
  * @access private
  */
@@ -44,7 +44,7 @@ require_once ('webcore/cmd/commands.php');
  * Return the commands for a {@link THEME}.
  * @package webcore
  * @subpackage command
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.7.0
  * @access private
  */

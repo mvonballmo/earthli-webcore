@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage db
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.2.1
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/db/user_entry_sub_object_query.php');
  * Return {@link COMMENT}s visible to a {@link USER}.
  * @package webcore
  * @subpackage db
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.2.1
  */
 class USER_COMMENT_QUERY extends USER_ENTRY_SUB_OBJECT_QUERY
@@ -119,7 +119,7 @@ class USER_COMMENT_QUERY extends USER_ENTRY_SUB_OBJECT_QUERY
  * Return {@link COMMENT}s visible to a {@link USER} in an application with {@link MULTI_TYPE_ENTRY}s.
  * @package webcore
  * @subpackage db
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.2.1
  */
 class USER_MULTI_TYPE_COMMENT_QUERY extends USER_COMMENT_QUERY

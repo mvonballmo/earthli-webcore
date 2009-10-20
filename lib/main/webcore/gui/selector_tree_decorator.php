@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage tree
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.2.1
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/gui/tree.php');
  * A decorator that adds a radio button to each selectable node.
  * @package webcore
  * @subpackage tree
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.2.1
  * @access private
  */
@@ -77,7 +77,7 @@ class SELECTOR_TREE_DECORATOR extends TREE_DECORATOR
  * A decorator that adds a checkbox to each selectable node.
  * @package webcore
  * @subpackage tree
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.2.1
  * @access private
  */

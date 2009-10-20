@@ -6,7 +6,7 @@
  * @filesource
  * @package albums
  * @subpackage forms
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.7.0
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/forms/search_fields.php');
  * Create a filter for {@link PICTURE}s.
  * @package albums
  * @subpackage forms
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.7.0
  */
 class SEARCH_PICTURE_FIELDS extends SEARCH_ENTRY_FIELDS
@@ -63,7 +63,7 @@ class SEARCH_PICTURE_FIELDS extends SEARCH_ENTRY_FIELDS
  * Create a filter for {@link JOURNAL}s.
  * @package albums
  * @subpackage forms
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.7.0
  */
 class SEARCH_JOURNAL_FIELDS extends SEARCH_ENTRY_FIELDS

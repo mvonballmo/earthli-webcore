@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage page
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.2.1
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/gui/themed_page_renderer.php');
  * Provides print-setup and browser-detection.
  * @package webcore
  * @subpackage page
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.2.1
  */
 class WEBCORE_PAGE_RENDERER extends THEMED_PAGE_RENDERER

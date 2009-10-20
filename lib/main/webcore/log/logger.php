@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage log
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.2.1
  */
 
@@ -199,7 +199,7 @@ function log_close_block ()
  * Separated from the logger to facilitate sharing.
  * @package webcore
  * @subpackage log
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.2.1
  * @access private
  */
@@ -276,7 +276,7 @@ class LOGGER_FILTER_SETTINGS
  * with other loggers.
  * @package webcore
  * @subpackage log
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.2.1
  * @abstract
  */
@@ -525,7 +525,7 @@ abstract class LOGGER extends LOGGER_CONTAINER
  * Does not record messages; records to null output.
  * @package webcore
  * @subpackage log
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.7.0
  */
 class NULL_LOGGER extends LOGGER

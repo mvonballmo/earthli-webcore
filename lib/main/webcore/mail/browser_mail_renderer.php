@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage mail
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.7.0
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/mail/mail_object_renderer.php');
  * Renders the contents of an {@link SUBMIT_BROWSER_FORM} for text or html email.
  * @package webcore
  * @subpackage mail
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.2.1
  */
 class BROWSER_MAIL_RENDERER extends RENDERER_BASED_MAIL_RENDERER

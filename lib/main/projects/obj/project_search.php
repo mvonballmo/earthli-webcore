@@ -6,7 +6,7 @@
  * @filesource
  * @package projects
  * @subpackage obj
- * @version 3.1.0
+ * @version 3.2.0
  * @since 1.7.0
  */
 
@@ -44,7 +44,7 @@ require_once ('projects/forms/project_search_fields.php');
  * A filter for {@link JOB}s.
  * @package projects
  * @subpackage obj
- * @version 3.1.0
+ * @version 3.2.0
  * @since 1.7.0
  */
 class JOB_SEARCH extends MULTI_ENTRY_SEARCH
@@ -67,7 +67,7 @@ class JOB_SEARCH extends MULTI_ENTRY_SEARCH
  * A filter for {@link CHANGE}s.
  * @package projects
  * @subpackage obj
- * @version 3.1.0
+ * @version 3.2.0
  * @since 1.7.0
  */
 class CHANGE_SEARCH extends MULTI_ENTRY_SEARCH

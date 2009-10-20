@@ -6,7 +6,7 @@
  * @filesource
  * @package projects
  * @subpackage command
- * @version 3.1.0
+ * @version 3.2.0
  * @since 1.9.0
  * @access private
  */
@@ -44,7 +44,7 @@ require_once ('webcore/cmd/commands.php');
  * Commands which apply to an {@link BRANCH}.
  * @package projects
  * @subpackage command
- * @version 3.1.0
+ * @version 3.2.0
  * @since 1.9.0
  * @access private
  */

@@ -4,7 +4,7 @@
  * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.5.0
  * @package webcore
  * @subpackage forms-core
@@ -231,7 +231,7 @@ abstract class PREVIEWABLE_FORM extends FORM
  * Forms that use an id as foreign key.
  * @package webcore
  * @subpackage forms-core
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.5.0
  * @abstract
  */
@@ -277,7 +277,7 @@ abstract class PREVIEWABLE_ID_BASED_FORM extends PREVIEWABLE_FORM
 
 /**
  * Represents an object to preview in a form.
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.5.0
  * @package webcore
  * @subpackage forms-core

@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage mail
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.2.1
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/gui/renderer.php');
  * Base class for all email rendering.
  * @package webcore
  * @subpackage mail
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.2.1
  */
 class MAIL_RENDERER extends RENDERER
@@ -104,7 +104,7 @@ class MAIL_RENDERER extends RENDERER
  * Stores the state of an application for a {@link MAIL_RENDERER}.
  * @package webcore
  * @subpackage mail
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.6.0 
  * @access private
  */

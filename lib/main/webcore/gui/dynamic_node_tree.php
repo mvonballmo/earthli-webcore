@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage tree
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.2.1
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/gui/dynamic_tree.php');
  * A dynamic tree control that displays {@link TREE_NODE}s.
  * @package webcore
  * @subpackage tree
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.2.1
  */
 class DYNAMIC_NODE_TREE extends DYNAMIC_TREE

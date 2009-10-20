@@ -6,7 +6,7 @@
  * @filesource
  * @package projects
  * @subpackage obj
- * @version 3.1.0
+ * @version 3.2.0
  * @since 1.4.1
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/obj/folder.php');
  * Holds {@link CHANGE}s, {@link JOB}s and {@link RELEASE}s to define a project.
  * @package projects
  * @subpackage obj
- * @version 3.1.0
+ * @version 3.2.0
  * @since 1.4.1
  */
 class PROJECT extends FOLDER

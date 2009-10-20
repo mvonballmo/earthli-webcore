@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage forms
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.5.0
  */
 
@@ -44,7 +44,7 @@ require_once ('webcore/gui/layer.php');
  * Create a filter for {@link OBJECT_IN_FOLDER} objects.
  * @package webcore
  * @subpackage forms
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.5.0
  */
 class STORE_SEARCH_FORM extends RENDERABLE_FORM

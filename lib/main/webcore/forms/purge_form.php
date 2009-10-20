@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage forms
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.7.0
  */
 
@@ -45,7 +45,7 @@ require_once ('webcore/forms/renderable_form.php');
  * have a state flag that allows them to be marked as deleted without purging from the database.
  * @package webcore
  * @subpackage forms
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.5.0
  */
 class PURGE_OBJECT_FORM extends RENDERABLE_FORM

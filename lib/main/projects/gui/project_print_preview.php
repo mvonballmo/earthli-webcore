@@ -6,7 +6,7 @@
  * @filesource
  * @package projects
  * @subpackage gui
- * @version 3.1.0
+ * @version 3.2.0
  * @since 1.4.1
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/gui/print_preview.php');
  * Handle printing entries in an {@link ALBUM}.
  * @package projects
  * @subpackage gui
- * @version 3.1.0
+ * @version 3.2.0
  * @since 1.7.0
  * @access private
  */
@@ -76,7 +76,7 @@ class PROJECT_PRINT_RENDERER_OPTIONS extends PRINT_RENDERER_OPTIONS
  * Handle printing {@link CHANGE}s and {@link JOB}s in {@link PROJECT}s.
  * @package projects
  * @subpackage gui
- * @version 3.1.0
+ * @version 3.2.0
  * @since 1.4.1
  */
 class PROJECT_PRINT_PREVIEW extends PRINT_PREVIEW

@@ -6,7 +6,7 @@
  * @filesource
  * @package albums
  * @subpackage obj
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.7.0
  */
 
@@ -44,7 +44,7 @@ require_once ('albums/forms/album_search_fields.php');
  * A filter for {@link PICTURE}s.
  * @package albums
  * @subpackage obj
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.7.0
  */
 class PICTURE_SEARCH extends MULTI_ENTRY_SEARCH
@@ -67,7 +67,7 @@ class PICTURE_SEARCH extends MULTI_ENTRY_SEARCH
  * A filter for {@link JOURNAL}s.
  * @package albums
  * @subpackage obj
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.7.0
  */
 class JOURNAL_SEARCH extends MULTI_ENTRY_SEARCH

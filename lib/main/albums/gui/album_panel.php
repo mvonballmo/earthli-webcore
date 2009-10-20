@@ -6,7 +6,7 @@
  * @filesource
  * @package albums
  * @subpackage gui
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.5.0
  */
 
@@ -77,7 +77,7 @@ function _configure_album_panels ($manager)
  * Manage a list of {@link PANEL}s for all {@link ALBUM}s.
  * @package albums
  * @subpackage gui
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.5.0
  */
 class ALBUM_INDEX_PANEL_MANAGER extends INDEX_PANEL_MANAGER
@@ -97,7 +97,7 @@ class ALBUM_INDEX_PANEL_MANAGER extends INDEX_PANEL_MANAGER
  * Manage a list of {@link PANEL}s associated with {@link ALBUM}s.
  * @package albums
  * @subpackage gui
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.5.0
  */
 class ALBUM_FOLDER_PANEL_MANAGER extends FOLDER_PANEL_MANAGER
@@ -125,7 +125,7 @@ class ALBUM_FOLDER_PANEL_MANAGER extends FOLDER_PANEL_MANAGER
  * Manage a list of {@link PANEL}s associated with {@link USER}s.
  * @package albums
  * @subpackage gui
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.5.0
  */
 class ALBUM_USER_PANEL_MANAGER extends USER_PANEL_MANAGER

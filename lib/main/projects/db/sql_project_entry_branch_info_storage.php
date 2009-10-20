@@ -6,7 +6,7 @@
  * @filesource
  * @package projects
  * @subpackage db
- * @version 3.1.0
+ * @version 3.2.0
  * @since 1.4.1
  * @access private
  */
@@ -44,7 +44,7 @@ require_once ('webcore/db/sql_unique_storage.php');
  * Specialized storage for {@link JOB_BRANCH_INFO} objects.
  * @package projects
  * @subpackage db
- * @version 3.1.0
+ * @version 3.2.0
  * @since 1.4.1
  * @access private
  */

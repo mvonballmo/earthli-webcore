@@ -6,7 +6,7 @@
  * @filesource
  * @package projects
  * @subpackage db
- * @version 3.1.0
+ * @version 3.2.0
  * @since 1.4.1
  */
 
@@ -44,7 +44,7 @@ require_once ('projects/db/project_query_toolkit.php');
  * Retrieves {@link RELEASE} related to a particular {@link PROJECT}.
  * @package projects
  * @subpackage db
- * @version 3.1.0
+ * @version 3.2.0
  * @since 1.4.1
  */
 class PROJECT_RELEASE_QUERY extends FOLDER_ENTRY_QUERY

@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage log
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.2.1
  */
 
@@ -46,7 +46,7 @@ require_once ('webcore/log/text_output_logger.php');
  * if the page fails to load completely.
  * @package webcore
  * @subpackage log
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.2.1
  */
 class JS_CONSOLE_LOGGER extends TEXT_OUTPUT_LOGGER

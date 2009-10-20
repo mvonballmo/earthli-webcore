@@ -6,7 +6,7 @@
  * @filesource
  * @package albums
  * @subpackage db
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.5.0
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/db/user_folder_query.php');
  * Retrieves {@link ALBUM}s visible to an {@link USER}.
  * @package albums
  * @subpackage db
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.5.0
  */
 class USER_ALBUM_QUERY extends USER_FOLDER_QUERY

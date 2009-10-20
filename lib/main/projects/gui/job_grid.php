@@ -6,7 +6,7 @@
  * @filesource
  * @package projects
  * @subpackage gui
- * @version 3.1.0
+ * @version 3.2.0
  * @since 1.4.1
  */
 
@@ -43,7 +43,7 @@ require_once ('projects/gui/project_entry_grid.php');
  * Display a list of {@link JOB}s from a {@link QUERY}.
  * @package projects
  * @subpackage gui
- * @version 3.1.0
+ * @version 3.2.0
  * @since 1.4.1
  */
 class JOB_GRID extends PROJECT_ENTRY_GRID
@@ -194,7 +194,7 @@ class JOB_GRID extends PROJECT_ENTRY_GRID
  * Display {@link JOB}s from a {@link QUERY}.
  * @package projects
  * @subpackage gui
- * @version 3.1.0
+ * @version 3.2.0
  * @since 1.4.1
  */
 class JOB_SUMMARY_GRID extends PROJECT_ENTRY_SUMMARY_GRID

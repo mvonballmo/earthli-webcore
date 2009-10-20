@@ -6,7 +6,7 @@
  * @filesource
  * @package news
  * @subpackage forms
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.4.0
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/forms/object_in_folder_form.php');
  * Edit or create an {@link ARTICLE}.
  * @package news
  * @subpackage forms
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.4.0
  */
 class ARTICLE_FORM extends DRAFTABLE_ENTRY_FORM

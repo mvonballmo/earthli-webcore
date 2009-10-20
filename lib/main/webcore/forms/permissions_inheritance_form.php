@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage forms
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.5.0
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/forms/form.php');
  * Switch inheritance for {@link FOLDER} security settings.
  * @package webcore
  * @subpackage forms
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.5.0
  */
 class PERMISSIONS_INHERITANCE_FORM extends ID_BASED_FORM

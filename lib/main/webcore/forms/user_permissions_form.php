@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage forms
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.2.1
  */
 
@@ -44,7 +44,7 @@ require_once ('webcore/forms/permissions_form.php');
  * Presents content, folder, group and user {@link PERMISSIONS}.
  * @package webcore
  * @subpackage forms
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.2.1
  */
 class USER_PERMISSIONS_FORM extends PERMISSIONS_FORM

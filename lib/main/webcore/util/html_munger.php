@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage text
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.4.0
  */
 
@@ -45,7 +45,7 @@ require_once ('webcore/util/tags.php');
  * This assumes that the container for this text is an HTML block element.
  * @package webcore
  * @subpackage text
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.5.0
  * @access private
  */
@@ -183,7 +183,7 @@ class HTML_BLOCK_TRANSFORMER extends MUNGER_BLOCK_TRANSFORMER
  * Surrounds paragraphed text with quotes.
  * @package webcore
  * @subpackage text
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.5.0
  * @access private
  */
@@ -228,7 +228,7 @@ class HTML_QUOTE_TRANSFORMER extends HTML_BLOCK_TRANSFORMER
  * Generates HTML paragraphs and line-breaks for text.
  * @package webcore
  * @subpackage text
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.4.0
  * @access private
  */
@@ -263,7 +263,7 @@ class HTML_PARAGRAPH_TRANSFORMER extends HTML_BLOCK_TRANSFORMER
  * Generates HTML paragraphs and line-breaks for text.
  * @package webcore
  * @subpackage text
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.4.0
  * @access private
  */
@@ -289,7 +289,7 @@ class HTML_GESHI_CODE_TRANSFORMER extends MUNGER_TRANSFORMER
  * A block of items in an {@link HTML_LIST_TRANSFORMER}.
  * @package webcore
  * @subpackage text
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.6.0
  * @access private
  */
@@ -320,7 +320,7 @@ class HTML_LIST_TRANSFORMER_ITEM
  * Generates HTML list items for newlines in text.
  * @package webcore
  * @subpackage text
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.4.0
  * @access private
  */
@@ -476,7 +476,7 @@ class HTML_LIST_TRANSFORMER extends MUNGER_LIST_TRANSFORMER
  * Generates alternating defition terms and definitions for newlines in the text.
  * @package webcore
  * @subpackage text
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.5.0
  * @access private
  */
@@ -548,7 +548,7 @@ class HTML_DEFINITION_LIST_TRANSFORMER extends MUNGER_DEFINITION_LIST_TRANSFORME
  * @package webcore
  * @subpackage text
  * @access private
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.5.0
  */
 class HTML_BASIC_REPLACER extends MUNGER_BASIC_REPLACER
@@ -581,7 +581,7 @@ class HTML_BASIC_REPLACER extends MUNGER_BASIC_REPLACER
  * Adds a link to a footnote, numbering automatically.
  * @package webcore
  * @subpackage text
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.7.1
  * @access private
  */
@@ -606,7 +606,7 @@ class HTML_FOOTNOTE_REFERENCE_REPLACER extends MUNGER_FOOTNOTE_REFERENCE_REPLACE
  * Links a block of text to a previous footnote reference.
  * @package webcore
  * @subpackage text
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.7.1
  * @access private
  */
@@ -639,7 +639,7 @@ class HTML_FOOTNOTE_TEXT_REPLACER extends MUNGER_FOOTNOTE_TEXT_REPLACER
  * @package webcore
  * @subpackage text
  * @access private
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.7.0
  */
 class HTML_PUNCTUATION_CONVERTER extends MUNGER_CONVERTER
@@ -688,7 +688,7 @@ class HTML_PUNCTUATION_CONVERTER extends MUNGER_CONVERTER
  * @package webcore
  * @subpackage text
  * @access private
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.7.1
  */
 class HTML_SMART_QUOTE_CONVERTER extends MUNGER_CONVERTER
@@ -848,7 +848,7 @@ class HTML_SMART_QUOTE_CONVERTER extends MUNGER_CONVERTER
  * @package webcore
  * @subpackage text
  * @access private
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.7.1
  */
 class HTML_LIGATURE_CONVERTER extends MUNGER_CONVERTER
@@ -883,7 +883,7 @@ class HTML_LIGATURE_CONVERTER extends MUNGER_CONVERTER
  * @package webcore
  * @subpackage text
  * @access private
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.7.0
  */
 class HTML_HIGHLIGHT_CONVERTER extends MUNGER_CONVERTER
@@ -924,7 +924,7 @@ class HTML_HIGHLIGHT_CONVERTER extends MUNGER_CONVERTER
  * {@link _close_content_area()} for more information.
  * @package webcore
  * @subpackage text
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.7.1
  * @access private
  */
@@ -1376,7 +1376,7 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
  * Includes the width by default.
  * @package webcore
  * @subpackage text
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.7.1
  * @access private
  */
@@ -1395,7 +1395,7 @@ class HTML_DIV_REPLACER extends HTML_BASE_REPLACER
  * Format a block quote with basic properties.
  * @package webcore
  * @subpackage text
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.7.1
  * @access private
  */
@@ -1412,7 +1412,7 @@ class HTML_BLOCK_QUOTE_REPLACER extends HTML_DIV_REPLACER
  * Format a preformatted block with basic properties.
  * @package webcore
  * @subpackage text
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.8.0
  * @access private */
 class HTML_PREFORMATTED_BLOCK_REPLACER extends HTML_DIV_REPLACER
@@ -1430,7 +1430,7 @@ class HTML_PREFORMATTED_BLOCK_REPLACER extends HTML_DIV_REPLACER
  * <li>width [CSS width]: Specifies the width of the box. Useful for floated boxes.</li></ul>
  * @package webcore
  * @subpackage text
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.4.0
  * @access private
  */
@@ -1500,7 +1500,7 @@ class HTML_BOX_REPLACER extends HTML_DIV_REPLACER
  * <li>width [CSS width]: Specifies the width of the box. Useful for floated boxes.</li></ul>
  * @package webcore
  * @subpackage text
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.4.0
  * @access private
  */
@@ -1553,7 +1553,7 @@ class HTML_MUNGER_CODE_REPLACER extends HTML_PREFORMATTED_BLOCK_REPLACER
  * <li>href: URL to which to link. Adds a link wrapper around the image.</li></ul>
  * @package webcore
  * @subpackage text
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.7.1
  * @access private
  */
@@ -1613,7 +1613,7 @@ class HTML_INLINE_ASSET_REPLACER extends HTML_BASE_REPLACER
  * <li>href: URL to which to link. Adds a link wrapper around the image.</li></ul>
  * @package webcore
  * @subpackage text
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.4.0
  * @access private
  */
@@ -1751,7 +1751,7 @@ class HTML_IMAGE_REPLACER extends HTML_INLINE_ASSET_REPLACER
  * <li>src: URL for the image itself.</li></ul>
  * @package webcore
  * @subpackage text
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.7.1
  * @access private
  */
@@ -1872,7 +1872,7 @@ class HTML_MEDIA_REPLACER extends HTML_INLINE_ASSET_REPLACER
  * <li>href: URL to which to link.</li></ul>
  * @package webcore
  * @subpackage text
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.4.0
  * @access private
  */
@@ -1947,7 +1947,7 @@ class HTML_LINK_REPLACER extends HTML_BASE_REPLACER
  * <ul><li>id: ID for the anchor</li></ul>
  * @package webcore
  * @subpackage text
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.8.0
  * @access private
  */
@@ -1977,7 +1977,7 @@ class HTML_ANCHOR_REPLACER extends MUNGER_REPLACER
  * <ul><li>level: Kind of heading; analogous to HTML heading level. Default is level 3. </li></ul>
  * @package webcore
  * @subpackage text
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.5.0
  * @access private
  */
@@ -2025,7 +2025,7 @@ class HTML_HEADING_REPLACER extends MUNGER_REPLACER
  * Formats common tag-based format to HTML.
  * @package webcore
  * @subpackage text
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.2.1
  */
 class HTML_MUNGER extends MUNGER
@@ -2132,7 +2132,7 @@ class HTML_MUNGER extends MUNGER
  * and {@link HTML_TITLE_MUNGER}.
  * @package webcore
  * @subpackage text
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.8.0
  */
 class HTML_BASE_MUNGER extends HTML_MUNGER
@@ -2166,7 +2166,7 @@ class HTML_BASE_MUNGER extends HTML_MUNGER
  * Provides default support for mapping lists, preformatted, quoted and box blocks to standard HTML.
  * @package webcore
  * @subpackage text
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.2.1
  */
 class HTML_TEXT_MUNGER extends HTML_BASE_MUNGER
@@ -2228,7 +2228,7 @@ class HTML_TEXT_MUNGER extends HTML_BASE_MUNGER
  * HTML paragraphs and other blocks are not generated with this formatter.
  * @package webcore
  * @subpackage text
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.4.0
  */
 class HTML_TITLE_MUNGER extends HTML_BASE_MUNGER

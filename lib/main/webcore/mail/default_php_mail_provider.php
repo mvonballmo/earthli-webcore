@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage mail
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.2.1
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/mail/mail_provider.php');
  * Send mail using the PHP 'mail' function.
  * @package webcore
  * @subpackage mail
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.2.1
  */
 class DEFAULT_PHP_MAIL_PROVIDER extends MAIL_PROVIDER

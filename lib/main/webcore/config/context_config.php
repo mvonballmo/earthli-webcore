@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage config
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.5.0
  */
 
@@ -67,7 +67,7 @@ define ('Tag_builder_html', 'html_tag');
  * @see CONTEXT::$display_options
  * @package webcore
  * @subpackage config
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.2.1
  */
 class CONTEXT_DISPLAY_OPTIONS
@@ -180,7 +180,7 @@ class CONTEXT_DISPLAY_OPTIONS
  * @see CONTEXT::$mail_options
  * @package webcore
  * @subpackage config
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.2.1
  */
 class CONTEXT_MAIL_OPTIONS
@@ -261,7 +261,7 @@ class CONTEXT_MAIL_OPTIONS
  * @see CONTEXT::$database_options
  * @package webcore
  * @subpackage config
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.5.0
  */
 class CONTEXT_DATABASE_OPTIONS
@@ -302,7 +302,7 @@ class CONTEXT_DATABASE_OPTIONS
  * @see CONTEXT::$upload_options
  * @package webcore
  * @subpackage config
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.5.0
  */
 class CONTEXT_UPLOAD_OPTIONS
@@ -347,7 +347,7 @@ class CONTEXT_UPLOAD_OPTIONS
  * Options used to store date to a client.
  * @package webcore
  * @subpackage config
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.6.1
  */
 class CONTEXT_STORAGE_OPTIONS

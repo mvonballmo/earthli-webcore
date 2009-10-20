@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage config
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.7.0
  */
 
@@ -45,7 +45,7 @@ include_once ('webcore/sys/resolver.php');
  * Redefine the {@link _init_application()} method.
  * @package webcore
  * @subpackage config
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.7.0
  */
 class APPLICATION_ENGINE extends RESOLVER

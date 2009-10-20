@@ -6,7 +6,7 @@
  * @filesource
  * @package albums
  * @subpackage gui
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.5.0
  */
 
@@ -43,7 +43,7 @@ require_once ('albums/gui/album_entry_grid.php');
  * Display {@link PICTURE}s from a {@link QUERY}.
  * @package albums
  * @subpackage gui
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.5.0
  */
 class PICTURE_GRID extends ALBUM_ENTRY_GRID
@@ -151,7 +151,7 @@ class PICTURE_GRID extends ALBUM_ENTRY_GRID
  * Display {@link PICTURE}s from a {@link QUERY}.
  * @package albums
  * @subpackage gui
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.5.0
  */
 class PICTURE_SUMMARY_GRID extends ENTRY_SUMMARY_GRID

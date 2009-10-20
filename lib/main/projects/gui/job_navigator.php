@@ -6,7 +6,7 @@
  * @filesource
  * @package projects
  * @subpackage gui
- * @version 3.1.0
+ * @version 3.2.0
  * @since 1.4.1
  */
 
@@ -43,7 +43,7 @@ require_once ('projects/gui/project_entry_navigator.php');
  * Display a list of {@link JOB}s 'around' the current one.
  * @package projects
  * @subpackage gui
- * @version 3.1.0
+ * @version 3.2.0
  * @since 1.4.1
  */
 class JOB_NAVIGATOR extends PROJECT_ENTRY_NAVIGATOR

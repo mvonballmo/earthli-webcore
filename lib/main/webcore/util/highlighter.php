@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage util
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.6.0
  */
 
@@ -46,7 +46,7 @@ require_once ('webcore/obj/webcore_object.php');
  * PHP function {@link PHP_MANUAL#highlight_file}.
  * @package webcore
  * @subpackage util
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.6.0
  * @access private
  */

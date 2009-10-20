@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage grid
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.2.1
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/gui/object_in_folder_grid.php');
  * Display {@link ENTRY} objects as the result of a {@link SEARCH}.
  * @package webcore
  * @subpackage gui
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.7.0
  */
 class ENTRY_SUMMARY_GRID extends OBJECT_IN_FOLDER_SUMMARY_GRID
@@ -54,7 +54,7 @@ class ENTRY_SUMMARY_GRID extends OBJECT_IN_FOLDER_SUMMARY_GRID
  * Display {@link DRAFTABLE_ENTRY} objects as the result of a {@link SEARCH}.
  * @package webcore
  * @subpackage gui
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.7.0
  */
 class DRAFTABLE_ENTRY_SUMMARY_GRID extends ENTRY_SUMMARY_GRID

@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage page
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.2.1
  */
 
@@ -47,7 +47,7 @@ require_once ('webcore/obj/webcore_object.php');
  * rendering).
  * @package webcore
  * @subpackage page
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.2.1
  */
 class PAGE_RENDERER extends WEBCORE_OBJECT

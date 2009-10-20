@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage obj
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.2.1
  */
 
@@ -53,7 +53,7 @@ require_once ('webcore/sys/date_time.php');
  * and either find the existing id for the given email or create a new record.
  * @package webcore
  * @subpackage obj
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.2.1
  */
 class SUBSCRIBER extends UNIQUE_OBJECT

@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage sys
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.7.0
  */
 
@@ -56,7 +56,7 @@ define ('Type_info_reg_prefix', '__type_info_');
  * and resolve URLs using the API of the parent class, {@link RESOURCE_MANAGER}.
  * @package webcore
  * @subpackage sys
- * @version 3.1.0
+ * @version 3.2.0
  * @since 2.7.0
  */
 class RESOLVER extends RESOURCE_MANAGER
