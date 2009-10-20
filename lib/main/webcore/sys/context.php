@@ -337,6 +337,16 @@ class CONTEXT extends RESOLVER
   }
 
   /**
+   * Customizable tag stripper.
+   * This is specialized for stripping titles of tags.
+   * @return MUNGER_STRIPPER
+   */
+  public function title_stripper ()
+  {
+    return $this->make_object ('munger_strpper', 'MUNGER_DEFAULT_TITLE_STRIPPER', 'webcore/util/munger_stripper.php');
+  }
+
+  /**
    * Create a validator for {@link MUNGER} tags.
    * Used by {@link FORM}s to validate text input. The form can request either a single-line or a multi-line
    * validator (single-line generally supports fewer tags).

@@ -2144,9 +2144,9 @@ class HTML_BASE_MUNGER extends HTML_MUNGER
     $this->register_known_tag ('span', true);
     $this->register_replacer ('i', new MUNGER_BASIC_REPLACER ('<em>', '</em>'));
     $this->register_replacer ('b', new MUNGER_BASIC_REPLACER ('<strong>', '</strong>'));
-    $this->register_replacer ('n', new MUNGER_BASIC_REPLACER ('<span class="notes">', '</span>'));
+    $this->register_replacer ('n', new MUNGER_BASIC_REPLACER ('<small class="notes">', '</small>'));
     $this->register_replacer ('c', new MUNGER_BASIC_REPLACER ('<code>', '</code>'));
-    $this->register_replacer ('hl', new MUNGER_BASIC_REPLACER ('<span class="highlight">', '</span>'));
+    $this->register_replacer ('hl', new MUNGER_BASIC_REPLACER ('<strong class="highlight">', '</strong>'));
     $this->register_known_tag ('var', true);  // program variables
     $this->register_known_tag ('kbd', true);  // keyboard input
     $this->register_known_tag ('dfn', true);  // defining instance of a term

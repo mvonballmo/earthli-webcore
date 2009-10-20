@@ -105,10 +105,24 @@ class PAGE_TITLE extends WEBCORE_OBJECT
     if (!empty($this->_objects))
     {
       $objs = array_reverse($this->_objects);
+      $titles = null;
       
       foreach ($objs as $obj)
       {
-        $titles [] = $opts->convert_to_html_entities ($obj->title_as_plain_text ());
+        if (empty($titles))
+        {
+          // Do not truncate the first, most important title in the list
+          
+          $formatter = $obj->title_formatter ();
+          $formatter->max_visible_output_chars = 0;
+          $title = $opts->convert_to_html_entities ($obj->title_as_plain_text ($formatter));
+        }
+        else 
+        {
+          $title = $opts->convert_to_html_entities ($obj->title_as_plain_text ());
+        }
+        
+        $titles [] = $title; 
       }
       
       $text = join ($this->separator, $titles);

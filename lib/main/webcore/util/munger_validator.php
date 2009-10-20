@@ -217,7 +217,6 @@ class MUNGER_VALIDATOR extends MUNGER_PARSER
     $this->errors = array ();
     $this->_line_number = 1;
     $this->_column = 0;
-    $this->_num_chars = 0;
     $this->_process ($input);
 
     while (($tag = array_pop ($this->_open_tags)))
@@ -394,6 +393,12 @@ class MUNGER_VALIDATOR extends MUNGER_PARSER
    */
   protected $_open_tags = array ();
 
+  /**
+   * @var array[string,MUNGER_VALIDATOR_TAG_INFO]
+   * @access private
+   */
+  protected $_known_tags;
+  
   /**
    * Current line number.
    * @see _update_position()

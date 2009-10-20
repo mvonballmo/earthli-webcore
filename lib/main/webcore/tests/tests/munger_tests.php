@@ -57,6 +57,7 @@ class MUNGER_TEST_TASK extends MUNGER_BASE_TEST_TASK
     $this->_run_token_tests ();
     $this->_run_attribute_tests ();
     $this->_run_validator_tests ();
+    $this->_run_stripper_tests ();
     $this->_run_sanitize_words_tests();
     $this->_run_plain_text_tests ();
     $this->_run_html_tests ();
@@ -210,6 +211,219 @@ Footnote reference.<fn>\r
 <media>(media)
 <page>That was a page marker.
 ", 0);
+  }
+  
+  protected function _run_stripper_tests ()
+  {
+    $this->_stripper = new MUNGER_DEFAULT_TITLE_STRIPPER ();
+    $this->_stripper->strip_unknown_tags = true;
+    $this->_run_stripper_test ("<span class=\"notes\">Test</span>", "Test");
+    $this->_run_stripper_test ("</div>", "");
+    $this->_run_stripper_test ("</img>", "");
+    $this->_run_stripper_test ("Try <div><n>Bla</div> and no error occurs.", "Try Bla and no error occurs.");
+    $this->_run_stripper_test ("<div class=\"notes\" align=\"center\" width=\"100px\">Test</span>", "Test");
+    $this->_run_stripper_test ("<div class=\"notes\" align=\"center\" width=\"100px\">Test</div>", "Test");
+    $this->_run_stripper_test ("\r
+Testing headings.\r
+\r
+\r
+Testing headings.\r
+\r
+<h level=\"1\"><b style=\"width: 50px\">H1 heading</h>\r
+\r
+Here's some text under this heading\r
+Here's some text under this heading\r
+Here's some text under this heading\r
+Here's some text under this heading\r
+Here's some text under this heading\r
+Here's some text under this heading\r
+Here's some text under this heading\r
+\r
+<h>Normal title</h></p>\r
+\r\nHere's some text under this heading (level 3).\r
+\r
+<h level=\"high\">Bogus heading</h>\r
+Here's some text under this heading\r
+Here's some text under this heading\r
+Here's some text under this heading\r
+\r
+<h level=\"1\"><b styl=\"width: 50px\">H1 heading</h>\r
+\r
+Here's some text under this heading\r
+\r
+<h>Normal title</h></p>\r
+\r
+Here's some text under this heading (level 3).\r
+\r
+<h level=\"high\">Bogus heading</h>\r
+\r
+\r
+Here's some text under this heading (level 3).\r
+Here's some text under this heading (level 3).\r
+Here's some text under this heading (level 3).\r
+Here's some text under this heading (level 3).\r
+Here's some text under this heading (level 3).\r
+\r
+\r
+<h>Multi-line\r
+heading</h2>\r
+\r
+", "\r
+Testing headings.\r
+\r
+\r
+Testing headings.\r
+\r
+H1 heading\r
+\r
+Here's some text under this heading\r
+Here's some text under this heading\r
+Here's some text under this heading\r
+Here's some text under this heading\r
+Here's some text under this heading\r
+Here's some text under this heading\r
+Here's some text under this heading\r
+\r
+Normal title\r
+\r\nHere's some text under this heading (level 3).\r
+\r
+Bogus heading\r
+Here's some text under this heading\r
+Here's some text under this heading\r
+Here's some text under this heading\r
+\r
+H1 heading\r
+\r
+Here's some text under this heading\r
+\r
+Normal title\r
+\r
+Here's some text under this heading (level 3).\r
+\r
+Bogus heading\r
+\r
+\r
+Here's some text under this heading (level 3).\r
+Here's some text under this heading (level 3).\r
+Here's some text under this heading (level 3).\r
+Here's some text under this heading (level 3).\r
+Here's some text under this heading (level 3).\r
+\r
+\r
+Multi-line\r
+heading\r
+\r
+");
+    
+    $this->_run_stripper_test ("<bq quote_style=\"none\">Content</bq>\r
+<bq quote_style=\"single\">Content</bq>\r
+<bq quote_style=\"multiple\">Content</bq>", "Content\r
+Content\r
+Content");
+    
+    $this->_run_stripper_test ("
+<span class=\"test\">span</span>
+<i>italics</i>
+<b>bold</b>
+<n>notes</n>
+<c>code</c>
+<hl>highlight</hl>
+<var>variable</var>
+<kbd>keyboard</kbd>
+<dfn>definition</dfn>
+<abbr>abbreviation</abbr>
+<cite>citation</cite>
+<macro>(macro)
+<h>This is a section header</h>
+<div>A simple documentation division in the text flow.</div>
+<clear>Cleared a floating element
+<pre>This is preformatted text.</pre>
+<box>A simple box in the text flow.</box>
+<code>if (SomeCondition)
+{
+  foreach (var item in Items)
+  {
+    RunSomeBackupProcess(item);
+  }
+}</code>
+<iq>inline quote</iq>
+<bq>This is a famous citation</bq>
+<pullquote>This is a pullquote</pullquote>
+<abstract>This is an abstract</abstract>
+<ul>
+  Item 1
+  Item 2
+</ul>
+<ol>
+  Item 1
+  Item 2
+</ol>
+<dl>
+  Term #1
+  Definition #1, with enough text so that the definition will wrap and we can verify that the margin is respected.
+  Term #2
+  Definition #2, with enough text so that the definition will wrap and we can verify that the margin is respected.
+</dl>
+Footnote reference.<fn>\r
+<ft>This is the first footnote.</ft>
+<hr>
+<a>link</a>
+<anchor>(anchor)
+<img>(image)
+<media>(media)
+<page>That was a page marker.
+", "
+span
+italics
+bold
+notes
+code
+highlight
+variable
+keyboard
+definition
+abbreviation
+citation
+(macro)
+This is a section header
+A simple documentation division in the text flow.
+Cleared a floating element
+This is preformatted text.
+A simple box in the text flow.
+if (SomeCondition)
+{
+  foreach (var item in Items)
+  {
+    RunSomeBackupProcess(item);
+  }
+}
+inline quote
+This is a famous citation
+This is a pullquote
+This is an abstract
+
+  Item 1
+  Item 2
+
+
+  Item 1
+  Item 2
+
+
+  Term #1
+  Definition #1, with enough text so that the definition will wrap and we can verify that the margin is respected.
+  Term #2
+  Definition #2, with enough text so that the definition will wrap and we can verify that the margin is respected.
+
+Footnote reference.\r
+This is the first footnote.
+
+link
+(anchor)
+(image)
+(media)
+That was a page marker.
+");
     
   }
   

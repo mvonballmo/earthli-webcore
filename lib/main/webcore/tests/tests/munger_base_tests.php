@@ -84,6 +84,12 @@ class MUNGER_BASE_TEST_TASK extends TEST_TASK
   public $show_validator_stats = false;
 
   /**
+   * Show statistics for the stripper tests.
+   * @var boolean
+   */
+  public $show_stripper_stats = false;
+
+  /**
    * Show statistics for the munger tests.
    * @var boolean
    */
@@ -352,6 +358,34 @@ This is a picture-perfect example of a country that benefitted from the freedom 
     }
   }
   
+  protected function _run_stripper_test ($input, $expected_output)
+  {
+    $this->_num_tests += 1;
+
+    $output = $this->_stripper->strip ($input);
+    
+    if (strcmp($output, $expected_output) != 0)
+    {
+      $this->_num_errors += 1;
+      echo "<hr style=\"clear: both\">\n";
+      echo "<div class=\"error\">Error detected</div>";
+    }
+    elseif ($this->show_stripper_stats)
+    {
+      echo "<hr style=\"clear: both\">\n";
+    }
+
+    if ((strcmp($output, $expected_output) != 0) || $this->show_stripper_stats)
+    {
+      echo "<h4>Input</h4>\n\n";
+      echo "[$input]\n\n";
+      echo "<h4>Expected output</h4>\n\n[";
+      echo $expected_output;
+      echo "]\n\n<h4>Actual output</h4>\n\n[";
+      echo "$output]\n\n";
+    }
+  }
+  
   protected function _run_munger_test ($input, $expected, $ignore = false)
   {
     $this->_num_tests += 1;
@@ -388,7 +422,7 @@ This is a picture-perfect example of a country that benefitted from the freedom 
       echo "<h4>Input</h4>\n\n";
       echo "[$input]\n\n";
       echo "<h4>Expected output</h4>\n\n[";
-      echo "$expected";
+      echo $expected;
       echo "]\n\n<h4>Actual output</h4>\n\n[";
       echo "$output]\n\n";
             

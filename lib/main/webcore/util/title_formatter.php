@@ -201,7 +201,8 @@ class TITLE_FORMATTER extends WEBCORE_OBJECT
 
     if (($max_size > 0) && ($len > $max_size))
     {
-      $text = strip_tags ($text);
+      $stripper = $this->context->title_stripper();
+      $text = $stripper->strip ($text);
       $start_chars = round ($max_size / 2, 0);
       $end_chars = $max_size - $start_chars;
       return substr ($text, 0, $start_chars) . "..." . substr ($text, $len - $end_chars, $end_chars);
@@ -220,14 +221,16 @@ class TITLE_FORMATTER extends WEBCORE_OBJECT
    */
   protected function _make_html_tag ($prefix, $suffix)
   {
-    $stripped_text = strip_tags ($this->text);
+    $stripper = $this->context->title_stripper();
+    
+    $stripped_text = $stripper->strip ($this->text);
     $text_to_use = $this->_truncate ($stripped_text);
 
     /* If the text was truncated, then we proceed with an entirely tagless title. We don't
        attempt to parse around the tags, as the munger would, because the truncation occurs in the
        middle of the title, which complicates finding the right spot to do it. */
 
-    $title_to_use = strip_tags ($this->title);
+    $title_to_use = $stripper->strip ($this->title);
 
     if ($stripped_text != $text_to_use)
     {

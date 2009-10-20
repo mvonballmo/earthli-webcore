@@ -51,7 +51,10 @@ require_once ('webcore/gui/object_renderer.php');
 abstract class MAIL_OBJECT_RENDERER extends MAIL_RENDERER
 {
   /**
+   * Gets the subject for the mail.
+   * 
    * @param object $obj
+   * @param MAIL_OBJECT_RENDERER_OPTIONS $options
    * @return string
    */
   public function subject ($obj, $options)
@@ -61,6 +64,7 @@ abstract class MAIL_OBJECT_RENDERER extends MAIL_RENDERER
 
   /**
    * Returns the object's contents as HTML.
+   * 
    * @param object $obj
    * @param MAIL_OBJECT_RENDERER_OPTIONS $options
    * @return string
@@ -72,6 +76,7 @@ abstract class MAIL_OBJECT_RENDERER extends MAIL_RENDERER
 
   /**
    * Returns the object's contents as text.
+   * 
    * @param object $obj
    * @param MAIL_OBJECT_RENDERER_OPTIONS $options
    * @return string
@@ -82,6 +87,8 @@ abstract class MAIL_OBJECT_RENDERER extends MAIL_RENDERER
   }
 
   /**
+   * Return the body of the mail.
+   * 
    * @param object $obj
    * @param MAIL_OBJECT_RENDERER_OPTIONS $options
    * @param method $func The method {@link _echo_text_content} or {@link _echo_html_content}.
@@ -103,6 +110,8 @@ abstract class MAIL_OBJECT_RENDERER extends MAIL_RENDERER
   }
 
   /**
+   * Return the body of the mail formatted as plain text.
+   * 
    * @param object $obj
    * @param MAIL_OBJECT_RENDERER_OPTIONS $options
    * @access private
@@ -111,6 +120,8 @@ abstract class MAIL_OBJECT_RENDERER extends MAIL_RENDERER
   protected abstract function _echo_text_content ($obj, $options);
 
   /**
+   * Return the body of the mail formatted as HTML.
+   * 
    * @param object $obj
    * @param MAIL_OBJECT_RENDERER_OPTIONS $options
    * @access private

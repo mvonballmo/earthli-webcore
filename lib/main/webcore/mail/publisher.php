@@ -233,9 +233,9 @@ class PUBLISHER extends LOGGABLE
         {
           foreach ($obj_history_items as $history_item)
           {
-            $obj = $objects [$object_type][$object_id];
-            if ($obj)
+            if (isset($objects [$object_type][$object_id]))
             {
+              $obj = $objects [$object_type][$object_id];
               $subscribers = $this->_subscribers_for ($history_item, $obj);
               $num_subscribers = sizeof ($subscribers);
 
@@ -898,9 +898,12 @@ require_once ('webcore/mail/mail_object_renderer.php');
 class SUBSCRIPTION_SETTINGS_MAIL_RENDERER extends MAIL_OBJECT_RENDERER
 {
   /**
-   * @param SEND_MAIL_FORM $obj
-   * @param EXCEPTION_MAIL_OBJECT_RENDERER_OPTIONS $options
+   * Gets the subject for the mail.
+   * 
+   * @param object $obj
+   * @param MAIL_OBJECT_RENDERER_OPTIONS $options
    * @return string
+   * @private
    */
   public function subject ($obj, $options)
   {
@@ -908,27 +911,40 @@ class SUBSCRIPTION_SETTINGS_MAIL_RENDERER extends MAIL_OBJECT_RENDERER
   }
 
   /**
-   * @param object $obj Parameter is not used.
-   * @param integer $excerpt_length
+   * Gets the url for the receiver of the mail.
+   * 
+   * @return string
+   * @private
+   */
+  protected function subscription_settings_url ()
+  {
+    return $this->app->resolve_file ($this->app->page_names->user_subscriptions_home . "?email=" . Subscriber_email_alias);
+  }
+  
+  /**
+   * Returns the object's contents as HTML.
+   * 
+   * @param object $obj
+   * @param MAIL_OBJECT_RENDERER_OPTIONS $options
    * @access private
    */
-  protected function _echo_html_content ($obj, $excerpt_length)
+  protected function _echo_html_content ($obj, $options)
   {
-    $app_root = $this->app->url ();
-    echo ("<p class=\"notes\">This email was generated automatically. <a href=\"{$app_root}view_user_subscriptions.php?email=" .
-          Subscriber_email_alias . "\">Check your subscription settings</a>.</p>");
+    $url = $this->subscription_settings_url (); 
+    echo ("<p class=\"notes\">This email was generated automatically. <a href=\"{$url}\">Check your subscription settings</a>.</p>");
   }
 
   /**
-   * @param SEND_MAIL_FORM $obj
-   * @param integer $excerpt_length
+   * Returns the object's contents as text.
+   * 
+   * @param object $obj
+   * @param MAIL_OBJECT_RENDERER_OPTIONS $options
    * @access private
    */
-  protected function _echo_text_content ($obj, $excerpt_length)
+  protected function _echo_text_content ($obj, $options)
   {
-    $link = $this->app->resolve_file ("view_user_subscriptions.php?email=" . Subscriber_email_alias);
     echo $this->line ("This email was generated automatically. Check your subscription settings:");
-    echo $this->line ("<$link>");
+    echo $this->line ("<" . $this->subscription_settings_url () . ">");
   }
 }
 
