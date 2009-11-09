@@ -110,8 +110,8 @@ abstract class TEST_TASK extends TASK
    * {@link _log()} an error if the values are not equal.
    * Records a debug message indicating success otherwise.
    * 
-   * @param mixed $expected
-   * @param mixed $actual
+   * @param object $expected
+   * @param object $actual
    */
   protected function _check_equal ($expected, $actual)
   {

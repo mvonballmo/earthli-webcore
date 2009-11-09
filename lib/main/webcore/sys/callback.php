@@ -67,7 +67,7 @@ class CALLBACK
   /**
    * Execute the function with the given arguments.
    * @param array $args
-   * @return mixed
+   * @return object
    */
   public function execute ($args = null)
   {
@@ -117,7 +117,7 @@ class CALLBACK_METHOD extends CALLBACK
   /**
    * Execute the method with the given arguments.
    * @param array $args
-   * @return mixed
+   * @return object
    */
   public function execute ($args = null)
   {
@@ -170,7 +170,7 @@ class CALLBACK_LIST
   /**
    * Execute each item in the list with the given arguments.
    * @param array $args
-   * @return mixed
+   * @return object
    */
   public function execute ($args = null)
   {

@@ -138,7 +138,7 @@ class FIELD extends RAISABLE
    * Is this field selected?
    * Returns true if 'value' is equal to the field's value. Some fields will override this
    * behavior to imbue it with their own semantics (e.g. {@link ARRAY_FIELD}).
-   * @param mixed $value
+   * @param object $value
    * @return boolean
    */
   public function selected ($value)
@@ -149,7 +149,7 @@ class FIELD extends RAISABLE
   /**
    * Return the value in native format.
    * You can also retrieve the value as text using {@link as_text()}.
-   * @return mixed
+   * @return object
    */
   public function value ()
   {
@@ -165,7 +165,7 @@ class FIELD extends RAISABLE
    * Convert the {@link value()} to text.
    * 
    * @param FORM $form Not used here, but used by descendents.
-   * @param mixed $value Optional parameter used by some fields to distinguish between different components of the value.
+   * @param object $value Optional parameter used by some fields to distinguish between different components of the value.
    * @return string
    */
   public function as_text ($form, $value = null)
@@ -180,7 +180,7 @@ class FIELD extends RAISABLE
    * TEXT_OPTIONS} and convert HTML entities.
    * @param string $quote_style Can be "ENT_NOQUOTES" or "ENT_QUOTES", which
    * translates quotes or not, respectively.
-   * @param mixed $value Optional parameter used by some fields to distinguish between different components of the value.
+   * @param object $value Optional parameter used by some fields to distinguish between different components of the value.
    * @return string
    */
   public function as_html ($form, $quote_style, $value = null)
@@ -220,7 +220,7 @@ class FIELD extends RAISABLE
    * Apply a new value to this field.
    * Value should always be in native format; the field manages internal value and display text. Use
    * {@link set_value_from_text()} if you have a string.
-   * @var mixed $value
+   * @var object $value
    */
   public function set_value ($value)
   {
@@ -263,7 +263,7 @@ class FIELD extends RAISABLE
    * Loads a value from the 'storage' into the field.
    * @param FORM $form
    * @param STORAGE $storage
-   * @param mixed $default Use this value if the client is empty.
+   * @param object $default Use this value if the client is empty.
    */
   public function load_from_client ($form, $storage, $default)
   {
@@ -520,7 +520,7 @@ class TEXT_FIELD extends FIELD
    * counteracts the effects of PHP's {@link PHP_MANUAL#get_magic_quotes_gpc()}
    * setting, if necessary.
    * @param FORM $form
-   * @param mixed $value Ignored.
+   * @param object $value Ignored.
    * @return string
    */
   public function as_text ($form, $value = null)
@@ -750,7 +750,7 @@ class DATE_TIME_FIELD extends FIELD
    * Apply a new value to this field.
    * Value should always be in native format; the field manages internal value and display text. Use
    * {@link set_value_from_text()} if you have a string.
-   * @var mixed $value
+   * @var object $value
    */
   public function set_value ($value)
   {
@@ -783,7 +783,7 @@ class DATE_TIME_FIELD extends FIELD
   /**
    * Convert the {@link value()} to html.
    * @param FORM $form Not used.
-   * @param mixed $value Optional parameter used by some fields to distinguish between different components of the value.
+   * @param object $value Optional parameter used by some fields to distinguish between different components of the value.
    * @return string
    */
   public function as_text ($form, $value = null)
@@ -1013,7 +1013,7 @@ class ARRAY_FIELD extends FIELD
   /**
    * Is this field selected?
    * Returns whether the value is in the array.
-   * @param mixed $value
+   * @param object $value
    * @return boolean
    */
   public function selected ($value)
@@ -1035,7 +1035,7 @@ class ENUMERATED_FIELD extends FIELD
 {
   /**
    * Add a valid key to this field.
-   * @param mixed $val
+   * @param object $val
    */
   public function add_value ($val)
   {
@@ -1093,7 +1093,7 @@ class UPLOAD_FILE_FIELD extends FIELD
 
   /**
    * Upload files do not accept initial values.
-   * @var mixed $value
+   * @var object $value
    */
   public function set_value ($value)
   {
@@ -1116,7 +1116,7 @@ class UPLOAD_FILE_FIELD extends FIELD
    * Convert the {@link value()} to text.
    * Returns a result only if 'value' is set.
    * @param FORM $form Not used.
-   * @param mixed $value 'Value' must be an integer, indexing into the list of
+   * @param object $value 'Value' must be an integer, indexing into the list of
    * files associated with this field.
    * @return string
    */

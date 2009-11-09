@@ -580,7 +580,7 @@ class EXIF_DATE_TIME_CONVERTER extends DATE_TIME_CONVERTER
 class DATE_TIME extends RAISABLE
 {
   /**
-   * @param integer|string $time Can be either a PHP or ISO time.
+   * @param object $time Can be either a PHP or ISO time.
    * @param string $type Can be either {@link Date_time_php} or {@link
    * Date_time_iso}.
    */

@@ -261,6 +261,15 @@ function __php_error_handler ($type, $msg, $file_name, $line_no)
   }
 }
 
+/**
+ * Thrown when a value does not match one of the values in a switch statement.
+ * 
+ * @see function raise()
+ * @package webcore
+ * @subpackage sys
+ * @version 3.2.0
+ * @since 2.7.1
+ */
 class UNKNOWN_VALUE_EXCEPTION extends Exception
 {
   public function __construct($value) 
@@ -276,6 +285,15 @@ class UNKNOWN_VALUE_EXCEPTION extends Exception
   private $_value;
 }
 
+/**
+ * Thrown when a method is not implemented (but was not marked as abstract).
+ * 
+ * @see function raise()
+ * @package webcore
+ * @subpackage sys
+ * @version 3.2.0
+ * @since 2.7.1
+ */
 class METHOD_NOT_IMPLEMENTED_EXCEPTION extends Exception
 {
   public function message()
@@ -362,9 +380,9 @@ class RAISABLE
    * Determines whether a value is an integer or not.
    * This will return false if it is not. To validate an integer with an exception,
    * use {@link validate_as_integer()} instead.
-   * @param mixed $value The integer prospect
+   * @param object $value The integer prospect
    * @param boolean $allow_empty Is an empty value interpreted as 0?
-   * @return mixed Returns false if it's not an integer. Returns the integer otherwise (or 0 if empty).
+   * @return object Returns false if it's not an integer. Returns the integer otherwise (or 0 if empty).
    * @access private
    */
   public function validate_as_integer_silent ($value, $allow_empty = true)
@@ -387,9 +405,9 @@ class RAISABLE
    * Cast $i as an integer (if it's not an integer, raise an exception)
    * This is used to validate arguments to databases so that hacks of the form 'URL?id=1 OR 1=1' don't work
    * The function dies immediately so that any dependent SQL doesn't reveal the inner workings of the database.
-   * @param mixed $value The integer prospect
+   * @param object $value The integer prospect
    * @param boolean $allow_empty Is an empty value interpreted as 0?
-   * @return mixed Returns the integer (or 0 if empty).
+   * @return object Returns the integer (or 0 if empty).
    * @see RAISABLE::validate_as_integer_silent
    * @access private
    */

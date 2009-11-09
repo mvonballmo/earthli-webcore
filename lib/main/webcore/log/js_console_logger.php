@@ -44,6 +44,7 @@ require_once ('webcore/log/text_output_logger.php');
  * Messages are recorded to a buffer. If any message with filter set to 'Msg_action_record_popup'
  * came in, it dumps all messages to JavaScript and opens a console to display them. Does not work
  * if the page fails to load completely.
+ * 
  * @package webcore
  * @subpackage log
  * @version 3.2.0
@@ -263,6 +264,15 @@ class JS_CONSOLE_LOGGER extends TEXT_OUTPUT_LOGGER
   protected $_messages = array ();
 }
 
+/**
+ * Used by the {@link JS_CONSOLE_LOGGER} to record internal details.
+ *
+ * @package webcore
+ * @subpackage log
+ * @version 3.2.0
+ * @since 2.2.1
+ * @access private
+ */
 class LOG_INFO
 {
   /**

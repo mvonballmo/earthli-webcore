@@ -100,7 +100,7 @@ abstract class SEARCH extends CONTENT_OBJECT
   public $type;
   
   /**
-   * @var mixed
+   * @var object
    */
   public $parameters;
   

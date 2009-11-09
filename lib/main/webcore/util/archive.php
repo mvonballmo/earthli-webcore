@@ -43,7 +43,7 @@ require_once ('webcore/sys/files.php');
 
 /**
  * Wrapper class for accessing {@link COMPRESSED_FILE}s.
- * Where a <code>COMPRESSED_FILE</code> can only handle a single type of file,
+ * Where a {@link COMPRESSED_FILE} can only handle a single type of file,
  * the archive manages a list of handlers (registered with {@link
  * register_handler()}). Use the {@link readable()} function to determine
  * whether the archive has a handler capable of reading a file set by {@link

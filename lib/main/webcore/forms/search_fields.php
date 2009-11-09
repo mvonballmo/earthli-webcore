@@ -1443,7 +1443,7 @@ class SEARCH_OBJECT_FIELDS extends WEBCORE_OBJECT
    * Fields that are automatically synced with search data.
    * Loading and storing is handled automatically for these fields. The value part of the array holds
    * the fields default value.
-   * @var array[string, mixed]
+   * @var array[string, object]
    * @access private
    */
   protected $_synced_fields;

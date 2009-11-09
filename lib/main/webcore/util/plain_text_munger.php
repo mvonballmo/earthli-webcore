@@ -725,6 +725,15 @@ class PLAIN_TEXT_NUMERIC_LIST_TRANSFORMER extends PLAIN_TEXT_LIST_TRANSFORMER
   protected $_current_mark = 0;
 }
 
+/**
+ * Links a block of text to a previous footnote reference.
+ * 
+ * @package webcore
+ * @subpackage text
+ * @version 3.2.0
+ * @since 2.7.1
+ * @access private
+ */
 class PLAIN_TEXT_FOOTNOTE_TEXT_TRANSFORMER extends PLAIN_TEXT_LIST_TRANSFORMER
 {
   /**

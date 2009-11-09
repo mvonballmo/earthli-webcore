@@ -579,6 +579,14 @@ class NEWSFEED_PAGE_RENDERER extends DEFAULT_PAGE_RENDERER
   }
 }
 
+/**
+ * An implementation of the {@link HTML_TEXT_MUNGER} with special handling for newsfeeds.
+ * @package webcore
+ * @subpackage newsfeed
+ * @version 3.2.0
+ * @since 3.2.0
+ * @access private
+ */
 class NEWSFEED_HTML_TEXT_MUNGER extends HTML_TEXT_MUNGER
 {
   public function __construct ()

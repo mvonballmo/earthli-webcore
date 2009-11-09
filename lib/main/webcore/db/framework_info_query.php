@@ -66,7 +66,7 @@ class FRAMEWORK_INFO_QUERY extends QUERY
   
   /**
    * Get the application info for the given application.
-   * @param mixed $obj Can be an {@link APPLICATION} or an {@link
+   * @param object $obj Can be an {@link APPLICATION} or an {@link
    * ENVIRONMENT}.
    * @return FRAMEWORK_INFO
    */

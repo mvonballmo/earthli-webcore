@@ -138,15 +138,15 @@ if (! function_exists ('file_get_contents'))
 
 /**
  * Return the output of the {@link PHP_MANUAL#print_r} function.
- * @param mixed $mixed
+ * @param object $value
  * @version 3.2.0
  * @since 2.6.0
  * @access private
  */
-function print_r_capture ($mixed)
+function print_r_capture ($value)
 {
   ob_start ();
-  print_r ($mixed);
+  print_r ($value);
   $Result = ob_get_contents();
   ob_end_clean();
   return $Result;
@@ -158,7 +158,7 @@ function print_r_capture ($mixed)
  * whether the index is valid for the given array.
  * @param array &$array Original array
  * @param integer $index Index into array
- * @param mixed $value Value to insert at 'index'
+ * @param object $value Value to insert at 'index'
  * @return array
  */
 function array_insert (&$array, $index, $value)

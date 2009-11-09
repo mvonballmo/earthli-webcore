@@ -92,7 +92,7 @@ class SQL_FIELD
   public $type;
 
   /**
-   * @var mixed
+   * @var object
    */
   public $value;
 
@@ -107,7 +107,7 @@ class SQL_FIELD
    * 'action'.
    * @param string $id Name of the field in the database.
    * @param integer $type Is it an integer, date or string?
-   * @param mixed $value The raw value
+   * @param object $value The raw value
    * @param integer $action Which actions is this field used for?
    */
   public function __construct ($id, $type, $value, $action)
@@ -208,7 +208,7 @@ class SQL_TABLE extends WEBCORE_OBJECT
    * @see SQL_FIELD
    * @param string $field_id
    * @param integer $field_type
-   * @param mixed $value
+   * @param object $value
    * @param integer $action
    */
   public function add ($field_id, $field_type, $value, $action)
@@ -221,7 +221,7 @@ class SQL_TABLE extends WEBCORE_OBJECT
    * Update the value of an existing field.
    *
    * @param string $field_id
-   * @param mixed $value
+   * @param object $value
    */
   public function update ($field_id, $value)
   {
@@ -426,7 +426,7 @@ class SQL_STORAGE extends WEBCORE_OBJECT
    * @param string $field_id Store value to this field.
    * @param integer $field_type Field is of this type (can be
    * 'Field_type_string', 'Field_type_integer', 'Field_type_date_time').
-   * @param mixed $value Reference to the actual value to store.
+   * @param object $value Reference to the actual value to store.
    * @param integer $action Store this field for these actions (can be {@link
    * Storage_action_none}, {@link Storage_action_create}, {@link
    * Storage_action_update}, {@link Storage_action_all}).

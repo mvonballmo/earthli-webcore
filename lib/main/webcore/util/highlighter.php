@@ -6,6 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage util
+ * @access private
  * @version 3.2.0
  * @since 2.6.0
  */

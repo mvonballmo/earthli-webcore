@@ -159,7 +159,7 @@ class FRAMEWORK_INFO extends NAMED_OBJECT
   
   /**
    * Set the software version and information.
-   * @param mixed $obj An {@link APPLICATION} or an {@link ENVIRONMENT}.
+   * @param object $obj An {@link APPLICATION} or an {@link ENVIRONMENT}.
    */
   public function set_software ($obj)
   {
