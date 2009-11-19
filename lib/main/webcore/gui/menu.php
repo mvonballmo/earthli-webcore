@@ -125,8 +125,7 @@ class MENU extends WEBCORE_OBJECT
    * @param string $title Title shown for the link.
    * @param string $url Action to execute.
    * @param string $icon Path to the optional icon.
-   * @param string $selected Renders as selected without the link if
-   * <code>True</code>.
+   * @param string $selected Renders as selected without the link if <c>True</c>.
    */
   public function append ($title, $url = '', $icon = '', $selected = false)
   {
@@ -138,8 +137,7 @@ class MENU extends WEBCORE_OBJECT
    * @param string $title Title shown for the link.
    * @param string $url Action to execute.
    * @param string $icon Path to the optional icon.
-   * @param string $selected Renders as selected without the link if
-   * <code>True</code>.
+   * @param string $selected Renders as selected without the link if <c>True</c>.
    */
   public function prepend ($title, $url = '', $icon = '', $selected = false)
   {
