@@ -1,0 +1,45 @@
+<refentry id="{@id}">
+ <refnamediv>
+  <refname>User Guide for the earthli WebCore</refname>
+  <refpurpose>To demonstrate how to configure, use, extend and work with the earthli WebCore.</refpurpose>
+ </refnamediv>
+ <refsynopsisdiv>
+  <author>
+   Marco Von Ballmoos
+   <authorblurb>
+    {@link http://earthli.com Home page}
+   </authorblurb>
+  </author>
+ </refsynopsisdiv>
+ {@toc}
+ <refsect1 id="{@id intro}">
+  <title>User Guide</title>
+  <para>
+   This will be the User Guide for the earthli WebCore. 
+  </para>
+ </refsect1>
+ <refsect1 id="{@id albums}">
+  <title>earthli Albums</title>
+  <para>
+   Introduction to {@tutorial albums.pkg earthli Albums}
+  </para>
+ </refsect1>
+ <refsect1 id="{@id news}">
+  <title>earthli News</title>
+  <para>
+   Introduction to {@tutorial news.pkg earthli News}
+  </para>
+ </refsect1>
+ <refsect1 id="{@id projects}">
+  <title>earthli Projects</title>
+  <para>
+   Introduction to {@tutorial projects.pkg earthli Projects}
+  </para>
+ </refsect1>
+ <refsect1 id="{@id recipes}">
+  <title>earthli Recipes</title>
+  <para>
+   Introduction to {@tutorial recipes.pkg earthli Recipes}
+  </para>
+ </refsect1>
+</refentry>

@@ -1,0 +1,21 @@
+<refentry id="{@id}">
+ <refnamediv>
+  <refname>User Guide for the earthli News</refname>
+  <refpurpose>To demonstrate how to configure, use, extend and work with the earthli News.</refpurpose>
+ </refnamediv>
+ <refsynopsisdiv>
+  <author>
+   Marco Von Ballmoos
+   <authorblurb>
+    {@link http://earthli.com Home page}
+   </authorblurb>
+  </author>
+ </refsynopsisdiv>
+ {@toc}
+ <refsect1 id="{@id intro}">
+  <title>User Guide</title>
+  <para>
+   This will be the User Guide for the earthli News.
+  </para>
+ </refsect1>
+</refentry>

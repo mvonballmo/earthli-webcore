@@ -1,0 +1,21 @@
+<refentry id="{@id}">
+ <refnamediv>
+  <refname>User Guide for the earthli Recipes</refname>
+  <refpurpose>To demonstrate how to configure, use, extend and work with the earthli Recipes.</refpurpose>
+ </refnamediv>
+ <refsynopsisdiv>
+  <author>
+   Marco Von Ballmoos
+   <authorblurb>
+    {@link http://earthli.com Home page}
+   </authorblurb>
+  </author>
+ </refsynopsisdiv>
+ {@toc}
+ <refsect1 id="{@id intro}">
+  <title>User Guide</title>
+  <para>
+   This will be the User Guide for the earthli Recipes.
+  </para>
+ </refsect1>
+</refentry>
