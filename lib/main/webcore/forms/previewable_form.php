@@ -281,7 +281,6 @@ abstract class PREVIEWABLE_ID_BASED_FORM extends PREVIEWABLE_FORM
  * @since 2.5.0
  * @package webcore
  * @subpackage forms-core
- * @abstract
  */
 class FORM_PREVIEW_SETTINGS extends WEBCORE_OBJECT
 {

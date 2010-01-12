@@ -2321,6 +2321,22 @@ class MUNGER extends MUNGER_PARSER
       }
     }
   }
+  
+  /**
+   * Applies all enabled conversions to the given "text".
+   * 
+   * @param string $text
+   * @return string
+   */
+  public function apply_converters($text)
+  {
+    foreach ($this->_converters as $converter)
+    {
+      $text = $converter->convert($this, $text);
+    }
+    
+    return $text;
+  }
 
   /**
    * Force output of open tags.
@@ -2582,12 +2598,7 @@ class MUNGER extends MUNGER_PARSER
    */
   protected function _as_output_text($text)
   {
-    foreach ($this->_converters as $converter)
-    {
-      $text = $converter->convert($this, $text);
-    }
-
-    return $text;
+    return $this->apply_converters($text);
   }
 
   /**

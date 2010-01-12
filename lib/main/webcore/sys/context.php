@@ -183,7 +183,7 @@ class CONTEXT extends RESOLVER
    * Resources to use for resolving paths.
    * Returns 'this' by default. Use this function to retrieve the most specific
    * resources with which to resolve paths or files.
-   * @return RESOURCES ()
+   * @return RESOURCE_MANAGER
    */
   public function resources ()
   {

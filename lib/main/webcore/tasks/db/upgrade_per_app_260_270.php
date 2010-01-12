@@ -28,7 +28,7 @@ http://www.earthli.com/software/webcore
 
 require_once ('webcore/db/migrator_task.php');
 
-class UPGRADE_PER_APP_260_270_TASK extends MIGRATOR_TASK
+abstract class UPGRADE_PER_APP_260_270_TASK extends MIGRATOR_TASK
 {
   public function clean_up_folder_permissions ($table)
   {

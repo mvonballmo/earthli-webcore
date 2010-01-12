@@ -54,7 +54,7 @@ define ('Msg_channel_migrate', 'Migrate');
   * @since 2.6.0
   * @access private
   */
-class MIGRATOR_TASK extends TASK
+abstract class MIGRATOR_TASK extends TASK
 {
   /**
    * Framework to upgrade.

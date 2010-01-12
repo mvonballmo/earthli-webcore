@@ -1245,6 +1245,7 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
    * Uses the "author", "caption", "source" and "href" to link the
    * caption or author and optionally note the source (using the domain
    * of the "href").
+   * 
    * @param MUNGER $munger The transformation context.
    * @param array[string,string] $attrs List of attributes for the tag
    * (retrieved from the token).
@@ -1253,9 +1254,9 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
    */
   protected function _calculate_caption ($munger, $attrs)
   {
-    $caption = $this->_read_attribute ($attrs, 'caption');
-    $author = $this->_read_attribute ($attrs, 'author');
-    $date = $this->_read_attribute ($attrs, 'date');
+    $caption = $munger->apply_converters($this->_read_attribute ($attrs, 'caption'));
+    $author = $munger->apply_converters($this->_read_attribute ($attrs, 'author'));
+    $date = $munger->apply_converters($this->_read_attribute ($attrs, 'date'));
 
     $href = $this->_convert_to_attribute($munger->resolve_url($this->_url_for_source ($attrs)));
     if ($href)
@@ -1274,21 +1275,23 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
       }
     }
 
-    $source = $this->_calculate_source ($attrs, $href);
+    $source = $this->_calculate_source ($munger, $attrs, $href);
 
     return $this->_calculate_suffix ($caption, $author, $date, $source);
   }
 
   /**
    * Return the formatted source as a link or text.
+   * 
+   * @param MUNGER $munger The transformation context.
    * @param array[string,string] $attrs
    * @param string $href
    * @return string
    * @access private
    */
-  protected function _calculate_source ($attrs, $href)
+  protected function _calculate_source ($munger, $attrs, $href)
   {
-    $Result = $this->_read_attribute ($attrs, 'source');
+    $Result = $munger->apply_converters($this->_read_attribute ($attrs, 'source'));
     if ($Result && $href)
     {
       $url = new URL ($href);
@@ -1647,8 +1650,8 @@ class HTML_IMAGE_REPLACER extends HTML_INLINE_ASSET_REPLACER
       $href = $this->_read_attribute ($attrs, 'href');
     }
 
-    $title = $this->_read_attribute ($attrs, 'title');
-    $alt = $this->_read_attribute ($attrs, 'alt', $title);
+    $title = $munger->apply_converters($this->_read_attribute ($attrs, 'title'));
+    $alt = $munger->apply_converters($this->_read_attribute ($attrs, 'alt', $title));
     if (! $alt)
     {
       $alt = ' ';
@@ -1890,10 +1893,10 @@ class HTML_LINK_REPLACER extends HTML_BASE_REPLACER
     {
       $attrs = $token->attributes ();
 
-      $author = $this->_read_attribute ($attrs, 'author');
-      $date = $this->_read_attribute ($attrs, 'date');
+      $author = $munger->apply_converters($this->_read_attribute ($attrs, 'author'));
+      $date = $munger->apply_converters($this->_read_attribute ($attrs, 'date'));
       $href = $munger->resolve_url (read_array_index ($attrs, 'href'));
-      $source = $this->_calculate_source ($attrs, $href);
+      $source = $this->_calculate_source ($munger, $attrs, $href);
 
       $this->_suffix = $this->_calculate_suffix (' ', $author, $date, $source);
 

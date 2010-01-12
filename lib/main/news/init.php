@@ -48,8 +48,8 @@ include_once ('webcore/init.php');
 
 /**
  * Unique id for the news application.
- * Used with {@link ENVIRONMENT::register_application()} and {@link
- * ENVIRONMENT::make_application()}.
+ * Used with {@link PAGE::register_application()} and {@link
+ * PAGE::make_application()}.
  */
 define ('News_application_id', 'com.earthli.news');
 

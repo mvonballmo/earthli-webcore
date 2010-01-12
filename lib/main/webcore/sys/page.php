@@ -193,7 +193,7 @@ class PAGE extends CONTEXT
    * Resources to use for resolving paths.
    * Returns {@link $app} if it is assigned to make sure that application-
    * specific resources are also resolved.
-   * @return RESOURCES ()
+   * @return RESOURCE_MANAGER
    */
   public function resources ()
   {

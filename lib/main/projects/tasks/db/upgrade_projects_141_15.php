@@ -234,7 +234,7 @@ class PROJECTS_141_15_MIGRATOR_TASK extends UPGRADE_PER_APP_221_23_TASK
       $this->_query ("CREATE TABLE `project_tree` (`parent_id` INT UNSIGNED NOT NULL ,`child_id` INT UNSIGNED NOT NULL)");
 
       $this->_query ("SELECT * from project_folders");
-      build_folder_roots ('project_tree');
+      $this->build_folder_roots ('project_tree');
 
     log_close_block ();
   }

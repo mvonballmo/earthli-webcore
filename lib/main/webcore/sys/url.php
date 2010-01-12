@@ -764,7 +764,7 @@ class URL
     else
     {
       $this->_text = $url;
-      $current_args = split ('&', $query);
+      $current_args = explode ('&', $query);
       foreach ($current_args as $arg)
       {
         @list ($n, $v) = explode ('=', $arg);

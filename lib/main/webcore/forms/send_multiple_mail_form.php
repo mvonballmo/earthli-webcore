@@ -104,7 +104,7 @@ abstract class SEND_MULTIPLE_MAIL_FORM extends SEND_MAIL_FORM
 
     // strip the '\r' for Windows systems, then split the string at '\n'
     $this->recipient_list = str_replace ("\r", '', $this->value_for ('recipients'));
-    $this->recipient_list = split ("\n", $this->recipient_list);
+    $this->recipient_list = explode ("\n", $this->recipient_list);
 
     $opts = $this->app->mail_options;
 

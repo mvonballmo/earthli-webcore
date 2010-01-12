@@ -40,7 +40,8 @@ http://www.earthli.com/software/webcore
 require_once ('webcore/gui/object_renderer.php');
 
 /**
- * Renders an {@link THEME} as HTML.
+ * Renders an {@link THEME} as HTML or plain text.
+ * 
  * @package webcore
  * @subpackage renderer
  * @version 3.2.0
@@ -50,8 +51,8 @@ class THEME_RENDERER extends OBJECT_RENDERER
 {
   /**
    * Outputs the object as HTML.
+   * 
    * @param THEME $obj
-   * @access private
    */
   protected function _display_as_html ($obj)
   {
@@ -67,6 +68,17 @@ class THEME_RENDERER extends OBJECT_RENDERER
 </div>
 <?php
   }
+  
+  /**
+   * Outputs the object as plain text.
+   * 
+	 * @param THEME $obj
+	 */
+	protected function _display_as_plain_text($obj) 
+	{
+		echo $obj->title_as_plain_text ();
+	}
+
 }
 
 ?>

@@ -879,7 +879,7 @@ class USER_AGENT_PARSER
     {
       if ($key)
       {
-        $keys = split (',', $key);
+        $keys = explode (',', $key);
         $match = true;
         foreach ($keys as $key)
         {

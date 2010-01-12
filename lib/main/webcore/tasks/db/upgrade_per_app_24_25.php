@@ -185,7 +185,7 @@ define ('Annotate_content', 0x02);
   */
 define ('View_content', 0x01);
 
-class UPGRADE_PER_APP_24_25_TASK extends MIGRATOR_TASK
+abstract class UPGRADE_PER_APP_24_25_TASK extends MIGRATOR_TASK
 {
   public function update_user_folder_permissions ($table_name, $new_name, $old_name)
   {

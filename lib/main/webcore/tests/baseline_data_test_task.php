@@ -104,7 +104,7 @@ define ('Baseline_test_owner3_id', 12000);
  * @since 2.7.0
  * @access private
  */
-class BASELINE_DATA_TEST_TASK extends TEST_TASK
+abstract class BASELINE_DATA_TEST_TASK extends TEST_TASK
 {
   /**
    * @param FOLDER $fldr

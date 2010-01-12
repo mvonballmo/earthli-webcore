@@ -41,8 +41,8 @@ require_once ('projects/init.php');
 
 /**
  * Creates and sets the global projects application.
- * Calls {@link ENVIRONMENT::make_application()} to create the application. See
- * {@link ENVIRONMENT::register_application()} for help on customizing the
+ * Calls {@link PAGE::make_application()} to create the application. See
+ * {@link PAGE::register_application()} for help on customizing the
  * application creation and initialization.
  * @global PROJECT_APPLICATION $App
  * @version 3.2.0

@@ -28,7 +28,7 @@ http://www.earthli.com/software/webcore
 
 require_once ('webcore/db/migrator_task.php');
 
-class UPGRADE_PER_APP_271_300_TASK extends MIGRATOR_TASK
+abstract class UPGRADE_PER_APP_271_300_TASK extends MIGRATOR_TASK
 {
   protected function _update_history_type_for_drafts ($table_name)
   {

@@ -366,8 +366,8 @@ function path_between ($from, $to, $opts = null)
   {
     // check for partial containment of rooted paths
     
-    $to_folders = split ($opts->path_delimiter, trim($to, $opts->path_delimiter));
-    $from_folders = split ($opts->path_delimiter, trim($from, $opts->path_delimiter));
+    $to_folders = explode ($opts->path_delimiter, trim($to, $opts->path_delimiter));
+    $from_folders = explode ($opts->path_delimiter, trim($from, $opts->path_delimiter));
     
     $common_root_folder_count = 0;
     $count = min(array(sizeof($to_folders), sizeof($from_folders)));

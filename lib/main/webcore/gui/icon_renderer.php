@@ -40,7 +40,8 @@ http://www.earthli.com/software/webcore
 require_once ('webcore/gui/object_renderer.php');
 
 /**
- * Renders an {@link ICON} as HTML.
+ * Renders an {@link ICON} as HTML or plain text.
+ * 
  * @package webcore
  * @subpackage renderer
  * @version 3.2.0
@@ -50,8 +51,8 @@ class ICON_RENDERER extends OBJECT_RENDERER
 {
   /**
    * Outputs the object as HTML.
+   * 
    * @param ICON $obj
-   * @access private
    */
   protected function _display_as_html ($obj)
   {
@@ -72,6 +73,20 @@ class ICON_RENDERER extends OBJECT_RENDERER
 </div>
 <?php
   }
+  
+  /**
+   * Outputs the object as plain text.
+   * 
+	 * @param ICON $obj
+	 */
+	protected function _display_as_plain_text ($obj) 
+	{
+    echo $obj->title_as_plain_text ();
+    if ($obj->category)
+    {
+      echo " ($obj->category)";
+    }
+	}
 }
 
 ?>

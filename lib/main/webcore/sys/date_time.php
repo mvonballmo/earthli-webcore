@@ -719,7 +719,7 @@ class DATE_TIME extends RAISABLE
       $this->set_from_iso ($this->as_iso ());
     }
 
-    $parts = split (' ', $this->_iso_time);
+    $parts = explode (' ', $this->_iso_time);
     $this->_iso_time = $parts [0] . " $t";
   }
 

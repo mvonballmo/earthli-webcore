@@ -28,7 +28,7 @@ http://www.earthli.com/software/webcore
 
 require_once ('webcore/db/migrator_task.php');
 
-class UPGRADE_PER_APP_221_23_TASK extends MIGRATOR_TASK
+abstract class UPGRADE_PER_APP_221_23_TASK extends MIGRATOR_TASK
 {
   public function build_folder_roots ($table_name)
   {
@@ -59,7 +59,7 @@ class UPGRADE_PER_APP_221_23_TASK extends MIGRATOR_TASK
       }
     }
     
-    build_folder_tree ($roots, $table_name);
+    $this->build_folder_tree ($roots, $table_name);
   }
 
   public function build_folder_tree ($folders, $table_name)
@@ -75,12 +75,12 @@ class UPGRADE_PER_APP_221_23_TASK extends MIGRATOR_TASK
             $parent = $folder;
             while ($child && $parent->id)
             {
-              _query ("INSERT INTO $table_name (parent_id, child_id) VALUES ($parent->id, $child->id)");
-              _query ("INSERT INTO $table_name (parent_id, child_id) VALUES ($parent->id, $child->id)");
+              $this->_query ("INSERT INTO $table_name (parent_id, child_id) VALUES ($parent->id, $child->id)");
+              $this->_query ("INSERT INTO $table_name (parent_id, child_id) VALUES ($parent->id, $child->id)");
               $parent = $parent->parent;
             }
           }
-          build_folder_tree ($folder->children, $table_name);
+          $this->build_folder_tree ($folder->children, $table_name);
         }
       }
     }
