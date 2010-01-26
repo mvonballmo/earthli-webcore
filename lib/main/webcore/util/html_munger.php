@@ -857,7 +857,7 @@ class HTML_LIGATURE_CONVERTER extends MUNGER_CONVERTER
    * Table of punctuation mappings to apply in {@link _convert()}
    * @var array[string,string]
    */
-  public $punctuation_table = array ( 'ffi' => '&#xfb03;;'
+  public $punctuation_table = array ( 'ffi' => '&#xfb03;'
                                  , 'ffl' => '&#xfb04;'
                                  , 'ff' => '&#xfb00;'
                                  , 'fi' => '&#xfb01;'
@@ -1254,9 +1254,9 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
    */
   protected function _calculate_caption ($munger, $attrs)
   {
-    $caption = $munger->apply_converters($this->_read_attribute ($attrs, 'caption'));
-    $author = $munger->apply_converters($this->_read_attribute ($attrs, 'author'));
-    $date = $munger->apply_converters($this->_read_attribute ($attrs, 'date'));
+    $caption = $munger->apply_non_html_converters($this->_read_attribute ($attrs, 'caption'));
+    $author = $munger->apply_non_html_converters($this->_read_attribute ($attrs, 'author'));
+    $date = $munger->apply_non_html_converters($this->_read_attribute ($attrs, 'date'));
 
     $href = $this->_convert_to_attribute($munger->resolve_url($this->_url_for_source ($attrs)));
     if ($href)
@@ -1291,7 +1291,7 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
    */
   protected function _calculate_source ($munger, $attrs, $href)
   {
-    $Result = $munger->apply_converters($this->_read_attribute ($attrs, 'source'));
+    $Result = $munger->apply_non_html_converters($this->_read_attribute ($attrs, 'source'));
     if ($Result && $href)
     {
       $url = new URL ($href);
@@ -1650,8 +1650,8 @@ class HTML_IMAGE_REPLACER extends HTML_INLINE_ASSET_REPLACER
       $href = $this->_read_attribute ($attrs, 'href');
     }
 
-    $title = $munger->apply_converters($this->_read_attribute ($attrs, 'title'));
-    $alt = $munger->apply_converters($this->_read_attribute ($attrs, 'alt', $title));
+    $title = $munger->apply_non_html_converters($this->_read_attribute ($attrs, 'title'));
+    $alt = $munger->apply_non_html_converters($this->_read_attribute ($attrs, 'alt', $title));
     if (! $alt)
     {
       $alt = ' ';
@@ -1893,8 +1893,8 @@ class HTML_LINK_REPLACER extends HTML_BASE_REPLACER
     {
       $attrs = $token->attributes ();
 
-      $author = $munger->apply_converters($this->_read_attribute ($attrs, 'author'));
-      $date = $munger->apply_converters($this->_read_attribute ($attrs, 'date'));
+      $author = $munger->apply_non_html_converters($this->_read_attribute ($attrs, 'author'));
+      $date = $munger->apply_non_html_converters($this->_read_attribute ($attrs, 'date'));
       $href = $munger->resolve_url (read_array_index ($attrs, 'href'));
       $source = $this->_calculate_source ($munger, $attrs, $href);
 
@@ -2088,6 +2088,13 @@ class HTML_MUNGER extends MUNGER
   public function resolve_url ($url, $root_override = null)
   {
     return parent::resolve_url ($url, $root_override);
+  }
+
+  public function apply_non_html_converters($text)
+  {
+    static $names_to_skip = array('tags');
+    
+    return $this->apply_converters($text, $names_to_skip);    
   }
 
   /**

@@ -2326,18 +2326,22 @@ class MUNGER extends MUNGER_PARSER
    * Applies all enabled conversions to the given "text".
    * 
    * @param string $text
+   * @param array[string] $skip_names
    * @return string
    */
-  public function apply_converters($text)
+  public function apply_converters($text, $skip_names = array())
   {
-    foreach ($this->_converters as $converter)
+    foreach ($this->_converters as $name => $converter)
     {
-      $text = $converter->convert($this, $text);
+    	if (!in_array($name, $skip_names))
+    	{
+        $text = $converter->convert($this, $text);
+    	}
     }
     
     return $text;
   }
-
+  
   /**
    * Force output of open tags.
    * This is called when text is truncated or the transformation is complete to ensure well-formedness.
@@ -2698,7 +2702,7 @@ class MUNGER extends MUNGER_PARSER
    * List of content converters.
    * These convert a piece of non-tag text to a final format. All registered
    * converters are executed against every piece of non-tag text.
-   * @see MUNGER_CONVERTER
+   * @see array[MUNGER_CONVERTER]
    * @access private
    */
   protected $_converters = array();
