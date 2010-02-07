@@ -1408,7 +1408,30 @@ class HTML_BLOCK_QUOTE_REPLACER extends HTML_DIV_REPLACER
    * Overriding this with "blockquote" has strange effects, therefore it has
    * been set back to the inherited "div" value.
    * @var string */
-  public $main_tag = 'div';  
+  public $main_tag = 'blockquote';
+
+  /**
+   * Render the open tag.
+   * 
+   * @return string
+   * @access private
+   */
+  protected function _open_inner_area ($munger, $attrs, $outer_css, $inner_css, $inner_class)
+  {
+  	return parent::_open_inner_area($munger, $attrs, $outer_css, $inner_css, $inner_class) . '<div>';
+  }
+
+  /**
+   * Render the closing tag.
+   *
+   * @param MUNGER $munger The transformation context.
+   * @return string
+   * @access private
+   */
+  protected function _close_inner_area ($munger)
+  {
+    return '</div></' . $this->main_tag . '>';
+  }
 }
 
 /**
