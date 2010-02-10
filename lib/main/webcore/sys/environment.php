@@ -78,7 +78,7 @@ class ENVIRONMENT extends RESOLVER
    * Version number of the WebCore library.
    * @var string
    */
-  public $version = '3.0.0';
+  public $version = '3.2.0';
 
   /**
    * Default identifier for this environment.
