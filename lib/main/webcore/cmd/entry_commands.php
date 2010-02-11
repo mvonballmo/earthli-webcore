@@ -254,7 +254,7 @@ class DRAFTABLE_ENTRY_COMMANDS extends ENTRY_COMMANDS
     $cmd->title = 'Queue';
     $cmd->link = "set_queued.php?id=$entry->id&last_page=$last_page";
     $cmd->icon = '{icons}buttons/queue';
-    $cmd->executable = ! $entry->queued () &$this->login->is_allowed (Privilege_set_entry, Privilege_modify, $entry) && ($entry->unpublished ());
+    $cmd->executable = ! $entry->queued () && $this->login->is_allowed (Privilege_set_entry, Privilege_modify, $entry) && ($entry->unpublished ());
     $cmd->importance = Command_importance_default;
     $this->append ($cmd);
 

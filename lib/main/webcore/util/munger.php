@@ -2253,7 +2253,7 @@ class MUNGER extends MUNGER_PARSER
     $this->_add_text_to_output($this->_as_output_text($text));
     $this->_current_visible_chars += $num_chars;
 
-    if ($truncated || (($this->_current_visible_chars >= $this->_current_maximum_chars) &$this->_tokenizers[$this->_nesting_level]->tokens_available()))
+    if ($truncated || (($this->_current_visible_chars >= $this->_current_maximum_chars) && $this->_tokenizers[$this->_nesting_level]->tokens_available()))
     {
       $this->_truncate();
     }
