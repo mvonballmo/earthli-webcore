@@ -156,7 +156,7 @@ class CONTROLS_RENDERER extends WEBCORE_OBJECT
    * @param string $script Name of the JavaScript function to execute (must conform to 'function(form: form; submit_all_fields: boolean; submit_field_name, preview_field_name: string)').
    * @return string
    */
-  public function submit_button_as_html ($title, $icon = '', $script = null, $icon_size = '16px')
+  public function submit_button_as_html ($title = null, $icon = '', $script = null, $icon_size = '16px')
   {
     if (! isset ($script))
     {

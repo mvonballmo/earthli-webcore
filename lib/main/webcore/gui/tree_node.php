@@ -83,6 +83,11 @@ class TREE_NODE
     return $this->_title;
   }
   
+  public function link ()
+  {
+    return $this->_link;
+  }
+  
   /**
    * true if the node's children are hidden; otherwise, false. 
    *
@@ -101,6 +106,11 @@ class TREE_NODE
   public function parent_node ()
   {
     return $this->_parent;
+  }
+  
+  public function get_child ($index)
+  {
+    return $this->_nodes[$index];
   }
   
   public function children ()

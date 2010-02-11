@@ -406,10 +406,10 @@ class PANEL_MANAGER extends WEBCORE_OBJECT
    * Called from {@link move_panel()}.
    * @param string $id Name of the panel to move.
    * @param integer $index Position in the ordering.
-   * @param array &$panels List of panels to move.
+   * @param array $panels List of panels to move.
    * @access private
    */
-  protected function _move_panel_to ($id, $index, &$panels)
+  protected function _move_panel_to ($id, $index, $panels)
   {
     $old_index = array_search ($id, $panels);
     if ($old_index !== false)

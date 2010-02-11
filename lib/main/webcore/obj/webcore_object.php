@@ -64,8 +64,8 @@ class WEBCORE_OBJECT extends RAISABLE
     // Take references to all of these objects so that subsequent additions, like
     // setting the application on the page, are properly updated everywhere.
     
-    $this->context =& $context;
-    $this->env =& $context->env;
+    $this->context = $context;
+    $this->env = $context->env;
     
     // Do not take a reference to the database, otherwise "ensure_has_own_database_connection"
     // will change the database for all objects instead of just the one.
@@ -74,17 +74,17 @@ class WEBCORE_OBJECT extends RAISABLE
 
     if ($context->is_page)
     {
-      $this->page =& $context;
+      $this->page = $context;
     }
     else
     {
-      $this->app =& $context;
+      $this->app = $context;
       
       // Take a reference to a reference so that updates to the "login" or "page" on the application
       // automatically apply to all objects created in that application.
       
-      $this->page =& $context->page;
-      $this->login =& $context->login;
+      $this->page = $context->page;
+      $this->login = $context->login;
     }
 
     $this->env->num_webcore_objects += 1;

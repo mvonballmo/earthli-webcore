@@ -733,7 +733,7 @@ class SEARCH_TEXT_FIELDS extends SEARCH_FIELDS
    * @param object $obj
    * @param array[string]
    */
-  public function apply_to_query ($query, $obj, &$fields)
+  public function apply_to_query ($query, $obj, $fields)
   {
     if ($obj->parameters [$this->base_name])
     {
@@ -858,9 +858,9 @@ class SORT_FIELDS extends SEARCH_FIELDS
    * Restrict the query by these fields.
    * @param QUERY $query The query to which to apply parameters.
    * @param object $obj The object from which to extract parameters.
-   * @param array[string] &$orders Add orderings to this list.
+   * @param array[string] $orders Add orderings to this list.
    */
-  public function apply_to_query ($query, $obj, &$orders)
+  public function apply_to_query ($query, $obj, $orders)
   {
     $sort = $obj->parameters [$this->sort_name ()];
     if ($sort)

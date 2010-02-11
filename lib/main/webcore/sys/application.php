@@ -242,7 +242,7 @@ class APPLICATION extends CONTEXT
    * Name and version of the application.
    * @return string
    */
-  public function description ()
+  public function description ($as_html = true)
   {
     return $this->title . ' ' . $this->version;
   }
