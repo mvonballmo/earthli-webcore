@@ -265,7 +265,10 @@ class GENERIC_TREE_NODE_INFO extends TREE_NODE_INFO
    */
   public function id ($node)
   {
-    return $node->id();
+    if (isset($node))
+    {
+      return $node->id();
+    }
   }
 }
 

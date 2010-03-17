@@ -59,8 +59,14 @@ class MAIL_RENDERER extends RENDERER
   {
     /* Save options to be restored later. */
    
-    $state->saved_display_options = clone($this->page->display_options);
-    $state->saved_template_options = clone($this->page->template_options); 
+    if (isset($this->page->display_options))
+    {
+      $state->saved_display_options = clone($this->page->display_options);
+    }
+    if (isset($this->page->template_options))
+    {
+      $state->saved_template_options = clone($this->page->template_options);
+    }
     $state->saved_show_interactive_option = $options->show_interactive;
     $state->saved_show_local_time_option = $this->env->date_time_toolkit->formatter->show_local_time;
     
