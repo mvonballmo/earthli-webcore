@@ -99,8 +99,14 @@ class MAIL_RENDERER extends RENDERER
   protected function _finish_rendering ($options, $state)
   {
     $this->context->restore_root_behavior ();
-    $this->page->display_options = $state->saved_display_options;
-    $this->page->template_options = $state->saved_template_options;
+    if (isset($state->saved_display_options))
+    {
+      $this->page->display_options = $state->saved_display_options;
+    }
+    if (isset($state->saved_template_options))
+    {
+      $this->page->template_options = $state->saved_template_options;
+    }
     $this->env->date_time_toolkit->formatter->show_local_time = $state->saved_show_local_time_option;
     $options->show_interactive = $state->saved_show_interactive_option;
   }
