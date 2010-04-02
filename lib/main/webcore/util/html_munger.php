@@ -936,6 +936,13 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
    * @var string
    */
   public $main_tag = 'div';
+  
+  /**
+   * The CSS class to use for the {@link $main_tag}.
+   * 
+   * @var string
+   */
+  public $main_CSS_class = '';
 
   /**
    * True if the main tag is a block element.
@@ -1172,7 +1179,7 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
    * container; includes alignment and width.
    * @param CSS_STYLE_BUILDER $inner_css Styles intended for the inner
    * container; includes additional style and properties.
-   * @param $inner_class CSS classes to apply to the inner container.
+   * @param string $inner_class CSS classes to apply to the inner container.
    * @see _close_inner_area()
    * @return string
    * @access private
@@ -1180,8 +1187,17 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
   protected function _open_inner_area ($munger, $attrs, $outer_css, $inner_css, $inner_class)
   {
     $builder = $munger->make_tag_builder ($this->main_tag);
-    $builder->add_attribute ('class', $inner_class);
-
+    
+    if (! empty ($this->main_CSS_class))
+    {
+    	$css_class = $this->main_CSS_class . ' ' . $inner_class;
+    }
+    else
+    {
+    	$css_class = $inner_class; 
+    }
+    
+    $builder->add_attribute ('class', $css_class);
     $outer_css->add_text ($inner_css->as_text ());
     $builder->add_attribute ('style', $outer_css->as_text ());
 
@@ -2215,6 +2231,8 @@ class HTML_TEXT_MUNGER extends HTML_BASE_MUNGER
     $block_transformer = new HTML_BLOCK_TRANSFORMER ();
     $quote_transformer = new HTML_QUOTE_TRANSFORMER ();
 //    $geshi_transformer = new HTML_GESHI_CODE_TRANSFORMER ();
+    $shell_replacer = new HTML_PREFORMATTED_BLOCK_REPLACER ();
+    $shell_replacer->main_CSS_class = 'shell';
 
 
     $this->register_transformer ('h', $nop_transformer);
@@ -2229,7 +2247,8 @@ class HTML_TEXT_MUNGER extends HTML_BASE_MUNGER
     $this->register_transformer ('code', $nop_transformer);
     $this->register_replacer ('code', new HTML_MUNGER_CODE_REPLACER ());
     $this->register_replacer ('iq', new MUNGER_BASIC_REPLACER ('<span class="quote-inline">&ldquo;', '&rdquo;</span>'));
-    $this->register_replacer ('shell', new MUNGER_BASIC_REPLACER ('<span class="shell">', '</span>'));
+    $this->register_transformer ('shell', $nop_transformer);
+    $this->register_replacer ('shell', $shell_replacer);
     $this->register_transformer ('bq', $quote_transformer);
     $this->register_replacer ('bq', new HTML_BLOCK_QUOTE_REPLACER ('quote quote-block'));
     $this->register_transformer ('pullquote', $quote_transformer);
