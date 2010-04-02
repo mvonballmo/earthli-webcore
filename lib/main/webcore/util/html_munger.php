@@ -2229,6 +2229,7 @@ class HTML_TEXT_MUNGER extends HTML_BASE_MUNGER
     $this->register_transformer ('code', $nop_transformer);
     $this->register_replacer ('code', new HTML_MUNGER_CODE_REPLACER ());
     $this->register_replacer ('iq', new MUNGER_BASIC_REPLACER ('<span class="quote-inline">&ldquo;', '&rdquo;</span>'));
+    $this->register_replacer ('shell', new MUNGER_BASIC_REPLACER ('<div class="shell">', '</div>'));
     $this->register_transformer ('bq', $quote_transformer);
     $this->register_replacer ('bq', new HTML_BLOCK_QUOTE_REPLACER ('quote quote-block'));
     $this->register_transformer ('pullquote', $quote_transformer);

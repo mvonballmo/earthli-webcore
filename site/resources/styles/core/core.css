@@ -96,6 +96,15 @@ var, kbd
   font-family: monospace;
 }
 
+.shell
+{
+	font-family: monospace;
+	background-color: black; 
+	border: 1px solid silver; 
+	color: white; 
+	padding: 0px 2px; 
+}
+
 pre
 {
   font-size: 9pt;
