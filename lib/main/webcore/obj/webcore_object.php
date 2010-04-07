@@ -127,7 +127,6 @@ class WEBCORE_OBJECT extends RAISABLE
   /**
    * Return the context's exception handler
    * @return EXCEPTION_HANDLER
-   * @access private
    */
   protected function _exception_handler ()
   {
@@ -145,7 +144,6 @@ class WEBCORE_OBJECT extends RAISABLE
    * {@link DATE_TIME} objects are copied as references by PHP5, but should be
    * fully-cloned copies themselves. Called from {@link __clone()}.
    * @param WEBCORE_OBJECT $other
-   * @access private
    */
   protected function copy_from ($other)
   {
@@ -163,28 +161,24 @@ class WEBCORE_OBJECT extends RAISABLE
   /**
    * reference to the context (usually a PAGE or APPLICATION)
    * @var CONTEXT
-   * @access private
    */
   public $context = null;
 
   /**
    * Shortcut to global environment.
    * @var ENVIRONMENT
-   * @access private
    */
   public $env = null;
 
   /**
    * Shortcut to global page object.
    * @var PAGE
-   * @access private
    */
   public $page = null;
 
   /**
    * Reference to the shared database.
    * @var DATABASE
-   * @access private
    */
   public $db = null;
 
@@ -192,7 +186,6 @@ class WEBCORE_OBJECT extends RAISABLE
    * Reference to the application.
    * Can be empty if there is no application.
    * @var APPLICATION
-   * @access private
    */
   public $app = null;
 
@@ -200,7 +193,6 @@ class WEBCORE_OBJECT extends RAISABLE
    * Shortcut to the 'login' in the application.
    * Can be empty if there is no application.
    * @var USER
-   * @access private
    */
   public $login = null;
 }

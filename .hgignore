@@ -1,0 +1,6 @@
+syntax: glob
+
+org.eclipse.php.core.prefs
+.buildpath
+.project
+.DS_Store

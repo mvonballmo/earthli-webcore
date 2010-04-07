@@ -1046,12 +1046,16 @@ class PLAIN_TEXT_PUNCTUATION_CONVERTER extends MUNGER_CONVERTER
    * @var array[string,string]
    */
   public $punctuation_table = array ( '---' => ' -- '
-                                 , '(s,)' => 's'   // Turkish s with cedilla
-                                 , '(c,)' => 'c'   // Turkish c with cedilla
-                                 , '(i-)' => 'i'   // Turkish i without dot
-                                 , '(g-)' => 'g'   // Turkish g (silent)
-                                 , '(I.)' => 'I'   // Turkish I with dot
-                                 );
+	                                  , '(S,)' => 'S'     // Turkish S with cedilla
+	                                  , '(s,)' => 's'     // Turkish s with cedilla
+	                                  , '(C,)' => 'C'     // Turkish C with cedilla
+	                                  , '(c,)' => 'c'     // Turkish c with cedilla
+	                                  , '(i-)' => 'i'     // Turkish i without dot
+	                                  , '(g-)' => 'g'     // Turkish g (silent)
+	                                  , '(I.)' => 'I'     // Turkish I with dot
+	                                  , '(Z-)' => 'Z'     // Slavic Z with a caron    
+	                                  , '(z-)' => 'z'     // Slavic z with a caron    
+	                                  );
 
   /**
    * Convert the text to an output format.

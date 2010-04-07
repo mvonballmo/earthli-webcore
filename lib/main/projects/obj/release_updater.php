@@ -48,7 +48,6 @@ require_once ('webcore/obj/webcore_object.php');
  * @access private
  * @version 3.2.0
  * @since 1.7.0
- * @abstract
  */
 abstract class RELEASE_UPDATER extends WEBCORE_OBJECT
 {
@@ -76,7 +75,7 @@ abstract class RELEASE_UPDATER extends WEBCORE_OBJECT
    * The function may generate sub-history items for affected entries. Use the parameter to determine
    * whether these sub-history items are published or not.
    * @param string $sub_history_item_publication_state Can be {@link History_item_silent} or {@link History_item_needs_send}.
-   * @access private
+   * 
    * @abstract
    */
   public abstract function apply ($sub_history_item_publication_state = History_item_silent);
@@ -86,6 +85,7 @@ abstract class RELEASE_UPDATER extends WEBCORE_OBJECT
    * If there is a newer release, that is returned and all jobs/changes in this
    * release are assigned to that one. If not, jobs/changes are assigned to no
    * release in this branch.
+   * 
    * @return RELEASE
    */
   public function replacement_release ()
@@ -93,7 +93,7 @@ abstract class RELEASE_UPDATER extends WEBCORE_OBJECT
     if (! isset ($this->_replacement_release))
     {
       $release_query = $this->branch->release_query ();
-      $release_query->set_order ('rel.time_next_deadline ASC');
+      $release_query->set_order ('rel.time_next_deadline DESC');
       $releases = $release_query->objects ();
 
       /* Look for this release in the list of releases for this branch. If it's found,
@@ -136,7 +136,6 @@ abstract class RELEASE_UPDATER extends WEBCORE_OBJECT
    * @param QUERY $entry_query
    * @param string $sub_history_item_publication_state Can be {@link History_item_silent} or {@link History_item_needs_send}.
    * @param string $applier_func
-   * @access private
    */
   protected function _apply_to_entries ($entry_query, $sub_history_item_publication_state, $applier_func)
   {
@@ -177,11 +176,19 @@ abstract class RELEASE_UPDATER extends WEBCORE_OBJECT
       $this_branch_info->store ();
     }
   }
+  
+  /**
+   * Apply the required change to the {@link BRANCH}.
+   * @param PROJECT_ENTRY_BRANCH_INFO $branch_info
+   */
+  protected function _set_replacement_release ($branch_info)
+  {
+    $branch_info->release_id = $this->_replacement_release_id ();
+  }
 
   /**
    * Id of the {@link replacement_release()}.
    * @return integer
-   * @access private
    */
   protected function _replacement_release_id ()
   {
@@ -213,16 +220,6 @@ class RELEASE_PURGER extends RELEASE_UPDATER
   {
     $entry_query = $this->release->entry_query ();
     $this->_apply_to_entries ($entry_query, $sub_history_item_publication_state, '_set_replacement_release');
-  }
-
-  /**
-   * Apply the required change to the {@link BRANCH}.
-   * @param PROJECT_ENTRY_BRANCH_INFO $branch_info
-   * @access private
-   */
-  protected function _set_replacement_release ($branch_info)
-  {
-    $branch_info->release_id = $this->_replacement_release_id ();
   }
 }
 
@@ -259,7 +256,7 @@ class RELEASE_SHIPPER extends RELEASE_UPDATER
   {
     $this->_apply_to_entries ($this->change_query (), $sub_history_item_publication_state, '_set_release');
     $this->_apply_to_entries ($this->closed_job_query (), $sub_history_item_publication_state, '_set_release');
-    $this->_apply_to_entries ($this->open_job_query (), $sub_history_item_publication_state, '_clear_release');
+    $this->_apply_to_entries ($this->open_job_query (), $sub_history_item_publication_state, '_set_replacement_release');
     $this->_apply_to_entries ($this->remapped_job_query (), $sub_history_item_publication_state, '_map_status');
   }
 

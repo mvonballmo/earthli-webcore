@@ -103,6 +103,7 @@ var, kbd
 	border: 1px solid silver; 
 	color: white; 
 	padding: 0px 2px; 
+	display: block;
 }
 
 pre
