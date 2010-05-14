@@ -156,8 +156,13 @@ body>.page
 
 .quote-inline
 {
-	font-style: italic;
-	color: #800000;
+	font-style: italic;	
+	color: #777;
+}
+
+.quote-inline:hover
+{
+/*  outline: 3px solid green; */
 }
 
 .quote-inline em
@@ -167,9 +172,9 @@ body>.page
 
 .quote-block
 {
-	padding: .5em;
-	color: #800000;
-	border: 1px solid #CCCCCC;
+	padding: 0em .5em;
+/*	color: #800000; */
+	border-left: 6px solid #CCCCCC;
 }
 
 .pullquote
