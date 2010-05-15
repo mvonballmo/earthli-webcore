@@ -132,7 +132,7 @@ class MUNGER_VALIDATOR_TAG_INFO
     $attrs = $token->attributes ();
     foreach (array_keys($attrs) as $key)
     {
-      if (! isset ($this->properties [$key]))
+      if (! isset ($this->properties [strtolower($key)]))
       {
         $validator->add_error ('Invalid attribute [' . $key . '] for [' . $token->name() . ']', $token);
       }
