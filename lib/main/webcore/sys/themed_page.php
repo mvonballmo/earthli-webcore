@@ -395,24 +395,14 @@ class THEMED_PAGE extends PAGE
   {
     parent::__construct ($env);
 
-    $class_name = $this->final_class_name ('THEME_OPTIONS');
+    $class_name = $this->final_class_name ('THEME_OPTIONS');    
     $this->theme_options = new $class_name ();
 
     $this->theme = new THEME_SETTINGS ($this);
     $this->stored_theme = new THEME_SETTINGS ($this);
     $this->default_theme = new THEME_SETTINGS ($this);
-
-    $browser = $env->browser ();
-    if (! $browser->supports (Browser_alpha_PNG))
-    {
-      $this->default_theme->icon_extension = 'gif';
-      $this->default_theme->icon_set = 'webcore_gif_silver';
-    }
-
-    if ($browser->is (Browser_ie))
-    {
-      $this->default_theme->dont_apply_to_forms = true;
-    }
+    
+    $this->_configure_default_theme_options();
   }
 
   /**
@@ -572,6 +562,27 @@ class THEMED_PAGE extends PAGE
     $this->storage->start_multiple_value ($this->storage_options->theme_settings_name);
     $this->stored_theme->store_to_client ($this->storage);
     $this->storage->finish_multiple_value ();
+  }
+  
+  /**
+   * Configure the {@link $default_theme}.
+   */
+  protected function _configure_default_theme_options()
+  {
+  	if ($this->env->is_http_server()) 
+    {
+	    $browser = $this->env->browser ();
+	    if (! $browser->supports (Browser_alpha_PNG))
+	    {
+	      $this->default_theme->icon_extension = 'gif';
+	      $this->default_theme->icon_set = 'webcore_gif_silver';
+	    }
+	  
+	    if ($browser->is (Browser_ie))
+	    {
+	      $this->default_theme->dont_apply_to_forms = true;
+	    }
+    }
   }
 
   /**

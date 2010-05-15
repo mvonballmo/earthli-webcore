@@ -380,12 +380,6 @@ class ENGINE extends RESOLVER
     $page->default_theme->font_name_CSS_file_name = '{styles}fonts/verdana';
     $page->default_theme->font_size_CSS_file_name = '{styles}core/small';
 
-    /* Load the user's preferred theme from local storage (using a COOKIE).
-     * Leave this out in order to force the 'default theme'.
-     */
-
-    $page->load_theme ();
-
     /* Set up database options. */
 
     $page->database_options->host = 'localhost';  // sets the default

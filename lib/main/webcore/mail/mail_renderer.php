@@ -63,16 +63,21 @@ class MAIL_RENDERER extends RENDERER
     {
       $state->saved_display_options = clone($this->page->display_options);
     }
+    
     if (isset($this->page->template_options))
     {
       $state->saved_template_options = clone($this->page->template_options);
     }
+
     $state->saved_show_interactive_option = $options->show_interactive;
     $state->saved_show_local_time_option = $this->env->date_time_toolkit->formatter->show_local_time;
     
     /* Apply required changes to global options. */
     
+    // Use full URLs
     $this->context->set_root_behavior (Force_root_on);
+    
+    // Do not use JavaScript for times
     $this->page->display_options->show_local_times = false;
     
     $options = $this->page->template_options;
@@ -99,14 +104,17 @@ class MAIL_RENDERER extends RENDERER
   protected function _finish_rendering ($options, $state)
   {
     $this->context->restore_root_behavior ();
+    
     if (isset($state->saved_display_options))
     {
       $this->page->display_options = $state->saved_display_options;
     }
+    
     if (isset($state->saved_template_options))
     {
       $this->page->template_options = $state->saved_template_options;
     }
+
     $this->env->date_time_toolkit->formatter->show_local_time = $state->saved_show_local_time_option;
     $options->show_interactive = $state->saved_show_interactive_option;
   }
@@ -114,6 +122,7 @@ class MAIL_RENDERER extends RENDERER
 
 /**
  * Stores the state of an application for a {@link MAIL_RENDERER}.
+ * 
  * @package webcore
  * @subpackage mail
  * @version 3.2.0
@@ -124,28 +133,36 @@ class MAIL_RENDERER_STATE
 {
   /**
    * Copy of the page's display options.
-   * Stored by {@link _start_rendering()} and restored by {@link _finish_rendering()}. 
+   * 
+   * Stored by {@link _start_rendering()} and restored by {@link _finish_rendering()}.
+   *  
    * @var PAGE_DISPLAY_OPTIONS
    */
   public $saved_display_options;
 
   /**
    * Copy of the page's template options.
-   * Stored by {@link _start_rendering()} and restored by {@link _finish_rendering()}. 
+   * 
+   * Stored by {@link _start_rendering()} and restored by {@link _finish_rendering()}.
+   *  
    * @var PAGE_TEMPLATE_OPTIONS
    */
   public $saved_template_options;
 
   /**
-   * Saved value for {@link MAIL_RENDERER_OPTIONS::$show_interactive}. 
-   * Stored by {@link _start_rendering()} and restored by {@link _finish_rendering()}. 
+   * Saved value for {@link MAIL_RENDERER_OPTIONS::$show_interactive}.
+   *  
+   * Stored by {@link _start_rendering()} and restored by {@link _finish_rendering()}.
+   *  
    * @var boolean
    */
   public $saved_show_local_time_option;
 
   /**
-   * Saved value for {@link MAIL_RENDERER_OPTIONS::$show_interactive}. 
-   * Stored by {@link _start_rendering()} and restored by {@link _finish_rendering()}. 
+   * Saved value for {@link MAIL_RENDERER_OPTIONS::$show_interactive}.
+   * 
+   * Stored by {@link _start_rendering()} and restored by {@link _finish_rendering()}.
+   *  
    * @var boolean
    */
   public $saved_show_interactive_option;

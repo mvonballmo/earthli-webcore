@@ -91,6 +91,11 @@ class THEMED_ENGINE extends ENGINE
   {
     parent::_init_page ($env, $page);
     $this->_init_theme ($page);
+    
+    /* Load the user's preferred theme from local storage (using a COOKIE).
+     * Leave this out in order to force the 'default theme'.
+     */
+
     if ($this->use_local_theme)
     {
       $page->load_theme ();

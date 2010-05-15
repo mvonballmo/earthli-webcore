@@ -462,7 +462,10 @@ class PUBLISHER extends LOGGABLE
        * internally.
        */
 
-      $this->_send_items ($items);
+      if (isset($items))
+      {
+      	$this->_send_items ($items);
+      }
     }
   }
 
