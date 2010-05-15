@@ -317,11 +317,8 @@ abstract class FOLDER_INHERITABLE_SETTINGS extends STORABLE
       $history_item->store ();
     }
 
-    if ($creating)
-    {
-      $target_folder->$field_name = $source_folder->id;
-      $target_folder->store ();
-    }
+    $target_folder->$field_name = $source_folder->id;
+    $target_folder->store ();
   }
 
   /**

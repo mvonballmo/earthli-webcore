@@ -570,10 +570,13 @@ class FOLDER_SECURITY extends FOLDER_INHERITABLE_SETTINGS
 
   protected function _ensure_default_permissions_are_stored()
   {
+  	$this->anonymous_permissions (); // Try loading the existing permissions
     if (! isset ($this->_anonymous_permissions))
     {
       $this->_anonymous_permissions = $this->_create_and_store_permissions (Privilege_kind_anonymous);
     }
+    
+    $this->registered_permissions (); // Try loading the existing permissions
     if (! isset ($this->_registered_permissions))
     {
       $this->_registered_permissions = $this->_create_and_store_permissions (Privilege_kind_registered);
