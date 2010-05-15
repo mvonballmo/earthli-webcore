@@ -444,9 +444,9 @@ class THEMED_PAGE extends PAGE
   {
     $this->storage->load_multiple_values ($this->storage_options->theme_settings_name, false);
     $this->stored_theme->load_from_client ($this->storage);
-    $this->theme = $this->stored_theme;
+    $this->theme = clone($this->stored_theme);
 
-    $old_theme = $this->theme;
+    $old_theme = clone($this->theme);
     $this->validate_theme ();
     $this->stored_theme_is_valid = $old_theme->equals ($this->theme);
 
