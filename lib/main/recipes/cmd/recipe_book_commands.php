@@ -63,7 +63,14 @@ class RECIPE_BOOK_COMMANDS extends FOLDER_COMMANDS
     $cmd = $this->command_at ('new_entry');
     $cmd->title = 'New recipe';
     $cmd->icon = '{app_icons}buttons/new_recipe';
-    $cmd->link = "create_recipe.php?id=$folder->id";
+    if ($folder->is_organizational()) 
+    {
+      $cmd->link = "select_folder.php?page_name=create_recipe.php";
+    }
+    else
+    {
+      $cmd->link = "create_recipe.php?id=$folder->id";
+    }
   }
 }
 

@@ -73,10 +73,7 @@ class FOLDER_COMMANDS extends COMMANDS
     $cmd->importance = Command_importance_high + Command_importance_increment;
     $this->append ($cmd);
 
-    if (! $folder->is_organizational ())
-    {
-      $this->_add_creators ($folder);
-    }
+    $this->_add_creators ($folder);
   }
 
   /**
@@ -92,7 +89,7 @@ class FOLDER_COMMANDS extends COMMANDS
     $cmd->link = "edit_folder.php?id=$folder->id";
     $cmd->icon = '{icons}buttons/edit';
     $cmd->executable = $this->login->is_allowed (Privilege_set_folder, Privilege_modify, $folder);
-    $cmd->importance = Command_importance_high + Command_importance_increment;
+    $cmd->importance = Command_importance_high;
     $this->append ($cmd);
 
     $cmd = $this->make_command ();
@@ -189,6 +186,11 @@ class FOLDER_COMMANDS extends COMMANDS
     $cmd->executable = $this->login->is_allowed (Privilege_set_entry, Privilege_create, $folder);
     $cmd->importance = Command_importance_high;
     $this->append ($cmd);
+    
+    if ($folder->is_organizational ())
+    {
+      $cmd->link = "select_folder.php?entry_type=ENTRY";
+    }
   }
 }
 

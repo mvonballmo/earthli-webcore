@@ -116,7 +116,14 @@ class ALBUM_COMMANDS extends FOLDER_COMMANDS
     $cmd = $this->make_command ();
     $cmd->id = 'new_picture';
     $cmd->title = 'New picture';
-    $cmd->link = "create_picture.php?id=$folder->id";
+    if ($folder->is_organizational()) 
+    {
+      $cmd->link = "select_folder.php?page_name=create_picture.php";
+    }
+    else
+    {
+      $cmd->link = "create_picture.php?id=$folder->id";
+    }    
     $cmd->icon = '{app_icons}buttons/new_picture';
     $cmd->executable = $folder->app->login->is_allowed (Privilege_set_entry, Privilege_create, $folder);
     $cmd->importance = Command_importance_high + Command_importance_increment;
@@ -125,21 +132,36 @@ class ALBUM_COMMANDS extends FOLDER_COMMANDS
     $cmd = $this->make_command ();
     $cmd->id = 'new_journal';
     $cmd->title = 'New journal';
+    if ($folder->is_organizational()) 
+    {
+      $cmd->link = "select_folder.php?page_name=create_journal.php";
+    }
+    else
+    {
+      $cmd->link = "create_journal.php?id=$folder->id";
+    }
     $cmd->link = "create_journal.php?id=$folder->id";
     $cmd->icon = '{app_icons}buttons/new_journal';
     $cmd->executable = $folder->app->login->is_allowed (Privilege_set_entry, Privilege_create, $folder);
     $cmd->importance = Command_importance_high - Command_importance_increment;
     $this->append ($cmd);
-
+    
     $cmd = $this->make_command ();
     $cmd->id = 'upload_pictures';
     $cmd->title = 'Upload pictures';
-    $cmd->link = "upload_pictures.php?id=$folder->id";
+    if ($folder->is_organizational()) 
+    {
+      $cmd->link = "select_folder.php?page_name=upload_pictures.php";
+    }
+    else
+    {
+      $cmd->link = "upload_pictures.php?id=$folder->id";
+    }
     $cmd->icon = '{icons}buttons/upload';
     $cmd->executable = $folder->app->login->is_allowed (Privilege_set_entry, Privilege_create, $folder)
                        && $folder->app->login->is_allowed (Privilege_set_entry, Privilege_upload, $folder)
                        && $folder->uploads_allowed ();
-    $cmd->importance = Command_importance_low;
+    $cmd->importance = Command_importance_high + Command_importance_increment;
     $this->append ($cmd);
   }
 }

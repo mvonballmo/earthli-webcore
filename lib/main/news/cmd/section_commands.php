@@ -63,7 +63,15 @@ class SECTION_COMMANDS extends FOLDER_COMMANDS
     $cmd = $this->command_at ('new_entry');
     $cmd->title = 'New article';
     $cmd->icon = '{app_icons}buttons/new_article';
-    $cmd->link = "create_article.php?id=$folder->id";
+    
+    if ($folder->is_organizational()) 
+    {
+    	$cmd->link = "select_folder.php?page_name=create_article.php";
+    }
+    else
+    {
+      $cmd->link = "create_article.php?id=$folder->id";
+    }
   }
 }
 

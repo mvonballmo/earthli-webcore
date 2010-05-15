@@ -26,33 +26,40 @@ http://www.earthli.com/software/webcore
 
 ****************************************************************************/
 
-  $Page->title->subject = 'Select folder';
-
-  $App->set_referer ();
-
-  $Page->location->add_root_link ();
-  $Page->location->append ($Page->title->subject);
-
-  $Page->start_display ();
-?>
-  <div class="box">
-    <div class="box-title">
-      <?php echo $Page->title->subject; ?>
-    </div>
-    <div class="box-body">
-      <p style="text-align: center">Please select a folder in order to continue.</p>
-    <?php
-      $folder_query = $App->login->folder_query ();
-      $folders = $folder_query->tree ();
-
-      include_once ('webcore/gui/folder_tree_node_info.php');
-      $tree = $App->make_tree_renderer ();
-      $tree->node_info = new FOLDER_TREE_NODE_INFO ($App);
-      $tree->node_info->page_link = read_var ('last_page');
-      $tree->display ($folders);
-    ?>
-    </div>
-  </div>
-<?php
-  $Page->finish_display ();
+	$page_name = read_var ('page_name');
+	
+	if (!empty($page_name))
+	{
+	  $Page->location->add_root_link ();
+	  $Page->location->append ($Page->title->subject);
+	
+	  $Page->start_display ();
+	?>
+	  <div class="box">
+	    <div class="box-title">
+	      <?php echo $Page->title->subject; ?>
+	    </div>
+	    <div class="box-body">
+	      <p style="text-align: center">Please select a folder in order to continue.</p>
+	    <?php    
+		    $create_entry_url = $App->resolve_file_for_alias (Folder_name_application, $page_name);
+		    
+		    include_once ('webcore/gui/folder_tree_node_info.php');
+		    $tree = $App->make_tree_renderer ();
+		    $tree->node_info = new FOLDER_TREE_NODE_INFO ($App);
+		    $tree->node_info->page_link = "$create_entry_url";
+		    
+		    $folder_query = $App->login->folder_query ();
+		    $folders = $folder_query->tree ();
+		    $tree->display ($folders);
+	    ?>
+	    </div>
+	  </div>
+	<?php
+	  $Page->finish_display ();
+	}
+	else
+	{
+	  $Page->raise_error ('Incorrect arguments for selecting a folder.', 'Select folder');
+	}
 ?>

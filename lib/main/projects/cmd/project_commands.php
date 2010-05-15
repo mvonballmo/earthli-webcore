@@ -69,59 +69,76 @@ class PROJECT_COMMANDS extends FOLDER_COMMANDS
   protected function _add_creators ($folder)
   {
     $cmd = $this->make_command ();
+    $cmd->id = 'new_change';
+    $cmd->title = 'New change';
+    if ($folder->is_organizational()) 
+    {
+      $cmd->link = "select_folder.php?page_name=create_change.php";
+    }
+    else
+    {
+      $cmd->link = "create_change.php?id=$folder->id";
+    }
+    $cmd->icon = '{app_icons}buttons/new_change';
+    $cmd->executable = $this->login->is_allowed (Privilege_set_entry, Privilege_create, $folder);
+    $cmd->importance = Command_importance_high;
+    $this->append ($cmd);
+  	
+    $cmd = $this->make_command ();
     $cmd->id = 'new_job';
     $cmd->title = 'New job';
-    $cmd->link = "create_job.php?id=$folder->id";
+    if ($folder->is_organizational()) 
+    {
+      $cmd->link = "select_folder.php?page_name=create_job.php";
+    }
+    else
+    {
+      $cmd->link = "create_job.php?id=$folder->id";
+    }
     $cmd->icon = '{app_icons}buttons/new_job';
     $cmd->executable = $this->login->is_allowed (Privilege_set_entry, Privilege_create, $folder);
     $cmd->importance = Command_importance_high;
     $this->append ($cmd);
 
-    $cmd = $this->make_command ();
-    $cmd->id = 'new_change';
-    $cmd->title = 'New change';
-    $cmd->link = "create_change.php?id=$folder->id";
-    $cmd->icon = '{app_icons}buttons/new_change';
-    $cmd->executable = $this->login->is_allowed (Privilege_set_entry, Privilege_create, $folder);
-    $cmd->importance = Command_importance_high;
-    $this->append ($cmd);
-
-    $cmd = $this->make_command ();
-    $cmd->id = 'new_release';
-    $cmd->title = 'New release';
-    $cmd->link = "create_release.php?id=$folder->trunk_id";
-    $cmd->icon = '{app_icons}buttons/new_release';
-    $cmd->executable = $this->login->is_allowed (Privilege_set_folder, Privilege_modify, $folder);
-    $cmd->importance = Command_importance_low + Command_importance_increment;
-    $this->append ($cmd);
-
-    $cmd = $this->make_command ();
-    $cmd->id = 'new_branch';
-    $cmd->title = 'New branch';
-
-    $branch =  $folder->trunk ();
-    if (isset ($branch))
+    if (!$folder->is_organizational()) 
     {
-      $cmd->link = "create_branch.php?id=$folder->id&branch_id=$branch->id";
-    }
-    else
-    {
-      $cmd->link = "create_branch.php?id=$folder->id";
-    }
+	    $cmd = $this->make_command ();
+	    $cmd->id = 'new_release';
+	    $cmd->title = 'New release';
+	    $cmd->icon = '{app_icons}buttons/new_release';
+	    $cmd->executable = $this->login->is_allowed (Privilege_set_folder, Privilege_modify, $folder);
+	    $cmd->importance = Command_importance_low + Command_importance_increment;
+	    $this->append ($cmd);
+    	$cmd->link = "create_release.php?id=$folder->trunk_id";
 
-    $cmd->icon = '{app_icons}buttons/new_branch';
-    $cmd->executable = $this->login->is_allowed (Privilege_set_folder, Privilege_modify, $folder);
-    $cmd->importance = Command_importance_low + Command_importance_increment;
-    $this->append ($cmd);
-
-    $cmd = $this->make_command ();
-    $cmd->id = 'new_component';
-    $cmd->title = 'New component';
-    $cmd->link = "create_component.php?id=$folder->id";
-    $cmd->icon = '{app_icons}buttons/new_component';
-    $cmd->executable = $this->login->is_allowed (Privilege_set_folder, Privilege_modify, $folder);
-    $cmd->importance = Command_importance_low + Command_importance_increment;
-    $this->append ($cmd);
+	    $cmd = $this->make_command ();
+	    $cmd->id = 'new_branch';
+	    $cmd->title = 'New branch';
+	
+	    $branch =  $folder->trunk ();
+	    if (isset ($branch))
+	    {
+	      $cmd->link = "create_branch.php?id=$folder->id&branch_id=$branch->id";
+	    }
+	    else
+	    {
+	      $cmd->link = "create_branch.php?id=$folder->id";
+	    }
+	
+	    $cmd->icon = '{app_icons}buttons/new_branch';
+	    $cmd->executable = $this->login->is_allowed (Privilege_set_folder, Privilege_modify, $folder);
+	    $cmd->importance = Command_importance_low + Command_importance_increment;
+	    $this->append ($cmd);
+	
+	    $cmd = $this->make_command ();
+	    $cmd->id = 'new_component';
+	    $cmd->title = 'New component';
+	    $cmd->link = "create_component.php?id=$folder->id";
+	    $cmd->icon = '{app_icons}buttons/new_component';
+	    $cmd->executable = $this->login->is_allowed (Privilege_set_folder, Privilege_modify, $folder);
+	    $cmd->importance = Command_importance_low + Command_importance_increment;
+	    $this->append ($cmd);
+    }
   }
 }
 
