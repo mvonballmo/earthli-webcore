@@ -468,10 +468,11 @@ class APPLICATION extends CONTEXT
       $this->storage->expire_when_session_ends ();
     }
 
-    $this->storage->set_value ($this->storage_options->login_user_name, $this->_encode_user ($user));
+    $this->_get_login_storage()->set_value ($this->storage_options->login_user_name, $this->_encode_user ($user));
+    
     $this->set_login ($user);
   }
-
+  
   /**
    * Changes the {@link $login} to the given user.
    * Does not perform any password checking. Does not store this user on the
@@ -530,7 +531,7 @@ class APPLICATION extends CONTEXT
    */
   public function log_out ()
   {
-    $this->storage->clear_value ($this->storage_options->login_user_name);
+    $this->_get_login_storage()->clear_value ($this->storage_options->login_user_name);
   }
 
   /**
@@ -996,12 +997,13 @@ class APPLICATION extends CONTEXT
   protected function _logged_in_user ($force = false)
   {
     $info_name = $this->storage_options->login_user_name;
+    $storage = $this->_get_login_storage();
     
     $Result = null;
 
     /* Read the user's information from the storage, if present. */
     
-    $user_info = $this->storage->value ($info_name);
+    $user_info = $storage->value ($info_name);
     if (!empty($user_info))
     {
       $Result = $this->_decode_user ($user_info);
@@ -1052,7 +1054,7 @@ class APPLICATION extends CONTEXT
     if (! isset ($Result))
     {
       $Result = $this->anon_user ();
-      $this->storage->clear_value ($info_name);
+      $storage->clear_value ($info_name);
     }
 
     return $Result;
@@ -1124,6 +1126,16 @@ class APPLICATION extends CONTEXT
     }
 
     return new $class_name ($this);
+  }
+
+  protected function _get_login_storage()
+  {
+    if ($this->storage_options->shared_login)
+    {
+      return $this->page->storage;
+    }
+
+    return $this->storage;
   }
 
   /**

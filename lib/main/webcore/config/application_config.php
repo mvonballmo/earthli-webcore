@@ -423,21 +423,33 @@ class APPLICATION_STORAGE_OPTIONS extends CONTEXT_STORAGE_OPTIONS
 {
   /**
    * Name of the cookie for storing login info.
+   * 
    * @var string
    */
   public $login_user_name = 'login_user';
 
   /**
    * Name of the cookie for storing last known page.
+   * 
    * @var string
    */
   public $return_to_page_name = 'return_to_page';
 
   /**
    * Number of days to store a login.
+   * 
    * @var integer
    */
   public $login_duration = 180;
+  
+  /**
+   * If true, login information is stored globally for all earthli applications.
+   * If false, this application tracks its login information separately from
+   * other earthli applications.
+   * 
+   * @var boolean
+   */
+  public $shared_login = true;
 }
 
 /**
