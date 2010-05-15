@@ -36,7 +36,7 @@ http://www.earthli.com/software/webcore
 
   if (! isset ($folder))
   {
-    $Env->redirect_local ('select_folder.php?last_page=' . urlencode ($Env->url (Url_part_all)));
+    $Env->redirect_local ('select_folder.php?page_name=' . urlencode ($Env->url (Url_part_name | Url_part_ext)));
   }
   else
   {
