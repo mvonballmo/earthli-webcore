@@ -514,7 +514,7 @@ class ZIP_FILE extends COMPRESSED_FILE
     if (function_exists ('zip_open'))
     {
       $this->_handle = @zip_open ($this->file_name);
-      if ($this->_handle === false)
+      if (!is_resource($this->_handle))
       {
         $this->_handle = null;
       }
