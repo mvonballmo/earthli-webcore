@@ -93,7 +93,7 @@ class PROJECT_USER_RELEASE_QUERY extends USER_ENTRY_QUERY
 
     // set a 'fake' folder id (so that the release appears as an ENTRY to the parent query)
     $fldr_id = $this->db->f ('branch_folder_id');
-    $obj->set_parent_folder ($this->login->folder_at_id ($fldr_id));
+    $obj->set_parent_folder ($this->_user->folder_at_id ($fldr_id));
     $obj->_branch->set_parent_folder ($obj->parent_folder ());
   }
 }

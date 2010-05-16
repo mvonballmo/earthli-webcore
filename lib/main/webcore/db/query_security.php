@@ -60,11 +60,13 @@ class QUERY_SECURITY_RESTRICTION extends WEBCORE_OBJECT
 {
   /**
    * @param QUERY $query Query to which the restriction is applied.
+   * @param USER $user The user for which folders are to be retrieved.
    */
-  public function __construct ($query)
+  public function __construct ($query, $user)
   {
     parent::__construct ($query->context);
     $this->_query = $query;
+    $this->_user = $user;
   }
 
   /**
@@ -166,7 +168,7 @@ class QUERY_SECURITY_RESTRICTION extends WEBCORE_OBJECT
   protected function _generate_sql_for_sets ($set_names)
   {
     $this->_set_names = $set_names;
-    $permissions = $this->login->permissions ();
+    $permissions = $this->_user->permissions ();
     
     foreach ($set_names as &$set_name)
     {
@@ -215,7 +217,7 @@ class QUERY_SECURITY_RESTRICTION extends WEBCORE_OBJECT
   {
     $sets = array_merge ($this->_vis_sets, $item->sets);
     $privs = array_merge ($this->_vis_privs, $item->privileges);
-    $fq = $this->login->folder_query ();
+    $fq = $this->_user->folder_query ();
     return $fq->filtered_ids_as_string ($sets, $privs);
   }
 
@@ -237,7 +239,7 @@ class QUERY_SECURITY_RESTRICTION extends WEBCORE_OBJECT
     {
       if ($item->include_drafts && ($state == Visible) && $this->_query->includes (Unpublished))
       {
-        $Result = "($Result) OR (($table_name.state & " . Unpublished . " = " . Unpublished . ") AND ($table_name.owner_id = {$this->login->id}))";
+        $Result = "($Result) OR (($table_name.state & " . Unpublished . " = " . Unpublished . ") AND ($table_name.owner_id = {$this->_user->id}))";
       }
     }
     return $Result;
@@ -296,6 +298,13 @@ class QUERY_SECURITY_RESTRICTION extends WEBCORE_OBJECT
    * @access private
    */
   protected $_vis_privs;
+  
+  /**
+   * The user to use for access control.
+   * 
+   * @var USER
+   */
+  private $_user;
   
   /**
    * The query on which this object operates.

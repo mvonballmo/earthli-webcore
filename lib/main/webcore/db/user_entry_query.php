@@ -54,6 +54,17 @@ class USER_ENTRY_QUERY extends OBJECT_IN_FOLDER_QUERY
    * @var string
    */
   public $alias = 'entry';
+  
+  /**
+   * @param USER $user The user for which entries are to be retrieved.
+   */
+  public function __construct ($user)
+  {
+    parent::__construct ($user->app);
+    
+    $this->_user = $user;
+    $this->_user->load_permissions (); // Make sure permissions are available
+  }
 
   /**
    * Apply default restrictions and tables.
@@ -86,7 +97,7 @@ class USER_ENTRY_QUERY extends OBJECT_IN_FOLDER_QUERY
     if (! $this->_returns_no_data ())
     {
       include_once ('webcore/db/query_security.php');
-      $restriction = new QUERY_SECURITY_RESTRICTION ($this);
+      $restriction = new QUERY_SECURITY_RESTRICTION ($this, $this->_user);
       $sql = $restriction->as_sql (array (Privilege_set_folder, Privilege_set_entry));
       if (! $sql)
       {
@@ -136,19 +147,24 @@ class USER_ENTRY_QUERY extends OBJECT_IN_FOLDER_QUERY
    */
   protected function _prepare_object ($obj)
   {
-    $obj->set_parent_folder ($this->login->folder_at_id ($this->db->f ('folder_id')));
+    $obj->set_parent_folder ($this->_user->folder_at_id ($this->db->f ('folder_id')));
   }
 
   /**
+   * The user to use for access control.
+   * 
+   * @var USER
+   */
+  private $_user;
+  
+  /**
    * @var USER_FOLDER_QUERY
-   * @access private
    */
   protected $_folder_query;
 
   /**
    * Name of the default permission set to use.
    * @var string
-   * @access private
    */
   protected $_privilege_set = Privilege_set_entry;
 }
@@ -163,11 +179,11 @@ class USER_ENTRY_QUERY extends OBJECT_IN_FOLDER_QUERY
 class USER_MULTI_ENTRY_QUERY extends USER_ENTRY_QUERY
 {
   /**
-   * @param ALBUM_APPLICATION $app Main application.
+   * @param USER $user The user for which entries are to be retrieved.
    */
-  public function __construct ($app)
+  public function __construct ($user)
   {
-    parent::__construct ($app);
+    parent::__construct ($user);
     $this->set_type ('');
   }
 

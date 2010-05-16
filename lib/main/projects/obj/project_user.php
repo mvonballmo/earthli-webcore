@@ -75,7 +75,7 @@ class PROJECT_USER extends USER
   public function all_release_query ()
   {
     include_once ('projects/db/project_user_release_query.php');
-    return new PROJECT_USER_RELEASE_QUERY ($this->app);
+    return new PROJECT_USER_RELEASE_QUERY ($this);
   }
 
   /**
@@ -85,7 +85,7 @@ class PROJECT_USER extends USER
   public function all_branch_query ()
   {
     include_once ('projects/db/project_user_branch_query.php');
-    return new PROJECT_USER_BRANCH_QUERY ($this->app);
+    return new PROJECT_USER_BRANCH_QUERY ($this);
   }
 
   /**

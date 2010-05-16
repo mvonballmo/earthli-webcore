@@ -75,8 +75,14 @@ class FOLDER_SUBSCRIPTION_FORM extends SUBSCRIPTION_FORM
     {
       $selected_folder_ids = $this->_object->subscribed_ids_for (Subscribe_folder);
     }
+    
+    $user = $this->_object->user ();  // Try to get the user associated with this subscriber
+    if (!isset($user))
+    {
+    	$user = $this->app->anon_user();
+    }
 
-    $folder_query = $this->login->folder_query ();
+    $folder_query = $user->folder_query ();
     $folders = $folder_query->tree ($this->app->root_folder_id);
     $selected_folders = $folder_query->objects_at_ids ($selected_folder_ids);
 

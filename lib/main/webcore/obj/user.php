@@ -485,7 +485,7 @@ class USER extends CONTENT_OBJECT
     if (! isset ($this->_folder_query))
     {
       $class_name = $this->app->final_class_name ('USER_FOLDER_QUERY', 'webcore/db/user_folder_query.php');
-      return new $class_name ($this->app);
+      return new $class_name ($this);
     }
 
     return $this->_folder_query;
@@ -548,7 +548,7 @@ class USER extends CONTENT_OBJECT
   public function all_comment_query ()
   {
     $class_name = $this->app->final_class_name ('USER_COMMENT_QUERY', 'webcore/db/user_comment_query.php');
-    return new $class_name ($this->app);
+    return new $class_name ($this);
   }
 
   /**
@@ -578,7 +578,7 @@ class USER extends CONTENT_OBJECT
   public function all_entry_query ()
   {
     $class_name = $this->app->final_class_name ('USER_ENTRY_QUERY', 'webcore/db/user_entry_query.php');
-    return new $class_name ($this->app);
+    return new $class_name ($this);
   }
 
   /**
@@ -608,7 +608,7 @@ class USER extends CONTENT_OBJECT
   public function all_attachment_query ()
   {
     $class_name = $this->app->final_class_name ('USER_ATTACHMENT_QUERY', 'webcore/db/user_attachment_query.php');
-    return new $class_name ($this->app);
+    return new $class_name ($this);
   }
 
   /**

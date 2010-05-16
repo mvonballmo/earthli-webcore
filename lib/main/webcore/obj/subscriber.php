@@ -364,7 +364,6 @@ class SUBSCRIBER extends UNIQUE_OBJECT
     if (isset ($this->email) && $obj->exists ())
     {
       $query = $obj->subscriber_query ();
-      $query->clear_restrictions();
       $query->restrict ("subscribers.email = '$this->email'");
       $query->set_select ('subs.kind as subkind');
       $db = $query->raw_output ();

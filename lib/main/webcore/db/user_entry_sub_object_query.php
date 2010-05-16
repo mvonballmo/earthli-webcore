@@ -49,6 +49,17 @@ require_once ('webcore/db/object_in_folder_query.php');
 abstract class USER_ENTRY_SUB_OBJECT_QUERY extends OBJECT_IN_FOLDER_QUERY
 {
   /**
+   * @param USER $user The user for which entries are to be retrieved.
+   */
+  public function __construct ($user)
+  {
+    parent::__construct ($user->app);
+    
+    $this->_user = $user;
+    $this->_user->load_permissions (); // Make sure permissions are available
+  }
+
+	/**
    * Apply default restrictions and tables.
    */
   public function apply_defaults () 
@@ -67,7 +78,7 @@ abstract class USER_ENTRY_SUB_OBJECT_QUERY extends OBJECT_IN_FOLDER_QUERY
     if (! $this->_returns_no_data ())
     {
       include_once ('webcore/db/query_security.php');
-      $restriction = new QUERY_SECURITY_RESTRICTION ($this);
+      $restriction = new QUERY_SECURITY_RESTRICTION ($this, $this->_user);
       $sql = $restriction->as_sql (array (Privilege_set_folder, Privilege_set_entry, $this->_privilege_set));
       if (! $sql)
       {
@@ -127,7 +138,7 @@ abstract class USER_ENTRY_SUB_OBJECT_QUERY extends OBJECT_IN_FOLDER_QUERY
     $entry->id = $db->f ('entry_id');
     $entry->title = $db->f ('entry_title');
     $entry->state = $db->f ('entry_state');
-    $entry->set_parent_folder ($this->login->folder_at_id ($this->db->f ('folder_id')));
+    $entry->set_parent_folder ($this->_user->folder_at_id ($this->db->f ('folder_id')));
   }
 
   /**
@@ -153,6 +164,13 @@ abstract class USER_ENTRY_SUB_OBJECT_QUERY extends OBJECT_IN_FOLDER_QUERY
    * @abstract
    */
   protected abstract function _attach_entry_to_object ($obj, $entry);  
+
+  /**
+   * The user to use for access control.
+   * 
+   * @var USER
+   */
+  private $_user;  
 }
 
 ?>

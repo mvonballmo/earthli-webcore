@@ -366,7 +366,7 @@ class PROJECT_APPLICATION extends APPLICATION
     if (! isset ($this->_component_cache))
     {
       include_once ('projects/db/project_user_component_query.php');
-      $this->_component_cache = new QUERY_BASED_CACHE (new PROJECT_USER_COMPONENT_QUERY ($this));
+      $this->_component_cache = new QUERY_BASED_CACHE (new PROJECT_USER_COMPONENT_QUERY ($this->login));
     }
     return $this->_component_cache->object_at_id ($id);
   }

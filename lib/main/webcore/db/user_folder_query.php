@@ -55,16 +55,19 @@ class USER_FOLDER_QUERY extends OBJECT_IN_FOLDER_QUERY
   public $alias = 'fldr';
 
   /**
-   * @param APPLICATION $app Main application.
+   * @param USER $user The user for which folders are to be retrieved.
    */
-  public function __construct ($app)
+  public function __construct ($user)
   {
-    parent::__construct ($app);
+    parent::__construct ($user->app);
 
     /* Folders may be loaded as another query is executing;
      * make sure not to execute in the existing connection.
      */
     $this->ensure_has_own_database_connection ();
+    
+    $this->_user = $user;
+    $this->_user->load_permissions (); // Make sure permissions are available
   }
 
   /**
@@ -232,7 +235,7 @@ class USER_FOLDER_QUERY extends OBJECT_IN_FOLDER_QUERY
 
     if (! $this->_returns_no_data ())
     {
-      $p = $this->login->permissions ();
+      $p = $this->_user->permissions ();
       $vis = $p->value_for (Privilege_set_folder, Privilege_view);
       $invis = $p->value_for (Privilege_set_folder, Privilege_view_hidden);
 
@@ -375,7 +378,7 @@ class USER_FOLDER_QUERY extends OBJECT_IN_FOLDER_QUERY
           $this->_num_records = 0;
         }
 
-        if ($this->login->is_anonymous ())
+        if ($this->_user->is_anonymous ())
         {
           $global_type = Privilege_kind_anonymous;
         }
@@ -384,7 +387,7 @@ class USER_FOLDER_QUERY extends OBJECT_IN_FOLDER_QUERY
           $global_type = Privilege_kind_registered;
         }
 
-        $user_id = $this->login->id;
+        $user_id = $this->_user->id;
 
         $this->_calculated_restrictions [] =  "(perm.kind = '$global_type')" .
                                               " OR ((perm.kind = '" . Privilege_kind_user . "') AND (perm.ref_id = $user_id))" .
@@ -466,7 +469,7 @@ class USER_FOLDER_QUERY extends OBJECT_IN_FOLDER_QUERY
         $idx_set = 0;
         while ($Result && ($idx_set < sizeof ($this->_filter_by_sets)))
         {
-          $Result = $this->login->is_allowed ($this->_filter_by_sets [$idx_set], $this->_filter_by_types [$idx_set], $obj);
+          $Result = $this->_user->is_allowed ($this->_filter_by_sets [$idx_set], $this->_filter_by_types [$idx_set], $obj);
           $idx_set += 1;
         }
       }
@@ -581,7 +584,7 @@ class USER_FOLDER_QUERY extends OBJECT_IN_FOLDER_QUERY
    */
   protected function _visible_objects_available ()
   {
-    $p = $this->login->permissions ();
+    $p = $this->_user->permissions ();
     return $p->value_for (Privilege_set_folder, Privilege_view) != Privilege_always_denied;
   }
 
@@ -592,7 +595,7 @@ class USER_FOLDER_QUERY extends OBJECT_IN_FOLDER_QUERY
    */
   protected function _invisible_objects_available ()
   {
-    $p = $this->login->permissions ();
+    $p = $this->_user->permissions ();
     return $p->value_for (Privilege_set_folder, Privilege_view_hidden) != Privilege_always_denied;
   }
 
@@ -616,29 +619,32 @@ class USER_FOLDER_QUERY extends OBJECT_IN_FOLDER_QUERY
   }
 
   /**
+   * The user to use for access control.
+   * 
+   * @var USER
+   */
+  private $_user;
+  
+  /**
    * @var integer
-   * @access private
    */
   protected $_num_folders = 0;
 
   /**
    * @var array[string]
    * @see _filtered_data()
-   * @access private
    */
   protected $_filter_by_sets;
 
   /**
    * @var integer
    * @see filtered_objects()
-   * @access private
    */
   protected $_filter_by_type;
 
   /**
    * Name of the default permission set to use.
    * @var string
-   * @access private
    */
   protected $_privilege_set = Privilege_set_folder;
 }

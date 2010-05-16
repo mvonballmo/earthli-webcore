@@ -68,7 +68,7 @@ class USER_HISTORY_ITEM_QUERY extends HISTORY_ITEM_QUERY
     if (! $this->_returns_no_data ())
     {
       include_once ('webcore/db/query_security.php');
-      $restriction = new QUERY_SECURITY_RESTRICTION ($this);
+      $restriction = new QUERY_SECURITY_RESTRICTION ($this, $this->_user);
       $sql = $restriction->as_sql (array (Privilege_set_folder));
       if (! $sql)
       {

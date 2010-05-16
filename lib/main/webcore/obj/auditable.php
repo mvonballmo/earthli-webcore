@@ -176,14 +176,11 @@ abstract class AUDITABLE extends UNIQUE_OBJECT
    */
   public function subscriber_query ($history_item = null)
   {
-    if (! isset ($this->_subscriber_query))
-    {
-      $class_name = $this->app->final_class_name ('SUBSCRIPTION_QUERY', 'webcore/db/subscriber_query.php');
-      $this->_subscriber_query = new $class_name ($this->app);
-      $this->_prepare_subscription_query ($this->_subscriber_query, $history_item);
-    }
+    $class_name = $this->app->final_class_name ('SUBSCRIPTION_QUERY', 'webcore/db/subscriber_query.php');
+    $Result = new $class_name ($this->app);
+    $this->_prepare_subscription_query ($Result, $history_item);
 
-    return $this->_subscriber_query;
+    return $Result;
   }
 
   /**
@@ -387,13 +384,6 @@ abstract class AUDITABLE extends UNIQUE_OBJECT
   {
     // NOP
   }
-
-  /**
-   * Cached result of {@link subscriber_query()}.
-   * @var SUBSCRIBER_QUERY
-   * @access private
-   */
-  protected $_subscriber_query;
 }
 
 ?>
