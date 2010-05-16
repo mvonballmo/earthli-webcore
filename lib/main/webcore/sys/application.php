@@ -649,7 +649,7 @@ class APPLICATION extends CONTEXT
    */
   public function return_to_referer ($fallback_url)
   {
-    $stored_url = $this->storage->value ($this->storage_options->return_to_page_name);
+    $stored_url = $this->get_referer_url();
     if ($stored_url)
     {
       $this->env->redirect_remote ($stored_url);
@@ -658,6 +658,18 @@ class APPLICATION extends CONTEXT
     {
       $this->env->redirect_local ($fallback_url);
     }
+  }
+  
+  /**
+   * Get the URL of the refering page stored in the session.
+   * 
+   * May be empty.
+   * 
+   * @return string
+   */
+  public function get_referer_url()
+  {
+  	return $this->storage->value ($this->storage_options->return_to_page_name);
   }
 
   /**
