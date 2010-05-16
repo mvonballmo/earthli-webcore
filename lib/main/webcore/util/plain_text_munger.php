@@ -1236,6 +1236,7 @@ class PLAIN_TEXT_BASE_MUNGER extends TEXT_MUNGER
     $this->register_known_tag ('n', true);
     $this->register_known_tag ('c', true);
     $this->register_known_tag ('hl', true);
+    $this->register_known_tag ('del', true);
     $this->register_known_tag ('var', true);  // program variables
     $this->register_known_tag ('kbd', true);  // keyboard input
     $this->register_known_tag ('dfn', true);  // defining instance of a term
