@@ -232,6 +232,11 @@ class ATTACHMENT_HOST_FORM extends OBJECT_IN_FOLDER_FORM
     $field->id = 'sizes';
     $field->title = 'Sizes';
     $this->add_field ($field);
+
+    $field = new TEXT_FIELD ();
+    $field->id = 'caption_modes';
+    $field->title = 'Caption Modes';
+    $this->add_field ($field);
   }
   
   /**
@@ -254,6 +259,13 @@ class ATTACHMENT_HOST_FORM extends OBJECT_IN_FOLDER_FORM
       }
     }
     return $this->_attachments;
+  }
+  
+  public function load_with_defaults ()
+  {
+    parent::load_with_defaults ();
+    
+    $this->set_value ('caption_modes', 'caption');
   }
   
   /**
@@ -289,10 +301,18 @@ class ATTACHMENT_HOST_FORM extends OBJECT_IN_FOLDER_FORM
       $props->add_item ('Full-size', '100');
       $sizes = $renderer->drop_down_as_html ('sizes', $props);
         
+      $props = $renderer->make_list_properties ();
+      $props->add_item ('No text', 'none');
+      $props->add_item ('Caption', 'caption');
+      $props->add_item ('Tooltip', 'tooltip');
+      $props->add_item ('Both', 'both');
+      $caption_modes = $renderer->drop_down_as_html ('caption_modes', $props);
+      
       $renderer->start_row ('Attachments');
         echo $attachments . '&nbsp;';
         echo $alignments . '&nbsp;';
         echo $sizes;
+        echo $caption_modes;
         echo $renderer->javascript_button_as_html ('Add', 'on_insert_attachment ()');
       $renderer->finish_row ();
       $browser = $this->env->browser ();
@@ -337,18 +357,36 @@ class ATTACHMENT_HOST_FORM extends OBJECT_IN_FOLDER_FORM
       caption_text = attachments [f.attachments.value].replace (/"/g, "'");
       alignment = f.alignments.value;
       size = f.sizes.value;
+      caption_mode = f.caption_modes.value;
+      
+      text = '';
+      if (caption_mode == "caption")
+      {
+        text = ' caption="' + caption_text + '"';
+      }
+      else if (caption_mode == "tooltip")
+      {
+        text = ' title="' + caption_text + '"';
+      }
+      else if (caption_mode == "both")
+      {
+        text = ' caption="' + caption_text + '" title="' + caption_text + '"';
+      }
+      
       if (size == "thumbnail")
       {
-        text_to_insert = '<img attachment="' + f.attachments.value + '" align="' + alignment + '" class="frame" caption="' + caption_text + '">';
+        text_to_insert = '<img attachment="' + f.attachments.value + '" align="' + alignment + '" class="frame"' + text + '>';
       }
       else
       {
         if (size == "100")
         {
-          text_to_insert = '<img src="{att_link}' + f.attachments.value + '" align="' + alignment + '" class="frame" caption="' + caption_text + '">';
+          text_to_insert = '<img src="{att_link}' + f.attachments.value + '" align="' + alignment + '" class="frame"' + text + '>';
         }
-        else      
-          text_to_insert = '<img src="{att_link}' + f.attachments.value + '" href="{att_link}' + f.attachments.value + '" align="' + alignment + '" class="frame" caption="' + caption_text + '" scale="' + size + '%">';
+        else   
+        {   
+          text_to_insert = '<img src="{att_link}' + f.attachments.value + '" href="{att_link}' + f.attachments.value + '" align="' + alignment + '" class="frame"' + text + ' scale="' + size + '%">';
+        }
       }
       insert_text (<?php echo $this->js_form_name (); ?>.description, text_to_insert);
     }
@@ -431,6 +469,7 @@ class DRAFTABLE_ENTRY_FORM extends ENTRY_FORM
   public function load_with_defaults ()
   {
     parent::load_with_defaults ();
+    
     $this->set_value ('draft', true);
     $this->set_value ('is_visible', true);
     $this->set_visible ('is_visible', false);
