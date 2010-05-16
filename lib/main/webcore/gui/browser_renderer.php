@@ -101,6 +101,28 @@ class BROWSER_RENDERER extends OBJECT_RENDERER
       <dd class="detail">
         <?php echo $browser->system_id (); ?>
       </dd>
+      <dt class="field">JavaScript</dt>
+      <dd class="detail">
+        <?php echo $this->_boolean_as_html ($browser->supports (Browser_JavaScript)); ?>
+      </dd>
+      <dt class="field">CSS</dt>
+      <dd class="detail">
+        <?php
+        echo $this->_boolean_as_html ($browser->supports (Browser_CSS_1), '1.0');
+        echo ' ';
+        echo $this->_boolean_as_html ($browser->supports (Browser_CSS_2), '2.0');
+        echo ' ';
+        echo $this->_boolean_as_html ($browser->supports (Browser_CSS_2_1), '2.1');
+      ?>
+      </dd>
+      <dt class="field">DOM</dt>
+      <dd class="detail">
+        <?php 
+        echo $this->_boolean_as_html ($browser->supports (Browser_DOM_1), '1.0'); 
+        echo ' ';
+        echo $this->_boolean_as_html ($browser->supports (Browser_DOM_2), '2.0');
+        ?>
+      </dd>
       <dt class="field">Alpha PNG</dt>
       <dd class="detail">
         <?php echo $this->_boolean_as_html ($browser->supports (Browser_alpha_PNG)); ?>
@@ -108,24 +130,6 @@ class BROWSER_RENDERER extends OBJECT_RENDERER
       <dt class="field">Cookies</dt>
       <dd class="detail">
         <?php echo $this->_boolean_as_html ($browser->supports (Browser_cookie)); ?>
-      </dd>
-      <dt class="field">CSS</dt>
-      <dd class="detail">
-        <?php
-        echo $this->_boolean_as_html ($browser->supports (Browser_CSS_1), 'level 1');
-        echo ' ';
-        echo $this->_boolean_as_html ($browser->supports (Browser_CSS_2), 'level 2');
-        echo ' ';
-        echo $this->_boolean_as_html ($browser->supports (Browser_CSS_Tables), 'tables');
-      ?>
-      </dd>
-      <dt class="field">DOM</dt>
-      <dd class="detail">
-        <?php echo $this->_boolean_as_html ($browser->supports (Browser_DHTML), 'level 1'); ?>
-      </dd>
-      <dt class="field">JavaScript</dt>
-      <dd class="detail">
-        <?php echo $this->_boolean_as_html ($browser->supports (Browser_JavaScript)); ?>
       </dd>
     </dl>
 <?php    
@@ -159,14 +163,15 @@ class BROWSER_RENDERER extends OBJECT_RENDERER
       $table->add_item ('Renderer', $browser->renderer_name () . ' ' . $browser->renderer_version ());
     }
     $table->add_item ('Operating System', $browser->system_id ());
+    $table->add_item ('JavaScript', $this->_boolean_as_text ($browser->supports (Browser_JavaScript)));
+    $table->add_item ('CSS', $this->_boolean_as_text ($browser->supports (Browser_CSS_1), '1.0') . ' '
+                           . $this->_boolean_as_text ($browser->supports (Browser_CSS_2), '2.0') . ' '
+                           . $this->_boolean_as_text ($browser->supports (Browser_CSS_2_1), '2.1') . ' '
+                     );
+    $table->add_item ('DOM', $this->_boolean_as_text ($browser->supports (Browser_DOM_1), '1.0') . ' '
+                           . $this->_boolean_as_text ($browser->supports (Browser_DOM_2), '2.0'));
     $table->add_item ('Alpha PNG', $this->_boolean_as_text ($browser->supports (Browser_alpha_PNG)));
     $table->add_item ('Cookies', $this->_boolean_as_text ($browser->supports (Browser_cookie)));
-    $table->add_item ('CSS', $this->_boolean_as_text ($browser->supports (Browser_CSS_1), 'level 1') . ' '
-                           . $this->_boolean_as_text ($browser->supports (Browser_CSS_2), 'level 2') . ' '
-                           . $this->_boolean_as_text ($browser->supports (Browser_CSS_Tables), 'tables') . ' '
-                     );
-    $table->add_item ('DOM', $this->_boolean_as_text ($browser->supports (Browser_DHTML), 'level 1'));
-    $table->add_item ('JavaScript', $this->_boolean_as_text ($browser->supports (Browser_JavaScript)));
     $table->display ();    
   }  
 

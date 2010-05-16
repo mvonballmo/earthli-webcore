@@ -56,7 +56,7 @@ class BOX_RENDERER extends WEBCORE_OBJECT
   {
     parent::__construct ($context);
     $browser = $this->env->browser ();
-    $this->_supports_css_tables = $browser->supports (Browser_CSS_Tables);
+    $this->_supports_css_tables = $browser->supports (Browser_CSS_2_1);
   }
   
   /**

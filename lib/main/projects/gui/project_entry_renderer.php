@@ -129,7 +129,7 @@ abstract class PROJECT_ENTRY_RENDERER extends ENTRY_RENDERER
     {
       $layer = $this->context->make_layer ("id_{$entry->id}_long_description");
       $layer->margin_left = '1em';
-      $layer->visible = ! $browser->supports (Browser_DHTML);
+      $layer->visible = ! $this->context->dhtml_allowed();
 ?>
 <div style="margin-bottom: .75em">
 <?php

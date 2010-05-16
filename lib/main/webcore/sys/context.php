@@ -231,7 +231,7 @@ class CONTEXT extends RESOLVER
    */
   public function dhtml_allowed ()
   {
-    return $this->display_options->use_DHTML && $this->env->browser ()->supports (Browser_DHTML);
+    return $this->display_options->use_DHTML && $this->env->browser ()->supports (Browser_DOM_1);
   }
 
   /**

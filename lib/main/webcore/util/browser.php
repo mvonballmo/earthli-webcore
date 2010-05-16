@@ -39,7 +39,7 @@ http://www.earthli.com/software/webcore
 /**
  * Does the browser support DHTML?
  */
-define ('Browser_DHTML', 1);
+define ('Browser_DOM_1', 1);
 
 /**
  * Does the browser support PNG images with alpha-transparency?
@@ -59,7 +59,7 @@ define ('Browser_CSS_2', 4);
 /**
  * Does the browser support CSS Tables?
  */
-define ('Browser_CSS_Tables', 5);
+define ('Browser_CSS_2_1', 5);
 
 /**
  * Does the browser support Javascript?
@@ -100,11 +100,11 @@ define ('Browser_netscape_4', 'netscape_4');
 define ('Browser_gecko', 'gecko');
 
 /**
- * Browser uses the KHTML renderer.
+ * Browser uses the Webkit renderer.
  * As of this writing, this is used by Safari and Omniweb 4.5 on the Mac and
  * Konqueror on Linux.
  */
-define ('Browser_khtml', 'khtml');
+define ('Browser_webkit', 'webkit');
 
 /**
  * Browser uses the Opera renderer.
@@ -478,41 +478,48 @@ class BROWSER
   {
     switch ($code)
     {
-    case Browser_DHTML:
-      return (($this->is (Browser_gecko)) ||
-              ($this->is (Browser_opera) && ($this->_ua->major_version >= 7)) ||
-              ($this->is (Browser_presto)) ||
-              ($this->is (Browser_ie) && $this->_ua->major_version >= 5) ||
-              ($this->is (Browser_khtml)));
+    case Browser_DOM_1:
+      return $this->is (Browser_gecko) ||
+             $this->is (Browser_presto) ||
+             $this->is (Browser_webkit) ||
+             $this->is (Browser_opera) && ($this->_ua->major_version >= 7) ||
+             $this->is (Browser_ie) && ($this->_ua->major_version >= 5);
 
+    case Browser_DOM_2:
+      return $this->is (Browser_gecko) && ($this->_ua->major_version >= 1) && ($this->_ua->minor_version >= 8) ||
+             $this->is (Browser_presto) ||
+             $this->is (Browser_webkit) ||
+             $this->is (Browser_opera) && ($this->_ua->major_version >= 9);
+              
     case Browser_alpha_PNG:
-      return (($this->is (Browser_gecko)) ||
-              ($this->is (Browser_presto)) ||
-              ($this->is (Browser_opera) && (($this->_ua->major_version >= 6) ||
-                                             ($this->is (Browser_os_mac) && ($this->_ua->major_version >= 5)))) ||
-              ($this->is (Browser_ie) && (($this->is (Browser_os_mac) && ($this->_ua->major_version >= 5)) ||
-                                         ($this->is (Browser_os_windows) && ($this->_ua->major_version >= 7)))) ||
-              ($this->is (Browser_omniweb) && ($this->_ua->major_version >= 4)) ||
-              ($this->is (Browser_khtml)));
+      return $this->is (Browser_gecko) ||
+             $this->is (Browser_presto) ||
+             $this->is (Browser_webkit) ||
+             $this->is (Browser_opera) && (($this->_ua->major_version >= 6) || ($this->is (Browser_os_mac) && ($this->_ua->major_version >= 5))) ||
+             $this->is (Browser_omniweb) && ($this->_ua->major_version >= 4) ||
+             $this->is (Browser_ie) && (($this->is (Browser_os_mac) && ($this->_ua->major_version >= 5)) || ($this->is (Browser_os_windows) && ($this->_ua->major_version >= 7)));
 
     case Browser_CSS_1:
       return (($this->is (Browser_gecko)) ||
               ($this->is (Browser_presto)) ||
+              ($this->is (Browser_webkit)) ||
               ($this->is (Browser_opera) && ($this->_ua->major_version >= 4)) ||
               ($this->is (Browser_ie) && ($this->_ua->major_version >= 5)) ||
-              ($this->is (Browser_khtml)));
+              ($this->is (Browser_webkit)));
 
     case Browser_CSS_2:
-      return (($this->is (Browser_gecko)) ||
-              ($this->is (Browser_presto)) ||
-              ($this->is (Browser_opera) && ($this->_ua->major_version >= 7)) ||
-              ($this->is (Browser_khtml)) ||
-              ($this->is (Browser_omniweb) && (($this->_ua->major_version >= 5) || (($this->_ua->major_version >= 4) && ($this->_ua->minor_version >= 5)))));
+      return $this->is (Browser_gecko) ||
+             $this->is (Browser_presto) ||
+             $this->is (Browser_webkit) ||
+             $this->is (Browser_opera) && ($this->_ua->major_version >= 7) ||
+             $this->is (Browser_omniweb) && (($this->_ua->major_version >= 5) || (($this->_ua->major_version >= 4) && ($this->_ua->minor_version >= 5)));
               
-    case Browser_CSS_Tables:
-      return (($this->is (Browser_opera) && ($this->_ua->major_version >= 7)) ||
-              ($this->is (Browser_presto)) ||
-              ($this->is (Browser_omniweb) && (($this->_ua->major_version >= 5) || (($this->_ua->major_version >= 4) && ($this->_ua->minor_version >= 5)))));
+    case Browser_CSS_2_1:
+      return $this->is (Browser_gecko) && ($this->_ua->major_version >= 1) && ($this->_ua->minor_version >= 8) ||
+             $this->is (Browser_presto) ||
+             $this->is (Browser_webkit) ||
+             $this->is (Browser_opera) && ($this->_ua->major_version >= 7) ||
+             $this->is (Browser_omniweb) && (($this->_ua->major_version >= 5) || (($this->_ua->major_version >= 4) && ($this->_ua->minor_version >= 5)));
 
     case Browser_JavaScript:
       return $this->_ua->renderer_name != Browser_unknown;
@@ -522,10 +529,6 @@ class BROWSER
 
     case Browser_anchors_in_posts:
       return ! ($this->is (Browser_ie) && $this->is (Browser_os_mac));
-
-    case Browser_DOM_2:
-      return $this->is (Browser_opera) && ($this->_ua->major_version >= 9) ||
-             $this->is (Browser_presto);
 
     case Browser_extended_HTML_newsfeeds:
       return true;
@@ -980,15 +983,15 @@ class USER_AGENT_PARSE_TABLES
       'msie' => new USER_AGENT_RENDERER_INFO (Browser_ie, 'Trident (IE)', User_agent_temporary_renderer, 'Internet Explorer'),
       'rv' => new USER_AGENT_RENDERER_INFO (Browser_gecko, 'Gecko', User_agent_temporary_renderer, 'Mozilla'),
       'gecko' => new USER_AGENT_RENDERER_INFO (Browser_gecko, 'Gecko', User_agent_temporary_renderer, 'Mozilla'),
-      'shiira' => new USER_AGENT_RENDERER_INFO (Browser_khtml, 'Webcore', User_agent_final_browser_abort, 'Shiira'),
-      'applewebkit' => new USER_AGENT_RENDERER_INFO (Browser_khtml, 'Webcore', User_agent_final_renderer),
+      'shiira' => new USER_AGENT_RENDERER_INFO (Browser_webkit, 'Webcore', User_agent_final_browser_abort, 'Shiira'),
+      'applewebkit' => new USER_AGENT_RENDERER_INFO (Browser_webkit, 'Webcore', User_agent_final_renderer),
       'netscape6' => new USER_AGENT_RENDERER_INFO (Browser_gecko, 'Netscape', User_agent_final_browser),
-      'chrome' => new USER_AGENT_RENDERER_INFO (Browser_khtml, 'Google Chrome', User_agent_final_browser_abort),
+      'chrome' => new USER_AGENT_RENDERER_INFO (Browser_webkit, 'Google Chrome', User_agent_final_browser_abort),
       'opera mini' => new USER_AGENT_RENDERER_INFO (Browser_opera, 'Presto (Opera)', User_agent_final_browser_temporary_renderer, 'Opera Mini'),
       'opera' => new USER_AGENT_RENDERER_INFO (Browser_opera, 'Presto (Opera)', User_agent_temporary_renderer, 'Opera'),
       'presto' => new USER_AGENT_RENDERER_INFO (Browser_presto, 'Presto (Opera)', User_agent_final_renderer, 'Opera'),
       'version' => new USER_AGENT_RENDERER_INFO (Browser_presto, 'Presto (Opera)', User_agent_final_browser, 'Opera'),
-      'konqueror' => new USER_AGENT_RENDERER_INFO (Browser_khtml, 'KHTML', User_agent_final_browser, 'Konqueror'),
+      'konqueror' => new USER_AGENT_RENDERER_INFO (Browser_webkit, 'KHTML', User_agent_final_browser, 'Konqueror'),
       'omniweb' => new USER_AGENT_RENDERER_INFO (Browser_omniweb, 'OmniWeb', User_agent_final_browser),
       'webtv' => new USER_AGENT_RENDERER_INFO (Browser_webtv, 'WebTV', User_agent_final_browser),
       'googlebot' => new USER_AGENT_RENDERER_INFO (Browser_robot, 'Google Robot', User_agent_final_browser),

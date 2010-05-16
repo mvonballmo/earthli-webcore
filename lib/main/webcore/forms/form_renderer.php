@@ -627,10 +627,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    */
   public function start_layer_row ($id, $title, $description, $visible = false, $styled = true)
   {
-    $browser = $this->env->browser ();
-    $use_layer = $browser->supports (Browser_DHTML);
-
-    if ($use_layer)
+    if ($this->context->dhtml_allowed())
     {
       $Result = $this->context->make_layer ($id);
       $Result->visible = $visible;
