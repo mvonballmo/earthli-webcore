@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2010 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package projects
  * @subpackage forms
- * @version 3.2.0
+ * @version 3.3.0
  * @since 1.7.0
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2009 Marco Von Ballmoos
+Copyright (c) 2002-2010 Marco Von Ballmoos
 
 This file is part of earthli Projects.
 
@@ -43,7 +43,7 @@ require_once ('webcore/forms/purge_form.php');
  * Handles deletion of {@link COMPONENT}s.
  * @package projects
  * @subpackage forms
- * @version 3.2.0
+ * @version 3.3.0
  * @since 1.7.0
  */
 class PURGE_COMPONENT_FORM extends PURGE_OBJECT_FORM

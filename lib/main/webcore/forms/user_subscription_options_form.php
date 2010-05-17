@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2010 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package webcore
  * @subpackage forms
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.2.1
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2009 Marco Von Ballmoos
+Copyright (c) 2002-2010 Marco Von Ballmoos
 
 This file is part of earthli Webcore.
 
@@ -43,7 +43,7 @@ require_once ('webcore/forms/subscription_form.php');
  * Presents the standard WebCore subscription options.
  * @package webcore
  * @subpackage forms
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.2.1
  */
 class USER_SUBSCRIPTION_OPTIONS_FORM extends SUBSCRIPTION_FORM

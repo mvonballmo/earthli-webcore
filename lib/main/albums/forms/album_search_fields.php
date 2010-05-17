@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2010 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package albums
  * @subpackage forms
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.7.0
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2009 Marco Von Ballmoos
+Copyright (c) 2002-2010 Marco Von Ballmoos
 
 This file is part of earthli Albums.
 
@@ -43,7 +43,7 @@ require_once ('webcore/forms/search_fields.php');
  * Create a filter for {@link PICTURE}s.
  * @package albums
  * @subpackage forms
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.7.0
  */
 class SEARCH_PICTURE_FIELDS extends SEARCH_ENTRY_FIELDS
@@ -63,7 +63,7 @@ class SEARCH_PICTURE_FIELDS extends SEARCH_ENTRY_FIELDS
  * Create a filter for {@link JOURNAL}s.
  * @package albums
  * @subpackage forms
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.7.0
  */
 class SEARCH_JOURNAL_FIELDS extends SEARCH_ENTRY_FIELDS

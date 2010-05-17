@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2010 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package webcore
  * @subpackage config
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.7.1
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2009 Marco Von Ballmoos
+Copyright (c) 2002-2010 Marco Von Ballmoos
 
 This file is part of earthli WebCore.
 
@@ -46,7 +46,7 @@ require_once ('webcore/obj/webcore_object.php');
  * and format.
  * @package webcore
  * @subpackage config
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.7.1
  */
 class NEWSFEED_ENGINE extends WEBCORE_OBJECT

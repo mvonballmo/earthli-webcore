@@ -1,19 +1,19 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2010 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package albums
  * @subpackage sys
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.9.0
  * @access private
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2009 Marco Von Ballmoos
+Copyright (c) 2002-2010 Marco Von Ballmoos
 
 This file is part of earthli Albums.
 
@@ -44,7 +44,7 @@ require_once ('webcore/sys/webcore_type_infos.php');
  * Describes the {@link ALBUM} class.
  * @package albums
  * @subpackage sys
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.6.0
  * @access private
  */
@@ -80,7 +80,7 @@ class ALBUM_TYPE_INFO extends FOLDER_TYPE_INFO
  * Describes the {@link JOURNAL} class.
  * @package albums
  * @subpackage sys
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.6.0
  * @access private
  */
@@ -116,7 +116,7 @@ class JOURNAL_TYPE_INFO extends ENTRY_TYPE_INFO
  * Describes the {@link PICTURE} class.
  * @package albums
  * @subpackage sys
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.6.0
  * @access private
  */

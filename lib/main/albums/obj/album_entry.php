@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2010 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package albums
  * @subpackage obj
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.5.0
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2009 Marco Von Ballmoos
+Copyright (c) 2002-2010 Marco Von Ballmoos
 
 This file is part of earthli Albums.
 
@@ -45,7 +45,7 @@ require_once ('webcore/obj/multi_type_entry.php');
  * @abstract
  * @package albums
  * @subpackage obj
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.5.0
  */
 abstract class ALBUM_ENTRY extends MULTI_TYPE_ENTRY

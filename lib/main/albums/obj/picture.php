@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2010 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package albums
  * @subpackage obj
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.5.0
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2009 Marco Von Ballmoos
+Copyright (c) 2002-2010 Marco Von Ballmoos
 
 This file is part of earthli Albums.
 
@@ -48,7 +48,7 @@ define ('Picture_thumbnail_suffix', '_tn');
  * A {@link PICTURE}, with date, description and thumbnail.
  * @package albums
  * @subpackage obj
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.5.0
  */
 class PICTURE extends ALBUM_ENTRY

@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2010 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package webcore
  * @subpackage sys
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.2.1
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2009 Marco Von Ballmoos
+Copyright (c) 2002-2010 Marco Von Ballmoos
 
 This file is part of earthli WebCore.
 
@@ -103,7 +103,7 @@ define ('Url_part_all', 0x1F);
  * @see has_local_domain()
  * @package webcore
  * @subpackage sys
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.7.0
  */
 class URL_OPTIONS extends FILE_OPTIONS
@@ -132,7 +132,7 @@ class URL_OPTIONS extends FILE_OPTIONS
  * URL concatenation and analysis.
  * @package webcore
  * @subpackage sys
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.2.1
  */
 class URL
@@ -798,7 +798,7 @@ class URL
  * Manages urls for the server file system.
  * @package webcore
  * @subpackage sys
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.5.0
  */
 class FILE_URL extends URL

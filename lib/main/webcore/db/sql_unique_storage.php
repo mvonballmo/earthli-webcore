@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2010 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package webcore
  * @subpackage db
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.2.1
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2009 Marco Von Ballmoos
+Copyright (c) 2002-2010 Marco Von Ballmoos
 
 This file is part of earthli WebCore.
 
@@ -44,7 +44,7 @@ require_once ('webcore/db/sql_storage.php');
  * Once the object has been created, it retrieves the id for the new object and sets the appropriate field.
  * @package webcore
  * @subpackage db
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.2.1
  * @access private
  */

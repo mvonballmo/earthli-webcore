@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2010 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package webcore
  * @subpackage db
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.7.0
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2009 Marco Von Ballmoos
+Copyright (c) 2002-2010 Marco Von Ballmoos
 
 This file is part of earthli WebCore.
 
@@ -44,7 +44,7 @@ require_once ('webcore/db/user_entry_sub_object_query.php');
  * Only supports attachments made for {@link ENTRY} objects.
  * @package webcore
  * @subpackage db
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.7.0
  */
 class USER_ATTACHMENT_QUERY extends USER_ENTRY_SUB_OBJECT_QUERY
@@ -121,7 +121,7 @@ class USER_ATTACHMENT_QUERY extends USER_ENTRY_SUB_OBJECT_QUERY
  * Only supports attachments made for {@link ENTRY} objects.
  * @package webcore
  * @subpackage db
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.7.0
  */
 class USER_MULTI_TYPE_ATTACHMENT_QUERY extends USER_ATTACHMENT_QUERY

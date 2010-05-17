@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2010 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package webcore
  * @subpackage util
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.7.1
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2009 Marco Von Ballmoos
+Copyright (c) 2002-2010 Marco Von Ballmoos
 
 This file is part of earthli WebCore.
 
@@ -45,7 +45,7 @@ require_once ('webcore/obj/webcore_object.php');
  * from various sources.
  * @package webcore
  * @subpackage util
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.7.1
  * @abstract
  */
@@ -114,7 +114,7 @@ abstract class TEST_SUITE extends WEBCORE_OBJECT
  * Loads tests from an INI file.
  * @package webcore
  * @subpackage util
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.7.1
  */
 class INI_TEST_SUITE extends TEST_SUITE

@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2010 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package webcore
  * @subpackage history
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.4.0
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2009 Marco Von Ballmoos
+Copyright (c) 2002-2010 Marco Von Ballmoos
 
 This file is part of earthli WebCore.
 
@@ -45,7 +45,7 @@ require_once ('webcore/obj/unique_object.php');
  * item is recorded to the database, recording which information was changed, by
  * whom and when.
  * @package webcore
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.4.0
 f * @subpackage history
  */

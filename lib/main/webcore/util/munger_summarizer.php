@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2010 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package webcore
  * @subpackage text
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.7.0
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2009 Marco Von Ballmoos
+Copyright (c) 2002-2010 Marco Von Ballmoos
 
 This file is part of earthli WebCore.
 
@@ -44,7 +44,7 @@ require_once ('webcore/util/plain_text_munger.php');
  * Used by the {@link MUNGER_SUMMARIZER} to generate an initial text.
  * @package webcore
  * @subpackage text
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.4.0
  */
 class TEXT_STRIPPER extends TEXT_MUNGER
@@ -90,7 +90,7 @@ class TEXT_STRIPPER extends TEXT_MUNGER
  * whether the summary blocks have entire words.
  * @package webcore
  * @subpackage text
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.7.0
  */
 class MUNGER_SUMMARIZER

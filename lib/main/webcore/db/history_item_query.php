@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2010 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package webcore
  * @subpackage db
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.4.0
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2009 Marco Von Ballmoos
+Copyright (c) 2002-2010 Marco Von Ballmoos
 
 This file is part of earthli WebCore.
 
@@ -43,7 +43,7 @@ require_once ('webcore/db/query.php');
  * Return {@link HISTORY_ITEM}s for an object.
  * @package webcore
  * @subpackage db
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.4.0
  */
 class HISTORY_ITEM_QUERY extends QUERY
@@ -79,7 +79,7 @@ class HISTORY_ITEM_QUERY extends QUERY
  * Return {@link HISTORY_ITEM}s for an object.
  * @package webcore
  * @subpackage db
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.4.0
  */
 class OBJECT_IN_FOLDER_HISTORY_ITEM_QUERY extends HISTORY_ITEM_QUERY
@@ -99,7 +99,7 @@ class OBJECT_IN_FOLDER_HISTORY_ITEM_QUERY extends HISTORY_ITEM_QUERY
  * Return {@link HISTORY_ITEM}s for an object.
  * @package webcore
  * @subpackage db
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.4.0
  */
 class ENTRY_HISTORY_ITEM_QUERY extends HISTORY_ITEM_QUERY

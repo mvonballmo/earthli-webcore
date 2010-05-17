@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2010 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package webcore
  * @subpackage mail
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.7.0
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2009 Marco Von Ballmoos
+Copyright (c) 2002-2010 Marco Von Ballmoos
 
 This file is part of earthli WebCore.
 
@@ -43,7 +43,7 @@ require_once ('webcore/gui/object_renderer.php');
  * Renders a {@link BROWSER} for text or html.
  * @package webcore
  * @subpackage gui
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.7.1
  */
 class BROWSER_RENDERER extends OBJECT_RENDERER

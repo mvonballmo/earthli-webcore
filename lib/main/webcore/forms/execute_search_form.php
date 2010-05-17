@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2010 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package webcore
  * @subpackage forms
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.5.0
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2009 Marco Von Ballmoos
+Copyright (c) 2002-2010 Marco Von Ballmoos
 
 This file is part of earthli WebCore.
 
@@ -45,7 +45,7 @@ require_once ('webcore/obj/search.php');
  * Create a filter for objects in a WebCore application.
  * @package webcore
  * @subpackage forms
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.5.0
  */
 class EXECUTE_SEARCH_FORM extends ID_BASED_FORM

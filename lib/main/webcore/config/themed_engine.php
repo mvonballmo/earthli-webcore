@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2010 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package webcore
  * @subpackage config
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.7.0
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2009 Marco Von Ballmoos
+Copyright (c) 2002-2010 Marco Von Ballmoos
 
 This file is part of earthli WebCore.
 
@@ -44,7 +44,7 @@ include_once ('webcore/config/engine.php');
  * Create and initializes a {@link THEMED_PAGE} instead of a {@link PAGE}.
  * @package webcore
  * @subpackage config
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.7.0
  */
 class THEMED_ENGINE extends ENGINE

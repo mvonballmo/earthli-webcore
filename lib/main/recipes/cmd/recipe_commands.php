@@ -1,19 +1,19 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2010 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package recipes
  * @subpackage command
- * @version 3.2.0
+ * @version 3.3.0
  * @since 1.7.0
  * @access private
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2009 Marco Von Ballmoos
+Copyright (c) 2002-2010 Marco Von Ballmoos
 
 This file is part of earthli Recipes.
 
@@ -44,7 +44,7 @@ require_once ('webcore/cmd/entry_commands.php');
  * Return the commands for a {@link RECIPE}.
  * @package recipes
  * @subpackage command
- * @version 3.2.0
+ * @version 3.3.0
  * @since 1.7.0
  * @access private
  */

@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2010 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package recipes
  * @subpackage gui
- * @version 3.2.0
+ * @version 3.3.0
  * @since 1.3.0
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2009 Marco Von Ballmoos
+Copyright (c) 2002-2010 Marco Von Ballmoos
 
 This file is part of earthli Recipes.
 
@@ -43,7 +43,7 @@ require_once ('webcore/gui/folder_grid.php');
  * Display {@link RECIPE_BOOK}s from a query.
  * @package recipes
  * @subpackage gui
- * @version 3.2.0
+ * @version 3.3.0
  * @since 1.3.0
  */
 class RECIPE_BOOK_GRID extends FOLDER_GRID

@@ -2,17 +2,17 @@
 
 /**
  * Including this file creates and assigns a global projects application.
- * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2010 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package projects
- * @version 3.2.0
+ * @version 3.3.0
  * @since 1.8.0
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2009 Marco Von Ballmoos
+Copyright (c) 2002-2010 Marco Von Ballmoos
 
 This file is part of earthli Projects.
 
@@ -45,7 +45,7 @@ require_once ('projects/init.php');
  * {@link PAGE::register_application()} for help on customizing the
  * application creation and initialization.
  * @global PROJECT_APPLICATION $App
- * @version 3.2.0
+ * @version 3.3.0
  * @since 1.4.1
  */
 $App = $Page->make_application (Project_application_id, true, true);

@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2010 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package projects
  * @subpackage gui
- * @version 3.2.0
+ * @version 3.3.0
  * @since 1.7.0
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2009 Marco Von Ballmoos
+Copyright (c) 2002-2010 Marco Von Ballmoos
 
 This file is part of earthli Projects.
 
@@ -43,7 +43,7 @@ require_once ('projects/gui/project_entry_renderer.php');
  * Render details for a {@link JOB}.
  * @package projects
  * @subpackage gui
- * @version 3.2.0
+ * @version 3.3.0
  * @since 1.7.0
  */
 class JOB_RENDERER extends PROJECT_ENTRY_RENDERER
@@ -379,7 +379,7 @@ class JOB_RENDERER extends PROJECT_ENTRY_RENDERER
  * Also renders other data with {@link ENTRY_ASSOCIATED_DATA_RENDERER}.
  * @package projects
  * @subpackage gui
- * @version 3.2.0
+ * @version 3.3.0
  * @since 1.9.0
  */
 class JOB_ASSOCIATED_DATA_RENDERER extends ENTRY_ASSOCIATED_DATA_RENDERER

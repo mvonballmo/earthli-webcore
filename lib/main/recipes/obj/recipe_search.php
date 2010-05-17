@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2010 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package recipes
  * @subpackage obj
- * @version 3.2.0
+ * @version 3.3.0
  * @since 1.3.0
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2009 Marco Von Ballmoos
+Copyright (c) 2002-2010 Marco Von Ballmoos
 
 This file is part of earthli Recipes.
 
@@ -44,7 +44,7 @@ require_once ('recipes/forms/recipe_search_fields.php');
  * A filter for {@link RECIPE}s.
  * @package recipes
  * @subpackage obj
- * @version 3.2.0
+ * @version 3.3.0
  * @since 1.5.0
  */
 class RECIPE_SEARCH extends ENTRY_SEARCH

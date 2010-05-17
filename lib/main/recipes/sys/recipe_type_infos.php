@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2010 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package recipes
  * @subpackage sys
- * @version 3.2.0
+ * @version 3.3.0
  * @since 1.7.0
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2009 Marco Von Ballmoos
+Copyright (c) 2002-2010 Marco Von Ballmoos
 
 This file is part of earthli Recipes.
 
@@ -43,7 +43,7 @@ require_once ('webcore/sys/webcore_type_infos.php');
  * Describes the {@link RECIPE} class.
  * @package recipes
  * @subpackage sys
- * @version 3.2.0
+ * @version 3.3.0
  * @since 1.4.0
  * @access private
  */
@@ -79,7 +79,7 @@ class RECIPE_TYPE_INFO extends DRAFTABLE_ENTRY_TYPE_INFO
  * Describes the {@link FOLDER} class.
  * @package recipes
  * @subpackage sys
- * @version 3.2.0
+ * @version 3.3.0
  * @since 1.4.0
  * @access private
  */

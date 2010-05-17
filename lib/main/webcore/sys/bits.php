@@ -1,19 +1,19 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2010 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package webcore
  * @subpackage sys
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.2.1
  * @access private
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2009 Marco Von Ballmoos
+Copyright (c) 2002-2010 Marco Von Ballmoos
 
 This file is part of earthli WebCore.
 
@@ -41,7 +41,7 @@ http://www.earthli.com/software/webcore
  * Maintains bit flags.
  * @package webcore
  * @subpackage sys
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.2.1
  * @access private
  */

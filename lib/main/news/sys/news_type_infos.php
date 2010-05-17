@@ -1,19 +1,19 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2010 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package news
  * @subpackage sys
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.8.0
  * @access private
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2009 Marco Von Ballmoos
+Copyright (c) 2002-2010 Marco Von Ballmoos
 
 This file is part of earthli News.
 
@@ -44,7 +44,7 @@ require_once ('webcore/sys/webcore_type_infos.php');
  * Modifies the {@link ARTICLE} class.
  * @package news
  * @subpackage sys
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.5.0
  * @access private
  */
@@ -80,7 +80,7 @@ class ARTICLE_TYPE_INFO extends DRAFTABLE_ENTRY_TYPE_INFO
  * Describes the {@link FOLDER} class.
  * @package news
  * @subpackage sys
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.8.0
  * @access private
  */

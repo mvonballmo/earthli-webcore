@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2010 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package webcore
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.2.1
  * @access private
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2009 Marco Von Ballmoos
+Copyright (c) 2002-2010 Marco Von Ballmoos
 
 This file is part of earthli WebCore.
 
@@ -44,7 +44,7 @@ if (! function_exists ('is_a'))
    * @see PHP_MANUAL#is_a
    * @param object $object
    * @param string $class_name
-   * @version 3.2.0
+   * @version 3.3.0
    * @since 2.2.1
    * @access private
    */
@@ -67,7 +67,7 @@ if (! function_exists ('html_entity_decode'))
    * This is only included if the PHP version doesn't already have this function.
    * @see PHP_MANUAL#html_entity_decode
    * @param object $text
-   * @version 3.2.0
+   * @version 3.3.0
    * @since 2.2.1
    * @access private
    */
@@ -86,7 +86,7 @@ if (! function_exists ('image_type_to_mime_type'))
    * This is only included if the PHP version doesn't already have this function.
    * @see PHP_MANUAL#image_type_to_mime_type
    * @param integer $imagetype
-   * @version 3.2.0
+   * @version 3.3.0
    * @since 2.2.1
    * @access private
    */
@@ -122,7 +122,7 @@ if (! function_exists ('file_get_contents'))
    * This is only included if the PHP version doesn't already have this function.
    * @see PHP_MANUAL#file_get_contents
    * @param string $file_name
-   * @version 3.2.0
+   * @version 3.3.0
    * @since 2.7.0
    * @access private
    */
@@ -139,7 +139,7 @@ if (! function_exists ('file_get_contents'))
 /**
  * Return the output of the {@link PHP_MANUAL#print_r} function.
  * @param object $value
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.6.0
  * @access private
  */

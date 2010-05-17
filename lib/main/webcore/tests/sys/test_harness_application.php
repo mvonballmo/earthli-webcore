@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2010 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package webcore
  * @subpackage tests
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.6.0
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2009 Marco Von Ballmoos
+Copyright (c) 2002-2010 Marco Von Ballmoos
 
 This file is part of earthli WebCore.
 
@@ -41,7 +41,7 @@ require_once ('webcore/sys/application.php');
 
 /**
  * @package webcore
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.6.0
  * @subpackage tests
  */
@@ -117,7 +117,7 @@ class TEST_HARNESS_APPLICATION_TABLE_NAMES extends APPLICATION_TABLE_NAMES
  * A WebCore application with default test data for unit tests.
  * @package webcore
  * @subpackage tests
- * @version 3.2.0
+ * @version 3.3.0
  * @since 1.3.0
  */
 class TEST_HARNESS_APPLICATION extends APPLICATION

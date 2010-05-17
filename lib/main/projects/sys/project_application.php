@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2010 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package projects
  * @subpackage sys
- * @version 3.2.0
+ * @version 3.3.0
  * @since 1.4.1
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2009 Marco Von Ballmoos
+Copyright (c) 2002-2010 Marco Von Ballmoos
 
 This file is part of earthli Projects.
 
@@ -44,7 +44,7 @@ require_once ('projects/sys/project_type_infos.php');
 /**
  * @package projects
  * @subpackage sys
- * @version 3.2.0
+ * @version 3.3.0
  * @since 1.4.1
  */
 class PROJECT_APPLICATION_PAGE_NAMES extends APPLICATION_PAGE_NAMES
@@ -78,7 +78,7 @@ class PROJECT_APPLICATION_PAGE_NAMES extends APPLICATION_PAGE_NAMES
 /**
  * @package projects
  * @subpackage sys
- * @version 3.2.0
+ * @version 3.3.0
  * @since 1.4.1
  */
 class PROJECT_APPLICATION_TABLE_NAMES extends APPLICATION_TABLE_NAMES
@@ -187,7 +187,7 @@ class PROJECT_APPLICATION_TABLE_NAMES extends APPLICATION_TABLE_NAMES
 /**
  * @package projects
  * @subpackage sys
- * @version 3.2.0
+ * @version 3.3.0
  * @since 1.4.1
  */
 class PROJECT_APPLICATION_XML_OPTIONS
@@ -220,7 +220,7 @@ class PROJECT_APPLICATION_XML_OPTIONS
  * {@link BRANCH}es and {@link RELEASE}s and generates {@link CHANGE_LOG}s.
  * @package projects
  * @subpackage sys
- * @version 3.2.0
+ * @version 3.3.0
  * @since 1.4.1
  */
 class PROJECT_APPLICATION extends APPLICATION

@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2010 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package webcore
  * @subpackage forms
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.2.1
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2009 Marco Von Ballmoos
+Copyright (c) 2002-2010 Marco Von Ballmoos
 
 This file is part of earthli Webcore.
 
@@ -42,7 +42,7 @@ require_once ('webcore/forms/form.php');
  * Update list of {@link USER}s subscribed to a {@link FOLDER}.
  * @package webcore
  * @subpackage forms
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.2.1
  */
 class FOLDER_SUBSCRIBER_FORM extends ID_BASED_FORM

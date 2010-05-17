@@ -2,17 +2,17 @@
 
 /**
  * Including this file creates and assigns a global recipes application.
- * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2010 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package recipes
- * @version 3.2.0
+ * @version 3.3.0
  * @since 1.6.0
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2009 Marco Von Ballmoos
+Copyright (c) 2002-2010 Marco Von Ballmoos
 
 This file is part of earthli Recipes.
 
@@ -45,7 +45,7 @@ require_once ('recipes/init.php');
  * {@link PAGE::register_application()} for help on customizing the
  * application creation and initialization.
  * @global RECIPE_APPLICATION $App
- * @version 3.2.0
+ * @version 3.3.0
  * @since 1.3.0
  */
 $App = $Page->make_application (Recipe_application_id, true, true);

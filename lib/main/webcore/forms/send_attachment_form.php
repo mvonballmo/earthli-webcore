@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2010 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package webcore
  * @subpackage forms
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.5.0
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2009 Marco Von Ballmoos
+Copyright (c) 2002-2010 Marco Von Ballmoos
 
 This file is part of earthli WebCore.
 
@@ -44,7 +44,7 @@ require_once ('webcore/forms/send_object_in_folder_form.php');
  * Deleting marks a database object as deleted, but does not remove it from the database.
  * @package webcore
  * @subpackage forms
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.5.0
  */
 class SEND_ATTACHMENT_FORM extends SEND_OBJECT_IN_FOLDER_FORM

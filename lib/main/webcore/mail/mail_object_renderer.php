@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2010 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package webcore
  * @subpackage mail
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.2.1
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2009 Marco Von Ballmoos
+Copyright (c) 2002-2010 Marco Von Ballmoos
 
 This file is part of earthli WebCore.
 
@@ -44,7 +44,7 @@ require_once ('webcore/gui/object_renderer.php');
  * Renders the contents of an object for text or html email.
  * @package webcore
  * @subpackage mail
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.5.0
  * @abstract
  */
@@ -134,7 +134,7 @@ abstract class MAIL_OBJECT_RENDERER extends MAIL_RENDERER
  * Renders the contents of a mail using a sub-renderer.
  * @package webcore
  * @subpackage mail
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.7.1
  * @access private
  * @abstract
@@ -175,7 +175,7 @@ abstract class RENDERER_BASED_MAIL_RENDERER extends MAIL_OBJECT_RENDERER
  * Rendering options passed to a {@link MAIL_OBJECT_RENDERER}
  * @package webcore
  * @subpackage mail
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.5.0
  * @access private
  */

@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2010 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package projects
  * @subpackage obj
- * @version 3.2.0
+ * @version 3.3.0
  * @since 1.7.0
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2009 Marco Von Ballmoos
+Copyright (c) 2002-2010 Marco Von Ballmoos
 
 This file is part of earthli Projects.
 
@@ -44,7 +44,7 @@ require_once ('projects/forms/project_search_fields.php');
  * A filter for {@link JOB}s.
  * @package projects
  * @subpackage obj
- * @version 3.2.0
+ * @version 3.3.0
  * @since 1.7.0
  */
 class JOB_SEARCH extends MULTI_ENTRY_SEARCH
@@ -67,7 +67,7 @@ class JOB_SEARCH extends MULTI_ENTRY_SEARCH
  * A filter for {@link CHANGE}s.
  * @package projects
  * @subpackage obj
- * @version 3.2.0
+ * @version 3.3.0
  * @since 1.7.0
  */
 class CHANGE_SEARCH extends MULTI_ENTRY_SEARCH

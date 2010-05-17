@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2010 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package projects
  * @subpackage db
- * @version 3.2.0
+ * @version 3.3.0
  * @since 1.9.1
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2009 Marco Von Ballmoos
+Copyright (c) 2002-2010 Marco Von Ballmoos
 
 This file is part of earthli Projects.
 
@@ -44,7 +44,7 @@ require_once ('projects/db/project_query_toolkit.php');
  * Deferred base class for retrieving entries.
  * @package projects
  * @subpackage db
- * @version 3.2.0
+ * @version 3.3.0
  * @since 1.4.1
  */
 class GENERIC_PROJECT_ENTRY_QUERY extends FOLDER_MULTI_ENTRY_QUERY
@@ -82,7 +82,7 @@ class GENERIC_PROJECT_ENTRY_QUERY extends FOLDER_MULTI_ENTRY_QUERY
  * Retrieves {@link CHANGE}s or {@link JOB}s related to a particular {@link PROJECT}.
  * @package projects
  * @subpackage db
- * @version 3.2.0
+ * @version 3.3.0
  * @since 1.4.1
  */
 class PROJECT_ENTRY_QUERY extends GENERIC_PROJECT_ENTRY_QUERY

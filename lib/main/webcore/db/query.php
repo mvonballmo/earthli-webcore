@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2010 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package webcore
  * @subpackage db
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.2.1
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2009 Marco Von Ballmoos
+Copyright (c) 2002-2010 Marco Von Ballmoos
 
 This file is part of earthli WebCore.
 
@@ -46,7 +46,7 @@ require_once ('webcore/db/database.php');
  * applied uniformly regardless of the objects being retrieved.
  * @package webcore
  * @subpackage db
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.2.1
  * @abstract
  */
@@ -1392,7 +1392,7 @@ abstract class QUERY extends WEBCORE_OBJECT
  * 
  * @package webcore
  * @subpackage db
- * @version 3.2.0
+ * @version 3.3.0
  * @since 3.1.0
  * @abstract
  */
@@ -1552,7 +1552,7 @@ abstract class HIERARCHICAL_QUERY extends QUERY
  * @access private
  * @package webcore
  * @subpackage db
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.2.1
  */
 class QUERY_BASED_CACHE extends RAISABLE
@@ -1621,7 +1621,7 @@ class QUERY_BASED_CACHE extends RAISABLE
  * @access private
  * @package webcore
  * @subpackage db
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.7.0
  */
 class QUERY_ITERATOR extends RAISABLE

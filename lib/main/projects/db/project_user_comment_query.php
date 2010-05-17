@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2010 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package projects
  * @subpackage db
- * @version 3.2.0
+ * @version 3.3.0
  * @since 1.4.1
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2009 Marco Von Ballmoos
+Copyright (c) 2002-2010 Marco Von Ballmoos
 
 This file is part of earthli Projects.
 
@@ -43,7 +43,7 @@ require_once ('webcore/db/user_comment_query.php');
  * Retrieves {@link COMMENT}s visible to a {@link USER}.
  * @package projects
  * @subpackage db
- * @version 3.2.0
+ * @version 3.3.0
  * @since 1.4.1
  */
 class PROJECT_USER_COMMENT_QUERY extends USER_MULTI_TYPE_COMMENT_QUERY

@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2010 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package webcore
  * @subpackage forms
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.2.1
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2009 Marco Von Ballmoos
+Copyright (c) 2002-2010 Marco Von Ballmoos
 
 This file is part of earthli WebCore.
 
@@ -44,7 +44,7 @@ require_once ('webcore/sys/security.php');
  * Create or delete {@link PERMISSIONS} for a {@link FOLDER}.
  * @package webcore
  * @subpackage forms
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.2.1
  */
 class CREATE_FOLDER_PERMISSIONS_FORM extends ID_BASED_FORM

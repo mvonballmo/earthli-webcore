@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2010 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package webcore
  * @subpackage db
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.2.1
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2009 Marco Von Ballmoos
+Copyright (c) 2002-2010 Marco Von Ballmoos
 
 This file is part of earthli WebCore.
 
@@ -43,7 +43,7 @@ require_once ('webcore/db/user_entry_sub_object_query.php');
  * Return {@link COMMENT}s visible to a {@link USER}.
  * @package webcore
  * @subpackage db
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.2.1
  */
 class USER_COMMENT_QUERY extends USER_ENTRY_SUB_OBJECT_QUERY
@@ -119,7 +119,7 @@ class USER_COMMENT_QUERY extends USER_ENTRY_SUB_OBJECT_QUERY
  * Return {@link COMMENT}s visible to a {@link USER} in an application with {@link MULTI_TYPE_ENTRY}s.
  * @package webcore
  * @subpackage db
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.2.1
  */
 class USER_MULTI_TYPE_COMMENT_QUERY extends USER_COMMENT_QUERY

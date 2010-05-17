@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2010 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package projects
  * @subpackage gui
- * @version 3.2.0
+ * @version 3.3.0
  * @since 1.9.0
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2009 Marco Von Ballmoos
+Copyright (c) 2002-2010 Marco Von Ballmoos
 
 This file is part of earthli Projects.
 
@@ -44,7 +44,7 @@ require_once ('webcore/gui/entry_grid.php');
  * Used as a base class only.
  * @package projects
  * @subpackage gui
- * @version 3.2.0
+ * @version 3.3.0
  * @since 1.9.0
  */
 class PROJECT_ENTRY_GRID extends CONTENT_OBJECT_GRID
@@ -251,7 +251,7 @@ class PROJECT_ENTRY_GRID extends CONTENT_OBJECT_GRID
  * Display {@link PROJECT_ENTRY}s from a {@link QUERY}.
  * @package projects
  * @subpackage gui
- * @version 3.2.0
+ * @version 3.3.0
  * @since 1.4.1
  */
 class PROJECT_ENTRY_SUMMARY_GRID extends ENTRY_SUMMARY_GRID

@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2010 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package webcore
  * @subpackage newsfeed
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.7.1
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2009 Marco Von Ballmoos
+Copyright (c) 2002-2010 Marco Von Ballmoos
 
 This file is part of earthli WebCore.
 
@@ -56,7 +56,7 @@ require_once ('webcore/gui/default_page_renderer.php');
  *
  * @package webcore
  * @subpackage newsfeed
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.7.1
  */
 abstract class NEWSFEED_RENDERER extends WEBCORE_OBJECT
@@ -389,7 +389,7 @@ abstract class NEWSFEED_RENDERER extends WEBCORE_OBJECT
  * Base class for newsfeed item renderers.
  * @package webcore
  * @subpackage newsfeed
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.7.1
  */
 class NEWSFEED_OBJECT_RENDERER extends HANDLER_RENDERER
@@ -479,7 +479,7 @@ class NEWSFEED_OBJECT_RENDERER extends HANDLER_RENDERER
  * Rendering options used by a {@link NEWSFEED_RENDERER}.
  * @package webcore
  * @subpackage newsfeed
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.7.1
  * @access private
  */
@@ -530,7 +530,7 @@ class NEWSFEEDER_RENDERER_OPTIONS extends OBJECT_RENDERER_OPTIONS
  * Formats a video or media for a newsfeed.
  * @package webcore
  * @subpackage newsfeed
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.7.1
  * @access private
  */
@@ -555,7 +555,7 @@ class NEWSFEED_MEDIA_REPLACER extends HTML_MEDIA_REPLACER
  * Formats the header and footer for HTML newsfeed items.
  * @package webcore
  * @subpackage newsfeed
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.7.1
  * @access private
  */
@@ -583,7 +583,7 @@ class NEWSFEED_PAGE_RENDERER extends DEFAULT_PAGE_RENDERER
  * An implementation of the {@link HTML_TEXT_MUNGER} with special handling for newsfeeds.
  * @package webcore
  * @subpackage newsfeed
- * @version 3.2.0
+ * @version 3.3.0
  * @since 3.2.0
  * @access private
  */
@@ -603,7 +603,7 @@ class NEWSFEED_HTML_TEXT_MUNGER extends HTML_TEXT_MUNGER
  * Links a block of text to a previous footnote reference.
  * @package webcore
  * @subpackage newsfeed
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.7.1
  * @access private
  */
@@ -632,7 +632,7 @@ class NEWSFEED_FOOTNOTE_TEXT_REPLACER extends HTML_FOOTNOTE_TEXT_REPLACER
  * Adds a link to a footnote, numbering automatically.
  * @package webcore
  * @subpackage newsfeed
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.7.1
  * @access private
  */

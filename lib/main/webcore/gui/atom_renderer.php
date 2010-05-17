@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2010 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package webcore
  * @subpackage newsfeed
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.7.1
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2009 Marco Von Ballmoos
+Copyright (c) 2002-2010 Marco Von Ballmoos
 
 This file is part of earthli WebCore.
 
@@ -80,7 +80,7 @@ function _echo_atom_text_tag ($tag, $text, $language, $is_html)
  * @see RSS_RENDERER
  * @package webcore
  * @subpackage newsfeed
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.7.1
  */
 class ATOM_RENDERER extends NEWSFEED_RENDERER
@@ -152,7 +152,7 @@ class ATOM_RENDERER extends NEWSFEED_RENDERER
  * Render an {@link ENTRY} as an Atom entry.
  * @package webcore
  * @subpackage newsfeed
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.7.1
  */
 class ENTRY_ATOM_RENDERER extends NEWSFEED_OBJECT_RENDERER
@@ -210,7 +210,7 @@ class ENTRY_ATOM_RENDERER extends NEWSFEED_OBJECT_RENDERER
  * Render a {@link DRAFTABLE_ENTRY} as an Atom entry.
  * @package webcore
  * @subpackage newsfeed
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.7.1
  */
 class DRAFTABLE_ENTRY_ATOM_RENDERER extends ENTRY_ATOM_RENDERER

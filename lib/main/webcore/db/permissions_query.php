@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2010 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package webcore
  * @subpackage db
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.2.1
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2009 Marco Von Ballmoos
+Copyright (c) 2002-2010 Marco Von Ballmoos
 
 This file is part of earthli WebCore.
 
@@ -43,7 +43,7 @@ require_once ('webcore/db/query.php');
  * Return security {@link PERMISSIONS} objects.
  * @package webcore
  * @subpackage db
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.2.1
  */
 class PERMISSIONS_QUERY extends QUERY
@@ -117,7 +117,7 @@ class PERMISSIONS_QUERY extends QUERY
  * Return security {@link PERMISSIONS} objects for a {@link FOLDER}.
  * @package webcore
  * @subpackage db
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.2.1
  */
 class FOLDER_PERMISSIONS_QUERY extends PERMISSIONS_QUERY

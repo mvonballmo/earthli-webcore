@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2010 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package projects
  * @subpackage obj
- * @version 3.2.0
+ * @version 3.3.0
  * @since 1.8.0
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2009 Marco Von Ballmoos
+Copyright (c) 2002-2010 Marco Von Ballmoos
 
 This file is part of earthli Projects.
 
@@ -44,7 +44,7 @@ require_once ('webcore/obj/webcore_object.php');
  * Includes two {@link RELEASE_DATE_STATUS} objects, describing the testing and shipping status.
  * @package projects
  * @subpackage obj
- * @version 3.2.0
+ * @version 3.3.0
  * @since 1.8.0
  * @access private
  */
@@ -189,7 +189,7 @@ class RELEASE_STATUS
  * Releases have two dates: testing and shipping.
  * @package projects
  * @subpackage obj
- * @version 3.2.0
+ * @version 3.3.0
  * @since 1.8.0
  */
 class RELEASE_DATE_STATUS extends WEBCORE_OBJECT

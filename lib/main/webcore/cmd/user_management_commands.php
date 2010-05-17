@@ -1,19 +1,19 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2010 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package webcore
  * @subpackage command
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.7.0
  * @access private
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2009 Marco Von Ballmoos
+Copyright (c) 2002-2010 Marco Von Ballmoos
 
 This file is part of earthli WebCore.
 
@@ -46,7 +46,7 @@ require_once ('webcore/cmd/commands.php');
  * "anonymous" or "registered" users.
  * @package webcore
  * @subpackage command
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.7.0
  * @access private
  */
@@ -99,7 +99,7 @@ class USER_LIST_COMMANDS extends COMMANDS
  * "anonymous" or "registered" users.
  * @package webcore
  * @subpackage command
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.7.0
  * @access private
  */

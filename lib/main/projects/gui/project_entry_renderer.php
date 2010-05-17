@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2010 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package projects
  * @subpackage gui
- * @version 3.2.0
+ * @version 3.3.0
  * @since 1.4.1
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2009 Marco Von Ballmoos
+Copyright (c) 2002-2010 Marco Von Ballmoos
 
 This file is part of earthli Projects.
 
@@ -44,7 +44,7 @@ require_once ('webcore/gui/location_renderer.php');
  * Renders a {@link PROJECT_ENTRY} for display in an email (plain text or HTML).
  * @package projects
  * @subpackage gui
- * @version 3.2.0
+ * @version 3.3.0
  * @since 1.4.1
  * @abstract
  */
@@ -287,7 +287,7 @@ abstract class PROJECT_ENTRY_RENDERER extends ENTRY_RENDERER
  * Renders a location for a {@link PROJECT_ENTRY} into a {@link PAGE}.
  * @package projects
  * @subpackage gui
- * @version 3.2.0
+ * @version 3.3.0
  * @since 1.9.1
  */
 class PROJECT_ENTRY_LOCATION_RENDERER extends OBJECT_IN_FOLDER_LOCATION_RENDERER

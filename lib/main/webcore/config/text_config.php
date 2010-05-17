@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2010 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package webcore
  * @subpackage config
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.7.1
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2009 Marco Von Ballmoos
+Copyright (c) 2002-2010 Marco Von Ballmoos
 
 This file is part of earthli WebCore.
 
@@ -53,7 +53,7 @@ define ('ISO_8859_1_registered_symbol', chr(174));
  * global_text_options()}.
  * @package webcore
  * @subpackage text
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.7.1
  */
 class TEXT_OPTIONS

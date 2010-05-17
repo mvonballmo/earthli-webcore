@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2010 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package webcore
  * @subpackage sys
- * @version 3.2.0
+ * @version 3.3.0
  * @since 3.1.0
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2009 Marco Von Ballmoos
+Copyright (c) 2002-2010 Marco Von Ballmoos
 
 This file is part of earthli WebCore.
 
@@ -43,7 +43,7 @@ require_once ('webcore/sys/system.php');
  * Handler that works with the {@link ENVIRONMENT}.
  * @package webcore
  * @subpackage sys
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.7.0
  */
 class ENVIRONMENT_EXCEPTION_HANDLER extends EXCEPTION_HANDLER
@@ -74,7 +74,7 @@ class ENVIRONMENT_EXCEPTION_HANDLER extends EXCEPTION_HANDLER
  * HTML-formatted exception message.
  * @package webcore
  * @subpackage sys
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.2.1
  */
 class HTML_EXCEPTION_HANDLER extends ENVIRONMENT_EXCEPTION_HANDLER
@@ -111,7 +111,7 @@ class HTML_EXCEPTION_HANDLER extends ENVIRONMENT_EXCEPTION_HANDLER
  * @see function raise()
  * @package webcore
  * @subpackage sys
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.4.0
  */
 class LOGGER_EXCEPTION_HANDLER extends HTML_EXCEPTION_HANDLER
@@ -151,7 +151,7 @@ class LOGGER_EXCEPTION_HANDLER extends HTML_EXCEPTION_HANDLER
  * Fatal errors are redirected to another page.
  * @package webcore
  * @subpackage sys
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.2.1
  */
 class REDIRECT_EXCEPTION_HANDLER extends HTML_EXCEPTION_HANDLER

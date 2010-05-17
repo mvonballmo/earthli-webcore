@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2010 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package webcore
  * @subpackage grid
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.4.0
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2009 Marco Von Ballmoos
+Copyright (c) 2002-2010 Marco Von Ballmoos
 
 This file is part of earthli WebCore.
 
@@ -43,7 +43,7 @@ require_once ('webcore/gui/grid.php');
  * Displays {@link HISTORY_ITEM}s from a {@link QUERY}.
  * @package webcore
  * @subpackage grid
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.4.0
  */
 class HISTORY_ITEM_GRID extends STANDARD_GRID

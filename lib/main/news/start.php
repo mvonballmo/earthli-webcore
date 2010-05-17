@@ -2,17 +2,17 @@
 
 /**
  * Including this file creates and assigns a global news application.
- * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2010 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package news
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.7.0
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2009 Marco Von Ballmoos
+Copyright (c) 2002-2010 Marco Von Ballmoos
 
 This file is part of earthli News.
 
@@ -45,7 +45,7 @@ require_once ('news/init.php');
  * {@link PAGE::register_application()} for help on customizing the
  * application creation and initialization.
  * @global NEWS_APPLICATION $App
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.4.0
  */
 $App = $Page->make_application (News_application_id, true, true);

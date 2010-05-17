@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2010 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package webcore
  * @subpackage grid
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.2.1
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2009 Marco Von Ballmoos
+Copyright (c) 2002-2010 Marco Von Ballmoos
 
 This file is part of earthli Webcore.
 
@@ -50,7 +50,7 @@ require_once ('webcore/gui/grid.php');
  * 
  * @package webcore
  * @subpackage grid
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.2.1
  * @abstract
  */
@@ -178,7 +178,7 @@ abstract class LIST_GRID extends STANDARD_GRID
  * Properties of a column in a {@link LIST_GRID}.
  * @package webcore
  * @subpackage grid
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.7.0
  * @access private
  */

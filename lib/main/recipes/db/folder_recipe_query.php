@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2010 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package recipes
  * @subpackage db
- * @version 3.2.0
+ * @version 3.3.0
  * @since 1.3.0
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2009 Marco Von Ballmoos
+Copyright (c) 2002-2010 Marco Von Ballmoos
 
 This file is part of earthli Recipes.
 
@@ -43,7 +43,7 @@ require_once ('webcore/db/folder_entry_query.php');
  * Retrieves {@link RECIPE}s related to a particular {@link RECIPE_BOOK}.
  * @package recipes
  * @subpackage db
- * @version 3.2.0
+ * @version 3.3.0
  * @since 1.3.0
  */
 class FOLDER_RECIPE_QUERY extends FOLDER_ENTRY_QUERY

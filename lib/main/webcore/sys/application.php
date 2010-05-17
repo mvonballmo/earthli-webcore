@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2010 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package webcore
  * @subpackage sys
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.2.1
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2009 Marco Von Ballmoos
+Copyright (c) 2002-2010 Marco Von Ballmoos
 
 This file is part of earthli WebCore.
 
@@ -64,7 +64,7 @@ define ('App_entry_reg_prefix', '__entry_');
  * There can be multiple applications per page.
  * @package webcore
  * @subpackage sys
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.2.1
  */
 class APPLICATION extends CONTEXT
@@ -1211,7 +1211,7 @@ class APPLICATION extends CONTEXT
  * Encapsulates an application that uses {@link DRAFTABLE_ENTRY}s.
  * @package webcore
  * @subpackage sys
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.7.1
  */
 class DRAFTABLE_APPLICATION extends APPLICATION

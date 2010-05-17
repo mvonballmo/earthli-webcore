@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2010 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package webcore
  * @subpackage tree
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.2.1
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2009 Marco Von Ballmoos
+Copyright (c) 2002-2010 Marco Von Ballmoos
 
 This file is part of earthli WebCore.
 
@@ -43,7 +43,7 @@ require_once ('webcore/gui/tree.php');
  * Handles tree-rendering for nodes of type {@link FOLDER}.
  * @package webcore
  * @subpackage tree
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.2.1
  */
 class FOLDER_TREE_NODE_INFO extends TREE_NODE_INFO
@@ -181,7 +181,7 @@ class FOLDER_TREE_NODE_INFO extends TREE_NODE_INFO
  * Handles tree-rendering for {@link FOLDER}s in the explorer window.
  * @package webcore
  * @subpackage tree
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.2.1
  */
 class EXPLORER_FOLDER_TREE_NODE_INFO extends FOLDER_TREE_NODE_INFO
@@ -202,7 +202,7 @@ class EXPLORER_FOLDER_TREE_NODE_INFO extends FOLDER_TREE_NODE_INFO
  * Handles tree-rendering for {@link FOLDER}s in the security window.
  * @package webcore
  * @subpackage tree
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.2.1
  */
 class SECURITY_FOLDER_TREE_NODE_INFO extends FOLDER_TREE_NODE_INFO
@@ -266,7 +266,7 @@ class SECURITY_FOLDER_TREE_NODE_INFO extends FOLDER_TREE_NODE_INFO
  * Handles tree-rendering for {@link FOLDER}s in the folder subscription views.
  * @package webcore
  * @subpackage tree
- * @version 3.2.0
+ * @version 3.3.0
  * @since 2.2.1
  */
 class SUBSCRIPTION_FOLDER_TREE_NODE_INFO extends FOLDER_TREE_NODE_INFO

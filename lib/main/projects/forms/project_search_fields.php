@@ -1,18 +1,18 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2009 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2010 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package projects
  * @subpackage forms
- * @version 3.2.0
+ * @version 3.3.0
  * @since 1.7.0
  */
 
 /****************************************************************************
 
-Copyright (c) 2002-2009 Marco Von Ballmoos
+Copyright (c) 2002-2010 Marco Von Ballmoos
 
 This file is part of earthli Projects.
 
@@ -43,7 +43,7 @@ require_once ('webcore/forms/search_fields.php');
  * Create a filter for {@link JOB}s.
  * @package projects
  * @subpackage forms
- * @version 3.2.0
+ * @version 3.3.0
  * @since 1.7.0
  */
 class SEARCH_PROJECT_ENTRY_FIELDS extends SEARCH_ENTRY_FIELDS
@@ -228,7 +228,7 @@ class SEARCH_PROJECT_ENTRY_FIELDS extends SEARCH_ENTRY_FIELDS
  * Create a filter for {@link JOB}s.
  * @package projects
  * @subpackage forms
- * @version 3.2.0
+ * @version 3.3.0
  * @since 1.7.0
  */
 class SEARCH_JOB_FIELDS extends SEARCH_PROJECT_ENTRY_FIELDS
@@ -246,7 +246,7 @@ class SEARCH_JOB_FIELDS extends SEARCH_PROJECT_ENTRY_FIELDS
  * Create a filter for {@link CHANGE}s.
  * @package projects
  * @subpackage forms
- * @version 3.2.0
+ * @version 3.3.0
  * @since 1.7.0
  */
 class SEARCH_CHANGE_FIELDS extends SEARCH_PROJECT_ENTRY_FIELDS
