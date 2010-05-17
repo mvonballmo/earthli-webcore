@@ -209,7 +209,7 @@ class PAGE_NEWSFEED_OPTIONS
    * @var array[string,string]
    */
   public $formats = array(
-    Newsfeed_format_atom => "RSS", Newsfeed_format_rss => "Atom"
+    Newsfeed_format_atom => "Atom", Newsfeed_format_rss => "RSS"
   );
 
   /**
@@ -220,9 +220,9 @@ class PAGE_NEWSFEED_OPTIONS
    * @var array[string]
    */
   public $content_formats = array(
-    Newsfeed_content_text => "Plain text", 
-    Newsfeed_content_html => "Simple html",
-    Newsfeed_content_full_html => "Styled html"
+    Newsfeed_content_text => array ("Plain text", "Plain text content; not appropriate for HTML newsreaders."), 
+    Newsfeed_content_html => array ("Simple html", "HTML body with minimal styling; good for integrating into online newsreaders."),
+    Newsfeed_content_full_html => array ("Styled html", "Fully-styled HTML; perfect for standalone article newsreaders.")
   );
 
   /**
@@ -263,16 +263,58 @@ class PAGE_NEWSFEED_OPTIONS
       
       foreach ($this->formats as $format => $format_title)
       {
-        foreach ($this->content_formats as $content => $content_title)
+        foreach ($this->content_formats as $content => $content_texts)
         {
           $url->replace_argument ('format', $format);
           $url->replace_argument ('content', $content);
+          
+          $content_title = $content_texts [0];
 ?>
   <link rel="alternate" title="<?php echo $title; ?> (<?php echo $format_title; ?>/<?php echo $content_title; ?>)" href="<?php echo $url->as_html (); ?>" type="application/rss+xml">
 <?php
         }
       }
     }
+  }
+  
+  public function make_commands ($context)
+  {
+  	$Result = new COMMANDS($context);
+  	
+    if ($this->enabled && $this->file_name)
+    {
+      $title = $this->title->as_text ();
+      $url = new URL ($this->page->resolve_file ($this->file_name, Force_root_on));
+      
+      foreach ($this->formats as $format => $format_title)
+      {
+        foreach ($this->content_formats as $content => $content_texts)
+        {
+        	$content_title = $content_texts [0];
+        	$content_description = $content_texts [1];
+        	
+          $url->replace_argument ('format', $format);
+          $url->replace_argument ('content', $content);
+          
+          $cmd = $Result->make_command();
+          $cmd->id = $format . '_' . $content;
+          $cmd->title = '<b>'.  $content_title . '</b> (' . $format_title . ')';
+          if ($format == 'rss') 
+          {
+          	$cmd->icon = '{icons}indicators/newsfeed_rss';
+          }
+          else 
+          {
+            $cmd->icon = '{icons}indicators/newsfeed_atom';
+          }
+          $cmd->description = $content_description;
+          $cmd->link = $url->as_text();
+          $Result->append($cmd);
+        }
+      }
+    }
+    
+    return $Result;
   }
 }
 

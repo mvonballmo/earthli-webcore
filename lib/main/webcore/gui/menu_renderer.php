@@ -161,11 +161,39 @@ class MENU_RENDERER extends WEBCORE_OBJECT
   public $alignment = Menu_align_right;
 
   /**
-   * Show the word "Commands" for the drop-down?
+   * Show the word {@link $trigger_title} for the drop-down trigger?
    * Turned off when using {@link Menu_size_minimal} with {@link set_size()}.
    * @var boolean
    */
-  public $show_commands_title = true;
+  public $show_trigger_title = true;
+  
+  /**
+   * Show the {@link $trigger_icon} for the drop-down trigger?
+   * 
+   * @var boolean
+   */
+  public $show_trigger_icon = true;
+  
+  /**
+   * The text to show when {@link $show_trigger_title} is true. 
+   * 
+   * @var string
+   */
+  public $trigger_title = 'Commands';
+  
+  /**
+   * The icon to show when {@link $show_trigger_icon} is true.
+   * 
+   * @var string
+   */
+  public $trigger_icon = '{icons}buttons/menu';
+  
+  /**
+   * The CSS class to use for the entire dropdown trigger.
+   * 
+   * @var string
+   */
+  public $trigger_button_CSS_class = 'menu-button';
 
   /**
    * Use this separator if {@link Menu_show_as_buttons} is <code>False</code>.
@@ -203,12 +231,12 @@ class MENU_RENDERER extends WEBCORE_OBJECT
  public function set_size ($size_option)
  {
     $this->display_mode = Menu_horizontal_with_dropdown;
-    $this->show_commands_title = true;
+    $this->show_trigger_title = true;
     switch ($size_option)
     {
     case Menu_size_minimal:
       $this->num_important_commands = 0;
-      $this->show_commands_title = false;
+      $this->show_trigger_title = false;
       break;
     case Menu_size_compact:
       $this->num_important_commands = 0;
@@ -238,7 +266,7 @@ class MENU_RENDERER extends WEBCORE_OBJECT
     if ($commands->num_executable_commands () > 0)
     {
       ?>
-      <div class="<?php echo $CSS_class; ?>">
+      <div class="<?php echo $CSS_class; ?>"<?php echo $this->_get_alignment(); ?>>
         <?php $this->display ($commands); ?>
         <div style="clear: both"></div>
       </div>
@@ -258,7 +286,6 @@ class MENU_RENDERER extends WEBCORE_OBJECT
     if (isset ($this->env->profiler)) $this->env->profiler->start ('ui');
     if ($commands->num_executable_commands ())
     {
-      $this->_start_alignment ();
       switch ($this->display_mode)
       {
         case Menu_horizontal:
@@ -272,7 +299,6 @@ class MENU_RENDERER extends WEBCORE_OBJECT
           $this->_draw_important_with_dropdown ($commands, $this->display_mode);
           break;
       }
-      $this->_finish_alignment ();
     }
     if (isset ($this->env->profiler)) $this->env->profiler->stop ('ui');
   }
@@ -283,7 +309,7 @@ class MENU_RENDERER extends WEBCORE_OBJECT
    * _start_alignment()}.
    * @access private
    */
-  protected function _start_alignment ()
+  protected function _get_alignment ()
   {
     switch ($this->alignment)
     {
@@ -301,18 +327,7 @@ class MENU_RENDERER extends WEBCORE_OBJECT
       $style = '';
     }
     
-    echo '<div'. $style . '>' . "\n  ";
-  }
-  
-  /**
-   * Finish drawing the container for {@link $alignment}.
-   * Called by {@link display()} to close the container opened by {@link
-   * _start_alignment()}.
-   * @access private
-   */
-  protected function _finish_alignment ()
-  {
-    echo '</div>' . "\n";
+    return $style;
   }
   
   /**
@@ -410,6 +425,11 @@ class MENU_RENDERER extends WEBCORE_OBJECT
         }
         $tag .= '>';
           
+	      if (!empty($cmd->description))
+	      {
+	        $Result .= ' <span class="menu-button-description">' . $cmd->description . '</span>';
+	      }
+
         /* Important! IE displays the last character in this last link of the last 
          * button in the menu again underneath the menus. The code below makes
          * sure that it is a space so it doesn't appear on the screen. IE - so
@@ -427,7 +447,11 @@ class MENU_RENDERER extends WEBCORE_OBJECT
       }
       elseif ($CSS_class)
       {
-        $Result = '<span' . $CSS_class . '>' . $Result . '</span>';        
+        $Result = '<span' . $CSS_class . '>' . $Result . '</span>';       
+	      if (!empty($cmd->description)) 
+	      {
+	        $Result .= '<span class="menu-item-description">' . $cmd->description . '</span>';
+	      }
       }
     }
     
@@ -536,14 +560,21 @@ class MENU_RENDERER extends WEBCORE_OBJECT
       $menu_id = 'menu_' . mt_rand ();
       $menu_tag = ' id="' . $menu_id . '"';
     }
-    $trigger = $this->context->resolve_icon_as_html ("{icons}buttons/menu", ' ', '16px');
-    if ($this->show_commands_title)
+    
+    $trigger = '';
+    
+    if ($this->show_trigger_icon)
     {
-      $trigger .= '&nbsp;Commands';
+      $trigger = $this->context->resolve_icon_as_html ($this->trigger_icon, ' ', '16px');
+    }
+    
+    if ($this->show_trigger_title)
+    {
+      $trigger .= '&nbsp;' . $this->trigger_title;
     }
 
     echo '  <div class="' . $trigger_class . '"' . $menu_tag . '>' . "\n";
-    echo '    <div class="menu-button" style="float: none">' . $trigger . "</div>\n";
+    echo '    <div class="' . $this->trigger_button_CSS_class . '" style="float: none">' . $trigger . "</div>\n";
     echo '    <div class="' . $menu_class . '">' . "\n";
     $this->_draw_vertical_menu ($commands, false);
     echo '    </div>' . "\n";

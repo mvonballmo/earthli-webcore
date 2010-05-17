@@ -102,13 +102,13 @@ class RSS_RENDERER extends NEWSFEED_RENDERER
     <generator><?php echo $this->_as_xml ($this->generator); ?></generator>
     <language><?php echo $this->_as_xml ($this->language); ?></language>
     <ttl><?php echo $this->_as_xml ($this->ttl_in_minutes); ?></ttl>
-    <title><?php $this->title->display (); ?></title>
+    <title><![CDATA[<?php $this->title->display (); ?>]]></title>
     <link><?php echo $this->_as_xml ($this->base_url); ?></link>
     <pubDate><?php echo $time_modified->as_RFC_2822 (); ?></pubDate>
     <lastBuildDate><?php echo $time_modified->as_RFC_2822 (); ?></lastBuildDate>
     <image>
       <link><?php echo $this->_as_xml ($this->base_url); ?></link>
-      <title><?php $this->title->display (); ?></title>
+      <title><![CDATA[<?php $this->title->display (); ?>]]></title>
       <url><?php echo $this->context->sized_icon ($this->icon_file, '100px'); ?></url>
     </image>
     <description><![CDATA[<?php echo $this->_as_xml ($this->description); ?>]]></description>
@@ -160,10 +160,10 @@ class ENTRY_RSS_RENDERER extends NEWSFEED_OBJECT_RENDERER
 ?>
   <item>
     <guid><?php echo $obj->home_page (Force_root_on); ?></guid>
-    <title><?php echo $this->_as_xml ($obj->title_as_plain_text ()); ?></title>
+    <title><![CDATA[<?php echo $this->_as_xml ($obj->title_as_plain_text ()); ?>]]></title>
     <link><?php echo $this->_as_xml ($obj->home_page (Force_root_on)); ?></link>
     <pubDate><?php echo $t->as_RFC_2822 (); ?></pubDate>
-    <description><![CDATA[<?php echo $content; ?>]]></description>     
+    <description><![CDATA[<?php echo $content; ?>]]></description>
   </item>
 <?php
   }

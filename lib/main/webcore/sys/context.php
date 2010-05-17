@@ -474,6 +474,22 @@ class CONTEXT extends RESOLVER
   }
 
   /**
+   * Return an object to draw a newsfeed menu.
+   * @see make_menu()
+   * @return MENU_RENDERER
+   */
+  public function make_newsfeed_menu_renderer ()
+  {
+    $Result = $this->make_menu_renderer ();
+    $Result->set_size (Menu_size_minimal);
+    $Result->content_mode = Menu_show_as_buttons | Menu_show_icon | Menu_show_title;
+    $Result->trigger_icon = "{icons}indicators/newsfeed_rss";
+    $Result->trigger_button_CSS_class = '';
+    
+    return $Result;
+  }
+  
+  /**
    * Return an object to draw trees.
    * @return TREE
    */

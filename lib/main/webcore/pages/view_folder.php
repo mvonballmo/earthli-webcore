@@ -62,7 +62,13 @@ http://www.earthli.com/software/webcore/albums
 ?>
   <div class="side-bar">
     <div class="side-bar-title">
-      <?php echo $folder->icon_as_html ('20px') . ' ' . $folder->title_as_html (); ?>
+      <?php 
+        $newsfeed_commands = $Page->newsfeed_options->make_commands($App);
+        $renderer = $App->make_newsfeed_menu_renderer ();
+        $renderer->display_as_toolbar ($newsfeed_commands, 'nothing');
+        
+        echo $folder->icon_as_html ('20px') . ' ' . $folder->title_as_html (); 
+      ?>
     </div>
     <div class="side-bar-body">
       <?php

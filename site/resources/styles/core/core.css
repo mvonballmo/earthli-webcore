@@ -387,7 +387,7 @@ pre code
 
 .menu-trigger 
 {
-  
+  font-weight: normal;
 }
 
 .menu-group-title 
@@ -423,11 +423,21 @@ pre code
   padding: 3px 3px
 }
 
-.menu-bar-top 
+.menu-bar-top
 {
   text-align: right;
   border-bottom: 1px solid #000000;
   padding: 3px 3px
+}
+
+.menu-button-description, .menu-button-description
+{
+	color: black;
+	display: block;
+	margin-left: 20px;
+	padding: 3px 0px;
+	width: 200px;
+	white-space: normal;
 }
 
 /* @end */

@@ -799,7 +799,7 @@ class APPLICATION extends CONTEXT
   {
     return $this->_make_special_registered_type ($type, App_search_reg_prefix);
   }
-
+  
   /**
    * Register a class that is an {@link ENTRY}.
    * Defines the base entry class to use for this function. The default class

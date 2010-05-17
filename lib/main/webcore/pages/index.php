@@ -87,6 +87,10 @@ http://www.earthli.com/software/webcore
   <div class="side-bar">
     <div class="side-bar-title">
       <?php
+        $newsfeed_commands = $Page->newsfeed_options->make_commands($App);
+        $renderer = $App->make_newsfeed_menu_renderer ();
+        $renderer->display_as_toolbar ($newsfeed_commands, 'nothing');
+        
         if (isset ($folder))
         {
           echo $folder->title_as_html ();
