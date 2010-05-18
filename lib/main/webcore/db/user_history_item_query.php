@@ -49,11 +49,13 @@ require_once ('webcore/db/history_item_query.php');
 class USER_HISTORY_ITEM_QUERY extends HISTORY_ITEM_QUERY
 {
   /**
-   * @param APPLICATION $app Main application.
+   * @param USER $user The user for which items are to be retrieved.
    */
-  public function __construct ($app)
+	public function __construct ($user)
   {
-    parent::__construct ($app);
+    parent::__construct ($user->app);
+    
+    $this->_user = $user;
     $this->add_table ("{$this->app->table_names->folders} fldr", 'act.access_id = fldr.id');
     $this->restrict ('NOT (act.object_type = \'' . History_item_user . '\') AND NOT (act.object_type = \'' . History_item_group . '\')');
   }
@@ -127,5 +129,13 @@ class USER_HISTORY_ITEM_QUERY extends HISTORY_ITEM_QUERY
       return new $class_name ($this->app);
     }
   }
+
+  /**
+   * The user to use for access control.
+   * 
+   * @var USER
+   */
+  protected $_user;
 }
+
 ?>

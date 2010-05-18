@@ -618,7 +618,7 @@ class USER extends CONTENT_OBJECT
   public function all_history_item_query ()
   {
     $class_name = $this->app->final_class_name ('USER_HISTORY_ITEM_QUERY', 'webcore/db/user_history_item_query.php');
-    return new $class_name ($this->app);
+    return new $class_name ($this);
   }
 
   /**
