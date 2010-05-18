@@ -155,7 +155,7 @@ class USER_ENTRY_QUERY extends OBJECT_IN_FOLDER_QUERY
    * 
    * @var USER
    */
-  private $_user;
+  protected $_user;
   
   /**
    * @var USER_FOLDER_QUERY

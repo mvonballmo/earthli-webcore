@@ -331,7 +331,7 @@ class PROJECT_APPLICATION extends APPLICATION
     if (! isset ($this->_branch_cache))
     {
       include_once ('projects/db/project_user_branch_query.php');
-      $this->_branch_cache = new QUERY_BASED_CACHE (new PROJECT_USER_BRANCH_QUERY ($this));
+      $this->_branch_cache = new QUERY_BASED_CACHE (new PROJECT_USER_BRANCH_QUERY ($this->login));
     }
     return $this->_branch_cache->object_at_id ($id);
   }
@@ -348,7 +348,7 @@ class PROJECT_APPLICATION extends APPLICATION
     if (! isset ($this->_release_cache))
     {
       include_once ('projects/db/project_user_release_query.php');
-      $this->_release_cache = new QUERY_BASED_CACHE (new PROJECT_USER_RELEASE_QUERY ($this));
+      $this->_release_cache = new QUERY_BASED_CACHE (new PROJECT_USER_RELEASE_QUERY ($this->login));
     }
 
     return $this->_release_cache->object_at_id ($id);
