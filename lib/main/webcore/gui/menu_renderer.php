@@ -266,7 +266,7 @@ class MENU_RENDERER extends WEBCORE_OBJECT
     if ($commands->num_executable_commands () > 0)
     {
       ?>
-      <div class="<?php echo $CSS_class; ?>"<?php echo $this->_get_alignment(); ?>>
+      <div class="<?php echo $CSS_class; ?>">
         <?php $this->display ($commands); ?>
         <div style="clear: both"></div>
       </div>
@@ -286,6 +286,7 @@ class MENU_RENDERER extends WEBCORE_OBJECT
     if (isset ($this->env->profiler)) $this->env->profiler->start ('ui');
     if ($commands->num_executable_commands ())
     {
+    	echo "<div " . $this->_get_alignment() . '>';
       switch ($this->display_mode)
       {
         case Menu_horizontal:
@@ -299,6 +300,7 @@ class MENU_RENDERER extends WEBCORE_OBJECT
           $this->_draw_important_with_dropdown ($commands, $this->display_mode);
           break;
       }
+      echo '</div>';
     }
     if (isset ($this->env->profiler)) $this->env->profiler->stop ('ui');
   }

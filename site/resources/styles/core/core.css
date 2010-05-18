@@ -24,6 +24,9 @@ http://www.earthli.com/software/webcore
 
 ****************************************************************************/
 
+/* Styles related to 3- or 2-column structure; adapted from <http://matthewjamestaylor.com/blog/perfect-3-column.htm> */
+@import url("3_column_layout.css");
+
 /* @group HTML Base */
 
 body 
@@ -284,6 +287,11 @@ pre code
   border-spacing: 0px
 }
 
+.side-bar + .side-bar
+{
+	margin-top: 15px;
+}
+
 .side-bar-body 
 {
   padding: .5em .25em;
@@ -302,6 +310,11 @@ pre code
 .chart, .preview 
 {
   border: 1px solid #000000
+}
+
+.chart + .chart
+{
+	margin-top: 15px;	
 }
 
 .chart-body, .preview-body 
@@ -350,11 +363,6 @@ pre code
 /* @end */
 
 /* @group Menus */
-
-.menu-trigger 
-{
-  
-}
 
 .menu-dropdown, .menu-dropdown-ie 
 {
@@ -788,6 +796,17 @@ blockquote p:first-child, .side-bar-body p:first-child, .chart-body p:first-chil
 
 .horizontal-separator 
 {
+  border-bottom: 1px solid #000000;
+  empty-cells: show;
+  height: .1em;
+  clear: both;
+  display: block;
+}
+
+hr 
+{
+	color: transparent;
+	border: 0px;
   border-bottom: 1px solid #000000;
   empty-cells: show;
   height: .1em;

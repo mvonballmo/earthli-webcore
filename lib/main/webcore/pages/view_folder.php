@@ -65,7 +65,7 @@ http://www.earthli.com/software/webcore/albums
       <?php 
         $newsfeed_commands = $Page->newsfeed_options->make_commands($App);
         $renderer = $App->make_newsfeed_menu_renderer ();
-        $renderer->display_as_toolbar ($newsfeed_commands, 'nothing');
+        $renderer->display ($newsfeed_commands);
         
         echo $folder->icon_as_html ('20px') . ' ' . $folder->title_as_html (); 
       ?>

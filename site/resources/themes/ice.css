@@ -78,7 +78,7 @@ body>.page
 	border-color: #CCCCCC;
 }
 
-.horizontal-separator, .vertical-separator
+hr, .horizontal-separator, .vertical-separator
 {
 	border-color: #CCCCCC;
 }

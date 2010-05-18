@@ -89,7 +89,7 @@ http://www.earthli.com/software/webcore
       <?php
         $newsfeed_commands = $Page->newsfeed_options->make_commands($App);
         $renderer = $App->make_newsfeed_menu_renderer ();
-        $renderer->display_as_toolbar ($newsfeed_commands, 'nothing');
+        $renderer->display ($newsfeed_commands);
         
         if (isset ($folder))
         {
