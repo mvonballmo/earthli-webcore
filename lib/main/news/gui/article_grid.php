@@ -78,13 +78,7 @@ class BASE_ARTICLE_GRID extends CONTENT_OBJECT_GRID
   public $show_description = false;
 
   /**
-   * @var boolean
-   */
-  public $show_controls = false;  
-
-  /**
    * @param ARTICLE $obj
-   * @access private
    */
   protected function _draw_box ($obj)
   {
@@ -107,10 +101,7 @@ class BASE_ARTICLE_GRID extends CONTENT_OBJECT_GRID
       </div>
       <div class="detail">
         <?php
-          if ($this->show_controls)
-          {
-            $this->_draw_menu_for ($obj, Menu_size_compact);
-          }
+          $this->_draw_menu_for ($obj, Menu_size_compact);
 
           if ($this->show_user)
           {
@@ -199,83 +190,85 @@ class ARTICLE_GRID extends BASE_ARTICLE_GRID
   /**
    * @var boolean
    */
-  public $show_controls = true;
-
+  public $fuzzy_dates = true;
+  
   /**
    * @var boolean
    */
-  public $fuzzy_dates = true;  
+  public $group_by_time = true;
 
   /**
    * @param ARTICLE $obj
-   * @access private
    */
   protected function _start_row ($obj)
   {
-    $curr_date = $obj->time_published;
-    if (! $curr_date->is_valid ())
-    {
-      $curr_date = $obj->time_modified;
-    }
-      
-    $now = new DATE_TIME ();
-    
-    if ($curr_date->equals ($now, Date_time_date_part))
-    {
-      $interval_text = 'Today';
-    }
-    else
-    {
-      $yesterday = new DATE_TIME (time () - 86400);
-      if ($curr_date->equals ($yesterday, Date_time_date_part))
-      {
-        $interval_text = 'Yesterday'; 
-      }
-      else
-      {
-        $two_days_ago = new DATE_TIME (time () - (86400 * 2));
-        if ($curr_date->equals ($two_days_ago, Date_time_date_part))
-        {
-          $interval_text = 'Two Days Ago';
-        }
-        else
-        {
-          if ($this->fuzzy_dates)
-          {
-            $interval = $now->diff ($curr_date);
-            $interval_text = $interval->format (1) . ' Ago';
-          }
-          else
-          {
-            $t = $curr_date->formatter ();
-            $t->type = Date_time_format_date_only;
-            $interval_text = $curr_date->format ($t);
-          }
-        }
-      }
-    }
-
-    $dates_are_different = empty ($this->last_interval) || $this->last_interval != $interval_text;
-      
-    if ($dates_are_different)
-    {
-      $this->last_interval = $interval_text;
-      $this->last_date = $curr_date;
-?>
-  <tr>
-    <?php if ($this->items_are_selectable) { ?>
-    <td></td>
-    <?php } ?>
-    <td class="object-in-list">
-      <div class="field" style="font-size: larger">
-        <span style="margin-right: 1em"><?php echo $this->app->resolve_icon_as_html ('{app_icons}app/news', 'News', '32px'); ?></span>
-        <?php echo $interval_text; ?>
-      </div>
-    </td>
-  </tr>
-  <tr><td>&nbsp;</td></tr>
-<?php
-    }
+  	if ($this->group_by_time)
+  	{
+	    $curr_date = $obj->time_published;
+	    if (! $curr_date->is_valid ())
+	    {
+	      $curr_date = $obj->time_modified;
+	    }
+	      
+	    $now = new DATE_TIME ();
+	    
+	    if ($curr_date->equals ($now, Date_time_date_part))
+	    {
+	      $interval_text = 'Today';
+	    }
+	    else
+	    {
+	      $yesterday = new DATE_TIME (time () - 86400);
+	      if ($curr_date->equals ($yesterday, Date_time_date_part))
+	      {
+	        $interval_text = 'Yesterday'; 
+	      }
+	      else
+	      {
+	        $two_days_ago = new DATE_TIME (time () - (86400 * 2));
+	        if ($curr_date->equals ($two_days_ago, Date_time_date_part))
+	        {
+	          $interval_text = 'Two Days Ago';
+	        }
+	        else
+	        {
+	          if ($this->fuzzy_dates)
+	          {
+	            $interval = $now->diff ($curr_date);
+	            $interval_text = $interval->format (1) . ' Ago';
+	          }
+	          else
+	          {
+	            $t = $curr_date->formatter ();
+	            $t->type = Date_time_format_date_only;
+	            $interval_text = $curr_date->format ($t);
+	          }
+	        }
+	      }
+	    }
+	
+	    $dates_are_different = empty ($this->last_interval) || $this->last_interval != $interval_text;
+	      
+	    if ($dates_are_different)
+	    {
+	      $this->last_interval = $interval_text;
+	      $this->last_date = $curr_date;
+	?>
+	  <tr>
+	    <?php if ($this->items_are_selectable) { ?>
+	    <td></td>
+	    <?php } ?>
+	    <td class="object-in-list">
+	      <div class="field" style="font-size: larger">
+	        <span style="margin-right: 1em"><?php echo $this->app->resolve_icon_as_html ('{app_icons}app/news', 'News', '32px'); ?></span>
+	        <?php echo $interval_text; ?>
+	      </div>
+	    </td>
+	  </tr>
+	  <tr><td>&nbsp;</td></tr>
+	<?php
+	    }
+	  }
 
     parent::_start_row ($obj);
   }
