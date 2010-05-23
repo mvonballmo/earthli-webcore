@@ -1080,13 +1080,16 @@ class FORM_RENDERER extends CONTROLS_RENDERER
       $buttons [] = $this->submit_button_as_html ('Quick Save', '{icons}buttons/quick_save', 'quick_save_and_reload');
     }
     
-    $referer_url = $this->app->get_referer_url();
-    
-    if (!empty($referer_url))
+    if (isset($this->app))
     {
-    	$buttons [] = $this->button_as_html('Cancel', $referer_url, '{icons}buttons/cancel');
+    	$referer_url = $this->app->get_referer_url();
+    
+	    if (!empty($referer_url))
+	    {
+	    	$buttons [] = $this->button_as_html('Cancel', $referer_url, '{icons}buttons/cancel');
+	    }
     }
-
+    
     $this->draw_buttons_in_row ($buttons);
   }
 
