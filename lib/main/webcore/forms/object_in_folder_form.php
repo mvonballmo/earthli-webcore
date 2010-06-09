@@ -311,7 +311,7 @@ class ATTACHMENT_HOST_FORM extends OBJECT_IN_FOLDER_FORM
       $renderer->start_row ('Attachments');
         echo $attachments . '&nbsp;';
         echo $alignments . '&nbsp;';
-        echo $sizes;
+        echo $sizes . '&nbsp;';
         echo $caption_modes;
         echo $renderer->javascript_button_as_html ('Add', 'on_insert_attachment ()');
       $renderer->finish_row ();
