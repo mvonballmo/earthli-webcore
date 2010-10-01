@@ -392,7 +392,7 @@ class RAISABLE
       $value = 0;
     }
 
-    if (is_numeric ($value))
+    if (is_numeric ($value) && (strpos($value, 'e') === FALSE))
     {
       return $value;
     }
@@ -419,7 +419,8 @@ class RAISABLE
       return $validated_value;
     }
 
-    throw new Exception("[$value] is not an integer.");
+    $value = htmlentities($value);
+    $this->raise ("[$value] is not an integer.");
   }
 
   /**
