@@ -125,6 +125,7 @@ http://www.earthli.com/software/webcore
       }
       else
       {
+	      $page_name = htmlentities($page_name);
         echo "<div class=\"error\">[$page_name] is not a file.</div>";
       }
     ?>
