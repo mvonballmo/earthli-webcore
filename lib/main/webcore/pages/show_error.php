@@ -87,7 +87,7 @@ http://www.earthli.com/software/webcore
   <p class="error">
   <?php
     $page_url = $Page->url ();
-    echo $page_url; 
+    echo htmlentities($page_url);
   ?>
   </p>
   <p class="notes">Please see the <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html">HTTP 1.1 Status Code Definitions</a> for more information.</p>
