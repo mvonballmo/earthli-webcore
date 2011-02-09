@@ -1046,19 +1046,19 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
 
     switch ($alignment)
     {
-    case 'left-column':
-      ; // 'clear' attribute is handled above
-    case 'left':
-      $outer_css->add_text ('float: left; margin-right: .5em; margin-bottom: .5em');
-      break;
-    case 'right-column':
-      ; // 'clear' attribute is handled above
-    case 'right':
-      $outer_css->add_text ('float: right; margin-left: .5em; margin-bottom: .5em');
-      break;
-    case 'center':
-      $outer_css->add_text ('margin: auto; display: table');
-      break;
+	    case 'left-column':
+	      ; // 'clear' attribute is handled above
+	    case 'left':
+	      $outer_css->add_text ('float: left; margin-right: .5em; margin-bottom: .5em');
+	      break;
+	    case 'right-column':
+	      ; // 'clear' attribute is handled above
+	    case 'right':
+	      $outer_css->add_text ('float: right; margin-left: .5em; margin-bottom: .5em');
+	      break;
+	    case 'center':
+	      $outer_css->add_text ('margin: auto; display: table');
+	      break;
     }
 
     $inner_css = $munger->make_style_builder ();
@@ -1106,16 +1106,17 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
         }
       }
 
+      $caption = $this->_get_caption ($is_block, true);
       $builder->add_attribute ('style', $outer_css->as_text ());
       $outer_css->clear ();
       $inner = $this->_open_inner_area ($munger, $attrs, $outer_css, $inner_css, $class);
       if ($is_block)
       {
-        $tag = '<div class="auto-content-block">';
+        $tag = '<div class="auto-content-block">' . $caption;
       }
       else
       {
-        $tag = '<span class="auto-content-inline">';
+        $tag = '<span class="auto-content-inline">' . $caption;
       }
       $Result = $builder->as_html () . $tag . $inner;
     }
@@ -1126,6 +1127,43 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
 
     return $Result;
   }
+
+  /**
+   * Returns the caption for this element, formatted according to the given parameters.
+   * @param boolean $is_block If true, uses DIV tags for extra containers;
+   * otherwise, SPAN tags are used.
+   * @param boolean $is_block If true, the top of the container is being formatted.
+   * @return string
+   * @access private
+	 */
+	protected function _get_caption($is_block, $is_top) 
+	{
+		$caption_needed = false;
+	  
+	  switch ($this->_caption_position)
+    {
+	    case 'top':
+        $caption_needed = $is_top;
+        break; 
+	    case 'both':
+	    	$caption_needed = true;
+	      break;
+	    default:  
+        $caption_needed = !$is_top;
+        break;
+    }
+    
+    if ($caption_needed)
+    {
+      if ($is_block)
+      {
+        return '<div class="auto-content-caption">' . $this->_caption . '</div>';
+      }
+      
+      return '<span class="auto-content-caption">' . $this->_caption . '</span>';
+    }
+	}
+
 
   /**
    * Renders close tag(s) for the container.
@@ -1144,13 +1182,14 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
 
     if ($this->_has_outer_area ())
     {
+    	$caption = $this->_get_caption($is_block, false);
       if ($is_block)
       {
-        $Result .= '</div><div class="auto-content-caption">' . $this->_caption . '</div></div>';
+        $Result .= '</div>' . $caption . '</div>';
       }
       else
       {
-        $Result .= '</span><span class="auto-content-caption">' . $this->_caption . '</span></span>';
+        $Result .= '</span>' . $caption . '</span>';
       }
     }
 
@@ -1273,6 +1312,7 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
     $caption = $munger->apply_non_html_converters($this->_read_attribute ($attrs, 'caption'));
     $author = $munger->apply_non_html_converters($this->_read_attribute ($attrs, 'author'));
     $date = $munger->apply_non_html_converters($this->_read_attribute ($attrs, 'date'));
+    $this->_caption_position = read_array_index ($attrs, 'caption-position');
 
     $href = $this->_convert_to_attribute($munger->resolve_url($this->_url_for_source ($attrs)));
     if ($href)
@@ -1384,10 +1424,19 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
    * True if the last open tag had a caption.
    * Set by {@link _open_outer_area()} and used by {@link _close_outer_area()}
    * to determine how many close tags to add.
+   * 
    * @var string
    * @access private
    */
   protected $_caption;
+
+  /**
+   * Determines the desired position of the caption for this container: "top", "bottom" or "both".
+   * 
+   * @var string
+   * @access private
+   */
+  protected $_caption_position;
 }
 
 /**
