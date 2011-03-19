@@ -30,6 +30,8 @@ http://www.earthli.com/software/webcore
 	
 	if (!empty($page_name))
 	{
+    $Page->title->subject = 'Select folder';
+
 	  $Page->location->add_root_link ();
 	  $Page->location->append ($Page->title->subject);
 	
