@@ -186,7 +186,6 @@ class BATCH_CREATE_PICTURES_TASK extends TASK
     $class_name = $this->app->final_class_name ('IMAGE', 'webcore/util/image.php');
     $img = new $class_name ();
     $img->set_file ($entry->extracted_name, $this->read_exif);
-    $this->_log ($img->properties->php_type);
     if ($img->loadable ())
     {
       $img->load_from_file ();
