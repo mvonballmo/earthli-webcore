@@ -576,7 +576,6 @@ class ZIP_ENTRY extends COMPRESSED_FILE_ENTRY
         while (($data = zip_entry_read ($this->_handle, $this->read_block_size)) != false)
         {
           fwrite ($f, $data);
-          $data = zip_entry_read ($this->_handle, $this->read_block_size);
         }
         fclose ($f);
       }
