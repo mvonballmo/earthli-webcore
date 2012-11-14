@@ -442,22 +442,22 @@ abstract class GRID extends WEBCORE_OBJECT
       {
         if ($include_anchor_id && $this->paginator->page_anchor)
         {
-          echo '<p style="text-align: center" id="' . $this->paginator->page_anchor . '">' . $output . '</p>';
+          echo '<p class="paginator" style="text-align: center" id="' . $this->paginator->page_anchor . '">' . $output . '</p>';
         }
         else
         {
-          echo '<p style="text-align: center">' . $output . '</p>';
+          echo '<p class="paginator" style="text-align: center">' . $output . '</p>';
         }
       }
       else
       {
         if ($include_anchor_id && $this->paginator->page_anchor)
         {
-          echo '<p id="' . $this->paginator->page_anchor . '">' . $output . '</p>';
+          echo '<p class="paginator" id="' . $this->paginator->page_anchor . '">' . $output . '</p>';
         }
         else
         {
-          echo '<p>' . $output . '</p>';
+          echo '<p class="paginator">' . $output . '</p>';
         }
       }
     }
