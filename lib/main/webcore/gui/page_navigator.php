@@ -132,6 +132,12 @@ class PAGE_NAVIGATOR extends WEBCORE_OBJECT
   public $show_total = true;
 
   /**
+   * Show icons for the first/previous/next/last links?
+   * @var boolean
+   */
+  public $use_icons_for_buttons = true;
+  
+  /**
    * @param CONTEXT $context
    * @param integer $num_total_objects Total number of objects that need to be displayed.
    * @param integer $num_objects_per_page Number of objects to show per page.
@@ -276,22 +282,14 @@ class PAGE_NAVIGATOR extends WEBCORE_OBJECT
 
       if ($many_pages && ($this->page_number > 1))
       {
-        $this->_output = "<a title=\"First Page\" href=\"" .
-                         $this->_make_page_link (1) .
-                         "\">" .
-                         $this->context->resolve_icon_as_html ('{icons}buttons/go_to_first', 'First page', '16px') .
-                         "</a>&nbsp;";
+        $this->_output = "<a title=\"First Page\" href=\"" . $this->_make_page_link (1) . "\">" . $this->_get_button_content('first') . "</a>";
       }
 
       // put in the previous page, if necessary
 
       if ($this->page_number > 1)
       {
-        $this->_output .= "<a title=\"Previous Page\" href=\"" .
-                          $this->_make_page_link ($this->page_number - 1) .
-                          "\">" .
-                          $this->context->resolve_icon_as_html ('{icons}buttons/go_to_previous', 'Previous page', '16px') .
-                          "</a>&nbsp;";
+        $this->_output .= "<a title=\"Previous Page\" href=\"" . $this->_make_page_link ($this->page_number - 1) . "\">" . $this->_get_button_content('previous') . "</a>";
       }
 
       $this->_output .= $this->begin_block;
@@ -340,22 +338,14 @@ class PAGE_NAVIGATOR extends WEBCORE_OBJECT
 
       if ($this->page_number < $this->_count)
       {
-        $this->_output .= "&nbsp;<a title=\"Next Page\" href=\"" .
-                          $this->_make_page_link ($this->page_number + 1) .
-                          "\">" .
-                          $this->context->resolve_icon_as_html ('{icons}buttons/go_to_next', 'Next page', '16px') .
-                          "</a>";
+        $this->_output .= "<a title=\"Next Page\" href=\"" . $this->_make_page_link ($this->page_number + 1) . "\">" . $this->_get_button_content('next') . "</a>";
       }
 
       if ($many_pages)
       {
         if ($this->page_number < $this->_count)
         {
-          $this->_output .= "&nbsp;<a title=\"Last Page\" href=\"" .
-                            $this->_make_page_link ($this->_count) .
-                            "\">" .
-                            $this->context->resolve_icon_as_html ('{icons}buttons/go_to_last', 'Last page', '16px') .
-                            "</a>";
+          $this->_output .= "<a title=\"Last Page\" href=\"" . $this->_make_page_link ($this->_count) . "\">" . $this->_get_button_content('last') . "</a>";
         }
 
         if ($this->show_total)
@@ -367,6 +357,38 @@ class PAGE_NAVIGATOR extends WEBCORE_OBJECT
     else
     {
       $this->pages = "<span class=\"selected\">1</span>";
+    }
+  }
+  
+  protected function _get_button_content($type)
+  {
+    if ($this->use_icons_for_buttons)
+    {
+      switch ($type)
+      {
+        case 'first':
+          return $this->context->resolve_icon_as_html ('{icons}buttons/go_to_first', 'First page', '16px');
+        case 'previous':
+          return $this->context->resolve_icon_as_html ('{icons}buttons/go_to_previous', 'Previous page', '16px');
+        case 'next':
+          return $this->context->resolve_icon_as_html ('{icons}buttons/go_to_next', 'Next page', '16px');
+        case 'last':
+          return $this->context->resolve_icon_as_html ('{icons}buttons/go_to_last', 'Last page', '16px');
+      }
+    }
+    else
+    {
+      switch ($type)
+      {
+        case 'first':
+          return '&lt;&lt;';
+        case 'previous':
+          return '&lt;';
+        case 'next':
+          return '&gt;';
+        case 'last':
+          return '&gt;&gt;';
+        }
     }
   }
 
