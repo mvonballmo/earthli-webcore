@@ -1345,6 +1345,13 @@ abstract class MUNGER_BLOCK_TRANSFORMER extends MUNGER_TRANSFORMER
   public $strict_newlines = false;
 
   /**
+   * The default style to use when no quote style is otherwise specified.
+   *
+   * @var string
+   */
+  public $default_quote_style = Munger_quote_style_default;
+
+  /**
    * Remove newlines according to tagging rules.
    * 
    * This layouter does its best to generate conforming text. It tracks the state of the buffer
@@ -1376,7 +1383,7 @@ abstract class MUNGER_BLOCK_TRANSFORMER extends MUNGER_TRANSFORMER
       $Result = read_array_index($attrs, 'quote_style');
       if (!$Result)
       {
-        $Result = Munger_quote_style_default;
+        $Result = $this->default_quote_style;
       }
     }
 

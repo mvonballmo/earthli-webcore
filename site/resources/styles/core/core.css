@@ -634,6 +634,8 @@ span.error
   font-size: 150%;
   border: 1px black solid;
   padding: .5em;
+  margin: 0;
+  line-height: 130%;
 }
 
 .abstract

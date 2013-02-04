@@ -2280,6 +2280,8 @@ class HTML_TEXT_MUNGER extends HTML_BASE_MUNGER
     $list_transformer = new HTML_LIST_TRANSFORMER ();
     $block_transformer = new HTML_BLOCK_TRANSFORMER ();
     $quote_transformer = new HTML_QUOTE_TRANSFORMER ();
+    $no_quote_transformer = new HTML_QUOTE_TRANSFORMER ();
+    $no_quote_transformer->default_quote_style = Munger_quote_style_none;
 //    $geshi_transformer = new HTML_GESHI_CODE_TRANSFORMER ();
     $shell_replacer = new HTML_PREFORMATTED_BLOCK_REPLACER ();
     $shell_replacer->main_CSS_class = 'shell';
@@ -2301,9 +2303,9 @@ class HTML_TEXT_MUNGER extends HTML_BASE_MUNGER
     $this->register_replacer ('shell', $shell_replacer);
     $this->register_transformer ('bq', $quote_transformer);
     $this->register_replacer ('bq', new HTML_BLOCK_QUOTE_REPLACER ('quote quote-block'));
-    $this->register_transformer ('pullquote', $quote_transformer);
+    $this->register_transformer ('pullquote', $no_quote_transformer);
     $this->register_replacer ('pullquote', new HTML_BLOCK_QUOTE_REPLACER ('quote pullquote'));
-    $this->register_transformer ('abstract', $quote_transformer);
+    $this->register_transformer ('abstract', $no_quote_transformer);
     $this->register_replacer ('abstract', new HTML_BLOCK_QUOTE_REPLACER ('quote abstract'));
     $this->register_transformer ('ul', $list_transformer);
     $this->register_transformer ('ol', $list_transformer);
