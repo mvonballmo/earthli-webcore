@@ -80,9 +80,9 @@ class DEFAULT_PAGE_RENDERER extends WEBCORE_PAGE_RENDERER
           if ($options->logo_file)
           {
             $root_url = $page->path_to (Folder_name_root);
-            $logo_url = $page->resolve_icon_as_html ($options->logo_file, $options->logo_title);
+            $logo_url = $page->resolve_file ($options->logo_file);
         ?>
-          <div class="banner-logo"><a href="<?php echo $root_url; ?>"><?php echo $logo_url; ?></a></div>
+          <div class="banner-logo" style="background-image: url(<?php echo $logo_url; ?>)"><a href="<?php echo $root_url; ?>"></a></div>
         <?php } ?>
           <div class="banner-content">
             <h1 class="banner-title"><?php echo $options->title; ?>
@@ -102,13 +102,14 @@ class DEFAULT_PAGE_RENDERER extends WEBCORE_PAGE_RENDERER
         <?php
           $this->_handle_client_data_warnings ($options);
           $this->_handle_browser_warnings ($options, true);
+
           if ($page->location->size ())
           {
-        ?>
-        <div class="nav-box">
-          <?php $page->location->display (); ?>
-        </div>
-        <?php
+            ?>
+            <div class="nav-box">
+              <?php $page->location->display (); ?>
+            </div>
+            <?php
           }
         ?>
       </div>
