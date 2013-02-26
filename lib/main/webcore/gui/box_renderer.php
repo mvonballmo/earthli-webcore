@@ -68,11 +68,11 @@ class BOX_RENDERER extends WEBCORE_OBJECT
   {
     if ($this->_supports_css_tables)
     {
-      echo '<div style="display: table">' . "\n";
+      echo '<div style="display: table; width: 100%">' . "\n";
     }
     else
     {
-      echo '<table cellpadding="0" cellspacing="0"><tr>' . "\n";
+      echo '<table cellpadding="0" cellspacing="0" style="width: 100%"><tr>' . "\n";
     }
   }
   
@@ -108,7 +108,41 @@ class BOX_RENDERER extends WEBCORE_OBJECT
 
     $this->_column_started = true; 
   }
-  
+
+  /**
+   * Open a column after calling {@link start_column_set()}.
+   * Closes a previously opened column automatically.
+   * @param string $CSS_style Use this style for the column.
+   */
+  public function new_column_of_type ($CSS_class = '')
+  {
+    if ($this->_column_started)
+    {
+      $this->_close_column ();
+    }
+
+    if ($this->_supports_css_tables)
+    {
+      $tag_name = 'div';
+      $style = 'display: table-cell; vertical-align: top';
+    }
+    else
+    {
+      $tag_name = 'td';
+      $style = 'vertical-align: top';
+    }
+
+    $class = '';
+    if ($CSS_class)
+    {
+      $class = 'class="' . $CSS_class . '"';
+    }
+
+    echo '  <' . $tag_name . ' style="' . $style . '"' . $class . '>' . "\n";
+
+    $this->_column_started = true;
+  }
+
   /**
    * Close a set opened with {@link start_column_set()}.
    * Closes a previously opened column automatically.

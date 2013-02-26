@@ -51,7 +51,7 @@ http://www.earthli.com/software/webcore
     $Page->start_display ();
     $box = $Page->make_box_renderer ();
     $box->start_column_set ();
-    $box->new_column ('padding-right: 1em');  
+    $box->new_column_of_type ('left-column');
 ?>
   <div class="side-bar">
     <div class="side-bar-title">
@@ -70,7 +70,7 @@ http://www.earthli.com/software/webcore
     </div>
   </div>
 <?php
-    $box->new_column ('width: 75%');
+    $box->new_column_of_type ('right-column');
 ?>
   <div class="box">
     <?php

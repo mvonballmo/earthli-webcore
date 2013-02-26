@@ -90,7 +90,7 @@ http://www.earthli.com/software/webcore
 
           $box = $Page->make_box_renderer ();
           $box->start_column_set ();
-          $box->new_column ('padding-right: 1em');  
+          $box->new_column_of_type ('left-column');
       ?>
     <div class="chart">
       <div class="chart-title">
@@ -115,7 +115,7 @@ http://www.earthli.com/software/webcore
       </div>
     </div>
 <?php
-          $box->new_column ('width: 75%');          
+          $box->new_column_of_type ('right-column');
         }
 
         $form->button = "Update";

@@ -58,7 +58,7 @@ http://www.earthli.com/software/webcore/albums
 
     $box = $Page->make_box_renderer ();
     $box->start_column_set ();
-    $box->new_column ('padding-right: 1em');  
+    $box->new_column_of_type ('left-column');
 ?>
   <div class="side-bar">
     <div class="side-bar-title">
@@ -87,6 +87,7 @@ http://www.earthli.com/software/webcore/albums
           /* Make a copy (not a reference). */
           $tree = $App->make_tree_renderer ();
           include_once ('webcore/gui/folder_tree_node_info.php');
+          $tree->centered = false;
           $tree->node_info = new FOLDER_TREE_NODE_INFO ($App);
           $tree->node_info->page_args = read_vars (array ('panel', 'time_frame'));
           $tree->display ($folders);
@@ -114,16 +115,16 @@ http://www.earthli.com/software/webcore/albums
     </div>
   </div>
 <?php
-    $box->new_column ('width: 75%');
+    $box->new_column_of_type ('right-column');
 ?>
   <div class="box">
-    <?php
-      $renderer = $folder->handler_for (Handler_menu);
-      $renderer->display_as_toolbar ($folder->handler_for (Handler_commands));
-    ?>
     <div class="box-title">
     <?php echo $panel->raw_title (); ?>
     </div>
+    <?php
+    $renderer = $folder->handler_for (Handler_menu);
+    $renderer->display_as_toolbar ($folder->handler_for (Handler_commands));
+    ?>
   <?php if ($panel->uses_time_selector) { ?>
     <div class="menu-bar-top" style="text-align: center">
       <?php $panel_manager->display_time_menu (); ?>
