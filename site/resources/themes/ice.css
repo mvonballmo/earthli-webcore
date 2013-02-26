@@ -44,21 +44,7 @@ body
 
 .page
 {
-	width: 900px;
 	max-width: 900px;
-	margin: auto;
-}
-
-/* Hidden from IE. Combined with the rule above, this ensures that IE
-   is always 800px, but other, better browsers are a maximum of 800px. */
-body>.page
-{
-	width: auto;
-}
-
-.banner
-{
-	padding: 6px 4px;
 }
 
 .banner-title
@@ -71,11 +57,17 @@ body>.page
 	border: 0px solid #FFFFFF;
 }
 
-.box-title
+.box-title, .menu-bar-top
 {
-/*  color: #0055BB; */
-	color: #333333;
-	border-color: #CCCCCC;
+  border: none;
+  border-bottom: 4px solid #8fc7ff;
+  margin-left: -15px;
+  margin-right: -15px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  font-weight: normal;
 }
 
 hr, .horizontal-separator, .vertical-separator
@@ -105,6 +97,7 @@ hr, .horizontal-separator, .vertical-separator
 
 .menu-bar-top, .menu-bar-bottom
 {
+  border: none;
 	border-color: #CCCCCC;
 }
 
@@ -145,13 +138,14 @@ hr, .horizontal-separator, .vertical-separator
 
 .nav-box
 {
-	border-width: 0px;
-	border-bottom: 1px solid #CCCCCC;
-}
-
-.page-body
-{
-	padding: 10px;
+  border: none;
+  margin-left: -15px;
+  margin-right: -15px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 5px;
+  padding-bottom: 0px;
+  border-top: 4px solid #8fc7ff;
 }
 
 .quote-inline

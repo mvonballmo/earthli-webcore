@@ -156,12 +156,15 @@ pre code
 
 .page 
 {
-  
+  margin-left: 15px;
+  margin-top: 15px;
+  margin-bottom: 5px;
+  margin-right: 5px;
 }
 
 .banner 
 {
-  margin-bottom: 1em
+  margin-bottom: 15px;
 }
 
 .banner-box 
@@ -171,26 +174,38 @@ pre code
 
 .banner-header 
 {
-  padding: .5em;
-  padding-bottom: 1em;
+  position: relative;
 }
 
-.banner-logo 
+.banner-logo
 {
-  float: left;
+  background-repeat: no-repeat;
+  width: 250px;
+  height: 75px;
+}
+
+.banner-logo a
+{
+  display: block;
+  height: 100%;
 }
 
 .banner-content 
 {
-  clear: right;
   text-align: right;
-  margin-top: 1em;
+  position: absolute;
+  right: 0;
+  bottom: 0px;
+}
+
+.banner-content h1
+{
+  margin: 0;
 }
 
 .banner-title 
 {
   font-weight: bold;
-  margin: 0px
 }
 
 .login-status 
@@ -200,10 +215,9 @@ pre code
 
 .nav-box 
 {
-  clear: both;
+  margin-top: 15px;
+  padding-bottom: 5px;
   border-bottom: 1px solid #000000;
-  padding: 4px;
-  margin-top: .5em;
 }
 
 .nav-item 
@@ -218,9 +232,6 @@ pre code
 
 .footer 
 {
-  margin-top: 2em;
-  margin-bottom: 0px;
-  padding: 1em;
   clear: both;
 }
 
@@ -263,20 +274,17 @@ pre code
 .box 
 {
   border: 1px solid #000000;
-  border-spacing: 0px
 }
 
-.box-body 
+.box-body
 {
-  padding: .6em .25em;
-  empty-cells: show
 }
 
-.box-title 
+.box-title
 {
-  padding: .25em;
   font-weight: bold;
   empty-cells: show;
+  padding-bottom: 5px;
   border-bottom: 1px solid #000000;
   text-align: left
 }
@@ -376,9 +384,6 @@ pre code
   background-color: #FFFFFF;
   border: 1px solid black;
   text-align: left;
-  padding: .5em 0em;
-  margin: 0px;
-  margin-left: 2px;
 }
 
 .menu-dropdown 
@@ -396,26 +401,30 @@ pre code
 .menu-trigger 
 {
   font-weight: normal;
+  margin-left: 10px;
+}
+
+.menu-trigger > .menu-button
+{
+  margin-left: 0;
 }
 
 .menu-group-title 
 {
-  font-weight: bold;
-  margin: .75em .25em .25em .25em;
-  border-bottom: 1px solid #AAAAAA;
+  padding: .5em;
 }
 
 .menu-button 
 {
   display: block;
   float: left;
-  padding: 2px;
-  margin-left: 2px;
+  padding: 5px;
+  margin-left: 10px;
 }
 
 .menu-item 
 {
-  padding: .25em .50em;
+  padding: .5em;
   display: block;
 }
 
@@ -428,14 +437,14 @@ pre code
 {
   text-align: right;
   border-top: 1px solid #000000;
-  padding: 3px 3px
+  padding-top: 5px;
 }
 
 .menu-bar-top
 {
   text-align: right;
+  padding-bottom: 5px;
   border-bottom: 1px solid #000000;
-  padding: 3px 3px
 }
 
 .menu-button-description, .menu-button-description
@@ -919,4 +928,14 @@ hr
   font-weight: normal;
   font-style: normal;
   font-size: 100%;
+}
+
+.left-column
+{
+  padding-right: 15px;
+}
+
+.right-colum
+{
+  width: 75%;
 }
