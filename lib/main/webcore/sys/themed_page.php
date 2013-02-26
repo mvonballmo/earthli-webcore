@@ -88,7 +88,7 @@ class THEME_SETTINGS extends WEBCORE_OBJECT
    * with different themes.
    * @var string
    */
-  public $font_name_CSS_file_name = '{styles}fonts/verdana';
+  public $font_name_CSS_file_name = '{styles}fonts/segoe';
 
   /**
    * Name of the font-size stylesheet to use.
@@ -314,6 +314,7 @@ class THEME_OPTIONS
     $this->add_font_name ('Courier', '{styles}fonts/courier');
     $this->add_font_name ('Geneva', '{styles}fonts/geneva');
     $this->add_font_name ('Georgia', '{styles}fonts/georgia');
+    $this->add_font_name ('Segoe', '{styles}fonts/segoe');
     $this->add_font_name ('Times', '{styles}fonts/times');
     $this->add_font_name ('Trebuchet', '{styles}fonts/trebuchet');
     $this->add_font_name ('Verdana', '{styles}fonts/verdana');
