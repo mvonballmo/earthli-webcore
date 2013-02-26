@@ -80,11 +80,6 @@ class ALBUM_GRID extends FOLDER_GRID
     <?php echo $obj->title_as_html (); ?>
   </div>
   <div class="chart-body" style="text-align: center">
-    <div>
-    <?php
-      $this->_draw_menu_for ($obj, Menu_size_minimal, Menu_align_left);
-    ?>
-    </div>
     <p style="clear: both">
       <?php
       if ($main_pic)
@@ -99,6 +94,11 @@ class ALBUM_GRID extends FOLDER_GRID
     <?php } ?>
     </p>
     <p class="detail">
+    <div>
+      <?php
+      $this->_draw_menu_for ($obj, Menu_size_minimal, Menu_align_left);
+      ?>
+    </div>
     <?php
       if ($obj->is_multi_day ())
       {

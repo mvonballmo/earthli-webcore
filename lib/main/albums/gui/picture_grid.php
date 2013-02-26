@@ -117,16 +117,16 @@ class PICTURE_GRID extends ALBUM_ENTRY_GRID
   </div>
   <div class="chart-body" style="text-align: center">
     <?php
-      if ($this->show_controls)
-      {
-        $this->_draw_menu_for ($obj, Menu_size_minimal, Menu_align_right);
-      }
       $this->_url->replace_argument ('id', $obj->id);
     ?>
     <p style="clear: both">
       <a href="<?php echo $this->_url->as_html (); ?>"><img class="frame" src="<?php echo $obj->full_thumbnail_name (); ?>" alt="Picture"></a>
     </p>
     <?php
+      if ($this->show_controls)
+      {
+        $this->_draw_menu_for ($obj, Menu_size_minimal, Menu_align_left);
+      }
       if ($this->show_date)
       {
     ?>
