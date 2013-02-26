@@ -39,12 +39,12 @@ h3, .grid-title
   font-size: 14pt
 }
 
-body, h4, td, th, .menu-control, .text-control, .text-control-required, .quoter
+body, h4, td, th, .menu-control, .text-control, .text-control-required, .quoter, .menu
 {
   font-size: 12pt
 }
 
-h5, .detail, .footer, .notes, .tree-node, .menu,
+h5, .detail, .footer, .notes, .tree-node,
 .info-box-bottom, .info-box-top, .login-status, .footnote-reference
 {
   font-size: 10pt

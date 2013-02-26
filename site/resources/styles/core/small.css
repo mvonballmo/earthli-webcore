@@ -34,17 +34,17 @@ h2, .box-title, .side-bar-title
   font-size: 14pt
 }
 
-h3, .grid-title
+h3, .grid-title, .menu-group-title
 {
   font-size: 12pt
 }
 
-h4, body, td, th, .menu-control, .text-control, .text-control-required, .quoter
+h4, body, td, th, .menu-control, .text-control, .text-control-required, .quoter, .menu
 {
   font-size: 10pt;
 }
 
-h5, .detail, .footer, .notes, .tree-node, .menu,
+h5, .detail, .footer, .notes, .tree-node,
 .info-box-bottom, .info-box-top, .login-status, .footnote-reference
 {
   font-size: 8pt;
