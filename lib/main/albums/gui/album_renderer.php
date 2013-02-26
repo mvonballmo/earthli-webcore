@@ -65,7 +65,7 @@ class ALBUM_RENDERER extends FOLDER_RENDERER
       if ($this->_options->show_as_summary)
       {
   ?>
-  <div style="text-align: center">
+  <div>
   <?php
       }
       else

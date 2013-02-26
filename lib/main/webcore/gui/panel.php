@@ -313,7 +313,7 @@ class PANEL_MANAGER extends WEBCORE_OBJECT
   {
   ?>
   <div style="margin-top: 1em; margin-bottom: 1em">
-    <table cellpadding="0" cellspacing="0" style="margin: auto; margin-top: 1em">
+    <table cellpadding="0" cellspacing="0">
     <?php
       foreach ($this->_location_order as $id)
       {
