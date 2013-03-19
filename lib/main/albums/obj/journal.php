@@ -115,10 +115,10 @@ class JOURNAL extends ALBUM_ENTRY
     $hi = $folder->temperature_as_html ($this->hi_temp);
     if ($lo == $hi)
     {
-      return $hi;
+      return '<span class="field">' . $hi . '</span>';
     }
 
-    return "$lo to $hi";
+    return '<span class="field">' . $lo . '</span> to <span class="field">' . $hi . '</span>';
   }
 
   /**
@@ -129,10 +129,10 @@ class JOURNAL extends ALBUM_ENTRY
   {
     if ($this->lo_temp == $this->hi_temp)
     {
-      return "{$this->hi_temp}°C";
+      return "{$this->hi_temp}ï¿½C";
     }
 
-    return "{$this->lo_temp}°C to {$this->hi_temp}°C";
+    return "{$this->lo_temp}ï¿½C to {$this->hi_temp}ï¿½C";
   }
 
   /**

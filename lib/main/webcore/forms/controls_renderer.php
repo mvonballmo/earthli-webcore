@@ -136,7 +136,7 @@ class CONTROLS_RENDERER extends WEBCORE_OBJECT
     {
       $Result .= ' style="width: ' . $this->button_width . '"';
     }
-    return $Result . '>' . $title . "</button>\n";
+    return $Result . '>' . $title . "</button>";
   }
 
   /**

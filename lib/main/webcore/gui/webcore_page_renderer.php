@@ -58,7 +58,8 @@ class WEBCORE_PAGE_RENDERER extends THEMED_PAGE_RENDERER
            ($browser->supports (Browser_CSS_2) &&
             $browser->supports (Browser_JavaScript) &&
             $browser->supports (Browser_cookie) &&
-            $browser->supports (Browser_alpha_PNG));
+            $browser->supports (Browser_alpha_PNG) &&
+            $browser->supports (Browser_columns));
   }
 
   /**

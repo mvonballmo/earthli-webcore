@@ -253,16 +253,19 @@ class ENTRY extends ATTACHMENT_HOST
         return new ENTRY_COMMANDS ($this);
       case Handler_history_item:
         include_once ('webcore/obj/webcore_history_items.php');
-        return new ENTRY_HISTORY_ITEM ($this->app);
+        return new ENTRY_HISTORY_ITEM ($this->app, $options);
       case Handler_rss_renderer:
         include_once ('webcore/gui/rss_renderer.php');
-        return new ENTRY_RSS_RENDERER ($this->app);
+        return new ENTRY_RSS_RENDERER ($this->app, $options);
       case Handler_atom_renderer:
         include_once ('webcore/gui/atom_renderer.php');
-        return new ENTRY_ATOM_RENDERER ($this->app);
+        return new ENTRY_ATOM_RENDERER ($this->app, $options);
       case Handler_associated_data:
         include_once ('webcore/gui/entry_renderer.php');
         return new ENTRY_ASSOCIATED_DATA_RENDERER ($this->app, $options);
+      case Handler_subscriptions:
+        include_once ('webcore/gui/subscription_renderer.php');
+        return new ENTRY_SUBSCRIPTION_RENDERER ($this->app, $options);
       default:
         return parent::_default_handler_for ($handler_type, $options);
     }

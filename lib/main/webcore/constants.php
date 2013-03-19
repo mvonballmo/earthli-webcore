@@ -727,6 +727,7 @@ define ('Menu_align_inline', 'inline');
  * @see Handler_rss
  * @see Handler_atom
  * @see Handler_navigator
+ * @see Handler_subscriptions
  */
 define ('Handler_constants', '');
 
@@ -801,6 +802,12 @@ define ('Handler_navigator', 'navigator');
  * @see Handler_constants
  */
 define ('Handler_location', 'location');
+
+/**
+ * Return an {@link SUBSCRIPTION_RENDERER}.
+ * @see Handler_constants
+ */
+define ('Handler_subscriptions', 'subscriptions');
 
 /**
  * Return a renderer for associated content.

@@ -135,7 +135,7 @@ class TEXT_TABLE_RENDERER
    */
   public function add_item ($label, $content)
   {
-    $item = null; // Compiler warning
+    $item = new stdClass();
     $item->label = $label;
     $item->content = $content;
     $this->_items [] = $item;

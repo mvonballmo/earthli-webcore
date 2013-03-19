@@ -90,7 +90,7 @@ class ARCHIVE
    */
   public function register_handler ($class_name, $file_name)
   {
-    $handler = null; // Compiler warning
+    $handler = new stdClass();
     $handler->class_name = $class_name;
     $handler->file_name = $file_name;
     $this->_handlers [] = $handler;

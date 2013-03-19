@@ -419,7 +419,7 @@ abstract class DATE_TIME_CONVERTER extends RAISABLE
    */
   public function text_to_php ($value, $parts = Date_time_both_parts)
   {
-    $arr = null; // Compiler warning
+    $arr = new stdClass();
     if (preg_match ($this->match_expression, $value, $arr))
     {
       switch ($parts)
@@ -631,7 +631,7 @@ class DATE_TIME extends RAISABLE
   {
     if (($this->_php_time == Date_time_unassigned) && ($this->_iso_time != Date_time_unassigned))
     {
-      $parts = null; // Compiler warning
+      $parts = new stdClass();
       preg_match ('/([0-9]{4})-([0-9]{1,2})-([0-9]{1,2})( ([0-9]{1,2}):([0-9]{1,2}):([0-9]{1,2}))/', $this->_iso_time, $parts);
       if (sizeof ($parts))
       {

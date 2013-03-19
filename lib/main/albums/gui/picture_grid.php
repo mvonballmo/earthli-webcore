@@ -51,7 +51,7 @@ class PICTURE_GRID extends ALBUM_ENTRY_GRID
   /**
    * @var string
    */
-  public $box_style = 'chart';
+  public $box_style = '';
 
   /**
    * @var string
@@ -61,7 +61,7 @@ class PICTURE_GRID extends ALBUM_ENTRY_GRID
   /**
    * @var integer
    */
-  public $spacing = 8;
+  public $spacing = 0;
 
   /**
    * @var integer
@@ -76,7 +76,7 @@ class PICTURE_GRID extends ALBUM_ENTRY_GRID
   /**
    * @var boolean
    */
-  public $show_separator = false;
+  public $show_separator = true;
 
   /**
    * @var boolean
@@ -106,42 +106,49 @@ class PICTURE_GRID extends ALBUM_ENTRY_GRID
   {
     $folder = $obj->parent_folder ();
 ?>
-  <div class="chart-title" style="text-align: center">
   <?php
+    $this->_url->replace_argument ('id', $obj->id);
+  ?>
+  <div style="position: relative">
+    <p>
+      <a href="<?php echo $this->_url->as_html (); ?>"><img src="<?php echo $obj->full_thumbnail_name (); ?>" alt="Picture"></a>
+    </p>
+    <?php
+      if ($this->show_controls)
+      {
+    ?>
+        <div style="position: absolute; left: 0; top: 0">
+    <?php
+        $this->_draw_menu_for ($obj, Menu_size_minimal, Menu_align_inline);
+    ?>
+        </div>
+    <?php
+      }
+    ?>
+  </div>
+  <h3>
+    <?php
     if ($this->show_folder)
     {
       echo $folder->title_as_link () . $this->app->display_options->object_separator;
     }
     echo $this->obj_link ($obj);
-  ?>
-  </div>
-  <div class="chart-body" style="text-align: center">
-    <?php
-      $this->_url->replace_argument ('id', $obj->id);
     ?>
-    <p style="clear: both">
-      <a href="<?php echo $this->_url->as_html (); ?>"><img class="frame" src="<?php echo $obj->full_thumbnail_name (); ?>" alt="Picture"></a>
-    </p>
-    <?php
-      if ($this->show_controls)
-      {
-        $this->_draw_menu_for ($obj, Menu_size_minimal, Menu_align_left);
-      }
-      if ($this->show_date)
-      {
+  </h3>
+  <?php
+  if ($this->show_date)
+  {
     ?>
     <p class="detail"><?php echo $folder->format_date ($obj->date); ?></p>
-    <?php
-      }
-
-    ?>
-    <div style="text-align: justify">
-    <?php
-      $munger = $obj->html_formatter ();
-      $obj->max_visible_output_chars = $this->description_length;
-      echo $obj->description_as_html ($munger);
-    ?>
-    </div>
+  <?php
+  }
+  ?>
+  <div style="margin-right: 20%">
+  <?php
+    $munger = $obj->html_formatter ();
+    $obj->max_visible_output_chars = $this->description_length;
+    echo $obj->description_as_html ($munger);
+  ?>
   </div>
 <?php
   }

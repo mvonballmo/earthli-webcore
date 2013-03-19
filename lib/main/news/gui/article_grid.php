@@ -84,8 +84,11 @@ class BASE_ARTICLE_GRID extends CONTENT_OBJECT_GRID
   {
     $folder = $obj->parent_folder ();
 ?>
-  <div>
-    <div>
+  <div class="grid-item">
+    <div class="minimal-commands">
+      <?php $this->_draw_menu_for ($obj, Menu_size_minimal, Menu_align_inline); ?>
+    </div>
+    <div class="minimal-commands-content">
       <?php
         if ($this->show_folder && $folder->icon_url)
         {
@@ -96,13 +99,11 @@ class BASE_ARTICLE_GRID extends CONTENT_OBJECT_GRID
       <?php
         }
       ?>
-      <div class="grid-title">
+      <h3 class="grid-title">
         <?php echo $this->obj_link ($obj); ?>
-      </div>
+      </h3>
       <div class="detail">
         <?php
-          $this->_draw_menu_for ($obj, Menu_size_compact);
-
           if ($this->show_user)
           {
             if ($obj->unpublished ())
@@ -138,37 +139,37 @@ class BASE_ARTICLE_GRID extends CONTENT_OBJECT_GRID
           {
             $time = $obj->time_published;
           }
-            
+
           echo $time->format ();
-          
+
           if ($this->show_folder)
           {
             echo ' in ' . $folder->title_as_link ();
           }
       ?>
       </div>
+      <?php
+      if ($this->show_description)
+      {
+        ?>
+        <div class="text-flow">
+          <?php
+          $munger = $obj->html_formatter ();
+          if ($obj->invisible ())
+          {
+            $munger->max_visible_output_chars = $this->chars_to_show_for_hidden;
+          }
+          else
+          {
+            $munger->max_visible_output_chars = $this->chars_to_show_for_visible;
+          }
+
+          echo $obj->description_as_html ($munger);
+          ?>
+        </div>
     </div>
   </div>
-  <?php 
-    if ($this->show_description) 
-    {
-  ?>
-  <div class="text-flow">
-    <?php
-      $munger = $obj->html_formatter ();
-      if ($obj->invisible ())
-      {
-        $munger->max_visible_output_chars = $this->chars_to_show_for_hidden;
-      }
-      else
-      {
-        $munger->max_visible_output_chars = $this->chars_to_show_for_visible;
-      }
-  
-      echo $obj->description_as_html ($munger);
-    ?>
-  </div>
-<?php
+  <?php
     }
   }  
 }
@@ -259,10 +260,9 @@ class ARTICLE_GRID extends BASE_ARTICLE_GRID
 	    <td></td>
 	    <?php } ?>
 	    <td class="object-in-list">
-	      <div class="field" style="font-size: larger">
-	        <span style="margin-right: 1em"><?php echo $this->app->resolve_icon_as_html ('{app_icons}app/news', 'News', '32px'); ?></span>
+	      <h3>
 	        <?php echo $interval_text; ?>
-	      </div>
+	      </h3>
 	    </td>
 	  </tr>
 	  <tr><td>&nbsp;</td></tr>

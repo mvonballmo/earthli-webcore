@@ -349,7 +349,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * Is the form centered in its parent?
    * @var boolean
    */
-  public $centered = true;
+  public $centered = false;
 
   /**
    * Name of the icon to use for the 'required' mark.
@@ -528,7 +528,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
       $style [] = 'width: ' . $this->width;
     }
 
-    if (sizeof ($style) > 0)
+    if (!empty($style) && sizeof ($style) > 0)
     {
       $style = implode ('; ', $style);
       echo '<table cellspacing="' . $this->spacing . '" cellpadding="' . $this->padding . '" class="form-' . $this->_form->CSS_class . '" style="' . $style . '">' . "\n";
@@ -1183,7 +1183,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
 
       $Result .= "</script>\n";
       $Result .= ' <a href="javascript:' . $id . '_field.show_calendar ()">' . $this->context->resolve_icon_as_html ('{icons}buttons/calendar', 'Show calendar in popup window', '16px') . '</a>';
-      $Result .= ' ' . $this->context->resolve_icon_as_html ('{icons}indicators/info', 'Use [d.m.Y] or [m/d/Y] or [Y-m-d]', '16px', 'vertical-align: middle; cursor: help');
+      $Result .= ' ' . $this->context->resolve_icon_as_html ('{icons}indicators/info', 'Use [d.m.Y] or [m/d/Y] or [Y-m-d]', '16px', 'vertical-align: middle');
 
       return $Result;
     }
@@ -1946,16 +1946,16 @@ class FORM_RENDERER extends CONTROLS_RENDERER
                 {
                   if ($Result != '')
                   {
-                    $Result .= '<div style="margin-top: ' . $props->line_spacing . '">' . $ctrl_string . "</div>\n";
+                    $Result .= '<li style="margin-top: ' . $props->line_spacing . '">' . $ctrl_string . "</li>\n";
                   }
                   else
                   {
-                    $Result = '<div>' . $ctrl_string . "</div>\n";
+                    $Result = '<li>' . $ctrl_string . "</li>\n";
                   }
                 }
                 else
                 {
-                  $Result .= '<div>' . $ctrl_string . "</div>\n";
+                  $Result .= '<li>' . $ctrl_string . "</li>\n";
                 }
               }
             }
@@ -1973,6 +1973,10 @@ class FORM_RENDERER extends CONTROLS_RENDERER
         {
           $Result = '<dl style="margin:0px">' . $Result . "</dl>\n";
         }
+      }
+      else
+      {
+        $Result = '<ul>' . $Result . "</ul>\n";
       }
 
       if ($id)

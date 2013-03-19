@@ -85,14 +85,17 @@ class DEFAULT_PAGE_RENDERER extends WEBCORE_PAGE_RENDERER
           <div class="banner-logo" style="background-image: url(<?php echo $logo_url; ?>)"><a href="<?php echo $root_url; ?>"></a></div>
         <?php } ?>
           <div class="banner-content">
-            <h1 class="banner-title"><?php echo $options->title; ?>
             <?php
-              if ($options->icon)
-              {
-                echo $page->resolve_icon_as_html ($options->icon, ' ', '50px', 'vertical-align: text-bottom');
-              }
+            if ($options->icon)
+            {
+              ?>
+              <div class="banner-icon" style="background-image: url(<?php echo $page->sized_icon ($options->icon, '50px'); ?>)"></div>
+            <?php
+            }
             ?>
-            </h1>
+            <div class="banner-title">
+              <?php echo $options->title; ?>
+            </div>
             <div class="login-status">
               <?php echo $this->_login_theme_status ($options); ?>
             </div>
@@ -148,9 +151,23 @@ class DEFAULT_PAGE_RENDERER extends WEBCORE_PAGE_RENDERER
         $lines [] = $options->copyright;
       }
 
-      if ($options->copyright && $options->show_versions)
+      if ($options->show_links)
       {
-        $lines [] = '';
+        $lines [] = $this->_links_as_text ($options);
+      }
+
+      if ($options->show_last_time_modified)
+      {
+        $date = new DATE_TIME (getlastmod ());
+        $f = $date->formatter ();
+        $f->set_type_and_clear_flags (Date_time_format_short_date_and_time);
+
+        $lines [] = 'Last modified on ' . $date->format ($f);
+      }
+
+      if ($options->show_statistics)
+      {
+        $lines [] = $this->_page_statistics_as_text ($options);
       }
 
       if ($options->show_versions)
@@ -158,28 +175,9 @@ class DEFAULT_PAGE_RENDERER extends WEBCORE_PAGE_RENDERER
         $lines [] = $this->_versions_as_text ($options);
       }
 
-      echo '<div style="float: left">';
-      echo join ('<br>', $lines);
+      echo '<div class="footer-data">';
+      echo join ('</div><div class="footer-data">', $lines);
       echo '</div>';
-
-      /* Build the right side of the footer with support/contact/privacy links
-       * and statistics.
-       */
-
-      $links = $this->_links_as_text ($options);
-      $stats = $this->_page_statistics_as_text ($options);
-
-      if ($links || $stats)
-      {
-        echo '<div style="text-align: right">';
-        $lines = array ();
-        $lines [] = $links;
-        $lines [] = $stats;
-        echo join ('<br>', $lines);
-        echo '</div>';
-      }
-
-      echo '<div style="clear: both"></div>';
 
       $this->_handle_browser_warnings ($options, false);
     ?>
@@ -281,33 +279,27 @@ class DEFAULT_PAGE_RENDERER extends WEBCORE_PAGE_RENDERER
   */
   protected function _links_as_text ($options)
   {
-    if ($options->show_links)
+    $menu = $this->context->make_menu ();
+    $res = $this->page->resources ();
+
+    if ($options->contact_url)
     {
-      /* Make a copy. */
-      $menu = $this->context->make_menu ();
-      $res = $this->page->resources ();
-
-      if ($options->contact_url)
-      {
-        $menu->append ('Contact', $res->resolve_file ($options->contact_url));
-      }
-      if ($options->support_url)
-      {
-        $menu->append ('Support', $res->resolve_file ($options->support_url));
-      }
-      if ($options->privacy_url)
-      {
-        $menu->append ('Privacy', $res->resolve_file ($options->privacy_url));
-      }
-      if ($options->rights_url)
-      {
-        $menu->append ('Rights', $res->resolve_file ($options->rights_url));
-      }
-
-      return $menu->as_html ();
+      $menu->append ('Contact', $res->resolve_file ($options->contact_url));
     }
-    
-    return '';
+    if ($options->support_url)
+    {
+      $menu->append ('Support', $res->resolve_file ($options->support_url));
+    }
+    if ($options->privacy_url)
+    {
+      $menu->append ('Privacy', $res->resolve_file ($options->privacy_url));
+    }
+    if ($options->rights_url)
+    {
+      $menu->append ('Rights', $res->resolve_file ($options->rights_url));
+    }
+
+    return $menu->as_html ();
   }
 
   /**
@@ -325,7 +317,7 @@ class DEFAULT_PAGE_RENDERER extends WEBCORE_PAGE_RENDERER
       $versions [] = $options->app_info;
     }
 
-    $versions [] = '<a href="http://earthli.com/software/webcore">' . $this->env->description () . '</a>';
+    $versions [] = 'Powered by <a href="http://earthli.com/software/webcore">' . $this->env->description () . '</a>';
 
     return join ($this->page->display_options->menu_separator, $versions);
   }
@@ -338,52 +330,41 @@ class DEFAULT_PAGE_RENDERER extends WEBCORE_PAGE_RENDERER
   */
   protected function _page_statistics_as_text ($options)
   {
-    if ($options->show_statistics)
+    $profiler = $this->env->profiler;
+
+    if (isset ($profiler) && $profiler->exists ('global'))
     {
-      $profiler = $this->env->profiler;
-
-      if (isset ($profiler) && $profiler->exists ('global'))
-      {
-        $t = $profiler->elapsed ('global');
-        $values [] = "{$t}s";
-      }
-
-      $query_data = "{$this->env->num_queries_executed} queries";
-      if (isset ($profiler) && $profiler->exists ('db'))
-      {
-        $t = $profiler->elapsed ('db');
-        $query_data .= " ({$t}s)";
-      }
-      $values [] = $query_data;
-
-      $values [] = "{$this->env->num_webcore_objects} objects";
-
-      if (isset ($profiler) && $profiler->exists ('text'))
-      {
-        $t = $profiler->elapsed ('text');
-        $values [] = "{$t}s (text)";
-      }
-
-      if (isset ($profiler) && $profiler->exists ('ui'))
-      {
-        $t = $profiler->elapsed ('ui');
-        $values [] = "{$t}s (ui)";
-      }
+      $t = $profiler->elapsed ('global');
+      $values [] = "{$t}s";
     }
 
-    if ($options->show_last_time_modified)
+    $query_data = "{$this->env->num_queries_executed} queries";
+    if (isset ($profiler) && $profiler->exists ('db'))
     {
-      $date = new DATE_TIME (getlastmod ());
-      $f = $date->formatter ();
-      $f->set_type_and_clear_flags (Date_time_format_short_date_and_time);
-      $values [] = $date->format ($f);
+      $t = $profiler->elapsed ('db');
+      $query_data .= " ({$t}s)";
+    }
+    $values [] = $query_data;
+
+    $values [] = "{$this->env->num_webcore_objects} objects";
+
+    if (isset ($profiler) && $profiler->exists ('text'))
+    {
+      $t = $profiler->elapsed ('text');
+      $values [] = "{$t}s (text)";
+    }
+
+    if (isset ($profiler) && $profiler->exists ('ui'))
+    {
+      $t = $profiler->elapsed ('ui');
+      $values [] = "{$t}s (ui)";
     }
 
     if (! empty ($values))
     {
       return join ($this->page->display_options->menu_separator, $values);
     }
-    
+
     return '';
   }
 
@@ -414,27 +395,22 @@ class DEFAULT_PAGE_RENDERER extends WEBCORE_PAGE_RENDERER
         {
           $browser_url = $res->resolve_file ($options->browser_url);
       ?>
-        <div>Your <a href="<?php echo $browser_url; ?>">browser</a> may have trouble rendering this page.</div>
+        <div>Your browser may have trouble rendering this page. See <a href="<?php echo $browser_url; ?>">supported browsers</a> for more information.</div>
       <?php
         }
         else
         {
       ?>
-        <div>Your browser may have trouble rendering this page.</div>
+        <div>Your browser may have trouble rendering this page. To avoid any issues, please use
+          <a href="http://opera.com">Opera</a>
+          <a href="http://google.com/chrome">Chrome</a>,
+          <a href="http://getfirefox.com">FireFox</a>,
+          <a href="http://apple.com/safari">Safari</a> or any other modern, standards-compliant browser.</div>
       <?php
         }
 
         $url = $opt_ignore_warning->setter_url_as_html (! $opt_ignore_warning->value ());
       ?>
-      <p>
-        To get the maximum amount of pleasure while browsing this and other websites you can download for free any one of these 
-        <a href="http://getfirefox.com">FireFox</a>, 
-        <a href="http://google.com/chrome">Chrome</a>, 
-        <a href="http://opera.com">Opera</a> or 
-        <a href="http://apple.com/safari">Safari</a>.
-        If you are using a work computer where you are not allowed to install software yourself you 
-        can use <a href="http://portableapps.com/">Portable Apps</a> to make it possible to run FireFox without even having to "install" it...      
-      </p>      
       <div style="margin-top: 1em">
         <input id="ignore_browser_warning" type="checkbox" value="<?php echo $opt_ignore_warning->value (); ?>" onclick="window.location='<?php echo $url; ?>'" style="vertical-align: middle">
         <label for="ignore_browser_warning">Do not show this message again.</label>

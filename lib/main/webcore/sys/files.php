@@ -76,7 +76,7 @@ class FILE_OPTIONS
    * corresponding entry in {@link $target_chars}.
    * @var string
    */
-  public $source_chars = 'äáàâëéèêïíìîöóòôüúùûÄÁÀÂËÉÈÊÏÍÌÎÖÓÒÔÜÚÙÛñÑçÇ';
+  public $source_chars = 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½';
 
   /**
    * List of characters to convert <i>to</i> in afile name.
@@ -713,7 +713,7 @@ function text_to_file_size ($text)
     return $text;
   }
 
-  $pieces = null; // Compiler warning
+  $pieces = new stdClass();
   if (preg_match ('/([0-9]+)([MB]|[M]|[GB]|[G]|[KB]|[K]|[TB]|[T])/', $text, $pieces))
   {
     switch ($pieces [2])

@@ -275,10 +275,13 @@ class EXECUTE_SEARCH_FORM extends ID_BASED_FORM
         {
           $props->add_item ($t->plural_title, $t->id);
         }
-          
-        $renderer->draw_drop_down_row ('type', $props);
-      
-        $renderer->draw_buttons_in_row (array ($renderer->submit_button_as_html ()));
+
+        $renderer->start_row(' ');
+          echo $renderer->drop_down_as_html('type', $props);
+          echo '<div style="float: right">';
+          echo $renderer->draw_buttons(array ($renderer->submit_button_as_html ()));
+          echo '</div>';
+        $renderer->finish_row();
       $renderer->finish ();
     }
     else
@@ -287,7 +290,6 @@ class EXECUTE_SEARCH_FORM extends ID_BASED_FORM
       $this->_search->fields->draw_fields ($this, $renderer);
       $renderer->draw_separator ();
 
-//      $buttons [] = $renderer->javascript_button_as_html ('Save', 'save_search (document.' . $this->name . ')');
       $buttons [] = $renderer->submit_button_as_HTML ();
       $renderer->draw_buttons_in_row ($buttons);
 

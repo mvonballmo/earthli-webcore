@@ -97,10 +97,10 @@ class PICTURE_RENDERER extends ENTRY_RENDERER
     if ($metrics->loaded ())
     {
   ?>
-  <div style="margin: auto; width: <?php echo $metrics->width (); ?>px; margin-top: 1em">
-    <div style="text-align: right">
+  <div style="width: <?php echo $metrics->width (); ?>px">
+    <p>
       <?php echo $folder->format_date ($entry->date); ?>
-    </div>
+    </p>
     <div>
       <?php $this->_echo_html_description ($entry); ?>
     </div>
@@ -108,7 +108,7 @@ class PICTURE_RENDERER extends ENTRY_RENDERER
     <?php
       if ($this->_options->show_interactive)
       {
-        echo $metrics->as_html ($entry->title_as_plain_text ());
+        echo $metrics->as_html ($entry->title_as_plain_text (), '');
       }
       else
       {
@@ -120,7 +120,7 @@ class PICTURE_RENDERER extends ENTRY_RENDERER
       if ($this->_options->show_interactive && $metrics->was_resized)
       {
     ?>
-    <div class="notes">
+    <div class="subdued">
       Resized from
       <?php echo $metrics->original_width; ?> x <?php echo $metrics->original_height; ?> to
       <?php echo $metrics->constrained_width; ?> x <?php echo $metrics->constrained_height; ?>.

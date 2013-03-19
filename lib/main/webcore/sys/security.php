@@ -874,7 +874,7 @@ class PERMISSIONS_FORMATTER extends WEBCORE_OBJECT
    */
   protected function _register_formatter ($range, $type, $image, $title)
   {
-    $formatter = null; // Compiler warning
+    $formatter = new stdClass();
     $formatter->type = $type;
     $formatter->image = $image;
     $formatter->title = $title;
@@ -985,7 +985,7 @@ class PRIVILEGE_MAP
    */
   public function add ($set_name, $type = null)
   {
-    $set = null; // Compiler warning
+    $set = new stdClass();
     $set->name = $set_name;
     if (isset ($type))
     {

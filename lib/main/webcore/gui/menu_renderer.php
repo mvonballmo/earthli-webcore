@@ -286,7 +286,7 @@ class MENU_RENDERER extends WEBCORE_OBJECT
     if (isset ($this->env->profiler)) $this->env->profiler->start ('ui');
     if ($commands->num_executable_commands ())
     {
-    	echo "<div " . $this->_get_alignment() . '>';
+    	echo "<ul class=\"menu-items\" " . $this->_get_alignment() . '>';
       switch ($this->display_mode)
       {
         case Menu_horizontal:
@@ -300,7 +300,7 @@ class MENU_RENDERER extends WEBCORE_OBJECT
           $this->_draw_important_with_dropdown ($commands, $this->display_mode);
           break;
       }
-      echo '</div>';
+      echo '</ul>';
     }
     if (isset ($this->env->profiler)) $this->env->profiler->stop ('ui');
   }
@@ -367,15 +367,18 @@ class MENU_RENDERER extends WEBCORE_OBJECT
       {
         if ($this->content_mode & Menu_show_as_buttons)
         {
-          echo '  ' . $this->_command_as_html ($cmd, $CSS_class) . "\n";
+          echo '  <li>' . $this->_command_as_html ($cmd, $CSS_class) . "</li>\n";
         }
         else
         {
           if ($idx_cmd > 0)
           {
-            echo $sep;
+            echo '  <li>' . $sep . $this->_command_as_html ($cmd, '') . "</li>\n";
           }
-          echo '  ' . $this->_command_as_html ($cmd, '') . "\n";
+          else
+          {
+            echo '  <li>' . $this->_command_as_html ($cmd, '') . "</li>\n";
+          }
         }
         $idx_cmd += 1;
         if ($idx_cmd == $num_cmds_to_be_shown)
@@ -395,10 +398,13 @@ class MENU_RENDERER extends WEBCORE_OBJECT
   protected function _command_as_html ($cmd, $CSS_class)
   {
     $Result = '';
+    $style = '';
     
     if ($cmd->icon && ($this->content_mode & Menu_show_icon))
     {
-      $parts [] = $this->context->resolve_icon_as_html ($cmd->icon, ' ', '16px');
+      $CSS_class .= ' icon';
+      $style = 'style="background-image: url(' . $this->context->sized_icon ($cmd->icon, '16px') . ')"';
+//      $parts [] = $this->context->resolve_icon_as_html ($cmd->icon, ' ', '16px');
     }
     if ($cmd->title && (($this->content_mode & Menu_show_title) || ! $cmd->icon))
     {
@@ -416,7 +422,7 @@ class MENU_RENDERER extends WEBCORE_OBJECT
       if ($cmd->link)
       {
         $link = htmlspecialchars ($this->context->resolve_file ($cmd->link));
-        $tag = '<a' . $CSS_class . ' href="' . $link . '"';
+        $tag = '<a' . $CSS_class . ' ' . $style . ' href="' . $link . '"';
         if ($this->target)
         {
           $tag .= ' target="' . $this->target . '"';
@@ -470,7 +476,7 @@ class MENU_RENDERER extends WEBCORE_OBJECT
    */
   protected function _draw_vertical_menu ($commands, $important_only)
   {
-    echo '    <div class="menu">' . "\n";
+    echo '    <ul class="menu">' . "\n";
     if ($important_only)
     {
       $this->_draw_commands ($commands, true, 'menu-item');
@@ -491,14 +497,14 @@ class MENU_RENDERER extends WEBCORE_OBJECT
           {
             if ($cmd->executable)
             {
-              echo '        ' . $this->_command_as_html ($cmd, 'menu-item') . '' . "\n";
+              echo '        <li>' . $this->_command_as_html ($cmd, 'menu-item') . '</li>' . "\n";
             }
           }
           echo '      </div>' . "\n";
         }
       }
     }
-    echo "    </div>\n";
+    echo "    </ul>\n";
   }  
 
   /**
@@ -575,8 +581,8 @@ class MENU_RENDERER extends WEBCORE_OBJECT
       $trigger .= '&nbsp;' . $this->trigger_title;
     }
 
-    echo '  <div class="' . $trigger_class . '"' . $menu_tag . '>' . "\n";
-    echo '    <div class="' . $this->trigger_button_CSS_class . '" style="float: none">' . $trigger . "</div>\n";
+    echo '  <div class="' . $trigger_class . ' ' . $this->trigger_button_CSS_class . '"' . $menu_tag . '>' . "\n";
+    echo '    <div style="float: none">' . $trigger . "</div>\n";
     echo '    <div class="' . $menu_class . '">' . "\n";
     $this->_draw_vertical_menu ($commands, false);
     echo '    </div>' . "\n";

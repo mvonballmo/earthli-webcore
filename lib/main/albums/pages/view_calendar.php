@@ -43,9 +43,6 @@ http://www.earthli.com/software/webcore/albums
     $Page->start_display ();
 ?>
 <div class="box">
-  <div class="box-title">
-    <?php echo $folder->title_as_html (); ?> - Calendar
-  </div>
   <?php
     $menu = $App->make_menu ();
     $menu->renderer->content_mode = Menu_show_all_as_buttons;

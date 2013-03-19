@@ -59,12 +59,16 @@ http://www.earthli.com/software/webcore
 
     $class_name = $App->final_class_name ('COMMENT_LIST_RENDERER', 'webcore/gui/comment_renderer.php');
     $com_renderer = new $class_name ($com_query, $comment);
+
+    $subscription_status = $comment->handler_for (Handler_subscriptions);
   ?>
   <div class="box">
-    <div class="box-title">
-      Comment <?php echo $comment->title_as_html (); ?>
+    <div class="top-box">
+      <?php
+      $subscription_status->display ($comment);
+      $com_renderer->display_menu ();
+      ?>
     </div>
-    <?php $com_renderer->display_menu (); ?>
     <div class="box-body">
       <?php $com_renderer->display (); ?>
     </div>

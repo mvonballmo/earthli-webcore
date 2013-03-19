@@ -141,7 +141,7 @@ abstract class RELEASE_UPDATER extends WEBCORE_OBJECT
   {
     $entries = $entry_query->objects ();
 
-    $this_branch_info = null; // Compiler warning
+    $this_branch_info = new stdClass();
 
     foreach ($entries as $entry)
     {

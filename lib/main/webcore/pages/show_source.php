@@ -37,8 +37,10 @@ http://www.earthli.com/software/webcore
     echo "<div class=\"log-box\">$source_text</div>\n";
   }
 
+
   $Page->title->subject = 'View source';
   $Page->template_options->title = 'Source';
+  $Page->template_options->icon = '{icons}buttons/source';
 
   $Page->location->add_root_link ();
   $Page->location->append ('View source');
@@ -46,22 +48,11 @@ http://www.earthli.com/software/webcore
   $Page->start_display ();
 ?>
 <div class="box">
-  <div class="box-title">
-    View source
-  </div>
   <div class="box-body">
-    <div class="info-box-top">
-      <div style="float: left; padding-bottom: .5em">
-        <?php echo $Page->resolve_icon_as_html ('{icons}buttons/source', '', '50px'); ?>
-      </div>
-      <div style="margin-left: 60px">
-        <p style="margin-top: 0em">The best way to learn how to use the <a href="http://earthli.com/software/webcore/">WebCore</a>
-          is by example. See the <a href="http://earthli.com/software/webcore/documentation.php">documentation</a> for
-          more information.</p>
-        <p style="margin-bottom: 0em">The requested URL is always shown first; if a page uses one or more WebCore templates, those are shown afterwards.</p>
-      </div>
-      <div style="clear: both"></div>
-    </div>
+    <p>The best way to learn how to use the <a href="http://earthli.com/software/webcore/">WebCore</a>
+      is by example. See the <a href="http://earthli.com/software/webcore/documentation.php">documentation</a> for
+      more information.</p>
+    <p>The requested URL is always shown first; if a page uses one or more WebCore templates, those are shown afterwards.</p>
     <?php
       if (is_file ($file_name))
       {

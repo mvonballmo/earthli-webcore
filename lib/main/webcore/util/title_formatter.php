@@ -255,7 +255,7 @@ class TITLE_FORMATTER extends WEBCORE_OBJECT
     if ($title_to_use)
     {
       $title_to_use = $this->context->text_options->convert_to_html_attribute ($title_to_use);
-      $Result .= " title=\"$title_to_use\" style=\"cursor: help\"";
+      $Result .= " title=\"$title_to_use\"";
     }
 
     if ($this->CSS_class)

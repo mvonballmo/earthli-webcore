@@ -57,7 +57,7 @@ class JOB_RENDERER extends PROJECT_ENTRY_RENDERER
   {
     $this->_echo_subscribe_status ($entry);
 ?>
-<div class="info-box-top">
+<div>
   <table cellpadding="2" cellspacing="0" style="margin-left: 0px">
     <tr>
       <td class="label">Kind</td>

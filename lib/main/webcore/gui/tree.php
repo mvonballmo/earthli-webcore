@@ -628,14 +628,9 @@ class HTML_TREE extends TREE
    * Is this tree centered in its parent container?
    * @var boolean
    */
-  public $centered = true;
+  public $centered = false;
 
-  /**
-   * How much space does this tree leave above and below?
-   * Specify with valid CSS values.
-   * @var string
-   */
-  public $vertical_margin = '1em';
+  public $CSS_class = 'tree';
 
   /**
    * Start rendering the tree.
@@ -643,18 +638,12 @@ class HTML_TREE extends TREE
    */
   public function start ()
   {
-    if ($this->vertical_margin)
-    {
-?>
-<div style="margin-top: <?php echo $this->vertical_margin; ?>; margin-bottom: <?php echo $this->vertical_margin; ?>">
-<?php
-    }
+    $class = $this->CSS_class ? "class=\"$this->CSS_class\"" : '';
+    $style = $this->centered ? "style=\"margin: auto; display: table\"" : '';
 
-    if ($this->centered)
+    if ($class || $style)
     {
-?>
-<div style="margin: auto; display: table">
-<?php
+      echo "<div $class $style>";
     }
   }
 
@@ -664,14 +653,7 @@ class HTML_TREE extends TREE
    */
   public function finish ()
   {
-    if ($this->centered)
-    {
-?>
-</div>
-<?php
-    }
-
-    if ($this->vertical_margin)
+    if ($this->centered || $this->CSS_class)
     {
 ?>
 </div>

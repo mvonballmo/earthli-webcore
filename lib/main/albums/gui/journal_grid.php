@@ -61,12 +61,12 @@ class JOURNAL_GRID extends ALBUM_ENTRY_GRID
   /**
    * @var integer
    */
-  public $spacing = 2;
+  public $spacing = 0;
 
   /**
    * @var boolean
    */
-  public $show_separator = false;
+  public $show_separator = true;
 
   /**
    * @var boolean
@@ -87,40 +87,40 @@ class JOURNAL_GRID extends ALBUM_ENTRY_GRID
     $folder = $obj->parent_folder ();
     $creator = $obj->creator ();
 ?>
-  <div class="info-box-top">
-    <?php
-      $this->_draw_menu_for ($obj, Menu_size_compact);
-    ?>
-    <div style="float: left; margin-right: .5em">
-      <?php echo $obj->weather_icon (); ?>
+  <div class="grid-item">
+    <div class="minimal-commands">
+      <?php $this->_draw_menu_for ($obj, Menu_size_minimal, Menu_align_inline); ?>
     </div>
-    <div style="float: left">
-      <div class="grid-title">
-        <?php
+    <div class="minimal-commands-content">
+      <div style="float: left; margin-right: .5em">
+        <?php echo $obj->weather_icon (); ?>
+      </div>
+      <div style="margin-left: 40px">
+        <h3 class="grid-title">
+          <?php
           if ($this->show_folder)
           {
             echo $folder->title_as_link () . $this->app->display_options->object_separator;
           }
           echo $this->obj_link ($obj);
-        ?>
-      </div>
-      <div class="detail">
-        <?php echo $folder->format_date ($obj->date); ?>
+          ?>
+        </h3>
+        <p class="date-time">
+          <?php echo $folder->format_date ($obj->date); ?>
+        </p>
+        <div class="description" style="clear: both">
+          <?php
+          $munger = $obj->html_formatter ();
+          $munger->max_visible_output_chars = 250;
+          echo $obj->description_as_html ($munger);
+          ?>
+          <p class="info-box-bottom">
+            <?php if ($this->show_user) { echo $creator->title_as_link (); ?> - <?php } ?>
+            <?php echo $obj->time_created->format (); ?>
+          </p>
+        </div>
       </div>
     </div>
-    <div style="clear: both"></div>
-  </div>
-  <div class="description">
-    <?php
-      $munger = $obj->html_formatter ();
-      $munger->max_visible_output_chars = 250;
-      echo $obj->description_as_html ($munger);
-    ?>
-    <p class="detail" style="text-align: right">
-      <?php if ($this->show_user) { echo $creator->title_as_link (); ?> - <?php } ?>
-      <?php echo $obj->time_created->format (); ?>
-    </p>
-  </div>
 <?php
   }
 }

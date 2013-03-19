@@ -55,8 +55,11 @@ class NEWS_PANEL_MANAGER_HELPER extends PANEL_MANAGER_HELPER
    */
   public function configure ($manager)
   {
-////    $panel = $manager->panel_at ('article');
-////    $panel->default_time_frame = Time_frame_last_month;
+    $panel = $manager->panel_at ('drafts');
+    $panel->columns = 2;
+
+    $panel = $manager->panel_at ('abandoned');
+    $panel->columns = 2;
   }
 }
 

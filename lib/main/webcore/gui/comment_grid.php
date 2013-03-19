@@ -57,7 +57,7 @@ class COMMENT_GRID extends SELECTABLE_GRID
   /**
    * @var integer
    */
-  public $spacing = 2;
+  public $spacing = 0;
 
   /**
    * @var boolean
@@ -125,32 +125,39 @@ class COMMENT_GRID extends SELECTABLE_GRID
 
   protected function _echo_header ($obj)
   {
-    $this->_draw_menu_for ($obj, Menu_size_compact);
+    ?>
+    <div class="grid-item">
+      <div class="minimal-commands">
+        <?php $this->_draw_menu_for ($obj, Menu_size_minimal, Menu_align_inline); ?>
+      </div>
+      <div class="minimal-commands-content">
+        <?php
 
-    $creator = $obj->creator ();
-    if ($creator->icon_url)
-    {
-  ?>
-  <div style="float: left">
-    <?php echo $creator->icon_as_html (); ?>
-  </div>
-  <div style="margin-left: 40px">
-  <?php
-    }
-  ?>
-    <div style="margin-bottom: .25em">
-      <?php echo $obj->icon () . ' ' . $obj->title_as_link (); ?>
+        $creator = $obj->creator ();
+        if ($creator->icon_url)
+        {
+        ?>
+        <div style="float: left">
+          <?php echo $creator->icon_as_html (); ?>
+        </div>
+        <div style="margin-left: 40px">
+        <?php
+          }
+        ?>
+          <div style="margin-bottom: .25em">
+            <?php echo $obj->icon () . ' ' . $obj->title_as_link (); ?>
+          </div>
+          <div class="detail">
+            by <?php echo $creator->title_as_link (); ?> - <?php echo $obj->time_created->format (); ?>
+          </div>
+        <?php
+          if ($creator->icon_url)
+          {
+        ?>
+        </div>
+      </div>
     </div>
-    <div class="detail">
-      by <?php echo $creator->title_as_link (); ?> - <?php echo $obj->time_created->format (); ?>
-    </div>
-  <?php
-    if ($creator->icon_url)
-    {
-  ?>
-  </div>
-  <div style="clear: both"></div>
-  <?php
+    <?php
     }
   }
 }

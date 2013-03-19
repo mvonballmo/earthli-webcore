@@ -299,7 +299,7 @@ class BRANCH extends OBJECT_IN_FOLDER
        the change (branch removed, trunk added, main branch changed). */
 
     $entries = $entry_query->objects ();
-    $main_branch_info = null; // Compiler warning
+    $main_branch_info = new stdClass();
 
     foreach ($entries as $entry)
     {

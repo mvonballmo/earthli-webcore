@@ -57,17 +57,22 @@ class PROJECT_ENTRY_GRID extends CONTENT_OBJECT_GRID
   /**
    * @var integer
    */
-  public $spacing = 4;
+  public $spacing = 0;
+
+  /**
+   * @var integer
+   */
+  public $padding = 0;
 
   /**
    * @var boolean
    */
-  public $even_columns = false;
+  public $even_columns = true;
 
   /**
    * @var boolean
    */
-  public $show_separator = false;
+  public $show_separator = true;
 
   /**
    * @var boolean
@@ -102,70 +107,78 @@ class PROJECT_ENTRY_GRID extends CONTENT_OBJECT_GRID
   {
     $branch_info = $obj->main_branch_info ();
 ?>
-<div style="float: left">
-<?php
-  echo $obj->kind_icon ();
-?>
-</div>
-<div style="margin-left: 24px">
-  <div class="grid-title">
-  <?php
-    echo $this->obj_link ($obj);
-  ?>
+  <div class="grid-item">
+    <div class="minimal-commands">
+      <?php $this->_draw_menu_for ($obj, Menu_size_minimal, Menu_align_inline); ?>
+    </div>
+    <div class="minimal-commands-content">
+      <div style="float: left">
+      <?php
+        echo $obj->kind_icon ();
+      ?>
+      </div>
+      <div style="margin-left: 24px">
+        <div class="grid-title">
+        <?php
+          echo $this->obj_link ($obj);
+        ?>
+        </div>
+        <?php
+          $this->_draw_context_in_project_for ($obj, $branch_info);
+          if ($this->show_release)
+          {
+        ?>
+        <div class="detail" style="margin: .5em 0em">
+        <?php
+            $this->_draw_release_details ($obj, $branch_info);
+        ?>
+        </div>
+        <?php
+          }
+        ?>
+      </div>
+      <div style="float: left">
+      <?php
+          $layer = $this->context->make_layer ("id_{$obj->id}_details");
+          $layer->CSS_class = 'description';
+          $layer->margin_left = '24px';
+          $layer->draw_toggle ();
+      ?>
+      </div>
+      <div class="detail" style="margin-left: 24px">
+        <?php
+          $this->_draw_user_details ($obj, $branch_info);
+        ?>
+      </div>
+      <?php
+          $layer->start ();
+      ?>
+      <p class="detail">
+      <?php
+          if (! $obj->time_created->equals ($obj->time_modified))
+          {
+            echo '<br>Updated ';
+            if ($this->show_user)
+            {
+              $modifier = $obj->modifier ();
+              echo 'by ' . $modifier->title_as_link ();
+            }
+            echo ' on ' . $obj->time_modified->format ();
+          }
+      ?>
+      </p>
+      <?php
+        echo $obj->description_as_html ();
+        if ($obj->extra_description)
+        {
+          echo "<p><span class=\"field\">" . strlen ($obj->extra_description) . "</span> bytes of extra information.</p>";
+        }
+        $this->_draw_description ($obj);
+        $layer->finish ();
+      ?>
+    </div>
   </div>
   <?php
-    $this->_draw_menu_for ($obj, Menu_size_compact);
-    $this->_draw_context_in_project_for ($obj, $branch_info);
-    if ($this->show_release)
-    {
-  ?>
-  <div class="detail" style="margin: .5em 0em">
-  <?php
-      $this->_draw_release_details ($obj, $branch_info);    
-  ?>
-  </div>
-  <?php
-    }
-  ?>
-</div>
-<div style="float: left">
-<?php
-    $layer = $this->context->make_layer ("id_{$obj->id}_details");
-    $layer->CSS_class = 'description';
-    $layer->margin_left = '24px';
-    $layer->draw_toggle ();
-?>
-</div>
-<div class="detail" style="margin-left: 24px">
-  <?php
-    $this->_draw_user_details ($obj, $branch_info);
-  ?>
-</div>
-<?php
-    $layer->start ();
-?>
-<p class="detail">
-<?php
-    if (! $obj->time_created->equals ($obj->time_modified))
-    {
-      echo '<br>Updated ';
-      if ($this->show_user)
-      {
-        $modifier = $obj->modifier ();
-        echo 'by ' . $modifier->title_as_link ();
-      }
-      echo ' on ' . $obj->time_modified->format ();
-    }
-?>
-</p>
-<?php
-    echo $obj->description_as_html ();
-    if ($obj->extra_description)
-    {
-      echo "<p><span class=\"field\">" . strlen ($obj->extra_description) . "</span> bytes of extra information.</p>";
-    }
-    $this->_draw_description ($obj);
-    $layer->finish ();
   }  
 
   /**

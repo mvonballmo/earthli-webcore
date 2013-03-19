@@ -60,13 +60,13 @@ class PAGE_TITLE extends WEBCORE_OBJECT
    * Starts every page title.
    * @var string
    */
-  public $prefix = '..:: ';
+  public $prefix = '';
 
   /**
    *  Finishes every page title.
    * @var string
    */
-  public $suffix = ' ::..';
+  public $suffix = '';
 
   /**
    * The main area of the page.

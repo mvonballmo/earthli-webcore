@@ -74,6 +74,36 @@ class RELEASE_PANEL extends QUERY_PANEL
   }
 }
 
+class JOB_PANEL extends ENTRY_PANEL
+{
+  /**
+   * Number of rows to use in the grid.
+   * @var integer
+   */
+  public $rows = 15;
+
+  /**
+   * Number of columns to use in the grid.
+   * @var integer
+   */
+  public $columns = 2;
+}
+
+class CHANGE_PANEL extends ENTRY_PANEL
+{
+  /**
+   * Number of rows to use in the grid.
+   * @var integer
+   */
+  public $rows = 15;
+
+  /**
+   * Number of columns to use in the grid.
+   * @var integer
+   */
+  public $columns = 2;
+}
+
 /**
  * Display a list of {@link BRANCH}es in a {@link PANEL}.
  * @package projects

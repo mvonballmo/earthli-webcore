@@ -128,7 +128,17 @@ class LOCATION_MENU extends MENU
   public function add_folder_text ($folder, $page_args = '', $page_url = '')
   {
     $this->add_folder_link ($folder->parent_folder ());
-    $this->add_object_text ($folder);
+
+    $t = $folder->title_formatter ();
+    $t->max_visible_output_chars = 0;
+    $title = $folder->title_as_html($t);
+    $icon = $folder->icon_as_html('16px');
+
+    if ($icon)
+    {
+      $title = $icon . ' ' . $title;
+    }
+    $this->append ($title);
   }
 
   /**

@@ -78,7 +78,7 @@ abstract class PROJECT_ENTRY_RENDERER extends ENTRY_RENDERER
     <?php
       if ($branch_info->is_main () && (sizeof ($branch_infos) > 1))
       {
-        echo '<span style="cursor: help" title="Used for non-branch-specific lists.">&bull;&nbsp;</span>';
+        echo '<span title="Used for non-branch-specific lists.">&bull;&nbsp;</span>';
       }
       $branch = $branch_info->branch ();
       if ($branch->locked ())

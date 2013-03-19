@@ -144,7 +144,7 @@ abstract class FORM extends WEBCORE_OBJECT
    * Should this form set focus to its initial control?
    * @var boolean
    */
-  public $allow_focus = true;
+  public $allow_focus = false;
 
   /**
    * Handles verifying human (vs. robot) input in the form.
@@ -252,7 +252,7 @@ abstract class FORM extends WEBCORE_OBJECT
    */
   public function process_plain ()
   {
-    $no_obj = null; // Compiler warning
+    $no_obj = new stdClass();
     $this->_process ($no_obj, Form_load_action_default);
   }
 

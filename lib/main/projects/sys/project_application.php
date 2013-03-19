@@ -295,6 +295,8 @@ class PROJECT_APPLICATION extends APPLICATION
     $this->register_class ('ENTRY_SUMMARY_GRID', 'JOB_SUMMARY_GRID', 'projects/gui/job_grid.php', 'job');
     $this->register_class ('ENTRY_SUMMARY_GRID', 'CHANGE_SUMMARY_GRID', 'projects/gui/change_grid.php', 'change');
     $this->register_class ('ENTRY_LIST', 'JOB_LIST', 'projects/gui/job_list.php', 'job');
+    $this->register_class ('ENTRY_PANEL', 'JOB_PANEL', 'projects/gui/project_panel.php', 'job');
+    $this->register_class ('ENTRY_PANEL', 'CHANGE_PANEL', 'projects/gui/project_panel.php', 'change');
     $this->register_class ('PUBLISHER', 'PROJECT_PUBLISHER', 'projects/mail/project_publisher.php');
     $this->register_class ('APPLICATION_TABLE_NAMES', 'PROJECT_APPLICATION_TABLE_NAMES');
     $this->register_class ('APPLICATION_PAGE_NAMES', 'PROJECT_APPLICATION_PAGE_NAMES');

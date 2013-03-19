@@ -199,7 +199,7 @@ class COMMENT extends ATTACHMENT_HOST
   }
 
   /**
-   * HTML code for the icon to use for this kind.
+   * HTML code for the icon to use for this comment.
    * @param string $size
    * @return string
    */
@@ -207,6 +207,17 @@ class COMMENT extends ATTACHMENT_HOST
   {
     $props = $this->icon_properties ();
     return $props->icon_as_html ($size);
+  }
+
+  /**
+   * The raw URL to the icon to use for this comment.
+   * @param string $size
+   * @return string
+   */
+  public function icon_url ($size = '15px')
+  {
+    $props = $this->icon_properties ();
+    return $props->expanded_icon_url($size);
   }
 
   /**
@@ -401,6 +412,9 @@ class COMMENT extends ATTACHMENT_HOST
       case Handler_history_item:
         include_once ('webcore/obj/webcore_history_items.php');
         return new COMMENT_HISTORY_ITEM ($this->app);
+      case Handler_subscriptions:
+        include_once ('webcore/gui/subscription_renderer.php');
+        return new COMMENT_SUBSCRIPTION_RENDERER ($this->app, $options);
       default:
         return parent::_default_handler_for ($handler_type, $options);
     }

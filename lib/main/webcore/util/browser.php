@@ -89,6 +89,11 @@ define ('Browser_DOM_2', 9);
 define ('Browser_extended_HTML_newsfeeds', 10);
 
 /**
+ * Does the browser support CSS3 columns?
+ */
+define ('Browser_columns', 11);
+
+/**
  * Browser uses the Netscape 4 renderer.
  */
 define ('Browser_netscape_4', 'netscape_4');
@@ -486,9 +491,10 @@ class BROWSER
              $this->is (Browser_ie) && ($this->_ua->major_version >= 5);
 
     case Browser_DOM_2:
-      return $this->is (Browser_gecko) && ($this->_ua->major_version >= 1) && ($this->_ua->minor_version >= 8) ||
+      return $this->is (Browser_gecko) && ((($this->_ua->major_version == 1) && ($this->_ua->minor_version >= 8)) || ($this->_ua->major_version > 1)) ||
              $this->is (Browser_presto) ||
              $this->is (Browser_webkit) ||
+             $this->is (Browser_ie) && (($this->is (Browser_os_mac) && ($this->_ua->major_version >= 5)) || ($this->is (Browser_os_windows) && ($this->_ua->major_version >= 7))) ||
              $this->is (Browser_opera) && ($this->_ua->major_version >= 9);
               
     case Browser_alpha_PNG:
@@ -512,13 +518,15 @@ class BROWSER
              $this->is (Browser_presto) ||
              $this->is (Browser_webkit) ||
              $this->is (Browser_opera) && ($this->_ua->major_version >= 7) ||
+             $this->is (Browser_ie) && (($this->is (Browser_os_mac) && ($this->_ua->major_version >= 5)) || ($this->is (Browser_os_windows) && ($this->_ua->major_version >= 7))) ||
              $this->is (Browser_omniweb) && (($this->_ua->major_version >= 5) || (($this->_ua->major_version >= 4) && ($this->_ua->minor_version >= 5)));
               
     case Browser_CSS_2_1:
-      return $this->is (Browser_gecko) && ($this->_ua->major_version >= 1) && ($this->_ua->minor_version >= 8) ||
+      return $this->is (Browser_gecko) && ((($this->_ua->major_version == 1) && ($this->_ua->minor_version >= 8)) || ($this->_ua->major_version > 1)) ||
              $this->is (Browser_presto) ||
              $this->is (Browser_webkit) ||
              $this->is (Browser_opera) && ($this->_ua->major_version >= 7) ||
+             $this->is (Browser_ie) && (($this->is (Browser_os_mac) && ($this->_ua->major_version >= 5)) || ($this->is (Browser_os_windows) && ($this->_ua->major_version >= 8))) ||
              $this->is (Browser_omniweb) && (($this->_ua->major_version >= 5) || (($this->_ua->major_version >= 4) && ($this->_ua->minor_version >= 5)));
 
     case Browser_JavaScript:
@@ -532,6 +540,13 @@ class BROWSER
 
     case Browser_extended_HTML_newsfeeds:
       return true;
+
+    case Browser_columns:
+      return $this->is (Browser_gecko) ||
+        $this->is (Browser_presto) ||
+        $this->is (Browser_webkit) ||
+        $this->is (Browser_opera) ||
+        $this->is (Browser_ie) && ($this->_ua->major_version >= 10);
     }
 
     return false;
@@ -712,7 +727,7 @@ class USER_AGENT_PARSER
   {
     $Result = new USER_AGENT_PROPERTIES ();
 
-    $parts = null; // Compiler warning
+    $parts = new stdClass();
     
     preg_match_all ('/([a-zA-Z]|[a-zA-Z]+[0-9]+|[a-zA-Z]+[ 0-9]+[a-zA-Z]|[a-zA-Z][ \-&a-zA-Z]*[a-zA-Z])[-\/: ]?[vV]?([0-9][0-9a-z]*([\.-][0-9][0-9a-z]*)*)/', $s, $parts);
 
@@ -856,7 +871,7 @@ class USER_AGENT_PARSER
    */
   protected function _determine_gecko_date ($version)
   {
-    $parts = null; // Compiler warning
+    $parts = new stdClass();
     preg_match ('/([0-9]{4})([0-9]{2})([0-9]{2})/', $version, $parts);
     if (sizeof ($parts))
     {

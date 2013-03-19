@@ -31,20 +31,14 @@ http://www.earthli.com/software/webcore
        $history_item_query: QUERY
        $obj: OBJECT_IN_FOLDER
   */
-  $Page->title->subject = 'History';
+  $Page->title->subject = $history_item_query->size () . ' History items';
 
-  $Page->location->append ('History');
+  $Page->location->append ($App->resolve_icon_as_html('{icons}buttons/history', '', '16px') . ' ' . $Page->title->subject);
 
   $Page->start_display ();
 ?>
 <div class="box">
-  <div class="box-title">
-    <?php echo $App->title_bar_icon ('{icons}buttons/history'); ?> <?php echo 'History for ' . $obj->title_as_html (); ?>
-  </div>
-  <div class="menu-bar-top">
-    <span class="field"><?php echo $history_item_query->size (); ?></span> Items
-  </div>
-  <div class="box-body">
+  <div class="box-body grid-content">
   <?php
     $class_name = $App->final_class_name ('HISTORY_ITEM_GRID', 'webcore/gui/history_item_grid.php');
     $grid = new $class_name ($App);

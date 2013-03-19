@@ -65,15 +65,12 @@ http://www.earthli.com/software/webcore
 
     $Page->location->add_folder_link ($folder);
     $Page->location->add_object_link ($entry);
-    $Page->location->append ($Page->title->subject);
+    $Page->location->append ($App->resolve_icon_as_html('{icons}buttons/delete', '', '16px') . ' ' . $Page->title->subject);
 
     $Page->start_display ();
   ?>
   <div class="box">
-    <div class="box-title">
-      <?php echo $App->title_bar_icon ('{icons}buttons/delete'); ?> Confirm delete of <?php echo $entry_type_info->singular_title; ?>
-    </div>
-    <div class="box-body">
+    <div class="box-body form-content">
     <?php
       $form->display ();
     ?>

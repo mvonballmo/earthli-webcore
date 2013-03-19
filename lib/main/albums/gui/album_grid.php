@@ -51,7 +51,7 @@ class ALBUM_GRID extends FOLDER_GRID
   /**
    * @var boolean
    */
-  public $show_separator = false;
+  public $show_separator = true;
 
   /**
    * @var string
@@ -61,12 +61,12 @@ class ALBUM_GRID extends FOLDER_GRID
   /**
    * @var string
    */
-  public $box_style = 'chart';
+  public $box_style = '';
 
   /**
    * @var integer
    */
-  public $spacing = 8;
+  public $spacing = 0;
 
   /**
    * @param ALBUM $obj
@@ -76,42 +76,55 @@ class ALBUM_GRID extends FOLDER_GRID
   {
     $main_pic = $obj->main_picture ();
 ?>
-  <div class="chart-title" style="text-align: center">
-    <?php echo $obj->title_as_html (); ?>
-  </div>
-  <div class="chart-body" style="text-align: center">
-    <p style="clear: both">
-      <?php
-      if ($main_pic)
-      {
-        $f = $main_pic->date->formatter ();
-        $f->show_CSS = false;
-        $pic_title = $main_pic->title_as_plain_text () . " (" . $obj->format_date ($main_pic->date, $f) . ")";
-      ?>
-      <a href="view_folder.php?<?php echo "id=$obj->id"; ?>"><img class="frame" src="<?php echo $main_pic->full_thumbnail_name (); ?>" title="<?php echo $pic_title; ?>" alt="<?php echo $pic_title; ?>"></a>
-    <?php } else { ?>
-      <a href="view_folder.php?<?php echo "id=$obj->id"; ?>"><?php echo $obj->title; ?></a>
-    <?php } ?>
-    </p>
-    <p class="detail">
-    <div>
-      <?php
-      $this->_draw_menu_for ($obj, Menu_size_minimal, Menu_align_left);
-      ?>
-    </div>
     <?php
-      if ($obj->is_multi_day ())
-      {
-        echo $obj->format_date ($obj->first_day) . ' - ' . $obj->format_date ($obj->last_day); 
-      }
-      else
-      {
-        echo $obj->format_date ($obj->first_day);
-      }
-    ?>  
-    </p>
-    <div class="detail"><?php echo $obj->summary_as_html (); ?></div>
-  </div>
+    if ($main_pic)
+    {
+      $f = $main_pic->date->formatter ();
+      $f->show_CSS = false;
+      $pic_title = $main_pic->title_as_plain_text () . " (" . $obj->format_date ($main_pic->date, $f) . ")";
+      ?>
+      <div style="position: relative">
+        <p>
+        <a href="view_folder.php?<?php echo "id=$obj->id"; ?>"><img src="<?php echo $main_pic->full_thumbnail_name (); ?>" title="<?php echo $pic_title; ?>" alt="<?php echo $pic_title; ?>"></a>
+        </p>
+      <div style="position: absolute; left: 0; top: 0">
+        <?php
+        $this->_draw_menu_for ($obj, Menu_size_minimal, Menu_align_inline);
+        ?>
+      </div>
+    <?php
+    }
+    else
+    {
+      ?>
+      <div style="float: left; padding-right: 15px; padding-top: .5em">
+        <?php
+        $this->_draw_menu_for ($obj, Menu_size_minimal, Menu_align_inline);
+        ?>
+      </div>
+      <p>
+        <a href="view_folder.php?<?php echo "id=$obj->id"; ?>"><?php echo $obj->title; ?></a>
+      </p>
+    <?php
+    }
+    ?>
+    </div>
+  <h3>
+    <?php echo $obj->title_as_html (); ?>
+  </h3>
+  <p class="detail">
+  <?php
+    if ($obj->is_multi_day ())
+    {
+      echo $obj->format_date ($obj->first_day) . ' - ' . $obj->format_date ($obj->last_day);
+    }
+    else
+    {
+      echo $obj->format_date ($obj->first_day);
+    }
+  ?>
+  </p>
+  <div style="margin-right: 20%"><?php echo $obj->summary_as_html (); ?></div>
 <?php
   }
 }

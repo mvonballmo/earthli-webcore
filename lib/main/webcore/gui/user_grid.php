@@ -64,16 +64,6 @@ class USER_GRID extends CONTENT_OBJECT_GRID
   public $show_separator = false;
 
   /**
-   * @var string
-   */
-  public $width = '60%';
-
-  /**
-   * @var boolean
-   */
-  public $centered = true;
-
-  /**
    * @var boolean
    */
   public $even_columns = false;
@@ -84,39 +74,43 @@ class USER_GRID extends CONTENT_OBJECT_GRID
    */
   protected function _draw_box ($obj)
   {
-?>
-  <div style="float: left; margin-right: .5em">
-    <?php echo $obj->icon_as_html ('32px'); ?>
-  </div>
-  <div class="grid-title">
-    <?php echo $this->obj_link ($obj); ?>
-  </div>
-  <div class="detail">
-    <?php echo $obj->real_name (); ?>
-  </div>
-  <div style="margin-top: .5em">
-    <div style="float: left">
-    <?php
-      $menu = $this->context->make_menu ();
-
-      $entry_types = $this->app->entry_type_infos ();
-      $url = new URL ($obj->home_page ());
-
-      foreach ($entry_types as $type_info)
-      {
-        $url->replace_argument ('panel', $type_info->id);
-        $menu->append ($type_info->plural_title, $url->as_text ());
-      }
-
-      $url->replace_argument ('panel', 'comments');
-      $menu->append ('Comments', $url->as_text ());
-
-      $menu->display ();
     ?>
+    <div class="grid-item">
+    <div class="minimal-commands">
+      <?php $this->_draw_menu_for ($obj, Menu_size_minimal, Menu_align_inline); ?>
     </div>
-    <?php
-      $this->_draw_menu_for ($obj, Menu_size_compact);
-    ?>
+    <div class="minimal-commands-content">
+      <div style="float: left; margin-right: .5em">
+        <?php echo $obj->icon_as_html ('32px'); ?>
+      </div>
+      <div class="grid-title">
+        <?php echo $this->obj_link ($obj); ?>
+      </div>
+      <div class="detail">
+        <?php echo $obj->real_name (); ?>
+      </div>
+      <div style="margin-top: .5em">
+        <div style="float: left">
+        <?php
+          $menu = $this->context->make_menu ();
+
+          $entry_types = $this->app->entry_type_infos ();
+          $url = new URL ($obj->home_page ());
+
+          foreach ($entry_types as $type_info)
+          {
+            $url->replace_argument ('panel', $type_info->id);
+            $menu->append ($type_info->plural_title, $url->as_text ());
+          }
+
+          $url->replace_argument ('panel', 'comments');
+          $menu->append ('Comments', $url->as_text ());
+
+          $menu->display ();
+        ?>
+        </div>
+      </div>
+    </div>
   </div>
 <?php
    }

@@ -325,19 +325,19 @@ class USER_FORM extends CONTENT_OBJECT_FORM
   protected function _draw_controls ($renderer)
   {
     $renderer->start ();
-
-///    $renderer->default_control_width = '15em';
-
     $renderer->set_width ('20em');
+
     $renderer->draw_text_line_row ('title');
     $renderer->draw_password_row ('password1');
     $renderer->draw_password_row ('password2');
 
-    $renderer->draw_separator ();
+    if ($this->visible('title') || $this->visible('password1') || $this->visible('password2'))
+    {
+      $renderer->draw_separator ();
+    }
 
     $renderer->draw_text_line_row ('real_first_name');
     $renderer->draw_text_line_row ('real_last_name');
-
     $renderer->draw_text_line_row ('email');    
 
     $props = $renderer->make_list_properties ();

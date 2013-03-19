@@ -82,7 +82,7 @@ class CONTEXT_DISPLAY_OPTIONS
    * Separator string used between page numbers in page navigators.
    * @var string
    */
-  public $page_separator = ' &bull; ';
+  public $page_separator = '';
 
   /**
    * Separator string used between locations in the navigation bar.
@@ -106,7 +106,7 @@ class CONTEXT_DISPLAY_OPTIONS
    * Maximum number of objects to show in the list of an entry navigator.
    * @var integer
    */
-  public $objects_to_show = 25;
+  public $objects_to_show = 15;
 
   /**
    * Use this extensions for icons that don't specify one.
@@ -132,7 +132,7 @@ class CONTEXT_DISPLAY_OPTIONS
    * Specify a maximum number of characters to display for object titles.
    * @var integer
    */
-  public $default_max_title_size = 25;
+  public $default_max_title_size = 40;
 
   /**
    * Use this title size for all elements (temporarily).

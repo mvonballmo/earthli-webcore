@@ -59,21 +59,19 @@ class JOURNAL_RENDERER extends ENTRY_RENDERER
 
     $folder = $entry->parent_folder ();
 ?>
-<div class="info-box-top">
-  <div style="float: left; padding-right: 1em">
-    <?php echo $entry->weather_icon (); ?>
-  </div>
-  <div style="float: right; text-align: right">
-    <?php echo $folder->format_date ($entry->date); ?>
-  </div>
-  <div class="field">
-    <?php echo $entry->temperature_as_html (); ?>
-  </div>
-  <div>
-    <?php echo $entry->weather_as_html () ?>
-  </div>
-  <div style="clear:both"></div>
-</div>
+    <p class="date-time">
+      <?php echo $folder->format_date ($entry->date); ?>
+    </p>
+    <div class="left-icon">
+      <?php echo $entry->weather_icon (); ?>
+    </div>
+    <div>
+      <?php echo $entry->temperature_as_html (); ?>
+    </div>
+    <div>
+      <?php echo $entry->weather_as_html () ?>
+    </div>
+    <div style="clear:both"></div>
 <?php echo $entry->description_as_html (); ?>
 <?php
     $this->_echo_html_user_information ($entry, 'info-box-bottom');

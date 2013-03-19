@@ -198,7 +198,7 @@ abstract class OBJECT_RENDERER extends HANDLER_RENDERER
     {
       $this->_options = $options;
     }
-    $this->_options->show_interactive = false; 
+    $this->_options->show_interactive = false;
     $this->_display_as_printable($obj);
   }
 

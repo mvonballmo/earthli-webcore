@@ -264,7 +264,7 @@ class PUBLISHER extends LOGGABLE
                     {
                       if (! isset ($subscriber_records [$subscriber->email]))
                       {
-                        $sub_rec = null; // Compiler warning
+                        $sub_rec = new stdClass();
                         $sub_rec->subscriber = $subscriber;
                         $sub_rec->num_objects = 0;
                         $subscriber_records [$subscriber->email] = $sub_rec;

@@ -41,18 +41,15 @@ http://www.earthli.com/software/webcore
       $Env->redirect_local ('view_users.php');
     }
 
-    $Page->title->subject ='Permissions for all users';
+    $Page->title->subject ='Edit permissions for registered users';
     $Page->location->append ($App->short_title, './');
     $Page->location->append ('Users', 'view_users.php');
-    $Page->location->append ($Page->title->subject);
+    $Page->location->append ($App->resolve_icon_as_html('{icons}buttons/security', '', '16px') . ' ' . $Page->title->subject);
 
     $Page->start_display ();
   ?>
   <div class="box">
-    <div class="box-title">
-      <?php echo $App->title_bar_icon ('{icons}buttons/security'); ?> Default registered user permissions
-    </div>
-    <div class="box-body">
+    <div class="box-body form-content">
     <?php
       $form->display ();
     ?>

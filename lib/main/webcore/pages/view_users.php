@@ -42,51 +42,55 @@ http://www.earthli.com/software/webcore
       $user_query->set_kind (Privilege_kind_registered);
     }
 
-    $Page->title->subject = 'Users';
+    $caption = $show_anon ? ' Anonymous Users' : ' Registered Users';
+
+    $Page->title->subject = $user_query->size () . $caption;
 
     $Page->location->add_root_link ();
-    $Page->location->append ('Users');
+    $Page->location->append ($Page->title->subject);
 
     $Page->start_display ();
-
-    $box = $Page->make_box_renderer ();
-    $box->start_column_set ();
-    $box->new_column_of_type ('left-column');
   ?>
-  <div class="side-bar">
-    <div class="side-bar-title">
-      Search
-    </div>
-    <div class="side-bar-body">
-    <?php
+  <div class="box">
+    <div class="top-box">
+      <?php
+      $box = $Page->make_box_renderer ();
+      $box->start_column_set ();
+      $box->new_column_of_type ('description-box');
+      ?>
+      <p>This page lists all of the registered users for <?php echo $App->title; ?>.</p>
+      <?php
+      $box->new_column_of_type ('tools-box');
+
+      echo '<h4>Search</h4>';
+
       $class_name = $App->final_class_name ('EXECUTE_SEARCH_FORM', 'webcore/forms/execute_search_form.php');
       $search = null;
       $form = new $class_name ($App, $search);
       $form->load_with_defaults ();
       $form->set_value ('type', 'user');
       $form->display ();
-    ?>
-    </div>
-  </div>
-  <?php
-    $box->new_column_of_type ('right-column');
-  ?>
-  <div class="box">
-    <div class="box-title">
-      <?php echo $user_query->size (); if ($show_anon) echo ' Anonymous'; else echo ' Registered'; ?> Users
-    </div>
-    <?php
+
+      $box->new_column_of_type ('tools-box');
+
+      echo '<h4>Tools</h4>';
+
       $class_name = $App->final_class_name ('USER_MANAGEMENT_COMMANDS', 'webcore/cmd/user_management_commands.php');
       $commands = new $class_name ($App);
       $renderer = $App->make_menu_renderer ();
+      $renderer->set_size(Menu_size_standard);
       $renderer->num_important_commands = 1;
+      $renderer->alignment = Menu_align_inline;
       $renderer->display_as_toolbar ($commands);
-    ?>
+
+      $box->finish_column_set ();
+      ?>
+    </div>
     <div class="box-body">
     <?php
       $class_name = $Page->final_class_name ('USER_GRID', 'webcore/gui/user_grid.php');
       $grid = new $class_name ($App);
-      $grid->set_ranges (10, 1);
+      $grid->set_ranges (10, 3);
       $grid->set_query ($user_query);
       $grid->display ();
      ?>

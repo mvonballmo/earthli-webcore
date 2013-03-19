@@ -154,10 +154,12 @@ class COMMENT_LIST_RENDERER extends WEBCORE_OBJECT
     if ($this->_comment_query->size () > 1)
     {
 ?>
-  <div class="menu-bar-top">
-<?php
+  <div>
+    <span class="field"><?php echo $this->_comment_query->size (); ?></span> Replies
+    &mdash;
+    <?php
       $menu = $this->context->make_menu ();
-      $menu->renderer->alignment = Menu_align_default;
+      $menu->renderer->alignment = Menu_align_inline;
   
       switch ($this->comment_mode)
       {
@@ -170,10 +172,9 @@ class COMMENT_LIST_RENDERER extends WEBCORE_OBJECT
         $menu->append ('Show Flat', $this->_obj->home_page () . "&comment_mode=flat#comments");
         break;
       }
-      
+
       $menu->display ();
 ?>
-    <span class="field"><?php echo $this->_comment_query->size (); ?></span> Replies
   </div>
 <?php
     }    

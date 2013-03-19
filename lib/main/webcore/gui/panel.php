@@ -312,7 +312,6 @@ class PANEL_MANAGER extends WEBCORE_OBJECT
   public function display ()
   {
   ?>
-  <div style="margin-top: 1em; margin-bottom: 1em">
     <table cellpadding="0" cellspacing="0">
     <?php
       foreach ($this->_location_order as $id)
@@ -340,7 +339,6 @@ class PANEL_MANAGER extends WEBCORE_OBJECT
       }
     ?>
     </table>
-  </div>
 <?php
   }
 
@@ -736,7 +734,6 @@ class WEBCORE_PANEL_MANAGER extends PANEL_MANAGER
     $class_name = $this->app->final_class_name ('FOLDER_PANEL');
     $panel = new $class_name ($this, $folders);
     $panel->recurse_tree_for_count = true;
-    $panel->columns = 1;
     $this->add_panel ($panel);
   }
 
@@ -1217,6 +1214,12 @@ class COMMENT_PANEL extends QUERY_PANEL
   public $show_folder = true;
 
   /**
+   * Number of columns to use in the grid.
+   * @var integer
+   */
+  public $columns = 2;
+
+  /**
    * @return COMMENT_GRID
    * @access private
    */
@@ -1300,7 +1303,13 @@ class USER_PANEL extends QUERY_PANEL
    * @var string
    */
   public $title = 'Users';
-  
+
+  /**
+   * Number of columns to use in the grid.
+   * @var integer
+   */
+  public $columns = 3;
+
   /**
    * @var boolean
    */
@@ -1381,7 +1390,7 @@ class THEME_PANEL extends QUERY_PANEL
    * Number of columns to use in the grid.
    * @var integer
    */
-  public $columns = 2;
+  public $columns = 3;
 
   /**
    * @param PANEL_MANAGER $manager Owner of this panel.
@@ -1555,7 +1564,7 @@ class FOLDER_PANEL extends GRID_PANEL
   /**
    * @var integer
    */
-  public $columns = 2;
+  public $columns = 3;
   
   /**
    * @var integer

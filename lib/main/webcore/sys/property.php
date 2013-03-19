@@ -50,7 +50,7 @@ require_once ('webcore/obj/webcore_object.php');
 class PROPERTY_VALUE extends WEBCORE_OBJECT
 {
   /**
-   * The actul stored value.
+   * The actual stored value.
    * Usually stored as this value in a database. The {@link $title} and {@link $icon} are for
    * displaying properties with this value.
    * @var integer

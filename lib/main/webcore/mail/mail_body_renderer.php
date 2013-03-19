@@ -79,7 +79,7 @@ class MAIL_BODY_RENDERER extends MAIL_RENDERER
    */
   public function add ($obj, $renderer)
   {
-    $pair = null; // Compiler warning
+    $pair = new stdClass();
     $pair->obj = $obj;
     $pair->renderer = $renderer;
     $this->objects [] = $pair;
@@ -93,7 +93,7 @@ class MAIL_BODY_RENDERER extends MAIL_RENDERER
    */
   public function as_html ($options)
   {
-    $state = null; // Compiler warning
+    $state = new stdClass();
     $this->_start_rendering ($options, $state);
     $Result = $this->_html_header () . $this->_html_content ($options) . $this->_html_footer ();
     $this->_finish_rendering ($options, $state);
@@ -114,7 +114,7 @@ class MAIL_BODY_RENDERER extends MAIL_RENDERER
    */
   public function as_text ($options)
   {
-    $state = null; // Compiler warning
+    $state = new stdClass();
     $this->_start_rendering ($options, $state);
     $Result = $this->_text_content ($options);
     $this->_finish_rendering ($options, $state);

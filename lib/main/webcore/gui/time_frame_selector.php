@@ -114,18 +114,18 @@ class TIME_FRAME_SELECTOR extends WEBCORE_OBJECT
   public function display ()
   {
     $this->assert (! empty ($this->page_link), 'Page name cannot be empty.', 'display', 'TIME_FRAME_SELECTOR');
-?>
-  <div class="detail">
-<?php
     $menu = $this->context->make_menu ();
     $menu->renderer->separator = $this->context->display_options->menu_separator;
 
     $url = new URL ($this->page_link);
-    $url->replace_argument ('time_frame', Time_frame_today);
-    $menu->append ('Today', $url->as_text (), '', $this->period == Time_frame_today);
-
     $url->replace_argument ('time_frame', Time_frame_recent);
     $menu->append ('Recent', $url->as_text (), '', $this->period == Time_frame_recent);
+
+    $url->replace_argument ('time_frame', Time_frame_all);
+    $menu->append ('All', $url->as_text (), '', $this->period == Time_frame_all);
+
+    $url->replace_argument ('time_frame', Time_frame_today);
+    $menu->append ('Today', $url->as_text (), '', $this->period == Time_frame_today);
 
     $url->replace_argument ('time_frame', Time_frame_last_week);
     $menu->append ('Last Week', $url->as_text (), '', $this->period == Time_frame_last_week);
@@ -133,13 +133,7 @@ class TIME_FRAME_SELECTOR extends WEBCORE_OBJECT
     $url->replace_argument ('time_frame', Time_frame_last_month);
     $menu->append ('Last Month', $url->as_text (), '', $this->period == Time_frame_last_month);
 
-    $url->replace_argument ('time_frame', Time_frame_all);
-    $menu->append ('All', $url->as_text (), '', $this->period == Time_frame_all);
-
     $menu->display ();
-?>
-  </div>
-<?php
   }
 
   /**

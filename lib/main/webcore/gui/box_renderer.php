@@ -50,6 +50,18 @@ require_once ('webcore/obj/webcore_object.php');
 class BOX_RENDERER extends WEBCORE_OBJECT
 {
   /**
+   * A CSS-style specifying the width of the box.
+   * @var string
+   */
+  var $width = '100%';
+
+  /**
+   * A CSS-style specifying the height of the box.
+   * @var string
+   */
+  var $height = '';
+
+  /**
    * @param CONTEXT $context
    */
   public function __construct ($context)
@@ -66,13 +78,27 @@ class BOX_RENDERER extends WEBCORE_OBJECT
    */
   public function start_column_set ()
   {
+    include_once('webcore/util/tags.php');
+    $builder = new CSS_STYLE_BUILDER();
+
+    if ($this->width)
+    {
+      $builder->add_attribute('width', $this->width);
+    }
+
+    if ($this->height)
+    {
+      $builder->add_attribute('height', $this->height);
+    }
+
     if ($this->_supports_css_tables)
     {
-      echo '<div style="display: table; width: 100%">' . "\n";
+      $builder->add_attribute('display', 'table');
+      echo '<div style="' . $builder->as_text() . '">' . "\n";
     }
     else
     {
-      echo '<table cellpadding="0" cellspacing="0" style="width: 100%"><tr>' . "\n";
+      $tag = '<table cellpadding="0" cellspacing="0" style="' . $builder->as_text() . '"><tr>' . "\n";
     }
   }
   

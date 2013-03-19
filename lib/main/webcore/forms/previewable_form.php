@@ -312,8 +312,8 @@ class FORM_PREVIEW_SETTINGS extends WEBCORE_OBJECT
     $layer = $this->context->make_layer ('obj_' . uniqid (rand ()));
     $layer->visible = $this->visible;
 ?>
-<div class="preview" style="margin-bottom: 1em">
-  <div class="preview-title"><?php $layer->draw_toggle (); echo ' ' . $this->title; ?></div>
+    <h3 class="preview-title"><?php $layer->draw_toggle (); echo ' ' . $this->title; ?></h3>
+<div class="preview" style="margin-left: 20px">
   <?php $layer->start (); ?>
   <div class="preview-body">
     <?php $this->_display (); ?>

@@ -43,7 +43,7 @@ http://www.earthli.com/software/webcore
     $Page->title->add_object ($folder);
 
     $Page->location->add_folder_link ($folder);
-    $Page->location->append ('Permissions', $folder->permissions_home_page ());
+    $Page->location->append ($App->resolve_icon_as_html ('{icons}buttons/security', ' ', '16px') . ' Permissions', $folder->permissions_home_page ());
 
     if ($folder->defines_security ())
     {
@@ -59,10 +59,7 @@ http://www.earthli.com/software/webcore
     $Page->start_display ();
   ?>
   <div class="box">
-    <div class="box-title">
-      <?php echo $App->title_bar_icon ('{icons}buttons/security'); ?> <?php echo $Page->title->subject; ?>
-    </div>
-    <div class="box-body">
+    <div class="box-body text-flow">
     <?php
       $form->display ();
     ?>

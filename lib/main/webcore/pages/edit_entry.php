@@ -65,14 +65,11 @@ http://www.earthli.com/software/webcore
 
     $Page->location->add_folder_link ($folder);
     $Page->location->add_object_link ($entry);
-    $Page->location->append ($Page->title->subject);
+    $Page->location->append ($App->resolve_icon_as_html ('{icons}buttons/edit', ' ', '16px') . ' ' . $Page->title->subject);
 
     $Page->start_display ();
   ?>
   <div class="box">
-    <div class="box-title">
-      <?php echo $App->title_bar_icon ('{icons}buttons/edit'); ?> Edit <?php echo $entry_type_info->singular_title; ?>
-    </div>
     <?php
       $commands = $entry->handler_for (Handler_commands);
       $commands->disable_all_except (array('attach'));
@@ -80,7 +77,7 @@ http://www.earthli.com/software/webcore
       $renderer->target = '_blank';
       $renderer->display_as_toolbar ($commands);
     ?>
-    <div class="box-body">
+    <div class="box-body form-content">
     <?php
       $form->display ();
     ?>

@@ -55,56 +55,38 @@ class USER_RENDERER extends CONTENT_OBJECT_RENDERER
    */
   protected function _display_as_html ($obj)
   {
-    $this->_echo_subscribe_status ($obj);
-    $main_style = '';
-    if ($obj->icon_url)
+    if ($this->_options->show_as_summary)
     {
-      $main_style .= ' margin-left: 60px';
-      echo '<div style="float: left; margin-right: 10px">';
-      echo $obj->icon_as_html ('50px');
-      echo '</div>';
-    }
-    
-    if ($obj->picture_url && ! $this->_options->show_as_summary)
-    {
-      $class_name = $this->app->final_class_name ('IMAGE_METRICS', 'webcore/util/image.php');
-      $metrics = new $class_name ();
-      $metrics->set_url ($this->context->resolve_file ($obj->picture_url, Force_root_on));
-      $metrics->resize_to_fit (200, 150);
-?>
-     <div style="float: right"><?php echo $metrics->as_html ('Picture'); ?></div>
-<?php 
-    }
-    
-    if ($main_style)
-    {
-      echo '<div style="' . $main_style . '">';
-    }
-      
-    $this->_echo_properties_as_html ($obj);
-    
-    if ($obj->description)
-    {
-      echo $obj->description_as_html ();
-    }
+      if ($obj->picture_url)
+      {
+        $class_name = $this->app->final_class_name ('IMAGE_METRICS', 'webcore/util/image.php');
+        $metrics = new $class_name ();
+        $metrics->set_url ($this->context->resolve_file ($obj->picture_url, Force_root_on));
+        $metrics->resize_to_fit (200, 200);
+        echo '<p>' . $metrics->as_html ('Picture', '') . '</p>';
+      }
+      else if ($obj->icon_url)
+      {
+        $main_style .= ' margin-left: 60px';
+        echo '<p>';
+        echo $obj->icon_as_html ('50px');
+        echo '</p>';
+      }
 
-    if ($obj->signature)
-    {
-      echo $obj->signature_as_html ();
+      $this->_echo_properties_as_html ($obj);
     }
-
-    if ($main_style)
+    else
     {
-      echo '</div>';
-    }
+      if ($obj->picture_url)
+      {
+        ?>
+        <img src="<?php echo $obj->full_picture_url (); ?>" alt="Picture">
+      <?php
+      }
 
-    $this->_echo_html_user_information ($obj, 'info-box-bottom');
-    
-    if ($obj->picture_url && $this->_options->show_as_summary)
-    {
-?>
-    <img class="frame" src="<?php echo $obj->full_picture_url (); ?>" alt="Picture">
-<?php 
+      $this->_echo_properties_as_html ($obj);
+
+      $this->_echo_html_user_information ($obj, 'info-box-bottom');
     }
   }
   
@@ -116,7 +98,7 @@ class USER_RENDERER extends CONTENT_OBJECT_RENDERER
   protected function _echo_properties_as_html ($obj)
   {
 ?>    
-  <dl>
+  <dl class="compact">
     <dt class="field">
       Name
     </dt>
@@ -157,7 +139,7 @@ class USER_RENDERER extends CONTENT_OBJECT_RENDERER
       ?>
     </dd>
     <?php
-      if ($this->_options->show_as_summary)
+      if (!$this->_options->show_as_summary)
       {
     ?>
     <dt class="field">

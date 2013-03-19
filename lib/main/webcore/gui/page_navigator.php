@@ -80,7 +80,7 @@ class PAGE_NAVIGATOR extends WEBCORE_OBJECT
    * Optional page anchor for the page_link.
    * @var string
    */
-  public $page_anchor = 'pages';
+  public $page_anchor = '';
 
   /**
    * Inserted between page numbers.
@@ -92,13 +92,13 @@ class PAGE_NAVIGATOR extends WEBCORE_OBJECT
    * Inserted after first/previous links and before page numbers.
    * @var string
    */
-  public $begin_block = '&nbsp;';
+  public $begin_block = '';
 
   /**
    * Inserted after page numbers and before next/last links.
    * @var string
    */
-  public $end_block = '&nbsp;';
+  public $end_block = '';
 
   /**
    * Number of page numbers to display at once.
@@ -135,8 +135,14 @@ class PAGE_NAVIGATOR extends WEBCORE_OBJECT
    * Show icons for the first/previous/next/last links?
    * @var boolean
    */
-  public $use_icons_for_buttons = true;
-  
+  public $use_icons_for_buttons = false;
+
+  /**
+   * Show disabled buttons for non-functional buttons? Or just hide them?
+   * @var boolean
+   */
+  public $show_disabled_buttons = true;
+
   /**
    * @param CONTEXT $context
    * @param integer $num_total_objects Total number of objects that need to be displayed.
@@ -280,16 +286,27 @@ class PAGE_NAVIGATOR extends WEBCORE_OBJECT
       // put in the first page if there are more pages than
       // can be displayed
 
-      if ($many_pages && ($this->page_number > 1))
+      if ($many_pages)
       {
-        $this->_output = "<a title=\"First Page\" href=\"" . $this->_make_page_link (1) . "\">" . $this->_get_button_content('first') . "</a>";
+        if ($this->page_number > 1)
+        {
+          $this->_output = "<a title=\"First Page\" href=\"" . $this->_make_page_link (1) . "\">" . $this->_get_button_content('go_to_first') . "</a>";
+        }
+        else if ($this->show_disabled_buttons)
+        {
+          $this->_output = '<span class="button disabled">' . $this->_get_button_content('go_to_first_disabled') . "</span>";
+        }
       }
 
       // put in the previous page, if necessary
 
       if ($this->page_number > 1)
       {
-        $this->_output .= "<a title=\"Previous Page\" href=\"" . $this->_make_page_link ($this->page_number - 1) . "\">" . $this->_get_button_content('previous') . "</a>";
+        $this->_output .= "<a title=\"Previous Page\" href=\"" . $this->_make_page_link ($this->page_number - 1) . "\">" . $this->_get_button_content('go_to_previous') . "</a>";
+      }
+      else if ($this->show_disabled_buttons)
+      {
+        $this->_output .= '<span class="button disabled">' . $this->_get_button_content('go_to_previous_disabled') . "</span>";
       }
 
       $this->_output .= $this->begin_block;
@@ -338,15 +355,24 @@ class PAGE_NAVIGATOR extends WEBCORE_OBJECT
 
       if ($this->page_number < $this->_count)
       {
-        $this->_output .= "<a title=\"Next Page\" href=\"" . $this->_make_page_link ($this->page_number + 1) . "\">" . $this->_get_button_content('next') . "</a>";
+        $this->_output .= "<a title=\"Next Page\" href=\"" . $this->_make_page_link ($this->page_number + 1) . "\">" . $this->_get_button_content('go_to_next') . "</a>";
+      }
+      else if ($this->show_disabled_buttons)
+      {
+        $this->_output .= '<span class="button disabled">' . $this->_get_button_content('go_to_next_disabled') . "</span>";
       }
 
       if ($many_pages)
       {
         if ($this->page_number < $this->_count)
         {
-          $this->_output .= "<a title=\"Last Page\" href=\"" . $this->_make_page_link ($this->_count) . "\">" . $this->_get_button_content('last') . "</a>";
+          $this->_output .= "<a title=\"Last Page\" href=\"" . $this->_make_page_link ($this->_count) . "\">" . $this->_get_button_content('go_to_last') . "</a>";
         }
+        else
+        {
+          $this->_output .= '<span class="button disabled">' . $this->_get_button_content('go_to_last_disabled') . "</span>";
+        }
+
 
         if ($this->show_total)
         {
@@ -359,36 +385,46 @@ class PAGE_NAVIGATOR extends WEBCORE_OBJECT
       $this->pages = "<span class=\"selected\">1</span>";
     }
   }
-  
+
   protected function _get_button_content($type)
   {
     if ($this->use_icons_for_buttons)
     {
       switch ($type)
       {
-        case 'first':
-          return $this->context->resolve_icon_as_html ('{icons}buttons/go_to_first', 'First page', '16px');
-        case 'previous':
-          return $this->context->resolve_icon_as_html ('{icons}buttons/go_to_previous', 'Previous page', '16px');
-        case 'next':
-          return $this->context->resolve_icon_as_html ('{icons}buttons/go_to_next', 'Next page', '16px');
-        case 'last':
-          return $this->context->resolve_icon_as_html ('{icons}buttons/go_to_last', 'Last page', '16px');
+        case 'go_to_first':
+        case 'go_to_first_disabled':
+          $text = 'First page';
+        case 'go_to_previous':
+        case 'go_to_previous_disabled':
+          $text = 'Previous page';
+        case 'go_to_next':
+        case 'go_to_next_disabled':
+          $text = 'Next page';
+        case 'go_to_last':
+        case 'go_to_last_disabled':
+          $text = 'Last page';
       }
+
+      return $this->context->resolve_icon_as_html ('{icons}buttons/' . $type, $text, '16px');
     }
     else
     {
       switch ($type)
       {
-        case 'first':
-          return '&lt;&lt;';
-        case 'previous':
+        case 'go_to_first':
+        case 'go_to_first_disabled':
+          return '|&lt;';
+        case 'go_to_previous':
+        case 'go_to_previous_disabled':
           return '&lt;';
-        case 'next':
+        case 'go_to_next':
+        case 'go_to_next_disabled':
           return '&gt;';
-        case 'last':
-          return '&gt;&gt;';
-        }
+        case 'go_to_last':
+        case 'go_to_last_disabled':
+          return '&gt;|';
+      }
     }
   }
 

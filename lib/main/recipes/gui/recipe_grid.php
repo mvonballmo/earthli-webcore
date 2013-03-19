@@ -59,14 +59,9 @@ class RECIPE_GRID extends CONTENT_OBJECT_GRID
   public $box_style = 'object-in-list';
 
   /**
-   * @var integer
-   */
-  public $spacing = 4;
-
-  /**
    * @var boolean
    */
-  public $show_separator = false;
+  public $show_separator = true;
 
   /**
    * @var boolean
@@ -87,38 +82,42 @@ class RECIPE_GRID extends CONTENT_OBJECT_GRID
     $folder = $obj->parent_folder ();
     $creator = $obj->creator ();
   ?>
-  <div class="grid-title">
-  <?php
-    if ($this->show_folder)
-    {
-      echo $folder->title_as_link () . $this->app->display_options->object_separator;
-    }
-    echo $this->obj_link ($obj);
-  ?>
-  </div>
-  <div>
-    <?php
-      $this->_draw_menu_for ($obj, Menu_size_compact);
-    ?>
-    <span class="detail"><?php if ($this->show_user) { echo $creator->title_as_link (); ?> - <?php } ?>
-    <?php echo $obj->time_created->format (); ?></span>
-  </div>
-  <div class="description">
-    <?php
-      if ($obj->originator)
-      {
-    ?>
-    <div>
-      From the kitchen of <span class="field"><?php echo $obj->originator; ?></span>
+  <div class="grid-item">
+    <div class="minimal-commands">
+      <?php $this->_draw_menu_for ($obj, Menu_size_minimal, Menu_align_inline); ?>
     </div>
-    <?php
-      }
-  
-      if ($obj->description && ! $this->items_are_selectable)
-      {
-        echo $obj->description_as_html ();
-      }
-    ?>
+    <div class="minimal-commands-content">
+      <div class="grid-title">
+      <?php
+        if ($this->show_folder)
+        {
+          echo $folder->title_as_link () . $this->app->display_options->object_separator;
+        }
+        echo $this->obj_link ($obj);
+      ?>
+      </div>
+      <div>
+        <span class="detail"><?php if ($this->show_user) { echo $creator->title_as_link (); ?> - <?php } ?>
+        <?php echo $obj->time_created->format (); ?></span>
+      </div>
+      <div class="description" style="margin-right: 20%">
+        <?php
+          if ($obj->originator)
+          {
+        ?>
+        <p>
+          From the kitchen of <em><?php echo $obj->originator; ?></em>
+        </p>
+        <?php
+          }
+
+          if ($obj->description && ! $this->items_are_selectable)
+          {
+            echo $obj->description_as_html ();
+          }
+        ?>
+      </div>
+    </div>
   </div>
   <?php
   }

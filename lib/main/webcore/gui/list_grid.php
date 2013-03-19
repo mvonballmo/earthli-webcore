@@ -79,7 +79,7 @@ abstract class LIST_GRID extends STANDARD_GRID
    */
   public function append_column ($name, $alignment = 'left')
   {
-    $col = null;  // Compiler warning
+    $col = new stdClass();
     $col->name = $name;
     $col->alignment = $alignment;
     $this->_columns [] = $col;
@@ -93,7 +93,7 @@ abstract class LIST_GRID extends STANDARD_GRID
    */
   public function prepend_column ($name, $alignment = 'left')
   {
-    $col = null; // Compiler warning
+    $col = new stdClass();
     $col->name = $name;
     $col->alignment = $alignment;
     array_unshift ($this->_columns, $col);

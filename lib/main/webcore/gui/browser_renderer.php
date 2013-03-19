@@ -51,7 +51,7 @@ class BROWSER_RENDERER extends OBJECT_RENDERER
   /**
    * @var boolean
    */
-  public $show_user_agent = false;
+  public $show_user_agent = true;
   
   /**
    * Outputs the object as HTML.
@@ -61,13 +61,6 @@ class BROWSER_RENDERER extends OBJECT_RENDERER
   protected function _display_as_html ($obj)
   {
     $browser = $obj;
-    
-    if ($this->show_user_agent)
-    {
-?>
-    <p><?php echo $browser->user_agent_string; ?></p>
-<?php    
-    }
 ?>
     <dl>
       <dt class="field">Application</dt>
@@ -113,6 +106,8 @@ class BROWSER_RENDERER extends OBJECT_RENDERER
         echo $this->_boolean_as_html ($browser->supports (Browser_CSS_2), '2.0');
         echo ' ';
         echo $this->_boolean_as_html ($browser->supports (Browser_CSS_2_1), '2.1');
+        echo ' ';
+        echo $this->_boolean_as_html ($browser->supports (Browser_columns), 'columns');
       ?>
       </dd>
       <dt class="field">DOM</dt>
@@ -131,6 +126,17 @@ class BROWSER_RENDERER extends OBJECT_RENDERER
       <dd class="detail">
         <?php echo $this->_boolean_as_html ($browser->supports (Browser_cookie)); ?>
       </dd>
+      <?php
+      if ($this->show_user_agent)
+      {
+        ?>
+        <dt class="field">User Agent String</dt>
+        <dd class="detail">
+          <?php echo $browser->user_agent_string; ?>
+        </dd>
+        <?php
+      }
+      ?>
     </dl>
 <?php    
   }

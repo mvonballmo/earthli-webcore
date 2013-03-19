@@ -56,20 +56,21 @@ function _configure_album_panels ($manager)
   {
     $panel = $manager->panel_at ('picture');
     $panel->rows = 10;
-    $panel->columns = 2;
+    $panel->columns = 3;
     $panel->default_time_frame = Time_frame_all;
   }
 
   if ($manager->is_panel ('journal'))
   {
     $panel = $manager->panel_at ('journal');
-    $panel->default_time_frame = Time_frame_all; 
+    $panel->default_time_frame = Time_frame_all;
+    $panel->columns = 2;
   }
 
   if ($manager->is_panel ('album'))
   {
     $panel = $manager->panel_at ('album');
-    $panel->columns = 2;
+    $panel->columns = 3;
   }
 }
 

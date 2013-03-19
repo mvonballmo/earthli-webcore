@@ -44,9 +44,11 @@ http://www.earthli.com/software/webcore/albums
     $panel_manager = new $class_name ($folder);
     $panel = $panel_manager->selected_panel ();
 
-    $Page->location->add_folder_text ($folder, 'panel=' . $panel_manager->selected_panel_id);
     $Page->title->add_object ($folder);
-    $Page->title->subject = $panel->raw_title();
+    $Page->title->subject = $panel->num_objects () . ' ' . $panel->raw_title();
+
+    $Page->location->add_folder_text ($folder, 'panel=' . $panel_manager->selected_panel_id);
+    $Page->location->append($Page->title->subject);
 
     $Page->add_script_file ('{scripts}webcore_forms.js');
     
@@ -55,36 +57,33 @@ http://www.earthli.com/software/webcore/albums
     $Page->newsfeed_options->file_name = '{app}/view_folder_rss.php?id=' . $folder->id;
 
     $Page->start_display ();
-
-    $box = $Page->make_box_renderer ();
-    $box->start_column_set ();
-    $box->new_column_of_type ('left-column');
 ?>
-  <div class="side-bar">
-    <div class="side-bar-title">
-      <?php 
-        $newsfeed_commands = $Page->newsfeed_options->make_commands($App);
-        $renderer = $App->make_newsfeed_menu_renderer ();
-        $renderer->display ($newsfeed_commands);
-        
-        echo $folder->icon_as_html ('20px') . ' ' . $folder->title_as_html (); 
-      ?>
-    </div>
-    <div class="side-bar-body">
+  <div class="box">
+    <div class="box-body">
+      <div class="top-box">
       <?php
+        $box = $Page->make_box_renderer ();
+        $box->start_column_set ();
+        $box->new_column_of_type ('description-box');
+
         $renderer = $folder->handler_for (Handler_html_renderer);
         $options = $renderer->options ();
         $options->show_as_summary = true;
         $options->show_users = false;
         $renderer->display ($folder);
 
+        $box->new_column_of_type ('contents-box');
+
+        echo '<h4>Contents</h4>';
         $panel_manager->display ();
 
         if (! empty ($folders))
         {
+          $box->new_column_of_type('sub-folders-box');
+
           $folder_type_info = $App->type_info_for ('FOLDER');
           echo '<h4>Sub-' . $folder_type_info->plural_title . '</h4>';
-          /* Make a copy (not a reference). */
+
           $tree = $App->make_tree_renderer ();
           include_once ('webcore/gui/folder_tree_node_info.php');
           $tree->centered = false;
@@ -92,46 +91,55 @@ http://www.earthli.com/software/webcore/albums
           $tree->node_info->page_args = read_vars (array ('panel', 'time_frame'));
           $tree->display ($folders);
         }
+
+        $box->new_column_of_type ('tools-box');
+
+        echo '<h4>Search</h4>';
+
+        $class_name = $App->final_class_name ('EXECUTE_SEARCH_FORM', 'webcore/forms/execute_search_form.php');
+        $search = null;
+        $selected_panel = $panel_manager->selected_panel ();
+        $form = new $class_name ($App, $search);
+        $form->load_with_defaults ();
+        $form->set_value ('state', $selected_panel->state);
+        $form->set_value ('folder_ids', $folder->id);
+        $form->set_value ('folder_search_type', Search_user_constant);
+        $form->display ();
+
+        if (empty ($folders))
+        {
+          $box->new_column_of_type ('tools-box');
+          echo '<h4>Tools</h4>';
+        }
+        else
+        {
+          echo '<h4>Tools</h4>';
+        }
+
+        $renderer = $folder->handler_for (Handler_menu);
+        $renderer->alignment = Menu_align_right;
+        $renderer->set_size(Menu_size_compact);
+        $renderer->display($folder->handler_for (Handler_commands));
+
+        $newsfeed_commands = $Page->newsfeed_options->make_commands($App);
+        $renderer = $App->make_newsfeed_menu_renderer ();
+        $renderer->set_size (Menu_size_compact);
+        $renderer->alignment = Menu_align_inline;
+        $renderer->display ($newsfeed_commands);
+
+        $subscription_status = $folder->handler_for (Handler_subscriptions);
+        $subscription_status->display ($folder);
+
+        $box->finish_column_set ();
       ?>
-    </div>
-  </div>
-  <br>
-  <div class="side-bar">
-    <div class="side-bar-title">
-      Search
-    </div>
-    <div class="side-bar-body">
-    <?php
-      $class_name = $App->final_class_name ('EXECUTE_SEARCH_FORM', 'webcore/forms/execute_search_form.php');
-      $search = null;
-      $selected_panel = $panel_manager->selected_panel ();
-      $form = new $class_name ($App, $search);
-      $form->load_with_defaults ();
-      $form->set_value ('state', $selected_panel->state);
-      $form->set_value ('folder_ids', $folder->id);
-      $form->set_value ('folder_search_type', Search_user_constant);
-      $form->display ();
-    ?>
-    </div>
-  </div>
-<?php
-    $box->new_column_of_type ('right-column');
-?>
-  <div class="box">
-    <div class="box-title">
-    <?php echo $panel->raw_title (); ?>
-    </div>
-    <?php
-    $renderer = $folder->handler_for (Handler_menu);
-    $renderer->display_as_toolbar ($folder->handler_for (Handler_commands));
-    ?>
-  <?php if ($panel->uses_time_selector) { ?>
-    <div class="menu-bar-top" style="text-align: center">
+      </div>
+    <?php if ($panel->uses_time_selector) { ?>
+    <div class="menu-bar-top">
       <?php $panel_manager->display_time_menu (); ?>
     </div>
-  <?php } ?>
-    <div class="box-body">
-    <?php $panel->display (); ?>
+    <?php } ?>
+    <?php
+      $panel->display (); ?>
     </div>
   <?php
     if ($panel->num_objects () && $panel->uses_time_selector)
@@ -139,7 +147,7 @@ http://www.earthli.com/software/webcore/albums
       // don't show the bottom selector if there are no objects
 
   ?>
-    <div class="menu-bar-bottom" style="text-align: center">
+    <div class="menu-bar-bottom">
       <?php $panel_manager->display_time_menu (); ?>
     </div>
   <?php
@@ -147,7 +155,6 @@ http://www.earthli.com/software/webcore/albums
   ?>
   </div>
 <?php
-    $box->finish_column_set ();
     $Page->finish_display ();
   }
   else

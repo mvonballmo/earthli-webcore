@@ -78,15 +78,14 @@ class FLAT_COMMENT_GRID extends PRINTABLE_COMMENT_GRID
   {
     $creator = $obj->creator ();
 ?>
-    <div class="info-box-top">
+    <div>
       <?php
         if ($creator->icon_url)
         {
       ?>
-      <div style="float: left; margin-right: .5em">
-        <?php echo $creator->icon_as_html (); ?>
+      <div class="left-icon" style="width: 32px; height: 32px; background-image: url(<?php echo $creator->expanded_icon_url ('32px'); ?>)">
       </div>
-      <?php
+        <?php
         }
       ?>
       <div>
@@ -103,8 +102,8 @@ class FLAT_COMMENT_GRID extends PRINTABLE_COMMENT_GRID
             }
           }
         ?>
-        <div style="margin-bottom: .25em">
-          <?php echo $obj->icon () . ' ' . $obj->title_as_link (); ?>
+        <div class="comment-title" style="background-image: url('<?php echo $obj->icon_url (); ?>')">
+          <?php echo $obj->title_as_link (); ?>
         </div>
         <?php
           if ($this->show_user_info)

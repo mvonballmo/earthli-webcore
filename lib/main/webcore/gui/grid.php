@@ -73,7 +73,7 @@ abstract class GRID extends WEBCORE_OBJECT
    * Center the grid in its parent?
    * @var boolean
    */
-  public $centered = true;
+  public $centered = false;
 
   /**
    * Displays page navigation for the grid, if necessary.

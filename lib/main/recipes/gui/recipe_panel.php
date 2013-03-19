@@ -61,6 +61,9 @@ class RECIPE_PANEL_MANAGER_HELPER extends PANEL_MANAGER_HELPER
       $panel->rows = 10;
       $panel->columns = 2;
       $manager->move_panel_to ('folder', 0, Panel_selection);
+
+      $panel = $manager->panel_at ('recipe');
+      $panel->columns = 2;
     }
   }
 }

@@ -715,6 +715,9 @@ class FOLDER extends ATTACHMENT_HOST
       case Handler_history_item:
         include_once ('webcore/obj/webcore_history_items.php');
         return new FOLDER_HISTORY_ITEM ($this->app);
+      case Handler_subscriptions:
+        include_once ('webcore/gui/subscription_renderer.php');
+        return new FOLDER_SUBSCRIPTION_RENDERER ($this->app, $options);
       default:
         return parent::_default_handler_for ($handler_type, $options);
     }

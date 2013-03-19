@@ -44,7 +44,7 @@ http://www.earthli.com/software/webcore
     $panel = $panel_manager->selected_panel ();
 
     $Page->title->add_object ($user);
-    $Page->title->subject = $panel->raw_title ();
+    $Page->title->subject = $panel->num_objects () . ' ' . $panel->raw_title();
 
     $Page->newsfeed_options->title->group = $App->title;
     $Page->newsfeed_options->title->add_object ($user);
@@ -53,40 +53,48 @@ http://www.earthli.com/software/webcore
     $Page->location->add_root_link ();
     $Page->location->append ("Users", "view_users.php");
     $Page->location->add_object_text ($user);
+    $Page->location->append($Page->title->subject);
 
     $Page->start_display ();
-
-    $box = $Page->make_box_renderer ();
-    $box->start_column_set ();
-    $box->new_column_of_type ('left-column');
-?>
-  <div class="side-bar">
-    <div class="side-bar-title">
-      <?php echo $user->title_as_html (); ?>
-    </div>
-    <div class="side-bar-body">
-      <?php
-        $panel_manager->display ();  
-      ?>
-    </div>
-  </div>
-<?php
-    $box->new_column_of_type ('right-column');
 ?>
   <div class="box">
-    <?php
-      $renderer = $user->handler_for (Handler_menu);
-      $renderer->display_as_toolbar ($user->handler_for (Handler_commands));
-    ?>
-    <div class="box-title">
-      <?php echo $panel->raw_title (); ?>
-    </div>
-    <?php if ($panel->uses_time_selector) { ?>
-      <div class="menu-bar-top" style="text-align: center">
-        <?php $panel_manager->display_time_menu (); ?>
-      </div>
-    <?php } ?>
       <div class="box-body">
+        <div class="top-box">
+          <?php
+          $box = $Page->make_box_renderer ();
+          $box->start_column_set ();
+          $box->new_column_of_type ('description-box');
+
+          $renderer = $user->handler_for (Handler_html_renderer);
+          $options = $renderer->options ();
+          $options->show_as_summary = true;
+          $options->show_users = false;
+          $renderer->display ($user);
+
+          $box->new_column_of_type ('contents-box');
+
+          echo '<h4>Contents</h4>';
+          $panel_manager->display ();
+
+          $box->new_column_of_type ('tools-box');
+          echo '<h4>Tools</h4>';
+
+          $subscription_status = $user->handler_for (Handler_subscriptions);
+          $subscription_status->display ($user);
+
+          $renderer = $user->handler_for (Handler_menu);
+          $renderer->alignment = Menu_align_inline;
+          $renderer->set_size(Menu_size_compact);
+          $renderer->display_as_toolbar ($user->handler_for (Handler_commands));
+
+          $box->finish_column_set ();
+          ?>
+        </div>
+        <?php if ($panel->uses_time_selector) { ?>
+          <div class="menu-bar-top">
+            <?php $panel_manager->display_time_menu (); ?>
+          </div>
+        <?php } ?>
       <?php $panel->display (); ?>
       </div>
     <?php
@@ -94,7 +102,7 @@ http://www.earthli.com/software/webcore
       {
         // don't show the bottom selector if there are no objects
     ?>
-      <div class="menu-bar-bottom" style="text-align: center">
+      <div class="menu-bar-bottom">
         <?php $panel_manager->display_time_menu (); ?>
       </div>
     <?php

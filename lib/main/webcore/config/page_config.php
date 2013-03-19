@@ -414,7 +414,7 @@ class PAGE_TEMPLATE_OPTIONS
    * ENVIRONMENT}).
    * @var boolean
    */
-  public $show_statistics = true;
+  public $show_statistics = false;
 
   /**
    * Show the Contact/Support/Privacy links.

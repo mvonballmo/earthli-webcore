@@ -71,7 +71,7 @@ class OBJECT_NAVIGATOR extends WEBCORE_OBJECT
   /**
    * Text for the anchor of all generated links; can be empty.
    */
-  public $page_anchor = "navigator";
+  public $page_anchor = "";
 
   /**
    * Text for link that goes to previous page in the near list.
@@ -79,7 +79,7 @@ class OBJECT_NAVIGATOR extends WEBCORE_OBJECT
    * this link is provided to jump 'size' entries back in the list.
    * @var string
    */
-  public $list_previous_text = "[Previous Page]";
+  public $list_previous_text = "[Previous Items]";
 
   /**
    * Text for link that goes to next page in the near list.
@@ -87,7 +87,7 @@ class OBJECT_NAVIGATOR extends WEBCORE_OBJECT
    * this link is provided to jump 'window_size' entries forward in the list.
    * @var string
    */
-  public $list_next_text = "[Next Page]";
+  public $list_next_text = "[Next Items]";
 
   /**
    * Text for link that goes to first entry in the list.
@@ -114,6 +114,12 @@ class OBJECT_NAVIGATOR extends WEBCORE_OBJECT
   public $controls_last_text = "Last";
 
   /**
+   * Show icons for the previous/next links?
+   * @var boolean
+   */
+  public $use_icons_for_buttons = false;
+
+  /**
    * @param CONTEXT $context
    */
   public function __construct ($context)
@@ -122,7 +128,6 @@ class OBJECT_NAVIGATOR extends WEBCORE_OBJECT
 
     $opts = $context->display_options;
     $this->window_size = $opts->objects_to_show;
-    $this->separator = $opts->menu_separator . "\n";
     $this->num_entries = Unassigned;
     $this->page_link = $this->env->url (Url_part_no_host_path);
   }
@@ -198,64 +203,68 @@ class OBJECT_NAVIGATOR extends WEBCORE_OBJECT
     $this->_context->set_selected_id ($this->_selected);
     if ($this->_context->is_valid ())
     {
+      $this->_list_near_selected = '<ul>';
+
       $this->_url = new URL ($this->page_link);
 
       // Build the context list
 
       if (! $this->_context->is_on_first_page ())
       {
-        $this->_list_near_selected .= '<div style="text-align: center">' .
-                                      $this->_text_for_control ($this->_context->previous_page_object, $this->list_previous_text, 'move_up') .
-                                      "</div>\n";
+        $this->_list_near_selected .= '<li class="page-up">' .
+                                      $this->_text_for_control ($this->_context->previous_page_object, 'page_up') .
+                                      "</li>\n";
       }
 
       $objs = $this->_context->objects_in_window;
 
       foreach ($objs as $obj)
       {
-        $this->_list_near_selected .= $this->_text_for_list ($obj) . "<br>\n";
+        $this->_list_near_selected .= '<li>' . $this->_text_for_list ($obj) . "</li>\n";
       }
 
       if (! $this->_context->is_on_last_page ())
       {
-        $this->_list_near_selected .= '<div style="text-align: center">' .
-                                      $this->_text_for_control ($this->_context->next_page_object, $this->list_next_text, 'move_down') .
-                                      "</div>\n";
+        $this->_list_near_selected .= '<li class="page-down">' .
+                                      $this->_text_for_control ($this->_context->next_page_object, 'page_down') .
+                                      "</li>\n";
       }
+
+      $this->_list_near_selected .= '</ul>';
 
       // Build the navigation controls
 
       if (! $this->_context->is_first ())
       {
-        $this->_controls .= $this->_text_for_control ($this->_context->first_object, $this->controls_first_text, 'go_to_first') . $this->separator;
-        $this->_controls .= $this->_text_for_control ($this->_context->previous_object, $this->controls_previous_text, 'go_to_previous') . $this->separator;
+        $this->_controls .= $this->_text_for_control ($this->_context->first_object, 'first') . $this->separator;
+        $this->_controls .= $this->_text_for_control ($this->_context->previous_object, 'previous') . $this->separator;
       }
       else
       {
-        $this->_controls .= $this->app->resolve_icon_as_html ('{icons}buttons/go_to_first_disabled', $this->controls_first_text, '16px') . $this->separator;
-        $this->_controls .= $this->app->resolve_icon_as_html ('{icons}buttons/go_to_previous_disabled', $this->controls_previous_text, '16px') . $this->separator;
+        $this->_controls .= '<span class="disabled">' . $this->_get_button_content('first') . '</span>';
+        $this->_controls .= '<span class="disabled">' . $this->_get_button_content('previous') . '</span>';
+      }
+
+      if (! $this->_context->is_last ())
+      {
+        $this->_controls .= $this->_text_for_control ($this->_context->next_object, 'next') . $this->separator;
+        $this->_controls .= $this->_text_for_control ($this->_context->last_object, 'last');
+      }
+      else
+      {
+        $this->_controls .= '<span class="disabled">' . $this->_get_button_content('next') . '</span>';
+        $this->_controls .= '<span class="disabled">' . $this->_get_button_content('last') . '</span>';
       }
 
       if ($this->page_anchor)
       {
         $this->_controls .= '<span class="field" id="' . $this->page_anchor . '">' . $this->_context->position_of_selected_id .
-                            '</span> of <span class="field">' . $this->_context->num_objects_in_list . '</span>' . $this->separator . "\n";
+          '</span> of <span class="field">' . $this->_context->num_objects_in_list . '</span>' . $this->separator . "\n";
       }
       else
       {
         $this->_controls .= '<span class="field">' . $this->_context->position_of_selected_id .
-                            '</span> of <span class="field">' . $this->_context->num_objects_in_list . '</span>' . $this->separator . "\n";
-      }
-
-      if (! $this->_context->is_last ())
-      {
-        $this->_controls .= $this->_text_for_control ($this->_context->next_object, $this->controls_next_text, 'go_to_next') . $this->separator;
-        $this->_controls .= $this->_text_for_control ($this->_context->last_object, $this->controls_last_text, 'go_to_last');
-      }
-      else
-      {
-        $this->_controls .= $this->app->resolve_icon_as_html ('{icons}buttons/go_to_next_disabled', $this->controls_next_text, '16px') . $this->separator;
-        $this->_controls .= $this->app->resolve_icon_as_html ('{icons}buttons/go_to_last_disabled', $this->controls_last_text, '16px');
+          '</span> of <span class="field">' . $this->_context->num_objects_in_list . '</span>' . $this->separator . "\n";
       }
     }
   }
@@ -270,19 +279,15 @@ class OBJECT_NAVIGATOR extends WEBCORE_OBJECT
    * @return string
    * @access private
    */
-  protected function _text_for_control ($obj, $text, $icon = '')
+  protected function _text_for_control ($obj, $type)
   {
     $this->_url->replace_argument ('id', $obj->id);
     $t = $this->_formatter_for_object ($obj);
     $t->max_visible_output_chars = 0;
     $title = $obj->title_as_plain_text ($t);
 
-    if ($icon)
-    {
-      $text = $this->app->resolve_icon_as_html ("{icons}buttons/$icon", $title, '16px');
-    }
-
-    $title = $this->context->text_options->convert_to_html_attribute ($title);
+    $text = $this->_get_button_content($type);
+    $title = $this->_get_button_title($type) . ' (' . $this->context->text_options->convert_to_html_attribute ($title) . ')';
 
     if ($this->page_anchor)
     {
@@ -340,6 +345,67 @@ class OBJECT_NAVIGATOR extends WEBCORE_OBJECT
    */
   protected function _adjust_query ($query)
   {
+  }
+
+  protected function _get_button_content($type)
+  {
+    if ($this->use_icons_for_buttons)
+    {
+      $title = $this->_get_button_title($type);
+
+      switch ($type)
+      {
+        case 'first':
+          return $this->context->resolve_icon_as_html ('{icons}buttons/go_to_first', $title, '16px');
+        case 'previous':
+          return $this->context->resolve_icon_as_html ('{icons}buttons/go_to_previous', $title, '16px');
+        case 'next':
+          return $this->context->resolve_icon_as_html ('{icons}buttons/go_to_next', $title, '16px');
+        case 'last':
+          return $this->context->resolve_icon_as_html ('{icons}buttons/go_to_last', $title, '16px');
+        case 'page_up':
+          return $this->context->resolve_icon_as_html ('{icons}buttons/move_up', $title, '16px');
+        case 'page_down':
+          return $this->context->resolve_icon_as_html ('{icons}buttons/move_down', $title, '16px');
+      }
+    }
+    else
+    {
+      switch ($type)
+      {
+        case 'first':
+          return '|&lt;';
+        case 'previous':
+          return '&lt;';
+        case 'next':
+          return '&gt;';
+        case 'last':
+          return '&gt;|';
+        case 'page_up':
+          return $this->list_previous_text;
+        case 'page_down':
+          return $this->list_next_text;
+      }
+    }
+  }
+
+  protected function _get_button_title($type)
+  {
+    switch ($type)
+    {
+      case 'first':
+        return 'First page';
+      case 'previous':
+        return 'Previous page';
+      case 'next':
+        return 'Next page';
+      case 'last':
+        return 'Last page';
+      case 'page_up':
+        return $this->list_previous_text;
+      case 'page_down':
+        return $this->list_next_text;
+    }
   }
 
   /**

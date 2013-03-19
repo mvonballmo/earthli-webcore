@@ -77,7 +77,9 @@ class ALBUM_RENDERER extends FOLDER_RENDERER
       }
 
   ?>
-      <img class="frame" src="<?php echo $main_pic->full_thumbnail_name (); ?>" alt="<?php echo $pic_title; ?>" title="<?php echo $pic_title; ?>">
+      <p>
+        <img src="<?php echo $main_pic->full_thumbnail_name (); ?>" alt="<?php echo $pic_title; ?>" title="<?php echo $pic_title; ?>">
+      </p>
   <?php
 
       if ($this->_options->show_as_summary)

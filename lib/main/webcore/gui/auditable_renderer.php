@@ -115,51 +115,6 @@ class AUDITABLE_RENDERER extends OBJECT_RENDERER
    */
   protected function _echo_html_subscribed_toggle ($obj, $page_name, $kind)
   {
-    if ($this->_options->show_interactive)
-    {
-      $subscriber = $this->login->subscriber ();
-      if ($subscriber->email)
-      {
-        $kinds = $subscriber->receives_notifications_through ($obj);
-        
-        $obj_type_info = $obj->type_info ();
-        $obj_title = strtolower ($obj_type_info->singular_title);
-        $directly_subscribed = in_array ($kind, $kinds);
-        
-        $url = new URL ($page_name);
-        $url->add_arguments ('email=' . $subscriber->email . '&subscribed=' . ! $directly_subscribed);
-  
-        $icon = $this->context->resolve_icon_as_html ('{icons}indicators/subscribed', 'Subscribed', '16px', '');
-        if (sizeof ($kinds) > 0)
-        {
-          if ($directly_subscribed)
-          {
-            $text = 'You are subscribed to this ' . $obj_title . '. (<a href="' . $url->as_html () . '">Unsubscribe</a>)';
-          }
-          else
-          {
-            if (in_array (Subscribe_user, $kinds))
-            {
-              $creator = $obj->creator ();
-              $text = 'You are subscribed to this ' . $obj_title . ' through the user, ' . $creator->title_as_link () . '.';
-            }
-            else
-            {
-              $folder = $obj->parent_folder ();
-              $folder_type_info = $folder->type_info ();
-              $folder_title = strtolower ($folder_type_info->singular_title);
-              $text = 'You are subscribed to this ' . $obj_title . ' through its ' . $folder_title . ', ' . $folder->title_as_link () . '.';
-            }
-          }
-        }
-        else
-        {
-          $text = 'You are <strong>not</strong> subscribed to this ' . $obj_title . '. (<a href="' . $url->as_html () . '">Subscribe</a>)';
-        }
-
-        echo '<div class="status-indicator"><div style="float: left">' . $icon . '</div><div style="margin-left: 20px">' . $text . '</div></div>';
-      }
-    }
   }
 
   /**
