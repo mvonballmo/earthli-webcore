@@ -64,24 +64,44 @@ http://www.earthli.com/software/webcore/albums
       <?php
         $box = $Page->make_box_renderer ();
         $box->start_column_set ();
-        $box->new_column_of_type ('description-box');
 
         $renderer = $folder->handler_for (Handler_html_renderer);
         $options = $renderer->options ();
         $options->show_as_summary = true;
         $options->show_users = false;
-        $renderer->display ($folder);
+
+        $text = $renderer->display_to_string ($folder);
+
+        if ($text)
+        {
+          $box->new_column_of_type ('description-box');
+
+          echo $text;
+        }
 
         $box->new_column_of_type ('contents-box');
 
-        echo '<h4>Contents</h4>';
+        echo '<h4>';
+
+        $newsfeed_commands = $Page->newsfeed_options->make_commands($App);
+        $renderer = $App->make_newsfeed_menu_renderer ();
+        $renderer->set_size (Menu_size_minimal);
+        $renderer->alignment = Menu_align_inline;
+        $renderer->display ($newsfeed_commands);
+
+        echo ' Contents</h4>';
+        echo '<div class="panels">';
+
         $panel_manager->display ();
+
+        echo '</div>';
 
         if (! empty ($folders))
         {
           $box->new_column_of_type('sub-folders-box');
 
           $folder_type_info = $App->type_info_for ('FOLDER');
+
           echo '<h4>Sub-' . $folder_type_info->plural_title . '</h4>';
 
           $tree = $App->make_tree_renderer ();
@@ -120,12 +140,6 @@ http://www.earthli.com/software/webcore/albums
         $renderer->alignment = Menu_align_right;
         $renderer->set_size(Menu_size_compact);
         $renderer->display($folder->handler_for (Handler_commands));
-
-        $newsfeed_commands = $Page->newsfeed_options->make_commands($App);
-        $renderer = $App->make_newsfeed_menu_renderer ();
-        $renderer->set_size (Menu_size_compact);
-        $renderer->alignment = Menu_align_inline;
-        $renderer->display ($newsfeed_commands);
 
         $subscription_status = $folder->handler_for (Handler_subscriptions);
         $subscription_status->display ($folder);

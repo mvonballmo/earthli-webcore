@@ -96,7 +96,6 @@ http://www.earthli.com/software/webcore
         <?php
         $box = $Page->make_box_renderer ();
         $box->start_column_set ();
-        $box->new_column_of_type ('description-box');
 
         if (isset ($folder))
         {
@@ -104,13 +103,27 @@ http://www.earthli.com/software/webcore
           $options = $renderer->options ();
           $options->show_as_summary = true;
           $options->show_users = false;
-          $renderer->display ($folder);
+
+          $text = $renderer->display_to_string ($folder);
+
+          if ($text)
+          {
+            $box->new_column_of_type ('description-box');
+
+            echo $text;
+          }
         }
 
         $box->new_column_of_type ('contents-box');
 
-        echo '<h4>Contents</h4>';
+        echo '<h4>';
 
+        $newsfeed_commands = $Page->newsfeed_options->make_commands($App);
+        $renderer = $App->make_newsfeed_menu_renderer ();
+        $renderer->alignment = Menu_align_inline;
+        $renderer->display ($newsfeed_commands);
+
+        echo ' Contents</h4>';
         echo '<div class="panels">';
 
         $panel_manager->display ();
@@ -122,6 +135,7 @@ http://www.earthli.com/software/webcore
           $box->new_column_of_type('sub-folders-box');
 
           $folder_type_info = $App->type_info_for ('FOLDER');
+
           echo '<h4>' . $folder_type_info->plural_title . '</h4>';
           /* Make a copy (not a reference). */
           $tree = $App->make_tree_renderer ();
@@ -150,10 +164,6 @@ http://www.earthli.com/software/webcore
         $form->CSS_class = 'search';
         $form->allow_focus = false;
         $form->display ();
-
-        $newsfeed_commands = $Page->newsfeed_options->make_commands($App);
-        $renderer = $App->make_newsfeed_menu_renderer ();
-        $renderer->display ($newsfeed_commands);
 
         $panel_commands = $panel->commands ();
         if (isset ($panel_commands))
