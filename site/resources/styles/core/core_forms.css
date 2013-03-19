@@ -28,8 +28,13 @@ http://www.earthli.com/software/webcore
 
 .button-control
 {
-	padding: .25em;
-	margin-left: .5em;
+	padding: 5px;
+  margin: 0;
+}
+
+.button-control + .button-control
+{
+  margin-left: 10px;
 }
 
 .button-control:link, .button-control:visited, .button-control:active, .button-control:hover
@@ -39,6 +44,8 @@ http://www.earthli.com/software/webcore
 
 .menu-control, .text-control, .text-control-required, .menu-control-required
 {
+  border-radius: 4px;
+  padding: 4px;
 }
 
 input[type="radio"], input[type="checkbox"]

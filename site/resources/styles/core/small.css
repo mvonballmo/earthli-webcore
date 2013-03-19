@@ -26,7 +26,7 @@ http://www.earthli.com/software/webcore
 
 h1, .banner-title
 {
-  font-size: 24pt
+  font-size: 20pt
 }
 
 h2, .box-title, .side-bar-title
@@ -39,13 +39,21 @@ h3, .grid-title, .menu-group-title
   font-size: 12pt
 }
 
-h4, body, td, th, .menu-control, .text-control, .text-control-required, .quoter, .menu
+h4, body, td, th, .menu-control, .text-control, .text-control-required, .quoter, .menu, .nav-box, .button-control
 {
   font-size: 10pt;
 }
 
-h5, .detail, .footer, .notes, .tree-node,
-.info-box-bottom, .info-box-top, .login-status, .footnote-reference
+h5,
+.detail,
+.footer,
+.notes,
+.tree-node,
+.info-box-bottom,
+.info-box-top,
+.login-status,
+.footnote-reference,
+.subdued
 {
   font-size: 8pt;
 }
@@ -54,4 +62,3 @@ h5, .detail, .footer, .notes, .tree-node,
 {
 	font-size: 7pt;
 }
-

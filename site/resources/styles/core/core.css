@@ -24,9 +24,6 @@ http://www.earthli.com/software/webcore
 
 ****************************************************************************/
 
-/* Styles related to 3- or 2-column structure; adapted from <http://matthewjamestaylor.com/blog/perfect-3-column.htm> */
-@import url("3_column_layout.css");
-
 /* @group HTML Base */
 
 body 
@@ -39,18 +36,16 @@ body
 
 h1, h3, h4 
 {
-  font-weight: bold
+  font-weight: normal
 }
 
 h2 
 {
   font-weight: normal;
-  margin: 0px;
-  padding: 2px 0px;
   border-bottom: 1px solid #000000
 }
 
-h5 
+h5
 {
   font-weight: bold;
   margin: 0px;
@@ -164,7 +159,7 @@ pre code
 
 .banner 
 {
-  margin-bottom: 15px;
+
 }
 
 .banner-box 
@@ -192,10 +187,10 @@ pre code
 
 .banner-content 
 {
-  text-align: right;
   position: absolute;
   right: 0;
   bottom: 0px;
+  text-align: right;
 }
 
 .banner-content h1
@@ -205,7 +200,16 @@ pre code
 
 .banner-title 
 {
+  display: inline-block;
   font-weight: bold;
+}
+
+.banner-icon
+{
+  width: 50px;
+  height: 50px;
+  background-repeat: no-repeat;
+  display: inline-block;
 }
 
 .login-status 
@@ -213,20 +217,36 @@ pre code
   
 }
 
-.nav-box 
+.nav-box
 {
   margin-top: 15px;
   padding-bottom: 5px;
   border-bottom: 1px solid #000000;
 }
 
-.nav-item 
+.top-box
+{
+  border-bottom: 1px solid #4A8CCA;
+  margin-bottom: 15px;
+  margin-right: -15px;
+  margin-left: -15px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.form-content, .grid-content
+{
+  margin-top: 15px;
+}
+
+.nav-item
 {
   font-weight: normal;
 }
 
 .page-body 
 {
+  margin-bottom: 15px;
   clear: both
 }
 
@@ -235,7 +255,35 @@ pre code
   clear: both;
 }
 
-.footer-box 
+@media screen and (min-width:600px)
+{
+  .footer-data
+  {
+    display: inline-block;
+    vertical-align: top;
+    box-sizing: border-box;
+  }
+
+  .footer-data + .footer-data
+  {
+    padding-left: 15px;
+  }
+}
+
+@media screen and (max-width:599px)
+{
+  .footer-data
+  {
+    display: block;
+  }
+
+  .footer-data + .footer-data
+  {
+    margin-top: .3em;
+  }
+}
+
+.footer-box
 {
   
 }
@@ -283,10 +331,9 @@ pre code
 .box-title
 {
   font-weight: bold;
-  empty-cells: show;
   padding-bottom: 5px;
   border-bottom: 1px solid #000000;
-  text-align: left
+  margin: 0;
 }
 
 .side-bar 
@@ -302,7 +349,7 @@ pre code
 
 .side-bar-body 
 {
-  padding: .5em .25em;
+  padding: 15px;
   empty-cells: show
 }
 
@@ -330,11 +377,10 @@ pre code
   padding: .5em
 }
 
-.chart-title, .preview-title 
+.chart-title, .preview-title
 {
-  padding: .25em;
+  padding: 5px 0;
   font-weight: bold;
-  border-bottom: 1px solid #000000
 }
 
 .object-in-list, .info-box-top, .info-box-bottom 
@@ -343,17 +389,23 @@ pre code
   clear: both;
 }
 
-.object-in-list, .info-box-top 
+.info-box-top
 {
   border-bottom: 1px solid #000000;
   margin-bottom: 1em;
+}
+
+td.object-in-list + td.object-in-list
+{
+  /* put space before a cell that follows another in a row */
+
+  padding-left: 30px;
 }
 
 .info-box-bottom 
 {
   border-top: 1px solid #000000;
   margin-top: 1em;
-  text-align: right;
 }
 
 .graph-foreground 
@@ -384,6 +436,31 @@ pre code
   background-color: #FFFFFF;
   border: 1px solid black;
   text-align: left;
+  position: relative;
+  z-index: 100;
+}
+
+ul.menu-items
+{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+ul.menu
+{
+  margin: 0;
+  padding: 0;
+}
+
+ul.menu-items li
+{
+  display: inline-block;
+}
+
+ul.menu-items .menu li
+{
+  display: block;
 }
 
 .menu-dropdown 
@@ -401,7 +478,11 @@ pre code
 .menu-trigger 
 {
   font-weight: normal;
-  margin-left: 10px;
+}
+
+.menu-trigger.newsfeed
+{
+  margin-left: 0;
 }
 
 .menu-trigger > .menu-button
@@ -414,11 +495,16 @@ pre code
   padding: .5em;
 }
 
-.menu-button 
+.menu-button
 {
   display: block;
   float: left;
   padding: 5px;
+  min-height: 21px;
+}
+
+.menu-button + .menu-button
+{
   margin-left: 10px;
 }
 
@@ -428,6 +514,14 @@ pre code
   display: block;
 }
 
+.menu-item.icon,
+.menu-button.icon
+{
+  background-repeat: no-repeat;
+  padding-left: 26px;
+  background-position: 5px 8px;
+}
+
 .menu-button:hover, .menu-item:hover, .menu-bar-top a:hover 
 {
   text-decoration: none;
@@ -435,14 +529,12 @@ pre code
 
 .menu-bar-bottom 
 {
-  text-align: right;
   border-top: 1px solid #000000;
   padding-top: 5px;
 }
 
 .menu-bar-top
 {
-  text-align: right;
   padding-bottom: 5px;
   border-bottom: 1px solid #000000;
 }
@@ -455,6 +547,156 @@ pre code
 	padding: 3px 0px;
 	width: 200px;
 	white-space: normal;
+}
+
+/* @end */
+
+/* @group object header */
+
+.description-box
+{
+  width: 25%;
+  border-right: 1px solid #4A8CCA; /* frame */
+  padding-right: 15px;
+}
+
+.contents-box
+{
+  width: 20%;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-bottom: 15px;
+}
+
+.sub-folders-box
+{
+  width: 30%;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.sub-folders-box .tree
+{
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.contents-box .panels
+{
+}
+
+.tools-box
+{
+  width: 25%;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+/* @end */
+
+/* @group Pagination */
+
+.paginator
+{
+  margin-top: 20px;
+}
+
+.paginator a,
+.object-navigator .controls a,
+.object-navigator .controls .disabled,
+.paginator .selected,
+.paginator .button,
+.paginator .status
+{
+  display: inline-block;
+  text-decoration: none;
+  min-width: 30px;
+  min-height: 30px;
+  width: 2em;
+  height: 2em;
+  padding: 5px;
+  box-sizing: border-box;
+  background-color: #CCCCCC;
+  margin-right: 10px;
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.paginator .status
+{
+  width: 80px;
+  text-align: center;
+}
+
+.paginator .disabled,
+.object-navigator .controls .disabled
+{
+  background-color: #EEEEEE;
+  color: #AAAAAA;
+}
+
+.object-navigator .controls .list-toggle
+{
+  width: auto;
+}
+
+.object-navigator .controls .list-toggle img
+{
+  position: relative;
+  top: 2px;
+}
+
+.paginator .selected
+{
+  background-color: #666666;
+  color: white;
+}
+
+.object-navigator ul
+{
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.object-navigator ul li,
+.object-navigator .page-up a,
+.object-navigator .page-down a
+{
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
+
+.object-navigator .page-up,
+.object-navigator .page-down
+{
+  padding: 0;
+}
+
+.object-navigator .page-up a,
+.object-navigator .page-down a
+{
+  display: block;
+  text-align: center;
+  background-color: #CCCCCC;
+}
+
+.object-navigator .links
+{
+  white-space: nowrap;
+  -webkit-column-width: 250px;
+  -webkit-column-gap: 15px;
+  -webkit-column-rule: 1px solid #4A8CCA;
+  column-width: 250px;
+  column-gap: 25px;
+  column-rule: 1px solid #4A8CCA;
+  margin: 15px 0;
+}
+
+.object-navigator .controls
+{
+
 }
 
 /* @end */
@@ -515,25 +757,13 @@ pre code
 
 /* @group Statuses */
 
-.visible 
-{
-  font-weight: bold;
-}
-
-a.visible 
-{
-  font-weight: bold;
-}
-
 .invisible 
 {
-  font-weight: normal;
   font-style: italic
 }
 
 .invisible:link, .invisible:visited, .invisible:active, .invisible:hover 
 {
-  font-weight: normal;
   font-style: italic
 }
 
@@ -545,7 +775,6 @@ a.visible
 .selected 
 {
   font-weight: bold;
-  font-style: italic
 }
 
 .disabled 
@@ -693,7 +922,13 @@ blockquote p:first-child, .side-bar-body p:first-child, .chart-body p:first-chil
 .text-flow ul li 
 {
   line-height: 140%;
-  margin-top: .4em;
+  padding-left: .4em;
+}
+
+.text-flow ul
+{
+  margin-left: 0;
+  padding-left: 18px;
 }
 
 .text-flow .notes 
@@ -712,7 +947,6 @@ blockquote p:first-child, .side-bar-body p:first-child, .chart-body p:first-chil
 
 .form-basic 
 {
-  padding: .75em;
 }
 
 .label, .required, .form-basic-required, .form-basic-label 
@@ -720,8 +954,13 @@ blockquote p:first-child, .side-bar-body p:first-child, .chart-body p:first-chil
   font-weight: bold;
   text-align: right;
   white-space: nowrap;
+  padding-right: 10px;
   vertical-align: top;
-  padding-right: 1em;
+}
+
+.form-basic-label
+{
+  padding-top: 10px;
 }
 
 .form-button-content 
@@ -731,11 +970,20 @@ blockquote p:first-child, .side-bar-body p:first-child, .chart-body p:first-chil
 
 .form-basic-block 
 {
-  border: 1px dotted #999999;
- 
+  border-left: 1px dotted #999999;
+	padding-left: 15px;
+}
 
-/* background: url(../themes/common/5_percent_black.png) repeat; */
-	padding: .5em;
+.form-basic-content ul
+{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.form-basic-content ul
+{
+
 }
 
 /* @end */
@@ -795,7 +1043,6 @@ blockquote p:first-child, .side-bar-body p:first-child, .chart-body p:first-chil
 
 .date-time 
 {
-  font-style: italic;
 }
 
 .vertical-separator 
@@ -827,7 +1074,14 @@ hr
 
 .comment-block 
 {
-  margin-left: 1.5em
+  margin-left: 25px
+}
+
+.comment-title
+{
+  background-repeat: no-repeat;
+  margin-bottom: 5px;
+  margin-left: 2em;
 }
 
 .description 
@@ -842,8 +1096,9 @@ hr
 
 .page-message 
 {
-  padding: .75em;
-  margin-bottom: .5em;
+  padding: 15px;
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
 
 .excerpt 
@@ -860,12 +1115,22 @@ hr
 {
   border: 1px solid #000000;
   padding: 1px;
-  margin: .2em
 }
 
 .grid-title 
 {
   padding-bottom: .5em;
+}
+
+.grid-item .minimal-commands
+{
+  float: left;
+  margin-right: 5px;
+}
+
+.grid-item .minimal-commands-content
+{
+  margin-left: 32px;
 }
 
 .notes 
@@ -930,6 +1195,27 @@ hr
   font-size: 100%;
 }
 
+.left-sidebar-column
+{
+  padding-right: 15px;
+}
+
+.right-sidebar-column
+{
+  padding-left: 15px;
+}
+
+.content-column
+{
+  width: 75%;
+  padding-right: 15px;
+}
+
+.fill-viewport
+{
+  height: 100%;
+}
+
 .left-column
 {
   padding-right: 15px;
@@ -938,4 +1224,11 @@ hr
 .right-colum
 {
   width: 75%;
+}
+
+.left-icon
+{
+  float: left;
+  padding-right: 10px;
+  background-repeat: no-repeat;
 }

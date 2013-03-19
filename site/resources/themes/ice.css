@@ -26,7 +26,7 @@ http://www.earthli.com/software/webcore
 
 a:visited, a:link
 {
-	color: #0066CC;
+	color: #3477B1;
 }
 
 a:hover, a:active
@@ -38,7 +38,7 @@ body
 {
 	margin: 0px;
 	padding: 0px;
-	background: url(ice/sidebar-background.png) top left no-repeat;
+/*	background: url(ice/sidebar-background.png) top left no-repeat;*/
 	background-color: #FFFFFF;
 }
 
@@ -49,18 +49,18 @@ body
 
 .banner-title
 {
-	color: #003399;
+	color: #0066CC;
 }
 
 .box
 {
-	border: 0px solid #FFFFFF;
+	border: none;
 }
 
 .box-title, .menu-bar-top
 {
   border: none;
-  border-bottom: 4px solid #8fc7ff;
+  border-bottom: 1px solid #4A8CCA; /* frame */
   margin-left: -15px;
   margin-right: -15px;
   padding-left: 15px;
@@ -120,20 +120,10 @@ hr, .horizontal-separator, .vertical-separator
 
 .menu-item:hover
 {
-	background: url(ice/menu-item-background.png) no-repeat;
-	border-top: 1px solid #AAAAAA;
-	border-bottom: 1px solid #AAAAAA;
-}
-
-.menu-button
-{
-	border: 1px solid #CCCCCC;
-}
-
-.menu-button:hover
-{
-	border: 1px solid #AAAAAA;
-	background: url(ice/menu-item-background.png) no-repeat;
+	border-top: 1px solid #777;
+	border-bottom: 1px solid #777;
+  background-color: #AAA;
+  color: #FFF;
 }
 
 .nav-box
@@ -143,9 +133,10 @@ hr, .horizontal-separator, .vertical-separator
   margin-right: -15px;
   padding-left: 15px;
   padding-right: 15px;
-  padding-top: 5px;
-  padding-bottom: 0px;
-  border-top: 4px solid #8fc7ff;
+  padding-bottom: 5px;
+  padding-top: 0px;
+  border-bottom: 1px solid #4A8CCA; /* frame */
+  font-weight: normal;
 }
 
 .quote-inline
@@ -177,28 +168,24 @@ hr, .horizontal-separator, .vertical-separator
 
 .side-bar, .chart, .preview, .form-basic-block
 {
-	border: 1px solid #CCCCCC;
-	background: url(ice/sidebar-background.png) top left no-repeat;
+  border: none;
+	border-left: 2px solid #4A8CCA; /* frame */
 }
 
 .side-bar-title, .chart-title, .preview-title
 {
   color: #0055BB;
-	border-bottom: 1px solid #CCCCCC;
 }
 
 h2
 {
 	border-bottom: 1px dotted #AAAAAA;
-	padding-left: .2em;
-	padding: .2em;
 	color: #0066CC;
 }
 
 h3
 {
 	color: #333333;
-/**  color: #0066CC; */
 }
 
 h4
@@ -208,12 +195,27 @@ h4
 
 .locked a:link, .locked a:visited
 {
-	color: #336699;
+	color: #369;
 }
 
-.object-in-list, .info-box-top, .info-box-bottom, .frame
+.info-box-top, .info-box-bottom, .frame
 {
-	border-color: #CCCCCC;
+	border-color: #AAA;
+}
+
+.info-box-top,
+.info-box-bottom,
+.subdued
+{
+  color: #AAA;
+}
+
+.info-box-top a:link,
+.info-box-top a:visited,
+.info-box-bottom a:link,
+.info-box-bottom a:visited
+{
+  color: #74A7D1;
 }
 
 pre code
@@ -222,4 +224,60 @@ pre code
   border-color: rgb(160,160,160);
   border-width: 3px 1px 1px;
   border-style: solid dotted;
+}
+
+.paginator a,
+.object-navigator .controls a,
+.paginator .selected,
+.paginator .button,
+.paginator .status,
+.object-navigator .page-up a,
+.object-navigator .page-down a,
+.menu-button
+{
+  background-color: #EEEEEE;
+  border: 1px solid silver;
+  border-radius: 4px;
+}
+
+.paginator .disabled,
+.object-navigator .controls .disabled
+{
+  border-radius: 4px;
+  border: 1px solid #DDD;
+}
+
+.paginator a:hover,
+.object-navigator .controls a:hover,
+.object-navigator .page-up a:hover,
+.object-navigator .page-down a:hover,
+.button-control:hover,
+.menu-button:hover
+{
+  border-color: darkgray;
+  background-color: #DDDDDD;
+}
+
+.paginator .selected
+{
+  background-color: #3477B1;
+  color: white;
+}
+
+.left-sidebar
+{
+  border-right: 1px solid #4A8CCA; /* frame */
+  padding-right: 15px;
+  background-color: #EEE;
+  padding-left: 15px;
+  margin-left: -15px;
+}
+
+.right-sidebar
+{
+  border-left: 1px solid #4A8CCA; /* frame */
+  padding-left: 15px;
+  background-color: #F8F8F8;
+  padding-right: 15px;
+  margin-right: -15px;
 }
