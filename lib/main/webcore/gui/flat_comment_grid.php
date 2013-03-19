@@ -78,71 +78,71 @@ class FLAT_COMMENT_GRID extends PRINTABLE_COMMENT_GRID
   {
     $creator = $obj->creator ();
 ?>
-    <div>
-      <?php
-        if ($creator->icon_url)
+    <div class="grid-item">
+      <div class="minimal-commands">
+        <?php
+        if ($this->show_controls)
         {
-      ?>
-      <div class="left-icon" style="width: 32px; height: 32px; background-image: url(<?php echo $creator->expanded_icon_url ('32px'); ?>)">
-      </div>
-        <?php
+          echo '<div style="float: left">';
+          $this->_draw_menu_for ($obj, Menu_size_minimal, Menu_align_inline);
+          echo '</div>';
         }
-      ?>
-      <div>
-        <?php
-          if ($this->show_controls)
-          {
-            if ($obj->equals ($this->_comment))
-            {
-              $this->_draw_menu_for ($obj);
-            }
-            else
-            {
-              $this->_draw_menu_for ($obj, Menu_size_compact);
-            }
-          }
         ?>
+      </div>
+      <div class="minimal-commands-content">
         <div class="comment-title" style="background-image: url('<?php echo $obj->icon_url (); ?>')">
           <?php echo $obj->title_as_link (); ?>
         </div>
         <?php
-          if ($this->show_user_info)
+        if ($this->show_user_info)
+        {
+          if ($creator->icon_url)
           {
+            ?>
+            <div class="left-icon detail" style="background-image: url(<?php echo $creator->expanded_icon_url ('16px'); ?>)">
+              by <?php echo $creator->title_as_link (); ?> - <?php echo $obj->time_created->format (); ?>
+            </div>
+          <?php
+          }
+          else
+          {
+            ?>
+            <div class="left-icon detail">
+              by <?php echo $creator->title_as_link (); ?> - <?php echo $obj->time_created->format (); ?>
+            </div>
+          <?php
+          }
+        }
         ?>
-        <div class="detail" style="margin-left: 2em">
-          by <?php echo $creator->title_as_link (); ?> - <?php echo $obj->time_created->format (); ?>
+        <div class="description">
+          <?php
+          echo $obj->description_as_html ();
+
+          if ($obj->modified () && $this->show_user_info)
+          {
+            $modifier = $obj->modifier ();
+            ?>
+            <p class="detail" style="text-align: right">Updated by <?php echo $modifier->title_as_link (); ?> - <?php echo $obj->time_modified->format (); ?></p>
+          <?php
+          }
+          ?>
         </div>
         <?php
-          }
+        $attachment_query = $obj->attachment_query ();
+
+        $num_attachments = $attachment_query->size ();
+        if ($num_attachments)
+        {
+          $class_name = $this->app->final_class_name ('ATTACHMENT_GRID', 'webcore/gui/attachment_grid.php');
+          $grid = new $class_name ($this->app);
+          $grid->set_ranges (3, 3);
+          $grid->set_query ($attachment_query);
+          $grid->display ();
+        }
         ?>
       </div>
-      <div style="clear: both"></div>
-    </div>
-    <div class="description">
-<?php
-    echo $obj->description_as_html ();
-
-    if ($obj->modified () && $this->show_user_info)
-    {
-      $modifier = $obj->modifier ();
-    ?>
-      <p class="detail" style="text-align: right">Updated by <?php echo $modifier->title_as_link (); ?> - <?php echo $obj->time_modified->format (); ?></p>
-  <?php
-    }
-  ?>
     </div>
 <?php
-    $attachment_query = $obj->attachment_query ();
-
-    $num_attachments = $attachment_query->size ();
-    if ($num_attachments)
-    {
-      $class_name = $this->app->final_class_name ('ATTACHMENT_GRID', 'webcore/gui/attachment_grid.php');
-      $grid = new $class_name ($this->app);
-      $grid->set_ranges (3, 3);
-      $grid->set_query ($attachment_query);
-      $grid->display ();
-    }
   }
 
   /**

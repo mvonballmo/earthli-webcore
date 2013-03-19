@@ -1074,14 +1074,14 @@ hr
 
 .comment-block 
 {
-  margin-left: 25px
+  margin-left: 35px
 }
 
 .comment-title
 {
   background-repeat: no-repeat;
   margin-bottom: 5px;
-  margin-left: 2em;
+  padding-left: 20px;
 }
 
 .description 
@@ -1228,7 +1228,7 @@ hr
 
 .left-icon
 {
-  float: left;
-  padding-right: 10px;
   background-repeat: no-repeat;
+  padding-left: 21px;
+  min-width: 16px; min-height: 16px;
 }
