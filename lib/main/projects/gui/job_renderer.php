@@ -396,10 +396,10 @@ class JOB_ASSOCIATED_DATA_RENDERER extends ENTRY_ASSOCIATED_DATA_RENDERER
     if ($num_changes)
     {
 ?>
-<div class="box-title">
+<h2>
   <?php echo $num_changes; ?> Changes
-</div>
-<div class="box-body">
+</h2>
+<div class="grid-content">
 <?php
       $class_name = $this->app->final_class_name ('CHANGE_GRID', 'projects/gui/change_grid.php');
       $grid = new $class_name ($this->app, read_var ('search_text'));

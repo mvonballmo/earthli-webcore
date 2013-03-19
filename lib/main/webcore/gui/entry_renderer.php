@@ -146,10 +146,10 @@ class ENTRY_ASSOCIATED_DATA_RENDERER extends HANDLER_RENDERER
       if ($attachment_query->size ())
       {
   ?>
-  <div id="attachments" class="box-title" style="clear: both">
+  <h2 id="attachments" style="clear: both">
     Attachments
-  </div>
-  <div class="box-body">
+  </h2>
+  <div class="grid-content">
   <?php
         $class_name = $this->app->final_class_name ('ATTACHMENT_GRID', 'webcore/gui/attachment_grid.php');
         $grid = new $class_name ($this->app);
@@ -173,11 +173,11 @@ class ENTRY_ASSOCIATED_DATA_RENDERER extends HANDLER_RENDERER
         $class_name = $this->app->final_class_name ('COMMENT_LIST_RENDERER', 'webcore/gui/comment_renderer.php');
         $com_renderer = new $class_name ($com_query, $obj);
       ?>
-      <div id="comments" class="box-title" style="clear: both">
+      <h2 id="comments" style="clear: both">
         Comments
-      </div>
+      </h2>
       <?php $com_renderer->display_menu (); ?>
-      <div class="box-body">
+      <div class="grid-content">
         <?php $com_renderer->display (); ?>
       </div>
       <?php
