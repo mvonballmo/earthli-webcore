@@ -555,7 +555,7 @@ abstract class GRID extends WEBCORE_OBJECT
   protected function _CSS_for_box ()
   {
     $style = $this->_style_for_box ();
-    $attrs = [];
+    $attrs = array();
     if (!empty($style))
     {
       $attrs [] = "style=\"$style\"";

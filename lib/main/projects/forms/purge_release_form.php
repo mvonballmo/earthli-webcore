@@ -94,7 +94,7 @@ class PURGE_RELEASE_FORM extends PURGE_OBJECT_FORM
   {
     parent::load_from_object ($obj);
     $this->set_value ('sub_history_item_publication_state', History_item_silent);
-    $this->_previews = [];
+    $this->_previews = array();
     $this->add_preview ($obj, 'Purge Release details', true);
   }
 
