@@ -94,7 +94,8 @@ class PURGE_RELEASE_FORM extends PURGE_OBJECT_FORM
   {
     parent::load_from_object ($obj);
     $this->set_value ('sub_history_item_publication_state', History_item_silent);
-    $this->add_preview ($obj, 'Purge Release details');
+    $this->_previews = [];
+    $this->add_preview ($obj, 'Purge Release details', true);
   }
 
   /**
@@ -151,6 +152,7 @@ class PURGE_RELEASE_PREVIEW_SETTINGS extends UPDATE_RELEASE_PREVIEW_SETTINGS
   protected function _display ()
   {
     $class_name = $this->app->final_class_name ('RELEASE_PURGER', 'projects/obj/release_updater.php');
+    /** @var $committer RELEASE_PURGER */
     $committer = new $class_name ($this->object);
 ?>
   <p>Purging this release will make the following changes (scroll down or hide this preview to accept).</p>

@@ -27,11 +27,14 @@ http://www.earthli.com/software/webcore
 ****************************************************************************/
 
   $folder_query = $App->login->folder_query ();
+
+  /** @var $parent FOLDER */
   $parent = $folder_query->object_at_id (read_var ('id'));
 
   if (isset ($parent) && $App->login->is_allowed (Privilege_set_folder, Privilege_create, $parent))
   {
     $class_name = $App->final_class_name ('FOLDER_FORM', 'webcore/forms/folder_form.php');
+    /** @var $form FOLDER_FORM */
     $form = new $class_name ($parent);
 
     $folder = $parent->new_folder ();
@@ -43,6 +46,15 @@ http://www.earthli.com/software/webcore
       $Env->redirect_local ($folder->home_page ());
     }
 
+    if ($type_info->icon)
+    {
+      $icon = $App->sized_icon($type_info->icon, '');
+    }
+    else
+    {
+      $icon = '{icons}buttons/create';
+    }
+
     if ($parent)
     {
       $Page->title->add_object ($parent);
@@ -50,15 +62,12 @@ http://www.earthli.com/software/webcore
     }
 
     $Page->title->subject = 'Create ' . $type_info->singular_title;
-    $Page->location->append ($Page->title->subject);
+    $Page->location->append ($Page->title->subject, '', $icon);
 
     $Page->start_display ();
   ?>
   <div class="box">
-    <div class="box-title">
-      <?php echo $App->title_bar_icon ($type_info->icon); ?> Create <?php echo $type_info->singular_title; ?> in <?php echo $parent->title_as_link (); ?>
-    </div>
-    <div class="box-body">
+    <div class="box-body form-content">
     <?php
       $form->display ();
     ?>

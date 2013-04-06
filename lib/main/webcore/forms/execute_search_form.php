@@ -116,7 +116,7 @@ class EXECUTE_SEARCH_FORM extends ID_BASED_FORM
       $field->id = 'search_text';
       $field->title = '';
       $this->add_field ($field);
-      
+
       $tsearch = $this->app->make_search ($type);
       $tsearch->fields->add_fields ($this, false);
     }

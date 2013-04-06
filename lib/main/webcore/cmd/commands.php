@@ -56,16 +56,16 @@ class COMMAND
   public $id;
 
   /**
-   * Text used for the title of the link.
-   * @var string
-   */
-  public $title = '';
-
-  /**
    * Text used inside the link.
    * @var string
    */
-  public $text = '';
+  public $caption = '';
+
+  /**
+   * Text used for the title of the link.
+   * @var string
+   */
+  public $link_title = '';
 
   /**
    * URL to execute the command.
@@ -157,7 +157,7 @@ class COMMANDS extends WEBCORE_OBJECT
 {
   /**
    * Return the list of {@link COMMAND_GROUP}s.
-   * @return array[COMMAND_GROUP]
+   * @return COMMAND_GROUP[]
    */
   public function groups ()
   {
@@ -166,7 +166,7 @@ class COMMANDS extends WEBCORE_OBJECT
   
   /**
    * Return the list of all {@link COMMAND}s.
-   * @return array[COMMAND]
+   * @return COMMAND[]
    */
   public function command_list ()
   {
@@ -187,7 +187,7 @@ class COMMANDS extends WEBCORE_OBJECT
    * Returns empty if none has been added with {@link append()} or {@link
    * prepend()}.
    * @param string $id
-   * @return BUTTON
+   * @return COMMAND
    */
   public function command_at ($id)
   {
@@ -330,7 +330,7 @@ class COMMANDS extends WEBCORE_OBJECT
 
   /**
    * Grouped lists of commands.
-   * @var array[COMMAND_GROUP]
+   * @var COMMAND_GROUP[]
    * @see COMMAND_GROUP
    * @see $_commands
    * @access private
@@ -339,7 +339,7 @@ class COMMANDS extends WEBCORE_OBJECT
 
   /**
    * All commands indexed by {@link COMMAND::$id}.
-   * @var array[COMMAND]
+   * @var COMMAND[]
    * @see COMMAND
    * @see $_groups
    * @see $_ordered_commands
@@ -349,13 +349,17 @@ class COMMANDS extends WEBCORE_OBJECT
 
   /**
    * All commands in order.
-   * @var array[COMMAND]
+   * @var COMMAND[]
    * @see COMMAND
    * @see $_commands
    * @see $_groups
    * @access private
    */
   protected $_ordered_commands = array ();
-}
 
-?>
+  /**
+   * The command group to which new commands are automatically added.
+   * @var COMMAND_GROUP
+   */
+  protected $_current_group;
+}

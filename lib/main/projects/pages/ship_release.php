@@ -57,14 +57,11 @@ http://www.earthli.com/software/webcore
     $Page->location->add_folder_link ($folder);
     $Page->location->add_object_link ($branch);
     $Page->location->add_object_link ($release);
-    $Page->location->append ($Page->title->subject);
+    $Page->location->append ($Page->title->subject, '', '{icons}/buttons/ship');
 
     $Page->start_display ();
 ?>
 <div class="box">
-  <div class="box-title">
-    Ship <?php echo $release->title_as_html (); ?>
-  </div>
   <div class="box-body">
     <?php
       $form->display ();

@@ -114,7 +114,7 @@ class FLAT_COMMENT_GRID extends PRINTABLE_COMMENT_GRID
           }
         }
         ?>
-        <div class="description">
+        <div class="text-flow">
           <?php
           echo $obj->description_as_html ();
 
@@ -134,6 +134,7 @@ class FLAT_COMMENT_GRID extends PRINTABLE_COMMENT_GRID
         if ($num_attachments)
         {
           $class_name = $this->app->final_class_name ('ATTACHMENT_GRID', 'webcore/gui/attachment_grid.php');
+          /** @var $grid ATTACHMENT_GRID */
           $grid = new $class_name ($this->app);
           $grid->set_ranges (3, 3);
           $grid->set_query ($attachment_query);

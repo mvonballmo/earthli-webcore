@@ -61,7 +61,7 @@ class CONFIGURE_COMMANDS extends COMMANDS
 
     $cmd = $this->make_command ();
     $cmd->id = 'publish';
-    $cmd->title = 'Publish';
+    $cmd->caption = 'Publish';
     $cmd->link = "publish.php";
     $cmd->icon = '{icons}indicators/published';
     $cmd->executable = $this->app->login->is_allowed (Privilege_set_global, Privilege_configure);
@@ -69,7 +69,7 @@ class CONFIGURE_COMMANDS extends COMMANDS
 
     $cmd = $this->make_command ();
     $cmd->id = 'upgrade_app';
-    $cmd->title = 'Upgrade Application';
+    $cmd->caption = 'Upgrade Application';
     $cmd->link = "upgrade.php";
     $cmd->icon = '{icons}buttons/upgrade';
     $cmd->executable = $info->app_info->needs_upgrade () && $this->app->login->is_allowed (Privilege_set_global, Privilege_configure);
@@ -77,7 +77,7 @@ class CONFIGURE_COMMANDS extends COMMANDS
 
     $cmd = $this->make_command ();
     $cmd->id = 'upgrade_webcore';
-    $cmd->title = 'Upgrade WebCore';
+    $cmd->caption = 'Upgrade WebCore';
     $cmd->link = "upgrade.php?framework=1";
     $cmd->icon = '{icons}buttons/upgrade';
     $cmd->executable = $info->lib_info->needs_upgrade () && $this->app->login->is_allowed (Privilege_set_global, Privilege_configure);
@@ -85,7 +85,7 @@ class CONFIGURE_COMMANDS extends COMMANDS
 
     $cmd = $this->make_command ();
     $cmd->id = 'test_suite';
-    $cmd->title = 'Test Suite';
+    $cmd->caption = 'Test Suite';
     $cmd->link = "view_test_suite.php";
     $cmd->icon = '{icons}buttons/test';
     $cmd->executable = $this->app->login->is_allowed (Privilege_set_global, Privilege_configure);

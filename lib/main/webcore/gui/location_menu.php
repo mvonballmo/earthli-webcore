@@ -131,21 +131,17 @@ class LOCATION_MENU extends MENU
 
     $t = $folder->title_formatter ();
     $t->max_visible_output_chars = 0;
-    $title = $folder->title_as_html($t);
-    $icon = $folder->icon_as_html('16px');
 
-    if ($icon)
-    {
-      $title = $icon . ' ' . $title;
-    }
-    $this->append ($title);
+    $this->append ($folder->title_as_html($t), '', $folder->expanded_icon_url('16px'));
   }
 
   /**
    * Add this object's home page to the location.
-   * @param NAMED_OBJECT $obj
+   * @param NAMED_OBJECT $obj The object to add to the location.
+   * @param string $page_args The optional arguments to include in the link's query arguments.
+   * @param string $icon The optional icon to include with the object's menu item.
    */
-  public function add_object_link ($obj, $page_args = '')
+  public function add_object_link ($obj, $page_args = '', $icon = '')
   {
     // Don't allow objects in the list to set the style of the navigation bar.
 
@@ -155,19 +151,18 @@ class LOCATION_MENU extends MENU
     {
       $t->add_arguments ($page_args);
     }
-    $this->append ($obj->title_as_link ($t));
+    $this->append ($obj->title_as_link ($t), '', $icon);
   }
 
   /**
    * Add this object's (unlinked) name to the location.
    * @param NAMED_OBJECT $obj
+   * @param string $icon The optional icon to include with the object's menu item.
    */
-  public function add_object_text ($obj)
+  public function add_object_text ($obj, $icon = '')
   {
     $t = $obj->title_formatter ();
     $t->max_visible_output_chars = 0;
-    $this->append ($obj->title_as_html ($t));
+    $this->append ($obj->title_as_html ($t), '', $icon);
   }
 }
-
-?>

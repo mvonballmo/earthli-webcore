@@ -87,17 +87,9 @@ class COMMENT_GRID extends SELECTABLE_GRID
   {
     $this->_echo_header ($obj);
 ?>
-  <div class="description">
+  <div class="text-flow">
   <?php
     echo $obj->description_as_html ();
-
-    if ($obj->modified ())
-    {
-      $modifier = $obj->modifier ();
-  ?>
-    <p class="detail" style="text-align: right">Updated by <?php echo $modifier->title_as_link (); ?> - <?php echo $obj->time_modified->format (); ?></p>
-  <?php
-    }
   ?>
   </div>
 <?php
@@ -144,11 +136,20 @@ class COMMENT_GRID extends SELECTABLE_GRID
         <?php
           }
         ?>
-          <div style="margin-bottom: .25em">
+          <div style="margin-bottom: 5px">
             <?php echo $obj->icon () . ' ' . $obj->title_as_link (); ?>
           </div>
           <div class="detail">
-            by <?php echo $creator->title_as_link (); ?> - <?php echo $obj->time_created->format (); ?>
+            by <?php echo $creator->title_as_link (); ?> - <?php echo $obj->time_created->format ();
+
+            if ($obj->modified ())
+            {
+              $modifier = $obj->modifier ();
+              ?>
+              (Updated by <?php echo $modifier->title_as_link (); ?> - <?php echo $obj->time_modified->format (); ?>)
+            <?php
+            }
+            ?>
           </div>
         <?php
           if ($creator->icon_url)

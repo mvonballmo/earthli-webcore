@@ -53,6 +53,7 @@ http://www.earthli.com/software/webcore
   if (isset ($comment) && (! $comment->parent_id || isset ($parent)) && $App->login->is_allowed (Privilege_set_comment, Privilege_modify, $comment))
   {
     $class_name = $App->final_class_name ('COMMENT_FORM', 'webcore/forms/comment_form.php');
+    /** @var $form COMMENT_FORM */
     $form = new $class_name ($folder);
 
     $form->process_existing ($comment);
@@ -71,7 +72,7 @@ http://www.earthli.com/software/webcore
         $prev = $entry;
       }
 
-      $form->add_preview ($prev, 'In reply to: ' . $prev->title_as_html (), ! $form->previewing ());
+      $form->add_preview ($prev, 'In reply to: ' . $prev->title_as_html (), false);
     }
 
     $Page->title->add_object ($folder);
@@ -81,16 +82,13 @@ http://www.earthli.com/software/webcore
 
     $Page->location->add_folder_link ($folder);
     $Page->location->add_object_link ($entry);
-    $Page->location->add_object_link ($comment);
-    $Page->location->append ($Page->title->subject);
+    $Page->location->add_object_link ($comment, '', '{icons}buttons/reply');
+    $Page->location->append ($Page->title->subject, '', '{icons}/buttons/edit');
 
     $Page->start_display ();
   ?>
   <div class="box">
-    <div class="box-title">
-      <?php echo $App->title_bar_icon ('{icons}buttons/edit'); ?> <?php echo $Page->title->subject; ?>
-    </div>
-    <div class="box-body">
+    <div class="box-body form-content">
     <?php
       $form->display ();
     ?>

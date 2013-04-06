@@ -53,15 +53,12 @@ http://www.earthli.com/software/webcore
       $Page->title->subject = "Create subscriber";
 
       $Page->location->add_root_link ();
-      $Page->location->append ($Page->title->subject);
+      $Page->location->append ($Page->title->subject, '', '{icons}buttons/create');
 
       $Page->start_display ();
   ?>
   <div class="box">
-    <div class="box-title">
-      <?php echo $App->title_bar_icon ('{icons}buttons/create'); ?> Create subscriber for <?php echo $email; ?>
-    </div>
-    <div class="box-body">
+    <div class="box-body form-content">
     <?php
       $form->button = 'Create';
       $form->button_icon = '{icons}buttons/create';

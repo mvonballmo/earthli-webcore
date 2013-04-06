@@ -100,7 +100,7 @@ class RECIPE_GRID extends CONTENT_OBJECT_GRID
         <span class="detail"><?php if ($this->show_user) { echo $creator->title_as_link (); ?> - <?php } ?>
         <?php echo $obj->time_created->format (); ?></span>
       </div>
-      <div class="description" style="margin-right: 20%">
+      <div class="text-flow">
         <?php
           if ($obj->originator)
           {

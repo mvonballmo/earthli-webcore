@@ -27,6 +27,7 @@ http://www.earthli.com/software/webcore
 ****************************************************************************/
 
   $folder_query = $App->login->folder_query ();
+  /** @var $folder FOLDER */
   $folder = $folder_query->object_at_id (read_var ('id'));
 
   if (isset ($folder) &&
@@ -36,6 +37,7 @@ http://www.earthli.com/software/webcore
     $group_query = $App->group_query ();
 
     $class_name = $App->final_class_name ('FOLDER_GROUP_PERMISSIONS_CREATE_FORM', 'webcore/forms/folder_group_permissions_create_form.php');
+    /** @var $form FOLDER_GROUP_PERMISSIONS_CREATE_FORM */
     $form = new $class_name ($folder, $group_query);
 
     $security = $folder->security_definition ();
@@ -51,25 +53,27 @@ http://www.earthli.com/software/webcore
     $Page->title->subject = 'Add permissions for group';
 
     $Page->location->add_folder_link ($folder);
-    $Page->location->append ('Permissions', $folder->permissions_home_page ());
-    $Page->location->append ($Page->title->subject);
+    $Page->location->append ('Permissions', $folder->permissions_home_page (), '{icons}buttons/security');
+    $Page->location->append ($Page->title->subject, '', '{icons}buttons/create');
 
     $Page->start_display ();
-  ?>
-  <div class="box">
-    <div class="box-title">
-      <?php echo $App->title_bar_icon ('{icons}buttons/security'); ?>
-      Add permissions for group
-    </div>
-    <?php
-      if ($App->login->is_allowed (Privilege_set_group, Privilege_create))
-      {
+
+    if ($App->login->is_allowed (Privilege_set_group, Privilege_create))
+    {
+      ?>
+      <div class="top-box button-content">
+        <?php
         $menu = $App->make_menu ();
         $menu->append ('Create Group', 'create_group.php', '{icons}buttons/create');
-        $menu->display_as_toolbar ();
-      }
-    ?>
-    <div class="box-body">
+        $menu->renderer = $App->make_menu_renderer ();
+        $menu->display ();
+        ?>
+      </div>
+    <?php
+    }
+  ?>
+  <div class="box">
+    <div class="box-body form-content">
     <?php
       $form->display ();
     ?>

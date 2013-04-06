@@ -61,172 +61,136 @@ class EXCEPTION_RENDERER extends OBJECT_RENDERER
     $application_description = $obj->application_description;
     $routine_name = $obj->routine_name;
     $error_message = $obj->message;
-
-    if (! $this->_options->show_details)
-    {
-      $layer = $this->context->make_layer ('exception_details');
-    }
+    /** @var $options EXCEPTION_RENDERER_OPTIONS */
+    $options = $this->_options;
 ?>
-<div style="width: 75%; margin: auto">
   <p class="error"><?php echo $error_message; ?></p>
+  <table class="basic columns left-labels">
+    <tr>
+      <th>Page</th>
+      <td>
+        <?php
+          $page_title = substr ($page_name, 0, 50);
+          if ($page_title != $page_name)
+          {
+            echo "<span title=\"$page_name\">$page_title...</span>\n";
+          }
+          else
+          {
+            echo "$page_title\n";
+          }
+        ?>
+      </td>
+    </tr>
   <?php
-    if (isset ($layer))
-    {
-  ?>
-  <p class="detail"><?php echo $layer->draw_toggle (); ?> Click the arrow for more details.</p>
-  <?php
-    }
-  ?>
-</div>
-<?php if (isset ($layer)) $layer->start (); ?>
-<table class="chart" style="margin: auto">
-  <tr>
-    <td class="label">Page</td>
-    <td>
-      <?php
-        $page_title = substr ($page_name, 0, 50);
-        if ($page_title != $page_name)
-        {
-          echo "<span title=\"$page_name\">$page_title...</span>\n";
-        }
-        else
-        {
-          echo "$page_title\n";
-        }
-      ?>
-    </td>
-  </tr>
-<?php
-    if ($application_description)
-    {
-?>
-  <tr>
-    <td class="label">Application</td>
-    <td><?php echo $application_description; ?></td>
-  </tr>
-<?php
-    }
-?>
-<?php
-    if ($routine_name)
-    {
-      if ($dynamic_class_name)
+      if ($application_description)
       {
-        if ($dynamic_class_name != $class_name)
+  ?>
+    <tr>
+      <th>Application</th>
+      <td><?php echo $application_description; ?></td>
+    </tr>
+  <?php
+      }
+  ?>
+  <?php
+      if ($routine_name)
+      {
+        if ($dynamic_class_name)
         {
-?>
-  <tr>
-    <td class="label">Class</td>
-    <td><code><?php echo $dynamic_class_name; ?></code> (<code><?php echo $class_name; ?>)</code></td>
-  </tr>
-<?php
+          if ($dynamic_class_name != $class_name)
+          {
+  ?>
+    <tr>
+      <th>Class</th>
+      <td><code><?php echo $dynamic_class_name; ?></code> (<code><?php echo $class_name; ?>)</code></td>
+    </tr>
+  <?php
+          }
+          else
+          {
+  ?>
+    <tr>
+      <th>Class</th>
+      <td><code><?php echo $class_name; ?></code></td>
+    </tr>
+  <?php
+          }
         }
         else
         {
-?>
-  <tr>
-    <td class="label">Class</td>
-    <td><code><?php echo $class_name; ?></code></td>
-  </tr>
-<?php
+  ?>
+    <tr>
+      <th>Scope</th>
+      <td><code>global</code></td>
+    </tr>
+  <?php
         }
+  ?>
+    <tr>
+      <th>Routine</th>
+      <td><code><?php if ($class_name == $routine_name) echo '&lt;constructor&gt;'; else echo $routine_name; ?></code></td>
+    </tr>
+  <?php
       }
       else
       {
-?>
-  <tr>
-    <td class="label">Scope</td>
-    <td><code>global</code></td>
-  </tr>
-<?php
+  ?>
+    <tr>
+      <th>Scope</th>
+      <td><code>global</code></td>
+    </tr>
+  <?php
       }
-?>
-  <tr>
-    <td class="label">Routine</td>
-    <td><code><?php if ($class_name == $routine_name) echo '&lt;constructor&gt;'; else echo $routine_name; ?></code></td>
-  </tr>
-<?php
-    }
-    else
-    {
-?>
-  <tr>
-    <td class="label">Scope</td>
-    <td><code>global</code></td>
-  </tr>
-<?php
-    }
-?>
-  <tr>
-    <td colspan="2">&nbsp;</td>
-  </tr>
-  <tr>
-    <td class="label">Server</td>
-    <td><?php echo $this->env->server_info (); ?></td>
-  </tr>
-  <tr>
-    <td class="label">Library</td>
-    <td><?php echo 'WebCore ' . $this->env->version; ?></td>
-  </tr>
-  <?php
-    if ($this->_options->include_browser_info)
-    {
-      $browser = $this->env->browser ();
   ?>
-  <tr>
-    <td colspan="2">&nbsp;</td>
-  </tr>
-  <tr>
-    <td class="label">Browser</td>
-    <td>
-      <?php
-        echo $browser->description_as_html ();
-      ?>
-    </td>
-  </tr>
-  <tr>
-    <td class="label">OS</td>
-    <td>
-      <?php
-        echo $browser->system_id ();
-      ?>
-    </td>
-  </tr>
-  <tr>
-    <td class="label">User agent</td>
-    <td>
-      <?php
-        $browser_title = substr ($browser->user_agent_string, 0, 50);
-        if ($browser_title != $browser->user_agent_string)
-        {
-          echo "<span title=\"$browser->user_agent_string\">$browser_title...</span>\n";
-        }
-        else
-        {
-          echo "$browser_title\n";
-        }
-      ?>
-    </td>
-  </tr>
-  <?php
-    }
+    <tr>
+      <th>Server</th>
+      <td><?php echo $this->env->server_info (); ?></td>
+    </tr>
+    <tr>
+      <th>Library</th>
+      <td><?php echo 'WebCore ' . $this->env->version; ?></td>
+    </tr>
+    <?php
+      if ($options->include_browser_info)
+      {
+        $browser = $this->env->browser ();
+    ?>
+    <tr>
+      <th>Browser</th>
+      <td>
+        <?php
+          echo $browser->description_as_html ();
+        ?>
+      </td>
+    </tr>
+    <tr>
+      <th>OS</th>
+      <td>
+        <?php
+          echo $browser->system_id ();
+        ?>
+      </td>
+    </tr>
+    <tr>
+      <th>User agent</th>
+      <td>
+        <?php echo $browser->user_agent_string; ?>
+      </td>
+    </tr>
+    <?php
+      }
 
-    if ($this->_options->include_page_data)
-    {
-  ?>
-  <tr>
-    <td colspan="2">&nbsp;</td>
-  </tr>
-  <?php
-      $this->_show_array_as_html ('Post', $obj->variables_for (Var_type_post));
-      $this->_show_array_as_html ('URL', $obj->variables_for (Var_type_get));
-      $this->_show_array_as_html ('Cookie', $obj->variables_for (Var_type_cookie));
-      $this->_show_array_as_html ('Uploads', $obj->variables_for (Var_type_upload));
-    }
-  ?>
-</table>
+      if ($options->include_page_data)
+      {
+        $this->_show_array_as_html ('Post', $obj->variables_for (Var_type_post));
+        $this->_show_array_as_html ('URL', $obj->variables_for (Var_type_get));
+        $this->_show_array_as_html ('Cookie', $obj->variables_for (Var_type_cookie));
+        $this->_show_array_as_html ('Uploads', $obj->variables_for (Var_type_upload));
+      }
+    ?>
+  </table>
 <?php
-    if (isset ($layer)) $layer->finish ();
   }
 
   protected function _show_array_as_html ($title, $arr)
@@ -238,7 +202,7 @@ class EXCEPTION_RENDERER extends OBJECT_RENDERER
       $layer->visible = false;
 ?>
 <tr>
-  <td class="label"><?php echo $title . ' ' . $layer->toggle_as_html (); ?></td>
+  <th><?php echo $title . ' ' . $layer->toggle_as_html (); ?></th>
   <td>
     <div><span class="field"><?php echo sizeof ($arr); ?></span> parameters</div>
     <?php $layer->start (); ?>
@@ -315,7 +279,10 @@ class EXCEPTION_RENDERER extends OBJECT_RENDERER
     $table->add_item ('Server', $this->env->server_info ());
     $table->add_item ('Library', 'WebCore ' . $this->env->version);
 
-    if ($this->_options->include_browser_info)
+    /** @var $options EXCEPTION_RENDERER_OPTIONS */
+    $options = $this->_options;
+
+    if ($options->include_browser_info)
     {
       $table->add_separator ();
       $table->add_item ('Browser', $browser->description_as_plain_text ());
@@ -327,7 +294,7 @@ class EXCEPTION_RENDERER extends OBJECT_RENDERER
 
     echo $this->line ();
 
-    if ($this->_options->include_page_data)
+    if ($options->include_page_data)
     {
       $this->_show_array_as_text ('Post', $obj->variables_for (Var_type_post));
       $this->_show_array_as_text ('URL', $obj->variables_for (Var_type_get));
@@ -372,12 +339,6 @@ class EXCEPTION_RENDERER extends OBJECT_RENDERER
  */
 class EXCEPTION_RENDERER_OPTIONS extends OBJECT_RENDERER_OPTIONS
 {
-  /**
-   * Details are hidden in a {@link LAYER} if False.
-   * @var boolean
-   */
-  public $show_details = false;
-
   /**
    * Send Get/Post/Cookie info with exception?
    * @var boolean

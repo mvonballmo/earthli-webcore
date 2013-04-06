@@ -42,17 +42,19 @@ http://www.earthli.com/software/webcore
     $Page->add_script_file ('{scripts}webcore_forms.js');
     $Page->start_display ();
   ?>
-  <div class="box">
+  <div class="top-box button-content">
     <?php
-      $class_name = $App->final_class_name ('USER_LIST_COMMANDS', 'webcore/cmd/user_management_commands.php');
-      $commands = new $class_name ($App);
-      $renderer = $App->make_menu_renderer ();
-      $renderer->display_as_toolbar ($commands);
+    $class_name = $App->final_class_name ('USER_LIST_COMMANDS', 'webcore/cmd/user_management_commands.php');
+    $commands = new $class_name ($App);
+    $renderer = $App->make_menu_renderer ();
+    $renderer->display ($commands);
     ?>
-    <div class="box-title">
-      Browse for user
-    </div>
+  </div>
+  <div class="box">
     <div class="box-body">
+      <h2>
+        Browse for user
+      </h2>
     <?php
       $user_query = $App->user_query ();
 

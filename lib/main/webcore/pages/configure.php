@@ -34,20 +34,19 @@ http://www.earthli.com/software/webcore
     $Page->title->subject = 'Configure';
 
     $Page->location->add_root_link ();
-    $Page->location->append ($Page->title->subject);
+    $Page->location->append ($Page->title->subject, '', '{icons}indicators/working');
 
     $Page->start_display ();
   ?>
-  <div class="box">
-    <div class="box-title">
-      <?php echo $App->title_bar_icon ('{icons}indicators/working'); ?> <?php echo $Page->title->subject; ?>
-    </div>
+  <div class="top-box button-content">
     <?php
-      $class_name = $App->final_class_name ('CONFIGURE_COMMANDS', 'webcore/cmd/configure_commands.php');
-      $commands = new $class_name ($info);
-      $renderer = $App->make_menu_renderer ();
-      $renderer->display_as_toolbar ($commands);
+    $class_name = $App->final_class_name ('CONFIGURE_COMMANDS', 'webcore/cmd/configure_commands.php');
+    $commands = new $class_name ($info);
+    $renderer = $App->make_menu_renderer ();
+    $renderer->display_as_toolbar ($commands);
     ?>
+  </div>
+  <div class="box">
     <div class="box-body">
     <?php
       $class_name = $App->final_class_name ('APPLICATION_RENDERER', 'webcore/gui/application_renderer.php');

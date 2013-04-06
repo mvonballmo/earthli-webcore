@@ -74,7 +74,7 @@ class ENTRY_COMMANDS extends COMMANDS
   {
     $cmd = $this->make_command ();
     $cmd->id = 'edit';
-    $cmd->title = 'Edit';
+    $cmd->caption = 'Edit';
     $cmd->link = "edit_entry.php?id=$entry->id";
     $cmd->icon = '{icons}buttons/edit';
     $cmd->executable = $this->login->is_allowed (Privilege_set_entry, Privilege_modify, $entry);
@@ -83,7 +83,7 @@ class ENTRY_COMMANDS extends COMMANDS
 
     $cmd = $this->make_command ();
     $cmd->id = 'delete';
-    $cmd->title = 'Delete';
+    $cmd->caption = 'Delete';
     $cmd->link = "delete_entry.php?id=$entry->id";
     $cmd->icon = '{icons}buttons/delete';
     $cmd->executable = ! $entry->deleted () && $this->login->is_allowed (Privilege_set_entry, Privilege_delete, $entry);
@@ -92,7 +92,7 @@ class ENTRY_COMMANDS extends COMMANDS
 
     $cmd = $this->make_command ();
     $cmd->id = 'purge';
-    $cmd->title = 'Purge';
+    $cmd->caption = 'Purge';
     $cmd->link = "purge_entry.php?id=$entry->id";
     $cmd->icon = '{icons}buttons/purge';
     $cmd->executable = $this->login->is_allowed (Privilege_set_entry, Privilege_purge, $entry);
@@ -103,7 +103,7 @@ class ENTRY_COMMANDS extends COMMANDS
 
     $cmd = $this->make_command ();
     $cmd->id = 'move';
-    $cmd->title = 'Move';
+    $cmd->caption = 'Move';
     $cmd->link = "multiple_move.php?id=$folder_id&entry_ids=$entry->id";
     $cmd->icon = '{icons}buttons/move';
     $cmd->executable = $this->login->is_allowed (Privilege_set_entry, Privilege_modify, $entry);
@@ -122,7 +122,7 @@ class ENTRY_COMMANDS extends COMMANDS
 
     $cmd = $this->make_command ();
     $cmd->id = 'print';
-    $cmd->title = 'Print';
+    $cmd->caption = 'Print';
     $cmd->link = "multiple_print.php?id=$folder_id&entry_ids=$entry->id";
     $cmd->icon = '{icons}buttons/print';
     $cmd->executable = true;
@@ -131,7 +131,7 @@ class ENTRY_COMMANDS extends COMMANDS
 
     $cmd = $this->make_command ();
     $cmd->id = 'send';
-    $cmd->title = 'Send';
+    $cmd->caption = 'Send';
     $cmd->link = "send_entry.php?id=$entry->id";
     $cmd->icon = '{icons}buttons/send';
     $cmd->executable = true;
@@ -140,7 +140,7 @@ class ENTRY_COMMANDS extends COMMANDS
 
     $cmd = $this->make_command ();
     $cmd->id = 'plain_text';
-    $cmd->title = 'Plain text';
+    $cmd->caption = 'Plain text';
     $cmd->link = "view_entry_plain_text.php?id=$entry->id";
     $cmd->icon = '{icons}indicators/text';
     $cmd->executable = true;
@@ -149,7 +149,7 @@ class ENTRY_COMMANDS extends COMMANDS
 
     $cmd = $this->make_command ();
     $cmd->id = 'history';
-    $cmd->title = 'History';
+    $cmd->caption = 'History';
     $cmd->link = "view_entry_history.php?id=$entry->id";
     $cmd->icon = '{icons}buttons/history';
     $cmd->executable = $this->login->is_allowed (Privilege_set_entry, Privilege_view_history, $entry);
@@ -166,7 +166,7 @@ class ENTRY_COMMANDS extends COMMANDS
   {
     $cmd = $this->make_command ();
     $cmd->id = 'comment';
-    $cmd->title = 'Add comment';
+    $cmd->caption = 'Add comment';
     $cmd->link = "create_comment.php?id=$entry->id";
     $cmd->icon = '{icons}buttons/reply';
     $cmd->executable = $this->login->is_allowed (Privilege_set_comment, Privilege_create, $entry);
@@ -175,7 +175,7 @@ class ENTRY_COMMANDS extends COMMANDS
 
     $cmd = $this->make_command ();
     $cmd->id = 'attach';
-    $cmd->title = 'Attach';
+    $cmd->caption = 'Attach';
     $cmd->link = "create_attachment.php?id=$entry->id&type=" . History_item_entry;
     $cmd->icon = '{icons}buttons/attach';
     $cmd->executable = $this->login->is_allowed (Privilege_set_attachment, Privilege_create, $entry)
@@ -187,7 +187,7 @@ class ENTRY_COMMANDS extends COMMANDS
 
     $cmd = $this->make_command ();
     $cmd->id = 'copy';
-    $cmd->title = 'Copy';
+    $cmd->caption = 'Copy';
     $cmd->link = "multiple_copy.php?id=$folder_id&entry_ids=$entry->id";
     $cmd->icon = '{icons}buttons/copy';
     $cmd->executable = true;
@@ -200,7 +200,7 @@ class ENTRY_COMMANDS extends COMMANDS
     {
       $cmd = $this->make_command ();
       $cmd->id = 'clone';
-      $cmd->title = 'Clone';
+      $cmd->caption = 'Clone';
       $cmd->link = "clone_entry.php?id=$entry->id";
       $cmd->icon = '{icons}buttons/clone';
       $cmd->executable = $this->login->is_allowed (Privilege_set_entry, Privilege_create, $entry);
@@ -233,7 +233,7 @@ class DRAFTABLE_ENTRY_COMMANDS extends ENTRY_COMMANDS
 
     $cmd = $this->make_command ();
     $cmd->id = 'publish';
-    $cmd->title = 'Publish';
+    $cmd->caption = 'Publish';
     $cmd->link = "set_published.php?id=$entry->id&last_page=$last_page";
     $cmd->icon = '{icons}buttons/ship';
     $cmd->executable = $this->login->is_allowed (Privilege_set_entry, Privilege_modify, $entry) && ($entry->unpublished ());
@@ -242,7 +242,7 @@ class DRAFTABLE_ENTRY_COMMANDS extends ENTRY_COMMANDS
 
     $cmd = $this->make_command ();
     $cmd->id = 'abandon';
-    $cmd->title = 'Abandon';
+    $cmd->caption = 'Abandon';
     $cmd->link = "set_abandoned.php?id=$entry->id&last_page=$last_page";
     $cmd->icon = '{icons}buttons/abandon';
     $cmd->executable = ! $entry->abandoned () && $this->login->is_allowed (Privilege_set_entry, Privilege_modify, $entry) && ($entry->unpublished ());
@@ -251,7 +251,7 @@ class DRAFTABLE_ENTRY_COMMANDS extends ENTRY_COMMANDS
 
     $cmd = $this->make_command ();
     $cmd->id = 'queue';
-    $cmd->title = 'Queue';
+    $cmd->caption = 'Queue';
     $cmd->link = "set_queued.php?id=$entry->id&last_page=$last_page";
     $cmd->icon = '{icons}buttons/queue';
     $cmd->executable = ! $entry->queued () && $this->login->is_allowed (Privilege_set_entry, Privilege_modify, $entry) && ($entry->unpublished ());
@@ -260,7 +260,7 @@ class DRAFTABLE_ENTRY_COMMANDS extends ENTRY_COMMANDS
 
     $cmd = $this->make_command ();
     $cmd->id = 'unpublish';
-    $cmd->title = 'Unpublish';
+    $cmd->caption = 'Unpublish';
     $cmd->link = "set_draft.php?id=$entry->id&last_page=$last_page";
     $cmd->icon = '{icons}buttons/unpublish';
     $cmd->executable = $this->login->is_allowed (Privilege_set_entry, Privilege_modify, $entry) && ($entry->visible ());

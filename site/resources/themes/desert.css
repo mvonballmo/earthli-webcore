@@ -26,16 +26,8 @@ http://www.earthli.com/software/webcore
 
 body
 {
-	padding: 0em;
 	background: #CC9966 url(desert/mud_cracks_medium.jpg) repeat;
 	color: black;
-}
-
-.page-body
-{
-	padding: 0em .5em;
-	max-width: 800px;
-	margin: auto;
 }
 
 .banner, .footer
@@ -50,12 +42,6 @@ body
 .banner
 {
 	border-bottom-width: 2px;
-}
-
-.banner-box, .footer-box
-{
-	max-width: 800px;
-	margin: auto;
 }
 
 .footer

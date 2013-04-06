@@ -47,12 +47,10 @@ http://www.earthli.com/software/webcore
   }
 
   $Page->location->add_root_link ();
+  $Page->location->append('Access denied', '', '{icons}buttons/security');
   $Page->start_display ();
 ?>
 <div class="box">
-  <div class="box-title">
-    <?php echo $App->title_bar_icon ('{icons}buttons/security'); ?> Access denied
-  </div>
   <div class="box-body">
     <?php
       if (empty ($last_page))
@@ -76,7 +74,7 @@ http://www.earthli.com/software/webcore
     <?php } ?>
       </div>
     </div>    
-    <div style="margin: 4em auto">
+    <div class="form-content">
     <?php
       $form->display ();
     ?>

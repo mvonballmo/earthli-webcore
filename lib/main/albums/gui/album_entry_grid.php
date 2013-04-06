@@ -50,7 +50,7 @@ abstract class ALBUM_ENTRY_GRID extends CONTENT_OBJECT_GRID
 {
   /**
    * Render the grid itself.
-   * @param array[object] $objs
+   * @param stdClass[] $objs
    * @access private
    */
   protected function _draw ($objs)

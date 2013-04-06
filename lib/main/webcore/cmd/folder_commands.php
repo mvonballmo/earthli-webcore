@@ -66,7 +66,7 @@ class FOLDER_COMMANDS extends COMMANDS
 
     $cmd = $this->make_command ();
     $cmd->id = 'new';
-    $cmd->title = 'New folder';
+    $cmd->caption = 'New folder';
     $cmd->link = "create_folder.php?id=$folder->id";
     $cmd->icon = '{icons}buttons/new_folder';
     $cmd->executable = $this->login->is_allowed (Privilege_set_folder, Privilege_create, $folder);
@@ -85,7 +85,7 @@ class FOLDER_COMMANDS extends COMMANDS
   {
     $cmd = $this->make_command ();
     $cmd->id = 'edit';
-    $cmd->title = 'Edit';
+    $cmd->caption = 'Edit';
     $cmd->link = "edit_folder.php?id=$folder->id";
     $cmd->icon = '{icons}buttons/edit';
     $cmd->executable = $this->login->is_allowed (Privilege_set_folder, Privilege_modify, $folder);
@@ -94,7 +94,7 @@ class FOLDER_COMMANDS extends COMMANDS
 
     $cmd = $this->make_command ();
     $cmd->id = 'delete';
-    $cmd->title = 'Delete';
+    $cmd->caption = 'Delete';
     $cmd->link = "delete_folder.php?id=$folder->id";
     $cmd->icon = '{icons}buttons/delete';
     $cmd->executable = (! $folder->deleted () && ! $folder->is_root () &&
@@ -104,7 +104,7 @@ class FOLDER_COMMANDS extends COMMANDS
 
     $cmd = $this->make_command ();
     $cmd->id = 'purge';
-    $cmd->title = 'Purge';
+    $cmd->caption = 'Purge';
     $cmd->link = "purge_folder.php?id=$folder->id";
     $cmd->icon = '{icons}buttons/purge';
     $cmd->executable = ($this->login->is_allowed (Privilege_set_folder, Privilege_purge, $folder)
@@ -118,7 +118,7 @@ class FOLDER_COMMANDS extends COMMANDS
     {
       $cmd = $this->make_command ();
       $cmd->id = 'move';
-      $cmd->title = 'Move';
+      $cmd->caption = 'Move';
       $cmd->link = "multiple_move.php?id=$parent_id&folder_ids=$folder->id";
       $cmd->icon = '{icons}buttons/move';
       $cmd->executable = $this->login->is_allowed (Privilege_set_folder, Privilege_modify, $folder);
@@ -137,7 +137,7 @@ class FOLDER_COMMANDS extends COMMANDS
   {
     $cmd = $this->make_command ();
     $cmd->id = 'security';
-    $cmd->title = 'Security';
+    $cmd->caption = 'Security';
     $cmd->link = "view_folder_permissions.php?id=$folder->id";
     $cmd->icon = '{icons}buttons/security';
     $cmd->executable = $this->login->is_allowed (Privilege_set_folder, Privilege_secure, $folder);
@@ -146,7 +146,7 @@ class FOLDER_COMMANDS extends COMMANDS
 
     $cmd = $this->make_command ();
     $cmd->id = 'subscribers';
-    $cmd->title = 'Subscribers';
+    $cmd->caption = 'Subscribers';
     $cmd->link = "view_folder_subscriptions.php?id=$folder->id";
     $cmd->icon = '{icons}buttons/subscriptions';
     $cmd->executable = $this->login->is_allowed (Privilege_set_folder, Privilege_modify, $folder);
@@ -155,7 +155,7 @@ class FOLDER_COMMANDS extends COMMANDS
 
     $cmd = $this->make_command ();
     $cmd->id = 'history';
-    $cmd->title = 'History';
+    $cmd->caption = 'History';
     $cmd->link = "view_folder_history.php?id=$folder->id";
     $cmd->icon = '{icons}buttons/history';
     $cmd->executable = $this->login->is_allowed (Privilege_set_folder, Privilege_view_history, $folder);
@@ -164,7 +164,7 @@ class FOLDER_COMMANDS extends COMMANDS
 
     $cmd = $this->make_command ();
     $cmd->id = 'explorer';
-    $cmd->title = 'Explorer';
+    $cmd->caption = 'Explorer';
     $cmd->link = "view_explorer.php?id=$folder->id";
     $cmd->icon = '{icons}buttons/explorer';
     $cmd->importance = Command_importance_low;
@@ -180,7 +180,7 @@ class FOLDER_COMMANDS extends COMMANDS
   {
     $cmd = $this->make_command ();
     $cmd->id = 'new_entry';
-    $cmd->title = 'New entry';
+    $cmd->caption = 'New entry';
     $cmd->link = "create_entry.php?id=$folder->id";
     $cmd->icon = '{icons}buttons/new_object';
     $cmd->executable = $this->login->is_allowed (Privilege_set_entry, Privilege_create, $folder);

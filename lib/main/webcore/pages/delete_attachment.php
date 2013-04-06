@@ -74,44 +74,42 @@ http://www.earthli.com/software/webcore
     if (isset ($host))
     {
       $attachment_query = $host->attachment_query ();
+      /** @var $attachment ATTACHMENT */
       $attachment = $attachment_query->object_at_id ($id);
 
       $Page->title->add_object ($attachment);
-      $Page->location->add_object_link ($attachment);
+      $Page->location->add_object_link ($attachment, '', '{icons}buttons/attach');
     }
   }
 
-  if (isset ($attachment) && $App->login->is_allowed (Privilege_set_attachment, Privilege_delete, $attachment))
+  if (isset($host) && isset ($attachment) && $App->login->is_allowed (Privilege_set_attachment, Privilege_delete, $attachment))
   {
     $class_name = $App->final_class_name ('DELETE_ATTACHMENT_FORM', 'webcore/forms/delete_attachment_form.php');
+    /** @var $form DELETE_ATTACHMENT_FORM */
     $form = new $class_name ($folder, Privilege_set_entry);
 
     $form->process_existing ($attachment);
     if ($form->committed ())
     {
-      if ($App->login->is_allowed (Privilege_set_entry, Privilege_hidden, $folder) && ! $form->value_for ('purge'))
+      if ($App->login->is_allowed (Privilege_set_entry, Privilege_view_hidden, $folder) && ! $form->value_for ('purge'))
       {
         $App->return_to_referer ($attachment->home_page ());
       }
       else
       {
-        $Env->redirect_local ($entry->home_page ());
+        $Env->redirect_local ($host->home_page ());
       }
     }
 
     $Page->title->add_object ($attachment);
     $Page->title->subject = 'Delete Attachment';
 
-    $Page->location->add_object_link ($attachment);
-    $Page->location->append ($Page->title->subject);
+    $Page->location->append ($Page->title->subject, '', '{icons}buttons/delete');
 
     $Page->start_display ();
 ?>
     <div class="box">
-      <div class="box-title">
-        <?php echo $App->title_bar_icon ('{icons}buttons/delete'); ?> Delete Attachment?
-      </div>
-      <div class="box-body">
+      <div class="box-body form-content">
         <?php
           $form->display ();
         ?>

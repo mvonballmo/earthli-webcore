@@ -92,10 +92,10 @@ class JOURNAL_GRID extends ALBUM_ENTRY_GRID
       <?php $this->_draw_menu_for ($obj, Menu_size_minimal, Menu_align_inline); ?>
     </div>
     <div class="minimal-commands-content">
-      <div style="float: left; margin-right: .5em">
+      <div style="float: left; margin-right: 5px">
         <?php echo $obj->weather_icon (); ?>
       </div>
-      <div style="margin-left: 40px">
+      <div style="margin-left: 35px">
         <h3 class="grid-title">
           <?php
           if ($this->show_folder)
@@ -108,7 +108,7 @@ class JOURNAL_GRID extends ALBUM_ENTRY_GRID
         <p class="date-time">
           <?php echo $folder->format_date ($obj->date); ?>
         </p>
-        <div class="description" style="clear: both">
+        <div class="text-flow">
           <?php
           $munger = $obj->html_formatter ();
           $munger->max_visible_output_chars = 250;

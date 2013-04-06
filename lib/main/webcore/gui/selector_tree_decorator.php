@@ -59,8 +59,9 @@ class SELECTOR_TREE_DECORATOR extends TREE_DECORATOR
    * Render the decorator for this node.
    * @param object $node
    * @param string $text
+   * @param string $icon
    */
-  public function draw ($node, $text)
+  public function draw ($node, $text, $icon)
   {
     $node_info = $this->node_info ();
     $id = $node_info->id ($node);
@@ -68,7 +69,12 @@ class SELECTOR_TREE_DECORATOR extends TREE_DECORATOR
     $dom_id = $this->control_name . '_' . $id;
 ?>
     <input type="radio" id="<?php echo $dom_id; ?>" name="<?php echo $this->control_name; ?>" value="<?php echo $id; ?>" style="vertical-align: middle"<?php if ($disabled) echo ' disabled'; ?>>
-    <label for="<?php echo $dom_id; ?>"><?php echo $text; ?></label>
+    <label for="<?php echo $dom_id; ?>"><?php
+      if ($icon)
+      {
+        echo $icon . ' ';
+      }
+      ?><?php echo $text; ?></label>
 <?php
   }
 }
@@ -194,8 +200,9 @@ class MULTI_SELECTOR_TREE_DECORATOR extends TREE_DECORATOR
    * Render the decorator for this node.
    * @param object $node
    * @param string $text
+   * @param string $icon
    */
-  public function draw ($node, $text)
+  public function draw ($node, $text, $icon)
   {
     $control_name = $this->control_name;
     $node_info = $this->node_info ();
@@ -219,7 +226,12 @@ class MULTI_SELECTOR_TREE_DECORATOR extends TREE_DECORATOR
     $dom_id = $this->control_name . '_' . $id;
 ?>
     <input type="checkbox" id="<?php echo $dom_id; ?>" name="<?php echo $control_name; ?>[]" <?php if (isset ($on_click)) echo "onclick=\"$on_click\""; ?> value="<?php echo $node->id; ?>" <?php echo $state; ?><?php if ($disabled) echo ' disabled'; ?>>
-    <label for="<?php echo $dom_id; ?>"><?php echo $text; ?></label>
+    <label for="<?php echo $dom_id; ?>"><?php
+      if ($icon)
+      {
+        echo $icon . ' ';
+      }
+      ?><?php echo $text; ?></label>
 <?php
   }
 }

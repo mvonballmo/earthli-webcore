@@ -61,7 +61,7 @@ class RELEASE_COMMANDS extends COMMANDS
 
     $cmd = $this->make_command ();
     $cmd->id = 'edit';
-    $cmd->title = 'Edit';
+    $cmd->caption = 'Edit';
     $cmd->link = "edit_release.php?id=$obj->id";
     $cmd->icon = '{icons}buttons/edit';
     $cmd->executable = $this->login->is_allowed (Privilege_set_release, Privilege_modify, $obj);
@@ -70,7 +70,7 @@ class RELEASE_COMMANDS extends COMMANDS
 
     $cmd = $this->make_command ();
     $cmd->id = 'delete';
-    $cmd->title = 'Delete';
+    $cmd->caption = 'Delete';
     $cmd->link = "delete_release.php?id=$obj->id";
     $cmd->icon = '{icons}buttons/delete';
     $cmd->executable = ! $obj->deleted () && $this->login->is_allowed (Privilege_set_release, Privilege_delete, $obj);
@@ -79,7 +79,7 @@ class RELEASE_COMMANDS extends COMMANDS
 
     $cmd = $this->make_command ();
     $cmd->id = 'purge';
-    $cmd->title = 'Purge';
+    $cmd->caption = 'Purge';
     $cmd->link = "purge_release.php?id=$obj->id";
     $cmd->icon = '{icons}buttons/purge';
     $cmd->executable = $this->login->is_allowed (Privilege_set_release, Privilege_purge, $obj);
@@ -88,7 +88,7 @@ class RELEASE_COMMANDS extends COMMANDS
 
     $cmd = $this->make_command ();
     $cmd->id = 'ship';
-    $cmd->title = 'Ship';
+    $cmd->caption = 'Ship';
     $cmd->link = "ship_release.php?id=$obj->id";
     $cmd->icon = '{icons}buttons/ship';
     $cmd->executable = $obj->planned () && $this->login->is_allowed (Privilege_set_release, Privilege_modify, $obj);
@@ -99,7 +99,7 @@ class RELEASE_COMMANDS extends COMMANDS
 
     $cmd = $this->make_command ();
     $cmd->id = 'print';
-    $cmd->title = 'Print';
+    $cmd->caption = 'Print';
     $cmd->link = "view_release_change_log.php?id=$obj->id&printable=1";
     $cmd->icon = '{icons}buttons/print';
     $cmd->executable = true;
@@ -108,7 +108,7 @@ class RELEASE_COMMANDS extends COMMANDS
 
     $cmd = $this->make_command ();
     $cmd->id = 'history';
-    $cmd->title = 'View history';
+    $cmd->caption = 'View history';
     $cmd->link = "view_release_history.php?id=$obj->id";
     $cmd->icon = '{icons}buttons/history';
     $cmd->executable = $this->login->is_allowed (Privilege_set_release, Privilege_view_history, $obj);
@@ -117,7 +117,7 @@ class RELEASE_COMMANDS extends COMMANDS
 
     $cmd = $this->make_command ();
     $cmd->id = 'change_log';
-    $cmd->title = 'View change log';
+    $cmd->caption = 'View change log';
     $cmd->link = "view_release_change_log.php?id=$obj->id";
     $cmd->icon = '{app_icons}buttons/change_log';
     $cmd->executable = true;
@@ -133,7 +133,7 @@ class RELEASE_COMMANDS extends COMMANDS
 
       $cmd = $this->make_command ();
       $cmd->id = 'new_job';
-      $cmd->title = 'New job';
+      $cmd->caption = 'New job';
       $cmd->link = "create_job.php?id=$folder->id&branch_id=$branch->id&release_id=$obj->id";
       $cmd->icon = '{app_icons}buttons/new_job';
       $cmd->executable = ! $obj->locked () && $this->login->is_allowed (Privilege_set_entry, Privilege_create, $obj);
@@ -142,7 +142,7 @@ class RELEASE_COMMANDS extends COMMANDS
 
       $cmd = $this->make_command ();
       $cmd->id = 'new_change';
-      $cmd->title = 'New change';
+      $cmd->caption = 'New change';
       $cmd->link = "create_change.php?id=$folder->id&branch_id=$branch->id&release_id=$obj->id";
       $cmd->icon = '{app_icons}buttons/new_change';
       $cmd->executable = ! $obj->locked () && $this->login->is_allowed (Privilege_set_entry, Privilege_create, $obj);

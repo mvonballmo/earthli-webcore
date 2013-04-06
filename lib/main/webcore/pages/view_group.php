@@ -34,7 +34,6 @@ http://www.earthli.com/software/webcore
     $App->set_referer ();
 
     $Page->title->add_object ($group);
-    $Page->title->subject = 'Home';
 
     $Page->location->add_root_link ();
     $Page->location->append ('Groups', 'view_groups.php');
@@ -42,14 +41,14 @@ http://www.earthli.com/software/webcore
 
     $Page->start_display ();
 ?>
+<div class="top-box button-content">
+<?php
+  $renderer = $group->handler_for (Handler_menu);
+  $renderer->alignment = Menu_align_inline;
+  $renderer->display ($group->handler_for (Handler_commands));
+?>
+</div>
 <div class="box">
-  <div class="box-title">
-    <?php echo $group->title_as_html (); ?>
-  </div>
-  <?php
-    $renderer = $group->handler_for (Handler_menu);
-    $renderer->display_as_toolbar ($group->handler_for (Handler_commands));
-  ?>
   <div class="box-body">
   <?php
     $renderer = $group->handler_for (Handler_html_renderer);

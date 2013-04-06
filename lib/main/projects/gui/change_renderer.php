@@ -50,17 +50,17 @@ class CHANGE_RENDERER extends PROJECT_ENTRY_RENDERER
 {
   /**
    * Outputs the object as HTML.
-   * @param JOB $entry
+   * @param CHANGE $entry
    * @access private
    */
   protected function _display_as_html ($entry)
   {
     $this->_echo_subscribe_status ($entry);
 ?>
-<div class="info-box-top">
-  <table cellpadding="2" cellspacing="0" style="margin-left: 0px">
+<div>
+  <table class="basic columns left-labels">
     <tr>
-      <td class="label">Kind</td>
+      <th>Kind</th>
       <td><?php echo $entry->kind_icon () . ' ' . $entry->kind_as_text (); ?></td>
     </tr>
     <?php
@@ -69,14 +69,14 @@ class CHANGE_RENDERER extends PROJECT_ENTRY_RENDERER
         $comp = $entry->component ();
     ?>
     <tr>
-      <td class="label">Component</td>
+      <th>Component</th>
       <td><?php echo $comp->icon_as_html ('16px') . ' ' . $comp->title_as_link (); ?></td>
     </tr>
     <?php
       }
     ?>
     <tr>
-      <td class="label">Job</td>
+      <th>Job</th>
       <td>
 <?php
     $job = $entry->job ();
@@ -84,7 +84,7 @@ class CHANGE_RENDERER extends PROJECT_ENTRY_RENDERER
     {
       $t = $job->title_formatter ();
       $t->CSS_class = '';
-      echo '(' . $job->title_as_link ($t) . ')';
+      echo $job->title_as_link ($t);
     }
     else
     {
@@ -100,7 +100,7 @@ class CHANGE_RENDERER extends PROJECT_ENTRY_RENDERER
     {
 ?>
     <tr>
-      <td class="label">Created</td>
+      <th>Created</th>
       <td>
         <?php echo $entry->time_created->format (); ?>
         by <?php
@@ -115,7 +115,7 @@ class CHANGE_RENDERER extends PROJECT_ENTRY_RENDERER
         $modifier = $entry->modifier ();
 ?>
     <tr>
-      <td class="label">Modified</td>
+      <th>Modified</th>
       <td><?php echo $entry->time_modified->format (); ?> by <?php echo $modifier->title_as_link (); ?></td>
     </tr>
     <?php
@@ -124,7 +124,6 @@ class CHANGE_RENDERER extends PROJECT_ENTRY_RENDERER
 
     if (! $this->_hide_files && $entry->files)
     {
-      /* Make a copy. */
       $layer = $this->app->make_layer ();
       $layer->margin_top = '0px';
       $layer->name = "id_{$entry->id}_details";
@@ -164,14 +163,14 @@ class CHANGE_RENDERER extends PROJECT_ENTRY_RENDERER
 
   /**
    * Show information for this branch as HTML.
-   * @param PROJECT_ENTRY $obj
-   * @param PROJECT_ENTRY_BRANCH_INFO $branch_info
+   * @param CHANGE $obj
+   * @param CHANGE_BRANCH_INFO $branch_info
    * @access private
    */
   protected function _echo_html_branch_info ($obj, $branch_info)
   {
     $applier = $branch_info->applier ();
-    echo 'Applied ' . $branch_info->time_applied->format () . ' by ' . $applier->title_as_link ();
+    echo 'Applied on ' . $branch_info->time_applied->format () . ' by ' . $applier->title_as_link ();
   }
 
   /**
@@ -186,7 +185,7 @@ class CHANGE_RENDERER extends PROJECT_ENTRY_RENDERER
 
   /**
    * Outputs the object as plain text.
-   * @param object $entry
+   * @param CHANGE $entry
    * @access private
    */
   protected function _display_as_plain_text ($entry)
@@ -207,8 +206,8 @@ class CHANGE_RENDERER extends PROJECT_ENTRY_RENDERER
 
   /**
    * Show information for this branch
-   * @param PROJECT_ENTRY $entry
-   * @param PROJECT_ENTRY_BRANCH_INFO $branch_info
+   * @param CHANGE $entry
+   * @param CHANGE_BRANCH_INFO $branch_info
    */
   protected function _echo_plain_text_branch_info ($entry, $branch_info)
   {
@@ -218,7 +217,7 @@ class CHANGE_RENDERER extends PROJECT_ENTRY_RENDERER
 
   /**
    * Show information for a branch's release.
-   * @param PROJECT_ENTRY_BRANCH_INFO $branch_info
+   * @param CHANGE_BRANCH_INFO $branch_info
    */
   protected function _echo_plain_text_branch_release_info ($branch_info)
   {
@@ -227,7 +226,7 @@ class CHANGE_RENDERER extends PROJECT_ENTRY_RENDERER
 
   /**
    * Outputs the object for print preview.
-   * @param JOB $entry
+   * @param CHANGE $entry
    */
   public function display_as_printable ($entry)
   {
@@ -236,7 +235,7 @@ class CHANGE_RENDERER extends PROJECT_ENTRY_RENDERER
   }
 
   /**
-   * Show files when renderered?
+   * Show files when rendered?
    * The print preview can toggle this value.
    * @var boolean
    * @access private

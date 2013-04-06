@@ -50,7 +50,7 @@ class ALBUM_APPLICATION_DISPLAY_OPTIONS extends APPLICATION_DISPLAY_OPTIONS
   /**
    * Return the list of {@link JOURNAL::$weather_type}s.
    * @see PROPERTY_VALUE
-   * @return array[PROPERTY_VALUE]
+   * @return PROPERTY_VALUE[]
    */
   public function weather_icons ()
   {
@@ -111,7 +111,7 @@ class ALBUM_APPLICATION_DISPLAY_OPTIONS extends APPLICATION_DISPLAY_OPTIONS
 
   /**
    * @see PROPERTY_VALUE
-   * @var array[PROPERTY_VALUE]
+   * @var PROPERTY_VALUE[]
    * @access private
    */
   protected $_weather_icons;

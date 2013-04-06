@@ -55,35 +55,74 @@ class ATTACHMENT_RENDERER extends CONTENT_OBJECT_RENDERER
    */
   protected function _display_as_html ($obj)
   {
-    echo '<div style="float: left">';
+?>
+    <div style="float: left">
+<?php
     echo $obj->icon_as_html ('50px');
-    echo '</div><div style="margin-left: 60px">';
+?>
+    </div>
+    <div style="margin-left: 65px">
+<?php
 
     $file_name = $obj->full_file_name ();
     $file_url = htmlentities ($obj->full_url ());
-    
-    echo "<table>\n";
-    echo '<tr><td class="label">Name</td><td>' . $obj->original_file_name;
+?>
+    <table class="basic columns left-labels">
+      <tr>
+        <th>Name</th>
+        <td>
+          <?php echo $obj->original_file_name; ?>
+        </td>
+      </tr>
+      <tr>
+        <th>Size</th>
+        <td>
+          <?php echo file_size_as_text ($obj->size); ?>
+        </td>
+      </tr>
+      <tr>
+        <th>Type</th>
+        <td>
+          <?php echo $obj->mime_type; ?>
+        </td>
+      </tr>
+<?php
+
     if ($obj->exists () && ($obj->original_file_name != $obj->file_name) && $this->_options->show_interactive)
     {
-      $img = $this->app->resolve_icon_as_html ('{icons}indicators/info', 'Info', '16px');
-      echo '<div class="caution" style="margin-top: .2em"><span class="notes">' . $img . ' Stored as <span class="field">' . $obj->file_name . "</span> on the server.</span></div>\n";
-    }    
-    echo "</td></tr>\n";
-    echo '<tr><td class="label">Size</td><td>' . file_size_as_text ($obj->size) . "</td></tr>\n";
-    echo '<tr><td class="label">Type</td><td>' . $obj->mime_type . "</td></tr>\n";
+      $img_url = $this->app->sized_icon ('{icons}indicators/info', '16px');
+?>
+      <tr>
+        <th></th>
+        <td>
+          <div class="caution notes" style="display: inline-block">
+            <span class="icon sixteen" style="background-image: url(<?php echo $img_url; ?>)">Stored as <span class="field"><?php echo $obj->file_name; ?></span> on the server.</span></div>
+        </td>
+      </tr>
+<?php
+    }
+    echo "\n";
 
     if ($this->_options->show_interactive && ! $obj->is_image)
     {
-      echo "<tr><td colspan=\"2\">&nbsp;</td></tr>\n";
-      echo '<tr><td colspan="2">';
-      $renderer = $this->context->make_controls_renderer ();
-      $buttons [] = $renderer->button_as_html ('Download', $file_url, '{icons}buttons/download');
-      $renderer->draw_buttons_in_row ($buttons);
-      echo "</td></tr>\n";
+      ?>
+      <tr>
+        <th></th>
+        <td>
+        <?php
+        $menu = $this->app->make_menu ();
+        $menu->append ('Download', $file_url, '{icons}buttons/download');
+        $menu->renderer = $this->app->make_menu_renderer ();
+        $menu->display ();
+        ?>
+        </td>
+      </tr>
+      <?php
     }
-
-    echo "</table>\n<br>\n";
+?>
+    </table>
+  </div>
+<?php
 
     if ($obj->is_image)
     {
@@ -95,12 +134,10 @@ class ATTACHMENT_RENDERER extends CONTENT_OBJECT_RENDERER
     }
     else
     {
-      echo $this->_echo_html_description ($obj);
+      $this->_echo_html_description ($obj);
     }
 
     $this->_echo_html_user_information ($obj, 'info-box-bottom');
-
-    echo '</div>';
   }
   
   /**
@@ -112,14 +149,15 @@ class ATTACHMENT_RENDERER extends CONTENT_OBJECT_RENDERER
   protected function _draw_html_image ($obj, $file_url)
   {
     $class_name = $this->app->final_class_name ('IMAGE_METRICS', 'webcore/util/image.php');
+    /** @var $metrics IMAGE_METRICS */
     $metrics = new $class_name ();
     $metrics->set_url ($file_url);
     $metrics->resize_to_fit (640, 640);
     if ($metrics->loaded ())
     {
 ?>
-<div style="margin: auto; width: <?php echo $metrics->width (); ?>px">
-  <div>
+<div style="width: <?php echo $metrics->width (); ?>px">
+  <div class="text-flow">
     <?php $this->_echo_html_description ($obj); ?>
   </div>
   <div>
@@ -134,7 +172,7 @@ class ATTACHMENT_RENDERER extends CONTENT_OBJECT_RENDERER
     if ($this->_options->show_interactive && $metrics->was_resized)
     {
   ?>
-  <div class="notes">
+  <div class="subdued">
     Resized from
     <?php echo $metrics->original_width; ?> x <?php echo $metrics->original_height; ?> to
     <?php echo $metrics->constrained_width; ?> x <?php echo $metrics->constrained_height; ?>.

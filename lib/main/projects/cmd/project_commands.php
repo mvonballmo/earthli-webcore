@@ -58,7 +58,7 @@ class PROJECT_COMMANDS extends FOLDER_COMMANDS
     parent::__construct ($folder);
 
     $cmd = $this->command_at ('new');
-    $cmd->title = 'New project';
+    $cmd->caption = 'New project';
   }
 
   /**
@@ -70,7 +70,7 @@ class PROJECT_COMMANDS extends FOLDER_COMMANDS
   {
     $cmd = $this->make_command ();
     $cmd->id = 'new_change';
-    $cmd->title = 'New change';
+    $cmd->caption = 'New change';
     if ($folder->is_organizational()) 
     {
       $cmd->link = "select_folder.php?page_name=create_change.php";
@@ -86,7 +86,7 @@ class PROJECT_COMMANDS extends FOLDER_COMMANDS
   	
     $cmd = $this->make_command ();
     $cmd->id = 'new_job';
-    $cmd->title = 'New job';
+    $cmd->caption = 'New job';
     if ($folder->is_organizational()) 
     {
       $cmd->link = "select_folder.php?page_name=create_job.php";
@@ -104,7 +104,7 @@ class PROJECT_COMMANDS extends FOLDER_COMMANDS
     {
 	    $cmd = $this->make_command ();
 	    $cmd->id = 'new_release';
-	    $cmd->title = 'New release';
+	    $cmd->caption = 'New release';
 	    $cmd->icon = '{app_icons}buttons/new_release';
 	    $cmd->executable = $this->login->is_allowed (Privilege_set_folder, Privilege_modify, $folder);
 	    $cmd->importance = Command_importance_low + Command_importance_increment;
@@ -113,7 +113,7 @@ class PROJECT_COMMANDS extends FOLDER_COMMANDS
 
 	    $cmd = $this->make_command ();
 	    $cmd->id = 'new_branch';
-	    $cmd->title = 'New branch';
+	    $cmd->caption = 'New branch';
 	
 	    $branch =  $folder->trunk ();
 	    if (isset ($branch))
@@ -132,7 +132,7 @@ class PROJECT_COMMANDS extends FOLDER_COMMANDS
 	
 	    $cmd = $this->make_command ();
 	    $cmd->id = 'new_component';
-	    $cmd->title = 'New component';
+	    $cmd->caption = 'New component';
 	    $cmd->link = "create_component.php?id=$folder->id";
 	    $cmd->icon = '{app_icons}buttons/new_component';
 	    $cmd->executable = $this->login->is_allowed (Privilege_set_folder, Privilege_modify, $folder);

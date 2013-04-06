@@ -60,16 +60,13 @@ http://www.earthli.com/software/webcore
 
     $Page->location->add_folder_link ($folder);
     $Page->location->add_object_link ($entry);
-    $Page->location->add_object_link ($comment);
-    $Page->location->append ($Page->title->subject);
+    $Page->location->add_object_link ($comment, '', '{icons}buttons/reply');
+    $Page->location->append ($Page->title->subject, '', '{icons}/buttons/purge');
 
     $Page->start_display ();
 ?>
   <div class="box">
-    <div class="box-title">
-      <?php echo $App->title_bar_icon ('{icons}buttons/delete'); ?> Purge Comment?
-    </div>
-    <div class="box-body">
+    <div class="box-body form-content">
       <?php
         $form->display ();
       ?>

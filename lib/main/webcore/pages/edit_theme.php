@@ -46,15 +46,12 @@ http://www.earthli.com/software/webcore
     $Page->location->add_root_link ();
     $Page->location->append ('Themes', 'view_themes.php');
     $Page->location->add_object_link ($theme);
-    $Page->location->append ($Page->title->subject);
+    $Page->location->append ($Page->title->subject, '', '{icons}buttons/edit');
 
     $Page->start_display ();
   ?>
   <div class="box">
-    <div class="box-title">
-      <?php echo $App->title_bar_icon ('{icons}buttons/edit'); ?> Edit <?php echo $theme->title_as_html (); ?>
-    </div>
-    <div class="box-body">
+    <div class="box-body form-content">
     <?php
       $form->display ();
     ?>

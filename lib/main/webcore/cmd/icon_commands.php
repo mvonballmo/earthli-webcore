@@ -59,7 +59,7 @@ class ICON_COMMANDS extends COMMANDS
     
     $cmd = $this->make_command ();
     $cmd->id = 'edit';
-    $cmd->title = 'Edit';
+    $cmd->caption = 'Edit';
     $cmd->link = "edit_icon.php?id=$icon->id";
     $cmd->icon = '{icons}buttons/edit';
     $cmd->executable = $this->login->is_allowed (Privilege_set_global, Privilege_resources);
@@ -68,7 +68,7 @@ class ICON_COMMANDS extends COMMANDS
 
     $cmd = $this->make_command ();    
     $cmd->id = 'delete';
-    $cmd->title = 'Delete';
+    $cmd->caption = 'Delete';
     $cmd->link = "delete_icon.php?id=$icon->id";
     $cmd->icon = '{icons}buttons/delete';
     $cmd->executable = $this->login->is_allowed (Privilege_set_global, Privilege_resources);

@@ -27,6 +27,7 @@ http://www.earthli.com/software/webcore/albums
 ****************************************************************************/
   
   $folder_query = $App->login->folder_query ();
+  /** @var $folder FOLDER */
   $folder = $folder_query->object_at_id (read_var ('id'));
 
   if (isset ($folder)
@@ -37,9 +38,10 @@ http://www.earthli.com/software/webcore/albums
     $Page->title->subject = 'Upload pictures';
     
     $Page->location->add_folder_link ($folder);
-    $Page->location->append ($Page->title->subject);
+    $Page->location->append ($Page->title->subject, '', '{icons}/buttons/upload');
 
     $class_name = $App->final_class_name ('UPLOAD_PICTURES_FORM', 'albums/forms/upload_pictures_form.php');
+    /** @var $form UPLOAD_PICTURES_FORM */
     $form = new $class_name ($folder);
     $form->process_plain ();
     if (! $form->committed ())
@@ -47,10 +49,7 @@ http://www.earthli.com/software/webcore/albums
       $Page->start_display ();
 ?>
 <div class="box">
-  <div class="box-title">
-    <?php echo $App->title_bar_icon ('{icons}buttons/upload'); ?> <?php echo $Page->title->subject; ?>
-  </div>
-  <div class="box-body">
+  <div class="box-body form-content">
   <?php
     $form->display ();
   ?>

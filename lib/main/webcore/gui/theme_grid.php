@@ -65,35 +65,40 @@ class THEME_GRID extends STANDARD_GRID
   protected function _draw_box ($obj)
   {
 ?>
-  <div style="text-align: center">
-    <h4>
-    <?php
-      if (! $this->is_chooser)
-      {
-        $this->_draw_menu_for ($obj, Menu_size_minimal, Menu_align_left);
-      }
+  <div style="position: relative">
+<?php
+  if (! $this->is_chooser)
+  {
     ?>
-      <?php echo $obj->title_as_html (); ?>
-    </h4>
-    <div>
-    <?php
-      if ($this->is_chooser)
-      {
-    ?>
-      <a href="#" onclick="set_main_theme ('<?php echo $obj->id; ?>'); return false;" title="Choose this theme"><img class="frame" src="<?php echo $obj->snapshot_thumbnail_name (); ?>" alt="<?php echo $obj->title_as_plain_text (); ?>"></a>
-    <?php
-      }
-      else
-      {
-    ?>
-      <img class="frame" src="<?php echo $obj->snapshot_thumbnail_name (); ?>" alt="<?php echo $obj->title_as_plain_text (); ?>">
-    <?php
-      }
-    ?>
+    <div style="position: absolute; left: 0; top: 0">
+      <?php
+      $this->_draw_menu_for ($obj, Menu_size_minimal, Menu_align_inline);
+      ?>
     </div>
-    <div class="detail">
-      [<a href="<?php echo $obj->snapshot_name (); ?>">full-size sample</a>]
-    </div>
+    <?php
+  }
+?>
+    <p>
+      <a href="<?php echo $obj->snapshot_name (); ?>"><img class="frame" src="<?php echo $obj->snapshot_thumbnail_name (); ?>" alt="<?php echo $obj->title_as_plain_text (); ?>"></a>
+    </p>
+<?php
+  if ($this->is_chooser)
+  {
+?>
+      <a class="button" href="#" onclick="set_main_theme ('<?php echo $obj->id; ?>'); return false;" title="Choose this theme"><?php echo $obj->title_as_html(); ?></a>
+<?php
+  }
+  else
+  {
+?>
+    <h3>
+<?php
+    echo $obj->title_as_html ();
+?>
+    </h3>
+<?php
+  }
+    ?>
   </div>
 <?php
   }

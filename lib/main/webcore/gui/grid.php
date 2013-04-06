@@ -555,11 +555,12 @@ abstract class GRID extends WEBCORE_OBJECT
   protected function _CSS_for_box ()
   {
     $style = $this->_style_for_box ();
-    if ($style)
+    $attrs = [];
+    if (!empty($style))
     {
       $attrs [] = "style=\"$style\"";
     }
-    if ($this->box_style)
+    if (!empty($this->box_style))
     {
       $attrs [] = "class=\"$this->box_style\"";
     }
@@ -585,7 +586,7 @@ abstract class GRID extends WEBCORE_OBJECT
       return "vertical-align: top; width: $width%";
     }
 
-    return "vertical-align: top";
+    return "";
   }
 
   /**
@@ -633,7 +634,7 @@ abstract class HTML_TABLE_GRID extends GRID
   {
     $style = $this->_style_for_grid ();
 ?>
-<table cellspacing="<?php echo $this->spacing; ?>" cellpadding="<?php echo $this->padding; ?>" <?php if ($style) echo " style=\"$style\""; if ($this->border_size) echo " border=\"$this->border_size\""; ?>>
+<table class="basic" <?php if ($style) echo " style=\"$style\""; if ($this->border_size) echo " border=\"$this->border_size\""; ?>>
 <?php
   }
 

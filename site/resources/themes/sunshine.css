@@ -26,7 +26,6 @@ http://www.earthli.com/software/webcore
 
 body
 {
-	padding: 0em;
 	background-color: #FFFF88;
 	color: black;
 }
@@ -34,13 +33,6 @@ body
 .nav-box
 {
 	border-width: 0px;
-}
-
-.page-body
-{
-	padding: 0em .5em;
-	max-width: 800px;
-	margin: auto;
 }
 
 .banner, .footer
@@ -54,12 +46,6 @@ body
 .banner
 {
 	border-bottom-width: 1px;
-}
-
-.banner-box, .footer-box
-{
-	max-width: 800px;
-	margin: auto;
 }
 
 .footer

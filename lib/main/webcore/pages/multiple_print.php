@@ -45,17 +45,16 @@ http://www.earthli.com/software/webcore
     $Page->title->add_object ($folder);
     $Page->title->subject = 'Print ' . $form->object_list->description ();
 
+    $Page->location->renderer->context = $App;
+
     $Page->location->add_folder_link ($folder);
     $Page->location->append ("Explorer", "view_explorer.php?id=$folder->id");
-    $Page->location->append ($Page->title->subject);
+    $Page->location->append ($Page->title->subject, '', '{icons}buttons/print');
 
     $Page->start_display ();
   ?>
   <div class="box">
-    <div class="box-title">
-      <?php echo $App->title_bar_icon ('{icons}buttons/print'); ?> <?php echo $Page->title->subject; ?>
-    </div>
-    <div class="box-body">
+    <div class="box-body form-content">
     <?php
       $form->action = 'print_preview.php';
       $form->display ();

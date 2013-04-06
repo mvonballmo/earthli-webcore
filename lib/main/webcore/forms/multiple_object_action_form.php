@@ -170,23 +170,22 @@ abstract class MULTIPLE_OBJECT_ACTION_FORM extends ID_BASED_FORM
   protected function _draw_selected_objects ()
   {
 ?>
-<div class="chart">
-  <div class="chart-body" style="white-space: nowrap">
+<div class="left-sidebar" style="white-space: nowrap">
   <?php
     $count = sizeof ($this->object_list->folders);
 
     if ($count)
     {
       $folder_info = $this->app->type_info_for ('FOLDER');
-      echo '<h3>' . $folder_info->plural_title . '</h3>';
-      echo '<p>';
+      echo '<h2>' . $folder_info->plural_title . '</h2>';
+      echo '<ul class="object-list">';
       
       foreach ($this->object_list->folders as &$folder)
       {
-        echo $folder->title_as_link () . "<br>";
+        echo '<li>' . $folder->title_as_link () . "</li>";
       }
 
-      echo '</p>';
+      echo '</ul>';
     }
 
     $count = sizeof ($this->object_list->entries);
@@ -205,24 +204,20 @@ abstract class MULTIPLE_OBJECT_ACTION_FORM extends ID_BASED_FORM
             echo '</p>';
           }
           $current_type = $type_info->plural_title;
-          echo "<h3>{$type_info->plural_title}</h3>\n";
-          echo '<p>';
+          echo "<h2>{$type_info->plural_title}</h2>\n";
+          echo '<ul class="object-list">';
         }
-        
+
+        echo "<li>";
         echo $entry->title_as_link ();
-        
-        if ($index < $count - 1)
-        {
-          echo "<br>\n";
-        }
-        
+        echo "</li>\n";
+
         $index += 1;
       }
 
-      echo "</p>\n";
+      echo "</ul>\n";
     }
   ?>
-  </div>
 </div>
 <?php
   }
@@ -248,7 +243,7 @@ abstract class MULTIPLE_OBJECT_ACTION_FORM extends ID_BASED_FORM
     if ($this->object_list->has_objects ())
     {
       $renderer->start_column ();
-      $renderer->start_row ();
+      $renderer->start_row ('', ' ');
         echo $this->_draw_selected_objects ();
       $renderer->finish_row ();
       $renderer->start_column ();

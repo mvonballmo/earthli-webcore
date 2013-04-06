@@ -59,7 +59,7 @@ abstract class LIST_GRID extends STANDARD_GRID
   /**
    * Add space between columns?
    * @var boolean*/
-  public $use_spacers = true;
+  public $use_spacers = false;
 
   /**
    * @var boolean

@@ -129,6 +129,7 @@ class PANEL_MANAGER extends WEBCORE_OBJECT
     $this->_add_panels ();
 
     $class_name = $this->context->final_class_name ('PANEL_MANAGER_HELPER');
+    /** @var $helper PANEL_MANAGER_HELPER */
     $helper = new $class_name ($this->context);
     $helper->configure ($this);
 
@@ -262,6 +263,7 @@ class PANEL_MANAGER extends WEBCORE_OBJECT
    * @param string $id Name of the panel to move.
    * @param string $after Name of the panel after which panel 'id' should
    * appear.
+   * @param $flags integer The flags that determine whether to move in the location, selection or both.
    */
   public function move_panel_after ($id, $after, $flags)
   {
@@ -312,7 +314,7 @@ class PANEL_MANAGER extends WEBCORE_OBJECT
   public function display ()
   {
   ?>
-    <table cellpadding="0" cellspacing="0">
+    <table>
     <?php
       foreach ($this->_location_order as $id)
       {
@@ -436,7 +438,7 @@ class PANEL_MANAGER extends WEBCORE_OBJECT
   }
 
   /**
-   * @var array[string,PANEL]
+   * @var PANEL[]
    * @see PANEL
    * @access private
    */
@@ -741,11 +743,11 @@ class WEBCORE_PANEL_MANAGER extends PANEL_MANAGER
    * Add a {@link ENTRY_PANEL} for the given query.
    * Iterates the {@link APPLICATION::entry_type_infos()} list, adding
    * a panel with {@link _add_entry_panel()} for each registered type.
-   * @param QUERY $query
-   * @see _add_entry_panels()
+   * @param QUERY $query The base query to use for all entries.
+   * @param string $panel_class_name The name of the panel class to create.
    * @access private
    */
-  protected function _add_entry_panels_for ($query)
+  protected function _add_entry_panels_for ($query, $panel_class_name = 'ENTRY_PANEL')
   {
     $type_infos = $this->app->entry_type_infos ();
 
@@ -785,6 +787,7 @@ class WEBCORE_PANEL_MANAGER extends PANEL_MANAGER
     $this->add_panel (new $panel_class_name ($this, $query, $type_info));
     if ($type_info->draftable)
     {
+      /** @var $panel QUERY_PANEL */
       $panel = $this->panel_at ($type_info->id);
       $panel->query->filter_out (Unpublished);
       $this->_add_draft_panels_for ($query, $type_info, $panel_class_name);
@@ -795,7 +798,9 @@ class WEBCORE_PANEL_MANAGER extends PANEL_MANAGER
    * Add a {@link ENTRY_PANEL} for drafting states.
    * Adds three panels, one for {@link Draft}s, one for {@link Abandoned}
    * entries and one for {@link Queued} entries.
-   * @param QUERY $query
+   * @param QUERY $query The base query for all entries of this type.
+   * @param $type_info The type info describing the base entry type.
+   * @param $panel_class_name The name of the panel class to create
    * @see _add_entry_panels_for()
    * @access private
    */
@@ -1730,9 +1735,6 @@ class USER_SUMMARY_PANEL extends PANEL
     return true;
   }
 
-  /**
-   * @param PANEL_OPTIONS $options
-   */
   public function display ()
   {
     $renderer = $this->_user->handler_for (Handler_html_renderer);

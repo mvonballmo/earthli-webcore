@@ -225,7 +225,9 @@ class EXCEPTION_SIGNATURE
    * debugging values). Forms with file uploading will not be properly recreated (since the browser
    * actually needs a selected file in order to do mark a field as an uploaded file).
    * $param string $name
-   * @param array[string,string]
+   * @param $params array An array of parameters to include in the simulated form submission.
+   * @param $name string The name of the form to simulate
+   * @internal param $array string[][]
    * @return string
    */
   public function as_form ($params, $name)
@@ -367,5 +369,3 @@ class EXCEPTION_SIGNATURE
    */
   protected $_variables;
 }
-
-?>

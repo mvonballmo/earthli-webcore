@@ -30,6 +30,8 @@ http://www.earthli.com/software/webcore
 {
 	padding: 5px;
   margin: 0;
+  border-radius: 4px;
+  border: 1px solid #666;
 }
 
 .button-control + .button-control

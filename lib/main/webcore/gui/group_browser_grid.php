@@ -60,19 +60,9 @@ class GROUP_BROWSER_GRID extends STANDARD_GRID
   public $show_separator = false;
 
   /**
-   * @var integer
-   */
-  public $padding = 4;
-
-  /**
    * @var string
    */
   public $width = '';
-
-  /**
-   * @var boolean
-   */
-  public $centered = true;
 
   /**
    * @param CONTEXT $context

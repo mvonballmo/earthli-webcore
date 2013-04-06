@@ -56,16 +56,13 @@ http://www.earthli.com/software/webcore
     $Page->title->subject  = 'Delete permissions for ' . $user->title_as_plain_text ();
 
     $Page->location->add_folder_link ($folder);
-    $Page->location->append ("Permissions", $folder->permissions_home_page ());
-    $Page->location->append ($Page->title->subject);
+    $Page->location->append ("Permissions", $folder->permissions_home_page (), '{icons}buttons/security');
+    $Page->location->append ($Page->title->subject, '', '{icons}buttons/delete');
 
     $Page->start_display ();
   ?>
   <div class="box">
-    <div class="box-title">
-      <?php echo $App->title_bar_icon ('{icons}buttons/security'); ?> Delete Permissions for <?php echo $user->title_as_html (); ?>
-    </div>
-    <div class="box-body">
+    <div class="box-body message-box">
     <?php
       $form->display ();
     ?>

@@ -60,13 +60,12 @@ class ALBUM_COMMANDS extends FOLDER_COMMANDS
     $cmd = $this->command_at ('new');
     $cmd->icon = '{app_icons}buttons/new_album';
     $cmd->importance = Command_importance_high + Command_importance_increment;
-    $cmd->title = 'New album';
+    $cmd->caption = 'New album';
   }
 
   /**
    * Add commands that provide views on the folder.
    * @param FOLDER $folder Show commands for this folder.
-   * @param USER $creator Folder belongs to this user (also available as $folder->creator ()).
    * @access private
    */
   protected function _add_viewers ($folder)
@@ -76,7 +75,7 @@ class ALBUM_COMMANDS extends FOLDER_COMMANDS
     $cmd = $this->make_command ();
 
     $cmd->id = 'print_preview';
-    $cmd->title = 'Print preview';
+    $cmd->caption = 'Print preview';
 
     $cmd->link = "multiple_print.php?id=$folder->id";
     $entry_query = $folder->entry_query ();
@@ -97,7 +96,7 @@ class ALBUM_COMMANDS extends FOLDER_COMMANDS
 
     $cmd = $this->make_command ();
     $cmd->id = 'calendar';
-    $cmd->title = 'Calendar';
+    $cmd->caption = 'Calendar';
     $cmd->link = "view_calendar.php?id=$folder->id";
     $cmd->icon = '{icons}buttons/calendar';
     $cmd->executable = true;
@@ -107,15 +106,14 @@ class ALBUM_COMMANDS extends FOLDER_COMMANDS
 
   /**
    * Add buttons that create items in the folder.
-   * @param FOLDER $folder
-   * @param USER $creator Folder belongs to this user (also available as $folder->creator ()).
+   * @param ALBUM $folder
    * @access private
    */
   protected function _add_creators ($folder)
   {
     $cmd = $this->make_command ();
     $cmd->id = 'new_picture';
-    $cmd->title = 'New picture';
+    $cmd->caption = 'New picture';
     if ($folder->is_organizational()) 
     {
       $cmd->link = "select_folder.php?page_name=create_picture.php";
@@ -131,7 +129,7 @@ class ALBUM_COMMANDS extends FOLDER_COMMANDS
 
     $cmd = $this->make_command ();
     $cmd->id = 'new_journal';
-    $cmd->title = 'New journal';
+    $cmd->caption = 'New journal';
     if ($folder->is_organizational()) 
     {
       $cmd->link = "select_folder.php?page_name=create_journal.php";
@@ -148,7 +146,7 @@ class ALBUM_COMMANDS extends FOLDER_COMMANDS
     
     $cmd = $this->make_command ();
     $cmd->id = 'upload_pictures';
-    $cmd->title = 'Upload pictures';
+    $cmd->caption = 'Upload pictures';
     if ($folder->is_organizational()) 
     {
       $cmd->link = "select_folder.php?page_name=upload_pictures.php";
@@ -165,5 +163,3 @@ class ALBUM_COMMANDS extends FOLDER_COMMANDS
     $this->append ($cmd);
   }
 }
-
-?>

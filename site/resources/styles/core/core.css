@@ -28,13 +28,100 @@ http://www.earthli.com/software/webcore
 
 body 
 {
-  margin: 0em;
-  padding: .5em;
+  margin: 0;
+  padding: 0;
   background-color: white;
   color: black;
 }
 
-h1, h3, h4 
+table
+{
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+}
+
+table td,
+table th
+{
+  padding: 0;
+  text-align: left;
+}
+
+table td p:first-child,
+table th p:first-child,
+table td pre:first-child,
+table th pre:first-child
+{
+  margin-top: 0;
+}
+
+table td p:last-child,
+table th p:last-child,
+table td pre:last-child,
+table th pre:last-child
+{
+  margin-bottom: 0;
+}
+
+table.basic > tbody > tr > td,
+table.basic > tbody > tr > th
+{
+  padding: 2px 15px 2px 2px;
+}
+
+table.columns > tbody > tr > td,
+table.columns > tbody > tr > th
+{
+  padding: 2px 15px;
+  border-right: 1px solid #CCC;
+}
+
+table.basic > tbody > tr:first-child > td,
+table.basic > tbody > tr:first-child > th
+{
+  padding-top: 0;
+}
+
+table.basic > tbody > tr:last-child > td,
+table.basic > tbody > tr:last-child > th
+{
+  padding-bottom: 0;
+}
+
+table.basic > tbody > tr > td:first-child,
+table.basic > tbody > tr > th:first-child
+{
+  padding-left: 0;
+}
+
+table.basic > tbody > tr > td:last-child,
+table.basic > tbody > tr > th:last-child
+{
+  padding-right: 0;
+}
+
+table.columns> tbody > tr > td:last-child,
+table.columns > tbody > tr > th:last-child
+{
+  border-right: none;
+}
+
+table.left-labels > tbody > tr > td:first-child,
+table.left-labels > tbody > tr > th:first-child
+{
+  text-align: right;
+  white-space: nowrap;
+  border-bottom: none;
+}
+
+table.left-labels.top > tbody > tr > td:first-child,
+table.left-labels.top > tbody > tr > th:first-child
+{
+  vertical-align: top;
+}
+
+h1, h3, h4
 {
   font-weight: normal
 }
@@ -42,19 +129,23 @@ h1, h3, h4
 h2 
 {
   font-weight: normal;
-  border-bottom: 1px solid #000000
 }
 
 h5
 {
   font-weight: bold;
-  margin: 0px;
-  padding: 2px 0px
+  margin: 0;
+  padding: 2px 0
+}
+
+dl
+{
+  margin: 15px 0;
 }
 
 dd 
 {
-  margin: 0.2em 0em .7em 1.5em
+  margin: 5px 0 15px 1.5em
 }
 
 td 
@@ -66,7 +157,7 @@ th
 {
   font-weight: bold;
   vertical-align: bottom;
-  border-bottom: 1px solid #000000
+  border-bottom: 1px solid #CCC
 }
 
 a:active, a:hover 
@@ -81,7 +172,7 @@ a:link, a:visited
 
 a img 
 {
-  border: 0px
+  border: 0
 }
 
 dfn, var, cite
@@ -100,7 +191,7 @@ var, kbd
 	background-color: black; 
 	border: 1px solid silver; 
 	color: white; 
-	padding: 0px 2px; 
+	padding: 0 2px;
 	display: block;
 }
 
@@ -112,11 +203,9 @@ pre
   text-align: left;
 }
 
-pre code
+pre > code
 {
-  margin: 1em auto;
-  width: 95%;
-  padding: .5em;
+  margin: 1em 0;
   display: block;
 }
 
@@ -136,35 +225,34 @@ pre code
 		body (HTML)
 			page
 				banner
-					banner-box
-						banner-header
-							banner-logo
-							banner-icon
-							banner-content
-								banner-title
-								login-status
-						nav-box
+          banner-header
+            banner-logo
+            banner-icon
+            banner-content
+              banner-title
+              login-status
+          nav-box
 				page-body
 				footer
-					footer-box
 */
 
 .page 
 {
-  margin-left: 15px;
-  margin-top: 15px;
+  max-width: 900px;
   margin-bottom: 5px;
   margin-right: 5px;
 }
 
-.banner 
+.page-body
 {
-
+  padding: 0 15px;
 }
 
-.banner-box 
+.banner 
 {
-  
+  padding-top: 15px;
+  padding-right: 15px;
+  padding-left: 15px;
 }
 
 .banner-header 
@@ -189,7 +277,7 @@ pre code
 {
   position: absolute;
   right: 0;
-  bottom: 0px;
+  bottom: 0;
   text-align: right;
 }
 
@@ -220,8 +308,10 @@ pre code
 .nav-box
 {
   margin-top: 15px;
-  padding-bottom: 5px;
-  border-bottom: 1px solid #000000;
+  margin-left: -15px;
+  margin-right: -15px;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
 .top-box
@@ -239,6 +329,14 @@ pre code
   margin-top: 15px;
 }
 
+
+
+.button-content
+{
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
 .nav-item
 {
   font-weight: normal;
@@ -253,6 +351,9 @@ pre code
 .footer 
 {
   clear: both;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-top: 15px;
 }
 
 @media screen and (min-width:600px)
@@ -281,11 +382,6 @@ pre code
   {
     margin-top: .3em;
   }
-}
-
-.footer-box
-{
-  
 }
 
 /* @end */
@@ -321,7 +417,10 @@ pre code
 
 .box 
 {
-  border: 1px solid #000000;
+  margin-left: -15px;
+  margin-right: -15px;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
 .box-body
@@ -339,7 +438,7 @@ pre code
 .side-bar 
 {
   border: 1px solid #000000;
-  border-spacing: 0px
+  border-spacing: 0
 }
 
 .side-bar + .side-bar
@@ -362,9 +461,16 @@ pre code
   text-align: left
 }
 
-.chart, .preview 
+.chart, .preview
 {
-  border: 1px solid #000000
+  border-left: 2px solid #CCC; /* frame */
+  padding-left: 15px;
+  margin: 15px 0;
+}
+
+.hidden-layer
+{
+  margin-left: 7px;
 }
 
 .chart + .chart
@@ -372,12 +478,12 @@ pre code
 	margin-top: 15px;	
 }
 
-.chart-body, .preview-body 
+.chart-body
 {
   padding: .5em
 }
 
-.chart-title, .preview-title
+.chart-title
 {
   padding: 5px 0;
   font-weight: bold;
@@ -422,6 +528,37 @@ td.object-in-list + td.object-in-list
 
 /* @end */
 
+/* @group Icons */
+
+.icon
+{
+  display: inline-block;
+  background-repeat: no-repeat;
+}
+
+.thirty-two
+{
+  padding-left: 37px;
+  background: no-repeat 0 5px;
+  min-height: 42px;
+}
+
+.twenty
+{
+  padding-left: 25px;
+  background: no-repeat 0 3px;
+  min-height: 26px;
+}
+
+.sixteen
+{
+  padding-left: 21px;
+  background: no-repeat 0 1px;
+  min-height: 18px;
+}
+
+/* @end */
+
 /* @group Menus */
 
 .menu-dropdown, .menu-dropdown-ie 
@@ -440,7 +577,9 @@ td.object-in-list + td.object-in-list
   z-index: 100;
 }
 
-ul.menu-items
+ul.menu-items,
+ul.menu-buttons,
+ul.menu
 {
   list-style: none;
   margin: 0;
@@ -453,17 +592,24 @@ ul.menu
   padding: 0;
 }
 
-ul.menu-items li
+ul.menu-items > li,
+ul.menu-buttons > li
 {
   display: inline-block;
 }
 
 ul.menu-items .menu li
+ul.menu-buttons .menu li
 {
   display: block;
 }
 
-.menu-dropdown 
+ul.menu-buttons > li + li
+{
+  margin-left: 10px;
+}
+
+.menu-dropdown
 {
   top: auto;
   left: auto;
@@ -492,7 +638,8 @@ ul.menu-items .menu li
 
 .menu-group-title 
 {
-  padding: .5em;
+  padding: 5px;
+  border-bottom: 1px dotted #CCC;
 }
 
 .menu-button
@@ -500,24 +647,23 @@ ul.menu-items .menu li
   display: block;
   float: left;
   padding: 5px;
-  min-height: 21px;
 }
 
-.menu-button + .menu-button
+.menu-button + .menu-button,
+.button + .menu-buttons
 {
   margin-left: 10px;
 }
 
 .menu-item 
 {
-  padding: .5em;
+  padding: 5px;
   display: block;
 }
 
 .menu-item.icon,
 .menu-button.icon
 {
-  background-repeat: no-repeat;
   padding-left: 26px;
   background-position: 5px 8px;
 }
@@ -527,16 +673,11 @@ ul.menu-items .menu li
   text-decoration: none;
 }
 
-.menu-bar-bottom 
-{
-  border-top: 1px solid #000000;
-  padding-top: 5px;
-}
 
-.menu-bar-top
+.menu-bar-top,
+.menu-bar-bottom
 {
-  padding-bottom: 5px;
-  border-bottom: 1px solid #000000;
+  margin: 15px 0;
 }
 
 .menu-button-description, .menu-button-description
@@ -544,7 +685,7 @@ ul.menu-items .menu li
 	color: black;
 	display: block;
 	margin-left: 20px;
-	padding: 3px 0px;
+	padding: 3px 0;
 	width: 200px;
 	white-space: normal;
 }
@@ -558,6 +699,11 @@ ul.menu-items .menu li
   width: 25%;
   border-right: 1px solid #4A8CCA; /* frame */
   padding-right: 15px;
+}
+
+.description-box table:first-child
+{
+  margin-top: 15px;
 }
 
 .contents-box
@@ -598,53 +744,52 @@ ul.menu-items .menu li
 
 .paginator
 {
-  margin-top: 20px;
+  margin-top: 15px;
 }
 
-.paginator a,
-.object-navigator .controls a,
-.object-navigator .controls .disabled,
-.paginator .selected,
-.paginator .button,
-.paginator .status
+.button
 {
   display: inline-block;
   text-decoration: none;
-  min-width: 30px;
-  min-height: 30px;
-  width: 2em;
-  height: 2em;
+  min-width: 2.2em;
+  min-height: 2.2em;
   padding: 5px;
   box-sizing: border-box;
   background-color: #CCCCCC;
-  margin-right: 10px;
   text-align: center;
   vertical-align: middle;
   white-space: nowrap;
+  border-radius: 4px;
 }
 
-.paginator .status
+.button + .button
 {
-  width: 80px;
-  text-align: center;
+  margin-left: 10px;
 }
 
-.paginator .disabled,
-.object-navigator .controls .disabled
-{
-  background-color: #EEEEEE;
-  color: #AAAAAA;
-}
-
-.object-navigator .controls .list-toggle
-{
-  width: auto;
-}
-
-.object-navigator .controls .list-toggle img
+.button img
 {
   position: relative;
   top: 2px;
+}
+
+.paginator .button
+{
+  width: 2.2em;
+  height: 2.2em;
+}
+
+.paginator .counters
+{
+  margin: 0 10px;
+  display: inline-block;
+  text-align: center;
+}
+
+.paginator .disabled
+{
+  background: #EEEEEE;
+  color: #AAAAAA;
 }
 
 .paginator .selected
@@ -660,27 +805,28 @@ ul.menu-items .menu li
   margin: 0;
 }
 
-.object-navigator ul li,
-.object-navigator .page-up a,
-.object-navigator .page-down a
+.object-navigator li
 {
   padding-top: 3px;
   padding-bottom: 3px;
 }
 
-.object-navigator .page-up,
-.object-navigator .page-down
+.object-navigator .page-up
 {
-  padding: 0;
+  margin-bottom: 5px;
 }
 
-.object-navigator .page-up a,
-.object-navigator .page-down a
+.object-navigator .links .button
 {
   display: block;
   text-align: center;
-  background-color: #CCCCCC;
 }
+
+.object-navigator .page-down
+{
+  margin-top: 5px;
+}
+
 
 .object-navigator .links
 {
@@ -694,9 +840,10 @@ ul.menu-items .menu li
   margin: 15px 0;
 }
 
-.object-navigator .controls
+.object-list li
 {
-
+  padding-top: 1px;
+  padding-bottom: 1px;
 }
 
 /* @end */
@@ -777,23 +924,19 @@ ul.menu-items .menu li
   font-weight: bold;
 }
 
-.disabled 
-{
-  color: #666666;
-}
-
-.locked 
+.locked
 {
   color: #999999;
 }
 
 .error 
 {
-  background: #FFE6E6;
+  background-color: #FFEAEA;
   border: 1px dotted #A00000;
-  padding: 3px;
+  padding: 5px;
+  margin-left: -5px;
+  margin-right: -5px;
   color: #A00000;
-  font-style: italic;
 }
 
 span.error 
@@ -803,7 +946,7 @@ span.error
 
 .warning 
 {
-  background: #EBAE39;
+  background-color: #EBAE39;
   color: #000000;
   border: 1px dotted #A06000;
   padding: 3px;
@@ -812,7 +955,7 @@ span.error
 
 .caution 
 {
-  background: #FFFFCC;
+  background-color: #FFFFCC;
   color: #000000;
   border: 1px dotted #A0A000;
   padding: 3px;
@@ -826,20 +969,12 @@ span.error
 
 .caution a:hover, .warning a:hover 
 {
-  background: none;
+  background-color: transparent;
   color: #CC0000;
-}
-
-.status-indicator 
-{
-  font-style: italic;
-  font-size: 85%;
-  margin: 1em 0em 2em 0em;
 }
 
 .highlight 
 {
-  font-weight: bold;
 }
 
 /* @end */
@@ -849,7 +984,7 @@ span.error
 .quote 
 {
   display: block;
-  margin: 1em 2em;
+  margin: 15px 0;
   float-displace: block;
 }
 
@@ -879,10 +1014,10 @@ span.error
 .abstract
 {
   font-style: italic;
-  border-width: 1px 0px;
+  border-width: 1px 0;
   border-color: black;
   border-style: solid;
-  padding: 1em 0em;
+  padding: 1em 0;
 }
 
 .quote-inline
@@ -901,6 +1036,18 @@ span.error
 
 /* Makes sure floated images in paragraphs start low enough. */
 
+ul.minimal
+{
+  padding: 0;
+  list-style: none;
+}
+
+ul.minimal li
+{
+  margin: 0;
+  padding: 0;
+}
+
 p div:first-child img:first-child 
 {
   margin-top: 1.5em;
@@ -910,7 +1057,7 @@ p div:first-child img:first-child
 
 blockquote p:first-child, .side-bar-body p:first-child, .chart-body p:first-child 
 {
-  margin: 0em;
+  margin: 0;
 }
 
 .text-flow 
@@ -919,17 +1066,29 @@ blockquote p:first-child, .side-bar-body p:first-child, .chart-body p:first-chil
   text-align: left
 }
 
-.text-flow ul li 
+.text-flow ul li,
+.text-flow ol li
 {
   line-height: 140%;
   padding-left: .4em;
 }
 
-.text-flow ul
+.text-flow ul,
+.text-flow ol
 {
   margin-left: 0;
-  padding-left: 18px;
 }
+
+.text-flow ul
+{
+  padding-left: 15px;
+}
+
+.text-flow ol
+{
+  padding-left: 2.5em;
+}
+
 
 .text-flow .notes 
 {
@@ -954,7 +1113,7 @@ blockquote p:first-child, .side-bar-body p:first-child, .chart-body p:first-chil
   font-weight: bold;
   text-align: right;
   white-space: nowrap;
-  padding-right: 10px;
+  padding: 2px 10px 2px 0;
   vertical-align: top;
 }
 
@@ -974,6 +1133,11 @@ blockquote p:first-child, .side-bar-body p:first-child, .chart-body p:first-chil
 	padding-left: 15px;
 }
 
+.form-basic-content
+{
+  padding: 2px 0;
+}
+
 .form-basic-content ul
 {
   list-style: none;
@@ -981,9 +1145,10 @@ blockquote p:first-child, .side-bar-body p:first-child, .chart-body p:first-chil
   padding: 0;
 }
 
-.form-basic-content ul
+.form-basic-content ul li
 {
-
+  padding-top: 2px;
+  padding-bottom: 2px;
 }
 
 /* @end */
@@ -1056,7 +1221,7 @@ blockquote p:first-child, .side-bar-body p:first-child, .chart-body p:first-chil
 {
   border-bottom: 1px solid #000000;
   empty-cells: show;
-  height: .1em;
+  height: 1px;
   clear: both;
   display: block;
 }
@@ -1064,7 +1229,7 @@ blockquote p:first-child, .side-bar-body p:first-child, .chart-body p:first-chil
 hr 
 {
 	color: transparent;
-	border: 0px;
+	border: 0;
   border-bottom: 1px solid #000000;
   empty-cells: show;
   height: .1em;
@@ -1086,10 +1251,11 @@ hr
 
 .description 
 {
-  
+  margin-top: 5px;
+  margin-bottom: 15px;
 }
 
-.detail 
+.detail
 {
   font-style: normal
 }
@@ -1130,7 +1296,7 @@ hr
 
 .grid-item .minimal-commands-content
 {
-  margin-left: 32px;
+  margin-left: 35px;
 }
 
 .notes 
@@ -1183,7 +1349,7 @@ hr
 
 .message-description 
 {
-  margin: 1em 0em;
+  margin: 1em 0;
   font-size: 85%;
   font-style: italic;
 }
@@ -1205,10 +1371,21 @@ hr
   padding-left: 15px;
 }
 
+.left-sidebar
+{
+  padding-left: 15px;
+  margin-left: -15px;
+}
+
+.right-sidebar
+{
+  padding-right: 15px;
+  margin-right: -15px;
+}
+
 .content-column
 {
   width: 75%;
-  padding-right: 15px;
 }
 
 .fill-viewport

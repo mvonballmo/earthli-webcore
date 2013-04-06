@@ -143,7 +143,7 @@ class PICTURE_GRID extends ALBUM_ENTRY_GRID
   <?php
   }
   ?>
-  <div style="margin-right: 20%">
+  <div class="text-flow" style="margin-right: 20%">
   <?php
     $munger = $obj->html_formatter ();
     $obj->max_visible_output_chars = $this->description_length;

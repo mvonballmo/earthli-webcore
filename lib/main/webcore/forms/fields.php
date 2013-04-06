@@ -220,7 +220,7 @@ class FIELD extends RAISABLE
    * Apply a new value to this field.
    * Value should always be in native format; the field manages internal value and display text. Use
    * {@link set_value_from_text()} if you have a string.
-   * @var object $value
+   * @var int|string $value
    */
   public function set_value ($value)
   {
@@ -252,7 +252,7 @@ class FIELD extends RAISABLE
    * Stores the current value to the client.
    * Uses the {@link CONTEXT::$storage} to record its value.
    * @var FORM $form
-   * @param STORAGE $storage
+   * @param CLIENT_STORAGE $storage
    */
   public function store_to_client ($form, $storage)
   {
@@ -262,7 +262,7 @@ class FIELD extends RAISABLE
   /**
    * Loads a value from the 'storage' into the field.
    * @param FORM $form
-   * @param STORAGE $storage
+   * @param CLIENT_STORAGE $storage
    * @param object $default Use this value if the client is empty.
    */
   public function load_from_client ($form, $storage, $default)
@@ -714,7 +714,7 @@ class DATE_TIME_FIELD extends FIELD
   /**
    * Minimum date-time.
    * Used only if the variable is set. Do not set directly, use @see set_min_date instead.
-   * @var integer
+   * @var DATE_TIME
    */
   public $min_date;
 
@@ -727,8 +727,8 @@ class DATE_TIME_FIELD extends FIELD
   /**
    * Set the minimum date.
    * Class does not apply a minimum if this function is not called.
-   * @param DATE_TIME $d
-   * @param integer $type
+   * @param int|string $d The raw date value to use.
+   * @param string $type The type of date time to create.
    */
   public function set_min_date ($d, $type = Date_time_iso)
   {
@@ -738,8 +738,8 @@ class DATE_TIME_FIELD extends FIELD
   /**
    * Set the maximum date.
    * Class does not apply a maximum if this function is not called.
-   * @param DATE_TIME $d
-   * @param integer $type
+   * @param int|string $d The raw date value to use.
+   * @param string $type The type of date time to create.
    */
   public function set_max_date ($d, $type = Date_time_iso)
   {
@@ -750,7 +750,7 @@ class DATE_TIME_FIELD extends FIELD
    * Apply a new value to this field.
    * Value should always be in native format; the field manages internal value and display text. Use
    * {@link set_value_from_text()} if you have a string.
-   * @var object $value
+   * @var DATE_TIME $value
    */
   public function set_value ($value)
   {
@@ -809,13 +809,16 @@ class DATE_TIME_FIELD extends FIELD
 
     if ($this->continue_validating ($form))
     {
-      if (! $this->_value->is_valid ())
+      /** @var $value DATE_TIME */
+      $value = $this->_value;
+
+      if (! $value->is_valid ())
       {
         $form->record_error ($this->id, "[$this->_text_value] is not a valid date/time.");
       }
       else
       {
-        $date = $this->_value;
+        $date = $value;
         if (isset ($this->max_date))
         {
           if (isset ($this->min_date))
@@ -1035,7 +1038,7 @@ class ENUMERATED_FIELD extends FIELD
 {
   /**
    * Add a valid key to this field.
-   * @param object $val
+   * @param object|string $val
    */
   public function add_value ($val)
   {
@@ -1257,5 +1260,3 @@ class UPLOAD_FILE_FIELD extends FIELD
    */
   protected $_form;
 }
-
-?>

@@ -69,8 +69,15 @@ class MAIL_TOC_ENTRY_RENDERER extends RENDERER
   public $toc;
 
   /**
+   * Reference to the enclosing group.
+   * @var MAIL_TOC_GROUP_RENDERER
+   */
+  public $group;
+
+  /**
    * Create a table of contents group.
-   * @param MAIL_TOC_RENDERER $toc
+   * @param MAIL_TOC_RENDERER $toc The parent of this renderer
+   * @param $group MAIL_TOC_GROUP_RENDERER The group renderer
    */
   public function __construct ($toc, $group)
   {
@@ -143,6 +150,7 @@ class MAIL_TOC_ENTRY_RENDERER extends RENDERER
    * Called from {@link as_html_for_table()}.
    * 
    * @param MAIL_BODY_RENDERER_OBJECT $pair
+   * @return string
    */
   public function pair_as_html_for_table ($pair)
   {
@@ -191,8 +199,9 @@ class MAIL_TOC_ENTRY_RENDERER extends RENDERER
    * Render an item as html.
    * Displays the item's full content. Called from {@link as_html_for_items()}.
    * @param MAIL_BODY_RENDERER_OBJECT $pair
-   * @param MAIL_RENDERER_OPTIONS $options
+   * @param MAIL_OBJECT_RENDERER_OPTIONS $options
    * @param string $top_link HTML text for the link back to the top of the page.
+   * @return string
    */
   public function pair_as_html_for_items ($pair, $options, $top_link = '')
   {
@@ -210,8 +219,9 @@ class MAIL_TOC_ENTRY_RENDERER extends RENDERER
   /**
    * Render the group's full items as HTML.
    * Displays the group's header, then each item body using {@link pair_as_html_item()}.
-   * @param MAIL_RENDERER_OPTIONS $options
+   * @param MAIL_OBJECT_RENDERER_OPTIONS $options
    * @param string $top_link HTML text for the link back to the top of the page.
+   * @return string
    */
   public function as_html_for_items ($options, $top_link)
   {
@@ -231,6 +241,8 @@ class MAIL_TOC_ENTRY_RENDERER extends RENDERER
    * Render an item in the TOC as plain text.
    * Displays the item's title. Called from {@link as_plain_text_for_table()}.
    * @param MAIL_BODY_RENDERER_OBJECT $pair
+   * @param $indent string The indent to include as a prefix before the pair's title.
+   * @return string
    */
   public function pair_as_plain_text_for_table ($pair, $indent)
   {
@@ -259,7 +271,8 @@ class MAIL_TOC_ENTRY_RENDERER extends RENDERER
    * Render a single object as plain text.
    * Displays the item's full content. Called from {@link as_plain_text_for_items()}.
    * @param MAIL_BODY_RENDERER_OBJECT $pair
-   * @param MAIL_RENDERER_OPTIONS $options
+   * @param MAIL_OBJECT_RENDERER_OPTIONS $options
+   * @return string
    */
   public function pair_as_plain_text_item ($pair, $options)
   {
@@ -269,7 +282,8 @@ class MAIL_TOC_ENTRY_RENDERER extends RENDERER
   /**
    * Render all objects in this entry fully.
    * Renders each object with {pair_as_plain_text_item()}.
-   * @param MAIL_RENDERER_OPTIONS $options
+   * @param MAIL_OBJECT_RENDERER_OPTIONS $options
+   * @return string
    */
   public function as_plain_text_for_items ($options)
   {
@@ -316,7 +330,7 @@ class MAIL_TOC_GROUP_RENDERER extends RENDERER
 
   /**
    * List of {@link MAIL_TOC_ENTRY_RENDERER} in this group.
-   * @var array[MAIL_TOC_ENTRY_RENDERER]
+   * @var MAIL_TOC_ENTRY_RENDERER[]
    */
   public $entries = array ();
 
@@ -409,8 +423,9 @@ class MAIL_TOC_GROUP_RENDERER extends RENDERER
   /**
    * Render the group's full items as HTML.
    * Displays the group's header, then each item body using {@link pair_as_html_item()}.
-   * @param MAIL_RENDERER_OPTIONS $options
+   * @param MAIL_OBJECT_RENDERER_OPTIONS $options
    * @param string $top_link HTML text for the link back to the top of the page.
+   * @return string
    */
   public function as_html_for_items ($options, $top_link)
   {
@@ -420,8 +435,7 @@ class MAIL_TOC_GROUP_RENDERER extends RENDERER
     {
       $fldr = $this->folder;
       $Result = "<div class=\"horizontal-separator\" style=\"margin-top: 3.5em\"></div>\n";
-      $Result .= '<a id="fldr_' . $fldr->id . "\"></a>\n";
-      $Result .= '<h2>' . $fldr->title_as_html () . "</h2>\n";
+      $Result .= '<h2 id="fldr_' . $fldr->id . '">' . $fldr->title_as_html () . "</h2>\n";
     }
 
     foreach ($this->entries as $entry)
@@ -456,7 +470,8 @@ class MAIL_TOC_GROUP_RENDERER extends RENDERER
   /**
    * Render the group's full items as plain text.
    * Displays the group's header, then each item body using {@link pair_as_plain_text_item()}.
-   * @param MAIL_RENDERER_OPTIONS $options
+   * @param MAIL_OBJECT_RENDERER_OPTIONS $options
+   * @return string
    */
   public function as_plain_text_for_items ($options)
   {
@@ -533,7 +548,7 @@ class MAIL_TOC_RENDERER extends RENDERER
 
   /**
    * List of {@link MAIL_TOC_GROUP_RENDERER}s.
-   * @var array[MAIL_TOC_GROUP_RENDERER]
+   * @var MAIL_TOC_GROUP_RENDERER[]
    */
   public $groups;
 
@@ -541,18 +556,21 @@ class MAIL_TOC_RENDERER extends RENDERER
    * Create a table of contents for the given list.
    * @see MAIL_BODY_RENDERER_OBJECT
    * @param CONTEXT $context
-   * @param array[MAIL_BODY_RENDERER_OBJECT] $pairs
+   * @param MAIL_BODY_RENDERER_OBJECT[] $pairs
    */
   public function __construct ($context, $pairs)
   {
     parent::__construct ($context);
 
+    /** @var $entry MAIL_TOC_ENTRY_RENDERER */
     $entry = null;
+    /** @var $group MAIL_TOC_GROUP_RENDERER */
     $group = null;
     $this->groups = array ();
 
     foreach ($pairs as $pair)
     {
+      /** @var $obj FOLDER */
       $obj = $pair->obj;
 
       if (! isset ($group) || ! $group->accepts_item ($obj))
@@ -573,7 +591,8 @@ class MAIL_TOC_RENDERER extends RENDERER
   /**
    * Render the table of contents as HTML.
    * Generally called before outputting the item bodies with {@link items_as_html()}.
-   * @param MAIL_RENDERER_OPTIONS $options
+   * @param MAIL_OBJECT_RENDERER_OPTIONS $options
+   * @return string
    */
   public function table_as_html ($options)
   {
@@ -591,7 +610,8 @@ class MAIL_TOC_RENDERER extends RENDERER
   /**
    * Render the full items in TOC order as HTML.
    * Generally called after outputting the table with {@link table_as_html()}.
-   * @param MAIL_RENDERER_OPTIONS $options
+   * @param MAIL_OBJECT_RENDERER_OPTIONS $options
+   * @return string
    */
   public function items_as_html ($options)
   {
@@ -607,7 +627,8 @@ class MAIL_TOC_RENDERER extends RENDERER
   /**
    * Render the table of contents as plain text.
    * Generally called before outputting the item bodies with {@link items_as_plain_text()}.
-   * @param MAIL_RENDERER_OPTIONS $options
+   * @param MAIL_OBJECT_RENDERER_OPTIONS $options
+   * @return string
    */
   public function table_as_plain_text ($options)
   {
@@ -622,7 +643,8 @@ class MAIL_TOC_RENDERER extends RENDERER
   /**
    * Render the full items in TOC order as plain text.
    * Generally called after outputting the table with {@link table_as_plain_text()}.
-   * @param MAIL_RENDERER_OPTIONS $options
+   * @param MAIL_OBJECT_RENDERER_OPTIONS $options
+   * @return string
    */
   public function items_as_plain_text ($options)
   {
@@ -675,7 +697,7 @@ class WEBCORE_MAIL_BODY_RENDERER extends THEMED_MAIL_BODY_RENDERER
 {
   /**
    * All objects' contents returned as HTML.
-   * @param MAIL_RENDERER_OPTIONS $options
+   * @param MAIL_OBJECT_RENDERER_OPTIONS $options
    * @return string
    * @access private
    */
@@ -694,7 +716,7 @@ class WEBCORE_MAIL_BODY_RENDERER extends THEMED_MAIL_BODY_RENDERER
 
   /**
    * All objects' contents returned as text.
-   * @param MAIL_RENDERER_OPTIONS $options
+   * @param MAIL_OBJECT_RENDERER_OPTIONS $options
    * @return string
    * @access private
    */
@@ -721,5 +743,3 @@ class WEBCORE_MAIL_BODY_RENDERER extends THEMED_MAIL_BODY_RENDERER
     return new $class_name ($this->app, $this->objects);
   }
 }
-
-?>

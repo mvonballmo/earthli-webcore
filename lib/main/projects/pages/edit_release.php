@@ -54,15 +54,12 @@ http://www.earthli.com/software/webcore/projects
     $Page->location->add_folder_link ($folder);
     $Page->location->add_object_link ($rel->branch ());
     $Page->location->add_object_link ($rel);
-    $Page->location->append ('Edit');
+    $Page->location->append ('Edit', '', '{icons}buttons/edit');
 
     $Page->start_display ();
 ?>
     <div class="box">
-      <div class="box-title">
-        <?php echo $App->title_bar_icon ('{icons}buttons/edit'); ?> <?php echo $Page->title->subject; ?>
-      </div>
-      <div class="box-body">
+      <div class="box-body form-content">
         <?php
           $form->button = "Update";
           $form->display ();

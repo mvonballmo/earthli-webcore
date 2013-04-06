@@ -422,7 +422,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * Padding inside each row.
    * @var integer
    */
-  public $padding = 2;
+  public $padding = 0;
 
   /**
    * Show the icon for required fields?
@@ -685,9 +685,9 @@ class FORM_RENDERER extends CONTROLS_RENDERER
   /**
    * Draw a block of text in the form.
    * This does its best to keep the sizing vis-a-vis other controls correct.
-   * @param $title.
-   * @param $text Text to display.
-   * @param $class CSS class used for text.
+   * @param $title string The title to use for the row.
+   * @param $text string The text to display.
+   * @param $class string CSS class used for text.
    */
   public function draw_text_row ($title, $text, $CSS_class = '')
   {
@@ -701,7 +701,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
   ?>
   <tr>
     <td class="form-<?php echo $this->_form->CSS_class; ?>-label"><?php echo $title; ?></td>
-    <td class="<?php echo $CSS_class; ?>" <?php if (! empty($this->width)) { ?>style="width: <?php echo $this->width; ?>"<?php } ?>>
+    <td class="text-flow <?php echo $CSS_class; ?>" <?php if (! empty($this->width)) { ?>style="width: <?php echo $this->width; ?>"<?php } ?>>
       <?php echo $text; ?>
     </td>
   </tr>
@@ -711,7 +711,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
     {
   ?>
   <tr>
-    <td colspan="2" class="<?php echo $CSS_class; ?>" <?php if (! empty($this->width)) { ?>style="width: <?php echo $this->width; ?>"<?php } ?>>
+    <td colspan="2" class="text-flow <?php echo $CSS_class; ?>" <?php if (! empty($this->width)) { ?>style="width: <?php echo $this->width; ?>"<?php } ?>>
       <?php echo $text; ?>
     </td>
   </tr>
@@ -786,13 +786,13 @@ class FORM_RENDERER extends CONTROLS_RENDERER
   {
     if ($styled)
     {
-      $css_class = ' class="form-' . $this->_form->CSS_class . '-block"';
+      echo '<div class="form-' . $this->_form->CSS_class . '-block">';
     }
     else
     {
-      $css_class = '';
+      echo '<div>';
     }
-    echo '<table width="100%" cellspacing="' . $this->spacing . '" cellpadding="' . $this->padding . '"' . $css_class . '>' . "\n";
+    echo '<table width="100%" cellspacing="' . $this->spacing . '" cellpadding="' . $this->padding . '">' . "\n";
 
     if (isset ($width))
     {
@@ -1596,7 +1596,39 @@ class FORM_RENDERER extends CONTROLS_RENDERER
   {
     if ($field->visible)
     {
-      if ($field->required)
+      $label_content = '';
+
+      if (isset ($title))
+      {
+        $t = $title;
+      }
+      else
+      {
+        $t = $field->title;
+      }
+
+      if (! empty ($t))
+      {
+        if ($dom_id)
+        {
+          $label_content .= '<label for="' . $dom_id . '">';
+        }
+        $label_content .= $t;
+        if ($dom_id)
+        {
+          $label_content .= '</label>';
+        }
+        if ($field->required && $this->show_required_mark)
+        {
+          $label_content .= $this->required_mark ();
+        }
+      }
+
+      if (empty($label_content))
+      {
+        $CSS_class = 'empty-label';
+      }
+      else if ($field->required)
       {
         $CSS_class = "form-" . $this->_form->CSS_class . "-required";
       }
@@ -1604,39 +1636,10 @@ class FORM_RENDERER extends CONTROLS_RENDERER
       {
         $CSS_class = "form-" . $this->_form->CSS_class . "-label";
       }
-?>
-  <tr>
-    <td class="<?php echo $CSS_class; ?>">
-      <?php
-        if (isset ($title))
-        {
-          $t = $title;
-        }
-        else
-        {
-          $t = $field->title;
-        }
-        if (! empty ($t))
-        {
-          if ($dom_id)
-          {
-            echo '<label for="' . $dom_id . '">';
-          }
-          echo $t;
-          if ($dom_id)
-          {
-            echo '</label>';
-          }
-          if ($field->required && $this->show_required_mark)
-          {
-            echo $this->required_mark ();
-          }
-        }
       ?>
-    </td>
-    <td class="form-<?php echo $this->_form->CSS_class; ?>-content">
-      <?php echo $control_text; ?>
-    </td>
+  <tr>
+    <td class="<?php echo $CSS_class; ?>"><?php echo $label_content; ?></td>
+    <td class="form-<?php echo $this->_form->CSS_class; ?>-content"><?php echo $control_text; ?></td>
   </tr>
   <?php
       $this->draw_error_row ($field->id);
@@ -1692,7 +1695,8 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * Called when a control is created by the renderer.
    * @param string $id Id of the control in the form.
    * @param string $text HTML for the control.
-   * @param boolean $can_be_focussed Indicate whether to use this control as initial focus if none is already set.
+   * @param bool $can_be_focused A value that indicates whether the control should be focused.
+   * @internal param bool $can_be_focussed Indicate whether to use this control as initial focus if none is already set.
    * @return string
    */
   protected function _control_created ($id, $text, $can_be_focused = true)
@@ -1976,7 +1980,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
       }
       else
       {
-        $Result = '<ul>' . $Result . "</ul>\n";
+        $Result = '<ul class="' . $type . '-control">' . $Result . "</ul>\n";
       }
 
       if ($id)

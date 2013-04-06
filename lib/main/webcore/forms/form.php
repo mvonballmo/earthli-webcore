@@ -279,7 +279,7 @@ abstract class FORM extends WEBCORE_OBJECT
   /**
    * Validate the form and all fields.
    * This is done automatically when {@link attempt_action()} is called.
-   * @param object Validate for this object.
+   * @param $obj object Validate for this object.
    */
   public function validate ($obj)
   {
@@ -434,7 +434,8 @@ abstract class FORM extends WEBCORE_OBJECT
   /**
    * Returns the list of errors for "id".
    * Returns an empty array if no errors are found.
-   * @return array[string]
+   * @param $id string The field for which to get errors.
+   * @return string[]
    */
   public function errors_for ($id)
   {
@@ -472,7 +473,8 @@ abstract class FORM extends WEBCORE_OBJECT
    * Useful when working with forms with method = 'get'. The values that generated
    * the form can then be retrieved with this function and mapped to other links outside this form.
    * Pagination in search forms is supported this way.
-   * @param array[string] $field_names Specifies which field values to use. If empty, all values are returned.
+   * @param string $field_names
+   * @internal param $array [string] $field_names Specifies which field values to use. If empty, all values are returned.
    * @return string
    */
   public function as_query_string ($field_names = '')
@@ -582,6 +584,7 @@ abstract class FORM extends WEBCORE_OBJECT
    * the first one). Only returns an object is it exists and is valid;
    * otherwise, returns <code>null</code>.
    * @param string $id Must be a valid field id.
+   * @param int $index Gets the nth upload file from the set.
    * @return UPLOADED_FILE
    * @access private
    */
@@ -1148,6 +1151,7 @@ abstract class FORM extends WEBCORE_OBJECT
    * @param UPLOAD_FILE_FIELD $field
    * @param UPLOADED_FILE $file
    * @param boolean $form_is_valid Will the form be committed?
+   * @return string
    * @access private
    */
   protected function _upload_folder_for ($field, $file, $form_is_valid)
@@ -1239,8 +1243,8 @@ abstract class FORM extends WEBCORE_OBJECT
   }
 
   /**
-   * @param string Name of the control.
-   * @param string Function from which the check comes from.
+   * @param $id string Name of the control.
+   * @param $func string Function from which the check comes from.
    * @return boolean
    * @access private
    */
@@ -1498,7 +1502,7 @@ abstract class FORM extends WEBCORE_OBJECT
 
   /**
    * Table of fields indexed by id.
-   * @var array[string,FIELD]
+   * @var FIElD[]
    * @see FIELD
    * @access private
    */
@@ -1507,7 +1511,8 @@ abstract class FORM extends WEBCORE_OBJECT
   /**
    * Simple list of all fields.
    * Used for referenced iteration.
-   * @var array[FIELD]
+   * @var FIELD[]
+   * @see FIELD
    * @access private
    */
   protected $_field_list = array ();
@@ -1519,7 +1524,7 @@ abstract class FORM extends WEBCORE_OBJECT
   protected $_errors = array ();
 
   /**
-   * @var array[UPLOAD_FILE_FIELD]
+   * @var UPLOAD_FILE_FIELD[]
    * @see UPLOAD_FILE_FIELD
    * @access private
    */
@@ -1564,6 +1569,13 @@ abstract class FORM extends WEBCORE_OBJECT
    * @access private
    */
   protected $_max_upload_file_size;
+
+  /**
+   * A list of boolean fields that define flags that include the name of the form in their ids.
+   * @var string[]
+   * @access private
+   */
+  protected $_form_based_field_names;
 }
 
 /**

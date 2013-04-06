@@ -886,7 +886,7 @@ class IMAGE_METRICS
    * @param string $CSS_class CSS class to use for the image.
    * @see as_html_without_link()
    */
-  public function as_html ($title = ' ', $CSS_class = 'frame')
+  public function as_html ($title = ' ', $CSS_class = '')
   {
     $Result = $this->as_html_without_link ($title, $CSS_class);
     if ($Result)
@@ -909,7 +909,7 @@ class IMAGE_METRICS
    * @param string $CSS_class CSS class to use for the image.
    * @see as_html()
    */
-  public function as_html_without_link ($title = ' ', $CSS_class = 'frame')
+  public function as_html_without_link ($title = ' ', $CSS_class = '')
   {
     if (! isset ($this->_image) || $this->_image->loadable ())
     {

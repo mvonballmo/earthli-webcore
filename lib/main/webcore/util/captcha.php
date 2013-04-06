@@ -85,10 +85,10 @@ abstract class CAPTCHA extends WEBCORE_OBJECT
    * @abstract
    */
   public abstract function decode ($text);
-  
+
   /**
    * Determine whether the answer matches the question.
-   * @param string $proposal
+   * @param $answer string The answer given by the user.
    * @return boolean
    * @abstract
    */
@@ -122,7 +122,7 @@ define ('Captcha_operator_times', 2);
 class NUMERIC_CAPTCHA extends CAPTCHA
 {
   /**
-   * @var string
+   * @var integer
    */
   public $operand_left;
 
@@ -132,7 +132,7 @@ class NUMERIC_CAPTCHA extends CAPTCHA
   public $operator;
 
   /**
-   * @var string
+   * @var integer
    */
   public $operand_right;
   
@@ -150,8 +150,8 @@ class NUMERIC_CAPTCHA extends CAPTCHA
   public function generate ()
   {
     $this->operand_left = rand (1, 9);
-    $this->operation = rand (Captcha_operator_plus, Captcha_operator_times);
-    if ($this->operation == Captcha_operator_minus)
+    $this->operator = rand (Captcha_operator_plus, Captcha_operator_times);
+    if ($this->operator == Captcha_operator_minus)
     {
       $this->operand_right = rand (1, $this->operand_left);
     }
@@ -169,7 +169,7 @@ class NUMERIC_CAPTCHA extends CAPTCHA
   {
     $numbers = array ('zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine');
     $operations = array ('plus', 'minus', 'times');
-    return 'What is ' . $numbers [$this->operand_left] . ' ' . $operations [$this->operation] . ' ' . $numbers [$this->operand_right] . '?';
+    return 'What is ' . $numbers [$this->operand_left] . ' ' . $operations [$this->operator] . ' ' . $numbers [$this->operand_right] . '?';
   }
   
   /**
@@ -178,7 +178,7 @@ class NUMERIC_CAPTCHA extends CAPTCHA
    */
   public function encode ()
   {
-    return $this->operand_left . ',' . $this->operation . ',' . $this->operand_right;
+    return $this->operand_left . ',' . $this->operator . ',' . $this->operand_right;
   }
   
   /**
@@ -189,7 +189,7 @@ class NUMERIC_CAPTCHA extends CAPTCHA
   {
     $params = explode (',', $text);
     $this->operand_left = $params [0]; 
-    $this->operation = $params [1];
+    $this->operator = $params [1];
     $this->operand_right = $params [2];
   }
   
@@ -200,7 +200,7 @@ class NUMERIC_CAPTCHA extends CAPTCHA
    */
   public function validate ($proposal)
   {
-    switch ($this->operation)
+    switch ($this->operator)
     {
       case Captcha_operator_plus:
         $answer = $this->operand_left + $this->operand_right;
@@ -210,10 +210,11 @@ class NUMERIC_CAPTCHA extends CAPTCHA
         break;
       case Captcha_operator_times:
         $answer = $this->operand_left * $this->operand_right;
+        break;
+      default:
+        $answer = null;
     }
     
     return $answer == $proposal;
   }
 }
-
-?>

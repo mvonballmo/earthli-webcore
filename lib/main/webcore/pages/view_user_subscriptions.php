@@ -26,6 +26,8 @@ http://www.earthli.com/software/webcore
 
 ****************************************************************************/
 
+  $Page->title->subject = "Subscriptions";
+
   $email = read_var ('email');
 
   if ($email)
@@ -54,7 +56,6 @@ http://www.earthli.com/software/webcore
 
     if (! isset ($user) || $App->login->is_allowed (Privilege_set_global, Privilege_subscribe, $user))
     {
-      $Page->title->subject = "Subscriptions";
       $Page->title->add_object ($subscriber);
 
       $Page->location->add_root_link ();
@@ -69,38 +70,42 @@ http://www.earthli.com/software/webcore
         $url->replace_argument ('panel', 'summary');
         $Page->location->append ($email, $url->as_text ());
       }
-      $Page->location->append ($Page->title->subject);
+      $Page->location->append ($Page->title->subject, '', '{icons}buttons/subscriptions');
 
       $class_name = $App->final_class_name ('SUBSCRIPTION_PANEL_MANAGER', 'webcore/gui/subscription_panel.php');
+      /** @var $panel_manager PANEL_MANAGER */
       $panel_manager = new $class_name ($subscriber);
+      /** @var $selected_panel FORM_PANEL */
       $selected_panel = $panel_manager->selected_panel ();
       $selected_panel->check ();
 
       $Page->start_display ();
-      $box = $Page->make_box_renderer ();
-      $box->start_column_set ();
-      $box->new_column_of_type ('left-column');
-  ?>
-    <div class="side-bar">
-      <div class="side-bar-title">
-        Subscriptions
-      </div>
-      <div class="side-bar-body">
-      <?php
-        $panel_manager->display (true);
-      ?>
-      </div>
-    </div>
-  <?php
-      $box->new_column_of_type ('right-column');
   ?>
     <div class="box">
-      <div class="box-title">
-        <?php echo $App->title_bar_icon ('{icons}buttons/subscriptions'); ?> <?php echo $selected_panel->raw_title (); ?>
-      </div>
       <div class="box-body">
       <?php
-        $selected_panel->display ();
+      $box = $Page->make_box_renderer();
+      $box->start_column_set();
+      $box->new_column_of_type('left-sidebar-column');
+?>
+        <div class="left-sidebar">
+          <h2>
+            Subscriptions
+          </h2>
+          <?php
+          $panel_manager->display (true);
+          ?>
+        </div>
+      <?php
+      $box->new_column_of_type('content-column');
+      ?>
+        <div class="form-content">
+      <?php
+      $selected_panel->display ();
+      ?>
+        </div>
+      <?php
+      $box->finish_column_set();
       ?>
       </div>
     </div>

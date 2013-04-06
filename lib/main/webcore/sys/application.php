@@ -167,7 +167,7 @@ class APPLICATION extends CONTEXT
   public $anon_options;
 
   /**
-   * @var array[integer]
+   * @var integer[]
    */
   public $max_title_sizes;
 

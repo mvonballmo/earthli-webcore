@@ -136,6 +136,8 @@ class ATTACHMENT extends OBJECT_IN_FOLDER
    * Fully resolved server-local path to the thumbnail.
    * Will be empty if not {@link is_image} or no thumnail was generated.
    * @see thumbnail_url()
+   * @param string $for_file The optional file for which to get a thumbnail
+   * name; if empty, the result of {@link full_file_name} is used.
    * @return string
    */
   public function thumbnail_file_name ($for_file = '')
@@ -190,6 +192,7 @@ class ATTACHMENT extends OBJECT_IN_FOLDER
   /**
    * File type icon.
    * Retrieves file type to icon mappings from the {@link APPLICATION::file_type_manager()}.
+   * @param string $size The size of the icon to return.
    * @return string
    */
   public function icon_as_html ($size = '100px')
@@ -224,12 +227,14 @@ class ATTACHMENT extends OBJECT_IN_FOLDER
       $this->file_name = $new_file_name;
 
       $class_name = $this->app->final_class_name ('IMAGE', 'webcore/util/image.php');
+      /** @var $img IMAGE */
       $img = new $class_name ();
       $img->set_file ($this->full_file_name ());
       $this->is_image = $img->loadable ();
       if (! $this->is_image)
       {
         $class_name = $this->app->final_class_name ('ARCHIVE', 'webcore/util/archive.php');
+        /** @var $archive ARCHIVE */
         $archive = new $class_name ($this->full_file_name ());
         $this->is_archive = $archive->readable ();
       }
@@ -376,7 +381,7 @@ class ATTACHMENT extends OBJECT_IN_FOLDER
   /**
    * Return default handler objects for supported tasks.
    * @param string $handler_type Specific functionality required.
-   * @param object $options
+   * @param OBJECT_RENDERER_OPTIONS $options
    * @return object
    * @access private
    */
@@ -448,5 +453,3 @@ class ATTACHMENT extends OBJECT_IN_FOLDER
    */
   protected $_host;
 }
-
-?>

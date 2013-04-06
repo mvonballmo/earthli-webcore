@@ -101,6 +101,7 @@ class FOLDER_SUBSCRIBER_FORM extends ID_BASED_FORM
     $query = $this->_folder->subscriber_query ();
 
     $class_name = $this->app->final_class_name ('SUBSCRIBER_GRID', 'webcore/gui/subscriber_grid.php');
+    /** @var $grid SUBSCRIBER_GRID */
     $grid = new $class_name ($this->app);
     
     $num_rows = max ($query->size (), 1);

@@ -86,7 +86,7 @@ http://www.earthli.com/software/webcore
           if (isset ($comment))
           {
             $Page->title->add_object ($comment);
-            $Page->location->add_object_link ($comment);
+            $Page->location->add_object_link ($comment, '', '{icons}buttons/reply');
 
             $host = $comment;
           }
@@ -112,15 +112,12 @@ http://www.earthli.com/software/webcore
     }
 
     $Page->title->subject = 'Create Attachment';
-    $Page->location->append ($Page->title->subject);
+    $Page->location->append ($Page->title->subject, '', '{icons}buttons/attach');
 
     $Page->start_display ();
 ?>
     <div class="box">
-      <div class="box-title">
-        <?php echo $App->title_bar_icon ('{icons}buttons/attach'); ?> <?php echo $Page->title->subject; ?>
-      </div>
-      <div class="box-body">
+      <div class="box-body form-content">
       <?php
         $form->display ();
       ?>

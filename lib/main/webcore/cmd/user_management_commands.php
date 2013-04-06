@@ -61,7 +61,7 @@ class USER_LIST_COMMANDS extends COMMANDS
 
     $cmd = $this->make_command ();
     $cmd->id = 'create';
-    $cmd->title = 'New user';
+    $cmd->caption = 'New user';
     $cmd->link = "create_user.php";
     $cmd->icon = '{icons}buttons/create';
     $cmd->executable = $this->login->is_allowed (Privilege_set_user, Privilege_create);
@@ -73,7 +73,7 @@ class USER_LIST_COMMANDS extends COMMANDS
 
     $cmd = $this->make_command ();
     $cmd->id = 'show_registered';
-    $cmd->title = 'Show registered users';
+    $cmd->caption = 'Show registered users';
     $cmd->link = $link_url->as_text ();
     $cmd->icon = '{icons}buttons/login';
     $cmd->executable = read_var ('show_anon');
@@ -84,7 +84,7 @@ class USER_LIST_COMMANDS extends COMMANDS
 
     $cmd = $this->make_command ();
     $cmd->id = 'show_anonymous';
-    $cmd->title = 'Show anonymous users';
+    $cmd->caption = 'Show anonymous users';
     $cmd->link = $link_url->as_text ();
     $cmd->icon = '{icons}buttons/anonymous';
     $cmd->executable = ! read_var ('show_anon');
@@ -114,7 +114,7 @@ class USER_MANAGEMENT_COMMANDS extends USER_LIST_COMMANDS
 
     $cmd = $this->make_command ();
     $cmd->id = 'anon_permissions';
-    $cmd->title = 'Edit anonymous user permissions';
+    $cmd->caption = 'Edit anonymous user permissions';
     $cmd->link = "edit_anon_user_permissions.php";
     $cmd->icon = '{icons}buttons/anon_user_permissions';
     $cmd->executable = $this->login->is_allowed (Privilege_set_user, Privilege_secure);
@@ -123,7 +123,7 @@ class USER_MANAGEMENT_COMMANDS extends USER_LIST_COMMANDS
 
     $cmd = $this->make_command ();
     $cmd->id = 'reg_permissions';
-    $cmd->title = 'Edit registered user permissions';
+    $cmd->caption = 'Edit registered user permissions';
     $cmd->link = "edit_all_users_permissions.php";
     $cmd->icon = '{icons}buttons/reg_user_permissions';
     $cmd->executable = $this->login->is_allowed (Privilege_set_user, Privilege_secure);

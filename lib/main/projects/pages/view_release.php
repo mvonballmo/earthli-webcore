@@ -27,12 +27,14 @@ http://www.earthli.com/software/webcore/projects
 ****************************************************************************/
 
   $id = read_var ('id');
+  /** @var $folder_query USER_PROJECT_QUERY */
   $folder_query = $App->login->folder_query ();
   $folder = $folder_query->folder_for_release_at_id ($id);
 
   if (isset ($folder))
   {
     $rel_query = $folder->release_query ();
+    /** @var $release RELEASE */
     $release = $rel_query->object_at_id ($id);
   }
 
@@ -43,6 +45,7 @@ http://www.earthli.com/software/webcore/projects
     $branch = $release->branch ();
 
     $class_name = $App->final_class_name ('PROJECT_RELEASE_PANEL_MANAGER', 'projects/gui/project_panel.php');
+    /** @var $panel_manager PROJECT_RELEASE_PANEL_MANAGER */
     $panel_manager = new $class_name ($release);
     $panel = $panel_manager->selected_panel ();
 
@@ -59,64 +62,71 @@ http://www.earthli.com/software/webcore/projects
 
     $Page->location->add_folder_link ($folder, 'panel=' . $panel_manager->selected_panel_id);
     $Page->location->add_object_link ($branch, 'panel=' . $panel_manager->selected_panel_id);
-    $Page->location->add_object_text ($release);
+
+    $Page->location->add_object_text ($release, $App->sized_icon($release->state_icon_name(), ''));
+    $Page->location->append($Page->title->subject);
 
     $Page->start_display ();
+?>
+<div class="top-box">
+<?php
     $box = $Page->make_box_renderer ();
     $box->start_column_set ();
-    $box->new_column_of_type ('left-column');
-?>
-  <div class="side-bar">
-    <div class="side-bar-title">
-      <?php
-        if ($release->locked ())
-        {
-          echo $release->state_as_icon ('20px') . ' ';
-        }
-        echo $release->title_as_html ();
-      ?>
-    </div>
-    <div class="side-bar-body">
-    <?php
-      $renderer = $release->handler_for (Handler_html_renderer);
-      $options = $renderer->options ();
-      $options->show_users = false;
-      $options->show_as_summary = true;
-      $renderer->display ($release);
 
-      $panel_manager->display ();
-     ?>
-    </div>
-  </div>
-  <br>
-  <div class="side-bar">
-    <div class="side-bar-title">
-      Search
-    </div>
-    <div class="side-bar-body">
-    <?php
-      $class_name = $App->final_class_name ('EXECUTE_SEARCH_FORM', 'webcore/forms/execute_search_form.php');
-      $search = null;
-      $form = new $class_name ($App, $search);
-      $form->load_with_defaults ();
-      $form->set_value ('folder_ids', $folder->id);
-      $form->display ();
-    ?>
-    </div>
-  </div>
-<?php
-    $box->new_column_of_type ('right-column');
+    $renderer = $release->handler_for (Handler_html_renderer);
+    $options = $renderer->options ();
+    $options->show_users = false;
+    $options->show_as_summary = true;
+
+    $text = $renderer->display_to_string ($release);
+
+    if ($text)
+    {
+      $box->new_column_of_type ('description-box');
+
+      echo $text;
+    }
+
+    $box->new_column_of_type ('contents-box');
+
+    echo '<h4>';
+
+    $newsfeed_commands = $Page->newsfeed_options->make_commands($App);
+    $renderer = $App->make_newsfeed_menu_renderer ();
+    $renderer->set_size (Menu_size_minimal);
+    $renderer->alignment = Menu_align_inline;
+    $renderer->display ($newsfeed_commands);
+
+    echo ' Contents</h4>';
+    echo '<div class="panels">';
+
+    $panel_manager->display ();
+
+    echo '</div>';
+
+    $box->new_column_of_type ('tools-box');
+
+    echo '<h4>Search</h4>';
+
+    $class_name = $App->final_class_name ('EXECUTE_SEARCH_FORM', 'webcore/forms/execute_search_form.php');
+    $search = null;
+    /** @var $form EXECUTE_SEARCH_FORM */
+    $form = new $class_name ($App, $search);
+    $form->load_with_defaults ();
+    $form->set_value ('folder_ids', $folder->id);
+    $form->display ();
+
+    $renderer = $App->make_menu_renderer ();
+    $renderer->set_size(Menu_size_minimal);
+    /** @var $commands COMMANDS */
+    $commands = $release->handler_for(Handler_commands);
+    $renderer->display ($commands);
+
+    $box->finish_column_set ();
 ?>
   <div class="box">
-    <?php
-      $renderer = $App->make_menu_renderer ();
-      $renderer->display_as_toolbar ($release->handler_for (Handler_commands));
-    ?>
-    <div class="box-title">
-      <?php echo $panel->raw_title (); ?>
-    </div>
     <?php if ($panel->uses_time_selector) { ?>
-    <div class="menu-bar-top" style="text-align: center">
+    <div class="menu-bar-top">
       <?php $panel_manager->display_time_menu (); ?>
     </div>
     <?php } ?>
@@ -129,7 +139,7 @@ http://www.earthli.com/software/webcore/projects
         // don't show the bottom selector if there are no objects
 
     ?>
-    <div class="menu-bar-bottom" style="text-align: center">
+    <div class="menu-bar-bottom">
       <?php $panel_manager->display_time_menu (); ?>
     </div>
     <?php

@@ -27,11 +27,13 @@ http://www.earthli.com/software/webcore
 ****************************************************************************/
 
   $folder_query = $App->login->folder_query ();
+  /** @var $folder FOLDER */
   $folder = $folder_query->object_at_id (read_var ('id'));
 
   if (isset ($folder) && $App->login->is_allowed (Privilege_set_folder, Privilege_purge, $folder))
   {
     $class_name = $App->final_class_name ('PURGE_OBJECT_FORM', 'webcore/forms/purge_form.php', 'folder');
+    /** @var $form PURGE_OBJECT_FORM */
     $form = new $class_name ($App);
 
     $form->process_existing ($folder);
@@ -53,15 +55,12 @@ http://www.earthli.com/software/webcore
     $Page->title->subject = 'Purge Folder';
 
     $Page->location->add_folder_link ($folder);
-    $Page->location->append ($Page->title->subject);
+    $Page->location->append ($Page->title->subject, '', '{icons}buttons/purge');
 
     $Page->start_display ();
   ?>
   <div class="box">
-    <div class="box-title">
-      <?php echo $App->title_bar_icon ('{icons}buttons/purge'); ?> Purge <?php echo $folder->title_as_html (); ?>?
-    </div>
-    <div class="box-body">
+    <div class="box-body form-content">
     <?php
       $form->display ();
     ?>

@@ -51,15 +51,12 @@ http://www.earthli.com/software/webcore
 
     $Page->location->add_folder_link ($folder);
     $Page->location->append ("Explorer", "view_explorer.php?id=$folder->id");
-    $Page->location->append ($Page->title->subject);
+    $Page->location->append ($Page->title->subject, '', '{icons}buttons/restore');
 
     $Page->start_display ();
   ?>
   <div class="box">
-    <div class="box-title">
-      <?php echo $App->title_bar_icon ('{icons}buttons/restore'); ?> <?php echo $Page->title->subject; ?>
-    </div>
-    <div class="box-body">
+    <div class="box-body form-content">
     <?php
       $form->display ();
     ?>

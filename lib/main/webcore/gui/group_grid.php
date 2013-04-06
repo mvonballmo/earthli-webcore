@@ -69,12 +69,12 @@ class GROUP_GRID extends STANDARD_GRID
    */
   protected function _draw_box ($obj)
   {
-    $user_query = $obj->user_query ();
+    $this->_draw_menu_for ($obj, Menu_size_minimal);
+    echo "</td>\n<td>";
     echo $obj->title_as_link ();
-    echo "</td>\n<td style=\"padding-left: 1em; text-align: center\">";
+    echo "</td>\n<td>";
+    $user_query = $obj->user_query ();
     echo $user_query->size ();
-    echo "</td>\n<td style=\"padding-left: 1em\">";
-    $this->_draw_menu_for ($obj, Menu_size_compact);
   }
 
   /**
@@ -84,8 +84,9 @@ class GROUP_GRID extends STANDARD_GRID
   {
 ?>
 <tr>
-  <th style="text-align: left">Name</th>
-  <th style="padding-left: 1em">Users</th>
+  <th></th>
+  <th>Name</th>
+  <th>Users</th>
 </tr>
 <?php
   }

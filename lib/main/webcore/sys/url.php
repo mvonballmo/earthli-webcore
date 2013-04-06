@@ -336,7 +336,7 @@ class URL
 
   /**
    * The default separator for folders.
-   * @return char
+   * @return string
    * @see options()
    */
   public function path_delimiter ()
@@ -480,7 +480,8 @@ class URL
 
   /**
    * Add a url argument.
-   * @param string $arg
+   * @param string $name The name of the argument.
+   * @param string $value The value to use for the argument.
    */
   public function add_argument ($name, $value)
   {
@@ -540,8 +541,8 @@ class URL
    * If the value is empty, the argument is removed. Use {@link
    * replace_arguments()} to add multiple values (or a chunk of an existing
    * query string).
-   * @param string $arg_name
-   * @param string $arg_value
+   * @param string $name The name of the argument.
+   * @param string $value The value to use for the argument.
    */
   public function replace_argument ($name, $value)
   {
@@ -702,6 +703,7 @@ class URL
    * Return a location for these parameters.
    * @param string $text
    * @param string $args
+   * @return string
    * @access private
    */
   protected function _text_for_resource_and_args ($text, $args)
@@ -726,6 +728,7 @@ class URL
   /**
    * Return the extension for the given file name.
    * @param string $text May have a path, but may not have a query string.
+   * @return string
    * @access private
    */
   protected function _extension_for ($text)
@@ -807,7 +810,6 @@ class FILE_URL extends URL
    * Creates a URL that is treated as a server-local file.
    * '/' is automatically converted to the local form, so you can freely
    * base a file system path on an internet URL.
-   * @param CONTEXT $context
    * @param string $text Initial path.
    */
   public function __construct ($text)
@@ -935,7 +937,6 @@ function ensure_has_protocol ($f, $protocol)
  * @see strip_protocol()
  * @param string $f The path to check.
  * @param string $protocol If not empty, checks for the given protocol only.
- * @param FILE_OPTIONS $opts
  * @return boolean
  */
 function has_protocol ($f, $protocol = '')
@@ -992,6 +993,7 @@ function split_protocol ($f)
  * Return the domain for the given URL.
  * May be empty.
  * @param string $f
+ * @param FILE_OPTIONS $opts
  * @return string
  */
 function extract_domain ($f, $opts = null)
@@ -1082,7 +1084,7 @@ function strip_domain ($f, $opts = null)
  * Checks the list of local domains registered in the options until it finds a
  * match.
  * @param string $f
- * @param FILE_OPTIONS $opts
+ * @param URL_OPTIONS $opts
  * @return boolean
  */
 function has_local_domain ($f, $opts = null)
@@ -1110,7 +1112,7 @@ function has_local_domain ($f, $opts = null)
  * Convert a file name to a url on this server.
  * Returns empty if the file is not in the server's document root.
  * @param string $f
- * @param FILE_OPTIONS $opts
+ * @param URL_OPTIONS $opts
  * @return string
  */
 function file_name_to_url ($f, $opts = null)
@@ -1149,7 +1151,7 @@ function file_name_to_url ($f, $opts = null)
  * </ul>
  *
  * @param string $f
- * @param FILE_OPTIONS $opts
+ * @param URL_OPTIONS $opts
  * @return string
  */
 function url_to_file_name ($f, $opts = null)
@@ -1175,7 +1177,7 @@ function url_to_file_name ($f, $opts = null)
  * Useful for calculating paths for uploaded files.
  * @see UPLOADER
  * @param string $f
- * @param FILE_OPTIONS $opts
+ * @param URL_OPTIONS $opts
  * @param boolean $create_if_not_found Creates the folder if it doesn't exist.
  * @return string
  * @see ensure_path_exists()
@@ -1225,5 +1227,3 @@ function global_url_options ()
  * @access private
  */
 $_g_url_options = null;
-
-?>

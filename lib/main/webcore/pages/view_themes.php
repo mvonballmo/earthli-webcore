@@ -26,7 +26,7 @@ http://www.earthli.com/software/webcore
 
 ****************************************************************************/
 
-  $Page->title->subject = 'themes';
+  $Page->title->subject = 'Themes';
 
   $App->set_referer ();
 
@@ -36,10 +36,7 @@ http://www.earthli.com/software/webcore
   $Page->start_display ();
 ?>
   <div class="box">
-    <div class="box-title">
-      Themes
-    </div>
-    <?php 
+    <?php
       if ($App->login->is_allowed (Privilege_set_global, Privilege_resources)) 
       {
         $menu = $App->make_menu ();

@@ -90,101 +90,101 @@ http://www.earthli.com/software/webcore
 
   $Page->start_display ();
 ?>
+  <div class="top-box">
+    <?php
+    $box = $Page->make_box_renderer ();
+    $box->start_column_set ();
+
+    if (isset ($folder))
+    {
+      $renderer = $folder->handler_for (Handler_html_renderer);
+      $options = $renderer->options ();
+      $options->show_as_summary = true;
+      $options->show_users = false;
+
+      $text = $renderer->display_to_string ($folder);
+
+      if ($text)
+      {
+        $box->new_column_of_type ('description-box');
+
+        echo $text;
+      }
+    }
+
+    $box->new_column_of_type ('contents-box');
+
+    echo '<h4>';
+
+    $newsfeed_commands = $Page->newsfeed_options->make_commands($App);
+    $renderer = $App->make_newsfeed_menu_renderer ();
+    $renderer->alignment = Menu_align_inline;
+    $renderer->display ($newsfeed_commands);
+
+    echo ' Contents</h4>';
+    echo '<div class="panels">';
+
+    $panel_manager->display ();
+
+    echo '</div>';
+
+    if (! empty ($folders))
+    {
+      $box->new_column_of_type('sub-folders-box');
+
+      $folder_type_info = $App->type_info_for ('FOLDER');
+
+      echo '<h4>' . $folder_type_info->plural_title . '</h4>';
+      /* Make a copy (not a reference). */
+      $tree = $App->make_tree_renderer ();
+      include_once ('webcore/gui/folder_tree_node_info.php');
+      $tree->node_info = new FOLDER_TREE_NODE_INFO ($App);
+      $tree->node_info->page_args = read_vars (array ('panel', 'time_frame'));
+      $tree->display ($folders);
+    }
+
+    $box->new_column_of_type ('tools-box');
+
+    echo '<h4>Search</h4>';
+
+    $class_name = $App->final_class_name ('EXECUTE_SEARCH_FORM', 'webcore/forms/execute_search_form.php');
+    $search = null;
+    $selected_panel = $panel_manager->selected_panel ();
+    $form = new $class_name ($App, $search);
+    $form->load_with_defaults ();
+    $form->set_value ('state', $selected_panel->state);
+    $form->display ();
+
+    echo '<h4>Subscriptions</h4>';
+
+    include_once ('webcore/forms/check_subscriptions_form.php');
+    $form = new CHECK_SUBSCRIPTIONS_FORM ($App);
+    $form->CSS_class = 'search';
+    $form->allow_focus = false;
+    $form->display ();
+
+    $panel_commands = $panel->commands ();
+    if (isset ($panel_commands))
+    {
+      $renderer = $App->make_menu_renderer ();
+      $renderer->set_size (Menu_size_full);
+      $renderer->content_mode = Menu_show_as_buttons | Menu_show_icon;
+      $renderer->display_as_toolbar ($panel_commands);
+    }
+
+    if (isset ($folder))
+    {
+      $renderer = $folder->handler_for (Handler_menu);
+      $renderer->set_size (Menu_size_minimal);
+      $renderer->display ($folder->handler_for (Handler_commands));
+    }
+
+    $box->finish_column_set ();
+    ?>
+  </div>
   <div class="box">
     <div class="box-body">
-      <div class="top-box">
-        <?php
-        $box = $Page->make_box_renderer ();
-        $box->start_column_set ();
-
-        if (isset ($folder))
-        {
-          $renderer = $folder->handler_for (Handler_html_renderer);
-          $options = $renderer->options ();
-          $options->show_as_summary = true;
-          $options->show_users = false;
-
-          $text = $renderer->display_to_string ($folder);
-
-          if ($text)
-          {
-            $box->new_column_of_type ('description-box');
-
-            echo $text;
-          }
-        }
-
-        $box->new_column_of_type ('contents-box');
-
-        echo '<h4>';
-
-        $newsfeed_commands = $Page->newsfeed_options->make_commands($App);
-        $renderer = $App->make_newsfeed_menu_renderer ();
-        $renderer->alignment = Menu_align_inline;
-        $renderer->display ($newsfeed_commands);
-
-        echo ' Contents</h4>';
-        echo '<div class="panels">';
-
-        $panel_manager->display ();
-
-        echo '</div>';
-
-        if (! empty ($folders))
-        {
-          $box->new_column_of_type('sub-folders-box');
-
-          $folder_type_info = $App->type_info_for ('FOLDER');
-
-          echo '<h4>' . $folder_type_info->plural_title . '</h4>';
-          /* Make a copy (not a reference). */
-          $tree = $App->make_tree_renderer ();
-          include_once ('webcore/gui/folder_tree_node_info.php');
-          $tree->node_info = new FOLDER_TREE_NODE_INFO ($App);
-          $tree->node_info->page_args = read_vars (array ('panel', 'time_frame'));
-          $tree->display ($folders);
-        }
-
-        $box->new_column_of_type ('tools-box');
-
-        echo '<h4>Search</h4>';
-
-        $class_name = $App->final_class_name ('EXECUTE_SEARCH_FORM', 'webcore/forms/execute_search_form.php');
-        $search = null;
-        $selected_panel = $panel_manager->selected_panel ();
-        $form = new $class_name ($App, $search);
-        $form->load_with_defaults ();
-        $form->set_value ('state', $selected_panel->state);
-        $form->display ();
-
-        echo '<h4>Subscriptions</h4>';
-
-        include_once ('webcore/forms/check_subscriptions_form.php');
-        $form = new CHECK_SUBSCRIPTIONS_FORM ($App);
-        $form->CSS_class = 'search';
-        $form->allow_focus = false;
-        $form->display ();
-
-        $panel_commands = $panel->commands ();
-        if (isset ($panel_commands))
-        {
-          $renderer = $App->make_menu_renderer ();
-          $renderer->set_size (Menu_size_full);
-          $renderer->content_mode = Menu_show_as_buttons | Menu_show_icon;
-          $renderer->display_as_toolbar ($panel_commands);
-        }
-
-        if (isset ($folder))
-        {
-          $renderer = $folder->handler_for (Handler_menu);
-          $renderer->set_size (Menu_size_minimal);
-          $renderer->display ($folder->handler_for (Handler_commands));
-        }
-
-        $box->finish_column_set ();
-        ?>
-      </div>
-      <?php
+    <?php
       if ($panel->uses_time_selector)
       {
         ?>

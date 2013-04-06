@@ -125,11 +125,12 @@ class MENU extends WEBCORE_OBJECT
    * @param string $title Title shown for the link.
    * @param string $url Action to execute.
    * @param string $icon Path to the optional icon.
-   * @param string $selected Renders as selected without the link if <c>True</c>.
+   * @param bool $selected Renders as selected without the link if <c>True</c>.
+   * @param $link_title string The title to use for the url if the command is not selected.
    */
-  public function append ($title, $url = '', $icon = '', $selected = false)
+  public function append ($title, $url = '', $icon = '', $selected = false, $link_title = '')
   {
-    $this->_commands->append ($this->_make_command ($title, $url, $icon, $selected));
+    $this->_commands->append ($this->_make_command ($title, $url, $icon, $selected, $link_title));
   }
   
   /**
@@ -137,11 +138,12 @@ class MENU extends WEBCORE_OBJECT
    * @param string $title Title shown for the link.
    * @param string $url Action to execute.
    * @param string $icon Path to the optional icon.
-   * @param string $selected Renders as selected without the link if <c>True</c>.
+   * @param bool $selected Renders as selected without the link if <c>True</c>.
+   * @param $link_title string The title to use for the url if the command is not selected.
    */
-  public function prepend ($title, $url = '', $icon = '', $selected = false)
+  public function prepend ($title, $url = '', $icon = '', $selected = false, $link_title = '')
   {
-    $this->_commands->prepend ($this->_make_command ($title, $url, $icon, $selected));
+    $this->_commands->prepend ($this->_make_command ($title, $url, $icon, $selected, $link_title));
   }
   
   /**
@@ -154,28 +156,31 @@ class MENU extends WEBCORE_OBJECT
     $this->renderer = clone($other->renderer);
     $this->_commands = clone($other->_commands);
   }
-  
+
   /**
    * Create and configure a {@link COMMAND}.
-   * @param string $text Title of the command.
+   * @param string $caption Text of the command.
    * @param string $url Link for the command action.
-   * @param string $icon Path to the icon for the command. 
-   * @param string $selected Renders as selected without the link if
+   * @param string $icon Path to the icon for the command.
+   * @param bool $selected Renders as selected without the link if
    * <code>True</code>.
+   * @param $link_title string The title to use for the url if the command is not selected.
+   * @return COMMAND
    * @access private
    */
-  protected function _make_command ($title, $url, $icon, $selected)
+  protected function _make_command ($caption, $url, $icon, $selected, $link_title)
   {
     $Result = $this->_commands->make_command ();
     $Result->id = 'item_' . mt_rand ();
     if ($selected)
     {
-      $Result->title = "<span class=\"selected\">$title</span>";
+      $Result->caption = "<span class=\"selected\">$caption</span>";
     }
     else
     {
-      $Result->title = $title;
+      $Result->caption = $caption;
       $Result->link = $url;
+      $Result->link_title = $link_title;
     }
     $Result->icon = $icon;
     return $Result;
@@ -189,5 +194,3 @@ class MENU extends WEBCORE_OBJECT
    */
   protected $_commands;
 }
-
-?>

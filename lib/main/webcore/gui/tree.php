@@ -266,16 +266,16 @@ abstract class TREE extends WEBCORE_OBJECT
     $icon = $this->node_info->icon_for ($node);
     $title = $this->node_info->title_for ($node);
     
-    if ($icon)
-    {
-      echo ' ' . $icon . ' '; 
-    }
     if (isset ($this->decorator))
     {
-      $this->decorator->draw ($node, $title);
+      $this->decorator->draw ($node, $title, $icon);
     }
     else
     {
+      if ($icon)
+      {
+        echo ' ' . $icon . ' ';
+      }
       echo $title;
     }
   }
@@ -460,12 +460,13 @@ abstract class TREE_NODE_INFO extends WEBCORE_OBJECT
    * Default behavior returns no nodes.
    * @param object $node
    * @access private
+   * @return TREE_NODE_INFO[]
    */
   public function sub_nodes ($node) {}
 
   /**
    * Return the title for the given node.
-   * @param PROJECT $node Draw the title for this project.
+   * @param NAMED_OBJECT $node Draw the title for this project.
    * @return string
    * @abstract
    */
@@ -602,8 +603,9 @@ class TREE_DECORATOR extends WEBCORE_OBJECT
    * Render the decorator for this node.
    * @param object $node
    * @param string $text
+   * @param string $icon
    */
-  public function draw ($node, $text) {}
+  public function draw ($node, $text, $icon) {}
 
   /**
    * Reference to the parent tree's node info object.

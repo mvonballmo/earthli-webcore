@@ -67,15 +67,15 @@ class MAIL_BODY_RENDERER extends MAIL_RENDERER
   /**
    * List of objects in the email.
    * @see MAIL_BODY_RENDERER_OBJECT
-   * @var array [MAIL_BODY_RENDERER_OBJECT]
+   * @var MAIL_BODY_RENDERER_OBJECT[]
    */
   public $objects;
 
   /**
-   * Add an object to be renderered when the full email is rendered.
+   * Add an object to be rendered when the full email is rendered.
    * You can add multiple objects; renderer must be matched with the object.
    * @param object $obj
-   * @param OBJECT_MAIL_RENDERER $renderer
+   * @param MAIL_OBJECT_RENDERER $renderer
    */
   public function add ($obj, $renderer)
   {
@@ -88,12 +88,12 @@ class MAIL_BODY_RENDERER extends MAIL_RENDERER
   /**
    * Retrieve the body of the email as HTML.
    * Return only 'excerpt_length' visible characters from each object's description if non-zero.
-   * @param MAIL_RENDERER_OPTIONS $options
+   * @param MAIL_OBJECT_RENDERER_OPTIONS $options
    * @return string
    */
   public function as_html ($options)
   {
-    $state = new stdClass();
+    $state = new MAIL_RENDERER_STATE();
     $this->_start_rendering ($options, $state);
     $Result = $this->_html_header () . $this->_html_content ($options) . $this->_html_footer ();
     $this->_finish_rendering ($options, $state);
@@ -109,12 +109,12 @@ class MAIL_BODY_RENDERER extends MAIL_RENDERER
   /**
    * Retrieve the body of the email as text.
    * Return only 'excerpt_length' visible characters from each object's description if non-zero.
-   * @param MAIL_RENDERER_OPTIONS $options
+   * @param MAIL_OBJECT_RENDERER_OPTIONS $options
    * @return string
    */
   public function as_text ($options)
   {
-    $state = new stdClass();
+    $state = new MAIL_RENDERER_STATE();
     $this->_start_rendering ($options, $state);
     $Result = $this->_text_content ($options);
     $this->_finish_rendering ($options, $state);
@@ -144,7 +144,7 @@ class MAIL_BODY_RENDERER extends MAIL_RENDERER
 
   /**
    * All objects' contents returned as HTML.
-   * @param MAIL_RENDERER_OPTIONS $options
+   * @param MAIL_OBJECT_RENDERER_OPTIONS $options
    * @return string
    * @access private
    */
@@ -180,17 +180,17 @@ class MAIL_BODY_RENDERER extends MAIL_RENDERER
 
   /**
    * All objects' contents returned as text.
-   * @param MAIL_RENDERER_OPTIONS $options
+   * @param MAIL_OBJECT_RENDERER_OPTIONS $options
    * @return string
    * @access private
    */
   protected function _text_content ($options)
   {
+    $Result = '';
     $count = sizeof ($this->objects);
     if ($count)
     {
       $index = 0;
-      $Result = '';
 
       while ($index < $count)
       {
@@ -270,14 +270,12 @@ class MAIL_BODY_RENDERER extends MAIL_RENDERER
 class MAIL_BODY_RENDERER_OBJECT
 {
   /**
-   * @var object $obj
+   * @var UNIQUE_OBJECT $obj
    */
   public $obj;
 
   /**
-   * @var OBJECT_MAIL_RENDERER
+   * @var MAIL_OBJECT_RENDERER
    */
   public $renderer;
 }
-
-?>

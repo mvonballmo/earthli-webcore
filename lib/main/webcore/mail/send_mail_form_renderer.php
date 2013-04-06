@@ -50,7 +50,7 @@ class SEND_MAIL_FORM_RENDERER extends MAIL_OBJECT_RENDERER
 {
   /**
    * @param SEND_MAIL_FORM $obj
-   * @param EXCEPTION_MAIL_OBJECT_RENDERER_OPTIONS $options
+   * @param MAIL_OBJECT_RENDERER_OPTIONS $options
    * @return string
    */
   public function subject ($obj, $options)
@@ -60,7 +60,7 @@ class SEND_MAIL_FORM_RENDERER extends MAIL_OBJECT_RENDERER
 
   /**
    * @param SEND_MAIL_FORM $obj
-   * @param MAIL_RENDERER_OPTIONS $options
+   * @param MAIL_OBJECT_RENDERER_OPTIONS $options
    * @access private
    */
   protected function _echo_html_content ($obj, $options)
@@ -70,10 +70,9 @@ class SEND_MAIL_FORM_RENDERER extends MAIL_OBJECT_RENDERER
       $munger = $this->context->html_text_formatter ();
       $sender_name = $obj->value_for ('sender_name');
 ?>
-    <div class="horizontal-separator" style="margin-bottom: 1em"></div>
     <div class="quote-block"><?php echo $munger->transform ($obj->value_for ('message')); ?></div>
     <?php if ($sender_name) { ?>
-    <p class="quoter">- <?php echo $sender_name; ?></p>
+    <p class="quoter">&mdash;<?php echo $sender_name; ?></p>
     <?php } ?>
     <div class="horizontal-separator"></div>
 <?php
@@ -82,7 +81,7 @@ class SEND_MAIL_FORM_RENDERER extends MAIL_OBJECT_RENDERER
 
   /**
    * @param SEND_MAIL_FORM $obj
-   * @param MAIL_RENDERER_OPTIONS $options
+   * @param MAIL_OBJECT_RENDERER_OPTIONS $options
    * @access private
    */
   protected function _echo_text_content ($obj, $options)

@@ -59,7 +59,7 @@ class CHANGE_LOG_COMMANDS extends COMMANDS
 
     $cmd = $this->make_command ();
     $cmd->id = 'print';
-    $cmd->title = 'Print';
+    $cmd->caption = 'Print';
     $url = new URL ($this->env->url (Url_part_no_host_path));
     $url->add_argument ('printable', '1');
     $cmd->link = $url->as_text ();
@@ -74,11 +74,11 @@ class CHANGE_LOG_COMMANDS extends COMMANDS
     $cmd->id = 'show_dates';
     if ($show_date)
     {
-      $cmd->title = 'Hide Dates';
+      $cmd->caption = 'Hide Dates';
     }
     else
     {
-      $cmd->title = 'Show Dates';
+      $cmd->caption = 'Show Dates';
     }
     $url = new URL ($this->env->url (Url_part_no_host_path));
     $url->replace_argument ('show_date', ! $show_date);
@@ -94,11 +94,11 @@ class CHANGE_LOG_COMMANDS extends COMMANDS
     $cmd->id = 'show_users';
     if ($show_user)
     {
-      $cmd->title = 'Hide Users';
+      $cmd->caption = 'Hide Users';
     }
     else
     {
-      $cmd->title = 'Show Users';
+      $cmd->caption = 'Show Users';
     }
     $url = new URL ($this->env->url (Url_part_no_host_path));
     $url->replace_argument ('show_user', ! $show_user);
@@ -114,11 +114,11 @@ class CHANGE_LOG_COMMANDS extends COMMANDS
     $cmd->id = 'show_descriptions';
     if ($show_description)
     {
-      $cmd->title = 'Hide descriptions';
+      $cmd->caption = 'Hide descriptions';
     }
     else
     {
-      $cmd->title = 'Show descriptions';
+      $cmd->caption = 'Show descriptions';
     }
     $url = new URL ($this->env->url (Url_part_no_host_path));
     $url->replace_argument ('show_description', ! $show_description);
@@ -153,12 +153,12 @@ class BRANCH_CHANGE_LOG_COMMANDS extends CHANGE_LOG_COMMANDS
     $cmd->id = 'show_releases';
     if ($show_all)
     {
-      $cmd->title = 'Show Unassigned';
+      $cmd->caption = 'Show Unassigned';
       $cmd->icon = '{icons}indicators/question';
     }
     else
     {
-      $cmd->title = 'Show Releases';
+      $cmd->caption = 'Show Releases';
       $cmd->icon = '{app_icons}buttons/new_release';
     }
     $url = new URL ($this->env->url (Url_part_no_host_path));

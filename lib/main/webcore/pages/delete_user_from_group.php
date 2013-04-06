@@ -47,15 +47,14 @@ http://www.earthli.com/software/webcore
 
       $Page->title->add_object ($group);
       $Page->title->subject = 'Remove ' . $user->title_as_plain_text ();
+      $Page->location->add_root_link ();
+      $Page->location->append ('Groups', 'view_groups.php');
       $Page->location->append ($group->title_as_link ());
       $Page->location->append ($Page->title->subject);
 
       $Page->start_display ();
     ?>
     <div class="box">
-      <div class="box-title">
-        Remove <?php echo $user->title_as_html (); ?> from <?php echo $group->title_as_html (); ?>?
-      </div>
       <div class="box-body">
       <?php
         $form->display ();

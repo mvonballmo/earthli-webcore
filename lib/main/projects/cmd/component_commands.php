@@ -59,7 +59,7 @@ class COMPONENT_COMMANDS extends COMMANDS
 
     $cmd = $this->make_command ();
     $cmd->id = 'edit';
-    $cmd->title = 'Edit';
+    $cmd->caption = 'Edit';
     $cmd->link = "edit_component.php?id=$comp->id";
     $cmd->icon = '{icons}buttons/edit';
     $cmd->executable = $this->login->is_allowed (Privilege_set_folder, Privilege_modify, $comp);
@@ -68,7 +68,7 @@ class COMPONENT_COMMANDS extends COMMANDS
 
     $cmd = $this->make_command ();    
     $cmd->id = 'delete';
-    $cmd->title = 'Delete';
+    $cmd->caption = 'Delete';
     $cmd->link = "delete_component.php?id=$comp->id";
     $cmd->icon = '{icons}buttons/delete';
     $cmd->executable = ! $comp->deleted () && $this->login->is_allowed (Privilege_set_folder, Privilege_delete, $comp);
@@ -77,7 +77,7 @@ class COMPONENT_COMMANDS extends COMMANDS
 
     $cmd = $this->make_command ();    
     $cmd->id = 'purge';
-    $cmd->title = 'Purge';
+    $cmd->caption = 'Purge';
     $cmd->link = "purge_component.php?id=$comp->id";
     $cmd->icon = '{icons}buttons/purge';
     $cmd->executable = $this->login->is_allowed (Privilege_set_folder, Privilege_purge, $comp);
@@ -86,7 +86,7 @@ class COMPONENT_COMMANDS extends COMMANDS
 
     $cmd = $this->make_command ();    
     $cmd->id = 'history';
-    $cmd->title = 'History';
+    $cmd->caption = 'History';
     $cmd->link = "view_component_history.php?id=$comp->id";
     $cmd->icon = '{icons}buttons/history';
     $cmd->executable = $this->login->is_allowed (Privilege_set_folder, Privilege_view_history, $comp);

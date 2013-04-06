@@ -29,6 +29,7 @@ http://www.earthli.com/software/webcore
   if ($App->login->is_allowed (Privilege_set_user, Privilege_create))
   {
     $class_name = $App->final_class_name ('USER_FORM', 'webcore/forms/user_form.php');
+    /** @var $form USER_FORM */
     $form = new $class_name ($App);
 
     $user = $App->new_user ();
@@ -43,15 +44,12 @@ http://www.earthli.com/software/webcore
 
     $Page->location->add_root_link ();
     $Page->location->append ('Users', 'view_users.php');
-    $Page->location->append ($Page->title->subject);
+    $Page->location->append ($Page->title->subject, '', '{icons}buttons/create');
 
     $Page->start_display ();
   ?>
   <div class="box">
-    <div class="box-title">
-      <?php echo $App->title_bar_icon ('{icons}buttons/create'); ?> Create user
-    </div>
-    <div class="box-body">
+    <div class="box-body form-content">
     <?php
       $form->button = "Create";
       $form->display ();

@@ -32,6 +32,7 @@ http://www.earthli.com/software/webcore
   */
 
   $folder_query = $App->login->folder_query ();
+  /** @var $folder FOLDER */
   $folder = $folder_query->object_at_id (read_var ('id'));
 
   if (! isset ($folder))
@@ -43,6 +44,8 @@ http://www.earthli.com/software/webcore
     if ($App->login->is_allowed (Privilege_set_entry, Privilege_create, $folder))
     {
       $class_name = $App->final_class_name ('ENTRY_FORM', 'webcore/forms/object_in_folder_form.php', $entry_type_info->id);
+
+      /** @var $form ENTRY_FORM */
       $form = new $class_name ($folder);
 
       $entry = $folder->new_object ($entry_type_info->id);
@@ -74,61 +77,56 @@ http://www.earthli.com/software/webcore
         }
       }
 
-      $Page->title->add_object ($folder);
-      $Page->title->subject = "Create {$entry_type_info->singular_title}";
-
-      $Page->location->add_folder_link ($folder);
-      $Page->location->append ($Page->title->subject);
-
       if ($entry_type_info->icon)
       {
-        $icon = $entry_type_info->icon;
+        $icon = $App->sized_icon($entry_type_info->icon, '');
       }
       else
       {
         $icon = '{icons}buttons/create';
       }
 
+      $Page->title->add_object ($folder);
+      $Page->title->subject = "Create {$entry_type_info->singular_title}";
+
+      $Page->location->add_folder_link ($folder);
+      $Page->location->append ($Page->title->subject, '', $icon);
+
       $Page->start_display ();
     ?>
-    <div class="box">
-      <div class="box-title">
-        <?php echo $App->title_bar_icon ($icon); ?> Create <?php echo $entry_type_info->singular_title; ?>
-      </div>
+    <div class="top-box button-content">
       <?php
-        $url = $opt_stay_on_page->setter_url_as_html (! $opt_stay_on_page->value ());
-        if ($opt_stay_on_page->value ())
-        {
-          $icon = $App->resolve_icon_as_html ('{icons}indicators/pinned', 'Unpin', '16px', '');
-          $text = 'You are "pinned" here and will come back to this form after creating your ' . strtolower ($entry_type_info->singular_title) . 
-                  '. (<a href="' . $url . '">Unpin</a>)';
-        }
-        else
-        {
-          $icon = $App->resolve_icon_as_html ('{icons}indicators/unpinned', 'Pin', '16px', '');
-          $text = 'Use the "<a href="' . $url . '">pin</a>" to stay on this page; it makes creating multiple '
-                  . strtolower ($entry_type_info->plural_title) . ' easier.';
-        }
-        
-        echo '<div class="status-indicator"><div style="float: left"><a href="' . $url . '">' . $icon . '</a></div><div style="margin-left: 20px">' . $text . '</div></div>';
+      $menu = $App->make_menu ();
+      $menu->renderer = $App->make_menu_renderer ();
       ?>
-      <div class="box-body">
       <?php
-        $last_id = read_var ('last_id');
-        if ($last_id)
-        {
-          $entry_query = $folder->entry_query ();
-          $entry_query->set_type ($entry_type_info->id);
-          $last_entry = $entry_query->object_at_id ($last_id);
-      ?>
-      <div style="margin-bottom: 1em; margin-top: -1em">
-        <?php echo $App->resolve_icon_as_html ('{icons}indicators/info', 'Info', '16px'); ?>
-        Added <?php echo $last_entry->title_as_link (); ?>.
-        <span class="notes">(create another <?php echo $entry_type_info->singular_title; ?> below)</span>
-      </div>
-      <?php
-        }
+      $url = $opt_stay_on_page->setter_url_as_text (! $opt_stay_on_page->value ());
+      if ($opt_stay_on_page->value ())
+      {
+        $menu->append ('Unpin', $url, '{icons}indicators/pinned', false, 'You are "pinned" here and will come back to this form after creating your ' . strtolower ($entry_type_info->singular_title) . '. Click to unpin.');
+      }
+      else
+      {
+        $menu->append ('Pin', $url, '{icons}indicators/unpinned', false, 'Click to pin and to stay on this page; it makes creating multiple ' . strtolower ($entry_type_info->plural_title) . ' easier.');
+      }
 
+      $menu->display ();
+
+      $last_id = read_var ('last_id');
+      if ($last_id)
+      {
+        $entry_query = $folder->entry_query ();
+        $entry_query->set_type ($entry_type_info->id);
+        $last_entry = $entry_query->object_at_id ($last_id);
+        ?>
+        <span class="icon sixteen" style="margin-left: 15px; background-image: url(<?php echo $App->sized_icon ('{icons}indicators/info', '16px'); ?>)">Added <?php echo $last_entry->title_as_link (); ?>.</span>
+      <?php
+      }
+      ?>
+    </div>
+    <div class="box">
+      <div class="box-body form-content">
+      <?php
         $form->display ();
       ?>
       </div>

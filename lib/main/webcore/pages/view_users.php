@@ -81,7 +81,7 @@ http://www.earthli.com/software/webcore
       $renderer->set_size(Menu_size_standard);
       $renderer->num_important_commands = 1;
       $renderer->alignment = Menu_align_inline;
-      $renderer->display_as_toolbar ($commands);
+      $renderer->display ($commands);
 
       $box->finish_column_set ();
       ?>

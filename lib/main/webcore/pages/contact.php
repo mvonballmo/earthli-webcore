@@ -37,7 +37,6 @@ http://www.earthli.com/software/webcore
   $options = $Page->template_options;
 ?>
 <div class="box">
-  <div class="box-title">Contact</div>
   <div class="box-body">
     <p>To contact the site owners, use the 
       <a href="<?php echo $res->resolve_file ($options->support_url); ?>">support page</a>

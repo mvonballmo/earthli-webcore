@@ -55,11 +55,19 @@ class NEWS_PANEL_MANAGER_HELPER extends PANEL_MANAGER_HELPER
    */
   public function configure ($manager)
   {
-    $panel = $manager->panel_at ('drafts');
-    $panel->columns = 2;
+    if ($manager->is_panel('drafts'))
+    {
+      /** @var $panel GRID_PANEL */
+      $panel = $manager->panel_at ('drafts');
+      $panel->columns = 2;
+    }
 
-    $panel = $manager->panel_at ('abandoned');
-    $panel->columns = 2;
+    if ($manager->is_panel('abandoned'))
+    {
+      /** @var $panel GRID_PANEL */
+      $panel = $manager->panel_at('abandoned');
+      $panel->columns = 2;
+    }
   }
 }
 

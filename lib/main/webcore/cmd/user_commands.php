@@ -63,7 +63,7 @@ class USER_COMMANDS extends COMMANDS
     {
       $cmd = $this->make_command ();
       $cmd->id = 'edit';
-      $cmd->title = 'Edit';
+      $cmd->caption = 'Edit';
       $cmd->link = 'edit_user.php?name=' . $title;
       $cmd->icon = '{icons}buttons/edit';
       $cmd->executable = $this->login->is_allowed (Privilege_set_user, Privilege_modify, $user);
@@ -72,7 +72,7 @@ class USER_COMMANDS extends COMMANDS
 
       $cmd = $this->make_command ();
       $cmd->id = 'password';
-      $cmd->title = 'Password';
+      $cmd->caption = 'Password';
       $cmd->link = 'edit_password.php?name=' . $title;
       $cmd->icon = '{icons}buttons/password';
       $cmd->executable = $this->login->is_allowed (Privilege_set_global, Privilege_password, $user);
@@ -81,7 +81,7 @@ class USER_COMMANDS extends COMMANDS
 
       $cmd = $this->make_command ();
       $cmd->id = 'subscriptions';
-      $cmd->title = 'Subscriptions';
+      $cmd->caption = 'Subscriptions';
       $cmd->link = 'view_user_subscriptions.php?email=' . urlencode ($user->email);
       $cmd->icon = '{icons}buttons/subscriptions';
       $cmd->executable = $user->email && $this->login->is_allowed (Privilege_set_global, Privilege_subscribe, $user);
@@ -90,7 +90,7 @@ class USER_COMMANDS extends COMMANDS
 
       $cmd = $this->make_command ();
       $cmd->id = 'history';
-      $cmd->title = 'History';
+      $cmd->caption = 'History';
       $cmd->link = 'view_user_history.php?name=' . $title;
       $cmd->icon = '{icons}buttons/history';
       $cmd->executable = $this->login->is_allowed (Privilege_set_user, Privilege_view_history, $user);
@@ -100,7 +100,7 @@ class USER_COMMANDS extends COMMANDS
 
     $cmd = $this->make_command ();
     $cmd->id = 'delete';
-    $cmd->title = 'Delete';
+    $cmd->caption = 'Delete';
     $cmd->link = 'delete_user.php?name=' . $title;
     $cmd->icon = '{icons}buttons/delete';
     $cmd->executable = ($this->login->is_allowed (Privilege_set_user, Privilege_delete, $user)
@@ -110,7 +110,7 @@ class USER_COMMANDS extends COMMANDS
 
     $cmd = $this->make_command ();
     $cmd->id = 'secure';
-    $cmd->title = 'Security';
+    $cmd->caption = 'Security';
     $cmd->link = 'edit_user_permissions.php?name=' . $title;
     $cmd->icon = '{icons}buttons/security';
     $cmd->executable = $this->login->is_allowed (Privilege_set_user, Privilege_secure);

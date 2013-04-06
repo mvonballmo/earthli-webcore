@@ -57,15 +57,12 @@ http://www.earthli.com/software/webcore/projects
     $Page->location->add_folder_link ($folder);
     $Page->location->add_object_link ($branch);
     $Page->location->add_object_link ($rel);
-    $Page->location->append ($Page->title->subject);
+    $Page->location->append ($Page->title->subject, '', '{icons}buttons/purge');
 
     $Page->start_display ();
   ?>
   <div class="box">
-    <div class="box-title">
-      <?php echo $App->title_bar_icon ('{icons}buttons/purge'); ?> Purge release?
-    </div>
-    <div class="box-body">
+    <div class="box-body form-content">
     <?php
       $form->display ();
     ?>

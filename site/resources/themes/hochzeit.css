@@ -30,12 +30,6 @@ body
 	color: #FDF8E5;
 }
 
-.page
-{
-	max-width: 800px;
-	margin: auto;
-}
-
 .banner a:link, .banner a:visited, .footer a:link, .footer a:visited
 {
 	color: #3357A2;
@@ -44,8 +38,11 @@ body
 .nav-box
 {
 	background: #DDCCBB url(hochzeit/fossil_paper_light.jpg) repeat;
-	border: 1px solid #554433;
+	border-top: 1px solid #554433;
+	border-bottom: 1px solid #554433;
 	color: #554433;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 
 a:link, a:visited
@@ -58,16 +55,35 @@ a:hover, a:active
 	color: #FF0000;
 }
 
-.box, .menu
+.menu
 {
 	background: #FDF8E5 url(hochzeit/milkweed_paper.jpg) repeat;
 	color: #554433;
 	border-color: #554433;
 }
 
-.box-title
+.box
 {
-	border-color: #554433;
+  background: #FDF8E5 url(hochzeit/milkweed_paper.jpg) repeat;
+  color: #554433;
+  border-color: #554433;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.box > *:first-child,
+.box-body > *:first-child,
+.content-column > *:first-child,
+.left-sidebar > *:first-child
+{
+  margin-top: 0;
+}
+
+.box > *:last-child,
+.box-body > *:last-child,
+.content-column > *:last-child
+{
+  margin-bottom: 0;
 }
 
 .side-bar, .chart, .preview
@@ -89,7 +105,7 @@ a:hover, a:active
 	border-width: 0px;
 }
 
-.preview-body, .form-basic
+.preview-body
 {
 	border: 1px solid #554433;
 	background: url(hochzeit/10_percent_brown.png);
@@ -162,4 +178,28 @@ h1
 	border: 1px solid #554433;
 	padding: .5em;
 	background: url(hochzeit/10_percent_brown.png) repeat;
+}
+
+.left-sidebar
+{
+  border-right: 1px solid #554433; /* frame */
+  padding-right: 15px;
+}
+
+.right-sidebar
+{
+  border-left: 1px solid #554433; /* frame */
+  padding-left: 15px;
+}
+
+.button
+{
+  border: 1px solid #999;
+  background: #DDCCBB url(hochzeit/fossil_paper_light.jpg) repeat;
+}
+
+.paginator .selected
+{
+  background: #BBAA99 url(hochzeit/fossil_paper.jpg) repeat;
+  color: #FDF8E5;
 }

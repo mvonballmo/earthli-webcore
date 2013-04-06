@@ -27,6 +27,7 @@ http://www.earthli.com/software/webcore/albums
 ****************************************************************************/
 
   $folder_query = $App->login->folder_query ();
+  /** @var $folder FOLDER */
   $folder = $folder_query->object_at_id (read_var ('id'));
   
   if (isset ($folder) && $App->login->is_allowed (Privilege_set_folder, Privilege_view, $folder))
@@ -41,6 +42,7 @@ http://www.earthli.com/software/webcore/albums
     $folder = $folder_query->object_at_id ($folder->id);
 
     $class_name = $App->final_class_name ('FOLDER_PANEL_MANAGER', 'webcore/gui/panel.php');
+    /** @var $panel_manager FOLDER_PANEL_MANAGER */
     $panel_manager = new $class_name ($folder);
     $panel = $panel_manager->selected_panel ();
 
@@ -58,116 +60,127 @@ http://www.earthli.com/software/webcore/albums
 
     $Page->start_display ();
 ?>
-  <div class="box">
-    <div class="box-body">
-      <div class="top-box">
+<div class="top-box">
+  <?php
+  $box = $Page->make_box_renderer ();
+  $box->start_column_set ();
+
+  $renderer = $folder->handler_for (Handler_html_renderer);
+  $options = $renderer->options ();
+  $options->show_as_summary = true;
+  $options->show_users = false;
+
+  $text = $renderer->display_to_string ($folder);
+
+  if ($text)
+  {
+    $box->new_column_of_type ('description-box');
+
+    echo $text;
+  }
+
+  $box->new_column_of_type ('contents-box');
+
+  echo '<h4>';
+
+  $newsfeed_commands = $Page->newsfeed_options->make_commands($App);
+  $renderer = $App->make_newsfeed_menu_renderer ();
+  $renderer->set_size (Menu_size_minimal);
+  $renderer->alignment = Menu_align_inline;
+  $renderer->display ($newsfeed_commands);
+
+  echo ' Contents</h4>';
+  echo '<div class="panels">';
+
+  $panel_manager->display ();
+
+  echo '</div>';
+
+  if (! empty ($folders))
+  {
+    $box->new_column_of_type('sub-folders-box');
+
+    $folder_type_info = $App->type_info_for ('FOLDER');
+
+    echo '<h4>Sub-' . $folder_type_info->plural_title . '</h4>';
+
+    $tree = $App->make_tree_renderer ();
+    include_once ('webcore/gui/folder_tree_node_info.php');
+    $tree->node_info = new FOLDER_TREE_NODE_INFO ($App);
+    $tree->node_info->page_args = read_vars (array ('panel', 'time_frame'));
+    $tree->display ($folders);
+  }
+
+  $box->new_column_of_type ('tools-box');
+
+  echo '<h4>Search</h4>';
+
+  $class_name = $App->final_class_name ('EXECUTE_SEARCH_FORM', 'webcore/forms/execute_search_form.php');
+  $search = null;
+  $selected_panel = $panel_manager->selected_panel ();
+  /** @var $form EXECUTE_SEARCH_FORM */
+  $form = new $class_name ($App, $search);
+  $form->load_with_defaults ();
+  $form->set_value ('state', $selected_panel->state);
+  $form->set_value ('folder_ids', $folder->id);
+  $form->set_value ('folder_search_type', Search_user_constant);
+  $form->display ();
+
+  if (empty ($folders))
+  {
+    $box->new_column_of_type ('tools-box');
+    echo '<h4>Tools</h4>';
+  }
+  else
+  {
+    echo '<h4>Tools</h4>';
+  }
+
+  ?>
+  <div class="grid-item grid-content">
+    <div class="minimal-commands">
       <?php
-        $box = $Page->make_box_renderer ();
-        $box->start_column_set ();
-
-        $renderer = $folder->handler_for (Handler_html_renderer);
-        $options = $renderer->options ();
-        $options->show_as_summary = true;
-        $options->show_users = false;
-
-        $text = $renderer->display_to_string ($folder);
-
-        if ($text)
-        {
-          $box->new_column_of_type ('description-box');
-
-          echo $text;
-        }
-
-        $box->new_column_of_type ('contents-box');
-
-        echo '<h4>';
-
-        $newsfeed_commands = $Page->newsfeed_options->make_commands($App);
-        $renderer = $App->make_newsfeed_menu_renderer ();
-        $renderer->set_size (Menu_size_minimal);
-        $renderer->alignment = Menu_align_inline;
-        $renderer->display ($newsfeed_commands);
-
-        echo ' Contents</h4>';
-        echo '<div class="panels">';
-
-        $panel_manager->display ();
-
-        echo '</div>';
-
-        if (! empty ($folders))
-        {
-          $box->new_column_of_type('sub-folders-box');
-
-          $folder_type_info = $App->type_info_for ('FOLDER');
-
-          echo '<h4>Sub-' . $folder_type_info->plural_title . '</h4>';
-
-          $tree = $App->make_tree_renderer ();
-          include_once ('webcore/gui/folder_tree_node_info.php');
-          $tree->centered = false;
-          $tree->node_info = new FOLDER_TREE_NODE_INFO ($App);
-          $tree->node_info->page_args = read_vars (array ('panel', 'time_frame'));
-          $tree->display ($folders);
-        }
-
-        $box->new_column_of_type ('tools-box');
-
-        echo '<h4>Search</h4>';
-
-        $class_name = $App->final_class_name ('EXECUTE_SEARCH_FORM', 'webcore/forms/execute_search_form.php');
-        $search = null;
-        $selected_panel = $panel_manager->selected_panel ();
-        $form = new $class_name ($App, $search);
-        $form->load_with_defaults ();
-        $form->set_value ('state', $selected_panel->state);
-        $form->set_value ('folder_ids', $folder->id);
-        $form->set_value ('folder_search_type', Search_user_constant);
-        $form->display ();
-
-        if (empty ($folders))
-        {
-          $box->new_column_of_type ('tools-box');
-          echo '<h4>Tools</h4>';
-        }
-        else
-        {
-          echo '<h4>Tools</h4>';
-        }
-
-        $renderer = $folder->handler_for (Handler_menu);
-        $renderer->alignment = Menu_align_right;
-        $renderer->set_size(Menu_size_compact);
-        $renderer->display($folder->handler_for (Handler_commands));
-
-        $subscription_status = $folder->handler_for (Handler_subscriptions);
-        $subscription_status->display ($folder);
-
-        $box->finish_column_set ();
+      $renderer = $folder->handler_for (Handler_menu);
+      $renderer->alignment = Menu_align_inline;
+      $renderer->set_size(Menu_size_minimal);
+      $renderer->display($folder->handler_for (Handler_commands));
       ?>
-      </div>
-    <?php if ($panel->uses_time_selector) { ?>
-    <div class="menu-bar-top">
-      <?php $panel_manager->display_time_menu (); ?>
     </div>
-    <?php } ?>
-    <?php
-      $panel->display (); ?>
+    <div class="minimal-commands-content">
+      <?php
+      $subscription_status = $folder->handler_for (Handler_subscriptions);
+      $subscription_status->display ($folder);
+      ?>
     </div>
-  <?php
-    if ($panel->num_objects () && $panel->uses_time_selector)
-    {
-      // don't show the bottom selector if there are no objects
-
-  ?>
-    <div class="menu-bar-bottom">
-      <?php $panel_manager->display_time_menu (); ?>
-    </div>
-  <?php
-    }
-  ?>
   </div>
+  <?php
+
+  $box->finish_column_set ();
+  ?>
+</div>
+<div class="box">
+  <div class="box-body">
+  <?php if ($panel->uses_time_selector) { ?>
+  <div class="menu-bar-top">
+    <?php $panel_manager->display_time_menu (); ?>
+  </div>
+  <?php } ?>
+  <?php
+    $panel->display (); ?>
+  </div>
+<?php
+  if ($panel->num_objects () && $panel->uses_time_selector)
+  {
+    // don't show the bottom selector if there are no objects
+
+?>
+  <div class="menu-bar-bottom">
+    <?php $panel_manager->display_time_menu (); ?>
+  </div>
+<?php
+  }
+?>
+</div>
 <?php
     $Page->finish_display ();
   }

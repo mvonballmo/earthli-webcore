@@ -93,7 +93,7 @@ class BASE_ARTICLE_GRID extends CONTENT_OBJECT_GRID
         if ($this->show_folder && $folder->icon_url)
         {
       ?>
-      <div style="float: left; padding-right: .5em">
+      <div style="float: left; padding-right: 5px">
         <?php echo $folder->icon_as_html (); ?>
       </div>
       <?php

@@ -59,7 +59,7 @@ class COMMENT_COMMANDS extends COMMANDS
 
     $cmd = $this->make_command ();
     $cmd->id = 'reply';
-    $cmd->title = 'Reply';
+    $cmd->caption = 'Reply';
     $cmd->link = "create_comment.php?id=$comment->entry_id&parent_id=$comment->id";
     $cmd->icon = '{icons}buttons/reply';
     $cmd->executable = $this->login->is_allowed (Privilege_set_comment, Privilege_create, $comment);
@@ -68,7 +68,7 @@ class COMMENT_COMMANDS extends COMMANDS
 
     $cmd = $this->make_command ();
     $cmd->id = 'edit';
-    $cmd->title = 'Edit';
+    $cmd->caption = 'Edit';
     $cmd->link = "edit_comment.php?id=$comment->id";
     $cmd->icon = '{icons}buttons/edit';
     $cmd->executable = $this->login->is_allowed (Privilege_set_comment, Privilege_modify, $comment);
@@ -77,7 +77,7 @@ class COMMENT_COMMANDS extends COMMANDS
 
     $cmd = $this->make_command ();
     $cmd->id = 'delete';
-    $cmd->title = 'Delete';
+    $cmd->caption = 'Delete';
     $cmd->link = "delete_comment.php?id=$comment->id";
     $cmd->icon = '{icons}buttons/delete';
     $cmd->executable = ! $comment->deleted () && $this->login->is_allowed (Privilege_set_comment, Privilege_delete, $comment);
@@ -86,7 +86,7 @@ class COMMENT_COMMANDS extends COMMANDS
 
     $cmd = $this->make_command ();
     $cmd->id = 'purge';
-    $cmd->title = 'Purge';
+    $cmd->caption = 'Purge';
     $cmd->link = "purge_comment.php?id=$comment->id";
     $cmd->icon = '{icons}buttons/purge';
     $cmd->executable = $this->login->is_allowed (Privilege_set_comment, Privilege_purge, $comment);
@@ -95,7 +95,7 @@ class COMMENT_COMMANDS extends COMMANDS
 
     $cmd = $this->make_command ();
     $cmd->id = 'attach';
-    $cmd->title = 'Attach';
+    $cmd->caption = 'Attach';
     $cmd->link = "create_attachment.php?id=$comment->id&type=" . History_item_comment;
     $cmd->icon = '{icons}buttons/attach';
     $cmd->executable = $this->login->is_allowed (Privilege_set_attachment, Privilege_create, $comment)
@@ -105,7 +105,7 @@ class COMMENT_COMMANDS extends COMMANDS
 
     $cmd = $this->make_command ();
     $cmd->id = 'send';
-    $cmd->title = 'Send';
+    $cmd->caption = 'Send';
     $cmd->link = "send_comment.php?id=$comment->id";
     $cmd->icon = '{icons}buttons/send';
     $cmd->executable = true;
@@ -114,7 +114,7 @@ class COMMENT_COMMANDS extends COMMANDS
 
     $cmd = $this->make_command ();
     $cmd->id = 'history';
-    $cmd->title = 'History';
+    $cmd->caption = 'History';
     $cmd->link = "view_comment_history.php?id=$comment->id";
     $cmd->icon = '{icons}buttons/history';
     $cmd->executable = $this->login->is_allowed (Privilege_set_comment, Privilege_view_history, $comment);

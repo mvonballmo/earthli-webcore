@@ -47,6 +47,7 @@ http://www.earthli.com/software/webcore
     }
     
     $class_name = $App->final_class_name ('EXECUTE_SEARCH_FORM', 'webcore/forms/execute_search_form.php');
+    /** @var $form EXECUTE_SEARCH_FORM */
     $form = new $class_name ($App, $search);
 
     $form->process ($search);
@@ -75,11 +76,7 @@ http://www.earthli.com/software/webcore
     $Page->start_display ();
   ?>
   <div class="box">
-    <div class="box-title">
-      <a name="search-form"></a>
-      <?php echo $Page->title->subject; ?>
-    </div>
-    <div class="box-body">
+    <div class="box-body form-content" id="search-form">
       <?php $form->display (); ?>
     </div>
     <?php
@@ -92,7 +89,7 @@ http://www.earthli.com/software/webcore
         $renderer->display_as_toolbar ($commands);
 */
     ?>
-    <div id="search-results" class="box-title">
+    <h2 id="search-results">
     <?php 
       if ($num_search_results == 1)
       {
@@ -103,11 +100,9 @@ http://www.earthli.com/software/webcore
         echo $num_search_results . ' Results';
       }
     ?>
-    </div>
+    </h2>
     <div class="box-body">
-      <div style="margin: auto; display: table">
-        <?php echo $search->system_description_as_html (); ?>
-      </div>
+      <?php echo $search->system_description_as_html (); ?>
       <?php
         $grid = $search->grid ();
         $grid->show_folder = true;

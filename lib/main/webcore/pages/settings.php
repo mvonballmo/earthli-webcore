@@ -26,14 +26,17 @@ http://www.earthli.com/software/webcore
 
 ****************************************************************************/
 
-  $Page->title->subject = 'Theme Settings';
+/** @var $theme_query THEME_QUERY */
+  $theme_query = $Page->theme_query ();
+
+  $Page->title->subject = $theme_query->size () . ' Themes';
   $Page->template_options->title = 'Settings';
   $Page->template_options->settings_url = '';
   
   $Page->location->add_root_link ();
   $Page->location->append ('Settings');
+  $Page->location->append ($theme_query->size () . ' Themes');
 
-  $theme_query = $Page->theme_query ();
   $themes = $theme_query->objects ();
 
   include_once ('webcore/forms/theme_selector_form.php');
@@ -44,14 +47,15 @@ http://www.earthli.com/software/webcore
   $Page->start_display ();
 ?>
 <div class="box">
-  <div class="box-title"><?php echo $theme_query->size (); ?> Themes</div>
-  <div class="box-body" style="text-align: center">
+  <div class="box-body">
     <p>Adjust your font and theme settings in the form below. Select <span class="reference">[default]</span>
       to restore the site default for that setting.</p>
     <?php $form->display (); ?>
-    <p>You can also switch themes with the samples below. Click a screenshot below to switch to that theme.</p>
+    <p>You can also switch themes with the samples below. Press the button under the thumbnail to select a theme.</p>
     <?php
       $class_name = $Page->final_class_name ('THEME_GRID', 'webcore/gui/theme_grid.php');
+
+      /** @var $grid THEME_GRID */
       $grid = new $class_name ($Page);
       $grid->is_chooser = true;
       $grid->set_ranges (5, 3);

@@ -60,15 +60,12 @@ http://www.earthli.com/software/webcore
     $Page->title->subject = 'Delete folder';
 
     $Page->location->add_folder_link ($folder);
-    $Page->location->append ($Page->title->subject);
+    $Page->location->append ($Page->title->subject, '', '{icons}buttons/delete');
 
     $Page->start_display ();
   ?>
   <div class="box">
-    <div class="box-title">
-      <?php echo $App->title_bar_icon ('{icons}buttons/delete'); ?> Delete <?php echo $folder->title_as_html (); ?>?
-    </div>
-    <div class="box-body">
+    <div class="box-body form-content">
     <?php
       $form->display ();
     ?>

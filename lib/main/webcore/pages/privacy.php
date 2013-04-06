@@ -34,7 +34,6 @@ http://www.earthli.com/software/webcore
   $Page->start_display ();
 ?>
 <div class="box">
-  <div class="box-title">Privacy</div>
   <div class="box-body">
     <h2>Short and Sweet</h2>
     <p>The owners and operators of this site will not give out any of your information to

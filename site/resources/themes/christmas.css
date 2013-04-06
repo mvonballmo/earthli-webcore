@@ -61,12 +61,6 @@ body
 	border-width: 0px;
 }
 
-.banner-box, .footer-box
-{
-	max-width: 800px;
-	margin: auto;
-}
-
 .banner a:link, .banner a:visited, .footer a:link, .footer a:visited, .chart-title a:link, .chart-title a:visited
 {
 	color: #00FF00;

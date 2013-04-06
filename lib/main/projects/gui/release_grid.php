@@ -61,7 +61,7 @@ class RELEASE_GRID extends CONTENT_OBJECT_GRID
   /**
    * @var integer
    */
-  public $spacing = 4;
+  public $spacing = 0;
 
   /**
    * @var boolean
@@ -98,68 +98,63 @@ class RELEASE_GRID extends CONTENT_OBJECT_GRID
     $branch = $obj->branch ();
     $creator = $obj->creator ();
 ?>
-<div style="margin-left: 24px">
-  <?php
-    $this->_draw_menu_for ($obj, Menu_size_compact);
-  ?>
-  <div class="grid-title">
-  <?php
-    if ($this->show_folder && isset ($folder))
-    {
-      echo $folder->title_as_link () . $this->app->display_options->object_separator;
-    }
-    if ($this->show_branch && isset ($branch))
-    {
-      echo $branch->title_as_link () . $this->app->display_options->object_separator;
-    }
-    echo $obj->state_as_icon () . ' ';
-    echo $this->obj_link ($obj);
-  ?>
+<div class="grid-item">
+  <div class="minimal-commands">
+    <?php $this->_draw_menu_for ($obj, Menu_size_minimal, Menu_align_inline); ?>
   </div>
-</div>
-<div style="padding-right: .5em; float: left">
-<?php
-  $layer = $this->context->make_layer ("id_{$obj->id}_details");
-  $layer->CSS_class = 'description';
-  $layer->margin_left = '24px';
-  $layer->draw_toggle ();
-?>
-</div>
-<div style="margin-left: 24px">
-  <div class="detail">
+  <div class="minimal-commands-content">
+    <h3 class="grid-title" style="margin-bottom: 0">
+      <?php echo $this->obj_link ($obj); ?>
+    </h3>
+    <div class="detail">
     <?php
+      $links = array();
+
+      if ($this->show_folder && isset ($folder))
+      {
+        $links []= $folder->title_as_link ();
+      }
+      if ($this->show_branch && isset ($branch))
+      {
+        $links []= $branch->title_as_link ();
+      }
+
+      echo join($this->app->display_options->object_separator, $links);
+    ?>
+    </div>
+    <div class="detail">
+      <?php
       $status = $obj->status ();
       echo $status->as_html ();
-    ?>
+      ?>
+    </div>
+    <p class="detail">
+      <?php
+      echo 'Created ';
+      if ($this->show_user)
+      {
+        echo 'by ' . $creator->title_as_link () . ' - ';
+      }
+      echo $obj->time_created->format ();
+
+      if (! $obj->time_created->equals ($obj->time_modified))
+      {
+        $modifier = $obj->modifier ();
+        echo '<br>Updated ';
+        if ($this->show_user)
+        {
+          echo 'by ' . $modifier->title_as_link () . ' - ';
+        }
+        echo $obj->time_modified->format ();
+      }
+      ?>
+    </p>
+    <?php
+    echo $obj->description_as_html ();
+?>
   </div>
 </div>
 <?php
-    $layer->start ();
-?>
-<p class="detail">
-<?php
-  echo 'Created ';
-  if ($this->show_user)
-  {
-    echo 'by ' . $creator->title_as_link () . ' - ';
-  }
-  echo $obj->time_created->format ();
-
-  if (! $obj->time_created->equals ($obj->time_modified))
-  {
-    $modifier = $obj->modifier ();
-    echo '<br>Updated ';
-    if ($this->show_user)
-    {
-      echo 'by ' . $modifier->title_as_link () . ' - ';
-    }
-    echo $obj->time_modified->format ();
-  }
-?>
-</p>
-<?php
-    echo $obj->description_as_html ();
-    $layer->finish ();
   }
 }
 ?>

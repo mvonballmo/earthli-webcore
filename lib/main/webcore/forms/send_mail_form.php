@@ -180,6 +180,7 @@ abstract class SEND_MAIL_FORM extends PREVIEWABLE_FORM
   public function make_message ($obj)
   {
     $class_name = $this->context->final_class_name ('MAIL_MESSAGE', 'webcore/mail/mail_message.php');
+    /** @var $Result MAIL_MESSAGE */
     $Result = new $class_name ($this->context);
     $Result->send_as_html = $this->value_for ('send_as_html');
 
@@ -198,12 +199,15 @@ abstract class SEND_MAIL_FORM extends PREVIEWABLE_FORM
     $Result->set_sender ($sender_name, $sender_email);
 
     $class_name = $this->context->final_class_name ('THEMED_MAIL_BODY_RENDERER', 'webcore/mail/themed_mail_body_renderer.php');
+    /** @var $mail_renderer THEMED_MAIL_BODY_RENDERER */
     $mail_renderer = new $class_name ($this->context);
 
     $class_name = $this->context->final_class_name ('SEND_MAIL_FORM_RENDERER', 'webcore/mail/send_mail_form_renderer.php');
+    /** @var $mail_obj_renderer SEND_MAIL_FORM_RENDERER */
     $mail_obj_renderer = new $class_name ($this->context);
     $mail_renderer->add ($this, $mail_obj_renderer);
 
+    /** @var $options MAIL_OBJECT_RENDERER_OPTIONS */
     $options = $this->_make_renderer_options ();
 
     $obj_renderer = $this->mail_renderer ($obj);

@@ -298,7 +298,7 @@ class PAGE_NEWSFEED_OPTIONS
           
           $cmd = $Result->make_command();
           $cmd->id = $format . '_' . $content;
-          $cmd->title = '<b>'.  $content_title . '</b> (' . $format_title . ')';
+          $cmd->caption = '<b>'.  $content_title . '</b> (' . $format_title . ')';
           if ($format == 'rss') 
           {
           	$cmd->icon = '{icons}indicators/newsfeed_rss';

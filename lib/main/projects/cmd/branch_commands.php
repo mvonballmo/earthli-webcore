@@ -60,7 +60,7 @@ class BRANCH_COMMANDS extends COMMANDS
     $cmd = $this->make_command ();
     $this->append_group ('Edit');
     $cmd->id = 'edit';
-    $cmd->title = 'Edit';
+    $cmd->caption = 'Edit';
     $cmd->link = "edit_branch.php?id=$obj->id";
     $cmd->icon = '{icons}buttons/edit';
     $cmd->executable = $this->login->is_allowed (Privilege_set_folder, Privilege_modify, $obj);
@@ -73,7 +73,7 @@ class BRANCH_COMMANDS extends COMMANDS
     {
       $cmd = $this->make_command ();
       $cmd->id = 'delete';
-      $cmd->title = 'Delete';
+      $cmd->caption = 'Delete';
       $cmd->link = "delete_branch.php?id=$obj->id";
       $cmd->icon = '{icons}buttons/delete';
       $cmd->executable = ! $obj->deleted () && $this->login->is_allowed (Privilege_set_folder, Privilege_modify, $obj);
@@ -82,7 +82,7 @@ class BRANCH_COMMANDS extends COMMANDS
 
       $cmd = $this->make_command ();
       $cmd->id = 'purge';
-      $cmd->title = 'Purge';
+      $cmd->caption = 'Purge';
       $cmd->link = "purge_branch.php?id=$obj->id";
       $cmd->icon = '{icons}buttons/purge';
       $cmd->executable = $this->login->is_allowed (Privilege_set_folder, Privilege_purge, $obj);
@@ -94,7 +94,7 @@ class BRANCH_COMMANDS extends COMMANDS
 
     $cmd = $this->make_command ();
     $cmd->id = 'print';
-    $cmd->title = 'Print';
+    $cmd->caption = 'Print';
     $cmd->link = "view_branch_change_log.php?id=$obj->id&printable=1";
     $cmd->icon = '{icons}buttons/print';
     $cmd->executable = true;
@@ -103,7 +103,7 @@ class BRANCH_COMMANDS extends COMMANDS
 
     $cmd = $this->make_command ();
     $cmd->id = 'history';
-    $cmd->title = 'History';
+    $cmd->caption = 'History';
     $cmd->link = "view_branch_history.php?id=$obj->id";
     $cmd->icon = '{icons}buttons/history';
     $cmd->executable = $this->login->is_allowed (Privilege_set_folder, Privilege_view_history, $obj);
@@ -112,7 +112,7 @@ class BRANCH_COMMANDS extends COMMANDS
 
     $cmd = $this->make_command ();
     $cmd->id = 'change_log';
-    $cmd->title = 'View change log';
+    $cmd->caption = 'View change log';
     $cmd->link = "view_branch_change_log.php?id=$obj->id";
     $cmd->icon = '{app_icons}buttons/change_log';
     $cmd->executable = true;
@@ -125,7 +125,7 @@ class BRANCH_COMMANDS extends COMMANDS
 
       $cmd = $this->make_command ();
       $cmd->id = 'new_release';
-      $cmd->title = 'New release';
+      $cmd->caption = 'New release';
       $cmd->link = "create_release.php?id=$obj->id";
       $cmd->icon = '{app_icons}buttons/new_release';
       $cmd->executable = $this->login->is_allowed (Privilege_set_folder, Privilege_modify, $obj);
@@ -134,7 +134,7 @@ class BRANCH_COMMANDS extends COMMANDS
 
       $cmd = $this->make_command ();
       $cmd->id = 'new_branch';
-      $cmd->title = 'New branch';
+      $cmd->caption = 'New branch';
       $cmd->link = "create_branch.php?id=$folder->id&branch_id=$obj->id";
       $cmd->icon = '{app_icons}buttons/new_branch';
       $cmd->executable = $this->login->is_allowed (Privilege_set_folder, Privilege_modify, $obj);
@@ -144,7 +144,7 @@ class BRANCH_COMMANDS extends COMMANDS
 
       $cmd = $this->make_command ();
       $cmd->id = 'new_job';
-      $cmd->title = 'New job';
+      $cmd->caption = 'New job';
       $cmd->link = "create_job.php?id=$folder->id&branch_id=$obj->id";
       $cmd->icon = '{app_icons}buttons/new_job';
       $cmd->executable = $this->login->is_allowed (Privilege_set_entry, Privilege_create, $obj);
@@ -153,7 +153,7 @@ class BRANCH_COMMANDS extends COMMANDS
 
       $cmd = $this->make_command ();
       $cmd->id = 'new_change';
-      $cmd->title = 'New change';
+      $cmd->caption = 'New change';
       $cmd->link = "create_change.php?id=$folder->id&branch_id=$obj->id";
       $cmd->icon = '{app_icons}buttons/new_change';
       $cmd->executable = $this->login->is_allowed (Privilege_set_entry, Privilege_create, $obj);

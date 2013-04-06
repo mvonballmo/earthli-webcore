@@ -27,6 +27,7 @@ http://www.earthli.com/software/webcore/projects
 ****************************************************************************/
 
   $id = read_var ('id');
+  /** @var $folder_query USER_PROJECT_QUERY */
   $folder_query = $App->login->folder_query ();
   $folder = $folder_query->folder_for_branch_at_id ($id);
 
@@ -41,6 +42,7 @@ http://www.earthli.com/software/webcore/projects
     $App->set_referer ();
 
     $class_name = $App->final_class_name ('PROJECT_BRANCH_PANEL_MANAGER', 'projects/gui/project_panel.php');
+    /** @var $panel_manager PROJECT_BRANCH_PANEL_MANAGER */
     $panel_manager = new $class_name ($branch);
     $panel = $panel_manager->selected_panel ();
 
@@ -72,6 +74,7 @@ http://www.earthli.com/software/webcore/projects
     </div>
     <div class="side-bar-body">
     <?php
+      /** @var $renderer OBJECT_RENDERER */
       $renderer = $branch->handler_for (Handler_html_renderer);
       $options = $renderer->options ();
       $options->show_as_summary = true;
@@ -91,6 +94,7 @@ http://www.earthli.com/software/webcore/projects
     <?php
       $class_name = $App->final_class_name ('EXECUTE_SEARCH_FORM', 'webcore/forms/execute_search_form.php');
       $search = null;
+      /** @var $form EXECUTE_SEARCH_FORM */
       $form = new $class_name ($App, $search);
       $form->load_with_defaults ();
       $form->set_value ('folder_ids', $folder->id);

@@ -67,7 +67,7 @@ class FOLDER_RENDERER extends CONTENT_OBJECT_RENDERER
 
     $this->_echo_html_content ($obj);
     $this->_echo_subscribe_status ($obj);
-    
+
     if ($use_table)
     {
       $box->finish_column_set ();

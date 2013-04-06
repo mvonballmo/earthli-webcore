@@ -27,9 +27,8 @@ http://www.earthli.com/software/webcore
 
 .button-control
 {
-  background-color: #EEEEEE;
+  background-color: #EEE;
   border: 1px solid silver;
-  border-radius: 4px;
 }
 
 .button-control:active, .button-control:hover, .button-control:focus

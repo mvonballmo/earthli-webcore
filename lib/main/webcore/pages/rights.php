@@ -34,7 +34,6 @@ http://www.earthli.com/software/webcore
   $Page->start_display ();
 ?>
 <div class="box">
-  <div class="box-title">Rights</div>
   <div class="box-body">
     <p>This site and it's contents (including web pages, email notifications and
     newsfeeds) belongs to the site owner, as indicated in the

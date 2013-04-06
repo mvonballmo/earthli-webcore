@@ -317,19 +317,19 @@ class ALBUM_CALENDAR extends BASIC_CALENDAR
   }
 
   /**
-   * @var array[ALBUM]
+   * @var ALBUM[]
    * @access private
    */
   protected $_albums;
 
   /**
-   * @var array[JOURNAL]
+   * @var JOURNAL[]
    * @access private
    */
   protected $_journals;
 
   /**
-   * @var array[DATE_TIME]
+   * @var DATE_TIME[]
    * @access private
    */
   protected $_pic_dates;

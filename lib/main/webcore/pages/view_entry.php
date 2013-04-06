@@ -58,91 +58,92 @@ http://www.earthli.com/software/webcore
     $navigator->set_query ($entry_query);
     $navigator->set_selected ($id);
 
-    $Page->start_display ();
-?>
-<div class="top-box">
-  <?php
-    if ($navigator->size () > 1)
+    $show_entry_list = false;
+    $show_links = false;
+    $has_multiple_entries = $navigator->size() > 1;
+
+    if ($has_multiple_entries)
     {
       include_once ('webcore/util/options.php');
       $option = new STORED_OPTION ($App, "show_{$entry_info->id}_list");
       $show_entry_list = $option->value ();
       $opt_link = $option->setter_url_as_html (! $show_entry_list);
 
-      $need_side_panel = ($navigator->size () > 1) && $show_entry_list;
-
-      echo '<div class="object-navigator">';
-
-      if ($need_side_panel)
-      {
-        ?>
-        <div class="links">
-          <?php echo $navigator->list_near_selected (); ?>
-        </div>
-        <?php
-      }
-
-      echo '<p class="controls">';
-
-      echo $navigator->controls ();
-
-      ?>
-      <a href="<?php echo $opt_link; ?>" class="list-toggle">
-      <?php
-
-      if (! $show_entry_list)
-      {
-        ?>
-        <?php echo $App->resolve_icon_as_html ('{icons}buttons/show_list', 'Show list', '16px', ''); ?> <span class="caption">Show list</span>
-        <?php
-      }
-      else
-      {
-        ?>
-        <?php echo $App->resolve_icon_as_html ('{icons}buttons/close', 'Close list', '16px', ''); ?> <span class="caption">Close list</span></a>
-        <?php
-      }
-
-      echo '</a>';
-
-      $renderer = $entry->handler_for (Handler_menu);
-      $renderer->set_size (Menu_size_compact);
-      $renderer->alignment = Menu_align_inline;
-      $renderer->display ($entry->handler_for (Handler_commands));
-
-      echo '</p></div>';
-
-      $subscription_status = $entry->handler_for (Handler_subscriptions);
-      $subscription_status->display ($entry);
-    }
-?>
-  </div>
-  <div class="box">
-    <div class="box-body" style="margin-top: 15px">
-      <h1>
-      <?php
-      $t = $entry->title_formatter ();
-      $t->max_visible_output_chars = 0;
-      echo $entry->title_as_html ($t);
-      ?>
-      </h1>
-<?php
-    $renderer = $entry->handler_for (Handler_html_renderer);
-    $renderer->display ($entry);
-?>
-    </div>
-  </div>
-<?php
-    $associated_data = $entry->handler_for (Handler_associated_data);
-    if (isset ($associated_data))
-    {
-      $associated_data->display ($entry);
+      $show_links = ($navigator->size () > 1) && $show_entry_list;
     }
 
-    $Page->finish_display ();
-  }
-  else
+    $Page->start_display ();
+?>
+<div class="top-box<?php if (!$show_links) { echo ' button-content'; }; ?>">
+<?php
+  if ($has_multiple_entries)
   {
-    $Page->raise_security_violation ("You are not allowed to view this item.", $folder);
+    echo '<div class="object-navigator">';
+
+    if ($show_links)
+    {
+      ?>
+      <div class="links">
+        <?php echo $navigator->list_near_selected (); ?>
+      </div>
+      <?php
+    }
+
+    echo '<span class="paginator">';
+    echo $navigator->controls ();
+    echo '</span>';
+
+    if (! $show_entry_list)
+    {
+      $icon = '{icons}buttons/show_list';
+      $caption = 'Show list';
+    }
+    else
+    {
+      $icon = '{icons}buttons/close';
+      $caption = 'Hide list';
+    }
+
+    $icon = $App->sized_icon ($icon, '16px');
+    ?><a href="<?php echo $opt_link; ?>" class="button"><span class="icon sixteen" style="background-image: url(<?php echo $icon; ?>)"><?php echo $caption; ?></span></a><?php
+    $renderer = $entry->handler_for (Handler_menu);
+    $renderer->set_size (Menu_size_compact);
+    $renderer->alignment = Menu_align_inline;
+    $renderer->display ($entry->handler_for (Handler_commands));
+
+    echo '</div>';
+
+    $subscription_status = $entry->handler_for (Handler_subscriptions);
+    $subscription_status->display ($entry);
   }
+?>
+</div>
+<div class="box">
+  <div class="box-body" style="margin-top: 15px">
+    <h1>
+    <?php
+    $t = $entry->title_formatter ();
+    $t->max_visible_output_chars = 0;
+    echo $entry->title_as_html ($t);
+    ?>
+    </h1>
+<?php
+  $renderer = $entry->handler_for (Handler_html_renderer);
+  $renderer->display ($entry);
+?>
+  </div>
+</div>
+<?php
+  $associated_data = $entry->handler_for (Handler_associated_data);
+  if (isset ($associated_data))
+  {
+    $associated_data->display ($entry);
+  }
+
+  $Page->finish_display ();
+}
+else
+{
+  $Page->raise_security_violation ("You are not allowed to view this item.", $folder);
+}
 ?>

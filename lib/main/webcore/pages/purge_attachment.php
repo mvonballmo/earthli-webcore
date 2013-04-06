@@ -81,27 +81,25 @@ http://www.earthli.com/software/webcore
     }
   }
 
-  if (isset ($attachment) && $App->login->is_allowed (Privilege_set_attachment, Privilege_purge, $attachment))
+  if (isset($host) && isset ($attachment) && $App->login->is_allowed (Privilege_set_attachment, Privilege_purge, $attachment))
   {
     $class_name = $App->final_class_name ('PURGE_ATTACHMENT_FORM', 'webcore/forms/purge_attachment_form.php');
+    /** @var $form PURGE_ATTACHMENT_FORM */
     $form = new $class_name ($App);
 
     $form->process_existing ($attachment);
     if ($form->committed ())
     {
-      $Env->redirect_local ($entry->home_page ());
+      $Env->redirect_local ($host->home_page ());
     }
 
     $Page->title->subject = 'Purge Attachment';
-    $Page->location->append ($Page->title->subject);
+    $Page->location->append ($Page->title->subject, '', '{icons}buttons/purge');
 
     $Page->start_display ();
 ?>
     <div class="box">
-      <div class="box-title">
-        <?php echo $App->title_bar_icon ('{icons}buttons/purge'); ?> Purge Attachment?
-      </div>
-      <div class="box-body">
+      <div class="box-body form-content">
         <?php
           $form->display ();
         ?>

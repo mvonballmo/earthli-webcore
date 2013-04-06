@@ -86,29 +86,12 @@ http://www.earthli.com/software/webcore
     {
       $Page->location->add_object_link ($parent);
     }
-    $Page->location->append ($Page->title->subject);
+    $Page->location->append ($Page->title->subject, '', '{icons}buttons/reply');
 
     $Page->start_display ();
 ?>
     <div class="box">
-      <div class="box-title">
-        <?php echo $App->title_bar_icon ('{icons}buttons/reply'); ?>
-      <?php
-        if (! $parent_id)
-        {
-      ?>
-        Create comment for <?php echo $entry->title_as_html (); ?>
-      <?php
-        }
-        else
-        {
-      ?>
-        Reply to <?php echo $parent->title_as_html (); ?>
-      <?php
-        }
-      ?>
-      </div>
-      <div class="box-body">
+      <div class="box-body form-content">
       <?php
         $form->display ();
       ?>

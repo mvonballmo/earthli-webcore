@@ -91,7 +91,7 @@ class JOB_COMMANDS extends ENTRY_COMMANDS
 
     $cmd = $this->make_command ();
     $cmd->id = 'work';
-    $cmd->title = 'Start working';
+    $cmd->caption = 'Start working';
     $cmd->link = "set_job_status.php?id=$entry->id&status=3&branch_id=$branch_info->branch_id&last_page=$last_page";
     $cmd->icon = '{app_icons}statuses/working';
     $cmd->importance = Command_importance_high + Command_importance_increment;
@@ -103,7 +103,7 @@ class JOB_COMMANDS extends ENTRY_COMMANDS
 
     $cmd = $this->make_command ();
     $cmd->id = 'work';
-    $cmd->title = 'Stop working';
+    $cmd->caption = 'Stop working';
     $cmd->link = "set_job_status.php?id=$entry->id&status=4&branch_id=$branch_info->branch_id&last_page=$last_page";
     $cmd->icon = '{app_icons}statuses/stopped';
     $cmd->importance = Command_importance_high + Command_importance_increment;
@@ -115,7 +115,7 @@ class JOB_COMMANDS extends ENTRY_COMMANDS
     
     $cmd = $this->make_command ();
     $cmd->id = 'fix';
-    $cmd->title = 'Mark as fixed';
+    $cmd->caption = 'Mark as fixed';
     $cmd->link = "set_job_status.php?id=$entry->id&status=7&branch_id=$branch_info->branch_id&last_page=$last_page";
     $cmd->icon = '{app_icons}statuses/released';
     $cmd->importance = Command_importance_high + Command_importance_increment;
@@ -127,7 +127,7 @@ class JOB_COMMANDS extends ENTRY_COMMANDS
 
     $cmd = $this->make_command ();
     $cmd->id = 'reopen';
-    $cmd->title = 'Re-open';
+    $cmd->caption = 'Re-open';
     $cmd->link = "set_job_status.php?id=$entry->id&status=1&branch_id=$branch_info->branch_id&last_page=$last_page";
     $cmd->icon = '{app_icons}statuses/reopened';
     $cmd->importance = Command_importance_high + Command_importance_increment;
@@ -154,7 +154,7 @@ class JOB_COMMANDS extends ENTRY_COMMANDS
 
     $cmd = $this->make_command ();
     $cmd->id = 'new_change';
-    $cmd->title = 'Add change';
+    $cmd->caption = 'Add change';
     $cmd->link = "create_change.php?id=$folder_id&job_id=$entry->id";
     $cmd->icon = '{app_icons}buttons/new_change';
     $cmd->executable = $this->login->is_allowed (Privilege_set_entry, Privilege_create, $entry);

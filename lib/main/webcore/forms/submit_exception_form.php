@@ -126,7 +126,6 @@ class SUBMIT_EXCEPTION_FORM extends SEND_MAIL_FORM
   {
     $class_name = $this->context->final_class_name ('EXCEPTION_RENDERER_OPTIONS', 'webcore/gui/exception_renderer.php');
     $Result = new $class_name ();
-    $Result->show_details = true;
     $Result->include_page_data = $this->value_for ('include_page_data');
     $Result->include_browser_info = $this->value_for ('include_browser_info');
     $Result->subject = $this->value_for ('subject');
@@ -164,5 +163,3 @@ class SUBMIT_EXCEPTION_FORM extends SEND_MAIL_FORM
     $renderer->draw_check_box_row ('include_page_data');
   }
 }
-
-?>

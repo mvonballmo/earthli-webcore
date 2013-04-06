@@ -111,8 +111,10 @@ class FOLDER_SUBSCRIPTION_FORM extends SUBSCRIPTION_FORM
     {
       $buttons [] = $renderer->javascript_button_as_HTML ('Select All', "select_all ($ctrl_name)", '{icons}buttons/select');
       $buttons [] = $renderer->javascript_button_as_HTML ('Clear All', "select_none ($ctrl_name)", '{icons}buttons/close');
-      $buttons [] = $renderer->submit_button_as_HTML ();
-      $renderer->draw_buttons_in_row ($buttons);
+
+      $renderer->start_row();
+      $renderer->draw_buttons ($buttons);
+      $renderer->finish_row();
 
       $renderer->draw_separator ();
       $renderer->draw_error_row ('ids');
@@ -123,10 +125,7 @@ class FOLDER_SUBSCRIPTION_FORM extends SUBSCRIPTION_FORM
     $renderer->finish_row ();
 
     $renderer->draw_separator ();
-    if (! empty ($buttons))
-    {
-      $renderer->draw_buttons_in_row ($buttons);
-    }
+    $renderer->draw_submit_button_row();
 
     $renderer->finish ();
   }

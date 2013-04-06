@@ -31,6 +31,8 @@ http://www.earthli.com/software/webcore
 
   if (isset ($folder) && $App->login->is_allowed (Privilege_set_folder, Privilege_modify, $folder))
   {
+    $subscriber_query = $folder->subscriber_query ();
+
     $class_name = $App->final_class_name ('FOLDER_SUBSCRIBER_FORM', 'webcore/forms/folder_subscriber_form.php');
     $form = new $class_name ($folder);
 
@@ -41,46 +43,44 @@ http://www.earthli.com/software/webcore
     }
 
     $Page->title->add_object ($folder);
-    $Page->title->subject = 'Subscribers';
+    $Page->title->subject = $subscriber_query->size () . ' subscribers for ' . $folder->title_as_html ();
 
     $Page->location->add_folder_link ($folder);
-    $Page->location->append ($Page->title->subject);
+    $Page->location->append ($Page->title->subject, '', '{icons}buttons/subscriptions');
 
     $Page->start_display ();
 
     $folders = $folder_query->tree ();
-    $subscriber_query = $folder->subscriber_query ();
 ?>
-<div class="box">
-  <div class="box-title">
-    <?php echo $App->title_bar_icon ('{icons}buttons/subscriptions'); ?> <?php echo $subscriber_query->size (); ?> subscribers for <?php echo $folder->title_as_html (); ?>
-  </div>
-  <?php
-    include_once ('webcore/util/options.php');
-    $option = new STORED_OPTION ($App, 'show_security_tree');
-    $show_tree = $option->value ();
-    $opt_link = $option->setter_url_as_html (! $show_tree);
-  ?>
-  <div class="menu-bar-top">
-  <?php
-    if (! $show_tree)
-    {
-  ?>
-    <div style="float: left">
-      <a href="<?php echo $opt_link; ?>"><?php echo $App->resolve_icon_as_html ('{icons}buttons/show_list', 'Show list', '16px'); ?></a>
-      <a href="<?php echo $opt_link; ?>">Show folder tree</a>
-    </div>
-  <?php
-    }
+    <div class="top-box button-content">
+      <?php
+      include_once ('webcore/util/options.php');
+      $option = new STORED_OPTION ($App, 'show_security_tree');
+      $show_tree = $option->value ();
+      $opt_link = $option->setter_url_as_html (! $show_tree);
 
-    $menu = $App->make_menu ();
-    $menu->renderer->content_mode = Menu_show_all_as_buttons;
-    $menu->renderer->alignment = Menu_align_right;
-    $menu->append ('Add subscribers', 'create_folder_subscriptions.php?id=' . $folder->id, '{icons}buttons/add_subscribers');
-    $menu->display ();
-  ?>
-    <div style="clear: both"></div>
-  </div>
+      if (! $show_tree)
+      {
+        $icon = '{icons}buttons/show_list';
+        $caption = 'Show folders';
+      }
+      else
+      {
+        $icon = '{icons}buttons/close';
+        $caption = 'Hide folders';
+      }
+
+      $icon = $App->sized_icon ($icon, '16px');
+      ?><a href="<?php echo $opt_link; ?>" class="button"><span class="icon sixteen" style="background-image: url(<?php echo $icon; ?>)"><?php echo $caption; ?></span></a><?php
+
+      $menu = $App->make_menu ();
+      $menu->renderer->content_mode = Menu_show_all_as_buttons;
+      $menu->renderer->alignment = Menu_align_inline;
+      $menu->append ('Add subscribers', 'create_folder_subscriptions.php?id=' . $folder->id, '{icons}buttons/add_subscribers');
+      $menu->display ();
+      ?>
+    </div>
+<div class="box">
   <div class="box-body">
       <?php
         if ($show_tree)
@@ -90,16 +90,9 @@ http://www.earthli.com/software/webcore
 
           $box = $Page->make_box_renderer ();
           $box->start_column_set ();
-          $box->new_column_of_type ('left-column');
+          $box->new_column_of_type ('left-sidebar-column');
       ?>
-    <div class="chart">
-      <div class="chart-title">
-        <div style="float: right">
-          <a href="<?php echo $opt_link; ?>"><?php echo $App->resolve_icon_as_html ('{icons}buttons/close', 'Hide folder tree', '16px'); ?></a>
-        </div>
-        <?php echo $folder_type_info->plural_title; ?>
-      </div>
-      <div class="chart-body">
+    <div class="left-sidebar">
       <?php
           include_once ('webcore/gui/folder_tree_node_info.php');
           $tree_node_info = new SUBSCRIPTION_FOLDER_TREE_NODE_INFO ($App);
@@ -107,19 +100,18 @@ http://www.earthli.com/software/webcore
           $tree_node_info->set_selected_node ($folder);
           $tree_node_info->set_visible_node ($folder);
   
-          /* Make a copy (not a reference). */
           $tree = $App->make_tree_renderer ();
           $tree->node_info = $tree_node_info;
           $tree->display ($folders);
       ?>
-      </div>
     </div>
 <?php
-          $box->new_column_of_type ('right-column');
+          $box->new_column_of_type('content-column text-flow');
         }
 
         $form->button = "Update";
         $form->display ();
+
         if ($show_tree)
         {
           $box->finish_column_set ();

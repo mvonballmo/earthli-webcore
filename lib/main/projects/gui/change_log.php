@@ -63,42 +63,42 @@ class CHANGE_LOG extends WEBCORE_OBJECT
    * @param array[CHANGE] $chngs
    * @param array[RELEASE] $rels
    */
-  public function display ($jobs, $chngs, $rels)
+  public function display ($jobs, $changes, $releases)
   {
     $this->app->display_options->overridden_max_title_size = 150;
     $this->app->date_time_toolkit->formatter->set_default_formatter (Date_time_format_short_date);
 
-    $chng_idx = 0;
+    $change_idx = 0;
     $job_idx = 0;
 
-    // show all unnassociated jobs and changes
+    // show all unassociated jobs and changes
 
     ob_start ();
       $this->_display_entries ($jobs, 0, $job_idx, '_draw_job', 'Jobs');
-      $this->_display_entries ($chngs, 0, $chng_idx, '_draw_change', 'Changes');
+      $this->_display_entries ($changes, 0, $change_idx, '_draw_change', 'Changes');
       $content = ob_get_contents ();
     ob_end_clean ();
 
-    if (($job_idx > 0) || ($chng_idx > 0))
+    if (($job_idx > 0) || ($change_idx > 0))
     {
       echo $content;
 ?>
-  <a name="releases"></a>
+  <span id="releases"></span>
 <?php
     }
 
-    if (sizeof ($rels))
+    if (sizeof ($releases))
     {
-      foreach ($rels as $rel)
+      foreach ($releases as $rel)
       {
         $orig_job_idx = $job_idx;
-        $orig_chng_idx = $chng_idx;
+        $orig_chng_idx = $change_idx;
         ob_start ();
           $this->_display_entries ($jobs, $rel->id, $job_idx, '_draw_job', 'Jobs');
-          $this->_display_entries ($chngs, $rel->id, $chng_idx, '_draw_change', 'Changes');
+          $this->_display_entries ($changes, $rel->id, $change_idx, '_draw_change', 'Changes');
           $content = ob_get_contents ();
         ob_end_clean ();
-        $this->_draw_release ($rel, $job_idx - $orig_job_idx, $chng_idx - $orig_chng_idx);
+        $this->_draw_release ($rel, $job_idx - $orig_job_idx, $change_idx - $orig_chng_idx);
         echo $content;
       }
     }
@@ -116,17 +116,17 @@ class CHANGE_LOG extends WEBCORE_OBJECT
     $this->app->date_time_toolkit->formatter->set_default_formatter (Date_time_format_short_date);
 
     $job_idx = 0;
-    $chng_idx = 0;
+    $change_idx = 0;
     
     $this->_display_entries ($jobs, $rel->id, $job_idx, '_draw_job', 'Jobs');
-    $this->_display_entries ($chngs, $rel->id, $chng_idx, '_draw_change', 'Changes');
+    $this->_display_entries ($chngs, $rel->id, $change_idx, '_draw_change', 'Changes');
   }
 
   /**
    * Display all entries that have release equal to 'release_id'.
    * 'entry_idx' is the current position in the given entry list. Processing should start with this index
    * and should increment it for each entry processed.
-   * @param array[ENTRY] $entries
+   * @param PROJECT_ENTRY[] $entries
    * @param integer $release_id
    * @param integer $entry_idx
    * @param string $draw_entry Use this method to render the 'entries' in the list.
@@ -170,7 +170,7 @@ class CHANGE_LOG extends WEBCORE_OBJECT
           }
           if ($old_idx != $entry_idx)
           {
-            echo "</dl></blockquote>\n";
+            echo "</dl>\n";
           }
           $content = ob_get_contents ();
         ob_end_clean ();
@@ -191,11 +191,11 @@ class CHANGE_LOG extends WEBCORE_OBJECT
     {      
       if (isset ($this->_component_id))
       {
-        echo "</dl></blockquote>\n";
+        echo "</dl>\n";
         echo '<div class="horizontal-separator"></div>';
       }
       
-      echo "<h3>" . $this->comp_name_for ($entry) . "</h3>\n<blockquote><dl>\n";
+      echo "<h3>" . $this->comp_name_for ($entry) . "</h3>\n<dl>\n";
 
       $this->_component_id = $entry->component_id;
     }    
@@ -222,9 +222,9 @@ class CHANGE_LOG extends WEBCORE_OBJECT
 
   /**
    * Draw the given project entry in the list.
-   * 
+   *
    * @param PROJECT_ENTRY $entry
-   * @param USER $entry
+   * @param USER $user
    * @param DATE_TIME $time
    * @access private
    */
@@ -256,15 +256,22 @@ class CHANGE_LOG extends WEBCORE_OBJECT
     
     $props = $entry->kind_properties ();
 
-    echo "<dt>\n" . $props->icon_as_html () . ' ' . $detail . "</dt>\n";
+    echo "<div class=\"sixteen\" style=\"background-image: url(" . $props->expanded_icon_url() . ")\">";
+
+    echo $detail;
 
     if ($this->show_description)
     {
       $munger = $entry->html_formatter ();
       $munger->force_paragraphs = false;
       $desc = $entry->description_as_html ($munger);
-      echo "<dd class=\"detail\">\n$desc</dd>\n";
-    }  
+      if ($desc)
+      {
+        echo "<div class=\"description\">$desc</div>";
+      }
+    }
+
+    echo '</div>';
   }
 
   /**
@@ -274,6 +281,7 @@ class CHANGE_LOG extends WEBCORE_OBJECT
    */
   protected function _draw_job ($job)
   {
+    /** @var $branch_info JOB_BRANCH_INFO */
     $branch_info = $job->main_branch_info ();
     $this->_draw_entry ($job, $branch_info->closer (), $branch_info->time_closed);
   }
@@ -292,58 +300,91 @@ class CHANGE_LOG extends WEBCORE_OBJECT
    * Draw a release in the list.
    * If the job and changes counts are 0, then assume that the entries for
    * that release weren't in the list and retrieve the counts.
-   * @param RELEASE $rel
+   * @param RELEASE $release
    * @param integer $num_jobs Number of jobs in this release. Can be empty.
-   * @param integer $num_chngs Number of changes in this release. Can be empty.
+   * @param integer $num_changes Number of changes in this release. Can be empty.
    * @access private
    */
-  protected function _draw_release ($rel, $num_jobs, $num_chngs)
+  protected function _draw_release ($release, $num_jobs, $num_changes)
   {
-    if (! $num_chngs)
+    if (! $num_changes)
     {
-      $chng_query = $rel->change_query ();
-      $num_chngs = $chng_query->size ();
+      $chng_query = $release->change_query ();
+      $num_changes = $chng_query->size ();
     }
 
     if (! $num_jobs)
     {
-      $job_query = $rel->job_query ();
+      $job_query = $release->job_query ();
       $num_jobs = $job_query->size ();
     }
 
-    $t = $rel->title_formatter ();
+    $t = $release->title_formatter ();
     $t->set_name ('view_release_change_log.php');
-
 ?>
-  <div class="info-box-top">
-    <div>
-      <span style="float: right">
-        <span class="field"><?php echo $num_jobs; ?></span> jobs |
-        <span class="field"><?php echo $num_chngs; ?></span> changes |
-        <?php
-          $status = $rel->status ();
+  <h2>
+    <?php echo $release->title_as_link ($t) ?>
+  </h2>
+    <table class="basic columns left-labels">
+      <tr>
+        <th>Jobs</th>
+        <td><?php echo $num_jobs; ?></td>
+      </tr>
+      <tr>
+        <th>Changes</th>
+        <td><?php echo $num_changes; ?></td>
+      </tr>
+      <tr>
+        <th></th>
+        <td>
+          <?php
+          $status = $release->status ();
           echo $status->as_html ();
-        ?>
-      </span>
-      <span class="grid-title">
-        <?php echo $rel->title_as_link ($t) ?>
-      </span>
-      <div style="clear: both"></div>
-    </div>
+          ?>
+        </td>
+      </tr>
+    </table>
 <?php
-    $t = $rel->time_created->formatter ();
-    $t->type = Date_time_format_date_and_time;
-    $creator = $rel->creator ();
+    if ($this->show_description)
+    {
+      $munger = $release->html_formatter ();
+      $desc = $release->description_as_html ($munger);
+      if ($desc)
+      {
+      ?>
+      <div class="text-flow">
+        <?php echo $desc; ?>
+      </div>
+      <?php
+      }
+    }
+
+    if ($this->show_user || $this->show_date)
+    {
+      $t = $release->time_created->formatter ();
+      $t->type = Date_time_format_date_and_time;
+      $creator = $release->creator ();
 ?>
-    <p>
-      Created by <?php echo $creator->title_as_link (); ?> - <?php echo $rel->time_created->format ($t); ?>
+    <p class="info-box-bottom">
+      Created
+    <?php
+      if ($this->show_user)
+      {
+    ?>
+      by <?php echo $creator->title_as_link (); ?>
+    <?php
+      }
+
+      if ($this->show_date)
+      {
+        ?>
+        on
+        <?php echo $release->time_created->format ($t);
+      }
+    ?>
     </p>
 <?php
-    $munger = $rel->html_formatter ();
-    $munger->force_paragraphs = true;
-?>
-  </div>
-<?php
+    }
   }
   
   /**

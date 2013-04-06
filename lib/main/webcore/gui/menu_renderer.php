@@ -158,7 +158,7 @@ class MENU_RENDERER extends WEBCORE_OBJECT
    * menu position.
    * @var string
    */
-  public $alignment = Menu_align_right;
+  public $alignment = Menu_align_inline;
 
   /**
    * Show the word {@link $trigger_title} for the drop-down trigger?
@@ -193,7 +193,7 @@ class MENU_RENDERER extends WEBCORE_OBJECT
    * 
    * @var string
    */
-  public $trigger_button_CSS_class = 'menu-button';
+  public $trigger_button_CSS_class = 'button';
 
   /**
    * Use this separator if {@link Menu_show_as_buttons} is <code>False</code>.
@@ -286,11 +286,19 @@ class MENU_RENDERER extends WEBCORE_OBJECT
     if (isset ($this->env->profiler)) $this->env->profiler->start ('ui');
     if ($commands->num_executable_commands ())
     {
-    	echo "<ul class=\"menu-items\" " . $this->_get_alignment() . '>';
+      if ($this->content_mode & Menu_show_as_buttons)
+      {
+        echo "<ul class=\"menu-buttons\" " . $this->_get_alignment() . '>';
+      }
+      else
+      {
+        echo "<ul class=\"menu-items\" " . $this->_get_alignment() . '>';
+      }
+
       switch ($this->display_mode)
       {
         case Menu_horizontal:
-          $this->_draw_commands ($commands, false);
+          $this->_draw_commands ($commands, false, 'button');
           break;
         case Menu_vertical:
           $this->_draw_vertical_menu ($commands, false);
@@ -367,17 +375,17 @@ class MENU_RENDERER extends WEBCORE_OBJECT
       {
         if ($this->content_mode & Menu_show_as_buttons)
         {
-          echo '  <li>' . $this->_command_as_html ($cmd, $CSS_class) . "</li>\n";
+          echo '  <li>' . $this->_command_as_html ($cmd, $CSS_class) . "</li>";
         }
         else
         {
           if ($idx_cmd > 0)
           {
-            echo '  <li>' . $sep . $this->_command_as_html ($cmd, '') . "</li>\n";
+            echo '  <li>' . $sep . $this->_command_as_html ($cmd, '') . "</li>";
           }
           else
           {
-            echo '  <li>' . $this->_command_as_html ($cmd, '') . "</li>\n";
+            echo '  <li>' . $this->_command_as_html ($cmd, '') . "</li>";
           }
         }
         $idx_cmd += 1;
@@ -392,6 +400,7 @@ class MENU_RENDERER extends WEBCORE_OBJECT
   /**
    * Create an HTML link for the command.
    * @param COMMAND $cmd
+   * @param string $CSS_class
    * @return string
    * @access private
    */
@@ -399,30 +408,31 @@ class MENU_RENDERER extends WEBCORE_OBJECT
   {
     $Result = '';
     $style = '';
-    
+    $text = '';
+
     if ($cmd->icon && ($this->content_mode & Menu_show_icon))
     {
-      $CSS_class .= ' icon';
       $style = 'style="background-image: url(' . $this->context->sized_icon ($cmd->icon, '16px') . ')"';
-//      $parts [] = $this->context->resolve_icon_as_html ($cmd->icon, ' ', '16px');
     }
-    if ($cmd->title && (($this->content_mode & Menu_show_title) || ! $cmd->icon))
+
+    if ($cmd->caption && (($this->content_mode & Menu_show_title) || ! $cmd->icon))
     {
-      $parts [] = $cmd->title;
+      $text = $cmd->caption;
     }
     
-    if (isset ($parts))
+    if (!empty ($text))
     {
-      $sep = '&nbsp;';
-      $Result = implode ($sep, $parts);
+      $Result = $text;
+
       if ($CSS_class)
       {
         $CSS_class = ' class="' . $CSS_class . '"';
       }
+
       if ($cmd->link)
       {
         $link = htmlspecialchars ($this->context->resolve_file ($cmd->link));
-        $tag = '<a' . $CSS_class . ' ' . $style . ' href="' . $link . '"';
+        $tag = '<a' . $CSS_class . ' href="' . $link . '" title="' . global_text_options()->convert_to_html_attribute($cmd->link_title) . '"';
         if ($this->target)
         {
           $tag .= ' target="' . $this->target . '"';
@@ -432,7 +442,12 @@ class MENU_RENDERER extends WEBCORE_OBJECT
           $tag .= ' onclick="' .  $cmd->on_click . '; return false;"';
         }
         $tag .= '>';
-          
+
+        if ($style)
+        {
+          $tag .= '<span class="icon sixteen" ' . $style . '>';
+        }
+
 	      if (!empty($cmd->description))
 	      {
 	        $Result .= ' <span class="menu-button-description">' . $cmd->description . '</span>';
@@ -443,19 +458,49 @@ class MENU_RENDERER extends WEBCORE_OBJECT
          * sure that it is a space so it doesn't appear on the screen. IE - so
          * crappy it hurts.
          */
-        
+
+        $Result = $tag . $Result;
+
+        if ($style)
+        {
+          $Result .= '</span>';
+        }
+
         if ($this->_is_ie)
         {
-          $Result = $tag . $Result . ' </a>';
+          $Result .= ' </a>';
         }
         else
         {
-          $Result = $tag . $Result . '</a>';
+          $Result .= '</a>';
         }
       }
-      elseif ($CSS_class)
+      elseif ($CSS_class || $style)
       {
-        $Result = '<span' . $CSS_class . '>' . $Result . '</span>';       
+        $tag = '';
+
+        if ($CSS_class)
+        {
+          $tag = '<span' . $CSS_class . '>';
+        }
+
+        if ($style)
+        {
+          $tag .= '<span class="icon sixteen" ' . $style . '>';
+        }
+
+        $Result = $tag . $Result;
+
+        if ($CSS_class)
+        {
+          $Result .= '</span>';
+        }
+
+        if ($style)
+        {
+          $Result .= '</span>';
+        }
+
 	      if (!empty($cmd->description)) 
 	      {
 	        $Result .= '<span class="menu-item-description">' . $cmd->description . '</span>';
@@ -471,12 +516,12 @@ class MENU_RENDERER extends WEBCORE_OBJECT
    * Used by the drop-down renderer and lists that use the {@link
    * Menu_vertical} or {@link Menu_vertical_with_dropdown} style.
    * @param COMMANDS $commands
-   * @param string $CSS_class Used for the menu container.
+   * @param bool $important_only If true, only important commands are rendered.
    * @access private
    */
   protected function _draw_vertical_menu ($commands, $important_only)
   {
-    echo '    <ul class="menu">' . "\n";
+    echo '<ul class="menu">' . "\n";
     if ($important_only)
     {
       $this->_draw_commands ($commands, true, 'menu-item');
@@ -488,10 +533,9 @@ class MENU_RENDERER extends WEBCORE_OBJECT
       {
         if (! $group->is_empty ())
         {
-          echo '      <div class="menu-group">' . "\n";
           if ($group->name)
           {
-            echo '        <div class="menu-group-title">' . $group->name . '</div>' . "\n";
+            echo '<li class="menu-group-title">' . $group->name . '</li>' . "\n";
           }
           foreach ($group->commands as $cmd)
           {
@@ -500,11 +544,10 @@ class MENU_RENDERER extends WEBCORE_OBJECT
               echo '        <li>' . $this->_command_as_html ($cmd, 'menu-item') . '</li>' . "\n";
             }
           }
-          echo '      </div>' . "\n";
         }
       }
     }
-    echo "    </ul>\n";
+    echo "</ul>\n";
   }  
 
   /**
@@ -540,7 +583,7 @@ class MENU_RENDERER extends WEBCORE_OBJECT
     {
       if ($display_mode == Menu_horizontal_with_dropdown)
       {
-        $this->_draw_commands ($commands, false);
+        $this->_draw_commands ($commands, false, 'button');
       }
       else
       {
@@ -571,22 +614,32 @@ class MENU_RENDERER extends WEBCORE_OBJECT
     
     $trigger = '';
     
-    if ($this->show_trigger_icon)
-    {
-      $trigger = $this->context->resolve_icon_as_html ($this->trigger_icon, ' ', '16px');
-    }
-    
     if ($this->show_trigger_title)
     {
-      $trigger .= '&nbsp;' . $this->trigger_title;
+      $trigger = $this->trigger_title;
     }
 
-    echo '  <div class="' . $trigger_class . ' ' . $this->trigger_button_CSS_class . '"' . $menu_tag . '>' . "\n";
-    echo '    <div style="float: none">' . $trigger . "</div>\n";
-    echo '    <div class="' . $menu_class . '">' . "\n";
+    echo '<li class="' . $trigger_class . ' ' . $this->trigger_button_CSS_class . '"' . $menu_tag . '>';
+    if ($this->show_trigger_icon)
+    {
+      if (empty ($trigger))
+      {
+        echo $this->context->resolve_icon_as_html($this->trigger_icon, '', '16px');
+      }
+      else
+      {
+        echo '<span class="icon sixteen" style="background-image: url(' . $this->context->sized_icon ($this->trigger_icon, '16px') . ')">';
+      }
+
+    }
+    echo $trigger;
+    echo '<span class="' . $menu_class . '">';
     $this->_draw_vertical_menu ($commands, false);
-    echo '    </div>' . "\n";
-    echo '  </div>' . "\n";
+    if ($this->show_trigger_icon && !empty ($trigger))
+    {
+      echo '</span>';
+    }
+    echo '</span></li>';
 
     if (! $this->_supports_css_2)
     {
@@ -602,13 +655,8 @@ class MENU_RENDERER extends WEBCORE_OBJECT
    */
   protected function _draw_horizontal_with_dropdown ($commands)
   {
-    $_menu_box_renderer = $this->context->make_box_renderer ();
-    $_menu_box_renderer->start_column_set ();
-      $_menu_box_renderer->new_column ('padding: 0px');
-        $this->_draw_commands ($commands, true);
-      $_menu_box_renderer->new_column ('padding: 0px');
-        $this->_draw_dropdown ($commands);
-    $_menu_box_renderer->finish_column_set ();
+    $this->_draw_commands ($commands, true, 'button');
+    $this->_draw_dropdown ($commands);
   }
   
   /**

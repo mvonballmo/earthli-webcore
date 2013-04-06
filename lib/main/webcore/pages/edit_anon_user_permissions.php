@@ -31,6 +31,7 @@ http://www.earthli.com/software/webcore
   if (isset ($user) && ($App->login->is_allowed (Privilege_set_user, Privilege_secure)))
   {
     $class_name = $App->final_class_name ('USER_PERMISSIONS_FORM', 'webcore/forms/user_permissions_form.php');
+    /** @var $form USER_PERMISSIONS_FORM */
     $form = new $class_name ($App);
 
     $form->set_visible ('use_defaults', false);
@@ -44,7 +45,7 @@ http://www.earthli.com/software/webcore
     $Page->title->subject ='Edit permissions for anonymous users';
     $Page->location->append ($App->short_title, './');
     $Page->location->append ('Users', 'view_users.php');
-    $Page->location->append ($App->resolve_icon_as_html('{icons}buttons/security', '', '16px') . ' ' . $Page->title->subject);
+    $Page->location->append ($Page->title->subject, '', '{icons}buttons/security');
 
     $Page->start_display ();
   ?>

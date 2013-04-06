@@ -221,7 +221,7 @@ abstract class PREVIEWABLE_FORM extends FORM
    * If the object being edited is attached to another, it is attached as a 'preview' to the form.
    * If the user has elected to preview changes on the object being edited, it is also displayed as
    * a preview.
-   * @var array[FORM_PREVIEW_SETTINGS]
+   * @var FORM_PREVIEW_SETTINGS[]
    * @see FORM_PREVIEW_SETTINGS
    */
   protected $_previews;
@@ -312,8 +312,8 @@ class FORM_PREVIEW_SETTINGS extends WEBCORE_OBJECT
     $layer = $this->context->make_layer ('obj_' . uniqid (rand ()));
     $layer->visible = $this->visible;
 ?>
-    <h3 class="preview-title"><?php $layer->draw_toggle (); echo ' ' . $this->title; ?></h3>
-<div class="preview" style="margin-left: 20px">
+    <h3><?php $layer->draw_toggle (); echo ' ' . $this->title; ?></h3>
+<div class="preview hidden-layer">
   <?php $layer->start (); ?>
   <div class="preview-body">
     <?php $this->_display (); ?>

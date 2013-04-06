@@ -34,12 +34,23 @@ h2, .box-title, .side-bar-title
   font-size: 14pt
 }
 
-h3, .grid-title, .menu-group-title
+h3, .grid-title
 {
   font-size: 12pt
 }
 
-h4, body, td, th, .menu-control, .text-control, .text-control-required, .quoter, .menu, .nav-box, .button-control
+h4,
+body,
+td,
+th,
+.menu-control,
+.text-control,
+.text-control-required,
+.quoter,
+.menu,
+.nav-box,
+.button-control,
+.menu-group-title
 {
   font-size: 10pt;
 }

@@ -59,7 +59,7 @@ class ATTACHMENT_COMMANDS extends COMMANDS
 
     $cmd = $this->make_command ();
     $cmd->id = 'edit';
-    $cmd->title = 'Edit';
+    $cmd->caption = 'Edit';
     $cmd->link = "edit_attachment.php?id=$attachment->id&type=$attachment->type";
     $cmd->icon = '{icons}buttons/edit';
     $cmd->executable = $this->login->is_allowed (Privilege_set_attachment, Privilege_modify, $attachment);
@@ -68,7 +68,7 @@ class ATTACHMENT_COMMANDS extends COMMANDS
 
     $cmd = $this->make_command ();
     $cmd->id = 'delete';
-    $cmd->title = 'Delete';
+    $cmd->caption = 'Delete';
     $cmd->link = "delete_attachment.php?id=$attachment->id&type=$attachment->type";
     $cmd->icon = '{icons}buttons/delete';
     $cmd->executable = ! $attachment->deleted () && $this->login->is_allowed (Privilege_set_attachment, Privilege_delete, $attachment);
@@ -77,7 +77,7 @@ class ATTACHMENT_COMMANDS extends COMMANDS
 
     $cmd = $this->make_command ();
     $cmd->id = 'purge';
-    $cmd->title = 'Purge';
+    $cmd->caption = 'Purge';
     $cmd->link = "purge_attachment.php?id=$attachment->id&type=$attachment->type";
     $cmd->icon = '{icons}buttons/purge';
     $cmd->executable = $this->login->is_allowed (Privilege_set_attachment, Privilege_purge, $attachment);
@@ -86,7 +86,7 @@ class ATTACHMENT_COMMANDS extends COMMANDS
 
     $cmd = $this->make_command ();
     $cmd->id = 'send';
-    $cmd->title = 'Send';
+    $cmd->caption = 'Send';
     $cmd->link = "send_attachment.php?id=$attachment->id&type=$attachment->type";
     $cmd->icon = '{icons}buttons/send';
     $cmd->executable = true;
@@ -95,7 +95,7 @@ class ATTACHMENT_COMMANDS extends COMMANDS
 
     $cmd = $this->make_command ();
     $cmd->id = 'history';
-    $cmd->title = 'History';
+    $cmd->caption = 'History';
     $cmd->link = "view_attachment_history.php?id=$attachment->id&type=$attachment->type";
     $cmd->icon = '{icons}buttons/history';
     $cmd->executable = $this->login->is_allowed (Privilege_set_attachment, Privilege_view_history, $attachment);

@@ -81,6 +81,7 @@ http://www.earthli.com/software/webcore
   if (isset ($attachment) && $App->login->is_allowed (Privilege_set_attachment, Privilege_view, $attachment))
   {
     $class_name = $App->final_class_name ('SEND_ATTACHMENT_FORM', 'webcore/forms/send_attachment_form.php');
+    /** @var $form SEND_ATTACHMENT_FORM */
     $form = new $class_name ($App);
 
     $form->process_existing ($attachment);

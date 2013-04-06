@@ -473,7 +473,7 @@ class RELEASE extends OBJECT_IN_FOLDER
    * @return string
    * @access private
    */
-  protected function _state_icon_name ()
+  public function state_icon_name ()
   {
     switch ($this->state)
     {
@@ -484,7 +484,7 @@ class RELEASE extends OBJECT_IN_FOLDER
     case Shipped:
       return '{icons}buttons/ship';
     default:
-      return parent::_state_icon_name ();
+      return parent::state_icon_name ();
     }
   }
 

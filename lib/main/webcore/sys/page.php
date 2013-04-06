@@ -238,7 +238,7 @@ class PAGE extends CONTEXT
    * @param string $msg
    * @param WEBCORE_OBJECT $context
    */
-  public function raise_security_violation ($msg, $context = 0)
+  public function raise_security_violation ($msg, $context = null)
   {
     if ($this->redirect_security_violations && ! $this->env->ignore_redirects)
     {
@@ -272,9 +272,16 @@ class PAGE extends CONTEXT
       }
 
       $this->title->subject = 'Access Denied';
+      $this->location->append($this->title->subject, '', '{icons}/indicators/warning');
 
       $this->start_display ();
-      echo "<div class=\"error\">$msg</div>";
+      ?>
+      <div class="box">
+        <div class="box-body">
+          <p class="error"><?php echo $msg; ?></p>
+        </div>
+      </div>
+      <?php
       $this->finish_display ();
     }
   }
@@ -310,18 +317,16 @@ class PAGE extends CONTEXT
     {
       $caption = $this->title->subject;
     }
-    $caption .= ': Error';
-    
+
     $this->title->subject = $caption;
-    
+
+    $this->location->append($this->title->subject, '', '{icons}/indicators/error');
+
     $this->start_display ();
     ?>
     <div class="box">
-      <div class="box-title">
-        <?php echo $this->title_bar_icon ('{icons}indicators/error'); ?> <?php echo $caption; ?>
-      </div>
       <div class="box-body">
-         <div class="error"><?php echo $message; ?></div> 
+         <p class="error"><?php echo $message; ?></p>
       </div>
     </div>
     <?php

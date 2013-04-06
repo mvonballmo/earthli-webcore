@@ -40,19 +40,19 @@ http://www.earthli.com/software/webcore/albums
     $Page->start_display ();
 ?>
 <div class="box">
-  <div class="box-title">
-    Choose cover picture for <?php echo $folder->title_as_link (); ?>
-  </div>
   <div class="box-body">
+    <h2>
+      Choose cover picture for <?php echo $folder->title_as_link (); ?>
+    </h2>
     <p class="notes">Click a picture below to select it. Click "Clear" to select
       no cover picture.</p>
     <?php
       $controls_renderer = $App->make_controls_renderer ();
-      echo '<div style="text-align: center">';
+      echo '<p>';
       echo $controls_renderer->javascript_button_as_html ('Clear', "picker.select_value ('0')", '{icons}buttons/delete' );
       echo $controls_renderer->javascript_button_as_html ('Cancel', "window.close()", '{icons}buttons/close' );
-      echo '</div>';
-      
+      echo '</p>';
+
       $pic_query = $folder->entry_query ();
       $pic_query->set_type ('picture');
       

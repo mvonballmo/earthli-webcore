@@ -48,7 +48,6 @@ http://www.earthli.com/software/webcore
   $Page->start_display ();
 ?>
 <div class="box">
-  <div class="box-title">Support</div>
   <div class="box-body">
     <p>If you're having trouble seeing something on this site, you should
       <a href="<?php echo $res->resolve_file ($options->browser_url); ?>">test 

@@ -60,6 +60,7 @@ class USER_RENDERER extends CONTENT_OBJECT_RENDERER
       if ($obj->picture_url)
       {
         $class_name = $this->app->final_class_name ('IMAGE_METRICS', 'webcore/util/image.php');
+        /** @var $metrics IMAGE_METRICS */
         $metrics = new $class_name ();
         $metrics->set_url ($this->context->resolve_file ($obj->picture_url, Force_root_on));
         $metrics->resize_to_fit (200, 200);
@@ -67,7 +68,6 @@ class USER_RENDERER extends CONTENT_OBJECT_RENDERER
       }
       else if ($obj->icon_url)
       {
-        $main_style .= ' margin-left: 60px';
         echo '<p>';
         echo $obj->icon_as_html ('50px');
         echo '</p>';

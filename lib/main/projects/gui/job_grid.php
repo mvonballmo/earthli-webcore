@@ -180,6 +180,8 @@ class JOB_GRID extends PROJECT_ENTRY_GRID
   public function title_formatter ($obj)
   {
     $Result = parent::title_formatter ($obj);
+
+    /** @var $branch_info JOB_BRANCH_INFO */
     $branch_info = $obj->main_branch_info ();
     if ($branch_info->is_closed ())
     {

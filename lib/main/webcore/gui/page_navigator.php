@@ -132,6 +132,12 @@ class PAGE_NAVIGATOR extends WEBCORE_OBJECT
   public $show_total = true;
 
   /**
+   * Show the total number of pages?
+   * @var boolean
+   */
+  public $show_first_and_last = true;
+
+  /**
    * Show icons for the first/previous/next/last links?
    * @var boolean
    */
@@ -286,11 +292,11 @@ class PAGE_NAVIGATOR extends WEBCORE_OBJECT
       // put in the first page if there are more pages than
       // can be displayed
 
-      if ($many_pages)
+      if ($this->show_first_and_last && $many_pages)
       {
         if ($this->page_number > 1)
         {
-          $this->_output = "<a title=\"First Page\" href=\"" . $this->_make_page_link (1) . "\">" . $this->_get_button_content('go_to_first') . "</a>";
+          $this->_output = "<a class=\"button\" title=\"First Page\" href=\"" . $this->_make_page_link (1) . "\">" . $this->_get_button_content('go_to_first') . "</a>";
         }
         else if ($this->show_disabled_buttons)
         {
@@ -302,7 +308,7 @@ class PAGE_NAVIGATOR extends WEBCORE_OBJECT
 
       if ($this->page_number > 1)
       {
-        $this->_output .= "<a title=\"Previous Page\" href=\"" . $this->_make_page_link ($this->page_number - 1) . "\">" . $this->_get_button_content('go_to_previous') . "</a>";
+        $this->_output .= "<a class=\"button\" title=\"Previous Page\" href=\"" . $this->_make_page_link ($this->page_number - 1) . "\">" . $this->_get_button_content('go_to_previous') . "</a>";
       }
       else if ($this->show_disabled_buttons)
       {
@@ -336,11 +342,11 @@ class PAGE_NAVIGATOR extends WEBCORE_OBJECT
         $page_text = $index + $this->page_offset;
         if ($index == $this->page_number)
         {
-          $this->_output .= "<span class=\"selected\">$page_text</span>";
+          $this->_output .= "<span class=\"button selected\">$page_text</span>";
         }
         else
         {
-          $this->_output .= "<a href=\"" . $this->_make_page_link ($index) . "\">$page_text</a>";
+          $this->_output .= "<a class=\"button\" href=\"" . $this->_make_page_link ($index) . "\">$page_text</a>";
         }
 
         if ($index < $last_page)
@@ -355,18 +361,18 @@ class PAGE_NAVIGATOR extends WEBCORE_OBJECT
 
       if ($this->page_number < $this->_count)
       {
-        $this->_output .= "<a title=\"Next Page\" href=\"" . $this->_make_page_link ($this->page_number + 1) . "\">" . $this->_get_button_content('go_to_next') . "</a>";
+        $this->_output .= "<a class=\"button\" title=\"Next Page\" href=\"" . $this->_make_page_link ($this->page_number + 1) . "\">" . $this->_get_button_content('go_to_next') . "</a>";
       }
       else if ($this->show_disabled_buttons)
       {
         $this->_output .= '<span class="button disabled">' . $this->_get_button_content('go_to_next_disabled') . "</span>";
       }
 
-      if ($many_pages)
+      if ($this->show_first_and_last && $many_pages)
       {
         if ($this->page_number < $this->_count)
         {
-          $this->_output .= "<a title=\"Last Page\" href=\"" . $this->_make_page_link ($this->_count) . "\">" . $this->_get_button_content('go_to_last') . "</a>";
+          $this->_output .= "<a class=\"button\" title=\"Last Page\" href=\"" . $this->_make_page_link ($this->_count) . "\">" . $this->_get_button_content('go_to_last') . "</a>";
         }
         else
         {
@@ -382,7 +388,7 @@ class PAGE_NAVIGATOR extends WEBCORE_OBJECT
     }
     else
     {
-      $this->pages = "<span class=\"selected\">1</span>";
+      $this->pages = "<span class=\"button selected\">1</span>";
     }
   }
 

@@ -36,6 +36,7 @@ http://www.earthli.com/software/webcore
 
 .text-control, .menu-control, .text-control-required
 {
-	background: #BBAA99;
+  border: 1px solid #554433;
+  background: #BBAA99 url(hochzeit/fossil_paper.jpg) repeat;
 	color: #FDF8E5;
 }

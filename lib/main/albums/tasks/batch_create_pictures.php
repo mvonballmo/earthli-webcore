@@ -191,7 +191,6 @@ class BATCH_CREATE_PICTURES_TASK extends TASK
       $img->load_from_file ();
 
       $url = new FILE_URL ($entry->extracted_name);
-      $file_name_only = $url->name_without_extension ();
 
       if ($this->create_thumbnail)
       {
@@ -224,6 +223,8 @@ class BATCH_CREATE_PICTURES_TASK extends TASK
         }
       }
 
+      $original_url = new FILE_URL ($entry->name);
+      $file_name_only = $original_url->name_without_extension ();
       $pic_title = $this->file_name_template;
       $pic_title = str_replace ('{#}', $this->_num_pictures_imported + $this->starting_index, $pic_title);
       $pic_title = str_replace ('{file}', $file_name_only, $pic_title);

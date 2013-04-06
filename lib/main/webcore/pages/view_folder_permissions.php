@@ -40,7 +40,7 @@ http://www.earthli.com/software/webcore
     $Page->title->subject = 'Permissions';
 
     $Page->location->add_folder_link ($folder);
-    $Page->location->append ("Permissions");
+    $Page->location->append ("Permissions", '', '{icons}buttons/security');
 
     $Page->start_display ();
 
@@ -50,29 +50,29 @@ http://www.earthli.com/software/webcore
     $formatter = new PERMISSIONS_FORMATTER ($App);
     $privilege_groups = $formatter->content_privilege_groups ();
   ?>
-  <div class="box">
-    <div class="box-title">
-      <?php echo $App->title_bar_icon ('{icons}buttons/security'); ?> Permissions for <?php echo $folder->title_as_html (); ?>
-    </div>
+  <div class="top-box button-content">
     <?php
-      include_once ('webcore/util/options.php');
-      $option = new STORED_OPTION ($App, 'show_security_tree');
-      $show_tree = $option->value ();
-      $opt_link = $option->setter_url_as_html (! $show_tree);
+    include_once ('webcore/util/options.php');
+    $option = new STORED_OPTION ($App, 'show_security_tree');
+    $show_tree = $option->value ();
+    $opt_link = $option->setter_url_as_html (! $show_tree);
 
-      if (! $show_tree)
-      {
+    if (! $show_tree)
+    {
+      $icon = '{icons}buttons/show_list';
+      $caption = 'Show folders';
+    }
+    else
+    {
+      $icon = '{icons}buttons/close';
+      $caption = 'Hide folders';
+    }
+
+    $icon = $App->sized_icon ($icon, '16px');
+    ?><a href="<?php echo $opt_link; ?>" class="button"><span class="icon sixteen" style="background-image: url(<?php echo $icon; ?>)"><?php echo $caption; ?></span></a><?php
     ?>
-    <div class="menu-bar-top">
-      <div style="float: left">
-        <a href="<?php echo $opt_link; ?>"><?php echo $App->resolve_icon_as_html ('{icons}buttons/show_list', 'Show list', '16px'); ?></a>
-        <a href="<?php echo $opt_link; ?>">Show folder tree</a>
-      </div>
-      <div style="clear: both"></div>
-    </div>
-    <?php
-      }
-    ?>
+  </div>
+  <div class="box">
     <div class="box-body">
       <?php
         if ($show_tree)
@@ -81,16 +81,9 @@ http://www.earthli.com/software/webcore
 
           $box = $Page->make_box_renderer ();
           $box->start_column_set ();
-          $box->new_column_of_type ('left-column');
+          $box->new_column_of_type ('left-sidebar-column');
       ?>
-    <div class="chart">
-      <div class="chart-title">
-        <div style="float: right">
-          <a href="<?php echo $opt_link; ?>"><?php echo $App->resolve_icon_as_html ('{icons}buttons/close', 'Hide folder tree', '16px'); ?></a>
-        </div>
-        Folders
-      </div>
-      <div class="chart-body">
+      <div class="left-sidebar">
       <?php
           include_once ('webcore/gui/folder_tree_node_info.php');
           $tree_node_info = new SECURITY_FOLDER_TREE_NODE_INFO ($App);
@@ -99,21 +92,19 @@ http://www.earthli.com/software/webcore
           $tree_node_info->set_selected_node ($folder);
           $tree_node_info->set_defined_nodes_visible ($folders);
 
-          /* Make a copy (not a reference). */
           $tree = $App->make_tree_renderer ();
           $tree->node_info = $tree_node_info;
           $tree->display ($folders);
       ?>
       </div>
-    </div>
-<?php
-          $box->new_column_of_type ('right-column');
+      <?php
+          $box->new_column_of_type('content-column text-flow');
         }
-?>
+      ?>
     <p class="notes">The permissions for this folder are shown below. Permissions are,
       by default, inherited from the parent folder. Inherited permissions are displayed
       as read-only. Use the button below to define or revert permissions.</p>
-    <table cellspacing="0" cellpadding="3" style="margin: auto">
+    <table class="basic columns">
     <?php
 
       $cols = sizeof ($privilege_groups) + 2;
@@ -146,16 +137,8 @@ http://www.earthli.com/software/webcore
         $index = 1;
         foreach ($privilege_groups as $group)
         {
-          if ($index % 2)
-          {
-            $bg_style = '; background-image: url(' . $App->resolve_file ('{icons}shades/5_percent_black') . ')';
-          }
-          else
-          {
-            $bg_style = '';
-          }
     ?>
-    <td class="detail" style="padding-right: 1em<?php echo $bg_style; ?>"><?php echo $group->title; ?></td>
+    <th class="detail"><?php echo $group->title; ?></th>
     <?php
           $index += 1;
         }
@@ -175,16 +158,8 @@ http://www.earthli.com/software/webcore
           $index = 1;
           foreach ($privilege_groups as $group)
           {
-            if ($index % 2)
-            {
-              $bg_style = '; background-image: url(' . $App->resolve_file ('{icons}shades/5_percent_black') . ')';
-            }
-            else
-            {
-              $bg_style = '';
-            }
       ?>
-      <td class="detail" style="padding-right: 1em<?php echo $bg_style; ?>; white-space: nowrap">
+      <td class="detail" style="white-space: nowrap">
       <?php
           foreach ($group->maps as $map)
           {
@@ -265,10 +240,9 @@ http://www.earthli.com/software/webcore
         </td>
       </tr>
       <?php
-          draw_headers ();
-
           if (sizeof ($groups))
           {
+            draw_headers ();
             foreach ($groups as $perms)
             {
               $group = $perms->group ();
@@ -318,10 +292,9 @@ http://www.earthli.com/software/webcore
       </tr>
 
       <?php
-          draw_headers ();
-
           if (sizeof ($users))
           {
+            draw_headers ();
             foreach ($users as $perms)
             {
               $user = $perms->user ();

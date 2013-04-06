@@ -62,7 +62,7 @@ class EXPLORER_COMMANDS extends COMMANDS
 
     $cmd = $this->make_command ();
     $cmd->id = 'print';
-    $cmd->title = 'Print';
+    $cmd->caption = 'Print';
     $cmd->link = '#';
     $cmd->on_click = "submit_explorer_form ('$form_name', 'multiple_print.php')";
     $cmd->icon = '{icons}buttons/print';
@@ -71,7 +71,7 @@ class EXPLORER_COMMANDS extends COMMANDS
 
     $cmd = $this->make_command ();
     $cmd->id = 'move';
-    $cmd->title = 'Move';
+    $cmd->caption = 'Move';
     $cmd->link = '#';
     $cmd->on_click = "submit_explorer_form ('$form_name', 'multiple_move.php')";
     $cmd->icon = '{icons}buttons/move';
@@ -81,7 +81,7 @@ class EXPLORER_COMMANDS extends COMMANDS
 
     $cmd = $this->make_command ();
     $cmd->id = 'copy';
-    $cmd->title = 'Copy';
+    $cmd->caption = 'Copy';
     $cmd->link = '#';
     $cmd->on_click = "submit_explorer_form ('$form_name', 'multiple_copy.php')";
     $cmd->icon = '{icons}buttons/copy';
@@ -90,7 +90,7 @@ class EXPLORER_COMMANDS extends COMMANDS
 
     $cmd = $this->make_command ();
     $cmd->id = 'delete';
-    $cmd->title = 'Delete';
+    $cmd->caption = 'Delete';
     $cmd->link = '#';
     $cmd->on_click = "submit_explorer_form ('$form_name', 'multiple_delete.php')";
     $cmd->icon = '{icons}buttons/delete';
@@ -101,7 +101,7 @@ class EXPLORER_COMMANDS extends COMMANDS
 
     $cmd = $this->make_command ();
     $cmd->id = 'restore';
-    $cmd->title = 'Restore';
+    $cmd->caption = 'Restore';
     $cmd->link = '#';
     $cmd->on_click = "submit_explorer_form ('$form_name', 'multiple_restore.php')";
     $cmd->icon = '{icons}buttons/restore';
@@ -113,7 +113,7 @@ class EXPLORER_COMMANDS extends COMMANDS
 
     $cmd = $this->make_command ();
     $cmd->id = 'purge';
-    $cmd->title = 'Purge';
+    $cmd->caption = 'Purge';
     $cmd->link = '#';
     $cmd->on_click = "submit_explorer_form ('$form_name', 'multiple_purge.php')";
     $cmd->icon = '{icons}buttons/purge';
@@ -146,7 +146,7 @@ class DRAFTABLE_EXPLORER_COMMANDS extends EXPLORER_COMMANDS
 
     $cmd = $this->make_command ();
     $cmd->id = 'publish';
-    $cmd->title = 'Publish';
+    $cmd->caption = 'Publish';
     $cmd->link = '#';
     $cmd->on_click = "submit_explorer_form ('$form_name', 'multiple_publish.php')";
     $cmd->icon = '{icons}buttons/ship';
@@ -155,7 +155,7 @@ class DRAFTABLE_EXPLORER_COMMANDS extends EXPLORER_COMMANDS
 
     $cmd = $this->make_command ();
     $cmd->id = 'queue';
-    $cmd->title = 'Queue';
+    $cmd->caption = 'Queue';
     $cmd->link = '#';
     $cmd->on_click = "submit_explorer_form ('$form_name', 'multiple_queue.php')";
     $cmd->icon = '{icons}buttons/queue';
@@ -164,7 +164,7 @@ class DRAFTABLE_EXPLORER_COMMANDS extends EXPLORER_COMMANDS
 
     $cmd = $this->make_command ();
     $cmd->id = 'abandon';
-    $cmd->title = 'Abandon';
+    $cmd->caption = 'Abandon';
     $cmd->link = '#';
     $cmd->on_click = "submit_explorer_form ('$form_name', 'multiple_abandon.php')";
     $cmd->icon = '{icons}buttons/abandon';

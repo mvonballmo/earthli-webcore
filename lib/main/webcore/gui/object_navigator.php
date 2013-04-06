@@ -241,8 +241,8 @@ class OBJECT_NAVIGATOR extends WEBCORE_OBJECT
       }
       else
       {
-        $this->_controls .= '<span class="disabled">' . $this->_get_button_content('first') . '</span>';
-        $this->_controls .= '<span class="disabled">' . $this->_get_button_content('previous') . '</span>';
+        $this->_controls .= '<span class="button disabled">' . $this->_get_button_content('first') . '</span>';
+        $this->_controls .= '<span class="button disabled">' . $this->_get_button_content('previous') . '</span>';
       }
 
       if (! $this->_context->is_last ())
@@ -252,20 +252,18 @@ class OBJECT_NAVIGATOR extends WEBCORE_OBJECT
       }
       else
       {
-        $this->_controls .= '<span class="disabled">' . $this->_get_button_content('next') . '</span>';
-        $this->_controls .= '<span class="disabled">' . $this->_get_button_content('last') . '</span>';
+        $this->_controls .= '<span class="button disabled">' . $this->_get_button_content('next') . '</span>';
+        $this->_controls .= '<span class="button disabled">' . $this->_get_button_content('last') . '</span>';
       }
 
+      $id = '';
       if ($this->page_anchor)
       {
-        $this->_controls .= '<span class="field" id="' . $this->page_anchor . '">' . $this->_context->position_of_selected_id .
-          '</span> of <span class="field">' . $this->_context->num_objects_in_list . '</span>' . $this->separator . "\n";
+        $id = 'id="' . $this->page_anchor . '"';
       }
-      else
-      {
-        $this->_controls .= '<span class="field">' . $this->_context->position_of_selected_id .
-          '</span> of <span class="field">' . $this->_context->num_objects_in_list . '</span>' . $this->separator . "\n";
-      }
+
+      $this->_controls .= '<span class="counters"' . $id . '>' . '<span class="field">' . $this->_context->position_of_selected_id .
+        '</span> of <span class="field">' . $this->_context->num_objects_in_list . '</span>' . $this->separator . "</span>";
     }
   }
 
@@ -289,12 +287,13 @@ class OBJECT_NAVIGATOR extends WEBCORE_OBJECT
     $text = $this->_get_button_content($type);
     $title = $this->_get_button_title($type) . ' (' . $this->context->text_options->convert_to_html_attribute ($title) . ')';
 
+    $href = $this->_url->as_html ();
     if ($this->page_anchor)
     {
-      return '<a href="' . $this->_url->as_html () . '#' . $this->page_anchor . '" title="' . $title . '">' . $text . '</a>';
+      $href .= '#' . $this->page_anchor;
     }
 
-    return '<a href="' . $this->_url->as_html () . '" title="' . $title . '">' . $text . '</a>';
+    return '<a class="button" href="' . $href . '" title="' . $title . '">' . $text . '</a>';
   }
 
   /**

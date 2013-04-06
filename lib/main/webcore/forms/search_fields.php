@@ -961,7 +961,7 @@ class SEARCH_OBJECT_FIELDS extends WEBCORE_OBJECT
   {
     $field = new TEXT_FIELD ();
     $field->id = 'search_text';
-    $field->title = 'Find';
+    $field->title = '';
     $field->tag_validator_type = Tag_validator_none;
     $form->add_field ($field);
 

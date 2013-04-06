@@ -27,6 +27,7 @@ http://www.earthli.com/software/webcore
 ****************************************************************************/
 
   $folder_query = $App->login->folder_query ();
+  /** @var $folder FOLDER */
   $folder = $folder_query->object_at_id (read_var ('id'));
 
   if (isset ($folder))
@@ -41,9 +42,10 @@ http://www.earthli.com/software/webcore
     }
   }
 
-  if (isset ($perm) && $App->login->is_allowed (Privilege_set_folder, Privilege_secure, $folder))
+  if (isset($user) && isset ($perm) && $App->login->is_allowed (Privilege_set_folder, Privilege_secure, $folder))
   {
     $class_name = $App->final_class_name ('FOLDER_USER_PERMISSIONS_FORM', 'webcore/forms/folder_user_permissions_form.php');
+    /** @var $form FOLDER_USER_PERMISSIONS_FORM */
     $form = new $class_name ($user);
 
     $form->process_existing ($perm);
@@ -56,16 +58,13 @@ http://www.earthli.com/software/webcore
     $Page->title->subject = 'Edit ' . $perm->title_as_plain_text ();
 
     $Page->location->add_folder_link ($folder);
-    $Page->location->append ("Permissions", $folder->permissions_home_page ());
-    $Page->location->append ($Page->title->subject);
+    $Page->location->append ("Permissions", $folder->permissions_home_page (), '{icons}buttons/security');
+    $Page->location->append ($Page->title->subject, '', '{icons}buttons/edit');
 
     $Page->start_display ();
   ?>
   <div class="box">
-    <div class="box-title">
-      <?php echo $App->title_bar_icon ('{icons}buttons/security'); ?> <?php echo $Page->title->subject; ?>
-    </div>
-    <div class="box-body">
+    <div class="box-body form-content">
     <?php
       $form->display ();
     ?>

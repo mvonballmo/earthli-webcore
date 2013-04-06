@@ -70,11 +70,6 @@ class LOG_IN_FORM extends FORM
   public $submitted_flag = 'login_submitted';
 
   /**
-   * @var string
-   */
-  public $CSS_class = 'login';
-
-  /**
    * @param APPLICATION $app Main application.
    */
   public function __construct ($app)

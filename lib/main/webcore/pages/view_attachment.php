@@ -83,25 +83,24 @@ http://www.earthli.com/software/webcore
     $App->set_referer ();
 
     $Page->title->subject = $attachment->title_as_plain_text ();
-    $Page->location->add_object_text ($attachment);
+    $Page->location->add_object_text ($attachment, '{icons}/buttons/attach');
 
     $Page->start_display ();
 ?>
-    <div class="box">
-      <div class="box-title">
-        <?php echo $attachment->title_as_html (); ?>
-      </div>
-      <?php
-        $renderer = $attachment->handler_for (Handler_menu);
-        $renderer->display_as_toolbar ($attachment->handler_for (Handler_commands));
-      ?>
-      <div class="box-body">
-        <?php
-          $renderer = $attachment->handler_for (Handler_html_renderer);
-          $renderer->display ($attachment);
-        ?>
-      </div>
-    </div>
+<div class="top-box button-content">
+  <?php
+  $renderer = $attachment->handler_for (Handler_menu);
+  $renderer->display ($attachment->handler_for (Handler_commands));
+  ?>
+</div>
+<div class="box">
+  <div class="box-body">
+    <?php
+      $renderer = $attachment->handler_for (Handler_html_renderer);
+      $renderer->display ($attachment);
+    ?>
+  </div>
+</div>
 <?php
     $Page->finish_display ();
   }

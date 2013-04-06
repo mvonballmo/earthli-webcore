@@ -26,7 +26,7 @@ http://www.earthli.com/software/webcore
 
 ****************************************************************************/
 
-  $Page->title->subject = 'icons';
+  $Page->title->subject = 'Icons';
 
   $App->set_referer ();
 
@@ -34,22 +34,23 @@ http://www.earthli.com/software/webcore
   $Page->location->append ($Page->title->subject);
 
   $Page->start_display ();
+
+  if ($App->login->is_allowed (Privilege_set_global, Privilege_resources))
+  {
+    ?>
+    <div class="top-box button-content">
+      <?php
+      $menu = $App->make_menu ();
+      $menu->append ('Create icon', 'create_icon.php', '{icons}buttons/create');
+      $menu->renderer = $App->make_menu_renderer ();
+      $menu->display ();
+      ?>
+    </div>
+  <?php
+  }
 ?>
   <div class="box">
-    <div class="box-title">
-      Icons
-    </div>
-    <?php
-      if ($App->login->is_allowed (Privilege_set_global, Privilege_resources))
-      {
-        $menu = $App->make_menu ();
-        $menu->renderer->content_mode = Menu_show_all_as_buttons;
-        $menu->renderer->alignment = Menu_align_right;
-        $menu->append ('Create icon', 'create_icon.php', '{icons}buttons/create');
-        $menu->display_as_toolbar ();
-      }
-    ?>
-    <div class="box-body">
+    <div class="box-body grid-content">
     <?php
       $icon_query = $App->icon_query ();
 

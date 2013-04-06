@@ -97,10 +97,8 @@ abstract class PERMISSIONS_FORM extends FORM
     $buttons [] = $renderer->javascript_button_as_html ('Grant None', 'grant_no_permissions (this.form)', '{icons}buttons/close');
     $buttons [] = $renderer->submit_button_as_html ();
     $renderer->start_button_row ('');
-    echo '<div style="text-align: center">';
-    $renderer->draw_buttons ($buttons);
-    echo '</div>';
-    $renderer->finish_row ();    
+    $renderer->draw_buttons_in_row ($buttons);
+    $renderer->finish_row ();
     $renderer->draw_separator ();
   }
 

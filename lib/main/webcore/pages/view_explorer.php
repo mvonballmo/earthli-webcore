@@ -40,7 +40,7 @@ http://www.earthli.com/software/webcore
       $Page->location->add_folder_link ($parent, '', 'view_explorer.php');
     }
     $Page->location->add_object_link ($folder);
-    $Page->location->append ('Explorer');
+    $Page->location->append ('Explorer', '', '{icons}buttons/explorer');
 
     $Page->add_script_file ('{scripts}webcore_forms.js');
 
@@ -48,40 +48,36 @@ http://www.earthli.com/software/webcore
 
     $form_name = 'explorer_form';
   ?>
-  <div class="box">
-    <div class="box-title">
-      <?php echo $App->title_bar_icon ('{icons}buttons/explorer'); ?> Exploring <?php echo $folder->title_as_html (); ?>
-    </div>
-    <?php
-      include_once ('webcore/util/options.php');
-      $option = new STORED_OPTION ($App, 'show_explorer_tree');
-      $show_tree = $option->value ();
-      $opt_link = $option->setter_url_as_html (! $show_tree);
-      
-      $class_name = $App->final_class_name ('EXPLORER_COMMANDS', 'webcore/cmd/explorer_commands.php');
-      $commands = new $class_name ($folder, $form_name);
-      $renderer = $folder->handler_for (Handler_menu);
+  <div class="top-box button-content">
+  <?php
+    include_once ('webcore/util/options.php');
+    $option = new STORED_OPTION ($App, 'show_explorer_tree');
+    $show_tree = $option->value ();
+    $opt_link = $option->setter_url_as_html (! $show_tree);
 
-      if (! $show_tree)
-      {
+    if (! $show_tree)
+    {
+      $icon = '{icons}buttons/show_list';
+      $caption = 'Show folders';
+    }
+    else
+    {
+      $icon = '{icons}buttons/close';
+      $caption = 'Hide folders';
+    }
+
+    $icon = $App->sized_icon ($icon, '16px');
+    ?><a href="<?php echo $opt_link; ?>" class="button"><span class="icon sixteen" style="background-image: url(<?php echo $icon; ?>)"><?php echo $caption; ?></span></a><?php
+
+    $class_name = $App->final_class_name ('EXPLORER_COMMANDS', 'webcore/cmd/explorer_commands.php');
+    $commands = new $class_name ($folder, $form_name);
+    $renderer = $folder->handler_for (Handler_menu);
+    $renderer->set_size (Menu_size_compact);
+    $renderer->alignment = Menu_align_inline;
+    $renderer->display ($commands);
     ?>
-    <div class="menu-bar-top">
-      <div style="float: left">
-        <a href="<?php echo $opt_link; ?>"><?php echo $App->resolve_icon_as_html ('{icons}buttons/show_list', 'Show list', '16px'); ?></a>
-        <a href="<?php echo $opt_link; ?>">Show folder tree</a>
-      </div>
-      <?php
-        $renderer->display ($commands);
-      ?>
-      <div style="clear: both"></div>
-    </div>
-    <?php
-      }
-      else
-      {
-        $renderer->display_as_toolbar ($commands);
-      }
-    ?>
+  </div>
+  <div class="box">
     <div class="box-body">
     <?php
       if ($show_tree)
@@ -90,15 +86,8 @@ http://www.earthli.com/software/webcore
         $box->start_column_set ();
         $box->new_column_of_type ('left-column');
     ?>
-      <div class="chart">
-        <div class="chart-title">
-          <div style="float: right">
-            <a href="<?php echo $opt_link; ?>"><?php echo $App->resolve_icon_as_html ('{icons}buttons/close', 'Hide folder tree', '16px'); ?></a>
-          </div>
-          Folders
-        </div>
-        <div class="chart-body">
-        <?php 
+      <div class="left-sidebar" style="white-space: nowrap">
+        <?php
           /* Make a copy (not a reference). */
           $tree = $App->make_tree_renderer ();
   
@@ -112,7 +101,6 @@ http://www.earthli.com/software/webcore
           $folders = $folder_query->tree ();
           $tree->display ($folders);
         ?>
-        </div>
       </div>
     <?php
         $box->new_column_of_type ('right-column');
@@ -172,7 +160,6 @@ http://www.earthli.com/software/webcore
             $items_text = ' ' . $list->paginator->num_items () . ' ' . $type_info->plural_title;
           }
       ?>
-      <br>
       <h2 id="<?php echo $type_info->id . '_list'; ?>"><?php echo $App->title_bar_icon ($type_info->icon) . $items_text; ?></h2>
       <?php
           $list->display ();

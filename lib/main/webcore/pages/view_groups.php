@@ -30,26 +30,30 @@ http://www.earthli.com/software/webcore
   {
     $App->set_referer ();
 
-    $Page->location->add_root_link ();
-    $Page->location->append ('Groups');
     $Page->title->subject = 'Groups';
+
+    $Page->location->add_root_link ();
+    $Page->location->append ($Page->title->subject);
 
     $Page->start_display ();
   ?>
-  <div class="box">
-    <div class="box-title">
-      Groups
-    </div>
-    <?php 
-      if ($App->login->is_allowed (Privilege_set_group, Privilege_create)) 
-      {
-        $menu = $App->make_menu ();
-        $menu->renderer->content_mode = Menu_show_all_as_buttons;
-        $menu->renderer->alignment = Menu_align_right;
-        $menu->append ('Create Group', 'create_group.php', '{icons}buttons/create');
-        $menu->display_as_toolbar ();
-      } 
+    <?php
+    if ($App->login->is_allowed (Privilege_set_group, Privilege_create))
+    {
     ?>
+    <div class="top-box button-content">
+    <?php
+      $menu = $App->make_menu ();
+      $menu->renderer->content_mode = Menu_show_all_as_buttons;
+      $menu->renderer->alignment = Menu_align_inline;
+      $menu->append ('Create Group', 'create_group.php', '{icons}buttons/create');
+      $menu->display ();
+    ?>
+    </div>
+    <?php
+    }
+    ?>
+  <div class="box">
     <div class="box-body">
     <?php
       $group_query = $App->group_query ();

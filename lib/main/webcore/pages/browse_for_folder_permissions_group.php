@@ -38,21 +38,27 @@ http://www.earthli.com/software/webcore
       $Page->template_options->footer_visible = false;
       $Page->add_script_file ('{scripts}webcore_forms.js');
       $Page->start_display ();
+
+      if ($App->login->is_allowed (Privilege_set_group, Privilege_create))
+      {
+      ?>
+      <div class="top-box button-content">
+      <?php
+        $menu = $App->make_menu ();
+        $menu->append ('Create Group', 'create_group.php', '{icons}buttons/create');
+        $menu->renderer = $App->make_menu_renderer ();
+        $menu->display ();
+        ?>
+      </div>
+      <?php
+      }
     ?>
     <div class="box">
-      <div class="box-title">
-        Browse for group
-      </div>
-      <?php 
-        if ($App->login->is_allowed (Privilege_set_group, Privilege_create)) 
-        {
-          $menu = $App->make_menu ();
-          $menu->append ('Create Group', 'create_group.php', '{icons}buttons/create');
-          $menu->display_as_toolbar (); 
-        }
-      ?>
       <div class="box-body">
-        <p class="notes">Groups that already have permissions for <?php echo $folder->title_as_link (); ?> 
+        <h2>
+          Browse for group
+        </h2>
+        <p class="notes">Groups that already have permissions for <?php echo $folder->title_as_link (); ?>
           are <em>not</em> displayed.</p>
       <?php
         $group_query = $App->group_query ();

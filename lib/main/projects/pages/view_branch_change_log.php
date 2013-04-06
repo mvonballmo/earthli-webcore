@@ -26,13 +26,17 @@ http://www.earthli.com/software/webcore/projects
 
 ****************************************************************************/
 
+  $Page->title->subject = 'Change log';
+
   $id = read_var ('id');
+  /** @var $folder_query USER_PROJECT_QUERY */
   $folder_query = $App->login->folder_query ();
   $folder = $folder_query->folder_for_branch_at_id ($id);
 
   if (isset ($folder))
   {
     $branch_query = $folder->branch_query ();
+    /** @var $branch BRANCH */
     $branch = $branch_query->object_at_id ($id);
   }
 
@@ -40,11 +44,10 @@ http://www.earthli.com/software/webcore/projects
   {
     $Page->title->add_object ($folder);
     $Page->title->add_object ($branch);
-    $Page->title->subject = 'Change log';
 
     $Page->location->add_folder_link ($folder, 'panel=releases');
     $Page->location->add_object_link ($branch, 'panel=releases');
-    $Page->location->append ($Page->title->subject);
+    $Page->location->append ($Page->title->subject, '', $App->sized_icon ('{app_icons}buttons/change_log', ''));
 
     $printable = read_var ('printable');
 
@@ -63,7 +66,7 @@ http://www.earthli.com/software/webcore/projects
     if ($printable)
     {
 ?>
-<h1 style="text-align: center">
+<h1>
   <?php
     echo $folder->title_as_link ();
     echo $App->display_options->object_separator;
@@ -75,22 +78,17 @@ http://www.earthli.com/software/webcore/projects
     else
     {
 ?>
-<div class="box">
-  <div class="box-title">
+<div class="top-box button-content">
   <?php
-    echo ($App->title_bar_icon ('{app_icons}buttons/change_log') . ' ' .
-          $folder->title_as_html () .
-          $App->display_options->object_separator .
-          $branch->title_as_html ());
-  ?> change log
-  </div>
-  <?php
-    $class_name = $App->final_class_name ('BRANCH_CHANGE_LOG_COMMANDS', 'projects/cmd/change_log_commands.php');
-    $commands = new $class_name ($App);
-    $renderer = $App->make_menu_renderer ();
-    $renderer->num_important_commands = 1;
-    $renderer->display_as_toolbar ($commands);
+  $class_name = $App->final_class_name ('BRANCH_CHANGE_LOG_COMMANDS', 'projects/cmd/change_log_commands.php');
+  /** @var $commands COMMANDS */
+  $commands = new $class_name ($App);
+  $renderer = $App->make_menu_renderer ();
+  $renderer->set_size(Menu_size_full);
+  $renderer->display ($commands);
   ?>
+</div>
+<div class="box">
   <div class="box-body">
 <?php
     }
@@ -124,6 +122,7 @@ http://www.earthli.com/software/webcore/projects
     $not_used = array ();
 
     $class_name = $App->final_class_name ('CHANGE_LOG', 'projects/gui/change_log.php');
+    /** @var $change_log CHANGE_LOG */
     $change_log = new $class_name ($App);
     $change_log->show_description = $show_description;
     $change_log->show_date = $show_date;

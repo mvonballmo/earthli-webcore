@@ -108,7 +108,7 @@ class ENVIRONMENT extends RESOLVER
    * Settings for url operations.
    * Defaults to {@link global_url_options()}.
    * @see global_file_options() for a URL-style implementation.
-   * @var FILE_OPTIONS
+   * @var URL_OPTIONS
    */
   public $url_options;
 
@@ -402,10 +402,11 @@ class ENVIRONMENT extends RESOLVER
 
   /**
    * Returns the requested parts of the current URL.
-   * @param integer $parts Can be any combination of {@link Url_part_host},
+   * @param int $parts Can be any combination of {@link Url_part_host},
    * {@link Url_part_path}, {@link Url_part_name}, {@link Url_part_ext} and
    * {@link Url_part_args}.
    * @return string
+   * @throws Exception
    */
   public function url ($parts = Url_part_no_args)
   {
@@ -640,7 +641,8 @@ class ENVIRONMENT extends RESOLVER
   {
     $url = new URL ($location);
     $url->prepend ($this->host_name ());
-    return $this->redirect_remote ($url->as_text ());
+
+    $this->redirect_remote ($url->as_text ());
   }
 
   /**
@@ -739,5 +741,3 @@ class ENVIRONMENT extends RESOLVER
    */
   protected $_running_on_declared_host;
 }
-
-?>

@@ -59,7 +59,7 @@ class GROUP_COMMANDS extends COMMANDS
 
     $cmd = $this->make_command ();
     $cmd->id = 'edit';
-    $cmd->title = 'Edit';
+    $cmd->caption = 'Edit';
     $cmd->link = "edit_group.php?id=$group->id";
     $cmd->icon = '{icons}buttons/edit';
     $cmd->executable = $this->login->is_allowed (Privilege_set_group, Privilege_modify);
@@ -68,7 +68,7 @@ class GROUP_COMMANDS extends COMMANDS
 
     $cmd = $this->make_command ();    
     $cmd->id = 'delete';
-    $cmd->title = 'Delete';
+    $cmd->caption = 'Delete';
     $cmd->link = "delete_group.php?id=$group->id";
     $cmd->icon = '{icons}buttons/delete';
     $cmd->executable = $this->login->is_allowed (Privilege_set_group, Privilege_delete);
@@ -77,7 +77,7 @@ class GROUP_COMMANDS extends COMMANDS
 
     $cmd = $this->make_command ();    
     $cmd->id = 'history';
-    $cmd->title = 'History';
+    $cmd->caption = 'History';
     $cmd->link = "view_group_history.php?id=$group->id";
     $cmd->icon = '{icons}buttons/history';
     $cmd->executable = $this->login->is_allowed (Privilege_set_group, Privilege_view_history);

@@ -27,6 +27,7 @@ http://www.earthli.com/software/webcore
 ****************************************************************************/
 
   $folder_query = $App->login->folder_query ();
+  /** @var $folder FOLDER */
   $folder = $folder_query->object_at_id (read_var ('id'));
 
   if (isset ($folder) && $App->login->is_allowed (Privilege_set_folder, Privilege_secure, $folder))
@@ -34,6 +35,7 @@ http://www.earthli.com/software/webcore
     $user_query = $App->user_query ();
 
     $class_name = $App->final_class_name ('FOLDER_USER_PERMISSIONS_CREATE_FORM', 'webcore/forms/folder_user_permissions_create_form.php');
+    /** @var $form FOLDER_USER_PERMISSIONS_CREATE_FORM */
     $form = new $class_name ($folder, $user_query);
 
     $security = $folder->security_definition ();
@@ -49,22 +51,27 @@ http://www.earthli.com/software/webcore
     $Page->title->subject = 'Add permissions for user';
 
     $Page->location->add_folder_link ($folder);
-    $Page->location->append ('Permissions', $folder->permissions_home_page ());
-    $Page->location->append ($Page->title->subject);
+    $Page->location->append ('Permissions', $folder->permissions_home_page (), '{icons}buttons/security');
+    $Page->location->append ($Page->title->subject, '', '{icons}buttons/create');
 
     $Page->start_display ();
+
+    if ($App->login->is_allowed (Privilege_set_user, Privilege_create))
+    {
+      ?>
+      <div class="top-box button-content">
+        <?php
+        $menu = $App->make_menu ();
+        $menu->append ('Create User', 'create_user.php', '{icons}buttons/create');
+        $menu->renderer = $App->make_menu_renderer ();
+        $menu->display ();
+        ?>
+      </div>
+    <?php
+    }
   ?>
   <div class="box">
-    <div class="box-title">
-      <?php echo $App->title_bar_icon ('{icons}buttons/security'); ?>
-      Add permissions for user
-    </div>
-    <?php if ($App->login->is_allowed (Privilege_set_user, Privilege_create)) {?>
-    <div class="menu-bar-top">
-      <a href="create_user.php">Create user</a>
-    </div>
-    <?php } ?>
-    <div class="box-body">
+    <div class="box-body form-content">
     <?php
       $form->display ();
     ?>

@@ -44,15 +44,12 @@ http://www.earthli.com/software/webcore
     $Page->title->subject = 'Add subscribers';
 
     $Page->location->add_folder_link ($folder);
-    $Page->location->append ($Page->title->subject);
+    $Page->location->append ($Page->title->subject, '', '{icons}buttons/subscriptions');
 
     $Page->start_display ();
   ?>
   <div class="box">
-    <div class="box-title">
-      <?php echo $App->title_bar_icon ('{icons}buttons/subscriptions'); ?> Add subscribers to <?php echo $folder->title_as_html (); ?>
-    </div>
-    <div class="box-body">
+    <div class="box-body form-content">
     <?php
       $form->display ();
     ?>

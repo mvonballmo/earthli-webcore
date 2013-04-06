@@ -64,19 +64,9 @@ class GROUP_USER_GRID extends STANDARD_GRID
   public $even_columns = false;
 
   /**
-   * @var boolean
-   */
-  public $centered = true;
-
-  /**
    * @var string
    */
   public $width = '';
-
-  /**
-   * @var integer
-   */
-  public $padding = 1;
 
   /**
    * @param GROUP $group Show users from this group.
@@ -98,7 +88,7 @@ class GROUP_USER_GRID extends STANDARD_GRID
 
     if ($this->login->is_allowed (Privilege_set_group, Privilege_modify))
     {
-      echo "</td>\n<td style=\"padding-left: 1em\">";
+      echo "</td>\n<td>";
       echo $this->_controls_renderer->button_as_html ('Remove...', 'delete_user_from_group.php?id=' . $this->_group_id . '&name=' . $obj->title, '{icons}buttons/delete');
     }
   }
@@ -112,8 +102,7 @@ class GROUP_USER_GRID extends STANDARD_GRID
     {
 ?>
   <tr>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
+    <td></td>
     <td>
       <?php
         echo $this->_controls_renderer->button_as_html ('Add...', 'add_user_to_group.php?id=' . $this->_group_id, '{icons}buttons/add');

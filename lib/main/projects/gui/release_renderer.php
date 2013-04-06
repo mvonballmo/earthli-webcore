@@ -69,29 +69,25 @@ class RELEASE_RENDERER extends CONTENT_OBJECT_RENDERER
     $this->_echo_html_user_information($obj, 'info-box-bottom');
   }
 
-  protected function _echo_status_as_html($title, $status)
-  {
-?>
-  <h4>
-    <?php echo $title; ?>
-  </h4>
-  <p class="detail">
-    <?php echo $status->as_html (); ?>
-  </p>
-<?php
-  }
-
   /**
    * Shows testing/ship dates for a release in HTML.
    * @param RELEASE $obj
    */
   protected function _echo_details_as_html($obj) 
   {
-    echo '<div class="info-box-top">';
     $status = $obj->status ();
-    $this->_echo_status_as_html('Test Date', $status->test);
-    $this->_echo_status_as_html('Ship Date', $status->ship);
-    echo '</div>';
+?>
+    <table class="basic columns left-labels">
+      <tr>
+        <th>Test Date</th>
+        <td><?php echo $status->test->as_html(); ?></td>
+      </tr>
+      <tr>
+        <th>Ship Date</th>
+        <td><?php echo $status->ship->as_html(); ?></td>
+      </tr>
+    </table>
+<?php
   }
 
   /**

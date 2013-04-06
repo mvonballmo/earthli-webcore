@@ -79,7 +79,7 @@ class SEARCH_GRID extends STANDARD_GRID
   ?>
   Searches <span class="field"><?php echo $obj->type; ?>s</span>.
   </div>
-  <div class="description">
+  <div class="text-flow">
   <?php
     $renderer = $obj->handler_for (Handler_html_renderer);
     $renderer->display ($obj);

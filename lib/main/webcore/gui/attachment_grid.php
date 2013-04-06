@@ -51,7 +51,7 @@ class ATTACHMENT_GRID extends STANDARD_GRID
   /**
    * @var string
    */
-  public $box_style = 'chart';
+  public $box_style = '';
 
   /**
    * @var integer
@@ -89,23 +89,18 @@ class ATTACHMENT_GRID extends STANDARD_GRID
   public $last_page;
 
   /**
-   * @param USER $obj
+   * @param ATTACHMENT $obj
    * @access private
    */
   protected function _draw_box ($obj)
   {
 ?>
-<div style="text-align: center">
-  <div class="chart-title">
+<div style="position: relative">
+  <div style="position: absolute; left: 0; top: 0">
     <?php
-      echo $obj->title_as_html ();
+    $this->_draw_menu_for ($obj, Menu_size_minimal, Menu_align_inline);
     ?>
   </div>
-  <div class="chart-body">
-    <?php
-      $this->_draw_menu_for ($obj, Menu_size_minimal, Menu_align_left);
-    ?>
-    <div style="clear: both">
     <a href="<?php echo $obj->home_page_as_html (); ?>"><?php
       if ($obj->is_image)
       {
@@ -126,12 +121,17 @@ class ATTACHMENT_GRID extends STANDARD_GRID
     ?></a>
     </div>
   </div>
-  <div class="detail" style="text-align: center; margin-bottom: 1em">
+    <h3>
+      <?php
+      echo $obj->title_as_html ();
+      ?>
+    </h3>
+  <p class="detail">
     <?php
       echo $obj->mime_type . ' (' . file_size_as_text ($obj->size) . ')';
     ?>
-  </div>
-  <div style="text-align: left">
+  </p>
+  <div class="text-flow">
   <?php echo $obj->description_as_html (); ?>
   </div>
 </div>

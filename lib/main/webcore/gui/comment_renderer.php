@@ -68,7 +68,7 @@ class COMMENT_RENDERER extends CONTENT_OBJECT_RENDERER
       </div>
       <div style="clear: both"></div>
     </div>
-    <div class="description">
+    <div class="text-flow">
 <?php
       $this->_echo_subscribe_status ($obj);
       echo $obj->description_as_html ();
@@ -156,19 +156,17 @@ class COMMENT_LIST_RENDERER extends WEBCORE_OBJECT
 ?>
   <div>
     <span class="field"><?php echo $this->_comment_query->size (); ?></span> Replies
-    &mdash;
     <?php
       $menu = $this->context->make_menu ();
       $menu->renderer->alignment = Menu_align_inline;
+      $menu->renderer->content_mode = Menu_show_as_buttons;
   
       switch ($this->comment_mode)
       {
       case Comment_render_flat:
         $menu->append ('Show Threaded', $this->_obj->home_page () . "&comment_mode=threaded#comments");
-        $menu->append ('Show Flat', '', '', true);
         break;
       case Comment_render_threaded:
-        $menu->append ('Show Threaded', '', '', true);
         $menu->append ('Show Flat', $this->_obj->home_page () . "&comment_mode=flat#comments");
         break;
       }

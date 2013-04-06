@@ -58,10 +58,10 @@ class RECIPE_BOOK_COMMANDS extends FOLDER_COMMANDS
     parent::__construct ($folder);
 
     $cmd = $this->command_at ('new');
-    $cmd->title = 'New recipe book';
+    $cmd->caption = 'New recipe book';
 
     $cmd = $this->command_at ('new_entry');
-    $cmd->title = 'New recipe';
+    $cmd->caption = 'New recipe';
     $cmd->icon = '{app_icons}buttons/new_recipe';
     if ($folder->is_organizational()) 
     {

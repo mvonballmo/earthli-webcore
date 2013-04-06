@@ -49,16 +49,15 @@ http://www.earthli.com/software/webcore
 
     $Page->title->add_object ($user);
     $Page->title->subject = 'Delete user';
+    $Page->location->add_root_link();
+    $Page->location->append('Users', 'view_users.php');
     $Page->location->add_object_link ($user);
-    $Page->location->append ($Page->title->subject);
+    $Page->location->append ($Page->title->subject, '', '{icons}buttons/delete');
 
     $Page->start_display ();
   ?>
   <div class="box">
-    <div class="box-title">
-      <?php echo $App->title_bar_icon ('{icons}buttons/delete'); ?> Delete <?php echo $user->title_as_html (); ?>?
-    </div>
-    <div class="box-body">
+    <div class="box-body form-content">
     <?php
       $form->display ();
     ?>

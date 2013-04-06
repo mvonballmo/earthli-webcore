@@ -31,6 +31,7 @@ http://www.earthli.com/software/webcore
 
   $folder_query = $App->login->folder_query ();
   $folder = $folder_query->folder_for_attachment_at_id ($id, $type);
+  $attachment = null;
 
   if (isset ($folder))
   {
@@ -74,6 +75,7 @@ http://www.earthli.com/software/webcore
     if (isset ($host))
     {
       $attachment_query = $host->attachment_query ();
+      /** @var $attachment ATTACHMENT */
       $attachment = $attachment_query->object_at_id ($id);
 
       $Page->title->add_object ($attachment);
@@ -81,9 +83,10 @@ http://www.earthli.com/software/webcore
     }
   }
 
-  if (isset ($attachment) && $App->login->is_allowed (Privilege_set_attachment, Privilege_modify, $attachment))
+  if (isset($host) && isset ($attachment) && $App->login->is_allowed (Privilege_set_attachment, Privilege_modify, $attachment))
   {
     $class_name = $App->final_class_name ('ATTACHMENT_FORM', 'webcore/forms/attachment_form.php');
+    /** @var $form ATTACHMENT_FORM */
     $form = new $class_name ($host);
 
     $form->process_existing ($attachment);
@@ -93,15 +96,12 @@ http://www.earthli.com/software/webcore
     }
 
     $Page->title->subject = 'Edit Attachment';
-    $Page->location->append ($Page->title->subject);
+    $Page->location->append ($Page->title->subject, '', '{icons}buttons/edit');
 
     $Page->start_display ();
 ?>
     <div class="box">
-      <div class="box-title">
-        <?php echo $App->title_bar_icon ('{icons}buttons/edit'); ?> Edit Attachment
-      </div>
-      <div class="box-body">
+      <div class="box-body form-content">
       <?php
         $form->display ();
       ?>

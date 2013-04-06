@@ -51,7 +51,7 @@ class MAIL_RENDERER extends RENDERER
   /**
    * Sets up the application to generate an email.
    * Makes sure that absolute URLs are on and JavaScript is off.
-   * @param MAIL_RENDERER_OPTIONS $options
+   * @param MAIL_OBJECT_RENDERER_OPTIONS $options
    * @param MAIL_RENDERER_STATE $state
    * @access private
    */
@@ -90,14 +90,13 @@ class MAIL_RENDERER extends RENDERER
     $options->close_logger = false;
     $options->show_statistics = false;
     $options->show_last_time_modified = false;
-    $options->show_interactive = false;
-    
+
     $this->env->date_time_toolkit->formatter->show_local_time = false;
   }
   
   /**
    * Restores application from previous call to {@link _start_rendering()}.
-   * @param MAIL_RENDERER_OPTIONS $options
+   * @param MAIL_OBJECT_RENDERER_OPTIONS $options
    * @param MAIL_RENDERER_STATE $state
    * @access private
    */
@@ -136,7 +135,7 @@ class MAIL_RENDERER_STATE
    * 
    * Stored by {@link _start_rendering()} and restored by {@link _finish_rendering()}.
    *  
-   * @var PAGE_DISPLAY_OPTIONS
+   * @var CONTEXT_DISPLAY_OPTIONS
    */
   public $saved_display_options;
 
@@ -167,5 +166,3 @@ class MAIL_RENDERER_STATE
    */
   public $saved_show_interactive_option;
 }
-
-?>

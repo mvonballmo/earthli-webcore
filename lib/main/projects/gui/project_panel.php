@@ -62,7 +62,6 @@ class RELEASE_PANEL extends QUERY_PANEL
    * @var boolean
    */
   public $uses_time_selector = false;
-
   /**
    * @return RELEASE_GRID
    * @access private

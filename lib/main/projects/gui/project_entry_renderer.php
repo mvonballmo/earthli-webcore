@@ -94,6 +94,7 @@ abstract class PROJECT_ENTRY_RENDERER extends ENTRY_RENDERER
           echo $this->app->resolve_icon_as_html ('{icons}indicators/locked', 'Locked', '16px') . ' ';
         }
         $rel_status = $rel->status ();
+
         echo $rel->title_as_link ();
       }
       else
@@ -104,11 +105,12 @@ abstract class PROJECT_ENTRY_RENDERER extends ENTRY_RENDERER
     </dt>
     <dd class="text-flow">
       <?php
+        echo $this->_echo_html_branch_info ($entry, $branch_info);
         if (isset ($rel_status))
         {
-          echo $rel_status->as_html () . '<br>';
+          echo '<br>' . $rel_status->as_html ();
         }
-        echo $this->_echo_html_branch_info ($entry, $branch_info); ?>
+      ?>
     </dd>
   <?php
     }
@@ -124,7 +126,6 @@ abstract class PROJECT_ENTRY_RENDERER extends ENTRY_RENDERER
    */
   protected function _echo_html_extra_description ($entry)
   {
-    $browser = $this->env->browser ();
     if ($entry->extra_description && ! $this->_options->preferred_text_length)
     {
       $layer = $this->context->make_layer ("id_{$entry->id}_long_description");
@@ -175,8 +176,12 @@ abstract class PROJECT_ENTRY_RENDERER extends ENTRY_RENDERER
    */
   protected function _echo_branches_as_plain_text ($entry)
   {
-    $branch_info_query = $entry->branch_info_query ();
-    $branch_infos = $branch_info_query->objects ();
+    $branch_infos = $entry->current_branch_infos ();
+    if (sizeof ($branch_infos) == 0)
+    {
+      $branch_info_query = $entry->branch_info_query ();
+      $branch_infos = $branch_info_query->objects ();
+    }
     foreach ($branch_infos as $branch_info)
     {
       $is_main_branch = $branch_info->is_main () && (sizeof ($branch_infos) > 1);
@@ -295,7 +300,7 @@ class PROJECT_ENTRY_LOCATION_RENDERER extends OBJECT_IN_FOLDER_LOCATION_RENDERER
   /**
    * Render any parent objects to the title and location.
    * @param PAGE $page
-   * @param RENDERABLE $obj
+   * @param PROJECT_ENTRY $obj
    * @access private
    */
   protected function _add_context ($page, $obj)

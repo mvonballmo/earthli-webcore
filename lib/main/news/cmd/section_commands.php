@@ -58,10 +58,10 @@ class SECTION_COMMANDS extends FOLDER_COMMANDS
     parent::__construct ($folder);
 
     $cmd = $this->command_at ('new');
-    $cmd->title = 'New section';
+    $cmd->caption = 'New section';
 
     $cmd = $this->command_at ('new_entry');
-    $cmd->title = 'New article';
+    $cmd->caption = 'New article';
     $cmd->icon = '{app_icons}buttons/new_article';
     
     if ($folder->is_organizational()) 
