@@ -62,6 +62,15 @@ class USER_COMMANDS extends COMMANDS
     if (! $this->login->is_anonymous ())
     {
       $cmd = $this->make_command ();
+      $cmd->id = 'subscribe';
+      $cmd->caption = 'Subscribe';
+      $cmd->link = 'subscribe_to_user.php?name=' . $title . '&email=' . $this->login->email . '&subscribed=1';
+      $cmd->icon = '{icons}indicators/subscribed';
+      $cmd->executable = $this->login->email && $this->login->is_allowed (Privilege_set_user, Privilege_view, $user);
+      $cmd->importance = Command_importance_high - Command_importance_increment;
+      $this->append ($cmd);
+
+      $cmd = $this->make_command ();
       $cmd->id = 'edit';
       $cmd->caption = 'Edit';
       $cmd->link = 'edit_user.php?name=' . $title;
@@ -72,7 +81,7 @@ class USER_COMMANDS extends COMMANDS
 
       $cmd = $this->make_command ();
       $cmd->id = 'password';
-      $cmd->caption = 'Password';
+      $cmd->caption = 'Change password';
       $cmd->link = 'edit_password.php?name=' . $title;
       $cmd->icon = '{icons}buttons/password';
       $cmd->executable = $this->login->is_allowed (Privilege_set_global, Privilege_password, $user);
@@ -81,7 +90,7 @@ class USER_COMMANDS extends COMMANDS
 
       $cmd = $this->make_command ();
       $cmd->id = 'subscriptions';
-      $cmd->caption = 'Subscriptions';
+      $cmd->caption = 'Manage subscriptions';
       $cmd->link = 'view_user_subscriptions.php?email=' . urlencode ($user->email);
       $cmd->icon = '{icons}buttons/subscriptions';
       $cmd->executable = $user->email && $this->login->is_allowed (Privilege_set_global, Privilege_subscribe, $user);

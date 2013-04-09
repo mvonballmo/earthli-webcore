@@ -83,32 +83,40 @@ class USER_GRID extends CONTENT_OBJECT_GRID
       <div style="float: left; margin-right: .5em">
         <?php echo $obj->icon_as_html ('32px'); ?>
       </div>
-      <div class="grid-title">
+      <h3>
         <?php echo $this->obj_link ($obj); ?>
-      </div>
-      <div class="detail">
+      </h3>
+      <p class="detail">
         <?php echo $obj->real_name (); ?>
-      </div>
-      <div style="margin-top: .5em">
-        <div style="float: left">
+        <br>Registered on
         <?php
-          $menu = $this->context->make_menu ();
+        $c = $obj->time_created;
+        $f = $c->formatter ();
+        $f->type = Date_time_format_short_date;
 
-          $entry_types = $this->app->entry_type_infos ();
-          $url = new URL ($obj->home_page ());
+        echo $c->format ($f);
+        ?></p>
+      <div style="margin-top: 5px">
+      <?php
+        $menu = $this->context->make_menu ();
 
-          foreach ($entry_types as $type_info)
-          {
-            $url->replace_argument ('panel', $type_info->id);
-            $menu->append ($type_info->plural_title, $url->as_text ());
-          }
+        $entry_types = $this->app->entry_type_infos ();
+        $url = new URL ($obj->home_page ());
 
-          $url->replace_argument ('panel', 'comments');
-          $menu->append ('Comments', $url->as_text ());
+        foreach ($entry_types as $type_info)
+        {
+          $url->replace_argument ('panel', $type_info->id);
+          $menu->append ($type_info->plural_title, $url->as_text ());
+        }
 
-          $menu->display ();
-        ?>
-        </div>
+        $url->replace_argument ('panel', 'comments');
+        $menu->append ('Comments', $url->as_text ());
+
+        $menu->display ();
+      ?>
+      </div>
+      <div class="text-flow">
+        <?php $this->_echo_text_summary ($obj); ?>
       </div>
     </div>
   </div>
@@ -125,30 +133,6 @@ class USER_GRID extends CONTENT_OBJECT_GRID
  */
 class SELECT_USER_GRID extends USER_GRID
 {
-  /**
-   * @param USER $obj
-   * @access private
-   */
-  protected function _draw_box ($obj)
-  {
-    $c = $obj->time_created;
-    $f = $c->formatter ();
-    $f->type = Date_time_format_short_date;
-?>
-  <?php
-    $this->_draw_menu_for ($obj, Menu_size_compact);
-  ?>
-  <div class="grid-title">
-    <?php echo $obj->icon_as_html ('16px'); ?>
-    <?php echo $this->obj_link ($obj); ?>
-  </div>
-  <div class="detail">
-    <div><?php echo $obj->real_name (); ?></div>
-    <div class="notes">Registered on <?php echo $c->format ($f); ?></div>
-  </div>
-<?php
-    $this->_echo_text_summary ($obj);
-  }
 }
 
 ?>

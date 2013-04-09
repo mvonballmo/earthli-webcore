@@ -39,6 +39,11 @@ a:hover, a:active
 	color: #0066CC;
 }
 
+.footer
+{
+  border-top: 1px solid #4A8CCA;
+}
+
 table.columns > tbody > tr > td,
 table.columns > tbody > tr > th
 {

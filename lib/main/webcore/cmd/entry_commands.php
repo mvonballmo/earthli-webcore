@@ -73,6 +73,15 @@ class ENTRY_COMMANDS extends COMMANDS
   protected function _add_editors ($entry)
   {
     $cmd = $this->make_command ();
+    $cmd->id = 'subscribe';
+    $cmd->caption = 'Subscribe';
+    $cmd->link = 'subscribe_to_entry.php?id=' . $entry->id . '&email=' . $this->login->email . '&subscribed=1';
+    $cmd->icon = '{icons}indicators/subscribed';
+    $cmd->executable = $this->login->email && $this->login->is_allowed (Privilege_set_entry, Privilege_view, $entry);
+    $cmd->importance = Command_importance_high - Command_importance_increment;
+    $this->append ($cmd);
+
+    $cmd = $this->make_command ();
     $cmd->id = 'edit';
     $cmd->caption = 'Edit';
     $cmd->link = "edit_entry.php?id=$entry->id";

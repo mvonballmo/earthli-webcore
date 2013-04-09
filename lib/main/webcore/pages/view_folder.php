@@ -136,24 +136,10 @@ http://www.earthli.com/software/webcore/albums
     echo '<h4>Tools</h4>';
   }
 
-  ?>
-  <div class="grid-item grid-content">
-    <div class="minimal-commands">
-      <?php
-      $renderer = $folder->handler_for (Handler_menu);
-      $renderer->alignment = Menu_align_inline;
-      $renderer->set_size(Menu_size_minimal);
-      $renderer->display($folder->handler_for (Handler_commands));
-      ?>
-    </div>
-    <div class="minimal-commands-content">
-      <?php
-      $subscription_status = $folder->handler_for (Handler_subscriptions);
-      $subscription_status->display ($folder);
-      ?>
-    </div>
-  </div>
-  <?php
+  $renderer = $folder->handler_for (Handler_menu);
+  $renderer->alignment = Menu_align_inline;
+  $renderer->set_size(Menu_size_compact);
+  $renderer->display($folder->handler_for (Handler_commands));
 
   $box->finish_column_set ();
   ?>

@@ -26,6 +26,12 @@ http://www.earthli.com/software/webcore
 
 /* Defines form control styles. */
 
+input,
+select
+{
+  margin: 0;
+}
+
 .button-control
 {
 	padding: 5px;
@@ -53,7 +59,7 @@ http://www.earthli.com/software/webcore
 input[type="radio"], input[type="checkbox"]
 {
 	vertical-align: middle;
-	margin: 0px;
-	padding: 0px;
+	margin: 0;
+	padding: 0;
 }
 

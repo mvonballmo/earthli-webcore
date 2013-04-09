@@ -115,7 +115,7 @@ class TIME_FRAME_SELECTOR extends WEBCORE_OBJECT
   {
     $this->assert (! empty ($this->page_link), 'Page name cannot be empty.', 'display', 'TIME_FRAME_SELECTOR');
     $menu = $this->context->make_menu ();
-    $menu->renderer->separator = $this->context->display_options->menu_separator;
+    $menu->renderer->separator_class = $this->context->display_options->menu_class;
 
     $url = new URL ($this->page_link);
     $url->replace_argument ('time_frame', Time_frame_recent);

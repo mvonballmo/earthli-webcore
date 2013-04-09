@@ -57,19 +57,20 @@ th,
 
 h5,
 .detail,
-.footer,
 .notes,
 .tree-node,
 .info-box-bottom,
 .info-box-top,
-.login-status,
 .footnote-reference,
 .subdued
 {
   font-size: 8pt;
 }
 
-.footer
+.copyright,
+.versions,
+.statistics,
+.modification-time
 {
-	font-size: 7pt;
+  font-size: 7.5pt;
 }

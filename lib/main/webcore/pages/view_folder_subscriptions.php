@@ -27,6 +27,7 @@ http://www.earthli.com/software/webcore
 ****************************************************************************/
 
   $folder_query = $App->login->folder_query ();
+  /** @var $folder FOLDER */
   $folder = $folder_query->object_at_id (read_var ('id'));
 
   if (isset ($folder) && $App->login->is_allowed (Privilege_set_folder, Privilege_modify, $folder))
@@ -34,6 +35,7 @@ http://www.earthli.com/software/webcore
     $subscriber_query = $folder->subscriber_query ();
 
     $class_name = $App->final_class_name ('FOLDER_SUBSCRIBER_FORM', 'webcore/forms/folder_subscriber_form.php');
+    /** @var $form FOLDER_SUBSCRIBER_FORM */
     $form = new $class_name ($folder);
 
     $form->process_existing ($folder);
@@ -52,71 +54,73 @@ http://www.earthli.com/software/webcore
 
     $folders = $folder_query->tree ();
 ?>
-    <div class="top-box button-content">
-      <?php
-      include_once ('webcore/util/options.php');
-      $option = new STORED_OPTION ($App, 'show_security_tree');
-      $show_tree = $option->value ();
-      $opt_link = $option->setter_url_as_html (! $show_tree);
+<div class="top-box">
+  <div class="button-content">
+    <?php
+    include_once ('webcore/util/options.php');
+    $option = new STORED_OPTION ($App, 'show_security_tree');
+    $show_tree = $option->value ();
+    $opt_link = $option->setter_url_as_html (! $show_tree);
 
-      if (! $show_tree)
-      {
-        $icon = '{icons}buttons/show_list';
-        $caption = 'Show folders';
-      }
-      else
-      {
-        $icon = '{icons}buttons/close';
-        $caption = 'Hide folders';
-      }
+    if (! $show_tree)
+    {
+      $icon = '{icons}buttons/show_list';
+      $caption = 'Show folders';
+    }
+    else
+    {
+      $icon = '{icons}buttons/close';
+      $caption = 'Hide folders';
+    }
 
-      $icon = $App->sized_icon ($icon, '16px');
-      ?><a href="<?php echo $opt_link; ?>" class="button"><span class="icon sixteen" style="background-image: url(<?php echo $icon; ?>)"><?php echo $caption; ?></span></a><?php
+    $icon = $App->sized_icon ($icon, '16px');
+    ?><a href="<?php echo $opt_link; ?>" class="button"><span class="icon sixteen" style="background-image: url(<?php echo $icon; ?>)"><?php echo $caption; ?></span></a><?php
 
-      $menu = $App->make_menu ();
-      $menu->renderer->content_mode = Menu_show_all_as_buttons;
-      $menu->renderer->alignment = Menu_align_inline;
-      $menu->append ('Add subscribers', 'create_folder_subscriptions.php?id=' . $folder->id, '{icons}buttons/add_subscribers');
-      $menu->display ();
-      ?>
-    </div>
+    $menu = $App->make_menu ();
+    $menu->renderer->content_mode = Menu_show_all_as_buttons;
+    $menu->renderer->alignment = Menu_align_inline;
+    $menu->append ('Add subscribers', 'create_folder_subscriptions.php?id=' . $folder->id, '{icons}buttons/add_subscribers');
+    $menu->display ();
+    ?>
+  </div>
+</div>
 <div class="box">
   <div class="box-body">
-      <?php
-        if ($show_tree)
-        {
-          $folders = $folder_query->tree ();
-          $folder_type_info = $folder->type_info ();
+    <?php
+      if ($show_tree)
+      {
+        $folders = $folder_query->tree ();
+        $folder_type_info = $folder->type_info ();
 
-          $box = $Page->make_box_renderer ();
-          $box->start_column_set ();
-          $box->new_column_of_type ('left-sidebar-column');
-      ?>
+        $box = $Page->make_box_renderer ();
+        $box->start_column_set ();
+        $box->new_column_of_type ('left-sidebar-column');
+    ?>
     <div class="left-sidebar">
-      <?php
-          include_once ('webcore/gui/folder_tree_node_info.php');
-          $tree_node_info = new SUBSCRIPTION_FOLDER_TREE_NODE_INFO ($App);
-          $tree_node_info->page_link = $Env->url ();
-          $tree_node_info->set_selected_node ($folder);
-          $tree_node_info->set_visible_node ($folder);
-  
-          $tree = $App->make_tree_renderer ();
-          $tree->node_info = $tree_node_info;
-          $tree->display ($folders);
-      ?>
+    <?php
+        include_once ('webcore/gui/folder_tree_node_info.php');
+        $tree_node_info = new SUBSCRIPTION_FOLDER_TREE_NODE_INFO ($App);
+        $tree_node_info->page_link = $Env->url ();
+        $tree_node_info->set_selected_node ($folder);
+        $tree_node_info->set_visible_node ($folder);
+
+        $tree = $App->make_tree_renderer ();
+        $tree->node_info = $tree_node_info;
+        $tree->display ($folders);
+    ?>
     </div>
-<?php
-          $box->new_column_of_type('content-column text-flow');
-        }
+    <?php
+        $box->new_column_of_type('content-column text-flow');
+      }
 
-        $form->button = "Update";
-        $form->display ();
+      $form->button = "Update";
+      $form->display ();
 
-        if ($show_tree)
-        {
-          $box->finish_column_set ();
-        }
-?>
+      if (isset ($box))
+      {
+        $box->finish_column_set ();
+      }
+    ?>
     </div>
   </div>
 <?php

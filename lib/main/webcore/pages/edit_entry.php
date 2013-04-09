@@ -68,16 +68,25 @@ http://www.earthli.com/software/webcore
     $Page->location->append ($Page->title->subject, '', '{icons}buttons/edit');
 
     $Page->start_display ();
+
+    /** @var $commands COMMANDS */
+    $commands = $entry->handler_for (Handler_commands);
+    $commands->disable_all_except (array('attach'));
+
+    if ($commands->num_executable_commands ())
+    {
+      ?>
+      <div class="top-box button-content">
+    <?php
+        /** @var $renderer MENU_RENDERER */
+        $renderer = $entry->handler_for (Handler_menu);
+        $renderer->target = '_blank';
+        $renderer->display ($commands);
+        ?>
+      </div>
+    <?php
+    }
   ?>
-  <div class="top-box button-content">
-  <?php
-  $commands = $entry->handler_for (Handler_commands);
-  $commands->disable_all_except (array('attach'));
-  $renderer = $entry->handler_for (Handler_menu);
-  $renderer->target = '_blank';
-  $renderer->display_as_toolbar ($commands);
-  ?>
-  </div>
   <div class="box">
     <div class="box-body form-content">
     <?php

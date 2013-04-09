@@ -330,10 +330,13 @@ class SUBSCRIBER extends UNIQUE_OBJECT
 
     if ($this->exists ())
     {
-      $this->db->logged_query ("DELETE FROM {$this->app->table_names->subscriptions}" .
-                               " WHERE subscriber_id = $this->id" .
-                               " AND kind = '$kind'" .
-                               " AND ref_id = $id");
+      $this->db->logged_query (
+        "DELETE {$this->app->table_names->subscriptions} FROM {$this->app->table_names->subscriptions}" .
+        " INNER JOIN {$this->app->table_names->subscribers}" .
+        " ON {$this->app->table_names->subscribers}.id = {$this->app->table_names->subscriptions}.subscriber_id" .
+        " WHERE {$this->app->table_names->subscribers}.email = '$this->email'" .
+        " AND kind = '$kind'" .
+        " AND ref_id = $id");
     }
   }
 

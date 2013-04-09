@@ -35,5 +35,7 @@ http://www.earthli.com/software/webcore
     $sub_type = Subscribe_user;
   }
 
-  include_once ('webcore/pages/subscribe_to_object.php');  
-?>
+  $Page->location->add_root_link();
+  $Page->location->append('Users', 'view_users.php');
+
+  include_once ('webcore/pages/subscribe_to_object.php');

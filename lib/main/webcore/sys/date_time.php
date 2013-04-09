@@ -760,7 +760,7 @@ class DATE_TIME extends RAISABLE
    * @param DATE_TIME_FORMATTER $formatter Pass in the formatter to use.
    * @return string
    */
-  public function format ($formatter = 0)
+  public function format ($formatter = null)
   {
     if (! $formatter)
     {

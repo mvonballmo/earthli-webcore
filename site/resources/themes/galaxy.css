@@ -30,12 +30,6 @@ body
 	color: #FFFFFF;
 }
 
-.page
-{
-	max-width: 800px;
-	margin: auto;
-}
-
 .banner-title
 {
 	color: #CCFF00;
@@ -64,13 +58,14 @@ a:hover, a:active
 
 .box
 {
-	border: 2px solid #666666;
+	border-top: 2px solid #666666;
+	border-bottom: 2px solid #666666;
+  background-image:  url(galaxy/stars_light.jpg);
+  background-repeat: repeat;
 }
 
 .box-body
 {
-	background-image:  url(galaxy/stars_light.jpg);
-	background-repeat: repeat;
 }
 
 .box-title

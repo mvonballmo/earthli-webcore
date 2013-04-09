@@ -196,7 +196,7 @@ class PROJECT_ENTRY_GRID extends CONTENT_OBJECT_GRID
   <div class="detail">
   <?php
       $menu = $this->context->make_menu ();
-      $menu->renderer->separator = $this->app->display_options->object_separator;
+      $menu->renderer->separator_class = $this->app->display_options->object_class;
 
       if ($this->show_folder)
       {

@@ -270,9 +270,9 @@ class BROWSER
       return $forwarded;
     }
     else if ($remote_addr)
- {
-   return $remote_addr;
- }
+    {
+      return $remote_addr;
+    }
 
     return read_array_index ($_SERVER, 'REMOTE_HOST');
   }
@@ -600,6 +600,7 @@ class BROWSER
   }
 
   /**
+   * @param USER_AGENT_PARSE_TABLES $tables
    * @return USER_AGENT_PARSER
    * @access private
    */
@@ -607,6 +608,9 @@ class BROWSER
   {
     return new USER_AGENT_PARSER ($tables);
   }
+
+  /** @var USER_AGENT_PROPERTIES */
+  protected $_ua;
 }
 
 /**
@@ -727,7 +731,7 @@ class USER_AGENT_PARSER
   {
     $Result = new USER_AGENT_PROPERTIES ();
 
-    $parts = new stdClass();
+    $parts = 0;
     
     preg_match_all ('/([a-zA-Z]|[a-zA-Z]+[0-9]+|[a-zA-Z]+[ 0-9]+[a-zA-Z]|[a-zA-Z][ \-&a-zA-Z]*[a-zA-Z])[-\/: ]?[vV]?([0-9][0-9a-z]*([\.-][0-9][0-9a-z]*)*)/', $s, $parts);
 
@@ -740,6 +744,7 @@ class USER_AGENT_PARSER
 
     $continue_processing = true;
     $index = 0;
+    /** @var $current_renderer USER_AGENT_RENDERER_INFO */
     $current_renderer = null;
     $browser_is_final = false;
 
@@ -762,6 +767,7 @@ class USER_AGENT_PARSER
       {
         if (isset ($renderers [$id]))
         {
+          /** @var $renderer USER_AGENT_RENDERER_INFO */
           $renderer = $renderers [$id];
   
           if (empty ($current_renderer) || ($current_renderer->renderer_can_be_overridden ()))
@@ -850,7 +856,7 @@ class USER_AGENT_PARSER
   /**
    * Pull out the version from the given string.
    * @param string $version
-   * @return true
+   * @return bool
    * @access private
    */
   protected function _extract_version ($version)
@@ -871,7 +877,7 @@ class USER_AGENT_PARSER
    */
   protected function _determine_gecko_date ($version)
   {
-    $parts = new stdClass();
+    $parts = 0;
     preg_match ('/([0-9]{4})([0-9]{2})([0-9]{2})/', $version, $parts);
     if (sizeof ($parts))
     {
@@ -1062,7 +1068,6 @@ class USER_AGENT_PARSE_TABLES
                   'views' => 1,                 // Newsfeed readers
                   'users' => 1,                  // Newsfeed readers
                   'ipv' => 1,
-                  'ssl' => 1,
                   'linux i' => 1,
                   );
   }
@@ -1307,5 +1312,3 @@ class USER_AGENT_RENDERER_INFO
     return ($this->id == Browser_netscape_4) && ($ver [0] > 4);
   }
 }
-
-?>

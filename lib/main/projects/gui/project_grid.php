@@ -61,7 +61,7 @@ class PROJECT_GRID extends FOLDER_GRID
   /**
    * @var string
    */
-  public $box_style = 'chart';
+  public $box_style = '';
 
   /**
    * @var integer
@@ -75,8 +75,23 @@ class PROJECT_GRID extends FOLDER_GRID
   protected function _draw_box ($obj)
   {
 ?>
-  <div class="chart-title" style="text-align: center">
+  <div class="grid-item">
+  <div class="minimal-commands">
+    <?php $this->_draw_menu_for ($obj, Menu_size_minimal, Menu_align_inline); ?>
+  </div>
+  <div class="minimal-commands-content">
     <?php
+    if ($obj->icon_url)
+    {
+      ?>
+      <div style="float: left; padding-right: 5px">
+        <?php echo $obj->icon_as_html (); ?>
+      </div>
+    <?php
+    }
+    ?>
+    <h3 class="grid-title">
+      <?php
       // drill down to the folder view only if there are subfolders for that project
 
       $t = $obj->title_formatter ();
@@ -84,23 +99,22 @@ class PROJECT_GRID extends FOLDER_GRID
       {
         $t->add_argument ('panel', 'projects');
       }
-      echo $obj->icon_as_html () . ' ' . $obj->title_as_link ($t);
-    ?>
-  </div>
-  <div class="chart-body">
-    <div>
+      echo $obj->title_as_link ($t);
+      ?>
+    </h3>
+    <p>
     <?php
-      $this->_draw_menu_for ($obj, Menu_size_compact);
-  
       $menu = $this->context->make_menu ();
       $menu->append ("Changes", "view_folder.php?id=$obj->id&panel=changes");
       $menu->append ("Jobs", "view_folder.php?id=$obj->id&panel=jobs");
       $menu->display ();
     ?>
+    </p>
+    <div class="text-flow">
+      <?php echo $obj->summary_as_html (); ?>
     </div>
-    <?php echo $obj->summary_as_html (); ?>
   </div>
-<?php
+  <?php
   }
 }
 ?>

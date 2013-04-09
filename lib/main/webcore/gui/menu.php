@@ -127,10 +127,14 @@ class MENU extends WEBCORE_OBJECT
    * @param string $icon Path to the optional icon.
    * @param bool $selected Renders as selected without the link if <c>True</c>.
    * @param $link_title string The title to use for the url if the command is not selected.
+   * @return \COMMAND
    */
   public function append ($title, $url = '', $icon = '', $selected = false, $link_title = '')
   {
-    $this->_commands->append ($this->_make_command ($title, $url, $icon, $selected, $link_title));
+    $result = $this->_make_command($title, $url, $icon, $selected, $link_title);
+    $this->_commands->append ($result);
+
+    return $result;
   }
   
   /**

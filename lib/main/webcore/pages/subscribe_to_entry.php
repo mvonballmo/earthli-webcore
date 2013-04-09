@@ -31,9 +31,15 @@ http://www.earthli.com/software/webcore
   if ($id)
   {
     $query = $App->login->all_entry_query ();
+    /** @var $obj ENTRY */
     $obj = $query->object_at_id ($id);
     $sub_type = Subscribe_entry;
+
+    if ($obj)
+    {
+      $Page->location->add_folder_link($obj->parent_folder());
+      $Page->location->add_object_link($obj);
+    }
   }
 
-  include_once ('webcore/pages/subscribe_to_object.php');  
-?>
+  include_once ('webcore/pages/subscribe_to_object.php');

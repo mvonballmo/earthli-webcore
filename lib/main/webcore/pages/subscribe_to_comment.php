@@ -31,9 +31,16 @@ http://www.earthli.com/software/webcore
   if ($id)
   {
     $query = $App->login->all_comment_query ();
+    /** @var $obj COMMENT */
     $obj = $query->object_at_id ($id);
     $sub_type = Subscribe_comment;
+
+    if ($obj)
+    {
+      $Page->location->add_folder_link($obj->parent_folder());
+      $Page->location->add_object_link($obj->entry());
+      $Page->location->add_object_link($obj, '', '{icons}/buttons/reply');
+    }
   }
 
-  include_once ('webcore/pages/subscribe_to_object.php');  
-?>
+  include_once ('webcore/pages/subscribe_to_object.php');

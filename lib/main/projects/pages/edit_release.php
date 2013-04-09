@@ -27,6 +27,7 @@ http://www.earthli.com/software/webcore/projects
 ****************************************************************************/
 
   $id = read_var ('id');
+  /** @var $folder_query USER_PROJECT_QUERY */
   $folder_query = $App->login->folder_query ();
   $folder = $folder_query->folder_for_release_at_id ($id);
 
@@ -39,6 +40,7 @@ http://www.earthli.com/software/webcore/projects
   if (isset ($rel) && $App->login->is_allowed (Privilege_set_release, Privilege_modify, $rel))
   {
     $class_name = $App->final_class_name ('RELEASE_FORM', 'projects/forms/release_form.php');
+    /** @var $form RELEASE_FORM */
     $form = new $class_name ($folder);
 
     $form->process_existing ($rel);

@@ -33,7 +33,7 @@ http://www.earthli.com/software/webcore
   */
   $Page->title->subject = $history_item_query->size () . ' History items';
 
-  $Page->location->append ($App->resolve_icon_as_html('{icons}buttons/history', '', '16px') . ' ' . $Page->title->subject);
+  $Page->location->append ($Page->title->subject, '', '{icons}buttons/history');
 
   $Page->start_display ();
 ?>
@@ -41,6 +41,7 @@ http://www.earthli.com/software/webcore
   <div class="box-body grid-content">
   <?php
     $class_name = $App->final_class_name ('HISTORY_ITEM_GRID', 'webcore/gui/history_item_grid.php');
+    /** @var $grid HISTORY_ITEM_GRID */
     $grid = new $class_name ($App);
     $grid->set_ranges (10, 1);
     $grid->set_query ($history_item_query);

@@ -696,7 +696,7 @@ class FOLDER extends ATTACHMENT_HOST
   /**
    * Return default handler objects for supported tasks.
    * @param string $handler_type Specific functionality required.
-   * @param object $options
+   * @param OBJECT_RENDERER_OPTIONS $options
    * @return object
    * @access private
    */

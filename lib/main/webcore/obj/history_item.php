@@ -157,6 +157,7 @@ class HISTORY_ITEM extends UNIQUE_OBJECT
   }
 
   /**
+   * @throws UNKNOWN_VALUE_EXCEPTION
    * @return string
    */
   public function publication_state_as_text ()
@@ -176,36 +177,49 @@ class HISTORY_ITEM extends UNIQUE_OBJECT
 
   /**
    * An HTML icon for published/not published/queued.
+   * @param string $size
+   * @throws UNKNOWN_VALUE_EXCEPTION
    * @return string
    */
   public function publication_state_as_icon ($size = '16px')
   {
-    switch ($this->publication_state)
-    {
-    case History_item_silent:
-      $icon_name = '{icons}indicators/not_published';
-      break;
-    case History_item_sent:
-      $icon_name = '{icons}indicators/published';
-      break;
-    case History_item_needs_send:
-      $icon_name = '{icons}indicators/queued_for_publication';
-      break;
-    default:
-      throw new UNKNOWN_VALUE_EXCEPTION($this->publication_state);
-    }
+    $icon_name = $this->publication_state_icon_url();
 
     return $this->app->resolve_icon_as_html ($icon_name, $this->publication_state_as_text (), $size);
   }
 
   /**
+   * @return string
+   * @throws UNKNOWN_VALUE_EXCEPTION
+   */
+  public function publication_state_icon_url()
+  {
+    switch ($this->publication_state)
+    {
+      case History_item_silent:
+        $icon_name = '{icons}indicators/not_published';
+        break;
+      case History_item_sent:
+        $icon_name = '{icons}indicators/published';
+        break;
+      case History_item_needs_send:
+        $icon_name = '{icons}indicators/queued_for_publication';
+        break;
+      default:
+        throw new UNKNOWN_VALUE_EXCEPTION($this->publication_state);
+    }
+    return $icon_name;
+  }
+
+  /**
    * An HTML icon for the kind of transition.
    * This can be various things, like 'Deleted', 'Restored', 'Edited', etc.
+   * @param string $size The size of image to return.
    * @return string
    */
   public function kind_as_icon ($size = '16px')
   {
-    return $this->app->resolve_icon_as_html ($this->_kind_icon_name (), $this->kind, $size);
+    return $this->app->resolve_icon_as_html ($this->kind_icon_url (), $this->kind, $size);
   }
 
   /**
@@ -439,7 +453,9 @@ class HISTORY_ITEM extends UNIQUE_OBJECT
   /**
    * Record class-specific differences.
    * 'orig' is the same as {@link $_object}, but is passed here for convenience.
-   * @param AUDITABLE $obj
+   * @param NAMED_OBJECT $orig The original object.
+   * @param NAMED_OBJECT $new The new object.
+   * @internal param \AUDITABLE $obj
    * @access private
    */
   protected function _record_differences ($orig, $new) {}
@@ -466,11 +482,11 @@ class HISTORY_ITEM extends UNIQUE_OBJECT
    * Pass in the name to use in the message and the two options. You can also specify your own text to use when
    * one of the objects is not set.
    * @param string $name
-   * @param NAMED_OBJECT $orig
-   * @param NAMED_OBJECT $new
+   * @param NAMED_OBJECT $orig The original object.
+   * @param NAMED_OBJECT $new The new object.
    * @param string $empty_text Text to use when object is not set.
-   * @param string $prefix Show this before each object's title
    * @param string $prefix Show this after each object's title.
+   * @param string $suffix
    * @access private
    */
   protected function _record_object_difference ($name, $orig, $new, $empty_text = '[not set]', $prefix = '', $suffix = '')
@@ -503,7 +519,7 @@ class HISTORY_ITEM extends UNIQUE_OBJECT
    * @param string $name
    * @param DATE_TIME $orig_date
    * @param DATE_TIME $new_date
-   * @param integer $type Type of date-time formatting to use.
+   * @param string $type Type of date-time formatting to use.
    * @access private
    */
   protected function _record_time_difference ($name, $orig_date, $new_date, $type = Date_time_format_short_date_and_time)
@@ -645,7 +661,7 @@ class HISTORY_ITEM extends UNIQUE_OBJECT
    * @return string
    * @access private
    */
-  protected function _kind_icon_name ()
+  public function kind_icon_url ()
   {
     switch ($this->kind)
     {
@@ -659,7 +675,7 @@ class HISTORY_ITEM extends UNIQUE_OBJECT
   /**
    * Return default handler objects for supported tasks.
    * @param string $handler_type Specific functionality required.
-   * @param object $options
+   * @param OBJECT_RENDERER_OPTIONS $options
    * @return object
    * @access private
    */
@@ -713,5 +729,3 @@ class HISTORY_ITEM extends UNIQUE_OBJECT
    */
   protected $_is_new;
 }
-
-?>

@@ -69,7 +69,7 @@ class PROJECT_RENDERER extends FOLDER_RENDERER
   protected function _echo_details_as_html ($obj)
   {
   ?>
-  <table cellpadding="2" cellspacing="0">
+  <table class="basic columns left-labels">
   <?php
     if (! $obj->is_organizational ())
     {
@@ -99,85 +99,76 @@ class PROJECT_RENDERER extends FOLDER_RENDERER
         }
   ?>
       <tr>
-        <td class="label">Trunk</td>
+        <th>Trunk</th>
         <td><?php echo $trunk->title_as_link (); ?></td>
       </tr>
       <tr>
-        <td class="label">Latest</td>
+        <th>Latest</th>
         <td><?php echo $latest_text; ?></td>
       </tr>
       <tr>
-        <td class="label">Next</td>
+        <th>Next</th>
         <td><?php echo $next_text; ?></td>
-      </tr>
-  <?php
-      }
-      else
-      {
-  ?>
-      <tr>
-        <td class="label">Default branch</td>
-        <td><?php echo $trunk->title_as_html (); ?></td>
       </tr>
   <?php
       }
     }
 
-    if (! $this->_options->show_as_summary)
+    if (!! $this->_options->show_as_summary)
     {
       $options = $obj->options ();
   ?>
     <tr>
-      <td class="label">Assignees</td>
+      <th>Assignees</th>
       <td>
       <?php
         switch ($options->assignee_group_type)
         {
         case Project_user_registered_only:
-          echo 'Allow only registered users';
+          echo 'Registered users';
           break;
         case Project_user_all:
-          echo 'Allow all users';
+          echo 'All users';
           break;
         case Project_user_group:
           $group = $options->assignee_group ();
-          echo 'Allow only users from ' . $group->title_as_link ();
+          echo $group->title_as_link ();
           break;
         }
       ?>
       </td>
     </tr>
     <tr>
-      <td class="label">Reporters</td>
+      <th>Reporters</th>
       <td>
       <?php
         switch ($options->reporter_group_type)
         {
         case Project_user_registered_only:
-          echo 'Allow only registered users';
+          echo 'Registered users';
           break;
         case Project_user_all:
-          echo 'Allow all users';
+          echo 'All users';
           break;
         case Project_user_group:
           $group = $options->reporter_group ();
-          echo 'Allow only users from ' . $group->title_as_link ();
+          echo $group->title_as_link ();
           break;
         }
       ?>
       </td>
     </tr>
     <tr>
-      <td class="label">Releases</td>
+      <th>Deadlines</th>
       <td>
       <?php
         if (! $options->seconds_until_deadline)
         {
-          echo 'Show no warnings for deadlines';
+          echo 'Do not warn';
         }
         else
         {
-          echo 'Show warning <span class="field">' . $options->release_warning_description () . '</span> before deadline.';
+          echo 'Warn <span class="field">' . $options->release_warning_description () . '</span> before.';
         }
       ?>
     </td>
@@ -187,11 +178,11 @@ class PROJECT_RENDERER extends FOLDER_RENDERER
         {
   ?>
     <tr>
-      <td></td>
+      <th>Options</th>
       <td class="notes">
   <?php 
           $definer = $options->definer ();
-          echo 'Options are inherited from ' . $definer->title_as_link ();
+          echo 'Defined in ' . $definer->title_as_link ();
         }
   ?>
       </td>

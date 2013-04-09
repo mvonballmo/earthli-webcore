@@ -97,33 +97,24 @@ class USER_RENDERER extends CONTENT_OBJECT_RENDERER
    */
   protected function _echo_properties_as_html ($obj)
   {
-?>    
-  <dl class="compact">
-    <dt class="field">
-      Name
-    </dt>
-    <dd>
-      <?php echo $obj->real_name (); ?>
-    </dd>
-    <dt class="field">
-      Registered On
-    </dt>
-    <dd>
-      <?php echo $obj->time_created->format (); ?>
-    </dd>
-    <dt class="field">
-      Email
-    </dt>
-    <dd>
-      <?php
-        echo $obj->email_as_text ();
-      ?>
-    </dd>
-    <dt class="field">
-      Home Page
-    </dt>
-    <dd>
-      <?php
+?>
+  <table class="basic columns left-labels">
+    <tr>
+      <th>Name</th>
+      <td><?php echo $obj->real_name (); ?></td>
+    </tr>
+    <tr>
+      <th>Member since</th>
+      <td><?php echo $obj->time_created->format (); ?></td>
+    </tr>
+    <tr>
+      <th>Email</th>
+      <td><?php echo $obj->email_as_text (); ?></td>
+    </tr>
+    <tr>
+      <th>Home page</th>
+      <td>
+        <?php
         if ($obj->home_page_url)
         {
           $t = $obj->title_formatter ();
@@ -136,17 +127,13 @@ class USER_RENDERER extends CONTENT_OBJECT_RENDERER
         {
           echo "(none)";
         }
-      ?>
-    </dd>
-    <?php
-      if (!$this->_options->show_as_summary)
-      {
-    ?>
-    <dt class="field">
-      Description
-    </dt>
-    <dd>
-      <?php
+        ?>
+      </td>
+    </tr>
+    <tr>
+      <th>Description</th>
+      <td>
+        <?php
         if ($obj->description)
         {
           echo $obj->description_as_html ();
@@ -155,27 +142,10 @@ class USER_RENDERER extends CONTENT_OBJECT_RENDERER
         {
           echo "(none)";
         }
-      ?>
-    </dd>
-    <dt class="field">
-      Signature
-    </dt>
-    <dd>
-      <?php
-        if ($obj->signature)
-        {
-          echo $obj->signature_as_html ();
-        }
-        else
-        {
-          echo "(none)";
-        }
-      ?>
-    </dd>
-    <?php
-      }
-    ?>
-  </dl>
+        ?>
+      </td>
+    </tr>
+  </table>
 <?php
   }
 

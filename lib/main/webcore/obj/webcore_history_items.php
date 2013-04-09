@@ -187,7 +187,7 @@ class OBJECT_IN_FOLDER_HISTORY_ITEM extends CONTENT_OBJECT_HISTORY_ITEM
    * Return the basic name of this kind's icon.
    * @return string
    */
-  protected function _kind_icon_name ()
+  public function kind_icon_url ()
   {
     switch ($this->kind)
     {
@@ -202,7 +202,7 @@ class OBJECT_IN_FOLDER_HISTORY_ITEM extends CONTENT_OBJECT_HISTORY_ITEM
     case History_item_locked:
       return '{icons}indicators/locked';
     default:
-      return parent::_kind_icon_name ();
+      return parent::kind_icon_url ();
     }
   }
 }
@@ -292,7 +292,7 @@ class ENTRY_HISTORY_ITEM extends OBJECT_IN_FOLDER_HISTORY_ITEM
    * Return the basic name of this kind's icon.
    * @return string
    */
-  protected function _kind_icon_name ()
+  public function kind_icon_url ()
   {
     switch ($this->kind)
     {
@@ -305,7 +305,7 @@ class ENTRY_HISTORY_ITEM extends OBJECT_IN_FOLDER_HISTORY_ITEM
     case History_item_unpublished:
       return '{icons}buttons/unpublish';
     default:
-      return parent::_kind_icon_name ();
+      return parent::kind_icon_url ();
     }
   }
 }

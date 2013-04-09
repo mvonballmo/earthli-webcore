@@ -76,20 +76,25 @@ class OBJECT_IN_FOLDER_SUMMARY_GRID extends CONTENT_OBJECT_GRID
    */
   protected function _draw_box ($obj)
   {
-    $this->_draw_menu_for ($obj, Menu_size_minimal);
+    $layer = $this->context->make_layer ('obj_' . uniqid (rand ()));
+    $layer->visible = false;
 ?>
-  <div class="grid-title">
-  <?php
-    echo $this->obj_link ($obj);
-  ?>
-  </div>
-  <div class="info-box-top">
-  <?php
-    $this->_echo_header ($obj);
-  ?>
-  </div>
+  <div class="grid-item">
+    <div class="minimal-commands">
+    </div>
+    <div class="minimal-commands-content">
+    </div>
+    <h3><?php $layer->draw_toggle (); echo ' ' . $this->obj_link ($obj); ?></h3>
+    <div class="preview hidden-layer">
+      <?php
+      $layer->start ();
+      $this->_draw_menu_for ($obj, Menu_size_minimal, Menu_align_inline);
+      $this->_echo_header ($obj);
+      $this->_echo_text_summary ($obj);
+      $layer->finish ();
+      ?>
+    </div>
 <?php
-    $this->_echo_text_summary ($obj);
   }
   
   /**

@@ -52,7 +52,7 @@ http://www.earthli.com/software/webcore/projects
     $Page->title->add_object ($folder);
     $Page->title->add_object ($branch);
     $Page->title->add_object ($release);
-    $Page->title->subject = $panel->raw_title ();
+    $Page->title->subject = $panel->num_objects() . ' ' . $panel->raw_title ();
 
     $Page->newsfeed_options->title->group = $App->title;
     $Page->newsfeed_options->title->add_object ($folder);
@@ -73,10 +73,11 @@ http://www.earthli.com/software/webcore/projects
     $box = $Page->make_box_renderer ();
     $box->start_column_set ();
 
+    /** @var $renderer OBJECT_RENDERER */
     $renderer = $release->handler_for (Handler_html_renderer);
     $options = $renderer->options ();
-    $options->show_users = false;
     $options->show_as_summary = true;
+    $options->show_users = false;
 
     $text = $renderer->display_to_string ($release);
 
@@ -91,7 +92,9 @@ http://www.earthli.com/software/webcore/projects
 
     echo '<h4>';
 
+    /** @var $newsfeed_commands COMMANDS */
     $newsfeed_commands = $Page->newsfeed_options->make_commands($App);
+    /** @var $renderer MENU_RENDERER */
     $renderer = $App->make_newsfeed_menu_renderer ();
     $renderer->set_size (Menu_size_minimal);
     $renderer->alignment = Menu_align_inline;
@@ -124,6 +127,7 @@ http://www.earthli.com/software/webcore/projects
 
     $box->finish_column_set ();
 ?>
+</div>
   <div class="box">
     <?php if ($panel->uses_time_selector) { ?>
     <div class="menu-bar-top">

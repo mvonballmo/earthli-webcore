@@ -144,14 +144,19 @@ class DEFAULT_PAGE_RENDERER extends WEBCORE_PAGE_RENDERER
 
       $lines = array ();
 
-      if ($options->copyright)
-      {
-        $lines [] = $options->copyright;
-      }
-
       if ($options->show_links)
       {
-        $lines [] = $this->_links_as_text ($options);
+        $lines [] = '<div class="links">' . $this->_links_as_text ($options) . '</div>';
+      }
+
+      if ($options->copyright)
+      {
+        $lines [] = '<div class="copyright">' . $options->copyright . '</div>';
+      }
+
+      if ($options->show_versions)
+      {
+        $lines [] = '<div class="versions">' . $this->_versions_as_text ($options) . '</div>';
       }
 
       if ($options->show_last_time_modified)
@@ -160,17 +165,12 @@ class DEFAULT_PAGE_RENDERER extends WEBCORE_PAGE_RENDERER
         $f = $date->formatter ();
         $f->set_type_and_clear_flags (Date_time_format_short_date_and_time);
 
-        $lines [] = 'Last modified on ' . $date->format ($f);
+        $lines [] = '<div class="modification-time">Last modified on ' . $date->format ($f) . '</div>';
       }
 
       if ($options->show_statistics)
       {
-        $lines [] = $this->_page_statistics_as_text ($options);
-      }
-
-      if ($options->show_versions)
-      {
-        $lines [] = $this->_versions_as_text ($options);
+        $lines [] = '<div class="statistics">' . $this->_page_statistics_as_text ($options) . '</div>';
       }
 
       echo '<div class="footer-data">';
@@ -199,6 +199,9 @@ class DEFAULT_PAGE_RENDERER extends WEBCORE_PAGE_RENDERER
      * of the renderer is always a PAGE, not an APPLICATION.
      */
 
+    /** @var $app APPLICATION */
+    $app = null;
+    $logged_in = false;
     $app_exists = isset ($this->page->app);
     $show_login = $options->show_login && $app_exists;
     if ($app_exists)
@@ -212,7 +215,6 @@ class DEFAULT_PAGE_RENDERER extends WEBCORE_PAGE_RENDERER
 
     if ($options->show_links || $show_login)
     {
-      /* Make a copy. */
       $menu = $this->context->make_menu ();
 
       if ($show_login)
@@ -231,35 +233,6 @@ class DEFAULT_PAGE_RENDERER extends WEBCORE_PAGE_RENDERER
         {
           $menu->append ('Logged in as ' . $app->login->title_as_link ());
           $menu->append ('Log out', $app->resolve_file_for_alias (Folder_name_application, $app->page_names->log_out));
-        }
-      }
-
-      if ($options->show_links)
-      {
-        if ($show_login && $this->page->app->login->is_allowed (Privilege_set_global, Privilege_configure))
-        {
-          $url = $app->resolve_file ('{app}' . $app->page_names->configure);
-          $menu->append ('Configure', $url);
-        }
-
-        $res = $this->page->resources ();
-        if ($options->settings_url)
-        {
-          $url = $res->resolve_file ($options->settings_url);
-          if ($this->page->theme->title)
-          {
-            $menu->append ('<a href="' . $url . '">Theme</a>' . ': ' . $this->page->theme->title);
-          }
-          else
-          {
-            $menu->append ('Theme', $url);
-          }
-        }
-
-        if ($options->show_source_url)
-        {
-          $url = $res->resolve_file ($options->show_source_url);
-          $menu->append ('View source', $url . '?page_name=' . urlencode ($this->env->url (Url_part_no_args)));
         }
       }
 
@@ -297,6 +270,40 @@ class DEFAULT_PAGE_RENDERER extends WEBCORE_PAGE_RENDERER
       $menu->append ('Rights', $res->resolve_file ($options->rights_url));
     }
 
+    if (isset($this->page->app))
+    {
+      /** @var $app APPLICATION */
+      $app = $this->page->app;
+
+      if ($app->login->is_allowed (Privilege_set_global, Privilege_configure))
+      {
+        $url = $app->resolve_file ('{app}' . $app->page_names->configure);
+        $menu->append ('Configure', $url);
+      }
+    }
+
+    $res = $this->page->resources ();
+    if ($options->settings_url)
+    {
+      $url = $res->resolve_file ($options->settings_url);
+      /** @var $page THEMED_PAGE */
+      $page = $this->page;
+      if ($page->theme->title)
+      {
+        $menu->append ('Theme: ' . $page->theme->title, $url);
+      }
+      else
+      {
+        $menu->append ('Theme', $url);
+      }
+    }
+
+    if ($options->show_source_url)
+    {
+      $url = $res->resolve_file ($options->show_source_url);
+      $menu->append ('View source', $url . '?page_name=' . urlencode ($this->env->url (Url_part_no_args)));
+    }
+
     return $menu->as_html ();
   }
 
@@ -308,16 +315,16 @@ class DEFAULT_PAGE_RENDERER extends WEBCORE_PAGE_RENDERER
   */
   protected function _versions_as_text ($options)
   {
-    $versions = array ();
+    $menu = $this->page->make_menu();
 
     if ($options->app_info)
     {
-      $versions [] = $options->app_info;
+      $menu->append($options->app_info);
     }
 
-    $versions [] = 'Powered by <a href="http://earthli.com/software/webcore">' . $this->env->description () . '</a>';
+    $menu->append($this->env->description (), "http://earthli.com/software/webcore");
 
-    return join ($this->page->display_options->menu_separator, $versions);
+    return 'Powered by ' . $menu->as_html();
   }
 
   /**
@@ -330,10 +337,12 @@ class DEFAULT_PAGE_RENDERER extends WEBCORE_PAGE_RENDERER
   {
     $profiler = $this->env->profiler;
 
+    $menu = $this->page->make_menu();
+
     if (isset ($profiler) && $profiler->exists ('global'))
     {
       $t = $profiler->elapsed ('global');
-      $values [] = "{$t}s";
+      $menu->append("{$t}s");
     }
 
     $query_data = "{$this->env->num_queries_executed} queries";
@@ -342,28 +351,23 @@ class DEFAULT_PAGE_RENDERER extends WEBCORE_PAGE_RENDERER
       $t = $profiler->elapsed ('db');
       $query_data .= " ({$t}s)";
     }
-    $values [] = $query_data;
 
-    $values [] = "{$this->env->num_webcore_objects} objects";
+    $menu->append($query_data);
+    $menu->append("{$this->env->num_webcore_objects} objects");
 
     if (isset ($profiler) && $profiler->exists ('text'))
     {
       $t = $profiler->elapsed ('text');
-      $values [] = "{$t}s (text)";
+      $menu->append("{$t}s (text)");
     }
 
     if (isset ($profiler) && $profiler->exists ('ui'))
     {
       $t = $profiler->elapsed ('ui');
-      $values [] = "{$t}s (ui)";
+      $menu->append("{$t}s (ui)");
     }
 
-    if (! empty ($values))
-    {
-      return join ($this->page->display_options->menu_separator, $values);
-    }
-
-    return '';
+    return $menu->as_html();
   }
 
   /**
@@ -430,6 +434,7 @@ class DEFAULT_PAGE_RENDERER extends WEBCORE_PAGE_RENDERER
    */
   protected function _handle_client_data_warnings ($options)
   {
+    /** @var $page THEMED_PAGE */
     $page = $this->page;
 
     if (! $page->stored_theme_is_valid)

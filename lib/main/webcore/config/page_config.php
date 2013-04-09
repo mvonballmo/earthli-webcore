@@ -405,7 +405,7 @@ class PAGE_TEMPLATE_OPTIONS
    * Show the update time for the file itself?
    * @var boolean
    */
-  public $show_last_time_modified = true;
+  public $show_last_time_modified = false;
 
   /**
    * Show statistics gathered during page generation?
@@ -414,7 +414,7 @@ class PAGE_TEMPLATE_OPTIONS
    * ENVIRONMENT}).
    * @var boolean
    */
-  public $show_statistics = false;
+  public $show_statistics = true;
 
   /**
    * Show the Contact/Support/Privacy links.

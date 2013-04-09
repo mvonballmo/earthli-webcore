@@ -196,15 +196,14 @@ class MENU_RENDERER extends WEBCORE_OBJECT
   public $trigger_button_CSS_class = 'button';
 
   /**
-   * Use this separator if {@link Menu_show_as_buttons} is <code>False</code>.
-   * Defaults to {@link CONTEXT_DISPLAY_OPTIONS::$menu_separator}.
+   * The class to include when {@link Menu_show_as_buttons} is <code>False</code>.
+   * Defaults to {@link CONTEXT_DISPLAY_OPTIONS::$object_class}.
    * @var string
    */
-  public $separator;
+  public $separator_class;
 
   /**
    * Target frame for generated links.
-   * Use only from within framesets; usually used to target the "_top" frame.
    * @var string
    */
   public $target = '';
@@ -286,14 +285,23 @@ class MENU_RENDERER extends WEBCORE_OBJECT
     if (isset ($this->env->profiler)) $this->env->profiler->start ('ui');
     if ($commands->num_executable_commands ())
     {
+      $alignment = $this->_get_alignment();
+
       if ($this->content_mode & Menu_show_as_buttons)
       {
-        echo "<ul class=\"menu-buttons\" " . $this->_get_alignment() . '>';
+        $class = "menu-buttons";
       }
       else
       {
-        echo "<ul class=\"menu-items\" " . $this->_get_alignment() . '>';
+        $class =  $this->separator_class;
+        if (!$class)
+        {
+          $class = $this->context->display_options->menu_class;
+        }
+        $class = "menu-items " . $class;
       }
+
+      echo "<ul class=\"$class\" $alignment>";
 
       switch ($this->display_mode)
       {
@@ -360,33 +368,18 @@ class MENU_RENDERER extends WEBCORE_OBJECT
     }
 
     $idx_cmd = 0;
-    if ($this->separator)
-    {
-      $sep = $this->separator;
-    }
-    else
-    {
-      $sep = $this->context->display_options->menu_separator;
-    }
-      
+
     foreach ($cmds as $cmd)
     {
       if ($cmd->executable)
       {
         if ($this->content_mode & Menu_show_as_buttons)
         {
-          echo '  <li>' . $this->_command_as_html ($cmd, $CSS_class) . "</li>";
+          echo '<li>' . $this->_command_as_html ($cmd, $CSS_class) . "</li>";
         }
         else
         {
-          if ($idx_cmd > 0)
-          {
-            echo '  <li>' . $sep . $this->_command_as_html ($cmd, '') . "</li>";
-          }
-          else
-          {
-            echo '  <li>' . $this->_command_as_html ($cmd, '') . "</li>";
-          }
+          echo '<li>' . $this->_command_as_html ($cmd, '') . "</li>";
         }
         $idx_cmd += 1;
         if ($idx_cmd == $num_cmds_to_be_shown)
@@ -619,7 +612,7 @@ class MENU_RENDERER extends WEBCORE_OBJECT
       $trigger = $this->trigger_title;
     }
 
-    echo '<li class="' . $trigger_class . ' ' . $this->trigger_button_CSS_class . '"' . $menu_tag . '>';
+    echo '<li class="' . $trigger_class . '"' . $menu_tag . '><span class="' . $this->trigger_button_CSS_class . '">';
     if ($this->show_trigger_icon)
     {
       if (empty ($trigger))
@@ -639,7 +632,7 @@ class MENU_RENDERER extends WEBCORE_OBJECT
     {
       echo '</span>';
     }
-    echo '</span></li>';
+    echo '</span></span></li>';
 
     if (! $this->_supports_css_2)
     {

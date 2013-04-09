@@ -197,6 +197,7 @@ abstract class NAMED_OBJECT extends STORABLE
   /**
    * Rewrite the given url to point to this object.
    * @param string $page_url The url to modify.
+   * @return string
    */
   public function replace_page_arguments ($page_url)
   {
@@ -267,6 +268,7 @@ abstract class NAMED_OBJECT extends STORABLE
    * @param boolean $use_links Show objects as links?
    * @param string $separator Optional separator. If not set, {@link APPLICATION_DISPLAY_OPTIONS::$obj_url_separator} is used.
    * @param TITLE_FORMATTER $formatter Optional formatter to use.
+   * @return string
    * @access private
    */
   protected function _object_url ($use_links, $separator = null, $formatter = null)
@@ -290,6 +292,7 @@ abstract class NAMED_OBJECT extends STORABLE
    * If no specific munger is provided, the one from {@link NAMED_OBJECT::html_formatter()} is used.
    * @param string $text
    * @param HTML_MUNGER $munger
+   * @return string
    * @access private
    */
   protected function _text_as_html ($text, $munger = null)
@@ -307,7 +310,8 @@ abstract class NAMED_OBJECT extends STORABLE
    * Transform a text for this object into HTML.
    * If no specific munger is provided, the one from {@link NAMED_OBJECT::html_formatter()} is used.
    * @param string $text
-   * @param HTML_MUNGER $munger
+   * @param PLAIN_TEXT_MUNGER $munger
+   * @return string
    * @access private
    */
   protected function _text_as_plain_text ($text, $munger = null)
@@ -321,5 +325,3 @@ abstract class NAMED_OBJECT extends STORABLE
     return $munger->transform ($text, $this);
   }
 }
-
-?>

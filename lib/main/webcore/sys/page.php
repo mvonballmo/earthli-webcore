@@ -171,9 +171,10 @@ class PAGE extends CONTEXT
 
     $class_name = $this->final_class_name ('LOCATION_MENU', 'webcore/gui/location_menu.php');
     $this->location = new $class_name ($this);
-    $this->location->renderer->separator = $this->display_options->location_separator;
+    $this->location->renderer->separator_class = $this->display_options->location_class;
 
     $this->template_options = new PAGE_TEMPLATE_OPTIONS ();
+    $this->template_options->show_statistics = $env->debug_enabled && $env->debugging;
     $this->icon_options = new PAGE_ICON_OPTIONS ($this);
     $this->refresh_options = new PAGE_REFRESH_OPTIONS ($this);
     $this->newsfeed_options = new PAGE_NEWSFEED_OPTIONS ($this);

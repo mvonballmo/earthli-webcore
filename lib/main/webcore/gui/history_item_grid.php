@@ -62,6 +62,10 @@ class HISTORY_ITEM_GRID extends STANDARD_GRID
    * @var integer
    */
   public $padding = 0;
+
+  /**
+   * @var bool
+   */
   public $show_separator = false;
 
   /**
@@ -75,7 +79,7 @@ class HISTORY_ITEM_GRID extends STANDARD_GRID
     {
       if (isset ($this->_last_time))
       {
-        $this->time_diffs [] = $this->_last_time->diff ($obj->time_created);
+        $this->_time_diffs [] = $this->_last_time->diff ($obj->time_created);
       }
 
       $this->_last_time = $obj->time_created;
@@ -85,20 +89,18 @@ class HISTORY_ITEM_GRID extends STANDARD_GRID
   }
 
   /**
-   * @param ARTICLE $obj
+   * @param HISTORY_ITEM $obj
    * @access private
    */
-  protected function _start_row ($obj)
+  protected function _draw_box ($obj)
   {
     $curr_date = $obj->time_created;
     if (! isset ($this->last_date) || (! $curr_date->equals ($this->last_date, Date_time_date_part)))
     {
       $this->last_date = $curr_date;
-?>
-  <tr>
-    <td>
+      ?>
       <h2>
-      <?php
+        <?php
         $t = $curr_date->formatter ();
         $t->type = Date_time_format_date_only;
         echo $curr_date->format ($t);
@@ -112,88 +114,72 @@ class HISTORY_ITEM_GRID extends STANDARD_GRID
         {
           echo ' (Yesterday)';
         }
-      ?>
+        ?>
       </h2>
-    </td>
-  </tr>
-<?php
+    <?php
     }
 
-    parent::_start_row ($obj);
-  }
-
-  /**
-   * @param HISTORY_ITEM $obj
-   * @access private
-   */
-  protected function _draw_box ($obj)
-  {
     $this->_item_number += 1;
     $creator = $obj->creator ();
-    
-    $layer = $this->context->make_layer ('obj_' . $obj->id);
-    $layer->visible = false;
 ?>
-  <div style="margin-left: 2em">
-    <div style="float: left">
-      <?php $layer->draw_toggle (); ?>
-      <?php echo $obj->kind_as_icon ('16px'); ?>
-    </div>
-    <div style="margin-left: 40px">
-      <div style="margin-bottom: .25em">
-        <?php echo $obj->title_as_html (); ?>
-      </div>
-      <div class="detail">
+  <h3>
+    <?php echo $obj->title_as_html (); ?>
+  </h3>
+  <?php
+  if ($obj->description || $obj->system_description)
+  {
+    echo $obj->description_as_html ();
+    echo $obj->system_description_as_html ();
+  }
+  ?>
+  <table class="basic columns left-labels top">
+    <tr>
+      <th>Time</th>
+      <td>
       <?php
-        $icon = $creator->icon_as_html ('16px');
+        $tf = $obj->time_created->formatter();
+        $tf->type = Date_time_format_date_and_time;
+        echo $obj->time_created->format ();
+      ?>
+      </td>
+    </tr>
+    <tr>
+      <th>User</th>
+      <td>
+        <?php
+        $icon = $creator->expanded_icon_url ('16px');
         if ($icon)
         {
-          echo $icon . ' ';
+          ?><span class="sixteen icon" style="background-image: url(<?php echo $icon; ?>)"><?php echo $creator->title_as_link (); ?></span><?php
         }
-        echo $creator->title_as_link () . ' - ' . $obj->time_created->format ();
-      ?>
-      </div>
-    </div>
-    <?php
-      $layer->start ();
+        else
+        {
+          echo $creator->title_as_link ();
+        }
+        ?>
+      </td>
+    </tr>
+    <tr>
+      <th>Kind</th>
+      <td>
+        <span class="sixteen icon" style="background-image: url(<?php echo $this->context->sized_icon($obj->kind_icon_url (), '16px'); ?>)"><?php echo $obj->kind; ?></span>
+      </td>
+    </tr>
+    <tr>
+      <th>Emails</th>
+      <td>
+        <span class="sixteen icon" style="background-image: url(<?php echo $this->context->sized_icon($obj->publication_state_icon_url (), '16px'); ?>)"><?php echo $obj->publication_state_as_text (); ?></span>
+      </td>
+    </tr>
+  </table>
+  <?php
+  if (isset ($this->_time_diffs [$this->_item_number - 1]))
+  {
     ?>
-    <dl class="detail" style="margin-left: 40px">
-      <dt class="field">Kind of modification</dt>
-      <dd>
-        <?php echo $obj->kind_as_icon ('16px'); ?>
-        <?php echo $obj->kind; ?>
-      </dd>
-      <dt class="field">Email notifications</dt>
-      <dd>
-        <?php echo $obj->publication_state_as_icon () . ' ' . $obj->publication_state_as_text (); ?>
-      </dd>
-      <?php
-        if (isset ($this->time_diffs [$this->_item_number - 1]))
-        {
-      ?>
-      <dt class="field">Time since previous revision</dt>
-      <dd>
-        <?php echo $this->time_diffs [$this->_item_number - 1]->format (); ?>
-      </dd>
-      <?php
-        }
-        
-        if ($obj->description || $obj->system_description)
-        {
-      ?>
-      <dt class="field">Description</dt>
-      <dd>
-        <?php echo $obj->description_as_html (); ?>
-        <?php echo $obj->system_description_as_html (); ?>
-      </dd>
-      <?php
-        }
-      ?>
-    </dl>
-    <?php
-      $layer->finish ();
+    <p>&dArr; <?php echo $this->_time_diffs [$this->_item_number - 1]->format (); ?> &dArr;</p>
+  <?php
+  }
   ?>
-  </div>
   <?php
   }
 
@@ -208,5 +194,10 @@ class HISTORY_ITEM_GRID extends STANDARD_GRID
    * @access private
    */
   protected $_last_time;
+
+  /**
+   * @var TIME_INTERVAL[]
+   */
+  protected $_time_diffs;
 }
 ?>

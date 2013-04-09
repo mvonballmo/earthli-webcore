@@ -58,7 +58,10 @@ h5,
   font-size: 12pt;
 }
 
-.footer
+.copyright,
+.versions,
+.statistics,
+.modification-time
 {
-	font-size: 11pt;
+ 	font-size: 11pt;
 }

@@ -40,11 +40,20 @@ http://www.earthli.com/software/webcore
     $App->set_search_text (read_var ('search_text'));
 
     $class_name = $App->final_class_name ('USER_PANEL_MANAGER', 'webcore/gui/panel.php');
+    /** @var $panel_manager USER_PANEL_MANAGER */
     $panel_manager = new $class_name ($user);
     $panel = $panel_manager->selected_panel ();
 
     $Page->title->add_object ($user);
-    $Page->title->subject = $panel->num_objects () . ' ' . $panel->raw_title();
+    $num_objects = $panel->num_objects();
+    if ($num_objects)
+    {
+      $Page->title->subject = $num_objects . ' ' . $panel->raw_title();
+    }
+    else
+    {
+      $Page->title->subject = $panel->raw_title();
+    }
 
     $Page->newsfeed_options->title->group = $App->title;
     $Page->newsfeed_options->title->add_object ($user);
@@ -57,60 +66,58 @@ http://www.earthli.com/software/webcore
 
     $Page->start_display ();
 ?>
-  <div class="box">
-      <div class="box-body">
-        <div class="top-box">
-          <?php
-          $box = $Page->make_box_renderer ();
-          $box->start_column_set ();
-          $box->new_column_of_type ('description-box');
+<div class="top-box">
+  <?php
+  $box = $Page->make_box_renderer ();
+  $box->start_column_set ();
+  $box->new_column_of_type ('description-box');
 
-          $renderer = $user->handler_for (Handler_html_renderer);
-          $options = $renderer->options ();
-          $options->show_as_summary = true;
-          $options->show_users = false;
-          $renderer->display ($user);
+  echo '<div class="grid-content">';
+  $renderer = $user->handler_for (Handler_html_renderer);
+  $options = $renderer->options ();
+  $options->show_as_summary = true;
+  $options->show_users = false;
+  $renderer->display ($user);
+  echo '</div>';
 
-          $box->new_column_of_type ('contents-box');
+  $box->new_column_of_type ('contents-box');
 
-          echo '<h4>Contents</h4>';
-          $panel_manager->display ();
+  echo '<h4>Contents</h4>';
+  $panel_manager->display ();
 
-          $box->new_column_of_type ('tools-box');
-          echo '<h4>Tools</h4>';
+  $box->new_column_of_type ('tools-box');
+  echo '<h4>Tools</h4>';
 
-          $subscription_status = $user->handler_for (Handler_subscriptions);
-          $subscription_status->display ($user);
+  $renderer = $user->handler_for (Handler_menu);
+  $renderer->alignment = Menu_align_inline;
+  $renderer->set_size(Menu_size_compact);
+  $renderer->display_as_toolbar ($user->handler_for (Handler_commands));
 
-          $renderer = $user->handler_for (Handler_menu);
-          $renderer->alignment = Menu_align_inline;
-          $renderer->set_size(Menu_size_compact);
-          $renderer->display_as_toolbar ($user->handler_for (Handler_commands));
-
-          $box->finish_column_set ();
-          ?>
-        </div>
-        <?php if ($panel->uses_time_selector) { ?>
-          <div class="menu-bar-top">
-            <?php $panel_manager->display_time_menu (); ?>
-          </div>
-        <?php } ?>
-      <?php $panel->display (); ?>
-      </div>
-    <?php
-      if ($panel->num_objects () && $panel->uses_time_selector)
-      {
-        // don't show the bottom selector if there are no objects
-    ?>
-      <div class="menu-bar-bottom">
+  $box->finish_column_set ();
+  ?>
+</div>
+<div class="box">
+  <div class="box-body">
+    <?php if ($panel->uses_time_selector) { ?>
+      <div class="menu-bar-top">
         <?php $panel_manager->display_time_menu (); ?>
       </div>
-    <?php
-      }
-    ?>
+    <?php } ?>
+    <?php $panel->display (); ?>
+  <?php
+    if ($num_objects && $panel->uses_time_selector)
+    {
+      // don't show the bottom selector if there are no objects
+  ?>
+    <div class="menu-bar-bottom">
+      <?php $panel_manager->display_time_menu (); ?>
+    </div>
+  <?php
+    }
+  ?>
   </div>
+</div>
 <?php
-    $box->finish_column_set ();
     $Page->finish_display ();
   }
   else

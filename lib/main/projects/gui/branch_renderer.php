@@ -67,7 +67,7 @@ class BRANCH_RENDERER extends CONTENT_OBJECT_RENDERER
   protected function _echo_details_as_html ($obj)
   {
 ?>
-  <table cellpadding="2" cellspacing="0">
+  <table class="basic columns left-labels">
 <?php
     $parent_release = $obj->parent_release ();
     if ($parent_release)
@@ -75,7 +75,7 @@ class BRANCH_RENDERER extends CONTENT_OBJECT_RENDERER
       $parent_branch = $parent_release->branch ();
 ?>
     <tr>
-      <td class="label">Parent</td>
+      <th>Parent</th>
       <td>
       <?php
         echo $parent_branch->title_as_link ();
@@ -108,7 +108,7 @@ class BRANCH_RENDERER extends CONTENT_OBJECT_RENDERER
       }
 ?>
     <tr>
-      <td class="label">Latest</td>
+      <th>Latest</th>
       <td><?php echo $rel_text; ?></td>
     </tr>
 <?php
@@ -124,7 +124,7 @@ class BRANCH_RENDERER extends CONTENT_OBJECT_RENDERER
       }
 ?>
     <tr>
-      <td class="label">Next</td>
+      <th>Next</th>
       <td><?php echo $rel_text; ?></td>
     </tr>
 <?php

@@ -313,31 +313,53 @@ class PANEL_MANAGER extends WEBCORE_OBJECT
    */
   public function display ()
   {
-  ?>
-    <table>
-    <?php
-      foreach ($this->_location_order as $id)
+    $panels = array();
+    $panel_with_number_exists = false;
+    foreach ($this->_location_order as $id)
+    {
+      $panel = $this->_panels [$id];
+      if ($panel->selectable ())
       {
-        $panel = $this->_panels [$id];
-        if ($panel->selectable ())
-        {
+        $obj = new stdClass();
+        $obj->num_objects = $panel->num_objects ();
+        $obj->title = $panel->title_as_link();
+        $panel_with_number_exists = $panel_with_number_exists || $obj->num_objects;
+
+        $panels []= $obj;
+      }
+    }
+
+    if ($panel_with_number_exists)
+    {
+      ?>
+      <table class="basic columns left-labels">
+    <?php
+    }
+    else
+    {
+    ?>
+      <table>
+    <?php
+    }
+
+    foreach ($panels as $panel)
+    {
     ?>
       <tr>
-        <td class="label">
-          <?php
-            $num_objects = $panel->num_objects ();
+        <?php if ($panel_with_number_exists) { ?>
+        <th><?php
+            $num_objects = $panel->num_objects;
             if ($num_objects)
             {
               echo $num_objects;
             }
-          ?>
-        </td>
-        <td>
-          <?php echo $panel->title_as_link (); ?>
+          ?></th>
+        <?php } ?>
+        <td style="white-space: nowrap">
+          <?php echo $panel->title; ?>
         </td>
       </tr>
     <?php
-        }
       }
     ?>
     </table>
@@ -1006,11 +1028,8 @@ class USER_PANEL_MANAGER extends WEBCORE_PANEL_MANAGER
    */
   protected function _add_panels ()
   {
-    $class_name = $this->app->final_class_name ('USER_SUMMARY_PANEL');
-    $this->add_panel(new $class_name ($this, $this->_user));
     $this->_add_entry_panels_for ($this->login->user_entry_query ($this->_user->id), true, false);
     $this->_add_comment_panel_for ($this->login->user_comment_query ($this->_user->id), true, false);
-    $this->move_panel_to ('summary', 0, Panel_all);
   }
 
   /**

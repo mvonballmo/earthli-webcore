@@ -78,6 +78,10 @@ class CONTEXT_DISPLAY_OPTIONS
    */
   public $menu_separator = ' | ';
 
+  public $menu_class = 'standard';
+  public $location_class = 'location';
+  public $object_class = 'objects';
+
   /**
    * Separator string used between page numbers in page navigators.
    * @var string
@@ -106,7 +110,7 @@ class CONTEXT_DISPLAY_OPTIONS
    * Maximum number of objects to show in the list of an entry navigator.
    * @var integer
    */
-  public $objects_to_show = 15;
+  public $objects_to_show = 25;
 
   /**
    * Use this extensions for icons that don't specify one.

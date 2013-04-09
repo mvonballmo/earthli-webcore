@@ -26,31 +26,31 @@ http://www.earthli.com/software/webcore/projects
 
 ****************************************************************************/
 
-  $id = read_var ('id');
-  $folder_query = $App->login->folder_query ();
-  $folder = $folder_query->folder_for_branch_at_id ($id);
+$id = read_var ('id');
+/** @var $folder_query USER_PROJECT_QUERY */
+$folder_query = $App->login->folder_query ();
+$folder = $folder_query->folder_for_branch_at_id ($id);
 
-  if (isset ($folder))
-  {
-    $branch_query = $folder->branch_query ();
-    $branch = $branch_query->object_at_id ($id);
-  }
+if (isset ($folder))
+{
+  $branch_query = $folder->branch_query ();
+  $branch = $branch_query->object_at_id ($id);
+}
 
-  if (isset ($branch))
-  {
-    $Page->title->add_object ($folder);
-    $Page->title->add_object ($branch);
+if (isset ($branch))
+{
+  $Page->title->add_object ($folder);
+  $Page->title->add_object ($branch);
 
-    $Page->location->add_folder_link ($folder, "panel=branches");
-    $Page->location->add_object_link ($branch);
+  $Page->location->add_folder_link ($folder, "panel=branches");
+  $Page->location->add_object_link ($branch);
 
-    $history_item_query = $branch->history_item_query ();
-    $obj = $branch;
+  $history_item_query = $branch->history_item_query ();
+  $obj = $branch;
 
-    include_once ('webcore/pages/view_history.php');
-  }
-  else
-  {
-    $Page->raise_security_violation ('You are not allowed to view this branch\'s history.', $folder);
-  }
-?>
+  include_once ('webcore/pages/view_history.php');
+}
+else
+{
+  $Page->raise_security_violation ('You are not allowed to view this branch\'s history.', $folder);
+}

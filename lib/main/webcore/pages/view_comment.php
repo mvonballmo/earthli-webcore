@@ -42,7 +42,7 @@ http://www.earthli.com/software/webcore
     }
   }
 
-  if (isset ($comment) && $App->login->is_allowed (Privilege_set_comment, Privilege_view, $comment))
+  if (isset ($comment) && isset ($entry) && $App->login->is_allowed (Privilege_set_comment, Privilege_view, $comment))
   {
     $App->set_referer ();
     $App->set_search_text (read_var ('search_text'));
@@ -61,17 +61,24 @@ http://www.earthli.com/software/webcore
     /** @var $com_renderer COMMENT_LIST_RENDERER */
     $com_renderer = new $class_name ($com_query, $comment);
 
-    /** @var $subscription_status SUBSCRIPTION_RENDERER */
-    $subscription_status = $comment->handler_for (Handler_subscriptions);
+    $commands = $com_renderer->make_commands();
+    if ($commands->num_executable_commands() > 0)
+    {
+  ?>
+<div class="top-box button-content">
+  <span class="field"><?php echo $com_renderer->size(); ?></span> Replies
+  <?php
+  $menu = $App->make_menu();
+  $menu->renderer->alignment = Menu_align_inline;
+  $menu->renderer->content_mode = Menu_show_as_buttons;
+  $menu->display ();
+  ?>
+</div>
+  <?php
+  }
   ?>
   <div class="box">
-    <div class="top-box button-content">
-      <?php
-      $subscription_status->display ($comment);
-      $com_renderer->display_menu ();
-      ?>
-    </div>
-    <div class="box-body">
+    <div class="box-body grid-content">
       <?php $com_renderer->display (); ?>
     </div>
   </div>

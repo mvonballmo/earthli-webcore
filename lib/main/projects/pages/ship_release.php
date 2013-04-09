@@ -27,12 +27,14 @@ http://www.earthli.com/software/webcore
 ****************************************************************************/
 
   $id = read_var ('id');
+  /** @var $folder_query USER_PROJECT_QUERY */
   $folder_query = $App->login->folder_query ();
   $folder = $folder_query->folder_for_release_at_id ($id);
 
   if (isset ($folder))
   {
     $rel_query = $folder->release_query ();
+    /** @var $release RELEASE */
     $release = $rel_query->object_at_id ($id);
 
     include ('projects/forms/ship_release_form.php');

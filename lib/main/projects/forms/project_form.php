@@ -128,7 +128,10 @@ class PROJECT_FORM extends FOLDER_FORM
     $this->_apply_options_to_UI ($options);
 
     $trunk = $obj->trunk ();
-    $this->set_value ('trunk_id', $trunk->id);
+    if ($trunk)
+    {
+      $this->set_value ('trunk_id', $trunk->id);
+    }
 
     $this->_set_up_options ();
   }
@@ -296,8 +299,7 @@ class PROJECT_FORM extends FOLDER_FORM
     $renderer->start_column ();
     $renderer->start_row ();
 ?>
-    <div class="chart">
-      <div class="chart-body">
+    <div class="left-sidebar">
       <?php
         $folder_query = $this->login->folder_query ();
         $folders = $folder_query->tree ();
@@ -314,7 +316,6 @@ class PROJECT_FORM extends FOLDER_FORM
         $tree->node_info = $tree_node_info;
         $tree->display ($folders);
       ?>
-      </div>
     </div>
 <?php
     $renderer->finish_row ();

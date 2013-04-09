@@ -729,7 +729,7 @@ class PROJECT_RELEASE_PANEL_MANAGER extends WEBCORE_PANEL_MANAGER
   }
 
   /**
-   * @param PROJECT $folder Project for which to show panels.
+   * @param RELEASE $release Release for which to show panels.
    */
   public function __construct ($release)
   {

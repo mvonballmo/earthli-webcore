@@ -26,26 +26,46 @@ http://www.earthli.com/software/webcore
 
 ****************************************************************************/
 
-  $Page->location->append ($App->short_title, './');
   $Page->title->subject = 'Subscribe';
 
-  if (isset ($obj))
+  $email = read_var ('email');
+  $subscribed = read_var ('subscribed');
+
+  if (isset ($obj) && $email)
   { 
-    $email = read_var ('email');
-    $subscribed = read_var ('subscribed');
+    $user_query = $App->user_query ();
+    $user = $user_query->object_at_email ($email);
+    $subscriber = $user->subscriber ();
+  }
     
-    if ($email)
-    {
-      $user_query = $App->user_query ();
-      $user = $user_query->object_at_email ($email);
-      $subscriber = $user->subscriber ();
-    }
-  }  
-    
-  if (isset ($user) && $App->login->is_allowed (Privilege_set_user, Privilege_modify, $user))
+  if (isset($obj) && isset($subscriber) && isset ($user) && $App->login->is_allowed (Privilege_set_user, Privilege_modify, $user))
   {
-    $subscriber->set_subscribed ($obj, $sub_type, $subscribed);
-    $App->return_to_referer ($obj->home_page ());
+    if ($subscriber->subscribed($obj, $sub_type) != $subscribed)
+    {
+      $subscriber->set_subscribed ($obj, $sub_type, $subscribed);
+    }
+
+    $Page->location->append($Page->title->subject, '', '{icons}indicators/subscribed');
+
+    $Page->start_display();
+
+?>
+<div class="top-box">
+  <div class="button-content"><?php
+    $menu = $Page->make_menu();
+    $menu->renderer = $Page->make_menu_renderer();
+    $menu->append('Manage all your subscriptions', "view_user_subscriptions.php?email=$email", '{icons}/buttons/subscriptions');
+    $menu->display();
+    ?></div>
+</div>
+<div class="button-content">
+  <?php
+    $subscription_status = $obj->handler_for (Handler_subscriptions);
+    $subscription_status->display ($obj);
+  ?>
+</div>
+<?php
+    $Page->finish_display();
   }
   else
   {

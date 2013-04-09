@@ -151,13 +151,14 @@ class ENTRY_ASSOCIATED_DATA_RENDERER extends HANDLER_RENDERER
   </h2>
   <div class="grid-content">
   <?php
-        $class_name = $this->app->final_class_name ('ATTACHMENT_GRID', 'webcore/gui/attachment_grid.php');
-        $grid = new $class_name ($this->app);
-        $grid->set_ranges (3, 3);
-        $grid->paginator->page_anchor = 'attachments';
-        $grid->paginator->page_number_var_name = 'attachment_page_number';
-        $grid->set_query ($attachment_query);
-        $grid->display ();
+    $class_name = $this->app->final_class_name ('ATTACHMENT_GRID', 'webcore/gui/attachment_grid.php');
+    /** @var $grid ATTACHMENT_GRID */
+    $grid = new $class_name ($this->app);
+    $grid->set_ranges (3, 3);
+    $grid->paginator->page_anchor = 'attachments';
+    $grid->paginator->page_number_var_name = 'attachment_page_number';
+    $grid->set_query ($attachment_query);
+    $grid->display ();
   ?>
   </div>
   <?php
@@ -171,12 +172,29 @@ class ENTRY_ASSOCIATED_DATA_RENDERER extends HANDLER_RENDERER
       if ($com_query->size ())
       {
         $class_name = $this->app->final_class_name ('COMMENT_LIST_RENDERER', 'webcore/gui/comment_renderer.php');
+        /** @var $com_renderer COMMENT_LIST_RENDERER */
         $com_renderer = new $class_name ($com_query, $obj);
       ?>
       <h2 id="comments" style="clear: both">
         Comments
       </h2>
-      <?php $com_renderer->display_menu (); ?>
+      <?php
+        $commands = $com_renderer->make_commands();
+        if ($commands->num_executable_commands() > 0)
+        {
+          ?>
+          <div class="button-content">
+            <span class="field"><?php echo $com_renderer->size(); ?></span> Replies
+            <?php
+            $menu_renderer = $this->app->make_menu_renderer();
+            $menu_renderer->alignment = Menu_align_inline;
+            $menu_renderer->content_mode = Menu_show_as_buttons;
+            $menu_renderer->display ($commands);
+            ?>
+          </div>
+      <?php
+        }
+      ?>
       <div class="grid-content">
         <?php $com_renderer->display (); ?>
       </div>

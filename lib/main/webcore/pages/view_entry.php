@@ -44,16 +44,18 @@ http://www.earthli.com/software/webcore
     $entry = $entry_query->object_at_id ($id);
   }
 
-  if (isset ($entry) && $App->login->is_allowed (Privilege_set_entry, Privilege_view, $entry))
+  if (isset($entry_query) && isset ($entry) && $App->login->is_allowed (Privilege_set_entry, Privilege_view, $entry))
   {
     $App->set_referer ();
     $App->set_search_text (read_var ('search_text'));
 
     $entry_info = $entry->type_info ();
-    
+
+    /** @var $location_renderer LOCATION_RENDERER */
     $location_renderer = $entry->handler_for (Handler_location);
     $location_renderer->add_to_page_as_text ($Page, $entry);
 
+    /** @var $navigator OBJECT_NAVIGATOR */
     $navigator = $entry->handler_for (Handler_navigator);
     $navigator->set_query ($entry_query);
     $navigator->set_selected ($id);
@@ -74,7 +76,7 @@ http://www.earthli.com/software/webcore
 
     $Page->start_display ();
 ?>
-<div class="top-box<?php if (!$show_links) { echo ' button-content'; }; ?>">
+<div class="top-box">
 <?php
   if ($has_multiple_entries)
   {
@@ -89,6 +91,9 @@ http://www.earthli.com/software/webcore
       <?php
     }
 
+    echo '</div>';
+
+    echo '<div class="button-content">';
     echo '<span class="paginator">';
     echo $navigator->controls ();
     echo '</span>';
@@ -106,15 +111,13 @@ http://www.earthli.com/software/webcore
 
     $icon = $App->sized_icon ($icon, '16px');
     ?><a href="<?php echo $opt_link; ?>" class="button"><span class="icon sixteen" style="background-image: url(<?php echo $icon; ?>)"><?php echo $caption; ?></span></a><?php
+    /** @var $renderer MENU_RENDERER */
     $renderer = $entry->handler_for (Handler_menu);
     $renderer->set_size (Menu_size_compact);
     $renderer->alignment = Menu_align_inline;
     $renderer->display ($entry->handler_for (Handler_commands));
 
     echo '</div>';
-
-    $subscription_status = $entry->handler_for (Handler_subscriptions);
-    $subscription_status->display ($entry);
   }
 ?>
 </div>
@@ -134,6 +137,7 @@ http://www.earthli.com/software/webcore
   </div>
 </div>
 <?php
+  /** @var $associated_data ENTRY_ASSOCIATED_DATA_RENDERER */
   $associated_data = $entry->handler_for (Handler_associated_data);
   if (isset ($associated_data))
   {

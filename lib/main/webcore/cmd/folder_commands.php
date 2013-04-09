@@ -84,6 +84,15 @@ class FOLDER_COMMANDS extends COMMANDS
   protected function _add_editors ($folder)
   {
     $cmd = $this->make_command ();
+    $cmd->id = 'subscribe';
+    $cmd->caption = 'Subscribe';
+    $cmd->link = 'subscribe_to_folder.php?id=' . $folder->id . '&email=' . $this->login->email . '&subscribed=1';
+    $cmd->icon = '{icons}indicators/subscribed';
+    $cmd->executable = $this->login->email && $this->login->is_allowed (Privilege_set_folder, Privilege_view, $folder);
+    $cmd->importance = Command_importance_high - Command_importance_increment;
+    $this->append ($cmd);
+
+    $cmd = $this->make_command ();
     $cmd->id = 'edit';
     $cmd->caption = 'Edit';
     $cmd->link = "edit_folder.php?id=$folder->id";
@@ -130,14 +139,13 @@ class FOLDER_COMMANDS extends COMMANDS
   /**
    * Add buttons that provide views on the folder.
    * @param FOLDER $folder
-   * @param USER $creator Folder belongs to this user (also available as $folder->creator ()).
    * @access private
    */
   protected function _add_viewers ($folder)
   {
     $cmd = $this->make_command ();
     $cmd->id = 'security';
-    $cmd->caption = 'Security';
+    $cmd->caption = 'Manage security';
     $cmd->link = "view_folder_permissions.php?id=$folder->id";
     $cmd->icon = '{icons}buttons/security';
     $cmd->executable = $this->login->is_allowed (Privilege_set_folder, Privilege_secure, $folder);
@@ -146,7 +154,7 @@ class FOLDER_COMMANDS extends COMMANDS
 
     $cmd = $this->make_command ();
     $cmd->id = 'subscribers';
-    $cmd->caption = 'Subscribers';
+    $cmd->caption = 'Manage subscribers';
     $cmd->link = "view_folder_subscriptions.php?id=$folder->id";
     $cmd->icon = '{icons}buttons/subscriptions';
     $cmd->executable = $this->login->is_allowed (Privilege_set_folder, Privilege_modify, $folder);
@@ -193,5 +201,3 @@ class FOLDER_COMMANDS extends COMMANDS
     }
   }
 }
-
-?>

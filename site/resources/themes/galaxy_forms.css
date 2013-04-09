@@ -36,7 +36,7 @@ http://www.earthli.com/software/webcore
 	color: #FFFF00;
 }
 
-.text-control, .menu-control
+.text-control, .menu-control, .menu-control-required, .text-control-required
 {
 	background: #000000;
 	color: #FF9933;

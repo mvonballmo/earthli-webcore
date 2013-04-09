@@ -46,7 +46,6 @@ body, h4, td, th, .menu-control, .text-control, .text-control-required, .quoter,
 
 h5,
 .detail,
-.footer,
 .notes,
 .tree-node,
 .info-box-bottom,
@@ -58,7 +57,10 @@ h5,
   font-size: 10pt
 }
 
-.footer
+.copyright,
+.versions,
+.statistics,
+.modification-time
 {
 	font-size: 9pt;
 }

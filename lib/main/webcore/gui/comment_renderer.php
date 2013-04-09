@@ -147,35 +147,40 @@ class COMMENT_LIST_RENDERER extends WEBCORE_OBJECT
   }
 
   /**
-   * Render the menu selector for switching modes.
+   * The number of comments that will be rendered.
+   * @return int
    */
-  public function display_menu ()
+  public function size ()
   {
+    return $this->_comment_query->size ();
+  }
+
+  /**
+   * Returns a list of commands for this renderer.
+   * @return \COMMANDS
+   */
+  public function make_commands ()
+  {
+    $Result = new COMMANDS($this->context);
+
     if ($this->_comment_query->size () > 1)
     {
-?>
-  <div>
-    <span class="field"><?php echo $this->_comment_query->size (); ?></span> Replies
-    <?php
-      $menu = $this->context->make_menu ();
-      $menu->renderer->alignment = Menu_align_inline;
-      $menu->renderer->content_mode = Menu_show_as_buttons;
-  
+      $command = $Result->make_command();
+      $Result->append($command);
       switch ($this->comment_mode)
       {
-      case Comment_render_flat:
-        $menu->append ('Show Threaded', $this->_obj->home_page () . "&comment_mode=threaded#comments");
-        break;
-      case Comment_render_threaded:
-        $menu->append ('Show Flat', $this->_obj->home_page () . "&comment_mode=flat#comments");
-        break;
+        case Comment_render_flat:
+          $command->caption = 'Show Threaded';
+          $command->link = $this->_obj->home_page () . "&comment_mode=threaded#comments";
+          break;
+        case Comment_render_threaded:
+          $command->caption = 'Show Flat';
+          $command->link = $this->_obj->home_page () . "&comment_mode=flat#comments";
+          break;
       }
+    }
 
-      $menu->display ();
-?>
-  </div>
-<?php
-    }    
+    return $Result;
   }
 
   /**

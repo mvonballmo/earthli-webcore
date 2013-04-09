@@ -55,7 +55,6 @@ class DYNAMIC_TREE extends HTML_TREE
   {
     parent::__construct ($context);
 
-    /* Make a copy. */    
     $this->_layer = $context->make_layer ();
     $this->_layer->margin_top = '.1em';
   }

@@ -27,4 +27,5 @@ http://www.earthli.com/software/webcore/recipes
 ****************************************************************************/
   
   require_once ('recipes/start.php');
-  require_once ($App->page_template_for ('webcore/pages/subscribe_to_folder.php'));
+  require_once ($App->page_template_for ('webcore/pages/subscribe_to_comment.php'));
+?>

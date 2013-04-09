@@ -531,11 +531,11 @@ class FORM_RENDERER extends CONTROLS_RENDERER
     if (!empty($style) && sizeof ($style) > 0)
     {
       $style = implode ('; ', $style);
-      echo '<table cellspacing="' . $this->spacing . '" cellpadding="' . $this->padding . '" class="form-' . $this->_form->CSS_class . '" style="' . $style . '">' . "\n";
+      echo '<table class="form-' . $this->_form->CSS_class . '" style="' . $style . '">' . "\n";
     }
     else
     {
-      echo '<table cellspacing="' . $this->spacing . '" cellpadding="' . $this->padding . '">' . "\n";
+      echo '<table>' . "\n";
     }
 
     if ($this->_form->num_errors (Form_general_error_id))

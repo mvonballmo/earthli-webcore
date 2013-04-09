@@ -75,7 +75,7 @@ class OBJECT_NAVIGATOR extends WEBCORE_OBJECT
 
   /**
    * Text for link that goes to previous page in the near list.
-   * If the number of entries in the list is greater than {@link $window_size},
+   * If the number of entries in the list is greater than {@link UNIQUE_OBJECT_CACHE::$window_size},
    * this link is provided to jump 'size' entries back in the list.
    * @var string
    */
@@ -83,7 +83,7 @@ class OBJECT_NAVIGATOR extends WEBCORE_OBJECT
 
   /**
    * Text for link that goes to next page in the near list.
-   * If the number of entries in the list is greater than {@link $window_size},
+   * If the number of entries in the list is greater than {@link UNIQUE_OBJECT_CACHE::$window_size},
    * this link is provided to jump 'window_size' entries forward in the list.
    * @var string
    */
@@ -127,7 +127,6 @@ class OBJECT_NAVIGATOR extends WEBCORE_OBJECT
     parent::__construct ($context);
 
     $opts = $context->display_options;
-    $this->window_size = $opts->objects_to_show;
     $this->num_entries = Unassigned;
     $this->page_link = $this->env->url (Url_part_no_host_path);
   }
@@ -271,9 +270,10 @@ class OBJECT_NAVIGATOR extends WEBCORE_OBJECT
    * Return the object title as a link or text.
    * If this is the selected entry, it is returned as text (with style 'selected'), otherwise
    * a link to the entry's home page is returned.
-   * @param NAMED_OBJECT $obj
-   * @param string $text Text to use; may be empty.
-   * @param string $icon
+   * @param UNIQUE_OBJECT $obj
+   * @param $type The type of button/link to generate.
+   * @internal param string $text Text to use; may be empty.
+   * @internal param string $icon
    * @return string
    * @access private
    */
@@ -298,7 +298,7 @@ class OBJECT_NAVIGATOR extends WEBCORE_OBJECT
 
   /**
    * Return the object title for the list.
-   * @param NAMED_OBJECT $obj
+   * @param UNIQUE_OBJECT $obj
    * @return string
    */
   protected function _text_for_list ($obj)
@@ -328,6 +328,7 @@ class OBJECT_NAVIGATOR extends WEBCORE_OBJECT
   /**
    * Return a formatter for this entry.
    * Override in descendants to customize the formatter.
+   * @param $obj UNIQUE_OBJECT
    * @return TITLE_FORMATTER
    * @access private
    */
@@ -437,6 +438,9 @@ class OBJECT_NAVIGATOR extends WEBCORE_OBJECT
    * @access private
    */
   protected $_url;
-}
 
-?>
+  /**
+   * @var UNIQUE_OBJECT_CACHE
+   */
+  protected $_context;
+}

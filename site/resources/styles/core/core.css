@@ -37,6 +37,7 @@ body
 table
 {
   border-collapse: collapse;
+  border-spacing: 0;
   margin: 0;
   padding: 0;
 }
@@ -327,14 +328,13 @@ pre code
 .form-content, .grid-content
 {
   margin-top: 15px;
+  margin-bottom: 15px;
 }
-
-
 
 .button-content
 {
-  padding-top: 15px;
-  padding-bottom: 15px;
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
 
 .nav-item
@@ -348,40 +348,24 @@ pre code
   clear: both
 }
 
-.footer 
+.footer
 {
   clear: both;
   padding-right: 15px;
   padding-left: 15px;
   margin-top: 15px;
+  border-top: 1px solid #CCC;
+  padding-top: 5px;
 }
 
-@media screen and (min-width:600px)
+.footer-data
 {
-  .footer-data
-  {
-    display: inline-block;
-    vertical-align: top;
-    box-sizing: border-box;
-  }
-
-  .footer-data + .footer-data
-  {
-    padding-left: 15px;
-  }
+  display: block;
 }
 
-@media screen and (max-width:599px)
+.footer-data + .footer-data
 {
-  .footer-data
-  {
-    display: block;
-  }
-
-  .footer-data + .footer-data
-  {
-    margin-top: .3em;
-  }
+  margin-top: .3em;
 }
 
 /* @end */
@@ -577,25 +561,55 @@ td.object-in-list + td.object-in-list
   z-index: 100;
 }
 
+.menu-items.standard li:before
+{
+  content: '|';
+  padding-right: 5px;
+}
+
+.menu-items.objects li:before,
+.menu-items.location li:before
+{
+  content: '>';
+  padding-right: 5px;
+}
+
+.menu-items li:first-child:before
+{
+  content: '';
+  padding-right: 0;
+}
+
 ul.menu-items,
 ul.menu-buttons,
-ul.menu
+ul.menu,
+.text-flow > ul.menu-items,
+.text-flow > ul.menu-buttons,
+.text-flow > ul.menu
 {
+  display: inline-block;
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-ul.menu
-{
-  margin: 0;
-  padding: 0;
-}
-
 ul.menu-items > li,
-ul.menu-buttons > li
+.text-flow ul.menu-items > li
 {
   display: inline-block;
+  margin-right: 5px;
+}
+
+ul.menu-items > li:last-child,
+.text-flow ul.menu-items > li:last-child
+{
+  margin-right: 0;
+}
+
+ul.menu-buttons > li,
+.text-flow ul.menu-buttons > li
+{
+  padding: 0;
 }
 
 ul.menu-items .menu li

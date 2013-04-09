@@ -50,59 +50,30 @@ require_once ('webcore/gui/object_renderer.php');
 abstract class SUBSCRIPTION_RENDERER extends HANDLER_RENDERER
 {
   /**
-   * Show a button to toggle subscribe status.
-   * @param AUDITABLE $obj
-   * @param string $page_name Location of "toggle" url.
-   * @param string $kind Can be any of the {@link Subscribe_constants}.
-   * @access private
+   * Returns a list of commands for this renderer.
+   * @return \COMMANDS
    */
-  protected function _echo_html_subscribed_toggle ($obj, $page_name, $kind)
+  public function make_commands ()
   {
-    if ($this->_options->show_interactive)
-    {
-      $subscriber = $this->login->subscriber ();
-      if ($subscriber->email)
-      {
-        $kinds = $subscriber->receives_notifications_through ($obj);
+    $Result = new COMMANDS($this->context);
 
-        $obj_type_info = $obj->type_info ();
-        $obj_title = strtolower ($obj_type_info->singular_title);
-        $directly_subscribed = in_array ($kind, $kinds);
+//    if ($this->_comment_query->size () > 1)
+//    {
+//      $command = $Result->make_command();
+//      switch ($this->comment_mode)
+//      {
+//        case Comment_render_flat:
+//          $command->caption = 'Show Threaded';
+//          $command->link = $this->_obj->home_page () . "&comment_mode=threaded#comments";
+//          break;
+//        case Comment_render_threaded:
+//          $command->caption = 'Show Flat';
+//          $command->link = $this->_obj->home_page () . "&comment_mode=flat#comments";
+//          break;
+//      }
+//    }
 
-        $url = new URL ($page_name);
-        $url->add_arguments ('email=' . $subscriber->email . '&subscribed=' . ! $directly_subscribed);
-
-        $icon = $this->context->resolve_icon_as_html ('{icons}indicators/subscribed', 'Subscribed', '16px', '');
-        if (sizeof ($kinds) > 0)
-        {
-          if ($directly_subscribed)
-          {
-            $text = 'You are subscribed to this ' . $obj_title . '. (<a href="' . $url->as_html () . '">Unsubscribe</a>)';
-          }
-          else
-          {
-            if (in_array (Subscribe_user, $kinds))
-            {
-              $creator = $obj->creator ();
-              $text = 'You are subscribed to this ' . $obj_title . ' through the user, ' . $creator->title_as_link () . '.';
-            }
-            else
-            {
-              $folder = $obj->parent_folder ();
-              $folder_type_info = $folder->type_info ();
-              $folder_title = strtolower ($folder_type_info->singular_title);
-              $text = 'You are subscribed to this ' . $obj_title . ' through its ' . $folder_title . ', ' . $folder->title_as_link () . '.';
-            }
-          }
-        }
-        else
-        {
-          $text = 'You are <strong>not</strong> subscribed to this ' . $obj_title . '. (<a href="' . $url->as_html () . '">Subscribe</a>)';
-        }
-
-        echo '<div class="status-indicator"><div style="float: left">' . $icon . '</div><div style="margin-left: 20px">' . $text . '</div></div>';
-      }
-    }
+    return $Result;
   }
 }
 
@@ -115,7 +86,97 @@ class COMMENT_SUBSCRIPTION_RENDERER extends SUBSCRIPTION_RENDERER
    */
   public function display ($obj, $options = null)
   {
-    $this->_echo_html_subscribed_toggle ($obj, 'subscribe_to_comment.php?id=' . $obj->id, Subscribe_comment);
+    $subscriber = $this->login->subscriber ();
+    if ($subscriber->email)
+    {
+      $kinds = $subscriber->receives_notifications_through ($obj);
+
+      $obj_type_info = $obj->type_info ();
+      $obj_title = strtolower ($obj_type_info->singular_title);
+
+      $directly_subscribed = in_array (Subscribe_comment, $kinds);
+      $url = new URL ('subscribe_to_comment.php');
+      $url->add_argument('id', $obj->id);
+      $url->add_argument('email', $subscriber->email);
+      $url->add_argument ('subscribed', !$directly_subscribed);
+
+      if ($directly_subscribed)
+      {
+        $text = 'You are subscribed directly to this ' . $obj_title . '.';
+      }
+      else
+      {
+        $text = 'You are <strong>not</strong> directly subscribed to this ' . $obj_title . '.';
+      }
+
+      $caption = $directly_subscribed ? 'Unsubscribe' : 'Subscribe';
+
+      echo '<p>' . $text . ' <a class="button" href="' . $url->as_html() . '">' . $caption . '</a></p>';
+
+      $creator = $obj->creator ();
+      $directly_subscribed = in_array (Subscribe_user, $kinds);
+      $url = new URL ('subscribe_to_user.php');
+      $url->add_argument('name', $creator->title);
+      $url->add_argument('email', $subscriber->email);
+      $url->add_argument ('subscribed', !$directly_subscribed);
+
+      if ($directly_subscribed)
+      {
+        $text = 'You are subscribed to the creator of this ' . $obj_title . ', ' . $creator->title_as_link () . '.';
+      }
+      else
+      {
+        $text = 'You are <strong>not</strong> subscribed to the creator of this ' . $obj_title . ', ' . $creator->title_as_link () . '.';
+      }
+
+      $caption = $directly_subscribed ? 'Unsubscribe' : 'Subscribe';
+
+      echo '<p>' . $text . ' <a class="button" href="' . $url->as_html() . '">' . $caption . '</a></p>';
+
+      $entry = $obj->entry ();
+      $entry_type_info = $entry->type_info ();
+      $entry_title = strtolower ($entry_type_info->singular_title);
+      $directly_subscribed = in_array (Subscribe_entry, $kinds);
+      $url = new URL ('subscribe_to_entry.php');
+      $url->add_argument('id', $entry->id);
+      $url->add_argument('email', $subscriber->email);
+      $url->add_argument ('subscribed', !$directly_subscribed);
+
+      if ($directly_subscribed)
+      {
+        $text = 'You are subscribed to this ' . $obj_title . ' through its ' . $entry_title . ', ' . $entry->title_as_link () . '.';
+      }
+      else
+      {
+        $text = 'You are <strong>not</strong> subscribed to this ' . $obj_title . ' through its ' . $entry_title . ', ' . $entry->title_as_link () . '.';
+      }
+
+      $caption = $directly_subscribed ? 'Unsubscribe' : 'Subscribe';
+
+      echo '<p>' . $text . ' <a class="button" href="' . $url->as_html() . '">' . $caption . '</a></p>';
+
+      $folder = $obj->parent_folder ();
+      $folder_type_info = $folder->type_info ();
+      $folder_title = strtolower ($folder_type_info->singular_title);
+      $directly_subscribed = in_array (Subscribe_folder, $kinds);
+      $url = new URL ('subscribe_to_folder.php');
+      $url->add_argument('id', $folder->id);
+      $url->add_argument('email', $subscriber->email);
+      $url->add_argument ('subscribed', !$directly_subscribed);
+
+      if ($directly_subscribed)
+      {
+        $text = 'You are subscribed to this ' . $obj_title . ' through its ' . $folder_title . ', ' . $folder->title_as_link () . '.';
+      }
+      else
+      {
+        $text = 'You are <strong>not</strong> subscribed to this ' . $obj_title . ' through its ' . $folder_title . ', ' . $folder->title_as_link () . '.';
+      }
+
+      $caption = $directly_subscribed ? 'Unsubscribe' : 'Subscribe';
+
+      echo '<p>' . $text . ' <a class="button" href="' . $url->as_html() . '">' . $caption . '</a></p>';
+    }
   }
 }
 
@@ -128,7 +189,54 @@ class FOLDER_SUBSCRIPTION_RENDERER extends SUBSCRIPTION_RENDERER
    */
   public function display ($obj, $options = null)
   {
-    $this->_echo_html_subscribed_toggle ($obj, 'subscribe_to_folder.php?id=' . $obj->id, Subscribe_folder);
+    $subscriber = $this->login->subscriber ();
+    if ($subscriber->email)
+    {
+      $page_name = 'subscribe_to_folder.php?id=' . $obj->id;
+      $kind = Subscribe_folder;
+      $kinds = $subscriber->receives_notifications_through ($obj);
+
+      $directly_subscribed = in_array ($kind, $kinds);
+
+      $url = new URL ($page_name);
+      $url->add_arguments ('email=' . $subscriber->email . '&subscribed=' . ! $directly_subscribed);
+
+      $folder_type_info = $obj->type_info ();
+      $folder_title = strtolower ($folder_type_info->singular_title);
+
+      if ($directly_subscribed)
+      {
+        $text = 'You are directly subscribed to this ' . $folder_title . '.';
+      }
+      else
+      {
+        $text = 'You are <strong>not</strong> directly subscribed to this ' . $folder_title . '.';
+      }
+
+      $caption = $directly_subscribed ? 'Unsubscribe' : 'Subscribe';
+
+      echo '<p>' . $text . ' <a class="button" href="' . $url->as_html() . '">' . $caption . '</a></p>';
+
+      $creator = $obj->creator ();
+      $directly_subscribed = in_array (Subscribe_user, $kinds);
+      $url = new URL ('subscribe_to_user.php');
+      $url->add_argument('name', $creator->title);
+      $url->add_argument('email', $subscriber->email);
+      $url->add_argument ('subscribed', !$directly_subscribed);
+
+      if ($directly_subscribed)
+      {
+        $text = 'You are subscribed to the creator of this ' . $folder_title . ', ' . $creator->title_as_link () . '.';
+      }
+      else
+      {
+        $text = 'You are <strong>not</strong> subscribed to the creator of this ' . $folder_title . ', ' . $creator->title_as_link () . '.';
+      }
+
+      $caption = $directly_subscribed ? 'Unsubscribe' : 'Subscribe';
+
+      echo '<p>' . $text . ' <a class="button" href="' . $url->as_html() . '">' . $caption . '</a></p>';
+    }
   }
 }
 
@@ -141,7 +249,31 @@ class USER_SUBSCRIPTION_RENDERER extends SUBSCRIPTION_RENDERER
    */
   public function display ($obj, $options = null)
   {
-    $this->_echo_html_subscribed_toggle ($obj, 'subscribe_to_user.php?name=' . $obj->title, Subscribe_user);
+    $subscriber = $this->login->subscriber ();
+    if ($subscriber->email)
+    {
+      $page_name = 'subscribe_to_user.php?name=' . $obj->title;
+      $kind = Subscribe_user;
+      $kinds = $subscriber->receives_notifications_through ($obj);
+
+      $directly_subscribed = in_array ($kind, $kinds);
+
+      $url = new URL ($page_name);
+      $url->add_arguments ('email=' . $subscriber->email . '&subscribed=' . ! $directly_subscribed);
+
+      if ($directly_subscribed)
+      {
+        $text = 'You are subscribed to this user.';
+      }
+      else
+      {
+        $text = 'You are <strong>not</strong> subscribed to this user.';
+      }
+
+      $caption = $directly_subscribed ? 'Unsubscribe' : 'Subscribe';
+
+      echo '<p>' . $text . ' <a class="button" href="' . $url->as_html() . '">' . $caption . '</a></p>';
+    }
   }
 }
 
@@ -149,11 +281,81 @@ class ENTRY_SUBSCRIPTION_RENDERER extends SUBSCRIPTION_RENDERER
 {
   /**
    * Outputs the subscription options for the given {@link $obj}.
-   * @param COMMENT $obj
+   * @param ENTRY $obj
    * @param OBJECT_RENDERER_OPTIONS $options
    */
   public function display ($obj, $options = null)
   {
-    $this->_echo_html_subscribed_toggle ($obj, 'subscribe_to_entry.php?id=' . $obj->id, Subscribe_entry);
+    $subscriber = $this->login->subscriber ();
+    if ($subscriber->email)
+    {
+      $kind = Subscribe_entry;
+      $kinds = $subscriber->receives_notifications_through ($obj);
+
+      $obj_type_info = $obj->type_info ();
+      $obj_title = strtolower ($obj_type_info->singular_title);
+
+      $directly_subscribed = in_array ($kind, $kinds);
+      $url = new URL ('subscribe_to_entry.php');
+      $url->add_argument('id', $obj->id);
+      $url->add_argument('email', $subscriber->email);
+      $url->add_argument ('subscribed', !$directly_subscribed);
+
+      if ($directly_subscribed)
+      {
+        $text = 'You are subscribed directly to this ' . $obj_title . '.';
+      }
+      else
+      {
+        $text = 'You are <strong>not</strong> directly subscribed to this ' . $obj_title . '.';
+      }
+
+      $caption = $directly_subscribed ? 'Unsubscribe' : 'Subscribe';
+
+      echo '<p>' . $text . ' <a class="button" href="' . $url->as_html() . '">' . $caption . '</a></p>';
+
+      $creator = $obj->creator ();
+      $directly_subscribed = in_array (Subscribe_user, $kinds);
+      $url = new URL ('subscribe_to_user.php');
+      $url->add_argument('name', $creator->title);
+      $url->add_argument('email', $subscriber->email);
+      $url->add_argument ('subscribed', !$directly_subscribed);
+      $href = $url->as_html();
+
+      if ($directly_subscribed)
+      {
+        $text = 'You are subscribed to the creator of this ' . $obj_title . ', ' . $creator->title_as_link () . '.';
+      }
+      else
+      {
+        $text = 'You are <strong>not</strong> subscribed to the creator of this ' . $obj_title . ', ' . $creator->title_as_link () . '.';
+      }
+
+      $caption = $directly_subscribed ? 'Unsubscribe' : 'Subscribe';
+
+      echo '<p>' . $text . ' <a class="button" href="' . $href . '">' . $caption . '</a></p>';
+
+      $folder = $obj->parent_folder ();
+      $folder_type_info = $folder->type_info ();
+      $folder_title = strtolower ($folder_type_info->singular_title);
+      $directly_subscribed = in_array (Subscribe_folder, $kinds);
+      $url = new URL ('subscribe_to_folder.php');
+      $url->add_argument('id', $folder->id);
+      $url->add_argument('email', $subscriber->email);
+      $url->add_argument ('subscribed', !$directly_subscribed);
+
+      if ($directly_subscribed)
+      {
+        $text = 'You are subscribed to this ' . $obj_title . ' through its ' . $folder_title . ', ' . $folder->title_as_link () . '.';
+      }
+      else
+      {
+        $text = 'You are <strong>not</strong> subscribed to this ' . $obj_title . ' through its ' . $folder_title . ', ' . $folder->title_as_link () . '.';
+      }
+
+      $caption = $directly_subscribed ? 'Unsubscribe' : 'Subscribe';
+
+      echo '<p>' . $text . ' <a class="button" href="' . $url->as_html() . '">' . $caption . '</a></p>';
+    }
   }
 }

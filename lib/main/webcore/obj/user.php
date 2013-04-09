@@ -825,7 +825,7 @@ class USER extends CONTENT_OBJECT
   /**
    * Return default handler objects for supported tasks.
    * @param string $handler_type Specific functionality required.
-   * @param object $options
+   * @param OBJECT_RENDERER_OPTIONS $options
    * @return object
    * @access private
    */
@@ -846,7 +846,7 @@ class USER extends CONTENT_OBJECT
         return new USER_HISTORY_ITEM ($this->app);
       case Handler_subscriptions:
         include_once ('webcore/gui/subscription_renderer.php');
-        return new ENTRY_SUBSCRIPTION_RENDERER ($this->app, $options);
+        return new USER_SUBSCRIPTION_RENDERER ($this->app, $options);
       default:
         return parent::_default_handler_for ($handler_type, $options);
     }
