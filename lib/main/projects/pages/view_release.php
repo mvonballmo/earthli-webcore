@@ -119,11 +119,14 @@ http://www.earthli.com/software/webcore/projects
     $form->set_value ('folder_ids', $folder->id);
     $form->display ();
 
+    echo '<h4>Tools</h4>';
+    echo '<div class="button-content">';
     $renderer = $App->make_menu_renderer ();
-    $renderer->set_size(Menu_size_minimal);
+    $renderer->set_size(Menu_size_compact);
     /** @var $commands COMMANDS */
-    $commands = $release->handler_for(Handler_commands);
+    $commands = $branch->handler_for(Handler_commands);
     $renderer->display ($commands);
+    echo '</div>';
 
     $box->finish_column_set ();
 ?>

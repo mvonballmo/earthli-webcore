@@ -71,7 +71,7 @@ class COMMENT_COMMANDS extends COMMANDS
     $cmd->caption = 'Subscribe';
     $cmd->link = 'subscribe_to_comment.php?id=' . $comment->id . '&email=' . $this->login->email . '&subscribed=1';
     $cmd->icon = '{icons}indicators/subscribed';
-    $cmd->executable = $this->login->email && $this->login->is_allowed (Privilege_set_comment, Privilege_view, $comment);
+    $cmd->executable = $this->login->is_allowed (Privilege_set_comment, Privilege_view, $comment);
     $cmd->importance = Command_importance_high - Command_importance_increment;
     $this->append ($cmd);
 

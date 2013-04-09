@@ -29,6 +29,11 @@ http://www.earthli.com/software/webcore
   $Page->title->subject = 'Subscribe';
 
   $email = read_var ('email');
+  if (! $email)
+  {
+    $Env->redirect_local('create_subscriber.php');
+  }
+
   $subscribed = read_var ('subscribed');
 
   if (isset ($obj) && $email)

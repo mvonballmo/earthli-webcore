@@ -66,7 +66,7 @@ class USER_COMMANDS extends COMMANDS
       $cmd->caption = 'Subscribe';
       $cmd->link = 'subscribe_to_user.php?name=' . $title . '&email=' . $this->login->email . '&subscribed=1';
       $cmd->icon = '{icons}indicators/subscribed';
-      $cmd->executable = $this->login->email && $this->login->is_allowed (Privilege_set_user, Privilege_view, $user);
+      $cmd->executable = $this->login->is_allowed (Privilege_set_user, Privilege_view, $user);
       $cmd->importance = Command_importance_high - Command_importance_increment;
       $this->append ($cmd);
 

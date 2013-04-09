@@ -173,7 +173,8 @@ class USER_SUBSCRIPTION_OPTIONS_FORM extends SUBSCRIPTION_FORM
   public function load_with_defaults ()
   {
     parent::load_with_defaults ();
-    $this->set_value ('new_email', $_REQUEST ['email']);
+    $email = read_var('email');
+    $this->set_value ('new_email', $email);
     $this->set_value ('send_as_html', 1);
 
     $this->set_value ('max_individual_messages', 3);
@@ -225,6 +226,7 @@ class USER_SUBSCRIPTION_OPTIONS_FORM extends SUBSCRIPTION_FORM
 
     if (! $this->value_for ('group_objects'))
     {
+      /** @var $field INTEGER_FIELD */
       $field = $this->field_at ('max_individual_messages');
       $field->required = false;
       $field->set_value (0);
@@ -368,7 +370,11 @@ class USER_SUBSCRIPTION_OPTIONS_FORM extends SUBSCRIPTION_FORM
   protected function _draw_controls ($renderer)
   {
     $user_query = $this->app->user_query ();
-    $user = $user_query->object_at_email ($this->value_for ('email'));
+    $email = $this->value_for('email');
+    if (!empty($email))
+    {
+      $user = $user_query->object_at_email ($email);
+    }
     if (isset ($user))
     {
       $field = $this->field_at ('new_email');

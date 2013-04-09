@@ -38,6 +38,7 @@ http://www.earthli.com/software/webcore
 
   if (! empty ($show_only_root_folders))
   {
+    /** @var $folder FOLDER */
     $folder = $folder_query->object_at_id ($App->root_folder_id);
     $folder_query->restrict ('parent_id = ' . $App->root_folder_id);
 
@@ -65,6 +66,7 @@ http://www.earthli.com/software/webcore
   }
 
   $class_name = $App->final_class_name ('INDEX_PANEL_MANAGER', 'webcore/gui/panel.php');
+  /** @var $panel_manager INDEX_PANEL_MANAGER */
   $panel_manager = new $class_name ($App, $folders);
   $panel = $panel_manager->selected_panel ();
 
@@ -97,6 +99,7 @@ http://www.earthli.com/software/webcore
 
     if (isset ($folder))
     {
+      /** @var $renderer OBJECT_RENDERER */
       $renderer = $folder->handler_for (Handler_html_renderer);
       $options = $renderer->options ();
       $options->show_as_summary = true;
@@ -117,6 +120,7 @@ http://www.earthli.com/software/webcore
     echo '<h4>';
 
     $newsfeed_commands = $Page->newsfeed_options->make_commands($App);
+    /** @var $renderer MENU_RENDERER */
     $renderer = $App->make_newsfeed_menu_renderer ();
     $renderer->alignment = Menu_align_inline;
     $renderer->display ($newsfeed_commands);
@@ -150,18 +154,14 @@ http://www.earthli.com/software/webcore
     $class_name = $App->final_class_name ('EXECUTE_SEARCH_FORM', 'webcore/forms/execute_search_form.php');
     $search = null;
     $selected_panel = $panel_manager->selected_panel ();
+    /** @var $form EXECUTE_SEARCH_FORM */
     $form = new $class_name ($App, $search);
     $form->load_with_defaults ();
     $form->set_value ('state', $selected_panel->state);
     $form->display ();
 
-    echo '<h4>Subscriptions</h4>';
-
-    include_once ('webcore/forms/check_subscriptions_form.php');
-    $form = new CHECK_SUBSCRIPTIONS_FORM ($App);
-    $form->CSS_class = 'search';
-    $form->allow_focus = false;
-    $form->display ();
+    echo '<h4>Tools</h4>';
+    echo '<div class="button-content">';
 
     $panel_commands = $panel->commands ();
     if (isset ($panel_commands))
@@ -169,15 +169,19 @@ http://www.earthli.com/software/webcore
       $renderer = $App->make_menu_renderer ();
       $renderer->set_size (Menu_size_full);
       $renderer->content_mode = Menu_show_as_buttons | Menu_show_icon;
-      $renderer->display_as_toolbar ($panel_commands);
+      $renderer->display ($panel_commands);
     }
 
     if (isset ($folder))
     {
       $renderer = $folder->handler_for (Handler_menu);
-      $renderer->set_size (Menu_size_minimal);
-      $renderer->display ($folder->handler_for (Handler_commands));
+      $renderer->set_size (Menu_size_compact);
+      /** @var $commands COMMANDS */
+      $commands = $folder->handler_for(Handler_commands);
+      $renderer->display ($commands);
     }
+
+    echo '</div>';
 
     $box->finish_column_set ();
     ?>

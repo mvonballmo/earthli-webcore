@@ -28,50 +28,48 @@ http://www.earthli.com/software/webcore
 
   $email = read_var ('email');
 
-  if ($email)
+  $subscriber_query = $App->subscriber_query ();
+
+  if (!empty($email))
   {
-    $subscriber_query = $App->subscriber_query ();
     $subscriber = $subscriber_query->object_at_email ($email);
+  }
 
-    if (isset ($subscriber))
-    {
-      $Env->redirect_local ($subscriber->home_page ());
-    }
-    else
-    {
-      $class_name = $App->final_class_name ('USER_SUBSCRIPTION_OPTIONS_FORM', 'webcore/forms/user_subscription_options_form.php');
-      $form = new $class_name ($App);
-
-      $subscriber = $App->new_subscriber ();
-
-      $form->process_new ($subscriber);
-      if ($form->committed ())
-      {
-        $Env->redirect_local ($subscriber->home_page ());
-      }
-
-      $Page->title->subject = "Create subscriber";
-
-      $Page->location->add_root_link ();
-      $Page->location->append ($Page->title->subject, '', '{icons}buttons/create');
-
-      $Page->start_display ();
-  ?>
-  <div class="box">
-    <div class="box-body form-content">
-    <?php
-      $form->button = 'Create';
-      $form->button_icon = '{icons}buttons/create';
-      $form->display ();
-    ?>
-    </div>
-  </div>
-  <?php
-      $Page->finish_display ();
-    }
+  if (isset ($subscriber))
+  {
+    $Env->redirect_local ($subscriber->home_page ());
   }
   else
   {
-    $Page->raise_error ('Please enter an email address.');
+    $class_name = $App->final_class_name ('USER_SUBSCRIPTION_OPTIONS_FORM', 'webcore/forms/user_subscription_options_form.php');
+    /** @var $form USER_SUBSCRIPTION_OPTIONS_FORM */
+    $form = new $class_name ($App);
+
+    $subscriber = $App->new_subscriber ();
+
+    $form->process_new ($subscriber);
+    if ($form->committed ())
+    {
+      $Env->redirect_local ($subscriber->home_page ());
+    }
+
+    $Page->title->subject = "Create subscriber";
+
+    $Page->location->add_root_link ();
+    $Page->location->append ($Page->title->subject, '', '{icons}buttons/create');
+
+    $Page->start_display ();
+?>
+<div class="box">
+  <div class="box-body form-content">
+  <?php
+    $form->button = 'Create';
+    $form->button_icon = '{icons}buttons/create';
+    $form->display ();
+  ?>
+  </div>
+</div>
+<?php
+    $Page->finish_display ();
   }
 ?>
