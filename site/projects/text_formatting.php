@@ -1,7 +1,7 @@
 <?php
 /****************************************************************************
 
-Copyright (c) 2002-2010 Marco Von Ballmoos
+Copyright (c) 2002-2013 Marco Von Ballmoos
 
 This file is part of earthli Projects.
 
@@ -27,4 +27,4 @@ http://www.earthli.com/software/webcore/projects
   
   require_once ('projects/start.php');
   require_once ($App->page_template_for ('webcore/pages/text_formatting.php'));
-?>
+?>

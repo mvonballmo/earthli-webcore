@@ -2,7 +2,7 @@
 
 /****************************************************************************
 
-Copyright (c) 2002-2010 Marco Von Ballmoos
+Copyright (c) 2002-2013 Marco Von Ballmoos
 
 This file is part of earthli Albums.
 
@@ -31,4 +31,4 @@ http://www.earthli.com/software/webcore/albums
   $types [] = 'journal';
   require_once ($App->page_template_for ('webcore/pages/view_users.php'));
 ?>
-
+

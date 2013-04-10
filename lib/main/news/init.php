@@ -4,7 +4,7 @@
  * Initialization file for the {@link NEWS_APPLICATION}.
  * Use {@link ENVIROMENT::make_application()} with {@link News_application_id}
  * to create an instance.
- * @copyright Copyright (c) 2002-2010 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2013 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package news
@@ -14,7 +14,7 @@
 
 /****************************************************************************
 
-Copyright (c) 2002-2010 Marco Von Ballmoos
+Copyright (c) 2002-2013 Marco Von Ballmoos
 
 This file is part of earthli News.
 

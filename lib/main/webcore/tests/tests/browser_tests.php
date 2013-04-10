@@ -2,7 +2,7 @@
 
 /**
  * WebCore Testsuite Component.
- * @copyright Copyright (c) 2002-2010 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2013 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package webcore
@@ -14,7 +14,7 @@
 
 /****************************************************************************
 
-Copyright (c) 2002-2010 Marco Von Ballmoos
+Copyright (c) 2002-2013 Marco Von Ballmoos
 
 This file is part of earthli WebCore.
 
@@ -507,9 +507,9 @@ class BROWSER_TEST_TASK extends TEST_TASK
           $this->_check (!$date->is_valid (), 'Date should not be valid');
           $this->_check ($browser->is (Browser_robot), 'Browser should be a robot.');
 
-    $browser->load_from_string ('WebSearchBench WebCrawler V1.0 (Beta), Prof. Dr.-Ing. Christoph Lindemann, Universität Dortmund, cl@cs.uni-dortmund.de, http://websearchbench.cs.uni-dortmund.de/');
+    $browser->load_from_string ('WebSearchBench WebCrawler V1.0 (Beta), Prof. Dr.-Ing. Christoph Lindemann, Universitï¿½t Dortmund, cl@cs.uni-dortmund.de, http://websearchbench.cs.uni-dortmund.de/');
 
-          $this->_check_equal ('WebSearchBench WebCrawler V1.0 (Beta), Prof. Dr.-Ing. Christoph Lindemann, Universität Dortmund, cl@cs.uni-dortmund.de, http://websearchbench.cs.uni-dortmund.de/', $browser->user_agent_string);
+          $this->_check_equal ('WebSearchBench WebCrawler V1.0 (Beta), Prof. Dr.-Ing. Christoph Lindemann, Universitï¿½t Dortmund, cl@cs.uni-dortmund.de, http://websearchbench.cs.uni-dortmund.de/', $browser->user_agent_string);
           $this->_check_equal ('Unknown', $browser->system_id ());
           $this->_check_equal ('Unknown', $browser->calculated_system_name ());
           $this->_check_equal ('Unknown', $browser->system_name ());

@@ -2,7 +2,7 @@
 
 /****************************************************************************
 
-Copyright (c) 2002-2010 Marco Von Ballmoos
+Copyright (c) 2002-2013 Marco Von Ballmoos
 
 This file is part of earthli Projects.
 
@@ -30,4 +30,4 @@ http://www.earthli.com/software/webcore/projects
   require_once ('projects/gui/project_panel.php');
   $panel_manager_class_name = 'PROJECT_USER_PANEL_MANAGER';
   require_once ($App->page_template_for ('webcore/pages/view_user.php'));
-?>
+?>

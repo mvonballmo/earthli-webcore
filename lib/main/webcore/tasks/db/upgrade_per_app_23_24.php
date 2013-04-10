@@ -2,7 +2,7 @@
 
 /****************************************************************************
 
-Copyright (c) 2002-2010 Marco Von Ballmoos
+Copyright (c) 2002-2013 Marco Von Ballmoos
 
 This file is part of earthli WebCore.
 
@@ -96,33 +96,33 @@ abstract class UPGRADE_PER_APP_23_24_TASK extends MIGRATOR_TASK
     $this->_query ("UPDATE $table_name SET title = REPLACE(title, '&amp;', '&'), description = REPLACE(description, '&amp;', '&');");
     $this->_query ("UPDATE $table_name SET title = REPLACE(title, '&quot;', '\"'), description = REPLACE(description, '&quot;', '\"');");
 
-    $this->_query ("UPDATE $table_name SET title = REPLACE(title, '&uuml;', 'ü'), description = REPLACE(description, '&uuml;', 'ü');");
-    $this->_query ("UPDATE $table_name SET title = REPLACE(title, '&Uuml;', 'Ü'), description = REPLACE(description, '&Uuml;', 'Ü');");
+    $this->_query ("UPDATE $table_name SET title = REPLACE(title, '&uuml;', 'ï¿½'), description = REPLACE(description, '&uuml;', 'ï¿½');");
+    $this->_query ("UPDATE $table_name SET title = REPLACE(title, '&Uuml;', 'ï¿½'), description = REPLACE(description, '&Uuml;', 'ï¿½');");
 
-    $this->_query ("UPDATE $table_name SET title = REPLACE(title, '&ouml;', 'ö'), description = REPLACE(description, '&ouml;', 'ö');");
-    $this->_query ("UPDATE $table_name SET title = REPLACE(title, '&Ouml;', 'Ö'), description = REPLACE(description, '&Ouml;', 'Ö');");
+    $this->_query ("UPDATE $table_name SET title = REPLACE(title, '&ouml;', 'ï¿½'), description = REPLACE(description, '&ouml;', 'ï¿½');");
+    $this->_query ("UPDATE $table_name SET title = REPLACE(title, '&Ouml;', 'ï¿½'), description = REPLACE(description, '&Ouml;', 'ï¿½');");
 
-    $this->_query ("UPDATE $table_name SET title = REPLACE(title, '&auml;', 'ä'), description = REPLACE(description, '&auml;', 'ä');");
-    $this->_query ("UPDATE $table_name SET title = REPLACE(title, '&Auml;', 'Ä'), description = REPLACE(description, '&Auml;', 'Ä');");
+    $this->_query ("UPDATE $table_name SET title = REPLACE(title, '&auml;', 'ï¿½'), description = REPLACE(description, '&auml;', 'ï¿½');");
+    $this->_query ("UPDATE $table_name SET title = REPLACE(title, '&Auml;', 'ï¿½'), description = REPLACE(description, '&Auml;', 'ï¿½');");
 
-    $this->_query ("UPDATE $table_name SET title = REPLACE(title, '&egrave;', 'é'), description = REPLACE(description, '&egrave;', 'é');");
-    $this->_query ("UPDATE $table_name SET title = REPLACE(title, '&Egrave;', 'É'), description = REPLACE(description, '&Egrave;', 'É');");
+    $this->_query ("UPDATE $table_name SET title = REPLACE(title, '&egrave;', 'ï¿½'), description = REPLACE(description, '&egrave;', 'ï¿½');");
+    $this->_query ("UPDATE $table_name SET title = REPLACE(title, '&Egrave;', 'ï¿½'), description = REPLACE(description, '&Egrave;', 'ï¿½');");
 
-    $this->_query ("UPDATE $table_name SET title = REPLACE(title, '&eacute;', 'è'), description = REPLACE(description, '&eacute;', 'è');");
-    $this->_query ("UPDATE $table_name SET title = REPLACE(title, '&Eacute;', 'È'), description = REPLACE(description, '&Eacute;', 'È');");
+    $this->_query ("UPDATE $table_name SET title = REPLACE(title, '&eacute;', 'ï¿½'), description = REPLACE(description, '&eacute;', 'ï¿½');");
+    $this->_query ("UPDATE $table_name SET title = REPLACE(title, '&Eacute;', 'ï¿½'), description = REPLACE(description, '&Eacute;', 'ï¿½');");
 
-    $this->_query ("UPDATE $table_name SET title = REPLACE(title, '&deg;', '°'), description = REPLACE(description, '&deg;', '°');");
+    $this->_query ("UPDATE $table_name SET title = REPLACE(title, '&deg;', 'ï¿½'), description = REPLACE(description, '&deg;', 'ï¿½');");
 
-    $this->_query ("UPDATE $table_name SET title = REPLACE(title, 'Ã¤', 'ä'), description = REPLACE(description, 'Ã¤', 'ä');");
-    $this->_query ("UPDATE $table_name SET title = REPLACE(title, 'Ã„', 'Ä'), description = REPLACE(description, 'Ã„', 'Ä');");
-    $this->_query ("UPDATE $table_name SET title = REPLACE(title, 'Ã¼', 'ü'), description = REPLACE(description, 'Ã¼', 'ü');");
-    $this->_query ("UPDATE $table_name SET title = REPLACE(title, 'Ãœ', 'Ü'), description = REPLACE(description, 'Ãœ', 'Ü');");
-    $this->_query ("UPDATE $table_name SET title = REPLACE(title, 'Ã¶', 'ö'), description = REPLACE(description, 'Ã¶', 'ö');");
+    $this->_query ("UPDATE $table_name SET title = REPLACE(title, 'Ã¤', 'ï¿½'), description = REPLACE(description, 'Ã¤', 'ï¿½');");
+    $this->_query ("UPDATE $table_name SET title = REPLACE(title, 'Ã„', 'ï¿½'), description = REPLACE(description, 'Ã„', 'ï¿½');");
+    $this->_query ("UPDATE $table_name SET title = REPLACE(title, 'Ã¼', 'ï¿½'), description = REPLACE(description, 'Ã¼', 'ï¿½');");
+    $this->_query ("UPDATE $table_name SET title = REPLACE(title, 'Ãœ', 'ï¿½'), description = REPLACE(description, 'Ãœ', 'ï¿½');");
+    $this->_query ("UPDATE $table_name SET title = REPLACE(title, 'Ã¶', 'ï¿½'), description = REPLACE(description, 'Ã¶', 'ï¿½');");
 
-    // deliberate hack here because there is one entry with this combination that should obviously translate to Ü
-    // and it's in the title. The other two are in the description and appear to map to Ä
+    // deliberate hack here because there is one entry with this combination that should obviously translate to ï¿½
+    // and it's in the title. The other two are in the description and appear to map to ï¿½
 
-    $this->_query ("UPDATE $table_name SET title = REPLACE(title, 'Ã?', 'Ü'), description = REPLACE(description, 'Ã?', 'Ä');");
+    $this->_query ("UPDATE $table_name SET title = REPLACE(title, 'ï¿½?', 'ï¿½'), description = REPLACE(description, 'ï¿½?', 'ï¿½');");
   }
 }
 

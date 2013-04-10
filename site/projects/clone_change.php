@@ -2,7 +2,7 @@
 
 /****************************************************************************
 
-Copyright (c) 2002-2010 Marco Von Ballmoos
+Copyright (c) 2002-2013 Marco Von Ballmoos
 
 This file is part of earthli Webcore.
 
@@ -29,4 +29,4 @@ http://www.earthli.com/software/webcore
   require_once ('projects/start.php');
   $entry_type_info = $App->type_info_for ('CHANGE', 'projects/obj/change.php');
   require_once ($App->page_template_for ('webcore/pages/clone_entry.php'));
-?>
+?>

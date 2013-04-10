@@ -2,7 +2,7 @@
 
 /**
  * WebCore Testsuite Component.
- * @copyright Copyright (c) 2002-2010 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2013 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package webcore
@@ -14,7 +14,7 @@
 
 /****************************************************************************
 
-Copyright (c) 2002-2010 Marco Von Ballmoos
+Copyright (c) 2002-2013 Marco Von Ballmoos
 
 This file is part of earthli WebCore.
 
@@ -95,16 +95,16 @@ class FILE_TEST_TASK extends TEST_TASK
   
   private function _test_normalized_ids()
   {
-    $this->_check_equal ('untergeordnet_asthetisch', normalize_file_id ('Untergeordnet Ästhetisch'));
-    $this->_check_equal ('untergeordnet_asthetisch', normalize_file_id ('Untergeordnet    Ästhetisch'));
-    $this->_check_equal ('aaaaeeeeiiiioooouuuuaaaaeeeeiiiioooouuuunncc', normalize_file_id ('äáàâëéèêïíìîöóòôüúùûÄÁÀÂËÉÈÊÏÍÌÎÖÓÒÔÜÚÙÛñÑçÇ'));
+    $this->_check_equal ('untergeordnet_asthetisch', normalize_file_id ('Untergeordnet ï¿½sthetisch'));
+    $this->_check_equal ('untergeordnet_asthetisch', normalize_file_id ('Untergeordnet    ï¿½sthetisch'));
+    $this->_check_equal ('aaaaeeeeiiiioooouuuuaaaaeeeeiiiioooouuuunncc', normalize_file_id ('ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'));
     
     $opts = global_file_options ();
     $opts->normalized_ids_are_lower_case = false;
     
-    $this->_check_equal ('Untergeordnet_Asthetisch', normalize_file_id ('Untergeordnet Ästhetisch'));
-    $this->_check_equal ('Untergeordnet_Asthetisch', normalize_file_id ('Untergeordnet    Ästhetisch'));
-    $this->_check_equal ('aaaaeeeeiiiioooouuuuAAAAEEEEIIIIOOOOUUUUnNcC', normalize_file_id ('äáàâëéèêïíìîöóòôüúùûÄÁÀÂËÉÈÊÏÍÌÎÖÓÒÔÜÚÙÛñÑçÇ'));
+    $this->_check_equal ('Untergeordnet_Asthetisch', normalize_file_id ('Untergeordnet ï¿½sthetisch'));
+    $this->_check_equal ('Untergeordnet_Asthetisch', normalize_file_id ('Untergeordnet    ï¿½sthetisch'));
+    $this->_check_equal ('aaaaeeeeiiiioooouuuuAAAAEEEEIIIIOOOOUUUUnNcC', normalize_file_id ('ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'));
   }
   
   private function _test_file_sizes()

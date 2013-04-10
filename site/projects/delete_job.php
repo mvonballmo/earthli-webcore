@@ -2,7 +2,7 @@
 
 /****************************************************************************
 
-Copyright (c) 2002-2010 Marco Von Ballmoos
+Copyright (c) 2002-2013 Marco Von Ballmoos
 
 This file is part of earthli Projects.
 
@@ -29,4 +29,4 @@ http://www.earthli.com/software/webcore/projects
   require_once ('projects/start.php');
   $entry_type_info = $App->type_info_for ('JOB', 'projects/obj/job.php');
   require_once ($App->page_template_for ('webcore/pages/delete_entry.php'));
-?>
+?>

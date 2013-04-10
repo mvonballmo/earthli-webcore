@@ -2,7 +2,7 @@
 
 /****************************************************************************
 
-Copyright (c) 2002-2010 Marco Von Ballmoos
+Copyright (c) 2002-2013 Marco Von Ballmoos
 
 This file is part of earthli Recipes.
 
@@ -30,4 +30,4 @@ http://www.earthli.com/software/webcore/recipes
   require_once ('recipes/gui/recipe_panel.php');
   $panel_manager_class_name = 'RECIPE_USER_PANEL_MANAGER';
   require_once ($App->page_template_for ('webcore/pages/view_user.php'));
-?>
+?>

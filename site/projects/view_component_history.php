@@ -2,7 +2,7 @@
 
 /****************************************************************************
 
-Copyright (c) 2002-2010 Marco Von Ballmoos
+Copyright (c) 2002-2013 Marco Von Ballmoos
 
 This file is part of earthli Projects.
 
@@ -55,4 +55,4 @@ http://www.earthli.com/software/webcore/projects
   {
     $Page->raise_security_violation ('You are not allowed to view this component\'s history.', $folder);
   }
-?>
+?>

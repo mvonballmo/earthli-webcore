@@ -2,7 +2,7 @@
 
 /****************************************************************************
 
-Copyright (c) 2002-2010 Marco Von Ballmoos
+Copyright (c) 2002-2013 Marco Von Ballmoos
 
 This file is part of earthli Recipes.
 
@@ -29,4 +29,4 @@ http://www.earthli.com/software/webcore/recipes
   require_once ('recipes/start.php');
   require_once ($App->page_template_for ('webcore/pages/edit_folder_anon_user_permissions.php'));
 ?>
-
+

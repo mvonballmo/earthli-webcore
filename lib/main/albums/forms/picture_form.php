@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2010 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2013 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package albums
@@ -12,7 +12,7 @@
 
 /****************************************************************************
 
-Copyright (c) 2002-2010 Marco Von Ballmoos
+Copyright (c) 2002-2013 Marco Von Ballmoos
 
 This file is part of earthli Albums.
 
@@ -263,7 +263,12 @@ class PICTURE_FORM extends ALBUM_ENTRY_FORM
     $file_name = $this->_selected_file_name ();
 
     if (! $this->value_for ('use_upload'))
-    {      $old_file_name = $obj->file_name;      $obj->file_name = $file_name;      $file_name = url_to_file_name ($obj->full_file_name ());      $obj->file_name = $old_file_name;    }
+    {
+      $old_file_name = $obj->file_name;
+      $obj->file_name = $file_name;
+      $file_name = url_to_file_name ($obj->full_file_name ());
+      $obj->file_name = $old_file_name;
+    }
 
     if ($this->value_for ('read_exif'))
     {
