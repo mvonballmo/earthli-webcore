@@ -113,7 +113,7 @@ http://www.earthli.com/software/webcore
     ?><a href="<?php echo $opt_link; ?>" class="button"><span class="icon sixteen" style="background-image: url(<?php echo $icon; ?>)"><?php echo $caption; ?></span></a><?php
     /** @var $renderer MENU_RENDERER */
     $renderer = $entry->handler_for (Handler_menu);
-    $renderer->set_size (Menu_size_compact);
+    $renderer->set_size (Menu_size_standard);
     $renderer->alignment = Menu_align_inline;
     $renderer->display ($entry->handler_for (Handler_commands));
 

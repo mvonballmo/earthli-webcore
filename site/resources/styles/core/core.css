@@ -610,6 +610,7 @@ ul.menu-buttons > li,
 .text-flow ul.menu-buttons > li
 {
   padding: 0;
+  display: inline-block;
 }
 
 ul.menu-items .menu li
