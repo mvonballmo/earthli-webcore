@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage util
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.5.0
  */
 
@@ -45,7 +45,7 @@ require_once ('webcore/obj/webcore_object.php');
  * from various sources.
  * @package webcore
  * @subpackage util
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.5.0
  * @abstract
  */
@@ -153,7 +153,7 @@ abstract class FILE_TYPE_MANAGER extends WEBCORE_OBJECT
  * Loads file types from an INI file.
  * @package webcore
  * @subpackage util
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.5.0
  */
 class INI_FILE_TYPE_MANAGER extends FILE_TYPE_MANAGER

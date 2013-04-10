@@ -6,7 +6,7 @@
  * @filesource
  * @package projects
  * @subpackage gui
- * @version 3.3.0
+ * @version 3.4.0
  * @since 1.4.1
  */
 
@@ -44,7 +44,7 @@ require_once ('webcore/gui/select_list.php');
   * Used primarily in the explorer page.
  * @package projects
  * @subpackage gui
- * @version 3.3.0
+ * @version 3.4.0
  * @since 1.4.1
  */
 class JOB_LIST extends SELECT_LIST

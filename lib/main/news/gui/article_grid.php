@@ -6,7 +6,7 @@
  * @filesource
  * @package news
  * @subpackage gui
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.4.0
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/gui/entry_grid.php');
  * Base rendering for {@link ARTICLE}s from a {@link QUERY}.
  * @package news
  * @subpackage gui
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.7.1
  */
 class BASE_ARTICLE_GRID extends CONTENT_OBJECT_GRID
@@ -176,7 +176,7 @@ class BASE_ARTICLE_GRID extends CONTENT_OBJECT_GRID
  * Display {@link ARTICLE}s from a {@link QUERY}.
  * @package news
  * @subpackage gui
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.4.0
  */
 class ARTICLE_GRID extends BASE_ARTICLE_GRID
@@ -282,7 +282,7 @@ class ARTICLE_GRID extends BASE_ARTICLE_GRID
  * Display {@link ARTICLE}s from a {@link QUERY}.
  * @package news
  * @subpackage gui
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.4.0
  */
 class ARTICLE_SUMMARY_GRID extends DRAFTABLE_ENTRY_SUMMARY_GRID

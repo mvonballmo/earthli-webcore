@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage renderer
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.5.0
  */
 
@@ -44,7 +44,7 @@ require_once ('webcore/gui/renderer.php');
  * Used from the configuration/administration section.
  * @package webcore
  * @subpackage renderer
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.7.0
  */
 class APPLICATION_RENDERER extends RENDERER

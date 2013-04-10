@@ -6,7 +6,7 @@
  * @filesource
  * @package projects
  * @subpackage gui
- * @version 3.3.0
+ * @version 3.4.0
  * @since 1.4.1
  */
 
@@ -44,7 +44,7 @@ require_once ('webcore/gui/object_list_title.php');
  * Displays {@link RELEASE}s, {@link CHANGE}s and {@link JOB}s in a logical, ordered change list.
  * @package projects
  * @subpackage gui
- * @version 3.3.0
+ * @version 3.4.0
  * @since 1.4.1
  */
 class CHANGE_LOG extends WEBCORE_OBJECT

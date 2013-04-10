@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage obj
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.5.0
  */
 
@@ -44,7 +44,7 @@ require_once ('webcore/obj/auditable.php');
  * All content objects have a {@link $title} and a {@link $description}.
  * @package webcore
  * @subpackage obj
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.5.0
  */
 abstract class CONTENT_OBJECT extends AUDITABLE

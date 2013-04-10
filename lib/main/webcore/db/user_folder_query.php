@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage db
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.2.1
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/db/object_in_folder_query.php');
  * Return {@link FOLDER}s visible to a {@link USER}.
  * @package webcore
  * @subpackage db
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.2.1
  */
 class USER_FOLDER_QUERY extends OBJECT_IN_FOLDER_QUERY

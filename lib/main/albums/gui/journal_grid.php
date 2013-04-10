@@ -6,7 +6,7 @@
  * @filesource
  * @package albums
  * @subpackage gui
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.5.0
  */
 
@@ -43,7 +43,7 @@ require_once ('albums/gui/album_entry_grid.php');
  * Display {@link JOURNAL}s from a {@link QUERY}.
  * @package albums
  * @subpackage gui
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.5.0
  */
 class JOURNAL_GRID extends ALBUM_ENTRY_GRID
@@ -130,7 +130,7 @@ class JOURNAL_GRID extends ALBUM_ENTRY_GRID
  * Display {@link JOURNAL}s from a {@link QUERY}.
  * @package albums
  * @subpackage gui
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.5.0
  */
 class JOURNAL_SUMMARY_GRID extends ENTRY_SUMMARY_GRID

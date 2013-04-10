@@ -6,7 +6,7 @@
  * @filesource
  * @package projects
  * @subpackage forms
- * @version 3.3.0
+ * @version 3.4.0
  * @since 1.7.0
  */
 
@@ -44,7 +44,7 @@ require_once ('projects/obj/release_updater.php');
  * Ships a {@link RELEASE}.
  * @package projects
  * @subpackage forms
- * @version 3.3.0
+ * @version 3.4.0
  * @since 1.7.0
  */
 class SHIP_RELEASE_FORM extends AUDITABLE_FORM
@@ -179,7 +179,7 @@ class SHIP_RELEASE_FORM extends AUDITABLE_FORM
  * Represents an object to preview in a form.
  * @package projects
  * @subpackage forms
- * @version 3.3.0
+ * @version 3.4.0
  * @since 1.7.0
  */
 class SHIP_RELEASE_PREVIEW_SETTINGS extends UPDATE_RELEASE_PREVIEW_SETTINGS

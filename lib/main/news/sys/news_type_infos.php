@@ -6,7 +6,7 @@
  * @filesource
  * @package news
  * @subpackage sys
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.8.0
  * @access private
  */
@@ -44,7 +44,7 @@ require_once ('webcore/sys/webcore_type_infos.php');
  * Modifies the {@link ARTICLE} class.
  * @package news
  * @subpackage sys
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.5.0
  * @access private
  */
@@ -80,7 +80,7 @@ class ARTICLE_TYPE_INFO extends DRAFTABLE_ENTRY_TYPE_INFO
  * Describes the {@link FOLDER} class.
  * @package news
  * @subpackage sys
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.8.0
  * @access private
  */

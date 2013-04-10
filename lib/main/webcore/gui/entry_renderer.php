@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage renderer
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.5.0
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/gui/content_object_renderer.php');
  * Render details for {@link ENTRY} objects.
  * @package webcore
  * @subpackage renderer
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.6.0
  */
 class ENTRY_RENDERER extends CONTENT_OBJECT_RENDERER
@@ -75,7 +75,7 @@ class ENTRY_RENDERER extends CONTENT_OBJECT_RENDERER
  * Render details for {@link DRAFTABLE_ENTRY} objects.
  * @package webcore
  * @subpackage renderer
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.5.0
  */
 class DRAFTABLE_ENTRY_RENDERER extends ENTRY_RENDERER
@@ -127,7 +127,7 @@ class DRAFTABLE_ENTRY_RENDERER extends ENTRY_RENDERER
  * Render {@link COMMENT}s and {@link ATTACHMENT}s for an {@link ENTRY}.
  * @package webcore
  * @subpackage renderer
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.7.0
  */
 class ENTRY_ASSOCIATED_DATA_RENDERER extends HANDLER_RENDERER

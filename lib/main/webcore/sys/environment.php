@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage sys
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.2.1
  */
 
@@ -54,7 +54,7 @@ require_once ('webcore/log/logger_container.php');
  * @see PAGE
  * @package webcore
  * @subpackage sys
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.2.1
  */
 class ENVIRONMENT extends RESOLVER

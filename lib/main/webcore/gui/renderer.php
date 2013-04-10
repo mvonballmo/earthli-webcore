@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage renderer
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.5.0
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/obj/webcore_object.php');
  * Rendering functions for text and HTML.
  * @package webcore
  * @subpackage renderer
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.5.0
  * @abstract
  */
@@ -108,7 +108,7 @@ class RENDERER extends WEBCORE_OBJECT
  * {@link display()} to write out the table.
  * @package webcore
  * @subpackage renderer
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.5.0
  * @access private
  */

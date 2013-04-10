@@ -6,7 +6,7 @@
  * @filesource
  * @package projects
  * @subpackage command
- * @version 3.3.0
+ * @version 3.4.0
  * @since 1.9.0
  * @access private
  */
@@ -44,7 +44,7 @@ require_once ('webcore/cmd/commands.php');
  * Return the commands for a {@link CHANGE_LOG}.
  * @package projects
  * @subpackage command
- * @version 3.3.0
+ * @version 3.4.0
  * @since 1.9.0
  * @access private
  */
@@ -134,7 +134,7 @@ class CHANGE_LOG_COMMANDS extends COMMANDS
  * Return the commands for a {@link CHANGE_LOG} for a {@link BRANCH}.
  * @package projects
  * @subpackage command
- * @version 3.3.0
+ * @version 3.4.0
  * @since 1.9.0
  * @access private
  */

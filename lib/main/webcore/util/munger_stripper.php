@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage text
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.5.0
  */
 
@@ -47,7 +47,7 @@ require_once ('webcore/util/munger.php');
  * 
  * @package webcore
  * @subpackage text
- * @version 3.3.0
+ * @version 3.4.0
  * @since 3.2.0
  */
 class MUNGER_STRIPPER extends MUNGER_PARSER
@@ -134,7 +134,7 @@ class MUNGER_STRIPPER extends MUNGER_PARSER
  * Common base for all tag-strippers, single- or multi-line.
  * @package webcore
  * @subpackage text
- * @version 3.3.0
+ * @version 3.4.0
  * @since 3.2.0
  */
 class MUNGER_BASE_STRIPPER extends MUNGER_STRIPPER
@@ -162,7 +162,7 @@ class MUNGER_BASE_STRIPPER extends MUNGER_STRIPPER
  * Default stripper for {@link HTML_MUNGER} and {@link PLAIN_TEXT_MUNGER}.
  * @package webcore
  * @subpackage text
- * @version 3.3.0
+ * @version 3.4.0
  * @since 3.2.0
  */
 class MUNGER_DEFAULT_TITLE_STRIPPER extends MUNGER_BASE_STRIPPER

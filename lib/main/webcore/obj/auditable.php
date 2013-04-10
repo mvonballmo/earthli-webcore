@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage obj
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.4.0
  */
 
@@ -48,7 +48,7 @@ require_once ('webcore/obj/unique_object.php');
  * have occurred within the system.
  * @package webcore
  * @subpackage obj
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.4.0
  * @abstract
  */

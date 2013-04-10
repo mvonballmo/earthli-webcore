@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage forms
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.2.1
  */
 
@@ -45,7 +45,7 @@ require_once ('webcore/forms/content_object_form.php');
  * @see ADD_USER_TO_GROUP_FORM
  * @package webcore
  * @subpackage forms
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.2.1
  */
 class GROUP_FORM extends CONTENT_OBJECT_FORM

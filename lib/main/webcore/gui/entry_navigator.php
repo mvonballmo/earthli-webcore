@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage gui
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.4.0
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/gui/object_navigator.php');
  * Navigates lists of {@link ENTRY}s.
  * @package webcore
  * @subpackage gui
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.4.0
  */
 class ENTRY_NAVIGATOR extends OBJECT_NAVIGATOR
@@ -75,7 +75,7 @@ class ENTRY_NAVIGATOR extends OBJECT_NAVIGATOR
  * Navigates lists of {@link MULTI_TYPE_ENTRY}s.
  * @package webcore
  * @subpackage gui
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.7.0
  */
 class MULTI_TYPE_ENTRY_NAVIGATOR extends ENTRY_NAVIGATOR

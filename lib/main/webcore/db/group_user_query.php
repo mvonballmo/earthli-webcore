@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage db
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.2.1
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/db/user_query.php');
  * Return {@link USER}s from a security {@link GROUP}.
  * @package webcore
  * @subpackage db
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.2.1
  */
 class GROUP_USER_QUERY extends USER_QUERY

@@ -6,7 +6,7 @@
  * @filesource
  * @package albums
  * @subpackage sys
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.5.0
  */
 
@@ -146,7 +146,7 @@ class ALBUM_APPLICATION_PICTURE_OPTIONS
  * Automatically generates calendars and printouts.
  * @package albums
  * @subpackage sys
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.5.0
  */
 class ALBUM_APPLICATION extends APPLICATION

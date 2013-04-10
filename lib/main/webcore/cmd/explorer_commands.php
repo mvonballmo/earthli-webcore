@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage command
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.7.0
  * @access private
  */
@@ -46,7 +46,7 @@ require_once ('webcore/cmd/commands.php');
  * page.
  * @package webcore
  * @subpackage command
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.7.0
  * @access private
  */
@@ -130,7 +130,7 @@ class EXPLORER_COMMANDS extends COMMANDS
  * applications that use {@link DRAFTABLE_ENTRY}s.
  * @package webcore
  * @subpackage command
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.7.1
  * @access private
  */

@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage db
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.6.0
  */
 
@@ -52,7 +52,7 @@ require_once ('webcore/obj/webcore_object.php');
  * @see QUERY::table_for_set()
  * @package webcore
  * @subpackage db
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.6.0
  * @access private
  */
@@ -325,7 +325,7 @@ class QUERY_SECURITY_RESTRICTION extends WEBCORE_OBJECT
  *
  * @package webcore
  * @subpackage db
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.6.0
  * @access private
  */
@@ -427,7 +427,7 @@ class QUERY_SECURITY_RESTRICTION_SET_ITEM
  *
  * @package webcore
  * @subpackage db
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.6.0
  * @access private
  */

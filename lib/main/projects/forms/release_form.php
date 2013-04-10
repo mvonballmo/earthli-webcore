@@ -6,7 +6,7 @@
  * @filesource
  * @package projects
  * @subpackage forms
- * @version 3.3.0
+ * @version 3.4.0
  * @since 1.4.1
  */
 
@@ -44,7 +44,7 @@ require_once ('webcore/forms/object_in_folder_form.php');
  * 
  * @package projects
  * @subpackage forms
- * @version 3.3.0
+ * @version 3.4.0
  * @since 1.4.1
  */
 class RELEASE_FORM extends OBJECT_IN_FOLDER_FORM

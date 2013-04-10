@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage sys
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.6.0
  * @access private
  */
@@ -44,7 +44,7 @@ require_once ('webcore/obj/webcore_object.php');
  * Base class for maintenance tasks.
   * @package webcore
   * @subpackage sys
-  * @version 3.3.0
+  * @version 3.4.0
   * @since 2.6.0
   * @abstract
   * @access private

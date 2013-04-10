@@ -6,7 +6,7 @@
  * @filesource
  * @package projects
  * @subpackage obj
- * @version 3.3.0
+ * @version 3.4.0
  * @since 1.4.1
  */
 
@@ -46,7 +46,7 @@ require_once ('webcore/sys/property.php');
  * of {@link CHANGE}s.
  * @package projects
  * @subpackage obj
- * @version 3.3.0
+ * @version 3.4.0
  * @since 1.4.1
  */
 class JOB extends PROJECT_ENTRY
@@ -391,7 +391,7 @@ class JOB extends PROJECT_ENTRY
  * A possible value for a {@link JOB_BRANCH_INFO::$status}.
  * @package projects
  * @subpackage obj
- * @version 3.3.0
+ * @version 3.4.0
  * @since 1.7.0
  */
 class JOB_STATUS_VALUE extends PROPERTY_VALUE
@@ -421,7 +421,7 @@ class JOB_STATUS_VALUE extends PROPERTY_VALUE
  * and to add or remove a job from a branch.
  * @package projects
  * @subpackage obj
- * @version 3.3.0
+ * @version 3.4.0
  * @since 1.4.1
  */
 class JOB_BRANCH_INFO extends PROJECT_ENTRY_BRANCH_INFO

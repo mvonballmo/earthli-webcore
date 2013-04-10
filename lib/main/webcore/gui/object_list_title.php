@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage mail
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.6.1
  */
 
@@ -46,7 +46,7 @@ require_once ('webcore/obj/webcore_object.php');
  * {@link PUBLISHER_MESSAGE} to generate the subject of an email.
  * @package webcore
  * @subpackage mail
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.6.1
  * @access private
  */
@@ -127,7 +127,7 @@ class OBJECT_LIST_TITLE extends WEBCORE_OBJECT
  * {@link PUBLISHER_MESSAGE}.
  * @package webcore
  * @subpackage mail
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.6.1
  * @access private
  */

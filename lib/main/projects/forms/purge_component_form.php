@@ -6,7 +6,7 @@
  * @filesource
  * @package projects
  * @subpackage forms
- * @version 3.3.0
+ * @version 3.4.0
  * @since 1.7.0
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/forms/purge_form.php');
  * Handles deletion of {@link COMPONENT}s.
  * @package projects
  * @subpackage forms
- * @version 3.3.0
+ * @version 3.4.0
  * @since 1.7.0
  */
 class PURGE_COMPONENT_FORM extends PURGE_OBJECT_FORM

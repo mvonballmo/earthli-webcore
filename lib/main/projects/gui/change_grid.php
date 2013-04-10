@@ -6,7 +6,7 @@
  * @filesource
  * @package projects
  * @subpackage gui
- * @version 3.3.0
+ * @version 3.4.0
  * @since 1.4.1
  */
 
@@ -43,7 +43,7 @@ require_once ('projects/gui/project_entry_grid.php');
  * Display {@link CHANGE}s from a {@link QUERY}.
  * @package projects
  * @subpackage gui
- * @version 3.3.0
+ * @version 3.4.0
  * @since 1.4.1
  */
 class CHANGE_GRID extends PROJECT_ENTRY_GRID
@@ -107,7 +107,7 @@ class CHANGE_GRID extends PROJECT_ENTRY_GRID
  * Display {@link CHANGE}s from a {@link QUERY}.
  * @package projects
  * @subpackage gui
- * @version 3.3.0
+ * @version 3.4.0
  * @since 1.4.1
  */
 class CHANGE_SUMMARY_GRID extends PROJECT_ENTRY_SUMMARY_GRID

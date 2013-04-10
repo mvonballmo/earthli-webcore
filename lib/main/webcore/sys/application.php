@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage sys
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.2.1
  */
 
@@ -64,7 +64,7 @@ define ('App_entry_reg_prefix', '__entry_');
  * There can be multiple applications per page.
  * @package webcore
  * @subpackage sys
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.2.1
  */
 class APPLICATION extends CONTEXT
@@ -1211,7 +1211,7 @@ class APPLICATION extends CONTEXT
  * Encapsulates an application that uses {@link DRAFTABLE_ENTRY}s.
  * @package webcore
  * @subpackage sys
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.7.1
  */
 class DRAFTABLE_APPLICATION extends APPLICATION

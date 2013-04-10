@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage grid
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.7.0
  */
 
@@ -44,7 +44,7 @@ require_once ('webcore/gui/selectable_grid.php');
  * Shows associated folder and creator information.
  * @package webcore
  * @subpackage grid
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.7.0*/
 abstract class CONTENT_OBJECT_GRID extends SELECTABLE_GRID
 {

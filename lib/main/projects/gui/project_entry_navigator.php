@@ -6,7 +6,7 @@
  * @filesource
  * @package projects
  * @subpackage gui
- * @version 3.3.0
+ * @version 3.4.0
  * @since 3.1.0
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/gui/entry_navigator.php');
  * Renders a {@link PROJECT_ENTRY} for display in an email (plain text or HTML).
  * @package projects
  * @subpackage gui
- * @version 3.3.0
+ * @version 3.4.0
  * @since 3.1.0
  * @abstract
  */

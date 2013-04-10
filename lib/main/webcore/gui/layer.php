@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage gui
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.2.1
  */
 
@@ -48,7 +48,7 @@ require_once ('webcore/util/tags.php');
  * <c>False</c>, the layer cannot be toggled and is always {@link $visible}.
  * @package webcore
  * @subpackage gui
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.2.1
  */
 class LAYER extends WEBCORE_OBJECT

@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage util
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.2.1
  */
 
@@ -44,7 +44,7 @@ require_once ('webcore/obj/webcore_object.php');
  * Includes formatting for object state, maximum title length and writing links or text.
  * @package webcore
  * @subpackage util
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.2.1
  */
 class TITLE_FORMATTER extends WEBCORE_OBJECT

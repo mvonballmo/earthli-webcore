@@ -6,7 +6,7 @@
  * @filesource
  * @package projects
  * @subpackage gui
- * @version 3.3.0
+ * @version 3.4.0
  * @since 1.9.0
  */
 
@@ -44,7 +44,7 @@ require_once ('webcore/gui/entry_grid.php');
  * Used as a base class only.
  * @package projects
  * @subpackage gui
- * @version 3.3.0
+ * @version 3.4.0
  * @since 1.9.0
  */
 class PROJECT_ENTRY_GRID extends CONTENT_OBJECT_GRID
@@ -264,7 +264,7 @@ class PROJECT_ENTRY_GRID extends CONTENT_OBJECT_GRID
  * Display {@link PROJECT_ENTRY}s from a {@link QUERY}.
  * @package projects
  * @subpackage gui
- * @version 3.3.0
+ * @version 3.4.0
  * @since 1.4.1
  */
 class PROJECT_ENTRY_SUMMARY_GRID extends ENTRY_SUMMARY_GRID

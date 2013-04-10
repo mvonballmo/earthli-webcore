@@ -6,7 +6,7 @@
  * @filesource
  * @package projects
  * @subpackage forms
- * @version 3.3.0
+ * @version 3.4.0
  * @since 1.4.1
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/forms/multiple_object_printer_form.php');
  * Print objects from a {@link PROJECT}.
  * @package projects
  * @subpackage forms
- * @version 3.3.0
+ * @version 3.4.0
  * @since 1.4.1
  */
 class PROJECT_MULTIPLE_OBJECT_PRINTER_FORM extends MULTIPLE_OBJECT_PRINTER_FORM

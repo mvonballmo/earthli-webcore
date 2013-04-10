@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage forms
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.2.1
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/forms/subscription_form.php');
  * Presents the standard WebCore subscription options.
  * @package webcore
  * @subpackage forms
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.2.1
  */
 class USER_SUBSCRIPTION_OPTIONS_FORM extends SUBSCRIPTION_FORM

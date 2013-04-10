@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage db
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.6.0
  * @access private
  */
@@ -50,7 +50,7 @@ define ('Msg_channel_migrate', 'Migrate');
  * Facilitates migrating databases for WebCore {@link APPLICATION}s.
   * @package webcore
   * @subpackage db
-  * @version 3.3.0
+  * @version 3.4.0
   * @since 2.6.0
   * @access private
   */

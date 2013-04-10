@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage db
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.2.1
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/db/query.php');
  * Return security {@link PERMISSIONS} objects.
  * @package webcore
  * @subpackage db
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.2.1
  */
 class PERMISSIONS_QUERY extends QUERY
@@ -117,7 +117,7 @@ class PERMISSIONS_QUERY extends QUERY
  * Return security {@link PERMISSIONS} objects for a {@link FOLDER}.
  * @package webcore
  * @subpackage db
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.2.1
  */
 class FOLDER_PERMISSIONS_QUERY extends PERMISSIONS_QUERY

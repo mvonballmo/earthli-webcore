@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage obj
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.5.0
  * @access private
  */
@@ -49,7 +49,7 @@ require_once ('webcore/obj/storable.php');
  * inheriting from the parent folder.
  * @package webcore
  * @subpackage sys
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.5.0
  * @access private
  */

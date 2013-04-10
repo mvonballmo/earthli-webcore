@@ -6,7 +6,7 @@
  * @filesource
  * @package projects
  * @subpackage gui
- * @version 3.3.0
+ * @version 3.4.0
  * @since 1.4.1
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/gui/entry_navigator.php');
  * Display a list of {@link CHANGE}s 'around' the current one.
  * @package projects
  * @subpackage gui
- * @version 3.3.0
+ * @version 3.4.0
  * @since 1.4.1
  */
 class CHANGE_NAVIGATOR extends ENTRY_NAVIGATOR

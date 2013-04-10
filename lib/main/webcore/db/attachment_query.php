@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage db
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.5.0
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/db/object_in_folder_query.php');
  * Return {@link ATTACHMENT}s for an {@link ATTACHMENT_HOST}.
  * @package webcore
  * @subpackage db
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.5.0
  */
 class ATTACHMENT_QUERY extends OBJECT_IN_SINGLE_FOLDER_QUERY

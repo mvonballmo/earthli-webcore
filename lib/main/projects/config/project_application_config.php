@@ -6,7 +6,7 @@
  * @filesource
  * @package projects
  * @subpackage config
- * @version 3.3.0
+ * @version 3.4.0
  * @since 1.9.0
  */
 
@@ -42,7 +42,7 @@ require_once ('webcore/config/application_config.php');
 /**
  * @package projects
  * @subpackage config
- * @version 3.3.0
+ * @version 3.4.0
  * @since 1.9.0
  */
 class PROJECT_APPLICATION_DISPLAY_OPTIONS extends APPLICATION_DISPLAY_OPTIONS
@@ -313,7 +313,7 @@ class PROJECT_APPLICATION_DISPLAY_OPTIONS extends APPLICATION_DISPLAY_OPTIONS
  * Maps statuses when a {@link RELEASE} is shipped.
  * @package projects
  * @subpackage config
- * @version 3.3.0
+ * @version 3.4.0
  * @since 1.5.0
  * @access private
  */

@@ -6,7 +6,7 @@
  * @filesource
  * @package projects
  * @subpackage db
- * @version 3.3.0
+ * @version 3.4.0
  * @since 1.4.1
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/db/folder_comment_query.php');
  * Retrieves {@link COMMENT}s related to a particular {@link PROJECT}.
  * @package projects
  * @subpackage db
- * @version 3.3.0
+ * @version 3.4.0
  * @since 1.4.1
  */
 class PROJECT_COMMENT_QUERY extends FOLDER_MULTI_TYPE_COMMENT_QUERY

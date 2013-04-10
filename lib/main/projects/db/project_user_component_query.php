@@ -6,7 +6,7 @@
  * @filesource
  * @package projects
  * @subpackage db
- * @version 3.3.0
+ * @version 3.4.0
  * @since 1.7.0
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/db/user_entry_query.php');
  * Retrieves {@link COMPONENT}s visible to a {@link PROJECT_USER}.
  * @package projects
  * @subpackage db
- * @version 3.3.0
+ * @version 3.4.0
  * @since 1.7.0
  */
 class PROJECT_USER_COMPONENT_QUERY extends USER_ENTRY_QUERY

@@ -6,7 +6,7 @@
  * @filesource
  * @package recipes
  * @subpackage sys
- * @version 3.3.0
+ * @version 3.4.0
  * @since 1.7.0
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/sys/webcore_type_infos.php');
  * Describes the {@link RECIPE} class.
  * @package recipes
  * @subpackage sys
- * @version 3.3.0
+ * @version 3.4.0
  * @since 1.4.0
  * @access private
  */
@@ -79,7 +79,7 @@ class RECIPE_TYPE_INFO extends DRAFTABLE_ENTRY_TYPE_INFO
  * Describes the {@link FOLDER} class.
  * @package recipes
  * @subpackage sys
- * @version 3.3.0
+ * @version 3.4.0
  * @since 1.4.0
  * @access private
  */

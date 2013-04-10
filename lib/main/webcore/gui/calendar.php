@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage gui
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.2.1
  */
 
@@ -48,7 +48,7 @@ require_once ('webcore/obj/webcore_object.php');
  * Provides drawing hooks for days, weeks, months, years so descendants can decide how to draw.
  * @package webcore
  * @subpackage gui
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.2.1
  * @abstract
  */

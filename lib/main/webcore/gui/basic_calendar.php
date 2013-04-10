@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage gui
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.2.1
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/gui/calendar.php');
  * Implements the calendar interface with HTML tables.
  * @package webcore
  * @subpackage gui
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.2.1
  */
 class BASIC_CALENDAR extends CALENDAR

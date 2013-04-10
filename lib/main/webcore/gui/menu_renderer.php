@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage renderer
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.7.0
  */
 
@@ -117,7 +117,7 @@ define ('Menu_show_all_as_list', 3);
  * Renders {@link COMMAND}s to HTML.
  * @package webcore
  * @subpackage renderer
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.7.0
  * @abstract
  */

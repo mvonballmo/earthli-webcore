@@ -6,7 +6,7 @@
  * @filesource
  * @package recipes
  * @subpackage obj
- * @version 3.3.0
+ * @version 3.4.0
  * @since 1.3.0
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/obj/entry.php');
  * Contains all the information about a recipe.
  * @package recipes
  * @subpackage obj
- * @version 3.3.0
+ * @version 3.4.0
  * @since 1.3.0
  */
 class RECIPE extends DRAFTABLE_ENTRY

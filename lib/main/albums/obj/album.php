@@ -6,7 +6,7 @@
  * @filesource
  * @package albums
  * @subpackage obj
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.5.0
  */
 
@@ -108,7 +108,7 @@ define ('Album_location_type_remote', 'remote');
  * Holds {@link PICTURE}s and {@link JOURNAL}s in a photo-album.
  * @package albums
  * @subpackage obj
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.5.0
  */
 class ALBUM extends FOLDER

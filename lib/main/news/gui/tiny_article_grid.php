@@ -6,7 +6,7 @@
  * @filesource
  * @package news
  * @subpackage gui
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.7.0
  */
 
@@ -44,7 +44,7 @@ require_once ('webcore/gui/content_object_grid.php');
  * Shows only the title and date of the article. Good for showing recent links.
  * @package news
  * @subpackage gui
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.7.0
  */
 class TINY_ARTICLE_GRID extends CONTENT_OBJECT_GRID

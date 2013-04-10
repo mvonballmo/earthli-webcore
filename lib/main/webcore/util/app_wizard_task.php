@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage util
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.7.1
  */
 
@@ -49,7 +49,7 @@ define ('Msg_channel_app_wizard', 'Wizard');
  * Builds a new webcore application.
  * @package webcore
  * @subpackage tests
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.6.0
  */
 class APP_WIZARD_TASK extends TASK

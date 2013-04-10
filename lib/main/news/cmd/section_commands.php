@@ -6,7 +6,7 @@
  * @filesource
  * @package news
  * @subpackage command
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.8.0
  * @access private
  */
@@ -44,7 +44,7 @@ require_once ('webcore/cmd/folder_commands.php');
  * Return the commands for a {@link SECTION}.
  * @package news
  * @subpackage command
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.8.0
  * @access private
  */

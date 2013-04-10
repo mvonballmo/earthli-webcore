@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage forms
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.2.1
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/forms/form.php');
  * Adds a list of email addresses as {@link SUBSCRIBER}s to a {@link FOLDER}.
  * @package webcore
  * @subpackage forms
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.2.1
  */
 class ADD_SUBSCRIBERS_TO_FOLDER_FORM extends ID_BASED_FORM

@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage forms
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.2.1
  */
 
@@ -44,7 +44,7 @@ http://www.earthli.com/software/webcore
  * a form field. {@link validate()} checks a given answer.
  * @package webcore
  * @subpackage util
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.7.1
  */
 abstract class CAPTCHA extends WEBCORE_OBJECT
@@ -116,7 +116,7 @@ define ('Captcha_operator_times', 2);
  * the expression in a form field. {@link validate()} checks a given answer.
  * @package webcore
  * @subpackage util
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.7.1
  */
 class NUMERIC_CAPTCHA extends CAPTCHA

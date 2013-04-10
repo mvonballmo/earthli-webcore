@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage obj
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.2.1
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/obj/renderable.php');
  * A WebCore object which can be stored to a database.
  * @package webcore
  * @subpackage obj
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.2.1
  * @abstract
  */
@@ -227,7 +227,7 @@ abstract class STORABLE extends RENDERABLE
  * Options used to maintain database integrity when an object has been purged.
  * @package webcore
  * @subpackage obj
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.5.0
  * @access private
  */

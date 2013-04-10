@@ -6,7 +6,7 @@
  * @filesource
  * @package albums
  * @subpackage db
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.9.1
  */
 

@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage forms
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.2.1
  */
 
@@ -44,7 +44,7 @@ require_once ('webcore/obj/object_list_builder.php');
  * Performs an action on multiple {@link FOLDER}s and/or {@link ENTRY}s.
  * @package webcore
  * @subpackage forms
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.2.1
  * @abstract
  */

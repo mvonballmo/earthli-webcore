@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage grid
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.2.1
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/gui/printable_comment_grid.php');
  * Displays {@link COMMENT}s from a {@link QUERY}.
  * @package webcore
  * @subpackage grid
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.2.1
  */
 class FLAT_COMMENT_GRID extends PRINTABLE_COMMENT_GRID

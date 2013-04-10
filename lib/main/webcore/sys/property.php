@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage obj
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.5.0
  */
 
@@ -44,7 +44,7 @@ require_once ('webcore/obj/webcore_object.php');
  * Also includes a title and icon.
  * @package webcore
  * @subpackage obj
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.5.0
  */
 class PROPERTY_VALUE extends WEBCORE_OBJECT

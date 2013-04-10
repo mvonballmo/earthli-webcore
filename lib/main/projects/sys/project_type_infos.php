@@ -6,7 +6,7 @@
  * @filesource
  * @package projects
  * @subpackage sys
- * @version 3.3.0
+ * @version 3.4.0
  * @since 1.9.0
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/sys/webcore_type_infos.php');
  * Describes the {@link PROJECT} class.
  * @package projects
  * @subpackage sys
- * @version 3.3.0
+ * @version 3.4.0
  * @since 1.5.0
  * @access private
  */
@@ -74,7 +74,7 @@ class PROJECT_TYPE_INFO extends FOLDER_TYPE_INFO
  * Describes the {@link JOB} class.
  * @package projects
  * @subpackage sys
- * @version 3.3.0
+ * @version 3.4.0
  * @since 1.5.0
  * @access private
  */
@@ -110,7 +110,7 @@ class JOB_TYPE_INFO extends ENTRY_TYPE_INFO
  * Describes the {@link CHANGE} class.
  * @package projects
  * @subpackage sys
- * @version 3.3.0
+ * @version 3.4.0
  * @since 1.5.0
  * @access private
  */
@@ -146,7 +146,7 @@ class CHANGE_TYPE_INFO extends ENTRY_TYPE_INFO
  * Describes the {@link BRANCH} class.
  * @package projects
  * @subpackage sys
- * @version 3.3.0
+ * @version 3.4.0
  * @since 1.5.0
  * @access private
  */
@@ -182,7 +182,7 @@ class BRANCH_TYPE_INFO extends TYPE_INFO
  * Describes the {@link RELEASE} class.
  * @package projects
  * @subpackage sys
- * @version 3.3.0
+ * @version 3.4.0
  * @since 1.5.0
  * @access private
  */
@@ -218,7 +218,7 @@ class RELEASE_TYPE_INFO extends TYPE_INFO
  * Describes the {@link PROJECT_COMMENT} class.
  * @package projects
  * @subpackage sys
- * @version 3.3.0
+ * @version 3.4.0
  * @since 3.1.0
  * @access private
  */

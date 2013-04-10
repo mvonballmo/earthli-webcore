@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage config
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.7.1
  */
 
@@ -46,7 +46,7 @@ require_once ('webcore/obj/webcore_object.php');
  * and format.
  * @package webcore
  * @subpackage config
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.7.1
  */
 class NEWSFEED_ENGINE extends WEBCORE_OBJECT

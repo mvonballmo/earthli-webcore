@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage grid
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.2.1
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/gui/select_list.php');
  * Show {@link FOLDER}s in a selectable, tabular list.
  * @package webcore
  * @subpackage grid
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.2.1
  */
 class FOLDER_LIST extends SELECT_LIST

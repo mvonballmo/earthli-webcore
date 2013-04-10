@@ -6,7 +6,7 @@
  * @filesource
  * @package projects
  * @subpackage gui
- * @version 3.3.0
+ * @version 3.4.0
  * @since 1.7.0
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/gui/folder_renderer.php');
  * Render details for a {@link PROJECT}.
  * @package projects
  * @subpackage gui
- * @version 3.3.0
+ * @version 3.4.0
  * @since 1.7.0
  */
 class PROJECT_RENDERER extends FOLDER_RENDERER

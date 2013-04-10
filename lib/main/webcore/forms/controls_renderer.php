@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage forms-core
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.6.0
  * @access private
  */
@@ -44,7 +44,7 @@ require_once ('webcore/obj/webcore_object.php');
  * Properties for an item in a list.
  * @package webcore
  * @subpackage forms-core
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.6.0
  * @access private
  */

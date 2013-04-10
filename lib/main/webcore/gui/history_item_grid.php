@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage grid
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.4.0
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/gui/grid.php');
  * Displays {@link HISTORY_ITEM}s from a {@link QUERY}.
  * @package webcore
  * @subpackage grid
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.4.0
  */
 class HISTORY_ITEM_GRID extends STANDARD_GRID

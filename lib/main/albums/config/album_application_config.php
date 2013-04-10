@@ -6,7 +6,7 @@
  * @filesource
  * @package albums
  * @subpackage config
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.9.0
  */
 
@@ -42,7 +42,7 @@ require_once ('webcore/config/application_config.php');
 /**
  * @package albums
  * @subpackage config
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.9.0
  */
 class ALBUM_APPLICATION_DISPLAY_OPTIONS extends APPLICATION_DISPLAY_OPTIONS

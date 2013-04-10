@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage tests
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.7.0
  * @access private
  */
@@ -100,7 +100,7 @@ define ('Baseline_test_owner3_id', 12000);
         - entry (draft, owner2)
  * @package webcore
  * @subpackage tests
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.7.0
  * @access private
  */

@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage mail
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.2.1
  */
 
@@ -53,7 +53,7 @@ require_once ('webcore/obj/webcore_object.php');
  * @see MAIL_PROVIDER
  * @package webcore
  * @subpackage mail
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.2.1
  */
 class MAIL_MESSAGE extends WEBCORE_OBJECT

@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage mail
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.4.0
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/mail/mail_object_renderer.php');
  * Renders mail content for {@link HISTORY_ITEM}s.
  * @package webcore
  * @subpackage mail
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.4.0
  */
 class HISTORY_ITEM_MAIL_RENDERER extends MAIL_OBJECT_RENDERER

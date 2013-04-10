@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage mail
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.2.1
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/mail/mail_body_renderer.php');
  * Renders html emails using WebCore renderers.
  * @package webcore
  * @subpackage mail
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.2.1
  */
 class THEMED_MAIL_BODY_RENDERER extends MAIL_BODY_RENDERER

@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage util
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.4.0
  * @access private
  */
@@ -62,7 +62,7 @@ require_once ('webcore/sys/system.php');
  * exactly on {@link $window_size} away from the currently selected one, in either direction.
  * @package webcore
  * @subpackage util
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.4.0
  * @access private
  * @abstract

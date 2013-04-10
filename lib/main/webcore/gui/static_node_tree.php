@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage tree
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.2.1
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/gui/static_tree.php');
  * A static tree control that displays {@link TREE_NODE}s.
  * @package webcore
  * @subpackage tree
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.2.1
  */
 class STATIC_NODE_TREE extends STATIC_TREE

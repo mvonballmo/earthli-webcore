@@ -6,7 +6,7 @@
  * @filesource
  * @package albums
  * @subpackage forms
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.5.0
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/forms/multiple_object_mover_form.php');
  * Move objects between {@link ALBUM}s.
  * @package albums
  * @subpackage forms
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.5.0
  */
 class ALBUM_MULTIPLE_OBJECT_MOVER_FORM extends MULTIPLE_OBJECT_MOVER_FORM

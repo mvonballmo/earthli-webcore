@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage sys
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.2.1
  */
 
@@ -48,7 +48,7 @@ require_once ('webcore/sys/context.php');
  * and other rendering delegation.
  * @package webcore
  * @subpackage sys
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.2.1
  */
 class PAGE extends CONTEXT
@@ -396,7 +396,7 @@ class PAGE extends CONTEXT
    * @param boolean $set_as_default Calls {@link APPLICATION_ENGINE::
    * set_as_main_for()} using {@link $Page} if True.
    * 
-   * @version 3.3.0
+   * @version 3.4.0
    * @since 2.7.0
    * @see APPLICATION_ENGINE
    * @return APPLICATION

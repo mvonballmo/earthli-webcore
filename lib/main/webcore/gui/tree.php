@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage tree
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.2.1
  */
 
@@ -69,7 +69,7 @@ require_once ('webcore/obj/webcore_object.php');
  * @abstract 
  * @package webcore
  * @subpackage tree
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.2.1
  */
 abstract class TREE extends WEBCORE_OBJECT
@@ -407,7 +407,7 @@ abstract class TREE extends WEBCORE_OBJECT
  * Handles rendering for specific node types in a {@link TREE}.
  * @package webcore
  * @subpackage tree
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.2.1
  * @abstract
  * @access private
@@ -568,7 +568,7 @@ abstract class TREE_NODE_INFO extends WEBCORE_OBJECT
  * @see TREE_NODE_INFO
  * @package webcore
  * @subpackage tree
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.2.1
  * @access private
  */
@@ -621,7 +621,7 @@ class TREE_DECORATOR extends WEBCORE_OBJECT
  * Tree drawn with simple HTML 'div' containers.
  * @package webcore
  * @subpackage tree
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.5.0
  */
 class HTML_TREE extends TREE

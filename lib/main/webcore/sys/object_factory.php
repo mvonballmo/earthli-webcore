@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage sys
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.5.0
  * @access private
  */
@@ -47,7 +47,7 @@ require_once ('webcore/sys/system.php');
  * class.
  * @package webcore
  * @subpackage sys
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.5.0
  * @access private
  */
@@ -222,7 +222,7 @@ class OBJECT_FACTORY extends RAISABLE
  * Used by {@link OBJECT_FACTORY} to store registered classes.
  * @package webcore
  * @subpackage sys
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.5.0
  * @access private
  */

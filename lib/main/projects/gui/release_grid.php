@@ -6,7 +6,7 @@
  * @filesource
  * @package projects
  * @subpackage gui
- * @version 3.3.0
+ * @version 3.4.0
  * @since 1.4.1
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/gui/content_object_grid.php');
  * Display a list of {@link RELEASE}s from a {@link QUERY}.
  * @package projects
  * @subpackage gui
- * @version 3.3.0
+ * @version 3.4.0
  * @since 1.4.1
  */
 class RELEASE_GRID extends CONTENT_OBJECT_GRID

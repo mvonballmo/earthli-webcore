@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage obj
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.2.1
  */
 
@@ -46,7 +46,7 @@ require_once ('webcore/obj/entry.php');
  * the extra-info table.
  * @package webcore
  * @subpackage obj
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.2.1
  * @abstract
  */

@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage security
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.5.0
  * @access private
  */
@@ -50,7 +50,7 @@ require_once ('webcore/obj/named_object.php');
  * specific set of privileges.
  * @package webcore
  * @subpackage security
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.5.0
  * @access private
  */
@@ -204,7 +204,7 @@ class PRIVILEGES extends RAISABLE
  * to ensure that they are both reading and storing the same privileges.
  * @package webcore
  * @subpackage security
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.5.0
  * @access private
  */
@@ -256,7 +256,7 @@ class CONTENT_PRIVILEGES extends PRIVILEGES
  * types use this set of privileges.
  * @package webcore
  * @subpackage security
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.5.0
  * @access private
  */
@@ -284,7 +284,7 @@ class SINGLE_ENTRY_PRIVILEGES extends CONTENT_PRIVILEGES
  * Privileges which apply globally in an {@link APPLICATION}.
  * @package webcore
  * @subpackage security
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.5.0
  * @access private
  */
@@ -327,7 +327,7 @@ class GLOBAL_PRIVILEGES extends PRIVILEGES
  * is specified, the content privileges defined for the {@link FOLDER} are used.
  * @package webcore
  * @subpackage security
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.5.0
  * @access private
  */

@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage forms
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.2.1
  */
 
@@ -45,7 +45,7 @@ require_once ('webcore/forms/multiple_object_action_form.php');
  * in the source folder.
  * @package webcore
  * @subpackage forms
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.2.1
  */
 class MULTIPLE_OBJECT_MOVER_FORM extends MULTIPLE_OBJECT_ACTION_FORM
@@ -254,7 +254,7 @@ class MULTIPLE_OBJECT_MOVER_FORM extends MULTIPLE_OBJECT_ACTION_FORM
  * in the source folder.
  * @package webcore
  * @subpackage forms
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.7.0
  */
 class MULTIPLE_DRAFTABLE_OBJECT_MOVER_FORM extends MULTIPLE_OBJECT_MOVER_FORM

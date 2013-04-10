@@ -8,7 +8,7 @@
  * @author Marco Von Ballmoos
  * @filesource
  * @package recipes
- * @version 3.3.0
+ * @version 3.4.0
  * @since 1.3.0
  */
 

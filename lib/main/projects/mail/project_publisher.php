@@ -6,7 +6,7 @@
  * @filesource
  * @package projects
  * @subpackage mail
- * @version 3.3.0
+ * @version 3.4.0
  * @since 1.4.1
  */
 
@@ -45,7 +45,7 @@ require_once ('webcore/mail/publisher.php');
  * {@link BRANCH}es and {@link COMMENT}s.
  * @package projects
  * @subpackage mail
- * @version 3.3.0
+ * @version 3.4.0
  * @since 1.4.1
  */
 class PROJECT_PUBLISHER extends PUBLISHER

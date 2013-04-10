@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage mail
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.2.1
  */
 
@@ -46,7 +46,7 @@ require_once ('webcore/gui/object_list_title.php');
  * Handles bulk-mailing to {@link SUBSCRIBER}s.
  * @package webcore
  * @subpackage mail
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.2.1
  */
 class PUBLISHER extends LOGGABLE
@@ -718,7 +718,7 @@ class PUBLISHER extends LOGGABLE
  * it consists of two logical items and four objects.
  * @package webcore
  * @subpackage mail
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.5.0
  * @access private
  */
@@ -873,7 +873,7 @@ class PUBLISHER_MESSAGE extends WEBCORE_OBJECT
  * Formats the subject line for multiple objects.
  * @package webcore
  * @subpackage mail
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.6.0
  * @access private
  */
@@ -895,7 +895,7 @@ require_once ('webcore/mail/mail_object_renderer.php');
  * Renders a link for a subscriber's personal settings.
  * @package webcore
  * @subpackage mail
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.5.0
  */
 class SUBSCRIPTION_SETTINGS_MAIL_RENDERER extends MAIL_OBJECT_RENDERER
@@ -958,7 +958,7 @@ class SUBSCRIPTION_SETTINGS_MAIL_RENDERER extends MAIL_OBJECT_RENDERER
  * actually need an object, but the renderer caching does.
  * @package webcore
  * @subpackage mail
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.5.0
  */
 class SUBSCRIPTION_SETTINGS extends RENDERABLE

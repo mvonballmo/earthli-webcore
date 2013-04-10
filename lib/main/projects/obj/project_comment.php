@@ -6,7 +6,7 @@
  * @filesource
  * @package projects
  * @subpackage obj
- * @version 3.3.0
+ * @version 3.4.0
  * @since 1.7.0
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/obj/comment.php');
  * A comment for use with {@link PROJECT}s.
  * @package projects
  * @subpackage obj
- * @version 3.3.0
+ * @version 3.4.0
  * @since 1.4.1
  */
 class PROJECT_COMMENT extends COMMENT

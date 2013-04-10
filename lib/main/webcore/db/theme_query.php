@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage db
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.2.1
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/db/query.php');
  * Return a list of {@link THEME}.
  * @package webcore
  * @subpackage db
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.2.1
  */
 class THEME_QUERY extends QUERY
@@ -79,7 +79,7 @@ class THEME_QUERY extends QUERY
  * Return a list of {@link THEME}.
  * @package webcore
  * @subpackage db
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.5.0
  */
 class APPLICATION_THEME_QUERY extends THEME_QUERY

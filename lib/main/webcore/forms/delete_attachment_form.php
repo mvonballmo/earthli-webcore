@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage forms
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.5.0
  */
 
@@ -44,7 +44,7 @@ require_once ('webcore/forms/delete_form.php');
  * Deleting marks a database object as deleted, but does not remove it from the database.
  * @package webcore
  * @subpackage forms
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.5.0
  */
 class DELETE_ATTACHMENT_FORM extends DELETE_OBJECT_IN_FOLDER_FORM

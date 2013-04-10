@@ -6,7 +6,7 @@
  * @filesource
  * @package albums
  * @subpackage forms
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.5.0
  */
 
@@ -43,7 +43,7 @@ require_once ('albums/forms/album_entry_form.php');
  * Edit or create a {@link PICTURE}.
  * @package albums
  * @subpackage forms
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.5.0
  */
 class PICTURE_FORM extends ALBUM_ENTRY_FORM

@@ -6,7 +6,7 @@
  * @filesource
  * @package news
  * @subpackage gui
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.4.0
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/gui/panel.php');
  * Performs setup for various {@link PANEL_MANAGER}s.
  * @package news
  * @subpackage gui
- * @version 3.3.0
+ * @version 3.4.0
  * @since 2.8.1
  */
 class NEWS_PANEL_MANAGER_HELPER extends PANEL_MANAGER_HELPER
