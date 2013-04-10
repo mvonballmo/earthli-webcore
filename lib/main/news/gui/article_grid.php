@@ -78,7 +78,7 @@ class BASE_ARTICLE_GRID extends CONTENT_OBJECT_GRID
   public $show_description = false;
 
   /**
-   * @param ARTICLE $obj
+   * @param DRAFTABLE_ENTRY $obj
    */
   protected function _draw_box ($obj)
   {
@@ -99,23 +99,21 @@ class BASE_ARTICLE_GRID extends CONTENT_OBJECT_GRID
       <?php
         }
       ?>
-      <h3 class="grid-title">
+      <h3>
         <?php echo $this->obj_link ($obj); ?>
       </h3>
-      <div class="detail">
+      <div class="info-box-top">
         <?php
           if ($this->show_user)
           {
             if ($obj->unpublished ())
             {
               $user = $obj->creator ();
-              $time = $obj->time_created;
               echo 'Created by ' . $user->title_as_link () . ' on ';
             }
             else
             {
               $user = $obj->publisher ();
-              $time = $obj->time_published;
               echo 'Published by ' . $user->title_as_link () . ' on ';
             }
           }
@@ -199,7 +197,7 @@ class ARTICLE_GRID extends BASE_ARTICLE_GRID
   public $group_by_time = true;
 
   /**
-   * @param ARTICLE $obj
+   * @param DRAFTABLE_ENTRY $obj
    */
   protected function _start_row ($obj)
   {

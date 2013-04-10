@@ -58,9 +58,9 @@ class JOB_RENDERER extends PROJECT_ENTRY_RENDERER
     $this->_echo_subscribe_status ($entry);
 ?>
 <div>
-  <table cellpadding="2" cellspacing="0" style="margin-left: 0px">
+  <table class="basic columns left-labels">
     <tr>
-      <td class="label">Kind</td>
+      <th>Kind</th>
       <td><?php echo $entry->kind_icon () . ' ' . $entry->kind_as_text (); ?></td>
     </tr>
     <?php
@@ -69,7 +69,7 @@ class JOB_RENDERER extends PROJECT_ENTRY_RENDERER
         $comp = $entry->component ();
     ?>
     <tr>
-      <td class="label">Component</td>
+      <th>Component</th>
       <td><?php echo $comp->icon_as_html ('16px') . ' ' . $comp->title_as_link (); ?></td>
     </tr>
 <?php
@@ -78,7 +78,7 @@ class JOB_RENDERER extends PROJECT_ENTRY_RENDERER
       {
     ?>
     <tr>
-      <td class="label">Needed By</td>
+      <th>Needed By</th>
       <td>
       <?php
         $f = $entry->time_needed->formatter ();
@@ -119,7 +119,7 @@ class JOB_RENDERER extends PROJECT_ENTRY_RENDERER
       {
     ?>
     <tr>
-      <td class="label">Reported By</td>
+      <th>Reported By</th>
       <td>
       <?php
         if ($reporter)
@@ -140,7 +140,7 @@ class JOB_RENDERER extends PROJECT_ENTRY_RENDERER
       {
     ?>
     <tr>
-      <td class="label">Created</td>
+      <th>Created</th>
       <td>
         <?php echo $entry->time_created->format (); ?>
         by
@@ -155,7 +155,7 @@ class JOB_RENDERER extends PROJECT_ENTRY_RENDERER
           $modifier = $entry->modifier ();
     ?>
     <tr>
-      <td class="label">Modified</td>
+      <th>Modified</th>
       <td><?php echo $entry->time_modified->format (); ?> by <?php echo $modifier->title_as_link (); ?></td>
     </tr>
     <?php
@@ -245,7 +245,7 @@ class JOB_RENDERER extends PROJECT_ENTRY_RENDERER
 
   /**
    * Outputs the object as plain text.
-   * @param object $entry
+   * @param JOB $entry
    * @access private
    */
   protected function _display_as_plain_text ($entry)
@@ -289,7 +289,7 @@ class JOB_RENDERER extends PROJECT_ENTRY_RENDERER
 
   /**
    * Show information for this branch
-   * @param JOB $obj
+   * @param JOB $entry
    * @param JOB_BRANCH_INFO $branch_info
    * @access private
    */
@@ -355,19 +355,20 @@ class JOB_RENDERER extends PROJECT_ENTRY_RENDERER
 
     if ($this->_options->show_changes)
     {
-      $chng_query = $entry->change_query ();
-      $chngs = $chng_query->objects ();
-      $num_changes = sizeof ($chngs);
+      $change_query = $entry->change_query ();
+      /** @var $changes CHANGE[] */
+      $changes = $change_query->objects ();
+      $num_changes = sizeof ($changes);
       if ($num_changes)
       {
   ?>
     <h2><?php echo $num_changes; ?> Changes</h2>
   <?php
-        $renderer = $chngs[0]->handler_for (Handler_print_renderer, $this->_options);
-        foreach ($chngs as $chng)
+        $renderer = $changes[0]->handler_for (Handler_print_renderer, $this->_options);
+        foreach ($changes as $change)
         {
-          echo '<h3>' . $chng->title_as_link () . '</h3>';
-          $renderer->display ($chng);
+          echo '<h3>' . $change->title_as_link () . '</h3>';
+          $renderer->display ($change);
         }
       }
     }
@@ -391,8 +392,8 @@ class JOB_ASSOCIATED_DATA_RENDERER extends ENTRY_ASSOCIATED_DATA_RENDERER
    */
   public function display ($obj, $options = null)
   {
-    $chng_query = $obj->change_query ();
-    $num_changes = $chng_query->size ();
+    $change_query = $obj->change_query ();
+    $num_changes = $change_query->size ();
     if ($num_changes)
     {
 ?>
@@ -401,11 +402,12 @@ class JOB_ASSOCIATED_DATA_RENDERER extends ENTRY_ASSOCIATED_DATA_RENDERER
 </h2>
 <div class="grid-content">
 <?php
-      $class_name = $this->app->final_class_name ('CHANGE_GRID', 'projects/gui/change_grid.php');
-      $grid = new $class_name ($this->app, read_var ('search_text'));
-      $grid->set_ranges (20, 1);
-      $grid->set_query ($chng_query);
-      $grid->display ();
+  $class_name = $this->app->final_class_name ('CHANGE_GRID', 'projects/gui/change_grid.php');
+  /** @var $grid CHANGE_GRID */
+  $grid = new $class_name ($this->app, read_var ('search_text'));
+  $grid->set_ranges (20, 1);
+  $grid->set_query ($change_query);
+  $grid->display ();
 ?>
 </div>
 <?php
