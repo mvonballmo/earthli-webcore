@@ -27,6 +27,7 @@ http://www.earthli.com/software/webcore
 ****************************************************************************/
 
   $folder_query = $App->login->folder_query ();
+  /** @var $folder FOLDER */
   $folder = $folder_query->object_at_id (read_var ('id'));
 
   if (isset ($folder) && $App->login->is_allowed (Privilege_set_folder, Privilege_view, $folder))
@@ -48,7 +49,8 @@ http://www.earthli.com/software/webcore
 
     $form_name = 'explorer_form';
   ?>
-  <div class="top-box button-content">
+  <div class="top-box">
+    <div class="button-content">
   <?php
     include_once ('webcore/util/options.php');
     $option = new STORED_OPTION ($App, 'show_explorer_tree');
@@ -66,16 +68,19 @@ http://www.earthli.com/software/webcore
       $caption = 'Hide folders';
     }
 
-    $icon = $App->sized_icon ($icon, '16px');
+    $icon = $App->get_icon_url ($icon, '16px');
     ?><a href="<?php echo $opt_link; ?>" class="button"><span class="icon sixteen" style="background-image: url(<?php echo $icon; ?>)"><?php echo $caption; ?></span></a><?php
 
     $class_name = $App->final_class_name ('EXPLORER_COMMANDS', 'webcore/cmd/explorer_commands.php');
+    /** @var $commands EXPLORER_COMMANDS */
     $commands = new $class_name ($folder, $form_name);
+    /** @var $renderer MENU_RENDERER */
     $renderer = $folder->handler_for (Handler_menu);
     $renderer->set_size (Menu_size_compact);
     $renderer->alignment = Menu_align_inline;
     $renderer->display ($commands);
     ?>
+    </div>
   </div>
   <div class="box">
     <div class="box-body">
@@ -117,9 +122,10 @@ http://www.earthli.com/software/webcore
       {
         $folder_info = $App->type_info_for ('FOLDER');
     ?>
-    <h2 id="folder_list"><?php echo $App->title_bar_icon ('{icons}buttons/new_folder') . ' ' . $num_folders . ' ' . $folder_info->plural_title; ?></h2>
+    <h2 id="folder_list"><?php echo $num_folders . ' ' . $folder_info->plural_title; ?></h2>
     <?php
         $class_name = $App->final_class_name ('FOLDER_LIST', 'webcore/gui/folder_list.php');
+        /** @var $list FOLDER_LIST */
         $list = new $class_name ($App);
         $list->page_name = $Env->url (Url_part_file_name);
         $list->form_name = $form_name;
@@ -133,12 +139,14 @@ http://www.earthli.com/software/webcore
       $entry_types = $App->entry_type_infos ();
       foreach ($entry_types as $type_info)
       {
+        /** @var $entry_query FOLDER_DRAFTABLE_ENTRY_QUERY */
         $entry_query = $folder->entry_query ();
         $entry_query->set_type ($type_info->id);
         $num_objs = $entry_query->size ();
         if ($num_objs)
         {
           $class_name = $App->final_class_name ('ENTRY_LIST', 'webcore/gui/entry_list.php', $type_info->id);
+          /** @var $list ENTRY_LIST */
           $list = new $class_name ($App);
           $list->control_name = "{$type_info->id}_ids";
           $list->paginator->page_number_var_name = "{$type_info->id}_page_number";
@@ -160,7 +168,7 @@ http://www.earthli.com/software/webcore
             $items_text = ' ' . $list->paginator->num_items () . ' ' . $type_info->plural_title;
           }
       ?>
-      <h2 id="<?php echo $type_info->id . '_list'; ?>"><?php echo $App->title_bar_icon ($type_info->icon) . $items_text; ?></h2>
+      <h2 id="<?php echo $type_info->id . '_list'; ?>"><?php echo $items_text; ?></h2>
       <?php
           $list->display ();
         }

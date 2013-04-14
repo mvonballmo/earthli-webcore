@@ -76,7 +76,7 @@ class COMPONENT extends OBJECT_IN_FOLDER
   {
     if ($this->icon_url)
     {
-      return $this->app->sized_icon ($this->icon_url, $size);
+      return $this->app->get_icon_url ($this->icon_url, $size);
     }
     
     return '';

@@ -107,11 +107,10 @@ http://www.earthli.com/software/webcore
     $entry_query = $folder->entry_query ();
     $entry_query->set_type ($entry_type_info->id);
     $last_entry = $entry_query->object_at_id ($last_id);
-    if (isset ($last_entry))
+
+    if (isset($last_entry))
     {
-  ?>
-    <span class="icon sixteen" style="margin-left: 15px; background-image: url(<?php echo $App->sized_icon ('{icons}indicators/info', '16px'); ?>)">Added <?php echo $last_entry->title_as_link (); ?>.</span>
-  <?php
+      echo $App->get_text_with_icon('{icons}indicators/info', 'Added ' . $last_entry->title_as_link (), '16px', 'top-box-message');
     }
   }
   ?>

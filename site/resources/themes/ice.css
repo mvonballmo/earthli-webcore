@@ -24,12 +24,14 @@ http://www.earthli.com/software/webcore
 
 ****************************************************************************/
 
-a:visited, a:link
+a:visited,
+a:link
 {
 	color: #3477B1;
 }
 
-a:hover, a:active
+a:hover,
+a:active
 {
 	color: #CC3333;
 }
@@ -130,7 +132,7 @@ hr, .horizontal-separator, .vertical-separator
 
 .quote-block
 {
-	padding: 0em 15px;
+	padding: 0 15px;
 	border-left: 6px solid #CCCCCC;
 }
 

@@ -62,8 +62,8 @@ http://www.earthli.com/software/webcore/projects
     $Page->title->subject = 'Delete Release';
 
     $Page->location->add_folder_link ($folder);
-    $Page->location->add_object_link ($branch);
-    $Page->location->add_object_link ($rel);
+    $Page->location->add_object_link ($branch, '', $App->resolve_file('{app_icons}buttons/new_branch'));
+    $Page->location->add_object_link ($rel, '', $App->resolve_file('{app_icons}buttons/new_release'));
     $Page->location->append ($Page->title->subject, '', '{icons}buttons/delete');
 
     $Page->start_display ();

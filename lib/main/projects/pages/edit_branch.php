@@ -39,6 +39,7 @@ http://www.earthli.com/software/webcore/projects
   if (isset ($branch) && $App->login->is_allowed (Privilege_set_branch, Privilege_modify, $branch))
   {
     $class_name = $App->final_class_name ('BRANCH_FORM', 'projects/forms/branch_form.php');
+    /** @var $form BRANCH_FORM */
     $form = new $class_name ($folder);
 
     $form->process_existing ($branch);
@@ -52,16 +53,13 @@ http://www.earthli.com/software/webcore/projects
     $Page->title->subject = 'Edit Branch';
     
     $Page->location->add_folder_link ($folder);
-    $Page->location->add_object_link ($branch);
-    $Page->location->append ('Edit');
+    $Page->location->add_object_link ($branch, '', $App->resolve_file('{app_icons}buttons/new_branch'));
+    $Page->location->append ('Edit', '', '{icons}buttons/edit');
 
     $Page->start_display ();
 ?>
     <div class="box">
-      <div class="box-title">
-        <?php echo $App->title_bar_icon ('{icons}buttons/edit'); ?> <?php echo $Page->title->subject; ?>
-      </div>
-      <div class="box-body">
+      <div class="box-body form-content">
       <?php
         $form->button = "Update";
         $form->display ();

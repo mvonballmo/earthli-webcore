@@ -62,39 +62,13 @@ class ALBUM_RENDERER extends FOLDER_RENDERER
       $f->set_type_and_clear_flags (Date_time_format_short_date);
       $pic_title = $this->context->text_options->convert_to_html_attribute ("$main_pic->title (" . $main_pic->date->format ($f) . ")");
 
-      if ($this->_options->show_as_summary)
-      {
-  ?>
-  <div>
-  <?php
-      }
-      else
-      {
-  ?>
-  <div class="chart" style="float: right; margin-bottom: 1em">
-    <div class="chart-body">
-  <?php
-      }
-
-  ?>
+    ?>
+    <div>
       <p>
         <img src="<?php echo $main_pic->full_thumbnail_name (); ?>" alt="<?php echo $pic_title; ?>" title="<?php echo $pic_title; ?>">
       </p>
-  <?php
-
-      if ($this->_options->show_as_summary)
-      {
-  ?>
-  </div>
-  <?php
-      }
-      else
-      {
-  ?>
     </div>
-  </div>
-  <?php
-      }
+    <?php
     }
 
     if (! $obj->is_root ())
@@ -116,7 +90,6 @@ class ALBUM_RENDERER extends FOLDER_RENDERER
     }
 
     $this->_echo_html_descriptions ($obj);
-    $this->_echo_subscribe_status ($obj);
     $this->_echo_html_user_information ($obj, 'info-box-bottom');
   }
 

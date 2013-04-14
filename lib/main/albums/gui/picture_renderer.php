@@ -56,7 +56,6 @@ class PICTURE_RENDERER extends ENTRY_RENDERER
    */
   protected function _display_as_html ($entry)
   {
-    $this->_echo_subscribe_status ($entry);
     $this->_echo_picture_as_html ($entry);
   }
 

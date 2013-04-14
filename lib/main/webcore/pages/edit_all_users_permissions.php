@@ -44,7 +44,7 @@ http://www.earthli.com/software/webcore
     $Page->title->subject ='Edit permissions for registered users';
     $Page->location->append ($App->short_title, './');
     $Page->location->append ('Users', 'view_users.php');
-    $Page->location->append ($App->resolve_icon_as_html('{icons}buttons/security', '', '16px') . ' ' . $Page->title->subject);
+    $Page->location->append ($Page->title->subject, '', '{icons}buttons/security');
 
     $Page->start_display ();
   ?>

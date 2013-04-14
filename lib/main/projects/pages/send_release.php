@@ -27,6 +27,7 @@ http://www.earthli.com/software/webcore/projects
 ****************************************************************************/
 
   $id = read_var ('id');
+  /** @var $folder_query USER_PROJECT_QUERY */
   $folder_query = $App->login->folder_query ();
   $folder = $folder_query->folder_for_release_at_id ($id);
 
@@ -39,6 +40,7 @@ http://www.earthli.com/software/webcore/projects
   if (isset ($rel) && $App->login->is_allowed (Privilege_set_release, Privilege_view, $rel))
   {
     $class_name = $App->final_class_name ('SEND_OBJECT_IN_FOLDER_FORM', 'webcore/forms/send_object_in_folder_form.php', 'release');
+    /** @var $form SEND_OBJECT_IN_FOLDER_FORM */
     $form = new $class_name ($App);
 
     $form->process_existing ($rel);
@@ -47,21 +49,21 @@ http://www.earthli.com/software/webcore/projects
       $Env->redirect_local ($rel->home_page ());
     }
 
+    $branch = $rel->branch ();
+
     $Page->title->add_object ($folder);
     $Page->title->add_object ($rel);
     $Page->title->subject = 'Send Release';
 
     $Page->location->add_folder_link ($folder);
-    $Page->location->add_object_link ($rel);
-    $Page->location->append ("Send");
+    $Page->location->add_object_link ($branch, '', $App->resolve_file('{app_icons}buttons/new_branch'));
+    $Page->location->add_object_link ($rel, '', $App->resolve_file('{app_icons}buttons/new_release'));
+    $Page->location->append ('Send', '', '{icons}buttons/send');
 
     $Page->start_display ();
 ?>
 <div class="box">
-  <div class="box-title">
-    <?php echo $App->title_bar_icon ('{icons}buttons/send'); ?> <?php echo $Page->title->subject; ?>
-  </div>
-  <div class="box-body">
+  <div class="box-body form-content">
   <?php
     $form->display ();
   ?>

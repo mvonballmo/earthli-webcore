@@ -100,25 +100,23 @@ class JOB extends PROJECT_ENTRY
   }
 
   /**
-   * HTML code for the icon to use for this assignee.
-   * Pass in a folder relative to the project owners folder.
-   * @param string $size
+   * Gets the base url for the icon for this user (i.e. icon is not sized).
    * @return string
    */
-  public function assignee_icon ($size = '16px')
+  public function get_assignee_icon_url ()
   {
     $assignee = $this->assignee ();
     if ($assignee)
     {
-      $Result = $assignee->icon_as_html ($size, 'Assigned');
+      $Result = $assignee->icon_url;
       if (! isset ($Result))
       {
-        $Result = $this->app->resolve_icon_as_html ('{app_icons}owners/assigned', 'Assigned', $size);
+        $Result = '{app_icons}owners/assigned';
       }
     }
     else
     {
-      $Result = $this->app->resolve_icon_as_html ('{app_icons}owners/unassigned', 'Unassigned', $size);
+      $Result = '{app_icons}owners/unassigned';
     }
 
     return $Result;

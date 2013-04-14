@@ -51,7 +51,7 @@ require_once ('webcore/cmd/entry_commands.php');
 class ARTICLE_COMMANDS extends DRAFTABLE_ENTRY_COMMANDS
 {
   /**
-   * @param ARTICLE $obj Configure commands for this object.
+   * @param DRAFTABLE_ENTRY $entry Configure commands for this object.
    */
   public function __construct ($entry)
   {
@@ -73,5 +73,3 @@ class ARTICLE_COMMANDS extends DRAFTABLE_ENTRY_COMMANDS
     $cmd->link = "send_article.php?id=$entry->id";
   }
 }
-
-?>

@@ -109,7 +109,7 @@ class RSS_RENDERER extends NEWSFEED_RENDERER
     <image>
       <link><?php echo $this->_as_xml ($this->base_url); ?></link>
       <title><![CDATA[<?php $this->title->display (); ?>]]></title>
-      <url><?php echo $this->context->sized_icon ($this->icon_file, '100px'); ?></url>
+      <url><?php echo $this->context->get_icon_url ($this->icon_file, '100px'); ?></url>
     </image>
     <description><![CDATA[<?php echo $this->_as_xml ($this->description); ?>]]></description>
     <copyright><![CDATA[<?php echo $this->_as_xml ($this->copyright); ?>]]></copyright>

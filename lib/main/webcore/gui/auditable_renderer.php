@@ -107,17 +107,6 @@ class AUDITABLE_RENDERER extends OBJECT_RENDERER
   }
 
   /**
-   * Show a button to toggle subscribe status.
-   * @param AUDITABLE $obj
-   * @param string $page_name Location of "toggle" url.
-   * @param string $kind Can be any of the {@link Subscribe_constants}.
-   * @access private
-   */
-  protected function _echo_html_subscribed_toggle ($obj, $page_name, $kind)
-  {
-  }
-
-  /**
    * Outputs the object as plain text.
   * @param AUDITABLE $obj
   * @access private
@@ -180,5 +169,3 @@ class AUDITABLE_RENDERER extends OBJECT_RENDERER
     echo $this->line ($caption . ' by ' . $user->title_as_plain_text () . ' on ' . $this->time ($time));
   }
 }
-
-?>

@@ -43,7 +43,7 @@ if (isset ($branch))
   $Page->title->add_object ($branch);
 
   $Page->location->add_folder_link ($folder, "panel=branches");
-  $Page->location->add_object_link ($branch);
+  $Page->location->add_object_link ($branch, '', $App->resolve_file('{app_icons}buttons/new_branch'));
 
   $history_item_query = $branch->history_item_query ();
   $obj = $branch;

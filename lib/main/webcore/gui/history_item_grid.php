@@ -162,13 +162,13 @@ class HISTORY_ITEM_GRID extends STANDARD_GRID
     <tr>
       <th>Kind</th>
       <td>
-        <span class="sixteen icon" style="background-image: url(<?php echo $this->context->sized_icon($obj->kind_icon_url (), '16px'); ?>)"><?php echo $obj->kind; ?></span>
+        <span class="sixteen icon" style="background-image: url(<?php echo $this->context->get_icon_url($obj->kind_icon_url (), '16px'); ?>)"><?php echo $obj->kind; ?></span>
       </td>
     </tr>
     <tr>
       <th>Emails</th>
       <td>
-        <span class="sixteen icon" style="background-image: url(<?php echo $this->context->sized_icon($obj->publication_state_icon_url (), '16px'); ?>)"><?php echo $obj->publication_state_as_text (); ?></span>
+        <span class="sixteen icon" style="background-image: url(<?php echo $this->context->get_icon_url($obj->publication_state_icon_url (), '16px'); ?>)"><?php echo $obj->publication_state_as_text (); ?></span>
       </td>
     </tr>
   </table>

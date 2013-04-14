@@ -426,7 +426,7 @@ class SQL_STORAGE extends WEBCORE_OBJECT
    * @param string $field_id Store value to this field.
    * @param integer $field_type Field is of this type (can be
    * 'Field_type_string', 'Field_type_integer', 'Field_type_date_time').
-   * @param object $value Reference to the actual value to store.
+   * @param object|string|int $value Reference to the actual value to store.
    * @param integer $action Store this field for these actions (can be {@link
    * Storage_action_none}, {@link Storage_action_create}, {@link
    * Storage_action_update}, {@link Storage_action_all}).

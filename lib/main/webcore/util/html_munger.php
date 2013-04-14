@@ -260,32 +260,6 @@ class HTML_PARAGRAPH_TRANSFORMER extends HTML_BLOCK_TRANSFORMER
 }
 
 /**
- * Generates HTML paragraphs and line-breaks for text.
- * @package webcore
- * @subpackage text
- * @version 3.4.0
- * @since 2.4.0
- * @access private
- */
-class HTML_GESHI_CODE_TRANSFORMER extends MUNGER_TRANSFORMER
-{
-  /**
-   * Transform raw text.
-   * @param MUNGER $munger The transformation context.
-   * @param string $text
-   * @return string
-   * @access private
-   */
-  protected function _apply_transform ($munger, $text)
-  {
-//    include_once ('third_party/geshi/geshi.php');
-    $geshi = new GeSHi($text, 'java');
-    $geshi->enable_classes ();
-    return $geshi->parse_code();
-  }
-}
-
-/**
  * A block of items in an {@link HTML_LIST_TRANSFORMER}.
  * @package webcore
  * @subpackage text
@@ -413,8 +387,9 @@ class HTML_LIST_TRANSFORMER extends MUNGER_LIST_TRANSFORMER
 
   /**
    * Post-process text generated from another transformer.
-   * @param MUNGER $munger The transformation context.
+   * @param HTML_MUNGER $munger The transformation context.
    * @param string
+   * @return string
    * @access private
    */
   protected function _transformer_text ($munger, $text)
@@ -467,6 +442,7 @@ class HTML_LIST_TRANSFORMER extends MUNGER_LIST_TRANSFORMER
 
   /**
    * @access private
+   * @var HTML_LIST_TRANSFORMER_ITEM
    */
   protected $_last_item = null;
 }
@@ -501,6 +477,7 @@ class HTML_DEFINITION_LIST_TRANSFORMER extends MUNGER_DEFINITION_LIST_TRANSFORME
    * Called from {@link _build_definition_part()}.
    * @param MUNGER $munger The transformation context.
    * @param string $line
+   * @return string
    * @access private
    */
   protected function _build_as_definition_term ($munger, $line)
@@ -518,6 +495,7 @@ class HTML_DEFINITION_LIST_TRANSFORMER extends MUNGER_DEFINITION_LIST_TRANSFORME
    * Called from {@link _build_definition_part()}.
    * @param MUNGER $munger The transformation context.
    * @param string $line
+   * @return string
    * @access private
    */
   protected function _build_as_definition_body ($munger, $line)
@@ -902,7 +880,7 @@ class HTML_HIGHLIGHT_CONVERTER extends MUNGER_CONVERTER
 
   /**
    * Convert the text to an output format.
-   * @param MUNGER $munger The conversion context.
+   * @param HTML_MUNGER $munger The conversion context.
    * @param string $text
    * @return string
    * @access private
@@ -995,7 +973,7 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
    * to the outermost container. Calls {@link _render_content()} to create the
    * content inside all of the extra containers.
    * @see _close_outer_area()
-   * @param MUNGER $munger The transformation context.
+   * @param HTML_MUNGER $munger The transformation context.
    * @param ARRAY[string,string] $attrs Attributes of a tag; retrieved from the
    * token.
    * @param boolean $is_block If true, uses DIV tags for extra containers;
@@ -1130,12 +1108,11 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
 
   /**
    * Returns the caption for this element, formatted according to the given parameters.
-   * @param boolean $is_block If true, uses DIV tags for extra containers;
-   * otherwise, SPAN tags are used.
    * @param boolean $is_block If true, the top of the container is being formatted.
+   * @param $is_top
    * @return string
    * @access private
-	 */
+   */
 	protected function _get_caption($is_block, $is_top) 
 	{
 		$caption_needed = false;
@@ -1211,7 +1188,7 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
    * Called by {@link _open_outer_area()} with parameters containing pre-
    * calculated values for common values. Should be closed with {@link
    * _close_inner_area()}.
-   * @param MUNGER $munger The transformation context.
+   * @param HTML_MUNGER $munger The transformation context.
    * @param array[string,string] $attrs List of attributes for the tag
    * (retrieved from the token).
    * @param CSS_STYLE_BUILDER $outer_css Styles intended for the bounding
@@ -1301,7 +1278,7 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
    * caption or author and optionally note the source (using the domain
    * of the "href").
    * 
-   * @param MUNGER $munger The transformation context.
+   * @param HTML_MUNGER $munger The transformation context.
    * @param array[string,string] $attrs List of attributes for the tag
    * (retrieved from the token).
    * @return string
@@ -1339,7 +1316,7 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
   /**
    * Return the formatted source as a link or text.
    * 
-   * @param MUNGER $munger The transformation context.
+   * @param HTML_MUNGER $munger The transformation context.
    * @param array[string,string] $attrs
    * @param string $href
    * @return string
@@ -1529,14 +1506,14 @@ class HTML_BOX_REPLACER extends HTML_DIV_REPLACER
 {
   /**
    * Render the beginning of the tag.
-   * @param MUNGER $munger The transformation context.
+   * @param HTML_MUNGER $munger The transformation context.
    * @param array[string,string] $attrs List of attributes for the tag
    * (retrieved from the token).
    * @param CSS_STYLE_BUILDER $outer_css Styles intended for the bounding
    * container; includes alignment and width.
    * @param CSS_STYLE_BUILDER $inner_css Styles intended for the inner
    * container; includes additional style and properties.
-   * @param $inner_class CSS classes to apply to the inner container.
+   * @param $inner_class string CSS classes to apply to the inner container.
    * @see _close_inner_area()
    * @return string
    * @access private

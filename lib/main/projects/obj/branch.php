@@ -99,6 +99,7 @@ class BRANCH extends OBJECT_IN_FOLDER
   {
     if (! isset ($this->_parent_release) && isset ($this->parent_release_id))
     {
+      /** @var $f PROJECT */
       $f = $this->parent_folder ();
       $q = $f->release_query ();
       $this->_parent_release = $q->object_at_id ($this->parent_release_id);

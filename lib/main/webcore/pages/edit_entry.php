@@ -76,14 +76,16 @@ http://www.earthli.com/software/webcore
     if ($commands->num_executable_commands ())
     {
       ?>
-      <div class="top-box button-content">
+      <div class="top-box">
+        <div class="button-content">
     <?php
         /** @var $renderer MENU_RENDERER */
         $renderer = $entry->handler_for (Handler_menu);
         $renderer->target = '_blank';
         $renderer->display ($commands);
         ?>
-      </div>
+      </div></div>
+
     <?php
     }
   ?>

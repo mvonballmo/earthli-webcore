@@ -43,16 +43,16 @@ http://www.earthli.com/software/webcore
     $Page->title->add_object ($folder);
 
     $Page->location->add_folder_link ($folder);
-    $Page->location->append ($App->resolve_icon_as_html ('{icons}buttons/security', ' ', '16px') . ' Permissions', $folder->permissions_home_page ());
+    $Page->location->append ('Permissions', $folder->permissions_home_page ());
 
     if ($folder->defines_security ())
     {
-      $Page->location->append ('Inherit');
+      $Page->location->append ('Inherit', '', '{icons}buttons/security');
       $Page->title->subject = 'Inherit Permissions';
     }
     else
     {
-      $Page->location->append ('Create');
+      $Page->location->append ('Create', '', '{icons}buttons/security');
       $Page->title->subject = 'Create Permissions';
     }
 

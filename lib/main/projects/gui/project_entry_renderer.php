@@ -83,19 +83,27 @@ abstract class PROJECT_ENTRY_RENDERER extends ENTRY_RENDERER
       $branch = $branch_info->branch ();
       if ($branch->locked ())
       {
-        echo $this->app->resolve_icon_as_html ('{icons}indicators/locked', 'Locked', '16px') . ' ';
+        echo $this->app->get_text_with_icon('{icons}indicators/locked', $branch_info->title_as_link (), '16px');
       }
-      echo $branch_info->title_as_link ();
+      else
+      {
+        echo $branch_info->title_as_link ();
+      }
+
       echo $this->app->display_options->object_separator;
+
       if ($rel)
       {
-        if ($rel->locked ())
-        {
-          echo $this->app->resolve_icon_as_html ('{icons}indicators/locked', 'Locked', '16px') . ' ';
-        }
         $rel_status = $rel->status ();
 
-        echo $rel->title_as_link ();
+        if ($rel->locked ())
+        {
+          echo $this->app->get_text_with_icon('{icons}indicators/locked', $rel->title_as_link (), '16px');
+        }
+        else
+        {
+          echo $rel->title_as_link ();
+        }
       }
       else
       {

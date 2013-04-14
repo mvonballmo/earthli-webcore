@@ -88,7 +88,7 @@ class DEFAULT_PAGE_RENDERER extends WEBCORE_PAGE_RENDERER
           if ($options->icon)
           {
             ?>
-            <div class="banner-icon" style="background-image: url(<?php echo $page->sized_icon ($options->icon, '50px'); ?>)"></div>
+            <div class="banner-icon" style="background-image: url(<?php echo $page->get_icon_url ($options->icon, '50px'); ?>)"></div>
           <?php
           }
           ?>

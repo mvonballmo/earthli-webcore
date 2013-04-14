@@ -148,7 +148,7 @@ abstract class OBJECT_IN_FOLDER extends CONTENT_OBJECT
    */
   public function state_as_icon ($size = '16px')
   {
-    return $this->app->resolve_icon_as_html ($this->state_icon_name (), $this->state_as_string (), $size);
+    return $this->app->resolve_icon_as_html ($this->state_icon_url (), $this->state_as_string (), $size);
   }
 
   /**
@@ -538,7 +538,7 @@ abstract class OBJECT_IN_FOLDER extends CONTENT_OBJECT
    * @return string
    * @access private
    */
-  public function state_icon_name ()
+  public function state_icon_url ()
   {
     switch ($this->state)
     {

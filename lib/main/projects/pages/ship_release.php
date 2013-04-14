@@ -57,8 +57,8 @@ http://www.earthli.com/software/webcore
     $panel_manager = new PROJECT_RELEASE_PANEL_MANAGER ($release);
 
     $Page->location->add_folder_link ($folder);
-    $Page->location->add_object_link ($branch);
-    $Page->location->add_object_link ($release);
+    $Page->location->add_object_link ($branch, '', $App->resolve_file('{app_icons}buttons/new_branch'));
+    $Page->location->add_object_link ($release, '', $App->resolve_file('{app_icons}buttons/new_release'));
     $Page->location->append ($Page->title->subject, '', '{icons}/buttons/ship');
 
     $Page->start_display ();

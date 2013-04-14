@@ -91,7 +91,7 @@ class PROPERTY_VALUE extends WEBCORE_OBJECT
   {
     if ($this->icon)
     {
-      return $this->context->sized_icon ($this->icon, $size);
+      return $this->context->get_icon_url ($this->icon, $size);
     }
     
     return '';

@@ -27,13 +27,16 @@ http://www.earthli.com/software/webcore/projects
 ****************************************************************************/
 
   $folder_query = $App->login->folder_query ();
+  /** @var $folder PROJECT */
   $folder = $folder_query->object_at_id (read_var ('id'));
 
   if (isset ($folder) && $App->login->is_allowed (Privilege_set_folder, Privilege_modify, $folder))
   {
     $class_name = $App->final_class_name ('BRANCH_FORM', 'projects/forms/branch_form.php');
+    /** @var $form BRANCH_FORM */
     $form = new $class_name ($folder);
 
+    /** @var $branch BRANCH */
     $branch = $folder->new_object ('branch');
 
     $form->process_new ($branch);
@@ -46,15 +49,12 @@ http://www.earthli.com/software/webcore/projects
     $Page->title->subject = 'Create Branch';
 
     $Page->location->add_folder_link ($folder);
-    $Page->location->append ($Page->title->subject);
+    $Page->location->append ($Page->title->subject, '', $App->resolve_file('{app_icons}buttons/new_branch'));
 
     $Page->start_display ();
 ?>
 <div class="box">
-  <div class="box-title">
-    <?php echo $App->title_bar_icon ('{app_icons}buttons/new_branch'); ?> <?php echo $Page->title->subject; ?>
-  </div>
-  <div class="box-body">
+  <div class="box-body form-content">
   <?php
     $form->button = "Create";
     $form->display ();

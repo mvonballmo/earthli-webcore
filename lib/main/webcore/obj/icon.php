@@ -113,7 +113,7 @@ class ICON extends UNIQUE_OBJECT
    */
   public function page_name ()
   {
-    return $this->context->sized_icon ($this->url, '100px');
+    return $this->context->get_icon_url ($this->url, '100px');
   }
   
   /**

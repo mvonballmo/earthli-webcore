@@ -45,7 +45,7 @@ http://www.earthli.com/software/webcore
     }
 
     $Page->title->add_object ($folder);
-    $Page->title->subject = $subscriber_query->size () . ' subscribers for ' . $folder->title_as_html ();
+    $Page->title->subject = $subscriber_query->size () . ' subscribers';
 
     $Page->location->add_folder_link ($folder);
     $Page->location->append ($Page->title->subject, '', '{icons}buttons/subscriptions');
@@ -73,7 +73,7 @@ http://www.earthli.com/software/webcore
       $caption = 'Hide folders';
     }
 
-    $icon = $App->sized_icon ($icon, '16px');
+    $icon = $App->get_icon_url ($icon, '16px');
     ?><a href="<?php echo $opt_link; ?>" class="button"><span class="icon sixteen" style="background-image: url(<?php echo $icon; ?>)"><?php echo $caption; ?></span></a><?php
 
     $menu = $App->make_menu ();

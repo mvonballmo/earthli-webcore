@@ -82,6 +82,7 @@ class FOLDER_SUBSCRIBER_FORM extends ID_BASED_FORM
     $selected_emails = $this->value_for ('subscriber_ids');
 
     $query = $this->_folder->subscriber_query ();
+    /** @var $subscribers SUBSCRIBER[] */
     $subscribers = $query->objects ();
     foreach ($subscribers as $subscriber)
     {
@@ -100,39 +101,30 @@ class FOLDER_SUBSCRIBER_FORM extends ID_BASED_FORM
   {
     $query = $this->_folder->subscriber_query ();
 
+    $renderer->start ();
+
+    $folder_type_info = $this->app->type_info_for('FOLDER');
+
+    $renderer->draw_text_row('', '<span style="width: 25em; display: inline-block">The following emails will be notified when changes are made to this ' . $folder_type_info->singular_title . '.</span>');
+
     $class_name = $this->app->final_class_name ('SUBSCRIBER_GRID', 'webcore/gui/subscriber_grid.php');
     /** @var $grid SUBSCRIBER_GRID */
-    $grid = new $class_name ($this->app);
+    $grid = new $class_name ($this->app, $this);
     
     $num_rows = max ($query->size (), 1);
     $grid->set_ranges ($num_rows, 1);
     $grid->set_query ($query);
 
-    $ctrl_name = $this->js_name ('subscriber_ids');
-
-    $renderer->start ();
-
-    if ($query->size () > 0)
-    {
-      $buttons [] = $renderer->javascript_button_as_HTML ('Select All', "select_all ($ctrl_name)", '{icons}buttons/select');
-      $buttons [] = $renderer->javascript_button_as_HTML ('Clear All', "select_none ($ctrl_name)", '{icons}buttons/close');
-      $buttons [] = $renderer->submit_button_as_HTML ();
-      $renderer->draw_buttons_in_row ($buttons);
-
-      $renderer->draw_separator ();
-    }
-
     $renderer->start_row ();
     $grid->display ();
     $renderer->finish_row ();
 
-    $renderer->draw_separator ();
-    if (! empty ($buttons))
+    if ($query->size () > 0)
     {
+      $buttons [] = $renderer->submit_button_as_HTML ();
       $renderer->draw_buttons_in_row ($buttons);
     }
 
     $renderer->finish ();
   }
 }
-?>

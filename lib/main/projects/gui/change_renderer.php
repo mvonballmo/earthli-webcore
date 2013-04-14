@@ -55,13 +55,18 @@ class CHANGE_RENDERER extends PROJECT_ENTRY_RENDERER
    */
   protected function _display_as_html ($entry)
   {
-    $this->_echo_subscribe_status ($entry);
 ?>
 <div>
   <table class="basic columns left-labels">
     <tr>
       <th>Kind</th>
-      <td><?php echo $entry->kind_icon () . ' ' . $entry->kind_as_text (); ?></td>
+      <td>
+        <?php
+        $props = $entry->kind_properties ();
+
+        echo $this->context->get_text_with_icon($props->icon, $entry->kind_as_text (), '16px');
+        ?>
+      </td>
     </tr>
     <?php
       if ($entry->component_id)
@@ -70,7 +75,11 @@ class CHANGE_RENDERER extends PROJECT_ENTRY_RENDERER
     ?>
     <tr>
       <th>Component</th>
-      <td><?php echo $comp->icon_as_html ('16px') . ' ' . $comp->title_as_link (); ?></td>
+      <td>
+        <?php
+        echo $this->app->get_text_with_icon($comp->icon_url, $comp->title_as_link (), '16px');
+        ?>
+      </td>
     </tr>
     <?php
       }

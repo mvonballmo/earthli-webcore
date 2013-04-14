@@ -31,24 +31,23 @@ http://www.earthli.com/software/webcore
   if ($App->login->is_allowed (Privilege_set_global, Privilege_configure))
   {
     $class_name = $App->final_class_name ('EXECUTE_APP_WIZARD_FORM', 'webcore/forms/execute_app_wizard_form.php');
+    /** @var $form FORM */
     $form = new $class_name ($App);
     
     $class_name = $App->final_class_name ('APP_WIZARD_TASK', 'webcore/util/app_wizard_task.php');
+    /** @var $task TASK */
     $task = new $class_name ($App);
 
     $Page->title->subject = 'App Wizard';
     
     $Page->location->add_root_link ();
     $Page->location->append ('Configure', 'configure.php');
-    $Page->location->append ($Page->title->subject);
+    $Page->location->append ($Page->title->subject, '', '{icons}buttons/create');
   
     $Page->start_display ();
   ?>
     <div class="box">
-      <div class="box-title">
-        <?php echo $App->title_bar_icon ('{icons}buttons/create'); ?> <?php echo $Page->title->subject; ?>
-      </div>
-      <div class="box-body">
+      <div class="box-body form-content">
         <?php
           $form->process_existing ($task);
           if (! $form->committed ())

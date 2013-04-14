@@ -27,11 +27,13 @@ http://www.earthli.com/software/webcore
 ****************************************************************************/
 
   $folder_query = $App->login->folder_query ();
+  /** @var $folder FOLDER */
   $folder = $folder_query->object_at_id (read_var ('id'));
 
   if (isset ($folder))
   {
     $class_name = $App->final_class_name ('MULTIPLE_OBJECT_PUBLISHER_FORM', 'webcore/forms/multiple_object_publisher_form.php');
+    /** @var $form MULTIPLE_OBJECT_PUBLISHER_FORM */
     $form = new $class_name ($folder);
     $form->load_from_request ();
   }
@@ -51,16 +53,13 @@ http://www.earthli.com/software/webcore
     $Page->title->subject = 'Publish ' . $form->object_list->description ();
 
     $Page->location->add_folder_link ($folder);
-    $Page->location->append ("Explorer", "view_explorer.php?id=$folder->id");
-    $Page->location->append ($Page->title->subject);
+    $Page->location->append ("Explorer", "view_explorer.php?id=$folder->id", '{icons}buttons/explorer');
+    $Page->location->append ($Page->title->subject, '', '{icons}buttons/ship');
 
     $Page->start_display ();
   ?>
   <div class="box">
-    <div class="box-title">
-      <?php echo $App->title_bar_icon ('{icons}buttons/ship'); ?> <?php echo $Page->title->subject; ?>
-    </div>
-    <div class="box-body">
+    <div class="box-body form-content">
     <?php
       $form->display ();
     ?>

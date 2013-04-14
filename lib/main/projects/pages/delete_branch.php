@@ -27,6 +27,7 @@ http://www.earthli.com/software/webcore/projects
 ****************************************************************************/
 
   $id = read_var ('id');
+  /** @var $folder_query USER_PROJECT_QUERY */
   $folder_query = $App->login->folder_query ();
   $folder = $folder_query->folder_for_branch_at_id ($id);
 
@@ -39,12 +40,13 @@ http://www.earthli.com/software/webcore/projects
   if (isset ($branch) && $App->login->is_allowed (Privilege_set_branch, Privilege_delete, $branch))
   {
     $class_name = $App->final_class_name ('DELETE_BRANCH_FORM', 'projects/forms/delete_branch_form.php', 'branch');
+    /** @var $form DELETE_BRANCH_FORM */
     $form = new $class_name ($folder, Privilege_set_folder);
 
     $form->process_existing ($branch);
     if ($form->committed ())
     {
-      if ($App->login->is_allowed (Privilege_set_branch, Privilege_hidden, $branch))
+      if ($App->login->is_allowed (Privilege_set_branch, Privilege_view_hidden, $branch))
       {
         $App->return_to_referer ($branch->home_page ());
       }
@@ -59,16 +61,13 @@ http://www.earthli.com/software/webcore/projects
     $Page->title->subject = "Delete Branch";
 
     $Page->location->add_folder_link ($folder);
-    $Page->location->add_object_link ($branch);
-    $Page->location->append ($Page->title->subject);
+    $Page->location->add_object_link ($branch, '', $App->resolve_file('{app_icons}buttons/new_branch'));
+    $Page->location->append ($Page->title->subject, '', '{icons}buttons/delete');
 
     $Page->start_display ();
   ?>
   <div class="box">
-    <div class="box-title">
-      <?php echo $App->title_bar_icon ('{icons}buttons/delete'); ?> Delete Branch?
-    </div>
-    <div class="box-body">
+    <div class="box-body form-content">
     <?php
       $form->display ();
     ?>

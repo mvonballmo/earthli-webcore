@@ -27,6 +27,7 @@ http://www.earthli.com/software/webcore/projects
 ****************************************************************************/
 
   $id = read_var ('id');
+  /** @var $folder_query USER_PROJECT_QUERY */
   $folder_query = $App->login->folder_query ();
   $folder = $folder_query->folder_for_component_at_id ($id);
 
@@ -36,12 +37,13 @@ http://www.earthli.com/software/webcore/projects
     $comp = $comp_query->object_at_id ($id);
   }
 
-  if (isset ($object) && $App->login->is_allowed (Privilege_set_component, Privilege_purge, $comp))
+  if (isset ($comp) && $App->login->is_allowed (Privilege_set_component, Privilege_purge, $comp))
   {
     $class_name = $App->final_class_name ('PURGE_COMPONENT_FORM', 'projects/forms/purge_component_form.php');
+    /** @var $form PURGE_COMPONENT_FORM */
     $form = new $class_name ($App);
 
-    $form->process_existing ($object);
+    $form->process_existing ($comp);
     if ($form->committed ())
     {
       $Env->redirect_local ($folder->home_page ());
@@ -53,15 +55,12 @@ http://www.earthli.com/software/webcore/projects
 
     $Page->location->add_folder_link ($folder);
     $Page->location->add_object_link ($comp);
-    $Page->location->append ($Page->title->subject);
+    $Page->location->append ($Page->title->subject, '', '{icons}buttons/purge');
 
     $Page->start_display ();
   ?>
   <div class="box">
-    <div class="box-title">
-      <?php echo $App->title_bar_icon ('{icons}buttons/purge'); ?> Purge Component?
-    </div>
-    <div class="box-body">
+    <div class="box-body form-content">
     <?php
       $form->display ();
     ?>

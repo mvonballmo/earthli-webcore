@@ -70,7 +70,6 @@ class COMMENT_RENDERER extends CONTENT_OBJECT_RENDERER
     </div>
     <div class="text-flow">
 <?php
-      $this->_echo_subscribe_status ($obj);
       echo $obj->description_as_html ();
 ?>
     </div>
@@ -93,16 +92,6 @@ class COMMENT_RENDERER extends CONTENT_OBJECT_RENDERER
   {
     $this->_echo_plain_text_description ($obj);
     $this->_echo_plain_text_user_information ($obj, false);
-  }
-
-  /**
-   * Shows the subscription status for this object.
-   * @param COMMENT $obj
-   * @access private
-   */
-  protected function _echo_subscribe_status ($obj)
-  {
-    $this->_echo_html_subscribed_toggle ($obj, 'subscribe_to_comment.php?id=' . $obj->id, Subscribe_comment);
   }
 }
 

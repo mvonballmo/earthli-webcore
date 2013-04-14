@@ -258,17 +258,6 @@ class CONTEXT extends RESOLVER
   }
 
   /**
-   * Icon for display in a title bar.
-   * Handles default formatting and styling.
-   * @param string $icon_url
-   * @return string
-   */
-  public function title_bar_icon ($icon_url)
-  {
-    return $this->resolve_icon_as_html ($icon_url, ' ', '32px', 'vertical-align: text-bottom');
-  }
-
-  /**
    * Set the text to highlight in this context.
    * All HTML formatters will have these words automatically set so that they are highlighted.
    * @see html_text_formatter ()

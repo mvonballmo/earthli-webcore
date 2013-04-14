@@ -55,8 +55,6 @@ class JOURNAL_RENDERER extends ENTRY_RENDERER
    */
   protected function _display_as_html ($entry)
   {
-    $this->_echo_subscribe_status ($entry);
-
     $folder = $entry->parent_folder ();
 ?>
     <p class="date-time">

@@ -59,14 +59,15 @@ http://www.earthli.com/software/webcore/projects
 
     if ($branch->locked ())
     {
-      $icon = $App->sized_icon($branch->state_icon_name(), '');
+
+      $icon = $App->resolve_file($branch->state_icon_url(), '');
     }
     else
     {
       $icon = '';
     }
 
-    $Page->location->add_object_text ($branch, $icon);
+    $Page->location->add_object_text ($branch, $App->resolve_file('{app_icons}buttons/new_branch'));
     $Page->location->append ($Page->title->subject);
 
     $Page->start_display ();
@@ -155,7 +156,6 @@ http://www.earthli.com/software/webcore/projects
     ?>
   </div>
 <?php
-    $box->finish_column_set ();
     $Page->finish_display ();
   }
   else

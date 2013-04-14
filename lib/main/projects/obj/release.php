@@ -88,6 +88,12 @@ class RELEASE extends OBJECT_IN_FOLDER
   public $time_next_deadline;
 
   /**
+   * A short summary of this release.
+   * @var string
+   */
+  public $summary;
+
+  /**
    * @param PROJECT_APPLICATION $app Main application.
    */
   public function __construct ($app)
@@ -473,7 +479,7 @@ class RELEASE extends OBJECT_IN_FOLDER
    * @return string
    * @access private
    */
-  public function state_icon_name ()
+  public function state_icon_url ()
   {
     switch ($this->state)
     {
@@ -484,7 +490,7 @@ class RELEASE extends OBJECT_IN_FOLDER
     case Shipped:
       return '{icons}buttons/ship';
     default:
-      return parent::state_icon_name ();
+      return parent::state_icon_url ();
     }
   }
 

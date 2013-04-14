@@ -406,13 +406,14 @@ class RESOURCE_MANAGER extends RAISABLE
    * Resolve the file fragment as an HTML image.
    * @param string $fragment location of icon.
    * @param string $text used for the alt and title attributes.
-   * @param string $dom_id an optional DOM id to allow JavaScript access to the image.
+   * @param string $size The size of icon to render; defaults to '16px'.
    * @param string $style an optional CSS style (not a class).
+   * @param int|string $dom_id An optional DOM id to allow JavaScript access to the image.
    * @return string
    */
   public function resolve_icon_as_html ($fragment, $text, $size = '', $style = 'vertical-align: middle', $dom_id = 0)
   {
-    return $this->image_as_html ($this->sized_icon ($fragment, $size), $text, $style, $dom_id);
+    return $this->image_as_html ($this->get_icon_url ($fragment, $size), $text, $style, $dom_id);
   }
 
   /**
@@ -433,8 +434,8 @@ class RESOURCE_MANAGER extends RAISABLE
    * Render an image as HTML.
    * @param string $url location of icon.
    * @param string $text used for the alt and title attributes.
-   * @param string $dom_id an optional DOM id to allow JavaScript access to the image.
    * @param string $style an optional CSS style (not a class).
+   * @param int|string $dom_id an optional DOM id to allow JavaScript access to the image.
    * @return string
    */
   public function image_as_html ($url, $text, $style = 'vertical-align: middle', $dom_id = 0)
@@ -462,13 +463,13 @@ class RESOURCE_MANAGER extends RAISABLE
    * Get the URL for the requested icon size.
    * Returns an icon 'size' which conforms to the WebCore naming conventions for icon sizes. Sized icons
    * have several files, all in the same folder. If a size is specified, it is appended to the file name
-   * with a preceding underscore. e.g. sized_icon ('logo', '16px') returns logo_16px. This algorithm is
+   * with a preceding underscore. e.g. get_icon_url ('logo', '16px') returns logo_16px. This algorithm is
    * subject to change.
    * @param string $base_url Location of the icon file.
    * @param string $size Size modifier to use to find the correct icon.
    * @return string
    */
-  public function sized_icon ($base_url, $size)
+  public function get_icon_url ($base_url, $size)
   {
     if ($base_url)
     {
@@ -487,6 +488,35 @@ class RESOURCE_MANAGER extends RAISABLE
     }
     
     return '';
+  }
+
+  public function get_text_with_icon ($icon_url, $text, $size, $extra_css = '')
+  {
+    if ($icon_url)
+    {
+      switch ($size)
+      {
+        case '16px':
+          $class = 'sixteen';
+          break;
+        case '20px':
+          $class = 'twenty';
+          break;
+        case '32px':
+          $class = 'thirty-two';
+          break;
+        default:
+          throw new UNKNOWN_VALUE_EXCEPTION($size);
+      }
+
+      $expanded_icon_url = $this->get_icon_url($icon_url, $size);
+
+      return "<span class=\"icon $class $extra_css\" style=\"background-image: url($expanded_icon_url)\">$text</span>";
+    }
+    else
+    {
+      return $text;
+    }
   }
 
   /**
@@ -825,5 +855,3 @@ class RESOURCE_MANAGER extends RAISABLE
    */
   protected $_cache;
 }
-
-?>

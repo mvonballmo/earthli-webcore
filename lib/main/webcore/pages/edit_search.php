@@ -27,11 +27,13 @@ http://www.earthli.com/software/webcore
 ****************************************************************************/
 
   $search_query = $App->login->search_query ();
+  /** @var $search SEARCH */
   $search = $search_query->object_at_id (read_var ('id'));
 
   if (isset ($search))
   {
     $class_name = $App->final_class_name ('STORE_SEARCH_FORM', 'webcore/forms/store_search_form.php');
+    /** @var $form STORE_SEARCH_FORM */
     $form = new $class_name ($App, $search->fields);
 
     $form->process_existing ($search);
@@ -46,15 +48,12 @@ http://www.earthli.com/software/webcore
     $Page->location->add_root_link ();
     $Page->location->append ('Searches', 'view_searches.php');
     $Page->location->add_object_link ($search);
-    $Page->location->append ($Page->title->subject);
+    $Page->location->append ($Page->title->subject, '', '{icons}buttons/edit');
 
     $Page->start_display ();
 ?>
 <div class="box">
-  <div class="box-title">
-    <?php echo $App->title_bar_icon ('{icons}buttons/edit'); ?> <?php echo $Page->title->subject; ?>
-  </div>
-  <div class="box-body">
+  <div class="box-body form-content">
   <?php
     $form->display ();
   ?>

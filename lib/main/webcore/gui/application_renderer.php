@@ -55,63 +55,40 @@ class APPLICATION_RENDERER extends RENDERER
    */
   public function display_as_html ($obj)
   {
-    $main_style = '';
-    if ($obj->app->icon)
-    {
-      $main_style .= ' margin-left: 60px';
-      echo '<div style="float: left; margin-right: 10px">';
-      echo $this->app->resolve_icon_as_html ($obj->app->icon, ' ', '50px');
-      echo '</div>';
-      echo '<div style="' . $main_style . '">';
-    }
-?>      
-  <dl>
-    <dt class="field">
-      Title
-    </dt>
-    <dd>
-      <?php echo $obj->app->name (); ?>
-    </dd>
-    <dt class="field">
-      Database Name
-    </dt>
-    <dd>
-      <?php echo $obj->app->database_options->name; ?>
-    </dd>
-    <dt class="field">
-      Frameworks
-    </dt>
-    <dd>
+?>
+<table class="basic columns left-labels top">
+  <tr>
+    <th>Title</th>
+    <td><?php echo $this->app->get_text_with_icon($obj->app->icon, $obj->app->name (), '20px'); ?></td>
+  </tr>
+  <tr>
+    <th>Database name</th>
+    <td><?php echo $obj->app->database_options->name; ?></td>
+  </tr>
+  <tr>
+    <th>Frameworks</th>
+    <td class="text-flow">
       <?php echo $obj->app_info->description (); ?><br>
       <?php echo $obj->lib_info->description (); ?>
-    </dd>
-    <dt class="field">
-      Databases
-    </dt>
-    <dd>
+    </td>
+  </tr>
+  <tr>
+    <th>Databases</th>
+    <td class="text-flow">
       <?php echo $obj->app_info->description (false); ?><br>
       <?php echo $obj->lib_info->description (false); ?>
-    </dd>
-    <dt class="field">
-      Support URL
-    </dt>
-    <dd>
-      <a href="<?php echo $obj->app->support_url; ?>"><?php echo $obj->app->support_url; ?></a>
-    </dd>
-    <dt class="field">
-      Log Files
-    </dt>
-    <dd>
-      <?php
-        echo $this->app->resolve_file ($obj->app->mail_options->log_file_name);
-      ?>
-    </dd>
-  </dl>
+    </td>
+  </tr>
+  <tr>
+    <th>Support URL</th>
+    <td><a href="<?php echo $obj->app->support_url; ?>"><?php echo $obj->app->support_url; ?></a></td>
+  </tr>
+  <tr>
+    <th>Log Files</th>
+    <td><?php echo $this->app->resolve_file ($obj->app->mail_options->log_file_name); ?></td>
+  </tr>
+</table>
 <?php
-    if ($obj->app->icon)
-    {
-      echo '</div>';
-    }
   }
 }
 

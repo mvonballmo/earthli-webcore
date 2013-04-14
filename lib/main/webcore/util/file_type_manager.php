@@ -97,7 +97,7 @@ abstract class FILE_TYPE_MANAGER extends WEBCORE_OBJECT
    */
   public function expanded_icon_url ($mime_type, $extension, $size = '32px')
   {
-    return $this->context->sized_icon ($this->icon_url ($mime_type, $extension), $size);
+    return $this->context->get_icon_url ($this->icon_url ($mime_type, $extension), $size);
   }
 
   /**

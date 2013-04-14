@@ -62,13 +62,13 @@ class CHANGE_NAVIGATOR extends ENTRY_NAVIGATOR
 
   /**
    * @param CHANGE $obj Retrieve the title from this change.
-   * @param boolean $selected Is this the current item in the list?
    * @return string
    * @access private
    */
   protected function _text_for_list ($obj)
   {
-    return $obj->kind_icon ('16px') . ' ' . parent::_text_for_list ($obj);
+    $props = $obj->kind_properties ();
+
+    return $this->context->get_text_with_icon($props->icon, parent::_text_for_list ($obj), '16px');
   }
 }
-?>

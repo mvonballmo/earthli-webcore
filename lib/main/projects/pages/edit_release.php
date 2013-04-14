@@ -54,8 +54,8 @@ http://www.earthli.com/software/webcore/projects
     $Page->title->subject = 'Edit Release ' . $rel->title_as_plain_text ();
 
     $Page->location->add_folder_link ($folder);
-    $Page->location->add_object_link ($rel->branch ());
-    $Page->location->add_object_link ($rel);
+    $Page->location->add_object_link ($rel->branch (), '', $App->resolve_file('{app_icons}buttons/new_branch'));
+    $Page->location->add_object_link ($rel, '', $App->resolve_file('{app_icons}buttons/new_release'));
     $Page->location->append ('Edit', '', '{icons}buttons/edit');
 
     $Page->start_display ();

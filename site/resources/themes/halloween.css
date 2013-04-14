@@ -30,12 +30,6 @@ body
 	color: #FFFFFF;
 }
 
-.page
-{
-	max-width: 800px;
-	margin: auto;
-}
-
 .banner-title
 {
 	color: #FF9900;
@@ -44,6 +38,12 @@ body
 .nav-box
 {
 	border-width: 0px;
+}
+
+.button
+{
+  background-color: transparent;
+  border: 1px solid #666;
 }
 
 .box
@@ -163,11 +163,6 @@ th
 .quote, .quote-inline, .quote-block
 {
 	color: #CCCCCC;
-}
-
-.quote-block
-{
-	padding: .5em;
 }
 
 .required

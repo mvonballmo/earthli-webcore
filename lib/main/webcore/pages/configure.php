@@ -38,18 +38,23 @@ http://www.earthli.com/software/webcore
 
     $Page->start_display ();
   ?>
-  <div class="top-box button-content">
+  <div class="top-box">
+    <div class="button-content">
     <?php
     $class_name = $App->final_class_name ('CONFIGURE_COMMANDS', 'webcore/cmd/configure_commands.php');
+    /** @var $commands CONFIGURE_COMMANDS */
     $commands = new $class_name ($info);
     $renderer = $App->make_menu_renderer ();
-    $renderer->display_as_toolbar ($commands);
+    $renderer->set_size(Menu_size_full);
+    $renderer->display ($commands);
     ?>
+    </div>
   </div>
   <div class="box">
     <div class="box-body">
     <?php
       $class_name = $App->final_class_name ('APPLICATION_RENDERER', 'webcore/gui/application_renderer.php');
+      /** @var $renderer APPLICATION_RENDERER */
       $renderer = new $class_name ($App);
       $renderer->display_as_html ($info);
     ?>

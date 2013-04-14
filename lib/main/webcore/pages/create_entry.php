@@ -79,7 +79,7 @@ http://www.earthli.com/software/webcore
 
       if ($entry_type_info->icon)
       {
-        $icon = $App->sized_icon($entry_type_info->icon, '');
+        $icon = $App->get_icon_url($entry_type_info->icon, '');
       }
       else
       {
@@ -95,6 +95,7 @@ http://www.earthli.com/software/webcore
       $Page->start_display ();
     ?>
     <div class="top-box button-content">
+      <div class="button-content">
       <?php
       $menu = $App->make_menu ();
       $menu->renderer = $App->make_menu_renderer ();
@@ -118,11 +119,14 @@ http://www.earthli.com/software/webcore
         $entry_query = $folder->entry_query ();
         $entry_query->set_type ($entry_type_info->id);
         $last_entry = $entry_query->object_at_id ($last_id);
-        ?>
-        <span class="icon sixteen" style="margin-left: 15px; background-image: url(<?php echo $App->sized_icon ('{icons}indicators/info', '16px'); ?>)">Added <?php echo $last_entry->title_as_link (); ?>.</span>
-      <?php
+
+        if (isset($last_entry))
+        {
+          echo $App->get_text_with_icon('{icons}indicators/info', 'Added ' . $last_entry->title_as_link (), '16px', 'top-box-message');
+        }
       }
       ?>
+      </div>
     </div>
     <div class="box">
       <div class="box-body form-content">

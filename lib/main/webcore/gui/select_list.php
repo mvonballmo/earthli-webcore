@@ -82,7 +82,18 @@ class SELECT_LIST extends LIST_GRID
    */
   protected function _draw_header ()
   {
-    $col = '<div style="text-align: center">';
+//    $class_name = $this->app->final_class_name ('SELECTION_COMMANDS', 'webcore/cmd/selection_commands.php');
+//    /** @var $commands SELECTION_COMMANDS */
+//
+//    $commands = new $class_name ($form, $this->control_name);
+//
+//    $menu_renderer = $this->app->make_menu_renderer();
+//    $menu_renderer->set_size(Menu_size_minimal);
+//    $menu_renderer->alignment = Menu_align_inline;
+//
+//    $menu_renderer->display($commands);
+
+    $col = '<div>';
     $col .= "<a href=\"#\" onclick=\"toggle_selected (document.getElementById('$this->form_name')['{$this->control_name}[]']); return false;\" title=\"$this->toggle_title\">";
     if ($this->toggle_image)
     {

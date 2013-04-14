@@ -52,22 +52,19 @@ http://www.earthli.com/software/webcore/projects
     $Page->title->subject = 'Edit Component';
     
     $Page->location->add_folder_link ($folder);
-    $Page->location->add_object_link ($comp);
-    $Page->location->append ('Edit');
+    $Page->location->add_object_link ($comp, '', $comp->icon_url);
+    $Page->location->append ('Edit', '', '{icons}buttons/edit');
 
     $Page->start_display ();
 ?>
-    <div class="box">
-      <div class="box-title">
-        <?php echo $App->title_bar_icon ('{icons}buttons/edit'); ?> <?php echo $Page->title->subject; ?>
-      </div>
-      <div class="box-body">
-      <?php
-        $form->button = "Update";
-        $form->display ();
-      ?>
-      </div>
-    </div>
+<div class="box">
+  <div class="box-body form-content">
+  <?php
+    $form->button = "Update";
+    $form->display ();
+  ?>
+  </div>
+</div>
 <?php
     $Page->finish_display ();
   }

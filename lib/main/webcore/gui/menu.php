@@ -83,19 +83,6 @@ class MENU extends WEBCORE_OBJECT
   }
 
   /**
-   * Render the menu into a toolbar container.
-   * @param string $CSS_class
-   * @see MENU_RENDERER::display_as_toolbar()
-   */
-  public function display_as_toolbar ($CSS_class = 'menu-bar-top')
-  {
-    if (isset ($this->_commands))
-    {
-      $this->renderer->display_as_toolbar ($this->_commands, $CSS_class);
-    }
-  }
-
-  /**
    * Render the menu as HTML.
    * @see MENU_RENDERER::display()
    */

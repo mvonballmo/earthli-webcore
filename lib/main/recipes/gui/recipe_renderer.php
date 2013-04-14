@@ -55,8 +55,6 @@ class RECIPE_RENDERER extends DRAFTABLE_ENTRY_RENDERER
    */
   protected function _display_as_html ($entry)
   {
-    $this->_echo_subscribe_status ($entry);
-
     if ($entry->originator)
     {
   ?>
@@ -65,20 +63,20 @@ class RECIPE_RENDERER extends DRAFTABLE_ENTRY_RENDERER
     }
   ?>
   <?php $this->_echo_html_description ($entry); ?>
-  <?php if (! $this->_options->preferred_text_length ) { ?>
-  <div style="margin: auto; width: 90%">
-    <div style="float: left; width: 45%; padding-right: 1em;">
-      <h3 style="text-align: center">Ingredients</h3>
-      <?php echo $entry->ingredients_as_html (); ?>
-    </div>
-    <div class="vertical-separator" style="float: left; width: 45%; padding-left: 1em; margin-bottom: 1em">
-      <h3 style="text-align: center">Instructions</h3>
-      <?php echo $entry->instructions_as_html (); ?>
-    </div>
-    <div style="clear: both"></div>
-  </div>
-  <?php } ?>
-<?php
+  <?php
+    if (! $this->_options->preferred_text_length )
+    {
+      $box = $this->context->make_box_renderer ();
+      $box->start_column_set ();
+      $box->new_column_of_type ('first-of-two-columns text-flow');
+      echo '<h3>Ingredients</h3>';
+      echo $entry->ingredients_as_html ();
+      $box->new_column_of_type ('second-of-two-columns text-flow');
+      echo '<h3>Instructions</h3>';
+      echo $entry->instructions_as_html ();
+      $box->finish_column_set();
+    }
+
     $this->_echo_html_user_information ($entry, 'info-box-bottom');
   }
 

@@ -70,6 +70,38 @@ class SUBSCRIBER_GRID extends STANDARD_GRID
   public $show_separator = false;
 
   /**
+   * @var string
+   */
+  public $menu_size = Menu_size_full;
+
+  /**
+   * @param APPLICATION $app Main application.
+   * @param FORM $form The form within which this grid is shown.
+   */
+  public function __construct ($app, $form)
+  {
+    parent::__construct ($app);
+    $this->_form = $form;
+  }
+
+  protected function _draw($objs)
+  {
+    $class_name = $this->app->final_class_name ('SELECTION_COMMANDS', 'webcore/cmd/selection_commands.php');
+    /** @var $commands SELECTION_COMMANDS */
+    $commands = new $class_name ($this->_form, 'subscriber_ids');
+
+    $menu_renderer = $this->app->make_menu_renderer();
+    $menu_renderer->set_size($this->menu_size);
+    $menu_renderer->alignment = Menu_align_inline;
+
+    echo '<p>';
+    $menu_renderer->display($commands);
+    echo '</p>';
+
+    parent::_draw($objs);
+  }
+
+  /**
    * @param SUBSCRIBER $obj
    * @access private
    */
@@ -81,5 +113,9 @@ class SUBSCRIBER_GRID extends STANDARD_GRID
     echo $obj->title_as_link ();
   }
 
+  /** @var \FORM */
+  var $_form;
 }
+
+
 ?>

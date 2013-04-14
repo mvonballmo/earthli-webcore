@@ -44,12 +44,13 @@ http://www.earthli.com/software/webcore
   if (isset ($entry) && $App->login->is_allowed (Privilege_set_entry, Privilege_delete, $entry))
   {
     $class_name = $App->final_class_name ('DELETE_OBJECT_IN_FOLDER_FORM', 'webcore/forms/delete_form.php', $entry_type_info->id);
+    /** @var $form DELETE_OBJECT_IN_FOLDER_FORM */
     $form = new $class_name ($folder, Privilege_set_entry);
 
     $form->process_existing ($entry);
     if ($form->committed ())
     {
-      if ($App->login->is_allowed (Privilege_set_entry, Privilege_hidden, $folder, $creator) && ! $form->value_for ('purge'))
+      if ($App->login->is_allowed (Privilege_set_entry, Privilege_view_hidden, $folder, $entry->creator()) && ! $form->value_for ('purge'))
       {
         $App->return_to_referer ($entry->home_page ());
       }
@@ -65,7 +66,7 @@ http://www.earthli.com/software/webcore
 
     $Page->location->add_folder_link ($folder);
     $Page->location->add_object_link ($entry);
-    $Page->location->append ($App->resolve_icon_as_html('{icons}buttons/delete', '', '16px') . ' ' . $Page->title->subject);
+    $Page->location->append ($Page->title->subject, '', '{icons}buttons/delete');
 
     $Page->start_display ();
   ?>

@@ -55,13 +55,17 @@ class JOB_RENDERER extends PROJECT_ENTRY_RENDERER
    */
   protected function _display_as_html ($entry)
   {
-    $this->_echo_subscribe_status ($entry);
 ?>
 <div>
   <table class="basic columns left-labels">
     <tr>
       <th>Kind</th>
-      <td><?php echo $entry->kind_icon () . ' ' . $entry->kind_as_text (); ?></td>
+      <td>
+        <?php
+        $props = $entry->kind_properties ();
+        echo $this->app->get_text_with_icon($props->icon, $entry->kind_as_text(), '16px');
+        ?>
+      </td>
     </tr>
     <?php
       if ($entry->component_id)
@@ -70,7 +74,11 @@ class JOB_RENDERER extends PROJECT_ENTRY_RENDERER
     ?>
     <tr>
       <th>Component</th>
-      <td><?php echo $comp->icon_as_html ('16px') . ' ' . $comp->title_as_link (); ?></td>
+      <td>
+        <?php
+        echo $this->app->get_text_with_icon($comp->icon_url, $comp->title_as_link (), '16px');
+        ?>
+      </td>
     </tr>
 <?php
       }
@@ -90,25 +98,25 @@ class JOB_RENDERER extends PROJECT_ENTRY_RENDERER
       }
     ?>
     <tr>
-      <td class="label">Assigned to</td>
+      <th>Assigned to</th>
       <td>
       <?php
-        echo $entry->assignee_icon () . ' ';
-
         $assignee = $entry->assignee ();
         if ($assignee)
         {
-          echo $assignee->title_as_link ();
+          $text = $assignee->title_as_link ();
           $time_owned = $entry->assignee_age ();
           if (isset ($time_owned))
           {
-            echo ' (' . $time_owned->format () . ')';
+            $text .= ' (' . $time_owned->format () . ')';
           }
         }
         else
         {
-          echo '(None)';
+          $text = '(None)';
         }
+
+        echo $this->app->get_text_with_icon($entry->get_assignee_icon_url(), $text, '16px');
       ?>
       </td>
     </tr>
@@ -188,9 +196,11 @@ class JOB_RENDERER extends PROJECT_ENTRY_RENDERER
         echo $needed_by . '<br>';
       }
     }
+
+    $status = $branch_info->status_properties ();
 ?>
-  <span class="field"><?php echo $branch_info->status_icon () . ' ' . $branch_info->status_as_text (); ?></span>
-  <span class="detail">
+  <span class="field"><?php echo $this->app->get_text_with_icon($status->icon, $branch_info->status_as_text (), '16px'); ?></span>
+  <span>
   <?php
     $closer = $branch_info->closer ();
     $time_open = $branch_info->age ();

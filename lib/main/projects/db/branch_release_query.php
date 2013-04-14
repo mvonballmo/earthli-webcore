@@ -76,5 +76,3 @@ class BRANCH_RELEASE_QUERY extends PROJECT_RELEASE_QUERY
    */
   protected $_branch;
 }
-
-?>

@@ -122,7 +122,26 @@ class FRAMEWORK_INFO extends NAMED_OBJECT
     
     return $this->app->resolve_icon_as_html ($icon, $title, $size);
   }
-  
+
+  /**
+   * Return an icon for the state of this version.
+   * Must set the {@link $software_version} first.
+   * @return string
+   */
+  public function icon_url ()
+  {
+    if ($this->_version_not_found || ! $this->database_version)
+    {
+      return '{icons}indicators/error';
+    }
+    elseif ($this->needs_upgrade ())
+    {
+      return '{icons}indicators/warning';
+    }
+
+    return '{icons}buttons/select';
+  }
+
   /**
    * Return a message for the state of this version.
    * Must set the {@link $software_version} first.
@@ -153,8 +172,8 @@ class FRAMEWORK_INFO extends NAMED_OBJECT
     {
       return $this->title . ' ' . $this->software_version;
     }
-    else 
-      return $this->icon_as_html () . ' ' . $this->title . ' ' . $this->database_version . ' &mdash; ' . $this->message ();
+
+    return $this->context->get_text_with_icon($this->icon_url(), ' ' . $this->title . ' ' . $this->database_version . ' &mdash; ' . $this->message (), '16px');
   }
   
   /**

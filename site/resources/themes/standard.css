@@ -24,15 +24,9 @@ http://www.earthli.com/software/webcore
 
 ****************************************************************************/
 
-.page
-{
-	max-width: 800px;
-	margin: auto;
-}
-
 .nav-box
 {
-	border-width: 0px;
+	border-width: 0;
 }
 
 a:link
@@ -47,30 +41,26 @@ a:visited
 	text-decoration: underline;
 }
 
+a:hover,
 a:active
-{
-	color: #FF0000;
-}
-
-a:hover
 {
 	color: #FF0000;
 }
 
 .box
 {
-	border-width: 0px;
+	border-width: 0;
 }
 
 .box-title
 {
 	text-align: center;
-	border-width: 0px;
+	border-width: 0;
 }
 
 .chart-title
 {
-	border-width: 0px;
+	border-width: 0;
 }
 
 .object-in-list, .info-box-top, .info-box-bottom

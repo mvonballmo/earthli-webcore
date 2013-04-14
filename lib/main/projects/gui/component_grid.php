@@ -59,11 +59,6 @@ class COMPONENT_GRID extends STANDARD_GRID
   public $object_name = 'Component';
 
   /**
-   * @var integer
-   */
-  public $spacing = 4;
-
-  /**
    * @var boolean
    */
   public $even_columns = false;
@@ -89,21 +84,20 @@ class COMPONENT_GRID extends STANDARD_GRID
   public $show_branch = false;
 
   /**
-   * @param RELEASE $obj
+   * @param COMPONENT $obj
    * @access private
    */
   protected function _draw_box ($obj)
   {
 ?>
-  <div class="grid-title">
-    <?php echo $obj->icon_as_html ('32px') . ' ' . $obj->title_as_link (); ?>
-  </div>
-  <div style="margin-left: 1em; float: right">
-  <?php
-    $this->_draw_menu_for ($obj, Menu_size_compact);
-  ?>
-  </div>
-  <div>
+  <div class="grid-item">
+    <div class="minimal-commands">
+      <?php $this->_draw_menu_for ($obj, Menu_size_minimal, Menu_align_inline); ?>
+    </div>
+    <div class="minimal-commands-content">
+    <h3>
+      <?php echo $this->app->get_text_with_icon($obj->icon_url, $obj->title_as_link (), '20px'); ?>
+    </h3>
   <?php
     $menu = $this->context->make_menu ();
 

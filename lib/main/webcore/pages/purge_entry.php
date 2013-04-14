@@ -45,6 +45,7 @@ http://www.earthli.com/software/webcore/
   {
     $entry_type_info = $entry->type_info ();
     $class_name = $App->final_class_name ('PURGE_OBJECT_FORM', 'webcore/forms/purge_form.php', $entry_type_info->id);
+    /** @var $form PURGE_OBJECT_FORM */
     $form = new $class_name ($App);
 
     $form->process_existing ($entry);
@@ -59,15 +60,12 @@ http://www.earthli.com/software/webcore/
 
     $Page->location->add_folder_link ($folder);
     $Page->location->add_object_link ($entry);
-    $Page->location->append ($Page->title->subject);
+    $Page->location->append ($Page->title->subject, '', '{icons}buttons/purge');
 
     $Page->start_display ();
   ?>
   <div class="box">
-    <div class="box-title">
-      <?php echo $App->title_bar_icon ('{icons}buttons/purge'); ?> Purge <?php echo $entry_type_info->singular_title; ?>?
-    </div>
-    <div class="box-body">
+    <div class="box-body form-content">
     <?php
       $form->display ();
     ?>

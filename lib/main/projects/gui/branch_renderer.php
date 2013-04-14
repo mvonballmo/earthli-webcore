@@ -57,7 +57,7 @@ class BRANCH_RENDERER extends CONTENT_OBJECT_RENDERER
   {
     $this->_echo_details_as_html ($obj);
     echo $obj->description_as_html ();
-    $this->_echo_html_user_information ($obj, 'info-text-bottom');
+    $this->_echo_html_user_information ($obj, 'info-box-bottom');
   }
 
   /**
@@ -68,6 +68,14 @@ class BRANCH_RENDERER extends CONTENT_OBJECT_RENDERER
   {
 ?>
   <table class="basic columns left-labels">
+    <tr>
+      <th>State</th>
+      <td>
+        <?php
+        echo $this->context->get_text_with_icon($obj->state_icon_url(), $obj->state_as_string(), '16px');
+        ?>
+      </td>
+    </tr>
 <?php
     $parent_release = $obj->parent_release ();
     if ($parent_release)

@@ -39,4 +39,3 @@ http://www.earthli.com/software/webcore
   {
     $Page->raise_security_violation ('You are not allowed to publish notifications for this application.');
   }
-?>

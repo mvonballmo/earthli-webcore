@@ -94,15 +94,12 @@ http://www.earthli.com/software/webcore
     $Page->title->subject = 'Send Attachment';
 
     $Page->location->add_object_link ($attachment);
-    $Page->location->append ($Page->title->subject);
+    $Page->location->append ($Page->title->subject, '', '{icons}buttons/send');
 
     $Page->start_display ();
 ?>
     <div class="box">
-      <div class="box-title">
-        <?php echo $App->title_bar_icon ('{icons}buttons/send'); ?> Send Attachment
-      </div>
-      <div class="box-body">
+      <div class="box-body form-content">
       <?php
         $form->display ();
       ?>

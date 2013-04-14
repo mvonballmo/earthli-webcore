@@ -122,6 +122,8 @@ class CONTROLS_RENDERER extends WEBCORE_OBJECT
    * Return HTML for a button linked to JavaScript.
    * @param string $title Name on the button.
    * @param string $action JavaScript to execute when clicked.
+   * @param string $icon
+   * @param string $icon_size
    * @param string $type Can be 'button', 'submit' or 'cancel'.
    * @return string
    */
@@ -129,7 +131,7 @@ class CONTROLS_RENDERER extends WEBCORE_OBJECT
   {
     if (isset ($icon) && $icon)
     {
-      $title = $this->context->resolve_icon_as_html ($icon, '', $icon_size) . ' ' . $title;
+      $title = $this->context->get_text_with_icon($icon, $title, $icon_size);
     }
     $Result = '<button class="button-control" type="' . $type . '" onClick="' . $action . '"';
     if ($this->button_width)
@@ -142,7 +144,10 @@ class CONTROLS_RENDERER extends WEBCORE_OBJECT
   /**
    * Return HTML for a button linked to a url.
    * @param string $title Name on the button.
-   * @param string $action Link to go to when clicked. HTML characters should not be escaped.
+   * @param $location
+   * @param string $icon
+   * @param string $icon_size
+   * @internal param string $action Link to go to when clicked. HTML characters should not be escaped.
    * @return string
    */
   public function button_as_html ($title, $location, $icon = '', $icon_size = '16px')
@@ -153,7 +158,9 @@ class CONTROLS_RENDERER extends WEBCORE_OBJECT
   /**
    * Return HTML for a submitting button.
    * @param string $title Name on the button.
+   * @param string $icon
    * @param string $script Name of the JavaScript function to execute (must conform to 'function(form: form; submit_all_fields: boolean; submit_field_name, preview_field_name: string)').
+   * @param string $icon_size
    * @return string
    */
   public function submit_button_as_html ($title = null, $icon = '', $script = null, $icon_size = '16px')
@@ -179,5 +186,3 @@ class CONTROLS_RENDERER extends WEBCORE_OBJECT
    */
   protected $_supports_css_2;
 }
-
-?>

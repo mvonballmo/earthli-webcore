@@ -76,7 +76,7 @@ class ATTACHMENT_GRID extends STANDARD_GRID
   /**
    * @var boolean
    */
-  public $centered = true;
+  public $centered = false;
 
   /**
    * @var boolean

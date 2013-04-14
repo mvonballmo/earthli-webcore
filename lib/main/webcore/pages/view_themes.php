@@ -35,22 +35,27 @@ http://www.earthli.com/software/webcore
 
   $Page->start_display ();
 ?>
+<div class="top-box">
+  <div class="button-content">
+  <?php
+  if ($App->login->is_allowed (Privilege_set_global, Privilege_resources))
+  {
+    $menu = $App->make_menu ();
+    $menu->renderer->content_mode = Menu_show_all_as_buttons;
+    $menu->renderer->alignment = Menu_align_inline;
+    $menu->append ('Create theme', 'create_theme.php', '{icons}/buttons/create');
+    $menu->display ();
+  }
+  ?>
+  </div>
+</div>
   <div class="box">
-    <?php
-      if ($App->login->is_allowed (Privilege_set_global, Privilege_resources)) 
-      {
-        $menu = $App->make_menu ();
-        $menu->renderer->content_mode = Menu_show_all_as_buttons;
-        $menu->renderer->alignment = Menu_align_right;
-        $menu->append ('Create theme', 'create_theme.php', '{icons}/buttons/create');
-        $menu->display_as_toolbar ();
-      } 
-    ?>
     <div class="box-body">
     <?php
       $theme_query = $App->theme_query ();
 
       $class_name = $App->final_class_name ('THEME_GRID', 'webcore/gui/theme_grid.php');
+      /** @var $grid THEME_GRID */
       $grid = new $class_name ($App);
       $grid->set_ranges (3, 3);
       $grid->set_query ($theme_query);

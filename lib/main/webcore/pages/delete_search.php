@@ -27,11 +27,13 @@ http://www.earthli.com/software/webcore
 ****************************************************************************/
 
   $search_query = $App->login->search_query ();
+  /** @var $search SEARCH */
   $search = $search_query->object_at_id (read_var ('id'));
 
   if (isset ($search))
   {
     $class_name = $App->final_class_name ('DELETE_FORM', 'webcore/forms/delete_form.php');
+    /** @var $form DELETE_FORM */
     $form = new $class_name ($App);
 
     $form->process_existing ($search);
@@ -43,15 +45,12 @@ http://www.earthli.com/software/webcore
     $Page->title->add_object ($search);
     $Page->title->subject = 'Delete search';
     $Page->location->add_object_link ($search);
-    $Page->location->append ($Page->title->subject);
+    $Page->location->append ($Page->title->subject, '', '{icons}buttons/delete');
 
     $Page->start_display ();
 ?>
 <div class="box">
-  <div class="box-title">
-    <?php echo $App->title_bar_icon ('{icons}buttons/delete'); ?> Delete <?php echo $search->title_as_html (); ?>?
-  </div>
-  <div class="box-body">
+  <div class="box-body form-content">
   <?php
     $form->display ();
   ?>

@@ -66,7 +66,6 @@ class FOLDER_RENDERER extends CONTENT_OBJECT_RENDERER
     }
 
     $this->_echo_html_content ($obj);
-    $this->_echo_subscribe_status ($obj);
 
     if ($use_table)
     {
@@ -84,6 +83,9 @@ class FOLDER_RENDERER extends CONTENT_OBJECT_RENDERER
     $this->_echo_html_descriptions ($obj);
   }
 
+  /**
+   * @param $obj FOLDER
+   */
   protected function _echo_html_descriptions ($obj)
   {
     if ($obj->summary && $this->_options->show_as_summary)
@@ -95,19 +97,4 @@ class FOLDER_RENDERER extends CONTENT_OBJECT_RENDERER
       echo $this->_echo_html_description ($obj);
     }
   }
-
-  /**
-   * Shows the subscription status for this object.
-   * @param FOLDER $obj
-   * @access private
-   */
-  protected function _echo_subscribe_status ($obj)
-  {
-    if (! $obj->is_root ())
-    {
-      $this->_echo_html_subscribed_toggle ($obj, 'subscribe_to_folder.php?id=' . $obj->id, Subscribe_folder);
-    }
-  }
 }
-
-?>

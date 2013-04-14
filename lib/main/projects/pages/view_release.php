@@ -61,9 +61,9 @@ http://www.earthli.com/software/webcore/projects
     $Page->newsfeed_options->file_name = '{app}/view_release_rss.php?id=' . $release->id;
 
     $Page->location->add_folder_link ($folder, 'panel=' . $panel_manager->selected_panel_id);
-    $Page->location->add_object_link ($branch, 'panel=' . $panel_manager->selected_panel_id);
+    $Page->location->add_object_link ($branch, 'panel=' . $panel_manager->selected_panel_id, $App->resolve_file('{app_icons}buttons/new_branch'));
 
-    $Page->location->add_object_text ($release, $App->sized_icon($release->state_icon_name(), ''));
+    $Page->location->add_object_text ($release, $App->resolve_file('{app_icons}buttons/new_release'), '');
     $Page->location->append($Page->title->subject);
 
     $Page->start_display ();
@@ -124,7 +124,7 @@ http://www.earthli.com/software/webcore/projects
     $renderer = $App->make_menu_renderer ();
     $renderer->set_size(Menu_size_compact);
     /** @var $commands COMMANDS */
-    $commands = $branch->handler_for(Handler_commands);
+    $commands = $release->handler_for(Handler_commands);
     $renderer->display ($commands);
     echo '</div>';
 
@@ -154,7 +154,6 @@ http://www.earthli.com/software/webcore/projects
     ?>
   </div>
 <?php
-    $box->finish_column_set ();
     $Page->finish_display ();
   }
   else

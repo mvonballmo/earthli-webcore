@@ -263,11 +263,11 @@ class FORM_LIST_PROPERTIES
   /**
    * Replace an existing item in the list.
    * These items are then renderered by specific controls, using the values given.
-   * @param $index Zero-based index of item to replace.
-   * @param $title Display text. Used by all controls.
-   * @param $value Value submitted with form data. Used by all controls.
-   * @param $text Additional text to display outside of the label.
-   * @param $enabled Is the control for this item enabled? Used only by radio buttons and checkboxes.
+   * @param $index int Zero-based index of item to replace.
+   * @param $title string Display text. Used by all controls.
+   * @param $value string Value submitted with form data. Used by all controls.
+   * @param $text string Additional text to display outside of the label.
+   * @param $enabled boolean Is the control for this item enabled? Used only by radio buttons and checkboxes.
    * @see FORM_LIST_ITEM
    */
   public function replace_item ($index, $title, $value, $enabled = true, $text = '')
@@ -410,7 +410,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * Should be specified in legal CSS units.
    * @var string
    */
-  public $width = '35em';
+  public $width = 'auto';
 
   /**
    * Spacing between rows and columns.
@@ -808,7 +808,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    */
   public function finish_block ($restore_width = false)
   {
-    echo "</table>\n";
+    echo "</table></div>\n";
     if ($restore_width)
     {
       $this->restore_width ();
@@ -980,6 +980,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * Draw a list box onto a separate row in the form.
    * @param string $id
    * @param FORM_LIST_PROPERTIES $props
+   * @param string $title Override the title; used instead of the field title
    */
   public function draw_list_box_row ($id, $props, $title = null)
   {
@@ -992,8 +993,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * as in other uses of the property list. The title from the field is used for each checkbox and each
    * has its own on/off value.
    * @param string $title Title to show for the group
-   * @param string $props
-   * @param string $value Value assigned to the checkbox.
+   * @param FORM_LIST_PROPERTIES $props
    */
   public function draw_check_boxes_row ($title, $props)
   {
@@ -1016,9 +1016,9 @@ class FORM_RENDERER extends CONTROLS_RENDERER
 
   /**
    * Draw a list of checkboxes in a separate row in the form.
-   * @param string $id
-   * @param string $on_click JavaScript to execute when clicked.
-   * @param string $value Value assigned to the checkbox.
+   * @param string $id The id of the field to render as a check box.
+   * @param $props FORM_LIST_PROPERTIES The properties that represent the check boxes to render.
+   * @param string $title An optional title to use for the row.
    */
   public function draw_check_group_row ($id, $props, $title = null)
   {
@@ -1027,8 +1027,9 @@ class FORM_RENDERER extends CONTROLS_RENDERER
 
   /**
    * Draw a checkbox onto a separate row in the form.
-   * @param string $id
+   * @param string $id The id of the field to render as a check box.
    * @param CHECK_BOX_ITEM $item Properties used to render this check box.
+   * @param string $title An optional title to use for the row.
    */
   public function draw_check_box_row ($id, $item = null, $title = '')
   {
@@ -1696,7 +1697,6 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * @param string $id Id of the control in the form.
    * @param string $text HTML for the control.
    * @param bool $can_be_focused A value that indicates whether the control should be focused.
-   * @internal param bool $can_be_focussed Indicate whether to use this control as initial focus if none is already set.
    * @return string
    */
   protected function _control_created ($id, $text, $can_be_focused = true)
@@ -2009,7 +2009,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * @param FORM_LIST_PROPERTIES $props Control is rendered in this list (may be null).
    * @param FORM_LIST_ITEM $item Settings to apply for the rendered item.
    * @param string $type Type of control: "checkbox" or "radio".
-   * @param string $id to use for the label and control.
+   * @param $dom_id string The unique id to assign to the generated control.
    * @return string
    * @access private
    */

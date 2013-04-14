@@ -150,16 +150,6 @@ class USER_RENDERER extends CONTENT_OBJECT_RENDERER
   }
 
   /**
-   * Shows the subscription status for this object.
-   * @param USER $obj
-   * @access private
-   */
-  protected function _echo_subscribe_status ($obj)
-  {
-    $this->_echo_html_subscribed_toggle ($obj, 'subscribe_to_user.php?name=' . $obj->title, Subscribe_user);
-  }
-
-  /**
    * Outputs the object as plain text.
    * @param USER $obj
    * @access private

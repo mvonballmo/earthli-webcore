@@ -49,6 +49,11 @@ require_once ('webcore/forms/object_in_folder_form.php');
 class PROJECT_ENTRY_FORM extends ENTRY_FORM
 {
   /**
+   * The branches to display in this form.
+   * @var BRANCH[] */
+  var $branches;
+
+  /**
    * @param PROJECT $folder Project in which to add or edit the PROJECT_ENTRY.
    */
   public function __construct ($folder)
@@ -85,9 +90,9 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
     $field->sticky = true;
     $this->add_field ($field);
 
-    $branch_query = $this->_folder->branch_query ();
+    $branch_query = $folder->branch_query ();
     $this->branches = $branch_query->objects ();
-    $this->default_branch_id = $this->_folder->trunk_id;
+    $this->default_branch_id = $folder->trunk_id;
 
     foreach ($this->branches as $branch)
     {
@@ -328,9 +333,7 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
   protected function _draw_branch_scripts ()
   {
 ?>
-    var settings = document.getElementById ('branch_' + id + '_settings');
     var panel = document.getElementById ('branch_' + id + '_panel');
-    var title = document.getElementById ('branch_' + id + '_title');
     var main_branch = ctrl.form ['main_branch_id'];
 
     var release_ctrl = ctrl.form ['branch_' + id + '_release_id'];
@@ -339,9 +342,7 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
 
     if (ctrl.checked)
     {
-      settings.style.display = 'block';
-      panel.className = 'chart';
-      title.className = 'chart-title';
+      panel.style.display = 'block';
 
       /* Make sure at least one radio button is selected. If none is selected, the control
          corresponding to 'id' will be selected. */
@@ -350,9 +351,7 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
     }
     else
     {
-      settings.style.display = 'none';
-      panel.className = '';
-      title.className = '';
+      panel.style.display = 'none';
 
       /* Make sure a different radio button is selected (the algorithm simply finds the first
          radio button which is not the one specified and selects that. */
@@ -385,30 +384,37 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
    */
   protected function _draw_kind_controls ($renderer)
   {
-    $kinds = $this->app->display_options->entry_kinds ();
+    /** @var $display_options PROJECT_APPLICATION_DISPLAY_OPTIONS */
+    $display_options = $this->app->display_options;
+    $kinds = $display_options->entry_kinds ();
     if (sizeof ($kinds))
     {
       $props = $renderer->make_list_properties ();
       $props->items_per_row = 1;
-      $props->line_spacing = '.25em';
       $index = 0;
       foreach ($kinds as &$kind)
       {
-        $props->add_item ($kind->icon_as_html ('20px') . ' ' . $kind->title, $index);
+        $props->add_item ($this->app->get_text_with_icon($kind->icon, $kind->title, '20px'), $index);
         $index += 1;
       }
       $renderer->draw_radio_group_row ('kind', $props);
     }
   }
 
+  /**
+   * @param FORM_RENDERER $renderer
+   */
   protected function _draw_component_controls ($renderer)
   {
     $props = $renderer->make_list_properties ();
     $props->add_item ('[None]', 0);
 
-    $component_query = $this->_folder->component_query ();
-    $comps = $component_query->objects ();
-    foreach ($comps as $comp)
+    /** @var PROJECT $folder */
+    $folder = $this->_folder;
+    $component_query = $folder->component_query ();
+    /** @var COMPONENT[] $components */
+    $components = $component_query->objects ();
+    foreach ($components as $comp)
     {
       $props->add_item ($comp->title_as_plain_text (), $comp->id);
     }
@@ -420,6 +426,7 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
    * Should controls for this branch be disabled?
    * @param BRANCH $branch
    * @param RELEASE $release
+   * @return bool
    * @access private
    */
   protected function _branch_is_locked ($branch, $release)
@@ -447,9 +454,8 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
         $title = $release->title_as_link ();
         if ($release->locked ())
         {
-          $title = $this->app->resolve_icon_as_html ('{icons}indicators/locked', 'Locked', '16px') . ' ' . $title;
+          $title = $this->context->get_text_with_icon('{icons}indicators/locked', $title, '16px');
         }
-
         $renderer->draw_text_row ('Release', $title);
       }
       else
@@ -465,6 +471,7 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
       $props->add_item ('[Next release]', 0);
 
       $release_query = $branch->pending_release_query (Release_not_locked);
+      /** @var $releases RELEASE[] */
       $releases = $release_query->objects ();
       
       $planned_release = null;
@@ -473,6 +480,7 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
       {
         foreach ($releases as $release)
         {
+          /** @var $nd DATE_TIME */
           $nd = $release->time_next_deadline;
           if ($nd->is_valid ())
           {
@@ -538,54 +546,49 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
 
         if ($visible || ! $branch->locked ())
         {
-          if ($use_DHTML)
+          if ($use_DHTML && ! $visible)
           {
-            if (! $visible)
+            $style = 'display: none';
+          }
+          $locked = $branch->locked ();
+
+          $release_id = $this->value_for ("branch_{$branch->id}_release_id");
+          if ($release_id)
+          {
+            /** @var $release_query BRANCH_RELEASE_QUERY */
+            $release_query = $branch->release_query ();
+            /** @var $release RELEASE */
+            $release = $release_query->object_at_id ($release_id);
+            $locked = $locked || $this->_branch_is_locked ($branch, $release);
+          }
+          else
+          {
+            $release = null;
+          }
+
+          if ($locked)
+          {
+            $renderer->draw_hidden ("branch_{$branch->id}_enabled");
+
+            $title = $branch->title_as_link ();
+            if ($branch->locked ())
             {
-              $style = 'display: none';
+              $title = $this->context->get_text_with_icon('{icons}indicators/locked', $title, '16px');
             }
+            echo $title;
+          }
+          else
+          {
+            $check_props->on_click_script = "on_click_branch (this, '$branch->id')";
+            echo $renderer->check_box_as_HTML ("branch_{$branch->id}_enabled", $check_props);
           }
         ?>
-        <div id="branch_<?php echo $branch->id; ?>_panel" <?php if ($visible) echo "class=\"chart\""; ?> style="margin-bottom: .25em; width: 35em">
-          <div id="branch_<?php echo $branch->id; ?>_title" <?php if ($visible) echo "class=\"chart-title\""; ?> style="text-align: left">
-            <?php
-              $locked = $branch->locked ();
-
-              $release_id = $this->value_for ("branch_{$branch->id}_release_id");
-              if ($release_id)
-              {
-                $release_query = $branch->release_query ();
-                $release = $release_query->object_at_id ($release_id);
-                $locked = $locked || $this->_branch_is_locked ($branch, $release);
-              }
-              else
-              {
-                $release = null;
-              }
-
-              if ($locked)
-              {
-                $renderer->draw_hidden ("branch_{$branch->id}_enabled");
-                if ($branch->locked ())
-                {
-                  echo $this->app->resolve_icon_as_html ('{icons}indicators/locked', 'Locked', '16px') . ' ';
-                }
-                echo $branch->title_as_link ();
-              }
-              else
-              {
-                $check_props->on_click_script = "on_click_branch (this, '$branch->id')";
-                echo $renderer->check_box_as_HTML ("branch_{$branch->id}_enabled", $check_props);
-              }
-            ?>
-          </div>
-          <div class="chart-body" id="branch_<?php echo $branch->id; ?>_settings" <?php echo "style=\"$style; margin-left: 1em\""; ?>>
+        <div id="branch_<?php echo $branch->id; ?>_panel" class="preview"<?php if ($style) echo 'style="' . $style . '"'; ?>>
           <?php
             $renderer->start_block ();
               $this->_draw_branch_info_controls ($branch, $renderer, $visible, $release);
             $renderer->finish_block ();
           ?>
-          </div>
         </div>
         <?php
         }
@@ -595,34 +598,6 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
       $renderer->draw_error_row ('main_branch_id');
       $renderer->finish_block ();
     }
-  }
-
-  /**
-   * Draws the description with project-specific help-text.
-   * @access private
-   */
-  protected function _draw_description_field ()
-  {
-    $this->_draw_text_box ('description', '35em', '8em'); ?>
-    <div class="notes" style="width: 40em">A short description that is shown in change logs and job lists.
-      Longer text that should not appear in summaries should go in the 'Extra Information' field below. Find out more
-      about <a style="text-decoration: underline" href="text_formatting.php">supported tags and formatting</a>.</div>
-<?php
-  }
-
-  /**
-   * Draws the extra description with project-specific help-text.
-   * @access private
-   */
-  protected function _draw_extra_description_field ()
-  {
-//    $this->_draw_button ('Preview', "preview_text (document.$this->name.extra_description)");
-    $this->_draw_text_box ('extra_description', '35em', '15em'); ?>
-    <div class="notes" style="width: 40em">This information is not shown in job lists or change logs, but is
-      always available when a job is viewed alone. If it's a bug, store the stack trace
-      or log output here. If it's a new feature, store examples and a more in-depth
-      description here. Find out more about <a style="text-decoration: underline" href="text_formatting.php">supported tags and formatting</a>.</div>
-<?php
   }
 
   /**

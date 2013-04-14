@@ -46,7 +46,7 @@ http://www.earthli.com/software/webcore
     $Page->location->add_root_link ();
     $Page->location->append ("Users", "view_users.php");
     $Page->location->add_object_link ($user);
-    $Page->location->append ($App->resolve_icon_as_html('{icons}buttons/password', '', '16px') . ' ' . $Page->title->subject);
+    $Page->location->append ($Page->title->subject, '', '{icons}buttons/password');
 
     $Page->start_display ();
   ?>

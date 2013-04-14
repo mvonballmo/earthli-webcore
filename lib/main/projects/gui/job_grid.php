@@ -139,29 +139,27 @@ class JOB_GRID extends PROJECT_ENTRY_GRID
   </div>
   <?php } ?>
   <div>
-    <div style="float: left">
+    <div>
     <?php
-      $assignee = $obj->assignee ();
       if (! $is_closed)
       {
-        echo $obj->assignee_icon ();
-      }
-      if ($assignee)
-      {
-    ?>
-      Assigned to <?php echo $assignee->title_as_link (); ?>
-    <?php
-        $time_owned = $obj->assignee_age ();
-        if (isset ($time_owned))
+        $assignee = $obj->assignee ();
+
+        if ($assignee)
         {
-          echo ' (' . $time_owned->format () . ')';
+          $text = 'Assigned to ' . $assignee->title_as_link ();
+          $time_owned = $obj->assignee_age ();
+          if (isset ($time_owned))
+          {
+            $text .= ' (' . $time_owned->format () . ')';
+          }
         }
-      }
-      else
-      {
-    ?>
-      <span class="notes">Not assigned</span>
-    <?php
+        else
+        {
+          $text = '<span class="notes">Not assigned</span>';
+        }
+
+        echo $this->app->get_text_with_icon($obj->get_assignee_icon_url(), $text, '16px');
       }
     ?>
     </div>

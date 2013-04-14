@@ -59,11 +59,6 @@ class BRANCH_GRID extends CONTENT_OBJECT_GRID
   public $object_name = 'Branch';
 
   /**
-   * @var integer
-   */
-  public $spacing = 4;
-
-  /**
    * @var boolean
    */
   public $even_columns = false;
@@ -92,22 +87,27 @@ class BRANCH_GRID extends CONTENT_OBJECT_GRID
     $folder = $obj->parent_folder ();
     $creator = $obj->creator ();
   ?>
-  <?php
-      $this->_draw_menu_for ($obj, Menu_size_compact);
-  ?>
-  <div class="grid-title">
-  <?php
-    if ($this->show_folder)
-    {
-      echo $folder->title_as_link () . $this->app->display_options->object_separator;
-    }
-    if ($obj->locked ())
-    {
-      echo $this->app->resolve_icon_as_html ('{icons}indicators/locked', 'Locked', '16px') . ' ';
-    }
-    echo $this->obj_link ($obj);
-  ?>
-  </div>
+  <div class="grid-item">
+    <div class="minimal-commands">
+      <?php $this->_draw_menu_for ($obj, Menu_size_minimal, Menu_align_inline); ?>
+    </div>
+    <div class="minimal-commands-content">
+    <h3>
+    <?php
+      if ($this->show_folder)
+      {
+        echo $folder->title_as_link () . $this->app->display_options->object_separator;
+      }
+      if ($obj->locked ())
+      {
+        echo $this->app->get_text_with_icon('{icons}indicators/locked', $this->obj_link ($obj), '16px');
+      }
+      else
+      {
+        echo $this->obj_link ($obj);
+      }
+    ?>
+    </h3>
   <div>
     <div style="float: left; margin-right: .5em">
     <?php

@@ -261,14 +261,14 @@ class ALBUM_FORM extends FOLDER_FORM
       $now = new DATE_TIME ();
       if ($now->less_than ($this->value_for ('first_day')))
       {
-        $this->record_error ('First day of a journal cannot be in the future.');
+        $this->record_error ('first_day', 'First day of a journal cannot be in the future.');
       }
       break;
     case Album_is_span:
       $last_day = $this->value_for ('last_day');
       if ($last_day->less_than ($this->value_for ('first_day')))
       {
-        $this->record_error ('First day must come before the last day.');
+        $this->record_error ('last_day', 'First day must come before the last day.');
       }
       break;
     }
@@ -592,8 +592,10 @@ class ALBUM_FORM extends FOLDER_FORM
 
       if ($main_picture_id)
       {
+        /** @var $pic_query FOLDER_DRAFTABLE_ENTRY_QUERY */
         $pic_query = $this->_object->entry_query ();
         $pic_query->set_type ('picture');
+        /** @var $main_picture PICTURE */
         $main_picture = $pic_query->object_at_id ($main_picture_id);
       }
 

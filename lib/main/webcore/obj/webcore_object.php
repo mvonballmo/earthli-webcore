@@ -59,7 +59,7 @@ class WEBCORE_OBJECT extends RAISABLE
    */
   public function __construct ($context)
   {
-    $this->assert (isset ($context), "[context] cannot be empty.", 'WEBCORE_OBJECT', 'WEBCORE_OBJECT');
+    $this->assert (isset ($context), "[context] cannot be empty.", '__construct', 'WEBCORE_OBJECT');
 
     // Take references to all of these objects so that subsequent additions, like
     // setting the application on the page, are properly updated everywhere.

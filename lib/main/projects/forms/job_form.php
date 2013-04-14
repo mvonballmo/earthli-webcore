@@ -251,7 +251,7 @@ class JOB_FORM extends PROJECT_ENTRY_FORM
 
   /**
    * Called after fields are validated.
-   * @param object $obj Object being validated.
+   * @param JOB $obj Object being validated.
    * @access private
    */
   protected function _post_validate ($obj)
@@ -272,7 +272,9 @@ class JOB_FORM extends PROJECT_ENTRY_FORM
 
           if (! $release->planned ())
           {
-            $statuses = $this->app->display_options->job_statuses ();
+            /** @var $options PROJECT_APPLICATION_DISPLAY_OPTIONS */
+            $options = $this->app->display_options;
+            $statuses = $options->job_statuses ();
             $status = $statuses [$branch_status];
 
             if ($status->kind == Job_status_kind_open)
@@ -314,7 +316,9 @@ class JOB_FORM extends PROJECT_ENTRY_FORM
     $field->title = "Status";
     $field->enabled = isset ($_REQUEST [$field->id]);
     $field->sticky = true;
-    $statuses = $this->app->display_options->job_statuses ();
+    /** @var $display_options PROJECT_APPLICATION_DISPLAY_OPTIONS */
+    $display_options = $this->app->display_options;
+    $statuses = $display_options->job_statuses ();
     if (sizeof ($statuses))
     {
       foreach ($statuses as $status)
@@ -329,7 +333,7 @@ class JOB_FORM extends PROJECT_ENTRY_FORM
     $field->title = "Priority";
     $field->enabled = isset ($_REQUEST [$field->id]);
     $field->sticky = true;
-    $priorities = $this->app->display_options->job_priorities ();
+    $priorities = $display_options->job_priorities ();
     if (sizeof ($priorities))
     {
       foreach ($priorities as $priority)
@@ -360,7 +364,7 @@ class JOB_FORM extends PROJECT_ENTRY_FORM
   /**
    * Store form values for this branch.
    * This is called once for each branch that is enabled when the form is committed.
-   * @param PROJECT_ENTRY_BRANCH_INFO $branch_info
+   * @param JOB_BRANCH_INFO $branch_info
    * @access private
    */
   protected function _store_to_branch_info ($branch_info)
@@ -405,13 +409,15 @@ class JOB_FORM extends PROJECT_ENTRY_FORM
   {
     /* Get the list of statuses for this branch. */
     $selected_status = $this->value_for ("branch_{$branch->id}_status");
+    /** @var $display_options PROJECT_APPLICATION_DISPLAY_OPTIONS */
+    $display_options = $this->app->display_options;
     if ($this->cloning () || ! $this->object_exists ())
     {
-      $statuses = $this->app->display_options->job_statuses ();
+      $statuses = $display_options->job_statuses ();
     }
     else
     {
-      $statuses = $this->app->display_options->job_statuses_for ($selected_status);
+      $statuses = $display_options->job_statuses_for ($selected_status);
     }
 
     if ($this->_branch_is_locked ($branch, $release))
@@ -425,7 +431,7 @@ class JOB_FORM extends PROJECT_ENTRY_FORM
         $renderer->draw_text_row ('Status', $status->icon_as_html ('16px') . ' ' . $status->title);
         $renderer->draw_error_row ("branch_{$branch->id}_status");
 
-        $priorities = $this->app->display_options->job_priorities ();
+        $priorities = $display_options->job_priorities ();
         $priority = $priorities [$this->value_for ("branch_{$branch->id}_priority")];
         $renderer->draw_text_row ('Priority', $priority->icon_as_html ('16px') . ' ' . $priority->title);
         $renderer->draw_error_row ("branch_{$branch->id}_priority");
@@ -446,7 +452,7 @@ class JOB_FORM extends PROJECT_ENTRY_FORM
       // Draw priorities
 
       $props = $renderer->make_list_properties ();
-      $priorities = $this->app->display_options->job_priorities ();
+      $priorities = $display_options->job_priorities ();
       foreach ($priorities as $priority)
       {
         $props->add_item ($priority->title, $priority->value);
@@ -468,6 +474,7 @@ class JOB_FORM extends PROJECT_ENTRY_FORM
    */
   protected function _prepare_list_properties_for ($renderer, $user_query)
   {
+    /** @var $users USER[] */
     $users = $user_query->objects ();
     $Result = $renderer->make_list_properties ();
     $Result->width = '15em';
@@ -492,7 +499,10 @@ class JOB_FORM extends PROJECT_ENTRY_FORM
     $this->_draw_component_controls ($renderer);
     $renderer->draw_separator ();
 
-    $project_options = $this->_folder->options ();
+    /** @var $folder PROJECT */
+    $folder = $this->_folder;
+    /** @var $project_options PROJECT_OPTIONS */
+    $project_options = $folder->options ();
 
     /* Draw the assignee box */
 
@@ -544,7 +554,7 @@ class JOB_FORM extends PROJECT_ENTRY_FORM
     $renderer->draw_separator ();
     $renderer->draw_text_row ('Subscriptions', 'Check the following to subscribe the following users to this job.', 'notes');
 
-    $renderer->start_row (' ');
+    // TODO this should probably go in the load_from_object/load_from_defaults methods
 
     if ($this->object_exists ())
     {
@@ -558,15 +568,13 @@ class JOB_FORM extends PROJECT_ENTRY_FORM
     $field = $this->field_at ('subscribe_creator');
     $field->title = $field->title . ' (' . $creator->title_as_link () . ')';
 
-    echo "<p>\n";
-    echo $renderer->check_box_as_html ('subscribe_creator');
-    echo "<br>\n";
-    echo $renderer->check_box_as_html ('subscribe_assignee');
-    echo "<br>\n";
-    echo $renderer->check_box_as_html ('subscribe_reporter');
-    echo "</p>\n";
+    $props = $renderer->make_list_properties ();
+    $props->show_descriptions = true;
+    $props->add_item ('subscribe_creator', 1);
+    $props->add_item ('subscribe_assignee', 1);
+    $props->add_item ('subscribe_reporter', 1);
 
-    $renderer->finish_row ();
+    $renderer->draw_check_boxes_row(' ', $props);
 
     $this->_draw_history_item_controls ($renderer, false);
 

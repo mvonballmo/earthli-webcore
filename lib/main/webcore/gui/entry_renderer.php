@@ -56,18 +56,7 @@ class ENTRY_RENDERER extends CONTENT_OBJECT_RENDERER
   protected function _display_as_html ($obj)
   {
     $this->_echo_html_user_information ($obj);
-    $this->_echo_subscribe_status ($obj);
     $this->_echo_html_description ($obj);
-  }
-  
-  /**
-   * Shows the subscription status for this object.
-   * @param ENTRY $obj
-   * @access private
-   */
-  protected function _echo_subscribe_status ($obj)
-  {
-    $this->_echo_html_subscribed_toggle ($obj, 'subscribe_to_entry.php?id=' . $obj->id, Subscribe_entry);
   }
 }
 
@@ -146,7 +135,7 @@ class ENTRY_ASSOCIATED_DATA_RENDERER extends HANDLER_RENDERER
       if ($attachment_query->size ())
       {
   ?>
-  <h2 id="attachments" style="clear: both">
+  <h2 id="attachments">
     Attachments
   </h2>
   <div class="grid-content">

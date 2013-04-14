@@ -144,7 +144,7 @@ class FOLDER extends ATTACHMENT_HOST
   {
     if ($this->icon_url)
     {
-      return $this->app->sized_icon ($this->icon_url, $size);
+      return $this->app->get_icon_url ($this->icon_url, $size);
     }
     
     return '';

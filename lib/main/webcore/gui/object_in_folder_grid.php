@@ -60,11 +60,6 @@ class OBJECT_IN_FOLDER_SUMMARY_GRID extends CONTENT_OBJECT_GRID
   public $show_separator = false;
 
   /**
-   * @var integer
-   */
-  public $width = '65%';
-
-  /**
    * Show check-box selectors next to items?
    * @var boolean
    */
@@ -76,24 +71,28 @@ class OBJECT_IN_FOLDER_SUMMARY_GRID extends CONTENT_OBJECT_GRID
    */
   protected function _draw_box ($obj)
   {
-    $layer = $this->context->make_layer ('obj_' . uniqid (rand ()));
-    $layer->visible = false;
+    $selector = $this->_get_selector($obj);
+
+    $selector_class = !empty($selector) ? 'selector' : '';
 ?>
   <div class="grid-item">
-    <div class="minimal-commands">
-    </div>
-    <div class="minimal-commands-content">
-    </div>
-    <h3><?php $layer->draw_toggle (); echo ' ' . $this->obj_link ($obj); ?></h3>
-    <div class="preview hidden-layer">
-      <?php
-      $layer->start ();
+    <div class="minimal-commands <?php echo $selector_class; ?>">
+    <?php
+      if ($selector)
+      {
+        echo "<span class=\"selector\">$selector</span>";
+      }
       $this->_draw_menu_for ($obj, Menu_size_minimal, Menu_align_inline);
+    ?>
+    </div>
+    <div class="minimal-commands-content <?php echo $selector_class; ?>">
+      <h3><?php echo $this->obj_link ($obj); ?></h3>
+      <?php
       $this->_echo_header ($obj);
       $this->_echo_text_summary ($obj);
-      $layer->finish ();
       ?>
     </div>
+  </div>
 <?php
   }
   
@@ -116,16 +115,16 @@ class OBJECT_IN_FOLDER_SUMMARY_GRID extends CONTENT_OBJECT_GRID
   protected function _echo_header ($obj)
   {
 ?>
-  <table cellpadding="1" cellspacing="0">
+  <table class="basic columns left-labels top">
     <?php $this->_echo_details ($obj); ?>
     <tr>
-      <td class="label">Location:</td>
+      <th>Location</th>
       <td>
         <?php $this->_echo_folders ($obj); ?>
       </td>
     </tr>
     <tr>
-      <td class="label">Size:</td>
+      <th>Size</th>
       <td>
       <?php echo file_size_as_text ($this->_size_of ($obj)); ?>
       </td>
@@ -155,11 +154,11 @@ class OBJECT_IN_FOLDER_SUMMARY_GRID extends CONTENT_OBJECT_GRID
   {
 ?>
     <tr>
-      <td class="label"><?php echo $title; ?>:</td>
+      <th><?php echo $title; ?></th>
       <td><?php echo $user->title_as_link (); ?></td>
     </tr>
     <tr>
-      <td class="label">Date:</td>
+      <th>Date</th>
       <td><?php echo $date->format (); ?></td>
     </tr>
 <?php

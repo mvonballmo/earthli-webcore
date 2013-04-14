@@ -62,7 +62,7 @@ class COMPONENT_COMMANDS extends COMMANDS
     $cmd->caption = 'Edit';
     $cmd->link = "edit_component.php?id=$comp->id";
     $cmd->icon = '{icons}buttons/edit';
-    $cmd->executable = $this->login->is_allowed (Privilege_set_folder, Privilege_modify, $comp);
+    $cmd->executable = $this->login->is_allowed (Privilege_set_component, Privilege_modify, $comp);
     $cmd->importance = Command_importance_high;
     $this->append ($cmd);
 
@@ -71,7 +71,7 @@ class COMPONENT_COMMANDS extends COMMANDS
     $cmd->caption = 'Delete';
     $cmd->link = "delete_component.php?id=$comp->id";
     $cmd->icon = '{icons}buttons/delete';
-    $cmd->executable = ! $comp->deleted () && $this->login->is_allowed (Privilege_set_folder, Privilege_delete, $comp);
+    $cmd->executable = ! $comp->deleted () && $this->login->is_allowed (Privilege_set_component, Privilege_delete, $comp);
     $cmd->importance = Command_importance_high - 2 * Command_importance_increment;
     $this->append ($cmd);
 
@@ -80,7 +80,7 @@ class COMPONENT_COMMANDS extends COMMANDS
     $cmd->caption = 'Purge';
     $cmd->link = "purge_component.php?id=$comp->id";
     $cmd->icon = '{icons}buttons/purge';
-    $cmd->executable = $this->login->is_allowed (Privilege_set_folder, Privilege_purge, $comp);
+    $cmd->executable = $this->login->is_allowed (Privilege_set_component, Privilege_purge, $comp);
     $cmd->importance = Command_importance_high - 2 * Command_importance_increment;
     $this->append ($cmd);
 
@@ -89,7 +89,7 @@ class COMPONENT_COMMANDS extends COMMANDS
     $cmd->caption = 'History';
     $cmd->link = "view_component_history.php?id=$comp->id";
     $cmd->icon = '{icons}buttons/history';
-    $cmd->executable = $this->login->is_allowed (Privilege_set_folder, Privilege_view_history, $comp);
+    $cmd->executable = $this->login->is_allowed (Privilege_set_component, Privilege_view_history, $comp);
     $cmd->importance = Command_importance_low;
     $this->append ($cmd);
   }

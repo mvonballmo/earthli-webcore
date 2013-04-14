@@ -62,13 +62,14 @@ class JOB_NAVIGATOR extends PROJECT_ENTRY_NAVIGATOR
 
   /**
    * @param JOB $obj Retrieve the title from this job.
-   * @param boolean $selected Is this the current item in the list?
    * @return string
    * @access private
    */
   protected function _text_for_list ($obj)
   {
-    $Result = $obj->kind_icon ('16px') . ' ' . parent::_text_for_list ($obj);
+    $props = $obj->kind_properties ();
+    $Result = $this->context->get_text_with_icon($props->icon, parent::_text_for_list ($obj), '16px');
+    /** @var $branch_info JOB_BRANCH_INFO */
     $branch_info = $obj->main_branch_info ();
     if ($branch_info->is_closed ())
     {
@@ -86,10 +87,10 @@ class JOB_NAVIGATOR extends PROJECT_ENTRY_NAVIGATOR
   protected function _formatter_for_object ($obj)
   {
     $Result = parent::_formatter_for_object ($obj);
+    /** @var $branch_info JOB_BRANCH_INFO */
     $branch_info = $obj->main_branch_info ();
     $Result->title = $branch_info->status_as_text () . ' - ' . $branch_info->priority_as_text ();
      
     return $Result;
   }
 }
-?>

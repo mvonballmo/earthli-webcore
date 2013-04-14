@@ -109,16 +109,21 @@ http://www.earthli.com/software/webcore
       $caption = 'Hide list';
     }
 
-    $icon = $App->sized_icon ($icon, '16px');
+    $icon = $App->get_icon_url ($icon, '16px');
     ?><a href="<?php echo $opt_link; ?>" class="button"><span class="icon sixteen" style="background-image: url(<?php echo $icon; ?>)"><?php echo $caption; ?></span></a><?php
-    /** @var $renderer MENU_RENDERER */
-    $renderer = $entry->handler_for (Handler_menu);
-    $renderer->set_size (Menu_size_standard);
-    $renderer->alignment = Menu_align_inline;
-    $renderer->display ($entry->handler_for (Handler_commands));
-
-    echo '</div>';
   }
+  else
+  {
+    echo '<div class="button-content">';
+  }
+
+  /** @var $renderer MENU_RENDERER */
+  $renderer = $entry->handler_for (Handler_menu);
+  $renderer->set_size (Menu_size_standard);
+  $renderer->alignment = Menu_align_inline;
+  $renderer->display ($entry->handler_for (Handler_commands));
+
+  echo '</div>';
 ?>
 </div>
 <div class="box">

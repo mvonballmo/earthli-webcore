@@ -87,11 +87,13 @@ http://www.earthli.com/software/webcore
 
     $Page->start_display ();
 ?>
-<div class="top-box button-content">
+<div class="top-box">
+  <div class="button-content">
   <?php
   $renderer = $attachment->handler_for (Handler_menu);
   $renderer->display ($attachment->handler_for (Handler_commands));
   ?>
+  </div>
 </div>
 <div class="box">
   <div class="box-body">

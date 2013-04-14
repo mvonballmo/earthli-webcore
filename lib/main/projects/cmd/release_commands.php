@@ -107,6 +107,15 @@ class RELEASE_COMMANDS extends COMMANDS
     $this->append ($cmd);
 
     $cmd = $this->make_command ();
+    $cmd->id = 'send';
+    $cmd->caption = 'Send';
+    $cmd->link = "send_release.php?id=$obj->id";
+    $cmd->icon = '{icons}buttons/send';
+    $cmd->executable = true;
+    $cmd->importance = Command_importance_high - Command_importance_increment;
+    $this->append ($cmd);
+
+    $cmd = $this->make_command ();
     $cmd->id = 'history';
     $cmd->caption = 'View history';
     $cmd->link = "view_release_history.php?id=$obj->id";

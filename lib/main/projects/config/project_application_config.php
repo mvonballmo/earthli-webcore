@@ -51,7 +51,7 @@ class PROJECT_APPLICATION_DISPLAY_OPTIONS extends APPLICATION_DISPLAY_OPTIONS
    * List of {@link PROJECT_ENTRY::$kind}s.
    * @see add_entry_kind()
    * @see PROPERTY_VALUE
-   * @return array[PROPERTY_VALUE]
+   * @return PROPERTY_VALUE[]
    */
   public function entry_kinds ()
   {
@@ -66,7 +66,7 @@ class PROJECT_APPLICATION_DISPLAY_OPTIONS extends APPLICATION_DISPLAY_OPTIONS
    * List of {@link JOB_BRANCH_INFO::$priority}s.
    * @see add_job_priority()
    * @see PROPERTY_VALUE
-   * @return array[PROPERTY_VALUE]
+   * @return PROPERTY_VALUE[]
    */
   public function job_priorities ()
   {
@@ -81,7 +81,7 @@ class PROJECT_APPLICATION_DISPLAY_OPTIONS extends APPLICATION_DISPLAY_OPTIONS
    * List of {@link JOB_BRANCH_INFO::$status}es.
    * @see add_job_status()
    * @see JOB_STATUS_VALUE
-   * @return array[JOB_STATUS_VALUE]
+   * @return JOB_STATUS_VALUE[]
    */
   public function job_statuses ()
   {
@@ -96,7 +96,7 @@ class PROJECT_APPLICATION_DISPLAY_OPTIONS extends APPLICATION_DISPLAY_OPTIONS
    * List of {@link JOB_BRANCH_INFO::$status}es to map when a {@link RELEASE} is shipped.
    * @see add_job_status_map()
    * @see JOB_STATUS_MAP
-   * @return array[JOB_STATUS_MAP]
+   * @return JOB_STATUS_MAP[]
    */
   public function job_status_map ()
   {
@@ -116,7 +116,8 @@ class PROJECT_APPLICATION_DISPLAY_OPTIONS extends APPLICATION_DISPLAY_OPTIONS
    * instead go to 're-opened'.
    * @see JOB_STATUS_MAP
    * @see job_statuses()
-   * @return array[JOB_STATUS_MAP]
+   * @param $status
+   * @return JOB_STATUS_MAP[]
    */
   public function job_statuses_for ($status)
   {

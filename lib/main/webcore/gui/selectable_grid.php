@@ -68,41 +68,16 @@ abstract class SELECTABLE_GRID extends STANDARD_GRID
   public $items_are_selected = false;
 
   /**
-   * Render the start of a single cell.
-   * @param object $obj
-   * @access private
-   */
-  protected function _start_box ($obj)
-  {
-    parent::_start_box ($obj);
-    if ($this->items_are_selectable)
-    {
-?>
-  <div style="float: left">
-    <?php $this->_echo_selector ($obj); ?>
-  </div>
-  <div style="margin-left: 2em">
-<?php
-    }
-  }
-  
-  protected function _finish_box ($obj)
-  {
-    if ($this->items_are_selectable)
-    {
-?>
-  </div>
-<?php
-    }
-    parent::_finish_box ($obj);
-  }
-  
-  /**
    * Display a checkbox to select this item.
    * @param object $obj
    * @access private
    */
   protected function _echo_selector ($obj)
+  {
+    echo $this->_get_selector($obj);
+  }
+
+  protected function _get_selector ($obj)
   {
     if ($this->items_are_selectable)
     {
@@ -114,7 +89,7 @@ abstract class SELECTABLE_GRID extends STANDARD_GRID
       {
         $state = '';
       }
-      echo '<input type="checkbox" name="' . $this->selector_name . '" value="' . $obj->id . '"' . $state . '>';
+      return '<input type="checkbox" name="' . $this->selector_name . '" value="' . $obj->id . '"' . $state . '>';
     }
   }
 }

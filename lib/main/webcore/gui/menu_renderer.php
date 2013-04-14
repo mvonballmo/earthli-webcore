@@ -227,8 +227,8 @@ class MENU_RENDERER extends WEBCORE_OBJECT
    * Menu_size_standard} or {@link Menu_size_full}. Descendents may add more
    * supported types if desired.
    */
- public function set_size ($size_option)
- {
+  public function set_size ($size_option)
+  {
     $this->display_mode = Menu_horizontal_with_dropdown;
     $this->show_trigger_title = true;
     switch ($size_option)
@@ -250,26 +250,6 @@ class MENU_RENDERER extends WEBCORE_OBJECT
     case Menu_size_full:
       $this->display_mode = Menu_horizontal;
       break;
-    }
- }
- 
-  /**
-   * Render the commands into a toolbar container.
-   * Renders the buttons into a DIV that functions as a toolbar if there are any
-   * executable commands, otherwise renders nothing.
-   * @param COMMANDS $commands
-   * @param string $CSS_class
-   */
-  public function display_as_toolbar ($commands, $CSS_class = 'menu-bar-top')
-  {
-    if ($commands->num_executable_commands () > 0)
-    {
-      ?>
-      <div class="<?php echo $CSS_class; ?>">
-        <?php $this->display ($commands); ?>
-        <div style="clear: both"></div>
-      </div>
-      <?php
     }
   }
 
@@ -405,7 +385,7 @@ class MENU_RENDERER extends WEBCORE_OBJECT
 
     if ($cmd->icon && ($this->content_mode & Menu_show_icon))
     {
-      $style = 'style="background-image: url(' . $this->context->sized_icon ($cmd->icon, '16px') . ')"';
+      $style = 'style="background-image: url(' . $this->context->get_icon_url ($cmd->icon, '16px') . ')"';
     }
 
     if ($cmd->caption && (($this->content_mode & Menu_show_title) || ! $cmd->icon))
@@ -621,7 +601,7 @@ class MENU_RENDERER extends WEBCORE_OBJECT
       }
       else
       {
-        echo '<span class="icon sixteen" style="background-image: url(' . $this->context->sized_icon ($this->trigger_icon, '16px') . ')">';
+        echo '<span class="icon sixteen" style="background-image: url(' . $this->context->get_icon_url ($this->trigger_icon, '16px') . ')">';
       }
 
     }

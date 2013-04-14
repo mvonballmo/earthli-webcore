@@ -109,7 +109,7 @@ class LOCATION_MENU extends MENU
         $t->add_arguments ($page_args);
       }
       
-      $this->prepend ($parent->title_as_link ($t));
+      $this->prepend ($parent->title_as_link ($t), '', $parent->icon_url);
       $parent = $parent->parent_folder ();
     }
 
@@ -132,7 +132,7 @@ class LOCATION_MENU extends MENU
     $t = $folder->title_formatter ();
     $t->max_visible_output_chars = 0;
 
-    $this->append ($folder->title_as_html($t), '', $folder->expanded_icon_url('16px'));
+    $this->append ($folder->title_as_html($t), '', $folder->icon_url);
   }
 
   /**

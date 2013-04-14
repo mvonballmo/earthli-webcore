@@ -552,7 +552,7 @@ class DRAFTABLE_ENTRY extends ENTRY
    * @return string
    * @access private
    */
-  public function state_icon_name ()
+  public function state_icon_url ()
   {
     switch ($this->state)
     {
@@ -563,7 +563,7 @@ class DRAFTABLE_ENTRY extends ENTRY
     case Abandoned:
       return '{icons}buttons/abandon';
     default:
-      return parent::state_icon_name ();
+      return parent::state_icon_url ();
     }
   }
 

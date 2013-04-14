@@ -26,6 +26,7 @@ http://www.earthli.com/software/webcore
 
 .button-control
 {
+  color: #FF6600;
 	background: url(halloween/black_50.png);
 	border: 1px solid #666666;
 }
@@ -37,7 +38,7 @@ http://www.earthli.com/software/webcore
 
 .menu-control, .text-control, .text-control-required
 {
-	background: #000000 ;
+	background: #000000;
 	color: #FF6600;
 	border: 1px solid #666666;
 }

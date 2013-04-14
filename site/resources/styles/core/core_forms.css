@@ -37,7 +37,6 @@ select
 	padding: 5px;
   margin: 0;
   border-radius: 4px;
-  border: 1px solid #666;
 }
 
 .button-control + .button-control
@@ -45,9 +44,11 @@ select
   margin-left: 10px;
 }
 
-.button-control:link, .button-control:visited, .button-control:active, .button-control:hover
+.button-control:active,
+.button-control:hover,
+.button-control:focus
 {
-	text-decoration: none;
+	cursor: pointer;
 }
 
 .menu-control, .text-control, .text-control-required, .menu-control-required

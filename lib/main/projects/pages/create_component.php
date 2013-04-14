@@ -27,12 +27,15 @@ http://www.earthli.com/software/webcore/projects
 ****************************************************************************/
 
   $id = read_var ('id');
+  /** @var $folder_query USER_PROJECT_QUERY */
   $folder_query = $App->login->folder_query ();
+  /** @var $folder PROJECT */
   $folder = $folder_query->object_at_id ($id);
 
   if (isset ($folder) && $App->login->is_allowed (Privilege_set_folder, Privilege_modify, $folder))
   {
     $class_name = $App->final_class_name ('COMPONENT_FORM', 'projects/forms/component_form.php');
+    /** @var $form COMPONENT_FORM */
     $form = new $class_name ($folder);
 
     $comp = $folder->new_object ('component');
@@ -47,15 +50,12 @@ http://www.earthli.com/software/webcore/projects
     $Page->title->subject = 'Create component';
 
     $Page->location->add_folder_link ($folder);
-    $Page->location->append ($Page->title->subject);
+    $Page->location->append ($Page->title->subject, '', $App->resolve_file('{app_icons}buttons/new_component'));
 
     $Page->start_display ();
 ?>
   <div class="box">
-    <div class="box-title">
-      <?php echo $App->title_bar_icon ('{app_icons}buttons/new_component'); ?> <?php echo $Page->title->subject; ?>
-    </div>
-    <div class="box-body">
+    <div class="box-body form-content">
       <?php
         $form->button = "Create";
         $form->display ();

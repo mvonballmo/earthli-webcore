@@ -72,7 +72,7 @@ http://www.earthli.com/software/webcore
       ?>
     </p>
     <p class="caution">
-      <span class="icon sixteen" style="background-image: url(<?php echo $Page->sized_icon ('{icons}indicators/warning', '16px'); ?>)">By default, the report includes some browser and web site data. See the full report details for more information.</span>
+      <span class="icon sixteen" style="background-image: url(<?php echo $Page->get_icon_url ('{icons}indicators/warning', '16px'); ?>)">By default, the report includes some browser and web site data. See the full report details for more information.</span>
     </p>
     <?php
       $layer = $Page->make_layer ('exception_details');

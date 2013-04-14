@@ -103,10 +103,10 @@ class RELEASE_GRID extends CONTENT_OBJECT_GRID
     <?php $this->_draw_menu_for ($obj, Menu_size_minimal, Menu_align_inline); ?>
   </div>
   <div class="minimal-commands-content">
-    <h3 class="grid-title" style="margin-bottom: 0">
+    <h3>
       <?php echo $this->obj_link ($obj); ?>
     </h3>
-    <div class="detail">
+    <p class="detail">
     <?php
       $links = array();
 
@@ -121,7 +121,7 @@ class RELEASE_GRID extends CONTENT_OBJECT_GRID
 
       echo join($this->app->display_options->object_separator, $links);
     ?>
-    </div>
+    </p>
     <div class="detail">
       <?php
       $status = $obj->status ();

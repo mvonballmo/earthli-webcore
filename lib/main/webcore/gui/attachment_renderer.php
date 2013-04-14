@@ -90,7 +90,7 @@ class ATTACHMENT_RENDERER extends CONTENT_OBJECT_RENDERER
 
     if ($obj->exists () && ($obj->original_file_name != $obj->file_name) && $this->_options->show_interactive)
     {
-      $img_url = $this->app->sized_icon ('{icons}indicators/info', '16px');
+      $img_url = $this->app->get_icon_url ('{icons}indicators/info', '16px');
 ?>
       <tr>
         <th></th>

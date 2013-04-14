@@ -26,39 +26,40 @@ http://www.earthli.com/software/webcore/projects
 
 ****************************************************************************/
 
-  $id = read_var ('id');
-  $folder_query = $App->login->folder_query ();
-  $folder = $folder_query->folder_for_release_at_id ($id);
+$id = read_var ('id');
+/** @var $folder_query USER_PROJECT_QUERY */
+$folder_query = $App->login->folder_query ();
+$folder = $folder_query->folder_for_release_at_id ($id);
+$branch = null;
 
-  if (isset ($folder))
-  {
-    $rel_query = $folder->release_query ();
-    $release = $rel_query->object_at_id ($id);
-
-    if (isset ($release))
-    {
-      $branch = $release->branch ();
-    }
-  }
+if (isset ($folder))
+{
+  $rel_query = $folder->release_query ();
+  $release = $rel_query->object_at_id ($id);
 
   if (isset ($release))
   {
-
-    $Page->title->add_object ($folder);
-    $Page->title->add_object ($branch);
-    $Page->title->add_object ($release);
-
-    $Page->location->add_folder_link ($folder, 'panel=branches');
-    $Page->location->add_object_link ($branch);
-    $Page->location->add_object_link ($release);
-
-    $history_item_query = $release->history_item_query ();
-    $obj = $release;
-
-    include_once ('webcore/pages/view_history.php');
+    $branch = $release->branch ();
   }
-  else
-  {
-    $Page->raise_security_violation ('You are not allowed to view this release\'s history.', $folder);
-  }
-?>
+}
+
+if (isset ($release))
+{
+
+  $Page->title->add_object ($folder);
+  $Page->title->add_object ($branch);
+  $Page->title->add_object ($release);
+
+  $Page->location->add_folder_link ($folder, 'panel=branches');
+  $Page->location->add_object_link ($branch, '', $App->resolve_file('{app_icons}buttons/new_branch'));
+  $Page->location->add_object_link ($release, '', $App->resolve_file('{app_icons}buttons/new_release'));
+
+  $history_item_query = $release->history_item_query ();
+  $obj = $release;
+
+  include_once ('webcore/pages/view_history.php');
+}
+else
+{
+  $Page->raise_security_violation ('You are not allowed to view this release\'s history.', $folder);
+}

@@ -52,9 +52,9 @@ http://www.earthli.com/software/webcore/projects
     $Page->title->add_object ($release);
 
     $Page->location->add_folder_link ($folder, 'panel=releases');
-    $Page->location->add_object_link ($branch, 'panel=releases');
-    $Page->location->add_object_link ($release, '', $App->sized_icon($release->state_icon_name(), ''));
-    $Page->location->append ($Page->title->subject, '', $App->sized_icon ('{app_icons}buttons/change_log', ''));
+    $Page->location->add_object_link ($branch, 'panel=releases', '', $App->resolve_file('{app_icons}buttons/new_branch'));
+    $Page->location->add_object_link ($release, '', $App->resolve_file('{app_icons}buttons/new_release'));
+    $Page->location->append ($Page->title->subject, '', $App->resolve_file ('{app_icons}buttons/change_log', ''));
 
     $printable = read_var ('printable');
 

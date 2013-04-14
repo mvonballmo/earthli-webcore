@@ -27,11 +27,13 @@ http://www.earthli.com/software/webcore
 ****************************************************************************/
 
   $folder_query = $App->login->folder_query ();
+  /** @var $folder FOLDER */
   $folder = $folder_query->object_at_id (read_var ('id'));
 
   if (isset ($folder) && $App->login->is_allowed (Privilege_set_folder, Privilege_modify, $folder))
   {
     $class_name = $App->final_class_name ('FOLDER_FORM', 'webcore/forms/folder_form.php');
+    /** @var $form FOLDER_FORM */
     $form = new $class_name ($folder);
 
     $form->process_existing ($folder);
@@ -44,7 +46,7 @@ http://www.earthli.com/software/webcore
     $Page->title->subject = 'Edit';
 
     $Page->location->add_folder_link ($folder);
-    $Page->location->append ($App->resolve_icon_as_html ('{icons}buttons/edit', ' ', '16px') . ' ' . $Page->title->subject);
+    $Page->location->append ($Page->title->subject, '', '{icons}buttons/edit');
 
     $Page->start_display ();
   ?>

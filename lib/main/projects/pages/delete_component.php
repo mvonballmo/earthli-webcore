@@ -27,6 +27,7 @@ http://www.earthli.com/software/webcore/projects
 ****************************************************************************/
 
   $id = read_var ('id');
+  /** @var $folder_query USER_PROJECT_QUERY */
   $folder_query = $App->login->folder_query ();
   $folder = $folder_query->folder_for_component_at_id ($id);
 
@@ -39,12 +40,13 @@ http://www.earthli.com/software/webcore/projects
   if (isset ($comp) && $App->login->is_allowed (Privilege_set_component, Privilege_delete, $comp))
   {
     $class_name = $App->final_class_name ('DELETE_OBJECT_IN_FOLDER_FORM', 'webcore/forms/delete_form.php', 'component');
+    /** @var $form DELETE_OBJECT_IN_FOLDER_FORM */
     $form = new $class_name ($folder, Privilege_set_component);
 
     $form->process_existing ($comp);
     if ($form->committed ())
     {
-      if ($App->login->is_allowed (Privilege_set_component, Privilege_hidden, $folder))
+      if ($App->login->is_allowed (Privilege_set_component, Privilege_view_hidden, $folder))
       {
         $App->return_to_referer ($comp->home_page ());
       }
@@ -60,15 +62,12 @@ http://www.earthli.com/software/webcore/projects
 
     $Page->location->add_folder_link ($folder);
     $Page->location->add_object_link ($comp);
-    $Page->location->append ($Page->title->subject);
+    $Page->location->append ($Page->title->subject, '', '{icons}buttons/delete');
 
     $Page->start_display ();
   ?>
   <div class="box">
-    <div class="box-title">
-      <?php echo $App->title_bar_icon ('{icons}buttons/delete'); ?> Delete component?
-    </div>
-    <div class="box-body">
+    <div class="box-body form-content">
     <?php
       $form->display ();
     ?>

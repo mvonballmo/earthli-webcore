@@ -27,6 +27,7 @@ http://www.earthli.com/software/webcore/albums
 ****************************************************************************/
   
   $folder_query = $App->login->folder_query ();
+  /** @var $folder FOLDER */
   $folder = $folder_query->object_at_id (read_var ('id'));
 
   if (isset ($folder) && $App->login->is_allowed (Privilege_set_folder, Privilege_view, $folder))
@@ -42,20 +43,27 @@ http://www.earthli.com/software/webcore/albums
     $Page->add_style_sheet ('{app_styles}calendar');
     $Page->start_display ();
 ?>
-<div class="box">
-  <?php
+<div class="top-box">
+  <div class="button-content">
+    <?php
     $menu = $App->make_menu ();
     $menu->renderer->content_mode = Menu_show_all_as_buttons;
-    $menu->renderer->alignment = Menu_align_right;
+    $menu->renderer->alignment = Menu_align_inline;
     $menu->append ('Explorer', "view_explorer.php?id=$folder->id", '{icons}/buttons/explorer');
     $menu->append ('Album', "view_folder.php?id=$folder->id", '{app_icons}/buttons/new_album');
-    $menu->display_as_toolbar ();
-  ?>
+    $menu->display ();
+    ?>
+  </div>
+</div>
+<?php
+?>
+<div class="box">
   <div class="box-body">
   <?php
     $calendar = 1;
     
     $class_name = $App->final_class_name ('ALBUM_CALENDAR', 'albums/gui/album_calendar.php');
+    /** @var $cal ALBUM_CALENDAR */
     $cal = new $class_name ($folder);
     $cal->display ();
   ?>
