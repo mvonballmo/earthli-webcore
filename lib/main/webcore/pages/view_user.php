@@ -89,9 +89,8 @@ http://www.earthli.com/software/webcore
   echo '<h4>Tools</h4>';
 
   $renderer = $user->handler_for (Handler_menu);
-  $renderer->alignment = Menu_align_inline;
   $renderer->set_size(Menu_size_compact);
-  $renderer->display_as_toolbar ($user->handler_for (Handler_commands));
+  $renderer->display ($user->handler_for (Handler_commands));
 
   $box->finish_column_set ();
   ?>

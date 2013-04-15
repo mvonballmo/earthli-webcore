@@ -120,7 +120,6 @@ http://www.earthli.com/software/webcore
   /** @var $renderer MENU_RENDERER */
   $renderer = $entry->handler_for (Handler_menu);
   $renderer->set_size (Menu_size_standard);
-  $renderer->alignment = Menu_align_inline;
   $renderer->display ($entry->handler_for (Handler_commands));
 
   echo '</div>';

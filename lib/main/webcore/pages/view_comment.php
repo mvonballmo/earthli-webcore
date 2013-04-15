@@ -69,7 +69,6 @@ http://www.earthli.com/software/webcore
   <span class="field"><?php echo $com_renderer->size(); ?></span> Replies
   <?php
   $menu = $App->make_menu();
-  $menu->renderer->alignment = Menu_align_inline;
   $menu->renderer->content_mode = Menu_show_as_buttons;
   $menu->display ();
   ?>

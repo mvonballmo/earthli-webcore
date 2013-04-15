@@ -84,7 +84,7 @@ class FLAT_COMMENT_GRID extends PRINTABLE_COMMENT_GRID
         if ($this->show_controls)
         {
           echo '<div style="float: left">';
-          $this->_draw_menu_for ($obj, Menu_size_minimal, Menu_align_inline);
+          $this->_draw_menu_for ($obj, Menu_size_minimal);
           echo '</div>';
         }
         ?>

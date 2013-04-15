@@ -36,11 +36,11 @@ http://www.earthli.com/software/webcore
 
     $Page->title->subject = 'Explore ' . $folder->title_as_plain_text ();
     $parent = $folder->parent_folder ();
+    $Page->location->add_folder_link ($folder, '', '', false);
     if (isset ($parent))
     {
       $Page->location->add_folder_link ($parent, '', 'view_explorer.php');
     }
-    $Page->location->add_object_link ($folder);
     $Page->location->append ('Explorer', '', '{icons}buttons/explorer');
 
     $Page->add_script_file ('{scripts}webcore_forms.js');
@@ -77,7 +77,6 @@ http://www.earthli.com/software/webcore
     /** @var $renderer MENU_RENDERER */
     $renderer = $folder->handler_for (Handler_menu);
     $renderer->set_size (Menu_size_compact);
-    $renderer->alignment = Menu_align_inline;
     $renderer->display ($commands);
     ?>
     </div>

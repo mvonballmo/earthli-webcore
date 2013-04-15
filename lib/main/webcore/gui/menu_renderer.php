@@ -151,16 +151,6 @@ class MENU_RENDERER extends WEBCORE_OBJECT
   public $num_important_commands = 3;
 
   /**
-   * Attachment for the menu in its container.
-   * Can be {@link Menu_align_default}, {@link Menu_align_left}, {@link
-   * Menu_align_right} or {@link Menu_align_center}. The default option doesn't
-   * manipulate the menu's position, letting the CSS of the container govern the
-   * menu position.
-   * @var string
-   */
-  public $alignment = Menu_align_inline;
-
-  /**
    * Show the word {@link $trigger_title} for the drop-down trigger?
    * Turned off when using {@link Menu_size_minimal} with {@link set_size()}.
    * @var boolean
@@ -265,8 +255,6 @@ class MENU_RENDERER extends WEBCORE_OBJECT
     if (isset ($this->env->profiler)) $this->env->profiler->start ('ui');
     if ($commands->num_executable_commands ())
     {
-      $alignment = $this->_get_alignment();
-
       if ($this->content_mode & Menu_show_as_buttons)
       {
         $class = "menu-buttons";
@@ -281,7 +269,7 @@ class MENU_RENDERER extends WEBCORE_OBJECT
         $class = "menu-items " . $class;
       }
 
-      echo "<ul class=\"$class\" $alignment>";
+      echo "<ul class=\"$class\">";
 
       switch ($this->display_mode)
       {
@@ -300,34 +288,7 @@ class MENU_RENDERER extends WEBCORE_OBJECT
     }
     if (isset ($this->env->profiler)) $this->env->profiler->stop ('ui');
   }
-  
-  /**
-   * Start drawing the container for {@link $alignment}.
-   * Called by {@link display()} to open the container closed by {@link
-   * _start_alignment()}.
-   * @access private
-   */
-  protected function _get_alignment ()
-  {
-    switch ($this->alignment)
-    {
-    case Menu_align_left:
-    case Menu_align_right:
-      $style = ' style="float: ' . $this->alignment . '"';
-      break;
-    case Menu_align_center:
-      $style = ' style="margin: auto; display: table; text-align: center;"';
-      break;
-    case Menu_align_inline:
-      $style = ' style="display: inline-block"';
-      break;
-    default:
-      $style = '';
-    }
-    
-    return $style;
-  }
-  
+
   /**
    * Draw some or all of the given commands.
    * @param COMMANDS $commands

@@ -83,7 +83,7 @@ class LOCATION_MENU extends MENU
       $this->prepend ($this->env->title, $this->page->path_to (Folder_name_root));
     }
   }
-  
+
   /**
    * Add a folder and its parents as links to the location.
    * Each folder is displayed as a link to the right of its parent.
@@ -91,12 +91,13 @@ class LOCATION_MENU extends MENU
    * @param FOLDER $folder
    * @param string $page_args Add these arguments to the URL's query string.
    * @param string $page_url Replace the folder's home page with this page.
+   * @param bool $include_parents If true, links for all parent folders are included as well.
    */
-  public function add_folder_link ($folder, $page_args = '', $page_url = '')
+  public function add_folder_link ($folder, $page_args = '', $page_url = '', $include_parents = true)
   {
     $parent = $folder;
 
-    while (! empty($parent->id) && ! $parent->is_root ())
+    while (isset($parent) && ! empty($parent->id) && ! $parent->is_root ())
     {
       $t = $parent->title_formatter ();
       $t->CSS_class = 'nav-item';
@@ -110,10 +111,21 @@ class LOCATION_MENU extends MENU
       }
       
       $this->prepend ($parent->title_as_link ($t), '', $parent->icon_url);
-      $parent = $parent->parent_folder ();
+
+      if ($include_parents)
+      {
+        $parent = $parent->parent_folder ();
+      }
+      else
+      {
+        $parent = null;
+      }
     }
 
-    $this->add_root_link ();
+    if (isset($parent))
+    {
+      $this->add_root_link ();
+    }
   }
 
   /**
@@ -122,10 +134,8 @@ class LOCATION_MENU extends MENU
    * of it as links.
    * @see add_folder_link()
    * @param FOLDER $folder
-   * @param string $page_args Add these arguments to the URL's query string.
-   * @param string $page_url Replace the folder's home page with this page.
    */
-  public function add_folder_text ($folder, $page_args = '', $page_url = '')
+  public function add_folder_text ($folder)
   {
     $this->add_folder_link ($folder->parent_folder ());
 

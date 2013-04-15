@@ -86,7 +86,7 @@ http://www.earthli.com/software/webcore
         $class_name = $App->final_class_name ('EXPLORER_COMMANDS', 'webcore/cmd/explorer_commands.php');
         $commands = new $class_name ($folder, $form->name);
         $renderer = $folder->handler_for (Handler_menu);
-        $renderer->display_as_toolbar ($commands);
+        $renderer->display ($commands);
 */
     ?>
     <h2 id="search-results">

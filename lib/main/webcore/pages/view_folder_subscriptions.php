@@ -78,7 +78,6 @@ http://www.earthli.com/software/webcore
 
     $menu = $App->make_menu ();
     $menu->renderer->content_mode = Menu_show_all_as_buttons;
-    $menu->renderer->alignment = Menu_align_inline;
     $menu->append ('Add subscribers', 'create_folder_subscriptions.php?id=' . $folder->id, '{icons}buttons/add_subscribers');
     $menu->display ();
     ?>

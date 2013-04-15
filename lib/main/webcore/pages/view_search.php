@@ -26,45 +26,46 @@ http://www.earthli.com/software/webcore
 
 ****************************************************************************/
 
-  $search_query = $App->login->search_query ();
-  $search = $search_query->object_at_id (read_var ('id'));
+$search_query = $App->login->search_query ();
+/** @var $search SEARCH */
+$search = $search_query->object_at_id (read_var ('id'));
 
-  if (isset ($search))
-  {
-    $App->set_referer ();
+if (isset ($search))
+{
+  $App->set_referer ();
 
-    $Page->title->add_object ($search);
-    $Page->title->subject = 'Home';
+  $Page->title->add_object ($search);
+  $Page->title->subject = $search->title_as_html ();
 
-    $Page->location->add_root_link ();
-    $Page->location->append ('Searches', 'view_searches.php');
-    $Page->location->add_object_text ($search);
+  $Page->location->add_root_link ();
+  $Page->location->append ('Searches', 'view_searches.php');
+  $Page->location->append ($Page->title->subject);
 
-    $Page->start_display ();
+  $Page->start_display ();
 
-    $search_query = $search->prepared_query ();
-    $num_results = $search_query->size ();
+  $search_query = $search->prepared_query ();
+  $num_results = $search_query->size ();
 ?>
-<div class="box">
-  <div class="box-title">
-    <?php echo $search->title_as_html (); ?>
-  </div>
-  <?php
+<div class="top-box">
+  <div class="button-content">
+    <?php
+    /** @var $renderer MENU_RENDERER */
     $renderer = $search->handler_for (Handler_menu);
-    $renderer->display_as_toolbar ($search->handler_for (Handler_commands));
-  ?>
+    $renderer->display ($search->handler_for (Handler_commands));
+    ?>
+  </div>
+</div>
+<div class="box">
   <div class="box-body">
   <?php
+    /** @var $renderer OBJECT_RENDERER */
     $renderer = $search->handler_for (Handler_html_renderer);
     $renderer->display ($search);
   ?>
-  </div>
-  <div class="box-title">
+  <h2>
     <?php echo $num_results; ?> Result(s)
-  </div>
-  <div class="box-body">
+  </h2>
   <?php
-
     $grid = $search->grid ();
     $grid->show_folder = true;
     $grid->set_ranges (10, 1);

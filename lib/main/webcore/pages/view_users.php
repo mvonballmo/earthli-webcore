@@ -83,7 +83,6 @@ http://www.earthli.com/software/webcore
     $commands = new $class_name ($App);
     $renderer = $App->make_menu_renderer ();
     $renderer->set_size(Menu_size_compact);
-    $renderer->alignment = Menu_align_inline;
     $renderer->display ($commands);
 
     echo '</div>';

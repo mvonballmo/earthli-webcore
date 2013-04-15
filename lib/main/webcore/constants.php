@@ -677,44 +677,6 @@ define ('Menu_size_toolbar', 'toolbar');
 define ('Menu_size_full', 'full');
 
 /**
- * Menu is rendered into the regular text-flow.
- * No markup is added to change the placment of the menu. Used by the {@link
- * MENU_RENDERER}.
- * @see Menu_align_left
- * @see Menu_align_right
- * @see Menu_align_center
- */
-define ('Menu_align_default', 'default');
-
-/**
- * Menu is floated to the left of content.
- * This differs from {@link Menu_align_default} as it is not in the normal text
- * flow. Used by the {@link MENU_RENDERER}.
- */
-define ('Menu_align_left', 'left');
-
-/**
- * Menu is floated to the right of content.
- * Used  by the {@link MENU_RENDERER}.
- * @see Menu_align_default
- */
-define ('Menu_align_right', 'right');
-
-/**
- * Menu is centered in its container.
- * Used  by the {@link MENU_RENDERER}.
- * @see Menu_align_default
- */
-define ('Menu_align_center', 'center');
-
-/**
- * Menu integrates in text flow of its container.
- * Used  by the {@link MENU_RENDERER}.
- * @see Menu_align_default
- */
-define ('Menu_align_inline', 'inline');
-
-/**
  * Used to request associated objects from a {@link RENDERABLE}.
  *  This   is a placeholder for documentation only. Do not use this constant.
  * @see Handler_print_renderer

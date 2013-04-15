@@ -122,7 +122,6 @@ http://www.earthli.com/software/webcore
     $newsfeed_commands = $Page->newsfeed_options->make_commands($App);
     /** @var $renderer MENU_RENDERER */
     $renderer = $App->make_newsfeed_menu_renderer ();
-    $renderer->alignment = Menu_align_inline;
     $renderer->display ($newsfeed_commands);
 
     echo ' Contents</h4>';

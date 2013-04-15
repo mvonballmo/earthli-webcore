@@ -82,7 +82,7 @@ class OBJECT_IN_FOLDER_SUMMARY_GRID extends CONTENT_OBJECT_GRID
       {
         echo "<span class=\"selector\">$selector</span>";
       }
-      $this->_draw_menu_for ($obj, Menu_size_minimal, Menu_align_inline);
+      $this->_draw_menu_for ($obj, Menu_size_minimal);
     ?>
     </div>
     <div class="minimal-commands-content <?php echo $selector_class; ?>">

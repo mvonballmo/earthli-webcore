@@ -92,7 +92,6 @@ class SUBSCRIBER_GRID extends STANDARD_GRID
 
     $menu_renderer = $this->app->make_menu_renderer();
     $menu_renderer->set_size($this->menu_size);
-    $menu_renderer->alignment = Menu_align_inline;
 
     echo '<p>';
     $menu_renderer->display($commands);

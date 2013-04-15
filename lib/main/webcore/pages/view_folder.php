@@ -86,7 +86,6 @@ http://www.earthli.com/software/webcore/albums
   $newsfeed_commands = $Page->newsfeed_options->make_commands($App);
   $renderer = $App->make_newsfeed_menu_renderer ();
   $renderer->set_size (Menu_size_minimal);
-  $renderer->alignment = Menu_align_inline;
   $renderer->display ($newsfeed_commands);
 
   echo ' Contents</h4>';
@@ -137,7 +136,6 @@ http://www.earthli.com/software/webcore/albums
   }
 
   $renderer = $folder->handler_for (Handler_menu);
-  $renderer->alignment = Menu_align_inline;
   $renderer->set_size(Menu_size_compact);
   $renderer->display($folder->handler_for (Handler_commands));
 

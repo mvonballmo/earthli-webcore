@@ -176,7 +176,6 @@ class ENTRY_ASSOCIATED_DATA_RENDERER extends HANDLER_RENDERER
             <span class="field"><?php echo $com_renderer->size(); ?></span> Replies
             <?php
             $menu_renderer = $this->app->make_menu_renderer();
-            $menu_renderer->alignment = Menu_align_inline;
             $menu_renderer->content_mode = Menu_show_as_buttons;
             $menu_renderer->display ($commands);
             ?>

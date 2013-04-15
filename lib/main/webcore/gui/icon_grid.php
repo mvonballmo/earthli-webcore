@@ -97,34 +97,47 @@ class ICON_GRID extends STANDARD_GRID
    */
   protected function _draw_box ($obj)
   {
-?>
-<div style="text-align: center">
-  <div style="height: 100px">
+  ?>
+  <div style="position: relative">
     <?php
-      if ($this->is_chooser)
-      {
-        echo '<a href="#" onclick="picker.select_value (\'' . $obj->url . '\'); return false;">';
-        echo $obj->icon_as_html ();
-        echo '</a>';
-      }
-      else
-      {
-        echo $obj->icon_as_html ();
-      }
+    if (! $this->is_chooser)
+    {
+      ?>
+      <div style="position: absolute; left: 0; top: 0">
+        <?php
+        $this->_draw_menu_for ($obj, Menu_size_minimal);
+        ?>
+      </div>
+    <?php
+    }
     ?>
-  </div>
-  <div style="margin-top: 1em">
+    <p>
+      <img src="<?php echo $obj->home_page (); ?>" alt="<?php echo $obj->title_as_plain_text (); ?>">
+    </p>
     <?php
-      $this->_draw_menu_for ($obj, Menu_size_minimal, Menu_align_left);
+    if ($this->is_chooser)
+    {
+    ?>
+    <a class="button" href="#" onclick="picker.select_value ('<?php echo $obj->url; ?>'); return false;" title="Choose this theme"><?php echo $obj->title_as_html(); ?></a>
+    <?php
+    }
+    else
+    {
+    ?>
+    <h3>
+      <?php
       echo $obj->title_as_html ();
+      ?>
+    </h3>
+    <?php
       if ($obj->category)
       {
-        echo " ($obj->category)";
+        echo "<p>{$obj->category}</p>";
       }
+    }
     ?>
   </div>
-</div>
-<?php
-   }
+    <?php
+  }
 }
 ?>

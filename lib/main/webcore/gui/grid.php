@@ -500,19 +500,13 @@ abstract class GRID extends WEBCORE_OBJECT
    * object. Draws nothing if {@link $show_menus} is <code>False</code>.
    * @param RENDERABLE $obj
    * @param string $size Sizing constant; see {@link Menu_size_standard}.
-   * @param string $alignment Alignment constant; see {@link
-   * Menu_alignment_default}.
    */
-  protected function _draw_menu_for ($obj, $size = Menu_size_standard, $alignment = '')
+  protected function _draw_menu_for ($obj, $size = Menu_size_standard)
   {
     if ($this->show_menus)
     {
       $renderer = $obj->handler_for (Handler_menu);
       $renderer->set_size ($size);
-      if ($alignment)
-      {
-        $renderer->alignment = $alignment;
-      }
       $renderer->display ($obj->handler_for (Handler_commands));
     }
   }

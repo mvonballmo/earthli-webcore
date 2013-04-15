@@ -98,7 +98,7 @@ class ATTACHMENT_GRID extends STANDARD_GRID
 <div style="position: relative">
   <div style="position: absolute; left: 0; top: 0">
     <?php
-    $this->_draw_menu_for ($obj, Menu_size_minimal, Menu_align_inline);
+    $this->_draw_menu_for ($obj, Menu_size_minimal);
     ?>
   </div>
     <a href="<?php echo $obj->home_page_as_html (); ?>"><?php

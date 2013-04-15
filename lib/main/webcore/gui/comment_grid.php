@@ -115,12 +115,15 @@ class COMMENT_GRID extends SELECTABLE_GRID
 <?php
   }
 
+  /**
+   * @param COMMENT $obj
+   */
   protected function _echo_header ($obj)
   {
     ?>
     <div class="grid-item">
       <div class="minimal-commands">
-        <?php $this->_draw_menu_for ($obj, Menu_size_minimal, Menu_align_inline); ?>
+        <?php $this->_draw_menu_for ($obj, Menu_size_minimal); ?>
       </div>
       <div class="minimal-commands-content">
         <?php

@@ -42,7 +42,6 @@ http://www.earthli.com/software/webcore
   {
     $menu = $App->make_menu ();
     $menu->renderer->content_mode = Menu_show_all_as_buttons;
-    $menu->renderer->alignment = Menu_align_inline;
     $menu->append ('Create theme', 'create_theme.php', '{icons}/buttons/create');
     $menu->display ();
   }

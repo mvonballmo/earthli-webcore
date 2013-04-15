@@ -86,7 +86,7 @@ class BASE_ARTICLE_GRID extends CONTENT_OBJECT_GRID
 ?>
   <div class="grid-item">
     <div class="minimal-commands">
-      <?php $this->_draw_menu_for ($obj, Menu_size_minimal, Menu_align_inline); ?>
+      <?php $this->_draw_menu_for ($obj, Menu_size_minimal); ?>
     </div>
     <div class="minimal-commands-content">
       <?php

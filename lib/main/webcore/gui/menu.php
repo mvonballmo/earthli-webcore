@@ -38,9 +38,8 @@ http://www.earthli.com/software/webcore
 
 /**
  * Manages buildup of simple command lists.
- * Uses a {@link MENU_RENDERER} to render when {@link display()} or {@link
- * display_as_toolbar()} is called. Use {@link append()} and {@link prepend()}
- * to add items.
+ * Uses a {@link MENU_RENDERER} to render when {@link display()} is called.
+ * Use {@link append()} and {@link prepend()} to add items.
  * @package webcore
  * @subpackage gui
  * @version 3.4.0
@@ -62,7 +61,6 @@ class MENU extends WEBCORE_OBJECT
     $this->renderer = $this->context->make_menu_renderer ();
     $this->renderer->set_size (Menu_size_full);
     $this->renderer->content_mode = Menu_show_all_as_list;
-    $this->renderer->alignment = Menu_align_default;
 
     include_once ('webcore/cmd/commands.php');
     $this->_commands = new COMMANDS ($context);

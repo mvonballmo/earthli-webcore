@@ -48,7 +48,6 @@ http://www.earthli.com/software/webcore/albums
     <?php
     $menu = $App->make_menu ();
     $menu->renderer->content_mode = Menu_show_all_as_buttons;
-    $menu->renderer->alignment = Menu_align_inline;
     $menu->append ('Explorer', "view_explorer.php?id=$folder->id", '{icons}/buttons/explorer');
     $menu->append ('Album', "view_folder.php?id=$folder->id", '{app_icons}/buttons/new_album');
     $menu->display ();

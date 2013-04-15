@@ -89,7 +89,7 @@ class JOURNAL_GRID extends ALBUM_ENTRY_GRID
 ?>
   <div class="grid-item">
     <div class="minimal-commands">
-      <?php $this->_draw_menu_for ($obj, Menu_size_minimal, Menu_align_inline); ?>
+      <?php $this->_draw_menu_for ($obj, Menu_size_minimal); ?>
     </div>
     <div class="minimal-commands-content">
       <div style="float: left; margin-right: 5px">
