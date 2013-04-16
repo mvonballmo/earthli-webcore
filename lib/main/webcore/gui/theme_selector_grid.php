@@ -53,7 +53,6 @@ class THEME_SELECTOR_GRID extends THEME_GRID
   public $box_style = '';
   public $width = '';
   public $show_separator = false;
-  public $padding = 0;
   public $centered = true;
 
   /**

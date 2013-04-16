@@ -59,11 +59,6 @@ class RELEASE_GRID extends CONTENT_OBJECT_GRID
   public $object_name = 'Release';
 
   /**
-   * @var integer
-   */
-  public $spacing = 0;
-
-  /**
    * @var boolean
    */
   public $even_columns = false;

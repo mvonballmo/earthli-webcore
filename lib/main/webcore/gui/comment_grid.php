@@ -55,11 +55,6 @@ class COMMENT_GRID extends SELECTABLE_GRID
   public $object_name = 'Comment';
 
   /**
-   * @var integer
-   */
-  public $spacing = 0;
-
-  /**
    * @var boolean
    */
   public $show_separator = true;

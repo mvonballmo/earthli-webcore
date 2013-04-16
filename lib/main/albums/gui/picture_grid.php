@@ -61,16 +61,6 @@ class PICTURE_GRID extends ALBUM_ENTRY_GRID
   /**
    * @var integer
    */
-  public $spacing = 0;
-
-  /**
-   * @var integer
-   */
-  public $padding = 0;
-
-  /**
-   * @var integer
-   */
   public $description_length = 100;
 
   /**

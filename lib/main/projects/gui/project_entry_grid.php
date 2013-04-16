@@ -55,16 +55,6 @@ class PROJECT_ENTRY_GRID extends CONTENT_OBJECT_GRID
   public $box_style = 'object-in-list';
 
   /**
-   * @var integer
-   */
-  public $spacing = 0;
-
-  /**
-   * @var integer
-   */
-  public $padding = 0;
-
-  /**
    * @var boolean
    */
   public $even_columns = true;

@@ -55,11 +55,6 @@ class SUBSCRIBER_GRID extends STANDARD_GRID
   public $object_name = 'Subscriber';
 
   /**
-   * @var integer
-   */
-  public $spacing = 2;
-
-  /**
    * @var string
    */
   public $width = '';

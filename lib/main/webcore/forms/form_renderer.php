@@ -413,18 +413,6 @@ class FORM_RENDERER extends CONTROLS_RENDERER
   public $width = 'auto';
 
   /**
-   * Spacing between rows and columns.
-   * @var integer
-   */
-  public $spacing = 0;
-
-  /**
-   * Padding inside each row.
-   * @var integer
-   */
-  public $padding = 0;
-
-  /**
    * Show the icon for required fields?
    * @var boolean
    */
@@ -792,7 +780,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
     {
       echo '<div>';
     }
-    echo '<table width="100%" cellspacing="' . $this->spacing . '" cellpadding="' . $this->padding . '">' . "\n";
+    echo '<table width="100%">' . "\n";
 
     if (isset ($width))
     {
@@ -857,7 +845,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
       $this->_column_started = true;
       $this->start_row ($title);
   ?>
-    <table cellspacing="0" cellpadding="0">
+    <table>
       <tr>
         <td style="vertical-align: top; padding-right: 1em">
   <?php

@@ -195,7 +195,7 @@ class ALBUM_CALENDAR extends BASIC_CALENDAR
     if ($num_pics || isset ($jrnls) || isset ($albums))
     {
 ?>
-      <table width="100%" cellspacing="0" cellpadding="0">
+      <table style="width: 100%">
         <tr>
           <td class="album-day-num"><?php echo $day; ?></td>
           <td style="text-align: right">

@@ -59,11 +59,6 @@ class HISTORY_ITEM_GRID extends STANDARD_GRID
   public $object_name = 'history item';
 
   /**
-   * @var integer
-   */
-  public $padding = 0;
-
-  /**
    * @var bool
    */
   public $show_separator = false;

@@ -65,11 +65,6 @@ class USER_BROWSER_GRID extends STANDARD_GRID
   public $even_columns = false;
 
   /**
-   * @var integer
-   */
-  public $padding = 1;
-
-  /**
    * @var string
    */
   public $width = '';

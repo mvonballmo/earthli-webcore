@@ -50,11 +50,6 @@ require_once ('webcore/gui/grid.php');
 abstract class FOLDER_GRID extends STANDARD_GRID
 {
   /**
-   * @var integer
-   */
-  public $padding = 0;
-
-  /**
    * Assign the tree of {@link FOLDER}s to display.
    * @param array[FOLDER]
    */
@@ -94,5 +89,3 @@ abstract class FOLDER_GRID extends STANDARD_GRID
    */
   protected $_folders;
 }
-
-?>

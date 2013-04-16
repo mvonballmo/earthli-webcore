@@ -108,10 +108,10 @@ class ARCHIVE
 
   /**
    * Execute the 'file_callback' for each file entry.
-   * @param  CALLBACK $file_callback Function prototype: function ({@link
+   * @param CALLBACK $file_callback Function prototype: function ({@link
    * COMPRESSED_FILE} $archive, {@link COMPRESSED_FILE_ENTRY} $entry, {@link
    * CALLBACK} $error_callback = null)
-   * @param  CALLBACK $error_callback Function prototype: function ({@link
+   * @param CALLBACK $error_callback Function prototype: function ({@link
    * COMPRESSED_FILE} $archive, string $msg, {@link COMPRESSED_FILE_ENTRY}
    * $entry)
    */

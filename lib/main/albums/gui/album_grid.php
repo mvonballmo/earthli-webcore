@@ -64,11 +64,6 @@ class ALBUM_GRID extends FOLDER_GRID
   public $box_style = '';
 
   /**
-   * @var integer
-   */
-  public $spacing = 0;
-
-  /**
    * @param ALBUM $obj
    * @access private
    */

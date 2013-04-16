@@ -98,7 +98,7 @@ class BOX_RENDERER extends WEBCORE_OBJECT
     }
     else
     {
-      $tag = '<table cellpadding="0" cellspacing="0" style="' . $builder->as_text() . '"><tr>' . "\n";
+      echo '<table style="' . $builder->as_text() . '"><tr>' . "\n";
     }
   }
   

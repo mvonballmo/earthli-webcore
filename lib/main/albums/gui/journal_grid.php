@@ -59,11 +59,6 @@ class JOURNAL_GRID extends ALBUM_ENTRY_GRID
   public $box_style = 'object-in-list';
 
   /**
-   * @var integer
-   */
-  public $spacing = 0;
-
-  /**
    * @var boolean
    */
   public $show_separator = true;

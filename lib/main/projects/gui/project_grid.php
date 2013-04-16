@@ -64,11 +64,6 @@ class PROJECT_GRID extends FOLDER_GRID
   public $box_style = '';
 
   /**
-   * @var integer
-   */
-  public $spacing = 8;
-
-  /**
    * @param PROJECT $obj
    * @access private
    */

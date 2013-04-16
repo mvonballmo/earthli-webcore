@@ -59,11 +59,6 @@ class RECIPE_BOOK_GRID extends FOLDER_GRID
   public $box_style = '';
 
   /**
-   * @var integer
-   */
-  public $spacing = 6;
-
-  /**
    * @var boolean
    */
   public $show_separator = false;

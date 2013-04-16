@@ -481,9 +481,9 @@ HTML_CALENDAR.prototype.draw_time_selector = function ()
 /** Draw an HTML-table-based calendar with JavaScript. */
 HTML_CALENDAR.prototype.display = function ()
 {
-  this.echo ('<table class="' + this.main_style + '" cellpadding="0" cellspacing="0" style="width: 100%">');
+  this.echo ('<table class="' + this.main_style + '">');
 	this.echo ('<tr><td class="' + this.banner_style + '">');
-	  this.echo ('<table cellspacing="0">');
+	  this.echo ('<table>');
 		this.echo ('<tr><td style="white-space: nowrap">');
   		  if (this.show_year_selector)
 			this.echo (this.make_changer_link (this.previous_year, this.icon_as_html (this.previous_year_image, 'Move to previous year')));

@@ -53,12 +53,13 @@ class TINY_PICTURE_GRID extends CSS_FLOW_GRID
 {
   public $object_name = 'Picture';
   public $box_style = '';
-  public $padding = 0;
-  public $spacing = 0;
   public $width = '';
   public $max_width = 100;
   public $max_height = 75;
 
+  /**
+   * @param PICTURE $obj
+   */
   protected function _draw_box ($obj)
   {
     $url = $obj->thumbnail_location (Force_root_on);

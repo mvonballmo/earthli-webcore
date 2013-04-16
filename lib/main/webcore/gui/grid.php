@@ -52,18 +52,6 @@ require_once ('webcore/obj/webcore_object.php');
 abstract class GRID extends WEBCORE_OBJECT
 {
   /**
-   * Space to leave betweena grid cell border and its content.
-   * @var integer
-   */
-  public $padding = 2;
-
-  /**
-   * Space to leave between grid cells.
-   * @var integer
-   */
-  public $spacing = 0;
-
-  /**
    * A CSS-style specifying the width of the grid.
    * @var string
    */
@@ -838,14 +826,6 @@ abstract class CSS_FLOW_GRID extends GRID
       $Result = 'float: left';
     }
 
-    if ($this->spacing)
-    {
-      $Result .= '; margin: ' . $this->spacing . 'px';
-    }
-    if ($this->padding)
-    {
-      $Result .= '; padding: ' . $this->padding . 'px';
-    }
     if ($this->min_box_width)
     {
       $Result .= '; min-width: ' . $this->min_box_width;

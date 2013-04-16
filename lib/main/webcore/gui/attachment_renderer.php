@@ -203,11 +203,12 @@ class ATTACHMENT_RENDERER extends CONTENT_OBJECT_RENDERER
     if ($obj->is_archive)
     {
       $class_name = $this->app->final_class_name ('ARCHIVE', 'webcore/util/archive.php');
+      /** @var $archive ARCHIVE */
       $archive = new $class_name ($file_name);      
       echo '<h2>Files</h2>';
       echo '<br>';
-      echo '<table class="detail" cellspacing="0">';
-      echo '<tr><th style="text-align: left; padding-right: 1em">Name</th><th style="text-align: right">Size</th></tr>';
+      echo '<table class="basic columns">';
+      echo '<tr><th>Name</th><th>Size</th></tr>';
       $archive->for_each (new CALLBACK_METHOD ('list_file_as_html', $this));
       echo '</table>';
     }
@@ -229,7 +230,7 @@ class ATTACHMENT_RENDERER extends CONTENT_OBJECT_RENDERER
   
   /**
    * Outputs the object as plain text.
-   * @param object $entry
+   * @param object $obj
    * @access private
    */
   protected function _display_as_plain_text ($obj)
@@ -297,10 +298,10 @@ class ATTACHMENT_RENDERER extends CONTENT_OBJECT_RENDERER
   {
     $ft = $this->context->file_type_manager ();
     $url = new FILE_URL ($entry->name);
-    $icon = $ft->icon_as_html ('', $url->extension (), '16px');
+    $icon_url = $ft->expanded_icon_url ('', $url->extension (), '16px');
 
-    echo '<tr><td style="padding-right: 1em">' . $icon . ' ' . $entry->name
-         . '</td><td style="text-align: right">' . file_size_as_text ($entry->size) . '</td></tr>';
+    echo '<tr><td><span class="icon sixteen" style="background-image: url(' . $icon_url . ')">' . $entry->name
+         . '</span></td><td>' . file_size_as_text ($entry->size) . '</td></tr>';
   }
 
   /**

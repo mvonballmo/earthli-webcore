@@ -54,11 +54,6 @@ class ATTACHMENT_GRID extends STANDARD_GRID
   public $box_style = '';
 
   /**
-   * @var integer
-   */
-  public $spacing = '5';
-
-  /**
    * @var boolean
    */
   public $show_separator = false;

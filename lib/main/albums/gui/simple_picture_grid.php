@@ -55,11 +55,6 @@ class SIMPLE_PICTURE_GRID extends STANDARD_GRID
   public $object_name = 'Picture';
 
   /**
-   * @var integer
-   */
-  public $spacing = 4;
-
-  /**
    * @var boolean
    */
   public $show_separator = false;

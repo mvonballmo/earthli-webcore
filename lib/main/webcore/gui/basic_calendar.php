@@ -182,7 +182,7 @@ class BASIC_CALENDAR extends CALENDAR
    */
   public function start_calendar ()
   {
-    echo "<table style=\"margin: auto\" cellspacing=\"0\" cellpadding=\"0\" class=\"calendar\">\n";
+    echo "<table class=\"calendar\">\n";
   }
 
   /**
