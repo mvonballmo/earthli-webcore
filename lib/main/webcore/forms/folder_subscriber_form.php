@@ -68,7 +68,7 @@ class FOLDER_SUBSCRIBER_FORM extends ID_BASED_FORM
 
     $field = new ARRAY_FIELD ();
     $field->id = 'subscriber_ids';
-    $field->title = 'Subscribers';
+    $field->caption = 'Subscribers';
     $this->add_field ($field);
   }
 

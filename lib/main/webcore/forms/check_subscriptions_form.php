@@ -90,7 +90,7 @@ class CHECK_SUBSCRIPTIONS_FORM extends ID_BASED_FORM
 
     $field = new EMAIL_FIELD ();
     $field->id = 'email';
-    $field->title = 'Email';
+    $field->caption = 'Email';
     $field->description = 'Enter an email to create or view subscriptions';
     $this->add_field ($field);
   }

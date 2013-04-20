@@ -57,13 +57,13 @@ class PROJECT_MULTIPLE_OBJECT_PRINTER_FORM extends MULTIPLE_OBJECT_PRINTER_FORM
 
     $field = new BOOLEAN_FIELD ();
     $field->id = 'show_changes';
-    $field->title = 'Show Changes';
+    $field->caption = 'Show Changes';
     $field->description = 'Show changes under each selected job.';
     $this->add_field ($field);
 
     $field = new BOOLEAN_FIELD ();
     $field->id = 'show_files';
-    $field->title = 'Show Files';
+    $field->caption = 'Show Files';
     $field->description = 'Show files associated with a change.';
     $this->add_field ($field);
   }

@@ -65,20 +65,20 @@ class MULTIPLE_OBJECT_MOVER_FORM extends MULTIPLE_OBJECT_ACTION_FORM
 
     $field = new INTEGER_FIELD ();
     $field->id = 'selected_folder_id';
-    $field->title = 'Target';
+    $field->caption = 'Target';
     $field->required = true;
     $field->min_value = 1;
     $this->add_field ($field);
 
     $field = new BOOLEAN_FIELD ();
     $field->id = 'maintain_permissions';
-    $field->title = 'Maintain permissions';
+    $field->caption = 'Maintain permissions';
     $field->description = 'If checked, permissions are created where needed to ensure that folders retain their current permissions.';
     $this->add_field ($field);
 
     $field = new BOOLEAN_FIELD ();
     $field->id = 'copy_as_draft';
-    $field->title = 'Copy as Draft';
+    $field->caption = 'Copy as Draft';
     $field->visible = false;
     $field->description = 'If checked, copied entries are stored as drafts instead of published.';
     $this->add_field ($field);

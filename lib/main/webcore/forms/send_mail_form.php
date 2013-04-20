@@ -75,38 +75,38 @@ abstract class SEND_MAIL_FORM extends PREVIEWABLE_FORM
 
     $field = new MUNGER_TITLE_FIELD ();
     $field->id = 'subject';
-    $field->title = 'Subject';
+    $field->caption = 'Subject';
     $field->required = true;
     $this->add_field ($field);
 
     $field = new MUNGER_TEXT_FIELD ();
     $field->id = 'message';
-    $field->title = 'Message';
+    $field->caption = 'Message';
     $field->max_length = 5000;
     $this->add_field ($field);
 
     $field = new EMAIL_FIELD ();
     $field->id = 'sender_email';
-    $field->title = 'Sender email';
+    $field->caption = 'Sender email';
     $field->required = true;
     $this->add_field ($field);
 
     $field = new TITLE_FIELD ();
     $field->id = 'sender_name';
-    $field->title = 'Sender name';
+    $field->caption = 'Sender name';
     $field->required = true;
     $this->add_field ($field);
 
     $field = new EMAIL_FIELD ();
     $field->id = 'send_to';
-    $field->title = 'Send to email';
+    $field->caption = 'Send to email';
     $field->required = true;
     $field->visible = false;
     $this->add_field ($field);
 
     $field = new BOOLEAN_FIELD ();
     $field->id = 'send_as_html';
-    $field->title = 'Format';
+    $field->caption = 'Format';
     $this->add_field ($field);
   }
 

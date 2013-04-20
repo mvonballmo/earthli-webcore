@@ -57,13 +57,13 @@ class ALBUM_MULTIPLE_OBJECT_PRINTER_FORM extends MULTIPLE_OBJECT_PRINTER_FORM
 
     $field = new BOOLEAN_FIELD ();
     $field->id = 'show_pictures';
-    $field->title = 'Pictures';
+    $field->caption = 'Pictures';
     $field->description = 'Show pictures with journal entries.';
     $this->add_field ($field);
 
     $field = new BOOLEAN_FIELD ();
     $field->id = 'resize_pictures';
-    $field->title = '';
+    $field->caption = '';
     $field->description = 'Resize pictures according to album rules.';
     $this->add_field ($field);
   }

@@ -67,7 +67,7 @@ class EXECUTE_TEST_SUITE_FORM extends FORM
 
     $field = new TEXT_FIELD ();
     $field->id = 'test_name';
-    $field->title = 'Test';
+    $field->caption = 'Test';
     $field->min_value = 0;
     $this->add_field ($field);
   }

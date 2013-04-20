@@ -57,17 +57,17 @@ class FOLDER_FORM extends OBJECT_IN_FOLDER_FORM
 
     $field = new URI_FIELD ();
     $field->id = 'icon_url';
-    $field->title = 'Icon';
+    $field->caption = 'Icon';
     $this->add_field ($field);
 
     $field = new MUNGER_TEXT_FIELD ();
     $field->id = 'summary';
-    $field->title = 'Summary';
+    $field->caption = 'Summary';
     $this->add_field ($field);
 
     $field = new BOOLEAN_FIELD ();
     $field->id = 'is_organizational';
-    $field->title = 'Organizer';
+    $field->caption = 'Organizer';
     $field->description = 'Used for structure; cannot add new content';
     $this->add_field ($field);
   }

@@ -59,7 +59,7 @@ class FOLDER_GROUP_PERMISSIONS_FORM extends FOLDER_PERMISSIONS_FORM
 
     $field = new TEXT_FIELD ();
     $field->id = 'group_id';
-    $field->title = 'Group ID';
+    $field->caption = 'Group ID';
     $field->required = true;
     $field->min_value = 1;
     $field->visible = false;

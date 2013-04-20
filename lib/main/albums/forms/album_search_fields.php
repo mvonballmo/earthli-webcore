@@ -93,22 +93,22 @@ class SEARCH_JOURNAL_FIELDS extends SEARCH_ENTRY_FIELDS
 
     $field = new INTEGER_FIELD ();
     $field->id = 'colder_than';
-    $field->title = 'Colder than';
+    $field->caption = 'Colder than';
     $form->add_field ($field);
 
     $field = new INTEGER_FIELD ();
     $field->id = 'warmer_than';
-    $field->title = 'Warmer than';
+    $field->caption = 'Warmer than';
     $form->add_field ($field);
 
     $field = new ARRAY_FIELD ();
     $field->id = 'weather_type';
-    $field->title = ' ';
+    $field->caption = ' ';
     $form->add_field ($field);
 
     $field = new BOOLEAN_FIELD ();
     $field->id = 'not_weather_type';
-    $field->title = 'Weather';
+    $field->caption = 'Weather';
     $field->description = 'Invert selection';
     $form->add_field ($field);
   }

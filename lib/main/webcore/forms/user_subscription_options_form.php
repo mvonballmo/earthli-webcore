@@ -67,75 +67,75 @@ class USER_SUBSCRIPTION_OPTIONS_FORM extends SUBSCRIPTION_FORM
 
     $field = new EMAIL_FIELD ();
     $field->id = 'new_email';
-    $field->title = 'Email address';
+    $field->caption = 'Email address';
     $field->required = true;
     $field->min_length = 5;
     $this->add_field ($field);
 
     $field = new BOOLEAN_FIELD ();
     $field->id = 'send_as_html';
-    $field->title = 'Format';
+    $field->caption = 'Format';
     $this->add_field ($field);
 
     $field = new INTEGER_FIELD ();
     $field->id = 'max_individual_messages';
-    $field->title = 'Grouping';
+    $field->caption = 'Grouping';
     $field->min_value = 1;
     $this->add_field ($field);
 
     $field = new INTEGER_FIELD ();
     $field->id = 'max_items_per_message';
-    $field->title = 'Size';
+    $field->caption = 'Size';
     $field->min_value = 2;
     $this->add_field ($field);
 
     $field = new INTEGER_FIELD ();
     $field->id = 'min_hours_to_wait';
-    $field->title = 'Schedule';
+    $field->caption = 'Schedule';
     $this->add_field ($field);
 
     $field = new INTEGER_FIELD ();
     $field->id = 'preferred_text_length';
-    $field->title = 'Preferred text length';
+    $field->caption = 'Preferred text length';
     $field->min_value = 0;
     $this->add_field ($field);
 
     $field = new BOOLEAN_FIELD ();
     $field->id = 'text_options';
-    $field->title = 'Text';
+    $field->caption = 'Text';
     $this->add_field ($field);
 
     $field = new BOOLEAN_FIELD ();
     $field->id = 'group_objects';
-    $field->title = 'Grouping';
+    $field->caption = 'Grouping';
     $this->add_field ($field);
 
     $field = new BOOLEAN_FIELD ();
     $field->id = 'split_objects';
-    $field->title = 'Size';
+    $field->caption = 'Size';
     $this->add_field ($field);
 
     $field = new BOOLEAN_FIELD ();
     $field->id = 'group_history_items';
-    $field->title = '&nbsp;';
+    $field->caption = '&nbsp;';
     $field->description = 'Group history details for an object into one message.';
     $this->add_field ($field);
 
     $field = new BOOLEAN_FIELD ();
     $field->id = 'show_history_items';
-    $field->title = '';
+    $field->caption = '';
     $field->description = 'Show history details.';
     $this->add_field ($field);
 
     $field = new BOOLEAN_FIELD ();
     $field->id = 'show_history_item_as_subject';
-    $field->title = '';
+    $field->caption = '';
     $field->description = 'Show history details in the message subject.';
     $this->add_field ($field);
 
     $field = new BOOLEAN_FIELD ();
     $field->id = 'send_own_changes';
-    $field->title = 'Content';
+    $field->caption = 'Content';
     $field->description = 'Send messages triggered by this subscriber.';
     $this->add_field ($field);
   }

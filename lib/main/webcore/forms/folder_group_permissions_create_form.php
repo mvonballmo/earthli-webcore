@@ -71,7 +71,7 @@ class FOLDER_GROUP_PERMISSIONS_CREATE_FORM extends FOLDER_PERMISSIONS_FORM
 
     $field = new TEXT_FIELD ();
     $field->id = 'group_name';
-    $field->title = 'Group';
+    $field->caption = 'Group';
     $field->required = true;
     $field->min_length = 1;
     $field->max_length = 50;

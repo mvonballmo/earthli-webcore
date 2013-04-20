@@ -65,20 +65,20 @@ class ATTACHMENT_FORM extends OBJECT_IN_FOLDER_FORM
 
     $field = new TEXT_FIELD ();
     $field->id = 'type';
-    $field->title = 'Type';
+    $field->caption = 'Type';
     $field->required = true;
     $field->visible = false;
     $this->add_field ($field);
 
     $field = new BOOLEAN_FIELD ();
     $field->id = 'create_thumbnail';
-    $field->title = 'Generate thumbnail';
+    $field->caption = 'Generate thumbnail';
     $field->sticky = true;
     $this->add_field ($field);
 
     $field = new INTEGER_FIELD ();
     $field->id = 'thumbnail_size';
-    $field->title = 'Thumbnail';
+    $field->caption = 'Thumbnail';
     $field->min_value = 32;
     $field->max_value = 400;
     $field->sticky = true;
@@ -86,13 +86,13 @@ class ATTACHMENT_FORM extends OBJECT_IN_FOLDER_FORM
 
     $field = new BOOLEAN_FIELD ();
     $field->id = 'overwrite';
-    $field->title = 'Overwrite existing file';
+    $field->caption = 'Overwrite existing file';
     $field->sticky = true;
     $this->add_field ($field);
 
     $field = new UPLOAD_FILE_FIELD ();
     $field->id = 'file_name';
-    $field->title = 'File';
+    $field->caption = 'File';
     $field->required = true;
     $field->max_length = 200;
     $this->add_field ($field);

@@ -57,27 +57,27 @@ class JOURNAL_FORM extends ALBUM_ENTRY_FORM
 
     $field = new INTEGER_FIELD ();
     $field->id = 'lo_temp';
-    $field->title = 'Low Temperature';
+    $field->caption = 'Low Temperature';
     $field->min_value = -60;
     $field->max_value = 60;
     $this->add_field ($field);
 
     $field = new INTEGER_FIELD ();
     $field->id = 'hi_temp';
-    $field->title = 'High Temperature';
+    $field->caption = 'High Temperature';
     $field->min_value = -60;
     $field->max_value = 60;
     $this->add_field ($field);
 
     $field = new INTEGER_FIELD ();
     $field->id = 'weather_type';
-    $field->title = 'Weather Type';
+    $field->caption = 'Weather Type';
     $field->required = true;
     $this->add_field ($field);
 
     $field = new MUNGER_TEXT_FIELD ();
     $field->id = 'weather';
-    $field->title = 'Weather';
+    $field->caption = 'Weather';
     $this->add_field ($field);
   }
 

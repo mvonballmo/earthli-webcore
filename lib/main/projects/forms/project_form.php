@@ -57,14 +57,14 @@ class PROJECT_FORM extends FOLDER_FORM
 
     $field = new BOOLEAN_FIELD ();
     $field->id = 'defines_options';
-    $field->title = 'Defines options';
+    $field->caption = 'Defines options';
     $this->add_field ($field);
 
     include_once ('projects/obj/project_options.php');  // include the constants used below
 
     $field = new ENUMERATED_FIELD ();
     $field->id = 'assignee_group_type';
-    $field->title = 'Assignees';
+    $field->caption = 'Assignees';
     $field->add_value (Project_user_all);
     $field->add_value (Project_user_registered_only);
     $field->add_value (Project_user_group);
@@ -72,13 +72,13 @@ class PROJECT_FORM extends FOLDER_FORM
 
     $field = new INTEGER_FIELD ();
     $field->id = 'assignee_group_id';
-    $field->title = 'Assignee group id';
+    $field->caption = 'Assignee group id';
     $field->min_value = 1;
     $this->add_field ($field);
 
     $field = new ENUMERATED_FIELD ();
     $field->id = 'reporter_group_type';
-    $field->title = 'Reporters';
+    $field->caption = 'Reporters';
     $field->add_value (Project_user_all);
     $field->add_value (Project_user_registered_only);
     $field->add_value (Project_user_group);
@@ -86,13 +86,13 @@ class PROJECT_FORM extends FOLDER_FORM
 
     $field = new INTEGER_FIELD ();
     $field->id = 'reporter_group_id';
-    $field->title = 'Reporter group id';
+    $field->caption = 'Reporter group id';
     $field->min_value = 1;
     $this->add_field ($field);
 
     $field = new INTEGER_FIELD ();
     $field->id = 'seconds_until_deadline';
-    $field->title = 'Releases';
+    $field->caption = 'Releases';
     $field->description = 'Show a warning for releases with a deadline within this many days.';
     $field->min_value = 0;
     $this->add_field ($field);
@@ -101,7 +101,7 @@ class PROJECT_FORM extends FOLDER_FORM
 
     $field = new INTEGER_FIELD ();
     $field->id = 'trunk_id';
-    $field->title = 'Trunk';
+    $field->caption = 'Trunk';
     $field->description = 'Default branch for new jobs and changes.';
     $field->min_value = 1;
     $this->add_field ($field);
@@ -110,7 +110,7 @@ class PROJECT_FORM extends FOLDER_FORM
 
     $field = new TITLE_FIELD ();
     $field->id = 'branch_title';
-    $field->title = 'Branch title';
+    $field->caption = 'Branch title';
     $field->description = 'Fill in the name of the default branch for this project.';
     $this->add_field ($field);
   }

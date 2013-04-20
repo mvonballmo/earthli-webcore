@@ -62,13 +62,13 @@ class CHANGE_FORM extends PROJECT_ENTRY_FORM
 
     $field = new INTEGER_FIELD ();
     $field->id = 'job_id';
-    $field->title = 'Job';
+    $field->caption = 'Job';
     $field->min_value = 0;
     $this->add_field ($field);
 
     $field = new TEXT_FIELD ();
     $field->id = 'files';
-    $field->title = 'Files';
+    $field->caption = 'Files';
     $field->min_length = 0;
     $field->max_length = 65535;
     $this->add_field ($field);

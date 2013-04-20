@@ -58,7 +58,7 @@ class OBJECT_IN_FOLDER_FORM extends CONTENT_OBJECT_FORM
 
     $field = new BOOLEAN_FIELD ();
     $field->id = 'is_visible';
-    $field->title = 'Visible';
+    $field->caption = 'Visible';
     $field->description = 'Show this item to non-admin users.';
     $this->add_field ($field);
   }
@@ -220,22 +220,22 @@ class ATTACHMENT_HOST_FORM extends OBJECT_IN_FOLDER_FORM
 
     $field = new TEXT_FIELD ();
     $field->id = 'attachments';
-    $field->title = 'Attachments';
+    $field->caption = 'Attachments';
     $this->add_field ($field);
 
     $field = new TEXT_FIELD ();
     $field->id = 'alignments';
-    $field->title = 'Alignments';
+    $field->caption = 'Alignments';
     $this->add_field ($field);
 
     $field = new TEXT_FIELD ();
     $field->id = 'sizes';
-    $field->title = 'Sizes';
+    $field->caption = 'Sizes';
     $this->add_field ($field);
 
     $field = new TEXT_FIELD ();
     $field->id = 'caption_modes';
-    $field->title = 'Caption Modes';
+    $field->caption = 'Caption Modes';
     $this->add_field ($field);
   }
   
@@ -452,13 +452,13 @@ class DRAFTABLE_ENTRY_FORM extends ENTRY_FORM
 
     $field = new BOOLEAN_FIELD ();
     $field->id = 'draft';
-    $field->title = 'Draft';
+    $field->caption = 'Draft';
     $field->visible = false;
     $this->add_field ($field);
 
     $field = new BOOLEAN_FIELD ();
     $field->id = 'quick_save';
-    $field->title = 'Quick Save';
+    $field->caption = 'Quick Save';
     $field->visible = false;
     $this->add_field ($field);
   }

@@ -76,7 +76,7 @@ class PURGE_OBJECT_FORM extends RENDERABLE_FORM
     
     $field = new BOOLEAN_FIELD ();
     $field->id = 'remove_resources';
-    $field->title = 'Remove associated files';
+    $field->caption = 'Remove associated files';
     $field->visible = false;
     $this->add_field ($field);
   }

@@ -68,14 +68,14 @@ class PASSWORD_FORM extends FORM
 
     $field = new TEXT_FIELD ();
     $field->id = 'name';
-    $field->title = 'Name';
+    $field->caption = 'Name';
     $field->required = true;
     $field->visible = false;
     $this->add_field ($field);
 
     $field = new TEXT_FIELD ();
     $field->id = 'password1';
-    $field->title = 'Password';
+    $field->caption = 'Password';
     $field->required = true;
     $field->min_length = $this->app->user_options->minimum_password_length;
     $field->max_length = 20;
@@ -83,7 +83,7 @@ class PASSWORD_FORM extends FORM
 
     $field = new TEXT_FIELD ();
     $field->id = 'password2';
-    $field->title = 'Confirm Password';
+    $field->caption = 'Confirm Password';
     $field->required = true;
     $field->min_length = $this->app->user_options->minimum_password_length;
     $field->max_length = 20;
@@ -91,7 +91,7 @@ class PASSWORD_FORM extends FORM
     
     $field = new BOOLEAN_FIELD ();
     $field->id = 'remember';
-    $field->title = 'Remember me';
+    $field->caption = 'Remember me';
     $field->description = 'Store your user information on this computer.';
     $this->add_field ($field);
   }

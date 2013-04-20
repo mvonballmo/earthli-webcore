@@ -63,7 +63,7 @@ class CREATE_FOLDER_PERMISSIONS_FORM extends ID_BASED_FORM
 
     $field = new ENUMERATED_FIELD ();
     $field->id = 'copy_mode';
-    $field->title = '';
+    $field->caption = '';
     $field->add_value (Security_copy_none);
     $field->add_value (Security_copy_current);
     $field->add_value (Security_create_admin);

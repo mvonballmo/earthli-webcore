@@ -63,7 +63,7 @@ abstract class SEND_MULTIPLE_MAIL_FORM extends SEND_MAIL_FORM
 
     $field = new TEXT_FIELD ();
     $field->id = 'recipients';
-    $field->title = 'Recipients';
+    $field->caption = 'Recipients';
     $field->description = 'Type each email on its own line.';
     $field->required = true;
     $field->tag_validator_type = Tag_validator_none;
@@ -71,7 +71,7 @@ abstract class SEND_MULTIPLE_MAIL_FORM extends SEND_MAIL_FORM
 
     $field = new ENUMERATED_FIELD ();
     $field->id = 'email_type';
-    $field->title = 'Email Options';
+    $field->caption = 'Email Options';
     $field->description = '*May time out if many emails are specified.';
     $field->add_value ('single_mail');
     $field->add_value ('multiple_mail');

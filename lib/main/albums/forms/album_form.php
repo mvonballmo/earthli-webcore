@@ -57,36 +57,36 @@ class ALBUM_FORM extends FOLDER_FORM
 
     $field = new URI_FIELD ();
     $field->id = 'url_root';
-    $field->title = 'Root URL';
+    $field->caption = 'Root URL';
     $field->required = true;
     $this->add_field ($field);
 
     $field = new BOOLEAN_FIELD ();
     $field->id = 'show_times';
-    $field->title = 'Show times';
+    $field->caption = 'Show times';
     $field->description = 'Shows times with albums, picture and journals for finer detail.';
     $this->add_field ($field);
 
     $field = new BOOLEAN_FIELD ();
     $field->id = 'show_celsius';
-    $field->title = 'Show celsius';
+    $field->caption = 'Show celsius';
     $this->add_field ($field);
 
     $field = new INTEGER_FIELD ();
     $field->id = 'max_picture_height';
-    $field->title = 'Maximum picture height';
+    $field->caption = 'Maximum picture height';
     $field->min_value = 0;
     $this->add_field ($field);
 
     $field = new INTEGER_FIELD ();
     $field->id = 'max_picture_width';
-    $field->title = 'Maximum picture width';
+    $field->caption = 'Maximum picture width';
     $field->min_value = 0;
     $this->add_field ($field);
 
     $field = new ENUMERATED_FIELD ();
     $field->id = 'date_style';
-    $field->title = '';
+    $field->caption = '';
     $field->add_value (Album_is_single_day);
     $field->add_value (Album_is_span);
     $field->add_value (Album_is_journal);
@@ -96,30 +96,30 @@ class ALBUM_FORM extends FOLDER_FORM
 
     $field = new DATE_FIELD ();
     $field->id = 'first_day';
-    $field->title = 'First day';
+    $field->caption = 'First day';
     $this->add_field ($field);
 
     $field = new DATE_FIELD ();
     $field->id = 'last_day';
-    $field->title = 'Last day';
+    $field->caption = 'Last day';
     $this->add_field ($field);
 
     $field = new BOOLEAN_FIELD ();
     $field->id = 'constrain_picture_size';
-    $field->title = 'Display pictures as';
+    $field->caption = 'Display pictures as';
     $field->description = 'Initial size for larger pictures; clicking shows it full size.';
     $this->add_field ($field);
 
     $field = new INTEGER_FIELD ();
     $field->id = 'main_picture_id';
-    $field->title = 'Main picture';
+    $field->caption = 'Main picture';
     $field->min_value = 0;
     $field->visible = false;
     $this->add_field ($field);
 
     $field = new ENUMERATED_FIELD ();
     $field->id = 'location';
-    $field->title = 'Location';
+    $field->caption = 'Location';
     $field->required = true;
     $field->add_value (Album_location_type_local);
     $field->add_value (Album_location_type_remote);
@@ -127,7 +127,7 @@ class ALBUM_FORM extends FOLDER_FORM
 
     $field = new BOOLEAN_FIELD ();
     $field->id = 'url_root_enabled';
-    $field->title = '';
+    $field->caption = '';
     $field->description = 'Check to change the Root URL. For advanced users only -- pictures are not moved when the root is changed.';
     $this->add_field ($field);
   }

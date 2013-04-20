@@ -59,7 +59,7 @@ class FOLDER_GROUP_PERMISSIONS_DELETE_FORM extends DELETE_FORM
 
     $field = new INTEGER_FIELD ();
     $field->id = 'group_id';
-    $field->title = 'Group ID';
+    $field->caption = 'Group ID';
     $field->required = true;
     $field->min_value = 1;
     $field->visible = false;

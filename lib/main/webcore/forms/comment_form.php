@@ -59,14 +59,14 @@ class COMMENT_FORM extends ATTACHMENT_HOST_FORM
 
     $field = new INTEGER_FIELD ();
     $field->id = 'kind';
-    $field->title = 'Kind';
+    $field->caption = 'Kind';
     $field->min_value = 0;
     $field->max_value = 255;
     $this->add_field ($field);
 
     $field = new INTEGER_FIELD ();
     $field->id = 'parent_id';
-    $field->title = 'Parent Id';
+    $field->caption = 'Parent Id';
     $field->min_value = 0;
     $field->visible = false;
     $this->add_field ($field);

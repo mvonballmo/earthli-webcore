@@ -58,28 +58,28 @@ class RELEASE_FORM extends OBJECT_IN_FOLDER_FORM
 
     $field = new INTEGER_FIELD ();
     $field->id = 'state';
-    $field->title = '';
+    $field->caption = '';
     $this->add_field ($field);
 
     $field = new DATE_FIELD ();
     $field->id = 'time_scheduled';
-    $field->title = 'Ship date';
+    $field->caption = 'Ship date';
     $this->add_field ($field);
 
     $field = new DATE_FIELD ();
     $field->id = 'time_testing_scheduled';
-    $field->title = 'Test date';
+    $field->caption = 'Test date';
     $this->add_field ($field);
 
     $field = new MUNGER_TEXT_FIELD ();
     $field->id = 'summary';
-    $field->title = 'Summary';
+    $field->caption = 'Summary';
     $field->max_length = 65535;
     $this->add_field ($field);
 
     $field = new INTEGER_FIELD ();
     $field->id = 'branch_id';
-    $field->title = 'Branch';
+    $field->caption = 'Branch';
     $this->add_field ($field);
     
     $branch_query = $folder->branch_query ();

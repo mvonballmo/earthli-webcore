@@ -57,30 +57,30 @@ class RECIPE_FORM extends DRAFTABLE_ENTRY_FORM
 
     $field = new MUNGER_TITLE_FIELD ();
     $field->id = 'originator';
-    $field->title = 'Originator';
+    $field->caption = 'Originator';
     $this->add_field ($field);
 
     $field = new MUNGER_TEXT_FIELD ();
     $field->id = 'instructions';
-    $field->title = 'Instructions';
+    $field->caption = 'Instructions';
     $field->required = true;
     $this->add_field ($field);
 
     $field = new MUNGER_TEXT_FIELD ();
     $field->id = 'ingredients';
-    $field->title = 'Ingredients';
+    $field->caption = 'Ingredients';
     $field->required = true;
     $this->add_field ($field);
 
     $field = new BOOLEAN_FIELD ();
     $field->id = 'bullet_ingredients';
-    $field->title = '';
+    $field->caption = '';
     $field->description = 'Show ingredients as a bulleted list';
     $this->add_field ($field);
 
     $field = new BOOLEAN_FIELD ();
     $field->id = 'number_instructions';
-    $field->title = '';
+    $field->caption = '';
     $field->description = 'Show instructions as a numbered list';
     $this->add_field ($field);
   }

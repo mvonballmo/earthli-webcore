@@ -59,7 +59,7 @@ class FIELD extends RAISABLE
    * Title used in error messages and display.
    * @var string
    */
-  public $title = '';
+  public $caption = '';
 
   /**
    * Must this field be non-empty?
@@ -112,7 +112,7 @@ class FIELD extends RAISABLE
   {
     if ($this->required && $this->is_empty ())
     {
-      $form->record_error ($this->id, "Please provide a value for $this->title.");
+      $form->record_error ($this->id, "Please provide a value for $this->caption.");
     }
   }
 
@@ -328,7 +328,7 @@ class INTEGER_FIELD extends FIELD
     {
       if ($this->_value && !is_numeric ($this->_value))
       {
-        $form->record_error ($this->id, "Please enter a number for $this->title: [$this->_value] is not valid.");
+        $form->record_error ($this->id, "Please enter a number for $this->caption: [$this->_value] is not valid.");
       }
       else
       {
@@ -338,14 +338,14 @@ class INTEGER_FIELD extends FIELD
           {
             if (! (($this->min_value <= $this->_value) && ($this->_value <= $this->max_value)))
             {
-              $form->record_error ($this->id, "Please enter a number between $this->min_value and $this->max_value for $this->title");
+              $form->record_error ($this->id, "Please enter a number between $this->min_value and $this->max_value for $this->caption");
             }
           }
           else
           {
             if ($this->_value < $this->min_value)
             {
-              $form->record_error ($this->id, "Please enter a number greater than or equal to $this->min_value for $this->title");
+              $form->record_error ($this->id, "Please enter a number greater than or equal to $this->min_value for $this->caption");
             }
           }
         }
@@ -355,7 +355,7 @@ class INTEGER_FIELD extends FIELD
           {
             if ($this->_value > $this->max_value)
             {
-              $form->record_error ($this->id, "Please enter a number less than or equal to $this->max_value for $this->title");
+              $form->record_error ($this->id, "Please enter a number less than or equal to $this->max_value for $this->caption");
             }
           }
         }
@@ -398,7 +398,7 @@ class BOOLEAN_FIELD extends FIELD
     {
       if (! ((0 <= $this->_value) && ($this->_value <= 1)))
       {
-        $form->record_error ($this->id, "Please enter a boolean value (0 or 1) for $this->title");
+        $form->record_error ($this->id, "Please enter a boolean value (0 or 1) for $this->caption");
       }
     }
   }
@@ -476,20 +476,20 @@ class TEXT_FIELD extends FIELD
       {
         if (! (($this->min_length <= $len) && ($len <= $this->max_length)))
         {
-          $form->record_error ($this->id, "Please enter between $this->min_length and $this->max_length characters for $this->title");
+          $form->record_error ($this->id, "Please enter between $this->min_length and $this->max_length characters for $this->caption");
         }
       }
       else
       {
         if ($len < $this->min_length)
         {
-          $form->record_error ($this->id, "Please enter at least $this->min_length characters for $this->title");
+          $form->record_error ($this->id, "Please enter at least $this->min_length characters for $this->caption");
         }
       }
 
       if ($this->expression && ! preg_match ($this->expression, $this->_value))
       {
-        $form->record_error ($this->id, "$this->title $this->expression_help.");
+        $form->record_error ($this->id, "$this->caption $this->expression_help.");
       }
 
       if ($this->tag_validator_type != Tag_validator_none)
@@ -506,7 +506,7 @@ class TEXT_FIELD extends FIELD
             $from_col = $error->column;
             $to_col = $error->column + strlen ($error->token->data ());
             $js = "select_line_column_range (this.document.getElementById ('$name'), $line, $from_col, $line, $to_col)";
-            $position = "$this->title [<a href=\"#\" onclick=\"javascript:$js\">line $line, char $from_col</a>]";
+            $position = "$this->caption [<a href=\"#\" onclick=\"javascript:$js\">line $line, char $from_col</a>]";
             $form->record_error ($this->id, $position . ' ' . htmlspecialchars ($msg));
           }
         }
@@ -825,14 +825,14 @@ class DATE_TIME_FIELD extends FIELD
           {
             if ($date->less_than_equal ($this->min_date) || $this->max_date->less_than_equal ($date))
             {
-              $form->record_error ($this->id, 'Please enter a date between '.$this->min_date->as_iso ().' and '.$this->max_date->as_iso ()." for $this->title");
+              $form->record_error ($this->id, 'Please enter a date between '.$this->min_date->as_iso ().' and '.$this->max_date->as_iso ()." for $this->caption");
             }
           }
           else
           {
             if ($this->max_date->less_than_equal ($date))
             {
-              $form->record_error ($this->id, 'Please enter a date less than '.$this->max_date->as_iso ()." for $this->title");
+              $form->record_error ($this->id, 'Please enter a date less than '.$this->max_date->as_iso ()." for $this->caption");
             }
           }
         }
@@ -842,7 +842,7 @@ class DATE_TIME_FIELD extends FIELD
           {
             if ($date->less_than_equal ($this->min_date))
             {
-              $form->record_error ($this->id, 'Please enter a date greater than '.$this->min_date->as_iso ()." for $this->title");
+              $form->record_error ($this->id, 'Please enter a date greater than '.$this->min_date->as_iso ()." for $this->caption");
             }
           }
         }
@@ -940,14 +940,14 @@ class ARRAY_FIELD extends FIELD
         {
           if (! (($this->min_values <= $size) && ($size <= $this->max_values)))
           {
-            $form->record_error ($this->id, "Please enter between $this->min_values and $this->max_values values for $this->title");
+            $form->record_error ($this->id, "Please enter between $this->min_values and $this->max_values values for $this->caption");
           }
         }
         else
         {
           if ($size < $this->min_values)
           {
-            $form->record_error ($this->id, "Please enter at least $this->min_values values for $this->title");
+            $form->record_error ($this->id, "Please enter at least $this->min_values values for $this->caption");
           }
         }
       }
@@ -955,7 +955,7 @@ class ARRAY_FIELD extends FIELD
       {
         if ($size > $this->max_values)
         {
-          $form->record_error ($this->id, "Please enter at most $this->max_values for $this->title");
+          $form->record_error ($this->id, "Please enter at most $this->max_values for $this->caption");
         }
       }
     }
@@ -1061,7 +1061,7 @@ class ENUMERATED_FIELD extends FIELD
       if (! isset ($this->_values [$this->_value]))
       {
         $flat = join (', ', array_keys ($this->_values));
-        $form->record_error ($this->id, "Please enter one of [$flat] for $this->title");
+        $form->record_error ($this->id, "Please enter one of [$flat] for $this->caption");
       }
     }
   }
@@ -1227,7 +1227,7 @@ class UPLOAD_FILE_FIELD extends FIELD
         {
           if ($this->max_bytes && ($file->size > $this->max_bytes))
           {
-            $form->record_error ($this->id, "$this->title can be at most ".file_size_as_text ($this->max_bytes).'.', $idx);
+            $form->record_error ($this->id, "$this->caption can be at most ".file_size_as_text ($this->max_bytes).'.', $idx);
           }
         }
 

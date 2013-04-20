@@ -78,13 +78,13 @@ abstract class MULTIPLE_OBJECT_ACTION_FORM extends ID_BASED_FORM
 
     $field = new ARRAY_FIELD ();
     $field->id = 'folder_ids';
-    $field->title = 'Folders';
+    $field->caption = 'Folders';
     $field->visible = false;
     $this->add_field ($field);
 
     $field = new ARRAY_FIELD ();
     $field->id = 'entry_ids';
-    $field->title = 'Entries';
+    $field->caption = 'Entries';
     $field->visible = false;
     $this->add_field ($field);
 

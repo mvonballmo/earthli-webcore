@@ -130,7 +130,7 @@ class DELETE_OBJECT_FORM extends PURGE_OBJECT_FORM
 
     $field = new BOOLEAN_FIELD ();
     $field->id = 'purge';
-    $field->title = 'Purge immediately';
+    $field->caption = 'Purge immediately';
     $this->add_field ($field);
   }
 

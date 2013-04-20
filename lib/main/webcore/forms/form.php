@@ -172,7 +172,7 @@ abstract class FORM extends WEBCORE_OBJECT
 
     $field = new BOOLEAN_FIELD ();
     $field->id = 'debug';
-    $field->title = 'Debug';
+    $field->caption = 'Debug';
     $field->visible = false;
     $this->add_field ($field);
 
@@ -182,14 +182,14 @@ abstract class FORM extends WEBCORE_OBJECT
 
       $field = new INTEGER_FIELD ();
       $field->id = 'verification_answer';
-      $field->title = 'Verification';
+      $field->caption = 'Verification';
       $field->required = true;
       $field->description = 'Please answer the question above using numerals (not text). This is an anti-spam measure; we apologize for the inconvenience.';
       $this->add_field ($field);
 
       $field = new TEXT_FIELD ();
       $field->id = 'verification_question';
-      $field->title = '';
+      $field->caption = '';
       $field->min_length = 5;
       $field->max_length = 5;
       $field->visible = false;
@@ -1484,7 +1484,7 @@ abstract class FORM extends WEBCORE_OBJECT
     {
       $field = new BOOLEAN_FIELD ();
       $field->id = $this->form_based_field_name ($field_name);
-      $field->title = ucfirst ($field_name);
+      $field->caption = ucfirst ($field_name);
       $field->set_value(false);
       $field->visible = false;
       $this->add_field ($field);
@@ -1598,7 +1598,7 @@ abstract class ID_BASED_FORM extends FORM
 
     $field = new INTEGER_FIELD ();
     $field->id = 'id';
-    $field->title = 'ID';
+    $field->caption = 'ID';
     $field->min_value = 1;
     $field->visible = false;
     $this->add_field ($field);

@@ -68,13 +68,13 @@ class USER_PERMISSIONS_FORM extends PERMISSIONS_FORM
 
     $field = new TITLE_FIELD ();
     $field->id = 'name';
-    $field->title = 'Title';
+    $field->caption = 'Title';
     $field->visible = false;
     $this->add_field ($field);
 
     $field = new BOOLEAN_FIELD ();
     $field->id = 'use_defaults';
-    $field->title = 'Use Defaults';
+    $field->caption = 'Use Defaults';
     $this->add_field ($field);
 
     $formatter = $this->app->make_permissions_formatter ();
@@ -317,10 +317,10 @@ function update_controls ()
   {
     $id = $map->id ();
     $field = $this->field_at ($id);
-    $field->title = $formatter->icon_for ($map) . ' ' . $formatter->title_for ($map);
+    $field->caption = $formatter->icon_for ($map) . ' ' . $formatter->title_for ($map);
     echo '<div style="margin-bottom: .4em">';
     echo $renderer->drop_down_as_HTML ($id, $props);
-    echo ' ' . $field->title . "</div>\n";
+    echo ' ' . $field->caption . "</div>\n";
   }
 
   /**

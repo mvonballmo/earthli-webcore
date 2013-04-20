@@ -64,7 +64,7 @@ class EXECUTE_PUBLISHER_TASK_FORM extends EXECUTE_TASK_FORM
 
     $field = new BOOLEAN_FIELD ();
     $field->id = 'preview';
-    $field->title = 'Preview Mails';
+    $field->caption = 'Preview Mails';
     $field->description = 'Show the generated mails in the task output. Use with care &mdash; output can be quite large.';
     $this->add_field ($field);
   }

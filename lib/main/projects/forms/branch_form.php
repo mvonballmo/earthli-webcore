@@ -57,12 +57,12 @@ class BRANCH_FORM extends OBJECT_IN_FOLDER_FORM
 
     $field = new INTEGER_FIELD ();
     $field->id = 'parent_release_id';
-    $field->title = 'Parent release';
+    $field->caption = 'Parent release';
     $this->add_field ($field);
 
     $field = new INTEGER_FIELD ();
     $field->id = 'state';
-    $field->title = 'Status';
+    $field->caption = 'Status';
     $this->add_field ($field);
   }
 

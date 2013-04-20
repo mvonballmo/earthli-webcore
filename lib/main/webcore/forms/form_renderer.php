@@ -1593,7 +1593,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
       }
       else
       {
-        $t = $field->title;
+        $t = $field->caption;
       }
 
       if (! empty ($t))
@@ -1878,7 +1878,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
         {
           $field = $this->_field_at ($item->title);
           $item = clone($item);
-          $item->title = $field->title;
+          $item->title = $field->caption;
           $item->description = $field->description;
           $item->enabled = $field->enabled;
           $dom_id = $field->id;

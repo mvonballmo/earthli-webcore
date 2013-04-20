@@ -62,14 +62,14 @@ class PURGE_COMPONENT_FORM extends PURGE_OBJECT_FORM
 
     $field = new ENUMERATED_FIELD ();
     $field->id = 'sub_history_item_publication_state';
-    $field->title = 'Notifications';
+    $field->caption = 'Notifications';
     $field->add_value (History_item_needs_send);
     $field->add_value (History_item_silent);
     $this->add_field ($field);
 
     $field = new INTEGER_FIELD ();
     $field->id = 'replacement_component_id';
-    $field->title = 'Replace with';
+    $field->caption = 'Replace with';
     $field->description = 'Replace all references with this component.';
     $this->add_field ($field);
   }

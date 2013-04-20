@@ -67,7 +67,7 @@ class PERMISSIONS_INHERITANCE_FORM extends ID_BASED_FORM
 
     $field = new BOOLEAN_FIELD ();
     $field->id = 'defined';
-    $field->title = 'Defined';
+    $field->caption = 'Defined';
     $field->required = true;
     $this->add_field ($field);
   }

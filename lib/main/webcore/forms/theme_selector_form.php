@@ -65,29 +65,29 @@ class THEME_SELECTOR_FORM extends FORM
 
     $field = new INTEGER_FIELD ();
     $field->id = 'page_number';
-    $field->title = 'Page Number';
+    $field->caption = 'Page Number';
     $field->min_value = 1;
     $field->visible = false;
     $this->add_field ($field);
 
     $field = new TEXT_FIELD ();
     $field->id = 'main_CSS_file_name';
-    $field->title = 'Name';
+    $field->caption = 'Name';
     $this->add_field ($field);
 
     $field = new TEXT_FIELD ();
     $field->id = 'font_name_CSS_file_name';
-    $field->title = 'Font Name';
+    $field->caption = 'Font Name';
     $this->add_field ($field);
 
     $field = new TEXT_FIELD ();
     $field->id = 'font_size_CSS_file_name';
-    $field->title = 'Font Size';
+    $field->caption = 'Font Size';
     $this->add_field ($field);
 
     $field = new BOOLEAN_FIELD ();
     $field->id = 'dont_apply_to_forms';
-    $field->title = 'Form Styling';
+    $field->caption = 'Form Styling';
     $field->description = 'Don\'t apply theme to form controls.';
     $this->add_field ($field);
   }

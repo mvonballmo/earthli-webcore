@@ -66,7 +66,7 @@ class UPLOAD_PICTURES_FORM extends ID_BASED_FORM
 
     $field = new UPLOAD_FILE_FIELD ();
     $field->id = 'zipfile';
-    $field->title = 'Zip file';
+    $field->caption = 'Zip file';
     $field->description = 'Please specify a zip file containing your pictures.';
     $field->required = true;
     $field->max_bytes = text_to_file_size ('30MB');
@@ -74,37 +74,37 @@ class UPLOAD_PICTURES_FORM extends ID_BASED_FORM
 
     $field = new MUNGER_TITLE_FIELD ();
     $field->id = 'title';
-    $field->title = 'Title';
+    $field->caption = 'Title';
     $field->description = 'Each picture entry will have this title. Use {#} to include the picture number and {file} to include the file name without the extension. For example, if the title is \'Picture {#} - {file}\', file1.jpg will have the title \'Picture 1 - file1\').';
     $field->required = true;
     $this->add_field ($field);
 
     $field = new BOOLEAN_FIELD ();
     $field->id = 'read_exif';
-    $field->title = 'Read EXIF info';
+    $field->caption = 'Read EXIF info';
     $this->add_field ($field);
 
     $field = new DATE_TIME_FIELD ();
     $field->id = 'day';
-    $field->title = 'Day';
+    $field->caption = 'Day';
     $field->required = true;
     $this->add_field ($field);
 
     $field = new BOOLEAN_FIELD ();
     $field->id = 'create_thumbnail';
-    $field->title = 'Create thumbnails';
+    $field->caption = 'Create thumbnails';
     $this->add_field ($field);
 
     $field = new INTEGER_FIELD ();
     $field->id = 'thumbnail_size';
-    $field->title = 'Thumbnail size';
+    $field->caption = 'Thumbnail size';
     $field->min_value = 32;
     $field->max_value = 300;
     $this->add_field ($field);
 
     $field = new INTEGER_FIELD ();
     $field->id = 'starting_index';
-    $field->title = 'First number';
+    $field->caption = 'First number';
     $field->required = true;
     $field->description = 'Set the next number to use for {#} in the title (if uploading in multiple batches).';
     $field->min_value = 1;

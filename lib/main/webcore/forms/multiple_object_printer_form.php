@@ -74,14 +74,14 @@ class MULTIPLE_OBJECT_PRINTER_FORM extends MULTIPLE_OBJECT_ACTION_FORM
 
     $field = new INTEGER_FIELD ();
     $field->id = 'show_comments';
-    $field->title = 'Comments';
+    $field->caption = 'Comments';
     $field->min_value = 0;
     $field->max_value = 2;
     $this->add_field ($field);
 
     $field = new BOOLEAN_FIELD ();
     $field->id = 'show_users';
-    $field->title = 'Users/dates';
+    $field->caption = 'Users/dates';
     $field->description = 'Display users and create/modify times.';
     $this->add_field ($field);
   }

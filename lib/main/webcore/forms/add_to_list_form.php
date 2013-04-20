@@ -79,19 +79,19 @@ class ADD_TO_LIST_FORM extends ID_BASED_FORM
 
     $field = new TEXT_FIELD ();
     $field->id = 'type';
-    $field->title = 'Type';
+    $field->caption = 'Type';
     $field->visible = false;
     $this->add_field ($field);
 
     $field = new ARRAY_FIELD ();
     $field->id = 'object_ids';
-    $field->title = 'Objects';
+    $field->caption = 'Objects';
     $field->visible = false;
     $this->add_field ($field);
 
     $field = new BOOLEAN_FIELD ();
     $field->id = 'selected_only';
-    $field->title = 'Selected only';
+    $field->caption = 'Selected only';
     $this->add_field ($field);
 
     $field = $this->field_at ('id');

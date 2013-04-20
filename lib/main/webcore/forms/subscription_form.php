@@ -80,19 +80,19 @@ abstract class SUBSCRIPTION_FORM extends FORM
 
     $field = new EMAIL_FIELD ();
     $field->id = 'email';
-    $field->title = 'Email';
+    $field->caption = 'Email';
     $field->visible = false;
     $this->add_field ($field);
 
     $field = new TEXT_FIELD ();
     $field->id = 'panel';
-    $field->title = 'Panel';
+    $field->caption = 'Panel';
     $field->visible = false;
     $this->add_field ($field);
 
     $field = new ARRAY_FIELD ();
     $field->id = 'ids';
-    $field->title = 'Ids';
+    $field->caption = 'Ids';
     $field->min_values = 0;
     $this->add_field ($field);
   }

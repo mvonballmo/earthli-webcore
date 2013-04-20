@@ -78,37 +78,37 @@ class EXECUTE_TASK_FORM extends FORM
 
     $field = new TEXT_FIELD ();
     $field->id = 'test_name';
-    $field->title = 'Test Name';
+    $field->caption = 'Test Name';
     $field->visible = false;
     $this->add_field ($field);
 
     $field = new BOOLEAN_FIELD ();
     $field->id = 'testing';
-    $field->title = 'Test Run Only';
+    $field->caption = 'Test Run Only';
     $field->description = 'Runs through without actually changing anything; databases are untouched and mails are not sent.';
     $this->add_field ($field);
 
     $field = new BOOLEAN_FIELD ();
     $field->id = 'console';
-    $field->title = 'Emulate Command-Line';
+    $field->caption = 'Emulate Command-Line';
     $field->description = 'Configure the environment as if it was <strong>not</strong> running on an HTTP server.';
     $this->add_field ($field);
 
     $field = new BOOLEAN_FIELD ();
     $field->id = 'verbose';
-    $field->title = 'Verbose';
+    $field->caption = 'Verbose';
     $field->description = 'Show database queries and other details. Use "debug" to show all messages.';
     $this->add_field ($field);
 
     $field = new BOOLEAN_FIELD ();
     $field->id = 'stop_on_error';
-    $field->title = 'Stop on Error';
+    $field->caption = 'Stop on Error';
     $field->description = 'Abort execution of the task if an error occurs; turn this off to ignore spurious errors.';
     $this->add_field ($field);
 
     $field = new BOOLEAN_FIELD ();
     $field->id = 'database';
-    $field->title = 'Show Database Output';
+    $field->caption = 'Show Database Output';
     $field->description = 'Shows queries executed against the database.';
     $this->add_field ($field);
 

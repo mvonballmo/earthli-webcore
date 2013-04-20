@@ -58,7 +58,7 @@ class COMPONENT_FORM extends OBJECT_IN_FOLDER_FORM
 
     $field = new URI_FIELD ();
     $field->id = 'icon_url';
-    $field->title = 'Icon URL';
+    $field->caption = 'Icon URL';
     $this->add_field ($field);
   }
 

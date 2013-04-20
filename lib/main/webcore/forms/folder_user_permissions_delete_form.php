@@ -61,7 +61,7 @@ class FOLDER_USER_PERMISSIONS_DELETE_FORM extends DELETE_FORM
 
     $field = new TITLE_FIELD ();
     $field->id = 'name';
-    $field->title = 'User';
+    $field->caption = 'User';
     $field->required = true;
     $field->visible = false;
     $this->add_field ($field);

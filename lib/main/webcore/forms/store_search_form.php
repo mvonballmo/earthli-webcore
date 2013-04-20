@@ -66,19 +66,19 @@ class STORE_SEARCH_FORM extends RENDERABLE_FORM
 
     $field = new TEXT_FIELD ();
     $field->id = 'type';
-    $field->title = 'Type';
+    $field->caption = 'Type';
     $field->visible = false;
     $this->add_field ($field);
 
     $field = new MUNGER_TITLE_FIELD ();
     $field->id = 'search_title';
-    $field->title = 'Title';
+    $field->caption = 'Title';
     $field->required = true;
     $this->add_field ($field);
 
     $field = new MUNGER_TEXT_FIELD ();
     $field->id = 'search_description';
-    $field->title = 'Description';
+    $field->caption = 'Description';
     $this->add_field ($field);
   }
 

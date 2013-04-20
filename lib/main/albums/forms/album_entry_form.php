@@ -57,7 +57,7 @@ class ALBUM_ENTRY_FORM extends ENTRY_FORM
 
     $field = new DATE_TIME_FIELD ();
     $field->id = 'day';
-    $field->title = 'Day';
+    $field->caption = 'Day';
     $field->required = true;
     $field->sticky = true;
     $this->add_field ($field);

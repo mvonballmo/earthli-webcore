@@ -71,7 +71,7 @@ class FOLDER_USER_PERMISSIONS_CREATE_FORM extends FOLDER_PERMISSIONS_FORM
 
     $field = new TITLE_FIELD ();
     $field->id = 'title';
-    $field->title = 'User Name';
+    $field->caption = 'User Name';
     $field->required = true;
     $this->add_field ($field);
   }

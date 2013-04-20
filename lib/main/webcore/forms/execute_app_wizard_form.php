@@ -72,63 +72,63 @@ class EXECUTE_APP_WIZARD_FORM extends FORM
 
     $field = new TEXT_FIELD ();
     $field->id = 'app_title';
-    $field->title = 'Title';
+    $field->caption = 'Title';
     $field->sticky = true;
     $field->required = true;
     $this->add_field ($field);
 
     $field = new TEXT_FIELD ();
     $field->id = 'app_id';
-    $field->title = 'Identifier';
+    $field->caption = 'Identifier';
     $field->sticky = true;
     $field->required = true;
     $this->add_field ($field);
 
     $field = new TEXT_FIELD ();
     $field->id = 'app_url';
-    $field->title = 'URL';
+    $field->caption = 'URL';
     $field->sticky = true;
     $field->required = true;
     $this->add_field ($field);
 
     $field = new TEXT_FIELD ();
     $field->id = 'app_folder';
-    $field->title = 'Folder';
+    $field->caption = 'Folder';
     $field->sticky = true;
     $field->required = true;
     $this->add_field ($field);
 
     $field = new TEXT_FIELD ();
     $field->id = 'app_prefix';
-    $field->title = 'Prefix';
+    $field->caption = 'Prefix';
     $field->sticky = true;
     $field->required = true;
     $this->add_field ($field);
 
     $field = new TEXT_FIELD ();
     $field->id = 'folder_name';
-    $field->title = 'Folder Name';
+    $field->caption = 'Folder Name';
     $field->sticky = true;
     $field->required = true;
     $this->add_field ($field);
 
     $field = new TEXT_FIELD ();
     $field->id = 'entry_name';
-    $field->title = 'Entry Name';
+    $field->caption = 'Entry Name';
     $field->sticky = true;
     $field->required = true;
     $this->add_field ($field);
 
     $field = new TEXT_FIELD ();
     $field->id = 'author_name';
-    $field->title = 'Author Name';
+    $field->caption = 'Author Name';
     $field->sticky = true;
     $field->required = true;
     $this->add_field ($field);
 
     $field = new EMAIL_FIELD ();
     $field->id = 'author_email';
-    $field->title = 'Author Email';
+    $field->caption = 'Author Email';
     $field->sticky = true;
     $field->required = true;
     $this->add_field ($field);

@@ -78,14 +78,14 @@ class LOG_IN_FORM extends FORM
 
     $field = new TEXT_FIELD ();
     $field->id = 'name';
-    $field->title = 'Name';
+    $field->caption = 'Name';
     $field->required = true;
     $field->max_length = 100;
     $this->add_field ($field);
 
     $field = new TEXT_FIELD ();
     $field->id = 'password';
-    $field->title = 'Password';
+    $field->caption = 'Password';
     $field->required = true;
     $field->min_length = 1;
     $field->max_length = 20;
@@ -93,13 +93,13 @@ class LOG_IN_FORM extends FORM
 
     $field = new BOOLEAN_FIELD ();
     $field->id = 'remember';
-    $field->title = 'Remember me';
+    $field->caption = 'Remember me';
     $field->description = 'Store your user information on this computer and avoid logging in every time.';
     $this->add_field ($field);
 
     $field = new TEXT_FIELD ();
     $field->id = 'last_page';
-    $field->title = 'Last page';
+    $field->caption = 'Last page';
     $field->visible = false;
     $this->add_field ($field);
 

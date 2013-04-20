@@ -58,7 +58,7 @@ abstract class AUDITABLE_FORM extends RENDERABLE_FORM
 
     $field = new ENUMERATED_FIELD ();
     $field->id = 'publication_state';
-    $field->title = 'Notifications';
+    $field->caption = 'Notifications';
     $field->add_value (History_item_default);
     $field->add_value (History_item_silent);
     $field->add_value (History_item_needs_send);
@@ -66,25 +66,25 @@ abstract class AUDITABLE_FORM extends RENDERABLE_FORM
 
     $field = new MUNGER_TITLE_FIELD ();
     $field->id = 'history_item_title';
-    $field->title = 'Title';
+    $field->caption = 'Title';
     $field->description = 'This will be used as the notification title; if none is given, a default is selected based on the changes made.';
     $this->add_field ($field);
 
     $field = new MUNGER_TEXT_FIELD ();
     $field->id = 'history_item_description';
-    $field->title = 'Description';
+    $field->caption = 'Description';
     $field->description = 'This is a quick description of why the change was made.';
     $this->add_field ($field);
 
     $field = new DATE_TIME_FIELD ();
     $field->id = 'time_modified';
-    $field->title = 'Last modified';
+    $field->caption = 'Last modified';
     $field->visible = false;
     $this->add_field ($field);
     
     $field = new BOOLEAN_FIELD ();
     $field->id = 'update_modifier_on_change';
-    $field->title = 'Update Modifier';
+    $field->caption = 'Update Modifier';
     $field->description = 'Set the modifier of this object to the currently logged-in user; turn off to maintain the existing user as modifier.';
     $field->visible = false;
     $this->add_field ($field);

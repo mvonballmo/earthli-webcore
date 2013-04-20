@@ -68,7 +68,7 @@ class FOLDER_PERMISSIONS_FORM extends PERMISSIONS_FORM
 
     $field = new INTEGER_FIELD ();
     $field->id = 'id';
-    $field->title = 'ID';
+    $field->caption = 'ID';
     $field->min_value = 1;
     $field->visible = false;
     $this->add_field ($field);

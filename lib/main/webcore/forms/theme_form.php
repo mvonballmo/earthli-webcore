@@ -57,13 +57,13 @@ class THEME_FORM extends RENDERABLE_FORM
 
     $field = new MUNGER_TITLE_FIELD ();
     $field->id = 'title';
-    $field->title = 'Title';
+    $field->caption = 'Title';
     $field->required = true;
     $this->add_field ($field);
 
     $field = new URI_FIELD ();
     $field->id = 'main_CSS_file_name';
-    $field->title = 'Skin CSS';
+    $field->caption = 'Skin CSS';
     $field->required = true;
     $field->min_length = 1;
     $field->max_length = 100;
@@ -71,7 +71,7 @@ class THEME_FORM extends RENDERABLE_FORM
 
     $field = new URI_FIELD ();
     $field->id = 'font_name_CSS_file_name';
-    $field->title = 'Font CSS';
+    $field->caption = 'Font CSS';
     $field->required = false;
     $field->min_length = 1;
     $field->max_length = 100;
@@ -79,7 +79,7 @@ class THEME_FORM extends RENDERABLE_FORM
 
     $field = new URI_FIELD ();
     $field->id = 'font_size_CSS_file_name';
-    $field->title = 'Size CSS';
+    $field->caption = 'Size CSS';
     $field->required = false;
     $field->min_length = 1;
     $field->max_length = 100;
@@ -87,7 +87,7 @@ class THEME_FORM extends RENDERABLE_FORM
 
     $field = new TEXT_FIELD ();
     $field->id = 'icon_set';
-    $field->title = 'Icon set';
+    $field->caption = 'Icon set';
     $field->required = false;
     $field->min_length = 1;
     $field->max_length = 100;
@@ -95,7 +95,7 @@ class THEME_FORM extends RENDERABLE_FORM
 
     $field = new TEXT_FIELD ();
     $field->id = 'icon_extension';
-    $field->title = 'Extension';
+    $field->caption = 'Extension';
     $field->description = 'Default extension for icons and logos.';
     $field->required = false;
     $field->min_length = 1;
@@ -104,7 +104,7 @@ class THEME_FORM extends RENDERABLE_FORM
 
     $field = new TEXT_FIELD ();
     $field->id = 'renderer_class_name';
-    $field->title = 'Renderer';
+    $field->caption = 'Renderer';
     $field->description = 'Name of the PHP class that will render pages.';
     $field->required = false;
     $field->min_length = 1;

@@ -64,7 +64,7 @@ class EXECUTE_MIGRATOR_TASK_FORM extends EXECUTE_TASK_FORM
 
     $field = new BOOLEAN_FIELD ();
     $field->id = 'ignore_from_version';
-    $field->title = 'Ignore Version in Database';
+    $field->caption = 'Ignore Version in Database';
     $field->description = 'Migrate regardless of whether the database has the correct version. Use only if you know what you\'re doing.';
     $this->add_field ($field);
 

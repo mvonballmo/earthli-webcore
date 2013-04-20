@@ -123,7 +123,7 @@ abstract class PERMISSIONS_FORM extends FORM
   {
     $id = $map->id ();
     $field = $this->field_at ($id);
-    $field->title = $formatter->icon_for ($map) . ' ' . $formatter->title_for ($map);
+    $field->caption = $formatter->icon_for ($map) . ' ' . $formatter->title_for ($map);
     echo $renderer->check_box_as_HTML ($id);
     echo "<div style=\"height: .2em\"></div>\n";
   }

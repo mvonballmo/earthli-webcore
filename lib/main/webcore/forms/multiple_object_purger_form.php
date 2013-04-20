@@ -58,7 +58,7 @@ class MULTIPLE_OBJECT_PURGER_FORM extends MULTIPLE_OBJECT_ACTION_FORM
     
     $field = new BOOLEAN_FIELD ();
     $field->id = 'remove_resources';
-    $field->title = 'Remove associated files';
+    $field->caption = 'Remove associated files';
     $field->description = 'Leave this unchecked if any other object references the same files (e.g. you are purging a duplicate).';
     $field->visible = false;
     $this->add_field ($field);

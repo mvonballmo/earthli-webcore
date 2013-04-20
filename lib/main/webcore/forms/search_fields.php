@@ -282,7 +282,7 @@ class SEARCH_DATE_FIELDS extends SEARCH_FIELDS
   {
     $field = new ENUMERATED_FIELD ();
     $field->id = $this->search_type_name ();
-    $field->title = 'on';
+    $field->caption = 'on';
     $field->add_value (Search_date_today);
     $field->add_value (Search_date_this_week);
     $field->add_value (Search_date_this_month);
@@ -291,12 +291,12 @@ class SEARCH_DATE_FIELDS extends SEARCH_FIELDS
 
     $field = new DATE_TIME_FIELD ();
     $field->id = $this->after_name ();
-    $field->title = 'after';
+    $field->caption = 'after';
     $form->add_field ($field);
 
     $field = new DATE_TIME_FIELD ();
     $field->id = $this->before_name ();
-    $field->title = 'before';
+    $field->caption = 'before';
     $form->add_field ($field);
   }
 
@@ -488,7 +488,7 @@ class SEARCH_USER_FIELDS extends SEARCH_FIELDS
   {
     $field = new ENUMERATED_FIELD ();
     $field->id = $this->search_type_name ();
-    $field->title = '';
+    $field->caption = '';
     $field->add_value (Search_user_context_none);
     $field->add_value (Search_user_context_login);
     $field->add_value (Search_user_constant);
@@ -496,13 +496,13 @@ class SEARCH_USER_FIELDS extends SEARCH_FIELDS
 
     $field = new TEXT_FIELD ();
     $field->id = $this->base_name;
-    $field->title = 'by';
+    $field->caption = 'by';
     $field->tag_validator_type = Tag_validator_none;
     $form->add_field ($field);
 
     $field = new TEXT_FIELD ();
     $field->id = $this->ids_name ();
-    $field->title = $this->ids_name ();
+    $field->caption = $this->ids_name ();
     $field->tag_validator_type = Tag_validator_none;
     $form->add_field ($field);
   }
@@ -694,7 +694,7 @@ class SEARCH_TEXT_FIELDS extends SEARCH_FIELDS
   {
     $field = new BOOLEAN_FIELD ($form->app);
     $field->id = $this->base_name;
-    $field->title = $this->title;
+    $field->caption = $this->title;
     $form->add_field ($field);
   }
 
@@ -811,13 +811,13 @@ class SORT_FIELDS extends SEARCH_FIELDS
   {
     $field = new TEXT_FIELD ($form->app);
     $field->id = $this->sort_name ();
-    $field->title = '';
+    $field->caption = '';
     $field->tag_validator_type = Tag_validator_none;
     $form->add_field ($field);
 
     $field = new ENUMERATED_FIELD ($form->app);
     $field->id = $this->direction_name ();
-    $field->title = '';
+    $field->caption = '';
     $field->add_value ('asc');
     $field->add_value ('desc');
     $form->add_field ($field);
@@ -961,7 +961,7 @@ class SEARCH_OBJECT_FIELDS extends WEBCORE_OBJECT
   {
     $field = new TEXT_FIELD ();
     $field->id = 'search_text';
-    $field->title = '';
+    $field->caption = '';
     $field->tag_validator_type = Tag_validator_none;
     $form->add_field ($field);
 
@@ -1541,13 +1541,13 @@ class SEARCH_OBJECT_IN_FOLDER_FIELDS extends SEARCH_CONTENT_OBJECT_FIELDS
 
     $field = new BOOLEAN_FIELD ($form->app);
     $field->id = 'not_state';
-    $field->title = 'Not';
+    $field->caption = 'Not';
     $field->visible = $visible;
     $form->add_field ($field);
 
     $field = new ENUMERATED_FIELD ();
     $field->id = 'state';
-    $field->title = 'State';
+    $field->caption = 'State';
     $field->add_value (0);
     $states = $this->_states ();
     foreach (array_keys ($states) as $state)
@@ -1559,13 +1559,13 @@ class SEARCH_OBJECT_IN_FOLDER_FIELDS extends SEARCH_CONTENT_OBJECT_FIELDS
 
     $field = new ARRAY_FIELD ();
     $field->id = 'folder_ids';
-    $field->title = 'Folders';
+    $field->caption = 'Folders';
     $field->visible = $visible;
     $form->add_field ($field);
 
     $field = new ENUMERATED_FIELD ();
     $field->id = 'folder_search_type';
-    $field->title = '';
+    $field->caption = '';
     $field->add_value (Search_user_context_none);
     $field->add_value (Search_user_constant);
     $field->add_value (Search_user_not_constant);
@@ -1917,7 +1917,7 @@ class SEARCH_USER_OBJECT_FIELDS extends SEARCH_CONTENT_OBJECT_FIELDS
 
     $field = new ENUMERATED_FIELD ();
     $field->id = 'user_kind';
-    $field->title = 'Kind';
+    $field->caption = 'Kind';
     $field->description = 'Restrict to certain types of users.';
     $field->add_value ('all');
     $field->add_value (Privilege_kind_anonymous);

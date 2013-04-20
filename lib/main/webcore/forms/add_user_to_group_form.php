@@ -67,7 +67,7 @@ class ADD_USER_TO_GROUP_FORM extends ID_BASED_FORM
 
     $field = new TITLE_FIELD ();
     $field->id = 'name';
-    $field->title = 'User Name';
+    $field->caption = 'User Name';
     $field->required = true;
     $this->add_field ($field);
   }

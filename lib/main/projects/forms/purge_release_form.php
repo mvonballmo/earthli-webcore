@@ -69,7 +69,7 @@ class PURGE_RELEASE_FORM extends PURGE_OBJECT_FORM
 
     $field = new ENUMERATED_FIELD ();
     $field->id = 'sub_history_item_publication_state';
-    $field->title = 'Notifications';
+    $field->caption = 'Notifications';
     $field->add_value (History_item_needs_send);
     $field->add_value (History_item_silent);
     $this->add_field ($field);

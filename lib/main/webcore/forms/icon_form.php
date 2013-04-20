@@ -57,19 +57,19 @@ class ICON_FORM extends RENDERABLE_FORM
 
     $field = new MUNGER_TITLE_FIELD ();
     $field->id = 'title';
-    $field->title = 'Title';
+    $field->caption = 'Title';
     $field->required = true;
     $this->add_field ($field);
 
     $field = new TITLE_FIELD ();
     $field->id = 'category';
-    $field->title = 'Category';
+    $field->caption = 'Category';
     $field->required = false;
     $this->add_field ($field);
 
     $field = new URI_FIELD ();
     $field->id = 'url';
-    $field->title = 'URL';
+    $field->caption = 'URL';
     $field->required = true;
     $this->add_field ($field);
   }

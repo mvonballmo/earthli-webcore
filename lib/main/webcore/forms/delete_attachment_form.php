@@ -59,7 +59,7 @@ class DELETE_ATTACHMENT_FORM extends DELETE_OBJECT_IN_FOLDER_FORM
 
     $field = new TEXT_FIELD ();
     $field->id = 'type';
-    $field->title = 'Type';
+    $field->caption = 'Type';
     $field->visible = false;
     $this->add_field ($field);
   }

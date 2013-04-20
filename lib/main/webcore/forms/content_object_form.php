@@ -57,13 +57,13 @@ class CONTENT_OBJECT_FORM extends AUDITABLE_FORM
 
     $field = new MUNGER_TITLE_FIELD ();
     $field->id = 'title';
-    $field->title = 'Title';
+    $field->caption = 'Title';
     $field->required = true;
     $this->add_field ($field);
 
     $field = new MUNGER_TEXT_FIELD ();
     $field->id = 'description';
-    $field->title = 'Description';
+    $field->caption = 'Description';
     $this->add_field ($field);
   }
 

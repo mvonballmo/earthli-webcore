@@ -72,23 +72,23 @@ class SEARCH_PROJECT_ENTRY_FIELDS extends SEARCH_ENTRY_FIELDS
 
     $field = new ARRAY_FIELD ();
     $field->id = 'component_id';
-    $field->title = 'Component';
+    $field->caption = 'Component';
     $form->add_field ($field);
 
     $field = new BOOLEAN_FIELD ();
     $field->id = 'not_kind';
-    $field->title = 'Kind';
+    $field->caption = 'Kind';
     $field->description = 'Invert selection';
     $form->add_field ($field);
 
     $field = new ARRAY_FIELD ();
     $field->id = 'kind';
-    $field->title = ' ';
+    $field->caption = ' ';
     $form->add_field ($field);
 
     $field = new TEXT_FIELD ();
     $field->id = 'extra_description';
-    $field->title = 'Extra Description';
+    $field->caption = 'Extra Description';
     $form->add_field ($field);
   }
 

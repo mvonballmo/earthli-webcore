@@ -62,26 +62,26 @@ class PICTURE_FORM extends ALBUM_ENTRY_FORM
 
     $field = new TEXT_FIELD ();
     $field->id = 'file_name';
-    $field->title = 'File Name';
+    $field->caption = 'File Name';
     $field->min_length = 1;
     $field->max_length = 250;
     $this->add_field ($field);
 
     $field = new UPLOAD_FILE_FIELD ();
     $field->id = 'upload_file';
-    $field->title = 'Picture';
+    $field->caption = 'Picture';
     $field->max_bytes = text_to_file_size ('2MB');
     $this->add_field ($field);
 
     $field = new BOOLEAN_FIELD ();
     $field->id = 'create_thumbnail';
-    $field->title = 'Create a thumbnail';
+    $field->caption = 'Create a thumbnail';
     $field->sticky = true;
     $this->add_field ($field);
 
     $field = new INTEGER_FIELD ();
     $field->id = 'thumbnail_size';
-    $field->title = 'Thumbnail size';
+    $field->caption = 'Thumbnail size';
     $field->min_value = 32;
     $field->max_value = 400;
     $field->sticky = true;
@@ -89,13 +89,13 @@ class PICTURE_FORM extends ALBUM_ENTRY_FORM
 
     $field = new BOOLEAN_FIELD ();
     $field->id = 'overwrite';
-    $field->title = 'Overwrite existing file';
+    $field->caption = 'Overwrite existing file';
     $field->sticky = true;
     $this->add_field ($field);
 
     $field = new BOOLEAN_FIELD ();
     $field->id = 'read_exif';
-    $field->title = 'Read EXIF info';
+    $field->caption = 'Read EXIF info';
     $field->sticky = true;
     $this->add_field ($field);
 

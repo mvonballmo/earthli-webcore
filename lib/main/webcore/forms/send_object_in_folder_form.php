@@ -58,21 +58,21 @@ class SEND_OBJECT_IN_FOLDER_FORM extends SEND_MULTIPLE_MAIL_FORM
 
     $field = new INTEGER_FIELD ();
     $field->id = 'id';
-    $field->title = 'ID';
+    $field->caption = 'ID';
     $field->min_value = 1;
     $field->visible = false;
     $this->add_field ($field);
 
     $field = new INTEGER_FIELD ();
     $field->id = 'excerpt_type';
-    $field->title = 'Text Options';
+    $field->caption = 'Text Options';
     $field->min_value = 1;
     $field->max_value = 2;
     $this->add_field ($field);
 
     $field = new INTEGER_FIELD ();
     $field->id = 'excerpt_size';
-    $field->title = 'Excerpt Size';
+    $field->caption = 'Excerpt Size';
     $field->min_value = 100;
     $field->max_value = 1000;
     $this->add_field ($field);

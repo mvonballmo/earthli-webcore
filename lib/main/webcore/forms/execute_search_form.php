@@ -114,7 +114,7 @@ class EXECUTE_SEARCH_FORM extends ID_BASED_FORM
 
       $field = new TEXT_FIELD ();
       $field->id = 'search_text';
-      $field->title = '';
+      $field->caption = '';
       $this->add_field ($field);
 
       $tsearch = $this->app->make_search ($type);
@@ -123,14 +123,14 @@ class EXECUTE_SEARCH_FORM extends ID_BASED_FORM
 
     $field = new BOOLEAN_FIELD ();
     $field->id = 'quick_search';
-    $field->title = 'Quick Search';
+    $field->caption = 'Quick Search';
     $field->visible = false;
     $field->set_value (true);
     $this->add_field ($field);
 
     $field = new ENUMERATED_FIELD ();
     $field->id = 'type';
-    $field->title = '';
+    $field->caption = '';
     $field->visible = ! isset ($this->_search);
     
     /* Fill with all the registered search types. */

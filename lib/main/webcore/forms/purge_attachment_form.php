@@ -58,7 +58,7 @@ class PURGE_ATTACHMENT_FORM extends PURGE_OBJECT_FORM
 
     $field = new TEXT_FIELD ();
     $field->id = 'type';
-    $field->title = 'Type';
+    $field->caption = 'Type';
     $field->visible = false;
     $this->add_field ($field);
     

@@ -62,37 +62,37 @@ class JOB_FORM extends PROJECT_ENTRY_FORM
 
     $field = new DATE_FIELD ();
     $field->id = 'time_needed';
-    $field->title = 'Needed by';
+    $field->caption = 'Needed by';
     $field->sticky = true;
     $this->add_field ($field);
 
     $field = new INTEGER_FIELD ();
     $field->id = 'assignee_id';
-    $field->title = 'Assigned to';
+    $field->caption = 'Assigned to';
     $field->min_value = 0;
     $field->sticky = true;
     $this->add_field ($field);
 
     $field = new INTEGER_FIELD ();
     $field->id = 'reporter_id';
-    $field->title = 'Reported By';
+    $field->caption = 'Reported By';
     $field->min_value = 1;
     $field->sticky = true;
     $this->add_field ($field);
 
     $field = new BOOLEAN_FIELD ();
     $field->id = 'subscribe_creator';
-    $field->title = 'Subscribe creator';
+    $field->caption = 'Subscribe creator';
     $this->add_field ($field);
 
     $field = new BOOLEAN_FIELD ();
     $field->id = 'subscribe_reporter';
-    $field->title = 'Subscribe reporter (if different)';
+    $field->caption = 'Subscribe reporter (if different)';
     $this->add_field ($field);
 
     $field = new BOOLEAN_FIELD ();
     $field->id = 'subscribe_assignee';
-    $field->title = 'Subscribe assignee (if different)';
+    $field->caption = 'Subscribe assignee (if different)';
     $this->add_field ($field);
   }
 
@@ -313,7 +313,7 @@ class JOB_FORM extends PROJECT_ENTRY_FORM
 
     $field = new ENUMERATED_FIELD ();
     $field->id = "branch_{$branch->id}_status";
-    $field->title = "Status";
+    $field->caption = "Status";
     $field->enabled = isset ($_REQUEST [$field->id]);
     $field->sticky = true;
     /** @var $display_options PROJECT_APPLICATION_DISPLAY_OPTIONS */
@@ -330,7 +330,7 @@ class JOB_FORM extends PROJECT_ENTRY_FORM
 
     $field = new ENUMERATED_FIELD ();
     $field->id = "branch_{$branch->id}_priority";
-    $field->title = "Priority";
+    $field->caption = "Priority";
     $field->enabled = isset ($_REQUEST [$field->id]);
     $field->sticky = true;
     $priorities = $display_options->job_priorities ();
@@ -566,7 +566,7 @@ class JOB_FORM extends PROJECT_ENTRY_FORM
     }
 
     $field = $this->field_at ('subscribe_creator');
-    $field->title = $field->title . ' (' . $creator->title_as_link () . ')';
+    $field->caption = $field->caption . ' (' . $creator->title_as_link () . ')';
 
     $props = $renderer->make_list_properties ();
     $props->show_descriptions = true;

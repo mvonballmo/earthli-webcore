@@ -63,12 +63,12 @@ class SHIP_RELEASE_FORM extends AUDITABLE_FORM
 
     $field = new INTEGER_FIELD ();
     $field->id = 'state';
-    $field->title = 'Action';
+    $field->caption = 'Action';
     $this->add_field ($field);
 
     $field = new ENUMERATED_FIELD ();
     $field->id = 'sub_history_item_publication_state';
-    $field->title = 'Notifications';
+    $field->caption = 'Notifications';
     $field->add_value (History_item_needs_send);
     $field->add_value (History_item_silent);
     $this->add_field ($field);

@@ -58,33 +58,33 @@ class USER_FORM extends CONTENT_OBJECT_FORM
 
     $field = new TEXT_FIELD ();
     $field->id = 'name';
-    $field->title = 'Original name';
+    $field->caption = 'Original name';
     $field->visible = false;
     $this->add_field ($field);
 
     $field = new TEXT_FIELD ();
     $field->id = 'password1';
-    $field->title = 'Password';
+    $field->caption = 'Password';
     $field->min_length = $this->app->user_options->minimum_password_length;
     $field->max_length = 20;
     $this->add_field ($field);
 
     $field = new TEXT_FIELD ();
     $field->id = 'password2';
-    $field->title = 'Confirm Password';
+    $field->caption = 'Confirm Password';
     $field->min_length = $this->app->user_options->minimum_password_length;
     $field->max_length = 20;
     $this->add_field ($field);
 
     $field = new EMAIL_FIELD ();
     $field->id = 'orig_email';
-    $field->title = 'Original email address';
+    $field->caption = 'Original email address';
     $field->visible = false;
     $this->add_field ($field);
 
     $field = new EMAIL_FIELD ();
     $field->id = 'email';
-    $field->title = 'Email address';
+    $field->caption = 'Email address';
     $field->description = 'Allows you to sign up for subscriptions.';
     $this->add_field ($field);
     
@@ -93,41 +93,41 @@ class USER_FORM extends CONTENT_OBJECT_FORM
     $field->add_value (User_email_scrambled);
     $field->add_value (User_email_visible);
     $field->id = 'email_visibility';
-    $field->title = '';
+    $field->caption = '';
     $this->add_field ($field);    
 
     $field = new TITLE_FIELD ();
     $field->id = 'real_first_name';
-    $field->title = 'First name';
+    $field->caption = 'First name';
     $this->add_field ($field);
 
     $field = new TITLE_FIELD ();
     $field->id = 'real_last_name';
-    $field->title = 'Last name';
+    $field->caption = 'Last name';
     $this->add_field ($field);
 
     $field = new URI_FIELD ();
     $field->id = 'home_page_url';
-    $field->title = 'Home page';
+    $field->caption = 'Home page';
     $this->add_field ($field);
 
     $field = new URI_FIELD ();
     $field->id = 'picture_url';
-    $field->title = 'Picture';
+    $field->caption = 'Picture';
     $this->add_field ($field);
 
     $field = new URI_FIELD ();
     $field->id = 'icon_url';
-    $field->title = 'Icon URL';
+    $field->caption = 'Icon URL';
     $this->add_field ($field);
 
     $field = new MUNGER_TEXT_FIELD ();
     $field->id = 'signature';
-    $field->title = 'Signature';
+    $field->caption = 'Signature';
     $this->add_field ($field);
 
     $field = $this->_fields ['title'];
-    $field->title = 'Name';
+    $field->caption = 'Name';
   }
 
   /**

@@ -62,7 +62,7 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
 
     $field = new MUNGER_TEXT_FIELD ();
     $field->id = 'extra_description';
-    $field->title = 'Description';
+    $field->caption = 'Description';
     $field->description = 'This information is not shown in job lists or change logs, '
                           . ' but is always available when a job is viewed alone. If it\'s'
                           . ' a bug, store the stack trace or log output here. If it\'s a'
@@ -71,7 +71,7 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
 
     $field = new ENUMERATED_FIELD ();
     $field->id = 'kind';
-    $field->title = 'Kind';
+    $field->caption = 'Kind';
     $field->required = true;
     $field->sticky = true;
     $kinds = $this->app->display_options->entry_kinds ();
@@ -86,7 +86,7 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
 
     $field = new INTEGER_FIELD ();
     $field->id = 'component_id';
-    $field->title = 'Component';
+    $field->caption = 'Component';
     $field->sticky = true;
     $this->add_field ($field);
 
@@ -101,12 +101,12 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
 
     $field = new INTEGER_FIELD ();
     $field->id = "main_branch_id";
-    $field->title = "Main Branch";
+    $field->caption = "Main Branch";
     $field->min_value = 1;
     $this->add_field ($field);
 
     $field = $this->field_at ('description');
-    $field->title = 'Summary';
+    $field->caption = 'Summary';
     $field->description = 'A short description that is shown in change logs and job lists.'
                           . ' Longer text that should not appear in summaries should go in'
                           . ' the \'Extra Information\' field below.';
@@ -257,12 +257,12 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
   {
     $field = new BOOLEAN_FIELD ();
     $field->id = "branch_{$branch->id}_enabled";
-    $field->title = $branch->title_as_link ();
+    $field->caption = $branch->title_as_link ();
     $this->add_field ($field);
 
     $field = new INTEGER_FIELD ();
     $field->id = "branch_{$branch->id}_release_id";
-    $field->title = "Release";
+    $field->caption = "Release";
     $field->enabled = isset ($_REQUEST [$field->id]);
     $field->min_value = 0;
     $this->add_field ($field);

@@ -69,7 +69,7 @@ class ADD_SUBSCRIBERS_TO_FOLDER_FORM extends ID_BASED_FORM
 
     $field = new TEXT_FIELD ();
     $field->id = 'emails';
-    $field->title = 'Subscribers';
+    $field->caption = 'Subscribers';
     $field->description = 'Place each email on its own line in the list.';
     $field->required = true;
     $this->add_field ($field);

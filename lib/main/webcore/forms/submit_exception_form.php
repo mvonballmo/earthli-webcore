@@ -57,13 +57,13 @@ class SUBMIT_EXCEPTION_FORM extends SEND_MAIL_FORM
 
     $field = new BOOLEAN_FIELD ();
     $field->id = 'include_browser_info';
-    $field->title = 'Browser';
+    $field->caption = 'Browser';
     $field->description = 'Include information about your browser and operating system.';
     $this->add_field ($field);
 
     $field = new BOOLEAN_FIELD ();
     $field->id = 'include_page_data';
-    $field->title = 'Data';
+    $field->caption = 'Data';
     $field->description = 'Include page, form and cookie data. Excludes passwords, but may include other personal information.';
     $this->add_field ($field);
 
