@@ -211,16 +211,6 @@ class PICTURE extends ALBUM_ENTRY
   }
 
   /**
-   * Returns the thumbnail.
-   * @return string
-   * @access private
-   */
-  public function preview ()
-  {
-    return '<img class="frame" src=' . $this->full_thumbnail_name () . " alt=\"$this->title\" style=\"float: left\">";
-  }
-
-  /**
    * Name of the home page name for this object.
    * @return string
    */

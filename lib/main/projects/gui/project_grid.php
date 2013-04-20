@@ -70,7 +70,7 @@ class PROJECT_GRID extends FOLDER_GRID
   protected function _draw_box ($obj)
   {
 ?>
-  <div class="grid-item">
+<div class="grid-item">
   <div class="minimal-commands">
     <?php $this->_draw_menu_for ($obj, Menu_size_minimal); ?>
   </div>
@@ -85,7 +85,7 @@ class PROJECT_GRID extends FOLDER_GRID
     <?php
     }
     ?>
-    <h3 class="grid-title">
+    <h3>
       <?php
       // drill down to the folder view only if there are subfolders for that project
 

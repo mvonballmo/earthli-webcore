@@ -70,21 +70,25 @@ class SEARCH_GRID extends STANDARD_GRID
   protected function _draw_box ($obj)
   {
 ?>
-  <div class="grid-title">
+<div class="grid-item">
+  <div class="minimal-commands">
+    <?php $this->_draw_menu_for ($obj, Menu_size_minimal); ?>
+  </div>
+  <div class="minimal-commands-content">
+    <h3>
     <?php echo $obj->title_as_link (); ?>
+    </h3>
+    <div class="detail">
+    Searches <span class="field"><?php echo $obj->type; ?>s</span>.
+    </div>
+    <div class="text-flow">
+    <?php
+      $renderer = $obj->handler_for (Handler_html_renderer);
+      $renderer->display ($obj);
+    ?>
+    </div>
   </div>
-  <div>
-  <?php
-    $this->_draw_menu_for ($obj, Menu_size_compact);
-  ?>
-  Searches <span class="field"><?php echo $obj->type; ?>s</span>.
-  </div>
-  <div class="text-flow">
-  <?php
-    $renderer = $obj->handler_for (Handler_html_renderer);
-    $renderer->display ($obj);
-  ?>
-  </div>
+</div>
 <?php
   }
 }

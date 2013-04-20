@@ -70,22 +70,45 @@ class RECIPE_BOOK_GRID extends FOLDER_GRID
   protected function _draw_box ($obj)
   {
 ?>
-  <div class="button-control">
-    <div style="float: left; padding-right: .5em">
-      <?php echo $obj->icon_as_html (); ?>
-    </div>
-    <div>
-      <?php echo $obj->title_as_link (); ?>
-    </div>
-    <div class="detail" style="text-align: right">
+<div class="grid-item">
+  <div class="minimal-commands">
+    <?php $this->_draw_menu_for ($obj, Menu_size_minimal); ?>
+  </div>
+  <div class="minimal-commands-content">
     <?php
+    if ($obj->icon_url)
+    {
+      ?>
+      <div style="float: left; padding-right: 5px">
+        <?php echo $obj->icon_as_html (); ?>
+      </div>
+    <?php
+    }
+    ?>
+    <h3>
+      <?php
+      // drill down to the folder view only if there are subfolders for that project
+
+      $t = $obj->title_formatter ();
+      if (sizeof ($obj->sub_folders ()))
+      {
+        $t->add_argument ('panel', 'projects');
+      }
+      echo $obj->title_as_link ($t);
+      ?>
+    </h3>
+    <p class="detail">
+      <?php
       $entry_query = $obj->entry_query ();
       $size = $entry_query->size ();
       echo "(<span class=\"field\">$size</span> Recipes)";
-    ?>
+      ?>
+    </p>
+    <div class="text-flow">
+      <?php echo $obj->summary_as_html (); ?>
     </div>
-    <?php echo $obj->summary_as_html (); ?>
   </div>
+</div>
 <?php
   }
 }

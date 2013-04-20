@@ -57,9 +57,10 @@ class RECIPE_PANEL_MANAGER_HELPER extends PANEL_MANAGER_HELPER
   {
     if ($manager->is_panel ('folder'))
     {
+      /** @var $panel GRID_PANEL */
       $panel = $manager->panel_at ('folder');
       $panel->rows = 10;
-      $panel->columns = 2;
+      $panel->columns = 3;
       $manager->move_panel_to ('folder', 0, Panel_selection);
 
       $panel = $manager->panel_at ('recipe');

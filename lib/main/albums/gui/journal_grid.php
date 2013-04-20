@@ -91,7 +91,7 @@ class JOURNAL_GRID extends ALBUM_ENTRY_GRID
         <?php echo $obj->weather_icon (); ?>
       </div>
       <div style="margin-left: 35px">
-        <h3 class="grid-title">
+        <h3>
           <?php
           if ($this->show_folder)
           {

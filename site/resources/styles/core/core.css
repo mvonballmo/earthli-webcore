@@ -419,10 +419,6 @@ pre code
   padding-right: 15px;
 }
 
-.box-body
-{
-}
-
 .box-title
 {
   font-weight: bold;
@@ -828,7 +824,7 @@ ul.menu-buttons > li + li
   width: 20%;
   padding-left: 15px;
   padding-right: 15px;
-  padding-bottom: 15px;
+  margin-bottom: 15px;
 }
 
 .sub-folders-box
@@ -1107,8 +1103,10 @@ span.error
 
 .quote-block 
 {
-  padding: 0 15px;
-  border-left: 2px solid silver;
+  padding-left: 15px;
+  /*padding-left: 7px;*/
+  /*margin-left: -10px;*/
+  border-left: 6px solid #CCCCCC;
 }
 
 .quote-block p:first-child
@@ -1313,11 +1311,6 @@ hr
 .frame 
 {
   border: 1px solid #000000;
-}
-
-.grid-title 
-{
-  padding-bottom: .5em;
 }
 
 .minimal-commands

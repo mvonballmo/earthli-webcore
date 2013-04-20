@@ -246,14 +246,6 @@ abstract class NAMED_OBJECT extends STORABLE
   }
 
   /**
-   * Any extra information needed to summarize this object.
-   * Generally, this will be displayed along with a truncated description.
-   * @return string
-   */
-  public function preview () {}
-
-
-  /**
    * A string representing the entire title of the object.
    * Does not truncate or format the title in any way.
    * @return string

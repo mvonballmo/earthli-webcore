@@ -57,10 +57,6 @@ th.basic
   border-bottom: 1px solid #4A8CCA;
 }
 
-.box
-{
-}
-
 hr, .horizontal-separator, .vertical-separator
 {
 	border-color: #CCCCCC;
@@ -132,7 +128,6 @@ hr, .horizontal-separator, .vertical-separator
 
 .quote-block
 {
-	padding: 0 15px;
 	border-left: 6px solid #CCCCCC;
 }
 

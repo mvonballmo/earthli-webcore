@@ -146,47 +146,6 @@ class JOB extends PROJECT_ENTRY
   }
 
   /**
-   * Display the job summary information.
-   * When showing a short preview, show the age, job closer, priority and
-   * status.
-   */
-  public function preview ()
-  {
-?>
-    <p class="detail">
-<?php
-    $branch_info = $this->_main_branch_info;
-    $interval = $branch_info->age ();
-     $closer = $branch_info->closer ();
-     if ($closer)
-     {
-?>
-    <span class="field"><?php echo $branch_info->status_as_text (); ?></span>
-    (<?php echo $branch_info->time_closed->format (); ?>
-    by <?php echo $closer->title_as_link (); ?>
-    after <?php echo $interval->format (); ?>)
-<?php
-    }
-    else
-    {
-?>
-    <span class="field"><?php echo $branch_info->status_as_text (); ?></span> (<?php echo $interval->format (); ?>)<br>
-    <?php echo $branch_info->priority_as_text (); ?>
-<?php
-      $assignee = $this->assignee ();
-      if ($assignee)
-      {
-?>
-    <br>Assigned to <span class="field"><?php echo $assignee->title_as_link (); ?></span>
-<?php
-      }
-    }
-?>
-    </p>
-<?php
-  }
-
-  /**
    * Who is responsible for this job?
    * This user is responsible for managing/fixing/closing this job.
    * @return PROJECT_USER
@@ -236,17 +195,23 @@ class JOB extends PROJECT_ENTRY
   {
     $Result = parent::title_formatter ();
 
+    /** @var $branch_info JOB_BRANCH_INFO */
     $branch_info = $this->main_branch_info ();
 
     if ($branch_info->is_closed ())
     {
       $closer = $branch_info->closer ();
       $age = $branch_info->age ();
-      $Result->title = $branch_info->status_as_text () . ' by ' . $closer->title_as_plain_text () . ' after ' . $age->format ();
+      $status_properties = $branch_info->status_properties();
+
+      $Result->title = $status_properties->title . ' by ' . $closer->title_as_plain_text () . ' after ' . $age->format ();
     }
     else
     {
-      $Result->title = $branch_info->status_as_text () . ' - ' . $branch_info->priority_as_text ();
+      $status_properties = $branch_info->status_properties();
+      $priority_properties = $branch_info->priority_properties();
+
+      $Result->title = $status_properties->title . ' - ' . $priority_properties->title;
     }
 
     return $Result;
@@ -535,6 +500,7 @@ class JOB_BRANCH_INFO extends PROJECT_ENTRY_BRANCH_INFO
 
       if (! $Result)
       {
+        /** @var $entry JOB */
         $entry = $this->entry ();
         if ($entry->time_needed->is_valid ())
         {
@@ -586,7 +552,10 @@ class JOB_BRANCH_INFO extends PROJECT_ENTRY_BRANCH_INFO
     {
       $this->time_status_changed->set_now ();
 
-      $statuses = $this->app->display_options->job_statuses ();
+      /** @var $display_options PROJECT_APPLICATION_DISPLAY_OPTIONS */
+      $display_options = $this->app->display_options;
+
+      $statuses = $display_options->job_statuses ();
       $new_status = $statuses [$status];
 
       // If the job is now closed in this branch, set the closer and the time.
@@ -626,7 +595,9 @@ class JOB_BRANCH_INFO extends PROJECT_ENTRY_BRANCH_INFO
    */
   public function priority_properties ()
   {
-    $props = $this->app->display_options->job_priorities ();
+    /** @var $display_options PROJECT_APPLICATION_DISPLAY_OPTIONS */
+    $display_options = $this->app->display_options;
+    $props = $display_options->job_priorities ();
     if (isset ($props [$this->priority]))
     {
       return $props [$this->priority];
@@ -640,35 +611,15 @@ class JOB_BRANCH_INFO extends PROJECT_ENTRY_BRANCH_INFO
   }
 
   /**
-   * {@link $priority} as an HTML image.
-   * @param string $size
-   * @return string
-   */
-  public function priority_icon ($size = '16px')
-  {
-    $props = $this->priority_properties ();
-    return $props->icon_as_html ($size);
-  }
-
-  /**
-   * {@link $priority} as a string.
-   * @return string
-   */
-  public function priority_as_text ()
-  {
-    $props = $this->priority_properties ();
-
-    return $props->title;
-  }
-
-  /**
    * All properties of this entry's status.
    * The available statuses are defined by {@link PROJECT_APPLICATION::
    * job_statuses()}.
    */
   public function status_properties ()
   {
-    $props = $this->app->display_options->job_statuses ();
+    /** @var $display_options PROJECT_APPLICATION_DISPLAY_OPTIONS */
+    $display_options = $this->app->display_options;
+    $props = $display_options->job_statuses ();
     if (isset ($props [$this->status]))
     {
       return $props [$this->status];
@@ -679,28 +630,6 @@ class JOB_BRANCH_INFO extends PROJECT_ENTRY_BRANCH_INFO
       $prop->title = "[Unknown status ($this->status)]";
       return $prop;
     }
-  }
-
-  /**
-   * {@link $status} as an HTML image.
-   * @param string $size
-   * @return string
-   */
-  public function status_icon ($size = '16px')
-  {
-    $props = $this->status_properties ();
-    return $props->icon_as_html ($size);
-  }
-
-  /**
-   * {@link $status} as a string.
-   * @return string
-   */
-  public function status_as_text ()
-  {
-    $props = $this->status_properties ();
-
-    return $props->title;
   }
 
   /**
@@ -765,20 +694,7 @@ class JOB_BRANCH_INFO extends PROJECT_ENTRY_BRANCH_INFO
         include_once ('projects/obj/release_status.php');
         $status = new RELEASE_DATE_STATUS ($rel, $occurred, $entry->time_needed);
 
-        if ($text_only)
-        {
-          if ($status->text)
-          {
-            $Result = $status->text . ' ';
-          }
-        }
-        else
-        {
-          if ($status->icon)
-          {
-            $Result = $status->icon . ' ';
-          }
-        }
+        $Result = '';
         $diff_as_text = $status->diff_as_text ($text_only);
         $Result .= 'Needed by ' . $status->date_as_text ($text_only);
         if ($diff_as_text)
@@ -792,6 +708,18 @@ class JOB_BRANCH_INFO extends PROJECT_ENTRY_BRANCH_INFO
           {
             $Result .= ')';
           }
+        }
+
+        if ($text_only)
+        {
+          if ($status->text)
+          {
+            $Result = $status->text . ' ' . $Result;
+          }
+        }
+        else
+        {
+          $Result = $this->app->get_text_with_icon($status->icon_url, $Result, '16px');
         }
       }
     }

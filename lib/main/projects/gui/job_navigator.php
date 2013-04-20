@@ -89,7 +89,9 @@ class JOB_NAVIGATOR extends PROJECT_ENTRY_NAVIGATOR
     $Result = parent::_formatter_for_object ($obj);
     /** @var $branch_info JOB_BRANCH_INFO */
     $branch_info = $obj->main_branch_info ();
-    $Result->title = $branch_info->status_as_text () . ' - ' . $branch_info->priority_as_text ();
+    $status_properties = $branch_info->status_properties();
+    $priority_properties = $branch_info->priority_properties();
+    $Result->title = $status_properties->title . ' - ' . $priority_properties->title;
      
     return $Result;
   }

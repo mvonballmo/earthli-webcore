@@ -48,7 +48,7 @@ require_once ('webcore/obj/webcore_object.php');
  * @since 1.8.0
  * @access private
  */
-class RELEASE_STATUS
+class RELEASE_STATUS extends WEBCORE_OBJECT
 {
   /**
    * Information about the testing status of a release.
@@ -68,6 +68,8 @@ class RELEASE_STATUS
    */
   public function __construct ($release, $text_only)
   {
+    parent::__construct ($release->app);
+
     $this->test = new RELEASE_DATE_STATUS ($release, $release->time_tested, $release->time_testing_scheduled, ! $release->planned ());
     $this->ship = new RELEASE_DATE_STATUS ($release, $release->time_shipped, $release->time_scheduled);
   }
@@ -149,23 +151,20 @@ class RELEASE_STATUS
     if (! isset ($Result))
     {
       $Result = '';
+      $Result .= "Scheduled for $label " . $stat->date_as_text ($text_only);
+      $Result .= ' (' . $stat->diff_as_text ($text_only) . ' ' . $stat->diff_label . ')';
+
       if ($text_only)
       {
         if ($stat->text)
         {
-          $Result = '[' . $stat->text . '] ';
+          $Result = '[' . $stat->text . '] ' . $Result;
         }
       }
       else
       {
-        if ($stat->icon)
-        {
-          $Result = $stat->icon . ' ';
-        }
+        $Result = $this->app->get_text_with_icon($stat->icon_url, $Result, '16px');
       }
-
-      $Result .= "Scheduled for $label " . $stat->date_as_text ($text_only);
-      $Result .= ' (' . $stat->diff_as_text ($text_only) . ' ' . $stat->diff_label . ')';
     }
 
     return $Result;
@@ -234,12 +233,12 @@ class RELEASE_DATE_STATUS extends WEBCORE_OBJECT
   public $scheduled;
 
   /**
-   * Graphic indicator of the status condition.
+   * Url to the graphic indicator of the status condition.
    * Indicates whether an event has occurred, was skipped or is overdue.
    * @see $text
    * @var string
    */
-  public $icon;
+  public $icon_url;
 
   /**
    * Text indicator of the status condition.
@@ -262,10 +261,11 @@ class RELEASE_DATE_STATUS extends WEBCORE_OBJECT
   public $time_occurred;
 
   /**
-   * @param RELEASE $release
+   * @param RELEASE $rel
    * @param DATE_TIME $occurred Time the event occurred. Need not be valid.
    * @param DATE_TIME $scheduled Time the event is scheduled. Need not be valid.
    * @param boolean $skip_condition Marks an event as skipped if this is true, and the event was scheduled, but has not occurred.
+   * @internal param \RELEASE $release
    */
   public function __construct ($rel, $occurred, $scheduled, $skip_condition = false)
   {
@@ -287,11 +287,8 @@ class RELEASE_DATE_STATUS extends WEBCORE_OBJECT
   {
     if (! isset ($this->_html_text))
     {
-       $this->_html_text = $this->_as_text (false);
-      if ($this->icon)
-      {
-        $this->_html_text = $this->icon . ' ' . $this->_html_text;
-      }
+      $this->_html_text = $this->_as_text (false);
+      $this->_html_text = $this->app->get_text_with_icon($this->icon_url, $this->_html_text, '16px');
       $this->_html_text = '<span style="white-space: nowrap">' . $this->_html_text . '</span>';
     }
     return $this->_html_text;
@@ -353,7 +350,7 @@ class RELEASE_DATE_STATUS extends WEBCORE_OBJECT
     $this->scheduled = $this->time_scheduled->is_valid ();
     $this->occurred = $this->time_occurred->is_valid ();
     $this->overdue = false;
-    $this->icon = '';
+    $this->icon_url = '';
     $this->text = '';
     $this->diff_label = '';
     $this->_html_text = null;
@@ -363,7 +360,7 @@ class RELEASE_DATE_STATUS extends WEBCORE_OBJECT
     {
       $this->date = $this->time_occurred;
 
-      $this->icon = $this->context->resolve_icon_as_html ('{icons}indicators/released', 'Complete', '16px');
+      $this->icon_url = '{icons}indicators/released';
 
       if ($this->time_scheduled->is_valid ())
       {
@@ -386,12 +383,12 @@ class RELEASE_DATE_STATUS extends WEBCORE_OBJECT
         $this->date = $this->time_scheduled;
         if ($this->_skip_condition)
         {
-          $this->icon = $this->context->resolve_icon_as_html ('{icons}indicators/warning', 'Skipped', '16px');
+          $this->icon_url = '{icons}indicators/warning';
           $this->text = 'Skipped';
         }
         else
         {
-          $this->icon = $this->context->resolve_icon_as_html ('{icons}buttons/calendar', 'Scheduled', '16px');
+          $this->icon_url = '{icons}buttons/calendar';
           $now = new DATE_TIME ();
 
           if ($now->less_than_equal ($this->time_scheduled))
@@ -404,14 +401,14 @@ class RELEASE_DATE_STATUS extends WEBCORE_OBJECT
             $warn_time = $this->_release->warning_time ($this->time_scheduled);
             if ($warn_time->less_than ($now))
             {
-              $this->icon = $this->context->resolve_icon_as_html ('{icons}indicators/warning', 'Due soon', '16px');
+              $this->icon_url = '{icons}indicators/warning';
               $this->text = 'Due soon';
             }
           }
           else
           {
             $this->overdue = true;
-            $this->icon = $this->context->resolve_icon_as_html ('{icons}indicators/error', 'Overdue', '16px');
+            $this->icon_url = '{icons}indicators/error';
             $this->text = 'Overdue';
             $this->difference = $now->diff ($this->time_scheduled);
             $this->diff_label = 'late';

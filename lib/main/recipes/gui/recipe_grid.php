@@ -87,7 +87,7 @@ class RECIPE_GRID extends CONTENT_OBJECT_GRID
       <?php $this->_draw_menu_for ($obj, Menu_size_minimal); ?>
     </div>
     <div class="minimal-commands-content">
-      <div class="grid-title">
+      <h3>
       <?php
         if ($this->show_folder)
         {
@@ -95,10 +95,10 @@ class RECIPE_GRID extends CONTENT_OBJECT_GRID
         }
         echo $this->obj_link ($obj);
       ?>
-      </div>
-      <div>
-        <span class="detail"><?php if ($this->show_user) { echo $creator->title_as_link (); ?> - <?php } ?>
-        <?php echo $obj->time_created->format (); ?></span>
+      </h3>
+      <div class="detail">
+        <?php if ($this->show_user) { echo $creator->title_as_link (); ?> - <?php } ?>
+        <?php echo $obj->time_created->format (); ?>
       </div>
       <div class="text-flow">
         <?php

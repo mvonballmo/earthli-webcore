@@ -105,7 +105,10 @@ class JOB_GRID extends PROJECT_ENTRY_GRID
     }
   ?>
   <div>
-    <span class="field"><?php echo $branch_info->status_icon () . ' ' . $branch_info->status_as_text (); ?></span>
+    <span class="field"><?php
+      $status_props = $branch_info->status_properties ();
+      echo $this->app->get_text_with_icon($status_props->icon, $status_props->title, '16px');
+    ?></span>
   <?php
     if ($is_closed)
     {
@@ -135,7 +138,10 @@ class JOB_GRID extends PROJECT_ENTRY_GRID
   </div>
   <?php if (! $is_closed ) { ?>
   <div>
-    <?php echo $branch_info->priority_icon () . ' ' . $branch_info->priority_as_text (); ?>
+    <?php
+    $priority_props = $branch_info->priority_properties ();
+    echo $this->app->get_text_with_icon($priority_props->icon, $priority_props->title, '16px');
+    ?>
   </div>
   <?php } ?>
   <div>

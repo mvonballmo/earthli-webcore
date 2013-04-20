@@ -199,7 +199,7 @@ class JOB_RENDERER extends PROJECT_ENTRY_RENDERER
 
     $status = $branch_info->status_properties ();
 ?>
-  <span class="field"><?php echo $this->app->get_text_with_icon($status->icon, $branch_info->status_as_text (), '16px'); ?></span>
+  <span class="field"><?php echo $this->app->get_text_with_icon($status->icon, $status->title, '16px'); ?></span>
   <span>
   <?php
     $closer = $branch_info->closer ();
@@ -227,9 +227,9 @@ class JOB_RENDERER extends PROJECT_ENTRY_RENDERER
   (<?php echo $time_in_status->format (); ?>) <span class="notes">(open for <?php echo $time_open->format (); ?>)</span><br>
   <?php
       }
-  ?>
-  <?php echo $branch_info->priority_icon () . ' ' . $branch_info->priority_as_text (); ?>
-  <?php
+
+      $priority_props = $branch_info->priority_properties ();
+      echo $this->app->get_text_with_icon($priority_props->icon, $priority_props->title, '16px');
     }
   ?>
   </span>
@@ -314,7 +314,9 @@ class JOB_RENDERER extends PROJECT_ENTRY_RENDERER
       }
     }
 
-    echo '    ' . $branch_info->status_as_text ();
+    $status_properties = $branch_info->status_properties();
+
+    echo '    ' . $status_properties->title;
 
     $closer = $branch_info->closer ();
     $time_open = $branch_info->age ();
@@ -333,7 +335,9 @@ class JOB_RENDERER extends PROJECT_ENTRY_RENDERER
       {
         echo $this->line (' (' . $time_in_status->format () . ') (open for ' . $time_open->format () . ')');
       }
-      echo '    ' . $branch_info->priority_as_text ();
+
+      $priority_properties = $branch_info->priority_properties();
+      echo '    ' . $priority_properties->title;
     }
   }
 

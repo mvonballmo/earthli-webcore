@@ -108,11 +108,9 @@ class PROJECT_ENTRY_GRID extends CONTENT_OBJECT_GRID
       ?>
       </div>
       <div style="margin-left: 24px">
-        <div class="grid-title">
-        <?php
-          echo $this->obj_link ($obj);
-        ?>
-        </div>
+        <h3>
+        <?php echo $this->obj_link ($obj); ?>
+        </h3>
         <?php
           $this->_draw_context_in_project_for ($obj, $branch_info);
           if ($this->show_release)
