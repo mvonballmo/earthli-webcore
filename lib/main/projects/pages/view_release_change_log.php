@@ -86,7 +86,8 @@ http://www.earthli.com/software/webcore/projects
     else
     {
 ?>
-<div class="top-box button-content">
+<div class="top-box">
+  <div class="button-content">
   <?php
   $class_name = $App->final_class_name ('CHANGE_LOG_COMMANDS', 'projects/cmd/change_log_commands.php');
   /** @var $commands COMMANDS */
@@ -95,6 +96,7 @@ http://www.earthli.com/software/webcore/projects
   $renderer->set_size(Menu_size_full);
   $renderer->display ($commands);
   ?>
+  </div>
 </div>
 <div class="box">
   <div class="box-body">

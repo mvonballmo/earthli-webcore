@@ -1476,3 +1476,25 @@ hr
 {
   border-top-left-radius: 0;
 }
+
+.entries
+{
+  width: 100%;
+}
+
+.entries .short-date,
+.entries .folder
+{
+  text-align: right;
+  white-space: nowrap;
+}
+
+.entries .short-date
+{
+  width: 100px;
+}
+
+.entries .folder
+{
+  width: 170px;
+}

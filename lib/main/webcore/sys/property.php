@@ -97,5 +97,3 @@ class PROPERTY_VALUE extends WEBCORE_OBJECT
     return '';
   }
 }
-
-?>

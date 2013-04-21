@@ -562,11 +562,13 @@ class MENU_RENDERER extends WEBCORE_OBJECT
       }
       else
       {
-        echo '<span class="icon sixteen" style="background-image: url(' . $this->context->get_icon_url ($this->trigger_icon, '16px') . ')">';
+        echo $this->context->get_text_with_icon($this->trigger_icon, $trigger, '16px');
       }
-
     }
-    echo $trigger;
+    else
+    {
+      echo $trigger;
+    }
     echo '<span class="' . $menu_class . '">';
     $this->_draw_vertical_menu ($commands, false);
     if ($this->show_trigger_icon && !empty ($trigger))

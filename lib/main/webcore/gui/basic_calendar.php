@@ -245,7 +245,7 @@ class BASIC_CALENDAR extends CALENDAR
   protected function _draw_paginator ()
   {
 ?>
-    <p style="text-align: center"><?php $this->paginator->display (); ?></p>
+    <p><?php $this->paginator->display (); ?></p>
 <?php
   }
 }

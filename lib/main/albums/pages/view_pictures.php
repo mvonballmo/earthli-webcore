@@ -53,7 +53,7 @@ http://www.earthli.com/software/webcore/albums
       $Page->title->subject = 'Pictures from ' . $folder->format_date ($first_day, $df) . ' - ' . $folder->format_date ($last_day, $df);
 
     if ($calendar)
-      $Page->location->append ("Calendar", "view_calendar.php?id=$folder->id");
+      $Page->location->append ("Calendar", "view_calendar.php?id=$folder->id", '{icons}buttons/calendar');
 
     if ($journal)
     {
@@ -70,9 +70,6 @@ http://www.earthli.com/software/webcore/albums
     $Page->start_display ();
 ?>
 <div class="box">
-  <div class="box-title">
-    <?php echo $Page->title->subject; ?>
-  </div>
   <div class="box-body">
   <?php
     $pic_query = $folder->entry_query ();

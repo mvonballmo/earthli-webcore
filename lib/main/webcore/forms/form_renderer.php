@@ -1579,6 +1579,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * @param FIELD $field
    * @param string $control_text Prepared string of text; should be HTML code for a form control.
    * @param string $dom_id If set, makes an HTML label around the title with that id.
+   * @param string $title
    * @access private
    */
   protected function _draw_field_row ($field, $control_text, $dom_id = '', $title = null)
@@ -1609,7 +1610,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
         }
         if ($field->required && $this->show_required_mark)
         {
-          $label_content .= $this->required_mark ();
+          $label_content = $this->required_mark () . ' ' . $label_content;
         }
       }
 

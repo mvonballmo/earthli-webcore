@@ -219,7 +219,7 @@ class ALBUM_CALENDAR extends BASIC_CALENDAR
           <td colspan="2" style="height: 7px"></td>
         </tr>
         <tr>
-          <td style="text-align: center; vertical-align: top" colspan="2">
+          <td style="vertical-align: top" colspan="2">
           <?php
 
             // output all albums for today
@@ -272,7 +272,7 @@ class ALBUM_CALENDAR extends BASIC_CALENDAR
           <td colspan="2" style="height: 7px"></td>
         </tr>
         <tr>
-          <td style="text-align: center" colspan="2">
+          <td colspan="2">
             <a href="view_pictures.php?<?php echo "id={$this->album->id}&amp;calendar=1&amp;first_day=$iso_first_day&amp;last_day=$iso_last_day"; ?>"><?php echo "($num_pics pictures)"; ?></a>
           </td>
         </tr>
@@ -295,7 +295,7 @@ class ALBUM_CALENDAR extends BASIC_CALENDAR
   {
     $jrnl_query = $this->album->entry_query ();
     $jrnl_query->set_type ('journal');
-    $jrnl_query->set_days ("$this->curr_year-$this->curr_month-01", "$this->last_year-$this->last_month-31");
+    $jrnl_query->set_days ("$this->_curr_year-$this->_curr_month-01", "$this->_last_year-$this->_last_month-31");
     $this->_journals = $jrnl_query->objects ();
 
     // get only the dates for the pictures (using the 'raw_output' function)
@@ -305,7 +305,7 @@ class ALBUM_CALENDAR extends BASIC_CALENDAR
     $pic_query = $this->album->entry_query ();
     $pic_query->set_type ('picture');
     $pic_query->set_select ('entry.date');
-    $pic_query->set_days ("$this->curr_year-$this->curr_month-01", "$this->last_year-$this->last_month-31");
+    $pic_query->set_days ("$this->_curr_year-$this->_curr_month-01", "$this->_last_year-$this->_last_month-31");
     $pic_db = $pic_query->raw_output ();
     if ($pic_db)
     {

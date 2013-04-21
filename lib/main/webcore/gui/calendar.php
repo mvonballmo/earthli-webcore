@@ -143,10 +143,10 @@ abstract class CALENDAR extends WEBCORE_OBJECT
       }
     }
 
-    $this->curr_month = $curr_month;
-    $this->curr_year = $curr_year;
-    $this->last_month = $last_month;
-    $this->last_year = $last_year;
+    $this->_curr_month = $curr_month;
+    $this->_curr_year = $curr_year;
+    $this->_last_month = $last_month;
+    $this->_last_year = $last_year;
 
     $this->_page_changed ();
   }
@@ -166,43 +166,43 @@ abstract class CALENDAR extends WEBCORE_OBJECT
     $this->_draw_paginator ();
     $this->start_calendar ();
 
-    $this->start_year ($this->curr_year);
+    $this->start_year ($this->_curr_year);
 
     $month_displayed = false;
 
-    while ((($this->curr_year * 12) + $this->curr_month) <= (($this->last_year * 12) + $this->last_month))
+    while ((($this->_curr_year * 12) + $this->_curr_month) <= (($this->_last_year * 12) + $this->_last_month))
     {
-      $current_month_has_content = $this->month_has_content ($this->curr_month, $this->curr_year);
+      $current_month_has_content = $this->month_has_content ($this->_curr_month, $this->_curr_year);
       $month_displayed = $month_displayed || $current_month_has_content;
 
       if ($current_month_has_content)
       {
-        $this->build_month ($this->curr_month, $this->curr_year);
+        $this->build_month ($this->_curr_month, $this->_curr_year);
       }
       else
       {
         if (! isset ($this->_first_empty_month))
         {
-          $this->_first_empty_month = $this->curr_month;
-          $this->_first_empty_year = $this->curr_year;
+          $this->_first_empty_month = $this->_curr_month;
+          $this->_first_empty_year = $this->_curr_year;
         }
-        $this->_last_empty_month = $this->curr_month;
-        $this->_last_empty_year = $this->curr_year;
+        $this->_last_empty_month = $this->_curr_month;
+        $this->_last_empty_year = $this->_curr_year;
       }
 
-      if ($this->curr_month < Months_in_year)
+      if ($this->_curr_month < Months_in_year)
       {
-        $this->curr_month += 1;
+        $this->_curr_month += 1;
       }
       else
       {
-        $this->finish_year ($this->curr_year);
-        $this->curr_month = 1;
-        $this->curr_year += 1;
+        $this->finish_year ($this->_curr_year);
+        $this->_curr_month = 1;
+        $this->_curr_year += 1;
 
-        if ($this->curr_year <= $this->last_year)
+        if ($this->_curr_year <= $this->_last_year)
         {
-          $this->start_year ($this->curr_year);
+          $this->start_year ($this->_curr_year);
         }
       }
     }
@@ -301,6 +301,7 @@ abstract class CALENDAR extends WEBCORE_OBJECT
    * Does the specified month contain anything?
    * @param integer $month
    * @param integer $year
+   * @return bool
    * @access private
    */
   public function month_has_content ($month, $year)
@@ -449,6 +450,12 @@ abstract class CALENDAR extends WEBCORE_OBJECT
    * @access private
    */
   protected $_last_empty_year;
-}
 
-?>
+  protected $_curr_month;
+
+  protected $_curr_year;
+
+  protected $_last_month;
+
+  protected $_last_year;
+}
