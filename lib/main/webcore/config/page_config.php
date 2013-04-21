@@ -283,7 +283,6 @@ class PAGE_NEWSFEED_OPTIONS
   	
     if ($this->enabled && $this->file_name)
     {
-      $title = $this->title->as_text ();
       $url = new URL ($this->page->resolve_file ($this->file_name, Force_root_on));
       
       foreach ($this->formats as $format => $format_title)
@@ -306,8 +305,8 @@ class PAGE_NEWSFEED_OPTIONS
           else 
           {
             $cmd->icon = '{icons}indicators/newsfeed_atom';
+            $cmd->description = $content_description;
           }
-          $cmd->description = $content_description;
           $cmd->link = $url->as_text();
           $Result->append($cmd);
         }

@@ -799,12 +799,11 @@ ul.menu-buttons > li + li
   margin: 15px 0;
 }
 
-.menu-button-description, .menu-button-description
+.menu-button-description
 {
+  display: block;
+  margin: 5px 0 15px 0;
 	color: black;
-	display: block;
-	margin-left: 20px;
-	padding: 3px 0;
 	width: 200px;
 	white-space: normal;
 }

@@ -117,14 +117,7 @@ http://www.earthli.com/software/webcore
 
     $box->new_column_of_type ('contents-box');
 
-    echo '<h4>';
-
-    $newsfeed_commands = $Page->newsfeed_options->make_commands($App);
-    /** @var $renderer MENU_RENDERER */
-    $renderer = $App->make_newsfeed_menu_renderer ();
-    $renderer->display ($newsfeed_commands);
-
-    echo ' Contents</h4>';
+    echo '<h4>Contents</h4>';
     echo '<div class="panels">';
 
     $panel_manager->display ();

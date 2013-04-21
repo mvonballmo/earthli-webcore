@@ -553,7 +553,7 @@ class MENU_RENDERER extends WEBCORE_OBJECT
       $trigger = $this->trigger_title;
     }
 
-    echo '<li class="' . $trigger_class . '"' . $menu_tag . '><span class="' . $this->trigger_button_CSS_class . '">';
+    echo '<li class="' . $trigger_class . '"' . $menu_tag . '><div class="' . $this->trigger_button_CSS_class . '">';
     if ($this->show_trigger_icon)
     {
       if (empty ($trigger))
@@ -569,13 +569,9 @@ class MENU_RENDERER extends WEBCORE_OBJECT
     {
       echo $trigger;
     }
-    echo '<span class="' . $menu_class . '">';
+    echo '<div class="' . $menu_class . '">';
     $this->_draw_vertical_menu ($commands, false);
-    if ($this->show_trigger_icon && !empty ($trigger))
-    {
-      echo '</span>';
-    }
-    echo '</span></span></li>';
+    echo '</div></div></li>';
 
     if (! $this->_supports_css_2)
     {

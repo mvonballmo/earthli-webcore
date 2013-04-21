@@ -96,31 +96,29 @@ class ATTACHMENT_GRID extends STANDARD_GRID
     $this->_draw_menu_for ($obj, Menu_size_minimal);
     ?>
   </div>
-    <a href="<?php echo $obj->home_page_as_html (); ?>"><?php
-      if ($obj->is_image)
+  <a href="<?php echo $obj->home_page_as_html (); ?>"><?php
+    if ($obj->is_image)
+    {
+      $thumb = $obj->thumbnail_as_html ();
+      if ($thumb)
       {
-        $thumb = $obj->thumbnail_as_html ();
-        if ($thumb)
-        {
-          echo $thumb;
-        }
-        else
-        {
-          echo $obj->icon_as_html ('100px');
-        }
+        echo $thumb;
       }
       else
       {
         echo $obj->icon_as_html ('100px');
       }
-    ?></a>
-    </div>
-  </div>
-    <h3>
-      <?php
-      echo $obj->title_as_html ();
-      ?>
-    </h3>
+    }
+    else
+    {
+      echo $obj->icon_as_html ('100px');
+    }
+  ?></a>
+  <h3>
+    <?php
+    echo $obj->title_as_html ();
+    ?>
+  </h3>
   <p class="detail">
     <?php
       echo $obj->mime_type . ' (' . file_size_as_text ($obj->size) . ')';

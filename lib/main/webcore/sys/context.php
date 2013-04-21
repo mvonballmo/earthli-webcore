@@ -148,7 +148,7 @@ class CONTEXT extends RESOLVER
 
     $class_name = $this->final_class_name ('COOKIE', 'webcore/util/cookie.php');
     $this->cookie = new $class_name ();
-    $this->cookie->set_path ('/');
+    $this->cookie->path = '/';
 
     $this->storage = $this->cookie;
 
@@ -341,6 +341,7 @@ class CONTEXT extends RESOLVER
    * validator (single-line generally supports fewer tags).
    * @param string $type Can be {@link Tag_validator_single_line} or {@link Tag_validator_multi_line}.
    * @return MUNGER_VALIDATOR
+   * @throws UNKNOWN_VALUE_EXCEPTION
    */
   public function make_tag_validator ($type)
   {
@@ -397,12 +398,14 @@ class CONTEXT extends RESOLVER
   public function make_mail_provider ()
   {
     $class_name = $this->final_class_name ('MAIL_PROVIDER', 'webcore/mail/mail_provider.php');
+    /** @var $Result MAIL_PROVIDER */
     $Result = new $class_name ($this);
 
     $opts = $this->mail_options;
     if ($opts->logging_enabled)
     {
       $class_name = $this->final_class_name ('FILE_LOGGER', 'webcore/log/file_logger.php');
+      /** @var $logger FILE_LOGGER */
       $logger = new $class_name ();
       $logger->set_file_name ($this->env->resolve_file ($opts->log_file_name));
 
@@ -528,11 +531,11 @@ class CONTEXT extends RESOLVER
 
   /**
    * Return an object to format HTML or CSS tags.
-   * @param string $type Can be {@link Tag_builder_css} or {@link
-   * Tag_builder_html}.
+   * @param string $type Can be {@link Tag_builder_css} or {@link Tag_builder_html}.
    * @see HTML_TAG_BUILDER
    * @see CSS_TAG_BUILDER
-   * @return CSS_BUILDER|HTML_BUILDER
+   * @return CSS_STYLE_BUILDER|HTML_TAG_BUILDER
+   * @throws UNKNOWN_VALUE_EXCEPTION
    */
   public function make_tag_builder ($type)
   {
@@ -557,5 +560,3 @@ class CONTEXT extends RESOLVER
    */
   protected $_accepted_tags = '';
 }
-
-?>

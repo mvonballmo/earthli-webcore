@@ -86,6 +86,12 @@ class COMMAND
   public $on_click = '';
 
   /**
+   * Text included after the link to describe the effects of executing the command.
+   * @var string
+   */
+  public $description = '';
+
+  /**
    * Can this command be executed?
    * The renderer can decide whether to display this button as disabled or to
    * simply omit it from the list.
