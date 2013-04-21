@@ -1458,3 +1458,15 @@ hr
   padding-left: 21px;
   min-width: 16px; min-height: 16px;
 }
+
+.picture-overlap
+{
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.picture-overlap .menu-trigger .button
+{
+  border-top-left-radius: 0;
+}
