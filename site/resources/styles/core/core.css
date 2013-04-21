@@ -634,7 +634,7 @@ td.object-in-list + td.object-in-list
   padding-right: 0;
 }
 
-.text-flow
+.text-flow,
 {
   line-height: 160%;
   text-align: left
@@ -841,7 +841,7 @@ ul.menu-buttons > li + li
 
 .sub-folders-box .tree
 {
-  max-height: 200px;
+  max-height: 300px;
   overflow-y: auto;
 }
 
@@ -1360,10 +1360,50 @@ hr
   font-style: italic
 }
 
+.tree
+{
+  line-height: 160%;
+}
+
+.tree,
+.tree ul,
+.tree li
+{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tree ul
+{
+  padding-left: 21px;
+}
+
+.tree ul .leaf-only
+{
+  padding-left: 18px;
+}
+
+.tree .leaf
+{
+  padding-left: 18px;
+}
+
+
+.tree .tree-node:first-child
+{
+  margin-top: 0;
+}
+
+.tree .tree-node:last-child
+{
+  margin-bottom: 0;
+}
+
 .tree-node 
 {
   white-space: nowrap;
-  margin-bottom: .2em;
+  margin: 5px 0;
 }
 
 .tree-node img

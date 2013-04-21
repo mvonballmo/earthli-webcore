@@ -189,16 +189,18 @@ abstract class TREE extends WEBCORE_OBJECT
    * Start rendering a node.
    * @param object $node
    * @param boolean $is_last Is this a terminal node in this list?
+   * @param boolean $has_children Does this node have children?
    * @access private
    */
-  public function start_node ($node, $is_last) {}
+  public function start_node ($node, $is_last, $has_children, $sibling_has_children) {}
   /**
    * Finish rendering a node.
    * @param object $node
    * @param boolean $is_last Is this a terminal node in this list?
+   * @param boolean $has_children Does this node have children?
    * @access private
    */
-  public function finish_node ($node, $is_last) {}
+  public function finish_node ($node, $is_last, $has_children) {}
 
   /**
    * Called before sub-nodes are rendered.
@@ -263,20 +265,16 @@ abstract class TREE extends WEBCORE_OBJECT
    */
   public function draw_title ($node)
   {
-    $icon = $this->node_info->icon_for ($node);
-    $title = $this->node_info->title_for ($node);
+    $icon_url = $this->node_info->get_icon_url ($node);
+    $caption = $this->node_info->get_caption ($node);
     
     if (isset ($this->decorator))
     {
-      $this->decorator->draw ($node, $title, $icon);
+      $this->decorator->draw ($node, $caption, $icon_url);
     }
     else
     {
-      if ($icon)
-      {
-        echo ' ' . $icon . ' ';
-      }
-      echo $title;
+      echo $this->context->get_text_with_icon($icon_url, $caption, '16px');
     }
   }
 
@@ -286,15 +284,14 @@ abstract class TREE extends WEBCORE_OBJECT
    * @param boolean $is_last Is this a terminal node in this list?
    * @access private
    */
-  public function iterate_node ($node, $is_last)
+  public function iterate_node ($node, $is_last, $nodes, $sibling_has_children)
   {
     $this->_depth += 1;
     if ($node)
     {
-      $this->start_node ($node, $is_last);
-
-      $nodes = $this->node_info->sub_nodes ($node);
       $has_children = !empty ($nodes);
+
+      $this->start_node ($node, $is_last, $has_children, $sibling_has_children);
 
       if (count ($this->_stack))
       {
@@ -302,11 +299,11 @@ abstract class TREE extends WEBCORE_OBJECT
         {
           if ($s)
           {
-            $this->draw_icon (Tree_line, $node);
+//            $this->draw_icon (Tree_line, $node);
           }
           else
           {
-            $this->draw_icon (Tree_blank, $node);
+//            $this->draw_icon (Tree_blank, $node);
           }
         }
       }
@@ -321,7 +318,7 @@ abstract class TREE extends WEBCORE_OBJECT
           }
           else
           {
-            $this->draw_icon (Tree_ell, $node);
+//            $this->draw_icon (Tree_ell, $node);
           }
           array_push ($this->_stack, 0);
         }
@@ -333,7 +330,7 @@ abstract class TREE extends WEBCORE_OBJECT
           }
           else
           {
-            $this->draw_icon (Tree_tee, $node);
+//            $this->draw_icon (Tree_tee, $node);
           }
           array_push ($this->_stack, 1);
         }
@@ -348,7 +345,7 @@ abstract class TREE extends WEBCORE_OBJECT
         $this->post_draw_children ($node);
       }
 
-      $this->finish_node ($node, $is_last);
+      $this->finish_node ($node, $is_last, $has_children);
 
       array_pop ($this->_stack);
     }
@@ -364,6 +361,28 @@ abstract class TREE extends WEBCORE_OBJECT
   {
     $count = count ($nodes);
     $index = 0;
+
+    $sub_nodes = array();
+    $sub_node_has_children = false;
+
+    while ($index < $count)
+    {
+      $node = $nodes [$index];
+      if ($node)
+      {
+        $node_sub_nodes = $this->node_info->sub_nodes ($node);
+        $sub_node_has_children = $sub_node_has_children || !empty ($node_sub_nodes);
+        $sub_nodes [] = $node_sub_nodes;
+      }
+      else
+      {
+        $sub_nodes [] = array();
+      }
+      $index += 1;
+    }
+
+    $index = 0;
+
     while ($index < $count)
     {
       $node = $nodes [$index];
@@ -371,7 +390,7 @@ abstract class TREE extends WEBCORE_OBJECT
       {
         $this->decorator->node_found ($node);
       }
-      $this->iterate_node ($node, $index == $count - 1);
+      $this->iterate_node ($node, $index == $count - 1, $sub_nodes[$index], $sub_node_has_children);
       $index += 1;
     }
   }
@@ -460,24 +479,24 @@ abstract class TREE_NODE_INFO extends WEBCORE_OBJECT
    * Default behavior returns no nodes.
    * @param object $node
    * @access private
-   * @return TREE_NODE_INFO[]
+   * @return object[]
    */
   public function sub_nodes ($node) {}
 
   /**
    * Return the title for the given node.
-   * @param NAMED_OBJECT $node Draw the title for this project.
+   * @param object $node Draw the title for this project.
    * @return string
    * @abstract
    */
-  public abstract function title_for ($node);
+  public abstract function get_caption ($node);
 
   /**
    * Return the icon for the given node.
-   * @param PROJECT $node Draw the title for this project.
+   * @param object $node Draw the title for this project.
    * @return string
    */
-  public function icon_for ($node)
+  public function get_icon_url ($node)
   {
   }
   
@@ -609,7 +628,7 @@ class TREE_DECORATOR extends WEBCORE_OBJECT
 
   /**
    * Reference to the parent tree's node info object.
-   * @var TREE_NODE_INFO
+   * @return \TREE_NODE_INFO
    */
   public function node_info ()
   {
@@ -645,7 +664,7 @@ class HTML_TREE extends TREE
 
     if ($class || $style)
     {
-      echo "<div $class $style>";
+      echo "<ul $class $style>";
     }
   }
 
@@ -658,7 +677,7 @@ class HTML_TREE extends TREE
     if ($this->centered || $this->CSS_class)
     {
 ?>
-</div>
+</ul>
 <?php
     }
   }
@@ -667,25 +686,37 @@ class HTML_TREE extends TREE
    * Start rendering a node.
    * @param object $node
    * @param boolean $is_last Is this a terminal node in this list?
+   * @param boolean $has_children Does this node have children?
    * @access private
    */
-  public function start_node ($node, $is_last)
+  public function start_node ($node, $is_last, $has_children, $sibling_has_children)
   {
+    $class = '';
+    if ($sibling_has_children)
+    {
+      $class = $has_children ? 'container' : 'leaf';
+    }
+    else
+    {
+      $class = 'leaf-only';
+    }
+
 ?>
-  <div class="tree-node">
-<?php
+  <li class="tree-node <?php echo $class; ?>">
+      <?php
   }
 
   /**
    * Finish rendering a node.
    * @param object $node
    * @param boolean $is_last Is this a terminal node in this list?
+   * @param boolean $has_children Does this node have children?
    * @access private
    */
-  public function finish_node ($node, $is_last)
+  public function finish_node ($node, $is_last, $has_children)
   {
 ?>
-  </div>
+  </li>
 <?php
   }
 }

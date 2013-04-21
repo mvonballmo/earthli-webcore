@@ -57,18 +57,19 @@ class PROJECT_TREE_NODE_INFO extends FOLDER_TREE_NODE_INFO
    * @param PROJECT $node Draw the title for this project.
    * @return string
    */
-  public function icon_for ($node)
+  public function get_icon_url ($node)
   {
     if ($node->defines_options ())
     {
-      return $this->app->resolve_icon_as_html ('{icons}buttons/edit', 'Defines Assignee Options', '16px');
+      return '{icons}buttons/edit';
     }
 
-    return parent::icon_for ($node);
+    return parent::get_icon_url ($node);
   }
   
   /**
    * @param PROJECT $node Is this project editable?
+   * @return bool
    * @access private
    */
   public function visitable ($node)

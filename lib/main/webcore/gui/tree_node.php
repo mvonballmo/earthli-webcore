@@ -230,7 +230,7 @@ class GENERIC_TREE_NODE_INFO extends TREE_NODE_INFO
    * @return string
    * @access private
    */
-  public function title_for ($node)
+  public function get_caption ($node)
   {
     return $node->text ();
   }

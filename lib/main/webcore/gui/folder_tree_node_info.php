@@ -72,6 +72,7 @@ class FOLDER_TREE_NODE_INFO extends TREE_NODE_INFO
   /**
    * Return list of sub-nodes for 'node'.
    * @param FOLDER $node
+   * @return FOLDER[]
    * @access private
    */
   public function sub_nodes ($node)
@@ -81,10 +82,10 @@ class FOLDER_TREE_NODE_INFO extends TREE_NODE_INFO
 
   /**
    * Return the title for the given node.
-   * @param PROJECT $node Draw the title for this project.
+   * @param FOLDER $node Draw the title for this project.
    * @return string
    */
-  public function title_for ($node)
+  public function get_caption ($node)
   {
     if ($this->selected ($node))
     {
@@ -128,11 +129,11 @@ class FOLDER_TREE_NODE_INFO extends TREE_NODE_INFO
    * @param PROJECT $node Draw the title for this project.
    * @return string
    */
-  public function icon_for ($node)
+  public function get_icon_url ($node)
   {
     if ($this->show_folder_icon && $node->icon_url)
     {
-      return $node->icon_as_html ('16px');
+      return $node->icon_url;
     }
     
     return '';
@@ -251,14 +252,14 @@ class SECURITY_FOLDER_TREE_NODE_INFO extends FOLDER_TREE_NODE_INFO
    * @param PROJECT $node Draw the title for this project.
    * @return string
    */
-  public function icon_for ($node)
+  public function get_icon_url ($node)
   {
     if ($node->defines_security ())
     {
-      return $this->app->resolve_icon_as_html ('{icons}buttons/security', 'Defines Own Security Settings', '16px');
+      return '{icons}buttons/security';
     }
 
-    return parent::icon_for ($node);
+    return parent::get_icon_url ($node);
   }
 }
 

@@ -39,7 +39,17 @@ h3, .menu-title
   font-size: 14pt
 }
 
-body, h4, td, th, .menu-control, .text-control, .text-control-required, .quoter, .menu, .nav-box, .button-control
+body,
+h4,
+td,
+th,
+.menu-control,
+.text-control,
+.text-control-required,
+.quoter,
+.menu,
+.nav-box,
+.button-control
 {
   font-size: 12pt
 }
@@ -47,7 +57,6 @@ body, h4, td, th, .menu-control, .text-control, .text-control-required, .quoter,
 h5,
 .detail,
 .notes,
-.tree-node,
 .info-box-bottom,
 .info-box-top,
 .login-status,

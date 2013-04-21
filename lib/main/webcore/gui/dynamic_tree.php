@@ -56,7 +56,6 @@ class DYNAMIC_TREE extends HTML_TREE
     parent::__construct ($context);
 
     $this->_layer = $context->make_layer ();
-    $this->_layer->margin_top = '.1em';
   }
 
   /**
@@ -90,10 +89,9 @@ class DYNAMIC_TREE extends HTML_TREE
    */
   public function pre_draw_children ($node)
   {
-    echo "</div>\n<div class=\"tree-node\">";
     $this->_layer->name = 'obj_' . $this->node_info->id ($node);
     $this->_layer->visible = ! $this->node_info->closed ($node);
-    $this->_layer->start ();
+    $this->_layer->start ('ul');
   }
 
   /**
@@ -104,8 +102,6 @@ class DYNAMIC_TREE extends HTML_TREE
    */
   public function post_draw_children ($node)
   {
-    $this->_layer->finish ();
+    $this->_layer->finish ('ul');
   }
 }
-
-?>

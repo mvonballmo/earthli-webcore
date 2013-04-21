@@ -123,7 +123,7 @@ class LAYER extends WEBCORE_OBJECT
    * All content emitted until {@link finish()} is called will be shown/hidden
    * with this layer.
    */
-  public function start ()
+  public function start ($tag_name = 'div')
   {
     if (isset ($this->env->profiler)) $this->env->profiler->start ('ui');
     $css = $this->context->make_tag_builder (Tag_builder_css);
@@ -140,9 +140,9 @@ class LAYER extends WEBCORE_OBJECT
       $css->add_attribute ('margin-top', $this->margin_top);
     }
     $css_style = $css->as_text ();
-     
+
     $div = $this->context->make_tag_builder (Tag_builder_html);
-    $div->set_name ('div');
+    $div->set_name ($tag_name);
     if ($this->CSS_class)
     {
       $div->add_attribute ('class', $this->CSS_class);
@@ -164,9 +164,9 @@ class LAYER extends WEBCORE_OBJECT
    * Close the container for the layer.
    * Call only after calling {@link start()}.
    */
-  public function finish ()
+  public function finish ($tag_name = 'div')
   {
-    echo "</div>\n";
+    echo "</$tag_name>\n";
   }
 }
 

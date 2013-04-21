@@ -88,9 +88,9 @@ class SUBSCRIBER_GRID extends STANDARD_GRID
     $menu_renderer = $this->app->make_menu_renderer();
     $menu_renderer->set_size($this->menu_size);
 
-    echo '<p>';
+    echo '<div class="button-content">';
     $menu_renderer->display($commands);
-    echo '</p>';
+    echo '</div>';
 
     parent::_draw($objs);
   }
