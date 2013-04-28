@@ -535,6 +535,11 @@ td.object-in-list + td.object-in-list
   vertical-align: top;
 }
 
+table.basic > tbody > tr > td.empty-label
+{
+  padding: 0;
+}
+
 .form-button-content
 {
   text-align: right;
@@ -562,6 +567,11 @@ td.object-in-list + td.object-in-list
 {
   padding-top: 2px;
   padding-bottom: 2px;
+}
+
+.text-box-description
+{
+  margin-bottom: 15px;
 }
 
 /* @end */
@@ -634,7 +644,7 @@ td.object-in-list + td.object-in-list
   padding-right: 0;
 }
 
-.text-flow,
+.text-flow
 {
   line-height: 160%;
   text-align: left
