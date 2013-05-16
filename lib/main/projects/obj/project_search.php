@@ -85,5 +85,3 @@ class CHANGE_SEARCH extends MULTI_ENTRY_SEARCH
     parent::__construct ($app, new SEARCH_CHANGE_FIELDS ($app));
   }
 }
-
-?>

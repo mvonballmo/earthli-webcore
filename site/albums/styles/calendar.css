@@ -1,9 +1,10 @@
 .cell-empty,
 .cell-non-empty,
-.cell-selected
+.cell-selected,
+.cell-highlight
 {
-  min-width: 8em;
-  height: 4em;
+  width: 10em;
+  height: 5em;
 }
 
 .month {  font-size: 120%; }

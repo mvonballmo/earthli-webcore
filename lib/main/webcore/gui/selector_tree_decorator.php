@@ -69,12 +69,7 @@ class SELECTOR_TREE_DECORATOR extends TREE_DECORATOR
     $dom_id = $this->control_name . '_' . $id;
 ?>
     <input type="radio" id="<?php echo $dom_id; ?>" name="<?php echo $this->control_name; ?>" value="<?php echo $id; ?>" style="vertical-align: middle"<?php if ($disabled) echo ' disabled'; ?>>
-    <label for="<?php echo $dom_id; ?>"><?php
-      if ($icon)
-      {
-        echo $icon . ' ';
-      }
-      ?><?php echo $text; ?></label>
+    <label for="<?php echo $dom_id; ?>"><?php echo $this->context->get_text_with_icon($icon, $text, '16px'); ?></label>
 <?php
   }
 }
@@ -226,12 +221,7 @@ class MULTI_SELECTOR_TREE_DECORATOR extends TREE_DECORATOR
     $dom_id = $this->control_name . '_' . $id;
 ?>
     <input type="checkbox" id="<?php echo $dom_id; ?>" name="<?php echo $control_name; ?>[]" <?php if (isset ($on_click)) echo "onclick=\"$on_click\""; ?> value="<?php echo $node->id; ?>" <?php echo $state; ?><?php if ($disabled) echo ' disabled'; ?>>
-    <label for="<?php echo $dom_id; ?>"><?php
-      if ($icon)
-      {
-        echo $icon . ' ';
-      }
-      ?><?php echo $text; ?></label>
+    <label for="<?php echo $dom_id; ?>"><?php echo $this->context->get_text_with_icon($icon, $text, '16px'); ?></label>
 <?php
   }
 }

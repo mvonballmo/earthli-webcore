@@ -202,7 +202,9 @@ class SEARCH_PROJECT_ENTRY_FIELDS extends SEARCH_ENTRY_FIELDS
   {
     $renderer->draw_check_box_row ('not_kind');
 
-    $kinds = $this->app->display_options->entry_kinds ();
+    /** @var $display_options PROJECT_APPLICATION_DISPLAY_OPTIONS */
+    $display_options = $this->app->display_options;
+    $kinds = $display_options->entry_kinds ();
     if (sizeof ($kinds))
     {
       $props = $renderer->make_list_properties ();
@@ -211,15 +213,14 @@ class SEARCH_PROJECT_ENTRY_FIELDS extends SEARCH_ENTRY_FIELDS
       $index = 0;
       foreach ($kinds as $kind)
       {
-        $props->add_item ($kind->icon_as_html ('20px') . ' ' . $kind->title, $index);
+        $props->add_item ($this->context->get_text_with_icon($kind->icon, $kind->title, '16px'), $index);
         $index += 1;
       }
       $renderer->draw_check_group_row ('kind', $props);
     }
 
-    $props = $renderer->make_list_properties ();
-
     $renderer->draw_separator ();
+
     parent::_draw_date_fields ($form, $renderer);
   }
 }
@@ -233,13 +234,6 @@ class SEARCH_PROJECT_ENTRY_FIELDS extends SEARCH_ENTRY_FIELDS
  */
 class SEARCH_JOB_FIELDS extends SEARCH_PROJECT_ENTRY_FIELDS
 {
-  /**
-   * @param APPLICATION $app Main application.
-   */
-  public function __construct ($app)
-  {
-    parent::__construct ($app);
-  }
 }
 
 /**
@@ -260,47 +254,4 @@ class SEARCH_CHANGE_FIELDS extends SEARCH_PROJECT_ENTRY_FIELDS
 
     $this->_add_text ('files', 'Files', false, false, 'chng');
   }
-
-  /**
-   * Add fields for search properties to this form.
-   * @param FORM $form
-   */
-  public function add_fields ($form)
-  {
-    parent::add_fields ($form);
-  }
-
-  /**
-   * Restrict the query by these fields.
-   * @param QUERY $query
-   * @param object $obj
-   */
-  public function apply_to_query ($query, $obj)
-  {
-    parent::apply_to_query ($query, $obj);
-  }
-
-  /**
-   * Text representation of applied search fields.
-   * @param object $obj
-   * @return string
-   * @access private
-   */
-  protected function _restrictions_as_text ($obj)
-  {
-    $Result = parent::_restrictions_as_text ($obj);
-    return $Result;
-  }
-
-  /**
-   * @param FORM $form
-   * @param FORM_RENDERER $renderer
-   * @access private
-   */
-  protected function _draw_date_fields ($form, $renderer)
-  {
-    parent::_draw_date_fields ($form, $renderer);
-  }
 }
-
-?>

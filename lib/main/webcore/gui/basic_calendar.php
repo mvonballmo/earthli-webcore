@@ -129,8 +129,14 @@ class BASIC_CALENDAR extends CALENDAR
   public function start_month ($month, $year)
   {
     $month = date ("F", mktime (0, 0, 0, $month, 1, $year));
-    echo "<tr><td colspan=\"" . Days_in_week . "\" class=\"month\">$month</td></tr>\n";
-    echo "<tr><td colspan=\"" . Days_in_week . "\">&nbsp;</td></tr>\n";
+    echo "<tr><td colspan=\"" . Days_in_week . "\">";
+    if ($this->_year_pending)
+    {
+      echo "<h2 class=\"year\">$year</h2>";
+      $this->_year_pending = false;
+    }
+    echo "<h3 class=\"month\">$month</h3>";
+    echo "</td></tr>\n";
 
     echo "<tr>\n";
     $t = mktime (0, 0, 0, 9, 10, 2000);
@@ -142,8 +148,6 @@ class BASIC_CALENDAR extends CALENDAR
       $t = mktime (0, 0, 0, 9, $i + 4, 2000);
     }
     echo "</tr>\n";
-
-    echo "<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>\n";
   }
 
   /**
@@ -154,7 +158,6 @@ class BASIC_CALENDAR extends CALENDAR
    */
   public function finish_month ($month, $year)
   {
-    echo "<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>\n";
   }
 
   /**
@@ -164,7 +167,7 @@ class BASIC_CALENDAR extends CALENDAR
    */
   public function start_year ($year)
   {
-    echo "<tr><td colspan=\"" . Days_in_week . "\" class=\"year\">$year</td></tr>\n";
+    $this->_year_pending = true;
   }
 
   /**
@@ -212,13 +215,13 @@ class BASIC_CALENDAR extends CALENDAR
     $last_month = date ("F", mktime (0, 0, 0, $this->_last_empty_month, 1, $this->_last_empty_year));
     if ($this->_first_empty_month != $this->_last_empty_month)
     {
-      echo "<tr><td class=\"month\" colspan=\"" . Days_in_week . "\">$first_month - $last_month <span class=\"notes\">(No Content)</span></td></tr>\n";
+      $month_text = "$first_month &ndash; $last_month";
     }
     else
     {
-      echo "<tr><td class=\"month\" colspan=\"" . Days_in_week . "\">$first_month <span class=\"notes\">(No Content)</span></td></tr>\n";
+      $month_text = $first_month;
     }
-    echo "<tr><td colspan=\"" . Days_in_week . "\">&nbsp;</td></tr>\n";
+    echo "<tr><td class=\"month\" colspan=\"" . Days_in_week . "\"><h3>$month_text</h3> <p class=\"notes\">No content</p></td></tr>\n";
 
     // clears the months as rendered
 
@@ -248,5 +251,8 @@ class BASIC_CALENDAR extends CALENDAR
     <p><?php $this->paginator->display (); ?></p>
 <?php
   }
+
+  /** @var bool */
+  private $_year_pending;
 }
 ?>

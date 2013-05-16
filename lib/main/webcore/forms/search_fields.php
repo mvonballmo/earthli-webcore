@@ -70,7 +70,10 @@ abstract class SEARCH_FIELDS extends WEBCORE_OBJECT
 
   /**
    * @param CONTEXT $context
-   * @param string $base_name
+   * @param string $base_name The name of the field in the form and object.
+   * @param string $title The title to show for the field; can be empty.
+   * @param bool $sortable If true, the field is added to the list of available sorts.
+   * @param string $table_name
    */
   public function __construct ($context, $base_name, $title = '', $sortable = true, $table_name = '')
   {
@@ -328,7 +331,9 @@ class SEARCH_DATE_FIELDS extends SEARCH_FIELDS
    */
   public function validate ($form, $obj)
   {
+    /** @var $after DATE_TIME */
     $after = $form->value_for ($this->after_name ());
+    /** @var $before DATE_TIME */
     $before = $form->value_for ($this->before_name ());
 
     if ($before->is_valid () && $after->is_valid () && $before->less_than ($after))
@@ -391,7 +396,9 @@ class SEARCH_DATE_FIELDS extends SEARCH_FIELDS
    */
   public function needs_visible ($form)
   {
+    /** @var $date_before DATE_TIME */
     $date_before = $form->value_for ($this->before_name ());
+    /** @var $date_after DATE_TIME */
     $date_after = $form->value_for ($this->after_name ());
 
     return ($date_before->is_valid () || $form->num_errors ($this->before_name ())
@@ -475,6 +482,7 @@ class SEARCH_USER_FIELDS extends SEARCH_FIELDS
           return $this->title . ' is ' . join (' or ', $user_names);
         }
       }
+      return '';
     default:
       return '';
     }
@@ -673,6 +681,7 @@ class SEARCH_TEXT_FIELDS extends SEARCH_FIELDS
 
   /**
    * Return text describing this search field.
+   * @param $obj
    * @return string
    * @abstract
    */
@@ -1090,11 +1099,7 @@ class SEARCH_OBJECT_FIELDS extends WEBCORE_OBJECT
 
     if (read_var ('quick_search'))
     {
-      $layer = $this->context->make_layer ('advanced-search-settings');
-      $renderer->draw_text_row (' ', $layer->toggle_as_html () . ' Click the arrow for advanced settings.', 'notes');
-      $renderer->start_row ();
-      $layer->start ();
-      $renderer->start_block ();
+      $layer = $renderer->start_layer_row ('advanced-search-settings', '', 'Click the arrow for advanced settings');
     }
 
     $props = $renderer->make_list_properties ();
@@ -1116,9 +1121,7 @@ class SEARCH_OBJECT_FIELDS extends WEBCORE_OBJECT
 
     if (isset ($layer))
     {
-      $renderer->finish_block ();
-      $layer->finish ();
-      $renderer->finish_row ();
+      $renderer->finish_layer_row ($layer);
     }
   }
 
@@ -1181,24 +1184,17 @@ class SEARCH_OBJECT_FIELDS extends WEBCORE_OBJECT
         $user = $this->_users [$this->_linked_fields [$date->base_name]];
       }
 
-      $layer = $this->context->make_layer ($date->title);
-      $layer->visible = $date->needs_visible ($form) || (isset ($user) && $user->needs_visible ($form));
+      $visible = $date->needs_visible ($form) || (isset ($user) && $user->needs_visible ($form));
+      $layer = $renderer->start_layer_row($date->base_name, $date->title, 'Click the arrow to search by ' . $date->title . '.', $visible);
 
-      $renderer->draw_text_row ($date->title, $layer->toggle_as_html () . ' Click the arrow to search by ' . $date->title . '.', 'notes');
-      $renderer->start_row (' ');
-        $layer->start ();
-          $renderer->start_block ();
+      if (isset ($user))
+      {
+        $user->draw_fields ($form, $renderer);
+      }
 
-            if (isset ($user))
-            {
-              $user->draw_fields ($form, $renderer);
-            }
+      $date->draw_fields ($form, $renderer);
 
-            $date->draw_fields ($form, $renderer);
-
-          $renderer->finish_block ();
-        $layer->finish ();
-      $renderer->finish_row ();
+      $renderer->finish_layer_row($layer);
     }
 
     $renderer->default_control_width = $old_width;
@@ -1249,7 +1245,9 @@ class SEARCH_OBJECT_FIELDS extends WEBCORE_OBJECT
 
   /**
    * Add a set of date search fields.
-   * @param string $base_name
+   * @param string $base_name The name of the field in the form and object.
+   * @param string $title The title to show for the field; can be empty.
+   * @param bool $sortable If true, the field is added to the list of available sorts.
    * @access private
    */
   protected function _add_date ($base_name, $title = '', $sortable = true)
@@ -1261,7 +1259,9 @@ class SEARCH_OBJECT_FIELDS extends WEBCORE_OBJECT
 
   /**
    * Add a set of user search fields.
-   * @param string $base_name
+   * @param string $base_name The name of the field in the form and object.
+   * @param string $title The title to show for the field; can be empty.
+   * @param bool $sortable If true, the field is added to the list of available sorts.
    * @access private
    */
   protected function _add_user ($base_name, $title = '', $sortable = true)
@@ -1273,7 +1273,11 @@ class SEARCH_OBJECT_FIELDS extends WEBCORE_OBJECT
 
   /**
    * Add a set of text search fields.
-   * @param string $base_name
+   * @param string $base_name The name of the field in the form and object.
+   * @param string $title The title to show for the field; can be empty.
+   * @param bool $sortable If true, the field is added to the list of available sorts.
+   * @param bool $selected_by_default If true, the text field is included in the default search.
+   * @param string $table_name The name of the table to search for this text.
    * @access private
    */
   protected function _add_text ($base_name, $title = '', $sortable = true, $selected_by_default = true, $table_name = '')
@@ -1395,7 +1399,7 @@ class SEARCH_OBJECT_FIELDS extends WEBCORE_OBJECT
   /**
    * All registered date search field sets.
    * @see SEARCH_DATE_FIELDS
-   * @var array[SEARCH_DATE_FIELDS]
+   * @var SEARCH_DATE_FIELDS[]
    * @access private
    */
   protected $_dates;
@@ -1403,7 +1407,7 @@ class SEARCH_OBJECT_FIELDS extends WEBCORE_OBJECT
   /**
    * All registered user search field sets.
    * @see SEARCH_USER_FIELDS
-   * @var array[SEARCH_USER_FIELDS]
+   * @var SEARCH_USER_FIELDS[]
    * @access private
    */
   protected $_users;
@@ -1411,7 +1415,7 @@ class SEARCH_OBJECT_FIELDS extends WEBCORE_OBJECT
   /**
    * All registered text search field sets.
    * @see SEARCH_TEXT_FIELDS
-   * @var array[SEARCH_TEXT_FIELDS]
+   * @var SEARCH_TEXT_FIELDS[]
    * @access private
    */
   protected $_texts;
@@ -1419,7 +1423,7 @@ class SEARCH_OBJECT_FIELDS extends WEBCORE_OBJECT
   /**
    * All registered sort field sets.
    * @see SORT_FIELDS
-   * @var array[SORT_FIELDS]
+   * @var SORT_FIELDS[]
    * @access private
    */
   protected $_sorts;
@@ -1427,14 +1431,14 @@ class SEARCH_OBJECT_FIELDS extends WEBCORE_OBJECT
   /**
    * All registered search field sets.
    * @see SEARCH_FIELDS
-   * @var array[SEARCH_FIELDS]
+   * @var SEARCH_FIELDS[]
    * @access private
    */
   protected $_sets;
 
   /**
    * Indicates which fields should be drawn together.
-   * @var array[string,string]
+   * @var string[]
    * @access private
    */
   protected $_linked_fields;
@@ -1443,7 +1447,7 @@ class SEARCH_OBJECT_FIELDS extends WEBCORE_OBJECT
    * Fields that are automatically synced with search data.
    * Loading and storing is handled automatically for these fields. The value part of the array holds
    * the fields default value.
-   * @var array[string, object]
+   * @var object[]
    * @access private
    */
   protected $_synced_fields;
@@ -1643,6 +1647,10 @@ class SEARCH_OBJECT_IN_FOLDER_FIELDS extends SEARCH_CONTENT_OBJECT_FIELDS
                   Deleted => 'Deleted');
   }
 
+  /**
+   * @param $form FORM
+   * @param $renderer FORM_RENDERER
+   */
   protected function _draw_state_selector ($form, $renderer)
   {
     $old_width = $renderer->default_control_width;
@@ -1681,6 +1689,7 @@ class SEARCH_OBJECT_IN_FOLDER_FIELDS extends SEARCH_CONTENT_OBJECT_FIELDS
       if ($obj->parameters ['folder_ids'])
       {
         $folder_query = $this->login->folder_query ();
+        /** @var $folders FOLDER[] */
         $folders = $folder_query->objects_at_ids ($obj->parameters ['folder_ids']);
         if (sizeof ($folders))
         {
@@ -1758,6 +1767,7 @@ class SEARCH_OBJECT_IN_FOLDER_FIELDS extends SEARCH_CONTENT_OBJECT_FIELDS
     $props->add_item ('Selected folder(s)', Search_user_constant);
     $props->add_item ('NOT selected folder(s)', Search_user_not_constant);
 
+    /** @var $id_values int[] */
     $id_values = $form->value_for ('folder_ids');
     $selected_folder_ids = array ();
 
@@ -1772,51 +1782,43 @@ class SEARCH_OBJECT_IN_FOLDER_FIELDS extends SEARCH_CONTENT_OBJECT_FIELDS
       }
     }
 
-    $layer = $this->context->make_layer ('folders');
-    $layer->visible = ($form->value_for ('folder_search_type') != Search_user_context_none
-                       || (sizeof ($selected_folder_ids) > 0));
+    $visible = ($form->value_for ('folder_search_type') != Search_user_context_none
+      || (sizeof ($selected_folder_ids) > 0));
 
-    $renderer->draw_text_row ('Folder(s)', $layer->toggle_as_html () . ' Click the arrow to search by folder.', 'notes');
+    $layer = $renderer->start_layer_row('folders', 'Folder(s)', 'Click the arrow to search by folder.', $visible);
 
     $renderer->start_row (' ');
-      $layer->start ();
-        $renderer->start_block ();
-
-          $renderer->start_row (' ');
-            echo $renderer->drop_down_as_html ('folder_search_type', $props);
-            echo ' ';
-          $renderer->finish_row ();
-          $renderer->start_row (' ');
-
-          $folder_query = $this->login->folder_query ();
-          $folder_query->clear_results ();
-          $folders = $folder_query->root_tree ($this->app->root_folder_id);
-          $selected_folders = $folder_query->objects_at_ids ($selected_folder_ids);
-
-          /* Make a copy (not a reference). */
-          $tree = $this->app->make_tree_renderer ();
-
-          include_once ('webcore/gui/folder_tree_node_info.php');
-          $tree_node_info = new FOLDER_TREE_NODE_INFO ($this->app);
-
-          include_once ('webcore/gui/selector_tree_decorator.php');
-          $decorator = new MULTI_SELECTOR_TREE_DECORATOR ($tree, $selected_folder_ids);
-          $decorator->control_name = 'folder_ids';
-          $decorator->form_name = $form->name;
-          $decorator->auto_toggle_children = true;
-
-          $tree->node_info = $tree_node_info;
-          $tree->decorator = $decorator;
-          $tree->set_visible_nodes ($selected_folders);
-          $tree->centered = false;
-
-          $tree->display ($folders);
-
-          $renderer->finish_row ();
-
-        $renderer->finish_block ();
-      $layer->finish ();
+    echo $renderer->drop_down_as_html ('folder_search_type', $props);
+    echo ' ';
     $renderer->finish_row ();
+    $renderer->start_row (' ');
+
+    $folder_query = $this->login->folder_query ();
+    $folder_query->clear_results ();
+    $folders = $folder_query->root_tree ($this->app->root_folder_id);
+    $selected_folders = $folder_query->objects_at_ids ($selected_folder_ids);
+
+    /* Make a copy (not a reference). */
+    $tree = $this->app->make_tree_renderer ();
+
+    include_once ('webcore/gui/folder_tree_node_info.php');
+    $tree_node_info = new FOLDER_TREE_NODE_INFO ($this->app);
+
+    include_once ('webcore/gui/selector_tree_decorator.php');
+    $decorator = new MULTI_SELECTOR_TREE_DECORATOR ($tree, $selected_folder_ids);
+    $decorator->control_name = 'folder_ids';
+    $decorator->form_name = $form->name;
+    $decorator->auto_toggle_children = true;
+
+    $tree->node_info = $tree_node_info;
+    $tree->decorator = $decorator;
+    $tree->set_visible_nodes ($selected_folders);
+
+    $tree->display ($folders);
+
+    $renderer->finish_row ();
+
+    $renderer->finish_layer_row($layer);
 
     $renderer->default_control_width = $old_width;
   }
@@ -1958,6 +1960,10 @@ class SEARCH_USER_OBJECT_FIELDS extends SEARCH_CONTENT_OBJECT_FIELDS
     return $Result;
   }
 
+  /**
+   * @param $form FORM
+   * @param $renderer FORM_RENDERER
+   */
   protected function _draw_kind_selector ($form, $renderer)
   {
     $old_width = $renderer->default_control_width;
@@ -2017,5 +2023,3 @@ class SEARCH_FOLDER_FIELDS extends SEARCH_OBJECT_IN_FOLDER_FIELDS
     $this->_add_text ('summary', 'Summary');
   }
 }
-
-?>

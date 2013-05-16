@@ -52,7 +52,7 @@ class CHANGE_FORM extends PROJECT_ENTRY_FORM
    * @var string
    */
   public $name = 'change_form';
-  
+
   /**
    * @param PROJECT $folder Project in which to add or edit the change.
    */
@@ -185,6 +185,7 @@ class CHANGE_FORM extends PROJECT_ENTRY_FORM
   /**
    * Retrieve the job for 'id'
    * If the job cannot be assigned to this change or it's not visible, returns empty.
+   * @param $id
    * @return JOB
    * @access private
    */
@@ -219,24 +220,21 @@ class CHANGE_FORM extends PROJECT_ENTRY_FORM
       $this->_draw_branch_controls ($renderer);
     $renderer->finish_row ();
 
-    $renderer->draw_separator ();
     $renderer->draw_submit_button_row ();
 
-    $renderer->draw_separator ();
     $renderer->draw_text_box_row ('description');
 
-    $renderer->draw_separator ();
     $renderer->draw_text_box_row ('files');
 
-    $renderer->draw_separator ();
     $renderer->draw_submit_button_row ();
 
-    $renderer->draw_separator ();
     $renderer->draw_text_box_row ('extra_description');
-    $renderer->draw_separator ();
 
-    $branch_id = $this->value_for ('main_branch_id');    
-    $branch_query = $this->_folder->branch_query ();
+    $branch_id = $this->value_for ('main_branch_id');
+    /** @var $folder PROJECT */
+    $folder = $this->_folder;
+    $branch_query = $folder->branch_query ();
+    /** @var $branch BRANCH */
     $branch = $branch_query->object_at_id ($branch_id);
 
     $release_id = $this->value_for ("branch_{$branch_id}_release_id");
@@ -268,9 +266,9 @@ class CHANGE_FORM extends PROJECT_ENTRY_FORM
     }
 
     $entry_query->restrict ("(entry.id = $job_id) OR (closer_id <> 0) <> 0 OR (job.time_closed < '" . $t->as_iso () . "')");
-    $this->jobs = $entry_query->objects ();
+    $this->_jobs = $entry_query->objects ();
 
-    $num_jobs = sizeof ($this->jobs);
+    $num_jobs = sizeof ($this->_jobs);
     if ($num_jobs)
     {
       $props = $renderer->make_list_properties ();
@@ -278,11 +276,12 @@ class CHANGE_FORM extends PROJECT_ENTRY_FORM
 
       $props->add_item ('[None]', 0);
 
-      foreach ($this->jobs as $iter_job)
+      /** @var $j JOB */
+      foreach ($this->_jobs as $j)
       {
-        $t = $iter_job->title_formatter ();
+        $t = $j->title_formatter ();
         $t->max_visible_output_chars = 55;
-        $props->add_item ($iter_job->title_as_plain_text ($t), $iter_job->id);
+        $props->add_item ($j->title_as_plain_text ($t), $j->id);
       }
 
       $job = $this->job_at ($this->value_for ('job_id'));
@@ -299,14 +298,17 @@ class CHANGE_FORM extends PROJECT_ENTRY_FORM
       }
     }
 
-    $renderer->draw_separator ();
     $renderer->draw_submit_button_row ();
 
-    $renderer->draw_separator ();
     $this->_draw_history_item_controls ($renderer, false);
 
     $renderer->finish ();
   }
+
+  /**
+   * @var JOB[]
+   */
+  protected $_jobs;
 
   /**
    * @var QUERY

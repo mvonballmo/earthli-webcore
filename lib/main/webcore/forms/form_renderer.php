@@ -519,7 +519,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
     if (!empty($style) && sizeof ($style) > 0)
     {
       $style = implode ('; ', $style);
-      echo '<table class="form-' . $this->_form->CSS_class . '" style="' . $style . '">' . "\n";
+      echo '<table class="basic form-' . $this->_form->CSS_class . '" style="' . $style . '">' . "\n";
     }
     else
     {
@@ -622,7 +622,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
       $toggle = $Result->toggle_as_html ();
       if (! empty ($toggle))
       {
-        $title .= ' ' . $toggle;
+        $description = $toggle . ' ' . $description;
       }
       $description = sprintf ($description, 'Use the arrow to the left to show ');
     }
@@ -675,7 +675,8 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * This does its best to keep the sizing vis-a-vis other controls correct.
    * @param $title string The title to use for the row.
    * @param $text string The text to display.
-   * @param $class string CSS class used for text.
+   * @param string $CSS_class The class to use for the content box.
+   * @internal param string $class CSS class used for text.
    */
   public function draw_text_row ($title, $text, $CSS_class = '')
   {
@@ -1088,6 +1089,22 @@ class FORM_RENDERER extends CONTROLS_RENDERER
   }
 
   /**
+   * Draw the list of buttons in a row.
+   * Draws a series of buttons previously renderered with {@link javascript_button_as_html()},
+   * {@link button_as_html()} or {@link submit_button_as_html()}.
+   * @param array[string] $buttons
+   * @param string $title Title to show for this row.
+   */
+  public function draw_buttons_in_row($buttons, $title = '')
+  {
+    $this->start_button_row ($title);
+    echo '<div class="button-content">';
+    $this->draw_buttons ($buttons);
+    echo '</div>';
+    $this->finish_row ();
+  }
+
+  /**
    * Draw an icon text/browse button row.
    * @param string $field_id Name of the field for the text control.
    */
@@ -1231,7 +1248,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
 
       if ($text)
       {
-        $text = '<div class="notes">' . $text . '</div>';
+        $text = '<div class="text-box-description notes">' . $text . '</div>';
       }
 
       $Result .= '<div style="width: ' . $width . '">' . $text . '</div>';
@@ -1616,22 +1633,43 @@ class FORM_RENDERER extends CONTROLS_RENDERER
 
       if (empty($label_content))
       {
-        $CSS_class = 'empty-label';
-      }
-      else if ($field->required)
-      {
-        $CSS_class = "form-" . $this->_form->CSS_class . "-required";
+        ?>
+        <tr>
+        <td colspan="2" class="form-<?php echo $this->_form->CSS_class; ?>-content"><?php echo $control_text; ?></td>
+        </tr>
+        <?php
       }
       else
       {
-        $CSS_class = "form-" . $this->_form->CSS_class . "-label";
+        ?>
+        <tr>
+        <?php
+        if (ctype_space($label_content))
+        {
+        ?>
+          <td></td>
+        <?php
+        }
+        else
+        {
+          if ($field->required)
+          {
+            $CSS_class = "form-" . $this->_form->CSS_class . "-required";
+          }
+          else
+          {
+            $CSS_class = "form-" . $this->_form->CSS_class . "-label";
+          }
+          ?>
+            <td class="<?php echo $CSS_class; ?>"><?php echo $label_content; ?></td>
+        <?php
+        }
+        ?>
+          <td class="form-<?php echo $this->_form->CSS_class; ?>-content"><?php echo $control_text; ?></td>
+        </tr>
+          <?php
       }
-      ?>
-  <tr>
-    <td class="<?php echo $CSS_class; ?>"><?php echo $label_content; ?></td>
-    <td class="form-<?php echo $this->_form->CSS_class; ?>-content"><?php echo $control_text; ?></td>
-  </tr>
-  <?php
+
       $this->draw_error_row ($field->id);
     }
   }
