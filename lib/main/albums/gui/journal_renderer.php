@@ -69,8 +69,9 @@ class JOURNAL_RENDERER extends ENTRY_RENDERER
     <div>
       <?php echo $entry->weather_as_html () ?>
     </div>
-    <div style="clear:both"></div>
+    <div style="clear:both" class="text-flow">
 <?php echo $entry->description_as_html (); ?>
+    </div>
 <?php
     $this->_echo_html_user_information ($entry, 'info-box-bottom');
   }
