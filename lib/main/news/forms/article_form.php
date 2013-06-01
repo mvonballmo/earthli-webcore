@@ -87,8 +87,8 @@ class ARTICLE_FORM extends DRAFTABLE_ENTRY_FORM
    */
   protected function _draw_controls ($renderer)
   {
-    $renderer->set_width ('53em');
-    $renderer->default_control_height = '50em';
+    $renderer->set_width ('700px');
+    $renderer->default_control_height = '550px';
 
     parent::_draw_controls ($renderer);
   }
