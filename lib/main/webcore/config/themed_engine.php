@@ -77,8 +77,8 @@ class THEMED_ENGINE extends ENGINE
   protected function _init_theme ($page)
   {
     $page->default_theme->main_CSS_file_name = '{themes}/ice';
-    $page->default_theme->font_name_CSS_file_name = '{styles}fonts/verdana';
-    $page->default_theme->font_size_CSS_file_name = '{styles}core/small';
+    $page->default_theme->font_name_CSS_file_name = '{styles}fonts/raleway';
+    $page->default_theme->font_size_CSS_file_name = '{styles}core/medium';
   }
 
   /**

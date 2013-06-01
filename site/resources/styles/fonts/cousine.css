@@ -1,0 +1,8 @@
+@import "http://fonts.googleapis.com/css?family=Cousine";
+
+body,
+.text-control, .text-control-required,
+.menu-control, .menu-control-required
+{
+	font-family: "Cousine", "Courier New", Courier, mono
+}

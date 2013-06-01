@@ -88,7 +88,7 @@ class THEME_SETTINGS extends WEBCORE_OBJECT
    * with different themes.
    * @var string
    */
-  public $font_name_CSS_file_name = '{styles}fonts/segoe';
+  public $font_name_CSS_file_name = '{styles}fonts/raleway';
 
   /**
    * Name of the font-size stylesheet to use.
@@ -96,7 +96,7 @@ class THEME_SETTINGS extends WEBCORE_OBJECT
    * with different themes (font size is nice to adjust to suit their needs).
    * @var string
    */
-  public $font_size_CSS_file_name = '{styles}core/small';
+  public $font_size_CSS_file_name = '{styles}core/medium';
 
   /**
    *  Path to the icons folder.
@@ -310,12 +310,18 @@ class THEME_OPTIONS
    */
   protected function _init_font_names ()
   {
-    $this->add_font_name ('Arial', '{styles}fonts/arial');
-    $this->add_font_name ('Courier', '{styles}fonts/courier');
-    $this->add_font_name ('Geneva', '{styles}fonts/geneva');
-    $this->add_font_name ('Georgia', '{styles}fonts/georgia');
+    $this->add_font_name ('Anonymous Pro', '{styles}fonts/anonymous-pro');
+    $this->add_font_name ('Antic', '{styles}fonts/antic');
+    $this->add_font_name ('Buda', '{styles}fonts/buda');
+    $this->add_font_name ('Cousine', '{styles}fonts/cousine');
+    $this->add_font_name ('Forum', '{styles}fonts/forum');
+    $this->add_font_name ('Josefin Sans', '{styles}fonts/josefin-sans');
+    $this->add_font_name ('Jura', '{styles}fonts/jura');
+    $this->add_font_name ('Maven Pro', '{styles}fonts/maven-pro');
+    $this->add_font_name ('Open Sans', '{styles}fonts/open-sans');
+    $this->add_font_name ('Oxygen', '{styles}fonts/oxygen');
+    $this->add_font_name ('Raleway', '{styles}fonts/raleway');
     $this->add_font_name ('Segoe', '{styles}fonts/segoe');
-    $this->add_font_name ('Times', '{styles}fonts/times');
     $this->add_font_name ('Trebuchet', '{styles}fonts/trebuchet');
     $this->add_font_name ('Verdana', '{styles}fonts/verdana');
   }
