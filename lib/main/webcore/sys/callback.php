@@ -68,6 +68,7 @@ class CALLBACK
    * Execute the function with the given arguments.
    * @param array $args
    * @return object
+   * @throws UNKNOWN_VALUE_EXCEPTION
    */
   public function execute ($args = null)
   {

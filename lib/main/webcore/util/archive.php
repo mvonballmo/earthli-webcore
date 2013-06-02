@@ -368,11 +368,18 @@ abstract class COMPRESSED_FILE_ENTRY extends RAISABLE
   public $size;
 
   /**
-   * Location of extracted file.
+   * The path to the location where the file was extracted.
    * This property holds the last file produced when {@link extract_to()} was called. May be empty.
    * @var string
    */
   public $extracted_name;
+
+  /**
+   * The {@link $name} normalized for the target file system.
+   * This name is calculated using the standard FILE_URL options when the entry is created.
+   * @var string
+   */
+  public $normalized_name;
 
   /**
    * @param COMPRESSED_FILE $file
@@ -411,7 +418,7 @@ abstract class COMPRESSED_FILE_ENTRY extends RAISABLE
   public function extract_to ($path, $error_callback = null)
   {
     $url = new FILE_URL ($path);
-    $url->append ($this->name);
+    $url->append ($this->normalized_name);
     ensure_path_exists ($url->path ());
     $this->extracted_name = $url->as_text ();
 
@@ -490,7 +497,8 @@ class ZIP_FILE extends COMPRESSED_FILE
         $file_num += 1;
 
         $entry = new ZIP_ENTRY ($this, $this->_handle, $zip_entry, $opts);
-        $entry->name = normalize_path (zip_entry_name ($zip_entry), $opts);
+        $entry->name = zip_entry_name ($zip_entry);
+        $entry->normalized_name = normalize_path ($entry->name, $opts);
         $entry->number = $file_num;
         $entry->size = $size;
         $entry->compressed_size = zip_entry_compressedsize ($zip_entry);

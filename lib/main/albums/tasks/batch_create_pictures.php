@@ -184,6 +184,7 @@ class BATCH_CREATE_PICTURES_TASK extends TASK
     $entry->extract_to ($this->_target_directory, $error_callback);
 
     $class_name = $this->app->final_class_name ('IMAGE', 'webcore/util/image.php');
+    /** @var IMAGE $img */
     $img = new $class_name ();
     $img->set_file ($entry->extracted_name, $this->read_exif);
     if ($img->loadable ())
@@ -231,7 +232,7 @@ class BATCH_CREATE_PICTURES_TASK extends TASK
 
       $pic = $this->_folder->new_object ('picture');
       $pic->title = $pic_title;
-      $pic->file_name = $entry->name;
+      $pic->file_name = $entry->normalized_name;
       $pic->date = $pic_date;
       $history_item = $pic->new_history_item ();
       $pic->store_if_different ($history_item);
