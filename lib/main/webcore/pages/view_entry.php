@@ -134,20 +134,26 @@ http://www.earthli.com/software/webcore
     echo $entry->title_as_html ($t);
     ?>
     </h1>
-<?php
+  <?php
   $renderer = $entry->handler_for (Handler_html_renderer);
   $renderer->display ($entry);
-?>
-  </div>
-</div>
-<?php
+
   /** @var $associated_data ENTRY_ASSOCIATED_DATA_RENDERER */
   $associated_data = $entry->handler_for (Handler_associated_data);
   if (isset ($associated_data))
   {
-    $associated_data->display ($entry);
+    ?>
+    <div style="clear: both">
+    <?php
+      $associated_data->display ($entry);
+    ?>
+    </div>
+    <?php
   }
-
+?>
+  </div>
+</div>
+<?php
   $Page->finish_display ();
 }
 else
