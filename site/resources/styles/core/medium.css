@@ -26,17 +26,17 @@ http://www.earthli.com/software/webcore
 
 h1, .banner-title
 {
-  font-size: 24pt
+  font-size: 24pt;
 }
 
 h2, .box-title, .side-bar-title
 {
-  font-size: 16pt
+  font-size: 20pt
 }
 
 h3, .menu-title
 {
-  font-size: 14pt
+  font-size: 18pt
 }
 
 body,

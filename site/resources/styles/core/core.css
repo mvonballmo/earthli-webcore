@@ -125,21 +125,15 @@ table.left-labels.top > tbody > tr > th:first-child
   vertical-align: top;
 }
 
-h1, h3, h4
-{
-  font-weight: normal
-}
-
-h2 
-{
-  font-weight: normal;
-}
-
+h1,
+h2,
+h3,
+h4,
 h5
 {
-  font-weight: bold;
-  margin: 0;
-  padding: 2px 0
+  font-weight: normal;
+  margin-top: 1em;
+  margin-bottom: .25em;
 }
 
 dl
