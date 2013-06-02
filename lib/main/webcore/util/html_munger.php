@@ -2059,7 +2059,7 @@ class HTML_HEADING_REPLACER extends MUNGER_REPLACER
 
   /**
    * Convert the given token to the output format.
-   * @param MUNGER $munger The transformation context.
+   * @param HTML_MUNGER $munger The transformation context.
    * @param MUNGER_TOKEN $token
    * @return string
    */
@@ -2067,16 +2067,20 @@ class HTML_HEADING_REPLACER extends MUNGER_REPLACER
   {
     if ($token->is_start_tag ())
     {
-      $attrs = $token->attributes ();
+      $attributes = $token->attributes ();
 
-      $this->_level = read_array_index ($attrs, 'level');
+      $this->_level = read_array_index ($attributes, 'level');
 
       if (! is_numeric ($this->_level))
       {
         $this->_level = $this->default_level;
       }
 
-      return "<h$this->_level>";
+      $builder = $munger->make_tag_builder ("h$this->_level");
+      $builder->add_array_attribute ('class', $attributes);
+      $builder->add_array_attribute ('style', $attributes);
+
+      return $builder->as_html();
     }
 
     return "</h$this->_level>";
