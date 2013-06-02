@@ -647,7 +647,6 @@ table.basic > tbody > tr > td.empty-label
 .text-flow ul li,
 .text-flow ol li
 {
-  line-height: 140%;
   padding-left: .4em;
 }
 
