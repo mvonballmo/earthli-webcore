@@ -176,8 +176,8 @@ class JOB_HISTORY_ITEM extends PROJECT_ENTRY_HISTORY_ITEM
 
   /**
    * Record differences for two branches.
-   * @param PROJECT_ENTRY_BRANCH_INFO $orig_branch
-   * @param PROJECT_ENTRY_BRANCH_INFO $new_branch
+   * @param JOB_BRANCH_INFO $orig_branch
+   * @param JOB_BRANCH_INFO $new_branch
    * @access private
    */
   protected function _record_branch_differences ($orig_branch, $new_branch)
@@ -186,17 +186,25 @@ class JOB_HISTORY_ITEM extends PROJECT_ENTRY_HISTORY_ITEM
 
     if ($orig_branch->status != $new_branch->status)
     {
-      $orig_title = $orig_branch->status_as_text ();
-      $new_title = $new_branch->status_as_text ();
+      $orig_status_properties = $orig_branch->status_properties();
+      $new_status_properties = $new_branch->status_properties();
+
+      $orig_title = $orig_status_properties->title;
+      $new_title = $new_status_properties->title;
       $branch_title = $orig_branch->title_as_plain_text ();
+
       $this->_record_string_difference ("Status in branch [$branch_title]", $orig_title, $new_title);
     }
 
     if ($orig_branch->priority != $new_branch->priority)
     {
-      $orig_title = $orig_branch->priority_as_text ();
-      $new_title = $new_branch->priority_as_text ();
+      $orig_priority_properties = $orig_branch->priority_properties();
+      $new_priority_properties = $new_branch->priority_properties();
+
+      $orig_title = $orig_priority_properties->title;
+      $new_title = $new_priority_properties->title;
       $branch_title = $orig_branch->title_as_plain_text ();
+
       $this->_record_string_difference ("Priority in branch [$branch_title]", $orig_title, $new_title);
     }
   }
@@ -410,8 +418,10 @@ class PROJECT_HISTORY_ITEM extends FOLDER_HISTORY_ITEM
 
   /**
    * Description of reporter options.
-   * @param PROJECT_OPTIONS $options
+   * @param $type integer The type of permission.
+   * @param GROUP $group The group to use if {@link $type} is equal to {@link Project_user_group}.
    * @return string
+   * @throws UNKNOWN_VALUE_EXCEPTION
    * @access private
    */
   protected function _text_for_user_list_options ($type, $group)
@@ -429,5 +439,3 @@ class PROJECT_HISTORY_ITEM extends FOLDER_HISTORY_ITEM
     }
   }
 }
-
-?>

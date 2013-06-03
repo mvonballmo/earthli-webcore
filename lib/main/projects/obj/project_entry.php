@@ -226,7 +226,7 @@ abstract class PROJECT_ENTRY extends MULTI_TYPE_ENTRY
    * Return the list of unstored branches.
    * Used with {@link PROJECT_ENTRY::current_branch_infos()} to determine whether an object's
    * branches have changed.
-   * @return array[integer,PROJECT_ENTRY_BRANCH_INFO]
+   * @return PROJECT_ENTRY_BRANCH_INFO[]
    */
   public function stored_branch_infos ()
   {
