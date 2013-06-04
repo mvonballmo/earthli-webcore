@@ -754,7 +754,7 @@ ul.menu-buttons > li + li
 
 .menu-group-title 
 {
-  padding: 5px;
+  padding: .6em .5em;
   border-bottom: 1px dotted #CCC;
 }
 
@@ -773,7 +773,7 @@ ul.menu-buttons > li + li
 
 .menu-item 
 {
-  padding: 5px;
+  padding: .6em .5em;
   display: block;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
