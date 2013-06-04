@@ -689,7 +689,7 @@ ul.menu-items > li,
 .text-flow ul.menu-items > li
 {
   line-height: 100%;
-  display: inline-block;
+  display: inline;
   margin-right: 5px;
 }
 
