@@ -67,6 +67,24 @@ a:active
 	color: #FFFF00;
 }
 
+.button
+{
+  background-color: #333;
+  border: 1px solid #555;
+}
+
+.button:hover
+{
+  border-color: #999;
+  background-color: #444;
+}
+
+.button.disabled
+{
+  background-color: #222;
+  border: 1px solid #333;
+}
+
 .box-title
 {
 	color: #FF9933;
