@@ -125,6 +125,12 @@ table.left-labels.top > tbody > tr > th:first-child
   vertical-align: top;
 }
 
+table.left-labels.bottom > tbody > tr > td:first-child,
+table.left-labels.bottom > tbody > tr > th:first-child
+{
+  vertical-align: bottom;
+}
+
 h1,
 h2,
 h3,
@@ -154,7 +160,6 @@ td
 th 
 {
   font-weight: bold;
-  vertical-align: bottom;
   border-bottom: 1px solid #CCC
 }
 
