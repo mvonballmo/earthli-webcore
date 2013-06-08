@@ -26,7 +26,7 @@ http://www.earthli.com/software/webcore
 
 ****************************************************************************/
 
-  $Page->title->subject = 'Subscribe';
+  $Page->title->subject = 'Subscriptions';
 
   $email = read_var ('email');
   if (! $email)
@@ -35,6 +35,7 @@ http://www.earthli.com/software/webcore
   }
 
   $subscribed = read_var ('subscribed');
+  $return_url = read_var ('return_url');
 
   if (isset ($obj) && $email)
   { 
@@ -48,6 +49,11 @@ http://www.earthli.com/software/webcore
     if ($subscriber->subscribed($obj, $sub_type) != $subscribed)
     {
       $subscriber->set_subscribed ($obj, $sub_type, $subscribed);
+    }
+
+    if ($return_url)
+    {
+      $Env->redirect_local($return_url);
     }
 
     $Page->location->append($Page->title->subject, '', '{icons}indicators/subscribed');
