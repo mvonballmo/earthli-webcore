@@ -57,6 +57,13 @@ select
   padding: 4px;
 }
 
+button,
+.text-control, .text-control-required,
+.menu-control, .menu-control-required
+{
+  font-family: inherit;
+}
+
 input[type="radio"], input[type="checkbox"]
 {
 	vertical-align: middle;

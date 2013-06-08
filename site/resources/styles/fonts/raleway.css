@@ -1,8 +1,6 @@
 @import "http://fonts.googleapis.com/css?family=Raleway:400,700";
 
-body,
-.text-control, .text-control-required,
-.menu-control, .menu-control-required
+body
 {
 	font-family: 'Raleway', Verdana, Arial, Helvetica, san-serif;
 }
