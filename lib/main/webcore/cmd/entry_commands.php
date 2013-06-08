@@ -153,7 +153,7 @@ class ENTRY_COMMANDS extends COMMANDS
     $cmd->link = "view_entry_plain_text.php?id=$entry->id";
     $cmd->icon = '{icons}indicators/text';
     $cmd->executable = true;
-    $cmd->importance = Command_importance_high - Command_importance_increment;
+    $cmd->importance = Command_importance_high - Command_importance_increment * 2;
     $this->append ($cmd);
 
     $cmd = $this->make_command ();
