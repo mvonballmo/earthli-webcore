@@ -1213,15 +1213,13 @@ blockquote p:first-child, .side-bar-body p:first-child, .chart-body p:first-chil
 .auto-content-inline
 {
   display: block;
-  text-align: center;  
 }
 
 .auto-content-caption
 {
   font-size: 85%;
-  padding-top: .5em;
+  padding-top: 5px;
   display: block;
-  text-align: center;
 }
 
 .footnote-number 
