@@ -49,6 +49,17 @@ table th
   text-align: left;
 }
 
+table td
+{
+  text-align: left
+}
+
+table th
+{
+  font-weight: bold;
+  border-bottom: 1px solid #CCC
+}
+
 table td p:first-child,
 table td pre:first-child,
 table td ul:first-child
@@ -152,17 +163,6 @@ dd
   margin: 5px 0 15px 1.5em
 }
 
-td 
-{
-  text-align: left
-}
-
-th 
-{
-  font-weight: bold;
-  border-bottom: 1px solid #CCC
-}
-
 a:active,
 a:hover
 {
@@ -185,9 +185,27 @@ dfn, var, cite
   font-style: italic;
 }
 
+abbr
+{
+  border-bottom: 1px dotted #AAA;
+}
+
 var, kbd
 {
   font-family: monospace;
+}
+
+kbd
+{
+  display: inline-block;
+  background-color: #FAFAFA;
+  border-radius: 4px;
+  border: 1px solid #CCCCCC;
+  border-bottom: medium none #FFFFFF;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.196), 0 0 0 1px #FFFFFF inset;
+  color: #444444;
+  padding: 2px 5px;
+  white-space: nowrap;
 }
 
 .shell

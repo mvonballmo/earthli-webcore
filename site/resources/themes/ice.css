@@ -52,6 +52,11 @@ table.columns > tbody > tr > th
   border-right: 1px solid #4A8CCA;
 }
 
+table th
+{
+  border-bottom: 1px solid #4A8CCA;
+}
+
 th.basic
 {
   border-bottom: 1px solid #4A8CCA;
@@ -59,7 +64,7 @@ th.basic
 
 hr, .horizontal-separator, .vertical-separator
 {
-	border-color: #CCCCCC;
+	border-color: #4A8CCA;
 }
 
 .cell-non-empty, .cell-selected, .cell-highlight
@@ -80,6 +85,7 @@ hr, .horizontal-separator, .vertical-separator
 .highlight
 {
 	color: #00AA00;
+  font-weight: normal;
 }
 
 .menu

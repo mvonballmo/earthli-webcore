@@ -637,15 +637,19 @@ class HTML_PUNCTUATION_CONVERTER extends MUNGER_CONVERTER
                                  , '(R)' => '&reg;'
                                  , ' x ' => ' &times; '
                                  , ' - ' => ' &minus; '
-                                 , '(S,)' => '&#350;'     // Turkish S with cedilla
-                                 , '(s,)' => '&#351;'     // Turkish s with cedilla
-                                 , '(C,)' => '&Ccedil;'   // Turkish C with cedilla
-                                 , '(c,)' => '&ccedil;'   // Turkish c with cedilla
-                                 , '(i-)' => '&#305;'     // Turkish i without dot
-                                 , '(g-)' => '&#287;'     // Turkish g (silent)
-                                 , '(I.)' => '&#304;'     // Turkish I with dot
-                                 , '(Z-)' => '&#381;'      // Slavic Z with a caron    
-                                 , '(z-)' => '&#382;'      // Slavic z with a caron    
+                                 , '(S,)' => '&#350;'      // Turkish S with cedilla
+                                 , '(s,)' => '&#351;'      // Turkish s with cedilla
+                                 , '(C,)' => '&Ccedil;'    // Turkish C with cedilla
+                                 , '(c,)' => '&ccedil;'    // Turkish c with cedilla
+                                 , '(i-)' => '&#305;'      // Turkish i without dot
+                                 , '(g-)' => '&#287;'      // Turkish g (silent)
+                                 , '(I.)' => '&#304;'      // Turkish I with dot
+                                 , '(Z-)' => '&#381;'      // Slavic Z with a caron
+                                 , '(z-)' => '&#382;'      // Slavic z with a caron
+                                 , '(-cmd)' => '&#8984;'   // Command-key icon for Apple
+                                 , '(-shift)' => '&#8679;' // Shift-key icon
+                                 , '(-opt)' => '&#8997;'   // Option-key icon
+                                 , '(-eject)' => '&#9167;'   // Eject-key icon
                                  );
 
   /**
@@ -2226,7 +2230,7 @@ class HTML_BASE_MUNGER extends HTML_MUNGER
     $this->register_replacer ('n', new MUNGER_BASIC_REPLACER ('<small class="notes">', '</small>'));
     $this->register_replacer ('c', new MUNGER_BASIC_REPLACER ('<code>', '</code>'));
     $this->register_replacer ('hl', new MUNGER_BASIC_REPLACER ('<strong class="highlight">', '</strong>'));
-    $this->register_replacer ('del', new MUNGER_BASIC_REPLACER ('<del>', '</del>'));
+    $this->register_known_tag ('del', true);  // deleted text
     $this->register_known_tag ('var', true);  // program variables
     $this->register_known_tag ('kbd', true);  // keyboard input
     $this->register_known_tag ('dfn', true);  // defining instance of a term

@@ -56,7 +56,7 @@ http://www.earthli.com/software/webcore
       <li><a href="#links">Links</a></li>
       <li><a href="#images">Images</a></li>
       <li><a href="#videos">Videos</a></li>
-      <li><a href="#fonts">Font formatting</a></li>
+      <li><a href="#character">Character formatting</a></li>
       <li><a href="#generic">Generic formatting</a></li>
       <li><a href="#lists">Lists</a></li>
       <li><a href="#quoting">Quoting</a></li>
@@ -104,34 +104,76 @@ http://www.earthli.com/software/webcore
       <th>Output</th>
     </tr>
     <tr>
-      <td>"---"</td><td>&mdash;</td>
+      <td>---</td><td>&mdash;</td>
     </tr>
     <tr>
-      <td>"--"</td><td>&#8211;</td>
+      <td>--</td><td>&#8211;</td>
     </tr>
     <tr>
-      <td>"1/2"</td><td>&frac12;</td>
+      <td>1/2</td><td>&frac12;</td>
     </tr>
     <tr>
-      <td>"1/4"</td><td>&frac14;</td>
+      <td>1/4</td><td>&frac14;</td>
     </tr>
     <tr>
-      <td>"3/4"</td><td>&frac34;</td>
+      <td>3/4</td><td>&frac34;</td>
     </tr>
     <tr>
-      <td>"..."</td><td>&#8230;</td>
+      <td>...</td><td>&#8230;</td>
     </tr>
     <tr>
-      <td>"(tm)"</td><td>&trade;</td>
+      <td>(tm)</td><td>&trade;</td>
     </tr>
     <tr>
-      <td>"(c)"</td><td>&copy;</td>
+      <td>(c)</td><td>&copy;</td>
     </tr>
     <tr>
-      <td>"(r)"</td><td>&reg;</td>
+      <td>(r)</td><td>&reg;</td>
     </tr>
     <tr>
-      <td>" x "</td><td>&times;</td>
+      <td> x </td><td>&times;</td>
+    </tr>
+    <tr>
+      <td> - </td><td>&minus;</td>
+    </tr>
+    <tr>
+      <td>(S,)</td><td>&#350;</td>
+    </tr>
+    <tr>
+      <td>(s,)</td><td>&#351;</td>
+    </tr>
+    <tr>
+      <td>(C,)</td><td>&Ccedil;</td>
+    </tr>
+    <tr>
+      <td>(c,)</td><td>&ccedil;</td>
+    </tr>
+    <tr>
+      <td>(i-)</td><td>&#305;</td>
+    </tr>
+    <tr>
+      <td>(g-)</td><td>&#287;</td>
+    </tr>
+    <tr>
+      <td>(I.)</td><td>&#304;</td>
+    </tr>
+    <tr>
+      <td>(Z-)</td><td>&#381;</td>
+    </tr>
+    <tr>
+      <td>(z-)</td><td>&#382;</td>
+    </tr>
+    <tr>
+      <td>(-cmd)</td><td>&#8984;</td>
+    </tr>
+    <tr>
+      <td>(-shift)</td><td>&#8679;</td>
+    </tr>
+    <tr>
+      <td>(-opt)</td><td>&#8997;</td>
+    </tr>
+    <tr>
+      <td>(-eject)</td><td>&#9167;</td>
     </tr>
   </table>
   <p>Additionally, the following character pairs are automatically converted to
@@ -144,19 +186,19 @@ http://www.earthli.com/software/webcore
       <th>Output</th>
     </tr>
     <tr>
-      <td>"ffi"</td><td>&#xfb03;</td>
+      <td>ffi</td><td>&#xfb03;</td>
     </tr>
     <tr>
-      <td>"ffl"</td><td>&#xfb04;</td>
+      <td>ffl</td><td>&#xfb04;</td>
     </tr>
     <tr>
-      <td>"ff"</td><td>&#xfb00;</td>
+      <td>ff</td><td>&#xfb00;</td>
     </tr>
     <tr>
-      <td>"fi"</td><td>&#xfb01;</td>
+      <td>fi</td><td>&#xfb01;</td>
     </tr>
     <tr>
-      <td>"fl"</td><td>&#xfb02;</td>
+      <td>fl</td><td>&#xfb02;</td>
     </tr>
   </table>
   <h2 id="paths">Paths/resources</h2>
@@ -511,10 +553,83 @@ http://www.earthli.com/software/webcore
     the same for videos. You can reference local videos using the "attachment"
     property or remote videos using a full url in the "src" property. The "href"
     property is not used for videos.</p>
-  <h2 id="fonts">Font formatting</h2>
-  <p>There are two font formatting tags, <span class="highlight">&lt;i&gt;</span>
-    and <span class="highlight">&lt;b&gt;</span>. In the HTML formatter, these
-    translate to 'em' and 'strong'. They are ignored in the plain-text formatter.</p>
+  <h2 id="character">Character formatting</h2>
+  <p>There are several character-formatting tags, aligned more or less with the common
+    HTML tags. These are all ignored in the plain-text formatter.</p>
+  <table class="basic columns left-labels">
+    <tr>
+      <th>Tag</th>
+      <th>Input</th>
+      <th>Output</th>
+      <th>Description</th>
+    </tr>
+    <tr>
+      <th>b</th>
+      <td>&lt;b&gt;strong&lt;/b&gt;</td>
+      <td><strong>strong</strong></td>
+      <td>Strongly formatted text</td>
+    </tr>
+    <tr>
+      <th>i</th>
+      <td>&lt;i&gt;emphasized&lt;/i&gt;</td>
+      <td><em>emphasized</em></td>
+      <td>Emphasized text</td>
+    </tr>
+    <tr>
+      <th>n</th>
+      <td>&lt;n&gt;notes&lt;/n&gt;</td>
+      <td><small class="notes">notes</small></td>
+      <td>Notes/comments</td>
+    </tr>
+    <tr>
+      <th>c</th>
+      <td>&lt;c&gt;code&lt;/c&gt;</td>
+      <td><code>code</code></td>
+      <td>Inline code</td>
+    </tr>
+    <tr>
+      <th>hl</th>
+      <td>&lt;hl&gt;highlighted&lt;/hl&gt;</td>
+      <td><strong class="highlight">highlighted</strong></td>
+      <td>Highlighted text</td>
+    </tr>
+    <tr>
+      <th>del</th>
+      <td>&lt;del&gt;deleted&lt;/del&gt;</td>
+      <td><del>deleted</del></td>
+      <td>Deleted text</td>
+    </tr>
+    <tr>
+      <th>var</th>
+      <td>&lt;var&gt;variableOne&lt;/var&gt;</td>
+      <td><var>variableOne</var></td>
+      <td>Variable names</td>
+    </tr>
+    <tr>
+      <th>kbd</th>
+      <td>&lt;kbd&gt;(-cmd)&lt;/kbd&gt; + &lt;kbd&gt;B&lt;/kbd&gt;</td>
+      <td><kbd>&#8984;</kbd> + <kbd>B</kbd></td>
+      <td>Keyboard characters</td>
+    </tr>
+    <tr>
+      <th>dfn</th>
+      <td>&lt;dfn&gt;definition&lt;/dfn&gt;</td>
+      <td><dfn>definition</dfn></td>
+      <td>Definitions</td>
+    </tr>
+    <tr>
+      <th>abbr</th>
+      <td>&lt;abbr title="Computer-aided Design"&gt;CAD&lt;/abbr&gt;</td>
+      <td><abbr title="Computer-aided Design">CAD</abbr></td>
+      <td>Abbreviations</td>
+    </tr>
+    <tr>
+      <th>cite</th>
+      <td>&lt;cite&gt;citation&lt;/cite&gt;</td>
+      <td><cite>citation</cite></td>
+      <td>Citations</td>
+    </tr>
+  </table>
   <h2 id="generic">Generic formatting</h2>
   <p>You may also use <span class="highlight">&lt;span&gt;</span> and <span class="highlight">&lt;div&gt;</span>
     tags. In the HTML formatter, they are copied in as tags and will have
