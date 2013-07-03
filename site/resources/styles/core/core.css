@@ -206,6 +206,7 @@ kbd
   color: #444444;
   padding: 2px 5px;
   white-space: nowrap;
+  margin-bottom: 3px;
 }
 
 .shell
