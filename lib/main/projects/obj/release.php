@@ -421,13 +421,12 @@ class RELEASE extends OBJECT_IN_FOLDER
    * @param string $separator Optional separator. If not set, {@link APPLICATION_DISPLAY_OPTIONS::$obj_url_separator} is used.
    * @param TITLE_FORMATTER $formatter Optional formatter to use.
    * @return string
-   * @access private
    */
-  protected function _object_url ($use_links, $separator = null, $formatter = null)
+  public function object_url ($use_links, $separator = null, $formatter = null)
   {
-    $Result = parent::_object_url ($use_links, $separator, $formatter);
+    $Result = parent::object_url ($use_links, $separator, $formatter);
     $branch = $this->branch ();
-    $branch_url = $branch->_object_url ($use_links, $separator, $formatter);
+    $branch_url = $branch->object_url ($use_links, $separator, $formatter);
 
     if (! isset ($separator))
     {

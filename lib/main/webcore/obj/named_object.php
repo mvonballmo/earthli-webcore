@@ -132,7 +132,7 @@ abstract class NAMED_OBJECT extends STORABLE
    */
   public function object_url_as_text ($separator = null, $formatter = null)
   {
-    return $this->_object_url (false, $separator, $formatter);
+    return $this->object_url (false, $separator, $formatter);
   }
 
   /**
@@ -146,7 +146,7 @@ abstract class NAMED_OBJECT extends STORABLE
    */
   public function object_url_as_link ($separator = null, $formatter = null)
   {
-    return $this->_object_url (true, $separator, $formatter);
+    return $this->object_url (true, $separator, $formatter);
   }
 
   /**
@@ -261,9 +261,8 @@ abstract class NAMED_OBJECT extends STORABLE
    * @param string $separator Optional separator. If not set, {@link APPLICATION_DISPLAY_OPTIONS::$obj_url_separator} is used.
    * @param TITLE_FORMATTER $formatter Optional formatter to use.
    * @return string
-   * @access private
    */
-  protected function _object_url ($use_links, $separator = null, $formatter = null)
+  public function object_url ($use_links, $separator = null, $formatter = null)
   {
     if (! isset ($formatter))
     {
