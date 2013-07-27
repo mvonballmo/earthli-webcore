@@ -65,8 +65,9 @@ class SEARCH_PROJECT_ENTRY_FIELDS extends SEARCH_ENTRY_FIELDS
   /**
    * Add fields for search properties to this form.
    * @param FORM $form
+   * @param boolean $extra_visibility Default visibility for extra search fields.
    */
-  public function add_fields ($form)
+  public function add_fields ($form, $extra_visibility = true)
   {
     parent::add_fields ($form);
 
@@ -107,7 +108,7 @@ class SEARCH_PROJECT_ENTRY_FIELDS extends SEARCH_ENTRY_FIELDS
   /**
    * Restrict the query by these fields.
    * @param QUERY $query The query to which to apply parameters.
-   * @param object $obj The object from which to extract parameters.
+   * @param stdClass $obj The object from which to extract parameters.
    */
   public function apply_to_query ($query, $obj)
   {

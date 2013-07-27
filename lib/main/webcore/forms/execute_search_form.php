@@ -117,8 +117,8 @@ class EXECUTE_SEARCH_FORM extends ID_BASED_FORM
       $field->caption = '';
       $this->add_field ($field);
 
-      $tsearch = $this->app->make_search ($type);
-      $tsearch->fields->add_fields ($this, false);
+      $search_template = $this->app->make_search ($type);
+      $search_template->fields->add_fields ($this, false);
     }
 
     $field = new BOOLEAN_FIELD ();

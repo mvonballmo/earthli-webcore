@@ -86,8 +86,9 @@ class SEARCH_JOURNAL_FIELDS extends SEARCH_ENTRY_FIELDS
   /**
    * Add fields for search properties to this form.
    * @param FORM $form
+   * @param boolean $extra_visibility Default visibility for extra search fields.
    */
-  public function add_fields ($form)
+  public function add_fields ($form, $extra_visibility = true)
   {
     parent::add_fields ($form);
 

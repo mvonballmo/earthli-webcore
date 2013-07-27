@@ -444,11 +444,10 @@ abstract class QUERY extends WEBCORE_OBJECT
 
   /**
    * Restrict on a date field.
-   * 'from' or 'to' may be empty. If 'table' is not specified, it defaults to {@link $alias}.
+   * 'from' or 'to' may be empty.
    * @param string $field
    * @param DATE_TIME $from
    * @param DATE_TIME $to
-   * @param string $table
    */
   public function restrict_date ($field, $from, $to)
   {
