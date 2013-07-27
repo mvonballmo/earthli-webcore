@@ -71,6 +71,7 @@ http://www.earthli.com/software/webcore
 </div>
 <div class="button-content">
   <?php
+    /** @var SUBSCRIPTION_RENDERER $subscription_status */
     $subscription_status = $obj->handler_for (Handler_subscriptions);
     $subscription_status->display ($obj);
   ?>

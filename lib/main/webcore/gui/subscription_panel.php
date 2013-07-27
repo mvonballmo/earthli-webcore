@@ -560,9 +560,12 @@ class SUBSCRIPTION_SUMMARY_PANEL extends SUBSCRIPTION_PANEL
 
     $renderer = $this->context->make_controls_renderer ();
     $button = $renderer->button_as_html ('Change...', $url->as_text (), '{icons}buttons/edit');
-    $this->_echo_button_with_description ('', $button);
 
-  $panels = $this->_panel_manager->ordered_panels (Panel_location);
+    echo '<table class="basic columns">';
+
+    $this->_echo_button_with_description ('Settings', $button);
+
+    $panels = $this->_panel_manager->ordered_panels (Panel_location);
     foreach ($panels as $panel)
     {
       if ($this->_is_summarizable ($panel))
@@ -573,6 +576,8 @@ class SUBSCRIPTION_SUMMARY_PANEL extends SUBSCRIPTION_PANEL
         $this->_echo_button_with_description ($desc, $button);
       }
     }
+
+    echo '</table>';
   ?>
 <?php
   }
@@ -585,24 +590,16 @@ class SUBSCRIPTION_SUMMARY_PANEL extends SUBSCRIPTION_PANEL
    */
   protected function _echo_button_with_description ($desc, $button)
   {
-  ?>
-  <div>
-    <div style="float: right">
-  <?php
-    echo $button;
-  ?>
-    </div>
-  <?php
-    echo $desc
-  ?>
-  </div>
-  <p class="horizontal-separator" style="clear: both">&nbsp;</p>
-  <?php
+    echo '<tr>';
+    echo '<td>' . $desc . '</td>';
+    echo '<td>' . $button . '</td>';
+    echo '</tr>';
   }
 
   /**
    * Display a summary of this panel?
    * @var PANEL $panel
+   * @return bool
    */
   protected function _is_summarizable ($panel)
   {

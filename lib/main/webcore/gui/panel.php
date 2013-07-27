@@ -176,7 +176,7 @@ class PANEL_MANAGER extends WEBCORE_OBJECT
    * Retrieve panels in location or selection order.
    * @see PANEL
    * @param integer $flag Can be {@link Panel_location} or {@link Panel_selection}.
-   * @return array[PANEL]
+   * @return PANEL[]
    */
   public function ordered_panels ($flag)
   {
@@ -283,7 +283,7 @@ class PANEL_MANAGER extends WEBCORE_OBJECT
 
   /**
    * Subsequent panels are added after panel 'id'.
-   * If a descendent needs to insert a lot of panels, set the insertion
+   * If a descendant needs to insert a lot of panels, set the insertion
    * point so that calls to {@link add_panel()} insert after panel 'id' rather
    * than appending. Panels can always be moved with {@link move_panel_after()}
    * and {@link move_panel_to()}.
@@ -416,7 +416,7 @@ class PANEL_MANAGER extends WEBCORE_OBJECT
 
   /**
    * Create the set of panels to use.
-   * Override in descendent classes.
+   * Override in descendant classes.
    * @access private
    */
   protected function _add_panels ()
@@ -428,7 +428,7 @@ class PANEL_MANAGER extends WEBCORE_OBJECT
    * Called from {@link move_panel()}.
    * @param string $id Name of the panel to move.
    * @param integer $index Position in the ordering.
-   * @param array &$panels List of panels to move.
+   * @param PANEL[] &$panels List of panels to move.
    * @access private
    */
   protected function _move_panel_to ($id, $index, &$panels)
@@ -470,7 +470,7 @@ class PANEL_MANAGER extends WEBCORE_OBJECT
    * Panels ids in the order they should be selected.
    * By default, these are in the order in which they were added with {@link
    * add_panel()}.
-   * @var array[PANEL]
+   * @var PANEL[]
    * @see PANEL
    * @access private
    */
@@ -480,7 +480,7 @@ class PANEL_MANAGER extends WEBCORE_OBJECT
    * Panels ids in the order they should be displayed.
    * By default, these are in the order in which they were added with {@link
    * add_panel()}.
-   * @var array[PANEL]
+   * @var PANEL[]
    * @see PANEL
    * @access private
    */
@@ -748,7 +748,7 @@ class WEBCORE_PANEL_MANAGER extends PANEL_MANAGER
 {
   /**
    * Add a {@link FOLDER_PANEL} for the given query.
-   * @param array[FOLDER] $folders
+   * @param FOLDER[] $folders
    * @see FOLDER
    * @see _add_folder_panels()
    * @access private
@@ -874,7 +874,7 @@ class INDEX_PANEL_MANAGER extends WEBCORE_PANEL_MANAGER
 {
   /**
    * @param APPLICATION $app Main application.
-   * @param array[FOLDER] $folders Show panels for these folders.
+   * @param FOLDER[] $folders Show panels for these folders.
    * @see FOLDER
    */
   public function __construct ($app, $folders)
@@ -934,7 +934,7 @@ class INDEX_PANEL_MANAGER extends WEBCORE_PANEL_MANAGER
   }
 
   /**
-   * @var array[FOLDER]
+   * @var FOLDER[]
    * @see FOLDER
    * @access private
    */
@@ -1596,14 +1596,14 @@ class FOLDER_PANEL extends GRID_PANEL
   public $rows = 5;
   
   /**
-   * @var array[FOLDER]
+   * @var FOLDER[]
    * @see FOLDER
    */
   public $folders;
 
   /**
    * @param PANEL_MANAGER $manager Owner of this panel.
-   * @param array[FOLDER] $folders Show this list of folders in this panel.
+   * @param FOLDER[] $folders Show this list of folders in this panel.
    * @see FOLDER
    */
   public function __construct ($manager, $folders)
@@ -1645,7 +1645,7 @@ class FOLDER_PANEL extends GRID_PANEL
   }
 
   /**
-   * @param array[FOLDER]
+   * @param FOLDER[]
    * @return integer
    * @access private
    */
