@@ -236,8 +236,9 @@ class CHANGE_RENDERER extends PROJECT_ENTRY_RENDERER
   /**
    * Outputs the object for print preview.
    * @param CHANGE $entry
+   * @param OBJECT_RENDERER_OPTIONS $options
    */
-  public function display_as_printable ($entry)
+  public function display_as_printable ($entry, $options = null)
   {
     $this->_hide_files = ! $this->_options->show_files;
     parent::display_as_printable ($entry);

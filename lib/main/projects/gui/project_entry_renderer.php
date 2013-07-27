@@ -280,11 +280,12 @@ abstract class PROJECT_ENTRY_RENDERER extends ENTRY_RENDERER
   /**
    * Outputs the object for print preview.
    * @param PROJECT_ENTRY $entry
+   * @param OBJECT_RENDERER_OPTIONS $options
    */
-  public function display_as_printable ($entry)
+  public function display_as_printable ($entry, $options = null)
   {
     $this->_hide_users = ! $this->_options->show_users;
-    parent::display_as_printable ($entry);
+    parent::display_as_printable ($entry, $options);
   }
 
   /**
