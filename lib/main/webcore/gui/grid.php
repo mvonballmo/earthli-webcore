@@ -608,6 +608,8 @@ abstract class GRID extends WEBCORE_OBJECT
  */
 abstract class HTML_TABLE_GRID extends GRID
 {
+  public $table_style = 'basic';
+
   /**
    * Start rendering the grid.
    * @access private
@@ -616,7 +618,7 @@ abstract class HTML_TABLE_GRID extends GRID
   {
     $style = $this->_style_for_grid ();
 ?>
-<table class="basic" <?php if ($style) echo " style=\"$style\""; if ($this->border_size) echo " border=\"$this->border_size\""; ?>>
+<table class="<?php echo $this->table_style; ?>" <?php if ($style) echo " style=\"$style\""; if ($this->border_size) echo " border=\"$this->border_size\""; ?>>
 <?php
   }
 

@@ -27,11 +27,13 @@ http://www.earthli.com/software/webcore
 ****************************************************************************/
 
   $icon_query = $App->icon_query ();
+  /** @var ICON $icon */
   $icon = $icon_query->object_at_id (read_var ('id'));
 
   if (isset ($icon) && $App->login->is_allowed (Privilege_set_global, Privilege_resources))
   {
     $class_name = $App->final_class_name ('DELETE_FORM', 'webcore/forms/delete_form.php');
+    /** @var DELETE_FORM $form */
     $form = new $class_name ($App);
 
     $form->process_existing ($icon);

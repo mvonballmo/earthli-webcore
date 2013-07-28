@@ -24,17 +24,7 @@ http://www.earthli.com/software/webcore
 
 ****************************************************************************/
 
-.button-control
-{
-	background: #BBAA99 url(hochzeit/fossil_paper_light.jpg) repeat;
-}
-
-.button-control a:hover, .button-control a:active
-{
-	color: #000080;
-}
-
-.text-control, .menu-control, .text-control-required, .menu-control-required
+.text-control, .menu-control
 {
   border: 1px solid #554433;
   background: #BBAA99 url(hochzeit/fossil_paper.jpg) repeat;

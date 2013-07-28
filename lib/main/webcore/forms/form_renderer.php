@@ -1219,14 +1219,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
         $height = $this->default_control_height;
       }
 
-      if ($field->required)
-      {
-        $CSS_class = "text-control-required";
-      }
-      else
-      {
-        $CSS_class = "text-control";
-      }
+      $CSS_class = $this->_get_text_control_CSS_class($field);
 
       $Result = $this->_start_control ($field, 'textarea');
       $Result .= ' class="' . $CSS_class . '" rows="10" cols="25" style="width: ' . $width . '; height: ' . $height . '">';
@@ -1806,14 +1799,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
       $Result .= ' maxlength="' . $field->max_length . '"';
     }
 
-    if ($field->required)
-    {
-      $CSS_class = "text-control-required";
-    }
-    else
-    {
-      $CSS_class = "text-control";
-    }
+    $CSS_class = $this->_get_text_control_CSS_class($field);
 
     if ($options->CSS_class)
     {
@@ -2100,6 +2086,41 @@ class FORM_RENDERER extends CONTROLS_RENDERER
     }
     
     return '';
+  }
+
+  /**
+   * @param $field
+   * @return string
+   */
+  private function _get_text_control_CSS_class($field)
+  {
+    /** @var THEMED_PAGE $themed_page */
+    $themed_page = $this->page;
+
+    $Result = '';
+    if ($themed_page->theme->dont_apply_to_forms)
+    {
+      if ($field->required)
+      {
+        $Result = 'required';
+
+        return $Result;
+      }
+
+      return $Result;
+    }
+    else
+    {
+      $Result = 'text-control';
+      if ($field->required)
+      {
+        $Result .= ' required';
+
+        return $Result;
+      }
+
+      return $Result;
+    }
   }
 
   /**

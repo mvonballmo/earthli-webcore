@@ -83,7 +83,8 @@ http://www.earthli.com/software/webcore
 
     $Page->start_display ();
 ?>
-<div class="top-box button-content">
+<div class="top-box">
+  <div class="button-content">
   <?php
   $menu = $App->make_menu ();
   $menu->renderer = $App->make_menu_renderer ();
@@ -114,6 +115,7 @@ http://www.earthli.com/software/webcore
     }
   }
   ?>
+  </div>
 </div>
 <div class="box">
   <div class="box-body form-content">

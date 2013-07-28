@@ -24,24 +24,6 @@ http://www.earthli.com/software/webcore
 
 ****************************************************************************/
 
-.button-control
-{
-	background-color: #FFFFFF;
-	color: #666666;
-	border-color: #999999;
-}
-
-.button-control:hover, .button-control:active
-{
-	background-color: #EEEEEE;
-	border-color: black;
-}
-
-.button-control a:hover, .button-control a:active
-{
-	color: blue;
-}
-
 .text-control, .menu-control
 {
 	color: #336699;

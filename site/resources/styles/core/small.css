@@ -45,12 +45,12 @@ td,
 th,
 .menu-control,
 .text-control,
-.text-control-required,
 .quoter,
 .menu,
 .nav-box,
 .button-control,
-.menu-group-title
+.menu-group-title,
+.button
 {
   font-size: 10pt;
 }

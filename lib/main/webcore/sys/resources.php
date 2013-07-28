@@ -509,9 +509,19 @@ class RESOURCE_MANAGER extends RAISABLE
           throw new UNKNOWN_VALUE_EXCEPTION($size);
       }
 
+      if (empty($text))
+      {
+        $class .= ' no-label';
+      }
+
+      if (!empty($extra_css))
+      {
+        $class .= ' ' . $extra_css;
+      }
+
       $expanded_icon_url = $this->get_icon_url($icon_url, $size);
 
-      return "<span class=\"icon $class $extra_css\" style=\"background-image: url($expanded_icon_url)\">$text</span>";
+      return "<span class=\"icon $class\" style=\"background-image: url($expanded_icon_url)\">$text</span>";
     }
     else
     {

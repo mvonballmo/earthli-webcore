@@ -61,13 +61,15 @@ http://www.earthli.com/software/webcore
     if ($App->login->is_allowed (Privilege_set_group, Privilege_create))
     {
       ?>
-      <div class="top-box button-content">
+      <div class="top-box">
+        <div class="button-content">
         <?php
-        $menu = $App->make_menu ();
-        $menu->append ('Create Group', 'create_group.php', '{icons}buttons/create');
-        $menu->renderer = $App->make_menu_renderer ();
-        $menu->display ();
+          $menu = $App->make_menu ();
+          $menu->append ('Create Group', 'create_group.php', '{icons}buttons/create');
+          $menu->renderer = $App->make_menu_renderer ();
+          $menu->display ();
         ?>
+        </div>
       </div>
     <?php
     }

@@ -65,13 +65,15 @@ http://www.earthli.com/software/webcore
     if ($commands->num_executable_commands() > 0)
     {
   ?>
-<div class="top-box button-content">
-  <span class="field"><?php echo $com_renderer->size(); ?></span> Replies
-  <?php
-  $menu = $App->make_menu();
-  $menu->renderer->content_mode = Menu_show_as_buttons;
-  $menu->display ();
-  ?>
+<div class="top-box">
+  <div class="button-content">
+    <span class="field"><?php echo $com_renderer->size(); ?></span> Replies
+    <?php
+    $menu = $App->make_menu();
+    $menu->renderer->content_mode = Menu_show_as_buttons;
+    $menu->display ();
+    ?>
+  </div>
 </div>
   <?php
   }

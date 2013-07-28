@@ -37,13 +37,15 @@ http://www.earthli.com/software/webcore
   if ($App->login->is_allowed (Privilege_set_global, Privilege_resources))
   {
     ?>
-    <div class="top-box button-content">
+    <div class="top-box">
+      <div class="button-content">
       <?php
-      $menu = $App->make_menu ();
-      $menu->append ('Create icon', 'create_icon.php', '{icons}buttons/create');
-      $menu->renderer = $App->make_menu_renderer ();
-      $menu->display ();
+        $menu = $App->make_menu ();
+        $menu->append ('Create icon', 'create_icon.php', '{icons}buttons/create');
+        $menu->renderer = $App->make_menu_renderer ();
+        $menu->display ();
       ?>
+      </div>
     </div>
   <?php
   }

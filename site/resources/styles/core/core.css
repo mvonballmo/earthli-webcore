@@ -545,7 +545,7 @@ td.object-in-list + td.object-in-list
 {
 }
 
-.label, .required, .form-basic-required, .form-basic-label
+.form-basic-required, .form-basic-label
 {
   font-weight: bold;
   text-align: right;
@@ -624,6 +624,22 @@ table.basic > tbody > tr > td.empty-label
   min-height: 18px;
 }
 
+.sixteen.no-label
+{
+  padding-left: 0;
+  min-width: 18px;
+}
+
+.twenty.no-label
+{
+  padding-left: 26px;
+}
+
+.thirty-two.no-label
+{
+  padding-left: 26px;
+}
+
 /* @end */
 
 /* @group Menus */
@@ -689,12 +705,6 @@ table.basic > tbody > tr > td.empty-label
 .text-flow ol
 {
   padding-left: 2.5em;
-}
-
-
-.text-flow .notes
-{
-  line-height: 120%;
 }
 
 ul.menu-items,
@@ -912,6 +922,11 @@ ul.menu-buttons > li + li
   vertical-align: middle;
   white-space: nowrap;
   border-radius: 4px;
+}
+
+.button.no-label
+{
+  height: 2.2em;
 }
 
 .button + .button

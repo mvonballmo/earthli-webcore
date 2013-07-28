@@ -94,7 +94,7 @@ http://www.earthli.com/software/webcore
 
       $Page->start_display ();
     ?>
-    <div class="top-box button-content">
+    <div class="top-box">
       <div class="button-content">
       <?php
       $menu = $App->make_menu ();

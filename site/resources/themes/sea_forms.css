@@ -34,7 +34,7 @@ http://www.earthli.com/software/webcore
 	background-color: #496aA3;
 }
 
-.menu-control, .text-control, .text-control-required
+.menu-control, .text-control
 {
 	border: 1px solid #1C6CA9;
 	border-color: #000066 #698aC3 #698aC3 #000066;
@@ -42,7 +42,7 @@ http://www.earthli.com/software/webcore
 	color: #CCCCCC;
 }
 
-.text-control-required
+.text-control.required
 {
 	background-color: #698aC3;
 	color: white;

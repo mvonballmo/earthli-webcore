@@ -61,14 +61,14 @@ h2, th
 	color: #CC9933;
 }
 
-.box
+.top-box
 {
-	border: 0px;
+
 }
 
 .box-body
 {
-	border: 1px solid #666666;
+	/*border: 1px solid #666666;*/
 }
 
 .box-title
@@ -171,11 +171,6 @@ h2, th
 .horizontal-separator
 {
 	border-color: #666666;
-}
-
-.label
-{
-	color: #999999;
 }
 
 .menu-bar-bottom

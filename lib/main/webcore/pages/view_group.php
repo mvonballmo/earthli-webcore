@@ -42,12 +42,14 @@ if (isset ($group))
 
   $Page->start_display ();
 ?>
-<div class="top-box button-content">
-<?php
-  /** @var $renderer MENU_RENDERER */
-  $renderer = $group->handler_for (Handler_menu);
-  $renderer->display ($group->handler_for (Handler_commands));
-?>
+<div class="top-box">
+  <div class="button-content">
+  <?php
+    /** @var $renderer MENU_RENDERER */
+    $renderer = $group->handler_for (Handler_menu);
+    $renderer->display ($group->handler_for (Handler_commands));
+  ?>
+  </div>
 </div>
 <div class="box">
   <div class="box-body">

@@ -145,11 +145,11 @@ class JOURNAL_SUMMARY_GRID extends ENTRY_SUMMARY_GRID
     parent::_echo_details ($obj);
 ?>
     <tr>
-      <td class="label">Temperature:</td>
+      <th>Temperature:</th>
       <td><?php echo $obj->temperature_as_html (); ?></td>
     </tr>
     <tr>
-      <td class="label">Weather:</td>
+      <th>Weather:</th>
       <td><?php echo $obj->weather_icon (); ?></td>
     </tr>
 <?php
@@ -158,6 +158,7 @@ class JOURNAL_SUMMARY_GRID extends ENTRY_SUMMARY_GRID
   /**
    * Return the block of text to summarize.
    * @param OBJECT_IN_FOLDER $obj
+   * @return string
    * @access private
    */
   protected function _text_to_summarize ($obj)

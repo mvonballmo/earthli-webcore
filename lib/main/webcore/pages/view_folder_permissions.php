@@ -50,7 +50,8 @@ http://www.earthli.com/software/webcore
     $formatter = new PERMISSIONS_FORMATTER ($App);
     $privilege_groups = $formatter->content_privilege_groups ();
   ?>
-  <div class="top-box button-content">
+  <div class="top-box">
+    <div class="button-content">
     <?php
     include_once ('webcore/util/options.php');
     $option = new STORED_OPTION ($App, 'show_security_tree');
@@ -71,6 +72,7 @@ http://www.earthli.com/software/webcore
     $icon = $App->get_icon_url ($icon, '16px');
     ?><a href="<?php echo $opt_link; ?>" class="button"><span class="icon sixteen" style="background-image: url(<?php echo $icon; ?>)"><?php echo $caption; ?></span></a><?php
     ?>
+    </div>
   </div>
   <div class="box">
     <div class="box-body">
@@ -153,7 +155,7 @@ http://www.earthli.com/software/webcore
         global $privilege_groups;
         global $App;
     ?>
-      <td class="label"><?php echo $title; ?></td>
+      <td><?php echo $title; ?></td>
       <?php
           $index = 1;
           foreach ($privilege_groups as $group)

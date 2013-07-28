@@ -139,9 +139,9 @@ class CHANGE_RENDERER extends PROJECT_ENTRY_RENDERER
       $layer->visible = ! $this->app->dhtml_allowed ();
 ?>
     <tr>
-      <td class="label">
+      <th>
         <?php if (! $layer->visible) $layer->draw_toggle (); ?> Files
-      </td>
+      </th>
       <td>
         <?php echo $entry->num_files (); ?>
       </td>

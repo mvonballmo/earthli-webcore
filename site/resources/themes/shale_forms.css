@@ -24,20 +24,6 @@ http://www.earthli.com/software/webcore
 
 ****************************************************************************/
 
-.button-control
-{
-	background-color: #636C76;
-	color: #CCCCCC;
-	border-color: #999999;
-}
-
-.button-control:active, .button-control:hover
-{
-	background-color: #535C66;
-	color: #FFFFFF;
-	border-color: #AAAAAA;
-}
-
 .checkbox-control
 {
 	background: #000040;
@@ -48,12 +34,5 @@ http://www.earthli.com/software/webcore
 	color: #A3ACB6;
 	background-color: #434C56;
 	border-color: #777777;
-}
-
-.text-control-required, .menu-control-required
-{
-	color: #A3ACB6;
-	background-color: #434C56;
-	border-color: #AAAAAA;
 }
 

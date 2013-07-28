@@ -118,12 +118,6 @@ a:active, a:hover
 	background-color: white;
 }
 
-.text-control, .menu-control, .text-control-required
-{
-	color: #003399;
-	background: #FFFFAA;
-}
-
 .graph-foreground
 {
 	background: #CCE6FF;
@@ -142,11 +136,6 @@ a:active, a:hover
 .object-in-list
 {
 	border-color: #666666;
-}
-
-.label
-{
-	color: #003399;
 }
 
 .quote-block

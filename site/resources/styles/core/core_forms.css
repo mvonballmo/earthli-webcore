@@ -51,15 +51,15 @@ select
 	cursor: pointer;
 }
 
-.menu-control, .text-control, .text-control-required, .menu-control-required
+.menu-control, .text-control
 {
   border-radius: 4px;
   padding: 4px;
 }
 
 button,
-.text-control, .text-control-required,
-.menu-control, .menu-control-required
+.text-control
+.menu-control
 {
   font-family: inherit;
 }
