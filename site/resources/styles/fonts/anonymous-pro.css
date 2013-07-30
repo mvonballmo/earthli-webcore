@@ -4,5 +4,5 @@ body,
 .text-control,
 .menu-control
 {
-	font-family: "Anonymous Pro", "Courier New", Courier, mono
+	font-family: "Anonymous Pro", "Courier New", Courier, mono, monospace;
 }

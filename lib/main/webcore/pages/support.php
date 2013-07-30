@@ -47,13 +47,15 @@ http://www.earthli.com/software/webcore
   $Page->location->append ('Support');
   $Page->start_display ();
 ?>
-<div class="box">
-  <div class="box-body">
+<div class="main-box">
+  <div class="text-flow">
     <p>If you're having trouble seeing something on this site, you should
       <a href="<?php echo $res->resolve_file ($options->browser_url); ?>">test 
       your browser</a>.</p>
     <p>If you have other questions about this site or the software running it, 
       fill out the form below and we'll get back to you as soon as possible.</p>
+  </div>
+  <div class="form-content">
     <?php $form->display (); ?>
   </div>
 </div>

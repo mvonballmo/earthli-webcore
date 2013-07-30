@@ -30,11 +30,11 @@ http://www.earthli.com/software/webcore
   $Page->title->subject = 'Exception Submitted';
 
   $Page->location->add_root_link ();
+  $Page->location->append('Thank you');
   $Page->start_display ();
 ?>
-<div class="box">
-  <div class="box-title">Thank You</div>
-  <div class="box-body">
+<div class="main-box">
+  <div class="text-flow">
     <p>Thank you for submitting a bug report.</p>
     <p>Use your browser's "Back" button to get back to where you were in the application or
       go back to the <a href="<?php echo $Page->resolve_file ('{root}'); ?>">Home Page</a>.</p>

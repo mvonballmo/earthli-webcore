@@ -113,12 +113,27 @@ hr, .horizontal-separator, .vertical-separator
   color: #FFF;
 }
 
+.top-box
+{
+  border-bottom: 1px solid #4A8CCA;
+}
+
 .nav-box
 {
-  border: none;
   padding-bottom: 5px;
-  border-bottom: 1px solid #4A8CCA; /* frame */
+  border-color: #4A8CCA;
   font-weight: normal;
+}
+
+.description-box
+{
+  border-right-color: #4A8CCA;
+}
+
+.object-navigator .links
+{
+  -webkit-column-rule: 1px solid #4A8CCA;
+  column-rule: 1px solid #4A8CCA;
 }
 
 .quote-inline
@@ -210,24 +225,10 @@ pre > code
   padding-left: 15px;
 }
 
-.button,
-.menu-button
-{
-  background-color: #EEEEEE;
-  border: 1px solid silver;
-}
-
 .disabled
 {
   border-radius: 4px;
   border: 1px solid #DDD;
-}
-
-.button:hover,
-.menu-button:hover
-{
-  border-color: darkgray;
-  background-color: #DDDDDD;
 }
 
 .paginator .selected

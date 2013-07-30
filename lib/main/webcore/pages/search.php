@@ -75,8 +75,8 @@ http://www.earthli.com/software/webcore
 
     $Page->start_display ();
   ?>
-  <div class="box">
-    <div class="box-body form-content" id="search-form">
+  <div class="main-box">
+    <div class="form-content" id="search-form">
       <?php $form->display (); ?>
     </div>
     <?php
@@ -101,7 +101,7 @@ http://www.earthli.com/software/webcore
       }
     ?>
     </h2>
-    <div class="box-body">
+    <div class="text-flow">
       <?php echo $search->system_description_as_html (); ?>
       <?php
         $grid = $search->grid ();

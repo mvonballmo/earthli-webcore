@@ -29,9 +29,11 @@ http://www.earthli.com/software/webcore
   if ($App->login->is_allowed (Privilege_set_global, Privilege_resources))
   {
     $class_name = $App->final_class_name ('THEME_FORM', 'webcore/forms/theme_form.php');
+    /** @var THEME_FORM $form */
     $form = new $class_name ($App);
 
     $class_name = $App->final_class_name ('THEME', 'webcore/obj/theme.php');
+    /** @var THEME $theme */
     $theme = new $class_name ($App);
 
     $form->process_new ($theme);
@@ -48,8 +50,8 @@ http://www.earthli.com/software/webcore
 
     $Page->start_display ();
   ?>
-  <div class="box">
-    <div class="box-body form-content">
+  <div class="main-box">
+    <div class="form-content">
     <?php
       $form->display ();
     ?>

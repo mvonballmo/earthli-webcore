@@ -178,31 +178,27 @@ http://www.earthli.com/software/webcore
     $box->finish_column_set ();
     ?>
   </div>
-  <div class="box">
-    <div class="box-body">
-    <?php
-      if ($panel->uses_time_selector)
-      {
-        ?>
-        <div class="menu-bar-top">
-          <?php $panel_manager->display_time_menu (); ?>
-        </div>
-      <?php
-      }
-
-      $panel->display ();
+  <div class="main-box">
+  <?php
+    if ($panel->uses_time_selector)
+    {
       ?>
-    </div>
+      <div class="menu-bar-top">
+        <?php $panel_manager->display_time_menu (); ?>
+      </div>
     <?php
-      if ($panel->num_objects () && $panel->uses_time_selector)
-      {
-        // don't show the bottom selector if there are no objects
+    }
+
+    $panel->display ();
+    if ($panel->num_objects () && $panel->uses_time_selector)
+    {
+      // don't show the bottom selector if there are no objects
     ?>
     <div class="menu-bar-bottom">
         <?php $panel_manager->display_time_menu (); ?>
     </div>
     <?php
-      }
+    }
     ?>
   </div>
 <?php

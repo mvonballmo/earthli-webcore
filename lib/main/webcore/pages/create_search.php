@@ -30,6 +30,7 @@ http://www.earthli.com/software/webcore
   $search = $App->make_search ($search_type);
 
   $class_name = $App->final_class_name ('STORE_SEARCH_FORM', 'webcore/forms/store_search_form.php');
+  /** @var STORE_SEARCH_FORM $form */
   $form = new $class_name ($App, $search->fields);
 
   $form->process_new ($search);
@@ -46,8 +47,8 @@ http://www.earthli.com/software/webcore
 
   $Page->start_display ();
 ?>
-<div class="box">
-  <div class="box-body form-content">
+<div class="main-box">
+  <div class="form-content">
   <?php
     $form->display ();
   ?>

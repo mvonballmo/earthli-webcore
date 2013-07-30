@@ -32,6 +32,7 @@ http://www.earthli.com/software/webcore
   if (isset ($folder) && $App->login->is_allowed (Privilege_set_folder, Privilege_secure, $folder))
   {
     $class_name = $App->final_class_name ('CREATE_FOLDER_PERMISSIONS_FORM', 'webcore/forms/create_folder_permissions_form.php');
+    /** @var CREATE_FOLDER_PERMISSIONS_FORM $form */
     $form = new $class_name ($App);
 
     $form->process_existing ($folder);
@@ -58,8 +59,8 @@ http://www.earthli.com/software/webcore
 
     $Page->start_display ();
   ?>
-  <div class="box">
-    <div class="box-body text-flow">
+  <div class="main-box">
+    <div class="form-content">
     <?php
       $form->display ();
     ?>

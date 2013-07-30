@@ -81,14 +81,13 @@ http://www.earthli.com/software/webcore
 
       $Page->start_display ();
   ?>
-    <div class="box">
-      <div class="box-body">
+    <div class="main-box">
       <?php
       $box = $Page->make_box_renderer();
       $box->start_column_set();
       $box->new_column_of_type('left-sidebar-column');
-?>
-        <div class="left-sidebar">
+      ?>
+        <div class="left-sidebar text-flow">
           <h2>
             Subscriptions
           </h2>
@@ -107,7 +106,6 @@ http://www.earthli.com/software/webcore
       <?php
       $box->finish_column_set();
       ?>
-      </div>
     </div>
   <?php
       $box->finish_column_set ();

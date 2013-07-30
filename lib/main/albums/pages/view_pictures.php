@@ -27,6 +27,7 @@ http://www.earthli.com/software/webcore/albums
 ****************************************************************************/
 
   $folder_query = $App->login->folder_query ();
+  /** @var ALBUM $folder */
   $folder = $folder_query->object_at_id (read_var ('id'));
 
   if (isset ($folder)
@@ -41,7 +42,7 @@ http://www.earthli.com/software/webcore/albums
     $first_day = $App->make_date_time (read_var ('first_day'), Date_time_iso);
     $last_day = $App->make_date_time (read_var ('last_day'), Date_time_iso);
     $calendar = read_var ('calendar');
-    $journal = read_var ('journal');
+    $journal_id = read_var ('journal');
     $page_number = read_var ('page_number');
 
     $df = $first_day->formatter ();
@@ -55,11 +56,11 @@ http://www.earthli.com/software/webcore/albums
     if ($calendar)
       $Page->location->append ("Calendar", "view_calendar.php?id=$folder->id", '{icons}buttons/calendar');
 
-    if ($journal)
+    if ($journal_id)
     {
-      $jrnl_query = $folder->entry_query ();
-      $jrnl = $jrnl_query->object_at_id ($journal);
-      $Page->location->append ($jrnl->title, "view_journal.php?id=$jrnl->id&amp;calendar=$calendar&amp;page_number=$page_number");
+      $journal_query = $folder->entry_query ();
+      $journal = $journal_query->object_at_id ($journal_id);
+      $Page->location->append ($journal->title, "view_journal.php?id=$journal->id&amp;calendar=$calendar&amp;page_number=$page_number");
     }
 
     if ($calendar)
@@ -69,9 +70,10 @@ http://www.earthli.com/software/webcore/albums
 
     $Page->start_display ();
 ?>
-<div class="box">
-  <div class="box-body">
+<div class="main-box">
+  <div class="grid-content">
   <?php
+    /** @var ALBUM_ENTRY_QUERY $pic_query */
     $pic_query = $folder->entry_query ();
     $pic_query->set_type ('picture');
     $pic_query->set_days ($first_day->as_iso (), $last_day->as_iso ());
@@ -80,6 +82,7 @@ http://www.earthli.com/software/webcore/albums
     $last_day = read_var ('last_day');
 
     $class_name = $Page->final_class_name ('PICTURE_GRID', 'albums/gui/picture_grid.php');
+    /** @var PICTURE_GRID $grid */
     $grid = new $class_name ($Page);
     $grid->set_ranges (3, 3);
     $grid->set_query ($pic_query);

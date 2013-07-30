@@ -49,13 +49,11 @@ http://www.earthli.com/software/webcore
 
   $Page->start_display ();
 ?>
-<div class="box">
-  <div class="box-body">
-    <div class="form-content">
+<div class="main-box">
+  <div class="form-content">
   <?php
     $form->display ();
   ?>
-    </div>
   </div>
 </div>
 <?php

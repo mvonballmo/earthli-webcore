@@ -55,6 +55,7 @@ http://www.earthli.com/software/webcore
   if (isset ($comment))
   {
     $class_name = $App->final_class_name ('COMMENT_FORM', 'webcore/forms/comment_form.php');
+    /** @var COMMENT_FORM $form */
     $form = new $class_name ($folder);
 
     $form->process_new ($comment);
@@ -90,8 +91,8 @@ http://www.earthli.com/software/webcore
 
     $Page->start_display ();
 ?>
-    <div class="box">
-      <div class="box-body form-content">
+    <div class="main-box">
+      <div class="form-content">
       <?php
         $form->display ();
       ?>

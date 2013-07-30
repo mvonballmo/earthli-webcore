@@ -44,6 +44,7 @@ http://www.earthli.com/software/webcore
   if (isset ($entry) && $App->login->is_allowed (Privilege_set_entry, Privilege_view, $entry))
   {
     $class_name = $App->final_class_name ('SEND_OBJECT_IN_FOLDER_FORM', 'webcore/forms/send_object_in_folder_form.php', $entry_type_info->id);
+    /** @var SEND_OBJECT_IN_FOLDER_FORM $form */
     $form = new $class_name ($App);
 
     $form->process_existing ($entry);
@@ -62,8 +63,8 @@ http://www.earthli.com/software/webcore
 
     $Page->start_display ();
   ?>
-  <div class="box">
-    <div class="box-body form-content">
+  <div class="main-box">
+    <div class="form-content">
     <?php
       $form->display ();
     ?>

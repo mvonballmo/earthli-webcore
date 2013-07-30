@@ -47,8 +47,8 @@ http://www.earthli.com/software/webcore
   $Page->add_style_sheet ($Env->logger_style_sheet);
   $Page->start_display ();
 ?>
-<div class="box">
-  <div class="box-body">
+<div class="main-box">
+  <div class="text-flow">
     <p>The best way to learn how to use the <a href="http://earthli.com/software/webcore/">WebCore</a>
       is by example. See the <a href="http://earthli.com/software/webcore/documentation.php">documentation</a> for
       more information.</p>

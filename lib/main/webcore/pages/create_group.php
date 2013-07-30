@@ -29,6 +29,7 @@ http://www.earthli.com/software/webcore
   if ($App->login->is_allowed (Privilege_set_group, Privilege_create))
   {
     $class_name = $App->final_class_name ('GROUP_FORM', 'webcore/forms/group_form.php');
+    /** @var GROUP_FORM $form */
     $form = new $class_name ($App);
     
     $group = $App->new_group ();
@@ -47,8 +48,8 @@ http://www.earthli.com/software/webcore
 
     $Page->start_display ();
   ?>
-  <div class="box">
-    <div class="box-body form-content">
+  <div class="main-box">
+    <div class="form-content">
     <?php
       $form->display ();
     ?>

@@ -125,8 +125,8 @@ http://www.earthli.com/software/webcore
   echo '</div>';
 ?>
 </div>
-<div class="box">
-  <div class="box-body" style="margin-top: 15px">
+<div class="main-box">
+  <div class="text-flow">
     <h1>
     <?php
     $t = $entry->title_formatter ();

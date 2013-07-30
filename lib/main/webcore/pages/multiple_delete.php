@@ -27,11 +27,13 @@ http://www.earthli.com/software/webcore
 ****************************************************************************/
 
   $folder_query = $App->login->folder_query ();
+  /** @var FOLDER $folder */
   $folder = $folder_query->object_at_id (read_var ('id'));
 
   if (isset ($folder))
   {
     $class_name = $App->final_class_name ('MULTIPLE_OBJECT_DELETER_FORM', 'webcore/forms/multiple_object_deleter_form.php');
+    /** @var MULTIPLE_OBJECT_DELETER_FORM $form */
     $form = new $class_name ($folder);
     $form->load_from_request ();
   }
@@ -55,8 +57,8 @@ http://www.earthli.com/software/webcore
 
     $Page->start_display ();
   ?>
-  <div class="box">
-    <div class="box-body form-content">
+  <div class="main-box">
+    <div class="form-content">
     <?php
       $form->display ();
     ?>

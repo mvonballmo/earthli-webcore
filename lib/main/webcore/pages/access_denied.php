@@ -27,6 +27,7 @@ http://www.earthli.com/software/webcore
 ****************************************************************************/
 
   $class_name = $App->final_class_name ('LOG_IN_FORM', 'webcore/forms/log_in_form.php');
+  /** @var LOG_IN_FORM $form */
   $form = new $class_name ($App);
 
   $Page->title->subject = 'Access denied';
@@ -50,35 +51,33 @@ http://www.earthli.com/software/webcore
   $Page->location->append('Access denied', '', '{icons}buttons/security');
   $Page->start_display ();
 ?>
-<div class="box">
-  <div class="box-body">
-    <?php
-      if (empty ($last_page))
-      {
-        $last_page = 'unknown location';
-      }
-      $error_message = read_var ('error_message');
-      if (empty ($error_message))
-      {
-        $error_message = 'You are not allowed to perform that operation.';
-      }
-    ?>
-    <div class="message-box">
-      <div class="message-title"><?php echo $error_message; ?></div>
-      <div class="message-description">
-        Access to &lt;<a href="<?php echo $last_page; ?>"><?php echo $last_page; ?></a>&gt; was denied for this user.
-    <?php if ($App->login->is_anonymous ()) { ?>
-        Log in below to try again as a registered user.
-    <?php } else { ?>
-        You are logged in as <?php echo $App->login->title_as_link (); ?>. If you have another account with the proper permissions, log in below to try again as that user.
-    <?php } ?>
-      </div>
-    </div>    
-    <div class="form-content">
-    <?php
-      $form->display ();
-    ?>
+<div class="main-box">
+  <?php
+    if (empty ($last_page))
+    {
+      $last_page = 'unknown location';
+    }
+    $error_message = read_var ('error_message');
+    if (empty ($error_message))
+    {
+      $error_message = 'You are not allowed to perform that operation.';
+    }
+  ?>
+  <div class="message-box">
+    <div class="message-title"><?php echo $error_message; ?></div>
+    <div class="message-description">
+      Access to &lt;<a href="<?php echo $last_page; ?>"><?php echo $last_page; ?></a>&gt; was denied for this user.
+  <?php if ($App->login->is_anonymous ()) { ?>
+      Log in below to try again as a registered user.
+  <?php } else { ?>
+      You are logged in as <?php echo $App->login->title_as_link (); ?>. If you have another account with the proper permissions, log in below to try again as that user.
+  <?php } ?>
     </div>
+  </div>
+  <div class="form-content">
+  <?php
+    $form->display ();
+  ?>
   </div>
 </div>
 <?php

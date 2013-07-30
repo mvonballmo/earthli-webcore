@@ -35,6 +35,7 @@ http://www.earthli.com/software/webcore
     $type_info = $App->search_type_info_for ($search_type);
 
     $class_name = $App->final_class_name ('EXECUTE_SEARCH_FORM', 'webcore/forms/execute_search_form.php');
+    /** @var EXECUTE_SEARCH_FORM $form */
     $form = new $class_name ($App, $search);
 
     $form->process ($search);
@@ -48,43 +49,37 @@ http://www.earthli.com/software/webcore
     $Page->title->subject = "Search for {$type_info->plural_title}";
 
     $Page->location->add_root_link ();
-    $Page->location->append ($Page->title->subject);
+    $subject = $Page->title->subject;
+    if ($form->committed ())
+    {
+      $subject .= " ($num_search_results found)";
+    }
+    $Page->location->append ($subject);
 
     $Page->start_display ();
   ?>
-  <div class="box">
-    <div class="box-title">
-      <?php
-        echo $Page->title->subject;
-        if ($form->committed ())
-        {
-          echo " ($num_search_results found)";
-        }
-      ?>
-    </div>
-    <div class="box-body">
-    <?php
-      if ($form->committed ())
-      {
-        $form->controls_visible = ($num_search_results == 0);
-        $form->display ();
-    ?>
-    <div>
-    <?php
-        include_once ('webcore/forms/add_to_list_form.php');
-        $list_form = new ADD_TO_LIST_FORM ($App, $search, $search_query);
-        $list_form->action = 'add_to_list.php';
-        $list_form->display ();
-    ?>
-    </div>
-    <?php
-      }
-      else
-      {
-        $form->display ();
-      }
-    ?>
-    </div>
+  <div class="main-box">
+  <?php
+    if ($form->committed ())
+    {
+      $form->controls_visible = ($num_search_results == 0);
+      $form->display ();
+  ?>
+  <div>
+  <?php
+      include_once ('webcore/forms/add_to_list_form.php');
+      $list_form = new ADD_TO_LIST_FORM ($App, $search, $search_query);
+      $list_form->action = 'add_to_list.php';
+      $list_form->display ();
+  ?>
+  </div>
+  <?php
+    }
+    else
+    {
+      $form->display ();
+    }
+  ?>
   </div>
   <?php
     $Page->finish_display ();

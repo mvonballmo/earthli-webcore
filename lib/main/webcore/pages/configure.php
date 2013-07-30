@@ -50,15 +50,13 @@ http://www.earthli.com/software/webcore
     ?>
     </div>
   </div>
-  <div class="box">
-    <div class="box-body">
+  <div class="main-box">
     <?php
       $class_name = $App->final_class_name ('APPLICATION_RENDERER', 'webcore/gui/application_renderer.php');
       /** @var $renderer APPLICATION_RENDERER */
       $renderer = new $class_name ($App);
       $renderer->display_as_html ($info);
     ?>
-    </div>
   </div>
   <?php
     $Page->finish_display ();

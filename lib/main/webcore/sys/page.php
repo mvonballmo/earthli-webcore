@@ -277,8 +277,8 @@ class PAGE extends CONTEXT
 
       $this->start_display ();
       ?>
-      <div class="box">
-        <div class="box-body">
+      <div class="main-box">
+        <div class="text-flow">
           <p class="error"><?php echo $msg; ?></p>
         </div>
       </div>
@@ -286,13 +286,15 @@ class PAGE extends CONTEXT
       $this->finish_display ();
     }
   }
-  
+
   /**
    * Handle a generic error.
    * Shows a message and uses the context to determine how much additional information
    * to show (in the page title or the navigation bar).
-   * @param string $msg
-   * @param WEBCORE_OBJECT $context
+   * @param $message
+   * @param string $caption
+   * @param int|\WEBCORE_OBJECT $context
+   * @internal param string $msg
    */
   public function raise_error ($message, $caption = '', $context = 0)
   {
@@ -325,8 +327,8 @@ class PAGE extends CONTEXT
 
     $this->start_display ();
     ?>
-    <div class="box">
-      <div class="box-body">
+    <div class="main-box">
+      <div class="text-flow">
          <p class="error"><?php echo $message; ?></p>
       </div>
     </div>

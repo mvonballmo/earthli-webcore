@@ -26,7 +26,7 @@ http://www.earthli.com/software/webcore
 
 ****************************************************************************/
 
-  $Page->title->subject = 'searches';
+  $Page->title->subject = 'Searches';
 
   $App->set_referer ();
 
@@ -35,21 +35,17 @@ http://www.earthli.com/software/webcore
 
   $Page->start_display ();
 ?>
-  <div class="box">
-    <div class="box-title">
-      Searches
-    </div>
-    <div class="box-body">
+  <div class="main-box">
     <?php
       $search_query = $App->login->search_query ();
       $class_name = $App->final_class_name ('SEARCH_GRID', 'webcore/gui/search_grid.php');
+      /** @var SEARCH_GRID $grid */
       $grid = new $class_name ($App);
       $grid->last_page = '';
       $grid->set_ranges (10, 1);
       $grid->set_query ($search_query);
       $grid->display ();
     ?>
-    </div>
   </div>
 <?php
   $Page->finish_display ();

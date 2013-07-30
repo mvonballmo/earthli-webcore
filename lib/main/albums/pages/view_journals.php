@@ -60,30 +60,27 @@ http://www.earthli.com/software/webcore/albums
 
     $Page->title->subject = format_dates_for_title (false);
     $Page->location->append ("Calendar", "view_calendar.php?id=$folder->id");    
-    $Page->location->append ($folder->format_date ($first_day));
+    $Page->location->append ($Page->title->subject);
 
     $Page->start_display ();
 ?>
-<div class="box">
-  <div class="box-title">
-    <?php echo format_dates_for_title (true); ?>
-  </div>
-  <div class="box-body">
+<div class="main-box">
   <?php
-    $jrnl_query = $folder->entry_query ();
-    $jrnl_query->set_type ('journal');
-    $jrnl_query->set_days ($first_day->as_iso (), $last_day->as_iso ());
+    /** @var ALBUM_ENTRY_QUERY $journal_query */
+    $journal_query = $folder->entry_query ();
+    $journal_query->set_type ('journal');
+    $journal_query->set_days ($first_day->as_iso (), $last_day->as_iso ());
     
     $iso_first_day = $first_day->as_iso ();
     $iso_last_day = $last_day->as_iso ();
 
     $class_name = $App->final_class_name ('JOURNAL_GRID', 'albums/gui/journal_grid.php');
+    /** @var JOURNAL_GRID $grid */
     $grid = new $class_name ($App);
     $grid->set_ranges (15, 1);
-    $grid->set_query ($jrnl_query);
+    $grid->set_query ($journal_query);
     $grid->display ();
   ?>
-  </div>
 </div>
 <?php
     $Page->finish_display ();

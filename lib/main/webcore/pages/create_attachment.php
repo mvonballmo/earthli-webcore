@@ -103,6 +103,7 @@ http://www.earthli.com/software/webcore
   if (isset ($attachment))
   {
     $class_name = $App->final_class_name ('ATTACHMENT_FORM', 'webcore/forms/attachment_form.php');
+    /** @var ATTACHMENT_FORM $form */
     $form = new $class_name ($host);
 
     $form->process_new ($attachment);
@@ -116,8 +117,8 @@ http://www.earthli.com/software/webcore
 
     $Page->start_display ();
 ?>
-    <div class="box">
-      <div class="box-body form-content">
+    <div class="main-box">
+      <div class="form-content">
       <?php
         $form->display ();
       ?>

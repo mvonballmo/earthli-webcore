@@ -64,17 +64,13 @@ body
 	border: 0px;
 }
 
-.box
+.main-box
 {
-	border: 0px;
+	border: none;
+  background-color: #FFFFFF;
 }
 
-.box-body
-{
-	background-color: #FFFFFF;
-}
-
-.box-title, .preview-title, .chart-title
+.preview-title, .chart-title
 {
 	color: #336699;
 	border-bottom: 1px dotted #999999;

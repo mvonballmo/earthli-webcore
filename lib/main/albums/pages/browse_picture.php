@@ -27,6 +27,7 @@ http://www.earthli.com/software/webcore/albums
 ****************************************************************************/
 
   $folder_query = $App->login->folder_query ();
+  /** @var FOLDER $folder */
   $folder = $folder_query->object_at_id (read_var ('id'));
 
   if (isset ($folder) && $App->login->is_allowed (Privilege_set_folder, Privilege_modify, $folder))
@@ -39,30 +40,29 @@ http://www.earthli.com/software/webcore/albums
     $Page->add_script_file ('{scripts}webcore_forms.js');    
     $Page->start_display ();
 ?>
-<div class="box">
-  <div class="box-body">
-    <h2>
-      Choose cover picture for <?php echo $folder->title_as_link (); ?>
-    </h2>
-    <p class="notes">Click a picture below to select it. Click "Clear" to select
-      no cover picture.</p>
-    <?php
-      $controls_renderer = $App->make_controls_renderer ();
-      echo '<p>';
-      echo $controls_renderer->javascript_button_as_html ('Clear', "picker.select_value ('0')", '{icons}buttons/delete' );
-      echo $controls_renderer->javascript_button_as_html ('Cancel', "window.close()", '{icons}buttons/close' );
-      echo '</p>';
+<div class="main-box">
+  <h2>
+    Choose cover picture for <?php echo $folder->title_as_link (); ?>
+  </h2>
+  <p class="notes">Click a picture below to select it. Click "Clear" to select
+    no cover picture.</p>
+  <?php
+    $controls_renderer = $App->make_controls_renderer ();
+    echo '<p>';
+    echo $controls_renderer->javascript_button_as_html ('Clear', "picker.select_value ('0')", '{icons}buttons/delete' );
+    echo $controls_renderer->javascript_button_as_html ('Cancel', "window.close()", '{icons}buttons/close' );
+    echo '</p>';
 
-      $pic_query = $folder->entry_query ();
-      $pic_query->set_type ('picture');
-      
-      $class_name = $App->final_class_name ('SIMPLE_PICTURE_GRID', 'albums/gui/simple_picture_grid.php');
-      $grid = new $class_name ($App);
-      $grid->set_ranges (8, 3);
-      $grid->set_query ($pic_query);
-      $grid->display ();
-    ?>
-  </div>
+    $pic_query = $folder->entry_query ();
+    $pic_query->set_type ('picture');
+
+    $class_name = $App->final_class_name ('SIMPLE_PICTURE_GRID', 'albums/gui/simple_picture_grid.php');
+    /** @var SIMPLE_PICTURE_GRID $grid */
+    $grid = new $class_name ($App);
+    $grid->set_ranges (8, 3);
+    $grid->set_query ($pic_query);
+    $grid->display ();
+  ?>
 </div>
 <?php
     $Page->finish_display ();

@@ -31,6 +31,7 @@ http://www.earthli.com/software/webcore
   if ($App->login->is_allowed (Privilege_set_group, Privilege_view))
   {
     $folder_query = $App->login->folder_query ();
+    /** @var FOLDER $folder */
     $folder = $folder_query->object_at_id (read_var ('id'));
     if ($folder)
     {
@@ -55,38 +56,37 @@ http://www.earthli.com/software/webcore
       <?php
       }
     ?>
-    <div class="box">
-      <div class="box-body">
-        <h2>
-          Browse for group
-        </h2>
-        <p class="notes">Groups that already have permissions for <?php echo $folder->title_as_link (); ?>
-          are <em>not</em> displayed.</p>
-      <?php
-        $group_query = $App->group_query ();
+    <div class="main-box">
+      <h2>
+        Browse for group
+      </h2>
+      <p class="notes">Groups that already have permissions for <?php echo $folder->title_as_link (); ?>
+        are <em>not</em> displayed.</p>
+    <?php
+      $group_query = $App->group_query ();
 
-        /* Show only groups that do not have permission in this folder. */
-  
-        $security = $folder->security_definition ();
-        $permissions = $security->group_permissions ();
-  
-        $ids = array ();
-        foreach ($permissions as $permission)
-        {
-          $ids [] = $permission->ref_id;      
-        }
-        if (sizeof ($ids))
-        {
-          $group_query->restrict_by_op ('grp.id', $ids, Operator_not_in);
-        }
-  
-        $class_name = $App->final_class_name ('GROUP_BROWSER_GRID', 'webcore/gui/group_browser_grid.php');
-        $grid = new $class_name ($App);
-        $grid->set_ranges (25, 1);
-        $grid->set_query ($group_query);
-        $grid->display ();
-      ?>
-      </div>
+      /* Show only groups that do not have permission in this folder. */
+
+      $security = $folder->security_definition ();
+      $permissions = $security->group_permissions ();
+
+      $ids = array ();
+      foreach ($permissions as $permission)
+      {
+        $ids [] = $permission->ref_id;
+      }
+      if (sizeof ($ids))
+      {
+        $group_query->restrict_by_op ('grp.id', $ids, Operator_not_in);
+      }
+
+      $class_name = $App->final_class_name ('GROUP_BROWSER_GRID', 'webcore/gui/group_browser_grid.php');
+      /** @var GROUP_BROWSER_GRID $grid */
+      $grid = new $class_name ($App);
+      $grid->set_ranges (25, 1);
+      $grid->set_query ($group_query);
+      $grid->display ();
+    ?>
     </div>
     <?php
       $Page->finish_display ();

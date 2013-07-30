@@ -51,8 +51,8 @@ if (isset ($group))
   ?>
   </div>
 </div>
-<div class="box">
-  <div class="box-body">
+<div class="main-box">
+  <div class="grid-content">
 <?php
   $renderer = $group->handler_for (Handler_html_renderer);
   $renderer->display ($group);

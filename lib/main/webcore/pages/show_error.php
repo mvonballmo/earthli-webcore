@@ -50,16 +50,14 @@ http://www.earthli.com/software/webcore
   }
 
   $Page->template_options->title = $error_num;
-  $Page->title->subject = $title . ' (Error ' . $error_num . ')';
+  $Page->title->subject = $title;
+
+  $Page->location->add_root_link ();
+  $Page->location->append ($Page->title->subject, '', '{icons}indicators/warning');
 
   $Page->start_display ();
 ?>
-<div class="box">
-  <div class="box-title">
-    <?php echo $Page->resolve_icon_as_html ('{icons}indicators/error', 'Error', '20px'); ?>
-    <?php echo $Page->title->subject; ?>
-  </div>
-  <div class="box-body">
+<div class="main-box">
   <p>
   <?php
     switch ($error_num)

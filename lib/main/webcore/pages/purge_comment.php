@@ -45,6 +45,7 @@ http://www.earthli.com/software/webcore
   if (isset ($comment) && $App->login->is_allowed (Privilege_set_comment, Privilege_delete, $comment))
   {
     $class_name = $App->final_class_name ('PURGE_OBJECT_FORM', 'webcore/forms/purge_form.php', 'comment');
+    /** @var PURGE_OBJECT_FORM $form */
     $form = new $class_name ($App);
 
     $form->process_existing ($comment);
@@ -65,8 +66,8 @@ http://www.earthli.com/software/webcore
 
     $Page->start_display ();
 ?>
-  <div class="box">
-    <div class="box-body form-content">
+  <div class="main-box">
+    <div class="form-content">
       <?php
         $form->display ();
       ?>

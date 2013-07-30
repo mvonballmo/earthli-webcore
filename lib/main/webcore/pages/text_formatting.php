@@ -34,8 +34,7 @@ http://www.earthli.com/software/webcore
 
   $Page->start_display ();
 ?>
-<div  class="box">
-  <div class="box-body">
+<div  class="main-box">
   <?php
   $box = $Page->make_box_renderer();
   $box->start_column_set();
@@ -879,7 +878,7 @@ protected function _process_given_tokenizer($input, $tokenizer)<br>
       from another article:</p>
     <p><span class="highlight">&lt;bq&gt;</span>To Microsoft's credit, they are being
       quite aggressive about solving this particular hole. Even to the point
-      of coming up with the embarassing solution of saying that they can't be
+      of coming up with the embarrassing solution of saying that they can't be
       trusted. So, perhaps they do mean it when they say they are now a security
       company and start babbling about Palladium and DRM. They just mean they
       care about telling people about security holes, but don't actually intend
@@ -908,7 +907,7 @@ protected function _process_given_tokenizer($input, $tokenizer)<br>
       from another article:</p>
     <div class="quote-block">"To Microsoft's credit,
       they are being quite aggressive about solving this particular hole. Even
-      to the point of coming up with the embarassing solution of saying that
+      to the point of coming up with the embarrassing solution of saying that
       they can't be trusted. So, perhaps they do mean it when they say they
       are now a security company and start babbling about Palladium and DRM.
       They just mean they care about telling people about security holes, but
@@ -919,7 +918,6 @@ protected function _process_given_tokenizer($input, $tokenizer)<br>
   <?php
   $box->finish_column_set();
   ?>
-  </div>
 </div>
 <?php
   $Page->finish_display ();

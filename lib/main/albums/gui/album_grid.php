@@ -82,7 +82,7 @@ class ALBUM_GRID extends FOLDER_GRID
         <p>
         <a href="view_folder.php?<?php echo "id=$obj->id"; ?>"><img src="<?php echo $main_pic->full_thumbnail_name (); ?>" title="<?php echo $pic_title; ?>" alt="<?php echo $pic_title; ?>"></a>
         </p>
-      <div class="picture-overlap">
+      <div class="top-left-overlay">
         <?php
         $this->_draw_menu_for ($obj, Menu_size_minimal);
         ?>

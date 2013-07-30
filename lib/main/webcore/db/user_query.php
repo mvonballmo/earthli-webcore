@@ -115,7 +115,7 @@ class USER_QUERY extends QUERY
   }
 
   /**
-   * @param string $name
+   * @param $email
    * @return USER
    */
   public function object_at_email ($email)

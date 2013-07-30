@@ -29,6 +29,7 @@ http://www.earthli.com/software/webcore
   $Page->title->subject = 'Browse for user';
 
   $group_query = $App->group_query ();
+  /** @var GROUP $group */
   $group = $group_query->object_at_id (read_var ('id'));
 
   if (isset ($group) &&
@@ -52,37 +53,36 @@ http://www.earthli.com/software/webcore
     ?>
     </div>
   </div>
-  <div class="box">
-    <div class="box-body">
-      <h2>
-        Browse for user
-      </h2>
-    <?php
-      $user_query = $App->user_query ();
+  <div class="main-box">
+    <h2>
+      Browse for user
+    </h2>
+  <?php
+    $user_query = $App->user_query ();
 
-      $group_user_query = $group->user_query ();
-      $ids = $group_user_query->indexed_objects ();
-      if (sizeof ($ids))
-      {
-        $user_query->restrict_by_op ('usr.id', array_keys ($ids), Operator_not_in);
-      }
+    $group_user_query = $group->user_query ();
+    $ids = $group_user_query->indexed_objects ();
+    if (sizeof ($ids))
+    {
+      $user_query->restrict_by_op ('usr.id', array_keys ($ids), Operator_not_in);
+    }
 
-      if (read_var ('show_anon'))
-      {
-        $user_query->set_kind (Privilege_kind_anonymous);
-      }
-      else
-      {
-        $user_query->set_kind (Privilege_kind_registered);
-      }
+    if (read_var ('show_anon'))
+    {
+      $user_query->set_kind (Privilege_kind_anonymous);
+    }
+    else
+    {
+      $user_query->set_kind (Privilege_kind_registered);
+    }
 
-      $class_name = $App->final_class_name ('USER_BROWSER_GRID', 'webcore/gui/user_browser_grid.php');
-      $grid = new $class_name ($App);
-      $grid->set_ranges (15, 1);
-      $grid->set_query ($user_query);
-      $grid->display ();
-    ?>
-    </div>
+    $class_name = $App->final_class_name ('USER_BROWSER_GRID', 'webcore/gui/user_browser_grid.php');
+    /** @var USER_BROWSER_GRID $grid */
+    $grid = new $class_name ($App);
+    $grid->set_ranges (15, 1);
+    $grid->set_query ($user_query);
+    $grid->display ();
+  ?>
   </div>
   <?php
     $Page->finish_display ();

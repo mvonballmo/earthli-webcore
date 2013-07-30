@@ -65,12 +65,12 @@ class THEME_GRID extends STANDARD_GRID
   protected function _draw_box ($obj)
   {
 ?>
-  <div style="position: relative">
+  <div style="position: relative; display: table-cell">
 <?php
   if (! $this->is_chooser)
   {
     ?>
-    <div class="picture-overlap">
+    <div class="top-left-overlay">
       <?php
       $this->_draw_menu_for ($obj, Menu_size_minimal);
       ?>
@@ -78,17 +78,21 @@ class THEME_GRID extends STANDARD_GRID
     <?php
   }
 ?>
-    <p>
-      <a href="<?php echo $obj->snapshot_name (); ?>"><img class="frame" src="<?php echo $obj->snapshot_thumbnail_name (); ?>" alt="<?php echo $obj->title_as_plain_text (); ?>"></a>
-    </p>
+    <?php
+    if ($this->is_chooser)
+    {
+      ?>
+      <div class="bottom-right-overlay">
+        <a class="button" href="#" onclick="set_main_theme ('<?php echo $obj->id; ?>'); return false;" title="Choose this theme"><?php echo $obj->title_as_html(); ?></a>
+      </div>
+    <?php
+    }
+    ?>
+    <div style="line-height: 0">
+      <a href="<?php echo $obj->snapshot_name (); ?>"><img src="<?php echo $obj->snapshot_thumbnail_name (); ?>" alt="<?php echo $obj->title_as_plain_text (); ?>"></a>
+    </div>
 <?php
-  if ($this->is_chooser)
-  {
-?>
-      <a class="button" href="#" onclick="set_main_theme ('<?php echo $obj->id; ?>'); return false;" title="Choose this theme"><?php echo $obj->title_as_html(); ?></a>
-<?php
-  }
-  else
+  if (!$this->is_chooser)
   {
 ?>
     <h3>

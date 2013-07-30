@@ -27,11 +27,13 @@ http://www.earthli.com/software/webcore
 ****************************************************************************/
 
   $folder_query = $App->login->folder_query ();
+  /** @var FOLDER $folder */
   $folder = $folder_query->object_at_id (read_var ('id'));
 
   if (isset ($folder) && $App->login->is_allowed (Privilege_set_folder, Privilege_modify, $folder))
   {
     $class_name = $App->final_class_name ('ADD_SUBSCRIBERS_TO_FOLDER_FORM', 'webcore/forms/add_subscribers_to_folder_form.php');
+    /** @var ADD_SUBSCRIBERS_TO_FOLDER_FORM $form */
     $form = new $class_name ($folder);
 
     $form->process ($folder);
@@ -48,8 +50,8 @@ http://www.earthli.com/software/webcore
 
     $Page->start_display ();
   ?>
-  <div class="box">
-    <div class="box-body form-content">
+  <div class="main-box">
+    <div class="form-content">
     <?php
       $form->display ();
     ?>

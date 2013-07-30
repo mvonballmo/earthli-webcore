@@ -51,12 +51,13 @@ http://www.earthli.com/software/webcore
   <?php
   }
 ?>
-  <div class="box">
-    <div class="box-body grid-content">
+  <div class="main-box">
+    <div class="grid-content">
     <?php
       $icon_query = $App->icon_query ();
 
       $class_name = $App->final_class_name ('ICON_GRID', 'webcore/gui/icon_grid.php');
+      /** @var ICON_GRID $grid */
       $grid = new $class_name ($App);
       $grid->last_page = '';
       $grid->set_ranges (4, 4);

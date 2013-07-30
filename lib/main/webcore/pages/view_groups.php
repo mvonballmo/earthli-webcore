@@ -54,13 +54,14 @@ http://www.earthli.com/software/webcore
     <?php
     }
     ?>
-  <div class="box">
-    <div class="box-body">
+  <div class="main-box">
+    <div class="grid-content">
     <?php
       $group_query = $App->group_query ();
 
-      include_once ('webcore/gui/group_grid.php');
-      $grid = new GROUP_GRID ($App);
+      $class_name = $App->final_class_name ('GROUP_GRID', 'webcore/gui/group_grid.php');
+      /** @var $grid GROUP_GRID */
+      $grid = new $class_name ($App);
       $grid->set_ranges (25, 1);
       $grid->set_query ($group_query);
       $grid->display ();

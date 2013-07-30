@@ -35,6 +35,12 @@ body
 	color: #3357A2;
 }
 
+.page-body
+{
+  background: #FDF8E5 url(hochzeit/milkweed_paper.jpg) repeat;
+  margin-bottom: 0;
+}
+
 .nav-box
 {
 	background: #DDCCBB url(hochzeit/fossil_paper_light.jpg) repeat;
@@ -62,13 +68,18 @@ a:hover, a:active
 	border-color: #554433;
 }
 
-.box
+page-body
 {
   background: #FDF8E5 url(hochzeit/milkweed_paper.jpg) repeat;
   color: #554433;
   border-color: #554433;
-  padding-top: 15px;
-  padding-bottom: 15px;
+}
+
+.main-box
+{
+  color: #554433;
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
 
 .box > *:first-child,

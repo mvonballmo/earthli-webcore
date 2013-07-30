@@ -57,7 +57,7 @@ class THEMED_MAIL_BODY_RENDERER extends MAIL_BODY_RENDERER
     ob_start ();
       $this->page->start_display ();
 ?>
-<div class="box"><div class="box-body">
+<div class="main-box"><div class="text-flow">
 <?php
       $Result = ob_get_contents ();
     ob_end_clean ();

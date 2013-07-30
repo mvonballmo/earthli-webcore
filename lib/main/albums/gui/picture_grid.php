@@ -107,7 +107,7 @@ class PICTURE_GRID extends ALBUM_ENTRY_GRID
       if ($this->show_controls)
       {
     ?>
-        <div class="picture-overlap">
+        <div class="top-left-overlay">
     <?php
         $this->_draw_menu_for ($obj, Menu_size_minimal);
     ?>

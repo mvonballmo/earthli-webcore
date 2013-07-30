@@ -1,9 +1,15 @@
+@import "http://fonts.googleapis.com/css?family=Anonymous+Pro:400,700";
+
 .log-box
 {
-  font-family: "Courier New", Courier, fixed;
-  font-size: 8pt;
-  color: black;
-  padding: .5em;
+  margin: 15px 0;
+  line-height: normal;
+}
+
+.log-box code
+{
+  font-family: "Anonymous Pro", "Courier New", Courier, mono, monospace;
+  white-space: nowrap;
 }
 
 .log-block-title

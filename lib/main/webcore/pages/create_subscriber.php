@@ -60,8 +60,8 @@ http://www.earthli.com/software/webcore
 
     $Page->start_display ();
 ?>
-<div class="box">
-  <div class="box-body form-content">
+<div class="main-box">
+  <div class="form-content">
   <?php
     $form->button = 'Create';
     $form->button_icon = '{icons}buttons/create';

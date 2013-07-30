@@ -90,8 +90,8 @@ http://www.earthli.com/software/webcore/projects
   ?>
   </div>
 </div>
-<div class="box">
-  <div class="box-body">
+<div class="main-box">
+  <div class="text-flow">
 <?php
     }
 

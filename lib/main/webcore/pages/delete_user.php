@@ -27,17 +27,19 @@ http://www.earthli.com/software/webcore
 ****************************************************************************/
 
   $user_query = $App->user_query ();
+  /** @var USER $user */
   $user = $user_query->object_at_id (read_var ('id'));
 
   if (isset ($user) && $App->login->is_allowed (Privilege_set_user, Privilege_delete))
   {
     $class_name = $App->final_class_name ('DELETE_OBJECT_FORM', 'webcore/forms/delete_form.php', 'user');
+    /** @var DELETE_OBJECT_FORM $form */
     $form = new $class_name ($App, Privilege_set_user);
 
     $form->process_existing ($user);
     if ($form->committed ())
     {
-      if ($App->login->is_allowed (Privilege_set_user, Privilege_hidden) && ! $form->value_for ('purge'))
+      if ($App->login->is_allowed (Privilege_set_user, Privilege_view_hidden) && ! $form->value_for ('purge'))
       {
         $App->return_to_referer ($user->home_page ());
       }
@@ -56,8 +58,8 @@ http://www.earthli.com/software/webcore
 
     $Page->start_display ();
   ?>
-  <div class="box">
-    <div class="box-body form-content">
+  <div class="main-box">
+    <div class="form-content">
     <?php
       $form->display ();
     ?>

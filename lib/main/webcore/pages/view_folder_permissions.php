@@ -74,263 +74,261 @@ http://www.earthli.com/software/webcore
     ?>
     </div>
   </div>
-  <div class="box">
-    <div class="box-body">
-      <?php
-        if ($show_tree)
-        {
-          $folders = $folder_query->tree ();
-
-          $box = $Page->make_box_renderer ();
-          $box->start_column_set ();
-          $box->new_column_of_type ('left-sidebar-column');
-      ?>
-      <div class="left-sidebar">
-      <?php
-          include_once ('webcore/gui/folder_tree_node_info.php');
-          $tree_node_info = new SECURITY_FOLDER_TREE_NODE_INFO ($App);
-          $tree_node_info->page_link = $Env->url ();
-          $tree_node_info->set_visible_node ($folder);
-          $tree_node_info->set_selected_node ($folder);
-          $tree_node_info->set_defined_nodes_visible ($folders);
-
-          $tree = $App->make_tree_renderer ();
-          $tree->node_info = $tree_node_info;
-          $tree->display ($folders);
-      ?>
-      </div>
-      <?php
-          $box->new_column_of_type('content-column text-flow');
-        }
-      ?>
-    <p class="notes">The permissions for this folder are shown below. Permissions are,
-      by default, inherited from the parent folder. Inherited permissions are displayed
-      as read-only. Use the button below to define or revert permissions.</p>
-    <table class="basic columns">
+  <div class="main-box">
     <?php
-
-      $cols = sizeof ($privilege_groups) + 2;
-
-      if ($parent)
+      if ($show_tree)
       {
+        $folders = $folder_query->tree ();
+
+        $box = $Page->make_box_renderer ();
+        $box->start_column_set ();
+        $box->new_column_of_type ('left-sidebar-column');
     ?>
-      <tr>
-        <td colspan="<?php echo $cols; ?>">
-        <?php
-          $class_name = $App->final_class_name ('PERMISSIONS_INHERITANCE_FORM', 'webcore/forms/permissions_inheritance_form.php');
-          $form = new $class_name ($App);
-          $form->process_existing ($folder);
-          $form->display ();
-        ?>
-        </td>
-      </tr>
+    <div class="left-sidebar">
     <?php
+        include_once ('webcore/gui/folder_tree_node_info.php');
+        $tree_node_info = new SECURITY_FOLDER_TREE_NODE_INFO ($App);
+        $tree_node_info->page_link = $Env->url ();
+        $tree_node_info->set_visible_node ($folder);
+        $tree_node_info->set_selected_node ($folder);
+        $tree_node_info->set_defined_nodes_visible ($folders);
+
+        $tree = $App->make_tree_renderer ();
+        $tree->node_info = $tree_node_info;
+        $tree->display ($folders);
+    ?>
+    </div>
+    <?php
+        $box->new_column_of_type('content-column text-flow');
       }
-
-      function draw_headers ()
-      {
-        global $App;
-        global $privilege_groups;
     ?>
+  <p class="notes">The permissions for this folder are shown below. Permissions are,
+    by default, inherited from the parent folder. Inherited permissions are displayed
+    as read-only. Use the button below to define or revert permissions.</p>
+  <table class="basic columns">
+  <?php
+
+    $cols = sizeof ($privilege_groups) + 2;
+
+    if ($parent)
+    {
+  ?>
     <tr>
-      <td></td>
-      <td></td>
+      <td colspan="<?php echo $cols; ?>">
+      <?php
+        $class_name = $App->final_class_name ('PERMISSIONS_INHERITANCE_FORM', 'webcore/forms/permissions_inheritance_form.php');
+        $form = new $class_name ($App);
+        $form->process_existing ($folder);
+        $form->display ();
+      ?>
+      </td>
+    </tr>
+  <?php
+    }
+
+    function draw_headers ()
+    {
+      global $App;
+      global $privilege_groups;
+  ?>
+  <tr>
+    <td></td>
+    <td></td>
+  <?php
+      $index = 1;
+      foreach ($privilege_groups as $group)
+      {
+  ?>
+  <th class="detail"><?php echo $group->title; ?></th>
+  <?php
+        $index += 1;
+      }
+  ?>
+  </tr>
+  <?php
+    }
+
+    function draw_privilege_set ($title, $perm)
+    {
+      global $formatter;
+      global $privilege_groups;
+      global $App;
+  ?>
+    <td><?php echo $title; ?></td>
     <?php
         $index = 1;
         foreach ($privilege_groups as $group)
         {
     ?>
-    <th class="detail"><?php echo $group->title; ?></th>
+    <td class="detail" style="white-space: nowrap">
     <?php
-          $index += 1;
+        foreach ($group->maps as $map)
+        {
+          if ($perm->privileges->enabled ($map->set_name, $map->type))
+          {
+            echo $formatter->icon_for ($map);
+          }
+          else
+          {
+            echo $App->resolve_icon_as_html ('{icons}buttons/blank', ' ', '16px');
+          }
         }
     ?>
-    </tr>
+    </td>
     <?php
+        $index += 1;
       }
+    }
 
-      function draw_privilege_set ($title, $perm)
-      {
-        global $formatter;
-        global $privilege_groups;
-        global $App;
-    ?>
-      <td><?php echo $title; ?></td>
+    if ($defined)
+    {
+      $renderer = $App->make_controls_renderer ();
+    }
+  ?>
+    <tr>
+      <td></td>
+      <td colspan="<?php echo $cols - 1; ?>">
+        <h2>General</h2>
+      </td>
+    </tr>
+    <?php draw_headers (); ?>
+    <tr>
+      <td style="vertical-align: top; text-align: right">
       <?php
-          $index = 1;
-          foreach ($privilege_groups as $group)
-          {
-      ?>
-      <td class="detail" style="white-space: nowrap">
-      <?php
-          foreach ($group->maps as $map)
-          {
-            if ($perm->privileges->enabled ($map->set_name, $map->type))
-            {
-              echo $formatter->icon_for ($map);
-            }
-            else
-            {
-              echo $App->resolve_icon_as_html ('{icons}buttons/blank', ' ', '16px');
-            }
-          }
+        if ($defined)
+        {
+          echo $renderer->button_as_html ('', 'edit_folder_anon_user_permissions.php?id=' . $folder->id, '{icons}buttons/edit');
+        }
       ?>
       </td>
       <?php
-          $index += 1;
+        draw_privilege_set ('Anonymous', $security->anonymous_permissions ());
+      ?>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; text-align: right">
+      <?php
+        if ($defined)
+        {
+          echo $renderer->button_as_html ('', 'edit_folder_all_users_permissions.php?id=' . $folder->id, '{icons}buttons/edit');
         }
-      }
+      ?>
+      </td>
+      <?php
+        draw_privilege_set ('Registered', $security->registered_permissions ());
+      ?>
+    </tr>
+    <tr>
+      <td colspan="<?php echo $cols; ?>">&nbsp;</td>
+    </tr>
+    <?php
+      $groups = $security->group_permissions ();
 
-      if ($defined)
+      if (sizeof ($groups) || $defined)
       {
-        $renderer = $App->make_controls_renderer ();
+    ?>
+    <tr>
+      <td style="text-align: right">
+      <?php
+        if ($defined)
+        {
+          echo $renderer->button_as_html ('', 'create_folder_group_permissions.php?id=' . $folder->id, '{icons}buttons/add');
+        }
+      ?>
+      </td>
+      <td colspan="<?php echo $cols - 1; ?>">
+        <h2><?php echo sizeof ($groups); ?> Groups</h2>
+      </td>
+    </tr>
+    <?php
+        if (sizeof ($groups))
+        {
+          draw_headers ();
+          foreach ($groups as $perms)
+          {
+            $group = $perms->group ();
+    ?>
+    <tr>
+      <td style="vertical-align: top; text-align: right; white-space: nowrap">
+      <?php
+            if ($defined)
+            {
+              $buttons = array ();
+              $buttons [] = $renderer->button_as_html ('', 'edit_folder_group_permissions.php?id=' . $folder->id . '&group_id=' . $perms->ref_id, '{icons}buttons/edit');
+              $buttons [] = $renderer->button_as_html ('', 'delete_folder_group_permissions.php?id=' . $folder->id . '&group_id=' . $perms->ref_id, '{icons}buttons/delete');
+              $renderer->draw_buttons ($buttons);
+            }
+      ?>
+      </td>
+    <?php
+            draw_privilege_set ($group->title_as_link (), $perms);
+    ?>
+    </tr>
+    <?php
+          }
+        }
       }
     ?>
-      <tr>
-        <td></td>
-        <td colspan="<?php echo $cols - 1; ?>">
-          <h2>General</h2>
-        </td>
-      </tr>
-      <?php draw_headers (); ?>
-      <tr>
-        <td style="vertical-align: top; text-align: right">
-        <?php
-          if ($defined)
-          {
-            echo $renderer->button_as_html ('', 'edit_folder_anon_user_permissions.php?id=' . $folder->id, '{icons}buttons/edit');
-          }
-        ?>
-        </td>
-        <?php
-          draw_privilege_set ('Anonymous', $security->anonymous_permissions ());
-        ?>
-      </tr>
-      <tr>
-        <td style="vertical-align: top; text-align: right">
-        <?php
-          if ($defined)
-          {
-            echo $renderer->button_as_html ('', 'edit_folder_all_users_permissions.php?id=' . $folder->id, '{icons}buttons/edit');
-          }
-        ?>
-        </td>
-        <?php
-          draw_privilege_set ('Registered', $security->registered_permissions ());
-        ?>
-      </tr>
-      <tr>
-        <td colspan="<?php echo $cols; ?>">&nbsp;</td>
-      </tr>
-      <?php
-        $groups = $security->group_permissions ();
+    <tr>
+      <td colspan="<?php echo $cols; ?>">&nbsp;</td>
+    </tr>
+    <?php
+      $users = $security->user_permissions ();
 
-        if (sizeof ($groups) || $defined)
+      if (sizeof ($users) || $defined)
+      {
+    ?>
+    <tr>
+      <td style="text-align: right">
+      <?php
+        if ($defined)
         {
-      ?>
-      <tr>
-        <td style="text-align: right">
-        <?php
-          if ($defined)
-          {
-            echo $renderer->button_as_html ('', 'create_folder_group_permissions.php?id=' . $folder->id, '{icons}buttons/add');
-          }
-        ?>
-        </td>
-        <td colspan="<?php echo $cols - 1; ?>">
-          <h2><?php echo sizeof ($groups); ?> Groups</h2>
-        </td>
-      </tr>
-      <?php
-          if (sizeof ($groups))
-          {
-            draw_headers ();
-            foreach ($groups as $perms)
-            {
-              $group = $perms->group ();
-      ?>
-      <tr>
-        <td style="vertical-align: top; text-align: right; white-space: nowrap">
-        <?php
-              if ($defined)
-              {
-                $buttons = array ();
-                $buttons [] = $renderer->button_as_html ('', 'edit_folder_group_permissions.php?id=' . $folder->id . '&group_id=' . $perms->ref_id, '{icons}buttons/edit');
-                $buttons [] = $renderer->button_as_html ('', 'delete_folder_group_permissions.php?id=' . $folder->id . '&group_id=' . $perms->ref_id, '{icons}buttons/delete');
-                $renderer->draw_buttons ($buttons);
-              }
-        ?>
-        </td>
-      <?php
-              draw_privilege_set ($group->title_as_link (), $perms);
-      ?>
-      </tr>
-      <?php
-            }
-          }
+          echo $renderer->button_as_html ('', 'create_folder_user_permissions.php?id=' . $folder->id, '{icons}buttons/add');
         }
       ?>
-      <tr>
-        <td colspan="<?php echo $cols; ?>">&nbsp;</td>
-      </tr>
-      <?php
-        $users = $security->user_permissions ();
+      </td>
+      <td colspan="<?php echo $cols - 1; ?>">
+        <h2><?php echo sizeof ($users); ?> Users</h2>
+      </td>
+    </tr>
 
-        if (sizeof ($users) || $defined)
+    <?php
+        if (sizeof ($users))
         {
-      ?>
-      <tr>
-        <td style="text-align: right">
-        <?php
-          if ($defined)
+          draw_headers ();
+          foreach ($users as $perms)
           {
-            echo $renderer->button_as_html ('', 'create_folder_user_permissions.php?id=' . $folder->id, '{icons}buttons/add');
-          }
-        ?>
-        </td>
-        <td colspan="<?php echo $cols - 1; ?>">
-          <h2><?php echo sizeof ($users); ?> Users</h2>
-        </td>
-      </tr>
-
+            $user = $perms->user ();
+    ?>
+    <tr>
+      <td style="vertical-align: top; text-align: right; white-space: nowrap">
       <?php
-          if (sizeof ($users))
-          {
-            draw_headers ();
-            foreach ($users as $perms)
+            if ($defined)
             {
-              $user = $perms->user ();
-      ?>
-      <tr>
-        <td style="vertical-align: top; text-align: right; white-space: nowrap">
-        <?php
-              if ($defined)
-              {
-                $args = 'id=' . $folder->id . '&name=' . urlencode ($user->title);
-                $buttons = array ();
-                $buttons [] = $renderer->button_as_html ('', 'edit_folder_user_permissions.php?' . $args, '{icons}buttons/edit');
-                $buttons [] = $renderer->button_as_html ('', 'delete_folder_user_permissions.php?' . $args, '{icons}buttons/delete');
-                $renderer->draw_buttons ($buttons);
-              }
-        ?>
-        </td>
-      <?php
-              draw_privilege_set ($user->title_as_link (), $perms);
-      ?>
-      </tr>
-      <?php
+              $args = 'id=' . $folder->id . '&name=' . urlencode ($user->title);
+              $buttons = array ();
+              $buttons [] = $renderer->button_as_html ('', 'edit_folder_user_permissions.php?' . $args, '{icons}buttons/edit');
+              $buttons [] = $renderer->button_as_html ('', 'delete_folder_user_permissions.php?' . $args, '{icons}buttons/delete');
+              $renderer->draw_buttons ($buttons);
             }
+      ?>
+      </td>
+    <?php
+            draw_privilege_set ($user->title_as_link (), $perms);
+    ?>
+    </tr>
+    <?php
           }
         }
-      ?>
-    </table>
+      }
+    ?>
+  </table>
 <?php
       if ($show_tree)
       {
         $box->finish_column_set ();
       }
 ?>
-    </div>
   </div>
   <?php
     $Page->finish_display ();

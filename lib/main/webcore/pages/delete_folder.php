@@ -27,11 +27,13 @@ http://www.earthli.com/software/webcore
 ****************************************************************************/
 
   $folder_query = $App->login->folder_query ();
+  /** @var FOLDER $folder */
   $folder = $folder_query->object_at_id (read_var ('id'));
 
   if (isset ($folder) && $App->login->is_allowed (Privilege_set_folder, Privilege_delete, $folder))
   {
     $class_name = $App->final_class_name ('DELETE_OBJECT_IN_FOLDER_FORM', 'webcore/forms/delete_form.php', 'folder');
+    /** @var DELETE_OBJECT_IN_FOLDER_FORM $form */
     $form = new $class_name ($folder, Privilege_set_folder);
 
     $form->process_existing ($folder);
@@ -39,7 +41,7 @@ http://www.earthli.com/software/webcore
     {
       $parent = $folder->parent_folder ();
 
-      if ($App->login->is_allowed (Privilege_set_folder, Privilege_hidden, $folder) && ! $form->value_for ('purge'))
+      if ($App->login->is_allowed (Privilege_set_folder, Privilege_view_hidden, $folder) && ! $form->value_for ('purge'))
       {
         $App->return_to_referer ($folder->home_page ());
       }
@@ -64,8 +66,8 @@ http://www.earthli.com/software/webcore
 
     $Page->start_display ();
   ?>
-  <div class="box">
-    <div class="box-body form-content">
+  <div class="main-box">
+    <div class="form-content">
     <?php
       $form->display ();
     ?>

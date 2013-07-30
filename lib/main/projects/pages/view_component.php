@@ -98,15 +98,13 @@ http://www.earthli.com/software/webcore
     $box->finish_column_set ();
 ?>
 </div>
-<div class="box">
+<div class="main-box">
   <?php if ($panel->uses_time_selector) { ?>
   <div class="menu-bar-top">
     <?php $panel_manager->display_time_menu (); ?>
   </div>
 <?php } ?>
-  <div class="box-body">
-    <?php $panel->display (); ?>
-  </div>
+  <?php $panel->display (); ?>
   <?php
   if ($panel->num_objects () && $panel->uses_time_selector)
   {

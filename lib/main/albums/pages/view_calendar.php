@@ -56,8 +56,7 @@ http://www.earthli.com/software/webcore/albums
 </div>
 <?php
 ?>
-<div class="box">
-  <div class="box-body">
+<div class="main-box">
   <?php
     $calendar = 1;
     
@@ -66,7 +65,6 @@ http://www.earthli.com/software/webcore/albums
     $cal = new $class_name ($folder);
     $cal->display ();
   ?>
-  </div>
 </div>
 <?php
     $Page->finish_display ();

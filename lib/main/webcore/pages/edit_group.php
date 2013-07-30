@@ -27,11 +27,13 @@ http://www.earthli.com/software/webcore
 ****************************************************************************/
 
   $group_query = $App->group_query ();
+  /** @var GROUP $group */
   $group = $group_query->object_at_id (read_var ('id'));
 
   if (isset ($group) && $App->login->is_allowed (Privilege_set_group, Privilege_modify))
   {
     $class_name = $App->final_class_name ('GROUP_FORM', 'webcore/forms/group_form.php');
+    /** @var GROUP_FORM $form */
     $form = new $class_name ($App);
 
     $form->process_existing ($group);
@@ -50,8 +52,8 @@ http://www.earthli.com/software/webcore
 
     $Page->start_display ();
   ?>
-  <div class="box">
-    <div class="box-body form-content">
+  <div class="main-box">
+    <div class="form-content">
     <?php
       $form->display ();
     ?>

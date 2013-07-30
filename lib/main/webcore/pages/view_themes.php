@@ -48,8 +48,8 @@ http://www.earthli.com/software/webcore
   ?>
   </div>
 </div>
-  <div class="box">
-    <div class="box-body">
+  <div class="main-box">
+    <div class="grid-content">
     <?php
       $theme_query = $App->theme_query ();
 

@@ -74,8 +74,8 @@ http://www.earthli.com/software/webcore
     <?php
     }
   ?>
-  <div class="box">
-    <div class="box-body form-content">
+  <div class="main-box">
+    <div class="form-content">
     <?php
       $form->display ();
     ?>

@@ -529,7 +529,7 @@ abstract class QUERY extends WEBCORE_OBJECT
   /**
    * Return the requested objects.
    * Use {@link restrict()} to constrain the result set.
-   * @return array[object]
+   * @return stdClass[]
    */
   public function objects ()
   {

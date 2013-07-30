@@ -37,8 +37,8 @@ http://www.earthli.com/software/webcore
 
   $Page->start_display ();
 ?>
-<div class="box">
-  <div class="box-body grid-content">
+<div class="main-box">
+  <div class="grid-content">
   <?php
     $class_name = $App->final_class_name ('HISTORY_ITEM_GRID', 'webcore/gui/history_item_grid.php');
     /** @var $grid HISTORY_ITEM_GRID */

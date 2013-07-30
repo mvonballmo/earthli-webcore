@@ -24,11 +24,6 @@ http://www.earthli.com/software/webcore
 
 ****************************************************************************/
 
-.nav-box
-{
-	border-width: 0;
-}
-
 a:link
 {
 	color: #0000FF;
@@ -47,24 +42,13 @@ a:active
 	color: #FF0000;
 }
 
-.box
-{
-	border-width: 0;
-}
-
-.box-title
-{
-	text-align: center;
-	border-width: 0;
-}
-
-.chart-title
-{
-	border-width: 0;
-}
-
-.object-in-list, .info-box-top, .info-box-bottom
+.object-in-list, .info-box-top, .info-box-bottom, .nav-box, .top-box, .footer
 {
 	border-color: black;
 }
 
+.object-navigator .links
+{
+  -webkit-column-rule: 1px solid black;
+  column-rule: 1px solid black;
+}

@@ -27,7 +27,9 @@ http://www.earthli.com/software/webcore/projects
 ****************************************************************************/
   
   $id = read_var ('id');
+  /** @var USER_PROJECT_QUERY $folder_query */
   $folder_query = $App->login->folder_query ();
+  /** @var PROJECT $folder */
   $folder = $folder_query->folder_for_component_at_id ($id);
   
   if (isset ($folder))
@@ -39,6 +41,7 @@ http://www.earthli.com/software/webcore/projects
   if (isset ($comp) && $App->login->is_allowed (Privilege_set_component, Privilege_modify, $comp))
   {
     $class_name = $App->final_class_name ('COMPONENT_FORM', 'projects/forms/component_form.php');
+    /** @var COMPONENT_FORM $form */
     $form = new $class_name ($folder);
   
     $form->process_existing ($comp);
@@ -57,8 +60,8 @@ http://www.earthli.com/software/webcore/projects
 
     $Page->start_display ();
 ?>
-<div class="box">
-  <div class="box-body form-content">
+<div class="main-box">
+  <div class="form-content">
   <?php
     $form->button = "Update";
     $form->display ();

@@ -45,12 +45,13 @@ http://www.earthli.com/software/webcore
   if (isset ($comment) && $App->login->is_allowed (Privilege_set_comment, Privilege_delete, $comment))
   {
     $class_name = $App->final_class_name ('DELETE_OBJECT_IN_FOLDER_FORM', 'webcore/forms/delete_form.php', 'comment');
+    /** @var DELETE_OBJECT_IN_FOLDER_FORM $form */
     $form = new $class_name ($folder, Privilege_set_comment);
 
     $form->process_existing ($comment);
     if ($form->committed ())
     {
-      if ($App->login->is_allowed (Privilege_set_comment, Privilege_hidden, $folder) && ! $form->value_for ('purge'))
+      if ($App->login->is_allowed (Privilege_set_comment, Privilege_view_hidden, $folder) && ! $form->value_for ('purge'))
       {
         $App->return_to_referer ($comment->home_page ());
       }
@@ -72,8 +73,8 @@ http://www.earthli.com/software/webcore
 
     $Page->start_display ();
 ?>
-  <div class="box">
-    <div class="box-body form-content">
+  <div class="main-box">
+    <div class="form-content">
       <?php
         $form->display ();
       ?>

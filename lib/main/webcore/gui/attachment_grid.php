@@ -91,7 +91,7 @@ class ATTACHMENT_GRID extends STANDARD_GRID
   {
 ?>
 <div style="position: relative">
-  <div class="picture-overlap">
+  <div class="top-left-overlay">
     <?php
     $this->_draw_menu_for ($obj, Menu_size_minimal);
     ?>

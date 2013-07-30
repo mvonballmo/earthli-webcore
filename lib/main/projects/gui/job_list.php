@@ -84,25 +84,30 @@ class JOB_LIST extends SELECT_LIST
       $this->_draw_selector ($obj);
       break;
     case 1:
+      $kind_properties = $obj->kind_properties();
       $t = $obj->title_formatter ();
       $t->max_visible_output_chars = 0;
-      echo $obj->title_as_link ($t);
+      $title = $obj->title_as_link($t);
+      echo $this->app->get_text_with_icon($kind_properties->icon, $title, '16px');
       break;
     case 2:
+      /** @var JOB_BRANCH_INFO $branch_info */
       $branch_info = $obj->main_branch_info ();
       $interval = $branch_info->age ();
       echo $interval->format ();
       break;
     case 3:
+      /** @var JOB_BRANCH_INFO $branch_info */
       $branch_info = $obj->main_branch_info ();
-      echo $branch_info->priority_as_text ();
+      $priority_props = $branch_info->priority_properties ();
+      echo $this->app->get_text_with_icon($priority_props->icon, $priority_props->title, '16px');
       break;
     case 4:
+      /** @var JOB_BRANCH_INFO $branch_info */
       $branch_info = $obj->main_branch_info ();
-      echo $branch_info->status_as_text ();
+      $status_props = $branch_info->status_properties ();
+      echo $this->app->get_text_with_icon($status_props->icon, $status_props->title, '16px');
       break;
     }
   }
 }
-
-?>

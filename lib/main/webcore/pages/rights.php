@@ -33,8 +33,8 @@ http://www.earthli.com/software/webcore
   $Page->location->append ('Rights');
   $Page->start_display ();
 ?>
-<div class="box">
-  <div class="box-body">
+<div class="main-box">
+  <div class="text-flow">
     <p>This site and it's contents (including web pages, email notifications and
     newsfeeds) belongs to the site owner, as indicated in the
     copyright notice at the bottom of each page. Posted content, like

@@ -33,8 +33,8 @@ http://www.earthli.com/software/webcore
   $Page->location->append ('Privacy');
   $Page->start_display ();
 ?>
-<div class="box">
-  <div class="box-body">
+<div class="main-box">
+  <div class="text-flow">
     <h2>Short and Sweet</h2>
     <p>The owners and operators of this site will not give out any of your information to
     any third parties. Ever. Period.</p>
@@ -48,7 +48,7 @@ http://www.earthli.com/software/webcore
     Anonymous subscriptions, because of system limitations, cannot be protected
     fully&mdash;create an account in order to ensure complete privacy.</p> 
     <h3>Passwords</h3>
-    <p>Your password is immediatly encrypted before storing in the database and is not
+    <p>Your password is immediately encrypted before storing in the database and is not
     known to the operators of this web site (therefore it cannot be lost or
     shared). That also means that a lost password is lost forever and cannot be
     sent to you. It can, however, be reset.</p>
@@ -70,7 +70,7 @@ http://www.earthli.com/software/webcore
     own&mdash;suffice it to say that it's a big, bad world out there and life 
     isn't always fair.</p>
     <h3>Selling Out</h3>
-    <p>If this site is sold at a fantasical profit to another entity, all user 
+    <p>If this site is sold at a fantastical profit to another entity, all user
     information will belong to the new entity and their rules will apply. Again,
     this site will do its best to inform users of the changed circumstances.</p>
   </div>

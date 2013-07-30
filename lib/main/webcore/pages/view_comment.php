@@ -78,8 +78,8 @@ http://www.earthli.com/software/webcore
   <?php
   }
   ?>
-  <div class="box">
-    <div class="box-body grid-content">
+  <div class="main-box">
+    <div class="grid-content">
       <?php $com_renderer->display (); ?>
     </div>
   </div>

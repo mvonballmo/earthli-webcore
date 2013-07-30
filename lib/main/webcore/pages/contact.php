@@ -36,12 +36,10 @@ http://www.earthli.com/software/webcore
   $res = $Page->resources ();
   $options = $Page->template_options;
 ?>
-<div class="box">
-  <div class="box-body">
-    <p>To contact the site owners, use the 
-      <a href="<?php echo $res->resolve_file ($options->support_url); ?>">support page</a>
-      or send an email to <em><?php echo scramble_email ($Page->mail_options->webmaster_address); ?></em>.</p>
-  </div>
+<div class="main-box">
+  <p>To contact the site owners, use the
+    <a href="<?php echo $res->resolve_file ($options->support_url); ?>">support page</a>
+    or send an email to <em><?php echo scramble_email ($Page->mail_options->webmaster_address); ?></em>.</p>
 </div>
 <?php
   $Page->finish_display ();

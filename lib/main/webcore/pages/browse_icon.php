@@ -50,22 +50,21 @@ http://www.earthli.com/software/webcore
   <?php
   }
 ?>
-  <div class="box">
-    <div class="box-body">
-      <h2>
-        Browse for icon
-      </h2>
+  <div class="main-box">
+    <h2>
+      Browse for icon
+    </h2>
     <?php
       $icon_query = $App->icon_query ();
 
       $class_name = $App->final_class_name ('ICON_GRID', 'webcore/gui/icon_grid.php');
+      /** @var ICON_GRID $grid */
       $grid = new $class_name ($App);
       $grid->is_chooser = true;
       $grid->set_ranges (4, 4);
       $grid->set_query ($icon_query);
       $grid->display ();
     ?>
-    </div>
   </div>
 <?php
   $Page->finish_display ();

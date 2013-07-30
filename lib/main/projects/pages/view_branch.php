@@ -124,13 +124,13 @@ http://www.earthli.com/software/webcore/projects
     $box->finish_column_set ();
 ?>
 </div>
-  <div class="box">
+  <div class="main-box">
     <?php if ($panel->uses_time_selector) { ?>
     <div class="menu-bar-top">
       <?php $panel_manager->display_time_menu (); ?>
     </div>
     <?php } ?>
-    <div class="box-body">
+    <div class="text-flow">
       <?php $panel->display (); ?>
     </div>
     <?php

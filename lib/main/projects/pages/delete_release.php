@@ -27,6 +27,7 @@ http://www.earthli.com/software/webcore/projects
 ****************************************************************************/
 
   $id = read_var ('id');
+  /** @var USER_PROJECT_QUERY $folder_query */
   $folder_query = $App->login->folder_query ();
   $folder = $folder_query->folder_for_release_at_id ($id);
 
@@ -39,12 +40,13 @@ http://www.earthli.com/software/webcore/projects
   if (isset ($rel) && $App->login->is_allowed (Privilege_set_release, Privilege_delete, $rel))
   {
     $class_name = $App->final_class_name ('DELETE_OBJECT_IN_FOLDER_FORM', 'webcore/forms/delete_form.php', 'release');
+    /** @var DELETE_OBJECT_IN_FOLDER_FORM $form */
     $form = new $class_name ($folder, Privilege_set_release);
 
     $form->process_existing ($rel);
     if ($form->committed ())
     {
-      if ($App->login->is_allowed (Privilege_set_release, Privilege_hidden, $rel))
+      if ($App->login->is_allowed (Privilege_set_release, Privilege_view_hidden, $rel))
       {
         $App->return_to_referer ($rel->home_page ());
       }
@@ -68,8 +70,8 @@ http://www.earthli.com/software/webcore/projects
 
     $Page->start_display ();
   ?>
-  <div class="box">
-    <div class="box-body form-content">
+  <div class="main-box">
+    <div class="form-content">
     <?php
       $form->display ();
     ?>

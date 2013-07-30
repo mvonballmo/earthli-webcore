@@ -27,6 +27,7 @@ http://www.earthli.com/software/webcore
 ****************************************************************************/
 
   $folder_query = $App->login->folder_query ();
+  /** @var FOLDER $folder */
   $folder = $folder_query->object_at_id (read_var ('id'));
   
   if (isset ($folder))
@@ -42,6 +43,7 @@ http://www.earthli.com/software/webcore
   if (isset ($group) && $App->login->is_allowed (Privilege_set_folder, Privilege_secure, $folder))
   {
     $class_name = $App->final_class_name ('FOLDER_GROUP_PERMISSIONS_DELETE_FORM', 'webcore/forms/folder_group_permissions_delete_form.php');
+    /** @var FOLDER_GROUP_PERMISSIONS_DELETE_FORM $form */
     $form = new $class_name ($App);
 
     $form->process_existing ($perm);
@@ -59,8 +61,8 @@ http://www.earthli.com/software/webcore
 
     $Page->start_display ();
   ?>
-  <div class="box">
-    <div class="box-body form-content">
+  <div class="main-box">
+    <div class="form-content">
     <?php
       $form->display ();
     ?>

@@ -52,7 +52,9 @@ http://www.earthli.com/software/webcore
     $entry_info = $entry->type_info ();
     
     $location_renderer = $entry->handler_for (Handler_location);
-    $location_renderer->add_to_page_as_text ($Page, $entry);
+    $location_renderer->add_to_page_as_link ($Page, $entry);
+
+    $Page->location->append('Plain text', '', '{icons}indicators/text');
     
     $Page->add_style_sheet ($Env->logger_style_sheet);
 
@@ -62,32 +64,16 @@ http://www.earthli.com/software/webcore
 
     $Page->start_display ();
 ?>
-  <div class="menu-bar-top">
-  <?php 
-    $renderer = $entry->handler_for (Handler_menu);
-    $renderer->display ($entry->handler_for (Handler_commands));
-  ?>
-    <div style="clear: both"></div>
-  </div>
-  <div class="box">
-    <div class="box-title">
+  <div class="main-box">
+    <pre class="log-box">
 <?php
-    $t = $entry->title_formatter ();
-    $t->max_visible_output_chars = 0;
-    echo $entry->title_as_html ($t);
-?>
-        </div>
-        <div class="box-body">
-          <pre class="log-box">
-<?php      
     $renderer = $entry->handler_for (Handler_text_renderer);
     $options = $renderer->options();
     $options->load_from_request();
     $renderer->display ($entry);
 ?>
-          </pre>
-        </div>
-      </div>
+    </pre>
+  </div>
 <?php
     $Page->finish_display ();
   }

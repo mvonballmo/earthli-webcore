@@ -95,8 +95,7 @@ http://www.earthli.com/software/webcore
   $box->finish_column_set ();
   ?>
 </div>
-<div class="box">
-  <div class="box-body">
+<div class="main-box">
     <?php if ($panel->uses_time_selector) { ?>
       <div class="menu-bar-top">
         <?php $panel_manager->display_time_menu (); ?>
@@ -114,7 +113,6 @@ http://www.earthli.com/software/webcore
   <?php
     }
   ?>
-  </div>
 </div>
 <?php
     $Page->finish_display ();

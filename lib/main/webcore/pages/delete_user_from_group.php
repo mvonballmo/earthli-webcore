@@ -27,16 +27,19 @@ http://www.earthli.com/software/webcore
 ****************************************************************************/
 
   $group_query = $App->group_query ();
+  /** @var GROUP $group */
   $group = $group_query->object_at_id (read_var ('id'));
 
   if (isset ($group) && $App->login->is_allowed (Privilege_set_group, Privilege_modify))
   {
     $user_query = $group->user_query ();
+    /** @var USER $user */
     $user = $user_query->object_with_field ('title', read_var ('name'));
 
     if (isset ($user))
     {
       $class_name = $App->final_class_name ('DELETE_USER_FROM_GROUP_FORM', 'webcore/forms/delete_user_from_group_form.php');
+      /** @var DELETE_USER_FROM_GROUP_FORM $form */
       $form = new $class_name ($user);
 
       $form->process_existing ($group);
@@ -54,8 +57,8 @@ http://www.earthli.com/software/webcore
 
       $Page->start_display ();
     ?>
-    <div class="box">
-      <div class="box-body">
+    <div class="main-box">
+      <div class="form-content">
       <?php
         $form->display ();
       ?>

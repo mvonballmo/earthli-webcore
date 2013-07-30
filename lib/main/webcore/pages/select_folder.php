@@ -37,8 +37,8 @@ http://www.earthli.com/software/webcore
 	
 	  $Page->start_display ();
 	?>
-	  <div class="box">
-	    <div class="box-body">
+	  <div class="main-box">
+	    <div class="text-flow">
 	      <p>Please select a folder in order to continue.</p>
 	    <?php    
 		    $create_entry_url = $App->resolve_file_for_alias (Folder_name_application, $page_name);

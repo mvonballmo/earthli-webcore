@@ -83,44 +83,42 @@ http://www.earthli.com/software/webcore
     ?>
   </div>
 </div>
-<div class="box">
-  <div class="box-body">
-    <?php
-      if ($show_tree)
-      {
-        $folders = $folder_query->tree ();
-        $folder_type_info = $folder->type_info ();
+<div class="main-box">
+  <?php
+    if ($show_tree)
+    {
+      $folders = $folder_query->tree ();
+      $folder_type_info = $folder->type_info ();
 
-        $box = $Page->make_box_renderer ();
-        $box->start_column_set ();
-        $box->new_column_of_type ('left-sidebar-column');
-    ?>
-    <div class="left-sidebar">
-    <?php
-        include_once ('webcore/gui/folder_tree_node_info.php');
-        $tree_node_info = new SUBSCRIPTION_FOLDER_TREE_NODE_INFO ($App);
-        $tree_node_info->page_link = $Env->url ();
-        $tree_node_info->set_selected_node ($folder);
-        $tree_node_info->set_visible_node ($folder);
+      $box = $Page->make_box_renderer ();
+      $box->start_column_set ();
+      $box->new_column_of_type ('left-sidebar-column');
+  ?>
+  <div class="left-sidebar">
+  <?php
+      include_once ('webcore/gui/folder_tree_node_info.php');
+      $tree_node_info = new SUBSCRIPTION_FOLDER_TREE_NODE_INFO ($App);
+      $tree_node_info->page_link = $Env->url ();
+      $tree_node_info->set_selected_node ($folder);
+      $tree_node_info->set_visible_node ($folder);
 
-        $tree = $App->make_tree_renderer ();
-        $tree->node_info = $tree_node_info;
-        $tree->display ($folders);
-    ?>
-    </div>
-    <?php
-        $box->new_column_of_type('content-column text-flow');
-      }
+      $tree = $App->make_tree_renderer ();
+      $tree->node_info = $tree_node_info;
+      $tree->display ($folders);
+  ?>
+  </div>
+  <?php
+      $box->new_column_of_type('content-column text-flow');
+    }
 
-      $form->button = "Update";
-      $form->display ();
+    $form->button = "Update";
+    $form->display ();
 
-      if (isset ($box))
-      {
-        $box->finish_column_set ();
-      }
-    ?>
-    </div>
+    if (isset ($box))
+    {
+      $box->finish_column_set ();
+    }
+  ?>
   </div>
 <?php
     $Page->finish_display ();

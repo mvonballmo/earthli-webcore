@@ -55,8 +55,8 @@ if (isset ($search))
     ?>
   </div>
 </div>
-<div class="box">
-  <div class="box-body">
+<div class="main-box">
+  <div class="text-flow">
   <?php
     /** @var $renderer OBJECT_RENDERER */
     $renderer = $search->handler_for (Handler_html_renderer);

@@ -298,7 +298,7 @@ class MENU_RENDERER extends WEBCORE_OBJECT
    * @param string $CSS_class CSS class used for each {@link COMMAND}.
    * @access private
    */
-  protected function _draw_commands ($commands, $important_only, $CSS_class = 'menu-button')
+  protected function _draw_commands ($commands, $important_only, $CSS_class)
   {
     $cmds = $commands->command_list ();
     $num_cmds_to_be_shown = $commands->num_executable_commands (); 

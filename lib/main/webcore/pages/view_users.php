@@ -90,8 +90,8 @@ http://www.earthli.com/software/webcore
     $box->finish_column_set ();
     ?>
   </div>
-  <div class="box">
-    <div class="box-body">
+  <div class="main-box">
+    <div class="grid-content">
     <?php
       $class_name = $Page->final_class_name ('USER_GRID', 'webcore/gui/user_grid.php');
       /** @var $grid USER_GRID */
@@ -100,8 +100,8 @@ http://www.earthli.com/software/webcore
       $grid->set_query ($user_query);
       $grid->display ();
      ?>
-    </div> <!-- box-body -->
-  </div> <!-- box -->
+    </div>
+  </div>
   <?php
     $Page->finish_display ();
   }
