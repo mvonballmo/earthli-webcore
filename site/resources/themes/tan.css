@@ -208,3 +208,8 @@ h4
 	color: #0f3a89;
 }
 
+.text-control, .menu-control, .menu
+{
+  color: #0f3a89;
+  border: 1px solid #baba78;
+}

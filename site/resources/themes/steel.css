@@ -167,3 +167,15 @@ a:active, a:hover
 	border: 1px solid #1A2E4A;
 }
 
+.text-control, .menu-control
+{
+  border-width: 1px;
+  border-style: solid;
+  border-color: #1A2E4A #BACEEA #BACEEA #1A2E4A;
+  background-color: #BACEEA;
+}
+
+.text-control.required, .menu-control.required
+{
+  background-color: #CADEFA;
+}

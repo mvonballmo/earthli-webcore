@@ -157,3 +157,13 @@ h2
 {
 	color: #6666CC;
 }
+
+.text-control, .menu-control
+{
+  border-color: #000080;
+}
+
+.text-control.required, .menu-control.required
+{
+  background-color: #F4FFF4;
+}

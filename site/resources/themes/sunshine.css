@@ -154,3 +154,9 @@ a:active, a:hover
 {
 	color: #6699CC;
 }
+
+.text-control, .menu-control
+{
+  color: #003399;
+  background: #FFFFAA;
+}

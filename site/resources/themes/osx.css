@@ -227,4 +227,18 @@ th
 	background: url(osx/5_percent_black.png);
 }
 
+.text-control
+{
+  border-color: #888888;
+}
 
+.text-control.required
+{
+  border-color: #888888;
+}
+
+.text-control:focus
+{
+  background-color: #FFFFEE;
+  border-color: #0066CC;
+}

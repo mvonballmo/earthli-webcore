@@ -158,3 +158,9 @@ th
 	padding: .5em;
 }
 
+.text-control, .menu-control
+{
+  color: #77DD77;
+  background: #005000;
+  border-color: #008000;
+}

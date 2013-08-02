@@ -214,3 +214,10 @@ h1
   background: #BBAA99 url(hochzeit/fossil_paper.jpg) repeat;
   color: #FDF8E5;
 }
+
+.text-control, .menu-control
+{
+  border: 1px solid #554433;
+  background: #BBAA99 url(hochzeit/fossil_paper.jpg) repeat;
+  color: #FDF8E5;
+}

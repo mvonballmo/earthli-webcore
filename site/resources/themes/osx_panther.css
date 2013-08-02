@@ -230,3 +230,11 @@ th
   color: white;
 	background: url(osx/5_percent_black.png);
 }
+
+.text-control, .menu-control
+{
+  background: #DDDDDD;
+  border: 1px solid #333333;
+  border-bottom-color: #CCCCCC;
+  border-right-color: #CCCCCC;
+}

@@ -30,15 +30,9 @@ body
 	color: #CCCCCC;
 }
 
-.page
-{
-	max-width: 800px;
-	margin: auto;
-}
-
 .banner, .footer
 {
-	border: 0px solid #1C6CA9;
+	border: 0 solid #1C6CA9;
 }
 
 .banner
@@ -210,4 +204,18 @@ th
 {
 	background-color: #395a93;
 	border-color: #698aC3 #000066 #000066 #698aC3;
+}
+
+.menu-control, .text-control
+{
+  border: 1px solid #1C6CA9;
+  border-color: #000066 #698aC3 #698aC3 #000066;
+  background-color: #496aA3;
+  color: #CCCCCC;
+}
+
+.text-control.required
+{
+  background-color: #698aC3;
+  color: white;
 }

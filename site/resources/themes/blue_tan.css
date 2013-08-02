@@ -195,3 +195,9 @@ h4
 	padding: .5em;
 	border: 1px dotted #999999;
 }
+
+.text-control, .menu-control
+{
+  color: #336699;
+  border: 1px solid #999999;
+}

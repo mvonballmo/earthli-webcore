@@ -24,18 +24,4 @@ http://www.earthli.com/software/webcore
 
 ****************************************************************************/
 
-.text-control
-{
-	border-color: #888888;
-}
 
-.text-control.required
-{
-	border-color: #888888;
-}
-
-.text-control:focus
-{
-	background-color: #FFFFEE;
-	border-color: #0066CC;
-}

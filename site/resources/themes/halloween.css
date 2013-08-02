@@ -174,3 +174,10 @@ th
 {
 	color: #CC6600;
 }
+
+.menu-control, .text-control
+{
+  background: #000000;
+  color: #FF6600;
+  border: 1px solid #666666;
+}

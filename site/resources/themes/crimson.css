@@ -178,3 +178,10 @@ th
 {
 	border-color: #CCCCCC;
 }
+
+.text-control, .menu-control
+{
+  color: #CCBBAA;
+  background: #993333;
+  border: 1px solid #600000;
+}

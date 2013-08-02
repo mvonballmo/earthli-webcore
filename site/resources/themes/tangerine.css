@@ -222,3 +222,10 @@ a:hover, a:active
 {
 	color: #336699;
 }
+
+.menu-control, .text-control
+{
+  color: #003399;
+  background: #FFD878;
+  border-color: #999999;
+}

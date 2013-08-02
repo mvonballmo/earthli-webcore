@@ -168,3 +168,15 @@ th
 {
 	color: #CCCC66;
 }
+
+.text-control, .menu-control
+{
+  color: #DDCCBB;
+  background: #664466;
+  border-color: #998877;
+}
+
+.text-control.required
+{
+  background: #775577;
+}

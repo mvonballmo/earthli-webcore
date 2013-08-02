@@ -185,3 +185,10 @@ th
 	border: 1px dotted #999999;
 	background: #333333;
 }
+
+.menu-control, .text-control
+{
+  background: #000000 ;
+  color: #0099FF;
+  border: 1px solid #666666;
+}

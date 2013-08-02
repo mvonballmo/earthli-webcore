@@ -231,3 +231,20 @@ h2, th
 {
 	color: #999933;
 }
+
+.checkbox-control
+{
+  background: #000040;
+}
+
+.text-control, .menu-control
+{
+  color: #CC9933;
+  background-color: #333333;
+  border-color: #666666;
+}
+
+.text-control.required
+{
+  background-color: #222222;
+}

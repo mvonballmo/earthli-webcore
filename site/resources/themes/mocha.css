@@ -160,3 +160,10 @@ th
 	color: #CCBBAA;
 }
 
+.menu-control, .text-control
+{
+  color: #CCBBAA;
+  background: #5B4A39;
+  border-color: #322110;
+}
+

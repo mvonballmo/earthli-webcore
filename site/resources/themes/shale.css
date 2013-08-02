@@ -251,3 +251,14 @@ h2, th
 	border-color: #777777;
 }
 
+.checkbox-control
+{
+  background: #000040;
+}
+
+.text-control, .menu-control
+{
+  color: #A3ACB6;
+  background-color: #434C56;
+  border-color: #777777;
+}

@@ -164,3 +164,7 @@ h2
 	color: #006699;
 }
 
+.text-control, .menu-control
+{
+  background: #CEC0A8;
+}

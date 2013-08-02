@@ -236,3 +236,21 @@ pre > code
   background-color: #3477B1;
   color: white;
 }
+
+.text-control, .menu-control
+{
+  border: 1px solid #999999;
+}
+
+.text-control.required, .menu-control.required
+{
+  background-color: #FFFFFF;
+}
+
+.check-box-control
+{
+  border: 1px solid #999999;
+  background: white;
+  color: red;
+}
+
