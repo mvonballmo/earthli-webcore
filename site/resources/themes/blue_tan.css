@@ -70,8 +70,10 @@ body
   background-color: #FFFFFF;
 }
 
-.preview-title, .chart-title
+.chart-title
 {
+  margin-left: -15px;
+  padding-left: 15px;
 	color: #336699;
 	border-bottom: 1px dotted #999999;
 }

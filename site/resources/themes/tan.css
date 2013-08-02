@@ -27,18 +27,12 @@ http://www.earthli.com/software/webcore
 body
 {
 	background-color: #FFFFFF;
-}
-
-.page
-{
-	max-width: 800px;
-	margin: auto;
+  color: #5a5a18;
 }
 
 .nav-box
 {
-	border: 1px solid #baba78;
-	background-color: #efefce;
+	border-color: #baba78;
 }
 
 a:link, a:visited
@@ -51,40 +45,20 @@ a:hover, a:active
 	color: #FF0000;
 }
 
-.box
-{
-	border: 1px solid #827db0;
-}
-
-.box-body
-{
-}
-
-.box-title
-{
-	background-color: #e0ebfc;
-	color: #0f3a89;
-	border-bottom: 1px solid #827db0;
-}
-
-.side-bar, .chart
+.chart
 {
 	border-color: #baba78;
 }
 
 .preview
 {
-	border-width: 0px;
+	border-width: 0;
 }
 
-.preview-title
+.chart-title
 {
-	color: #81824e;
-	border-width: 0px;	
-}
-
-.side-bar-title, .chart-title
-{
+  margin-left: -15px;
+  padding-left: 15px;
 	background-color: #efefce;
 	color: #81824e;
 	border-bottom: 1px solid #baba78;
@@ -172,6 +146,27 @@ a:hover, a:active
 	color: #7799BB;
 }
 
+.button
+{
+  background-color: #FAFAEF;
+}
+
+.button.disabled
+{
+  border-color: #EEE;
+}
+
+.button:hover:not(.disabled):not(.selected)
+{
+  background-color: #efefce;
+  border-color: #baba78;
+}
+
+.button.selected
+{
+  background-color: #e0ebfc;
+}
+
 h1
 {
 	color: #B1B27e;
@@ -180,9 +175,7 @@ h1
 h2
 {
 	color: #0f3a89;
-	background-color: #e0ebfc;
-	border: 1px solid #827db0;
-	padding-left: 3px;
+  border-bottom: 1px dotted #0f3a89;
 }
 
 h3
