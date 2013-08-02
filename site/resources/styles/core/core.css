@@ -495,7 +495,6 @@ pre code
 
 .chart-body
 {
-  padding: .5em
 }
 
 .chart-title
@@ -566,6 +565,11 @@ table.basic > tbody > tr > td.empty-label
 .form-button-content
 {
   text-align: right;
+}
+
+.form-basic item-description
+{
+  margin-left: 20px;
 }
 
 .form-basic-block
@@ -738,7 +742,7 @@ ul.menu-items > li,
   margin-right: 5px;
 }
 
-.text-flow ul.menu > li
+.text-flow ul.menu > li:not(.menu-group-title)
 {
   line-height: 100%;
   padding: 0;
@@ -935,6 +939,12 @@ a.button:link, a.button:visited
 .button + .button
 {
   margin-left: 10px;
+}
+
+.button.disabled
+{
+  color: #AAA;
+  border-color: #DDD;
 }
 
 .button img

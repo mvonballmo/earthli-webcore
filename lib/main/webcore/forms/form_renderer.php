@@ -1916,7 +1916,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
             $Result .= '>' . $ctrl . "</dt>\n<dd";
             if ($props->description_class)
             {
-              $Result .= ' style="margin-left: 2em" class="' . $props->description_class . '"';
+              $Result .= ' class="item-description ' . $props->description_class . '"';
             }
             $Result .= '><label for="' . $dom_id . '">' . $item->description . "</label></dd>\n";
           }
