@@ -136,6 +136,7 @@ http://www.earthli.com/software/webcore
         $field = new TEXT_FIELD ();
         $field->id = 'name';
         $field->caption = 'Name';
+        $field->required = true;
         $this->add_field ($field);
 
         $field = new TEXT_FIELD ();
@@ -187,6 +188,7 @@ http://www.earthli.com/software/webcore
         $text_props = new FORM_TEXT_CONTROL_OPTIONS();
         $text_props->width = '10em';
         echo $renderer->date_as_html('date');
+        echo ' ';
         echo $renderer->text_line_as_html('name', $text_props);
         $renderer->finish_row();
         $renderer->draw_text_box_row('description', null, '2em');
@@ -196,9 +198,26 @@ http://www.earthli.com/software/webcore
         $props->height = '2em';
         $props->add_item ('One day', 0, 'For parties or sporting events.');
         $props->add_item ('Several days', 1, 'For trips; both first and last day are fixed.');
+        $props->items_per_row = 2;
         $renderer->draw_radio_group_row('select', $props);
-        $renderer->draw_drop_down_row('select', $props);
-        $renderer->draw_list_box_row('select', $props);
+
+        $field = $this->field_at('select');
+        $props->width = '15em';
+
+        $renderer->start_row('Menus');
+        echo $renderer->drop_down_as_html('select', $props);
+        echo ' ';
+        $field->required = true;
+        echo $renderer->drop_down_as_html('select', $props);
+        $renderer->finish_row();
+
+        $renderer->start_row('Lists');
+        $field->required = false;
+        echo $renderer->list_box_as_html('select', $props);
+        echo ' ';
+        $field->required = true;
+        echo $renderer->list_box_as_html('select', $props);
+        $renderer->finish_row();
 
         $renderer->finish();
       }
