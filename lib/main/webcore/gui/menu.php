@@ -47,7 +47,18 @@ http://www.earthli.com/software/webcore
  */
 class MENU extends WEBCORE_OBJECT
 {
+  /**
+   * Reference to the renderer for this menu.
+   * @var MENU_RENDERER
+   */
   public $renderer;
+
+  /**
+   * {@link append()} and {@link prepend()} add items here.
+   * Created by {@link _ensure_commands_exist()}.
+   * @var COMMANDS
+   */
+  public $commands;
 
   /**
    *
@@ -63,7 +74,7 @@ class MENU extends WEBCORE_OBJECT
     $this->renderer->content_mode = Menu_show_all_as_list;
 
     include_once ('webcore/cmd/commands.php');
-    $this->_commands = new COMMANDS ($context);
+    $this->commands = new COMMANDS ($context);
   }
   
   /**
@@ -72,9 +83,9 @@ class MENU extends WEBCORE_OBJECT
    */
   public function size ()
   {
-    if (isset ($this->_commands))
+    if (isset ($this->commands))
     {
-      return $this->_commands->size ();
+      return $this->commands->size ();
     }
     
     return 0;
@@ -86,9 +97,9 @@ class MENU extends WEBCORE_OBJECT
    */
   public function display ()
   {
-    if (isset ($this->_commands))
+    if (isset ($this->commands))
     {
-      $this->renderer->display ($this->_commands);
+      $this->renderer->display ($this->commands);
     }
   }
   
@@ -117,7 +128,7 @@ class MENU extends WEBCORE_OBJECT
   public function append ($title, $url = '', $icon = '', $selected = false, $link_title = '')
   {
     $result = $this->_make_command($title, $url, $icon, $selected, $link_title);
-    $this->_commands->append ($result);
+    $this->commands->append ($result);
 
     return $result;
   }
@@ -132,7 +143,7 @@ class MENU extends WEBCORE_OBJECT
    */
   public function prepend ($title, $url = '', $icon = '', $selected = false, $link_title = '')
   {
-    $this->_commands->prepend ($this->_make_command ($title, $url, $icon, $selected, $link_title));
+    $this->commands->prepend ($this->_make_command ($title, $url, $icon, $selected, $link_title));
   }
   
   /**
@@ -143,7 +154,7 @@ class MENU extends WEBCORE_OBJECT
   protected function copy_from ($other)
   {
     $this->renderer = clone($other->renderer);
-    $this->_commands = clone($other->_commands);
+    $this->commands = clone($other->commands);
   }
 
   /**
@@ -159,7 +170,7 @@ class MENU extends WEBCORE_OBJECT
    */
   protected function _make_command ($caption, $url, $icon, $selected, $link_title)
   {
-    $Result = $this->_commands->make_command ();
+    $Result = $this->commands->make_command ();
     $Result->id = 'item_' . mt_rand ();
     if ($selected)
     {
@@ -174,12 +185,4 @@ class MENU extends WEBCORE_OBJECT
     $Result->icon = $icon;
     return $Result;
   }
-
-  /**
-   * {@link append()} and {@link prepend()} add items here.
-   * Created by {@link _ensure_commands_exist()}.
-   * @var COMMANDS
-   * @access private
-   */
-  protected $_commands;
 }
