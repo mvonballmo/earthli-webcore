@@ -26,19 +26,22 @@ http://www.earthli.com/software/webcore
 
 ****************************************************************************/
 
-/** @var $theme_query THEME_QUERY */
-  $theme_query = $Page->theme_query ();
+  /** @var THEMED_PAGE $themed_page */
+  $themed_page = $Page;
+  /** @var $theme_query THEME_QUERY */
+  $theme_query = $themed_page->theme_query ();
+  $themes = $theme_query->objects ();
 
   $Page->title->subject = $theme_query->size () . ' Themes';
   $Page->template_options->title = 'Settings';
   $Page->template_options->settings_url = '';
-  
+
   $Page->location->add_root_link ();
   $Page->location->append ('Settings');
   $Page->location->append ($theme_query->size () . ' Themes');
 
-  $themes = $theme_query->objects ();
-
+  // Leave the form initialization before the call to $Page->start_display() so that the page is rendered
+  // most recently selected theme
   include_once ('webcore/forms/theme_selector_form.php');
   $form = new THEME_SELECTOR_FORM ($Page, $themes);
   $form->process_plain ();
@@ -50,38 +53,163 @@ http://www.earthli.com/software/webcore
   <?php
   $box = $Page->make_box_renderer();
   $box->start_column_set();
+  $box->new_column_of_type('left-sidebar-column');
+  ?>
+  <div class="left-sidebar">
+    <p>Customize the font and theme to the right and see a preview below.</p>
+    <div class="form-content">
+      <?php
+      $form->display ();
+      ?>
+    </div>
+    <p>You can also switch themes with the samples below. Press the button under the thumbnail to select a theme.</p>
+    <div class="grid-content">
+      <?php
+      $class_name = $Page->final_class_name ('THEME_GRID', 'webcore/gui/theme_grid.php');
+
+      /** @var $grid THEME_GRID */
+      $grid = new $class_name ($Page);
+      $grid->is_chooser = true;
+      $grid->paginator->pages_to_show = 2;
+      $grid->paginator->show_first_and_last = false;
+      $grid->paginator->show_total = false;
+      $grid->set_ranges (5, 1);
+      $grid->set_query ($theme_query);
+      $grid->display ();
+      ?>
+    </div>
+  </div>
+  <?php
   $box->new_column_of_type('content-column text-flow');
   ?>
-  <p>Adjust your font and theme settings in the form below. Select <span class="reference">[default]</span>
-    to restore the site default for that setting.</p>
-  <div class="form-content">
-    <?php $form->display (); ?>
+  <h1>Preview (level 1 heading)</h1>
+  <h2>Buttons & Menus (level 2 heading)</h2>
+  <?php
+  require_once ('webcore/gui/page_navigator.php');
+  $navigator = new PAGE_NAVIGATOR($Page);
+  $navigator->set_ranges(50, 10);
+  $navigator->pages_to_show = 4;
+  $navigator->display();
+  ?>
+  <div class="button-content">
+    <?php
+    require_once ('webcore/cmd/commands.php');
+    $menu = $Page->make_menu();
+    $menu->commands->append_group('Group One');
+    $menu->append('One', '#', '{icons}/buttons/edit');
+    $menu->append('Two', '#', '{icons}/buttons/add');
+    $menu->append('Three', '#', '{icons}/buttons/delete');
+    $menu->display();
+    ?>
   </div>
-  <h2>Preview</h2>
-  <h1>Level 1 header</h1>
-  <h2>Level 2 header</h2>
-  <h3>Level 3 header</h3>
-  <h4>Level 4 header</h4>
-  <table class="basic columns left-labels">
-    <tr>
-      <th></th>
-      <th>Data 1</th>
-      <th>Data 2</th>
-      <th>Data 3</th>
-    </tr>
-    <tr>
-      <th>Header 1</th>
-      <td>Data 1.1</td>
-      <td>Data 1.2</td>
-      <td>Data 1.3</td>
-    </tr>
-    <tr>
-      <th>Header 2</th>
-      <td>Data 2.1</td>
-      <td>Data 2.2</td>
-      <td>Data 2.3</td>
-    </tr>
-  </table>
+  <div class="button-content">
+    <?php
+    $menu->renderer->set_size(Menu_size_compact);
+    $menu->renderer->content_mode |= Menu_show_as_buttons;
+    $menu->display();
+    ?>
+  </div>
+  <div class="button-content">
+    <?php
+    $menu->renderer->set_size(Menu_size_full);
+    $menu->renderer->content_mode = Menu_show_all_as_buttons;
+    $menu->display();
+    ?>
+  </div>
+  <h3>Form elements (level 3 header)</h3>
+  <div class="form-content">
+    <?php
+    require_once('webcore/forms/form.php');
+    require_once('webcore/forms/form_renderer.php');
+
+    class SAMPLE_FORM extends FORM
+    {
+      function __construct($context)
+      {
+        parent::__construct ($context);
+
+        $field = new INTEGER_FIELD ();
+        $field->id = 'radio';
+        $field->caption = 'Radio';
+        $this->add_field ($field);
+
+        $field = new TEXT_FIELD ();
+        $field->id = 'name';
+        $field->caption = 'Name';
+        $this->add_field ($field);
+
+        $field = new TEXT_FIELD ();
+        $field->id = 'description';
+        $field->caption = 'Description';
+        $this->add_field ($field);
+
+        $field = new DATE_TIME_FIELD();
+        $field->id = 'date';
+        $field->caption = 'Date';
+        $this->add_field ($field);
+
+        $field = new BOOLEAN_FIELD ();
+        $field->id = 'bool1';
+        $field->set_value(1);
+        $field->caption = 'Option 1';
+        $this->add_field ($field);
+
+        $field = new BOOLEAN_FIELD ();
+        $field->id = 'bool2';
+        $field->caption = 'Option 2';
+        $this->add_field ($field);
+
+        $field = new ENUMERATED_FIELD();
+        $field->id = 'select';
+        $field->caption = 'Select';
+        $field->add_value (0);
+        $field->add_value (1);
+        $field->add_value (2);
+        $field->add_value (3);
+        $field->required = true;
+        $this->add_field ($field);
+      }
+
+      /**
+       * Draw the controls for the form.
+       * @param FORM_RENDERER $renderer
+       * @access private
+       */
+      protected function _draw_controls($renderer)
+      {
+        $renderer->start();
+        $props = $renderer->make_list_properties ();
+        $props->add_item('bool1', 1);
+        $props->add_item('bool2', 1);
+        $props->items_per_row = 4;
+        $renderer->draw_check_boxes_row('Options', $props);
+        $renderer->start_row('Text');
+        $text_props = new FORM_TEXT_CONTROL_OPTIONS();
+        $text_props->width = '10em';
+        echo $renderer->date_as_html('date');
+        echo $renderer->text_line_as_html('name', $text_props);
+        $renderer->finish_row();
+        $renderer->draw_text_box_row('description', null, '2em');
+        $props = $renderer->make_list_properties ();
+        $props->show_descriptions = true;
+        $props->width = '30em';
+        $props->height = '2em';
+        $props->add_item ('One day', 0, 'For parties or sporting events.');
+        $props->add_item ('Several days', 1, 'For trips; both first and last day are fixed.');
+        $renderer->draw_radio_group_row('select', $props);
+        $renderer->draw_drop_down_row('select', $props);
+        $renderer->draw_list_box_row('select', $props);
+
+        $renderer->finish();
+      }
+    }
+
+    $form = new SAMPLE_FORM($Page);
+    $form_renderer = new FORM_RENDERER($form);
+    $form->display();
+    ?>
+  </div>
+  <h4>Text and block elements (level 4 heading)</h4>
   <div class="quote-block">"This is a block quote. These are often used in article to include
     text from other sources. This is generally used for larger citations. Use the inline
     style for smaller citations."</div>
@@ -90,7 +218,7 @@ http://www.earthli.com/software/webcore
       This text following the citation and should make the paragraph wrap at least once.</p>
   </div>
   <div class="chart">
-    <h3 class="chart-title" style="margin-top: 0">Box (Code Listing)</h3>
+    <h3 class="chart-title">Box (Code Listing)</h3>
     <div class="chart-body">
       <pre><code>protected function _process_given_tokenizer($input, $tokenizer)
 {
@@ -154,27 +282,6 @@ http://www.earthli.com/software/webcore
       <td>Citations</td>
     </tr>
   </table>
-  <?php
-  $box->new_column_of_type('right-sidebar-column');
-  ?>
-  <div class="right-sidebar">
-    <p>You can also switch themes with the samples below. Press the button under the thumbnail to select a theme.</p>
-    <div class="grid-content">
-      <?php
-      $class_name = $Page->final_class_name ('THEME_GRID', 'webcore/gui/theme_grid.php');
-
-      /** @var $grid THEME_GRID */
-      $grid = new $class_name ($Page);
-      $grid->is_chooser = true;
-      $grid->paginator->pages_to_show = 2;
-      $grid->paginator->show_first_and_last = false;
-      $grid->paginator->show_total = false;
-      $grid->set_ranges (5, 1);
-      $grid->set_query ($theme_query);
-      $grid->display ();
-      ?>
-    </div>
-  </div>
   <?php
   $box->finish_column_set ();
   ?>
