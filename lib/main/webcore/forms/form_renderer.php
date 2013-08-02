@@ -1325,15 +1325,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
 
     if ($field->visible)
     {
-      if ($field->required)
-      {
-        $CSS_class = "menu-control-required";
-      }
-      else
-      {
-        $CSS_class = "menu-control";
-      }
-
+      $CSS_class = $this->_get_menu_control_CSS_class($field);
       if ($props->CSS_class)
       {
         $CSS_class .= ' ' . $props->CSS_class;
@@ -1401,14 +1393,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
 
     if ($field->visible)
     {
-      if ($field->required)
-      {
-        $CSS_class = "menu-control-required";
-      }
-      else
-      {
-        $CSS_class = "menu-control";
-      }
+      $CSS_class = $this->_get_menu_control_CSS_class($field);
 
       $Result = $this->_start_control ($field, 'select') . ' class="' . $CSS_class . '"';
 
@@ -2089,10 +2074,29 @@ class FORM_RENDERER extends CONTROLS_RENDERER
   }
 
   /**
-   * @param $field
+   * @param FIELD $field
    * @return string
    */
   private function _get_text_control_CSS_class($field)
+  {
+    return $this->_get_control_CSS_class($field, 'text-control');
+  }
+
+  /**
+   * @param FIELD $field
+   * @return string
+   */
+  private function _get_menu_control_CSS_class($field)
+  {
+    return $this->_get_control_CSS_class($field, 'menu-control');
+  }
+
+  /**
+   * @param FIELD $field
+   * @param string $base_class
+   * @return string
+   */
+  private function _get_control_CSS_class($field, $base_class)
   {
     /** @var THEMED_PAGE $themed_page */
     $themed_page = $this->page;
@@ -2111,7 +2115,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
     }
     else
     {
-      $Result = 'text-control';
+      $Result = $base_class;
       if ($field->required)
       {
         $Result .= ' required';
