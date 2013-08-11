@@ -116,5 +116,3 @@ class BITS
    */
   public $bits = 0;
 }
-
-?>

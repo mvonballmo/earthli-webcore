@@ -116,6 +116,7 @@ class PRIVILEGES extends RAISABLE
 
   /**
    * @param DATABASE $db Database from which to load values.
+   * @param string $prefix
    */
   public function load ($db, $prefix = '')
   {
@@ -128,7 +129,7 @@ class PRIVILEGES extends RAISABLE
   /**
    * Grant every content permission.
    * Used for creating 'root' users.
-   * @param $enabled Set to False to remove all rights.
+   * @param boolean $enabled Set to False to remove all rights.
    */
   public function set_all ($enabled = true)
   {
@@ -150,6 +151,7 @@ class PRIVILEGES extends RAISABLE
   /**
    * @param SQL_STORAGE $storage Store values to this object.
    * @param string $table_name Store values to this table.
+   * @param string $prefix
    * @access private
    */
   public function store_to ($storage, $table_name, $prefix = '')
@@ -176,6 +178,7 @@ class PRIVILEGES extends RAISABLE
   /**
    * Raise an exception if the set doesn't exist.
    * @param string $set_name
+   * @param $func_name
    * @access private
    */
   protected function _raise_if_not_supported ($set_name, $func_name)
@@ -184,13 +187,13 @@ class PRIVILEGES extends RAISABLE
   }
 
   /**
-   * @var array[string]
+   * @var string[]
    * @access private
    */
   protected $_set_names;
 
   /**
-   * @var array[string,BITS]
+   * @var BITS[]
    * @access private
    */
   protected $_sets;
@@ -375,6 +378,7 @@ class USER_PERMISSIONS extends STORABLE
    * {@link Privilege_controlled_by_content}.
    * @param string $set_name Check this set of privileges.
    * @param integer $type Check this privilege (or privileges).
+   * @return int
    */
   public function value_for ($set_name, $type)
   {
@@ -520,5 +524,3 @@ class USER_PERMISSIONS extends STORABLE
    */
   protected $_exists = false;
 }
-
-?>

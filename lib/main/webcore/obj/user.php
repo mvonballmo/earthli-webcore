@@ -267,16 +267,18 @@ class USER extends CONTENT_OBJECT
         $Result = true;
       }
       else if ($user_permissions->deny_privileges->enabled ($set_name, $type))
- {
-   $Result = false;
- }
+      {
+       $Result = false;
+      }
       else
       {
+        /** @var FOLDER $folder */
         $folder = $obj->security_context ();
         $folder_permissions = $folder->permissions ();
         $Result = $folder_permissions->enabled ($set_name, $type);
         if (! $Result)
         {
+          /** @var USER $owner */
           $owner = $obj->owner ();
           switch ($type)
           {
@@ -308,6 +310,7 @@ class USER extends CONTENT_OBJECT
   public function search_query ()
   {
     $class_name = $this->app->final_class_name ('SEARCH_QUERY', 'webcore/db/search_query.php');
+    /** @var SEARCH_QUERY $Result */
     $Result = new $class_name ($this->app);
     $Result->restrict ("user_id = $this->id");
     return $Result;
@@ -320,6 +323,7 @@ class USER extends CONTENT_OBJECT
   public function group_query ()
   {
     $class_name = $this->app->final_class_name ('USER_GROUP_QUERY', 'webcore/db/group_query.php');
+    /** @var USER_GROUP_QUERY $Result */
     $Result = new $class_name ($this->app);
     $Result->restrict ("utog.user_id = $this->id");
     return $Result;
@@ -337,6 +341,7 @@ class USER extends CONTENT_OBJECT
 
   /**
    * @param string $p
+   * @return bool
    * @access private
    */
   public function password_matches ($p)
@@ -562,12 +567,13 @@ class USER extends CONTENT_OBJECT
 
   /**
    * All comments viewable by this user, created by the user at 'id'.
+   * @param int $creator_id Restrict the query to return only comments created by the user with this id.
    * @return USER_COMMENT_QUERY
    */
-  public function user_comment_query ($id)
+  public function user_comment_query ($creator_id)
   {
     $Result = $this->all_comment_query ();
-    $Result->restrict ("com.creator_id = $id");
+    $Result->restrict ("com.creator_id = $creator_id");
     return $Result;
   }
 
@@ -592,12 +598,13 @@ class USER extends CONTENT_OBJECT
 
   /**
    * All entries viewable by this user, created by the user at 'id'.
+   * @param int $creator_id Restrict the query to return only comments created by the user with this id.
    * @return USER_ENTRY_QUERY
    */
-  public function user_entry_query ($id)
+  public function user_entry_query ($creator_id)
   {
     $Result = $this->all_entry_query ();
-    $Result->restrict ("entry.creator_id = $id");
+    $Result->restrict ("entry.creator_id = $creator_id");
     return $Result;
   }
 
@@ -632,12 +639,13 @@ class USER extends CONTENT_OBJECT
 
   /**
    * All entries viewable by this user, created by the user at 'id'.
-   * @return USER_HISTORY_ITEM_QUERY
+   * @param int $user_id Restrict the query to return only history items created by the user with this id.
+   * @return \USER_HISTORY_ITEM_QUERY
    */
-  public function user_history_item_query ($id)
+  public function user_history_item_query ($user_id)
   {
     $Result = $this->all_history_item_query ();
-    $Result->restrict ("act.user_id = $id");
+    $Result->restrict ("act.user_id = $user_id");
     return $Result;
   }
 
@@ -809,7 +817,6 @@ class USER extends CONTENT_OBJECT
   public function delete ($update_now = true)
   {
     $this->assert ($this->app->user_options->users_can_be_deleted, 'Users cannot be deleted.', 'delete', 'USER');
-    parent::delete ($update_now);
   }
 
   /**
@@ -894,5 +901,3 @@ class USER extends CONTENT_OBJECT
    */
   public $kind;
 }
-
-?>

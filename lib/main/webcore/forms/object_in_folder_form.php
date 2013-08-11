@@ -375,17 +375,17 @@ class ATTACHMENT_HOST_FORM extends OBJECT_IN_FOLDER_FORM
       
       if (size == "thumbnail")
       {
-        text_to_insert = '<img attachment="' + f.attachments.value + '" align="' + alignment + '" class="frame"' + text + '>';
+        text_to_insert = '<img attachment="' + f.attachments.value + '" align="' + alignment + '"' + text + '>';
       }
       else
       {
         if (size == "100")
         {
-          text_to_insert = '<img src="{att_link}' + f.attachments.value + '" align="' + alignment + '" class="frame"' + text + '>';
+          text_to_insert = '<img src="{att_link}' + f.attachments.value + '" align="' + alignment + '"' + text + '>';
         }
         else   
         {   
-          text_to_insert = '<img src="{att_link}' + f.attachments.value + '" href="{att_link}' + f.attachments.value + '" align="' + alignment + '" class="frame"' + text + ' scale="' + size + '%">';
+          text_to_insert = '<img src="{att_link}' + f.attachments.value + '" href="{att_link}' + f.attachments.value + '" align="' + alignment + '"' + text + ' scale="' + size + '%">';
         }
       }
       insert_text (<?php echo $this->js_form_name (); ?>.description, text_to_insert);

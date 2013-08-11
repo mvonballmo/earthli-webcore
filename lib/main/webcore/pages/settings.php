@@ -99,24 +99,43 @@ http://www.earthli.com/software/webcore
     $menu->append('One', '#', '{icons}/buttons/edit');
     $menu->append('Two', '#', '{icons}/buttons/add');
     $menu->append('Three', '#', '{icons}/buttons/delete');
+    $menu->renderer->content_mode &= ~Menu_show_icon;
     $menu->display();
     ?>
   </div>
   <div class="button-content">
     <?php
+    $menu->renderer->separator_class = 'objects';
+    $menu->display();
+    ?>
+  </div>
+  <div class="button-content">
+    <?php
+    $menu->renderer->separator_class = 'location';
+    $menu->display();
+    ?>
+  </div>
+  <div class="button-content">
+    <a href="#" class="button">L</a><?php
     $menu->renderer->set_size(Menu_size_compact);
-    $menu->renderer->content_mode |= Menu_show_as_buttons;
+    $menu->renderer->content_mode |= Menu_show_as_buttons | Menu_show_icon;
     $menu->display();
-    ?>
-  </div>
-  <div class="button-content">
-    <?php
     $menu->renderer->set_size(Menu_size_full);
     $menu->renderer->content_mode = Menu_show_all_as_buttons;
     $menu->display();
-    ?>
+    $menu->renderer->set_size(Menu_size_compact);
+    $menu->renderer->content_mode |= Menu_show_as_buttons | Menu_show_icon;
+    $menu->display();
+    ?><a href="#" class="button">R</a>
   </div>
-  <h3>Form elements (level 3 header)</h3>
+  <div class="button-content">
+    <a href="#" class="button">L</a><?php
+    $menu->renderer->set_size(Menu_size_full);
+    $menu->renderer->content_mode = Menu_show_all_as_buttons;
+    $menu->display();
+    ?><a href="#" class="button">R</a>
+  </div>
+  <h3>Form elements (level 3 heading)</h3>
   <div class="form-content">
     <?php
     require_once('webcore/forms/form.php');
@@ -196,8 +215,8 @@ http://www.earthli.com/software/webcore
         $props->show_descriptions = true;
         $props->width = '30em';
         $props->height = '2em';
-        $props->add_item ('One day', 0, 'For parties or sporting events.');
-        $props->add_item ('Several days', 1, 'For trips; both first and last day are fixed.');
+        $props->add_item ('Option One', 0, 'Description for option one.');
+        $props->add_item ('Option Two', 1, 'Description for option two.');
         $props->items_per_row = 2;
         $renderer->draw_radio_group_row('select', $props);
 
@@ -229,12 +248,21 @@ http://www.earthli.com/software/webcore
     ?>
   </div>
   <h4>Text and block elements (level 4 heading)</h4>
+  <p>Standard paragraph text.</p>
+  <ol><li>Item One</li><li>Item Two</li></ol>
+  <ul><li>Item One</li><li>Item Two</li></ul>
   <div class="quote-block">"This is a block quote. These are often used in article to include
     text from other sources. This is generally used for larger citations. Use the inline
     style for smaller citations."</div>
+  <div class="info-box-top">
+    <p>This is an info box at the top of a page or section.</p>
+  </div>
   <div class="preview">
     <p>This is text in a preview box. <span class="quote-inline">This is an example of an inline quotation.</span>
       This text following the citation and should make the paragraph wrap at least once.</p>
+  </div>
+  <div class="info-box-bottom">
+    <p>This is an info box at the bottom of a page or section.</p>
   </div>
   <div class="chart">
     <h3 class="chart-title">Box (Code Listing)</h3>

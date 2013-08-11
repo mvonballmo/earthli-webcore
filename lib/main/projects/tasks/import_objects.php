@@ -38,7 +38,7 @@ http://www.earthli.com/software/webcore/projects
 
     $Page->add_style_sheet ($Env->logger_style_sheet);
     $Page->start_display ();
-    echo "<div class=\"side-bar\"><div class=\"side-bar-title\">Importing VCS Changes</div><div class=\"log-box\">";
+    echo "<div class=\"chart\"><div class=\"chart-title\">Importing VCS Changes</div><div class=\"log-box\">";
   }
 
   // replace the default logger with one that writes to the page instead of a separate popup
@@ -329,7 +329,7 @@ http://www.earthli.com/software/webcore/projects
 
   if ($Env->is_http_server ())
   {
-    echo "</div></div>";
+    echo "</div></div></div>";
     $Page->finish_display ();
   }
 ?>

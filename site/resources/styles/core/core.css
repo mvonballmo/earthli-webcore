@@ -224,7 +224,6 @@ kbd
 
 pre
 {
-  font-size: 9pt;
   font-family: monospace;
   line-height: normal;
   text-align: left;
@@ -234,13 +233,8 @@ pre > code
 {
   margin: 1em 0;
   display: block;
-}
-
-/* IE mac sucks, the PREs disappear completely \*/
-pre code
-{
-  overflow: auto;
-  overflow-y: hidden;  
+  padding-left: 15px;
+  border-left: 3px #CCC solid;
 }
 
 /* @end */
@@ -405,6 +399,38 @@ pre code
 
 /* @end */
 
+/* @group Text flow */
+
+.text-flow
+{
+  line-height: 160%;
+  text-align: left
+}
+
+.text-flow ul:not([class]),
+.text-flow ol:not([class])
+{
+  margin-left: 0;
+}
+
+.text-flow ul:not([class])
+{
+  padding-left: 1.1em;
+}
+
+.text-flow ol:not([class])
+{
+  padding-left: 1.3em;
+}
+
+.text-flow ul:not([class]) li,
+.text-flow ol:not([class]) li
+{
+  padding-left: .5em;
+}
+
+/* @end */
+
 /* @group Containers */
 
 /* Defines blocks within the page-body.
@@ -503,16 +529,21 @@ pre code
   font-weight: bold;
 }
 
-.object-in-list, .info-box-top, .info-box-bottom 
+.object-in-list
 {
   padding: .5em .1em;
+}
+
+.object-in-list, .info-box-top, .info-box-bottom
+{
   clear: both;
 }
 
-.info-box-top
+.info-box-top,
+.info-box-bottom,
+.subdued
 {
-  border-bottom: 1px solid #000000;
-  margin-bottom: 1em;
+  color: #AAA;
 }
 
 td.object-in-list + td.object-in-list
@@ -522,10 +553,31 @@ td.object-in-list + td.object-in-list
   padding-left: 30px;
 }
 
-.info-box-bottom 
+.info-box-top
+{
+  line-height: normal;
+  border-bottom: 1px solid #000000;
+  margin-bottom: 1em;
+}
+
+.info-box-bottom
 {
   border-top: 1px solid #000000;
   margin-top: 1em;
+}
+
+.info-box-bottom p:first-child,
+.info-box-bottom pre:first-child,
+.info-box-bottom ul:first-child
+{
+  margin-top: 0;
+}
+
+.info-box-top p:last-child,
+.info-box-top pre:last-child,
+.info-box-top ul:last-child
+{
+  margin-bottom: .2em;
 }
 
 .graph-foreground 
@@ -538,6 +590,12 @@ td.object-in-list + td.object-in-list
   border: solid 1px #888888;
   padding: 1px;
   background-color: #DDDDDD;
+}
+
+.menu-bar-top,
+.menu-bar-bottom
+{
+  margin: 15px 0;
 }
 
 /* @end */
@@ -567,9 +625,10 @@ table.basic > tbody > tr > td.empty-label
   text-align: right;
 }
 
-.form-basic item-description
+.form-basic .item-description
 {
   margin-left: 20px;
+  margin-top: .5em;
 }
 
 .form-basic-block
@@ -586,12 +645,14 @@ table.basic > tbody > tr > td.empty-label
 .form-basic-content ul
 {
   list-style: none;
+  display: block;
   margin: 0;
   padding: 0;
 }
 
 .form-basic-content ul li
 {
+  display: inline;
   padding-top: 2px;
   padding-bottom: 2px;
 }
@@ -650,167 +711,55 @@ table.basic > tbody > tr > td.empty-label
 
 /* @end */
 
-/* @group Menus */
-
-.menu-dropdown, .menu-dropdown-ie 
-{
-  display: none;
-  position: absolute;
-}
-
-.menu 
-{
-  white-space: nowrap;
-  background-color: #FFFFFF;
-  border: 1px solid black;
-  text-align: left;
-  position: relative;
-  z-index: 100;
-}
-
-.menu-items.standard li:before
-{
-  content: '|';
-  padding-right: 5px;
-}
-
-.menu-items.objects li:before,
-.menu-items.location li:before
-{
-  content: '>';
-  padding-right: 5px;
-}
-
-.menu-items li:first-child:before
-{
-  content: '';
-  padding-right: 0;
-}
-
-.text-flow
-{
-  line-height: 160%;
-  text-align: left
-}
-
-.text-flow ul li,
-.text-flow ol li
-{
-  padding-left: .4em;
-}
-
-.text-flow ul,
-.text-flow ol
-{
-  margin-left: 0;
-}
-
-.text-flow ul
-{
-  padding-left: 15px;
-}
-
-.text-flow ol
-{
-  padding-left: 2.5em;
-}
-
-ul.menu-items,
-ul.menu-buttons,
-ul.menu,
-.text-flow > ul.menu-items,
-.text-flow > ul.menu-buttons,
-.text-flow > ul.menu
-{
-  display: inline-block;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-ul.menu-buttons,
-.text-flow > ul.menu-buttons
-{
-  display: inline;
-}
-
-ul.menu-items > li,
-.text-flow ul.menu-items > li
-{
-  line-height: 100%;
-  display: inline;
-  margin-right: 5px;
-}
-
-.text-flow ul.menu > li:not(.menu-group-title)
-{
-  line-height: 100%;
-  padding: 0;
-  min-height: 18px;
-}
-
-ul.menu-items > li:last-child,
-.text-flow ul.menu-items > li:last-child
-{
-  margin-right: 0;
-}
-
-ul.menu-buttons > li,
-.text-flow ul.menu-buttons > li
-{
-  padding: 0;
-  display: inline-block;
-}
-
-ul.menu-items .menu li
-ul.menu-buttons .menu li,
-ul.menu > li
-{
-  display: block;
-}
-
-ul.menu-buttons > li + li
-{
-  margin-left: 10px;
-}
+/* @group Dropdown Menu */
 
 .menu-dropdown
 {
+  display: none;
+  position: absolute;
   top: auto;
   left: auto;
 }
 
-.menu-trigger:hover .menu-dropdown,
-.menu-trigger-ie-over .menu-dropdown-ie 
+.menu-trigger:hover .menu-dropdown
 {
   display: block;
 }
 
-.menu-trigger 
+ul.menu
 {
+  position: relative;
+  z-index: 100;
+  display: inline-block;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  line-height: 100%;
   font-weight: normal;
+  white-space: nowrap;
+  text-align: left;
+  background-color: #FFFFFF;
+  border: 1px solid black;
 }
 
-.menu-trigger.newsfeed
+ul.menu > li
 {
-  margin-left: 0;
+  padding: 0;
+  min-height: 18px;
 }
 
-.menu-group-title 
+ul.menu .menu-group-title
 {
   padding: .6em .5em;
   border-bottom: 1px dotted #CCC;
 }
 
-.button + .menu-buttons
-{
-  margin-left: 10px;
-}
-
-.menu-item 
+.menu-item
 {
   padding: .6em .5em;
   display: block;
+  border-top: 1px solid transparent;
+  border-bottom: 1px solid transparent;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
@@ -825,25 +774,75 @@ ul.menu-buttons > li + li
   background-position: 5px 8px;
 }
 
-.menu-item:hover, .menu-bar-top a:hover
+.menu-item:hover
 {
   text-decoration: none;
+  border-color: #CCC;
+  background-color: #EEE;
 }
 
-
-.menu-bar-top,
-.menu-bar-bottom
+ul.menu li:last-child .menu-item:hover
 {
-  margin: 15px 0;
+  border-bottom-color: transparent;
 }
 
-.menu-button-description
+.menu-item-description
 {
   display: block;
   margin: 5px 0 15px 0;
-	color: black;
-	width: 200px;
-	white-space: normal;
+  color: black;
+  width: 200px;
+  white-space: normal;
+  line-height: 130%;
+}
+
+/* @end */
+
+/* @group Buttons / Inline Menu */
+
+.menu-items
+{
+  display: inline;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  line-height: 100%;
+}
+
+.menu-items > li
+{
+  display: inline;
+}
+
+.menu-items.buttons > li + li
+{
+  padding-left: 10px;
+}
+
+.button + .menu-items.buttons,
+.menu-items.buttons + .menu-items.buttons,
+.menu-items.buttons + .button
+{
+  margin-left: 10px;
+}
+
+.menu-items.standard li:before
+{
+  content: '|';
+  padding: 0 .4em;
+}
+
+.menu-items.objects li:before,
+.menu-items.location li:before
+{
+  content: '>';
+  padding: 0 .4em;
+}
+
+.menu-items li:first-child:before
+{
+  content: '';
+  padding: 0;
 }
 
 /* @end */
@@ -911,12 +910,14 @@ ul.menu-buttons > li + li
   min-height: 2.2em;
   padding: .5em;
   box-sizing: border-box;
+  cursor: pointer;
   background-color: #EEE;
   border: 1px solid silver;
   text-align: center;
   vertical-align: middle;
   white-space: nowrap;
   border-radius: 4px;
+  line-height: 100%;
 }
 
 a.button:link, a.button:visited
@@ -1165,7 +1166,6 @@ span.error
 {
   display: block;
   margin: 15px 0;
-  float-displace: block;
 }
 
 .quote-block 
@@ -1381,12 +1381,12 @@ hr
 .minimal-commands
 {
   float: left;
-  margin-right: 5px;
+  margin-right: .35em;
 }
 
 .minimal-commands-content
 {
-  margin-left: 35px;
+  margin-left: 2.55em;
 }
 
 .minimal-commands .selector
@@ -1515,12 +1515,16 @@ hr
 {
   padding-left: 15px;
   margin-left: -15px;
+  border-right: 1px solid #CCC;
+  padding-right: 15px;
 }
 
 .right-sidebar
 {
   padding-right: 15px;
   margin-right: -15px;
+  border-left: 1px solid #CCC;
+  padding-left: 15px;
 }
 
 .content-column

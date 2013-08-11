@@ -128,5 +128,3 @@ abstract class RENDERABLE extends WEBCORE_OBJECT
     return get_class ($this);
   }
 }
-
-?>

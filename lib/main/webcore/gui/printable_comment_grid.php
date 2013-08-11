@@ -75,7 +75,7 @@ abstract class PRINTABLE_COMMENT_GRID extends STANDARD_GRID
   public $show_user_info = true;
 
   /**
-   * @param APPLICATION $application
+   * @param APPLICATION $app
    * @param COMMENT $comment Comments belong to this comment (can be empty).
    */
   public function __construct ($app, $comment)
@@ -86,13 +86,15 @@ abstract class PRINTABLE_COMMENT_GRID extends STANDARD_GRID
 
   /**
    * Show the paginator only if not printing.
+   * @param boolean $include_anchor_id If true, renders the id for the
+   * paginator.
    * @access private
    */
-  protected function _draw_paginator ()
+  protected function _draw_paginator ($include_anchor_id)
   {
     if ($this->_show_paginator)
     {
-      parent::_draw_paginator ();
+      parent::_draw_paginator ($include_anchor_id);
     }
   }
 
@@ -111,4 +113,3 @@ abstract class PRINTABLE_COMMENT_GRID extends STANDARD_GRID
   protected $_show_paginator = false;
 
 }
-?>

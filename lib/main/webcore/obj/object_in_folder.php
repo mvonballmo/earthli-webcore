@@ -190,10 +190,10 @@ abstract class OBJECT_IN_FOLDER extends CONTENT_OBJECT
    */
   public function resolve_url ($url, $root_override = null)
   {
-    $fldr = $this->parent_folder ();
-    if (isset ($fldr))
+    $folder = $this->parent_folder ();
+    if (isset ($folder))
     {
-      return $fldr->resolve_url ($url, $root_override);
+      return $folder->resolve_url ($url, $root_override);
     }
 
     return parent::resolve_url ($url, $root_override);
@@ -235,10 +235,10 @@ abstract class OBJECT_IN_FOLDER extends CONTENT_OBJECT
    */
   public function parent_folder_id ()
   {
-    $fldr = $this->parent_folder ();
-    if (isset($fldr))
+    $folder = $this->parent_folder ();
+    if (isset($folder))
     {
-      return $fldr->id;
+      return $folder->id;
     }
     
     return 0;
@@ -249,26 +249,26 @@ abstract class OBJECT_IN_FOLDER extends CONTENT_OBJECT
    * Logged-in user must have the proper security clearance to perform the
    * action. If the folder is the same as the current {@link parent_folder()},
    * the function does nothing.
-   * @param FOLDER $fldr
+   * @param FOLDER $folder
    * @param FOLDER_OPERATION_OPTIONS $options
    */
-  public function move_to ($fldr, $options)
+  public function move_to ($folder, $options)
   {
     $parent = $this->parent_folder ();
-    if (! $parent->equals ($fldr))
+    if (! $parent->equals ($folder))
     {
       $privilege_set = $this->_privilege_set ();
       if ($this->login->is_allowed ($privilege_set, Privilege_delete, $this->parent_folder ()) && 
-        $this->login->is_allowed ($privilege_set, Privilege_create, $fldr))
+        $this->login->is_allowed ($privilege_set, Privilege_create, $folder))
       {
-        $this->_move_to ($fldr, $options);
+        $this->_move_to ($folder, $options);
       }
       else
       {
-        $msg = 'Could not move ' . get_class ($this) . '[' . $this->title_as_plain_text () . '] to folder [' . $fldr->title_as_plain_text () . '] (insufficent privileges).';
+        $msg = 'Could not move ' . get_class ($this) . '[' . $this->title_as_plain_text () . '] to folder [' . $folder->title_as_plain_text () . '] (insufficent privileges).';
         if ($options->raise_on_security_failure)
         {
-          $this->raise ($msg);
+          $this->raise ($msg, 'move_to', 'OBJECT_IN_FOLDER');
         }
         else
         {
@@ -283,22 +283,22 @@ abstract class OBJECT_IN_FOLDER extends CONTENT_OBJECT
    * Logged-in user must have the proper security clearance to perform the
    * action. If the folder is the same as the current {@link parent_folder()},
    * the function makes an exact copy (except for {@link $id}).
-   * @param FOLDER $fldr
+   * @param FOLDER $folder
    * @param FOLDER_OPERATION_OPTIONS $options
    */
-  public function copy_to ($fldr, $options)
+  public function copy_to ($folder, $options)
   {
     $privilege_set = $this->_privilege_set ();
-    if ($this->login->is_allowed ($privilege_set, Privilege_create, $fldr))
+    if ($this->login->is_allowed ($privilege_set, Privilege_create, $folder))
     {
-      $this->_copy_to ($fldr, $options);
+      $this->_copy_to ($folder, $options);
     }
     else
     {
-      $msg = 'Could not copy ' . get_class ($this) . '[' . $this->title_as_plain_text () . '] to folder [' . $fldr->title_as_plain_text () . '] (insufficent privileges).';
+      $msg = 'Could not copy ' . get_class ($this) . '[' . $this->title_as_plain_text () . '] to folder [' . $folder->title_as_plain_text () . '] (insufficent privileges).';
       if ($options->raise_on_security_failure)
       {
-        $this->raise ($msg);
+        $this->raise ($msg, 'copy_to', 'OBJECT_IN_FOLDER');
       }
       else
       {
@@ -412,7 +412,7 @@ abstract class OBJECT_IN_FOLDER extends CONTENT_OBJECT
           return History_item_hidden_update;
         }
 
-        return History_item_udpated;
+        return History_item_updated;
       }
 
       return History_item_updated;
@@ -446,9 +446,9 @@ abstract class OBJECT_IN_FOLDER extends CONTENT_OBJECT
   public function store_to ($storage)
   {
     parent::store_to ($storage);
-    $tname = $this->table_name ();
-    $storage->add ($tname, 'state', Field_type_integer, $this->state);
-    $storage->add ($tname, 'owner_id', Field_type_integer, $this->owner_id);
+    $table_name = $this->table_name ();
+    $storage->add ($table_name, 'state', Field_type_integer, $this->state);
+    $storage->add ($table_name, 'owner_id', Field_type_integer, $this->owner_id);
   }
 
   /**
@@ -518,9 +518,9 @@ abstract class OBJECT_IN_FOLDER extends CONTENT_OBJECT
    * move an object to another folder, use {@link move_to()} instead.
    * @access private
    */
-  public function set_parent_folder ($fldr)
+  public function set_parent_folder ($folder)
   {
-    $this->_parent_folder = $fldr;
+    $this->_parent_folder = $folder;
   }
 
   /**
@@ -563,20 +563,20 @@ abstract class OBJECT_IN_FOLDER extends CONTENT_OBJECT
   /**
    * Move the object to the specified folder.
    * Called from {@link move_to()} after checking security privileges.
-   * @param FOLDER $fldr
+   * @param FOLDER $folder
    * @param FOLDER_OPERATION_OPTIONS $options
    */
-  protected function _move_to ($fldr, $options)
+  protected function _move_to ($folder, $options)
   {
     if ($options->update_now)
     {
       $history_item = $this->new_history_item ();
-      $this->set_parent_folder ($fldr);
+      $this->set_parent_folder ($folder);
       $this->store_if_different ($history_item);
     }
     else
     {
-      $this->_parent_folder = $fldr;
+      $this->_parent_folder = $folder;
     }
   }
 
@@ -586,21 +586,21 @@ abstract class OBJECT_IN_FOLDER extends CONTENT_OBJECT
    * object becomes the copied object -- if {@link
    * FOLDER_OPERATION_OPTIONS::$update_now} is <code>False</code>, the
    * object is simply cloned, but not stored.
-   * @param FOLDER $fldr
+   * @param FOLDER $folder
    * @param FOLDER_OPERATION_OPTIONS $options
    */
-  protected function _copy_to ($fldr, $options)
+  protected function _copy_to ($folder, $options)
   {
     $this->initialize_as_new ();
     if ($options->update_now)
     {
       $history_item = $this->new_history_item ();
-      $this->set_parent_folder ($fldr);
+      $this->set_parent_folder ($folder);
       $this->store_if_different ($history_item);
     }
     else
     {
-      $this->_parent_folder = $fldr;
+      $this->_parent_folder = $folder;
     }
   }
 
@@ -684,5 +684,3 @@ class FOLDER_OPERATION_OPTIONS
    */
   public $raise_on_security_failure = false;
 }
-
-?>

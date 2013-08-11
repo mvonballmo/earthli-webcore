@@ -1924,11 +1924,11 @@ class FORM_RENDERER extends CONTROLS_RENDERER
           {
             if ($props->item_class)
             {
-              $ctrls [] = '<span class="' . $props->item_class . '">' . $ctrl . '</span>';
+              $ctrls [] = '<li class="' . $props->item_class . '">' . $ctrl . '</li>';
             }
             else
             {
-              $ctrls [] = $ctrl;
+              $ctrls [] = '<li>' . $ctrl . '</li>';
             }
 
             if (($counter == $num_items) || ($props->items_per_row == 1) || (($counter % $props->items_per_row) == 0))
@@ -1987,7 +1987,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
 
         if ($field->description)
         {
-          $Result .= '<div style="margin-left: 2em; margin-top: .5em; width: ' . $width . '"><div class="notes">' . $field->description . '</div></div>';
+          $Result .= '<div class="item-description" style="width: ' . $width . '"><div class="notes">' . $field->description . '</div></div>';
         }
 
         $Result = $this->_control_created ($id, $Result, false);
@@ -2000,7 +2000,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
   }
 
   /**
-   * Renders a checkbox or radio buttion with a label.
+   * Renders a checkbox or radio button with a label.
    * Used by {@link _control_group_as_HTML()} and {@link draw_check_box_row()} to generate
    * the raw control text.
    * @param FIELD $field Render the control for this field.

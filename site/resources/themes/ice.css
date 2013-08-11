@@ -69,7 +69,7 @@ hr, .horizontal-separator, .vertical-separator
 
 .cell-non-empty, .cell-selected, .cell-highlight
 {
-	border-color: #999999;
+	border-color: #4A8CCA;
 }
 
 .cell-highlight
@@ -88,9 +88,9 @@ hr, .horizontal-separator, .vertical-separator
   font-weight: normal;
 }
 
-.menu
+ul.menu
 {
-	border: 1px solid #AAAAAA;
+	border: 1px solid #4A8CCA;
 }
 
 .menu-item
@@ -99,18 +99,9 @@ hr, .horizontal-separator, .vertical-separator
 	border-bottom: 1px solid transparent;
 }
 
-/* Hack to prevent IE from drawing "transparent" as bright blue. */
-.menu-dropdown-ie .menu-item
-{
-	border-color: white;
-}
-
 .menu-item:hover
 {
-	border-top: 1px solid #777;
-	border-bottom: 1px solid #777;
-  background-color: #AAA;
-  color: #FFF;
+  border-color: #4A8CCA;
 }
 
 .top-box
@@ -192,13 +183,6 @@ h4
 	border-color: #AAA;
 }
 
-.info-box-top,
-.info-box-bottom,
-.subdued
-{
-  color: #AAA;
-}
-
 .info-box-top a:link,
 .info-box-top a:visited,
 .info-box-bottom a:link,
@@ -215,25 +199,18 @@ pre > code
 
 .left-sidebar
 {
-  border-right: 1px solid #4A8CCA; /* frame */
-  padding-right: 15px;
+  border-color: #4A8CCA;
 }
 
 .right-sidebar
 {
-  border-left: 1px solid #4A8CCA; /* frame */
-  padding-left: 15px;
+  border-color: #4A8CCA;
 }
 
-.disabled
+.button.selected
 {
-  border-radius: 4px;
-  border: 1px solid #DDD;
-}
-
-.paginator .selected
-{
-  background-color: #3477B1;
+  background-color: #4A8CCA;
+  border-color: #666;
   color: white;
 }
 
@@ -242,15 +219,8 @@ pre > code
   border: 1px solid #999999;
 }
 
-.text-control.required, .menu-control.required
-{
-  background-color: #FFFFFF;
-}
-
 .check-box-control
 {
   border: 1px solid #999999;
-  background: white;
-  color: red;
 }
 

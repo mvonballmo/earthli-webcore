@@ -131,5 +131,3 @@ class COMMENT_COMMANDS extends COMMANDS
     $this->append ($cmd);
   }
 }
-
-?>

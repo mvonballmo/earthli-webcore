@@ -65,6 +65,8 @@ h5,
   font-size: 8pt;
 }
 
+pre,
+.shell,
 .copyright,
 .versions,
 .statistics,

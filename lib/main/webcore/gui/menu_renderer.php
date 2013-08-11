@@ -257,7 +257,7 @@ class MENU_RENDERER extends WEBCORE_OBJECT
     {
       if ($this->content_mode & Menu_show_as_buttons)
       {
-        $class = "menu-buttons";
+        $class = "menu-items buttons";
       }
       else
       {
@@ -358,15 +358,12 @@ class MENU_RENDERER extends WEBCORE_OBJECT
     {
       $Result = $text;
 
-      if ($CSS_class)
-      {
-        $CSS_class = ' class="' . $CSS_class . '"';
-      }
+      $class_statement = $CSS_class ? ' class="' . $CSS_class . '"' : '';
 
       if ($cmd->link)
       {
         $link = htmlspecialchars ($this->context->resolve_file ($cmd->link));
-        $tag = '<a' . $CSS_class . ' href="' . $link . '" title="' . global_text_options()->convert_to_html_attribute($cmd->link_title) . '"';
+        $tag = '<a' . $class_statement . ' href="' . $link . '" title="' . global_text_options()->convert_to_html_attribute($cmd->link_title) . '"';
         if ($this->target)
         {
           $tag .= ' target="' . $this->target . '"';
@@ -384,7 +381,8 @@ class MENU_RENDERER extends WEBCORE_OBJECT
 
 	      if (!empty($cmd->description))
 	      {
-	        $Result .= ' <span class="menu-button-description">' . $cmd->description . '</span>';
+          $description_class_statement = $CSS_class ? ' class="' . $CSS_class . '-description"' : '';
+          $Result .= ' <span ' . $description_class_statement . '>' . $cmd->description . '</span>';
 	      }
 
         /* Important! IE displays the last character in this last link of the last 
@@ -538,14 +536,7 @@ class MENU_RENDERER extends WEBCORE_OBJECT
     $trigger_class = 'menu-trigger';
     $menu_class = 'menu-dropdown';
     $menu_tag = '';
-    if (! $this->_supports_css_2)
-    {
-      $trigger_class .= '-ie';
-      $menu_class .= '-ie';
-      $menu_id = 'menu_' . mt_rand ();
-      $menu_tag = ' id="' . $menu_id . '"';
-    }
-    
+
     $trigger = '';
     
     if ($this->show_trigger_title)

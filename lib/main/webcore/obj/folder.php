@@ -264,6 +264,7 @@ class FOLDER extends ATTACHMENT_HOST
       $method_name = '_make_entry';
     }
 
+    /** @var ENTRY $Result */
     $Result = $this->$method_name ();
     $Result->set_parent_folder ($this);
 
@@ -312,7 +313,7 @@ class FOLDER extends ATTACHMENT_HOST
 
   /**
    * Return a list of sub-folders visible to the logged-in user.
-   * @return array[FOLDER]
+   * @return FOLDER[]
    */
   public function sub_folders ()
   {
@@ -380,11 +381,11 @@ class FOLDER extends ATTACHMENT_HOST
    * Set the containing folder for the object.
    * @access private
    */
-  public function set_parent_folder ($fldr)
+  public function set_parent_folder ($folder)
   {
-    parent::set_parent_folder ($fldr);
-    $this->parent_id = $fldr->id;
-    $this->root_id = $fldr->root_id;
+    parent::set_parent_folder ($folder);
+    $this->parent_id = $folder->id;
+    $this->root_id = $folder->root_id;
   }
 
   /**
@@ -501,8 +502,9 @@ class FOLDER extends ATTACHMENT_HOST
     else
     {
       $subscriber_query = $parent->subscriber_query ();
-      $objs = $subscriber_query->objects ();
-      foreach ($objs as $obj)
+      /** @var SUBSCRIBER[] $objects */
+      $objects = $subscriber_query->objects ();
+      foreach ($objects as $obj)
       {
         $obj->subscribe ($this->id, Subscribe_folder);
       }
@@ -519,7 +521,7 @@ class FOLDER extends ATTACHMENT_HOST
     if ($this->exists ())
     {
       $sub_folders = $this->sub_folders ();
-      foreach ($sub_folders as &$folder)
+      foreach ($sub_folders as $folder)
       {
         $folder->set_state ($this->state, true);
       }
@@ -530,14 +532,14 @@ class FOLDER extends ATTACHMENT_HOST
 
   /**
    * Move the object to the specified folder.
-   * @param FOLDER $fldr
+   * @param FOLDER $folder
    * @param FOLDER_OPERATION_OPTIONS $options
    */
-  protected function _move_to ($fldr, $options)
+  protected function _move_to ($folder, $options)
   {
     if ($options->update_now && $options->maintain_permissions)
     {
-      if ($this->permissions_id != $fldr->permissions_id)
+      if ($this->permissions_id != $folder->permissions_id)
       {
         if (! $this->defines_security ())
         {
@@ -547,27 +549,27 @@ class FOLDER extends ATTACHMENT_HOST
         }
         else
         {
-          $this->permissions_id = $fldr->permissions_id;
+          $this->permissions_id = $folder->permissions_id;
         }
       }
     }
     else
     {
-      $this->permissions_id = $fldr->permissions_id;
+      $this->permissions_id = $folder->permissions_id;
     }
-    parent::_move_to ($fldr, $options);
+    parent::_move_to ($folder, $options);
   }
 
   /**
    * Copy the object to the specified folder.
-   * @param FOLDER $fldr
+   * @param FOLDER $folder
    * @param FOLDER_OPERATION_OPTIONS $options
    */
-  protected function _copy_to ($fldr, $options)
+  protected function _copy_to ($folder, $options)
   {
     if ($options->update_now && $options->maintain_permissions)
     {
-      if ($this->permissions_id != $fldr->permissions_id)
+      if ($this->permissions_id != $folder->permissions_id)
       {
         $security = $this->security_definition ();
         $security->copy_and_store (Security_copy_current);
@@ -576,9 +578,9 @@ class FOLDER extends ATTACHMENT_HOST
     }
     else
     {
-      $this->permissions_id = $fldr->permissions_id;
+      $this->permissions_id = $folder->permissions_id;
     }
-    parent::_copy_to ($fldr, $options);
+    parent::_copy_to ($folder, $options);
   }
 
   /**
@@ -732,8 +734,7 @@ class FOLDER extends ATTACHMENT_HOST
   protected function _prepare_subscription_query ($query, $history_item)
   {
     $query->restrict ('watch_entries > 0');
-    $query->restrict_kinds (array (Subscribe_folder => $this->id
-                                   , Subscribe_user => $this->creator_id));
+    $query->restrict_kinds (array (Subscribe_folder => $this->id, Subscribe_user => $this->creator_id));
   }
 
   /**
@@ -785,5 +786,3 @@ class FOLDER extends ATTACHMENT_HOST
    */
   protected $_privileges;
 }
-
-?>

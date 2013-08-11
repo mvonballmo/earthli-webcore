@@ -493,9 +493,12 @@ abstract class GRID extends WEBCORE_OBJECT
   {
     if ($this->show_menus)
     {
+      /** @var MENU_RENDERER $renderer */
       $renderer = $obj->handler_for (Handler_menu);
       $renderer->set_size ($size);
-      $renderer->display ($obj->handler_for (Handler_commands));
+      /** @var COMMANDS $commands */
+      $commands = $obj->handler_for(Handler_commands);
+      $renderer->display ($commands);
     }
   }
 
