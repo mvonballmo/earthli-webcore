@@ -114,6 +114,36 @@ define ('Menu_show_all_as_buttons', 7);
 define ('Menu_show_all_as_list', 3);
 
 /**
+ * Show the {@link MENU_RENDERER::$trigger_title} when rendering.
+ * Used by the {@link MENU_RENDERER}.
+ */
+define ('Menu_options_show_trigger_title', 1);
+
+/**
+ * Show the {@link MENU_RENDERER::$trigger_title} when rendering.
+ * Used by the {@link MENU_RENDERER}.
+ */
+define ('Menu_options_show_trigger_icon', 2);
+
+/**
+ * Show the {@link MENU_RENDERER::$trigger_title} when rendering.
+ * Used by the {@link MENU_RENDERER}.
+ */
+define ('Menu_options_show_selected_as_trigger_title', 4);
+
+/**
+ * Show compact menu items with the selected item in the trigger title.
+ * Used by the {@link MENU_RENDERER}.
+ */
+define ('Menu_options_show_as_select', 7);
+
+/**
+ * Show the {@link MENU_RENDERER::$trigger_title} when rendering.
+ * Used by the {@link MENU_RENDERER}.
+ */
+define ('Menu_options_show_trigger_title_and_icon', 3);
+
+/**
  * Renders {@link COMMAND}s to HTML.
  * @package webcore
  * @subpackage renderer
@@ -139,6 +169,11 @@ class MENU_RENDERER extends WEBCORE_OBJECT
   public $display_mode = Menu_horizontal_with_dropdown;
 
   /**
+   * Rendering options for the menu itself.
+   */
+  public $options = Menu_options_show_trigger_title_and_icon;
+
+  /**
    * Number of commands to show outside of the drop-down.
    * Used only if {@link $display_mode} is {@link Menu_horizontal_with_dropdown}
    * or {@link Menu_vertical_with_dropdown}. In that case, this is the maximum
@@ -150,20 +185,6 @@ class MENU_RENDERER extends WEBCORE_OBJECT
    */
   public $num_important_commands = 3;
 
-  /**
-   * Show the word {@link $trigger_title} for the drop-down trigger?
-   * Turned off when using {@link Menu_size_minimal} with {@link set_size()}.
-   * @var boolean
-   */
-  public $show_trigger_title = true;
-  
-  /**
-   * Show the {@link $trigger_icon} for the drop-down trigger?
-   * 
-   * @var boolean
-   */
-  public $show_trigger_icon = true;
-  
   /**
    * The text to show when {@link $show_trigger_title} is true. 
    * 
@@ -199,17 +220,6 @@ class MENU_RENDERER extends WEBCORE_OBJECT
   public $target = '';
 
   /**
-   * @param CONTEXT $context
-   */
-  public function __construct ($context)
-  {
-    parent::__construct ($context);
-    $browser = $this->env->browser ();
-    $this->_supports_css_2 = $browser->supports (Browser_CSS_2);
-    $this->_is_ie = $browser->is (Browser_ie);
-  }
-  
-  /**
    * Sets up the renderer for a general size.
    * The various rendering options can be set as a group using one of the size
    * options detailed below.
@@ -220,12 +230,12 @@ class MENU_RENDERER extends WEBCORE_OBJECT
   public function set_size ($size_option)
   {
     $this->display_mode = Menu_horizontal_with_dropdown;
-    $this->show_trigger_title = true;
+    $this->options |= Menu_options_show_trigger_title;
     switch ($size_option)
     {
     case Menu_size_minimal:
       $this->num_important_commands = 0;
-      $this->show_trigger_title = false;
+      $this->options &= ~Menu_options_show_trigger_title;
       break;
     case Menu_size_compact:
       $this->num_important_commands = 0;
@@ -316,11 +326,11 @@ class MENU_RENDERER extends WEBCORE_OBJECT
       {
         if ($this->content_mode & Menu_show_as_buttons)
         {
-          echo '<li>' . $this->_command_as_html ($cmd, $CSS_class) . "</li>";
+          echo '<li>' . $this->_command_as_html ($cmd, $CSS_class) . '</li>';
         }
         else
         {
-          echo '<li>' . $this->_command_as_html ($cmd, '') . "</li>";
+          echo '<li>' . $this->_command_as_html ($cmd, '') . '</li>';
         }
         $idx_cmd += 1;
         if ($idx_cmd == $num_cmds_to_be_shown)
@@ -398,22 +408,15 @@ class MENU_RENDERER extends WEBCORE_OBJECT
           $Result .= '</span>';
         }
 
-        if ($this->_is_ie)
-        {
-          $Result .= ' </a>';
-        }
-        else
-        {
-          $Result .= '</a>';
-        }
+        $Result .= '</a>';
       }
-      elseif ($CSS_class || $style)
+      elseif ($class_statement || $style)
       {
         $tag = '';
 
-        if ($CSS_class)
+        if ($class_statement)
         {
-          $tag = '<span' . $CSS_class . '>';
+          $tag = '<span ' . $class_statement . '>';
         }
 
         if ($style)
@@ -423,7 +426,7 @@ class MENU_RENDERER extends WEBCORE_OBJECT
 
         $Result = $tag . $Result;
 
-        if ($CSS_class)
+        if ($class_statement)
         {
           $Result .= '</span>';
         }
@@ -539,13 +542,29 @@ class MENU_RENDERER extends WEBCORE_OBJECT
 
     $trigger = '';
     
-    if ($this->show_trigger_title)
+    if ($this->options & Menu_options_show_trigger_title)
     {
-      $trigger = $this->trigger_title;
+      if ($this->options & Menu_options_show_selected_as_trigger_title)
+      {
+        foreach ($commands->command_list() as $command)
+        {
+          if (empty($command->link))
+          {
+            // TODO Add support for setting the selected item instead of just assuming that the one without a link is selected
+            // TODO Should we show the icon of the selected item in the trigger as well? Should we use the menu icon as a badge?
+
+            $trigger = $command->caption;
+          }
+        }
+      }
+      else
+      {
+        $trigger = $this->trigger_title;
+      }
     }
 
     echo '<li class="' . $trigger_class . '"' . $menu_tag . '><div class="' . $this->trigger_button_CSS_class . '">';
-    if ($this->show_trigger_icon)
+    if ($this->options & Menu_options_show_trigger_icon)
     {
       if (empty ($trigger))
       {
@@ -563,11 +582,6 @@ class MENU_RENDERER extends WEBCORE_OBJECT
     echo '<div class="' . $menu_class . '">';
     $this->_draw_vertical_menu ($commands, false);
     echo '</div></div></li>';
-
-    if (! $this->_supports_css_2)
-    {
-      echo "<script type=\"text/javascript\">init_menu ('$menu_id');</script>";
-    }
   }
   
   /**
@@ -613,13 +627,3 @@ function _compare_commands_by_importance ($cmd1, $cmd2)
   }
   return ($cmd1->importance > $cmd2->importance) ? -1 : 1;
 }
-
-/**
- * Used by the {@link MENU_RENDERER}.
- * Used in place of class static variable.
- * @global BOX_RENDERER $_menu_box_renderer
- * @access private
- */
-$_menu_box_renderer = null;
-
-?>
