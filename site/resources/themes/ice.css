@@ -49,17 +49,17 @@ a:active
 table.columns > tbody > tr > td,
 table.columns > tbody > tr > th
 {
-  border-right: 1px solid #4A8CCA;
+  border-color: #4A8CCA;
 }
 
 table th
 {
-  border-bottom: 1px solid #4A8CCA;
+  border-color: #4A8CCA;
 }
 
 th.basic
 {
-  border-bottom: 1px solid #4A8CCA;
+  border-color: #4A8CCA;
 }
 
 hr, .horizontal-separator, .vertical-separator
@@ -147,12 +147,12 @@ ul.menu
 {
 }
 
-.side-bar, .chart, .preview, .form-basic-block
+.chart, .preview, .form-basic-block
 {
 	border-left: 2px solid #4A8CCA; /* frame */
 }
 
-.side-bar-title, .chart-title, .preview-title
+.chart-title, .preview-title
 {
   color: #0055BB;
 }

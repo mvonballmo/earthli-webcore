@@ -30,35 +30,24 @@ body
 	color: #FFFFFF;
 }
 
-.page
+a:link, a:visited
 {
-	max-width: 800px;
-	margin: auto;
+  color: #FF9;
+}
+
+a:active, a:hover
+{
+  color: #FFFF00;
 }
 
 .nav-box
 {
-	border-width: 0px;
+  border-color: #998877;
 }
 
 .banner-title
 {
 	color: #CCBBAA;
-}
-
-a:link, a:visited
-{
-	color: #FFFF99;
-}
-
-a:active, a:hover
-{
-	color: #FFFF00;
-}
-
-.box
-{
-	border-width: 0px;
 }
 
 .box-title
@@ -71,14 +60,42 @@ a:active, a:hover
 
 .side-bar, .chart, .preview
 {
-	border-width: 0px;
+	border-width: 0;
 }
 
-.side-bar-body, .chart-body, .preview-body, .form-basic,
-.quote-block, .menu
+.chart-body,
+.quote-block, ul.menu
 {
-	background: #663366;
-	border: 1px solid #998877;
+	background: #636;
+	border: 1px solid #987;
+}
+
+.button
+{
+  background: #646;
+  border-color: #987;
+}
+
+a.button:link, a.button:visited
+{
+  color: white;
+}
+
+.button.disabled
+{
+  border-color: #654;
+}
+
+.button.selected
+{
+  background: #636;
+  color: #FF9;
+}
+
+.button:hover:not(.disabled):not(.selected)
+{
+  border-color: #CBA;
+  background-color: #978;
 }
 
 .quote-block

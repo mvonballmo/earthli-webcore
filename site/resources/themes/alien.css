@@ -47,6 +47,22 @@ body
   padding-bottom: 5px;
 }
 
+table.columns > tbody > tr > td,
+table.columns > tbody > tr > th
+{
+  border-color: #555;
+}
+
+table th
+{
+  border-color: #555;
+}
+
+th.basic
+{
+  border-color: #555;
+}
+
 a:visited
 {
 	color: #88BB55;
@@ -71,12 +87,19 @@ a:active
 {
   background-color: #333;
   border: 1px solid #555;
+  color: white;
 }
 
-.button:hover
+a.button:link, a.button:visited,
+.button a:link, .button a:visited
 {
-  border-color: #999;
-  background-color: #444;
+  color: white;
+}
+
+.button:hover:not(.disabled):not(.selected)
+{
+  border-color: #f93;
+  background-color: #222;
 }
 
 .button.disabled
@@ -85,31 +108,33 @@ a:active
   border: 1px solid #333;
 }
 
-.side-bar-body, .chart-body, .preview-body, .quote-block, .form-basic, .menu
+pre > code
 {
-	border: 1px solid #666666;
-	background-color: #333333;
+  border-color: #555;
 }
 
-.form-basic-block
+.quote-block
 {
-	border: 1px solid #555555;
+	background-color: #333;
+  border-color: #555;
+  color: #CCC;
+  padding-top: .5em;
+  padding-bottom: .5em;
 }
 
-.side-bar, .chart, .preview
+.quote-inline, .quote
 {
-	border-width: 0px;
+  color: #CCCCCC;
 }
 
-.side-bar-title, .chart-title, .preview-title
+.chart-title
 {
 	color: #FF9933;
-	border-bottom-width: 0px;
 }
 
 .menu-bar-bottom, .menu-bar-top
 {
-	border-width: 0px;
+	border-width: 0;
 }
 
 .horizontal-separator, .vertical-separator
@@ -127,15 +152,22 @@ a:active
 	background-color: #333333;
 }
 
-.menu-item
+ul.menu
 {
-	border: 1px #333333 solid;
+  background-color: #333;
+  border-color: #f93;
 }
 
-.menu-item:hover, .menu-button:hover
+.menu-item:hover
 {
-	background-color: #666666;
-	border: 1px #ff9933 solid;
+  background-color: #222;
+	border-bottom: 1px solid #ff9933;
+	border-top: 1px solid #ff9933;
+}
+
+.chart, .preview, .form-basic-block
+{
+  border-left: 2px solid #666;
 }
 
 .menu-button
@@ -156,27 +188,7 @@ h2
 
 h3
 {
-	color: #ff9933;
-}
-
-h3 a:link
-{
-	color: #ff9933;
-}
-
-h3 a:visited
-{
-	color: #ff9933;
-}
-
-h3 a:active
-{
-	color: #FFFF00;
-}
-
-h3 a:hover
-{
-	color: #FFFF00;
+	color: #f93;
 }
 
 h4
@@ -187,11 +199,6 @@ h4
 th
 {
 	border-bottom-color: #FFFFFF;
-}
-
-.frame
-{
-	border-color: #666666;
 }
 
 .graph-foreground
@@ -214,19 +221,19 @@ th
 	border-color: #666666;
 }
 
-.quote-inline, .quote-block, .quote
-{
-	color: #CCCCCC;
-}
-
-.quote-block
-{
-	padding: .5em;
-}
-
 .locked a:link, .locked a:visited
 {
 	color: #88BB55;
+}
+
+.left-sidebar
+{
+  border-color: #666;
+}
+
+.right-sidebar
+{
+  border-color: #666;
 }
 
 .selected

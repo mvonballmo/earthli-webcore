@@ -104,18 +104,6 @@ page-body
 	border-color: #554433;
 }
 
-.preview
-{
-	width: 85%;
-	margin: auto;
-	border-width: 0px;
-}
-
-.preview-title
-{
-	border-width: 0px;
-}
-
 .preview-body
 {
 	border: 1px solid #554433;
@@ -209,7 +197,7 @@ h1
   background: #DDCCBB url(hochzeit/fossil_paper_light.jpg) repeat;
 }
 
-.paginator .selected
+.pager .selected
 {
   background: #BBAA99 url(hochzeit/fossil_paper.jpg) repeat;
   color: #FDF8E5;
