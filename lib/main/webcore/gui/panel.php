@@ -299,7 +299,7 @@ class PANEL_MANAGER extends WEBCORE_OBJECT
   /**
    * Render the time_frame selector.
    * Should be called only if the panel itself makes use of the selector. Otherwise, it will
-   * not be initially and will throw an exception.
+   * not be initialized and will throw an exception.
    * @see TIME_FRAME_SELECTOR.
    */
   public function display_time_menu ()
@@ -655,6 +655,14 @@ abstract class PANEL extends WEBCORE_OBJECT
    * @abstract
    */
   public abstract function display ();
+
+  /**
+   * @return PAGE_NAVIGATOR
+   */
+  public function get_pager()
+  {
+    return null;
+  }
 
   /**
    * The URL needed to show this panel.
@@ -1104,13 +1112,18 @@ abstract class GRID_PANEL extends PANEL
    */
   public function display ()
   {
-    $grid = $this->_make_grid ();
+    $this->ensure_grid_exists();
+    $this->_grid->display ();
+  }
 
-    $this->_panel_manager->options->apply_to ($grid);
-    $this->_set_up_grid ($grid);
+  /**
+   * @return PAGE_NAVIGATOR
+   */
+  public function get_pager()
+  {
+    $this->ensure_grid_exists();
 
-    $grid->set_ranges ($this->rows, $this->columns);
-    $grid->display ();
+    return $this->_grid->get_pager();
   }
 
   /**
@@ -1128,6 +1141,24 @@ abstract class GRID_PANEL extends PANEL
    * @abstract
    */
   protected abstract function _make_grid ();
+
+  private function ensure_grid_exists()
+  {
+    if (!isset($this->_grid))
+    {
+      $this->_grid = $this->_make_grid();
+      $this->_panel_manager->options->apply_to($this->_grid);
+      $this->_set_up_grid($this->_grid);
+
+      $this->_grid->set_ranges($this->rows, $this->columns);
+    }
+  }
+
+  /**
+   * @var GRID
+   * @access private
+   */
+  var $_grid;
 }
 
 /**
