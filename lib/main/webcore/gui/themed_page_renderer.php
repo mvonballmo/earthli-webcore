@@ -65,12 +65,6 @@ class THEMED_PAGE_RENDERER extends PAGE_RENDERER
     $styles [] = $res->resolve_file ($theme->font_size_CSS_file_name);
     $styles [] = $res->resolve_file ($theme->font_name_CSS_file_name);
     $styles [] = $res->resolve_file ($theme->main_CSS_file_name);
-    if (! $theme->dont_apply_to_forms)
-    {
-      $url = new URL ($theme->main_CSS_file_name);
-      $url->append_to_name ('_forms');
-      $styles [] = $res->resolve_file ($url->as_text ());
-    }
 
     foreach ($styles as $style)
     {
