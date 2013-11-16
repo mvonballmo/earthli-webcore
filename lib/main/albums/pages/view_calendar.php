@@ -47,7 +47,7 @@ http://www.earthli.com/software/webcore/albums
   <div class="button-content">
     <?php
     $menu = $App->make_menu ();
-    $menu->renderer->content_mode = Menu_show_all_as_buttons;
+    $menu->renderer->set_size(Menu_size_compact);
     $menu->append ('Explorer', "view_explorer.php?id=$folder->id", '{icons}/buttons/explorer');
     $menu->append ('Album', "view_folder.php?id=$folder->id", '{app_icons}/buttons/new_album');
     $menu->display ();
