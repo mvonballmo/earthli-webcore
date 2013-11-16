@@ -245,10 +245,10 @@ class BASIC_CALENDAR extends CALENDAR
   /**
    * @access private
    */
-  protected function _draw_paginator ()
+  protected function _draw_pager ()
   {
 ?>
-    <p><?php $this->paginator->display (); ?></p>
+    <p><?php $this->pager->display (); ?></p>
 <?php
   }
 

@@ -177,6 +177,8 @@ class COMMENT_LIST_RENDERER extends WEBCORE_OBJECT
    */
   public function display ()
   {
+    /** @var GRID $grid */
+    $grid = null;
     switch ($this->comment_mode)
     {
     case Comment_render_flat:
@@ -191,8 +193,8 @@ class COMMENT_LIST_RENDERER extends WEBCORE_OBJECT
       break;
     }
 
-    $grid->paginator->page_anchor = 'comments';
-    $grid->paginator->page_number_var_name = 'comment_page_number';
+    $grid->pager->page_anchor = 'comments';
+    $grid->pager->page_number_var_name = 'comment_page_number';
     $grid->set_query ($this->_comment_query);
     $grid->display ();
   }

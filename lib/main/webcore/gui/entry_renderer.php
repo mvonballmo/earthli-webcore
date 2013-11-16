@@ -144,8 +144,8 @@ class ENTRY_ASSOCIATED_DATA_RENDERER extends HANDLER_RENDERER
     /** @var $grid ATTACHMENT_GRID */
     $grid = new $class_name ($this->app);
     $grid->set_ranges (3, 3);
-    $grid->paginator->page_anchor = 'attachments';
-    $grid->paginator->page_number_var_name = 'attachment_page_number';
+    $grid->pager->page_anchor = 'attachments';
+    $grid->pager->page_number_var_name = 'attachment_page_number';
     $grid->set_query ($attachment_query);
     $grid->display ();
   ?>

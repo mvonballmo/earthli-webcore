@@ -100,8 +100,8 @@ class THREADED_COMMENT_GRID extends FLAT_COMMENT_GRID
           // we are not printing (when printing, all threads are displayed)
           
           $num_objects_per_page = $this->_num_rows * $this->_num_columns;
-          $query->set_select ('com.id, com.time_created');
-          $query->set_limits (($this->paginator->page_number - 1) * $num_objects_per_page, $num_objects_per_page);
+          $this->_query->set_select ('com.id, com.time_created');
+          $this->_query->set_limits (($this->pager->page_number - 1) * $num_objects_per_page, $num_objects_per_page);
           $db = $this->_query->raw_output ();
 
           if ($db)
@@ -121,7 +121,7 @@ class THREADED_COMMENT_GRID extends FLAT_COMMENT_GRID
               $this->_query->set_select ('com.*');
               $this->_query->restrict ("com.root_id IN ($str_com_ids)");
               $Result = $this->_query->tree ();
-              $this->_show_paginator = true;
+              $this->_show_pager = true;
             }
           }
         }

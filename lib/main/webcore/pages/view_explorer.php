@@ -127,8 +127,8 @@ http://www.earthli.com/software/webcore
         $list = new $class_name ($App);
         $list->page_name = $Env->url (Url_part_file_name);
         $list->form_name = $form_name;
-        $list->paginator->page_number_var_name = 'folder_page_number';
-        $list->paginator->page_anchor = "folder_list";
+        $list->pager->page_number_var_name = 'folder_page_number';
+        $list->pager->page_anchor = "folder_list";
         $list->set_ranges (20, 1);
         $list->set_query ($folder_query);
         $list->display ();
@@ -147,8 +147,8 @@ http://www.earthli.com/software/webcore
           /** @var $list ENTRY_LIST */
           $list = new $class_name ($App);
           $list->control_name = "{$type_info->id}_ids";
-          $list->paginator->page_number_var_name = "{$type_info->id}_page_number";
-          $list->paginator->page_anchor = "{$type_info->id}_list";
+          $list->pager->page_number_var_name = "{$type_info->id}_page_number";
+          $list->pager->page_anchor = "{$type_info->id}_list";
           $list->form_name = $form_name;
           $list->set_ranges (20, 1);
           $list->set_query ($entry_query);
@@ -157,13 +157,13 @@ http://www.earthli.com/software/webcore
            * which filter to apply to the entries (for state).
            */
           
-          if ($list->paginator->num_pages () > 1)
+          if ($list->pager->num_pages () > 1)
           {
-            $items_text = ' Showing ' . $list->paginator->first_item_index () . ' - ' . $list->paginator->last_item_index () . ' of ' . $list->paginator->num_items () . ' ' . $type_info->plural_title;                     
+            $items_text = ' Showing ' . $list->pager->first_item_index () . ' - ' . $list->pager->last_item_index () . ' of ' . $list->pager->num_items () . ' ' . $type_info->plural_title;
           }
           else
           {
-            $items_text = ' ' . $list->paginator->num_items () . ' ' . $type_info->plural_title;
+            $items_text = ' ' . $list->pager->num_items () . ' ' . $type_info->plural_title;
           }
       ?>
       <h2 id="<?php echo $type_info->id . '_list'; ?>"><?php echo $items_text; ?></h2>

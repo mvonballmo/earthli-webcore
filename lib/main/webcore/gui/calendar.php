@@ -69,6 +69,11 @@ abstract class CALENDAR extends WEBCORE_OBJECT
   public $last_day;
 
   /**
+   * The number of years to display in the pager.
+   * @var int */
+  public $num_years;
+
+  /**
    * @param APPLICATION $app Main application.
    */
   public function __construct ($app)
@@ -76,8 +81,8 @@ abstract class CALENDAR extends WEBCORE_OBJECT
     parent::__construct ($app);
 
     include_once ('webcore/gui/page_navigator.php');
-    $this->paginator = new PAGE_NAVIGATOR ($app);
-    $this->paginator->pages_to_show = 5;
+    $this->pager = new PAGE_NAVIGATOR ($app);
+    $this->pager->pages_to_show = 5;
   }
 
   /**
@@ -114,8 +119,8 @@ abstract class CALENDAR extends WEBCORE_OBJECT
       $this->num_years = 1;
     }
 
-    $this->paginator->set_ranges ($this->num_years, 1);
-    $this->paginator->page_offset = date ("Y", $php_first_day) - 1;
+    $this->pager->set_ranges ($this->num_years, 1);
+    $this->pager->page_offset = date ("Y", $php_first_day) - 1;
 
     $curr_month = $first_month;
     $curr_year = $first_year;
@@ -126,7 +131,7 @@ abstract class CALENDAR extends WEBCORE_OBJECT
     {
       // the span is more than 12 months, so split into pages
       
-      if ($this->paginator->page_number == 1)
+      if ($this->pager->page_number == 1)
       {
         $last_month = 12;
         $last_year = $curr_year;
@@ -134,7 +139,7 @@ abstract class CALENDAR extends WEBCORE_OBJECT
       else
       {
         $curr_month = 1;
-        $curr_year = $curr_year + $this->paginator->page_number - 1;
+        $curr_year = $curr_year + $this->pager->page_number - 1;
         if ($curr_year != $last_year)
         {
           $last_month = 12;
@@ -163,7 +168,7 @@ abstract class CALENDAR extends WEBCORE_OBJECT
     // and the last day of the month that 'last_day' falls on
     // to make sure the calendar displays whole months only
 
-    $this->_draw_paginator ();
+    $this->_draw_pager();
     $this->start_calendar ();
 
     $this->start_year ($this->_curr_year);
@@ -217,7 +222,7 @@ abstract class CALENDAR extends WEBCORE_OBJECT
     $this->finish_calendar ();
     if ($month_displayed)
     {
-      $this->_draw_paginator ();
+      $this->_draw_pager ();
     }
   }
 
@@ -348,7 +353,7 @@ abstract class CALENDAR extends WEBCORE_OBJECT
    * @access private
    * @abstract
    */
-  protected abstract function _draw_paginator ();
+  protected abstract function _draw_pager ();
 
   /**
    * A new week is beginning.

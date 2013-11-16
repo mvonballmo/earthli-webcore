@@ -57,7 +57,7 @@ class FLAT_COMMENT_GRID extends PRINTABLE_COMMENT_GRID
    * Used when printing to shut off pagination
    * @var boolean
    */
-  public $show_paginator = true;
+  public $show_pager = true;
 
   /**
    * @param COMMENT $obj
@@ -155,7 +155,7 @@ class FLAT_COMMENT_GRID extends PRINTABLE_COMMENT_GRID
   {
     // if printing, then don't paginate, return all objects
 
-    if ($this->show_paginator)
+    if ($this->show_pager)
     {
       return $this->_query->objects ();
     }

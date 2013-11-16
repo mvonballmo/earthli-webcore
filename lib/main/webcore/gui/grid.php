@@ -67,7 +67,7 @@ abstract class GRID extends WEBCORE_OBJECT
    * Displays page navigation for the grid, if necessary.
    * @var PAGE_NAVIGATOR
    */
-  public $paginator;
+  public $pager;
 
   /**
    * Force all columns to even width, regardless of content.
@@ -121,12 +121,12 @@ abstract class GRID extends WEBCORE_OBJECT
   public $overridden_max_title_size = 75;
 
   /**
-   * Should the paginator be drawn?
+   * Should the pager be drawn?
    * Set this to False to prevent page numbers from displaying even if there are
    * more pages than can be displayed.
    * @var boolean
    */
-  public $show_paginator = true;
+  public $show_pager = true;
 
   /**
    * Should menus be drawn for objects?
@@ -141,12 +141,12 @@ abstract class GRID extends WEBCORE_OBJECT
   {
     parent::__construct ($app);
     include_once ('webcore/gui/page_navigator.php');
-    $this->paginator = new PAGE_NAVIGATOR ($app);
+    $this->pager = new PAGE_NAVIGATOR ($app);
   }
 
   /**
    * Specify the number of desired columns and rows.
-   * The grid will use a paginator to allow access to the objects not representable in a 'num_rows' x 'num_cols' grid.
+   * The grid will use a pager to allow access to the objects not representable in a 'num_rows' x 'num_cols' grid.
    * @see GRID::display()
    * @param integer $num_rows Number of rows to display.
    * @param integer $num_cols Number of columns to display (some grids are not designed to use more than one column).
@@ -168,6 +168,17 @@ abstract class GRID extends WEBCORE_OBJECT
     $this->_num_objects = null;
   }
 
+  public function get_pager()
+  {
+    if (! isset ($this->_num_objects))
+    {
+      $this->_num_objects = $this->_get_size ();
+      $this->pager->set_ranges ($this->_num_objects, $this->_num_rows * $this->_num_columns);
+    }
+
+    return $this->pager;
+  }
+
   /**
    * Show this page of objects from the query.
    * The query must be set with {@link set_query()} before calling this
@@ -181,13 +192,14 @@ abstract class GRID extends WEBCORE_OBJECT
     if (! isset ($this->_num_objects))
     {
       $this->_num_objects = $this->_get_size ();
-      $this->paginator->set_ranges ($this->_num_objects, $this->_num_rows * $this->_num_columns);
+      $this->pager->set_ranges ($this->_num_objects, $this->_num_rows * $this->_num_columns);
     }
 
     if ($this->_num_objects > 0)
     {
+      $objects = $this->_get_objects ();
       if (isset ($this->env->profiler)) $this->env->profiler->start ('ui');
-      $this->_draw ($this->_get_objects ());
+      $this->_draw ($objects);
       if (isset ($this->env->profiler)) $this->env->profiler->stop ('ui');
     }
     else
@@ -218,24 +230,24 @@ abstract class GRID extends WEBCORE_OBJECT
   {
     $this->assert (isset ($this->_query), 'query is not set', '_get_objects', 'GRID');
     $num_objects_per_page = $this->_num_rows * $this->_num_columns;
-    $this->_query->set_limits (($this->paginator->page_number - 1) * $num_objects_per_page, $num_objects_per_page);
+    $this->_query->set_limits (($this->pager->page_number - 1) * $num_objects_per_page, $num_objects_per_page);
     return $this->_query->objects ();
   }
 
   /**
    * Render the grid itself.
-   * Draws a paginator if {@link $show_paginator} is True, then calls {@link _start_grid()}
+   * Draws a pager if {@link $show_pager} is True, then calls {@link _start_grid()}
    * and {@link _draw_header()}. After calling {@link _draw_cells()} to draw the content, it
    * finishes with {@link _draw_footer()} and {@link _finish_grid()} before drawing the
-   * paginator again with {@link _draw_paginator()}.
+   * pager again with {@link _draw_pager()}.
    * @param array[object] $objs
    * @access private
    */
   protected function _draw ($objs)
   {
-    if ($this->show_paginator)
+    if ($this->show_pager)
     {
-      $this->_draw_paginator (true);
+      $this->_draw_pager (true);
     }
 
     $this->_start_grid ();
@@ -256,9 +268,9 @@ abstract class GRID extends WEBCORE_OBJECT
     $this->_draw_footer ();
     $this->_finish_grid ();
 
-    if ($this->show_paginator)
+    if ($this->show_pager)
     {
-      $this->_draw_paginator (false);
+      $this->_draw_pager (false);
     }
 
     ob_start ();
@@ -418,35 +430,21 @@ abstract class GRID extends WEBCORE_OBJECT
    * Render the page navigator, if necessary.
    * Only called if {@link $show_paginotor} is True. Called from {@link _draw()}.
    * @param boolean $include_anchor_id If true, renders the id for the
-   * paginator.
+   * pager.
    * @access private
    */
-  protected function _draw_paginator ($include_anchor_id)
+  protected function _draw_pager ($include_anchor_id)
   {
-    $output = $this->paginator->as_html ();
+    $output = $this->pager->as_html ();
     if ($output)
     {
-      if ($this->centered)
+      if ($include_anchor_id && $this->pager->page_anchor)
       {
-        if ($include_anchor_id && $this->paginator->page_anchor)
-        {
-          echo '<p class="paginator" style="text-align: center" id="' . $this->paginator->page_anchor . '">' . $output . '</p>';
-        }
-        else
-        {
-          echo '<p class="paginator" style="text-align: center">' . $output . '</p>';
-        }
+        echo '<div class="pager" id="' . $this->pager->page_anchor . '">' . $output . '</div>';
       }
       else
       {
-        if ($include_anchor_id && $this->paginator->page_anchor)
-        {
-          echo '<p class="paginator" id="' . $this->paginator->page_anchor . '">' . $output . '</p>';
-        }
-        else
-        {
-          echo '<p class="paginator">' . $output . '</p>';
-        }
+        echo '<div class="pager">' . $output . '</div>';
       }
     }
   }
@@ -464,9 +462,7 @@ abstract class GRID extends WEBCORE_OBJECT
    */
   protected function _draw_empty_grid ()
   {
-?>
-  <p class="error">There are no <?php echo $this->object_name; ?>s to display.</p>
-<?php
+    $this->context->show_message('There are no ' . $this->object_name . 's to display.');
   }
 
   /**
@@ -593,7 +589,7 @@ abstract class GRID extends WEBCORE_OBJECT
   protected $_num_objects;
 
   /**
-   * @var QUERY
+   * @var HIERARCHICAL_QUERY
    * @access private
    */
   protected $_query;

@@ -94,7 +94,7 @@ http://www.earthli.com/software/webcore
     echo '</div>';
 
     echo '<div class="button-content">';
-    echo '<span class="paginator">';
+    echo '<span class="pager">';
     echo $navigator->controls ();
     echo '</span>';
 

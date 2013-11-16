@@ -79,7 +79,7 @@ abstract class FOLDER_GRID extends STANDARD_GRID
   {
     $this->assert (isset ($this->_folders), 'folders are not set', '_get_objects', 'FOLDER_GRID');
     $num_objects_per_page = $this->_num_rows * $this->_num_columns;
-    return array_slice ($this->_folders, ($this->paginator->page_number - 1) * $num_objects_per_page, $num_objects_per_page);
+    return array_slice ($this->_folders, ($this->pager->page_number - 1) * $num_objects_per_page, $num_objects_per_page);
   }
 
   /**
