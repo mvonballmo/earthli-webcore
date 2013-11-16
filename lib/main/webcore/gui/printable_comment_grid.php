@@ -85,16 +85,16 @@ abstract class PRINTABLE_COMMENT_GRID extends STANDARD_GRID
   }
 
   /**
-   * Show the paginator only if not printing.
+   * Show the pager only if not printing.
    * @param boolean $include_anchor_id If true, renders the id for the
-   * paginator.
+   * pager.
    * @access private
    */
-  protected function _draw_paginator ($include_anchor_id)
+  protected function _draw_pager ($include_anchor_id)
   {
-    if ($this->_show_paginator)
+    if ($this->_show_pager)
     {
-      parent::_draw_paginator ($include_anchor_id);
+      parent::_draw_pager ($include_anchor_id);
     }
   }
 
@@ -110,6 +110,6 @@ abstract class PRINTABLE_COMMENT_GRID extends STANDARD_GRID
    * @var boolean
    * @access private
    */
-  protected $_show_paginator = false;
+  protected $_show_pager = false;
 
 }
