@@ -88,25 +88,35 @@ class DEFAULT_PAGE_RENDERER extends WEBCORE_PAGE_RENDERER
           if ($options->icon)
           {
             ?>
-            <div class="banner-icon" style="background-image: url(<?php echo $page->get_icon_url ($options->icon, '50px'); ?>)"></div>
+            <div class="icon-container">
+              <div class="banner-icon" style="background-image: url(<?php echo $page->get_icon_url ($options->icon, '50px'); ?>)"></div>
           <?php
           }
           ?>
-          <div class="banner-title"><?php
-            $newsfeed_commands = $this->page->newsfeed_options->make_commands($this->context);
-            if ($newsfeed_commands->num_executable_commands())
-            {
-              $renderer = $this->context->make_newsfeed_menu_renderer ();
-              $renderer->set_size (Menu_size_minimal);
-              $renderer->display ($newsfeed_commands);
-              echo ' ';
-            }
 
-            echo $options->title;
-            ?></div>
+          <div class="banner-title">
+          <?php
+          $newsfeed_commands = $this->page->newsfeed_options->make_commands($this->context);
+          if ($newsfeed_commands->num_executable_commands())
+          {
+            $renderer = $this->context->make_newsfeed_menu_renderer ();
+            $renderer->set_size (Menu_size_minimal);
+            $renderer->display ($newsfeed_commands);
+          }
+          ?>
+          <?php echo $options->title; ?>
+          </div>
           <div class="login-status">
             <?php echo $this->_login_theme_status ($options); ?>
           </div>
+          <?php
+          if ($options->icon)
+          {
+            ?>
+            </div>
+            <?php
+          }
+          ?>
         </div>
         <div style="clear: both"></div>
       </div>
