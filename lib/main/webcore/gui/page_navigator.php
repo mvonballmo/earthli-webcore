@@ -207,19 +207,21 @@ class PAGE_NAVIGATOR extends WEBCORE_OBJECT
 
   /**
    * Render the navigator.
+   * @param bool $reset If true, the pager's content will be regenerated even if it already exists.
    */
-  public function display ()
+  public function display ($reset = false)
   {
-    echo $this->as_html ();
+    echo $this->as_html ($reset);
   }
 
   /**
    * Return navigator as HTML.
+   * @param bool $reset If true, the pager's content will be regenerated even if it already exists.
    * @return string
    */
-  public function as_html ()
+  public function as_html ($reset = false)
   {
-    if (! isset ($this->_output))
+    if ($reset || ! isset ($this->_output))
     {
       $this->_generate ();
     }

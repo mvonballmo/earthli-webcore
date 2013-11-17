@@ -657,6 +657,14 @@ abstract class PANEL extends WEBCORE_OBJECT
   public abstract function display ();
 
   /**
+   * @return GRID
+   */
+  public function get_grid()
+  {
+    return null;
+  }
+
+  /**
    * @return PAGE_NAVIGATOR
    */
   public function get_pager()
@@ -1114,6 +1122,16 @@ abstract class GRID_PANEL extends PANEL
   {
     $this->ensure_grid_exists();
     $this->_grid->display ();
+  }
+
+  /**
+   * @return GRID
+   */
+  public function get_grid()
+  {
+    $this->ensure_grid_exists();
+
+    return $this->_grid;
   }
 
   /**

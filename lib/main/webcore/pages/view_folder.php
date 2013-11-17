@@ -129,8 +129,18 @@ http://www.earthli.com/software/webcore/albums
       $panel_manager->display_time_menu ();
     }
     $pager = $panel->get_pager();
-    $pager->pages_to_show = 0;
-    $pager->display();
+
+    if ($pager)
+    {
+      $pager->pages_to_show = 0;
+      $pager->display();
+    }
+
+    $grid = $panel->get_grid();
+    if ($grid)
+    {
+      $grid->show_pager = false;
+    }
 
     /** @var MENU_RENDERER $renderer */
     $renderer = $folder->handler_for (Handler_menu);
@@ -144,17 +154,26 @@ http://www.earthli.com/software/webcore/albums
   <?php
     $panel->display ();
 
-    if ($panel->num_objects () && $panel->uses_time_selector)
+    if ($panel->num_objects ())
     {
       // don't show the bottom selector if there are no objects
-
     ?>
-  <div class="menu-bar-bottom">
-    <?php $panel_manager->display_time_menu (); ?>
-  </div>
-  <?php
+    <div class="menu-bar-bottom">
+    <?php
+      if ($panel->uses_time_selector)
+      {
+        $panel_manager->display_time_menu ();
+      }
+      if ($pager)
+      {
+        $pager->pages_to_show = 5;
+        $pager->display(true);
+      }
+    ?>
+    </div>
+    <?php
     }
-  ?>
+    ?>
 </div>
 <?php
     $Page->finish_display ();
