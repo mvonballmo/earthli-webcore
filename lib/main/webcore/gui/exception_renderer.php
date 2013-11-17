@@ -63,8 +63,9 @@ class EXCEPTION_RENDERER extends OBJECT_RENDERER
     $error_message = $obj->message;
     /** @var $options EXCEPTION_RENDERER_OPTIONS */
     $options = $this->_options;
-?>
-  <p class="error"><?php echo $error_message; ?></p>
+
+    $this->context->show_message($error_message);
+  ?>
   <table class="basic columns left-labels">
     <tr>
       <th>Page</th>

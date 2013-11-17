@@ -279,7 +279,7 @@ class PAGE extends CONTEXT
       ?>
       <div class="main-box">
         <div class="text-flow">
-          <p class="error"><?php echo $msg; ?></p>
+          <?php $this->show_message($msg); ?>
         </div>
       </div>
       <?php
@@ -329,8 +329,8 @@ class PAGE extends CONTEXT
     ?>
     <div class="main-box">
       <div class="text-flow">
-         <p class="error"><?php echo $message; ?></p>
-      </div>
+        <?php $this->show_message($message); ?>
+      <div>
     </div>
     <?php
     $this->finish_display ();

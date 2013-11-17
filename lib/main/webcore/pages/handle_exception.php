@@ -70,13 +70,12 @@ http://www.earthli.com/software/webcore
     $controls_renderer->draw_buttons ($buttons);
     ?>
   </p>
-  <p class="caution">
-    <span class="icon sixteen" style="background-image: url(<?php echo $Page->get_icon_url ('{icons}indicators/warning', '16px'); ?>)">By default, the report includes some browser and web site data. See the full report details for more information.</span>
-  </p>
   <?php
+    $Page->show_message('By default, the report includes some browser and web site data. See the full report details for more information.', 'info');
+
     $layer = $Page->make_layer ('exception_details');
   ?>
-  <p class="detail"><?php echo $layer->draw_toggle (); ?> Toggle the arrow to see the full report details.</p>
+  <p class="detail"><?php $layer->draw_toggle (); ?> Toggle the arrow to see the full report details.</p>
   <?php
 
   $layer->start ();

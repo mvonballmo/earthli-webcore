@@ -550,6 +550,20 @@ class CONTEXT extends RESOLVER
     }
   }
 
+  public function show_message ($message, $type = 'error')
+  {
+    $icon_url = $this->get_icon_url ('{icons}indicators/' . $type, '16px');
+    if ($type == 'info')
+    {
+      $type = 'caution';
+    }
+    ?>
+    <p class="<?php echo $type; ?>">
+      <span class="icon sixteen" style="background-image: url(<?php echo $icon_url; ?>)"><?php echo $message; ?></span>
+    </p>
+  <?php
+  }
+
   /**
    * Internal flag for title formatting.
    * The set of accepted tags for which the title formatter was built is stored here. When a title

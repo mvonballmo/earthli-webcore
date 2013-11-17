@@ -90,13 +90,13 @@ class ATTACHMENT_RENDERER extends CONTENT_OBJECT_RENDERER
 
     if ($obj->exists () && ($obj->original_file_name != $obj->file_name) && $this->_options->show_interactive)
     {
-      $img_url = $this->app->get_icon_url ('{icons}indicators/info', '16px');
 ?>
       <tr>
         <th></th>
         <td>
-          <div class="caution notes" style="display: inline-block">
-            <span class="icon sixteen" style="background-image: url(<?php echo $img_url; ?>)">Stored as <span class="field"><?php echo $obj->file_name; ?></span> on the server.</span></div>
+          <?php
+          $this->page->show_message('Stored as <span class="field">' . $obj->file_name . '</span> on the server.', 'info')
+          ?>
         </td>
       </tr>
 <?php
@@ -198,7 +198,7 @@ class ATTACHMENT_RENDERER extends CONTENT_OBJECT_RENDERER
    */
   protected function _draw_html_archive ($obj, $file_name)
   {
-    echo $this->_echo_html_description ($obj);
+    $this->_echo_html_description ($obj);
 
     if ($obj->is_archive)
     {
@@ -275,6 +275,7 @@ class ATTACHMENT_RENDERER extends CONTENT_OBJECT_RENDERER
   protected function _draw_text_archive ($obj, $file_name)
   {
     $class_name = $this->app->final_class_name ('ARCHIVE', 'webcore/util/archive.php');
+    /** @var ARCHIVE $archive */
     $archive = new $class_name ($file_name);      
     echo $this->line ('[Files]');
     echo $this->sep ();
