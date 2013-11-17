@@ -118,29 +118,29 @@ http://www.earthli.com/software/webcore/albums
   $form->set_value ('folder_search_type', Search_user_constant);
   $form->display ();
 
-  if (empty ($folders))
-  {
-    $box->new_column_of_type ('tools-box');
-    echo '<h4>Tools</h4>';
-  }
-  else
-  {
-    echo '<h4>Tools</h4>';
-  }
-
-  $renderer = $folder->handler_for (Handler_menu);
-  $renderer->set_size(Menu_size_compact);
-  $renderer->display($folder->handler_for (Handler_commands));
-
   $box->finish_column_set ();
   ?>
 </div>
 <div class="main-box">
-  <?php if ($panel->uses_time_selector) { ?>
   <div class="menu-bar-top">
-    <?php $panel_manager->display_time_menu (); ?>
+    <?php
+    if ($panel->uses_time_selector)
+    {
+      $panel_manager->display_time_menu ();
+    }
+    $pager = $panel->get_pager();
+    $pager->pages_to_show = 0;
+    $pager->display();
+
+    /** @var MENU_RENDERER $renderer */
+    $renderer = $folder->handler_for (Handler_menu);
+    $renderer->set_size(Menu_size_standard);
+    $renderer->num_important_commands = 2;
+    /** @var COMMANDS $commands */
+    $commands = $folder->handler_for(Handler_commands);
+    $renderer->display($commands);
+    ?>
   </div>
-  <?php } ?>
   <?php
     $panel->display ();
 
