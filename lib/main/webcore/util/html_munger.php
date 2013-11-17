@@ -2059,7 +2059,7 @@ class HTML_HEADING_REPLACER extends MUNGER_REPLACER
    * Heading level to use if none is specified.
    * @var integer
    */
-  public $default_level = 3;
+  public $default_level = 2;
 
   /**
    * Convert the given token to the output format.
