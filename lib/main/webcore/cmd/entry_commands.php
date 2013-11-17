@@ -57,21 +57,6 @@ class ENTRY_COMMANDS extends COMMANDS
   {
     parent::__construct ($entry->app);
 
-    $this->append_group ('Edit');
-    $this->_add_editors ($entry);
-    $this->append_group ('View');
-    $this->_add_viewers ($entry);
-    $this->append_group ('Create');
-    $this->_add_creators ($entry);
-  }
-
-  /**
-   * Add commands that edit the entry.
-   * @param ENTRY $entry
-   * @access private
-   */
-  protected function _add_editors ($entry)
-  {
     $cmd = $this->make_command ();
     $cmd->id = 'subscribe';
     $cmd->caption = 'Subscribe';
@@ -81,6 +66,21 @@ class ENTRY_COMMANDS extends COMMANDS
     $cmd->importance = Command_importance_high - Command_importance_increment;
     $this->append ($cmd);
 
+    $this->append_group ('Create');
+    $this->_add_creators ($entry);
+    $this->append_group ('Edit');
+    $this->_add_editors ($entry);
+    $this->append_group ('View');
+    $this->_add_viewers ($entry);
+  }
+
+  /**
+   * Add commands that edit the entry.
+   * @param ENTRY $entry
+   * @access private
+   */
+  protected function _add_editors ($entry)
+  {
     $cmd = $this->make_command ();
     $cmd->id = 'edit';
     $cmd->caption = 'Edit';

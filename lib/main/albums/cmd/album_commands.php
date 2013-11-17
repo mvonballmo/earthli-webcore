@@ -70,10 +70,16 @@ class ALBUM_COMMANDS extends FOLDER_COMMANDS
    */
   protected function _add_viewers ($folder)
   {
-    parent::_add_viewers ($folder);
+    $cmd = $this->make_command ();
+    $cmd->id = 'calendar';
+    $cmd->caption = 'Calendar';
+    $cmd->link = "view_calendar.php?id=$folder->id";
+    $cmd->icon = '{icons}buttons/calendar';
+    $cmd->executable = true;
+    $cmd->importance = Command_importance_high;
+    $this->append ($cmd);
 
     $cmd = $this->make_command ();
-
     $cmd->id = 'print_preview';
     $cmd->caption = 'Print preview';
 
@@ -94,14 +100,7 @@ class ALBUM_COMMANDS extends FOLDER_COMMANDS
     $cmd->importance = Command_importance_high;
     $this->append ($cmd);
 
-    $cmd = $this->make_command ();
-    $cmd->id = 'calendar';
-    $cmd->caption = 'Calendar';
-    $cmd->link = "view_calendar.php?id=$folder->id";
-    $cmd->icon = '{icons}buttons/calendar';
-    $cmd->executable = true;
-    $cmd->importance = Command_importance_high;
-    $this->append ($cmd);
+    parent::_add_viewers ($folder);
   }
 
   /**

@@ -57,12 +57,17 @@ class FOLDER_COMMANDS extends COMMANDS
   {
     parent::__construct ($folder->app);
 
-    $this->append_group ('Edit');
-    $this->_add_editors ($folder);
-    $this->append_group ('View');
-    $this->_add_viewers ($folder);
+    $cmd = $this->make_command ();
+    $cmd->id = 'subscribe';
+    $cmd->caption = 'Subscribe';
+    $cmd->link = 'subscribe_to_folder.php?id=' . $folder->id . '&email=' . $this->login->email . '&subscribed=1';
+    $cmd->icon = '{icons}indicators/subscribed';
+    $cmd->executable = $this->login->is_allowed (Privilege_set_folder, Privilege_view, $folder);
+    $cmd->importance = Command_importance_high - Command_importance_increment;
+    $this->append ($cmd);
 
     $this->append_group ('Create');
+    $this->_add_creators ($folder);
 
     $cmd = $this->make_command ();
     $cmd->id = 'new';
@@ -73,7 +78,10 @@ class FOLDER_COMMANDS extends COMMANDS
     $cmd->importance = Command_importance_high + Command_importance_increment;
     $this->append ($cmd);
 
-    $this->_add_creators ($folder);
+    $this->append_group ('Edit');
+    $this->_add_editors ($folder);
+    $this->append_group ('View');
+    $this->_add_viewers ($folder);
   }
 
   /**
@@ -83,15 +91,6 @@ class FOLDER_COMMANDS extends COMMANDS
    */
   protected function _add_editors ($folder)
   {
-    $cmd = $this->make_command ();
-    $cmd->id = 'subscribe';
-    $cmd->caption = 'Subscribe';
-    $cmd->link = 'subscribe_to_folder.php?id=' . $folder->id . '&email=' . $this->login->email . '&subscribed=1';
-    $cmd->icon = '{icons}indicators/subscribed';
-    $cmd->executable = $this->login->is_allowed (Privilege_set_folder, Privilege_view, $folder);
-    $cmd->importance = Command_importance_high - Command_importance_increment;
-    $this->append ($cmd);
-
     $cmd = $this->make_command ();
     $cmd->id = 'edit';
     $cmd->caption = 'Edit';
@@ -144,6 +143,23 @@ class FOLDER_COMMANDS extends COMMANDS
   protected function _add_viewers ($folder)
   {
     $cmd = $this->make_command ();
+    $cmd->id = 'explorer';
+    $cmd->caption = 'Explorer';
+    $cmd->link = "view_explorer.php?id=$folder->id";
+    $cmd->icon = '{icons}buttons/explorer';
+    $cmd->importance = Command_importance_low;
+    $this->append ($cmd);
+
+    $cmd = $this->make_command ();
+    $cmd->id = 'history';
+    $cmd->caption = 'History';
+    $cmd->link = "view_folder_history.php?id=$folder->id";
+    $cmd->icon = '{icons}buttons/history';
+    $cmd->executable = $this->login->is_allowed (Privilege_set_folder, Privilege_view_history, $folder);
+    $cmd->importance = Command_importance_low;
+    $this->append ($cmd);
+
+    $cmd = $this->make_command ();
     $cmd->id = 'security';
     $cmd->caption = 'Manage security';
     $cmd->link = "view_folder_permissions.php?id=$folder->id";
@@ -158,23 +174,6 @@ class FOLDER_COMMANDS extends COMMANDS
     $cmd->link = "view_folder_subscriptions.php?id=$folder->id";
     $cmd->icon = '{icons}buttons/subscriptions';
     $cmd->executable = $this->login->is_allowed (Privilege_set_folder, Privilege_modify, $folder);
-    $cmd->importance = Command_importance_low;
-    $this->append ($cmd);
-
-    $cmd = $this->make_command ();
-    $cmd->id = 'history';
-    $cmd->caption = 'History';
-    $cmd->link = "view_folder_history.php?id=$folder->id";
-    $cmd->icon = '{icons}buttons/history';
-    $cmd->executable = $this->login->is_allowed (Privilege_set_folder, Privilege_view_history, $folder);
-    $cmd->importance = Command_importance_low;
-    $this->append ($cmd);
-
-    $cmd = $this->make_command ();
-    $cmd->id = 'explorer';
-    $cmd->caption = 'Explorer';
-    $cmd->link = "view_explorer.php?id=$folder->id";
-    $cmd->icon = '{icons}buttons/explorer';
     $cmd->importance = Command_importance_low;
     $this->append ($cmd);
   }
