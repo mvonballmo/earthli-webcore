@@ -150,6 +150,12 @@ class PAGE_NAVIGATOR extends WEBCORE_OBJECT
   public $show_disabled_buttons = true;
 
   /**
+   * Show the pager even if there's only a single page.
+   * @var boolean
+   */
+  public $show_single_page = false;
+
+  /**
    * @param CONTEXT $context
    * @param integer $num_total_objects Total number of objects that need to be displayed.
    * @param integer $num_objects_per_page Number of objects to show per page.
@@ -383,13 +389,13 @@ class PAGE_NAVIGATOR extends WEBCORE_OBJECT
 
         if ($this->show_total)
         {
-          $this->_output .= "<li><span class=\"page-total\"> ($this->_count $this->entry_type)</span></li>";
+          $this->_output .= "<li><span class=\"page-total\"> ($this->page_number of $this->_count $this->entry_type)</span></li>";
         }
       }
     }
-    else
+    else if ($this->show_single_page)
     {
-      $this->_output = "<li><span class=\"button selected\">1</span></li>";
+      $this->_output .= "<li><span class=\"button selected\">1</span></li>";
     }
 
     $this->_output .= '</ul>';
