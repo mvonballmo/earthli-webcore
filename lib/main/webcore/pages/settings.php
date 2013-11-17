@@ -70,9 +70,9 @@ http://www.earthli.com/software/webcore
       /** @var $grid THEME_GRID */
       $grid = new $class_name ($Page);
       $grid->is_chooser = true;
-      $grid->paginator->pages_to_show = 2;
-      $grid->paginator->show_first_and_last = false;
-      $grid->paginator->show_total = false;
+      $grid->pager->pages_to_show = 2;
+      $grid->pager->show_first_and_last = false;
+      $grid->pager->show_total = false;
       $grid->set_ranges (5, 1);
       $grid->set_query ($theme_query);
       $grid->display ();
@@ -211,6 +211,10 @@ http://www.earthli.com/software/webcore
         echo $renderer->text_line_as_html('name', $text_props);
         $renderer->finish_row();
         $renderer->draw_text_box_row('description', null, '2em');
+
+        $renderer->start_row('Block');
+        $renderer->start_block(true);
+
         $props = $renderer->make_list_properties ();
         $props->show_descriptions = true;
         $props->width = '30em';
@@ -221,7 +225,7 @@ http://www.earthli.com/software/webcore
         $renderer->draw_radio_group_row('select', $props);
 
         $field = $this->field_at('select');
-        $props->width = '15em';
+        $props->width = '8em';
 
         $renderer->start_row('Menus');
         echo $renderer->drop_down_as_html('select', $props);
@@ -238,6 +242,9 @@ http://www.earthli.com/software/webcore
         echo $renderer->list_box_as_html('select', $props);
         $renderer->finish_row();
 
+        $renderer->finish_block();
+        $renderer->finish_row();
+
         $renderer->finish();
       }
     }
@@ -247,6 +254,9 @@ http://www.earthli.com/software/webcore
     $form->display();
     ?>
   </div>
+  <div class="info-box-top">
+    <p>This is an info box at the top of a page or section.</p>
+  </div>
   <h4>Text and block elements (level 4 heading)</h4>
   <p>Standard paragraph text.</p>
   <ol><li>Item One</li><li>Item Two</li></ol>
@@ -254,16 +264,15 @@ http://www.earthli.com/software/webcore
   <div class="quote-block">"This is a block quote. These are often used in article to include
     text from other sources. This is generally used for larger citations. Use the inline
     style for smaller citations."</div>
-  <div class="info-box-top">
-    <p>This is an info box at the top of a page or section.</p>
-  </div>
   <div class="preview">
     <p>This is text in a preview box. <span class="quote-inline">This is an example of an inline quotation.</span>
       This text following the citation and should make the paragraph wrap at least once.</p>
   </div>
-  <div class="info-box-bottom">
-    <p>This is an info box at the bottom of a page or section.</p>
-  </div>
+  <?php
+    $Page->show_message('This is an caution box.', 'info');
+    $Page->show_message('This is an warning box.', 'warning');
+    $Page->show_message('This is an error box.');
+  ?>
   <div class="chart">
     <h3 class="chart-title">Box (Code Listing)</h3>
     <div class="chart-body">
@@ -278,6 +287,9 @@ http://www.earthli.com/software/webcore
   }
 }</code></pre>
     </div>
+  </div>
+  <div class="info-box-bottom">
+    <p>This is an info box at the bottom of a page or section.</p>
   </div>
   <table class="basic columns left-labels">
     <tr>
