@@ -684,15 +684,6 @@ abstract class PANEL extends WEBCORE_OBJECT
     $url->replace_argument ('panel', $this->id);
     return $url->as_html ();
   }
-
-  /**
-   * Commands associated with this panel.
-   * @return COMMANDS
-   */
-  public function commands ()
-  {
-    return null;
-  }
 }
 
 /**
@@ -1405,16 +1396,6 @@ class USER_PANEL extends QUERY_PANEL
   protected function _make_grid ()
   {
     $class_name = $this->app->final_class_name ('USER_GRID', 'webcore/gui/user_grid.php');
-    return new $class_name ($this->app);
-  }
-
-  /**
-   * Commands associated with this panel.
-   * @return COMMANDS
-   */
-  public function commands ()
-  {
-    $class_name = $this->app->final_class_name ('USER_MANAGEMENT_COMMANDS', 'webcore/cmd/user_management_commands.php');
     return new $class_name ($this->app);
   }
 
