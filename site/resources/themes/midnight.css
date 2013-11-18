@@ -30,6 +30,12 @@ body
 	background-color: #000000;
 }
 
+table.columns > tbody > tr > td,
+table.columns > tbody > tr > th
+{
+  border-color: #666666;
+}
+
 .nav-box,
 .footer,
 .top-box
