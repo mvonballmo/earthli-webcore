@@ -930,6 +930,7 @@ ul.menu li:first-child .menu-item:hover
   min-height: 2.2em;
   padding: .5em;
   box-sizing: border-box;
+  -moz-box-sizing: border-box;
   cursor: pointer;
   background-color: #EEE;
   border: 1px solid silver;
