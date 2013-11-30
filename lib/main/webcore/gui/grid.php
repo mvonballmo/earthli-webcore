@@ -462,7 +462,7 @@ abstract class GRID extends WEBCORE_OBJECT
    */
   protected function _draw_empty_grid ()
   {
-    $this->context->show_message('There are no ' . $this->object_name . 's to display.');
+    $this->context->show_message('There are no ' . $this->object_name . 's to display.', 'info');
   }
 
   /**

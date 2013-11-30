@@ -550,6 +550,11 @@ class CONTEXT extends RESOLVER
     }
   }
 
+  /**
+   * Adds a message to the output stream.
+   * @param string $message The message to display
+   * @param string $type The type of message; can be 'error', 'warning' and 'info'
+   */
   public function show_message ($message, $type = 'error')
   {
     $icon_url = $this->get_icon_url ('{icons}indicators/' . $type, '16px');
