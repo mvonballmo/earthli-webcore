@@ -92,6 +92,31 @@ abstract class SELECTABLE_GRID extends STANDARD_GRID
       return '<input type="checkbox" name="' . $this->selector_name . '" value="' . $obj->id . '"' . $state . '>';
     }
   }
+
+  /**
+   * @param RENDERABLE $obj
+   */
+  protected function _display_start_minimal_commands_block($obj)
+  {
+    if ($this->show_menus)
+    {
+      $selector = $this->_get_selector($obj);
+
+      $selector_class = !empty($selector) ? 'selector' : '';
+      ?>
+      <div class="minimal-commands <?php echo $selector_class; ?>">
+        <?php
+        if ($selector)
+        {
+          echo "<span class=\"selector\">$selector</span>";
+        }
+        $this->_draw_menu_for ($obj, Menu_size_minimal);
+        ?>
+      </div>
+    <div class="minimal-commands-content <?php echo $selector_class; ?>">
+    <?php
+    }
+  }
 }
 
 ?>

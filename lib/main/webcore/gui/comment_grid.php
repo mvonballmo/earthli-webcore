@@ -91,6 +91,9 @@ class COMMENT_GRID extends SELECTABLE_GRID
     $this->_echo_entry_info ($obj);
   }
 
+  /**
+   * @param COMMENT $obj
+   */
   protected function _echo_entry_info ($obj)
   {
     $folder = $obj->parent_folder ();
@@ -117,11 +120,8 @@ class COMMENT_GRID extends SELECTABLE_GRID
   {
     ?>
     <div class="grid-item">
-      <div class="minimal-commands">
-        <?php $this->_draw_menu_for ($obj, Menu_size_minimal); ?>
-      </div>
-      <div class="minimal-commands-content">
-        <?php
+      <?php
+        $this->_display_start_minimal_commands_block($obj);
 
         $creator = $obj->creator ();
         if ($creator->icon_url)
@@ -155,7 +155,6 @@ class COMMENT_GRID extends SELECTABLE_GRID
         ?>
         </div>
       </div>
-    </div>
     <?php
     }
   }

@@ -79,17 +79,9 @@ class FLAT_COMMENT_GRID extends PRINTABLE_COMMENT_GRID
     $creator = $obj->creator ();
 ?>
     <div class="grid-item">
-      <div class="minimal-commands">
-        <?php
-        if ($this->show_controls)
-        {
-          echo '<div style="float: left">';
-          $this->_draw_menu_for ($obj, Menu_size_minimal);
-          echo '</div>';
-        }
-        ?>
-      </div>
-      <div class="minimal-commands-content">
+      <?php
+      $this->_display_start_minimal_commands_block($obj);
+      ?>
         <div class="comment-title" style="background-image: url('<?php echo $obj->icon_url (); ?>')">
           <?php echo $obj->title_as_link (); ?>
         </div>
@@ -141,8 +133,10 @@ class FLAT_COMMENT_GRID extends PRINTABLE_COMMENT_GRID
           $grid->display ();
         }
         ?>
+      <?php
+      $this->_display_finish_minimal_commands_block();
+      ?>
       </div>
-    </div>
 <?php
   }
 

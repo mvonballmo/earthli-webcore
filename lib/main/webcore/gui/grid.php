@@ -499,6 +499,32 @@ abstract class GRID extends WEBCORE_OBJECT
   }
 
   /**
+   * @param RENDERABLE $obj
+   */
+  protected function _display_start_minimal_commands_block($obj)
+  {
+    if ($this->show_menus)
+    {
+      ?>
+      <div class="minimal-commands">
+        <?php $this->_draw_menu_for ($obj, Menu_size_minimal); ?>
+      </div>
+      <div class="minimal-commands-content">
+    <?php
+    }
+  }
+
+  protected function _display_finish_minimal_commands_block()
+  {
+    if ($this->show_menus)
+    {
+      ?>
+      </div>
+    <?php
+    }
+  }
+
+  /**
    * CSS styles to apply to the main grid container.
    * Takes {@link $centered}, {@link $width} and {@link $show_page_breaks} into account.
    * @return string

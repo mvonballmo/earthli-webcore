@@ -76,10 +76,9 @@ class USER_GRID extends CONTENT_OBJECT_GRID
   {
     ?>
     <div class="grid-item">
-    <div class="minimal-commands">
-      <?php $this->_draw_menu_for ($obj, Menu_size_minimal); ?>
-    </div>
-    <div class="minimal-commands-content">
+      <?php
+      $this->_display_start_minimal_commands_block($obj);
+      ?>
       <div style="float: left; margin-right: .5em">
         <?php echo $obj->icon_as_html ('32px'); ?>
       </div>
@@ -118,8 +117,10 @@ class USER_GRID extends CONTENT_OBJECT_GRID
       <div class="text-flow">
         <?php $this->_echo_text_summary ($obj); ?>
       </div>
+      <?php
+      $this->_display_finish_minimal_commands_block();
+      ?>
     </div>
-  </div>
 <?php
    }
 }

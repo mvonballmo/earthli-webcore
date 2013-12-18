@@ -85,14 +85,11 @@ class BASE_ARTICLE_GRID extends CONTENT_OBJECT_GRID
     $folder = $obj->parent_folder ();
 ?>
   <div class="grid-item">
-    <div class="minimal-commands">
-      <?php $this->_draw_menu_for ($obj, Menu_size_minimal); ?>
-    </div>
-    <div class="minimal-commands-content">
-      <?php
-        if ($this->show_folder && $folder->icon_url)
-        {
-      ?>
+    <?php
+      $this->_display_start_minimal_commands_block($obj);
+      if ($this->show_folder && $folder->icon_url)
+      {
+    ?>
       <div style="float: left; padding-right: 5px">
         <?php echo $folder->icon_as_html (); ?>
       </div>
@@ -166,6 +163,9 @@ class BASE_ARTICLE_GRID extends CONTENT_OBJECT_GRID
           ?>
         </div>
     </div>
+    <?php
+    $this->_display_finish_minimal_commands_block();
+    ?>
   </div>
   <?php
     }

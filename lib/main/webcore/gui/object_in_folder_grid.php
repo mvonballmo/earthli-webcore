@@ -71,29 +71,19 @@ class OBJECT_IN_FOLDER_SUMMARY_GRID extends CONTENT_OBJECT_GRID
    */
   protected function _draw_box ($obj)
   {
-    $selector = $this->_get_selector($obj);
-
-    $selector_class = !empty($selector) ? 'selector' : '';
 ?>
   <div class="grid-item">
-    <div class="minimal-commands <?php echo $selector_class; ?>">
     <?php
-      if ($selector)
-      {
-        echo "<span class=\"selector\">$selector</span>";
-      }
-      $this->_draw_menu_for ($obj, Menu_size_minimal);
+    $this->_display_start_minimal_commands_block($obj);
     ?>
-    </div>
-    <div class="minimal-commands-content <?php echo $selector_class; ?>">
-      <h3><?php echo $this->obj_link ($obj); ?></h3>
-      <?php
-      $this->_echo_header ($obj);
-      $this->_echo_text_summary ($obj);
-      ?>
-    </div>
+    <h3><?php echo $this->obj_link ($obj); ?></h3>
+    <?php
+    $this->_echo_header ($obj);
+    $this->_echo_text_summary ($obj);
+    $this->_display_finish_minimal_commands_block();
+    ?>
   </div>
-<?php
+  <?php
   }
   
   /**

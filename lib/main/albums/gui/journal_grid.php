@@ -83,10 +83,9 @@ class JOURNAL_GRID extends ALBUM_ENTRY_GRID
     $creator = $obj->creator ();
 ?>
   <div class="grid-item">
-    <div class="minimal-commands">
-      <?php $this->_draw_menu_for ($obj, Menu_size_minimal); ?>
-    </div>
-    <div class="minimal-commands-content">
+    <?php
+      $this->_display_start_minimal_commands_block($obj);
+    ?>
       <div style="float: left; margin-right: 5px">
         <?php echo $obj->weather_icon (); ?>
       </div>
@@ -115,6 +114,9 @@ class JOURNAL_GRID extends ALBUM_ENTRY_GRID
           </p>
         </div>
       </div>
+    <?php
+    $this->_display_finish_minimal_commands_block();
+    ?>
     </div>
 <?php
   }

@@ -71,10 +71,9 @@ class SEARCH_GRID extends STANDARD_GRID
   {
 ?>
 <div class="grid-item">
-  <div class="minimal-commands">
-    <?php $this->_draw_menu_for ($obj, Menu_size_minimal); ?>
-  </div>
-  <div class="minimal-commands-content">
+  <?php
+  $this->_display_start_minimal_commands_block($obj);
+  ?>
     <h3>
     <?php echo $obj->title_as_link (); ?>
     </h3>
@@ -87,7 +86,9 @@ class SEARCH_GRID extends STANDARD_GRID
       $renderer->display ($obj);
     ?>
     </div>
-  </div>
+  <?php
+  $this->_display_finish_minimal_commands_block();
+  ?>
 </div>
 <?php
   }
