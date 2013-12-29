@@ -1,6 +1,8 @@
 @import "http://fonts.googleapis.com/css?family=Antic";
 
 body
+.text-control,
+.menu-control
 {
 	font-family: 'Antic', Verdana, Arial, Helvetica, san-serif;
 }

@@ -1,6 +1,8 @@
 @import "http://fonts.googleapis.com/css?family=Oxygen:400,700";
 
 body
+.text-control,
+.menu-control
 {
 	font-family: 'Oxygen', Verdana, Arial, Helvetica, san-serif;
 }

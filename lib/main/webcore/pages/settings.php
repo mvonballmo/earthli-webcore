@@ -157,16 +157,19 @@ http://www.earthli.com/software/webcore
         $field->caption = 'Name';
         $field->required = true;
         $this->add_field ($field);
+        $this->set_value('name', 'Filler text');
 
         $field = new TEXT_FIELD ();
         $field->id = 'description';
         $field->caption = 'Description';
         $this->add_field ($field);
+        $this->set_value('description', 'Filler text that demonstrates which font is being used in longer, wrapping text.');
 
         $field = new DATE_TIME_FIELD();
         $field->id = 'date';
         $field->caption = 'Date';
         $this->add_field ($field);
+        $this->set_value('date', new DATE_TIME());
 
         $field = new BOOLEAN_FIELD ();
         $field->id = 'bool1';

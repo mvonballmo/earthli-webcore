@@ -1,4 +1,6 @@
 body
+.text-control,
+.menu-control
 {
 	font-family: Segoe UI, Segoe WP, Helvetica Neue, Roboto, sans-serif
 }

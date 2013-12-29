@@ -1,4 +1,6 @@
 body
+.text-control,
+.menu-control
 {
 	font-family: "Courier New", Courier, mono
 }
