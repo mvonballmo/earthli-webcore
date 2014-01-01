@@ -152,7 +152,7 @@ class ATTACHMENT_RENDERER extends CONTENT_OBJECT_RENDERER
     /** @var $metrics IMAGE_METRICS */
     $metrics = new $class_name ();
     $metrics->set_url ($file_url);
-    $metrics->resize_to_fit (640, 640);
+    $metrics->resize_to_fit (800, 800);
     if ($metrics->loaded ())
     {
 ?>

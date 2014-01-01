@@ -159,8 +159,8 @@ class ALBUM_FORM extends FOLDER_FORM
       $this->set_value ('location', Album_location_type_remote);
       $this->set_value ('show_celsius', true);
 
-      $this->set_value ('max_picture_width', 640);
-      $this->set_value ('max_picture_height', 480);
+      $this->set_value ('max_picture_width', 800);
+      $this->set_value ('max_picture_height', 600);
 
       $this->set_value ('first_day', new DATE_TIME ());
       $this->set_value ('last_day', new DATE_TIME ());

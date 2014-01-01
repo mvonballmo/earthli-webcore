@@ -133,12 +133,12 @@ class ALBUM_APPLICATION_PICTURE_OPTIONS
   /**
    * @var integer
    */
-  public $default_max_picture_height = 480;
+  public $default_max_picture_height = 600;
 
   /**
    * @var integer
    */
-  public $default_max_picture_width = 640;
+  public $default_max_picture_width = 800;
 }
 
 /**
