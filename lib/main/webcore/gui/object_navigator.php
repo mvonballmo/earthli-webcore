@@ -70,8 +70,14 @@ class OBJECT_NAVIGATOR extends WEBCORE_OBJECT
 
   /**
    * Text for the anchor of all generated links; can be empty.
+   * @var string
    */
   public $page_anchor = "";
+
+  /**
+   * The name of the parameter to get/set in the query string.
+   * @var string  */
+  public $primary_key_field_name = "id";
 
   /**
    * Text for link that goes to previous page in the near list.
@@ -126,7 +132,6 @@ class OBJECT_NAVIGATOR extends WEBCORE_OBJECT
   {
     parent::__construct ($context);
 
-    $opts = $context->display_options;
     $this->num_entries = Unassigned;
     $this->page_link = $this->env->url (Url_part_no_host_path);
   }
@@ -271,7 +276,7 @@ class OBJECT_NAVIGATOR extends WEBCORE_OBJECT
    * If this is the selected entry, it is returned as text (with style 'selected'), otherwise
    * a link to the entry's home page is returned.
    * @param UNIQUE_OBJECT $obj
-   * @param $type The type of button/link to generate.
+   * @param string $type The type of button/link to generate.
    * @internal param string $text Text to use; may be empty.
    * @internal param string $icon
    * @return string
@@ -279,7 +284,7 @@ class OBJECT_NAVIGATOR extends WEBCORE_OBJECT
    */
   protected function _text_for_control ($obj, $type)
   {
-    $this->_url->replace_argument ('id', $obj->id);
+    $this->_url->replace_argument ($this->primary_key_field_name, $obj->id);
     $t = $this->_formatter_for_object ($obj);
     $t->max_visible_output_chars = 0;
     $title = $obj->title_as_plain_text ($t);
@@ -305,7 +310,7 @@ class OBJECT_NAVIGATOR extends WEBCORE_OBJECT
   {
     $id = $obj->id;
     $t = $this->_formatter_for_object ($obj);
-    $this->_url->replace_argument ('id', $obj->id);
+    $this->_url->replace_argument ($this->primary_key_field_name, $obj->id);
     $t->location = $this->_url->as_text ();
     if ($this->page_anchor)
     {

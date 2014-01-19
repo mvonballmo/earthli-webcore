@@ -107,7 +107,13 @@ class TREE_NODE
   {
     return $this->_parent;
   }
-  
+
+  /**
+   * Gets the child of this node at position {@link $index}.
+   * @param int $index
+   *
+   * @return TREE_NODE
+   */
   public function get_child ($index)
   {
     return $this->_nodes[$index];
