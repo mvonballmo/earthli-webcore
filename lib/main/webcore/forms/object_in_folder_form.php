@@ -285,12 +285,12 @@ class ATTACHMENT_HOST_FORM extends OBJECT_IN_FOLDER_FORM
       $attachments = $renderer->drop_down_as_html ('attachments', $props);
       
       $props = $renderer->make_list_properties ();
+      $props->add_item ('None', 'none');
       $props->add_item ('Left', 'left');
       $props->add_item ('Left (alone)', 'left-column');
       $props->add_item ('Center', 'center');
       $props->add_item ('Right', 'right');
       $props->add_item ('Right (alone)', 'right-column');
-      $props->add_item ('None', 'none');
       $alignments = $renderer->drop_down_as_html ('alignments', $props);
       
       $props = $renderer->make_list_properties ();
