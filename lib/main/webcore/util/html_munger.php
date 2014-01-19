@@ -24,7 +24,7 @@ the Free Software Foundation; either version 2 of the License, or
 earthli WebCore is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
+GNU General Public License for more detailƒs.
 
 You should have received a copy of the GNU General Public License
 along with earthli WebCore; if not, write to the Free Software
@@ -946,7 +946,7 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
 
   /**
    * Convert the given token to the output format.
-   * @param MUNGER $munger The transformation context.
+   * @param HTML_MUNGER $munger The transformation context.
    * @param MUNGER_TOKEN $token
    * @return string
    */
@@ -954,8 +954,8 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
   {
     if ($token->is_start_tag ())
     {
-      $attrs = $token->attributes ();
-      $Result = $this->_open_outer_area ($munger, $attrs, $this->is_block);
+      $attributes = $token->attributes ();
+      $Result = $this->_open_outer_area ($munger, $attributes, $this->is_block);
       if (! $this->has_end_tag)
       {
         $Result .= $this->_close_outer_area ($munger, $this->is_block);
@@ -978,20 +978,20 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
    * content inside all of the extra containers.
    * @see _close_outer_area()
    * @param HTML_MUNGER $munger The transformation context.
-   * @param ARRAY[string,string] $attrs Attributes of a tag; retrieved from the
+   * @param ARRAY[string,string] $attributes Attributes of a tag; retrieved from the
    * token.
    * @param boolean $is_block If true, uses DIV tags for extra containers;
    * otherwise, SPAN tags are used.
    * @return string
    * @access private
    */
-  protected function _open_outer_area ($munger, $attrs, $is_block)
+  protected function _open_outer_area ($munger, $attributes, $is_block)
   {
     $outer_css = $munger->make_style_builder ();
 
-    $alignment = read_array_index ($attrs, 'align');
+    $alignment = read_array_index ($attributes, 'align');
 
-    $clear = read_array_index ($attrs, 'clear');
+    $clear = read_array_index ($attributes, 'clear');
     switch ($clear)
     {
       case 'right':
@@ -1029,12 +1029,12 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
     switch ($alignment)
     {
 	    case 'left-column':
-	      ; // 'clear' attribute is handled above
+	      // 'clear' attribute is handled above
 	    case 'left':
 	      $outer_css->add_text ('float: left; margin-right: .5em; margin-bottom: .5em');
 	      break;
 	    case 'right-column':
-	      ; // 'clear' attribute is handled above
+	      // 'clear' attribute is handled above
 	    case 'right':
 	      $outer_css->add_text ('float: right; margin-left: .5em; margin-bottom: .5em');
 	      break;
@@ -1044,9 +1044,9 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
     }
 
     $inner_css = $munger->make_style_builder ();
-    $inner_css->add_text (read_array_index ($attrs, 'style'));
+    $inner_css->add_text (read_array_index ($attributes, 'style'));
 
-    $class = read_array_index ($attrs, 'class');
+    $class = read_array_index ($attributes, 'class');
     if ($this->css_classes)
     {
       if ($class)
@@ -1059,9 +1059,9 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
       }
     }
 
-    $this->_caption = $this->_calculate_caption ($munger, $attrs);
+    $this->_caption = $this->_calculate_caption ($munger, $attributes);
 
-    $width = $this->_calculate_width ($munger, $attrs);
+    $width = $this->_calculate_width ($munger, $attributes);
     $outer_css->add_attribute ('width', $width);
 
     if ($this->_has_outer_area ())
@@ -1091,7 +1091,7 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
       $caption = $this->_get_caption ($is_block, true);
       $builder->add_attribute ('style', $outer_css->as_text ());
       $outer_css->clear ();
-      $inner = $this->_open_inner_area ($munger, $attrs, $outer_css, $inner_css, $class);
+      $inner = $this->_open_inner_area ($munger, $attributes, $outer_css, $inner_css, $class);
       if ($is_block)
       {
         $tag = '<div class="auto-content-block">' . $caption;
@@ -1104,7 +1104,7 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
     }
     else
     {
-      $Result = $this->_open_inner_area ($munger, $attrs, $outer_css, $inner_css, $class);
+      $Result = $this->_open_inner_area ($munger, $attributes, $outer_css, $inner_css, $class);
     }
 
     return $Result;
@@ -1119,8 +1119,6 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
    */
 	protected function _get_caption($is_block, $is_top) 
 	{
-		$caption_needed = false;
-	  
 	  switch ($this->_caption_position)
     {
 	    case 'top':
@@ -1144,7 +1142,6 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
       return '<span class="auto-content-caption">' . $this->_caption . '</span>';
     }
 	}
-
 
   /**
    * Renders close tag(s) for the container.
@@ -1193,7 +1190,7 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
    * calculated values for common values. Should be closed with {@link
    * _close_inner_area()}.
    * @param HTML_MUNGER $munger The transformation context.
-   * @param array[string,string] $attrs List of attributes for the tag
+   * @param array[string,string] $attributes List of attributes for the tag
    * (retrieved from the token).
    * @param CSS_STYLE_BUILDER $outer_css Styles intended for the bounding
    * container; includes alignment and width.
@@ -1204,7 +1201,7 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
    * @return string
    * @access private
    */
-  protected function _open_inner_area ($munger, $attrs, $outer_css, $inner_css, $inner_class)
+  protected function _open_inner_area ($munger, $attributes, $outer_css, $inner_css, $inner_class)
   {
     $builder = $munger->make_tag_builder ($this->main_tag);
     
@@ -1240,28 +1237,28 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
   /**
    * Return the width to use for the tag.
    * @param MUNGER $munger The transformation context.
-   * @param array[string,string] $attrs List of attributes for the tag
+   * @param array[string,string] $attributes List of attributes for the tag
    * (retrieved from the token).
    * @return string
    * @access private
    */
-  protected function _calculate_width ($munger, $attrs)
+  protected function _calculate_width ($munger, $attributes)
   {
-    return read_array_index ($attrs, 'width');
+    return read_array_index ($attributes, 'width');
   }
 
   /**
    * Read a value from the attributes list and convert it for placement
    * within an HTML tag attribute value.
-   * @param array[string,string] $attrs List of attributes for the tag
+   * @param array[string,string] $attributes List of attributes for the tag
    * (retrieved from the token).
    * @param string $index Index into the attributes array.
    * @return string
    * @access private
    */
-  protected function _read_attribute ($attrs, $index)
+  protected function _read_attribute ($attributes, $index)
   {
-    return $this->_convert_to_attribute (read_array_index ($attrs, $index));
+    return $this->_convert_to_attribute (read_array_index ($attributes, $index));
   }
 
   /**
@@ -1283,19 +1280,19 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
    * of the "href").
    * 
    * @param HTML_MUNGER $munger The transformation context.
-   * @param array[string,string] $attrs List of attributes for the tag
+   * @param array[string,string] $attributes List of attributes for the tag
    * (retrieved from the token).
    * @return string
    * @access private
    */
-  protected function _calculate_caption ($munger, $attrs)
+  protected function _calculate_caption ($munger, $attributes)
   {
-    $caption = $munger->apply_non_html_converters($this->_read_attribute ($attrs, 'caption'));
-    $author = $munger->apply_non_html_converters($this->_read_attribute ($attrs, 'author'));
-    $date = $munger->apply_non_html_converters($this->_read_attribute ($attrs, 'date'));
-    $this->_caption_position = read_array_index ($attrs, 'caption-position');
+    $caption = $munger->apply_non_html_converters($this->_read_attribute ($attributes, 'caption'));
+    $author = $munger->apply_non_html_converters($this->_read_attribute ($attributes, 'author'));
+    $date = $munger->apply_non_html_converters($this->_read_attribute ($attributes, 'date'));
+    $this->_caption_position = read_array_index ($attributes, 'caption-position');
 
-    $href = $this->_convert_to_attribute($munger->resolve_url($this->_url_for_source ($attrs)));
+    $href = $this->_convert_to_attribute($munger->resolve_url($this->_url_for_source ($attributes)));
     if ($href)
     {
       if ($caption)
@@ -1312,7 +1309,7 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
       }
     }
 
-    $source = $this->_calculate_source ($munger, $attrs, $href);
+    $source = $this->_calculate_source ($munger, $attributes, $href);
 
     return $this->_calculate_suffix ($caption, $author, $date, $source);
   }
@@ -1458,13 +1455,21 @@ class HTML_BLOCK_QUOTE_REPLACER extends HTML_DIV_REPLACER
 
   /**
    * Render the open tag.
-   * 
+   *
+   * @param HTML_MUNGER $munger The transformation context.
+   * @param array[string,string] $attributes List of attributes for the tag
+   * (retrieved from the token).
+   * @param CSS_STYLE_BUILDER $outer_css Styles intended for the bounding
+   * container; includes alignment and width.
+   * @param CSS_STYLE_BUILDER $inner_css Styles intended for the inner
+   * container; includes additional style and properties.
+   * @param $inner_class string CSS classes to apply to the inner container.
    * @return string
    * @access private
    */
-  protected function _open_inner_area ($munger, $attrs, $outer_css, $inner_css, $inner_class)
+  protected function _open_inner_area ($munger, $attributes, $outer_css, $inner_css, $inner_class)
   {
-  	return parent::_open_inner_area($munger, $attrs, $outer_css, $inner_css, $inner_class) . '<div>';
+  	return parent::_open_inner_area($munger, $attributes, $outer_css, $inner_css, $inner_class) . '<div>';
   }
 
   /**
@@ -1511,7 +1516,7 @@ class HTML_BOX_REPLACER extends HTML_DIV_REPLACER
   /**
    * Render the beginning of the tag.
    * @param HTML_MUNGER $munger The transformation context.
-   * @param array[string,string] $attrs List of attributes for the tag
+   * @param array[string,string] $attributes List of attributes for the tag
    * (retrieved from the token).
    * @param CSS_STYLE_BUILDER $outer_css Styles intended for the bounding
    * container; includes alignment and width.
@@ -1522,14 +1527,14 @@ class HTML_BOX_REPLACER extends HTML_DIV_REPLACER
    * @return string
    * @access private
    */
-  protected function _open_inner_area ($munger, $attrs, $outer_css, $inner_css, $inner_class)
+  protected function _open_inner_area ($munger, $attributes, $outer_css, $inner_css, $inner_class)
   {
     $builder = $munger->make_tag_builder ($this->main_tag);
     $builder->add_attribute ('class', 'chart');
     $builder->add_attribute ('style', $outer_css->as_text ());
     $Result = $builder->as_html ();
 
-    $title = $this->_read_attribute ($attrs, 'title');;
+    $title = $this->_read_attribute ($attributes, 'title');;
     if ($title)
     {
       $Result .= "<$this->main_tag class=\"chart-title\">$title</$this->main_tag>";
@@ -1580,23 +1585,23 @@ class HTML_MUNGER_CODE_REPLACER extends HTML_PREFORMATTED_BLOCK_REPLACER
 {
   /**
    * Render the beginning of the tag.
-   * @param MUNGER $munger The transformation context.
+   * @param HTML_MUNGER $munger The transformation context.
    * @param array[string,string] $attrs List of attributes for the tag
    * (retrieved from the token).
    * @param CSS_STYLE_BUILDER $outer_css Styles intended for the bounding
    * container; includes alignment and width.
    * @param CSS_STYLE_BUILDER $inner_css Styles intended for the inner
    * container; includes additional style and properties.
-   * @param $inner_class CSS classes to apply to the inner container.
+   * @param string $inner_class CSS classes to apply to the inner container.
    * @see _close_inner_area()
    * @return string
    * @access private
    */
-  protected function _open_inner_area ($munger, $attrs, $outer_css, $inner_css, $inner_class)
+  protected function _open_inner_area ($munger, $attributes, $outer_css, $inner_css, $inner_class)
   {
     $this->_quotes_were_enabled = $munger->set_converter_enabled('quotes', false);
 
-    return parent::_open_inner_area ($munger, $attrs, $outer_css, $inner_css, $inner_class) . '<code>';
+    return parent::_open_inner_area ($munger, $attributes, $outer_css, $inner_css, $inner_class) . '<code>';
   }
 
   /**
@@ -1693,21 +1698,21 @@ class HTML_IMAGE_REPLACER extends HTML_INLINE_ASSET_REPLACER
 {
   /**
    * Render the open tag for the image and link.
-   * @param MUNGER $munger The transformation context.
-   * @param array[string,string] $attrs List of attributes for the tag
+   * @param HTML_MUNGER $munger The transformation context.
+   * @param array[string,string] $attributes List of attributes for the tag
    * (retrieved from the token).
    * @param CSS_STYLE_BUILDER $outer_css Styles intended for the bounding
    * container; includes alignment and width.
    * @param CSS_STYLE_BUILDER $inner_css Styles intended for the inner
    * container; includes additional style and properties.
-   * @param $inner_class CSS classes to apply to the inner container.
+   * @param string $inner_class CSS classes to apply to the inner container.
    * @see _close_inner_area()
    * @return string
    * @access private
    */
-  protected function _open_inner_area ($munger, $attrs, $outer_css, $inner_css, $inner_class)
+  protected function _open_inner_area ($munger, $attributes, $outer_css, $inner_css, $inner_class)
   {
-    $attachment_name = read_array_index ($attrs, 'attachment');
+    $attachment_name = read_array_index ($attributes, 'attachment');
     if ($attachment_name)
     {
       $src = '{att_thumb}/' . $attachment_name;
@@ -1715,12 +1720,12 @@ class HTML_IMAGE_REPLACER extends HTML_INLINE_ASSET_REPLACER
     }
     else
     {
-      $src = $this->_read_attribute ($attrs, 'src');
-      $href = $this->_read_attribute ($attrs, 'href');
+      $src = $this->_read_attribute ($attributes, 'src');
+      $href = $this->_read_attribute ($attributes, 'href');
     }
 
-    $title = $munger->apply_non_html_converters($this->_read_attribute ($attrs, 'title'));
-    $alt = $munger->apply_non_html_converters($this->_read_attribute ($attrs, 'alt', $title));
+    $title = $munger->apply_non_html_converters($this->_read_attribute ($attributes, 'title'));
+    $alt = $munger->apply_non_html_converters($this->_read_attribute ($attributes, 'alt', $title));
     if (! $alt)
     {
       $alt = ' ';
@@ -1749,20 +1754,20 @@ class HTML_IMAGE_REPLACER extends HTML_INLINE_ASSET_REPLACER
   /**
    * Return the width to use for the tag.
    * @param MUNGER $munger The transformation context.
-   * @param array[string,string] $attrs List of attributes for the tag
+   * @param array[string,string] $attributes List of attributes for the tag
    * (retrieved from the token).
    * @return string
    * @access private
    */
-  protected function _calculate_width ($munger, $attrs)
+  protected function _calculate_width ($munger, $attributes)
   {
     /* Prefer scale over width, discarding invalid scale values.
      * Retrieve width from the image only if scale is set or
      * width is not set and an outer area was generated (we want
      * to constrain the caption to the width of the image). */
 
-    $scale = read_array_index ($attrs, 'scale');
-    $Result = read_array_index ($attrs, 'width');
+    $scale = read_array_index ($attributes, 'scale');
+    $Result = read_array_index ($attributes, 'width');
     if ($scale)
     {
       if (substr ($scale, -1, 1) == '%')
@@ -1778,14 +1783,14 @@ class HTML_IMAGE_REPLACER extends HTML_INLINE_ASSET_REPLACER
 
     if (($scale) || (! $Result && $this->_has_outer_area ()))
     {
-      $attachment_name = read_array_index ($attrs, 'attachment');
+      $attachment_name = read_array_index ($attributes, 'attachment');
       if ($attachment_name)
       {
         $src = '{att_thumb}/' . $attachment_name;
       }
       else
       {
-        $src = read_array_index ($attrs, 'src');
+        $src = read_array_index ($attributes, 'src');
       }
       $url = new URL ($munger->resolve_url ($src, Force_root_on));
       if (! $url->has_domain () || $url->has_local_domain ())
@@ -1831,32 +1836,32 @@ class HTML_MEDIA_REPLACER extends HTML_INLINE_ASSET_REPLACER
 {
   /**
    * Render the open tag for the image and link.
-   * @param MUNGER $munger The transformation context.
-   * @param array[string,string] $attrs List of attributes for the tag
+   * @param HTML_MUNGER $munger The transformation context.
+   * @param array[string,string] $attributes List of attributes for the tag
    * (retrieved from the token).
    * @param CSS_STYLE_BUILDER $outer_css Styles intended for the bounding
    * container; includes alignment and width.
    * @param CSS_STYLE_BUILDER $inner_css Styles intended for the inner
    * container; includes additional style and properties.
-   * @param $inner_class CSS classes to apply to the inner container.
+   * @param string $inner_class CSS classes to apply to the inner container.
    * @see _close_inner_area()
    * @return string
    * @access private
    */
-  protected function _open_inner_area ($munger, $attrs, $outer_css, $inner_css, $inner_class)
+  protected function _open_inner_area ($munger, $attributes, $outer_css, $inner_css, $inner_class)
   {
     /* Get the source URL and format it according to media type. */
-    $attachment_name = read_array_index ($attrs, 'attachment');
+    $attachment_name = read_array_index ($attributes, 'attachment');
     if ($attachment_name)
     {
       $src = '{att_link}/' . $attachment_name;
     }
     else
     {
-      $src = read_array_index ($attrs, 'src');
+      $src = read_array_index ($attributes, 'src');
     }
 
-    return $this->_render_asset ($munger, $munger->resolve_url ($src), $attrs, $inner_css, $outer_css, $inner_class);
+    return $this->_render_asset ($munger, $munger->resolve_url ($src), $attributes, $inner_css, $outer_css, $inner_class);
   }
 
   /**
@@ -1867,56 +1872,56 @@ class HTML_MEDIA_REPLACER extends HTML_INLINE_ASSET_REPLACER
    * @return string
    * @access private
    */
-  protected function _calculate_width ($munger, $attrs)
+  protected function _calculate_width ($munger, $attributes)
   {
-    return read_array_index ($attrs, 'width', '450px');
+    return read_array_index ($attributes, 'width', '450px');
   }
 
   /**
    * Return a representation for this url and attributes.
-   * @param MUNGER $munger The transformation context.
+   * @param HTML_MUNGER $munger The transformation context.
    * @param string $src The url to the movie.
-   * @param array[string,string] $attrs List of attributes for the tag
+   * @param array[string,string] $attributes List of attributes for the tag
    * (retrieved from the token).
    * @param CSS_STYLE_BUILDER $outer_css Styles intended for the bounding
    * container; includes alignment and width.
    * @param CSS_STYLE_BUILDER $inner_css Styles intended for the inner
    * container; includes additional style and properties.
-   * @param $inner_class CSS classes to apply to the inner container.
+   * @param string $inner_class CSS classes to apply to the inner container.
    * @return string
    * @access private
    */
-  protected function _render_asset ($munger, $src, $attrs, $inner_css, $outer_css, $inner_class)
+  protected function _render_asset ($munger, $src, $attributes, $inner_css, $outer_css, $inner_class)
   {
-    return $this->_asset_as_movie ($munger, $src, $attrs, $inner_css, $outer_css, $inner_class);
+    return $this->_asset_as_movie ($munger, $src, $attributes, $inner_css, $outer_css, $inner_class);
   }
 
   /**
    * Return a control to display the movie.
-   * @param MUNGER $munger The transformation context.
+   * @param HTML_MUNGER $munger The transformation context.
    * @param string $src The url to the movie.
-   * @param array[string,string] $attrs List of attributes for the tag
+   * @param array[string,string] $attributes List of attributes for the tag
    * (retrieved from the token).
    * @param CSS_STYLE_BUILDER $outer_css Styles intended for the bounding
    * container; includes alignment and width.
    * @param CSS_STYLE_BUILDER $inner_css Styles intended for the inner
    * container; includes additional style and properties.
-   * @param $inner_class CSS classes to apply to the inner container.
+   * @param string $inner_class CSS classes to apply to the inner container.
    * @return string
    * @access private
    */
-  protected function _asset_as_movie ($munger, $src, $attrs, $inner_css, $outer_css, $inner_class)
+  protected function _asset_as_movie ($munger, $src, $attributes, $inner_css, $outer_css, $inner_class)
   {
     $builder = $munger->make_tag_builder ('embed');
-    $builder->add_array_attribute ('title', $attrs);
+    $builder->add_array_attribute ('title', $attributes);
     $builder->add_attribute ('class', $inner_class);
     $builder->add_attribute ('src', $src);
     $builder->add_attribute ('type', 'application/x-shockwave-flash');
     $builder->add_attribute ('pluginspage', 'http://www.macromedia.com/go/getflashplayer');
     $inner_css->add_text ($outer_css->as_text ());
-    $inner_css->add_array_attribute ('height', $attrs, '350px');
+    $inner_css->add_array_attribute ('height', $attributes, '350px');
     $builder->add_attribute ('style', $inner_css->as_text ());
-    $builder->add_attribute ('FlashVars', read_array_index ($attrs, 'args'));
+    $builder->add_attribute ('FlashVars', read_array_index ($attributes, 'args'));
 
     return $builder->as_html () . '</embed>';
   }
@@ -1952,7 +1957,7 @@ class HTML_LINK_REPLACER extends HTML_BASE_REPLACER
 {
   /**
    * Convert the given token to the output format.
-   * @param MUNGER $munger The transformation context.
+   * @param HTML_MUNGER $munger The transformation context.
    * @param MUNGER_TOKEN $token
    * @return string
    */
@@ -1960,20 +1965,20 @@ class HTML_LINK_REPLACER extends HTML_BASE_REPLACER
   {
     if ($token->is_start_tag ())
     {
-      $attrs = $token->attributes ();
+      $attributes = $token->attributes ();
 
-      $author = $munger->apply_non_html_converters($this->_read_attribute ($attrs, 'author'));
-      $date = $munger->apply_non_html_converters($this->_read_attribute ($attrs, 'date'));
-      $href = $munger->resolve_url (read_array_index ($attrs, 'href'));
-      $source = $this->_calculate_source ($munger, $attrs, $href);
+      $author = $munger->apply_non_html_converters($this->_read_attribute ($attributes, 'author'));
+      $date = $munger->apply_non_html_converters($this->_read_attribute ($attributes, 'date'));
+      $href = $munger->resolve_url (read_array_index ($attributes, 'href'));
+      $source = $this->_calculate_source ($munger, $attributes, $href);
 
       $this->_suffix = $this->_calculate_suffix (' ', $author, $date, $source);
 
       $builder = $munger->make_tag_builder ('a');
       $builder->add_attribute ('href', $href);
-      $builder->add_array_attribute ('title', $attrs);
-      $builder->add_array_attribute ('class', $attrs);
-      $builder->add_array_attribute ('style', $attrs);
+      $builder->add_array_attribute ('title', $attributes);
+      $builder->add_array_attribute ('class', $attributes);
+      $builder->add_array_attribute ('style', $attributes);
 
       return $builder->as_html ();
     }
@@ -2011,6 +2016,13 @@ class HTML_LINK_REPLACER extends HTML_BASE_REPLACER
    * @access private
    */
   protected $_href;
+
+  /**
+   * The text to include after the end tag of the link.
+   * @var string
+   * @access private
+   */
+  protected $_suffix;
 }
 
 /**
@@ -2027,7 +2039,7 @@ class HTML_ANCHOR_REPLACER extends MUNGER_REPLACER
 {
   /**
    * Convert the given token to the output format.
-   * @param MUNGER $munger The transformation context.
+   * @param HTML_MUNGER $munger The transformation context.
    * @param MUNGER_TOKEN $token
    * @return string
    */
@@ -2139,7 +2151,8 @@ class HTML_MUNGER extends MUNGER
 
   /**
    * Shared instance used by {@link MUNGER_REPLACER}s and {@link MUNGER_TRANSFORMER}s.
-   * @param string $name Initialize with this CSS fragment.
+   * @param string $css The initial CSS to use.
+   * @internal param string $name Initialize with this CSS fragment.
    * @return CSS_STYLE_BUILDER
    */
   public function make_style_builder ($css = '')
@@ -2339,5 +2352,3 @@ class HTML_TITLE_MUNGER extends HTML_BASE_MUNGER
     $this->_default_transformer = new MUNGER_NOP_TRANSFORMER ();
   }
 }
-
-?>
