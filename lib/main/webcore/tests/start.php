@@ -2,7 +2,7 @@
 
 /**
  * Including this file creates and assigns a global tests application.
- * @copyright Copyright (c) 2002-2013 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2014 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package webcore
@@ -13,7 +13,7 @@
 
 /****************************************************************************
 
-Copyright (c) 2002-2013 Marco Von Ballmoos
+Copyright (c) 2002-2014 Marco Von Ballmoos
 
 This file is part of earthli WebCore.
 

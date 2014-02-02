@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @copyright Copyright (c) 2002-2013 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2014 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package webcore
@@ -12,7 +12,7 @@
 
 /****************************************************************************
 
-Copyright (c) 2002-2013 Marco Von Ballmoos
+Copyright (c) 2002-2014 Marco Von Ballmoos
 
 This file is part of earthli WebCore.
 
@@ -24,7 +24,7 @@ the Free Software Foundation; either version 2 of the License, or
 earthli WebCore is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more detailƒs.
+GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with earthli WebCore; if not, write to the Free Software

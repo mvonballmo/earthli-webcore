@@ -4,7 +4,7 @@
  * Initialization file for the {@link TEST_HARNESS_APPLICATION}.
  * Use {@link ENVIROMENT::make_application()} with {@link
  * Test_harness_application_id} to create an instance.
- * @copyright Copyright (c) 2002-2013 Marco Von Ballmoos
+ * @copyright Copyright (c) 2002-2014 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
  * @package webcore
@@ -15,7 +15,7 @@
 
 /****************************************************************************
 
-Copyright (c) 2002-2013 Marco Von Ballmoos
+Copyright (c) 2002-2014 Marco Von Ballmoos
 
 This file is part of earthli WebCore.
 
