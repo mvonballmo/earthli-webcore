@@ -735,9 +735,9 @@ table.basic > tbody > tr > td.empty-label
   left: auto;
 }
 
-.menu-trigger:hover .menu-dropdown
+.menu-trigger:hover
 {
-  /*display: block;*/
+  cursor: pointer;
 }
 
 ul.menu
