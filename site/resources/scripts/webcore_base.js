@@ -392,3 +392,57 @@ function date_time_from_string (s, century_break)
   return Result;
 }
 
+function closeMenus(rootElement)
+{
+  var menus = rootElement.querySelectorAll('.menu-dropdown');
+  for (var menuIndex = 0; menuIndex < menus.length; menuIndex++)
+  {
+    var menu = menus[menuIndex];
+    menu.style.display = 'none'
+  }
+}
+
+document.addEventListener('DOMContentLoaded', function(){
+
+  var htmlElements = document.querySelectorAll('html');
+
+  for (var htmlIndex = 0; htmlIndex < htmlElements.length; htmlIndex++)
+  {
+    var htmlElement = htmlElements[htmlIndex];
+
+    htmlElement.addEventListener('click', function()
+    {
+      closeMenus(this);
+    })
+  }
+
+  var triggers = document.querySelectorAll('.menu-trigger');
+
+  for (var i = 0; i < triggers.length; i++)
+  {
+    var trigger = triggers[i];
+
+    trigger.addEventListener('click', function(e)
+    {
+      e.stopPropagation();  // Prevent document body from getting this click
+
+      closeMenus(document);
+
+      var menus = this.querySelectorAll('.menu-dropdown');
+
+      if (menus.length > 0)
+      {
+        var menu = menus[0];
+        if (menu.style.display == 'none')
+        {
+          menu.style.display = 'block'
+        }
+        else
+        {
+          menu.style.display = 'none'
+        }
+      }
+    })
+  }
+});
+

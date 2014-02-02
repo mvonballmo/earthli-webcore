@@ -737,7 +737,7 @@ table.basic > tbody > tr > td.empty-label
 
 .menu-trigger:hover .menu-dropdown
 {
-  display: block;
+  /*display: block;*/
 }
 
 ul.menu
