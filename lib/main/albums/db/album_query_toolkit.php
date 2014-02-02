@@ -45,6 +45,7 @@ http://www.earthli.com/software/webcore/albums
  */
 function album_query_set_type ($query, $type)
 {
+  /** @var ALBUM_APPLICATION_TABLE_NAMES $table_names */
   $table_names = $query->app->table_names;
 
   switch ($type)
