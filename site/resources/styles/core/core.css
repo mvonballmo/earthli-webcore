@@ -1204,8 +1204,6 @@ span.error, span.caution, span.warning
 .quote-block 
 {
   padding-left: 15px;
-  /*padding-left: 7px;*/
-  /*margin-left: -10px;*/
   border-left: 6px solid #CCCCCC;
 }
 
@@ -1230,11 +1228,10 @@ span.error, span.caution, span.warning
 
 .abstract
 {
-  font-style: italic;
   border-width: 1px 0;
   border-color: black;
   border-style: solid;
-  padding: 1em 0;
+  padding: 15px 0;
 }
 
 .quote-inline
