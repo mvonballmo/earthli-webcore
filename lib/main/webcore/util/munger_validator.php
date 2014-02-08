@@ -256,6 +256,7 @@ class MUNGER_VALIDATOR extends MUNGER_PARSER
   /**
    * Should this tag be converted to text?
    * @var MUNGER_TOKEN $token
+   * @return bool
    * @access private
    */
   protected function _treat_as_text ($token)
@@ -388,13 +389,13 @@ class MUNGER_VALIDATOR extends MUNGER_PARSER
 
   /**
    * Stack of tags found in the input stream.
-   * @var array[MUNGER_TAG]
+   * @var MUNGER_TAG[]
    * @access private
    */
   protected $_open_tags = array ();
 
   /**
-   * @var array[string,MUNGER_VALIDATOR_TAG_INFO]
+   * @var MUNGER_VALIDATOR_TAG_INFO[]
    * @access private
    */
   protected $_known_tags;
@@ -402,6 +403,7 @@ class MUNGER_VALIDATOR extends MUNGER_PARSER
   /**
    * Current line number.
    * @see _update_position()
+   * @var int
    * @access private
    */
   protected $_line_number;
@@ -409,6 +411,7 @@ class MUNGER_VALIDATOR extends MUNGER_PARSER
   /**
    * Current column in the line.
    * @see _update_position()
+   * @var int
    * @access private
    */
   protected $_column = 0;
@@ -439,6 +442,8 @@ class MUNGER_BASE_VALIDATOR extends MUNGER_VALIDATOR
     $this->register_known_tag ('dfn', $standard_tag_info);
     $this->register_known_tag ('abbr', $standard_tag_info);
     $this->register_known_tag ('cite', $standard_tag_info);
+    $this->register_known_tag ('sub', $standard_tag_info);
+    $this->register_known_tag ('sup', $standard_tag_info);
     $this->register_known_tag ('macro', new MUNGER_VALIDATOR_TAG_INFO (false, array('convert')));
   }
 }

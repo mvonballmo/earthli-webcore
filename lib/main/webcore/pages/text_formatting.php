@@ -176,7 +176,7 @@ http://www.earthli.com/software/webcore
     </tr>
   </table>
   <p>Additionally, the following character pairs are automatically converted to
-    their ligature equivalents. Some browsers don't especially like these characters,
+    their ligature equivalents. Most browsers don't especially like these characters<a href="#ligatures_footnote_body" id="ligatures_footnote_ref" class="footnote-number">[1]</a>,
     so this conversion is off, by default. You can enable this replacement for
     whole regions using the <a href="#macro">&lt;macro&gt;</a> tag.</p>
   <table class="basic columns">
@@ -200,6 +200,11 @@ http://www.earthli.com/software/webcore
       <td>fl</td><td>&#xfb02;</td>
     </tr>
   </table>
+  <div class="footnote-reference"><span id="ligatures_footnote_body" class="footnote-number">[1]</span>As of this writing,
+    in 2014, all tested browser still consistently take the ligature from a fallback font rather than the specialized web
+    fonts used in the page. This is likely because such fonts (e.g. Raleway) don't have explicit ligatures defined. In such
+    cases, though, falling back to using individual letters is much preferred to importing a ligature from a completely
+    different font.<a href="#ligatures_footnote_ref" class="footnote-return" title="Jump back to reference.">&#8617;</a></div>
   <h2 id="paths">Paths/resources</h2>
   <p>As you'll see below, you can add images and links to your text really easily.
     You don't have to use absolute urls though. You can base your url on a path
@@ -627,6 +632,18 @@ http://www.earthli.com/software/webcore
       <td>&lt;cite&gt;citation&lt;/cite&gt;</td>
       <td><cite>citation</cite></td>
       <td>Citations</td>
+    </tr>
+    <tr>
+      <th>sub</th>
+      <td>10&lt;sub&gt;n&lt;/sub&gt;</td>
+      <td>10<sub>n</sub></td>
+      <td>Subscripts</td>
+    </tr>
+    <tr>
+      <th>sup</th>
+      <td>2&lt;sup&gt;16&lt;/sup&gt;</td>
+      <td>2<sup>16</sup></td>
+      <td>Superscripts</td>
     </tr>
   </table>
   <h2 id="generic">Generic formatting</h2>

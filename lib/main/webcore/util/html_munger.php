@@ -2249,6 +2249,8 @@ class HTML_BASE_MUNGER extends HTML_MUNGER
     $this->register_known_tag ('dfn', true);  // defining instance of a term
     $this->register_known_tag ('abbr', true);  // abbreviation
     $this->register_known_tag ('cite', true);  // citations of other sources
+    $this->register_known_tag ('sub', true);  // subscript
+    $this->register_known_tag ('sup', true);  // superscript
     $this->register_replacer ('macro', new MUNGER_MACRO_REPLACER (), false);
     
     $this->register_converter ('tags', new MUNGER_HTML_CONVERTER ());
