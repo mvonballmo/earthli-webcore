@@ -49,31 +49,31 @@ require_once ('webcore/obj/webcore_object.php');
 define ('Menu_horizontal', 'h');
 
 /**
- * Shows all commands in a list. 
+ * Shows all commands in a list.
  * Used by the {@link MENU_RENDERER}.
  * @see Menu_horizontal
  */
 define ('Menu_vertical', 'v');
 
 /**
- * Shows some commands in a line; uses a dropdown for others.
+ * Shows some commands in a line; uses a drop-down for others.
  * The drop-down list is displayed with CSS for compliant browsers and emulated
  * with JavaScript for non-compliant ones. If {@link APPLICATION::
  * dhtml_allowed()} returns <code>False</code>, this option reverts to {@link
  * Menu_horizontal}. Used by the {@link MENU_RENDERER}.
  * @see Menu_horizontal
  */
-define ('Menu_horizontal_with_dropdown', 'hd');
+define ('Menu_horizontal_with_drop_down', 'hd');
 
 /**
- * Shows some commands in a list; uses a dropdown for others.
+ * Shows some commands in a list; uses a drop-down for others.
  * The drop-down list is displayed with CSS for compliant browsers and emulated
  * with JavaScript for non-compliant ones. If {@link APPLICATION::
  * dhtml_allowed()} returns <code>False</code>, this option reverts to {@link
  * Menu_vertical}. Used by the {@link MENU_RENDERER}.
  * @see Menu_horizontal
  */
-define ('Menu_vertical_with_dropdown', 'vd');
+define ('Menu_vertical_with_drop_down', 'vd');
 
 /**
  * Show the icon for {@link COMMAND}s.
@@ -166,7 +166,7 @@ class MENU_RENDERER extends WEBCORE_OBJECT
    *  This options is ignored if {@link
    * APPLICATION::dhmtl_allowed()} is <code>False</code>.
    */
-  public $display_mode = Menu_horizontal_with_dropdown;
+  public $display_mode = Menu_horizontal_with_drop_down;
 
   /**
    * Rendering options for the menu itself.
@@ -186,22 +186,22 @@ class MENU_RENDERER extends WEBCORE_OBJECT
   public $num_important_commands = 3;
 
   /**
-   * The text to show when {@link $show_trigger_title} is true. 
-   * 
+   * The text to show when {@link $show_trigger_title} is true.
+   *
    * @var string
    */
   public $trigger_title = 'Commands';
-  
+
   /**
    * The icon to show when {@link $show_trigger_icon} is true.
-   * 
+   *
    * @var string
    */
   public $trigger_icon = '{icons}buttons/menu';
-  
+
   /**
-   * The CSS class to use for the entire dropdown trigger.
-   * 
+   * The CSS class to use for the entire drop-down trigger.
+   *
    * @var string
    */
   public $trigger_button_CSS_class = 'button';
@@ -224,12 +224,12 @@ class MENU_RENDERER extends WEBCORE_OBJECT
    * The various rendering options can be set as a group using one of the size
    * options detailed below.
    * @param string $size_option May be one of {@link Menu_size_compact}, {@link
-   * Menu_size_standard} or {@link Menu_size_full}. Descendents may add more
+   * Menu_size_standard} or {@link Menu_size_full}. Descendants may add more
    * supported types if desired.
    */
   public function set_size ($size_option)
   {
-    $this->display_mode = Menu_horizontal_with_dropdown;
+    $this->display_mode = Menu_horizontal_with_drop_down;
     $this->options |= Menu_options_show_trigger_title;
     switch ($size_option)
     {
@@ -242,6 +242,7 @@ class MENU_RENDERER extends WEBCORE_OBJECT
       break;
     case Menu_size_standard:
       $this->num_important_commands = 3;
+      $this->options &= ~Menu_options_show_trigger_title;
       break;
     case Menu_size_toolbar:
       $this->content_mode = Menu_show_all_as_buttons - Menu_show_title;
@@ -289,8 +290,8 @@ class MENU_RENDERER extends WEBCORE_OBJECT
         case Menu_vertical:
           $this->_draw_vertical_menu ($commands, false);
           break;
-        case Menu_horizontal_with_dropdown:
-        case Menu_vertical_with_dropdown:
+        case Menu_horizontal_with_drop_down:
+        case Menu_vertical_with_drop_down:
           $this->_draw_important_with_dropdown ($commands, $this->display_mode);
           break;
       }
@@ -311,7 +312,7 @@ class MENU_RENDERER extends WEBCORE_OBJECT
   protected function _draw_commands ($commands, $important_only, $CSS_class)
   {
     $cmds = $commands->command_list ();
-    $num_cmds_to_be_shown = $commands->num_executable_commands (); 
+    $num_cmds_to_be_shown = $commands->num_executable_commands ();
     if ($important_only)
     {
       usort ($cmds, '_compare_commands_by_importance');
@@ -340,7 +341,7 @@ class MENU_RENDERER extends WEBCORE_OBJECT
       }
     }
   }
-  
+
   /**
    * Create an HTML link for the command.
    * @param COMMAND $cmd
@@ -363,7 +364,7 @@ class MENU_RENDERER extends WEBCORE_OBJECT
     {
       $text = $cmd->caption;
     }
-    
+
     if (!empty ($text))
     {
       $Result = $text;
@@ -395,7 +396,7 @@ class MENU_RENDERER extends WEBCORE_OBJECT
           $Result .= ' <span ' . $description_class_statement . '>' . $cmd->description . '</span>';
 	      }
 
-        /* Important! IE displays the last character in this last link of the last 
+        /* Important! IE displays the last character in this last link of the last
          * button in the menu again underneath the menus. The code below makes
          * sure that it is a space so it doesn't appear on the screen. IE - so
          * crappy it hurts.
@@ -436,16 +437,16 @@ class MENU_RENDERER extends WEBCORE_OBJECT
           $Result .= '</span>';
         }
 
-	      if (!empty($cmd->description)) 
+	      if (!empty($cmd->description))
 	      {
 	        $Result .= '<span class="menu-item-description">' . $cmd->description . '</span>';
 	      }
       }
     }
-    
+
     return $Result;
   }
-  
+
   /**
    * Draw all commands in groups vertically.
    * Used by the drop-down renderer and lists that use the {@link
@@ -483,10 +484,10 @@ class MENU_RENDERER extends WEBCORE_OBJECT
       }
     }
     echo "</ul>\n";
-  }  
+  }
 
   /**
-   * Draw the groups inside a vertical dropdown menu.
+   * Draw the groups inside a vertical drop-down menu.
    * Uses JavaScript for browsers that don't support {@link Browser_CSS_2}.
    * @param COMMANDS $commands
    * @param string $display_mode One of {@link Menu_horizontal_with_dropdown} or
@@ -499,24 +500,24 @@ class MENU_RENDERER extends WEBCORE_OBJECT
     {
       if ($this->num_important_commands > 0)
       {
-        if ($display_mode == Menu_horizontal_with_dropdown)
+        if ($display_mode == Menu_horizontal_with_drop_down)
         {
           $this->_draw_horizontal_with_dropdown ($commands);
         }
         else
         {
           $this->_draw_vertical_menu ($commands, true);
-          $this->_draw_dropdown ($commands);
+          $this->_draw_drop_down ($commands);
         }
       }
       else
       {
-        $this->_draw_dropdown ($commands);
+        $this->_draw_drop_down ($commands);
       }
     }
     else
     {
-      if ($display_mode == Menu_horizontal_with_dropdown)
+      if ($display_mode == Menu_horizontal_with_drop_down)
       {
         $this->_draw_commands ($commands, false, 'button');
       }
@@ -526,22 +527,22 @@ class MENU_RENDERER extends WEBCORE_OBJECT
       }
     }
   }
-  
+
   /**
-   * Draw the commands inside a vertical dropdown menu.
+   * Draw the commands inside a vertical drop-down menu.
    * Uses JavaScript for browsers that don't support {@link Browser_CSS_2}. Uses
    * {@link _draw_vertical_menu()} to draw the contents of the drop-down.
    * @param COMMANDS $commands
    * @access private
    */
-  protected function _draw_dropdown ($commands)
+  protected function _draw_drop_down ($commands)
   {
     $trigger_class = 'menu-trigger';
     $menu_class = 'menu-dropdown';
     $menu_tag = '';
 
     $trigger = '';
-    
+
     if ($this->options & Menu_options_show_trigger_title)
     {
       if ($this->options & Menu_options_show_selected_as_trigger_title)
@@ -583,7 +584,7 @@ class MENU_RENDERER extends WEBCORE_OBJECT
     $this->_draw_vertical_menu ($commands, false);
     echo '</div></div></li>';
   }
-  
+
   /**
    * Draw important commands and a trigger side-by-side.
    * Uses a {@link BOX_RENDERER} to draw cross-platform.
@@ -593,7 +594,7 @@ class MENU_RENDERER extends WEBCORE_OBJECT
   protected function _draw_horizontal_with_dropdown ($commands)
   {
     $this->_draw_commands ($commands, true, 'button');
-    $this->_draw_dropdown ($commands);
+    $this->_draw_drop_down ($commands);
   }
   
   /**
