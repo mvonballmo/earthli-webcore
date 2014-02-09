@@ -272,8 +272,8 @@ http://www.earthli.com/software/webcore
       This text following the citation and should make the paragraph wrap at least once.</p>
   </div>
   <?php
-    $Page->show_message('This is an caution box.', 'info');
-    $Page->show_message('This is an warning box.', 'warning');
+    $Page->show_message('This is a caution box.', 'info');
+    $Page->show_message('This is a warning box.', 'warning');
     $Page->show_message('This is an error box.');
   ?>
   <div class="chart">
