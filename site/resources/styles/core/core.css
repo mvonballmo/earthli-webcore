@@ -240,7 +240,7 @@ pre > code
   margin: 15px 0;
   display: block;
   padding-left: 15px;
-  border-left: 3px #CCC solid;
+  border-left: 6px #CCC solid;
 }
 
 .chart > .chart-body > pre > code
@@ -571,6 +571,13 @@ pre > code
 .subdued
 {
   color: #AAA;
+}
+
+.info-box-top div + div,
+.info-box-bottom div + div,
+.subdued div + div
+{
+  margin-top: 3px;
 }
 
 td.object-in-list + td.object-in-list
