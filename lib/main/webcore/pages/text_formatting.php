@@ -74,6 +74,7 @@ http://www.earthli.com/software/webcore
       <li><a href="#abstract">Abstract</a></li>
       <li><a href="#pullquotes">Pull quotes</a></li>
       <li><a href="#boxes">Boxes</a></li>
+      <li><a href="#messages">Messages</a></li>
       <li><a href="#footnotes">Footnotes</a></li>
       <li><a href="#clear">Clearing floats</a></li>
       <li><a href="#anchors">Anchors</a></li>
@@ -404,7 +405,7 @@ http://www.earthli.com/software/webcore
     </tr>
   </table>
   <div class="preview ">
-    <div class="preview-title">Example</div>
+    <h3 class="preview-title">Example</h3>
     <table class="basic">
       <tr>
         <td style="width: 50%">
@@ -526,7 +527,7 @@ http://www.earthli.com/software/webcore
     </tr>
   </table>
   <div class="preview ">
-    <div class="preview-title">Example</div>
+    <h3 class="preview-title">Example</h3>
     <table class="basic">
       <tr>
         <td style="width: 50%">
@@ -556,7 +557,7 @@ http://www.earthli.com/software/webcore
     handled as expected. The indenting is <em>not</em> necessary here, but
     is used to make the source text clearer.</p>
   <div class="preview">
-    <div class="preview-title">Example 1</div>
+    <h3 class="preview-title">Example 1</h3>
     <table class="basic">
       <tr>
         <td><span class="highlight">&lt;ul&gt;</span><br>
@@ -591,7 +592,7 @@ Three<br>
     in the text; this indicates that the item should continue after the embedded
     list.</p>
   <div class="preview">
-    <div class="preview-title">Example 2</div>
+    <h3 class="preview-title">Example 2</h3>
     <table class="basic">
       <tr>
         <td><span class="highlight">&lt;ul&gt;</span><br>
@@ -619,7 +620,7 @@ Three<br>
   </div>
   <p>Inserting blank lines will generate blank list items.</p>
   <div class="preview">
-    <div class="preview-title">Example 3</div>
+    <h3 class="preview-title">Example 3</h3>
     <table class="basic">
       <tr>
         <td><span class="highlight">&lt;ul&gt;</span><br>
@@ -662,8 +663,11 @@ More...<br>
     and <span class="highlight">dd_class</span>, which define the CSS class for definition terms and
     definitions, respectively. Use a <span class="highlight">&lt;div&gt;</span> tag to include more complex
   formatting in the definition, as shown in the example below, which has multiple paragraphs.</p>
+  <?php
+
+  ?>
   <div class="preview">
-    <div class="preview-title">Example 4</div>
+    <h3 class="preview-title">Example 4</h3>
     <table class="basic">
       <tr>
         <td><span class="highlight">&lt;dl dt_class="field" dd_class="notes"&gt;</span><br>
@@ -734,7 +738,7 @@ Second Term<br>
     </tr>
   </table>
   <div class="preview ">
-    <div class="preview-title">Example</div>
+    <h3 class="preview-title">Example</h3>
     <table class="basic">
       <tr>
         <td style="width: 50%">
@@ -808,7 +812,7 @@ Second Term<br>
     </tr>
   </table>
   <div class="preview">
-    <div class="preview-title">Example</div>
+    <h3 class="preview-title">Example</h3>
     <table class="basic">
       <tr>
         <td style="width: 50%; vertical-align: top">
@@ -864,7 +868,7 @@ Second Term<br>
     </tr>
   </table>
   <div class="preview ">
-    <div class="preview-title">Example</div>
+    <h3 class="preview-title">Example</h3>
     <table class="basic">
       <tr>
         <td style="width: 50%">
@@ -872,7 +876,7 @@ Second Term<br>
         </td>
         <td style="font-size: 150%">&rArr;</td>
         <td>
-          <span style="width: 280px; display: table"><span class="auto-content-inline"><embed src="http://www.youtube.com/v/7ryCiS3RxQY" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" style="width: 280px; height: 165px"></embed></span><span class="auto-content-caption"><a href="http://www.youtube.com/watch?v=7ryCiS3RxQY">A rainy day in Z&uuml;ri Oberland</a> by <cite>mvonballmo</cite> (<cite><a href="http://www.youtube.com/">YouTube</a></cite>)</span></span>
+          <span style="width: 280px; display: table"><span class="auto-content-inline"><embed src="http://www.youtube.com/v/7ryCiS3RxQY" type="application/x-shockwave-flash" style="width: 280px; height: 165px"></embed></span><span class="auto-content-caption"><a href="http://www.youtube.com/watch?v=7ryCiS3RxQY">A rainy day in Z&uuml;ri Oberland</a> by <cite>mvonballmo</cite> (<cite><a href="http://www.youtube.com/">YouTube</a></cite>)</span></span>
         </td>
       </tr>
     </table>
@@ -939,7 +943,7 @@ Second Term<br>
     the <span class="highlight">&lt;pre&gt;</span> tag can be used to force
     the formatter to use the exact whitespace you have specified.</p>
   <div class="preview ">
-    <div class="preview-title">Example</div>
+    <h3 class="preview-title">Example</h3>
     <table class="basic">
       <tr>
         <td style="width: 50%">
@@ -977,7 +981,7 @@ to be
     that it doesn't force block formatting.
   </p>
   <div class="preview ">
-    <div class="preview-title">Example 1</div>
+    <h3 class="preview-title">Example 1</h3>
     <table class="basic">
       <tr>
         <td style="width: 50%">
@@ -1010,7 +1014,7 @@ to be
     </table>
   </div>
   <div class="preview ">
-    <div class="preview-title">Example 2</div>
+    <h3 class="preview-title">Example 2</h3>
     <table class="basic">
       <tr>
         <td style="width: 40%">
@@ -1059,7 +1063,7 @@ to be
     </tr>
   </table>
   <div class="preview">
-    <div class="preview-title">Example 1</div>
+    <h3 class="preview-title">Example 1</h3>
     <table class="basic">
       <tr>
         <td style="width: 50%">
@@ -1077,7 +1081,7 @@ to be
     </table>
   </div>
   <div class="preview">
-    <div class="preview-title">Example 2</div>
+    <h3 class="preview-title">Example 2</h3>
     <table class="basic">
       <tr>
         <td style="width: 50%">
@@ -1095,7 +1099,7 @@ to be
     </table>
   </div>
   <div class="preview">
-    <div class="preview-title">Example 3</div>
+    <h3 class="preview-title">Example 3</h3>
     <table class="basic">
       <tr>
         <td style="width: 50%">
@@ -1121,7 +1125,7 @@ to be
     the text is supplemental or tangential. In the HTML formatter, this
     translates to the 'notes' CSS style. It is ignored in the plain-text formatter.</p>
   <div class="preview">
-    <div class="preview-title">Example</div>
+    <h3 class="preview-title">Example</h3>
     <table class="basic">
       <tr>
         <td style="width: 50%">
@@ -1146,7 +1150,7 @@ to be
   <p>The <span class="highlight">&lt;quote_style&gt;</span> attribute (see <a href="#quoting">quoting</a> above)
     applies this tag as well, but the default value is <span class="highlight">none</span>.</p>
   <div class="preview">
-    <div class="preview-title">Example</div>
+    <h3 class="preview-title">Example</h3>
     <table class="basic">
       <tr>
         <td style="width: 50%">
@@ -1174,7 +1178,7 @@ to be
   <p>The <span class="highlight">&lt;quote_style&gt;</span> attribute (see <a href="#quoting">quoting</a> above)
     applies this tag as well, but the default value is <span class="highlight">none</span>.</p>
   <div class="preview">
-    <div class="preview-title">Example</div>
+    <h3 class="preview-title">Example</h3>
     <table class="basic">
       <tr>
         <td style="width: 50%">
@@ -1246,9 +1250,8 @@ to be
         container (affecting the box's content).</td>
     </tr>
   </table>
-  <p>All other attributes, if specified, are <em>discarded</em>.</p>
   <div class="preview">
-    <div class="preview-title">Example 1</div>
+    <h3 class="preview-title">Example 1</h3>
     <table class="basic">
       <tr>
         <td style="width: 50%">
@@ -1284,6 +1287,27 @@ to be
       </tr>
     </table>
   </div>
+  <h2 id="messages">Messages</h2>
+  <p>Use the <span class="highlight">&lt;info&gt;</span>, <span class="highlight">&lt;warning&gt;</span> or
+    <span class="highlight">&lt;error&gt;</span> tag to show a message box with some content.</p>
+  <div class="preview">
+    <h3 class="preview-title">Example</h3>
+    <table class="basic">
+      <tr>
+        <td style="width: 50%">
+          <p><span class="highlight">&lt;info&gt;</span>This is an info message.<span class="highlight">&lt;/info&gt;</span></p>
+          <p><span class="highlight">&lt;warning&gt;</span>This is a warning message.<span class="highlight">&lt;/warning&gt;</span></p>
+          <p><span class="highlight">&lt;error&gt;</span>This is an error message.<span class="highlight">&lt;/error&gt;</span></p>
+        </td>
+        <td style="font-size: 150%">&rArr;</td>
+        <td>
+          <?php $Page->show_message('This is an info message.', 'info')?>
+          <?php $Page->show_message('This is a warning message.', 'warning')?>
+          <?php $Page->show_message('This is an error message.', 'error')?>
+        </td>
+      </tr>
+    </table>
+  </div>
   <h2 id="footnotes">Footnotes</h2>
   <p>Longer texts can include footnotes and end-notes by placing markers with the
     <span class="highlight">&lt;fn&gt;</span> tag. These are replaced with integer markers (e.g. 1, 2, 3, etc.).
@@ -1291,7 +1315,7 @@ to be
     These are also numbered incrementally. Footnotes can be placed anywhere in the text, but are commonly
     included at the end, separated by a horizontal rule, as shown in the example below.</p>
   <div class="preview">
-    <div class="preview-title">Example</div>
+    <h3 class="preview-title">Example</h3>
     <table class="basic">
       <tr>
         <td style="width: 50%">
@@ -1326,7 +1350,7 @@ to be
   also use the attribute <span class="highlight">clear="both"</span> on any block to do the same thing, but this tag lets
     you avoid surrounding a paragraph with <span class="highlight">&lt;div&gt;</span> tags, as shown in the example below.</p>
   <div class="preview">
-    <div class="preview-title">Example</div>
+    <h3 class="preview-title">Example</h3>
     <table class="basic">
       <tr>
         <td style="width: 50%">
@@ -1357,7 +1381,7 @@ to be
     <span class="highlight">id</span> on any other tag to do the same thing, but this tag lets
     you avoid adding unnecessary begin/end tags, as shown in the example below.</p>
   <div class="preview">
-    <div class="preview-title">Example</div>
+    <h3 class="preview-title">Example</h3>
     <table class="basic">
       <tr>
         <td style="width: 50%">
@@ -1381,7 +1405,7 @@ to be
   <h2 id="rules">Rules</h2>
   <p>Use an <span class="highlight">&lt;hr&gt;</span> tag to introduce a break in the text.</p>
   <div class="preview">
-    <div class="preview-title">Example</div>
+    <h3 class="preview-title">Example</h3>
     <table class="basic">
       <tr>
         <td style="width: 50%">
@@ -1445,19 +1469,19 @@ to be
   </table>
   <p>The following examples enable ligatures:</p>
   <div class="preview">
-    <div class="preview-title">Example 1</div>
+    <h3 class="preview-title">Example 1</h3>
     <span class="highlight">&lt;macro convert="ligature"&gt;</span> or <span class="highlight">&lt;macro convert="+ligature"&gt;</span>
   </div>
   <p>The following examples turn off everything but highlighting:</p>
   <div class="preview">
-    <div class="preview-title">Example 2</div>
+    <h3 class="preview-title">Example 2</h3>
     <span class="highlight">&lt;macro convert="-ligature,-punctuation"&gt;</span>
     <p>or</p>
     <span class="highlight">&lt;macro convert="-all;+highlight"&gt;</span>
   </div>
   <p>The following example makes sure that all converters are turned on:</p>
   <div class="preview">
-    <div class="preview-title">Example 3</div>
+    <h3 class="preview-title">Example 3</h3>
     <span class="highlight">&lt;macro convert="+all"&gt;</span>
   </div>
 

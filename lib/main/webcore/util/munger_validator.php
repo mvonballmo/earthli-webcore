@@ -481,6 +481,9 @@ class MUNGER_DEFAULT_TEXT_VALIDATOR extends MUNGER_BASE_VALIDATOR
 
     $this->register_known_tag ('h', new MUNGER_VALIDATOR_TAG_INFO (true, array ('level', 'style', 'class')));
     $this->register_known_tag ('div', $div_tag_info);
+    $this->register_known_tag ('info', $div_tag_info);
+    $this->register_known_tag ('warning', $div_tag_info);
+    $this->register_known_tag ('error', $div_tag_info);
     $this->register_known_tag ('clear', new MUNGER_VALIDATOR_TAG_INFO (false));
     $this->register_known_tag ('pre', $div_tag_info);
     $this->register_known_tag ('box', new MUNGER_VALIDATOR_TAG_INFO (true, array_merge ($div_tag_props, array ('title'))));

@@ -159,7 +159,7 @@ http://www.earthli.com/software/webcore
         $this->add_field ($field);
         $this->set_value('name', 'Filler text');
 
-        $field = new TEXT_FIELD ();
+        $field = new MUNGER_TEXT_FIELD ();
         $field->id = 'description';
         $field->caption = 'Description';
         $this->add_field ($field);
@@ -200,6 +200,8 @@ http://www.earthli.com/software/webcore
        */
       protected function _draw_controls($renderer)
       {
+        $renderer->default_control_height = '75px';
+
         $renderer->start();
         $props = $renderer->make_list_properties ();
         $props->add_item('bool1', 1);
@@ -213,7 +215,7 @@ http://www.earthli.com/software/webcore
         echo ' ';
         echo $renderer->text_line_as_html('name', $text_props);
         $renderer->finish_row();
-        $renderer->draw_text_box_row('description', null, '2em');
+        $renderer->draw_text_box_row('description', null);
 
         $renderer->start_row('Block');
         $renderer->start_block(true);
@@ -264,6 +266,9 @@ http://www.earthli.com/software/webcore
   <p>Standard paragraph text.</p>
   <ol><li>Item One</li><li>Item Two</li></ol>
   <ul><li>Item One</li><li>Item Two</li></ul>
+  <div class="info-box-bottom">
+    <p>This is an info box at the bottom of a page or section.</p>
+  </div>
   <div class="quote-block">"This is a block quote. These are often used in article to include
     text from other sources. This is generally used for larger citations. Use the inline
     style for smaller citations."</div>
@@ -277,23 +282,40 @@ http://www.earthli.com/software/webcore
     $Page->show_message('This is an error box.');
   ?>
   <div class="chart">
-    <h3 class="chart-title">Box (Code Listing)</h3>
+    <h3 class="chart-title">Box</h3>
     <div class="chart-body">
-      <pre><code>protected function _process_given_tokenizer($input, $tokenizer)
+      <p>The following is a code from the <c>MUNGER</c>.</p>
+      <pre><code>protected function _process($input, $tokenizer)
 {
   $tokenizer->set_input($input);
-  while ($tokenizer->tokens_available())
+  while ($tokenizer->available())
   {
-    $tokenizer->read_next_token();
-    $token = $tokenizer->current_token();
-    $this->_process_token($token);
+    $tokenizer->read_next();
+    $token = $tokenizer->current();
+    $this->_process($token);
   }
 }</code></pre>
     </div>
   </div>
-  <div class="info-box-bottom">
-    <p>This is an info box at the bottom of a page or section.</p>
+  <p>This is code by itself.</p>
+<pre><code>protected function _process($input, $tokenizer)
+{
+  $tokenizer->set_input($input);
+  while ($tokenizer->available())
+  {
+    $tokenizer->read_next();
+    $token = $tokenizer->current();
+    $this->_process($token);
+  }
+}</code></pre>
+  <div class="abstract">
+    This is the text of an abstract. These are often used to summarize much longer blocks of text, similar in a way to the block at the beginning of a scientific paper.
   </div>
+  <p>This is text before a rule.</p>
+  <p><span class="horizontal-separator"></span></p>
+  <p>This is text after a rule.</p>
+  <div class="quote pullquote right" style="margin-top: 15px; float: right; width: 150px">Pull-quotes catch your eye.</div>
+  <p>This is the text that accompanies the pull-quote. Pull-quotes are often used to highlight interesting bits of text in much longer articles in order to pique a reader's interest or to catch a scanner's eye.</p>
   <table class="basic columns left-labels">
     <tr>
       <th>Style</th>

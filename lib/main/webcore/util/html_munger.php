@@ -1540,10 +1540,10 @@ class HTML_BOX_REPLACER extends HTML_DIV_REPLACER
     $builder->add_attribute ('style', $outer_css->as_text ());
     $Result = $builder->as_html ();
 
-    $title = $this->_read_attribute ($attributes, 'title');;
+    $title = $this->_read_attribute ($attributes, 'title');
     if ($title)
     {
-      $Result .= "<$this->main_tag class=\"chart-title\">$title</$this->main_tag>";
+      $Result .= "<h3 class=\"chart-title\">$title</h3>";
     }
 
     if ($inner_class)
@@ -1923,7 +1923,6 @@ class HTML_MEDIA_REPLACER extends HTML_INLINE_ASSET_REPLACER
     $builder->add_attribute ('class', $inner_class);
     $builder->add_attribute ('src', $src);
     $builder->add_attribute ('type', 'application/x-shockwave-flash');
-    $builder->add_attribute ('pluginspage', 'http://www.macromedia.com/go/getflashplayer');
     $inner_css->add_text ($outer_css->as_text ());
     $inner_css->add_array_attribute ('height', $attributes, '350px');
     $builder->add_attribute ('style', $inner_css->as_text ());
@@ -2288,15 +2287,24 @@ class HTML_TEXT_MUNGER extends HTML_BASE_MUNGER
     $quote_transformer = new HTML_QUOTE_TRANSFORMER ();
     $no_quote_transformer = new HTML_QUOTE_TRANSFORMER ();
     $no_quote_transformer->default_quote_style = Munger_quote_style_none;
-//    $geshi_transformer = new HTML_GESHI_CODE_TRANSFORMER ();
     $shell_replacer = new HTML_PREFORMATTED_BLOCK_REPLACER ();
     $shell_replacer->main_CSS_class = 'shell';
 
+    /** @var THEMED_PAGE $page */
+    global $Page;
+    $page = $Page;
 
     $this->register_transformer ('h', $nop_transformer);
     $this->register_replacer ('h', new HTML_HEADING_REPLACER ());
     $this->register_transformer ('div', $block_transformer);
     $this->register_replacer ('div', new HTML_DIV_REPLACER ());
+    $this->register_transformer ('info', $block_transformer);
+    $this->register_replacer ('info', new MUNGER_BASIC_REPLACER ($page->get_begin_message('info', 'p'), $page->get_end_message('p')));
+    $this->register_transformer ('warning', $block_transformer);
+    $this->register_replacer ('warning', new MUNGER_BASIC_REPLACER ($page->get_begin_message('warning', 'p'), $page->get_end_message('p')));
+    $this->register_transformer ('error', $block_transformer);
+    $this->register_replacer ('error', new MUNGER_BASIC_REPLACER ($page->get_begin_message('error', 'p'), $page->get_end_message('p')));
+    $this->register_transformer ('div', $block_transformer);
     $this->register_replacer ('clear', new MUNGER_BASIC_REPLACER ('<span style="display: block; clear: both"></span>', ''));
     $this->register_transformer ('pre', $nop_transformer);
     $this->register_replacer ('pre', new HTML_PREFORMATTED_BLOCK_REPLACER ());

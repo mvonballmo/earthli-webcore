@@ -557,16 +557,34 @@ class CONTEXT extends RESOLVER
    */
   public function show_message ($message, $type = 'error')
   {
+    echo $this->get_begin_message ($type) . $message . $this->get_end_message();
+  }
+
+  /**
+   * Get a message formatted for HTML output.
+   * @param string $tag_name
+   * @return string
+   */
+  public function get_end_message ($tag_name = 'p')
+  {
+    return '</span></' . $tag_name . '>';
+  }
+
+  /**
+   * Get the beginning of a message tag formatted for HTML output.
+   * @param string $type The type of message; can be 'error', 'warning' and 'info'
+   * @param string $tag_name
+   * @return string
+   */
+  public function get_begin_message ($type = 'error', $tag_name = 'p')
+  {
     $icon_url = $this->get_icon_url ('{icons}indicators/' . $type, '16px');
     if ($type == 'info')
     {
       $type = 'caution';
     }
-    ?>
-    <p class="<?php echo $type; ?>">
-      <span class="icon sixteen" style="background-image: url(<?php echo $icon_url; ?>)"><?php echo $message; ?></span>
-    </p>
-  <?php
+
+    return '<' . $tag_name . ' class="' . $type . '"><span class="icon sixteen" style="background-image: url(' . $icon_url . ')">';
   }
 
   /**
