@@ -430,7 +430,7 @@ class MUNGER_BASE_VALIDATOR extends MUNGER_VALIDATOR
   {
     parent::__construct ();
 
-    $standard_tag_info = new MUNGER_VALIDATOR_TAG_INFO (true, array ('class', 'style', 'title'));
+    $standard_tag_info = new MUNGER_VALIDATOR_TAG_INFO (true, array ('id', 'class', 'style', 'title'));
     $this->register_known_tag ('span', $standard_tag_info);
     $this->register_known_tag ('i', $standard_tag_info);
     $this->register_known_tag ('b', $standard_tag_info);
@@ -502,5 +502,3 @@ class MUNGER_DEFAULT_TEXT_VALIDATOR extends MUNGER_BASE_VALIDATOR
     $this->register_known_tag ('page', new MUNGER_VALIDATOR_TAG_INFO (false, array ('title')));
   }
 }
-
-?>

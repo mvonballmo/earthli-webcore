@@ -1393,6 +1393,9 @@ abstract class MUNGER_BLOCK_TRANSFORMER extends MUNGER_TRANSFORMER
   /**
    * Transform given newlines to HTML boxes.
    * @param string $text
+   * @param $quote_style
+   * @param $open_quote
+   * @param $close_quote
    * @return string
    * @access private
    */

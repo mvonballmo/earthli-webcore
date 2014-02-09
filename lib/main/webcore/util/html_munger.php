@@ -1213,7 +1213,13 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
     {
     	$css_class = $inner_class; 
     }
-    
+
+    $align = read_array_index ($attributes, 'align');
+    if (isset($align))
+    {
+      $css_class .= ' ' . $align;
+    }
+
     $builder->add_attribute ('class', $css_class);
     $outer_css->add_text ($inner_css->as_text ());
     $builder->add_attribute ('style', $outer_css->as_text ());
