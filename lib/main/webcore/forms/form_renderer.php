@@ -1062,6 +1062,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
     if ($show_preview)
     {
       $buttons [] = $this->submit_button_as_html ('Preview', '{icons}buttons/view', 'preview_form');
+      $buttons [] = $this->javascript_button_as_html('Inline preview', 'preview_field(\'' . $this->_form->name . '\', \'' . 'description' . '\')');
     }
 
     if ($this->drafts_enabled)
@@ -1518,7 +1519,9 @@ class FORM_RENDERER extends CONTROLS_RENDERER
   /**
    * Return HTML for a submitting button.
    * @param string $title Name on the button.
+   * @param string $icon
    * @param string $script Name of the JavaScript function to execute (must conform to 'function(form: form; submit_all_fields: boolean; submit_field_name, preview_field_name: string)').
+   * @param string $icon_size
    * @return string
    */
   public function submit_button_as_html ($title = null, $icon = '', $script = null, $icon_size = '16px')

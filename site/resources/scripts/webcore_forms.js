@@ -365,6 +365,29 @@ function submit_form (form_name, submit_all, submitted_name, preview_name)
   _submit_form (document.getElementById (form_name), submit_all, submitted_name, preview_name);
 }
 
+function preview_field (form_name, field_name)
+{
+  // Instead of submitting the form, we could post the contents via AJAX
+  // Actually, we want to preview just a single field
+  var request = new XMLHttpRequest();
+  request.open('POST', '/news/generate_preview.php', true);
+  request.setRequestHeader("Content-type", "application/x-www-form-urlencoded;charset=ISO-8859-1");
+
+  var form = document.getElementById(form_name);
+  var idField = form['id'];
+  var dataField = document.getElementById(field_name);
+
+  request.send('id=' + encodeURIComponent(idField.value) + '&inputText=' + encodeURIComponent(dataField.value));
+
+  request.onreadystatechange=function()
+  {
+    if (request.readyState==4 && request.status==200)
+    {
+      document.getElementById("inline_preview").innerHTML=request.responseText;
+    }
+  }
+}
+
 function preview_form (form_name, submit_all, submitted_name, preview_name)
 {
 	submit_form (form_name, submit_all, preview_name, submitted_name);
