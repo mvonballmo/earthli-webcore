@@ -53,7 +53,8 @@ a:active, a:hover
 	color: #55cffb;
 }
 
-.chart-title
+.chart-title,
+.preview-title
 {
 	color: #79cc36;
 }
@@ -63,7 +64,8 @@ a:active, a:hover
 .chart,
 pre > code,
 .left-sidebar,
-.right-sidebar
+.right-sidebar,
+.abstract
 {
   border-color: #666;
 }

@@ -48,7 +48,8 @@ th,
 .quoter,
 .menu,
 .nav-box,
-.button
+.button,
+pre
 {
   font-size: 14pt;
 }
@@ -66,7 +67,6 @@ h5,
   font-size: 12pt;
 }
 
-pre,
 .shell,
 .copyright,
 .versions,

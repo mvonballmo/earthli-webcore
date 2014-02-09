@@ -134,13 +134,19 @@ table.left-labels > tbody > tr > th:first-child
 table.left-labels.top > tbody > tr > td:first-child,
 table.left-labels.top > tbody > tr > th:first-child
 {
-  vertical-align: top;
+  vertical-align: baseline;
 }
 
 table.left-labels.bottom > tbody > tr > td:first-child,
 table.left-labels.bottom > tbody > tr > th:first-child
 {
   vertical-align: bottom;
+}
+
+.text-flow table.basic > tbody > tr > td,
+.text-flow table.left-labels.top > tbody > tr > th:first-child
+{
+  line-height: 160%;
 }
 
 h1,
@@ -231,10 +237,16 @@ pre
 
 pre > code
 {
-  margin: 1em 0;
+  margin: 15px 0;
   display: block;
   padding-left: 15px;
   border-left: 3px #CCC solid;
+}
+
+.chart > .chart-body > pre > code
+{
+  padding-left: 0;
+  border-width: 0;
 }
 
 /* @end */
@@ -520,7 +532,7 @@ pre > code
 
 .chart, .preview
 {
-  border-left: 2px solid silver;
+  border-left: 3px solid silver;
   padding-left: 15px;
   margin: 15px 0;
 }
@@ -539,7 +551,8 @@ pre > code
 {
 }
 
-.chart-title
+.chart-title,
+.preview-title
 {
 }
 
@@ -1042,6 +1055,9 @@ a.button:link, a.button:visited
   -webkit-column-width: 250px;
   -webkit-column-gap: 15px;
   -webkit-column-rule: 1px solid #CCC;
+  -moz-column-width: 250px;
+  -moz-column-gap: 15px;
+  -moz-column-rule: 1px solid #CCC;
   column-width: 250px;
   column-gap: 25px;
   column-rule: 1px solid #CCC;
@@ -1219,17 +1235,36 @@ span.error, span.caution, span.warning
 
 .pullquote 
 {
+  border: 1px solid silver;
+  padding: 15px;
   font-size: 150%;
-  border: 1px black solid;
-  padding: .5em;
   margin: 0;
   line-height: 130%;
+  text-align: center;
+}
+
+.pullquote.right,
+.pullquote.right-column
+{
+  text-align: left;
+  border: none;
+  border-left: 1px solid silver;
+  padding: 0 0 0 15px;
+}
+
+.pullquote.left,
+.pullquote.left-column
+{
+  text-align: right;
+  border: none;
+  border-right: 1px solid silver;
+  padding: 0 15px 0 0;
 }
 
 .abstract
 {
   border-width: 1px 0;
-  border-color: black;
+  border-color: silver;
   border-style: solid;
   padding: 15px 0;
 }
@@ -1572,7 +1607,7 @@ hr
   padding-right: 15px;
 }
 
-.right-colum
+.right-column
 {
   width: 75%;
 }
