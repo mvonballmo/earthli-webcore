@@ -852,6 +852,7 @@ abstract class FORM extends WEBCORE_OBJECT
    * If the 'idx' is provided, then the error is recorded only for the idx-th control for this field.
    * @param string $id Must be a valid field id.
    * @param string $msg The error message *
+   * @param int $idx
    * @access private
    */
   public function record_error ($id, $msg, $idx = null)
@@ -871,6 +872,7 @@ abstract class FORM extends WEBCORE_OBJECT
    * How many errors have occurred for 'id'?
    * If the 'idx' is provided, then only errors for the idx-th control for this field are returned.
    * @param string $id Must be a valid field id.
+   * @param int $idx
    * @return integer
    * @access private
    */
@@ -890,6 +892,7 @@ abstract class FORM extends WEBCORE_OBJECT
    * @see FORM::num_errors()
    * @param string $id Must be a valid field id.
    * @param integer $index
+   * @param int $idx
    * @return integer
    * @access private
    */
@@ -1133,7 +1136,7 @@ abstract class FORM extends WEBCORE_OBJECT
    * the same mechanisms for resolved overwrite options.
    * @param UPLOAD_FILE_FIELD $field File is associated with this field.
    * @param UPLOADED_FILE $file Move this file object.
-   * @param $path Move to this folder.
+   * @param string $path Move to this folder.
    * @param boolean $form_is_valid Will the form be committed?
    * @access private
    */

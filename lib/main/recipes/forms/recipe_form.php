@@ -49,7 +49,7 @@ require_once ('webcore/forms/object_in_folder_form.php');
 class RECIPE_FORM extends DRAFTABLE_ENTRY_FORM
 {
   /**
-   * @param RECIPE_BOOK $folder Add or create recipes in this recipe book.
+   * @param FOLDER $folder Object is created/edited in this folder.
    */
   public function __construct ($folder)
   {

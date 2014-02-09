@@ -49,11 +49,11 @@ require_once ('webcore/forms/object_in_folder_form.php');
 class ARTICLE_FORM extends DRAFTABLE_ENTRY_FORM
 {
   /**
-   * @param CONTEXT $context Attach to this object.
+   * @param FOLDER $folder Object is created/edited in this folder.
    */
-  public function __construct ($context)
+  public function __construct ($folder)
   {
-    parent::__construct ($context);
+    parent::__construct ($folder);
 
     $this->field_at('update_modifier_on_change')->visible = true;
   }
@@ -93,4 +93,3 @@ class ARTICLE_FORM extends DRAFTABLE_ENTRY_FORM
     parent::_draw_controls ($renderer);
   }
 }
-?>

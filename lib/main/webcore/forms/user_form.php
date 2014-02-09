@@ -66,14 +66,14 @@ class USER_FORM extends CONTENT_OBJECT_FORM
     $field->id = 'password1';
     $field->caption = 'Password';
     $field->min_length = $this->app->user_options->minimum_password_length;
-    $field->max_length = 20;
+    $field->max_length = 100;
     $this->add_field ($field);
 
     $field = new TEXT_FIELD ();
     $field->id = 'password2';
     $field->caption = 'Confirm Password';
     $field->min_length = $this->app->user_options->minimum_password_length;
-    $field->max_length = 20;
+    $field->max_length = 100;
     $this->add_field ($field);
 
     $field = new EMAIL_FIELD ();

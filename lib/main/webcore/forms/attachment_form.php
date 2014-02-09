@@ -94,13 +94,12 @@ class ATTACHMENT_FORM extends OBJECT_IN_FOLDER_FORM
     $field->id = 'file_name';
     $field->caption = 'File';
     $field->required = true;
-    $field->max_length = 200;
     $this->add_field ($field);
   }
 
   /**
    * Load initial properties from this object.
-   * @param UNIQUE_OBJECT $obj
+   * @param ATTACHMENT $obj
    */
   public function load_from_object ($obj)
   {

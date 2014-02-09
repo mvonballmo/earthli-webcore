@@ -64,7 +64,7 @@ class PICTURE_FORM extends ALBUM_ENTRY_FORM
     $field->id = 'file_name';
     $field->caption = 'File Name';
     $field->min_length = 1;
-    $field->max_length = 250;
+    $field->max_length = 1000;
     $this->add_field ($field);
 
     $field = new UPLOAD_FILE_FIELD ();
@@ -115,9 +115,14 @@ class PICTURE_FORM extends ALBUM_ENTRY_FORM
   public function load_from_object ($obj)
   {
     parent::load_from_object ($obj);
+
+    /** @var ALBUM $folder */
+    $folder = $this->_folder;
+
     $this->set_value ('thumbnail_size', 200);
     $this->set_value ('file_name', $obj->file_name);
-    $this->set_required ('file_name', ! $this->_folder->uploads_allowed ());
+
+    $this->set_required ('file_name', ! $folder->uploads_allowed ());
     $this->set_value ('overwrite', true);
     $this->set_value ('use_upload', false);
     $this->set_value ('create_thumbnail', false);
@@ -131,7 +136,11 @@ class PICTURE_FORM extends ALBUM_ENTRY_FORM
   public function load_from_clone ($obj)
   {
     parent::load_from_clone ($obj);
-    $this->set_value ('create_thumbnail', $this->_folder->uploads_allowed ());
+
+    /** @var ALBUM $folder */
+    $folder = $this->_folder;
+
+    $this->set_value ('create_thumbnail', $folder->uploads_allowed ());
   }
 
   /**
@@ -140,12 +149,17 @@ class PICTURE_FORM extends ALBUM_ENTRY_FORM
   public function load_with_defaults ()
   {
     parent::load_with_defaults ();
-    $this->set_required ('file_name', ! $this->_folder->uploads_allowed ());
+
+    /** @var ALBUM $folder */
+    $folder = $this->_folder;
+    $uploads_allowed = $folder->uploads_allowed();
+
+    $this->set_required ('file_name', !$uploads_allowed);
 
     $this->load_from_client ('thumbnail_size', 200);
     $this->load_from_client ('overwrite', true);
-    $this->load_from_client ('create_thumbnail', $this->_folder->uploads_allowed ());
-    $this->load_from_client ('use_upload', $this->_folder->uploads_allowed ());
+    $this->load_from_client ('create_thumbnail', $uploads_allowed);
+    $this->load_from_client ('use_upload', $uploads_allowed);
     $this->load_from_client ('read_exif', true);
   }
 
@@ -184,7 +198,7 @@ class PICTURE_FORM extends ALBUM_ENTRY_FORM
 
   /**
    * Apply post-validation operations to the object.
-   * @param object $obj Object being validated.
+   * @param PICTURE $obj Object being validated.
    * @access private
    */
   protected function _prepare_for_commit ($obj)
@@ -197,7 +211,12 @@ class PICTURE_FORM extends ALBUM_ENTRY_FORM
     if (isset ($file))
     {
       $obj->file_name = $file->normalized_name;
-      $this->_move_uploaded_file ($this->field_at ('upload_file'), $file, url_to_file_name ($this->_folder->picture_folder_url ()));
+      /** @var ALBUM $folder */
+      $folder = $this->_folder;
+      /** @var UPLOAD_FILE_FIELD $upload_file_field */
+      $upload_file_field = $this->field_at('upload_file');
+
+      $this->_move_uploaded_file ($upload_file_field, $file, url_to_file_name ($folder->picture_folder_url ()));
     }
 
     /* Create the thumbnail if needed. */
@@ -205,6 +224,7 @@ class PICTURE_FORM extends ALBUM_ENTRY_FORM
     if ($this->value_for ('create_thumbnail'))
     {
       $class_name = $this->app->final_class_name ('THUMBNAIL_CREATOR', 'webcore/util/image.php');
+      /** @var THUMBNAIL_CREATOR $creator */
       $creator = new $class_name ($this->app);
 
       $url = $obj->location ();
@@ -277,6 +297,7 @@ class PICTURE_FORM extends ALBUM_ENTRY_FORM
       if (($use_upload && ! $this->num_errors ('upload_file', Form_first_control_for_field)) || ! $url_is_empty)
       {
         $class_name = $this->context->final_class_name ('IMAGE', 'webcore/util/image.php');
+        /** @var IMAGE $img */
         $img = new $class_name ();
         $img->set_file ($file_name, true);
         if ($img->properties->exists () && $img->properties->time_created->is_valid ())
@@ -362,6 +383,7 @@ class PICTURE_FORM extends ALBUM_ENTRY_FORM
 
   /**
    * @param FORM_RENDERER $renderer
+   * @param string $row_title
    * @access private
    */
   protected function _draw_thumbnail_options ($renderer, $row_title)
@@ -385,9 +407,12 @@ class PICTURE_FORM extends ALBUM_ENTRY_FORM
    */
   protected function _draw_controls ($renderer)
   {
+    /** @var UPLOADED_FILE_SET $file_set */
     $file_set = $this->value_for ('upload_file');
+    /** @var ALBUM $folder */
+    $folder = $this->_folder;
 
-    $upload_allowed = $this->_folder->uploads_allowed ();
+    $upload_allowed = $folder->uploads_allowed ();
     $upload_found = isset ($file_set) && $file_set->is_valid ();
     $is_uploading = $this->value_for ('use_upload');
 
@@ -516,6 +541,8 @@ class PICTURE_FORM extends ALBUM_ENTRY_FORM
 
     $renderer->finish ();
   }
+
+  private $_exif_date;
 }
 
 ?>

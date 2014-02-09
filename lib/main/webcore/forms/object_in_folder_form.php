@@ -54,6 +54,7 @@ class OBJECT_IN_FOLDER_FORM extends CONTENT_OBJECT_FORM
   public function __construct ($folder)
   {
     parent::__construct ($folder->app);
+
     $this->_folder = $folder;
 
     $field = new BOOLEAN_FIELD ();
@@ -444,11 +445,11 @@ class ENTRY_FORM extends ATTACHMENT_HOST_FORM
 class DRAFTABLE_ENTRY_FORM extends ENTRY_FORM
 {
   /**
-   * @param CONTEXT $context Attach to this object.
+   * @param FOLDER $folder Object is created/edited in this folder.
    */
-  public function __construct ($context)
+  public function __construct ($folder)
   {
-    parent::__construct ($context);
+    parent::__construct ($folder);
 
     $field = new BOOLEAN_FIELD ();
     $field->id = 'draft';

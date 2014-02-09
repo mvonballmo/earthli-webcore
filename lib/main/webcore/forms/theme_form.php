@@ -66,7 +66,7 @@ class THEME_FORM extends RENDERABLE_FORM
     $field->caption = 'Skin CSS';
     $field->required = true;
     $field->min_length = 1;
-    $field->max_length = 100;
+    $field->max_length = 1000;
     $this->add_field ($field);
 
     $field = new URI_FIELD ();
@@ -74,7 +74,7 @@ class THEME_FORM extends RENDERABLE_FORM
     $field->caption = 'Font CSS';
     $field->required = false;
     $field->min_length = 1;
-    $field->max_length = 100;
+    $field->max_length = 1000;
     $this->add_field ($field);
 
     $field = new URI_FIELD ();
@@ -82,7 +82,7 @@ class THEME_FORM extends RENDERABLE_FORM
     $field->caption = 'Size CSS';
     $field->required = false;
     $field->min_length = 1;
-    $field->max_length = 100;
+    $field->max_length = 1000;
     $this->add_field ($field);
 
     $field = new TEXT_FIELD ();
@@ -90,7 +90,7 @@ class THEME_FORM extends RENDERABLE_FORM
     $field->caption = 'Icon set';
     $field->required = false;
     $field->min_length = 1;
-    $field->max_length = 100;
+    $field->max_length = 1000;
     $this->add_field ($field);
 
     $field = new TEXT_FIELD ();
@@ -114,7 +114,7 @@ class THEME_FORM extends RENDERABLE_FORM
 
   /**
    * Load initial properties from this object.
-   * @param UNIQUE_OBJECT $obj
+   * @param THEME $obj
    */
   public function load_from_object ($obj)
   {
@@ -130,7 +130,7 @@ class THEME_FORM extends RENDERABLE_FORM
 
   /**
    * Store the form's values to this object.
-   * @param STORABLE $obj
+   * @param THEME $obj
    * @access private
    * @abstract
    */
@@ -179,5 +179,3 @@ class THEME_FORM extends RENDERABLE_FORM
     $renderer->finish ();
   }
 }
-
-?>

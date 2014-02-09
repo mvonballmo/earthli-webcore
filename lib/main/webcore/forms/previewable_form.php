@@ -148,7 +148,7 @@ abstract class PREVIEWABLE_FORM extends FORM
 
   /**
    * Executes the form for an object.
-   * @param object $obj
+   * @param STORABLE $obj
    * @param string $load_action
    * @access private
    */

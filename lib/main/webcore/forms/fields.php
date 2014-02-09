@@ -584,7 +584,7 @@ class TITLE_FIELD extends TEXT_FIELD
   /**
    * @var integer
    */
-  public $max_length = 100;
+  public $max_length = 1000;
 
   /**
    * @var integer
