@@ -237,16 +237,17 @@ pre
 
 pre > code
 {
-  margin: 15px 0;
   display: block;
   padding-left: 15px;
   border-left: 6px #CCC solid;
+  margin: 15px 0 15px -6px;
 }
 
 .chart > .chart-body > pre > code
 {
   padding-left: 0;
   border-width: 0;
+  margin-left: 0;
 }
 
 /* @end */
@@ -534,7 +535,7 @@ pre > code
 {
   border-left: 3px solid silver;
   padding-left: 15px;
-  margin: 15px 0;
+  margin: 15px 0 15px -3px;
 }
 
 .hidden-layer
@@ -661,14 +662,15 @@ table.basic > tbody > tr > td.empty-label
 
 .form-basic .item-description
 {
-  margin-left: 20px;
-  margin-top: .5em;
+  margin-left: 15px;
+  margin-top: 5px;
 }
 
 .form-basic-block
 {
-  border-left: 2px solid silver;
+  border-left: 3px solid silver;
   padding-left: 15px;
+  margin-left: -3px;
 }
 
 .form-basic-content
@@ -1228,6 +1230,7 @@ span.error, span.caution, span.warning
 {
   padding-left: 15px;
   border-left: 6px solid #CCCCCC;
+  margin-left: -6px;
 }
 
 .quote-block p:first-child

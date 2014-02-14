@@ -140,7 +140,7 @@ ul.menu
 
 .quote-block
 {
-	border-left: 6px solid #CCCCCC;
+	border-color: #CCCCCC;
 }
 
 .pullquote
@@ -149,7 +149,7 @@ ul.menu
 
 .chart, .preview, .form-basic-block
 {
-	border-left: 2px solid #4A8CCA; /* frame */
+	border-color: #4A8CCA; /* frame */
 }
 
 .chart-title, .preview-title
