@@ -2056,7 +2056,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
           $box->start_column_set ();
           $box->new_column_of_type ('left-column');
           echo $ctrl;
-          $box->new_column ();
+          $box->new_column ('width: 100%');
           echo $label;
           $box->finish_column_set ();
         $Result = ob_get_contents ();

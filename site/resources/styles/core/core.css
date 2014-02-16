@@ -1617,6 +1617,17 @@ hr
   height: 100%;
 }
 
+.column-set
+{
+  display: table;
+}
+
+.column-set-column
+{
+  display: table-cell;
+  vertical-align: top;
+}
+
 .left-column
 {
   padding-right: 15px;
