@@ -321,9 +321,11 @@ function select_char_range (ctrl, fromChar, toChar)
     */ 
     var range = ctrl.createTextRange (); 
     range.move ("character", fromChar - 1);
+    range.moveEnd ("character", toChar - fromChar);
     range.select ();
+    range.scrollIntoView();
   } 
-  else if (ctrl.selectionStart) 
+  else
   { 
     /* Gecko is a little bit shorter on that. Simply
        focus the element and set the selection to a
@@ -331,7 +333,7 @@ function select_char_range (ctrl, fromChar, toChar)
     */ 
     ctrl.focus (); 
     ctrl.setSelectionRange (fromChar - 1, toChar - 1);
-  } 
+  }
 }
 
 /* Select a span of text; units are 1-based.

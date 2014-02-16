@@ -722,6 +722,8 @@ class FORM_RENDERER extends CONTROLS_RENDERER
   /**
    * Draw errors for a control onto a separate row in the form.
    * @param string $id Name of field.
+   * @param string $title
+   * @param string $width
    */
   public function draw_error_row ($id, $title = ' ', $width = '')
   {
