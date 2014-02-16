@@ -138,7 +138,7 @@ class BOX_RENDERER extends WEBCORE_OBJECT
   /**
    * Open a column after calling {@link start_column_set()}.
    * Closes a previously opened column automatically.
-   * @param string $CSS_style Use this style for the column.
+   * @param string $CSS_class Use this style for the column.
    */
   public function new_column_of_type ($CSS_class = '')
   {
@@ -220,5 +220,3 @@ class BOX_RENDERER extends WEBCORE_OBJECT
    */
   protected $_column_started = false;
 }
-
-?>

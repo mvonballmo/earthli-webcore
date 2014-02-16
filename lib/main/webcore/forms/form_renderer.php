@@ -2054,7 +2054,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
         $box = $this->context->make_box_renderer ();
         ob_start ();
           $box->start_column_set ();
-          $box->new_column ('padding-right: .5em');
+          $box->new_column_of_type ('left-column');
           echo $ctrl;
           $box->new_column ();
           echo $label;
