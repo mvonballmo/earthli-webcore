@@ -729,6 +729,11 @@ table.basic > tbody > tr > td.empty-label
   min-height: 18px;
 }
 
+.no-label
+{
+  display: inline-block;
+}
+
 .sixteen.no-label
 {
   padding-left: 0;
