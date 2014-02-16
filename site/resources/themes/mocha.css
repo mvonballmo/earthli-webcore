@@ -26,138 +26,130 @@ http://www.earthli.com/software/webcore
 
 body
 {
-	background: #544332;
-	color: #FFFFFF;
+  background: #544332;
+  color: #FFFFFF;
 }
 
 .page
 {
-	max-width: 800px;
-	margin: auto;
+  max-width: 800px;
+  margin: auto;
 }
 
 .nav-box
 {
-	border-width: 0px;
+  border-width: 0px;
 }
 
 .box
 {
-	border-width: 0px;
-}
-
-.box-title
-{
-	color: #AA9988;
-	border-width: 0px;
-	border-bottom: 1px solid #766554;
-	text-align: center;
+  border-width: 0px;
 }
 
 .side-bar, .chart, .preview, .form-basic, .menu
 {
-	background-color: #655443;
-	border-color: #322110;
+  background-color: #655443;
+  border-color: #322110;
 }
 
 .side-bar-title
 {
-	border-width: 0px;
-	text-align: center;
-	color: #AA9988;
+  border-width: 0px;
+  text-align: center;
+  color: #AA9988;
 }
 
 .preview-title
 {
-	border-width: 0px;
-	color: #AA9988;
+  border-width: 0px;
+  color: #AA9988;
 }
 
 .chart-title
 {
-	background-color: #4B3A29;
-	color: #CCBBAA;
+  background-color: #4B3A29;
+  color: #CCBBAA;
 }
 
 .cell-non-empty
 {
-	border-color: #766554;
+  border-color: #766554;
 }
 
 .cell-selected, .cell-highlight
 {
-	background: #655443;
-	border-color: #766554;
+  background: #655443;
+  border-color: #766554;
 }
 
 .menu-bar-top, .menu-bar-bottom
 {
-	border-width: 0px;
+  border-width: 0px;
 }
 
 a:link
 {
-	color: #CCBBAA;
+  color: #CCBBAA;
 }
 
 a:visited
 {
-	color: #CCBBAA;
+  color: #CCBBAA;
 }
 
 a:active
 {
-	color: #FFFF00;
+  color: #FFFF00;
 }
 
 a:hover
 {
-	color: #FFFF00;
+  color: #FFFF00;
 }
 
 h2
 {
-	border-color: #CCCCCC;
+  border-color: #CCCCCC;
 }
 
 th
 {
-	border-color: #CCCCCC;
+  border-color: #CCCCCC;
 }
 
 .graph-foreground
 {
-	background: #CCBBAA;
+  background: #CCBBAA;
 }
 
 .graph-background
 {
-	background: #443322;
+  background: #443322;
 }
 
 .disabled
 {
-	color: #CCCCCC;
+  color: #CCCCCC;
 }
 
 .highlight
 {
-	color: #FF0000;
+  color: #FF0000;
 }
 
 .object-in-list, .info-box-top, .info-box-bottom, .horizontal-separator, .vertical-separator
 {
-	border-color: #766554;
+  border-color: #766554;
 }
 
 .quote, .quote-inline, .quote-block
 {
-	color: #CCBBAA;
+  color: #CCBBAA;
 }
 
 .required
 {
-	color: #CCBBAA;
+  color: #CCBBAA;
 }
 
 .menu-control, .text-control

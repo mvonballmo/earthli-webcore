@@ -26,209 +26,185 @@ http://www.earthli.com/software/webcore
 
 a:link, a:visited
 {
-	color: #FFFFFF;
+  color: #FFFFFF;
 }
 
 a:active, a:hover
 {
-	color: #0066CC;
+  color: #0066CC;
 }
 
 body
 {
-	background: #AAAAAA url(osx/os_x_app_background.png);
+  background: #AAAAAA url(osx/os_x_app_background.png);
 }
 
 code
 {
-	color: #C8F39C;
+  color: #C8F39C;
 }
 
 .page
 {
-	max-width: 800px;
-	margin: auto;
+  max-width: 800px;
+  margin: auto;
 }
 
 h2
 {
-	color: #FFFFFF;
-	border-bottom-color: #FFFFFF;
+  color: #FFFFFF;
+  border-bottom-color: #FFFFFF;
 }
 
 th
 {
-	border-bottom: 1px solid #FFFFFF;
+  border-bottom: 1px solid #FFFFFF;
 }
 
 .banner-title
 {
-	color: white;
+  color: white;
 }
 
 .box
 {
-	border-width: 0px;
-}
-
-.box-title
-{
-	border-width: 0px;
-	text-align: center;
-	font-weight: normal;
+  border-width: 0px;
 }
 
 .cell-non-empty
 {
-	border-color: #CCCCCC;
+  border-color: #CCCCCC;
 }
 
 .cell-selected
 {
-	background: url(osx/10_percent_black.png) repeat;
-	border-color: #CCCCCC;
+  background: url(osx/10_percent_black.png) repeat;
+  border-color: #CCCCCC;
 }
 
 .cell-highlight
 {
-	background: url(osx/5_percent_black.png) repeat;
-	border-color: #CCCCCC;
+  background: url(osx/5_percent_black.png) repeat;
+  border-color: #CCCCCC;
 }
 
 .frame
 {
-	border-color: #999999;
-	border-width: 1px;
+  border-color: #999999;
+  border-width: 1px;
 }
 
 .graph-background
 {
-	border-top: 0px;
-	border-bottom: 0px;
-	border-color: #AAAAAA;
-	background: url(osx/graph_empty.png) repeat;
+  border-top: 0px;
+  border-bottom: 0px;
+  border-color: #AAAAAA;
+  background: url(osx/graph_empty.png) repeat;
 }
 
 .graph-foreground
 {
-	background: url(osx/graph_full.png) repeat;
+  background: url(osx/graph_full.png) repeat;
 }
 
 .error
 {
-	background: #CCB6B6;
+  background: #CCB6B6;
 }
 
 .highlight
 {
-	color: #C8F39C;
-}
-
-.locked a:link, .locked a:visited
-{
-	color: #888888;
+  color: #C8F39C;
 }
 
 .required
 {
-	color: #333333;
+  color: #333333;
 }
 
 .menu-bar-top, .menu-bar-bottom
 {
-	border-color: #999999;
+  border-color: #999999;
 }
 
 .quote, .quote-inline
 {
-	color: #333333;
-	font-style: italic;
+  color: #333333;
+  font-style: italic;
 }
 
 .quote-block
 {
-	color: #333333;
-	border: 1px solid #999999;
-	padding: .5em;
-	background: #CCCCCC;
+  color: #333333;
+  border: 1px solid #999999;
+  padding: .5em;
+  background: #CCCCCC;
 }
 
 .side-bar
 {
-	background: url(osx/5_percent_black.png) repeat;
+  background: url(osx/5_percent_black.png) repeat;
 }
 
 .side-bar, .nav-box, .chart, .preview
 {
-	border: 1px solid #333333;
-	border-top-color: #CCCCCC;
-	border-left-color: #CCCCCC;
+  border: 1px solid #333333;
+  border-top-color: #CCCCCC;
+  border-left-color: #CCCCCC;
 }
 
 .info-box-top, .info-box-bottom
 {
-	border: 1px solid #777777;
-	background: url(osx/5_percent_black.png) repeat;
-	padding: 1em;
+  border: 1px solid #777777;
+  background: url(osx/5_percent_black.png) repeat;
+  padding: 1em;
 }
 
 .form-basic, .form-basic-block
 {
-	border: 1px solid #333333;
-	border-bottom-color: #CCCCCC;
-	border-right-color: #CCCCCC;
-	background: url(osx/5_percent_black.png) repeat;
-	padding: 1em;
+  border: 1px solid #333333;
+  border-bottom-color: #CCCCCC;
+  border-right-color: #CCCCCC;
+  background: url(osx/5_percent_black.png) repeat;
+  padding: 1em;
 }
 
 .object-in-list
 {
-	border-color: #888888;
+  border-color: #888888;
 }
 
 .side-bar-title, .chart-title
 {
-	text-align: center;
-	color: white;
-	border-width: 0px;
+  text-align: center;
+  color: white;
+  border-width: 0px;
 }
 
 .preview-title
 {
-	color: white;
-	border-width: 0px;
+  color: white;
+  border-width: 0px;
 }
 
 .menu
 {
-	border: 1px solid;
-	border-color: #CCCCCC #666666 #666666 #CCCCCC;
-	background: #AAAAAA url(osx/os_x_app_background.png);
+  border: 1px solid;
+  border-color: #CCCCCC #666666 #666666 #CCCCCC;
+  background: #AAAAAA url(osx/os_x_app_background.png);
 }
 
 .menu-item
 {
-	border: 1px solid transparent;
+  border: 1px solid transparent;
 }
 
 .menu-item:hover
 {
-	color: white;
-	background: url(osx/5_percent_black.png);
-	border-top: 1px solid #CCCCCC;
-	border-bottom: 1px solid #CCCCCC;
-}
-
-.menu-button
-{
-	border: 1px solid #CCCCCC;
-	border-color: #CCCCCC #666666 #666666 #CCCCCC;
-}
-
-.menu-button:hover
-{
   color: white;
-	background: url(osx/5_percent_black.png);
+  background: url(osx/5_percent_black.png);
+  border-top: 1px solid #CCCCCC;
+  border-bottom: 1px solid #CCCCCC;
 }
 
 .text-control, .menu-control

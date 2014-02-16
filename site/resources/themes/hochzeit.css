@@ -26,13 +26,13 @@ http://www.earthli.com/software/webcore
 
 body
 {
-	background: #BBAA99 url(hochzeit/fossil_paper.jpg) repeat;
-	color: #FDF8E5;
+  background: #BBAA99 url(hochzeit/fossil_paper.jpg) repeat;
+  color: #FDF8E5;
 }
 
 .banner a:link, .banner a:visited, .footer a:link, .footer a:visited
 {
-	color: #3357A2;
+  color: #3357A2;
 }
 
 .page-body
@@ -43,29 +43,29 @@ body
 
 .nav-box
 {
-	background: #DDCCBB url(hochzeit/fossil_paper_light.jpg) repeat;
-	border-top: 1px solid #554433;
-	border-bottom: 1px solid #554433;
-	color: #554433;
+  background: #DDCCBB url(hochzeit/fossil_paper_light.jpg) repeat;
+  border-top: 1px solid #554433;
+  border-bottom: 1px solid #554433;
+  color: #554433;
   padding-top: 5px;
   padding-bottom: 5px;
 }
 
 a:link, a:visited
 {
-	color: #5579C4;
+  color: #5579C4;
 }
 
 a:hover, a:active
 {
-	color: #FF0000;
+  color: #FF0000;
 }
 
 .menu
 {
-	background: #FDF8E5 url(hochzeit/milkweed_paper.jpg) repeat;
-	color: #554433;
-	border-color: #554433;
+  background: #FDF8E5 url(hochzeit/milkweed_paper.jpg) repeat;
+  color: #554433;
+  border-color: #554433;
 }
 
 page-body
@@ -83,7 +83,6 @@ page-body
 }
 
 .box > *:first-child,
-.box-body > *:first-child,
 .content-column > *:first-child,
 .left-sidebar > *:first-child
 {
@@ -91,7 +90,6 @@ page-body
 }
 
 .box > *:last-child,
-.box-body > *:last-child,
 .content-column > *:last-child
 {
   margin-bottom: 0;
@@ -99,84 +97,84 @@ page-body
 
 .side-bar, .chart, .preview
 {
-	background: #FDF8E5 url(hochzeit/milkweed_paper.jpg) repeat;
-	color: #554433;
-	border-color: #554433;
+  background: #FDF8E5 url(hochzeit/milkweed_paper.jpg) repeat;
+  color: #554433;
+  border-color: #554433;
 }
 
 .preview-body
 {
-	border: 1px solid #554433;
-	background: url(hochzeit/10_percent_brown.png);
+  border: 1px solid #554433;
+  background: url(hochzeit/10_percent_brown.png);
 }
 
 .menu
 {
-	background-color: transparent;
-	background: #DDCCBB url(hochzeit/milkweed_paper.jpg) repeat;
+  background-color: transparent;
+  background: #DDCCBB url(hochzeit/milkweed_paper.jpg) repeat;
 }
 
 .side-bar-title
 {
-	border-color: #554433;
+  border-color: #554433;
 }
 
 .chart-title
 {
-	background: #DDCCBB url(hochzeit/fossil_paper_light.jpg) repeat;
+  background: #DDCCBB url(hochzeit/fossil_paper_light.jpg) repeat;
 }
 
 .callout
 {
-	border-color: #554433;
+  border-color: #554433;
 }
 
 .horizontal-separator, .vertical-separator
 {
-	border-color: #554433;
+  border-color: #554433;
 }
 
 .cell-selected, .cell-highlight
 {
-	background: #DDCCBB url(hochzeit/fossil_paper_light.jpg) repeat;
+  background: #DDCCBB url(hochzeit/fossil_paper_light.jpg) repeat;
 }
 
 .error
 {
-	background-color: transparent;
-	border-width: 0px;
+  background-color: transparent;
+  border-width: 0px;
 }
 
 h1
 {
-	color: #FDF8E5;
+  color: #FDF8E5;
 }
 
 .graph-foreground
 {
-	background: #FDF8E5;
+  background: #FDF8E5;
 }
 
 .graph-background
 {
-	background: #887766;
+  background: #887766;
 }
 
 .highlight
 {
-	color: #FF0000;
+  color: #FF0000;
 }
 
 .quote, .quote-inline
 {
-	color: black;
+  color: black;
 }
 
 .quote-block
 {
-	border: 1px solid #554433;
-	padding: .5em;
-	background: url(hochzeit/10_percent_brown.png) repeat;
+  border: 1px solid #554433;
+  padding: .5em;
+  background: url(hochzeit/10_percent_brown.png) repeat;
 }
 
 .left-sidebar

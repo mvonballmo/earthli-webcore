@@ -26,136 +26,124 @@ http://www.earthli.com/software/webcore
 
 body
 {
-	background: #FFFFFF url(earthli/rabbit.png) no-repeat fixed center center;
+  background: #FFFFFF url(earthli/rabbit.png) no-repeat fixed center center;
 }
 
 .page
 {
-	max-width: 800px;
-	margin: auto;
+  max-width: 800px;
+  margin: auto;
 }
 
 .nav-box
 {
-	border-width: 0px;
+  border-width: 0px;
 }
 
 a:link, a:visited
 {
-	color: #0000CC;
+  color: #0000CC;
 }
 
 a:hover, a:active
 {
-	color: #008000;
+  color: #008000;
 }
 
 .box
 {
-	border-width: 0px;
-}
-
-.box-title
-{
-	color: #000080;
-	border: 1px solid #0000CC;
-	background-color: #BCD6EF;
+  border-width: 0px;
 }
 
 .form-basic
 {
-	border: 1px solid #0000CC;
-	background: url(earthli/30_percent_blue.png);
+  border: 1px solid #0000CC;
+  background: url(earthli/30_percent_blue.png);
 }
 
 .menu
 {
-	background-color: transparent;
-	background: white url(earthli/30_percent_blue.png);
+  background-color: transparent;
+  background: white url(earthli/30_percent_blue.png);
 }
 
 .preview
 {
-	border-width: 0px;
-	width: 80%;
-	margin: auto;
+  border-width: 0px;
+  width: 80%;
+  margin: auto;
 }
 
 .preview-title
 {
-	color: #000060;	
+  color: #000060;
 }
 
 .side-bar, .chart
 {
-	border: 1px solid #008000;
+  border: 1px solid #008000;
 }
 
 .side-bar-title, .chart-title
 {
-	border-bottom-color: #008000;
-	color: #006000;
-	background-color: #D8E4CE;
+  border-bottom-color: #008000;
+  color: #006000;
+  background-color: #D8E4CE;
 }
 
 h2
 {
-	color: #000080;
-	border: 1px solid #0000CC;
-	background-color: #BCD6EF;
-	padding-left: 3px;
+  color: #000080;
+  border: 1px solid #0000CC;
+  background-color: #BCD6EF;
+  padding-left: 3px;
 }
 
 .frame
 {
-	border-color: #000080;
+  border-color: #000080;
 }
 
 .graph-foreground
 {
-	background-color: #D8E4CE;
+  background-color: #D8E4CE;
 }
 
 .graph-background
 {
-	background-color: #0000AA;
+  background-color: #0000AA;
 }
 
 .highlight
 {
-	color: #FF8000;
+  color: #FF8000;
 }
 
 .object-in-list, .info-box-top, .info-box-bottom
 {
-	border-color: #0000CC;
+  border-color: #0000CC;
 }
 
 .vertical-separator, .horizontal-separator
 {
-	border-color: #0000CC;
+  border-color: #0000CC;
 }
 
 .menu-bar-top, .menu-bar-bottom
 {
-	border-color: #0000CC;
+  border-color: #0000CC;
 }
 
 .quote-block, .quote-inline, .quote
 {
-	color: #006000;
+  color: #006000;
 }
 
 .quote-block
 {
-	border: 1px solid #006000;
-	background: url(earthli/30_percent_green.png);
-	padding: .5em;
-}
-
-.locked a:link, .locked a:visited
-{
-	color: #6666CC;
+  border: 1px solid #006000;
+  background: url(earthli/30_percent_green.png);
+  padding: .5em;
 }
 
 .text-control, .menu-control

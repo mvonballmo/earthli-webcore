@@ -26,29 +26,18 @@ http://www.earthli.com/software/webcore
 
 a:link
 {
-	color: #0000FF;
-	text-decoration: underline;
+  color: #0000FF;
+  text-decoration: underline;
 }
 
 a:visited
 {
-	color: #800080;
-	text-decoration: underline;
+  color: #800080;
+  text-decoration: underline;
 }
 
 a:hover,
 a:active
 {
-	color: #FF0000;
-}
-
-.object-in-list, .info-box-top, .info-box-bottom, .nav-box, .top-box, .footer
-{
-	border-color: black;
-}
-
-.object-navigator .links
-{
-  -webkit-column-rule: 1px solid black;
-  column-rule: 1px solid black;
+  color: #FF0000;
 }

@@ -26,145 +26,140 @@ http://www.earthli.com/software/webcore
 
 a:link, a:visited
 {
-	color: #0066CC;
+  color: #0066CC;
 }
 
 a:active, a:hover
 {
-	color: #33AA66;
+  color: #33AA66;
 }
 
 body
 {
-	background: #F8F8F8 url(osx/dialog_light.gif) repeat;
+  background: #F8F8F8 url(osx/dialog_light.gif) repeat;
 }
 
 code
 {
-	color: #008000;
+  color: #008000;
 }
 
 h2
 {
-	color: #666666;
-	border-bottom-color: #666666;
+  color: #666666;
+  border-bottom-color: #666666;
 }
 
 .banner-title
 {
-	color: #999999;
+  color: #999999;
 }
 
 .cell-non-empty
 {
-	border-color: #AAAAAA;
+  border-color: #AAAAAA;
 }
 
 .cell-selected
 {
-	background: url(osx/10_percent_black.png) repeat;
-	border-color: #888888;
+  background: url(osx/10_percent_black.png) repeat;
+  border-color: #888888;
 }
 
 .cell-highlight
 {
-	background: url(osx/5_percent_black.png) repeat;
-	border-color: #888888;
+  background: url(osx/5_percent_black.png) repeat;
+  border-color: #888888;
 }
 
 .frame
 {
-	border-color: #999999;
-	border-width: 1px;
+  border-color: #999999;
+  border-width: 1px;
 }
 
 .graph-background
 {
-	border-top: 0px;
-	border-bottom: 0px;
-	border-color: #AAAAAA;
-	background: url(osx/graph_empty.png) repeat;
+  border-top: 0px;
+  border-bottom: 0px;
+  border-color: #AAAAAA;
+  background: url(osx/graph_empty.png) repeat;
 }
 
 .graph-foreground
 {
-	background: url(osx/graph_full.png) repeat;
+  background: url(osx/graph_full.png) repeat;
 }
 
 .highlight
 {
-	color: #00AA00;
-}
-
-.locked a:link, .locked a:visited
-{
-	color: #888888;
+  color: #00AA00;
 }
 
 .required
 {
-	color: #333333;
+  color: #333333;
 }
 
 .menu-bar-top, .menu-bar-bottom
 {
-	border-color: #999999;
+  border-color: #999999;
 }
 
 .quote, .quote-inline, .quote-block
 {
-	color: #666666;
+  color: #666666;
 }
 
 .nav-box, .chart, .preview
 {
-	background: url(osx/5_percent_black.png) repeat;
-	border: 1px solid #999999;
+  background: url(osx/5_percent_black.png) repeat;
+  border: 1px solid #999999;
 }
 
 .form-basic-block
 {
-	border: 1px solid #333333;
-	border-bottom-color: #CCCCCC;
-	border-right-color: #CCCCCC;
-	background: url(osx/5_percent_black.png) repeat;
-	padding: 1em;
+  border: 1px solid #333333;
+  border-bottom-color: #CCCCCC;
+  border-right-color: #CCCCCC;
+  background: url(osx/5_percent_black.png) repeat;
+  padding: 1em;
 }
 
 .chart-title
 {
-	color: white;
-	background: url(osx/5_percent_black.png) repeat;
+  color: white;
+  background: url(osx/5_percent_black.png) repeat;
   margin-left: -5px;
   padding-left: 5px;
 }
 
 .side-bar-title, .preview-title
 {
-	border-width: 0;
+  border-width: 0;
 }
 
 .object-in-list
 {
-	border-color: #888888;
+  border-color: #888888;
 }
 
 ul.menu
 {
-	border: 1px solid;
-	border-color: #CCCCCC #666666 #666666 #CCCCCC;
-	background: transparent url(osx/80_percent_white.png);
+  border: 1px solid;
+  border-color: #CCCCCC #666666 #666666 #CCCCCC;
+  background: transparent url(osx/80_percent_white.png);
 }
 
 ul.menu
 {
-	border: 1px solid #AAAAAA;
+  border: 1px solid #AAAAAA;
 }
 
 .menu-item:hover
 {
-	background: url(osx/5_percent_black.png);
-	border-color: #AAAAAA;
+  background: url(osx/5_percent_black.png);
+  border-color: #AAAAAA;
 }
 
 .text-control

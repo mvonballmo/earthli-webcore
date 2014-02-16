@@ -29,7 +29,7 @@ h1, .banner-title
   font-size: 20pt
 }
 
-h2, .box-title, .side-bar-title
+h2, .side-bar-title
 {
   font-size: 14pt
 }
@@ -45,12 +45,11 @@ td,
 th,
 .menu-control,
 .text-control,
-.quoter,
 .menu,
 .nav-box,
 .menu-group-title,
-.button
-pre,
+.button,
+pre
 {
   font-size: 10pt;
 }
@@ -72,5 +71,5 @@ h5,
 .statistics,
 .modification-time
 {
-  font-size: 7.5pt;
+  font-size: 8pt;
 }

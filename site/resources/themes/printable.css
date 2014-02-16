@@ -26,41 +26,41 @@ http://www.earthli.com/software/webcore
 
 body
 {
-	background-color: #FFFFFF;
+  background-color: #FFFFFF;
 }
 
 a:link, a:visited
 {
-	color: #000000;
+  color: #000000;
 }
 
 .box
 {
-	border-width: 0px;
+  border-width: 0px;
 }
 
 .chart
 {
-	border-color: #999999;
+  border-color: #999999;
 }
 
 .chart-title
 {
-	border-width: 0px;
+  border-width: 0px;
 }
 
 .menu-bar-top, .menu-bar-bottom
 {
-	border-width: 0px;
+  border-width: 0px;
 }
 
 .error
 {
-	background-color: transparent;
-	border-width: 0px;
+  background-color: transparent;
+  border-width: 0px;
 }
 
 .info-box-bottom, .info-box-top
 {
-	border-width: 0px;
+  border-width: 0px;
 }

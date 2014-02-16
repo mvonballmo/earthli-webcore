@@ -260,19 +260,20 @@ http://www.earthli.com/software/webcore
     ?>
   </div>
   <div class="info-box-top">
-    <p>This is an info box at the top of a page or section.</p>
+    <p>This is an info box at the top of a <a href="#">page</a> or <a href="#">section</a>.</p>
   </div>
   <h4>Text and block elements (level 4 heading)</h4>
   <p>Standard paragraph text.</p>
   <ol><li>Item One</li><li>Item Two</li></ol>
   <ul><li>Item One</li><li>Item Two</li></ul>
   <div class="info-box-bottom">
-    <p>This is an info box at the bottom of a page or section.</p>
+    <p>This is an info box at the bottom of a <a href="#">page</a> or <a href="#">section</a>.</p>
   </div>
-  <div class="quote-block">"This is a block quote. These are often used in article to include
+  <p class="quote-block">"This is a block quote. These are often used in article to include
     text from other sources. This is generally used for larger citations. Use the inline
-    style for smaller citations."</div>
+    style for smaller citations."</p>
   <div class="preview">
+    <h3 class="preview-title">Title</h3>
     <p>This is text in a preview box. <span class="quote-inline">This is an example of an inline quotation.</span>
       This text following the citation and should make the paragraph wrap at least once.</p>
   </div>
@@ -314,7 +315,7 @@ http://www.earthli.com/software/webcore
   <p>This is text before a rule.</p>
   <p><span class="horizontal-separator"></span></p>
   <p>This is text after a rule.</p>
-  <div class="quote pullquote right" style="margin-top: 15px; float: right; width: 150px">Pull-quotes catch your eye.</div>
+  <div class="quote pullquote right" style="float: right; width: 150px">Pull-quotes catch your eye.</div>
   <p>This is the text that accompanies the pull-quote. Pull-quotes are often used to highlight interesting bits of text in much longer articles in order to pique a reader's interest or to catch a scanner's eye.</p>
   <table class="basic columns left-labels">
     <tr>

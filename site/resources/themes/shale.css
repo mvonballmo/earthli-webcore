@@ -26,20 +26,20 @@ http://www.earthli.com/software/webcore
 
 body
 {
-	color: #CCCCCC;
-	background-color: #4A525A;
+  color: #CCCCCC;
+  background-color: #4A525A;
 }
 
 .page
 {
-	max-width: 800px;
-	margin: auto;
+  max-width: 800px;
+  margin: auto;
 }
 
 a:link, a:visited
 {
-	text-decoration: none;
-	color: white;
+  text-decoration: none;
+  color: white;
 }
 
 a:hover
@@ -49,60 +49,60 @@ a:hover
 
 h2, th
 {
-	border-color: #CCCCCC;
-	color: #CCCCCC;
+  border-color: #CCCCCC;
+  color: #CCCCCC;
 }
 
 .banner-title
 {
-	color: #CCCCCC;
+  color: #CCCCCC;
 }
 
-.box, .box-body, .box-title
+.box
 {
-	border-width: 0px;
+  border-width: 0px;
 }
 
 .error
 {
-	background: #CCB6B6;
+  background: #CCB6B6;
 }
 
 .cell-non-empty
 {
-	border: 1px solid #999999;
+  border: 1px solid #999999;
 }
 
 .cell-selected, .cell-highlight
 {
-	background-color: #444444;
-	border-color: #999999;
+  background-color: #444444;
+  border-color: #999999;
 }
 
 .chart, .preview, .side-bar, .form-basic
 {
-	border: 1px solid #777777;
-	background-color: #535C66;
+  border: 1px solid #777777;
+  background-color: #535C66;
 }
 
 .object-in-list, .info-box-top
 {
-	border-bottom: 1px solid #777777;
+  border-bottom: 1px solid #777777;
 }
 
 .info-box-bottom, .info-box-top
 {
-	color: #AAAAAA;
+  color: #AAAAAA;
 }
 
 .info-box-bottom
 {
-	border-top: 1px solid #777777;
+  border-top: 1px solid #777777;
 }
 
 .text-flow a:link, .text-flow a:visited
 {
-	border-bottom: 1px dotted #999999;
+  border-bottom: 1px dotted #999999;
 }
 
 .text-flow a:hover
@@ -113,61 +113,61 @@ h2, th
 
 .preview
 {
-	width: 85%;
-	margin: auto;
+  width: 85%;
+  margin: auto;
 }
 
 .side-bar-title
 {
-	color: #CCCCCC;
+  color: #CCCCCC;
 }
 
 .chart-title, .preview-title, .side-bar-title
 {
-	border-width: 0px;
+  border-width: 0px;
 }
 
 .detail
 {
-	color: #AAAAAA;
+  color: #AAAAAA;
 }
 
 .frame
 {
-	padding: .25em;
-	border-color: #777777;
+  padding: .25em;
+  border-color: #777777;
 }
 
 .graph-foreground
 {
-	background: #556F99;
-	border-right: 1px solid #999999;
+  background: #556F99;
+  border-right: 1px solid #999999;
 }
 
 .graph-background
 {
-	background: #294a83;
-	border: 1px solid #999999;
+  background: #294a83;
+  border: 1px solid #999999;
 }
 
 .highlight
 {
-	color: #FF0000;
+  color: #FF0000;
 }
 
 .horizontal-separator
 {
-	border-color: #777777;
+  border-color: #777777;
 }
 
 .menu-bar-bottom
 {
-	border-width: 0px;
+  border-width: 0px;
 }
 
 .menu-bar-top
 {
-	border-width: 0px;
+  border-width: 0px;
 }
 
 .menu-bar-top a:hover
@@ -177,78 +177,66 @@ h2, th
 
 .menu-bar-bottom, .menu-bar-top
 {
-	border-color: #777777;
+  border-color: #777777;
 }
 
 .menu
 {
-	background: #535C66;
-	border: 1px solid #888888;
+  background: #535C66;
+  border: 1px solid #888888;
 }
 
 .menu-item
 {
-	border-top: 1px solid transparent;
-	border-bottom: 1px solid transparent;
+  border-top: 1px solid transparent;
+  border-bottom: 1px solid transparent;
 }
 
 .menu-item:hover
 {
-	background: #6A727A;
-	border-top: 1px solid #888888;
-	border-bottom: 1px solid #888888;
-	text-decoration: none;
-}
-
-.menu-button
-{
-	border: 1px solid #666666;
-}
-
-.menu-button:hover
-{
-	border: 1px solid #888888;
-	background: #6A727A;
-	text-decoration: none;
+  background: #6A727A;
+  border-top: 1px solid #888888;
+  border-bottom: 1px solid #888888;
+  text-decoration: none;
 }
 
 .nav-box
 {
-	border-width: 0px;
-	border-bottom: 1px solid #666666;
+  border-width: 0px;
+  border-bottom: 1px solid #666666;
 }
 
 .quote, .quote-inline
 {
-	color: #AAAAAA;
-	font-style: italic;
+  color: #AAAAAA;
+  font-style: italic;
 }
 
 .quote em, .quote-inline em
 {
-	font-style: normal;
+  font-style: normal;
 }
 
 .quote-block
 {
-	color: #AAAAAA;
-	border-left: 1px solid #777777;
-	padding-left: 1em;
+  color: #AAAAAA;
+  border-left: 1px solid #777777;
+  padding-left: 1em;
 }
 
 .required
 {
-	color: #CC9933;
+  color: #CC9933;
 }
 
 .selected
 {
-	color: #CCCCCC;
+  color: #CCCCCC;
 }
 
 .vertical-separator
 {
-	border-color: #777777;
+  border-color: #777777;
 }
 
 .checkbox-control

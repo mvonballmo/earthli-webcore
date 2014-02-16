@@ -26,128 +26,123 @@ http://www.earthli.com/software/webcore
 
 body
 {
-	background-color: #EEEEEE;
+  background-color: #EEEEEE;
 }
 
 .banner, .footer
 {
-	border-style: solid;
-	border-color: #999999;
-	border-width: 0px;
-	background-color: #DDDDDD;
+  border-style: solid;
+  border-color: #999999;
+  border-width: 0px;
+  background-color: #DDDDDD;
 }
 
 .banner
 {
-	border-bottom-width: 1px;
+  border-bottom-width: 1px;
 }
 
 .footer
 {
-	border-top-width: 1px;
+  border-top-width: 1px;
 }
 
 .nav-box
 {
-	border-width: 0px;
+  border-width: 0px;
 }
 
 a:link
 {
-	color: #0066CC;
+  color: #0066CC;
 }
 
 a:visited
 {
-	color: #0033AA;
+  color: #0033AA;
 }
 
 a:hover, a:active
 {
-	color: #FF0000;
+  color: #FF0000;
 }
 
 .preview
 {
-	width: 85%;
-	margin: auto;
-	border-width: 0px;
+  width: 85%;
+  margin: auto;
+  border-width: 0px;
 }
 
 .preview-title
 {
-	border-width: 0px;
+  border-width: 0px;
 }
 
 .box, .side-bar, .chart
 {
-	background-color: #DDDDDD;
-	border-width: 0px;
-	border: 1px solid #666666;
+  background-color: #DDDDDD;
+  border-width: 0px;
+  border: 1px solid #666666;
 }
 
-.box-title, .side-bar-title, .chart-title
+.side-bar-title, .chart-title
 {
-	background-color: #CCCCCC;
+  background-color: #CCCCCC;
 }
 
 .menu-bar-top, .menu-bar-bottom
 {
-	border-color: #666666;
+  border-color: #666666;
 }
 
 .cell-non-empty
 {
-	border-color: #666666;
+  border-color: #666666;
 }
 
 .cell-highlight
 {
-	border-color: #666666;
-	background-color: #FFFFFF;
+  border-color: #666666;
+  background-color: #FFFFFF;
 }
 
 h3
 {
-	color: #666666;
+  color: #666666;
 }
 
 h4
 {
-	color: #333333;
+  color: #333333;
 }
 
 .graph-foreground
 {
-	background-color: #669933;
+  background-color: #669933;
 }
 
 .graph-background
 {
-	background-color: #003399;
+  background-color: #003399;
 }
 
 .highlight
 {
-	color: #00AA00;
+  color: #00AA00;
 }
 
 .object-in-list, .info-box-top, .info-box-bottom
 {
-	border-color: #666666;
-}
-
-.locked a:link, .locked a:visited
-{
-	color: #336699;
+  border-color: #666666;
 }
 
 .quote-block
 {
-	font-style: italic;
-	padding: .5em;
-	border: 1px dotted #666666;
-	background: #EEEEEE;
+  font-style: italic;
+  padding: .5em;
+  border: 1px dotted #666666;
+  background: #EEEEEE;
 }
 
 .text-control, .menu-control

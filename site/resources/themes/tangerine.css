@@ -26,201 +26,178 @@ http://www.earthli.com/software/webcore
 
 body
 {
-	background-color:	#FFF8DD;
-	color: black;
+  background-color:  #FFF8DD;
+  color: black;
 }
 
 h2, h3, h4
 {
-	color: #FF9933;
-	border-color: transparent;
+  color: #FF9933;
+  border-color: transparent;
 }
 
 .nav-box
 {
-	border-width: 0px;
+  border-width: 0px;
 }
 
 .banner, .footer
 {
-	border-style: solid;
-	border-color: #333333;
-	border-width: 0px;
-	background-color: #FFC868;
+  border-style: solid;
+  border-color: #333333;
+  border-width: 0px;
+  background-color: #FFC868;
 }
 
 .banner
 {
-	border-bottom-width: 1px;
+  border-bottom-width: 1px;
 }
 
 .banner-title
 {
-	color: #444444;
+  color: #444444;
 }
 
 .footer
 {
-	border-top-width: 1px;
+  border-top-width: 1px;
 }
 
 a:link, a:visited
 {
-	color: #0055BB;
+  color: #0055BB;
 }
 
 a:hover, a:active
 {
-	color: #699C36;
+  color: #699C36;
 }
 
 .box
 {
-	border-width: 0px;
-}
-
-.box-title
-{
-	color: #FF9933;
-	text-align: center;
-	border-bottom: 1px dotted #666666;
+  border-width: 0px;
 }
 
 .side-bar, .chart, .preview, .form-basic, .quote-block,
 .info-box-top, .info-box-bottom
 {
-	border: 1px solid #999999;
-	background-color: #FFE8A8;
+  border: 1px solid #999999;
+  background-color: #FFE8A8;
 }
 
 .frame
 {
-	border: 1px solid #999999;
+  border: 1px solid #999999;
 }
 
 .side-bar .info-box-top, .chart .info-box-top, .preview .info-box-top,
 .side-bar .info-box-bottom, .chart .info-box-bottom, .preview .info-box-bottom
 .side-bar .quote-block, .chart .quote-block, .preview .quote-block
 {
-	border: 1px solid #999999;
-	background-color: #FFD878;	
+  border: 1px solid #999999;
+  background-color: #FFD878;
 }
 
 .side-bar-title, .chart-title, .preview-title
 {
-	border-color: transparent;
-	color: #FF7700;
+  border-color: transparent;
+  color: #FF7700;
 }
 
 .cell-selected, .cell-highlight, .cell-empty, .cell-non-empty
 {
-	border-color: #999999;
+  border-color: #999999;
 }
 
 .cell-selected
 {
-	background-color: #FFBB55;
+  background-color: #FFBB55;
 }
 
 .cell-highlight
 {
-	background-color: #FFD878;
+  background-color: #FFD878;
 }
 
 .calendar
 {
-	border: 1px solid #999999;
+  border: 1px solid #999999;
 }
 
 .calendar-banner, .calendar-footer
 {
-	background-color: #FFC868;
+  background-color: #FFC868;
 }
 
 .calendar-weekday-banner
 {
-	background-color: #FFE8A8;
+  background-color: #FFE8A8;
 }
 
 .menu-bar-top, .menu-bar-bottom
 {
-	border-width: 0px;
+  border-width: 0px;
 }
 
 .menu
 {
-	color: #003399;
-	background-color: #FFD878;
-	border-color: #999999;
+  color: #003399;
+  background-color: #FFD878;
+  border-color: #999999;
 }
 
 .menu-item
 {
-	border: 1px #FFD878 solid
+  border: 1px #FFD878 solid
 }
 
-.menu-item:hover, .menu-button:hover
+.menu-item:hover
 {
-	background: #FFE8A8;
-	border: 1px #FF6600 solid;
-}
-
-.menu-button
-{
-	border: 1px solid #999999;
-	background-color: #FFD878;
+  background: #FFE8A8;
+  border: 1px #FF6600 solid;
 }
 
 .graph-foreground
 {
-	background: #FFF8DD;
+  background: #FFF8DD;
 }
 
 .graph-background
 {
-	border: 1px solid #999999;
-	background-color: #FFC868;	
+  border: 1px solid #999999;
+  background-color: #FFC868;
 }
 
 .highlight
 {
-	color: red;
+  color: red;
 }
 
 .object-in-list
 {
-	border-color: #544332;
+  border-color: #544332;
 }
 
 .quote-inline, .quote
 {
-	font-style: italic;
+  font-style: italic;
 }
 
 .quote-inline em, .quote em
 {
-	font-style: normal;
+  font-style: normal;
 }
 
 .quote-block
 {
-	color: #544332;
+  color: #544332;
   padding: .5em;
 }
 
 .required
 {
-	color: #003399;
-}
-
-.locked
-{
-	color: #666666;
-}
-
-.locked a:link, .locked a:visited
-{
-	color: #336699;
+  color: #003399;
 }
 
 .menu-control, .text-control

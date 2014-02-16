@@ -1,6 +1,6 @@
 /****************************************************************************
 
-Copyright (c) 2002 Marco Von Ballmoos
+Copyright (c) 2002-2014 Marco Von Ballmoos
 
 This file is part of earthli WebCore.
 
@@ -26,64 +26,25 @@ http://www.earthli.com/software/webcore
 
 body
 {
-	color: #FFFFFF;
-	background-color: #000000;
+  background-color: black;
+  color: white;
 }
 
-table.columns > tbody > tr > td,
-table.columns > tbody > tr > th
-{
-  border-color: #666666;
-}
-
-.nav-box,
-.footer,
-.top-box
-{
-	border-color: #444;
-}
-
-a:link, a:visited
+a:link,
+a:visited
 {
   color: #05aae5;
 }
 
-a:active, a:hover
+a:hover,
+a:active
 {
-	color: #55cffb;
+  color: #55cffb;
 }
 
-.chart-title,
-.preview-title
+h1
 {
-	color: #79cc36;
-}
-
-.quote-block,
-.preview,
-.chart,
-pre > code,
-.left-sidebar,
-.right-sidebar,
-.abstract
-{
-  border-color: #666;
-}
-
-.cell-non-empty
-{
-	border-color: #666666;
-}
-
-.cell-selected, .cell-highlight
-{
-	border-color: #444;
-	background-color: #222;
-}
-
-.horizontal-separator, .vertical-separator
-{
-	border-color: #444;
+  color: #ffc31c;
 }
 
 h2
@@ -92,75 +53,83 @@ h2
   border-bottom: 1px dotted #333;
 }
 
-h1, h3
+h3
 {
   color: #ffc31c;
 }
 
-th
+.nav-box,
+.top-box,
+.footer,
+.horizontal-separator,
+.vertical-separator,
+.left-sidebar,
+.right-sidebar,
+.object-in-list,
+.info-box-top,
+.info-box-bottom,
+.cell-selected,
+.cell-highlight
 {
-	border-bottom-color: #FFFFFF;
+  border-color: #444;
 }
 
-.caution
+table.columns > tbody > tr > td,
+table.columns > tbody > tr > th,
+.quote-block,
+.preview,
+.chart,
+pre > code,
+.form-basic-block,
+.abstract,
+.cell-non-empty
 {
-  background-color: #c2e8a4;
-  border-color: #90b571;
+  border-color: #666;
 }
 
-.warning
+.chart-title,
+.preview-title
 {
-  background-color: #ffe7a6;
-  border-color: #ccb473;
+  color: #79cc36;
 }
 
+.cell-highlight
+{
+  background-color: #444;
+}
+
+.cell-selected
+{
+  background-color: #222;
+}
+
+.caution,
+.warning,
 .error
 {
-  background-color: #dfc7ff;
-}
-
-.frame
-{
-	border-color: #FFFFFF;
+  color: #333;
 }
 
 .graph-foreground
 {
-	background-color: #000000;
+  background-color: black;
 }
 
 .graph-background
 {
-	background-color: #0066CC;
+  background-color: #0066CC;
 }
 
 .highlight
 {
-	color: #dfc7ff;
+  color: #dfc7ff;
 }
 
-.selected
+.quote,
+.quote-inline,
+.quote-block
 {
-  /*
-  light-green: #c2e8a4
-  light-orange: #ffe7a6
-  light-purple: #dfc7ff
-  */
-}
-
-.object-in-list, .info-box-top, .info-box-bottom
-{
-	border-color: #666666;
-}
-
-.quote, .quote-inline, .quote-block
-{
-	color: #CCCCCC;
-}
-
-.locked a:link, .locked a:visited
-{
-	color: #6699CC;
+  color: silver;
 }
 
 .button
@@ -170,11 +139,13 @@ th
   color: #999;
 }
 
-a.button:link, a.button:visited
+a.button:link,
+a.button:visited
 {
-  color: #aaa;
+  color: #AAA;
 }
 
+.selected,
 .button.selected
 {
   color: white;
@@ -182,20 +153,21 @@ a.button:link, a.button:visited
 
 .button.disabled
 {
-  border-color: #222;
-  color: #666;
   background-color: #111;
+  border-color: #222;
+  color: silver;
 }
 
-.button:hover:not(.disabled):not(.selected)
+.button:hover:not(.disabled):not(.selected),
+.menu-item
 {
   background-color: #444;
 }
 
 .menu
 {
-	background: #111;
-	border-color: #666;
+  background: #111;
+  border-color: #666;
 }
 
 ul.menu .menu-group-title
@@ -204,16 +176,10 @@ ul.menu .menu-group-title
   border-color: #222;
 }
 
-.menu-item
-{
-  background-color: #444;
-}
-
 .menu-item:hover
 {
-	background: #333333;
-	border-top: 1px dotted #666;
-	border-bottom: 1px dotted #666;
+  background-color: #333;
+  border-color: #666;
 }
 
 .menu-item-description
@@ -223,7 +189,7 @@ ul.menu .menu-group-title
 
 .menu-control, .text-control
 {
-  background: #000000;
+  background-color: black;
   color: #05aae5;
-  border: 1px solid #666666;
+  border-color: #666;
 }

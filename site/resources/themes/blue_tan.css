@@ -26,47 +26,47 @@ http://www.earthli.com/software/webcore
 
 body
 {
-	background-color: white;
-	color: black;
+  background-color: white;
+  color: black;
 }
 
 .banner, .footer
 {
-	border-style: solid;
-	border-color: #333333;
-	border-width: 0px;
-	background-color: #336699;
-	color: white;
+  border-style: solid;
+  border-color: #333333;
+  border-width: 0px;
+  background-color: #336699;
+  color: white;
 }
 
 .banner
 {
-	border-bottom-width: 2px;
+  border-bottom-width: 2px;
 }
 
 .footer
 {
-	border-top-width: 2px;
+  border-top-width: 2px;
 }
 
 .footer a:link, .footer a:visited, .banner a:link, .banner a:visited
 {
-	color: #CCCC99;
+  color: #CCCC99;
 }
 
 .footer a:hover, .footer a:active, .banner a:hover, .banner a:active
 {
-	color: #CCFF99;
+  color: #CCFF99;
 }
 
 .nav-box
 {
-	border: 0px;
+  border: 0px;
 }
 
 .main-box
 {
-	border: none;
+  border: none;
   background-color: #FFFFFF;
 }
 
@@ -74,126 +74,126 @@ body
 {
   margin-left: -15px;
   padding-left: 15px;
-	color: #336699;
-	border-bottom: 1px dotted #999999;
+  color: #336699;
+  border-bottom: 1px dotted #999999;
 }
 
 .side-bar, .chart, .preview
 {
-	border: 1px solid #999999;
+  border: 1px solid #999999;
 }
 
 .side-bar-title
 {
-	color: #999999;
-	border-bottom: 1px dotted #999999;
+  color: #999999;
+  border-bottom: 1px dotted #999999;
 }
 
 .menu-bar-bottom
 {
-	border-top: 1px dotted #999999;
+  border-top: 1px dotted #999999;
 }
 
 .menu-bar-top
 {
-	border-bottom: 1px dotted #999999;
+  border-bottom: 1px dotted #999999;
 }
 
 .menu
 {
-	border: 1px dotted #999999;
+  border: 1px dotted #999999;
 }
 
 .menu-item
 {
-	border-top: 1px solid white;
-	border-bottom: 1px solid white;
+  border-top: 1px solid white;
+  border-bottom: 1px solid white;
 }
 
 .menu-item:hover
 {
-	background: #EEEEEE;
-	border-top: 1px dotted #999999;
-	border-bottom: 1px dotted #999999;
+  background: #EEEEEE;
+  border-top: 1px dotted #999999;
+  border-bottom: 1px dotted #999999;
 }
 
 .cell-non-empty
 {
-	border-color: #dedebd;
+  border-color: #dedebd;
 }
 
 .cell-selected, .cell-highlight
 {
-	background-color: #F8F8F8;
-	border-color: #dedebd;
+  background-color: #F8F8F8;
+  border-color: #dedebd;
 }
 
 a:link, a:visited
 {
-	color: #999966;
+  color: #999966;
 }
 
 a:hover, a:active
 {
-	color: #99CC66;
+  color: #99CC66;
 }
 
 h2
 {
-	color: #336699;
-	border-bottom: 1px dotted #999999;
-	padding-left: 3px;
+  color: #336699;
+  border-bottom: 1px dotted #999999;
+  padding-left: 3px;
 }
 
 h3
 {
-	color: #666666;
+  color: #666666;
 }
 
 h4
 {
-	color: #999999;
+  color: #999999;
 }
 
 .excerpt
 {
-	color: #666666;
+  color: #666666;
 }
 
 .frame
 {
-	border-color: #999999;
+  border-color: #999999;
 }
 
 .graph-foreground
 {
-	background-color: #CCCC99;
+  background-color: #CCCC99;
 }
 
 .graph-background
 {
-	background-color: #336699;
+  background-color: #336699;
 }
 
 .highlight
 {
-	color: #00AA00;
+  color: #00AA00;
 }
 
 .vertical-separator, .horizontal-separator
 {
-	border-color: #999999;
+  border-color: #999999;
 }
 
 .quote-inline, .quote-block, .quote
 {
-	color: #666666;
+  color: #666666;
 }
 
 .quote-block
 {
-	padding: .5em;
-	border: 1px dotted #999999;
+  padding: .5em;
+  border: 1px dotted #999999;
 }
 
 .text-control, .menu-control
