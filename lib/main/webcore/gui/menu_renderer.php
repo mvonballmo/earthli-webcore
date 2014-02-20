@@ -239,6 +239,7 @@ class MENU_RENDERER extends WEBCORE_OBJECT
       break;
     case Menu_size_compact:
       $this->num_important_commands = 0;
+      $this->content_mode |= Menu_show_as_buttons;
       break;
     case Menu_size_standard:
       $this->num_important_commands = 3;
@@ -272,7 +273,7 @@ class MENU_RENDERER extends WEBCORE_OBJECT
       }
       else
       {
-        $class =  $this->separator_class;
+        $class = $this->separator_class;
         if (!$class)
         {
           $class = $this->context->display_options->menu_class;
@@ -390,7 +391,7 @@ class MENU_RENDERER extends WEBCORE_OBJECT
           $tag .= '<span class="icon sixteen" ' . $style . '>';
         }
 
-	      if (!empty($cmd->description))
+	      if (!empty($cmd->description) && $CSS_class == 'menu-item')
 	      {
           $description_class_statement = $CSS_class ? ' class="' . $CSS_class . '-description"' : '';
           $Result .= ' <span ' . $description_class_statement . '>' . $cmd->description . '</span>';
@@ -437,7 +438,7 @@ class MENU_RENDERER extends WEBCORE_OBJECT
           $Result .= '</span>';
         }
 
-	      if (!empty($cmd->description))
+	      if (!empty($cmd->description) && $CSS_class == 'menu-item')
 	      {
 	        $Result .= '<span class="menu-item-description">' . $cmd->description . '</span>';
 	      }
