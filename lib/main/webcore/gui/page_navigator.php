@@ -291,116 +291,121 @@ class PAGE_NAVIGATOR extends WEBCORE_OBJECT
    */
   protected function _generate ()
   {
-    $this->_output = '<ul class="menu-items buttons">';
-    $this->_url = new URL ($this->page_link);
+    $this->_output = '';
 
-    if ($this->_count > 1)
+    if ($this->_count > 1 || $this->show_single_page)
     {
-      $many_pages = $this->_count > $this->pages_to_show;
+      $this->_output = '<ul class="menu-items buttons">';
+      $this->_url = new URL ($this->page_link);
 
-      // put in the first page if there are more pages than
-      // can be displayed
-
-      if ($this->show_first_and_last && $many_pages)
+      if ($this->_count > 1)
       {
+        $many_pages = $this->_count > $this->pages_to_show;
+
+        // put in the first page if there are more pages than
+        // can be displayed
+
+        if ($this->show_first_and_last && $many_pages)
+        {
+          if ($this->page_number > 1)
+          {
+            $this->_output .= "<li><a class=\"button\" title=\"First Page\" href=\"" . $this->_make_page_link (1) . "\">" . $this->_get_button_content('go_to_first') . "</a></li>";
+          }
+          else if ($this->show_disabled_buttons)
+          {
+            $this->_output .= '<li><span class="button disabled">' . $this->_get_button_content('go_to_first_disabled') . "</span></li>";
+          }
+        }
+
+        // put in the previous page, if necessary
+
         if ($this->page_number > 1)
         {
-          $this->_output .= "<li><a class=\"button\" title=\"First Page\" href=\"" . $this->_make_page_link (1) . "\">" . $this->_get_button_content('go_to_first') . "</a></li>";
+          $this->_output .= "<li><a class=\"button\" title=\"Previous Page\" href=\"" . $this->_make_page_link ($this->page_number - 1) . "\">" . $this->_get_button_content('go_to_previous') . "</a>";
         }
         else if ($this->show_disabled_buttons)
         {
-          $this->_output .= '<li><span class="button disabled">' . $this->_get_button_content('go_to_first_disabled') . "</span></li>";
+          $this->_output .= '<li><span class="button disabled">' . $this->_get_button_content('go_to_previous_disabled') . "</span>";
         }
-      }
 
-      // put in the previous page, if necessary
+        $this->_output .= $this->begin_block;
 
-      if ($this->page_number > 1)
-      {
-        $this->_output .= "<li><a class=\"button\" title=\"Previous Page\" href=\"" . $this->_make_page_link ($this->page_number - 1) . "\">" . $this->_get_button_content('go_to_previous') . "</a>";
-      }
-      else if ($this->show_disabled_buttons)
-      {
-        $this->_output .= '<li><span class="button disabled">' . $this->_get_button_content('go_to_previous_disabled') . "</span>";
-      }
+        // make the list of numbers
 
-      $this->_output .= $this->begin_block;
-
-      // make the list of numbers
-
-      if ($this->page_number <= $this->pages_to_show)
-      {
-        $first_page = 1;
-      }
-      else
-      {
-        $first_page = min ($this->_count - $this->pages_to_show + 1, $this->page_number - floor ($this->pages_to_show / 2));
-      }
-
-      if ($this->_count < $this->pages_to_show)
-      {
-        $last_page = $this->_count;
-      }
-      else
-      {
-        $last_page = $first_page + $this->pages_to_show - 1;
-      }
-
-      for ($index = $first_page; $index <= $last_page; $index++)
-      {
-        $page_text = $index + $this->page_offset;
-        if ($index == $this->page_number)
+        if ($this->page_number <= $this->pages_to_show)
         {
-          $this->_output .= "<li><span class=\"button selected\">$page_text</span></li>";
+          $first_page = 1;
         }
         else
         {
-          $this->_output .= "<li><a class=\"button\" href=\"" . $this->_make_page_link ($index) . "\">$page_text</a></li>";
+          $first_page = min ($this->_count - $this->pages_to_show + 1, $this->page_number - floor ($this->pages_to_show / 2));
         }
 
-        if ($index < $last_page)
+        if ($this->_count < $this->pages_to_show)
         {
-          $this->_output .= $this->separator;
+          $last_page = $this->_count;
         }
-      }
+        else
+        {
+          $last_page = $first_page + $this->pages_to_show - 1;
+        }
 
-      $this->_output .= $this->end_block;
+        for ($index = $first_page; $index <= $last_page; $index++)
+        {
+          $page_text = $index + $this->page_offset;
+          if ($index == $this->page_number)
+          {
+            $this->_output .= "<li><span class=\"button selected\">$page_text</span></li>";
+          }
+          else
+          {
+            $this->_output .= "<li><a class=\"button\" href=\"" . $this->_make_page_link ($index) . "\">$page_text</a></li>";
+          }
 
-      // put in the next page, if necessary
+          if ($index < $last_page)
+          {
+            $this->_output .= $this->separator;
+          }
+        }
 
-      if ($this->page_number < $this->_count)
-      {
-        $this->_output .= "<li><a class=\"button\" title=\"Next Page\" href=\"" . $this->_make_page_link ($this->page_number + 1) . "\">" . $this->_get_button_content('go_to_next') . "</a></li>";
-      }
-      else if ($this->show_disabled_buttons)
-      {
-        $this->_output .= '<li><span class="button disabled">' . $this->_get_button_content('go_to_next_disabled') . "</span></li>";
-      }
+        $this->_output .= $this->end_block;
 
-      if ($this->show_first_and_last && $many_pages)
-      {
+        // put in the next page, if necessary
+
         if ($this->page_number < $this->_count)
         {
-          $this->_output .= "<li><a class=\"button\" title=\"Last Page\" href=\"" . $this->_make_page_link ($this->_count) . "\">" . $this->_get_button_content('go_to_last') . "</a></li>";
+          $this->_output .= "<li><a class=\"button\" title=\"Next Page\" href=\"" . $this->_make_page_link ($this->page_number + 1) . "\">" . $this->_get_button_content('go_to_next') . "</a></li>";
         }
-        else
+        else if ($this->show_disabled_buttons)
         {
-          $this->_output .= '<li><span class="button disabled">' . $this->_get_button_content('go_to_last_disabled') . "</span></li>";
+          $this->_output .= '<li><span class="button disabled">' . $this->_get_button_content('go_to_next_disabled') . "</span></li>";
         }
 
-
-        if ($this->show_total)
+        if ($this->show_first_and_last && $many_pages)
         {
-          $this->_output .= "<li><span class=\"page-total\"> ($this->page_number of $this->_count $this->entry_type)</span></li>";
+          if ($this->page_number < $this->_count)
+          {
+            $this->_output .= "<li><a class=\"button\" title=\"Last Page\" href=\"" . $this->_make_page_link ($this->_count) . "\">" . $this->_get_button_content('go_to_last') . "</a></li>";
+          }
+          else
+          {
+            $this->_output .= '<li><span class="button disabled">' . $this->_get_button_content('go_to_last_disabled') . "</span></li>";
+          }
+
+
+          if ($this->show_total)
+          {
+            $this->_output .= "<li><span class=\"page-total\"> ($this->page_number of $this->_count $this->entry_type)</span></li>";
+          }
         }
       }
-    }
-    else if ($this->show_single_page)
-    {
-      $this->_output .= "<li><span class=\"button selected\">1</span></li>";
-    }
+      else if ($this->show_single_page)
+      {
+        $this->_output .= "<li><span class=\"button selected\">1</span></li>";
+      }
 
-    $this->_output .= '</ul>';
+      $this->_output .= '</ul>';
+    }
   }
 
   protected function _get_button_content($type)
