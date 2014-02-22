@@ -50,12 +50,17 @@ h1
 h2
 {
   color: #79cc36;
-  border-bottom: 1px dotted #333;
+  border-color: #333;
 }
 
 h3
 {
   color: #ffc31c;
+}
+
+.banner-title
+{
+  color: white;
 }
 
 .nav-box,
@@ -82,7 +87,8 @@ table.columns > tbody > tr > th,
 pre > code,
 .form-basic-block,
 .abstract,
-.cell-non-empty
+.cell-non-empty,
+.pullquote
 {
   border-color: #666;
 }
@@ -91,6 +97,12 @@ pre > code,
 .preview-title
 {
   color: #79cc36;
+}
+
+.info-box-top,
+.info-box-bottom
+{
+  /*color: default;*/
 }
 
 .cell-highlight
@@ -110,6 +122,13 @@ pre > code,
   color: #333;
 }
 
+.caution a:link, .caution a:visited,
+.warning a:link, .warning a:visited,
+.error a:link, .error a:visited
+{
+  /*color: default;*/
+}
+
 .graph-foreground
 {
   background-color: black;
@@ -117,12 +136,17 @@ pre > code,
 
 .graph-background
 {
-  background-color: #0066CC;
+  background-color: #06C;
 }
 
 .highlight
 {
   color: #dfc7ff;
+}
+
+.selected
+{
+  color: #79cc36;
 }
 
 .quote,
@@ -145,7 +169,6 @@ a.button:visited
   color: #AAA;
 }
 
-.selected,
 .button.selected
 {
   color: white;
@@ -187,7 +210,8 @@ ul.menu .menu-group-title
   color: white;
 }
 
-.menu-control, .text-control
+.text-control,
+.menu-control
 {
   background-color: black;
   color: #05aae5;

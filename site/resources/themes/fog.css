@@ -82,11 +82,10 @@ a:hover, a:active
 .box, .side-bar, .chart
 {
   background-color: #DDDDDD;
-  border-width: 0px;
-  border: 1px solid #666666;
+  border: 1px solid #666;
 }
 
-.side-bar-title, .chart-title
+.chart-title
 {
   background-color: #CCCCCC;
 }

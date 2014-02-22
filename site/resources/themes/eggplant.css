@@ -1,6 +1,6 @@
 /****************************************************************************
 
-Copyright (c) 2002 Marco Von Ballmoos
+Copyright (c) 2002-2014 Marco Von Ballmoos
 
 This file is part of earthli WebCore.
 
@@ -26,161 +26,193 @@ http://www.earthli.com/software/webcore
 
 body
 {
-  background: #553355;
-  color: #FFFFFF;
+  background-color: #535;
+  color: #EEC;
 }
 
-a:link, a:visited
+a:link,
+a:visited
 {
   color: #FF9;
 }
 
-a:active, a:hover
+a:hover,
+a:active
 {
-  color: #FFFF00;
+  color: #F99;
 }
 
-.nav-box
+h1
 {
-  border-color: #998877;
-}
-
-.banner-title
-{
-  color: #CCBBAA;
-}
-
-.side-bar, .chart, .preview
-{
-  border-width: 0;
-}
-
-.chart-body,
-.quote-block, ul.menu
-{
-  background: #636;
-  border: 1px solid #987;
-}
-
-.button
-{
-  background: #646;
-  border-color: #987;
-}
-
-a.button:link, a.button:visited
-{
-  color: white;
-}
-
-.button.disabled
-{
-  border-color: #654;
-}
-
-.button.selected
-{
-  background: #636;
-  color: #FF9;
-}
-
-.button:hover:not(.disabled):not(.selected)
-{
-  border-color: #CBA;
-  background-color: #978;
-}
-
-.quote-block
-{
-  padding: .5em;
-}
-
-.side-bar-title, .chart-title, .preview-title
-{
-  color: #CCBBAA;
-  border-width: 0px;
-}
-
-.cell-non-empty
-{
-  border-color: #998877;
-}
-
-.cell-selected, .cell-highlight
-{
-  border-color: #998877;
-  background: #664466;
-}
-
-.horizontal-separator, .vertical-separator
-{
-  border-color: #998877;
-}
-
-.menu-bar-top, .menu-bar-bottom
-{
-  border-width: 0px;
-}
-
-.object-in-list, .info-box-top, .info-box-bottom
-{
-  border-color: #998877;
-}
-
-span ul.menu
-{
-  background: #663366;
-  border-color: #998877;
+  color: #ECE;
 }
 
 h2
 {
-  border-color: #998877;
+  color: #B9B;
+  border-color: #B9B;
 }
 
-th
+h3
 {
-  border-color: #998877;
+  color: #979;
 }
 
-.frame
+.banner-title
 {
-  border-color: #CCBBAA;
+  color: #B9B;
+}
+
+
+.chart-title,
+.preview-title
+{
+  color: #B9B;
+}
+.nav-box,
+.top-box,
+.footer,
+.horizontal-separator,
+.vertical-separator,
+.left-sidebar,
+.right-sidebar,
+.object-in-list,
+.info-box-top,
+.info-box-bottom,
+.cell-selected,
+.cell-highlight
+{
+  border-color: #987;
+}
+
+table.columns > tbody > tr > td,
+table.columns > tbody > tr > th,
+.quote-block,
+.preview,
+.chart,
+pre > code,
+.form-basic-block,
+.abstract,
+.cell-non-empty,
+.pullquote
+{
+  border-color: #987;
+}
+
+.info-box-top,
+.info-box-bottom
+{
+  color: #987;
+}
+
+.cell-highlight
+{
+  background-color: #757;
+}
+
+.cell-selected
+{
+  background-color: #646;
+}
+
+.caution,
+.warning,
+.error
+{
+  color: #765;
+}
+
+.caution a:link, .caution a:visited,
+.warning a:link, .warning a:visited,
+.error a:link, .error a:visited
+{
+  color: #66C;
 }
 
 .graph-foreground
 {
-  background: #CCBBAA;
+  background-color: #CBA;
 }
 
 .graph-background
 {
-  background: #330033;
+  background-color: #303;
 }
 
 .highlight
 {
-  color: #88CC88;
+  color: #8C8;
 }
 
-.required
+.selected
 {
-  color: #CCBBAA;
+  color: #F99;
 }
 
-.quote, .quote-inline, .quote-block
+.quote,
+.quote-inline,
+.quote-block
 {
-  color: #CCBBAA;
+  color: #CBA;
 }
 
-.text-control, .menu-control
+.button
 {
-  color: #DDCCBB;
-  background: #664466;
-  border-color: #998877;
+  background-color: #646;
+  border-color: #987;
+  color: white;
 }
 
-.text-control.required
+a.button:link,
+a.button:visited
 {
-  background: #775577;
+  color: white;
+}
+
+.button.selected
+{
+  background-color: #747;
+  color: #FF9;
+}
+
+.button.disabled
+{
+  background-color: #535;
+  border-color: #654;
+}
+
+.button:hover:not(.disabled):not(.selected)
+{
+  background-color: #978;
+}
+
+ul.menu
+{
+  background: #424;
+  border-color: #987;
+}
+
+ul.menu .menu-group-title
+{
+  background-color: #535;
+  border-color: #987;
+}
+
+.menu-item:hover
+{
+  background-color: #535;
+  border-color: #646;
+}
+
+.menu-item-description
+{
+  color: #EEC;
+}
+
+.text-control,
+.menu-control
+{
+  background-color: #646;
+  color: #DCB;
+  border-color: #987;
 }

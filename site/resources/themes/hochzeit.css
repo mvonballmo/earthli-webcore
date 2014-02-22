@@ -114,19 +114,9 @@ page-body
   background: #DDCCBB url(hochzeit/milkweed_paper.jpg) repeat;
 }
 
-.side-bar-title
-{
-  border-color: #554433;
-}
-
 .chart-title
 {
   background: #DDCCBB url(hochzeit/fossil_paper_light.jpg) repeat;
-}
-
-.callout
-{
-  border-color: #554433;
 }
 
 .horizontal-separator, .vertical-separator

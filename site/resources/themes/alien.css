@@ -85,7 +85,7 @@ pre > code,
 
 .cell-highlight
 {
-  background-color: #333;
+  background-color: #222;
 }
 
 .cell-selected
@@ -95,7 +95,7 @@ pre > code,
 
 code
 {
-  color: #39F;
+  color: #a06dc2;
 }
 
 h2
@@ -132,7 +132,7 @@ h4
 
 .highlight
 {
-  color: #F00;
+  color: #6ca7ff;
 }
 
 .quote,

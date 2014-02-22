@@ -99,7 +99,7 @@ a:hover, a:active
   background-color: #FFD878;
 }
 
-.side-bar-title, .chart-title, .preview-title
+.chart-title, .preview-title
 {
   border-color: transparent;
   color: #FF7700;

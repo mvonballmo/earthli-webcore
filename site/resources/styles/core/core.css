@@ -156,9 +156,14 @@ h4,
 h5
 {
   font-weight: normal;
-  margin-top: 1em;
-  margin-bottom: .25em;
+  margin-top: 15px;
+  margin-bottom: 5px;
   line-height: normal;
+}
+
+h2
+{
+  border-bottom: 1px dotted silver;
 }
 
 dl
@@ -473,7 +478,6 @@ pre > code
 		or directing to other areas.
 
 		side-bar
-		  side-bar-title
 			side-bar-body
 
 		Used for blocks within a side-bar or box.
@@ -483,9 +487,6 @@ pre > code
 			chart-body
 
 		description - used for long runs of text
-
-		callout -
-
 */
 
 .main-box
@@ -511,15 +512,6 @@ pre > code
 {
   padding: 15px;
   empty-cells: show
-}
-
-.side-bar-title 
-{
-  padding: .25em;
-  font-weight: bold;
-  empty-cells: show;
-  border-bottom: 1px solid #000000;
-  text-align: left
 }
 
 .chart, .preview
@@ -603,19 +595,18 @@ td.object-in-list + td.object-in-list
 .info-box-top pre:last-child,
 .info-box-top ul:last-child
 {
-  margin-bottom: .2em;
+  margin-bottom: 5px;
 }
 
 .graph-foreground 
 {
-  background-color: #AAAAAA;
+  display: inline-block;
+  background-color: #AAA;
 }
 
 .graph-background 
 {
-  border: solid 1px #888888;
-  padding: 1px;
-  background-color: #DDDDDD;
+  line-height: 0;
 }
 
 .menu-bar-top,
@@ -1127,7 +1118,7 @@ a.button:link, a.button:visited
 .cell-selected,
 .cell-highlight
 {
-  padding: 2px;
+  padding: 5px;
   vertical-align: top;
   empty-cells: show;
 }
@@ -1160,6 +1151,7 @@ a.button:link, a.button:visited
 
 .selected 
 {
+  font-weight: normal;
 }
 
 .caution, .warning, .error
@@ -1194,6 +1186,7 @@ span.error, span.caution, span.warning
 
 .highlight
 {
+  font-weight: normal;
 }
 
 /* @end */
@@ -1237,8 +1230,8 @@ span.error, span.caution, span.warning
 .pullquote.right-column
 {
   text-align: left;
-  border: none;
-  border-left: 1px solid silver;
+  border-width: 0;
+  border-left-width: 1px;
   padding: 0 0 0 15px;
 }
 
@@ -1246,8 +1239,8 @@ span.error, span.caution, span.warning
 .pullquote.left-column
 {
   text-align: right;
-  border: none;
-  border-right: 1px solid silver;
+  border-width: 0;
+  border-right-width: 1px;
   padding: 0 15px 0 0;
 }
 
@@ -1536,18 +1529,12 @@ hr
   margin: 1em;
 }
 
-.error-message 
-{
-  padding-left: 40px;
-  background: url(../../icons/webcore_png/indicators/error_32px.png) no-repeat;
-}
-
 .message-title 
 {
   font-weight: bold;
 }
 
-.message-description 
+.message-description
 {
   margin: 1em 0;
   font-size: 85%;

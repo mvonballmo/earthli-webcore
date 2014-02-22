@@ -74,7 +74,7 @@ a:hover, a:active
   background-color: #006611;
 }
 
-.side-bar-title, .chart-title, .preview-title
+.chart-title, .preview-title
 {
   color: #77DD77;
   border-width: 0px;

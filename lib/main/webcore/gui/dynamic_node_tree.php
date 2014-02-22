@@ -57,4 +57,3 @@ class DYNAMIC_NODE_TREE extends DYNAMIC_TREE
     parent::__construct ($app, new GENERIC_TREE_NODE_INFO ($app));
   }
 }
-?>

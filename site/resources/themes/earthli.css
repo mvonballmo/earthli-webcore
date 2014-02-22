@@ -84,7 +84,7 @@ a:hover, a:active
   border: 1px solid #008000;
 }
 
-.side-bar-title, .chart-title
+.chart-title
 {
   border-bottom-color: #008000;
   color: #006000;

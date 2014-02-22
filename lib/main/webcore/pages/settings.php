@@ -98,7 +98,8 @@ http://www.earthli.com/software/webcore
     $menu->commands->append_group('Group One');
     $menu->append('One', '#', '{icons}/buttons/edit');
     $menu->append('Two', '#', '{icons}/buttons/add');
-    $menu->append('Three', '#', '{icons}/buttons/delete');
+    $item = $menu->append('Three', '#', '{icons}/buttons/delete');
+    $item->description = 'Button three includes a description below';
     $menu->renderer->content_mode &= ~Menu_show_icon;
     $menu->display();
     ?>
@@ -134,6 +135,45 @@ http://www.earthli.com/software/webcore
     $menu->renderer->content_mode = Menu_show_all_as_buttons;
     $menu->display();
     ?><a href="#" class="button">R</a>
+  </div>
+  <div class="button-content">
+    <?php
+    include ('webcore/gui/tree_node.php');
+
+    $tree = $Page->make_tree_renderer ();
+    $tree->node_info = new GENERIC_TREE_NODE_INFO($Page);
+
+    $node = new TREE_NODE ('Documents', '', false);
+    $node->append (new TREE_NODE ('Specs (PDF)', '#', '', true));
+    $node->append (new TREE_NODE ('Specs 2 (PDF)', '#'));
+    $node->append (new TREE_NODE ('Specs 3 (PDF)', '#'));
+    $nodes [] = $node;
+
+    $root = new TREE_NODE ('Encodo', '', false, '', true);
+    foreach ($nodes as $node)
+    {
+      $root->append ($node);
+    }
+    $roots [] = $root;
+    $roots [] = new TREE_NODE ('Earthli');
+
+    $node = new TREE_NODE ('Archive');
+    $node->append (new TREE_NODE ('Specs (PDF)', '#'));
+    $node->append (new TREE_NODE ('Specs 2 (PDF)', '#'));
+    $node->append (new TREE_NODE ('Specs 3 (PDF)', '#'));
+
+    $nodes = null;
+    $nodes [] = $node;
+
+    $root = new TREE_NODE ('Home');
+    foreach ($nodes as $node)
+    {
+      $root->append ($node);
+    }
+    $roots [] = $root;
+
+    $tree->display ($roots);
+    ?>
   </div>
   <h3>Form elements (level 3 heading)</h3>
   <div class="form-content">
@@ -201,6 +241,7 @@ http://www.earthli.com/software/webcore
       protected function _draw_controls($renderer)
       {
         $renderer->default_control_height = '75px';
+        $renderer->set_width('400px');
 
         $renderer->start();
         $props = $renderer->make_list_properties ();
@@ -249,6 +290,7 @@ http://www.earthli.com/software/webcore
 
         $renderer->finish_block();
         $renderer->finish_row();
+        $renderer->draw_submit_button_row();
 
         $renderer->finish();
       }
@@ -278,10 +320,20 @@ http://www.earthli.com/software/webcore
       This text following the citation and should make the paragraph wrap at least once.</p>
   </div>
   <?php
-    $Page->show_message('This is a caution box.', 'info');
-    $Page->show_message('This is a warning box.', 'warning');
-    $Page->show_message('This is an error box.');
+    $Page->show_message('This is a <a href="#">caution</a> box.', 'info');
+    $Page->show_message('This is a <a href="#">warning</a> box.', 'warning');
+    $Page->show_message('This is an <a href="#">error</a> box.');
   ?>
+  <h3>Chart/Graph</h3>
+  <div class="graph-background">
+    <div class="graph-foreground" style="width: 30px; height: 100px"></div>
+    <div class="graph-foreground" style="width: 30px; height: 10px"></div>
+    <div class="graph-foreground" style="width: 30px; height: 80px"></div>
+    <div class="graph-foreground" style="width: 30px; height: 75px"></div>
+    <div class="graph-foreground" style="width: 30px; height: 75px"></div>
+    <div class="graph-foreground" style="width: 30px; height: 100px"></div>
+    <div class="graph-foreground" style="width: 30px; height: 50px"></div>
+  </div>
   <div class="chart">
     <h3 class="chart-title">Box</h3>
     <div class="chart-body">
@@ -341,6 +393,10 @@ http://www.earthli.com/software/webcore
     <tr>
       <td><strong class="highlight">highlighted</strong></td>
       <td>Highlighted text</td>
+    </tr>
+    <tr>
+      <td><strong class="selected">selected</strong></td>
+      <td>Selected text</td>
     </tr>
     <tr>
       <td><del>deleted</del></td>

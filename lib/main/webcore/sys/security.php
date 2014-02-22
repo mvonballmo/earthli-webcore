@@ -160,7 +160,7 @@ class FOLDER_PERMISSIONS extends NAMED_OBJECT
   /**
    * Grant every content permission.
    * Used for creating 'root' users.
-   * @param $enabled Set to False to remove all rights.
+   * @param bool $enabled Set to False to remove all rights.
    */
   public function set_all ($enabled = true)
   {
@@ -285,6 +285,7 @@ class FOLDER_PERMISSIONS extends NAMED_OBJECT
   }
 
   /**
+   * @throws UNKNOWN_VALUE_EXCEPTION
    * @return string
    */
   public function raw_title ()
@@ -441,6 +442,7 @@ class FOLDER_SECURITY extends FOLDER_INHERITABLE_SETTINGS
 
   /**
    * Permissions for a particular group.
+   * @param $id
    * @return FOLDER_PERMISSIONS
    */
   public function group_permissions_at_id ($id)
@@ -458,6 +460,7 @@ class FOLDER_SECURITY extends FOLDER_INHERITABLE_SETTINGS
 
   /**
    * Permisions for this user in this folder.
+   * @param $id
    * @return FOLDER_PERMISSIONS
    */
   public function user_permissions_at_id ($id)
@@ -529,6 +532,7 @@ class FOLDER_SECURITY extends FOLDER_INHERITABLE_SETTINGS
     if ($copy_mode == Security_copy_current)
     {
       $query = $this->permissions_query ();
+      /** @var FOLDER_PERMISSIONS[] $permissions */
       $permissions = $query->objects ();
 
       foreach ($permissions as $perm)

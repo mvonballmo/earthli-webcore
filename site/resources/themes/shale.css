@@ -117,12 +117,7 @@ h2, th
   margin: auto;
 }
 
-.side-bar-title
-{
-  color: #CCCCCC;
-}
-
-.chart-title, .preview-title, .side-bar-title
+.chart-title, .preview-title
 {
   border-width: 0px;
 }

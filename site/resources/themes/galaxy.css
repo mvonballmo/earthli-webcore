@@ -82,7 +82,7 @@ a:hover, a:active
   background-repeat: repeat;
 }
 
-.side-bar-title, .chart-title
+.chart-title
 {
   color: #CCFF00;
   border-bottom: 1px solid #666666;

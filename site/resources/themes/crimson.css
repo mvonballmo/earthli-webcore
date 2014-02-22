@@ -26,155 +26,194 @@ http://www.earthli.com/software/webcore
 
 body
 {
-  padding: 0em;
-  background: #880000;
-  color: #EEEEEE;
+  background-color: #800;
+  color: #EEE;
 }
 
-.footer
+a:link,
+a:visited
 {
-  border-top: 1px solid #550000;
-  background-color: #772222;
+  color: #c2c274;
 }
 
-.nav-box
+a:hover,
+a:active
 {
-  border-width: 0px;
+  color: #F99;
 }
 
-.box
+h1
 {
-  border-width: 0px;
-}
-
-.side-bar, .chart, .preview
-{
-  border: 1px solid #999966;
-  background: #AA1111;
-}
-
-.chart-title, .side-bar-title, .preview-title
-{
-  margin-left: .25em;
-  margin-right: .25em;
-  border-bottom: 1px solid #CCCC99;
-}
-
-.form-basic
-{
-  border: 1px solid #600000;
-  background: #AA1111;
-}
-
-.menu
-{
-  border: 1px solid #600000;
-  background: #800000;
-}
-
-.cell-non-empty
-{
-  border-color: #FFAAAA;
-}
-
-.cell-selected, .cell-highlight
-{
-  background: #AA1111;
-  border-color: #FFAAAA;
-}
-
-a:visited, a:link
-{
-  color: #CCCC99;
-}
-
-a:active, a:hover
-{
-  color: #FFFFFF;
+  color: white;
 }
 
 h2
 {
-  border-color: #CCCC99;
+  color: #d7302b;
+  border-color: #d7302b;
 }
 
-th
+h3
 {
-  border-color: #CCCC99;
+  color: #ee4d58;
 }
 
-.disabled
+.banner-title
 {
-  color: #333333;
+  color: #d7302b;
 }
 
+.chart-title,
+.preview-title
+{
+  color: #d7302b;
+}
+
+.nav-box,
+.top-box,
+.footer,
+.horizontal-separator,
+.vertical-separator,
+.left-sidebar,
+.right-sidebar,
+.object-in-list,
+.info-box-top,
+.info-box-bottom,
+.cell-selected,
+.cell-highlight
+{
+  border-color: #a66f6f;
+}
+
+table.columns > tbody > tr > td,
+table.columns > tbody > tr > th,
+.quote-block,
+.preview,
+.chart,
+pre > code,
+.form-basic-block,
+.abstract,
+.cell-non-empty,
+.pullquote
+{
+  border-color: #A11;
+}
+
+.info-box-top,
+.info-box-bottom
+{
+  color: #987;
+}
+
+.cell-highlight
+{
+  background-color: #600;
+}
+
+.cell-selected
+{
+  background-color: #700;
+}
+
+.caution,
+.warning,
 .error
 {
-  background-color: #336699;
-  border-color: #0000CC;
-  color: #FF0;
+  color: #765;
+}
+
+.caution a:link, .caution a:visited,
+.warning a:link, .warning a:visited,
+.error a:link, .error a:visited
+{
+  color: #66C;
 }
 
 .graph-foreground
 {
-  background: #AAAAAA;
+  background-color: #d7302b;
 }
 
 .graph-background
 {
-  background: #772222;
 }
 
 .highlight
 {
-  color: #FF0000;
+  color: #8C8;
 }
 
-.horizontal-separator
+.selected
 {
-  border-color: #CCCCCC;
+  color: #F99;
 }
 
-.object-in-list, .info-box-top, .info-box-bottom
-{
-  border-color: #999966;
-}
-
-.menu-bar-top, .menu-bar-bottom
-{
-  border-width: 0px;
-}
-
+.quote,
+.quote-inline,
 .quote-block
 {
-  padding: .5em;
-  background-color: #993333;
-  border: 1px solid #600000;
+  color: #CBA;
 }
 
-.quote-inline, .quote
+.button
 {
-  font-style: italic;
+  background-color: #700;
+  border-color: #a66f6f;
+  color: #DDD;
 }
 
-.quote-inline em, .quote em
+a.button:link,
+a.button:visited
 {
-  font-style: normal;
+  color: #DDD;
 }
 
-.required
+.button.selected
 {
-  color: #FFFFAA;
+  background-color: #B22;
+  border-color: #a66f6f;
+  color: #FC0;
 }
 
-.vertical-separator
+.button.disabled
 {
-  border-color: #CCCCCC;
+  background-color: #900;
+  border-color: #7b5252;
+  color: #A77;
 }
 
-.text-control, .menu-control
+.button:hover:not(.disabled):not(.selected)
 {
-  color: #CCBBAA;
-  background: #993333;
-  border: 1px solid #600000;
+  background-color: #B22;
+}
+
+ul.menu
+{
+  background: #700;
+  border-color: #987;
+}
+
+ul.menu .menu-group-title
+{
+  background-color: #600;
+  border-color: #987;
+}
+
+.menu-item:hover
+{
+  background-color: #B22;
+  border-color: #600;
+}
+
+.menu-item-description
+{
+  color: #EEC;
+}
+
+.text-control,
+.menu-control
+{
+  background-color: #933;
+  color: #EEE;
+  border-color: #987;
 }

@@ -51,7 +51,7 @@ body
   border-width: 0px;
 }
 
-.side-bar-title, .chart-title
+.chart-title
 {
   color: #FF9900;
   border-bottom: 1px solid #666666;

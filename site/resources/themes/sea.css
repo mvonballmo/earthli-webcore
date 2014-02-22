@@ -91,7 +91,7 @@ th
   border-width: 0;
 }
 
-.side-bar-title, .chart-title, .preview-title
+.chart-title, .preview-title
 {
   color: #99CC66;
   border-bottom-width: 0;
@@ -115,12 +115,6 @@ th
 .quote-block
 {
   background-color: #395a93;
-}
-
-.callout
-{
-  border-width: 0;
-  border-bottom: 2px solid #1C6CA9;
 }
 
 .cell-non-empty, .cell-selected, .cell-highlight

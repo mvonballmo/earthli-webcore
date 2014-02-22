@@ -65,7 +65,7 @@ a:active, a:hover
   color: #DAEEFA;
 }
 
-.chart-title, .side-bar-title, .preview-title
+.chart-title, .preview-title
 {
   border-width: 0px;
   border-style: solid;

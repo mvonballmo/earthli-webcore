@@ -90,7 +90,7 @@ a:hover, a:active
   background: url(desert/10_percent_brown.png);
 }
 
-.side-bar-title, .chart-title, .preview-title
+.chart-title, .preview-title
 {
   color: #FFCC00;
   background: #786347 url(desert/mud_cracks_dark.jpg) repeat;

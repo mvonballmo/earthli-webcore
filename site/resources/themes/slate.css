@@ -1,6 +1,6 @@
 /****************************************************************************
 
-Copyright (c) 2002 Marco Von Ballmoos
+Copyright (c) 2002-2014 Marco Von Ballmoos
 
 This file is part of earthli WebCore.
 
@@ -26,201 +26,193 @@ http://www.earthli.com/software/webcore
 
 body
 {
-  background: #333333;
-  color: #CCCCCC;
+  background-color: #333;
+  color: silver;
 }
 
-a:link, a:visited
+a:link,
+a:visited
 {
-  color: #CCCC66;
-  text-decoration: underline;
+  color: #CC6;
 }
 
-a:active, a:hover
+a:hover,
+a:active
 {
-  color: #FFFF99;
-  text-decoration: underline;
+  color: #FF9;
 }
 
-h2, th
+h1
 {
-  border-color: #CCCCCC;
-  color: #CCCCCC;
+  color: #C93;
+}
+
+h2
+{
+  color: #FC6;
+  border-color: #333;
+}
+
+h3
+{
+  color: #ffc31c;
 }
 
 .banner-title
 {
-  color: #CC9933;
+  color: #C93;
 }
 
-.top-box
+.chart-title,
+.preview-title
 {
-
+  /*color: #B9B;*/
 }
 
-.callout
+.nav-box,
+.top-box,
+.footer,
+.horizontal-separator,
+.vertical-separator,
+.left-sidebar,
+.right-sidebar,
+.object-in-list,
+.info-box-top,
+.info-box-bottom,
+.cell-selected,
+.cell-highlight
 {
-  padding: .25em;
-  border-width: 0em;
-  border-bottom: 1px solid #666666;
+  border-color: #444;
 }
 
-.callout a:link, .callout a:visited
+table.columns > tbody > tr > td,
+table.columns > tbody > tr > th,
+.quote-block,
+.preview,
+.chart,
+pre > code,
+.form-basic-block,
+.abstract,
+.cell-non-empty,
+.pullquote
 {
-  text-decoration: none;
+  border-color: #666;
 }
 
-.callout a:hover, .callout a:active, .callout
+.info-box-top,
+.info-box-bottom
 {
-  text-decoration: underline;
+  color: #777;
 }
 
-.cell-non-empty
+.cell-highlight
 {
-  border: 1px solid #999999;
+  background-color: #666;
 }
 
-.cell-selected, .cell-highlight
+.cell-selected
 {
-  background-color: #444444;
-  border-color: #999999;
+  background-color: #555;
 }
 
-.chart, .preview, .side-bar, .info-box-top, .info-box-bottom, .object-in-list
+.caution,
+.warning,
+.error
 {
-  border-width: 0px;
+  color: #333;
 }
 
-.preview
+.caution a:link, .caution a:visited,
+.warning a:link, .warning a:visited,
+.error a:link, .error a:visited
 {
-  width: 85%;
-  margin: auto;
-}
-
-.side-bar-title
-{
-  color: #CCCCCC;
-  border-bottom: 1px solid #666666;
-}
-
-.chart a:link, .chart a:visited,
-.preview a:link, .preview a:visited,
-.side-bar-body a:link, .side-bar-body a:visited
-{
-  text-decoration: none;
-}
-
-.chart a:hover, .chart a:active, .chart
-.preview a:hover, .preview a:active, .preview
-{
-  text-decoration: underline;
-}
-
-.chart-title, .preview-title
-{
-  border-width: 0px;
-  border-bottom: 1px solid #666666;
-}
-
-.detail
-{
-  color: #999999;
-}
-
-.frame
-{
-  border-color: #666666;
+  color: #66A;
 }
 
 .graph-foreground
 {
-  background: #556F99;
-  border-right: 1px solid #999999;
+  background-color: #556F99;
 }
 
 .graph-background
 {
-  background: #294a83;
-  border: 1px solid #999999;
+  background-color: #294a83;
 }
 
 .highlight
 {
-  color: #FF0000;
-}
-
-.horizontal-separator
-{
-  border-color: #666666;
-}
-
-.menu-bar-bottom
-{
-  border-width: 0px;
-}
-
-.menu-bar-top
-{
-  border-width: 0px;
-}
-
-.menu-bar-bottom, .menu-bar-top
-{
-  border-color: #666666;
-}
-
-.nav-box
-{
-  border-width: 0px;
-  border-bottom: 1px solid #666666;
-}
-
-.quote, .quote-inline
-{
-  color: #AAAAAA;
-  font-style: italic;
-}
-
-.quote em, .quote-inline em
-{
-  font-style: normal;
-}
-
-.quote-block, .menu
-{
-  background: black;
-  border: 1px solid #666666;
-  padding: .5em;
-}
-
-.required
-{
-  color: #CC9933;
+  color: #53a131;
 }
 
 .selected
 {
-  color: #CC9933;
+  color: #FC6;
 }
 
-.vertical-separator
+.quote,
+.quote-inline,
+.quote-block
 {
-  border-color: #FFFFFF;
+  color: #888;
 }
 
-.checkbox-control
+.button
 {
-  background: #000040;
+  background-color: #666;
+  border-color: #888;
+  color: silver;
 }
 
-.text-control, .menu-control
+a.button:link,
+a.button:visited
 {
-  color: #CC9933;
-  background-color: #333333;
-  border-color: #666666;
+  color: silver;
 }
 
-.text-control.required
+.button.selected
 {
-  background-color: #222222;
+  border-color: silver;
+  color: #FC6;
+}
+
+.button.disabled
+{
+  background-color: #444;
+  border-color: #555;
+}
+
+.button:hover:not(.disabled):not(.selected)
+{
+  background-color: #444;
+}
+
+ul.menu
+{
+  background: #333;
+  border-color: #666;
+}
+
+ul.menu .menu-group-title
+{
+  background-color: #444;
+  border-color: #222;
+}
+
+.menu-item:hover
+{
+  background-color: #444;
+  border-color: #666;
+}
+
+.menu-item-description
+{
+  color: #888;
+}
+
+.text-control,
+.menu-control
+{
+  background-color: #222;
+  color: #C93;
+  border-color: #666;
 }
