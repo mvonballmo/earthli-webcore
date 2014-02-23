@@ -54,7 +54,8 @@ h3
 .info-box-top,
 .info-box-bottom,
 .cell-selected,
-.cell-highlight
+.cell-highlight,
+.description-box
 {
   border-color: @light_border;
 }
@@ -73,11 +74,34 @@ pre > code,
   border-color: @dark_border;
 }
 
+.object-navigator .links
+{
+  column-rule-color: @light_border;
+  -webkit-column-rule-color: @light_border;
+  -moz-column-rule-color: @light_border;
+}
+
 .info-box-top,
 .info-box-bottom,
 .subdued
 {
   color: @darkest_text_color;
+}
+
+.info-box-top,
+.info-box-bottom,
+.subdued
+{
+  a:link, a:visited
+  {
+    color: @darker_link_color;
+  }
+
+  a:hover, a:active
+  {
+    color: @link_hover_color;
+
+  }
 }
 
 .cell-highlight
@@ -154,7 +178,7 @@ a.button:visited
 {
   background-color: @medium_body_color;
   border-color: @medium_border;
-  color: @darkest_text_color;
+  color: @darker_text_color;
 }
 
 .button:hover:not(.disabled):not(.selected)

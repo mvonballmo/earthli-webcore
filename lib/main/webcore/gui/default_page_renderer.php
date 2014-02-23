@@ -459,17 +459,10 @@ class DEFAULT_PAGE_RENDERER extends WEBCORE_PAGE_RENDERER
     if (! $page->stored_theme_is_valid)
     {
       $res = $this->page->resources ();
-  ?>
-  <div class="warning page-message notes">
-    <?php echo $res->resolve_icon_as_html ('{icons}/indicators/warning', '', '32px', 'float: left'); ?>
-    <div style="margin-left: 48px">
-      Your theme settings are out-dated. Please go to
-      <a href="<?php echo $res->resolve_file ($options->settings_url); ?>">theme settings</a>
-      to update them.
-    </div>
-    <div style="clear: both"></div>
-  </div>
-  <?php
+
+      $message = 'Your theme settings are out-dated. Please go to <a href="' . $res->resolve_file ($options->settings_url) . '">theme settings</a> to update them.';
+
+      $this->page->show_message($message, 'warning');
     }
   }
 }
