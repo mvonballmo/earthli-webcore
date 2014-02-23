@@ -26,134 +26,195 @@ http://www.earthli.com/software/webcore
 
 body
 {
-  background: #005500;
-  color: #FFFFFF;
+  background-color: #050;
+  color: #DED;
 }
 
-.banner, .footer
-{
-  border-style: solid;
-  border-color: #003300;
-  border-width: 0px;
-  background-color: #007711;
-}
-
-.banner
-{
-  border-bottom-width: 1px;
-}
-
-.footer
-{
-  border-top-width: 1px;
-}
-
-.nav-box
-{
-  border-width: 0px;
-}
-
-a:link, a:visited
+a:link,
+a:visited
 {
   color: #ADD594;
 }
 
-a:hover, a:active
+a:hover,
+a:active
 {
-  color: #FFFF00;
+  color: #ffea62;
 }
 
-.box
+h1
 {
-  border-width: 0px;
-}
-
-.side-bar, .chart, .preview, .form-basic, .quote-block, .menu
-{
-  border: 1px solid #558855;
-  background-color: #006611;
-}
-
-.chart-title, .preview-title
-{
-  color: #77DD77;
-  border-width: 0px;
-}
-
-.cell-non-empty
-{
-  border-color: #558855;
-}
-
-.cell-selected, .cell-highlight
-{
-  border-color: #558855;
-  background-color: #006611;
-}
-
-.menu-bar-top, .menu-bar-bottom
-{
-  border-width: 0px;
-}
-
-.horizontal-separator, .vertical-separator
-{
-  border-color: #9DC584;
+  color: #6D7;
 }
 
 h2
 {
+  color: #9DC584;
   border-color: #9DC584;
 }
 
-th
+h3
+{
+  color: #7D7;
+}
+
+.banner-title
+{
+  color: #6D7;
+}
+
+
+.chart-title,
+.preview-title
+{
+  color: #7D7;
+}
+
+.nav-box,
+.top-box,
+.footer,
+.horizontal-separator,
+.vertical-separator,
+.left-sidebar,
+.right-sidebar,
+.object-in-list,
+.info-box-top,
+.info-box-bottom,
+.cell-selected,
+.cell-highlight
+{
+  border-color: #585;
+}
+
+table.columns > tbody > tr > td,
+table.columns > tbody > tr > th,
+.quote-block,
+.preview,
+.chart,
+pre > code,
+.form-basic-block,
+.abstract,
+.cell-non-empty,
+.pullquote
 {
   border-color: #9DC584;
 }
 
-.frame
+.info-box-top,
+.info-box-bottom
 {
-  border-color: #558855;
+  color: #9A9;
+}
+
+.cell-highlight
+{
+  background-color: #172;
+}
+
+.cell-selected
+{
+  background-color: #061;
+}
+
+.caution,
+.warning,
+.error
+{
+  color: #765;
+}
+
+.caution a:link, .caution a:visited,
+.warning a:link, .warning a:visited,
+.error a:link, .error a:visited
+{
+  color: #66C;
 }
 
 .graph-foreground
 {
-  background: #00FF99;
+  background-color: #7D7;
 }
 
 .graph-background
 {
-  background: #009933;
 }
 
 .highlight
 {
-  color: #FF0000;
+  color: #ffba00;
 }
 
-.object-in-list, .info-box-top, .info-box-bottom
+.selected
 {
-  border-color: #558855;
+  color: #b5befd;
 }
 
-.required
-{
-  color: #77DD77;
-}
-
-.quote-inline, .quote-block, .quote
-{
-  color: #CCCCCC;
-}
-
+.quote,
+.quote-inline,
 .quote-block
 {
-  padding: .5em;
+  color: #c5e3ba;
 }
 
-.text-control, .menu-control
+.button
 {
-  color: #77DD77;
-  background: #005000;
-  border-color: #008000;
+  background-color: #061;
+  border-color: #585;
+  color: white;
 }
+
+a.button:link,
+a.button:visited
+{
+  color: white;
+}
+
+.button.selected
+{
+  background-color: #4A4;
+  color: #FF0;
+}
+
+.button.disabled
+{
+  background-color: #051;
+  border-color: #363;
+}
+
+.button:hover:not(.disabled):not(.selected)
+{
+  background-color: #4A4;
+}
+
+ul.menu
+{
+  background-color: #061;
+  border-color: #585;
+}
+
+ul.menu .menu-group-title
+{
+  background-color: #051;
+  border-color: #585;
+}
+
+.menu-item:hover
+{
+  background-color: #4A4;
+  border-color: #585;
+}
+
+.menu-item-description
+{
+  color: #EEC;
+}
+
+.text-control,
+.menu-control
+{
+  background-color: #050;
+  color: #ADD594;
+  border-color: #585;
+}
+
+
