@@ -47,6 +47,127 @@ http://www.earthli.com/software/webcore
   $form->process_plain ();
   $form->load_with_defaults ();
 
+
+  $Page->add_script_file('{scripts}webcore_calendar.js');
+
+require_once('webcore/forms/form.php');
+require_once('webcore/forms/form_renderer.php');
+
+class SAMPLE_FORM extends FORM
+{
+  function __construct($context)
+  {
+    parent::__construct ($context);
+
+    $field = new INTEGER_FIELD ();
+    $field->id = 'radio';
+    $field->caption = 'Radio';
+    $this->add_field ($field);
+
+    $field = new TEXT_FIELD ();
+    $field->id = 'name';
+    $field->caption = 'Name';
+    $field->required = true;
+    $this->add_field ($field);
+    $this->set_value('name', 'Filler text');
+
+    $field = new MUNGER_TEXT_FIELD ();
+    $field->id = 'description';
+    $field->caption = 'Description';
+    $this->add_field ($field);
+    $this->set_value('description', 'Filler text that demonstrates which font is being used in longer, wrapping text.');
+
+    $field = new DATE_TIME_FIELD();
+    $field->id = 'date';
+    $field->caption = 'Date';
+    $this->add_field ($field);
+    $this->set_value('date', new DATE_TIME());
+
+    $field = new BOOLEAN_FIELD ();
+    $field->id = 'bool1';
+    $field->set_value(1);
+    $field->caption = 'Option 1';
+    $this->add_field ($field);
+
+    $field = new BOOLEAN_FIELD ();
+    $field->id = 'bool2';
+    $field->caption = 'Option 2';
+    $this->add_field ($field);
+
+    $field = new ENUMERATED_FIELD();
+    $field->id = 'select';
+    $field->caption = 'Select';
+    $field->add_value (0);
+    $field->add_value (1);
+    $field->add_value (2);
+    $field->add_value (3);
+    $field->required = true;
+    $this->add_field ($field);
+  }
+
+  /**
+   * Draw the controls for the form.
+   * @param FORM_RENDERER $renderer
+   * @access private
+   */
+  protected function _draw_controls($renderer)
+  {
+    $renderer->default_control_height = '75px';
+    $renderer->set_width('400px');
+
+    $renderer->start();
+    $props = $renderer->make_list_properties ();
+    $props->add_item('bool1', 1);
+    $props->add_item('bool2', 1);
+    $props->items_per_row = 4;
+    $renderer->draw_check_boxes_row('Options', $props);
+    $renderer->start_row('Text');
+    $text_props = new FORM_TEXT_CONTROL_OPTIONS();
+    $text_props->width = '10em';
+    echo $renderer->date_as_html('date');
+    echo ' ';
+    echo $renderer->text_line_as_html('name', $text_props);
+    $renderer->finish_row();
+    $renderer->draw_text_box_row('description', null);
+
+    $renderer->start_row('Block');
+    $renderer->start_block(true);
+
+    $props = $renderer->make_list_properties ();
+    $props->show_descriptions = true;
+    $props->width = '30em';
+    $props->height = '2em';
+    $props->add_item ('Option One', 0, 'Description for option one.');
+    $props->add_item ('Option Two', 1, 'Description for option two.');
+    $props->items_per_row = 2;
+    $renderer->draw_radio_group_row('select', $props);
+
+    $field = $this->field_at('select');
+    $props->width = '8em';
+
+    $renderer->start_row('Menus');
+    echo $renderer->drop_down_as_html('select', $props);
+    echo ' ';
+    $field->required = true;
+    echo $renderer->drop_down_as_html('select', $props);
+    $renderer->finish_row();
+
+    $renderer->start_row('Lists');
+    $field->required = false;
+    echo $renderer->list_box_as_html('select', $props);
+    echo ' ';
+    $field->required = true;
+    echo $renderer->list_box_as_html('select', $props);
+    $renderer->finish_row();
+
+    $renderer->finish_block();
+    $renderer->finish_row();
+    $renderer->draw_submit_button_row();
+
+    $renderer->finish();
+  }
+}
+
   $Page->start_display ();
 ?>
 <div class="main-box">
@@ -178,123 +299,6 @@ http://www.earthli.com/software/webcore
   <h3>Form elements (level 3 heading)</h3>
   <div class="form-content">
     <?php
-    require_once('webcore/forms/form.php');
-    require_once('webcore/forms/form_renderer.php');
-
-    class SAMPLE_FORM extends FORM
-    {
-      function __construct($context)
-      {
-        parent::__construct ($context);
-
-        $field = new INTEGER_FIELD ();
-        $field->id = 'radio';
-        $field->caption = 'Radio';
-        $this->add_field ($field);
-
-        $field = new TEXT_FIELD ();
-        $field->id = 'name';
-        $field->caption = 'Name';
-        $field->required = true;
-        $this->add_field ($field);
-        $this->set_value('name', 'Filler text');
-
-        $field = new MUNGER_TEXT_FIELD ();
-        $field->id = 'description';
-        $field->caption = 'Description';
-        $this->add_field ($field);
-        $this->set_value('description', 'Filler text that demonstrates which font is being used in longer, wrapping text.');
-
-        $field = new DATE_TIME_FIELD();
-        $field->id = 'date';
-        $field->caption = 'Date';
-        $this->add_field ($field);
-        $this->set_value('date', new DATE_TIME());
-
-        $field = new BOOLEAN_FIELD ();
-        $field->id = 'bool1';
-        $field->set_value(1);
-        $field->caption = 'Option 1';
-        $this->add_field ($field);
-
-        $field = new BOOLEAN_FIELD ();
-        $field->id = 'bool2';
-        $field->caption = 'Option 2';
-        $this->add_field ($field);
-
-        $field = new ENUMERATED_FIELD();
-        $field->id = 'select';
-        $field->caption = 'Select';
-        $field->add_value (0);
-        $field->add_value (1);
-        $field->add_value (2);
-        $field->add_value (3);
-        $field->required = true;
-        $this->add_field ($field);
-      }
-
-      /**
-       * Draw the controls for the form.
-       * @param FORM_RENDERER $renderer
-       * @access private
-       */
-      protected function _draw_controls($renderer)
-      {
-        $renderer->default_control_height = '75px';
-        $renderer->set_width('400px');
-
-        $renderer->start();
-        $props = $renderer->make_list_properties ();
-        $props->add_item('bool1', 1);
-        $props->add_item('bool2', 1);
-        $props->items_per_row = 4;
-        $renderer->draw_check_boxes_row('Options', $props);
-        $renderer->start_row('Text');
-        $text_props = new FORM_TEXT_CONTROL_OPTIONS();
-        $text_props->width = '10em';
-        echo $renderer->date_as_html('date');
-        echo ' ';
-        echo $renderer->text_line_as_html('name', $text_props);
-        $renderer->finish_row();
-        $renderer->draw_text_box_row('description', null);
-
-        $renderer->start_row('Block');
-        $renderer->start_block(true);
-
-        $props = $renderer->make_list_properties ();
-        $props->show_descriptions = true;
-        $props->width = '30em';
-        $props->height = '2em';
-        $props->add_item ('Option One', 0, 'Description for option one.');
-        $props->add_item ('Option Two', 1, 'Description for option two.');
-        $props->items_per_row = 2;
-        $renderer->draw_radio_group_row('select', $props);
-
-        $field = $this->field_at('select');
-        $props->width = '8em';
-
-        $renderer->start_row('Menus');
-        echo $renderer->drop_down_as_html('select', $props);
-        echo ' ';
-        $field->required = true;
-        echo $renderer->drop_down_as_html('select', $props);
-        $renderer->finish_row();
-
-        $renderer->start_row('Lists');
-        $field->required = false;
-        echo $renderer->list_box_as_html('select', $props);
-        echo ' ';
-        $field->required = true;
-        echo $renderer->list_box_as_html('select', $props);
-        $renderer->finish_row();
-
-        $renderer->finish_block();
-        $renderer->finish_row();
-        $renderer->draw_submit_button_row();
-
-        $renderer->finish();
-      }
-    }
 
     $form = new SAMPLE_FORM($Page);
     $form_renderer = new FORM_RENDERER($form);
