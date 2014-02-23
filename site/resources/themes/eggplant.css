@@ -1,0 +1,183 @@
+/****************************************************************************
+
+Copyright (c) 2002-2014 Marco Von Ballmoos
+
+This file is part of earthli WebCore.
+
+earthli WebCore is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+earthli WebCore is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with earthli WebCore; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
+For more information about the earthli WebCore, visit:
+
+http://www.earthli.com/software/webcore
+
+****************************************************************************/
+body {
+  background-color: #553355;
+  color: #eeeecc;
+}
+a:link,
+a:visited {
+  color: #ffff99;
+}
+a:hover,
+a:active {
+  color: #ff9999;
+}
+h1 {
+  color: #eeeecc;
+}
+h2 {
+  color: #bb99bb;
+  border-color: #bb99bb;
+}
+h3 {
+  color: #997799;
+}
+.banner-title {
+  color: #bb99bb;
+}
+.chart-title,
+.preview-title {
+  color: #bb99bb;
+}
+.nav-box,
+.top-box,
+.footer,
+.horizontal-separator,
+.vertical-separator,
+.left-sidebar,
+.right-sidebar,
+.object-in-list,
+.info-box-top,
+.info-box-bottom,
+.cell-selected,
+.cell-highlight,
+.description-box {
+  border-color: #998877;
+}
+table.columns > tbody > tr > td,
+table.columns > tbody > tr > th,
+.quote-block,
+.preview,
+.chart,
+pre > code,
+.form-basic-block,
+.abstract,
+.cell-non-empty,
+.pullquote {
+  border-color: #998877;
+}
+.object-navigator .links {
+  column-rule-color: #998877;
+  -webkit-column-rule-color: #998877;
+  -moz-column-rule-color: #998877;
+}
+.info-box-top,
+.info-box-bottom,
+.subdued {
+  color: #998877;
+}
+.info-box-top a:link,
+.info-box-bottom a:link,
+.subdued a:link,
+.info-box-top a:visited,
+.info-box-bottom a:visited,
+.subdued a:visited {
+  color: #ffff66;
+}
+.info-box-top a:hover,
+.info-box-bottom a:hover,
+.subdued a:hover,
+.info-box-top a:active,
+.info-box-bottom a:active,
+.subdued a:active {
+  color: #ff9999;
+}
+.cell-highlight {
+  background-color: #442244;
+}
+.cell-selected {
+  background-color: #4b254b;
+}
+.caution,
+.warning,
+.error {
+  color: #776655;
+}
+.caution a:link,
+.caution a:visited,
+.warning a:link,
+.warning a:visited,
+.error a:link,
+.error a:visited {
+  color: #6666cc;
+}
+.graph-foreground {
+  background-color: #bb99bb;
+}
+.highlight {
+  color: #88cc88;
+}
+.selected {
+  color: #d17b9c;
+}
+.quote,
+.quote-inline,
+.quote-block {
+  color: #ccbbaa;
+}
+.button {
+  background-color: #4b254b;
+  border-color: #998877;
+  color: #dddddd;
+}
+a.button:link,
+a.button:visited {
+  color: #dddddd;
+}
+.button.selected {
+  background-color: #664466;
+  border-color: #998877;
+  color: #eeeecc;
+}
+.button.disabled {
+  background-color: #523152;
+  border-color: #7e6f5f;
+  color: #ccbbaa;
+}
+.button:hover:not(.disabled):not(.selected) {
+  background-color: #664466;
+}
+ul.menu {
+  background-color: #4b254b;
+  border-color: #998877;
+}
+ul.menu .menu-group-title {
+  background-color: #442244;
+  border-color: #998877;
+}
+.menu-item:hover {
+  background-color: #664466;
+  border-color: #442244;
+}
+.menu-item-description {
+  color: #eeeecc;
+}
+.text-control,
+.menu-control {
+  background-color: #4b254b;
+  color: #eeeecc;
+  border-color: #998877;
+}

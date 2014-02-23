@@ -1,0 +1,183 @@
+/****************************************************************************
+
+Copyright (c) 2002 Marco Von Ballmoos
+
+This file is part of earthli WebCore.
+
+earthli WebCore is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+earthli WebCore is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with earthli WebCore; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
+For more information about the earthli WebCore, visit:
+
+http://www.earthli.com/software/webcore
+
+****************************************************************************/
+body {
+  background-color: #294a83;
+  color: #cccccc;
+}
+a:link,
+a:visited {
+  color: #4c9cd9;
+}
+a:hover,
+a:active {
+  color: #99cc66;
+}
+h1 {
+  color: #cccccc;
+}
+h2 {
+  color: #79a251;
+  border-color: #79a251;
+}
+h3 {
+  color: #acc891;
+}
+.banner-title {
+  color: #79a251;
+}
+.chart-title,
+.preview-title {
+  color: #79a251;
+}
+.nav-box,
+.top-box,
+.footer,
+.horizontal-separator,
+.vertical-separator,
+.left-sidebar,
+.right-sidebar,
+.object-in-list,
+.info-box-top,
+.info-box-bottom,
+.cell-selected,
+.cell-highlight,
+.description-box {
+  border-color: #7697ce;
+}
+table.columns > tbody > tr > td,
+table.columns > tbody > tr > th,
+.quote-block,
+.preview,
+.chart,
+pre > code,
+.form-basic-block,
+.abstract,
+.cell-non-empty,
+.pullquote {
+  border-color: #3a62a4;
+}
+.object-navigator .links {
+  column-rule-color: #7697ce;
+  -webkit-column-rule-color: #7697ce;
+  -moz-column-rule-color: #7697ce;
+}
+.info-box-top,
+.info-box-bottom,
+.subdued {
+  color: #999999;
+}
+.info-box-top a:link,
+.info-box-bottom a:link,
+.subdued a:link,
+.info-box-top a:visited,
+.info-box-bottom a:visited,
+.subdued a:visited {
+  color: #2676b3;
+}
+.info-box-top a:hover,
+.info-box-bottom a:hover,
+.subdued a:hover,
+.info-box-top a:active,
+.info-box-bottom a:active,
+.subdued a:active {
+  color: #99cc66;
+}
+.cell-highlight {
+  background-color: #1e3660;
+}
+.cell-selected {
+  background-color: #223d6c;
+}
+.caution,
+.warning,
+.error {
+  color: #776655;
+}
+.caution a:link,
+.caution a:visited,
+.warning a:link,
+.warning a:visited,
+.error a:link,
+.error a:visited {
+  color: #6666cc;
+}
+.graph-foreground {
+  background-color: #79a251;
+}
+.highlight {
+  color: #ffff00;
+}
+.selected {
+  color: #99cc66;
+}
+.quote,
+.quote-inline,
+.quote-block {
+  color: #b3b3b3;
+}
+.button {
+  background-color: #223d6c;
+  border-color: #7697ce;
+  color: #b3b3b3;
+}
+a.button:link,
+a.button:visited {
+  color: #b3b3b3;
+}
+.button.selected {
+  background-color: #2d518f;
+  border-color: #7697ce;
+  color: #cccccc;
+}
+.button.disabled {
+  background-color: #254377;
+  border-color: #507ac1;
+  color: #b3b3b3;
+}
+.button:hover:not(.disabled):not(.selected) {
+  background-color: #2d518f;
+}
+ul.menu {
+  background-color: #223d6c;
+  border-color: #7697ce;
+}
+ul.menu .menu-group-title {
+  background-color: #1e3660;
+  border-color: #7697ce;
+}
+.menu-item:hover {
+  background-color: #2d518f;
+  border-color: #1e3660;
+}
+.menu-item-description {
+  color: #cccccc;
+}
+.text-control,
+.menu-control {
+  background-color: #223d6c;
+  color: #cccccc;
+  border-color: #7697ce;
+}
