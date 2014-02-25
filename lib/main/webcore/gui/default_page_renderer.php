@@ -407,38 +407,34 @@ class DEFAULT_PAGE_RENDERER extends WEBCORE_PAGE_RENDERER
       if (! $opt_ignore_warning->value ())
       {
         $res = $this->page->resources ();
-  ?>
-    <div class="caution page-message notes">
-      <?php echo $res->resolve_icon_as_html ('{icons}/indicators/warning', '', '32px', 'float: left'); ?>
-      <div style="margin-left: 48px">
-      <?php
+
+        echo $this->page->get_begin_message('info', 'div');
         if ($options->browser_url)
         {
           $browser_url = $res->resolve_file ($options->browser_url);
       ?>
-        <div>Your browser may have trouble rendering this page. See <a href="<?php echo $browser_url; ?>">supported browsers</a> for more information.</div>
+        <p>Your browser may have trouble rendering this page. See <a href="<?php echo $browser_url; ?>">supported browsers</a> for more information.</p>
       <?php
         }
         else
         {
       ?>
-        <div>Your browser may have trouble rendering this page. To avoid any issues, please use
+        <p>Your browser may have trouble rendering this page. To avoid any issues, please use
           <a href="http://opera.com">Opera</a>
           <a href="http://google.com/chrome">Chrome</a>,
           <a href="http://getfirefox.com">FireFox</a>,
-          <a href="http://apple.com/safari">Safari</a> or any other modern, standards-compliant browser.</div>
+          <a href="http://apple.com/safari">Safari</a> or any other modern, standards-compliant browser.</p>
       <?php
         }
 
         $url = $opt_ignore_warning->setter_url_as_html (! $opt_ignore_warning->value ());
       ?>
-      <div style="margin-top: 1em">
+      <p>
         <input id="ignore_browser_warning" type="checkbox" value="<?php echo $opt_ignore_warning->value (); ?>" onclick="window.location='<?php echo $url; ?>'" style="vertical-align: middle">
         <label for="ignore_browser_warning">Do not show this message again.</label>
-      </div>
-    </div>
-  </div>
-  <?php
+      </p>
+      <?php
+        echo $this->page->get_end_message('div');
       }
     }
   }
