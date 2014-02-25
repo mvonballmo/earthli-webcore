@@ -718,8 +718,7 @@ table.basic > tbody > tr > td.empty-label
 
 .sixteen.no-label
 {
-  padding-left: 0;
-  min-width: 18px;
+  padding-left: 18px;
 }
 
 .twenty.no-label
@@ -729,7 +728,7 @@ table.basic > tbody > tr > td.empty-label
 
 .thirty-two.no-label
 {
-  padding-left: 26px;
+  padding-left: 42px;
 }
 
 /* @end */
@@ -1154,11 +1153,29 @@ a.button:link, a.button:visited
   font-weight: normal;
 }
 
-.caution, .warning, .error
+.caution,
+.warning,
+.error
 {
   padding: 5px;
   margin-left: -5px;
+  margin-top: 15px;
+  margin-bottom: 15px;
   border: 1px dotted #666;
+}
+
+.caution p:first-child,
+.warning  p:first-child,
+.error  p:first-child
+{
+  margin-top: 0;
+}
+
+.caution p:last-child,
+.warning  p:last-child,
+.error  p:last-child
+{
+  margin-bottom: 0;
 }
 
 .error
@@ -1216,7 +1233,7 @@ span.error, span.caution, span.warning
 	margin-bottom: 0;
 }
 
-.pullquote 
+.pullquote
 {
   border: 1px solid silver;
   padding: 15px;
@@ -1292,7 +1309,9 @@ p div:first-child img:first-child
 
 /* Make sure that paragraphs inside block elements don't use margins.*/
 
-blockquote p:first-child, .side-bar-body p:first-child, .chart-body p:first-child 
+blockquote p:first-child,
+.side-bar-body p:first-child,
+.chart-body p:first-child
 {
   margin: 0;
 }
@@ -1409,14 +1428,7 @@ hr
   font-style: normal
 }
 
-.page-message 
-{
-  padding: 15px;
-  margin-top: 15px;
-  margin-bottom: 15px;
-}
-
-.excerpt 
+.excerpt
 {
   font-size: 150%
 }
