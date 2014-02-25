@@ -113,7 +113,7 @@ class SAMPLE_FORM extends FORM
   protected function _draw_controls($renderer)
   {
     $renderer->default_control_height = '75px';
-    $renderer->set_width('400px');
+    $renderer->set_width('30em');
 
     $renderer->start();
     $props = $renderer->make_list_properties ();
@@ -135,8 +135,6 @@ class SAMPLE_FORM extends FORM
 
     $props = $renderer->make_list_properties ();
     $props->show_descriptions = true;
-    $props->width = '30em';
-    $props->height = '2em';
     $props->add_item ('Option One', 0, 'Description for option one.');
     $props->add_item ('Option Two', 1, 'Description for option two.');
     $props->items_per_row = 2;
@@ -241,12 +239,14 @@ class SAMPLE_FORM extends FORM
     <a href="#" class="button">L</a><?php
     $menu->renderer->set_size(Menu_size_compact);
     $menu->renderer->content_mode |= Menu_show_as_buttons | Menu_show_icon;
+    $menu->renderer->options &= ~Menu_options_show_trigger_title;
     $menu->display();
     $menu->renderer->set_size(Menu_size_full);
     $menu->renderer->content_mode = Menu_show_all_as_buttons;
     $menu->display();
     $menu->renderer->set_size(Menu_size_compact);
     $menu->renderer->content_mode |= Menu_show_as_buttons | Menu_show_icon;
+    $menu->renderer->options &= ~Menu_options_show_trigger_title;
     $menu->display();
     ?><a href="#" class="button">R</a>
   </div>

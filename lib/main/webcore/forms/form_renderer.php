@@ -1852,15 +1852,6 @@ class FORM_RENDERER extends CONTROLS_RENDERER
         $counter = 0;
       }
 
-      if (isset ($props->width))
-      {
-        $width = $props->width;
-      }
-      else
-      {
-        $width = $this->width;
-      }
-
       $num_items = sizeof ($props->items);
 
       $needs_descriptions = $props->show_descriptions;
@@ -1965,6 +1956,15 @@ class FORM_RENDERER extends CONTROLS_RENDERER
             }
           }
         }
+      }
+
+      if (isset ($props->width))
+      {
+        $width = $props->width;
+      }
+      else
+      {
+        $width = null;
       }
 
       if ($needs_descriptions)
