@@ -24,33 +24,33 @@ http://www.earthli.com/software/webcore
 
 ****************************************************************************/
 
-@lighter_body_color: lighten(@body_color, 5%);
-@body_color: #FFFF88;
-@medium_body_color: darken(@body_color, 5%);
-@darker_body_color: darken(@body_color, 10%);
-@darkest_body_color: darken(@body_color, 20%);
+@import "theme-base";
 
-@light_border: #666;
-@medium_border: darken(@light_border, 10%);
-@dark_border: darken(@light_border, 20%);
+@control_hover_background_color: lighten(@body_color, 5%);
+@body_color: #FFFF88;
+@disabled_control_background_color: darken(@body_color, 5%);
+@control_background_color: darken(@body_color, 10%);
+@accent_background_color: darken(@body_color, 20%);
+
+@bright_border: #666;
+@medium_border: darken(@bright_border, 10%);
+@stark_border: darken(@bright_border, 20%);
 
 @text_color: #333;
-@darker_text_color: lighten(@text_color, 10%);
-@darkest_text_color: lighten(@text_color, 20%);
+@dimmer_text_color: lighten(@text_color, 10%);
+@dimmest_text_color: lighten(@text_color, 20%);
 
 @title_color: #0044AA;
-@lighter_title_color: lighten(@title_color, 20%);
+@h3_color: lighten(@title_color, 20%);
 
 @link_color: #06C;
-@darker_link_color: darken(@link_color, 10%);
+@dimmer_link_color: darken(@link_color, 10%);
 @link_hover_color: #F60;
 
-@button_text_color: @darker_text_color;
+@control_text_color: @dimmer_text_color;
 
 @message_box_text_color: #765;
 @message_box_link_color: #66C;
 
-@highlight_color: #F00;
-@selected_color: #99CC66;
-
-@import "theme-base";
+@highlighted_text_color: #F00;
+@selected_text_color: #99CC66;

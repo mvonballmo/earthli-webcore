@@ -133,6 +133,9 @@ pre > code,
 .selected {
   color: #a1c9ff;
 }
+code {
+  color: #cccccc;
+}
 .quote,
 .quote-inline,
 .quote-block {
@@ -150,7 +153,7 @@ a.button:visited {
 .button.selected {
   background-color: #5e667b;
   border-color: #999999;
-  color: #cccccc;
+  color: #a1c9ff;
 }
 .button.disabled {
   background-color: #484f57;
@@ -159,6 +162,7 @@ a.button:visited {
 }
 .button:hover:not(.disabled):not(.selected) {
   background-color: #5e667b;
+  border-color: #999999;
 }
 ul.menu {
   background-color: #434c56;
@@ -170,14 +174,14 @@ ul.menu .menu-group-title {
 }
 .menu-item:hover {
   background-color: #5e667b;
-  border-color: #394149;
+  border-color: #999999;
 }
 .menu-item-description {
-  color: #cccccc;
+  color: #dddddd;
 }
 .text-control,
 .menu-control {
   background-color: #434c56;
-  color: #cccccc;
+  color: #dddddd;
   border-color: #999999;
 }

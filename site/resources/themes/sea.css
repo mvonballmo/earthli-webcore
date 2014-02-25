@@ -25,7 +25,7 @@ http://www.earthli.com/software/webcore
 ****************************************************************************/
 body {
   background-color: #294a83;
-  color: #cccccc;
+  color: #dddddd;
 }
 a:link,
 a:visited {
@@ -36,21 +36,21 @@ a:active {
   color: #99cc66;
 }
 h1 {
-  color: #cccccc;
+  color: #99cc66;
 }
 h2 {
-  color: #79a251;
-  border-color: #79a251;
+  color: #99cc66;
+  border-color: #99cc66;
 }
 h3 {
-  color: #acc891;
+  color: #cce6b3;
 }
 .banner-title {
-  color: #79a251;
+  color: #99cc66;
 }
 .chart-title,
 .preview-title {
-  color: #79a251;
+  color: #99cc66;
 }
 .nav-box,
 .top-box,
@@ -87,7 +87,7 @@ pre > code,
 .info-box-top,
 .info-box-bottom,
 .subdued {
-  color: #999999;
+  color: #ffffff;
 }
 .info-box-top a:link,
 .info-box-bottom a:link,
@@ -125,7 +125,7 @@ pre > code,
   color: #6666cc;
 }
 .graph-foreground {
-  background-color: #79a251;
+  background-color: #99cc66;
 }
 .highlight {
   color: #ffff00;
@@ -133,32 +133,36 @@ pre > code,
 .selected {
   color: #99cc66;
 }
+code {
+  color: #dddddd;
+}
 .quote,
 .quote-inline,
 .quote-block {
-  color: #b3b3b3;
+  color: #f7f7f7;
 }
 .button {
   background-color: #223d6c;
   border-color: #7697ce;
-  color: #b3b3b3;
+  color: #f7f7f7;
 }
 a.button:link,
 a.button:visited {
-  color: #b3b3b3;
+  color: #f7f7f7;
 }
 .button.selected {
   background-color: #2d518f;
   border-color: #7697ce;
-  color: #cccccc;
+  color: #99cc66;
 }
 .button.disabled {
   background-color: #254377;
   border-color: #507ac1;
-  color: #b3b3b3;
+  color: #f7f7f7;
 }
 .button:hover:not(.disabled):not(.selected) {
   background-color: #2d518f;
+  border-color: #7697ce;
 }
 ul.menu {
   background-color: #223d6c;
@@ -170,14 +174,14 @@ ul.menu .menu-group-title {
 }
 .menu-item:hover {
   background-color: #2d518f;
-  border-color: #1e3660;
+  border-color: #7697ce;
 }
 .menu-item-description {
-  color: #cccccc;
+  color: #f7f7f7;
 }
 .text-control,
 .menu-control {
   background-color: #223d6c;
-  color: #cccccc;
+  color: #f7f7f7;
   border-color: #7697ce;
 }

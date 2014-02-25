@@ -23,46 +23,35 @@ For more information about the earthli WebCore, visit:
 http://www.earthli.com/software/webcore
 
 ****************************************************************************/
-
-body
-{
-  background-color: black;
-  color: white;
+body {
+  background-color: #000000;
+  color: #ffffff;
 }
-
 a:link,
-a:visited
-{
+a:visited {
   color: #05aae5;
 }
-
 a:hover,
-a:active
-{
+a:active {
   color: #55cffb;
 }
-
-h1
-{
+h1 {
   color: #ffc31c;
 }
-
-h2
-{
+h2 {
   color: #79cc36;
-  border-color: #333;
+  border-color: #79cc36;
 }
-
-h3
-{
+h3 {
   color: #ffc31c;
 }
-
-.banner-title
-{
-  color: white;
+.banner-title {
+  color: #79cc36;
 }
-
+.chart-title,
+.preview-title {
+  color: #79cc36;
+}
 .nav-box,
 .top-box,
 .footer,
@@ -74,11 +63,10 @@ h3
 .info-box-top,
 .info-box-bottom,
 .cell-selected,
-.cell-highlight
-{
-  border-color: #444;
+.cell-highlight,
+.description-box {
+  border-color: #444444;
 }
-
 table.columns > tbody > tr > td,
 table.columns > tbody > tr > th,
 .quote-block,
@@ -88,132 +76,115 @@ pre > code,
 .form-basic-block,
 .abstract,
 .cell-non-empty,
-.pullquote
-{
-  border-color: #666;
+.pullquote {
+  border-color: #666666;
 }
-
-.chart-title,
-.preview-title
-{
-  color: #79cc36;
+.object-navigator .links {
+  column-rule-color: #444444;
+  -webkit-column-rule-color: #444444;
+  -moz-column-rule-color: #444444;
 }
-
 .info-box-top,
-.info-box-bottom
-{
-  /*color: default;*/
+.info-box-bottom,
+.subdued {
+  color: #b3b3b3;
 }
-
-.cell-highlight
-{
-  background-color: #444;
+.info-box-top a:link,
+.info-box-bottom a:link,
+.subdued a:link,
+.info-box-top a:visited,
+.info-box-bottom a:visited,
+.subdued a:visited {
+  color: #3cc8fb;
 }
-
-.cell-selected
-{
-  background-color: #222;
+.info-box-top a:hover,
+.info-box-bottom a:hover,
+.subdued a:hover,
+.info-box-top a:active,
+.info-box-bottom a:active,
+.subdued a:active {
+  color: #55cffb;
 }
-
+.cell-highlight {
+  background-color: #1f1f1f;
+}
+.cell-selected {
+  background-color: #141414;
+}
 .caution,
 .warning,
-.error
-{
-  color: #333;
+.error {
+  color: #776655;
 }
-
-.caution a:link, .caution a:visited,
-.warning a:link, .warning a:visited,
-.error a:link, .error a:visited
-{
-  /*color: default;*/
+.caution a:link,
+.caution a:visited,
+.warning a:link,
+.warning a:visited,
+.error a:link,
+.error a:visited {
+  color: #6666cc;
 }
-
-.graph-foreground
-{
-  background-color: black;
+.graph-foreground {
+  background-color: #79cc36;
 }
-
-.graph-background
-{
-  background-color: #06C;
+.highlight {
+  color: #c8abff;
 }
-
-.highlight
-{
-  color: #dfc7ff;
-}
-
-.selected
-{
+.selected {
   color: #79cc36;
 }
-
+code {
+  color: #7d9cd1;
+}
 .quote,
 .quote-inline,
-.quote-block
-{
-  color: silver;
+.quote-block {
+  color: #cccccc;
 }
-
-.button
-{
-  background-color: #222;
-  border-color: #444;
-  color: #999;
+.button {
+  background-color: #141414;
+  border-color: #444444;
+  color: #cccccc;
 }
-
 a.button:link,
-a.button:visited
-{
-  color: #AAA;
+a.button:visited {
+  color: #cccccc;
 }
-
-.button.selected
-{
-  color: white;
+.button.selected {
+  background-color: #262626;
+  border-color: #444444;
+  color: #79cc36;
 }
-
-.button.disabled
-{
-  background-color: #111;
-  border-color: #222;
-  color: silver;
+.button.disabled {
+  background-color: #0f0f0f;
+  border-color: #5e5e5e;
+  color: #cccccc;
 }
-
-.button:hover:not(.disabled):not(.selected),
-.menu-item
-{
-  background-color: #444;
+.button:hover:not(.disabled):not(.selected) {
+  background-color: #262626;
+  border-color: #444444;
 }
-
-.menu
-{
-  background: #111;
-  border-color: #666;
+ul.menu {
+  background-color: #141414;
+  border-color: #444444;
 }
-
-ul.menu .menu-group-title
-{
-  background-color: #444;
-  border-color: #222;
+ul.menu .menu-group-title {
+  background-color: #1f1f1f;
+  border-color: #444444;
 }
-
-.menu-item:hover
-{
-  background-color: #333;
-  border-color: #666;
+.menu-item:hover {
+  background-color: #262626;
+  border-color: #444444;
 }
-
-.menu-item-description
-{
-  color: white;
+.menu-item-description {
+  color: #cccccc;
 }
-
 .text-control,
-.menu-control
-{
-  background-color: black;
-  color: #05aae5;
-  border-color: #666;
+.menu-control {
+  background-color: #141414;
+  color: #cccccc;
+  border-color: #444444;
+}
+.banner-title {
+  color: #ffffff;
 }

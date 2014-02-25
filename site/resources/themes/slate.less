@@ -24,33 +24,33 @@ http://www.earthli.com/software/webcore
 
 ****************************************************************************/
 
-@lighter_body_color: #444;
-@body_color: #333;
-@medium_body_color: darken(@body_color, 1%);
-@darker_body_color: #666;
-@darkest_body_color: #555;
+@import "theme-base";
 
-@light_border: #888;
-@medium_border: darken(@light_border, 10%);
-@dark_border: #444;
+@control_hover_background_color: #444;
+@body_color: #333;
+@disabled_control_background_color: darken(@body_color, 1%);
+@control_background_color: #666;
+@accent_background_color: #555;
+
+@bright_border: #888;
+@medium_border: darken(@bright_border, 10%);
+@stark_border: #444;
 
 @text_color: silver;
-@darker_text_color: #AAA;
-@darkest_text_color: #888;
+@dimmer_text_color: #AAA;
+@dimmest_text_color: #888;
 
 @title_color: #FC6;
-@lighter_title_color: #ffc31c;
+@h3_color: #ffc31c;
 
 @link_color: #CC6;
-@darker_link_color: darken(@link_color, 10%);
+@dimmer_link_color: darken(@link_color, 10%);
 @link_hover_color: #FF9;
 
-@button_text_color: #DDD;
+@control_text_color: #DDD;
 
 @message_box_text_color: #765;
 @message_box_link_color: #66C;
 
-@highlight_color: #53a131;
-@selected_color: #FC6;
-
-@import "theme-base";
+@highlighted_text_color: #53a131;
+@selected_text_color: #FC6;

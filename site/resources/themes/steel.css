@@ -36,7 +36,7 @@ a:active {
   color: #ffff00;
 }
 h1 {
-  color: #222222;
+  color: #2d5080;
 }
 h2 {
   color: #2d5080;
@@ -133,6 +133,9 @@ pre > code,
 .selected {
   color: #3f6578;
 }
+code {
+  color: #222222;
+}
 .quote,
 .quote-inline,
 .quote-block {
@@ -150,7 +153,7 @@ a.button:visited {
 .button.selected {
   background-color: #adc4e3;
   border-color: #b2c5e0;
-  color: #222222;
+  color: #3f6578;
 }
 .button.disabled {
   background-color: #8da3c3;
@@ -159,6 +162,7 @@ a.button:visited {
 }
 .button:hover:not(.disabled):not(.selected) {
   background-color: #adc4e3;
+  border-color: #b2c5e0;
 }
 ul.menu {
   background-color: #8a9eba;
@@ -170,14 +174,14 @@ ul.menu .menu-group-title {
 }
 .menu-item:hover {
   background-color: #adc4e3;
-  border-color: #aabeda;
+  border-color: #b2c5e0;
 }
 .menu-item-description {
-  color: #222222;
+  color: #444444;
 }
 .text-control,
 .menu-control {
   background-color: #8a9eba;
-  color: #222222;
+  color: #444444;
   border-color: #b2c5e0;
 }

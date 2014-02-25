@@ -1,3 +1,43 @@
+@body_color: white;
+@accent_background_color: darken(@body_color, 9%);
+
+@text_color: black;
+@dimmer_text_color: lighten(@text_color, 10%);
+@dimmest_text_color: lighten(@text_color, 20%);
+
+@link_color: blue;
+@dimmer_link_color: darken(@link_color, 15%);
+@link_hover_color: red;
+
+@title_color: @text_color;
+@h1_color: @title_color;
+@h2_color: @title_color;
+@h3_color: @title_color;
+
+@bright_border: darken(@body_color, 40%);
+@medium_border: darken(@bright_border, 10%);
+@stark_border: darken(@bright_border, 20%);
+
+@code_text_color: @text_color;
+@highlighted_text_color: green;
+@selected_text_color: @text_color;
+
+@control_text_color: @dimmer_text_color;
+@control_background_color: darken(@body_color, 6%);
+@control_border_color: @bright_border;
+
+@selected_control_text_color: @selected_text_color;
+
+@disabled_control_text_color: @dimmer_text_color;
+@disabled_control_background_color: darken(@body_color, 3%);
+@disabled_control_border_color: @medium_border;
+
+@control_hover_background_color: lighten(@body_color, 3%);
+@control_hover_border_color: @bright_border;
+
+@message_box_text_color: #765;
+@message_box_link_color: #66C;
+
 body
 {
   background-color: @body_color;
@@ -18,18 +58,18 @@ a:active
 
 h1
 {
-  color: @text_color;
+  color: @h1_color;
 }
 
 h2
 {
-  color: @title_color;
-  border-color: @title_color;
+  color: @h2_color;
+  border-color: @h2_color;
 }
 
 h3
 {
-  color: @lighter_title_color;
+  color: @h3_color;
 }
 
 .banner-title
@@ -57,7 +97,7 @@ h3
 .cell-highlight,
 .description-box
 {
-  border-color: @light_border;
+  border-color: @bright_border;
 }
 
 table.columns > tbody > tr > td,
@@ -71,21 +111,21 @@ pre > code,
 .cell-non-empty,
 .pullquote
 {
-  border-color: @dark_border;
+  border-color: @stark_border;
 }
 
 .object-navigator .links
 {
-  column-rule-color: @light_border;
-  -webkit-column-rule-color: @light_border;
-  -moz-column-rule-color: @light_border;
+  column-rule-color: @bright_border;
+  -webkit-column-rule-color: @bright_border;
+  -moz-column-rule-color: @bright_border;
 }
 
 .info-box-top,
 .info-box-bottom,
 .subdued
 {
-  color: @darkest_text_color;
+  color: @dimmest_text_color;
 }
 
 .info-box-top,
@@ -94,24 +134,23 @@ pre > code,
 {
   a:link, a:visited
   {
-    color: @darker_link_color;
+    color: @dimmer_link_color;
   }
 
   a:hover, a:active
   {
     color: @link_hover_color;
-
   }
 }
 
 .cell-highlight
 {
-  background-color: @darkest_body_color;
+  background-color: @accent_background_color;
 }
 
 .cell-selected
 {
-  background-color: @darker_body_color;
+  background-color: @control_background_color;
 }
 
 .caution,
@@ -139,80 +178,86 @@ pre > code,
 
 .highlight
 {
-  color: @highlight_color;
+  color: @highlighted_text_color;
 }
 
 .selected
 {
-  color: @selected_color;
+  color: @selected_text_color;
+}
+
+code
+{
+  color: @code_text_color;
 }
 
 .quote,
 .quote-inline,
 .quote-block
 {
-  color: @darker_text_color;
+  color: @dimmer_text_color;
 }
 
 .button
 {
-  background-color: @darker_body_color;
-  border-color: @light_border;
-  color: @button_text_color;
+  background-color: @control_background_color;
+  border-color: @control_border_color;
+  color: @control_text_color;
 }
 
 a.button:link,
 a.button:visited
 {
-  color: @button_text_color;
+  color: @control_text_color;
 }
 
 .button.selected
 {
-  background-color: @lighter_body_color;
-  border-color: @light_border;
-  color: @text_color;
+  background-color: @control_hover_background_color;
+  border-color: @control_border_color;
+  color: @selected_control_text_color;
 }
 
 .button.disabled
 {
-  background-color: @medium_body_color;
-  border-color: @medium_border;
-  color: @darker_text_color;
+  background-color: @disabled_control_background_color;
+  border-color: @disabled_control_border_color;
+  color: @disabled_control_text_color;
 }
 
 .button:hover:not(.disabled):not(.selected)
 {
-  background-color: @lighter_body_color;
+  background-color: @control_hover_background_color;
+  border-color: @control_hover_border_color;
 }
 
 ul.menu
 {
-  background-color: @darker_body_color;
-  border-color: @light_border;
+  background-color: @control_background_color;
+  border-color: @control_border_color;
 }
 
 ul.menu .menu-group-title
 {
-  background-color: @darkest_body_color;
-  border-color: @light_border;
+  background-color: @accent_background_color;
+  border-color: @control_border_color;
 }
 
 .menu-item:hover
 {
-  background-color: @lighter_body_color;
-  border-color: @darkest_body_color;
+  background-color: @control_hover_background_color;
+  border-color: @control_hover_border_color;
 }
 
 .menu-item-description
 {
-  color: @text_color;
+  color: @control_text_color;
 }
 
 .text-control,
 .menu-control
 {
-  background-color: @darker_body_color;
-  color: @text_color;
-  border-color: @light_border;
+  background-color: @control_background_color;
+  color: @control_text_color;
+  border-color: @control_border_color;
 }

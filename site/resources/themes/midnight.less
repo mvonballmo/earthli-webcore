@@ -1,6 +1,6 @@
 /****************************************************************************
 
-Copyright (c) 2002 Marco Von Ballmoos
+Copyright (c) 2002-2014 Marco Von Ballmoos
 
 This file is part of earthli WebCore.
 
@@ -25,21 +25,27 @@ http://www.earthli.com/software/webcore
 ****************************************************************************/
 
 @import "theme-base";
+@import "theme-base-dark";
 
-@body_color: #882829;
+@body_color: black;
 
-@bright_border: #a66f6f;
-@stark_border: #6e0000;
+@bright_border: #444;
+@stark_border: #666;
 
-@text_color: #EEE;
-@dimmer_text_color: #CBA;
-@dimmest_text_color: #987;
+@text_color: white;
 
-@title_color: #eb6049;
-@h3_color: #eea61c;
+@title_color: #79cc36;
+@h1_color: #ffc31c;
+@h3_color: #ffc31c;
 
-@link_color: #c2c274;
-@link_hover_color: #F99;
+@link_color: #05aae5;
+@link_hover_color: #55cffb;
 
-@highlighted_text_color: #77cc67;
-@selected_text_color: #F99;
+@code_text_color: #7d9cd1;
+@highlighted_text_color: #c8abff;
+@selected_text_color: @title_color;
+
+.banner-title
+{
+  color: @text_color;
+}

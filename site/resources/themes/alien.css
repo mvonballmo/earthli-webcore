@@ -23,38 +23,38 @@ For more information about the earthli WebCore, visit:
 http://www.earthli.com/software/webcore
 
 ****************************************************************************/
-
-body
-{
-  background-color: black;
-  color: white;
+body {
+  background-color: #000000;
+  color: #ffffff;
 }
-
-a:link
-{
-  color: #BBEE88;
+a:link,
+a:visited {
+  color: #90be5a;
 }
-
-a:visited
-{
-  color: #88BB55;
-}
-
 a:hover,
-a:active
-{
-  color: #FFFF00;
+a:active {
+  color: #ffff00;
 }
-
-.banner,
-.footer
-{
-  background-color: #222;
+h1 {
+  color: #ff8d46;
 }
-
+h2 {
+  color: #ff8d46;
+  border-color: #ff8d46;
+}
+h3 {
+  color: #ffb217;
+}
+.banner-title {
+  color: #ff8d46;
+}
+.chart-title,
+.preview-title {
+  color: #ff8d46;
+}
 .nav-box,
-.footer,
 .top-box,
+.footer,
 .horizontal-separator,
 .vertical-separator,
 .left-sidebar,
@@ -64,6 +64,9 @@ a:active
 .info-box-bottom,
 .cell-selected,
 .cell-highlight,
+.description-box {
+  border-color: #555555;
+}
 table.columns > tbody > tr > td,
 table.columns > tbody > tr > th,
 .quote-block,
@@ -72,143 +75,120 @@ table.columns > tbody > tr > th,
 pre > code,
 .form-basic-block,
 .abstract,
-.cell-non-empty
-{
-  border-color: #555;
+.cell-non-empty,
+.pullquote {
+  border-color: #888888;
 }
-
-.chart-title,
-.preview-title
-{
-  color: #f93;
+.object-navigator .links {
+  column-rule-color: #555555;
+  -webkit-column-rule-color: #555555;
+  -moz-column-rule-color: #555555;
 }
-
-.cell-highlight
-{
-  background-color: #222;
+.info-box-top,
+.info-box-bottom,
+.subdued {
+  color: #b3b3b3;
 }
-
-.cell-selected
-{
-  background-color: #111;
+.info-box-top a:link,
+.info-box-bottom a:link,
+.subdued a:link,
+.info-box-top a:visited,
+.info-box-bottom a:visited,
+.subdued a:visited {
+  color: #b5d491;
 }
-
-code
-{
-  color: #a06dc2;
+.info-box-top a:hover,
+.info-box-bottom a:hover,
+.subdued a:hover,
+.info-box-top a:active,
+.info-box-bottom a:active,
+.subdued a:active {
+  color: #ffff00;
 }
-
-h2
-{
-  border-bottom: 1px dotted #999;
+.cell-highlight {
+  background-color: #1f1f1f;
 }
-
-h3
-{
-  color: #F93;
+.cell-selected {
+  background-color: #141414;
 }
-
-h4
-{
-  color: silver;
-}
-
 .caution,
 .warning,
-.error
-{
-  color: #333;
+.error {
+  color: #776655;
 }
-
-.graph-foreground
-{
-  background-color: #693;
+.caution a:link,
+.caution a:visited,
+.warning a:link,
+.warning a:visited,
+.error a:link,
+.error a:visited {
+  color: #6666cc;
 }
-
-.graph-background
-{
-  background-color: #039;
+.graph-foreground {
+  background-color: #ff8d46;
 }
-
-.highlight
-{
+.highlight {
   color: #6ca7ff;
 }
-
+.selected {
+  color: #fffb8b;
+}
+code {
+  color: #a98ebd;
+}
 .quote,
 .quote-inline,
-.quote-block
-{
-  color: silver;
+.quote-block {
+  color: #cccccc;
 }
-
-.quote-block
-{
-  background-color: #333;
+.button {
+  background-color: #141414;
+  border-color: #555555;
+  color: #cccccc;
 }
-
-.button
-{
-  background-color: #333;
-  border-color: #555;
-  color: white;
-}
-
 a.button:link,
-a.button:visited
-{
-  color: #AAA;
+a.button:visited {
+  color: #cccccc;
 }
-
-.selected,
-.button.selected
-{
-  color: #FF0;
+.button.selected {
+  background-color: #262626;
+  border-color: #555555;
+  color: #fffb8b;
 }
-
-.button.disabled
-{
+.button.disabled {
+  background-color: #0f0f0f;
+  border-color: #6f6f6f;
+  color: #cccccc;
+}
+.button:hover:not(.disabled):not(.selected) {
+  background-color: #262626;
+  border-color: #555555;
+}
+ul.menu {
+  background-color: #141414;
+  border-color: #555555;
+}
+ul.menu .menu-group-title {
+  background-color: #1f1f1f;
+  border-color: #555555;
+}
+.menu-item:hover {
+  background-color: #262626;
+  border-color: #555555;
+}
+.menu-item-description {
+  color: #cccccc;
+}
+.text-control,
+.menu-control {
+  background-color: #141414;
+  color: #cccccc;
+  border-color: #555555;
+}
+.banner,
+.footer {
   background-color: #222;
-  border-color: #333;
 }
-
-.button:hover:not(.disabled):not(.selected)
-{
-  background-color: #222;
-}
-
-.menu-item
-{
-  background-color: #222;
-}
-
-.menu
-{
+.quote-block {
   background-color: #333;
-  border-color: #f93;
-}
-
-ul.menu .menu-group-title
-{
-  background-color: #222;
-  border-color: #444;
-}
-
-
-.menu-item:hover
-{
-  background-color: #222;
-  border-color: #ff9933;
-}
-
-.menu-item-description
-{
-  color: white;
-}
-
-.menu-control, .text-control
-{
-  background-color: black;
-  color: #BE8;
-  border-color: #555;
 }
