@@ -23,21 +23,176 @@ For more information about the earthli WebCore, visit:
 http://www.earthli.com/software/webcore
 
 ****************************************************************************/
-
-a:link
-{
-  color: #0000FF;
-  text-decoration: underline;
+body {
+  background-color: #ffffff;
+  color: #333333;
 }
-
-a:visited
-{
-  color: #800080;
-  text-decoration: underline;
+a:link,
+a:visited {
+  color: #0000ff;
 }
-
 a:hover,
-a:active
-{
-  color: #FF0000;
+a:active {
+  color: #ff0000;
+}
+h1 {
+  color: #333333;
+}
+h2 {
+  color: #333333;
+  border-color: #333333;
+}
+h3 {
+  color: #333333;
+}
+h4 {
+  color: #333333;
+}
+.banner-title {
+  color: #333333;
+}
+.chart-title,
+.preview-title {
+  color: #333333;
+}
+.nav-box,
+.top-box,
+.footer,
+.horizontal-separator,
+.vertical-separator,
+.left-sidebar,
+.right-sidebar,
+.object-in-list,
+.info-box-top,
+.info-box-bottom,
+.cell-selected,
+.cell-highlight,
+.description-box {
+  border-color: #b3b3b3;
+}
+table.columns > tbody > tr > td,
+table.columns > tbody > tr > th,
+.quote-block,
+.preview,
+.chart,
+pre > code,
+.form-basic-block,
+.abstract,
+.cell-non-empty,
+.pullquote {
+  border-color: #7f7f7f;
+}
+.object-navigator .links {
+  column-rule-color: #b3b3b3;
+  -webkit-column-rule-color: #b3b3b3;
+  -moz-column-rule-color: #b3b3b3;
+}
+.info-box-top,
+.info-box-bottom,
+.subdued {
+  color: #666666;
+}
+.info-box-top a:link,
+.info-box-bottom a:link,
+.subdued a:link,
+.info-box-top a:visited,
+.info-box-bottom a:visited,
+.subdued a:visited {
+  color: #0000b3;
+}
+.info-box-top a:hover,
+.info-box-bottom a:hover,
+.subdued a:hover,
+.info-box-top a:active,
+.info-box-bottom a:active,
+.subdued a:active {
+  color: #ff0000;
+}
+.cell-highlight {
+  background-color: #e8e8e8;
+}
+.cell-selected {
+  background-color: #f0f0f0;
+}
+.caution,
+.warning,
+.error {
+  color: #776655;
+}
+.caution a:link,
+.caution a:visited,
+.warning a:link,
+.warning a:visited,
+.error a:link,
+.error a:visited {
+  color: #6666cc;
+}
+.graph-foreground {
+  background-color: #333333;
+}
+.highlight {
+  color: #008000;
+}
+.selected {
+  color: #333333;
+}
+code {
+  color: #333333;
+}
+.quote,
+.quote-inline,
+.quote-block {
+  color: #4d4d4d;
+}
+.button {
+  background-color: #f0f0f0;
+  border-color: #b3b3b3;
+  color: #4d4d4d;
+}
+a.button:link,
+a.button:visited {
+  color: #4d4d4d;
+}
+.button.selected {
+  background-color: #ffffff;
+  border-color: #b3b3b3;
+  color: #333333;
+}
+.button.disabled {
+  background-color: #f7f7f7;
+  border-color: #999999;
+  color: #4d4d4d;
+}
+.button:hover:not(.disabled):not(.selected) {
+  background-color: #ffffff;
+  border-color: #b3b3b3;
+}
+ul.menu {
+  background-color: #f0f0f0;
+  border-color: #b3b3b3;
+}
+ul.menu .menu-group-title {
+  background-color: #e8e8e8;
+  border-color: #b3b3b3;
+}
+.menu-item:hover {
+  background-color: #ffffff;
+  border-color: #b3b3b3;
+}
+.menu-item-description {
+  color: #4d4d4d;
+}
+.text-control,
+.menu-control {
+  background-color: #f0f0f0;
+  color: #4d4d4d;
+  border-color: #b3b3b3;
+}
+a:link {
+  color: blue;
+  text-decoration: underline;
+}
+a:visited {
+  color: purple;
+  text-decoration: underline;
 }

@@ -1,42 +1,4 @@
-@body_color: white;
-@accent_background_color: darken(@body_color, 9%);
-
-@text_color: black;
-@dimmer_text_color: lighten(@text_color, 10%);
-@dimmest_text_color: lighten(@text_color, 20%);
-
-@link_color: blue;
-@dimmer_link_color: darken(@link_color, 15%);
-@link_hover_color: red;
-
-@title_color: @text_color;
-@h1_color: @title_color;
-@h2_color: @title_color;
-@h3_color: @title_color;
-
-@bright_border: darken(@body_color, 40%);
-@medium_border: darken(@bright_border, 10%);
-@stark_border: darken(@bright_border, 20%);
-
-@code_text_color: @text_color;
-@highlighted_text_color: green;
-@selected_text_color: @text_color;
-
-@control_text_color: @dimmer_text_color;
-@control_background_color: darken(@body_color, 6%);
-@control_border_color: @bright_border;
-
-@selected_control_text_color: @selected_text_color;
-
-@disabled_control_text_color: @dimmer_text_color;
-@disabled_control_background_color: darken(@body_color, 3%);
-@disabled_control_border_color: @medium_border;
-
-@control_hover_background_color: lighten(@body_color, 3%);
-@control_hover_border_color: @bright_border;
-
-@message_box_text_color: #765;
-@message_box_link_color: #66C;
+@import "../styles/core/core-values";
 
 body
 {
@@ -72,9 +34,14 @@ h3
   color: @h3_color;
 }
 
+h4
+{
+  color: @h4_color;
+}
+
 .banner-title
 {
-  color: @title_color;
+  color: @banner_title_color;
 }
 
 .chart-title,
