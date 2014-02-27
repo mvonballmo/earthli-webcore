@@ -41,21 +41,18 @@ table th {
   padding: 0;
   text-align: left;
 }
-table td {
-  text-align: left;
-}
 table th {
   font-weight: bold;
   border-bottom: 1px solid #b3b3b3;
 }
-table td p:first-child,
-table td pre:first-child,
-table td ul:first-child {
+table td > p:first-child,
+table td > pre:first-child,
+table td > ul:first-child {
   margin-top: 0;
 }
-table td p:last-child,
-table td pre:last-child,
-table td ul:last-child {
+table td > p:last-child,
+table td > pre:last-child,
+table td > ul:last-child {
   margin-bottom: 0;
 }
 table.basic {
@@ -66,10 +63,13 @@ table.basic > tbody > tr > th {
   padding: 2px 15px 2px 2px;
   line-height: 130%;
 }
-table.columns > tbody > tr > td,
-table.columns > tbody > tr > th {
-  padding: 2px 15px;
-  border-right: 1px solid #b3b3b3;
+table.basic > tbody > tr > td:first-child,
+table.basic > tbody > tr > th:first-child {
+  padding-left: 0;
+}
+table.basic > tbody > tr > td:last-child,
+table.basic > tbody > tr > th:last-child {
+  padding-right: 0;
 }
 table.basic > tbody > tr:first-child > td,
 table.basic > tbody > tr:first-child > th {
@@ -79,13 +79,10 @@ table.basic > tbody > tr:last-child > td,
 table.basic > tbody > tr:last-child > th {
   padding-bottom: 0;
 }
-table.basic > tbody > tr > td:first-child,
-table.basic > tbody > tr > th:first-child {
-  padding-left: 0;
-}
-table.basic > tbody > tr > td:last-child,
-table.basic > tbody > tr > th:last-child {
-  padding-right: 0;
+table.columns > tbody > tr > td,
+table.columns > tbody > tr > th {
+  padding: 2px 15px;
+  border-right: 1px solid #b3b3b3;
 }
 table.columns > tbody > tr > td:last-child,
 table.columns > tbody > tr > th:last-child {
