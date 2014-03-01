@@ -1,0 +1,13 @@
+@body_color: gray;
+
+.engraved_border(@depth: 1px, @highlight_color: lighten(@body_color, 30%), @shadow_color: darken(@body_color, 10%))
+{
+  border: @depth solid;
+  border-color: @shadow_color @highlight_color @highlight_color @shadow_color;
+}
+
+.extruded_border(@depth: 1px, @highlight_color: lighten(@body_color, 30%), @shadow_color: darken(@body_color, 10%))
+{
+  border: @depth solid;
+  border-color: @highlight_color @shadow_color @shadow_color @highlight_color;
+}

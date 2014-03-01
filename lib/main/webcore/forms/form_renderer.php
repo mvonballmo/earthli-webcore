@@ -519,11 +519,11 @@ class FORM_RENDERER extends CONTROLS_RENDERER
     if (!empty($style) && sizeof ($style) > 0)
     {
       $style = implode ('; ', $style);
-      echo '<table class="basic form-' . $this->_form->CSS_class . '" style="' . $style . '">' . "\n";
+      echo '<div class="form-' . $this->_form->CSS_class . '"><table class="basic" style="' . $style . '">' . "\n";
     }
     else
     {
-      echo '<table>' . "\n";
+      echo '<div class="form-' . $this->_form->CSS_class . '"><table>' . "\n";
     }
 
     if ($this->_form->num_errors (Form_general_error_id))
@@ -550,7 +550,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
 <?php
     }
 
-    echo "</table>\n";
+    echo "</table></div>\n";
   }
 
   /**

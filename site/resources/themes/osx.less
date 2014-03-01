@@ -26,9 +26,65 @@ http://www.earthli.com/software/webcore
 
 @import "theme-base";
 
-@background_color: #f8ffb6;
+@background_color: #F8F8F8;
 @text_color: #222;
-@title_color: #db7721;
-@link_color: #2a5fb0;
-@highlighted_text_color: #F00;
-@selected_text_color: #99CC66;
+@title_color: @text_color;
+@link_color: #3093dc;
+@link_hover_color: #06C;
+@highlighted_text_color: #0A0;
+@selected_text_color: #366dc8;
+@edit_control_background_color: white;
+
+body
+{
+  background-image: url(osx/dialog_light.gif);
+  background-repeat: repeat;
+}
+
+.cell-selected
+{
+  background-color: transparent;
+  background-image: url(osx/5_percent_black.png);
+  background-repeat: repeat;
+}
+
+.cell-highlight
+{
+  background-color: transparent;
+  background-image: url(osx/10_percent_black.png);
+  background-repeat: repeat;
+}
+
+.graph-foreground
+{
+  background-image: url(osx/graph_full.png);
+  background-repeat: repeat;
+}
+
+.chart,
+.preview
+{
+  background-image: url(osx/5_percent_black.png);
+  background-repeat: repeat;
+  .extruded_border(1px, #FFF);
+}
+
+.form-basic,
+.form-basic-block
+{
+  .engraved_border(1px, #FFF, #AAA);
+  background-image: url(osx/5_percent_black.png);
+  background-repeat: repeat;
+  padding: @small_spacing;
+}
+
+.text-control,
+.menu-control
+{
+  .engraved_border(1px, #FFF);
+}
+
+ul.menu
+{
+  opacity: .85;
+}

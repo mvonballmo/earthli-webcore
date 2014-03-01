@@ -25,15 +25,15 @@ http://www.earthli.com/software/webcore
 ****************************************************************************/
 body {
   background-color: #9aaeca;
-  color: #222222;
+  color: #000000;
 }
 a:link,
 a:visited {
-  color: #ffffdd;
+  color: #d8e7ea;
 }
 a:hover,
 a:active {
-  color: #ffff00;
+  color: #ffffff;
 }
 h1 {
   color: #2d5080;
@@ -43,17 +43,41 @@ h2 {
   border-color: #2d5080;
 }
 h3 {
-  color: #3864a1;
+  color: #2d3480;
 }
 h4 {
-  color: #2d5080;
-}
-.banner-title {
-  color: #2d5080;
+  color: #2d3480;
 }
 .chart-title,
 .preview-title {
   color: #2d5080;
+}
+.banner {
+  background-color: transparent;
+  color: #000000;
+}
+.banner a:link,
+.banner a:visited {
+  color: #d8e7ea;
+}
+.banner a:hover,
+.banner a:active {
+  color: #ffffff;
+}
+.banner-title {
+  color: #2d5080;
+}
+.footer {
+  background-color: transparent;
+  color: #000000;
+}
+.footer a:link,
+.footer a:visited {
+  color: #d8e7ea;
+}
+.footer a:hover,
+.footer a:active {
+  color: #ffffff;
 }
 .nav-box,
 .top-box,
@@ -67,30 +91,30 @@ h4 {
 .info-box-bottom,
 .cell-selected,
 .cell-highlight,
-.description-box {
-  border-color: #b2c5e0;
-}
+.cell-non-empty,
+.description-box,
 table.columns > tbody > tr > td,
 table.columns > tbody > tr > th,
+.abstract {
+  border-color: #6c7a8d;
+}
 .quote-block,
 .preview,
 .chart,
 pre > code,
 .form-basic-block,
-.abstract,
-.cell-non-empty,
 .pullquote {
-  border-color: #1a2e4a;
+  border-color: #89a1c1;
 }
 .object-navigator .links {
-  column-rule-color: #b2c5e0;
-  -webkit-column-rule-color: #b2c5e0;
-  -moz-column-rule-color: #b2c5e0;
+  column-rule-color: #6c7a8d;
+  -webkit-column-rule-color: #6c7a8d;
+  -moz-column-rule-color: #6c7a8d;
 }
 .info-box-top,
 .info-box-bottom,
 .subdued {
-  color: #2c3a6a;
+  color: #55606f;
 }
 .info-box-top a:link,
 .info-box-bottom a:link,
@@ -98,7 +122,7 @@ pre > code,
 .info-box-top a:visited,
 .info-box-bottom a:visited,
 .subdued a:visited {
-  color: #4a5e9a;
+  color: #bfd0dd;
 }
 .info-box-top a:hover,
 .info-box-bottom a:hover,
@@ -106,13 +130,13 @@ pre > code,
 .info-box-top a:active,
 .info-box-bottom a:active,
 .subdued a:active {
-  color: #ffff00;
+  color: #ffffff;
 }
 .cell-highlight {
-  background-color: #aabeda;
+  background-color: #7c96ba;
 }
 .cell-selected {
-  background-color: #8a9eba;
+  background-color: #869ebf;
 }
 .caution,
 .warning,
@@ -131,60 +155,60 @@ pre > code,
   background-color: #2d5080;
 }
 .highlight {
-  color: #944e9d;
+  color: #137a26;
 }
 .selected {
-  color: #3f6578;
+  color: #944e9d;
 }
 code {
-  color: #222222;
+  color: #000000;
 }
 .quote,
 .quote-inline,
 .quote-block {
-  color: #1a2e4a;
+  color: #363d47;
 }
 .button {
-  background-color: #8a9eba;
-  border-color: #b2c5e0;
-  color: #444444;
+  background-color: #869ebf;
+  border-color: #6c7a8d;
+  color: #272c33;
 }
 a.button:link,
 a.button:visited {
-  color: #444444;
+  color: #272c33;
 }
 .button.selected {
-  background-color: #adc4e3;
-  border-color: #b2c5e0;
-  color: #3f6578;
+  background-color: #a4b6cf;
+  border-color: #6c7a8d;
+  color: #944e9d;
 }
 .button.disabled {
-  background-color: #8da3c3;
-  border-color: #8eaad1;
-  color: #1a2e4a;
+  background-color: #89a1c1;
+  border-color: #566170;
+  color: #55606f;
 }
 .button:hover:not(.disabled):not(.selected) {
-  background-color: #adc4e3;
-  border-color: #b2c5e0;
+  background-color: #a4b6cf;
+  border-color: #6c7a8d;
 }
 ul.menu {
-  background-color: #8a9eba;
-  border-color: #b2c5e0;
+  background-color: #869ebf;
+  border-color: #6c7a8d;
 }
 ul.menu .menu-group-title {
-  background-color: #aabeda;
-  border-color: #b2c5e0;
+  background-color: #7c96ba;
+  border-color: #6c7a8d;
 }
-.menu-item:hover {
-  background-color: #adc4e3;
-  border-color: #b2c5e0;
+ul.menu .menu-item:hover {
+  background-color: #a4b6cf;
+  border-color: #6c7a8d;
 }
-.menu-item-description {
-  color: #444444;
+ul.menu .menu-item-description {
+  color: #272c33;
 }
 .text-control,
 .menu-control {
-  background-color: #8a9eba;
-  color: #444444;
-  border-color: #b2c5e0;
+  background-color: #869ebf;
+  color: #272c33;
+  border-color: #6c7a8d;
 }

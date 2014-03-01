@@ -46,14 +46,38 @@ h3 {
   color: #347a3c;
 }
 h4 {
-  color: #2c6833;
-}
-.banner-title {
-  color: #2c6833;
+  color: #347a3c;
 }
 .chart-title,
 .preview-title {
   color: #2c6833;
+}
+.banner {
+  background-color: transparent;
+  color: #222222;
+}
+.banner a:link,
+.banner a:visited {
+  color: #c3e28a;
+}
+.banner a:hover,
+.banner a:active {
+  color: #ffea62;
+}
+.banner-title {
+  color: #2c6833;
+}
+.footer {
+  background-color: transparent;
+  color: #222222;
+}
+.footer a:link,
+.footer a:visited {
+  color: #c3e28a;
+}
+.footer a:hover,
+.footer a:active {
+  color: #ffea62;
 }
 .nav-box,
 .top-box,
@@ -67,18 +91,18 @@ h4 {
 .info-box-bottom,
 .cell-selected,
 .cell-highlight,
-.description-box {
-  border-color: #558855;
-}
+.cell-non-empty,
+.description-box,
 table.columns > tbody > tr > td,
 table.columns > tbody > tr > th,
+.abstract {
+  border-color: #558855;
+}
 .quote-block,
 .preview,
 .chart,
 pre > code,
 .form-basic-block,
-.abstract,
-.cell-non-empty,
 .pullquote {
   border-color: #456f45;
 }
@@ -90,7 +114,7 @@ pre > code,
 .info-box-top,
 .info-box-bottom,
 .subdued {
-  color: #555555;
+  color: #557052;
 }
 .info-box-top a:link,
 .info-box-bottom a:link,
@@ -98,7 +122,7 @@ pre > code,
 .info-box-top a:visited,
 .info-box-bottom a:visited,
 .subdued a:visited {
-  color: #a4d34d;
+  color: #a8ce83;
 }
 .info-box-top a:hover,
 .info-box-bottom a:hover,
@@ -142,16 +166,16 @@ code {
 .quote,
 .quote-inline,
 .quote-block {
-  color: #3c3c3c;
+  color: #435440;
 }
 .button {
   background-color: #6da566;
   border-color: #558855;
-  color: #3c3c3c;
+  color: #394638;
 }
 a.button:link,
 a.button:visited {
-  color: #3c3c3c;
+  color: #394638;
 }
 .button.selected {
   background-color: #88b683;
@@ -159,9 +183,9 @@ a.button:visited {
   color: #535e8a;
 }
 .button.disabled {
-  background-color: #76aa6f;
+  background-color: #456f45;
   border-color: #416941;
-  color: #3c3c3c;
+  color: #557052;
 }
 .button:hover:not(.disabled):not(.selected) {
   background-color: #88b683;
@@ -175,16 +199,16 @@ ul.menu .menu-group-title {
   background-color: #649e5d;
   border-color: #558855;
 }
-.menu-item:hover {
+ul.menu .menu-item:hover {
   background-color: #88b683;
   border-color: #558855;
 }
-.menu-item-description {
-  color: #3c3c3c;
+ul.menu .menu-item-description {
+  color: #394638;
 }
 .text-control,
 .menu-control {
   background-color: #6da566;
-  color: #3c3c3c;
+  color: #394638;
   border-color: #558855;
 }

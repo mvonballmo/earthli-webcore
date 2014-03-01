@@ -23,157 +23,233 @@ For more information about the earthli WebCore, visit:
 http://www.earthli.com/software/webcore
 
 ****************************************************************************/
-
-a:link, a:visited
-{
-  color: #0066CC;
+body {
+  background-color: #f8f8f8;
+  color: #222222;
 }
-
-a:active, a:hover
-{
-  color: #33AA66;
+a:link,
+a:visited {
+  color: #3093dc;
 }
-
-body
-{
-  background: #F8F8F8 url(osx/dialog_light.gif) repeat;
+a:hover,
+a:active {
+  color: #0066cc;
 }
-
-code
-{
-  color: #008000;
+h1 {
+  color: #222222;
 }
-
-h2
-{
-  color: #666666;
-  border-bottom-color: #666666;
+h2 {
+  color: #222222;
+  border-color: #222222;
 }
-
-.banner-title
-{
-  color: #999999;
+h3 {
+  color: #222222;
 }
-
-.cell-non-empty
-{
-  border-color: #AAAAAA;
+h4 {
+  color: #222222;
 }
-
-.cell-selected
-{
-  background: url(osx/10_percent_black.png) repeat;
-  border-color: #888888;
+.chart-title,
+.preview-title {
+  color: #222222;
 }
-
-.cell-highlight
-{
-  background: url(osx/5_percent_black.png) repeat;
-  border-color: #888888;
+.banner {
+  background-color: transparent;
+  color: #222222;
 }
-
-.frame
-{
-  border-color: #999999;
-  border-width: 1px;
+.banner a:link,
+.banner a:visited {
+  color: #3093dc;
 }
-
-.graph-background
-{
-  border-top: 0px;
-  border-bottom: 0px;
-  border-color: #AAAAAA;
-  background: url(osx/graph_empty.png) repeat;
+.banner a:hover,
+.banner a:active {
+  color: #0066cc;
 }
-
-.graph-foreground
-{
-  background: url(osx/graph_full.png) repeat;
+.banner-title {
+  color: #222222;
 }
-
-.highlight
-{
-  color: #00AA00;
+.footer {
+  background-color: transparent;
+  color: #222222;
 }
-
-.required
-{
-  color: #333333;
+.footer a:link,
+.footer a:visited {
+  color: #3093dc;
 }
-
-.menu-bar-top, .menu-bar-bottom
-{
-  border-color: #999999;
+.footer a:hover,
+.footer a:active {
+  color: #0066cc;
 }
-
-.quote, .quote-inline, .quote-block
-{
-  color: #666666;
+.nav-box,
+.top-box,
+.footer,
+.horizontal-separator,
+.vertical-separator,
+.left-sidebar,
+.right-sidebar,
+.object-in-list,
+.info-box-top,
+.info-box-bottom,
+.cell-selected,
+.cell-highlight,
+.cell-non-empty,
+.description-box,
+table.columns > tbody > tr > td,
+table.columns > tbody > tr > th,
+.abstract {
+  border-color: #b8b8b8;
 }
-
-.nav-box, .chart, .preview
-{
-  background: url(osx/5_percent_black.png) repeat;
-  border: 1px solid #999999;
+.quote-block,
+.preview,
+.chart,
+pre > code,
+.form-basic-block,
+.pullquote {
+  border-color: #ebebeb;
 }
-
-.form-basic-block
-{
-  border: 1px solid #333333;
-  border-bottom-color: #CCCCCC;
-  border-right-color: #CCCCCC;
-  background: url(osx/5_percent_black.png) repeat;
-  padding: 1em;
+.object-navigator .links {
+  column-rule-color: #b8b8b8;
+  -webkit-column-rule-color: #b8b8b8;
+  -moz-column-rule-color: #b8b8b8;
 }
-
-.chart-title
-{
-  color: white;
-  background: url(osx/5_percent_black.png) repeat;
-  margin-left: -5px;
-  padding-left: 5px;
+.info-box-top,
+.info-box-bottom,
+.subdued {
+  color: #989898;
 }
-
-.preview-title
-{
-  border-width: 0;
+.info-box-top a:link,
+.info-box-bottom a:link,
+.subdued a:link,
+.info-box-top a:visited,
+.info-box-bottom a:visited,
+.subdued a:visited {
+  color: #80bbe7;
 }
-
-.object-in-list
-{
-  border-color: #888888;
+.info-box-top a:hover,
+.info-box-bottom a:hover,
+.subdued a:hover,
+.info-box-top a:active,
+.info-box-bottom a:active,
+.subdued a:active {
+  color: #0066cc;
 }
-
-ul.menu
-{
+.cell-highlight {
+  background-color: #e1e1e1;
+}
+.cell-selected {
+  background-color: #e9e9e9;
+}
+.caution,
+.warning,
+.error {
+  color: #776655;
+}
+.caution a:link,
+.caution a:visited,
+.warning a:link,
+.warning a:visited,
+.error a:link,
+.error a:visited {
+  color: #6666cc;
+}
+.graph-foreground {
+  background-color: #222222;
+}
+.highlight {
+  color: #00aa00;
+}
+.selected {
+  color: #366dc8;
+}
+code {
+  color: #222222;
+}
+.quote,
+.quote-inline,
+.quote-block {
+  color: #6d6d6d;
+}
+.button {
+  background-color: #e9e9e9;
+  border-color: #b8b8b8;
+  color: #585858;
+}
+a.button:link,
+a.button:visited {
+  color: #585858;
+}
+.button.selected {
+  background-color: #ffffff;
+  border-color: #b8b8b8;
+  color: #366dc8;
+}
+.button.disabled {
+  background-color: #ebebeb;
+  border-color: #9e9e9e;
+  color: #989898;
+}
+.button:hover:not(.disabled):not(.selected) {
+  background-color: #ffffff;
+  border-color: #b8b8b8;
+}
+ul.menu {
+  background-color: #e9e9e9;
+  border-color: #b8b8b8;
+}
+ul.menu .menu-group-title {
+  background-color: #e1e1e1;
+  border-color: #b8b8b8;
+}
+ul.menu .menu-item:hover {
+  background-color: #ffffff;
+  border-color: #b8b8b8;
+}
+ul.menu .menu-item-description {
+  color: #585858;
+}
+.text-control,
+.menu-control {
+  background-color: #ffffff;
+  color: #585858;
+  border-color: #b8b8b8;
+}
+body {
+  background-image: url(osx/dialog_light.gif);
+  background-repeat: repeat;
+}
+.cell-selected {
+  background-color: transparent;
+  background-image: url(osx/5_percent_black.png);
+  background-repeat: repeat;
+}
+.cell-highlight {
+  background-color: transparent;
+  background-image: url(osx/10_percent_black.png);
+  background-repeat: repeat;
+}
+.graph-foreground {
+  background-image: url(osx/graph_full.png);
+  background-repeat: repeat;
+}
+.chart,
+.preview {
+  background-image: url(osx/5_percent_black.png);
+  background-repeat: repeat;
   border: 1px solid;
-  border-color: #CCCCCC #666666 #666666 #CCCCCC;
-  background: transparent url(osx/80_percent_white.png);
+  border-color: #ffffff #676767 #676767 #ffffff;
 }
-
-ul.menu
-{
-  border: 1px solid #AAAAAA;
+.form-basic,
+.form-basic-block {
+  border: 1px solid;
+  border-color: #aaaaaa #ffffff #ffffff #aaaaaa;
+  background-image: url(osx/5_percent_black.png);
+  background-repeat: repeat;
+  padding: 5px;
 }
-
-.menu-item:hover
-{
-  background: url(osx/5_percent_black.png);
-  border-color: #AAAAAA;
+.text-control,
+.menu-control {
+  border: 1px solid;
+  border-color: #676767 #ffffff #ffffff #676767;
 }
-
-.text-control
-{
-  border-color: #888888;
-}
-
-.text-control.required
-{
-  border-color: #888888;
-}
-
-.text-control:focus
-{
-  background-color: #FFFFEE;
-  border-color: #0066CC;
+ul.menu {
+  opacity: .85;
 }

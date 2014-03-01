@@ -32,7 +32,7 @@ body
 {
   margin: 0;
   padding: 0;
-  background-color: @body_color;
+  background-color: @background_color;
   color: @text_color;
 }
 
@@ -453,7 +453,7 @@ pre > code
   padding-left: @standard_spacing;
   margin-top: @standard_spacing;
   border-top: @hairline_border_width solid @bright_border;
-  padding-top: @standard_spacing;
+  padding-top: @small_spacing;
 }
 
 .footer-data
@@ -512,10 +512,7 @@ pre > code
 		Defines areas outside of the main content -- perhaps with additional information
 		or directing to other areas.
 
-		side-bar
-			side-bar-body
-
-		Used for blocks within a side-bar or box.
+		Used for blocks within a box.
 
 		chart
 		  chart-title
@@ -532,24 +529,8 @@ pre > code
   padding-right: 0;
 }
 
-.side-bar
-{
-  border: @hairline_border_width solid #000000;
-  border-spacing: 0
-}
-
-.side-bar + .side-bar
-{
-	margin-top: @standard_spacing;
-}
-
-.side-bar-body 
-{
-  padding: @standard_spacing;
-  empty-cells: show
-}
-
-.chart, .preview
+.chart,
+.preview
 {
   border-left: @thin_border_width solid @bright_border;
   padding-left: @standard_spacing;
@@ -589,7 +570,7 @@ pre > code
 .info-box-bottom,
 .subdued
 {
-  color: #AAA;
+  color: #dimmest_text_color;
 }
 
 .info-box-top div + div,
@@ -611,26 +592,27 @@ td.object-in-list + td.object-in-list
   line-height: normal;
   border-bottom: @hairline_border_width solid @bright_border;
   margin-bottom: @standard_spacing;
+
+  p:last-child,
+  pre:last-child,
+  ul:last-child
+  {
+    margin-bottom: @small_spacing;
+  }
 }
 
 .info-box-bottom
 {
+  line-height: normal;
   border-top: @hairline_border_width solid @bright_border;
   margin-top: @standard_spacing;
-}
 
-.info-box-bottom p:first-child,
-.info-box-bottom pre:first-child,
-.info-box-bottom ul:first-child
-{
-  margin-top: 0;
-}
-
-.info-box-top p:last-child,
-.info-box-top pre:last-child,
-.info-box-top ul:last-child
-{
-  margin-bottom: @small_spacing;
+  p:first-child,
+  pre:first-child,
+  ul:first-child
+  {
+    margin-top: @small_spacing;
+  }
 }
 
 .graph-foreground 
@@ -797,19 +779,38 @@ ul.menu
   text-align: left;
   background-color: #FFFFFF;
   border: @hairline_border_width solid @bright_border;
-}
 
-ul.menu > li
-{
-  padding: 0;
-  min-height: 18px;
-}
+  > li
+  {
+    padding: 0;
+    min-height: 18px;
 
-ul.menu .menu-group-title
-{
-  padding: .6em .5em;
-  border-bottom: @hairline_border_width dotted @bright_border;
-  cursor: default;
+    &:last-child .menu-item:hover
+    {
+      border-bottom-color: transparent;
+    }
+
+    &:first-child .menu-item:hover
+    {
+      border-top-color: transparent;
+    }
+  }
+
+  .menu-group-title
+  {
+    padding: .6em .5em;
+    border-bottom: @hairline_border_width dotted @bright_border;
+    cursor: default;
+  }
+
+  .menu-item-description
+  {
+    display: block;
+    margin: @small_spacing 0 0 0;
+    width: 200px;
+    white-space: normal;
+    line-height: @compressed_text_flow_line_height;
+  }
 }
 
 .menu-item
@@ -824,38 +825,19 @@ ul.menu .menu-group-title
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-}
 
-.menu-item.icon
-{
-  padding-left: 26px;
-  background-position: 5px 8px;
-}
+  &.icon
+  {
+    padding-left: 26px;
+    background-position: 5px 8px;
+  }
 
-.menu-item:hover
-{
-  text-decoration: none;
-  border-color: @bright_border;
-  background-color: #EEE;
-}
-
-ul.menu li:last-child .menu-item:hover
-{
-  border-bottom-color: transparent;
-}
-
-ul.menu li:first-child .menu-item:hover
-{
-  border-top-color: transparent;
-}
-
-.menu-item-description
-{
-  display: block;
-  margin: @small_spacing 0 0 0;
-  width: 200px;
-  white-space: normal;
-  line-height: @compressed_text_flow_line_height;
+  &:hover
+  {
+    text-decoration: none;
+    border-color: @bright_border;
+    background-color: #EEE;
+  }
 }
 
 /* @end */
@@ -1347,7 +1329,6 @@ p div:first-child img:first-child
 /* Make sure that paragraphs inside block elements don't use margins.*/
 
 blockquote p:first-child,
-.side-bar-body p:first-child,
 .chart-body p:first-child
 {
   margin: 0;

@@ -46,14 +46,38 @@ h3 {
   color: #997799;
 }
 h4 {
-  color: #bb99bb;
-}
-.banner-title {
-  color: #bb99bb;
+  color: #997799;
 }
 .chart-title,
 .preview-title {
   color: #bb99bb;
+}
+.banner {
+  background-color: transparent;
+  color: #eeeecc;
+}
+.banner a:link,
+.banner a:visited {
+  color: #ffff99;
+}
+.banner a:hover,
+.banner a:active {
+  color: #ff9999;
+}
+.banner-title {
+  color: #bb99bb;
+}
+.footer {
+  background-color: transparent;
+  color: #eeeecc;
+}
+.footer a:link,
+.footer a:visited {
+  color: #ffff99;
+}
+.footer a:hover,
+.footer a:active {
+  color: #ff9999;
 }
 .nav-box,
 .top-box,
@@ -67,18 +91,18 @@ h4 {
 .info-box-bottom,
 .cell-selected,
 .cell-highlight,
-.description-box {
-  border-color: #998877;
-}
+.cell-non-empty,
+.description-box,
 table.columns > tbody > tr > td,
 table.columns > tbody > tr > th,
+.abstract {
+  border-color: #998877;
+}
 .quote-block,
 .preview,
 .chart,
 pre > code,
 .form-basic-block,
-.abstract,
-.cell-non-empty,
 .pullquote {
   border-color: #998877;
 }
@@ -98,7 +122,7 @@ pre > code,
 .info-box-top a:visited,
 .info-box-bottom a:visited,
 .subdued a:visited {
-  color: #ffff4d;
+  color: #bbad7e;
 }
 .info-box-top a:hover,
 .info-box-bottom a:hover,
@@ -142,7 +166,7 @@ code {
 .quote,
 .quote-inline,
 .quote-block {
-  color: #fbfbf2;
+  color: #b8ada2;
 }
 .button {
   background-color: #422842;
@@ -159,9 +183,9 @@ a.button:visited {
   color: #d17b9c;
 }
 .button.disabled {
-  background-color: #4b2d4b;
+  background-color: #998877;
   border-color: #7e6f5f;
-  color: #fbfbf2;
+  color: #998877;
 }
 .button:hover:not(.disabled):not(.selected) {
   background-color: #5f395f;
@@ -175,11 +199,11 @@ ul.menu .menu-group-title {
   background-color: #382238;
   border-color: #998877;
 }
-.menu-item:hover {
+ul.menu .menu-item:hover {
   background-color: #5f395f;
   border-color: #998877;
 }
-.menu-item-description {
+ul.menu .menu-item-description {
   color: #eeeecc;
 }
 .text-control,

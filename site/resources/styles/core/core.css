@@ -43,7 +43,7 @@ table th {
 }
 table th {
   font-weight: bold;
-  border-bottom: 1px solid #b3b3b3;
+  border-bottom: 1px solid #c2c2c2;
 }
 table td > p:first-child,
 table td > pre:first-child,
@@ -82,7 +82,7 @@ table.basic > tbody > tr:last-child > th {
 table.columns > tbody > tr > td,
 table.columns > tbody > tr > th {
   padding: 2px 15px;
-  border-right: 1px solid #b3b3b3;
+  border-right: 1px solid #c2c2c2;
 }
 table.columns > tbody > tr > td:last-child,
 table.columns > tbody > tr > th:last-child {
@@ -117,7 +117,7 @@ h5 {
   line-height: normal;
 }
 h2 {
-  border-bottom: 1px dotted #b3b3b3;
+  border-bottom: 1px dotted #c2c2c2;
 }
 dl {
   margin: 15px 0;
@@ -164,7 +164,7 @@ kbd {
 .shell {
   font-family: monospace;
   background-color: #333;
-  border: 1px solid #b3b3b3;
+  border: 1px solid #c2c2c2;
   color: white;
   padding: 0 5px;
   display: block;
@@ -177,7 +177,7 @@ pre {
 pre > code {
   display: block;
   padding-left: 15px;
-  border-left: 6px solid #b3b3b3;
+  border-left: 6px solid #c2c2c2;
   margin: 15px 0 15px -6px;
 }
 .chart > .chart-body > pre > code {
@@ -269,10 +269,10 @@ pre > code {
   margin-left: -15px;
   padding-left: 15px;
   padding-bottom: 5px;
-  border-bottom: 1px solid #b3b3b3;
+  border-bottom: 1px solid #c2c2c2;
 }
 .top-box {
-  border-bottom: 1px solid #b3b3b3;
+  border-bottom: 1px solid #c2c2c2;
   margin-bottom: 15px;
   margin-right: -15px;
   margin-left: -15px;
@@ -302,8 +302,8 @@ pre > code {
   clear: both;
   padding-left: 15px;
   margin-top: 15px;
-  border-top: 1px solid #b3b3b3;
-  padding-top: 15px;
+  border-top: 1px solid #c2c2c2;
+  padding-top: 5px;
 }
 .footer-data {
   display: block;
@@ -343,10 +343,7 @@ pre > code {
 		Defines areas outside of the main content -- perhaps with additional information
 		or directing to other areas.
 
-		side-bar
-			side-bar-body
-
-		Used for blocks within a side-bar or box.
+		Used for blocks within a box.
 
 		chart
 		  chart-title
@@ -360,20 +357,9 @@ pre > code {
   padding-left: 15px;
   padding-right: 0;
 }
-.side-bar {
-  border: 1px solid #000000;
-  border-spacing: 0;
-}
-.side-bar + .side-bar {
-  margin-top: 15px;
-}
-.side-bar-body {
-  padding: 15px;
-  empty-cells: show;
-}
 .chart,
 .preview {
-  border-left: 3px solid #b3b3b3;
+  border-left: 3px solid #c2c2c2;
   padding-left: 15px;
   margin: 15px 0 15px -3px;
 }
@@ -394,7 +380,7 @@ pre > code {
 .info-box-top,
 .info-box-bottom,
 .subdued {
-  color: #AAA;
+  color: #dimmest_text_color;
 }
 .info-box-top div + div,
 .info-box-bottom div + div,
@@ -407,22 +393,23 @@ td.object-in-list + td.object-in-list {
 }
 .info-box-top {
   line-height: normal;
-  border-bottom: 1px solid #b3b3b3;
+  border-bottom: 1px solid #c2c2c2;
   margin-bottom: 15px;
-}
-.info-box-bottom {
-  border-top: 1px solid #b3b3b3;
-  margin-top: 15px;
-}
-.info-box-bottom p:first-child,
-.info-box-bottom pre:first-child,
-.info-box-bottom ul:first-child {
-  margin-top: 0;
 }
 .info-box-top p:last-child,
 .info-box-top pre:last-child,
 .info-box-top ul:last-child {
   margin-bottom: 5px;
+}
+.info-box-bottom {
+  line-height: normal;
+  border-top: 1px solid #c2c2c2;
+  margin-top: 15px;
+}
+.info-box-bottom p:first-child,
+.info-box-bottom pre:first-child,
+.info-box-bottom ul:first-child {
+  margin-top: 5px;
 }
 .graph-foreground {
   display: inline-block;
@@ -456,7 +443,7 @@ table.basic > tbody > tr > td.empty-label {
   margin-top: 5px;
 }
 .form-basic-block {
-  border-left: 3px solid #b3b3b3;
+  border-left: 3px solid #c2c2c2;
   padding-left: 15px;
   margin-left: -3px;
 }
@@ -533,16 +520,29 @@ ul.menu {
   white-space: nowrap;
   text-align: left;
   background-color: #FFFFFF;
-  border: 1px solid #b3b3b3;
+  border: 1px solid #c2c2c2;
 }
 ul.menu > li {
   padding: 0;
   min-height: 18px;
 }
+ul.menu > li:last-child .menu-item:hover {
+  border-bottom-color: transparent;
+}
+ul.menu > li:first-child .menu-item:hover {
+  border-top-color: transparent;
+}
 ul.menu .menu-group-title {
   padding: .6em .5em;
-  border-bottom: 1px dotted #b3b3b3;
+  border-bottom: 1px dotted #c2c2c2;
   cursor: default;
+}
+ul.menu .menu-item-description {
+  display: block;
+  margin: 5px 0 0 0;
+  width: 200px;
+  white-space: normal;
+  line-height: 130%;
 }
 .menu-item {
   padding: .6em .5em;
@@ -562,21 +562,8 @@ ul.menu .menu-group-title {
 }
 .menu-item:hover {
   text-decoration: none;
-  border-color: #b3b3b3;
+  border-color: #c2c2c2;
   background-color: #EEE;
-}
-ul.menu li:last-child .menu-item:hover {
-  border-bottom-color: transparent;
-}
-ul.menu li:first-child .menu-item:hover {
-  border-top-color: transparent;
-}
-.menu-item-description {
-  display: block;
-  margin: 5px 0 0 0;
-  width: 200px;
-  white-space: normal;
-  line-height: 130%;
 }
 /* @end */
 /* @group Buttons / Inline Menu */
@@ -615,7 +602,7 @@ ul.menu li:first-child .menu-item:hover {
 /* @group object header */
 .description-box {
   width: 25%;
-  border-right: 1px solid #b3b3b3;
+  border-right: 1px solid #c2c2c2;
   padding-right: 15px;
 }
 .description-box table:first-child {
@@ -656,7 +643,7 @@ ul.menu li:first-child .menu-item:hover {
   -moz-box-sizing: border-box;
   cursor: pointer;
   background-color: #EEE;
-  border: 1px solid #b3b3b3;
+  border: 1px solid #c2c2c2;
   text-align: center;
   vertical-align: middle;
   white-space: nowrap;
@@ -735,9 +722,9 @@ a.button:visited {
   column-width: 250px;
   -webkit-column-width: 250px;
   -moz-column-width: 250px;
-  column-rule: 1px solid #b3b3b3;
-  -webkit-column-rule: 1px solid #b3b3b3;
-  -moz-column-rule: 1px solid #b3b3b3;
+  column-rule: 1px solid #c2c2c2;
+  -webkit-column-rule: 1px solid #c2c2c2;
+  -moz-column-rule: 1px solid #c2c2c2;
   column-gap: 15px;
   -webkit-column-gap: 15px;
   -moz-column-gap: 15px;
@@ -781,7 +768,7 @@ a.button:visited {
 .cell-selected,
 .cell-highlight,
 .cell-non-empty {
-  border: 1px solid #b3b3b3;
+  border: 1px solid #c2c2c2;
 }
 .cell-empty {
   border: none;
@@ -844,7 +831,7 @@ span.warning {
 }
 .quote-block {
   padding-left: 15px;
-  border-left: 6px solid #b3b3b3;
+  border-left: 6px solid #c2c2c2;
   margin-left: -6px;
 }
 .quote-block p:first-child {
@@ -854,7 +841,7 @@ span.warning {
   margin-bottom: 0;
 }
 .pullquote {
-  border: 1px solid #b3b3b3;
+  border: 1px solid #c2c2c2;
   padding: 15px;
   font-size: 150%;
   margin: 0;
@@ -879,7 +866,7 @@ span.warning {
 }
 .abstract {
   border-width: 1px 0;
-  border-color: #b3b3b3;
+  border-color: #c2c2c2;
   border-style: solid;
   padding: 15px 0;
 }
@@ -908,7 +895,6 @@ p div:first-child img:first-child {
 }
 /* Make sure that paragraphs inside block elements don't use margins.*/
 blockquote p:first-child,
-.side-bar-body p:first-child,
 .chart-body p:first-child {
   margin: 0;
 }
@@ -954,7 +940,7 @@ blockquote p:first-child,
   width: 0.1em;
 }
 .horizontal-separator {
-  border-bottom: 1px solid #b3b3b3;
+  border-bottom: 1px solid #c2c2c2;
   empty-cells: show;
   height: 1px;
   clear: both;
@@ -963,7 +949,7 @@ blockquote p:first-child,
 hr {
   color: transparent;
   border: 0;
-  border-bottom: 1px solid #b3b3b3;
+  border-bottom: 1px solid #c2c2c2;
   empty-cells: show;
   height: .1em;
   clear: both;
@@ -991,7 +977,7 @@ hr {
   font-weight: bold;
 }
 .frame {
-  border: 1px solid #b3b3b3;
+  border: 1px solid #c2c2c2;
 }
 .minimal-commands {
   float: left;
@@ -1076,13 +1062,13 @@ hr {
 .left-sidebar {
   padding-left: 15px;
   margin-left: -15px;
-  border-right: 1px solid #b3b3b3;
+  border-right: 1px solid #c2c2c2;
   padding-right: 15px;
 }
 .right-sidebar {
   padding-right: 15px;
   margin-right: -15px;
-  border-left: 1px solid #b3b3b3;
+  border-left: 1px solid #c2c2c2;
   padding-left: 15px;
 }
 .content-column {

@@ -1,8 +1,9 @@
 @import "../styles/core/core-values";
+@import "../styles/core/core-mixins";
 
 body
 {
-  background-color: @body_color;
+  background-color: @background_color;
   color: @text_color;
 }
 
@@ -39,15 +40,60 @@ h4
   color: @h4_color;
 }
 
+.chart-title,
+.preview-title
+{
+  color: @title_color;
+}
+
+.banner
+{
+  background-color: @banner_background_color;
+  color: @banner_text_color;
+  a:link, a:visited
+  {
+    color: @banner_link_color;
+  }
+
+  a:hover, a:active
+  {
+    color: @banner_link_hover_color;
+  }
+}
+
 .banner-title
 {
   color: @banner_title_color;
 }
 
-.chart-title,
-.preview-title
+.banner-content when not (@banner_background_color = transparent)
 {
-  color: @title_color;
+  margin-right: @standard_spacing;
+}
+
+.footer
+{
+  background-color: @footer_background_color;
+  color: @footer_text_color;
+  a:link, a:visited
+  {
+    color: @footer_link_color;
+  }
+
+  a:hover, a:active
+  {
+    color: @footer_link_hover_color;
+  }
+}
+
+.footer when not (@footer_background_color = transparent)
+{
+  padding-bottom: @small_spacing;
+}
+
+.page when not (@footer_background_color = transparent)
+{
+  margin-bottom: 0;
 }
 
 .nav-box,
@@ -62,20 +108,20 @@ h4
 .info-box-bottom,
 .cell-selected,
 .cell-highlight,
-.description-box
+.cell-non-empty,
+.description-box,
+table.columns > tbody > tr > td,
+table.columns > tbody > tr > th,
+.abstract
 {
   border-color: @bright_border;
 }
 
-table.columns > tbody > tr > td,
-table.columns > tbody > tr > th,
 .quote-block,
 .preview,
 .chart,
 pre > code,
 .form-basic-block,
-.abstract,
-.cell-non-empty,
 .pullquote
 {
   border-color: @stark_border;
@@ -202,29 +248,29 @@ ul.menu
 {
   background-color: @control_background_color;
   border-color: @control_border_color;
-}
 
-ul.menu .menu-group-title
-{
-  background-color: @accent_background_color;
-  border-color: @control_border_color;
-}
+  .menu-group-title
+  {
+    background-color: @accent_background_color;
+    border-color: @control_border_color;
+  }
 
-.menu-item:hover
-{
-  background-color: @control_hover_background_color;
-  border-color: @control_hover_border_color;
-}
+  .menu-item:hover
+  {
+    background-color: @control_hover_background_color;
+    border-color: @control_hover_border_color;
+  }
 
-.menu-item-description
-{
-  color: @control_text_color;
+  .menu-item-description
+  {
+    color: @control_text_color;
+  }
 }
 
 .text-control,
 .menu-control
 {
-  background-color: @control_background_color;
-  color: @control_text_color;
+  background-color: @edit_control_background_color;
+  color: @edit_control_text_color;
   border-color: @control_border_color;
 }
