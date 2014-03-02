@@ -1,6 +1,6 @@
 /****************************************************************************
 
-Copyright (c) 2002 Marco Von Ballmoos
+Copyright (c) 2002-2014 Marco Von Ballmoos
 
 This file is part of earthli WebCore.
 
@@ -23,207 +23,192 @@ For more information about the earthli WebCore, visit:
 http://www.earthli.com/software/webcore
 
 ****************************************************************************/
-
-body
-{
-	color: #FFFFFF;
-	background-color: #000000;
+body {
+  background-color: #000000;
+  color: #ffffff;
 }
-
-table.columns > tbody > tr > td,
-table.columns > tbody > tr > th
-{
-  border-color: #666666;
-}
-
-.nav-box,
-.footer,
-.top-box
-{
-	border-color: #444;
-}
-
-a:link, a:visited
-{
+a:link,
+a:visited {
   color: #05aae5;
 }
-
-a:active, a:hover
-{
-	color: #55cffb;
+a:hover,
+a:active {
+  color: #51d1ff;
 }
-
+h1 {
+  color: #ffc31c;
+}
+h2 {
+  color: #79cc36;
+  border-color: #79cc36;
+}
+h3 {
+  color: #ffc31c;
+}
+h4 {
+  color: #ffc31c;
+}
 .chart-title,
-.preview-title
-{
-	color: #79cc36;
+.preview-title {
+  color: #79cc36;
 }
-
+.banner {
+  background-color: transparent;
+  color: #ffffff;
+}
+.banner a:link,
+.banner a:visited {
+  color: #05aae5;
+}
+.banner a:hover,
+.banner a:active {
+  color: #51d1ff;
+}
+.banner-title {
+  color: #ffffff;
+}
+.footer {
+  background-color: transparent;
+  color: #ffffff;
+}
+.footer a:link,
+.footer a:visited {
+  color: #05aae5;
+}
+.footer a:hover,
+.footer a:active {
+  color: #51d1ff;
+}
+.nav-box,
+.top-box,
+.footer,
+.horizontal-separator,
+.vertical-separator,
+.left-sidebar,
+.right-sidebar,
+.object-in-list,
+.info-box-top,
+.info-box-bottom,
+.cell-selected,
+.cell-highlight,
+.cell-non-empty,
+.description-box,
+table.columns > tbody > tr > td,
+table.columns > tbody > tr > th,
+.abstract {
+  border-color: #666666;
+}
 .quote-block,
 .preview,
 .chart,
 pre > code,
-.left-sidebar,
-.right-sidebar,
-.abstract
-{
-  border-color: #666;
+.form-basic-block,
+.pullquote {
+  border-color: #999999;
 }
-
-.cell-non-empty
-{
-	border-color: #666666;
+.object-navigator .links {
+  column-rule-color: #666666;
+  -webkit-column-rule-color: #666666;
+  -moz-column-rule-color: #666666;
 }
-
-.cell-selected, .cell-highlight
-{
-	border-color: #444;
-	background-color: #222;
+.info-box-top,
+.info-box-bottom,
+.subdued {
+  color: #b3b3b3;
 }
-
-.horizontal-separator, .vertical-separator
-{
-	border-color: #444;
+.info-box-top a:link,
+.info-box-bottom a:link,
+.subdued a:link,
+.info-box-top a:visited,
+.info-box-bottom a:visited,
+.subdued a:visited {
+  color: #3cc8fb;
 }
-
-h2
-{
+.info-box-top a:hover,
+.info-box-bottom a:hover,
+.subdued a:hover,
+.info-box-top a:active,
+.info-box-bottom a:active,
+.subdued a:active {
+  color: #51d1ff;
+}
+.cell-highlight {
+  background-color: #1f1f1f;
+}
+.cell-selected {
+  background-color: #141414;
+}
+.caution,
+.warning,
+.error {
+  color: #776655;
+}
+.caution a:link,
+.caution a:visited,
+.warning a:link,
+.warning a:visited,
+.error a:link,
+.error a:visited {
+  color: #6666cc;
+}
+.graph-foreground {
+  background-color: #79cc36;
+}
+.highlight {
+  color: #c8abff;
+}
+.selected {
   color: #79cc36;
-  border-bottom: 1px dotted #333;
 }
-
-h1, h3
-{
-  color: #ffc31c;
+code {
+  color: #7d9cd1;
 }
-
-th
-{
-	border-bottom-color: #FFFFFF;
+.quote,
+.quote-inline,
+.quote-block {
+  color: #cccccc;
 }
-
-.caution
-{
-  background-color: #c2e8a4;
-  border-color: #90b571;
+.button {
+  background-color: #141414;
+  border-color: #666666;
+  color: #bfbfbf;
 }
-
-.warning
-{
-  background-color: #ffe7a6;
-  border-color: #ccb473;
+a.button:link,
+a.button:visited {
+  color: #bfbfbf;
 }
-
-.error
-{
-  background-color: #dfc7ff;
+.button.selected {
+  background-color: #262626;
+  border-color: #666666;
+  color: #79cc36;
 }
-
-.frame
-{
-	border-color: #FFFFFF;
+.button.disabled {
+  background-color: #0f0f0f;
+  border-color: #3d3d3d;
+  color: #b3b3b3;
 }
-
-.graph-foreground
-{
-	background-color: #000000;
+.button:hover:not(.disabled):not(.selected) {
+  background-color: #262626;
+  border-color: #666666;
 }
-
-.graph-background
-{
-	background-color: #0066CC;
+ul.menu {
+  background-color: #141414;
+  border-color: #666666;
 }
-
-.highlight
-{
-	color: #dfc7ff;
+ul.menu .menu-group-title {
+  background-color: #1f1f1f;
+  border-color: #666666;
 }
-
-.selected
-{
-  /*
-  light-green: #c2e8a4
-  light-orange: #ffe7a6
-  light-purple: #dfc7ff
-  */
+ul.menu .menu-item:hover {
+  background-color: #262626;
+  border-color: #666666;
 }
-
-.object-in-list, .info-box-top, .info-box-bottom
-{
-	border-color: #666666;
+ul.menu .menu-item-description {
+  color: #bfbfbf;
 }
-
-.quote, .quote-inline, .quote-block
-{
-	color: #CCCCCC;
-}
-
-.locked a:link, .locked a:visited
-{
-	color: #6699CC;
-}
-
-.button
-{
-  background-color: #222;
-  border-color: #444;
-  color: #999;
-}
-
-a.button:link, a.button:visited
-{
-  color: #aaa;
-}
-
-.button.selected
-{
-  color: white;
-}
-
-.button.disabled
-{
-  border-color: #222;
-  color: #666;
-  background-color: #111;
-}
-
-.button:hover:not(.disabled):not(.selected)
-{
-  background-color: #444;
-}
-
-.menu
-{
-	background: #111;
-	border-color: #666;
-}
-
-ul.menu .menu-group-title
-{
-  background-color: #444;
-  border-color: #222;
-}
-
-.menu-item
-{
-  background-color: #444;
-}
-
-.menu-item:hover
-{
-	background: #333333;
-	border-top: 1px dotted #666;
-	border-bottom: 1px dotted #666;
-}
-
-.menu-item-description
-{
-  color: white;
-}
-
-.menu-control, .text-control
-{
-  background: #000000;
-  color: #05aae5;
-  border: 1px solid #666666;
+.text-control,
+.menu-control {
+  background-color: #141414;
+  color: #bfbfbf;
+  border-color: #666666;
 }

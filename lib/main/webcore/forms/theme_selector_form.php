@@ -54,8 +54,8 @@ class THEME_SELECTOR_FORM extends FORM
   public $name = 'theme_setter_form';
 
   /**
-   * @param APPLICATION $app Main application.
-   * @param array[THEME] $themes List of available themes.
+   * @param CONTEXT $page
+   * @param THEME[] $themes List of available themes.
    */
   public function __construct ($page, $themes)
   {

@@ -519,11 +519,11 @@ class FORM_RENDERER extends CONTROLS_RENDERER
     if (!empty($style) && sizeof ($style) > 0)
     {
       $style = implode ('; ', $style);
-      echo '<table class="basic form-' . $this->_form->CSS_class . '" style="' . $style . '">' . "\n";
+      echo '<div class="form-' . $this->_form->CSS_class . '"><table class="basic" style="' . $style . '">' . "\n";
     }
     else
     {
-      echo '<table>' . "\n";
+      echo '<div class="form-' . $this->_form->CSS_class . '"><table>' . "\n";
     }
 
     if ($this->_form->num_errors (Form_general_error_id))
@@ -550,7 +550,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
 <?php
     }
 
-    echo "</table>\n";
+    echo "</table></div>\n";
   }
 
   /**
@@ -722,6 +722,8 @@ class FORM_RENDERER extends CONTROLS_RENDERER
   /**
    * Draw errors for a control onto a separate row in the form.
    * @param string $id Name of field.
+   * @param string $title
+   * @param string $width
    */
   public function draw_error_row ($id, $title = ' ', $width = '')
   {
@@ -1853,15 +1855,6 @@ class FORM_RENDERER extends CONTROLS_RENDERER
         $counter = 0;
       }
 
-      if (isset ($props->width))
-      {
-        $width = $props->width;
-      }
-      else
-      {
-        $width = $this->width;
-      }
-
       $num_items = sizeof ($props->items);
 
       $needs_descriptions = $props->show_descriptions;
@@ -1968,6 +1961,15 @@ class FORM_RENDERER extends CONTROLS_RENDERER
         }
       }
 
+      if (isset ($props->width))
+      {
+        $width = $props->width;
+      }
+      else
+      {
+        $width = null;
+      }
+
       if ($needs_descriptions)
       {
         if ($width)
@@ -2057,9 +2059,9 @@ class FORM_RENDERER extends CONTROLS_RENDERER
         $box = $this->context->make_box_renderer ();
         ob_start ();
           $box->start_column_set ();
-          $box->new_column ('padding-right: .5em');
+          $box->new_column_of_type ('left-column');
           echo $ctrl;
-          $box->new_column ();
+          $box->new_column ('width: 100%');
           echo $label;
           $box->finish_column_set ();
         $Result = ob_get_contents ();

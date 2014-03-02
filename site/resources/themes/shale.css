@@ -1,6 +1,6 @@
 /****************************************************************************
 
-Copyright (c) 2002 Marco Von Ballmoos
+Copyright (c) 2002-2014 Marco Von Ballmoos
 
 This file is part of earthli WebCore.
 
@@ -23,242 +23,192 @@ For more information about the earthli WebCore, visit:
 http://www.earthli.com/software/webcore
 
 ****************************************************************************/
-
-body
-{
-	color: #CCCCCC;
-	background-color: #4A525A;
+body {
+  background-color: #4a525a;
+  color: #cccccc;
 }
-
-.page
-{
-	max-width: 800px;
-	margin: auto;
+a:link,
+a:visited {
+  color: #ffffff;
 }
-
-a:link, a:visited
-{
-	text-decoration: none;
-	color: white;
+a:hover,
+a:active {
+  color: #fcff4e;
 }
-
-a:hover
-{
-  text-decoration: underline;
+h1 {
+  color: #a1c9ff;
 }
-
-h2, th
-{
-	border-color: #CCCCCC;
-	color: #CCCCCC;
+h2 {
+  color: #a1c9ff;
+  border-color: #a1c9ff;
 }
-
-.banner-title
-{
-	color: #CCCCCC;
+h3 {
+  color: #a1aaff;
 }
-
-.box, .box-body, .box-title
-{
-	border-width: 0px;
+h4 {
+  color: #a1aaff;
 }
-
-.error
-{
-	background: #CCB6B6;
+.chart-title,
+.preview-title {
+  color: #a1c9ff;
 }
-
-.cell-non-empty
-{
-	border: 1px solid #999999;
+.banner {
+  background-color: transparent;
+  color: #cccccc;
 }
-
-.cell-selected, .cell-highlight
-{
-	background-color: #444444;
-	border-color: #999999;
+.banner a:link,
+.banner a:visited {
+  color: #ffffff;
 }
-
-.chart, .preview, .side-bar, .form-basic
-{
-	border: 1px solid #777777;
-	background-color: #535C66;
+.banner a:hover,
+.banner a:active {
+  color: #ffffff;
 }
-
-.object-in-list, .info-box-top
-{
-	border-bottom: 1px solid #777777;
+.banner-title {
+  color: #a1c9ff;
 }
-
-.info-box-bottom, .info-box-top
-{
-	color: #AAAAAA;
+.footer {
+  background-color: transparent;
+  color: #cccccc;
 }
-
-.info-box-bottom
-{
-	border-top: 1px solid #777777;
+.footer a:link,
+.footer a:visited {
+  color: #ffffff;
 }
-
-.text-flow a:link, .text-flow a:visited
-{
-	border-bottom: 1px dotted #999999;
+.footer a:hover,
+.footer a:active {
+  color: #ffffff;
 }
-
-.text-flow a:hover
-{
-  border-bottom: 1px solid white;
-  text-decoration: none;
+.nav-box,
+.top-box,
+.footer,
+.horizontal-separator,
+.vertical-separator,
+.left-sidebar,
+.right-sidebar,
+.object-in-list,
+.info-box-top,
+.info-box-bottom,
+.cell-selected,
+.cell-highlight,
+.cell-non-empty,
+.description-box,
+table.columns > tbody > tr > td,
+table.columns > tbody > tr > th,
+.abstract {
+  border-color: #71777c;
 }
-
-.preview
-{
-	width: 85%;
-	margin: auto;
+.quote-block,
+.preview,
+.chart,
+pre > code,
+.form-basic-block,
+.pullquote {
+  border-color: #3e454c;
 }
-
-.side-bar-title
-{
-	color: #CCCCCC;
+.object-navigator .links {
+  column-rule-color: #71777c;
+  -webkit-column-rule-color: #71777c;
+  -moz-column-rule-color: #71777c;
 }
-
-.chart-title, .preview-title, .side-bar-title
-{
-	border-width: 0px;
+.info-box-top,
+.info-box-bottom,
+.subdued {
+  color: #85898d;
 }
-
-.detail
-{
-	color: #AAAAAA;
+.info-box-top a:link,
+.info-box-bottom a:link,
+.subdued a:link,
+.info-box-top a:visited,
+.info-box-bottom a:visited,
+.subdued a:visited {
+  color: #b7babd;
 }
-
-.frame
-{
-	padding: .25em;
-	border-color: #777777;
+.info-box-top a:hover,
+.info-box-bottom a:hover,
+.subdued a:hover,
+.info-box-top a:active,
+.info-box-bottom a:active,
+.subdued a:active {
+  color: #fcff4e;
 }
-
-.graph-foreground
-{
-	background: #556F99;
-	border-right: 1px solid #999999;
+.cell-highlight {
+  background-color: #353b41;
 }
-
-.graph-background
-{
-	background: #294a83;
-	border: 1px solid #999999;
+.cell-selected {
+  background-color: #3c4349;
 }
-
-.highlight
-{
-	color: #FF0000;
+.caution,
+.warning,
+.error {
+  color: #776655;
 }
-
-.horizontal-separator
-{
-	border-color: #777777;
+.caution a:link,
+.caution a:visited,
+.warning a:link,
+.warning a:visited,
+.error a:link,
+.error a:visited {
+  color: #6666cc;
 }
-
-.menu-bar-bottom
-{
-	border-width: 0px;
+.graph-foreground {
+  background-color: #a1c9ff;
 }
-
-.menu-bar-top
-{
-	border-width: 0px;
+.highlight {
+  color: #88cc88;
 }
-
-.menu-bar-top a:hover
-{
-  text-decoration: underline;
+.selected {
+  color: #a1c9ff;
 }
-
-.menu-bar-bottom, .menu-bar-top
-{
-	border-color: #777777;
+code {
+  color: #cccccc;
 }
-
-.menu
-{
-	background: #535C66;
-	border: 1px solid #888888;
+.quote,
+.quote-inline,
+.quote-block {
+  color: #9fa1a4;
 }
-
-.menu-item
-{
-	border-top: 1px solid transparent;
-	border-bottom: 1px solid transparent;
+.button {
+  background-color: #3c4349;
+  border-color: #71777c;
+  color: #acaeb0;
 }
-
-.menu-item:hover
-{
-	background: #6A727A;
-	border-top: 1px solid #888888;
-	border-bottom: 1px solid #888888;
-	text-decoration: none;
+a.button:link,
+a.button:visited {
+  color: #acaeb0;
 }
-
-.menu-button
-{
-	border: 1px solid #666666;
+.button.selected {
+  background-color: #515a62;
+  border-color: #71777c;
+  color: #a1c9ff;
 }
-
-.menu-button:hover
-{
-	border: 1px solid #888888;
-	background: #6A727A;
-	text-decoration: none;
+.button.disabled {
+  background-color: #3e454c;
+  border-color: #636a70;
+  color: #85898d;
 }
-
-.nav-box
-{
-	border-width: 0px;
-	border-bottom: 1px solid #666666;
+.button:hover:not(.disabled):not(.selected) {
+  background-color: #515a62;
+  border-color: #71777c;
 }
-
-.quote, .quote-inline
-{
-	color: #AAAAAA;
-	font-style: italic;
+ul.menu {
+  background-color: #3c4349;
+  border-color: #71777c;
 }
-
-.quote em, .quote-inline em
-{
-	font-style: normal;
+ul.menu .menu-group-title {
+  background-color: #353b41;
+  border-color: #71777c;
 }
-
-.quote-block
-{
-	color: #AAAAAA;
-	border-left: 1px solid #777777;
-	padding-left: 1em;
+ul.menu .menu-item:hover {
+  background-color: #515a62;
+  border-color: #71777c;
 }
-
-.required
-{
-	color: #CC9933;
+ul.menu .menu-item-description {
+  color: #acaeb0;
 }
-
-.selected
-{
-	color: #CCCCCC;
-}
-
-.vertical-separator
-{
-	border-color: #777777;
-}
-
-.checkbox-control
-{
-  background: #000040;
-}
-
-.text-control, .menu-control
-{
-  color: #A3ACB6;
-  background-color: #434C56;
-  border-color: #777777;
+.text-control,
+.menu-control {
+  background-color: #3c4349;
+  color: #acaeb0;
+  border-color: #71777c;
 }

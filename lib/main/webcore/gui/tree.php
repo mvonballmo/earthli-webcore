@@ -567,13 +567,13 @@ abstract class TREE_NODE_INFO extends WEBCORE_OBJECT
   public function visitable ($node) { return $this->nodes_are_links; }
 
   /**
-   * @var array[integer => object]
+   * @var object[]
    * @access private
    */
   public $open_nodes;
 
   /**
-   * @var array[integer => object]
+   * @var object[]
    * @access private
    */
   public $selected_nodes;

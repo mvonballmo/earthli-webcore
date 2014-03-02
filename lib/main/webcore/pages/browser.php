@@ -60,25 +60,19 @@ $Page->start_display();
     <li><a href="#report_problem">How do I report a problem with browser detection?</a></li>
   </ul>
   <h2>FAQ</h2>
-  <div class="icon thirty-two" style="background-image: url(<?php echo $Page->get_icon_url('{icons}indicators/question', '32px'); ?>)">
+  <div class="icon thirty-two no-label" style="background-image: url(<?php echo $Page->get_icon_url('{icons}indicators/question', '32px'); ?>)">
     <p class="quote-block" id="unsupported_browser">
       Why do I see a warning at the top of the page?
     </p>
     <p>If your browser's not on this list (yeah, I'm looking at you, Internet Explorer), you'll see
       this message at the top of the page.</p>
 
-    <div class="caution page-message">
-      <div class="notes">
-        <div
-          style="float: left"><?php echo $Page->resolve_icon_as_html('{icons}indicators/warning', '', '16px'); ?></div>
-        <div style="margin-left: 20px">
-          Your browser may have trouble rendering this page. [...]
-        </div>
-      </div>
-    </div>
+    <?php
+      $Page->show_message('Your browser may have trouble rendering this page. [...]', 'warning');
+    ?>
     <p>While this site degrades gracefully under older browsers, it won't look as nice as it could.</p>
   </div>
-  <div class="icon thirty-two" style="background-image: url(<?php echo $Page->get_icon_url('{icons}indicators/question', '32px'); ?>)">
+  <div class="icon thirty-two no-label" style="background-image: url(<?php echo $Page->get_icon_url('{icons}indicators/question', '32px'); ?>)">
     <p class="quote-block" id="what_cant_i_do">
       What kind of stuff won't I be able to do?
     </p>
@@ -94,7 +88,7 @@ $Page->start_display();
     <p>The default theme has been carefully designed so that it looks nice even on non-compliant
       browsers.</p>
   </div>
-  <div class="icon thirty-two" style="background-image: url(<?php echo $Page->get_icon_url('{icons}indicators/question', '32px'); ?>)">
+  <div class="icon thirty-two no-label" style="background-image: url(<?php echo $Page->get_icon_url('{icons}indicators/question', '32px'); ?>)">
     <p class="quote-block" id="remove_warning">
       How do I get rid of the warning?
     </p>
@@ -102,7 +96,7 @@ $Page->start_display();
       <a href="#downloads">browsers</a> in the downloads sidebar. Or you can just check the "Do not show this message
       again." box.</p>
   </div>
-  <div class="icon thirty-two" style="background-image: url(<?php echo $Page->get_icon_url('{icons}indicators/question', '32px'); ?>)">
+  <div class="icon thirty-two no-label" style="background-image: url(<?php echo $Page->get_icon_url('{icons}indicators/question', '32px'); ?>)">
     <p class="quote-block" id="technologies">
       What does my browser need?
     </p>
@@ -121,7 +115,7 @@ $Page->start_display();
     </ul>
     <p>Your browser's capabilities are listed in the <a href="#your_browser">your browser</a> box above.</p>
   </div>
-  <div class="icon thirty-two" style="background-image: url(<?php echo $Page->get_icon_url('{icons}indicators/question', '32px'); ?>)">
+  <div class="icon thirty-two no-label" style="background-image: url(<?php echo $Page->get_icon_url('{icons}indicators/question', '32px'); ?>)">
     <p class="quote-block" id="report_problem">
       How do I report a problem with browser detection?
     </p>

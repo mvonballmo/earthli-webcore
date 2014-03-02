@@ -101,9 +101,9 @@ class AUDITABLE_RENDERER extends OBJECT_RENDERER
    */
   protected function _echo_html_user ($caption, $user, $time)
   {
-    echo "<div>\n";
+    echo "<p>\n";
     echo $caption . ' by ' . $user->title_as_link () . ' on ' . $time->format () . "\n";
-    echo "</div>\n";
+    echo "</p>\n";
   }
 
   /**

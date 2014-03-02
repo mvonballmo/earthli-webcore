@@ -50,8 +50,9 @@ class TREE_NODE
    * @param string $link Link the name to this url.
    * @param boolean $closed Is this node closed by default?
    * @param string $target Target the link to this frame.
+   * @param bool $selected Is this node selected?
    */
-  public function __construct ($title, $link = '', $closed = true, $target = '')
+  public function __construct ($title, $link = '', $closed = true, $target = '', $selected = false)
   {
     static $id;
     $id += 1;
@@ -60,6 +61,7 @@ class TREE_NODE
     $this->_title = $title;
     $this->_link = $link;
     $this->_closed = $closed;
+    $this->_selected = $selected;
     $this->_target = $target;
   }
 
@@ -118,7 +120,10 @@ class TREE_NODE
   {
     return $this->_nodes[$index];
   }
-  
+
+  /**
+   * @return TREE_NODE[]
+   */
   public function children ()
   {
     return $this->_nodes;
@@ -140,14 +145,21 @@ class TREE_NODE
    */
   public function text ()
   {
+    $CSS_class = $this->_selected ? ' class="selected"' : '';
+
     if ($this->_link)
     {
       if ($this->_target)
       {
-        return "<a href=\"$this->_link\" target=\"$this->_target\">$this->_title</a>";
+        return "<a href=\"$this->_link\" target=\"$this->_target\"$CSS_class>$this->_title</a>";
       }
 
-      return "<a href=\"$this->_link\">$this->_title</a>";
+      return "<a href=\"$this->_link\"$CSS_class>$this->_title</a>";
+    }
+
+    if ($CSS_class)
+    {
+      return "<span$CSS_class>$this->_title</span>";
     }
 
     return $this->_title;
@@ -196,7 +208,7 @@ class TREE_NODE
   /**
    * Optional list of child nodes.
    *
-   * @var array[TREE_NODE]
+   * @var TREE_NODE[]
    */
   protected $_nodes;
 
@@ -207,6 +219,14 @@ class TREE_NODE
    * @access private
    */
   protected $_closed;
+
+  /**
+   * Is this node selected initially?
+   *
+   * @var boolean
+   * @access private
+   */
+  protected $_selected;
 }
 
 require_once ('webcore/gui/tree.php');
@@ -223,6 +243,7 @@ class GENERIC_TREE_NODE_INFO extends TREE_NODE_INFO
   /**
    * Return list of sub-nodes for 'node'.
    * @param TREE_NODE $node
+   * @return \TREE_NODE[]
    * @access private
    */
   public function sub_nodes ($node)
@@ -277,5 +298,3 @@ class GENERIC_TREE_NODE_INFO extends TREE_NODE_INFO
     }
   }
 }
-
-?>

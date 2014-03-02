@@ -23,147 +23,192 @@ For more information about the earthli WebCore, visit:
 http://www.earthli.com/software/webcore
 
 ****************************************************************************/
-
-body
-{
-	background: #544332;
-	color: #FFFFFF;
+body {
+  background-color: #544332;
+  color: #ddd9d6;
 }
-
-.page
-{
-	max-width: 800px;
-	margin: auto;
+a:link,
+a:visited {
+  color: #ccbbaa;
 }
-
-.nav-box
-{
-	border-width: 0px;
+a:hover,
+a:active {
+  color: #f6eee6;
 }
-
-.box
-{
-	border-width: 0px;
+h1 {
+  color: #bc561f;
 }
-
-.box-title
-{
-	color: #AA9988;
-	border-width: 0px;
-	border-bottom: 1px solid #766554;
-	text-align: center;
+h2 {
+  color: #bc561f;
+  border-color: #bc561f;
 }
-
-.side-bar, .chart, .preview, .form-basic, .menu
-{
-	background-color: #655443;
-	border-color: #322110;
+h3 {
+  color: #bc8a1f;
 }
-
-.side-bar-title
-{
-	border-width: 0px;
-	text-align: center;
-	color: #AA9988;
+h4 {
+  color: #bc8a1f;
 }
-
-.preview-title
-{
-	border-width: 0px;
-	color: #AA9988;
+.chart-title,
+.preview-title {
+  color: #bc561f;
 }
-
-.chart-title
-{
-	background-color: #4B3A29;
-	color: #CCBBAA;
+.banner {
+  background-color: transparent;
+  color: #ddd9d6;
 }
-
-.cell-non-empty
-{
-	border-color: #766554;
+.banner a:link,
+.banner a:visited {
+  color: #ccbbaa;
 }
-
-.cell-selected, .cell-highlight
-{
-	background: #655443;
-	border-color: #766554;
+.banner a:hover,
+.banner a:active {
+  color: #f6eee6;
 }
-
-.menu-bar-top, .menu-bar-bottom
-{
-	border-width: 0px;
+.banner-title {
+  color: #bc561f;
 }
-
-a:link
-{
-	color: #CCBBAA;
+.footer {
+  background-color: transparent;
+  color: #ddd9d6;
 }
-
-a:visited
-{
-	color: #CCBBAA;
+.footer a:link,
+.footer a:visited {
+  color: #ccbbaa;
 }
-
-a:active
-{
-	color: #FFFF00;
+.footer a:hover,
+.footer a:active {
+  color: #f6eee6;
 }
-
-a:hover
-{
-	color: #FFFF00;
+.nav-box,
+.top-box,
+.footer,
+.horizontal-separator,
+.vertical-separator,
+.left-sidebar,
+.right-sidebar,
+.object-in-list,
+.info-box-top,
+.info-box-bottom,
+.cell-selected,
+.cell-highlight,
+.cell-non-empty,
+.description-box,
+table.columns > tbody > tr > td,
+table.columns > tbody > tr > th,
+.abstract {
+  border-color: #7d7063;
 }
-
-h2
-{
-	border-color: #CCCCCC;
+.quote-block,
+.preview,
+.chart,
+pre > code,
+.form-basic-block,
+.pullquote {
+  border-color: #443628;
 }
-
-th
-{
-	border-color: #CCCCCC;
+.object-navigator .links {
+  column-rule-color: #7d7063;
+  -webkit-column-rule-color: #7d7063;
+  -moz-column-rule-color: #7d7063;
 }
-
-.graph-foreground
-{
-	background: #CCBBAA;
+.info-box-top,
+.info-box-bottom,
+.subdued {
+  color: #92877c;
 }
-
-.graph-background
-{
-	background: #443322;
+.info-box-top a:link,
+.info-box-bottom a:link,
+.subdued a:link,
+.info-box-top a:visited,
+.info-box-bottom a:visited,
+.subdued a:visited {
+  color: #9c8b7a;
 }
-
-.disabled
-{
-	color: #CCCCCC;
+.info-box-top a:hover,
+.info-box-bottom a:hover,
+.subdued a:hover,
+.info-box-top a:active,
+.info-box-bottom a:active,
+.subdued a:active {
+  color: #f6eee6;
 }
-
-.highlight
-{
-	color: #FF0000;
+.cell-highlight {
+  background-color: #372c21;
 }
-
-.object-in-list, .info-box-top, .info-box-bottom, .horizontal-separator, .vertical-separator
-{
-	border-color: #766554;
+.cell-selected {
+  background-color: #413427;
 }
-
-.quote, .quote-inline, .quote-block
-{
-	color: #CCBBAA;
+.caution,
+.warning,
+.error {
+  color: #776655;
 }
-
-.required
-{
-	color: #CCBBAA;
+.caution a:link,
+.caution a:visited,
+.warning a:link,
+.warning a:visited,
+.error a:link,
+.error a:visited {
+  color: #6666cc;
 }
-
-.menu-control, .text-control
-{
-  color: #CCBBAA;
-  background: #5B4A39;
-  border-color: #322110;
+.graph-foreground {
+  background-color: #bc561f;
 }
-
+.highlight {
+  color: #b1c22d;
+}
+.selected {
+  color: #ffc63f;
+}
+code {
+  color: #ddd9d6;
+}
+.quote,
+.quote-inline,
+.quote-block {
+  color: #ada59d;
+}
+.button {
+  background-color: #413427;
+  border-color: #7d7063;
+  color: #bbb4ad;
+}
+a.button:link,
+a.button:visited {
+  color: #bbb4ad;
+}
+.button.selected {
+  background-color: #5e4b38;
+  border-color: #7d7063;
+  color: #ffc63f;
+}
+.button.disabled {
+  background-color: #443628;
+  border-color: #6f6052;
+  color: #92877c;
+}
+.button:hover:not(.disabled):not(.selected) {
+  background-color: #5e4b38;
+  border-color: #7d7063;
+}
+ul.menu {
+  background-color: #413427;
+  border-color: #7d7063;
+}
+ul.menu .menu-group-title {
+  background-color: #372c21;
+  border-color: #7d7063;
+}
+ul.menu .menu-item:hover {
+  background-color: #5e4b38;
+  border-color: #7d7063;
+}
+ul.menu .menu-item-description {
+  color: #bbb4ad;
+}
+.text-control,
+.menu-control {
+  background-color: #413427;
+  color: #bbb4ad;
+  border-color: #7d7063;
+}

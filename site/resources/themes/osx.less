@@ -1,0 +1,90 @@
+/****************************************************************************
+
+Copyright (c) 2002 Marco Von Ballmoos
+
+This file is part of earthli WebCore.
+
+earthli WebCore is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+earthli WebCore is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with earthli WebCore; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
+For more information about the earthli WebCore, visit:
+
+http://www.earthli.com/software/webcore
+
+****************************************************************************/
+
+@import "theme-base";
+
+@background_color: #F8F8F8;
+@text_color: #222;
+@title_color: @text_color;
+@link_color: #3093dc;
+@link_hover_color: #06C;
+@highlighted_text_color: #0A0;
+@selected_text_color: #366dc8;
+@edit_control_background_color: white;
+
+body
+{
+  background-image: url(osx/dialog_light.gif);
+  background-repeat: repeat;
+}
+
+.cell-selected
+{
+  background-color: transparent;
+  background-image: url(osx/5_percent_black.png);
+  background-repeat: repeat;
+}
+
+.cell-highlight
+{
+  background-color: transparent;
+  background-image: url(osx/10_percent_black.png);
+  background-repeat: repeat;
+}
+
+.graph-foreground
+{
+  background-image: url(osx/graph_full.png);
+  background-repeat: repeat;
+}
+
+.chart,
+.preview
+{
+  background-image: url(osx/5_percent_black.png);
+  background-repeat: repeat;
+  .extruded_border(1px, #FFF);
+}
+
+.form-basic,
+.form-basic-block
+{
+  .engraved_border(1px, #FFF, #AAA);
+  background-image: url(osx/5_percent_black.png);
+  background-repeat: repeat;
+  padding: @small_spacing;
+}
+
+.text-control,
+.menu-control
+{
+  .engraved_border(1px, #FFF);
+}
+
+ul.menu
+{
+  opacity: .85;
+}

@@ -1,6 +1,6 @@
 /****************************************************************************
 
-Copyright (c) 2002 Marco Von Ballmoos
+Copyright (c) 2002-2014 Marco Von Ballmoos
 
 This file is part of earthli WebCore.
 
@@ -23,165 +23,192 @@ For more information about the earthli WebCore, visit:
 http://www.earthli.com/software/webcore
 
 ****************************************************************************/
-
-body
-{
-	padding: 0em;
-	background: #880000;
-	color: #EEEEEE;
+body {
+  background-color: #9d302e;
+  color: #eeeeee;
 }
-
-.footer
-{
-	border-top: 1px solid #550000;
-	background-color: #772222;
+a:link,
+a:visited {
+  color: #c2c274;
 }
-
-.nav-box
-{
-	border-width: 0px;
+a:hover,
+a:active {
+  color: #ebebb1;
 }
-
-.box
-{
-	border-width: 0px;
+h1 {
+  color: #eb6049;
 }
-
-.box-title
-{
-	color: #FFFFFF;
-	border-width: 0px;
-	border-bottom: 1px solid #CCCC99;
+h2 {
+  color: #eb6049;
+  border-color: #eb6049;
 }
-
-.side-bar, .chart, .preview
-{
-	border: 1px solid #999966;
-	background: #AA1111;
+h3 {
+  color: #eb9649;
 }
-
-.chart-title, .side-bar-title, .preview-title
-{
-	margin-left: .25em;
-	margin-right: .25em;
-	border-bottom: 1px solid #CCCC99;
+h4 {
+  color: #eb9649;
 }
-
-.form-basic
-{
-	border: 1px solid #600000;
-	background: #AA1111;
+.chart-title,
+.preview-title {
+  color: #eb6049;
 }
-
-.menu
-{
-	border: 1px solid #600000;
-	background: #800000;
+.banner {
+  background-color: transparent;
+  color: #eeeeee;
 }
-
-.cell-non-empty
-{
-	border-color: #FFAAAA;
+.banner a:link,
+.banner a:visited {
+  color: #c2c274;
 }
-
-.cell-selected, .cell-highlight
-{
-	background: #AA1111;
-	border-color: #FFAAAA;
+.banner a:hover,
+.banner a:active {
+  color: #ebebb1;
 }
-
-a:visited, a:link
-{
-	color: #CCCC99;
+.banner-title {
+  color: #eb6049;
 }
-
-a:active, a:hover
-{
-	color: #FFFFFF;
+.footer {
+  background-color: transparent;
+  color: #eeeeee;
 }
-
-h2
-{
-	border-color: #CCCC99;
+.footer a:link,
+.footer a:visited {
+  color: #c2c274;
 }
-
-th
-{
-	border-color: #CCCC99;
+.footer a:hover,
+.footer a:active {
+  color: #ebebb1;
 }
-
-.disabled
-{
-	color: #333333;
+.nav-box,
+.top-box,
+.footer,
+.horizontal-separator,
+.vertical-separator,
+.left-sidebar,
+.right-sidebar,
+.object-in-list,
+.info-box-top,
+.info-box-bottom,
+.cell-selected,
+.cell-highlight,
+.cell-non-empty,
+.description-box,
+table.columns > tbody > tr > td,
+table.columns > tbody > tr > th,
+.abstract {
+  border-color: #b56968;
 }
-
-.error
-{
-	background-color: #336699;
-	border-color: #0000CC;
-	color: #FF0;
+.quote-block,
+.preview,
+.chart,
+pre > code,
+.form-basic-block,
+.pullquote {
+  border-color: #892a28;
 }
-
-.graph-foreground
-{
-	background: #AAAAAA;
+.object-navigator .links {
+  column-rule-color: #b56968;
+  -webkit-column-rule-color: #b56968;
+  -moz-column-rule-color: #b56968;
 }
-
-.graph-background
-{
-	background: #772222;
+.info-box-top,
+.info-box-bottom,
+.subdued {
+  color: #c18684;
 }
-
-.highlight
-{
-	color: #FF0000;
+.info-box-top a:link,
+.info-box-bottom a:link,
+.subdued a:link,
+.info-box-top a:visited,
+.info-box-bottom a:visited,
+.subdued a:visited {
+  color: #b38858;
 }
-
-.horizontal-separator
-{
-	border-color: #CCCCCC;
+.info-box-top a:hover,
+.info-box-bottom a:hover,
+.subdued a:hover,
+.info-box-top a:active,
+.info-box-bottom a:active,
+.subdued a:active {
+  color: #ebebb1;
 }
-
-.object-in-list, .info-box-top, .info-box-bottom
-{
-	border-color: #999966;
+.cell-highlight {
+  background-color: #7a2524;
 }
-
-.menu-bar-top, .menu-bar-bottom
-{
-	border-width: 0px;
+.cell-selected {
+  background-color: #852927;
 }
-
-.quote-block
-{
-	padding: .5em;
-	background-color: #993333;
-	border: 1px solid #600000;	
+.caution,
+.warning,
+.error {
+  color: #776655;
 }
-
-.quote-inline, .quote
-{
-	font-style: italic;
+.caution a:link,
+.caution a:visited,
+.warning a:link,
+.warning a:visited,
+.error a:link,
+.error a:visited {
+  color: #6666cc;
 }
-
-.quote-inline em, .quote em
-{
-	font-style: normal;
+.graph-foreground {
+  background-color: #eb6049;
 }
-
-.required
-{
-	color: #FFFFAA;
+.highlight {
+  color: #77cc67;
 }
-
-.vertical-separator
-{
-	border-color: #CCCCCC;
+.selected {
+  color: #ff9999;
 }
-
-.text-control, .menu-control
-{
-  color: #CCBBAA;
-  background: #993333;
-  border: 1px solid #600000;
+code {
+  color: #eeeeee;
+}
+.quote,
+.quote-inline,
+.quote-block {
+  color: #d2acab;
+}
+.button {
+  background-color: #852927;
+  border-color: #b56968;
+  color: #dabfbe;
+}
+a.button:link,
+a.button:visited {
+  color: #dabfbe;
+}
+.button.selected {
+  background-color: #a93431;
+  border-color: #b56968;
+  color: #ff9999;
+}
+.button.disabled {
+  background-color: #892a28;
+  border-color: #ad5553;
+  color: #c18684;
+}
+.button:hover:not(.disabled):not(.selected) {
+  background-color: #a93431;
+  border-color: #b56968;
+}
+ul.menu {
+  background-color: #852927;
+  border-color: #b56968;
+}
+ul.menu .menu-group-title {
+  background-color: #7a2524;
+  border-color: #b56968;
+}
+ul.menu .menu-item:hover {
+  background-color: #a93431;
+  border-color: #b56968;
+}
+ul.menu .menu-item-description {
+  color: #dabfbe;
+}
+.text-control,
+.menu-control {
+  background-color: #852927;
+  color: #dabfbe;
+  border-color: #b56968;
 }

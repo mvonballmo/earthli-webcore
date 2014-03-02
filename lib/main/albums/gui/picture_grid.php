@@ -165,7 +165,7 @@ class PICTURE_SUMMARY_GRID extends ENTRY_SUMMARY_GRID
 
   /**
    * Return the size of the object.
-   * @param OBJECT_IN_FOLDER $obj
+   * @param PICTURE $obj
    * @return integer
    * @access private
    */

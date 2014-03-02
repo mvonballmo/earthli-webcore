@@ -23,161 +23,195 @@ For more information about the earthli WebCore, visit:
 http://www.earthli.com/software/webcore
 
 ****************************************************************************/
-
-body
-{
-	background: #000000 url(halloween/halloween_bg.jpg) no-repeat fixed center center;
-	color: #FFFFFF;
+body {
+  background-color: #000000;
+  color: #ffffff;
 }
-
-.banner-title
-{
-	color: #FF9900;
+a:link,
+a:visited {
+  color: #ff9933;
 }
-
-.nav-box
-{
-	border-width: 0px;
+a:hover,
+a:active {
+  color: #ffcc99;
 }
-
-.button
-{
+h1 {
+  color: #ff6600;
+}
+h2 {
+  color: #ff6600;
+  border-color: #ff6600;
+}
+h3 {
+  color: #ffbb00;
+}
+h4 {
+  color: #ffbb00;
+}
+.chart-title,
+.preview-title {
+  color: #ff6600;
+}
+.banner {
   background-color: transparent;
-  border: 1px solid #666;
+  color: #ffffff;
 }
-
-.box
-{
-	border-width: 0px;
+.banner a:link,
+.banner a:visited {
+  color: #ff9933;
 }
-
-.box-title, .side-bar-title, .chart-title
-{
-	color: #FF9900;
-	border-bottom: 1px solid #666666;
+.banner a:hover,
+.banner a:active {
+  color: #ffcc99;
 }
-
-.preview, .preview-title
-{
-	border-width: 0px;
+.banner-title {
+  color: #ff9900;
 }
-
-.form-basic, .quote-block
-{
-	border: 1px solid #999999;
-	background: url(halloween/20_percent_black.png);
+.footer {
+  background-color: transparent;
+  color: #ffffff;
 }
-
-.menu
-{
-	background-color: transparent;
-	background: url(halloween/60_percent_black.png);
+.footer a:link,
+.footer a:visited {
+  color: #ff9933;
 }
-
-.side-bar, .chart
-{
-	border: 1px #666666 solid;
+.footer a:hover,
+.footer a:active {
+  color: #ffcc99;
 }
-
-.cell-non-empty
-{
-	border-color: #999999;
+.nav-box,
+.top-box,
+.footer,
+.horizontal-separator,
+.vertical-separator,
+.left-sidebar,
+.right-sidebar,
+.object-in-list,
+.info-box-top,
+.info-box-bottom,
+.cell-selected,
+.cell-highlight,
+.cell-non-empty,
+.description-box,
+table.columns > tbody > tr > td,
+table.columns > tbody > tr > th,
+.abstract {
+  border-color: #666666;
 }
-
-.cell-selected, .cell-highlight
-{
-	border-color: #999999;
+.quote-block,
+.preview,
+.chart,
+pre > code,
+.form-basic-block,
+.pullquote {
+  border-color: #999999;
 }
-
-.menu-bar-bottom, .menu-bar-top
-{
-	border-width: 0px;
+.object-navigator .links {
+  column-rule-color: #666666;
+  -webkit-column-rule-color: #666666;
+  -moz-column-rule-color: #666666;
 }
-
-.horizontal-separator, .vertical-separator
-{
-	border-color: #999999;
+.info-box-top,
+.info-box-bottom,
+.subdued {
+  color: #b3b3b3;
 }
-
-a:link, a:visited
-{
-	color: #FF9933;
+.info-box-top a:link,
+.info-box-bottom a:link,
+.subdued a:link,
+.info-box-top a:visited,
+.info-box-bottom a:visited,
+.subdued a:visited {
+  color: #ffbf80;
 }
-
-a:hover, a:active
-{
-	color: #FFFF00;
+.info-box-top a:hover,
+.info-box-bottom a:hover,
+.subdued a:hover,
+.info-box-top a:active,
+.info-box-bottom a:active,
+.subdued a:active {
+  color: #ffcc99;
 }
-
-h1
-{
-	color: #FF6600;
+.cell-highlight {
+  background-color: #1f1f1f;
 }
-
-h2
-{
-	color: #CCCCCC;
-	border-bottom: 2px solid #CCCCCC;
+.cell-selected {
+  background-color: #141414;
 }
-
-th
-{
-	border-bottom-color: #FFFFFF;
+.caution,
+.warning,
+.error {
+  color: #776655;
 }
-
-.disabled
-{
-	color: #999999;
+.caution a:link,
+.caution a:visited,
+.warning a:link,
+.warning a:visited,
+.error a:link,
+.error a:visited {
+  color: #6666cc;
 }
-
-.frame
-{
-	border-color: #666666;
+.graph-foreground {
+  background-color: #ff6600;
 }
-
-.graph-answer
-{
-	background-color: #444444;
+.highlight {
+  color: #ffff00;
 }
-
-.graph-background
-{
-	background-color: #FF9933;
+.selected {
+  color: #ff6600;
 }
-
-.highlight
-{
-	color: #FFFF00;
+code {
+  color: #ffffff;
 }
-
-.object-in-list, .info-box-top, .info-box-bottom
-{
-	border-color: #666666;
+.quote,
+.quote-inline,
+.quote-block {
+  color: #cccccc;
 }
-
-.quote, .quote-inline, .quote-block
-{
-	color: #CCCCCC;
+.button {
+  background-color: #141414;
+  border-color: #666666;
+  color: #bfbfbf;
 }
-
-.required
-{
-	color: #FF6600;
+a.button:link,
+a.button:visited {
+  color: #bfbfbf;
 }
-
-.selected
-{
-	color: #FF6600;
+.button.selected {
+  background-color: #262626;
+  border-color: #666666;
+  color: #ff6600;
 }
-
-.locked a:link, .locked a:visited
-{
-	color: #CC6600;
+.button.disabled {
+  background-color: #0f0f0f;
+  border-color: #3d3d3d;
+  color: #b3b3b3;
 }
-
-.menu-control, .text-control
-{
-  background: #000000;
-  color: #FF6600;
-  border: 1px solid #666666;
+.button:hover:not(.disabled):not(.selected) {
+  background-color: #262626;
+  border-color: #666666;
+}
+ul.menu {
+  background-color: #141414;
+  border-color: #666666;
+}
+ul.menu .menu-group-title {
+  background-color: #1f1f1f;
+  border-color: #666666;
+}
+ul.menu .menu-item:hover {
+  background-color: #262626;
+  border-color: #666666;
+}
+ul.menu .menu-item-description {
+  color: #bfbfbf;
+}
+.text-control,
+.menu-control {
+  background-color: #141414;
+  color: #bfbfbf;
+  border-color: #666666;
+}
+body {
+  background: #000000 url(halloween/halloween_bg.jpg) no-repeat fixed center center;
 }

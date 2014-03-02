@@ -1,6 +1,6 @@
 /****************************************************************************
 
-Copyright (c) 2002 Marco Von Ballmoos
+Copyright (c) 2002-2014 Marco Von Ballmoos
 
 This file is part of earthli WebCore.
 
@@ -23,241 +23,201 @@ For more information about the earthli WebCore, visit:
 http://www.earthli.com/software/webcore
 
 ****************************************************************************/
-
-body
-{
-	background-color: black;
-	color: white;
+body {
+  background-color: #000000;
+  color: #ffffff;
 }
-
-.banner, .footer
-{
-	background-color: #333333;
+a:link,
+a:visited {
+  color: #90be5a;
 }
-
-.banner
-{
-  border-bottom: 2px solid #666666;
+a:hover,
+a:active {
+  color: #c2e896;
 }
-
-.footer
-{
-  border-top: 2px solid #666666;
-  padding-top: 5px;
+h1 {
+  color: #ff8d46;
+}
+h2 {
+  color: #ff8d46;
+  border-color: #ff8d46;
+}
+h3 {
+  color: #ffcb46;
+}
+h4 {
+  color: #ffcb46;
+}
+.chart-title,
+.preview-title {
+  color: #ff8d46;
+}
+.banner {
+  background-color: #222222;
+  color: #ffffff;
+}
+.banner a:link,
+.banner a:visited {
+  color: #90be5a;
+}
+.banner a:hover,
+.banner a:active {
+  color: #c2e896;
+}
+.banner-title {
+  color: #ff8d46;
+}
+.banner-content {
+  margin-right: 15px;
+}
+.footer {
+  background-color: #222222;
+  color: #ffffff;
+}
+.footer a:link,
+.footer a:visited {
+  color: #90be5a;
+}
+.footer a:hover,
+.footer a:active {
+  color: #c2e896;
+}
+.footer {
   padding-bottom: 5px;
 }
-
+.page {
+  margin-bottom: 0;
+}
+.nav-box,
+.top-box,
+.footer,
+.horizontal-separator,
+.vertical-separator,
+.left-sidebar,
+.right-sidebar,
+.object-in-list,
+.info-box-top,
+.info-box-bottom,
+.cell-selected,
+.cell-highlight,
+.cell-non-empty,
+.description-box,
 table.columns > tbody > tr > td,
-table.columns > tbody > tr > th
-{
-  border-color: #555;
+table.columns > tbody > tr > th,
+.abstract {
+  border-color: #666666;
 }
-
-table th
-{
-  border-color: #555;
+.quote-block,
+.preview,
+.chart,
+pre > code,
+.form-basic-block,
+.pullquote {
+  border-color: #999999;
 }
-
-th.basic
-{
-  border-color: #555;
+.object-navigator .links {
+  column-rule-color: #666666;
+  -webkit-column-rule-color: #666666;
+  -moz-column-rule-color: #666666;
 }
-
-a:visited
-{
-	color: #88BB55;
+.info-box-top,
+.info-box-bottom,
+.subdued {
+  color: #b3b3b3;
 }
-
-a:link
-{
-	color: #BBEE88;
+.info-box-top a:link,
+.info-box-bottom a:link,
+.subdued a:link,
+.info-box-top a:visited,
+.info-box-bottom a:visited,
+.subdued a:visited {
+  color: #b5d491;
 }
-
-a:hover
-{
-	color: #FFFF00;
+.info-box-top a:hover,
+.info-box-bottom a:hover,
+.subdued a:hover,
+.info-box-top a:active,
+.info-box-bottom a:active,
+.subdued a:active {
+  color: #c2e896;
 }
-
-a:active
-{
-	color: #FFFF00;
+.cell-highlight {
+  background-color: #1f1f1f;
 }
-
-.button
-{
-  background-color: #333;
-  border: 1px solid #555;
-  color: white;
+.cell-selected {
+  background-color: #141414;
 }
-
-a.button:link, a.button:visited,
-.button a:link, .button a:visited
-{
-  color: white;
+.caution,
+.warning,
+.error {
+  color: #776655;
 }
-
-.button:hover:not(.disabled):not(.selected)
-{
-  border-color: #f93;
-  background-color: #222;
+.caution a:link,
+.caution a:visited,
+.warning a:link,
+.warning a:visited,
+.error a:link,
+.error a:visited {
+  color: #6666cc;
 }
-
-.button.disabled
-{
-  background-color: #222;
-  border: 1px solid #333;
+.graph-foreground {
+  background-color: #ff8d46;
 }
-
-pre > code
-{
-  border-color: #555;
+.highlight {
+  color: #6ca7ff;
 }
-
-.quote-block
-{
-	background-color: #333;
-  border-color: #555;
-  color: #CCC;
-  padding-top: .5em;
-  padding-bottom: .5em;
+.selected {
+  color: #fffb8b;
 }
-
-.quote-inline, .quote
-{
-  color: #CCCCCC;
+code {
+  color: #a98ebd;
 }
-
-.chart-title
-{
-	color: #FF9933;
+.quote,
+.quote-inline,
+.quote-block {
+  color: #cccccc;
 }
-
-.menu-bar-bottom, .menu-bar-top
-{
-	border-width: 0;
+.button {
+  background-color: #141414;
+  border-color: #666666;
+  color: #bfbfbf;
 }
-
-.horizontal-separator, .vertical-separator
-{
-	border-color: #999999;
+a.button:link,
+a.button:visited {
+  color: #bfbfbf;
 }
-
-.cell-highlight, .cell-selected
-{
-	border-color: #666666;
+.button.selected {
+  background-color: #262626;
+  border-color: #666666;
+  color: #fffb8b;
 }
-
-.cell-highlight
-{
-	background-color: #333333;
+.button.disabled {
+  background-color: #0f0f0f;
+  border-color: #3d3d3d;
+  color: #b3b3b3;
 }
-
-ul.menu
-{
-  background-color: #333;
-  border-color: #f93;
+.button:hover:not(.disabled):not(.selected) {
+  background-color: #262626;
+  border-color: #666666;
 }
-
-.menu-item:hover
-{
-  background-color: #222;
-	border-bottom: 1px solid #ff9933;
-	border-top: 1px solid #ff9933;
+ul.menu {
+  background-color: #141414;
+  border-color: #666666;
 }
-
-.chart, .preview, .form-basic-block
-{
-  border-left: 2px solid #666;
+ul.menu .menu-group-title {
+  background-color: #1f1f1f;
+  border-color: #666666;
 }
-
-.menu-button
-{
-	border: 1px solid #444444;
-	background-color: #222222;
+ul.menu .menu-item:hover {
+  background-color: #262626;
+  border-color: #666666;
 }
-
-code
-{
-	color: #3399FF;
+ul.menu .menu-item-description {
+  color: #bfbfbf;
 }
-
-h2
-{
-	border-bottom: 1px dotted #999999;
-}
-
-h3
-{
-	color: #f93;
-}
-
-h4
-{
-	color: #CCCCCC;
-}
-
-th
-{
-	border-bottom-color: #FFFFFF;
-}
-
-.graph-foreground
-{
-	background-color: #669933;
-}
-
-.graph-background
-{
-	background-color: #003399;
-}
-
-.highlight
-{
-	color: #FF0000;
-}
-
-.object-in-list, .info-box-top, .info-box-bottom
-{
-	border-color: #666666;
-}
-
-.locked a:link, .locked a:visited
-{
-	color: #88BB55;
-}
-
-.left-sidebar
-{
-  border-color: #666;
-}
-
-.right-sidebar
-{
-  border-color: #666;
-}
-
-.selected
-{
-	color: #FFFF00;
-}
-
-.error
-{
-	background: url(common/10_percent_white.png) repeat;
-	border: 1px dotted #ff9933;
-	padding: 3px;
-	color: #ff9933;
-	font-style: italic;
-}
-
-.menu-control, .text-control
-{
-  background: #000000;
-  color: #BBEE88;
-  border: 1px solid #666666;
-}
-
-.menu-control:focus, .text-control:focus
-{
-  border: 1px #ff9933 solid;
+.text-control,
+.menu-control {
+  background-color: #141414;
+  color: #bfbfbf;
+  border-color: #666666;
 }

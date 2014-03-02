@@ -67,8 +67,6 @@ class BOX_RENDERER extends WEBCORE_OBJECT
   public function __construct ($context)
   {
     parent::__construct ($context);
-    $browser = $this->env->browser ();
-    $this->_supports_css_tables = $browser->supports (Browser_CSS_2_1);
   }
   
   /**
@@ -91,15 +89,7 @@ class BOX_RENDERER extends WEBCORE_OBJECT
       $builder->add_attribute('height', $this->height);
     }
 
-    if ($this->_supports_css_tables)
-    {
-      $builder->add_attribute('display', 'table');
-      echo '<div style="' . $builder->as_text() . '">' . "\n";
-    }
-    else
-    {
-      echo '<table style="' . $builder->as_text() . '"><tr>' . "\n";
-    }
+    echo '<div class="column-set" style="' . $builder->as_text() . '">' . "\n";
   }
   
   /**
@@ -114,23 +104,14 @@ class BOX_RENDERER extends WEBCORE_OBJECT
       $this->_close_column ();
     }
       
-    if ($this->_supports_css_tables)
+    if ($CSS_style)
     {
-      $tag_name = 'div';
-      $style = 'display: table-cell; vertical-align: top';
+      echo '  <div class="column-set-column" style="' . $CSS_style . '">' . "\n";
     }
     else
     {
-      $tag_name = 'td';
-      $style = 'vertical-align: top';
+      echo '  <div class="column-set-column">' . "\n";
     }
-    
-    if ($CSS_style)
-    {
-      $style .= '; ' . $CSS_style;
-    }
-      
-    echo '  <' . $tag_name . ' style="' . $style . '">' . "\n";
 
     $this->_column_started = true; 
   }
@@ -138,7 +119,7 @@ class BOX_RENDERER extends WEBCORE_OBJECT
   /**
    * Open a column after calling {@link start_column_set()}.
    * Closes a previously opened column automatically.
-   * @param string $CSS_style Use this style for the column.
+   * @param string $CSS_class Use this style for the column.
    */
   public function new_column_of_type ($CSS_class = '')
   {
@@ -147,24 +128,13 @@ class BOX_RENDERER extends WEBCORE_OBJECT
       $this->_close_column ();
     }
 
-    if ($this->_supports_css_tables)
-    {
-      $tag_name = 'div';
-      $style = 'display: table-cell; vertical-align: top';
-    }
-    else
-    {
-      $tag_name = 'td';
-      $style = 'vertical-align: top';
-    }
-
-    $class = '';
+    $class = 'column-set-column';
     if ($CSS_class)
     {
-      $class = 'class="' . $CSS_class . '"';
+      $class .= ' ' . $CSS_class;
     }
 
-    echo '  <' . $tag_name . ' style="' . $style . '"' . $class . '>' . "\n";
+    echo '  <div class="' . $class . '">' . "\n";
 
     $this->_column_started = true;
   }
@@ -180,14 +150,7 @@ class BOX_RENDERER extends WEBCORE_OBJECT
       $this->_close_column ();
     }
       
-    if ($this->_supports_css_tables)
-    {
-      echo '</div>' . "\n";
-    }
-    else
-    {
-      echo '</tr></table>' . "\n";
-    }
+    echo '</div>' . "\n";
   }
   
   /**
@@ -198,21 +161,8 @@ class BOX_RENDERER extends WEBCORE_OBJECT
    */
   protected function _close_column ()
   {
-    if ($this->_supports_css_tables)
-    {
-      echo '  </div>' . "\n";
-    }
-    else
-    {
-      echo '  </td>' . "\n";
-    }
+    echo '  </div>' . "\n";
   }
-  
-  /**
-   * Can CSS 2 be used to render controls?
-   * @var boolean
-   */
-  protected $_supports_css_tables;
 
   /**
    * @var boolean 
@@ -220,5 +170,3 @@ class BOX_RENDERER extends WEBCORE_OBJECT
    */
   protected $_column_started = false;
 }
-
-?>

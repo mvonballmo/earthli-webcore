@@ -567,7 +567,12 @@ class CONTEXT extends RESOLVER
    */
   public function get_end_message ($tag_name = 'p')
   {
-    return '</span></' . $tag_name . '>';
+    if ($tag_name == 'p')
+    {
+      return '</span></p>';
+    }
+
+    return '</div></' . $tag_name . '>';
   }
 
   /**
@@ -584,7 +589,9 @@ class CONTEXT extends RESOLVER
       $type = 'caution';
     }
 
-    return '<' . $tag_name . ' class="' . $type . '"><span class="icon sixteen" style="background-image: url(' . $icon_url . ')">';
+    $sub_tag_name = $tag_name == 'p' ? 'span' : 'div';
+
+    return '<' . $tag_name . ' class="' . $type . '"><' . $sub_tag_name . ' class="icon sixteen" style="display: block; background-image: url(' . $icon_url . ')">';
   }
 
   /**

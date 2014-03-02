@@ -23,218 +23,192 @@ For more information about the earthli WebCore, visit:
 http://www.earthli.com/software/webcore
 
 ****************************************************************************/
-
-body
-{
-	background-color: #294a83;
-	color: #CCCCCC;
+body {
+  background-color: #294a83;
+  color: #dddddd;
 }
-
-.banner, .footer
-{
-	border: 0 solid #1C6CA9;
+a:link,
+a:visited {
+  color: #4c9cd9;
 }
-
-.banner
-{
-	border-bottom-width: 2px;
+a:hover,
+a:active {
+  color: #95ccf6;
 }
-
-.footer
-{
-	border-top-width: 2px;
+h1 {
+  color: #99cc66;
 }
-
-.nav-box
-{
-	border-width: 0;
+h2 {
+  color: #99cc66;
+  border-color: #99cc66;
 }
-
-a:link, a:visited
-{
-	color: #4C9CD9;
+h3 {
+  color: #77cc66;
 }
-
-a:active, a:hover
-{
-	color: #99CC66;
+h4 {
+  color: #77cc66;
 }
-
-h1
-{
-	color: #99CC66;
+.chart-title,
+.preview-title {
+  color: #99cc66;
 }
-
-h2
-{
-	border-color: #1C6CA9;
+.banner {
+  background-color: transparent;
+  color: #dddddd;
 }
-
-th
-{
-	border-color: #CCCCCC;
+.banner a:link,
+.banner a:visited {
+  color: #4c9cd9;
 }
-
-.box
-{
-	border-width: 0;
+.banner a:hover,
+.banner a:active {
+  color: #95ccf6;
 }
-
-.box-title
-{
-	color: #99CC66;
-	text-align: center;
-	border-bottom: 2px solid #1C6CA9;
+.banner-title {
+  color: #99cc66;
 }
-
-.side-bar-body, .chart-body
-{
-	border: 1px solid #1C6CA9;
-	background-color: #11427A;
+.footer {
+  background-color: transparent;
+  color: #dddddd;
 }
-
-.side-bar, .chart
-{
-	border-width: 0;
+.footer a:link,
+.footer a:visited {
+  color: #4c9cd9;
 }
-
-.side-bar-title, .chart-title, .preview-title
-{
-	color: #99CC66;
-	border-bottom-width: 0;
+.footer a:hover,
+.footer a:active {
+  color: #95ccf6;
 }
-
-.preview
-{
-  border-left: 1px solid #2C8CB9;
+.nav-box,
+.top-box,
+.footer,
+.horizontal-separator,
+.vertical-separator,
+.left-sidebar,
+.right-sidebar,
+.object-in-list,
+.info-box-top,
+.info-box-bottom,
+.cell-selected,
+.cell-highlight,
+.cell-non-empty,
+.description-box,
+table.columns > tbody > tr > td,
+table.columns > tbody > tr > th,
+.abstract {
+  border-color: #5f769e;
 }
-
-.info-box-top
-{
-  border-bottom: 1px solid #2C8CB9;
+.quote-block,
+.preview,
+.chart,
+pre > code,
+.form-basic-block,
+.pullquote {
+  border-color: #233f70;
 }
-
-.info-box-bottom
-{
-  border-top: 1px solid #2C8CB9;
+.object-navigator .links {
+  column-rule-color: #5f769e;
+  -webkit-column-rule-color: #5f769e;
+  -moz-column-rule-color: #5f769e;
 }
-
-.quote-block
-{
-	background-color: #395a93;
+.info-box-top,
+.info-box-bottom,
+.subdued {
+  color: #7a8cac;
 }
-
-.callout
-{
-	border-width: 0;
-	border-bottom: 2px solid #1C6CA9;
+.info-box-top a:link,
+.info-box-bottom a:link,
+.subdued a:link,
+.info-box-top a:visited,
+.info-box-bottom a:visited,
+.subdued a:visited {
+  color: #3e7bb7;
 }
-
-.cell-non-empty, .cell-selected, .cell-highlight
-{
-	border-color: #CCCCCC;
+.info-box-top a:hover,
+.info-box-bottom a:hover,
+.subdued a:hover,
+.info-box-top a:active,
+.info-box-bottom a:active,
+.subdued a:active {
+  color: #95ccf6;
 }
-
-.cell-highlight
-{
-	background-color: #11427A;
+.cell-highlight {
+  background-color: #1e3660;
 }
-
-.horizontal-separator, .vertical-separator
-{
-	border-color: #1C6CA9;
+.cell-selected {
+  background-color: #223d6c;
 }
-
-.menu-bar-top, .menu-bar-bottom
-{
-	border-width: 0;
+.caution,
+.warning,
+.error {
+  color: #776655;
 }
-
-.error
-{
-	background-color: #FFBB00;
-	border-color:	#FF6600;
-	color: blue;
+.caution a:link,
+.caution a:visited,
+.warning a:link,
+.warning a:visited,
+.error a:link,
+.error a:visited {
+  color: #6666cc;
 }
-
-.frame
-{
-	border-color: #99CC66;
+.graph-foreground {
+  background-color: #99cc66;
 }
-
-.graph-foreground
-{
-	background: #556F99;
-	border-right: 1px solid #999999;
+.highlight {
+  color: #ffff00;
 }
-
-.graph-background
-{
-	background: #294a83;
-	border: 1px solid #999999;
+.selected {
+  color: #99cc66;
 }
-
-.highlight
-{
-	color: #FFFF00;
+code {
+  color: #dddddd;
 }
-
-.object-in-list
-{
-	border-color: #1C6CA9;
+.quote,
+.quote-inline,
+.quote-block {
+  color: #9eaabe;
 }
-
-.object-in-list
-{
-	border-bottom-width: 2px;
+.button {
+  background-color: #223d6c;
+  border-color: #5f769e;
+  color: #b0b8c7;
 }
-
-.quote, .quote-block, .quote-inline
-{
-	color: #AAAAAA;
+a.button:link,
+a.button:visited {
+  color: #b0b8c7;
 }
-
-.quote-block
-{
-	padding: .5em;
+.button.selected {
+  background-color: #2d518f;
+  border-color: #5f769e;
+  color: #99cc66;
 }
-
-.required
-{
-	color: #FFFFFF;
+.button.disabled {
+  background-color: #233f70;
+  border-color: #4c6795;
+  color: #7a8cac;
 }
-
-.selected
-{
-	color: #99CC66;
+.button:hover:not(.disabled):not(.selected) {
+  background-color: #2d518f;
+  border-color: #5f769e;
 }
-
-.locked a:link, .locked a:visited
-{
-	color: #2C7CB9;
+ul.menu {
+  background-color: #223d6c;
+  border-color: #5f769e;
 }
-
-.menu
-{
-	background-color: #395a93;
-	border-color: #698aC3 #000066 #000066 #698aC3;
+ul.menu .menu-group-title {
+  background-color: #1e3660;
+  border-color: #5f769e;
 }
-
-.menu-control, .text-control
-{
-  border: 1px solid #1C6CA9;
-  border-color: #000066 #698aC3 #698aC3 #000066;
-  background-color: #496aA3;
-  color: #CCCCCC;
+ul.menu .menu-item:hover {
+  background-color: #2d518f;
+  border-color: #5f769e;
 }
-
-.text-control::selection
-{
-  background-color: red;
+ul.menu .menu-item-description {
+  color: #b0b8c7;
 }
-
-.text-control.required
-{
-  background-color: #698aC3;
-  color: white;
+.text-control,
+.menu-control {
+  background-color: #223d6c;
+  color: #b0b8c7;
+  border-color: #5f769e;
 }
