@@ -120,19 +120,17 @@ class DEFAULT_PAGE_RENDERER extends WEBCORE_PAGE_RENDERER
         </div>
         <div style="clear: both"></div>
       </div>
+      <div class="nav-box">
       <?php
         $this->_handle_client_data_warnings ($options);
         $this->_handle_browser_warnings ($options, true);
 
         if ($page->location->size ())
         {
-          ?>
-          <div class="nav-box">
-            <?php $page->location->display (); ?>
-          </div>
-          <?php
+          $page->location->display ();
         }
       ?>
+      </div>
     </div>
 <?php
     }
