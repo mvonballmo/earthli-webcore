@@ -112,7 +112,7 @@ class SAMPLE_FORM extends FORM
   protected function _draw_controls($renderer)
   {
     $renderer->default_control_height = '75px';
-    $renderer->set_width('30em');
+    $renderer->set_width('25em');
 
     $renderer->start();
     $props = $renderer->make_list_properties ();
@@ -122,7 +122,7 @@ class SAMPLE_FORM extends FORM
     $renderer->draw_check_boxes_row('Options', $props);
     $renderer->start_row('Text');
     $text_props = new FORM_TEXT_CONTROL_OPTIONS();
-    $text_props->width = '10em';
+    $text_props->width = '8em';
     echo $renderer->date_as_html('date');
     echo ' ';
     echo $renderer->text_line_as_html('name', $text_props);

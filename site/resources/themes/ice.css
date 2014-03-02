@@ -23,95 +23,192 @@ For more information about the earthli WebCore, visit:
 http://www.earthli.com/software/webcore
 
 ****************************************************************************/
+body {
+  background-color: #ffffff;
+  color: #333333;
+}
 a:link,
 a:visited {
-  color: #3477B1;
+  color: #3477b1;
 }
 a:hover,
 a:active {
-  color: #CC3333;
+  color: #63aae8;
+}
+h1 {
+  color: #4a8cca;
 }
 h2 {
-  border-bottom: 1px dotted #AAAAAA;
-  color: #4A8CCA;
+  color: #4a8cca;
+  border-color: #4a8cca;
 }
 h3 {
-  color: #333333;
+  color: #4a61ca;
 }
 h4 {
-  color: #666;
+  color: #4a61ca;
+}
+.chart-title,
+.preview-title {
+  color: #4a8cca;
+}
+.banner {
+  background-color: transparent;
+  color: #333333;
+}
+.banner a:link,
+.banner a:visited {
+  color: #3477b1;
+}
+.banner a:hover,
+.banner a:active {
+  color: #63aae8;
 }
 .banner-title {
-  color: #4A8CCA;
+  color: #4a8cca;
+}
+.footer {
+  background-color: transparent;
+  color: #333333;
+}
+.footer a:link,
+.footer a:visited {
+  color: #3477b1;
+}
+.footer a:hover,
+.footer a:active {
+  color: #63aae8;
 }
 .nav-box,
 .top-box,
 .footer,
-.chart,
-.preview,
-.form-basic-block,
-.left-sidebar,
-.right-sidebar,
-table.columns > tbody > tr > td,
-table.columns > tbody > tr > th,
-table th,
-th.basic,
-hr,
 .horizontal-separator,
 .vertical-separator,
-.cell-non-empty,
+.left-sidebar,
+.right-sidebar,
+.object-in-list,
+.info-box-top,
+.info-box-bottom,
 .cell-selected,
 .cell-highlight,
-ul.menu,
-.menu-item:hover {
-  border-color: #4A8CCA;
+.cell-non-empty,
+.description-box,
+table.columns > tbody > tr > td,
+table.columns > tbody > tr > th,
+.abstract {
+  border-color: #8aabca;
+}
+.quote-block,
+.preview,
+.chart,
+pre > code,
+.form-basic-block,
+.pullquote {
+  border-color: #4a8cca;
+}
+.object-navigator .links {
+  column-rule-color: #8aabca;
+  -webkit-column-rule-color: #8aabca;
+  -moz-column-rule-color: #8aabca;
 }
 .info-box-top,
 .info-box-bottom,
-.frame {
-  border-color: #AAA;
-}
-.cell-highlight {
-  background-color: #F4F4F4;
-}
-.cell-selected {
-  background-color: #DDEEFF;
-}
-.highlight {
-  color: #00AA00;
-}
-.description-box {
-  border-right-color: #4A8CCA;
-}
-.object-navigator .links {
-  column-rule-color: #4A8CCA;
-  -webkit-column-rule-color: #4A8CCA;
-  -moz-column-rule-color: #4A8CCA;
-}
-.quote-inline {
-  color: #777;
-}
-.chart-title,
-.preview-title {
-  color: #0055BB;
+.subdued {
+  color: #a3a3a3;
 }
 .info-box-top a:link,
-.info-box-top a:visited,
 .info-box-bottom a:link,
-.info-box-bottom a:visited {
-  color: #74A7D1;
+.subdued a:link,
+.info-box-top a:visited,
+.info-box-bottom a:visited,
+.subdued a:visited {
+  color: #85add0;
 }
-pre > code {
-  border-color: silver;
+.info-box-top a:hover,
+.info-box-bottom a:hover,
+.subdued a:hover,
+.info-box-top a:active,
+.info-box-bottom a:active,
+.subdued a:active {
+  color: #63aae8;
+}
+.cell-highlight {
+  background-color: #e8e8e8;
+}
+.cell-selected {
+  background-color: #f8f8f8;
+}
+.caution,
+.warning,
+.error {
+  color: #776655;
+}
+.caution a:link,
+.caution a:visited,
+.warning a:link,
+.warning a:visited,
+.error a:link,
+.error a:visited {
+  color: #6666cc;
+}
+.graph-foreground {
+  background-color: #4a8cca;
+}
+.highlight {
+  color: #00aa00;
+}
+.selected {
+  color: #4a8cca;
+}
+code {
+  color: #333333;
+}
+.quote,
+.quote-inline,
+.quote-block {
+  color: #7a7a7a;
+}
+.button {
+  background-color: #f8f8f8;
+  border-color: #8aabca;
+  color: #666666;
+}
+a.button:link,
+a.button:visited {
+  color: #666666;
 }
 .button.selected {
-  background-color: #4A8CCA;
-  color: white;
+  background-color: #4a8cca;
+  border-color: #8aabca;
+  color: #ffffff;
+}
+.button.disabled {
+  background-color: #ffffff;
+  border-color: #d7d7d7;
+  color: #a3a3a3;
+}
+.button:hover:not(.disabled):not(.selected) {
+  background-color: #ffffff;
+  border-color: #8aabca;
+}
+ul.menu {
+  background-color: #f8f8f8;
+  border-color: #8aabca;
+}
+ul.menu .menu-group-title {
+  background-color: #f0f0f0;
+  border-color: #8aabca;
+}
+ul.menu .menu-item:hover {
+  background-color: #ffffff;
+  border-color: #8aabca;
+}
+ul.menu .menu-item-description {
+  color: #666666;
 }
 .text-control,
 .menu-control {
-  border-color: #999;
-}
-.menu-item-description {
-  color: #333;
+  background-color: #ffffff;
+  color: #666666;
+  border-color: #8aabca;
 }

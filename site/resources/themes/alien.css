@@ -193,7 +193,7 @@ a.button:visited {
 }
 .button.disabled {
   background-color: #0f0f0f;
-  border-color: #808080;
+  border-color: #3d3d3d;
   color: #b3b3b3;
 }
 .button:hover:not(.disabled):not(.selected) {

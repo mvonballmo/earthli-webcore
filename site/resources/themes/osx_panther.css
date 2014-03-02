@@ -62,7 +62,7 @@ h4 {
 }
 .banner a:hover,
 .banner a:active {
-  color: #0066cc;
+  color: #ffffff;
 }
 .banner-title {
   color: #222222;
@@ -77,7 +77,7 @@ h4 {
 }
 .footer a:hover,
 .footer a:active {
-  color: #0066cc;
+  color: #ffffff;
 }
 .nav-box,
 .top-box,
@@ -184,7 +184,7 @@ a.button:visited {
 }
 .button.disabled {
   background-color: #bfbfbf;
-  border-color: #7f7f7f;
+  border-color: #ababab;
   color: #808080;
 }
 .button:hover:not(.disabled):not(.selected) {
@@ -231,12 +231,12 @@ body {
 .chart,
 .preview {
   border: 2px solid;
-  border-color: #cdcdcd #676767 #676767 #cdcdcd;
+  border-color: #ffffff #b3b3b3 #b3b3b3 #ffffff;
 }
 .form-basic,
 .form-basic-block {
   border: 2px solid;
-  border-color: #676767 #cdcdcd #cdcdcd #676767;
+  border-color: #b3b3b3 #ffffff #ffffff #b3b3b3;
   background-image: url(osx/5_percent_black.png);
   background-repeat: repeat;
   padding: 5px;
@@ -244,5 +244,5 @@ body {
 .text-control,
 .menu-control {
   border: 1px solid;
-  border-color: #676767 #cdcdcd #cdcdcd #676767;
+  border-color: #b3b3b3 #ffffff #ffffff #b3b3b3;
 }

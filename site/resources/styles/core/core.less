@@ -52,7 +52,7 @@ table
   th
   {
     font-weight: bold;
-    border-bottom: @hairline_border_width solid @bright_border
+    border-bottom: @hairline_border_width solid @standard_border
   }
 
   td
@@ -123,7 +123,7 @@ table
       > th
       {
         padding: @cell_spacing @standard_spacing;
-        border-right: @hairline_border_width solid @bright_border;
+        border-right: @hairline_border_width solid @standard_border;
 
         &:last-child
         {
@@ -195,7 +195,7 @@ h5
 
 h2
 {
-  border-bottom: @hairline_border_width dotted @bright_border;
+  border-bottom: @hairline_border_width dotted @standard_border;
 }
 
 dl
@@ -259,7 +259,7 @@ kbd
 {
 	font-family: monospace;
 	background-color: #333;
-	border: @hairline_border_width solid @bright_border;
+	border: @hairline_border_width solid @standard_border;
 	color: white; 
 	padding: 0 @small_spacing;
 	display: block;
@@ -276,7 +276,7 @@ pre > code
 {
   display: block;
   padding-left: @standard_spacing;
-  border-left: @thick_border_width solid @bright_border;
+  border-left: @thick_border_width solid @standard_border;
   margin: @standard_spacing 0 @standard_spacing -@thick_border_width;
 }
 
@@ -406,12 +406,12 @@ pre > code
   margin-left: -@standard_spacing;
   padding-left: @standard_spacing;
   padding-bottom: @small_spacing;
-  border-bottom: @hairline_border_width solid @bright_border;
+  border-bottom: @hairline_border_width solid @standard_border;
 }
 
 .top-box
 {
-  border-bottom: @hairline_border_width solid @bright_border;
+  border-bottom: @hairline_border_width solid @standard_border;
   margin-bottom: @standard_spacing;
   margin-right: -@standard_spacing;
   margin-left: -@standard_spacing;
@@ -452,7 +452,7 @@ pre > code
   clear: both;
   padding-left: @standard_spacing;
   margin-top: @standard_spacing;
-  border-top: @hairline_border_width solid @bright_border;
+  border-top: @hairline_border_width solid @standard_border;
   padding-top: @small_spacing;
 }
 
@@ -532,7 +532,7 @@ pre > code
 .chart,
 .preview
 {
-  border-left: @thin_border_width solid @bright_border;
+  border-left: @thin_border_width solid @standard_border;
   padding-left: @standard_spacing;
   margin: @standard_spacing 0 @standard_spacing -@thin_border_width;
 }
@@ -590,7 +590,7 @@ td.object-in-list + td.object-in-list
 .info-box-top
 {
   line-height: normal;
-  border-bottom: @hairline_border_width solid @bright_border;
+  border-bottom: @hairline_border_width solid @standard_border;
   margin-bottom: @standard_spacing;
 
   p:last-child,
@@ -604,7 +604,7 @@ td.object-in-list + td.object-in-list
 .info-box-bottom
 {
   line-height: normal;
-  border-top: @hairline_border_width solid @bright_border;
+  border-top: @hairline_border_width solid @standard_border;
   margin-top: @standard_spacing;
 
   p:first-child,
@@ -667,7 +667,7 @@ table.basic > tbody > tr > td.empty-label
 
 .form-basic-block
 {
-  border-left: @thin_border_width solid @bright_border;
+  border-left: @thin_border_width solid @standard_border;
   padding-left: @standard_spacing;
   margin-left: -@thin_border_width;
 }
@@ -778,7 +778,7 @@ ul.menu
   white-space: nowrap;
   text-align: left;
   background-color: #FFFFFF;
-  border: @hairline_border_width solid @bright_border;
+  border: @hairline_border_width solid @standard_border;
 
   > li
   {
@@ -799,7 +799,7 @@ ul.menu
   .menu-group-title
   {
     padding: .6em .5em;
-    border-bottom: @hairline_border_width dotted @bright_border;
+    border-bottom: @hairline_border_width dotted @standard_border;
     cursor: default;
   }
 
@@ -835,7 +835,7 @@ ul.menu
   &:hover
   {
     text-decoration: none;
-    border-color: @bright_border;
+    border-color: @standard_border;
     background-color: #EEE;
   }
 }
@@ -896,7 +896,7 @@ ul.menu
 .description-box
 {
   width: 25%;
-  border-right: @hairline_border_width solid @bright_border;
+  border-right: @hairline_border_width solid @standard_border;
   padding-right: @standard_spacing;
 }
 
@@ -957,7 +957,7 @@ ul.menu
   -moz-box-sizing: border-box;
   cursor: pointer;
   background-color: #EEE;
-  border: @hairline_border_width solid @bright_border;
+  border: @hairline_border_width solid @standard_border;
   text-align: center;
   vertical-align: middle;
   white-space: nowrap;
@@ -1072,9 +1072,9 @@ a.button:link, a.button:visited
   -webkit-column-width: 250px;
   -moz-column-width: 250px;
 
-  column-rule: @hairline_border_width solid @bright_border;
-  -webkit-column-rule: @hairline_border_width solid @bright_border;
-  -moz-column-rule: @hairline_border_width solid @bright_border;
+  column-rule: @hairline_border_width solid @standard_border;
+  -webkit-column-rule: @hairline_border_width solid @standard_border;
+  -moz-column-rule: @hairline_border_width solid @standard_border;
 
   column-gap: @standard_spacing;
   -webkit-column-gap: @standard_spacing;
@@ -1143,7 +1143,7 @@ a.button:link, a.button:visited
 .cell-highlight,
 .cell-non-empty
 {
-  border: @hairline_border_width solid @bright_border;
+  border: @hairline_border_width solid @standard_border;
 }
 
 .cell-empty
@@ -1236,7 +1236,7 @@ span.error, span.caution, span.warning
 .quote-block 
 {
   padding-left: @standard_spacing;
-  border-left: @thick_border_width solid @bright_border;
+  border-left: @thick_border_width solid @standard_border;
   margin-left: -@thick_border_width;
 }
 
@@ -1252,7 +1252,7 @@ span.error, span.caution, span.warning
 
 .pullquote
 {
-  border: @hairline_border_width solid @bright_border;
+  border: @hairline_border_width solid @standard_border;
   padding: @standard_spacing;
   font-size: 150%;
   margin: 0;
@@ -1283,7 +1283,7 @@ span.error, span.caution, span.warning
 .abstract
 {
   border-width: @hairline_border_width 0;
-  border-color: @bright_border;
+  border-color: @standard_border;
   border-style: solid;
   padding: @standard_spacing 0;
 }
@@ -1405,7 +1405,7 @@ blockquote p:first-child,
 
 .horizontal-separator 
 {
-  border-bottom: @hairline_border_width solid @bright_border;
+  border-bottom: @hairline_border_width solid @standard_border;
   empty-cells: show;
   height: @hairline_border_width;
   clear: both;
@@ -1416,7 +1416,7 @@ hr
 {
 	color: transparent;
 	border: 0;
-  border-bottom: @hairline_border_width solid @bright_border;
+  border-bottom: @hairline_border_width solid @standard_border;
   empty-cells: show;
   height: .1em;
   clear: both;
@@ -1458,7 +1458,7 @@ hr
 
 .frame 
 {
-  border: @hairline_border_width solid @bright_border;
+  border: @hairline_border_width solid @standard_border;
 }
 
 .minimal-commands
@@ -1592,7 +1592,7 @@ hr
 {
   padding-left: @standard_spacing;
   margin-left: -@standard_spacing;
-  border-right: @hairline_border_width solid @bright_border;
+  border-right: @hairline_border_width solid @standard_border;
   padding-right: @standard_spacing;
 }
 
@@ -1600,7 +1600,7 @@ hr
 {
   padding-right: @standard_spacing;
   margin-right: -@standard_spacing;
-  border-left: @hairline_border_width solid @bright_border;
+  border-left: @hairline_border_width solid @standard_border;
   padding-left: @standard_spacing;
 }
 

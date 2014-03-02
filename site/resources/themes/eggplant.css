@@ -43,10 +43,10 @@ h2 {
   border-color: #bb99bb;
 }
 h3 {
-  color: #997799;
+  color: #bb99b0;
 }
 h4 {
-  color: #997799;
+  color: #bb99b0;
 }
 .chart-title,
 .preview-title {
@@ -62,7 +62,7 @@ h4 {
 }
 .banner a:hover,
 .banner a:active {
-  color: #ff9999;
+  color: #ffffff;
 }
 .banner-title {
   color: #bb99bb;
@@ -77,7 +77,7 @@ h4 {
 }
 .footer a:hover,
 .footer a:active {
-  color: #ff9999;
+  color: #ffffff;
 }
 .nav-box,
 .top-box,
@@ -96,7 +96,7 @@ h4 {
 table.columns > tbody > tr > td,
 table.columns > tbody > tr > th,
 .abstract {
-  border-color: #998877;
+  border-color: #836b79;
 }
 .quote-block,
 .preview,
@@ -104,17 +104,17 @@ table.columns > tbody > tr > th,
 pre > code,
 .form-basic-block,
 .pullquote {
-  border-color: #998877;
+  border-color: #452945;
 }
 .object-navigator .links {
-  column-rule-color: #998877;
-  -webkit-column-rule-color: #998877;
-  -moz-column-rule-color: #998877;
+  column-rule-color: #836b79;
+  -webkit-column-rule-color: #836b79;
+  -moz-column-rule-color: #836b79;
 }
 .info-box-top,
 .info-box-bottom,
 .subdued {
-  color: #998877;
+  color: #9a878b;
 }
 .info-box-top a:link,
 .info-box-bottom a:link,
@@ -170,45 +170,45 @@ code {
 }
 .button {
   background-color: #422842;
-  border-color: #998877;
-  color: #eeeecc;
+  border-color: #836b79;
+  color: #c8bfae;
 }
 a.button:link,
 a.button:visited {
-  color: #eeeecc;
+  color: #c8bfae;
 }
 .button.selected {
   background-color: #5f395f;
-  border-color: #998877;
+  border-color: #836b79;
   color: #d17b9c;
 }
 .button.disabled {
-  background-color: #998877;
-  border-color: #7e6f5f;
-  color: #998877;
+  background-color: #452945;
+  border-color: #73576c;
+  color: #9a878b;
 }
 .button:hover:not(.disabled):not(.selected) {
   background-color: #5f395f;
-  border-color: #998877;
+  border-color: #836b79;
 }
 ul.menu {
   background-color: #422842;
-  border-color: #998877;
+  border-color: #836b79;
 }
 ul.menu .menu-group-title {
   background-color: #382238;
-  border-color: #998877;
+  border-color: #836b79;
 }
 ul.menu .menu-item:hover {
   background-color: #5f395f;
-  border-color: #998877;
+  border-color: #836b79;
 }
 ul.menu .menu-item-description {
-  color: #eeeecc;
+  color: #c8bfae;
 }
 .text-control,
 .menu-control {
   background-color: #422842;
-  color: #eeeecc;
-  border-color: #998877;
+  color: #c8bfae;
+  border-color: #836b79;
 }

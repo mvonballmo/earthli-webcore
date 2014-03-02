@@ -184,7 +184,7 @@ a.button:visited {
 }
 .button.disabled {
   background-color: #89a1c1;
-  border-color: #566170;
+  border-color: #7c8ca3;
   color: #55606f;
 }
 .button:hover:not(.disabled):not(.selected) {

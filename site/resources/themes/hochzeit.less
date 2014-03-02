@@ -1,6 +1,6 @@
 /****************************************************************************
 
-Copyright (c) 2002 Marco Von Ballmoos
+Copyright (c) 2002-2014 Marco Von Ballmoos
 
 This file is part of earthli WebCore.
 
@@ -26,26 +26,47 @@ http://www.earthli.com/software/webcore
 
 @import "theme-base";
 
-@background_color: white;
-
-@text_color: #225;
-
-@banner_background_color: @title_color;
-@footer_background_color: @title_color;
-@banner_text_color: @background_color;
-@footer_text_color: @background_color;
-@banner_link_color: #CC9;
+@background_color: #FDF8E5;
+@text_color: #554433;
+@title_color: @text_color;
+@banner_title_color: @background_color;
+@banner_background_color: #BBAA99;
+@footer_background_color: @banner_background_color;
+@accent_border: lighten(@text_color, 30%);
+@link_color: #5579C4;
+@highlighted_text_color: #c72c1b;
+@selected_text_color: @title_color;
+@selected_control_text_color: @background_color;
+@control_text_color: #text_color;
+@edit_control_text_color: #FDF8E5;
+@banner_link_color: darken(saturate(@background_color, 30%), 5%);
 @footer_link_color: @banner_link_color;
-@banner_link_hover_color: #CF9;
-@footer_link_hover_color: @banner_link_hover_color;
 
-@standard_border: darken(@background_color, 20%);
+body
+{
+  background: #FDF8E5 url(hochzeit/milkweed_paper.jpg) repeat;
+}
 
-@title_color: #369;
-@banner_title_color: white;
+.banner,
+.footer,
+.text-control,
+.menu-control,
+.graph-foreground,
+.button.selected
+{
+  background: #BBAA99 url(hochzeit/fossil_paper.jpg) repeat;
+}
 
-@link_color: #996;
-@link_hover_color: #9C6;
+ul.menu
+{
+  background: #FDF8E5 url(hochzeit/milkweed_paper.jpg) repeat;
+}
 
-@highlighted_text_color: #0A0;
-@selected_text_color: #375daf;
+.cell-selected,
+.cell-highlight,
+.button,
+.button.disabled,
+.menu-group-title
+{
+  background: #DDCCBB url(hochzeit/fossil_paper_light.jpg) repeat;
+}

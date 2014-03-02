@@ -62,7 +62,7 @@ h4 {
 }
 .banner a:hover,
 .banner a:active {
-  color: #fcff4e;
+  color: #ffffff;
 }
 .banner-title {
   color: #a1c9ff;
@@ -77,7 +77,7 @@ h4 {
 }
 .footer a:hover,
 .footer a:active {
-  color: #fcff4e;
+  color: #ffffff;
 }
 .nav-box,
 .top-box,
@@ -184,7 +184,7 @@ a.button:visited {
 }
 .button.disabled {
   background-color: #3e454c;
-  border-color: #595d61;
+  border-color: #636a70;
   color: #85898d;
 }
 .button:hover:not(.disabled):not(.selected) {

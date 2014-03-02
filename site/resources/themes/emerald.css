@@ -25,7 +25,7 @@ http://www.earthli.com/software/webcore
 ****************************************************************************/
 body {
   background-color: #7fb079;
-  color: #222222;
+  color: #000000;
 }
 a:link,
 a:visited {
@@ -33,7 +33,7 @@ a:visited {
 }
 a:hover,
 a:active {
-  color: #ffea62;
+  color: #eefbd7;
 }
 h1 {
   color: #2c6833;
@@ -43,10 +43,10 @@ h2 {
   border-color: #2c6833;
 }
 h3 {
-  color: #347a3c;
+  color: #2c6847;
 }
 h4 {
-  color: #347a3c;
+  color: #2c6847;
 }
 .chart-title,
 .preview-title {
@@ -54,7 +54,7 @@ h4 {
 }
 .banner {
   background-color: transparent;
-  color: #222222;
+  color: #000000;
 }
 .banner a:link,
 .banner a:visited {
@@ -62,14 +62,14 @@ h4 {
 }
 .banner a:hover,
 .banner a:active {
-  color: #ffea62;
+  color: #eefbd7;
 }
 .banner-title {
   color: #2c6833;
 }
 .footer {
   background-color: transparent;
-  color: #222222;
+  color: #000000;
 }
 .footer a:link,
 .footer a:visited {
@@ -77,7 +77,7 @@ h4 {
 }
 .footer a:hover,
 .footer a:active {
-  color: #ffea62;
+  color: #eefbd7;
 }
 .nav-box,
 .top-box,
@@ -96,7 +96,7 @@ h4 {
 table.columns > tbody > tr > td,
 table.columns > tbody > tr > th,
 .abstract {
-  border-color: #558855;
+  border-color: #597b55;
 }
 .quote-block,
 .preview,
@@ -104,17 +104,17 @@ table.columns > tbody > tr > th,
 pre > code,
 .form-basic-block,
 .pullquote {
-  border-color: #456f45;
+  border-color: #70a769;
 }
 .object-navigator .links {
-  column-rule-color: #558855;
-  -webkit-column-rule-color: #558855;
-  -moz-column-rule-color: #558855;
+  column-rule-color: #597b55;
+  -webkit-column-rule-color: #597b55;
+  -moz-column-rule-color: #597b55;
 }
 .info-box-top,
 .info-box-bottom,
 .subdued {
-  color: #557052;
+  color: #466143;
 }
 .info-box-top a:link,
 .info-box-bottom a:link,
@@ -130,7 +130,7 @@ pre > code,
 .info-box-top a:active,
 .info-box-bottom a:active,
 .subdued a:active {
-  color: #ffea62;
+  color: #eefbd7;
 }
 .cell-highlight {
   background-color: #649e5d;
@@ -161,54 +161,54 @@ pre > code,
   color: #535e8a;
 }
 code {
-  color: #222222;
+  color: #000000;
 }
 .quote,
 .quote-inline,
 .quote-block {
-  color: #435440;
+  color: #2c3e2a;
 }
 .button {
   background-color: #6da566;
-  border-color: #558855;
-  color: #394638;
+  border-color: #597b55;
+  color: #202c1e;
 }
 a.button:link,
 a.button:visited {
-  color: #394638;
+  color: #202c1e;
 }
 .button.selected {
   background-color: #88b683;
-  border-color: #558855;
+  border-color: #597b55;
   color: #535e8a;
 }
 .button.disabled {
-  background-color: #456f45;
-  border-color: #416941;
-  color: #557052;
+  background-color: #70a769;
+  border-color: #668e61;
+  color: #466143;
 }
 .button:hover:not(.disabled):not(.selected) {
   background-color: #88b683;
-  border-color: #558855;
+  border-color: #597b55;
 }
 ul.menu {
   background-color: #6da566;
-  border-color: #558855;
+  border-color: #597b55;
 }
 ul.menu .menu-group-title {
   background-color: #649e5d;
-  border-color: #558855;
+  border-color: #597b55;
 }
 ul.menu .menu-item:hover {
   background-color: #88b683;
-  border-color: #558855;
+  border-color: #597b55;
 }
 ul.menu .menu-item-description {
-  color: #394638;
+  color: #202c1e;
 }
 .text-control,
 .menu-control {
   background-color: #6da566;
-  color: #394638;
-  border-color: #558855;
+  color: #202c1e;
+  border-color: #597b55;
 }

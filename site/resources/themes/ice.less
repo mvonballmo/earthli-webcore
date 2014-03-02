@@ -24,135 +24,19 @@ http://www.earthli.com/software/webcore
 
 ****************************************************************************/
 
-a:link,
-a:visited
-{
-  color: #3477B1;
-}
+@import "theme-base";
 
-a:hover,
-a:active
-{
-  color: #CC3333;
-}
-
-h2
-{
-  border-bottom: 1px dotted #AAAAAA;
-  color: #4A8CCA;
-}
-
-h3
-{
-  color: #333333;
-}
-
-h4
-{
-  color: #666;
-}
-
-.banner-title
-{
-  color: #4A8CCA;
-}
-
-.nav-box,
-.top-box,
-.footer,
-.chart,
-.preview,
-.form-basic-block,
-.left-sidebar,
-.right-sidebar,
-table.columns > tbody > tr > td,
-table.columns > tbody > tr > th,
-table th,
-th.basic,
-hr,
-.horizontal-separator,
-.vertical-separator,
-.cell-non-empty,
-.cell-selected,
-.cell-highlight,
-ul.menu,
-.menu-item:hover
-{
-  border-color: #4A8CCA;
-}
-
-.info-box-top,
-.info-box-bottom,
-.frame
-{
-  border-color: #AAA;
-}
-
-
-.cell-highlight
-{
-  background-color: #F4F4F4;
-}
-
-.cell-selected
-{
-  background-color: #DDEEFF;
-}
-
-.highlight
-{
-  color: #00AA00;
-}
-
-.description-box
-{
-  border-right-color: #4A8CCA;
-}
-
-.object-navigator .links
-{
-  column-rule-color: #4A8CCA;
-  -webkit-column-rule-color: #4A8CCA;
-  -moz-column-rule-color: #4A8CCA;
-}
-
-.quote-inline
-{
-  color: #777;
-}
-
-.chart-title,
-.preview-title
-{
-  color: #0055BB;
-}
-
-.info-box-top a:link,
-.info-box-top a:visited,
-.info-box-bottom a:link,
-.info-box-bottom a:visited
-{
-  color: #74A7D1;
-}
-
-pre > code
-{
-  border-color: silver;
-}
-
-.button.selected
-{
-  background-color: #4A8CCA;
-  color: white;
-}
-
-.text-control,
-.menu-control
-{
-  border-color: #999;
-}
-
-.menu-item-description
-{
-  color: #333;
-}
+@background_color: white;
+@standard_border: #8aabca;
+@accent_border: @title_color;
+@text_color: #333;
+@title_color: #4A8CCA;
+@link_color: #3477B1;
+@highlighted_text_color: #0A0;
+@control_background_color: #F8F8F8;
+@edit_control_background_color: @background_color;
+@selected_text_color: @title_color;
+@selected_control_background_color: @title_color;
+@selected_control_text_color: @background_color;
+@disabled_control_background_color: @background_color;
+@menu_title_background_color: #F0F0F0;

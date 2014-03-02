@@ -1,6 +1,6 @@
 /****************************************************************************
 
-Copyright (c) 2002 Marco Von Ballmoos
+Copyright (c) 2002-2014 Marco Von Ballmoos
 
 This file is part of earthli WebCore.
 
@@ -23,177 +23,222 @@ For more information about the earthli WebCore, visit:
 http://www.earthli.com/software/webcore
 
 ****************************************************************************/
-
-body
-{
-  background: #BBAA99 url(hochzeit/fossil_paper.jpg) repeat;
-  color: #FDF8E5;
-}
-
-.banner a:link, .banner a:visited, .footer a:link, .footer a:visited
-{
-  color: #3357A2;
-}
-
-.page-body
-{
-  background: #FDF8E5 url(hochzeit/milkweed_paper.jpg) repeat;
-  margin-bottom: 0;
-}
-
-.nav-box
-{
-  background: #DDCCBB url(hochzeit/fossil_paper_light.jpg) repeat;
-  border-top: 1px solid #554433;
-  border-bottom: 1px solid #554433;
+body {
+  background-color: #fdf8e5;
   color: #554433;
-  padding-top: 5px;
+}
+a:link,
+a:visited {
+  color: #5579c4;
+}
+a:hover,
+a:active {
+  color: #94b0eb;
+}
+h1 {
+  color: #554433;
+}
+h2 {
+  color: #554433;
+  border-color: #554433;
+}
+h3 {
+  color: #554f33;
+}
+h4 {
+  color: #554f33;
+}
+.chart-title,
+.preview-title {
+  color: #554433;
+}
+.banner {
+  background-color: #bbaa99;
+  color: #554433;
+}
+.banner a:link,
+.banner a:visited {
+  color: #fff4c9;
+}
+.banner a:hover,
+.banner a:active {
+  color: #ffffff;
+}
+.banner-title {
+  color: #fdf8e5;
+}
+.banner-content {
+  margin-right: 15px;
+}
+.footer {
+  background-color: #bbaa99;
+  color: #554433;
+}
+.footer a:link,
+.footer a:visited {
+  color: #fff4c9;
+}
+.footer a:hover,
+.footer a:active {
+  color: #ffffff;
+}
+.footer {
   padding-bottom: 5px;
 }
-
-a:link, a:visited
-{
-  color: #5579C4;
-}
-
-a:hover, a:active
-{
-  color: #FF0000;
-}
-
-.menu
-{
-  background: #FDF8E5 url(hochzeit/milkweed_paper.jpg) repeat;
-  color: #554433;
-  border-color: #554433;
-}
-
-page-body
-{
-  background: #FDF8E5 url(hochzeit/milkweed_paper.jpg) repeat;
-  color: #554433;
-  border-color: #554433;
-}
-
-.main-box
-{
-  color: #554433;
-  margin-top: 15px;
-  margin-bottom: 15px;
-}
-
-.box > *:first-child,
-.content-column > *:first-child,
-.left-sidebar > *:first-child
-{
-  margin-top: 0;
-}
-
-.box > *:last-child,
-.content-column > *:last-child
-{
+.page {
   margin-bottom: 0;
 }
-
-.side-bar, .chart, .preview
-{
-  background: #FDF8E5 url(hochzeit/milkweed_paper.jpg) repeat;
+.nav-box,
+.top-box,
+.footer,
+.horizontal-separator,
+.vertical-separator,
+.left-sidebar,
+.right-sidebar,
+.object-in-list,
+.info-box-top,
+.info-box-bottom,
+.cell-selected,
+.cell-highlight,
+.cell-non-empty,
+.description-box,
+table.columns > tbody > tr > td,
+table.columns > tbody > tr > th,
+.abstract {
+  border-color: #cbc2b0;
+}
+.quote-block,
+.preview,
+.chart,
+pre > code,
+.form-basic-block,
+.pullquote {
+  border-color: #ac9175;
+}
+.object-navigator .links {
+  column-rule-color: #cbc2b0;
+  -webkit-column-rule-color: #cbc2b0;
+  -moz-column-rule-color: #cbc2b0;
+}
+.info-box-top,
+.info-box-bottom,
+.subdued {
+  color: #b1a795;
+}
+.info-box-top a:link,
+.info-box-bottom a:link,
+.subdued a:link,
+.info-box-top a:visited,
+.info-box-bottom a:visited,
+.subdued a:visited {
+  color: #98acd1;
+}
+.info-box-top a:hover,
+.info-box-bottom a:hover,
+.subdued a:hover,
+.info-box-top a:active,
+.info-box-bottom a:active,
+.subdued a:active {
+  color: #94b0eb;
+}
+.cell-highlight {
+  background-color: #faedba;
+}
+.cell-selected {
+  background-color: #fbf0c9;
+}
+.caution,
+.warning,
+.error {
+  color: #776655;
+}
+.caution a:link,
+.caution a:visited,
+.warning a:link,
+.warning a:visited,
+.error a:link,
+.error a:visited {
+  color: #6666cc;
+}
+.graph-foreground {
+  background-color: #554433;
+}
+.highlight {
+  color: #c72c1b;
+}
+.selected {
   color: #554433;
-  border-color: #554433;
 }
-
-.preview-body
-{
-  border: 1px solid #554433;
-  background: url(hochzeit/10_percent_brown.png);
+code {
+  color: #554433;
 }
-
-.menu
-{
-  background-color: transparent;
-  background: #DDCCBB url(hochzeit/milkweed_paper.jpg) repeat;
+.quote,
+.quote-inline,
+.quote-block {
+  color: #908371;
 }
-
-.chart-title
-{
-  background: #DDCCBB url(hochzeit/fossil_paper_light.jpg) repeat;
+.button {
+  background-color: #fbf0c9;
+  border-color: #cbc2b0;
+  color: #text_color;
 }
-
-.horizontal-separator, .vertical-separator
-{
-  border-color: #554433;
+a.button:link,
+a.button:visited {
+  color: #text_color;
 }
-
-.cell-selected, .cell-highlight
-{
-  background: #DDCCBB url(hochzeit/fossil_paper_light.jpg) repeat;
+.button.selected {
+  background-color: #fefcf3;
+  border-color: #cbc2b0;
+  color: #fdf8e5;
 }
-
-.error
-{
-  background-color: transparent;
-  border-width: 0px;
+.button.disabled {
+  background-color: #ac9175;
+  border-color: #dcd5c2;
+  color: #b1a795;
 }
-
-h1
-{
-  color: #FDF8E5;
+.button:hover:not(.disabled):not(.selected) {
+  background-color: #fefcf3;
+  border-color: #cbc2b0;
 }
-
-.graph-foreground
-{
-  background: #FDF8E5;
+ul.menu {
+  background-color: #fbf0c9;
+  border-color: #cbc2b0;
 }
-
-.graph-background
-{
-  background: #887766;
+ul.menu .menu-group-title {
+  background-color: #faedba;
+  border-color: #cbc2b0;
 }
-
-.highlight
-{
-  color: #FF0000;
+ul.menu .menu-item:hover {
+  background-color: #fefcf3;
+  border-color: #cbc2b0;
 }
-
-.quote, .quote-inline
-{
-  color: black;
+ul.menu .menu-item-description {
+  color: #text_color;
 }
-
-.quote-block
-{
-  border: 1px solid #554433;
-  padding: .5em;
-  background: url(hochzeit/10_percent_brown.png) repeat;
+.text-control,
+.menu-control {
+  background-color: #fbf0c9;
+  color: #fdf8e5;
+  border-color: #cbc2b0;
 }
-
-.left-sidebar
-{
-  border-right: 1px solid #554433; /* frame */
-  padding-right: 15px;
+body {
+  background: #fdf8e5 url(hochzeit/milkweed_paper.jpg) repeat;
 }
-
-.right-sidebar
-{
-  border-left: 1px solid #554433; /* frame */
-  padding-left: 15px;
+.banner,
+.footer,
+.text-control,
+.menu-control,
+.graph-foreground,
+.button.selected {
+  background: #bbaa99 url(hochzeit/fossil_paper.jpg) repeat;
 }
-
-.button
-{
-  border: 1px solid #999;
-  background: #DDCCBB url(hochzeit/fossil_paper_light.jpg) repeat;
+ul.menu {
+  background: #fdf8e5 url(hochzeit/milkweed_paper.jpg) repeat;
 }
-
-.pager .selected
-{
-  background: #BBAA99 url(hochzeit/fossil_paper.jpg) repeat;
-  color: #FDF8E5;
-}
-
-.text-control, .menu-control
-{
-  border: 1px solid #554433;
-  background: #BBAA99 url(hochzeit/fossil_paper.jpg) repeat;
-  color: #FDF8E5;
+.cell-selected,
+.cell-highlight,
+.button,
+.button.disabled,
+.menu-group-title {
+  background: #ddccbb url(hochzeit/fossil_paper_light.jpg) repeat;
 }
