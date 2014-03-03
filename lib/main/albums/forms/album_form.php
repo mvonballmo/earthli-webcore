@@ -139,20 +139,22 @@ class ALBUM_FORM extends FOLDER_FORM
   {
     parent::load_with_defaults ();
 
-    if (isset ($this->_folder))
+    /** @var ALBUM $folder */
+    $folder = $this->_folder;
+    if (isset ($folder))
     {
-      $this->set_value ('location', $this->_folder->location);
-      $this->set_value ('url_root', $this->_folder->url_root);
+      $this->set_value ('location', $folder->location);
+      $this->set_value ('url_root', $folder->url_root);
 
-      $this->set_value ('date_style', $this->_folder->date_style ());
-      $this->set_value ('first_day', $this->_folder->first_day);
-      $this->set_value ('last_day', $this->_folder->last_day);
+      $this->set_value ('date_style', $folder->date_style ());
+      $this->set_value ('first_day', $folder->first_day);
+      $this->set_value ('last_day', $folder->last_day);
 
-      $this->set_value ('show_times', $this->_folder->show_times);
-      $this->set_value ('show_celsius', $this->_folder->show_celsius);
+      $this->set_value ('show_times', $folder->show_times);
+      $this->set_value ('show_celsius', $folder->show_celsius);
 
-      $this->set_value ('max_picture_width', $this->_folder->max_picture_width);
-      $this->set_value ('max_picture_height', $this->_folder->max_picture_height);
+      $this->set_value ('max_picture_width', $folder->max_picture_width);
+      $this->set_value ('max_picture_height', $folder->max_picture_height);
     }
     else
     {
@@ -169,7 +171,7 @@ class ALBUM_FORM extends FOLDER_FORM
     }
 
     $this->set_value ('constrain_picture_size', $this->value_for ('max_picture_width') || $this->value_for ('max_picture_height'));
-    $this->set_visible ('location', $this->login->is_allowed (Privilege_set_entry, Privilege_upload, $this->_folder));
+    $this->set_visible ('location', $this->login->is_allowed (Privilege_set_entry, Privilege_upload, $folder));
     $this->set_visible ('url_root_enabled', ($this->value_for ('url_root') != '') && ($this->value_for ('location') == Album_location_type_local));
     $this->set_enabled ('url_root', ! $this->visible ('url_root_enabled'));
   }
@@ -255,18 +257,22 @@ class ALBUM_FORM extends FOLDER_FORM
   {
     parent::_post_validate ($obj);
 
+    /** @var DATE_TIME $first_day_value */
+    $first_day_value = $this->value_for('first_day');
+    /** @var DATE_TIME $last_day_value */
+    $last_day_value = $this->value_for ('last_day');
+
     switch ($this->value_for ('date_style'))
     {
     case Album_is_journal:
       $now = new DATE_TIME ();
-      if ($now->less_than ($this->value_for ('first_day')))
+      if ($now->less_than ($first_day_value))
       {
         $this->record_error ('first_day', 'First day of a journal cannot be in the future.');
       }
       break;
     case Album_is_span:
-      $last_day = $this->value_for ('last_day');
-      if ($last_day->less_than ($this->value_for ('first_day')))
+      if ($last_day_value->less_than ($first_day_value))
       {
         $this->record_error ('last_day', 'First day must come before the last day.');
       }
@@ -290,9 +296,14 @@ class ALBUM_FORM extends FOLDER_FORM
     $obj->url_root = $this->value_as_text ('url_root');
     $obj->location = $this->value_as_text ('location');
 
+    /** @var DATE_TIME $first_day_value */
+    $first_day_value = $this->value_for('first_day');
+    /** @var DATE_TIME $last_day_value */
+    $last_day_value = $this->value_for ('last_day');
+
     $obj->show_times = $this->value_for ('show_times');
     $obj->show_celsius = $this->value_for ('show_celsius');
-    $obj->set_date_style ($this->value_for ('date_style'), $this->value_for ('first_day'), $this->value_for ('last_day'));
+    $obj->set_date_style ($this->value_for ('date_style'), $first_day_value, $last_day_value);
     $obj->main_picture_id = $this->value_for ('main_picture_id');
 
     if ($this->value_for ('constrain_picture_size'))
@@ -495,7 +506,7 @@ class ALBUM_FORM extends FOLDER_FORM
     $item->on_click_script = 'on_url_root_enabled_changed (this)';
     $item->smart_wrapping = true;
     
-    $renderer->draw_check_box_row ('url_root_enabled', $item);
+    $renderer->draw_check_box_row ('url_root_enabled', $item, '&nbsp;');
     
     $renderer->draw_separator ();
 
@@ -613,6 +624,7 @@ class ALBUM_FORM extends FOLDER_FORM
       }
       else
       {
+        $title = '';
         $image_display = 'none';
         $text_display = 'inline';
         $image_source = '';
