@@ -125,13 +125,13 @@ dl {
 dd {
   margin: 5px 0 15px 1.5em;
 }
-a:active,
-a:hover {
-  text-decoration: underline;
-}
 a:link,
 a:visited {
   text-decoration: none;
+}
+a:active,
+a:hover {
+  text-decoration: underline;
 }
 a img {
   border: 0;
@@ -679,6 +679,9 @@ a.button:visited {
 .button img {
   position: relative;
   top: 2px;
+}
+.button .icon {
+  display: inline-block;
 }
 .pager .button {
   width: 2.2em;
