@@ -125,13 +125,13 @@ dl {
 dd {
   margin: 5px 0 15px 1.5em;
 }
-a:active,
-a:hover {
-  text-decoration: underline;
-}
 a:link,
 a:visited {
   text-decoration: none;
+}
+a:active,
+a:hover {
+  text-decoration: underline;
 }
 a img {
   border: 0;
@@ -472,17 +472,20 @@ table.basic > tbody > tr > td.empty-label {
 }
 .thirty-two {
   padding-left: 37px;
+  padding-top: .8em;
   background: no-repeat 0 5px;
   min-height: 42px;
 }
 .twenty {
   padding-left: 25px;
+  padding-top: .4em;
   background: no-repeat;
   min-height: 26px;
 }
 .sixteen {
   padding-left: 21px;
-  background: no-repeat 0 5px;
+  padding-top: 3px;
+  background: no-repeat 0 2px;
   min-height: 18px;
 }
 .no-label {
@@ -679,6 +682,10 @@ a.button:visited {
 .button img {
   position: relative;
   top: 2px;
+}
+.button .icon {
+  display: inline-block;
+  box-sizing: border-box;
 }
 .pager .button {
   width: 2.2em;

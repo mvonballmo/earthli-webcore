@@ -60,17 +60,9 @@ class TINY_ARTICLE_GRID extends CONTENT_OBJECT_GRID
     $fd = $obj->time_published->formatter ();
     $fd->type = Date_time_format_short_date;
 ?>
-  <div style="float: left">
-    <?php echo $this->app->resolve_icon_as_html ('{app_icons}app/news', '', '16px'); ?>
-  </div>
-  <div class="detail" style="margin-left: 20px; margin-bottom: .5em">
-    <div>
-      <?php echo $obj->title_as_link ($t); ?>
-    </div>
-    <div style="text-align: right">
-      <?php echo $obj->time_published->format ($fd); ?>
-    </div>
-  </div>
+  <p>
+    <?php echo $obj->time_published->format ($fd); ?>: <?php echo $obj->title_as_link ($t); ?>
+  </p>
 <?php
   }
 }
