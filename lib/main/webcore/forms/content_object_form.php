@@ -61,7 +61,7 @@ class CONTENT_OBJECT_FORM extends AUDITABLE_FORM
     $field->required = true;
     $this->add_field ($field);
 
-    $field = new MUNGER_TEXT_FIELD ();
+    $field = new MEDIUM_MUNGER_TEXT_FIELD ();
     $field->id = 'description';
     $field->caption = 'Description';
     $this->add_field ($field);
