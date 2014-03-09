@@ -27,4 +27,4 @@ http://www.earthli.com/software/webcore/news
  ****************************************************************************/
 
 require_once ('news/start.php');
-require_once ($App->page_template_for ('webcore/pages/generate_preview.php'));
+require_once ($App->page_template_for ('webcore/pages/save_field.php'));

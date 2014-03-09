@@ -287,5 +287,3 @@ abstract class AUDITABLE_FORM extends RENDERABLE_FORM
    */
   protected $_history_item;
 }
-
-?>
