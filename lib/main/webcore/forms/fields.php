@@ -660,6 +660,23 @@ class MUNGER_TEXT_FIELD extends TEXT_FIELD
 }
 
 /**
+ * Validates medium-length multi-line {@link MUNGER} text (up to 500KB).
+ * @see FORM
+ * @package webcore
+ * @subpackage forms-core
+ * @version 3.4.0
+ * @since 3.4.1
+ * @access private
+ */
+class MEDIUM_MUNGER_TEXT_FIELD extends MUNGER_TEXT_FIELD
+{
+  /**
+   * @var integer
+   */
+  public $max_length = 500000;
+}
+
+/**
  * Validates single-line {@link MUNGER} text.
  * @see FORM
  * @package webcore
