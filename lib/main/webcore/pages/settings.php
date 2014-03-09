@@ -258,6 +258,14 @@ class SAMPLE_FORM extends FORM
   </div>
   <div class="button-content">
     <?php
+    $renderer = $Page->make_controls_renderer ();
+    echo $renderer->button_as_html ('Upgrayedd', '#', '{icons}buttons/upgrade', '32px');
+    echo $renderer->button_as_html ('Upgrayedd', '#', '{icons}buttons/upgrade', '20px');
+    echo $renderer->button_as_html ('Upgrayedd', '#', '{icons}buttons/upgrade', '16px');
+    ?>
+  </div>
+  <div class="button-content">
+    <?php
     include ('webcore/gui/tree_node.php');
 
     $tree = $Page->make_tree_renderer ();
