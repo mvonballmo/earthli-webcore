@@ -74,3 +74,18 @@ h5,
 {
  	font-size: 11pt;
 }
+
+.icon.sixteen
+{
+  padding-top: 1px;
+}
+
+.icon.twenty
+{
+  padding-top: .2em;
+}
+
+.icon.thirty-two
+{
+  padding-top: .7em;
+}
