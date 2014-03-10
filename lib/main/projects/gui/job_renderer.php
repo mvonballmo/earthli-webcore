@@ -6,7 +6,7 @@
  * @filesource
  * @package projects
  * @subpackage gui
- * @version 3.4.0
+ * @version 3.5.0
  * @since 1.7.0
  */
 
@@ -43,7 +43,7 @@ require_once ('projects/gui/project_entry_renderer.php');
  * Render details for a {@link JOB}.
  * @package projects
  * @subpackage gui
- * @version 3.4.0
+ * @version 3.5.0
  * @since 1.7.0
  */
 class JOB_RENDERER extends PROJECT_ENTRY_RENDERER
@@ -394,7 +394,7 @@ class JOB_RENDERER extends PROJECT_ENTRY_RENDERER
  * Also renders other data with {@link ENTRY_ASSOCIATED_DATA_RENDERER}.
  * @package projects
  * @subpackage gui
- * @version 3.4.0
+ * @version 3.5.0
  * @since 1.9.0
  */
 class JOB_ASSOCIATED_DATA_RENDERER extends ENTRY_ASSOCIATED_DATA_RENDERER

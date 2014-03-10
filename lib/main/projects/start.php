@@ -6,7 +6,7 @@
  * @author Marco Von Ballmoos
  * @filesource
  * @package projects
- * @version 3.4.0
+ * @version 3.5.0
  * @since 1.8.0
  */
 
@@ -45,7 +45,7 @@ require_once ('projects/init.php');
  * {@link PAGE::register_application()} for help on customizing the
  * application creation and initialization.
  * @global PROJECT_APPLICATION $App
- * @version 3.4.0
+ * @version 3.5.0
  * @since 1.4.1
  */
 $App = $Page->make_application (Project_application_id, true, true);

@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage sys
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.5.0
  * @access private
  */
@@ -44,7 +44,7 @@ http://www.earthli.com/software/webcore
  * {@link CALLBACK_METHOD}.
  * @package webcore
  * @subpackage sys
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.5.0
  * @access private
  */
@@ -99,7 +99,7 @@ class WEBCORE_CALLBACK
  * callback to a specific object.
  * @package webcore
  * @subpackage sys
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.5.0
  * @access private
  */
@@ -154,7 +154,7 @@ class CALLBACK_METHOD extends WEBCORE_CALLBACK
  * Manages and executes a list of {@link CALLBACK}s.
  * @package webcore
  * @subpackage sys
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.7.0
  * @access private
  */

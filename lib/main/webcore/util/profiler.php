@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage util
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  * @access private
  */
@@ -44,7 +44,7 @@ require_once ('webcore/sys/system.php');
  * Maintains a time for a channel in the {@link PROFILER}.
  * @package webcore
  * @subpackage util
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  * @access private
  */
@@ -152,7 +152,7 @@ class PROFILER_TIMER extends RAISABLE
  * and the time for processing the entire page.
  * @package webcore
  * @subpackage util
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  * @see PROFILER_TIMER
  * @access private

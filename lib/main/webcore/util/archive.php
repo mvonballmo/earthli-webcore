@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage util
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.5.0
  */
 
@@ -54,7 +54,7 @@ require_once ('webcore/sys/files.php');
  *
  * @package webcore
  * @subpackage util
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.5.0
  */
 class ARCHIVE
@@ -202,7 +202,7 @@ class ARCHIVE
  * COMPRESSED_FILE}s.
  * @package webcore
  * @subpackage util
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.7.0
  * @access private
  */
@@ -230,7 +230,7 @@ class ARCHIVE_HANDLER
  * @package webcore
  * @subpackage util
  * @access private
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.5.0
  * @abstract
  */
@@ -334,7 +334,7 @@ abstract class COMPRESSED_FILE extends RAISABLE
  * This class is format-independent (represents an interface that can be a zip, tar, gzip file).
  * @package webcore
  * @subpackage util
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.5.0
  * @access private
  * @abstract
@@ -461,7 +461,7 @@ abstract class COMPRESSED_FILE_ENTRY extends RAISABLE
  * Used by the {@link ARCHIVE} to provide seamless support for ZIP files.
  * @package webcore
  * @subpackage util
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.5.0
  * @access private
  */
@@ -540,7 +540,7 @@ class ZIP_FILE extends COMPRESSED_FILE
  * A single entry found in a {@link ZIP_FILE}.
  * @package webcore
  * @subpackage util
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.5.0
  * @access private
  */

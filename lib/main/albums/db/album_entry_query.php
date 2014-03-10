@@ -6,7 +6,7 @@
  * @filesource
  * @package albums
  * @subpackage db
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.5.0
  */
 
@@ -44,7 +44,7 @@ require_once ('albums/db/album_query_toolkit.php');
  * Retrieves {@link PICTURE}s or {@link JOURNAL}s for an {@link ALBUM}.
  * @package albums
  * @subpackage db
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.5.0
  */
 class ALBUM_ENTRY_QUERY extends FOLDER_MULTI_ENTRY_QUERY

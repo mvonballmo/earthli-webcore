@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage gui
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.4.0
  */
 
@@ -48,7 +48,7 @@ require_once ('webcore/obj/webcore_object.php');
  * @see UNIQUE_OBJECT_CACHE
  * @package webcore
  * @subpackage gui
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.4.0
  */
 class OBJECT_NAVIGATOR extends WEBCORE_OBJECT

@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage util
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  */
 
@@ -46,7 +46,7 @@ require_once ('webcore/sys/client_storage.php');
  * expire at session end, by default.
  * @package webcore
  * @subpackage util
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  */
 class COOKIE extends CLIENT_STORAGE

@@ -6,7 +6,7 @@
  * @filesource
  * @package albums
  * @subpackage tasks
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.8.0
  */
 
@@ -44,7 +44,7 @@ require_once ('webcore/sys/task.php');
  * Used by the {@link UPLOAD_PICTURE_FORM}.
  * @package albums
  * @subpackage forms
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.8.0
  * @access private
  */

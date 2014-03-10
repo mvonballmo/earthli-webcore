@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage obj
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.5.0
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/obj/object_in_folder.php');
  * Manages a list of attachments.
  * @package webcore
  * @subpackage obj
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.5.0
  * @abstract
  */

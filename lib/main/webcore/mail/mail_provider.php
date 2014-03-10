@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage mail
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  */
 
@@ -44,7 +44,7 @@ require_once ('webcore/log/loggable.php');
  * Actual implementation are derived from this one.
  * @package webcore
  * @subpackage mail
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  * @abstract
  */

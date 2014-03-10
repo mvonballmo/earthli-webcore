@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage renderer
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.6.0
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/gui/object_renderer.php');
  * Renders the contents of an {@link EXCEPTION_SIGNATURE}.
  * @package webcore
  * @subpackage renderer
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.6.0
  */
 class EXCEPTION_RENDERER extends OBJECT_RENDERER
@@ -334,7 +334,7 @@ class EXCEPTION_RENDERER extends OBJECT_RENDERER
  * Options used with the {@link EXCEPTION_RENDERER}.
  * @package webcore
  * @subpackage renderer
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.6.0
  * @access private
  */

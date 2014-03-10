@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage text
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.7.0
  */
 
@@ -44,7 +44,7 @@ require_once ('webcore/util/plain_text_munger.php');
  * Used by the {@link MUNGER_SUMMARIZER} to generate an initial text.
  * @package webcore
  * @subpackage text
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.4.0
  */
 class TEXT_STRIPPER extends TEXT_MUNGER
@@ -90,7 +90,7 @@ class TEXT_STRIPPER extends TEXT_MUNGER
  * whether the summary blocks have entire words.
  * @package webcore
  * @subpackage text
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.7.0
  */
 class MUNGER_SUMMARIZER

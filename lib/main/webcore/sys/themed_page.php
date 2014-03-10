@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage sys
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  */
 
@@ -46,7 +46,7 @@ require_once ('webcore/obj/webcore_object.php');
  * not need to go to the database to style a {@link PAGE}.
  * @package webcore
  * @subpackage sys
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.3.0
  */
 class THEME_SETTINGS extends WEBCORE_OBJECT
@@ -234,7 +234,7 @@ class THEME_SETTINGS extends WEBCORE_OBJECT
  * Options for setting a {@link THEME}.
  * @package webcore
  * @subpackage sys
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  */
 class THEME_OPTIONS
@@ -357,7 +357,7 @@ class THEME_OPTIONS
  * a renderer that draws the page with the chosen {@link THEME}.
  * @package webcore
  * @subpackage sys
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  */
 class THEMED_PAGE extends PAGE

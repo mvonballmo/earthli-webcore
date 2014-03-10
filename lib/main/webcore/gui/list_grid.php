@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage grid
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  */
 
@@ -50,7 +50,7 @@ require_once ('webcore/gui/grid.php');
  * 
  * @package webcore
  * @subpackage grid
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  * @abstract
  */
@@ -178,7 +178,7 @@ abstract class LIST_GRID extends STANDARD_GRID
  * Properties of a column in a {@link LIST_GRID}.
  * @package webcore
  * @subpackage grid
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.7.0
  * @access private
  */

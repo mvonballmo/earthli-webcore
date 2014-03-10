@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage forms
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  */
 
@@ -44,7 +44,7 @@ require_once ('webcore/forms/previewable_form.php');
  * Handles setting up the {@link MAIL_PROVIDER} and {@link MAIL_RENDERER}s for descendant classes.
  * @package webcore
  * @subpackage forms
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  * @abstract
  */
@@ -355,7 +355,7 @@ abstract class SEND_MAIL_FORM extends PREVIEWABLE_FORM
  * Represents an object to preview in a form.
  * @package webcore
  * @subpackage forms
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.5.0
  */
 class SEND_MAIL_FORM_PREVIEW_SETTINGS extends FORM_PREVIEW_SETTINGS

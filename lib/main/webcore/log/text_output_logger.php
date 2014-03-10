@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage log
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.3.0
  */
 
@@ -44,7 +44,7 @@ require_once ('webcore/log/logger.php');
  * Provides white-space handling for HTML and plain-text rendering.
  * @package webcore
  * @subpackage log
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.3.0
  * @abstract
  */

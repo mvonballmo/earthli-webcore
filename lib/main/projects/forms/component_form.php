@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage forms
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.4.0
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/forms/object_in_folder_form.php');
  * Form that stores {@link ICON}s.
  * @package webcore
  * @subpackage forms
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.5.0
  * @abstract
  */

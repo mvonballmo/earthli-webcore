@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage db
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/db/object_in_folder_query.php');
  * Return {@link ENTRY} objects visible to a {@link USER}.
  * @package webcore
  * @subpackage db
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  * @abstract
  */
@@ -173,7 +173,7 @@ class USER_ENTRY_QUERY extends OBJECT_IN_FOLDER_QUERY
  * Return {@link ENTRY}s for a {@link USER} in a multi entry-type application.
  * @package webcore
  * @subpackage db
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.7.0
  */
 class USER_MULTI_ENTRY_QUERY extends USER_ENTRY_QUERY
@@ -222,7 +222,7 @@ class USER_MULTI_ENTRY_QUERY extends USER_ENTRY_QUERY
  * Retrieves {@link DRAFTABLE_ENTRY}s visible to a {@link USER}.
  * @package webcore
  * @subpackage db
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.7.1
  */
 class USER_DRAFTABLE_ENTRY_QUERY extends USER_ENTRY_QUERY

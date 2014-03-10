@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage renderer
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.5.0
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/gui/auditable_renderer.php');
  * Render details for {@link CONTENT_OBJECT} objects.
  * @package webcore
  * @subpackage renderer
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.5.0
  */
 class CONTENT_OBJECT_RENDERER extends AUDITABLE_RENDERER

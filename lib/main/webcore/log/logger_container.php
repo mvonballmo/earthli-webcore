@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage log
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.7.0
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/sys/system.php');
  * Manages a chain of {@link LOGGER}s.
  * @package webcore
  * @subpackage log
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.7.0
  */
 class LOGGER_CONTAINER extends RAISABLE

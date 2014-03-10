@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage sys
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.7.0
  */
 
@@ -59,7 +59,7 @@ define ('Msg_channel_client', 'Storage');
  * @see COOKIE
  * @package webcore
  * @subpackage sys
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.7.0
  * @abstract
  */

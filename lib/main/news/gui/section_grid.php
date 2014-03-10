@@ -6,7 +6,7 @@
  * @filesource
  * @package news
  * @subpackage gui
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.4.0
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/gui/folder_grid.php');
  * Display {@link SECTION}s from a {@link QUERY}.
  * @package news
  * @subpackage gui
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.4.0
  */
 class SECTION_GRID extends FOLDER_GRID

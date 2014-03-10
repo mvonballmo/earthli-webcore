@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage history
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.4.0
  */
 
@@ -45,7 +45,7 @@ require_once ('webcore/obj/unique_object.php');
  * item is recorded to the database, recording which information was changed, by
  * whom and when.
  * @package webcore
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.4.0
 f * @subpackage history
  */

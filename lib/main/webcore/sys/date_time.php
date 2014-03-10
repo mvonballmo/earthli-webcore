@@ -4,7 +4,7 @@
  * @copyright Copyright (c) 2002-2014 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  * @package webcore
  * @subpackage date-time
@@ -88,7 +88,7 @@ define ('Date_time_unassigned', -1);
  * Provides formatting and conversion for {@link DATE_TIME}s.
  * @package webcore
  * @subpackage date-time
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.5.0
  */
 class DATE_TIME_TOOLKIT
@@ -156,7 +156,7 @@ class DATE_TIME_TOOLKIT
  * absolute times. Maintains an array of format strings which can be customized to locale.
  * @package webcore
  * @subpackage date-time
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.5.0
  */
 class DATE_TIME_FORMATTER extends RAISABLE
@@ -324,7 +324,7 @@ class DATE_TIME_FORMATTER extends RAISABLE
  * Standard US date/time formatting.
  * @package webcore
  * @subpackage date-time
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.5.0
  */
 class US_DATE_TIME_FORMATTER extends DATE_TIME_FORMATTER
@@ -344,7 +344,7 @@ class US_DATE_TIME_FORMATTER extends DATE_TIME_FORMATTER
  * Standard European date/time formatting.
  * @package webcore
  * @subpackage date-time
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.5.0
  */
 class EURO_DATE_TIME_FORMATTER extends DATE_TIME_FORMATTER
@@ -364,7 +364,7 @@ class EURO_DATE_TIME_FORMATTER extends DATE_TIME_FORMATTER
  * Standard ISO date/time formatting.
  * @package webcore
  * @subpackage date-time
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.7.0
  */
 class ISO_DATE_TIME_FORMATTER extends DATE_TIME_FORMATTER
@@ -384,7 +384,7 @@ class ISO_DATE_TIME_FORMATTER extends DATE_TIME_FORMATTER
  * Converts strings to times usable by {@link DATE_TIME}s.
  * @package webcore
  * @subpackage date-time
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.5.0
  */
 abstract class DATE_TIME_CONVERTER extends RAISABLE
@@ -441,7 +441,7 @@ abstract class DATE_TIME_CONVERTER extends RAISABLE
  * Converts a US date (mm/dd/yyyy hh:mm:ss).
  * @package webcore
  * @subpackage date-time
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.5.0
  */
 class US_DATE_TIME_CONVERTER extends DATE_TIME_CONVERTER
@@ -472,7 +472,7 @@ class US_DATE_TIME_CONVERTER extends DATE_TIME_CONVERTER
  * Converts a European date (dd.mm.yyyy hh:mm:ss).
  * @package webcore
  * @subpackage date-time
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.5.0
  */
 class EURO_DATE_TIME_CONVERTER extends DATE_TIME_CONVERTER
@@ -503,7 +503,7 @@ class EURO_DATE_TIME_CONVERTER extends DATE_TIME_CONVERTER
  * Converts an ISO date (yyyy-mm-dd hh:mm:ss).
  * @package webcore
  * @subpackage date-time
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.5.0
  */
 class ISO_DATE_TIME_CONVERTER extends DATE_TIME_CONVERTER
@@ -534,7 +534,7 @@ class ISO_DATE_TIME_CONVERTER extends DATE_TIME_CONVERTER
  * Converts an EXIF date (yyyy:mm:dd hh:mm:ss).
  * @package webcore
  * @subpackage date-time
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.7.0
  */
 class EXIF_DATE_TIME_CONVERTER extends DATE_TIME_CONVERTER
@@ -574,7 +574,7 @@ class EXIF_DATE_TIME_CONVERTER extends DATE_TIME_CONVERTER
  * @see DATE_TIME_FORMATTER
  * @package webcore
  * @subpackage date-time
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  */
 class DATE_TIME extends RAISABLE
@@ -983,7 +983,7 @@ class DATE_TIME extends RAISABLE
  * Uses 30 days per month when calculating number of months.
  * @package webcore
  * @subpackage date-time
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  */
 class TIME_INTERVAL

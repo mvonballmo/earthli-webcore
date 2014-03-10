@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage forms
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.7.1
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/forms/form.php');
  * Executes the {@link APP_WIZARD_TASK} based on user input.
  * @package webcore
  * @subpackage forms
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.7.1
  */
 class EXECUTE_APP_WIZARD_FORM extends FORM

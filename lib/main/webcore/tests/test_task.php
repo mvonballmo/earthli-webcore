@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage tests
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.6.0
  */
 
@@ -48,7 +48,7 @@ define ('Msg_channel_test', 'Test');
  * Facilitates migrating databases for WebCore {@link APPLICATION}s.
  * @package webcore
  * @subpackage tests
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.6.0
  */
 abstract class TEST_TASK extends TASK

@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage obj
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  */
 
@@ -44,7 +44,7 @@ require_once ('webcore/obj/storable.php');
  * The title can be emitted as html text, an html link or plain text.
  * @package webcore
  * @subpackage obj
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  * @abstract
  */

@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage util
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  */
 
@@ -202,7 +202,7 @@ define ('Browser_unknown', 'Unknown');
  * @see supports()
  * @package webcore
  * @subpackage util
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  */
 class BROWSER
@@ -622,7 +622,7 @@ class BROWSER
  * the {@link USER_AGENT_PARSER}.
  * @package webcore
  * @subpackage util
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.6.0
  */
 class USER_AGENT_PROPERTIES
@@ -713,7 +713,7 @@ class USER_AGENT_PROPERTIES
  * agents passed in by PHP.
  * @package webcore
  * @subpackage util
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.7.0
  * @access private
  */
@@ -980,7 +980,7 @@ class USER_AGENT_PARSER
  * a database of known user agents.
  * @package webcore
  * @subpackage util
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.7.0
  * @access private
  */
@@ -1215,7 +1215,7 @@ define ('User_agent_final_browser_temporary_renderer', 5);
  * of these to use during detection.
  * @package webcore
  * @subpackage util
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.7.0
  * @access private
  */

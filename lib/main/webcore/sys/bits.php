@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage sys
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  * @access private
  */
@@ -41,7 +41,7 @@ http://www.earthli.com/software/webcore
  * Maintains bit flags.
  * @package webcore
  * @subpackage sys
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  * @access private
  */

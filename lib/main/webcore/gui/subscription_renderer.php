@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage gui
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.7.1
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/gui/object_renderer.php');
  * Renders the subscription status and options for a {@link RENDERABLE} into a {@link PAGE}.
  * @package webcore
  * @subpackage gui
- * @version 3.4.0
+ * @version 3.5.0
  * @since 3.4.0
  * @abstract
  */

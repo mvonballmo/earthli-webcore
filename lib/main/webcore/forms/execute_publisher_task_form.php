@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage forms
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.7.0
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/forms/execute_task_form.php');
  * Show options for and execute {@link PUBLISHER_TASK}s.
  * @package webcore
  * @subpackage forms
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.7.0
  */
 class EXECUTE_PUBLISHER_TASK_FORM extends EXECUTE_TASK_FORM

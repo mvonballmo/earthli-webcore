@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage util
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.7.1
  */
 
@@ -45,7 +45,7 @@ require_once ('webcore/obj/webcore_object.php');
  * from various sources.
  * @package webcore
  * @subpackage util
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.7.1
  * @abstract
  */
@@ -114,7 +114,7 @@ abstract class TEST_SUITE extends WEBCORE_OBJECT
  * Loads tests from an INI file.
  * @package webcore
  * @subpackage util
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.7.1
  */
 class INI_TEST_SUITE extends TEST_SUITE

@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage command
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.7.0
  * @access private
  */
@@ -46,7 +46,7 @@ require_once ('webcore/cmd/commands.php');
  * "anonymous" or "registered" users.
  * @package webcore
  * @subpackage command
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.7.0
  * @access private
  */
@@ -99,7 +99,7 @@ class USER_LIST_COMMANDS extends COMMANDS
  * "anonymous" or "registered" users.
  * @package webcore
  * @subpackage command
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.7.0
  * @access private
  */

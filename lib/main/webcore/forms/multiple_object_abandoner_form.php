@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage forms
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.7.1
  */
 
@@ -45,7 +45,7 @@ require_once ('webcore/forms/multiple_object_action_form.php');
  * meant to be published.
  * @package webcore
  * @subpackage forms
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.7.1
  */
 class MULTIPLE_OBJECT_ABANDONER_FORM extends MULTIPLE_OBJECT_ACTION_FORM

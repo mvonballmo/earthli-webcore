@@ -6,7 +6,7 @@
  * @filesource
  * @package projects
  * @subpackage gui
- * @version 3.4.0
+ * @version 3.5.0
  * @since 1.4.1
  */
 
@@ -46,7 +46,7 @@ require_once ('webcore/gui/folder_tree_node_info.php');
  * that define their own options.
  * @package projects
  * @subpackage gui
- * @version 3.4.0
+ * @version 3.5.0
  * @since 1.4.1
  * @see PROJECT::defines_options ()
  */

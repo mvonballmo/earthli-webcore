@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage forms
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/forms/delete_form.php');
  * Delete {@link PERMISSIONS} for a {@link USER} from a {@link FOLDER}.
  * @package webcore
  * @subpackage forms
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  */
 class FOLDER_GROUP_PERMISSIONS_DELETE_FORM extends DELETE_FORM

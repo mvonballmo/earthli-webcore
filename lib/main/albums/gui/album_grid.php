@@ -6,7 +6,7 @@
  * @filesource
  * @package albums
  * @subpackage gui
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.5.0
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/gui/folder_grid.php');
  * Display {@link ALBUM}s from a {@link QUERY}.
  * @package albums
  * @subpackage gui
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.5.0
  */
 class ALBUM_GRID extends FOLDER_GRID

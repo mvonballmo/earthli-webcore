@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage config
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.7.0
  */
 
@@ -48,7 +48,7 @@ include_once ('webcore/sys/resolver.php');
  * to configure them after creation.
  * @package webcore
  * @subpackage config
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.7.0
  */
 class ENGINE extends RESOLVER

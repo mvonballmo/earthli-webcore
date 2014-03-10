@@ -9,7 +9,7 @@
  * @filesource
  * @package albums
  * @subpackage config
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.5.0
  */
 

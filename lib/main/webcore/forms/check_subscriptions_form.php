@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage forms
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.6.0
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/forms/form.php');
  * Look up an email address and redirect to its home page.
  * @package webcore
  * @subpackage forms
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.6.0
  */
 class CHECK_SUBSCRIPTIONS_FORM extends ID_BASED_FORM

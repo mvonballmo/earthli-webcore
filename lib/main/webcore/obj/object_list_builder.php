@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage obj
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.7.1
  */
 
@@ -44,7 +44,7 @@ require_once ('webcore/forms/form.php');
  * Used by the {@link MULTIPLE_OBJECT_ACTION_FORM} and {@link PRINT_PREVIEW}.
  * @package webcore
  * @subpackage obj
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.7.1
  */
 class OBJECT_LIST_BUILDER extends WEBCORE_OBJECT

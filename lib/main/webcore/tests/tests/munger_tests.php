@@ -7,7 +7,7 @@
  * @filesource
  * @package webcore
  * @subpackage tests
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.7.0
  * @access private
  */
@@ -45,7 +45,7 @@ require_once ('webcore/tests/tests/munger_base_tests.php');
 /**
  * @package webcore
  * @subpackage tests
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.7.0
  * @access private
  */

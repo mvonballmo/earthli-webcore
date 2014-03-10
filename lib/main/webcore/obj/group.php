@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage obj
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/obj/content_object.php');
  * Contains {@link USER}s and can have {@link PERMISSIONS} in {@link FOLDER}s.
  * @package webcore
  * @subpackage obj
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  */
 class GROUP extends CONTENT_OBJECT

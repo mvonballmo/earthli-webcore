@@ -6,7 +6,7 @@
  * @filesource
  * @package projects
  * @subpackage obj
- * @version 3.4.0
+ * @version 3.5.0
  * @since 1.4.1
  */
 
@@ -45,7 +45,7 @@ require_once ('webcore/obj/object_in_folder.php');
  * {@link CHANGE}s made since the last release are included in this release when it is created.
  * @package projects
  * @subpackage obj
- * @version 3.4.0
+ * @version 3.5.0
  * @since 1.4.1
  */
 class RELEASE extends OBJECT_IN_FOLDER

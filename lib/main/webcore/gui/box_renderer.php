@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage renderer
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.7.0
  */
 
@@ -44,7 +44,7 @@ require_once ('webcore/obj/webcore_object.php');
  * Uses HTML tables if the browser does not support the proper CSS box model.
  * @package webcore
  * @subpackage renderer
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.7.0
  */
 class BOX_RENDERER extends WEBCORE_OBJECT

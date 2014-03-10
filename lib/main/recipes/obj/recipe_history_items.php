@@ -6,7 +6,7 @@
  * @filesource
  * @package recipes
  * @subpackage obj
- * @version 3.4.0
+ * @version 3.5.0
  * @since 1.3.0
  * @access private
  */
@@ -44,7 +44,7 @@ require_once ('webcore/obj/webcore_history_items.php');
  * Manages the audit trail of a {@link RECIPE}.
  * @package recipes
  * @subpackage obj
- * @version 3.4.0
+ * @version 3.5.0
  * @since 1.3.0
  * @access private
  */

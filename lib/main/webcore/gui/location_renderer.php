@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage gui
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.7.1
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/obj/webcore_object.php');
  * Renders a location for a {@link RENDERABLE} into a {@link PAGE}.
  * @package webcore
  * @subpackage gui
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.7.1
  */
 class LOCATION_RENDERER extends WEBCORE_OBJECT
@@ -89,7 +89,7 @@ class LOCATION_RENDERER extends WEBCORE_OBJECT
  * Renders a location for a {@link RENDERABLE} into a {@link PAGE}.
  * @package webcore
  * @subpackage gui
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.7.1
  */
 class OBJECT_IN_FOLDER_LOCATION_RENDERER extends LOCATION_RENDERER
