@@ -325,7 +325,7 @@ function update_controls ()
 
   /**
    * Holds a list of the fields that are represent permissions.
-   * @var array[FIELD]
+   * @var FIELD[]
    * @access private
    */
   protected $_privilege_fields;

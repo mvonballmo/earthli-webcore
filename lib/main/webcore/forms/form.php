@@ -453,7 +453,7 @@ abstract class FORM extends WEBCORE_OBJECT
   /**
    * Returns the list of all errors for this form.
    * Merges results from {@link errors_for()} for all fields.
-   * @return array[string]
+   * @return string[]
    */
   public function all_errors ()
   {
@@ -1016,7 +1016,7 @@ abstract class FORM extends WEBCORE_OBJECT
   /**
    * Return the correct PHP global array for values.
    * Used by {@link _load_from_request()}.
-   * return array[string]
+   * return string[]
    * @access private
    */
   protected function _request_array_to_use ()
@@ -1521,7 +1521,7 @@ abstract class FORM extends WEBCORE_OBJECT
   protected $_field_list = array ();
 
   /**
-   * @var array[string]
+   * @var string[]
    * @access private
    */
   protected $_errors = array ();

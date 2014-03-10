@@ -86,7 +86,8 @@ abstract class QUERY extends WEBCORE_OBJECT
 
   /**
    * Returns if the filter is included in the query.
-   * Provides for descendent classes.
+   * Provides for descendant classes.
+   * @param $filter
    * @return boolean
    */
   public function includes ($filter)
@@ -101,6 +102,7 @@ abstract class QUERY extends WEBCORE_OBJECT
    * security to its output.
    * @param string $set_name Can be {@link Privilege_set_folder}, {@link
    * Privilege_set_entry} or {@link Privilege_set_comment}.
+   * @throws METHOD_NOT_IMPLEMENTED_EXCEPTION
    * @return string
    * @abstract
    */
@@ -336,9 +338,8 @@ abstract class QUERY extends WEBCORE_OBJECT
   /**
    * Apply generic restrictions.
    * Used by {@link restrict_to_ids()}.
-   * @param string $field Name of the field to restrict.
-   * @param string|array[integer] $field Can be an array or a comma-separated
-   * string or any other value.
+   * @param string|integer[] $field Can be an array or a comma-separated string or any other value.
+   * @param object $value
    * @param string $operator Can be any of the {@link Operator_constants}.
    */
   public function restrict_by_op ($field, $value, $operator = Operator_equal)
@@ -388,7 +389,7 @@ abstract class QUERY extends WEBCORE_OBJECT
   /**
    * Restrict the ids to a given set.
    * Restricts on the  {@link $alias} and {@link $id}.
-   * @param string|array[integer] $ids Can be an array or a comma-separated
+   * @param string|integer[] $ids Can be an array or a comma-separated
    * string.
    * @param string $operator Can be {@link Operator_in} or {@link
    * Operator_not_in}.
@@ -401,7 +402,7 @@ abstract class QUERY extends WEBCORE_OBJECT
   /**
    * Restrict to one of the given choices.
    * This constructs an OR statement with the list of choices.
-   * @param array[string] $choices
+   * @param string[] $choices
    */
   public function restrict_to_one_of ($choices)
   {
@@ -501,7 +502,7 @@ abstract class QUERY extends WEBCORE_OBJECT
           $this->env->profiler->restart ('query');
         }
 
-        log_message ("<b>Reading count:</b><div style=\"margin: 1em 0em 0em 1.5em\">$this->_count_SQL</div>", Msg_type_debug_info, Msg_channel_database, true);
+        log_message ("<b>Reading count:</b><div style=\"margin: 1em 0 0 1.5em\">$this->_count_SQL</div>", Msg_type_debug_info, Msg_channel_database, true);
 
         $this->db->query ($this->_count_SQL);
         if ($this->db->next_record ())
@@ -560,6 +561,7 @@ abstract class QUERY extends WEBCORE_OBJECT
         {
           if ($this->_is_valid_object ($this->db))
           {
+            /** @var WEBCORE_OBJECT $obj */
             $obj = $this->_make_object ();
             $obj->load ($this->db);
             $this->_prepare_object ($obj);
@@ -599,7 +601,7 @@ abstract class QUERY extends WEBCORE_OBJECT
    * @see $alias
    * @see $id
    * @param integer $id
-   * @return object
+   * @return UNIQUE_OBJECT
    */
   public function object_at_id ($id)
   {
@@ -666,7 +668,7 @@ abstract class QUERY extends WEBCORE_OBJECT
    * @param string $ids Comma-separated list of integers.
    * @param boolean $invert_logic If true, returns all objects NOT matching the
    * query.
-   * @return array[object]
+   * @return object[]
    */
   public function objects_at_ids ($ids, $invert_logic = false)
   {
@@ -678,7 +680,7 @@ abstract class QUERY extends WEBCORE_OBJECT
    * @param string $ids Comma-separated list of integers.
    * @param boolean $invert_logic If true, returns all objects NOT matching the
    * query.
-   * @return array[object]
+   * @return object[]
    */
   public function indexed_objects_at_ids ($ids, $invert_logic = false)
   {
@@ -689,7 +691,7 @@ abstract class QUERY extends WEBCORE_OBJECT
    * Return only the objects with 'field' equal to 'value'.
    * @param string $field
    * @param string $value
-   * @return array[object]
+   * @return object[]
    */
   public function objects_with_field ($field, $value)
   {
@@ -703,10 +705,10 @@ abstract class QUERY extends WEBCORE_OBJECT
 
   /**
    * Return only the objects with all 'fields' equal to all 'values'.
-   * @param array[string] $fields
-   * @param array[string] $values
+   * @param string[] $fields
+   * @param string[] $values
    * @param string $operator Can be any of the {@link Operator_constants}.
-   * @return array[object]
+   * @return object[]
    */
   public function objects_with_fields ($fields, $values, $operator = Operator_equal)
   {
@@ -731,7 +733,7 @@ abstract class QUERY extends WEBCORE_OBJECT
    * Ordering can be used to guarantee the correct object is returned.
    * @param string $field
    * @param string $value
-   * @return array[object]
+   * @return object[]
    */
   public function object_with_field ($field, $value)
   {
@@ -747,8 +749,8 @@ abstract class QUERY extends WEBCORE_OBJECT
   /**
    * Return only the objects with all 'fields' equal to all 'values'.
    * Ordering can be used to guarantee the correct object is returned.
-   * @param array[string] $fields
-   * @param array[string] $values
+   * @param string[] $fields
+   * @param string[] $values
    * @param string $operator Can be any of the {@link Operator_constants}.
    * @return object
    */
@@ -767,7 +769,7 @@ abstract class QUERY extends WEBCORE_OBJECT
   /**
    * Result set with each object stored as [id => object].
    * Each object is stored in the result set, mapped to its id.
-   * @return array[object]
+   * @return object[]
    */
   public function indexed_objects ()
   {
@@ -821,7 +823,7 @@ abstract class QUERY extends WEBCORE_OBJECT
    * Cache this set of objects as the result of the query.
    * The objects for this query have already been calculated elsewhere and are
    * assumed to represent the correct query results.
-   * @param array[object] $objects
+   * @param object[] $objects
    * @access private
    */
   public function cache ($objects)
@@ -858,7 +860,7 @@ abstract class QUERY extends WEBCORE_OBJECT
    * @param string $ids Comma-separated list of integers.
    * @param boolean $invert_logic If true, returns all objects NOT matching the query.
    * @param string $method_name Name of the method to call to retrieve objects.
-   * @return array[object]
+   * @return object[]
    */
   protected function _objects_at_ids ($ids, $invert_logic, $method_name)
   {
@@ -1017,7 +1019,7 @@ abstract class QUERY extends WEBCORE_OBJECT
   /**
    * Return the list of restrictions for retrieving objects.
    * @see _prepare_restrictions()
-   * @return array[string]
+   * @return string[]
    * @access private
    */
   protected function _object_restrictions ()
@@ -1028,7 +1030,7 @@ abstract class QUERY extends WEBCORE_OBJECT
   /**
    * Return the list of restrictions for calculating size.
    * @see _prepare_restrictions()
-   * @return array[string]
+   * @return string[]
    * @access private
    */
   protected function _count_restrictions ()
@@ -1041,7 +1043,7 @@ abstract class QUERY extends WEBCORE_OBJECT
    * Includes {@link $_system_restrictions}, {@link $_calculated_restrictions}
    * and restrictions for {@link $_first_day} and {@link $_last_day}.
    * @see _prepare_restrictions()
-   * @return array[string]
+   * @return string[]
    * @access private
    */
   protected function _restrictions ()
@@ -1134,7 +1136,7 @@ abstract class QUERY extends WEBCORE_OBJECT
 
   /**
    * Should this object be indexed?
-   * @param DATABASE $db
+   * @param $obj
    * @return bool
    * @access private
    */
@@ -1312,7 +1314,7 @@ abstract class QUERY extends WEBCORE_OBJECT
    * calls {@link objects_with_field()}, the query imposes an internal restriction, but one that the
    * user didn't actually add. This list holds temporary restrictions, as opposed to those stored in
    * {@link _calculated_restrictions}.
-   * @var array[string]
+   * @var string[]
    * @access private
    */
   protected $_system_restrictions;
@@ -1321,7 +1323,7 @@ abstract class QUERY extends WEBCORE_OBJECT
    * List of restrictions imposed by security and filtering.
    * Descendent query classes override {@link _prepare_restrictions} to impose security and filtering
    * restrictions. Those are added to this list.
-   * @var array[string]
+   * @var string[]
    * @access private
    */
   protected $_calculated_restrictions;
@@ -1356,7 +1358,7 @@ abstract class QUERY extends WEBCORE_OBJECT
    * Current result set.
    * Valid only after an 'objects' (or any of 'object_at_id', 'objects_at_ids',
    * etc.) request has been successfully issued.
-   * @var array[object]
+   * @var object[]
    * @access private
    */
   protected $_objects;
@@ -1372,7 +1374,7 @@ abstract class QUERY extends WEBCORE_OBJECT
   /**
    * Current result set.
    * Valid only after a call to 'indexed_objects' has been issued.
-   * @var array[object]
+   * @var object[]
    * @access private
    */
   protected $_indexed_objects;
@@ -1380,7 +1382,7 @@ abstract class QUERY extends WEBCORE_OBJECT
   /**
    * Current result set.
    * Valid only after a call to 'tree' or 'root_tree' has been issued.
-   * @var array[object]
+   * @var object[]
    * @access private
    */
   protected $_object_tree;
@@ -1403,7 +1405,7 @@ abstract class HIERARCHICAL_QUERY extends QUERY
    * folder.
    * @param integer $root_id A hint that can be used to limit the number of
    * objects to check when building the tree.
-   * @return array[object]
+   * @return object[]
    */
   public function tree ($sub_folder_id = 0, $root_id = 0)
   {
@@ -1478,7 +1480,7 @@ abstract class HIERARCHICAL_QUERY extends QUERY
    * Also, if there is only one object at the root, it is discarded and the sub-
    * objects are returned instead.
    * @param integer $parent_id
-   * @return array[object]
+   * @return object[]
    */
   public function root_tree ($parent_id = 0)
   {
@@ -1509,32 +1511,23 @@ abstract class HIERARCHICAL_QUERY extends QUERY
    * @access private
    * @abstract
    */
-  protected function _obj_set_sub_objects_cached ($obj)
-  {
-    throw new METHOD_NOT_IMPLEMENTED_EXCEPTION();
-  }
-  
+  protected abstract function _obj_set_sub_objects_cached ($obj);
+
   /**
    * @param object $parent
    * @param object $obj
    * @access private
    * @abstract
    */
-  protected function _obj_connect_to_parent ($parent, $obj)
-  {
-    throw new METHOD_NOT_IMPLEMENTED_EXCEPTION();
-  }
+  protected abstract function _obj_connect_to_parent ($parent, $obj);
 
   /**
    * @param object $obj
-   * @return array[object]
+   * @return object[]
    * @access private
    * @abstract
    */
-  protected function _obj_sub_objects ($obj)
-  {
-    throw new METHOD_NOT_IMPLEMENTED_EXCEPTION();
-  }
+  protected abstract function _obj_sub_objects ($obj);
 }
 
 /**
@@ -1585,7 +1578,7 @@ class QUERY_BASED_CACHE extends RAISABLE
     {
       return $this->_cache [$id];
     }
-    
+
     $Result = $this->query->object_at_id ($id);
     
     $this->add_object($Result);
@@ -1607,7 +1600,7 @@ class QUERY_BASED_CACHE extends RAISABLE
   }
 
   /**
-   * @var array[UNIQUE_OBJECT]
+   * @var UNIQUE_OBJECT[]
    * @access private
    */
   protected $_cache;
@@ -1736,7 +1729,7 @@ class QUERY_ITERATOR extends RAISABLE
   protected $_first_item_to_get;
 
   /**
-   * @var array[object]
+   * @var object[]
    */
   protected $_objects;
 
@@ -1746,5 +1739,3 @@ class QUERY_ITERATOR extends RAISABLE
    */
   protected $_query;
 }
-
-?>

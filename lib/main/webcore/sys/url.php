@@ -112,7 +112,7 @@ class URL_OPTIONS extends FILE_OPTIONS
    * List of domain to document root mappings. Use {@link has_local_domain()} to
    * test whether a {@link URL} is considered local or not. The strings can be
    * regular expressions.
-   * @var array[string,string]
+   * @var string[]
    */
   public $domains;
 
@@ -679,7 +679,7 @@ class URL
 
   /**
    * Return the resource and query string.
-   * @return array[string] The first entry is the resource, then second is the query string. Either may be empty.
+   * @return string[] The first entry is the resource, then second is the query string. Either may be empty.
    * @access private
    */
   protected function _extract_resource_and_args ()
@@ -747,7 +747,7 @@ class URL
   /**
    * Add arguments, replacing existing values.
    * Used by {@link replace_arguments()} and {@link replace_argument()}.
-   * @param array[string,string] $new_args Key/value pairs to insert into the
+   * @param string[] $new_args Key/value pairs to insert into the
    * query string.
    * @access private
    */
@@ -970,7 +970,7 @@ function strip_protocol ($f)
  * Remove any drive or domain information.
  * @see has_domain()
  * @param string $f The path to check.
- * @return array[string,string]
+ * @return string[]
  */
 function split_protocol ($f)
 {

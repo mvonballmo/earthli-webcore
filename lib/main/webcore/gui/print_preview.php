@@ -220,7 +220,7 @@ class PRINT_PREVIEW extends WEBCORE_OBJECT
 
   /**
    * Render the print preview.
-   * @param array[ENTRY] $entries
+   * @param ENTRY[] $entries
    */
   public function display ($entries)
   {

@@ -62,7 +62,7 @@ class TEXT_OPTIONS
    * Characters to translate from HTML in a form. These are in addition
    * to the rather large set returned by {@link
    * PHP_MANUAL#get_html_translation_table}.
-   * @var array[string,string]
+   * @var string[]
    */
   public $html_entity_translations = array ( ISO_8859_1_em_dash => '&mdash;'
                                         , ISO_8859_1_en_dash => '&#8211;'

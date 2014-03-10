@@ -717,7 +717,7 @@ class HISTORY_ITEM extends UNIQUE_OBJECT
    * List of differences between the original and current object.
    * This is only used when the history item is being created; it is not used when the history item
    * is loaded from the database.
-   * @var array[string]
+   * @var string[]
    * @access private
    */
   protected $_differences;

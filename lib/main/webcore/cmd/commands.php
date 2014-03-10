@@ -125,7 +125,7 @@ class COMMAND_GROUP
 
   /**
    * @see COMMAND 
-   * @var array[COMMAND]
+   * @var COMMAND[]
    */
   public $commands = array ();  
   
@@ -281,7 +281,7 @@ class COMMANDS extends WEBCORE_OBJECT
   
   /**
    * Disable all commands except those given. 
-   * @param array[string] $ids
+   * @param string[] $ids
    */
   public function disable_all_except ($ids)
   {

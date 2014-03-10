@@ -143,7 +143,7 @@ class DATE_TIME_TOOLKIT
 
   /**
    * List of registered input formats.
-   * @var array[DATE_TIME_CONVERTER]
+   * @var DATE_TIME_CONVERTER[]
    * @see DATE_TIME_CONVERTER
    * @access private
    */
@@ -314,7 +314,7 @@ class DATE_TIME_FORMATTER extends RAISABLE
 
   /**
    * List of registered output formats.
-   * @var array[string]
+   * @var string[]
    * @access private
    */
   protected $_format_strings;

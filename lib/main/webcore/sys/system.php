@@ -117,7 +117,7 @@ function read_array_index ($arr, $index, $default_value = '')
  * passing a value at all.
  * @version 3.4.0
  * @since 2.2.1
- * @param string $var_name
+ * @param integer $index
  * @param string $default_value
  * @return string
  */
@@ -138,7 +138,7 @@ function read_var ($index, $default_value = '')
  * For example, if the url of the page is "index.php?b=1&c=2&d=3", then
  * <code>read_vars (array ('a', 'b', 'c'))</code> returns "b=1&c=2". Use this
  * function to gather page parameters for easy reposting.
- * @param array[string] $indexes
+ * @param string[] $indexes
  * @return string
  */
 function read_vars ($indexes)
@@ -338,6 +338,8 @@ class RAISABLE
   /**
    * Raise an error if the object is not the requested type.
    * @param object $obj
+   * @param string $expected_class
+   * @param string $routine_name
    * @param string $class_name
    * @access private
    */
@@ -405,9 +407,9 @@ class RAISABLE
    * Cast $i as an integer (if it's not an integer, raise an exception)
    * This is used to validate arguments to databases so that hacks of the form 'URL?id=1 OR 1=1' don't work
    * The function dies immediately so that any dependent SQL doesn't reveal the inner workings of the database.
-   * @param object $value The integer prospect
+   * @param object|int $value The integer prospect
    * @param boolean $allow_empty Is an empty value interpreted as 0?
-   * @return object Returns the integer (or 0 if empty).
+   * @return integer Returns the integer (or 0 if empty).
    * @see RAISABLE::validate_as_integer_silent
    * @access private
    */
@@ -420,7 +422,7 @@ class RAISABLE
     }
 
     $value = htmlentities($value);
-    $this->raise ("[$value] is not an integer.");
+    $this->raise ("[$value] is not an integer.", '', '');
   }
 
   /**
@@ -565,11 +567,10 @@ class TYPE_INFO
    * Gets a unique id for the given object.
    *
    * @param WEBCORE_OBJECT $obj
+   * @return string
    */
   public function unique_id ($obj)
   {
     return '';
   }
 }
-
-?>

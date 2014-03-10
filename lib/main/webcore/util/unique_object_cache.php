@@ -109,7 +109,7 @@ class UNIQUE_OBJECT_CACHE extends OBJECT_CACHE
   /**
    * Load the requested objects.
    * @param string $ids Comma-separated list of ids to load.
-   * @return array[object]
+   * @return object[]
    * @access private
    * @abstract
    */
@@ -123,7 +123,7 @@ class UNIQUE_OBJECT_CACHE extends OBJECT_CACHE
    * Load the requested objects.
    * @param integer $first Index within master list for first item.
    * @param integer $count Number of items to retrieve from that position.
-   * @return array[object]
+   * @return object[]
    * @access private
    * @abstract
    */

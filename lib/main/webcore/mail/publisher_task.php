@@ -72,14 +72,14 @@ class PUBLISHER_TASK extends TASK
   /**
    * Publish only the given entry history item type, if set.
    * Can contain any of the {@link History_item_state_constants}.
-   * @var array[string]
+   * @var string[]
    */
   public $entry_filter;
 
   /**
    * Publish only the given entry history item type, if set.
    * Can contain any of the {@link History_item_state_constants}.
-   * @var array[string]
+   * @var string[]
    */
   public $comment_filter;
 
@@ -118,6 +118,7 @@ class PUBLISHER_TASK extends TASK
     /* Log in as a user that can see all objects that need sending
        If the impersonation fails, it throws an exception. */
 
+    /** @var  $opts */
     $opts = $this->app->mail_options;
     $this->app->impersonate ($opts->publisher_user_name, $opts->publisher_user_password);
     $publisher = $this->app->make_publisher ();

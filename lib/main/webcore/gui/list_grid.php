@@ -167,7 +167,7 @@ abstract class LIST_GRID extends STANDARD_GRID
   }
   
   /**
-   * @var array[LIST_GRID_COLUMN]
+   * @var LIST_GRID_COLUMN[]
    * @see LIST_GRID_COLUMN
    * @access private
    */

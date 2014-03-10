@@ -297,6 +297,7 @@ function join_paths ($path1, $path2, $opts = null)
  * @param string $from
  * @param string $to
  * @param FILE_OPTIONS $opts
+ * @return string
  */
 function path_between ($from, $to, $opts = null)
 {
@@ -664,6 +665,8 @@ function normalize_file_id ($part, $opts = null)
  * Returns a readable version of the given size.
  * Translates 2000000 to 2MB, 2400 to 2.4KB etc.
  * @param integer $size
+ * @param bool $force_kb
+ * @throws UNKNOWN_VALUE_EXCEPTION
  * @return string
  */
 function file_size_as_text ($size, $force_kb = false)
@@ -704,6 +707,7 @@ function file_size_as_text ($size, $force_kb = false)
  * Interprets "MB" and "M" as megabytes, "GB" and "G" as gigabytes and "KB" and "K"
  * as kilobytes.
  * @param string
+ * @throws UNKNOWN_VALUE_EXCEPTION
  * @return integer
  */
 function text_to_file_size ($text)
@@ -856,10 +860,11 @@ function temp_folder ()
 
 /**
  * Return the list of files for the given path.
- * @param string $f Must be a full path.
- * @param boolean $prepend_path Prepends 'f' to each file if true.
- * @return array[string]
+ * @param string $base_path Must be a full path.
+ * @param string $path_to_prepend Prepended to each file.
+ * @param bool $recurse If true, include all sub-folders.
  * @param FILE_OPTIONS $opts
+ * @return string[]
  */
 function file_list_for ($base_path, $path_to_prepend = '', $recurse = false, $opts = NULL)
 {

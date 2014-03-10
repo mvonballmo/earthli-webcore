@@ -224,7 +224,7 @@ class DATABASE extends DB_Sql
   
   /**
    * Used for duplicate query checking.
-   * @var array[string]
+   * @var string[]
    * @access private
    */
   protected $_query_texts;

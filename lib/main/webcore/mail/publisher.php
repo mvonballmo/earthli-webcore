@@ -484,6 +484,8 @@ class PUBLISHER extends LOGGABLE
     else
     {
       $class_name = $this->app->final_class_name ('WEBCORE_MAIL_BODY_RENDERER', 'webcore/mail/webcore_mail_body_renderer.php');
+
+      /** @var WEBCORE_MAIL_BODY_RENDERER $mail_renderer */
       $mail_renderer = new $class_name ($this->context);
 
       $mail_renderer->add ($this->_subscription_settings, $this->_renderer_for ($this->_subscription_settings));
@@ -512,7 +514,7 @@ class PUBLISHER extends LOGGABLE
    * Mark the given records as published in the database.
    * Called from {@link publish_history_items()} once all interested subscribers have
    * been updated with the history item ids.
-   * @param array[HISTORY_ITEM] $history_items
+   * @param HISTORY_ITEM[] $history_items
    * @access private
    */
   protected function _update_publication_status_for ($history_items)
@@ -550,7 +552,7 @@ class PUBLISHER extends LOGGABLE
    * Each message contains all the information it needs to send an email to the
    * given subscriber. Once all emails are sent to a subscriber, the queued
    * history items for that subscriber are cleared in the database.
-   * @param array[PUBLISHER_MESSAGE] $items
+   * @param PUBLISHER_MESSAGE[] $items
    * @access private
    */
   protected function _send_items ($items)
@@ -607,7 +609,7 @@ class PUBLISHER extends LOGGABLE
 
   /**
    * Get a renderer from cache, if possible.
-   * @param PUBLISHABLE $obj
+   * @param object $obj
    * @return MAIL_OBJECT_RENDERER
    * @access private
    */
@@ -631,8 +633,9 @@ class PUBLISHER extends LOGGABLE
    * could be pulled from cache, but the email address differs with each email. This
    * allows the publisher to make the most of caching and still customize the email body
    * for the recipient.
-   * @param PUBLICATION_BATCH $batch Contains information about the publication phase
+   * @param PUBLISHER_MESSAGE $item
    * @param string $text
+   * @internal param \PUBLICATION_BATCH $batch Contains information about the publication phase
    * @return string
    * @access private
    */
@@ -673,7 +676,7 @@ class PUBLISHER extends LOGGABLE
    * List of subscribers for this objct.
    * @param HISTORY_ITEM $history_item
    * @param AUDITABLE $obj
-   * @return array[SUBSCRIBER]
+   * @return SUBSCRIBER[]
    */
   protected function _subscribers_for ($history_item, $obj)
   {
@@ -706,6 +709,11 @@ class PUBLISHER extends LOGGABLE
    * @access private
    */
   protected $_subscription_settings;
+
+  /**
+   * @var RENDERER[]
+   */
+  private $_renderers;
 }
 
 /**
@@ -739,7 +747,7 @@ class PUBLISHER_MESSAGE extends WEBCORE_OBJECT
 
   /**
    * List of objects to render in the message.
-   * @var array[UNIQUE_OBJECT]
+   * @var UNIQUE_OBJECT[]
    */
   public $objects;
 
@@ -981,5 +989,3 @@ class SUBSCRIPTION_SETTINGS extends RENDERABLE
     }
   }
 }
-
-?>

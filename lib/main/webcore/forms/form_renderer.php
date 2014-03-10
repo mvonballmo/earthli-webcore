@@ -821,10 +821,10 @@ class FORM_RENDERER extends CONTROLS_RENDERER
 
   /**
    * Closes a left indent.
-   * 
+   *
    * To be used only when {@link start_indent()} has already been called.
-   * 
-   * @param $size The size of the indent; not used here, but may be used by descendents.
+   *
+   * @param string $size The size of the indent; not used here, but may be used by descendents.
    * @see start_indent()
    */
   public function finish_indent ($size = '2em')
@@ -1092,9 +1092,9 @@ class FORM_RENDERER extends CONTROLS_RENDERER
 
   /**
    * Draw the list of buttons in a row.
-   * Draws a series of buttons previously renderered with {@link javascript_button_as_html()},
+   * Draws a series of buttons previously rendered with {@link javascript_button_as_html()},
    * {@link button_as_html()} or {@link submit_button_as_html()}.
-   * @param array[string] $buttons
+   * @param string[] $buttons
    * @param string $title Title to show for this row.
    */
   public function draw_buttons_in_row($buttons, $title = '')
@@ -2155,14 +2155,14 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * Table of used DOM ids.
    * If radio buttons or other group controls are rendered to different parts of a page for the
    * same field, this structure remembers which DOM id was last used for the given field.
-   * @var array[string, integer]
+   * @var integer[]
    * @access private
    */
   protected $_num_controls = array ();
 
   /**
    * Stack of widths applied with {@link set_width()}.
-   * @var array[STORED_WIDTH]
+   * @var STORED_WIDTH[]
    * @access private
    */
   protected $_widths;

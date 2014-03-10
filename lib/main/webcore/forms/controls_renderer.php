@@ -88,7 +88,7 @@ class CONTROLS_RENDERER extends WEBCORE_OBJECT
    * Draw the list of buttons as HTML.
    * Draws a series of buttons previously renderered with {@link javascript_button_as_html()},
    * {@link button_as_html()} or {@link submit_button_as_html()}.
-   * @param array[string] $buttons
+   * @param string[] $buttons
    */
   public function draw_buttons ($buttons)
   {
@@ -108,7 +108,7 @@ class CONTROLS_RENDERER extends WEBCORE_OBJECT
    * Draw the list of buttons in a row.
    * Draws a series of buttons previously renderered with {@link javascript_button_as_html()},
    * {@link button_as_html()} or {@link submit_button_as_html()}.
-   * @param array[string] $buttons
+   * @param string[] $buttons
    * @param string $title Title to show for this row.
    */
   public function draw_buttons_in_row ($buttons, $title = ' ')

@@ -79,22 +79,22 @@ class MAIL_MESSAGE extends WEBCORE_OBJECT
   public $send_as_html = true;
 
   /**
-   * @var array[string]
+   * @var string[]
    */
   public $send_to = array ();
 
   /**
-   * @var array[string]
+   * @var string[]
    */
   public $cc = array ();
 
   /**
-   * @var array[string]
+   * @var string[]
    */
   public $bcc = array ();
 
   /**
-   * @var array[string]
+   * @var string[]
    */
   public $custom_headers = array ();
 

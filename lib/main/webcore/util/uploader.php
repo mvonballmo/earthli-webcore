@@ -396,7 +396,7 @@ class UPLOADED_FILE_SET
 {
   /**
    * List of uploaded files.
-   * @var array[UPLOADED_FILE]
+   * @var UPLOADED_FILE[]
    * @see UPLOADED_FILE
    */
   public $files = array ();
@@ -565,7 +565,7 @@ class UPLOADER extends RAISABLE
   /**
    * Map of field name to list of files.
    * Each submitted fields may be associated with one of more uploaded files.
-   * @var array[string,UPLOADED_FILE_SET]
+   * @var UPLOADED_FILE_SET[]
    * @see UPLOADED_FILE_SET
    */
   public $file_sets = array ();

@@ -99,7 +99,7 @@ abstract class SEARCH_FIELDS extends WEBCORE_OBJECT
 
   /**
    * Add sortable values to the array.
-   * @param array[string, string] $values
+   * @param string[] $values
    */
   public function add_sort_fields ($values)
   {
@@ -714,7 +714,7 @@ class SEARCH_TEXT_FIELDS extends SEARCH_FIELDS
    * Restrict the query by these fields.
    * @param QUERY $query
    * @param stdClass $obj
-   * @param array[string]
+   * @param string[]
    */
   public function apply_to_query ($query, $obj, &$fields)
   {
@@ -773,7 +773,7 @@ class SORT_FIELDS extends SEARCH_FIELDS
   /**
    * Return text describing this search field.
    * @param stdClass $obj
-   * @param array[string,string] $sort_values
+   * @param string[] $sort_values
    * @return string
    */
   public function description ($obj, $sort_values)
@@ -1321,7 +1321,7 @@ class SEARCH_OBJECT_FIELDS extends WEBCORE_OBJECT
 
   /**
    * List of sortable values
-   * @return array[string, string]
+   * @return string[]
    */
   protected function _sort_values ()
   {
@@ -1619,7 +1619,7 @@ class SEARCH_OBJECT_IN_FOLDER_FIELDS extends SEARCH_CONTENT_OBJECT_FIELDS
 
   /**
    * List of sortable values.
-   * @return array[string, string]
+   * @return string[]
    */
   protected function _sort_values ()
   {
@@ -1631,7 +1631,7 @@ class SEARCH_OBJECT_IN_FOLDER_FIELDS extends SEARCH_CONTENT_OBJECT_FIELDS
 
   /**
    * List of possible object states.
-   * @return array[string]
+   * @return string[]
    */
   protected function _states ()
   {
@@ -1866,7 +1866,7 @@ class SEARCH_DRAFTABLE_FIELDS extends SEARCH_ENTRY_FIELDS
 
   /**
    * List of possible object states.
-   * @return array[string]
+   * @return string[]
    */
   protected function _states ()
   {

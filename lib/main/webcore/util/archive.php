@@ -108,10 +108,10 @@ class ARCHIVE
 
   /**
    * Execute the 'file_callback' for each file entry.
-   * @param CALLBACK $file_callback Function prototype: function ({@link
+   * @param WEBCORE_CALLBACK $file_callback Function prototype: function ({@link
    * COMPRESSED_FILE} $archive, {@link COMPRESSED_FILE_ENTRY} $entry, {@link
    * CALLBACK} $error_callback = null)
-   * @param CALLBACK $error_callback Function prototype: function ({@link
+   * @param WEBCORE_CALLBACK $error_callback Function prototype: function ({@link
    * COMPRESSED_FILE} $archive, string $msg, {@link COMPRESSED_FILE_ENTRY}
    * $entry)
    */
@@ -128,7 +128,7 @@ class ARCHIVE
   /**
    * Extract all files in {@link $file_name} to 'path'.
    * @param string $path Valid path in the local file system.
-   * @param CALLBACK $error_callback Function prototype: function ({@link
+   * @param WEBCORE_CALLBACK $error_callback Function prototype: function ({@link
    * COMPRESSED_FILE} $archive, string $msg, {@link COMPRESSED_FILE_ENTRY}
    * $entry)
    */
@@ -190,7 +190,7 @@ class ARCHIVE
   /**
    * List of archive format handlers.
    * @see ARCHIVE_HANDLER
-   * @var array[ARCHIVE_HANDLER]
+   * @var ARCHIVE_HANDLER[]
    * @access private
    */
   protected $_handlers;
@@ -260,7 +260,7 @@ abstract class COMPRESSED_FILE extends RAISABLE
    * 
    * If it cannot be opened, an error is recorded to the given 'error_callback'. 
    * 
-   * @param CALLBACK $error_callback Function prototype: function (string, {@link COMPRESSED_FILE_ENTRY})
+   * @param WEBCORE_CALLBACK $error_callback Function prototype: function (string, {@link COMPRESSED_FILE_ENTRY})
    */
   public function open ($error_callback = null)
   {
@@ -278,8 +278,8 @@ abstract class COMPRESSED_FILE extends RAISABLE
 
   /**
    * Execute the 'file_callback' for each file entry.
-   * @param CALLBACK $file_callback Function prototype: function ({@link COMPRESSED_FILE} $archive, {@link COMPRESSED_FILE_ENTRY} $entry, {@link CALLBACK} $error_callback = null)
-   * @param CALLBACK $error_callback Function prototype: function ({@link COMPRESSED_FILE} $archive, string $msg, {@link COMPRESSED_FILE_ENTRY} $entry)
+   * @param WEBCORE_CALLBACK $file_callback Function prototype: function ({@link COMPRESSED_FILE} $archive, {@link COMPRESSED_FILE_ENTRY} $entry, {@link CALLBACK} $error_callback = null)
+   * @param WEBCORE_CALLBACK $error_callback Function prototype: function ({@link COMPRESSED_FILE} $archive, string $msg, {@link COMPRESSED_FILE_ENTRY} $entry)
    */
   public function for_each ($file_callback, $error_callback = null)
   {
@@ -289,7 +289,7 @@ abstract class COMPRESSED_FILE extends RAISABLE
 
   /**
    * Extract all files to 'path'.
-   * @param CALLBACK $error_callback Function prototype: function (string, {@link COMPRESSED_FILE_ENTRY})
+   * @param WEBCORE_CALLBACK $error_callback Function prototype: function (string, {@link COMPRESSED_FILE_ENTRY})
    */
   public function extract_to ($path, $error_callback = null)
   {
@@ -302,7 +302,7 @@ abstract class COMPRESSED_FILE extends RAISABLE
    * This function is called for each file in the compressed file when {@link extract_to()} is called.
    * @param COMPRESSED_FILE $comp_file
    * @param COMPRESSED_FILE_ENTRY $entry
-   * @param CALLBACK $error_callback Function prototype: function ({@link COMPRESSED_FILE} $archive, string $msg, {@link COMPRESSED_FILE_ENTRY} $entry)
+   * @param WEBCORE_CALLBACK $error_callback Function prototype: function ({@link COMPRESSED_FILE} $archive, string $msg, {@link COMPRESSED_FILE_ENTRY} $entry)
    * @access private
    */
   public function _extract_file ($comp_file, $entry, $error_callback)
@@ -313,7 +313,7 @@ abstract class COMPRESSED_FILE extends RAISABLE
   /**
    * Opens the file using the implementation-specific underlying driver.
    * 
-   * @param CALLBACK $error_callback Function prototype: function (string, {@link COMPRESSED_FILE_ENTRY})
+   * @param WEBCORE_CALLBACK $error_callback Function prototype: function (string, {@link COMPRESSED_FILE_ENTRY})
    * @access private
    * @abstract
    */
@@ -321,8 +321,8 @@ abstract class COMPRESSED_FILE extends RAISABLE
 
   /**
    * Execute the 'file_callback' for each file entry.
-   * @param CALLBACK $file_callback Function prototype: function ({@link COMPRESSED_FILE}, {@link COMPRESSED_FILE_ENTRY})
-   * @param CALLBACK $error_callback Function prototype: function ({@link COMPRESSED_FILE} $archive, string $msg, {@link COMPRESSED_FILE_ENTRY} $entry)
+   * @param WEBCORE_CALLBACK $file_callback Function prototype: function ({@link COMPRESSED_FILE}, {@link COMPRESSED_FILE_ENTRY})
+   * @param WEBCORE_CALLBACK $error_callback Function prototype: function ({@link COMPRESSED_FILE} $archive, string $msg, {@link COMPRESSED_FILE_ENTRY} $entry)
    * @access private
    * @abstract
    */
@@ -413,7 +413,7 @@ abstract class COMPRESSED_FILE_ENTRY extends RAISABLE
    * If there is an error in the extraction, it is communicated to the optional 'error_callback'
    * instead of raising an exception (which stops the script).
    * @param string $path
-   * @param CALLBACK $error_callback
+   * @param WEBCORE_CALLBACK $error_callback
    */
   public function extract_to ($path, $error_callback = null)
   {
@@ -428,7 +428,7 @@ abstract class COMPRESSED_FILE_ENTRY extends RAISABLE
   /**
    * Format-dependent extraction algorithm.
    * @param string $path
-   * @param CALLBACK $error_callback
+   * @param WEBCORE_CALLBACK $error_callback
    * @access private
    * @abstract
    */
@@ -436,7 +436,7 @@ abstract class COMPRESSED_FILE_ENTRY extends RAISABLE
 
   /**
    * Report an error.
-   * @param CALLBACK $error_callback
+   * @param WEBCORE_CALLBACK $error_callback
    * @param string $msg
    * @access private
    */
@@ -481,8 +481,8 @@ class ZIP_FILE extends COMPRESSED_FILE
   /**
    * Execute the 'file_callback' for each file entry.
    * The zip file is automatically closed when complete (the iterator returned by PHP is one-way).
-   * @param CALLBACK $file_callback Function prototype: function ({@link COMPRESSED_FILE} $archive, {@link COMPRESSED_FILE_ENTRY} $entry, {@link CALLBACK} $error_callback = null)
-   * @param CALLBACK $error_callback Function prototype: function ({@link COMPRESSED_FILE} $archive, string $msg, {@link COMPRESSED_FILE_ENTRY} $entry)
+   * @param WEBCORE_CALLBACK $file_callback Function prototype: function ({@link COMPRESSED_FILE} $archive, {@link COMPRESSED_FILE_ENTRY} $entry, {@link CALLBACK} $error_callback = null)
+   * @param WEBCORE_CALLBACK $error_callback Function prototype: function ({@link COMPRESSED_FILE} $archive, string $msg, {@link COMPRESSED_FILE_ENTRY} $entry)
    */
   protected function _for_each ($file_callback, $error_callback = null)
   {
@@ -513,7 +513,7 @@ class ZIP_FILE extends COMPRESSED_FILE
   /**
    * Opens the file using the implementation-specific underlying driver.
    * 
-   * @param CALLBACK $error_callback Function prototype: function (string, {@link COMPRESSED_FILE_ENTRY})
+   * @param WEBCORE_CALLBACK $error_callback Function prototype: function (string, {@link COMPRESSED_FILE_ENTRY})
    * @access private
    */
   protected function _open ($error_callback = null)
@@ -567,7 +567,7 @@ class ZIP_ENTRY extends COMPRESSED_FILE_ENTRY
   /**
    * Extract using the zip algorithm.
    * @param string $path
-   * @param CALLBACK $error_callback
+   * @param WEBCORE_CALLBACK $error_callback
    * @access private
    */
   protected function _extract_to ($path, $error_callback)

@@ -76,7 +76,7 @@ class QUERY_SECURITY_RESTRICTION extends WEBCORE_OBJECT
    * passes {@link Privilege_set_folder} and {@link Privilege_set_entry}. If the user does
    * not have rights to the outer set (folders), then rights to the inner set are not even
    * checked (i.e. denied).
-   * @param array[string] List of privilege sets to check.
+   * @param string[] List of privilege sets to check.
    * @return string
    */
   public function as_sql ($set_names)
@@ -162,7 +162,7 @@ class QUERY_SECURITY_RESTRICTION extends WEBCORE_OBJECT
    * This function is called from {@link as_sql()} and builds a chain of
    * {@link QUERY_SECURITY_RESTRICTION_SET}s, which represent the request. These sets
    * are then applied to this restriction, generating the SQL text.
-   * @param array[string] $set_names
+   * @param string[] $set_names
    * @access private
    */
   protected function _generate_sql_for_sets ($set_names)
@@ -285,7 +285,7 @@ class QUERY_SECURITY_RESTRICTION extends WEBCORE_OBJECT
    * List of sets whose visible states must be checked.
    * A list of folder ids is retrieved for which the user has the matching privileges
    * and included in the restriction.
-   * @var array[string]
+   * @var string[]
    * @access private
    */
   protected $_vis_sets;
@@ -294,7 +294,7 @@ class QUERY_SECURITY_RESTRICTION extends WEBCORE_OBJECT
    * List of privileges for the visible states to check.
    * This array is always the same size as {@link $vis_sets} and only ever includes the
    * {@link Privilege_view} flag.
-   * @var array[integer]
+   * @var integer[]
    * @access private
    */
   protected $_vis_privs;
@@ -335,7 +335,7 @@ class QUERY_SECURITY_RESTRICTION_SET_ITEM
    * List of states to restrict.
    * If an entry in this array is non-zero, the state of any matching item must
    * contain the given state (typically matching the {@link Visible} flag).
-   * @var array[integer]
+   * @var integer[]
    */
   public $states;
 
@@ -343,7 +343,7 @@ class QUERY_SECURITY_RESTRICTION_SET_ITEM
    * List of privilege sets to restrict.
    * A list of folder ids is retrieved for which the user has the matching privileges
    * and included in the restriction.
-   * @var array[string]
+   * @var string[]
    */
   public $sets;
 
@@ -351,7 +351,7 @@ class QUERY_SECURITY_RESTRICTION_SET_ITEM
    * List of privileges to restrict.
    * This array is always the same size as {@link $sets} and only ever includes the
    * {@link Privilege_view_hidden} flag.
-   * @var array[integer]
+   * @var integer[]
    */
   public $privileges;
 

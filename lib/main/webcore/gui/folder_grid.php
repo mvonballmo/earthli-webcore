@@ -51,7 +51,7 @@ abstract class FOLDER_GRID extends STANDARD_GRID
 {
   /**
    * Assign the tree of {@link FOLDER}s to display.
-   * @param array[FOLDER]
+   * @param FOLDER[]
    */
   public function set_folders ($folders)
   {
@@ -72,7 +72,7 @@ abstract class FOLDER_GRID extends STANDARD_GRID
 
   /**
    * Get the list of objects for the requested page.
-   * @return array[FOLDER]
+   * @return FOLDER[]
    * @access private
    */
   protected function _get_objects ()
@@ -83,7 +83,7 @@ abstract class FOLDER_GRID extends STANDARD_GRID
   }
 
   /**
-   * @var array[FOLDER]
+   * @var FOLDER[]
    * @see FOLDER
    * @access private
    */

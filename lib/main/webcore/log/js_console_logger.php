@@ -258,7 +258,7 @@ class JS_CONSOLE_LOGGER extends TEXT_OUTPUT_LOGGER
   protected $_log_info;
 
   /**
-   * @var array[LOG_INFO]
+   * @var LOG_INFO[]
    * @access private
    */
   protected $_messages = array ();

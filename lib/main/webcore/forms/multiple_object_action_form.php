@@ -261,7 +261,7 @@ abstract class MULTIPLE_OBJECT_ACTION_FORM extends ID_BASED_FORM
   /**
    * List of selected folders.
    * Available only when not submitted.
-   * @var array[FOLDER]
+   * @var FOLDER[]
    * @access private
    */
   public $folders;
@@ -269,7 +269,7 @@ abstract class MULTIPLE_OBJECT_ACTION_FORM extends ID_BASED_FORM
   /**
    * List of selected entries.
    * Available only when not submitted.
-   * @var array[ENTRY]
+   * @var ENTRY[]
    * @access private
    */
   public $entries;

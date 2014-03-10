@@ -139,7 +139,7 @@ class COOKIE extends CLIENT_STORAGE
   /**
    * Stores new values locally so that subsequent lookups don't read
    * the stale value out of the page cookie.
-   * @var array[string,string]
+   * @var string[]
    * @access private
    */
   protected $_values = array ();
@@ -149,7 +149,7 @@ class COOKIE extends CLIENT_STORAGE
    * Use {@link start_multiple_value()} to start storing to a list of
    * values. Use {@link finish_multiple_value()} to write the accumulated
    * values to a single cookie.
-   * @var array[string,string]
+   * @var string[]
    * @access private
    */
   protected $_multiple_values;

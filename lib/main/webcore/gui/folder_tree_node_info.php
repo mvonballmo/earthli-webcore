@@ -217,7 +217,7 @@ class SECURITY_FOLDER_TREE_NODE_INFO extends FOLDER_TREE_NODE_INFO
 
   /**
    * Make sure all nodes that define their permissions are visible in the tree.
-   * @param array[FOLDER] $nodes
+   * @param FOLDER[] $nodes
    */
   public function set_defined_nodes_visible ($nodes)
   {

@@ -87,11 +87,8 @@ class ENTRY_COMMENT_QUERY extends COMMENT_QUERY
       $old_tables = $this->_tables;
       $this->add_table ("{$this->app->table_names->attachments} a", 'a.object_id = com.id');
       $this->_start_system_call ("a.id = $id");
-      $objs = $this->objects ();
-      if (sizeof ($objs))
-      {
-        $Result = $objs [0];
-      }
+      $objects = $this->objects ();
+      $Result = sizeof ($objects) ? $objects [0] : 0;
       $this->_end_system_call ();
       $this->_tables = $old_tables;
       return $Result;
@@ -111,7 +108,7 @@ class ENTRY_COMMENT_QUERY extends COMMENT_QUERY
   }
 
   /**
-   * @return array[string]
+   * @return string[]
    * @access private
    */
   protected function _prepare_restrictions ()
@@ -127,5 +124,3 @@ class ENTRY_COMMENT_QUERY extends COMMENT_QUERY
    */
   protected $_entry;
 }
-
-?>

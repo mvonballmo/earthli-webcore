@@ -100,7 +100,7 @@ class PROJECT_ENTRY_BRANCH_INFO_QUERY extends QUERY
 
   /**
    * Result set with each object stored as [branch_id => PROJECT_ENTRY_INFO].
-   * @return array[PROJECT_ENTRY_INFO]
+   * @return PROJECT_ENTRY_BRANCH_INFO[]
    */
   public function indexed_objects_by_branch_id ()
   {
@@ -139,7 +139,7 @@ class PROJECT_ENTRY_BRANCH_INFO_QUERY extends QUERY
 }
 
 /**
- * Retrieves {@link JOB_BRANCH_INFO}es for a particular {@link JOB}.
+ * Retrieves {@link JOB_BRANCH_INFO}s for a particular {@link JOB}.
  * @package projects
  * @subpackage db
  * @version 3.4.0

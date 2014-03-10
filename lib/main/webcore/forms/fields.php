@@ -203,7 +203,7 @@ class FIELD extends RAISABLE
   /**
    * Set this field from a request array.
    * Sets the field to <code>null</code> if it is not in the array.
-   * @param array[string] $values */
+   * @param string[] $values */
   public function set_value_from_request ($values)
   {
     if (isset ($values [$this->id]))

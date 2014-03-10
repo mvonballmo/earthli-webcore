@@ -271,7 +271,7 @@ class HTML_LIST_TRANSFORMER_ITEM
 {
   /**
    * Individual items.
-   * @var array[string]
+   * @var string[]
    */
   public $items;
 
@@ -624,7 +624,7 @@ class HTML_PUNCTUATION_CONVERTER extends MUNGER_CONVERTER
 {
   /**
    * Table of punctuation mappings to apply in {@link _convert()}
-   * @var array[string,string]
+   * @var string[]
    */
   public $punctuation_table = array ( '---' => '&mdash;'
                                  , '--' => '&#8211;'
@@ -687,7 +687,7 @@ class HTML_SMART_QUOTE_CONVERTER extends MUNGER_CONVERTER
    * unless it is in the following array. The Unicode characters mentioned in
    * the sample at [http://www.pensee.com/dunham/smartQuotes.html] are commented
    * for now.
-   * @var array[char]
+   * @var string[]
    */
   public $left_chars = array ('(', '[', '{', '<', '=', ';', '.', ',', '"', '\''/*0x00AB, 0x3008, 0x300A*/);
 
@@ -837,7 +837,7 @@ class HTML_LIGATURE_CONVERTER extends MUNGER_CONVERTER
 {
   /**
    * Table of punctuation mappings to apply in {@link _convert()}
-   * @var array[string,string]
+   * @var string[]
    */
   public $punctuation_table = array ( 'ffi' => '&#xfb03;'
                                  , 'ffl' => '&#xfb04;'
@@ -978,7 +978,7 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
    * content inside all of the extra containers.
    * @see _close_outer_area()
    * @param HTML_MUNGER $munger The transformation context.
-   * @param ARRAY[string,string] $attributes Attributes of a tag; retrieved from the
+   * @param string[] $attributes Attributes of a tag; retrieved from the
    * token.
    * @param boolean $is_block If true, uses DIV tags for extra containers;
    * otherwise, SPAN tags are used.
@@ -1141,6 +1141,8 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
       
       return '<span class="auto-content-caption">' . $this->_caption . '</span>';
     }
+
+    return '';
 	}
 
   /**
@@ -1190,7 +1192,7 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
    * calculated values for common values. Should be closed with {@link
    * _close_inner_area()}.
    * @param HTML_MUNGER $munger The transformation context.
-   * @param array[string,string] $attributes List of attributes for the tag
+   * @param string[] $attributes List of attributes for the tag
    * (retrieved from the token).
    * @param CSS_STYLE_BUILDER $outer_css Styles intended for the bounding
    * container; includes alignment and width.
@@ -1243,7 +1245,7 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
   /**
    * Return the width to use for the tag.
    * @param MUNGER $munger The transformation context.
-   * @param array[string,string] $attributes List of attributes for the tag
+   * @param string[] $attributes List of attributes for the tag
    * (retrieved from the token).
    * @return string
    * @access private
@@ -1256,7 +1258,7 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
   /**
    * Read a value from the attributes list and convert it for placement
    * within an HTML tag attribute value.
-   * @param array[string,string] $attributes List of attributes for the tag
+   * @param string[] $attributes List of attributes for the tag
    * (retrieved from the token).
    * @param string $index Index into the attributes array.
    * @return string
@@ -1286,7 +1288,7 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
    * of the "href").
    * 
    * @param HTML_MUNGER $munger The transformation context.
-   * @param array[string,string] $attributes List of attributes for the tag
+   * @param string[] $attributes List of attributes for the tag
    * (retrieved from the token).
    * @return string
    * @access private
@@ -1324,7 +1326,7 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
    * Return the formatted source as a link or text.
    * 
    * @param HTML_MUNGER $munger The transformation context.
-   * @param array[string,string] $attrs
+   * @param string[] $attrs
    * @param string $href
    * @return string
    * @access private
@@ -1395,13 +1397,13 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
 
   /**
    * Return the URL to use for calculating the source.
-   * @param array[string,string] $attrs
+   * @param string[] $attributes
    * @return string
    * @access private
    */
-  protected function _url_for_source ($attrs)
+  protected function _url_for_source ($attributes)
   {
-    return read_array_index ($attrs, 'href');
+    return read_array_index ($attributes, 'href');
   }
 
   /**
@@ -1463,7 +1465,7 @@ class HTML_BLOCK_QUOTE_REPLACER extends HTML_DIV_REPLACER
    * Render the open tag.
    *
    * @param HTML_MUNGER $munger The transformation context.
-   * @param array[string,string] $attributes List of attributes for the tag
+   * @param string[] $attributes List of attributes for the tag
    * (retrieved from the token).
    * @param CSS_STYLE_BUILDER $outer_css Styles intended for the bounding
    * container; includes alignment and width.
@@ -1522,7 +1524,7 @@ class HTML_BOX_REPLACER extends HTML_DIV_REPLACER
   /**
    * Render the beginning of the tag.
    * @param HTML_MUNGER $munger The transformation context.
-   * @param array[string,string] $attributes List of attributes for the tag
+   * @param string[] $attributes List of attributes for the tag
    * (retrieved from the token).
    * @param CSS_STYLE_BUILDER $outer_css Styles intended for the bounding
    * container; includes alignment and width.
@@ -1592,8 +1594,7 @@ class HTML_MUNGER_CODE_REPLACER extends HTML_PREFORMATTED_BLOCK_REPLACER
   /**
    * Render the beginning of the tag.
    * @param HTML_MUNGER $munger The transformation context.
-   * @param array[string,string] $attrs List of attributes for the tag
-   * (retrieved from the token).
+   * @param string[] $attributes List of attributes for the tag (retrieved from the token).
    * @param CSS_STYLE_BUILDER $outer_css Styles intended for the bounding
    * container; includes alignment and width.
    * @param CSS_STYLE_BUILDER $inner_css Styles intended for the inner
@@ -1668,20 +1669,20 @@ class HTML_INLINE_ASSET_REPLACER extends HTML_BASE_REPLACER
 
   /**
    * Return the URL to use for calculating the source.
-   * @param array[string,string] $attrs
+   * @param string[] $attributes
    * @return string
    * @access private
    */
-  protected function _url_for_source ($attrs)
+  protected function _url_for_source ($attributes)
   {
-    $attachment_name = read_array_index ($attrs, 'attachment');
+    $attachment_name = read_array_index ($attributes, 'attachment');
     if ($attachment_name)
     {
       $Result = '{att_link}/' . $attachment_name;
     }
     else
     {
-      $Result = read_array_index ($attrs, 'href');
+      $Result = read_array_index ($attributes, 'href');
     }
     return $Result;
   }
@@ -1705,7 +1706,7 @@ class HTML_IMAGE_REPLACER extends HTML_INLINE_ASSET_REPLACER
   /**
    * Render the open tag for the image and link.
    * @param HTML_MUNGER $munger The transformation context.
-   * @param array[string,string] $attributes List of attributes for the tag
+   * @param string[] $attributes List of attributes for the tag
    * (retrieved from the token).
    * @param CSS_STYLE_BUILDER $outer_css Styles intended for the bounding
    * container; includes alignment and width.
@@ -1760,7 +1761,7 @@ class HTML_IMAGE_REPLACER extends HTML_INLINE_ASSET_REPLACER
   /**
    * Return the width to use for the tag.
    * @param MUNGER $munger The transformation context.
-   * @param array[string,string] $attributes List of attributes for the tag
+   * @param string[] $attributes List of attributes for the tag
    * (retrieved from the token).
    * @return string
    * @access private
@@ -1843,7 +1844,7 @@ class HTML_MEDIA_REPLACER extends HTML_INLINE_ASSET_REPLACER
   /**
    * Render the open tag for the image and link.
    * @param HTML_MUNGER $munger The transformation context.
-   * @param array[string,string] $attributes List of attributes for the tag
+   * @param string[] $attributes List of attributes for the tag
    * (retrieved from the token).
    * @param CSS_STYLE_BUILDER $outer_css Styles intended for the bounding
    * container; includes alignment and width.
@@ -1873,8 +1874,7 @@ class HTML_MEDIA_REPLACER extends HTML_INLINE_ASSET_REPLACER
   /**
    * Return the width to use for the tag.
    * @param MUNGER $munger The transformation context.
-   * @param array[string,string] $attrs List of attributes for the tag
-   * (retrieved from the token).
+   * @param string[] $attributes List of attributes for the tag (retrieved from the token).
    * @return string
    * @access private
    */
@@ -1887,7 +1887,7 @@ class HTML_MEDIA_REPLACER extends HTML_INLINE_ASSET_REPLACER
    * Return a representation for this url and attributes.
    * @param HTML_MUNGER $munger The transformation context.
    * @param string $src The url to the movie.
-   * @param array[string,string] $attributes List of attributes for the tag
+   * @param string[] $attributes List of attributes for the tag
    * (retrieved from the token).
    * @param CSS_STYLE_BUILDER $outer_css Styles intended for the bounding
    * container; includes alignment and width.
@@ -1906,7 +1906,7 @@ class HTML_MEDIA_REPLACER extends HTML_INLINE_ASSET_REPLACER
    * Return a control to display the movie.
    * @param HTML_MUNGER $munger The transformation context.
    * @param string $src The url to the movie.
-   * @param array[string,string] $attributes List of attributes for the tag
+   * @param string[] $attributes List of attributes for the tag
    * (retrieved from the token).
    * @param CSS_STYLE_BUILDER $outer_css Styles intended for the bounding
    * container; includes alignment and width.

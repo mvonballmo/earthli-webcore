@@ -97,7 +97,7 @@ abstract class OBJECT_CACHE extends RAISABLE
   /**
    * Context list for the current object.
    * Set the current object with {@link set_selected_id()}.
-   * @var array[object]
+   * @var object[]
    */
   public $objects_in_window;
 
@@ -495,7 +495,7 @@ abstract class OBJECT_CACHE extends RAISABLE
   /**
    * Load the requested objects.
    * @param string $ids Comma-separated list of ids to load.
-   * @return array[object]
+   * @return object[]
    * @access private
    * @abstract
    */
@@ -505,7 +505,7 @@ abstract class OBJECT_CACHE extends RAISABLE
    * Load the requested objects.
    * @param integer $first Index within master list for first item.
    * @param integer $count Number of items to retrieve from that position.
-   * @return array[object]
+   * @return object[]
    * @access private
    * @abstract
    */

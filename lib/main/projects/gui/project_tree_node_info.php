@@ -78,7 +78,7 @@ class PROJECT_TREE_NODE_INFO extends FOLDER_TREE_NODE_INFO
   }
 
   /**
-   * @param array[PROJECT] $nodes If a node in this list defines its own options, make sure its parent node is open (make it visible). Works with a tree of projects as well.
+   * @param PROJECT[] $nodes If a node in this list defines its own options, make sure its parent node is open (make it visible). Works with a tree of projects as well.
    * @access private
    */
   public function set_defined_nodes_visible ($nodes)
@@ -96,5 +96,3 @@ class PROJECT_TREE_NODE_INFO extends FOLDER_TREE_NODE_INFO
     }
   }
 }
-
-?>

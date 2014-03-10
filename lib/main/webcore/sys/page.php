@@ -620,10 +620,8 @@ class PAGE extends CONTEXT
 
   /**
    * List of path aliases to treat as icon paths.
-   * @var array[string]
+   * @var string[]
    * @access private
    */
   protected $_icon_aliases;
 }
-
-?>

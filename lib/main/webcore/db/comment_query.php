@@ -121,7 +121,7 @@ class COMMENT_QUERY extends OBJECT_IN_SINGLE_FOLDER_QUERY
   }
 
   /**
-   * @return array[COMMENT]
+   * @return COMMENT[]
    * @param COMMENT $obj
    * @access private
    */

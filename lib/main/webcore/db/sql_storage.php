@@ -130,6 +130,7 @@ class SQL_FIELD
 
   /**
    * Escape the value for use as SQL.
+   * @throws UNKNOWN_VALUE_EXCEPTION
    * @return string
    */
   public function value_for_sql ()
@@ -177,7 +178,7 @@ class SQL_TABLE extends WEBCORE_OBJECT
   /**
    * The list of fields in this table.
    *
-   * @var array[SQL_FIELD]
+   * @var SQL_FIELD[]
    * 
    * @see add()
    */
@@ -186,7 +187,7 @@ class SQL_TABLE extends WEBCORE_OBJECT
   /**
    * The list of restrictions in this table.
    *
-   * @var array[string]
+   * @var string[]
    * 
    * @see restrict()
    */
@@ -295,7 +296,7 @@ class SQL_TABLE extends WEBCORE_OBJECT
   /**
    * Get the fields and values for this action.
    * @param integer $action
-   * @return array[string,string]
+   * @return string[]
    */
   public function fields_as_sql ($action)
   {
@@ -313,7 +314,6 @@ class SQL_TABLE extends WEBCORE_OBJECT
   /**
    * Get the restrictions for this table.
    * Used by {@link _update()} and {@link exists()}.
-   * @param integer $action
    * @return string
    */
   public function restrictions_as_sql ()
@@ -564,9 +564,7 @@ class SQL_STORAGE extends WEBCORE_OBJECT
    * 
    * Filled by calls to {@link add()}.
    * 
-   * @var array[SQL_TABLE]
+   * @var SQL_TABLE[]
    */
   private $_tables;
 }
-
-?>

@@ -223,7 +223,7 @@ abstract class GRID extends WEBCORE_OBJECT
 
   /**
    * Get the list of objects for the requested page.
-   * @return array[object]
+   * @return object[]
    * @access private
    */
   protected function _get_objects ()
@@ -240,7 +240,7 @@ abstract class GRID extends WEBCORE_OBJECT
    * and {@link _draw_header()}. After calling {@link _draw_cells()} to draw the content, it
    * finishes with {@link _draw_footer()} and {@link _finish_grid()} before drawing the
    * pager again with {@link _draw_pager()}.
-   * @param array[object] $objs
+   * @param object[] $objs
    * @access private
    */
   protected function _draw ($objs)
@@ -304,9 +304,9 @@ abstract class GRID extends WEBCORE_OBJECT
    * already been started and {@link _draw_separator()} if {@link $show_separator} is
    * True.
    *
-   * Most descendents will only override the {@link _draw_box()} method to draw the
+   * Most descendants will only override the {@link _draw_box()} method to draw the
    * object details.
-   * @param array[object] $objs
+   * @param object[] $objs
    * @access private
    */
   protected function _draw_cells ($objs)

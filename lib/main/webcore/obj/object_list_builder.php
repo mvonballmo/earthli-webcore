@@ -52,14 +52,14 @@ class OBJECT_LIST_BUILDER extends WEBCORE_OBJECT
   /**
    * List of selected folders.
    * Use {@link load_from_request()} to populate.
-   * @var array[FOLDER]
+   * @var FOLDER[]
    */
   public $folders;
 
   /**
    * List of selected entries.
    * Use {@link load_from_request()} to populate.
-   * @var array[ENTRY]
+   * @var ENTRY[]
    */
   public $entries;
 
@@ -125,7 +125,7 @@ class OBJECT_LIST_BUILDER extends WEBCORE_OBJECT
   
   /**
    * List of entry ids; used by {@link FORM}s.
-   * @return array[integer]
+   * @return integer[]
    */
   public function entry_ids ()
   {
@@ -134,7 +134,7 @@ class OBJECT_LIST_BUILDER extends WEBCORE_OBJECT
   
   /**
    * List of folder ids; used by {@link FORM}s.
-   * @return array[integer]
+   * @return integer[]
    */
   public function folder_ids ()
   {
@@ -195,6 +195,7 @@ class OBJECT_LIST_BUILDER extends WEBCORE_OBJECT
         $this->assert (! empty ($folder_id), 'Cannot retrieve all items with an [id].', 'load_from_request', 'OBJECT_LIST_BUILDER');
     
         $folder_query = $this->login->folder_query ();
+        /** @var FOLDER $folder */
         $folder = $folder_query->object_at_id ($folder_id);
         $entry_query = $folder->entry_query ();
         $entry_query->set_type ($entry_type);
@@ -225,12 +226,22 @@ class OBJECT_LIST_BUILDER extends WEBCORE_OBJECT
   protected $_folder;
 
   /**
+   * The list of ids for the entries included in this list.
+   * @var int[]
+   */
+  private $_entry_ids;
+
+  /**
+   * The list of ids for the folders included in this list.
+   * @var int[]
+   */
+  private $_folder_ids;
+
+  /**
    * Description of the contents of the list builder.
    * Returned by {@link description()}.
-   * @var array[string]
+   * @var string[]
    * @access private
    */
-  protected $_content;
+  protected $_contents;
 }
-
-?>

@@ -62,6 +62,7 @@ class PROFILER_TIMER extends RAISABLE
   /**
    * Return how much time has elapsed in this timer.
    * @param string $rounded_to Round to this many digits.
+   * @return float
    */
   public function elapsed ($rounded_to)
   {
@@ -112,7 +113,7 @@ class PROFILER_TIMER extends RAISABLE
 
   /**
    * Makes a single value out of the PHP 'microtime' function.
-   * @return real
+   * @return float
    * @access private
    */
   protected function _current_time ()
@@ -123,14 +124,14 @@ class PROFILER_TIMER extends RAISABLE
 
   /**
    * When was this profiler started?
-   * @var real
+   * @var float
    * @access private
    */
   protected $_start_time;
 
   /**
    * How much time has elapsed in this timer?
-   * @var real
+   * @var float
    * @access private
    */
   protected $_elapsed = 0;
@@ -161,6 +162,7 @@ class PROFILER extends RAISABLE
   /**
    * Has a timer with this name been started?
    * @param string $id
+   * @return bool
    */
   public function exists ($id)
   {
@@ -168,10 +170,10 @@ class PROFILER extends RAISABLE
   }
 
   /**
-   * Returns the elasped time, in seconds.
+   * Returns the elapsed time, in seconds.
    * If timer is running, it is not stopped.
    * @param string $id
-   * @param string $rounded_to Round to this many digits.
+   * @param int $rounded_to Round to this many digits.
    * @return float
    */
   public function elapsed ($id, $rounded_to = 3)
@@ -245,7 +247,8 @@ class PROFILER extends RAISABLE
   /**
    * Return a timer for 'id'.
    * If the timer does not exist, an exception is thrown.
-   * @var strind id
+   * @var string id
+   * @return PROFILER_TIMER
    * @access private
    */
   protected function _existing_timer ($id)
@@ -259,9 +262,7 @@ class PROFILER extends RAISABLE
   }
 
   /**
-   * @var array[object]
+   * @var PROFILER_TIMER[]
    */
   protected $_timers = array ();
 }
-
-?>

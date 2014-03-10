@@ -101,13 +101,13 @@ class MUNGER_VALIDATOR_TAG_INFO
 
   /**
    * Table of properties accepted by this tag.
-   * @var array[string]
+   * @var string[]
    */
   public $properties = array ();
 
   /**
    * @param boolean $has_end_tag
-   * @param array[string] $properties
+   * @param string[] $properties
    */
   public function __construct ($has_end_tag, $properties = null)
   {

@@ -206,7 +206,7 @@ class PAGE_NEWSFEED_OPTIONS
    * 
    * Can contain any of the formats listed with the {@link Newsfeed_constants}.
    *
-   * @var array[string,string]
+   * @var string[]
    */
   public $formats = array(
     Newsfeed_format_atom => "Atom", Newsfeed_format_rss => "RSS"
@@ -217,7 +217,7 @@ class PAGE_NEWSFEED_OPTIONS
    * 
    * Can contain any of the content formats listed with the {@link Newsfeed_constants}.
    *
-   * @var array[string]
+   * @var string[]
    */
   public $content_formats = array(
     Newsfeed_content_text => array ("Plain text", "Plain text content; not appropriate for HTML newsreaders."), 

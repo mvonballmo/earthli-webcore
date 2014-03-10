@@ -242,7 +242,7 @@ class APPLICATION_DISPLAY_OPTIONS extends CONTEXT_DISPLAY_OPTIONS
    * Return the list of {@link COMMENT} icons.
    * @see add_comment_kind()
    * @see PROPERTY_VALUE
-   * @return array[PROPERTY_VALUE]
+   * @return PROPERTY_VALUE[]
    */
   public function comment_icons ()
   {
@@ -304,7 +304,7 @@ class APPLICATION_DISPLAY_OPTIONS extends CONTEXT_DISPLAY_OPTIONS
 
   /**
    * @see PROPERTY_VALUE
-   * @var array[PROPERTY_VALUE]
+   * @var PROPERTY_VALUE[]
    * @access private
    */
   protected $_comment_icons;

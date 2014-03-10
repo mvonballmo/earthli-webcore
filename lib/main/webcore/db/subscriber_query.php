@@ -65,7 +65,7 @@ class SUBSCRIBER_QUERY extends QUERY
   }
 
   /**
-   * @param string $name
+   * @param string $email
    * @return USER
    */
   public function object_at_email ($email)
@@ -105,7 +105,7 @@ class SUBSCRIPTION_QUERY extends SUBSCRIBER_QUERY
 
   /**
    * Restrict to one of the given kind/id combinations.
-   * @param array[string][integer] $choices
+   * @param integer[] $choices
    */
   public function restrict_kinds ($choices)
   {
@@ -117,5 +117,3 @@ class SUBSCRIPTION_QUERY extends SUBSCRIBER_QUERY
     $this->restrict_to_one_of ($restrictions);
   }
 }
-
-?>

@@ -292,7 +292,7 @@ class ATTACHMENT_RENDERER extends CONTENT_OBJECT_RENDERER
    * Passed as a {@link CALLBACK} if the attachment is an {@link ARCHIVE}.
    * @param ARCHIVE $archive
    * @param COMPRESSED_FILE_ENTRY $entry
-   * @param CALLBACK $error_callback Function prototype: function ({@link COMPRESSED_FILE} $archive, string $msg, {@link COMPRESSED_FILE_ENTRY} $entry)
+   * @param WEBCORE_CALLBACK $error_callback Function prototype: function ({@link COMPRESSED_FILE} $archive, string $msg, {@link COMPRESSED_FILE_ENTRY} $entry)
    * @access private
    */
   public function list_file_as_html ($archive, $entry, $error_callback = null)
@@ -310,7 +310,7 @@ class ATTACHMENT_RENDERER extends CONTENT_OBJECT_RENDERER
    * Passed as a {@link CALLBACK} if the attachment is an {@link ARCHIVE}.
    * @param ARCHIVE $archive
    * @param COMPRESSED_FILE_ENTRY $entry
-   * @param CALLBACK $error_callback Function prototype: function ({@link COMPRESSED_FILE} $archive, string $msg, {@link COMPRESSED_FILE_ENTRY} $entry)
+   * @param WEBCORE_CALLBACK $error_callback Function prototype: function ({@link COMPRESSED_FILE} $archive, string $msg, {@link COMPRESSED_FILE_ENTRY} $entry)
    * @access private
    */
   public function list_file_as_text ($archive, $entry, $error_callback = null)
@@ -326,7 +326,7 @@ class ATTACHMENT_RENDERER extends CONTENT_OBJECT_RENDERER
   protected $_longest_name;
 
   /**
-   * @var array[COMPRESSED_FILE_ENTRY]
+   * @var COMPRESSED_FILE_ENTRY[]
    * @see COMPRESSED_FILE_ENTRY
    * @access private
    */

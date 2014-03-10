@@ -58,7 +58,7 @@ class MAIL_TOC_ENTRY_RENDERER extends RENDERER
 
   /**
    * List of {@link MAIL_BODY_RENDERER_OBJECT}s.
-   * @var array[MAIL_BODY_RENDERER_OBJECT]
+   * @var MAIL_BODY_RENDERER_OBJECT[]
    */
   public $pairs = array ();
 
@@ -179,7 +179,7 @@ class MAIL_TOC_ENTRY_RENDERER extends RENDERER
     if (isset ($this->main_pair))
     {
       $Result = $this->pair_as_html_for_table ($this->main_pair);
-      $Result .= "\n<ul class=\"detail\" style=\"margin: .2em 0em\">";
+      $Result .= "\n<ul class=\"detail\" style=\"margin: .2em 0\">";
     }
 
     foreach ($this->pairs as $pair)

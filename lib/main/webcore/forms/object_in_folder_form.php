@@ -242,7 +242,7 @@ class ATTACHMENT_HOST_FORM extends OBJECT_IN_FOLDER_FORM
   
   /**
    * @see ATTACHMENT
-   * @return array[ATTACHMENT]
+   * @return ATTACHMENT[]
    * @access private
    */
   protected function _attachments ()

@@ -49,7 +49,7 @@ require_once ('webcore/gui/flat_comment_grid.php');
 class THREADED_COMMENT_GRID extends FLAT_COMMENT_GRID
 {
   /**
-   * @param array[COMMENT] $objs
+   * @param COMMENT[] $objs
    * @access private
    */
   protected function _draw_cells ($objs)
@@ -72,7 +72,7 @@ class THREADED_COMMENT_GRID extends FLAT_COMMENT_GRID
 
   /**
    * Get the list of objects for the requested page.
-   * @return array[COMMENT]
+   * @return COMMENT[]
    * @access private
    */
   protected function _get_objects ()
@@ -141,7 +141,7 @@ class THREADED_COMMENT_GRID extends FLAT_COMMENT_GRID
   }
 
   /**
-   * @param array[COMMENT] $objs
+   * @param COMMENT[] $objs
    * @param integer $depth Nesting level.
    * @access private
    */

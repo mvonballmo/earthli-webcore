@@ -184,7 +184,7 @@ class EXCEPTION_SIGNATURE
    * Return a list of values for this exception.
    * This is the list of values available for this type when the exception occurred.
    * @param string $type Can be {@link Var_type_post}, {@link Var_type_get}, {@link Var_type_cookie} or {@link Var_type_upload}.
-   * @return array[string][string]
+   * @return string[]
    */
   public function variables_for ($type)
   {
@@ -276,7 +276,7 @@ class EXCEPTION_SIGNATURE
    * Allows this signature to be easily encoded in a form (e.g. by creating a hidden field for each pair
    * in this array). Encoding in a form is useful if the error handler page wants to send the signature
    * further or to build a form that can recreate the error.
-   * @return array[string][string]
+   * @return string[]
    */
   public function as_array ()
   {
@@ -310,7 +310,7 @@ class EXCEPTION_SIGNATURE
    * Used by {@link as_array()} to include information about the post/get/cookie state when the
    * exception occurred.
    * @param string $title Name of the array to get. Can be {@link Var_type_post}, {@link Var_type_get}, {@link Var_type_cookie} or {@link Var_type_upload}.
-   * @param array[string,string] $to_array
+   * @param string[] $to_array
    * @access private
    */
   protected function _add_values_from ($title, $to_array)
@@ -364,7 +364,7 @@ class EXCEPTION_SIGNATURE
 
   /**
    * Global variable state at time of exception.
-   * @var array[string,string,string]
+   * @var string[]
    * @access private
    */
   protected $_variables;

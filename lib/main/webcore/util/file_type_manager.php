@@ -136,14 +136,14 @@ abstract class FILE_TYPE_MANAGER extends WEBCORE_OBJECT
   
   /**
    * Maps mime types to icon urls.
-   * @var array[string,string]
+   * @var string[]
    * @access private
    */
   protected $_mime_types;
   
   /**
    * Maps extensions to icon urls.
-   * @var array[string,string]
+   * @var string[]
    * @access private
    */
   protected $_extensions;

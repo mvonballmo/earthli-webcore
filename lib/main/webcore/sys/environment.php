@@ -500,7 +500,7 @@ class ENVIRONMENT extends RESOLVER
    * @see url_to_folder()
    * @param string $default_domain Default host to use if ({@link
    * is_http_server()} is <code>False</code>).
-   * @param array[string] $domains Optional list of domains and their
+   * @param string[] $domains Optional list of domains and their
    * corresponding server-local paths. The default mapping maps the server root
    * to the document root. However, you can customize the mapping with regular
    * expressions or add other sub-domains supported by this server. (e. g. array

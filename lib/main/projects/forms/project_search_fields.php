@@ -95,7 +95,7 @@ class SEARCH_PROJECT_ENTRY_FIELDS extends SEARCH_ENTRY_FIELDS
 
   /**
    * List of sortable values
-   * @return array[string, string]
+   * @return string[]
    */
   protected function _sort_values ()
   {

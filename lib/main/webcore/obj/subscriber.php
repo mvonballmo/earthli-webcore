@@ -279,10 +279,10 @@ class SUBSCRIBER extends UNIQUE_OBJECT
   }
 
   /**
-   * (Un)Subscribe to the object indicated by the "id" and "kind".
+   * (Un)Subscribe to the object indicated by the {@link $obj} and {@link $kind}.
    * @see subscribe()
    * @see unsubscribe()
-   * @param integer $id Unique id for the subscribed object.
+   * @param AUDITABLE $obj
    * @param integer $kind Can be any of the {@link Subscribe_constants}.
    * @param boolean $enabled Turn the subscription on or off.
    */
@@ -359,7 +359,7 @@ class SUBSCRIBER extends UNIQUE_OBJECT
    * Returns a list of {@link Subscribe_constants} that match this person and the
    * given object.
    * @param AUDITABLE $obj
-   * @return array[integer]
+   * @return integer[]
    */
   public function receives_notifications_through ($obj)
   {
@@ -385,6 +385,7 @@ class SUBSCRIBER extends UNIQUE_OBJECT
   public function subscription_query ()
   {
     $class_name = $this->app->final_class_name ('SUBSCRIPTION_QUERY', 'webcore/db/subscriber_query.php');
+    /** @var SUBSCRIPTION_QUERY $Result */
     $Result = new $class_name ($this->app);
     $Result->set_select ('subs.*');
     $Result->restrict_text ('subscribers.email', $this->email);
@@ -395,7 +396,7 @@ class SUBSCRIBER extends UNIQUE_OBJECT
    * Return this list of subscribed ids for the given type.
    * @param string $kind Can be any one of the {@link Subscribe_constants}.
    * @param string $type Type of entry to find in multiple-entry-type modules.
-   * @return array[integer]
+   * @return integer[]
    */
   public function subscribed_ids_for ($kind, $type = '')
   {
@@ -460,7 +461,7 @@ class SUBSCRIBER extends UNIQUE_OBJECT
    * Replace subscriptions for the given type.
    * Pass in a list of ids to which this user should be subscribed.
    * @param string $kind Can be any one of the {@link Subscribe_constants}.
-   * @param array[integer] $selected_ids List of ids to replace the existing
+   * @param integer[] $selected_ids List of ids to replace the existing
    * set.
    * @param string $type Type of entry to find in multiple-entry-type modules.
    * (used only for entries).
@@ -631,9 +632,7 @@ class SUBSCRIBER extends UNIQUE_OBJECT
 
   /**
    * Queued history items as an array of ids.
-   * @var array[integer]
+   * @var integer[]
    */
   protected $_queued_history_items;
 }
-
-?>

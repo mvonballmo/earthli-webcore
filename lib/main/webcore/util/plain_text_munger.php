@@ -1043,7 +1043,7 @@ class PLAIN_TEXT_PUNCTUATION_CONVERTER extends MUNGER_CONVERTER
 {
   /**
    * Table of punctuation mappings to apply in {@link _convert()}
-   * @var array[string,string]
+   * @var string[]
    */
   public $punctuation_table = array ( '---' => ' -- '
 	                                  , '(S,)' => 'S'     // Turkish S with cedilla

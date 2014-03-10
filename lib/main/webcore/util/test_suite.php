@@ -83,7 +83,7 @@ abstract class TEST_SUITE extends WEBCORE_OBJECT
    * Return just the titles of the tests.
    * Used to display the available tests. Use {@link test_task_at_index()} to
    * get an instance of a test.
-   * @return array[string]
+   * @return string[]
    */
   public function test_names ()
   {
@@ -104,7 +104,7 @@ abstract class TEST_SUITE extends WEBCORE_OBJECT
 
   /**
    * Map of test classes to their file names.
-   * @var array[string,string]
+   * @var string[]
    * @access private
    */
   protected $_tests;

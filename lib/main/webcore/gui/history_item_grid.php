@@ -65,7 +65,7 @@ class HISTORY_ITEM_GRID extends STANDARD_GRID
 
   /**
    * Render the grid itself.
-   * @param array[object] $objs
+   * @param object[] $objs
    * @access private
    */
   protected function _draw ($objs)

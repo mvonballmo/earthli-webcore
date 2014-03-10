@@ -137,7 +137,9 @@ class RELEASE_FORM extends OBJECT_IN_FOLDER_FORM
   {
     parent::_post_validate ($obj);
 
+    /** @var DATE_TIME $test */
     $test = $this->value_for ('time_testing_scheduled');
+    /** @var DATE_TIME $ship */
     $ship = $this->value_for ('time_scheduled');
 
     if ($test->is_valid () && $ship->is_valid ())
@@ -157,8 +159,15 @@ class RELEASE_FORM extends OBJECT_IN_FOLDER_FORM
   protected function _store_to_object ($obj)
   {
     $obj->summary = $this->value_for ('summary');
-    $obj->set_time_scheduled ($this->value_for ('time_scheduled'));
-    $obj->set_time_testing_scheduled ($this->value_for ('time_testing_scheduled'));
+
+    /** @var DATE_TIME $time_scheduled */
+    $time_scheduled = $this->value_for('time_scheduled');
+    $obj->set_time_scheduled ($time_scheduled);
+
+    /** @var DATE_TIME $time_testing_scheduled */
+    $time_testing_scheduled = $this->value_for('time_testing_scheduled');
+    $obj->set_time_testing_scheduled ($time_testing_scheduled);
+
     $obj->branch_id = $this->value_for ('branch_id');
 
     parent::_store_to_object ($obj);
@@ -266,8 +275,7 @@ class RELEASE_FORM extends OBJECT_IN_FOLDER_FORM
   /**
    * Cached list of branches for the folder in which the release resides.
    *
-   * @var array[BRANCH]
+   * @var BRANCH[]
    */
   protected $_branches;
 }
-?>

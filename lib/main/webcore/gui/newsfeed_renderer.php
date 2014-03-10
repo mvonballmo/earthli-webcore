@@ -541,7 +541,7 @@ class NEWSFEED_MEDIA_REPLACER extends HTML_MEDIA_REPLACER
    * @param string $src The url to the movie.
    * @param string $type An identifier for the type of tag to embed (e.g.
    * youtube).
-   * @param ARRAY[string, string] $attrs List of attributes for the tag.
+   * @param string[] $attrs List of attributes for the tag.
    * @return string
    * @access private
    */

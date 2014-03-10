@@ -143,7 +143,7 @@ class OBJECT_FACTORY extends RAISABLE
    * Each class is resolved to its final class and the file for the class is
    * included.
    * @param string $prefix
-   * @return array[string]
+   * @return string[]
    */
   public function classes_with_prefix ($prefix)
   {
@@ -210,7 +210,7 @@ class OBJECT_FACTORY extends RAISABLE
   }
 
   /**
-   * @var array[string,OBJECT_FACTORY_ITEM]
+   * @var OBJECT_FACTORY_ITEM[]
    * @see OBJECT_FACTORY_ITEM
    * @access private
    */

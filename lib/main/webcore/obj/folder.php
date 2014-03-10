@@ -768,7 +768,7 @@ class FOLDER extends ATTACHMENT_HOST
   protected $_sub_folders_cached = false;
 
   /**
-   * @var array[FOLDER]
+   * @var FOLDER[]
    * @access private
    */
   protected $_sub_folders;

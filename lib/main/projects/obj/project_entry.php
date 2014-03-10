@@ -402,14 +402,14 @@ abstract class PROJECT_ENTRY extends MULTI_TYPE_ENTRY
 
   /**
    * Used during storage to hold new branches.
-   * @var array[integer,PROJECT_ENTRY_BRANCH_INFO]
+   * @var PROJECT_ENTRY_BRANCH_INFO[]
    * @access private
    */
   protected $_current_branch_infos;
 
   /**
    * Used during storage to hold stored branches.
-   * @var array[integer,PROJECT_ENTRY_BRANCH_INFO]
+   * @var PROJECT_ENTRY_BRANCH_INFO[]
    * @access private
    */
   protected $_stored_branch_infos;

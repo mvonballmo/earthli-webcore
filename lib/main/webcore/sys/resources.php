@@ -221,7 +221,7 @@ class RESOURCE_MANAGER extends RAISABLE
    * Add a listener to call when a path is changed.
    * Sends a message when the path associated with an alias is
    * changed with {@link set_path()}.
-   * @param CALLBACK $listener
+   * @param WEBCORE_CALLBACK $listener
    */
   public function add_listener ($listener)
   {
@@ -612,7 +612,7 @@ class RESOURCE_MANAGER extends RAISABLE
    * given in the fragment.
    * @param string $fragment
    * @param boolean $root_override Overrides {@link $resolve_to_root} if set to {@link Force_root_on}.
-   * @return array[string,string]
+   * @return string[]
    * @access private
    */
   protected function _extract_alias_and_resolved_path ($fragment, $root_override)
@@ -705,7 +705,7 @@ class RESOURCE_MANAGER extends RAISABLE
    * contains the entire unchanged fragment. The remaining fragment will never
    * contain aliases (i.e. it is always a completely converted URL).
    * @param string $fragment
-   * @return array[string,string]
+   * @return string[]
    */
   protected function _extract_alias ($fragment)
   {
@@ -828,21 +828,21 @@ class RESOURCE_MANAGER extends RAISABLE
   /**
    * Alias to path mapping.
    * Each path is a legal url with an optional alias prefix.
-   * @var array[string,string]
+   * @var string[]
    * @access private
    */
   protected $_paths;
 
   /**
    * Alias to extension mapping.
-   * @var array[string,string]
+   * @var string[]
    * @access private
    */
   protected $_extensions;
 
   /**
    * Record aliases that force root resolution.
-   * @var array[string,boolean]
+   * @var boolean[]
    * @access private
    */
   protected $_forced_roots;
@@ -860,7 +860,7 @@ class RESOURCE_MANAGER extends RAISABLE
    * Provides a significant performance boost. Paths are invalidated when
    * changed with {@link set_path()} or {@link add_path()}. Changes to {@link
    * $_parent_resources} do not cause the cache to clear.
-   * @var array[string,string]
+   * @var string[]
    * @access private
    */
   protected $_cache;

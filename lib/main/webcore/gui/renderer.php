@@ -190,10 +190,8 @@ class TEXT_TABLE_RENDERER
 
   /**
    * List of label/column pairs in the table.
-   * @var array[string][string]
+   * @var string[]
    * @access private
    */
   protected $_items;
 }
-
-?>

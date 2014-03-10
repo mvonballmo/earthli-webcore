@@ -142,7 +142,7 @@ class FLAT_COMMENT_GRID extends PRINTABLE_COMMENT_GRID
 
   /**
    * Get the list of objects for the requested page.
-   * @return array[COMMENT]
+   * @return COMMENT[]
    * @access private
    */
   protected function _get_objects ()
