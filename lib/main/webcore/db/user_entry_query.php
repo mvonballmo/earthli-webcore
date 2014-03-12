@@ -47,7 +47,7 @@ require_once ('webcore/db/object_in_folder_query.php');
  * @since 2.2.1
  * @abstract
  */
-class USER_ENTRY_QUERY extends OBJECT_IN_FOLDER_QUERY
+abstract class USER_ENTRY_QUERY extends OBJECT_IN_FOLDER_QUERY
 {
   /**
    * SQL alias for the "main" table.
@@ -176,7 +176,7 @@ class USER_ENTRY_QUERY extends OBJECT_IN_FOLDER_QUERY
  * @version 3.5.0
  * @since 2.7.0
  */
-class USER_MULTI_ENTRY_QUERY extends USER_ENTRY_QUERY
+abstract class USER_MULTI_ENTRY_QUERY extends USER_ENTRY_QUERY
 {
   /**
    * @param USER $user The user for which entries are to be retrieved.
@@ -252,6 +252,33 @@ class USER_DRAFTABLE_ENTRY_QUERY extends USER_ENTRY_QUERY
       $this->set_order ('entry.state ASC, entry.time_published DESC, entry.time_created DESC');
     }
   }
-}
 
-?>
+  /**
+   * @param object $obj
+   * @access private
+   */
+  protected function _obj_set_sub_objects_cached($obj)
+  {
+    // NOP
+  }
+
+  /**
+   * @param object $parent
+   * @param object $obj
+   * @access private
+   */
+  protected function _obj_connect_to_parent($parent, $obj)
+  {
+    // NOP
+  }
+
+  /**
+   * @param object $obj
+   * @return object[]
+   * @access private
+   */
+  protected function _obj_sub_objects($obj)
+  {
+    // NOP
+  }
+}

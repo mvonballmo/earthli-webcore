@@ -51,6 +51,7 @@ abstract class OBJECT_IN_FOLDER_QUERY extends HIERARCHICAL_QUERY
 {
   /**
    * Returns if the filter is included in the query.
+   * @param $filter
    * @return boolean
    */
   public function includes ($filter)

@@ -110,5 +110,33 @@ class ATTACHMENT_QUERY extends OBJECT_IN_SINGLE_FOLDER_QUERY
    * @access private
    */
   protected $_privilege_set = Privilege_set_attachment;
+
+  /**
+   * @param object $obj
+   * @access private
+   */
+  protected function _obj_set_sub_objects_cached($obj)
+  {
+    // NOP
+  }
+
+  /**
+   * @param object $parent
+   * @param object $obj
+   * @access private
+   */
+  protected function _obj_connect_to_parent($parent, $obj)
+  {
+    // NOP
+  }
+
+  /**
+   * @param object $obj
+   * @return object[]
+   * @access private
+   */
+  protected function _obj_sub_objects($obj)
+  {
+    // NOP
+  }
 }
-?>
