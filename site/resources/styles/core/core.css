@@ -377,6 +377,10 @@ pre > code {
 .info-box-bottom {
   clear: both;
 }
+td.object-in-list + td.object-in-list {
+  /* put space before a cell that follows another in a row */
+  padding-left: 30px;
+}
 .info-box-top,
 .info-box-bottom,
 .subdued {
@@ -384,12 +388,17 @@ pre > code {
 }
 .info-box-top div + div,
 .info-box-bottom div + div,
-.subdued div + div {
-  margin-top: 3px;
-}
-td.object-in-list + td.object-in-list {
-  /* put space before a cell that follows another in a row */
-  padding-left: 30px;
+.subdued div + div,
+.info-box-top p + p,
+.info-box-bottom p + p,
+.subdued p + p,
+.info-box-top div + p,
+.info-box-bottom div + p,
+.subdued div + p,
+.info-box-top p + div,
+.info-box-bottom p + div,
+.subdued p + div {
+  margin-top: 5px;
 }
 .info-box-top {
   line-height: normal;
@@ -397,6 +406,7 @@ td.object-in-list + td.object-in-list {
   margin-bottom: 15px;
 }
 .info-box-top p:last-child,
+.info-box-top div:last-child,
 .info-box-top pre:last-child,
 .info-box-top ul:last-child {
   margin-bottom: 5px;
@@ -407,6 +417,7 @@ td.object-in-list + td.object-in-list {
   margin-top: 15px;
 }
 .info-box-bottom p:first-child,
+.info-box-bottom div:first-child,
 .info-box-bottom pre:first-child,
 .info-box-bottom ul:first-child {
   margin-top: 5px;
