@@ -582,12 +582,13 @@ td.object-in-list + td.object-in-list
 {
   color: #dimmest_text_color;
 
-  div + div,
-  p + p,
-  div + p,
-  p + div
+  p,
+  div,
+  pre,
+  ul
   {
     margin-top: @small_spacing;
+    margin-bottom: @small_spacing;
   }
 }
 
@@ -596,14 +597,6 @@ td.object-in-list + td.object-in-list
   line-height: normal;
   border-bottom: @hairline_border_width solid @standard_border;
   margin-bottom: @standard_spacing;
-
-  p:last-child,
-  div:last-child,
-  pre:last-child,
-  ul:last-child
-  {
-    margin-bottom: @small_spacing;
-  }
 }
 
 .info-box-bottom
@@ -611,14 +604,6 @@ td.object-in-list + td.object-in-list
   line-height: normal;
   border-top: @hairline_border_width solid @standard_border;
   margin-top: @standard_spacing;
-
-  p:first-child,
-  div:first-child,
-  pre:first-child,
-  ul:first-child
-  {
-    margin-top: @small_spacing;
-  }
 }
 
 .graph-foreground

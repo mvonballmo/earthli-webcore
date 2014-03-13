@@ -386,41 +386,30 @@ td.object-in-list + td.object-in-list {
 .subdued {
   color: #dimmest_text_color;
 }
-.info-box-top div + div,
-.info-box-bottom div + div,
-.subdued div + div,
-.info-box-top p + p,
-.info-box-bottom p + p,
-.subdued p + p,
-.info-box-top div + p,
-.info-box-bottom div + p,
-.subdued div + p,
-.info-box-top p + div,
-.info-box-bottom p + div,
-.subdued p + div {
+.info-box-top p,
+.info-box-bottom p,
+.subdued p,
+.info-box-top div,
+.info-box-bottom div,
+.subdued div,
+.info-box-top pre,
+.info-box-bottom pre,
+.subdued pre,
+.info-box-top ul,
+.info-box-bottom ul,
+.subdued ul {
   margin-top: 5px;
+  margin-bottom: 5px;
 }
 .info-box-top {
   line-height: normal;
   border-bottom: 1px solid #c2c2c2;
   margin-bottom: 15px;
 }
-.info-box-top p:last-child,
-.info-box-top div:last-child,
-.info-box-top pre:last-child,
-.info-box-top ul:last-child {
-  margin-bottom: 5px;
-}
 .info-box-bottom {
   line-height: normal;
   border-top: 1px solid #c2c2c2;
   margin-top: 15px;
-}
-.info-box-bottom p:first-child,
-.info-box-bottom div:first-child,
-.info-box-bottom pre:first-child,
-.info-box-bottom ul:first-child {
-  margin-top: 5px;
 }
 .graph-foreground {
   display: inline-block;

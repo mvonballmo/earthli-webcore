@@ -30,6 +30,8 @@ http://www.earthli.com/software/webcore
   $themed_page = $Page;
   /** @var $theme_query THEME_QUERY */
   $theme_query = $themed_page->theme_query ();
+
+  /** @var THEME[] $themes */
   $themes = $theme_query->objects ();
 
   $Page->title->subject = $theme_query->size () . ' Themes';
@@ -321,6 +323,11 @@ class SAMPLE_FORM extends FORM
   <ul><li>Item One</li><li>Item Two</li></ul>
   <div class="info-box-bottom">
     <p>This is an info box at the bottom of a <a href="#">page</a> or <a href="#">section</a>.</p>
+    <p>Paragraph two.</p>
+    <p>Paragraph three.</p>
+    <p>Div one.</p>
+    <p>Paragraph four.</p>
+    <p>Div two.</p>
   </div>
   <p class="quote-block">"This is a block quote. These are often used in article to include
     text from other sources. This is generally used for larger citations. Use the inline
