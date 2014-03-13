@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage grid
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  */
 
@@ -45,7 +45,7 @@ require_once ('webcore/obj/webcore_object.php');
  * query has more objects than will fit, it automatically handles showing pages of grids.
  * @package webcore
  * @subpackage grid
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  * @abstract
  */
@@ -223,7 +223,7 @@ abstract class GRID extends WEBCORE_OBJECT
 
   /**
    * Get the list of objects for the requested page.
-   * @return array[object]
+   * @return object[]
    * @access private
    */
   protected function _get_objects ()
@@ -240,7 +240,7 @@ abstract class GRID extends WEBCORE_OBJECT
    * and {@link _draw_header()}. After calling {@link _draw_cells()} to draw the content, it
    * finishes with {@link _draw_footer()} and {@link _finish_grid()} before drawing the
    * pager again with {@link _draw_pager()}.
-   * @param array[object] $objs
+   * @param object[] $objs
    * @access private
    */
   protected function _draw ($objs)
@@ -304,9 +304,9 @@ abstract class GRID extends WEBCORE_OBJECT
    * already been started and {@link _draw_separator()} if {@link $show_separator} is
    * True.
    *
-   * Most descendents will only override the {@link _draw_box()} method to draw the
+   * Most descendants will only override the {@link _draw_box()} method to draw the
    * object details.
-   * @param array[object] $objs
+   * @param object[] $objs
    * @access private
    */
   protected function _draw_cells ($objs)
@@ -627,7 +627,7 @@ abstract class GRID extends WEBCORE_OBJECT
  * Use the {@link CSS_FLOW_GRID} to allow the grid to resize smaller, if needed.
  * @package webcore
  * @subpackage grid
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.6.0
  * @abstract
  */
@@ -739,7 +739,7 @@ abstract class HTML_TABLE_GRID extends GRID
  * for a container that enforces number of columns.
  * @package webcore
  * @subpackage grid
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.6.0
  * @abstract
  */
@@ -871,7 +871,7 @@ abstract class CSS_FLOW_GRID extends GRID
  * @see HTML_TABLE_GRID
  * @package webcore
  * @subpackage grid
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.6.0
  * @abstract
  */

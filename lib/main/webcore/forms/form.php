@@ -4,7 +4,7 @@
  * @copyright Copyright (c) 2002-2014 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  * @package webcore
  * @subpackage forms-core
@@ -74,7 +74,7 @@ define ('Form_first_control_for_field', 0);
  * Manages a list of {@link FIELD}s to validate and display controls.
  * @package webcore
  * @subpackage forms-core
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  * @abstract
  */
@@ -453,7 +453,7 @@ abstract class FORM extends WEBCORE_OBJECT
   /**
    * Returns the list of all errors for this form.
    * Merges results from {@link errors_for()} for all fields.
-   * @return array[string]
+   * @return string[]
    */
   public function all_errors ()
   {
@@ -1016,7 +1016,7 @@ abstract class FORM extends WEBCORE_OBJECT
   /**
    * Return the correct PHP global array for values.
    * Used by {@link _load_from_request()}.
-   * return array[string]
+   * return string[]
    * @access private
    */
   protected function _request_array_to_use ()
@@ -1521,7 +1521,7 @@ abstract class FORM extends WEBCORE_OBJECT
   protected $_field_list = array ();
 
   /**
-   * @var array[string]
+   * @var string[]
    * @access private
    */
   protected $_errors = array ();
@@ -1586,7 +1586,7 @@ abstract class FORM extends WEBCORE_OBJECT
  * Use {@link UNIQUE_OBJECT_FORM} to use the primary key.
  * @package webcore
  * @subpackage forms-core
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.5.0
  * @abstract
  */

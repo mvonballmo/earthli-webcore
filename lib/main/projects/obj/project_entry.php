@@ -6,7 +6,7 @@
  * @filesource
  * @package projects
  * @subpackage obj
- * @version 3.4.0
+ * @version 3.5.0
  * @since 1.4.1
  */
 
@@ -44,7 +44,7 @@ require_once ('webcore/obj/multi_type_entry.php');
  * @abstract 
  * @package projects
  * @subpackage obj
- * @version 3.4.0
+ * @version 3.5.0
  * @since 1.4.1
  */
 abstract class PROJECT_ENTRY extends MULTI_TYPE_ENTRY
@@ -402,14 +402,14 @@ abstract class PROJECT_ENTRY extends MULTI_TYPE_ENTRY
 
   /**
    * Used during storage to hold new branches.
-   * @var array[integer,PROJECT_ENTRY_BRANCH_INFO]
+   * @var PROJECT_ENTRY_BRANCH_INFO[]
    * @access private
    */
   protected $_current_branch_infos;
 
   /**
    * Used during storage to hold stored branches.
-   * @var array[integer,PROJECT_ENTRY_BRANCH_INFO]
+   * @var PROJECT_ENTRY_BRANCH_INFO[]
    * @access private
    */
   protected $_stored_branch_infos;
@@ -421,7 +421,7 @@ abstract class PROJECT_ENTRY extends MULTI_TYPE_ENTRY
  * and to add or remove a project entry from a branch.
  * @package projects
  * @subpackage obj
- * @version 3.4.0
+ * @version 3.5.0
  * @since 1.4.1
  * @abstract
  */

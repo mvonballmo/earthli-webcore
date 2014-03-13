@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage forms
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  */
 
@@ -44,7 +44,7 @@ require_once ('webcore/obj/object_list_builder.php');
  * Performs an action on multiple {@link FOLDER}s and/or {@link ENTRY}s.
  * @package webcore
  * @subpackage forms
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  * @abstract
  */
@@ -261,7 +261,7 @@ abstract class MULTIPLE_OBJECT_ACTION_FORM extends ID_BASED_FORM
   /**
    * List of selected folders.
    * Available only when not submitted.
-   * @var array[FOLDER]
+   * @var FOLDER[]
    * @access private
    */
   public $folders;
@@ -269,7 +269,7 @@ abstract class MULTIPLE_OBJECT_ACTION_FORM extends ID_BASED_FORM
   /**
    * List of selected entries.
    * Available only when not submitted.
-   * @var array[ENTRY]
+   * @var ENTRY[]
    * @access private
    */
   public $entries;

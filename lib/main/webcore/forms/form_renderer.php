@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage forms-core
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.5.0
  * @access private
  */
@@ -44,7 +44,7 @@ require_once ('webcore/forms/controls_renderer.php');
  * Properties for an item in a list.
  * @package webcore
  * @subpackage forms-core
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.5.0
  * @access private
  */
@@ -105,7 +105,7 @@ class FORM_LIST_ITEM
  * Properties for a check box.
  * @package webcore
  * @subpackage forms-core
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.6.0
  * @access private
  */
@@ -126,7 +126,7 @@ class CHECK_BOX_ITEM extends FORM_LIST_ITEM
  * $show_descriptions} to true if you pass descriptions to {@link add_item()}.
  * @package webcore
  * @subpackage forms-core
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.5.0
  * @access private
  */
@@ -292,7 +292,7 @@ class FORM_LIST_PROPERTIES
  * Passed as a parameter to several rendering functions in {@link FORM_RENDERER}.
  * @package webcore
  * @subpackage forms-core
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.5.0
  * @access private
  */
@@ -339,7 +339,7 @@ class FORM_TEXT_CONTROL_OPTIONS
  * Helper class for painting {@link FORM}s.
  * @package webcore
  * @subpackage forms-core
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.5.0
  * @access private
  */
@@ -821,10 +821,10 @@ class FORM_RENDERER extends CONTROLS_RENDERER
 
   /**
    * Closes a left indent.
-   * 
+   *
    * To be used only when {@link start_indent()} has already been called.
-   * 
-   * @param $size The size of the indent; not used here, but may be used by descendents.
+   *
+   * @param string $size The size of the indent; not used here, but may be used by descendents.
    * @see start_indent()
    */
   public function finish_indent ($size = '2em')
@@ -1094,9 +1094,9 @@ class FORM_RENDERER extends CONTROLS_RENDERER
 
   /**
    * Draw the list of buttons in a row.
-   * Draws a series of buttons previously renderered with {@link javascript_button_as_html()},
+   * Draws a series of buttons previously rendered with {@link javascript_button_as_html()},
    * {@link button_as_html()} or {@link submit_button_as_html()}.
-   * @param array[string] $buttons
+   * @param string[] $buttons
    * @param string $title Title to show for this row.
    */
   public function draw_buttons_in_row($buttons, $title = '')
@@ -2159,14 +2159,14 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * Table of used DOM ids.
    * If radio buttons or other group controls are rendered to different parts of a page for the
    * same field, this structure remembers which DOM id was last used for the given field.
-   * @var array[string, integer]
+   * @var integer[]
    * @access private
    */
   protected $_num_controls = array ();
 
   /**
    * Stack of widths applied with {@link set_width()}.
-   * @var array[STORED_WIDTH]
+   * @var STORED_WIDTH[]
    * @access private
    */
   protected $_widths;
@@ -2177,7 +2177,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
  * @see FORM::set_width()
  * @package webcore
  * @subpackage forms-core
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.7.0
  * @access private
  */

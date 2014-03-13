@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage config
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.7.1
  */
 
@@ -53,7 +53,7 @@ define ('ISO_8859_1_registered_symbol', chr(174));
  * global_text_options()}.
  * @package webcore
  * @subpackage text
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.7.1
  */
 class TEXT_OPTIONS
@@ -62,7 +62,7 @@ class TEXT_OPTIONS
    * Characters to translate from HTML in a form. These are in addition
    * to the rather large set returned by {@link
    * PHP_MANUAL#get_html_translation_table}.
-   * @var array[string,string]
+   * @var string[]
    */
   public $html_entity_translations = array ( ISO_8859_1_em_dash => '&mdash;'
                                         , ISO_8859_1_en_dash => '&#8211;'

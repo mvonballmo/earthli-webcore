@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage gui
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.7.1
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/gui/object_renderer.php');
  * Renders the subscription status and options for a {@link RENDERABLE} into a {@link PAGE}.
  * @package webcore
  * @subpackage gui
- * @version 3.4.0
+ * @version 3.5.0
  * @since 3.4.0
  * @abstract
  */
@@ -106,7 +106,7 @@ abstract class SUBSCRIPTION_RENDERER extends HANDLER_RENDERER
   /**
    * @param SUBSCRIBER $subscriber
    * @param NAMED_OBJECT $obj
-   * @param array[integer] $kinds
+   * @param integer[] $kinds
    * @param OBJECT_RENDERER_OPTIONS $options
    */
   protected abstract function _display($obj, $subscriber, $kinds, $options);
@@ -117,7 +117,7 @@ class COMMENT_SUBSCRIPTION_RENDERER extends SUBSCRIPTION_RENDERER
   /**
    * @param SUBSCRIBER $subscriber
    * @param COMMENT $obj
-   * @param array[integer] $kinds
+   * @param integer[] $kinds
    * @param OBJECT_RENDERER_OPTIONS $options
    */
   protected function _display($obj, $subscriber, $kinds, $options)
@@ -134,7 +134,7 @@ class FOLDER_SUBSCRIPTION_RENDERER extends SUBSCRIPTION_RENDERER
   /**
    * @param SUBSCRIBER $subscriber
    * @param FOLDER $obj
-   * @param array[integer] $kinds
+   * @param integer[] $kinds
    * @param OBJECT_RENDERER_OPTIONS $options
    */
   protected function _display($obj, $subscriber, $kinds, $options)
@@ -149,7 +149,7 @@ class USER_SUBSCRIPTION_RENDERER extends SUBSCRIPTION_RENDERER
   /**
    * @param SUBSCRIBER $subscriber
    * @param USER $obj
-   * @param array[integer] $kinds
+   * @param integer[] $kinds
    * @param OBJECT_RENDERER_OPTIONS $options
    */
   protected function _display($obj, $subscriber, $kinds, $options)
@@ -163,7 +163,7 @@ class ENTRY_SUBSCRIPTION_RENDERER extends SUBSCRIPTION_RENDERER
   /**
    * @param SUBSCRIBER $subscriber
    * @param ENTRY $obj
-   * @param array[integer] $kinds
+   * @param integer[] $kinds
    * @param OBJECT_RENDERER_OPTIONS $options
    */
   protected function _display($obj, $subscriber, $kinds, $options)

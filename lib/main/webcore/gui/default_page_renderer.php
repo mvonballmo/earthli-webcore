@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage page
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  */
 
@@ -46,7 +46,7 @@ require_once ('webcore/gui/webcore_page_renderer.php');
  * the page header and footer.
  * @package webcore
  * @subpackage page
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  */
 class DEFAULT_PAGE_RENDERER extends WEBCORE_PAGE_RENDERER

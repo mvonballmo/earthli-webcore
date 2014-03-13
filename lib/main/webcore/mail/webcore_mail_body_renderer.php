@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage mail
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.6.0
  */
 
@@ -44,7 +44,7 @@ require_once ('webcore/mail/themed_mail_body_renderer.php');
  * Used by the {@link MAIL_TOC_GROUP_RENDERER} to show an object with all of its history items.
  * @package webcore
  * @subpackage mail
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.6.0
  * @access private
  */
@@ -58,7 +58,7 @@ class MAIL_TOC_ENTRY_RENDERER extends RENDERER
 
   /**
    * List of {@link MAIL_BODY_RENDERER_OBJECT}s.
-   * @var array[MAIL_BODY_RENDERER_OBJECT]
+   * @var MAIL_BODY_RENDERER_OBJECT[]
    */
   public $pairs = array ();
 
@@ -179,7 +179,7 @@ class MAIL_TOC_ENTRY_RENDERER extends RENDERER
     if (isset ($this->main_pair))
     {
       $Result = $this->pair_as_html_for_table ($this->main_pair);
-      $Result .= "\n<ul class=\"detail\" style=\"margin: .2em 0em\">";
+      $Result .= "\n<ul class=\"detail\" style=\"margin: .2em 0\">";
     }
 
     foreach ($this->pairs as $pair)
@@ -311,7 +311,7 @@ class MAIL_TOC_ENTRY_RENDERER extends RENDERER
  * Used by the {@link MAIL_TOC_RENDERER}.
  * @package webcore
  * @subpackage mail
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.6.0
  * @access private
  */
@@ -535,7 +535,7 @@ class MAIL_TOC_GROUP_RENDERER extends RENDERER
  * Manages a list of {@link MAIL_TOC_GROUP_RENDERER}s.
  * @package webcore
  * @subpackage mail
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.6.0
  * @access private
  */
@@ -690,7 +690,7 @@ class MAIL_TOC_RENDERER extends RENDERER
  * containing {@link FOLDER}s.
  * @package webcore
  * @subpackage mail
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.6.0
  */
 class WEBCORE_MAIL_BODY_RENDERER extends THEMED_MAIL_BODY_RENDERER

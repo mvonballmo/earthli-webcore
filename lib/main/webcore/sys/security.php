@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage security
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.5.0
  * @access private
  */
@@ -58,7 +58,7 @@ define ("Security_create_admin", 2);
  * Used by {@link FOLDER}s to determine a {@link USER}'s rights.
  * @package webcore
  * @subpackage security
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.5.0
  * @access private
  */
@@ -319,7 +319,7 @@ class FOLDER_PERMISSIONS extends NAMED_OBJECT
  * @see FOLDER::security()
  * @package webcore
  * @subpackage security
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.5.0
  * @access private
  */
@@ -411,7 +411,7 @@ class FOLDER_SECURITY extends FOLDER_INHERITABLE_SETTINGS
   /**
    * Permissions for {@link GROUP}s.
    * @see FOLDER_PERMISSIONS
-   * @return array[FOLDER_PERMISSIONS]
+   * @return FOLDER_PERMISSIONS[]
    */
   public function group_permissions ()
   {
@@ -427,7 +427,7 @@ class FOLDER_SECURITY extends FOLDER_INHERITABLE_SETTINGS
   /**
    * Permissions for {@link USER}s.
    * @see FOLDER_PERMISSIONS
-   * @return array[FOLDER_PERMISSIONS]
+   * @return FOLDER_PERMISSIONS[]
    */
   public function user_permissions ()
   {
@@ -605,7 +605,6 @@ class FOLDER_SECURITY extends FOLDER_INHERITABLE_SETTINGS
    * @param boolean $adding Is the option being added?
    * @return string
    * @access private
-   * @abstract
    */
   protected function _history_item_title ($adding)
   {
@@ -615,9 +614,9 @@ class FOLDER_SECURITY extends FOLDER_INHERITABLE_SETTINGS
   /**
    * Description for a folder's history item for inheriting this option.
    * @param boolean $adding Is the option being added?
+   * @param FOLDER $folder
    * @return string
    * @access private
-   * @abstract
    */
   protected function _history_item_description ($adding, $folder)
   {
@@ -628,7 +627,6 @@ class FOLDER_SECURITY extends FOLDER_INHERITABLE_SETTINGS
    * Name of the table in which settings are stored.
    * @return string
    * @access private
-   * @abstract
    */
   protected function _settings_table_name ()
   {
@@ -664,28 +662,28 @@ class FOLDER_SECURITY extends FOLDER_INHERITABLE_SETTINGS
   /**
    * @access private
    * @see FOLDER_PERMISSIONS
-   * @var array[FOLDER_PERMISSIONS]
+   * @var FOLDER_PERMISSIONS[]
    */
   protected $_group_permissions;
 
   /**
    * @access private
    * @see FOLDER_PERMISSIONS
-   * @var array[FOLDER_PERMISSIONS]
+   * @var FOLDER_PERMISSIONS[]
    */
   protected $_user_permissions;
 
   /**
    * @access private
    * @see FOLDER_PERMISSIONS
-   * @var array[integer,FOLDER_PERMISSIONS]
+   * @var FOLDER_PERMISSIONS[]
    */
   protected $_group_table;
 
   /**
    * @access private
    * @see FOLDER_PERMISSIONS
-   * @var array[integer,FOLDER_PERMISSIONS]
+   * @var FOLDER_PERMISSIONS[]
    */
   protected $_user_table;
 }
@@ -699,7 +697,7 @@ class FOLDER_SECURITY extends FOLDER_INHERITABLE_SETTINGS
  * administer.
  * @package webcore
  * @subpackage security
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.5.0
  * @access private
  */
@@ -733,7 +731,7 @@ class PERMISSIONS_FORMATTER extends WEBCORE_OBJECT
   /**
    * Content privileges, grouped and mapped for display.
    * @see PRIVILEGE_GROUP
-   * @return array[PRIVILEGE_GROUP]
+   * @return PRIVILEGE_GROUP[]
    */
   public function content_privilege_groups ()
   {
@@ -769,17 +767,17 @@ class PERMISSIONS_FORMATTER extends WEBCORE_OBJECT
 
     $group = new PRIVILEGE_GROUP ('Folders');
     $group->description = 'Individual settings for this folder and sub-folders.';
-    $map = $group->new_map (Privilege_set_folder, Privilege_view);
-    $map = $group->new_map (Privilege_set_folder, Privilege_create);
-    $map = $group->new_map (Privilege_set_folder, Privilege_modify);
-    $map = $group->new_map (Privilege_set_folder, Privilege_delete);
+    $group->new_map (Privilege_set_folder, Privilege_view);
+    $group->new_map (Privilege_set_folder, Privilege_create);
+    $group->new_map (Privilege_set_folder, Privilege_modify);
+    $group->new_map (Privilege_set_folder, Privilege_delete);
     $Result [] = $group;
 
     $group = new PRIVILEGE_GROUP ('Content');
     $group->description = 'Settings for all entries and comments.';
     $map = $group->new_map (Privilege_set_entry, Privilege_view);
     $map->add (Privilege_set_comment);
-    $map = $group->new_map (Privilege_set_entry, Privilege_create);
+    $group->new_map (Privilege_set_entry, Privilege_create);
     $map = $group->new_map (Privilege_set_entry, Privilege_modify);
     $map->add (Privilege_set_comment);
     $map->add (Privilege_set_attachment);
@@ -790,13 +788,13 @@ class PERMISSIONS_FORMATTER extends WEBCORE_OBJECT
 
     $group = new PRIVILEGE_GROUP ('Comments');
     $group->description = 'Settings for comments (overrides the create setting in content).';
-    $map = $group->new_map (Privilege_set_comment, Privilege_create);
+    $group->new_map (Privilege_set_comment, Privilege_create);
     $Result [] = $group;
 
     $group = new PRIVILEGE_GROUP ('Attachments');
     $group->description = 'Settings for attachments (overrides the create setting in content).';
-    $map = $group->new_map (Privilege_set_attachment, Privilege_view);
-    $map = $group->new_map (Privilege_set_attachment, Privilege_create);
+    $group->new_map (Privilege_set_attachment, Privilege_view);
+    $group->new_map (Privilege_set_attachment, Privilege_create);
     $Result [] = $group;
 
     return $Result;
@@ -805,7 +803,7 @@ class PERMISSIONS_FORMATTER extends WEBCORE_OBJECT
   /**
    * Global privileges, grouped and mapped for display.
    * @see PRIVILEGE_GROUP
-   * @return array[PRIVILEGE_GROUP]
+   * @return PRIVILEGE_GROUP[]
    */
   public function global_privilege_groups ()
   {
@@ -834,17 +832,17 @@ class PERMISSIONS_FORMATTER extends WEBCORE_OBJECT
     $Result [] = $group;
 
     $group = new PRIVILEGE_GROUP ('Users');
-    $map = $group->new_map (Privilege_set_user, Privilege_view);
-    $map = $group->new_map (Privilege_set_user, Privilege_create);
-    $map = $group->new_map (Privilege_set_user, Privilege_modify);
-    $map = $group->new_map (Privilege_set_user, Privilege_delete);
+    $group->new_map (Privilege_set_user, Privilege_view);
+    $group->new_map (Privilege_set_user, Privilege_create);
+    $group->new_map (Privilege_set_user, Privilege_modify);
+    $group->new_map (Privilege_set_user, Privilege_delete);
     $Result [] = $group;
 
     $group = new PRIVILEGE_GROUP ('Groups');
-    $map = $group->new_map (Privilege_set_group, Privilege_view);
-    $map = $group->new_map (Privilege_set_group, Privilege_create);
-    $map = $group->new_map (Privilege_set_group, Privilege_modify);
-    $map = $group->new_map (Privilege_set_group, Privilege_delete);
+    $group->new_map (Privilege_set_group, Privilege_view);
+    $group->new_map (Privilege_set_group, Privilege_create);
+    $group->new_map (Privilege_set_group, Privilege_modify);
+    $group->new_map (Privilege_set_group, Privilege_delete);
     $Result [] = $group;
 
     return $Result;
@@ -862,6 +860,8 @@ class PERMISSIONS_FORMATTER extends WEBCORE_OBJECT
   /**
    * Return the icon registered for this privilege.
    * @param PRIVILEGE_MAP $map Information about the privilege.
+   * @param string $size
+   * @return string
    */
   public function icon_for ($map, $size = '16px')
   {
@@ -871,9 +871,11 @@ class PERMISSIONS_FORMATTER extends WEBCORE_OBJECT
 
   /**
    * Register a privilege with a title and image.
-   * @param integer $privilege
+   * @param int $range
+   * @param string $type
    * @param string $image
    * @param string $title
+   * @internal param int $privilege
    * @access private
    */
   protected function _register_formatter ($range, $type, $image, $title)
@@ -887,7 +889,7 @@ class PERMISSIONS_FORMATTER extends WEBCORE_OBJECT
 
   /**
    * Formatters indexed by range and privilege.
-   * @var array[string][integer]
+   * @var integer[]
    * @access private
    */
   protected $_formatters;
@@ -897,7 +899,7 @@ class PERMISSIONS_FORMATTER extends WEBCORE_OBJECT
  * Describes a group of displayed privileges.
  * @package webcore
  * @subpackage security
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.5.0
  * @access private
  */
@@ -909,7 +911,12 @@ class PRIVILEGE_GROUP
   public $title;
 
   /**
-   * @var array[PRIVILEGE_MAP]
+   * @var string
+   */
+  public $description;
+
+  /**
+   * @var PRIVILEGE_MAP[]
    * @see PRIVILEGE_MAP
    */
   public $maps;
@@ -928,6 +935,7 @@ class PRIVILEGE_GROUP
    * 'range'.
    * @param string $range Can be {@link Privilege_range_object} or {@link
    * Privilege_range_global}.
+   * @return PRIVILEGE_MAP
    */
   public function new_map ($set_name, $type, $range = Privilege_range_object)
   {
@@ -942,7 +950,7 @@ class PRIVILEGE_GROUP
  * Contains a list of privilege set/type pairs to which this privilege maps.
  * @package webcore
  * @subpackage security
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.5.0
  * @access private
  */
@@ -1031,5 +1039,3 @@ class PRIVILEGE_MAP
    */
   protected $_sets;
 }
-
-?>

@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage util
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.4.0
  * @access private
  */
@@ -44,7 +44,7 @@ require_once ('webcore/util/object_cache.php');
  * Generates a {@link UNIQUE_OBJECT}'s 'context' within a list.
  * @package webcore
  * @subpackage util
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.4.0
  * @access private
  */
@@ -109,7 +109,7 @@ class UNIQUE_OBJECT_CACHE extends OBJECT_CACHE
   /**
    * Load the requested objects.
    * @param string $ids Comma-separated list of ids to load.
-   * @return array[object]
+   * @return object[]
    * @access private
    * @abstract
    */
@@ -123,7 +123,7 @@ class UNIQUE_OBJECT_CACHE extends OBJECT_CACHE
    * Load the requested objects.
    * @param integer $first Index within master list for first item.
    * @param integer $count Number of items to retrieve from that position.
-   * @return array[object]
+   * @return object[]
    * @access private
    * @abstract
    */

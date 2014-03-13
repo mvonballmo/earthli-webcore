@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage forms
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  */
 
@@ -44,7 +44,7 @@ require_once ('webcore/forms/permissions_form.php');
  * Presents content, folder, group and user {@link PERMISSIONS}.
  * @package webcore
  * @subpackage forms
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  */
 class USER_PERMISSIONS_FORM extends PERMISSIONS_FORM
@@ -325,7 +325,7 @@ function update_controls ()
 
   /**
    * Holds a list of the fields that are represent permissions.
-   * @var array[FIELD]
+   * @var FIELD[]
    * @access private
    */
   protected $_privilege_fields;

@@ -6,7 +6,7 @@
  * @filesource
  * @package projects
  * @subpackage gui
- * @version 3.4.0
+ * @version 3.5.0
  * @since 1.4.1
  */
 
@@ -44,7 +44,7 @@ require_once ('webcore/gui/object_list_title.php');
  * Displays {@link RELEASE}s, {@link CHANGE}s and {@link JOB}s in a logical, ordered change list.
  * @package projects
  * @subpackage gui
- * @version 3.4.0
+ * @version 3.5.0
  * @since 1.4.1
  */
 class CHANGE_LOG extends WEBCORE_OBJECT
@@ -59,9 +59,9 @@ class CHANGE_LOG extends WEBCORE_OBJECT
    * then those changes. Then, for each release in the list, show the release details, then
    * the list of associated jobs (from the list) and the list of assocated changes (from the
    * list).
-   * @param array[JOB] $jobs
-   * @param array[CHANGE] $chngs
-   * @param array[RELEASE] $rels
+   * @param JOB[] $jobs
+   * @param CHANGE[] $changes
+   * @param RELEASE[] $releases
    */
   public function display ($jobs, $changes, $releases)
   {
@@ -105,12 +105,12 @@ class CHANGE_LOG extends WEBCORE_OBJECT
   }
 
   /**
-   * Display all changes and jobs which belong to 'rel'.
-   * @param array[JOB] $jobs
-   * @param array[CHANGE] $chngs
-   * @param RELEASE $rel
+   * Display all changes and jobs which belong to 'release'.
+   * @param JOB[] $jobs
+   * @param CHANGE[] $changes
+   * @param RELEASE $release
    */
-  public function display_release ($jobs, $chngs, $rel)
+  public function display_release ($jobs, $changes, $release)
   {
     $this->app->display_options->overridden_max_title_size = 150;
     $this->app->date_time_toolkit->formatter->set_default_formatter (Date_time_format_short_date);
@@ -118,8 +118,8 @@ class CHANGE_LOG extends WEBCORE_OBJECT
     $job_idx = 0;
     $change_idx = 0;
     
-    $this->_display_entries ($jobs, $rel->id, $job_idx, '_draw_job', 'Jobs');
-    $this->_display_entries ($chngs, $rel->id, $change_idx, '_draw_change', 'Changes');
+    $this->_display_entries ($jobs, $release->id, $job_idx, '_draw_job', 'Jobs');
+    $this->_display_entries ($changes, $release->id, $change_idx, '_draw_change', 'Changes');
   }
 
   /**
@@ -200,7 +200,11 @@ class CHANGE_LOG extends WEBCORE_OBJECT
       $this->_component_id = $entry->component_id;
     }    
   }
-  
+
+  /**
+   * @param PROJECT_ENTRY $entry
+   * @return string
+   */
   public function comp_name_for ($entry)
   {
     if (! $entry->component_id)
@@ -210,6 +214,7 @@ class CHANGE_LOG extends WEBCORE_OBJECT
 
     if (! isset ($this->_components))
     {
+      /** @var PROJECT $folder */
       $folder = $entry->parent_folder ();
       $component_query = $folder->component_query ();
       $this->_components = $component_query->indexed_objects ();
@@ -390,7 +395,7 @@ class CHANGE_LOG extends WEBCORE_OBJECT
   /**
    * List of components available for the folder being rendered.
    *
-   * @var array[COMPONENT]
+   * @var COMPONENT[]
    */
   protected $_components;
   

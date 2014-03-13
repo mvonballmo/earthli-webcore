@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage db
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/db/object_in_folder_query.php');
  * Return {@link FOLDER}s visible to a {@link USER}.
  * @package webcore
  * @subpackage db
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  */
 class USER_FOLDER_QUERY extends OBJECT_IN_FOLDER_QUERY
@@ -81,7 +81,7 @@ class USER_FOLDER_QUERY extends OBJECT_IN_FOLDER_QUERY
   }
 
   /**
-   * @return array[FOLDER]
+   * @return FOLDER[]
    */
   public function objects ()
   {
@@ -97,8 +97,8 @@ class USER_FOLDER_QUERY extends OBJECT_IN_FOLDER_QUERY
   /**
    * Provides additional filtering of indexed object ids.
    * @see QUERY::indexed_ids_as_string()
-   * @param array[string] $set_names array of permission sets to restrict.
-   * @param array[integer] $types Permission(s) to restrict.
+   * @param string[] $set_names array of permission sets to restrict.
+   * @param integer[] $types Permission(s) to restrict.
    * @return string
    * @access private
    */
@@ -110,9 +110,9 @@ class USER_FOLDER_QUERY extends OBJECT_IN_FOLDER_QUERY
   /**
    * Provides additional filtering of indexed objects.
    * @see QUERY::indexed_objects()
-   * @param array[string] $set_names array of permission sets to restrict.
-   * @param array[integer] $types Permission(s) to restrict.
-   * @return array[object]
+   * @param string[] $set_names array of permission sets to restrict.
+   * @param integer[] $types Permission(s) to restrict.
+   * @return object[]
    * @access private
    */
   public function filtered_objects ($set_names, $types)
@@ -406,9 +406,10 @@ class USER_FOLDER_QUERY extends OBJECT_IN_FOLDER_QUERY
 
   /**
    * Internal function for filtering output.
-   * @param array[string] $set_names array of permission sets to restrict.
-   * @param array[integer] $types Permission(s) to restrict.
-   * @return array[object]
+   * @param string $func_name
+   * @param string[] $set_names array of permission sets to restrict.
+   * @param integer[] $types Permission(s) to restrict.
+   * @return object[]
    * @access private
    */
   protected function _filtered_data ($func_name, $set_names, $types)
@@ -538,7 +539,7 @@ class USER_FOLDER_QUERY extends OBJECT_IN_FOLDER_QUERY
   /**
    * Return the list of restrictions for calculating size.
    * @see _prepare_restrictions()
-   * @return array[string]
+   * @return string[]
    * @access private
    */
   protected function _count_restrictions ()
@@ -568,7 +569,7 @@ class USER_FOLDER_QUERY extends OBJECT_IN_FOLDER_QUERY
   }
 
   /**
-   * @return array[FOLDER]
+   * @return FOLDER[]
    * @param FOLDER $obj
    * @access private
    */
@@ -631,7 +632,7 @@ class USER_FOLDER_QUERY extends OBJECT_IN_FOLDER_QUERY
   protected $_num_folders = 0;
 
   /**
-   * @var array[string]
+   * @var string[]
    * @see _filtered_data()
    */
   protected $_filter_by_sets;
@@ -647,6 +648,29 @@ class USER_FOLDER_QUERY extends OBJECT_IN_FOLDER_QUERY
    * @var string
    */
   protected $_privilege_set = Privilege_set_folder;
-}
 
-?>
+  /**
+   * @var string
+   */
+  private $_usable_restriction;
+
+  /**
+   * @var FOLDER
+   */
+  private $_first_folder;
+
+  /**
+   * @var int[]
+   */
+  private $_filter_by_types;
+
+  /**
+   * @var int[]
+   */
+  private $_used_ids;
+
+  /**
+   * @var int
+   */
+  private $_num_folders_counted;
+}

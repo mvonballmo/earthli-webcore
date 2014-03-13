@@ -6,7 +6,7 @@
  * @filesource
  * @package projects
  * @subpackage gui
- * @version 3.4.0
+ * @version 3.5.0
  * @since 1.4.1
  */
 
@@ -46,7 +46,7 @@ require_once ('webcore/gui/folder_tree_node_info.php');
  * that define their own options.
  * @package projects
  * @subpackage gui
- * @version 3.4.0
+ * @version 3.5.0
  * @since 1.4.1
  * @see PROJECT::defines_options ()
  */
@@ -78,7 +78,7 @@ class PROJECT_TREE_NODE_INFO extends FOLDER_TREE_NODE_INFO
   }
 
   /**
-   * @param array[PROJECT] $nodes If a node in this list defines its own options, make sure its parent node is open (make it visible). Works with a tree of projects as well.
+   * @param PROJECT[] $nodes If a node in this list defines its own options, make sure its parent node is open (make it visible). Works with a tree of projects as well.
    * @access private
    */
   public function set_defined_nodes_visible ($nodes)
@@ -96,5 +96,3 @@ class PROJECT_TREE_NODE_INFO extends FOLDER_TREE_NODE_INFO
     }
   }
 }
-
-?>

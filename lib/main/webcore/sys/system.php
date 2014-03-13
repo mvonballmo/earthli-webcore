@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage sys
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.6.0
  */
 
@@ -92,7 +92,7 @@ define ('Var_type_upload', '_FILES');
 
 /**
  * Retrieves an array index without triggering a PHP notice.
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  * @param array $arr
  * @param string $index
@@ -115,9 +115,9 @@ function read_array_index ($arr, $index, $default_value = '')
  * If the actual value in the request is the empty string and the default value is not, then use
  * the default value. This makes the assumption that an explicitly empty value is the same as not
  * passing a value at all.
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
- * @param string $var_name
+ * @param integer $index
  * @param string $default_value
  * @return string
  */
@@ -138,7 +138,7 @@ function read_var ($index, $default_value = '')
  * For example, if the url of the page is "index.php?b=1&c=2&d=3", then
  * <code>read_vars (array ('a', 'b', 'c'))</code> returns "b=1&c=2". Use this
  * function to gather page parameters for easy reposting.
- * @param array[string] $indexes
+ * @param string[] $indexes
  * @return string
  */
 function read_vars ($indexes)
@@ -157,7 +157,7 @@ function read_vars ($indexes)
 
 /**
  * Remove empty entries from an array.
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  * @param array $arr
  * @return array
@@ -185,7 +185,7 @@ function trim_array ($arr)
  * @param string $class_name The name of the class where the error occurred (can be empty)
  * @param object $obj Reference to the object where the error occurred (can be empty)
  * @param EXCEPTION_HANDLER $handler The handler for this exception (can be empty)
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  * @see set_default_exception_handler()
  * @see EXCEPTION_HANDLER
@@ -208,7 +208,7 @@ function raise ($message, $routine_name = '', $class_name = '', $obj = null, $ha
 /**
  * Sets the default exception handler for the page.
  * @param EXCEPTION_HANDLER $handler The default exception handler
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  * @see raise()
  */
@@ -267,7 +267,7 @@ function __php_error_handler ($type, $msg, $file_name, $line_no)
  * @see function raise()
  * @package webcore
  * @subpackage sys
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.7.1
  */
 class UNKNOWN_VALUE_EXCEPTION extends Exception
@@ -291,7 +291,7 @@ class UNKNOWN_VALUE_EXCEPTION extends Exception
  * @see function raise()
  * @package webcore
  * @subpackage sys
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.7.1
  */
 class METHOD_NOT_IMPLEMENTED_EXCEPTION extends Exception
@@ -307,7 +307,7 @@ class METHOD_NOT_IMPLEMENTED_EXCEPTION extends Exception
  * This allows groups of classes to use different exception handlers.
  * @package webcore
  * @subpackage sys
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  */
 class RAISABLE
@@ -338,6 +338,8 @@ class RAISABLE
   /**
    * Raise an error if the object is not the requested type.
    * @param object $obj
+   * @param string $expected_class
+   * @param string $routine_name
    * @param string $class_name
    * @access private
    */
@@ -405,9 +407,9 @@ class RAISABLE
    * Cast $i as an integer (if it's not an integer, raise an exception)
    * This is used to validate arguments to databases so that hacks of the form 'URL?id=1 OR 1=1' don't work
    * The function dies immediately so that any dependent SQL doesn't reveal the inner workings of the database.
-   * @param object $value The integer prospect
+   * @param object|int $value The integer prospect
    * @param boolean $allow_empty Is an empty value interpreted as 0?
-   * @return object Returns the integer (or 0 if empty).
+   * @return integer Returns the integer (or 0 if empty).
    * @see RAISABLE::validate_as_integer_silent
    * @access private
    */
@@ -420,7 +422,7 @@ class RAISABLE
     }
 
     $value = htmlentities($value);
-    $this->raise ("[$value] is not an integer.");
+    $this->raise ("[$value] is not an integer.", '', '');
   }
 
   /**
@@ -439,7 +441,7 @@ class RAISABLE
  * @see function raise()
  * @package webcore
  * @subpackage sys
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  */
 class EXCEPTION_HANDLER
@@ -501,7 +503,7 @@ class EXCEPTION_HANDLER
  * Used to be able to generically handle lists of varying entries.
  * @package webcore
  * @subpackage sys
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.5.0
  * @access private
  */
@@ -565,11 +567,10 @@ class TYPE_INFO
    * Gets a unique id for the given object.
    *
    * @param WEBCORE_OBJECT $obj
+   * @return string
    */
   public function unique_id ($obj)
   {
     return '';
   }
 }
-
-?>

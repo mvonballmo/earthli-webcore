@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage sys
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.7.0
  */
 
@@ -59,7 +59,7 @@ define ('Msg_channel_client', 'Storage');
  * @see COOKIE
  * @package webcore
  * @subpackage sys
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.7.0
  * @abstract
  */
@@ -297,7 +297,7 @@ abstract class CLIENT_STORAGE extends RAISABLE
    * Newly set or cleared values are read out of here to avoid reading "stale"
    * values from the actual client storage (which is only updated when the page
    * is submitted).
-   * @var array[string,string]
+   * @var string[]
    * @access private
    */
   protected $_values = array ();
@@ -307,7 +307,7 @@ abstract class CLIENT_STORAGE extends RAISABLE
    * Use {@link start_multiple_value()} to start storing to a list of
    * values. Use {@link finish_multiple_value()} to write the accumulated
    * values to a single setting.
-   * @var array[string,string]
+   * @var string[]
    * @access private
    */
   protected $_multiple_values;

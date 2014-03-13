@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage sys
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  */
 
@@ -46,7 +46,7 @@ require_once ('webcore/obj/webcore_object.php');
  * not need to go to the database to style a {@link PAGE}.
  * @package webcore
  * @subpackage sys
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.3.0
  */
 class THEME_SETTINGS extends WEBCORE_OBJECT
@@ -125,7 +125,7 @@ class THEME_SETTINGS extends WEBCORE_OBJECT
 
   /**
    * Load theme from a client-side storage (cookie).
-   * @param STORAGE $storage
+   * @param CLIENT_STORAGE $storage
    */
   public function load_from_client ($storage)
   {
@@ -142,7 +142,7 @@ class THEME_SETTINGS extends WEBCORE_OBJECT
 
   /**
    * Store theme to a client-side storage (cookie).
-   * @param STORAGE $storage
+   * @param CLIENT_STORAGE $storage
    */
   public function store_to_client ($storage)
   {
@@ -234,7 +234,7 @@ class THEME_SETTINGS extends WEBCORE_OBJECT
  * Options for setting a {@link THEME}.
  * @package webcore
  * @subpackage sys
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  */
 class THEME_OPTIONS
@@ -339,13 +339,13 @@ class THEME_OPTIONS
   }
 
   /**
-   * @var array[string,string]
+   * @var string[]
    * @access private
    */
   protected $_font_names;
 
   /**
-   * @var array[string,string]
+   * @var string[]
    * @access private
    */
   protected $_font_sizes;
@@ -357,7 +357,7 @@ class THEME_OPTIONS
  * a renderer that draws the page with the chosen {@link THEME}.
  * @package webcore
  * @subpackage sys
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  */
 class THEMED_PAGE extends PAGE
@@ -498,6 +498,7 @@ class THEMED_PAGE extends PAGE
       if ($id)
       {
         $theme_query = $this->theme_query ();
+        /** @var THEME $theme */
         $theme = $theme_query->object_at_id ($id);
       }
 
@@ -534,7 +535,8 @@ class THEMED_PAGE extends PAGE
 
   /**
    * Set a new stored theme font name.
-   * @param string $name Name of the new theme font (if empty, resets value to default)
+   * @param string $url
+   * @internal param string $name Name of the new theme font (if empty, resets value to default)
    */
   public function set_theme_font_name ($url)
   {
@@ -543,7 +545,8 @@ class THEMED_PAGE extends PAGE
 
   /**
    * Set a new stored theme font size.
-   * @param string $size Name of the new theme size (if empty, resets value to default)
+   * @param string $url
+   * @internal param string $size Name of the new theme size (if empty, resets value to default)
    */
   public function set_theme_font_size ($url)
   {
@@ -642,5 +645,3 @@ class THEMED_PAGE extends PAGE
     }
   }
 }
-
-?>

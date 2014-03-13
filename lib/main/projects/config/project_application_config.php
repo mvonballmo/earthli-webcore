@@ -6,7 +6,7 @@
  * @filesource
  * @package projects
  * @subpackage config
- * @version 3.4.0
+ * @version 3.5.0
  * @since 1.9.0
  */
 
@@ -42,7 +42,7 @@ require_once ('webcore/config/application_config.php');
 /**
  * @package projects
  * @subpackage config
- * @version 3.4.0
+ * @version 3.5.0
  * @since 1.9.0
  */
 class PROJECT_APPLICATION_DISPLAY_OPTIONS extends APPLICATION_DISPLAY_OPTIONS
@@ -213,7 +213,7 @@ class PROJECT_APPLICATION_DISPLAY_OPTIONS extends APPLICATION_DISPLAY_OPTIONS
    * 'closed' so that a shipped release has no open issues. Retrieve the current
    * list with {@link job_status_map()}.
    * @see JOB_STATUS_MAP
-   * @param array[integer] $from_statuses
+   * @param integer[] $from_statuses
    * @param integer $to_status
    */
   public function set_job_status_mapping ($from_statuses, $to_status)
@@ -285,21 +285,21 @@ class PROJECT_APPLICATION_DISPLAY_OPTIONS extends APPLICATION_DISPLAY_OPTIONS
   /**
    * List of entry kinds.
    * @see PROPERTY_VALUE
-   * @var array[PROPERTY_VALUE]
+   * @var PROPERTY_VALUE[]
    */
   protected $_entry_kinds;
 
   /**
    * List of job priorities.
    * @see PROPERTY_VALUE
-   * @var array[PROPERTY_VALUE]
+   * @var PROPERTY_VALUE[]
    */
   protected $_job_priorities;
 
   /**
    * List of job statuses.
    * @see JOB_STATUS_VALUE
-   * @var array[JOB_STATUS_VALUE]
+   * @var JOB_STATUS_VALUE[]
    */
   protected $_job_statuses;
 
@@ -314,7 +314,7 @@ class PROJECT_APPLICATION_DISPLAY_OPTIONS extends APPLICATION_DISPLAY_OPTIONS
  * Maps statuses when a {@link RELEASE} is shipped.
  * @package projects
  * @subpackage config
- * @version 3.4.0
+ * @version 3.5.0
  * @since 1.5.0
  * @access private
  */
@@ -335,7 +335,7 @@ class JOB_STATUS_MAP extends WEBCORE_OBJECT
 
   /**
    * @param APPLICATION $app
-   * @param array[integer] $from
+   * @param integer[] $from
    * @param integer $to
    */
   public function __construct ($app, $from, $to)
@@ -356,5 +356,3 @@ class JOB_STATUS_MAP extends WEBCORE_OBJECT
     return $statuses [$this->to];
   }
 }
-
-?>

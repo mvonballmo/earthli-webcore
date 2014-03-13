@@ -6,7 +6,7 @@
  * @filesource
  * @package projects
  * @subpackage db
- * @version 3.4.0
+ * @version 3.5.0
  * @since 1.4.1
  */
 
@@ -44,7 +44,7 @@ require_once ('projects/db/project_query_toolkit.php');
  * Retrieves {@link CHANGE}s or {@link JOB}s visible to a {@link PROJECT_USER}.
  * @package projects
  * @subpackage db
- * @version 3.4.0
+ * @version 3.5.0
  * @since 1.4.1
  */
 class PROJECT_USER_ENTRY_QUERY extends USER_MULTI_ENTRY_QUERY

@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage mail
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/mail/mail_object_renderer.php');
  * Renders a request from a {@link SEND_MAIL_FORM}.
  * @package webcore
  * @subpackage mail
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  */
 class SEND_MAIL_FORM_RENDERER extends MAIL_OBJECT_RENDERER

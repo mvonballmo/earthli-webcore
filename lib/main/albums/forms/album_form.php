@@ -6,7 +6,7 @@
  * @filesource
  * @package albums
  * @subpackage forms
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.5.0
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/forms/folder_form.php');
  * Edit or create an {@link ALBUM}.
  * @package albums
  * @subpackage forms
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.5.0
  */
 class ALBUM_FORM extends FOLDER_FORM

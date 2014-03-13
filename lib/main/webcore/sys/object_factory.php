@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage sys
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.5.0
  * @access private
  */
@@ -47,7 +47,7 @@ require_once ('webcore/sys/system.php');
  * class.
  * @package webcore
  * @subpackage sys
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.5.0
  * @access private
  */
@@ -143,7 +143,7 @@ class OBJECT_FACTORY extends RAISABLE
    * Each class is resolved to its final class and the file for the class is
    * included.
    * @param string $prefix
-   * @return array[string]
+   * @return string[]
    */
   public function classes_with_prefix ($prefix)
   {
@@ -210,7 +210,7 @@ class OBJECT_FACTORY extends RAISABLE
   }
 
   /**
-   * @var array[string,OBJECT_FACTORY_ITEM]
+   * @var OBJECT_FACTORY_ITEM[]
    * @see OBJECT_FACTORY_ITEM
    * @access private
    */
@@ -222,7 +222,7 @@ class OBJECT_FACTORY extends RAISABLE
  * Used by {@link OBJECT_FACTORY} to store registered classes.
  * @package webcore
  * @subpackage sys
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.5.0
  * @access private
  */

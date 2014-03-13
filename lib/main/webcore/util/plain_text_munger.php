@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage text
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.4.0
  */
 
@@ -45,7 +45,7 @@ require_once ('webcore/util/munger.php');
  * the boundaries with embedded block elements.
  * @package webcore
  * @subpackage text
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.5.0
  * @access private
  */
@@ -206,7 +206,7 @@ class PLAIN_TEXT_BLOCK_TRANSFORMER extends MUNGER_BLOCK_TRANSFORMER
  * the boundaries with embedded block elements.
  * @package webcore
  * @subpackage text
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.4.0
  * @access private
  */
@@ -248,7 +248,7 @@ class PLAIN_TEXT_PARAGRAPH_TRANSFORMER extends PLAIN_TEXT_BLOCK_TRANSFORMER
  * Surrounds paragraphed text with quotes.
  * @package webcore
  * @subpackage text
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.6.0
  * @access private
  */
@@ -299,7 +299,7 @@ class PLAIN_TEXT_QUOTE_TRANSFORMER extends PLAIN_TEXT_BLOCK_TRANSFORMER
  * <li>format: specifies which pieces to render (can be 'url', 'all', 'none').</li></ul>
  * @package webcore
  * @subpackage text
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.4.0
  * @access private
  */
@@ -388,7 +388,7 @@ class PLAIN_TEXT_LINK_REPLACER extends MUNGER_REPLACER
  * <li>format: specifies which pieces to render (can be 'url', 'all', 'none').</li></ul>
  * @package webcore
  * @subpackage text
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.4.0
  * @access private
  */
@@ -475,7 +475,7 @@ class PLAIN_TEXT_MEDIA_REPLACER extends MUNGER_REPLACER
  * Adds a link to a footnote, numbering automatically.
  * @package webcore
  * @subpackage text
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.7.1
  * @access private
  */
@@ -499,7 +499,7 @@ class PLAIN_TEXT_FOOTNOTE_REFERENCE_REPLACER extends MUNGER_FOOTNOTE_REFERENCE_R
  * Links a block of text to a previous footnote reference.
  * @package webcore
  * @subpackage text
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.7.0
  * @access private
  */
@@ -532,7 +532,7 @@ class PLAIN_TEXT_FOOTNOTE_TEXT_REPLACER extends MUNGER_FOOTNOTE_TEXT_REPLACER
  * Ordered an unordered lists are supported.
  * @package webcore
  * @subpackage text
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.4.0
  * @access private
  */
@@ -683,7 +683,7 @@ class PLAIN_TEXT_LIST_TRANSFORMER extends MUNGER_LIST_TRANSFORMER
  * Converts text to a numbered list.
  * @package webcore
  * @subpackage text
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.4.0
  * @access private
  */
@@ -730,7 +730,7 @@ class PLAIN_TEXT_NUMERIC_LIST_TRANSFORMER extends PLAIN_TEXT_LIST_TRANSFORMER
  * 
  * @package webcore
  * @subpackage text
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.7.1
  * @access private
  */
@@ -797,7 +797,7 @@ class PLAIN_TEXT_FOOTNOTE_TEXT_TRANSFORMER extends PLAIN_TEXT_LIST_TRANSFORMER
  * Generates alternating defition terms and definitions for newlines in the text.
  * @package webcore
  * @subpackage text
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.5.0
  * @access private
  */
@@ -911,7 +911,7 @@ class PLAIN_TEXT_DEFINITION_LIST_TRANSFORMER extends MUNGER_DEFINITION_LIST_TRAN
  * Preserves preformatted text.
  * @package webcore
  * @subpackage text
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.4.0
  * @access private
  */
@@ -964,7 +964,7 @@ class PLAIN_TEXT_PREFORMATTED_TRANSFORMER extends MUNGER_TRANSFORMER
  * <li>title [string]: formats a title bar for the box with this string in it.</li>
  * @package webcore
  * @subpackage text
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.5.0
  * @access private
  */
@@ -1007,7 +1007,7 @@ class PLAIN_TEXT_BOX_REPLACER extends MUNGER_REPLACER
  * <li>title [string]: formats a title bar for the box with this string in it.</li>
  * @package webcore
  * @subpackage text
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.7.0
  * @access private
  */
@@ -1036,14 +1036,14 @@ class PLAIN_TEXT_HORIZONTAL_RULE_REPLACER extends MUNGER_REPLACER
  * @package webcore
  * @subpackage text
  * @access private
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.7.1
  */
 class PLAIN_TEXT_PUNCTUATION_CONVERTER extends MUNGER_CONVERTER
 {
   /**
    * Table of punctuation mappings to apply in {@link _convert()}
-   * @var array[string,string]
+   * @var string[]
    */
   public $punctuation_table = array ( '---' => ' -- '
 	                                  , '(S,)' => 'S'     // Turkish S with cedilla
@@ -1074,7 +1074,7 @@ class PLAIN_TEXT_PUNCTUATION_CONVERTER extends MUNGER_CONVERTER
  * Converts tagged text to formatted plain text.
  * @package webcore
  * @subpackage text
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.5.0
  */
 class TEXT_MUNGER extends MUNGER
@@ -1221,7 +1221,7 @@ class TEXT_MUNGER extends MUNGER
  * 
  * @package webcore
  * @subpackage text
- * @version 3.4.0
+ * @version 3.5.0
  * @since 3.1.0
  */
 class PLAIN_TEXT_BASE_MUNGER extends TEXT_MUNGER
@@ -1254,7 +1254,7 @@ class PLAIN_TEXT_BASE_MUNGER extends TEXT_MUNGER
  * 
  * @package webcore
  * @subpackage text
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.4.0
  */
 class PLAIN_TEXT_MUNGER extends PLAIN_TEXT_BASE_MUNGER
@@ -1300,7 +1300,7 @@ class PLAIN_TEXT_MUNGER extends PLAIN_TEXT_BASE_MUNGER
  * 
  * @package webcore
  * @subpackage text
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.6.1
  */
 class PLAIN_TEXT_TITLE_MUNGER extends PLAIN_TEXT_BASE_MUNGER

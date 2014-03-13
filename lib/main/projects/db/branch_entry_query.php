@@ -6,7 +6,7 @@
  * @filesource
  * @package projects
  * @subpackage db
- * @version 3.4.0
+ * @version 3.5.0
  * @since 1.4.1
  */
 
@@ -43,7 +43,7 @@ require_once ('projects/db/project_entry_query.php');
  * Retrieves {@link CHANGE}s or {@link JOB}s related to a particular {@link BRANCH}.
  * @package projects
  * @subpackage db
- * @version 3.4.0
+ * @version 3.5.0
  * @since 1.4.1
  */
 class BRANCH_ENTRY_QUERY extends GENERIC_PROJECT_ENTRY_QUERY

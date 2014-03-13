@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage forms
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  */
 
@@ -44,7 +44,7 @@ require_once ('webcore/forms/form.php');
  * Does not require the current password.
  * @package webcore
  * @subpackage forms
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  */
 class PASSWORD_FORM extends FORM

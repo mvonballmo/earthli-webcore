@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage obj
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  */
 
@@ -44,7 +44,7 @@ require_once ('webcore/obj/attachment_host.php');
  * Each comment is numbered, numbers are maintained individually for each entry.
  * @package webcore
  * @subpackage obj
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  */
 class COMMENT extends ATTACHMENT_HOST
@@ -129,7 +129,7 @@ class COMMENT extends ATTACHMENT_HOST
   /**
    * Returns a list of comments directly attached to this one.
    * May also contain the entire tree of sub-comments below this one.
-   * @return array[COMMENT]
+   * @return COMMENT[]
    */
   public function sub_comments ()
   {
@@ -158,7 +158,7 @@ class COMMENT extends ATTACHMENT_HOST
    * Caches a list of sub-comment.
    * Generally called when a tree of comments is built to avoid re-querying for
    * data that has already been retrieved.
-   * @param array[COMMENT] $subs
+   * @param COMMENT[] $subs
    * @access private
    */
   public function set_sub_comments ($subs)
@@ -438,7 +438,7 @@ class COMMENT extends ATTACHMENT_HOST
   }
 
   /**
-   * @var array[COMMENT]
+   * @var COMMENT[]
    * @access private
    */
   protected $_sub_comments;

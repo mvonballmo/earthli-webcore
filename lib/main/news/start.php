@@ -6,7 +6,7 @@
  * @author Marco Von Ballmoos
  * @filesource
  * @package news
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.7.0
  */
 
@@ -45,7 +45,7 @@ require_once ('news/init.php');
  * {@link PAGE::register_application()} for help on customizing the
  * application creation and initialization.
  * @global NEWS_APPLICATION $App
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.4.0
  */
 $App = $Page->make_application (News_application_id, true, true);

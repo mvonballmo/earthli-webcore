@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage mail
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  */
 
@@ -53,7 +53,7 @@ require_once ('webcore/obj/webcore_object.php');
  * @see MAIL_PROVIDER
  * @package webcore
  * @subpackage mail
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  */
 class MAIL_MESSAGE extends WEBCORE_OBJECT
@@ -79,22 +79,22 @@ class MAIL_MESSAGE extends WEBCORE_OBJECT
   public $send_as_html = true;
 
   /**
-   * @var array[string]
+   * @var string[]
    */
   public $send_to = array ();
 
   /**
-   * @var array[string]
+   * @var string[]
    */
   public $cc = array ();
 
   /**
-   * @var array[string]
+   * @var string[]
    */
   public $bcc = array ();
 
   /**
-   * @var array[string]
+   * @var string[]
    */
   public $custom_headers = array ();
 

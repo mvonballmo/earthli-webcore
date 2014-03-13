@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage db
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  */
 
@@ -43,11 +43,11 @@ require_once ('webcore/db/object_in_folder_query.php');
  * Return {@link ENTRY} objects visible to a {@link USER}.
  * @package webcore
  * @subpackage db
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  * @abstract
  */
-class USER_ENTRY_QUERY extends OBJECT_IN_FOLDER_QUERY
+abstract class USER_ENTRY_QUERY extends OBJECT_IN_FOLDER_QUERY
 {
   /**
    * SQL alias for the "main" table.
@@ -173,10 +173,10 @@ class USER_ENTRY_QUERY extends OBJECT_IN_FOLDER_QUERY
  * Return {@link ENTRY}s for a {@link USER} in a multi entry-type application.
  * @package webcore
  * @subpackage db
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.7.0
  */
-class USER_MULTI_ENTRY_QUERY extends USER_ENTRY_QUERY
+abstract class USER_MULTI_ENTRY_QUERY extends USER_ENTRY_QUERY
 {
   /**
    * @param USER $user The user for which entries are to be retrieved.
@@ -222,7 +222,7 @@ class USER_MULTI_ENTRY_QUERY extends USER_ENTRY_QUERY
  * Retrieves {@link DRAFTABLE_ENTRY}s visible to a {@link USER}.
  * @package webcore
  * @subpackage db
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.7.1
  */
 class USER_DRAFTABLE_ENTRY_QUERY extends USER_ENTRY_QUERY
@@ -252,6 +252,33 @@ class USER_DRAFTABLE_ENTRY_QUERY extends USER_ENTRY_QUERY
       $this->set_order ('entry.state ASC, entry.time_published DESC, entry.time_created DESC');
     }
   }
-}
 
-?>
+  /**
+   * @param object $obj
+   * @access private
+   */
+  protected function _obj_set_sub_objects_cached($obj)
+  {
+    // NOP
+  }
+
+  /**
+   * @param object $parent
+   * @param object $obj
+   * @access private
+   */
+  protected function _obj_connect_to_parent($parent, $obj)
+  {
+    // NOP
+  }
+
+  /**
+   * @param object $obj
+   * @return object[]
+   * @access private
+   */
+  protected function _obj_sub_objects($obj)
+  {
+    // NOP
+  }
+}

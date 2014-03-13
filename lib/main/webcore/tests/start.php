@@ -7,7 +7,7 @@
  * @filesource
  * @package webcore
  * @subpackage tests
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.6.0
  */
 
@@ -46,7 +46,7 @@ require_once ('webcore/tests/init.php');
  * {@link ENVIRONMENT::register_application()} for help on customizing the
  * application creation and initialization.
  * @global TEST_HARNESS_APPLICATION $App
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.6.0
  */
 $App = $Page->make_application (Test_harness_application_id, true, true);

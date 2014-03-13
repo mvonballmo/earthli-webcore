@@ -41,24 +41,24 @@ http://www.earthli.com/software/webcore
 
     if ($object_list->has_entries ())
     {
+      $Page->set_printable ();
+      $Page->start_display ();
+
       if (sizeof ($object_list->entries) == 1)
       {
         $Page->title->add_object ($object_list->entries [0]);
         $Page->title->subject = 'Print';
-    ?>
-    <h1><?php echo $App->title; ?></h1>
-    <?php
+        ?>
+        <h1><?php echo $App->title; ?></h1>
+      <?php
       }
       else
       {
         $Page->title->subject = $object_list->description ();
-    ?>
-    <h1><?php echo $App->title . ' &mdash; ' . $object_list->description (); ?></h1>
-    <?php
+        ?>
+        <h1><?php echo $App->title . ' &mdash; ' . $object_list->description (); ?></h1>
+      <?php
       }
-      
-      $Page->set_printable ();
-      $Page->start_display ();
 
       $class_name = $App->final_class_name ('PRINT_PREVIEW', 'webcore/gui/print_preview.php');
       $preview = new $class_name ($App);

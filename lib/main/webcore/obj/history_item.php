@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage history
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.4.0
  */
 
@@ -45,7 +45,7 @@ require_once ('webcore/obj/unique_object.php');
  * item is recorded to the database, recording which information was changed, by
  * whom and when.
  * @package webcore
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.4.0
 f * @subpackage history
  */
@@ -717,7 +717,7 @@ class HISTORY_ITEM extends UNIQUE_OBJECT
    * List of differences between the original and current object.
    * This is only used when the history item is being created; it is not used when the history item
    * is loaded from the database.
-   * @var array[string]
+   * @var string[]
    * @access private
    */
   protected $_differences;

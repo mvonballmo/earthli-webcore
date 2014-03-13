@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage util
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.5.0
  */
 
@@ -102,7 +102,7 @@ define ('Form_max_file_size_field_name', 'MAX_FILE_SIZE');
  * Represents a file uploaded by PHP.
  * @package webcore
  * @subpackage util
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.5.0
  */
 class UPLOADED_FILE extends RAISABLE
@@ -389,14 +389,14 @@ class UPLOADED_FILE extends RAISABLE
  * were actually associated with the input name.
  * @package webcore
  * @subpackage util
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.5.0
  */
 class UPLOADED_FILE_SET
 {
   /**
    * List of uploaded files.
-   * @var array[UPLOADED_FILE]
+   * @var UPLOADED_FILE[]
    * @see UPLOADED_FILE
    */
   public $files = array ();
@@ -518,7 +518,7 @@ class UPLOADED_FILE_SET
  * amount of re-uploading a user must do when a form cannot be committed.
  * @package webcore
  * @subpackage util
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.5.0
  */
 class UPLOADER extends RAISABLE
@@ -565,7 +565,7 @@ class UPLOADER extends RAISABLE
   /**
    * Map of field name to list of files.
    * Each submitted fields may be associated with one of more uploaded files.
-   * @var array[string,UPLOADED_FILE_SET]
+   * @var UPLOADED_FILE_SET[]
    * @see UPLOADED_FILE_SET
    */
   public $file_sets = array ();

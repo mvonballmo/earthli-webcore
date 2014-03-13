@@ -6,7 +6,7 @@
  * @filesource
  * @package projects
  * @subpackage command
- * @version 3.4.0
+ * @version 3.5.0
  * @since 1.9.0
  * @access private
  */
@@ -44,7 +44,7 @@ require_once ('webcore/cmd/folder_commands.php');
  * Actions which apply to a {@link PROJECT}.
  * @package projects
  * @subpackage command
- * @version 3.4.0
+ * @version 3.5.0
  * @since 1.9.0
  * @access private
  */

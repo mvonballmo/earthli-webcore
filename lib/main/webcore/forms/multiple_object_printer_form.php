@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage forms
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  */
 
@@ -44,7 +44,7 @@ require_once ('webcore/gui/print_preview.php'); // for constants
  * Sends one or more {@link ENTRY}s to a print preview page.
  * @package webcore
  * @subpackage forms
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  */
 class MULTIPLE_OBJECT_PRINTER_FORM extends MULTIPLE_OBJECT_ACTION_FORM

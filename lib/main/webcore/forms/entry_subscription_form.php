@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage forms
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/forms/subscription_form.php');
  * Display a list of {@link ENTRY}s to which a {@link SUBSCRIBER} is subscribed.
  * @package webcore
  * @subpackage forms
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  */
 class ENTRY_SUBSCRIPTION_FORM extends CONTENT_OBJECT_SUBSCRIPTION_FORM

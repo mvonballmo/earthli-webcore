@@ -6,7 +6,7 @@
  * @filesource
  * @package recipes
  * @subpackage config
- * @version 3.4.0
+ * @version 3.5.0
  * @since 1.7.0
  */
 
@@ -44,7 +44,7 @@ include_once ('webcore/config/application_engine.php');
  * Inherit from this class to customize startup for the application.
  * @package recipes
  * @subpackage config
- * @version 3.4.0
+ * @version 3.5.0
  * @since 1.7.0
  */
 class RECIPE_APPLICATION_ENGINE extends APPLICATION_ENGINE

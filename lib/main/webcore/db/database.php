@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage db
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  */
 
@@ -49,7 +49,7 @@ define ('Msg_channel_database', 'Database');
  *
  * @package webcore
  * @subpackage db
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  */
 class DATABASE extends DB_Sql
@@ -224,7 +224,7 @@ class DATABASE extends DB_Sql
   
   /**
    * Used for duplicate query checking.
-   * @var array[string]
+   * @var string[]
    * @access private
    */
   protected $_query_texts;

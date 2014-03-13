@@ -6,7 +6,7 @@
  * @filesource
  * @package projects
  * @subpackage obj
- * @version 3.4.0
+ * @version 3.5.0
  * @since 3.1.0
  */
 
@@ -44,7 +44,7 @@ require_once ('webcore/sys/property.php');
  * 
  * @package projects
  * @subpackage util
- * @version 3.4.0
+ * @version 3.5.0
  * @since 3.1.0
  */
 class PROJECT_VERSION_FORMATTER

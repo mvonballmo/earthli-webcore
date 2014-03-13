@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage obj
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/obj/attachment_host.php');
  * Main object in a WebCore {@link APPLICATION}.
  * @package webcore
  * @subpackage obj
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  */
 class ENTRY extends ATTACHMENT_HOST
@@ -307,7 +307,7 @@ class ENTRY extends ATTACHMENT_HOST
  * An {@link ENTRY} with support for an {@link Unpublished} status.
  * @package webcore
  * @subpackage obj
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.5.0
  */
 class DRAFTABLE_ENTRY extends ENTRY

@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage grid
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.7.0
  */
 
@@ -44,7 +44,7 @@ require_once ('webcore/gui/content_object_grid.php');
  * Used to display the results of a {@link SEARCH} and subscription lists.
  * @package webcore
  * @subpackage gui
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.7.0
  */
 class OBJECT_IN_FOLDER_SUMMARY_GRID extends CONTENT_OBJECT_GRID

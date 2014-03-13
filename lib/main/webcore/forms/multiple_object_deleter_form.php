@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage forms
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  */
 
@@ -44,7 +44,7 @@ require_once ('webcore/forms/multiple_object_action_form.php');
  * Deleting marks the entry or folder as invisible, but does not remove information from the database.
  * @package webcore
  * @subpackage forms
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  */
 class MULTIPLE_OBJECT_DELETER_FORM extends MULTIPLE_OBJECT_ACTION_FORM

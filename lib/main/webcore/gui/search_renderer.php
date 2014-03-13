@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage renderer
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.5.0
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/gui/content_object_renderer.php');
  * Render details for {@link SEARCH} objects.
  * @package webcore
  * @subpackage renderer
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.5.0
  */
 class SEARCH_RENDERER extends CONTENT_OBJECT_RENDERER

@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage command
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.7.0
  */
 
@@ -44,7 +44,7 @@ require_once ('webcore/obj/webcore_object.php');
  * Rendered in the interface by a {@link MENU_RENDERER}.
  * @package webcore
  * @subpackage command
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.7.0
  */
 class COMMAND
@@ -113,7 +113,7 @@ class COMMAND
  * Used by {@link COMMANDS} to cluster relevant commands.
  * @package webcore
  * @subpackage command
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.7.0
  */
 class COMMAND_GROUP
@@ -125,7 +125,7 @@ class COMMAND_GROUP
 
   /**
    * @see COMMAND 
-   * @var array[COMMAND]
+   * @var COMMAND[]
    */
   public $commands = array ();  
   
@@ -156,7 +156,7 @@ class COMMAND_GROUP
  * with a {@link MENU_RENDERER}.
  * @package webcore
  * @subpackage command
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.7.0
  */
 class COMMANDS extends WEBCORE_OBJECT
@@ -281,7 +281,7 @@ class COMMANDS extends WEBCORE_OBJECT
   
   /**
    * Disable all commands except those given. 
-   * @param array[string] $ids
+   * @param string[] $ids
    */
   public function disable_all_except ($ids)
   {

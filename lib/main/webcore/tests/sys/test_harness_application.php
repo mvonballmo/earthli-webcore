@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage tests
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.6.0
  */
 
@@ -41,7 +41,7 @@ require_once ('webcore/sys/application.php');
 
 /**
  * @package webcore
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.6.0
  * @subpackage tests
  */
@@ -117,7 +117,7 @@ class TEST_HARNESS_APPLICATION_TABLE_NAMES extends APPLICATION_TABLE_NAMES
  * A WebCore application with default test data for unit tests.
  * @package webcore
  * @subpackage tests
- * @version 3.4.0
+ * @version 3.5.0
  * @since 1.3.0
  */
 class TEST_HARNESS_APPLICATION extends APPLICATION

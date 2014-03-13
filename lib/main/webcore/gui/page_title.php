@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage gui
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  */
 
@@ -45,7 +45,7 @@ require_once ('webcore/obj/webcore_object.php');
  * By default, it displays: prefix group object[s] subject suffix.
  * @package webcore
  * @subpackage gui
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  */
 class PAGE_TITLE extends WEBCORE_OBJECT

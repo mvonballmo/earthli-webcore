@@ -6,7 +6,7 @@
  * @filesource
  * @package albums
  * @subpackage obj
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.5.0
  */
 
@@ -48,7 +48,7 @@ define ('Picture_thumbnail_suffix', '_tn');
  * A {@link PICTURE}, with date, description and thumbnail.
  * @package albums
  * @subpackage obj
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.5.0
  */
 class PICTURE extends ALBUM_ENTRY

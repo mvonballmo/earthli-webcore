@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage log
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  */
 
@@ -44,7 +44,7 @@ require_once ('webcore/log/text_output_logger.php');
  * If the environment is a server, it uses an HTML line-break.
  * @package webcore
  * @subpackage log
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  */
 class ECHO_LOGGER extends TEXT_OUTPUT_LOGGER

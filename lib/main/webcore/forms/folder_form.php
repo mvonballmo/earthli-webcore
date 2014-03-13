@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage forms
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/forms/object_in_folder_form.php');
  * Update or create a {@link FOLDER}.
  * @package webcore
  * @subpackage forms
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  */
 class FOLDER_FORM extends OBJECT_IN_FOLDER_FORM

@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage forms
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/forms/subscription_form.php');
  * Subscribe/unsubscribe to one or more {@link FOLDER}s.
  * @package webcore
  * @subpackage forms
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  */
 class FOLDER_SUBSCRIPTION_FORM extends SUBSCRIPTION_FORM

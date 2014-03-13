@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage grid
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  */
 
@@ -44,7 +44,7 @@ require_once ('webcore/gui/object_in_folder_grid.php');
  * Shows associated folder, entry and creator information.
  * @package webcore
  * @subpackage grid
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  */
 class COMMENT_GRID extends SELECTABLE_GRID
@@ -164,7 +164,7 @@ class COMMENT_GRID extends SELECTABLE_GRID
  * Displays {@link COMMENTS}s for a {@link SEARCH}.
  * @package webcore
  * @subpackage grid
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.7.0
  */
 class SELECT_COMMENT_GRID extends OBJECT_IN_FOLDER_SUMMARY_GRID

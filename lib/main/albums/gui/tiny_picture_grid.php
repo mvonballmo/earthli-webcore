@@ -6,7 +6,7 @@
  * @filesource
  * @package albums
  * @subpackage gui
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.8.0
  */
 
@@ -46,7 +46,7 @@ require_once ('webcore/gui/grid.php');
  * size of the thumbnail.
  * @package albums
  * @subpackage gui
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.8.0
  */
 class TINY_PICTURE_GRID extends CSS_FLOW_GRID

@@ -6,7 +6,7 @@
  * @filesource
  * @package recipes
  * @subpackage command
- * @version 3.4.0
+ * @version 3.5.0
  * @since 1.7.0
  * @access private
  */
@@ -44,7 +44,7 @@ require_once ('webcore/cmd/entry_commands.php');
  * Return the commands for a {@link RECIPE}.
  * @package recipes
  * @subpackage command
- * @version 3.4.0
+ * @version 3.5.0
  * @since 1.7.0
  * @access private
  */

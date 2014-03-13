@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage db
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/db/object_in_folder_query.php');
  * Return {@link ENTRY}s for a {@link FOLDER}.
  * @package webcore
  * @subpackage db
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  * @abstract
  */
@@ -208,13 +208,42 @@ class FOLDER_ENTRY_QUERY extends OBJECT_IN_SINGLE_FOLDER_QUERY
    * @access private
    */
   protected $_privilege_set = Privilege_set_entry;
+
+  /**
+   * @param object $obj
+   * @access private
+   */
+  protected function _obj_set_sub_objects_cached($obj)
+  {
+    // NOP
+  }
+
+  /**
+   * @param object $parent
+   * @param object $obj
+   * @access private
+   */
+  protected function _obj_connect_to_parent($parent, $obj)
+  {
+    // NOP
+  }
+
+  /**
+   * @param object $obj
+   * @return object[]
+   * @access private
+   */
+  protected function _obj_sub_objects($obj)
+  {
+    // NOP
+  }
 }
 
 /**
  * Return {@link ENTRY}s for a {@link FOLDER} in a multi entry-type application.
  * @package webcore
  * @subpackage db
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  */
 class FOLDER_MULTI_ENTRY_QUERY extends FOLDER_ENTRY_QUERY
@@ -263,7 +292,7 @@ class FOLDER_MULTI_ENTRY_QUERY extends FOLDER_ENTRY_QUERY
  * Retrieves {@link DRAFTABLE_ENTRY}s related to a particular {@link FOLDER}.
  * @package webcore
  * @subpackage db
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.7.1
  */
 class FOLDER_DRAFTABLE_ENTRY_QUERY extends FOLDER_ENTRY_QUERY

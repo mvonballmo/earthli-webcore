@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage db
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/db/user_entry_sub_object_query.php');
  * Return {@link COMMENT}s visible to a {@link USER}.
  * @package webcore
  * @subpackage db
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  */
 class USER_COMMENT_QUERY extends USER_ENTRY_SUB_OBJECT_QUERY
@@ -113,13 +113,42 @@ class USER_COMMENT_QUERY extends USER_ENTRY_SUB_OBJECT_QUERY
    * @access private
    */
   protected $_privilege_set = Privilege_set_comment;
+
+  /**
+   * @param object $obj
+   * @access private
+   */
+  protected function _obj_set_sub_objects_cached($obj)
+  {
+    // NOP
+  }
+
+  /**
+   * @param object $parent
+   * @param object $obj
+   * @access private
+   */
+  protected function _obj_connect_to_parent($parent, $obj)
+  {
+    // NOP
+  }
+
+  /**
+   * @param object $obj
+   * @return object[]
+   * @access private
+   */
+  protected function _obj_sub_objects($obj)
+  {
+    // NOP
+  }
 }
 
 /**
  * Return {@link COMMENT}s visible to a {@link USER} in an application with {@link MULTI_TYPE_ENTRY}s.
  * @package webcore
  * @subpackage db
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  */
 class USER_MULTI_TYPE_COMMENT_QUERY extends USER_COMMENT_QUERY

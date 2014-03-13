@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage sys
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  */
 
@@ -64,7 +64,7 @@ define ('App_entry_reg_prefix', '__entry_');
  * There can be multiple applications per page.
  * @package webcore
  * @subpackage sys
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  */
 class APPLICATION extends CONTEXT
@@ -842,7 +842,7 @@ class APPLICATION extends CONTEXT
 
   /**
    * Return a list of registered entry types.
-   * @return array[string,TYPE_INFO]
+   * @return TYPE_INFO[]
    * @see TYPE_INFO
    */
   public function entry_type_infos ()
@@ -872,7 +872,7 @@ class APPLICATION extends CONTEXT
 
   /**
    * Return a list of registered search types.
-   * @return array[string,TYPE_INFO]
+   * @return TYPE_INFO[]
    * @see TYPE_INFO
    */
   public function search_type_infos ()
@@ -888,7 +888,7 @@ class APPLICATION extends CONTEXT
 
   /**
    * The actual file system location of the application source.
-   * Copy/paste to descendents to return the correct location.
+   * Copy/paste to descendants to return the correct location.
    * @return string
    * @access private
    */
@@ -1179,14 +1179,14 @@ class APPLICATION extends CONTEXT
    * List of {@link ENTRY} classes.
    * This list is used to create a list of {@link TYPE_INFO} objects describing the available
    * entry types when requested with {@link entry_type_infos()}.
-   * @var array[string,string]
+   * @var string[]
    * @access private
    */
   protected $_entry_classes;
 
   /**
    * Cached list of {@link TYPE_INFO} objects.
-   * @var array[TYPE_INFO]
+   * @var TYPE_INFO[]
    * @see entry_type_infos()
    * @access private*/
   protected $_entry_type_infos;
@@ -1201,7 +1201,7 @@ class APPLICATION extends CONTEXT
   protected $_searches;
 
   /**
-   * @var array[string]
+   * @var string[]
    * @access private
    */
   protected $_page_templates;
@@ -1211,7 +1211,7 @@ class APPLICATION extends CONTEXT
  * Encapsulates an application that uses {@link DRAFTABLE_ENTRY}s.
  * @package webcore
  * @subpackage sys
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.7.1
  */
 class DRAFTABLE_APPLICATION extends APPLICATION

@@ -6,7 +6,7 @@
  * @filesource
  * @package projects
  * @subpackage gui
- * @version 3.4.0
+ * @version 3.5.0
  * @since 1.7.0
  */
 
@@ -43,7 +43,7 @@ require_once ('projects/gui/project_entry_renderer.php');
  * Render details for a {@link CHANGE}.
  * @package projects
  * @subpackage gui
- * @version 3.4.0
+ * @version 3.5.0
  * @since 1.7.0
  */
 class CHANGE_RENDERER extends PROJECT_ENTRY_RENDERER

@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage db
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.5.0
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/db/object_in_folder_query.php');
  * Return {@link ATTACHMENT}s for an {@link ATTACHMENT_HOST}.
  * @package webcore
  * @subpackage db
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.5.0
  */
 class ATTACHMENT_QUERY extends OBJECT_IN_SINGLE_FOLDER_QUERY
@@ -110,5 +110,33 @@ class ATTACHMENT_QUERY extends OBJECT_IN_SINGLE_FOLDER_QUERY
    * @access private
    */
   protected $_privilege_set = Privilege_set_attachment;
+
+  /**
+   * @param object $obj
+   * @access private
+   */
+  protected function _obj_set_sub_objects_cached($obj)
+  {
+    // NOP
+  }
+
+  /**
+   * @param object $parent
+   * @param object $obj
+   * @access private
+   */
+  protected function _obj_connect_to_parent($parent, $obj)
+  {
+    // NOP
+  }
+
+  /**
+   * @param object $obj
+   * @return object[]
+   * @access private
+   */
+  protected function _obj_sub_objects($obj)
+  {
+    // NOP
+  }
 }
-?>

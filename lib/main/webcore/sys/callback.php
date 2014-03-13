@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage sys
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.5.0
  * @access private
  */
@@ -40,15 +40,15 @@ http://www.earthli.com/software/webcore
 /**
  * Calls a global function.
  * Use this class as a parameter callback when you want to support either object methods
- * or global functions as a callback. Object methods are supported with descendent class
+ * or global functions as a callback. Object methods are supported with descendant class
  * {@link CALLBACK_METHOD}.
  * @package webcore
  * @subpackage sys
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.5.0
  * @access private
  */
-class CALLBACK
+class WEBCORE_CALLBACK
 {
   /**
    * Name of the global function to call.
@@ -99,11 +99,11 @@ class CALLBACK
  * callback to a specific object.
  * @package webcore
  * @subpackage sys
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.5.0
  * @access private
  */
-class CALLBACK_METHOD extends CALLBACK
+class CALLBACK_METHOD extends WEBCORE_CALLBACK
 {
   /**
    * @param string $name
@@ -118,6 +118,7 @@ class CALLBACK_METHOD extends CALLBACK
   /**
    * Execute the method with the given arguments.
    * @param array $args
+   * @throws UNKNOWN_VALUE_EXCEPTION
    * @return object
    */
   public function execute ($args = null)
@@ -153,7 +154,7 @@ class CALLBACK_METHOD extends CALLBACK
  * Manages and executes a list of {@link CALLBACK}s.
  * @package webcore
  * @subpackage sys
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.7.0
  * @access private
  */
@@ -161,7 +162,7 @@ class CALLBACK_LIST
 {
   /**
    * Add a callback to the list of listeners.
-   * @param CALLBACK $callback
+   * @param WEBCORE_CALLBACK $callback
    */
   public function add_item ($callback)
   {
@@ -188,7 +189,7 @@ class CALLBACK_LIST
   
   /**
    * List of items in the list. 
-   * @var array[CALLBACK]
+   * @var WEBCORE_CALLBACK[]
    * @access private
    */
   protected $_items = array ();
@@ -200,5 +201,3 @@ class CALLBACK_LIST
    */
   protected $_executing = false;
 }
-
-?>

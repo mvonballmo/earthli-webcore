@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage log
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  */
 
@@ -47,7 +47,7 @@ require_once ('webcore/log/text_output_logger.php');
  * 
  * @package webcore
  * @subpackage log
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  */
 class JS_CONSOLE_LOGGER extends TEXT_OUTPUT_LOGGER
@@ -258,7 +258,7 @@ class JS_CONSOLE_LOGGER extends TEXT_OUTPUT_LOGGER
   protected $_log_info;
 
   /**
-   * @var array[LOG_INFO]
+   * @var LOG_INFO[]
    * @access private
    */
   protected $_messages = array ();
@@ -269,7 +269,7 @@ class JS_CONSOLE_LOGGER extends TEXT_OUTPUT_LOGGER
  *
  * @package webcore
  * @subpackage log
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  * @access private
  */

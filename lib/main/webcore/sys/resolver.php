@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage sys
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.7.0
  */
 
@@ -51,12 +51,12 @@ require_once ('webcore/sys/resources.php');
 define ('Type_info_reg_prefix', '__type_info_');
 
 /**
- * Manages lists of overridables for a particular context.
+ * Manages lists of overridable items for a particular context.
  * Retrieve classes using {@link final_class_name()}, {@link page_template_for()}
  * and resolve URLs using the API of the parent class, {@link RESOURCE_MANAGER}.
  * @package webcore
  * @subpackage sys
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.7.0
  */
 class RESOLVER extends RESOURCE_MANAGER
@@ -73,7 +73,7 @@ class RESOLVER extends RESOURCE_MANAGER
    * @see OBJECT_FACTORY::final_class_name()
    * @param string $class_name Unique name of the class to load.
    * @param string $file_name Location of 'class_name'.
-   * @param string $context Distiguishes among multiple similar registrations.
+   * @param string $context Distinguishes among multiple similar registrations.
    * @return string
    */
   public function final_class_name ($class_name, $file_name = '', $context = '')
@@ -87,7 +87,7 @@ class RESOLVER extends RESOURCE_MANAGER
    * @param string $singleton_name Unique name of the object to create.
    * @param string $class_name Unique name of the class to load.
    * @param string $file_name Location of 'class_name'.
-   * @param string $context Distiguishes among multiple similar registrations.
+   * @param string $context Distinguishes among multiple similar registrations.
    * @return object
    */
   public function find_or_create_singleton ($singleton_name, $class_name, $file_name = '', $context = '')
@@ -178,6 +178,7 @@ class RESOLVER extends RESOURCE_MANAGER
    * Return meta-information for the given class.
    * If there is no specific type info defined for the class, {@link TYPE_INFO} is returned.
    * @param string $class_name
+   * @param string $file_name
    * @return TYPE_INFO
    */
   public function type_info_for ($class_name, $file_name = '')
@@ -216,7 +217,7 @@ class RESOLVER extends RESOURCE_MANAGER
 
   /**
    * Register plugins in {@link $classes} during initialization.
-   * Descendents should register plugins in this method if the object to override
+   * Descendants should register plugins in this method if the object to override
    * is created in the constructor.
    * @access private
    */
@@ -237,16 +238,14 @@ class RESOLVER extends RESOURCE_MANAGER
    *  Page template registry.
    * Use {@link page_template_for()} to retrieve a page template name. Use 
    * {@link register_page_template()} to add a template translation.
-   * @var array[string,string]
+   * @var string[]
    * @access private
    */
   protected $_page_templates;
 
   /**
-   * @var array[string,object]
+   * @var object[]
    * @access private
    */
   protected $_singletons;
 }
-
-?>

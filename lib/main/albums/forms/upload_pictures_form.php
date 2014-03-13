@@ -6,7 +6,7 @@
  * @filesource
  * @package albums
  * @subpackage forms
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.5.0
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/forms/form.php');
  * Edit or create a {@link PICTURE}.
  * @package albums
  * @subpackage forms
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.5.0
  */
 class UPLOAD_PICTURES_FORM extends ID_BASED_FORM

@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage db
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  */
 
@@ -44,7 +44,7 @@ require_once ('webcore/db/object_in_folder_query.php');
  * This class returns comments from a single folder.
  * @package webcore
  * @subpackage db
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  */
 class COMMENT_QUERY extends OBJECT_IN_SINGLE_FOLDER_QUERY
@@ -121,7 +121,7 @@ class COMMENT_QUERY extends OBJECT_IN_SINGLE_FOLDER_QUERY
   }
 
   /**
-   * @return array[COMMENT]
+   * @return COMMENT[]
    * @param COMMENT $obj
    * @access private
    */

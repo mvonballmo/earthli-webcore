@@ -6,7 +6,7 @@
  * @filesource
  * @package projects
  * @subpackage db
- * @version 3.4.0
+ * @version 3.5.0
  * @since 1.4.1
  */
 
@@ -44,7 +44,7 @@ require_once ('projects/db/project_query_toolkit.php');
  * Retrieves {@link RELEASE}s for a particular {@link BRANCH}.
  * @package projects
  * @subpackage db
- * @version 3.4.0
+ * @version 3.5.0
  * @since 1.4.1
  */
 class BRANCH_RELEASE_QUERY extends PROJECT_RELEASE_QUERY

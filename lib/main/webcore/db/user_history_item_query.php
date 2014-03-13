@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage db
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.4.0
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/db/history_item_query.php');
  * Returns all the {@link HISTORY_ITEM}s a user can see.
  * @package webcore
  * @subpackage db
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.4.0
  */
 class USER_HISTORY_ITEM_QUERY extends HISTORY_ITEM_QUERY

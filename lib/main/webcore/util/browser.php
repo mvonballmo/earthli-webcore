@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage util
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  */
 
@@ -202,7 +202,7 @@ define ('Browser_unknown', 'Unknown');
  * @see supports()
  * @package webcore
  * @subpackage util
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  */
 class BROWSER
@@ -622,7 +622,7 @@ class BROWSER
  * the {@link USER_AGENT_PARSER}.
  * @package webcore
  * @subpackage util
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.6.0
  */
 class USER_AGENT_PROPERTIES
@@ -713,7 +713,7 @@ class USER_AGENT_PROPERTIES
  * agents passed in by PHP.
  * @package webcore
  * @subpackage util
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.7.0
  * @access private
  */
@@ -980,7 +980,7 @@ class USER_AGENT_PARSER
  * a database of known user agents.
  * @package webcore
  * @subpackage util
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.7.0
  * @access private
  */
@@ -995,7 +995,7 @@ class USER_AGENT_PARSE_TABLES
    * IE is the next weakest because many user agents spoof as IE as well. If either or both of these are
    * specified, they are recorded, but if any other renderer is specified, that one is used instead.
    * @see USER_AGENT_RENDERER_INFO
-   * @return array[string,USER_AGENT_RENDERER_INFO]
+   * @return USER_AGENT_RENDERER_INFO[]
    */
   public function renderer_ids ()
   {
@@ -1033,7 +1033,7 @@ class USER_AGENT_PARSE_TABLES
    * A list of ids known to be spurious or system ids.
    * The algorithm always uses the last non-ignored id as the browser id; this
    * list determines which ids are ignored.
-   * @return array[string,boolean]
+   * @return boolean[]
    */
   public function ignored_ids ()
   {
@@ -1074,7 +1074,7 @@ class USER_AGENT_PARSE_TABLES
 
   /**
    * A list of systems known to provide version info in the user agent.
-   * @return array[string,string]
+   * @return string[]
    */
   public function system_ids ()
   {
@@ -1095,7 +1095,7 @@ class USER_AGENT_PARSE_TABLES
    * A list of names that are commonly robots.
    * Since there are so many different robot clients, we look for common names
    * in the renderer/browser name to mark unknown browsers as robots.
-   * @return array[string,boolean]
+   * @return boolean[]
    */
   public function robot_names ()
   {
@@ -1111,7 +1111,7 @@ class USER_AGENT_PARSE_TABLES
    * The platform id is a nicely formatted, standardized name for the operating system. This
    * array maps the different user agent platform ids onto these standard ones. (e.g. 'nt 4'
    * and 'nt4' both map onto 'Windows NT 4.x').
-   * @return array[string,string]
+   * @return string[]
    */
   public function os_ids ()
   {
@@ -1215,7 +1215,7 @@ define ('User_agent_final_browser_temporary_renderer', 5);
  * of these to use during detection.
  * @package webcore
  * @subpackage util
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.7.0
  * @access private
  */

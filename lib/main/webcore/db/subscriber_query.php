@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage db
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/db/query.php');
  * Return {@link SUBSCRIBER}s (which may or may not correspond to {@link USER}s).
  * @package webcore
  * @subpackage db
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  */
 class SUBSCRIBER_QUERY extends QUERY
@@ -65,7 +65,7 @@ class SUBSCRIBER_QUERY extends QUERY
   }
 
   /**
-   * @param string $name
+   * @param string $email
    * @return USER
    */
   public function object_at_email ($email)
@@ -88,7 +88,7 @@ class SUBSCRIBER_QUERY extends QUERY
  * Return a list of subscriptions.
  * @package webcore
  * @subpackage db
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  */
 class SUBSCRIPTION_QUERY extends SUBSCRIBER_QUERY
@@ -105,7 +105,7 @@ class SUBSCRIPTION_QUERY extends SUBSCRIBER_QUERY
 
   /**
    * Restrict to one of the given kind/id combinations.
-   * @param array[string][integer] $choices
+   * @param integer[] $choices
    */
   public function restrict_kinds ($choices)
   {
@@ -117,5 +117,3 @@ class SUBSCRIPTION_QUERY extends SUBSCRIBER_QUERY
     $this->restrict_to_one_of ($restrictions);
   }
 }
-
-?>

@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage util
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.6.0
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/obj/webcore_object.php');
  * Generates a URL to set a cookie value.
  * @package webcore
  * @subpackage util
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.6.0
  */
 class STORED_OPTION extends WEBCORE_OBJECT
@@ -145,10 +145,8 @@ class STORED_OPTION extends WEBCORE_OBJECT
    * Additional arguments to add to the return URL.
    * The url of the current page is used by default. More arguments can be added
    * with {@link add_argument()}.
-   * @var array[string,string]
+   * @var string[]
    * @access private
    */
   protected $_args;
 }
-
-?>

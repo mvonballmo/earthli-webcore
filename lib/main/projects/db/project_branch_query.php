@@ -6,7 +6,7 @@
  * @filesource
  * @package projects
  * @subpackage db
- * @version 3.4.0
+ * @version 3.5.0
  * @since 1.4.1
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/db/object_in_folder_query.php');
  * Retrieves {@link BRANCH}es for a particular {@link PROJECT}.
  * @package projects
  * @subpackage db
- * @version 3.4.0
+ * @version 3.5.0
  * @since 1.4.1
  */
 class PROJECT_BRANCH_QUERY extends OBJECT_IN_SINGLE_FOLDER_QUERY

@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage tree
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/gui/tree.php');
  * A decorator that adds a radio button to each selectable node.
  * @package webcore
  * @subpackage tree
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  * @access private
  */
@@ -78,7 +78,7 @@ class SELECTOR_TREE_DECORATOR extends TREE_DECORATOR
  * A decorator that adds a checkbox to each selectable node.
  * @package webcore
  * @subpackage tree
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  * @access private
  */
@@ -103,7 +103,7 @@ class MULTI_SELECTOR_TREE_DECORATOR extends TREE_DECORATOR
 
   /**
    * @param TREE $tree Decorate this tree.
-   * @param array[integer] $selected_node_ids Initially selected node ids
+   * @param integer[] $selected_node_ids Initially selected node ids
    */
   public function __construct ($tree, $selected_node_ids)
   {

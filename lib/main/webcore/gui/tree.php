@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage tree
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  */
 
@@ -69,7 +69,7 @@ require_once ('webcore/obj/webcore_object.php');
  * @abstract 
  * @package webcore
  * @subpackage tree
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  */
 abstract class TREE extends WEBCORE_OBJECT
@@ -187,15 +187,16 @@ abstract class TREE extends WEBCORE_OBJECT
 
   /**
    * Start rendering a node.
-   * @param object $node
+   * @param TREE_NODE $node
    * @param boolean $is_last Is this a terminal node in this list?
    * @param boolean $has_children Does this node have children?
+   * @param boolean $sibling_has_children
    * @access private
    */
   public function start_node ($node, $is_last, $has_children, $sibling_has_children) {}
   /**
    * Finish rendering a node.
-   * @param object $node
+   * @param TREE_NODE $node
    * @param boolean $is_last Is this a terminal node in this list?
    * @param boolean $has_children Does this node have children?
    * @access private
@@ -204,13 +205,13 @@ abstract class TREE extends WEBCORE_OBJECT
 
   /**
    * Called before sub-nodes are rendered.
-   * @param object $node
+   * @param TREE_NODE $node
    * @access private
    */
   public function pre_draw_children ($node) {}
   /**
    * Called after sub-nodes are rendered.
-   * @param object $node
+   * @param TREE_NODE $node
    * @access private
    */
   public function post_draw_children ($node) {}
@@ -220,7 +221,7 @@ abstract class TREE extends WEBCORE_OBJECT
    * This builds the customary branch structure next to the nodes and provides for indenting. This
    * function will be called once per nesting level for the given node.
    * @param integer $kind Any of the tree constants are valid here.
-   * @param object $node
+   * @param TREE_NODE $node
    * @access private
    */
   public function draw_icon ($kind, $node)
@@ -248,7 +249,7 @@ abstract class TREE extends WEBCORE_OBJECT
    * Render the node itself.
    * Defaults to drawing the 'title' of the node.
    * @see TREE::draw_title()
-   * @param object $node
+   * @param TREE_NODE $node
    * @access private
    */
   public function draw_node ($node)
@@ -260,7 +261,7 @@ abstract class TREE extends WEBCORE_OBJECT
    * Render the title for this node.
    * Defers this function to the 'decorator' passed in to the constructor.
    * @see TREE_DECORATOR
-   * @param object $node
+   * @param TREE_NODE $node
    * @access private
    */
   public function draw_title ($node)
@@ -280,8 +281,10 @@ abstract class TREE extends WEBCORE_OBJECT
 
   /**
    * Render the sub-tree for this node.
-   * @param object $node
+   * @param TREE_NODE $node
    * @param boolean $is_last Is this a terminal node in this list?
+   * @param TREE_NODE[] $nodes
+   * @param boolean $sibling_has_children
    * @access private
    */
   public function iterate_node ($node, $is_last, $nodes, $sibling_has_children)
@@ -354,7 +357,7 @@ abstract class TREE extends WEBCORE_OBJECT
 
   /**
    * Renders the given array of nodes.
-   * @param array [object] $nodes
+   * @param TREE_NODE[] $nodes
    * @access private
    */
   public function iterate_nodes ($nodes)
@@ -398,7 +401,7 @@ abstract class TREE extends WEBCORE_OBJECT
   /**
    * Tracks whether a depth in the tree has an open branch or not.
    * Used to determine whether to draw a 'blank' or a 'line' in that column.
-   * @var array[integer]
+   * @var integer[]
    * @access private
    */
   protected $_stack;
@@ -426,7 +429,7 @@ abstract class TREE extends WEBCORE_OBJECT
  * Handles rendering for specific node types in a {@link TREE}.
  * @package webcore
  * @subpackage tree
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  * @abstract
  * @access private
@@ -587,7 +590,7 @@ abstract class TREE_NODE_INFO extends WEBCORE_OBJECT
  * @see TREE_NODE_INFO
  * @package webcore
  * @subpackage tree
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  * @access private
  */
@@ -640,7 +643,7 @@ class TREE_DECORATOR extends WEBCORE_OBJECT
  * Tree drawn with simple HTML 'div' containers.
  * @package webcore
  * @subpackage tree
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.5.0
  */
 class HTML_TREE extends TREE
@@ -687,11 +690,11 @@ class HTML_TREE extends TREE
    * @param object $node
    * @param boolean $is_last Is this a terminal node in this list?
    * @param boolean $has_children Does this node have children?
+   * @param boolean $sibling_has_children
    * @access private
    */
   public function start_node ($node, $is_last, $has_children, $sibling_has_children)
   {
-    $class = '';
     if ($sibling_has_children)
     {
       $class = $has_children ? 'container' : 'leaf';

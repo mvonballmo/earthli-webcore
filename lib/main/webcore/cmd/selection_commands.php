@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage grid
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  */
 

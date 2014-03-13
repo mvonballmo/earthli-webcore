@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage forms
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.5.0
  */
 
@@ -45,7 +45,7 @@ require_once ('webcore/obj/search.php');
  * A set of fields used by search forms.
  * @package webcore
  * @subpackage forms
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.5.0
  * @abstract
  */
@@ -99,7 +99,7 @@ abstract class SEARCH_FIELDS extends WEBCORE_OBJECT
 
   /**
    * Add sortable values to the array.
-   * @param array[string, string] $values
+   * @param string[] $values
    */
   public function add_sort_fields ($values)
   {
@@ -185,7 +185,7 @@ abstract class SEARCH_FIELDS extends WEBCORE_OBJECT
  * Handles display and processing for date fields.
  * @package webcore
  * @subpackage forms
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.5.0
  */
 class SEARCH_DATE_FIELDS extends SEARCH_FIELDS
@@ -414,7 +414,7 @@ class SEARCH_DATE_FIELDS extends SEARCH_FIELDS
  * Handles display and processing for a user field.
  * @package webcore
  * @subpackage forms
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.5.0
  */
 class SEARCH_USER_FIELDS extends SEARCH_FIELDS
@@ -642,7 +642,7 @@ class SEARCH_USER_FIELDS extends SEARCH_FIELDS
  * Handles display and processing for a searchable text field.
  * @package webcore
  * @subpackage forms
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.5.0
  */
 class SEARCH_TEXT_FIELDS extends SEARCH_FIELDS
@@ -714,7 +714,7 @@ class SEARCH_TEXT_FIELDS extends SEARCH_FIELDS
    * Restrict the query by these fields.
    * @param QUERY $query
    * @param stdClass $obj
-   * @param array[string]
+   * @param string[]
    */
   public function apply_to_query ($query, $obj, &$fields)
   {
@@ -755,7 +755,7 @@ class SEARCH_TEXT_FIELDS extends SEARCH_FIELDS
  * Handles display and processing for sort values.
  * @package webcore
  * @subpackage forms
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.5.0
  */
 class SORT_FIELDS extends SEARCH_FIELDS
@@ -773,7 +773,7 @@ class SORT_FIELDS extends SEARCH_FIELDS
   /**
    * Return text describing this search field.
    * @param stdClass $obj
-   * @param array[string,string] $sort_values
+   * @param string[] $sort_values
    * @return string
    */
   public function description ($obj, $sort_values)
@@ -903,7 +903,7 @@ class SORT_FIELDS extends SEARCH_FIELDS
  * Provides methods for building object searches.
  * @package webcore
  * @subpackage forms
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.5.0
  */
 class SEARCH_OBJECT_FIELDS extends WEBCORE_OBJECT
@@ -1321,7 +1321,7 @@ class SEARCH_OBJECT_FIELDS extends WEBCORE_OBJECT
 
   /**
    * List of sortable values
-   * @return array[string, string]
+   * @return string[]
    */
   protected function _sort_values ()
   {
@@ -1451,7 +1451,7 @@ class SEARCH_OBJECT_FIELDS extends WEBCORE_OBJECT
  * Create a filter for {@link AUDITABLE} objects.
  * @package webcore
  * @subpackage forms
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.5.0
  */
 class SEARCH_AUDITABLE_FIELDS extends SEARCH_OBJECT_FIELDS
@@ -1484,7 +1484,7 @@ class SEARCH_AUDITABLE_FIELDS extends SEARCH_OBJECT_FIELDS
  * Create a filter for {@link AUDITABLE} objects.
  * @package webcore
  * @subpackage forms
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.5.0
  */
 class SEARCH_CONTENT_OBJECT_FIELDS extends SEARCH_AUDITABLE_FIELDS
@@ -1504,7 +1504,7 @@ class SEARCH_CONTENT_OBJECT_FIELDS extends SEARCH_AUDITABLE_FIELDS
  * Create a filter for {@link OBJECT_IN_FOLDER} objects.
  * @package webcore
  * @subpackage forms
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.5.0
  */
 class SEARCH_OBJECT_IN_FOLDER_FIELDS extends SEARCH_CONTENT_OBJECT_FIELDS
@@ -1619,7 +1619,7 @@ class SEARCH_OBJECT_IN_FOLDER_FIELDS extends SEARCH_CONTENT_OBJECT_FIELDS
 
   /**
    * List of sortable values.
-   * @return array[string, string]
+   * @return string[]
    */
   protected function _sort_values ()
   {
@@ -1631,7 +1631,7 @@ class SEARCH_OBJECT_IN_FOLDER_FIELDS extends SEARCH_CONTENT_OBJECT_FIELDS
 
   /**
    * List of possible object states.
-   * @return array[string]
+   * @return string[]
    */
   protected function _states ()
   {
@@ -1836,7 +1836,7 @@ class SEARCH_OBJECT_IN_FOLDER_FIELDS extends SEARCH_CONTENT_OBJECT_FIELDS
  * Create a filter for {@link DRAFTABLE} objects.
  * @package webcore
  * @subpackage forms
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.5.0
  */
 class SEARCH_ENTRY_FIELDS extends SEARCH_OBJECT_IN_FOLDER_FIELDS
@@ -1847,7 +1847,7 @@ class SEARCH_ENTRY_FIELDS extends SEARCH_OBJECT_IN_FOLDER_FIELDS
  * Create a filter for {@link DRAFTABLE} objects.
  * @package webcore
  * @subpackage forms
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.5.0
  */
 class SEARCH_DRAFTABLE_FIELDS extends SEARCH_ENTRY_FIELDS
@@ -1866,7 +1866,7 @@ class SEARCH_DRAFTABLE_FIELDS extends SEARCH_ENTRY_FIELDS
 
   /**
    * List of possible object states.
-   * @return array[string]
+   * @return string[]
    */
   protected function _states ()
   {
@@ -1882,7 +1882,7 @@ class SEARCH_DRAFTABLE_FIELDS extends SEARCH_ENTRY_FIELDS
  * Create a filter for {@link USER}s.
  * @package webcore
  * @subpackage forms
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.5.0
  */
 class SEARCH_USER_OBJECT_FIELDS extends SEARCH_CONTENT_OBJECT_FIELDS
@@ -2004,7 +2004,7 @@ class SEARCH_USER_OBJECT_FIELDS extends SEARCH_CONTENT_OBJECT_FIELDS
  * Create a filter for {@link USER}s.
  * @package webcore
  * @subpackage forms
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.5.0
  */
 class SEARCH_FOLDER_FIELDS extends SEARCH_OBJECT_IN_FOLDER_FIELDS

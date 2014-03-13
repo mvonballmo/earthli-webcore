@@ -6,7 +6,7 @@
  * @filesource
  * @package projects
  * @subpackage obj
- * @version 3.4.0
+ * @version 3.5.0
  * @since 1.7.0
  */
 
@@ -46,7 +46,7 @@ require_once ('webcore/obj/webcore_object.php');
  * @package projects
  * @subpackage obj
  * @access private
- * @version 3.4.0
+ * @version 3.5.0
  * @since 1.7.0
  */
 abstract class RELEASE_UPDATER extends WEBCORE_OBJECT
@@ -63,6 +63,9 @@ abstract class RELEASE_UPDATER extends WEBCORE_OBJECT
    */
   public $branch;
 
+  /**
+   * @param RELEASE $release
+   */
   public function __construct ($release)
   {
     parent::__construct ($release->app);
@@ -94,6 +97,8 @@ abstract class RELEASE_UPDATER extends WEBCORE_OBJECT
     {
       $release_query = $this->branch->release_query ();
       $release_query->set_order ('rel.time_next_deadline DESC');
+
+      /** @var RELEASE[] $releases */
       $releases = $release_query->objects ();
 
       /* Look for this release in the list of releases for this branch. If it's found,
@@ -139,12 +144,12 @@ abstract class RELEASE_UPDATER extends WEBCORE_OBJECT
    */
   protected function _apply_to_entries ($entry_query, $sub_history_item_publication_state, $applier_func)
   {
+    /** @var PROJECT_ENTRY[] $entries */
     $entries = $entry_query->objects ();
-
-    $this_branch_info = new stdClass();
 
     foreach ($entries as $entry)
     {
+      /** @var PROJECT_ENTRY_HISTORY_ITEM $history_item */
       $history_item = $entry->new_history_item ();
       $history_item->compare_branches = true;
       $history_item->publication_state = $sub_history_item_publication_state;
@@ -206,7 +211,7 @@ abstract class RELEASE_UPDATER extends WEBCORE_OBJECT
  * Manages purging of a {@link RELEASE}.
  * @package projects
  * @subpackage obj
- * @version 3.4.0
+ * @version 3.5.0
  * @since 1.7.0
  * @access private
  */
@@ -229,7 +234,7 @@ class RELEASE_PURGER extends RELEASE_UPDATER
  * entry histories properly when applying the change.
  * @package projects
  * @subpackage obj
- * @version 3.4.0
+ * @version 3.5.0
  * @since 1.7.0
  * @access private
  */
@@ -352,7 +357,7 @@ class RELEASE_SHIPPER extends RELEASE_UPDATER
  * Used when purging or shipping a release.
  * @package projects
  * @subpackage obj
- * @version 3.4.0
+ * @version 3.5.0
  * @since 1.9.0
  */
 class UPDATE_RELEASE_PREVIEW_SETTINGS extends FORM_PREVIEW_SETTINGS
@@ -366,22 +371,24 @@ class UPDATE_RELEASE_PREVIEW_SETTINGS extends FORM_PREVIEW_SETTINGS
    */
   protected function _draw_section ($title, $text, $query)
   {
-    $objs = $query->objects ();
-    if (sizeof ($objs))
+    /** @var PROJECT_ENTRY[] $objects */
+    $objects = $query->objects ();
+    if (sizeof ($objects))
     {
       $this->_objects_displayed = true;
   ?>
-  <h3><?php echo sizeof ($objs); ?> <?php echo $title; ?></h3>
+  <h3><?php echo sizeof ($objects); ?> <?php echo $title; ?></h3>
   <p class="notes">
     <?php echo $text; ?>
   </p>
   <?php
-      $this->_draw_entries ($objs);
+      $this->_draw_entries ($objects);
     }
   }
 
   /**
-   * @param array[PROJECT_ENTRY] $entries
+   * @param PROJECT_ENTRY[] $entries
+   * @param bool $show_status
    * @see PROJECT_ENTRY
    * @access private
    */
@@ -398,6 +405,7 @@ class UPDATE_RELEASE_PREVIEW_SETTINGS extends FORM_PREVIEW_SETTINGS
 
   /**
    * @param PROJECT_ENTRY $entry
+   * @param bool $show_status
    * @access private
    */
   protected function _draw_entry ($entry, $show_status = false)

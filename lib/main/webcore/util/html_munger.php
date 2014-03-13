@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage text
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.4.0
  */
 
@@ -45,7 +45,7 @@ require_once ('webcore/util/tags.php');
  * This assumes that the container for this text is an HTML block element.
  * @package webcore
  * @subpackage text
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.5.0
  * @access private
  */
@@ -183,7 +183,7 @@ class HTML_BLOCK_TRANSFORMER extends MUNGER_BLOCK_TRANSFORMER
  * Surrounds paragraphed text with quotes.
  * @package webcore
  * @subpackage text
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.5.0
  * @access private
  */
@@ -228,7 +228,7 @@ class HTML_QUOTE_TRANSFORMER extends HTML_BLOCK_TRANSFORMER
  * Generates HTML paragraphs and line-breaks for text.
  * @package webcore
  * @subpackage text
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.4.0
  * @access private
  */
@@ -263,7 +263,7 @@ class HTML_PARAGRAPH_TRANSFORMER extends HTML_BLOCK_TRANSFORMER
  * A block of items in an {@link HTML_LIST_TRANSFORMER}.
  * @package webcore
  * @subpackage text
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.6.0
  * @access private
  */
@@ -271,7 +271,7 @@ class HTML_LIST_TRANSFORMER_ITEM
 {
   /**
    * Individual items.
-   * @var array[string]
+   * @var string[]
    */
   public $items;
 
@@ -294,7 +294,7 @@ class HTML_LIST_TRANSFORMER_ITEM
  * Generates HTML list items for newlines in text.
  * @package webcore
  * @subpackage text
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.4.0
  * @access private
  */
@@ -452,7 +452,7 @@ class HTML_LIST_TRANSFORMER extends MUNGER_LIST_TRANSFORMER
  * Generates alternating defition terms and definitions for newlines in the text.
  * @package webcore
  * @subpackage text
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.5.0
  * @access private
  */
@@ -526,7 +526,7 @@ class HTML_DEFINITION_LIST_TRANSFORMER extends MUNGER_DEFINITION_LIST_TRANSFORME
  * @package webcore
  * @subpackage text
  * @access private
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.5.0
  */
 class HTML_BASIC_REPLACER extends MUNGER_BASIC_REPLACER
@@ -559,7 +559,7 @@ class HTML_BASIC_REPLACER extends MUNGER_BASIC_REPLACER
  * Adds a link to a footnote, numbering automatically.
  * @package webcore
  * @subpackage text
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.7.1
  * @access private
  */
@@ -584,7 +584,7 @@ class HTML_FOOTNOTE_REFERENCE_REPLACER extends MUNGER_FOOTNOTE_REFERENCE_REPLACE
  * Links a block of text to a previous footnote reference.
  * @package webcore
  * @subpackage text
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.7.1
  * @access private
  */
@@ -617,14 +617,14 @@ class HTML_FOOTNOTE_TEXT_REPLACER extends MUNGER_FOOTNOTE_TEXT_REPLACER
  * @package webcore
  * @subpackage text
  * @access private
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.7.0
  */
 class HTML_PUNCTUATION_CONVERTER extends MUNGER_CONVERTER
 {
   /**
    * Table of punctuation mappings to apply in {@link _convert()}
-   * @var array[string,string]
+   * @var string[]
    */
   public $punctuation_table = array ( '---' => '&mdash;'
                                  , '--' => '&#8211;'
@@ -670,7 +670,7 @@ class HTML_PUNCTUATION_CONVERTER extends MUNGER_CONVERTER
  * @package webcore
  * @subpackage text
  * @access private
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.7.1
  */
 class HTML_SMART_QUOTE_CONVERTER extends MUNGER_CONVERTER
@@ -687,7 +687,7 @@ class HTML_SMART_QUOTE_CONVERTER extends MUNGER_CONVERTER
    * unless it is in the following array. The Unicode characters mentioned in
    * the sample at [http://www.pensee.com/dunham/smartQuotes.html] are commented
    * for now.
-   * @var array[char]
+   * @var string[]
    */
   public $left_chars = array ('(', '[', '{', '<', '=', ';', '.', ',', '"', '\''/*0x00AB, 0x3008, 0x300A*/);
 
@@ -830,14 +830,14 @@ class HTML_SMART_QUOTE_CONVERTER extends MUNGER_CONVERTER
  * @package webcore
  * @subpackage text
  * @access private
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.7.1
  */
 class HTML_LIGATURE_CONVERTER extends MUNGER_CONVERTER
 {
   /**
    * Table of punctuation mappings to apply in {@link _convert()}
-   * @var array[string,string]
+   * @var string[]
    */
   public $punctuation_table = array ( 'ffi' => '&#xfb03;'
                                  , 'ffl' => '&#xfb04;'
@@ -865,7 +865,7 @@ class HTML_LIGATURE_CONVERTER extends MUNGER_CONVERTER
  * @package webcore
  * @subpackage text
  * @access private
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.7.0
  */
 class HTML_HIGHLIGHT_CONVERTER extends MUNGER_CONVERTER
@@ -906,7 +906,7 @@ class HTML_HIGHLIGHT_CONVERTER extends MUNGER_CONVERTER
  * {@link _close_content_area()} for more information.
  * @package webcore
  * @subpackage text
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.7.1
  * @access private
  */
@@ -978,7 +978,7 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
    * content inside all of the extra containers.
    * @see _close_outer_area()
    * @param HTML_MUNGER $munger The transformation context.
-   * @param ARRAY[string,string] $attributes Attributes of a tag; retrieved from the
+   * @param string[] $attributes Attributes of a tag; retrieved from the
    * token.
    * @param boolean $is_block If true, uses DIV tags for extra containers;
    * otherwise, SPAN tags are used.
@@ -1141,6 +1141,8 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
       
       return '<span class="auto-content-caption">' . $this->_caption . '</span>';
     }
+
+    return '';
 	}
 
   /**
@@ -1190,7 +1192,7 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
    * calculated values for common values. Should be closed with {@link
    * _close_inner_area()}.
    * @param HTML_MUNGER $munger The transformation context.
-   * @param array[string,string] $attributes List of attributes for the tag
+   * @param string[] $attributes List of attributes for the tag
    * (retrieved from the token).
    * @param CSS_STYLE_BUILDER $outer_css Styles intended for the bounding
    * container; includes alignment and width.
@@ -1243,7 +1245,7 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
   /**
    * Return the width to use for the tag.
    * @param MUNGER $munger The transformation context.
-   * @param array[string,string] $attributes List of attributes for the tag
+   * @param string[] $attributes List of attributes for the tag
    * (retrieved from the token).
    * @return string
    * @access private
@@ -1256,7 +1258,7 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
   /**
    * Read a value from the attributes list and convert it for placement
    * within an HTML tag attribute value.
-   * @param array[string,string] $attributes List of attributes for the tag
+   * @param string[] $attributes List of attributes for the tag
    * (retrieved from the token).
    * @param string $index Index into the attributes array.
    * @return string
@@ -1286,7 +1288,7 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
    * of the "href").
    * 
    * @param HTML_MUNGER $munger The transformation context.
-   * @param array[string,string] $attributes List of attributes for the tag
+   * @param string[] $attributes List of attributes for the tag
    * (retrieved from the token).
    * @return string
    * @access private
@@ -1324,7 +1326,7 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
    * Return the formatted source as a link or text.
    * 
    * @param HTML_MUNGER $munger The transformation context.
-   * @param array[string,string] $attrs
+   * @param string[] $attrs
    * @param string $href
    * @return string
    * @access private
@@ -1395,13 +1397,13 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
 
   /**
    * Return the URL to use for calculating the source.
-   * @param array[string,string] $attrs
+   * @param string[] $attributes
    * @return string
    * @access private
    */
-  protected function _url_for_source ($attrs)
+  protected function _url_for_source ($attributes)
   {
-    return read_array_index ($attrs, 'href');
+    return read_array_index ($attributes, 'href');
   }
 
   /**
@@ -1428,7 +1430,7 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
  * Includes the width by default.
  * @package webcore
  * @subpackage text
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.7.1
  * @access private
  */
@@ -1447,7 +1449,7 @@ class HTML_DIV_REPLACER extends HTML_BASE_REPLACER
  * Format a block quote with basic properties.
  * @package webcore
  * @subpackage text
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.7.1
  * @access private
  */
@@ -1463,7 +1465,7 @@ class HTML_BLOCK_QUOTE_REPLACER extends HTML_DIV_REPLACER
    * Render the open tag.
    *
    * @param HTML_MUNGER $munger The transformation context.
-   * @param array[string,string] $attributes List of attributes for the tag
+   * @param string[] $attributes List of attributes for the tag
    * (retrieved from the token).
    * @param CSS_STYLE_BUILDER $outer_css Styles intended for the bounding
    * container; includes alignment and width.
@@ -1495,7 +1497,7 @@ class HTML_BLOCK_QUOTE_REPLACER extends HTML_DIV_REPLACER
  * Format a preformatted block with basic properties.
  * @package webcore
  * @subpackage text
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.8.0
  * @access private */
 class HTML_PREFORMATTED_BLOCK_REPLACER extends HTML_DIV_REPLACER
@@ -1513,7 +1515,7 @@ class HTML_PREFORMATTED_BLOCK_REPLACER extends HTML_DIV_REPLACER
  * <li>width [CSS width]: Specifies the width of the box. Useful for floated boxes.</li></ul>
  * @package webcore
  * @subpackage text
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.4.0
  * @access private
  */
@@ -1522,7 +1524,7 @@ class HTML_BOX_REPLACER extends HTML_DIV_REPLACER
   /**
    * Render the beginning of the tag.
    * @param HTML_MUNGER $munger The transformation context.
-   * @param array[string,string] $attributes List of attributes for the tag
+   * @param string[] $attributes List of attributes for the tag
    * (retrieved from the token).
    * @param CSS_STYLE_BUILDER $outer_css Styles intended for the bounding
    * container; includes alignment and width.
@@ -1583,7 +1585,7 @@ class HTML_BOX_REPLACER extends HTML_DIV_REPLACER
  * <li>width [CSS width]: Specifies the width of the box. Useful for floated boxes.</li></ul>
  * @package webcore
  * @subpackage text
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.4.0
  * @access private
  */
@@ -1592,8 +1594,7 @@ class HTML_MUNGER_CODE_REPLACER extends HTML_PREFORMATTED_BLOCK_REPLACER
   /**
    * Render the beginning of the tag.
    * @param HTML_MUNGER $munger The transformation context.
-   * @param array[string,string] $attrs List of attributes for the tag
-   * (retrieved from the token).
+   * @param string[] $attributes List of attributes for the tag (retrieved from the token).
    * @param CSS_STYLE_BUILDER $outer_css Styles intended for the bounding
    * container; includes alignment and width.
    * @param CSS_STYLE_BUILDER $inner_css Styles intended for the inner
@@ -1636,7 +1637,7 @@ class HTML_MUNGER_CODE_REPLACER extends HTML_PREFORMATTED_BLOCK_REPLACER
  * <li>href: URL to which to link. Adds a link wrapper around the image.</li></ul>
  * @package webcore
  * @subpackage text
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.7.1
  * @access private
  */
@@ -1668,20 +1669,20 @@ class HTML_INLINE_ASSET_REPLACER extends HTML_BASE_REPLACER
 
   /**
    * Return the URL to use for calculating the source.
-   * @param array[string,string] $attrs
+   * @param string[] $attributes
    * @return string
    * @access private
    */
-  protected function _url_for_source ($attrs)
+  protected function _url_for_source ($attributes)
   {
-    $attachment_name = read_array_index ($attrs, 'attachment');
+    $attachment_name = read_array_index ($attributes, 'attachment');
     if ($attachment_name)
     {
       $Result = '{att_link}/' . $attachment_name;
     }
     else
     {
-      $Result = read_array_index ($attrs, 'href');
+      $Result = read_array_index ($attributes, 'href');
     }
     return $Result;
   }
@@ -1696,7 +1697,7 @@ class HTML_INLINE_ASSET_REPLACER extends HTML_BASE_REPLACER
  * <li>href: URL to which to link. Adds a link wrapper around the image.</li></ul>
  * @package webcore
  * @subpackage text
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.4.0
  * @access private
  */
@@ -1705,7 +1706,7 @@ class HTML_IMAGE_REPLACER extends HTML_INLINE_ASSET_REPLACER
   /**
    * Render the open tag for the image and link.
    * @param HTML_MUNGER $munger The transformation context.
-   * @param array[string,string] $attributes List of attributes for the tag
+   * @param string[] $attributes List of attributes for the tag
    * (retrieved from the token).
    * @param CSS_STYLE_BUILDER $outer_css Styles intended for the bounding
    * container; includes alignment and width.
@@ -1760,7 +1761,7 @@ class HTML_IMAGE_REPLACER extends HTML_INLINE_ASSET_REPLACER
   /**
    * Return the width to use for the tag.
    * @param MUNGER $munger The transformation context.
-   * @param array[string,string] $attributes List of attributes for the tag
+   * @param string[] $attributes List of attributes for the tag
    * (retrieved from the token).
    * @return string
    * @access private
@@ -1834,7 +1835,7 @@ class HTML_IMAGE_REPLACER extends HTML_INLINE_ASSET_REPLACER
  * <li>src: URL for the image itself.</li></ul>
  * @package webcore
  * @subpackage text
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.7.1
  * @access private
  */
@@ -1843,7 +1844,7 @@ class HTML_MEDIA_REPLACER extends HTML_INLINE_ASSET_REPLACER
   /**
    * Render the open tag for the image and link.
    * @param HTML_MUNGER $munger The transformation context.
-   * @param array[string,string] $attributes List of attributes for the tag
+   * @param string[] $attributes List of attributes for the tag
    * (retrieved from the token).
    * @param CSS_STYLE_BUILDER $outer_css Styles intended for the bounding
    * container; includes alignment and width.
@@ -1873,8 +1874,7 @@ class HTML_MEDIA_REPLACER extends HTML_INLINE_ASSET_REPLACER
   /**
    * Return the width to use for the tag.
    * @param MUNGER $munger The transformation context.
-   * @param array[string,string] $attrs List of attributes for the tag
-   * (retrieved from the token).
+   * @param string[] $attributes List of attributes for the tag (retrieved from the token).
    * @return string
    * @access private
    */
@@ -1887,7 +1887,7 @@ class HTML_MEDIA_REPLACER extends HTML_INLINE_ASSET_REPLACER
    * Return a representation for this url and attributes.
    * @param HTML_MUNGER $munger The transformation context.
    * @param string $src The url to the movie.
-   * @param array[string,string] $attributes List of attributes for the tag
+   * @param string[] $attributes List of attributes for the tag
    * (retrieved from the token).
    * @param CSS_STYLE_BUILDER $outer_css Styles intended for the bounding
    * container; includes alignment and width.
@@ -1906,7 +1906,7 @@ class HTML_MEDIA_REPLACER extends HTML_INLINE_ASSET_REPLACER
    * Return a control to display the movie.
    * @param HTML_MUNGER $munger The transformation context.
    * @param string $src The url to the movie.
-   * @param array[string,string] $attributes List of attributes for the tag
+   * @param string[] $attributes List of attributes for the tag
    * (retrieved from the token).
    * @param CSS_STYLE_BUILDER $outer_css Styles intended for the bounding
    * container; includes alignment and width.
@@ -1954,7 +1954,7 @@ class HTML_MEDIA_REPLACER extends HTML_INLINE_ASSET_REPLACER
  * <li>href: URL to which to link.</li></ul>
  * @package webcore
  * @subpackage text
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.4.0
  * @access private
  */
@@ -2036,7 +2036,7 @@ class HTML_LINK_REPLACER extends HTML_BASE_REPLACER
  * <ul><li>id: ID for the anchor</li></ul>
  * @package webcore
  * @subpackage text
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.8.0
  * @access private
  */
@@ -2066,7 +2066,7 @@ class HTML_ANCHOR_REPLACER extends MUNGER_REPLACER
  * <ul><li>level: Kind of heading; analogous to HTML heading level. Default is level 3. </li></ul>
  * @package webcore
  * @subpackage text
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.5.0
  * @access private
  */
@@ -2118,7 +2118,7 @@ class HTML_HEADING_REPLACER extends MUNGER_REPLACER
  * Formats common tag-based format to HTML.
  * @package webcore
  * @subpackage text
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  */
 class HTML_MUNGER extends MUNGER
@@ -2233,7 +2233,7 @@ class HTML_MUNGER extends MUNGER
  * and {@link HTML_TITLE_MUNGER}.
  * @package webcore
  * @subpackage text
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.8.0
  */
 class HTML_BASE_MUNGER extends HTML_MUNGER
@@ -2270,7 +2270,7 @@ class HTML_BASE_MUNGER extends HTML_MUNGER
  * Provides default support for mapping lists, preformatted, quoted and box blocks to standard HTML.
  * @package webcore
  * @subpackage text
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.2.1
  */
 class HTML_TEXT_MUNGER extends HTML_BASE_MUNGER
@@ -2347,7 +2347,7 @@ class HTML_TEXT_MUNGER extends HTML_BASE_MUNGER
  * HTML paragraphs and other blocks are not generated with this formatter.
  * @package webcore
  * @subpackage text
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.4.0
  */
 class HTML_TITLE_MUNGER extends HTML_BASE_MUNGER

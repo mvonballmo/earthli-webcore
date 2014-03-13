@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage text
- * @version 3.4.0
+ * @version 3.5.0
  * @since 2.5.0
  */
 
@@ -47,7 +47,7 @@ require_once ('webcore/util/munger.php');
  * 
  * @package webcore
  * @subpackage text
- * @version 3.4.0
+ * @version 3.5.0
  * @since 3.2.0
  */
 class MUNGER_STRIPPER extends MUNGER_PARSER
@@ -86,12 +86,12 @@ class MUNGER_STRIPPER extends MUNGER_PARSER
   {
     $this->_known_tags[strtolower($name)] = $has_end_tag;
   }
-  
+
   /**
    * Perform pre-processing on the input to consume.
-   * Called from {@link _process()} for before initializing the {@link
-   * $_tokenizer}.
+   * Called from {@link _process()} for before initializing the {@link $_tokenizer}.
    * @var string $input
+   * @return string
    * @access private
    */
   protected function _prepare_input($input)
@@ -102,6 +102,7 @@ class MUNGER_STRIPPER extends MUNGER_PARSER
   /**
    * Should this tag be converted to text?
    * @var MUNGER_TOKEN $token
+   * @return bool
    * @access private
    */
   protected function _treat_as_text ($token)
@@ -118,7 +119,7 @@ class MUNGER_STRIPPER extends MUNGER_PARSER
   }
 
   /**
-   * @var array[string,MUNGER_VALIDATOR_TAG_INFO]
+   * @var MUNGER_VALIDATOR_TAG_INFO[]
    * @access private
    */
   protected $_known_tags;
@@ -134,7 +135,7 @@ class MUNGER_STRIPPER extends MUNGER_PARSER
  * Common base for all tag-strippers, single- or multi-line.
  * @package webcore
  * @subpackage text
- * @version 3.4.0
+ * @version 3.5.0
  * @since 3.2.0
  */
 class MUNGER_BASE_STRIPPER extends MUNGER_STRIPPER
@@ -162,11 +163,9 @@ class MUNGER_BASE_STRIPPER extends MUNGER_STRIPPER
  * Default stripper for {@link HTML_MUNGER} and {@link PLAIN_TEXT_MUNGER}.
  * @package webcore
  * @subpackage text
- * @version 3.4.0
+ * @version 3.5.0
  * @since 3.2.0
  */
 class MUNGER_DEFAULT_TITLE_STRIPPER extends MUNGER_BASE_STRIPPER
 {
 }
-
-?>
