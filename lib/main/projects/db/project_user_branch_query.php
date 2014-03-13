@@ -76,5 +76,3 @@ class PROJECT_USER_BRANCH_QUERY extends USER_ENTRY_QUERY
     return new $class_name ($this->app);
   }
 }
-
-?>

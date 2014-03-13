@@ -228,11 +228,39 @@ abstract class OBJECT_IN_SINGLE_FOLDER_QUERY extends OBJECT_IN_FOLDER_QUERY
     $obj->set_parent_folder ($this->_folder);
   }
 
+
+  /**
+   * @param object $obj
+   * @access private
+   */
+  protected function _obj_set_sub_objects_cached($obj)
+  {
+    // NOP
+  }
+
+  /**
+   * @param object $parent
+   * @param object $obj
+   * @access private
+   */
+  protected function _obj_connect_to_parent($parent, $obj)
+  {
+    // NOP
+  }
+
+  /**
+   * @param object $obj
+   * @return object[]
+   * @access private
+   */
+  protected function _obj_sub_objects($obj)
+  {
+    // NOP
+  }
+
   /**
    * @var FOLDER
    * @access private
    */
   protected $_folder;
 }
-
-?>
