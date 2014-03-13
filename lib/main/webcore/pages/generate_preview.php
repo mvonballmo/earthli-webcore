@@ -10,6 +10,4 @@ $munger = $App->html_text_formatter();
 $entry_query = $App->login->all_entry_query();
 $obj = $entry_query->object_at_id($contentObjectId);
 
-$output = $munger->transform($input, $obj);
-
-echo $output;
+echo $munger->transform($input, $obj);

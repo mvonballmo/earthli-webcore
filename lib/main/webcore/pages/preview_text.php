@@ -34,4 +34,3 @@ http://www.earthli.com/software/webcore
   echo $munger->transform ($text);
 
   $Page->finish_display ();
-?>

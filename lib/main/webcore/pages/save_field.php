@@ -14,9 +14,11 @@ if ($obj != null)
 {
   $obj->description = $input;
 
-  $obj->store();
+  $obj->store_as_is();
 
   $App->show_message('Data was saved.', 'info');
+
+  echo $munger->transform($input, $obj);
 }
 else
 {

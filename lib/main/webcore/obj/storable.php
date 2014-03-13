@@ -83,7 +83,6 @@ abstract class STORABLE extends RENDERABLE
   public function store ()
   {
     $this->_update_login ();
-
     $this->_pre_store ();
 
     if ($this->exists ())
