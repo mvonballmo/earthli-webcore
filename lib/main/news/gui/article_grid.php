@@ -162,14 +162,13 @@ class BASE_ARTICLE_GRID extends CONTENT_OBJECT_GRID
           echo $obj->description_as_html ($munger);
           ?>
         </div>
-    </div>
     <?php
     $this->_display_finish_minimal_commands_block();
-    ?>
-  </div>
-  <?php
     }
-  }  
+    ?>
+    </div>
+  <?php
+  }
 }
 
 /**
