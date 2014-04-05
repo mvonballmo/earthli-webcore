@@ -377,39 +377,39 @@ pre > code {
 .info-box-bottom {
   clear: both;
 }
+td.object-in-list + td.object-in-list {
+  /* put space before a cell that follows another in a row */
+  padding-left: 30px;
+}
 .info-box-top,
 .info-box-bottom,
 .subdued {
   color: #dimmest_text_color;
 }
-.info-box-top div + div,
-.info-box-bottom div + div,
-.subdued div + div {
-  margin-top: 3px;
-}
-td.object-in-list + td.object-in-list {
-  /* put space before a cell that follows another in a row */
-  padding-left: 30px;
+.info-box-top p,
+.info-box-bottom p,
+.subdued p,
+.info-box-top div,
+.info-box-bottom div,
+.subdued div,
+.info-box-top pre,
+.info-box-bottom pre,
+.subdued pre,
+.info-box-top ul,
+.info-box-bottom ul,
+.subdued ul {
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 .info-box-top {
   line-height: normal;
   border-bottom: 1px solid #c2c2c2;
   margin-bottom: 15px;
 }
-.info-box-top p:last-child,
-.info-box-top pre:last-child,
-.info-box-top ul:last-child {
-  margin-bottom: 5px;
-}
 .info-box-bottom {
   line-height: normal;
   border-top: 1px solid #c2c2c2;
   margin-top: 15px;
-}
-.info-box-bottom p:first-child,
-.info-box-bottom pre:first-child,
-.info-box-bottom ul:first-child {
-  margin-top: 5px;
 }
 .graph-foreground {
   display: inline-block;

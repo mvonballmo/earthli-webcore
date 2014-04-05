@@ -28,7 +28,7 @@ http://www.earthli.com/software/webcore
 
 /* @group HTML Base */
 
-body 
+body
 {
   margin: 0;
   padding: 0;
@@ -203,7 +203,7 @@ dl
   margin: @standard_spacing 0;
 }
 
-dd 
+dd
 {
   margin: @small_spacing 0 @standard_spacing 1.5em
 }
@@ -220,7 +220,7 @@ a:hover
   text-decoration: underline
 }
 
-a img 
+a img
 {
   border: 0
 }
@@ -257,12 +257,12 @@ kbd
 
 .shell
 {
-	font-family: monospace;
-	background-color: #333;
-	border: @hairline_border_width solid @standard_border;
-	color: white; 
-	padding: 0 @small_spacing;
-	display: block;
+  font-family: monospace;
+  background-color: #333;
+  border: @hairline_border_width solid @standard_border;
+  color: white;
+  padding: 0 @small_spacing;
+  display: block;
 }
 
 pre
@@ -307,7 +307,7 @@ pre > code
 				footer
 */
 
-.page 
+.page
 {
   max-width: @page_max_width;
   min-width: @page_min_width;
@@ -320,13 +320,13 @@ pre > code
   padding: 0 @standard_spacing;
 }
 
-.banner 
+.banner
 {
   padding-top: @standard_spacing;
   padding-left: @standard_spacing;
 }
 
-.banner-header 
+.banner-header
 {
   position: relative;
 }
@@ -344,7 +344,7 @@ pre > code
   height: 100%;
 }
 
-.banner-content 
+.banner-content
 {
   position: absolute;
   right: 0;
@@ -357,7 +357,7 @@ pre > code
   margin: 0;
 }
 
-.banner-title 
+.banner-title
 {
   display: inline-block;
   font-weight: bold;
@@ -395,7 +395,7 @@ pre > code
   background-repeat: no-repeat;
 }
 
-.login-status 
+.login-status
 {
   margin-top: 10px;
 }
@@ -441,7 +441,7 @@ pre > code
   font-weight: normal;
 }
 
-.page-body 
+.page-body
 {
   margin-bottom: @standard_spacing;
   clear: both
@@ -544,7 +544,7 @@ pre > code
 
 .chart + .chart
 {
-	margin-top: @standard_spacing;
+  margin-top: @standard_spacing;
 }
 
 .chart-body
@@ -561,24 +561,13 @@ pre > code
   padding: .5em .1em;
 }
 
-.object-in-list, .info-box-top, .info-box-bottom
+.object-in-list,
+.info-box-top,
+.info-box-bottom
 {
   clear: both;
 }
 
-.info-box-top,
-.info-box-bottom,
-.subdued
-{
-  color: #dimmest_text_color;
-}
-
-.info-box-top div + div,
-.info-box-bottom div + div,
-.subdued div + div
-{
-  margin-top: 3px;
-}
 
 td.object-in-list + td.object-in-list
 {
@@ -587,18 +576,27 @@ td.object-in-list + td.object-in-list
   padding-left: 30px;
 }
 
+.info-box-top,
+.info-box-bottom,
+.subdued
+{
+  color: #dimmest_text_color;
+
+  p,
+  div,
+  pre,
+  ul
+  {
+    margin-top: @small_spacing;
+    margin-bottom: @small_spacing;
+  }
+}
+
 .info-box-top
 {
   line-height: normal;
   border-bottom: @hairline_border_width solid @standard_border;
   margin-bottom: @standard_spacing;
-
-  p:last-child,
-  pre:last-child,
-  ul:last-child
-  {
-    margin-bottom: @small_spacing;
-  }
 }
 
 .info-box-bottom
@@ -606,22 +604,15 @@ td.object-in-list + td.object-in-list
   line-height: normal;
   border-top: @hairline_border_width solid @standard_border;
   margin-top: @standard_spacing;
-
-  p:first-child,
-  pre:first-child,
-  ul:first-child
-  {
-    margin-top: @small_spacing;
-  }
 }
 
-.graph-foreground 
+.graph-foreground
 {
   display: inline-block;
   background-color: #AAA;
 }
 
-.graph-background 
+.graph-background
 {
   line-height: 0;
 }
@@ -1100,38 +1091,38 @@ a.button:link, a.button:visited
 
 /* @group Calendar */
 
-.calendar 
+.calendar
 {
   border: none;
 }
 
-.calendar-banner, .calendar-footer 
+.calendar-banner, .calendar-footer
 {
   padding: .1em;
 }
 
-.calendar-today 
+.calendar-today
 {
-  
+
 }
 
-.calendar-footer 
+.calendar-footer
 {
   padding-top: .5em;
 }
 
-.calendar-title 
+.calendar-title
 {
   text-align: center;
   font-weight: bold;
 }
 
-.calendar-body 
+.calendar-body
 {
   border-collapse: collapse;
 }
 
-.calendar-weekday 
+.calendar-weekday
 {
   font-style: italic;
   padding: .1em;
@@ -1169,12 +1160,12 @@ a.button:link, a.button:visited
   font-style: italic
 }
 
-.reserved 
+.reserved
 {
   font-weight: bold
 }
 
-.selected 
+.selected
 {
   font-weight: normal;
 }
@@ -1210,13 +1201,13 @@ a.button:link, a.button:visited
   border-color: #A00000;
 }
 
-.warning 
+.warning
 {
   background-color: #f0d295;
   border-color: #A06000;
 }
 
-.caution 
+.caution
 {
   background-color: #FFFFCC;
   border-color: #A0A000;
@@ -1236,13 +1227,13 @@ span.error, span.caution, span.warning
 
 /* @group Quotes */
 
-.quote 
+.quote
 {
   display: block;
   margin: @standard_spacing 0;
 }
 
-.quote-block 
+.quote-block
 {
   padding-left: @standard_spacing;
   border-left: @thick_border_width solid @standard_border;
@@ -1251,12 +1242,12 @@ span.error, span.caution, span.warning
 
 .quote-block p:first-child
 {
-	margin-top: 0;
+  margin-top: 0;
 }
 
 .quote-block p:last-child
 {
-	margin-bottom: 0;
+  margin-bottom: 0;
 }
 
 .pullquote
@@ -1330,7 +1321,7 @@ ul.minimal li
   padding: 0;
 }
 
-p div:first-child img:first-child 
+p div:first-child img:first-child
 {
   margin-top: 1.5em;
 }
@@ -1343,7 +1334,7 @@ blockquote p:first-child,
   margin: 0;
 }
 
-.inline-icon 
+.inline-icon
 {
   vertical-align: middle;
 }
@@ -1369,19 +1360,19 @@ blockquote p:first-child,
   display: block;
 }
 
-.footnote-number 
+.footnote-number
 {
   vertical-align: super;
   font-size: 75%;
   line-height: 1em;
 }
 
-.footnote-return 
+.footnote-return
 {
-  
+
 }
 
-.footnote-reference 
+.footnote-reference
 {
   display: block;
   margin-top: .5em;
@@ -1401,18 +1392,18 @@ blockquote p:first-child,
 
 /* @end */
 
-.date-time 
+.date-time
 {
 }
 
-.vertical-separator 
+.vertical-separator
 {
   border-left: @hairline_border_width solid #000000;
   empty-cells: show;
   width: .1em
 }
 
-.horizontal-separator 
+.horizontal-separator
 {
   border-bottom: @hairline_border_width solid @standard_border;
   empty-cells: show;
@@ -1421,10 +1412,10 @@ blockquote p:first-child,
   display: block;
 }
 
-hr 
+hr
 {
-	color: transparent;
-	border: 0;
+  color: transparent;
+  border: 0;
   border-bottom: @hairline_border_width solid @standard_border;
   empty-cells: show;
   height: .1em;
@@ -1432,7 +1423,7 @@ hr
   display: block;
 }
 
-.comment-block 
+.comment-block
 {
   margin-left: 35px
 }
@@ -1444,7 +1435,7 @@ hr
   padding-left: 20px;
 }
 
-.description 
+.description
 {
   margin-top: @small_spacing;
   margin-bottom: @standard_spacing;
@@ -1460,12 +1451,12 @@ hr
   font-size: 150%
 }
 
-.field 
+.field
 {
   font-weight: bold
 }
 
-.frame 
+.frame
 {
   border: @hairline_border_width solid @standard_border;
 }
@@ -1491,23 +1482,23 @@ hr
   margin-left: 53px;
 }
 
-.notes 
+.notes
 {
   font-style: italic;
   font-weight: normal;
 }
 
-.notes em 
+.notes em
 {
   font-weight: bold;
 }
 
-.print-item-box 
+.print-item-box
 {
   text-align: center;
 }
 
-.reference 
+.reference
 {
   font-style: italic
 }
@@ -1552,7 +1543,7 @@ hr
   margin-bottom: 0;
 }
 
-.tree-node 
+.tree-node
 {
   white-space: nowrap;
   margin: @small_spacing 0;
@@ -1560,15 +1551,15 @@ hr
 
 .tree-node img
 {
-	padding-right: .25em;
+  padding-right: .25em;
 }
 
-.message-box 
+.message-box
 {
   margin: 1em;
 }
 
-.message-title 
+.message-title
 {
   font-weight: bold;
 }

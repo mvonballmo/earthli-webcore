@@ -114,6 +114,7 @@ abstract class USER_ENTRY_QUERY extends OBJECT_IN_FOLDER_QUERY
    * Return the table to use for the given privilege set.
    * @param string $set_name Can be {@link Privilege_set_folder}, {@link
    * Privilege_set_entry} or {@link Privilege_set_comment}.
+   * @throws UNKNOWN_VALUE_EXCEPTION
    * @return string
    * @access private
    */
@@ -148,6 +149,35 @@ abstract class USER_ENTRY_QUERY extends OBJECT_IN_FOLDER_QUERY
   protected function _prepare_object ($obj)
   {
     $obj->set_parent_folder ($this->_user->folder_at_id ($this->db->f ('folder_id')));
+  }
+
+  /**
+   * @param object $obj
+   * @access private
+   */
+  protected function _obj_set_sub_objects_cached($obj)
+  {
+    // NOP
+  }
+
+  /**
+   * @param object $parent
+   * @param object $obj
+   * @access private
+   */
+  protected function _obj_connect_to_parent($parent, $obj)
+  {
+    // NOP
+  }
+
+  /**
+   * @param object $obj
+   * @return object[]
+   * @access private
+   */
+  protected function _obj_sub_objects($obj)
+  {
+    // NOP
   }
 
   /**
