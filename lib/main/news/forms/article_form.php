@@ -90,10 +90,10 @@ class ARTICLE_FORM extends DRAFTABLE_ENTRY_FORM
     $renderer->set_width ('700px');
     $renderer->default_control_height = '550px';
 
-    echo '<div id="inline_preview_message" class="text-flow"></div>';
-    echo '<div class="preview" id="inline_preview_block" style="display: none; margin-right: 15px; position: absolute; left: 950px; height: 700px; overflow: auto">';
+    echo '<div class="preview" id="inline_preview_block" style="display: none; margin-right: 15px; position: absolute; left: 950px">';
     echo '<div class="preview-title">Preview</div>';
-    echo '<div class="text-flow" id="inline_preview"></div>';
+    echo '<div id="inline_preview_message" class="text-flow"></div>';
+    echo '<div class="text-flow" id="inline_preview" style="height: 700px; overflow: auto"></div>';
     echo '</div>';
 
     parent::_draw_controls ($renderer);
