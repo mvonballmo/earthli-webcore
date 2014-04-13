@@ -1061,17 +1061,30 @@ class FORM_RENDERER extends CONTROLS_RENDERER
     {
       $show_preview = $this->preview_enabled;
     }
+
     if ($show_preview)
     {
-      $buttons [] = $this->submit_button_as_html ('Preview', '{icons}buttons/view', 'preview_form');
-      $buttons [] = $this->javascript_button_as_html('Inline preview', 'preview_field(\'' . $this->_form->name . '\', \'' . 'description' . '\')', '{icons}buttons/view');
+      if ($this->_form->object_exists())
+      {
+        $buttons [] = $this->javascript_button_as_html('Preview', 'preview_field(\'' . $this->_form->name . '\', \'' . 'description' . '\')', '{icons}buttons/view');
+      }
+      else
+      {
+        $buttons [] = $this->submit_button_as_html ('Preview', '{icons}buttons/view', 'preview_form');
+      }
     }
 
     if ($this->drafts_enabled)
     {
       $buttons [] = $this->submit_button_as_html ('Save as draft', '{icons}buttons/save', 'save_as_draft');
-//      $buttons [] = $this->submit_button_as_html ('Quick Save', '{icons}buttons/quick_save', 'quick_save_and_reload');
-      $buttons [] = $this->javascript_button_as_html('Inline save', 'save_field(\'' . $this->_form->name . '\', \'' . 'description' . '\')', '{icons}buttons/quick_save');
+      if ($this->_form->object_exists())
+      {
+        $buttons [] = $this->javascript_button_as_html('Quick save', 'save_field(\'' . $this->_form->name . '\', \'' . 'description' . '\')', '{icons}buttons/quick_save');
+      }
+      else
+      {
+        $buttons [] = $this->submit_button_as_html ('Quick Save', '{icons}buttons/quick_save', 'quick_save_and_reload');
+      }
     }
     
     if (isset($this->app))

@@ -383,7 +383,15 @@ function preview_field (form_name, field_name)
   {
     if (request.readyState==4 && request.status==200)
     {
-      document.getElementById("inline_preview").innerHTML=request.responseText;
+      var data = JSON.parse(request.responseText);
+
+      var previewBlock = document.getElementById("inline_preview_block");
+      var previewArea = document.getElementById("inline_preview");
+      var messageArea = document.getElementById("inline_preview_message");
+
+      previewBlock.style.display = 'block';
+      previewArea.innerHTML=data.text;
+      messageArea.innerHTML=data.message;
     }
   }
 }
@@ -404,11 +412,42 @@ function save_field (form_name, field_name)
   {
     if (request.readyState==4 && request.status==200)
     {
-      document.getElementById("inline_preview").innerHTML=request.responseText;
+      var data = JSON.parse(request.responseText);
+      form['time_modified'].value = data.modified;
+
+      var previewBlock = document.getElementById("inline_preview_block");
+      var previewArea = document.getElementById("inline_preview");
+      var messageArea = document.getElementById("inline_preview_message");
+
+      previewBlock.style.display = 'block';
+      previewArea.innerHTML=data.text;
+      messageArea.innerHTML=data.message;
     }
   }
 }
 
+//document.onkeydown = function(e) {
+//  if (!e) e = window.event;
+//
+//  if (e.shiftKey && e.ctrlKey)
+//  {
+//    var keynum = e.keyCode ? e.keyCode : e.which; // IE vs others
+//
+//    switch (keynum)
+//    {
+//      case 'p':
+//
+//        return false; //"return false" will avoid further events
+//      case 39: case 40: //key is left or down
+//      if (currImage >= maxImages) break; //if last do nothing
+//      goToNext(); // function which goes to next image
+//      return false; //"return false" will avoid further events
+//    }
+//  }
+//
+//  return; //using "return" other attached events will execute
+//};
+//
 function preview_form (form_name, submit_all, submitted_name, preview_name)
 {
 	submit_form (form_name, submit_all, preview_name, submitted_name);

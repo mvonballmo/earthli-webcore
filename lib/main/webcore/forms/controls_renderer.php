@@ -63,8 +63,6 @@ class CONTROLS_RENDERER extends WEBCORE_OBJECT
   public function __construct ($context)
   {
     parent::__construct ($context);
-    $browser = $this->env->browser ();
-    $this->_supports_css_2 = $browser->supports (Browser_CSS_2);
   }
 
   /**
@@ -86,27 +84,21 @@ class CONTROLS_RENDERER extends WEBCORE_OBJECT
   
   /**
    * Draw the list of buttons as HTML.
-   * Draws a series of buttons previously renderered with {@link javascript_button_as_html()},
+   * Draws a series of buttons previously rendered with {@link javascript_button_as_html()},
    * {@link button_as_html()} or {@link submit_button_as_html()}.
    * @param string[] $buttons
    */
   public function draw_buttons ($buttons)
   {
-    $btn_drawn = false;
     foreach ($buttons as $button)
     {
       echo $button;
-      if ($btn_drawn && ! $this->_supports_css_2)
-      {
-        echo '&nbsp';
-      }
-      $btn_drawn = true;
     }
   }
 
   /**
    * Draw the list of buttons in a row.
-   * Draws a series of buttons previously renderered with {@link javascript_button_as_html()},
+   * Draws a series of buttons previously rendered with {@link javascript_button_as_html()},
    * {@link button_as_html()} or {@link submit_button_as_html()}.
    * @param string[] $buttons
    * @param string $title Title to show for this row.
@@ -189,6 +181,7 @@ class CONTROLS_RENDERER extends WEBCORE_OBJECT
     {
       $script = 'submit_form';
     }
+
     return $this->javascript_button_as_html (
       $title, 
       $script . ' (\'' . $this->_form->name . '\', ' . $this->submit_all_fields . ', ' . "'" . 
@@ -199,10 +192,4 @@ class CONTROLS_RENDERER extends WEBCORE_OBJECT
       'submit'
     );
   }
-
-  /**
-   * Can CSS 2 be used to render controls?
-   * @var boolean
-   */
-  protected $_supports_css_2;
 }
