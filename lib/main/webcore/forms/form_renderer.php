@@ -1066,7 +1066,8 @@ class FORM_RENDERER extends CONTROLS_RENDERER
     {
       if ($this->_form->object_exists())
       {
-        $buttons [] = $this->javascript_button_as_html('Preview', 'preview_field(\'' . $this->_form->name . '\', \'' . 'description' . '\')', '{icons}buttons/view');
+        $url = $this->app->resolve_file('{app}/generate_preview.php');
+        $buttons [] = $this->javascript_button_as_html('Preview', 'execute_field(\'' . $url . '\', \'' . $this->_form->name . '\', \'' . 'description' . '\')', '{icons}buttons/view');
       }
       else
       {
@@ -1079,7 +1080,8 @@ class FORM_RENDERER extends CONTROLS_RENDERER
       $buttons [] = $this->submit_button_as_html ('Save as draft', '{icons}buttons/save', 'save_as_draft');
       if ($this->_form->object_exists())
       {
-        $buttons [] = $this->javascript_button_as_html('Quick save', 'save_field(\'' . $this->_form->name . '\', \'' . 'description' . '\')', '{icons}buttons/quick_save');
+        $url = $this->app->resolve_file('{app}/save_field.php');
+        $buttons [] = $this->javascript_button_as_html('Quick save', 'execute_field(\'' . $url . '\', \'' . $this->_form->name . '\', \'' . 'description' . '\')', '{icons}buttons/quick_save');
       }
       else
       {
