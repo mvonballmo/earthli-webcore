@@ -346,12 +346,6 @@ class FORM_TEXT_CONTROL_OPTIONS
 class FORM_RENDERER extends CONTROLS_RENDERER
 {
   /**
-   * Is the form centered in its parent?
-   * @var boolean
-   */
-  public $centered = false;
-
-  /**
    * Name of the icon to use for the 'required' mark.
    * Preferred over {@link required_text}.
    * @var string
@@ -481,6 +475,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
 
   /**
    * Return a helper class for formatting check boxes.
+   * @param string $id
    * @return CHECK_BOX_ITEM
    */
   public function make_check_properties ($id = '')
@@ -507,10 +502,6 @@ class FORM_RENDERER extends CONTROLS_RENDERER
     $this->_required_mark_used = false;
     $this->_column_started = false;
 
-    if ($this->centered)
-    {
-      $style [] = 'margin: auto';
-    }
     if (isset ($this->width) && $this->width)
     {
       $style [] = 'width: ' . $this->width;
@@ -620,11 +611,20 @@ class FORM_RENDERER extends CONTROLS_RENDERER
       $Result = $this->context->make_layer ($id);
       $Result->visible = $visible;
       $toggle = $Result->toggle_as_html ();
+      $description = sprintf ($description, 'Use the arrow to the left to show ');
       if (! empty ($toggle))
       {
-        $description = $toggle . ' ' . $description;
+        $box = $this->context->make_box_renderer ();
+        ob_start ();
+        $box->start_column_set ();
+        $box->new_column_of_type ('left-column');
+        echo $toggle;
+        $box->new_column ('width: 100%');
+        echo $description;
+        $box->finish_column_set ();
+        $description = ob_get_contents ();
+        ob_end_clean ();
       }
-      $description = sprintf ($description, 'Use the arrow to the left to show ');
     }
     else
     {
@@ -632,7 +632,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
       $Result = null;
     }
 
-    $this->draw_text_row ($title, $description, 'notes');
+    $this->draw_text_row ($title, $description, $this->get_description_CSS_class());
     $this->start_row (' ');
     if (isset ($Result))
     {
@@ -646,6 +646,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
   /**
    * Closes a hideable/hidden area in the form.
    * Should be paired with {@link start_layer_row()}.
+   * @param LAYER $layer
    * @see start_layer_row()
    */
   public function finish_layer_row ($layer)
@@ -711,8 +712,8 @@ class FORM_RENDERER extends CONTROLS_RENDERER
   /**
    * Draw a caution message in a form.
    * This does its best to keep the sizing vis-a-vis other controls correct.
-   * @param $title.
-   * @param $text Text to display.
+   * @param string $title.
+   * @param string $text Text to display.
    */
   public function draw_caution_row ($title, $text)
   {
@@ -1033,7 +1034,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
 
     if ($field->description)
     {
-      $item->title .= ' <span class="notes">' . $field->description . '</span>';
+      $item->title .= ' <span class="' . $this->get_description_CSS_class() . '">' . $field->description . '</span>';
     }
 
     $ctrl = $this->_grouped_control_as_HTML ($field, null, $item, 'checkbox', $field->id);
@@ -1077,7 +1078,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
 
     if ($this->drafts_enabled)
     {
-      $buttons [] = $this->submit_button_as_html ('Save as draft', '{icons}buttons/save', 'save_as_draft');
+      $buttons [] = $this->submit_button_as_html ('Save version', '{icons}buttons/save', 'save_as_draft');
       if ($this->_form->object_exists())
       {
         $url = $this->app->resolve_file('{app}/save_field.php');
@@ -1117,9 +1118,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
   public function draw_buttons_in_row($buttons, $title = '')
   {
     $this->start_button_row ($title);
-    echo '<div class="button-content">';
     $this->draw_buttons ($buttons);
-    echo '</div>';
     $this->finish_row ();
   }
 
@@ -1172,6 +1171,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    */
   public function date_as_html ($id, $options = null)
   {
+    /** @var DATE_FIELD $field */
     $field = $this->_field_at ($id);
     $includes_time = $field->parts_to_convert & Date_time_time_part;
 
@@ -1198,7 +1198,6 @@ class FORM_RENDERER extends CONTROLS_RENDERER
       $Result .= 'var ' . $id . "_field = new WEBCORE_DATE_TIME_FIELD ();\n";
       $Result .= $id . "_field.output_format = Date_format_us;\n";
 
-      $field = $this->_field_at ($id);
       if ($includes_time)
       {
         $Result .= $id . "_field.show_time = true;\n";
@@ -1260,7 +1259,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
 
       if ($text)
       {
-        $text = '<div class="text-box-description notes">' . $text . '</div>';
+        $text = '<div class="' . $this->get_description_CSS_class() . '">' . $text . '</div>';
       }
 
       $Result .= '<div style="width: ' . $width . '">' . $text . '</div>';
@@ -1386,11 +1385,11 @@ class FORM_RENDERER extends CONTROLS_RENDERER
       {
         if ($props->show_description_on_same_line)
         {
-          $Result .= ' <span class="notes">' . $field->description . '</span>';
+          $Result .= ' <span class="' . $this->get_description_CSS_class() . '">' . $field->description . '</span>';
         }
         else
         {
-          $Result .= '<div style="width: ' . $width . '"><div class="notes">' . $field->description . '</div></div>';
+          $Result .= '<div style="width: ' . $width . '"><div class="' . $this->get_description_CSS_class() . '">' . $field->description . '</div></div>';
         }
       }
 
@@ -1454,7 +1453,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
 
       if ($field->description)
       {
-        $Result .= '<div style="margin-top: .5em; width: ' . $width . '"><div class="notes">' . $field->description . '</div></div>';
+        $Result .= '<div style="margin-top: .5em; width: ' . $width . '"><div class="' . $this->get_description_CSS_class() . '">' . $field->description . '</div></div>';
       }
 
       return $this->_control_created ($id, $Result);
@@ -1468,11 +1467,12 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * If the file has already been uploaded and processed, the name is shown instead of a control
    * so that the user doesn't have to upload again if there were validation errors elsewhere.
    * @param string $id Name of field.
-   * @param FORM_LIST_PROPERTIES $props
+   * @param FORM_TEXT_CONTROL_OPTIONS $options
    * @return string
    */
   public function file_as_html ($id, $options = null)
   {
+    /** @var UPLOAD_FILE_FIELD $field */
     $field = $this->_field_at ($id);
 
     if (! isset ($options))
@@ -1509,7 +1509,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
 
       if ($field->description)
       {
-        $Result .= '<div style="width: ' . $width . '"><div class="notes">' . $field->description . "</div></div>\n";
+        $Result .= '<div style="width: ' . $width . '"><div class="' . $this->get_description_CSS_class() . '">' . $field->description . "</div></div>\n";
       }
     }
     else
@@ -1679,6 +1679,8 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * mapping {@link ARRAY_FIELD}s). Also renders the field's enabled state.
    * @param FIELD $field
    * @param string $tag_name Name of the HTML tag to generate.
+   * @param string $dom_id
+   * @return string
    * @access private
    */
   protected function _start_control ($field, $tag_name = 'input', $dom_id = null)
@@ -1825,11 +1827,11 @@ class FORM_RENDERER extends CONTROLS_RENDERER
 
       if ($options->show_description_on_same_line)
       {
-        $Result .= ' <span class="notes">' . $desc . '</span>';
+        $Result .= ' <span class="' . $this->get_description_CSS_class() . '">' . $desc . '</span>';
       }
       else
       {
-        $Result .= '<div style="width: ' . $width . '"><div class="notes">' . $desc . '</div></div>';
+        $Result .= '<div style="width: ' . $width . '"><div class="' . $this->get_description_CSS_class() . '">' . $desc . '</div></div>';
       }
     }
 
@@ -1936,17 +1938,17 @@ class FORM_RENDERER extends CONTROLS_RENDERER
           {
             if ($props->item_class)
             {
-              $ctrls [] = '<li class="' . $props->item_class . '">' . $ctrl . '</li>';
+              $controls [] = '<li class="' . $props->item_class . '">' . $ctrl . '</li>';
             }
             else
             {
-              $ctrls [] = '<li>' . $ctrl . '</li>';
+              $controls [] = '<li>' . $ctrl . '</li>';
             }
 
             if (($counter == $num_items) || ($props->items_per_row == 1) || (($counter % $props->items_per_row) == 0))
             {
-              $ctrl_string = implode ("\n", $ctrls);
-              $ctrls = null;
+              $ctrl_string = implode ("\n", $controls);
+              $controls = null;
 
               /* Avoid making an extra block if the controls never wrapped. */
 
@@ -2008,7 +2010,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
 
         if ($field->description)
         {
-          $Result .= '<div class="item-description" style="width: ' . $width . '"><div class="notes">' . $field->description . '</div></div>';
+          $Result .= '<div class="item-description" style="width: ' . $width . '"><div class="' . $this->get_description_CSS_class() . '">' . $field->description . '</div></div>';
         }
 
         $Result = $this->_control_created ($id, $Result, false);
@@ -2174,7 +2176,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * Table of used DOM ids.
    * If radio buttons or other group controls are rendered to different parts of a page for the
    * same field, this structure remembers which DOM id was last used for the given field.
-   * @var integer[]
+   * @var int[]
    * @access private
    */
   protected $_num_controls = array ();
@@ -2185,6 +2187,11 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * @access private
    */
   protected $_widths;
+
+  private function get_description_CSS_class()
+  {
+    return 'form-' . $this->_form->CSS_class . '-description';
+  }
 }
 
 /**

@@ -257,7 +257,6 @@ abstract class AUDITABLE_FORM extends RENDERABLE_FORM
    */
   protected function _draw_history_item_controls ($renderer, $show_initially)
   {
-    $renderer->draw_separator ();
     $description = 'Change history is stored automatically. %s history options.';
     $layer = $renderer->start_layer_row ('history', 'History', $description);
       $renderer->set_width ('25em');

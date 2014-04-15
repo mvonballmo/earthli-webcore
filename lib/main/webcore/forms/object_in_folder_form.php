@@ -175,15 +175,12 @@ class OBJECT_IN_FOLDER_FORM extends CONTENT_OBJECT_FORM
   {
     $renderer->start ();
     $renderer->draw_text_line_row ('title');
-    $renderer->draw_separator ();
+    $renderer->draw_text_box_row ('description');
+    $renderer->draw_submit_button_row ();
     if ($this->_has_options ())
     {
       $this->_draw_options ($renderer);
-      $renderer->draw_separator ();
     }
-    $renderer->draw_text_box_row ('description');
-    $renderer->draw_separator ();
-    $renderer->draw_submit_button_row ();
     $this->_draw_history_item_controls ($renderer, false);
     $renderer->finish ();
   }

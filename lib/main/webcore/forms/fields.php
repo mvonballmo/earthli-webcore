@@ -138,7 +138,7 @@ class FIELD extends RAISABLE
    * Is this field selected?
    * Returns true if 'value' is equal to the field's value. Some fields will override this
    * behavior to imbue it with their own semantics (e.g. {@link ARRAY_FIELD}).
-   * @param object $value
+   * @param object|string $value
    * @return boolean
    */
   public function selected ($value)
@@ -180,7 +180,7 @@ class FIELD extends RAISABLE
    * TEXT_OPTIONS} and convert HTML entities.
    * @param string $quote_style Can be "ENT_NOQUOTES" or "ENT_QUOTES", which
    * translates quotes or not, respectively.
-   * @param object $value Optional parameter used by some fields to distinguish between different components of the value.
+   * @param object|int $value Optional parameter used by some fields to distinguish between different components of the value.
    * @return string
    */
   public function as_html ($form, $quote_style, $value = null)
