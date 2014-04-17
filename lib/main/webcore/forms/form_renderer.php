@@ -502,10 +502,10 @@ class FORM_RENDERER extends CONTROLS_RENDERER
     $this->_required_mark_used = false;
     $this->_column_started = false;
 
-    if (isset ($this->width) && $this->width)
-    {
-      $style [] = 'width: ' . $this->width;
-    }
+//    if (isset ($this->width) && $this->width)
+//    {
+//      $style [] = 'width: ' . $this->width;
+//    }
 
     if (!empty($style) && sizeof ($style) > 0)
     {
@@ -691,7 +691,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
   ?>
   <tr>
     <td class="form-<?php echo $this->_form->CSS_class; ?>-label"><?php echo $title; ?></td>
-    <td class="text-flow <?php echo $CSS_class; ?>" <?php if (! empty($this->width)) { ?>style="width: <?php echo $this->width; ?>"<?php } ?>>
+    <td class="text-flow <?php echo $CSS_class; ?>">
       <?php echo $text; ?>
     </td>
   </tr>
@@ -701,7 +701,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
     {
   ?>
   <tr>
-    <td colspan="2" class="text-flow <?php echo $CSS_class; ?>" <?php if (! empty($this->width)) { ?>style="width: <?php echo $this->width; ?>"<?php } ?>>
+    <td colspan="2" class="text-flow <?php echo $CSS_class; ?>">
       <?php echo $text; ?>
     </td>
   </tr>
@@ -724,14 +724,9 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * Draw errors for a control onto a separate row in the form.
    * @param string $id Name of field.
    * @param string $title
-   * @param string $width
    */
-  public function draw_error_row ($id, $title = ' ', $width = '')
+  public function draw_error_row ($id, $title = ' ')
   {
-    if (! $width)
-    {
-      $width = $this->width;
-    }
 
     if (! $this->_form->num_errors ($id) && isset ($this->_num_controls [$id]))
     {
@@ -749,7 +744,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
   ?>
   <tr>
     <td class="form-<?php echo $this->_form->CSS_class; ?>-label"><?php echo $title; ?></td>
-    <td class="form-<?php echo $this->_form->CSS_class; ?>-content" style="width: <?php echo $width; ?>"><?php $this->_form->draw_errors ($id); ?></td>
+    <td class="form-<?php echo $this->_form->CSS_class; ?>-content"><?php $this->_form->draw_errors ($id); ?></td>
   </tr>
   <?php
       }
@@ -757,7 +752,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
       {
   ?>
   <tr>
-    <td colspan="2" class="form-<?php echo $this->_form->CSS_class; ?>-content" style="width: <?php echo $width; ?>"><?php $this->_form->draw_errors ($id); ?></td>
+    <td colspan="2" class="form-<?php echo $this->_form->CSS_class; ?>-content"><?php $this->_form->draw_errors ($id); ?></td>
   </tr>
   <?php
       }
@@ -771,10 +766,8 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * there is already a row opened with {@link start_row()}. Must be closed with {@link finish_block()}.
    * @param boolean $styled Applies a style using {@link FORM::$CSS_class} as
    * a base (may make the block visible).
-   * @param string $width A CSS style for the width to use within the block.
-   * Calls {@link set_width()} with the given value.
    */
-  public function start_block ($styled = false, $width = null)
+  public function start_block ($styled = false)
   {
     if ($styled)
     {
@@ -784,27 +777,16 @@ class FORM_RENDERER extends CONTROLS_RENDERER
     {
       echo '<div>';
     }
-    echo '<table width="100%">' . "\n";
-
-    if (isset ($width))
-    {
-      $this->set_width ($width);
-    }
+    echo '<table>' . "\n";
   }
 
   /**
    * Close a nested content area in the form.
    * Must be paired with {@link start_block()}.
-   * @param boolean $restore_width Calls {@link restore_width()} if True. Set
-   * to True only if a width was passed to {@link start_block()}.
    */
-  public function finish_block ($restore_width = false)
+  public function finish_block ()
   {
     echo "</table></div>\n";
-    if ($restore_width)
-    {
-      $this->restore_width ();
-    }
   }
 
   /**
@@ -1067,7 +1049,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
     {
       if ($this->_form->object_exists())
       {
-        $url = $this->app->resolve_file('{app}/generate_preview.php');
+        $url = $this->context->resolve_file('{app}/generate_preview.php');
         $buttons [] = $this->javascript_button_as_html('Preview', 'execute_field(\'' . $url . '\', \'' . $this->_form->name . '\', \'' . 'description' . '\')', '{icons}buttons/view');
       }
       else
@@ -1230,7 +1212,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
     {
       if (! isset ($width))
       {
-        $width = $this->default_control_width;
+        $width = '100%';
       }
       if (! isset ($height))
       {
@@ -1240,7 +1222,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
       $CSS_class = $this->_get_text_control_CSS_class($field);
 
       $Result = $this->_start_control ($field, 'textarea');
-      $Result .= ' class="' . $CSS_class . '" rows="10" cols="25" style="width: ' . $width . '; height: ' . $height . '">';
+      $Result .= ' class="' . $CSS_class . '" style="box-sizing: border-box; display: block; width: ' . $width . '; height: ' . $height . '">';
       $Result .= $this->_to_html ($field, ENT_NOQUOTES) . '</textarea>';
 
       if ($field->description)
@@ -1798,7 +1780,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
     }
     else
     {
-      $width = $this->default_control_width;
+      $width = '100%';//$this->default_control_width;
     }
 
     $Result = $this->_start_control ($field);
@@ -1819,7 +1801,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
       $Result .= ' OnChange=\'' . $options->on_change_script . '\'';
     }
 
-    $Result .= ' type="' . $type . '" class="' . $CSS_class . '" value="' . $this->_to_html ($field, ENT_QUOTES) . '" style="width: ' . $width . '">';
+    $Result .= ' type="' . $type . '" class="' . $CSS_class . '" value="' . $this->_to_html ($field, ENT_QUOTES) . '" style="display: block; box-sizing: border-box; width: ' . $width . '">';
 
     if ($field->description || $options->extra_description)
     {

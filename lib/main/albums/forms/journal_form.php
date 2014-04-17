@@ -166,7 +166,7 @@ class JOURNAL_FORM extends ALBUM_ENTRY_FORM
       $renderer->draw_radio_group_row ('weather_type', $props);
     }
 
-    $renderer->draw_text_box_row ('weather', $renderer->default_control_width, '3em');
+    $renderer->draw_text_box_row ('weather', null, '3em');
     $renderer->draw_separator ();
 
     $options = new FORM_TEXT_CONTROL_OPTIONS ();

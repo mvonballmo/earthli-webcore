@@ -623,7 +623,7 @@ class SEARCH_USER_FIELDS extends SEARCH_FIELDS
     $renderer->finish_row ();
 
     $renderer->draw_text_row (' ', 'Separate multiple names with a semi-colon.', 'notes');
-    $renderer->draw_error_row ($this->base_name, ' ', $renderer->width);
+    $renderer->draw_error_row ($this->base_name, ' ');
   }
 
   /**

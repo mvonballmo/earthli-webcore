@@ -581,7 +581,7 @@ class ALBUM_FORM extends FOLDER_FORM
     $renderer->finish_row ();
     $renderer->draw_separator ();
 
-    $renderer->draw_text_box_row ('summary', $renderer->default_control_width, '3em');
+    $renderer->draw_text_box_row ('summary', null, '3em');
     $renderer->draw_text_box_row ('description');
     $renderer->draw_separator ();
     $renderer->draw_submit_button_row ();

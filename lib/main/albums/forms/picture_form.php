@@ -534,7 +534,7 @@ class PICTURE_FORM extends ALBUM_ENTRY_FORM
     $renderer->draw_check_box_row ('is_visible');
     $renderer->draw_separator ();
 
-    $renderer->draw_text_box_row ('description', $renderer->default_control_width, '15em');
+    $renderer->draw_text_box_row ('description', null, '15em');
 
     $renderer->draw_submit_button_row ();
     $this->_draw_history_item_controls ($renderer, false);

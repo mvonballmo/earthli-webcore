@@ -297,11 +297,11 @@ class ATTACHMENT_FORM extends OBJECT_IN_FOLDER_FORM
       if ($this->login->is_allowed (Privilege_set_attachment, Privilege_upload, $this->_folder))
       {
         $renderer->start_row (' ');
-          $renderer->start_block (true, '30em');
+          $renderer->start_block (true);
             $renderer->draw_text_row (' ', 'Replacing the file for the attachment is optional; you can regenerate the thumbnail from the current image by clicking "Save" below.', 'notes');
             $renderer->draw_separator ();
             $this->_draw_file_controls ($renderer);
-          $renderer->finish_block (true);
+          $renderer->finish_block ();
         $renderer->finish_row ();
       }
     }
