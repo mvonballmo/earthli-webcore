@@ -52,7 +52,7 @@ class PROJECT_ENTRY_GRID extends CONTENT_OBJECT_GRID
   /**
    * @var string
    */
-  public $box_style = 'object-in-list';
+  public $box_CSS_class = 'object-in-list';
 
   /**
    * @var boolean

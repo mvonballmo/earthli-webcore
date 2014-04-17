@@ -51,7 +51,7 @@ class PICTURE_GRID extends ALBUM_ENTRY_GRID
   /**
    * @var string
    */
-  public $box_style = '';
+  public $box_CSS_class = '';
 
   /**
    * @var string

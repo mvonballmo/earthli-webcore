@@ -49,7 +49,7 @@ require_once ('webcore/gui/content_object_grid.php');
  */
 class TINY_ARTICLE_GRID extends CONTENT_OBJECT_GRID
 {
-  public $box_style = '';
+  public $box_CSS_class = '';
   public $width = '';
   public $show_separator = false;
 

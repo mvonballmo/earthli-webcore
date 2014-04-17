@@ -51,7 +51,7 @@ class HISTORY_ITEM_GRID extends STANDARD_GRID
   /**
    * @var string
    */
-  public $box_style = 'object-in-list';
+  public $box_CSS_class = 'object-in-list';
 
   /**
    * @var string

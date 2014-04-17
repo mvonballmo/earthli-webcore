@@ -52,7 +52,7 @@ require_once ('webcore/gui/grid.php');
 class TINY_PICTURE_GRID extends CSS_FLOW_GRID
 {
   public $object_name = 'Picture';
-  public $box_style = '';
+  public $box_CSS_class = 'tiny-picture';
   public $width = '';
   public $max_width = 100;
   public $max_height = 75;
@@ -73,9 +73,7 @@ class TINY_PICTURE_GRID extends CSS_FLOW_GRID
     {
       $metrics->resize ($this->max_width, $this->max_height);
     }
-  ?>
-    <a href="<?php echo $obj->home_page (); ?>"><?php echo $metrics->as_html_without_link ($obj->title_as_plain_text ()); ?></a>
-  <?php
+  ?><a href="<?php echo $obj->home_page (); ?>"><?php echo $metrics->as_html_without_link ($obj->title_as_plain_text ()); ?></a><?php
   }
 }
 

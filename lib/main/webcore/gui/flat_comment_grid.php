@@ -51,7 +51,7 @@ class FLAT_COMMENT_GRID extends PRINTABLE_COMMENT_GRID
   /**
    * @var string
    */
-  public $box_style = '';
+  public $box_CSS_class = '';
 
   /**
    * Used when printing to shut off pagination

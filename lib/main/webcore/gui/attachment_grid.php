@@ -51,7 +51,7 @@ class ATTACHMENT_GRID extends STANDARD_GRID
   /**
    * @var string
    */
-  public $box_style = '';
+  public $box_CSS_class = '';
 
   /**
    * @var boolean

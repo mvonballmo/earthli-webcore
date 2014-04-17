@@ -50,7 +50,7 @@ require_once ('webcore/gui/theme_grid.php');
  */
 class THEME_SELECTOR_GRID extends THEME_GRID
 {
-  public $box_style = '';
+  public $box_CSS_class = '';
   public $width = '';
   public $show_separator = false;
   public $centered = true;
