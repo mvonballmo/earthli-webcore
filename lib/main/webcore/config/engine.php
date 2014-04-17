@@ -345,7 +345,7 @@ class ENGINE extends RESOLVER
    * Override this function to customize initialization.
    * @see _make_page()
    * @param ENVIRONMENT $env
-   * @param PAGE $page
+   * @param THEMED_PAGE $page
    * @access private
    */
   protected function _init_page ($env, $page)
