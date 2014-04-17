@@ -81,7 +81,7 @@ class COMPONENT_COMMANDS extends COMMANDS
     $cmd->link = "purge_component.php?id=$comp->id";
     $cmd->icon = '{icons}buttons/purge';
     $cmd->executable = $this->login->is_allowed (Privilege_set_component, Privilege_purge, $comp);
-    $cmd->importance = Command_importance_high - 2 * Command_importance_increment;
+    $cmd->importance = Command_importance_high - 3 * Command_importance_increment;
     $this->append ($cmd);
 
     $cmd = $this->make_command ();    
