@@ -85,33 +85,61 @@ http://www.earthli.com/software/webcore
   echo '<h4>Contents</h4>';
   $panel_manager->display ();
 
-  $box->new_column_of_type ('tools-box');
-  echo '<h4>Tools</h4>';
-
-  $renderer = $user->handler_for (Handler_menu);
-  $renderer->set_size(Menu_size_compact);
-  $renderer->display ($user->handler_for (Handler_commands));
-
   $box->finish_column_set ();
   ?>
 </div>
 <div class="main-box">
-    <?php if ($panel->uses_time_selector) { ?>
-      <div class="menu-bar-top">
-        <?php $panel_manager->display_time_menu (); ?>
-      </div>
-    <?php } ?>
-    <?php $panel->display (); ?>
-  <?php
-    if ($num_objects && $panel->uses_time_selector)
+  <div class="menu-bar-top">
+    <?php
+    if ($panel->uses_time_selector)
     {
-      // don't show the bottom selector if there are no objects
-  ?>
+      $panel_manager->display_time_menu ();
+    }
+    $pager = $panel->get_pager();
+
+    if ($pager)
+    {
+      $pager->pages_to_show = 0;
+      $pager->display();
+    }
+
+    $grid = $panel->get_grid();
+    if ($grid)
+    {
+      $grid->show_pager = false;
+    }
+
+    /** @var MENU_RENDERER $renderer */
+    $renderer = $user->handler_for (Handler_menu);
+    $renderer->set_size(Menu_size_standard);
+    $renderer->num_important_commands = 2;
+    /** @var COMMANDS $commands */
+    $commands = $user->handler_for(Handler_commands);
+    $renderer->display($commands);
+    ?>
+  </div>
+  <?php
+  $panel->display ();
+
+  if ($panel->num_objects ())
+  {
+    // don't show the bottom selector if there are no objects
+    ?>
     <div class="menu-bar-bottom">
-      <?php $panel_manager->display_time_menu (); ?>
+      <?php
+      if ($panel->uses_time_selector)
+      {
+        $panel_manager->display_time_menu ();
+      }
+      if ($pager)
+      {
+        $pager->pages_to_show = 5;
+        $pager->display(true);
+      }
+      ?>
     </div>
   <?php
-    }
+  }
   ?>
 </div>
 <?php

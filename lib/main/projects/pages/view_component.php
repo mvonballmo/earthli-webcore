@@ -36,20 +36,20 @@ http://www.earthli.com/software/webcore
     $App->set_referer ();
 
     $comp_query = $folder->component_query ();
-    /** @var $comp COMPONENT */
-    $comp = $comp_query->object_at_id ($id);
+    /** @var $component COMPONENT */
+    $component = $comp_query->object_at_id ($id);
 
     $class_name = $App->final_class_name ('PROJECT_COMPONENT_PANEL_MANAGER', 'projects/gui/project_panel.php');
     /** @var $panel_manager PROJECT_COMPONENT_PANEL_MANAGER */
-    $panel_manager = new $class_name ($comp);
+    $panel_manager = new $class_name ($component);
     $panel = $panel_manager->selected_panel ();
 
     $Page->title->add_object ($folder);
-    $Page->title->add_object ($comp);
+    $Page->title->add_object ($component);
     $Page->title->subject = $panel->num_objects() . ' ' . $panel->raw_title ();
     
     $Page->location->add_folder_link ($folder, 'panel=' . $panel_manager->selected_panel_id);
-    $Page->location->add_object_text ($comp);
+    $Page->location->add_object_text ($component);
     
     $Page->start_display ();
 ?>
@@ -59,12 +59,12 @@ http://www.earthli.com/software/webcore
     $box->start_column_set ();
 
     /** @var $renderer OBJECT_RENDERER */
-    $renderer = $comp->handler_for (Handler_html_renderer);
+    $renderer = $component->handler_for (Handler_html_renderer);
     $options = $renderer->options ();
     $options->show_as_summary = true;
     $options->show_users = false;
 
-    $text = $renderer->display_to_string ($comp);
+    $text = $renderer->display_to_string ($component);
 
     if ($text)
     {
@@ -91,7 +91,7 @@ http://www.earthli.com/software/webcore
     $renderer = $App->make_menu_renderer ();
     $renderer->set_size(Menu_size_compact);
     /** @var $commands COMMANDS */
-    $commands = $comp->handler_for(Handler_commands);
+    $commands = $component->handler_for(Handler_commands);
     $renderer->display ($commands);
     echo '</div>';
 
@@ -99,20 +99,54 @@ http://www.earthli.com/software/webcore
 ?>
 </div>
 <div class="main-box">
-  <?php if ($panel->uses_time_selector) { ?>
   <div class="menu-bar-top">
-    <?php $panel_manager->display_time_menu (); ?>
+    <?php
+    if ($panel->uses_time_selector)
+    {
+      $panel_manager->display_time_menu ();
+    }
+    $pager = $panel->get_pager();
+
+    if ($pager)
+    {
+      $pager->pages_to_show = 0;
+      $pager->display();
+    }
+
+    $grid = $panel->get_grid();
+    if ($grid)
+    {
+      $grid->show_pager = false;
+    }
+
+    /** @var MENU_RENDERER $renderer */
+    $renderer = $component->handler_for (Handler_menu);
+    $renderer->set_size(Menu_size_standard);
+    $renderer->num_important_commands = 2;
+    /** @var COMMANDS $commands */
+    $commands = $component->handler_for(Handler_commands);
+    $renderer->display($commands);
+    ?>
   </div>
-<?php } ?>
-  <?php $panel->display (); ?>
   <?php
-  if ($panel->num_objects () && $panel->uses_time_selector)
+  $panel->display ();
+
+  if ($panel->num_objects ())
   {
     // don't show the bottom selector if there are no objects
-
     ?>
     <div class="menu-bar-bottom">
-      <?php $panel_manager->display_time_menu (); ?>
+      <?php
+      if ($panel->uses_time_selector)
+      {
+        $panel_manager->display_time_menu ();
+      }
+      if ($pager)
+      {
+        $pager->pages_to_show = 5;
+        $pager->display(true);
+      }
+      ?>
     </div>
   <?php
   }

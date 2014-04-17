@@ -74,33 +74,59 @@ http://www.earthli.com/software/webcore
 
     echo '</div>';
 
-    $box->new_column_of_type ('tools-box');
-
-    echo '<h4>Tools</h4>';
-    echo '<div class="button-content">';
-
-    $class_name = $App->final_class_name ('USER_MANAGEMENT_COMMANDS', 'webcore/cmd/user_management_commands.php');
-    $commands = new $class_name ($App);
-    $renderer = $App->make_menu_renderer ();
-    $renderer->set_size(Menu_size_compact);
-    $renderer->display ($commands);
-
-    echo '</div>';
-
     $box->finish_column_set ();
     ?>
   </div>
   <div class="main-box">
-    <div class="grid-content">
-    <?php
+    <div class="menu-bar-top">
+      <?php
       $class_name = $Page->final_class_name ('USER_GRID', 'webcore/gui/user_grid.php');
       /** @var $grid USER_GRID */
       $grid = new $class_name ($App);
       $grid->set_ranges (10, 3);
       $grid->set_query ($user_query);
-      $grid->display ();
-     ?>
+
+      $pager = $grid->get_pager();
+
+      if ($pager)
+      {
+        $pager->pages_to_show = 0;
+        $pager->display();
+      }
+
+      $grid->show_pager = false;
+
+      /** @var MENU_RENDERER $renderer */
+      $renderer = $App->make_menu_renderer ();
+      $renderer->set_size(Menu_size_standard);
+      $renderer->num_important_commands = 2;
+      $class_name = $App->final_class_name ('USER_MANAGEMENT_COMMANDS', 'webcore/cmd/user_management_commands.php');
+      /** @var COMMANDS $commands */
+      $commands = new $class_name ($App);
+      $renderer->display($commands);
+      ?>
     </div>
+    <div class="grid-content">
+      <?php
+      $grid->display ();
+      ?>
+    </div>
+    <?php
+
+    if ($pager && $pager->num_items() > 0)
+    {
+      // don't show the bottom selector if there are no objects
+      ?>
+      <div class="menu-bar-bottom">
+        <?php
+          $pager->pages_to_show = 5;
+          $pager->display(true);
+        ?>
+      </div>
+    <?php
+    }
+    ?>
+
   </div>
   <?php
     $Page->finish_display ();
