@@ -52,7 +52,8 @@ http://www.earthli.com/software/webcore
 <div class="main-box">
   <div class="text-flow">
     <p>An error occurred while processing your last request.</p>
-    <p>To help us address this issue, please <span class="field">submit</span> the prepared <span class="field">report</span> below. Or, take a chance and <span class="field">try again</span>. You never know.</p>
+    <p>Please submit the prepared report below to help us address this issue.</p>
+    <p>Or take a chance and try again. You never know.</p>
     <p>We apologize for the inconvenience and thank you in advance for your help,<br>
       the earthli Team.</p>
   </div>
