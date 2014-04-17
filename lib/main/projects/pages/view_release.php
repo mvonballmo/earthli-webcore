@@ -109,36 +109,61 @@ http://www.earthli.com/software/webcore/projects
     $form->set_value ('folder_ids', $folder->id);
     $form->display ();
 
-    echo '<h4>Tools</h4>';
-    echo '<div class="button-content">';
-    $renderer = $App->make_menu_renderer ();
-    $renderer->set_size(Menu_size_compact);
-    /** @var $commands COMMANDS */
-    $commands = $release->handler_for(Handler_commands);
-    $renderer->display ($commands);
-    echo '</div>';
-
     $box->finish_column_set ();
 ?>
 </div>
   <div class="main-box">
-    <?php if ($panel->uses_time_selector) { ?>
     <div class="menu-bar-top">
-      <?php $panel_manager->display_time_menu (); ?>
-    </div>
-    <?php } ?>
-    <?php $panel->display (); ?>
-    <?php
-      if ($panel->num_objects () && $panel->uses_time_selector)
+      <?php
+      if ($panel->uses_time_selector)
       {
-        // don't show the bottom selector if there are no objects
+        $panel_manager->display_time_menu ();
+      }
+      $pager = $panel->get_pager();
 
-    ?>
-    <div class="menu-bar-bottom">
-      <?php $panel_manager->display_time_menu (); ?>
+      if ($pager)
+      {
+        $pager->pages_to_show = 0;
+        $pager->display();
+      }
+
+      $grid = $panel->get_grid();
+      if ($grid)
+      {
+        $grid->show_pager = false;
+      }
+
+      /** @var MENU_RENDERER $renderer */
+      $renderer = $release->handler_for (Handler_menu);
+      $renderer->set_size(Menu_size_standard);
+      $renderer->num_important_commands = 2;
+      /** @var COMMANDS $commands */
+      $commands = $release->handler_for(Handler_commands);
+      $renderer->display($commands);
+      ?>
     </div>
     <?php
-      }
+    $panel->display ();
+
+    if ($panel->num_objects ())
+    {
+      // don't show the bottom selector if there are no objects
+      ?>
+      <div class="menu-bar-bottom">
+        <?php
+        if ($panel->uses_time_selector)
+        {
+          $panel_manager->display_time_menu ();
+        }
+        if ($pager)
+        {
+          $pager->pages_to_show = 5;
+          $pager->display(true);
+        }
+        ?>
+      </div>
+    <?php
+    }
     ?>
   </div>
 <?php
