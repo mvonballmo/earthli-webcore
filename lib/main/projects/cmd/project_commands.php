@@ -69,22 +69,6 @@ class PROJECT_COMMANDS extends FOLDER_COMMANDS
   protected function _add_creators ($folder)
   {
     $cmd = $this->make_command ();
-    $cmd->id = 'new_change';
-    $cmd->caption = 'New change';
-    if ($folder->is_organizational()) 
-    {
-      $cmd->link = "select_folder.php?page_name=create_change.php";
-    }
-    else
-    {
-      $cmd->link = "create_change.php?id=$folder->id";
-    }
-    $cmd->icon = '{app_icons}buttons/new_change';
-    $cmd->executable = $this->login->is_allowed (Privilege_set_entry, Privilege_create, $folder);
-    $cmd->importance = Command_importance_high;
-    $this->append ($cmd);
-  	
-    $cmd = $this->make_command ();
     $cmd->id = 'new_job';
     $cmd->caption = 'New job';
     if ($folder->is_organizational()) 
@@ -96,6 +80,22 @@ class PROJECT_COMMANDS extends FOLDER_COMMANDS
       $cmd->link = "create_job.php?id=$folder->id";
     }
     $cmd->icon = '{app_icons}buttons/new_job';
+    $cmd->executable = $this->login->is_allowed (Privilege_set_entry, Privilege_create, $folder);
+    $cmd->importance = Command_importance_high;
+    $this->append ($cmd);
+
+    $cmd = $this->make_command ();
+    $cmd->id = 'new_change';
+    $cmd->caption = 'New change';
+    if ($folder->is_organizational())
+    {
+      $cmd->link = "select_folder.php?page_name=create_change.php";
+    }
+    else
+    {
+      $cmd->link = "create_change.php?id=$folder->id";
+    }
+    $cmd->icon = '{app_icons}buttons/new_change';
     $cmd->executable = $this->login->is_allowed (Privilege_set_entry, Privilege_create, $folder);
     $cmd->importance = Command_importance_high;
     $this->append ($cmd);

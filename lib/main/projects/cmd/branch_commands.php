@@ -57,6 +57,50 @@ class BRANCH_COMMANDS extends COMMANDS
   {
     parent::__construct ($obj->app);
 
+    $folder = $obj->parent_folder ();
+
+    if (! $folder->is_organizational () && ! $obj->locked ())
+    {
+      $this->append_group ('Create');
+
+      $cmd = $this->make_command ();
+      $cmd->id = 'new_job';
+      $cmd->caption = 'New job';
+      $cmd->link = "create_job.php?id=$folder->id&branch_id=$obj->id";
+      $cmd->icon = '{app_icons}buttons/new_job';
+      $cmd->executable = $this->login->is_allowed (Privilege_set_entry, Privilege_create, $obj);
+      $cmd->importance = Command_importance_high + Command_importance_increment;
+      $this->append ($cmd);
+
+      $cmd = $this->make_command ();
+      $cmd->id = 'new_change';
+      $cmd->caption = 'New change';
+      $cmd->link = "create_change.php?id=$folder->id&branch_id=$obj->id";
+      $cmd->icon = '{app_icons}buttons/new_change';
+      $cmd->executable = $this->login->is_allowed (Privilege_set_entry, Privilege_create, $obj);
+      $cmd->importance = Command_importance_high + Command_importance_increment;
+      $this->append ($cmd);
+
+      $cmd = $this->make_command ();
+      $cmd->id = 'new_release';
+      $cmd->caption = 'New release';
+      $cmd->link = "create_release.php?id=$obj->id";
+      $cmd->icon = '{app_icons}buttons/new_release';
+      $cmd->executable = $this->login->is_allowed (Privilege_set_folder, Privilege_modify, $obj);
+      $cmd->importance = Command_importance_low;
+      $this->append ($cmd);
+
+      $cmd = $this->make_command ();
+      $cmd->id = 'new_branch';
+      $cmd->caption = 'New branch';
+      $cmd->link = "create_branch.php?id=$folder->id&branch_id=$obj->id";
+      $cmd->icon = '{app_icons}buttons/new_branch';
+      $cmd->executable = $this->login->is_allowed (Privilege_set_folder, Privilege_modify, $obj);
+      $cmd->importance = Command_importance_high - 2 * Command_importance_increment;
+      $cmd->importance = Command_importance_low;
+      $this->append ($cmd);
+    }
+
     $cmd = $this->make_command ();
     $this->append_group ('Edit');
     $cmd->id = 'edit';
@@ -66,8 +110,6 @@ class BRANCH_COMMANDS extends COMMANDS
     $cmd->executable = $this->login->is_allowed (Privilege_set_folder, Privilege_modify, $obj);
     $cmd->importance = Command_importance_high - Command_importance_increment;
     $this->append ($cmd);
-
-    $folder = $obj->parent_folder ();
 
     if (! $folder->is_root ())
     {
@@ -118,48 +160,6 @@ class BRANCH_COMMANDS extends COMMANDS
     $cmd->executable = true;
     $cmd->importance = Command_importance_high;
     $this->append ($cmd);
-
-    if (! $folder->is_organizational () && ! $obj->locked ())
-    {
-      $this->append_group ('Create');
-
-      $cmd = $this->make_command ();
-      $cmd->id = 'new_release';
-      $cmd->caption = 'New release';
-      $cmd->link = "create_release.php?id=$obj->id";
-      $cmd->icon = '{app_icons}buttons/new_release';
-      $cmd->executable = $this->login->is_allowed (Privilege_set_folder, Privilege_modify, $obj);
-      $cmd->importance = Command_importance_low;
-      $this->append ($cmd);
-
-      $cmd = $this->make_command ();
-      $cmd->id = 'new_branch';
-      $cmd->caption = 'New branch';
-      $cmd->link = "create_branch.php?id=$folder->id&branch_id=$obj->id";
-      $cmd->icon = '{app_icons}buttons/new_branch';
-      $cmd->executable = $this->login->is_allowed (Privilege_set_folder, Privilege_modify, $obj);
-      $cmd->importance = Command_importance_high - 2 * Command_importance_increment;
-      $cmd->importance = Command_importance_low;
-      $this->append ($cmd);
-
-      $cmd = $this->make_command ();
-      $cmd->id = 'new_job';
-      $cmd->caption = 'New job';
-      $cmd->link = "create_job.php?id=$folder->id&branch_id=$obj->id";
-      $cmd->icon = '{app_icons}buttons/new_job';
-      $cmd->executable = $this->login->is_allowed (Privilege_set_entry, Privilege_create, $obj);
-      $cmd->importance = Command_importance_high + Command_importance_increment;
-      $this->append ($cmd);
-
-      $cmd = $this->make_command ();
-      $cmd->id = 'new_change';
-      $cmd->caption = 'New change';
-      $cmd->link = "create_change.php?id=$folder->id&branch_id=$obj->id";
-      $cmd->icon = '{app_icons}buttons/new_change';
-      $cmd->executable = $this->login->is_allowed (Privilege_set_entry, Privilege_create, $obj);
-      $cmd->importance = Command_importance_high + Command_importance_increment;
-      $this->append ($cmd);
-    }
   }
 }
 
