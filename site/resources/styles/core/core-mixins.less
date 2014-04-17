@@ -1,5 +1,15 @@
 @background_color: gray;
 
+.set-color(@c)
+{
+  color: @c;
+
+  code
+  {
+    color: @c;
+  }
+}
+
 .engraved_border(@depth: 1px, @highlight_color: lighten(@background_color, 30%), @shadow_color: darken(@background_color, 10%))
 {
   border: @depth solid;

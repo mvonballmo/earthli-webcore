@@ -7,43 +7,47 @@ body
   color: @text_color;
 }
 
-a:link,
-a:visited
+code
 {
-  color: @link_color;
+  color: @code_text_color;
+}
+
+a:link,
+a:visited,
+{
+  .set-color(@link_color);
 }
 
 a:hover,
 a:active
 {
-  color: @link_hover_color;
+  .set-color(@link_hover_color);
 }
 
 h1
 {
-  color: @h1_color;
+  .set-color(@h1_color);
 }
 
 h2
 {
-  color: @h2_color;
-  border-color: @h2_color;
+  .set-color(@h2_color);
 }
 
 h3
 {
-  color: @h3_color;
+  .set-color(@h3_color);
 }
 
 h4
 {
-  color: @h4_color;
+  .set-color(@h4_color);
 }
 
 .chart-title,
 .preview-title
 {
-  color: @title_color;
+  .set-color(@title_color);
 }
 
 .banner
@@ -197,11 +201,6 @@ pre > code,
 .selected
 {
   color: @selected_text_color;
-}
-
-code
-{
-  color: @code_text_color;
 }
 
 .quote,
