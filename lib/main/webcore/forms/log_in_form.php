@@ -70,6 +70,12 @@ class LOG_IN_FORM extends FORM
   public $submitted_flag = 'login_submitted';
 
   /**
+   * Should this form set focus to its initial control?
+   * @var boolean
+   */
+  public $allow_focus = true;
+
+  /**
    * @param APPLICATION $app Main application.
    */
   public function __construct ($app)
