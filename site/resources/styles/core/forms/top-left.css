@@ -1,0 +1,11 @@
+.basic-form > p,
+.basic-form > div {
+  margin-left: 10px !important;
+}
+.basic-form fieldset label:first-child {
+  width: 190px;
+}
+.basic-form fieldset {
+  /* The border is one pixel, so this makes 10 pixels in all. */
+  padding-left: 9px;
+}

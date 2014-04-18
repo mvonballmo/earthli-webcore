@@ -1,0 +1,59 @@
+.basic-form fieldset {
+  margin: 0px;
+  margin-top: 15px;
+}
+.basic-form input,
+.basic-form textarea,
+.basic-form select {
+  margin-left: 0px;
+}
+.basic-form input[type=checkbox],
+.basic-form input[type=radio] {
+  vertical-align: baseline;
+  margin-left: 0px;
+  margin-top: 3px;
+}
+.basic-form input[type=submit],
+.basic-form button {
+  /* Do not use the surrounding line-height; instead, use padding. */
+  display: inline-block;
+  line-height: normal;
+  padding: 2px 8px;
+}
+.basic-form .help p:first-child {
+  margin-top: 0px;
+}
+.basic-form .help p:last-child {
+  margin-bottom: 0px;
+}
+.basic-form .hint,
+.basic-form > .form-row,
+.basic-form fieldset .hint,
+.basic-form fieldset > .form-row {
+  display: block;
+}
+.basic-form .group {
+  display: block;
+  margin: 3px 0px;
+}
+.basic-form fieldset fieldset .group {
+  margin-left: 0px;
+}
+.basic-form .group + .group {
+  clear: left;
+}
+.basic-form .one-input input:first-child {
+  float: left;
+  padding: 0px;
+  margin-left: 0px;
+}
+.basic-form .one-input label {
+  display: block;
+  margin-left: 18px;
+}
+.basic-form .one-input label:first-child {
+  float: left;
+  display: inline-block;
+  padding-right: 5px;
+  margin-left: 0px;
+}

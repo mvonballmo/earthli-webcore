@@ -1,0 +1,47 @@
+.basic-form {
+  width: 800px;
+}
+.basic-form input[type=text],
+.basic-form input[type=password],
+.basic-form input[type=file],
+.basic-form textarea,
+.basic-form select,
+.basic-form .hint,
+.basic-form .group,
+.basic-form .buttons-bottom,
+.basic-form .buttons-top,
+.basic-form .buttons-middle {
+  width: 300px;
+}
+.basic-form .two-inputs input,
+.basic-form .two-inputs select,
+.basic-form .two-inputs textarea {
+  width: 140px;
+}
+.basic-form .three-inputs input,
+.basic-form .three-inputs select,
+.basic-form .three-inputs textarea {
+  width: 95px;
+}
+.basic-form .form-row,
+.basic-form .group,
+.basic-form .hint {
+  margin-left: 200px;
+}
+.basic-form label:first-child {
+  float: left;
+  width: 200px;
+}
+.basic-form .help {
+  float: right;
+  width: 180px;
+  height: auto;
+  margin-right: 12px;
+}
+.basic-form fieldset {
+  padding-right: 0px;
+  margin-right: 0px;
+}
+.basic-form fieldset fieldset {
+  border-right-width: 0px;
+}

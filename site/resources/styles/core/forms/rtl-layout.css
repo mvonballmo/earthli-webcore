@@ -1,0 +1,65 @@
+.basic-form {
+  width: 800px;
+  text-align: right;
+}
+.basic-form input[type=text],
+.basic-form input[type=password],
+.basic-form input[type=file],
+.basic-form textarea,
+.basic-form select,
+.basic-form .hint,
+.basic-form .group {
+  width: 300px;
+}
+.basic-form input[type=checkbox],
+.basic-form input[type=radio] {
+  float: right !important;
+}
+.basic-form .two-inputs input,
+.basic-form .two-inputs select,
+.basic-form .two-inputs textarea {
+  width: 140px;
+}
+.basic-form .three-inputs input,
+.basic-form .three-inputs select,
+.basic-form .three-inputs textarea {
+  width: 95px;
+}
+.basic-form .form-row,
+.basic-form .group,
+.basic-form .hint {
+  margin-right: 200px;
+}
+.basic-form > p,
+.basic-form > div,
+.basic-form fieldset > p,
+.basic-form fieldset > div {
+  clear: right;
+}
+.basic-form .group,
+.basic-form .hint {
+  float: right;
+  clear: right;
+}
+.basic-form label:first-child {
+  float: right;
+  width: 200px;
+}
+.basic-form .one-input label {
+  margin-left: 0px;
+  margin-right: 18px;
+}
+.basic-form .help {
+  float: left;
+  width: 180px;
+  height: auto;
+  margin-left: 12px;
+}
+.basic-form fieldset {
+  padding-left: 0px;
+  margin-left: 0px;
+  clear: right;
+}
+.basic-form fieldset fieldset {
+  border-left-width: 0px;
+}
