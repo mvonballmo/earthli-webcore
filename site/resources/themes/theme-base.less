@@ -118,24 +118,24 @@ table.columns > tbody > tr > td,
 table.columns > tbody > tr > th,
 .abstract
 {
-  border-color: @standard_border;
+  border-color: @standard_border_color;
 }
 
 .quote-block,
 .preview,
 .chart,
 pre > code,
-.form-basic-block,
+.basic-form-block,
 .pullquote
 {
-  border-color: @accent_border;
+  border-color: @accent_border_color;
 }
 
 .object-navigator .links
 {
-  column-rule-color: @standard_border;
-  -webkit-column-rule-color: @standard_border;
-  -moz-column-rule-color: @standard_border;
+  column-rule-color: @standard_border_color;
+  -webkit-column-rule-color: @standard_border_color;
+  -moz-column-rule-color: @standard_border_color;
 }
 
 .info-box-top,
@@ -210,6 +210,52 @@ pre > code,
   color: @dimmer_text_color;
 }
 
+.style-controls
+{
+  button:extend(.button all) {}
+  input[type=submit]:extend(.button all) {}
+  input[type=button]:extend(.button all) {}
+
+  input,
+  select
+  {
+    margin: 0;
+  }
+
+  input[type="radio"],
+  input[type="checkbox"]
+  {
+    vertical-align: middle;
+    margin: 0;
+    padding: 0;
+  }
+
+  button,
+  input[type=submit],
+  input[type=text],
+  input[type=password],
+  input[type=button],
+  select,
+  textarea
+  {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+  }
+
+  input[type=text],
+  input[type=password],
+  select,
+  textarea
+  {
+    background-color: @edit_control_background_color;
+    border: 1px solid @control_border_color;
+    border-radius:  @standard_border_radius;
+    padding: @standard_border_radius;
+    margin-left: -@standard_border_radius - 1px;
+  }
+}
+
 .button
 {
   background-color: @control_background_color;
@@ -266,10 +312,16 @@ ul.menu
   }
 }
 
-.text-control,
-.menu-control
+form.style-controls
 {
-  background-color: @edit_control_background_color;
-  color: @edit_control_text_color;
-  border-color: @control_border_color;
+  input[type=text],
+  input[type=password],
+  select,
+  textarea
+  {
+    background-color: @edit_control_background_color;
+    border-color: @control_border_color;
+    border-radius: @standard_border_radius;
+    padding: @standard_border_radius;
+  }
 }

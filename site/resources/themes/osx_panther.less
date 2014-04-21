@@ -65,8 +65,8 @@ body
   .extruded_border(2px);
 }
 
-.form-basic,
-.form-basic-block
+.basic-form,
+.basic-form-block
 {
   .engraved_border(2px);
   background-image: url(osx/5_percent_black.png);
@@ -74,8 +74,13 @@ body
   padding: @small_spacing;
 }
 
-.text-control,
-.menu-control
+.style-controls
 {
-  .engraved_border;
+  input[type=password],
+  input[type=text],
+  select,
+  textarea
+  {
+    .engraved_border;
+  }
 }

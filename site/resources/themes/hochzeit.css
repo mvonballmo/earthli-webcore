@@ -137,9 +137,9 @@ table.columns > tbody > tr > th,
 .preview,
 .chart,
 pre > code,
-.form-basic-block,
+.basic-form-block,
 .pullquote {
-  border-color: #ac9175;
+  border-color: #fbf2cd;
 }
 .object-navigator .links {
   column-rule-color: #cbc2b0;
@@ -200,26 +200,75 @@ pre > code,
 .quote-block {
   color: #908371;
 }
-.button {
+.style-controls input,
+.style-controls select {
+  margin: 0;
+}
+.style-controls input[type="radio"],
+.style-controls input[type="checkbox"] {
+  vertical-align: middle;
+  margin: 0;
+  padding: 0;
+}
+.style-controls button,
+.style-controls input[type=submit],
+.style-controls input[type=text],
+.style-controls input[type=password],
+.style-controls input[type=button],
+.style-controls select,
+.style-controls textarea {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+.style-controls input[type=text],
+.style-controls input[type=password],
+.style-controls select,
+.style-controls textarea {
+  background-color: #fbf0c9;
+  border: 1px solid #cbc2b0;
+  border-radius: 4px;
+  padding: 4px;
+  margin-left: -5px;
+}
+.button,
+.style-controls button,
+.style-controls input[type=submit],
+.style-controls input[type=button] {
   background-color: #fbf0c9;
   border-color: #cbc2b0;
   color: #text_color;
 }
 a.button:link,
-a.button:visited {
+a.button:visited,
+a.style-controls button:link,
+a.style-controls button:visited,
+a.style-controls input[type=submit]:link,
+a.style-controls input[type=submit]:visited,
+a.style-controls input[type=button]:link,
+a.style-controls input[type=button]:visited {
   color: #text_color;
 }
-.button.selected {
+.button.selected,
+.style-controls button.selected,
+.style-controls input[type=submit].selected,
+.style-controls input[type=button].selected {
   background-color: #fefcf3;
   border-color: #cbc2b0;
   color: #fdf8e5;
 }
-.button.disabled {
-  background-color: #ac9175;
+.button.disabled,
+.style-controls button.disabled,
+.style-controls input[type=submit].disabled,
+.style-controls input[type=button].disabled {
+  background-color: #fbf2cd;
   border-color: #dcd5c2;
   color: #b1a795;
 }
-.button:hover:not(.disabled):not(.selected) {
+.button:hover:not(.disabled):not(.selected),
+.style-controls button:hover:not(.disabled):not(.selected),
+.style-controls input[type=submit]:hover:not(.disabled):not(.selected),
+.style-controls input[type=button]:hover:not(.disabled):not(.selected) {
   background-color: #fefcf3;
   border-color: #cbc2b0;
 }
@@ -238,21 +287,25 @@ ul.menu .menu-item:hover {
 ul.menu .menu-item-description {
   color: #text_color;
 }
-.text-control,
-.menu-control {
+form.style-controls input[type=text],
+form.style-controls input[type=password],
+form.style-controls select,
+form.style-controls textarea {
   background-color: #fbf0c9;
-  color: #fdf8e5;
   border-color: #cbc2b0;
+  border-radius: 4px;
+  padding: 4px;
 }
 body {
   background: #fdf8e5 url(hochzeit/milkweed_paper.jpg) repeat;
 }
 .banner,
 .footer,
-.text-control,
-.menu-control,
 .graph-foreground,
-.button.selected {
+.button.selected,
+.style-controls button.selected,
+.style-controls input[type=submit].selected,
+.style-controls input[type=button].selected {
   background: #bbaa99 url(hochzeit/fossil_paper.jpg) repeat;
 }
 ul.menu {
@@ -262,6 +315,18 @@ ul.menu {
 .cell-highlight,
 .button,
 .button.disabled,
-.menu-group-title {
+.menu-group-title,
+.style-controls button,
+.style-controls button.disabled,
+.style-controls input[type=submit],
+.style-controls input[type=submit].disabled,
+.style-controls input[type=button],
+.style-controls input[type=button].disabled {
+  background: #ddccbb url(hochzeit/fossil_paper_light.jpg) repeat;
+}
+.style-controls input[type=password],
+.style-controls input[type=text],
+.style-controls select,
+.style-controls textarea {
   background: #ddccbb url(hochzeit/fossil_paper_light.jpg) repeat;
 }

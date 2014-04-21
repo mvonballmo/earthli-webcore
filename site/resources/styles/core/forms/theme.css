@@ -1,68 +1,53 @@
+.basic-form fieldset {
+  border-top: 1px dotted #c2c2c2;
+}
 .basic-form fieldset legend {
-  font-weight: bold;
-  border: 1px solid silver;
-  background: #EEE;
-  padding: 2px 5px;
+  padding: 2px 4px;
+  margin-left: -5px;
+}
+.basic-form input[type=text],
+.basic-form input[type=password],
+.basic-form input[type=file],
+.basic-form textarea {
+  margin-top: -0.3em;
 }
 .basic-form .help {
   padding: 5px;
   padding-left: 25px;
-  background-image: url(info.png);
+  background-image: url(../../../icons/webcore_png/indicators/info_16px.png);
   background-repeat: no-repeat;
-  background-position: 2px 5px;
+  background-position: 5px 8px;
   border: 1px solid #AAF;
   background-color: #DDEEFF;
   color: #666666;
-  font-size: 80%;
-  line-height: 130%;
 }
 .basic-form .hint {
   font-size: 85%;
   font-style: italic;
 }
-.basic-form input .basic-form textarea .basic-form select {
-  background-color: white;
-  border: 1px solid gray;
-  padding: 2px 2px;
-}
-.basic-form textarea,
-.basic-form input[type=text],
-.basic-form input[type=password],
-.basic-form select {
-  font-family: "Lucida Grande", Lucida, Verdana, Arial, Helvetica, sans-serif;
-  font-size: 10pt;
+.basic-form label .description {
+  display: block;
+  font-style: italic;
 }
 .basic-form textarea {
   height: 85px;
 }
-.basic-form label:first-child:after {
-  content: ":";
-}
 .basic-form .required label:first-child {
   font-weight: bold;
-}
-.basic-form fieldset {
-  border: 1px solid gray;
 }
 .basic-form .group {
   line-height: 135%;
 }
-a.cancel:link {
-  color: #666666;
-}
-a.cancel:visited {
-  color: #666666;
-}
-.buttons-top {
+.basic-form .buttons-top {
   padding-bottom: 10px;
   border-bottom: 1px solid silver;
 }
-.buttons-middle {
+.basic-form .buttons-middle {
   border: 1px solid silver;
   border-width: 1px 0;
   padding: 10px 0;
 }
-.buttons-bottom {
+.basic-form .buttons-bottom {
   border-top: 1px solid silver;
   padding-top: 10px;
 }

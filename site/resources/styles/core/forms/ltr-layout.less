@@ -1,64 +1,73 @@
+@import "../core-values";
+@import "form-values";
+
 .basic-form
 {
   width: 800px;
-}
 
-.basic-form input[type=text],
-.basic-form input[type=password],
-.basic-form input[type=file],
-.basic-form textarea,
-.basic-form select,
-.basic-form .hint,
-.basic-form .group,
-.basic-form .buttons-bottom,
-.basic-form .buttons-top,
-.basic-form .buttons-middle
-{
-  width: 300px;
-}
+  input[type=text],
+  input[type=password],
+  input[type=file],
+  textarea,
+  select,
+  .hint,
+  .group,
+  .buttons-bottom,
+  .buttons-top,
+  .buttons-middle
+  {
+    width: 300px;
+  }
 
-.basic-form .two-inputs input,
-.basic-form .two-inputs select,
-.basic-form .two-inputs textarea
-{
-  width: 140px;
-}
+  .two-inputs
+  {
+    input,
+    select,
+    textarea
+    {
+      width: 150px;
+    }
+  }
 
-.basic-form .three-inputs input,
-.basic-form .three-inputs select,
-.basic-form .three-inputs textarea
-{
-  width: 95px;
-}
+  .three-inputs
+  {
+    input,
+    select,
+    textarea
+    {
+      width: 100px;
+    }
+  }
 
-.basic-form .form-row,
-.basic-form .group,
-.basic-form .hint
-{
-  margin-left: 200px;
-}
+  .form-row,
+  .group,
+  .hint
+  {
+    margin-left: @label-area-width;
+  }
 
-.basic-form label:first-child
-{
-  float: left;
-  width: 200px;
-}
+  label:first-child
+  {
+    float: left;
+    width: @label-area-width;
+  }
 
-.basic-form .help
-{
-  float: right;
-  width: 180px;
-  height: auto;
-  margin-right: 12px;
-}
+  .help
+  {
+    float: right;
+    width: 180px;
+    height: auto;
+    margin-right: 12px;
+  }
 
-.basic-form fieldset
-{
-  padding-right: 0px;
-  margin-right: 0px;
-}
+  fieldset
+  {
+    padding-right: 0px;
+    margin-right: 0px;
 
-.basic-form fieldset fieldset
-{
-  border-right-width: 0px;
+    fieldset
+    {
+      border-right-width: 0px;
+    }
+  }
 }

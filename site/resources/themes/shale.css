@@ -128,7 +128,7 @@ table.columns > tbody > tr > th,
 .preview,
 .chart,
 pre > code,
-.form-basic-block,
+.basic-form-block,
 .pullquote {
   border-color: #3e454c;
 }
@@ -191,26 +191,75 @@ pre > code,
 .quote-block {
   color: #9fa1a4;
 }
-.button {
+.style-controls input,
+.style-controls select {
+  margin: 0;
+}
+.style-controls input[type="radio"],
+.style-controls input[type="checkbox"] {
+  vertical-align: middle;
+  margin: 0;
+  padding: 0;
+}
+.style-controls button,
+.style-controls input[type=submit],
+.style-controls input[type=text],
+.style-controls input[type=password],
+.style-controls input[type=button],
+.style-controls select,
+.style-controls textarea {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+.style-controls input[type=text],
+.style-controls input[type=password],
+.style-controls select,
+.style-controls textarea {
+  background-color: #3c4349;
+  border: 1px solid #71777c;
+  border-radius: 4px;
+  padding: 4px;
+  margin-left: -5px;
+}
+.button,
+.style-controls button,
+.style-controls input[type=submit],
+.style-controls input[type=button] {
   background-color: #3c4349;
   border-color: #71777c;
   color: #acaeb0;
 }
 a.button:link,
-a.button:visited {
+a.button:visited,
+a.style-controls button:link,
+a.style-controls button:visited,
+a.style-controls input[type=submit]:link,
+a.style-controls input[type=submit]:visited,
+a.style-controls input[type=button]:link,
+a.style-controls input[type=button]:visited {
   color: #acaeb0;
 }
-.button.selected {
+.button.selected,
+.style-controls button.selected,
+.style-controls input[type=submit].selected,
+.style-controls input[type=button].selected {
   background-color: #515a62;
   border-color: #71777c;
   color: #a1c9ff;
 }
-.button.disabled {
+.button.disabled,
+.style-controls button.disabled,
+.style-controls input[type=submit].disabled,
+.style-controls input[type=button].disabled {
   background-color: #3e454c;
   border-color: #636a70;
   color: #85898d;
 }
-.button:hover:not(.disabled):not(.selected) {
+.button:hover:not(.disabled):not(.selected),
+.style-controls button:hover:not(.disabled):not(.selected),
+.style-controls input[type=submit]:hover:not(.disabled):not(.selected),
+.style-controls input[type=button]:hover:not(.disabled):not(.selected) {
   background-color: #515a62;
   border-color: #71777c;
 }
@@ -229,9 +278,12 @@ ul.menu .menu-item:hover {
 ul.menu .menu-item-description {
   color: #acaeb0;
 }
-.text-control,
-.menu-control {
+form.style-controls input[type=text],
+form.style-controls input[type=password],
+form.style-controls select,
+form.style-controls textarea {
   background-color: #3c4349;
-  color: #acaeb0;
   border-color: #71777c;
+  border-radius: 4px;
+  padding: 4px;
 }

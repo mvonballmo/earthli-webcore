@@ -1,23 +1,21 @@
-.basic-form fieldset fieldset,
-.basic-form .hint,
-.basic-form fieldset .group,
-.basic-form fieldset legend {
-  margin-left: 0px;
-}
 .basic-form fieldset {
-  margin-left: 200px;
-  border-left-width: 0px;
-  border-right-width: 0px;
-  border-bottom-width: 0px;
+  margin-left: 215px;
+  border: none;
   padding-left: 0px;
 }
+.basic-form fieldset fieldset,
+.basic-form fieldset .group {
+  margin-left: 0;
+}
+.basic-form .hint {
+  margin-left: 0;
+}
 .basic-form > p {
-  /* Applies to field rows appearing directly in a form (not in a fieldset). */
-  margin-left: 200px;
+  /* Applies to form rows appearing directly in a form (not in a fieldset). */
+  margin-left: 215px;
 }
 .basic-form label:first-child,
-.basic-form label:first-child,
 .basic-form .one-input label:first-child {
-  margin-left: -210px;
+  margin-left: -230px;
   text-align: right;
 }

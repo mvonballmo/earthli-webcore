@@ -2,23 +2,22 @@
   margin: 0px;
   margin-top: 15px;
 }
+.basic-form fieldset fieldset .group {
+  margin-left: 0px;
+}
 .basic-form input,
 .basic-form textarea,
 .basic-form select {
   margin-left: 0px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
 }
 .basic-form input[type=checkbox],
 .basic-form input[type=radio] {
   vertical-align: baseline;
   margin-left: 0px;
-  margin-top: 3px;
-}
-.basic-form input[type=submit],
-.basic-form button {
-  /* Do not use the surrounding line-height; instead, use padding. */
-  display: inline-block;
-  line-height: normal;
-  padding: 2px 8px;
+  margin-top: .5em;
 }
 .basic-form .help p:first-child {
   margin-top: 0px;
@@ -35,9 +34,6 @@
 .basic-form .group {
   display: block;
   margin: 3px 0px;
-}
-.basic-form fieldset fieldset .group {
-  margin-left: 0px;
 }
 .basic-form .group + .group {
   clear: left;

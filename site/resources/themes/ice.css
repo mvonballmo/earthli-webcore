@@ -122,20 +122,20 @@ h4 code {
 table.columns > tbody > tr > td,
 table.columns > tbody > tr > th,
 .abstract {
-  border-color: #8aabca;
+  border-color: #c2c2c2;
 }
 .quote-block,
 .preview,
 .chart,
 pre > code,
-.form-basic-block,
+.basic-form-block,
 .pullquote {
-  border-color: #4a8cca;
+  border-color: #f2f2f2;
 }
 .object-navigator .links {
-  column-rule-color: #8aabca;
-  -webkit-column-rule-color: #8aabca;
-  -moz-column-rule-color: #8aabca;
+  column-rule-color: #c2c2c2;
+  -webkit-column-rule-color: #c2c2c2;
+  -moz-column-rule-color: #c2c2c2;
 }
 .info-box-top,
 .info-box-bottom,
@@ -191,47 +191,99 @@ pre > code,
 .quote-block {
   color: #7a7a7a;
 }
-.button {
+.style-controls input,
+.style-controls select {
+  margin: 0;
+}
+.style-controls input[type="radio"],
+.style-controls input[type="checkbox"] {
+  vertical-align: middle;
+  margin: 0;
+  padding: 0;
+}
+.style-controls button,
+.style-controls input[type=submit],
+.style-controls input[type=text],
+.style-controls input[type=password],
+.style-controls input[type=button],
+.style-controls select,
+.style-controls textarea {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+.style-controls input[type=text],
+.style-controls input[type=password],
+.style-controls select,
+.style-controls textarea {
+  background-color: #ffffff;
+  border: 1px solid #c2c2c2;
+  border-radius: 4px;
+  padding: 4px;
+  margin-left: -5px;
+}
+.button,
+.style-controls button,
+.style-controls input[type=submit],
+.style-controls input[type=button] {
   background-color: #f8f8f8;
-  border-color: #8aabca;
+  border-color: #c2c2c2;
   color: #666666;
 }
 a.button:link,
-a.button:visited {
+a.button:visited,
+a.style-controls button:link,
+a.style-controls button:visited,
+a.style-controls input[type=submit]:link,
+a.style-controls input[type=submit]:visited,
+a.style-controls input[type=button]:link,
+a.style-controls input[type=button]:visited {
   color: #666666;
 }
-.button.selected {
+.button.selected,
+.style-controls button.selected,
+.style-controls input[type=submit].selected,
+.style-controls input[type=button].selected {
   background-color: #4a8cca;
-  border-color: #8aabca;
+  border-color: #c2c2c2;
   color: #ffffff;
 }
-.button.disabled {
+.button.disabled,
+.style-controls button.disabled,
+.style-controls input[type=submit].disabled,
+.style-controls input[type=button].disabled {
   background-color: #ffffff;
   border-color: #d7d7d7;
   color: #a3a3a3;
 }
-.button:hover:not(.disabled):not(.selected) {
+.button:hover:not(.disabled):not(.selected),
+.style-controls button:hover:not(.disabled):not(.selected),
+.style-controls input[type=submit]:hover:not(.disabled):not(.selected),
+.style-controls input[type=button]:hover:not(.disabled):not(.selected) {
   background-color: #ffffff;
-  border-color: #8aabca;
+  border-color: #c2c2c2;
 }
 ul.menu {
   background-color: #f8f8f8;
-  border-color: #8aabca;
+  border-color: #c2c2c2;
 }
 ul.menu .menu-group-title {
   background-color: #f0f0f0;
-  border-color: #8aabca;
+  border-color: #c2c2c2;
 }
 ul.menu .menu-item:hover {
   background-color: #ffffff;
-  border-color: #8aabca;
+  border-color: #c2c2c2;
 }
 ul.menu .menu-item-description {
   color: #666666;
 }
-.text-control,
-.menu-control {
+form.style-controls input[type=text],
+form.style-controls input[type=password],
+form.style-controls select,
+form.style-controls textarea {
   background-color: #ffffff;
-  color: #666666;
-  border-color: #8aabca;
+  border-color: #c2c2c2;
+  border-radius: 4px;
+  padding: 4px;
 }

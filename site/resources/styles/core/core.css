@@ -283,11 +283,9 @@ pre > code {
   margin-left: 15px;
 }
 .form-content,
-.grid-content {
-  margin-top: 15px;
-  margin-bottom: 15px;
-}
-.button-content {
+.grid-content,
+.button-content,
+.tree-content {
   margin-top: 15px;
   margin-bottom: 15px;
 }
@@ -423,48 +421,6 @@ td.object-in-list + td.object-in-list {
   margin: 15px 0;
 }
 /* @end */
-/* @group Forms */
-.form-basic-required,
-.form-basic-label {
-  font-weight: bold;
-  text-align: right;
-  white-space: nowrap;
-  padding: 2px 10px 2px 0;
-  vertical-align: top;
-}
-table.basic > tbody > tr > td.empty-label {
-  padding: 0;
-}
-.form-button-content {
-  text-align: right;
-}
-.form-basic .item-description {
-  margin-left: 15px;
-  margin-top: 5px;
-}
-.form-basic-block {
-  border-left: 3px solid #c2c2c2;
-  padding-left: 15px;
-  margin-left: -3px;
-}
-.form-basic-content {
-  padding: 2px 0;
-}
-.form-basic-content ul {
-  list-style: none;
-  display: block;
-  margin: 0;
-  padding: 0;
-}
-.form-basic-content ul li {
-  display: block;
-  padding-top: 2px;
-  padding-bottom: 2px;
-}
-.form-basic-description {
-  padding-top: 5px;
-}
-/* @end */
 /* @group Icons */
 .icon {
   display: inline;
@@ -585,7 +541,13 @@ ul.menu .menu-item-description {
 }
 .button + .menu-items.buttons,
 .menu-items.buttons + .menu-items.buttons,
-.menu-items.buttons + .button {
+.menu-items.buttons + .button,
+button + .menu-items.buttons,
+.menu-items.buttons + button,
+input[type=submit] + .menu-items.buttons,
+.menu-items.buttons + input[type=submit],
+input[type=button] + .menu-items.buttons,
+.menu-items.buttons + input[type=button] {
   margin-left: 10px;
 }
 .menu-items.standard li:before {
@@ -636,7 +598,10 @@ ul.menu .menu-item-description {
 .pager {
   margin-top: 15px;
 }
-.button {
+.button,
+button,
+input[type=submit],
+input[type=button] {
   display: inline-block;
   text-decoration: none;
   min-width: 2.2em;
@@ -654,40 +619,70 @@ ul.menu .menu-item-description {
   line-height: 100%;
 }
 a.button:link,
-a.button:visited {
+a.button:visited,
+abutton:link,
+abutton:visited,
+ainput[type=submit]:link,
+ainput[type=submit]:visited,
+ainput[type=button]:link,
+ainput[type=button]:visited {
   color: #333;
   text-decoration: none;
 }
-.button:hover:not(.disabled):not(.selected) {
+.button:hover:not(.disabled):not(.selected),
+button:hover:not(.disabled):not(.selected),
+input[type=submit]:hover:not(.disabled):not(.selected),
+input[type=button]:hover:not(.disabled):not(.selected) {
   border-color: darkgray;
   background-color: #DDDDDD;
 }
-.button.no-label {
+.button.no-label,
+button.no-label,
+input[type=submit].no-label,
+input[type=button].no-label {
   height: 2.2em;
 }
-.button + .button {
+.button + .button,
+button + button,
+input[type=submit] + input[type=submit],
+input[type=button] + input[type=button] {
   margin-left: 10px;
 }
-.button.disabled {
+.button.disabled,
+button.disabled,
+input[type=submit].disabled,
+input[type=button].disabled {
   color: #AAA;
   border-color: #DDD;
   cursor: default;
 }
-.button.selected {
+.button.selected,
+button.selected,
+input[type=submit].selected,
+input[type=button].selected {
   cursor: default;
   background-color: gray;
   border-color: #666;
   color: white;
 }
-.button img {
+.button img,
+button img,
+input[type=submit] img,
+input[type=button] img {
   position: relative;
   top: 2px;
 }
-.button .icon {
+.button .icon,
+button .icon,
+input[type=submit] .icon,
+input[type=button] .icon {
   display: inline-block;
   box-sizing: border-box;
 }
-.pager .button {
+.pager .button,
+.pager button,
+.pager input[type=submit],
+.pager input[type=button] {
   width: 2.2em;
   height: 2.2em;
 }
@@ -716,7 +711,10 @@ a.button:visited {
 .object-navigator .page-up {
   margin-bottom: 5px;
 }
-.object-navigator .links .button {
+.object-navigator .links .button,
+.object-navigator .links button,
+.object-navigator .links input[type=submit],
+.object-navigator .links input[type=button] {
   display: block;
   text-align: center;
 }
@@ -1123,10 +1121,16 @@ hr {
   right: 0;
   bottom: 0;
 }
-.top-left-overlay .button {
+.top-left-overlay .button,
+.top-left-overlay button,
+.top-left-overlay input[type=submit],
+.top-left-overlay input[type=button] {
   border-top-left-radius: 0;
 }
-.bottom-right-overlay .button {
+.bottom-right-overlay .button,
+.bottom-right-overlay button,
+.bottom-right-overlay input[type=submit],
+.bottom-right-overlay input[type=button] {
   border-bottom-right-radius: 0;
 }
 .entries {
@@ -1150,4 +1154,83 @@ hr {
 }
 .tiny-picture a {
   display: inline-block;
+}
+.basic-form-required,
+.basic-form-label {
+  font-weight: bold;
+  text-align: right;
+  white-space: nowrap;
+  padding: 2px 10px 2px 0;
+  vertical-align: top;
+}
+table.basic > tbody > tr > td.empty-label {
+  padding: 0;
+}
+.form-button-content {
+  text-align: right;
+}
+.basic-form .item-description {
+  margin-left: 15px;
+  margin-top: 5px;
+}
+.basic-form-block {
+  border-left: 3px solid #c2c2c2;
+  padding-left: 15px;
+  margin-left: -3px;
+}
+.basic-form-content {
+  padding: 2px 0;
+}
+.basic-form-content ul {
+  list-style: none;
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+.basic-form-content ul li {
+  display: block;
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+.basic-form-description {
+  padding-top: 5px;
+}
+.style-controls input,
+.style-controls select {
+  margin: 0;
+}
+.style-controls input[type="radio"],
+.style-controls input[type="checkbox"] {
+  vertical-align: middle;
+  margin: 0;
+  padding: 0;
+}
+.style-controls button,
+.style-controls input[type=submit],
+.style-controls input[type=text],
+.style-controls input[type=password],
+.style-controls input[type=button],
+.style-controls select,
+.style-controls textarea {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+.style-controls input[type=text],
+.style-controls input[type=password],
+.style-controls select,
+.style-controls textarea {
+  background-color: #f0f0f0;
+  border: 1px solid #c2c2c2;
+  border-radius: 4px;
+  padding: 4px;
+  margin-left: -5px;
+}
+@media print {
+  .top-box,
+  .banner-header,
+  .footer-data .links,
+  .footer-data .versions {
+    display: none;
+  }
 }

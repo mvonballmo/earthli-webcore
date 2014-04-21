@@ -438,13 +438,11 @@ class PICTURE_FORM extends ALBUM_ENTRY_FORM
       if (! $upload_found)
       {
         $options = new FORM_TEXT_CONTROL_OPTIONS ();
-        $options->width = '30em';
 
         $renderer->start_row ('Picture');
         $renderer->start_block (true);
 
         $props = $renderer->make_list_properties ();
-        $props->width = '30em';
         $props->on_click_script = 'file_option_changed (this)';
         $props->add_item ($this->app->resolve_icon_as_html ('{icons}buttons/upload', 'Upload', '16px') . ' Upload the picture below', 1);
         $renderer->start_row ();
@@ -502,7 +500,6 @@ class PICTURE_FORM extends ALBUM_ENTRY_FORM
     if (!$this->object_exists ())
     {
       $props = $renderer->make_list_properties ();
-      $props->width = '30em';
       $props->on_click_script = 'on_date_changed (this)';
       if (isset ($this->_exif_date))
       {

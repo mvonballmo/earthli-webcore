@@ -1,8 +1,6 @@
 @import "http://fonts.googleapis.com/css?family=Forum";
 
-body,
-.text-control,
-.menu-control
+body
 {
 	font-family: 'Forum', Georgia, Times New Roman, Times, serif;
 }

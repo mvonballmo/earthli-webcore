@@ -43,8 +43,6 @@ body,
 h4,
 td,
 th,
-.menu-control,
-.text-control,
 .menu,
 .nav-box,
 .button,
@@ -61,7 +59,7 @@ h5,
 .login-status,
 .footnote-reference,
 .subdued,
-.form-basic-description
+.basic-form-description
 {
   font-size: 10pt
 }

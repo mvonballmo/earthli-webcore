@@ -219,8 +219,6 @@ class FORM_LIST_PROPERTIES
 
   /**
    * Extra CSS class to apply to the control.
-   * Control will still have the class "menu-control", but this class is applied
-   * afterwards.
    */
   public $CSS_class = '';
 
@@ -329,7 +327,6 @@ class FORM_TEXT_CONTROL_OPTIONS
 
   /**
    * Extra CSS class to apply to the control.
-   * Control will still have the class "text-control", but this class is
    * applied afterwards.
    */
   public $CSS_class = '';
@@ -502,19 +499,23 @@ class FORM_RENDERER extends CONTROLS_RENDERER
     $this->_required_mark_used = false;
     $this->_column_started = false;
 
-//    if (isset ($this->width) && $this->width)
-//    {
-//      $style [] = 'width: ' . $this->width;
-//    }
+    /** @var THEMED_PAGE $themed_page */
+    $themed_page = $this->page;
+
+    $styled_class = '';
+    if (!$themed_page->theme->dont_apply_to_forms)
+    {
+      $styled_class = 'style-controls ';
+    }
 
     if (!empty($style) && sizeof ($style) > 0)
     {
       $style = implode ('; ', $style);
-      echo '<div class="form-' . $this->_form->CSS_class . '"><table class="basic" style="' . $style . '">' . "\n";
+      echo '<div class="' . $styled_class . $this->_form->CSS_class . '-form"><table class="basic" style="' . $style . '">' . "\n";
     }
     else
     {
-      echo '<div class="form-' . $this->_form->CSS_class . '"><table>' . "\n";
+      echo '<div class="' . $styled_class . $this->_form->CSS_class . '-form"><table>' . "\n";
     }
 
     if ($this->_form->num_errors (Form_general_error_id))
@@ -564,15 +565,15 @@ class FORM_RENDERER extends CONTROLS_RENDERER
     {
 ?>
   <tr>
-    <td class="form-<?php echo $CSS_class; ?>-label"><?php echo $title; ?></td>
-    <td class="form-<?php echo $CSS_class; ?>-content">
+    <td class="<?php echo $CSS_class; ?>-form-label"><?php echo $title; ?></td>
+    <td class="<?php echo $CSS_class; ?>-form-content">
 <?php
     }
     else
     {
 ?>
   <tr>
-    <td colspan="2" class="form-<?php echo $CSS_class; ?>-content">
+    <td colspan="2" class="<?php echo $CSS_class; ?>-form-content">
 <?php
     }
   }
@@ -666,7 +667,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
   {
 ?>
   <tr>
-    <td colspan="2" class="form-<?php echo $this->_form->CSS_class; ?>-separator">&nbsp;</td>
+    <td colspan="2" class="<?php echo $this->_form->CSS_class; ?>form--separator">&nbsp;</td>
   </tr>
 <?php
   }
@@ -683,14 +684,14 @@ class FORM_RENDERER extends CONTROLS_RENDERER
   {
     if (! $CSS_class)
     {
-      $CSS_class = "form-" . $this->_form->CSS_class . "-content";
+      $CSS_class = $this->_form->CSS_class . "form--content";
     }
 
     if ($title)
     {
   ?>
   <tr>
-    <td class="form-<?php echo $this->_form->CSS_class; ?>-label"><?php echo $title; ?></td>
+    <td class="<?php echo $this->_form->CSS_class; ?>-form-label"><?php echo $title; ?></td>
     <td class="text-flow <?php echo $CSS_class; ?>">
       <?php echo $text; ?>
     </td>
@@ -743,8 +744,8 @@ class FORM_RENDERER extends CONTROLS_RENDERER
       {
   ?>
   <tr>
-    <td class="form-<?php echo $this->_form->CSS_class; ?>-label"><?php echo $title; ?></td>
-    <td class="form-<?php echo $this->_form->CSS_class; ?>-content"><?php $this->_form->draw_errors ($id); ?></td>
+    <td class="<?php echo $this->_form->CSS_class; ?>-form-label"><?php echo $title; ?></td>
+    <td class="<?php echo $this->_form->CSS_class; ?>-form-content"><?php $this->_form->draw_errors ($id); ?></td>
   </tr>
   <?php
       }
@@ -752,7 +753,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
       {
   ?>
   <tr>
-    <td colspan="2" class="form-<?php echo $this->_form->CSS_class; ?>-content"><?php $this->_form->draw_errors ($id); ?></td>
+    <td colspan="2" class="<?php echo $this->_form->CSS_class; ?>-form-content"><?php $this->_form->draw_errors ($id); ?></td>
   </tr>
   <?php
       }
@@ -771,7 +772,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
   {
     if ($styled)
     {
-      echo '<div class="form-' . $this->_form->CSS_class . '-block">';
+      echo '<div class="' . $this->_form->CSS_class . 'form--block">';
     }
     else
     {
@@ -1222,7 +1223,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
       $CSS_class = $this->_get_text_control_CSS_class($field);
 
       $Result = $this->_start_control ($field, 'textarea');
-      $Result .= ' class="' . $CSS_class . '" style="box-sizing: border-box; display: block; width: ' . $width . '; height: ' . $height . '">';
+      $Result .= ' class="' . $CSS_class . '" style="box-sizing: border-box; width: ' . $width . '; height: ' . $height . '">';
       $Result .= $this->_to_html ($field, ENT_NOQUOTES) . '</textarea>';
 
       if ($field->description)
@@ -1616,7 +1617,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
       {
         ?>
         <tr>
-        <td colspan="2" class="form-<?php echo $this->_form->CSS_class; ?>-content"><?php echo $control_text; ?></td>
+        <td colspan="2" class="<?php echo $this->_form->CSS_class; ?>-form-content"><?php echo $control_text; ?></td>
         </tr>
         <?php
       }
@@ -1635,18 +1636,18 @@ class FORM_RENDERER extends CONTROLS_RENDERER
         {
           if ($field->required)
           {
-            $CSS_class = "form-" . $this->_form->CSS_class . "-required";
+            $CSS_class = $this->_form->CSS_class . "-form-required";
           }
           else
           {
-            $CSS_class = "form-" . $this->_form->CSS_class . "-label";
+            $CSS_class = $this->_form->CSS_class . "-form-label";
           }
           ?>
             <td class="<?php echo $CSS_class; ?>"><?php echo $label_content; ?></td>
         <?php
         }
         ?>
-          <td class="form-<?php echo $this->_form->CSS_class; ?>-content"><?php echo $control_text; ?></td>
+          <td class="<?php echo $this->_form->CSS_class; ?>-form-content"><?php echo $control_text; ?></td>
         </tr>
           <?php
       }
@@ -1801,7 +1802,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
       $Result .= ' OnChange=\'' . $options->on_change_script . '\'';
     }
 
-    $Result .= ' type="' . $type . '" class="' . $CSS_class . '" value="' . $this->_to_html ($field, ENT_QUOTES) . '" style="display: block; box-sizing: border-box; width: ' . $width . '">';
+    $Result .= ' type="' . $type . '" class="' . $CSS_class . '" value="' . $this->_to_html ($field, ENT_QUOTES) . '" style="box-sizing: border-box; width: ' . $width . '">';
 
     if ($field->description || $options->extra_description)
     {
@@ -2084,7 +2085,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    */
   private function _get_text_control_CSS_class($field)
   {
-    return $this->_get_control_CSS_class($field, 'text-control');
+    return $this->_get_control_CSS_class($field);
   }
 
   /**
@@ -2093,43 +2094,23 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    */
   private function _get_menu_control_CSS_class($field)
   {
-    return $this->_get_control_CSS_class($field, 'menu-control');
+    return $this->_get_control_CSS_class($field);
   }
 
   /**
    * @param FIELD $field
-   * @param string $base_class
    * @return string
    */
-  private function _get_control_CSS_class($field, $base_class)
+  private function _get_control_CSS_class($field)
   {
-    /** @var THEMED_PAGE $themed_page */
-    $themed_page = $this->page;
-
-    $Result = '';
-    if ($themed_page->theme->dont_apply_to_forms)
+    if ($field->required)
     {
-      if ($field->required)
-      {
-        $Result = 'required';
-
-        return $Result;
-      }
+      $Result = 'required';
 
       return $Result;
     }
-    else
-    {
-      $Result = $base_class;
-      if ($field->required)
-      {
-        $Result .= ' required';
 
-        return $Result;
-      }
-
-      return $Result;
-    }
+    return '';
   }
 
   /**
@@ -2172,7 +2153,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
 
   private function get_description_CSS_class()
   {
-    return 'form-' . $this->_form->CSS_class . '-description';
+    return $this->_form->CSS_class . '-form-description';
   }
 }
 

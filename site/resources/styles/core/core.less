@@ -52,7 +52,7 @@ table
   th
   {
     font-weight: bold;
-    border-bottom: @hairline_border_width solid @standard_border
+    border-bottom: @hairline_border_width solid @standard_border_color
   }
 
   td
@@ -123,7 +123,7 @@ table
       > th
       {
         padding: @cell_spacing @standard_spacing;
-        border-right: @hairline_border_width solid @standard_border;
+        border-right: @hairline_border_width solid @standard_border_color;
 
         &:last-child
         {
@@ -195,7 +195,7 @@ h5
 
 h2
 {
-  border-bottom: @hairline_border_width dotted @standard_border;
+  border-bottom: @hairline_border_width dotted @standard_border_color;
 }
 
 dl
@@ -245,7 +245,7 @@ kbd
   display: inline-block;
   font-family: monospace;
   background-color: #FAFAFA;
-  border-radius: 4px;
+  border-radius: @standard_border_radius;
   border: 1px solid silver;
   border-bottom: medium none #FFFFFF;
   box-shadow: 0 2px 0 rgba(0, 0, 0, 0.196), 0 0 0 @hairline_border_width #FFFFFF inset;
@@ -259,7 +259,7 @@ kbd
 {
   font-family: monospace;
   background-color: #333;
-  border: @hairline_border_width solid @standard_border;
+  border: @hairline_border_width solid @standard_border_color;
   color: white;
   padding: 0 @small_spacing;
   display: block;
@@ -276,7 +276,7 @@ pre > code
 {
   display: block;
   padding-left: @standard_spacing;
-  border-left: @thick_border_width solid @standard_border;
+  border-left: @thick_border_width solid @standard_border_color;
   margin: @standard_spacing 0 @standard_spacing -@thick_border_width;
 }
 
@@ -406,12 +406,12 @@ pre > code
   margin-left: -@standard_spacing;
   padding-left: @standard_spacing;
   padding-bottom: @small_spacing;
-  border-bottom: @hairline_border_width solid @standard_border;
+  border-bottom: @hairline_border_width solid @standard_border_color;
 }
 
 .top-box
 {
-  border-bottom: @hairline_border_width solid @standard_border;
+  border-bottom: @hairline_border_width solid @standard_border_color;
   margin-bottom: @standard_spacing;
   margin-right: -@standard_spacing;
   margin-left: -@standard_spacing;
@@ -424,13 +424,10 @@ pre > code
   margin-left: @standard_spacing;
 }
 
-.form-content, .grid-content
-{
-  margin-top: @standard_spacing;
-  margin-bottom: @standard_spacing;
-}
-
-.button-content
+.form-content,
+.grid-content,
+.button-content,
+.tree-content
 {
   margin-top: @standard_spacing;
   margin-bottom: @standard_spacing;
@@ -452,7 +449,7 @@ pre > code
   clear: both;
   padding-left: @standard_spacing;
   margin-top: @standard_spacing;
-  border-top: @hairline_border_width solid @standard_border;
+  border-top: @hairline_border_width solid @standard_border_color;
   padding-top: @small_spacing;
 }
 
@@ -532,7 +529,7 @@ pre > code
 .chart,
 .preview
 {
-  border-left: @thin_border_width solid @standard_border;
+  border-left: @thin_border_width solid @standard_border_color;
   padding-left: @standard_spacing;
   margin: @standard_spacing 0 @standard_spacing -@thin_border_width;
 }
@@ -595,14 +592,14 @@ td.object-in-list + td.object-in-list
 .info-box-top
 {
   line-height: normal;
-  border-bottom: @hairline_border_width solid @standard_border;
+  border-bottom: @hairline_border_width solid @standard_border_color;
   margin-bottom: @standard_spacing;
 }
 
 .info-box-bottom
 {
   line-height: normal;
-  border-top: @hairline_border_width solid @standard_border;
+  border-top: @hairline_border_width solid @standard_border_color;
   margin-top: @standard_spacing;
 }
 
@@ -621,71 +618,6 @@ td.object-in-list + td.object-in-list
 .menu-bar-bottom
 {
   margin: @standard_spacing 0;
-}
-
-/* @end */
-
-/* @group Forms */
-
-.form-basic
-{
-}
-
-.form-basic-required, .form-basic-label
-{
-  font-weight: bold;
-  text-align: right;
-  white-space: nowrap;
-  padding: @cell_spacing 10px @cell_spacing 0;
-  vertical-align: top;
-}
-
-table.basic > tbody > tr > td.empty-label
-{
-  padding: 0;
-}
-
-.form-button-content
-{
-  text-align: right;
-}
-
-.form-basic .item-description
-{
-  margin-left: @standard_spacing;
-  margin-top: @small_spacing;
-}
-
-.form-basic-block
-{
-  border-left: @thin_border_width solid @standard_border;
-  padding-left: @standard_spacing;
-  margin-left: -@thin_border_width;
-}
-
-.form-basic-content
-{
-  padding: @cell_spacing 0;
-}
-
-.form-basic-content ul
-{
-  list-style: none;
-  display: block;
-  margin: 0;
-  padding: 0;
-}
-
-.form-basic-content ul li
-{
-  display: block;
-  padding-top: 2px;
-  padding-bottom: 2px;
-}
-
-.form-basic-description
-{
-  padding-top: @small_spacing;
 }
 
 /* @end */
@@ -772,7 +704,7 @@ ul.menu
   white-space: nowrap;
   text-align: left;
   background-color: #FFFFFF;
-  border: @hairline_border_width solid @standard_border;
+  border: @hairline_border_width solid @standard_border_color;
 
   > li
   {
@@ -793,7 +725,7 @@ ul.menu
   .menu-group-title
   {
     padding: .6em .5em;
-    border-bottom: @hairline_border_width dotted @standard_border;
+    border-bottom: @hairline_border_width dotted @standard_border_color;
     cursor: default;
   }
 
@@ -829,7 +761,7 @@ ul.menu
   &:hover
   {
     text-decoration: none;
-    border-color: @standard_border;
+    border-color: @standard_border_color;
     background-color: #EEE;
   }
 }
@@ -890,7 +822,7 @@ ul.menu
 .description-box
 {
   width: 25%;
-  border-right: @hairline_border_width solid @standard_border;
+  border-right: @hairline_border_width solid @standard_border_color;
   padding-right: @standard_spacing;
 }
 
@@ -940,6 +872,10 @@ ul.menu
   margin-top: @standard_spacing;
 }
 
+button:extend(.button all) {}
+input[type=submit]:extend(.button all) {}
+input[type=button]:extend(.button all) {}
+
 .button
 {
   display: inline-block;
@@ -951,11 +887,11 @@ ul.menu
   -moz-box-sizing: border-box;
   cursor: pointer;
   background-color: #EEE;
-  border: @hairline_border_width solid @standard_border;
+  border: @hairline_border_width solid @standard_border_color;
   text-align: center;
   vertical-align: middle;
   white-space: nowrap;
-  border-radius: 4px;
+  border-radius: @standard_border_radius;
   line-height: 100%;
 }
 
@@ -1072,9 +1008,9 @@ a.button:link, a.button:visited
   -webkit-column-width: 250px;
   -moz-column-width: 250px;
 
-  column-rule: @hairline_border_width solid @standard_border;
-  -webkit-column-rule: @hairline_border_width solid @standard_border;
-  -moz-column-rule: @hairline_border_width solid @standard_border;
+  column-rule: @hairline_border_width solid @standard_border_color;
+  -webkit-column-rule: @hairline_border_width solid @standard_border_color;
+  -moz-column-rule: @hairline_border_width solid @standard_border_color;
 
   column-gap: @standard_spacing;
   -webkit-column-gap: @standard_spacing;
@@ -1143,7 +1079,7 @@ a.button:link, a.button:visited
 .cell-highlight,
 .cell-non-empty
 {
-  border: @hairline_border_width solid @standard_border;
+  border: @hairline_border_width solid @standard_border_color;
 }
 
 .cell-empty
@@ -1236,7 +1172,7 @@ span.error, span.caution, span.warning
 .quote-block
 {
   padding-left: @standard_spacing;
-  border-left: @thick_border_width solid @standard_border;
+  border-left: @thick_border_width solid @standard_border_color;
   margin-left: -@thick_border_width;
 }
 
@@ -1252,7 +1188,7 @@ span.error, span.caution, span.warning
 
 .pullquote
 {
-  border: @hairline_border_width solid @standard_border;
+  border: @hairline_border_width solid @standard_border_color;
   padding: @standard_spacing;
   font-size: 150%;
   margin: 0;
@@ -1283,7 +1219,7 @@ span.error, span.caution, span.warning
 .abstract
 {
   border-width: @hairline_border_width 0;
-  border-color: @standard_border;
+  border-color: @standard_border_color;
   border-style: solid;
   padding: @standard_spacing 0;
 }
@@ -1405,7 +1341,7 @@ blockquote p:first-child,
 
 .horizontal-separator
 {
-  border-bottom: @hairline_border_width solid @standard_border;
+  border-bottom: @hairline_border_width solid @standard_border_color;
   empty-cells: show;
   height: @hairline_border_width;
   clear: both;
@@ -1416,7 +1352,7 @@ hr
 {
   color: transparent;
   border: 0;
-  border-bottom: @hairline_border_width solid @standard_border;
+  border-bottom: @hairline_border_width solid @standard_border_color;
   empty-cells: show;
   height: .1em;
   clear: both;
@@ -1458,7 +1394,7 @@ hr
 
 .frame
 {
-  border: @hairline_border_width solid @standard_border;
+  border: @hairline_border_width solid @standard_border_color;
 }
 
 .minimal-commands
@@ -1592,7 +1528,7 @@ hr
 {
   padding-left: @standard_spacing;
   margin-left: -@standard_spacing;
-  border-right: @hairline_border_width solid @standard_border;
+  border-right: @hairline_border_width solid @standard_border_color;
   padding-right: @standard_spacing;
 }
 
@@ -1600,7 +1536,7 @@ hr
 {
   padding-right: @standard_spacing;
   margin-right: -@standard_spacing;
-  border-left: @hairline_border_width solid @standard_border;
+  border-left: @hairline_border_width solid @standard_border_color;
   padding-left: @standard_spacing;
 }
 
@@ -1712,4 +1648,11 @@ hr
 .tiny-picture a
 {
   display: inline-block;
+}
+
+@import "core-forms";
+
+@media print
+{
+  @import "printable";
 }

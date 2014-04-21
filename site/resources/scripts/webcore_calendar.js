@@ -46,9 +46,6 @@ var Calendar_style_weekend_day = 'calendar-weekend-day';
 var Calendar_style_month_day = 'calendar-month-day';
 var Calendar_style_other_day = 'calendar-other-day';
 
-var Calendar_style_menu_control = 'menu-control';
-var Calendar_style_text_control = 'text-control';
-
 var Calendar_image_path = '';
 
 var Calendar_image_previous_year = 'previous_year.png';
@@ -379,9 +376,6 @@ function HTML_CALENDAR ()
   this.weekend_day_style = Calendar_style_weekend_day;
   this.month_day_style = Calendar_style_month_day;
   this.other_day_style = Calendar_style_other_day;
-
-  this.menu_control_style = Calendar_style_menu_control;
-  this.text_control_style = Calendar_style_text_control;
 
   this.image_path = Calendar_image_path;
   this.previous_year_image = Calendar_image_previous_year;

@@ -1,0 +1,103 @@
+.basic-form
+{
+}
+
+.basic-form-required,
+.basic-form-label
+{
+  font-weight: bold;
+  text-align: right;
+  white-space: nowrap;
+  padding: @cell_spacing 10px @cell_spacing 0;
+  vertical-align: top;
+}
+
+table.basic > tbody > tr > td.empty-label
+{
+  padding: 0;
+}
+
+.form-button-content
+{
+  text-align: right;
+}
+
+.basic-form .item-description
+{
+  margin-left: @standard_spacing;
+  margin-top: @small_spacing;
+}
+
+.basic-form-block
+{
+  border-left: @thin_border_width solid @standard_border_color;
+  padding-left: @standard_spacing;
+  margin-left: -@thin_border_width;
+}
+
+.basic-form-content
+{
+  padding: @cell_spacing 0;
+}
+
+.basic-form-content ul
+{
+  list-style: none;
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+
+.basic-form-content ul li
+{
+  display: block;
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+
+.basic-form-description
+{
+  padding-top: @small_spacing;
+}
+
+.style-controls
+{
+  input,
+  select
+  {
+    margin: 0;
+  }
+
+  input[type="radio"],
+  input[type="checkbox"]
+  {
+    vertical-align: middle;
+    margin: 0;
+    padding: 0;
+  }
+
+  button,
+  input[type=submit],
+  input[type=text],
+  input[type=password],
+  input[type=button],
+  select,
+  textarea
+  {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+  }
+
+  input[type=text],
+  input[type=password],
+  select,
+  textarea
+  {
+    background-color: @edit_control_background_color;
+    border: 1px solid @control_border_color;
+    border-radius:  @standard_border_radius;
+    padding: @standard_border_radius;
+    margin-left: -@standard_border_radius - 1px;
+  }
+}

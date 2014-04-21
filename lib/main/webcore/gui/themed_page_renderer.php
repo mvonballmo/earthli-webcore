@@ -53,15 +53,12 @@ class THEMED_PAGE_RENDERER extends PAGE_RENDERER
    */
   public function display_styles ()
   {
+    /** @var THEMED_PAGE $page */
     $page = $this->page;
     $theme = $page->theme;
 
     $res = $page->resources ();
     $styles [] = $res->resolve_file ('{styles}core/core');
-    if (! $theme->dont_apply_to_forms)
-    {
-      $styles [] = $res->resolve_file ('{styles}core/core_forms');
-    }
     $styles [] = $res->resolve_file ($theme->font_size_CSS_file_name);
     $styles [] = $res->resolve_file ($theme->font_name_CSS_file_name);
     $styles [] = $res->resolve_file ($theme->main_CSS_file_name);

@@ -2,6 +2,8 @@
 @standard_spacing: @small_spacing * 3;
 @cell_spacing: 2px;
 
+@standard_border_radius: 4px;
+
 @text_flow_line_height: 160%;
 @compressed_text_flow_line_height: 130%;
 
@@ -41,9 +43,9 @@
 @thin_border_width: 3px;
 @thick_border_width: 6px;
 
-@standard_border: mix(@text_color, @background_color, 30%);
-@medium_border: darken(@standard_border, 10%);
-@accent_border: darken(@background_color, 5%);
+@standard_border_color: mix(@text_color, @background_color, 30%);
+@medium_border_color: darken(@standard_border_color, 10%);
+@accent_border_color: darken(@background_color, 5%);
 
 @code_text_color: @text_color;
 @highlighted_text_color: green;
@@ -51,7 +53,7 @@
 
 @control_text_color: mix(@text_color, @background_color, 75%);
 @control_background_color: darken(@background_color, 6%);
-@control_border_color: @standard_border;
+@control_border_color: @standard_border_color;
 
 @edit_control_text_color: @control_text_color;
 @edit_control_background_color: @control_background_color;
@@ -60,11 +62,11 @@
 @selected_control_background_color: @control_hover_background_color;
 
 @disabled_control_text_color: @dimmest_text_color;
-@disabled_control_background_color: @accent_border;
+@disabled_control_background_color: @accent_border_color;
 @disabled_control_border_color: mix(@dimmer_text_color, @background_color, 30%);
 
 @control_hover_background_color: lighten(@background_color, 3%);
-@control_hover_border_color: @standard_border;
+@control_hover_border_color: @standard_border_color;
 
 @menu_background_color: @control_background_color;
 @menu_title_background_color: @accent_background_color;
