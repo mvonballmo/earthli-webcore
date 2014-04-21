@@ -58,9 +58,12 @@ class UPLOAD_PICTURES_FORM extends ID_BASED_FORM
    */
   public $button_icon = '{icons}buttons/upload';
 
+  /**
+   * @param FOLDER $folder
+   */
   public function __construct ($folder)
   {
-    parent::__construct ($folder->context);
+    parent::__construct ($folder->app);
 
     $this->_folder = $folder;
 
@@ -118,7 +121,7 @@ class UPLOAD_PICTURES_FORM extends ID_BASED_FORM
   {
     parent::load_with_defaults ();
     $this->set_value ('day', $this->_folder->first_day);
-    $this->set_value ('title', 'Picture {#} - {file}');
+    $this->set_value ('title', '{file}');
     $this->set_value ('thumbnail_size', 200);
     $this->set_value ('create_thumbnail', true);
     $this->set_value ('read_exif', true);
