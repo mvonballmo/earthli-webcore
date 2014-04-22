@@ -1650,7 +1650,43 @@ hr
   display: inline-block;
 }
 
-@import "core-forms";
+.style-controls
+{
+  input,
+  select
+  {
+    margin: 0;
+  }
+
+  input[type="radio"],
+  input[type="checkbox"]
+  {
+    vertical-align: middle;
+    margin: 0;
+    padding: 0;
+  }
+
+  button,
+  input[type=submit],
+  input[type=button],
+  input[type=text],
+  input[type=password],
+  select,
+  textarea
+  {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+  }
+}
+
+@import "common-forms";
+@import "forms/base";
+@import "forms/ltr-layout";
+@import "forms/ltr-right";
+@import "forms/top-layout";
+@import "forms/top-right";
+@import "forms/theme";
 
 @media print
 {
