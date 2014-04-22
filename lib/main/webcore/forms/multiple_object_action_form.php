@@ -243,11 +243,9 @@ abstract class MULTIPLE_OBJECT_ACTION_FORM extends ID_BASED_FORM
     if ($this->object_list->has_objects ())
     {
       $renderer->start_column ();
-      $renderer->start_row ('', ' ');
-        echo $this->_draw_selected_objects ();
-      $renderer->finish_row ();
+        $this->_draw_selected_objects ();
       $renderer->start_column ();
-      $this->_draw_message ($renderer);
+        $this->_draw_message ($renderer);
       $renderer->finish_column ();
     }
     else

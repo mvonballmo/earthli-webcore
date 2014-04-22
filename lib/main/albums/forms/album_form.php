@@ -487,7 +487,6 @@ class ALBUM_FORM extends FOLDER_FORM
     $options->on_change_script = 'on_title_changed (this)';
 
     $renderer->draw_text_line_row ('title', $options);
-    $renderer->draw_separator ();
 
     if ($this->visible ('location'))
     {
@@ -506,15 +505,12 @@ class ALBUM_FORM extends FOLDER_FORM
     $item->on_click_script = 'on_url_root_enabled_changed (this)';
     $item->smart_wrapping = true;
     
-    $renderer->draw_check_box_row ('url_root_enabled', $item, '&nbsp;');
-    
-    $renderer->draw_separator ();
+    $renderer->draw_check_box_row ('url_root_enabled', $item);
 
     $options->on_change_script = null;
     $options->width = '12em';
 
-    $renderer->start_row ('Dates');
-    $renderer->start_block (true);
+    $renderer->start_block ('Dates');
 
     $props = $renderer->make_list_properties ();
     $props->on_click_script = 'on_day_mode_changed (this)';
@@ -534,15 +530,13 @@ class ALBUM_FORM extends FOLDER_FORM
     $renderer->draw_error_row ('dates');
 
     $renderer->finish_block ();
-    $renderer->finish_row ();
 
     $renderer->draw_separator ();
     $renderer->draw_submit_button_row ();
 
     $renderer->draw_separator ();
 
-    $renderer->start_row ('Settings');
-    $renderer->start_block (true);
+    $renderer->start_block ('Settings');
       $props = $renderer->make_list_properties ();
       $props->show_descriptions = true;
       $props->width = '30em';
@@ -573,17 +567,11 @@ class ALBUM_FORM extends FOLDER_FORM
       $renderer->draw_error_row ('picture');
 
     $renderer->finish_block ();
-    $renderer->finish_row ();
 
-    $renderer->draw_separator ();
-    $renderer->start_row ('Cover picture');
-      $this->_draw_cover_picture ($renderer);
-    $renderer->finish_row ();
-    $renderer->draw_separator ();
+    $this->_draw_cover_picture ($renderer);
 
     $renderer->draw_text_box_row ('summary', null, '3em');
     $renderer->draw_text_box_row ('description');
-    $renderer->draw_separator ();
     $renderer->draw_submit_button_row ();
 
     $this->_draw_history_item_controls ($renderer, false);
@@ -610,7 +598,7 @@ class ALBUM_FORM extends FOLDER_FORM
         $main_picture = $pic_query->object_at_id ($main_picture_id);
       }
 
-      $renderer->start_block (true);
+      $renderer->start_block ('Cover picture');
       $renderer->start_row ();
 
       if (isset ($main_picture))

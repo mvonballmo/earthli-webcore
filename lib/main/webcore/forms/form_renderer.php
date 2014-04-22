@@ -197,7 +197,6 @@ class FORM_LIST_PROPERTIES
   /**
    * Style to use for the list item title.
    * Used only if {@link $show_descriptions} is True.
-   * @see $description_class
    * @var string name of a CSS class.
    */
   public $item_class = '';
@@ -403,6 +402,8 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    */
   public $width = 'auto';
 
+  public $labels_CSS_class = 'ltr right';
+
   /**
    * Show the icon for required fields?
    * @var boolean
@@ -508,15 +509,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
       $styled_class = 'style-controls ';
     }
 
-    if (!empty($style) && sizeof ($style) > 0)
-    {
-      $style = implode ('; ', $style);
-      echo '<div class="' . $styled_class . $this->_form->CSS_class . '-form"><table class="basic" style="' . $style . '">' . "\n";
-    }
-    else
-    {
-      echo '<div class="' . $styled_class . $this->_form->CSS_class . '-form"><table>' . "\n";
-    }
+    echo '<div class="' . $styled_class . $this->_form->CSS_class . '-form ' . $this->labels_CSS_class . '">' . "\n";
 
     if ($this->_form->num_errors (Form_general_error_id))
     {
@@ -535,14 +528,11 @@ class FORM_RENDERER extends CONTROLS_RENDERER
     {
       $this->draw_separator ();
 ?>
-  <tr>
-    <td></td>
-    <td><?php echo $this->required_mark (); ?> Required fields</td>
-  </tr>
+  <p class="form-row"><?php echo $this->required_mark (); ?> Required fields</p>
 <?php
     }
 
-    echo "</table></div>\n";
+    echo "</div>\n";
   }
 
   /**
@@ -552,28 +542,20 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * labels for any rows already created in this block. To force a label area to be generated, pass ' ' as the
    * title.
    * @param string $title Label for the row.
-   * @param string $CSS_class CSS class assigned to the row's content container.
    */
-  public function start_row ($title = '', $CSS_class = '')
+  public function start_row ($title = '')
   {
-    if (! $CSS_class)
-    {
-      $CSS_class = $this->_form->CSS_class;
-    }
-
     if ($title)
     {
 ?>
-  <tr>
-    <td class="<?php echo $CSS_class; ?>-form-label"><?php echo $title; ?></td>
-    <td class="<?php echo $CSS_class; ?>-form-content">
+  <div class="form-row">
+    <label><?php echo $title; ?></label>
 <?php
     }
     else
     {
 ?>
-  <tr>
-    <td colspan="2" class="<?php echo $CSS_class; ?>-form-content">
+    <div class="form-row">
 <?php
     }
   }
@@ -584,8 +566,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
   public function finish_row ()
   {
 ?>
-    </td>
-  </tr>
+  </div>
 <?php
   }
 
@@ -633,13 +614,13 @@ class FORM_RENDERER extends CONTROLS_RENDERER
       $Result = null;
     }
 
+    $this->start_block ($title);
     $this->draw_text_row ($title, $description, $this->get_description_CSS_class());
     $this->start_row (' ');
     if (isset ($Result))
     {
       $Result->start ();
     }
-    $this->start_block ($styled);
 
     return $Result;
   }
@@ -652,12 +633,12 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    */
   public function finish_layer_row ($layer)
   {
-    $this->finish_block ();
     if (isset ($layer))
     {
       $layer->finish ();
     }
     $this->finish_row ();
+    $this->finish_block ();
   }
 
   /**
@@ -666,9 +647,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
   public function draw_separator ()
   {
 ?>
-  <tr>
-    <td colspan="2" class="<?php echo $this->_form->CSS_class; ?>form--separator">&nbsp;</td>
-  </tr>
+  <div class="form-row separator"></div>
 <?php
   }
 
@@ -687,27 +666,21 @@ class FORM_RENDERER extends CONTROLS_RENDERER
       $CSS_class = $this->_form->CSS_class . "form--content";
     }
 
+?>
+  <div class="form-row">
+<?php
     if ($title)
     {
-  ?>
-  <tr>
-    <td class="<?php echo $this->_form->CSS_class; ?>-form-label"><?php echo $title; ?></td>
-    <td class="text-flow <?php echo $CSS_class; ?>">
-      <?php echo $text; ?>
-    </td>
-  </tr>
-  <?php
+?>
+    <label><?php echo $title; ?></label>
+<?php
     }
-    else
-    {
-  ?>
-  <tr>
-    <td colspan="2" class="text-flow <?php echo $CSS_class; ?>">
+?>
+    <div class="text-flow <?php echo $CSS_class; ?>">
       <?php echo $text; ?>
-    </td>
-  </tr>
+    </div>
+  </div>
   <?php
-    }
   }
 
   /**
@@ -728,7 +701,6 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    */
   public function draw_error_row ($id, $title = ' ')
   {
-
     if (! $this->_form->num_errors ($id) && isset ($this->_num_controls [$id]))
     {
       $test_id = $id . ($this->_num_controls [$id] - 1);
@@ -740,23 +712,20 @@ class FORM_RENDERER extends CONTROLS_RENDERER
 
     if ($this->_form->num_errors ($id))
     {
+?>
+  <div class="form-row">
+  <?php
       if ($title)
       {
-  ?>
-  <tr>
-    <td class="<?php echo $this->_form->CSS_class; ?>-form-label"><?php echo $title; ?></td>
-    <td class="<?php echo $this->_form->CSS_class; ?>-form-content"><?php $this->_form->draw_errors ($id); ?></td>
-  </tr>
-  <?php
+    ?>
+    <label><?php echo $title; ?></label>
+    <?php
       }
-      else
-      {
-  ?>
-  <tr>
-    <td colspan="2" class="<?php echo $this->_form->CSS_class; ?>-form-content"><?php $this->_form->draw_errors ($id); ?></td>
-  </tr>
-  <?php
-      }
+
+      $this->_form->draw_errors ($id);
+    ?>
+  </div>
+<?php
     }
   }
 
@@ -765,20 +734,14 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * Use this feature to create hierarchical 'sub-forms'. Any rows added to the form
    * are added to blocks nested within the content area of the last open row. Should only be called when
    * there is already a row opened with {@link start_row()}. Must be closed with {@link finish_block()}.
-   * @param boolean $styled Applies a style using {@link FORM::$CSS_class} as
-   * a base (may make the block visible).
    */
-  public function start_block ($styled = false)
+  public function start_block ($title)
   {
-    if ($styled)
+    echo '<fieldset>' . "\n";
+    if ($title)
     {
-      echo '<div class="' . $this->_form->CSS_class . 'form--block">';
+      echo '<legend>' . $title . '</legend>';
     }
-    else
-    {
-      echo '<div>';
-    }
-    echo '<table>' . "\n";
   }
 
   /**
@@ -787,7 +750,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    */
   public function finish_block ()
   {
-    echo "</table></div>\n";
+    echo "</fieldset>\n";
   }
 
   /**
@@ -795,12 +758,11 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * To be used only when {@link start_row()} has already been called. Call {@link finish_indent()}
    * before calling {@link finish_row()} to maintain proper structure. These are useful when placing
    * controls after a radio button, so that the controls appear to "belong" to that selection.
-   * @param string $size CSS dimension controlling amount of indent
    * @see finish_indent()
    */
-  public function start_indent ($size = '2em')
+  public function start_indent ()
   {
-    echo "<div style=\"margin-left: $size\">\n";
+    echo "<div class=\"group\">\n";
   }
 
   /**
@@ -831,21 +793,15 @@ class FORM_RENDERER extends CONTROLS_RENDERER
     {
       $this->_column_started = true;
       $this->start_row ($title);
-  ?>
-    <table>
-      <tr>
-        <td style="vertical-align: top; padding-right: 1em">
-  <?php
-      $this->start_block ();
+      $box_renderer = $this->context->make_box_renderer();
+      $this->_box_renderers []= $box_renderer;
+      $box_renderer->start_column_set();
+      $box_renderer->new_column();
     }
     else
     {
-      $this->finish_block ();
-  ?>
-        </td>
-        <td style="vertical-align: top; padding-right: 1em">
-  <?php
-      $this->start_block ();
+      $box_renderer = $this->_box_renderers [count($this->_box_renderers) - 1];
+      $box_renderer->new_column();
     }
   }
 
@@ -857,12 +813,8 @@ class FORM_RENDERER extends CONTROLS_RENDERER
   public function finish_column ()
   {
     $this->_column_started = false;
-    $this->finish_block ();
-?>
-        </td>
-      </tr>
-    </table>
-<?php
+    $box_renderer = $this->_box_renderers [count($this->_box_renderers) - 1];
+    $box_renderer->finish_column_set();
     $this->finish_row ();
   }
 
@@ -933,11 +885,13 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * Draw a group of radio buttons onto a separate row in the form.
    * @param string $id
    * @param FORM_LIST_PROPERTIES $props
-   * @param string $title Override the title; used instead of the field title
    */
-  public function draw_radio_group_row ($id, $props, $title = null)
+  public function draw_radio_group_row ($id, $props)
   {
-    $this->_draw_field_row ($this->_field_at ($id), $this->radio_group_as_html ($id, $props), $title);
+    echo $this->radio_group_as_html ($id, $props);
+
+    $field = $this->_field_at($id);
+    $this->draw_error_row ($field->id);
   }
 
   /**
@@ -997,16 +951,18 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    */
   public function draw_check_group_row ($id, $props, $title = null)
   {
-    $this->_draw_field_row ($this->_field_at ($id), $this->check_group_as_HTML ($id, $props), $title);
+    echo $this->check_group_as_HTML ($id, $props);
+
+    $field = $this->_field_at($id);
+    $this->draw_error_row ($field->id);
   }
 
   /**
    * Draw a checkbox onto a separate row in the form.
    * @param string $id The id of the field to render as a check box.
    * @param CHECK_BOX_ITEM $item Properties used to render this check box.
-   * @param string $title An optional title to use for the row.
    */
-  public function draw_check_box_row ($id, $item = null, $title = '')
+  public function draw_check_box_row ($id, $item = null)
   {
     $field = $this->_field_at ($id);
     if (! isset ($item))
@@ -1017,12 +973,14 @@ class FORM_RENDERER extends CONTROLS_RENDERER
 
     if ($field->description)
     {
-      $item->title .= ' <span class="' . $this->get_description_CSS_class() . '">' . $field->description . '</span>';
+      $item->description .= $field->description;
     }
 
     $ctrl = $this->_grouped_control_as_HTML ($field, null, $item, 'checkbox', $field->id);
-    $ctrl = $this->_control_created ($id, $ctrl);
-    $this->_draw_field_row ($field, $ctrl, $field->id);
+    echo $this->_control_created ($id, $ctrl);
+
+    $field = $this->_field_at($id);
+    $this->draw_error_row ($field->id);
   }
 
   /**
@@ -1223,7 +1181,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
       $CSS_class = $this->_get_text_control_CSS_class($field);
 
       $Result = $this->_start_control ($field, 'textarea');
-      $Result .= ' class="' . $CSS_class . '" style="box-sizing: border-box; width: ' . $width . '; height: ' . $height . '">';
+      $Result .= ' class="' . $CSS_class . '" style="height: ' . $height . '">';
       $Result .= $this->_to_html ($field, ENT_NOQUOTES) . '</textarea>';
 
       if ($field->description)
@@ -1612,45 +1570,20 @@ class FORM_RENDERER extends CONTROLS_RENDERER
           $label_content = $this->required_mark () . ' ' . $label_content;
         }
       }
+?>
+      <div class="form-row<?php if ($field->required) { echo ' required'; }?>">
+<?php
+      if (!empty($label_content) || !ctype_space($label_content))
+      {
+        ?>
+        <label><?php echo $label_content; ?></label>
+        <?php
+      }
 
-      if (empty($label_content))
-      {
-        ?>
-        <tr>
-        <td colspan="2" class="<?php echo $this->_form->CSS_class; ?>-form-content"><?php echo $control_text; ?></td>
-        </tr>
-        <?php
-      }
-      else
-      {
-        ?>
-        <tr>
-        <?php
-        if (ctype_space($label_content))
-        {
-        ?>
-          <td></td>
-        <?php
-        }
-        else
-        {
-          if ($field->required)
-          {
-            $CSS_class = $this->_form->CSS_class . "-form-required";
-          }
-          else
-          {
-            $CSS_class = $this->_form->CSS_class . "-form-label";
-          }
-          ?>
-            <td class="<?php echo $CSS_class; ?>"><?php echo $label_content; ?></td>
-        <?php
-        }
-        ?>
-          <td class="<?php echo $this->_form->CSS_class; ?>-form-content"><?php echo $control_text; ?></td>
-        </tr>
-          <?php
-      }
+      echo $control_text;
+?>
+      </div>
+      <?php
 
       $this->draw_error_row ($field->id);
     }
@@ -1802,7 +1735,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
       $Result .= ' OnChange=\'' . $options->on_change_script . '\'';
     }
 
-    $Result .= ' type="' . $type . '" class="' . $CSS_class . '" value="' . $this->_to_html ($field, ENT_QUOTES) . '" style="box-sizing: border-box; width: ' . $width . '">';
+    $Result .= ' type="' . $type . '" class="' . $CSS_class . '" value="' . $this->_to_html ($field, ENT_QUOTES) . '">';
 
     if ($field->description || $options->extra_description)
     {
@@ -1856,27 +1789,6 @@ class FORM_RENDERER extends CONTROLS_RENDERER
         $counter = 0;
       }
 
-      $num_items = sizeof ($props->items);
-
-      $needs_descriptions = $props->show_descriptions;
-      if ($needs_descriptions)
-      {
-        $needs_descriptions = false;
-        foreach ($props->items as $item)
-        {
-          if ($id)
-          {
-            $needs_descriptions = ! empty ($item->description);
-          }
-          else
-          {
-            $field = $this->_field_at ($item->title);
-            $needs_descriptions = ! empty ($field->description);
-          }
-          if ($needs_descriptions) break;
-        }
-      }
-
       foreach ($props->items as $item)
       {
         $counter += 1;
@@ -1903,62 +1815,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
             $ctrl = $this->_control_created ($id, $ctrl, false);
           }
 
-          if ($needs_descriptions)
-          {
-            $Result .= '<dt';
-            if ($props->item_class)
-            {
-              $Result .= ' class="' . $props->item_class . '"';
-            }
-            $Result .= '>' . $ctrl . "</dt>\n<dd";
-            if ($props->description_class)
-            {
-              $Result .= ' class="item-description ' . $props->description_class . '"';
-            }
-            $Result .= '><label for="' . $dom_id . '">' . $item->description . "</label></dd>\n";
-          }
-          else
-          {
-            if ($props->item_class)
-            {
-              $controls [] = '<li class="' . $props->item_class . '">' . $ctrl . '</li>';
-            }
-            else
-            {
-              $controls [] = '<li>' . $ctrl . '</li>';
-            }
-
-            if (($counter == $num_items) || ($props->items_per_row == 1) || (($counter % $props->items_per_row) == 0))
-            {
-              $ctrl_string = implode ("\n", $controls);
-              $controls = null;
-
-              /* Avoid making an extra block if the controls never wrapped. */
-
-              if (($Result == '') && ($counter == $num_items))
-              {
-                $Result .= $ctrl_string . "\n";
-              }
-              else
-              {
-                if ($props->line_spacing)
-                {
-                  if ($Result != '')
-                  {
-                    $Result .= '<li style="margin-top: ' . $props->line_spacing . '">' . $ctrl_string . "</li>\n";
-                  }
-                  else
-                  {
-                    $Result = '<li>' . $ctrl_string . "</li>\n";
-                  }
-                }
-                else
-                {
-                  $Result .= '<li>' . $ctrl_string . "</li>\n";
-                }
-              }
-            }
-          }
+          $Result .= $ctrl;
         }
       }
 
@@ -1969,22 +1826,6 @@ class FORM_RENDERER extends CONTROLS_RENDERER
       else
       {
         $width = null;
-      }
-
-      if ($needs_descriptions)
-      {
-        if ($width)
-        {
-          $Result = '<dl style="margin:0px; width: ' . $width . "\">" . $Result . "</dl>\n";
-        }
-        else
-        {
-          $Result = '<dl style="margin:0px">' . $Result . "</dl>\n";
-        }
-      }
-      else
-      {
-        $Result = '<ul class="' . $type . '-control">' . $Result . "</ul>\n";
       }
 
       if ($id)
@@ -2021,57 +1862,44 @@ class FORM_RENDERER extends CONTROLS_RENDERER
   {
     if ($field->visible)
     {
-      $Result = $this->_start_control ($field, 'input', $dom_id);
-      $Result .= ' type="' . $type . '" value="' . $item->value . '"';
-
-      if ($type == 'checkbox')
-      {
-        $Result .= ' class="check-box-control"';
-      }
-      elseif ($type == 'radio')
-      {
-        $Result .= ' class="radio-control"';
-      }
+      $Result = '<div class="group one-input">';
+      $ctrl = $this->_start_control ($field, 'input', $dom_id);
+      $ctrl .= ' type="' . $type . '" value="' . $item->value . '"';
 
       if (! $item->enabled && $field->enabled)
       {
-        $Result .= ' disabled';
+        $ctrl .= ' disabled';
       }
 
       if (! empty ($item->on_click_script))
       {
-        $Result .= ' onClick="' . $item->on_click_script . '"';
+        $ctrl .= ' onClick="' . $item->on_click_script . '"';
       }
       elseif (isset ($props) && ! empty ($props->on_click_script))
       {
-        $Result .= ' onClick="' . $props->on_click_script . '"';
+        $ctrl .= ' onClick="' . $props->on_click_script . '"';
       }
 
       if ($field->selected ($item->value))
       {
-        $Result .= ' checked';
+        $ctrl .= ' checked';
       }
 
-      $Result .= '>';
-      $ctrl = $Result;
-      $label = '<label for="' . $dom_id . '">' . $item->title . '</label>' . $item->text;
-      if (((isset ($props) && $props->smart_wrapping) || $item->smart_wrapping) && ($item->title || $item->text))
+      $ctrl .= '>';
+
+      $label = '<label for="' . $dom_id . '">';
+      if ($item->description)
       {
-        $box = $this->context->make_box_renderer ();
-        ob_start ();
-          $box->start_column_set ();
-          $box->new_column_of_type ('left-column');
-          echo $ctrl;
-          $box->new_column ('width: 100%');
-          echo $label;
-          $box->finish_column_set ();
-        $Result = ob_get_contents ();
-        ob_end_clean ();
+        $label .= '<span class="title">' . $item->title . '</span><span class="description">' . $item->description . '</span>';
       }
       else
       {
-        $Result = $ctrl . ' ' . $label;
+        $label .= $item->title;
       }
+
+      $label .= '</label>';
+
+      $Result = $Result . $ctrl . $label . '</div>';
 
       return $Result;
     }
@@ -2150,6 +1978,13 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * @access private
    */
   protected $_widths;
+
+  /**
+   * Stack of box renderers created with {@link start_column()}.
+   * @var BOX_RENDERER[]
+   * @access private
+   */
+  private $_box_renderers;
 
   private function get_description_CSS_class()
   {
