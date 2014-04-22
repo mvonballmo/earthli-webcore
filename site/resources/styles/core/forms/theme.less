@@ -13,12 +13,15 @@
     }
   }
 
-  input[type=text],
-  input[type=password],
-  input[type=file],
-  textarea
+  label
   {
-    margin-top: -.3em;
+    + input[type=text],
+    + input[type=password],
+    + input[type=file],
+    + textarea
+    {
+      margin-top: -.3em;
+    }
   }
 
   .help

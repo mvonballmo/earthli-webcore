@@ -23,6 +23,22 @@ For more information about the earthli WebCore, visit:
 http://www.earthli.com/software/webcore
 
 ****************************************************************************/
+.style-controls button,
+.style-controls input[type=submit],
+.style-controls input[type=button] {
+  color: #c8bfae;
+}
+.style-controls input[type=text],
+.style-controls input[type=password],
+.style-controls select,
+.style-controls textarea {
+  background-color: #422842;
+  color: #c8bfae;
+  border: 1px solid #836b79;
+  border-radius: 4px;
+  padding: 4px;
+  margin-left: -5px;
+}
 body {
   background-color: #553355;
   color: #eeeecc;
@@ -190,37 +206,6 @@ pre > code,
 .quote-inline,
 .quote-block {
   color: #b8ada2;
-}
-.style-controls input,
-.style-controls select {
-  margin: 0;
-}
-.style-controls input[type="radio"],
-.style-controls input[type="checkbox"] {
-  vertical-align: middle;
-  margin: 0;
-  padding: 0;
-}
-.style-controls button,
-.style-controls input[type=submit],
-.style-controls input[type=text],
-.style-controls input[type=password],
-.style-controls input[type=button],
-.style-controls select,
-.style-controls textarea {
-  font-family: inherit;
-  font-size: inherit;
-  line-height: inherit;
-}
-.style-controls input[type=text],
-.style-controls input[type=password],
-.style-controls select,
-.style-controls textarea {
-  background-color: #422842;
-  border: 1px solid #836b79;
-  border-radius: 4px;
-  padding: 4px;
-  margin-left: -5px;
 }
 .button,
 .style-controls button,

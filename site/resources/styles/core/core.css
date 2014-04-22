@@ -547,7 +547,13 @@ button + .menu-items.buttons,
 input[type=submit] + .menu-items.buttons,
 .menu-items.buttons + input[type=submit],
 input[type=button] + .menu-items.buttons,
-.menu-items.buttons + input[type=button] {
+.menu-items.buttons + input[type=button],
+.style-controls button + .menu-items.buttons,
+.menu-items.buttons + .style-controls button,
+.style-controls input[type=submit] + .menu-items.buttons,
+.menu-items.buttons + .style-controls input[type=submit],
+.style-controls input[type=button] + .menu-items.buttons,
+.menu-items.buttons + .style-controls input[type=button] {
   margin-left: 10px;
 }
 .menu-items.standard li:before {
@@ -601,12 +607,15 @@ input[type=button] + .menu-items.buttons,
 .button,
 button,
 input[type=submit],
-input[type=button] {
+input[type=button],
+.style-controls button,
+.style-controls input[type=submit],
+.style-controls input[type=button] {
   display: inline-block;
   text-decoration: none;
   min-width: 2.2em;
   min-height: 2.2em;
-  padding: .5em;
+  padding: 5px;
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   cursor: pointer;
@@ -625,33 +634,51 @@ abutton:visited,
 ainput[type=submit]:link,
 ainput[type=submit]:visited,
 ainput[type=button]:link,
-ainput[type=button]:visited {
+ainput[type=button]:visited,
+a.style-controls button:link,
+a.style-controls button:visited,
+a.style-controls input[type=submit]:link,
+a.style-controls input[type=submit]:visited,
+a.style-controls input[type=button]:link,
+a.style-controls input[type=button]:visited {
   color: #333;
   text-decoration: none;
 }
 .button:hover:not(.disabled):not(.selected),
 button:hover:not(.disabled):not(.selected),
 input[type=submit]:hover:not(.disabled):not(.selected),
-input[type=button]:hover:not(.disabled):not(.selected) {
+input[type=button]:hover:not(.disabled):not(.selected),
+.style-controls button:hover:not(.disabled):not(.selected),
+.style-controls input[type=submit]:hover:not(.disabled):not(.selected),
+.style-controls input[type=button]:hover:not(.disabled):not(.selected) {
   border-color: darkgray;
   background-color: #DDDDDD;
 }
 .button.no-label,
 button.no-label,
 input[type=submit].no-label,
-input[type=button].no-label {
+input[type=button].no-label,
+.style-controls button.no-label,
+.style-controls input[type=submit].no-label,
+.style-controls input[type=button].no-label {
   height: 2.2em;
 }
 .button + .button,
 button + button,
 input[type=submit] + input[type=submit],
-input[type=button] + input[type=button] {
+input[type=button] + input[type=button],
+.style-controls button + .style-controls button,
+.style-controls input[type=submit] + .style-controls input[type=submit],
+.style-controls input[type=button] + .style-controls input[type=button] {
   margin-left: 10px;
 }
 .button.disabled,
 button.disabled,
 input[type=submit].disabled,
-input[type=button].disabled {
+input[type=button].disabled,
+.style-controls button.disabled,
+.style-controls input[type=submit].disabled,
+.style-controls input[type=button].disabled {
   color: #AAA;
   border-color: #DDD;
   cursor: default;
@@ -659,7 +686,10 @@ input[type=button].disabled {
 .button.selected,
 button.selected,
 input[type=submit].selected,
-input[type=button].selected {
+input[type=button].selected,
+.style-controls button.selected,
+.style-controls input[type=submit].selected,
+.style-controls input[type=button].selected {
   cursor: default;
   background-color: gray;
   border-color: #666;
@@ -668,21 +698,30 @@ input[type=button].selected {
 .button img,
 button img,
 input[type=submit] img,
-input[type=button] img {
+input[type=button] img,
+.style-controls button img,
+.style-controls input[type=submit] img,
+.style-controls input[type=button] img {
   position: relative;
   top: 2px;
 }
 .button .icon,
 button .icon,
 input[type=submit] .icon,
-input[type=button] .icon {
+input[type=button] .icon,
+.style-controls button .icon,
+.style-controls input[type=submit] .icon,
+.style-controls input[type=button] .icon {
   display: inline-block;
   box-sizing: border-box;
 }
 .pager .button,
 .pager button,
 .pager input[type=submit],
-.pager input[type=button] {
+.pager input[type=button],
+.pager .style-controls button,
+.pager .style-controls input[type=submit],
+.pager .style-controls input[type=button] {
   width: 2.2em;
   height: 2.2em;
 }
@@ -714,7 +753,10 @@ input[type=button] .icon {
 .object-navigator .links .button,
 .object-navigator .links button,
 .object-navigator .links input[type=submit],
-.object-navigator .links input[type=button] {
+.object-navigator .links input[type=button],
+.object-navigator .links .style-controls button,
+.object-navigator .links .style-controls input[type=submit],
+.object-navigator .links .style-controls input[type=button] {
   display: block;
   text-align: center;
 }
@@ -1124,13 +1166,19 @@ hr {
 .top-left-overlay .button,
 .top-left-overlay button,
 .top-left-overlay input[type=submit],
-.top-left-overlay input[type=button] {
+.top-left-overlay input[type=button],
+.top-left-overlay .style-controls button,
+.top-left-overlay .style-controls input[type=submit],
+.top-left-overlay .style-controls input[type=button] {
   border-top-left-radius: 0;
 }
 .bottom-right-overlay .button,
 .bottom-right-overlay button,
 .bottom-right-overlay input[type=submit],
-.bottom-right-overlay input[type=button] {
+.bottom-right-overlay input[type=button],
+.bottom-right-overlay .style-controls button,
+.bottom-right-overlay .style-controls input[type=submit],
+.bottom-right-overlay .style-controls input[type=button] {
   border-bottom-right-radius: 0;
 }
 .entries {
@@ -1155,46 +1203,6 @@ hr {
 .tiny-picture a {
   display: inline-block;
 }
-.basic-form-required,
-.basic-form-label {
-  font-weight: bold;
-  text-align: right;
-  white-space: nowrap;
-  padding: 2px 10px 2px 0;
-  vertical-align: top;
-}
-table.basic > tbody > tr > td.empty-label {
-  padding: 0;
-}
-.form-button-content {
-  text-align: right;
-}
-.basic-form .item-description {
-  margin-left: 15px;
-  margin-top: 5px;
-}
-.basic-form-block {
-  border-left: 3px solid #c2c2c2;
-  padding-left: 15px;
-  margin-left: -3px;
-}
-.basic-form-content {
-  padding: 2px 0;
-}
-.basic-form-content ul {
-  list-style: none;
-  display: block;
-  margin: 0;
-  padding: 0;
-}
-.basic-form-content ul li {
-  display: block;
-  padding-top: 2px;
-  padding-bottom: 2px;
-}
-.basic-form-description {
-  padding-top: 5px;
-}
 .style-controls input,
 .style-controls select {
   margin: 0;
@@ -1207,24 +1215,243 @@ table.basic > tbody > tr > td.empty-label {
 }
 .style-controls button,
 .style-controls input[type=submit],
+.style-controls input[type=button],
 .style-controls input[type=text],
 .style-controls input[type=password],
-.style-controls input[type=button],
 .style-controls select,
 .style-controls textarea {
   font-family: inherit;
   font-size: inherit;
   line-height: inherit;
 }
+.style-controls button,
+.style-controls input[type=submit],
+.style-controls input[type=button] {
+  color: #666666;
+}
 .style-controls input[type=text],
 .style-controls input[type=password],
 .style-controls select,
 .style-controls textarea {
   background-color: #f0f0f0;
+  color: #666666;
   border: 1px solid #c2c2c2;
   border-radius: 4px;
   padding: 4px;
   margin-left: -5px;
+}
+.basic-form fieldset {
+  margin: 0px;
+  margin-top: 15px;
+}
+.basic-form fieldset fieldset .group {
+  margin-left: 0px;
+}
+.basic-form input,
+.basic-form textarea,
+.basic-form select {
+  margin-left: 0px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+.basic-form input[type=checkbox],
+.basic-form input[type=radio] {
+  vertical-align: baseline;
+  margin-left: 0px;
+  margin-top: .5em;
+}
+.basic-form .help p:first-child {
+  margin-top: 0px;
+}
+.basic-form .help p:last-child {
+  margin-bottom: 0px;
+}
+.basic-form .hint,
+.basic-form > .form-row,
+.basic-form fieldset .hint,
+.basic-form fieldset > .form-row {
+  display: block;
+}
+.basic-form .form-row {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+.basic-form .group {
+  display: block;
+  margin: 3px 0px;
+}
+.basic-form .group + .group {
+  clear: left;
+}
+.basic-form .group .group {
+  margin-left: 18px;
+}
+.basic-form .one-input input:first-child {
+  float: left;
+}
+.basic-form .one-input label {
+  display: block;
+  margin-left: 18px;
+}
+.basic-form .one-input label:first-child {
+  float: left;
+  display: inline-block;
+  padding-right: 5px;
+  margin-left: 0px;
+}
+.basic-form.ltr {
+  width: 800px;
+}
+.basic-form.ltr .two-inputs input,
+.basic-form.ltr .two-inputs select,
+.basic-form.ltr .two-inputs textarea {
+  width: 150px;
+}
+.basic-form.ltr .three-inputs input,
+.basic-form.ltr .three-inputs select,
+.basic-form.ltr .three-inputs textarea {
+  width: 100px;
+}
+.basic-form.ltr .form-row,
+.basic-form.ltr .group,
+.basic-form.ltr .hint {
+  margin-left: 215px;
+}
+.basic-form.ltr .form-row .form-row {
+  margin-left: 0;
+}
+.basic-form.ltr label:first-child {
+  float: left;
+  width: 215px;
+}
+.basic-form.ltr .help {
+  float: right;
+  width: 180px;
+  height: auto;
+  margin-right: 12px;
+}
+.basic-form.ltr.right fieldset {
+  border: none;
+  padding-left: 0px;
+  margin-left: 215px;
+}
+.basic-form.ltr.right fieldset fieldset,
+.basic-form.ltr.right fieldset .group {
+  margin-left: 0;
+}
+.basic-form.ltr.right .hint {
+  margin-left: 0;
+}
+.basic-form.ltr.right > p {
+  /* Applies to form rows appearing directly in a form (not in a fieldset). */
+  margin-left: 215px;
+}
+.basic-form.ltr.right label:first-child,
+.basic-form.ltr.right .one-input label:first-child {
+  margin-left: -230px;
+  text-align: right;
+}
+.basic-form.top {
+  width: 600px;
+}
+.basic-form.top input[type=text],
+.basic-form.top input[type=password],
+.basic-form.top input[type=file],
+.basic-form.top textarea,
+.basic-form.top select,
+.basic-form.top .hint,
+.basic-form.top .group {
+  width: 300px;
+}
+.basic-form.top .two-inputs input,
+.basic-form.top .two-inputs select,
+.basic-form.top .two-inputs textarea {
+  width: 145px;
+}
+.basic-form.top .three-inputs input,
+.basic-form.top .three-inputs select,
+.basic-form.top .three-inputs textarea {
+  width: 95px;
+}
+.basic-form.top label:first-child {
+  display: block;
+}
+.basic-form.top .help {
+  float: right;
+  width: 180px;
+  height: auto;
+  margin-right: 12px;
+}
+.basic-form.top fieldset {
+  padding-right: 0px;
+  margin-right: 0px;
+}
+.basic-form.top fieldset fieldset {
+  border-right-width: 0px;
+}
+.basic-form.top.right fieldset fieldset,
+.basic-form.top.right .hint,
+.basic-form.top.right fieldset .group,
+.basic-form.top.right fieldset legend {
+  margin-left: 0px;
+}
+.basic-form.top.right fieldset {
+  border-left-width: 0px;
+  padding-left: 0px;
+}
+.basic-form fieldset {
+  border-top: 1px dotted #c2c2c2;
+}
+.basic-form fieldset legend {
+  padding: 2px 4px;
+  margin-left: -5px;
+}
+.basic-form label + input[type=text],
+.basic-form label + input[type=password],
+.basic-form label + input[type=file],
+.basic-form label + textarea {
+  margin-top: -0.3em;
+}
+.basic-form .help {
+  padding: 5px;
+  padding-left: 25px;
+  background-image: url(../../../icons/webcore_png/indicators/info_16px.png);
+  background-repeat: no-repeat;
+  background-position: 5px 8px;
+  border: 1px solid #AAF;
+  background-color: #DDEEFF;
+  color: #666666;
+}
+.basic-form .hint {
+  font-size: 85%;
+  font-style: italic;
+}
+.basic-form label .description {
+  display: block;
+  font-style: italic;
+}
+.basic-form textarea {
+  height: 85px;
+}
+.basic-form .required label:first-child {
+  font-weight: bold;
+}
+.basic-form .group {
+  line-height: 135%;
+}
+.basic-form .buttons-top {
+  padding-bottom: 10px;
+  border-bottom: 1px solid silver;
+}
+.basic-form .buttons-middle {
+  border: 1px solid silver;
+  border-width: 1px 0;
+  padding: 10px 0;
+}
+.basic-form .buttons-bottom {
+  border-top: 1px solid silver;
+  padding-top: 10px;
 }
 @media print {
   .top-box,

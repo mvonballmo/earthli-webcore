@@ -5,10 +5,10 @@
   padding: 2px 4px;
   margin-left: -5px;
 }
-.basic-form input[type=text],
-.basic-form input[type=password],
-.basic-form input[type=file],
-.basic-form textarea {
+.basic-form label + input[type=text],
+.basic-form label + input[type=password],
+.basic-form label + input[type=file],
+.basic-form label + textarea {
   margin-top: -0.3em;
 }
 .basic-form .help {

@@ -1,0 +1,28 @@
+@import "core-values";
+
+.style-controls
+{
+  button:extend(.button all) {}
+  input[type=submit]:extend(.button all) {}
+  input[type=button]:extend(.button all) {}
+
+  button,
+  input[type=submit],
+  input[type=button]
+  {
+    color: @control_text_color;
+  }
+
+  input[type=text],
+  input[type=password],
+  select,
+  textarea
+  {
+    background-color: @edit_control_background_color;
+    color: @edit_control_text_color;
+    border: 1px solid @control_border_color;
+    border-radius:  @standard_border_radius;
+    padding: @standard_border_radius;
+    margin-left: -@standard_border_radius - 1px;
+  }
+}

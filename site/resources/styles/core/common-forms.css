@@ -1,0 +1,16 @@
+.style-controls button,
+.style-controls input[type=submit],
+.style-controls input[type=button] {
+  color: #666666;
+}
+.style-controls input[type=text],
+.style-controls input[type=password],
+.style-controls select,
+.style-controls textarea {
+  background-color: #f0f0f0;
+  color: #666666;
+  border: 1px solid #c2c2c2;
+  border-radius: 4px;
+  padding: 4px;
+  margin-left: -5px;
+}

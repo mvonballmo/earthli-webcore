@@ -38,10 +38,11 @@
 .basic-form .group + .group {
   clear: left;
 }
+.basic-form .group .group {
+  margin-left: 18px;
+}
 .basic-form .one-input input:first-child {
   float: left;
-  padding: 0px;
-  margin-left: 0px;
 }
 .basic-form .one-input label {
   display: block;

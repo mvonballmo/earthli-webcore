@@ -23,6 +23,22 @@ For more information about the earthli WebCore, visit:
 http://www.earthli.com/software/webcore
 
 ****************************************************************************/
+.style-controls button,
+.style-controls input[type=submit],
+.style-controls input[type=button] {
+  color: #554433;
+}
+.style-controls input[type=text],
+.style-controls input[type=password],
+.style-controls select,
+.style-controls textarea {
+  background-color: #fbf0c9;
+  color: #554433;
+  border: 1px solid #cbc2b0;
+  border-radius: 4px;
+  padding: 4px;
+  margin-left: -5px;
+}
 body {
   background-color: #fdf8e5;
   color: #554433;
@@ -200,44 +216,13 @@ pre > code,
 .quote-block {
   color: #908371;
 }
-.style-controls input,
-.style-controls select {
-  margin: 0;
-}
-.style-controls input[type="radio"],
-.style-controls input[type="checkbox"] {
-  vertical-align: middle;
-  margin: 0;
-  padding: 0;
-}
-.style-controls button,
-.style-controls input[type=submit],
-.style-controls input[type=text],
-.style-controls input[type=password],
-.style-controls input[type=button],
-.style-controls select,
-.style-controls textarea {
-  font-family: inherit;
-  font-size: inherit;
-  line-height: inherit;
-}
-.style-controls input[type=text],
-.style-controls input[type=password],
-.style-controls select,
-.style-controls textarea {
-  background-color: #fbf0c9;
-  border: 1px solid #cbc2b0;
-  border-radius: 4px;
-  padding: 4px;
-  margin-left: -5px;
-}
 .button,
 .style-controls button,
 .style-controls input[type=submit],
 .style-controls input[type=button] {
   background-color: #fbf0c9;
   border-color: #cbc2b0;
-  color: #text_color;
+  color: #554433;
 }
 a.button:link,
 a.button:visited,
@@ -247,7 +232,7 @@ a.style-controls input[type=submit]:link,
 a.style-controls input[type=submit]:visited,
 a.style-controls input[type=button]:link,
 a.style-controls input[type=button]:visited {
-  color: #text_color;
+  color: #554433;
 }
 .button.selected,
 .style-controls button.selected,
@@ -285,7 +270,7 @@ ul.menu .menu-item:hover {
   border-color: #cbc2b0;
 }
 ul.menu .menu-item-description {
-  color: #text_color;
+  color: #554433;
 }
 form.style-controls input[type=text],
 form.style-controls input[type=password],

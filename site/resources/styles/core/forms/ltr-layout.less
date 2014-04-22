@@ -1,7 +1,7 @@
 @import "../core-values";
 @import "form-values";
 
-.basic-form
+.basic-form.ltr
 {
   width: 800px;
 
@@ -16,7 +16,7 @@
   .buttons-top,
   .buttons-middle
   {
-    width: 300px;
+//    width: 300px;
   }
 
   .two-inputs
@@ -46,6 +46,11 @@
     margin-left: @label-area-width;
   }
 
+  .form-row .form-row
+  {
+    margin-left: 0;
+  }
+
   label:first-child
   {
     float: left;
@@ -58,16 +63,5 @@
     width: 180px;
     height: auto;
     margin-right: 12px;
-  }
-
-  fieldset
-  {
-    padding-right: 0px;
-    margin-right: 0px;
-
-    fieldset
-    {
-      border-right-width: 0px;
-    }
   }
 }
