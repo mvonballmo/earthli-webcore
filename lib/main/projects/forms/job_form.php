@@ -477,7 +477,7 @@ class JOB_FORM extends PROJECT_ENTRY_FORM
     /** @var $users USER[] */
     $users = $user_query->objects ();
     $Result = $renderer->make_list_properties ();
-    $Result->width = '15em';
+    $Result->width = '20em';
     $Result->add_item ('(None)', 0);
     foreach ($users as $user)
     {
@@ -529,15 +529,7 @@ class JOB_FORM extends PROJECT_ENTRY_FORM
 
     /* Start the branch section */
 
-    $renderer->draw_separator ();
-    $renderer->start_row ('Branches');
-?>
-  <p class="notes">
-    Assign this job to one or more of the following branches.
-  </p>
-<?php
     $this->_draw_branch_controls ($renderer);
-    $renderer->finish_row ();
 
     $renderer->draw_separator ();
     $renderer->draw_submit_button_row ();

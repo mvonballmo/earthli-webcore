@@ -138,6 +138,7 @@ class THEME_SELECTOR_FORM extends FORM
    */
   protected function _draw_controls ($renderer)
   {
+    $renderer->labels_CSS_class = 'top right';
     $renderer->start ();
 
     $props = $renderer->make_list_properties ();

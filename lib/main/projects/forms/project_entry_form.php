@@ -407,6 +407,8 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
   protected function _draw_component_controls ($renderer)
   {
     $props = $renderer->make_list_properties ();
+    $props->width = '20em';
+    $props->CSS_class = '';
     $props->add_item ('[None]', 0);
 
     /** @var PROJECT $folder */
@@ -533,9 +535,12 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
   {
     if (sizeof ($this->branches))
     {
-      $renderer->start_block ();
-      $renderer->start_row ();
-
+      $renderer->start_block ('Branches');
+?>
+      <p class="notes">
+        Assign this job to one or more of the following branches.
+      </p>
+<?php
       $use_DHTML = $this->context->dhtml_allowed ();
       $check_props = $renderer->make_check_properties ();
 
@@ -583,9 +588,9 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
             echo $renderer->check_box_as_HTML ("branch_{$branch->id}_enabled", $check_props);
           }
         ?>
-        <div id="branch_<?php echo $branch->id; ?>_panel" class="preview"<?php if ($style) echo 'style="' . $style . '"'; ?>>
+        <div id="branch_<?php echo $branch->id; ?>_panel" <?php if ($style) echo 'style="' . $style . '"'; ?>>
           <?php
-            $renderer->start_block ();
+            $renderer->start_block ($branch->title_as_html());
               $this->_draw_branch_info_controls ($branch, $renderer, $visible, $release);
             $renderer->finish_block ();
           ?>
@@ -594,7 +599,6 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
         }
       }
 
-      $renderer->finish_row ();
       $renderer->draw_error_row ('main_branch_id');
       $renderer->finish_block ();
     }

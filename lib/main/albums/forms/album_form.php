@@ -618,19 +618,15 @@ class ALBUM_FORM extends FOLDER_FORM
         $image_source = '';
       }
 ?>
-      <div style="display: table; margin: auto; text-align: center">
-        <div style="margin-bottom: .5em">
-          <span id="main_picture_none_text" style="display: <?php echo $text_display; ?>">[None]</span>
-          <img id="main_picture_image" class="frame" style="display: <?php echo $image_display; ?>" src="<?php echo $image_source; ?>" alt="<?php echo $title; ?>">
-        </div>
-        <div style="text-align: right">
-          <?php echo $renderer->javascript_button_as_HTML ('Browse...', 'field.show_picker ()', '{icons}buttons/browse'); ?>
-        </div>
-        <div class="notes" style="margin-top: .5em">
-        <div id="main_picture_changed" class="caution" style="display: none">
-          <?php echo $this->app->resolve_icon_as_html ('{icons}indicators/warning', 'Warning', '16px'); ?>
-          Modified - click "Save" to store changes
-        </div>
+      <p>
+        <span id="main_picture_none_text" style="display: <?php echo $text_display; ?>">[None]</span>
+        <img id="main_picture_image" class="frame" style="display: <?php echo $image_display; ?>" src="<?php echo $image_source; ?>" alt="<?php echo $title; ?>">
+      </p>
+      <p class="button-content">
+        <?php echo $renderer->javascript_button_as_HTML ('Browse...', 'field.show_picker ()', '{icons}buttons/browse'); ?>
+      </p>
+      <div id="main_picture_changed">
+        <?php $this->context->show_message('Modified - click "Save" to store changes', 'info'); ?>
       </div>
   <?php
       $renderer->finish_row ();
