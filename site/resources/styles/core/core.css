@@ -1357,7 +1357,13 @@ hr {
 .basic-form.ltr .form-row .form-row {
   margin-left: 0;
 }
-.basic-form.ltr .form-row button:first-child {
+.basic-form.ltr .form-row .button:first-child,
+.basic-form.ltr .form-row button:first-child,
+.basic-form.ltr .form-row input[type=submit]:first-child,
+.basic-form.ltr .form-row input[type=button]:first-child,
+.basic-form.ltr .form-row .style-controls button:first-child,
+.basic-form.ltr .form-row .style-controls input[type=submit]:first-child,
+.basic-form.ltr .form-row .style-controls input[type=button]:first-child {
   margin-left: -5px;
 }
 .basic-form.ltr label:first-child {
