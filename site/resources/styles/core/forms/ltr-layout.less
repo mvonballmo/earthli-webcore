@@ -3,45 +3,31 @@
 
 .basic-form.ltr
 {
-  width: 800px;
-
-  input[type=text],
-  input[type=password],
-  input[type=file],
-  textarea,
-  select,
-  .hint,
-  .group,
-  .buttons-bottom,
-  .buttons-top,
-  .buttons-middle
+  fieldset
   {
-//    width: 300px;
-  }
+    margin-left: @label-area-width;
 
-  .two-inputs
-  {
-    input,
-    select,
-    textarea
+    fieldset
     {
-      width: 150px;
+      margin-left: 0;
     }
   }
 
-  .three-inputs
-  {
-    input,
-    select,
-    textarea
-    {
-      width: 100px;
-    }
-  }
-
-  .form-row,
-  .group,
   .hint
+  {
+    margin-left: 0;
+  }
+
+  > p
+  {
+    /* Applies to form rows appearing directly in a form (not in a fieldset). */
+
+    margin-left: @label-area-width;
+  }
+
+  > .form-row,
+  > .group,
+  > .hint
   {
     margin-left: @label-area-width;
   }
@@ -49,6 +35,14 @@
   .form-row .form-row
   {
     margin-left: 0;
+  }
+
+  .form-row
+  {
+    button:first-child
+    {
+      margin-left: -@standard_border_radius - @hairline_border_width;
+    }
   }
 
   label:first-child
@@ -63,5 +57,12 @@
     width: 180px;
     height: auto;
     margin-right: 12px;
+  }
+
+  label:first-child,
+  .one-input label:first-child
+  {
+    margin-left: -@label-area-width - @standard_spacing;
+    text-align: right;
   }
 }

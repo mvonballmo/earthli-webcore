@@ -25,4 +25,13 @@
     padding: @standard_border_radius;
     margin-left: -@standard_border_radius - 1px;
   }
+
+  input[disabled],
+  select[disabled],
+  textarea[disabled]
+  {
+    color: @disabled_control_text_color;
+    background-color: @disabled_control_background_color;
+    border-color: @disabled_control_border_color;
+  }
 }

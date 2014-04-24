@@ -1,31 +1,41 @@
 @import "../core-values";
+@import "../core-mixins";
 
 .basic-form
 {
   fieldset
   {
-    margin: 0px;
-    margin-top: @standard_spacing;
+    border: none;
+    margin: @standard_spacing 0;
+    padding: 0;
 
     fieldset .group
     {
-      margin-left: 0px;
+      margin-left: 0;
     }
   }
 
-  input, textarea, select
+  input,
+  textarea,
+  select
   {
-    margin-left: 0px;
-    box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
+    margin-left: 0;
+    .border-box();
+  }
+
+  textarea,
+  select,
+  input[type=password],
+  input[type=text]
+  {
+    width: 100%;
   }
 
   input[type=checkbox],
   input[type=radio]
   {
     vertical-align: baseline;
-    margin-left: 0px;
+    margin-left: 0;
     margin-top: .5em;
   }
 
@@ -33,12 +43,12 @@
   {
     p:first-child
     {
-      margin-top: 0px;
+      margin-top: 0;
     }
 
     p:last-child
     {
-      margin-bottom: 0px;
+      margin-bottom: 0;
     }
   }
 
@@ -52,8 +62,8 @@
 
   .form-row
   {
-    margin-top: 1em;
-    margin-bottom: 1em;
+    margin-top: @standard_spacing;
+    margin-bottom: @standard_spacing;
   }
 
   .group
@@ -91,6 +101,36 @@
       display: inline-block;
       padding-right: @small_spacing;
       margin-left: 0px;
+    }
+  }
+
+  .two-inputs
+  {
+    input,
+    select,
+    textarea
+    {
+      width: 50%;
+    }
+  }
+
+  .three-inputs
+  {
+    input,
+    select,
+    textarea
+    {
+      width: 33%;
+    }
+  }
+
+  .four-inputs
+  {
+    input,
+    select,
+    textarea
+    {
+      width: 25%;
     }
   }
 }

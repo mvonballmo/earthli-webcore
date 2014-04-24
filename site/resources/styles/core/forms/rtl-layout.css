@@ -1,34 +1,14 @@
 .basic-form {
-  width: 800px;
   text-align: right;
-}
-.basic-form input[type=text],
-.basic-form input[type=password],
-.basic-form input[type=file],
-.basic-form textarea,
-.basic-form select,
-.basic-form .hint,
-.basic-form .group {
-  width: 300px;
 }
 .basic-form input[type=checkbox],
 .basic-form input[type=radio] {
-  float: right !important;
+  float: right;
 }
-.basic-form .two-inputs input,
-.basic-form .two-inputs select,
-.basic-form .two-inputs textarea {
-  width: 140px;
-}
-.basic-form .three-inputs input,
-.basic-form .three-inputs select,
-.basic-form .three-inputs textarea {
-  width: 95px;
-}
-.basic-form .form-row,
-.basic-form .group,
-.basic-form .hint {
-  margin-right: 200px;
+.basic-form > .form-row,
+.basic-form > .group,
+.basic-form > .hint {
+  margin-right: 215px;
 }
 .basic-form > p,
 .basic-form > div,
@@ -43,7 +23,7 @@
 }
 .basic-form label:first-child {
   float: right;
-  width: 200px;
+  width: 215px;
 }
 .basic-form .one-input label {
   margin-left: 0px;

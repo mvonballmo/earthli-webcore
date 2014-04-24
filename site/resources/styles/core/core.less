@@ -883,8 +883,7 @@ input[type=button]:extend(.button all) {}
   min-width: 2.2em;
   min-height: 2.2em;
   padding: @small_spacing;
-  box-sizing: border-box;
-  -moz-box-sizing: border-box;
+  .border-box();
   cursor: pointer;
   background-color: #EEE;
   border: @hairline_border_width solid @standard_border_color;
@@ -941,7 +940,7 @@ a.button:link, a.button:visited
 .button .icon
 {
   display: inline-block;
-  box-sizing: border-box;
+  .border-box();
 }
 
 .pager .button
@@ -1575,14 +1574,14 @@ hr
 {
   width: 50%;
   padding-right: 8px;
-  box-sizing: border-box;
+  .border-box();
 }
 
 .second-of-two-columns
 {
   width: 50%;
   padding-left: 7px;
-  box-sizing: border-box;
+  .border-box();
 }
 
 .left-icon
@@ -1681,7 +1680,7 @@ hr
 }
 
 @import "common-forms";
-@import "forms/base";
+@import "forms/form-core";
 @import "forms/ltr-layout";
 @import "forms/ltr-right";
 @import "forms/top-layout";
