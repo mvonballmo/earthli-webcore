@@ -39,6 +39,13 @@ http://www.earthli.com/software/webcore
   padding: 4px;
   margin-left: -5px;
 }
+.style-controls input[disabled],
+.style-controls select[disabled],
+.style-controls textarea[disabled] {
+  color: #a4a385;
+  background-color: #dfe1aa;
+  border-color: #cacaa5;
+}
 body {
   background-color: #e6e8bd;
   color: #544f40;
