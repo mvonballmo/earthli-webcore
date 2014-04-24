@@ -177,7 +177,7 @@ class SAMPLE_FORM extends FORM
   ?>
   <div class="left-sidebar">
     <p>Customize the font and theme to the right and see a preview below.</p>
-    <div class="form-content">
+    <div class="form-content" style="width: 200px">
       <?php
       $form->display ();
       ?>
