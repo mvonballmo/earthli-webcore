@@ -615,7 +615,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
     }
 
     $this->start_block ($title);
-    $this->draw_text_row ($title, $description, $this->get_description_CSS_class());
+    $this->draw_text_row ($title, $description, 'description');
     $this->start_row (' ');
     if (isset ($Result))
     {
@@ -1156,32 +1156,35 @@ class FORM_RENDERER extends CONTROLS_RENDERER
     return '';
   }
 
-  /**
-   * Return HTML for a multi-line text box.
-   * @param string $id Name of field.
-   * @param string $width Width of the control in valid CSS. Defaults to {@link $default_control_width} if not specified.
-   * @param string $height Height of the control in valid CSS. Defaults to {@link $default_control_height} if not specified.
-   * @return string
-   */
-  public function text_box_as_html ($id, $width = null, $height = null)
+/**
+ * Return HTML for a multi-line text box.
+ * @param string $id Name of field.
+ * @param string $width Width of the control in valid CSS. Defaults to {@link $default_control_width} if not specified.
+ * @param string $height Height of the control in valid CSS. Defaults to {@link $default_control_height} if not specified.
+ * @param string $CSS_class The CSS class to apply to the control
+ * @return string
+ */
+  public function text_box_as_html ($id, $width = null, $height = null, $CSS_class = null)
   {
     $field = $this->_field_at ($id);
 
     if ($field->visible)
     {
-      if (! isset ($width))
-      {
-        $width = '100%';
-      }
       if (! isset ($height))
       {
         $height = $this->default_control_height;
       }
 
-      $CSS_class = $this->_get_text_control_CSS_class($field);
+      // TODO Change this code to default to applying a class rather than a fixed width/height
+
+      $style = '';
+      if (isset ($width))
+      {
+        $style = ' style="width: ' . $width . '; height: ' . $height . '"';
+      }
 
       $Result = $this->_start_control ($field, 'textarea');
-      $Result .= ' class="' . $CSS_class . '" style="height: ' . $height . '">';
+      $Result .= ' cols="30" rows="5" class="' . $CSS_class . '"' . $style . '>';
       $Result .= $this->_to_html ($field, ENT_NOQUOTES) . '</textarea>';
 
       if ($field->description)
@@ -1200,7 +1203,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
 
       if ($text)
       {
-        $text = '<div class="' . $this->get_description_CSS_class() . '">' . $text . '</div>';
+        $text = '<div class="description">' . $text . '</div>';
       }
 
       $Result .= '<div style="width: ' . $width . '">' . $text . '</div>';
@@ -1290,23 +1293,22 @@ class FORM_RENDERER extends CONTROLS_RENDERER
         $CSS_class .= ' ' . $props->CSS_class;
       }
 
-      $Result = $this->_start_control ($field, 'select') . ' class="' . $CSS_class . '"';
+      $Result = '';
+      if (isset ($props->width) || $props->CSS_class)
+      {
+        $Result = '<div style="width: ' . $props->width . '">';
+      }
+
+      $ctrl = $this->_start_control ($field, 'select') . ' class="' . $CSS_class . '"';
 
       if (isset ($props->on_click_script))
       {
-        $Result .= ' onChange="' . $props->on_click_script . '"';
-      }
-      if (isset ($props->width))
-      {
-        $Result .= ' style="width: ' . $props->width . '"';
-        $width = $props->width;
-      }
-      else
-      {
-        $width = $this->default_control_width;
+        $ctrl .= ' onChange="' . $props->on_click_script . '"';
       }
 
-      $Result .= '>';
+      $ctrl .= '>';
+
+      $Result .= $ctrl;
 
       $selected_value = $field->value ();
 
@@ -1326,12 +1328,17 @@ class FORM_RENDERER extends CONTROLS_RENDERER
       {
         if ($props->show_description_on_same_line)
         {
-          $Result .= ' <span class="' . $this->get_description_CSS_class() . '">' . $field->description . '</span>';
+          $Result .= ' <span class="description">' . $field->description . '</span>';
         }
         else
         {
-          $Result .= '<div style="width: ' . $width . '"><div class="' . $this->get_description_CSS_class() . '">' . $field->description . '</div></div>';
+          $Result .= '<div class="description">' . $field->description . '</div>';
         }
+      }
+
+      if (isset ($props->width))
+      {
+        $Result .= '</div>';
       }
 
       return $this->_control_created ($id, $Result);
@@ -1363,14 +1370,9 @@ class FORM_RENDERER extends CONTROLS_RENDERER
 
       if (isset ($props->width))
       {
-        $width = $props->width;
-      }
-      else
-      {
-        $width = $this->default_control_width;
+        $Result .= 'style="width: ' . $props->width . '"';
       }
 
-      $Result .= 'style="width: ' . $width . '"';
       $Result .= 'size="' . $props->height . '"';
       $Result .= '>';
 
@@ -1394,7 +1396,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
 
       if ($field->description)
       {
-        $Result .= '<div style="margin-top: .5em; width: ' . $width . '"><div class="' . $this->get_description_CSS_class() . '">' . $field->description . '</div></div>';
+        $Result .= '<div style="margin-top: .5em; width: ' . $width . '"><div class="description">' . $field->description . '</div></div>';
       }
 
       return $this->_control_created ($id, $Result);
@@ -1450,7 +1452,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
 
       if ($field->description)
       {
-        $Result .= '<div style="width: ' . $width . '"><div class="' . $this->get_description_CSS_class() . '">' . $field->description . "</div></div>\n";
+        $Result .= '<div style="width: ' . $width . '"><div class="description">' . $field->description . "</div></div>\n";
       }
     }
     else
@@ -1708,16 +1710,14 @@ class FORM_RENDERER extends CONTROLS_RENDERER
       $options = default_text_options ();
     }
 
+    $style = '';
     if (isset ($options->width))
     {
-      $width = $options->width;
-    }
-    else
-    {
-      $width = '100%';//$this->default_control_width;
+      $style = ' style="width: ' . $options->width . '"';
     }
 
     $Result = $this->_start_control ($field);
+
     if (isset ($field->max_length) && ($field->max_length > 0))
     {
       $Result .= ' maxlength="' . $field->max_length . '"';
@@ -1735,7 +1735,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
       $Result .= ' OnChange=\'' . $options->on_change_script . '\'';
     }
 
-    $Result .= ' type="' . $type . '" class="' . $CSS_class . '" value="' . $this->_to_html ($field, ENT_QUOTES) . '">';
+    $Result .= ' type="' . $type . '"' . $style . ' class="' . $CSS_class . '" value="' . $this->_to_html ($field, ENT_QUOTES) . '">';
 
     if ($field->description || $options->extra_description)
     {
@@ -1743,11 +1743,11 @@ class FORM_RENDERER extends CONTROLS_RENDERER
 
       if ($options->show_description_on_same_line)
       {
-        $Result .= ' <span class="' . $this->get_description_CSS_class() . '">' . $desc . '</span>';
+        $Result .= ' <span class="description">' . $desc . '</span>';
       }
       else
       {
-        $Result .= '<div style="width: ' . $width . '"><div class="' . $this->get_description_CSS_class() . '">' . $desc . '</div></div>';
+        $Result .= '<div class="description">' . $desc . '</div>';
       }
     }
 
@@ -1819,22 +1819,13 @@ class FORM_RENDERER extends CONTROLS_RENDERER
         }
       }
 
-      if (isset ($props->width))
-      {
-        $width = $props->width;
-      }
-      else
-      {
-        $width = null;
-      }
-
       if ($id)
       {
         $this->_num_controls [$id] = $counter;
 
         if ($field->description)
         {
-          $Result .= '<div class="item-description" style="width: ' . $width . '"><div class="' . $this->get_description_CSS_class() . '">' . $field->description . '</div></div>';
+          $Result .= '<div class="description">' . $field->description . '</div>';
         }
 
         $Result = $this->_control_created ($id, $Result, false);
@@ -1988,7 +1979,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
 
   private function get_description_CSS_class()
   {
-    return $this->_form->CSS_class . '-form-description';
+    return 'description';
   }
 }
 
