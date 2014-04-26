@@ -242,9 +242,8 @@ function update_controls ()
    */
   protected function _draw_permission_controls ($renderer, $formatter)
   {
-    $renderer->draw_text_row ('', 'The settings on the left can override content permissions, either <em>Granting</em> or <em>Denying</em> them. <em>[Folder]</em> uses the permissions defined in the folder.', 'notes');
-    $renderer->draw_separator ();
-    
+    $renderer->draw_text_row ('', 'The settings on the left can override content permissions, either <em>Granting</em> or <em>Denying</em> them. <em>[Folder]</em> uses the permissions defined in the folder.');
+
     if ($this->visible ('use_defaults'))
     {
       $props = $renderer->make_list_properties ();
@@ -262,7 +261,6 @@ function update_controls ()
       $renderer->start_row ();
       echo $renderer->radio_group_as_HTML ('use_defaults', $props);
       $renderer->finish_row ();
-      $renderer->draw_separator ();
     }
 
     $this->_draw_buttons ($renderer);
@@ -276,26 +274,24 @@ function update_controls ()
 
       foreach ($this->content_groups as $group)
       {
-        $renderer->start_row ($group->title);
+        $renderer->start_block ($group->title);
         foreach ($group->maps as $map)
         {
           $this->_draw_tri_permission ($map, $formatter, $renderer, $props);
         }
-        $renderer->finish_row ();
-        $renderer->draw_separator ();
+        $renderer->finish_block ();
       }
 
     $renderer->start_column (); 
 
       foreach ($this->global_groups as $group)
       {
-        $renderer->start_row ($group->title);
+        $renderer->start_block ($group->title);
         foreach ($group->maps as $map)
         {
           $this->_draw_permission ($map, $formatter, $renderer, $props);
         }
-        $renderer->finish_row ();
-        $renderer->draw_separator ();
+        $renderer->finish_block ();
       }
 
     $renderer->finish_column ();

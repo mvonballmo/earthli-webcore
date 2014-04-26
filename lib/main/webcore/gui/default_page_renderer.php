@@ -62,6 +62,8 @@ class DEFAULT_PAGE_RENDERER extends WEBCORE_PAGE_RENDERER
 
   protected function _start_body ()
   {
+    parent::_start_body();
+
     $page = $this->page;
     $env = $this->env;
     $browser = $env->browser();
@@ -141,6 +143,8 @@ class DEFAULT_PAGE_RENDERER extends WEBCORE_PAGE_RENDERER
 
   protected function _finish_body ()
   {
+    parent::_finish_body();
+
     $page = $this->page;
     $options = $page->template_options;
     $browser = $this->env->browser();

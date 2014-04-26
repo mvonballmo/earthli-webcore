@@ -148,8 +148,6 @@ class ADD_USER_TO_GROUP_FORM extends ID_BASED_FORM
    */
   protected function _draw_controls ($renderer)
   {
-    $renderer->set_width ('20em');
-
     $renderer->start ();
     $renderer->draw_text_line_row ('name');
 

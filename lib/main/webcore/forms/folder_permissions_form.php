@@ -152,16 +152,13 @@ class FOLDER_PERMISSIONS_FORM extends PERMISSIONS_FORM
     $this->_draw_buttons ($renderer);
     foreach ($this->groups as $group)
     {
-      $renderer->start_row ($group->title);
+      $renderer->start_block ($group->title);
       foreach ($group->maps as $map)
       {
         $this->_draw_permission ($map, $formatter, $renderer);
       }
-      $renderer->finish_row ();
-      $renderer->draw_separator ();
+      $renderer->finish_block ();
     }
     $this->_draw_buttons ($renderer);
   }
 }
-
-?>

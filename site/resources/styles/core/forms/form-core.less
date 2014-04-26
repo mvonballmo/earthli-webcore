@@ -1,5 +1,6 @@
 @import "../core-values";
 @import "../core-mixins";
+@import "form-values";
 
 .basic-form
 {
@@ -132,6 +133,21 @@
     {
       width: 25%;
     }
+  }
+
+  .browse
+  {
+    input
+    {
+      width: 200px;
+    }
+  }
+
+  .help
+  {
+    width: @label-area-width;
+    height: auto;
+    margin-right: @standard_spacing;
   }
 }
 

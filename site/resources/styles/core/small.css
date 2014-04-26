@@ -41,8 +41,6 @@ h3
 
 h4,
 body,
-td,
-th,
 .menu,
 .nav-box,
 .menu-group-title,
@@ -59,7 +57,8 @@ h5,
 .info-box-top,
 .footnote-reference,
 .subdued,
-.basic-form .description
+.basic-form .description,
+.message-box .description
 {
   font-size: 8pt;
 }

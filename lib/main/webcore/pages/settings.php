@@ -131,8 +131,7 @@ class SAMPLE_FORM extends FORM
     $renderer->finish_row();
     $renderer->draw_text_box_row('description', null);
 
-    $renderer->start_row('Block');
-    $renderer->start_block(true);
+    $renderer->start_block('Block');
 
     $props = $renderer->make_list_properties ();
     $props->show_descriptions = true;
@@ -160,7 +159,6 @@ class SAMPLE_FORM extends FORM
     $renderer->finish_row();
 
     $renderer->finish_block();
-    $renderer->finish_row();
     $renderer->draw_submit_button_row();
 
     $renderer->finish();
@@ -261,8 +259,11 @@ class SAMPLE_FORM extends FORM
   <div class="button-content">
     <?php
     $renderer = $Page->make_controls_renderer ();
+    echo $renderer->button_as_html ('', '#', '{icons}buttons/upgrade', '32px');
     echo $renderer->button_as_html ('Upgrayedd', '#', '{icons}buttons/upgrade', '32px');
+    echo $renderer->button_as_html ('', '#', '{icons}buttons/upgrade', '20px');
     echo $renderer->button_as_html ('Upgrayedd', '#', '{icons}buttons/upgrade', '20px');
+    echo $renderer->button_as_html ('', '#', '{icons}buttons/upgrade', '16px');
     echo $renderer->button_as_html ('Upgrayedd', '#', '{icons}buttons/upgrade', '16px');
     ?>
   </div>

@@ -27,6 +27,7 @@ http://www.earthli.com/software/webcore
 ****************************************************************************/
 
   $class_name = $App->final_class_name ('LOG_IN_FORM', 'webcore/forms/log_in_form.php');
+  /** @var LOG_IN_FORM $form */
   $form = new $class_name ($App);
 
   $Page->title->subject = 'Log in';

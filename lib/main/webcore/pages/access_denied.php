@@ -64,13 +64,13 @@ http://www.earthli.com/software/webcore
     }
   ?>
   <div class="message-box">
-    <div class="message-title"><?php echo $error_message; ?></div>
-    <div class="message-description">
-      Access to &lt;<a href="<?php echo $last_page; ?>"><?php echo $last_page; ?></a>&gt; was denied for this user.
+    <p class="title"><?php echo $error_message; ?></p>
+    <div class="description">
+      <p>Access to &lt;<a href="<?php echo $last_page; ?>"><?php echo $last_page; ?></a>&gt; was denied for this user.</p>
   <?php if ($App->login->is_anonymous ()) { ?>
-      Log in below to try again as a registered user.
+      <p>Log in below to try again as a registered user.</p>
   <?php } else { ?>
-      You are logged in as <?php echo $App->login->title_as_link (); ?>. If you have another account with the proper permissions, log in below to try again as that user.
+      <p>You are logged in as <?php echo $App->login->title_as_link (); ?>. If you have another account with the proper permissions, log in below to try again as that user.</p>
   <?php } ?>
     </div>
   </div>

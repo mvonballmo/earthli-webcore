@@ -428,33 +428,15 @@ td.object-in-list + td.object-in-list {
 }
 .thirty-two {
   padding-left: 37px;
-  padding-top: .8em;
-  background: no-repeat 0 5px;
-  min-height: 42px;
+  min-height: 32px;
 }
 .twenty {
   padding-left: 25px;
-  padding-top: .4em;
-  background: no-repeat;
-  min-height: 26px;
+  min-height: 20px;
 }
 .sixteen {
   padding-left: 21px;
-  padding-top: 3px;
-  background: no-repeat 0 2px;
-  min-height: 18px;
-}
-.no-label {
-  display: inline-block;
-}
-.sixteen.no-label {
-  padding-left: 18px;
-}
-.twenty.no-label {
-  padding-left: 26px;
-}
-.thirty-two.no-label {
-  padding-left: 42px;
+  min-height: 16px;
 }
 /* @end */
 /* @group Dropdown Menu */
@@ -542,12 +524,6 @@ ul.menu .menu-item-description {
 .button + .menu-items.buttons,
 .menu-items.buttons + .menu-items.buttons,
 .menu-items.buttons + .button,
-button + .menu-items.buttons,
-.menu-items.buttons + button,
-input[type=submit] + .menu-items.buttons,
-.menu-items.buttons + input[type=submit],
-input[type=button] + .menu-items.buttons,
-.menu-items.buttons + input[type=button],
 .style-controls button + .menu-items.buttons,
 .menu-items.buttons + .style-controls button,
 .style-controls input[type=submit] + .menu-items.buttons,
@@ -605,17 +581,14 @@ input[type=button] + .menu-items.buttons,
   margin-top: 15px;
 }
 .button,
-button,
-input[type=submit],
-input[type=button],
 .style-controls button,
 .style-controls input[type=submit],
 .style-controls input[type=button] {
   display: inline-block;
   text-decoration: none;
-  min-width: 2.2em;
-  min-height: 2.2em;
-  padding: 5px;
+  min-width: 2em;
+  min-height: 2em;
+  padding: .4em;
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
@@ -626,16 +599,10 @@ input[type=button],
   vertical-align: middle;
   white-space: nowrap;
   border-radius: 4px;
-  line-height: 100%;
+  line-height: normal;
 }
 a.button:link,
 a.button:visited,
-abutton:link,
-abutton:visited,
-ainput[type=submit]:link,
-ainput[type=submit]:visited,
-ainput[type=button]:link,
-ainput[type=button]:visited,
 a.style-controls button:link,
 a.style-controls button:visited,
 a.style-controls input[type=submit]:link,
@@ -646,37 +613,19 @@ a.style-controls input[type=button]:visited {
   text-decoration: none;
 }
 .button:hover:not(.disabled):not(.selected),
-button:hover:not(.disabled):not(.selected),
-input[type=submit]:hover:not(.disabled):not(.selected),
-input[type=button]:hover:not(.disabled):not(.selected),
 .style-controls button:hover:not(.disabled):not(.selected),
 .style-controls input[type=submit]:hover:not(.disabled):not(.selected),
 .style-controls input[type=button]:hover:not(.disabled):not(.selected) {
   border-color: darkgray;
   background-color: #DDDDDD;
 }
-.button.no-label,
-button.no-label,
-input[type=submit].no-label,
-input[type=button].no-label,
-.style-controls button.no-label,
-.style-controls input[type=submit].no-label,
-.style-controls input[type=button].no-label {
-  height: 2.2em;
-}
 .button + .button,
-button + button,
-input[type=submit] + input[type=submit],
-input[type=button] + input[type=button],
 .style-controls button + .style-controls button,
 .style-controls input[type=submit] + .style-controls input[type=submit],
 .style-controls input[type=button] + .style-controls input[type=button] {
   margin-left: 10px;
 }
 .button.disabled,
-button.disabled,
-input[type=submit].disabled,
-input[type=button].disabled,
 .style-controls button.disabled,
 .style-controls input[type=submit].disabled,
 .style-controls input[type=button].disabled {
@@ -685,9 +634,6 @@ input[type=button].disabled,
   cursor: default;
 }
 .button.selected,
-button.selected,
-input[type=submit].selected,
-input[type=button].selected,
 .style-controls button.selected,
 .style-controls input[type=submit].selected,
 .style-controls input[type=button].selected {
@@ -697,9 +643,6 @@ input[type=button].selected,
   color: white;
 }
 .button img,
-button img,
-input[type=submit] img,
-input[type=button] img,
 .style-controls button img,
 .style-controls input[type=submit] img,
 .style-controls input[type=button] img {
@@ -707,9 +650,6 @@ input[type=button] img,
   top: 2px;
 }
 .button .icon,
-button .icon,
-input[type=submit] .icon,
-input[type=button] .icon,
 .style-controls button .icon,
 .style-controls input[type=submit] .icon,
 .style-controls input[type=button] .icon {
@@ -718,15 +658,14 @@ input[type=button] .icon,
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
 }
-.pager .button,
-.pager button,
-.pager input[type=submit],
-.pager input[type=button],
-.pager .style-controls button,
-.pager .style-controls input[type=submit],
-.pager .style-controls input[type=button] {
-  width: 2.2em;
-  height: 2.2em;
+.sixteen.no-label {
+  padding-left: 16px;
+}
+.twenty.no-label {
+  padding-left: 20px;
+}
+.thirty-two.no-label {
+  padding-left: 32px;
 }
 .pager .counters {
   margin: 0 10px;
@@ -754,9 +693,6 @@ input[type=button] .icon,
   margin-bottom: 5px;
 }
 .object-navigator .links .button,
-.object-navigator .links button,
-.object-navigator .links input[type=submit],
-.object-navigator .links input[type=button],
 .object-navigator .links .style-controls button,
 .object-navigator .links .style-controls input[type=submit],
 .object-navigator .links .style-controls input[type=button] {
@@ -1088,15 +1024,10 @@ hr {
   padding-right: .25em;
 }
 .message-box {
-  margin: 1em;
+  margin: 15px 0;
 }
-.message-title {
-  font-weight: bold;
-}
-.message-description {
-  margin: 1em 0;
-  font-size: 85%;
-  font-style: italic;
+.message-box .description {
+  margin: 15px 0;
 }
 .complete-text-link {
   font-weight: normal;
@@ -1171,18 +1102,12 @@ hr {
   bottom: 0;
 }
 .top-left-overlay .button,
-.top-left-overlay button,
-.top-left-overlay input[type=submit],
-.top-left-overlay input[type=button],
 .top-left-overlay .style-controls button,
 .top-left-overlay .style-controls input[type=submit],
 .top-left-overlay .style-controls input[type=button] {
   border-top-left-radius: 0;
 }
 .bottom-right-overlay .button,
-.bottom-right-overlay button,
-.bottom-right-overlay input[type=submit],
-.bottom-right-overlay input[type=button],
 .bottom-right-overlay .style-controls button,
 .bottom-right-overlay .style-controls input[type=submit],
 .bottom-right-overlay .style-controls input[type=button] {
@@ -1211,14 +1136,13 @@ hr {
   display: inline-block;
 }
 .style-controls input,
-.style-controls select {
+.style-controls button select,
+.style-controls textarea {
   margin: 0;
 }
 .style-controls input[type="radio"],
 .style-controls input[type="checkbox"] {
   vertical-align: middle;
-  margin: 0;
-  padding: 0;
 }
 .style-controls button,
 .style-controls input[type=submit],
@@ -1229,6 +1153,11 @@ hr {
 .style-controls textarea {
   font-family: inherit;
   font-size: inherit;
+}
+.style-controls input[type=text],
+.style-controls input[type=password],
+.style-controls select,
+.style-controls textarea {
   line-height: inherit;
 }
 .style-controls button,
@@ -1336,8 +1265,22 @@ hr {
 .basic-form .four-inputs textarea {
   width: 25%;
 }
+.basic-form .browse input {
+  width: 200px;
+}
+.basic-form .help {
+  width: 215px;
+  height: auto;
+  margin-right: 15px;
+}
 .basic-form.ltr fieldset {
   margin-left: 215px;
+}
+.basic-form.ltr fieldset legend {
+  float: left;
+  width: 200px;
+  margin-left: -215px;
+  margin-top: .15em;
 }
 .basic-form.ltr fieldset fieldset {
   margin-left: 0;
@@ -1358,42 +1301,36 @@ hr {
   margin-left: 0;
 }
 .basic-form.ltr .form-row .button:first-child,
-.basic-form.ltr .form-row button:first-child,
-.basic-form.ltr .form-row input[type=submit]:first-child,
-.basic-form.ltr .form-row input[type=button]:first-child,
 .basic-form.ltr .form-row .style-controls button:first-child,
 .basic-form.ltr .form-row .style-controls input[type=submit]:first-child,
 .basic-form.ltr .form-row .style-controls input[type=button]:first-child {
   margin-left: -5px;
 }
-.basic-form.ltr label:first-child {
-  float: left;
-  width: 215px;
-}
 .basic-form.ltr .help {
   float: right;
-  width: 180px;
-  height: auto;
-  margin-right: 12px;
 }
-.basic-form.ltr label:first-child,
-.basic-form.ltr .one-input label:first-child {
-  margin-left: -230px;
+.basic-form.ltr label + input[type=text],
+.basic-form.ltr label + input[type=password],
+.basic-form.ltr label + input[type=file],
+.basic-form.ltr label + textarea {
+  margin-top: -0.3em;
+}
+.basic-form.ltr label:first-child {
+  float: left;
+  width: 200px;
+  margin-left: -215px;
+}
+.basic-form.ltr.left .required label:after {
+  content: '*';
+}
+.basic-form.ltr.right fieldset legend {
   text-align: right;
 }
-.basic-form.top .two-inputs input,
-.basic-form.top .two-inputs select,
-.basic-form.top .two-inputs textarea {
-  width: 50%;
+.basic-form.ltr.right label:first-child {
+  text-align: right;
 }
-.basic-form.top label:first-child {
-  display: block;
-}
-.basic-form.top .help {
-  float: right;
-  width: 180px;
-  height: auto;
-  margin-right: 12px;
+.basic-form.ltr.right label .required label:before {
+  content: '*';
 }
 .basic-form.top fieldset {
   padding-right: 0px;
@@ -1402,15 +1339,21 @@ hr {
 .basic-form.top fieldset fieldset {
   border-right-width: 0px;
 }
-.basic-form.top.right fieldset fieldset,
-.basic-form.top.right .hint,
-.basic-form.top.right fieldset .group,
-.basic-form.top.right fieldset legend {
-  margin-left: 0px;
+.basic-form.top .form-row .button:first-child,
+.basic-form.top .form-row .style-controls button:first-child,
+.basic-form.top .form-row .style-controls input[type=submit]:first-child,
+.basic-form.top .form-row .style-controls input[type=button]:first-child {
+  margin-left: -5px;
 }
-.basic-form.top.right fieldset {
-  border-left-width: 0px;
-  padding-left: 0px;
+.basic-form.top label:first-child {
+  display: block;
+  margin-bottom: 5px;
+}
+.basic-form.top .help {
+  float: right;
+}
+.basic-form.top .required label:after {
+  content: '*';
 }
 .basic-form fieldset {
   border-top: 1px dotted #696969;
@@ -1418,12 +1361,6 @@ hr {
 .basic-form fieldset legend {
   padding: 2px 4px;
   margin-left: -4px;
-}
-.basic-form label + input[type=text],
-.basic-form label + input[type=password],
-.basic-form label + input[type=file],
-.basic-form label + textarea {
-  margin-top: -0.3em;
 }
 .basic-form .help {
   padding: 5px;
@@ -1445,9 +1382,6 @@ hr {
 }
 .basic-form textarea {
   height: 85px;
-}
-.basic-form .required label:first-child {
-  font-weight: bold;
 }
 .basic-form .group {
   line-height: 135%;

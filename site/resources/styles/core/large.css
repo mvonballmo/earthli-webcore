@@ -34,15 +34,13 @@ h2
   font-size: 18pt;
 }
 
-h3, .menu-title
+h3
 {
   font-size: 16pt;
 }
 
 body,
 h4,
-td,
-th,
 .menu,
 .nav-box,
 .button,
@@ -60,7 +58,8 @@ h5,
 .login-status,
 .footnote-reference,
 .subdued,
-.basic-form .description
+.basic-form .description,
+.message-box .description
 {
   font-size: 12pt;
 }

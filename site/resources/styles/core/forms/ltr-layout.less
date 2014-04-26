@@ -5,6 +5,14 @@
 {
   fieldset
   {
+    legend
+    {
+      float: left;
+      width: @label-area-width - @standard_spacing;
+      margin-left: -@label-area-width;
+      margin-top: .15em;
+    }
+
     margin-left: @label-area-width;
 
     fieldset
@@ -45,24 +53,62 @@
     }
   }
 
-  label:first-child
-  {
-    float: left;
-    width: @label-area-width;
-  }
-
   .help
   {
     float: right;
-    width: 180px;
-    height: auto;
-    margin-right: 12px;
   }
 
-  label:first-child,
-  .one-input label:first-child
+  label
   {
-    margin-left: -@label-area-width - @standard_spacing;
-    text-align: right;
+    + input[type=text],
+    + input[type=password],
+    + input[type=file],
+    + textarea,
+    {
+      margin-top: -.3em;
+    }
+
+    &:first-child
+    {
+      float: left;
+      width: @label-area-width - @standard_spacing;
+      margin-left: -@label-area-width;
+    }
+  }
+
+  &.left
+  {
+    // Include styles specific to left-aligned ltr-label forms
+
+    .required label:after
+    {
+      content: '*';
+    }
+  }
+
+  &.right
+  {
+    // Include styles specific to right-aligned ltr-label forms
+
+    fieldset
+    {
+      legend
+      {
+        text-align: right;
+      }
+    }
+
+    label
+    {
+      &:first-child
+      {
+        text-align: right;
+      }
+
+      .required label:before
+      {
+        content: '*';
+      }
+    }
   }
 }

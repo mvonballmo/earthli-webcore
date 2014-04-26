@@ -405,12 +405,6 @@ class FORM_RENDERER extends CONTROLS_RENDERER
   public $labels_CSS_class = 'ltr right';
 
   /**
-   * Show the icon for required fields?
-   * @var boolean
-   */
-  public $show_required_mark = true;
-
-  /**
    * Should this renderer allow previewing?
    * @var boolean
    */
@@ -500,16 +494,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
     $this->_required_mark_used = false;
     $this->_column_started = false;
 
-    /** @var THEMED_PAGE $themed_page */
-    $themed_page = $this->page;
-
-    $styled_class = '';
-    if (!$themed_page->theme->dont_apply_to_forms)
-    {
-      $styled_class = 'style-controls ';
-    }
-
-    echo '<div class="' . $styled_class . $this->_form->CSS_class . '-form ' . $this->labels_CSS_class . '">' . "\n";
+    echo '<div class="' . $this->_form->CSS_class . '-form ' . $this->labels_CSS_class . '">' . "\n";
 
     if ($this->_form->num_errors (Form_general_error_id))
     {
@@ -526,7 +511,6 @@ class FORM_RENDERER extends CONTROLS_RENDERER
   {
     if ($this->_required_mark_used)
     {
-      $this->draw_separator ();
 ?>
   <p class="form-row"><?php echo $this->required_mark (); ?> Required fields</p>
 <?php
@@ -545,7 +529,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    */
   public function start_row ($title = '')
   {
-    if ($title)
+    if ($title && !ctype_space($title))
     {
 ?>
   <div class="form-row">
@@ -669,7 +653,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
 ?>
   <div class="form-row">
 <?php
-    if ($title)
+    if ($title && !ctype_space($title))
     {
 ?>
     <label><?php echo $title; ?></label>
@@ -715,7 +699,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
 ?>
   <div class="form-row">
   <?php
-      if ($title)
+      if ($title && !ctype_space($title))
       {
     ?>
     <label><?php echo $title; ?></label>
@@ -792,7 +776,6 @@ class FORM_RENDERER extends CONTROLS_RENDERER
     if (! $this->_column_started)
     {
       $this->_column_started = true;
-      $this->start_row ($title);
       $box_renderer = $this->context->make_box_renderer();
       $this->_box_renderers []= $box_renderer;
       $box_renderer->start_column_set();
@@ -815,7 +798,6 @@ class FORM_RENDERER extends CONTROLS_RENDERER
     $this->_column_started = false;
     $box_renderer = $this->_box_renderers [count($this->_box_renderers) - 1];
     $box_renderer->finish_column_set();
-    $this->finish_row ();
   }
 
   /**
@@ -828,6 +810,24 @@ class FORM_RENDERER extends CONTROLS_RENDERER
   public function draw_text_line_row ($id, $options = null, $title = null)
   {
     $this->_draw_field_row ($this->_field_at ($id), $this->text_line_as_html ($id, $options), $title);
+  }
+
+/**
+ * Draw a single-line text control with a 'browse' button onto a separate row in the form.
+ *
+ * @param string $id The id of the field to render.
+ * @param string $browse_script The script to execute from the browse button.
+ * @param FORM_TEXT_CONTROL_OPTIONS $options Override the default text control rendering; can be null.
+ * @param string $title If non-empty, used instead of the field title; can be null.
+ */
+  public function draw_text_line_with_browser_row($id, $browse_script, $options = null, $title = null)
+  {
+    $control_text = '<span class="browse">';
+    $control_text .= $this->text_line_as_html($id, $options);
+    $control_text .= $this->javascript_button_as_HTML ('Browse...', $browse_script, '{icons}buttons/browse');
+    $control_text .= '</span>';
+
+    $this->_draw_field_row ($this->_field_at ($id), $control_text, $title);
   }
 
   /**
@@ -1203,10 +1203,8 @@ class FORM_RENDERER extends CONTROLS_RENDERER
 
       if ($text)
       {
-        $text = '<div class="description">' . $text . '</div>';
+        $Result.= '<div class="description">' . $text . '</div>';
       }
-
-      $Result .= '<div style="width: ' . $width . '">' . $text . '</div>';
 
       return $this->_control_created ($id, $Result);
     }
@@ -1545,8 +1543,9 @@ class FORM_RENDERER extends CONTROLS_RENDERER
   {
     if ($field->visible)
     {
-      $label_content = '';
-
+?>
+      <div class="form-row<?php if ($field->required) { echo ' required'; }?>">
+<?php
       if (isset ($title))
       {
         $t = $title;
@@ -1556,37 +1555,22 @@ class FORM_RENDERER extends CONTROLS_RENDERER
         $t = $field->caption;
       }
 
-      if (! empty ($t))
+      if ($t && !ctype_space($t))
       {
         if ($dom_id)
         {
-          $label_content .= '<label for="' . $dom_id . '">';
+          echo '<label for="' . $dom_id . '">' . $t . '</label>';
         }
-        $label_content .= $t;
-        if ($dom_id)
+        else
         {
-          $label_content .= '</label>';
+          echo '<label>' . $t . '</label>';
         }
-        if ($field->required && $this->show_required_mark)
-        {
-          $label_content = $this->required_mark () . ' ' . $label_content;
-        }
-      }
-?>
-      <div class="form-row<?php if ($field->required) { echo ' required'; }?>">
-<?php
-      if (!empty($label_content) || !ctype_space($label_content))
-      {
-        ?>
-        <label><?php echo $label_content; ?></label>
-        <?php
       }
 
       echo $control_text;
 ?>
       </div>
       <?php
-
       $this->draw_error_row ($field->id);
     }
   }
@@ -1615,6 +1599,10 @@ class FORM_RENDERER extends CONTROLS_RENDERER
     if (! $field->enabled)
     {
       $Result .= ' disabled';
+    }
+    if ($field->required)
+    {
+      $Result .= ' required';
     }
     return $Result;
   }
@@ -1976,11 +1964,6 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * @access private
    */
   private $_box_renderers;
-
-  private function get_description_CSS_class()
-  {
-    return 'description';
-  }
 }
 
 /**

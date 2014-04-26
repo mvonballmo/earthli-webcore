@@ -34,18 +34,13 @@ h2
   font-size: 20pt
 }
 
-h3, .menu-title
+h3
 {
   font-size: 18pt
 }
 
 body,
 h4,
-td,
-th,
-.menu,
-.nav-box,
-.button,
 pre
 {
   font-size: 12pt
@@ -59,7 +54,8 @@ h5,
 .login-status,
 .footnote-reference,
 .subdued,
-.basic-form .description
+.basic-form .description,
+.message-box .description
 {
   font-size: 10pt
 }
@@ -71,11 +67,6 @@ h5,
 .modification-time
 {
 	font-size: 9pt;
-}
-
-.icon.sixteen
-{
-  padding-top: 1px;
 }
 
 .icon.twenty

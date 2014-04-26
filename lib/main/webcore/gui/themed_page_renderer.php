@@ -48,6 +48,32 @@ require_once ('webcore/gui/page_renderer.php');
  */
 class THEMED_PAGE_RENDERER extends PAGE_RENDERER
 {
+  protected function _start_body()
+  {
+    /** @var THEMED_PAGE $themed_page */
+    $themed_page = $this->page;
+
+    if (!$themed_page->theme->dont_apply_to_forms)
+    {
+      echo '<div class="style-controls">';
+    }
+
+    parent::_start_body();
+  }
+
+  protected function _finish_body()
+  {
+    parent::_finish_body();
+
+    /** @var THEMED_PAGE $themed_page */
+    $themed_page = $this->page;
+
+    if (!$themed_page->theme->dont_apply_to_forms)
+    {
+      echo '</div>';
+    }
+  }
+
   /**
    * Helper function called from {@link _include_styles_and_scripts()}.
    */

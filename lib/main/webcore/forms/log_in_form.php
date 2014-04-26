@@ -178,35 +178,24 @@ class LOG_IN_FORM extends FORM
    */
   protected function _draw_controls ($renderer)
   {
-    $renderer->show_required_mark = false;
-    $renderer->set_width ('15em');
-
     $renderer->start ();
 
     $renderer->draw_text_line_row ('name');
     $renderer->draw_password_row ('password');
-
-    $renderer->start_row (' ');
-    echo $renderer->check_box_as_HTML ('remember');
-    $renderer->finish_row ();
-
+    $renderer->draw_check_box_row ('remember');
     $renderer->draw_submit_button_row ();
+    $renderer->finish ();
 
     if ($this->app->login->is_anonymous ())
     {
       $anon = $this->app->anon_user ();
       if ($anon->is_allowed (Privilege_set_user, Privilege_create))
       {
-        $renderer->draw_separator ();
-        $renderer->start_row ();
 ?>
 <div class="notes">Don't have an account? <a href="<?php echo $this->app->page_names->user_create; ?>">Register...</a></div>
 <?php
-        $renderer->finish_row ();
       }
     }
-
-    $renderer->finish ();
   }
 }
 

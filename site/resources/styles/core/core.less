@@ -632,46 +632,20 @@ td.object-in-list + td.object-in-list
 
 .thirty-two
 {
-  padding-left: 37px;
-  padding-top: .8em;
-  background: no-repeat 0 5px;
-  min-height: 42px;
+  padding-left: 32px + @small_spacing;
+  min-height: 32px;
 }
 
 .twenty
 {
-  padding-left: 25px;
-  padding-top: .4em;
-  background: no-repeat;
-  min-height: 26px;
+  padding-left: 20px + @small_spacing;
+  min-height: 20px;
 }
 
 .sixteen
 {
-  padding-left: 21px;
-  padding-top: 3px;
-  background: no-repeat 0 2px;
-  min-height: 18px;
-}
-
-.no-label
-{
-  display: inline-block;
-}
-
-.sixteen.no-label
-{
-  padding-left: 18px;
-}
-
-.twenty.no-label
-{
-  padding-left: 26px;
-}
-
-.thirty-two.no-label
-{
-  padding-left: 42px;
+  padding-left: 16px + @small_spacing;
+  min-height: 16px;
 }
 
 /* @end */
@@ -786,14 +760,14 @@ ul.menu
 
 .menu-items.buttons > li + li
 {
-  padding-left: 10px;
+  padding-left: @button_spacing;
 }
 
 .button + .menu-items.buttons,
 .menu-items.buttons + .menu-items.buttons,
 .menu-items.buttons + .button
 {
-  margin-left: 10px;
+  margin-left: @button_spacing;
 }
 
 .menu-items.standard li:before
@@ -872,17 +846,13 @@ ul.menu
   margin-top: @standard_spacing;
 }
 
-button:extend(.button all) {}
-input[type=submit]:extend(.button all) {}
-input[type=button]:extend(.button all) {}
-
 .button
 {
   display: inline-block;
   text-decoration: none;
-  min-width: 2.2em;
-  min-height: 2.2em;
-  padding: @small_spacing;
+  min-width: @minimum_button_width;
+  min-height: @minimum_button_height;
+  padding: .4em;
   .border-box();
   cursor: pointer;
   background-color: #EEE;
@@ -891,7 +861,7 @@ input[type=button]:extend(.button all) {}
   vertical-align: middle;
   white-space: nowrap;
   border-radius: @standard_border_radius;
-  line-height: 100%;
+  line-height: normal;
 }
 
 a.button:link, a.button:visited
@@ -906,14 +876,9 @@ a.button:link, a.button:visited
   background-color: #DDDDDD;
 }
 
-.button.no-label
-{
-  height: 2.2em;
-}
-
 .button + .button
 {
-  margin-left: 10px;
+  margin-left: @button_spacing;
 }
 
 .button.disabled
@@ -943,15 +908,24 @@ a.button:link, a.button:visited
   .border-box();
 }
 
-.pager .button
+.sixteen.no-label
 {
-  width: 2.2em;
-  height: 2.2em;
+  padding-left: 16px;
+}
+
+.twenty.no-label
+{
+  padding-left: 20px;
+}
+
+.thirty-two.no-label
+{
+  padding-left: 32px;
 }
 
 .pager .counters
 {
-  margin: 0 10px;
+  margin: 0 @button_spacing;
   display: inline-block;
   text-align: center;
 }
@@ -1491,19 +1465,16 @@ hr
 
 .message-box
 {
-  margin: 1em;
+  margin: @standard_spacing 0;
 }
 
-.message-title
+.message-box .title
 {
-  font-weight: bold;
 }
 
-.message-description
+.message-box .description
 {
-  margin: 1em 0;
-  font-size: 85%;
-  font-style: italic;
+  margin: @standard_spacing 0;
 }
 
 .complete-text-link
@@ -1584,11 +1555,14 @@ hr
   .border-box();
 }
 
+// TODO Get rid of this style
+
 .left-icon
 {
   background-repeat: no-repeat;
   padding-left: 21px;
-  min-width: 16px; min-height: 16px;
+  min-width: 16px;
+  min-height: 16px;
 }
 
 .top-left-overlay
@@ -1652,7 +1626,9 @@ hr
 .style-controls
 {
   input,
-  select
+  button
+  select,
+  textarea
   {
     margin: 0;
   }
@@ -1661,8 +1637,6 @@ hr
   input[type="checkbox"]
   {
     vertical-align: middle;
-    margin: 0;
-    padding: 0;
   }
 
   button,
@@ -1675,6 +1649,13 @@ hr
   {
     font-family: inherit;
     font-size: inherit;
+  }
+
+  input[type=text],
+  input[type=password],
+  select,
+  textarea
+  {
     line-height: inherit;
   }
 }
@@ -1682,9 +1663,7 @@ hr
 @import "common-forms";
 @import "forms/form-core";
 @import "forms/ltr-layout";
-@import "forms/ltr-right";
 @import "forms/top-layout";
-@import "forms/top-right";
 @import "forms/theme";
 
 @media print
