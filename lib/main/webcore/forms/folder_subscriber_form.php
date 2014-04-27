@@ -101,6 +101,7 @@ class FOLDER_SUBSCRIBER_FORM extends ID_BASED_FORM
   {
     $query = $this->_folder->subscriber_query ();
 
+    $renderer->labels_CSS_class = 'top';
     $renderer->start ();
 
     $folder_type_info = $this->app->type_info_for('FOLDER');

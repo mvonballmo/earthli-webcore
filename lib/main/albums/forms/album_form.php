@@ -570,7 +570,7 @@ class ALBUM_FORM extends FOLDER_FORM
 
     $this->_draw_cover_picture ($renderer);
 
-    $renderer->draw_text_box_row ('summary', null, '3em');
+    $renderer->draw_text_box_row ('summary');
     $renderer->draw_text_box_row ('description');
     $renderer->draw_submit_button_row ();
 
@@ -625,7 +625,7 @@ class ALBUM_FORM extends FOLDER_FORM
       <p class="button-content">
         <?php echo $renderer->javascript_button_as_HTML ('Browse...', 'field.show_picker ()', '{icons}buttons/browse'); ?>
       </p>
-      <div id="main_picture_changed">
+      <div id="main_picture_changed" style="display: none">
         <?php $this->context->show_message('Modified - click "Save" to store changes', 'info'); ?>
       </div>
   <?php

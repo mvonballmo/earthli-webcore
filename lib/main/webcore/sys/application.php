@@ -750,7 +750,7 @@ class APPLICATION extends CONTEXT
    * can specify that the 'purge' privilege will be either granted or denied in a folder,
    * regardless of the type of object. This is defined by overriding {@link PERMISSIONS_FORMATTER::privilege_groups}
    * and defining a new set of {@link PRIVILEGE_GROUP}s and {@link PRIVILEGE_MAP}s.
-   * @return CONTENT_PRIVILEGES
+   * @return PERMISSIONS_FORMATTER
    */
   public function make_permissions_formatter ()
   {

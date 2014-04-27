@@ -143,11 +143,8 @@ class JOURNAL_FORM extends ALBUM_ENTRY_FORM
   {
     $renderer->start ();
     $renderer->draw_text_line_row ('title');
-    $renderer->draw_check_box_row ('is_visible');
-    $renderer->draw_separator ();
 
     $renderer->draw_date_row ('day');
-    $renderer->draw_separator ();
 
     $icons = $this->app->display_options->weather_icons ();
 
@@ -166,8 +163,7 @@ class JOURNAL_FORM extends ALBUM_ENTRY_FORM
       $renderer->draw_radio_group_row ('weather_type', $props);
     }
 
-    $renderer->draw_text_box_row ('weather', null, '3em');
-    $renderer->draw_separator ();
+    $renderer->draw_text_box_row ('weather');
 
     $options = new FORM_TEXT_CONTROL_OPTIONS ();
     $options->width = '3em';
@@ -177,23 +173,19 @@ class JOURNAL_FORM extends ALBUM_ENTRY_FORM
     echo $renderer->text_line_as_html ('lo_temp', $options);
     echo ' High ';
     echo $renderer->text_line_as_html ('hi_temp', $options);
-    echo ' <span class="notes">(Temperatures are in Celsius)</span>';
+    echo ' <span class="description">Temperatures are in Celsius</span>';
     $renderer->finish_row ();
     $renderer->draw_error_row ('lo_temp');
     $renderer->draw_error_row ('hi_temp');
 
     $renderer->draw_error_row ('temps');
-    $renderer->draw_separator ();
-    $renderer->draw_submit_button_row ();
-    $renderer->draw_separator ();
-    $renderer->draw_text_box_row ('description', $renderer->default_control_width, '20em');
+    $renderer->draw_text_box_row ('description', null, '20em');
 
-    $renderer->draw_separator ();
     $renderer->draw_submit_button_row ();
 
+    $renderer->draw_check_box_row ('is_visible');
     $this->_draw_history_item_controls ($renderer, false);
 
     $renderer->finish ();
   }
 }
-?>

@@ -771,9 +771,9 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * called first. Successive calls to this function will create new column content areas until
    * {@link finish_column()} is called to finish the column block.
    * 
-   * @param string $title The title to use for this column; can be empty.
+   * @param string $CSS_class The CSS class to use for the column.
    */
-  public function start_column ($title = '')
+  public function start_column ($CSS_class = '')
   {
     if (! $this->_column_started)
     {
@@ -781,12 +781,12 @@ class FORM_RENDERER extends CONTROLS_RENDERER
       $box_renderer = $this->context->make_box_renderer();
       $this->_box_renderers []= $box_renderer;
       $box_renderer->start_column_set();
-      $box_renderer->new_column_of_type();
+      $box_renderer->new_column_of_type($CSS_class);
     }
     else
     {
       $box_renderer = $this->_box_renderers [count($this->_box_renderers) - 1];
-      $box_renderer->new_column_of_type();
+      $box_renderer->new_column_of_type($CSS_class);
     }
   }
 
@@ -807,11 +807,10 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * 
    * @param string $id The id of the field to render.
    * @param FORM_TEXT_CONTROL_OPTIONS $options Override the default text control rendering; can be null.
-   * @param string $title If non-empty, used instead of the field title; can be null.
    */
-  public function draw_text_line_row ($id, $options = null, $title = null)
+  public function draw_text_line_row ($id, $options = null)
   {
-    $this->_draw_field_row ($this->_field_at ($id), $this->text_line_as_html ($id, $options), $title);
+    $this->_draw_field_row ($this->_field_at ($id), $this->text_line_as_html ($id, $options), 'text-line');
   }
 
   /**
@@ -820,16 +819,15 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * @param string $id The id of the field to render.
    * @param string $button The button to show next to the control.
    * @param FORM_TEXT_CONTROL_OPTIONS $options Override the default text control rendering; can be null.
-   * @param string $title If non-empty, used instead of the field title; can be null.
    */
-  public function draw_text_line_with_button_row($id, $button, $options = null, $title = null)
+  public function draw_text_line_with_button_row($id, $button, $options = null)
   {
     $control_text = '<span class="browse">';
     $control_text .= $this->text_line_as_html($id, $options);
     $control_text .= $button;
     $control_text .= '</span>';
 
-    $this->_draw_field_row ($this->_field_at ($id), $control_text, $title);
+    $this->_draw_field_row ($this->_field_at ($id), $control_text, 'text-line');
   }
 
   /**
@@ -838,16 +836,15 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * @param string $id The id of the field to render.
    * @param string $browse_script The script to execute from the browse button.
    * @param FORM_TEXT_CONTROL_OPTIONS $options Override the default text control rendering; can be null.
-   * @param string $title If non-empty, used instead of the field title; can be null.
    */
-  public function draw_text_line_with_browse_button_row($id, $browse_script, $options = null, $title = null)
+  public function draw_text_line_with_browse_button_row($id, $browse_script, $options = null)
   {
     $control_text = '<span class="browse">';
     $control_text .= $this->text_line_as_html($id, $options);
     $control_text .= $this->javascript_button_as_HTML ('Browse...', $browse_script, '{icons}buttons/browse');
     $control_text .= '</span>';
 
-    $this->_draw_field_row ($this->_field_at ($id), $control_text, $title);
+    $this->_draw_field_row ($this->_field_at ($id), $control_text, 'text-line');
   }
 
   /**
@@ -855,11 +852,10 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * 
    * @param string $id The id of the field to render.
    * @param FORM_TEXT_CONTROL_OPTIONS $options Override the default text control rendering; can be null.
-   * @param string $title If non-empty, used instead of the field title; can be null.
    */
-  public function draw_password_row ($id, $options = null, $title = null)
+  public function draw_password_row ($id, $options = null)
   {
-    $this->_draw_field_row ($this->_field_at ($id), $this->password_as_html ($id, $options), $title);
+    $this->_draw_field_row ($this->_field_at ($id), $this->password_as_html ($id, $options), 'text-line');
   }
 
   /**
@@ -867,11 +863,10 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * 
    * @param string $id The id of the field to render.
    * @param FORM_TEXT_CONTROL_OPTIONS $options Override the default text control rendering; can be null.
-   * @param string $title If non-empty, used instead of the field title; can be null.
    */
-  public function draw_date_row ($id, $options = null, $title = null)
+  public function draw_date_row ($id, $options = null)
   {
-    $this->_draw_field_row ($this->_field_at ($id), $this->date_as_html ($id, $options), $title);
+    $this->_draw_field_row ($this->_field_at ($id), $this->date_as_html ($id, $options), 'text-line');
   }
 
   /**
@@ -879,11 +874,10 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * 
    * @param string $id The id of the field to render.
    * @param FORM_TEXT_CONTROL_OPTIONS $options Override the default text control rendering; can be null.
-   * @param string $title If non-empty, used instead of the field title; can be null.
    */
-  public function draw_file_row ($id, $options = null, $title = null)
+  public function draw_file_row ($id, $options = null)
   {
-    $this->_draw_field_row ($this->_field_at ($id), $this->file_as_html ($id, $options), $title);
+    $this->_draw_field_row ($this->_field_at ($id), $this->file_as_html ($id, $options), 'text-line');
   }
 
   /**
@@ -894,11 +888,10 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * $default_control_width} if not specified.
    * @param string $height Height of the control in valid CSS; defaults to
    * {@link $default_control_height} if not specified.
-   * @param string $title If non-empty, used instead of the field title; can be null.
    */
-  public function draw_text_box_row ($id, $width = null, $height = null, $title = null)
+  public function draw_text_box_row ($id, $width = null, $height = null)
   {
-    $this->_draw_field_row ($this->_field_at ($id), $this->text_box_as_html ($id, $width, $height), $title);
+    $this->_draw_field_row ($this->_field_at ($id), $this->text_box_as_html ($id, $width, $height), 'text-line');
   }
 
   /**
@@ -918,22 +911,20 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * Draw a drop-down menu onto a separate row in the form.
    * @param string $id
    * @param FORM_LIST_PROPERTIES $props
-   * @param string $title Override the title; used instead of the field title
    */
-  public function draw_drop_down_row ($id, $props, $title = null)
+  public function draw_drop_down_row ($id, $props)
   {
-    $this->_draw_field_row ($this->_field_at ($id), $this->drop_down_as_HTML ($id, $props), $title);
+    $this->_draw_field_row ($this->_field_at ($id), $this->drop_down_as_HTML ($id, $props), 'text-line');
   }
 
   /**
    * Draw a list box onto a separate row in the form.
    * @param string $id
    * @param FORM_LIST_PROPERTIES $props
-   * @param string $title Override the title; used instead of the field title
    */
-  public function draw_list_box_row ($id, $props, $title = null)
+  public function draw_list_box_row ($id, $props)
   {
-    $this->_draw_field_row ($this->_field_at ($id), $this->list_box_as_HTML ($id, $props), $title);
+    $this->_draw_field_row ($this->_field_at ($id), $this->list_box_as_HTML ($id, $props), 'text-line');
   }
 
   /**
@@ -967,9 +958,8 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * Draw a list of checkboxes in a separate row in the form.
    * @param string $id The id of the field to render as a check box.
    * @param $props FORM_LIST_PROPERTIES The properties that represent the check boxes to render.
-   * @param string $title An optional title to use for the row.
    */
-  public function draw_check_group_row ($id, $props, $title = null)
+  public function draw_check_group_row ($id, $props)
   {
     echo $this->check_group_as_HTML ($id, $props);
 
@@ -1200,7 +1190,18 @@ class FORM_RENDERER extends CONTROLS_RENDERER
       $style = '';
       if (isset ($width))
       {
-        $style = ' style="width: ' . $width . '; height: ' . $height . '"';
+        if (isset($height))
+        {
+          $style = ' style="width: ' . $width . '; height: ' . $height . '"';
+        }
+        else
+        {
+          $style = ' style="width: ' . $width . '"';
+        }
+      }
+      else
+      {
+        $style = ' style="height: ' . $height . '"';
       }
 
       $Result = $this->_start_control ($field, 'textarea');
@@ -1555,36 +1556,21 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * Field-specific errors is also drawn here, if necessary.
    * @param FIELD $field
    * @param string $control_text Prepared string of text; should be HTML code for a form control.
-   * @param string $dom_id If set, makes an HTML label around the title with that id.
-   * @param string $title
+   * @param string $CSS_class
    * @access private
    */
-  protected function _draw_field_row ($field, $control_text, $dom_id = '', $title = null)
+  protected function _draw_field_row ($field, $control_text, $CSS_class = '')
   {
     if ($field->visible)
     {
 ?>
-      <div class="form-row<?php if ($field->required) { echo ' required'; }?>">
+      <div class="form-row<?php if ($field->required) { echo ' required'; }?><?php if ($CSS_class) { echo ' ' . $CSS_class; }?>">
 <?php
-      if (isset ($title))
-      {
-        $t = $title;
-      }
-      else
-      {
-        $t = $field->caption;
-      }
+      $title = $field->caption;
 
-      if ($t && !ctype_space($t))
+      if ($title && !ctype_space($title))
       {
-        if ($dom_id)
-        {
-          echo '<label for="' . $dom_id . '">' . $t . '</label>';
-        }
-        else
-        {
-          echo '<label>' . $t . '</label>';
-        }
+        echo '<label for="' . $field->id . '">' . $title . '</label>';
       }
 
       echo $control_text;

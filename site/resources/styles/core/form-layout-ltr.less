@@ -1,4 +1,4 @@
-@import "../core-values";
+@import "core-values";
 @import "form-values";
 
 .basic-form.ltr
@@ -58,16 +58,16 @@
     float: right;
   }
 
+  .text-line
+  {
+    label
+    {
+      margin-top: @small_spacing;
+    }
+  }
+
   label
   {
-    + input[type=text],
-    + input[type=password],
-    + input[type=file],
-    + textarea,
-    {
-      margin-top: -.3em;
-    }
-
     &:first-child
     {
       float: left;
@@ -109,17 +109,6 @@
       {
         content: '*';
       }
-    }
-  }
-}
-
-.style-controls .basic-form .ltr
-{
-  .form-row
-  {
-    button:first-child
-    {
-      margin-left: -@standard_border_radius - @hairline_border_width;
     }
   }
 }

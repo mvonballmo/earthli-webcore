@@ -81,7 +81,6 @@ abstract class PERMISSIONS_FORM extends FORM
   {
     $formatter = $this->app->make_permissions_formatter ();
 
-    $renderer->set_width ('');
     $renderer->start ();
     $this->_draw_permission_controls ($renderer, $formatter);
     $renderer->finish ();

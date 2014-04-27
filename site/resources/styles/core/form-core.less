@@ -1,5 +1,5 @@
-@import "../core-values";
-@import "../core-mixins";
+@import "core-values";
+@import "core-mixins";
 @import "form-values";
 
 .style-controls
@@ -9,7 +9,7 @@
   select,
   textarea
   {
-    margin: 0;
+//    margin: 0;
   }
 
   input[type="radio"],
@@ -40,20 +40,26 @@
 }
 
 .button,
+button
+{
+  display: inline-block;
+  min-width: @minimum_button_width;
+  min-height: @minimum_button_height;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.button,
 .style-controls button
 {
   .border-box();
-  display: inline-block;
-  text-decoration: none;
-  min-width: @minimum_button_width;
-  min-height: @minimum_button_height;
   padding: .4em;
+  text-decoration: none;
   cursor: pointer;
-  background-color: #EEE;
-  border: @hairline_border_width solid @standard_border_color;
   text-align: center;
   vertical-align: middle;
-  white-space: nowrap;
+  background-color: #EEE;
+  border: @hairline_border_width solid @standard_border_color;
   border-radius: @standard_border_radius;
   line-height: normal;
 }
@@ -103,6 +109,17 @@ input + button
 {
   display: inline-block;
   .border-box();
+}
+
+.style-controls .basic-form
+{
+  .form-row
+  {
+    button:first-child
+    {
+      margin-left: -@standard_border_radius - @hairline_border_width;
+    }
+  }
 }
 
 .basic-form
@@ -166,8 +183,8 @@ input + button
 
   .form-row
   {
-    margin-top: @standard_spacing;
-    margin-bottom: @standard_spacing;
+    margin-top: @small_spacing;
+    margin-bottom: @small_spacing;
   }
 
   .group

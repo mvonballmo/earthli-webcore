@@ -1230,7 +1230,7 @@ class SEARCH_OBJECT_FIELDS extends WEBCORE_OBJECT
 
     foreach ($this->_sorts as $sort)
     {
-      $renderer->start_column ('Sort by');
+      $renderer->start_column ();
       $sort->draw_fields ($form, $renderer, $sort_values);
     }
 

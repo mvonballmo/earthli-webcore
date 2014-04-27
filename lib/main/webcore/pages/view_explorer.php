@@ -76,7 +76,7 @@ http://www.earthli.com/software/webcore
     $commands = new $class_name ($folder, $form_name);
     /** @var $renderer MENU_RENDERER */
     $renderer = $folder->handler_for (Handler_menu);
-    $renderer->set_size (Menu_size_compact);
+    $renderer->set_size (Menu_size_standard);
     $renderer->display ($commands);
     ?>
     </div>

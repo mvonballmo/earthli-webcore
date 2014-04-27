@@ -57,7 +57,7 @@ http://www.earthli.com/software/webcore
       $Page->start_display ();
     ?>
     <div class="main-box">
-      <div class="form-content">
+      <div class="form-content text-flow">
       <?php
         $form->display ();
       ?>

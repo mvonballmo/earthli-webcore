@@ -257,10 +257,10 @@ class EXECUTE_SEARCH_FORM extends ID_BASED_FORM
    */
   protected function _draw_controls ($renderer)
   {
-    $renderer->labels_CSS_class = 'top';
-
     if (! isset ($this->_search))
     {
+      $renderer->labels_CSS_class = 'top';
+
       $this->button = 'Go';
 
       $renderer->start ();
@@ -288,8 +288,9 @@ class EXECUTE_SEARCH_FORM extends ID_BASED_FORM
       $renderer->start ();
       $this->_search->fields->draw_fields ($this, $renderer);
 
-      $buttons [] = $renderer->submit_button_as_HTML ();
-      $renderer->draw_buttons_in_row ($buttons);
+      $renderer->start_row();
+      echo $renderer->submit_button_as_HTML ();
+      $renderer->finish_row();
 
       $renderer->finish ();
     }

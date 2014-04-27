@@ -234,6 +234,13 @@ function update_controls ()
 <?php
   }
 
+  protected function _draw_controls($renderer)
+  {
+    $renderer->labels_CSS_class = 'top';
+
+    parent::_draw_controls($renderer);
+  }
+
   /**
    * @param FORM_RENDERER $renderer
    * @param PERMISSIONS_FORMATTER $formatter
@@ -242,7 +249,7 @@ function update_controls ()
    */
   protected function _draw_permission_controls ($renderer, $formatter)
   {
-    $renderer->draw_text_row ('', 'The settings on the left can override content permissions, either <em>Granting</em> or <em>Denying</em> them. <em>[Folder]</em> uses the permissions defined in the folder.');
+    $renderer->draw_text_row ('', 'The settings on the left can override content permissions, either <em>Granting</em> or <em>Denying</em> them. <em>Default</em> uses the permissions defined in the folder.');
 
     if ($this->visible ('use_defaults'))
     {
@@ -266,11 +273,11 @@ function update_controls ()
     $this->_draw_buttons ($renderer);
 
     $props = $renderer->make_list_properties ();
-    $props->add_item ('[Folder]', Privilege_controlled_by_content);
+    $props->add_item ('Default', Privilege_controlled_by_content);
     $props->add_item ('Granted', Privilege_always_granted);
     $props->add_item ('Denied', Privilege_always_denied);
 
-    $renderer->start_column ();
+    $renderer->start_column ('left-column');
 
       foreach ($this->content_groups as $group)
       {
@@ -314,9 +321,10 @@ function update_controls ()
     $id = $map->id ();
     $field = $this->field_at ($id);
     $field->caption = $formatter->icon_for ($map) . ' ' . $formatter->title_for ($map);
-    echo '<div style="margin-bottom: .4em">';
+    echo '<div class="three-inputs">';
     echo $renderer->drop_down_as_HTML ($id, $props);
-    echo ' ' . $field->caption . "</div>\n";
+    echo ' ' . $field->caption;
+    echo "</div>";
   }
 
   /**
