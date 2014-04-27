@@ -150,9 +150,7 @@ class BRANCH_FORM extends OBJECT_IN_FOLDER_FORM
       $props->add_item ($this->app->resolve_icon_as_html ('{icons}indicators/locked', ' ', '16px') . ' Locked', Locked, 'Cannot add or remove jobs and changes (undoable).');
     }
 
-    $renderer->draw_separator ();
     $renderer->draw_radio_group_row ('state', $props);
-    $renderer->draw_separator ();
 
     $props = $renderer->make_list_properties ();
     $props->add_item ('[None]', 0);
@@ -166,9 +164,7 @@ class BRANCH_FORM extends OBJECT_IN_FOLDER_FORM
     }
 
     $renderer->draw_drop_down_row ('parent_release_id', $props);
-    $renderer->draw_separator ();
     $renderer->draw_text_box_row ('description');
-    $renderer->draw_separator ();
     $renderer->draw_submit_button_row ();
 
     $this->_draw_history_item_controls ($renderer, false);
@@ -183,4 +179,3 @@ class BRANCH_FORM extends OBJECT_IN_FOLDER_FORM
    */
   protected $_privilege_set = Privilege_set_folder;
 }
-?>

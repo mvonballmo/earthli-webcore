@@ -104,8 +104,7 @@ class CREATE_FOLDER_PERMISSIONS_FORM extends ID_BASED_FORM
     {
       $renderer->start ();
       $renderer->draw_text_row ('', 'Are you sure you want to create new permissions for ' . $this->_object->title_as_link () . '?');
-      $renderer->draw_separator ();
-      
+
       $parent_folder = $this->_object->parent_folder ();
       $permissions_folder = $parent_folder->permissions_folder ();
       
@@ -114,12 +113,10 @@ class CREATE_FOLDER_PERMISSIONS_FORM extends ID_BASED_FORM
       $props->add_item ('Copy current permissions from ' . $permissions_folder->title_as_link (), Security_copy_current);
       $props->add_item ('Grant all permissions for user ' . $this->login->title_as_link (), Security_create_admin);
       $renderer->draw_radio_group_row ('copy_mode', $props);
-      $renderer->draw_separator ();
 
       $buttons [] = $renderer->button_as_HTML ('No', 'view_folder_permissions.php?id=' . $this->_object->id);
       $buttons [] = $renderer->submit_button_as_HTML ();
       $renderer->draw_buttons_in_row ($buttons);
-      $renderer->draw_separator ();
 
       $permissions = $this->login->permissions ();      
       if ($permissions->value_for (Privilege_set_folder, Privilege_view) != Privilege_always_granted)
@@ -138,12 +135,10 @@ class CREATE_FOLDER_PERMISSIONS_FORM extends ID_BASED_FORM
       $renderer->start ();
 
       $renderer->draw_text_row ('', 'Are you sure you want to remove permissions for ' . $this->_object->title_as_link () . '?*');
-      $renderer->draw_separator ();
 
       $buttons [] = $renderer->button_as_HTML ('No', 'view_folder_permissions.php?id=' . $this->_object->id);
       $buttons [] = $renderer->submit_button_as_HTML ();
       $renderer->draw_buttons_in_row ($buttons);
-      $renderer->draw_separator ();
 
       $renderer->draw_text_row ('', '*Doing so will revert all permissions to those used by the parent folder.', 'notes');
 

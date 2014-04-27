@@ -222,7 +222,6 @@ class SEARCH_JOURNAL_FIELDS extends SEARCH_ENTRY_FIELDS
       echo '&deg; and cooler than ' . $renderer->text_line_as_html ('colder_than', $options) . '&deg';
     $renderer->finish_row ();
 
-    $renderer->draw_separator ();
     parent::_draw_date_fields ($form, $renderer);
   }
 }

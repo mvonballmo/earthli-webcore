@@ -169,14 +169,6 @@ class FORM_LIST_PROPERTIES
   public $items_per_row = 1;
 
   /**
-   * CSS value for the amount of space between rows of items.
-   * This property is ignored if 'show_descriptions' is True, since a default spacing is used there
-   * to offset the description.
-   * @var string
-   */
-  public $line_spacing = '';
-
-  /**
    * Shows the list with descriptions.
    * Only by the radio and check button renderers. If this is True, then
    * {@link $items_per_row} is ignored. Ignored in the list box renderer.
@@ -200,21 +192,6 @@ class FORM_LIST_PROPERTIES
    * @var string name of a CSS class.
    */
   public $item_class = '';
-
-  /**
-   * Style to use for list item descriptions.
-   * Used only if {@link $show_descriptions} is True.
-   * @var string name of a CSS class.
-   */
-  public $description_class = 'notes';
-
-  /**
-   * Wraps text to the right of the control only.
-   * If this is false, text can wrap underneath the control. If True, the control is placed in a block
-   * to the left of another block, which contains the text.
-   * @var boolean
-   */
-  public $smart_wrapping = false;
 
   /**
    * Extra CSS class to apply to the control.
@@ -526,13 +503,14 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * labels for any rows already created in this block. To force a label area to be generated, pass ' ' as the
    * title.
    * @param string $title Label for the row.
+   * @param string $CSS_class
    */
-  public function start_row ($title = '')
+  public function start_row ($title = '', $CSS_class = '')
   {
     if ($title && !ctype_space($title))
     {
 ?>
-  <div class="form-row">
+  <div class="form-row<?php if ($CSS_class) echo ' ' . $CSS_class; ?>">
     <label><?php echo $title; ?></label>
 <?php
     }
@@ -578,19 +556,6 @@ class FORM_RENDERER extends CONTROLS_RENDERER
       $Result->visible = $visible;
       $toggle = $Result->toggle_as_html ();
       $description = sprintf ($description, 'Use the arrow to the left to show ');
-      if (! empty ($toggle))
-      {
-        $box = $this->context->make_box_renderer ();
-        ob_start ();
-        $box->start_column_set ();
-        $box->new_column_of_type ('left-column');
-        echo $toggle;
-        $box->new_column ('width: 100%');
-        echo $description;
-        $box->finish_column_set ();
-        $description = ob_get_contents ();
-        ob_end_clean ();
-      }
     }
     else
     {
@@ -598,16 +563,27 @@ class FORM_RENDERER extends CONTROLS_RENDERER
       $Result = null;
     }
 
-    $this->start_block ($title);
+    $this->start_block ($title, 'toggle');
+    if (isset($toggle))
+    {
 ?>
-    <div class="description">
-      <?php echo $description; ?>
-    </div>
+      <span class="toggle">
+        <?php echo $toggle; ?>
+      </span>
 <?php
+    }
+    ?>
+    <span class="description">
+      <?php echo $description; ?>
+    </span>
+    <?php
     if (isset ($Result))
     {
       $Result->start ();
     }
+    ?>
+    <div class="content">
+    <?php
 
     return $Result;
   }
@@ -620,6 +596,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    */
   public function finish_layer_row ($layer)
   {
+    echo '</div>';
     if (isset ($layer))
     {
       $layer->finish ();
@@ -721,9 +698,17 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * are added to blocks nested within the content area of the last open row. Should only be called when
    * there is already a row opened with {@link start_row()}. Must be closed with {@link finish_block()}.
    */
-  public function start_block ($title)
+  public function start_block ($title, $CSS_class = '')
   {
-    echo '<fieldset>' . "\n";
+    if ($CSS_class)
+    {
+      echo '<fieldset class="' . $CSS_class . '">' . "\n";
+    }
+    else
+    {
+      echo '<fieldset>' . "\n";
+    }
+
     if ($title)
     {
       echo '<legend>' . $title . '</legend>';
@@ -987,10 +972,8 @@ class FORM_RENDERER extends CONTROLS_RENDERER
     }
 
     $ctrl = $this->_grouped_control_as_HTML ($field, null, $item, 'checkbox', $field->id);
-    echo $this->_control_created ($id, $ctrl);
-
-    $field = $this->_field_at($id);
-    $this->draw_error_row ($field->id);
+    $ctrl =  $this->_control_created ($id, $ctrl);
+    $this->_draw_field_row($field, $ctrl);
   }
 
   /**
@@ -1085,6 +1068,19 @@ class FORM_RENDERER extends CONTROLS_RENDERER
     $button = $this->javascript_button_as_HTML ('Browse...', $field_id . '_field.show_picker ()', '{icons}buttons/browse');
     $this->draw_buttons_in_row (array ($button));
     $this->draw_error_row ($field_id);
+  }
+
+  public function label_as_html($id)
+  {
+    $field = $this->_field_at ($id);
+    $title = $field->caption;
+
+    if ($title && !ctype_space($title))
+    {
+      return '<label for="' . $id . '">' . $title . '</label>';
+    }
+
+    return '';
   }
 
   /**
@@ -1415,7 +1411,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
 
       if ($field->description)
       {
-        $Result .= '<div style="margin-top: .5em; width: ' . $width . '"><div class="description">' . $field->description . '</div></div>';
+        $Result .= '<div class="description">' . $field->description . '</div>';
       }
 
       return $this->_control_created ($id, $Result);
@@ -1765,26 +1761,28 @@ class FORM_RENDERER extends CONTROLS_RENDERER
 
     if (! isset ($field) || $field->visible)
     {
-      $Result = '';
-
+      $counter = 0;
       if ($id)
       {
         if (isset ($this->_num_controls [$id]))
         {
           $counter = $this->_num_controls [$id] + 1;
         }
-        else
-        {
-          $counter = 0;
-        }
-      }
-      else
-      {
-        $counter = 0;
       }
 
+      $Result = '<div class="form-row">';
+
+      $item_count = 0;
       foreach ($props->items as $item)
       {
+        if ($props->items_per_row >= 1)
+        {
+          if ($item_count != 0 && $item_count % $props->items_per_row == 0)
+          {
+            $Result .= '</div><div class="form-row">';
+          }
+        }
+
         $counter += 1;
 
         if (! $id)
@@ -1811,7 +1809,11 @@ class FORM_RENDERER extends CONTROLS_RENDERER
 
           $Result .= $ctrl;
         }
+
+        $item_count += 1;
       }
+
+      $Result .= '</div>';
 
       if ($id)
       {
@@ -1827,7 +1829,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
 
       return $Result;
     }
-    
+
     return '';
   }
 
@@ -1847,7 +1849,6 @@ class FORM_RENDERER extends CONTROLS_RENDERER
   {
     if ($field->visible)
     {
-      $Result = '<div class="group one-input">';
       $ctrl = $this->_start_control ($field, 'input', $dom_id);
       $ctrl .= ' type="' . $type . '" value="' . $item->value . '"';
 
@@ -1873,7 +1874,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
       $ctrl .= '>';
 
       $label = '<label for="' . $dom_id . '">';
-      if ($item->description)
+      if ($item->description && (!isset($props) || $props->show_descriptions))
       {
         $label .= '<span class="title">' . $item->title . '</span><span class="description">' . $item->description . '</span>';
       }
@@ -1884,9 +1885,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
 
       $label .= '</label>';
 
-      $Result = $Result . $ctrl . $label . '</div>';
-
-      return $Result;
+      return $ctrl . $label;
     }
     
     return '';

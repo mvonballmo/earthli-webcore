@@ -57,14 +57,14 @@ class JOURNAL_FORM extends ALBUM_ENTRY_FORM
 
     $field = new INTEGER_FIELD ();
     $field->id = 'lo_temp';
-    $field->caption = 'Low Temperature';
+    $field->caption = 'Low';
     $field->min_value = -60;
     $field->max_value = 60;
     $this->add_field ($field);
 
     $field = new INTEGER_FIELD ();
     $field->id = 'hi_temp';
-    $field->caption = 'High Temperature';
+    $field->caption = 'High';
     $field->min_value = -60;
     $field->max_value = 60;
     $this->add_field ($field);
@@ -168,12 +168,9 @@ class JOURNAL_FORM extends ALBUM_ENTRY_FORM
     $options = new FORM_TEXT_CONTROL_OPTIONS ();
     $options->width = '3em';
 
-    $renderer->start_row ('Temperatures');
-    echo 'Low ';
-    echo $renderer->text_line_as_html ('lo_temp', $options);
-    echo ' High ';
-    echo $renderer->text_line_as_html ('hi_temp', $options);
-    echo ' <span class="description">Temperatures are in Celsius</span>';
+    $renderer->start_row ('Temps', 'text-line');
+    echo $renderer->text_line_as_html ('lo_temp', $options) . '&deg;C to ';
+    echo $renderer->text_line_as_html ('hi_temp', $options) . '&deg;C ';
     $renderer->finish_row ();
     $renderer->draw_error_row ('lo_temp');
     $renderer->draw_error_row ('hi_temp');

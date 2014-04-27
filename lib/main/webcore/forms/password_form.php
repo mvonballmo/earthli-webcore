@@ -158,9 +158,7 @@ class PASSWORD_FORM extends FORM
     {
       $renderer->draw_check_box_row ('remember');
     }
-    $renderer->draw_separator ();
     $renderer->draw_submit_button_row ();
     $renderer->finish ();
   }
 }
-?>

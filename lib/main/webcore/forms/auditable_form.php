@@ -259,7 +259,6 @@ abstract class AUDITABLE_FORM extends RENDERABLE_FORM
   {
     $description = 'Change history is stored automatically. %s history options.';
     $layer = $renderer->start_layer_row ('history', 'History', $description);
-      $renderer->set_width ('25em');
       $props = $renderer->make_list_properties ();
       $props->show_descriptions = true;
       $props->add_item ('Default', History_item_default, 'Let the system decide whether to send notifications for this change.');
@@ -267,15 +266,10 @@ abstract class AUDITABLE_FORM extends RENDERABLE_FORM
       $props->add_item ('Do not publish', History_item_silent, 'Do not send notifications for this change');
       $renderer->draw_radio_group_row ('publication_state', $props);
 
-      $renderer->draw_separator ();
       $renderer->draw_text_line_row ('history_item_title');
-
-      $renderer->draw_separator ();
       $renderer->draw_text_box_row ('history_item_description');
 
-      $renderer->draw_separator ();
       $renderer->draw_submit_button_row ();
-      $renderer->restore_width ();
     $renderer->finish_layer_row ($layer);
   }
   

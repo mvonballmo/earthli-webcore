@@ -1161,8 +1161,12 @@ input + input[type=submit] {
   margin: 15px 0;
   padding: 0;
 }
-.basic-form fieldset fieldset .group {
-  margin-left: 0;
+.basic-form fieldset.toggle .content {
+  margin-top: 15px;
+}
+.basic-form fieldset.toggle .toggle {
+  float: left;
+  margin-right: 5px;
 }
 .basic-form input,
 .basic-form textarea,
@@ -1200,31 +1204,25 @@ input + input[type=submit] {
   margin-top: 5px;
   margin-bottom: 5px;
 }
-.basic-form .group {
-  display: block;
-  margin: 3px 0px;
-}
-.basic-form .group + .group {
-  clear: left;
-}
-.basic-form .group .group {
-  margin-left: 18px;
-}
-.basic-form .one-input input:first-child {
+.basic-form .form-row label:first-child + input[type=radio],
+.basic-form .form-row label:first-child + input[type=checkbox] {
   float: left;
+  margin-right: 5px;
 }
-.basic-form .one-input label {
+.basic-form .form-row label:not(:first-child) + input[type=radio],
+.basic-form .form-row label:not(:first-child) + input[type=checkbox] {
+  margin-left: 5px;
+}
+.basic-form .form-row label .description {
   display: block;
   margin-left: 18px;
+  position: relative;
+  top: 4px;
 }
-.basic-form .one-input label .description {
-  display: block;
-}
-.basic-form .one-input label:first-child {
-  float: left;
-  display: inline-block;
-  padding-right: 5px;
-  margin-left: 0px;
+.basic-form .one-input input,
+.basic-form .one-input select,
+.basic-form .one-input textarea {
+  width: 100%;
 }
 .basic-form .two-inputs input,
 .basic-form .two-inputs select,
@@ -1245,7 +1243,7 @@ input + input[type=submit] {
   width: 200px;
 }
 .basic-form .help {
-  width: 115px;
+  width: 135px;
   height: auto;
   margin-right: 15px;
 }
@@ -1265,6 +1263,11 @@ input + input[type=submit] {
   border: 1px solid #696969;
   border-radius: 4px;
   padding: 4px;
+}
+.style-controls label:first-child + input[type=text],
+.style-controls label:first-child + input[type=password],
+.style-controls label:first-child + select,
+.style-controls label:first-child + textarea {
   margin-left: -5px;
 }
 .style-controls input[disabled],
@@ -1282,13 +1285,16 @@ input + input[type=submit] {
   margin-left: -4px;
 }
 .basic-form.ltr fieldset {
-  margin-left: 115px;
+  margin-left: 135px;
 }
 .basic-form.ltr fieldset legend {
   float: left;
-  width: 100px;
-  margin-left: -115px;
+  width: 120px;
+  margin-left: -135px;
   margin-top: .15em;
+}
+.basic-form.ltr fieldset.toggle legend {
+  margin-top: 0;
 }
 .basic-form.ltr fieldset fieldset {
   margin-left: 0;
@@ -1298,12 +1304,12 @@ input + input[type=submit] {
 }
 .basic-form.ltr > p {
   /* Applies to form rows appearing directly in a form (not in a fieldset). */
-  margin-left: 115px;
+  margin-left: 135px;
 }
 .basic-form.ltr > .form-row,
 .basic-form.ltr > .group,
 .basic-form.ltr > .hint {
-  margin-left: 115px;
+  margin-left: 135px;
 }
 .basic-form.ltr .form-row .form-row {
   margin-left: 0;
@@ -1319,8 +1325,8 @@ input + input[type=submit] {
 }
 .basic-form.ltr label:first-child {
   float: left;
-  width: 100px;
-  margin-left: -115px;
+  width: 120px;
+  margin-left: -135px;
 }
 .basic-form.ltr.left .required label:after {
   content: '*';
@@ -1344,7 +1350,7 @@ input + input[type=submit] {
 .basic-form.rtl > .form-row,
 .basic-form.rtl > .group,
 .basic-form.rtl > .hint {
-  margin-right: 115px;
+  margin-right: 135px;
 }
 .basic-form.rtl > p,
 .basic-form.rtl > div,
@@ -1359,7 +1365,7 @@ input + input[type=submit] {
 }
 .basic-form.rtl label:first-child {
   float: right;
-  width: 115px;
+  width: 135px;
 }
 .basic-form.rtl .one-input label {
   margin-left: 0px;

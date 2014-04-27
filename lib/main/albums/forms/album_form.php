@@ -531,10 +531,7 @@ class ALBUM_FORM extends FOLDER_FORM
 
     $renderer->finish_block ();
 
-    $renderer->draw_separator ();
     $renderer->draw_submit_button_row ();
-
-    $renderer->draw_separator ();
 
     $renderer->start_block ('Settings');
       $props = $renderer->make_list_properties ();

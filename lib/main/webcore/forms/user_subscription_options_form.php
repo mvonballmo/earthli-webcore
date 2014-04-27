@@ -402,21 +402,17 @@ class USER_SUBSCRIPTION_OPTIONS_FORM extends SUBSCRIPTION_FORM
     $props->add_item ('Once per month', 720);
     $renderer->draw_drop_down_row ('min_hours_to_wait', $props);
 
-    $renderer->draw_separator ();
-
     $props = $renderer->make_list_properties ();
     $props->add_item ('HTML', 1);
     $props->add_item ('Plain text', 0);
     $renderer->draw_radio_group_row ('send_as_html', $props);
 
-    $renderer->draw_separator ();
     $layer = $renderer->start_layer_row ('advanced', 'Advanced', '%s more options.');
 
     $options->width = '3em';
 
     $props = $renderer->make_list_properties ();
     $props->on_click_script = 'on_change_text_option (this)';
-    $props->smart_wrapping = true;
     $props->add_item ('Send all available text.', 0);
     $props->add_item ('Send at most ', 1, '', true, $renderer->text_line_as_HTML ('preferred_text_length', $options) . ' characters.');
     $renderer->draw_radio_group_row ('text_options', $props);
@@ -426,38 +422,29 @@ class USER_SUBSCRIPTION_OPTIONS_FORM extends SUBSCRIPTION_FORM
 
     $props = $renderer->make_list_properties ();
     $props->on_click_script = 'on_group_objects (this)';
-    $props->smart_wrapping = true;
     $props->add_item ('One item per message.', 0);
     $props->add_item ('Group items if there are more than ', 1, '', true, $renderer->text_line_as_HTML ('max_individual_messages', $options) . ' at once.');
     $renderer->draw_radio_group_row ('group_objects', $props);
     $renderer->draw_error_row ('max_individual_messages');
 
-    $renderer->draw_separator ();
-
     $props = $renderer->make_list_properties ();
     $props->on_click_script = 'on_split_objects (this)';
-    $props->smart_wrapping = true;
     $props->add_item ('Send only one message.', 0);
     $props->add_item ('Send at most ', 1, '', true, $renderer->text_line_as_HTML ('max_items_per_message', $options) . ' items per message.');
     $renderer->draw_radio_group_row ('split_objects', $props);
     $renderer->draw_error_row ('max_items_per_message');
 
-    $renderer->draw_separator ();
-
     $renderer->draw_check_box_row ('send_own_changes');
     $check_props = $renderer->make_check_properties ();
     $check_props->on_click_script = 'on_show_history_items (this)';
     $renderer->draw_check_box_row ('show_history_items', $check_props);
-    $renderer->start_row (' ');
-      $renderer->start_block ();
-      $renderer->draw_check_box_row ('group_history_items');
-      $renderer->finish_block ();
-    $renderer->finish_row ();
+    $renderer->start_block ('');
+    $renderer->draw_check_box_row ('group_history_items');
+    $renderer->finish_block ();
     $renderer->draw_check_box_row ('show_history_item_as_subject');
 
     $renderer->finish_layer_row ($layer);
 
-    $renderer->draw_separator ();
     $renderer->draw_submit_button_row ();
 
     $renderer->finish ();

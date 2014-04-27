@@ -187,7 +187,6 @@ class EXECUTE_TASK_FORM extends FORM
   {
     $props = $renderer->make_list_properties ();
     $props->show_descriptions = true;
-    $props->item_class = 'field';
     $this->_add_boolean_options ($props);
     $renderer->draw_check_boxes_row ('Options', $props);
   }

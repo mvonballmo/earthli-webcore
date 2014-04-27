@@ -204,7 +204,6 @@ class CHANGE_FORM extends PROJECT_ENTRY_FORM
     $renderer->start ();
     $renderer->draw_text_line_row ('title');
     $renderer->draw_check_box_row ('is_visible');
-    $renderer->draw_separator ();
     $this->_draw_kind_controls ($renderer);
     $this->_draw_component_controls ($renderer);
 

@@ -282,24 +282,16 @@ class ATTACHMENT_FORM extends OBJECT_IN_FOLDER_FORM
       }
 
       $renderer->draw_text_row ('Current file', '<div style="float: left; margin-right: .5em">' . $img . '</div><div>' . $this->_object->original_file_name . '</div><div style="margin-top: .5em">' . $this->_object->mime_type . ' (' . file_size_as_text ($this->_object->size) . ')</div>', 'detail');
-      $renderer->draw_separator ();
 
       $renderer->draw_text_line_row ('title');
       $renderer->draw_check_box_row ('is_visible');
-      if ($this->visible ('is_visible'))
-      {
-        $renderer->draw_separator ();
-      }
       $renderer->draw_text_box_row ('description');
-
-      $renderer->draw_separator ();
 
       if ($this->login->is_allowed (Privilege_set_attachment, Privilege_upload, $this->_folder))
       {
         $renderer->start_row (' ');
           $renderer->start_block (true);
             $renderer->draw_text_row (' ', 'Replacing the file for the attachment is optional; you can regenerate the thumbnail from the current image by clicking "Save" below.', 'notes');
-            $renderer->draw_separator ();
             $this->_draw_file_controls ($renderer);
           $renderer->finish_block ();
         $renderer->finish_row ();
@@ -310,19 +302,13 @@ class ATTACHMENT_FORM extends OBJECT_IN_FOLDER_FORM
       if ($this->login->is_allowed (Privilege_set_attachment, Privilege_upload, $this->_folder))
       {
         $this->_draw_file_controls ($renderer);
-        $renderer->draw_separator ();
       }
 
       $renderer->draw_text_line_row ('title');
       $renderer->draw_check_box_row ('is_visible');
-      if ($this->visible ('is_visible'))
-      {
-        $renderer->draw_separator ();
-      }
       $renderer->draw_text_box_row ('description');
     }
 
-    $renderer->draw_separator ();
     $renderer->draw_submit_button_row ();
     
     $this->_draw_history_item_controls ($renderer, false);

@@ -295,9 +295,7 @@ class PROJECT_FORM extends FOLDER_FORM
    */
   protected function _draw_controls ($renderer)
   {
-    $renderer->start ();
-    $renderer->start_column ();
-    $renderer->start_row ();
+    $renderer->start_column ('left-sidebar-column');
 ?>
     <div class="left-sidebar">
       <?php
@@ -318,9 +316,9 @@ class PROJECT_FORM extends FOLDER_FORM
       ?>
     </div>
 <?php
-    $renderer->finish_row ();
-    $renderer->start_column ();
+    $renderer->start_column ('content-column');
 
+    $renderer->start ();
     $renderer->draw_text_line_row ('title');
     $renderer->draw_icon_browser_row ('icon_url', 'id', '28em');
 
@@ -329,7 +327,6 @@ class PROJECT_FORM extends FOLDER_FORM
     $item->on_click_script = 'on_organizational_changed (this)';
     $item->smart_wrapping = true;
     $renderer->draw_check_box_row ('is_organizational', $item);
-    $renderer->draw_separator ();
 
 
     if (! $this->object_exists () || ! $this->_object->is_root ())
@@ -350,13 +347,9 @@ class PROJECT_FORM extends FOLDER_FORM
         }
         $renderer->draw_drop_down_row ('trunk_id', $props);
       }
-      $renderer->draw_separator ();
     }
     
-    $renderer->start_row ('Options');
-    $renderer->start_block (true);
-
-      $renderer->start_row ('');
+    $renderer->start_block ('Options');
 
       // if this folder has a parent, then show the inheritance options
 
@@ -396,10 +389,6 @@ class PROJECT_FORM extends FOLDER_FORM
         $renderer->draw_hidden ('defines_options');
       }
 
-      $renderer->finish_row ();
-
-      $renderer->draw_separator ();
-
       $props = $renderer->make_list_properties ();
       $props->width = '15em';
       $props->add_item ('[No warning]', 0);
@@ -411,8 +400,6 @@ class PROJECT_FORM extends FOLDER_FORM
       $props->add_item ('2 weeks', 14 * 86400);
       $props->add_item ('1 month', 30 * 86400);
       $renderer->draw_drop_down_row ('seconds_until_deadline', $props);
-
-      $renderer->draw_separator ();
 
       /* Prepare the option and group lists for assignees and reporters. */
       
@@ -428,18 +415,15 @@ class PROJECT_FORM extends FOLDER_FORM
       }
 
     $renderer->finish_block ();
-    $renderer->finish_row ();
 
-    $renderer->draw_separator ();
     $renderer->draw_text_box_row ('summary');
     $renderer->draw_text_box_row ('description');
 
-    $renderer->draw_separator ();
     $renderer->draw_submit_button_row ();
     $this->_draw_history_item_controls ($renderer, false);
 
-    $renderer->finish_column ();
     $renderer->finish ();
+    $renderer->finish_column ();
   }
   
   protected function _make_user_list_properties_for ($renderer, $ctrl_id)

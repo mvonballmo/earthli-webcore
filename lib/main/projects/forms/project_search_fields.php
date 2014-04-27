@@ -209,8 +209,6 @@ class SEARCH_PROJECT_ENTRY_FIELDS extends SEARCH_ENTRY_FIELDS
     if (sizeof ($kinds))
     {
       $props = $renderer->make_list_properties ();
-      $props->items_per_row = 1;
-      $props->line_spacing = '.15em';
       $index = 0;
       foreach ($kinds as $kind)
       {

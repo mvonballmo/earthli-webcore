@@ -390,9 +390,8 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
     if (sizeof ($kinds))
     {
       $props = $renderer->make_list_properties ();
-      $props->items_per_row = 1;
       $index = 0;
-      foreach ($kinds as &$kind)
+      foreach ($kinds as $kind)
       {
         $props->add_item ($this->app->get_text_with_icon($kind->icon, $kind->title, '20px'), $index);
         $index += 1;

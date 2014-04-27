@@ -4,14 +4,6 @@
 
 .style-controls
 {
-  input,
-  button,
-  select,
-  textarea
-  {
-//    margin: 0;
-  }
-
   input[type="radio"],
   input[type="checkbox"]
   {
@@ -130,9 +122,18 @@ input + button
     margin: @standard_spacing 0;
     padding: 0;
 
-    fieldset .group
+    &.toggle
     {
-      margin-left: 0;
+      .content
+      {
+        margin-top: @standard_spacing;
+      }
+
+      .toggle
+      {
+        float: left;
+        margin-right: @small_spacing;
+      }
     }
   }
 
@@ -187,46 +188,46 @@ input + button
     margin-bottom: @small_spacing;
   }
 
-  .group
+  .form-row
   {
-    display: block;
-    margin: 3px 0px;
-
-    + .group
+    label:first-child
     {
-      clear: left;
+      & + input[type=radio],
+      & + input[type=checkbox],
+      {
+        float: left;
+        margin-right: @small_spacing;
+      }
     }
 
-    .group
+    label:not(:first-child)
     {
-      margin-left: 18px;
+      & + input[type=radio],
+      & + input[type=checkbox]
+      {
+        margin-left: @small_spacing;
+      }
+    }
+
+    label
+    {
+      .description
+      {
+        display: block;
+        margin-left: 13px + @small_spacing;
+        position: relative;
+        top: 4px;
+      }
     }
   }
 
   .one-input
   {
-    input:first-child
+    input,
+    select,
+    textarea
     {
-      float: left;
-    }
-
-    label
-    {
-      display: block;
-      margin-left: 18px;
-
-      .description
-      {
-        display: block;
-      }
-    }
-
-    label:first-child
-    {
-      float: left;
-      display: inline-block;
-      padding-right: @small_spacing;
-      margin-left: 0px;
+      width: 100%;
     }
   }
 

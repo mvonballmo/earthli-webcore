@@ -221,9 +221,7 @@ class RELEASE_FORM extends OBJECT_IN_FOLDER_FORM
       $renderer->draw_date_row ('time_scheduled');
     }
 
-    $renderer->draw_separator ();
-    $renderer->start_row ('Status');
-    $renderer->start_block (true);
+    $renderer->start_block ('Status');
     
     if (! $this->object_exists () || $this->_object->planned ())
     {
@@ -252,13 +250,9 @@ class RELEASE_FORM extends OBJECT_IN_FOLDER_FORM
     }
     
     $renderer->finish_block ();
-    $renderer->finish_row ();
 
-    $renderer->draw_separator ();
     $renderer->draw_text_box_row ('summary');
-    $renderer->draw_separator ();
     $renderer->draw_text_box_row ('description');
-    $renderer->draw_separator ();
     $renderer->draw_submit_button_row ();
     $this->_draw_history_item_controls ($renderer, false);
     $renderer->finish ();

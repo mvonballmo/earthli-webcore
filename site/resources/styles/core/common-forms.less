@@ -24,7 +24,17 @@ input[type=submit]:extend(button all){}
     border: 1px solid @control_border_color;
     border-radius:  @standard_border_radius;
     padding: @standard_border_radius;
-    margin-left: -@standard_border_radius - 1px;
+  }
+
+  label:first-child
+  {
+    & + input[type=text],
+    & + input[type=password],
+    & + select,
+    & + textarea
+    {
+      margin-left: -@standard_border_radius - 1px;
+    }
   }
 
   input[disabled],

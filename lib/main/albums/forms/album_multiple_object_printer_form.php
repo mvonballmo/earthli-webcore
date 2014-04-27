@@ -87,7 +87,6 @@ class ALBUM_MULTIPLE_OBJECT_PRINTER_FORM extends MULTIPLE_OBJECT_PRINTER_FORM
   protected function _draw_print_options ($renderer)
   {
     parent::_draw_print_options ($renderer);
-    $renderer->draw_separator ();
     $renderer->draw_check_box_row ('show_pictures');
     $renderer->draw_check_box_row ('resize_pictures');
   }

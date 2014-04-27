@@ -158,7 +158,6 @@ class COMMENT_FORM extends ATTACHMENT_HOST_FORM
     if ($this->_has_options ())
     {
       $this->_draw_options ($renderer);
-      $renderer->draw_separator ();
     }
 
     $icons = $this->app->display_options->comment_icons ();
@@ -181,11 +180,9 @@ class COMMENT_FORM extends ATTACHMENT_HOST_FORM
 
     if ($this->_captcha_enabled ())
     {
-      $renderer->draw_separator ();
       $this->_draw_captcha_controls ($renderer);
     }
 
-    $renderer->draw_separator ();
     $renderer->draw_submit_button_row ();
 
     $this->_draw_history_item_controls ($renderer, false);

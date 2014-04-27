@@ -330,19 +330,12 @@ class USER_FORM extends CONTENT_OBJECT_FORM
     $renderer->draw_password_row ('password1');
     $renderer->draw_password_row ('password2');
 
-    if ($this->visible('title') || $this->visible('password1') || $this->visible('password2'))
-    {
-      $renderer->draw_separator ();
-    }
-
     $renderer->draw_text_line_row ('real_first_name');
     $renderer->draw_text_line_row ('real_last_name');
     $renderer->draw_text_line_row ('email');    
 
     $props = $renderer->make_list_properties ();
     $props->show_descriptions = true;
-    $props->width = '';
-    $props->item_class = 'field';
     $props->add_item ('Keep private', User_email_hidden, 'Do not display this email under any circumstances. Used only for sending subscriptions.');
     $props->add_item ('Show scrambled', User_email_scrambled, 'Email is displayed, but scrambled (e.g. bob [at] network [dot] com)');
     $props->add_item ('Show normally', User_email_visible, 'Email is displayed normally (open to screen-scraping; not recommended)');
