@@ -133,6 +133,12 @@ input + button
       {
         float: left;
         margin-right: @small_spacing;
+
+        & + .description
+        {
+          display: block;
+          margin-left: 13px + @small_spacing;
+        }
       }
     }
   }
@@ -193,11 +199,18 @@ input + button
     label:first-child
     {
       & + input[type=radio],
-      & + input[type=checkbox],
+      & + input[type=checkbox]
       {
         float: left;
         margin-right: @small_spacing;
       }
+    }
+
+    input[type=radio]:first-child,
+    input[type=checkbox]:first-child
+    {
+      float: left;
+      margin-right: @small_spacing;
     }
 
     label:not(:first-child)
@@ -215,6 +228,10 @@ input + button
       {
         display: block;
         margin-left: 13px + @small_spacing;
+      }
+
+      .description:first-child
+      {
         position: relative;
         top: 4px;
       }

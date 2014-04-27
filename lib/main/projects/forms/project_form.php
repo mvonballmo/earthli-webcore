@@ -325,7 +325,6 @@ class PROJECT_FORM extends FOLDER_FORM
     $renderer->draw_check_box_row ('is_visible');
     $item = $renderer->make_check_properties ();
     $item->on_click_script = 'on_organizational_changed (this)';
-    $item->smart_wrapping = true;
     $renderer->draw_check_box_row ('is_organizational', $item);
 
 

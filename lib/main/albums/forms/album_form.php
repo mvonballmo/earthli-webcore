@@ -503,8 +503,7 @@ class ALBUM_FORM extends FOLDER_FORM
     
     $item = $renderer->make_check_properties ();
     $item->on_click_script = 'on_url_root_enabled_changed (this)';
-    $item->smart_wrapping = true;
-    
+
     $renderer->draw_check_box_row ('url_root_enabled', $item);
 
     $options->on_change_script = null;

@@ -91,5 +91,3 @@ class USER_SUBSCRIPTION_FORM extends CONTENT_OBJECT_SUBSCRIPTION_FORM
    */
   protected $_sub_type = Subscribe_user;
 }
-
-?>

@@ -83,7 +83,7 @@ class PASSWORD_FORM extends FORM
 
     $field = new TEXT_FIELD ();
     $field->id = 'password2';
-    $field->caption = 'Confirm Password';
+    $field->caption = 'Confirm';
     $field->required = true;
     $field->min_length = $this->app->user_options->minimum_password_length;
     $field->max_length = 20;

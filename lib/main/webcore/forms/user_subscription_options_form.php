@@ -387,7 +387,6 @@ class USER_SUBSCRIPTION_OPTIONS_FORM extends SUBSCRIPTION_FORM
     $options->width = '20em';
     
     $renderer->draw_text_line_row ('new_email', $options);
-    $renderer->draw_separator ();
 
     $props = $renderer->make_list_properties ();
     $props->on_click_script = 'on_min_hours_to_wait (this)';
@@ -434,13 +433,12 @@ class USER_SUBSCRIPTION_OPTIONS_FORM extends SUBSCRIPTION_FORM
     $renderer->draw_radio_group_row ('split_objects', $props);
     $renderer->draw_error_row ('max_items_per_message');
 
-    $renderer->draw_check_box_row ('send_own_changes');
     $check_props = $renderer->make_check_properties ();
     $check_props->on_click_script = 'on_show_history_items (this)';
+
+    $renderer->draw_check_box_row ('send_own_changes');
     $renderer->draw_check_box_row ('show_history_items', $check_props);
-    $renderer->start_block ('');
     $renderer->draw_check_box_row ('group_history_items');
-    $renderer->finish_block ();
     $renderer->draw_check_box_row ('show_history_item_as_subject');
 
     $renderer->finish_layer_row ($layer);

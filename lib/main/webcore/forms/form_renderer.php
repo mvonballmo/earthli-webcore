@@ -91,14 +91,6 @@ class FORM_LIST_ITEM
    * @var string
    */
   public $on_click_script = null;
-
-  /**
-   * Wraps text to the right of the control only.
-   * If this is false, text can wrap underneath the control. If True, the control is placed in a block
-   * to the left of another block, which contains the text. Overrides the value set in the list properties.
-   * @var boolean
-   */
-  public $smart_wrapping = false;
 }
 
 /**
@@ -212,14 +204,13 @@ class FORM_LIST_PROPERTIES
    */
   public function add_item ($title, $value, $description = '', $enabled = true, $text = '', $script = '')
   {
-    $item = new stdClass();
+    $item = new FORM_LIST_ITEM();
     $item->title = $title;
     $item->value = $value;
     $item->enabled = $enabled;
     $item->text = $text;
     $item->description = $description;
     $item->on_click_script = $script;
-    $item->smart_wrapping = false;
     $this->items [] = $item;
   }
 
@@ -886,10 +877,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    */
   public function draw_radio_group_row ($id, $props)
   {
-    echo $this->radio_group_as_html ($id, $props);
-
-    $field = $this->_field_at($id);
-    $this->draw_error_row ($field->id);
+    $this->_draw_field_row ($this->_field_at ($id), $this->radio_group_as_html ($id, $props));
   }
 
   /**
@@ -963,7 +951,6 @@ class FORM_RENDERER extends CONTROLS_RENDERER
     if (! isset ($item))
     {
       $item = $this->make_check_properties ();
-      $item->smart_wrapping = true;
     }
 
     if ($field->description)
@@ -1876,7 +1863,14 @@ class FORM_RENDERER extends CONTROLS_RENDERER
       $label = '<label for="' . $dom_id . '">';
       if ($item->description && (!isset($props) || $props->show_descriptions))
       {
-        $label .= '<span class="title">' . $item->title . '</span><span class="description">' . $item->description . '</span>';
+        if ($item->title && !ctype_space($item->title))
+        {
+          $label .= '<span class="title">' . $item->title . '</span><span class="description">' . $item->description . '</span>';
+        }
+        else
+        {
+          $label .= '<span class="description">' . $item->description . '</span>';
+        }
       }
       else
       {
@@ -1884,6 +1878,11 @@ class FORM_RENDERER extends CONTROLS_RENDERER
       }
 
       $label .= '</label>';
+
+      if ($item->text)
+      {
+        $label .= $item->text;
+      }
 
       return $ctrl . $label;
     }

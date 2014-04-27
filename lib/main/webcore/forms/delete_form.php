@@ -223,8 +223,6 @@ class DELETE_OBJECT_FORM extends PURGE_OBJECT_FORM
       $renderer->draw_check_boxes_row ('', $props);
     }
     
-    $renderer->draw_separator ();
-
     $buttons [] = $renderer->button_as_HTML ('No', $this->_object->home_page ());
     $buttons [] = $renderer->submit_button_as_HTML ();
     $renderer->draw_buttons_in_row ($buttons);
