@@ -590,7 +590,7 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
         ?>
         <div id="branch_<?php echo $branch->id; ?>_panel" <?php if ($style) echo 'style="' . $style . '"'; ?>>
           <?php
-            $renderer->start_block ($branch->title_as_html());
+            $renderer->start_block ('');
               $this->_draw_branch_info_controls ($branch, $renderer, $visible, $release);
             $renderer->finish_block ();
           ?>

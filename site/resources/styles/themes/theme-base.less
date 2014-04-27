@@ -5,6 +5,7 @@
 body
 {
   background-color: @background_color;
+  .repeated-background(@background_url);
   color: @text_color;
 }
 
@@ -54,6 +55,7 @@ h4
 .banner
 {
   background-color: @banner_background_color;
+  .repeated-background(@banner_background_url);
   color: @banner_text_color;
   a:link, a:visited
   {
@@ -79,6 +81,7 @@ h4
 .footer
 {
   background-color: @footer_background_color;
+  .repeated-background(@footer_background_url);
   color: @footer_text_color;
   a:link, a:visited
   {
@@ -169,6 +172,7 @@ pre > code,
 .cell-selected
 {
   background-color: @control_background_color;
+  .repeated-background(@control_background_url);
 }
 
 .caution,
@@ -187,7 +191,8 @@ pre > code,
 
 .graph-foreground
 {
-  background-color: @title_color;
+  background-color: @graph_background_color;
+  .repeated-background(@graph_background_url);
 }
 
 .graph-background
@@ -211,9 +216,38 @@ pre > code,
   color: @dimmer_text_color;
 }
 
-.button
+ul.menu
+{
+  background-color: @menu_background_color;
+  .repeated-background(@menu_background_url);
+  border-color: @menu_border_color;
+
+  .menu-group-title
+  {
+    background-color: @menu_title_background_color;
+    .repeated-background(@menu_title_background_url);
+    border-color: @menu_border_color;
+  }
+
+  .menu-item:hover
+  {
+    background-color: @control_hover_background_color;
+    .repeated-background(@control_hover_background_url);
+    border-color: @control_hover_border_color;
+  }
+
+  .menu-item-description
+  {
+    color: @control_text_color;
+  }
+}
+
+
+.button,
+.style-controls button
 {
   background-color: @control_background_color;
+  .repeated-background(@control_background_url);
   border-color: @control_border_color;
   color: @control_text_color;
 }
@@ -224,50 +258,33 @@ a.button:visited
   color: @control_text_color;
 }
 
-.button.selected
+.button.selected,
+.style-controls button.selected
 {
   background-color: @selected_control_background_color;
+  .repeated-background(@selected_control_background_url);
   border-color: @control_border_color;
   color: @selected_control_text_color;
 }
 
-.button.disabled
+.button.disabled,
+.style-controls button.disabled
 {
   background-color: @disabled_control_background_color;
+  .repeated-background(@disabled_control_background_url);
   border-color: @disabled_control_border_color;
   color: @disabled_control_text_color;
 }
 
-.button:hover:not(.disabled):not(.selected)
+.button:hover:not(.disabled):not(.selected),
+.style-controls button:hover:not(.disabled):not(.selected)
 {
   background-color: @control_hover_background_color;
+  .repeated-background(@control_hover_background_url);
   border-color: @control_hover_border_color;
 }
 
-ul.menu
-{
-  background-color: @menu_background_color;
-  border-color: @menu_border_color;
-
-  .menu-group-title
-  {
-    background-color: @menu_title_background_color;
-    border-color: @menu_border_color;
-  }
-
-  .menu-item:hover
-  {
-    background-color: @control_hover_background_color;
-    border-color: @control_hover_border_color;
-  }
-
-  .menu-item-description
-  {
-    color: @control_text_color;
-  }
-}
-
-form.style-controls
+.style-controls
 {
   input[type=text],
   input[type=password],
@@ -275,6 +292,7 @@ form.style-controls
   textarea
   {
     background-color: @edit_control_background_color;
+    .repeated-background(@edit_control_background_url);
     border-color: @control_border_color;
     border-radius: @standard_border_radius;
     padding: @standard_border_radius;

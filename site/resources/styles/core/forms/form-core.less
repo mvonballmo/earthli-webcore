@@ -2,6 +2,109 @@
 @import "../core-mixins";
 @import "form-values";
 
+.style-controls
+{
+  input,
+  button,
+  select,
+  textarea
+  {
+    margin: 0;
+  }
+
+  input[type="radio"],
+  input[type="checkbox"]
+  {
+    vertical-align: middle;
+  }
+
+  button,
+  input[type=submit],
+  input[type=button],
+  input[type=text],
+  input[type=password],
+  select,
+  textarea
+  {
+    font-family: inherit;
+    font-size: inherit;
+  }
+
+  input[type=text],
+  input[type=password],
+  select,
+  textarea
+  {
+    line-height: inherit;
+  }
+}
+
+.button,
+.style-controls button
+{
+  .border-box();
+  display: inline-block;
+  text-decoration: none;
+  min-width: @minimum_button_width;
+  min-height: @minimum_button_height;
+  padding: .4em;
+  cursor: pointer;
+  background-color: #EEE;
+  border: @hairline_border_width solid @standard_border_color;
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+  border-radius: @standard_border_radius;
+  line-height: normal;
+}
+
+a.button:link, a.button:visited
+{
+  color: #333;
+  text-decoration: none;
+}
+
+.button:hover:not(.disabled):not(.selected),
+.style-controls button:hover:not(.disabled):not(.selected)
+{
+  border-color: darkgray;
+  background-color: #DDDDDD;
+}
+
+.button + .button,
+button + button,
+.button + button,
+button + .button,
+input + .button,
+input + button
+{
+  margin-left: @button_spacing;
+}
+
+.button.disabled,
+.style-controls button.disabled
+{
+  color: #AAA;
+  border-color: #DDD;
+  cursor: default;
+}
+
+.button.selected,
+.style-controls button.selected
+{
+  cursor: default;
+  background-color: gray;
+  border-color: #666;
+  color: white;
+}
+
+.button .icon,
+.style-controls button .icon
+{
+  display: inline-block;
+  .border-box();
+}
+
 .basic-form
 {
   fieldset
@@ -94,6 +197,11 @@
     {
       display: block;
       margin-left: 18px;
+
+      .description
+      {
+        display: block;
+      }
     }
 
     label:first-child

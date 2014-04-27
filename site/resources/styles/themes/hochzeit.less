@@ -42,40 +42,7 @@ http://www.earthli.com/software/webcore
 @banner_link_color: darken(saturate(@background_color, 30%), 5%);
 @footer_link_color: @banner_link_color;
 
-body
-{
-  background: #FDF8E5 url(hochzeit/milkweed_paper.jpg) repeat;
-}
-
-.banner,
-.footer,
-.graph-foreground,
-.button.selected
-{
-  background: #BBAA99 url(hochzeit/fossil_paper.jpg) repeat;
-}
-
-ul.menu
-{
-  background: #FDF8E5 url(hochzeit/milkweed_paper.jpg) repeat;
-}
-
-.cell-selected,
-.cell-highlight,
-.button,
-.button.disabled,
-.menu-group-title
-{
-  background: #DDCCBB url(hochzeit/fossil_paper_light.jpg) repeat;
-}
-
-.style-controls
-{
-  input[type=password],
-  input[type=text],
-  select,
-  textarea
-  {
-    background: #DDCCBB url(hochzeit/fossil_paper_light.jpg) repeat;
-  }
-}
+@background_url: 'hochzeit/milkweed_paper.jpg';
+@selected_control_background_url: 'hochzeit/fossil_paper.jpg';
+@banner_background_url: 'hochzeit/fossil_paper.jpg';
+@control_background_url: 'hochzeit/fossil_paper_light.jpg';

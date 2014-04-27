@@ -16,6 +16,7 @@
 
 @background_color: white;
 @text_color: #333;
+@background_url: '';
 
 @accent_background_color: darken(@background_color, 9%);
 
@@ -39,9 +40,11 @@
 @footer_background_color: transparent;
 
 @banner_link_color: @link_color;
-@footer_link_color: @link_color;
 @banner_link_hover_color: saturate(lighten(@banner_link_color, 20%), 20%);
+@banner_background_url: '';
+@footer_link_color: @link_color;
 @footer_link_hover_color: saturate(lighten(@footer_link_color, 20%), 20%);;
+@footer_background_url: @banner_background_url;
 
 @hairline_border_width: 1px;
 @thin_border_width: 3px;
@@ -58,24 +61,33 @@
 @control_text_color: mix(@text_color, @background_color, 75%);
 @control_background_color: darken(@background_color, 6%);
 @control_border_color: @standard_border_color;
+@control_background_url: '';
 
 @edit_control_text_color: @control_text_color;
 @edit_control_background_color: @control_background_color;
+@edit_control_background_url: @control_background_url;
 
 @selected_control_text_color: @selected_text_color;
 @selected_control_background_color: @control_hover_background_color;
+@selected_control_background_url: @control_background_url;
 
 @disabled_control_text_color: @dimmest_text_color;
 @disabled_control_background_color: @accent_border_color;
 @disabled_control_border_color: mix(@dimmer_text_color, @background_color, 30%);
+@disabled_control_background_url: @control_background_url;
 
 @control_hover_background_color: lighten(@background_color, 3%);
+@control_hover_background_url: @background_url;
 @control_hover_border_color: @standard_border_color;
 
 @menu_background_color: @control_background_color;
-@menu_title_background_color: @accent_background_color;
 @menu_border_color: @control_border_color;
+@menu_background_url: @background_url;
+@menu_title_background_color: @accent_background_color;
+@menu_title_background_url: @control_background_url;
 
 @message_box_text_color: #765;
 @message_box_link_color: #66C;
 
+@graph_background_color: @title_color;
+@graph_background_url: @selected_control_background_url;

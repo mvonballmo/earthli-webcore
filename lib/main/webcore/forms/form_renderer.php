@@ -599,8 +599,11 @@ class FORM_RENDERER extends CONTROLS_RENDERER
     }
 
     $this->start_block ($title);
-    $this->draw_text_row ($title, $description, 'description');
-    $this->start_row (' ');
+?>
+    <div class="description">
+      <?php echo $description; ?>
+    </div>
+<?php
     if (isset ($Result))
     {
       $Result->start ();
@@ -621,7 +624,6 @@ class FORM_RENDERER extends CONTROLS_RENDERER
     {
       $layer->finish ();
     }
-    $this->finish_row ();
     $this->finish_block ();
   }
 
@@ -660,7 +662,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
 <?php
     }
 ?>
-    <div class="text-flow <?php echo $CSS_class; ?>">
+    <div class="<?php echo $CSS_class; ?>">
       <?php echo $text; ?>
     </div>
   </div>
@@ -779,12 +781,12 @@ class FORM_RENDERER extends CONTROLS_RENDERER
       $box_renderer = $this->context->make_box_renderer();
       $this->_box_renderers []= $box_renderer;
       $box_renderer->start_column_set();
-      $box_renderer->new_column();
+      $box_renderer->new_column_of_type();
     }
     else
     {
       $box_renderer = $this->_box_renderers [count($this->_box_renderers) - 1];
-      $box_renderer->new_column();
+      $box_renderer->new_column_of_type();
     }
   }
 
@@ -812,15 +814,33 @@ class FORM_RENDERER extends CONTROLS_RENDERER
     $this->_draw_field_row ($this->_field_at ($id), $this->text_line_as_html ($id, $options), $title);
   }
 
-/**
- * Draw a single-line text control with a 'browse' button onto a separate row in the form.
- *
- * @param string $id The id of the field to render.
- * @param string $browse_script The script to execute from the browse button.
- * @param FORM_TEXT_CONTROL_OPTIONS $options Override the default text control rendering; can be null.
- * @param string $title If non-empty, used instead of the field title; can be null.
- */
-  public function draw_text_line_with_browser_row($id, $browse_script, $options = null, $title = null)
+  /**
+   * Draw a single-line text control with a 'browse' button onto a separate row in the form.
+   *
+   * @param string $id The id of the field to render.
+   * @param string $button The button to show next to the control.
+   * @param FORM_TEXT_CONTROL_OPTIONS $options Override the default text control rendering; can be null.
+   * @param string $title If non-empty, used instead of the field title; can be null.
+   */
+  public function draw_text_line_with_button_row($id, $button, $options = null, $title = null)
+  {
+    $control_text = '<span class="browse">';
+    $control_text .= $this->text_line_as_html($id, $options);
+    $control_text .= $button;
+    $control_text .= '</span>';
+
+    $this->_draw_field_row ($this->_field_at ($id), $control_text, $title);
+  }
+
+  /**
+   * Draw a single-line text control with a 'browse' button onto a separate row in the form.
+   *
+   * @param string $id The id of the field to render.
+   * @param string $browse_script The script to execute from the browse button.
+   * @param FORM_TEXT_CONTROL_OPTIONS $options Override the default text control rendering; can be null.
+   * @param string $title If non-empty, used instead of the field title; can be null.
+   */
+  public function draw_text_line_with_browse_button_row($id, $browse_script, $options = null, $title = null)
   {
     $control_text = '<span class="browse">';
     $control_text .= $this->text_line_as_html($id, $options);

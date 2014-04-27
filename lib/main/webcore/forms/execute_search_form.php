@@ -109,7 +109,6 @@ class EXECUTE_SEARCH_FORM extends ID_BASED_FORM
     }
     else
     {
-      $this->CSS_class = 'quick-search';
       $this->action_anchor = '';
 
       $field = new TEXT_FIELD ();
@@ -258,17 +257,18 @@ class EXECUTE_SEARCH_FORM extends ID_BASED_FORM
    */
   protected function _draw_controls ($renderer)
   {
+    $renderer->labels_CSS_class = 'top';
+
     if (! isset ($this->_search))
     {
       $this->button = 'Go';
-      $renderer->set_width ('13em');
-      
+
       $renderer->start ();
-        $renderer->draw_text_line_row ('search_text');
+        $renderer->draw_text_line_with_button_row('search_text', $renderer->submit_button_as_html ());
       
         $props = $renderer->make_list_properties ();
         $props->CSS_class = 'detail';
-        
+
         /* Fill with all the registered search types. */
         $type_infos = $this->app->search_type_infos ();
         foreach ($type_infos as $t)
@@ -276,11 +276,10 @@ class EXECUTE_SEARCH_FORM extends ID_BASED_FORM
           $props->add_item ($t->plural_title, $t->id);
         }
 
-        $renderer->start_row('');
-          echo $renderer->drop_down_as_html('type', $props);
-          echo '<div style="float: right">';
-          $renderer->draw_buttons(array ($renderer->submit_button_as_html ()));
-          echo '</div>';
+        $renderer->start_row();
+        echo '<div class="two-inputs">';
+        echo $renderer->drop_down_as_html('type', $props);
+        echo '</div>';
         $renderer->finish_row();
       $renderer->finish ();
     }

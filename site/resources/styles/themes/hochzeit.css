@@ -25,7 +25,9 @@ http://www.earthli.com/software/webcore
 ****************************************************************************/
 .style-controls button,
 .style-controls input[type=submit],
-.style-controls input[type=button] {
+.style-controls input[type=button],
+.style-controls input[type=button],
+.style-controls input[type=submit] {
   color: #554433;
 }
 .style-controls input[type=text],
@@ -33,6 +35,8 @@ http://www.earthli.com/software/webcore
 .style-controls select,
 .style-controls textarea {
   background-color: #fbf0c9;
+  background-image: url('hochzeit/fossil_paper_light.jpg');
+  background-repeat: repeat;
   color: #554433;
   border: 1px solid #cbc2b0;
   border-radius: 4px;
@@ -44,10 +48,21 @@ http://www.earthli.com/software/webcore
 .style-controls textarea[disabled] {
   color: #b1a795;
   background-color: #fbf2cd;
+  background-image: url('hochzeit/fossil_paper_light.jpg');
+  background-repeat: repeat;
   border-color: #dcd5c2;
+}
+.basic-form fieldset {
+  border-top: 1px dotted #cbc2b0;
+}
+.basic-form fieldset legend {
+  padding: 2px 4px;
+  margin-left: -4px;
 }
 body {
   background-color: #fdf8e5;
+  background-image: url('hochzeit/milkweed_paper.jpg');
+  background-repeat: repeat;
   color: #554433;
 }
 code {
@@ -103,6 +118,8 @@ h4 code {
 }
 .banner {
   background-color: #bbaa99;
+  background-image: url('hochzeit/fossil_paper.jpg');
+  background-repeat: repeat;
   color: #554433;
 }
 .banner a:link,
@@ -121,6 +138,8 @@ h4 code {
 }
 .footer {
   background-color: #bbaa99;
+  background-image: url('hochzeit/fossil_paper.jpg');
+  background-repeat: repeat;
   color: #554433;
 }
 .footer a:link,
@@ -195,6 +214,8 @@ pre > code,
 }
 .cell-selected {
   background-color: #fbf0c9;
+  background-image: url('hochzeit/fossil_paper_light.jpg');
+  background-repeat: repeat;
 }
 .caution,
 .warning,
@@ -211,6 +232,8 @@ pre > code,
 }
 .graph-foreground {
   background-color: #554433;
+  background-image: url('hochzeit/fossil_paper.jpg');
+  background-repeat: repeat;
 }
 .highlight {
   color: #c72c1b;
@@ -223,102 +246,78 @@ pre > code,
 .quote-block {
   color: #908371;
 }
-.button,
-.style-controls button,
-.style-controls input[type=submit],
-.style-controls input[type=button] {
-  background-color: #fbf0c9;
-  border-color: #cbc2b0;
-  color: #554433;
-}
-a.button:link,
-a.button:visited,
-a.style-controls button:link,
-a.style-controls button:visited,
-a.style-controls input[type=submit]:link,
-a.style-controls input[type=submit]:visited,
-a.style-controls input[type=button]:link,
-a.style-controls input[type=button]:visited {
-  color: #554433;
-}
-.button.selected,
-.style-controls button.selected,
-.style-controls input[type=submit].selected,
-.style-controls input[type=button].selected {
-  background-color: #fefcf3;
-  border-color: #cbc2b0;
-  color: #fdf8e5;
-}
-.button.disabled,
-.style-controls button.disabled,
-.style-controls input[type=submit].disabled,
-.style-controls input[type=button].disabled {
-  background-color: #fbf2cd;
-  border-color: #dcd5c2;
-  color: #b1a795;
-}
-.button:hover:not(.disabled):not(.selected),
-.style-controls button:hover:not(.disabled):not(.selected),
-.style-controls input[type=submit]:hover:not(.disabled):not(.selected),
-.style-controls input[type=button]:hover:not(.disabled):not(.selected) {
-  background-color: #fefcf3;
-  border-color: #cbc2b0;
-}
 ul.menu {
   background-color: #fbf0c9;
+  background-image: url('hochzeit/milkweed_paper.jpg');
+  background-repeat: repeat;
   border-color: #cbc2b0;
 }
 ul.menu .menu-group-title {
   background-color: #faedba;
+  background-image: url('hochzeit/fossil_paper_light.jpg');
+  background-repeat: repeat;
   border-color: #cbc2b0;
 }
 ul.menu .menu-item:hover {
   background-color: #fefcf3;
+  background-image: url('hochzeit/milkweed_paper.jpg');
+  background-repeat: repeat;
   border-color: #cbc2b0;
 }
 ul.menu .menu-item-description {
   color: #554433;
 }
-form.style-controls input[type=text],
-form.style-controls input[type=password],
-form.style-controls select,
-form.style-controls textarea {
+.button,
+.style-controls button,
+.style-controls input[type=button],
+.style-controls input[type=submit] {
   background-color: #fbf0c9;
+  background-image: url('hochzeit/fossil_paper_light.jpg');
+  background-repeat: repeat;
+  border-color: #cbc2b0;
+  color: #554433;
+}
+a.button:link,
+a.button:visited {
+  color: #554433;
+}
+.button.selected,
+.style-controls button.selected,
+.style-controls input[type=button].selected,
+.style-controls input[type=submit].selected {
+  background-color: #fefcf3;
+  background-image: url('hochzeit/fossil_paper.jpg');
+  background-repeat: repeat;
+  border-color: #cbc2b0;
+  color: #fdf8e5;
+}
+.button.disabled,
+.style-controls button.disabled,
+.style-controls input[type=button].disabled,
+.style-controls input[type=submit].disabled {
+  background-color: #fbf2cd;
+  background-image: url('hochzeit/fossil_paper_light.jpg');
+  background-repeat: repeat;
+  border-color: #dcd5c2;
+  color: #b1a795;
+}
+.button:hover:not(.disabled):not(.selected),
+.style-controls button:hover:not(.disabled):not(.selected),
+.style-controls input[type=button]:hover:not(.disabled):not(.selected),
+.style-controls input[type=submit]:hover:not(.disabled):not(.selected) {
+  background-color: #fefcf3;
+  background-image: url('hochzeit/milkweed_paper.jpg');
+  background-repeat: repeat;
+  border-color: #cbc2b0;
+}
+.style-controls input[type=text],
+.style-controls input[type=password],
+.style-controls select,
+.style-controls textarea {
+  background-color: #fbf0c9;
+  background-image: url('hochzeit/fossil_paper_light.jpg');
+  background-repeat: repeat;
   border-color: #cbc2b0;
   border-radius: 4px;
   padding: 4px;
-}
-body {
-  background: #fdf8e5 url(hochzeit/milkweed_paper.jpg) repeat;
-}
-.banner,
-.footer,
-.graph-foreground,
-.button.selected,
-.style-controls button.selected,
-.style-controls input[type=submit].selected,
-.style-controls input[type=button].selected {
-  background: #bbaa99 url(hochzeit/fossil_paper.jpg) repeat;
-}
-ul.menu {
-  background: #fdf8e5 url(hochzeit/milkweed_paper.jpg) repeat;
-}
-.cell-selected,
-.cell-highlight,
-.button,
-.button.disabled,
-.menu-group-title,
-.style-controls button,
-.style-controls button.disabled,
-.style-controls input[type=submit],
-.style-controls input[type=submit].disabled,
-.style-controls input[type=button],
-.style-controls input[type=button].disabled {
-  background: #ddccbb url(hochzeit/fossil_paper_light.jpg) repeat;
-}
-.style-controls input[type=password],
-.style-controls input[type=text],
-.style-controls select,
-.style-controls textarea {
-  background: #ddccbb url(hochzeit/fossil_paper_light.jpg) repeat;
 }

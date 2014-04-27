@@ -508,6 +508,17 @@ ul.menu .menu-item-description {
 }
 /* @end */
 /* @group Buttons / Inline Menu */
+.button + .menu-items.buttons,
+.menu-items.buttons + .menu-items.buttons,
+.menu-items.buttons + .button,
+button + .menu-items.buttons,
+.menu-items.buttons + button,
+input[type=button] + .menu-items.buttons,
+.menu-items.buttons + input[type=button],
+input[type=submit] + .menu-items.buttons,
+.menu-items.buttons + input[type=submit] {
+  margin-left: 10px;
+}
 .menu-items {
   display: inline;
   list-style: none;
@@ -520,17 +531,6 @@ ul.menu .menu-item-description {
 }
 .menu-items.buttons > li + li {
   padding-left: 10px;
-}
-.button + .menu-items.buttons,
-.menu-items.buttons + .menu-items.buttons,
-.menu-items.buttons + .button,
-.style-controls button + .menu-items.buttons,
-.menu-items.buttons + .style-controls button,
-.style-controls input[type=submit] + .menu-items.buttons,
-.menu-items.buttons + .style-controls input[type=submit],
-.style-controls input[type=button] + .menu-items.buttons,
-.menu-items.buttons + .style-controls input[type=button] {
-  margin-left: 10px;
 }
 .menu-items.standard li:before {
   content: '|';
@@ -580,84 +580,6 @@ ul.menu .menu-item-description {
 .pager {
   margin-top: 15px;
 }
-.button,
-.style-controls button,
-.style-controls input[type=submit],
-.style-controls input[type=button] {
-  display: inline-block;
-  text-decoration: none;
-  min-width: 2em;
-  min-height: 2em;
-  padding: .4em;
-  box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  cursor: pointer;
-  background-color: #EEE;
-  border: 1px solid #696969;
-  text-align: center;
-  vertical-align: middle;
-  white-space: nowrap;
-  border-radius: 4px;
-  line-height: normal;
-}
-a.button:link,
-a.button:visited,
-a.style-controls button:link,
-a.style-controls button:visited,
-a.style-controls input[type=submit]:link,
-a.style-controls input[type=submit]:visited,
-a.style-controls input[type=button]:link,
-a.style-controls input[type=button]:visited {
-  color: #333;
-  text-decoration: none;
-}
-.button:hover:not(.disabled):not(.selected),
-.style-controls button:hover:not(.disabled):not(.selected),
-.style-controls input[type=submit]:hover:not(.disabled):not(.selected),
-.style-controls input[type=button]:hover:not(.disabled):not(.selected) {
-  border-color: darkgray;
-  background-color: #DDDDDD;
-}
-.button + .button,
-.style-controls button + .style-controls button,
-.style-controls input[type=submit] + .style-controls input[type=submit],
-.style-controls input[type=button] + .style-controls input[type=button] {
-  margin-left: 10px;
-}
-.button.disabled,
-.style-controls button.disabled,
-.style-controls input[type=submit].disabled,
-.style-controls input[type=button].disabled {
-  color: #AAA;
-  border-color: #DDD;
-  cursor: default;
-}
-.button.selected,
-.style-controls button.selected,
-.style-controls input[type=submit].selected,
-.style-controls input[type=button].selected {
-  cursor: default;
-  background-color: gray;
-  border-color: #666;
-  color: white;
-}
-.button img,
-.style-controls button img,
-.style-controls input[type=submit] img,
-.style-controls input[type=button] img {
-  position: relative;
-  top: 2px;
-}
-.button .icon,
-.style-controls button .icon,
-.style-controls input[type=submit] .icon,
-.style-controls input[type=button] .icon {
-  display: inline-block;
-  box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-}
 .sixteen.no-label {
   padding-left: 16px;
 }
@@ -692,10 +614,7 @@ a.style-controls input[type=button]:visited {
 .object-navigator .page-up {
   margin-bottom: 5px;
 }
-.object-navigator .links .button,
-.object-navigator .links .style-controls button,
-.object-navigator .links .style-controls input[type=submit],
-.object-navigator .links .style-controls input[type=button] {
+.object-navigator .links .button {
   display: block;
   text-align: center;
 }
@@ -1101,16 +1020,10 @@ hr {
   right: 0;
   bottom: 0;
 }
-.top-left-overlay .button,
-.top-left-overlay .style-controls button,
-.top-left-overlay .style-controls input[type=submit],
-.top-left-overlay .style-controls input[type=button] {
+.top-left-overlay .button {
   border-top-left-radius: 0;
 }
-.bottom-right-overlay .button,
-.bottom-right-overlay .style-controls button,
-.bottom-right-overlay .style-controls input[type=submit],
-.bottom-right-overlay .style-controls input[type=button] {
+.bottom-right-overlay .button {
   border-bottom-right-radius: 0;
 }
 .entries {
@@ -1136,8 +1049,11 @@ hr {
   display: inline-block;
 }
 .style-controls input,
-.style-controls button select,
-.style-controls textarea {
+.style-controls button,
+.style-controls select,
+.style-controls textarea,
+.style-controls input[type=button],
+.style-controls input[type=submit] {
   margin: 0;
 }
 .style-controls input[type="radio"],
@@ -1150,7 +1066,9 @@ hr {
 .style-controls input[type=text],
 .style-controls input[type=password],
 .style-controls select,
-.style-controls textarea {
+.style-controls textarea,
+.style-controls input[type=button],
+.style-controls input[type=submit] {
   font-family: inherit;
   font-size: inherit;
 }
@@ -1160,28 +1078,80 @@ hr {
 .style-controls textarea {
   line-height: inherit;
 }
+.button,
 .style-controls button,
-.style-controls input[type=submit],
-.style-controls input[type=button] {
-  color: #464646;
-}
-.style-controls input[type=text],
-.style-controls input[type=password],
-.style-controls select,
-.style-controls textarea {
-  background-color: #717171;
-  color: #464646;
+.style-controls input[type=button],
+.style-controls input[type=submit] {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  display: inline-block;
+  text-decoration: none;
+  min-width: 2em;
+  min-height: 2em;
+  padding: .4em;
+  cursor: pointer;
+  background-color: #EEE;
   border: 1px solid #696969;
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
   border-radius: 4px;
-  padding: 4px;
-  margin-left: -5px;
+  line-height: normal;
 }
-.style-controls input[disabled],
-.style-controls select[disabled],
-.style-controls textarea[disabled] {
-  color: #5d5d5d;
-  background-color: #737373;
-  border-color: #717171;
+a.button:link,
+a.button:visited {
+  color: #333;
+  text-decoration: none;
+}
+.button:hover:not(.disabled):not(.selected),
+.style-controls button:hover:not(.disabled):not(.selected),
+.style-controls input[type=button]:hover:not(.disabled):not(.selected),
+.style-controls input[type=submit]:hover:not(.disabled):not(.selected) {
+  border-color: darkgray;
+  background-color: #DDDDDD;
+}
+.button + .button,
+button + button,
+.button + button,
+button + .button,
+input + .button,
+input + button,
+input[type=button] + input[type=button],
+.button + input[type=button],
+input[type=button] + .button,
+input + input[type=button],
+input[type=submit] + input[type=submit],
+.button + input[type=submit],
+input[type=submit] + .button,
+input + input[type=submit] {
+  margin-left: 10px;
+}
+.button.disabled,
+.style-controls button.disabled,
+.style-controls input[type=button].disabled,
+.style-controls input[type=submit].disabled {
+  color: #AAA;
+  border-color: #DDD;
+  cursor: default;
+}
+.button.selected,
+.style-controls button.selected,
+.style-controls input[type=button].selected,
+.style-controls input[type=submit].selected {
+  cursor: default;
+  background-color: gray;
+  border-color: #666;
+  color: white;
+}
+.button .icon,
+.style-controls button .icon,
+.style-controls input[type=button] .icon,
+.style-controls input[type=submit] .icon {
+  display: inline-block;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
 }
 .basic-form fieldset {
   border: none;
@@ -1244,6 +1214,9 @@ hr {
   display: block;
   margin-left: 18px;
 }
+.basic-form .one-input label .description {
+  display: block;
+}
 .basic-form .one-input label:first-child {
   float: left;
   display: inline-block;
@@ -1273,6 +1246,38 @@ hr {
   height: auto;
   margin-right: 15px;
 }
+.style-controls button,
+.style-controls input[type=submit],
+.style-controls input[type=button],
+.style-controls input[type=button],
+.style-controls input[type=submit] {
+  color: #464646;
+}
+.style-controls input[type=text],
+.style-controls input[type=password],
+.style-controls select,
+.style-controls textarea {
+  background-color: #717171;
+  color: #464646;
+  border: 1px solid #696969;
+  border-radius: 4px;
+  padding: 4px;
+  margin-left: -5px;
+}
+.style-controls input[disabled],
+.style-controls select[disabled],
+.style-controls textarea[disabled] {
+  color: #5d5d5d;
+  background-color: #737373;
+  border-color: #717171;
+}
+.basic-form fieldset {
+  border-top: 1px dotted #696969;
+}
+.basic-form fieldset legend {
+  padding: 2px 4px;
+  margin-left: -4px;
+}
 .basic-form.ltr fieldset {
   margin-left: 215px;
 }
@@ -1300,10 +1305,7 @@ hr {
 .basic-form.ltr .form-row .form-row {
   margin-left: 0;
 }
-.basic-form.ltr .form-row .button:first-child,
-.basic-form.ltr .form-row .style-controls button:first-child,
-.basic-form.ltr .form-row .style-controls input[type=submit]:first-child,
-.basic-form.ltr .form-row .style-controls input[type=button]:first-child {
+.basic-form.ltr .form-row .button:first-child {
   margin-left: -5px;
 }
 .basic-form.ltr .help {
@@ -1332,6 +1334,11 @@ hr {
 .basic-form.ltr.right label .required label:before {
   content: '*';
 }
+.style-controls .basic-form .ltr .form-row button:first-child,
+.style-controls .basic-form .ltr .form-row input[type=button]:first-child,
+.style-controls .basic-form .ltr .form-row input[type=submit]:first-child {
+  margin-left: -5px;
+}
 .basic-form.top fieldset {
   padding-right: 0px;
   margin-right: 0px;
@@ -1339,10 +1346,7 @@ hr {
 .basic-form.top fieldset fieldset {
   border-right-width: 0px;
 }
-.basic-form.top .form-row .button:first-child,
-.basic-form.top .form-row .style-controls button:first-child,
-.basic-form.top .form-row .style-controls input[type=submit]:first-child,
-.basic-form.top .form-row .style-controls input[type=button]:first-child {
+.basic-form.top .form-row .button:first-child {
   margin-left: -5px;
 }
 .basic-form.top label:first-child {
@@ -1354,50 +1358,6 @@ hr {
 }
 .basic-form.top .required label:after {
   content: '*';
-}
-.basic-form fieldset {
-  border-top: 1px dotted #696969;
-}
-.basic-form fieldset legend {
-  padding: 2px 4px;
-  margin-left: -4px;
-}
-.basic-form .help {
-  padding: 5px;
-  padding-left: 25px;
-  background-image: url(../../../icons/webcore_png/indicators/info_16px.png);
-  background-repeat: no-repeat;
-  background-position: 5px 8px;
-  border: 1px solid #AAF;
-  background-color: #DDEEFF;
-  color: #666666;
-}
-.basic-form .hint {
-  font-size: 85%;
-  font-style: italic;
-}
-.basic-form label .description {
-  display: block;
-  font-style: italic;
-}
-.basic-form textarea {
-  height: 85px;
-}
-.basic-form .group {
-  line-height: 135%;
-}
-.basic-form .buttons-top {
-  padding-bottom: 10px;
-  border-bottom: 1px solid silver;
-}
-.basic-form .buttons-middle {
-  border: 1px solid silver;
-  border-width: 1px 0;
-  padding: 10px 0;
-}
-.basic-form .buttons-bottom {
-  border-top: 1px solid silver;
-  padding-top: 10px;
 }
 @media print {
   .top-box,

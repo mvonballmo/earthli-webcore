@@ -28,3 +28,9 @@
   border: @depth solid;
   border-color: @highlight_color @shadow_color @shadow_color @highlight_color;
 }
+
+.repeated-background(@url) when (@url > '')
+{
+  background-image: url(@url);
+  background-repeat: repeat;
+}

@@ -744,6 +744,15 @@ ul.menu
 
 /* @group Buttons / Inline Menu */
 
+.button + .menu-items.buttons,
+.menu-items.buttons + .menu-items.buttons,
+.menu-items.buttons + .button,
+button + .menu-items.buttons,
+.menu-items.buttons + button
+{
+  margin-left: @button_spacing;
+}
+
 .menu-items
 {
   display: inline;
@@ -761,13 +770,6 @@ ul.menu
 .menu-items.buttons > li + li
 {
   padding-left: @button_spacing;
-}
-
-.button + .menu-items.buttons,
-.menu-items.buttons + .menu-items.buttons,
-.menu-items.buttons + .button
-{
-  margin-left: @button_spacing;
 }
 
 .menu-items.standard li:before
@@ -844,68 +846,6 @@ ul.menu
 .pager
 {
   margin-top: @standard_spacing;
-}
-
-.button
-{
-  display: inline-block;
-  text-decoration: none;
-  min-width: @minimum_button_width;
-  min-height: @minimum_button_height;
-  padding: .4em;
-  .border-box();
-  cursor: pointer;
-  background-color: #EEE;
-  border: @hairline_border_width solid @standard_border_color;
-  text-align: center;
-  vertical-align: middle;
-  white-space: nowrap;
-  border-radius: @standard_border_radius;
-  line-height: normal;
-}
-
-a.button:link, a.button:visited
-{
-  color: #333;
-  text-decoration: none;
-}
-
-.button:hover:not(.disabled):not(.selected)
-{
-  border-color: darkgray;
-  background-color: #DDDDDD;
-}
-
-.button + .button
-{
-  margin-left: @button_spacing;
-}
-
-.button.disabled
-{
-  color: #AAA;
-  border-color: #DDD;
-  cursor: default;
-}
-
-.button.selected
-{
-  cursor: default;
-  background-color: gray;
-  border-color: #666;
-  color: white;
-}
-
-.button img
-{
-  position: relative;
-  top: 2px;
-}
-
-.button .icon
-{
-  display: inline-block;
-  .border-box();
 }
 
 .sixteen.no-label
@@ -1623,45 +1563,8 @@ hr
   display: inline-block;
 }
 
-.style-controls
-{
-  input,
-  button
-  select,
-  textarea
-  {
-    margin: 0;
-  }
-
-  input[type="radio"],
-  input[type="checkbox"]
-  {
-    vertical-align: middle;
-  }
-
-  button,
-  input[type=submit],
-  input[type=button],
-  input[type=text],
-  input[type=password],
-  select,
-  textarea
-  {
-    font-family: inherit;
-    font-size: inherit;
-  }
-
-  input[type=text],
-  input[type=password],
-  select,
-  textarea
-  {
-    line-height: inherit;
-  }
-}
-
-@import "common-forms";
 @import "forms/form-core";
+@import "common-forms";
 @import "forms/ltr-layout";
 @import "forms/top-layout";
 @import "forms/theme";
