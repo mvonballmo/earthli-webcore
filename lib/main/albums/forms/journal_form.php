@@ -177,10 +177,10 @@ class JOURNAL_FORM extends ALBUM_ENTRY_FORM
 
     $renderer->draw_error_row ('temps');
     $renderer->draw_text_box_row ('description', null, '20em');
+    $renderer->draw_check_box_row ('is_visible');
 
     $renderer->draw_submit_button_row ();
 
-    $renderer->draw_check_box_row ('is_visible');
     $this->_draw_history_item_controls ($renderer, false);
 
     $renderer->finish ();

@@ -101,7 +101,6 @@ class PURGE_COMPONENT_FORM extends PURGE_OBJECT_FORM
   {
     $renderer->start ();
     $renderer->draw_text_row ('', 'Are you sure you want to purge ' . $this->_object->title_as_link () . '?');
-    $renderer->draw_separator ();
 
     $props = $renderer->make_list_properties ();
     $props->show_descriptions = true;
@@ -121,13 +120,10 @@ class PURGE_COMPONENT_FORM extends PURGE_OBJECT_FORM
     }
     $renderer->draw_drop_down_row ('replacement_component_id', $props);
 
-    $renderer->draw_separator ();
-
     $buttons [] = $renderer->button_as_HTML ('No', $this->_object->home_page ());
     $buttons [] = $renderer->submit_button_as_HTML ();
     $renderer->draw_buttons_in_row ($buttons);
 
-    $renderer->draw_separator ();
     $renderer->draw_text_row ('', '*Purging an branch removes all connections to it and permanently removes it from the database.', 'notes');
 
     $renderer->finish ();

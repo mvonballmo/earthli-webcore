@@ -104,7 +104,6 @@ class EXECUTE_TEST_SUITE_FORM extends FORM
     }
     
     $renderer->draw_radio_group_row ('test_name', $props);
-    $renderer->draw_separator ();
     $renderer->draw_submit_button_row ();
     
     $renderer->finish ();

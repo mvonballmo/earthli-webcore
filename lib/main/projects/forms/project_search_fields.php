@@ -218,8 +218,6 @@ class SEARCH_PROJECT_ENTRY_FIELDS extends SEARCH_ENTRY_FIELDS
       $renderer->draw_check_group_row ('kind', $props);
     }
 
-    $renderer->draw_separator ();
-
     parent::_draw_date_fields ($form, $renderer);
   }
 }

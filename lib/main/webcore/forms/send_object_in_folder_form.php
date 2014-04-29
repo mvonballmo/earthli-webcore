@@ -102,6 +102,7 @@ class SEND_OBJECT_IN_FOLDER_FORM extends SEND_MULTIPLE_MAIL_FORM
 
   /**
    * How much of the object's descriptions does the user wish to send?
+   * @throws UNKNOWN_VALUE_EXCEPTION
    * @return integer
    */
   public function excerpt_size ()
@@ -127,8 +128,6 @@ class SEND_OBJECT_IN_FOLDER_FORM extends SEND_MULTIPLE_MAIL_FORM
   {
     parent::_draw_options ($renderer);
 
-    $renderer->draw_separator ();
-
     $options = new FORM_TEXT_CONTROL_OPTIONS ();
     $options->width = '4em';
 
@@ -151,5 +150,3 @@ class SEND_OBJECT_IN_FOLDER_FORM extends SEND_MULTIPLE_MAIL_FORM
     return new $class_name ($this->context);
   }
 }
-
-?>

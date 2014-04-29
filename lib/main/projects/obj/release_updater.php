@@ -378,11 +378,20 @@ class UPDATE_RELEASE_PREVIEW_SETTINGS extends FORM_PREVIEW_SETTINGS
       $this->_objects_displayed = true;
   ?>
   <h3><?php echo sizeof ($objects); ?> <?php echo $title; ?></h3>
-  <p class="notes">
+  <p>
     <?php echo $text; ?>
   </p>
   <?php
-      $this->_draw_entries ($objects);
+      $this->app->display_options->overridden_max_title_size = 100;
+      echo '<ul class="minimal">';
+      foreach ($objects as $entry)
+      {
+        $props = $entry->kind_properties();
+        $text = $this->context->get_text_with_icon($props->icon, $entry->title_as_link (), '16px');
+
+        echo '<li>' . $text . '</li>';
+      }
+      echo '</ul>';
     }
   }
 
@@ -394,29 +403,6 @@ class UPDATE_RELEASE_PREVIEW_SETTINGS extends FORM_PREVIEW_SETTINGS
    */
   protected function _draw_entries ($entries, $show_status = false)
   {
-    $this->app->display_options->overridden_max_title_size = 100;
-    echo '<div style="margin-left: 2em">';
-    foreach ($entries as $entry)
-    {
-      $this->_draw_entry ($entry, $show_status);
-    }
-    echo '</div>';
-  }
-
-  /**
-   * @param PROJECT_ENTRY $entry
-   * @param bool $show_status
-   * @access private
-   */
-  protected function _draw_entry ($entry, $show_status = false)
-  {
-    $icon = $entry->kind_icon ('16px');
-    if ($show_status)
-    {
-      $branch_info = $entry->main_branch_info ();
-      $icon = $branch_info->status_icon () . ' ' . $icon;
-    }
-    echo '<div>' . $icon . ' ' . $entry->title_as_link () . '</div>';
   }
 
   /**

@@ -1105,12 +1105,9 @@ class SEARCH_OBJECT_FIELDS extends WEBCORE_OBJECT
 
     $renderer->draw_check_boxes_row ('In', $props);
 
-    $renderer->draw_separator ();
-
     $this->_draw_user_fields ($form, $renderer);
     $this->_draw_date_fields ($form, $renderer);
 
-    $renderer->draw_separator ();
     $this->_draw_sort_fields ($form, $renderer);
 
     if (isset ($layer))
@@ -1826,7 +1823,6 @@ class SEARCH_OBJECT_IN_FOLDER_FIELDS extends SEARCH_CONTENT_OBJECT_FIELDS
   protected function _draw_date_fields ($form, $renderer)
   {
     $this->_draw_state_selector ($form, $renderer);
-    $renderer->draw_separator ();
     $this->_draw_folder_selector ($form, $renderer);
     parent::_draw_date_fields ($form, $renderer);
   }

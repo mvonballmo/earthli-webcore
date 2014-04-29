@@ -69,7 +69,7 @@ class FOLDER_USER_PERMISSIONS_DELETE_FORM extends DELETE_FORM
 
   /**
    * Load initial properties from these permissions.
-   * @param PERMISSIONS $obj
+   * @param FOLDER_PERMISSIONS $obj
    */
   public function load_from_object ($obj)
   {
@@ -78,4 +78,3 @@ class FOLDER_USER_PERMISSIONS_DELETE_FORM extends DELETE_FORM
     $this->set_value ('name', $this->_user->title);
   }
 }
-?>

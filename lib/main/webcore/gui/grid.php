@@ -301,8 +301,7 @@ abstract class GRID extends WEBCORE_OBJECT
    * {@link _draw_box()} and {@link _finish_box()}. Calls {@link _draw_page_break()} if
    * {@link $show_page_breaks} is True, and calls {@link _start_row()} for every
    * {@link $_num_columns} cells rendered, calling {@link _finish_row()} if a row has
-   * already been started and {@link _draw_separator()} if {@link $show_separator} is
-   * True.
+   * already been started.
    *
    * Most descendants will only override the {@link _draw_box()} method to draw the
    * object details.

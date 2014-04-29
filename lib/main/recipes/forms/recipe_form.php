@@ -138,17 +138,13 @@ class RECIPE_FORM extends DRAFTABLE_ENTRY_FORM
     $renderer->draw_text_line_row ('title');
     $renderer->draw_text_line_row ('originator');
     $renderer->draw_check_box_row ('is_visible');
-    $renderer->draw_separator ();
     $renderer->draw_text_box_row ('description');
-    $renderer->draw_separator ();
 
-    $renderer->draw_text_box_row ('ingredients');
     $renderer->draw_check_box_row ('bullet_ingredients');
-    $renderer->draw_separator ();
+    $renderer->draw_text_box_row ('ingredients', null, '20em');
 
-    $renderer->draw_text_box_row ('instructions');
     $renderer->draw_check_box_row ('number_instructions');
-    $renderer->draw_separator ();
+    $renderer->draw_text_box_row ('instructions', null, '20em');
 
     $renderer->draw_submit_button_row ();
 
@@ -157,4 +153,3 @@ class RECIPE_FORM extends DRAFTABLE_ENTRY_FORM
     $renderer->finish ();
   }
 }
-?>

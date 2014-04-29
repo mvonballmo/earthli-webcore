@@ -158,7 +158,6 @@ class SUBMIT_EXCEPTION_FORM extends SEND_MAIL_FORM
   protected function _draw_options ($renderer)
   {
     parent::_draw_options ($renderer);
-    $renderer->draw_separator ();
     $renderer->draw_check_box_row ('include_browser_info');
     $renderer->draw_check_box_row ('include_page_data');
   }

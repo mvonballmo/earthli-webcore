@@ -257,7 +257,7 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
   {
     $field = new BOOLEAN_FIELD ();
     $field->id = "branch_{$branch->id}_enabled";
-    $field->caption = $branch->title_as_link ();
+    $field->caption = $branch->title_as_html ();
     $this->add_field ($field);
 
     $field = new INTEGER_FIELD ();
@@ -536,7 +536,7 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
     {
       $renderer->start_block ('Branches');
 ?>
-      <p class="notes">
+      <p class="description">
         Assign this job to one or more of the following branches.
       </p>
 <?php
@@ -574,7 +574,7 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
           {
             $renderer->draw_hidden ("branch_{$branch->id}_enabled");
 
-            $title = $branch->title_as_link ();
+            $title = $branch->title_as_html ();
             if ($branch->locked ())
             {
               $title = $this->context->get_text_with_icon('{icons}indicators/locked', $title, '16px');

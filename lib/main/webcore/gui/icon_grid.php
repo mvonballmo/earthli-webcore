@@ -66,11 +66,6 @@ class ICON_GRID extends STANDARD_GRID
   /**
    * @var boolean
    */
-  public $centered = true;
-
-  /**
-   * @var boolean
-   */
   public $even_columns = true;
 
   /**

@@ -64,6 +64,7 @@ class THEME_FORM extends RENDERABLE_FORM
     $field = new URI_FIELD ();
     $field->id = 'main_CSS_file_name';
     $field->caption = 'Skin CSS';
+    $field->description = 'Each theme must define a skin file and can also specify font and sizing files.';
     $field->required = true;
     $field->min_length = 1;
     $field->max_length = 1000;
@@ -88,6 +89,7 @@ class THEME_FORM extends RENDERABLE_FORM
     $field = new TEXT_FIELD ();
     $field->id = 'icon_set';
     $field->caption = 'Icon set';
+    $field->description = 'A theme can override which icon set is used and specify the default extension to apply.';
     $field->required = false;
     $field->min_length = 1;
     $field->max_length = 1000;
@@ -152,30 +154,14 @@ class THEME_FORM extends RENDERABLE_FORM
   protected function _draw_controls ($renderer)
   {
     $renderer->start ();
-
     $renderer->draw_text_line_row ('title');
-
-    $renderer->draw_separator ();
-    $renderer->draw_text_row (' ', 'Each theme must define a skin file and can also specify font and sizing files.', 'notes');
-
-    $renderer->draw_separator ();
     $renderer->draw_text_line_row ('main_CSS_file_name');
     $renderer->draw_text_line_row ('font_name_CSS_file_name');
     $renderer->draw_text_line_row ('font_size_CSS_file_name');
-
-    $renderer->draw_separator ();
-    $renderer->draw_text_row (' ', 'A theme can override which icon set is used and specify the default extension to apply.', 'notes');
-
-    $renderer->draw_separator ();
     $renderer->draw_text_line_row ('icon_set');
     $renderer->draw_text_line_row ('icon_extension');
-
-    $renderer->draw_separator ();
     $renderer->draw_text_line_row ('renderer_class_name');
-
-    $renderer->draw_separator ();
     $renderer->draw_submit_button_row ();
-
     $renderer->finish ();
   }
 }

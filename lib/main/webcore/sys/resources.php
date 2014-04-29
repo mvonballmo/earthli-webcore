@@ -521,7 +521,7 @@ class RESOURCE_MANAGER extends RAISABLE
 
       $expanded_icon_url = $this->get_icon_url($icon_url, $size);
 
-      return "<span class=\"icon $class\" style=\"background-image: url($expanded_icon_url)\">$text</span>";
+      return "<span class=\"icon $class\" style=\"background-image: url($expanded_icon_url)\"></span>$text";
     }
     else
     {

@@ -64,7 +64,7 @@ class RECIPE_BOOK_GRID extends FOLDER_GRID
   public $show_separator = false;
 
   /**
-   * @param RECIPE_BOOK $obj
+   * @param FOLDER $obj
    * @access private
    */
   protected function _draw_box ($obj)
@@ -97,11 +97,11 @@ class RECIPE_BOOK_GRID extends FOLDER_GRID
       echo $obj->title_as_link ($t);
       ?>
     </h3>
-    <p class="detail">
+    <p>
       <?php
       $entry_query = $obj->entry_query ();
       $size = $entry_query->size ();
-      echo "(<span class=\"field\">$size</span> Recipes)";
+      echo "$size Recipes";
       ?>
     </p>
     <div class="text-flow">

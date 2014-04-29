@@ -353,17 +353,16 @@ class MENU_RENDERER extends WEBCORE_OBJECT
   protected function _command_as_html ($cmd, $CSS_class)
   {
     $Result = '';
-    $style = '';
     $text = '';
-
-    if ($cmd->icon && ($this->content_mode & Menu_show_icon))
-    {
-      $style = 'style="background-image: url(' . $this->context->get_icon_url ($cmd->icon, '16px') . ')"';
-    }
 
     if ($cmd->caption && (($this->content_mode & Menu_show_title) || ! $cmd->icon))
     {
       $text = $cmd->caption;
+    }
+
+    if ($cmd->icon && ($this->content_mode & Menu_show_icon))
+    {
+      $text = $this->context->get_text_with_icon($cmd->icon, $text, '16px');
     }
 
     if (!empty ($text))
@@ -386,33 +385,17 @@ class MENU_RENDERER extends WEBCORE_OBJECT
         }
         $tag .= '>';
 
-        if ($style)
-        {
-          $tag .= '<span class="icon sixteen" ' . $style . '>';
-        }
-
 	      if (!empty($cmd->description) && $CSS_class == 'menu-item')
 	      {
           $description_class_statement = $CSS_class ? ' class="' . $CSS_class . '-description"' : '';
           $Result .= ' <span ' . $description_class_statement . '>' . $cmd->description . '</span>';
 	      }
 
-        /* Important! IE displays the last character in this last link of the last
-         * button in the menu again underneath the menus. The code below makes
-         * sure that it is a space so it doesn't appear on the screen. IE - so
-         * crappy it hurts.
-         */
-
         $Result = $tag . $Result;
-
-        if ($style)
-        {
-          $Result .= '</span>';
-        }
 
         $Result .= '</a>';
       }
-      elseif ($class_statement || $style)
+      elseif ($class_statement)
       {
         $tag = '';
 
@@ -421,19 +404,9 @@ class MENU_RENDERER extends WEBCORE_OBJECT
           $tag = '<span ' . $class_statement . '>';
         }
 
-        if ($style)
-        {
-          $tag .= '<span class="icon sixteen" ' . $style . '>';
-        }
-
         $Result = $tag . $Result;
 
         if ($class_statement)
-        {
-          $Result .= '</span>';
-        }
-
-        if ($style)
         {
           $Result .= '</span>';
         }

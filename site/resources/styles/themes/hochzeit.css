@@ -42,6 +42,10 @@ http://www.earthli.com/software/webcore
   border-radius: 4px;
   padding: 4px;
 }
+.style-controls label:first-child + div > input[type=text]:first-child,
+.style-controls label:first-child + div > input[type=password]:first-child,
+.style-controls label:first-child + div > select:first-child,
+.style-controls label:first-child + div > textarea:first-child,
 .style-controls label:first-child + input[type=text],
 .style-controls label:first-child + input[type=password],
 .style-controls label:first-child + select,
@@ -52,13 +56,14 @@ http://www.earthli.com/software/webcore
 .style-controls select[disabled],
 .style-controls textarea[disabled] {
   color: #b1a795;
-  background-color: #fbf2cd;
+  background-color: #ac9175;
   background-image: url('hochzeit/fossil_paper_light.jpg');
   background-repeat: repeat;
   border-color: #dcd5c2;
 }
 .basic-form fieldset {
-  border-top: 1px dotted #cbc2b0;
+  border-top: 1px solid #ac9175;
+  padding-top: 5px;
 }
 .basic-form fieldset legend {
   padding: 2px 4px;
@@ -186,7 +191,7 @@ table.columns > tbody > tr > th,
 pre > code,
 .basic-form-block,
 .pullquote {
-  border-color: #fbf2cd;
+  border-color: #ac9175;
 }
 .object-navigator .links {
   column-rule-color: #cbc2b0;
@@ -300,7 +305,7 @@ a.button:visited {
 .style-controls button.disabled,
 .style-controls input[type=button].disabled,
 .style-controls input[type=submit].disabled {
-  background-color: #fbf2cd;
+  background-color: #ac9175;
   background-image: url('hochzeit/fossil_paper_light.jpg');
   background-repeat: repeat;
   border-color: #dcd5c2;

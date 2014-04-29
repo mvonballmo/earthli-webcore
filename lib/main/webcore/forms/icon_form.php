@@ -76,7 +76,7 @@ class ICON_FORM extends RENDERABLE_FORM
 
   /**
    * Load initial properties from this object.
-   * @param UNIQUE_OBJECT $obj
+   * @param ICON $obj
    */
   public function load_from_object ($obj)
   {
@@ -88,7 +88,7 @@ class ICON_FORM extends RENDERABLE_FORM
 
   /**
    * Store the form's values to this object.
-   * @param STORABLE $obj
+   * @param ICON $obj
    * @access private
    * @abstract
    */
@@ -109,10 +109,7 @@ class ICON_FORM extends RENDERABLE_FORM
     $renderer->draw_text_line_row ('title');
     $renderer->draw_text_line_row ('category');
     $renderer->draw_text_line_row ('url');
-    $renderer->draw_separator ();
     $renderer->draw_submit_button_row ();
     $renderer->finish ();
   }
 }
-
-?>

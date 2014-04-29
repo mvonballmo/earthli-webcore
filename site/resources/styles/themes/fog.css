@@ -40,6 +40,10 @@ http://www.earthli.com/software/webcore
   border-radius: 4px;
   padding: 4px;
 }
+.style-controls label:first-child + div > input[type=text]:first-child,
+.style-controls label:first-child + div > input[type=password]:first-child,
+.style-controls label:first-child + div > select:first-child,
+.style-controls label:first-child + div > textarea:first-child,
 .style-controls label:first-child + input[type=text],
 .style-controls label:first-child + input[type=password],
 .style-controls label:first-child + select,
@@ -54,7 +58,8 @@ http://www.earthli.com/software/webcore
   border-color: #cacaca;
 }
 .basic-form fieldset {
-  border-top: 1px dotted #b6b6b6;
+  border-top: 1px solid #e1e1e1;
+  padding-top: 5px;
 }
 .basic-form fieldset legend {
   padding: 2px 4px;

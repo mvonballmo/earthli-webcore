@@ -975,7 +975,7 @@ abstract class FORM extends WEBCORE_OBJECT
    */
   public function object_exists ()
   {
-    return isset ($this->_object) && $this->_object->exists ();
+    return isset ($this->_object) && method_exists($this->_object, 'exists') && $this->_object->exists ();
   }
 
   /**

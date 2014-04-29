@@ -385,6 +385,12 @@ class FORM_RENDERER extends CONTROLS_RENDERER
   public $drafts_enabled = false;
 
   /**
+   * If enabled, {@link draw_submit_button_row()} generates calls use the inline preview.
+   * @var boolean
+   */
+  public $inline_operations_enabled = false;
+
+  /**
    * @param FORM $form
    */
   public function __construct ($form)
@@ -453,6 +459,15 @@ class FORM_RENDERER extends CONTROLS_RENDERER
   {
   }
 
+  public function draw_inline_preview_area()
+  {
+    echo '<div class="preview" id="inline_preview_block" style="display: none; margin-right: 15px; position: absolute; left: 950px">';
+    echo '<div class="preview-title">Preview</div>';
+    echo '<div id="inline_preview_message" class="text-flow"></div>';
+    echo '<div class="text-flow" id="inline_preview" style="height: 600px; overflow: auto"></div>';
+    echo '</div>';
+  }
+
   /**
    * Start rendering the form.
    * All rendering calls are now valid.
@@ -467,7 +482,6 @@ class FORM_RENDERER extends CONTROLS_RENDERER
     if ($this->_form->num_errors (Form_general_error_id))
     {
       $this->draw_error_row (Form_general_error_id, '');
-      $this->draw_separator ();
     }
   }
 
@@ -534,12 +548,10 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * options." generates "These are only for advanced users. Use the arrow to
    * the left to show advanced options.").
    * @param boolean $visible Whether to initially display the layer or not
-   * @param boolean $styled Whether to apply a special style to the generated
-   * block inside the layer.
    * @return LAYER Pass this layer to {@link finish_layer_row()} to close it.
    * @see finish_layer_row()
    */
-  public function start_layer_row ($id, $title, $description, $visible = false, $styled = true)
+  public function start_layer_row ($id, $title, $description, $visible = false)
   {
     if ($this->context->dhtml_allowed())
     {
@@ -564,7 +576,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
 <?php
     }
     ?>
-    <span class="description">
+    <span class="text">
       <?php echo $description; ?>
     </span>
     <?php
@@ -593,16 +605,6 @@ class FORM_RENDERER extends CONTROLS_RENDERER
       $layer->finish ();
     }
     $this->finish_block ();
-  }
-
-  /**
-   * Add a spacer row to the form.
-   */
-  public function draw_separator ()
-  {
-?>
-  <div class="form-row separator"></div>
-<?php
   }
 
   /**
@@ -986,7 +988,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
 
     if ($show_preview)
     {
-      if ($this->_form->object_exists())
+      if ($this->_form->object_exists() && $this->inline_operations_enabled)
       {
         $url = $this->context->resolve_file('{app}/generate_preview.php');
         $buttons [] = $this->javascript_button_as_html('Preview', 'execute_field(\'' . $url . '\', \'' . $this->_form->name . '\', \'' . 'description' . '\')', '{icons}buttons/view');
@@ -1000,7 +1002,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
     if ($this->drafts_enabled)
     {
       $buttons [] = $this->submit_button_as_html ('Save version', '{icons}buttons/save', 'save_as_draft');
-      if ($this->_form->object_exists())
+      if ($this->_form->object_exists() && $this->inline_operations_enabled)
       {
         $url = $this->app->resolve_file('{app}/save_field.php');
         $buttons [] = $this->javascript_button_as_html('Quick save', 'execute_field(\'' . $url . '\', \'' . $this->_form->name . '\', \'' . 'description' . '\')', '{icons}buttons/quick_save');
@@ -1869,7 +1871,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
         }
         else
         {
-          $label .= '<span class="description">' . $item->description . '</span>';
+          $label .= $item->description;
         }
       }
       else

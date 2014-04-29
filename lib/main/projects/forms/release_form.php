@@ -200,7 +200,6 @@ class RELEASE_FORM extends OBJECT_IN_FOLDER_FORM
   {
     $renderer->start ();
     $renderer->draw_text_line_row ('title');
-    $renderer->draw_separator ();
 
     if ($this->visible ('branch_id'))
     {
@@ -212,7 +211,6 @@ class RELEASE_FORM extends OBJECT_IN_FOLDER_FORM
       }
 
       $renderer->draw_drop_down_row ('branch_id', $props);
-      $renderer->draw_separator ();
     }
 
     if (! $this->object_exists () || ! $this->_object->shipped ())

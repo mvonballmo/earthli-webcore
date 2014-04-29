@@ -178,6 +178,7 @@ class LOG_IN_FORM extends FORM
    */
   protected function _draw_controls ($renderer)
   {
+    echo '<div class="log-in-form">';
     $renderer->start ();
 
     $renderer->draw_text_line_row ('name');
@@ -196,6 +197,8 @@ class LOG_IN_FORM extends FORM
 <?php
       }
     }
+
+    echo '</div>';
   }
 }
 

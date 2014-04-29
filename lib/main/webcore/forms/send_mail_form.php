@@ -332,19 +332,15 @@ abstract class SEND_MAIL_FORM extends PREVIEWABLE_FORM
     $renderer->draw_text_line_row ('sender_name');
     $renderer->draw_text_line_row ('sender_email');
 
-    $renderer->draw_separator ();
-    
     $renderer->draw_text_line_row ('subject');
     $renderer->draw_text_box_row ('message');
 
     $renderer->draw_text_line_row ('send_to');
 
     $this->_draw_options ($renderer);
-    $renderer->draw_separator ();
 
     $this->_draw_captcha_controls ($renderer);    
 
-    $renderer->draw_separator ();
     $renderer->draw_submit_button_row ();
 
     $renderer->finish ();

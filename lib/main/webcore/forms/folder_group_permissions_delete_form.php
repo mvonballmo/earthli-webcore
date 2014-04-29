@@ -68,7 +68,7 @@ class FOLDER_GROUP_PERMISSIONS_DELETE_FORM extends DELETE_FORM
 
   /**
    * Load initial properties from these permissions.
-   * @param PERMISSIONS $obj
+   * @param FOLDER_PERMISSIONS $obj
    */
   public function load_from_object ($obj)
   {
@@ -77,4 +77,3 @@ class FOLDER_GROUP_PERMISSIONS_DELETE_FORM extends DELETE_FORM
     $this->set_value ('group_id', $obj->ref_id);
   }
 }
-?>

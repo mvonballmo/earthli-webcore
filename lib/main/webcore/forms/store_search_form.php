@@ -56,6 +56,7 @@ class STORE_SEARCH_FORM extends RENDERABLE_FORM
 
   /**
    * @param APPLICATION $app Main application.
+   * @param SEARCH_FIELDS $fields
    */
   public function __construct ($app, $fields)
   {
@@ -94,7 +95,7 @@ class STORE_SEARCH_FORM extends RENDERABLE_FORM
 
   /**
    * Load initial properties from this branch.
-   * @param BRANCH $obj
+   * @param SEARCH $obj
    */
   public function load_from_object ($obj)
   {
@@ -108,7 +109,7 @@ class STORE_SEARCH_FORM extends RENDERABLE_FORM
 
   /**
    * Store the form's values to this object.
-   * @param OBJECT_IN_FOLDER $obj
+   * @param SEARCH $obj
    * @access private
    */
   protected function _store_to_object ($obj)
@@ -135,17 +136,13 @@ class STORE_SEARCH_FORM extends RENDERABLE_FORM
     $renderer->start ();
 
     $layer = $renderer->start_layer_row ('parameters', 'Parameters', '%s fields for this search.');
-      $renderer->draw_separator ();
       $this->_search_fields->draw_fields ($this, $renderer);
     $renderer->finish_layer_row ($layer);
 
     $renderer->draw_text_line_row ('search_title');
     $renderer->draw_text_box_row ('search_description');
-    $renderer->draw_separator ();
     $renderer->draw_submit_button_row ();
 
     $renderer->finish ();
   }
 }
-
-?>

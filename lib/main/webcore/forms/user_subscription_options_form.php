@@ -413,11 +413,12 @@ class USER_SUBSCRIPTION_OPTIONS_FORM extends SUBSCRIPTION_FORM
     $props = $renderer->make_list_properties ();
     $props->on_click_script = 'on_change_text_option (this)';
     $props->add_item ('Send all available text.', 0);
+
+    // TODO add ability to send CSS class 'text-line' here
+
     $props->add_item ('Send at most ', 1, '', true, $renderer->text_line_as_HTML ('preferred_text_length', $options) . ' characters.');
     $renderer->draw_radio_group_row ('text_options', $props);
     $renderer->draw_error_row ('preferred_text_length');
-
-    $renderer->draw_separator ();
 
     $props = $renderer->make_list_properties ();
     $props->on_click_script = 'on_group_objects (this)';

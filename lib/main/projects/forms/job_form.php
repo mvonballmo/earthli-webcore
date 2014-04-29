@@ -494,10 +494,8 @@ class JOB_FORM extends PROJECT_ENTRY_FORM
   {
     $renderer->start ();
     $renderer->draw_text_line_row ('title');
-    $renderer->draw_separator ();
     $this->_draw_kind_controls ($renderer);
     $this->_draw_component_controls ($renderer);
-    $renderer->draw_separator ();
 
     /** @var $folder PROJECT */
     $folder = $this->_folder;
@@ -531,19 +529,10 @@ class JOB_FORM extends PROJECT_ENTRY_FORM
 
     $this->_draw_branch_controls ($renderer);
 
-    $renderer->draw_separator ();
     $renderer->draw_submit_button_row ();
-
-    $renderer->draw_separator ();
     $renderer->draw_text_box_row ('description');
-
-    $renderer->draw_separator ();
     $renderer->draw_text_box_row ('extra_description');
-
-    $renderer->draw_separator ();
     $renderer->draw_submit_button_row ();
-
-    $renderer->draw_separator ();
     $renderer->draw_text_row ('Subscriptions', 'Check the following to subscribe the following users to this job.', 'notes');
 
     // TODO this should probably go in the load_from_object/load_from_defaults methods

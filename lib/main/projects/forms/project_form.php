@@ -404,7 +404,6 @@ class PROJECT_FORM extends FOLDER_FORM
       
       $props = $this->_make_user_list_properties_for ($renderer, 'assignee_group_id');
       $renderer->draw_radio_group_row ('assignee_group_type', $props);
-      $renderer->draw_separator ();
       $props = $this->_make_user_list_properties_for ($renderer, 'reporter_group_id');
       $renderer->draw_radio_group_row ('reporter_group_type', $props);
       

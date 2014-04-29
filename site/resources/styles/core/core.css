@@ -282,6 +282,9 @@ pre > code {
 .top-box-message {
   margin-left: 15px;
 }
+.log-in-form {
+  width: 30em;
+}
 .form-content,
 .grid-content,
 .button-content,
@@ -423,7 +426,7 @@ td.object-in-list + td.object-in-list {
 /* @end */
 /* @group Icons */
 .icon {
-  display: inline;
+  display: inline-block;
   background-repeat: no-repeat;
 }
 .thirty-two {
@@ -869,7 +872,6 @@ hr {
   padding-left: 20px;
 }
 .description {
-  margin-top: 5px;
   margin-bottom: 15px;
 }
 .detail {
@@ -1156,6 +1158,9 @@ input + input[type=submit] {
 .style-controls .basic-form .form-row input[type=submit]:first-child {
   margin-left: -5px;
 }
+.basic-form {
+  line-height: 160%;
+}
 .basic-form fieldset {
   border: none;
   margin: 15px 0;
@@ -1168,7 +1173,7 @@ input + input[type=submit] {
   float: left;
   margin-right: 5px;
 }
-.basic-form fieldset.toggle .toggle + .description {
+.basic-form fieldset.toggle .toggle + .text {
   display: block;
   margin-left: 18px;
 }
@@ -1190,7 +1195,6 @@ input + input[type=submit] {
 .basic-form input[type=radio] {
   vertical-align: baseline;
   margin-left: 0;
-  margin-top: .5em;
 }
 .basic-form .help p:first-child {
   margin-top: 0;
@@ -1213,6 +1217,11 @@ input + input[type=submit] {
   float: left;
   margin-right: 5px;
 }
+.basic-form .form-row label:first-child + input[type=radio] + label,
+.basic-form .form-row label:first-child + input[type=checkbox] + label {
+  display: block;
+  margin-left: 18px;
+}
 .basic-form .form-row input[type=radio]:first-child,
 .basic-form .form-row input[type=checkbox]:first-child {
   float: left;
@@ -1225,10 +1234,6 @@ input + input[type=submit] {
 .basic-form .form-row label .description {
   display: block;
   margin-left: 18px;
-}
-.basic-form .form-row label .description:first-child {
-  position: relative;
-  top: 4px;
 }
 .basic-form .one-input input,
 .basic-form .one-input select,
@@ -1275,6 +1280,10 @@ input + input[type=submit] {
   border-radius: 4px;
   padding: 4px;
 }
+.style-controls label:first-child + div > input[type=text]:first-child,
+.style-controls label:first-child + div > input[type=password]:first-child,
+.style-controls label:first-child + div > select:first-child,
+.style-controls label:first-child + div > textarea:first-child,
 .style-controls label:first-child + input[type=text],
 .style-controls label:first-child + input[type=password],
 .style-controls label:first-child + select,
@@ -1289,7 +1298,8 @@ input + input[type=submit] {
   border-color: #717171;
 }
 .basic-form fieldset {
-  border-top: 1px dotted #696969;
+  border-top: 1px solid #737373;
+  padding-top: 5px;
 }
 .basic-form fieldset legend {
   padding: 2px 4px;

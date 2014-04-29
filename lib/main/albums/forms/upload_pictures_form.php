@@ -180,7 +180,6 @@ class UPLOAD_PICTURES_FORM extends ID_BASED_FORM
     $renderer->start ();
     $renderer->draw_text_line_row ('title');
     $renderer->draw_text_line_row ('starting_index');
-    $renderer->draw_separator ();
     $renderer->start_row ('Day');
     $renderer->start_block (true);
 
@@ -201,8 +200,6 @@ class UPLOAD_PICTURES_FORM extends ID_BASED_FORM
 
     $renderer->finish_block ();
     $renderer->finish_row ();
-
-    $renderer->draw_separator ();
 
     $renderer->draw_file_row ('zipfile');
 

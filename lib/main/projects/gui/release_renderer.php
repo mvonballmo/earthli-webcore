@@ -57,13 +57,13 @@ class RELEASE_RENDERER extends CONTENT_OBJECT_RENDERER
   {
     if ($this->_options->show_as_summary)
     {
-      echo $this->_echo_text_as_html($obj, $obj->summary);
+      $this->_echo_text_as_html($obj, $obj->summary);
       $this->_echo_details_as_html($obj);
     }
     else
     {
       $this->_echo_details_as_html($obj);
-      echo $this->_echo_html_description($obj);
+      $this->_echo_html_description($obj);
     }
 
     $this->_echo_html_user_information($obj, 'info-box-bottom');
@@ -101,7 +101,7 @@ class RELEASE_RENDERER extends CONTENT_OBJECT_RENDERER
     echo $this->line ('Test Date: ' . $status->test->as_plain_text ());
     echo $this->par ('Ship Date: ' . $status->ship->as_plain_text ());
     
-    echo $this->_echo_plain_text_description($obj);
+    $this->_echo_plain_text_description($obj);
     $this->_echo_plain_text_user_information($obj);
   }
 }

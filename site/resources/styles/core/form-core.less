@@ -116,6 +116,8 @@ input + button
 
 .basic-form
 {
+  line-height: @text_flow_line_height;
+
   fieldset
   {
     border: none;
@@ -134,7 +136,7 @@ input + button
         float: left;
         margin-right: @small_spacing;
 
-        & + .description
+        & + .text
         {
           display: block;
           margin-left: 13px + @small_spacing;
@@ -164,7 +166,6 @@ input + button
   {
     vertical-align: baseline;
     margin-left: 0;
-    margin-top: .5em;
   }
 
   .help
@@ -203,6 +204,12 @@ input + button
       {
         float: left;
         margin-right: @small_spacing;
+
+        & + label
+        {
+          display: block;
+          margin-left: 13px + @small_spacing;
+        }
       }
     }
 
@@ -228,12 +235,6 @@ input + button
       {
         display: block;
         margin-left: 13px + @small_spacing;
-      }
-
-      .description:first-child
-      {
-        position: relative;
-        top: 4px;
       }
     }
   }

@@ -116,7 +116,6 @@ class PERMISSIONS_INHERITANCE_FORM extends ID_BASED_FORM
     if ($folder->defines_security ())
     {
       $renderer->draw_text_row ('', 'Permissions for this folder are defined below.');
-      $renderer->draw_separator ();
       $this->button_icon = '{icons}buttons/restore';
       $this->button = 'Revert to inherited...';
       $renderer->draw_submit_button_row ();
@@ -124,7 +123,6 @@ class PERMISSIONS_INHERITANCE_FORM extends ID_BASED_FORM
     else
     {
       $renderer->draw_text_row ('', 'Permissions are inherited from ' . $title . '.');
-      $renderer->draw_separator ();
       $this->button_icon = '{icons}buttons/create';
       $this->button = 'Define permissions...';
       $renderer->draw_submit_button_row ();

@@ -201,11 +201,8 @@ class EXECUTE_TASK_FORM extends FORM
 
     $this->_draw_options ($renderer);
 
-    $renderer->draw_separator ();
     $renderer->draw_submit_button_row ();
 
     $renderer->finish ();
   }
 }
-
-?>

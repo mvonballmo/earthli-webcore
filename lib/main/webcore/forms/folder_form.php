@@ -145,7 +145,6 @@ class FOLDER_FORM extends OBJECT_IN_FOLDER_FORM
     $renderer->draw_check_box_row ('is_visible');
     $renderer->draw_text_box_row ('summary');
     $renderer->draw_text_box_row ('description');
-    $renderer->draw_separator();
     $renderer->draw_submit_button_row ();
     $this->_draw_history_item_controls ($renderer, false);
     $renderer->finish ();
@@ -158,4 +157,3 @@ class FOLDER_FORM extends OBJECT_IN_FOLDER_FORM
    */
   protected $_privilege_set = Privilege_set_folder;
 }
-?>

@@ -116,7 +116,6 @@ class FOLDER_SUBSCRIPTION_FORM extends SUBSCRIPTION_FORM
       $renderer->draw_buttons ($buttons);
       $renderer->finish_row();
 
-      $renderer->draw_separator ();
       $renderer->draw_error_row ('ids');
     }
 
@@ -124,11 +123,8 @@ class FOLDER_SUBSCRIPTION_FORM extends SUBSCRIPTION_FORM
     $tree->display ($folders);
     $renderer->finish_row ();
 
-    $renderer->draw_separator ();
     $renderer->draw_submit_button_row();
 
     $renderer->finish ();
   }
 }
-
-?>

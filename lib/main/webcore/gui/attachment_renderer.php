@@ -299,10 +299,9 @@ class ATTACHMENT_RENDERER extends CONTENT_OBJECT_RENDERER
   {
     $ft = $this->context->file_type_manager ();
     $url = new FILE_URL ($entry->name);
-    $icon_url = $ft->expanded_icon_url ('', $url->extension (), '16px');
+    $icon_with_text = $this->context->get_text_with_icon($ft->icon_url ('', $url->extension()), $entry->name, '16px');
 
-    echo '<tr><td><span class="icon sixteen" style="background-image: url(' . $icon_url . ')">' . $entry->name
-         . '</span></td><td>' . file_size_as_text ($entry->size) . '</td></tr>';
+    echo '<tr><td>' . $icon_with_text  . '</td><td>' . file_size_as_text ($entry->size) . '</td></tr>';
   }
 
   /**

@@ -77,6 +77,7 @@ class DELETE_FORM extends ID_BASED_FORM
    */
   protected function _draw_controls ($renderer)
   {
+    $renderer->labels_CSS_class = 'top';
     $renderer->start ();
     $renderer->start_row ();
 ?>
@@ -203,6 +204,7 @@ class DELETE_OBJECT_FORM extends PURGE_OBJECT_FORM
    */
   protected function _draw_controls ($renderer)
   {
+    $renderer->labels_CSS_class = 'top';
     $renderer->start ();
 
     if ($this->show_object_as_link) 

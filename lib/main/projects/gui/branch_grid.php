@@ -109,13 +109,7 @@ class BRANCH_GRID extends CONTENT_OBJECT_GRID
     ?>
     </h3>
   <div>
-    <div style="float: left; margin-right: .5em">
-    <?php
-      $layer = $this->context->make_layer ("id_{$obj->id}_details");
-      $layer->draw_toggle ();
-    ?>
-    </div>
-    <div class="detail" style="float: left">
+    <div>
     <?php
       $menu = $this->context->make_menu ();
       $menu->append ('Releases', $obj->home_page () . '&panel=releases');
@@ -124,12 +118,8 @@ class BRANCH_GRID extends CONTENT_OBJECT_GRID
       $menu->display ();
     ?>
     </div>
-    <div style="clear: both"></div>
   </div>
-  <?php
-    $layer->start ();
-  ?>
-  <p class="detail">
+  <p>
   <?php
     echo 'Created ';
     if ($this->show_user)
@@ -152,7 +142,6 @@ class BRANCH_GRID extends CONTENT_OBJECT_GRID
   </p>
   <?php
     echo $obj->description_as_html ();
-    $layer->finish ();
   }
 }
 ?>

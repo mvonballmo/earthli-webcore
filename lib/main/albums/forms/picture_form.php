@@ -431,7 +431,6 @@ class PICTURE_FORM extends ALBUM_ENTRY_FORM
     $renderer->start ();
 
     $renderer->draw_text_line_row ('title');
-    $renderer->draw_separator ();
 
     if ($upload_allowed)
     {
@@ -457,8 +456,6 @@ class PICTURE_FORM extends ALBUM_ENTRY_FORM
         $renderer->finish_row ();
         $renderer->draw_error_row ('upload_file');
 
-        $renderer->draw_separator ();
-
         $props->clear_items ();
         $props->add_item ('Show the picture from the URL below', 0);
         $renderer->start_row ();
@@ -471,8 +468,6 @@ class PICTURE_FORM extends ALBUM_ENTRY_FORM
           $renderer->finish_indent ();
         $renderer->finish_row ();
         $renderer->draw_error_row ('file_name');
-
-        $renderer->draw_separator ();
 
         $this->_draw_thumbnail_options ($renderer, '');
 
@@ -492,7 +487,6 @@ class PICTURE_FORM extends ALBUM_ENTRY_FORM
     }
 
     $renderer->draw_submit_button_row ();
-    $renderer->draw_separator ();
 
     $renderer->start_row ('Day');
     $renderer->start_block (true);
@@ -529,7 +523,6 @@ class PICTURE_FORM extends ALBUM_ENTRY_FORM
     $renderer->finish_row ();
 
     $renderer->draw_check_box_row ('is_visible');
-    $renderer->draw_separator ();
 
     $renderer->draw_text_box_row ('description', null, '15em');
 
