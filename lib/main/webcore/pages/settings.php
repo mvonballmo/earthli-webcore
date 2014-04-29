@@ -259,12 +259,12 @@ class SAMPLE_FORM extends FORM
   <div class="button-content">
     <?php
     $renderer = $Page->make_controls_renderer ();
-    echo $renderer->button_as_html ('', '#', '{icons}buttons/upgrade', '32px');
-    echo $renderer->button_as_html ('Upgrayedd', '#', '{icons}buttons/upgrade', '32px');
-    echo $renderer->button_as_html ('', '#', '{icons}buttons/upgrade', '20px');
-    echo $renderer->button_as_html ('Upgrayedd', '#', '{icons}buttons/upgrade', '20px');
-    echo $renderer->button_as_html ('', '#', '{icons}buttons/upgrade', '16px');
-    echo $renderer->button_as_html ('Upgrayedd', '#', '{icons}buttons/upgrade', '16px');
+    echo $renderer->button_as_html ('', '#', '{icons}buttons/upgrade', Thirty_two_px);
+    echo $renderer->button_as_html ('Upgrayedd', '#', '{icons}buttons/upgrade', Thirty_two_px);
+    echo $renderer->button_as_html ('', '#', '{icons}buttons/upgrade', Twenty_px);
+    echo $renderer->button_as_html ('Upgrayedd', '#', '{icons}buttons/upgrade', Twenty_px);
+    echo $renderer->button_as_html ('', '#', '{icons}buttons/upgrade', Sixteen_px);
+    echo $renderer->button_as_html ('Upgrayedd', '#', '{icons}buttons/upgrade', Sixteen_px);
     ?>
   </div>
   <div class="button-content">

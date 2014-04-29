@@ -831,7 +831,7 @@ Second Term<br>
         </td>
         <td style="font-size: 150%">&rArr;</td>
         <td>
-          <p><?php echo $Page->resolve_icon_as_html ('{icons}file_types/file', 'Webcore File Icon', '50px', 'margin-left: .5em; margin-bottom: .5em; float: right'); ?>
+          <p><?php echo $Page->resolve_icon_as_html ('{icons}file_types/file', 'Webcore File Icon', Fifty_px, 'margin-left: .5em; margin-bottom: .5em; float: right'); ?>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ac
             leo accumsan, semper magna in, consectetur metus. Mauris dictum adipiscing metus
             sed accumsan. Aenean facilisis justo lacus, et fringilla arcu luctus id. Nulla at
@@ -889,7 +889,7 @@ Second Term<br>
   <pre><code>{icons}file_types/file_32px</code></pre>
   <p>If you leave off the extension when referring to an icon file, the default
     application icon extension is applied, so you get:</p>
-  <p><?php echo $Page->resolve_icon_as_html ('{icons}file_types/file', ' ', '32px'); ?></p>
+  <p><?php echo $Page->resolve_icon_as_html ('{icons}file_types/file', ' ', Thirty_two_px); ?></p>
   <p>If, at some point, you move your icons, your reference to the icons folder won't
     be broken. This works for other stuff as well, like attachments. You can refer to
     an attachment file like this:

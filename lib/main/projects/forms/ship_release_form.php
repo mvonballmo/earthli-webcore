@@ -148,9 +148,9 @@ class SHIP_RELEASE_FORM extends AUDITABLE_FORM
 
     $props = $renderer->make_list_properties ();
     $props->show_descriptions = true;
-    $props->add_item ($this->app->resolve_icon_as_html ('{app_icons}statuses/working', ' ', '16px') . ' Release to testing', Testing, 'Feature-complete internal release.');
-    $props->add_item ($this->app->resolve_icon_as_html ('{icons}buttons/ship', ' ', '16px') . ' Ship', Shipped, 'Jobs and changes can still be added and removed.');
-    $props->add_item ($this->app->resolve_icon_as_html ('{icons}indicators/locked', ' ', '16px') . ' Lock', Locked, 'Changes and jobs cannot be added or removed.');
+    $props->add_item ($this->app->resolve_icon_as_html ('{app_icons}statuses/working', ' ', Sixteen_px) . ' Release to testing', Testing, 'Feature-complete internal release.');
+    $props->add_item ($this->app->resolve_icon_as_html ('{icons}buttons/ship', ' ', Sixteen_px) . ' Ship', Shipped, 'Jobs and changes can still be added and removed.');
+    $props->add_item ($this->app->resolve_icon_as_html ('{icons}indicators/locked', ' ', Sixteen_px) . ' Lock', Locked, 'Changes and jobs cannot be added or removed.');
     $renderer->draw_radio_group_row ('state', $props);
 
     $props = $renderer->make_list_properties ();

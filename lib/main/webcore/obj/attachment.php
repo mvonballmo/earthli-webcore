@@ -195,7 +195,7 @@ class ATTACHMENT extends OBJECT_IN_FOLDER
    * @param string $size The size of the icon to return.
    * @return string
    */
-  public function icon_as_html ($size = '100px')
+  public function icon_as_html ($size = One_hundred_px)
   {
     $ft = $this->app->file_type_manager ();
     $url = new FILE_URL ($this->file_name);

@@ -102,7 +102,7 @@ class FRAMEWORK_INFO extends NAMED_OBJECT
    * suffix.
    * @return string
    */
-  public function icon_as_html ($size = '16px')
+  public function icon_as_html ($size = Sixteen_px)
   {
     if ($this->_version_not_found || ! $this->database_version)
     {
@@ -173,7 +173,7 @@ class FRAMEWORK_INFO extends NAMED_OBJECT
       return $this->title . ' ' . $this->software_version;
     }
 
-    return $this->context->get_text_with_icon($this->icon_url(), ' ' . $this->title . ' ' . $this->database_version . ' &mdash; ' . $this->message (), '16px');
+    return $this->context->get_text_with_icon($this->icon_url(), ' ' . $this->title . ' ' . $this->database_version . ' &mdash; ' . $this->message (), Sixteen_px);
   }
   
   /**

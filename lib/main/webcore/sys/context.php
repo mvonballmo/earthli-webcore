@@ -583,7 +583,7 @@ class CONTEXT extends RESOLVER
    */
   public function get_begin_message ($type = 'error', $tag_name = 'p')
   {
-    $icon_url = $this->get_icon_url ('{icons}indicators/' . $type, '16px');
+    $icon_url = $this->get_icon_url ('{icons}indicators/' . $type, Sixteen_px);
     if ($type == 'info')
     {
       $type = 'caution';

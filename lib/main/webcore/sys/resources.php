@@ -406,7 +406,7 @@ class RESOURCE_MANAGER extends RAISABLE
    * Resolve the file fragment as an HTML image.
    * @param string $fragment location of icon.
    * @param string $text used for the alt and title attributes.
-   * @param string $size The size of icon to render; defaults to '16px'.
+   * @param string $size The size of icon to render; defaults to Sixteen_px.
    * @param string $style an optional CSS style (not a class).
    * @param int|string $dom_id An optional DOM id to allow JavaScript access to the image.
    * @return string
@@ -463,7 +463,7 @@ class RESOURCE_MANAGER extends RAISABLE
    * Get the URL for the requested icon size.
    * Returns an icon 'size' which conforms to the WebCore naming conventions for icon sizes. Sized icons
    * have several files, all in the same folder. If a size is specified, it is appended to the file name
-   * with a preceding underscore. e.g. get_icon_url ('logo', '16px') returns logo_16px. This algorithm is
+   * with a preceding underscore. e.g. get_icon_url ('logo', Sixteen_px) returns logo_16px. This algorithm is
    * subject to change.
    * @param string $base_url Location of the icon file.
    * @param string $size Size modifier to use to find the correct icon.
@@ -496,13 +496,13 @@ class RESOURCE_MANAGER extends RAISABLE
     {
       switch ($size)
       {
-        case '16px':
+        case Sixteen_px:
           $class = 'sixteen';
           break;
-        case '20px':
+        case Twenty_px:
           $class = 'twenty';
           break;
-        case '32px':
+        case Thirty_two_px:
           $class = 'thirty-two';
           break;
         default:

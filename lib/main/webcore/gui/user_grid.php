@@ -80,7 +80,7 @@ class USER_GRID extends CONTENT_OBJECT_GRID
       $this->_display_start_minimal_commands_block($obj);
       ?>
       <div style="float: left; margin-right: .5em">
-        <?php echo $obj->icon_as_html ('32px'); ?>
+        <?php echo $obj->icon_as_html (Thirty_two_px); ?>
       </div>
       <h3>
         <?php echo $this->obj_link ($obj); ?>

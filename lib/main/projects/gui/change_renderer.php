@@ -64,7 +64,7 @@ class CHANGE_RENDERER extends PROJECT_ENTRY_RENDERER
         <?php
         $props = $entry->kind_properties ();
 
-        echo $this->context->get_text_with_icon($props->icon, $entry->kind_as_text (), '16px');
+        echo $this->context->get_text_with_icon($props->icon, $entry->kind_as_text (), Sixteen_px);
         ?>
       </td>
     </tr>
@@ -77,7 +77,7 @@ class CHANGE_RENDERER extends PROJECT_ENTRY_RENDERER
       <th>Component</th>
       <td>
         <?php
-        echo $this->app->get_text_with_icon($comp->icon_url, $comp->title_as_link (), '16px');
+        echo $this->app->get_text_with_icon($comp->icon_url, $comp->title_as_link (), Sixteen_px);
         ?>
       </td>
     </tr>

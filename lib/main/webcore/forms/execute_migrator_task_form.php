@@ -129,7 +129,7 @@ class EXECUTE_MIGRATOR_TASK_FORM extends EXECUTE_TASK_FORM
     if (! $this->_object->info->exists ())
     {
       $warning_message = 'Since there is no version in the database, the migrator for <span class="field">' . $this->_object->info->database_version . '</span> will be used and "Ignore Version in Database" is required.';
-      $renderer->draw_text_row ($this->context->resolve_icon_as_html ('{icons}indicators/warning', 'Warning', '32px'), $warning_message, 'caution');
+      $renderer->draw_text_row ($this->context->resolve_icon_as_html ('{icons}indicators/warning', 'Warning', Thirty_two_px), $warning_message, 'caution');
     }
     parent::_draw_options ($renderer);
   }

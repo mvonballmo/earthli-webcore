@@ -212,7 +212,7 @@ class SEARCH_PROJECT_ENTRY_FIELDS extends SEARCH_ENTRY_FIELDS
       $index = 0;
       foreach ($kinds as $kind)
       {
-        $props->add_item ($this->context->get_text_with_icon($kind->icon, $kind->title, '16px'), $index);
+        $props->add_item ($this->context->get_text_with_icon($kind->icon, $kind->title, Sixteen_px), $index);
         $index += 1;
       }
       $renderer->draw_check_group_row ('kind', $props);

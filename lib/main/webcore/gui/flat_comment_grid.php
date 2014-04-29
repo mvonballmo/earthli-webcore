@@ -91,7 +91,7 @@ class FLAT_COMMENT_GRID extends PRINTABLE_COMMENT_GRID
           if ($creator->icon_url)
           {
             ?>
-            <div class="left-icon detail" style="background-image: url(<?php echo $creator->expanded_icon_url ('16px'); ?>)">
+            <div class="left-icon detail" style="background-image: url(<?php echo $creator->expanded_icon_url (Sixteen_px); ?>)">
               by <?php echo $creator->title_as_link (); ?> - <?php echo $obj->time_created->format (); ?>
             </div>
           <?php

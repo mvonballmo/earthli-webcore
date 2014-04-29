@@ -68,7 +68,7 @@ class JOB_NAVIGATOR extends PROJECT_ENTRY_NAVIGATOR
   protected function _text_for_list ($obj)
   {
     $props = $obj->kind_properties ();
-    $Result = $this->context->get_text_with_icon($props->icon, parent::_text_for_list ($obj), '16px');
+    $Result = $this->context->get_text_with_icon($props->icon, parent::_text_for_list ($obj), Sixteen_px);
     /** @var $branch_info JOB_BRANCH_INFO */
     $branch_info = $obj->main_branch_info ();
     if ($branch_info->is_closed ())

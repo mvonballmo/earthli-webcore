@@ -71,7 +71,7 @@ class ICON extends UNIQUE_OBJECT
   /**
    * @return string
    */
-  public function icon_as_html ($size = '100px')
+  public function icon_as_html ($size = One_hundred_px)
   {
     return $this->context->image_as_html ($this->home_page (), $this->title, $size);
   }
@@ -113,7 +113,7 @@ class ICON extends UNIQUE_OBJECT
    */
   public function page_name ()
   {
-    return $this->context->get_icon_url ($this->url, '100px');
+    return $this->context->get_icon_url ($this->url, One_hundred_px);
   }
   
   /**

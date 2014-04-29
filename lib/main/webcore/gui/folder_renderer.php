@@ -61,7 +61,7 @@ class FOLDER_RENDERER extends CONTENT_OBJECT_RENDERER
       $box = $this->context->make_box_renderer ();
       $box->start_column_set ();
       $box->new_column_of_type ('left-column');
-      echo $obj->icon_as_html ('50px');
+      echo $obj->icon_as_html (Fifty_px);
       $box->new_column ();
     }
 

@@ -63,7 +63,7 @@ class JOB_RENDERER extends PROJECT_ENTRY_RENDERER
       <td>
         <?php
         $props = $entry->kind_properties ();
-        echo $this->app->get_text_with_icon($props->icon, $entry->kind_as_text(), '16px');
+        echo $this->app->get_text_with_icon($props->icon, $entry->kind_as_text(), Sixteen_px);
         ?>
       </td>
     </tr>
@@ -76,7 +76,7 @@ class JOB_RENDERER extends PROJECT_ENTRY_RENDERER
       <th>Component</th>
       <td>
         <?php
-        echo $this->app->get_text_with_icon($comp->icon_url, $comp->title_as_link (), '16px');
+        echo $this->app->get_text_with_icon($comp->icon_url, $comp->title_as_link (), Sixteen_px);
         ?>
       </td>
     </tr>
@@ -116,7 +116,7 @@ class JOB_RENDERER extends PROJECT_ENTRY_RENDERER
           $text = '(None)';
         }
 
-        echo $this->app->get_text_with_icon($entry->get_assignee_icon_url(), $text, '16px');
+        echo $this->app->get_text_with_icon($entry->get_assignee_icon_url(), $text, Sixteen_px);
       ?>
       </td>
     </tr>
@@ -199,7 +199,7 @@ class JOB_RENDERER extends PROJECT_ENTRY_RENDERER
 
     $status = $branch_info->status_properties ();
 ?>
-  <span class="field"><?php echo $this->app->get_text_with_icon($status->icon, $status->title, '16px'); ?></span>
+  <span class="field"><?php echo $this->app->get_text_with_icon($status->icon, $status->title, Sixteen_px); ?></span>
   <span>
   <?php
     $closer = $branch_info->closer ();
@@ -229,7 +229,7 @@ class JOB_RENDERER extends PROJECT_ENTRY_RENDERER
       }
 
       $priority_props = $branch_info->priority_properties ();
-      echo $this->app->get_text_with_icon($priority_props->icon, $priority_props->title, '16px');
+      echo $this->app->get_text_with_icon($priority_props->icon, $priority_props->title, Sixteen_px);
     }
   ?>
   </span>

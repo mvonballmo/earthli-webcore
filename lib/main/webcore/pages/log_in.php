@@ -46,7 +46,7 @@ http://www.earthli.com/software/webcore
   }
 
   $Page->location->add_root_link ();
-  $Page->location->append ($App->resolve_icon_as_html ('{icons}buttons/login', ' ', '16px') . ' ' . $Page->title->subject);
+  $Page->location->append ($App->resolve_icon_as_html ('{icons}buttons/login', ' ', Sixteen_px) . ' ' . $Page->title->subject);
 
   $Page->start_display ();
 ?>

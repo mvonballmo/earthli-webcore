@@ -310,20 +310,6 @@ class FORM_TEXT_CONTROL_OPTIONS
 class FORM_RENDERER extends CONTROLS_RENDERER
 {
   /**
-   * Name of the icon to use for the 'required' mark.
-   * Preferred over {@link required_text}.
-   * @var string
-   */
-  public $required_icon = '{icons}indicators/required_16px';
-
-  /**
-   * Text to use to mark a field as 'required'.
-   * Used only if {@link required_icon} is empty.
-   * @var string
-   */
-  public $required_text = '*';
-
-  /**
    * How wide should controls be by default?
    * Should be specified in legal CSS units. Used by all text controls and the drop-down box.
    * @var string
@@ -474,7 +460,6 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    */
   public function start ()
   {
-    $this->_required_mark_used = false;
     $this->_column_started = false;
 
     echo '<div class="' . $this->_form->CSS_class . '-form ' . $this->labels_CSS_class . '">' . "\n";
@@ -491,13 +476,6 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    */
   public function finish ()
   {
-    if ($this->_required_mark_used)
-    {
-?>
-  <p class="form-row"><?php echo $this->required_mark (); ?> Required fields</p>
-<?php
-    }
-
     echo "</div>\n";
   }
 
@@ -647,7 +625,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    */
   public function draw_caution_row ($title, $text)
   {
-    $this->draw_text_row ($title, $this->app->resolve_icon_as_html ('{icons}indicators/warning', 'Warning', '16px') . ' ' . $text, 'caution detail');
+    $this->draw_text_row ($title, $this->app->resolve_icon_as_html ('{icons}indicators/warning', 'Warning', Sixteen_px) . ' ' . $text, 'caution detail');
   }
 
   /**
@@ -1142,8 +1120,8 @@ class FORM_RENDERER extends CONTROLS_RENDERER
       $Result .= $id . '_field.attach (' . $js_form . '.' . $id . ");\n";
 
       $Result .= "</script>\n";
-      $Result .= ' <a href="javascript:' . $id . '_field.show_calendar ()">' . $this->context->resolve_icon_as_html ('{icons}buttons/calendar', 'Show calendar in popup window', '16px') . '</a>';
-      $Result .= ' ' . $this->context->resolve_icon_as_html ('{icons}indicators/info', 'Use [d.m.Y] or [m/d/Y] or [Y-m-d]', '16px', 'vertical-align: middle');
+      $Result .= ' <a href="javascript:' . $id . '_field.show_calendar ()">' . $this->context->resolve_icon_as_html ('{icons}buttons/calendar', 'Show calendar in popup window', Sixteen_px) . '</a>';
+      $Result .= ' ' . $this->context->resolve_icon_as_html ('{icons}indicators/info', 'Use [d.m.Y] or [m/d/Y] or [Y-m-d]', Sixteen_px, 'vertical-align: middle');
 
       return $Result;
     }
@@ -1363,9 +1341,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
 
     if ($field->visible)
     {
-      $CSS_class = $this->_get_menu_control_CSS_class($field);
-
-      $Result = $this->_start_control ($field, 'select') . ' class="' . $CSS_class . '"';
+      $Result = $this->_start_control ($field, 'select');
 
       if (isset ($props->on_click_script))
       {
@@ -1446,7 +1422,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
       $file = $field->file_at ($this->_num_controls [$id]);
       $ft = $this->context->file_type_manager ();
       $url = new FILE_URL ($file->name);
-      $icon = $ft->icon_as_html ($file->mime_type, $url->extension (), '16px');
+      $icon = $ft->icon_as_html ($file->mime_type, $url->extension (), Sixteen_px);
 
       $Result = '<div style="width: ' . $width . '"><div class="detail">' . $icon . ' ' . $file->name . ' (' . file_size_as_text ($file->size) . ")</div></div>\n";
 
@@ -1489,7 +1465,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * @param string $icon_size
    * @return string
    */
-  public function submit_button_as_html ($title = null, $icon = '', $script = null, $icon_size = '16px')
+  public function submit_button_as_html ($title = null, $icon = '', $script = null, $icon_size = Sixteen_px)
   {
     if (! isset ($title))
     {
@@ -1636,26 +1612,6 @@ class FORM_RENDERER extends CONTROLS_RENDERER
     return $text;
   }
 
-  /* Text indicating that a field is required.
-   * @return string
-   * @access private
-   */
-  public function required_mark ()
-  {
-    $this->_required_mark_used = true;
-
-    if ($this->required_icon)
-    {
-      $Result = $this->context->resolve_icon_as_html ($this->required_icon, $this->required_text);
-    }
-    else
-    {
-      $Result = $this->required_text;
-    }
-
-    return $Result;
-  }
-
   /**
    * Return the requested field.
    * @param string $id
@@ -1702,11 +1658,11 @@ class FORM_RENDERER extends CONTROLS_RENDERER
       $Result .= ' maxlength="' . $field->max_length . '"';
     }
 
-    $CSS_class = $this->_get_text_control_CSS_class($field);
+    $CSS_class = '';
 
     if ($options->CSS_class)
     {
-      $CSS_class .= ' ' . $options->CSS_class;
+      $CSS_class = ' class="' . $options->CSS_class . '"';
     }
 
     if (isset ($options->on_change_script))
@@ -1714,7 +1670,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
       $Result .= ' OnChange=\'' . $options->on_change_script . '\'';
     }
 
-    $Result .= ' type="' . $type . '"' . $style . ' class="' . $CSS_class . '" value="' . $this->_to_html ($field, ENT_QUOTES) . '">';
+    $Result .= ' type="' . $type . '"' . $style . $CSS_class . ' value="' . $this->_to_html ($field, ENT_QUOTES) . '">';
 
     if ($field->description || $options->extra_description)
     {
@@ -1893,53 +1849,10 @@ class FORM_RENDERER extends CONTROLS_RENDERER
   }
 
   /**
-   * @param FIELD $field
-   * @return string
-   */
-  private function _get_text_control_CSS_class($field)
-  {
-    return $this->_get_control_CSS_class($field);
-  }
-
-  /**
-   * @param FIELD $field
-   * @return string
-   */
-  private function _get_menu_control_CSS_class($field)
-  {
-    return $this->_get_control_CSS_class($field);
-  }
-
-  /**
-   * @param FIELD $field
-   * @return string
-   */
-  private function _get_control_CSS_class($field)
-  {
-    if ($field->required)
-    {
-      $Result = 'required';
-
-      return $Result;
-    }
-
-    return '';
-  }
-
-  /**
    * @var FORM
    * @access private
    */
   protected $_form;
-
-  /**
-   * Set if the required mark is generated during form construction.
-   * The renderer will generate a legend explaining the required mark if the mark
-   * is generated at least once during form construction.
-   * @var boolean
-   * @access private
-   */
-  protected $_required_mark_used = false;
 
   /**
    * Currently building columns.

@@ -74,7 +74,7 @@ class PROPERTY_VALUE extends WEBCORE_OBJECT
    * @param string $size
    * @return string
    */
-  public function icon_as_html ($size = '16px')
+  public function icon_as_html ($size = Sixteen_px)
   {
     return $this->context->image_as_html ($this->expanded_icon_url ($size), $this->title);
   }
@@ -82,12 +82,12 @@ class PROPERTY_VALUE extends WEBCORE_OBJECT
   /**
    * Fully resolved path to the icon for this object.
    * The size parameter is prepended to the file name as a folder, in order to allow
-   * selecting from various sizes of icons. So, if the size parameter is '16px' and the
+   * selecting from various sizes of icons. So, if the size parameter is Sixteen_px and the
    * icon is '{icons}comments/smiley', the actual icon used is '{icons}comments/smiley/16px'.
    * @param string $size
    * @return string
    */
-  public function expanded_icon_url ($size = '16px')
+  public function expanded_icon_url ($size = Sixteen_px)
   {
     if ($this->icon)
     {

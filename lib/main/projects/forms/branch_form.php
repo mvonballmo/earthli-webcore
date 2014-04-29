@@ -140,14 +140,14 @@ class BRANCH_FORM extends OBJECT_IN_FOLDER_FORM
 
     if ($this->visible ('is_visible'))
     {
-      $props->add_item ($this->app->resolve_icon_as_html ('{icons}indicators/invisible', ' ', '16px') . ' Hidden', Hidden, 'Only administrators can see this branch\'s contents.');
-      $props->add_item ($this->app->resolve_icon_as_html ('{icons}buttons/view', ' ', '16px') . ' Visible', Visible, 'Jobs and changes can be added and removed.');
-      $props->add_item ($this->app->resolve_icon_as_html ('{icons}indicators/locked', ' ', '16px') . ' Locked', Locked, 'Cannot add or remove jobs and changes (undoable).');
+      $props->add_item ($this->app->resolve_icon_as_html ('{icons}indicators/invisible', ' ', Sixteen_px) . ' Hidden', Hidden, 'Only administrators can see this branch\'s contents.');
+      $props->add_item ($this->app->resolve_icon_as_html ('{icons}buttons/view', ' ', Sixteen_px) . ' Visible', Visible, 'Jobs and changes can be added and removed.');
+      $props->add_item ($this->app->resolve_icon_as_html ('{icons}indicators/locked', ' ', Sixteen_px) . ' Locked', Locked, 'Cannot add or remove jobs and changes (undoable).');
     }
     else
     {
-      $props->add_item ($this->app->resolve_icon_as_html ('{icons}buttons/view', ' ', '16px') . ' Unlocked', Visible, 'Jobs and changes can be added and removed.');
-      $props->add_item ($this->app->resolve_icon_as_html ('{icons}indicators/locked', ' ', '16px') . ' Locked', Locked, 'Cannot add or remove jobs and changes (undoable).');
+      $props->add_item ($this->app->resolve_icon_as_html ('{icons}buttons/view', ' ', Sixteen_px) . ' Unlocked', Visible, 'Jobs and changes can be added and removed.');
+      $props->add_item ($this->app->resolve_icon_as_html ('{icons}indicators/locked', ' ', Sixteen_px) . ' Locked', Locked, 'Cannot add or remove jobs and changes (undoable).');
     }
 
     $renderer->draw_radio_group_row ('state', $props);

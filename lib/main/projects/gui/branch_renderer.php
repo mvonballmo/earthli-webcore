@@ -72,7 +72,7 @@ class BRANCH_RENDERER extends CONTENT_OBJECT_RENDERER
       <th>State</th>
       <td>
         <?php
-        echo $this->context->get_text_with_icon($obj->state_icon_url(), $obj->state_as_string(), '16px');
+        echo $this->context->get_text_with_icon($obj->state_icon_url(), $obj->state_as_string(), Sixteen_px);
         ?>
       </td>
     </tr>

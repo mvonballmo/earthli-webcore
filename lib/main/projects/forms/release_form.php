@@ -228,10 +228,10 @@ class RELEASE_FORM extends OBJECT_IN_FOLDER_FORM
       $props->width = '';
       if ($this->visible ('is_visible'))
       {
-        $props->add_item ($this->app->resolve_icon_as_html ('{icons}indicators/invisible', ' ', '16px') . ' Hidden', Hidden, 'Prevent searching or browsing by non-admin users.');
+        $props->add_item ($this->app->resolve_icon_as_html ('{icons}indicators/invisible', ' ', Sixteen_px) . ' Hidden', Hidden, 'Prevent searching or browsing by non-admin users.');
       }
-      $props->add_item ($this->app->resolve_icon_as_html ('{icons}buttons/calendar', ' ', '16px') . ' Planned', Planned, 'Release is in development.');
-      $props->add_item ($this->app->resolve_icon_as_html ('{app_icons}statuses/working', ' ', '16px') . ' Testing', Testing, 'Release is feature-complete and in testing.');
+      $props->add_item ($this->app->resolve_icon_as_html ('{icons}buttons/calendar', ' ', Sixteen_px) . ' Planned', Planned, 'Release is in development.');
+      $props->add_item ($this->app->resolve_icon_as_html ('{app_icons}statuses/working', ' ', Sixteen_px) . ' Testing', Testing, 'Release is feature-complete and in testing.');
       $renderer->draw_radio_group_row ('state', $props);
     }
     else
@@ -240,10 +240,10 @@ class RELEASE_FORM extends OBJECT_IN_FOLDER_FORM
       $props->show_descriptions = true;
       if ($this->visible ('is_visible'))
       {
-        $props->add_item ($this->app->resolve_icon_as_html ('{icons}indicators/invisible', ' ', '16px') . ' Hidden', Hidden, 'Prevent searching or browsing by non-admin users.');
+        $props->add_item ($this->app->resolve_icon_as_html ('{icons}indicators/invisible', ' ', Sixteen_px) . ' Hidden', Hidden, 'Prevent searching or browsing by non-admin users.');
       }
-      $props->add_item ($this->app->resolve_icon_as_html ('{icons}buttons/ship', ' ', '16px') . ' Shipped', Shipped, 'Jobs and changes can still be added and removed.');
-      $props->add_item ($this->app->resolve_icon_as_html ('{icons}indicators/locked', ' ', '16px') . ' Locked', Locked, 'Changes and jobs cannot be added or removed.');
+      $props->add_item ($this->app->resolve_icon_as_html ('{icons}buttons/ship', ' ', Sixteen_px) . ' Shipped', Shipped, 'Jobs and changes can still be added and removed.');
+      $props->add_item ($this->app->resolve_icon_as_html ('{icons}indicators/locked', ' ', Sixteen_px) . ' Locked', Locked, 'Changes and jobs cannot be added or removed.');
       $renderer->draw_radio_group_row ('state', $props);
     }
     

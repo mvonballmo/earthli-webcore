@@ -271,7 +271,7 @@ class ATTACHMENT_FORM extends OBJECT_IN_FOLDER_FORM
 
     if ($this->object_exists ())
     {
-      $img = $this->_object->icon_as_html ('32px');
+      $img = $this->_object->icon_as_html (Thirty_two_px);
       if ($this->_object->is_image)
       {
         $thumb = $this->_object->thumbnail_as_html ();

@@ -106,12 +106,12 @@ class ATTACHMENT_GRID extends STANDARD_GRID
       }
       else
       {
-        echo $obj->icon_as_html ('100px');
+        echo $obj->icon_as_html (One_hundred_px);
       }
     }
     else
     {
-      echo $obj->icon_as_html ('100px');
+      echo $obj->icon_as_html (One_hundred_px);
     }
   ?></a>
   <h3>

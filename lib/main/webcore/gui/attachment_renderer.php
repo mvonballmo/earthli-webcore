@@ -58,7 +58,7 @@ class ATTACHMENT_RENDERER extends CONTENT_OBJECT_RENDERER
 ?>
     <div style="float: left">
 <?php
-    echo $obj->icon_as_html ('50px');
+    echo $obj->icon_as_html (Fifty_px);
 ?>
     </div>
     <div style="margin-left: 65px">
@@ -299,7 +299,7 @@ class ATTACHMENT_RENDERER extends CONTENT_OBJECT_RENDERER
   {
     $ft = $this->context->file_type_manager ();
     $url = new FILE_URL ($entry->name);
-    $icon_with_text = $this->context->get_text_with_icon($ft->icon_url ('', $url->extension()), $entry->name, '16px');
+    $icon_with_text = $this->context->get_text_with_icon($ft->icon_url ('', $url->extension()), $entry->name, Sixteen_px);
 
     echo '<tr><td>' . $icon_with_text  . '</td><td>' . file_size_as_text ($entry->size) . '</td></tr>';
   }

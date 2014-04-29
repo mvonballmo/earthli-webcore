@@ -119,7 +119,7 @@ class CONTROLS_RENDERER extends WEBCORE_OBJECT
    * @param string $type Can be 'button', 'submit' or 'cancel'.
    * @return string
    */
-  public function javascript_button_as_html ($title, $action, $icon = '', $icon_size = '16px', $type = 'button')
+  public function javascript_button_as_html ($title, $action, $icon = '', $icon_size = Sixteen_px, $type = 'button')
   {
     $class = '';
     if (empty($title))
@@ -148,7 +148,7 @@ class CONTROLS_RENDERER extends WEBCORE_OBJECT
    * @internal param string $action Link to go to when clicked. HTML characters should not be escaped.
    * @return string
    */
-  public function button_as_html ($title, $location, $icon = '', $icon_size = '16px')
+  public function button_as_html ($title, $location, $icon = '', $icon_size = Sixteen_px)
   {
     return $this->javascript_button_as_html ($title, 'window.location=\'' . htmlspecialchars ($location) . '\'', $icon, $icon_size, 'button');
   }
@@ -161,7 +161,7 @@ class CONTROLS_RENDERER extends WEBCORE_OBJECT
    * @param string $icon_size
    * @return string
    */
-  public function submit_button_as_html ($title = null, $icon = '', $script = null, $icon_size = '16px')
+  public function submit_button_as_html ($title = null, $icon = '', $script = null, $icon_size = Sixteen_px)
   {
     if (! isset ($script))
     {

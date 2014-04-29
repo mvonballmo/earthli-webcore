@@ -62,7 +62,7 @@ class COMPONENT extends OBJECT_IN_FOLDER
    * @var string $size
    * @return string
    */
-  public function icon_as_html ($size = '32px')
+  public function icon_as_html ($size = Thirty_two_px)
   {
     return $this->app->image_as_html ($this->expanded_icon_url ($size), ' ');
   }
@@ -72,7 +72,7 @@ class COMPONENT extends OBJECT_IN_FOLDER
    * @param string $size
    * @return string
    */
-  public function expanded_icon_url ($size = '32px')
+  public function expanded_icon_url ($size = Thirty_two_px)
   {
     if ($this->icon_url)
     {

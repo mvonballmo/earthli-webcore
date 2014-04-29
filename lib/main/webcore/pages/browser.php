@@ -154,13 +154,13 @@ $Page->start_display();
     <hr class="horizontal-separator" style="margin: .5em">
     <p class="notes">Problems with your browser? <a href="#report_problem">Report it</a>.</p>
     <h2 id="downloads">
-      <?php echo $Page->resolve_icon_as_html('{icons}buttons/download_to_hd', '', '32px'); ?> Download
+      <?php echo $Page->resolve_icon_as_html('{icons}buttons/download_to_hd', '', Thirty_two_px); ?> Download
     </h2>
     <p>For a better browsing experience, try one of these:</p>
     <dl>
       <dt class="field">
       <span
-        style="float: left"><?php echo $Page->resolve_icon_as_html('{icons}logos/browsers/opera1_t', '', '32px'); ?></span>
+        style="float: left"><?php echo $Page->resolve_icon_as_html('{icons}logos/browsers/opera1_t', '', Thirty_two_px); ?></span>
         <a href="http://opera.com" style="margin-left: 8px">Opera</a>
       </dt>
       <dd class="detail" style="margin-left: 40px; margin-bottom: 2em">
@@ -168,7 +168,7 @@ $Page->start_display();
       </dd>
       <dt class="field">
       <span
-        style="float: left"><?php echo $Page->resolve_icon_as_html('{icons}logos/browsers/chrome', '', '32px'); ?></span>
+        style="float: left"><?php echo $Page->resolve_icon_as_html('{icons}logos/browsers/chrome', '', Thirty_two_px); ?></span>
         <a href="http://google.com/chrome/" style="margin-left: 8px">Chrome</a>
       </dt>
       <dd class="detail" style="margin-left: 40px; margin-bottom: 2em">
@@ -176,7 +176,7 @@ $Page->start_display();
       </dd>
       <dt class="field">
       <span
-        style="float: left"><?php echo $Page->resolve_icon_as_html('{icons}logos/browsers/firefox', '', '32px'); ?></span>
+        style="float: left"><?php echo $Page->resolve_icon_as_html('{icons}logos/browsers/firefox', '', Thirty_two_px); ?></span>
         <a href="http://mozilla.org/products/firefox/" style="margin-left: 8px">Firefox</a>
       </dt>
       <dd class="detail" style="margin-left: 40px; margin-bottom: 2em">
@@ -184,7 +184,7 @@ $Page->start_display();
       </dd>
       <dt class="field">
       <span
-        style="float: left"><?php echo $Page->resolve_icon_as_html('{icons}logos/browsers/safari', '', '32px'); ?></span>
+        style="float: left"><?php echo $Page->resolve_icon_as_html('{icons}logos/browsers/safari', '', Thirty_two_px); ?></span>
         <a href="http://apple.com/safari" style="margin-left: 8px">Safari</a>
       </dt>
       <dd class="detail" style="margin-left: 40px; margin-bottom: 2em">
@@ -192,7 +192,7 @@ $Page->start_display();
       </dd>
       <dt class="field">
       <span
-        style="float: left"><?php echo $Page->resolve_icon_as_html('{icons}logos/browsers/omniweb5', '', '32px'); ?></span>
+        style="float: left"><?php echo $Page->resolve_icon_as_html('{icons}logos/browsers/omniweb5', '', Thirty_two_px); ?></span>
         <a href="http://omnigroup.com/applications/omniweb/" style="margin-left: 8px">Omniweb</a>
       </dt>
       <dd class="detail" style="margin-left: 40px">

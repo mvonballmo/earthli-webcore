@@ -271,7 +271,7 @@ class PROJECT_ENTRY_SUMMARY_GRID extends ENTRY_SUMMARY_GRID
         <?php
         $props = $obj->kind_properties ();
 
-        echo $this->context->get_text_with_icon($props->icon, $obj->kind_as_text (), '16px');
+        echo $this->context->get_text_with_icon($props->icon, $obj->kind_as_text (), Sixteen_px);
         ?>
       </td>
     </tr>
@@ -284,7 +284,7 @@ class PROJECT_ENTRY_SUMMARY_GRID extends ENTRY_SUMMARY_GRID
       <th>Component</th>
       <td>
         <?php
-        echo $this->app->get_text_with_icon($comp->icon_url, $comp->title_as_link (), '16px');
+        echo $this->app->get_text_with_icon($comp->icon_url, $comp->title_as_link (), Sixteen_px);
         ?>
       </td>
     </tr>

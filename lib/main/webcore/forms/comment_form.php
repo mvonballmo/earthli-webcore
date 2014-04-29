@@ -170,7 +170,7 @@ class COMMENT_FORM extends ATTACHMENT_HOST_FORM
       foreach ($icons as $icon)
       {
         $i += 1;
-        $props->add_item ($icon->icon_as_html ('15px'), $i);
+        $props->add_item ($icon->icon_as_html (Fifteen_px), $i);
       }
 
       $renderer->draw_radio_group_row ('kind', $props);
@@ -197,4 +197,3 @@ class COMMENT_FORM extends ATTACHMENT_HOST_FORM
    */
   protected $_privilege_set = Privilege_set_comment;
 }
-?>

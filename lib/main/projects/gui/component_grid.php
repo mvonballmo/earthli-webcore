@@ -96,7 +96,7 @@ class COMPONENT_GRID extends STANDARD_GRID
     </div>
     <div class="minimal-commands-content">
     <h3>
-      <?php echo $this->app->get_text_with_icon($obj->icon_url, $obj->title_as_link (), '20px'); ?>
+      <?php echo $this->app->get_text_with_icon($obj->icon_url, $obj->title_as_link (), Twenty_px); ?>
     </h3>
   <?php
     $menu = $this->context->make_menu ();

@@ -59,7 +59,7 @@ class APPLICATION_RENDERER extends RENDERER
 <table class="basic columns left-labels top">
   <tr>
     <th>Title</th>
-    <td><?php echo $this->app->get_text_with_icon($obj->app->icon, $obj->app->name (), '20px'); ?></td>
+    <td><?php echo $this->app->get_text_with_icon($obj->app->icon, $obj->app->name (), Twenty_px); ?></td>
   </tr>
   <tr>
     <th>Database name</th>

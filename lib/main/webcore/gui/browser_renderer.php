@@ -69,7 +69,7 @@ class BROWSER_RENDERER extends OBJECT_RENDERER
         $icon_name = $browser->icon_name ();
         if ($icon_name)
         {
-          echo $this->context->resolve_icon_as_html ('{icons}logos/browsers/' . $icon_name, '', '32px') . ' ';
+          echo $this->context->resolve_icon_as_html ('{icons}logos/browsers/' . $icon_name, '', Thirty_two_px) . ' ';
         }
         echo $browser->name () . ' ' . $browser->version ();
       ?>
@@ -196,7 +196,7 @@ class BROWSER_RENDERER extends OBJECT_RENDERER
       {
         $text = 'yes';
       }
-      return $this->context->resolve_icon_as_html ('{icons}comment/thumbs_up', '', '15px') . ' ' . $text;
+      return $this->context->resolve_icon_as_html ('{icons}comment/thumbs_up', '', Fifteen_px) . ' ' . $text;
     }
     else
     {
@@ -204,7 +204,7 @@ class BROWSER_RENDERER extends OBJECT_RENDERER
       {
         $text = 'no';
       }
-      return $this->context->resolve_icon_as_html ('{icons}comment/thumbs_down', '', '15px') . ' ' . $text;
+      return $this->context->resolve_icon_as_html ('{icons}comment/thumbs_down', '', Fifteen_px) . ' ' . $text;
     }
   }
 

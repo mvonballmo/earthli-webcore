@@ -798,6 +798,14 @@ ul.minimal li {
   margin: 0;
   padding: 0;
 }
+ul.minimal li .icon:first-child {
+  float: left;
+  margin-right: 5px;
+}
+ul.minimal li .icon.sixteen + .content {
+  display: block;
+  margin-left: 21px;
+}
 p div:first-child img:first-child {
   margin-top: 1.5em;
 }

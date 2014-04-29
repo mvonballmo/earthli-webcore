@@ -58,7 +58,7 @@ class COMPONENT_RENDERER extends CONTENT_OBJECT_RENDERER
     if ($obj->icon_url)
     {
       echo '<div style="float: left">';
-      echo $obj->icon_as_html ('50px');
+      echo $obj->icon_as_html (Fifty_px);
       echo '</div><div style="margin-left: 60px">';
     }
 

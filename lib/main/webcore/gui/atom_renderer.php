@@ -120,7 +120,7 @@ class ATOM_RENDERER extends NEWSFEED_RENDERER
   <id><?php echo $this->_as_xml ($this->base_url); ?></id>
   <link rel="self" href="<?php echo $this->_as_xml ($this->env->url (Url_part_all)); ?>"/>
   <updated><?php echo $time_modified->as_RFC_3339 (); ?></updated>
-  <icon><?php echo $this->context->get_icon_url ($this->icon_file, '100px'); ?></icon>
+  <icon><?php echo $this->context->get_icon_url ($this->icon_file, One_hundred_px); ?></icon>
   <?php _echo_atom_text_tag ('subtitle', $this->description, $this->language, $html); ?>
   <?php _echo_atom_text_tag ('rights', $this->copyright, $this->language, $html); ?>
 <?php

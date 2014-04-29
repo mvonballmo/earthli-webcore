@@ -146,7 +146,7 @@ abstract class OBJECT_IN_FOLDER extends CONTENT_OBJECT
    * @param string $size CSS for the size of the picture.
    * @return string
    */
-  public function state_as_icon ($size = '16px')
+  public function state_as_icon ($size = Sixteen_px)
   {
     return $this->app->resolve_icon_as_html ($this->state_icon_url (), $this->state_as_string (), $size);
   }

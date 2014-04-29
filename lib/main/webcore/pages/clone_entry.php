@@ -111,7 +111,7 @@ http://www.earthli.com/software/webcore
 
     if (isset($last_entry))
     {
-      echo $App->get_text_with_icon('{icons}indicators/info', 'Added ' . $last_entry->title_as_link (), '16px', 'top-box-message');
+      echo $App->get_text_with_icon('{icons}indicators/info', 'Added ' . $last_entry->title_as_link (), Sixteen_px, 'top-box-message');
     }
   }
   ?>

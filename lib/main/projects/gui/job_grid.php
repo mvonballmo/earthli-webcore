@@ -107,7 +107,7 @@ class JOB_GRID extends PROJECT_ENTRY_GRID
   <div>
     <span class="field"><?php
       $status_props = $branch_info->status_properties ();
-      echo $this->app->get_text_with_icon($status_props->icon, $status_props->title, '16px');
+      echo $this->app->get_text_with_icon($status_props->icon, $status_props->title, Sixteen_px);
     ?></span>
   <?php
     if ($is_closed)
@@ -140,7 +140,7 @@ class JOB_GRID extends PROJECT_ENTRY_GRID
   <div>
     <?php
     $priority_props = $branch_info->priority_properties ();
-    echo $this->app->get_text_with_icon($priority_props->icon, $priority_props->title, '16px');
+    echo $this->app->get_text_with_icon($priority_props->icon, $priority_props->title, Sixteen_px);
     ?>
   </div>
   <?php } ?>
@@ -165,7 +165,7 @@ class JOB_GRID extends PROJECT_ENTRY_GRID
           $text = '<span class="notes">Not assigned</span>';
         }
 
-        echo $this->app->get_text_with_icon($obj->get_assignee_icon_url(), $text, '16px');
+        echo $this->app->get_text_with_icon($obj->get_assignee_icon_url(), $text, Sixteen_px);
       }
     ?>
     </div>

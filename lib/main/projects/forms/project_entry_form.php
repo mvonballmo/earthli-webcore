@@ -393,7 +393,7 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
       $index = 0;
       foreach ($kinds as $kind)
       {
-        $props->add_item ($this->app->get_text_with_icon($kind->icon, $kind->title, '20px'), $index);
+        $props->add_item ($this->app->get_text_with_icon($kind->icon, $kind->title, Twenty_px), $index);
         $index += 1;
       }
       $renderer->draw_radio_group_row ('kind', $props);
@@ -455,7 +455,7 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
         $title = $release->title_as_link ();
         if ($release->locked ())
         {
-          $title = $this->context->get_text_with_icon('{icons}indicators/locked', $title, '16px');
+          $title = $this->context->get_text_with_icon('{icons}indicators/locked', $title, Sixteen_px);
         }
         $renderer->draw_text_row ('Release', $title);
       }
@@ -577,7 +577,7 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
             $title = $branch->title_as_html ();
             if ($branch->locked ())
             {
-              $title = $this->context->get_text_with_icon('{icons}indicators/locked', $title, '16px');
+              $title = $this->context->get_text_with_icon('{icons}indicators/locked', $title, Sixteen_px);
             }
             echo $title;
           }

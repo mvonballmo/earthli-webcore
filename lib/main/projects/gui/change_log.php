@@ -220,7 +220,7 @@ class CHANGE_LOG extends WEBCORE_OBJECT
     
     $component = $this->_components [$entry->component_id];
     
-    return $component->icon_as_html ('20px') . ' ' . $component->title_as_link ();
+    return $component->icon_as_html (Twenty_px) . ' ' . $component->title_as_link ();
   }
 
   /**
@@ -259,7 +259,7 @@ class CHANGE_LOG extends WEBCORE_OBJECT
     
     $props = $entry->kind_properties ();
 
-    echo '<li>' . $this->context->get_text_with_icon($props->icon, $detail, '16px');
+    echo '<li>' . $this->context->get_text_with_icon($props->icon, $detail, Sixteen_px);
 
     if ($this->show_description)
     {

@@ -1167,12 +1167,27 @@ ul.minimal
 {
   padding: 0;
   list-style: none;
-}
 
-ul.minimal li
-{
-  margin: 0;
-  padding: 0;
+  li
+  {
+    margin: 0;
+    padding: 0;
+
+    .icon
+    {
+      &:first-child
+      {
+        float: left;
+        margin-right: @small_spacing;
+      }
+
+      &.sixteen + .content
+      {
+        display: block;
+        margin-left: 16px + @small_spacing;
+      }
+    }
+  }
 }
 
 p div:first-child img:first-child

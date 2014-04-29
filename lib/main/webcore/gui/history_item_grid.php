@@ -142,7 +142,7 @@ class HISTORY_ITEM_GRID extends STANDARD_GRID
       <th>User</th>
       <td>
         <?php
-        $icon = $creator->expanded_icon_url ('16px');
+        $icon = $creator->expanded_icon_url (Sixteen_px);
         if ($icon)
         {
           ?><span class="sixteen icon" style="background-image: url(<?php echo $icon; ?>)"><?php echo $creator->title_as_link (); ?></span><?php
@@ -157,13 +157,13 @@ class HISTORY_ITEM_GRID extends STANDARD_GRID
     <tr>
       <th>Kind</th>
       <td>
-        <span class="sixteen icon" style="background-image: url(<?php echo $this->context->get_icon_url($obj->kind_icon_url (), '16px'); ?>)"><?php echo $obj->kind; ?></span>
+        <span class="sixteen icon" style="background-image: url(<?php echo $this->context->get_icon_url($obj->kind_icon_url (), Sixteen_px); ?>)"><?php echo $obj->kind; ?></span>
       </td>
     </tr>
     <tr>
       <th>Emails</th>
       <td>
-        <span class="sixteen icon" style="background-image: url(<?php echo $this->context->get_icon_url($obj->publication_state_icon_url (), '16px'); ?>)"><?php echo $obj->publication_state_as_text (); ?></span>
+        <span class="sixteen icon" style="background-image: url(<?php echo $this->context->get_icon_url($obj->publication_state_icon_url (), Sixteen_px); ?>)"><?php echo $obj->publication_state_as_text (); ?></span>
       </td>
     </tr>
   </table>

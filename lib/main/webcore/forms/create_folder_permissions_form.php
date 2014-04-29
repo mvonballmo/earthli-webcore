@@ -121,7 +121,7 @@ class CREATE_FOLDER_PERMISSIONS_FORM extends ID_BASED_FORM
       $permissions = $this->login->permissions ();      
       if ($permissions->value_for (Privilege_set_folder, Privilege_view) != Privilege_always_granted)
       {
-        $renderer->draw_text_row ('', '<div class="caution">' . $this->app->resolve_icon_as_html ('{icons}/indicators/warning', 'Warning', '16px') . ' *In this case, you <span class="field">will not</span> be able to see this folder.</div>', 'notes');
+        $renderer->draw_text_row ('', '<div class="caution">' . $this->app->resolve_icon_as_html ('{icons}/indicators/warning', 'Warning', Sixteen_px) . ' *In this case, you <span class="field">will not</span> be able to see this folder.</div>', 'notes');
       }
       else
       {

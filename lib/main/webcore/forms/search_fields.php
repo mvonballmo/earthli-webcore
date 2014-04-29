@@ -882,8 +882,8 @@ class SORT_FIELDS extends SEARCH_FIELDS
 
     $props = $renderer->make_list_properties ();
     $props->items_per_row = 2;
-    $props->add_item ($this->context->resolve_icon_as_html ('{icons}indicators/sort_ascending', 'Asc', '16px'), 'asc');
-    $props->add_item ($this->context->resolve_icon_as_html ('{icons}indicators/sort_descending', 'Desc', '16px'), 'desc');
+    $props->add_item ($this->context->resolve_icon_as_html ('{icons}indicators/sort_ascending', 'Asc', Sixteen_px), 'asc');
+    $props->add_item ($this->context->resolve_icon_as_html ('{icons}indicators/sort_descending', 'Desc', Sixteen_px), 'desc');
     $renderer->draw_radio_group_row ($this->direction_name (), $props);
   }
 

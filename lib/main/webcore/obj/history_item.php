@@ -181,7 +181,7 @@ class HISTORY_ITEM extends UNIQUE_OBJECT
    * @throws UNKNOWN_VALUE_EXCEPTION
    * @return string
    */
-  public function publication_state_as_icon ($size = '16px')
+  public function publication_state_as_icon ($size = Sixteen_px)
   {
     $icon_name = $this->publication_state_icon_url();
 
@@ -217,7 +217,7 @@ class HISTORY_ITEM extends UNIQUE_OBJECT
    * @param string $size The size of image to return.
    * @return string
    */
-  public function kind_as_icon ($size = '16px')
+  public function kind_as_icon ($size = Sixteen_px)
   {
     return $this->app->resolve_icon_as_html ($this->kind_icon_url (), $this->kind, $size);
   }

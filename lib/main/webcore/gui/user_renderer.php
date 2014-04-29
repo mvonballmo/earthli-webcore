@@ -69,7 +69,7 @@ class USER_RENDERER extends CONTENT_OBJECT_RENDERER
       else if ($obj->icon_url)
       {
         echo '<p>';
-        echo $obj->icon_as_html ('50px');
+        echo $obj->icon_as_html (Fifty_px);
         echo '</p>';
       }
 

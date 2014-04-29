@@ -361,17 +361,17 @@ class OBJECT_NAVIGATOR extends WEBCORE_OBJECT
       switch ($type)
       {
         case 'first':
-          return $this->context->resolve_icon_as_html ('{icons}buttons/go_to_first', $title, '16px');
+          return $this->context->resolve_icon_as_html ('{icons}buttons/go_to_first', $title, Sixteen_px);
         case 'previous':
-          return $this->context->resolve_icon_as_html ('{icons}buttons/go_to_previous', $title, '16px');
+          return $this->context->resolve_icon_as_html ('{icons}buttons/go_to_previous', $title, Sixteen_px);
         case 'next':
-          return $this->context->resolve_icon_as_html ('{icons}buttons/go_to_next', $title, '16px');
+          return $this->context->resolve_icon_as_html ('{icons}buttons/go_to_next', $title, Sixteen_px);
         case 'last':
-          return $this->context->resolve_icon_as_html ('{icons}buttons/go_to_last', $title, '16px');
+          return $this->context->resolve_icon_as_html ('{icons}buttons/go_to_last', $title, Sixteen_px);
         case 'page_up':
-          return $this->context->resolve_icon_as_html ('{icons}buttons/move_up', $title, '16px');
+          return $this->context->resolve_icon_as_html ('{icons}buttons/move_up', $title, Sixteen_px);
         case 'page_down':
-          return $this->context->resolve_icon_as_html ('{icons}buttons/move_down', $title, '16px');
+          return $this->context->resolve_icon_as_html ('{icons}buttons/move_down', $title, Sixteen_px);
       }
     }
     else

@@ -69,7 +69,7 @@ abstract class FILE_TYPE_MANAGER extends WEBCORE_OBJECT
    * @param string $size
    * @return string
    */
-  public function icon_as_html ($mime_type, $extension, $size = '32px')
+  public function icon_as_html ($mime_type, $extension, $size = Thirty_two_px)
   {
     if ($mime_type)
     {
@@ -95,7 +95,7 @@ abstract class FILE_TYPE_MANAGER extends WEBCORE_OBJECT
    * @param string $size
    * @return string
    */
-  public function expanded_icon_url ($mime_type, $extension, $size = '32px')
+  public function expanded_icon_url ($mime_type, $extension, $size = Thirty_two_px)
   {
     return $this->context->get_icon_url ($this->icon_url ($mime_type, $extension), $size);
   }

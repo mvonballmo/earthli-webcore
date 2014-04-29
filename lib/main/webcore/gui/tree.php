@@ -275,7 +275,7 @@ abstract class TREE extends WEBCORE_OBJECT
     }
     else
     {
-      echo $this->context->get_text_with_icon($icon_url, $caption, '16px');
+      echo $this->context->get_text_with_icon($icon_url, $caption, Sixteen_px);
     }
   }
 
