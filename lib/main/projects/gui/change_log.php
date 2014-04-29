@@ -74,8 +74,8 @@ class CHANGE_LOG extends WEBCORE_OBJECT
     // show all unassociated jobs and changes
 
     ob_start ();
-      $this->_display_entries ($jobs, 0, $job_idx, '_draw_job', 'Jobs');
-      $this->_display_entries ($changes, 0, $change_idx, '_draw_change', 'Changes');
+      $this->_display_entries ($jobs, 0, $job_idx);
+      $this->_display_entries ($changes, 0, $change_idx);
       $content = ob_get_contents ();
     ob_end_clean ();
 
@@ -94,8 +94,8 @@ class CHANGE_LOG extends WEBCORE_OBJECT
         $orig_job_idx = $job_idx;
         $orig_chng_idx = $change_idx;
         ob_start ();
-          $this->_display_entries ($jobs, $rel->id, $job_idx, '_draw_job', 'Jobs');
-          $this->_display_entries ($changes, $rel->id, $change_idx, '_draw_change', 'Changes');
+          $this->_display_entries ($jobs, $rel->id, $job_idx);
+          $this->_display_entries ($changes, $rel->id, $change_idx);
           $content = ob_get_contents ();
         ob_end_clean ();
         $this->_draw_release ($rel, $job_idx - $orig_job_idx, $change_idx - $orig_chng_idx);
@@ -118,8 +118,8 @@ class CHANGE_LOG extends WEBCORE_OBJECT
     $job_idx = 0;
     $change_idx = 0;
     
-    $this->_display_entries ($jobs, $release->id, $job_idx, '_draw_job', 'Jobs');
-    $this->_display_entries ($changes, $release->id, $change_idx, '_draw_change', 'Changes');
+    $this->_display_entries ($jobs, $release->id, $job_idx);
+    $this->_display_entries ($changes, $release->id, $change_idx);
   }
 
   /**
@@ -129,11 +129,9 @@ class CHANGE_LOG extends WEBCORE_OBJECT
    * @param PROJECT_ENTRY[] $entries
    * @param integer $release_id
    * @param integer $entry_idx
-   * @param string $draw_entry Use this method to render the 'entries' in the list.
-   * @param string $label Identifies the type of entry in the heading.
    * @access private
    */
-  protected function _display_entries ($entries, $release_id, $entry_idx, $draw_entry, $label)
+  protected function _display_entries ($entries, $release_id, $entry_idx)
   {
     unset ($this->curr_day);
     unset ($this->_component_id);
@@ -170,7 +168,7 @@ class CHANGE_LOG extends WEBCORE_OBJECT
           }
           if ($old_idx != $entry_idx)
           {
-            echo "</dl>\n";
+            echo "</ul>\n";
           }
           $content = ob_get_contents ();
         ob_end_clean ();
@@ -191,14 +189,14 @@ class CHANGE_LOG extends WEBCORE_OBJECT
     {      
       if (isset ($this->_component_id))
       {
-        echo "</dl>\n";
+        echo "</ul>\n";
         echo '<div class="horizontal-separator"></div>';
       }
       
-      echo "<h3>" . $this->comp_name_for ($entry) . "</h3>\n<dl>\n";
+      echo "<h3>" . $this->comp_name_for ($entry) . "</h3>\n<ul class=\"minimal\">\n";
 
       $this->_component_id = $entry->component_id;
-    }    
+    }
   }
 
   /**
@@ -261,9 +259,7 @@ class CHANGE_LOG extends WEBCORE_OBJECT
     
     $props = $entry->kind_properties ();
 
-    echo "<div class=\"sixteen\" style=\"background-image: url(" . $props->expanded_icon_url() . ")\">";
-
-    echo $detail;
+    echo '<li>' . $this->context->get_text_with_icon($props->icon, $detail, '16px');
 
     if ($this->show_description)
     {
@@ -276,7 +272,7 @@ class CHANGE_LOG extends WEBCORE_OBJECT
       }
     }
 
-    echo '</div>';
+    echo '</li>';
   }
 
   /**
@@ -293,12 +289,12 @@ class CHANGE_LOG extends WEBCORE_OBJECT
   
   /**
    * Draw a change in the list.
-   * @param CHANGE $chng
+   * @param CHANGE $change
    * @access private
    */
-  protected function _draw_change ($chng)
+  protected function _draw_change ($change)
   {
-    $this->_draw_entry ($chng, $chng->creator (), $chng->time_created);
+    $this->_draw_entry ($change, $change->creator (), $change->time_created);
   }
 
   /**
