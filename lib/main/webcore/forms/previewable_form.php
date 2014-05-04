@@ -121,7 +121,7 @@ abstract class PREVIEWABLE_FORM extends FORM
 
   /**
    * Displays objects in DHTML preview blocks.
-   * Objects can be added to the preview list so that they are renderered before the form.
+   * Objects can be added to the preview list so that they are rendered before the form.
    */
   protected function _draw_previews ()
   {

@@ -62,5 +62,3 @@ class RECIPE_SEARCH extends ENTRY_SEARCH
     parent::__construct ($app, new SEARCH_RECIPE_FIELDS ($app));
   }
 }
-
-?>

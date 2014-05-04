@@ -90,7 +90,7 @@ class FOLDER_TREE_NODE_INFO extends TREE_NODE_INFO
     if ($this->selected ($node))
     {
       $t = $node->title_formatter ();
-      $t->CSS_class = 'selected';
+      $t->css_class = 'selected';
       $Result = $node->title_as_html ($t);
     }
     else

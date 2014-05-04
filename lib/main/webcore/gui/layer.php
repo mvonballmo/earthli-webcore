@@ -63,7 +63,7 @@ class LAYER extends WEBCORE_OBJECT
    * Name of a CSS class used as the style for the layer.
    * @var string
    */
-  public $CSS_class = '';
+  public $css_class = '';
 
   /**
    * Is this layer initially displayed?
@@ -73,14 +73,14 @@ class LAYER extends WEBCORE_OBJECT
 
   /**
    * CSS style used for the top margin of the layer.
-   * Overrides that specified in the {@link $CSS_class} property.
+   * Overrides that specified in the {@link $css_class} property.
    * @var string
    */
   public $margin_top = '';
 
   /**
    * CSS style used for the left margin of the layer.
-   * Overrides that specified in the {@link $CSS_class} property.
+   * Overrides that specified in the {@link $css_class} property.
    * @var string
    */
   public $margin_left = '';
@@ -143,9 +143,9 @@ class LAYER extends WEBCORE_OBJECT
 
     $div = $this->context->make_tag_builder (Tag_builder_html);
     $div->set_name ($tag_name);
-    if ($this->CSS_class)
+    if ($this->css_class)
     {
-      $div->add_attribute ('class', $this->CSS_class);
+      $div->add_attribute ('class', $this->css_class);
     }
     if ($this->context->dhtml_allowed ())
     {

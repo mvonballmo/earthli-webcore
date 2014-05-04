@@ -654,7 +654,7 @@ class HTML_TREE extends TREE
    */
   public $centered = false;
 
-  public $CSS_class = 'tree';
+  public $css_class = 'tree';
 
   /**
    * Start rendering the tree.
@@ -662,7 +662,7 @@ class HTML_TREE extends TREE
    */
   public function start ()
   {
-    $class = $this->CSS_class ? "class=\"$this->CSS_class\"" : '';
+    $class = $this->css_class ? "class=\"$this->css_class\"" : '';
     $style = $this->centered ? "style=\"margin: auto; display: table\"" : '';
 
     if ($class || $style)
@@ -677,7 +677,7 @@ class HTML_TREE extends TREE
    */
   public function finish ()
   {
-    if ($this->centered || $this->CSS_class)
+    if ($this->centered || $this->css_class)
     {
 ?>
 </ul>

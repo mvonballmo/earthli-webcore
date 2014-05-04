@@ -255,6 +255,7 @@ class ATTACHMENT_FORM extends OBJECT_IN_FOLDER_FORM
     $check_props = $renderer->make_check_properties ('create_thumbnail');
     $check_props->on_click_script = 'on_click_thumbnail (this)';
     $check_props->text = ' no larger than ' . $renderer->text_line_as_html ('thumbnail_size', $options) . ' pixels.';
+    $check_props->css_class = 'text-line';
     $props->add_item_object ($check_props);
 
     $renderer->draw_check_boxes_row (' ', $props);

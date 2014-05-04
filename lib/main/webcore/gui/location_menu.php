@@ -100,7 +100,7 @@ class LOCATION_MENU extends MENU
     while (isset($parent) && ! empty($parent->id) && ! $parent->is_root ())
     {
       $t = $parent->title_formatter ();
-      $t->CSS_class = 'nav-item';
+      $t->css_class = 'nav-item';
       if ($page_url)
       {
         $t->set_name ($page_url);
@@ -156,7 +156,7 @@ class LOCATION_MENU extends MENU
     // Don't allow objects in the list to set the style of the navigation bar.
 
     $t = $obj->title_formatter ();
-    $t->CSS_class = 'nav-item';
+    $t->css_class = 'nav-item';
     if ($page_args)
     {
       $t->add_arguments ($page_args);

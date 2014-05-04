@@ -62,7 +62,7 @@ class COMMENT_GRID extends SELECTABLE_GRID
   /**
    * @var string
    */
-  public $box_CSS_class = 'object-in-list';
+  public $box_css_class = 'object-in-list';
 
   /**
    * @var boolean
@@ -120,43 +120,41 @@ class COMMENT_GRID extends SELECTABLE_GRID
   {
     ?>
     <div class="grid-item">
+    <?php
+      $this->_display_start_minimal_commands_block($obj);
+      ?>
+        <h3><?php echo $obj->title_as_link (); ?></h3>
       <?php
-        $this->_display_start_minimal_commands_block($obj);
-
+        $props = $obj->icon_properties ();
+        $this->context->start_icon_container($props->icon, Fifteen_px);
         $creator = $obj->creator ();
         if ($creator->icon_url)
         {
-        ?>
-        <div style="float: left">
-          <?php echo $creator->icon_as_html (); ?>
-        </div>
-        <div style="margin-left: 40px">
-        <?php
-          }
-        ?>
-          <div style="margin-bottom: 5px">
-            <?php echo $obj->icon () . ' ' . $obj->title_as_link (); ?>
-          </div>
-          <div class="detail">
-            by <?php echo $creator->title_as_link (); ?> - <?php echo $obj->time_created->format ();
+          $this->context->start_icon_container($creator->icon_url, Sixteen_px);
+        }
+      ?>
+        <div class="info-box-top">
+          <?php echo $creator->title_as_link (); ?> &ndash; <?php echo $obj->time_created->format ();
 
-            if ($obj->modified ())
-            {
-              $modifier = $obj->modifier ();
-              ?>
-              (Updated by <?php echo $modifier->title_as_link (); ?> - <?php echo $obj->time_modified->format (); ?>)
-            <?php
-            }
-            ?>
-          </div>
-        <?php
-          if ($creator->icon_url)
+          if ($obj->modified ())
           {
-        ?>
+            $modifier = $obj->modifier ();
+            ?>
+            (updated by <?php echo $modifier->title_as_link (); ?> &ndash; <?php echo $obj->time_modified->format (); ?>)
+          <?php
+          }
+          ?>
         </div>
+      <?php
+        if ($creator->icon_url)
+        {
+          $this->context->finish_icon_container();
+        }
+        $this->context->finish_icon_container();
+      ?>
       </div>
-    <?php
-    }
+    </div>
+  <?php
   }
 }
 

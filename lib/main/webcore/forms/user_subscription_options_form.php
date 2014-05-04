@@ -416,21 +416,24 @@ class USER_SUBSCRIPTION_OPTIONS_FORM extends SUBSCRIPTION_FORM
 
     // TODO add ability to send CSS class 'text-line' here
 
-    $props->add_item ('Send at most ', 1, '', true, $renderer->text_line_as_HTML ('preferred_text_length', $options) . ' characters.');
+    $item = $props->add_item ('Send at most ', 1, '', true, $renderer->text_line_as_HTML ('preferred_text_length', $options) . ' characters.');
+    $item->css_class = 'text-line';
     $renderer->draw_radio_group_row ('text_options', $props);
     $renderer->draw_error_row ('preferred_text_length');
 
     $props = $renderer->make_list_properties ();
     $props->on_click_script = 'on_group_objects (this)';
     $props->add_item ('One item per message.', 0);
-    $props->add_item ('Group items if there are more than ', 1, '', true, $renderer->text_line_as_HTML ('max_individual_messages', $options) . ' at once.');
+    $item = $props->add_item ('Group items if there are more than ', 1, '', true, $renderer->text_line_as_HTML ('max_individual_messages', $options) . ' at once.');
+    $item->css_class = 'text-line';
     $renderer->draw_radio_group_row ('group_objects', $props);
     $renderer->draw_error_row ('max_individual_messages');
 
     $props = $renderer->make_list_properties ();
     $props->on_click_script = 'on_split_objects (this)';
     $props->add_item ('Send only one message.', 0);
-    $props->add_item ('Send at most ', 1, '', true, $renderer->text_line_as_HTML ('max_items_per_message', $options) . ' items per message.');
+    $item = $props->add_item ('Send at most ', 1, '', true, $renderer->text_line_as_HTML ('max_items_per_message', $options) . ' items per message.');
+    $item->css_class = 'text-line';
     $renderer->draw_radio_group_row ('split_objects', $props);
     $renderer->draw_error_row ('max_items_per_message');
 

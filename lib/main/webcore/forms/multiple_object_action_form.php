@@ -240,7 +240,7 @@ abstract class MULTIPLE_OBJECT_ACTION_FORM extends ID_BASED_FORM
 ?>
       </div>
 <?php
-      $renderer->labels_CSS_class = 'top';
+      $renderer->labels_css_class = 'top';
       $renderer->start_column ('content-column');
         $renderer->start ();
         $this->_draw_message ($renderer);

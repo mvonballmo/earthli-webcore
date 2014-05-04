@@ -92,7 +92,7 @@ class CHANGE_RENDERER extends PROJECT_ENTRY_RENDERER
     if ($job)
     {
       $t = $job->title_formatter ();
-      $t->CSS_class = '';
+      $t->css_class = '';
       echo $job->title_as_link ($t);
     }
     else

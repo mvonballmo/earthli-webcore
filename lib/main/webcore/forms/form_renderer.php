@@ -79,8 +79,9 @@ class FORM_LIST_ITEM
 
   /**
    * Descriptive text displayed after the item.
-   * This text is not included in the label for the control and is renderered only by the list box in
+   * This text is not included in the label for the control and is rendered only by the list box in
    * a paragraph following the control and title.
+   *
    */
   public $description = '';
 
@@ -91,6 +92,12 @@ class FORM_LIST_ITEM
    * @var string
    */
   public $on_click_script = null;
+
+  /**
+   * The class to use for the line generated for this list item (if rendered as a form row).
+   * @var string
+   */
+  public $css_class = '';
 }
 
 /**
@@ -148,8 +155,7 @@ class FORM_LIST_PROPERTIES
   /**
    * List of items for this control.
    * Do not add items to this list directly. Use {@link add_item()} instead.
-   * @var array [FORM_LIST_ITEM]
-   * @see FORM_LIST_ITEM
+   * @var FORM_LIST_ITEM[]
    */
   public $items = array ();
 
@@ -188,7 +194,7 @@ class FORM_LIST_PROPERTIES
   /**
    * Extra CSS class to apply to the control.
    */
-  public $CSS_class = '';
+  public $css_class = '';
 
   /**
    * Add an item to the list.
@@ -200,6 +206,7 @@ class FORM_LIST_PROPERTIES
    * @param boolean $enabled Is the control for this item enabled? Used only by radio buttons and checkboxes.
    * @param string $text Additional text to display outside of the label.
    * @param string $script Called when the item is clicked. Overrides the {@link $on_click_script} for this object.
+   * @return \FORM_LIST_ITEM
    * @see FORM_LIST_ITEM
    */
   public function add_item ($title, $value, $description = '', $enabled = true, $text = '', $script = '')
@@ -212,6 +219,8 @@ class FORM_LIST_PROPERTIES
     $item->description = $description;
     $item->on_click_script = $script;
     $this->items [] = $item;
+
+    return $item;
   }
 
   /**
@@ -296,7 +305,7 @@ class FORM_TEXT_CONTROL_OPTIONS
    * Extra CSS class to apply to the control.
    * applied afterwards.
    */
-  public $CSS_class = '';
+  public $css_class = '';
 }
 
 /**
@@ -356,7 +365,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    */
   public $width = 'auto';
 
-  public $labels_CSS_class = 'ltr right';
+  public $labels_css_class = 'ltr right';
 
   /**
    * Should this renderer allow previewing?
@@ -462,7 +471,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
   {
     $this->_column_started = false;
 
-    echo '<div class="' . $this->_form->CSS_class . '-form ' . $this->labels_CSS_class . '">' . "\n";
+    echo '<div class="' . $this->_form->css_class . '-form ' . $this->labels_css_class . '">' . "\n";
 
     if ($this->_form->num_errors (Form_general_error_id))
     {
@@ -486,21 +495,21 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * labels for any rows already created in this block. To force a label area to be generated, pass ' ' as the
    * title.
    * @param string $title Label for the row.
-   * @param string $CSS_class
+   * @param string $css_class
    */
-  public function start_row ($title = '', $CSS_class = '')
+  public function start_row ($title = '', $css_class = '')
   {
     if ($title && !ctype_space($title))
     {
 ?>
-  <div class="form-row<?php if ($CSS_class) echo ' ' . $CSS_class; ?>">
+  <div class="form-row<?php if ($css_class) echo ' ' . $css_class; ?>">
     <label><?php echo $title; ?></label>
 <?php
     }
     else
     {
 ?>
-    <div class="form-row">
+    <div class="form-row<?php if ($css_class) echo ' ' . $css_class; ?>">
 <?php
     }
   }
@@ -590,14 +599,14 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * This does its best to keep the sizing vis-a-vis other controls correct.
    * @param $title string The title to use for the row.
    * @param $text string The text to display.
-   * @param string $CSS_class The class to use for the content box.
+   * @param string $css_class The class to use for the content box.
    * @internal param string $class CSS class used for text.
    */
-  public function draw_text_row ($title, $text, $CSS_class = '')
+  public function draw_text_row ($title, $text, $css_class = '')
   {
-    if (! $CSS_class)
+    if (! $css_class)
     {
-      $CSS_class = $this->_form->CSS_class . "form--content";
+      $css_class = $this->_form->css_class . "form--content";
     }
 
 ?>
@@ -610,7 +619,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
 <?php
     }
 ?>
-    <div class="<?php echo $CSS_class; ?>">
+    <div class="<?php echo $css_class; ?>">
       <?php echo $text; ?>
     </div>
   </div>
@@ -669,11 +678,11 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * are added to blocks nested within the content area of the last open row. Should only be called when
    * there is already a row opened with {@link start_row()}. Must be closed with {@link finish_block()}.
    */
-  public function start_block ($title, $CSS_class = '')
+  public function start_block ($title, $css_class = '')
   {
-    if ($CSS_class)
+    if ($css_class)
     {
-      echo '<fieldset class="' . $CSS_class . '">' . "\n";
+      echo '<fieldset class="' . $css_class . '">' . "\n";
     }
     else
     {
@@ -712,10 +721,9 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    *
    * To be used only when {@link start_indent()} has already been called.
    *
-   * @param string $size The size of the indent; not used here, but may be used by descendents.
    * @see start_indent()
    */
-  public function finish_indent ($size = '2em')
+  public function finish_indent ()
   {
     echo "</div>\n";
   }
@@ -727,9 +735,9 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * called first. Successive calls to this function will create new column content areas until
    * {@link finish_column()} is called to finish the column block.
    * 
-   * @param string $CSS_class The CSS class to use for the column.
+   * @param string $css_class The CSS class to use for the column.
    */
-  public function start_column ($CSS_class = '')
+  public function start_column ($css_class = '')
   {
     if (! $this->_column_started)
     {
@@ -737,12 +745,12 @@ class FORM_RENDERER extends CONTROLS_RENDERER
       $box_renderer = $this->context->make_box_renderer();
       $this->_box_renderers []= $box_renderer;
       $box_renderer->start_column_set();
-      $box_renderer->new_column_of_type($CSS_class);
+      $box_renderer->new_column_of_type($css_class);
     }
     else
     {
       $box_renderer = $this->_box_renderers [count($this->_box_renderers) - 1];
-      $box_renderer->new_column_of_type($CSS_class);
+      $box_renderer->new_column_of_type($css_class);
     }
   }
 
@@ -940,7 +948,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
 
     $ctrl = $this->_grouped_control_as_HTML ($field, null, $item, 'checkbox', $field->id);
     $ctrl =  $this->_control_created ($id, $ctrl);
-    $this->_draw_field_row($field, $ctrl);
+    $this->_draw_field_row($field, $ctrl, $item->css_class);
   }
 
   /**
@@ -1006,7 +1014,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
 
   public function start_button_row ($title = ' ')
   {
-    $this->start_row ($title, 'button');
+    $this->start_row ($title);
   }
 
   /**
@@ -1134,10 +1142,10 @@ class FORM_RENDERER extends CONTROLS_RENDERER
  * @param string $id Name of field.
  * @param string $width Width of the control in valid CSS. Defaults to {@link $default_control_width} if not specified.
  * @param string $height Height of the control in valid CSS. Defaults to {@link $default_control_height} if not specified.
- * @param string $CSS_class The CSS class to apply to the control
+ * @param string $css_class The CSS class to apply to the control
  * @return string
  */
-  public function text_box_as_html ($id, $width = null, $height = null, $CSS_class = null)
+  public function text_box_as_html ($id, $width = null, $height = null, $css_class = null)
   {
     $field = $this->_field_at ($id);
 
@@ -1150,7 +1158,6 @@ class FORM_RENDERER extends CONTROLS_RENDERER
 
       // TODO Change this code to default to applying a class rather than a fixed width/height
 
-      $style = '';
       if (isset ($width))
       {
         if (isset($height))
@@ -1168,7 +1175,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
       }
 
       $Result = $this->_start_control ($field, 'textarea');
-      $Result .= ' cols="30" rows="5" class="' . $CSS_class . '"' . $style . '>';
+      $Result .= ' cols="30" rows="5" class="' . $css_class . '"' . $style . '>';
       $Result .= $this->_to_html ($field, ENT_NOQUOTES) . '</textarea>';
 
       if ($field->description)
@@ -1206,13 +1213,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
   {
     if (! isset ($item))
     {
-      $item = new stdClass();
-      $item->text = '';
-      $item->on_click_script = null;
-      $item->value = 1;
-      $item->title = $id;
-      $item->enabled = true;
-      $item->smart_wrapping = false;
+      $item = $this->make_check_properties($id);
     }
     else
     {
@@ -1269,19 +1270,19 @@ class FORM_RENDERER extends CONTROLS_RENDERER
 
     if ($field->visible)
     {
-      $CSS_class = $this->_get_menu_control_CSS_class($field);
-      if ($props->CSS_class)
+      $css_class = '';
+      if ($props->css_class)
       {
-        $CSS_class .= ' ' . $props->CSS_class;
+        $css_class = ' ' . $props->css_class;
       }
 
       $Result = '';
-      if (isset ($props->width) || $props->CSS_class)
+      if (isset ($props->width) || $props->css_class)
       {
         $Result = '<div style="width: ' . $props->width . '">';
       }
 
-      $ctrl = $this->_start_control ($field, 'select') . ' class="' . $CSS_class . '"';
+      $ctrl = $this->_start_control ($field, 'select') . ' class="' . $css_class . '"';
 
       if (isset ($props->on_click_script))
       {
@@ -1517,15 +1518,15 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * Field-specific errors is also drawn here, if necessary.
    * @param FIELD $field
    * @param string $control_text Prepared string of text; should be HTML code for a form control.
-   * @param string $CSS_class
+   * @param string $css_class
    * @access private
    */
-  protected function _draw_field_row ($field, $control_text, $CSS_class = '')
+  protected function _draw_field_row ($field, $control_text, $css_class = '')
   {
     if ($field->visible)
     {
 ?>
-      <div class="form-row<?php if ($field->required) { echo ' required'; }?><?php if ($CSS_class) { echo ' ' . $CSS_class; }?>">
+      <div class="form-row<?php if ($field->required) { echo ' required'; }?><?php if ($css_class) { echo ' ' . $css_class; }?>">
 <?php
       $title = $field->caption;
 
@@ -1658,11 +1659,11 @@ class FORM_RENDERER extends CONTROLS_RENDERER
       $Result .= ' maxlength="' . $field->max_length . '"';
     }
 
-    $CSS_class = '';
+    $css_class = '';
 
-    if ($options->CSS_class)
+    if ($options->css_class)
     {
-      $CSS_class = ' class="' . $options->CSS_class . '"';
+      $css_class = ' class="' . $options->css_class . '"';
     }
 
     if (isset ($options->on_change_script))
@@ -1670,7 +1671,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
       $Result .= ' OnChange=\'' . $options->on_change_script . '\'';
     }
 
-    $Result .= ' type="' . $type . '"' . $style . $CSS_class . ' value="' . $this->_to_html ($field, ENT_QUOTES) . '">';
+    $Result .= ' type="' . $type . '"' . $style . $css_class . ' value="' . $this->_to_html ($field, ENT_QUOTES) . '">';
 
     if ($field->description || $options->extra_description)
     {
@@ -1715,16 +1716,23 @@ class FORM_RENDERER extends CONTROLS_RENDERER
         }
       }
 
-      $Result = '<div class="form-row">';
+      $Result = '';
 
       $item_count = 0;
       foreach ($props->items as $item)
       {
+        $css_class = $item->css_class ? 'form-row ' . $item->css_class : 'form-row';
+
+        if ($Result == '')
+        {
+          $Result = '<div class="' . $css_class . '">';
+        }
+
         if ($props->items_per_row >= 1)
         {
           if ($item_count != 0 && $item_count % $props->items_per_row == 0)
           {
-            $Result .= '</div><div class="form-row">';
+            $Result .= '</div><div class="' . $css_class . '">';
           }
         }
 

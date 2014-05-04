@@ -80,7 +80,7 @@ abstract class GRID extends WEBCORE_OBJECT
    * Should be a defined CSS class.
    * @var string
    */
-  public $box_CSS_class = '';
+  public $box_css_class = '';
 
   /**
    * Put a separator between rows in the grid?
@@ -566,9 +566,9 @@ abstract class GRID extends WEBCORE_OBJECT
     {
       $attrs [] = "style=\"$style\"";
     }
-    if (!empty($this->box_CSS_class))
+    if (!empty($this->box_css_class))
     {
-      $attrs [] = "class=\"$this->box_CSS_class\"";
+      $attrs [] = "class=\"$this->box_css_class\"";
     }
     if (sizeof ($attrs))
     {

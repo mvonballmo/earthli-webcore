@@ -170,17 +170,17 @@ class ATTACHMENT extends OBJECT_IN_FOLDER
 
   /**
    * Thumbnail as an HTML tag.
-   * @param string $CSS_class
+   * @param string $css_class
    * @return string
    */
-  public function thumbnail_as_html ($CSS_class = 'frame')
+  public function thumbnail_as_html ($css_class = 'frame')
   {
     $thumb_url = $this->thumbnail_url ();
     if ($thumb_url)
     {
-      if ($CSS_class)
+      if ($css_class)
       {
-        return "<img class=\"$CSS_class\" src=\"$thumb_url\" alt=\"$this->title\">\n";
+        return "<img class=\"$css_class\" src=\"$thumb_url\" alt=\"$this->title\">\n";
       }
 
       return "<img src=\"$thumb_url\" alt=\"$this->title\">\n";

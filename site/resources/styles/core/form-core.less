@@ -204,6 +204,7 @@ input + button
       {
         float: left;
         margin-right: @small_spacing;
+        margin-top: @small_spacing + 1;
 
         & + label
         {
@@ -218,6 +219,16 @@ input + button
     {
       float: left;
       margin-right: @small_spacing;
+      margin-top: @small_spacing + 1;
+    }
+
+    &.text-line
+    {
+      input[type=radio]:first-child,
+      input[type=checkbox]:first-child
+      {
+        margin-top: @small_spacing + @standard_border_radius + @hairline_border_width + 4; // magic number
+      }
     }
 
     label:not(:first-child)

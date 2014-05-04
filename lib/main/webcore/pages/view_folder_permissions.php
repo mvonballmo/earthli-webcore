@@ -69,8 +69,7 @@ http://www.earthli.com/software/webcore
       $caption = 'Hide folders';
     }
 
-    $icon = $App->get_icon_url ($icon, Sixteen_px);
-    ?><a href="<?php echo $opt_link; ?>" class="button"><span class="icon sixteen" style="background-image: url(<?php echo $icon; ?>)"><?php echo $caption; ?></span></a><?php
+    ?><a href="<?php echo $opt_link; ?>" class="button"><?php echo $Page->get_text_with_icon($icon, $caption, Sixteen_px); ?></a><?php
     ?>
     </div>
   </div>

@@ -118,7 +118,7 @@ class USER extends CONTENT_OBJECT
   public $ad_hoc_login = false;
 
   /**
-   * Icon, renderered as HTML.
+   * Icon, rendered as HTML.
    * The requested size can also be given, which is either used to retrieve the image or used in the HTML.
    * @var string $size
    * @return string

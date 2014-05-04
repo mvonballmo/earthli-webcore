@@ -407,7 +407,7 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
   {
     $props = $renderer->make_list_properties ();
     $props->width = '20em';
-    $props->CSS_class = '';
+    $props->css_class = '';
     $props->add_item ('[None]', 0);
 
     /** @var PROJECT $folder */

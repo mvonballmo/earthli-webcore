@@ -490,6 +490,56 @@ class RESOURCE_MANAGER extends RAISABLE
     return '';
   }
 
+  public function start_icon_container($icon_url, $size)
+  {
+    echo $this->_get_start_icon_container('div', $icon_url, $size);
+  }
+
+  public function finish_icon_container()
+  {
+    echo '</div>';
+  }
+
+  public function start_icon_wrapper($icon_url, $size)
+  {
+    echo $this->_get_start_icon_container('span', $icon_url, $size);
+  }
+
+  private function _get_start_icon_container($tag_name, $icon_url, $size)
+  {
+    $expanded_icon_url = $this->get_icon_url($icon_url, $size);
+    switch ($size)
+    {
+      case Fifteen_px:
+        $class = 'fifteen';
+        break;
+      case Sixteen_px:
+        $class = 'sixteen';
+        break;
+      case Twenty_px:
+        $class = 'twenty';
+        break;
+      case Thirty_two_px:
+        $class = 'thirty-two';
+        break;
+      case Fifty_px:
+        $class = 'fifty';
+        break;
+      case One_hundred_px:
+        $class = 'one-hundred';
+        break;
+      default:
+        throw new UNKNOWN_VALUE_EXCEPTION($size);
+    }
+
+    return '<' . $tag_name . ' class="icon ' . $class . '" style="background-image: url(' . $expanded_icon_url . ')">';
+  }
+
+  public function finish_icon_wrapper()
+  {
+    echo '</span>';
+  }
+
   public function get_text_with_icon ($icon_url, $text, $size, $extra_css = '')
   {
     if ($icon_url)

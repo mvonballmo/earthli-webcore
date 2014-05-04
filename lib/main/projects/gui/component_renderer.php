@@ -57,18 +57,13 @@ class COMPONENT_RENDERER extends CONTENT_OBJECT_RENDERER
   {
     if ($obj->icon_url)
     {
-      echo '<div style="float: left">';
-      echo $obj->icon_as_html (Fifty_px);
-      echo '</div><div style="margin-left: 60px">';
+      $this->context->start_icon_container($obj->icon_url, Fifty_px);
+      parent::_display_as_html ($obj);
+      $this->context->finish_icon_container();
     }
-
-    parent::_display_as_html ($obj);
-
-    if ($obj->icon_url)
+    else
     {
-      echo '</div>';
+      parent::_display_as_html ($obj);
     }
   }
 }
-
-?>

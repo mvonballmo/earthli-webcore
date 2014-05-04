@@ -132,7 +132,7 @@ abstract class FORM extends WEBCORE_OBJECT
    * Main form container has this CSS class.
    * @var string
    */
-  public $CSS_class = 'basic';
+  public $css_class = 'basic';
 
   /**
    * Always executes the form as submitted, if set.

@@ -57,39 +57,13 @@ class COMPONENT extends OBJECT_IN_FOLDER
   public $icon_url = '';
 
   /**
-   * Icon, renderered as HTML.
-   * The requested size can also be given, which is either used to retrieve the image or used in the HTML.
-   * @var string $size
-   * @return string
-   */
-  public function icon_as_html ($size = Thirty_two_px)
-  {
-    return $this->app->image_as_html ($this->expanded_icon_url ($size), ' ');
-  }
-
-  /**
-   * Fully resolved path to the icon for this object.
-   * @param string $size
-   * @return string
-   */
-  public function expanded_icon_url ($size = Thirty_two_px)
-  {
-    if ($this->icon_url)
-    {
-      return $this->app->get_icon_url ($this->icon_url, $size);
-    }
-    
-    return '';
-  }
-
-  /**
    * List of all entries (jobs or changes) for this release.
    * @return PROJECT_ENTRY_QUERY
    */
   public function entry_query ()
   {
-    $fldr = $this->parent_folder ();
-    $Result = $fldr->entry_query ();
+    $folder = $this->parent_folder ();
+    $Result = $folder->entry_query ();
     $Result->restrict ("entry.component_id = $this->id");
     return $Result;
   }
@@ -124,6 +98,7 @@ class COMPONENT extends OBJECT_IN_FOLDER
   {
     $folder = $this->parent_folder ();
     $class_name = $this->app->final_class_name ('PROJECT_COMMENT_QUERY', 'projects/db/project_comment_query.php');
+    /** @var PROJECT_COMMENT_QUERY $Result */
     $Result = new $class_name ($folder);
     $Result->restrict ("entry.component_id = $this->id");
     return $Result;
@@ -165,10 +140,10 @@ class COMPONENT extends OBJECT_IN_FOLDER
   public function store_to ($storage)
   {
     parent::store_to ($storage);
-    $tname =$this->table_name ();
-    $fldr_id = $this->parent_folder_id ();
-    $storage->add ($tname, 'folder_id', Field_type_integer, $fldr_id, Storage_action_create);
-    $storage->add ($tname, 'icon_url', Field_type_string, $this->icon_url);
+    $table_name =$this->table_name ();
+    $folder_id = $this->parent_folder_id ();
+    $storage->add ($table_name, 'folder_id', Field_type_integer, $folder_id, Storage_action_create);
+    $storage->add ($table_name, 'icon_url', Field_type_string, $this->icon_url);
   }
 
   /**
@@ -197,6 +172,7 @@ class COMPONENT extends OBJECT_IN_FOLDER
   protected function _purge ($options)
   {
     $entry_query = $this->entry_query ();
+    /** @var PROJECT_ENTRY[] $entries */
     $entries = $entry_query->objects ();
 
     foreach ($entries as $entry)
@@ -224,8 +200,8 @@ class COMPONENT extends OBJECT_IN_FOLDER
   /**
    * Return default handler objects for supported tasks.
    * @param string $handler_type Specific functionality required.
-   * @param object $options
-   * @return object
+   * @param OBJECT_RENDERER_OPTIONS $options
+   * @return stdClass
    * @access private
    */
   protected function _default_handler_for ($handler_type, $options = null)
@@ -265,5 +241,3 @@ class COMPONENT_PURGE_OPTIONS extends PURGE_OPTIONS
    */
   public $replacement_component_id;
 }
-
-?>

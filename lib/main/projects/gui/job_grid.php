@@ -189,7 +189,7 @@ class JOB_GRID extends PROJECT_ENTRY_GRID
     $branch_info = $obj->main_branch_info ();
     if ($branch_info->is_closed ())
     {
-      $Result->CSS_class = '';
+      $Result->css_class = '';
     }
     $Result->max_visible_output_chars = 0;
     return $Result;

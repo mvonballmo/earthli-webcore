@@ -258,7 +258,7 @@ abstract class TEXT_OUTPUT_LOGGER extends LOGGER
   {
     if ($this->_is_html)
     {
-      $Result = $this->_format_html_tag ($msg, $this->_CSS_class_for_type ($this->_last_type));
+      $Result = $this->_format_html_tag ($msg, $this->_css_class_for_type ($this->_last_type));
     }
     else
     {
@@ -367,7 +367,7 @@ abstract class TEXT_OUTPUT_LOGGER extends LOGGER
    * @return string
    * @access private
    */
-  protected function _CSS_class_for_type ($type)
+  protected function _css_class_for_type ($type)
   {
     switch ($type)
     {

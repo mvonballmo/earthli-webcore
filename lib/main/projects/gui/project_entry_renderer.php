@@ -289,7 +289,7 @@ abstract class PROJECT_ENTRY_RENDERER extends ENTRY_RENDERER
   }
 
   /**
-   * Show user info when renderered?
+   * Show user info when rendered?
    * The print preview can toggle this value.
    * @var boolean
    * @access private

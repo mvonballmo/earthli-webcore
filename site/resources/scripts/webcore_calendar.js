@@ -510,15 +510,15 @@ HTML_CALENDAR.prototype.display = function ()
 		  for (var idxDow = 0; idxDow < 7; idxDow++)
 		  {
 			if (this.is_today (current))
-			  CSS_class = this.today_style;
+			  css_class = this.today_style;
 			else if (! this.is_same_month (current))
-			  CSS_class = this.other_day_style;
+			  css_class = this.other_day_style;
 			else if (this.is_weekend_day (current))
-			  CSS_class = this.weekend_day_style;
+			  css_class = this.weekend_day_style;
 			else
-			  CSS_class = this.month_day_style;
+			  css_class = this.month_day_style;
 
-			this.echo ('<td class="' + CSS_class + '">' + this.make_selector_link (current, current.getDate ()) + '</td>');
+			this.echo ('<td class="' + css_class + '">' + this.make_selector_link (current, current.getDate ()) + '</td>');
 
 			current.setDate (current.getDate () + 1);
 		  }

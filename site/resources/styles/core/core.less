@@ -133,6 +133,14 @@ table
     }
   }
 
+  &.numeric-data
+  {
+    td
+    {
+      text-align: right;
+    }
+  }
+
   &.left-labels
   {
     > tbody > tr
@@ -145,6 +153,7 @@ table
           text-align: right;
           white-space: nowrap;
           border-bottom: none;
+          vertical-align: top;
         }
       }
     }
@@ -633,6 +642,24 @@ td.object-in-list + td.object-in-list
 {
   display: inline-block;
   background-repeat: no-repeat;
+  box-sizing: border-box;
+}
+
+div.icon
+{
+  display: block;
+}
+
+.one-hundred
+{
+  padding-left: 100px + @standard_spacing;
+  min-height: 100px;
+}
+
+.fifty
+{
+  padding-left: 50px + @standard_spacing;
+  min-height: 50px;
 }
 
 .thirty-two
@@ -651,6 +678,12 @@ td.object-in-list + td.object-in-list
 {
   padding-left: 16px + @small_spacing;
   min-height: 16px;
+}
+
+.fifteen
+{
+  padding-left: 15px + @small_spacing;
+  min-height: 15px;
 }
 
 /* @end */
@@ -1170,23 +1203,8 @@ ul.minimal
 
   li
   {
-    margin: 0;
+    margin: @small_spacing 0;
     padding: 0;
-
-    .icon
-    {
-      &:first-child
-      {
-        float: left;
-        margin-right: @small_spacing;
-      }
-
-      &.sixteen + .content
-      {
-        display: block;
-        margin-left: 16px + @small_spacing;
-      }
-    }
   }
 }
 

@@ -67,7 +67,7 @@ abstract class NAMED_OBJECT extends STORABLE
     }
     $Result->location = $this->home_page ();
     $Result->text = $this->raw_title ();
-    $Result->CSS_class = 'visible';
+    $Result->css_class = 'visible';
     $Result->title = '';
     return $Result;
   }

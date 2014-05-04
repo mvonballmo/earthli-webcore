@@ -51,7 +51,7 @@ class HISTORY_ITEM_GRID extends STANDARD_GRID
   /**
    * @var string
    */
-  public $box_CSS_class = 'object-in-list';
+  public $box_css_class = 'object-in-list';
 
   /**
    * @var string
@@ -141,29 +141,19 @@ class HISTORY_ITEM_GRID extends STANDARD_GRID
     <tr>
       <th>User</th>
       <td>
-        <?php
-        $icon = $creator->expanded_icon_url (Sixteen_px);
-        if ($icon)
-        {
-          ?><span class="sixteen icon" style="background-image: url(<?php echo $icon; ?>)"><?php echo $creator->title_as_link (); ?></span><?php
-        }
-        else
-        {
-          echo $creator->title_as_link ();
-        }
-        ?>
+        <?php echo $this->context->get_text_with_icon($creator->icon_url, $creator->title_as_link (), Sixteen_px); ?>
       </td>
     </tr>
     <tr>
       <th>Kind</th>
       <td>
-        <span class="sixteen icon" style="background-image: url(<?php echo $this->context->get_icon_url($obj->kind_icon_url (), Sixteen_px); ?>)"><?php echo $obj->kind; ?></span>
+        <?php echo $this->context->get_text_with_icon($obj->kind_icon_url (), $obj->kind, Sixteen_px); ?>
       </td>
     </tr>
     <tr>
       <th>Emails</th>
       <td>
-        <span class="sixteen icon" style="background-image: url(<?php echo $this->context->get_icon_url($obj->publication_state_icon_url (), Sixteen_px); ?>)"><?php echo $obj->publication_state_as_text (); ?></span>
+        <?php echo $this->context->get_text_with_icon($obj->publication_state_icon_url (), $obj->publication_state_as_text (), Sixteen_px); ?>
       </td>
     </tr>
   </table>

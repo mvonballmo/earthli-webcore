@@ -82,7 +82,7 @@ class PROPERTY_VALUE extends WEBCORE_OBJECT
   /**
    * Fully resolved path to the icon for this object.
    * The size parameter is prepended to the file name as a folder, in order to allow
-   * selecting from various sizes of icons. So, if the size parameter is Sixteen_px and the
+   * selecting from various sizes of icons. So, if the size parameter is {@link Sixteen_px}  and the
    * icon is '{icons}comments/smiley', the actual icon used is '{icons}comments/smiley/16px'.
    * @param string $size
    * @return string

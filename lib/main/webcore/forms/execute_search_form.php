@@ -259,7 +259,7 @@ class EXECUTE_SEARCH_FORM extends ID_BASED_FORM
   {
     if (! isset ($this->_search))
     {
-      $renderer->labels_CSS_class = 'top';
+      $renderer->labels_css_class = 'top';
 
       $this->button = 'Go';
 
@@ -267,7 +267,7 @@ class EXECUTE_SEARCH_FORM extends ID_BASED_FORM
         $renderer->draw_text_line_with_button_row('search_text', $renderer->submit_button_as_html ());
       
         $props = $renderer->make_list_properties ();
-        $props->CSS_class = 'detail';
+        $props->css_class = 'detail';
 
         /* Fill with all the registered search types. */
         $type_infos = $this->app->search_type_infos ();

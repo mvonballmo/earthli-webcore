@@ -874,17 +874,25 @@ class SORT_FIELDS extends SEARCH_FIELDS
   {
     $props = $renderer->make_list_properties ();
     $props->add_item ('[Default]', '');
+    $props->width = '10em';
     foreach ($sort_values as $key => $value)
     {
       $props->add_item ($value, $key);
     }
-    $renderer->draw_drop_down_row ($this->sort_name (), $props);
 
+    $renderer->start_row('Sort by');
+
+    echo $renderer->drop_down_as_html ($this->sort_name (), $props);
     $props = $renderer->make_list_properties ();
     $props->items_per_row = 2;
     $props->add_item ($this->context->resolve_icon_as_html ('{icons}indicators/sort_ascending', 'Asc', Sixteen_px), 'asc');
     $props->add_item ($this->context->resolve_icon_as_html ('{icons}indicators/sort_descending', 'Desc', Sixteen_px), 'desc');
-    $renderer->draw_radio_group_row ($this->direction_name (), $props);
+
+    // TODO This part also needs to be able to render a control group without a surrounding form-row
+
+    echo $renderer->radio_group_as_html ($this->direction_name (), $props);
+
+    $renderer->finish_row();
   }
 
   /**
@@ -1227,11 +1235,8 @@ class SEARCH_OBJECT_FIELDS extends WEBCORE_OBJECT
 
     foreach ($this->_sorts as $sort)
     {
-      $renderer->start_column ();
       $sort->draw_fields ($form, $renderer, $sort_values);
     }
-
-    $renderer->finish_column ();
   }
 
   /**
@@ -1647,10 +1652,11 @@ class SEARCH_OBJECT_IN_FOLDER_FIELDS extends SEARCH_CONTENT_OBJECT_FIELDS
     $old_width = $renderer->default_control_width;
     $renderer->default_control_width = '10em';
 
-    $renderer->start_row ('State');
-      echo $renderer->check_box_as_html ('not_state');
-      echo ' ';
+    // TODO Make this emit a checkbox that is NOT wrapped in a form-row
 
+    echo $renderer->check_box_as_html ('not_state');
+
+    $renderer->start_row ('State');
       $props = $renderer->make_list_properties ();
       $props->add_item ('[all]', 0);
       $states = $this->_states ();

@@ -924,7 +924,7 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
    * 
    * @var string
    */
-  public $main_CSS_class = '';
+  public $main_css_class = '';
 
   /**
    * True if the main tag is a block element.
@@ -1207,9 +1207,9 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
   {
     $builder = $munger->make_tag_builder ($this->main_tag);
     
-    if (! empty ($this->main_CSS_class))
+    if (! empty ($this->main_css_class))
     {
-    	$css_class = $this->main_CSS_class . ' ' . $inner_class;
+    	$css_class = $this->main_css_class . ' ' . $inner_class;
     }
     else
     {
@@ -2288,7 +2288,7 @@ class HTML_TEXT_MUNGER extends HTML_BASE_MUNGER
     $no_quote_transformer = new HTML_QUOTE_TRANSFORMER ();
     $no_quote_transformer->default_quote_style = Munger_quote_style_none;
     $shell_replacer = new HTML_PREFORMATTED_BLOCK_REPLACER ();
-    $shell_replacer->main_CSS_class = 'shell';
+    $shell_replacer->main_css_class = 'shell';
 
     /** @var THEMED_PAGE $page */
     global $Page;

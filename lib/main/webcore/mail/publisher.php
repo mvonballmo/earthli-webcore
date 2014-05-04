@@ -504,7 +504,7 @@ class PUBLISHER extends LOGGABLE
         $Result = $mail_renderer->as_text ($item->rendering_options ());
       }
 
-      $this->_renderered_bodies [$item->identifier] = $Result;
+      $this->_rendered_bodies [$item->identifier] = $Result;
     }
 
     return $this->_replace_aliases ($item, $Result);

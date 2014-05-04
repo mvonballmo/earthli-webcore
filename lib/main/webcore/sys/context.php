@@ -477,7 +477,7 @@ class CONTEXT extends RESOLVER
     $Result->content_mode = Menu_show_as_buttons | Menu_show_icon | Menu_show_title;
     $Result->trigger_title = 'Newsfeeds';
     $Result->trigger_icon = "{icons}indicators/newsfeed_rss";
-    $Result->trigger_button_CSS_class = 'newsfeed';
+    $Result->trigger_button_css_class = 'newsfeed';
     
     return $Result;
   }

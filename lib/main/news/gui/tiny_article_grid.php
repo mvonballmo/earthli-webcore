@@ -49,14 +49,14 @@ require_once ('webcore/gui/content_object_grid.php');
  */
 class TINY_ARTICLE_GRID extends CONTENT_OBJECT_GRID
 {
-  public $box_CSS_class = '';
+  public $box_css_class = '';
   public $width = '';
   public $show_separator = false;
 
   protected function _draw_box ($obj)
   {
     $t = $obj->title_formatter ();
-    $t->CSS_class = '';
+    $t->css_class = '';
     $fd = $obj->time_published->formatter ();
     $fd->type = Date_time_format_short_date;
 ?>

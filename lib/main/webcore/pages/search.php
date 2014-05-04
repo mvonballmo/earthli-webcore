@@ -106,7 +106,7 @@ http://www.earthli.com/software/webcore
       <?php
         $grid = $search->grid ();
         $grid->show_folder = true;
-        $grid->items_are_selectable = true;
+        $grid->items_are_selectable = false;
         $grid->selector_name = "{$type_info->id}_ids";
         $grid->set_ranges (10, 1);
         $grid->set_query ($search_query);

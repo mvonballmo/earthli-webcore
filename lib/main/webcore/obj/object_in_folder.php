@@ -159,11 +159,11 @@ abstract class OBJECT_IN_FOLDER extends CONTENT_OBJECT
     $Result = parent::title_formatter ();
     if ($this->invisible ())
     {
-      $Result->CSS_class = 'invisible';
+      $Result->css_class = 'invisible';
     }
     else
     {
-      $Result->CSS_class = 'visible';
+      $Result->css_class = 'visible';
     }
     return $Result;
   }

@@ -119,9 +119,9 @@ class BOX_RENDERER extends WEBCORE_OBJECT
   /**
    * Open a column after calling {@link start_column_set()}.
    * Closes a previously opened column automatically.
-   * @param string $CSS_class Use this style for the column.
+   * @param string $css_class Use this style for the column.
    */
-  public function new_column_of_type ($CSS_class = '')
+  public function new_column_of_type ($css_class = '')
   {
     if ($this->_column_started)
     {
@@ -129,9 +129,9 @@ class BOX_RENDERER extends WEBCORE_OBJECT
     }
 
     $class = 'column-set-column';
-    if ($CSS_class)
+    if ($css_class)
     {
-      $class .= ' ' . $CSS_class;
+      $class .= ' ' . $css_class;
     }
 
     echo '  <div class="' . $class . '">' . "\n";

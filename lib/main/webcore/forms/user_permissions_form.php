@@ -236,7 +236,7 @@ function update_controls ()
 
   protected function _draw_controls($renderer)
   {
-    $renderer->labels_CSS_class = 'top';
+    $renderer->labels_css_class = 'top';
 
     parent::_draw_controls($renderer);
   }

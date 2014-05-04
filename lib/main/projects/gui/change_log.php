@@ -219,8 +219,8 @@ class CHANGE_LOG extends WEBCORE_OBJECT
     }
     
     $component = $this->_components [$entry->component_id];
-    
-    return $component->icon_as_html (Twenty_px) . ' ' . $component->title_as_link ();
+
+    return $this->context->get_text_with_icon($component->icon_url, $component->title_as_link (), Thirty_two_px);
   }
 
   /**
@@ -245,7 +245,7 @@ class CHANGE_LOG extends WEBCORE_OBJECT
     if ($this->show_user && isset ($user))
     {
       $uf = $user->title_formatter ();
-      $uf->CSS_class = '';
+      $uf->css_class = '';
       $details [] = $user->title_as_link ($uf);
     }
     

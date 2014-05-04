@@ -319,12 +319,12 @@ class OBJECT_NAVIGATOR extends WEBCORE_OBJECT
 
     if ($id == $this->_selected)
     {
-      $t->CSS_class = 'selected';
+      $t->css_class = 'selected';
       $Result = $obj->title_as_html ($t);
     }
     else
     {
-      $t->CSS_class = '';
+      $t->css_class = '';
       $Result = $obj->title_as_link ($t);
     }
     return $Result;

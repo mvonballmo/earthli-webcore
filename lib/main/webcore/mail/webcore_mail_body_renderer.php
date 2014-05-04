@@ -156,7 +156,7 @@ class MAIL_TOC_ENTRY_RENDERER extends RENDERER
   {
     $obj = $pair->obj;
     $t = $obj->title_formatter ();
-    $t->CSS_class = '';
+    $t->css_class = '';
     $t->location = '#' . $this->location_for_obj ($obj);
     if (is_a ($pair->obj, 'HISTORY_ITEM'))
     {
@@ -404,7 +404,7 @@ class MAIL_TOC_GROUP_RENDERER extends RENDERER
     {
       $fldr = $this->folder;
       $t = $fldr->title_formatter ();
-      $t->CSS_class = '';
+      $t->css_class = '';
       $t->location = '#fldr_' .  $fldr->id;
       $Result = '<dt class="field">' . $this->subject->as_text () . ' in ' . $fldr->title_as_link ($t) . "</dt>\n";
       $Result .= "<dd>\n";

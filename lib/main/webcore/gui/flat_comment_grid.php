@@ -51,7 +51,7 @@ class FLAT_COMMENT_GRID extends PRINTABLE_COMMENT_GRID
   /**
    * @var string
    */
-  public $box_CSS_class = '';
+  public $box_css_class = '';
 
   /**
    * Used when printing to shut off pagination
@@ -82,43 +82,40 @@ class FLAT_COMMENT_GRID extends PRINTABLE_COMMENT_GRID
       <?php
       $this->_display_start_minimal_commands_block($obj);
       ?>
-        <div class="comment-title" style="background-image: url('<?php echo $obj->icon_url (); ?>')">
-          <?php echo $obj->title_as_link (); ?>
-        </div>
-        <?php
+      <h3><?php echo $obj->title_as_link (); ?></h3>
+      <?php
+        $props = $obj->icon_properties ();
+        $this->context->start_icon_container($props->icon, Fifteen_px);
         if ($this->show_user_info)
         {
           if ($creator->icon_url)
           {
-            ?>
-            <div class="left-icon detail" style="background-image: url(<?php echo $creator->expanded_icon_url (Sixteen_px); ?>)">
-              by <?php echo $creator->title_as_link (); ?> - <?php echo $obj->time_created->format (); ?>
-            </div>
-          <?php
+            $this->context->start_icon_container($creator->icon_url, Sixteen_px);
           }
-          else
-          {
-            ?>
-            <div class="left-icon detail">
-              by <?php echo $creator->title_as_link (); ?> - <?php echo $obj->time_created->format (); ?>
-            </div>
-          <?php
-          }
-        }
-        ?>
-        <div class="text-flow">
-          <?php
-          echo $obj->description_as_html ();
+      ?>
+      <div class="info-box-top">
+      <?php
+          echo $creator->title_as_link () . ' &ndash; ' . $obj->time_created->format ();
 
-          if ($obj->modified () && $this->show_user_info)
+          if ($obj->modified ())
           {
             $modifier = $obj->modifier ();
             ?>
-            <p class="detail" style="text-align: right">Updated by <?php echo $modifier->title_as_link (); ?> - <?php echo $obj->time_modified->format (); ?></p>
+            (updated by <?php echo $modifier->title_as_link (); ?> &ndash; <?php echo $obj->time_modified->format (); ?>)
           <?php
           }
-          ?>
-        </div>
+        ?>
+      </div>
+      <?php
+          if ($creator->icon_url)
+          {
+            $this->context->finish_icon_container();
+          }
+        }
+      ?>
+      <div class="text-flow">
+        <?php echo $obj->description_as_html (); ?>
+      </div>
         <?php
         $attachment_query = $obj->attachment_query ();
 
@@ -136,7 +133,7 @@ class FLAT_COMMENT_GRID extends PRINTABLE_COMMENT_GRID
       <?php
       $this->_display_finish_minimal_commands_block();
       ?>
-      </div>
+    </div>
 <?php
   }
 

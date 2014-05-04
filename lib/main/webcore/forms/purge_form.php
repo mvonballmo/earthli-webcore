@@ -148,7 +148,7 @@ class PURGE_OBJECT_FORM extends RENDERABLE_FORM
    */
   protected function _draw_controls ($renderer)
   {
-    $renderer->labels_CSS_class = 'top';
+    $renderer->labels_css_class = 'top';
     $renderer->start ();
 
     if ($this->show_object_as_link)

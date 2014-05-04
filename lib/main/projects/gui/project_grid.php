@@ -61,7 +61,7 @@ class PROJECT_GRID extends FOLDER_GRID
   /**
    * @var string
    */
-  public $box_CSS_class = '';
+  public $box_css_class = '';
 
   /**
    * @param PROJECT $obj

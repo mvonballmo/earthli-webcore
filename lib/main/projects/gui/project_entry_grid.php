@@ -52,7 +52,7 @@ class PROJECT_ENTRY_GRID extends CONTENT_OBJECT_GRID
   /**
    * @var string
    */
-  public $box_CSS_class = 'object-in-list';
+  public $box_css_class = 'object-in-list';
 
   /**
    * @var boolean
@@ -128,7 +128,7 @@ class PROJECT_ENTRY_GRID extends CONTENT_OBJECT_GRID
       <div style="float: left">
       <?php
           $layer = $this->context->make_layer ("id_{$obj->id}_details");
-          $layer->CSS_class = 'description';
+          $layer->css_class = 'description';
           $layer->margin_left = '24px';
           $layer->draw_toggle ();
       ?>

@@ -56,7 +56,7 @@ class SECTION_GRID extends FOLDER_GRID
   /**
    * @var string
    */
-  public $box_CSS_class = 'object-in-list';
+  public $box_css_class = 'object-in-list';
 
   /**
    * @var boolean
