@@ -205,7 +205,7 @@ abstract class GRID extends WEBCORE_OBJECT
 
   /**
    * Get the list of objects for the requested page.
-   * @return object[]
+   * @return stdClass[]
    * @access private
    */
   protected function _get_objects ()

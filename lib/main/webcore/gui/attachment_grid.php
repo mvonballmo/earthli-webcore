@@ -48,8 +48,13 @@ require_once ('webcore/gui/grid.php');
  */
 class ATTACHMENT_GRID extends STANDARD_GRID
 {
-  function __construct()
+  /**
+   * @param CONTEXT $context Context to which this grid belongs.
+   */
+  public function __construct ($context)
   {
+    parent::__construct ($context);
+
     $this->width = '';
     $this->even_columns = true;
   }
