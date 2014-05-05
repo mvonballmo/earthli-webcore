@@ -119,7 +119,7 @@ abstract class PERMISSIONS_FORM extends FORM
   {
     $id = $map->id ();
     $field = $this->field_at ($id);
-    $field->caption = $formatter->icon_for ($map) . ' ' . $formatter->title_for ($map);
+    $field->caption = $this->context->get_text_with_icon($formatter->icon_url_for ($map), $formatter->title_for ($map), Sixteen_px);
     echo $renderer->check_box_as_HTML ($id);
   }
 }

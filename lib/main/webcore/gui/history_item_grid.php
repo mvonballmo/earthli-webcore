@@ -49,28 +49,13 @@ require_once ('webcore/gui/grid.php');
 class HISTORY_ITEM_GRID extends STANDARD_GRID
 {
   /**
-   * @var string
-   */
-  public $box_css_class = 'object-in-list';
-
-  /**
-   * @var string
-   */
-  public $object_name = 'history item';
-
-  /**
-   * @var bool
-   */
-  public $show_separator = false;
-
-  /**
    * Render the grid itself.
-   * @param object[] $objs
+   * @param object[] $objects
    * @access private
    */
-  protected function _draw ($objs)
+  protected function _draw ($objects)
   {
-    foreach ($objs as $obj)
+    foreach ($objects as $obj)
     {
       if (isset ($this->_last_time))
       {
@@ -80,7 +65,7 @@ class HISTORY_ITEM_GRID extends STANDARD_GRID
       $this->_last_time = $obj->time_created;
     }
 
-    parent::_draw ($objs);
+    parent::_draw ($objects);
   }
 
   /**

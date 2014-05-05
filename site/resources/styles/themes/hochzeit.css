@@ -173,7 +173,6 @@ h4 code {
 .vertical-separator,
 .left-sidebar,
 .right-sidebar,
-.object-in-list,
 .info-box-top,
 .info-box-bottom,
 .cell-selected,
@@ -242,6 +241,7 @@ pre > code,
 }
 .graph-foreground {
   background-color: #554433;
+  color: #fdf8e5;
   background-image: url('hochzeit/fossil_paper.jpg');
   background-repeat: repeat;
 }

@@ -51,16 +51,6 @@ class ICON_GRID extends STANDARD_GRID
   /**
    * @var string
    */
-  public $box_css_class = '';
-
-  /**
-   * @var string
-   */
-  public $object_name = 'Icon';
-
-  /**
-   * @var string
-   */
   public $width = '';
 
   /**

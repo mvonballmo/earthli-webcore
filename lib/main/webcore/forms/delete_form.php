@@ -120,12 +120,12 @@ class DELETE_OBJECT_FORM extends PURGE_OBJECT_FORM
   public $show_previews_first = false;
 
   /**
-   * @param APPLICATION $app Main application.
+   * @param APPLICATION $context Main application.
    * @param string $set_name
    */
-  public function __construct ($app, $set_name)
+  public function __construct ($context, $set_name)
   {
-    parent::__construct ($app);
+    parent::__construct ($context);
 
     $this->_privilege_set = $set_name;
 

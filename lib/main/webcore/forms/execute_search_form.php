@@ -91,12 +91,12 @@ class EXECUTE_SEARCH_FORM extends ID_BASED_FORM
    * If the search is <c>null</c>, the form will be shown in "quick search"
    * mode. This shows only the text search and a drop-down to select the type
    * of object to search.
-   * @param APPLICATION $app Main application.
+   * @param APPLICATION $context Main application.
    * @param SEARCH $search Build the form based on this search object.
    */
-  public function __construct ($app, $search)
+  public function __construct ($context, $search)
   {
-    parent::__construct ($app);
+    parent::__construct ($context);
 
     $this->_search = $search;
     

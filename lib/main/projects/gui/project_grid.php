@@ -49,21 +49,6 @@ require_once ('webcore/gui/folder_grid.php');
 class PROJECT_GRID extends FOLDER_GRID
 {
   /**
-   * @var boolean
-   */
-  public $show_separator = false;
-
-  /**
-   * @var string
-   */
-  public $object_name = 'Project';
-
-  /**
-   * @var string
-   */
-  public $box_css_class = '';
-
-  /**
    * @param PROJECT $obj
    * @access private
    */

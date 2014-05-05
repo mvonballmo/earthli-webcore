@@ -55,11 +55,11 @@ class PICTURE_SEARCH extends MULTI_ENTRY_SEARCH
   public $type = 'picture';
 
   /**
-   * @param APPLICATION $app Main application.
+   * @param APPLICATION $context Main application.
    */
-  public function __construct ($app)
+  public function __construct ($context)
   {
-    parent::__construct ($app, new SEARCH_PICTURE_FIELDS ($app));
+    parent::__construct ($context, new SEARCH_PICTURE_FIELDS ($context));
   }
 }
 
@@ -78,11 +78,11 @@ class JOURNAL_SEARCH extends MULTI_ENTRY_SEARCH
   public $type = 'journal';
 
   /**
-   * @param APPLICATION $app Main application.
+   * @param APPLICATION $context Main application.
    */
-  public function __construct ($app)
+  public function __construct ($context)
   {
-    parent::__construct ($app, new SEARCH_JOURNAL_FIELDS ($app));
+    parent::__construct ($context, new SEARCH_JOURNAL_FIELDS ($context));
   }
 }
 

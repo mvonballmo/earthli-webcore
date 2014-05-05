@@ -50,21 +50,6 @@ require_once ('webcore/gui/object_in_folder_grid.php');
 class COMMENT_GRID extends SELECTABLE_GRID
 {
   /**
-   * @var string
-   */
-  public $object_name = 'Comment';
-
-  /**
-   * @var boolean
-   */
-  public $show_separator = true;
-
-  /**
-   * @var string
-   */
-  public $box_css_class = 'object-in-list';
-
-  /**
    * @var boolean
    */
   public $show_user = true;
@@ -134,6 +119,7 @@ class COMMENT_GRID extends SELECTABLE_GRID
         }
       ?>
         <div class="info-box-top">
+          <p>
           <?php echo $creator->title_as_link (); ?> &ndash; <?php echo $obj->time_created->format ();
 
           if ($obj->modified ())
@@ -144,6 +130,7 @@ class COMMENT_GRID extends SELECTABLE_GRID
           <?php
           }
           ?>
+          </p>
         </div>
       <?php
         if ($creator->icon_url)

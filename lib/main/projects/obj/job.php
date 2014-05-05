@@ -73,14 +73,14 @@ class JOB extends PROJECT_ENTRY
   public $reporter_id;
 
   /**
-   * @param PROJECT_APPLICATION $app Main application.
+   * @param PROJECT_APPLICATION $context Main application.
    */
-  public function __construct ($app)
+  public function __construct ($context)
   {
-    parent::__construct ($app);
+    parent::__construct ($context);
 
-    $this->time_needed = $app->make_date_time ();
-    $this->time_assignee_changed = $app->make_date_time ();
+    $this->time_needed = $context->make_date_time ();
+    $this->time_assignee_changed = $context->make_date_time ();
   }
 
   /**

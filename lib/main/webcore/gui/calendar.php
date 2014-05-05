@@ -74,14 +74,14 @@ abstract class CALENDAR extends WEBCORE_OBJECT
   public $num_years;
 
   /**
-   * @param APPLICATION $app Main application.
+   * @param APPLICATION $context Main application.
    */
-  public function __construct ($app)
+  public function __construct ($context)
   {
-    parent::__construct ($app);
+    parent::__construct ($context);
 
     include_once ('webcore/gui/page_navigator.php');
-    $this->pager = new PAGE_NAVIGATOR ($app);
+    $this->pager = new PAGE_NAVIGATOR ($context);
     $this->pager->pages_to_show = 5;
   }
 

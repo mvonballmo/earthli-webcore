@@ -49,21 +49,6 @@ require_once ('albums/gui/album_entry_grid.php');
 class JOURNAL_GRID extends ALBUM_ENTRY_GRID
 {
   /**
-   * @var string
-   */
-  public $object_name = 'Journal';
-
-  /**
-   * @var string
-   */
-  public $box_css_class = 'object-in-list';
-
-  /**
-   * @var boolean
-   */
-  public $show_separator = true;
-
-  /**
    * @var boolean
    */
   public $show_user = true;
@@ -79,6 +64,7 @@ class JOURNAL_GRID extends ALBUM_ENTRY_GRID
    */
   protected function _draw_box ($obj)
   {
+    /** @var ALBUM $folder */
     $folder = $obj->parent_folder ();
     $creator = $obj->creator ();
 ?>
@@ -133,11 +119,6 @@ class JOURNAL_GRID extends ALBUM_ENTRY_GRID
 class JOURNAL_SUMMARY_GRID extends ENTRY_SUMMARY_GRID
 {
   /**
-   * @var string
-   */
-  public $object_name = 'Journal';
-
-  /**
    * Show search details for an object.
    * @param JOURNAL $obj
    * @access private
@@ -159,7 +140,7 @@ class JOURNAL_SUMMARY_GRID extends ENTRY_SUMMARY_GRID
 
   /**
    * Return the block of text to summarize.
-   * @param OBJECT_IN_FOLDER $obj
+   * @param JOURNAL $obj
    * @return string
    * @access private
    */

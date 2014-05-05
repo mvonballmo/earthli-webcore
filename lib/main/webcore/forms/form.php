@@ -1593,11 +1593,11 @@ abstract class FORM extends WEBCORE_OBJECT
 abstract class ID_BASED_FORM extends FORM
 {
   /**
-   * @param APPLICATION $app Main application.
+   * @param APPLICATION $context Main application.
    */
-  public function __construct ($app)
+  public function __construct ($context)
   {
-    parent::__construct ($app);
+    parent::__construct ($context);
 
     $field = new INTEGER_FIELD ();
     $field->id = 'id';

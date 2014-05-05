@@ -49,24 +49,9 @@ require_once ('albums/gui/album_entry_grid.php');
 class PICTURE_GRID extends ALBUM_ENTRY_GRID
 {
   /**
-   * @var string
-   */
-  public $box_css_class = '';
-
-  /**
-   * @var string
-   */
-  public $object_name = 'Picture';
-
-  /**
    * @var integer
    */
   public $description_length = 100;
-
-  /**
-   * @var boolean
-   */
-  public $show_separator = true;
 
   /**
    * @var boolean
@@ -153,11 +138,6 @@ class PICTURE_GRID extends ALBUM_ENTRY_GRID
  */
 class PICTURE_SUMMARY_GRID extends ENTRY_SUMMARY_GRID
 {
-  /**
-   * @var string
-   */
-  public $object_name = 'Picture';
-
   /**
    * @var integer
    */

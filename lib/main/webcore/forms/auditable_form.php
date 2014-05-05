@@ -50,11 +50,11 @@ require_once ('webcore/forms/renderable_form.php');
 abstract class AUDITABLE_FORM extends RENDERABLE_FORM
 {
   /**
-   * @param APPLICATION $app Main application.
+   * @param APPLICATION $context Main application.
    */
-  public function __construct ($app)
+  public function __construct ($context)
   {
-    parent::__construct ($app);
+    parent::__construct ($context);
 
     $field = new ENUMERATED_FIELD ();
     $field->id = 'publication_state';

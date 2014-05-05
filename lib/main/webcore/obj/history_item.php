@@ -126,12 +126,12 @@ class HISTORY_ITEM extends UNIQUE_OBJECT
   public $system_description = '';
 
   /**
-   * @param APPLICATION $app Application for this history item
+   * @param APPLICATION $context Application for this history item
    */
-  public function __construct ($app)
+  public function __construct ($context)
   {
-    parent::__construct ($app);
-    $this->time_created = $app->make_date_time ();
+    parent::__construct ($context);
+    $this->time_created = $context->make_date_time ();
   }
 
   /**

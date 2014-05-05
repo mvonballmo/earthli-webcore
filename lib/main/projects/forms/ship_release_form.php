@@ -55,11 +55,11 @@ class SHIP_RELEASE_FORM extends AUDITABLE_FORM
   public $button = 'Yes';
 
   /**
-   * @param APPLICATION $app
+   * @param APPLICATION $context
    */
-  public function __construct ($app)
+  public function __construct ($context)
   {
-    parent::__construct ($app);
+    parent::__construct ($context);
 
     $this->show_previews_first = false;
 

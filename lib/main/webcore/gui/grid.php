@@ -58,12 +58,6 @@ abstract class GRID extends WEBCORE_OBJECT
   public $width = '100%';
 
   /**
-   * Center the grid in its parent?
-   * @var boolean
-   */
-  public $centered = false;
-
-  /**
    * Displays page navigation for the grid, if necessary.
    * @var PAGE_NAVIGATOR
    */
@@ -83,12 +77,6 @@ abstract class GRID extends WEBCORE_OBJECT
   public $box_css_class = '';
 
   /**
-   * Put a separator between rows in the grid?
-   * @var boolean
-   */
-  public $show_separator = true;
-
-  /**
    * Use CSS-style page-breaks for printing?
    * @var boolean
    */
@@ -106,12 +94,6 @@ abstract class GRID extends WEBCORE_OBJECT
    * @var integer
    */
   public $border_size = 0;
-
-  /**
-   * Name of the type of objects shown.
-   * @var string
-   */
-  public $object_name = 'object';
 
   /**
    * Override maximum title size to be this length.
@@ -135,13 +117,13 @@ abstract class GRID extends WEBCORE_OBJECT
   public $show_menus = true;
 
   /**
-   * @param APPLICATION $app Main application.
+   * @param CONTEXT $context Context to which this grid belongs.
    */
-  public function __construct ($app)
+  public function __construct ($context)
   {
-    parent::__construct ($app);
+    parent::__construct ($context);
     include_once ('webcore/gui/page_navigator.php');
-    $this->pager = new PAGE_NAVIGATOR ($app);
+    $this->pager = new PAGE_NAVIGATOR ($context);
   }
 
   /**
@@ -240,10 +222,10 @@ abstract class GRID extends WEBCORE_OBJECT
    * and {@link _draw_header()}. After calling {@link _draw_cells()} to draw the content, it
    * finishes with {@link _draw_footer()} and {@link _finish_grid()} before drawing the
    * pager again with {@link _draw_pager()}.
-   * @param object[] $objs
+   * @param stdClass[] $objects
    * @access private
    */
-  protected function _draw ($objs)
+  protected function _draw ($objects)
   {
     if ($this->show_pager)
     {
@@ -257,12 +239,12 @@ abstract class GRID extends WEBCORE_OBJECT
     {
       $old_size = $this->context->display_options->overridden_max_title_size;
       $this->context->display_options->overridden_max_title_size = $this->overridden_max_title_size;
-      $this->_draw_cells ($objs);
+      $this->_draw_cells ($objects);
       $this->context->display_options->overridden_max_title_size = $old_size;
     }
     else
     {
-      $this->_draw_cells ($objs);
+      $this->_draw_cells ($objects);
     }
 
     $this->_draw_footer ();
@@ -305,16 +287,15 @@ abstract class GRID extends WEBCORE_OBJECT
    *
    * Most descendants will only override the {@link _draw_box()} method to draw the
    * object details.
-   * @param object[] $objs
+   * @param stdClass[] $objects
    * @access private
    */
-  protected function _draw_cells ($objs)
+  protected function _draw_cells ($objects)
   {
     $index = 0;
     $remainder = 0;
-    $count = sizeof ($objs);
-    
-    foreach ($objs as &$obj)
+
+    foreach ($objects as &$obj)
     {
       $remainder = $index % $this->_num_columns;
 
@@ -335,10 +316,6 @@ abstract class GRID extends WEBCORE_OBJECT
       if ($remainder == $this->_num_columns - 1)
       {
         $this->_finish_row ($obj);
-        if (($index < $count - 1) && $this->show_separator)
-        {
-          $this->_draw_separator ();
-        }
       }
       
       $index += 1;
@@ -449,19 +426,12 @@ abstract class GRID extends WEBCORE_OBJECT
   }
 
   /**
-   * Render a separator between rows.
-   * Only used if {@link $show_separator} is True.
-   * @access private
-   */
-  protected function _draw_separator () {}
-
-  /**
    * Called if there are no objects in the query.
    * @access private
    */
   protected function _draw_empty_grid ()
   {
-    $this->context->show_message('There are no ' . $this->object_name . 's to display.', 'info');
+    $this->context->show_message('This list is empty.', 'info');
   }
 
   /**
@@ -534,10 +504,6 @@ abstract class GRID extends WEBCORE_OBJECT
     if ($this->width)
     {
       $styles [] = "width: $this->width";
-    }
-    if ($this->centered)
-    {
-      $styles [] = 'margin: auto';
     }
     if ($this->show_page_breaks)
     {
@@ -642,7 +608,7 @@ abstract class HTML_TABLE_GRID extends GRID
   {
     $style = $this->_style_for_grid ();
 ?>
-<table class="<?php echo $this->table_style; ?>" <?php if ($style) echo " style=\"$style\""; if ($this->border_size) echo " border=\"$this->border_size\""; ?>>
+<table class="grid <?php echo $this->table_style; ?>" <?php if ($style) echo " style=\"$style\""; if ($this->border_size) echo " border=\"$this->border_size\""; ?>>
 <?php
   }
 
@@ -696,17 +662,6 @@ abstract class HTML_TABLE_GRID extends GRID
   }
 
   /**
-   * Render a separator between rows.
-   * @access private
-   */
-  protected function _draw_separator ()
-  {
-?>
-  <tr><td>&nbsp;</td></tr>
-<?php
-  }
-
-  /**
    * Renders a page break if the grid is printable.
    * Called only if {@link $show_page_breaks} is true. Called whenever
    * {@link $rows_per_printed_page} have been rendered.
@@ -728,6 +683,11 @@ abstract class HTML_TABLE_GRID extends GRID
 ?>
 </table>
 <?php
+  }
+
+  protected function _new_column ()
+  {
+    echo "</td>\n<td>";
   }
 }
 
@@ -859,7 +819,7 @@ abstract class CSS_FLOW_GRID extends GRID
 
 /**
  * Placeholder class for extending classes.
- * Descendents that inherit from this class will automatically be updated to a new
+ * Descendants that inherit from this class will automatically be updated to a new
  * implementation if the ancestor here is changed. Prevents all descendent classes
  * from specifying that they explicitly use an HTML table for rendering.
  * @see CSS_FLOW_GRID
@@ -870,6 +830,8 @@ abstract class CSS_FLOW_GRID extends GRID
  * @since 2.6.0
  * @abstract
  */
-abstract class STANDARD_GRID extends HTML_TABLE_GRID {}
+abstract class STANDARD_GRID extends HTML_TABLE_GRID
+{
+}
 
 ?>

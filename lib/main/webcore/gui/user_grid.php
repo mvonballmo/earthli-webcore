@@ -49,21 +49,6 @@ require_once ('webcore/gui/content_object_grid.php');
 class USER_GRID extends CONTENT_OBJECT_GRID
 {
   /**
-   * @var string
-   */
-  public $box_css_class = 'object-in-list';
-
-  /**
-   * @var string
-   */
-  public $object_name = 'User';
-
-  /**
-   * @var boolean
-   */
-  public $show_separator = false;
-
-  /**
    * @var boolean
    */
   public $even_columns = false;

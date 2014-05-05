@@ -49,11 +49,11 @@ require_once ('webcore/forms/search_fields.php');
 class SEARCH_PROJECT_ENTRY_FIELDS extends SEARCH_ENTRY_FIELDS
 {
   /**
-   * @param APPLICATION $app Main application.
+   * @param APPLICATION $context Main application.
    */
-  public function __construct ($app)
+  public function __construct ($context)
   {
-    parent::__construct ($app);
+    parent::__construct ($context);
 
     $this->_add_text ('extra_description', 'Extra description');
 
@@ -243,11 +243,11 @@ class SEARCH_JOB_FIELDS extends SEARCH_PROJECT_ENTRY_FIELDS
 class SEARCH_CHANGE_FIELDS extends SEARCH_PROJECT_ENTRY_FIELDS
 {
   /**
-   * @param APPLICATION $app Main application.
+   * @param APPLICATION $context Main application.
    */
-  public function __construct ($app)
+  public function __construct ($context)
   {
-    parent::__construct ($app);
+    parent::__construct ($context);
 
     $this->_add_text ('files', 'Files', false, false, 'chng');
   }

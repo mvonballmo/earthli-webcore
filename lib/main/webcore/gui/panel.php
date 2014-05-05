@@ -109,19 +109,19 @@ class PANEL_MANAGER extends WEBCORE_OBJECT
   public $options;
 
   /**
-   * @param APPLICATION $app Main application.
+   * @param APPLICATION $context Main application.
    * @param boolean $show_time_menu Show a TIME_FRAME_SELECTOR with the panels?
    */
-  public function __construct ($app, $show_time_menu = true)
+  public function __construct ($context, $show_time_menu = true)
   {
-    parent::__construct ($app);
+    parent::__construct ($context);
 
     if ($show_time_menu)
     {
-      $this->time_menu = new TIME_FRAME_SELECTOR ($app);
+      $this->time_menu = new TIME_FRAME_SELECTOR ($context);
     }
     
-    $this->page_link = $app->env->url (Url_part_no_host_path);
+    $this->page_link = $context->env->url (Url_part_no_host_path);
     $this->options = $this->_make_options ();
     $this->_init_options ($this->options);
 
@@ -880,14 +880,14 @@ class WEBCORE_PANEL_MANAGER extends PANEL_MANAGER
 class INDEX_PANEL_MANAGER extends WEBCORE_PANEL_MANAGER
 {
   /**
-   * @param APPLICATION $app Main application.
+   * @param APPLICATION $context Main application.
    * @param FOLDER[] $folders Show panels for these folders.
    * @see FOLDER
    */
-  public function __construct ($app, $folders)
+  public function __construct ($context, $folders)
   {
     $this->_folders = $folders;
-    parent::__construct ($app);
+    parent::__construct ($context);
   }
 
   /**
@@ -1233,14 +1233,16 @@ abstract class QUERY_PANEL extends GRID_PANEL
 class HISTORY_ITEM_PANEL extends QUERY_PANEL
 {
   /**
-   * @var string
+   * @param PANEL_MANAGER $manager Owner of this panel.
+   * @param QUERY $query Show objects from this query.
    */
-  public $id = 'history';
-  
-  /**
-   * @var string
-   */
-  public $title = 'History';
+  public function __construct ($manager, $query)
+  {
+    parent::__construct($manager, $query);
+
+    $this->id = 'history';
+    $this->title = 'History';
+  }
 
   /**
    * @return HISTORY_ITEM_GRID
@@ -1263,25 +1265,22 @@ class HISTORY_ITEM_PANEL extends QUERY_PANEL
 class COMMENT_PANEL extends QUERY_PANEL
 {
   /**
-   * @var string
-   */
-  public $id = 'comments';
-  
-  /**
-   * @var string
-   */
-  public $title = 'Comments';
-  
-  /**
    * @var boolean
    */
   public $show_folder = true;
 
   /**
-   * Number of columns to use in the grid.
-   * @var integer
+   * @param PANEL_MANAGER $manager Owner of this panel.
+   * @param QUERY $query Show objects from this query.
    */
-  public $columns = 2;
+  public function __construct ($manager, $query)
+  {
+    parent::__construct($manager, $query);
+
+    $this->columns = 2;
+    $this->id = 'comments';
+    $this->title = 'Comments';
+  }
 
   /**
    * @return COMMENT_GRID
@@ -1304,21 +1303,6 @@ class COMMENT_PANEL extends QUERY_PANEL
 class GROUP_PANEL extends QUERY_PANEL
 {
   /**
-   * @var string
-   */
-  public $id = 'groups';
-  
-  /**
-   * @var string
-   */
-  public $title = 'Groups';
-  
-  /**
-   * @var boolean
-   */
-  public $uses_time_selector = false;
-
-  /**
    * @param PANEL_MANAGER $manager Owner of this panel.
    * @param QUERY $query Show objects from this query.
    */
@@ -1326,6 +1310,9 @@ class GROUP_PANEL extends QUERY_PANEL
   {
     parent::__construct ($manager, $query);
     $this->visible = $this->app->login->is_allowed (Privilege_set_group, Privilege_view);
+    $this->uses_time_selector = false;
+    $this->title = 'Groups';
+    $this->id = 'groups';
   }
 
   /**
@@ -1359,27 +1346,6 @@ class GROUP_PANEL extends QUERY_PANEL
 class USER_PANEL extends QUERY_PANEL
 {
   /**
-   * @var string
-   */
-  public $id = 'users';
-  
-  /**
-   * @var string
-   */
-  public $title = 'Users';
-
-  /**
-   * Number of columns to use in the grid.
-   * @var integer
-   */
-  public $columns = 3;
-
-  /**
-   * @var boolean
-   */
-  public $uses_time_selector = false;
-
-  /**
    * @param PANEL_MANAGER $manager Owner of this panel.
    * @param QUERY $query Show objects from this query.
    */
@@ -1387,6 +1353,10 @@ class USER_PANEL extends QUERY_PANEL
   {
     parent::__construct ($manager, $query);
     $this->visible = $this->app->login->is_allowed (Privilege_set_user, Privilege_view);
+    $this->uses_time_selector = false;
+    $this->title = 'Users';
+    $this->id = 'users';
+    $this->columns = 3;
   }
 
   /**
@@ -1420,33 +1390,6 @@ class USER_PANEL extends QUERY_PANEL
 class THEME_PANEL extends QUERY_PANEL
 {
   /**
-   * @var string
-   */
-  public $id = 'themes';
-  
-  /**
-   * @var string
-   */
-  public $title = 'Themes';
-  
-  /**
-   * @var boolean
-   */
-  public $uses_time_selector = false;
-  
-  /**
-   * Number of rows to use in the grid.
-   * @var integer
-   */
-  public $rows = 10;
-  
-  /**
-   * Number of columns to use in the grid.
-   * @var integer
-   */
-  public $columns = 3;
-
-  /**
    * @param PANEL_MANAGER $manager Owner of this panel.
    * @param QUERY $query Show objects from this query.
    */
@@ -1454,6 +1397,11 @@ class THEME_PANEL extends QUERY_PANEL
   {
     parent::__construct ($manager, $query);
     $this->visible = $this->app->login->is_allowed (Privilege_set_global, Privilege_resources);
+    $this->uses_time_selector = false;
+    $this->title = 'Themes';
+    $this->id = 'themes';
+    $this->rows = 10;
+    $this->columns = 3;
   }
 
   /**
@@ -1487,33 +1435,6 @@ class THEME_PANEL extends QUERY_PANEL
 class ICON_PANEL extends QUERY_PANEL
 {
   /**
-   * @var string
-   */
-  public $id = 'icons';
-  
-  /**
-   * @var string
-   */
-  public $title = 'Icons';
-  
-  /**
-   * @var boolean
-   */
-  public $uses_time_selector = false;
-  
-  /**
-   * Number of rows to use in the grid.
-   * @var integer
-   */
-  public $rows = 8;
-  
-  /**
-   * Number of columns to use in the grid.
-   * @var integer
-   */
-  public $columns = 3;
-
-  /**
    * @param PANEL_MANAGER $manager Owner of this panel.
    * @param QUERY $query Show objects from this query.
    */
@@ -1521,6 +1442,11 @@ class ICON_PANEL extends QUERY_PANEL
   {
     parent::__construct ($manager, $query);
     $this->visible = $this->app->login->is_allowed (Privilege_set_global, Privilege_resources);
+    $this->uses_time_selector = false;
+    $this->title = 'Icons';
+    $this->id = 'icons';
+    $this->rows = 8;
+    $this->columns = 3;
   }
 
   /**
@@ -1554,18 +1480,9 @@ class ICON_PANEL extends QUERY_PANEL
 class ENTRY_PANEL extends QUERY_PANEL
 {
   /**
-   * @var string
-   */
-  public $id = 'entries';
-  
-  /**
-   * @var string
-   */
-  public $title = 'Entries';
-
-  /**
    * @param PANEL_MANAGER $manager Owner of this panel.
    * @param QUERY $query Show objects from this query.
+   * @param TYPE_INFO $type_info
    */
   public function __construct ($manager, $query, $type_info = null)
   {
@@ -1606,26 +1523,6 @@ class ENTRY_PANEL extends QUERY_PANEL
 class FOLDER_PANEL extends GRID_PANEL
 {
   /**
-   * @var string
-   */
-  public $id = 'folders';
-  
-  /**
-   * @var string
-   */
-  public $title = 'Folders';
-  
-  /**
-   * @var integer
-   */
-  public $columns = 3;
-  
-  /**
-   * @var integer
-   */
-  public $rows = 5;
-  
-  /**
    * @var FOLDER[]
    * @see FOLDER
    */
@@ -1643,6 +1540,8 @@ class FOLDER_PANEL extends GRID_PANEL
     $type_info = $this->app->type_info_for ('FOLDER', 'webcore/obj/folder.php');
     $this->id = $type_info->id;
     $this->title = $type_info->plural_title;
+    $this->rows = 5;
+    $this->columns = 3;
   }
 
   /**
@@ -1756,16 +1655,6 @@ abstract class FORM_PANEL extends PANEL
 class USER_SUMMARY_PANEL extends PANEL
 {
   /**
-   * @var string
-   */
-  public $id = 'summary';
-  
-  /**
-   * @var string
-   */
-  public $title = 'Summary';
-
-  /**
    * @param USER_PANEL_MANAGER $panel_manager
    * @param USER $user
    */
@@ -1773,6 +1662,8 @@ class USER_SUMMARY_PANEL extends PANEL
   {
     parent::__construct ($panel_manager);
     $this->_user = $user;
+    $this->id = 'summary';
+    $this->title = 'Summary';
   }
 
   /**

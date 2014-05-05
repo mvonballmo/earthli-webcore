@@ -49,16 +49,6 @@ require_once ('webcore/gui/grid.php');
 abstract class PRINTABLE_COMMENT_GRID extends STANDARD_GRID
 {
   /**
-   * @var string
-   */
-  public $object_name = 'comment';
-
-  /**
-   * @var boolean
-   */
-  public $show_separator = false;
-
-  /**
    * @var boolean
    */
   public $show_controls = true;
@@ -75,12 +65,12 @@ abstract class PRINTABLE_COMMENT_GRID extends STANDARD_GRID
   public $show_user_info = true;
 
   /**
-   * @param APPLICATION $app
+   * @param APPLICATION $context
    * @param COMMENT $comment Comments belong to this comment (can be empty).
    */
-  public function __construct ($app, $comment)
+  public function __construct ($context, $comment)
   {
-    parent::__construct ($app);
+    parent::__construct ($context);
     $this->_comment = $comment;
   }
 

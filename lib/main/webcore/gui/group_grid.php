@@ -49,19 +49,14 @@ require_once ('webcore/gui/grid.php');
 class GROUP_GRID extends STANDARD_GRID
 {
   /**
-   * @var string
+   * @param APPLICATION $context Main application.
    */
-  public $object_name = 'group';
+  function __construct($context)
+  {
+    parent::__construct($context);
 
-  /**
-   * @var boolean
-   */
-  public $show_separator = false;
-
-  /**
-   * @var string
-   */
-  public $width = '';
+    $this->width = '';
+  }
 
   /**
    * @param GROUP $obj
@@ -70,10 +65,10 @@ class GROUP_GRID extends STANDARD_GRID
   protected function _draw_box ($obj)
   {
     $this->_draw_menu_for ($obj, Menu_size_minimal);
-    echo "</td>\n<td>";
+    $this->_new_column ();
     echo $obj->title_as_link ();
-    echo "</td>\n<td>";
     $user_query = $obj->user_query ();
+    $this->_new_column ();
     echo $user_query->size ();
   }
 
@@ -91,4 +86,5 @@ class GROUP_GRID extends STANDARD_GRID
 <?php
   }
 }
+
 ?>

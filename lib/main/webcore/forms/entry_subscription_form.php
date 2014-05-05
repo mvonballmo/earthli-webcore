@@ -56,12 +56,12 @@ class ENTRY_SUBSCRIPTION_FORM extends CONTENT_OBJECT_SUBSCRIPTION_FORM
   public $panel_name = 'entries';
 
   /**
-   * @param APPLICATION $app Main application.
+   * @param APPLICATION $context Main application.
    * @param TYPE_INFO $type_info
    */
-  public function __construct ($app, $type_info)
+  public function __construct ($context, $type_info)
   {
-    parent::__construct ($app);
+    parent::__construct ($context);
     $this->_type_info = $type_info;
     $this->_type = $type_info->id;
     $this->panel_name = $type_info->id;

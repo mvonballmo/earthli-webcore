@@ -49,11 +49,6 @@ require_once ('projects/gui/project_entry_grid.php');
 class JOB_GRID extends PROJECT_ENTRY_GRID
 {
   /**
-   * @var string
-   */
-  public $object_name = 'Job';
-
-  /**
    * Draw entry-specific information for the given release.
    * @param JOB $obj
    * @param JOB_BRANCH_INFO $branch_info
@@ -205,10 +200,6 @@ class JOB_GRID extends PROJECT_ENTRY_GRID
  */
 class JOB_SUMMARY_GRID extends PROJECT_ENTRY_SUMMARY_GRID
 {
-  /**
-   * @var string
-   */
-  public $object_name = 'Job';
 }
 
 ?>

@@ -94,20 +94,20 @@ class RELEASE extends OBJECT_IN_FOLDER
   public $summary;
 
   /**
-   * @param PROJECT_APPLICATION $app Main application.
+   * @param PROJECT_APPLICATION $context Main application.
    */
-  public function __construct ($app)
+  public function __construct ($context)
   {
-    parent::__construct ($app);
+    parent::__construct ($context);
 
-    $this->time_scheduled = $app->make_date_time ();
-    $this->time_testing_scheduled = $app->make_date_time ();
-    $this->time_next_deadline = $app->make_date_time ();
+    $this->time_scheduled = $context->make_date_time ();
+    $this->time_testing_scheduled = $context->make_date_time ();
+    $this->time_next_deadline = $context->make_date_time ();
 
-    $this->time_tested = $app->make_date_time ();
+    $this->time_tested = $context->make_date_time ();
     $this->time_tested->clear ();
 
-    $this->time_shipped = $app->make_date_time ();
+    $this->time_shipped = $context->make_date_time ();
     $this->time_shipped->clear ();
   }
 

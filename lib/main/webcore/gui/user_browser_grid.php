@@ -50,32 +50,14 @@ require_once ('webcore/gui/grid.php');
 class USER_BROWSER_GRID extends STANDARD_GRID
 {
   /**
-   * @var string
-   */
-  public $object_name = 'User';
-
-  /**
-   * @var boolean
-   */
-  public $show_separator = false;
-
-  /**
-   * @var boolean
-   */
-  public $even_columns = false;
-
-  /**
-   * @var string
-   */
-  public $width = '';
-
-  /**
    * @param CONTEXT $context
    */
   public function __construct ($context)
   {
     parent::__construct ($context);
     $this->_controls_renderer = $this->app->make_controls_renderer ();
+    $this->width = '';
+    $this->even_columns = false;
   }
 
   /**

@@ -76,11 +76,11 @@ class LOG_IN_FORM extends FORM
   public $allow_focus = true;
 
   /**
-   * @param APPLICATION $app Main application.
+   * @param APPLICATION $context Main application.
    */
-  public function __construct ($app)
+  public function __construct ($context)
   {
-    parent::__construct ($app);
+    parent::__construct ($context);
 
     $field = new TEXT_FIELD ();
     $field->id = 'name';

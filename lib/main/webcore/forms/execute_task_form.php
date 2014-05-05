@@ -70,11 +70,11 @@ class EXECUTE_TASK_FORM extends FORM
   public $button_icon = '{icons}buttons/ship';
 
   /**
-   * @param APPLICATION $app Main application.
+   * @param APPLICATION $context Main application.
    */
-  public function __construct ($app)
+  public function __construct ($context)
   {
-    parent::__construct ($app);
+    parent::__construct ($context);
 
     $field = new TEXT_FIELD ();
     $field->id = 'test_name';

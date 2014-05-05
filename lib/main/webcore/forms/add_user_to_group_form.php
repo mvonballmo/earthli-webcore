@@ -59,11 +59,11 @@ class ADD_USER_TO_GROUP_FORM extends ID_BASED_FORM
   public $button_icon = '{icons}buttons/add';
 
   /**
-   * @param APPLICATION $app Main application.
+   * @param APPLICATION $context Main application.
    */
-  public function __construct ($app)
+  public function __construct ($context)
   {
-    parent::__construct ($app);
+    parent::__construct ($context);
 
     $field = new TITLE_FIELD ();
     $field->id = 'name';

@@ -55,11 +55,11 @@ class CREATE_FOLDER_PERMISSIONS_FORM extends ID_BASED_FORM
   public $button = 'Yes';
 
   /**
-   * @param APPLICATION $app
+   * @param APPLICATION $context
    */
-  public function __construct ($app)
+  public function __construct ($context)
   {
-    parent::__construct ($app);
+    parent::__construct ($context);
 
     $field = new ENUMERATED_FIELD ();
     $field->id = 'copy_mode';

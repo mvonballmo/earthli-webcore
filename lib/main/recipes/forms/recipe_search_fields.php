@@ -49,11 +49,11 @@ require_once ('webcore/forms/search_fields.php');
 class SEARCH_RECIPE_FIELDS extends SEARCH_DRAFTABLE_FIELDS
 {
   /**
-   * @param APPLICATION $app Main application.
+   * @param APPLICATION $context Main application.
    */
-  public function __construct ($app)
+  public function __construct ($context)
   {
-    parent::__construct ($app);
+    parent::__construct ($context);
 
     $this->_add_text ('originator', 'Originator');
     $this->_add_text ('ingredients', 'Ingredients');

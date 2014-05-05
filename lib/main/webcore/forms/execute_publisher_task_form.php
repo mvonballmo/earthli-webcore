@@ -56,11 +56,11 @@ class EXECUTE_PUBLISHER_TASK_FORM extends EXECUTE_TASK_FORM
   public $button_icon = '{icons}indicators/published';
 
   /**
-   * @param APPLICATION $app Main application.
+   * @param APPLICATION $context Main application.
    */
-  public function __construct ($app)
+  public function __construct ($context)
   {
-    parent::__construct ($app);
+    parent::__construct ($context);
 
     $field = new BOOLEAN_FIELD ();
     $field->id = 'preview';

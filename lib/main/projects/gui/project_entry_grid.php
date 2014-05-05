@@ -50,19 +50,9 @@ require_once ('webcore/gui/entry_grid.php');
 class PROJECT_ENTRY_GRID extends CONTENT_OBJECT_GRID
 {
   /**
-   * @var string
-   */
-  public $box_css_class = 'object-in-list';
-
-  /**
    * @var boolean
    */
   public $even_columns = true;
-
-  /**
-   * @var boolean
-   */
-  public $show_separator = true;
 
   /**
    * @var boolean
@@ -113,16 +103,6 @@ class PROJECT_ENTRY_GRID extends CONTENT_OBJECT_GRID
         </h3>
         <?php
           $this->_draw_context_in_project_for ($obj, $branch_info);
-          if ($this->show_release)
-          {
-        ?>
-        <div class="detail" style="margin: .5em 0em">
-        <?php
-            $this->_draw_release_details ($obj, $branch_info);
-        ?>
-        </div>
-        <?php
-          }
         ?>
       </div>
       <div style="float: left">
@@ -135,8 +115,12 @@ class PROJECT_ENTRY_GRID extends CONTENT_OBJECT_GRID
       </div>
       <div class="detail" style="margin-left: 24px">
         <?php
+          if ($this->show_release)
+          {
+            $this->_draw_release_details ($obj, $branch_info);
+          }
           $this->_draw_user_details ($obj, $branch_info);
-        ?>
+      ?>
       </div>
       <?php
           $layer->start ();
@@ -180,9 +164,6 @@ class PROJECT_ENTRY_GRID extends CONTENT_OBJECT_GRID
   {
     if ($this->show_folder || $this->show_branch || $this->show_release || $this->show_component)
     {
-  ?>
-  <div class="detail">
-  <?php
       $menu = $this->context->make_menu ();
       $menu->renderer->separator_class = $this->app->display_options->object_class;
 
@@ -214,9 +195,6 @@ class PROJECT_ENTRY_GRID extends CONTENT_OBJECT_GRID
       }
 
       $menu->display ();
-  ?>
-  </div>
-  <?php
     }
   }
   
@@ -241,7 +219,6 @@ class PROJECT_ENTRY_GRID extends CONTENT_OBJECT_GRID
   /**
    * Draw extra description information for the entry.
    * @param PROJECT_ENTRY $obj
-   * @param PROJECT_ENTRY_BRANCH_INFO $branch_info
    */
   protected function _draw_description ($obj)
   {

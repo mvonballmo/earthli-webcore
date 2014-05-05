@@ -98,14 +98,14 @@ abstract class AUDITABLE extends UNIQUE_OBJECT
   public $update_modified_on_change = true;
 
   /**
-   * @param APPLICATION $app Main application.
+   * @param APPLICATION $context Main application.
    */
-  public function __construct ($app)
+  public function __construct ($context)
   {
-    parent::__construct ($app);
+    parent::__construct ($context);
 
-    $this->time_created = $app->make_date_time ();
-    $this->time_modified = $app->make_date_time ();
+    $this->time_created = $context->make_date_time ();
+    $this->time_modified = $context->make_date_time ();
   }
 
   /**

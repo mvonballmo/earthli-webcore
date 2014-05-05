@@ -56,11 +56,11 @@ class USER_SUBSCRIPTION_FORM extends CONTENT_OBJECT_SUBSCRIPTION_FORM
   public $panel_name = 'users';
 
   /**
-   * @param APPLICATION $app Main application.
+   * @param APPLICATION $context Main application.
    */
-  public function __construct ($app)
+  public function __construct ($context)
   {
-    parent::__construct ($app);
+    parent::__construct ($context);
     $this->_type_info = $this->app->type_info_for ('USER');
   }
 

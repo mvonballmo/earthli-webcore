@@ -49,12 +49,12 @@ require_once ('webcore/gui/static_tree.php');
 class STATIC_NODE_TREE extends STATIC_TREE
 {
   /**
-   * @param APPLICATION $app Main application.
+   * @param APPLICATION $context Main application.
    */
-  public function __construct ($app)
+  public function __construct ($context)
   {
     include_once ('webcore/gui/tree_node.php');
-    parent::__construct ($app, new GENERIC_TREE_NODE_INFO ($app));
+    parent::__construct ($context, new GENERIC_TREE_NODE_INFO ($context));
   }
 }
 ?>

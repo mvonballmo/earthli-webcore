@@ -112,25 +112,25 @@ http://www.earthli.com/software/webcore
       }
 
       $menu->display ();
-
-      $last_id = read_var ('last_id');
-      if ($last_id)
-      {
-        $entry_query = $folder->entry_query ();
-        $entry_query->set_type ($entry_type_info->id);
-        $last_entry = $entry_query->object_at_id ($last_id);
-
-        if (isset($last_entry))
-        {
-          echo $App->get_text_with_icon('{icons}indicators/info', 'Added ' . $last_entry->title_as_link (), Sixteen_px, 'top-box-message');
-        }
-      }
       ?>
       </div>
     </div>
     <div class="main-box">
       <div class="form-content">
       <?php
+        $last_id = read_var ('last_id');
+        if ($last_id)
+        {
+          $entry_query = $folder->entry_query ();
+          $entry_query->set_type ($entry_type_info->id);
+          $last_entry = $entry_query->object_at_id ($last_id);
+
+          if (isset($last_entry))
+          {
+            $App->show_message('Added ' . $last_entry->title_as_link (), 'info');
+          }
+        }
+
         $form->display ();
       ?>
       </div>

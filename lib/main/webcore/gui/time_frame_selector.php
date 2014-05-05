@@ -97,15 +97,15 @@ class TIME_FRAME_SELECTOR extends WEBCORE_OBJECT
   public $period;
 
   /**
-   * @param APPLICATION $app Main application.
+   * @param APPLICATION $context Main application.
    * @param integer $default Default time frame to show.
    * @see Time_frame_recent
    */
-  public function __construct ($app, $default = Time_frame_recent)
+  public function __construct ($context, $default = Time_frame_recent)
   {
-    parent::__construct ($app);
+    parent::__construct ($context);
     $this->load_period_from_request ($default);
-    $this->page_link = $app->env->url (Url_part_no_host_path);
+    $this->page_link = $context->env->url (Url_part_no_host_path);
   }
 
   /**

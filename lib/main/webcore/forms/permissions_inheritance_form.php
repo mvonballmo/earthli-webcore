@@ -59,11 +59,11 @@ class PERMISSIONS_INHERITANCE_FORM extends ID_BASED_FORM
   public $action = 'create_folder_permissions.php';
 
   /**
-   * @param APPLICATION $app Main application.
+   * @param APPLICATION $context Main application.
    */
-  public function __construct ($app)
+  public function __construct ($context)
   {
-    parent::__construct ($app);
+    parent::__construct ($context);
 
     $field = new BOOLEAN_FIELD ();
     $field->id = 'defined';

@@ -154,7 +154,7 @@ $Page->start_display();
     <hr class="horizontal-separator" style="margin: .5em">
     <p class="notes">Problems with your browser? <a href="#report_problem">Report it</a>.</p>
     <h2 id="downloads">
-      <?php echo $Page->resolve_icon_as_html('{icons}buttons/download_to_hd', '', Thirty_two_px); ?> Download
+      <?php echo $Page->get_text_with_icon('{icons}buttons/download_to_hd', 'Download', Thirty_two_px); ?>
     </h2>
     <p>For a better browsing experience, try one of these:</p>
     <dl>

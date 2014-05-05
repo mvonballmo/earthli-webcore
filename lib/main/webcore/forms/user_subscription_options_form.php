@@ -59,11 +59,11 @@ class USER_SUBSCRIPTION_OPTIONS_FORM extends SUBSCRIPTION_FORM
   public $button_icon = '{icons}buttons/save';
   
   /**
-   * @param APPLICATION $app Main application.
+   * @param APPLICATION $context Main application.
    */
-  public function __construct ($app)
+  public function __construct ($context)
   {
-    parent::__construct ($app);
+    parent::__construct ($context);
 
     $field = new EMAIL_FIELD ();
     $field->id = 'new_email';

@@ -36,7 +36,7 @@ http://www.earthli.com/software/webcore
 .style-controls textarea {
   background-color: #141414;
   color: #bfbfbf;
-  border: 1px solid #4d4d4d;
+  border: 1px solid #666666;
   border-radius: 4px;
   padding: 4px;
 }
@@ -58,7 +58,7 @@ http://www.earthli.com/software/webcore
   border-color: #3d3d3d;
 }
 .basic-form fieldset {
-  border-top: 1px solid #000000;
+  border-top: 1px solid #999999;
   padding-top: 5px;
 }
 .basic-form fieldset legend {
@@ -154,7 +154,6 @@ h4 code {
 .vertical-separator,
 .left-sidebar,
 .right-sidebar,
-.object-in-list,
 .info-box-top,
 .info-box-bottom,
 .cell-selected,
@@ -164,7 +163,7 @@ h4 code {
 table.columns > tbody > tr > td,
 table.columns > tbody > tr > th,
 .abstract {
-  border-color: #4d4d4d;
+  border-color: #666666;
 }
 .quote-block,
 .preview,
@@ -172,12 +171,12 @@ table.columns > tbody > tr > th,
 pre > code,
 .basic-form-block,
 .pullquote {
-  border-color: #000000;
+  border-color: #999999;
 }
 .object-navigator .links {
-  column-rule-color: #4d4d4d;
-  -webkit-column-rule-color: #4d4d4d;
-  -moz-column-rule-color: #4d4d4d;
+  column-rule-color: #666666;
+  -webkit-column-rule-color: #666666;
+  -moz-column-rule-color: #666666;
 }
 .info-box-top,
 .info-box-bottom,
@@ -221,6 +220,7 @@ pre > code,
 }
 .graph-foreground {
   background-color: #79cc36;
+  color: #000000;
 }
 .highlight {
   color: #c8abff;
@@ -235,15 +235,15 @@ pre > code,
 }
 ul.menu {
   background-color: #141414;
-  border-color: #4d4d4d;
+  border-color: #666666;
 }
 ul.menu .menu-group-title {
   background-color: #1f1f1f;
-  border-color: #4d4d4d;
+  border-color: #666666;
 }
 ul.menu .menu-item:hover {
   background-color: #262626;
-  border-color: #4d4d4d;
+  border-color: #666666;
 }
 ul.menu .menu-item-description {
   color: #bfbfbf;
@@ -253,7 +253,7 @@ ul.menu .menu-item-description {
 .style-controls input[type=button],
 .style-controls input[type=submit] {
   background-color: #141414;
-  border-color: #4d4d4d;
+  border-color: #666666;
   color: #bfbfbf;
 }
 a.button:link,
@@ -265,7 +265,7 @@ a.button:visited {
 .style-controls input[type=button].selected,
 .style-controls input[type=submit].selected {
   background-color: #262626;
-  border-color: #4d4d4d;
+  border-color: #666666;
   color: #79cc36;
 }
 .button.disabled,
@@ -281,14 +281,14 @@ a.button:visited {
 .style-controls input[type=button]:hover:not(.disabled):not(.selected),
 .style-controls input[type=submit]:hover:not(.disabled):not(.selected) {
   background-color: #262626;
-  border-color: #4d4d4d;
+  border-color: #666666;
 }
 .style-controls input[type=text],
 .style-controls input[type=password],
 .style-controls select,
 .style-controls textarea {
   background-color: #141414;
-  border-color: #4d4d4d;
+  border-color: #666666;
   border-radius: 4px;
   padding: 4px;
 }

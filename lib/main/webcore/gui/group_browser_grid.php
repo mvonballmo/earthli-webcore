@@ -52,16 +52,6 @@ class GROUP_BROWSER_GRID extends STANDARD_GRID
   /**
    * @var string
    */
-  public $object_name = 'group';
-
-  /**
-   * @var boolean
-   */
-  public $show_separator = false;
-
-  /**
-   * @var string
-   */
   public $width = '';
 
   /**
@@ -70,6 +60,7 @@ class GROUP_BROWSER_GRID extends STANDARD_GRID
   public function __construct ($context)
   {
     parent::__construct ($context);
+
     $this->_controls_renderer = $this->app->make_controls_renderer ();
   }
 

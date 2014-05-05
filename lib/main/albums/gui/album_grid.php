@@ -49,21 +49,6 @@ require_once ('webcore/gui/folder_grid.php');
 class ALBUM_GRID extends FOLDER_GRID
 {
   /**
-   * @var boolean
-   */
-  public $show_separator = true;
-
-  /**
-   * @var string
-   */
-  public $object_name = 'Album';
-
-  /**
-   * @var string
-   */
-  public $box_css_class = '';
-
-  /**
    * @param ALBUM $obj
    * @access private
    */

@@ -48,40 +48,11 @@ require_once ('webcore/gui/grid.php');
  */
 class ATTACHMENT_GRID extends STANDARD_GRID
 {
-  /**
-   * @var string
-   */
-  public $box_css_class = '';
-
-  /**
-   * @var boolean
-   */
-  public $show_separator = false;
-
-  /**
-   * @var string
-   */
-  public $object_name = 'Attachment';
-
-  /**
-   * @var string
-   */
-  public $width = '';
-
-  /**
-   * @var boolean
-   */
-  public $centered = false;
-
-  /**
-   * @var boolean
-   */
-  public $even_columns = true;
-
-  /**
-   * @var string
-   */
-  public $last_page;
+  function __construct()
+  {
+    $this->width = '';
+    $this->even_columns = true;
+  }
 
   /**
    * @param ATTACHMENT $obj

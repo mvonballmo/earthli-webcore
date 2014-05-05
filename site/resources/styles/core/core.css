@@ -55,6 +55,9 @@ table td > pre:last-child,
 table td > ul:last-child {
   margin-bottom: 0;
 }
+table td.numeric {
+  text-align: right;
+}
 table.basic {
   margin: 15px 0;
 }
@@ -78,6 +81,9 @@ table.basic > tbody > tr:first-child > th {
 table.basic > tbody > tr:last-child > td,
 table.basic > tbody > tr:last-child > th {
   padding-bottom: 0;
+}
+table.grid > tbody > tr > td + td {
+  padding-left: 15px;
 }
 table.columns > tbody > tr > td,
 table.columns > tbody > tr > th {
@@ -283,9 +289,6 @@ pre > code {
   padding-left: 15px;
   padding-right: 15px;
 }
-.top-box-message {
-  margin-left: 15px;
-}
 .log-in-form {
   width: 30em;
 }
@@ -374,17 +377,9 @@ pre > code {
 .chart + .chart {
   margin-top: 15px;
 }
-.object-in-list {
-  padding: .5em .1em;
-}
-.object-in-list,
 .info-box-top,
 .info-box-bottom {
   clear: both;
-}
-td.object-in-list + td.object-in-list {
-  /* put space before a cell that follows another in a row */
-  padding-left: 30px;
 }
 .info-box-top,
 .info-box-bottom,
@@ -433,29 +428,49 @@ td.object-in-list + td.object-in-list {
   display: inline-block;
   background-repeat: no-repeat;
   box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
 }
 div.icon {
   display: block;
 }
 .one-hundred {
-  padding-left: 115px;
+  min-width: 100px;
   min-height: 100px;
 }
+div.one-hundred {
+  padding-left: 115px;
+}
 .fifty {
-  padding-left: 65px;
+  min-width: 50px;
   min-height: 50px;
 }
+div.fifty {
+  padding-left: 55px;
+}
 .thirty-two {
-  padding-left: 37px;
+  min-width: 32px;
   min-height: 32px;
 }
+div.thirty-two {
+  padding-left: 37px;
+}
 .twenty {
-  padding-left: 25px;
+  min-width: 20px;
   min-height: 20px;
 }
+div.twenty {
+  padding-left: 25px;
+}
 .sixteen {
-  padding-left: 21px;
+  min-width: 16px;
   min-height: 16px;
+}
+div.sixteen {
+  padding-left: 21px;
+}
+.icon + .caption {
+  padding-left: 5px;
 }
 .fifteen {
   padding-left: 20px;
@@ -602,15 +617,6 @@ input[type=submit] + .menu-items.buttons,
 /* @group Pagination */
 .pager {
   margin-top: 15px;
-}
-.sixteen.no-label {
-  padding-left: 16px;
-}
-.twenty.no-label {
-  padding-left: 20px;
-}
-.thirty-two.no-label {
-  padding-left: 32px;
 }
 .pager .counters {
   margin: 0 10px;
@@ -1260,6 +1266,7 @@ input + input[type=submit] {
 .basic-form .form-row label .description {
   display: block;
   margin-left: 18px;
+  margin-bottom: 0;
 }
 .basic-form .one-input input,
 .basic-form .one-input select,

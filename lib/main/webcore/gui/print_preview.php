@@ -210,9 +210,9 @@ class PRINT_PREVIEW extends WEBCORE_OBJECT
    */
   public $options;
 
-  public function __construct ($app)
+  public function __construct ($context)
   {
-    parent::__construct ($app);
+    parent::__construct ($context);
 
     $this->options = $this->_make_print_options ();
     $this->options->load_from_request ();

@@ -157,7 +157,9 @@ class ATTACHMENT_FORM extends OBJECT_IN_FOLDER_FORM
     {
       $obj->file_name = $file->normalized_name;
       $url = new FILE_URL ($obj->full_file_name ());
-      $this->_move_uploaded_file ($this->field_at ('file_name'), $file, $url->path ());
+      /** @var UPLOAD_FILE_FIELD $file_name_field */
+      $file_name_field = $this->field_at('file_name');
+      $this->_move_uploaded_file ($file_name_field, $file, $url->path ());
     }
     
     /* Create the thumbnail if needed. */
@@ -165,6 +167,7 @@ class ATTACHMENT_FORM extends OBJECT_IN_FOLDER_FORM
     if ($obj->is_image && $this->value_for ('create_thumbnail'))
     {
       $class_name = $this->app->final_class_name ('THUMBNAIL_CREATOR', 'webcore/util/image.php');
+      /** @var THUMBNAIL_CREATOR $creator */
       $creator = new $class_name ($this->app);
       $creator->create_thumbnail_for ($obj->full_file_name (), $this->value_for ('thumbnail_size'));
       if ($creator->error_message)
@@ -176,7 +179,7 @@ class ATTACHMENT_FORM extends OBJECT_IN_FOLDER_FORM
 
   /**
    * Store the form's values to this object.
-   * @param STORABLE $obj
+   * @param ATTACHMENT $obj
    * @access private
    */
   protected function _store_to_object ($obj)

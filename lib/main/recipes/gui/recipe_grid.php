@@ -49,21 +49,6 @@ require_once ('webcore/gui/entry_grid.php');
 class RECIPE_GRID extends CONTENT_OBJECT_GRID
 {
   /**
-   * @var string
-   */
-  public $object_name = 'Recipe';
-
-  /**
-   * @var string
-   */
-  public $box_css_class = 'object-in-list';
-
-  /**
-   * @var boolean
-   */
-  public $show_separator = true;
-
-  /**
    * @var boolean
    */
   public $show_user = true;
@@ -132,11 +117,6 @@ class RECIPE_GRID extends CONTENT_OBJECT_GRID
  */
 class RECIPE_SUMMARY_GRID extends DRAFTABLE_ENTRY_SUMMARY_GRID
 {
-  /**
-   * @var string
-   */
-  public $object_name = 'Recipe';
-
   /**
    * Return the block of text to summarize.
    * @param OBJECT_IN_FOLDER $obj

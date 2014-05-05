@@ -60,11 +60,11 @@ class USER_PERMISSIONS_FORM extends PERMISSIONS_FORM
   public $button_icon = '{icons}buttons/save';
   
   /**
-   * @param APPLICATION $app Main application.
+   * @param APPLICATION $context Main application.
    */
-  public function __construct ($app)
+  public function __construct ($context)
   {
-    parent::__construct ($app);
+    parent::__construct ($context);
 
     $field = new TITLE_FIELD ();
     $field->id = 'name';
@@ -320,7 +320,7 @@ function update_controls ()
   {
     $id = $map->id ();
     $field = $this->field_at ($id);
-    $field->caption = $formatter->icon_for ($map) . ' ' . $formatter->title_for ($map);
+    $field->caption = $this->context->get_text_with_icon($formatter->icon_url_for ($map), $formatter->title_for ($map), Sixteen_px);
     echo '<div class="three-inputs">';
     echo $renderer->drop_down_as_HTML ($id, $props);
     echo ' ' . $field->caption;

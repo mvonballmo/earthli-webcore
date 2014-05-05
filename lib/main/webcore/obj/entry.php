@@ -330,13 +330,13 @@ class DRAFTABLE_ENTRY extends ENTRY
   public $state = Draft;
   
   /**
-   * @param APPLICATION $app Main application.
+   * @param APPLICATION $context Main application.
    */
-  public function __construct ($app)
+  public function __construct ($context)
   {
-    parent::__construct ($app);
+    parent::__construct ($context);
 
-    $this->time_published = $app->make_date_time ();
+    $this->time_published = $context->make_date_time ();
     $this->time_published->clear ();
   }
 

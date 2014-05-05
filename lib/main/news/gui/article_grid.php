@@ -49,11 +49,6 @@ require_once ('webcore/gui/entry_grid.php');
 class BASE_ARTICLE_GRID extends CONTENT_OBJECT_GRID
 {
   /**
-   * @var string
-   */
-  public $object_name = 'Article';
-
-  /**
    * @var boolean
    */
   public $show_folder = false;
@@ -256,7 +251,7 @@ class ARTICLE_GRID extends BASE_ARTICLE_GRID
 	    <?php if ($this->items_are_selectable) { ?>
 	    <td></td>
 	    <?php } ?>
-	    <td class="object-in-list">
+	    <td>
 	      <h3>
 	        <?php echo $interval_text; ?>
 	      </h3>
@@ -286,10 +281,6 @@ class ARTICLE_GRID extends BASE_ARTICLE_GRID
  */
 class ARTICLE_SUMMARY_GRID extends DRAFTABLE_ENTRY_SUMMARY_GRID
 {
-  /**
-   * @var string
-   */
-  public $object_name = 'Article';
 }
 
 ?>

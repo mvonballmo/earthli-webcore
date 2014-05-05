@@ -49,11 +49,6 @@ require_once ('webcore/gui/printable_comment_grid.php');
 class FLAT_COMMENT_GRID extends PRINTABLE_COMMENT_GRID
 {
   /**
-   * @var string
-   */
-  public $box_css_class = '';
-
-  /**
    * Used when printing to shut off pagination
    * @var boolean
    */
@@ -94,6 +89,7 @@ class FLAT_COMMENT_GRID extends PRINTABLE_COMMENT_GRID
           }
       ?>
       <div class="info-box-top">
+        <p>
       <?php
           echo $creator->title_as_link () . ' &ndash; ' . $obj->time_created->format ();
 
@@ -105,6 +101,7 @@ class FLAT_COMMENT_GRID extends PRINTABLE_COMMENT_GRID
           <?php
           }
         ?>
+        </p>
       </div>
       <?php
           if ($creator->icon_url)
@@ -112,6 +109,7 @@ class FLAT_COMMENT_GRID extends PRINTABLE_COMMENT_GRID
             $this->context->finish_icon_container();
           }
         }
+        $this->context->finish_icon_container();
       ?>
       <div class="text-flow">
         <?php echo $obj->description_as_html (); ?>

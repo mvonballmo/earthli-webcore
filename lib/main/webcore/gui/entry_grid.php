@@ -76,5 +76,3 @@ class DRAFTABLE_ENTRY_SUMMARY_GRID extends ENTRY_SUMMARY_GRID
     }
   }  
 }
-
-?>

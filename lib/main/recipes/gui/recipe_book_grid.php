@@ -49,21 +49,6 @@ require_once ('webcore/gui/folder_grid.php');
 class RECIPE_BOOK_GRID extends FOLDER_GRID
 {
   /**
-   * @var string
-   */
-  public $object_name = 'Recipe Book';
-
-  /**
-   * @var string
-   */
-  public $box_css_class = '';
-
-  /**
-   * @var boolean
-   */
-  public $show_separator = false;
-
-  /**
    * @param FOLDER $obj
    * @access private
    */

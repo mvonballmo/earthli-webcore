@@ -334,13 +334,13 @@ class JOB_STATUS_MAP extends WEBCORE_OBJECT
   public $to;
 
   /**
-   * @param APPLICATION $app
+   * @param APPLICATION $context
    * @param integer[] $from
    * @param integer $to
    */
-  public function __construct ($app, $from, $to)
+  public function __construct ($context, $from, $to)
   {
-    parent::__construct ($app);
+    parent::__construct ($context);
 
     $this->from = join (',', $from);
     $this->to = $to;

@@ -177,7 +177,7 @@ class COMMENT_LIST_RENDERER extends WEBCORE_OBJECT
    */
   public function display ()
   {
-    /** @var GRID $grid */
+    /** @var FLAT_COMMENT_GRID $grid */
     $grid = null;
     switch ($this->comment_mode)
     {

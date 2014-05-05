@@ -71,12 +71,12 @@ abstract class SUBSCRIPTION_FORM extends FORM
   public $panel_name;
 
   /**
-   * @param APPLICATION $app Main application.
+   * @param APPLICATION $context Main application.
    * @param SUBSCRIBER $subscriber Edit subscriptions for this user.
    */
-  public function __construct ($app)
+  public function __construct ($context)
   {
-    parent::__construct ($app);
+    parent::__construct ($context);
 
     $field = new EMAIL_FIELD ();
     $field->id = 'email';

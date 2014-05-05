@@ -49,11 +49,11 @@ require_once ('webcore/forms/renderable_form.php');
 class ICON_FORM extends RENDERABLE_FORM
 {
   /**
-   * @param APPLICATION $app Main application.
+   * @param APPLICATION $context Main application.
    */
-  public function __construct ($app)
+  public function __construct ($context)
   {
-    parent::__construct ($app);
+    parent::__construct ($context);
 
     $field = new MUNGER_TITLE_FIELD ();
     $field->id = 'title';

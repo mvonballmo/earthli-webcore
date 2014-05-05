@@ -264,12 +264,12 @@ class APPLICATION_CONFIGURATION_INFO extends WEBCORE_OBJECT
   public $lib_info;
 
   /**
-   * @param APPLICATION $app
+   * @param APPLICATION $context
    */
-  public function __construct ($app)
+  public function __construct ($context)
   {
-    parent::__construct ($app);
-    $this->load_from ($app);
+    parent::__construct ($context);
+    $this->load_from ($context);
   }
   
   /**

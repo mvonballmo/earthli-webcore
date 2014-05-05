@@ -1277,7 +1277,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
       }
 
       $Result = '';
-      if (isset ($props->width) || $props->css_class)
+      if (isset ($props->width))
       {
         $Result = '<div style="width: ' . $props->width . '">';
       }

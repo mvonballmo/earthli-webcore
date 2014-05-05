@@ -64,11 +64,6 @@ abstract class LIST_GRID extends STANDARD_GRID
   /**
    * @var boolean
    */
-  public $show_separator = false;
-
-  /**
-   * @var boolean
-   */
   public $even_columns = false;
 
   /**

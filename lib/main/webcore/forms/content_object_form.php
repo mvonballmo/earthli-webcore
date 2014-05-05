@@ -49,11 +49,11 @@ require_once ('webcore/forms/auditable_form.php');
 class CONTENT_OBJECT_FORM extends AUDITABLE_FORM
 {
   /**
-   * @param APPLICATION $app
+   * @param APPLICATION $context
    */
-  public function __construct ($app)
+  public function __construct ($context)
   {
-    parent::__construct ($app);
+    parent::__construct ($context);
 
     $field = new MUNGER_TITLE_FIELD ();
     $field->id = 'title';

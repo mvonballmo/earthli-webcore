@@ -49,11 +49,6 @@ require_once ('webcore/gui/grid.php');
 class THEME_GRID extends STANDARD_GRID
 {
   /**
-   * @var string
-   */
-  public $object_name = 'Theme';
-
-  /**
    * @var boolean
    */
   public $is_chooser = false;

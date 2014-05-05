@@ -50,16 +50,6 @@ require_once ('webcore/gui/content_object_grid.php');
 class OBJECT_IN_FOLDER_SUMMARY_GRID extends CONTENT_OBJECT_GRID
 {
   /**
-   * @var string
-   */
-  public $box_css_class = 'object-in-list';
-
-  /**
-   * @var boolean
-   */
-  public $show_separator = false;
-
-  /**
    * Show check-box selectors next to items?
    * @var boolean
    */

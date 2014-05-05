@@ -50,11 +50,11 @@ require_once ('webcore/forms/send_multiple_mail_form.php');
 class SEND_OBJECT_IN_FOLDER_FORM extends SEND_MULTIPLE_MAIL_FORM
 {
   /**
-   * @param APPLICATION $app Main application.
+   * @param APPLICATION $context Main application.
    */
-  public function __construct ($app)
+  public function __construct ($context)
   {
-    parent::__construct ($app);
+    parent::__construct ($context);
 
     $field = new INTEGER_FIELD ();
     $field->id = 'id';

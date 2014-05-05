@@ -50,21 +50,16 @@ require_once ('webcore/gui/select_list.php');
 class JOB_LIST extends SELECT_LIST
 {
   /**
-   * @var string display jobs only.
-   */
-  public $object_name = 'job';
-
-  /**
    * @var string Unique name for the selector controls for this list.
    */
   public $control_name = 'job_ids';
 
   /**
-   * @param PROJECT_APPLICATION $app Main application.
+   * @param PROJECT_APPLICATION $context Main application.
    */
-  public function __construct ($app)
+  public function __construct ($context)
   {
-    parent::__construct ($app);
+    parent::__construct ($context);
     $this->append_column ('Name');
     $this->append_column ('Age');
     $this->append_column ('Priority');

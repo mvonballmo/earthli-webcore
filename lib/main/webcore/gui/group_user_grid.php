@@ -49,16 +49,6 @@ require_once ('webcore/gui/grid.php');
 class GROUP_USER_GRID extends STANDARD_GRID
 {
   /**
-   * @var string
-   */
-  public $object_name = 'user';
-
-  /**
-   * @var boolean
-   */
-  public $show_separator = false;
-
-  /**
    * @var boolean
    */
   public $even_columns = false;

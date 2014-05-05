@@ -190,15 +190,15 @@ class ALBUM extends FOLDER
   public $max_picture_height;
 
   /**
-   * @param ALBUM_APPLICATION $app Main application.
+   * @param ALBUM_APPLICATION $context Main application.
    */
-  public function __construct ($app)
+  public function __construct ($context)
   {
-    parent::__construct ($app);
+    parent::__construct ($context);
 
     include_once ('webcore/sys/date_time.php');
-    $this->first_day = $app->make_date_time ();
-    $this->last_day = $app->make_date_time ();
+    $this->first_day = $context->make_date_time ();
+    $this->last_day = $context->make_date_time ();
   }
 
   /**

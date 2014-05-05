@@ -49,11 +49,11 @@ require_once ('webcore/forms/multiple_object_purger_form.php');
 class ALBUM_MULTIPLE_OBJECT_PURGER_FORM extends MULTIPLE_OBJECT_PURGER_FORM
 {
   /**
-   * @param APPLICATION $app
+   * @param APPLICATION $context
    */
-  public function __construct ($app)
+  public function __construct ($context)
   {
-    parent::__construct ($app);
+    parent::__construct ($context);
 
     $field = $this->field_at ('remove_resources');
     $field->visible = true;

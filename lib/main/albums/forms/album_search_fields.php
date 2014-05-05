@@ -49,11 +49,11 @@ require_once ('webcore/forms/search_fields.php');
 class SEARCH_PICTURE_FIELDS extends SEARCH_ENTRY_FIELDS
 {
   /**
-   * @param APPLICATION $app Main application.
+   * @param APPLICATION $context Main application.
    */
-  public function __construct ($app)
+  public function __construct ($context)
   {
-    parent::__construct ($app);
+    parent::__construct ($context);
 
     $this->_add_text ('file_name', 'File name', false, false, 'pic');
   }
@@ -69,11 +69,11 @@ class SEARCH_PICTURE_FIELDS extends SEARCH_ENTRY_FIELDS
 class SEARCH_JOURNAL_FIELDS extends SEARCH_ENTRY_FIELDS
 {
   /**
-   * @param APPLICATION $app Main application.
+   * @param APPLICATION $context Main application.
    */
-  public function __construct ($app)
+  public function __construct ($context)
   {
-    parent::__construct ($app);
+    parent::__construct ($context);
 
     $this->_add_text ('weather', 'Weather', false, false, 'jrnl');
 

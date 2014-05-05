@@ -51,11 +51,6 @@ class FOLDER_LIST extends SELECT_LIST
   /**
    * @var string
    */
-  public $object_name = 'folder';
-
-  /**
-   * @var string
-   */
   public $control_name = 'folder_ids';
 
   /**
@@ -66,11 +61,11 @@ class FOLDER_LIST extends SELECT_LIST
   public $page_name = '';
 
   /**
-   * @param APPLICATION $app Main application.
+   * @param APPLICATION $context Main application.
    */
-  public function __construct ($app)
+  public function __construct ($context)
   {
-    parent::__construct ($app);
+    parent::__construct ($context);
     $this->append_column ('Name');
     $this->append_column ('Summary');
   }

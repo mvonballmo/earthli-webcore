@@ -61,11 +61,11 @@ class PURGE_RELEASE_FORM extends PURGE_OBJECT_FORM
   public $show_previews_first = true;
 
   /**
-   * @param APPLICATION $app
+   * @param APPLICATION $context
    */
-  public function __construct ($app)
+  public function __construct ($context)
   {
-    parent::__construct ($app);
+    parent::__construct ($context);
 
     $field = new ENUMERATED_FIELD ();
     $field->id = 'sub_history_item_publication_state';

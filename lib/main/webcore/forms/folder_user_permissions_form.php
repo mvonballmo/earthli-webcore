@@ -67,7 +67,7 @@ class FOLDER_USER_PERMISSIONS_FORM extends FOLDER_PERMISSIONS_FORM
 
   /**
    * Load initial properties from these permissions.
-   * @param PERMISSIONS $obj
+   * @param FOLDER_PERMISSIONS $obj
    */
   public function load_from_object ($obj)
   {
@@ -77,7 +77,7 @@ class FOLDER_USER_PERMISSIONS_FORM extends FOLDER_PERMISSIONS_FORM
 
   /**
    * Store the form's values to this set of permissions.
-   * @param PERMISSIONS $obj
+   * @param FOLDER_PERMISSIONS $obj
    * @access private
    */
   public function commit ($obj)
@@ -88,4 +88,3 @@ class FOLDER_USER_PERMISSIONS_FORM extends FOLDER_PERMISSIONS_FORM
     parent::commit($obj);
   }
 }
-?>

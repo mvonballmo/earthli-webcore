@@ -51,16 +51,6 @@ class SEARCH_GRID extends STANDARD_GRID
   /**
    * @var string
    */
-  public $object_name = 'search';
-
-  /**
-   * @var boolean
-   */
-  public $show_separator = false;
-
-  /**
-   * @var string
-   */
   public $width = '';
 
   /**

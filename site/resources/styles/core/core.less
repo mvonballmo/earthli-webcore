@@ -70,6 +70,11 @@ table
     {
       margin-bottom: 0;
     }
+
+    &.numeric
+    {
+      text-align: right;
+    }
   }
 
   &.basic
@@ -113,6 +118,12 @@ table
         }
       }
     }
+  }
+
+  // Not sure if we need this
+  &.grid > tbody > tr > td + td
+  {
+    padding-left: @standard_spacing;
   }
 
   &.columns
@@ -428,11 +439,6 @@ pre > code
   padding-right: @standard_spacing;
 }
 
-.top-box-message
-{
-  margin-left: @standard_spacing;
-}
-
 .log-in-form
 {
   width: 30em;
@@ -567,24 +573,10 @@ pre > code
 {
 }
 
-.object-in-list
-{
-  padding: .5em .1em;
-}
-
-.object-in-list,
 .info-box-top,
 .info-box-bottom
 {
   clear: both;
-}
-
-
-td.object-in-list + td.object-in-list
-{
-  /* put space before a cell that follows another in a row */
-
-  padding-left: 30px;
 }
 
 .info-box-top,
@@ -642,7 +634,7 @@ td.object-in-list + td.object-in-list
 {
   display: inline-block;
   background-repeat: no-repeat;
-  box-sizing: border-box;
+  .border-box();
 }
 
 div.icon
@@ -652,32 +644,62 @@ div.icon
 
 .one-hundred
 {
-  padding-left: 100px + @standard_spacing;
+  min-width: 100px;
   min-height: 100px;
+}
+
+div.one-hundred
+{
+  padding-left: 100px + @standard_spacing;
 }
 
 .fifty
 {
-  padding-left: 50px + @standard_spacing;
+  min-width: 50px;
   min-height: 50px;
+}
+
+div.fifty
+{
+  padding-left: 50px + @small_spacing;
 }
 
 .thirty-two
 {
-  padding-left: 32px + @small_spacing;
+  min-width: 32px;
   min-height: 32px;
+}
+
+div.thirty-two
+{
+  padding-left: 32px + @small_spacing;
 }
 
 .twenty
 {
-  padding-left: 20px + @small_spacing;
+  min-width: 20px;
   min-height: 20px;
+}
+
+div.twenty
+{
+  padding-left: 20px + @small_spacing;
 }
 
 .sixteen
 {
-  padding-left: 16px + @small_spacing;
+  min-width: 16px;
   min-height: 16px;
+}
+
+div.sixteen
+{
+  padding-left: 16px + @small_spacing;
+}
+
+.icon + .caption
+{
+  padding-left: @small_spacing;
 }
 
 .fifteen
@@ -884,21 +906,6 @@ button + .menu-items.buttons,
 .pager
 {
   margin-top: @standard_spacing;
-}
-
-.sixteen.no-label
-{
-  padding-left: 16px;
-}
-
-.twenty.no-label
-{
-  padding-left: 20px;
-}
-
-.thirty-two.no-label
-{
-  padding-left: 32px;
 }
 
 .pager .counters

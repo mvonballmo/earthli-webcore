@@ -154,7 +154,6 @@ h4 code {
 .vertical-separator,
 .left-sidebar,
 .right-sidebar,
-.object-in-list,
 .info-box-top,
 .info-box-bottom,
 .cell-selected,
@@ -221,6 +220,7 @@ pre > code,
 }
 .graph-foreground {
   background-color: #2d5080;
+  color: #9aaeca;
 }
 .highlight {
   color: #137a26;

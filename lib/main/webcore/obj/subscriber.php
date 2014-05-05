@@ -160,12 +160,12 @@ class SUBSCRIBER extends UNIQUE_OBJECT
   public $preferred_text_length = 0;
 
   /**
-   * @param APPLICATION $app
+   * @param APPLICATION $context
    */
-  public function __construct ($app)
+  public function __construct ($context)
   {
-    parent::__construct ($app);
-    $this->time_messages_sent = $app->make_date_time ();
+    parent::__construct ($context);
+    $this->time_messages_sent = $context->make_date_time ();
   }
 
   /**

@@ -121,17 +121,11 @@ class CONTROLS_RENDERER extends WEBCORE_OBJECT
    */
   public function javascript_button_as_html ($title, $action, $icon = '', $icon_size = Sixteen_px, $type = 'button')
   {
-    $class = '';
-    if (empty($title))
-    {
-      $class = 'no-label';
-    }
-
     if (isset ($icon) && $icon)
     {
       $title = $this->context->get_text_with_icon($icon, $title, $icon_size);
     }
-    $Result = '<button class="' . $class . '" type="' . $type . '" onClick="' . $action . '"';
+    $Result = '<button type="' . $type . '" onClick="' . $action . '"';
     if ($this->button_width)
     {
       $Result .= ' style="width: ' . $this->button_width . '"';

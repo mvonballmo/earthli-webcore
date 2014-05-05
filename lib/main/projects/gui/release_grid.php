@@ -49,26 +49,6 @@ require_once ('webcore/gui/content_object_grid.php');
 class RELEASE_GRID extends CONTENT_OBJECT_GRID
 {
   /**
-   * @var string
-   */
-  public $box_css_class = 'object-in-list';
-
-  /**
-   * @var string
-   */
-  public $object_name = 'Release';
-
-  /**
-   * @var boolean
-   */
-  public $even_columns = false;
-
-  /**
-   * @var boolean
-   */
-  public $show_separator = false;
-
-  /**
    * @var boolean Show creator/modifier with releases?
    */
   public $show_user = true;
@@ -82,6 +62,17 @@ class RELEASE_GRID extends CONTENT_OBJECT_GRID
    * @var boolean Show branch for release?
    */
   public $show_branch = false;
+
+  /**
+   * @param CONTEXT $context Context to which this grid belongs.
+   */
+  function __construct($context)
+  {
+    parent::__construct($context);
+
+    $this->even_columns = false;
+    $this->columns = 2;
+  }
 
   /**
    * @param RELEASE $obj

@@ -50,17 +50,11 @@ require_once ('webcore/gui/select_list.php');
 class ENTRY_LIST extends SELECT_LIST
 {
   /**
-   * @var string
-   * @access private
+   * @param APPLICATION $context Main application.
    */
-  public $object_name = 'object';
-
-  /**
-   * @param APPLICATION $app Main application.
-   */
-  public function __construct ($app)
+  public function __construct ($context)
   {
-    parent::__construct ($app);
+    parent::__construct ($context);
     $this->append_column ('Name');
     $this->append_column ('Date');
     $this->append_column ('Creator');

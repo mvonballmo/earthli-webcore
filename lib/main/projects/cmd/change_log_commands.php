@@ -51,11 +51,11 @@ require_once ('webcore/cmd/commands.php');
 class CHANGE_LOG_COMMANDS extends COMMANDS
 {
   /**
-   * @param APPLICATION $app
+   * @param APPLICATION $context
    */
-  public function __construct ($app)
+  public function __construct ($context)
   {
-    parent::__construct ($app);
+    parent::__construct ($context);
 
     $cmd = $this->make_command ();
     $cmd->id = 'print';
@@ -141,11 +141,11 @@ class CHANGE_LOG_COMMANDS extends COMMANDS
 class BRANCH_CHANGE_LOG_COMMANDS extends CHANGE_LOG_COMMANDS
 {
   /**
-   * @param APPLICATION $app
+   * @param APPLICATION $context
    */
-  public function __construct ($app)
+  public function __construct ($context)
   {
-    parent::__construct ($app);
+    parent::__construct ($context);
 
     $show_all = read_var ('show_all', 1);
 

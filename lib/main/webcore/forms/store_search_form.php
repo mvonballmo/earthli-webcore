@@ -55,12 +55,12 @@ class STORE_SEARCH_FORM extends RENDERABLE_FORM
   public $controls_visible = true;
 
   /**
-   * @param APPLICATION $app Main application.
+   * @param APPLICATION $context Main application.
    * @param SEARCH_FIELDS $fields
    */
-  public function __construct ($app, $fields)
+  public function __construct ($context, $fields)
   {
-    parent::__construct ($app);
+    parent::__construct ($context);
 
     $this->_search_fields = $fields;
     $this->_search_fields->add_fields ($this);

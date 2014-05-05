@@ -1855,11 +1855,11 @@ class SEARCH_ENTRY_FIELDS extends SEARCH_OBJECT_IN_FOLDER_FIELDS
 class SEARCH_DRAFTABLE_FIELDS extends SEARCH_ENTRY_FIELDS
 {
   /**
-   * @param APPLICATION $app Main application.
+   * @param APPLICATION $context Main application.
    */
-  public function __construct ($app)
+  public function __construct ($context)
   {
-    parent::__construct ($app);
+    parent::__construct ($context);
 
     $this->_add_date ('time_published', 'Published');
     $this->_add_user ('publisher_id', 'Publisher');
@@ -1890,11 +1890,11 @@ class SEARCH_DRAFTABLE_FIELDS extends SEARCH_ENTRY_FIELDS
 class SEARCH_USER_OBJECT_FIELDS extends SEARCH_CONTENT_OBJECT_FIELDS
 {
   /**
-   * @param APPLICATION $app Main application.
+   * @param APPLICATION $context Main application.
    */
-  public function __construct ($app)
+  public function __construct ($context)
   {
-    parent::__construct ($app);
+    parent::__construct ($context);
 
     $this->_add_text ('real_first_name', 'First name');
     $this->_add_text ('real_last_name', 'Last name');
@@ -2012,11 +2012,11 @@ class SEARCH_USER_OBJECT_FIELDS extends SEARCH_CONTENT_OBJECT_FIELDS
 class SEARCH_FOLDER_FIELDS extends SEARCH_OBJECT_IN_FOLDER_FIELDS
 {
   /**
-   * @param APPLICATION $app Main application.
+   * @param APPLICATION $context Main application.
    */
-  public function __construct ($app)
+  public function __construct ($context)
   {
-    parent::__construct ($app);
+    parent::__construct ($context);
 
     $this->_add_text ('summary', 'Summary');
   }

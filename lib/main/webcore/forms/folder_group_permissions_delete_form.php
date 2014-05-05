@@ -51,11 +51,11 @@ class FOLDER_GROUP_PERMISSIONS_DELETE_FORM extends DELETE_FORM
   public $show_object_as_link = false;
 
   /**
-   * @param APPLICATION $app Main application.
+   * @param APPLICATION $context Main application.
    */
-  public function __construct ($app)
+  public function __construct ($context)
   {
-    parent::__construct ($app);
+    parent::__construct ($context);
 
     $field = new INTEGER_FIELD ();
     $field->id = 'group_id';

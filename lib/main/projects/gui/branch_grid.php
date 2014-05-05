@@ -49,27 +49,12 @@ require_once ('webcore/gui/content_object_grid.php');
 class BRANCH_GRID extends CONTENT_OBJECT_GRID
 {
   /**
-   * @var string
-   */
-  public $box_css_class = 'object-in-list';
-
-  /**
-   * @var string
-   */
-  public $object_name = 'Branch';
-
-  /**
    * @var boolean
    */
   public $even_columns = false;
 
   /**
-   * @var boolean
-   */
-  public $show_separator = false;
-
-  /**
-   * @var boolean Show creator/modifier with branchs?
+   * @var boolean Show creator/modifier with branches?
    */
   public $show_user = true;
 

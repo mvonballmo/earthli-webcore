@@ -49,39 +49,14 @@ require_once ('webcore/gui/grid.php');
 class COMPONENT_GRID extends STANDARD_GRID
 {
   /**
-   * @var string
+   * @param CONTEXT $context Context to which this grid belongs.
    */
-  public $box_css_class = 'object-in-list';
+  public function __construct ($context)
+  {
+    parent::__construct ($context);
 
-  /**
-   * @var string
-   */
-  public $object_name = 'Component';
-
-  /**
-   * @var boolean
-   */
-  public $even_columns = false;
-
-  /**
-   * @var boolean
-   */
-  public $show_separator = false;
-
-  /**
-   * @var boolean Show creator/modifier with releases?
-   */
-  public $show_user = true;
-
-  /**
-   * @var boolean Show project for release?
-   */
-  public $show_folder = false;
-
-  /**
-   * @var boolean Show branch for release?
-   */
-  public $show_branch = false;
+    $this->even_columns = false;
+  }
 
   /**
    * @param COMPONENT $obj
@@ -120,4 +95,5 @@ class COMPONENT_GRID extends STANDARD_GRID
 <?php
   }
 }
+
 ?>
