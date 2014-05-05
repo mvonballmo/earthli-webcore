@@ -1141,17 +1141,39 @@ a.button:visited {
 button + button,
 .button + button,
 button + .button,
-input + .button,
-input + button,
 input[type=button] + input[type=button],
 .button + input[type=button],
 input[type=button] + .button,
-input + input[type=button],
 input[type=submit] + input[type=submit],
 .button + input[type=submit],
-input[type=submit] + .button,
-input + input[type=submit] {
+input[type=submit] + .button {
   margin-left: 10px;
+}
+.input {
+  display: inline-block;
+}
+.input + .input,
+.input + input,
+input + .input,
+select + select,
+select + .input,
+.input + select,
+input + input,
+input + select,
+select + input,
+input + .button,
+input + button,
+.input + button,
+.input + .button,
+select + button,
+select + .button,
+input + input[type=button],
+.input + input[type=button],
+select + input[type=button],
+input + input[type=submit],
+.input + input[type=submit],
+select + input[type=submit] {
+  margin-left: 5px;
 }
 .button.disabled,
 .style-controls button.disabled,

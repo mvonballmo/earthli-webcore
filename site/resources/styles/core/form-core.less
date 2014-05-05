@@ -72,11 +72,33 @@ a.button:link, a.button:visited
 .button + .button,
 button + button,
 .button + button,
-button + .button,
-input + .button,
-input + button
+button + .button
 {
   margin-left: @button_spacing;
+}
+
+.input
+{
+  display: inline-block;
+}
+
+.input + .input,
+.input + input,
+input + .input,
+select + select,
+select + .input,
+.input + select,
+input + input,
+input + select,
+select + input,
+input + .button,
+input + button,
+.input + button,
+.input + .button,
+select + button,
+select + .button
+{
+  margin-left: @small_spacing;
 }
 
 .button.disabled,

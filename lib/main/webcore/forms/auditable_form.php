@@ -85,7 +85,7 @@ abstract class AUDITABLE_FORM extends RENDERABLE_FORM
     $field = new BOOLEAN_FIELD ();
     $field->id = 'update_modifier_on_change';
     $field->caption = 'Update Modifier';
-    $field->description = 'Set the modifier of this object to the currently logged-in user; turn off to maintain the existing user as modifier.';
+    $field->description = 'Store currently logged-in user as last modifier; turn off to maintain the existing user as modifier.';
     $field->visible = false;
     $this->add_field ($field);
   }

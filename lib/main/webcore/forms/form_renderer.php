@@ -1162,6 +1162,8 @@ class FORM_RENDERER extends CONTROLS_RENDERER
       {
         if (isset($height))
         {
+          // TODO Wrap in an .input class container
+
           $style = ' style="width: ' . $width . '; height: ' . $height . '"';
         }
         else
@@ -1279,7 +1281,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
       $Result = '';
       if (isset ($props->width))
       {
-        $Result = '<div style="width: ' . $props->width . '">';
+        $Result = '<span class="input" style="width: ' . $props->width . '">';
       }
 
       $ctrl = $this->_start_control ($field, 'select') . ' class="' . $css_class . '"';
@@ -1321,7 +1323,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
 
       if (isset ($props->width))
       {
-        $Result .= '</div>';
+        $Result .= '</span>';
       }
 
       return $this->_control_created ($id, $Result);
@@ -1351,6 +1353,8 @@ class FORM_RENDERER extends CONTROLS_RENDERER
 
       if (isset ($props->width))
       {
+        // TODO Wrap in an .input class container
+        
         $Result .= 'style="width: ' . $props->width . '"';
       }
 
@@ -1424,6 +1428,8 @@ class FORM_RENDERER extends CONTROLS_RENDERER
       $ft = $this->context->file_type_manager ();
       $url = new FILE_URL ($file->name);
       $icon = $ft->icon_as_html ($file->mime_type, $url->extension (), Sixteen_px);
+
+      // TODO Wrap in an .input class container
 
       $Result = '<div style="width: ' . $width . '"><div class="detail">' . $icon . ' ' . $file->name . ' (' . file_size_as_text ($file->size) . ")</div></div>\n";
 
@@ -1649,6 +1655,8 @@ class FORM_RENDERER extends CONTROLS_RENDERER
     $style = '';
     if (isset ($options->width))
     {
+      // TODO Wrap in an .input class container
+
       $style = ' style="width: ' . $options->width . '"';
     }
 
