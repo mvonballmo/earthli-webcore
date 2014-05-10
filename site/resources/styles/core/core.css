@@ -82,6 +82,9 @@ table.basic > tbody > tr:last-child > td,
 table.basic > tbody > tr:last-child > th {
   padding-bottom: 0;
 }
+table.grid > tbody > tr > td {
+  vertical-align: top;
+}
 table.grid > tbody > tr > td + td {
   padding-left: 15px;
 }
@@ -447,6 +450,13 @@ div.one-hundred {
 }
 div.fifty {
   padding-left: 55px;
+}
+.thirty {
+  min-width: 3px;
+  min-height: 3px;
+}
+div.thirty {
+  padding-left: 35px;
 }
 .thirty-two {
   min-width: 32px;
@@ -880,6 +890,9 @@ blockquote p:first-child,
   clear: both;
   display: block;
 }
+.image-without-text {
+  line-height: 0;
+}
 hr {
   color: transparent;
   border: 0;
@@ -915,6 +928,7 @@ hr {
 .minimal-commands {
   float: left;
   margin-right: .35em;
+  margin-top: 15px;
 }
 .minimal-commands-content {
   margin-left: 2.55em;
@@ -1038,15 +1052,31 @@ hr {
   min-width: 16px;
   min-height: 16px;
 }
+.overlay-container {
+  position: relative;
+  display: inline-block;
+}
 .top-left-overlay {
   position: absolute;
   left: 0;
   top: 0;
 }
+.top-left-overlay .button {
+  opacity: 0.75;
+}
+.top-left-overlay .button:hover {
+  opacity: 1;
+}
 .bottom-right-overlay {
   position: absolute;
   right: 0;
   bottom: 0;
+}
+.bottom-right-overlay .button {
+  opacity: 0.75;
+}
+.bottom-right-overlay .button:hover {
+  opacity: 1;
 }
 .top-left-overlay .button {
   border-top-left-radius: 0;

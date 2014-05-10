@@ -61,9 +61,6 @@ class OBJECT_IN_FOLDER_SUMMARY_GRID extends CONTENT_OBJECT_GRID
    */
   protected function _draw_box ($obj)
   {
-?>
-  <div class="grid-item">
-    <?php
     $this->_display_start_minimal_commands_block($obj);
     ?>
     <h3><?php echo $this->obj_link ($obj); ?></h3>
@@ -71,9 +68,6 @@ class OBJECT_IN_FOLDER_SUMMARY_GRID extends CONTENT_OBJECT_GRID
     $this->_echo_header ($obj);
     $this->_echo_text_summary ($obj);
     $this->_display_finish_minimal_commands_block();
-    ?>
-  </div>
-  <?php
   }
   
   /**

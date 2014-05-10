@@ -92,6 +92,7 @@ abstract class CONTENT_OBJECT_GRID extends SELECTABLE_GRID
     if ($this->app->search_text)
     {
       $class_name = $this->app->final_class_name ('MUNGER_SUMMARIZER', 'webcore/util/munger_summarizer.php');
+      /** @var MUNGER_SUMMARIZER $summarizer */
       $summarizer = new $class_name ();
       $summarizer->max_visible_output_chars = 500;
       $text = $summarizer->transform ($this->_text_to_summarize ($obj), $this->app->search_text);
@@ -101,12 +102,13 @@ abstract class CONTENT_OBJECT_GRID extends SELECTABLE_GRID
       }
     }
   }
-  
+
   /**
    * Return the block of text to summarize.
    * Called from {@link _echo_text_summary()}. Override in descendents to return
    * more text.
    * @param CONTENT_OBJECT $obj
+   * @return string
    * @access private
    */
   protected function _text_to_summarize ($obj)
@@ -114,5 +116,3 @@ abstract class CONTENT_OBJECT_GRID extends SELECTABLE_GRID
     return $obj->description;
   }
 }
-
-?>

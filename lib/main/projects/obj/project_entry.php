@@ -110,17 +110,6 @@ abstract class PROJECT_ENTRY extends MULTI_TYPE_ENTRY
   }
 
   /**
-   * HTML code for the icon to use for this kind.
-   * @param string $size
-   * @return string
-   */
-  public function kind_icon ($size = Twenty_px)
-  {
-    $props = $this->kind_properties ();
-    return $props->icon_as_html ($size);
-  }
-
-  /**
    * The kind as a string.
    * @return string
    * @see PROJECT_ENTRY::kind

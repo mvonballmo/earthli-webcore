@@ -64,15 +64,11 @@ class COMPONENT_GRID extends STANDARD_GRID
    */
   protected function _draw_box ($obj)
   {
+    $this->_display_start_minimal_commands_block($obj);
 ?>
-  <div class="grid-item">
-    <div class="minimal-commands">
-      <?php $this->_draw_menu_for ($obj, Menu_size_minimal); ?>
-    </div>
-    <div class="minimal-commands-content">
-    <h3>
-      <?php echo $this->app->get_text_with_icon($obj->icon_url, $obj->title_as_link (), Twenty_px); ?>
-    </h3>
+  <h3>
+    <?php echo $this->app->get_text_with_icon($obj->icon_url, $obj->title_as_link (), Twenty_px); ?>
+  </h3>
   <?php
     $menu = $this->context->make_menu ();
 
@@ -90,9 +86,8 @@ class COMPONENT_GRID extends STANDARD_GRID
     $menu->append ('Comments', $url->as_html ());
 
     $menu->display ();
-  ?>
-  </div>
-<?php
+
+    $this->_display_finish_minimal_commands_block();
   }
 }
 

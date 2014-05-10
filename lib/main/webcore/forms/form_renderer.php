@@ -1354,7 +1354,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
       if (isset ($props->width))
       {
         // TODO Wrap in an .input class container
-        
+
         $Result .= 'style="width: ' . $props->width . '"';
       }
 

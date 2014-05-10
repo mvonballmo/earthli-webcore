@@ -165,6 +165,14 @@ table.columns > tbody > tr > th,
 .abstract {
   border-color: #c2c2c2;
 }
+p.info-box-bottom,
+div.info-box-bottom {
+  padding-top: 5px;
+}
+p.info-box-top,
+div.info-box-top {
+  padding-bottom: 5px;
+}
 .quote-block,
 .preview,
 .chart,

@@ -139,11 +139,6 @@ class PICTURE_GRID extends ALBUM_ENTRY_GRID
 class PICTURE_SUMMARY_GRID extends ENTRY_SUMMARY_GRID
 {
   /**
-   * @var integer
-   */
-  public $width = '75%';
-
-  /**
    * Return the size of the object.
    * @param PICTURE $obj
    * @return integer
@@ -160,15 +155,12 @@ class PICTURE_SUMMARY_GRID extends ENTRY_SUMMARY_GRID
    */
   protected function _echo_header ($obj)
   {
-    $box = $this->app->make_box_renderer ();
-    $box->start_column_set ();
-    $box->new_column ('padding-right: 2em');
-    parent::_echo_header ($obj);
-    $box->new_column ();
-?>
+    ?>
+    <p>
     <a href="<?php echo $obj->home_page (); ?>"><img class="frame" src="<?php echo $obj->full_thumbnail_name (); ?>" alt="Picture"></a>
-<?php
-    $box->finish_column_set ();
+    </p>
+    <?php
+    parent::_echo_header ($obj);
   }
 }
 

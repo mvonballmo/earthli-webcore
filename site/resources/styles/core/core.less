@@ -57,11 +57,14 @@ table
 
   td
   {
-    > p:first-child,
-    > pre:first-child,
-    > ul:first-child
+    > p,
+    > pre,
+    > ul
     {
-      margin-top: 0;
+      &:first-child
+      {
+        margin-top: 0;
+      }
     }
 
     > p:last-child,
@@ -121,9 +124,17 @@ table
   }
 
   // Not sure if we need this
-  &.grid > tbody > tr > td + td
+  &.grid
   {
-    padding-left: @standard_spacing;
+
+    > tbody > tr > td
+    {
+      vertical-align: top;
+      & + td
+      {
+        padding-left: @standard_spacing;
+      }
+    }
   }
 
   &.columns
@@ -662,6 +673,17 @@ div.one-hundred
 div.fifty
 {
   padding-left: 50px + @small_spacing;
+}
+
+.thirty
+{
+  min-width: 3px;
+  min-height: 3px;
+}
+
+div.thirty
+{
+  padding-left: 30px + @small_spacing;
 }
 
 .thirty-two
@@ -1306,6 +1328,11 @@ blockquote p:first-child,
   display: block;
 }
 
+.image-without-text
+{
+  line-height: 0;
+}
+
 hr
 {
   color: transparent;
@@ -1358,6 +1385,7 @@ hr
 {
   float: left;
   margin-right: .35em;
+  margin-top: @standard_spacing;
 }
 
 .minimal-commands-content
@@ -1549,16 +1577,37 @@ hr
   min-height: 16px;
 }
 
-.top-left-overlay
+.overlay-container
+{
+  position: relative;
+  display: inline-block;
+}
+
+.overlay()
 {
   position: absolute;
+
+  .button
+  {
+    opacity: 0.75;
+
+    &:hover
+    {
+      opacity: 1;
+    }
+  }
+}
+
+.top-left-overlay
+{
+  .overlay;
   left: 0;
   top: 0;
 }
 
 .bottom-right-overlay
 {
-  position: absolute;
+  .overlay;
   right: 0;
   bottom: 0;
 }

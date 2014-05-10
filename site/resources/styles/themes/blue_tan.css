@@ -174,6 +174,14 @@ table.columns > tbody > tr > th,
 .abstract {
   border-color: #cccccc;
 }
+p.info-box-bottom,
+div.info-box-bottom {
+  padding-top: 5px;
+}
+p.info-box-top,
+div.info-box-top {
+  padding-bottom: 5px;
+}
 .quote-block,
 .preview,
 .chart,

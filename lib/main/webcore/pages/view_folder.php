@@ -65,6 +65,7 @@ http://www.earthli.com/software/webcore/albums
   $box = $Page->make_box_renderer ();
   $box->start_column_set ();
 
+  /** @var $renderer OBJECT_RENDERER */
   $renderer = $folder->handler_for (Handler_html_renderer);
   $options = $renderer->options ();
   $options->show_as_summary = true;

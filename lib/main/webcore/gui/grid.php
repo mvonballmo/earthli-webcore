@@ -11,33 +11,32 @@
  */
 
 /****************************************************************************
-
-Copyright (c) 2002-2014 Marco Von Ballmoos
-
-This file is part of earthli WebCore.
-
-earthli WebCore is free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation; either version 2 of the License, or
-(at your option) any later version.
-
-earthli WebCore is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with earthli WebCore; if not, write to the Free Software
-Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-
-For more information about the earthli WebCore, visit:
-
-http://www.earthli.com/software/webcore
-
-****************************************************************************/
+ *
+ * Copyright (c) 2002-2014 Marco Von Ballmoos
+ *
+ * This file is part of earthli WebCore.
+ *
+ * earthli WebCore is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * earthli WebCore is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with earthli WebCore; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ *
+ * For more information about the earthli WebCore, visit:
+ *
+ * http://www.earthli.com/software/webcore
+ ****************************************************************************/
 
 /** */
-require_once ('webcore/obj/webcore_object.php');
+require_once('webcore/obj/webcore_object.php');
 
 /**
  * Renders grids of objects from a {@link QUERY}.
@@ -119,10 +118,10 @@ abstract class GRID extends WEBCORE_OBJECT
   /**
    * @param CONTEXT $context Context to which this grid belongs.
    */
-  public function __construct ($context)
+  public function __construct($context)
   {
-    parent::__construct ($context);
-    include_once ('webcore/gui/page_navigator.php');
+    parent::__construct($context);
+    include_once('webcore/gui/page_navigator.php');
     $this->pager = new PAGE_NAVIGATOR ($context);
   }
 
@@ -133,7 +132,7 @@ abstract class GRID extends WEBCORE_OBJECT
    * @param integer $num_rows Number of rows to display.
    * @param integer $num_cols Number of columns to display (some grids are not designed to use more than one column).
    */
-  public function set_ranges ($num_rows, $num_cols)
+  public function set_ranges($num_rows, $num_cols)
   {
     $this->_num_rows = $num_rows;
     $this->_num_columns = $num_cols;
@@ -144,7 +143,7 @@ abstract class GRID extends WEBCORE_OBJECT
    * Call this before calling {@link display()}.
    * @param QUERY $query
    */
-  public function set_query ($query)
+  public function set_query($query)
   {
     $this->_query = $query;
     $this->_num_objects = null;
@@ -152,10 +151,10 @@ abstract class GRID extends WEBCORE_OBJECT
 
   public function get_pager()
   {
-    if (! isset ($this->_num_objects))
+    if (!isset ($this->_num_objects))
     {
-      $this->_num_objects = $this->_get_size ();
-      $this->pager->set_ranges ($this->_num_objects, $this->_num_rows * $this->_num_columns);
+      $this->_num_objects = $this->_get_size();
+      $this->pager->set_ranges($this->_num_objects, $this->_num_rows * $this->_num_columns);
     }
 
     return $this->pager;
@@ -169,24 +168,30 @@ abstract class GRID extends WEBCORE_OBJECT
    * the grid. If there are no objects, then don't render a grid, but display a
    * 'no objects' message.
    */
-  public function display ()
+  public function display()
   {
-    if (! isset ($this->_num_objects))
+    if (!isset ($this->_num_objects))
     {
-      $this->_num_objects = $this->_get_size ();
-      $this->pager->set_ranges ($this->_num_objects, $this->_num_rows * $this->_num_columns);
+      $this->_num_objects = $this->_get_size();
+      $this->pager->set_ranges($this->_num_objects, $this->_num_rows * $this->_num_columns);
     }
 
     if ($this->_num_objects > 0)
     {
-      $objects = $this->_get_objects ();
-      if (isset ($this->env->profiler)) $this->env->profiler->start ('ui');
-      $this->_draw ($objects);
-      if (isset ($this->env->profiler)) $this->env->profiler->stop ('ui');
+      $objects = $this->_get_objects();
+      if (isset ($this->env->profiler))
+      {
+        $this->env->profiler->start('ui');
+      }
+      $this->_draw($objects);
+      if (isset ($this->env->profiler))
+      {
+        $this->env->profiler->stop('ui');
+      }
     }
     else
     {
-      $this->_draw_empty_grid ();
+      $this->_draw_empty_grid();
     }
   }
 
@@ -197,10 +202,11 @@ abstract class GRID extends WEBCORE_OBJECT
    * @return integer
    * @access private
    */
-  protected function _get_size ()
+  protected function _get_size()
   {
-    $this->assert (isset ($this->_query), 'query is not set', '_get_size', 'GRID');
-    return $this->_query->size ();
+    $this->assert(isset ($this->_query), 'query is not set', '_get_size', 'GRID');
+
+    return $this->_query->size();
   }
 
   /**
@@ -208,12 +214,13 @@ abstract class GRID extends WEBCORE_OBJECT
    * @return stdClass[]
    * @access private
    */
-  protected function _get_objects ()
+  protected function _get_objects()
   {
-    $this->assert (isset ($this->_query), 'query is not set', '_get_objects', 'GRID');
+    $this->assert(isset ($this->_query), 'query is not set', '_get_objects', 'GRID');
     $num_objects_per_page = $this->_num_rows * $this->_num_columns;
-    $this->_query->set_limits (($this->pager->page_number - 1) * $num_objects_per_page, $num_objects_per_page);
-    return $this->_query->objects ();
+    $this->_query->set_limits(($this->pager->page_number - 1) * $num_objects_per_page, $num_objects_per_page);
+
+    return $this->_query->objects();
   }
 
   /**
@@ -225,47 +232,47 @@ abstract class GRID extends WEBCORE_OBJECT
    * @param stdClass[] $objects
    * @access private
    */
-  protected function _draw ($objects)
+  protected function _draw($objects)
   {
     if ($this->show_pager)
     {
-      $this->_draw_pager (true);
+      $this->_draw_pager(true);
     }
 
-    $this->_start_grid ();
-    $this->_draw_header ();
+    $this->_start_grid();
+    $this->_draw_header();
 
     if ($this->overridden_max_title_size)
     {
       $old_size = $this->context->display_options->overridden_max_title_size;
       $this->context->display_options->overridden_max_title_size = $this->overridden_max_title_size;
-      $this->_draw_cells ($objects);
+      $this->_draw_cells($objects);
       $this->context->display_options->overridden_max_title_size = $old_size;
     }
     else
     {
-      $this->_draw_cells ($objects);
+      $this->_draw_cells($objects);
     }
 
-    $this->_draw_footer ();
-    $this->_finish_grid ();
+    $this->_draw_footer();
+    $this->_finish_grid();
 
     if ($this->show_pager)
     {
-      $this->_draw_pager (false);
+      $this->_draw_pager(false);
     }
 
-    ob_start ();
-      $this->_draw_scripts ();
-      $scripts = ob_get_contents ();
-    ob_end_clean ();
-    if (! empty ($scripts))
+    ob_start();
+    $this->_draw_scripts();
+    $scripts = ob_get_contents();
+    ob_end_clean();
+    if (!empty ($scripts))
     {
-?>
-<script type="text/javascript">
-<?php echo $scripts; ?>
-</script>
-<?php
+      ?>
+      <script type="text/javascript">
+        <?php echo $scripts; ?>
+      </script>
+    <?php
     }
   }
 
@@ -273,7 +280,7 @@ abstract class GRID extends WEBCORE_OBJECT
    * Draw JavaScripts used by this grid.
    * @access private
    */
-  protected function _draw_scripts ()
+  protected function _draw_scripts()
   {
   }
 
@@ -290,7 +297,7 @@ abstract class GRID extends WEBCORE_OBJECT
    * @param stdClass[] $objects
    * @access private
    */
-  protected function _draw_cells ($objects)
+  protected function _draw_cells($objects)
   {
     $index = 0;
     $remainder = 0;
@@ -303,30 +310,30 @@ abstract class GRID extends WEBCORE_OBJECT
       {
         if ($this->show_page_breaks && ($index % $this->rows_per_printed_page == 0))
         {
-          $this->_draw_page_break ();
+          $this->_draw_page_break();
         }
 
-        $this->_start_row ($obj);
+        $this->_start_row($obj);
       }
 
-      $this->_start_box ($obj);
-      $this->_draw_box ($obj);
-      $this->_finish_box ($obj);
+      $this->_start_box($obj);
+      $this->_draw_box($obj);
+      $this->_finish_box($obj);
 
       if ($remainder == $this->_num_columns - 1)
       {
-        $this->_finish_row ($obj);
+        $this->_finish_row($obj);
       }
-      
+
       $index += 1;
     }
-    
+
     // if there were fewer than 'num_columns' cells in the last row
 
     if ($remainder < $this->_num_columns - 1)
     {
-      $empty = null;  // avoid a compile warning
-      $this->_finish_row ($empty);
+      $empty = null; // avoid a compile warning
+      $this->_finish_row($empty);
     }
   }
 
@@ -336,7 +343,9 @@ abstract class GRID extends WEBCORE_OBJECT
    * Called from {@link _draw()}.
    * @access private
    */
-  protected function _start_grid () {}
+  protected function _start_grid()
+  {
+  }
 
   /**
    * Render the header for the grid.
@@ -344,7 +353,9 @@ abstract class GRID extends WEBCORE_OBJECT
    * Called from {@link _draw()}.
    * @access private
    */
-  protected function _draw_header () {}
+  protected function _draw_header()
+  {
+  }
 
   /**
    * Start rendering a row.
@@ -352,7 +363,9 @@ abstract class GRID extends WEBCORE_OBJECT
    * @param object $obj
    * @access private
    */
-  protected function _start_row ($obj) {}
+  protected function _start_row($obj)
+  {
+  }
 
   /**
    * Finish rendering a row.
@@ -360,7 +373,9 @@ abstract class GRID extends WEBCORE_OBJECT
    * @param object $obj
    * @access private
    */
-  protected function _finish_row ($obj) {}
+  protected function _finish_row($obj)
+  {
+  }
 
   /**
    * Render the footer for the grid.
@@ -368,14 +383,18 @@ abstract class GRID extends WEBCORE_OBJECT
    * Called from {@link _draw()}.
    * @access private
    */
-  protected function _draw_footer () {}
+  protected function _draw_footer()
+  {
+  }
 
   /**
    * Finish rendering the grid.
    * Called from {@link _draw()}.
    * @access private
    */
-  protected function _finish_grid () {}
+  protected function _finish_grid()
+  {
+  }
 
   /**
    * Render the start of a single cell.
@@ -383,7 +402,9 @@ abstract class GRID extends WEBCORE_OBJECT
    * @param object $obj
    * @access private
    */
-  protected function _start_box ($obj) {}
+  protected function _start_box($obj)
+  {
+  }
 
   /**
    * Close the open cell.
@@ -391,7 +412,9 @@ abstract class GRID extends WEBCORE_OBJECT
    * @param object $obj
    * @access private
    */
-  protected function _finish_box ($obj) {}
+  protected function _finish_box($obj)
+  {
+  }
 
   /**
    * Render the actual cell contents.
@@ -400,7 +423,7 @@ abstract class GRID extends WEBCORE_OBJECT
    * @access private
    * @abstract
    */
-  protected abstract function _draw_box ($obj);
+  protected abstract function _draw_box($obj);
 
   /**
    * Render the page navigator, if necessary.
@@ -409,9 +432,9 @@ abstract class GRID extends WEBCORE_OBJECT
    * pager.
    * @access private
    */
-  protected function _draw_pager ($include_anchor_id)
+  protected function _draw_pager($include_anchor_id)
   {
-    $output = $this->pager->as_html ();
+    $output = $this->pager->as_html();
     if ($output)
     {
       if ($include_anchor_id && $this->pager->page_anchor)
@@ -429,7 +452,7 @@ abstract class GRID extends WEBCORE_OBJECT
    * Called if there are no objects in the query.
    * @access private
    */
-  protected function _draw_empty_grid ()
+  protected function _draw_empty_grid()
   {
     $this->context->show_message('This list is empty.', 'info');
   }
@@ -440,11 +463,11 @@ abstract class GRID extends WEBCORE_OBJECT
    * {@link $rows_per_printed_page} have been rendered.
    * @access private
    */
-  protected function _draw_page_break ()
+  protected function _draw_page_break()
   {
-?>
-  <div style="page-break-before: always"></div>
-<?php
+    ?>
+    <div style="page-break-before: always"></div>
+  <?php
   }
 
   /**
@@ -454,17 +477,60 @@ abstract class GRID extends WEBCORE_OBJECT
    * @param RENDERABLE $obj
    * @param string $size Sizing constant; see {@link Menu_size_standard}.
    */
-  protected function _draw_menu_for ($obj, $size = Menu_size_standard)
+  protected function _draw_menu_for($obj, $size = Menu_size_standard)
   {
     if ($this->show_menus)
     {
       /** @var MENU_RENDERER $renderer */
-      $renderer = $obj->handler_for (Handler_menu);
-      $renderer->set_size ($size);
+      $renderer = $obj->handler_for(Handler_menu);
+      $renderer->set_size($size);
       /** @var COMMANDS $commands */
       $commands = $obj->handler_for(Handler_commands);
-      $renderer->display ($commands);
+      $renderer->display($commands);
     }
+  }
+
+  protected function _display_start_overlay_container()
+  {
+    ?>
+    <div class="overlay-container">
+  <?php
+  }
+
+  protected function _display_finish_overlay_container()
+  {
+    ?>
+    </div>
+  <?php
+  }
+
+  protected function _display_start_overlay_commands($obj)
+  {
+    $this->_display_start_overlay_container();
+    ?>
+    <div class="top-left-overlay">
+      <?php
+      $this->_draw_menu_for($obj, Menu_size_minimal);
+      ?>
+    </div>
+  <?php
+  }
+
+  protected function _display_finish_overlay_commands()
+  {
+    $this->_display_finish_overlay_container();
+  }
+
+  protected function _display_start_bottom_right_overlay()
+  {
+    ?>
+    <div class="bottom-right-overlay">
+  <?php
+  }
+
+  protected function _display_finish_bottom_right_overlay()
+  {
+    echo '</div>';
   }
 
   /**
@@ -476,7 +542,7 @@ abstract class GRID extends WEBCORE_OBJECT
     {
       ?>
       <div class="minimal-commands">
-        <?php $this->_draw_menu_for ($obj, Menu_size_minimal); ?>
+        <?php $this->_draw_menu_for($obj, Menu_size_minimal); ?>
       </div>
       <div class="minimal-commands-content">
     <?php
@@ -499,7 +565,7 @@ abstract class GRID extends WEBCORE_OBJECT
    * @return string
    * @access private
    */
-  protected function _style_for_grid ()
+  protected function _style_for_grid()
   {
     if ($this->width)
     {
@@ -510,9 +576,9 @@ abstract class GRID extends WEBCORE_OBJECT
       $styles [] = 'page-break-before: always';
     }
 
-    if (isset ($styles) && sizeof ($styles))
+    if (isset ($styles) && sizeof($styles))
     {
-      return join ('; ', $styles);
+      return join('; ', $styles);
     }
 
     return '';
@@ -524,9 +590,9 @@ abstract class GRID extends WEBCORE_OBJECT
    * @return string
    * @access private
    */
-  protected function _CSS_for_box ()
+  protected function _CSS_for_box()
   {
-    $style = $this->_style_for_box ();
+    $style = $this->_style_for_box();
     $attrs = array();
     if (!empty($style))
     {
@@ -536,9 +602,9 @@ abstract class GRID extends WEBCORE_OBJECT
     {
       $attrs [] = "class=\"$this->box_css_class\"";
     }
-    if (sizeof ($attrs))
+    if (sizeof($attrs))
     {
-      return join (' ', $attrs);
+      return join(' ', $attrs);
     }
 
     return '';
@@ -550,11 +616,12 @@ abstract class GRID extends WEBCORE_OBJECT
    * @return string
    * @access private
    */
-  protected function _style_for_box ()
+  protected function _style_for_box()
   {
     if ($this->even_columns && ($this->_num_columns > 1))
     {
-      $width = round (100 / $this->_num_columns, 0);
+      $width = round(100 / $this->_num_columns, 0);
+
       return "vertical-align: top; width: $width%";
     }
 
@@ -604,12 +671,19 @@ abstract class HTML_TABLE_GRID extends GRID
    * Start rendering the grid.
    * @access private
    */
-  protected function _start_grid ()
+  protected function _start_grid()
   {
-    $style = $this->_style_for_grid ();
-?>
-<table class="grid <?php echo $this->table_style; ?>" <?php if ($style) echo " style=\"$style\""; if ($this->border_size) echo " border=\"$this->border_size\""; ?>>
-<?php
+    $style = $this->_style_for_grid();
+    ?>
+    <table class="grid <?php echo $this->table_style; ?>" <?php if ($style)
+  {
+    echo " style=\"$style\"";
+  }
+    if ($this->border_size)
+    {
+      echo " border=\"$this->border_size\"";
+    } ?>>
+  <?php
   }
 
   /**
@@ -617,11 +691,9 @@ abstract class HTML_TABLE_GRID extends GRID
    * @param object $obj
    * @access private
    */
-  protected function _start_row ($obj)
+  protected function _start_row($obj)
   {
-?>
-  <tr>
-<?php
+    $this->_internal_start_row();
   }
 
   /**
@@ -629,12 +701,9 @@ abstract class HTML_TABLE_GRID extends GRID
    * @param object $obj
    * @access private
    */
-  protected function _start_box ($obj)
+  protected function _start_box($obj)
   {
-    $attrs = $this->_CSS_for_box ();
-?>
-<td<?php if ($attrs) echo " $attrs"; ?>>
-<?php
+    $this->_internal_start_cell($this->_CSS_for_box());
   }
 
   /**
@@ -642,11 +711,9 @@ abstract class HTML_TABLE_GRID extends GRID
    * @param object $obj
    * @access private
    */
-  protected function _finish_box ($obj)
+  protected function _finish_box($obj)
   {
-?>
-</td>
-<?php
+    $this->_internal_finish_cell();
   }
 
   /**
@@ -654,11 +721,9 @@ abstract class HTML_TABLE_GRID extends GRID
    * @param object $obj
    * @access private
    */
-  protected function _finish_row ($obj)
+  protected function _finish_row($obj)
   {
-?>
-  </tr>
-<?php
+    $this->_internal_finish_row();
   }
 
   /**
@@ -667,27 +732,73 @@ abstract class HTML_TABLE_GRID extends GRID
    * {@link $rows_per_printed_page} have been rendered.
    * @access private
    */
-  protected function _draw_page_break ()
+  protected function _draw_page_break()
   {
-?>
-<tr style="page-break-before: always"><td colspan="<?php echo $this->_num_columns; ?>"></td></tr>
-<?php
+    $this->_internal_start_row('style="page-break-before: always"');
+    $this->_internal_start_cell('colspan="' . $this->_num_columns . '"');
+    $this->_internal_finish_cell();
+    $this->_internal_finish_row();
   }
 
   /**
    * Finish rendering the grid.
    * @access private
    */
-  protected function _finish_grid ()
+  protected function _finish_grid()
   {
-?>
-</table>
-<?php
+    ?>
+    </table>
+  <?php
   }
 
-  protected function _new_column ()
+  protected function _new_column()
   {
-    echo "</td>\n<td>";
+    $this->_internal_finish_cell();
+    $this->_internal_start_cell();
+  }
+
+  protected function _internal_start_row($attributes = null)
+  {
+    if ($attributes)
+    {
+      echo '<tr ' . $attributes . '>';
+    }
+    else
+    {
+      echo '<tr>';
+    }
+  }
+
+  protected function _internal_start_cell($attributes = null)
+  {
+    if ($attributes)
+    {
+      echo '<td ' . $attributes . '>';
+    }
+    else
+    {
+      echo '<td>';
+    }
+  }
+
+  protected function _internal_finish_cell()
+  {
+    echo '</td>';
+  }
+
+  protected function _internal_start_header_cell()
+  {
+    echo '<th>';
+  }
+
+  protected function _internal_finish_header_cell()
+  {
+    echo '</th>';
+  }
+
+  protected function _internal_finish_row()
+  {
+    echo '</tr>';
   }
 }
 
@@ -725,13 +836,13 @@ abstract class CSS_FLOW_GRID extends GRID
    * Start rendering the grid.
    * @access private
    */
-  protected function _start_grid ()
+  protected function _start_grid()
   {
-    $style = $this->_style_for_grid ();
+    $style = $this->_style_for_grid();
     $style .= '; display: table';
-?>
-<div style="<?php echo $style; ?>">
-<?php
+    ?>
+    <div style="<?php echo $style; ?>">
+  <?php
   }
 
   /**
@@ -739,55 +850,59 @@ abstract class CSS_FLOW_GRID extends GRID
    * @param object $obj
    * @access private
    */
-  protected function _start_row ($obj)
-  {
-?>
-<div style="display: table">
+protected function _start_row ($obj)
+{
+  ?>
+  <div style="display: table">
 <?php
-  }
+}
 
   /**
    * Render the start of a single cell.
    * @param object $obj
    * @access private
    */
-  protected function _start_box ($obj)
+protected function _start_box ($obj)
+{
+  $attrs = $this->_CSS_for_box();
+  ?>
+  <div<?php if ($attrs)
   {
-    $attrs = $this->_CSS_for_box ();
-?><div<?php if ($attrs) echo " $attrs"; ?>><?php
-  }
+    echo " $attrs";
+  } ?>><?php
+}
 
   /**
    * Close the open cell.
    * @param object $obj
    * @access private
    */
-  protected function _finish_box ($obj)
-  {
-?></div><?php
-  }
+protected function _finish_box ($obj)
+{
+  ?></div><?php
+}
 
   /**
    * Finish rendering a row.
    * @param object $obj
    * @access private
    */
-  protected function _finish_row ($obj)
-  {
-?>
-</div>
+protected function _finish_row ($obj)
+{
+  ?>
+  </div>
 <?php
-  }
+}
 
   /**
    * Finish rendering the grid.
    * @access private
    */
-  protected function _finish_grid ()
+  protected function _finish_grid()
   {
-?>
-</div>
-<?php
+    ?>
+    </div>
+  <?php
   }
 
   /**
@@ -796,9 +911,9 @@ abstract class CSS_FLOW_GRID extends GRID
    * @return string
    * @access private
    */
-  protected function _style_for_box ()
+  protected function _style_for_box()
   {
-    $style = parent::_style_for_box ();
+    $style = parent::_style_for_box();
     if ($style)
     {
       $Result = $style . '; float: left';

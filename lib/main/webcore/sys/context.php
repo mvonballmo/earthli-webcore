@@ -657,6 +657,9 @@ class CONTEXT extends RESOLVER
       case Thirty_two_px:
         $class = 'thirty-two';
         break;
+      case Thirty_px:
+        $class = 'thirty';
+        break;
       case Fifty_px:
         $class = 'fifty';
         break;

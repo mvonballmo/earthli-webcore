@@ -55,21 +55,15 @@ class FOLDER_RENDERER extends CONTENT_OBJECT_RENDERER
    */
   protected function _display_as_html ($obj)
   {
-    $use_table = ! $this->_options->show_as_summary && $obj->icon_url;
-    if ($use_table)
+    if ($obj->icon_url)
     {
-      $box = $this->context->make_box_renderer ();
-      $box->start_column_set ();
-      $box->new_column_of_type ('left-column');
-      echo $obj->icon_as_html (Fifty_px);
-      $box->new_column ();
+      $this->context->start_icon_container($obj->icon_url, Fifty_px);
+      parent::_display_as_html($obj);
+      $this->context->finish_icon_container();
     }
-
-    $this->_echo_html_content ($obj);
-
-    if ($use_table)
+    else
     {
-      $box->finish_column_set ();
+      parent::_display_as_html($obj);
     }
   }
 

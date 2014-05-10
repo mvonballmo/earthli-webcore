@@ -61,7 +61,7 @@ class DRAFTABLE_ENTRY_SUMMARY_GRID extends ENTRY_SUMMARY_GRID
 {
   /**
    * Show search details for an object.
-   * @param OBJECT_IN_FOLDER $obj
+   * @param DRAFTABLE_ENTRY $obj
    * @access private
    */
   protected function _echo_details ($obj)
