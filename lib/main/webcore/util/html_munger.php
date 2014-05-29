@@ -2328,7 +2328,7 @@ class HTML_TEXT_MUNGER extends HTML_BASE_MUNGER
     $this->register_replacer ('fn', new HTML_FOOTNOTE_REFERENCE_REPLACER (), false);
     $this->register_transformer ('ft', $block_transformer);
     $this->register_replacer ('ft', new HTML_FOOTNOTE_TEXT_REPLACER ());
-    $this->register_replacer ('hr', new HTML_BASIC_REPLACER ('<span class="horizontal-separator"></span>', ''), false);
+    $this->register_replacer ('hr', new HTML_BASIC_REPLACER ('<hr>', ''), false);
     $this->register_replacer ('a', new HTML_LINK_REPLACER ());
     $this->register_replacer ('anchor', new HTML_ANCHOR_REPLACER (), false);
     $this->register_replacer ('img', new HTML_IMAGE_REPLACER (), false);

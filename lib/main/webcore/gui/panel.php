@@ -1181,11 +1181,6 @@ abstract class GRID_PANEL extends PANEL
 abstract class QUERY_PANEL extends GRID_PANEL
 {
   /**
-   * @var boolean
-   */
-  public $uses_time_selector = true;
-  
-  /**
    * @var QUERY
    */
   public $query;
@@ -1198,6 +1193,7 @@ abstract class QUERY_PANEL extends GRID_PANEL
   {
     parent::__construct ($manager);
     $this->query = $query;
+    $this->uses_time_selector = true;
   }
 
   /**

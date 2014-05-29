@@ -75,7 +75,6 @@ class JOURNAL extends ALBUM_ENTRY
   /**
    * All properties of this entry's kind.
    * These are the properties defined in the user data file.
-   * @see weather_icon()
    */
   public function weather_icon_properties ()
   {
@@ -87,21 +86,9 @@ class JOURNAL extends ALBUM_ENTRY
     else
     {
       $prop = new PROPERTY_VALUE ($this->app);
-      $prop->title = "[Unknown weather ($this->kind)]";
+      $prop->title = "[Unknown weather ($this->weather_type)]";
       return $prop;
     }
-  }
-
-  /**
-   * HTML code for the icon to use for this kind.
-   * @see weather_icon_properties()
-   * @param string $size
-   * @return string
-   */
-  public function weather_icon ($size = '30px')
-  {
-    $props = $this->weather_icon_properties ();
-    return $props->icon_as_html ($size);
   }
 
   /**
@@ -110,6 +97,7 @@ class JOURNAL extends ALBUM_ENTRY
    */
   public function temperature_as_html ()
   {
+    /** @var ALBUM $folder */
     $folder = $this->parent_folder ();
     $lo = $folder->temperature_as_html ($this->lo_temp);
     $hi = $folder->temperature_as_html ($this->hi_temp);
@@ -211,11 +199,11 @@ class JOURNAL extends ALBUM_ENTRY
   public function store_to ($storage)
   {
     parent::store_to ($storage);
-    $tname =$this->secondary_table_name ();
-    $storage->add ($tname, 'weather', Field_type_string, $this->weather);
-    $storage->add ($tname, 'lo_temp', Field_type_integer, $this->lo_temp);
-    $storage->add ($tname, 'hi_temp', Field_type_integer, $this->hi_temp);
-    $storage->add ($tname, 'weather_type', Field_type_integer, $this->weather_type);
+    $table_name =$this->secondary_table_name ();
+    $storage->add ($table_name, 'weather', Field_type_string, $this->weather);
+    $storage->add ($table_name, 'lo_temp', Field_type_integer, $this->lo_temp);
+    $storage->add ($table_name, 'hi_temp', Field_type_integer, $this->hi_temp);
+    $storage->add ($table_name, 'weather_type', Field_type_integer, $this->weather_type);
   }
 
   /**
@@ -277,5 +265,3 @@ class JOURNAL extends ALBUM_ENTRY
    */
   public $type = 'journal';
 }
-
-?>

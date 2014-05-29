@@ -210,17 +210,6 @@ class COMMENT extends ATTACHMENT_HOST
   }
 
   /**
-   * The raw URL to the icon to use for this comment.
-   * @param string $size
-   * @return string
-   */
-  public function icon_url ($size = Fifteen_px)
-  {
-    $props = $this->icon_properties ();
-    return $props->expanded_icon_url($size);
-  }
-
-  /**
    * Attach this comment to an entry.
    * Does not store to the database. Sets up both the entry and the folder information
    * for this comment; used during object setup when retrieved from database.

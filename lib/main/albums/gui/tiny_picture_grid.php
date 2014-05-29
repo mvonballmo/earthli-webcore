@@ -51,10 +51,19 @@ require_once ('webcore/gui/grid.php');
  */
 class TINY_PICTURE_GRID extends CSS_FLOW_GRID
 {
-  public $box_css_class = 'tiny-picture';
-  public $width = '';
   public $max_width = 100;
   public $max_height = 75;
+
+  /**
+   * @param CONTEXT $context Context to which this grid belongs.
+   */
+  public function __construct($context)
+  {
+    parent::__construct($context);
+
+    $this->width = '';
+    $this->box_css_class = 'tiny-picture';
+  }
 
   /**
    * @param PICTURE $obj

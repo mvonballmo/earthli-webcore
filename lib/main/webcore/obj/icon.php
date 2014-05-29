@@ -69,11 +69,12 @@ class ICON extends UNIQUE_OBJECT
   public $url;
 
   /**
+   * @param string $size
    * @return string
    */
   public function icon_as_html ($size = One_hundred_px)
   {
-    return $this->context->image_as_html ($this->home_page (), $this->title, $size);
+    return $this->context->resolve_icon_as_html($this->home_page (), $this->title, $size);
   }
 
   /**
@@ -93,10 +94,10 @@ class ICON extends UNIQUE_OBJECT
   public function store_to ($storage)
   {
     parent::store_to ($storage);
-    $tname = $this->table_name ();
-    $storage->add ($tname, 'title', Field_type_string, $this->title);
-    $storage->add ($tname, 'category', Field_type_string, $this->category);
-    $storage->add ($tname, 'url', Field_type_string, $this->url);
+    $table_name = $this->table_name ();
+    $storage->add ($table_name, 'title', Field_type_string, $this->title);
+    $storage->add ($table_name, 'category', Field_type_string, $this->category);
+    $storage->add ($table_name, 'url', Field_type_string, $this->url);
   }
 
   /**

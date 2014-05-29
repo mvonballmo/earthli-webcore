@@ -198,17 +198,12 @@ class EXCEPTION_RENDERER extends OBJECT_RENDERER
   {
     if (sizeof ($arr))
     {
-      $layer = $this->context->make_layer ('array_' . $title);
-      $layer->name = 'array_' . $title;
-      $layer->visible = false;
 ?>
 <tr>
-  <th><?php echo $title . ' ' . $layer->toggle_as_html (); ?></th>
+  <th><?php echo $title; ?></th>
   <td>
     <div><span class="field"><?php echo sizeof ($arr); ?></span> parameters</div>
-    <?php $layer->start (); ?>
     <pre><?php print_r ($arr); ?></pre>
-    <?php $layer->finish (); ?>
   </td>
 </tr>
 <?php

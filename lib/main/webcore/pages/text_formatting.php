@@ -1337,7 +1337,7 @@ to be
             et fringilla arcu luctus id. Nulla at
             tortor at erat sagittis pellentesque.
           </p>
-          <p><span class="horizontal-separator"></span></p>
+          <hr>
           <div class="footnote-reference"><span id="footnote_body" class="footnote-number">[1]</span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ac
             leo accumsan, semper magna in, consectetur metus. Mauris dictum adipiscing metus
             sed accumsan.<a href="#footnote_ref" class="footnote-return" title="Jump back to reference.">&#8617;</a></div>
@@ -1420,7 +1420,7 @@ to be
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ac
             leo accumsan, semper magna in...
           </p>
-          <p><span class="horizontal-separator"></span></p>
+          <hr>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ac
             leo accumsan, semper magna in...</p>
         </td>

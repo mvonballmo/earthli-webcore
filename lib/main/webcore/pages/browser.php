@@ -151,7 +151,7 @@ $Page->start_display();
     $renderer = new $class_name ($Page);
     $renderer->display_as_html($browser);
     ?>
-    <hr class="horizontal-separator" style="margin: .5em">
+    <hr>
     <p class="notes">Problems with your browser? <a href="#report_problem">Report it</a>.</p>
     <h2 id="downloads">
       <?php echo $Page->get_text_with_icon('{icons}buttons/download_to_hd', 'Download', Thirty_two_px); ?>

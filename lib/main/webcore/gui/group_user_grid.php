@@ -49,16 +49,6 @@ require_once ('webcore/gui/grid.php');
 class GROUP_USER_GRID extends STANDARD_GRID
 {
   /**
-   * @var boolean
-   */
-  public $even_columns = false;
-
-  /**
-   * @var string
-   */
-  public $width = '';
-
-  /**
    * @param GROUP $group Show users from this group.
    */
   public function __construct ($group)
@@ -66,6 +56,8 @@ class GROUP_USER_GRID extends STANDARD_GRID
     parent::__construct ($group->app);
     $this->_group_id = $group->id;
     $this->_controls_renderer = $this->app->make_controls_renderer ();
+    $this->even_columns = false;
+    $this->width = '';
   }
 
   /**
@@ -78,7 +70,7 @@ class GROUP_USER_GRID extends STANDARD_GRID
 
     if ($this->login->is_allowed (Privilege_set_group, Privilege_modify))
     {
-      echo "</td>\n<td>";
+      $this->_new_column();
       echo $this->_controls_renderer->button_as_html ('Remove...', 'delete_user_from_group.php?id=' . $this->_group_id . '&name=' . $obj->title, '{icons}buttons/delete');
     }
   }

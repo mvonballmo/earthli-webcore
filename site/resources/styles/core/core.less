@@ -123,20 +123,6 @@ table
     }
   }
 
-  // Not sure if we need this
-  &.grid
-  {
-
-    > tbody > tr > td
-    {
-      vertical-align: top;
-      & + td
-      {
-        padding-left: @standard_spacing;
-      }
-    }
-  }
-
   &.columns
   {
     > tbody > tr
@@ -307,7 +293,7 @@ pre > code
 {
   display: block;
   padding-left: @standard_spacing;
-  border-left: @thick_border_width solid @standard_border_color;
+  border-left: @thick_border_width solid @code_border_color;
   margin: @standard_spacing 0 @standard_spacing -@thick_border_width;
 }
 
@@ -585,12 +571,6 @@ pre > code
 }
 
 .info-box-top,
-.info-box-bottom
-{
-  clear: both;
-}
-
-.info-box-top,
 .info-box-bottom,
 .subdued
 {
@@ -677,8 +657,8 @@ div.fifty
 
 .thirty
 {
-  min-width: 3px;
-  min-height: 3px;
+  min-width: 30px;
+  min-height: 30px;
 }
 
 div.thirty
@@ -1312,22 +1292,6 @@ blockquote p:first-child,
 {
 }
 
-.vertical-separator
-{
-  border-left: @hairline_border_width solid #000000;
-  empty-cells: show;
-  width: .1em
-}
-
-.horizontal-separator
-{
-  border-bottom: @hairline_border_width solid @standard_border_color;
-  empty-cells: show;
-  height: @hairline_border_width;
-  clear: both;
-  display: block;
-}
-
 .image-without-text
 {
   line-height: 0;
@@ -1338,8 +1302,7 @@ hr
   color: transparent;
   border: 0;
   border-bottom: @hairline_border_width solid @standard_border_color;
-  empty-cells: show;
-  height: .1em;
+  height: @hairline_border_width;
   clear: both;
   display: block;
 }

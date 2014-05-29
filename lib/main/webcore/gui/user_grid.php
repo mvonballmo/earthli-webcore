@@ -48,9 +48,14 @@ require_once('webcore/gui/content_object_grid.php');
 class USER_GRID extends CONTENT_OBJECT_GRID
 {
   /**
-   * @var boolean
+   * @param CONTEXT $context Context to which this grid belongs.
    */
-  public $even_columns = false;
+  public function __construct($context)
+  {
+    parent::__construct($context);
+
+    $this->even_columns = false;
+  }
 
   /**
    * @param USER $obj

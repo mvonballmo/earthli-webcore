@@ -37,7 +37,7 @@ http://www.earthli.com/software/webcore/albums
 ****************************************************************************/
 
 /** */
-require_once ('webcore/gui/folder_grid.php');
+require_once('webcore/gui/folder_grid.php');
 
 /**
  * Display {@link ALBUM}s from a {@link QUERY}.
@@ -52,60 +52,58 @@ class ALBUM_GRID extends FOLDER_GRID
    * @param ALBUM $obj
    * @access private
    */
-  protected function _draw_box ($obj)
+  protected function _draw_box($obj)
   {
-    $main_pic = $obj->main_picture ();
-?>
+    $main_pic = $obj->main_picture();
+    ?>
     <?php
     if ($main_pic)
     {
-      $f = $main_pic->date->formatter ();
+      $f = $main_pic->date->formatter();
       $f->show_CSS = false;
-      $pic_title = $main_pic->title_as_plain_text () . " (" . $obj->format_date ($main_pic->date, $f) . ")";
+      $pic_title = $main_pic->title_as_plain_text() . " (" . $obj->format_date($main_pic->date, $f) . ")";
       ?>
-      <div style="position: relative">
-        <p>
-        <a href="view_folder.php?<?php echo "id=$obj->id"; ?>"><img src="<?php echo $main_pic->full_thumbnail_name (); ?>" title="<?php echo $pic_title; ?>" alt="<?php echo $pic_title; ?>"></a>
-        </p>
-      <div class="top-left-overlay">
-        <?php
-        $this->_draw_menu_for ($obj, Menu_size_minimal);
-        ?>
+      <h3>
+        <?php echo $obj->title_as_html(); ?>
+      </h3>
+      <?php
+      $this->_display_start_overlay_commands($obj);
+      ?>
+      <div>
+        <a href="view_folder.php?<?php echo "id=$obj->id"; ?>"><img
+            src="<?php echo $main_pic->full_thumbnail_name(); ?>" title="<?php echo $pic_title; ?>"
+            alt="<?php echo $pic_title; ?>"></a>
       </div>
     <?php
+      $this->_display_finish_overlay_commands();
     }
     else
     {
+      $this->_display_start_minimal_commands_block($obj);
       ?>
-      <div style="float: left; padding-right: 15px; padding-top: .5em">
-        <?php
-        $this->_draw_menu_for ($obj, Menu_size_minimal);
-        ?>
-      </div>
+      <h3>
+        <?php echo $obj->title_as_html(); ?>
+      </h3>
       <p>
         <a href="view_folder.php?<?php echo "id=$obj->id"; ?>"><?php echo $obj->title; ?></a>
       </p>
     <?php
     }
     ?>
-    </div>
-  <h3>
-    <?php echo $obj->title_as_html (); ?>
-  </h3>
-  <p class="detail">
+    <p class="detail">
+      <?php
+      if ($obj->is_multi_day())
+      {
+        echo $obj->format_date($obj->first_day) . ' - ' . $obj->format_date($obj->last_day);
+      }
+      else
+      {
+        echo $obj->format_date($obj->first_day);
+      }
+      ?>
+    </p>
+    <div style="margin-right: 20%"><?php echo $obj->summary_as_html(); ?></div>
   <?php
-    if ($obj->is_multi_day ())
-    {
-      echo $obj->format_date ($obj->first_day) . ' - ' . $obj->format_date ($obj->last_day);
-    }
-    else
-    {
-      echo $obj->format_date ($obj->first_day);
-    }
-  ?>
-  </p>
-  <div style="margin-right: 20%"><?php echo $obj->summary_as_html (); ?></div>
-<?php
   }
 }
 

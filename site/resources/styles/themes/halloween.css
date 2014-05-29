@@ -72,6 +72,9 @@ body {
 code {
   color: #ffffff;
 }
+pre > code {
+  border-color: #666666;
+}
 a:link,
 a:visited {
   color: #ff9933;
@@ -150,8 +153,6 @@ h4 code {
 .nav-box,
 .top-box,
 .footer,
-.horizontal-separator,
-.vertical-separator,
 .left-sidebar,
 .right-sidebar,
 .info-box-top,
@@ -162,6 +163,7 @@ h4 code {
 .description-box,
 table.columns > tbody > tr > td,
 table.columns > tbody > tr > th,
+hr,
 .abstract {
   border-color: #666666;
 }
@@ -176,7 +178,6 @@ div.info-box-top {
 .quote-block,
 .preview,
 .chart,
-pre > code,
 .basic-form-block,
 .pullquote {
   border-color: #999999;

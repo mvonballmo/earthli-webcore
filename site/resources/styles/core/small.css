@@ -72,17 +72,22 @@ h5,
   font-size: 8pt;
 }
 
-  .icon.sixteen
-  {
-    padding-top: 3px;
-  }
+.icon.sixteen
+{
+  padding-top: 3px;
+}
 
-  .icon.twenty
-  {
-    padding-top: .4em;
-  }
+.icon.twenty
+{
+  padding-top: .4em;
+}
 
-  .icon.thirty-two
-  {
-    padding-top: 1em;
-  }
+.icon.thirty-two
+{
+  padding-top: 1em;
+}
+
+.style-controls select:not([size])
+{
+  height: 31px;
+}

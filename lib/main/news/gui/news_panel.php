@@ -70,5 +70,3 @@ class NEWS_PANEL_MANAGER_HELPER extends PANEL_MANAGER_HELPER
     }
   }
 }
-
-?>

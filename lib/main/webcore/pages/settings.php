@@ -384,7 +384,7 @@ class SAMPLE_FORM extends FORM
     This is the text of an abstract. These are often used to summarize much longer blocks of text, similar in a way to the block at the beginning of a scientific paper.
   </div>
   <p>This is text before a rule.</p>
-  <p><span class="horizontal-separator"></span></p>
+  <hr>
   <p>This is text after a rule.</p>
   <div class="quote pullquote right" style="float: right; width: 150px">Pull-quotes catch your eye.</div>
   <p>This is the text that accompanies the pull-quote. Pull-quotes are often used to highlight interesting bits of text in much longer articles in order to pique a reader's interest or to catch a scanner's eye.</p>

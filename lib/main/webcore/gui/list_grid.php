@@ -62,9 +62,14 @@ abstract class LIST_GRID extends STANDARD_GRID
   public $use_spacers = false;
 
   /**
-   * @var boolean
+   * @param CONTEXT $context Context to which this grid belongs.
    */
-  public $even_columns = false;
+  public function __construct($context)
+  {
+    parent::__construct($context);
+
+    $this->even_columns = false;
+  }
 
   /**
    * Add a column to the end of the list.

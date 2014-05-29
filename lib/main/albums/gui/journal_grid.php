@@ -127,12 +127,13 @@
       parent::_echo_details($obj);
       ?>
       <tr>
-        <th>Temperature:</th>
-        <td><?php echo $obj->temperature_as_html(); ?></td>
-      </tr>
-      <tr>
-        <th>Weather:</th>
-        <td><?php echo $obj->weather_icon(); ?></td>
+        <th>Weather</th>
+        <td>
+          <?php
+          $props = $obj->weather_icon_properties();
+          echo $this->context->get_text_with_icon($props->icon, $obj->temperature_as_html(), Thirty_px);
+          ?>
+        </td>
       </tr>
     <?php
     }

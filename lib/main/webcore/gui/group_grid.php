@@ -68,7 +68,7 @@ class GROUP_GRID extends STANDARD_GRID
     $this->_new_column ();
     echo $obj->title_as_link ();
     $user_query = $obj->user_query ();
-    $this->_new_column ();
+    $this->_new_column ('class="numeric"');
     echo $user_query->size ();
   }
 
@@ -79,7 +79,7 @@ class GROUP_GRID extends STANDARD_GRID
   {
 ?>
 <tr>
-  <th></th>
+  <td></td>
   <th>Name</th>
   <th>Users</th>
 </tr>

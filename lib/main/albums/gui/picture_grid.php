@@ -37,7 +37,7 @@ http://www.earthli.com/software/webcore/albums
 ****************************************************************************/
 
 /** */
-require_once ('albums/gui/album_entry_grid.php');
+require_once('albums/gui/album_entry_grid.php');
 
 /**
  * Display {@link PICTURE}s from a {@link QUERY}.
@@ -77,55 +77,53 @@ class PICTURE_GRID extends ALBUM_ENTRY_GRID
    * @param PICTURE $obj
    * @access private
    */
-  protected function _draw_box ($obj)
+  protected function _draw_box($obj)
   {
-    $folder = $obj->parent_folder ();
-?>
-  <?php
-    $this->_url->replace_argument ('id', $obj->id);
-  ?>
-  <div style="position: relative">
-    <p>
-      <a href="<?php echo $this->_url->as_html (); ?>"><img src="<?php echo $obj->full_thumbnail_name (); ?>" alt="Picture"></a>
-    </p>
-    <?php
-      if ($this->show_controls)
-      {
+    /** @var ALBUM $folder */
+    $folder = $obj->parent_folder();
     ?>
-        <div class="top-left-overlay">
     <?php
-        $this->_draw_menu_for ($obj, Menu_size_minimal);
-    ?>
-        </div>
-    <?php
-      }
-    ?>
-  </div>
-  <h3>
-    <?php
-    if ($this->show_folder)
+    $this->_url->replace_argument('id', $obj->id);
+    if ($this->show_controls)
     {
-      echo $folder->title_as_link () . $this->app->display_options->object_separator;
+      $this->_display_start_overlay_commands($obj);
     }
-    echo $this->obj_link ($obj);
     ?>
-  </h3>
-  <?php
-  if ($this->show_date)
-  {
+    <div class="image-without-text">
+      <a href="<?php echo $this->_url->as_html(); ?>"><img src="<?php echo $obj->full_thumbnail_name(); ?>"
+                                                           alt="Picture"></a>
+    </div>
+    <?php
+    if ($this->show_controls)
+    {
+      $this->_display_finish_overlay_commands();
+    }
     ?>
-    <p class="detail"><?php echo $folder->format_date ($obj->date); ?></p>
+    <h3>
+      <?php
+      if ($this->show_folder)
+      {
+        echo $folder->title_as_link() . $this->app->display_options->object_separator;
+      }
+      echo $this->obj_link($obj);
+      ?>
+    </h3>
+    <?php
+    if ($this->show_date)
+    {
+      ?>
+      <p class="detail"><?php echo $folder->format_date($obj->date); ?></p>
+    <?php
+    }
+    ?>
+    <div class="text-flow" style="margin-right: 20%">
+      <?php
+      $munger = $obj->html_formatter();
+      $munger->max_visible_output_chars = $this->description_length;
+      echo $obj->description_as_html($munger);
+      ?>
+    </div>
   <?php
-  }
-  ?>
-  <div class="text-flow" style="margin-right: 20%">
-  <?php
-    $munger = $obj->html_formatter ();
-    $obj->max_visible_output_chars = $this->description_length;
-    echo $obj->description_as_html ($munger);
-  ?>
-  </div>
-<?php
   }
 }
 
@@ -144,23 +142,24 @@ class PICTURE_SUMMARY_GRID extends ENTRY_SUMMARY_GRID
    * @return integer
    * @access private
    */
-  protected function _size_of ($obj)
+  protected function _size_of($obj)
   {
-    return @filesize (url_to_file_name ($obj->full_file_name (true)));
+    return @filesize(url_to_file_name($obj->full_file_name(true)));
   }
 
   /**
    * @param PICTURE $obj
    * @access private
    */
-  protected function _echo_header ($obj)
+  protected function _echo_header($obj)
   {
     ?>
     <p>
-    <a href="<?php echo $obj->home_page (); ?>"><img class="frame" src="<?php echo $obj->full_thumbnail_name (); ?>" alt="Picture"></a>
+      <a href="<?php echo $obj->home_page(); ?>"><img class="frame" src="<?php echo $obj->full_thumbnail_name(); ?>"
+                                                      alt="Picture"></a>
     </p>
     <?php
-    parent::_echo_header ($obj);
+    parent::_echo_header($obj);
   }
 }
 

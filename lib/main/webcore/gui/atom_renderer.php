@@ -160,7 +160,7 @@ class ENTRY_ATOM_RENDERER extends NEWSFEED_OBJECT_RENDERER
   /**
    * Draws the RSS item for this entry.
    * @param ENTRY $obj
-   * @param NEWSFEEDER_RENDERER_OPTIONS $options
+   * @param NEWSFEED_RENDERER_OPTIONS $options
    */
   public function display ($obj, $options = null)
   {

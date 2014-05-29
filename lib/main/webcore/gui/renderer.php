@@ -177,7 +177,7 @@ class TEXT_TABLE_RENDERER
         $text = '';
       }
 
-      echo $this->_renderer->_line ($text);
+      echo $this->_renderer->line($text);
     }
   }
 
@@ -190,7 +190,7 @@ class TEXT_TABLE_RENDERER
 
   /**
    * List of label/column pairs in the table.
-   * @var string[]
+   * @var stdClass[]
    * @access private
    */
   protected $_items;

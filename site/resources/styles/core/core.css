@@ -27,7 +27,7 @@ http://www.earthli.com/software/webcore
 body {
   margin: 0;
   padding: 0;
-  background-color: #808080;
+  background-color: #ffffff;
   color: #333333;
 }
 table {
@@ -43,7 +43,7 @@ table th {
 }
 table th {
   font-weight: bold;
-  border-bottom: 1px solid #696969;
+  border-bottom: 1px solid #c2c2c2;
 }
 table td > p:first-child,
 table td > pre:first-child,
@@ -82,16 +82,10 @@ table.basic > tbody > tr:last-child > td,
 table.basic > tbody > tr:last-child > th {
   padding-bottom: 0;
 }
-table.grid > tbody > tr > td {
-  vertical-align: top;
-}
-table.grid > tbody > tr > td + td {
-  padding-left: 15px;
-}
 table.columns > tbody > tr > td,
 table.columns > tbody > tr > th {
   padding: 2px 15px;
-  border-right: 1px solid #696969;
+  border-right: 1px solid #c2c2c2;
 }
 table.columns > tbody > tr > td:last-child,
 table.columns > tbody > tr > th:last-child {
@@ -130,7 +124,7 @@ h5 {
   line-height: normal;
 }
 h2 {
-  border-bottom: 1px dotted #696969;
+  border-bottom: 1px dotted #c2c2c2;
 }
 dl {
   margin: 15px 0;
@@ -177,7 +171,7 @@ kbd {
 .shell {
   font-family: monospace;
   background-color: #333;
-  border: 1px solid #696969;
+  border: 1px solid #c2c2c2;
   color: white;
   padding: 0 5px;
   display: block;
@@ -190,7 +184,7 @@ pre {
 pre > code {
   display: block;
   padding-left: 15px;
-  border-left: 6px solid #696969;
+  border-left: 6px solid #c2c2c2;
   margin: 15px 0 15px -6px;
 }
 .chart > .chart-body > pre > code {
@@ -282,10 +276,10 @@ pre > code {
   margin-left: -15px;
   padding-left: 15px;
   padding-bottom: 5px;
-  border-bottom: 1px solid #696969;
+  border-bottom: 1px solid #c2c2c2;
 }
 .top-box {
-  border-bottom: 1px solid #696969;
+  border-bottom: 1px solid #c2c2c2;
   margin-bottom: 15px;
   margin-right: -15px;
   margin-left: -15px;
@@ -313,7 +307,7 @@ pre > code {
   clear: both;
   padding-left: 15px;
   margin-top: 15px;
-  border-top: 1px solid #696969;
+  border-top: 1px solid #c2c2c2;
   padding-top: 5px;
 }
 .footer-data {
@@ -370,7 +364,7 @@ pre > code {
 }
 .chart,
 .preview {
-  border-left: 3px solid #696969;
+  border-left: 3px solid #c2c2c2;
   padding-left: 15px;
   margin: 15px 0 15px -3px;
 }
@@ -379,10 +373,6 @@ pre > code {
 }
 .chart + .chart {
   margin-top: 15px;
-}
-.info-box-top,
-.info-box-bottom {
-  clear: both;
 }
 .info-box-top,
 .info-box-bottom,
@@ -406,12 +396,12 @@ pre > code {
 }
 .info-box-top {
   line-height: normal;
-  border-bottom: 1px solid #696969;
+  border-bottom: 1px solid #c2c2c2;
   margin-bottom: 15px;
 }
 .info-box-bottom {
   line-height: normal;
-  border-top: 1px solid #696969;
+  border-top: 1px solid #c2c2c2;
   margin-top: 15px;
 }
 .graph-foreground {
@@ -452,8 +442,8 @@ div.fifty {
   padding-left: 55px;
 }
 .thirty {
-  min-width: 3px;
-  min-height: 3px;
+  min-width: 30px;
+  min-height: 30px;
 }
 div.thirty {
   padding-left: 35px;
@@ -509,7 +499,7 @@ ul.menu {
   white-space: nowrap;
   text-align: left;
   background-color: #FFFFFF;
-  border: 1px solid #696969;
+  border: 1px solid #c2c2c2;
 }
 ul.menu > li {
   padding: 0;
@@ -523,7 +513,7 @@ ul.menu > li:first-child .menu-item:hover {
 }
 ul.menu .menu-group-title {
   padding: .6em .5em;
-  border-bottom: 1px dotted #696969;
+  border-bottom: 1px dotted #c2c2c2;
   cursor: default;
 }
 ul.menu .menu-item-description {
@@ -551,7 +541,7 @@ ul.menu .menu-item-description {
 }
 .menu-item:hover {
   text-decoration: none;
-  border-color: #696969;
+  border-color: #c2c2c2;
   background-color: #EEE;
 }
 /* @end */
@@ -597,7 +587,7 @@ input[type=submit] + .menu-items.buttons,
 /* @group object header */
 .description-box {
   width: 25%;
-  border-right: 1px solid #696969;
+  border-right: 1px solid #c2c2c2;
   padding-right: 15px;
 }
 .description-box table:first-child {
@@ -666,9 +656,9 @@ input[type=submit] + .menu-items.buttons,
   column-width: 250px;
   -webkit-column-width: 250px;
   -moz-column-width: 250px;
-  column-rule: 1px solid #696969;
-  -webkit-column-rule: 1px solid #696969;
-  -moz-column-rule: 1px solid #696969;
+  column-rule: 1px solid #c2c2c2;
+  -webkit-column-rule: 1px solid #c2c2c2;
+  -moz-column-rule: 1px solid #c2c2c2;
   column-gap: 15px;
   -webkit-column-gap: 15px;
   -moz-column-gap: 15px;
@@ -712,7 +702,7 @@ input[type=submit] + .menu-items.buttons,
 .cell-selected,
 .cell-highlight,
 .cell-non-empty {
-  border: 1px solid #696969;
+  border: 1px solid #c2c2c2;
 }
 .cell-empty {
   border: none;
@@ -775,7 +765,7 @@ span.warning {
 }
 .quote-block {
   padding-left: 15px;
-  border-left: 6px solid #696969;
+  border-left: 6px solid #c2c2c2;
   margin-left: -6px;
 }
 .quote-block p:first-child {
@@ -785,7 +775,7 @@ span.warning {
   margin-bottom: 0;
 }
 .pullquote {
-  border: 1px solid #696969;
+  border: 1px solid #c2c2c2;
   padding: 15px;
   font-size: 150%;
   margin: 0;
@@ -810,7 +800,7 @@ span.warning {
 }
 .abstract {
   border-width: 1px 0;
-  border-color: #696969;
+  border-color: #c2c2c2;
   border-style: solid;
   padding: 15px 0;
 }
@@ -878,27 +868,14 @@ blockquote p:first-child,
   margin-top: .3em;
 }
 /* @end */
-.vertical-separator {
-  border-left: 1px solid #000000;
-  empty-cells: show;
-  width: 0.1em;
-}
-.horizontal-separator {
-  border-bottom: 1px solid #696969;
-  empty-cells: show;
-  height: 1px;
-  clear: both;
-  display: block;
-}
 .image-without-text {
   line-height: 0;
 }
 hr {
   color: transparent;
   border: 0;
-  border-bottom: 1px solid #696969;
-  empty-cells: show;
-  height: .1em;
+  border-bottom: 1px solid #c2c2c2;
+  height: 1px;
   clear: both;
   display: block;
 }
@@ -923,7 +900,7 @@ hr {
   font-weight: bold;
 }
 .frame {
-  border: 1px solid #696969;
+  border: 1px solid #c2c2c2;
 }
 .minimal-commands {
   float: left;
@@ -1004,13 +981,13 @@ hr {
 .left-sidebar {
   padding-left: 15px;
   margin-left: -15px;
-  border-right: 1px solid #696969;
+  border-right: 1px solid #c2c2c2;
   padding-right: 15px;
 }
 .right-sidebar {
   padding-right: 15px;
   margin-right: -15px;
-  border-left: 1px solid #696969;
+  border-left: 1px solid #c2c2c2;
   padding-left: 15px;
 }
 .content-column {
@@ -1151,7 +1128,7 @@ input[type=submit] {
   text-align: center;
   vertical-align: middle;
   background-color: #EEE;
-  border: 1px solid #696969;
+  border: 1px solid #c2c2c2;
   border-radius: 4px;
   line-height: normal;
 }
@@ -1353,15 +1330,15 @@ select + input[type=submit] {
 .style-controls input[type=button],
 .style-controls input[type=button],
 .style-controls input[type=submit] {
-  color: #464646;
+  color: #666666;
 }
 .style-controls input[type=text],
 .style-controls input[type=password],
 .style-controls select,
 .style-controls textarea {
-  background-color: #717171;
-  color: #464646;
-  border: 1px solid #696969;
+  background-color: #f0f0f0;
+  color: #666666;
+  border: 1px solid #c2c2c2;
   border-radius: 4px;
   padding: 4px;
 }
@@ -1378,12 +1355,12 @@ select + input[type=submit] {
 .style-controls input[disabled],
 .style-controls select[disabled],
 .style-controls textarea[disabled] {
-  color: #5d5d5d;
-  background-color: #737373;
-  border-color: #717171;
+  color: #a3a3a3;
+  background-color: #f2f2f2;
+  border-color: #d7d7d7;
 }
 .basic-form fieldset {
-  border-top: 1px solid #737373;
+  border-top: 1px solid #f2f2f2;
   padding-top: 5px;
 }
 .basic-form fieldset legend {

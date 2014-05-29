@@ -428,12 +428,12 @@ class JOB_FORM extends PROJECT_ENTRY_FORM
         $renderer->draw_hidden ("branch_{$branch->id}_priority");
 
         $status = $statuses [$selected_status];
-        $renderer->draw_text_row ('Status', $status->icon_as_html (Sixteen_px) . ' ' . $status->title);
+        $renderer->draw_text_row ('Status', $this->context->get_text_with_icon($status->icon, $status->title, Sixteen_px));
         $renderer->draw_error_row ("branch_{$branch->id}_status");
 
         $priorities = $display_options->job_priorities ();
         $priority = $priorities [$this->value_for ("branch_{$branch->id}_priority")];
-        $renderer->draw_text_row ('Priority', $priority->icon_as_html (Sixteen_px) . ' ' . $priority->title);
+        $renderer->draw_text_row ('Priority', $this->context->get_text_with_icon($priority->icon, $priority->title, Sixteen_px));
         $renderer->draw_error_row ("branch_{$branch->id}_priority");
       }
     }

@@ -131,28 +131,16 @@ class CHANGE_RENDERER extends PROJECT_ENTRY_RENDERER
       }
     }
 
-    if (! $this->_hide_files && $entry->files)
+    if ($entry->files)
     {
-      $layer = $this->app->make_layer ();
-      $layer->margin_top = '0px';
-      $layer->name = "id_{$entry->id}_details";
-      $layer->visible = ! $this->app->dhtml_allowed ();
 ?>
     <tr>
       <th>
-        <?php if (! $layer->visible) $layer->draw_toggle (); ?> Files
+        Files
       </th>
       <td>
-        <?php echo $entry->num_files (); ?>
-      </td>
-    </tr>
-    <tr>
-      <td></td>
-      <td>
 <?php
-      $layer->start ();
       echo $entry->files_as_html ();
-      $layer->finish ();
 ?>
       </td>
     </tr>

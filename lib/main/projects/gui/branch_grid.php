@@ -49,11 +49,6 @@ require_once ('webcore/gui/content_object_grid.php');
 class BRANCH_GRID extends CONTENT_OBJECT_GRID
 {
   /**
-   * @var boolean
-   */
-  public $even_columns = false;
-
-  /**
    * @var boolean Show creator/modifier with branches?
    */
   public $show_user = true;
@@ -62,6 +57,16 @@ class BRANCH_GRID extends CONTENT_OBJECT_GRID
    * @var boolean Show project for branch?
    */
   public $show_folder = false;
+
+  /**
+   * @param CONTEXT $context Context to which this grid belongs.
+   */
+  public function __construct($context)
+  {
+    parent::__construct($context);
+
+    $this->even_columns = false;
+  }
 
   /**
    * @param BRANCH $obj

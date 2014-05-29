@@ -113,7 +113,7 @@ Footnote reference.<fn>\r
 <dt>Term #3</dt>
 <dd>Definition #3, with enough text so that the definition will wrap and we can verify that the margin is respected.</dd>
 </dl><p>Footnote reference.<a href=\"#footnote_THEMED_PAGE_1_body\" id=\"footnote_THEMED_PAGE_1_ref\" class=\"footnote-number\" title=\"Jump to footnote.\">[1]</a></p>
-<div class=\"footnote-reference\"><span id=\"footnote_THEMED_PAGE_1_body\" class=\"footnote-number\">[1]</span> This is the first footnote.<a href=\"#footnote_THEMED_PAGE_1_ref\" class=\"footnote-return\" title=\"Jump back to reference.\">&#8617;</a></div><p><span class=\"horizontal-separator\"></span><br>
+<div class=\"footnote-reference\"><span id=\"footnote_THEMED_PAGE_1_body\" class=\"footnote-number\">[1]</span> This is the first footnote.<a href=\"#footnote_THEMED_PAGE_1_ref\" class=\"footnote-return\" title=\"Jump back to reference.\">&#8617;</a></div><p><hr><br>
 <a>link</a><br>
 <span id=\"somepoint\"></span>(anchor)<br>
 <img src=\"/resources/icons/webcore_png/indicators/error_16px.png\" alt=\" \">(image)<br>
@@ -520,7 +520,7 @@ $this->_run_munger_test (
 
 
 $this->_run_munger_test (
-"Stewart's witty repartee notwithstanding, it is an even greater pleasure to read this extremely well-written and well-founded critique of the same book, \"<a href=\"http://www.amconmag.com/2008/2008_01_28/review.html\" source=\"The American Conservative\">Goldberg’s Trivial Pursuit</a>\"",
+"Stewart's witty repartee notwithstanding, it is an even greater pleasure to read this extremely well-written and well-founded critique of the same book, \"<a href=\"http://www.amconmag.com/2008/2008_01_28/review.html\" source=\"The American Conservative\">Goldbergï¿½s Trivial Pursuit</a>\"",
 "<p>Stewart&rsquo;s witty repartee notwithstanding, it is an even greater pleasure to read this extremely well-written and well-founded critique of the same book, &ldquo;<a href=\"http://www.amconmag.com/2008/2008_01_28/review.html\">Goldberg&#8217;s Trivial Pursuit</a> (<cite><a href=\"http://www.amconmag.com/\">The American Conservative</a></cite>)&rdquo;</p>\n"
 );
 
@@ -1957,7 +1957,7 @@ $this->_run_munger_test (
 );
 
 $this->_run_munger_test (
-  "Horace Greeley likes to write in German (üöäÖ)",
+  "Horace Greeley likes to write in German (ï¿½ï¿½ï¿½ï¿½)",
   "Horace Greeley likes to write in German (&uuml;&ouml;&auml;&Ouml;)"
 );
 
@@ -4783,7 +4783,7 @@ Par4</p>
 $this->_munger->max_visible_output_chars = 520;
 
 $this->_run_munger_test (
-"Ich bin der Meinung, dass ich die folgende, mit peo entwickelte Logik nicht verändert habe. Unter Jet hat es funktioniert, unter SQLAny nicht.\r
+"Ich bin der Meinung, dass ich die folgende, mit peo entwickelte Logik nicht verï¿½ndert habe. Unter Jet hat es funktioniert, unter SQLAny nicht.\r
 \r
 in Auftraege.aom:\r
 \r
@@ -4814,9 +4814,9 @@ in Auftraege.avm:\r
   end\r
 </code>\r
 \r
-Der Effekt müsste sein, dass bei Fällen mit mehr als einem Auftrag die jeweiligen anderen Aufträge \r
+Der Effekt mï¿½sste sein, dass bei Fï¿½llen mit mehr als einem Auftrag die jeweiligen anderen Auftrï¿½ge \r
 \r
-unter \"Auftrag, Zusatzangaben, Bericht bei anderem Auftrag\" ausgewählt werden können.\r\n",
+unter \"Auftrag, Zusatzangaben, Bericht bei anderem Auftrag\" ausgewï¿½hlt werden kï¿½nnen.\r\n",
 "<p>Ich bin der Meinung, dass ich die folgende, mit peo entwickelte Logik nicht ver&auml;ndert habe. Unter Jet hat es funktioniert, unter SQLAny nicht.</p>
 <p>in Auftraege.aom:</p>
 <pre><code>  relation

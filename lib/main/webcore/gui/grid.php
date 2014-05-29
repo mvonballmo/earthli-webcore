@@ -88,13 +88,6 @@ abstract class GRID extends WEBCORE_OBJECT
   public $rows_per_printed_page = 2;
 
   /**
-   * Border width to show for the entire grid.
-   * Used primarily for debugging.
-   * @var integer
-   */
-  public $border_size = 0;
-
-  /**
    * Override maximum title size to be this length.
    * If this is 0, then the size is not overridden.
    * @var integer
@@ -675,15 +668,8 @@ abstract class HTML_TABLE_GRID extends GRID
   {
     $style = $this->_style_for_grid();
     ?>
-    <table class="grid <?php echo $this->table_style; ?>" <?php if ($style)
-  {
-    echo " style=\"$style\"";
-  }
-    if ($this->border_size)
-    {
-      echo " border=\"$this->border_size\"";
-    } ?>>
-  <?php
+    <table class="grid <?php echo $this->table_style; ?>" <?php if ($style) { echo " style=\"$style\""; } ?>>
+    <?php
   }
 
   /**
@@ -751,10 +737,10 @@ abstract class HTML_TABLE_GRID extends GRID
   <?php
   }
 
-  protected function _new_column()
+  protected function _new_column($attributes = null)
   {
     $this->_internal_finish_cell();
-    $this->_internal_start_cell();
+    $this->_internal_start_cell($attributes);
   }
 
   protected function _internal_start_row($attributes = null)
@@ -816,21 +802,21 @@ abstract class HTML_TABLE_GRID extends GRID
 abstract class CSS_FLOW_GRID extends GRID
 {
   /**
-   * Make each column the same width.
-   * Since cells are allowed to flow, forcing them to a certain percentage width of the parent
-   * container results in overlap rather than reflow. Defaults to off.
-   * If you re-enable this property, make sure to set a {@link $min_box_width} so that boxes
-   * still flow more or less normally.
-   * @var boolean
-   */
-  public $even_columns = false;
-
-  /**
    * Minimum width of a single box.
    * Use CSS units to specify the width.
    * @var string
    */
   public $min_box_width = '';
+
+  /**
+   * @param CONTEXT $context Context to which this grid belongs.
+   */
+  public function __construct($context)
+  {
+    parent::__construct($context);
+
+    $this->even_columns = false;
+  }
 
   /**
    * Start rendering the grid.

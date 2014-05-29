@@ -87,3 +87,8 @@ h5,
 {
   padding-top: .7em;
 }
+
+.style-controls select:not([size])
+{
+  height: 39px;
+}

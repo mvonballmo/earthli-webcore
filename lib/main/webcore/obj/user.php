@@ -125,22 +125,7 @@ class USER extends CONTENT_OBJECT
    */
   public function icon_as_html ($size = Thirty_two_px)
   {
-    return $this->app->image_as_html ($this->expanded_icon_url ($size), ' ');
-  }
-
-  /**
-   * Fully resolved path to the icon for this user.
-   * @param string $size
-   * @return string
-   */
-  public function expanded_icon_url ($size = Thirty_two_px)
-  {
-    if ($this->icon_url)
-    {
-      return $this->app->get_icon_url ($this->icon_url, $size);
-    }
-    
-    return '';
+    return $this->app->resolve_icon_as_html($this->icon_url, ' ', $size);
   }
 
   /**

@@ -14,6 +14,11 @@ code
   color: @code_text_color;
 }
 
+pre > code
+{
+  border-color: @code_border_color;
+}
+
 a:link,
 a:visited,
 {
@@ -107,8 +112,6 @@ h4
 .nav-box,
 .top-box,
 .footer,
-.horizontal-separator,
-.vertical-separator,
 .left-sidebar,
 .right-sidebar,
 .info-box-top,
@@ -119,6 +122,7 @@ h4
 .description-box,
 table.columns > tbody > tr > td,
 table.columns > tbody > tr > th,
+hr,
 .abstract
 {
   border-color: @standard_border_color;
@@ -140,7 +144,6 @@ p, div
 .quote-block,
 .preview,
 .chart,
-pre > code,
 .basic-form-block,
 .pullquote
 {

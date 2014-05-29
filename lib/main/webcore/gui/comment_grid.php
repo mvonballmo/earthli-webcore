@@ -105,6 +105,7 @@
       $this->_display_start_minimal_commands_block($obj);
       ?>
       <h3><?php echo $obj->title_as_link(); ?></h3>
+      <div class="info-box-top">
       <?php
       $props = $obj->icon_properties();
       $this->context->start_icon_container($props->icon, Fifteen_px);
@@ -114,7 +115,6 @@
         $this->context->start_icon_container($creator->icon_url, Sixteen_px);
       }
       ?>
-      <p class="info-box-top">
         <?php echo $creator->title_as_link(); ?> &ndash; <?php echo $obj->time_created->format();
           if ($obj->modified())
           {
@@ -124,7 +124,7 @@
           <?php
           }
         ?>
-      </p>
+      </div>
       <?php
       if ($creator->icon_url)
       {

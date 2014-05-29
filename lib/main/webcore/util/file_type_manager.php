@@ -84,20 +84,7 @@ abstract class FILE_TYPE_MANAGER extends WEBCORE_OBJECT
       $title = ' ';
     }
 
-    return $this->context->image_as_html ($this->expanded_icon_url ($mime_type, $extension, $size), $title);
-  }
-
-  /**
-   * Fully resolved path to the icon for the given file information.
-   * If the mime type is empty or not found, the extension is used. If the extension is not found,
-   * @param string $mime_type
-   * @param string $extension
-   * @param string $size
-   * @return string
-   */
-  public function expanded_icon_url ($mime_type, $extension, $size = Thirty_two_px)
-  {
-    return $this->context->get_icon_url ($this->icon_url ($mime_type, $extension), $size);
+    return $this->context->resolve_icon_as_html($this->icon_url ($mime_type, $extension), $title, $size);
   }
 
   /**

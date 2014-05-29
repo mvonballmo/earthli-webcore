@@ -56,21 +56,17 @@ class ICON_RENDERER extends OBJECT_RENDERER
    */
   protected function _display_as_html ($obj)
   {
+    echo $obj->icon_as_html ();
 ?>
-<div style="text-align: center">
-  <div style="height: 100px">
-    <?php echo $obj->icon_as_html (); ?>
-  </div>
-  <div style="margin-top: 1em">
+    <h3>
     <?php
-      echo $obj->title_as_html ();
-      if ($obj->category)
-      {
-        echo " ($obj->category)";
-      }
+    echo $obj->title_as_html ();
+    if ($obj->category)
+    {
+      echo " ($obj->category)";
+    }
     ?>
-  </div>
-</div>
+    </h3>
 <?php
   }
   

@@ -413,50 +413,7 @@ class RESOURCE_MANAGER extends RAISABLE
    */
   public function resolve_icon_as_html ($fragment, $text, $size = '', $style = 'vertical-align: middle', $dom_id = 0)
   {
-    return $this->image_as_html ($this->get_icon_url ($fragment, $size), $text, $style, $dom_id);
-  }
-
-  /**
-   * Alias for {@link resolve_file()}.
-   * Used by the {@link MUNGER} if this object is used as a parameter to
-   * {@link MUNGER::transform()}.
-   * @param string $url
-   * @param boolean $root_override Overrides {@link $resolve_to_root} if set to
-   * {@link Force_root_on}.
-   * @return string
-   */
-  public function resolve_url ($url, $root_override = null)
-  {
-    return $this->resolve_file ($url, $root_override);
-  }
-
-  /**
-   * Render an image as HTML.
-   * @param string $url location of icon.
-   * @param string $text used for the alt and title attributes.
-   * @param string $style an optional CSS style (not a class).
-   * @param int|string $dom_id an optional DOM id to allow JavaScript access to the image.
-   * @return string
-   */
-  public function image_as_html ($url, $text, $style = 'vertical-align: middle', $dom_id = 0)
-  {
-    if ($url)
-    {
-      $text = $this->_text_options->convert_to_html_attribute ($text);
-      $Result = "<img src=\"$url\" title=\"$text\" alt=\"$text\"";
-      if ($dom_id)
-      {
-        $Result .= " id=\"$dom_id\"";
-      }
-      if ($style)
-      {
-        $Result .= " style=\"$style\"";
-      }
-      $Result .= ">";
-      return $Result;
-    }
-    
-    return '';
+    return $this->_image_as_html ($this->get_icon_url ($fragment, $size), $text, $style, $dom_id);
   }
 
   /**
@@ -486,7 +443,7 @@ class RESOURCE_MANAGER extends RAISABLE
 
       return $this->resolve_file ($Result);
     }
-    
+
     return '';
   }
 
@@ -727,13 +684,13 @@ class RESOURCE_MANAGER extends RAISABLE
    * $anchor_delimiter} (assumes the link will be resolvable in page context).
    * or if it starts with a delimiter and the root does not have a domain, no
    * root can be prepended. If the url is empty, the root can be prepended.
-   * 
+   *
    * @see _finalize_url()
-   * 
+   *
    * @param string $url The url to resolve.
    * @param bool $root_override If null, no override is applied; if true, the root is applied; otherwise, no root is applied.
    * @return boolean
-   * 
+   *
    * @access private
    */
   protected function _needs_root ($url, $root_override)
@@ -763,6 +720,35 @@ class RESOURCE_MANAGER extends RAISABLE
       $Result = has_domain ($this->root_url, '', $this->_url_options) || ! begins_with_delimiter ($url, $this->_url_options);
     }
     return $Result;
+  }
+
+  /**
+   * Render an image as HTML.
+   * @param string $url location of icon.
+   * @param string $text used for the alt and title attributes.
+   * @param string $style an optional CSS style (not a class).
+   * @param int|string $dom_id an optional DOM id to allow JavaScript access to the image.
+   * @return string
+   */
+  private function _image_as_html ($url, $text, $style = 'vertical-align: middle', $dom_id = 0)
+  {
+    if ($url)
+    {
+      $text = $this->_text_options->convert_to_html_attribute ($text);
+      $Result = "<img src=\"$url\" title=\"$text\" alt=\"$text\"";
+      if ($dom_id)
+      {
+        $Result .= " id=\"$dom_id\"";
+      }
+      if ($style)
+      {
+        $Result .= " style=\"$style\"";
+      }
+      $Result .= ">";
+      return $Result;
+    }
+
+    return '';
   }
 
   /**

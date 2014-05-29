@@ -642,7 +642,6 @@ class CONTEXT extends RESOLVER
 
   private function _get_start_icon_container($tag_name, $icon_url, $size)
   {
-    $expanded_icon_url = $this->get_icon_url($icon_url, $size);
     switch ($size)
     {
       case Fifteen_px:
@@ -670,7 +669,7 @@ class CONTEXT extends RESOLVER
         throw new UNKNOWN_VALUE_EXCEPTION($size);
     }
 
-    return '<' . $tag_name . ' class="icon ' . $class . '" style="background-image: url(' . $expanded_icon_url . ')">';
+    return '<' . $tag_name . ' class="icon ' . $class . '" style="background-image: url(' . $this->get_icon_url($icon_url, $size) . ')">';
   }
 
   /**

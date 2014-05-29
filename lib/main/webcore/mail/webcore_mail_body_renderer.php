@@ -225,7 +225,7 @@ class MAIL_TOC_ENTRY_RENDERER extends RENDERER
    */
   public function as_html_for_items ($options, $top_link)
   {
-    $Result = '<div class="horizontal-separator" style="margin-top: 2em"></div>';
+    $Result = '<hr>';
     if (isset ($this->main_pair))
     {
       $Result .= $this->pair_as_html_for_items ($this->main_pair, $options, $top_link);
@@ -434,7 +434,7 @@ class MAIL_TOC_GROUP_RENDERER extends RENDERER
     if (isset ($this->folder))
     {
       $fldr = $this->folder;
-      $Result = "<div class=\"horizontal-separator\" style=\"margin-top: 3.5em\"></div>\n";
+      $Result = "<hr>\n";
       $Result .= '<h2 id="fldr_' . $fldr->id . '">' . $fldr->title_as_html () . "</h2>\n";
     }
 

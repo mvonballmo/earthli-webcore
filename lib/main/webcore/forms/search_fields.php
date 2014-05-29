@@ -1214,9 +1214,7 @@ class SEARCH_OBJECT_FIELDS extends WEBCORE_OBJECT
       if (! isset ($this->_linked_fields [$user->base_name]))
       {
         $renderer->start_row ($user->title);
-          $renderer->start_block ();
-            $user->draw_fields ($form, $renderer);
-          $renderer->finish_block ();
+          $user->draw_fields ($form, $renderer);
         $renderer->finish_row ();
       }
     }
@@ -1964,30 +1962,13 @@ class SEARCH_USER_OBJECT_FIELDS extends SEARCH_CONTENT_OBJECT_FIELDS
    */
   protected function _draw_kind_selector ($form, $renderer)
   {
-    $old_width = $renderer->default_control_width;
-    $renderer->default_control_width = '10em';
-
-    $layer = $this->context->make_layer ('user_kind');
-    $layer->visible = $form->value_for ('user_kind') != Privilege_kind_registered;
-
-    $renderer->draw_text_row ('Advanced', $layer->toggle_as_html () . ' Click the arrow for advanced search options.', 'notes');
-
-    $renderer->start_row (' ');
-      $layer->start ();
-        $renderer->start_block ();
-
-          $props = $renderer->make_list_properties ();
-          $props->show_description_on_same_line = true;
-          $props->add_item ('[all]', 'all');
-          $props->add_item ('Anonymous', Privilege_kind_anonymous);
-          $props->add_item ('Registered', Privilege_kind_registered);
-          $renderer->draw_drop_down_row ('user_kind', $props);
-
-        $renderer->finish_block ();
-      $layer->finish ();
-    $renderer->finish_row ();
-
-    $renderer->default_control_width = $old_width;
+    $props = $renderer->make_list_properties ();
+    $props->show_description_on_same_line = true;
+    $props->width = '20em';
+    $props->add_item ('[all]', 'all');
+    $props->add_item ('Anonymous', Privilege_kind_anonymous);
+    $props->add_item ('Registered', Privilege_kind_registered);
+    $renderer->draw_drop_down_row ('user_kind', $props);
   }
 
   /**

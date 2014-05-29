@@ -51,11 +51,6 @@
     /**
      * @var boolean
      */
-    public $even_columns = true;
-
-    /**
-     * @var boolean
-     */
     public $show_user = true;
 
     /**
@@ -77,6 +72,16 @@
      * @var boolean
      */
     public $show_component = true;
+
+    /**
+     * @param CONTEXT $context Context to which this grid belongs.
+     */
+    public function __construct($context)
+    {
+      parent::__construct($context);
+
+      $this->even_columns = true;
+    }
 
     /**
      * @param PROJECT_ENTRY $obj

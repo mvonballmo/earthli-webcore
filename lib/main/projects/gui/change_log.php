@@ -190,7 +190,7 @@ class CHANGE_LOG extends WEBCORE_OBJECT
       if (isset ($this->_component_id))
       {
         echo "</ul>\n";
-        echo '<div class="horizontal-separator"></div>';
+        echo '<hr>';
       }
       
       echo "<h3>" . $this->comp_name_for ($entry) . "</h3>\n<ul class=\"minimal\">\n";

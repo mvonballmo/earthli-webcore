@@ -109,7 +109,7 @@ class CHANGE extends PROJECT_ENTRY
   {
     $munger = $this->html_formatter ();
     $munger->force_paragraphs = true;
-    return $this->_text_as_html ("<code>$this->files</code>", $munger);
+    return $this->_text_as_html ("<pre>$this->files</pre>", $munger);
   }
 
   public function branch_info_query ()

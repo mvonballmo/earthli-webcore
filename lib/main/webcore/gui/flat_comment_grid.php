@@ -48,10 +48,15 @@ require_once('webcore/gui/printable_comment_grid.php');
 class FLAT_COMMENT_GRID extends PRINTABLE_COMMENT_GRID
 {
   /**
-   * Used when printing to shut off pagination
-   * @var boolean
+   * @param CONTEXT $context Context to which this grid belongs.
+   * @param COMMENT $comment Comments belong to this comment (can be empty).
    */
-  public $show_pager = true;
+  public function __construct($context, $comment)
+  {
+    parent::__construct($context, $comment);
+
+    $this->show_pager = true;
+  }
 
   /**
    * @param COMMENT $obj
@@ -73,6 +78,7 @@ class FLAT_COMMENT_GRID extends PRINTABLE_COMMENT_GRID
     $this->_display_start_minimal_commands_block($obj);
     ?>
     <h3><?php echo $obj->title_as_link(); ?></h3>
+    <div class="info-box-top">
     <?php
     $props = $obj->icon_properties();
     $this->context->start_icon_container($props->icon, Fifteen_px);
@@ -84,7 +90,6 @@ class FLAT_COMMENT_GRID extends PRINTABLE_COMMENT_GRID
         $this->context->start_icon_container($creator->icon_url, Sixteen_px);
       }
       ?>
-      <p class="info-box-top">
         <?php
         echo $creator->title_as_link() . ' &ndash; ' . $obj->time_created->format();
 
@@ -96,7 +101,7 @@ class FLAT_COMMENT_GRID extends PRINTABLE_COMMENT_GRID
         <?php
         }
         ?>
-      </p>
+      </div>
       <?php
       if ($creator->icon_url)
       {

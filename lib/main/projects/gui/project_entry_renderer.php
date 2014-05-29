@@ -136,27 +136,8 @@ abstract class PROJECT_ENTRY_RENDERER extends ENTRY_RENDERER
   {
     if ($entry->extra_description && ! $this->_options->preferred_text_length)
     {
-      $layer = $this->context->make_layer ("id_{$entry->id}_long_description");
-      $layer->margin_left = '1em';
-      $layer->visible = ! $this->context->dhtml_allowed();
-?>
-<div style="margin-bottom: .75em">
-<?php
-      if (! $layer->visible)
-      {
-        $layer->draw_toggle ();
-      }
-      echo ' <span class="field">' . strlen ($entry->extra_description) . ' bytes</span> of extra information';
-?>
-</div>
-<div>
-<?php
-      $layer->start ();
+      echo '<h3>Extra description</h3>';
       echo $entry->extra_description_as_html ();
-      $layer->finish ();
-?>
-</div>
-<?php
     }
   }
 

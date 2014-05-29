@@ -271,9 +271,7 @@ class PRINT_PREVIEW extends WEBCORE_OBJECT
   protected function _draw_separator ()
   {
 ?>
-<p>&nbsp;</p>
-<div class="horizontal-separator" style="clear: both"></div>
-<p>&nbsp;</p>
+<hr>
 <?php
   }
 
@@ -292,9 +290,6 @@ class PRINT_PREVIEW extends WEBCORE_OBJECT
    */
   protected function _draw_finish ()
   {
-?>
-<div>&nbsp;</div>
-<?php
   }
 
   /**

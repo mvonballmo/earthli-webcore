@@ -48,19 +48,20 @@ require_once('webcore/gui/grid.php');
 class ICON_GRID extends STANDARD_GRID
 {
   /**
-   * @var string
-   */
-  public $width = '';
-
-  /**
-   * @var boolean
-   */
-  public $even_columns = true;
-
-  /**
    * @var boolean
    */
   public $is_chooser = false;
+
+  /**
+   * @param CONTEXT $context Context to which this grid belongs.
+   */
+  public function __construct($context)
+  {
+    parent::__construct($context);
+
+    $this->even_columns = true;
+    $this->width = '';
+  }
 
   /**
    * Draw JavaScripts used by this grid.
