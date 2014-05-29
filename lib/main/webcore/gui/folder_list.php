@@ -99,4 +99,3 @@ class FOLDER_LIST extends SELECT_LIST
     }
   }
 }
-?>

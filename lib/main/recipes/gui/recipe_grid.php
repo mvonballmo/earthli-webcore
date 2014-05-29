@@ -117,7 +117,7 @@ class RECIPE_SUMMARY_GRID extends DRAFTABLE_ENTRY_SUMMARY_GRID
 {
   /**
    * Return the block of text to summarize.
-   * @param OBJECT_IN_FOLDER $obj
+   * @param RECIPE $obj
    * @return string
    * @access private
    */

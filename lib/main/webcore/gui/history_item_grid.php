@@ -50,7 +50,7 @@ class HISTORY_ITEM_GRID extends STANDARD_GRID
 {
   /**
    * Render the grid itself.
-   * @param object[] $objects
+   * @param HISTORY_ITEM[] $objects
    * @access private
    */
   protected function _draw ($objects)

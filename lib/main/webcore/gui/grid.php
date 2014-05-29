@@ -772,9 +772,16 @@ abstract class HTML_TABLE_GRID extends GRID
     echo '</td>';
   }
 
-  protected function _internal_start_header_cell()
+  protected function _internal_start_header_cell($attributes = null)
   {
-    echo '<th>';
+    if ($attributes)
+    {
+      echo '<th ' . $attributes . '>';
+    }
+    else
+    {
+      echo '<th>';
+    }
   }
 
   protected function _internal_finish_header_cell()

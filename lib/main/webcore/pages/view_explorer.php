@@ -165,7 +165,7 @@ http://www.earthli.com/software/webcore
             $items_text = ' ' . $list->pager->num_items () . ' ' . $type_info->plural_title;
           }
       ?>
-      <h2 id="<?php echo $type_info->id . '_list'; ?>"><?php echo $items_text; ?></h2>
+      <h2><?php echo $items_text; ?></h2>
       <?php
           $list->display ();
         }
@@ -180,7 +180,6 @@ http://www.earthli.com/software/webcore
       }
 ?>
     </div>
-  </div>
   <?php
     $Page->finish_display ();
   }

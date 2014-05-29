@@ -57,11 +57,6 @@ require_once ('webcore/gui/grid.php');
 abstract class LIST_GRID extends STANDARD_GRID
 {
   /**
-   * Add space between columns?
-   * @var boolean*/
-  public $use_spacers = false;
-
-  /**
    * @param CONTEXT $context Context to which this grid belongs.
    */
   public function __construct($context)
@@ -74,28 +69,28 @@ abstract class LIST_GRID extends STANDARD_GRID
   /**
    * Add a column to the end of the list.
    * @param string $name
-   * @param string $alignment Can be 'left', 'center' or 'right'
+   * @param string $css_class
    * @access private
    */
-  public function append_column ($name, $alignment = 'left')
+  public function append_column ($name, $css_class = '')
   {
-    $col = new stdClass();
+    $col = new LIST_GRID_COLUMN();
     $col->name = $name;
-    $col->alignment = $alignment;
+    $col->css_class = $css_class;
     $this->_columns [] = $col;
   }
 
   /**
    * Add a column to the beginning of the list.
    * @param string $name
-   * @param string $alignment Can be 'left', 'center' or 'right'
+   * @param string $css_class
    * @access private
    */
-  public function prepend_column ($name, $alignment = 'left')
+  public function prepend_column ($name, $css_class = '')
   {
-    $col = new stdClass();
+    $col = new LIST_GRID_COLUMN();
     $col->name = $name;
-    $col->alignment = $alignment;
+    $col->css_class = $css_class;
     array_unshift ($this->_columns, $col);
   }
 
@@ -111,14 +106,16 @@ abstract class LIST_GRID extends STANDARD_GRID
     {
       if ($index > 0)
       {
-        echo '<td style="vertical-align: top; text-align: ' . $this->_columns [$index]->alignment . '">';
+        $this->_internal_finish_cell();
+
+        $attributes = '';
+        if ($this->_columns[$index]->css_class)
+        {
+          $attributes = 'class="'. $this->_columns[$index]->css_class . '"';
+        }
+        $this->_internal_start_cell($attributes);
       }
       $this->_draw_column_contents ($obj, $index);
-      if (($index < $count - 1) && ($this->use_spacers))
-      {
-        echo '</td>';
-        $this->_draw_spacer ('td');
-      }
 
       $index += 1;
     }
@@ -133,18 +130,21 @@ abstract class LIST_GRID extends STANDARD_GRID
     $count = sizeof ($this->_columns);
     if ($count > 0)
     {
-      echo "<tr>\n";
+      $this->_internal_start_row();
       while ($index < $count)
       {
-        echo '<th style="text-align: ' . $this->_columns [$index]->alignment . '">' . $this->_columns [$index]->name . "</th>\n";
-        if (($index < $count - 1) && ($this->use_spacers))
+        $attributes = '';
+        if ($this->_columns[$index]->css_class)
         {
-          $this->_draw_spacer ('th');
+          $attributes = 'class="'. $this->_columns[$index]->css_class . '"';
         }
-  
+        $this->_internal_start_header_cell($attributes);
+        echo $this->_columns [$index]->name;
+        $this->_internal_finish_header_cell();
+
         $index += 1;
       }
-      echo "</tr>\n";
+      $this->_internal_finish_row();
     }
   }
 
@@ -158,20 +158,11 @@ abstract class LIST_GRID extends STANDARD_GRID
   protected abstract function _draw_column_contents ($obj, $index);
 
   /**
-   * @param string $cell_type Can be 'td' or 'th'.
-   * @access private
-   */
-  protected function _draw_spacer ($cell_type)
-  {
-    echo "<$cell_type class=\"spacer\">&nbsp;</$cell_type>\n";
-  }
-  
-  /**
    * @var LIST_GRID_COLUMN[]
    * @see LIST_GRID_COLUMN
    * @access private
    */
-  protected $_column_names = array ();
+  protected $_columns = array ();
 }
 
 /**
@@ -190,12 +181,5 @@ class LIST_GRID_COLUMN
    */
   public $name;
 
-  /**
-   * Horizontal alignment for header and data.
-   * Can be 'left', 'right', 'center'.
-   * @var string
-   */
-  public $alignment = 'left';
+  public $css_class = '';
 }
-
-?>

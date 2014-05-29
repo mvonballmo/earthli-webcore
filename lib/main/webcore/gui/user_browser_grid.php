@@ -80,7 +80,7 @@ class USER_BROWSER_GRID extends STANDARD_GRID
   protected function _draw_box ($obj)
   {
     echo $obj->title_as_link ();
-    echo "</td>\n<td style=\"padding-left: 1em; text-align: center\">";
+    $this->_new_column();
     echo $this->_controls_renderer->javascript_button_as_html ('Select', 'picker.select_value(\'' . $obj->title .'\')');
   }
 
