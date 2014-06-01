@@ -37,7 +37,7 @@ http://www.earthli.com/software/webcore/albums
 ****************************************************************************/
 
 /** */
-require_once ('webcore/gui/basic_calendar.php');
+require_once('webcore/gui/basic_calendar.php');
 
 /**
  * Renders {@link JOURNAL}s and {@link PICTURE}s into a calendar for an {@link ALBUM}.
@@ -55,61 +55,60 @@ class ALBUM_CALENDAR extends BASIC_CALENDAR
   public $album;
 
   /**
-   * @param ALBUM $folder Show calendar for this album.
+   * @param ALBUM $album Show calendar for this album.
    */
-  public function __construct ($album)
+  public function __construct($album)
   {
-    parent::__construct ($album->app);
+    parent::__construct($album->app);
 
     $this->album = $album;
-    $this->set_ranges ($album->first_day, $album->last_day);
-    $this->_albums = $album->sub_folders ();
+    $this->set_ranges($album->first_day, $album->last_day);
+    $this->_albums = $album->sub_folders();
   }
 
   /**
    * @param integer $month
    * @param integer $year
+   * @return bool
    * @access private
    */
-  public function month_has_content ($month, $year)
+  public function month_has_content($month, $year)
   {
     $Result = false;
-    $first_day = new DATE_TIME (mktime (0, 0, 0, $month, 1, $year));
-    $php_first_day = $first_day->as_php ();
-    $php_last_day = mktime (23, 59, 59, $month, $first_day->last_legal_day (), $year);
+    $first_day = new DATE_TIME (mktime(0, 0, 0, $month, 1, $year));
+    $last_day = new DATE_TIME (mktime(23, 59, 59, $month, $first_day->last_legal_day(), $year));
 
-    if ($this->_journals)
+    $journal = current($this->_journals);
+    if ($journal)
     {
-      $jrnl = current ($this->_journals);
-      if ($jrnl)
+      $Result = $journal->date->between($first_day, $last_day);
+    }
+
+    if (!$Result)
+    {
+      $picture = current($this->_pictures);
+      if ($picture)
       {
-        $php_jrnl_date = $jrnl->date->as_php ();
-        $Result = ($jrnl && ($php_first_day <= $php_jrnl_date) && ($php_jrnl_date <= $php_last_day));
+        $Result = $picture->date->between($first_day, $last_day);
       }
     }
 
-    if (! $Result)
+    if (!$Result)
     {
-      if (isset ($this->_pic_dates))
+      foreach ($this->_albums as $album)
       {
-        $pic_date = current ($this->_pic_dates);
-        if ($pic_date)
+        $Result = $album->first_day->between($first_day, $last_day, Date_time_date_part) || $album->last_day->between($first_day, $last_day, Date_time_date_part);
+
+        if ($Result)
         {
-          $php_pic_date = $pic_date->as_php ();
-          $Result = ($pic_date && ($php_first_day <= $php_pic_date) && ($php_pic_date <= $php_last_day));
+          break;
         }
-      }
-    }
 
-    if (! $Result)
-    {
-      foreach ($this->_albums as &$album)
-      {
-        if ((($php_first_day <= $album->first_day->as_php ()) && ($album->first_day->as_php () <= $php_last_day)) ||
-            (($php_first_day <= $album->last_day->as_php ()) && ($album->last_day->as_php () <= $php_last_day)))
+        $Result = $first_day->between($album->first_day, $album->last_day, Date_time_date_part) || $last_day->between($album->first_day, $album->last_day, Date_time_date_part);
+        if ($Result)
         {
-          $Result = true;
-        }        
+          break;
+        }
       }
     }
 
@@ -123,197 +122,159 @@ class ALBUM_CALENDAR extends BASIC_CALENDAR
    * @param integer $year
    * @access private
    */
-  protected function _get_content_for_day ($day, $week, $month, $year)
+  protected function _get_content_for_day($day, $week, $month, $year)
   {
-    $first_day = new DATE_TIME (mktime (0, 0, 0, $month, $day, $year));
-    $last_day = new DATE_TIME (mktime (23, 59, 59, $month, $day, $year));
-    $php_first_day = $first_day->as_php ();
-    $php_last_day = $last_day->as_php ();
+    $first_day = new DATE_TIME (mktime(0, 0, 0, $month, $day, $year));
+    $last_day = new DATE_TIME (mktime(23, 59, 59, $month, $day, $year));
 
     // find the number of pictures for this day
 
-    $num_pics = 0;
+    /** @var PICTURE[] $pictures */
+    $pictures = null;
 
-    if (isset ($this->_pic_dates))
+    if (isset ($this->_pictures))
     {
-      $pic_date = current ($this->_pic_dates);
+      $picture = current($this->_pictures);
 
-      if ($pic_date)
+      if ($picture)
       {
-        $php_pic_date = $pic_date->as_php ();
-
-        while ($pic_date && ($php_first_day <= $php_pic_date) && ($php_pic_date <= $php_last_day))
+        while ($picture && $picture->date->between($first_day, $last_day))
         {
-          $num_pics += 1;  // just count the number of pictures
-          next ($this->_pic_dates);
-          $pic_date = current ($this->_pic_dates);
-          if ($pic_date)
-          {
-            $php_pic_date = $pic_date->as_php ();
-          }
+          $pictures [] = $picture;
+          $picture = next($this->_pictures);
         }
       }
     }
 
     // find all the journal entries for this day
 
+    /** @var JOURNAL[] $journal_entries */
+    $journal_entries = null;
+
     if (isset ($this->_journals))
     {
-      $jrnl = current ($this->_journals);
+      $journal = current($this->_journals);
 
-      if ($jrnl)
+      if ($journal)
       {
-        $php_jrnl_date = $jrnl->date->as_php ();
-
-        while ($jrnl && ($php_first_day <= $php_jrnl_date) && ($php_jrnl_date <= $php_last_day))
+        while ($journal && $journal->date->between($first_day, $last_day))
         {
-          $jrnls [] = $jrnl;
-          next ($this->_journals);
-          $jrnl = current ($this->_journals);
-          if ($jrnl)
-          {
-            $php_jrnl_date = $jrnl->date->as_php ();
-          }
+          $journal_entries [] = $journal;
+          $journal = next($this->_journals);
         }
       }
     }
 
     // find all of the albums for this day
 
-    foreach ($this->_albums as &$album)
+    /** @var ALBUM[] $albums */
+    $albums = null;
+
+    foreach ($this->_albums as $album)
     {
-      $d = $album->first_day->as_php ();
-      $php_first_album_day = mktime (0, 0, 0, date ("n", $d), date ("j", $d), date ("Y", $d));
-      $d = $album->last_day->as_php ();
-      $php_last_album_day = mktime (23, 59, 59, date ("n", $d), date ("j", $d), date ("Y", $d));
-      if (($php_first_album_day <= $php_first_day) && ($php_last_day <= $php_last_album_day))
+      if ($first_day->between($album->first_day, $album->last_day, Date_time_date_part) || $last_day->between($album->first_day, $album->last_day, Date_time_date_part))
       {
         $albums [] = $album;
       }
     }
-    
-    if ($num_pics || isset ($jrnls) || isset ($albums))
+
+    if (isset($pictures) || isset ($journal_entries) || isset ($albums))
     {
-?>
-      <table style="width: 100%">
-        <tr>
-          <td class="album-day-num"><?php echo $day; ?></td>
-          <td style="text-align: right">
+      if (isset ($journal_entries) && !empty($journal_entries))
+      {
+        $first_journal = $journal_entries [0];
+        $journal_props = $first_journal->weather_icon_properties();
+        ?>
+        <div class="align-right">
           <?php
-            if (isset ($jrnls))
-            {
-              $c = sizeof ($jrnls);
-              if ($c)
-              {
-                $first_jrnl = $jrnls [0];
-                if ($first_jrnl)
-                {
-                  echo $first_jrnl->weather_icon ();
-                }
-              }
-            }
+          echo $this->context->get_text_with_icon($journal_props->icon, '', Thirty_px);
           ?>
-          </td>
-        </tr>
-        <tr>
-          <td colspan="2" style="height: 7px"></td>
-        </tr>
-        <tr>
-          <td style="vertical-align: top" colspan="2">
-          <?php
-
-            // output all albums for today
-
-            if (isset ($albums))
-            {
-              foreach ($albums as &$album)
-              {
-                $t = $album->title_formatter ();
-                $t->set_name ('view_calendar.php');
-                $t->text = "[$t->text]";
-                echo $album->title_as_link ($t) . '<br>';
-              }
-            }
-
-            // output all journal entries for today
-
-            if (isset ($jrnls))
-            {
-              if (sizeof ($jrnls) > 1)
-              {
-                // too many journal entries to list
-                
-                $iso_first_day = $first_day->as_iso ();
-                $iso_last_day = $last_day->as_iso ();
-          ?>
-              <a href="view_journals.php?<?php echo "id={$this->album->id}&amp;first_day=$iso_first_day&amp;last_day=$iso_last_day&amp;calendar=1"; ?>"><?php echo "($c journal entries)"; ?></a>
-          <?php
-              }
-              else
-              {
-                $jrnl = $jrnls [0];
-                $t = $jrnl->title_formatter ();
-                $t->add_argument ('calendar', '1');
-                $t->add_argument ('journal', $jrnl->id);
-                echo $jrnl->title_as_link ($t);
-                echo "<br>\n";
-              }
-            }
-          ?>
-          </td>
-        </tr>
+        </div>
+      <?php
+      }
+      ?>
+      <div class="day-number"><?php echo $day; ?></div>
+      <div class="day-content">
         <?php
-          if ($num_pics)
+
+        if (isset ($albums))
+        {
+          foreach ($albums as $album)
           {
-            $iso_first_day = $first_day->as_iso ();
-            $iso_last_day = $last_day->as_iso ();
-        ?>
-        <tr>
-          <td colspan="2" style="height: 7px"></td>
-        </tr>
-        <tr>
-          <td colspan="2">
-            <a href="view_pictures.php?<?php echo "id={$this->album->id}&amp;calendar=1&amp;first_day=$iso_first_day&amp;last_day=$iso_last_day"; ?>"><?php echo "($num_pics pictures)"; ?></a>
-          </td>
-        </tr>
-        <?php
+            $t = $album->title_formatter();
+            $t->set_name('view_calendar.php');
+            $t->text = "[$t->text]";
+            echo $album->title_as_link($t);
           }
+        }
+
+        if (isset ($journal_entries))
+        {
+          if (count($journal_entries) > 1)
+          {
+            $iso_first_day = $first_day->as_iso();
+            $iso_last_day = $last_day->as_iso();
+            $num_journals = count($journal_entries);
+            ?>
+            <a href="view_journals.php?<?php echo "id={$this->album->id}&amp;first_day=$iso_first_day&amp;last_day=$iso_last_day&amp;calendar=1"; ?>"><?php echo "($num_journals journals)"; ?></a>
+          <?php
+          }
+          else
+          {
+            $journal = $journal_entries [0];
+            $t = $journal->title_formatter();
+            $t->add_argument('calendar', '1');
+            $t->add_argument('journal', $journal->id);
+            echo $journal->title_as_link($t);
+          }
+        }
+
+        if (isset ($pictures))
+        {
+          if (count($pictures) > 1)
+          {
+            $iso_first_day = $first_day->as_iso();
+            $iso_last_day = $last_day->as_iso();
+            $num_pics = count($pictures);
+            ?>
+            <a href="view_pictures.php?<?php echo "id={$this->album->id}&amp;calendar=1&amp;first_day=$iso_first_day&amp;last_day=$iso_last_day"; ?>"><?php echo "($num_pics pictures)"; ?></a>
+          <?php
+          }
+          else
+          {
+            $picture = $pictures [0];
+            $t = $picture->title_formatter();
+            $t->add_argument('calendar', '1');
+            echo $picture->title_as_link($t);
+          }
+        }
         ?>
-      </table>
-<?php
+      </div>
+    <?php
     }
   }
 
   /**
    * Called when the page is set before rendering.
-   * 
+   *
    * This calendar caches the pictures and journals for the new page.
-   * 
+   *
    * @access private
    */
-  protected function _page_changed ()
+  protected function _page_changed()
   {
-    $jrnl_query = $this->album->entry_query ();
-    $jrnl_query->set_type ('journal');
-    $jrnl_query->set_days ("$this->_curr_year-$this->_curr_month-01", "$this->_last_year-$this->_last_month-31");
-    $this->_journals = $jrnl_query->objects ();
+    $first_day = new DATE_TIME (mktime(0, 0, 0, $this->_curr_month, 1, $this->_curr_year));
+    $last_day = new DATE_TIME (mktime(23, 59, 59, $this->_curr_month, $first_day->last_legal_day(), $this->_curr_year));
 
-    // get only the dates for the pictures (using the 'raw_output' function)
-    // and store all of the dates in 'pic_dates'. The number of pictures for
-    // a day are calculated by working through the list as each day is rendered.
+    $journal_query = $this->album->entry_query();
+    $journal_query->set_type('journal');
+    $journal_query->set_days($first_day->as_iso(), $last_day->as_iso());
+    $this->_journals = $journal_query->objects();
 
-    $pic_query = $this->album->entry_query ();
-    $pic_query->set_type ('picture');
-    $pic_query->set_select ('entry.date');
-    $pic_query->set_days ("$this->_curr_year-$this->_curr_month-01", "$this->_last_year-$this->_last_month-31");
-    $pic_db = $pic_query->raw_output ();
-    if ($pic_db)
-    {
-      while ($pic_db->next_record ())
-      {
-        $this->_pic_dates [] = new DATE_TIME ($pic_db->f ('date'), Date_time_iso);
-      }
-    }
+    $picture_query = $this->album->entry_query();
+    $picture_query->set_type('picture');
+    $picture_query->set_days($first_day->as_iso(), $last_day->as_iso());
+    $this->_pictures = $picture_query->objects();
   }
 
   /**
@@ -329,10 +290,10 @@ class ALBUM_CALENDAR extends BASIC_CALENDAR
   protected $_journals;
 
   /**
-   * @var DATE_TIME[]
+   * @var PICTURE[]
    * @access private
    */
-  protected $_pic_dates;
+  protected $_pictures;
 }
 
 ?>
