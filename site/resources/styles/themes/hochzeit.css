@@ -42,14 +42,20 @@ http://www.earthli.com/software/webcore
   border-radius: 4px;
   padding: 4px;
 }
-.style-controls label:first-child + div > input[type=text]:first-child,
-.style-controls label:first-child + div > input[type=password]:first-child,
-.style-controls label:first-child + div > select:first-child,
-.style-controls label:first-child + div > textarea:first-child,
 .style-controls label:first-child + input[type=text],
 .style-controls label:first-child + input[type=password],
 .style-controls label:first-child + select,
 .style-controls label:first-child + textarea {
+  margin-left: -5px;
+}
+.style-controls label:first-child + div > input[type=text]:first-child,
+.style-controls label:first-child + span > input[type=text]:first-child,
+.style-controls label:first-child + div > input[type=password]:first-child,
+.style-controls label:first-child + span > input[type=password]:first-child,
+.style-controls label:first-child + div > select:first-child,
+.style-controls label:first-child + span > select:first-child,
+.style-controls label:first-child + div > textarea:first-child,
+.style-controls label:first-child + span > textarea:first-child {
   margin-left: -5px;
 }
 .style-controls input[disabled],

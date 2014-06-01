@@ -28,16 +28,24 @@ input[type=submit]:extend(button all){}
 
   label:first-child
   {
-    & + div > input[type=text]:first-child,
-    & + div > input[type=password]:first-child,
-    & + div > select:first-child,
-    & + div > textarea:first-child,
     & + input[type=text],
     & + input[type=password],
     & + select,
     & + textarea
     {
       margin-left: -@standard_border_radius - 1px;
+    }
+
+    & + div,
+    & + span
+    {
+      > input[type=text]:first-child,
+      > input[type=password]:first-child,
+      > select:first-child,
+      > textarea:first-child
+      {
+        margin-left: -@standard_border_radius - 1px;
+      }
     }
   }
 

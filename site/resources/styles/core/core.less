@@ -591,6 +591,7 @@ pre > code
   line-height: normal;
   border-bottom: @hairline_border_width solid @standard_border_color;
   margin-bottom: @standard_spacing;
+  clear: both;
 }
 
 .info-box-bottom
@@ -598,6 +599,7 @@ pre > code
   line-height: normal;
   border-top: @hairline_border_width solid @standard_border_color;
   margin-top: @standard_spacing;
+  clear: both;
 }
 
 .graph-foreground
@@ -990,6 +992,17 @@ button + .menu-items.buttons,
 .calendar
 {
   border: none;
+//  margin-left: -@small_spacing - @hairline_border_width;
+
+  .cell-empty,
+  .cell-non-empty,
+  .cell-selected,
+  .cell-highlight
+  {
+    width: (@page_max_width - @standard_spacing - 8 * @hairline_border_width) / 7;
+    height: 5em;
+    box-sizing: border-box;
+  }
 }
 
 .calendar-banner, .calendar-footer
@@ -1018,11 +1031,21 @@ button + .menu-items.buttons,
   border-collapse: collapse;
 }
 
-.calendar-weekday
+.weekday
 {
-  font-style: italic;
-  padding: .1em;
-  text-align: center;
+}
+
+.day-number
+{
+
+}
+
+.day-content
+{
+  a
+  {
+    display: block;
+  }
 }
 
 .cell-empty,
@@ -1035,9 +1058,9 @@ button + .menu-items.buttons,
   empty-cells: show;
 }
 
+.cell-non-empty,
 .cell-selected,
-.cell-highlight,
-.cell-non-empty
+.cell-highlight
 {
   border: @hairline_border_width solid @standard_border_color;
 }
@@ -1175,6 +1198,41 @@ span.error, span.caution, span.warning
   padding: 0 @standard_spacing 0 0;
   margin-right: @small_spacing;
 }
+
+.align-left
+{
+  float: left;
+  margin: 0 @standard_spacing @standard_spacing 0;
+}
+
+.align-right
+{
+  float: right;
+  margin: 0 0 @standard_spacing @standard_spacing;
+}
+
+.align-center
+{
+  margin: auto;
+  display: table;
+}
+
+.clear-left
+{
+  clear: left;
+}
+
+.clear-right
+{
+  clear: right;
+}
+
+.clear-both
+{
+  clear: both;
+}
+
+// Make float left/right classes for renderer
 
 .abstract
 {
@@ -1528,16 +1586,6 @@ hr
   width: 50%;
   padding-left: 7px;
   .border-box();
-}
-
-// TODO Get rid of this style
-
-.left-icon
-{
-  background-repeat: no-repeat;
-  padding-left: 21px;
-  min-width: 16px;
-  min-height: 16px;
 }
 
 .overlay-container

@@ -398,11 +398,13 @@ pre > code {
   line-height: normal;
   border-bottom: 1px solid #c2c2c2;
   margin-bottom: 15px;
+  clear: both;
 }
 .info-box-bottom {
   line-height: normal;
   border-top: 1px solid #c2c2c2;
   margin-top: 15px;
+  clear: both;
 }
 .graph-foreground {
   display: inline-block;
@@ -672,6 +674,14 @@ input[type=submit] + .menu-items.buttons,
 .calendar {
   border: none;
 }
+.calendar .cell-empty,
+.calendar .cell-non-empty,
+.calendar .cell-selected,
+.calendar .cell-highlight {
+  width: 125.28571429px;
+  height: 5em;
+  box-sizing: border-box;
+}
 .calendar-banner,
 .calendar-footer {
   padding: .1em;
@@ -686,10 +696,8 @@ input[type=submit] + .menu-items.buttons,
 .calendar-body {
   border-collapse: collapse;
 }
-.calendar-weekday {
-  font-style: italic;
-  padding: .1em;
-  text-align: center;
+.day-content a {
+  display: block;
 }
 .cell-empty,
 .cell-non-empty,
@@ -699,9 +707,9 @@ input[type=submit] + .menu-items.buttons,
   vertical-align: top;
   empty-cells: show;
 }
+.cell-non-empty,
 .cell-selected,
-.cell-highlight,
-.cell-non-empty {
+.cell-highlight {
   border: 1px solid #c2c2c2;
 }
 .cell-empty {
@@ -797,6 +805,27 @@ span.warning {
   border-right-width: 1px;
   padding: 0 15px 0 0;
   margin-right: 5px;
+}
+.align-left {
+  float: left;
+  margin: 0 15px 15px 0;
+}
+.align-right {
+  float: right;
+  margin: 0 0 15px 15px;
+}
+.align-center {
+  margin: auto;
+  display: table;
+}
+.clear-left {
+  clear: left;
+}
+.clear-right {
+  clear: right;
+}
+.clear-both {
+  clear: both;
 }
 .abstract {
   border-width: 1px 0;
@@ -1023,12 +1052,6 @@ hr {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
 }
-.left-icon {
-  background-repeat: no-repeat;
-  padding-left: 21px;
-  min-width: 16px;
-  min-height: 16px;
-}
 .overlay-container {
   position: relative;
   display: inline-block;
@@ -1105,114 +1128,6 @@ hr {
 .style-controls textarea {
   line-height: inherit;
 }
-.button,
-button,
-input[type=button],
-input[type=submit] {
-  display: inline-block;
-  min-width: 2em;
-  min-height: 2em;
-  cursor: pointer;
-  white-space: nowrap;
-}
-.button,
-.style-controls button,
-.style-controls input[type=button],
-.style-controls input[type=submit] {
-  box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  padding: .4em;
-  text-decoration: none;
-  cursor: pointer;
-  text-align: center;
-  vertical-align: middle;
-  background-color: #EEE;
-  border: 1px solid #c2c2c2;
-  border-radius: 4px;
-  line-height: normal;
-}
-a.button:link,
-a.button:visited {
-  color: #333;
-  text-decoration: none;
-}
-.button:hover:not(.disabled):not(.selected),
-.style-controls button:hover:not(.disabled):not(.selected),
-.style-controls input[type=button]:hover:not(.disabled):not(.selected),
-.style-controls input[type=submit]:hover:not(.disabled):not(.selected) {
-  border-color: darkgray;
-  background-color: #DDDDDD;
-}
-.button + .button,
-button + button,
-.button + button,
-button + .button,
-input[type=button] + input[type=button],
-.button + input[type=button],
-input[type=button] + .button,
-input[type=submit] + input[type=submit],
-.button + input[type=submit],
-input[type=submit] + .button {
-  margin-left: 10px;
-}
-.input {
-  display: inline-block;
-}
-.input + .input,
-.input + input,
-input + .input,
-select + select,
-select + .input,
-.input + select,
-input + input,
-input + select,
-select + input,
-input + .button,
-input + button,
-.input + button,
-.input + .button,
-select + button,
-select + .button,
-input + input[type=button],
-.input + input[type=button],
-select + input[type=button],
-input + input[type=submit],
-.input + input[type=submit],
-select + input[type=submit] {
-  margin-left: 5px;
-}
-.button.disabled,
-.style-controls button.disabled,
-.style-controls input[type=button].disabled,
-.style-controls input[type=submit].disabled {
-  color: #AAA;
-  border-color: #DDD;
-  cursor: default;
-}
-.button.selected,
-.style-controls button.selected,
-.style-controls input[type=button].selected,
-.style-controls input[type=submit].selected {
-  cursor: default;
-  background-color: gray;
-  border-color: #666;
-  color: white;
-}
-.button .icon,
-.style-controls button .icon,
-.style-controls input[type=button] .icon,
-.style-controls input[type=submit] .icon {
-  display: inline-block;
-  box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-}
-.style-controls .basic-form .form-row button:first-child,
-.style-controls .basic-form .form-row input[type=button]:first-child,
-.style-controls .basic-form .form-row input[type=submit]:first-child {
-  margin-left: -5px;
-}
 .basic-form {
   line-height: 160%;
 }
@@ -1231,14 +1146,6 @@ select + input[type=submit] {
 .basic-form fieldset.toggle .toggle + .text {
   display: block;
   margin-left: 18px;
-}
-.basic-form input,
-.basic-form textarea,
-.basic-form select {
-  margin-left: 0;
-  box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
 }
 .basic-form textarea,
 .basic-form select,
@@ -1320,10 +1227,154 @@ select + input[type=submit] {
 .basic-form .browse input {
   width: 200px;
 }
+.basic-form input[type=text].tiny,
+.basic-form input[type=password].tiny,
+.basic-form input[type=file].tiny,
+.basic-form textarea.tiny,
+.basic-form select.tiny {
+  width: 3em;
+}
+.basic-form input[type=text].small,
+.basic-form input[type=password].small,
+.basic-form input[type=file].small,
+.basic-form textarea.small,
+.basic-form select.small {
+  width: 10em;
+}
+.basic-form input[type=text].small-medium,
+.basic-form input[type=password].small-medium,
+.basic-form input[type=file].small-medium,
+.basic-form textarea.small-medium,
+.basic-form select.small-medium {
+  width: 15em;
+}
+.basic-form input[type=text].medium,
+.basic-form input[type=password].medium,
+.basic-form input[type=file].medium,
+.basic-form textarea.medium,
+.basic-form select.medium {
+  width: 20em;
+}
 .basic-form .help {
   width: 135px;
   height: auto;
   margin-right: 15px;
+}
+.button,
+button,
+input[type=button],
+input[type=submit] {
+  display: inline-block;
+  min-width: 2em;
+  min-height: 2em;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.button,
+.style-controls button,
+.style-controls input[type=button],
+.style-controls input[type=submit] {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  padding: .4em;
+  text-decoration: none;
+  cursor: pointer;
+  text-align: center;
+  vertical-align: middle;
+  background-color: #EEE;
+  border: 1px solid #c2c2c2;
+  border-radius: 4px;
+  line-height: normal;
+}
+a.button:link,
+a.button:visited {
+  color: #333;
+  text-decoration: none;
+}
+.button:hover:not(.disabled):not(.selected),
+.style-controls button:hover:not(.disabled):not(.selected),
+.style-controls input[type=button]:hover:not(.disabled):not(.selected),
+.style-controls input[type=submit]:hover:not(.disabled):not(.selected) {
+  border-color: darkgray;
+  background-color: #DDDDDD;
+}
+.button + .button,
+button + button,
+.button + button,
+button + .button,
+input[type=button] + input[type=button],
+.button + input[type=button],
+input[type=button] + .button,
+input[type=submit] + input[type=submit],
+.button + input[type=submit],
+input[type=submit] + .button {
+  margin-left: 10px;
+}
+.input {
+  display: inline-block;
+}
+input,
+textarea,
+select {
+  margin-left: 0;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+.input + .input,
+.input + input,
+input + .input,
+select + select,
+select + .input,
+.input + select,
+input + input,
+input + select,
+select + input,
+input + .button,
+input + button,
+.input + button,
+.input + .button,
+select + button,
+select + .button,
+input + input[type=button],
+.input + input[type=button],
+select + input[type=button],
+input + input[type=submit],
+.input + input[type=submit],
+select + input[type=submit] {
+  margin-left: 5px;
+}
+.button.disabled,
+.style-controls button.disabled,
+.style-controls input[type=button].disabled,
+.style-controls input[type=submit].disabled {
+  color: #AAA;
+  border-color: #DDD;
+  cursor: default;
+}
+.button.selected,
+.style-controls button.selected,
+.style-controls input[type=button].selected,
+.style-controls input[type=submit].selected {
+  cursor: default;
+  background-color: gray;
+  border-color: #666;
+  color: white;
+}
+.button .icon,
+.style-controls button .icon,
+.style-controls input[type=button] .icon,
+.style-controls input[type=submit] .icon {
+  display: inline-block;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+.style-controls .basic-form .form-row button:first-child,
+.style-controls .basic-form .form-row input[type=button]:first-child,
+.style-controls .basic-form .form-row input[type=submit]:first-child {
+  margin-left: -5px;
 }
 .style-controls button,
 .style-controls input[type=submit],
@@ -1342,14 +1393,20 @@ select + input[type=submit] {
   border-radius: 4px;
   padding: 4px;
 }
-.style-controls label:first-child + div > input[type=text]:first-child,
-.style-controls label:first-child + div > input[type=password]:first-child,
-.style-controls label:first-child + div > select:first-child,
-.style-controls label:first-child + div > textarea:first-child,
 .style-controls label:first-child + input[type=text],
 .style-controls label:first-child + input[type=password],
 .style-controls label:first-child + select,
 .style-controls label:first-child + textarea {
+  margin-left: -5px;
+}
+.style-controls label:first-child + div > input[type=text]:first-child,
+.style-controls label:first-child + span > input[type=text]:first-child,
+.style-controls label:first-child + div > input[type=password]:first-child,
+.style-controls label:first-child + span > input[type=password]:first-child,
+.style-controls label:first-child + div > select:first-child,
+.style-controls label:first-child + span > select:first-child,
+.style-controls label:first-child + div > textarea:first-child,
+.style-controls label:first-child + span > textarea:first-child {
   margin-left: -5px;
 }
 .style-controls input[disabled],

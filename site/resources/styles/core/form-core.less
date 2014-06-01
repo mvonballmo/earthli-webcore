@@ -31,111 +31,6 @@
   }
 }
 
-.button,
-button
-{
-  display: inline-block;
-  min-width: @minimum_button_width;
-  min-height: @minimum_button_height;
-  cursor: pointer;
-  white-space: nowrap;
-}
-
-.button,
-.style-controls button
-{
-  .border-box();
-  padding: .4em;
-  text-decoration: none;
-  cursor: pointer;
-  text-align: center;
-  vertical-align: middle;
-  background-color: #EEE;
-  border: @hairline_border_width solid @standard_border_color;
-  border-radius: @standard_border_radius;
-  line-height: normal;
-}
-
-a.button:link, a.button:visited
-{
-  color: #333;
-  text-decoration: none;
-}
-
-.button:hover:not(.disabled):not(.selected),
-.style-controls button:hover:not(.disabled):not(.selected)
-{
-  border-color: darkgray;
-  background-color: #DDDDDD;
-}
-
-.button + .button,
-button + button,
-.button + button,
-button + .button
-{
-  margin-left: @button_spacing;
-}
-
-.input
-{
-  display: inline-block;
-}
-
-.input + .input,
-.input + input,
-input + .input,
-select + select,
-select + .input,
-.input + select,
-input + input,
-input + select,
-select + input,
-input + .button,
-input + button,
-.input + button,
-.input + .button,
-select + button,
-select + .button
-{
-  margin-left: @small_spacing;
-}
-
-.button.disabled,
-.style-controls button.disabled
-{
-  color: #AAA;
-  border-color: #DDD;
-  cursor: default;
-}
-
-.button.selected,
-.style-controls button.selected
-{
-  cursor: default;
-  background-color: gray;
-  border-color: #666;
-  color: white;
-}
-
-.button .icon,
-.style-controls button .icon
-{
-  display: inline-block;
-  .border-box();
-}
-
-.style-controls .basic-form
-{
-  .form-row
-  {
-    button:first-child
-    {
-      margin-left: -@standard_border_radius - @hairline_border_width;
-    }
-  }
-}
-
 .basic-form
 {
   line-height: @text_flow_line_height;
@@ -165,14 +60,6 @@ select + .button
         }
       }
     }
-  }
-
-  input,
-  textarea,
-  select
-  {
-    margin-left: 0;
-    .border-box();
   }
 
   textarea,
@@ -321,6 +208,33 @@ select + .button
     }
   }
 
+  input[type=text],
+  input[type=password],
+  input[type=file],
+  textarea,
+  select
+  {
+    &.tiny
+    {
+      width: 3em;
+    }
+
+    &.small
+    {
+      width: 10em;
+    }
+
+    &.small-medium
+    {
+      width: 15em;
+    }
+
+    &.medium
+    {
+      width: 20em;
+    }
+  }
+
   .help
   {
     width: @label-area-width;
@@ -329,3 +243,115 @@ select + .button
   }
 }
 
+.button,
+button
+{
+  display: inline-block;
+  min-width: @minimum_button_width;
+  min-height: @minimum_button_height;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.button,
+.style-controls button
+{
+  .border-box();
+  padding: .4em;
+  text-decoration: none;
+  cursor: pointer;
+  text-align: center;
+  vertical-align: middle;
+  background-color: #EEE;
+  border: @hairline_border_width solid @standard_border_color;
+  border-radius: @standard_border_radius;
+  line-height: normal;
+}
+
+a.button:link, a.button:visited
+{
+  color: #333;
+  text-decoration: none;
+}
+
+.button:hover:not(.disabled):not(.selected),
+.style-controls button:hover:not(.disabled):not(.selected)
+{
+  border-color: darkgray;
+  background-color: #DDDDDD;
+}
+
+.button + .button,
+button + button,
+.button + button,
+button + .button
+{
+  margin-left: @button_spacing;
+}
+
+.input
+{
+  display: inline-block;
+}
+
+input,
+textarea,
+select
+{
+  margin-left: 0;
+  .border-box();
+}
+
+.input + .input,
+.input + input,
+input + .input,
+select + select,
+select + .input,
+.input + select,
+input + input,
+input + select,
+select + input,
+input + .button,
+input + button,
+.input + button,
+.input + .button,
+select + button,
+select + .button
+{
+  margin-left: @small_spacing;
+}
+
+.button.disabled,
+.style-controls button.disabled
+{
+  color: #AAA;
+  border-color: #DDD;
+  cursor: default;
+}
+
+.button.selected,
+.style-controls button.selected
+{
+  cursor: default;
+  background-color: gray;
+  border-color: #666;
+  color: white;
+}
+
+.button .icon,
+.style-controls button .icon
+{
+  display: inline-block;
+  .border-box();
+}
+
+.style-controls .basic-form
+{
+  .form-row
+  {
+    button:first-child
+    {
+      margin-left: -@standard_border_radius - @hairline_border_width;
+    }
+  }
+}
