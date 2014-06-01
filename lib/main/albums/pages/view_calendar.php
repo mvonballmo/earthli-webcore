@@ -38,7 +38,7 @@ http://www.earthli.com/software/webcore/albums
     $Page->title->subject = 'Calendar';
     $Page->location->add_folder_link ($folder->parent_folder (), '', 'view_calendar.php');
     $Page->location->add_object_link ($folder);
-    $Page->location->append ($Page->title->subject);
+    $Page->location->append ($Page->title->subject, '', '{icons}buttons/calendar');
 
     $Page->add_style_sheet ('{app_styles}calendar');
     $Page->start_display ();

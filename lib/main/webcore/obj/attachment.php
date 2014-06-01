@@ -190,6 +190,16 @@ class ATTACHMENT extends OBJECT_IN_FOLDER
   }
 
   /**
+   * @return string
+   */
+  public function icon_url ()
+  {
+    $ft = $this->app->file_type_manager ();
+    $url = new FILE_URL ($this->file_name);
+    return $ft->icon_url ($this->mime_type, $url->extension ());
+  }
+
+  /**
    * File type icon.
    * Retrieves file type to icon mappings from the {@link APPLICATION::file_type_manager()}.
    * @param string $size The size of the icon to return.

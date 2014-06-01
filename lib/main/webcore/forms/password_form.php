@@ -149,8 +149,6 @@ class PASSWORD_FORM extends FORM
    */
   protected function _draw_controls ($renderer)
   {
-    $renderer->set_width ('12em');
-
     $renderer->start ();
     $renderer->draw_password_row ('password1');
     $renderer->draw_password_row ('password2');

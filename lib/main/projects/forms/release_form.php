@@ -204,7 +204,7 @@ class RELEASE_FORM extends OBJECT_IN_FOLDER_FORM
     if ($this->visible ('branch_id'))
     {
       $props = $renderer->make_list_properties ();
-      $props->width = '10em';
+      $props->css_class = 'small';
       foreach ($this->_branches as $branch)
       {
         $props->add_item ($branch->title_as_plain_text (), $branch->id);
@@ -225,7 +225,6 @@ class RELEASE_FORM extends OBJECT_IN_FOLDER_FORM
     {
       $props = $renderer->make_list_properties ();
       $props->show_descriptions = true;
-      $props->width = '';
       if ($this->visible ('is_visible'))
       {
         $props->add_item ($this->app->resolve_icon_as_html ('{icons}indicators/invisible', ' ', Sixteen_px) . ' Hidden', Hidden, 'Prevent searching or browsing by non-admin users.');

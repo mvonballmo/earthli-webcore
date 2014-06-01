@@ -276,7 +276,7 @@ class ATTACHMENT_HOST_FORM extends OBJECT_IN_FOLDER_FORM
     if (sizeof ($attachments))
     {
       $props = $renderer->make_list_properties ();
-      $props->width = '25%';
+      $props->css_class = 'small';
       foreach ($attachments as $att)
       {
         $props->add_item ($att->title_as_plain_text (), $att->file_name);
@@ -290,7 +290,7 @@ class ATTACHMENT_HOST_FORM extends OBJECT_IN_FOLDER_FORM
       $props->add_item ('Center', 'center');
       $props->add_item ('Right', 'right');
       $props->add_item ('Right (alone)', 'right-column');
-      $props->width = '8em';
+      $props->css_class = 'small';
       $alignments = $renderer->drop_down_as_html ('alignments', $props);
       
       $props = $renderer->make_list_properties ();
@@ -299,7 +299,7 @@ class ATTACHMENT_HOST_FORM extends OBJECT_IN_FOLDER_FORM
       $props->add_item ('50%', '50');
       $props->add_item ('75%', '75');
       $props->add_item ('Full-size', '100');
-      $props->width = '8em';
+      $props->css_class = 'small';
       $sizes = $renderer->drop_down_as_html ('sizes', $props);
         
       $props = $renderer->make_list_properties ();
@@ -307,7 +307,7 @@ class ATTACHMENT_HOST_FORM extends OBJECT_IN_FOLDER_FORM
       $props->add_item ('Caption', 'caption');
       $props->add_item ('Tooltip', 'tooltip');
       $props->add_item ('Both', 'both');
-      $props->width = '8em';
+      $props->css_class = 'small';
       $caption_modes = $renderer->drop_down_as_html ('caption_modes', $props);
       
       $renderer->start_row ('Attachments');

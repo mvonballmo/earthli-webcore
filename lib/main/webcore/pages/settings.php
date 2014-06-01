@@ -114,7 +114,6 @@ class SAMPLE_FORM extends FORM
   protected function _draw_controls($renderer)
   {
     $renderer->default_control_height = '75px';
-    $renderer->set_width('25em');
 
     $renderer->start();
     $props = $renderer->make_list_properties ();
@@ -124,7 +123,7 @@ class SAMPLE_FORM extends FORM
     $renderer->draw_check_boxes_row('Options', $props);
     $renderer->start_row('Text');
     $text_props = new FORM_TEXT_CONTROL_OPTIONS();
-    $text_props->width = '8em';
+    $text_props->css_class = 'small';
     echo $renderer->date_as_html('date');
     echo ' ';
     echo $renderer->text_line_as_html('name', $text_props);
@@ -135,13 +134,13 @@ class SAMPLE_FORM extends FORM
 
     $props = $renderer->make_list_properties ();
     $props->show_descriptions = true;
+    $props->css_class = 'small';
     $props->add_item ('Option One', 0, 'Description for option one.');
     $props->add_item ('Option Two', 1, 'Description for option two.');
     $props->items_per_row = 2;
     $renderer->draw_radio_group_row('select', $props);
 
     $field = $this->field_at('select');
-    $props->width = '8em';
 
     $renderer->start_row('Menus');
     echo $renderer->drop_down_as_html('select', $props);

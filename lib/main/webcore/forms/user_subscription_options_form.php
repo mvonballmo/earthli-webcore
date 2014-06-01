@@ -384,7 +384,7 @@ class USER_SUBSCRIPTION_OPTIONS_FORM extends SUBSCRIPTION_FORM
     $renderer->start ();
 
     $options = new FORM_TEXT_CONTROL_OPTIONS ();
-    $options->width = '20em';
+    $options->css_class = 'medium';
     
     $renderer->draw_text_line_row ('new_email', $options);
 
@@ -406,9 +406,9 @@ class USER_SUBSCRIPTION_OPTIONS_FORM extends SUBSCRIPTION_FORM
     $props->add_item ('Plain text', 0);
     $renderer->draw_radio_group_row ('send_as_html', $props);
 
-    $layer = $renderer->start_layer_row ('advanced', 'Advanced', '%s more options.');
+    $renderer->start_block('');
 
-    $options->width = '3em';
+    $options->css_class = 'tiny';
 
     $props = $renderer->make_list_properties ();
     $props->on_click_script = 'on_change_text_option (this)';
@@ -445,7 +445,7 @@ class USER_SUBSCRIPTION_OPTIONS_FORM extends SUBSCRIPTION_FORM
     $renderer->draw_check_box_row ('group_history_items');
     $renderer->draw_check_box_row ('show_history_item_as_subject');
 
-    $renderer->finish_layer_row ($layer);
+    $renderer->finish_block();
 
     $renderer->draw_submit_button_row ();
 

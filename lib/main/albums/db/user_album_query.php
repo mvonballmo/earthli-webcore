@@ -57,5 +57,3 @@ class USER_ALBUM_QUERY extends USER_FOLDER_QUERY
     $this->add_order ('fldr.first_day DESC', true);
   }
 }
-
-?>

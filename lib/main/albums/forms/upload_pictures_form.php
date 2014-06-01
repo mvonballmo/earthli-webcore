@@ -180,37 +180,34 @@ class UPLOAD_PICTURES_FORM extends ID_BASED_FORM
     $renderer->start ();
     $renderer->draw_text_line_row ('title');
     $renderer->draw_text_line_row ('starting_index');
-    $renderer->start_row ('Day');
-    $renderer->start_block (true);
+    $renderer->start_block ('Day');
 
-      $props = $renderer->make_list_properties ();
-      $props->add_item ('Use date stored by a digital camera (if possible)', 1);
-      $props->add_item ('Use the date below (if no date is found)', 0);
-      $renderer->start_row ();
-        echo $renderer->radio_group_as_html ('read_exif', $props);
-      $renderer->finish_row ();
-      $renderer->start_row ();
-        $renderer->start_indent ();
-        echo $renderer->date_as_html ('day');
-        $renderer->finish_indent ();
-      $renderer->finish_row ();
-  
-      $renderer->draw_error_row ('read_exif');
-      $renderer->draw_error_row ('day');
+    $props = $renderer->make_list_properties ();
+    $props->add_item ('Use date stored by a digital camera (if possible)', 1);
+    $props->add_item ('Use the date below (if no date is found)', 0);
+    $renderer->start_row ();
+      echo $renderer->radio_group_as_html ('read_exif', $props);
+    $renderer->finish_row ();
+    $renderer->start_row ();
+    echo $renderer->date_as_html ('day');
+    $renderer->finish_row ();
+
+    $renderer->draw_error_row ('read_exif');
+    $renderer->draw_error_row ('day');
 
     $renderer->finish_block ();
-    $renderer->finish_row ();
 
     $renderer->draw_file_row ('zipfile');
 
     $options = new FORM_TEXT_CONTROL_OPTIONS ();
-    $options->width = '4em';
+    $options->css_class = 'tiny';
     
     $renderer->start_row ('Thumbnails');
-      $props = $renderer->make_check_properties ();
-      $props->text = ' no larger than ' . $renderer->text_line_as_html ('thumbnail_size', $options). ' pixels.';
-      $props->on_click_script = 'on_click_thumbnail (this)';
-      echo $renderer->check_box_as_html ('create_thumbnail', $props);
+    $props = $renderer->make_check_properties ();
+    $props->text = ' no larger than ' . $renderer->text_line_as_html ('thumbnail_size', $options). ' pixels.';
+    $props->on_click_script = 'on_click_thumbnail (this)';
+    $props->css_class = 'text-line';
+    echo $renderer->check_box_as_html ('create_thumbnail', $props);
     $renderer->finish_row ();
     $renderer->draw_error_row ('thumbnail_size');
 

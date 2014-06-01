@@ -253,7 +253,7 @@ class ATTACHMENT_FORM extends OBJECT_IN_FOLDER_FORM
     $props->add_item ('overwrite', 1);
     
     $options = new FORM_TEXT_CONTROL_OPTIONS ();
-    $options->width = '4em';
+    $options->css_class = 'tiny';
     
     $check_props = $renderer->make_check_properties ('create_thumbnail');
     $check_props->on_click_script = 'on_click_thumbnail (this)';
@@ -275,17 +275,27 @@ class ATTACHMENT_FORM extends OBJECT_IN_FOLDER_FORM
 
     if ($this->object_exists ())
     {
-      $img = $this->_object->icon_as_html (Thirty_two_px);
-      if ($this->_object->is_image)
+      /** @var ATTACHMENT $attachment */
+      $attachment = $this->_object;
+
+      $img = $attachment->icon_as_html (Thirty_two_px);
+      if ($attachment->is_image)
       {
-        $thumb = $this->_object->thumbnail_as_html ();
+        $thumb = $attachment->thumbnail_as_html ();
         if ($thumb)
         {
           $img = $thumb;
         }
       }
 
-      $renderer->draw_text_row ('Current file', '<div style="float: left; margin-right: .5em">' . $img . '</div><div>' . $this->_object->original_file_name . '</div><div style="margin-top: .5em">' . $this->_object->mime_type . ' (' . file_size_as_text ($this->_object->size) . ')</div>', 'detail');
+      $renderer->start_row('Current file');
+
+      echo '<div class="info-box-top"><p>' . $this->_object->original_file_name . '</p>';
+      echo '<p>' . $this->_object->mime_type . ' (' . file_size_as_text ($this->_object->size) . ')</p></div>';
+      echo '<p>' . $img . '</p>';
+
+
+      $renderer->finish_row();
 
       $renderer->draw_text_line_row ('title');
       $renderer->draw_check_box_row ('is_visible');
@@ -293,12 +303,10 @@ class ATTACHMENT_FORM extends OBJECT_IN_FOLDER_FORM
 
       if ($this->login->is_allowed (Privilege_set_attachment, Privilege_upload, $this->_folder))
       {
-        $renderer->start_row (' ');
-          $renderer->start_block (true);
-            $renderer->draw_text_row (' ', 'Replacing the file for the attachment is optional; you can regenerate the thumbnail from the current image by clicking "Save" below.', 'notes');
-            $this->_draw_file_controls ($renderer);
-          $renderer->finish_block ();
-        $renderer->finish_row ();
+        $renderer->start_block ('Options');
+          $renderer->draw_text_row (' ', 'Replacing the file for the attachment is optional; you can regenerate the thumbnail from the current image by clicking "Save" below.', 'notes');
+          $this->_draw_file_controls ($renderer);
+        $renderer->finish_block ();
       }
     }
     else

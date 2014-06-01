@@ -336,10 +336,14 @@ class PROJECT_FORM extends FOLDER_FORM
       }
       elseif (! $this->_object->is_root ())
       {
+        /** @var PROJECT_BRANCH_QUERY $branch_query */
         $branch_query = $this->_object->branch_query ();
+
+        /** @var BRANCH[] $branches */
         $branches = $branch_query->objects ();
   
         $props = $renderer->make_list_properties ();
+        $props->css_class = 'small';
         foreach ($branches as $branch)
         {
           $props->add_item ($branch->title_as_plain_text (), $branch->id);
@@ -347,70 +351,71 @@ class PROJECT_FORM extends FOLDER_FORM
         $renderer->draw_drop_down_row ('trunk_id', $props);
       }
     }
-    
-    $renderer->start_block ('Options');
 
-      // if this folder has a parent, then show the inheritance options
+    // if this folder has a parent, then show the inheritance options
 
-      if (! $this->object_exists ())
-      {
-        $parent = $this->_folder;
-      }
-      else
-      {
-        $parent = $this->_folder->parent_folder ();
-      }
+    if (! $this->object_exists ())
+    {
+      $parent = $this->_folder;
+    }
+    else
+    {
+      $parent = $this->_folder->parent_folder ();
+    }
 
-      if ($parent)
-      {
-        $options_folder = $folder_query->object_at_id ($parent->options_id);
-        $props = $renderer->make_list_properties ();
-        $props->on_click_script = 'on_inherit_changed (this)';
-
-        if ($this->login->is_allowed (Privilege_set_folder, Privilege_modify, $options_folder))
-        {
-          $t = $options_folder->title_formatter ();
-          $t->set_name ($this->env->url (Url_part_file_name));
-          $title = 'Inherit options from ' . $options_folder->title_as_link ($t);
-        }
-        else
-        {
-          $title = 'Inherit options from ' . $options_folder->title_as_html ();
-        }
-
-        $props->add_item ($title, 0);
-        $props->add_item ('Define options below.', 1);
-
-        echo $renderer->radio_group_as_HTML ('defines_options', $props);
-      }
-      else
-      {
-        $renderer->draw_hidden ('defines_options');
-      }
-
+    if ($parent)
+    {
+      $renderer->start_block ('Options');
+      $options_folder = $folder_query->object_at_id ($parent->options_id);
       $props = $renderer->make_list_properties ();
-      $props->width = '15em';
-      $props->add_item ('[No warning]', 0);
-      $props->add_item ('1 day', 86400);
-      $props->add_item ('2 days', 2 * 86400);
-      $props->add_item ('3 days', 3 * 86400);
-      $props->add_item ('5 days', 5 * 86400);
-      $props->add_item ('1 week', 7 * 86400);
-      $props->add_item ('2 weeks', 14 * 86400);
-      $props->add_item ('1 month', 30 * 86400);
-      $renderer->draw_drop_down_row ('seconds_until_deadline', $props);
+      $props->css_class = 'medium';
+      $props->on_click_script = 'on_inherit_changed (this)';
 
-      /* Prepare the option and group lists for assignees and reporters. */
-      
-      $props = $this->_make_user_list_properties_for ($renderer, 'assignee_group_id');
-      $renderer->draw_radio_group_row ('assignee_group_type', $props);
-      $props = $this->_make_user_list_properties_for ($renderer, 'reporter_group_id');
-      $renderer->draw_radio_group_row ('reporter_group_type', $props);
-      
-      if (isset ($this->_user_list_error_message))
+      if ($this->login->is_allowed (Privilege_set_folder, Privilege_modify, $options_folder))
       {
-        $renderer->draw_caution_row (' ', $this->_user_list_error_message);
+        $t = $options_folder->title_formatter ();
+        $t->set_name ($this->env->url (Url_part_file_name));
+        $title = 'Inherit options from ' . $options_folder->title_as_link ($t);
       }
+      else
+      {
+        $title = 'Inherit options from ' . $options_folder->title_as_html ();
+      }
+
+      $props->add_item ($title, 0);
+      $props->add_item ('Define options below.', 1);
+
+      echo $renderer->radio_group_as_HTML ('defines_options', $props);
+    }
+    else
+    {
+      $renderer->start_block ('');
+      $renderer->draw_hidden ('defines_options');
+    }
+
+    $props = $renderer->make_list_properties ();
+    $props->css_class = 'small';
+    $props->add_item ('[No warning]', 0);
+    $props->add_item ('1 day', 86400);
+    $props->add_item ('2 days', 2 * 86400);
+    $props->add_item ('3 days', 3 * 86400);
+    $props->add_item ('5 days', 5 * 86400);
+    $props->add_item ('1 week', 7 * 86400);
+    $props->add_item ('2 weeks', 14 * 86400);
+    $props->add_item ('1 month', 30 * 86400);
+    $renderer->draw_drop_down_row ('seconds_until_deadline', $props);
+
+    /* Prepare the option and group lists for assignees and reporters. */
+
+    $props = $this->_make_user_list_properties_for ($renderer, 'assignee_group_id');
+    $renderer->draw_radio_group_row ('assignee_group_type', $props);
+    $props = $this->_make_user_list_properties_for ($renderer, 'reporter_group_id');
+    $renderer->draw_radio_group_row ('reporter_group_type', $props);
+
+    if (isset ($this->_user_list_error_message))
+    {
+      $renderer->draw_caution_row (' ', $this->_user_list_error_message);
+    }
 
     $renderer->finish_block ();
 
@@ -423,7 +428,12 @@ class PROJECT_FORM extends FOLDER_FORM
     $renderer->finish ();
     $renderer->finish_column ();
   }
-  
+
+  /**
+   * @param FORM_RENDERER $renderer
+   * @param $ctrl_id
+   * @return mixed
+   */
   protected function _make_user_list_properties_for ($renderer, $ctrl_id)
   {
     $Result = $renderer->make_list_properties ();
@@ -434,10 +444,13 @@ class PROJECT_FORM extends FOLDER_FORM
     if ($this->login->is_allowed (Privilege_set_group, Privilege_view))
     {
       $group_query = $this->app->group_query ();
+
+      /** @var GROUP[] $groups */
       $groups = $group_query->objects ();
       if (sizeof ($groups))
       {
         $group_props = $renderer->make_list_properties ();
+        $group_props->css_class = 'small';
         foreach ($groups as $group)
         {
           $group_props->add_item ($group->title_as_plain_text (), $group->id);

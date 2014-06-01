@@ -157,48 +157,38 @@ $Page->start_display();
       <?php echo $Page->get_text_with_icon('{icons}buttons/download_to_hd', 'Download', Thirty_two_px); ?>
     </h2>
     <p>For a better browsing experience, try one of these:</p>
-    <dl>
-      <dt class="field">
-      <span
-        style="float: left"><?php echo $Page->resolve_icon_as_html('{icons}logos/browsers/opera1_t', '', Thirty_two_px); ?></span>
-        <a href="http://opera.com" style="margin-left: 8px">Opera</a>
-      </dt>
-      <dd class="detail" style="margin-left: 40px; margin-bottom: 2em">
-        Free (Mac/Windows/Linux)
-      </dd>
-      <dt class="field">
-      <span
-        style="float: left"><?php echo $Page->resolve_icon_as_html('{icons}logos/browsers/chrome', '', Thirty_two_px); ?></span>
-        <a href="http://google.com/chrome/" style="margin-left: 8px">Chrome</a>
-      </dt>
-      <dd class="detail" style="margin-left: 40px; margin-bottom: 2em">
-        Free (Mac/Windows/Linux)
-      </dd>
-      <dt class="field">
-      <span
-        style="float: left"><?php echo $Page->resolve_icon_as_html('{icons}logos/browsers/firefox', '', Thirty_two_px); ?></span>
-        <a href="http://mozilla.org/products/firefox/" style="margin-left: 8px">Firefox</a>
-      </dt>
-      <dd class="detail" style="margin-left: 40px; margin-bottom: 2em">
-        Free (Mac/Windows/Linux)
-      </dd>
-      <dt class="field">
-      <span
-        style="float: left"><?php echo $Page->resolve_icon_as_html('{icons}logos/browsers/safari', '', Thirty_two_px); ?></span>
-        <a href="http://apple.com/safari" style="margin-left: 8px">Safari</a>
-      </dt>
-      <dd class="detail" style="margin-left: 40px; margin-bottom: 2em">
-        Free (Mac)
-      </dd>
-      <dt class="field">
-      <span
-        style="float: left"><?php echo $Page->resolve_icon_as_html('{icons}logos/browsers/omniweb5', '', Thirty_two_px); ?></span>
-        <a href="http://omnigroup.com/applications/omniweb/" style="margin-left: 8px">Omniweb</a>
-      </dt>
-      <dd class="detail" style="margin-left: 40px">
-        Free (Mac)
-      </dd>
-    </dl>
+    <?php
+    $Page->start_icon_container('{icons}logos/browsers/opera1_t', Thirty_two_px);
+    ?>
+    <h3><a href="http://opera.com">Opera</a></h3>
+    <p class="detail">Free (Mac/Windows/Linux)</p>
+    <?php
+    $Page->finish_icon_container();
+    ?>
+    <?php
+    $Page->start_icon_container('{icons}logos/browsers/chrome', Thirty_two_px);
+    ?>
+    <h3><a href="http://google.com/chrome/">Chrome</a></h3>
+    <p class="detail">Free (Mac/Windows/Linux)</p>
+    <?php
+    $Page->finish_icon_container();
+    ?>
+    <?php
+    $Page->start_icon_container('{icons}logos/browsers/firefox', Thirty_two_px);
+    ?>
+    <h3><a href="http://mozilla.org/products/firefox/">Firefox</a></h3>
+    <p class="detail">Free (Mac/Windows/Linux)</p>
+    <?php
+    $Page->finish_icon_container();
+    ?>
+    <?php
+    $Page->start_icon_container('{icons}logos/browsers/safari', Thirty_two_px);
+    ?>
+    <h3><a href="http://apple.com/safari">Safari</a></h3>
+    <p class="detail">Free (Mac)</p>
+    <?php
+    $Page->finish_icon_container();
+    ?>
   </div>
   <?php
     $box->finish_column_set ();

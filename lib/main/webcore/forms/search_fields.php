@@ -390,6 +390,7 @@ class SEARCH_DATE_FIELDS extends SEARCH_FIELDS
     $props->add_item ('This week', Search_date_this_week);
     $props->add_item ('This month', Search_date_this_month);
     $props->add_item ('Selected dates', Search_date_constant);
+    $props->css_class = 'short';
     $renderer->draw_drop_down_row ($this->search_type_name (), $props);
 
     $renderer->draw_date_row ($this->after_name ());
@@ -612,14 +613,18 @@ class SEARCH_USER_FIELDS extends SEARCH_FIELDS
   public function draw_fields ($form, $renderer)
   {
     $props = $renderer->make_list_properties ();
+    $props->css_class = 'small';
     $props->add_item ('Context or none', Search_user_context_none);
     $props->add_item ('Context or login', Search_user_context_login);
     $props->add_item ('Name(s) listed', Search_user_constant);
 
+    $text_props = new FORM_TEXT_CONTROL_OPTIONS();
+    $text_props->css_class = 'medium';
+
     $renderer->start_row ('by');
       echo $renderer->drop_down_as_html ($this->search_type_name (), $props);
       echo ' ';
-      echo $renderer->text_line_as_html ($this->base_name);
+      echo $renderer->text_line_as_html ($this->base_name, $text_props);
     $renderer->finish_row ();
 
     $renderer->draw_text_row (' ', 'Separate multiple names with a semi-colon.', 'notes');
@@ -874,7 +879,7 @@ class SORT_FIELDS extends SEARCH_FIELDS
   {
     $props = $renderer->make_list_properties ();
     $props->add_item ('[Default]', '');
-    $props->width = '10em';
+    $props->css_class = 'small';
     foreach ($sort_values as $key => $value)
     {
       $props->add_item ($value, $key);
@@ -1964,7 +1969,7 @@ class SEARCH_USER_OBJECT_FIELDS extends SEARCH_CONTENT_OBJECT_FIELDS
   {
     $props = $renderer->make_list_properties ();
     $props->show_description_on_same_line = true;
-    $props->width = '20em';
+    $props->css_class = 'medium';
     $props->add_item ('[all]', 'all');
     $props->add_item ('Anonymous', Privilege_kind_anonymous);
     $props->add_item ('Registered', Privilege_kind_registered);

@@ -991,35 +991,46 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
 
     $alignment = read_array_index ($attributes, 'align');
 
+    $clear_class = '';
     $clear = read_array_index ($attributes, 'clear');
     switch ($clear)
     {
-      case 'right':
-        if ($alignment == 'left-column')
-        {
-          $clear = 'both';
-        }
-        break;
       case 'left':
         if ($alignment == 'right-column')
         {
-          $clear = 'both';
+          $clear_class = 'clear-both';
+        }
+        else
+        {
+          $clear_class = 'clear-left';
+        }
+        break;
+      case 'right':
+        if ($alignment == 'left-column')
+        {
+          $clear_class = 'clear-both';
+        }
+        else
+        {
+          $clear_class = 'clear-right';
         }
         break;
       case 'both':
-        ; // value is ok
+        $clear_class = 'clear-both';
         break;
       default:
         if ($alignment == 'left-column')
         {
-          $clear = 'left';
+          $clear_class = 'clear-left';
         }
         elseif ($alignment == 'right-column')
         {
-          $clear = 'right';
+          $clear_class = 'clear-right';
         }
         break;
     }
+
+    $align_class = '';
 
     if (!empty ($clear))
     {
@@ -1029,17 +1040,18 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
     switch ($alignment)
     {
 	    case 'left-column':
-	      // 'clear' attribute is handled above
 	    case 'left':
-	      $outer_css->add_text ('float: left; margin-right: .5em; margin-bottom: .5em');
+        $align_class = 'align-left';
+//	      $outer_css->add_text ('float: left; margin-right: .5em; margin-bottom: .5em');
 	      break;
 	    case 'right-column':
-	      // 'clear' attribute is handled above
 	    case 'right':
-	      $outer_css->add_text ('float: right; margin-left: .5em; margin-bottom: .5em');
+        $align_class = 'align-right';
+	      //$outer_css->add_text ('float: right; margin-left: .5em; margin-bottom: .5em');
 	      break;
 	    case 'center':
-	      $outer_css->add_text ('margin: auto; display: table');
+        $align_class = 'align-center';
+//	      $outer_css->add_text ('margin: auto; display: table');
 	      break;
     }
 
@@ -1047,6 +1059,17 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
     $inner_css->add_text (read_array_index ($attributes, 'style'));
 
     $class = read_array_index ($attributes, 'class');
+
+    if ($align_class)
+    {
+      $class .= ' ' . $align_class;
+    }
+
+    if ($clear_class)
+    {
+      $class .= ' ' . $clear_class;
+    }
+
     if ($this->css_classes)
     {
       if ($class)

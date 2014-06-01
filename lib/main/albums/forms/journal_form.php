@@ -146,7 +146,10 @@ class JOURNAL_FORM extends ALBUM_ENTRY_FORM
 
     $renderer->draw_date_row ('day');
 
-    $icons = $this->app->display_options->weather_icons ();
+    /** @var ALBUM_APPLICATION_DISPLAY_OPTIONS $album_display_options */
+    $album_display_options = $this->app->display_options;
+    /** @var PROPERTY_VALUE[] $icons */
+    $icons = $album_display_options->weather_icons ();
 
     if (sizeof ($icons))
     {
@@ -157,7 +160,7 @@ class JOURNAL_FORM extends ALBUM_ENTRY_FORM
       foreach ($icons as $icon)
       {
         $i += 1;
-        $props->add_item ($icon->icon_as_html ('30px'), $i);
+        $props->add_item ($icon->icon_as_html (Thirty_px), $i);
       }
 
       $renderer->draw_radio_group_row ('weather_type', $props);
@@ -166,7 +169,7 @@ class JOURNAL_FORM extends ALBUM_ENTRY_FORM
     $renderer->draw_text_box_row ('weather');
 
     $options = new FORM_TEXT_CONTROL_OPTIONS ();
-    $options->width = '3em';
+    $options->css_class = 'tiny';
 
     $renderer->start_row ('Temps', 'text-line');
     echo $renderer->text_line_as_html ('lo_temp', $options) . '&deg;C to ';

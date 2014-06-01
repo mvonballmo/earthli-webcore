@@ -507,14 +507,12 @@ class ALBUM_FORM extends FOLDER_FORM
     $renderer->draw_check_box_row ('url_root_enabled', $item);
 
     $options->on_change_script = null;
-    $options->width = '12em';
 
     $renderer->start_block ('Dates');
 
     $props = $renderer->make_list_properties ();
     $props->on_click_script = 'on_day_mode_changed (this)';
     $props->show_descriptions = true;
-    $props->width = '30em';
     $props->add_item ('One day', Album_is_single_day, 'For parties or sporting events.');
     $props->add_item ('Several days', Album_is_span, 'For trips; both first and last day are fixed.');
     $props->add_item ('Journal', Album_is_journal, 'First day is fixed; last day is always today\'s date.');
@@ -535,14 +533,13 @@ class ALBUM_FORM extends FOLDER_FORM
     $renderer->start_block ('Settings');
       $props = $renderer->make_list_properties ();
       $props->show_descriptions = true;
-      $props->width = '30em';
 
       $props->add_item ('is_visible', 1);
       $props->add_item ('show_times', 1);
       $props->add_item ('is_organizational', 1);
 
       $options = new FORM_TEXT_CONTROL_OPTIONS ();
-      $options->width = '3em';
+      $options->css_class = 'tiny';
       $item = $renderer->make_check_properties ();
       $item->title = 'constrain_picture_size';
       $item->text = ' ' . $renderer->text_line_as_HTML ('max_picture_width', $options) . ' x ' . $renderer->text_line_as_HTML ('max_picture_height', $options);

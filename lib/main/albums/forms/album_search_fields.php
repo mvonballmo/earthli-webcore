@@ -216,7 +216,7 @@ class SEARCH_JOURNAL_FIELDS extends SEARCH_ENTRY_FIELDS
     $renderer->start_row (' ');
 
       $options = new FORM_TEXT_CONTROL_OPTIONS ();
-      $options->width = '3em';
+      $options->css_class = 'tiny';
 
       echo 'Warmer than ' . $renderer->text_line_as_html ('warmer_than', $options);
       echo '&deg; and cooler than ' . $renderer->text_line_as_html ('colder_than', $options) . '&deg';
@@ -225,5 +225,3 @@ class SEARCH_JOURNAL_FIELDS extends SEARCH_ENTRY_FIELDS
     parent::_draw_date_fields ($form, $renderer);
   }
 }
-
-?>

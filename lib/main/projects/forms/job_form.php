@@ -442,6 +442,7 @@ class JOB_FORM extends PROJECT_ENTRY_FORM
       // Draw statuses
 
       $props = $renderer->make_list_properties ();
+      $props->css_class = 'medium';
 
       foreach ($statuses as $status)
       {
@@ -452,6 +453,7 @@ class JOB_FORM extends PROJECT_ENTRY_FORM
       // Draw priorities
 
       $props = $renderer->make_list_properties ();
+      $props->css_class = 'medium';
       $priorities = $display_options->job_priorities ();
       foreach ($priorities as $priority)
       {
@@ -477,7 +479,7 @@ class JOB_FORM extends PROJECT_ENTRY_FORM
     /** @var $users USER[] */
     $users = $user_query->objects ();
     $Result = $renderer->make_list_properties ();
-    $Result->width = '20em';
+    $Result->css_class = 'medium';
     $Result->add_item ('(None)', 0);
     foreach ($users as $user)
     {

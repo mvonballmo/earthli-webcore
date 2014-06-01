@@ -91,8 +91,8 @@ class ARTICLE_FORM extends DRAFTABLE_ENTRY_FORM
     $renderer->inline_operations_enabled = true;
     $renderer->draw_inline_preview_area();
 
-//    echo '<div style="width: 50%">';
+    // TODO use flexbox here
+
     parent::_draw_controls ($renderer);
-//    echo '</div>';
   }
 }

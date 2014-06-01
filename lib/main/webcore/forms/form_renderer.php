@@ -132,13 +132,6 @@ class CHECK_BOX_ITEM extends FORM_LIST_ITEM
 class FORM_LIST_PROPERTIES
 {
   /**
-   * How wide should the list control be?
-   * Should be specified in legal CSS units. Used by the drop-down box and the list-box.
-   * @var string
-   */
-  public $width = null;
-
-  /**
    * How many items at once should be shown?
    * Used by the list-box.
    * @var integer
@@ -273,13 +266,6 @@ class FORM_LIST_PROPERTIES
 class FORM_TEXT_CONTROL_OPTIONS
 {
   /**
-   * How wide should the control be (in CSS units)?
-   * Defaults to {@link FORM_RENDERER::$default_control_width} if not specified.
-   * @var string
-   */
-  public $width = null;
-
-  /**
    * Should the description immediately follow the control?
    * If the control has a description, it will be displayed immediately after the control,
    * wrapping under it if it is too long. If this value is False, the description is always
@@ -339,7 +325,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * @see $default_date_time_width;
    * @var string
    */
-  public $default_date_width = '8em';
+  public $default_date_css_class = 'small';
 
   /**
    * How width should date/time controls be by default?
@@ -347,7 +333,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * {@link draw_date_row()} functions use this default.
    * @var string
    */
-  public $default_date_time_width = '12em';
+  public $default_date_time_css_class = 'small-medium';
 
   /**
    * Should the form ensure that all form values are submitted?
@@ -1102,11 +1088,11 @@ class FORM_RENDERER extends CONTROLS_RENDERER
       $options = clone(default_text_options ());
       if ($includes_time)
       {
-        $options->width = $this->default_date_time_width;
+        $options->css_class = $this->default_date_time_css_class;
       }
       else
       {
-        $options->width = $this->default_date_width;
+        $options->css_class = $this->default_date_css_class;
       }
     }
 
@@ -1279,10 +1265,6 @@ class FORM_RENDERER extends CONTROLS_RENDERER
       }
 
       $Result = '';
-      if (isset ($props->width))
-      {
-        $Result = '<span class="input" style="width: ' . $props->width . '">';
-      }
 
       $ctrl = $this->_start_control ($field, 'select') . ' class="' . $css_class . '"';
 
@@ -1321,11 +1303,6 @@ class FORM_RENDERER extends CONTROLS_RENDERER
         }
       }
 
-      if (isset ($props->width))
-      {
-        $Result .= '</span>';
-      }
-
       return $this->_control_created ($id, $Result);
     }
     
@@ -1349,13 +1326,6 @@ class FORM_RENDERER extends CONTROLS_RENDERER
       if (isset ($props->on_click_script))
       {
         $Result .= ' onChange="' . $props->on_click_script . '"';
-      }
-
-      if (isset ($props->width))
-      {
-        // TODO Wrap in an .input class container
-
-        $Result .= 'style="width: ' . $props->width . '"';
       }
 
       $Result .= 'size="' . $props->height . '"';
@@ -1408,14 +1378,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
       $options = clone(default_text_options ());
     }
 
-    if (isset ($options->width))
-    {
-      $width = $options->width;
-    }
-    else
-    {
-      $width = $this->default_control_width;
-    }
+    $width = $this->default_control_width;
 
     if (! isset ($this->_num_controls [$id]))
     {
@@ -1653,12 +1616,6 @@ class FORM_RENDERER extends CONTROLS_RENDERER
     }
 
     $style = '';
-    if (isset ($options->width))
-    {
-      // TODO Wrap in an .input class container
-
-      $style = ' style="width: ' . $options->width . '"';
-    }
 
     $Result = $this->_start_control ($field);
 

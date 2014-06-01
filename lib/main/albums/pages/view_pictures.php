@@ -54,7 +54,9 @@ http://www.earthli.com/software/webcore/albums
       $Page->title->subject = 'Pictures from ' . $folder->format_date ($first_day, $df) . ' - ' . $folder->format_date ($last_day, $df);
 
     if ($calendar)
+    {
       $Page->location->append ("Calendar", "view_calendar.php?id=$folder->id", '{icons}buttons/calendar');
+    }
 
     if ($journal_id)
     {

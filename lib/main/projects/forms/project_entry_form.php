@@ -406,8 +406,7 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
   protected function _draw_component_controls ($renderer)
   {
     $props = $renderer->make_list_properties ();
-    $props->width = '20em';
-    $props->css_class = '';
+    $props->css_class = 'medium';
     $props->add_item ('[None]', 0);
 
     /** @var PROJECT $folder */
@@ -469,6 +468,7 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
     else
     {
       $props = $renderer->make_list_properties ();
+      $props->css_class = 'medium';
       $props->add_item ('[Next release]', 0);
 
       $release_query = $branch->pending_release_query (Release_not_locked);
@@ -540,7 +540,6 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
         Assign this job to one or more of the following branches.
       </p>
 <?php
-      $use_DHTML = $this->context->dhtml_allowed ();
       $check_props = $renderer->make_check_properties ();
 
       foreach ($this->branches as $branch)
@@ -550,7 +549,7 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
 
         if ($visible || ! $branch->locked ())
         {
-          if ($use_DHTML && ! $visible)
+          if (! $visible)
           {
             $style = 'display: none';
           }

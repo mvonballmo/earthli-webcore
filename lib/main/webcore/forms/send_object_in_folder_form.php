@@ -129,7 +129,7 @@ class SEND_OBJECT_IN_FOLDER_FORM extends SEND_MULTIPLE_MAIL_FORM
     parent::_draw_options ($renderer);
 
     $options = new FORM_TEXT_CONTROL_OPTIONS ();
-    $options->width = '4em';
+    $options->css_class = 'tiny';
 
     $props = $renderer->make_list_properties ();
     $props->add_item ('Include all text', 1);
