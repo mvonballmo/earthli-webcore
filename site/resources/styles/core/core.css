@@ -296,6 +296,12 @@ pre > code {
   margin-top: 15px;
   margin-bottom: 15px;
 }
+.button-content button:first-child,
+.button-content a.button:first-child,
+.button-content input[type=button]:first-child,
+.button-content input[type=submit]:first-child {
+  margin-left: -5px;
+}
 .nav-item {
   font-weight: normal;
 }
@@ -408,10 +414,16 @@ pre > code {
 }
 .graph-foreground {
   display: inline-block;
-  background-color: #AAA;
+  background-color: #333333;
 }
 .graph-background {
   line-height: 0;
+}
+.graph-foreground.vertical {
+  width: 10px;
+}
+.graph-foreground.horizontal {
+  height: 10px;
 }
 .menu-bar-top,
 .menu-bar-bottom {
@@ -633,6 +645,9 @@ input[type=submit] + .menu-items.buttons,
   background-color: #666;
   color: white;
 }
+.pager .button {
+  text-align: center;
+}
 .object-navigator ul {
   list-style: none;
   padding-left: 0;
@@ -688,10 +703,6 @@ input[type=submit] + .menu-items.buttons,
 }
 .calendar-footer {
   padding-top: .5em;
-}
-.calendar-title {
-  text-align: center;
-  font-weight: bold;
 }
 .calendar-body {
   border-collapse: collapse;
@@ -788,7 +799,6 @@ span.warning {
   font-size: 150%;
   margin: 0;
   line-height: 130%;
-  text-align: center;
 }
 .pullquote.right,
 .pullquote.right-column {
@@ -952,30 +962,22 @@ hr {
 .notes em {
   font-weight: bold;
 }
-.print-item-box {
-  text-align: center;
-}
 .reference {
   font-style: italic;
 }
 .tree {
   line-height: 160%;
-}
-.tree,
-.tree ul,
-.tree li {
   margin: 0;
   padding: 0;
   list-style: none;
 }
-.tree ul {
-  padding-left: 21px;
-}
-.tree ul .leaf-only {
-  padding-left: 18px;
-}
 .tree .leaf {
   padding-left: 18px;
+}
+.tree .tree-node {
+  white-space: nowrap;
+  margin: 5px 0;
+  padding: 0;
 }
 .tree .tree-node:first-child {
   margin-top: 0;
@@ -983,12 +985,26 @@ hr {
 .tree .tree-node:last-child {
   margin-bottom: 0;
 }
-.tree-node {
-  white-space: nowrap;
-  margin: 5px 0;
+.tree .tree-node img {
+  padding-right: 5px;
 }
-.tree-node img {
-  padding-right: .25em;
+.tree input[type=radio],
+.tree input[type=checkbox] {
+  margin: 0;
+  margin-right: 5px;
+}
+.tree ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  padding-left: 21px;
+}
+.tree ul .leaf-only {
+  padding-left: 18px;
+}
+.tree ul li {
+  margin: 0;
+  padding: 0;
 }
 .message-box {
   margin: 15px 0;
@@ -1018,6 +1034,11 @@ hr {
   margin-right: -15px;
   border-left: 1px solid #c2c2c2;
   padding-left: 15px;
+}
+.full-height {
+  height: 100%;
+  box-sizing: border-box;
+  overflow: auto;
 }
 .content-column {
   width: 75%;
@@ -1204,6 +1225,11 @@ hr {
   margin-left: 18px;
   margin-bottom: 0;
 }
+.basic-form .form-row .error,
+.basic-form .form-row .warning,
+.basic-form .form-row .caution {
+  margin-right: 5px;
+}
 .basic-form .one-input input,
 .basic-form .one-input select,
 .basic-form .one-input textarea {
@@ -1255,6 +1281,41 @@ hr {
 .basic-form select.medium {
   width: 20em;
 }
+.basic-form input[type=text].short,
+.basic-form input[type=password].short,
+.basic-form input[type=file].short,
+.basic-form textarea.short,
+.basic-form select.short {
+  height: 5em;
+}
+.basic-form input[type=text].short-medium,
+.basic-form input[type=password].short-medium,
+.basic-form input[type=file].short-medium,
+.basic-form textarea.short-medium,
+.basic-form select.short-medium {
+  height: 10em;
+}
+.basic-form input[type=text].medium-height,
+.basic-form input[type=password].medium-height,
+.basic-form input[type=file].medium-height,
+.basic-form textarea.medium-height,
+.basic-form select.medium-height {
+  height: 15em;
+}
+.basic-form input[type=text].medium-tall,
+.basic-form input[type=password].medium-tall,
+.basic-form input[type=file].medium-tall,
+.basic-form textarea.medium-tall,
+.basic-form select.medium-tall {
+  height: 20em;
+}
+.basic-form input[type=text].tall,
+.basic-form input[type=password].tall,
+.basic-form input[type=file].tall,
+.basic-form textarea.tall,
+.basic-form select.tall {
+  height: 30em;
+}
 .basic-form .help {
   width: 135px;
   height: auto;
@@ -1280,12 +1341,11 @@ input[type=submit] {
   padding: .4em;
   text-decoration: none;
   cursor: pointer;
-  text-align: center;
-  vertical-align: middle;
   background-color: #EEE;
   border: 1px solid #c2c2c2;
   border-radius: 4px;
   line-height: normal;
+  text-align: left;
 }
 a.button:link,
 a.button:visited {

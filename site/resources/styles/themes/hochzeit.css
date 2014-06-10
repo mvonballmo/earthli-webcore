@@ -235,11 +235,13 @@ div.info-box-top {
 }
 .cell-highlight {
   background-color: #faedba;
+  color: #554433;
 }
 .cell-selected {
   background-color: #fbf0c9;
   background-image: url('hochzeit/fossil_paper_light.jpg');
   background-repeat: repeat;
+  color: #554433;
 }
 .caution,
 .warning,

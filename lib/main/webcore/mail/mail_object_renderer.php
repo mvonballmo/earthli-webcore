@@ -88,15 +88,16 @@ abstract class MAIL_OBJECT_RENDERER extends MAIL_RENDERER
 
   /**
    * Return the body of the mail.
-   * 
+   *
    * @param object $obj
    * @param MAIL_OBJECT_RENDERER_OPTIONS $options
-   * @param method $func The method {@link _echo_text_content} or {@link _echo_html_content}.
+   * @param string $func The method {@link _echo_text_content} or {@link _echo_html_content}.
+   * @return string
    * @access private
    */
   protected function _body ($obj, $options, $func)
   {
-    $state = new stdClass();
+    $state = new MAIL_RENDERER_STATE();
     $this->_start_rendering ($options, $state);
 
     ob_start ();
@@ -142,7 +143,7 @@ abstract class MAIL_OBJECT_RENDERER extends MAIL_RENDERER
 abstract class RENDERER_BASED_MAIL_RENDERER extends MAIL_OBJECT_RENDERER
 {
   /**
-   * @param object $obj
+   * @param RENDERABLE $obj
    * @param MAIL_OBJECT_RENDERER_OPTIONS $options
    * @access private
    */
@@ -153,7 +154,7 @@ abstract class RENDERER_BASED_MAIL_RENDERER extends MAIL_OBJECT_RENDERER
   }
 
   /**
-   * @param object $obj
+   * @param RENDERABLE $obj
    * @param MAIL_OBJECT_RENDERER_OPTIONS $options
    * @access private
    */
@@ -205,5 +206,3 @@ class MAIL_OBJECT_RENDERER_OPTIONS extends OBJECT_RENDERER_OPTIONS
    */
   public $ignore_subscriber_preferred_text_length = false;
 }
-
-?>

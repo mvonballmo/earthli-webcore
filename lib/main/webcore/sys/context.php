@@ -554,10 +554,11 @@ class CONTEXT extends RESOLVER
    * Adds a message to the output stream.
    * @param string $message The message to display
    * @param string $type The type of message; can be 'error', 'warning' and 'info'
+   * @param string $tag_name
    */
-  public function show_message ($message, $type = 'error')
+  public function show_message ($message, $type = 'error', $tag_name = 'p')
   {
-    echo $this->get_begin_message ($type) . $message . $this->get_end_message();
+    echo $this->get_begin_message ($type, $tag_name) . $message . $this->get_end_message($tag_name);
   }
 
   /**
@@ -573,6 +574,8 @@ class CONTEXT extends RESOLVER
     {
       $type = 'caution';
     }
+
+    // TODO P tag should just set the background icon and use an appropriate padding rather than a nested container
 
     $sub_tag_name = $tag_name == 'p' ? 'span' : 'div';
 

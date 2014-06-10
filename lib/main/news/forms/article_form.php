@@ -56,6 +56,8 @@ class ARTICLE_FORM extends DRAFTABLE_ENTRY_FORM
     parent::__construct ($folder);
 
     $this->field_at('update_modifier_on_change')->visible = true;
+
+    $this->description_control_css_class = 'tall';
   }
 
   /**
@@ -87,7 +89,6 @@ class ARTICLE_FORM extends DRAFTABLE_ENTRY_FORM
    */
   protected function _draw_controls ($renderer)
   {
-    $renderer->default_control_height = '550px';
     $renderer->inline_operations_enabled = true;
     $renderer->draw_inline_preview_area();
 

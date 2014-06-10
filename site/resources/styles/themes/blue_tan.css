@@ -225,9 +225,11 @@ div.info-box-top {
 }
 .cell-highlight {
   background-color: #e8e8e8;
+  color: #222255;
 }
 .cell-selected {
   background-color: #f0f0f0;
+  color: #222255;
 }
 .caution,
 .warning,

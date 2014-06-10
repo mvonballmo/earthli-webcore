@@ -64,7 +64,7 @@ abstract class RENDERABLE_FORM extends UNIQUE_OBJECT_FORM
    */
   protected function _make_preview_settings ($obj)
   {
-    return new RENDERABLE_FORM_PREVIEW_SETTINGS ($this->context);
+    return new RENDERABLE_FORM_PREVIEW_SETTINGS ($this);
   }
 
   /**

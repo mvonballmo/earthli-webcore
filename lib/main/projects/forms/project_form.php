@@ -320,7 +320,7 @@ class PROJECT_FORM extends FOLDER_FORM
 
     $renderer->start ();
     $renderer->draw_text_line_row ('title');
-    $renderer->draw_icon_browser_row ('icon_url', 'id', '28em');
+    $renderer->draw_icon_browser_row ('icon_url');
 
     $renderer->draw_check_box_row ('is_visible');
     $item = $renderer->make_check_properties ();

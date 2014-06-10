@@ -450,6 +450,15 @@ pre > code
   margin-bottom: @standard_spacing;
 }
 
+.button-content
+{
+  button:first-child,
+  a.button:first-child
+  {
+    margin-left: -@standard_border_radius - @hairline_border_width;
+  }
+}
+
 .nav-item
 {
   font-weight: normal;
@@ -605,12 +614,22 @@ pre > code
 .graph-foreground
 {
   display: inline-block;
-  background-color: #AAA;
+  background-color: @graph_foreground_color;
 }
 
 .graph-background
 {
   line-height: 0;
+}
+
+.graph-foreground.vertical
+{
+  width: @small_spacing * 2;
+}
+
+.graph-foreground.horizontal
+{
+  height: @small_spacing * 2;
 }
 
 .menu-bar-top,
@@ -931,6 +950,11 @@ button + .menu-items.buttons,
   color: white;
 }
 
+.pager .button
+{
+  text-align: center;
+}
+
 .object-navigator ul
 {
   list-style: none;
@@ -992,7 +1016,6 @@ button + .menu-items.buttons,
 .calendar
 {
   border: none;
-//  margin-left: -@small_spacing - @hairline_border_width;
 
   .cell-empty,
   .cell-non-empty,
@@ -1018,12 +1041,6 @@ button + .menu-items.buttons,
 .calendar-footer
 {
   padding-top: .5em;
-}
-
-.calendar-title
-{
-  text-align: center;
-  font-weight: bold;
 }
 
 .calendar-body
@@ -1176,7 +1193,6 @@ span.error, span.caution, span.warning
   font-size: 150%;
   margin: 0;
   line-height: @compressed_text_flow_line_height;
-  text-align: center;
 }
 
 .pullquote.right,
@@ -1435,11 +1451,6 @@ hr
   font-weight: bold;
 }
 
-.print-item-box
-{
-  text-align: center;
-}
-
 .reference
 {
   font-style: italic
@@ -1448,52 +1459,62 @@ hr
 .tree
 {
   line-height: @text_flow_line_height;
-}
-
-.tree,
-.tree ul,
-.tree li
-{
   margin: 0;
   padding: 0;
   list-style: none;
-}
 
-.tree ul
-{
-  padding-left: 21px;
-}
+  .leaf
+  {
+    padding-left: 18px;
+  }
 
-.tree ul .leaf-only
-{
-  padding-left: 18px;
-}
+  .tree-node
+  {
+    white-space: nowrap;
+    margin: @small_spacing 0;
+    padding: 0;
 
-.tree .leaf
-{
-  padding-left: 18px;
-}
+    &:first-child
+    {
+      margin-top: 0;
+    }
 
+    &:last-child
+    {
+      margin-bottom: 0;
+    }
 
-.tree .tree-node:first-child
-{
-  margin-top: 0;
-}
+    img
+    {
+      padding-right: @small_spacing;
+    }
+  }
 
-.tree .tree-node:last-child
-{
-  margin-bottom: 0;
-}
+  input[type=radio],
+  input[type=checkbox]
+  {
+    margin: 0;
+    margin-right: @small_spacing;
+  }
 
-.tree-node
-{
-  white-space: nowrap;
-  margin: @small_spacing 0;
-}
+  ul
+  {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    padding-left: 16px + @small_spacing;
 
-.tree-node img
-{
-  padding-right: .25em;
+    .leaf-only
+    {
+      padding-left: 18px;
+    }
+
+    li
+    {
+      margin: 0;
+      padding: 0;
+    }
+  }
 }
 
 .message-box
@@ -1541,6 +1562,13 @@ hr
   margin-right: -@standard_spacing;
   border-left: @hairline_border_width solid @standard_border_color;
   padding-left: @standard_spacing;
+}
+
+.full-height
+{
+  height: 100%;
+  box-sizing: border-box;
+  overflow: auto;
 }
 
 .content-column

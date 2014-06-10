@@ -69,17 +69,19 @@ h5,
 	font-size: 9pt;
 }
 
-.icon.twenty
-{
-  /*padding-top: .3em;*/
-}
-
-.icon.thirty-two
-{
-  /*padding-top: .8em;*/
-}
-
 .style-controls select:not([size])
 {
   height: 35px;
+}
+
+.icon.thirty-two + .caption
+{
+  position: relative;
+  top: -8px;
+}
+
+.icon.sixteen + .caption
+{
+  position: relative;
+  top: -1px;
 }

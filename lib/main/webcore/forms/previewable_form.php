@@ -287,14 +287,13 @@ abstract class FORM_PREVIEW_SETTINGS extends WEBCORE_OBJECT
 {
   /**
    * Title to display before the preview.
-   * This is always display, even when the preview is hidden with DHTML.
+   * This is always display, even when the preview is hidden.
    * @var string
    */
   public $title;
 
   /**
    * Is the preview initially visible?
-   * This will be ignored if the client is not DHTML-capable.
    * @var boolean
    */
   public $visible;
@@ -304,6 +303,16 @@ abstract class FORM_PREVIEW_SETTINGS extends WEBCORE_OBJECT
    * @var STORABLE
    */
   public $object;
+
+  /**
+   * @param FORM $form Attach to this object.
+   */
+  public function __construct ($form)
+  {
+    parent::__construct ($form->context);
+
+    $this->_form = $form;
+  }
 
   /**
    * Render the preview in the form.

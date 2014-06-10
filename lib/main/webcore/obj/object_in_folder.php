@@ -188,15 +188,15 @@ abstract class OBJECT_IN_FOLDER extends CONTENT_OBJECT
    * {@link Force_root_on}.
    * @return string
    */
-  public function resolve_url ($url, $root_override = null)
+  public function resolve_file ($url, $root_override = null)
   {
     $folder = $this->parent_folder ();
     if (isset ($folder))
     {
-      return $folder->resolve_url ($url, $root_override);
+      return $folder->resolve_file ($url, $root_override);
     }
 
-    return parent::resolve_url ($url, $root_override);
+    return parent::resolve_file ($url, $root_override);
   }
 
   /**

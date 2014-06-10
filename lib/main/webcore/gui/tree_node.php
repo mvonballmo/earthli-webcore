@@ -296,5 +296,7 @@ class GENERIC_TREE_NODE_INFO extends TREE_NODE_INFO
     {
       return $node->id();
     }
+
+    return null;
   }
 }

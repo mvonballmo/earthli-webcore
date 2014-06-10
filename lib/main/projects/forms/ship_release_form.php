@@ -121,8 +121,11 @@ class SHIP_RELEASE_FORM extends AUDITABLE_FORM
   {
     parent::commit ($obj);
 
+    /** @var RELEASE $release */
+    $release = $this->_object;
+
     include_once ('projects/obj/release_updater.php');
-    $committer = new RELEASE_SHIPPER ($this->_object);
+    $committer = new RELEASE_SHIPPER ($release);
     $committer->apply ($this->value_for ('sub_history_item_publication_state'));
   }
 
@@ -134,7 +137,7 @@ class SHIP_RELEASE_FORM extends AUDITABLE_FORM
    */
   protected function _make_preview_settings ($obj)
   {
-    return new SHIP_RELEASE_PREVIEW_SETTINGS ($this->context);
+    return new SHIP_RELEASE_PREVIEW_SETTINGS ($this);
   }
 
   /**

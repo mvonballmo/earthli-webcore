@@ -89,7 +89,7 @@ class MAIL_TOC_ENTRY_RENDERER extends RENDERER
   /**
    * Returns whether this folder matches this group.
    * Called during {@link MAIL_TOC_RENDERER} generation.
-   * @param OBJECT_IN_FOLDER $obj
+   * @param OBJECT_IN_FOLDER|HISTORY_ITEM $obj
    * @return boolean
    */
   public function accepts_item ($obj)
@@ -165,7 +165,7 @@ class MAIL_TOC_ENTRY_RENDERER extends RENDERER
     else
     {
       $type_info = $obj->type_info ();
-      return $this->context->resolve_icon_as_html ($type_info->icon, $type_info->singular_title, Sixteen_px) . ' ' . $obj->title_as_link ($t) . '<br>';
+      return $this->context->get_text_with_icon($type_info->icon, $obj->title_as_link ($t), Sixteen_px) . '<br>';
     }
   }
 
@@ -178,8 +178,8 @@ class MAIL_TOC_ENTRY_RENDERER extends RENDERER
     $Result = '';
     if (isset ($this->main_pair))
     {
-      $Result = $this->pair_as_html_for_table ($this->main_pair);
-      $Result .= "\n<ul class=\"detail\" style=\"margin: .2em 0\">";
+      $Result = '<li>' . $this->pair_as_html_for_table ($this->main_pair);
+      $Result .= "<ul>";
     }
 
     foreach ($this->pairs as $pair)
@@ -189,7 +189,7 @@ class MAIL_TOC_ENTRY_RENDERER extends RENDERER
 
     if (isset ($this->main_pair))
     {
-      $Result .= '</ul>';
+      $Result .= '</ul></li>';
     }
 
     return $Result;
@@ -210,7 +210,7 @@ class MAIL_TOC_ENTRY_RENDERER extends RENDERER
     $Result .= '<a id="' . $this->location_for_obj ($obj) . "\"></a>\n";
     if ($top_link)
     {
-      $Result .= '<div style="margin: 1em 0em">' . $top_link . "</div>\n";
+      $Result .= '<p>' . $top_link . "</p>\n";
     }
     $Result .= $pair->renderer->html_body ($obj, $options);
     return $Result;
@@ -377,11 +377,11 @@ class MAIL_TOC_GROUP_RENDERER extends RENDERER
   {
     if (is_a ($obj, 'OBJECT_IN_FOLDER'))
     {
-      $fldr = $obj->parent_folder ();
-      $Result = isset ($this->folder_id) && ($this->folder_id == $fldr->id);
+      $folder = $obj->parent_folder ();
+      $Result = isset ($this->folder_id) && ($this->folder_id == $folder->id);
       if ($Result)
       {
-        $this->folder = $fldr;
+        $this->folder = $folder;
       }
 
       return $Result;
@@ -402,17 +402,17 @@ class MAIL_TOC_GROUP_RENDERER extends RENDERER
   {
     if (isset ($this->folder))
     {
-      $fldr = $this->folder;
-      $t = $fldr->title_formatter ();
+      $folder = $this->folder;
+      $t = $folder->title_formatter ();
       $t->css_class = '';
-      $t->location = '#fldr_' .  $fldr->id;
-      $Result = '<dt class="field">' . $this->subject->as_text () . ' in ' . $fldr->title_as_link ($t) . "</dt>\n";
-      $Result .= "<dd>\n";
+      $t->location = '#fldr_' .  $folder->id;
+      $Result = '<h4>' . $this->subject->as_text () . ' in ' . $folder->title_as_link ($t) . "</h4>\n";
+      $Result .= "<ul class=\"minimal\">\n";
       foreach ($this->entries as $entry)
       {
         $Result .= $entry->as_html_for_table ();
       }
-      $Result .= "</dd>\n";
+      $Result .= "</ul>\n";
       
       return $Result;
     }
@@ -433,9 +433,8 @@ class MAIL_TOC_GROUP_RENDERER extends RENDERER
 
     if (isset ($this->folder))
     {
-      $fldr = $this->folder;
-      $Result = "<hr>\n";
-      $Result .= '<h2 id="fldr_' . $fldr->id . '">' . $fldr->title_as_html () . "</h2>\n";
+      $folder = $this->folder;
+      $Result .= '<h2 id="fldr_' . $folder->id . '">' . $folder->title_as_html () . "</h2>\n";
     }
 
     foreach ($this->entries as $entry)
@@ -596,14 +595,11 @@ class MAIL_TOC_RENDERER extends RENDERER
    */
   public function table_as_html ($options)
   {
-    $Result = "<a id=\"top\"></a>\n";
-    $Result .= "<p>There are <span class=\"field\">{$options->content_summary}</span> in this email.</p>\n";
-    $Result .= "<dl>\n";
+    $Result = "<p id=\"top\">There are <span class=\"field\">{$options->content_summary}</span> in this email.</p>\n";
     foreach ($this->groups as $group)
     {
       $Result .= $group->as_html_for_table ();
     }
-    $Result .= "</dl>\n";
     return $Result;
   }
 

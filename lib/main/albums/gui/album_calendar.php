@@ -216,7 +216,7 @@ class ALBUM_CALENDAR extends BASIC_CALENDAR
             $iso_last_day = $last_day->as_iso();
             $num_journals = count($journal_entries);
             ?>
-            <a href="view_journals.php?<?php echo "id={$this->album->id}&amp;first_day=$iso_first_day&amp;last_day=$iso_last_day&amp;calendar=1"; ?>"><?php echo "($num_journals journals)"; ?></a>
+            <a href="view_journals.php?<?php echo "id={$this->album->id}&amp;first_day=$iso_first_day&amp;last_day=$iso_last_day&amp;calendar=1"; ?>"><?php echo "$num_journals journals"; ?></a>
           <?php
           }
           else
@@ -237,7 +237,7 @@ class ALBUM_CALENDAR extends BASIC_CALENDAR
             $iso_last_day = $last_day->as_iso();
             $num_pics = count($pictures);
             ?>
-            <a href="view_pictures.php?<?php echo "id={$this->album->id}&amp;calendar=1&amp;first_day=$iso_first_day&amp;last_day=$iso_last_day"; ?>"><?php echo "($num_pics pictures)"; ?></a>
+            <a href="view_pictures.php?<?php echo "id={$this->album->id}&amp;calendar=1&amp;first_day=$iso_first_day&amp;last_day=$iso_last_day"; ?>"><?php echo "$num_pics pictures"; ?></a>
           <?php
           }
           else

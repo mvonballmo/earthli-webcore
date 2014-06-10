@@ -834,14 +834,11 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * Render a text-box field onto a separate row in the form.
    * 
    * @param string $id The id of the field to render.
-   * @param string $width Width of the control in valid CSS; defaults to {@link
-   * $default_control_width} if not specified.
-   * @param string $height Height of the control in valid CSS; defaults to
-   * {@link $default_control_height} if not specified.
+   * @param string $css_class
    */
-  public function draw_text_box_row ($id, $width = null, $height = null)
+  public function draw_text_box_row ($id, $css_class = '')
   {
-    $this->_draw_field_row ($this->_field_at ($id), $this->text_box_as_html ($id, $width, $height), 'text-line');
+    $this->_draw_field_row ($this->_field_at ($id), $this->text_box_as_html ($id, $css_class), 'text-line');
   }
 
   /**
@@ -944,47 +941,50 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    */
   public function draw_submit_button_row ($show_preview = null)
   {
-    if ($this->drafts_enabled)
+    if (!$this->_form->allow_cancel_only)
     {
-      $buttons [] = $this->submit_button_as_html ('Publish', '{icons}buttons/ship', 'save_as_visible');
-    }
-    else
-    {
-      $buttons [] = $this->submit_button_as_html ();
-    }
-
-    if (! isset ($show_preview))
-    {
-      $show_preview = $this->preview_enabled;
-    }
-
-    if ($show_preview)
-    {
-      if ($this->_form->object_exists() && $this->inline_operations_enabled)
+      if ($this->drafts_enabled)
       {
-        $url = $this->context->resolve_file('{app}/generate_preview.php');
-        $buttons [] = $this->javascript_button_as_html('Preview', 'execute_field(\'' . $url . '\', \'' . $this->_form->name . '\', \'' . 'description' . '\')', '{icons}buttons/view');
+        $buttons [] = $this->submit_button_as_html ('Publish', '{icons}buttons/ship', 'save_as_visible');
       }
       else
       {
-        $buttons [] = $this->submit_button_as_html ('Preview', '{icons}buttons/view', 'preview_form');
+        $buttons [] = $this->submit_button_as_html ();
+      }
+
+      if (! isset ($show_preview))
+      {
+        $show_preview = $this->preview_enabled;
+      }
+
+      if ($show_preview)
+      {
+        if ($this->_form->object_exists() && $this->inline_operations_enabled)
+        {
+          $url = $this->context->resolve_file('{app}/generate_preview.php');
+          $buttons [] = $this->javascript_button_as_html('Preview', 'execute_field(\'' . $url . '\', \'' . $this->_form->name . '\', \'' . 'description' . '\')', '{icons}buttons/view');
+        }
+        else
+        {
+          $buttons [] = $this->submit_button_as_html ('Preview', '{icons}buttons/view', 'preview_form');
+        }
+      }
+
+      if ($this->drafts_enabled)
+      {
+        $buttons [] = $this->submit_button_as_html ('Save version', '{icons}buttons/save', 'save_as_draft');
+        if ($this->_form->object_exists() && $this->inline_operations_enabled)
+        {
+          $url = $this->app->resolve_file('{app}/save_field.php');
+          $buttons [] = $this->javascript_button_as_html('Quick save', 'execute_field(\'' . $url . '\', \'' . $this->_form->name . '\', \'' . 'description' . '\')', '{icons}buttons/quick_save');
+        }
+        else
+        {
+          $buttons [] = $this->submit_button_as_html ('Quick Save', '{icons}buttons/quick_save', 'quick_save_and_reload');
+        }
       }
     }
 
-    if ($this->drafts_enabled)
-    {
-      $buttons [] = $this->submit_button_as_html ('Save version', '{icons}buttons/save', 'save_as_draft');
-      if ($this->_form->object_exists() && $this->inline_operations_enabled)
-      {
-        $url = $this->app->resolve_file('{app}/save_field.php');
-        $buttons [] = $this->javascript_button_as_html('Quick save', 'execute_field(\'' . $url . '\', \'' . $this->_form->name . '\', \'' . 'description' . '\')', '{icons}buttons/quick_save');
-      }
-      else
-      {
-        $buttons [] = $this->submit_button_as_html ('Quick Save', '{icons}buttons/quick_save', 'quick_save_and_reload');
-      }
-    }
-    
     if (isset($this->app))
     {
     	$referer_url = $this->app->get_referer_url();
@@ -1123,47 +1123,20 @@ class FORM_RENDERER extends CONTROLS_RENDERER
     return '';
   }
 
-/**
- * Return HTML for a multi-line text box.
- * @param string $id Name of field.
- * @param string $width Width of the control in valid CSS. Defaults to {@link $default_control_width} if not specified.
- * @param string $height Height of the control in valid CSS. Defaults to {@link $default_control_height} if not specified.
- * @param string $css_class The CSS class to apply to the control
- * @return string
- */
-  public function text_box_as_html ($id, $width = null, $height = null, $css_class = null)
+  /**
+   * Return HTML for a multi-line text box.
+   * @param string $id Name of field.
+   * @param string $css_class The CSS class to apply to the control
+   * @return string
+   */
+  public function text_box_as_html ($id, $css_class)
   {
     $field = $this->_field_at ($id);
 
     if ($field->visible)
     {
-      if (! isset ($height))
-      {
-        $height = $this->default_control_height;
-      }
-
-      // TODO Change this code to default to applying a class rather than a fixed width/height
-
-      if (isset ($width))
-      {
-        if (isset($height))
-        {
-          // TODO Wrap in an .input class container
-
-          $style = ' style="width: ' . $width . '; height: ' . $height . '"';
-        }
-        else
-        {
-          $style = ' style="width: ' . $width . '"';
-        }
-      }
-      else
-      {
-        $style = ' style="height: ' . $height . '"';
-      }
-
       $Result = $this->_start_control ($field, 'textarea');
-      $Result .= ' cols="30" rows="5" class="' . $css_class . '"' . $style . '>';
+      $Result .= ' cols="30" rows="5" class="' . $css_class . '">';
       $Result .= $this->_to_html ($field, ENT_NOQUOTES) . '</textarea>';
 
       if ($field->description)

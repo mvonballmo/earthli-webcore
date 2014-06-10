@@ -350,13 +350,11 @@ class USER_FORM extends CONTENT_OBJECT_FORM
     $renderer->draw_submit_button_row ();
 
     $layer = $renderer->start_layer_row ('other_options', 'More Options', '%s more user account options');
-      $renderer->default_control_height = '6em';
-  
       $renderer->draw_text_line_row ('home_page_url');
       $renderer->draw_text_line_row ('picture_url');
       $renderer->draw_icon_browser_row ('icon_url');
-      $renderer->draw_text_box_row ('signature');
-      $renderer->draw_text_box_row ('description');
+      $renderer->draw_text_box_row ('signature', 'short-medium');
+      $renderer->draw_text_box_row ('description', 'short-medium');
     $renderer->finish_layer_row ($layer);
 
     $this->_draw_history_item_controls ($renderer, false);
@@ -371,5 +369,3 @@ class USER_FORM extends CONTENT_OBJECT_FORM
    */
   protected $_privilege_set = Privilege_set_user;
 }
-
-?>

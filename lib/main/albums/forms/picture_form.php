@@ -463,7 +463,7 @@ class PICTURE_FORM extends ALBUM_ENTRY_FORM
       $renderer->draw_date_row('day');
     }
 
-    $renderer->draw_text_box_row ('description', null, '15em');
+    $renderer->draw_text_box_row ('description', 'short-medium');
 
     if ($upload_allowed)
     {
@@ -541,6 +541,7 @@ class PICTURE_FORM extends ALBUM_ENTRY_FORM
     $renderer->finish ();
   }
 
+  /** @var DATE_TIME */
   private $_exif_date;
 }
 

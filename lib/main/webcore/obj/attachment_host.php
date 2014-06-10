@@ -87,7 +87,7 @@ abstract class ATTACHMENT_HOST extends OBJECT_IN_FOLDER
    * {@link Force_root_on}.
    * @return string
    */
-  public function resolve_url ($url, $root_override = null)
+  public function resolve_file ($url, $root_override = null)
   {
     $att_link_key = '{att_link}';
     $att_thumb_key = '{att_thumb}';
@@ -116,7 +116,7 @@ abstract class ATTACHMENT_HOST extends OBJECT_IN_FOLDER
       $url = $url->as_text ();
     }
     
-    return parent::resolve_url ($url, $root_override);
+    return parent::resolve_file ($url, $root_override);
   }
 
   /**

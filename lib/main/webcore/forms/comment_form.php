@@ -176,7 +176,7 @@ class COMMENT_FORM extends ATTACHMENT_HOST_FORM
       $renderer->draw_radio_group_row ('kind', $props);
     }
 
-    $renderer->draw_text_box_row ('description', null, '15em');
+    $renderer->draw_text_box_row ('description', 'medium-height');
 
     if ($this->_captcha_enabled ())
     {

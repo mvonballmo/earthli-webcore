@@ -1032,26 +1032,18 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
 
     $align_class = '';
 
-    if (!empty ($clear))
-    {
-      $outer_css->add_text ('clear: ' . $clear);
-    }
-
     switch ($alignment)
     {
 	    case 'left-column':
 	    case 'left':
         $align_class = 'align-left';
-//	      $outer_css->add_text ('float: left; margin-right: .5em; margin-bottom: .5em');
 	      break;
 	    case 'right-column':
 	    case 'right':
         $align_class = 'align-right';
-	      //$outer_css->add_text ('float: right; margin-left: .5em; margin-bottom: .5em');
 	      break;
 	    case 'center':
         $align_class = 'align-center';
-//	      $outer_css->add_text ('margin: auto; display: table');
 	      break;
     }
 

@@ -10,6 +10,17 @@
   }
 }
 
+.set-title-color(@c)
+{
+  .set-color(@c);
+
+  a:link,
+  a:visited,
+  {
+    //.set-color(lighten(@c, 20%));
+  }
+}
+
 .border-box()
 {
   box-sizing: border-box;

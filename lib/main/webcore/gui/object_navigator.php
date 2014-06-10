@@ -266,8 +266,8 @@ class OBJECT_NAVIGATOR extends WEBCORE_OBJECT
         $id = 'id="' . $this->page_anchor . '"';
       }
 
-      $this->_controls .= '<span class="counters"' . $id . '>' . '<span class="field">' . $this->_context->position_of_selected_id .
-        '</span> of <span class="field">' . $this->_context->num_objects_in_list . '</span>' . $this->separator . "</span>";
+      $this->_controls .= '<span class="counters"' . $id . '>' . $this->_context->position_of_selected_id .
+        ' of ' . $this->_context->num_objects_in_list . $this->separator . "</span>";
     }
   }
 

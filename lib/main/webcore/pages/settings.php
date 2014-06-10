@@ -128,7 +128,7 @@ class SAMPLE_FORM extends FORM
     echo ' ';
     echo $renderer->text_line_as_html('name', $text_props);
     $renderer->finish_row();
-    $renderer->draw_text_box_row('description', null);
+    $renderer->draw_text_box_row('description');
 
     $renderer->start_block('Block');
 
@@ -266,42 +266,44 @@ class SAMPLE_FORM extends FORM
     echo $renderer->button_as_html ('Upgrayedd', '#', '{icons}buttons/upgrade', Sixteen_px);
     ?>
   </div>
-  <div class="button-content">
+  <div class="tree-content">
     <?php
     include ('webcore/gui/tree_node.php');
+    include ('webcore/gui/selector_tree_decorator.php');
 
     $tree = $Page->make_tree_renderer ();
     $tree->node_info = new GENERIC_TREE_NODE_INFO($Page);
 
-    $node = new TREE_NODE ('Documents', '', false);
-    $node->append (new TREE_NODE ('Specs (PDF)', '#', '', true));
-    $node->append (new TREE_NODE ('Specs 2 (PDF)', '#'));
-    $node->append (new TREE_NODE ('Specs 3 (PDF)', '#'));
-    $nodes [] = $node;
+    $documents_node = new TREE_NODE ('Documents', '', false);
+    $documents_node->append (new TREE_NODE ('Specs (PDF)', '#', '', true));
+    $documents_node->append (new TREE_NODE ('Specs 2 (PDF)', '#'));
+    $documents_node->append (new TREE_NODE ('Specs 3 (PDF)', '#'));
 
     $root = new TREE_NODE ('Encodo', '', false, '', true);
-    foreach ($nodes as $node)
-    {
-      $root->append ($node);
-    }
+    $root->append ($documents_node);
+
     $roots [] = $root;
     $roots [] = new TREE_NODE ('Earthli');
 
-    $node = new TREE_NODE ('Archive');
-    $node->append (new TREE_NODE ('Specs (PDF)', '#'));
-    $node->append (new TREE_NODE ('Specs 2 (PDF)', '#'));
-    $node->append (new TREE_NODE ('Specs 3 (PDF)', '#'));
+    $tree->display ($roots);
 
-    $nodes = null;
-    $nodes [] = $node;
+    $archive_node = new TREE_NODE ('Archive', '', false);
+    $archive_node->append (new TREE_NODE ('Specs (PDF)', '#'));
+    $archive_node->append (new TREE_NODE ('Specs 2 (PDF)', '#'));
+    $archive_node->append (new TREE_NODE ('Specs 3 (PDF)', '#'));
 
-    $root = new TREE_NODE ('Home');
-    foreach ($nodes as $node)
+    $root = new TREE_NODE ('Home', '', false);
+    $root->append ($archive_node);
+
+    foreach ($archive_node->children() as $child_node)
     {
-      $root->append ($node);
+      $tree->node_info->set_selected_node($child_node);
     }
+
+    $roots = null;
     $roots [] = $root;
 
+    $tree->decorator = new SELECTOR_TREE_DECORATOR($tree);
     $tree->display ($roots);
     ?>
   </div>

@@ -411,7 +411,7 @@ http://www.earthli.com/software/webcore
         <td style="width: 50%">
           <span class="highlight">&lt;bq href="http://earthli.com/news" source="Earthli News" author="Marco" date="Feb 2014" caption="Some article"&gt;</span>This is the content of the quote<span class="highlight">&lt;/bq&gt;</span>
         </td>
-        <td style="font-size: 150%">&rArr;</td>
+        <td style="font-size: 150%">&rarr;</td>
         <td>
           <div><div class="auto-content-block"><blockquote class="quote quote-block"><div>&ldquo;This is the content of the quote&rdquo;</div></blockquote></div><div class="auto-content-caption"><a href="http://earthli.com/news">Some article</a> by <cite>Marco</cite> on Feb 2014 (<cite><a href="http://earthli.com/">Earthli News</a></cite>)</div></div>
         </td>
@@ -534,7 +534,7 @@ http://www.earthli.com/software/webcore
           <p><span class="highlight">&lt;h level="2"&gt;</span>Products<span class="highlight">&lt;/h&gt;</span></p>
           <p><span class="highlight">&lt;h&gt;</span>earthli WebCore<span class="highlight">&lt;/h&gt;</span></p>
         </td>
-        <td style="font-size: 150%">&rArr;</td>
+        <td style="font-size: 150%">&rarr;</td>
         <td>
           <h2>Products</h2>
           <h3>earthli WebCore</h3>
@@ -570,7 +570,7 @@ One<br>
 Two<br>
 Three<br>
 <span class="highlight">&lt;/ul&gt;</span></td>
-        <td style="font-size: 150%">&rArr;</td>
+        <td style="font-size: 150%">&rarr;</td>
         <td><ul>
             <li>One
               <ol>
@@ -604,7 +604,7 @@ One<span class="highlight">&lt;ol&gt;</span><br>
 Two<br>
 Three<br>
 <span class="highlight">&lt;/ul&gt;</span></td>
-        <td style="font-size: 150%">&rArr;</td>
+        <td style="font-size: 150%">&rarr;</td>
         <td><ul>
             <li>One
               <ol>
@@ -638,7 +638,7 @@ More...<br>
 <br>
 <br>
 <span class="highlight">&lt;/ul&gt;</span></td>
-        <td style="font-size: 150%">&rArr;</td>
+        <td style="font-size: 150%">&rarr;</td>
         <td><ul>
             <li>&nbsp;</li>
             <li>One
@@ -682,7 +682,7 @@ Second Term<br>
             <br>
             Nulla at tortor at erat sagittis pellentesque.<span class="highlight">&lt;/div&gt;</span><br>
 <span class="highlight">&lt;/dl&gt;</span></td>
-        <td style="font-size: 150%">&rArr;</td>
+        <td style="font-size: 150%">&rarr;</td>
         <td><dl>
             <dt class="field">First Term</dt>
             <dd class="notes">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ac
@@ -744,7 +744,7 @@ Second Term<br>
         <td style="width: 50%">
           <span class="highlight">&lt;a href=&quot;http://www.earthli.com/&#x200b;software/webcore/&quot; title=&quot;Try out the earthli WebCore!&quot;&gt;earthli WebCore&lt;/a&gt;</span>
         </td>
-        <td style="font-size: 150%">&rArr;</td>
+        <td style="font-size: 150%">&rarr;</td>
         <td>
           <a href="http://www.earthli.com/software/webcore/" title="Try out the earthli WebCore!">earthli WebCore</a>
         </td>
@@ -829,14 +829,14 @@ Second Term<br>
             align=&quot;center&quot; title=&quot;Ozzie in the garden&quot;&gt;</span>
           </p>
         </td>
-        <td style="font-size: 150%">&rArr;</td>
+        <td style="font-size: 150%">&rarr;</td>
         <td>
           <p><?php echo $Page->resolve_icon_as_html ('{icons}file_types/file', 'Webcore File Icon', Fifty_px, 'margin-left: .5em; margin-bottom: .5em; float: right'); ?>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ac
             leo accumsan, semper magna in, consectetur metus. Mauris dictum adipiscing metus
             sed accumsan. Aenean facilisis justo lacus, et fringilla arcu luctus id. Nulla at
             tortor at erat sagittis pellentesque.</p>
-          <p style="text-align: center">
+          <p class="align-center">
             <a href="http://data.earthli.com/albums/oz/images/im000185.jpg"><img title="Ozzie in the garden" alt="Ozzie in the garden" src="http://data.earthli.com/albums/oz/images/im000185_tn.jpg"></a>
           </p>
         </td>
@@ -874,7 +874,7 @@ Second Term<br>
         <td style="width: 50%">
           <span class="highlight">&lt;media author="mvonballmo" src="http://www.youtube.com/&#x200b;v/7ryCiS3RxQY" caption="A rainy day in Z&uuml;ri Oberland" href="http://www.youtube.com/&#x200b;watch?v=7ryCiS3RxQY" source="YouTube" width="280px" height="165px"&gt;</span>
         </td>
-        <td style="font-size: 150%">&rArr;</td>
+        <td style="font-size: 150%">&rarr;</td>
         <td>
           <span style="width: 280px; display: table"><span class="auto-content-inline"><embed src="http://www.youtube.com/v/7ryCiS3RxQY" type="application/x-shockwave-flash" style="width: 280px; height: 165px"></embed></span><span class="auto-content-caption"><a href="http://www.youtube.com/watch?v=7ryCiS3RxQY">A rainy day in Z&uuml;ri Oberland</a> by <cite>mvonballmo</cite> (<cite><a href="http://www.youtube.com/">YouTube</a></cite>)</span></span>
         </td>
@@ -957,7 +957,7 @@ to be
                    ...so.<span class="highlight">&lt;/pre&gt;</span>
           </pre>
         </td>
-        <td style="font-size: 150%">&rArr;</td>
+        <td style="font-size: 150%">&rarr;</td>
         <td>
           <pre>
 Some text
@@ -997,7 +997,7 @@ to be
           &nbsp;&nbsp;}<br>
           }<span class="highlight">&lt;/code&gt;</span>
         </td>
-        <td style="font-size: 150%">&rArr;</td>
+        <td style="font-size: 150%">&rarr;</td>
         <td>
           <pre><code>function _process($input, $tokenizer)
 {
@@ -1020,7 +1020,7 @@ to be
         <td style="width: 40%">
           This example highlights the <span class="highlight">&lt;c&gt;</span>RunProcess()<span class="highlight">&lt;/c&gt;</span> method.
         </td>
-        <td style="font-size: 150%">&rArr;</td>
+        <td style="font-size: 150%">&rarr;</td>
         <td>
           This example highlights the <code>RunProcess()</code> method.
         </td>
@@ -1071,7 +1071,7 @@ to be
           his umbrella when the sun is shining, but wants it back the minute it
           begins to rain.<span class="highlight">&lt;/iq&gt;</span>.
         </td>
-        <td style="font-size: 150%">&rArr;</td>
+        <td style="font-size: 150%">&rarr;</td>
         <td>
           As Mark Twain once said, <span class="quote-inline">"A banker is a fellow
           who lends you his umbrella when the sun is shining, but wants it back
@@ -1089,7 +1089,7 @@ to be
           his umbrella when the sun is shining, but wants it back the minute it
           begins to rain.<span class="highlight">&lt;/bq&gt;</span>
         </td>
-        <td style="font-size: 150%">&rArr;</td>
+        <td style="font-size: 150%">&rarr;</td>
         <td>
           <p>As Mark Twain once said,</p>
           <div class="quote-block"><p>"A banker is a fellow who lends you his umbrella
@@ -1107,7 +1107,7 @@ to be
           <p>lends you his umbrella when the sun is shining,</p>
           <p>but wants it back the minute it begins to rain.<span class="highlight">&lt;/bq&gt;</span></p>
         </td>
-        <td style="font-size: 150%">&rArr;</td>
+        <td style="font-size: 150%">&rarr;</td>
         <td>
           <p>As Mark Twain once said,</p>
           <div class="quote-block">
@@ -1133,7 +1133,7 @@ to be
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ac
             leo accumsan, semper magna in, consectetur metus.</p>
         </td>
-        <td style="font-size: 150%">&rArr;</td>
+        <td style="font-size: 150%">&rarr;</td>
         <td>
           <p><span class="notes">N.B. The following text is of draft quality.</span></p>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ac
@@ -1159,7 +1159,7 @@ to be
           sed accumsan. Aenean facilisis justo lacus, et fringilla arcu luctus id. Nulla at
           tortor at erat sagittis pellentesque.<span class="highlight">&lt;/abstract&gt;</span>
         </td>
-        <td style="font-size: 150%">&rArr;</td>
+        <td style="font-size: 150%">&rarr;</td>
         <td>
           <p class="abstract">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ac
@@ -1189,7 +1189,7 @@ to be
             sed accumsan. Aenean facilisis justo lacus, et fringilla arcu luctus id. Nulla at
             tortor at erat sagittis pellentesque.</p>
         </td>
-        <td style="font-size: 150%">&rArr;</td>
+        <td style="font-size: 150%">&rarr;</td>
         <td>
           <blockquote class="quote pullquote right" style="float: right; margin-left: .5em; margin-bottom: .5em; width: 200px"><div>Mauris dictum adipiscing metus
               sed accumsan</div></blockquote>
@@ -1267,7 +1267,7 @@ to be
             &nbsp;&nbsp;}<br>
             }<span class="highlight">&lt;/code&gt;&lt;box&gt;</span>
         </td>
-        <td style="font-size: 150%">&rArr;</td>
+        <td style="font-size: 150%">&rarr;</td>
         <td>
           <div class="chart"><div class="chart-title">Listing One</div>
             <div class="chart-body">
@@ -1299,7 +1299,7 @@ to be
           <p><span class="highlight">&lt;warning&gt;</span>This is a warning message.<span class="highlight">&lt;/warning&gt;</span></p>
           <p><span class="highlight">&lt;error&gt;</span>This is an error message.<span class="highlight">&lt;/error&gt;</span></p>
         </td>
-        <td style="font-size: 150%">&rArr;</td>
+        <td style="font-size: 150%">&rarr;</td>
         <td>
           <?php $Page->show_message('This is an info message.', 'info')?>
           <?php $Page->show_message('This is a warning message.', 'warning')?>
@@ -1328,7 +1328,7 @@ to be
             leo accumsan, semper magna in, consectetur metus. Mauris dictum adipiscing metus
             sed accumsan.<span class="highlight">&lt;/ft&gt;</span></p>
         </td>
-        <td style="font-size: 150%">&rArr;</td>
+        <td style="font-size: 150%">&rarr;</td>
         <td>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ac
             leo accumsan, semper magna in, consectetur metus. Mauris dictum adipiscing metus
@@ -1360,7 +1360,7 @@ to be
           <p><span class="highlight">&lt;clear&gt;</span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ac
           leo accumsan, semper magna in...</p>
         </td>
-        <td style="font-size: 150%">&rArr;</td>
+        <td style="font-size: 150%">&rarr;</td>
         <td>
           <div class="chart" style="float: right; width: 100px">
             <div class="chart-body">
@@ -1391,7 +1391,7 @@ to be
             sed accumsan. Aenean facilisis justo lacus, et fringilla arcu luctus id. Nulla at
             tortor at erat sagittis pellentesque.<span class="highlight">&lt;anchor id="anchor1"&gt;</span></p>
         </td>
-        <td style="font-size: 150%">&rArr;</td>
+        <td style="font-size: 150%">&rarr;</td>
         <td>
           <p><a href="#anchor1">Jump to the anchor</a></p>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ac
@@ -1415,7 +1415,7 @@ to be
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ac
             leo accumsan, semper magna in...</p>
         </td>
-        <td style="font-size: 150%">&rArr;</td>
+        <td style="font-size: 150%">&rarr;</td>
         <td>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ac
             leo accumsan, semper magna in...

@@ -343,7 +343,7 @@ class RELEASE_SHIPPER extends RELEASE_UPDATER
 
   /**
    * Changes the closed status for this branch.
-   * @param PROJECT_ENTRY_BRANCH_INFO $branch_info
+   * @param JOB_BRANCH_INFO $branch_info
    * @access private
    */
   protected function _map_status ($branch_info)
@@ -360,7 +360,7 @@ class RELEASE_SHIPPER extends RELEASE_UPDATER
  * @version 3.5.0
  * @since 1.9.0
  */
-class UPDATE_RELEASE_PREVIEW_SETTINGS extends FORM_PREVIEW_SETTINGS
+abstract class UPDATE_RELEASE_PREVIEW_SETTINGS extends FORM_PREVIEW_SETTINGS
 {
   /**
    * Draw a list with a title.

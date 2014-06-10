@@ -158,6 +158,13 @@
         margin-bottom: 0;
       }
     }
+
+    .error,
+    .warning,
+    .caution
+    {
+      margin-right: @small_spacing;
+    }
   }
 
   .one-input
@@ -233,6 +240,31 @@
     {
       width: 20em;
     }
+
+    &.short
+    {
+      height: 5em;
+    }
+
+    &.short-medium
+    {
+      height: 10em;
+    }
+
+    &.medium-height
+    {
+      height: 15em;
+    }
+
+    &.medium-tall
+    {
+      height: 20em;
+    }
+
+    &.tall
+    {
+      height: 30em;
+    }
   }
 
   .help
@@ -260,12 +292,11 @@ button
   padding: .4em;
   text-decoration: none;
   cursor: pointer;
-  text-align: center;
-  vertical-align: middle;
   background-color: #EEE;
   border: @hairline_border_width solid @standard_border_color;
   border-radius: @standard_border_radius;
   line-height: normal;
+  text-align: left;
 }
 
 a.button:link, a.button:visited

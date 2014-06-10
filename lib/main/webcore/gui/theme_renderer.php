@@ -57,15 +57,13 @@ class THEME_RENDERER extends OBJECT_RENDERER
   protected function _display_as_html ($obj)
   {
 ?>
-<div style="text-align: center">
-  <h4><?php echo $obj->title_as_html (); ?></h4>
-  <div>
-    <img class="frame" src="<?php echo $obj->snapshot_thumbnail_name (); ?>" alt="<?php echo $obj->title_as_plain_text (); ?>">
-  </div>
+  <h2><?php echo $obj->title_as_html (); ?></h2>
+  <p>
+    <img src="<?php echo $obj->snapshot_thumbnail_name (); ?>" alt="<?php echo $obj->title_as_plain_text (); ?>">
+  </p>
   <div class="detail">
     [<a href="<?php echo $obj->snapshot_name (); ?>">full-size sample</a>]
   </div>
-</div>
 <?php
   }
   
@@ -78,7 +76,6 @@ class THEME_RENDERER extends OBJECT_RENDERER
 	{
 		echo $obj->title_as_plain_text ();
 	}
-
 }
 
 ?>

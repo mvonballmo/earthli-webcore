@@ -524,7 +524,7 @@ class ALBUM extends FOLDER
    * {@link Force_root_on}.
    * @return string
    */
-  public function resolve_url ($url, $root_override = null)
+  public function resolve_file ($url, $root_override = null)
   {
     $thumb_key = '{pic_thumb}';
     $pic_key = '{pic_image}';
@@ -574,7 +574,7 @@ class ALBUM extends FOLDER
       }
     }
 
-    return parent::resolve_url ($url, $root_override);
+    return parent::resolve_file ($url, $root_override);
   }
 
   /**

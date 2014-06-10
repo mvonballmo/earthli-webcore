@@ -240,7 +240,7 @@ abstract class NAMED_OBJECT extends STORABLE
    * {@link Force_root_on}.
    * @return string
    */
-  public function resolve_url ($url, $root_override = null)
+  public function resolve_file ($url, $root_override = null)
   {
     return $this->context->resolve_file ($url, $root_override);
   }

@@ -112,6 +112,7 @@ abstract class SEND_MAIL_FORM extends PREVIEWABLE_FORM
 
   /**
    * Get a mail renderer for this object.
+   * @param $obj
    * @return MAIL_OBJECT_RENDERER
    */
   public function mail_renderer ($obj)
@@ -268,11 +269,10 @@ abstract class SEND_MAIL_FORM extends PREVIEWABLE_FORM
    */
   protected function _make_preview_settings ($obj)
   {
-    $Result = new SEND_MAIL_FORM_PREVIEW_SETTINGS ($this->context);
+    $Result = new SEND_MAIL_FORM_PREVIEW_SETTINGS ($this);
     $Result->obj_renderer = $this->_make_obj_renderer ($obj);
     $Result->options = $this->_make_renderer_options ();
     $Result->show_as_html = $this->value_for ('send_as_html'); 
-    $Result->form = $this;
     return $Result;
   }
 
@@ -325,15 +325,12 @@ abstract class SEND_MAIL_FORM extends PREVIEWABLE_FORM
    */
   protected function _draw_controls ($renderer)
   {
-    $renderer->set_width ('25em');
-    $renderer->default_control_height = '6em';
-
     $renderer->start ();
     $renderer->draw_text_line_row ('sender_name');
     $renderer->draw_text_line_row ('sender_email');
 
     $renderer->draw_text_line_row ('subject');
-    $renderer->draw_text_box_row ('message');
+    $renderer->draw_text_box_row ('message', 'short-medium');
 
     $renderer->draw_text_line_row ('send_to');
 
@@ -380,11 +377,12 @@ class SEND_MAIL_FORM_PREVIEW_SETTINGS extends FORM_PREVIEW_SETTINGS
   protected function _display ()
   {
     $class_name = $this->context->final_class_name ('SEND_MAIL_FORM_RENDERER', 'webcore/mail/send_mail_form_renderer.php');
+    /** @var SEND_MAIL_FORM_RENDERER $send_mail_renderer */
     $send_mail_renderer = new $class_name ($this->context);
 
     if ($this->show_as_html)
     {
-      echo $send_mail_renderer->html_body ($this->form, $this->options);
+      echo $send_mail_renderer->html_body ($this->_form, $this->options);
       if (! empty ($this->obj_renderer))
       {
         echo $this->obj_renderer->html_body ($this->object, $this->options);
@@ -393,7 +391,7 @@ class SEND_MAIL_FORM_PREVIEW_SETTINGS extends FORM_PREVIEW_SETTINGS
     else
     {
       echo '<pre style="white-space: -o-pre-wrap">';
-      echo htmlspecialchars ($send_mail_renderer->text_body ($this->form, $this->options));
+      echo htmlspecialchars ($send_mail_renderer->text_body ($this->_form, $this->options));
       if (! empty ($this->obj_renderer))
       {
         echo htmlspecialchars ($this->obj_renderer->text_body ($this->object, $this->options));
@@ -401,6 +399,7 @@ class SEND_MAIL_FORM_PREVIEW_SETTINGS extends FORM_PREVIEW_SETTINGS
       echo '</pre>';
     }
   }
-}
 
-?>
+  /** @var FORM */
+  private $_form;
+}

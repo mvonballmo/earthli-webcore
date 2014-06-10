@@ -152,6 +152,8 @@ abstract class FORM extends WEBCORE_OBJECT
    */
   public $captcha;
 
+  public $allow_cancel_only = false;
+
   /**
    * @param CONTEXT $context Attach to this object.
    */

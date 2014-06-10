@@ -106,7 +106,7 @@ class PURGE_RELEASE_FORM extends PURGE_OBJECT_FORM
    */
   protected function _make_preview_settings ($obj)
   {
-    return new PURGE_RELEASE_PREVIEW_SETTINGS ($this->context);
+    return new PURGE_RELEASE_PREVIEW_SETTINGS ($this);
   }
 
   /**

@@ -126,7 +126,7 @@ class ATTACHMENT extends OBJECT_IN_FOLDER
     }
     else
     {
-      $Result = $this->_host->resolve_url ('{att_link}' . $this->file_name, $root_override);
+      $Result = $this->_host->resolve_file ('{att_link}' . $this->file_name, $root_override);
     }
 
     return $Result;

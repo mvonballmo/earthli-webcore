@@ -33,22 +33,22 @@ a:active
 
 h1
 {
-  .set-color(@h1_color);
+  .set-title-color(@h1_color);
 }
 
 h2
 {
-  .set-color(@h2_color);
+  .set-title-color(@h2_color);
 }
 
 h3
 {
-  .set-color(@h3_color);
+  .set-title-color(@h3_color);
 }
 
 h4
 {
-  .set-color(@h4_color);
+  .set-title-color(@h4_color);
 }
 
 .chart-title,
@@ -181,13 +181,17 @@ p, div
 
 .cell-highlight
 {
-  background-color: @accent_background_color;
+  background-color: @cell_highlight_background_color;
+  .repeated-background(@cell_highlight_background_url);
+  color: @cell_highlight_text_color;
+
 }
 
 .cell-selected
 {
-  background-color: @control_background_color;
-  .repeated-background(@control_background_url);
+  background-color: @cell_selected_background_color;
+  .repeated-background(@cell_selected_background_url);
+  color: @cell_selected_text_color;
 }
 
 .caution,
@@ -206,9 +210,9 @@ p, div
 
 .graph-foreground
 {
-  background-color: @graph_background_color;
+  background-color: @graph_foreground_color;
   color: @background_color;
-  .repeated-background(@graph_background_url);
+  .repeated-background(@graph_foreground_url);
 }
 
 .graph-background

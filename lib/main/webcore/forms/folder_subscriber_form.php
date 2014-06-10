@@ -106,7 +106,7 @@ class FOLDER_SUBSCRIBER_FORM extends ID_BASED_FORM
 
     $folder_type_info = $this->app->type_info_for('FOLDER');
 
-    $renderer->draw_text_row('', '<span style="width: 25em; display: inline-block">The following emails will be notified when changes are made to this ' . $folder_type_info->singular_title . '.</span>');
+    $renderer->draw_text_row('', 'The following emails will be notified when changes are made to this ' . $folder_type_info->singular_title . '.');
 
     $class_name = $this->app->final_class_name ('SUBSCRIBER_GRID', 'webcore/gui/subscriber_grid.php');
     /** @var $grid SUBSCRIBER_GRID */

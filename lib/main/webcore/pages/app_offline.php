@@ -38,7 +38,6 @@ http://www.earthli.com/software/webcore
   $Page->start_display ();
 ?>
 <div class="box">
-<div style="margin: 5em auto 0em auto; text-align: center">
 <p>
   <span class="field"><?php echo $app_name; ?></span> is currently offline.
 </p>
@@ -61,7 +60,7 @@ http://www.earthli.com/software/webcore
     $menu->display ();
   ?>
 </p>
-<div style='white-space: pre; font-size: 75%; font-family: "Courier New", Courier, mono'>
+<pre style="font-size: 6pt">
 <span style="color: #FFFFFF">B6711C1A</span><span style="color: #CCCCCC">DB</span><span style="color: #B5C5DE">98</span><span style="color: #81B3E6">1E</span><span style="color: #A4BED7">8C</span><span style="color: #FFFFFF">CA10B50BC5D9591E12</span><span style="color: #91B8E0">F4</span><span style="color: #7FB0E2">4E</span><span style="color: #CCCCCC">3F</span><span style="color: #FFFFFF">AF1B94B19E
 D7E73056</span><span style="color: #CCCCCC">5D</span><span style="color: #479EF7">8B</span><span style="color: #2991F9">BC</span><span style="color: #298CEF">A2</span><span style="color: #9DB6D0">33</span><span style="color: #FFFFFF">80DD409E824E</span><span style="color: #CCCCCC">EA</span><span style="color: #8CBAE8">17</span><span style="color: #3797F8">19</span><span style="color: #1E85ED">11</span><span style="color: #3A89D9">2A</span><span style="color: #FFFFFF">E0BDE176B6
 B3021422</span><span style="color: #B5C5DE">F9</span><span style="color: #3797F8">74</span><span style="color: #1284F7">BF</span><span style="color: #067CF4">9A</span><span style="color: #197EE3">4C</span><span style="color: #CCCCCC">F2</span><span style="color: #FFFFFF">FE63F0064B</span><span style="color: #ACC6DF">7E</span><span style="color: #439EFA">E5</span><span style="color: #228CF8">27</span><span style="color: #0B75E0">E8</span><span style="color: #076DD6">A5</span><span style="color: #FFFFFF">2B99931DC2
@@ -109,7 +108,7 @@ D8EA</span><span style="color: #AFBECD">F7</span><span style="color: #137EE9">CE
 A8BC3C</span><span style="color: #A6B9CB">BD</span><span style="color: #2682DF">F5</span><span style="color: #0072E5">D731</span><span style="color: #067AF0">22</span><span style="color: #AAD0EB">92</span><span style="color: #E6E6E1">FE</span><span style="color: #E4E5D6">77</span><span style="color: #DEDED0">50</span><span style="color: #CFCFC3">3D</span><span style="color: #C2C2B6">76</span><span style="color: #B2B2A5">CA</span><span style="color: #999999">CF</span><span style="color: #7D8C96">38</span><span style="color: #076DD6">FC</span><span style="color: #0162C5">2A</span><span style="color: #055AAF">9F</span><span style="color: #557DA5">85</span><span style="color: #BBBFC3">16</span><span style="color: #FFFFFF">1FBF23
 3D6531CD</span><span style="color: #B5BEC7">F9</span><span style="color: #5C95CE">FC</span><span style="color: #1575D7">F4</span><span style="color: #016EDD">0D</span><span style="color: #1E78D4">7F</span><span style="color: #ADC3D4">A0</span><span style="color: #CCCCCC">C4</span><span style="color: #C2C2B6">59</span><span style="color: #B6B7AD">99</span><span style="color: #AAABA3">95</span><span style="color: #999999">E5</span><span style="color: #6B7E8E">F7</span><span style="color: #1A63AC">04</span><span style="color: #0260BF">DB</span><span style="color: #1A63AC">56</span><span style="color: #879BAE">A1</span><span style="color: #FFFFFF">7D2ED5E146
 D3E92D1CC80A</span><span style="color: #BBBFC3">87</span><span style="color: #7B9DC0">88</span><span style="color: #367EC7">BA</span><span style="color: #1E6EBF">E4</span><span style="color: #4C84BB">22</span><span style="color: #89A4BC">AC</span><span style="color: #9BAAB4">0D</span><span style="color: #879BAE">A7</span><span style="color: #557DA5">1D</span><span style="color: #2669AB">75</span><span style="color: #4E82B6">F5</span><span style="color: #98A6B3">76</span><span style="color: #CCCCCC">AE</span><span style="color: #FFFFFF">90EA9707B7EC
-</span></div>
+</span></pre>
 </div>
 <?php
   $Page->finish_display ();

@@ -154,7 +154,7 @@ abstract class SEND_MULTIPLE_MAIL_FORM extends SEND_MAIL_FORM
     $props->add_item ('Send separate email to each recipient.*', 'multiple_mail');
 
     $renderer->draw_radio_group_row ('email_type', $props);
-    $renderer->draw_text_box_row ('recipients');
+    $renderer->draw_text_box_row ('recipients', 'short-medium');
   }
 
   /**

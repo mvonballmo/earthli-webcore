@@ -55,32 +55,40 @@ class COMMENT_RENDERER extends CONTENT_OBJECT_RENDERER
    */
   protected function _display_as_html ($obj)
   {
-    $creator = $obj->creator ();
 ?>
     <div class="info-box-top">
-      <div style="float: left; margin-right: .5em">
-        <?php echo $obj->icon (); ?>
-      </div>
-      <div style="float: left">
-        <div class="detail">
-          Created by <?php echo $creator->title_as_link (); ?> - <?php echo $obj->time_created->format (); ?>
-        </div>
-      </div>
-      <div style="clear: both"></div>
+      <?php
+      $props = $obj->icon_properties();
+      $this->context->start_icon_container($props->icon, Fifteen_px);
+      $creator = $obj->creator();
+      if ($creator->icon_url)
+      {
+        $this->context->start_icon_container($creator->icon_url, Sixteen_px);
+      }
+      ?>
+      <?php echo $creator->title_as_link(); ?> &ndash; <?php echo $obj->time_created->format();
+      if ($obj->modified())
+      {
+        $modifier = $obj->modifier();
+        ?>
+        (updated by <?php echo $modifier->title_as_link(); ?> &ndash; <?php echo $obj->time_modified->format(); ?>)
+      <?php
+      }
+      ?>
     </div>
+    <?php
+    if ($creator->icon_url)
+    {
+      $this->context->finish_icon_container();
+    }
+    $this->context->finish_icon_container();
+?>
     <div class="text-flow">
 <?php
       echo $obj->description_as_html ();
 ?>
     </div>
 <?php
-    if ($obj->modified ())
-    {
-      $modifier = $obj->modifier ();
-?>
-    <p class="detail" style="text-align: right">Updated by <?php echo $modifier->title_as_link (); ?> - <?php echo $obj->time_modified->format (); ?></p>
-<?php
-    }
   }
 
   /**

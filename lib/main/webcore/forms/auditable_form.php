@@ -156,12 +156,11 @@ abstract class AUDITABLE_FORM extends RENDERABLE_FORM
       $time_modified = $this->value_for ('time_modified');
       if (! $obj->time_modified->equals ($time_modified))
       {
-        $renderer = $this->context->make_controls_renderer ();
-        $button = $renderer->button_as_html ('Revert', $this->env->url (Url_part_no_args) . '?id=' . $obj->id, '{icons}/buttons/restore');
         $type_info = $obj->type_info ();
-        $msg = '<div style="float: right">' . $button . '</div>' .
-            '<div style="margin-right: 75px">This ' . strtolower ($type_info->singular_title) . ' has been changed by another user; you cannot save your changes. ' .
-            'Reverting <strong>discards</strong> your changes and loads the version saved by the other user.</div>';
+        $msg =
+          '<p>This ' . strtolower ($type_info->singular_title) . ' has been changed by another user; you cannot save your changes. ' .
+          'Please cancel this form or reload the page and try applying the changes again.</p>';
+        $this->allow_cancel_only = true;
         $this->record_error (Form_general_error_id,  $msg);
       }
     }
@@ -267,7 +266,7 @@ abstract class AUDITABLE_FORM extends RENDERABLE_FORM
       $renderer->draw_radio_group_row ('publication_state', $props);
 
       $renderer->draw_text_line_row ('history_item_title');
-      $renderer->draw_text_box_row ('history_item_description');
+      $renderer->draw_text_box_row ('history_item_description', 'short-medium');
 
       $renderer->draw_submit_button_row ();
     $renderer->finish_layer_row ($layer);
