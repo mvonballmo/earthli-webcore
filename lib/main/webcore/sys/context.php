@@ -558,7 +558,19 @@ class CONTEXT extends RESOLVER
    */
   public function show_message ($message, $type = 'error', $tag_name = 'p')
   {
-    echo $this->get_begin_message ($type, $tag_name) . $message . $this->get_end_message($tag_name);
+    echo $this->get_message ($message, $type, $tag_name);
+  }
+
+  /**
+   * Gets a formatted message.
+   * @param string $message The message to display
+   * @param string $type The type of message; can be 'error', 'warning' and 'info'
+   * @param string $tag_name
+   * @return string
+   */
+  public function get_message ($message, $type = 'error', $tag_name = 'p')
+  {
+    return $this->get_begin_message ($type, $tag_name) . $message . $this->get_end_message($tag_name);
   }
 
   /**
@@ -624,7 +636,7 @@ class CONTEXT extends RESOLVER
     echo '</span>';
   }
 
-  public function get_text_with_icon ($icon_url, $text, $size)
+  public function get_icon_with_text($icon_url, $size, $text)
   {
     if ($icon_url)
     {
@@ -643,7 +655,7 @@ class CONTEXT extends RESOLVER
     }
   }
 
-  private function _get_start_icon_container($tag_name, $icon_url, $size)
+  private function _get_start_icon_container($tag_name, $icon_url, $size, $css_class = '')
   {
     switch ($size)
     {
@@ -670,6 +682,11 @@ class CONTEXT extends RESOLVER
         break;
       default:
         throw new UNKNOWN_VALUE_EXCEPTION($size);
+    }
+
+    if ($css_class)
+    {
+      $class .= ' ' . $css_class;
     }
 
     return '<' . $tag_name . ' class="icon ' . $class . '" style="background-image: url(' . $this->get_icon_url($icon_url, $size) . ')">';

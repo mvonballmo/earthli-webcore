@@ -154,7 +154,7 @@ $Page->start_display();
     <hr>
     <p class="notes">Problems with your browser? <a href="#report_problem">Report it</a>.</p>
     <h2 id="downloads">
-      <?php echo $Page->get_text_with_icon('{icons}buttons/download_to_hd', 'Download', Thirty_two_px); ?>
+      <?php echo $Page->get_icon_with_text('{icons}buttons/download_to_hd', Thirty_two_px, 'Download'); ?>
     </h2>
     <p>For a better browsing experience, try one of these:</p>
     <?php

@@ -76,6 +76,6 @@ class PROPERTY_VALUE extends WEBCORE_OBJECT
    */
   public function icon_as_html ($size = Sixteen_px)
   {
-    return $this->context->resolve_icon_as_html($this->icon, $this->title, $size);
+    return $this->context->resolve_icon_as_html($this->icon, $size, $this->title);
   }
 }

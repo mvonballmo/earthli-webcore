@@ -215,7 +215,7 @@
           <?php
             $props = $obj->kind_properties();
 
-            echo $this->context->get_text_with_icon($props->icon, $obj->kind_as_text(), Sixteen_px);
+            echo $this->context->get_icon_with_text($props->icon, Sixteen_px, $obj->kind_as_text());
           ?>
         </td>
       </tr>
@@ -228,7 +228,7 @@
           <th>Component</th>
           <td>
             <?php
-              echo $this->app->get_text_with_icon($comp->icon_url, $comp->title_as_link(), Sixteen_px);
+              echo $this->app->get_icon_with_text($comp->icon_url, Sixteen_px, $comp->title_as_link());
             ?>
           </td>
         </tr>

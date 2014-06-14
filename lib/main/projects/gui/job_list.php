@@ -83,7 +83,7 @@ class JOB_LIST extends SELECT_LIST
       $t = $obj->title_formatter ();
       $t->max_visible_output_chars = 0;
       $title = $obj->title_as_link($t);
-      echo $this->app->get_text_with_icon($kind_properties->icon, $title, Sixteen_px);
+      echo $this->app->get_icon_with_text($kind_properties->icon, Sixteen_px, $title);
       break;
     case 2:
       /** @var JOB_BRANCH_INFO $branch_info */
@@ -95,13 +95,13 @@ class JOB_LIST extends SELECT_LIST
       /** @var JOB_BRANCH_INFO $branch_info */
       $branch_info = $obj->main_branch_info ();
       $priority_props = $branch_info->priority_properties ();
-      echo $this->app->get_text_with_icon($priority_props->icon, $priority_props->title, Sixteen_px);
+      echo $this->app->get_icon_with_text($priority_props->icon, Sixteen_px, $priority_props->title);
       break;
     case 4:
       /** @var JOB_BRANCH_INFO $branch_info */
       $branch_info = $obj->main_branch_info ();
       $status_props = $branch_info->status_properties ();
-      echo $this->app->get_text_with_icon($status_props->icon, $status_props->title, Sixteen_px);
+      echo $this->app->get_icon_with_text($status_props->icon, Sixteen_px, $status_props->title);
       break;
     }
   }

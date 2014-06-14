@@ -190,6 +190,14 @@ table
       }
     }
   }
+
+  &.panels
+  {
+    td
+    {
+      white-space: nowrap;
+    }
+  }
 }
 
 .text-flow table.basic > tbody > tr > td,
@@ -950,11 +958,6 @@ button + .menu-items.buttons,
   color: white;
 }
 
-.pager .button
-{
-  text-align: center;
-}
-
 .object-navigator ul
 {
   list-style: none;
@@ -976,7 +979,6 @@ button + .menu-items.buttons,
 .object-navigator .links .button
 {
   display: block;
-  text-align: center;
 }
 
 .object-navigator .page-down
@@ -1117,15 +1119,25 @@ button + .menu-items.buttons,
   border: @hairline_border_width dotted #666;
 }
 
+.caution.icon
+{
+  background-position: @small_spacing @small_spacing * 2;
+
+  &.sixteen
+  {
+    padding-left: 16px + @small_spacing * 2;
+  }
+}
+
 .caution p:first-child,
-.warning  p:first-child,
+.warning p:first-child,
 .error  p:first-child
 {
   margin-top: 0;
 }
 
 .caution p:last-child,
-.warning  p:last-child,
+.warning p:last-child,
 .error  p:last-child
 {
   margin-bottom: 0;
@@ -1139,7 +1151,7 @@ button + .menu-items.buttons,
 
 .warning
 {
-  background-color: #f0d295;
+  background-color: #f0a05d;
   border-color: #A06000;
 }
 

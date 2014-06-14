@@ -163,7 +163,7 @@ class RELEASE_STATUS extends WEBCORE_OBJECT
       }
       else
       {
-        $Result = $this->app->get_text_with_icon($stat->icon_url, $Result, Sixteen_px);
+        $Result = $this->app->get_icon_with_text($stat->icon_url, Sixteen_px, $Result);
       }
     }
 
@@ -288,7 +288,7 @@ class RELEASE_DATE_STATUS extends WEBCORE_OBJECT
     if (! isset ($this->_html_text))
     {
       $this->_html_text = $this->_as_text (false);
-      $this->_html_text = $this->app->get_text_with_icon($this->icon_url, $this->_html_text, Sixteen_px);
+      $this->_html_text = $this->app->get_icon_with_text($this->icon_url, Sixteen_px, $this->_html_text);
       $this->_html_text = '<span style="white-space: nowrap">' . $this->_html_text . '</span>';
     }
     return $this->_html_text;

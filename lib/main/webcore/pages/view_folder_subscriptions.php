@@ -73,7 +73,7 @@ http://www.earthli.com/software/webcore
       $caption = 'Hide folders';
     }
 
-    ?><a href="<?php echo $opt_link; ?>" class="button"><?php echo $Page->get_text_with_icon($icon, $caption, Sixteen_px); ?></a><?php
+    ?><a href="<?php echo $opt_link; ?>" class="button"><?php echo $Page->get_icon_with_text($icon, Sixteen_px, $caption); ?></a><?php
 
     $menu = $App->make_menu ();
     $menu->renderer->content_mode = Menu_show_all_as_buttons;

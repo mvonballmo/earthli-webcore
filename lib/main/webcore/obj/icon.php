@@ -74,7 +74,7 @@ class ICON extends UNIQUE_OBJECT
    */
   public function icon_as_html ($size = One_hundred_px)
   {
-    return $this->context->resolve_icon_as_html($this->home_page (), $this->title, $size);
+    return $this->context->resolve_icon_as_html($this->home_page(), $size, $this->title);
   }
 
   /**

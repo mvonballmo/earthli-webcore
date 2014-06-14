@@ -85,7 +85,7 @@ class BRANCH_GRID extends CONTENT_OBJECT_GRID
       }
       if ($obj->locked ())
       {
-        echo $this->app->get_text_with_icon('{icons}indicators/locked', $this->obj_link ($obj), Sixteen_px);
+        echo $this->app->get_icon_with_text('{icons}indicators/locked', Sixteen_px, $this->obj_link($obj));
       }
       else
       {

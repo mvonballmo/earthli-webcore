@@ -328,7 +328,7 @@ abstract class FORM_PREVIEW_SETTINGS extends WEBCORE_OBJECT
   <div class="preview-body">
     <?php $this->_display (); ?>
   </div>
-  <div style="clear: both"></div>
+  <div class="clear-both"></div>
   <?php $layer->finish (); ?>
 </div>
 <?php

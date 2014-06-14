@@ -98,34 +98,6 @@ class FRAMEWORK_INFO extends NAMED_OBJECT
   /**
    * Return an icon for the state of this version.
    * Must set the {@link $software_version} first.
-   * @param string $size Can be any CSS value that corresponds to an icon
-   * suffix.
-   * @return string
-   */
-  public function icon_as_html ($size = Sixteen_px)
-  {
-    if ($this->_version_not_found || ! $this->database_version)
-    {
-      $icon = '{icons}indicators/error';
-      $title = 'Error';
-    }
-    elseif ($this->needs_upgrade ())
-    {
-      $icon = '{icons}indicators/warning';
-      $title = 'Warning';
-    }
-    else
-    {
-      $icon = '{icons}buttons/select';
-      $title = 'Ok';
-    }
-    
-    return $this->app->resolve_icon_as_html ($icon, $title, $size);
-  }
-
-  /**
-   * Return an icon for the state of this version.
-   * Must set the {@link $software_version} first.
    * @return string
    */
   public function icon_url ()
@@ -173,7 +145,7 @@ class FRAMEWORK_INFO extends NAMED_OBJECT
       return $this->title . ' ' . $this->software_version;
     }
 
-    return $this->context->get_text_with_icon($this->icon_url(), ' ' . $this->title . ' ' . $this->database_version . ' &mdash; ' . $this->message (), Sixteen_px);
+    return $this->context->get_icon_with_text($this->icon_url(), Sixteen_px, ' ' . $this->title . ' ' . $this->database_version . ' &mdash; ' . $this->message());
   }
   
   /**

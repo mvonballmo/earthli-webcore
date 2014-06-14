@@ -79,7 +79,9 @@ class BRANCH_FORM extends OBJECT_IN_FOLDER_FORM
 
     if ($branch_id > 0)
     {
-      $branch = $this->app->branch_at_id ($branch_id);
+      /** @var PROJECT_APPLICATION $project_application */
+      $project_application = $this->app;
+      $branch = $project_application->branch_at_id ($branch_id);
       if (isset ($branch))
       {
         $release = $branch->latest_release ();
@@ -140,23 +142,29 @@ class BRANCH_FORM extends OBJECT_IN_FOLDER_FORM
 
     if ($this->visible ('is_visible'))
     {
-      $props->add_item ($this->app->resolve_icon_as_html ('{icons}indicators/invisible', ' ', Sixteen_px) . ' Hidden', Hidden, 'Only administrators can see this branch\'s contents.');
-      $props->add_item ($this->app->resolve_icon_as_html ('{icons}buttons/view', ' ', Sixteen_px) . ' Visible', Visible, 'Jobs and changes can be added and removed.');
-      $props->add_item ($this->app->resolve_icon_as_html ('{icons}indicators/locked', ' ', Sixteen_px) . ' Locked', Locked, 'Cannot add or remove jobs and changes (undoable).');
+      $props->add_item ($this->app->get_icon_with_text('{icons}indicators/invisible', Sixteen_px, 'Hidden'), Hidden, 'Only administrators can see this branch\'s contents.');
+      $props->add_item ($this->app->get_icon_with_text ('{icons}buttons/view', Sixteen_px, 'Visible'), Visible, 'Jobs and changes can be added and removed.');
+      $props->add_item ($this->app->get_icon_with_text ('{icons}indicators/locked', Sixteen_px, 'Locked'), Locked, 'Cannot add or remove jobs and changes (undoable).');
     }
     else
     {
-      $props->add_item ($this->app->resolve_icon_as_html ('{icons}buttons/view', ' ', Sixteen_px) . ' Unlocked', Visible, 'Jobs and changes can be added and removed.');
-      $props->add_item ($this->app->resolve_icon_as_html ('{icons}indicators/locked', ' ', Sixteen_px) . ' Locked', Locked, 'Cannot add or remove jobs and changes (undoable).');
+      $props->add_item ($this->app->get_icon_with_text ('{icons}buttons/view', Sixteen_px, 'Unlocked'), Visible, 'Jobs and changes can be added and removed.');
+      $props->add_item ($this->app->get_icon_with_text ('{icons}indicators/locked', Sixteen_px, 'Locked'), Locked, 'Cannot add or remove jobs and changes (undoable).');
     }
 
     $renderer->draw_radio_group_row ('state', $props);
 
-    $props = $renderer->make_list_properties ();
-    $props->add_item ('[None]', 0);
-    $release_query = $this->_folder->release_query ();
+    /** @var PROJECT $project */
+    $project = $this->_folder;
+    /** @var PROJECT_RELEASE_QUERY $release_query */
+    $release_query = $project->release_query ();
     $release_query->restrict ('rel.state = ' . Locked);
+    /** @var RELEASE[] $releases */
     $releases = $release_query->objects ();
+
+    $props = $renderer->make_list_properties ();
+    $props->css_class = 'small-medium';
+    $props->add_item ('[None]', 0);
     foreach ($releases as $release)
     {
       $branch = $release->branch ();

@@ -332,13 +332,13 @@ class PANEL_MANAGER extends WEBCORE_OBJECT
     if ($panel_with_number_exists)
     {
       ?>
-      <table class="basic columns left-labels">
+      <table class="panel basic columns left-labels">
     <?php
     }
     else
     {
     ?>
-      <table>
+      <table class="panel">
     <?php
     }
 
@@ -355,7 +355,7 @@ class PANEL_MANAGER extends WEBCORE_OBJECT
             }
           ?></th>
         <?php } ?>
-        <td style="white-space: nowrap">
+        <td>
           <?php echo $panel->title; ?>
         </td>
       </tr>

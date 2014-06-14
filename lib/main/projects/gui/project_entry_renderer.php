@@ -83,7 +83,7 @@ abstract class PROJECT_ENTRY_RENDERER extends ENTRY_RENDERER
       $branch = $branch_info->branch ();
       if ($branch->locked ())
       {
-        echo $this->app->get_text_with_icon('{icons}indicators/locked', $branch_info->title_as_link (), Sixteen_px);
+        echo $this->app->get_icon_with_text('{icons}indicators/locked', Sixteen_px, $branch_info->title_as_link());
       }
       else
       {
@@ -98,7 +98,7 @@ abstract class PROJECT_ENTRY_RENDERER extends ENTRY_RENDERER
 
         if ($rel->locked ())
         {
-          echo $this->app->get_text_with_icon('{icons}indicators/locked', $rel->title_as_link (), Sixteen_px);
+          echo $this->app->get_icon_with_text('{icons}indicators/locked', Sixteen_px, $rel->title_as_link());
         }
         else
         {

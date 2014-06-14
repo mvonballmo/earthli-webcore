@@ -131,7 +131,7 @@
         <td>
           <?php
           $props = $obj->weather_icon_properties();
-          echo $this->context->get_text_with_icon($props->icon, $obj->temperature_as_html(), Thirty_px);
+          echo $this->context->get_icon_with_text($props->icon, Thirty_px, $obj->temperature_as_html());
           ?>
         </td>
       </tr>

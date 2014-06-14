@@ -96,11 +96,11 @@ class LAYER extends WEBCORE_OBJECT
     {
       if ($this->visible)
       {
-        $icon = $this->context->resolve_icon_as_html ('{icons}tree/collapse', '[-]', '', 'vertical-align: middle', "{$this->name}_image");
+        $icon = $this->context->resolve_icon_as_html ('{icons}tree/collapse', '', '[-]', 'inline-icon', "{$this->name}_image");
       }
       else
       {
-        $icon = $this->context->resolve_icon_as_html ('{icons}tree/expand', '[+]', '', 'vertical-align: middle', "{$this->name}_image");
+        $icon = $this->context->resolve_icon_as_html ('{icons}tree/expand', '', '[+]', 'vertical-align: middle', "{$this->name}_image");
       }
 
       return '<a href="#" onclick="toggle_visibility(\'' . $this->name . '\'); return false;">' . $icon . '</a>';

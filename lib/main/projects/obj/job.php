@@ -719,7 +719,7 @@ class JOB_BRANCH_INFO extends PROJECT_ENTRY_BRANCH_INFO
         }
         else
         {
-          $Result = $this->app->get_text_with_icon($status->icon_url, $Result, Sixteen_px);
+          $Result = $this->app->get_icon_with_text($status->icon_url, Sixteen_px, $Result);
         }
       }
     }

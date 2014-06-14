@@ -185,7 +185,7 @@ class HISTORY_ITEM extends UNIQUE_OBJECT
   {
     $icon_name = $this->publication_state_icon_url();
 
-    return $this->app->resolve_icon_as_html ($icon_name, $this->publication_state_as_text (), $size);
+    return $this->app->resolve_icon_as_html ($icon_name, $size, $this->publication_state_as_text());
   }
 
   /**
@@ -219,7 +219,7 @@ class HISTORY_ITEM extends UNIQUE_OBJECT
    */
   public function kind_as_icon ($size = Sixteen_px)
   {
-    return $this->app->resolve_icon_as_html ($this->kind_icon_url (), $this->kind, $size);
+    return $this->app->resolve_icon_as_html ($this->kind_icon_url(), $size, $this->kind);
   }
 
   /**

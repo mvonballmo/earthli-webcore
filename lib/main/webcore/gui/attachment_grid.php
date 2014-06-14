@@ -65,13 +65,8 @@ class ATTACHMENT_GRID extends STANDARD_GRID
    */
   protected function _draw_box ($obj)
   {
+    $this->_display_start_overlay_commands($obj);
 ?>
-<div style="position: relative">
-  <div class="top-left-overlay">
-    <?php
-    $this->_draw_menu_for ($obj, Menu_size_minimal);
-    ?>
-  </div>
   <a href="<?php echo $obj->home_page_as_html (); ?>"><?php
     if ($obj->is_image)
     {
@@ -103,8 +98,9 @@ class ATTACHMENT_GRID extends STANDARD_GRID
   <div class="text-flow">
   <?php echo $obj->description_as_html (); ?>
   </div>
-</div>
 <?php
+    $this->_display_finish_overlay_commands();
    }
 }
+
 ?>

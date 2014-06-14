@@ -209,7 +209,7 @@ class BROWSER_RENDERER extends OBJECT_RENDERER
       {
         $text = 'yes';
       }
-      return $this->context->resolve_icon_as_html ('{icons}comment/thumbs_up', '', Fifteen_px) . ' ' . $text;
+      return $this->context->get_icon_with_text('{icons}comment/thumbs_up', Fifteen_px, $text);
     }
     else
     {
@@ -217,7 +217,7 @@ class BROWSER_RENDERER extends OBJECT_RENDERER
       {
         $text = 'no';
       }
-      return $this->context->resolve_icon_as_html ('{icons}comment/thumbs_down', '', Fifteen_px) . ' ' . $text;
+      return $this->context->get_icon_with_text ('{icons}comment/thumbs_down', Fifteen_px, $text);
     }
   }
 

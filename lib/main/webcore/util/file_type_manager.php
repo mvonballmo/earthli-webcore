@@ -84,7 +84,7 @@ abstract class FILE_TYPE_MANAGER extends WEBCORE_OBJECT
       $title = ' ';
     }
 
-    return $this->context->resolve_icon_as_html($this->icon_url ($mime_type, $extension), $title, $size);
+    return $this->context->resolve_icon_as_html($this->icon_url($mime_type, $extension), $size, $title);
   }
 
   /**

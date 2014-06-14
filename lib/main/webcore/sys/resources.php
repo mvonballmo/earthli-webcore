@@ -405,15 +405,15 @@ class RESOURCE_MANAGER extends RAISABLE
   /**
    * Resolve the file fragment as an HTML image.
    * @param string $fragment location of icon.
-   * @param string $text used for the alt and title attributes.
    * @param string $size The size of icon to render; defaults to Sixteen_px.
-   * @param string $style an optional CSS style (not a class).
+   * @param string $text used for the alt and title attributes.
+   * @param string $css_class an optional CSS class.
    * @param int|string $dom_id An optional DOM id to allow JavaScript access to the image.
    * @return string
    */
-  public function resolve_icon_as_html ($fragment, $text, $size = '', $style = 'vertical-align: middle', $dom_id = 0)
+  public function resolve_icon_as_html ($fragment, $size = '', $text = '', $css_class = 'inline-icon', $dom_id = 0)
   {
-    return $this->_image_as_html ($this->get_icon_url ($fragment, $size), $text, $style, $dom_id);
+    return $this->_image_as_html ($this->get_icon_url ($fragment, $size), $text, $css_class, $dom_id);
   }
 
   /**
@@ -726,11 +726,11 @@ class RESOURCE_MANAGER extends RAISABLE
    * Render an image as HTML.
    * @param string $url location of icon.
    * @param string $text used for the alt and title attributes.
-   * @param string $style an optional CSS style (not a class).
+   * @param string $css_class an optional CSS class.
    * @param int|string $dom_id an optional DOM id to allow JavaScript access to the image.
    * @return string
    */
-  private function _image_as_html ($url, $text, $style = 'vertical-align: middle', $dom_id = 0)
+  private function _image_as_html ($url, $text, $css_class = 'inline-icon', $dom_id = 0)
   {
     if ($url)
     {
@@ -740,9 +740,9 @@ class RESOURCE_MANAGER extends RAISABLE
       {
         $Result .= " id=\"$dom_id\"";
       }
-      if ($style)
+      if ($css_class)
       {
-        $Result .= " style=\"$style\"";
+        $Result .= " class=\"$css_class\"";
       }
       $Result .= ">";
       return $Result;

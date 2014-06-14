@@ -187,7 +187,7 @@ class ALBUM_CALENDAR extends BASIC_CALENDAR
         ?>
         <div class="align-right">
           <?php
-          echo $this->context->get_text_with_icon($journal_props->icon, '', Thirty_px);
+          echo $this->context->get_icon_with_text($journal_props->icon, Thirty_px, '');
           ?>
         </div>
       <?php

@@ -890,8 +890,8 @@ class SORT_FIELDS extends SEARCH_FIELDS
     echo $renderer->drop_down_as_html ($this->sort_name (), $props);
     $props = $renderer->make_list_properties ();
     $props->items_per_row = 2;
-    $props->add_item ($this->context->resolve_icon_as_html ('{icons}indicators/sort_ascending', 'Asc', Sixteen_px), 'asc');
-    $props->add_item ($this->context->resolve_icon_as_html ('{icons}indicators/sort_descending', 'Desc', Sixteen_px), 'desc');
+    $props->add_item ($this->context->get_icon_with_text('{icons}indicators/sort_ascending', Sixteen_px, 'Ascending'), 'asc');
+    $props->add_item ($this->context->get_icon_with_text('{icons}indicators/sort_descending', Sixteen_px, 'Descending'), 'desc');
 
     // TODO This part also needs to be able to render a control group without a surrounding form-row
 

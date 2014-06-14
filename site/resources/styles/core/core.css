@@ -109,6 +109,9 @@ table.left-labels.bottom > tbody > tr > td:first-child,
 table.left-labels.bottom > tbody > tr > th:first-child {
   vertical-align: bottom;
 }
+table.panels td {
+  white-space: nowrap;
+}
 .text-flow table.basic > tbody > tr > td,
 .text-flow table.left-labels.top > tbody > tr > th:first-child {
   line-height: 160%;
@@ -645,9 +648,6 @@ input[type=submit] + .menu-items.buttons,
   background-color: #666;
   color: white;
 }
-.pager .button {
-  text-align: center;
-}
 .object-navigator ul {
   list-style: none;
   padding-left: 0;
@@ -662,7 +662,6 @@ input[type=submit] + .menu-items.buttons,
 }
 .object-navigator .links .button {
   display: block;
-  text-align: center;
 }
 .object-navigator .page-down {
   margin-top: 5px;
@@ -746,6 +745,12 @@ input[type=submit] + .menu-items.buttons,
   margin-bottom: 15px;
   border: 1px dotted #666666;
 }
+.caution.icon {
+  background-position: 5px 10px;
+}
+.caution.icon.sixteen {
+  padding-left: 26px;
+}
 .caution p:first-child,
 .warning p:first-child,
 .error p:first-child {
@@ -761,7 +766,7 @@ input[type=submit] + .menu-items.buttons,
   border-color: #A00000;
 }
 .warning {
-  background-color: #f0d295;
+  background-color: #f0a05d;
   border-color: #A06000;
 }
 .caution {
@@ -1345,7 +1350,7 @@ input[type=submit] {
   border: 1px solid #c2c2c2;
   border-radius: 4px;
   line-height: normal;
-  text-align: left;
+  text-align: center;
 }
 a.button:link,
 a.button:visited {

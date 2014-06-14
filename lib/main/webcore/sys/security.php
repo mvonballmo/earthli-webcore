@@ -878,7 +878,7 @@ class PERMISSIONS_FORMATTER extends WEBCORE_OBJECT
   public function icon_for ($map, $size = Sixteen_px)
   {
     $formatter = $this->_formatters [$map->range][$map->type];
-    return $this->app->resolve_icon_as_html ($formatter->image, $formatter->title, $size);
+    return $this->app->resolve_icon_as_html ($formatter->image, $size, $formatter->title);
   }
 
   /**

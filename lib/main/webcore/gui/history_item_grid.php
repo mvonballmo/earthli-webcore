@@ -126,19 +126,19 @@ class HISTORY_ITEM_GRID extends STANDARD_GRID
     <tr>
       <th>User</th>
       <td>
-        <?php echo $this->context->get_text_with_icon($creator->icon_url, $creator->title_as_link (), Sixteen_px); ?>
+        <?php echo $this->context->get_icon_with_text($creator->icon_url, Sixteen_px, $creator->title_as_link()); ?>
       </td>
     </tr>
     <tr>
       <th>Kind</th>
       <td>
-        <?php echo $this->context->get_text_with_icon($obj->kind_icon_url (), $obj->kind, Sixteen_px); ?>
+        <?php echo $this->context->get_icon_with_text($obj->kind_icon_url(), Sixteen_px, $obj->kind); ?>
       </td>
     </tr>
     <tr>
       <th>Emails</th>
       <td>
-        <?php echo $this->context->get_text_with_icon($obj->publication_state_icon_url (), $obj->publication_state_as_text (), Sixteen_px); ?>
+        <?php echo $this->context->get_icon_with_text($obj->publication_state_icon_url(), Sixteen_px, $obj->publication_state_as_text()); ?>
       </td>
     </tr>
   </table>

@@ -110,7 +110,7 @@ http://www.earthli.com/software/webcore
       $caption = 'Hide list';
     }
 
-    ?><a href="<?php echo $opt_link; ?>" class="button"><?php echo $Page->get_text_with_icon($icon, $caption, Sixteen_px); ?></a><?php
+    ?><a href="<?php echo $opt_link; ?>" class="button"><?php echo $Page->get_icon_with_text($icon, Sixteen_px, $caption); ?></a><?php
   }
   else
   {
@@ -145,7 +145,7 @@ http://www.earthli.com/software/webcore
   if (isset ($associated_data))
   {
     ?>
-    <div style="clear: both">
+    <div class="clear-both">
     <?php
       $associated_data->display ($entry);
     ?>

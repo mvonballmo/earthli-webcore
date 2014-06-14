@@ -97,7 +97,7 @@ class SELECT_LIST extends LIST_GRID
     $col .= "<a href=\"#\" onclick=\"toggle_selected (document.getElementById('$this->form_name')['{$this->control_name}[]']); return false;\" title=\"$this->toggle_title\">";
     if ($this->toggle_image)
     {
-      $col .= $this->app->resolve_icon_as_html ($this->toggle_image, $this->toggle_title);
+      $col .= $this->app->resolve_icon_as_html ($this->toggle_image, '', $this->toggle_title);
     }
     else
     {

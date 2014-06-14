@@ -229,10 +229,10 @@ abstract class TREE extends WEBCORE_OBJECT
     switch ($kind)
     {
     case Tree_ell_plus:
-      echo $this->context->resolve_icon_as_html ('{icons}tree/ell', 'L');
+      echo $this->context->resolve_icon_as_html ('{icons}tree/ell', '', 'L');
       break;
     case Tree_tee_plus:
-      echo $this->context->resolve_icon_as_html ('{icons}tree/tee', '|-');
+      echo $this->context->resolve_icon_as_html ('{icons}tree/tee', '', '|-');
       break;
     }
   }
@@ -267,7 +267,7 @@ abstract class TREE extends WEBCORE_OBJECT
     }
     else
     {
-      echo $this->context->get_text_with_icon($icon_url, $caption, Sixteen_px);
+      echo $this->context->get_icon_with_text($icon_url, Sixteen_px, $caption);
     }
   }
 

@@ -125,7 +125,7 @@ class USER extends CONTENT_OBJECT
    */
   public function icon_as_html ($size = Thirty_two_px)
   {
-    return $this->app->resolve_icon_as_html($this->icon_url, ' ', $size);
+    return $this->app->resolve_icon_as_html($this->icon_url, $size, ' ');
   }
 
   /**

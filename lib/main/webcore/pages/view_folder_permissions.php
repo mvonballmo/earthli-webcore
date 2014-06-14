@@ -27,6 +27,8 @@ http://www.earthli.com/software/webcore
 ****************************************************************************/
 
   $folder_query = $App->login->folder_query ();
+
+  /** @var FOLDER $folder */
   $folder = $folder_query->object_at_id (read_var ('id'));
 
   if (isset ($folder) && $App->login->is_allowed (Privilege_set_folder, Privilege_secure, $folder))
@@ -69,7 +71,7 @@ http://www.earthli.com/software/webcore
       $caption = 'Hide folders';
     }
 
-    ?><a href="<?php echo $opt_link; ?>" class="button"><?php echo $Page->get_text_with_icon($icon, $caption, Sixteen_px); ?></a><?php
+    ?><a href="<?php echo $opt_link; ?>" class="button"><?php echo $Page->get_icon_with_text($icon, Sixteen_px, $caption); ?></a><?php
     ?>
     </div>
   </div>
@@ -77,6 +79,7 @@ http://www.earthli.com/software/webcore
     <?php
       if ($show_tree)
       {
+        /** @var FOLDER[] $folders */
         $folders = $folder_query->tree ();
 
         $box = $Page->make_box_renderer ();
@@ -100,8 +103,14 @@ http://www.earthli.com/software/webcore
     <?php
         $box->new_column_of_type('content-column text-flow');
       }
+      else
+      {
+        ?>
+        <div class="text-flow">
+        <?php
+      }
     ?>
-  <p class="notes">The permissions for this folder are shown below. Permissions are,
+  <p>The permissions for this folder are shown below. Permissions are,
     by default, inherited from the parent folder. Inherited permissions are displayed
     as read-only. Use the button below to define or revert permissions.</p>
   <table class="basic columns">
@@ -116,6 +125,7 @@ http://www.earthli.com/software/webcore
       <td colspan="<?php echo $cols; ?>">
       <?php
         $class_name = $App->final_class_name ('PERMISSIONS_INHERITANCE_FORM', 'webcore/forms/permissions_inheritance_form.php');
+        /** @var PERMISSIONS_INHERITANCE_FORM $form */
         $form = new $class_name ($App);
         $form->process_existing ($folder);
         $form->display ();
@@ -127,7 +137,6 @@ http://www.earthli.com/software/webcore
 
     function draw_headers ()
     {
-      global $App;
       global $privilege_groups;
   ?>
   <tr>
@@ -138,7 +147,7 @@ http://www.earthli.com/software/webcore
       foreach ($privilege_groups as $group)
       {
   ?>
-  <th class="detail"><?php echo $group->title; ?></th>
+  <th><?php echo $group->title; ?></th>
   <?php
         $index += 1;
       }
@@ -159,7 +168,7 @@ http://www.earthli.com/software/webcore
         foreach ($privilege_groups as $group)
         {
     ?>
-    <td class="detail" style="white-space: nowrap">
+    <td>
     <?php
         foreach ($group->maps as $map)
         {
@@ -169,7 +178,7 @@ http://www.earthli.com/software/webcore
           }
           else
           {
-            echo $App->resolve_icon_as_html ('{icons}buttons/blank', ' ', Sixteen_px);
+            echo $App->resolve_icon_as_html ('{icons}buttons/blank', Sixteen_px, ' ');
           }
         }
     ?>
@@ -194,7 +203,7 @@ http://www.earthli.com/software/webcore
     <tr>
       <td style="vertical-align: top; text-align: right">
       <?php
-        if ($defined)
+        if (isset ($renderer))
         {
           echo $renderer->button_as_html ('', 'edit_folder_anon_user_permissions.php?id=' . $folder->id, '{icons}buttons/edit');
         }
@@ -207,7 +216,7 @@ http://www.earthli.com/software/webcore
     <tr>
       <td style="vertical-align: top; text-align: right">
       <?php
-        if ($defined)
+        if (isset ($renderer))
         {
           echo $renderer->button_as_html ('', 'edit_folder_all_users_permissions.php?id=' . $folder->id, '{icons}buttons/edit');
         }
@@ -216,9 +225,6 @@ http://www.earthli.com/software/webcore
       <?php
         draw_privilege_set ('Registered', $security->registered_permissions ());
       ?>
-    </tr>
-    <tr>
-      <td colspan="<?php echo $cols; ?>">&nbsp;</td>
     </tr>
     <?php
       $groups = $security->group_permissions ();
@@ -229,7 +235,7 @@ http://www.earthli.com/software/webcore
     <tr>
       <td style="text-align: right">
       <?php
-        if ($defined)
+        if (isset ($renderer))
         {
           echo $renderer->button_as_html ('', 'create_folder_group_permissions.php?id=' . $folder->id, '{icons}buttons/add');
         }
@@ -250,11 +256,11 @@ http://www.earthli.com/software/webcore
     <tr>
       <td style="vertical-align: top; text-align: right; white-space: nowrap">
       <?php
-            if ($defined)
+            if (isset ($renderer))
             {
               $buttons = array ();
-              $buttons [] = $renderer->button_as_html ('', 'edit_folder_group_permissions.php?id=' . $folder->id . '&group_id=' . $perms->ref_id, '{icons}buttons/edit');
               $buttons [] = $renderer->button_as_html ('', 'delete_folder_group_permissions.php?id=' . $folder->id . '&group_id=' . $perms->ref_id, '{icons}buttons/delete');
+              $buttons [] = $renderer->button_as_html ('', 'edit_folder_group_permissions.php?id=' . $folder->id . '&group_id=' . $perms->ref_id, '{icons}buttons/edit');
               $renderer->draw_buttons ($buttons);
             }
       ?>
@@ -267,11 +273,7 @@ http://www.earthli.com/software/webcore
           }
         }
       }
-    ?>
-    <tr>
-      <td colspan="<?php echo $cols; ?>">&nbsp;</td>
-    </tr>
-    <?php
+
       $users = $security->user_permissions ();
 
       if (sizeof ($users) || $defined)
@@ -280,7 +282,7 @@ http://www.earthli.com/software/webcore
     <tr>
       <td style="text-align: right">
       <?php
-        if ($defined)
+        if (isset ($renderer))
         {
           echo $renderer->button_as_html ('', 'create_folder_user_permissions.php?id=' . $folder->id, '{icons}buttons/add');
         }
@@ -302,12 +304,12 @@ http://www.earthli.com/software/webcore
     <tr>
       <td style="vertical-align: top; text-align: right; white-space: nowrap">
       <?php
-            if ($defined)
+            if (isset ($renderer))
             {
               $args = 'id=' . $folder->id . '&name=' . urlencode ($user->title);
               $buttons = array ();
-              $buttons [] = $renderer->button_as_html ('', 'edit_folder_user_permissions.php?' . $args, '{icons}buttons/edit');
               $buttons [] = $renderer->button_as_html ('', 'delete_folder_user_permissions.php?' . $args, '{icons}buttons/delete');
+              $buttons [] = $renderer->button_as_html ('', 'edit_folder_user_permissions.php?' . $args, '{icons}buttons/edit');
               $renderer->draw_buttons ($buttons);
             }
       ?>
@@ -323,10 +325,15 @@ http://www.earthli.com/software/webcore
     ?>
   </table>
 <?php
-      if ($show_tree)
+      if (isset ($box))
       {
         $box->finish_column_set ();
       }
+    else
+    {
+?>
+        </div>      <?php
+    }
 ?>
   </div>
   <?php

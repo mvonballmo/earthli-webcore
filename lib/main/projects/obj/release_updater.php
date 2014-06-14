@@ -387,7 +387,7 @@ abstract class UPDATE_RELEASE_PREVIEW_SETTINGS extends FORM_PREVIEW_SETTINGS
       foreach ($objects as $entry)
       {
         $props = $entry->kind_properties();
-        $text = $this->context->get_text_with_icon($props->icon, $entry->title_as_link (), Sixteen_px);
+        $text = $this->context->get_icon_with_text($props->icon, Sixteen_px, $entry->title_as_link());
 
         echo '<li>' . $text . '</li>';
       }

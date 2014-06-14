@@ -123,7 +123,7 @@ class CONTROLS_RENDERER extends WEBCORE_OBJECT
   {
     if (isset ($icon) && $icon)
     {
-      $title = $this->context->get_text_with_icon($icon, $title, $icon_size);
+      $title = $this->context->get_icon_with_text($icon, $icon_size, $title);
     }
     $Result = '<button type="' . $type . '" onClick="' . $action . '"';
     if ($this->button_width)

@@ -362,7 +362,7 @@ class MENU_RENDERER extends WEBCORE_OBJECT
 
     if ($cmd->icon && ($this->content_mode & Menu_show_icon))
     {
-      $text = $this->context->get_text_with_icon($cmd->icon, $text, Sixteen_px);
+      $text = $this->context->get_icon_with_text($cmd->icon, Sixteen_px, $text);
     }
 
     if (!empty ($text))
@@ -543,11 +543,11 @@ class MENU_RENDERER extends WEBCORE_OBJECT
     {
       if (empty ($trigger))
       {
-        echo $this->context->resolve_icon_as_html($this->trigger_icon, '', Sixteen_px);
+        echo $this->context->resolve_icon_as_html($this->trigger_icon, Sixteen_px, '');
       }
       else
       {
-        echo $this->context->get_text_with_icon($this->trigger_icon, $trigger, Sixteen_px);
+        echo $this->context->get_icon_with_text($this->trigger_icon, Sixteen_px, $trigger);
       }
     }
     else

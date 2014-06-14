@@ -478,12 +478,12 @@ class PICTURE_FORM extends ALBUM_ENTRY_FORM
           /** @var PICTURE $pic */
           $pic = $this->_object;
 
-          echo '<img class="pullquote right" style="float: right" src="' . $pic->full_thumbnail_name() . '" alt="Picture">';
+          echo '<img class="pullquote right align-right" src="' . $pic->full_thumbnail_name() . '" alt="Picture">';
         }
 
         $props = $renderer->make_list_properties ();
         $props->on_click_script = 'file_option_changed (this)';
-        $props->add_item ($this->app->resolve_icon_as_html ('{icons}buttons/upload', 'Upload', Sixteen_px) . ' Upload the picture below', 1);
+        $props->add_item ($this->app->resolve_icon_as_html ('{icons}buttons/upload', Sixteen_px, 'Upload') . ' Upload the picture below', 1);
         $renderer->start_row ();
         echo $renderer->radio_group_as_html ('use_upload', $props);
         $renderer->finish_row ();
@@ -526,7 +526,7 @@ class PICTURE_FORM extends ALBUM_ENTRY_FORM
         /** @var PICTURE $pic */
         $pic = $this->_object;
 
-        echo '<img class="pullquote right" style="float: right" src="' . $pic->full_thumbnail_name() . '" alt="Picture">';
+        echo '<img class="pullquote right align-right" src="' . $pic->full_thumbnail_name() . '" alt="Picture">';
       }
       $renderer->finish_row();
       $renderer->draw_text_line_row ('file_name');

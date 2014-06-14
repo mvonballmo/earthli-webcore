@@ -100,12 +100,14 @@ class CREATE_FOLDER_PERMISSIONS_FORM extends ID_BASED_FORM
    */
   protected function _draw_controls ($renderer)
   {
-    if (! $this->_object->defines_security ())
+    /** @var FOLDER $folder */
+    $folder = $this->_object;
+    if (! $folder->defines_security ())
     {
       $renderer->start ();
-      $renderer->draw_text_row ('', 'Are you sure you want to create new permissions for ' . $this->_object->title_as_link () . '?');
+      $renderer->draw_text_row ('', 'Are you sure you want to create new permissions for ' . $folder->title_as_link () . '?');
 
-      $parent_folder = $this->_object->parent_folder ();
+      $parent_folder = $folder->parent_folder ();
       $permissions_folder = $parent_folder->permissions_folder ();
       
       $props = $renderer->make_list_properties ();
@@ -121,7 +123,7 @@ class CREATE_FOLDER_PERMISSIONS_FORM extends ID_BASED_FORM
       $permissions = $this->login->permissions ();      
       if ($permissions->value_for (Privilege_set_folder, Privilege_view) != Privilege_always_granted)
       {
-        $renderer->draw_text_row ('', '<div class="caution">' . $this->app->resolve_icon_as_html ('{icons}/indicators/warning', 'Warning', Sixteen_px) . ' *In this case, you <span class="field">will not</span> be able to see this folder.</div>', 'notes');
+        $renderer->draw_text_row ('', $this->app->get_message('*In this case, you <span class="field">will not</span> be able to see this folder.', 'warning'), 'notes');
       }
       else
       {
@@ -134,9 +136,9 @@ class CREATE_FOLDER_PERMISSIONS_FORM extends ID_BASED_FORM
     {
       $renderer->start ();
 
-      $renderer->draw_text_row ('', 'Are you sure you want to remove permissions for ' . $this->_object->title_as_link () . '?*');
+      $renderer->draw_text_row ('', 'Are you sure you want to remove permissions for ' . $folder->title_as_link () . '?*');
 
-      $buttons [] = $renderer->button_as_HTML ('No', 'view_folder_permissions.php?id=' . $this->_object->id);
+      $buttons [] = $renderer->button_as_HTML ('No', 'view_folder_permissions.php?id=' . $folder->id);
       $buttons [] = $renderer->submit_button_as_HTML ();
       $renderer->draw_buttons_in_row ($buttons);
 
@@ -146,4 +148,3 @@ class CREATE_FOLDER_PERMISSIONS_FORM extends ID_BASED_FORM
     }
   }
 }
-?>

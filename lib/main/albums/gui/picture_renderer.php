@@ -91,6 +91,7 @@ class PICTURE_RENDERER extends ENTRY_RENDERER
    */
   protected function _echo_picture_as_html ($entry)
   {
+    /** @var ALBUM $folder */
     $folder = $entry->parent_folder ();
     $metrics = $entry->metrics ();
     if ($metrics->loaded ())
@@ -100,7 +101,7 @@ class PICTURE_RENDERER extends ENTRY_RENDERER
     <p>
       <?php echo $folder->format_date ($entry->date); ?>
     </p>
-    <div>
+    <div class="text-flow">
       <?php $this->_echo_html_description ($entry); ?>
     </div>
     <div>
@@ -120,10 +121,8 @@ class PICTURE_RENDERER extends ENTRY_RENDERER
       {
     ?>
     <div class="subdued">
-      Resized from
-      <?php echo $metrics->original_width; ?> x <?php echo $metrics->original_height; ?> to
-      <?php echo $metrics->constrained_width; ?> x <?php echo $metrics->constrained_height; ?>.
-      Click to show full size in a separate window.
+      Displayed at <?php echo $metrics->constrained_width; ?> x <?php echo $metrics->constrained_height; ?>;
+      click to show full-size (<?php echo $metrics->original_width; ?> x <?php echo $metrics->original_height; ?>).
     </div>
     <?php
       }
@@ -135,12 +134,14 @@ class PICTURE_RENDERER extends ENTRY_RENDERER
     else
     {
   ?>
-    <div style="text-align: right">
+    <p>
       <?php echo $folder->format_date ($entry->date); ?>
+    </p>
+    <div class="text-flow">
+      <?php $this->_echo_html_description ($entry); ?>
     </div>
-  <?php
-      $this->_echo_html_description ($entry);
-      echo "<div class=\"error\">[$metrics->url] could not be displayed.</div>";
+      <?php
+      $this->context->show_message('[$metrics->url] could not be displayed.');
       $this->_echo_html_user_information ($entry, 'info-box-bottom');
     }
   }

@@ -620,7 +620,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    */
   public function draw_caution_row ($title, $text)
   {
-    $this->draw_text_row ($title, $this->app->resolve_icon_as_html ('{icons}indicators/warning', 'Warning', Sixteen_px) . ' ' . $text, 'caution detail');
+    $this->draw_text_row ($title, $this->app->resolve_icon_as_html ('{icons}indicators/warning', Sixteen_px, 'Warning') . ' ' . $text, 'caution detail');
   }
 
   /**
@@ -1114,8 +1114,8 @@ class FORM_RENDERER extends CONTROLS_RENDERER
       $Result .= $id . '_field.attach (' . $js_form . '.' . $id . ");\n";
 
       $Result .= "</script>\n";
-      $Result .= ' <a href="javascript:' . $id . '_field.show_calendar ()">' . $this->context->resolve_icon_as_html ('{icons}buttons/calendar', 'Show calendar in popup window', Sixteen_px) . '</a>';
-      $Result .= ' ' . $this->context->resolve_icon_as_html ('{icons}indicators/info', 'Use [d.m.Y] or [m/d/Y] or [Y-m-d]', Sixteen_px, 'vertical-align: middle');
+      $Result .= ' <a href="javascript:' . $id . '_field.show_calendar ()">' . $this->context->resolve_icon_as_html ('{icons}buttons/calendar', Sixteen_px, 'Show calendar in popup window') . '</a>';
+      $Result .= ' ' . $this->context->resolve_icon_as_html ('{icons}indicators/info', Sixteen_px, 'Use [d.m.Y] or [m/d/Y] or [Y-m-d]');
 
       return $Result;
     }

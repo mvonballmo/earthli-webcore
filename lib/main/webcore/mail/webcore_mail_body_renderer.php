@@ -165,7 +165,7 @@ class MAIL_TOC_ENTRY_RENDERER extends RENDERER
     else
     {
       $type_info = $obj->type_info ();
-      return $this->context->get_text_with_icon($type_info->icon, $obj->title_as_link ($t), Sixteen_px) . '<br>';
+      return $this->context->get_icon_with_text($type_info->icon, Sixteen_px, $obj->title_as_link($t)) . '<br>';
     }
   }
 
@@ -611,7 +611,7 @@ class MAIL_TOC_RENDERER extends RENDERER
    */
   public function items_as_html ($options)
   {
-    $top_link = '<a href="#top">' . $this->app->resolve_icon_as_html ('{icons}indicators/top', 'Go to top of email', Sixteen_px) . "</a>\n";
+    $top_link = '<a href="#top">' . $this->app->resolve_icon_as_html ('{icons}indicators/top', Sixteen_px, 'Go to top of email') . "</a>\n";
     $Result = '';
     foreach ($this->groups as $group)
     {
