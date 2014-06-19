@@ -63,12 +63,13 @@ class ENTRY_LIST extends SELECT_LIST
   /**
    * Draw the given column's data using the given object.
    * @param ENTRY $obj
-   * @param integer $index
+   * @param integer $col_index
+   * @param $row_index
    * @access private
    */
-  protected function _draw_column_contents ($obj, $index)
+  protected function _draw_column_contents ($obj, $col_index, $row_index)
   {
-    switch ($index)
+    switch ($col_index)
     {
     case 0:
       $this->_draw_selector ($obj);

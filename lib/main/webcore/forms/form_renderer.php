@@ -442,10 +442,10 @@ class FORM_RENDERER extends CONTROLS_RENDERER
 
   public function draw_inline_preview_area()
   {
-    echo '<div class="preview" id="inline_preview_block" style="display: none; margin-right: 15px; position: absolute; left: 950px">';
+    echo '<div class="preview" id="inline_preview_block">';
     echo '<div class="preview-title">Preview</div>';
     echo '<div id="inline_preview_message" class="text-flow"></div>';
-    echo '<div class="text-flow" id="inline_preview" style="height: 600px; overflow: auto"></div>';
+    echo '<div class="text-flow" id="inline_preview"></div>';
     echo '</div>';
   }
 
@@ -1102,20 +1102,19 @@ class FORM_RENDERER extends CONTROLS_RENDERER
     {
       $js_form = $this->_form->js_form_name ();
 
-      $Result .= "<script type=\"text/javascript\">\n";
-      $Result .= 'var ' . $id . "_field = new WEBCORE_DATE_TIME_FIELD ();\n";
-      $Result .= $id . "_field.output_format = Date_format_us;\n";
+      $Result .= "<script type=\"text/javascript\">";
+      $Result .= 'var ' . $id . "_field = new WEBCORE_DATE_TIME_FIELD ();";
+      $Result .= $id . "_field.output_format = Date_format_us;";
 
       if ($includes_time)
       {
-        $Result .= $id . "_field.show_time = true;\n";
+        $Result .= $id . "_field.show_time = true;";
       }
 
-      $Result .= $id . '_field.attach (' . $js_form . '.' . $id . ");\n";
+      $Result .= $id . '_field.attach (' . $js_form . '.' . $id . ");";
 
-      $Result .= "</script>\n";
-      $Result .= ' <a href="javascript:' . $id . '_field.show_calendar ()">' . $this->context->resolve_icon_as_html ('{icons}buttons/calendar', Sixteen_px, 'Show calendar in popup window') . '</a>';
-      $Result .= ' ' . $this->context->resolve_icon_as_html ('{icons}indicators/info', Sixteen_px, 'Use [d.m.Y] or [m/d/Y] or [Y-m-d]');
+      $Result .= "</script>";
+      $Result .= $this->javascript_button_as_html('', $id . '_field.show_calendar ()', '{icons}buttons/calendar');
 
       return $Result;
     }
@@ -1351,8 +1350,6 @@ class FORM_RENDERER extends CONTROLS_RENDERER
       $options = clone(default_text_options ());
     }
 
-    $width = $this->default_control_width;
-
     if (! isset ($this->_num_controls [$id]))
     {
       $this->_num_controls [$id] = 0;
@@ -1367,7 +1364,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
 
       // TODO Wrap in an .input class container
 
-      $Result = '<div style="width: ' . $width . '"><div class="detail">' . $icon . ' ' . $file->name . ' (' . file_size_as_text ($file->size) . ")</div></div>\n";
+      $Result = '<div class="detail">' . $icon . ' ' . $file->name . ' (' . file_size_as_text ($file->size) . ")</div>";
 
       $file_info = $file->store_to_text ($id);
       $uploader = $this->_form->uploader ();
@@ -1375,7 +1372,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
 
       if ($field->description)
       {
-        $Result .= '<div style="width: ' . $width . '"><div class="description">' . $field->description . "</div></div>\n";
+        $Result .= '<div class="description">' . $field->description . "</div>";
       }
     }
     else

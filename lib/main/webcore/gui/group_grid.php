@@ -65,12 +65,13 @@ class GROUP_GRID extends LIST_GRID
   /**
    * Draw the given column's data using the given object.
    * @param GROUP $obj
-   * @param integer $index
+   * @param integer $col_index
+   * @param $row_index
    * @access private
    */
-  protected function _draw_column_contents($obj, $index)
+  protected function _draw_column_contents($obj, $col_index, $row_index)
   {
-    switch ($index)
+    switch ($col_index)
     {
       case 0:
         $this->_draw_menu_for ($obj, Menu_size_minimal);

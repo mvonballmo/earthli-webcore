@@ -102,7 +102,9 @@ class ALBUM_GRID extends FOLDER_GRID
       }
       ?>
     </p>
-    <div style="margin-right: 20%"><?php echo $obj->summary_as_html(); ?></div>
+    <div class="text-flow multi-column-grid-description">
+      <?php echo $obj->summary_as_html(); ?>
+    </div>
   <?php
   }
 }

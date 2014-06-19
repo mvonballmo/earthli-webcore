@@ -242,7 +242,6 @@
           $this->last_interval = $interval_text;
           $this->last_date = $curr_date;
 
-          // TODO Create StartRow/FinishRow API
           $this->_internal_start_row();
           if ($this->items_are_selectable)
           {
@@ -266,6 +265,11 @@
      * @access private
      */
     public $last_interval;
+
+    /**
+     * @var DATE_TIME
+     * @access private */
+    public $last_date;
   }
 
   /**

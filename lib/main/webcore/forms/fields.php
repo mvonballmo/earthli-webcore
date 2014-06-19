@@ -831,7 +831,7 @@ class DATE_TIME_FIELD extends FIELD
 
       if (! $value->is_valid ())
       {
-        $form->record_error ($this->id, "[$this->_text_value] is not a valid date/time.");
+        $form->record_error ($this->id, "[$this->_text_value] is not a valid date/time. Use [d.m.Y] or [m/d/Y] or [Y-m-d]");
       }
       else
       {

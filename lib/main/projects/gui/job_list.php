@@ -68,12 +68,13 @@ class JOB_LIST extends SELECT_LIST
 
   /**
    * @param JOB $obj Draw fields from this job.
-   * @param integer $index Draw the column at this index.
+   * @param integer $col_index Draw the column at this index.
+   * @param $row_index
    * @access private
    */
-  protected function _draw_column_contents ($obj, $index)
+  protected function _draw_column_contents ($obj, $col_index, $row_index)
   {
-    switch ($index)
+    switch ($col_index)
     {
     case 0:
       $this->_draw_selector ($obj);

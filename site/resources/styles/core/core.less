@@ -52,7 +52,12 @@ table
   th
   {
     font-weight: bold;
-    border-bottom: @hairline_border_width solid @standard_border_color
+    border-bottom: @hairline_border_width solid @standard_border_color;
+
+    &.numeric
+    {
+      text-align: right;
+    }
   }
 
   td
@@ -161,7 +166,7 @@ table
           text-align: right;
           white-space: nowrap;
           border-bottom: none;
-          vertical-align: top;
+          vertical-align: baseline;
         }
       }
     }
@@ -504,29 +509,33 @@ pre > code
 .text-flow
 {
   line-height: @text_flow_line_height;
-  text-align: left
+  text-align: left;
+
+  ul:not([class]),
+  ol:not([class])
+  {
+    margin-left: 0;
+
+    li
+    {
+      padding-left: .5em;
+    }
+  }
+
+  ul:not([class])
+  {
+    padding-left: 1.1em;
+  }
+
+  ol:not([class])
+  {
+    padding-left: 1.3em;
+  }
 }
 
-.text-flow ul:not([class]),
-.text-flow ol:not([class])
+.multi-column-grid-description
 {
-  margin-left: 0;
-}
-
-.text-flow ul:not([class])
-{
-  padding-left: 1.1em;
-}
-
-.text-flow ol:not([class])
-{
-  padding-left: 1.3em;
-}
-
-.text-flow ul:not([class]) li,
-.text-flow ol:not([class]) li
-{
-  padding-left: .5em;
+  margin-right: 20%;
 }
 
 /* @end */
@@ -986,7 +995,6 @@ button + .menu-items.buttons,
   margin-top: @small_spacing;
 }
 
-
 .object-navigator .links
 {
   white-space: nowrap;
@@ -1248,16 +1256,19 @@ span.error, span.caution, span.warning
 .clear-left
 {
   clear: left;
+  display: block;
 }
 
 .clear-right
 {
   clear: right;
+  display: block;
 }
 
 .clear-both
 {
   clear: both;
+  display: block;
 }
 
 // Make float left/right classes for renderer
@@ -1705,6 +1716,11 @@ hr
 .tiny-picture a
 {
   display: inline-block;
+}
+
+.page-break
+{
+  page-break-before: always;
 }
 
 @import "form-core";

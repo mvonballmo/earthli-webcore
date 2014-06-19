@@ -120,7 +120,7 @@ class DEFAULT_PAGE_RENDERER extends WEBCORE_PAGE_RENDERER
           }
           ?>
         </div>
-        <div style="clear: both"></div>
+        <div class="clear-both"></div>
       </div>
       <div class="nav-box">
       <?php
@@ -432,7 +432,7 @@ class DEFAULT_PAGE_RENDERER extends WEBCORE_PAGE_RENDERER
         $url = $opt_ignore_warning->setter_url_as_html (! $opt_ignore_warning->value ());
       ?>
       <p>
-        <input id="ignore_browser_warning" type="checkbox" value="<?php echo $opt_ignore_warning->value (); ?>" onclick="window.location='<?php echo $url; ?>'" style="vertical-align: middle">
+        <input id="ignore_browser_warning" type="checkbox" value="<?php echo $opt_ignore_warning->value (); ?>" onclick="window.location='<?php echo $url; ?>'">
         <label for="ignore_browser_warning">Do not show this message again.</label>
       </p>
       <?php

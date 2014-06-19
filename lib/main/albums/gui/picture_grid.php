@@ -115,7 +115,7 @@ class PICTURE_GRID extends ALBUM_ENTRY_GRID
     <?php
     }
     ?>
-    <div class="text-flow" style="margin-right: 20%">
+    <div class="text-flow multi-column-grid-description">
       <?php
       $munger = $obj->html_formatter();
       $munger->max_visible_output_chars = $this->description_length;

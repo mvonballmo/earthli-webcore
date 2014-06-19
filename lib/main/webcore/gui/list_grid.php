@@ -70,13 +70,15 @@ abstract class LIST_GRID extends STANDARD_GRID
    * Add a column to the end of the list.
    * @param string $name
    * @param string $css_class
+   * @param string $type
    * @access private
    */
-  public function append_column ($name, $css_class = '')
+  public function append_column ($name, $css_class = '', $type = 'td')
   {
     $col = new LIST_GRID_COLUMN();
     $col->name = $name;
     $col->css_class = $css_class;
+    $col->type = $type;
     $this->_columns [] = $col;
   }
 
@@ -84,14 +86,35 @@ abstract class LIST_GRID extends STANDARD_GRID
    * Add a column to the beginning of the list.
    * @param string $name
    * @param string $css_class
+   * @param string $type
    * @access private
    */
-  public function prepend_column ($name, $css_class = '')
+  public function prepend_column ($name, $css_class = '', $type = 'td')
   {
     $col = new LIST_GRID_COLUMN();
     $col->name = $name;
     $col->css_class = $css_class;
+    $col->type = $type;
     array_unshift ($this->_columns, $col);
+  }
+
+  protected function _start_row($obj)
+  {
+    parent::_start_row($obj);
+    $this->_row_index += 1;
+  }
+
+  protected function _start_box($obj)
+  {
+    $current_column = $this->_columns[0];
+    if ($current_column->type == 'th')
+    {
+      $this->_internal_start_header_cell($this->_CSS_for_box());
+    }
+    else
+    {
+      parent::_start_box($obj);
+    }
   }
 
   /**
@@ -106,16 +129,32 @@ abstract class LIST_GRID extends STANDARD_GRID
     {
       if ($index > 0)
       {
-        $this->_internal_finish_cell();
+        $current_column = $this->_columns[$index];
+        if ($current_column->type == 'th')
+        {
+          $this->_internal_finish_header_cell();
+        }
+        else
+        {
+          $this->_internal_finish_cell();
+        }
 
         $attributes = '';
-        if ($this->_columns[$index]->css_class)
+        if ($current_column->css_class)
         {
-          $attributes = 'class="'. $this->_columns[$index]->css_class . '"';
+          $attributes = 'class="'. $current_column->css_class . '"';
         }
-        $this->_internal_start_cell($attributes);
+        if ($current_column->type == 'th')
+        {
+          $this->_internal_start_header_cell($attributes);
+        }
+        else
+        {
+          $this->_internal_start_cell($attributes);
+        }
       }
-      $this->_draw_column_contents ($obj, $index);
+
+      $this->_draw_column_contents ($obj, $index, $this->_row_index);
 
       $index += 1;
     }
@@ -146,16 +185,19 @@ abstract class LIST_GRID extends STANDARD_GRID
       }
       $this->_internal_finish_row();
     }
+
+    $this->_row_index = 0;
   }
 
   /**
    * Draw the given column's data using the given object.
    * @param object $obj
-   * @param integer $index
+   * @param $col_index
+   * @param $row_index
    * @access private
    * @abstract
    */
-  protected abstract function _draw_column_contents ($obj, $index);
+  protected abstract function _draw_column_contents ($obj, $col_index, $row_index);
 
   /**
    * @var LIST_GRID_COLUMN[]
@@ -163,6 +205,10 @@ abstract class LIST_GRID extends STANDARD_GRID
    * @access private
    */
   protected $_columns = array ();
+
+  /**
+   * @var int */
+  private $_row_index = 0;
 }
 
 /**
@@ -182,4 +228,6 @@ class LIST_GRID_COLUMN
   public $name;
 
   public $css_class = '';
+
+  public $type;
 }

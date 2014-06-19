@@ -1362,14 +1362,14 @@ to be
         </td>
         <td style="font-size: 150%">&rarr;</td>
         <td>
-          <div class="chart" style="float: right; width: 100px">
+          <div class="chart align-right" style="width: 100px">
             <div class="chart-body">
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ac
             leo accumsan, semper magna in...</p>
             </div>
           </div>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          <p><span style="display: block; clear: both"></span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ac
+          <p class="clear-both">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ac
             leo accumsan, semper magna in...</p>
         </td>
       </tr>

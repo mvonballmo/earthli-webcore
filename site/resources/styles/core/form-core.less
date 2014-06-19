@@ -374,6 +374,8 @@ select + .button
 {
   display: inline-block;
   .border-box();
+  position: relative;
+  top: 2px;
 }
 
 .style-controls .basic-form
@@ -385,4 +387,23 @@ select + .button
       margin-left: -@standard_border_radius - @hairline_border_width;
     }
   }
+}
+
+#inline_preview_block
+{
+  display: none;
+  position: absolute;
+  left: @page_max_width + 50px;
+  margin-right: @standard_spacing;
+}
+
+#inline_preview_message
+{
+
+}
+
+#inline_preview_block
+{
+  overflow: auto;
+  height: 42em;
 }

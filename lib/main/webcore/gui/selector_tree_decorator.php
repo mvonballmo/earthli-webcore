@@ -68,7 +68,7 @@ class SELECTOR_TREE_DECORATOR extends TREE_DECORATOR
     $disabled = ! ($node_info->selectable ($node));
     $dom_id = $this->control_name . '_' . $id;
 ?>
-    <input type="radio" id="<?php echo $dom_id; ?>" name="<?php echo $this->control_name; ?>" value="<?php echo $id; ?>" style="vertical-align: middle"<?php if ($disabled) echo ' disabled'; ?>><label for="<?php echo $dom_id; ?>"><?php echo $this->context->get_icon_with_text($icon, Sixteen_px, $text); ?></label>
+    <input type="radio" id="<?php echo $dom_id; ?>" name="<?php echo $this->control_name; ?>" value="<?php echo $id; ?>" <?php if ($disabled) echo ' disabled'; ?>><label for="<?php echo $dom_id; ?>"><?php echo $this->context->get_icon_with_text($icon, Sixteen_px, $text); ?></label>
 <?php
   }
 }

@@ -133,26 +133,21 @@ $Page->start_display();
     $form->display();
     ?>
   </div>
-  <div>
-    <div class="notes"><a name="report_problem"></a>Details courtesy of the
-      <a href="http://earthli.com/software/browser_detector/">earthli Browser Detector</a>.
-    </div>
-  </div>
   <?php
     $box->new_column_of_type('right-sidebar-column');
   ?>
   <div class="right-sidebar">
-    <h2 id="your_browser">
-      Your browser
-    </h2>
+    <h2 id="your_browser">Your browser</h2>
     <?php
     $class_name = $Page->final_class_name('BROWSER_RENDERER', 'webcore/gui/browser_renderer.php');
     /** @var BROWSER_RENDERER $renderer */
     $renderer = new $class_name ($Page);
     $renderer->display_as_html($browser);
     ?>
-    <hr>
-    <p class="notes">Problems with your browser? <a href="#report_problem">Report it</a>.</p>
+    <div class="info-box-bottom">
+      <p>Calculated by the <a href="http://earthli.com/software/browser_detector/">earthli Browser Detector</a>.</p>
+      <p>Something look wrong? <a href="#report_problem">Report it</a>.</p>
+    </div>
     <h2 id="downloads">
       <?php echo $Page->get_icon_with_text('{icons}buttons/download_to_hd', Thirty_two_px, 'Download'); ?>
     </h2>

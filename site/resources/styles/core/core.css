@@ -45,6 +45,9 @@ table th {
   font-weight: bold;
   border-bottom: 1px solid #c2c2c2;
 }
+table th.numeric {
+  text-align: right;
+}
 table td > p:first-child,
 table td > pre:first-child,
 table td > ul:first-child {
@@ -99,7 +102,7 @@ table.left-labels > tbody > tr > th:first-child {
   text-align: right;
   white-space: nowrap;
   border-bottom: none;
-  vertical-align: top;
+  vertical-align: baseline;
 }
 table.left-labels.top > tbody > tr > td:first-child,
 table.left-labels.top > tbody > tr > th:first-child {
@@ -335,15 +338,18 @@ pre > code {
 .text-flow ol:not([class]) {
   margin-left: 0;
 }
+.text-flow ul:not([class]) li,
+.text-flow ol:not([class]) li {
+  padding-left: .5em;
+}
 .text-flow ul:not([class]) {
   padding-left: 1.1em;
 }
 .text-flow ol:not([class]) {
   padding-left: 1.3em;
 }
-.text-flow ul:not([class]) li,
-.text-flow ol:not([class]) li {
-  padding-left: .5em;
+.multi-column-grid-description {
+  margin-right: 20%;
 }
 /* @end */
 /* @group Containers */
@@ -835,12 +841,15 @@ span.warning {
 }
 .clear-left {
   clear: left;
+  display: block;
 }
 .clear-right {
   clear: right;
+  display: block;
 }
 .clear-both {
   clear: both;
+  display: block;
 }
 .abstract {
   border-width: 1px 0;
@@ -1131,6 +1140,9 @@ hr {
 }
 .tiny-picture a {
   display: inline-block;
+}
+.page-break {
+  page-break-before: always;
 }
 .style-controls input[type="radio"],
 .style-controls input[type="checkbox"] {
@@ -1435,11 +1447,23 @@ select + input[type=submit] {
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
+  position: relative;
+  top: 2px;
 }
 .style-controls .basic-form .form-row button:first-child,
 .style-controls .basic-form .form-row input[type=button]:first-child,
 .style-controls .basic-form .form-row input[type=submit]:first-child {
   margin-left: -5px;
+}
+#inline_preview_block {
+  display: none;
+  position: absolute;
+  left: 950px;
+  margin-right: 15px;
+}
+#inline_preview_block {
+  overflow: auto;
+  height: 42em;
 }
 .style-controls button,
 .style-controls input[type=submit],

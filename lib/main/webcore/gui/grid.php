@@ -459,7 +459,7 @@ abstract class GRID extends WEBCORE_OBJECT
   protected function _draw_page_break()
   {
     ?>
-    <div style="page-break-before: always"></div>
+    <div class="page-break"></div>
   <?php
   }
 
@@ -720,9 +720,7 @@ abstract class HTML_TABLE_GRID extends GRID
    */
   protected function _draw_page_break()
   {
-    $this->_internal_start_row('style="page-break-before: always"');
-    $this->_internal_start_cell('colspan="' . $this->_num_columns . '"');
-    $this->_internal_finish_cell();
+    $this->_internal_start_row('class="page-break"');
     $this->_internal_finish_row();
   }
 
@@ -732,7 +730,7 @@ abstract class HTML_TABLE_GRID extends GRID
    */
   protected function _finish_grid()
   {
-    ?>
+  ?>
     </table>
   <?php
   }
@@ -831,10 +829,8 @@ abstract class CSS_FLOW_GRID extends GRID
    */
   protected function _start_grid()
   {
-    $style = $this->_style_for_grid();
-    $style .= '; display: table';
-    ?>
-    <div style="<?php echo $style; ?>">
+  ?>
+    <div style="<?php echo $this->_style_for_grid(); ?>">
   <?php
   }
 
@@ -845,9 +841,6 @@ abstract class CSS_FLOW_GRID extends GRID
    */
 protected function _start_row ($obj)
 {
-  ?>
-  <div style="display: table">
-<?php
 }
 
   /**
@@ -882,9 +875,6 @@ protected function _finish_box ($obj)
    */
 protected function _finish_row ($obj)
 {
-  ?>
-  </div>
-<?php
 }
 
   /**
@@ -894,6 +884,7 @@ protected function _finish_row ($obj)
   protected function _finish_grid()
   {
     ?>
+    <div class="clear-both"></div>
     </div>
   <?php
   }

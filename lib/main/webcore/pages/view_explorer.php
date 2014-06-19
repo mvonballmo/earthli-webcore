@@ -88,7 +88,7 @@ http://www.earthli.com/software/webcore
         $box->start_column_set ();
         $box->new_column_of_type ('left-column');
     ?>
-      <div class="left-sidebar" style="white-space: nowrap">
+      <div class="left-sidebar tree-content">
         <?php
           /* Make a copy (not a reference). */
           $tree = $App->make_tree_renderer ();

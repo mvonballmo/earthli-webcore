@@ -87,32 +87,11 @@ class PERMISSIONS_INHERITANCE_FORM extends ID_BASED_FORM
    */
   protected function _draw_controls ($renderer)
   {
+    $renderer->labels_css_class = 'top';
     $renderer->start ();
 
-    $folder_query = $this->login->folder_query ();
     $folder = $this->_object;
-    $parent = $folder->parent_folder ();
 
-    if (! $this->value_for ('defined'))
-    {
-      $permissions_folder = $folder_query->object_at_id ($folder->permissions_id);
-    }
-    else
-    {
-      $permissions_folder = $folder_query->object_at_id ($parent->permissions_id);
-    }
-
-    if ($this->login->is_allowed (Privilege_set_folder, Privilege_secure, $permissions_folder))
-    {
-      $t = $permissions_folder->title_formatter ();
-      $t->set_name ($this->env->url (Url_part_file_name));
-      $title = $permissions_folder->title_as_link ($t);
-    }
-    else
-    {
-      $title = $permissions_folder->title_as_html ();
-    }
-      
     if ($folder->defines_security ())
     {
       $renderer->draw_text_row ('', 'Permissions for this folder are defined below.');
@@ -122,6 +101,30 @@ class PERMISSIONS_INHERITANCE_FORM extends ID_BASED_FORM
     }
     else
     {
+      /** @var FOLDER $permissions_folder */
+      $permissions_folder = null;
+      $folder_query = $this->login->folder_query ();
+      if (! $this->value_for ('defined'))
+      {
+        $permissions_folder = $folder_query->object_at_id ($folder->permissions_id);
+      }
+      else
+      {
+        $parent = $folder->parent_folder ();
+        $permissions_folder = $folder_query->object_at_id ($parent->permissions_id);
+      }
+
+      if ($this->login->is_allowed (Privilege_set_folder, Privilege_secure, $permissions_folder))
+      {
+        $t = $permissions_folder->title_formatter ();
+        $t->set_name ($this->env->url (Url_part_file_name));
+        $title = $permissions_folder->title_as_link ($t);
+      }
+      else
+      {
+        $title = $permissions_folder->title_as_html ();
+      }
+
       $renderer->draw_text_row ('', 'Permissions are inherited from ' . $title . '.');
       $this->button_icon = '{icons}buttons/create';
       $this->button = 'Define permissions...';
@@ -131,4 +134,3 @@ class PERMISSIONS_INHERITANCE_FORM extends ID_BASED_FORM
     $renderer->finish ();
   }
 }
-?>

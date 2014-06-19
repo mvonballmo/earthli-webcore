@@ -497,6 +497,7 @@ class RELEASE extends OBJECT_IN_FOLDER
    * Format a date for status displays.
    * @param DATE_TIME $date
    * @param boolean $text_only Omit all tags if True.
+   * @return string
    * @access private
    */
   protected function _date_as_text ($date, $text_only)
@@ -522,6 +523,7 @@ class RELEASE extends OBJECT_IN_FOLDER
 
   /**
    * Create a status object describing this release.
+   * @param bool $text_only
    * @return RELEASE_STATUS
    * @access private
    */
@@ -543,7 +545,7 @@ class RELEASE extends OBJECT_IN_FOLDER
   /**
    * Return default handler objects for supported tasks.
    * @param string $handler_type Specific functionality required.
-   * @param object $options
+   * @param OBJECT_RENDERER_OPTIONS $options
    * @return object
    * @access private
    */
@@ -578,9 +580,6 @@ class RELEASE extends OBJECT_IN_FOLDER
     $branch = $this->branch ();
 
     $query->restrict ('watch_entries > 0');
-    $query->restrict_kinds (array (Subscribe_folder => $branch->parent_folder_id ()
-                                   , Subscribe_user => $this->creator_id));
+    $query->restrict_kinds (array (Subscribe_folder => $branch->parent_folder_id (), Subscribe_user => $this->creator_id));
   }
 }
-
-?>

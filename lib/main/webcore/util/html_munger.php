@@ -2320,7 +2320,7 @@ class HTML_TEXT_MUNGER extends HTML_BASE_MUNGER
     $this->register_transformer ('error', $block_transformer);
     $this->register_replacer ('error', new MUNGER_BASIC_REPLACER ($page->get_begin_message('error', 'p'), $page->get_end_message('p')));
     $this->register_transformer ('div', $block_transformer);
-    $this->register_replacer ('clear', new MUNGER_BASIC_REPLACER ('<span style="display: block; clear: both"></span>', ''));
+    $this->register_replacer ('clear', new MUNGER_BASIC_REPLACER ('<span class="clear-both"></span>', ''));
     $this->register_transformer ('pre', $nop_transformer);
     $this->register_replacer ('pre', new HTML_PREFORMATTED_BLOCK_REPLACER ());
     $this->register_transformer ('box', $block_transformer);

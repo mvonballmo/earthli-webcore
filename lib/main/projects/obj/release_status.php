@@ -287,9 +287,7 @@ class RELEASE_DATE_STATUS extends WEBCORE_OBJECT
   {
     if (! isset ($this->_html_text))
     {
-      $this->_html_text = $this->_as_text (false);
-      $this->_html_text = $this->app->get_icon_with_text($this->icon_url, Sixteen_px, $this->_html_text);
-      $this->_html_text = '<span style="white-space: nowrap">' . $this->_html_text . '</span>';
+      $this->_html_text = $this->app->get_icon_with_text($this->icon_url, Sixteen_px, $this->_as_text (false));
     }
     return $this->_html_text;
   }

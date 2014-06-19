@@ -164,7 +164,7 @@ class JOB_GRID extends PROJECT_ENTRY_GRID
       }
     ?>
     </div>
-    <div style="clear: both"></div>
+    <div class="clear-both"></div>
   </div>
   <?php
   }
