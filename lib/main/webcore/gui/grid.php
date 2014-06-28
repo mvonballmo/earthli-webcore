@@ -585,19 +585,20 @@ abstract class GRID extends WEBCORE_OBJECT
    */
   protected function _CSS_for_box()
   {
+    $attributes = array();
     $style = $this->_style_for_box();
-    $attrs = array();
     if (!empty($style))
     {
-      $attrs [] = "style=\"$style\"";
+      $attributes [] = "style=\"$style\"";
     }
-    if (!empty($this->box_css_class))
+    $css_class = $this->_class_for_box();
+    if (!empty($css_class))
     {
-      $attrs [] = "class=\"$this->box_css_class\"";
+      $attributes [] = "class=\"$css_class\"";
     }
-    if (sizeof($attrs))
+    if (sizeof($attributes))
     {
-      return join(' ', $attrs);
+      return join(' ', $attributes);
     }
 
     return '';
@@ -619,6 +620,14 @@ abstract class GRID extends WEBCORE_OBJECT
     }
 
     return "";
+  }
+
+  /**
+   * @return string
+   */
+  protected function _class_for_box()
+  {
+    return $this->box_css_class;
   }
 
   /**
@@ -668,8 +677,11 @@ abstract class HTML_TABLE_GRID extends GRID
   {
     $style = $this->_style_for_grid();
     ?>
-    <table class="grid <?php echo $this->table_style; ?>" <?php if ($style) { echo " style=\"$style\""; } ?>>
-    <?php
+    <table class="grid <?php echo $this->table_style; ?>" <?php if ($style)
+  {
+    echo " style=\"$style\"";
+  } ?>>
+  <?php
   }
 
   /**
@@ -730,7 +742,7 @@ abstract class HTML_TABLE_GRID extends GRID
    */
   protected function _finish_grid()
   {
-  ?>
+    ?>
     </table>
   <?php
   }
@@ -829,7 +841,7 @@ abstract class CSS_FLOW_GRID extends GRID
    */
   protected function _start_grid()
   {
-  ?>
+    ?>
     <div style="<?php echo $this->_style_for_grid(); ?>">
   <?php
   }
@@ -839,43 +851,45 @@ abstract class CSS_FLOW_GRID extends GRID
    * @param object $obj
    * @access private
    */
-protected function _start_row ($obj)
-{
-}
+  protected function _start_row($obj)
+  {
+    $this->_first_cell_in_row = true;
+  }
 
   /**
    * Render the start of a single cell.
    * @param object $obj
    * @access private
    */
-protected function _start_box ($obj)
-{
-  $attrs = $this->_CSS_for_box();
-  ?>
-  <div<?php if ($attrs)
+  protected function _start_box ($obj)
   {
-    echo " $attrs";
-  } ?>><?php
-}
+    $attrs = $this->_CSS_for_box();
+    ?>
+    <div<?php if ($attrs)
+    {
+      echo " $attrs";
+    } ?>><?php
+  }
 
   /**
    * Close the open cell.
    * @param object $obj
    * @access private
    */
-protected function _finish_box ($obj)
-{
-  ?></div><?php
-}
+  protected function _finish_box ($obj)
+  {
+    ?></div><?php
+    $this->_first_cell_in_row = false;
+  }
 
   /**
    * Finish rendering a row.
    * @param object $obj
    * @access private
    */
-protected function _finish_row ($obj)
-{
-}
+  protected function _finish_row($obj)
+  {
+  }
 
   /**
    * Finish rendering the grid.
@@ -914,6 +928,21 @@ protected function _finish_row ($obj)
 
     return $Result;
   }
+
+  protected function _class_for_box()
+  {
+    $result = parent::_class_for_box();
+    if ($this->_first_cell_in_row)
+    {
+      $result .= ' clear-both';
+    }
+
+    return $result;
+  }
+
+  /**
+   * @var boolean */
+  private $_first_cell_in_row;
 }
 
 /**
