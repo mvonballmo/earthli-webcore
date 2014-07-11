@@ -482,7 +482,7 @@ class RELEASE_DATE_STATUS extends WEBCORE_OBJECT
       $Result = $date->format ($f);
       if (! $text_only)
       {
-        $Result = '<span class="visible" style="white-space: nowrap">' . $Result . '</span>';
+        $Result = '<span class="visible">' . $Result . '</span>';
       }
     }
 

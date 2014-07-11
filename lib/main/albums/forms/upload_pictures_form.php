@@ -178,8 +178,25 @@ class UPLOAD_PICTURES_FORM extends ID_BASED_FORM
   protected function _draw_controls ($renderer)
   {
     $renderer->start ();
+    $renderer->draw_file_row ('zipfile');
     $renderer->draw_text_line_row ('title');
-    $renderer->draw_text_line_row ('starting_index');
+
+    $options = new FORM_TEXT_CONTROL_OPTIONS ();
+    $options->css_class = 'small';
+    $renderer->draw_text_line_row ('starting_index', $options);
+
+    $options = new FORM_TEXT_CONTROL_OPTIONS ();
+    $options->css_class = 'tiny';
+
+    $renderer->start_row ('Thumbnails');
+    $props = $renderer->make_check_properties ();
+    $props->text = ' no larger than ' . $renderer->text_line_as_html ('thumbnail_size', $options). ' pixels.';
+    $props->on_click_script = 'on_click_thumbnail (this)';
+    $props->css_class = 'text-line';
+    echo $renderer->check_box_as_html ('create_thumbnail', $props);
+    $renderer->finish_row ();
+    $renderer->draw_error_row ('thumbnail_size');
+
     $renderer->start_block ('Day');
 
     $props = $renderer->make_list_properties ();
@@ -197,22 +214,9 @@ class UPLOAD_PICTURES_FORM extends ID_BASED_FORM
 
     $renderer->finish_block ();
 
-    $renderer->draw_file_row ('zipfile');
-
-    $options = new FORM_TEXT_CONTROL_OPTIONS ();
-    $options->css_class = 'tiny';
-    
-    $renderer->start_row ('Thumbnails');
-    $props = $renderer->make_check_properties ();
-    $props->text = ' no larger than ' . $renderer->text_line_as_html ('thumbnail_size', $options). ' pixels.';
-    $props->on_click_script = 'on_click_thumbnail (this)';
-    $props->css_class = 'text-line';
-    echo $renderer->check_box_as_html ('create_thumbnail', $props);
-    $renderer->finish_row ();
-    $renderer->draw_error_row ('thumbnail_size');
-
     $renderer->draw_submit_button_row ();
     $renderer->finish ();
   }
 }
+
 ?>

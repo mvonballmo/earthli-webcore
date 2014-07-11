@@ -51,7 +51,7 @@ table
 
   th
   {
-    font-weight: bold;
+    font-weight: normal;
     border-bottom: @hairline_border_width solid @standard_border_color;
 
     &.numeric
@@ -196,6 +196,24 @@ table
     }
   }
 
+  &.top > tbody > tr
+  {
+    > td,
+    > th
+    {
+      vertical-align: baseline;
+    }
+  }
+
+  &.bottom > tbody > tr
+  {
+    > td,
+    > th
+    {
+      vertical-align: bottom;
+    }
+  }
+
   &.panels
   {
     td
@@ -308,6 +326,16 @@ pre > code
   padding-left: @standard_spacing;
   border-left: @thick_border_width solid @code_border_color;
   margin: @standard_spacing 0 @standard_spacing -@thick_border_width;
+
+  .reserved
+  {
+    font-weight: bold;
+  }
+
+  .comment
+  {
+
+  }
 }
 
 .chart > .chart-body > pre > code
@@ -390,7 +418,6 @@ pre > code
 .banner-title
 {
   display: inline-block;
-  font-weight: bold;
 }
 
 .newsfeed
@@ -1106,11 +1133,6 @@ button + .menu-items.buttons,
   font-style: italic
 }
 
-.reserved
-{
-  font-weight: bold
-}
-
 .selected
 {
   font-weight: normal;
@@ -1602,6 +1624,8 @@ hr
 .fill-viewport
 {
   height: 100%;
+  width: 100%;
+  border: none;
 }
 
 .column-set
@@ -1625,19 +1649,28 @@ hr
   width: 75%;
 }
 
-.first-of-two-columns
+.two-columns
 {
-  width: 50%;
-  padding-right: 8px;
   .border-box();
+  width: 50%;
+
+  + .two-columns
+  {
+    margin-left: @standard_spacing;
+  }
 }
 
-.second-of-two-columns
+.three-columns
 {
-  width: 50%;
-  padding-left: 7px;
   .border-box();
+  width: 33%;
+
+  + .three-columns
+  {
+    margin-left: @standard_spacing;
+  }
 }
+
 
 .overlay-container
 {
@@ -1658,6 +1691,11 @@ hr
       opacity: 1;
     }
   }
+}
+
+.unavailable
+{
+  opacity: 0.25;
 }
 
 .top-left-overlay

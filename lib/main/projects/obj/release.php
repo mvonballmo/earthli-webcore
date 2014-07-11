@@ -494,34 +494,6 @@ class RELEASE extends OBJECT_IN_FOLDER
   }
 
   /**
-   * Format a date for status displays.
-   * @param DATE_TIME $date
-   * @param boolean $text_only Omit all tags if True.
-   * @return string
-   * @access private
-   */
-  protected function _date_as_text ($date, $text_only)
-  {
-    $Result = '';
-
-    if ($date->is_valid ())
-    {
-      $f = $date->formatter ();
-      $f->type = Date_time_format_date_only;
-      $f->show_local_time = ! $text_only && $this->context->local_times_allowed ();
-      $f->show_CSS = ! $text_only;
-
-      $Result = $date->format ($f);
-      if (! $text_only)
-      {
-        $Result = '<span class="visible" style="white-space: nowrap">' . $Result . '</span>';
-      }
-    }
-
-    return $Result;
-  }
-
-  /**
    * Create a status object describing this release.
    * @param bool $text_only
    * @return RELEASE_STATUS

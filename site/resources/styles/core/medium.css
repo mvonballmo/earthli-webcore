@@ -41,7 +41,8 @@ h3
 
 body,
 h4,
-pre
+pre,
+.button
 {
   font-size: 12pt
 }
@@ -51,9 +52,9 @@ h5,
 .notes,
 .info-box-bottom,
 .info-box-top,
+.subdued,
 .login-status,
 .footnote-reference,
-.subdued,
 .basic-form .description,
 .message-box .description
 {

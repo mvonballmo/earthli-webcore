@@ -100,6 +100,8 @@ class CREATE_FOLDER_PERMISSIONS_FORM extends ID_BASED_FORM
    */
   protected function _draw_controls ($renderer)
   {
+    $renderer->labels_css_class = 'top';
+
     /** @var FOLDER $folder */
     $folder = $this->_object;
     if (! $folder->defines_security ())
