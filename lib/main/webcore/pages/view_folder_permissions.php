@@ -51,45 +51,117 @@ http://www.earthli.com/software/webcore
 
     $formatter = new PERMISSIONS_FORMATTER ($App);
     $privilege_groups = $formatter->content_privilege_groups ();
-  ?>
-  <div class="top-box">
-    <div class="button-content">
-    <?php
+
     include_once ('webcore/util/options.php');
-    $option = new STORED_OPTION ($App, 'show_security_tree');
-    $show_tree = $option->value ();
-    $opt_link = $option->setter_url_as_html (! $show_tree);
+    $tree_option = new STORED_OPTION ($App, 'show_security_tree');
+    $show_tree = $tree_option->value ();
+    $tree_opt_link = $tree_option->setter_url_as_html (! $show_tree);
 
-    if (! $show_tree)
-    {
-      $icon = '{icons}buttons/show_list';
-      $caption = 'Show folders';
-    }
-    else
-    {
-      $icon = '{icons}buttons/close';
-      $caption = 'Hide folders';
-    }
+    $details_option = new STORED_OPTION ($App, 'show_full_permissions');
+    $show_details = $details_option->value ();
+    $details_opt_link = $details_option->setter_url_as_html (! $show_details);
 
-    $renderer = $App->make_controls_renderer ();
-
-    echo $renderer->button_as_html($caption, $opt_link, $icon);
-
-    if ($folder->defines_security ())
-    {
-      echo $renderer->button_as_html('Revert to inherited...', 'create_folder_permissions.php?id=' . $folder->id, '{icons}buttons/restore');
-    }
-    else
-    {
-      echo $renderer->button_as_html('Define permissions...', 'create_folder_permissions.php?id=' . $folder->id, '{icons}buttons/create');
-    }
+    $menu = $App->make_menu();
 
     if ($defined)
     {
-      echo $renderer->button_as_html ('Add user permissions...', 'create_folder_user_permissions.php?id=' . $folder->id, '{icons}buttons/add');
-      echo $renderer->button_as_html ('Add group permissions...', 'create_folder_group_permissions.php?id=' . $folder->id, '{icons}buttons/add');
+      $menu->append('Add user...', 'create_folder_user_permissions.php?id=' . $folder->id, '{icons}buttons/add');
+      $menu->append('Add group...', 'create_folder_group_permissions.php?id=' . $folder->id, '{icons}buttons/add');
     }
+
+    if ($folder->defines_security ())
+    {
+      $menu->append('Delete...', 'create_folder_permissions.php?id=' . $folder->id, '{icons}buttons/delete');
+    }
+    else
+    {
+      $menu->append('Define permissions...', 'create_folder_permissions.php?id=' . $folder->id, '{icons}buttons/create');
+    }
+
+    if (! $show_tree)
+    {
+      $menu->append('Show folders', $tree_opt_link, '{icons}buttons/show_list');
+    }
+    else
+    {
+      $menu->append('Hide folders', $tree_opt_link, '{icons}buttons/close');
+    }
+
+    if (! $show_details)
+    {
+      $menu->append('Detail view', $details_opt_link, '{icons}buttons/view');
+    }
+    else
+    {
+      $menu->append('Compact view', $details_opt_link, '{icons}indicators/invisible');
+    }
+
+    function draw_headers ()
+    {
+      global $privilege_groups;
+      ?>
+      <tr>
+        <td></td>
+        <?php
+        $index = 1;
+        foreach ($privilege_groups as $group)
+        {
+          ?>
+          <th><?php echo $group->title; ?></th>
+          <?php
+          $index += 1;
+        }
+        ?>
+        <td></td>
+      </tr>
+    <?php
+    }
+
+    function draw_privilege_set ($title, $perm)
+    {
+      global $formatter;
+      global $privilege_groups;
+      global $App;
+      global $show_details;
+?>
+      <th>
+        <?php echo $title; ?>
+      </th>
+<?php
+      $index = 1;
+      foreach ($privilege_groups as $group)
+      {
+        ?>
+        <td>
+          <?php
+          foreach ($group->maps as $map)
+          {
+            $class_name = $perm->privileges->enabled ($map->set_name, $map->type) ? '' : 'unavailable';
+
+            if ($show_details)
+            {
+              echo '<div class="' . $class_name . '">' . $App->get_icon_with_text($formatter->icon_url_for($map), Sixteen_px, $formatter->title_for($map)) . '</div>';
+            }
+            else
+            {
+              echo '<span class="' . $class_name . '">' . $App->get_icon_with_text($formatter->icon_url_for($map), Sixteen_px, '') . '</span>';
+            }
+          }
+          ?>
+        </td>
+        <?php
+        $index += 1;
+      }
+    }
+
     ?>
+  <div class="top-box">
+    <div class="button-content">
+    <?php
+    $menu->renderer->set_size(Menu_size_full);
+    $menu->renderer->content_mode = Menu_show_all_as_buttons;
+    $menu->display();
+  ?>
     </div>
   </div>
   <div class="main-box">
@@ -156,60 +228,57 @@ http://www.earthli.com/software/webcore
         <?php
       }
     ?>
-  <table class="basic top columns">
+  <table class="basic top columns left-labels">
   <?php
 
     $cols = sizeof ($privilege_groups) + 2;
-
-    function draw_headers ()
-    {
-      global $privilege_groups;
-      global $cols;
   ?>
-  <tr>
-  <?php
-      $index = 1;
-      foreach ($privilege_groups as $group)
-      {
-  ?>
-  <th><?php echo $group->title; ?></th>
-  <?php
-        $index += 1;
-      }
-  ?>
-  </tr>
-  <?php
-    }
-
-    function draw_privilege_set ($title, $perm)
-    {
-      global $formatter;
-      global $privilege_groups;
-      global $App;
-
-        $index = 1;
-        foreach ($privilege_groups as $group)
-        {
-    ?>
-    <td>
+    <tr>
+      <td colspan="<?php echo $cols; ?>">
+        <h2>General</h2>
+      </td>
+    </tr>
     <?php
-        foreach ($group->maps as $map)
+    draw_headers ();
+    ?>
+    <tr>
+      <?php
+      draw_privilege_set ('Registered', $security->registered_permissions ());
+      ?>
+      <td>
+        <?php
+        if ($defined)
         {
-          $class_name = $perm->privileges->enabled ($map->set_name, $map->type) ? '' : 'unavailable';
-
-//          echo '<div class="' . $class_name . '">' . $App->get_icon_with_text($formatter->icon_url_for($map), Sixteen_px, $formatter->title_for($map)) . '</div>';
-          echo '<span class="' . $class_name . '">' . $App->get_icon_with_text($formatter->icon_url_for($map), Sixteen_px, '') . '</span>';
+          $args = 'id=' . $folder->id;
+          $menu = $App->make_menu();
+          $menu->append('Edit...', 'edit_folder_all_users_permissions.php?' . $args, '{icons}buttons/edit');
+          $menu->renderer->set_size(Menu_size_minimal);
+          $menu->renderer->content_mode = Menu_show_all_as_buttons;
+          $menu->display();
         }
-    ?>
-    </td>
-    <?php
-        $index += 1;
-      }
-    }
+        ?>
+      </td>
+    </tr>
+    <tr>
+      <?php
+      draw_privilege_set ('Anonymous', $security->anonymous_permissions ());
+      ?>
+      <td>
+        <?php
+        if ($defined)
+        {
+          $args = 'id=' . $folder->id;
+          $menu = $App->make_menu();
+          $menu->append('Edit...', 'edit_folder_anon_user_permissions.php?' . $args, '{icons}buttons/edit');
+          $menu->renderer->set_size(Menu_size_minimal);
+          $menu->renderer->content_mode = Menu_show_all_as_buttons;
+          $menu->display();
+        }
+        ?>
+      </td>
+    </tr>
+<?php
 
-    if ($defined)
-    {
-    }
 
     $users = $security->user_permissions ();
 
@@ -225,36 +294,29 @@ http://www.earthli.com/software/webcore
       <?php
       if (sizeof ($users))
       {
+        draw_headers ();
         foreach ($users as $perms)
         {
           $user = $perms->user ();
           ?>
           <tr>
-            <td colspan="<?php echo $cols; ?>">
-              <h3>
-                <?php
-                if ($defined)
-                {
-                  $args = 'id=' . $folder->id . '&name=' . urlencode ($user->title);
-                  $menu = $App->make_menu();
-                  $menu->append('Edit...', 'edit_folder_user_permissions.php?' . $args, '{icons}buttons/edit');
-                  $menu->append('Delete...', 'delete_folder_user_permissions.php?' . $args, '{icons}buttons/delete');
-                  $menu->renderer->set_size(Menu_size_minimal);
-                  $menu->renderer->content_mode = Menu_show_all_as_buttons;
-                  $menu->display();
-                }
-                ?>
-                <?php echo $user->title_as_link (); ?>
-              </h3>
-            </td>
-          </tr>
-          <?php
-          draw_headers ();
-          ?>
-          <tr>
             <?php
             draw_privilege_set ($user->title_as_link (), $perms);
             ?>
+            <td>
+              <?php
+              if ($defined)
+              {
+                $args = 'id=' . $folder->id . '&name=' . urlencode ($user->title);
+                $menu = $App->make_menu();
+                $menu->append('Edit...', 'edit_folder_user_permissions.php?' . $args, '{icons}buttons/edit');
+                $menu->append('Delete...', 'delete_folder_user_permissions.php?' . $args, '{icons}buttons/delete');
+                $menu->renderer->set_size(Menu_size_minimal);
+                $menu->renderer->content_mode = Menu_show_all_as_buttons;
+                $menu->display();
+              }
+              ?>
+            </td>
           </tr>
         <?php
         }
@@ -274,94 +336,35 @@ http://www.earthli.com/software/webcore
     <?php
         if (sizeof ($groups))
         {
+          draw_headers ();
           foreach ($groups as $perms)
           {
             $group = $perms->group ();
     ?>
     <tr>
-      <td colspan="<?php echo $cols; ?>">
-        <h3>
-          <?php
-          if ($defined)
-          {
-            $args = 'id=' . $folder->id . '&group_id=' . $perms->ref_id;
-            $menu = $App->make_menu();
-            $menu->append('Edit...', 'edit_folder_group_permissions.php?' . $args, '{icons}buttons/edit');
-            $menu->append('Delete...', 'delete_folder_group_permissions.php?' . $args, '{icons}buttons/delete');
-            $menu->renderer->set_size(Menu_size_minimal);
-            $menu->renderer->content_mode = Menu_show_all_as_buttons;
-            $menu->display();
-          }
-          ?>
-          <?php echo $group->title_as_link (); ?>
-        </h3>
-      </td>
-    </tr>
-    <?php
-    draw_headers ();
-    ?>
-    <tr>
     <?php
             draw_privilege_set ($group->title_as_link (), $perms);
     ?>
+      <td>
+        <?php
+        if ($defined)
+        {
+          $args = 'id=' . $folder->id . '&group_id=' . $perms->ref_id;
+          $menu = $App->make_menu();
+          $menu->append('Edit...', 'edit_folder_group_permissions.php?' . $args, '{icons}buttons/edit');
+          $menu->append('Delete...', 'delete_folder_group_permissions.php?' . $args, '{icons}buttons/delete');
+          $menu->renderer->set_size(Menu_size_minimal);
+          $menu->renderer->content_mode = Menu_show_all_as_buttons;
+          $menu->display();
+        }
+        ?>
+      </td>
     </tr>
     <?php
           }
         }
       }
 ?>
-  <tr>
-    <td colspan="<?php echo $cols; ?>">
-      <h2>General</h2>
-    </td>
-  </tr>
-    <tr>
-      <td colspan="<?php echo $cols; ?>">
-        <h3>
-          <?php
-          if ($defined)
-          {
-            $args = 'id=' . $folder->id;
-            $menu = $App->make_menu();
-            $menu->append('Edit...', 'edit_folder_all_users_permissions.php?' . $args, '{icons}buttons/edit');
-            $menu->renderer->set_size(Menu_size_minimal);
-            $menu->renderer->content_mode = Menu_show_all_as_buttons;
-            $menu->display();
-          }
-          ?>
-          Registered
-        </h3>
-      </td>
-    </tr>
-    <tr>
-      <?php
-      draw_privilege_set ('Registered', $security->registered_permissions ());
-      ?>
-    </tr>
-    <tr>
-      <td colspan="<?php echo $cols; ?>">
-        <h3>
-          <?php
-          if ($defined)
-          {
-            $args = 'id=' . $folder->id;
-            $menu = $App->make_menu();
-            $menu->append('Edit...', 'edit_folder_anon_user_permissions.php?' . $args, '{icons}buttons/edit');
-            $menu->renderer->set_size(Menu_size_minimal);
-            $menu->renderer->content_mode = Menu_show_all_as_buttons;
-            $menu->display();
-          }
-          ?>
-          Anonymous
-        </h3>
-      </td>
-    </tr>
-    <?php draw_headers (); ?>
-    <tr>
-      <?php
-      draw_privilege_set ('Anonymous', $security->anonymous_permissions ());
-      ?>
-    </tr>
   </table>
 <?php
       if (isset ($box))

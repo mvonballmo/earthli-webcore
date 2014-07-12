@@ -24,41 +24,40 @@ For more information about the earthli WebCore, visit:
 
 http://www.earthli.com/software/webcore
 
-****************************************************************************/
+ ****************************************************************************/
 
-  $last_page = read_array_index ($_GET, 'last_page');
-  $opt_name = read_array_index ($_GET, 'opt_name');
-  $opt_value = read_array_index ($_GET, 'opt_value');
-  $opt_page_context = read_array_index ($_GET, 'opt_page_context');
-  $opt_duration = read_array_index ($_GET, 'opt_duration');
-  
-  if (isset ($App) && ! $opt_page_context)
+$last_page = read_array_index($_GET, 'last_page');
+$opt_name = read_array_index($_GET, 'opt_name');
+$opt_value = read_array_index($_GET, 'opt_value');
+$opt_page_context = read_array_index($_GET, 'opt_page_context');
+$opt_duration = read_array_index($_GET, 'opt_duration');
+
+if (isset ($App) && !$opt_page_context)
+{
+  $context = $App;
+}
+else
+{
+  $context = $Page;
+}
+
+if ($last_page && $opt_name)
+{
+  if (is_numeric($opt_duration))
   {
-    $context = $App;
+    $context->storage->expire_in_n_days($opt_duration);
   }
   else
   {
-    $context = $Page;
+    $context->storage->expire_in_n_days($context->storage_options->setting_duration);
   }
 
-  if ($last_page && $opt_name)
-  {
-    if (is_numeric ($opt_duration))
-    {
-      $context->storage->expire_in_n_days ($opt_duration);
-    }
-    else
-    {
-      $context->storage->expire_in_n_days ($context->storage_options->setting_duration);
-    }
-    
-    $context->storage->set_value ($opt_name, $opt_value);
-    $Env->redirect_root ($last_page);
-  }
-  else
-  {
-    $Page->start_display ();
-    echo "<div class=\"error\">Could not set [$opt_name] to [$opt_value].</div>";
-    $Page->finish_display ();
-  }
-?>
+  $context->storage->set_value($opt_name, $opt_value);
+  $Env->redirect_root($last_page);
+}
+else
+{
+  $Page->start_display();
+  echo "<div class=\"error\">Could not set [$opt_name] to [$opt_value].</div>";
+  $Page->finish_display();
+}

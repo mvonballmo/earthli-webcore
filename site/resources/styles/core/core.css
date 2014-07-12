@@ -97,7 +97,7 @@ table.columns > tbody > tr > th:last-child {
 table.numeric-data td {
   text-align: right;
 }
-table.left-labels > tbody > tr > td:first-child,
+table.left-labels > tbody > tr > td:not([colspan]):first-child,
 table.left-labels > tbody > tr > th:first-child {
   text-align: right;
   white-space: nowrap;
@@ -1105,7 +1105,7 @@ hr {
   display: inline-block;
 }
 .unavailable {
-  opacity: 0.25;
+  opacity: 0.20;
 }
 .top-left-overlay {
   position: absolute;
