@@ -110,7 +110,7 @@ class STORED_OPTION extends WEBCORE_OBJECT
   public function setter_url_as_html ($value)
   {
     $url = $this->_url_for_value ($value);
-    return $url->as_html ();
+    return $url->as_text();
   }
 
   /**
