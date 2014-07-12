@@ -166,14 +166,8 @@ class FOLDER_GROUP_PERMISSIONS_CREATE_FORM extends FOLDER_PERMISSIONS_FORM
    */
   protected function _draw_permission_controls ($renderer, $formatter)
   {
-    $options = new FORM_TEXT_CONTROL_OPTIONS ();
-    $options->css_class = 'medium';
-
-    $renderer->draw_text_line_row ('group_name', $options);
-
-    $buttons [] = $renderer->javascript_button_as_HTML ('Browse...', 'field.show_picker()', '{icons}buttons/browse');
-    $renderer->draw_buttons_in_row ($buttons);
-
+    $renderer->draw_text_line_with_browse_button_row ('group_name', 'field.show_picker()');
+    
     parent::_draw_permission_controls ($renderer, $formatter);
   }
 }
