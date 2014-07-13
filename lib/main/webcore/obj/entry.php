@@ -49,26 +49,6 @@ require_once ('webcore/obj/attachment_host.php');
 class ENTRY extends ATTACHMENT_HOST
 {
   /**
-   * The last modification time, either of the entry itself or a comment.
-   * @return DATE_TIME
-   */
-  public function time_changed ()
-  {
-    $this->_load_change_info ();
-    return $this->_time_changed;
-  }
-
-  /**
-   * The last modifier, either of the entry itself or a comment.
-   * @return USER
-   */
-  public function changer ()
-  {
-    $this->_load_change_info ();
-    return $this->_changer;
-  }
-
-  /**
    * A query that addresses all the comments for this entry.
    * @return ENTRY_COMMENT_QUERY
    */
@@ -98,7 +78,7 @@ class ENTRY extends ATTACHMENT_HOST
   public function title_formatter ()
   {
     $Result = parent::title_formatter ();
-    $Result->page_name = $this->app->page_names->entry_home;
+    $Result->set_name($this->app->page_names->entry_home);
     $Result->max_visible_output_chars = $this->app->max_title_size ('entry');
     return $Result;
   }
@@ -109,9 +89,9 @@ class ENTRY extends ATTACHMENT_HOST
   public function store_to ($storage)
   {
     parent::store_to ($storage);
-    $tname =$this->table_name ();
-    $fldr_id = $this->parent_folder_id ();
-    $storage->add ($tname, 'folder_id', Field_type_integer, $fldr_id);
+    $table_name =$this->table_name ();
+    $folder_id = $this->parent_folder_id ();
+    $storage->add ($table_name, 'folder_id', Field_type_integer, $folder_id);
   }
 
   /**
@@ -151,6 +131,7 @@ class ENTRY extends ATTACHMENT_HOST
   protected function _purge ($options)
   {
     $comment_query = $this->comment_query ();
+    /** @var COMMENT[] $comments */
     $comments = $comment_query->objects ();
     
     foreach ($comments as &$comment)
@@ -181,36 +162,10 @@ class ENTRY extends ATTACHMENT_HOST
   protected function _make_comment ()
   {
     $class_name = $this->app->final_class_name ('COMMENT', 'webcore/obj/comment.php');
+    /** @var COMMENT $Result */
     $Result = new $class_name ($this->app);
     $Result->set_entry ($this);
     return $Result;
-  }
-
-  /**
-   * @access private
-   */
-  protected function _load_change_info ()
-  {
-    if (! isset ($this->_latest_comment_time))
-    {
-      $qs = "SELECT com.creator_id, com.time_created FROM {$this->app->table_names->comments} com" .
-            " INNER JOIN {$this->app->table_names->entries} entry on com.entry_id = entry.id" .
-            " WHERE ORDER BY com.time_created DESC LIMIT 1";
-
-      $this->db->logged_query ($qs);
-
-      if ($this->db->next_record ())
-      {
-        $this->_time_changed = $this->app->make_date_time ();
-        $this->_time_changed->set_from_iso ($this->db->f ('time_created'));
-        $this->_changer = $this->app->user_at_id ($this->db->f ('id'));
-      }
-      else
-      {
-        $this->_time_changed = $this->time_modified;
-        $this->_changer = $this->modifier ();
-      }
-    }
   }
 
   /**
@@ -236,7 +191,7 @@ class ENTRY extends ATTACHMENT_HOST
   /**
    * Return default handler objects for supported tasks.
    * @param string $handler_type Specific functionality required.
-   * @param object $options
+   * @param OBJECT_RENDERER_OPTIONS $options
    * @return object
    * @access private
    */
@@ -252,7 +207,7 @@ class ENTRY extends ATTACHMENT_HOST
         return new ENTRY_COMMANDS ($this);
       case Handler_history_item:
         include_once ('webcore/obj/webcore_history_items.php');
-        return new ENTRY_HISTORY_ITEM ($this->app, $options);
+        return new ENTRY_HISTORY_ITEM ($this->app);
       case Handler_rss_renderer:
         include_once ('webcore/gui/rss_renderer.php');
         return new ENTRY_RSS_RENDERER ($this->app, $options);
@@ -503,9 +458,10 @@ class DRAFTABLE_ENTRY extends ENTRY
         // State changed; check history items and revoke notification for published items
         
         $history_item_query = $this->history_item_query ();
+        /** @var HISTORY_ITEM[] $history_items */
         $history_items = $history_item_query->objects ();
         
-        foreach ($history_items as &$history_item)
+        foreach ($history_items as $history_item)
         {
           if (($history_item->kind == History_item_published) && ($history_item->publication_state == History_item_needs_send))
           {
@@ -569,7 +525,7 @@ class DRAFTABLE_ENTRY extends ENTRY
   /**
    * Return default handler objects for supported tasks.
    * @param string $handler_type Specific functionality required.
-   * @param object $options
+   * @param OBJECT_RENDERER_OPTIONS $options
    * @return object
    */
   protected function _default_handler_for ($handler_type, $options = null)
@@ -606,5 +562,3 @@ class DRAFTABLE_ENTRY extends ENTRY
     $this->time_published = clone ($other->time_published);
   }
 }
-
-?>

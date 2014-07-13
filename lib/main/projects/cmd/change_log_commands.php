@@ -153,12 +153,12 @@ class BRANCH_CHANGE_LOG_COMMANDS extends CHANGE_LOG_COMMANDS
     $cmd->id = 'show_releases';
     if ($show_all)
     {
-      $cmd->caption = 'Show Unassigned';
+      $cmd->caption = 'Show Unreleased';
       $cmd->icon = '{icons}indicators/question';
     }
     else
     {
-      $cmd->caption = 'Show Releases';
+      $cmd->caption = 'Show Released';
       $cmd->icon = '{app_icons}buttons/new_release';
     }
     $url = new URL ($this->env->url (Url_part_no_host_path));

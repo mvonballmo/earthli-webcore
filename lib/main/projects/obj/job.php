@@ -171,6 +171,42 @@ class JOB extends PROJECT_ENTRY
     return null;
   }
 
+  public function changer()
+  {
+    /** @var $branch_info JOB_BRANCH_INFO */
+    $branch_info = $this->main_branch_info ();
+
+    if ($branch_info->is_closed())
+    {
+      return $branch_info->closer();
+    }
+
+    return $this->modifier();
+  }
+
+  public function time_changed()
+  {
+    /** @var $branch_info JOB_BRANCH_INFO */
+    $branch_info = $this->main_branch_info ();
+
+    if ($branch_info->is_closed())
+    {
+      return $branch_info->time_closed;
+    }
+
+    if ($branch_info->time_status_changed->is_valid())
+    {
+      return $branch_info->time_status_changed;
+    }
+
+    if ($this->time_assignee_changed->is_valid())
+    {
+      return $this->time_assignee_changed;
+    }
+
+    return $this->time_modified;
+  }
+
   /**
    * Who reported this job?
    * This is the user that causes the job to be created. It can be different
@@ -248,20 +284,20 @@ class JOB extends PROJECT_ENTRY
   public function store_to ($storage)
   {
     parent::store_to ($storage);
-    $tname = $this->secondary_table_name ();
-    $storage->add ($tname, 'time_needed', Field_type_date_time, $this->time_needed);
-    $storage->add ($tname, 'time_assignee_changed', Field_type_date_time, $this->time_assignee_changed);
-    $storage->add ($tname, 'assignee_id', Field_type_integer, $this->assignee_id);
-    $storage->add ($tname, 'reporter_id', Field_type_integer, $this->reporter_id);
+    $table_name = $this->secondary_table_name ();
+    $storage->add ($table_name, 'time_needed', Field_type_date_time, $this->time_needed);
+    $storage->add ($table_name, 'time_assignee_changed', Field_type_date_time, $this->time_assignee_changed);
+    $storage->add ($table_name, 'assignee_id', Field_type_integer, $this->assignee_id);
+    $storage->add ($table_name, 'reporter_id', Field_type_integer, $this->reporter_id);
 
-    $storage->add ($tname, 'status', Field_type_integer, $this->_main_branch_info->status);
-    $storage->add ($tname, 'priority', Field_type_integer, $this->_main_branch_info->priority);
-    $storage->add ($tname, 'closer_id', Field_type_integer, $this->_main_branch_info->closer_id);
+    $storage->add ($table_name, 'status', Field_type_integer, $this->_main_branch_info->status);
+    $storage->add ($table_name, 'priority', Field_type_integer, $this->_main_branch_info->priority);
+    $storage->add ($table_name, 'closer_id', Field_type_integer, $this->_main_branch_info->closer_id);
     if ($this->_main_branch_info->closer_id)
     {
-      $storage->add ($tname, 'time_closed', Field_type_date_time, $this->_main_branch_info->time_closed);
+      $storage->add ($table_name, 'time_closed', Field_type_date_time, $this->_main_branch_info->time_closed);
     }
-    $storage->add ($tname, 'time_status_changed', Field_type_date_time, $this->_main_branch_info->time_status_changed);
+    $storage->add ($table_name, 'time_status_changed', Field_type_date_time, $this->_main_branch_info->time_status_changed);
   }
 
   /**

@@ -82,7 +82,7 @@ http://www.earthli.com/software/webcore/projects
   <div class="button-content">
   <?php
   $class_name = $App->final_class_name ('BRANCH_CHANGE_LOG_COMMANDS', 'projects/cmd/change_log_commands.php');
-  /** @var $commands COMMANDS */
+  /** @var $commands BRANCH_CHANGE_LOG_COMMANDS */
   $commands = new $class_name ($App);
   $renderer = $App->make_menu_renderer ();
   $renderer->set_size(Menu_size_full);
@@ -95,7 +95,15 @@ http://www.earthli.com/software/webcore/projects
 <?php
     }
 
-    if (! $show_all)
+    if ($show_all)
+    {
+      $jobs = array ();
+
+      $rel_query = $branch->release_query ();
+      $rel_query->restrict_by_op ('rel.state', array (Locked, Shipped), Operator_in);
+      $releases = $rel_query->objects ();
+    }
+    else
     {
       $entry_query = $branch->entry_query ();
       $entry_query->add_select ('IFNULL(ctob.branch_time_applied, jtob.branch_time_closed) as time_to_use');
@@ -103,25 +111,10 @@ http://www.earthli.com/software/webcore/projects
       $entry_query->restrict ('((ctob.branch_applier_id <> 0) OR (jtob.branch_closer_id <> 0)) AND NOT ((ctob.branch_applier_id <> 0) AND (jtob.branch_closer_id <> 0))');
       $entry_query->restrict ('etob.branch_release_id = 0');
       $entry_query->set_order ('comp.title ASC, entry.kind, time_to_use DESC');
-      $entries = $entry_query->objects ();
-    }
-    else
-    {
-      $entries = array ();
-    }
+      $jobs = $entry_query->objects ();
 
-    if ($show_all)
-    {
-      $rel_query = $branch->release_query ();
-      $rel_query->restrict_by_op ('rel.state', array (Locked, Shipped), Operator_in);
-      $rels = $rel_query->objects ();
+      $releases = array ();
     }
-    else
-    {
-      $rels = array ();
-    }
-
-    $not_used = array ();
 
     $class_name = $App->final_class_name ('CHANGE_LOG', 'projects/gui/change_log.php');
     /** @var $change_log CHANGE_LOG */
@@ -129,7 +122,7 @@ http://www.earthli.com/software/webcore/projects
     $change_log->show_description = $show_description;
     $change_log->show_date = $show_date;
     $change_log->show_user = $show_user;
-    $change_log->display ($entries, $not_used, $rels);
+    $change_log->display ($jobs, array (), $releases);
 
     if (! $printable)
     {

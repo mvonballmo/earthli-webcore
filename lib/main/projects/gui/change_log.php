@@ -68,18 +68,18 @@ class CHANGE_LOG extends WEBCORE_OBJECT
     $this->app->display_options->overridden_max_title_size = 150;
     $this->app->date_time_toolkit->formatter->set_default_formatter (Date_time_format_short_date);
 
-    $change_idx = 0;
-    $job_idx = 0;
+    $change_index = 0;
+    $job_index = 0;
 
     // show all unassociated jobs and changes
 
     ob_start ();
-      $this->_display_entries ($jobs, 0, $job_idx);
-      $this->_display_entries ($changes, 0, $change_idx);
+      $this->_display_entries ($jobs, 0, $job_index);
+      $this->_display_entries ($changes, 0, $change_index);
       $content = ob_get_contents ();
     ob_end_clean ();
 
-    if (($job_idx > 0) || ($change_idx > 0))
+    if (($job_index > 0) || ($change_index > 0))
     {
       echo $content;
 ?>
@@ -91,14 +91,14 @@ class CHANGE_LOG extends WEBCORE_OBJECT
     {
       foreach ($releases as $rel)
       {
-        $orig_job_idx = $job_idx;
-        $orig_chng_idx = $change_idx;
+        $original_job_index = $job_index;
+        $original_change_index = $change_index;
         ob_start ();
-          $this->_display_entries ($jobs, $rel->id, $job_idx);
-          $this->_display_entries ($changes, $rel->id, $change_idx);
+          $this->_display_entries ($jobs, $rel->id, $job_index);
+          $this->_display_entries ($changes, $rel->id, $change_index);
           $content = ob_get_contents ();
         ob_end_clean ();
-        $this->_draw_release ($rel, $job_idx - $orig_job_idx, $change_idx - $orig_chng_idx);
+        $this->_draw_release ($rel, $job_index - $original_job_index, $change_index - $original_change_index);
         echo $content;
       }
     }
@@ -128,10 +128,10 @@ class CHANGE_LOG extends WEBCORE_OBJECT
    * and should increment it for each entry processed.
    * @param PROJECT_ENTRY[] $entries
    * @param integer $release_id
-   * @param integer $entry_idx
+   * @param integer $entry_index
    * @access private
    */
-  protected function _display_entries ($entries, $release_id, $entry_idx)
+  protected function _display_entries ($entries, $release_id, &$entry_index)
   {
     unset ($this->curr_day);
     unset ($this->_component_id);
@@ -139,18 +139,18 @@ class CHANGE_LOG extends WEBCORE_OBJECT
     $entry_count = sizeof ($entries);
 
     $title = new OBJECT_LIST_TITLE ($this->context);
-    
-    if ($entry_idx < $entry_count)
+
+    if ($entry_index < $entry_count)
     {
-      $branch_info = $entries [$entry_idx]->main_branch_info ();
+      $branch_info = $entries [$entry_index]->main_branch_info ();
 
       if ($branch_info->release_id == $release_id)
       {
         ob_start ();
-          $old_idx = $entry_idx;
-          while (($entry_idx < $entry_count) && ($branch_info->release_id == $release_id))
+          $current_index = $entry_index;
+          while (($entry_index < $entry_count) && ($branch_info->release_id == $release_id))
           {
-            $entry = $entries [$entry_idx];
+            $entry = $entries [$entry_index];
             if (is_a ($entry, 'JOB'))
             {
               $this->_draw_job ($entry);
@@ -159,14 +159,14 @@ class CHANGE_LOG extends WEBCORE_OBJECT
             {
               $this->_draw_change ($entry);
             }
-            $title->add_object ($entries [$entry_idx]);
-            $entry_idx += 1;
-            if ($entry_idx < $entry_count)
+            $title->add_object ($entries [$entry_index]);
+            $entry_index += 1;
+            if ($entry_index < $entry_count)
             {
-              $branch_info = $entries [$entry_idx]->main_branch_info ();
+              $branch_info = $entries [$entry_index]->main_branch_info ();
             }
           }
-          if ($old_idx != $entry_idx)
+          if ($current_index != $entry_index)
           {
             echo "</ul>\n";
           }
@@ -282,11 +282,9 @@ class CHANGE_LOG extends WEBCORE_OBJECT
    */
   protected function _draw_job ($job)
   {
-    /** @var $branch_info JOB_BRANCH_INFO */
-    $branch_info = $job->main_branch_info ();
-    $this->_draw_entry ($job, $branch_info->closer (), $branch_info->time_closed);
+    $this->_draw_entry ($job, $job->changer(), $job->time_changed());
   }
-  
+
   /**
    * Draw a change in the list.
    * @param CHANGE $change
@@ -294,7 +292,7 @@ class CHANGE_LOG extends WEBCORE_OBJECT
    */
   protected function _draw_change ($change)
   {
-    $this->_draw_entry ($change, $change->creator (), $change->time_created);
+    $this->_draw_entry ($change, $change->modifier (), $change->time_modified);
   }
 
   /**
