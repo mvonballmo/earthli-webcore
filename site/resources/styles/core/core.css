@@ -293,6 +293,7 @@ pre > code .reserved {
   padding-left: 15px;
   padding-bottom: 5px;
   border-bottom: 1px solid #c2c2c2;
+  line-height: 160%;
 }
 .top-box {
   border-bottom: 1px solid #c2c2c2;
@@ -312,10 +313,10 @@ pre > code .reserved {
   margin-top: 15px;
   margin-bottom: 15px;
 }
-.button-content button:first-child,
-.button-content a.button:first-child,
-.button-content input[type=button]:first-child,
-.button-content input[type=submit]:first-child {
+.button-content *:first-child button:first-child,
+.button-content *:first-child a.button:first-child,
+.button-content *:first-child input[type=button]:first-child,
+.button-content *:first-child input[type=submit]:first-child {
   margin-left: -5px;
 }
 .nav-item {
@@ -883,6 +884,10 @@ ul.minimal {
 ul.minimal li {
   margin: 5px 0;
   padding: 0;
+}
+ul.minimal ul,
+ul.minimal ol {
+  list-style-type: disc;
 }
 p div:first-child img:first-child {
   margin-top: 1.5em;
