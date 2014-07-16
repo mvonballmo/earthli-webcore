@@ -130,7 +130,7 @@ class SAMPLE_FORM extends FORM
     $renderer->finish_row();
     $renderer->draw_text_box_row('description');
 
-    $renderer->start_block('Block');
+    $renderer->start_block('');
 
     $props = $renderer->make_list_properties ();
     $props->show_descriptions = true;

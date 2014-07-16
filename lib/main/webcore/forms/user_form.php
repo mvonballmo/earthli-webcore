@@ -237,7 +237,7 @@ class USER_FORM extends CONTENT_OBJECT_FORM
   /**
    * Execute the form.
    * The form has been validated and can be executed.
-   * @param object $obj
+   * @param USER $obj
    * @access private
    */
   public function commit ($obj)
@@ -256,6 +256,7 @@ class USER_FORM extends CONTENT_OBJECT_FORM
          subscriber record. */
 
       $class_name = $this->app->final_class_name ('SUBSCRIBER', 'webcore/obj/subscriber.php');
+      /** @var SUBSCRIBER $subscriber */
       $subscriber = new $class_name ($this->app);
       $subscriber->email = $orig_email;
 
