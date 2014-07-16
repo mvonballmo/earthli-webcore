@@ -789,12 +789,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    */
   public function draw_text_line_with_browse_button_row($id, $browse_script, $options = null)
   {
-    $control_text = '<span class="browse">';
-    $control_text .= $this->text_line_as_html($id, $options);
-    $control_text .= $this->javascript_button_as_HTML ('Browse...', $browse_script, '{icons}buttons/browse');
-    $control_text .= '</span>';
-
-    $this->_draw_field_row ($this->_field_at ($id), $control_text, 'text-line');
+    $this->draw_text_line_with_button_row($id, $this->javascript_button_as_HTML ('Browse...', $browse_script, '{icons}buttons/browse'), $options);
   }
 
   /**
@@ -1023,12 +1018,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    */
   public function draw_icon_browser_row ($field_id)
   {
-    $this->start_row ('Icon');
-      echo $this->text_line_as_HTML ($field_id);
-    $this->finish_row ();
-    $button = $this->javascript_button_as_HTML ('Browse...', $field_id . '_field.show_picker ()', '{icons}buttons/browse');
-    $this->draw_buttons_in_row (array ($button));
-    $this->draw_error_row ($field_id);
+    $this->draw_text_line_with_button_row($field_id, $this->javascript_button_as_HTML ('Browse...', $field_id . '_field.show_picker ()', '{icons}buttons/browse'));
   }
 
   public function label_as_html($id)
