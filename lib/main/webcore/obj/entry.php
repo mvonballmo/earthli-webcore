@@ -78,7 +78,6 @@ class ENTRY extends ATTACHMENT_HOST
   public function title_formatter ()
   {
     $Result = parent::title_formatter ();
-    $Result->set_name($this->app->page_names->entry_home);
     $Result->max_visible_output_chars = $this->app->max_title_size ('entry');
     return $Result;
   }
