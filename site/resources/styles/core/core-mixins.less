@@ -45,3 +45,24 @@
   background-image: url(@url);
   background-repeat: repeat;
 }
+
+.column-width(@width)
+{
+  column-width: @width;
+  -webkit-column-width: @width;
+  -moz-column-width: @width;
+}
+
+.column-rule(@width, @style, @color)
+{
+  column-rule: @width @style @color;
+  -webkit-column-rule: @width @style @color;
+  -moz-column-rule: @width @style @color;
+}
+
+.column-gap(@width)
+{
+  column-gap: @width;
+  -webkit-column-gap: @width;
+  -moz-column-gap: @width;
+}

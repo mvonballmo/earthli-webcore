@@ -25,6 +25,7 @@ http://www.earthli.com/software/webcore
 ****************************************************************************/
 
 @import "core-values";
+@import "core-mixins";
 
 /* @group HTML Base */
 
@@ -493,7 +494,8 @@ pre > code
 
 .button-content
 {
-  *:first-child
+  > *:first-child,
+  > *:first-child > *:first-child
   {
     button:first-child,
     a.button:first-child
@@ -898,9 +900,12 @@ button + .menu-items.buttons,
   display: inline;
 }
 
-.menu-items.buttons > li + li
+.menu-items.buttons
 {
-  padding-left: @button_spacing;
+  > li + li
+  {
+    padding-left: @button_spacing;
+  }
 }
 
 .menu-items.standard li:before
@@ -1028,20 +1033,11 @@ button + .menu-items.buttons,
 
 .object-navigator .links
 {
-  white-space: nowrap;
   margin: @standard_spacing 0;
 
-  column-width: 250px;
-  -webkit-column-width: 250px;
-  -moz-column-width: 250px;
-
-  column-rule: @hairline_border_width solid @standard_border_color;
-  -webkit-column-rule: @hairline_border_width solid @standard_border_color;
-  -moz-column-rule: @hairline_border_width solid @standard_border_color;
-
-  column-gap: @standard_spacing;
-  -webkit-column-gap: @standard_spacing;
-  -moz-column-gap: @standard_spacing;
+  .column-width(250px);
+  .column-rule(@hairline_border_width, solid, @standard_border_color);
+  .column-gap(@standard_spacing);
 }
 
 .object-list li

@@ -313,10 +313,14 @@ pre > code .reserved {
   margin-top: 15px;
   margin-bottom: 15px;
 }
-.button-content *:first-child button:first-child,
-.button-content *:first-child a.button:first-child,
-.button-content *:first-child input[type=button]:first-child,
-.button-content *:first-child input[type=submit]:first-child {
+.button-content > *:first-child button:first-child,
+.button-content > *:first-child > *:first-child button:first-child,
+.button-content > *:first-child a.button:first-child,
+.button-content > *:first-child > *:first-child a.button:first-child,
+.button-content > *:first-child input[type=button]:first-child,
+.button-content > *:first-child > *:first-child input[type=button]:first-child,
+.button-content > *:first-child input[type=submit]:first-child,
+.button-content > *:first-child > *:first-child input[type=submit]:first-child {
   margin-left: -5px;
 }
 .nav-item {
@@ -684,7 +688,6 @@ input[type=submit] + .menu-items.buttons,
   margin-top: 5px;
 }
 .object-navigator .links {
-  white-space: nowrap;
   margin: 15px 0;
   column-width: 250px;
   -webkit-column-width: 250px;
