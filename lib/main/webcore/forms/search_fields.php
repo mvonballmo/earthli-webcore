@@ -1106,7 +1106,7 @@ class SEARCH_OBJECT_FIELDS extends WEBCORE_OBJECT
 
     if (read_var ('quick_search'))
     {
-      $layer = $renderer->start_layer_row ('advanced-search-settings', '', 'Click the arrow for advanced settings');
+      $layer = $renderer->start_layer_row ('advanced-search-settings', 'Advanced', 'Click the arrow for advanced settings');
     }
 
     $props = $renderer->make_list_properties ();
