@@ -27,6 +27,8 @@ http://www.earthli.com/software/webcore
 ****************************************************************************/
 
   $search_type = read_var ('type');
+
+  /** @var OBJECT_IN_FOLDER_SEARCH $search */
   $search = $App->make_search ($search_type);
 
   if (isset ($search))
@@ -62,7 +64,7 @@ http://www.earthli.com/software/webcore
 
     if (isset ($folder))
     {
-      $search->folder_from_context = $folder;
+      $search->set_folder_from_context($folder);
       $Page->location->add_folder_link ($folder);
       $Page->title->add_object ($folder);          
     }
