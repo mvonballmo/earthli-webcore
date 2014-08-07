@@ -59,11 +59,11 @@ class USER_SUBSCRIPTION_OPTIONS_FORM extends SUBSCRIPTION_FORM
   public $button_icon = '{icons}buttons/save';
   
   /**
-   * @param APPLICATION $app Main application.
+   * @param APPLICATION $context Main application.
    */
-  public function __construct ($app)
+  public function __construct ($context)
   {
-    parent::__construct ($app);
+    parent::__construct ($context);
 
     $field = new EMAIL_FIELD ();
     $field->id = 'new_email';
@@ -384,10 +384,9 @@ class USER_SUBSCRIPTION_OPTIONS_FORM extends SUBSCRIPTION_FORM
     $renderer->start ();
 
     $options = new FORM_TEXT_CONTROL_OPTIONS ();
-    $options->width = '20em';
+    $options->css_class = 'medium';
     
     $renderer->draw_text_line_row ('new_email', $options);
-    $renderer->draw_separator ();
 
     $props = $renderer->make_list_properties ();
     $props->on_click_script = 'on_min_hours_to_wait (this)';
@@ -402,62 +401,52 @@ class USER_SUBSCRIPTION_OPTIONS_FORM extends SUBSCRIPTION_FORM
     $props->add_item ('Once per month', 720);
     $renderer->draw_drop_down_row ('min_hours_to_wait', $props);
 
-    $renderer->draw_separator ();
-
     $props = $renderer->make_list_properties ();
     $props->add_item ('HTML', 1);
     $props->add_item ('Plain text', 0);
     $renderer->draw_radio_group_row ('send_as_html', $props);
 
-    $renderer->draw_separator ();
-    $layer = $renderer->start_layer_row ('advanced', 'Advanced', '%s more options.');
+    $renderer->start_block('');
 
-    $options->width = '3em';
+    $options->css_class = 'tiny';
 
     $props = $renderer->make_list_properties ();
     $props->on_click_script = 'on_change_text_option (this)';
-    $props->smart_wrapping = true;
     $props->add_item ('Send all available text.', 0);
-    $props->add_item ('Send at most ', 1, '', true, $renderer->text_line_as_HTML ('preferred_text_length', $options) . ' characters.');
+
+    // TODO add ability to send CSS class 'text-line' here
+
+    $item = $props->add_item ('Send at most ', 1, '', true, $renderer->text_line_as_HTML ('preferred_text_length', $options) . ' characters.');
+    $item->css_class = 'text-line';
     $renderer->draw_radio_group_row ('text_options', $props);
     $renderer->draw_error_row ('preferred_text_length');
 
-    $renderer->draw_separator ();
-
     $props = $renderer->make_list_properties ();
     $props->on_click_script = 'on_group_objects (this)';
-    $props->smart_wrapping = true;
     $props->add_item ('One item per message.', 0);
-    $props->add_item ('Group items if there are more than ', 1, '', true, $renderer->text_line_as_HTML ('max_individual_messages', $options) . ' at once.');
+    $item = $props->add_item ('Group items if there are more than ', 1, '', true, $renderer->text_line_as_HTML ('max_individual_messages', $options) . ' at once.');
+    $item->css_class = 'text-line';
     $renderer->draw_radio_group_row ('group_objects', $props);
     $renderer->draw_error_row ('max_individual_messages');
 
-    $renderer->draw_separator ();
-
     $props = $renderer->make_list_properties ();
     $props->on_click_script = 'on_split_objects (this)';
-    $props->smart_wrapping = true;
     $props->add_item ('Send only one message.', 0);
-    $props->add_item ('Send at most ', 1, '', true, $renderer->text_line_as_HTML ('max_items_per_message', $options) . ' items per message.');
+    $item = $props->add_item ('Send at most ', 1, '', true, $renderer->text_line_as_HTML ('max_items_per_message', $options) . ' items per message.');
+    $item->css_class = 'text-line';
     $renderer->draw_radio_group_row ('split_objects', $props);
     $renderer->draw_error_row ('max_items_per_message');
 
-    $renderer->draw_separator ();
-
-    $renderer->draw_check_box_row ('send_own_changes');
     $check_props = $renderer->make_check_properties ();
     $check_props->on_click_script = 'on_show_history_items (this)';
+
+    $renderer->draw_check_box_row ('send_own_changes');
     $renderer->draw_check_box_row ('show_history_items', $check_props);
-    $renderer->start_row (' ');
-      $renderer->start_block ();
-      $renderer->draw_check_box_row ('group_history_items');
-      $renderer->finish_block ();
-    $renderer->finish_row ();
+    $renderer->draw_check_box_row ('group_history_items');
     $renderer->draw_check_box_row ('show_history_item_as_subject');
 
-    $renderer->finish_layer_row ($layer);
+    $renderer->finish_block();
 
-    $renderer->draw_separator ();
     $renderer->draw_submit_button_row ();
 
     $renderer->finish ();

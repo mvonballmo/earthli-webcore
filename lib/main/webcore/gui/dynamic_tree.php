@@ -56,6 +56,7 @@ class DYNAMIC_TREE extends HTML_TREE
     parent::__construct ($context);
 
     $this->_layer = $context->make_layer ();
+    $this->_layer->css_class = 'tree-node-list';
   }
 
   /**

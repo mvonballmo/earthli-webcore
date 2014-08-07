@@ -49,39 +49,15 @@ require_once ('webcore/gui/grid.php');
 class ATTACHMENT_GRID extends STANDARD_GRID
 {
   /**
-   * @var string
+   * @param CONTEXT $context Context to which this grid belongs.
    */
-  public $box_style = '';
+  public function __construct ($context)
+  {
+    parent::__construct ($context);
 
-  /**
-   * @var boolean
-   */
-  public $show_separator = false;
-
-  /**
-   * @var string
-   */
-  public $object_name = 'Attachment';
-
-  /**
-   * @var string
-   */
-  public $width = '';
-
-  /**
-   * @var boolean
-   */
-  public $centered = false;
-
-  /**
-   * @var boolean
-   */
-  public $even_columns = true;
-
-  /**
-   * @var string
-   */
-  public $last_page;
+    $this->width = '';
+    $this->even_columns = true;
+  }
 
   /**
    * @param ATTACHMENT $obj
@@ -89,13 +65,8 @@ class ATTACHMENT_GRID extends STANDARD_GRID
    */
   protected function _draw_box ($obj)
   {
+    $this->_display_start_overlay_commands($obj);
 ?>
-<div style="position: relative">
-  <div class="top-left-overlay">
-    <?php
-    $this->_draw_menu_for ($obj, Menu_size_minimal);
-    ?>
-  </div>
   <a href="<?php echo $obj->home_page_as_html (); ?>"><?php
     if ($obj->is_image)
     {
@@ -106,12 +77,12 @@ class ATTACHMENT_GRID extends STANDARD_GRID
       }
       else
       {
-        echo $obj->icon_as_html ('100px');
+        echo $obj->icon_as_html (One_hundred_px);
       }
     }
     else
     {
-      echo $obj->icon_as_html ('100px');
+      echo $obj->icon_as_html (One_hundred_px);
     }
   ?></a>
   <h3>
@@ -127,8 +98,9 @@ class ATTACHMENT_GRID extends STANDARD_GRID
   <div class="text-flow">
   <?php echo $obj->description_as_html (); ?>
   </div>
-</div>
 <?php
+    $this->_display_finish_overlay_commands();
    }
 }
+
 ?>

@@ -57,12 +57,12 @@ abstract class ALBUM_ENTRY extends MULTI_TYPE_ENTRY
   public $date;
 
   /**
-   * @param ALBUM_APPLICATION $app Main application.
+   * @param ALBUM_APPLICATION $context Main application.
    */
-  public function __construct ($app)
+  public function __construct ($context)
   {
-    parent::__construct ($app);
-    $this->date = $app->make_date_time ();
+    parent::__construct ($context);
+    $this->date = $context->make_date_time ();
   }
 
   /**

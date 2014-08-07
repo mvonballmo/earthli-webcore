@@ -214,9 +214,9 @@ abstract class FOLDER_INHERITABLE_SETTINGS extends STORABLE
   {
     if ($this->_stores_data)
     {
-      $tname = $this->_settings_table_name ();
-      $storage->restrict ($tname, 'folder_id');
-      $storage->add ($tname, 'folder_id', Field_type_integer, $this->_definer_id, Storage_action_create);
+      $table_name = $this->_settings_table_name ();
+      $storage->restrict ($table_name, 'folder_id');
+      $storage->add ($table_name, 'folder_id', Field_type_integer, $this->_definer_id, Storage_action_create);
     }
     $this->_exists = true;
   }
@@ -252,10 +252,10 @@ abstract class FOLDER_INHERITABLE_SETTINGS extends STORABLE
 
   /**
    * Calls {@link _update_folder()} for the whole folder tree.
-   * @see FOLDER
-   * @param tree[FOLDER] $folders
+   * @param FOLDER[] $folders
    * @param FOLDER $source_folder
    * @access private
+   * @see FOLDER
    */
   protected function _update_folder_tree ($folders, $source_folder)
   {
@@ -380,7 +380,7 @@ abstract class FOLDER_INHERITABLE_SETTINGS extends STORABLE
 
   /**
    * Title for a folder's history item for inheriting this option.
-   * @param boolean $adding Is the option being added?
+   * @param bool $creating Is the option being added?
    * @return string
    * @access private
    * @abstract
@@ -389,7 +389,7 @@ abstract class FOLDER_INHERITABLE_SETTINGS extends STORABLE
 
   /**
    * Description for a folder's history item for inheriting this option.
-   * @param boolean $adding Is the option being added?
+   * @param bool $creating Is the option being added?
    * @param FOLDER $folder Folder from which the option is being added.
    * @return string
    * @access private
@@ -455,5 +455,3 @@ abstract class FOLDER_INHERITABLE_SETTINGS extends STORABLE
    */
   protected $_exists;
 }
-
-?>

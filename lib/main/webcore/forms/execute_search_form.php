@@ -91,12 +91,12 @@ class EXECUTE_SEARCH_FORM extends ID_BASED_FORM
    * If the search is <c>null</c>, the form will be shown in "quick search"
    * mode. This shows only the text search and a drop-down to select the type
    * of object to search.
-   * @param APPLICATION $app Main application.
+   * @param APPLICATION $context Main application.
    * @param SEARCH $search Build the form based on this search object.
    */
-  public function __construct ($app, $search)
+  public function __construct ($context, $search)
   {
-    parent::__construct ($app);
+    parent::__construct ($context);
 
     $this->_search = $search;
     
@@ -109,7 +109,6 @@ class EXECUTE_SEARCH_FORM extends ID_BASED_FORM
     }
     else
     {
-      $this->CSS_class = 'quick-search';
       $this->action_anchor = '';
 
       $field = new TEXT_FIELD ();
@@ -260,15 +259,16 @@ class EXECUTE_SEARCH_FORM extends ID_BASED_FORM
   {
     if (! isset ($this->_search))
     {
+      $renderer->labels_css_class = 'top';
+
       $this->button = 'Go';
-      $renderer->set_width ('13em');
-      
+
       $renderer->start ();
-        $renderer->draw_text_line_row ('search_text');
+        $renderer->draw_text_line_with_button_row('search_text', $renderer->submit_button_as_html ());
       
         $props = $renderer->make_list_properties ();
-        $props->CSS_class = 'detail';
-        
+        $props->css_class = 'detail';
+
         /* Fill with all the registered search types. */
         $type_infos = $this->app->search_type_infos ();
         foreach ($type_infos as $t)
@@ -276,11 +276,10 @@ class EXECUTE_SEARCH_FORM extends ID_BASED_FORM
           $props->add_item ($t->plural_title, $t->id);
         }
 
-        $renderer->start_row('');
-          echo $renderer->drop_down_as_html('type', $props);
-          echo '<div style="float: right">';
-          $renderer->draw_buttons(array ($renderer->submit_button_as_html ()));
-          echo '</div>';
+        $renderer->start_row();
+        echo '<div class="two-inputs">';
+        echo $renderer->drop_down_as_html('type', $props);
+        echo '</div>';
         $renderer->finish_row();
       $renderer->finish ();
     }
@@ -289,8 +288,9 @@ class EXECUTE_SEARCH_FORM extends ID_BASED_FORM
       $renderer->start ();
       $this->_search->fields->draw_fields ($this, $renderer);
 
-      $buttons [] = $renderer->submit_button_as_HTML ();
-      $renderer->draw_buttons_in_row ($buttons);
+      $renderer->start_row();
+      echo $renderer->submit_button_as_HTML ();
+      $renderer->finish_row();
 
       $renderer->finish ();
     }

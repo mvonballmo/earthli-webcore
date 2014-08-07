@@ -62,14 +62,14 @@ class AUDITABLE_RENDERER extends OBJECT_RENDERER
    * Shows creator/modifier as a box in HTML.
    * Uses {@link _echo_html_users()} to format its contents.
    * @param AUDITABLE $obj
-   * @param string $CSS_class
+   * @param string $css_class
    * @access private
    */
-  protected function _echo_html_user_information ($obj, $CSS_class = 'info-box-top')
+  protected function _echo_html_user_information ($obj, $css_class = 'info-box-top')
   {
     if ($this->_options->show_users)
     {
-      echo "<div class=\"$CSS_class\">\n";
+      echo "<div class=\"$css_class\">\n";
       $this->_echo_html_users ($obj);
       echo "</div>\n";
     }

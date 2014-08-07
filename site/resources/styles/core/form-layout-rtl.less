@@ -1,0 +1,67 @@
+@import "core-values";
+@import "form-values";
+
+.basic-form.rtl
+{
+  text-align: right;
+
+  input[type=checkbox],
+  input[type=radio]
+  {
+    float: right;
+  }
+
+  > .form-row,
+  > .group,
+  > .hint
+  {
+    margin-right: @label-area-width;
+  }
+
+  > p,
+  > div,
+  fieldset > p,
+  fieldset > div
+  {
+    clear: right;
+  }
+
+  .group,
+  .hint
+  {
+    float: right;
+    clear: right;
+  }
+
+  label:first-child
+  {
+    float: right;
+    width: @label-area-width;
+  }
+
+  .one-input label
+  {
+    margin-left: 0px;
+    margin-right: 18px;
+  }
+
+  .help
+  {
+    float: left;
+    width: 180px;
+    height: auto;
+    margin-left: 12px;
+  }
+
+  fieldset
+  {
+    padding-left: 0px;
+    margin-left: 0px;
+    clear: right;
+
+    fieldset
+    {
+      border-left-width: 0px;
+    }
+  }
+}

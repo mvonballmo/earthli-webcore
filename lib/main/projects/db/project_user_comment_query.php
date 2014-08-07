@@ -49,11 +49,11 @@ require_once ('webcore/db/user_comment_query.php');
 class PROJECT_USER_COMMENT_QUERY extends USER_MULTI_TYPE_COMMENT_QUERY
 {
   /**
-   * @param PROJECT_APPLICATION $app Main application.
+   * @param PROJECT_APPLICATION $context Main application.
    */
-  public function __construct ($app)
+  public function __construct ($context)
   {
-    parent::__construct ($app);
+    parent::__construct ($context);
 
     $this->add_select ('entry.kind as entry_kind, chng.number as chng_number, chng.job_id as chng_job_id' .
                        ', job.status as job_status, job.priority as job_priority, job.closer_id as job_closer_id' .

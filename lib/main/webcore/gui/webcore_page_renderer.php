@@ -81,5 +81,3 @@ class WEBCORE_PAGE_RENDERER extends THEMED_PAGE_RENDERER
     parent::start_display ();
   }
 }
-
-?>

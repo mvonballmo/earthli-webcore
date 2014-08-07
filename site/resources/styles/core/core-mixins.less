@@ -1,4 +1,32 @@
-@background_color: gray;
+@import "core-values";
+
+.set-color(@c)
+{
+  color: @c;
+
+  code
+  {
+    color: @c;
+  }
+}
+
+.set-title-color(@c)
+{
+  .set-color(@c);
+
+  a:link,
+  a:visited,
+  {
+    //.set-color(lighten(@c, 20%));
+  }
+}
+
+.border-box()
+{
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
 
 .engraved_border(@depth: 1px, @highlight_color: lighten(@background_color, 30%), @shadow_color: darken(@background_color, 10%))
 {
@@ -10,4 +38,31 @@
 {
   border: @depth solid;
   border-color: @highlight_color @shadow_color @shadow_color @highlight_color;
+}
+
+.repeated-background(@url) when (@url > '')
+{
+  background-image: url(@url);
+  background-repeat: repeat;
+}
+
+.column-width(@width)
+{
+  column-width: @width;
+  -webkit-column-width: @width;
+  -moz-column-width: @width;
+}
+
+.column-rule(@width, @style, @color)
+{
+  column-rule: @width @style @color;
+  -webkit-column-rule: @width @style @color;
+  -moz-column-rule: @width @style @color;
+}
+
+.column-gap(@width)
+{
+  column-gap: @width;
+  -webkit-column-gap: @width;
+  -moz-column-gap: @width;
 }

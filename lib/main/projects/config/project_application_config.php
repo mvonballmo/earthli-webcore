@@ -334,13 +334,13 @@ class JOB_STATUS_MAP extends WEBCORE_OBJECT
   public $to;
 
   /**
-   * @param APPLICATION $app
+   * @param APPLICATION $context
    * @param integer[] $from
    * @param integer $to
    */
-  public function __construct ($app, $from, $to)
+  public function __construct ($context, $from, $to)
   {
-    parent::__construct ($app);
+    parent::__construct ($context);
 
     $this->from = join (',', $from);
     $this->to = $to;
@@ -348,11 +348,13 @@ class JOB_STATUS_MAP extends WEBCORE_OBJECT
 
   /**
    * The name of the {@link $to} status.
-   * @return string
+   * @return JOB_STATUS_VALUE
    */
   public function to_status ()
   {
-    $statuses = $this->app->display_options->job_statuses ();
+    /** @var PROJECT_APPLICATION_DISPLAY_OPTIONS $display_options */
+    $display_options = $this->app->display_options;
+    $statuses = $display_options->job_statuses ();
     return $statuses [$this->to];
   }
 }

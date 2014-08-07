@@ -49,23 +49,25 @@ require_once ('webcore/gui/select_list.php');
 class ALBUM_ENTRY_LIST extends SELECT_LIST
 {
   /**
-   * @param ALBUM_APPLICATION $app Main application.
+   * @param CONTEXT $context Context to which this grid belongs.
    */
-  public function __construct ($app)
+  public function __construct ($context)
   {
-    parent::__construct ($app);
+    parent::__construct ($context);
+
     $this->append_column ('Name');
     $this->append_column ('Date');
   }
 
   /**
-   * @param ALBUM $obj
-   * @param integer $index
+   * @param ALBUM_ENTRY $obj
+   * @param integer $col_index
+   * @param integer $row_index
    * @private
    */
-  protected function _draw_column_contents ($obj, $index)
+  protected function _draw_column_contents ($obj, $col_index, $row_index)
   {
-    switch ($index)
+    switch ($col_index)
     {
     case 0:
       $this->_draw_selector ($obj);
@@ -76,11 +78,10 @@ class ALBUM_ENTRY_LIST extends SELECT_LIST
       echo $obj->title_as_link ($t);
       break;
     case 2:
+      /** @var ALBUM $folder */
       $folder = $obj->parent_folder ();
       echo $folder->format_date ($obj->date);
       break;
     }
   }
 }
-
-?>

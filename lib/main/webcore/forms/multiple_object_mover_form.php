@@ -214,8 +214,6 @@ class MULTIPLE_OBJECT_MOVER_FORM extends MULTIPLE_OBJECT_ACTION_FORM
       $renderer->finish_row ();
     }
     
-    $renderer->draw_separator ();
-
     /* Make a copy (not a reference). */
     $tree = $this->app->make_tree_renderer ();
 
@@ -240,7 +238,6 @@ class MULTIPLE_OBJECT_MOVER_FORM extends MULTIPLE_OBJECT_ACTION_FORM
     $renderer->finish_row ();
 
     $renderer->draw_error_row ('selected_folder_id');
-    $renderer->draw_separator ();
 
     $buttons [] = $renderer->button_as_HTML ('No', "view_explorer.php?id={$this->_folder->id}");
     $buttons [] = $renderer->submit_button_as_HTML ();

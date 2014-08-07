@@ -126,7 +126,7 @@ class ATTACHMENT extends OBJECT_IN_FOLDER
     }
     else
     {
-      $Result = $this->_host->resolve_url ('{att_link}' . $this->file_name, $root_override);
+      $Result = $this->_host->resolve_file ('{att_link}' . $this->file_name, $root_override);
     }
 
     return $Result;
@@ -170,17 +170,17 @@ class ATTACHMENT extends OBJECT_IN_FOLDER
 
   /**
    * Thumbnail as an HTML tag.
-   * @param string $CSS_class
+   * @param string $css_class
    * @return string
    */
-  public function thumbnail_as_html ($CSS_class = 'frame')
+  public function thumbnail_as_html ($css_class = 'frame')
   {
     $thumb_url = $this->thumbnail_url ();
     if ($thumb_url)
     {
-      if ($CSS_class)
+      if ($css_class)
       {
-        return "<img class=\"$CSS_class\" src=\"$thumb_url\" alt=\"$this->title\">\n";
+        return "<img class=\"$css_class\" src=\"$thumb_url\" alt=\"$this->title\">\n";
       }
 
       return "<img src=\"$thumb_url\" alt=\"$this->title\">\n";
@@ -190,12 +190,22 @@ class ATTACHMENT extends OBJECT_IN_FOLDER
   }
 
   /**
+   * @return string
+   */
+  public function icon_url ()
+  {
+    $ft = $this->app->file_type_manager ();
+    $url = new FILE_URL ($this->file_name);
+    return $ft->icon_url ($this->mime_type, $url->extension ());
+  }
+
+  /**
    * File type icon.
    * Retrieves file type to icon mappings from the {@link APPLICATION::file_type_manager()}.
    * @param string $size The size of the icon to return.
    * @return string
    */
-  public function icon_as_html ($size = '100px')
+  public function icon_as_html ($size = One_hundred_px)
   {
     $ft = $this->app->file_type_manager ();
     $url = new FILE_URL ($this->file_name);

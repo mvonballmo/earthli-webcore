@@ -115,12 +115,12 @@ abstract class SEARCH extends CONTENT_OBJECT
   public $fields;
 
   /**
-   * @param APPLICATION $app Main application.
+   * @param APPLICATION $context Main application.
    * @param SEARCH_OBJECT_FIELDS $fields
    */
-  public function __construct ($app, $fields)
+  public function __construct ($context, $fields)
   {
-    parent::__construct ($app);
+    parent::__construct ($context);
     $this->fields = $fields;
   }
 
@@ -402,12 +402,12 @@ class COMMENT_SEARCH extends OBJECT_IN_FOLDER_SEARCH
   public $type = 'comment';
 
   /**
-   * @param APPLICATION $app Main application.
+   * @param APPLICATION $context Main application.
    */
-  public function __construct ($app)
+  public function __construct ($context)
   {
-    $class_name = $app->final_class_name ('SEARCH_OBJECT_IN_FOLDER_FIELDS', 'webcore/forms/search_fields.php');
-    parent::__construct ($app, new $class_name ($app));
+    $class_name = $context->final_class_name ('SEARCH_OBJECT_IN_FOLDER_FIELDS', 'webcore/forms/search_fields.php');
+    parent::__construct ($context, new $class_name ($context));
   }
 
   /**
@@ -453,12 +453,12 @@ class GROUP_SEARCH extends SEARCH
   public $type = 'group';
 
   /**
-   * @param APPLICATION $app Main application.
+   * @param APPLICATION $context Main application.
    */
-  public function __construct ($app)
+  public function __construct ($context)
   {
-    $class_name = $app->final_class_name ('SEARCH_AUDITABLE_FIELDS', 'webcore/forms/search_fields.php');
-    parent::__construct ($app, new $class_name ($app));
+    $class_name = $context->final_class_name ('SEARCH_AUDITABLE_FIELDS', 'webcore/forms/search_fields.php');
+    parent::__construct ($context, new $class_name ($context));
   }
 
   /**
@@ -499,12 +499,12 @@ class USER_SEARCH extends SEARCH
   public $type = 'user';
 
   /**
-   * @param APPLICATION $app Main application.
+   * @param APPLICATION $context Main application.
    */
-  public function __construct ($app)
+  public function __construct ($context)
   {
-    $class_name = $app->final_class_name ('SEARCH_USER_OBJECT_FIELDS', 'webcore/forms/search_fields.php');
-    parent::__construct ($app, new $class_name ($app));
+    $class_name = $context->final_class_name ('SEARCH_USER_OBJECT_FIELDS', 'webcore/forms/search_fields.php');
+    parent::__construct ($context, new $class_name ($context));
   }
 
   /**
@@ -545,12 +545,12 @@ class FOLDER_SEARCH extends OBJECT_IN_FOLDER_SEARCH
   public $type = 'folder';
 
   /**
-   * @param APPLICATION $app Main application.
+   * @param APPLICATION $context Main application.
    */
-  public function __construct ($app)
+  public function __construct ($context)
   {
-    $class_name = $app->final_class_name ('SEARCH_FOLDER_FIELDS', 'webcore/forms/search_fields.php');
-    parent::__construct ($app, new $class_name ($app));
+    $class_name = $context->final_class_name ('SEARCH_FOLDER_FIELDS', 'webcore/forms/search_fields.php');
+    parent::__construct ($context, new $class_name ($context));
   }
 
   /**

@@ -68,11 +68,11 @@ class PURGE_OBJECT_FORM extends RENDERABLE_FORM
   public $show_previews_first = false;
   
   /**
-   * @param APPLICATION $app
+   * @param APPLICATION $context
    */
-  public function __construct ($app)
+  public function __construct ($context)
   {
-    parent::__construct ($app);
+    parent::__construct ($context);
     
     $field = new BOOLEAN_FIELD ();
     $field->id = 'remove_resources';
@@ -148,6 +148,7 @@ class PURGE_OBJECT_FORM extends RENDERABLE_FORM
    */
   protected function _draw_controls ($renderer)
   {
+    $renderer->labels_css_class = 'top';
     $renderer->start ();
 
     if ($this->show_object_as_link)
@@ -159,11 +160,16 @@ class PURGE_OBJECT_FORM extends RENDERABLE_FORM
       $obj_text = $this->_object->title_as_html ();
     }
 
-    $renderer->draw_text_row ('', 'Are you sure you want to purge ' . $obj_text . '?*');
-    
+    echo '<div class="message-box">';
+    echo '<div class="title">';
+    echo 'Are you sure you want to purge ' . $obj_text . '?*';
+    echo '</div>';
+    echo '<div class="description">';
+    echo '*Purging an object permanently removes it and all contained content (entries, comments, etc.) from the database.';
+    echo '</div>';
+    echo '</div>';
+
     $this->_draw_options ($renderer);
-    
-    $renderer->draw_text_row ('', '*Purging an object permanently removes it and all contained content (entries, comments, etc.) from the database.', 'notes');
 
     $buttons [] = $renderer->button_as_HTML ('No', $this->_object->home_page ());
     $buttons [] = $renderer->submit_button_as_HTML ();

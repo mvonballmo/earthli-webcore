@@ -883,12 +883,12 @@ class IMAGE_METRICS
    * If the image has been resized, the image is wrapped in a link which will pop up a window with the
    * unconstrained image in it. The image tag itself is constrained to the desired size.
    * @param string $title Title to use for the image.
-   * @param string $CSS_class CSS class to use for the image.
+   * @param string $css_class CSS class to use for the image.
    * @see as_html_without_link()
    */
-  public function as_html ($title = ' ', $CSS_class = '')
+  public function as_html ($title = ' ', $css_class = '')
   {
-    $Result = $this->as_html_without_link ($title, $CSS_class);
+    $Result = $this->as_html_without_link ($title, $css_class);
     if ($Result)
     {
       if ($this->was_resized)
@@ -906,19 +906,19 @@ class IMAGE_METRICS
    * Return HTML code for displaying the image.
    * If the image has been resized, the image tag itself is constrained to the desired size.
    * @param string $title Title to use for the image.
-   * @param string $CSS_class CSS class to use for the image.
+   * @param string $css_class CSS class to use for the image.
    * @see as_html()
    */
-  public function as_html_without_link ($title = ' ', $CSS_class = '')
+  public function as_html_without_link ($title = ' ', $css_class = '')
   {
     if (! isset ($this->_image) || $this->_image->loadable ())
     {
       $opts = global_text_options ();
       $title = $opts->convert_to_html_attribute ($title);
       $Result = '<img src="' . $this->url . '" alt="' . $title . '" title="' . $title . '"';
-      if ($CSS_class)
+      if ($css_class)
       {
-        $Result .= ' class="' . $CSS_class . '"';
+        $Result .= ' class="' . $css_class . '"';
       }
       if ($this->was_resized)
       {

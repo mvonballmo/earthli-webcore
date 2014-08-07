@@ -1,0 +1,311 @@
+/****************************************************************************
+
+Copyright (c) 2002-2014 Marco Von Ballmoos
+
+This file is part of earthli WebCore.
+
+earthli WebCore is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+earthli WebCore is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with earthli WebCore; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
+For more information about the earthli WebCore, visit:
+
+http://www.earthli.com/software/webcore
+
+****************************************************************************/
+.style-controls button,
+.style-controls input[type=submit],
+.style-controls input[type=button],
+.style-controls input[type=button],
+.style-controls input[type=submit] {
+  color: #acaeb0;
+}
+.style-controls input[type=text],
+.style-controls input[type=password],
+.style-controls select,
+.style-controls textarea {
+  background-color: #3c4349;
+  color: #acaeb0;
+  border: 1px solid #71777c;
+  border-radius: 4px;
+  padding: 4px;
+}
+.style-controls label:first-child + input[type=text],
+.style-controls label:first-child + input[type=password],
+.style-controls label:first-child + select,
+.style-controls label:first-child + textarea {
+  margin-left: -5px;
+}
+.style-controls label:first-child + div > input[type=text]:first-child,
+.style-controls label:first-child + span > input[type=text]:first-child,
+.style-controls label:first-child + div > input[type=password]:first-child,
+.style-controls label:first-child + span > input[type=password]:first-child,
+.style-controls label:first-child + div > select:first-child,
+.style-controls label:first-child + span > select:first-child,
+.style-controls label:first-child + div > textarea:first-child,
+.style-controls label:first-child + span > textarea:first-child {
+  margin-left: -5px;
+}
+.style-controls input[disabled],
+.style-controls select[disabled],
+.style-controls textarea[disabled] {
+  color: #85898d;
+  background-color: #3e454c;
+  border-color: #636a70;
+}
+.basic-form fieldset {
+  border-top: 1px solid #3e454c;
+  padding-top: 5px;
+}
+.basic-form fieldset legend {
+  padding: 2px 4px;
+  margin-left: -4px;
+}
+body {
+  background-color: #4a525a;
+  color: #cccccc;
+}
+code {
+  color: #cccccc;
+}
+pre > code {
+  border-color: #71777c;
+}
+a:link,
+a:visited {
+  color: #ffffff;
+}
+a:link code,
+a:visited code {
+  color: #ffffff;
+}
+a:hover,
+a:active {
+  color: #fcff4e;
+}
+a:hover code,
+a:active code {
+  color: #fcff4e;
+}
+h1 {
+  color: #a1c9ff;
+}
+h1 code {
+  color: #a1c9ff;
+}
+h2 {
+  color: #a1c9ff;
+}
+h2 code {
+  color: #a1c9ff;
+}
+h3 {
+  color: #a1aaff;
+}
+h3 code {
+  color: #a1aaff;
+}
+h4 {
+  color: #a1aaff;
+}
+h4 code {
+  color: #a1aaff;
+}
+.chart-title,
+.preview-title {
+  color: #a1c9ff;
+}
+.chart-title code,
+.preview-title code {
+  color: #a1c9ff;
+}
+.banner {
+  background-color: transparent;
+  color: #cccccc;
+}
+.banner a:link,
+.banner a:visited {
+  color: #ffffff;
+}
+.banner a:hover,
+.banner a:active {
+  color: #ffffff;
+}
+.banner-title {
+  color: #a1c9ff;
+}
+.footer {
+  background-color: transparent;
+  color: #cccccc;
+}
+.footer a:link,
+.footer a:visited {
+  color: #ffffff;
+}
+.footer a:hover,
+.footer a:active {
+  color: #ffffff;
+}
+.nav-box,
+.top-box,
+.footer,
+.left-sidebar,
+.right-sidebar,
+.info-box-top,
+.info-box-bottom,
+.cell-selected,
+.cell-highlight,
+.cell-non-empty,
+.description-box,
+table.columns > tbody > tr > td,
+table.columns > tbody > tr > th,
+hr,
+.abstract {
+  border-color: #71777c;
+}
+p.info-box-bottom,
+div.info-box-bottom {
+  padding-top: 5px;
+}
+p.info-box-top,
+div.info-box-top {
+  padding-bottom: 5px;
+}
+.quote-block,
+.preview,
+.chart,
+.basic-form-block,
+.pullquote {
+  border-color: #3e454c;
+}
+.object-navigator .links {
+  column-rule-color: #71777c;
+  -webkit-column-rule-color: #71777c;
+  -moz-column-rule-color: #71777c;
+}
+.info-box-top,
+.info-box-bottom,
+.subdued {
+  color: #85898d;
+}
+.info-box-top a:link,
+.info-box-bottom a:link,
+.subdued a:link,
+.info-box-top a:visited,
+.info-box-bottom a:visited,
+.subdued a:visited {
+  color: #b7babd;
+}
+.info-box-top a:hover,
+.info-box-bottom a:hover,
+.subdued a:hover,
+.info-box-top a:active,
+.info-box-bottom a:active,
+.subdued a:active {
+  color: #fcff4e;
+}
+.cell-highlight {
+  background-color: #353b41;
+  color: #cccccc;
+}
+.cell-selected {
+  background-color: #3c4349;
+  color: #cccccc;
+}
+.caution,
+.warning,
+.error {
+  color: #776655;
+}
+.caution a:link,
+.caution a:visited,
+.warning a:link,
+.warning a:visited,
+.error a:link,
+.error a:visited {
+  color: #6666cc;
+}
+.graph-foreground {
+  background-color: #a1c9ff;
+  color: #4a525a;
+}
+.highlight {
+  color: #88cc88;
+}
+.selected {
+  color: #a1c9ff;
+}
+.quote,
+.quote-inline,
+.quote-block {
+  color: #9fa1a4;
+}
+ul.menu {
+  background-color: #3c4349;
+  border-color: #71777c;
+}
+ul.menu .menu-group-title {
+  background-color: #353b41;
+  border-color: #71777c;
+}
+ul.menu .menu-item:hover {
+  background-color: #515a62;
+  border-color: #71777c;
+}
+ul.menu .menu-item-description {
+  color: #acaeb0;
+}
+.button,
+.style-controls button,
+.style-controls input[type=button],
+.style-controls input[type=submit] {
+  background-color: #3c4349;
+  border-color: #71777c;
+  color: #acaeb0;
+}
+a.button:link,
+a.button:visited {
+  color: #acaeb0;
+}
+.button.selected,
+.style-controls button.selected,
+.style-controls input[type=button].selected,
+.style-controls input[type=submit].selected {
+  background-color: #515a62;
+  border-color: #71777c;
+  color: #a1c9ff;
+}
+.button.disabled,
+.style-controls button.disabled,
+.style-controls input[type=button].disabled,
+.style-controls input[type=submit].disabled {
+  background-color: #3e454c;
+  border-color: #636a70;
+  color: #85898d;
+}
+.button:hover:not(.disabled):not(.selected),
+.style-controls button:hover:not(.disabled):not(.selected),
+.style-controls input[type=button]:hover:not(.disabled):not(.selected),
+.style-controls input[type=submit]:hover:not(.disabled):not(.selected) {
+  background-color: #515a62;
+  border-color: #71777c;
+}
+.style-controls input[type=text],
+.style-controls input[type=password],
+.style-controls select,
+.style-controls textarea {
+  background-color: #3c4349;
+  border-color: #71777c;
+  border-radius: 4px;
+  padding: 4px;
+}

@@ -50,21 +50,16 @@ require_once ('webcore/gui/select_list.php');
 class JOB_LIST extends SELECT_LIST
 {
   /**
-   * @var string display jobs only.
-   */
-  public $object_name = 'job';
-
-  /**
    * @var string Unique name for the selector controls for this list.
    */
   public $control_name = 'job_ids';
 
   /**
-   * @param PROJECT_APPLICATION $app Main application.
+   * @param PROJECT_APPLICATION $context Main application.
    */
-  public function __construct ($app)
+  public function __construct ($context)
   {
-    parent::__construct ($app);
+    parent::__construct ($context);
     $this->append_column ('Name');
     $this->append_column ('Age');
     $this->append_column ('Priority');
@@ -73,12 +68,13 @@ class JOB_LIST extends SELECT_LIST
 
   /**
    * @param JOB $obj Draw fields from this job.
-   * @param integer $index Draw the column at this index.
+   * @param integer $col_index Draw the column at this index.
+   * @param $row_index
    * @access private
    */
-  protected function _draw_column_contents ($obj, $index)
+  protected function _draw_column_contents ($obj, $col_index, $row_index)
   {
-    switch ($index)
+    switch ($col_index)
     {
     case 0:
       $this->_draw_selector ($obj);
@@ -88,7 +84,7 @@ class JOB_LIST extends SELECT_LIST
       $t = $obj->title_formatter ();
       $t->max_visible_output_chars = 0;
       $title = $obj->title_as_link($t);
-      echo $this->app->get_text_with_icon($kind_properties->icon, $title, '16px');
+      echo $this->app->get_icon_with_text($kind_properties->icon, Sixteen_px, $title);
       break;
     case 2:
       /** @var JOB_BRANCH_INFO $branch_info */
@@ -100,13 +96,13 @@ class JOB_LIST extends SELECT_LIST
       /** @var JOB_BRANCH_INFO $branch_info */
       $branch_info = $obj->main_branch_info ();
       $priority_props = $branch_info->priority_properties ();
-      echo $this->app->get_text_with_icon($priority_props->icon, $priority_props->title, '16px');
+      echo $this->app->get_icon_with_text($priority_props->icon, Sixteen_px, $priority_props->title);
       break;
     case 4:
       /** @var JOB_BRANCH_INFO $branch_info */
       $branch_info = $obj->main_branch_info ();
       $status_props = $branch_info->status_properties ();
-      echo $this->app->get_text_with_icon($status_props->icon, $status_props->title, '16px');
+      echo $this->app->get_icon_with_text($status_props->icon, Sixteen_px, $status_props->title);
       break;
     }
   }

@@ -152,7 +152,7 @@ class EXECUTE_APP_WIZARD_FORM extends FORM
   
   /**
    * Execute the form.
-   * @param TASK $obj
+   * @param APP_WIZARD_TASK $obj
    * @access private
    */
   public function commit ($obj)
@@ -188,11 +188,8 @@ class EXECUTE_APP_WIZARD_FORM extends FORM
     $renderer->draw_text_line_row ('entry_name');    
     $renderer->draw_text_line_row ('author_name');    
     $renderer->draw_text_line_row ('author_email');    
-    $renderer->draw_separator ();
     $renderer->draw_submit_button_row ();
     
     $renderer->finish ();
   }
 }
-
-?>

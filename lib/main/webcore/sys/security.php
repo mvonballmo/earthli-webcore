@@ -99,12 +99,12 @@ class FOLDER_PERMISSIONS extends NAMED_OBJECT
   public $privileges;
 
   /**
-   * @param APPLICATION $app Main application.
+   * @param APPLICATION $context Main application.
    */
-  public function __construct ($app)
+  public function __construct ($context)
   {
-    parent::__construct ($app);
-    $this->privileges = $app->make_privileges ();
+    parent::__construct ($context);
+    $this->privileges = $context->make_privileges ();
   }
 
   /**
@@ -704,11 +704,11 @@ class FOLDER_SECURITY extends FOLDER_INHERITABLE_SETTINGS
 class PERMISSIONS_FORMATTER extends WEBCORE_OBJECT
 {
   /**
-   * @param APPLICATION $app Main application.
+   * @param APPLICATION $context Main application.
    */
-  public function __construct ($app)
+  public function __construct ($context)
   {
-    parent::__construct ($app);
+    parent::__construct ($context);
 
     $this->_register_formatter (Privilege_range_object, Privilege_view, '{icons}buttons/view', 'View');
     $this->_register_formatter (Privilege_range_object, Privilege_view_history, '{icons}buttons/history', 'View history');
@@ -860,13 +860,25 @@ class PERMISSIONS_FORMATTER extends WEBCORE_OBJECT
   /**
    * Return the icon registered for this privilege.
    * @param PRIVILEGE_MAP $map Information about the privilege.
+   * @return string
+   */
+  public function icon_url_for ($map)
+  {
+    $formatter = $this->_formatters [$map->range][$map->type];
+
+    return $formatter->image;
+  }
+
+  /**
+   * Return the icon registered for this privilege.
+   * @param PRIVILEGE_MAP $map Information about the privilege.
    * @param string $size
    * @return string
    */
-  public function icon_for ($map, $size = '16px')
+  public function icon_for ($map, $size = Sixteen_px)
   {
     $formatter = $this->_formatters [$map->range][$map->type];
-    return $this->app->resolve_icon_as_html ($formatter->image, $formatter->title, $size);
+    return $this->app->resolve_icon_as_html ($formatter->image, $size, $formatter->title);
   }
 
   /**

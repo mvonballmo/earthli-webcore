@@ -428,12 +428,12 @@ class JOB_FORM extends PROJECT_ENTRY_FORM
         $renderer->draw_hidden ("branch_{$branch->id}_priority");
 
         $status = $statuses [$selected_status];
-        $renderer->draw_text_row ('Status', $status->icon_as_html ('16px') . ' ' . $status->title);
+        $renderer->draw_text_row ('Status', $this->context->get_icon_with_text($status->icon, Sixteen_px, $status->title));
         $renderer->draw_error_row ("branch_{$branch->id}_status");
 
         $priorities = $display_options->job_priorities ();
         $priority = $priorities [$this->value_for ("branch_{$branch->id}_priority")];
-        $renderer->draw_text_row ('Priority', $priority->icon_as_html ('16px') . ' ' . $priority->title);
+        $renderer->draw_text_row ('Priority', $this->context->get_icon_with_text($priority->icon, Sixteen_px, $priority->title));
         $renderer->draw_error_row ("branch_{$branch->id}_priority");
       }
     }
@@ -442,6 +442,7 @@ class JOB_FORM extends PROJECT_ENTRY_FORM
       // Draw statuses
 
       $props = $renderer->make_list_properties ();
+      $props->css_class = 'medium';
 
       foreach ($statuses as $status)
       {
@@ -452,6 +453,7 @@ class JOB_FORM extends PROJECT_ENTRY_FORM
       // Draw priorities
 
       $props = $renderer->make_list_properties ();
+      $props->css_class = 'medium';
       $priorities = $display_options->job_priorities ();
       foreach ($priorities as $priority)
       {
@@ -477,7 +479,7 @@ class JOB_FORM extends PROJECT_ENTRY_FORM
     /** @var $users USER[] */
     $users = $user_query->objects ();
     $Result = $renderer->make_list_properties ();
-    $Result->width = '15em';
+    $Result->css_class = 'medium';
     $Result->add_item ('(None)', 0);
     foreach ($users as $user)
     {
@@ -494,10 +496,8 @@ class JOB_FORM extends PROJECT_ENTRY_FORM
   {
     $renderer->start ();
     $renderer->draw_text_line_row ('title');
-    $renderer->draw_separator ();
     $this->_draw_kind_controls ($renderer);
     $this->_draw_component_controls ($renderer);
-    $renderer->draw_separator ();
 
     /** @var $folder PROJECT */
     $folder = $this->_folder;
@@ -529,29 +529,12 @@ class JOB_FORM extends PROJECT_ENTRY_FORM
 
     /* Start the branch section */
 
-    $renderer->draw_separator ();
-    $renderer->start_row ('Branches');
-?>
-  <p class="notes">
-    Assign this job to one or more of the following branches.
-  </p>
-<?php
     $this->_draw_branch_controls ($renderer);
-    $renderer->finish_row ();
 
-    $renderer->draw_separator ();
     $renderer->draw_submit_button_row ();
-
-    $renderer->draw_separator ();
     $renderer->draw_text_box_row ('description');
-
-    $renderer->draw_separator ();
     $renderer->draw_text_box_row ('extra_description');
-
-    $renderer->draw_separator ();
     $renderer->draw_submit_button_row ();
-
-    $renderer->draw_separator ();
     $renderer->draw_text_row ('Subscriptions', 'Check the following to subscribe the following users to this job.', 'notes');
 
     // TODO this should probably go in the load_from_object/load_from_defaults methods

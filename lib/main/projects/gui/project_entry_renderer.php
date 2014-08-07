@@ -83,7 +83,7 @@ abstract class PROJECT_ENTRY_RENDERER extends ENTRY_RENDERER
       $branch = $branch_info->branch ();
       if ($branch->locked ())
       {
-        echo $this->app->get_text_with_icon('{icons}indicators/locked', $branch_info->title_as_link (), '16px');
+        echo $this->app->get_icon_with_text('{icons}indicators/locked', Sixteen_px, $branch_info->title_as_link());
       }
       else
       {
@@ -98,7 +98,7 @@ abstract class PROJECT_ENTRY_RENDERER extends ENTRY_RENDERER
 
         if ($rel->locked ())
         {
-          echo $this->app->get_text_with_icon('{icons}indicators/locked', $rel->title_as_link (), '16px');
+          echo $this->app->get_icon_with_text('{icons}indicators/locked', Sixteen_px, $rel->title_as_link());
         }
         else
         {
@@ -136,27 +136,8 @@ abstract class PROJECT_ENTRY_RENDERER extends ENTRY_RENDERER
   {
     if ($entry->extra_description && ! $this->_options->preferred_text_length)
     {
-      $layer = $this->context->make_layer ("id_{$entry->id}_long_description");
-      $layer->margin_left = '1em';
-      $layer->visible = ! $this->context->dhtml_allowed();
-?>
-<div style="margin-bottom: .75em">
-<?php
-      if (! $layer->visible)
-      {
-        $layer->draw_toggle ();
-      }
-      echo ' <span class="field">' . strlen ($entry->extra_description) . ' bytes</span> of extra information';
-?>
-</div>
-<div>
-<?php
-      $layer->start ();
+      echo '<h3>Extra description</h3>';
       echo $entry->extra_description_as_html ();
-      $layer->finish ();
-?>
-</div>
-<?php
     }
   }
 
@@ -289,7 +270,7 @@ abstract class PROJECT_ENTRY_RENDERER extends ENTRY_RENDERER
   }
 
   /**
-   * Show user info when renderered?
+   * Show user info when rendered?
    * The print preview can toggle this value.
    * @var boolean
    * @access private

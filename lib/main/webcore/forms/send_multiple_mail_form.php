@@ -55,11 +55,11 @@ abstract class SEND_MULTIPLE_MAIL_FORM extends SEND_MAIL_FORM
   public $show_send_to = false;
 
   /**
-   * @param APPLICATION $app Main application.
+   * @param APPLICATION $context Main application.
    */
-  public function __construct ($app)
+  public function __construct ($context)
   {
-    parent::__construct ($app);
+    parent::__construct ($context);
 
     $field = new TEXT_FIELD ();
     $field->id = 'recipients';
@@ -154,9 +154,11 @@ abstract class SEND_MULTIPLE_MAIL_FORM extends SEND_MAIL_FORM
     $props->add_item ('Send separate email to each recipient.*', 'multiple_mail');
 
     $renderer->draw_radio_group_row ('email_type', $props);
-    $renderer->draw_separator ();
-    $renderer->draw_text_box_row ('recipients');
+    $renderer->draw_text_box_row ('recipients', 'short-medium');
   }
-}
 
-?>
+  /**
+   * @var string[]
+   */
+  private $recipient_list;
+}

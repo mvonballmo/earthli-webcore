@@ -77,6 +77,7 @@ class DELETE_FORM extends ID_BASED_FORM
    */
   protected function _draw_controls ($renderer)
   {
+    $renderer->labels_css_class = 'top';
     $renderer->start ();
     $renderer->start_row ();
 ?>
@@ -119,12 +120,12 @@ class DELETE_OBJECT_FORM extends PURGE_OBJECT_FORM
   public $show_previews_first = false;
 
   /**
-   * @param APPLICATION $app Main application.
+   * @param APPLICATION $context Main application.
    * @param string $set_name
    */
-  public function __construct ($app, $set_name)
+  public function __construct ($context, $set_name)
   {
-    parent::__construct ($app);
+    parent::__construct ($context);
 
     $this->_privilege_set = $set_name;
 
@@ -203,6 +204,7 @@ class DELETE_OBJECT_FORM extends PURGE_OBJECT_FORM
    */
   protected function _draw_controls ($renderer)
   {
+    $renderer->labels_css_class = 'top';
     $renderer->start ();
 
     if ($this->show_object_as_link) 
@@ -223,8 +225,6 @@ class DELETE_OBJECT_FORM extends PURGE_OBJECT_FORM
       $renderer->draw_check_boxes_row ('', $props);
     }
     
-    $renderer->draw_separator ();
-
     $buttons [] = $renderer->button_as_HTML ('No', $this->_object->home_page ());
     $buttons [] = $renderer->submit_button_as_HTML ();
     $renderer->draw_buttons_in_row ($buttons);

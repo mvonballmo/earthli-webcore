@@ -157,15 +157,7 @@ class FOLDER_USER_PERMISSIONS_CREATE_FORM extends FOLDER_PERMISSIONS_FORM
    */
   protected function _draw_permission_controls ($renderer, $formatter)
   {
-    $options = new FORM_TEXT_CONTROL_OPTIONS ();
-    $options->width = '20em';
-
-    $renderer->draw_text_line_row ('title', $options);
-
-    $buttons [] = $renderer->javascript_button_as_HTML ('Browse...', 'field.show_picker()', '{icons}buttons/browse');
-    $renderer->draw_buttons_in_row ($buttons);
-
-    $renderer->draw_separator ();
+    $renderer->draw_text_line_with_browse_button_row ('title', 'field.show_picker()');
 
     parent::_draw_permission_controls ($renderer, $formatter);
   }

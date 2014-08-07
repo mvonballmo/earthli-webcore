@@ -50,11 +50,11 @@ require_once ('webcore/forms/renderable_form.php');
 abstract class AUDITABLE_FORM extends RENDERABLE_FORM
 {
   /**
-   * @param APPLICATION $app Main application.
+   * @param APPLICATION $context Main application.
    */
-  public function __construct ($app)
+  public function __construct ($context)
   {
-    parent::__construct ($app);
+    parent::__construct ($context);
 
     $field = new ENUMERATED_FIELD ();
     $field->id = 'publication_state';
@@ -85,7 +85,7 @@ abstract class AUDITABLE_FORM extends RENDERABLE_FORM
     $field = new BOOLEAN_FIELD ();
     $field->id = 'update_modifier_on_change';
     $field->caption = 'Update Modifier';
-    $field->description = 'Set the modifier of this object to the currently logged-in user; turn off to maintain the existing user as modifier.';
+    $field->description = 'Store currently logged-in user as last modifier; turn off to maintain the existing user as modifier.';
     $field->visible = false;
     $this->add_field ($field);
   }
@@ -156,12 +156,11 @@ abstract class AUDITABLE_FORM extends RENDERABLE_FORM
       $time_modified = $this->value_for ('time_modified');
       if (! $obj->time_modified->equals ($time_modified))
       {
-        $renderer = $this->context->make_controls_renderer ();
-        $button = $renderer->button_as_html ('Revert', $this->env->url (Url_part_no_args) . '?id=' . $obj->id, '{icons}/buttons/restore');
         $type_info = $obj->type_info ();
-        $msg = '<div style="float: right">' . $button . '</div>' .
-            '<div style="margin-right: 75px">This ' . strtolower ($type_info->singular_title) . ' has been changed by another user; you cannot save your changes. ' .
-            'Reverting <strong>discards</strong> your changes and loads the version saved by the other user.</div>';
+        $msg =
+          '<p>This ' . strtolower ($type_info->singular_title) . ' has been changed by another user; you cannot save your changes. ' .
+          'Please cancel this form or reload the page and try applying the changes again.</p>';
+        $this->allow_cancel_only = true;
         $this->record_error (Form_general_error_id,  $msg);
       }
     }
@@ -257,10 +256,8 @@ abstract class AUDITABLE_FORM extends RENDERABLE_FORM
    */
   protected function _draw_history_item_controls ($renderer, $show_initially)
   {
-    $renderer->draw_separator ();
     $description = 'Change history is stored automatically. %s history options.';
     $layer = $renderer->start_layer_row ('history', 'History', $description);
-      $renderer->set_width ('25em');
       $props = $renderer->make_list_properties ();
       $props->show_descriptions = true;
       $props->add_item ('Default', History_item_default, 'Let the system decide whether to send notifications for this change.');
@@ -268,15 +265,10 @@ abstract class AUDITABLE_FORM extends RENDERABLE_FORM
       $props->add_item ('Do not publish', History_item_silent, 'Do not send notifications for this change');
       $renderer->draw_radio_group_row ('publication_state', $props);
 
-      $renderer->draw_separator ();
       $renderer->draw_text_line_row ('history_item_title');
+      $renderer->draw_text_box_row ('history_item_description', 'short-medium');
 
-      $renderer->draw_separator ();
-      $renderer->draw_text_box_row ('history_item_description');
-
-      $renderer->draw_separator ();
       $renderer->draw_submit_button_row ();
-      $renderer->restore_width ();
     $renderer->finish_layer_row ($layer);
   }
   
@@ -287,5 +279,3 @@ abstract class AUDITABLE_FORM extends RENDERABLE_FORM
    */
   protected $_history_item;
 }
-
-?>

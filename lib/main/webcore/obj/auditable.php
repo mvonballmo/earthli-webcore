@@ -91,14 +91,21 @@ abstract class AUDITABLE extends UNIQUE_OBJECT
   public $update_modifier_on_change = true;
 
   /**
-   * @param APPLICATION $app Main application.
+   * If true, the modification date is automatically set to the current time when changes are made.
+   *
+   * @var boolean
    */
-  public function __construct ($app)
-  {
-    parent::__construct ($app);
+  public $update_modified_on_change = true;
 
-    $this->time_created = $app->make_date_time ();
-    $this->time_modified = $app->make_date_time ();
+  /**
+   * @param APPLICATION $context Main application.
+   */
+  public function __construct ($context)
+  {
+    parent::__construct ($context);
+
+    $this->time_created = $context->make_date_time ();
+    $this->time_modified = $context->make_date_time ();
   }
 
   /**
@@ -243,14 +250,22 @@ abstract class AUDITABLE extends UNIQUE_OBJECT
   }
 
   /**
-   * Store this object without updating audit information.
-   * this function should *only* be used when importing an object from
+   * Store this object without updating any audit information.
+   * This function should *only* be used when importing an object from
    * an external source. For example, if there are objects from another
    * WebCore system, or if there are objects externally generated and
    * verified by an XML importer. Using this function makes the assumption
    * that the 'creator' and 'modifier' have been properly set already.
    */
   public function store_as_is ()
+  {
+    parent::store ();
+  }
+
+  /**
+   * Store this object without updating modification information.
+   */
+  public function store_no_audit ()
   {
     parent::store ();
   }

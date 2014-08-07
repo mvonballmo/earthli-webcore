@@ -55,11 +55,13 @@ class SHIP_RELEASE_FORM extends AUDITABLE_FORM
   public $button = 'Yes';
 
   /**
-   * @param APPLICATION $app
+   * @param APPLICATION $context
    */
-  public function __construct ($app)
+  public function __construct ($context)
   {
-    parent::__construct ($app);
+    parent::__construct ($context);
+
+    $this->show_previews_first = false;
 
     $field = new INTEGER_FIELD ();
     $field->id = 'state';
@@ -119,8 +121,11 @@ class SHIP_RELEASE_FORM extends AUDITABLE_FORM
   {
     parent::commit ($obj);
 
+    /** @var RELEASE $release */
+    $release = $this->_object;
+
     include_once ('projects/obj/release_updater.php');
-    $committer = new RELEASE_SHIPPER ($this->_object);
+    $committer = new RELEASE_SHIPPER ($release);
     $committer->apply ($this->value_for ('sub_history_item_publication_state'));
   }
 
@@ -132,7 +137,7 @@ class SHIP_RELEASE_FORM extends AUDITABLE_FORM
    */
   protected function _make_preview_settings ($obj)
   {
-    return new SHIP_RELEASE_PREVIEW_SETTINGS ($this->context);
+    return new SHIP_RELEASE_PREVIEW_SETTINGS ($this);
   }
 
   /**
@@ -143,22 +148,19 @@ class SHIP_RELEASE_FORM extends AUDITABLE_FORM
   {
     $renderer->start ();
     $renderer->draw_text_row ('', 'Are you sure you want to ship ' . $this->_object->title_as_link () . '?');
-    $renderer->draw_separator ();
 
     $props = $renderer->make_list_properties ();
     $props->show_descriptions = true;
-    $props->add_item ($this->app->resolve_icon_as_html ('{app_icons}statuses/working', ' ', '16px') . ' Release to testing', Testing, 'Feature-complete internal release.');
-    $props->add_item ($this->app->resolve_icon_as_html ('{icons}buttons/ship', ' ', '16px') . ' Ship', Shipped, 'Jobs and changes can still be added and removed.');
-    $props->add_item ($this->app->resolve_icon_as_html ('{icons}indicators/locked', ' ', '16px') . ' Lock', Locked, 'Changes and jobs cannot be added or removed.');
+    $props->add_item ($this->app->get_icon_with_text('{app_icons}statuses/working', Sixteen_px, 'Release to testing'), Testing, 'Feature-complete internal release.');
+    $props->add_item ($this->app->get_icon_with_text ('{icons}buttons/ship', Sixteen_px, 'Ship'), Shipped, 'Jobs and changes can still be added and removed.');
+    $props->add_item ($this->app->get_icon_with_text ('{icons}indicators/locked', Sixteen_px, 'Lock'), Locked, 'Changes and jobs cannot be added or removed.');
     $renderer->draw_radio_group_row ('state', $props);
-    $renderer->draw_separator ();
 
     $props = $renderer->make_list_properties ();
     $props->show_descriptions = true;
     $props->add_item ('Publish release only', History_item_silent, 'Generate a single notification indicating that the release has shipped.');
     $props->add_item ('Publish all', History_item_needs_send, 'Generate individual notifications for affected jobs and changes.');
     $renderer->draw_radio_group_row ('sub_history_item_publication_state', $props);
-    $renderer->draw_separator ();
 
     $buttons [] = $renderer->button_as_HTML ('No', $this->_object->home_page ());
     $buttons [] = $renderer->submit_button_as_HTML ();
@@ -190,8 +192,11 @@ class SHIP_RELEASE_PREVIEW_SETTINGS extends UPDATE_RELEASE_PREVIEW_SETTINGS
   protected function _display ()
   {
     $class_name = $this->app->final_class_name ('RELEASE_SHIPPER', 'projects/obj/release_updater.php');
+
+    /** @var RELEASE_SHIPPER $committer */
     $committer = new $class_name ($this->object);
 ?>
+  <div class="text-flow">
   <p>Shipping this release will make the following changes (scroll down or hide this preview to accept).</p>
 <?php
     $replacement = $committer->replacement_release ();
@@ -211,6 +216,9 @@ class SHIP_RELEASE_PREVIEW_SETTINGS extends UPDATE_RELEASE_PREVIEW_SETTINGS
     $this->_draw_section ('closed job(s)', 'These jobs are closed and will be <span class="field">assigned to</span> this release.', $committer->closed_job_query ());
     $this->_draw_section ('job(s) will change status', 'These jobs will have their status changed to <span class="field">' . $status->icon_as_html () . ' ' . $status->title . '</span>.', $committer->remapped_job_query ());
 
+?>
+  </div>
+<?php
     if (! $this->_objects_displayed)
     {
 ?>

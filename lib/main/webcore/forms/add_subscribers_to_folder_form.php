@@ -109,8 +109,7 @@ class ADD_SUBSCRIBERS_TO_FOLDER_FORM extends ID_BASED_FORM
   protected function _draw_controls ($renderer)
   {
     $renderer->start ();
-    $renderer->draw_text_box_row ('emails', '25em', '6em');
-    $renderer->draw_separator ();
+    $renderer->draw_text_box_row ('emails');
     $renderer->draw_submit_button_row ();
     $renderer->finish ();
   }

@@ -125,32 +125,6 @@ class FOLDER extends ATTACHMENT_HOST
   }
 
   /**
-   * Icon, renderered as HTML.
-   * The requested size can also be given, which is either used to retrieve the image or used in the HTML.
-   * @var string $size
-   * @return string
-   */
-  public function icon_as_html ($size = '32px')
-  {
-    return $this->app->image_as_html ($this->expanded_icon_url ($size), ' ');
-  }
-
-  /**
-   * Fully resolved path to the icon for this folder.
-   * @param string $size
-   * @return string
-   */
-  public function expanded_icon_url ($size = '32px')
-  {
-    if ($this->icon_url)
-    {
-      return $this->app->get_icon_url ($this->icon_url, $size);
-    }
-    
-    return '';
-  }
-
-  /**
    * Last update time of any content in the folder.
    * If a comment exists, return the time of the comment, else return
    * the time of the most recent entry, else return the create time
@@ -336,7 +310,7 @@ class FOLDER extends ATTACHMENT_HOST
    * {@link Force_root_on}.
    * @return string
    */
-  public function resolve_url ($url, $root_override = null)
+  public function resolve_file ($url, $root_override = null)
   {
     $entry_key = '{entry}';
 
@@ -360,7 +334,7 @@ class FOLDER extends ATTACHMENT_HOST
       }
     }
 
-    return parent::resolve_url ($url, $root_override);
+    return parent::resolve_file ($url, $root_override);
   }
 
   /**

@@ -34,21 +34,15 @@ h2
   font-size: 20pt
 }
 
-h3, .menu-title
+h3
 {
   font-size: 18pt
 }
 
 body,
 h4,
-td,
-th,
-.menu-control,
-.text-control,
-.menu,
-.nav-box,
-.button,
-pre
+pre,
+.button
 {
   font-size: 12pt
 }
@@ -58,9 +52,11 @@ h5,
 .notes,
 .info-box-bottom,
 .info-box-top,
+.subdued,
 .login-status,
 .footnote-reference,
-.subdued
+.basic-form .description,
+.message-box .description
 {
   font-size: 10pt
 }
@@ -74,17 +70,19 @@ h5,
 	font-size: 9pt;
 }
 
-.icon.sixteen
+.style-controls select:not([size])
 {
-  padding-top: 1px;
+  height: 35px;
 }
 
-.icon.twenty
+.icon.thirty-two + .caption
 {
-  padding-top: .3em;
+  position: relative;
+  top: -8px;
 }
 
-.icon.thirty-two
+.icon.sixteen + .caption
 {
-  padding-top: .8em;
+  position: relative;
+  top: -1px;
 }

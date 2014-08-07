@@ -121,7 +121,7 @@ abstract class PREVIEWABLE_FORM extends FORM
 
   /**
    * Displays objects in DHTML preview blocks.
-   * Objects can be added to the preview list so that they are renderered before the form.
+   * Objects can be added to the preview list so that they are rendered before the form.
    */
   protected function _draw_previews ()
   {
@@ -281,19 +281,19 @@ abstract class PREVIEWABLE_ID_BASED_FORM extends PREVIEWABLE_FORM
  * @since 2.5.0
  * @package webcore
  * @subpackage forms-core
+ * @abstract
  */
-class FORM_PREVIEW_SETTINGS extends WEBCORE_OBJECT
+abstract class FORM_PREVIEW_SETTINGS extends WEBCORE_OBJECT
 {
   /**
    * Title to display before the preview.
-   * This is always display, even when the preview is hidden with DHTML.
+   * This is always display, even when the preview is hidden.
    * @var string
    */
   public $title;
 
   /**
    * Is the preview initially visible?
-   * This will be ignored if the client is not DHTML-capable.
    * @var boolean
    */
   public $visible;
@@ -303,6 +303,16 @@ class FORM_PREVIEW_SETTINGS extends WEBCORE_OBJECT
    * @var STORABLE
    */
   public $object;
+
+  /**
+   * @param FORM $form Attach to this object.
+   */
+  public function __construct ($form)
+  {
+    parent::__construct ($form->context);
+
+    $this->_form = $form;
+  }
 
   /**
    * Render the preview in the form.
@@ -318,11 +328,13 @@ class FORM_PREVIEW_SETTINGS extends WEBCORE_OBJECT
   <div class="preview-body">
     <?php $this->_display (); ?>
   </div>
-  <div style="clear: both"></div>
+  <div class="clear-both"></div>
   <?php $layer->finish (); ?>
 </div>
 <?php
   }
+
+  protected abstract function _display();
 }
 
 ?>

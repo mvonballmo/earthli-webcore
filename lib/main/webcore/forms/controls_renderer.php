@@ -63,8 +63,6 @@ class CONTROLS_RENDERER extends WEBCORE_OBJECT
   public function __construct ($context)
   {
     parent::__construct ($context);
-    $browser = $this->env->browser ();
-    $this->_supports_css_2 = $browser->supports (Browser_CSS_2);
   }
 
   /**
@@ -86,27 +84,21 @@ class CONTROLS_RENDERER extends WEBCORE_OBJECT
   
   /**
    * Draw the list of buttons as HTML.
-   * Draws a series of buttons previously renderered with {@link javascript_button_as_html()},
+   * Draws a series of buttons previously rendered with {@link javascript_button_as_html()},
    * {@link button_as_html()} or {@link submit_button_as_html()}.
    * @param string[] $buttons
    */
   public function draw_buttons ($buttons)
   {
-    $btn_drawn = false;
     foreach ($buttons as $button)
     {
       echo $button;
-      if ($btn_drawn && ! $this->_supports_css_2)
-      {
-        echo '&nbsp';
-      }
-      $btn_drawn = true;
     }
   }
 
   /**
    * Draw the list of buttons in a row.
-   * Draws a series of buttons previously renderered with {@link javascript_button_as_html()},
+   * Draws a series of buttons previously rendered with {@link javascript_button_as_html()},
    * {@link button_as_html()} or {@link submit_button_as_html()}.
    * @param string[] $buttons
    * @param string $title Title to show for this row.
@@ -127,33 +119,13 @@ class CONTROLS_RENDERER extends WEBCORE_OBJECT
    * @param string $type Can be 'button', 'submit' or 'cancel'.
    * @return string
    */
-  public function javascript_button_as_html ($title, $action, $icon = '', $icon_size = '16px', $type = 'button')
+  public function javascript_button_as_html ($title, $action, $icon = '', $icon_size = Sixteen_px, $type = 'button')
   {
-    /** @var THEMED_PAGE $themed_page */
-    $themed_page = $this->page;
-
-    $class = '';
-    if ($themed_page->theme->dont_apply_to_forms)
-    {
-      if (empty($title))
-      {
-        $class = 'no-label';
-      }
-    }
-    else
-    {
-      $class = 'button';
-      if (empty($title))
-      {
-        $class .= ' no-label';
-      }
-    }
-
     if (isset ($icon) && $icon)
     {
-      $title = $this->context->get_text_with_icon($icon, $title, $icon_size);
+      $title = $this->context->get_icon_with_text($icon, $icon_size, $title);
     }
-    $Result = '<button class="' . $class . '" type="' . $type . '" onClick="' . $action . '"';
+    $Result = '<button type="' . $type . '" onClick="' . $action . '"';
     if ($this->button_width)
     {
       $Result .= ' style="width: ' . $this->button_width . '"';
@@ -170,7 +142,7 @@ class CONTROLS_RENDERER extends WEBCORE_OBJECT
    * @internal param string $action Link to go to when clicked. HTML characters should not be escaped.
    * @return string
    */
-  public function button_as_html ($title, $location, $icon = '', $icon_size = '16px')
+  public function button_as_html ($title, $location, $icon = '', $icon_size = Sixteen_px)
   {
     return $this->javascript_button_as_html ($title, 'window.location=\'' . htmlspecialchars ($location) . '\'', $icon, $icon_size, 'button');
   }
@@ -183,12 +155,13 @@ class CONTROLS_RENDERER extends WEBCORE_OBJECT
    * @param string $icon_size
    * @return string
    */
-  public function submit_button_as_html ($title = null, $icon = '', $script = null, $icon_size = '16px')
+  public function submit_button_as_html ($title = null, $icon = '', $script = null, $icon_size = Sixteen_px)
   {
     if (! isset ($script))
     {
       $script = 'submit_form';
     }
+
     return $this->javascript_button_as_html (
       $title, 
       $script . ' (\'' . $this->_form->name . '\', ' . $this->submit_all_fields . ', ' . "'" . 
@@ -199,10 +172,4 @@ class CONTROLS_RENDERER extends WEBCORE_OBJECT
       'submit'
     );
   }
-
-  /**
-   * Can CSS 2 be used to render controls?
-   * @var boolean
-   */
-  protected $_supports_css_2;
 }

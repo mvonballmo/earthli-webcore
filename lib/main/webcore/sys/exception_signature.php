@@ -352,19 +352,33 @@ class EXCEPTION_SIGNATURE
    */
   protected function _add_vars_for ($type)
   {
-    foreach ($_REQUEST as $name => $value)
+    $variables = [];
+
+    switch ($type)
     {
-      if (strpos ($name, $type) === 0)
-      {
-        $name = substr ($name, strlen ($type));
-        $this->_variables [$type][$name] = $this->_decode_value ($value);
-      }
+      case Var_type_cookie:
+        $variables = $_COOKIE;
+        break;
+      case Var_type_get:
+        $variables = $_GET;
+        break;
+      case Var_type_post:
+        $variables = $_POST;
+        break;
+      case Var_type_upload:
+        $variables = $_FILES;
+        break;
+    }
+
+    foreach ($variables as $name => $value)
+    {
+      $this->_variables [$type][$name] = $this->_decode_value ($value);
     }
   }
 
   /**
    * Global variable state at time of exception.
-   * @var string[]
+   * @var array[]
    * @access private
    */
   protected $_variables;

@@ -50,11 +50,11 @@ require_once ('webcore/forms/content_object_form.php');
 class USER_FORM extends CONTENT_OBJECT_FORM
 {
   /**
-   * @param APPLICATION $app Main application.
+   * @param APPLICATION $context Main application.
    */
-  public function __construct ($app)
+  public function __construct ($context)
   {
-    parent::__construct ($app);
+    parent::__construct ($context);
 
     $field = new TEXT_FIELD ();
     $field->id = 'name';
@@ -237,7 +237,7 @@ class USER_FORM extends CONTENT_OBJECT_FORM
   /**
    * Execute the form.
    * The form has been validated and can be executed.
-   * @param object $obj
+   * @param USER $obj
    * @access private
    */
   public function commit ($obj)
@@ -256,6 +256,7 @@ class USER_FORM extends CONTENT_OBJECT_FORM
          subscriber record. */
 
       $class_name = $this->app->final_class_name ('SUBSCRIBER', 'webcore/obj/subscriber.php');
+      /** @var SUBSCRIBER $subscriber */
       $subscriber = new $class_name ($this->app);
       $subscriber->email = $orig_email;
 
@@ -325,16 +326,10 @@ class USER_FORM extends CONTENT_OBJECT_FORM
   protected function _draw_controls ($renderer)
   {
     $renderer->start ();
-    $renderer->set_width ('20em');
 
     $renderer->draw_text_line_row ('title');
     $renderer->draw_password_row ('password1');
     $renderer->draw_password_row ('password2');
-
-    if ($this->visible('title') || $this->visible('password1') || $this->visible('password2'))
-    {
-      $renderer->draw_separator ();
-    }
 
     $renderer->draw_text_line_row ('real_first_name');
     $renderer->draw_text_line_row ('real_last_name');
@@ -342,37 +337,25 @@ class USER_FORM extends CONTENT_OBJECT_FORM
 
     $props = $renderer->make_list_properties ();
     $props->show_descriptions = true;
-    $props->width = '';
-    $props->item_class = 'field';
     $props->add_item ('Keep private', User_email_hidden, 'Do not display this email under any circumstances. Used only for sending subscriptions.');
     $props->add_item ('Show scrambled', User_email_scrambled, 'Email is displayed, but scrambled (e.g. bob [at] network [dot] com)');
     $props->add_item ('Show normally', User_email_visible, 'Email is displayed normally (open to screen-scraping; not recommended)');
     
-    $renderer->draw_radio_group_row ('email_visibility', $props, '');
+    $renderer->draw_radio_group_row ('email_visibility', $props);
 
     if ($this->_captcha_enabled ())
     {
-      $renderer->draw_separator ();
       $this->_draw_captcha_controls ($renderer);
     }
-    $renderer->restore_width ();
 
-    $renderer->draw_separator ();
     $renderer->draw_submit_button_row ();
 
-    $renderer->draw_separator ();
     $layer = $renderer->start_layer_row ('other_options', 'More Options', '%s more user account options');
-      $renderer->set_width ('25em');
-      $renderer->default_control_height = '6em';
-  
       $renderer->draw_text_line_row ('home_page_url');
       $renderer->draw_text_line_row ('picture_url');
-  
       $renderer->draw_icon_browser_row ('icon_url');
-  
-      $renderer->draw_text_box_row ('signature');
-      $renderer->draw_text_box_row ('description');
-      $renderer->restore_width ();
+      $renderer->draw_text_box_row ('signature', 'short-medium');
+      $renderer->draw_text_box_row ('description', 'short-medium');
     $renderer->finish_layer_row ($layer);
 
     $this->_draw_history_item_controls ($renderer, false);
@@ -387,5 +370,3 @@ class USER_FORM extends CONTENT_OBJECT_FORM
    */
   protected $_privilege_set = Privilege_set_user;
 }
-
-?>

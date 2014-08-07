@@ -405,65 +405,22 @@ class RESOURCE_MANAGER extends RAISABLE
   /**
    * Resolve the file fragment as an HTML image.
    * @param string $fragment location of icon.
+   * @param string $size The size of icon to render; defaults to Sixteen_px.
    * @param string $text used for the alt and title attributes.
-   * @param string $size The size of icon to render; defaults to '16px'.
-   * @param string $style an optional CSS style (not a class).
+   * @param string $css_class an optional CSS class.
    * @param int|string $dom_id An optional DOM id to allow JavaScript access to the image.
    * @return string
    */
-  public function resolve_icon_as_html ($fragment, $text, $size = '', $style = 'vertical-align: middle', $dom_id = 0)
+  public function resolve_icon_as_html ($fragment, $size = '', $text = '', $css_class = 'inline-icon', $dom_id = 0)
   {
-    return $this->image_as_html ($this->get_icon_url ($fragment, $size), $text, $style, $dom_id);
-  }
-
-  /**
-   * Alias for {@link resolve_file()}.
-   * Used by the {@link MUNGER} if this object is used as a parameter to
-   * {@link MUNGER::transform()}.
-   * @param string $url
-   * @param boolean $root_override Overrides {@link $resolve_to_root} if set to
-   * {@link Force_root_on}.
-   * @return string
-   */
-  public function resolve_url ($url, $root_override = null)
-  {
-    return $this->resolve_file ($url, $root_override);
-  }
-
-  /**
-   * Render an image as HTML.
-   * @param string $url location of icon.
-   * @param string $text used for the alt and title attributes.
-   * @param string $style an optional CSS style (not a class).
-   * @param int|string $dom_id an optional DOM id to allow JavaScript access to the image.
-   * @return string
-   */
-  public function image_as_html ($url, $text, $style = 'vertical-align: middle', $dom_id = 0)
-  {
-    if ($url)
-    {
-      $text = $this->_text_options->convert_to_html_attribute ($text);
-      $Result = "<img src=\"$url\" title=\"$text\" alt=\"$text\"";
-      if ($dom_id)
-      {
-        $Result .= " id=\"$dom_id\"";
-      }
-      if ($style)
-      {
-        $Result .= " style=\"$style\"";
-      }
-      $Result .= ">";
-      return $Result;
-    }
-    
-    return '';
+    return $this->_image_as_html ($this->get_icon_url ($fragment, $size), $text, $css_class, $dom_id);
   }
 
   /**
    * Get the URL for the requested icon size.
    * Returns an icon 'size' which conforms to the WebCore naming conventions for icon sizes. Sized icons
    * have several files, all in the same folder. If a size is specified, it is appended to the file name
-   * with a preceding underscore. e.g. get_icon_url ('logo', '16px') returns logo_16px. This algorithm is
+   * with a preceding underscore. e.g. get_icon_url ('logo', Sixteen_px) returns logo_16px. This algorithm is
    * subject to change.
    * @param string $base_url Location of the icon file.
    * @param string $size Size modifier to use to find the correct icon.
@@ -486,47 +443,8 @@ class RESOURCE_MANAGER extends RAISABLE
 
       return $this->resolve_file ($Result);
     }
-    
+
     return '';
-  }
-
-  public function get_text_with_icon ($icon_url, $text, $size, $extra_css = '')
-  {
-    if ($icon_url)
-    {
-      switch ($size)
-      {
-        case '16px':
-          $class = 'sixteen';
-          break;
-        case '20px':
-          $class = 'twenty';
-          break;
-        case '32px':
-          $class = 'thirty-two';
-          break;
-        default:
-          throw new UNKNOWN_VALUE_EXCEPTION($size);
-      }
-
-      if (empty($text))
-      {
-        $class .= ' no-label';
-      }
-
-      if (!empty($extra_css))
-      {
-        $class .= ' ' . $extra_css;
-      }
-
-      $expanded_icon_url = $this->get_icon_url($icon_url, $size);
-
-      return "<span class=\"icon $class\" style=\"background-image: url($expanded_icon_url)\">$text</span>";
-    }
-    else
-    {
-      return $text;
-    }
   }
 
   /**
@@ -766,13 +684,13 @@ class RESOURCE_MANAGER extends RAISABLE
    * $anchor_delimiter} (assumes the link will be resolvable in page context).
    * or if it starts with a delimiter and the root does not have a domain, no
    * root can be prepended. If the url is empty, the root can be prepended.
-   * 
+   *
    * @see _finalize_url()
-   * 
+   *
    * @param string $url The url to resolve.
    * @param bool $root_override If null, no override is applied; if true, the root is applied; otherwise, no root is applied.
    * @return boolean
-   * 
+   *
    * @access private
    */
   protected function _needs_root ($url, $root_override)
@@ -802,6 +720,35 @@ class RESOURCE_MANAGER extends RAISABLE
       $Result = has_domain ($this->root_url, '', $this->_url_options) || ! begins_with_delimiter ($url, $this->_url_options);
     }
     return $Result;
+  }
+
+  /**
+   * Render an image as HTML.
+   * @param string $url location of icon.
+   * @param string $text used for the alt and title attributes.
+   * @param string $css_class an optional CSS class.
+   * @param int|string $dom_id an optional DOM id to allow JavaScript access to the image.
+   * @return string
+   */
+  private function _image_as_html ($url, $text, $css_class = 'inline-icon', $dom_id = 0)
+  {
+    if ($url)
+    {
+      $text = $this->_text_options->convert_to_html_attribute ($text);
+      $Result = "<img src=\"$url\" title=\"$text\" alt=\"$text\"";
+      if ($dom_id)
+      {
+        $Result .= " id=\"$dom_id\"";
+      }
+      if ($css_class)
+      {
+        $Result .= " class=\"$css_class\"";
+      }
+      $Result .= ">";
+      return $Result;
+    }
+
+    return '';
   }
 
   /**

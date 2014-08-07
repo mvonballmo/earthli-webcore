@@ -60,13 +60,13 @@ class ADD_TO_LIST_FORM extends ID_BASED_FORM
   public $button = 'Go';
 
   /**
-   * @param APPLICATION $app Main application.
+   * @param APPLICATION $context Main application.
    * @param SEARCH $search
    * @param QUERY $search_query
    */
-  public function __construct ($app, $search, $search_query)
+  public function __construct ($context, $search, $search_query)
   {
-    parent::__construct ($app);
+    parent::__construct ($context);
 
     $this->_search = $search;
     $this->_search_query = $search_query;

@@ -62,6 +62,8 @@ class DEFAULT_PAGE_RENDERER extends WEBCORE_PAGE_RENDERER
 
   protected function _start_body ()
   {
+    parent::_start_body();
+
     $page = $this->page;
     $env = $this->env;
     $browser = $env->browser();
@@ -89,7 +91,7 @@ class DEFAULT_PAGE_RENDERER extends WEBCORE_PAGE_RENDERER
           {
             ?>
             <div class="icon-container">
-              <div class="banner-icon" style="background-image: url(<?php echo $page->get_icon_url ($options->icon, '50px'); ?>)"></div>
+              <div class="banner-icon" style="background-image: url(<?php echo $page->get_icon_url ($options->icon, Fifty_px); ?>)"></div>
           <?php
           }
           ?>
@@ -118,7 +120,7 @@ class DEFAULT_PAGE_RENDERER extends WEBCORE_PAGE_RENDERER
           }
           ?>
         </div>
-        <div style="clear: both"></div>
+        <div class="clear-both"></div>
       </div>
       <div class="nav-box">
       <?php
@@ -141,6 +143,8 @@ class DEFAULT_PAGE_RENDERER extends WEBCORE_PAGE_RENDERER
 
   protected function _finish_body ()
   {
+    parent::_finish_body();
+
     $page = $this->page;
     $options = $page->template_options;
     $browser = $this->env->browser();
@@ -428,7 +432,7 @@ class DEFAULT_PAGE_RENDERER extends WEBCORE_PAGE_RENDERER
         $url = $opt_ignore_warning->setter_url_as_html (! $opt_ignore_warning->value ());
       ?>
       <p>
-        <input id="ignore_browser_warning" type="checkbox" value="<?php echo $opt_ignore_warning->value (); ?>" onclick="window.location='<?php echo $url; ?>'" style="vertical-align: middle">
+        <input id="ignore_browser_warning" type="checkbox" value="<?php echo $opt_ignore_warning->value (); ?>" onclick="window.location='<?php echo $url; ?>'">
         <label for="ignore_browser_warning">Do not show this message again.</label>
       </p>
       <?php

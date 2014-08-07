@@ -158,7 +158,6 @@ class COMMENT_FORM extends ATTACHMENT_HOST_FORM
     if ($this->_has_options ())
     {
       $this->_draw_options ($renderer);
-      $renderer->draw_separator ();
     }
 
     $icons = $this->app->display_options->comment_icons ();
@@ -171,21 +170,19 @@ class COMMENT_FORM extends ATTACHMENT_HOST_FORM
       foreach ($icons as $icon)
       {
         $i += 1;
-        $props->add_item ($icon->icon_as_html ('15px'), $i);
+        $props->add_item ($icon->icon_as_html (Fifteen_px), $i);
       }
 
       $renderer->draw_radio_group_row ('kind', $props);
     }
 
-    $renderer->draw_text_box_row ('description', $renderer->default_control_width, '25em');
+    $renderer->draw_text_box_row ('description', 'medium-height');
 
     if ($this->_captcha_enabled ())
     {
-      $renderer->draw_separator ();
       $this->_draw_captcha_controls ($renderer);
     }
 
-    $renderer->draw_separator ();
     $renderer->draw_submit_button_row ();
 
     $this->_draw_history_item_controls ($renderer, false);
@@ -200,4 +197,3 @@ class COMMENT_FORM extends ATTACHMENT_HOST_FORM
    */
   protected $_privilege_set = Privilege_set_comment;
 }
-?>

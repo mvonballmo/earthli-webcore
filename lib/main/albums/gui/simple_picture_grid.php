@@ -50,16 +50,6 @@ require_once ('webcore/gui/grid.php');
 class SIMPLE_PICTURE_GRID extends STANDARD_GRID
 {
   /**
-   * @var string
-   */
-  public $object_name = 'Picture';
-
-  /**
-   * @var boolean
-   */
-  public $show_separator = false;
-
-  /**
    * Draw JavaScripts used by this grid.
    * @access private
    */

@@ -58,9 +58,12 @@ class UPLOAD_PICTURES_FORM extends ID_BASED_FORM
    */
   public $button_icon = '{icons}buttons/upload';
 
+  /**
+   * @param FOLDER $folder
+   */
   public function __construct ($folder)
   {
-    parent::__construct ($folder->context);
+    parent::__construct ($folder->app);
 
     $this->_folder = $folder;
 
@@ -118,7 +121,7 @@ class UPLOAD_PICTURES_FORM extends ID_BASED_FORM
   {
     parent::load_with_defaults ();
     $this->set_value ('day', $this->_folder->first_day);
-    $this->set_value ('title', 'Picture {#} - {file}');
+    $this->set_value ('title', '{file}');
     $this->set_value ('thumbnail_size', 200);
     $this->set_value ('create_thumbnail', true);
     $this->set_value ('read_exif', true);
@@ -175,47 +178,45 @@ class UPLOAD_PICTURES_FORM extends ID_BASED_FORM
   protected function _draw_controls ($renderer)
   {
     $renderer->start ();
-    $renderer->draw_text_line_row ('title');
-    $renderer->draw_text_line_row ('starting_index');
-    $renderer->draw_separator ();
-    $renderer->start_row ('Day');
-    $renderer->start_block (true);
-
-      $props = $renderer->make_list_properties ();
-      $props->add_item ('Use date stored by a digital camera (if possible)', 1);
-      $props->add_item ('Use the date below (if no date is found)', 0);
-      $renderer->start_row ();
-        echo $renderer->radio_group_as_html ('read_exif', $props);
-      $renderer->finish_row ();
-      $renderer->start_row ();
-        $renderer->start_indent ();
-        echo $renderer->date_as_html ('day');
-        $renderer->finish_indent ();
-      $renderer->finish_row ();
-  
-      $renderer->draw_error_row ('read_exif');
-      $renderer->draw_error_row ('day');
-
-    $renderer->finish_block ();
-    $renderer->finish_row ();
-
-    $renderer->draw_separator ();
-
     $renderer->draw_file_row ('zipfile');
+    $renderer->draw_text_line_row ('title');
 
     $options = new FORM_TEXT_CONTROL_OPTIONS ();
-    $options->width = '4em';
-    
+    $options->css_class = 'small';
+    $renderer->draw_text_line_row ('starting_index', $options);
+
+    $options = new FORM_TEXT_CONTROL_OPTIONS ();
+    $options->css_class = 'tiny';
+
     $renderer->start_row ('Thumbnails');
-      $props = $renderer->make_check_properties ();
-      $props->text = ' no larger than ' . $renderer->text_line_as_html ('thumbnail_size', $options). ' pixels.';
-      $props->on_click_script = 'on_click_thumbnail (this)';
-      echo $renderer->check_box_as_html ('create_thumbnail', $props);
+    $props = $renderer->make_check_properties ();
+    $props->text = ' no larger than ' . $renderer->text_line_as_html ('thumbnail_size', $options). ' pixels.';
+    $props->on_click_script = 'on_click_thumbnail (this)';
+    $props->css_class = 'text-line';
+    echo $renderer->check_box_as_html ('create_thumbnail', $props);
     $renderer->finish_row ();
     $renderer->draw_error_row ('thumbnail_size');
+
+    $renderer->start_block ('Day');
+
+    $props = $renderer->make_list_properties ();
+    $props->add_item ('Use date stored by a digital camera (if possible)', 1);
+    $props->add_item ('Use the date below (if no date is found)', 0);
+    $renderer->start_row ();
+      echo $renderer->radio_group_as_html ('read_exif', $props);
+    $renderer->finish_row ();
+    $renderer->start_row ();
+    echo $renderer->date_as_html ('day');
+    $renderer->finish_row ();
+
+    $renderer->draw_error_row ('read_exif');
+    $renderer->draw_error_row ('day');
+
+    $renderer->finish_block ();
 
     $renderer->draw_submit_button_row ();
     $renderer->finish ();
   }
 }
+
 ?>

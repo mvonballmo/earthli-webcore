@@ -50,11 +50,11 @@ require_once ('webcore/forms/multiple_object_action_form.php');
 class MULTIPLE_OBJECT_PURGER_FORM extends MULTIPLE_OBJECT_ACTION_FORM
 {
   /**
-   * @param APPLICATION $app
+   * @param APPLICATION $context
    */
-  public function __construct ($app)
+  public function __construct ($context)
   {
-    parent::__construct ($app);
+    parent::__construct ($context);
     
     $field = new BOOLEAN_FIELD ();
     $field->id = 'remove_resources';

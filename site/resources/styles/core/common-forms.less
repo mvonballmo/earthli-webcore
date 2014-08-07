@@ -1,0 +1,88 @@
+@import "core-values";
+@import "core-mixins";
+
+input[type=button]:extend(button all){}
+input[type=submit]:extend(button all){}
+
+.style-controls
+{
+  button,
+  input[type=submit],
+  input[type=button]
+  {
+    color: @control_text_color;
+  }
+
+  input[type=text],
+  input[type=password],
+  select,
+  textarea
+  {
+    background-color: @edit_control_background_color;
+    .repeated-background(@edit_control_background_url);
+    color: @edit_control_text_color;
+    border: 1px solid @control_border_color;
+    border-radius:  @standard_border_radius;
+    padding: @standard_border_radius;
+  }
+
+  label:first-child
+  {
+    & + input[type=text],
+    & + input[type=password],
+    & + select,
+    & + textarea
+    {
+      margin-left: -@standard_border_radius - 1px;
+    }
+
+    & + div,
+    & + span
+    {
+      > input[type=text]:first-child,
+      > input[type=password]:first-child,
+      > select:first-child,
+      > textarea:first-child
+      {
+        margin-left: -@standard_border_radius - 1px;
+      }
+    }
+  }
+
+  input[disabled],
+  select[disabled],
+  textarea[disabled]
+  {
+    color: @disabled_control_text_color;
+    background-color: @disabled_control_background_color;
+    .repeated-background(@disabled_control_background_url);
+    border-color: @disabled_control_border_color;
+  }
+}
+
+.basic-form
+{
+  fieldset
+  {
+    border-top: @hairline_border_width solid @accent_border_color;
+    padding-top: @small_spacing;
+
+    legend
+    {
+      padding: @standard_border_radius / 2 @standard_border_radius;
+      margin-left: -@standard_border_radius;
+    }
+  }
+
+//  .help
+//  {
+//    padding: @small_spacing;
+//    padding-left: 25px;
+//    background-image: url(../../../icons/webcore_png/indicators/info_16px.png);
+//    background-repeat: no-repeat;
+//    background-position: 5px 8px;
+//    border: 1px solid #AAF;
+//    background-color: #DDEEFF;
+//    color: #666666;
+//  }
+}

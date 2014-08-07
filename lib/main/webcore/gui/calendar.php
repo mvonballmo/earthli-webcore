@@ -74,14 +74,14 @@ abstract class CALENDAR extends WEBCORE_OBJECT
   public $num_years;
 
   /**
-   * @param APPLICATION $app Main application.
+   * @param APPLICATION $context Main application.
    */
-  public function __construct ($app)
+  public function __construct ($context)
   {
-    parent::__construct ($app);
+    parent::__construct ($context);
 
     include_once ('webcore/gui/page_navigator.php');
-    $this->pager = new PAGE_NAVIGATOR ($app);
+    $this->pager = new PAGE_NAVIGATOR ($context);
     $this->pager->pages_to_show = 5;
   }
 
@@ -157,7 +157,7 @@ abstract class CALENDAR extends WEBCORE_OBJECT
   }
 
   /**
-   * Render all the days speficied in the range.
+   * Render all the days specified in the range.
    * Set the range with 'set_ranges'. If the calendar spans more than a year, then use the
    * page number to navigate between years.
    * @see CALENDAR::set_ranges()
@@ -235,6 +235,8 @@ abstract class CALENDAR extends WEBCORE_OBJECT
    */
   public function build_month ($month, $year)
   {
+    // TODO Add support for first day of week is Monday
+
     if (isset ($this->_first_empty_month))
     {
       // purge out any empty months that were skipped

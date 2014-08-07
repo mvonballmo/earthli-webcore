@@ -69,7 +69,7 @@ class USER_RENDERER extends CONTENT_OBJECT_RENDERER
       else if ($obj->icon_url)
       {
         echo '<p>';
-        echo $obj->icon_as_html ('50px');
+        echo $obj->icon_as_html (Fifty_px);
         echo '</p>';
       }
 
@@ -120,7 +120,7 @@ class USER_RENDERER extends CONTENT_OBJECT_RENDERER
           $t = $obj->title_formatter ();
           $t->text = $obj->home_page_url;
           $t->location = ensure_has_protocol($obj->home_page_url, "http");
-          $t->CSS_class = '';
+          $t->css_class = '';
           echo $t->as_html_link ();
         }
         else

@@ -94,20 +94,20 @@ class RELEASE extends OBJECT_IN_FOLDER
   public $summary;
 
   /**
-   * @param PROJECT_APPLICATION $app Main application.
+   * @param PROJECT_APPLICATION $context Main application.
    */
-  public function __construct ($app)
+  public function __construct ($context)
   {
-    parent::__construct ($app);
+    parent::__construct ($context);
 
-    $this->time_scheduled = $app->make_date_time ();
-    $this->time_testing_scheduled = $app->make_date_time ();
-    $this->time_next_deadline = $app->make_date_time ();
+    $this->time_scheduled = $context->make_date_time ();
+    $this->time_testing_scheduled = $context->make_date_time ();
+    $this->time_next_deadline = $context->make_date_time ();
 
-    $this->time_tested = $app->make_date_time ();
+    $this->time_tested = $context->make_date_time ();
     $this->time_tested->clear ();
 
-    $this->time_shipped = $app->make_date_time ();
+    $this->time_shipped = $context->make_date_time ();
     $this->time_shipped->clear ();
   }
 
@@ -494,34 +494,8 @@ class RELEASE extends OBJECT_IN_FOLDER
   }
 
   /**
-   * Format a date for status displays.
-   * @param DATE_TIME $date
-   * @param boolean $text_only Omit all tags if True.
-   * @access private
-   */
-  protected function _date_as_text ($date, $text_only)
-  {
-    $Result = '';
-
-    if ($date->is_valid ())
-    {
-      $f = $date->formatter ();
-      $f->type = Date_time_format_date_only;
-      $f->show_local_time = ! $text_only && $this->context->local_times_allowed ();
-      $f->show_CSS = ! $text_only;
-
-      $Result = $date->format ($f);
-      if (! $text_only)
-      {
-        $Result = '<span class="visible" style="white-space: nowrap">' . $Result . '</span>';
-      }
-    }
-
-    return $Result;
-  }
-
-  /**
    * Create a status object describing this release.
+   * @param bool $text_only
    * @return RELEASE_STATUS
    * @access private
    */
@@ -543,7 +517,7 @@ class RELEASE extends OBJECT_IN_FOLDER
   /**
    * Return default handler objects for supported tasks.
    * @param string $handler_type Specific functionality required.
-   * @param object $options
+   * @param OBJECT_RENDERER_OPTIONS $options
    * @return object
    * @access private
    */
@@ -578,9 +552,6 @@ class RELEASE extends OBJECT_IN_FOLDER
     $branch = $this->branch ();
 
     $query->restrict ('watch_entries > 0');
-    $query->restrict_kinds (array (Subscribe_folder => $branch->parent_folder_id ()
-                                   , Subscribe_user => $this->creator_id));
+    $query->restrict_kinds (array (Subscribe_folder => $branch->parent_folder_id (), Subscribe_user => $this->creator_id));
   }
 }
-
-?>

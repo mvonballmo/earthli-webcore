@@ -50,11 +50,11 @@ require_once ('webcore/forms/send_multiple_mail_form.php');
 class SEND_OBJECT_IN_FOLDER_FORM extends SEND_MULTIPLE_MAIL_FORM
 {
   /**
-   * @param APPLICATION $app Main application.
+   * @param APPLICATION $context Main application.
    */
-  public function __construct ($app)
+  public function __construct ($context)
   {
-    parent::__construct ($app);
+    parent::__construct ($context);
 
     $field = new INTEGER_FIELD ();
     $field->id = 'id';
@@ -102,6 +102,7 @@ class SEND_OBJECT_IN_FOLDER_FORM extends SEND_MULTIPLE_MAIL_FORM
 
   /**
    * How much of the object's descriptions does the user wish to send?
+   * @throws UNKNOWN_VALUE_EXCEPTION
    * @return integer
    */
   public function excerpt_size ()
@@ -127,10 +128,8 @@ class SEND_OBJECT_IN_FOLDER_FORM extends SEND_MULTIPLE_MAIL_FORM
   {
     parent::_draw_options ($renderer);
 
-    $renderer->draw_separator ();
-
     $options = new FORM_TEXT_CONTROL_OPTIONS ();
-    $options->width = '4em';
+    $options->css_class = 'tiny';
 
     $props = $renderer->make_list_properties ();
     $props->add_item ('Include all text', 1);
@@ -151,5 +150,3 @@ class SEND_OBJECT_IN_FOLDER_FORM extends SEND_MULTIPLE_MAIL_FORM
     return new $class_name ($this->context);
   }
 }
-
-?>

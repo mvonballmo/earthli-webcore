@@ -146,9 +146,9 @@ abstract class OBJECT_IN_FOLDER extends CONTENT_OBJECT
    * @param string $size CSS for the size of the picture.
    * @return string
    */
-  public function state_as_icon ($size = '16px')
+  public function state_as_icon ($size = Sixteen_px)
   {
-    return $this->app->resolve_icon_as_html ($this->state_icon_url (), $this->state_as_string (), $size);
+    return $this->app->resolve_icon_as_html ($this->state_icon_url(), $size, $this->state_as_string());
   }
 
   /**
@@ -159,11 +159,11 @@ abstract class OBJECT_IN_FOLDER extends CONTENT_OBJECT
     $Result = parent::title_formatter ();
     if ($this->invisible ())
     {
-      $Result->CSS_class = 'invisible';
+      $Result->css_class = 'invisible';
     }
     else
     {
-      $Result->CSS_class = 'visible';
+      $Result->css_class = 'visible';
     }
     return $Result;
   }
@@ -188,15 +188,15 @@ abstract class OBJECT_IN_FOLDER extends CONTENT_OBJECT
    * {@link Force_root_on}.
    * @return string
    */
-  public function resolve_url ($url, $root_override = null)
+  public function resolve_file ($url, $root_override = null)
   {
     $folder = $this->parent_folder ();
     if (isset ($folder))
     {
-      return $folder->resolve_url ($url, $root_override);
+      return $folder->resolve_file ($url, $root_override);
     }
 
-    return parent::resolve_url ($url, $root_override);
+    return parent::resolve_file ($url, $root_override);
   }
 
   /**

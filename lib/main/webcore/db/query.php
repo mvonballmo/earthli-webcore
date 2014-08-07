@@ -502,7 +502,7 @@ abstract class QUERY extends WEBCORE_OBJECT
           $this->env->profiler->restart ('query');
         }
 
-        log_message ("<b>Reading count:</b><div style=\"margin: 1em 0 0 1.5em\">$this->_count_SQL</div>", Msg_type_debug_info, Msg_channel_database, true);
+        log_message ("<b>Reading count:</b><p style=\"margin-left: 15px\">$this->_count_SQL</p>", Msg_type_debug_info, Msg_channel_database, true);
 
         $this->db->query ($this->_count_SQL);
         if ($this->db->next_record ())
@@ -542,7 +542,7 @@ abstract class QUERY extends WEBCORE_OBJECT
 
       if (! $this->_returns_no_data ())
       {
-        log_message ("<b>Reading objects:</b><div style=\"margin: 1em 0em 0em 1.5em\">$this->_objects_SQL</div>", Msg_type_debug_info, Msg_channel_database, true);
+        log_message ("<b>Reading objects:</b><p style=\"margin-left: 15px\">$this->_objects_SQL</p>", Msg_type_debug_info, Msg_channel_database, true);
 
         if (isset ($this->env->profiler))
         {

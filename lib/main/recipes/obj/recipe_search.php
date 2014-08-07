@@ -55,12 +55,10 @@ class RECIPE_SEARCH extends ENTRY_SEARCH
   public $type = 'recipe';
 
   /**
-   * @param APPLICATION $app Main application.
+   * @param APPLICATION $context Main application.
    */
-  public function __construct ($app)
+  public function __construct ($context)
   {
-    parent::__construct ($app, new SEARCH_RECIPE_FIELDS ($app));
+    parent::__construct ($context, new SEARCH_RECIPE_FIELDS ($context));
   }
 }
-
-?>

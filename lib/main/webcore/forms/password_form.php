@@ -60,11 +60,11 @@ class PASSWORD_FORM extends FORM
   public $button_icon = '{icons}buttons/password';
   
   /**
-   * @param APPLICATION $app Main application.
+   * @param APPLICATION $context Main application.
    */
-  public function __construct ($app)
+  public function __construct ($context)
   {
-    parent::__construct ($app);
+    parent::__construct ($context);
 
     $field = new TEXT_FIELD ();
     $field->id = 'name';
@@ -83,7 +83,7 @@ class PASSWORD_FORM extends FORM
 
     $field = new TEXT_FIELD ();
     $field->id = 'password2';
-    $field->caption = 'Confirm Password';
+    $field->caption = 'Confirm';
     $field->required = true;
     $field->min_length = $this->app->user_options->minimum_password_length;
     $field->max_length = 20;
@@ -149,8 +149,6 @@ class PASSWORD_FORM extends FORM
    */
   protected function _draw_controls ($renderer)
   {
-    $renderer->set_width ('12em');
-
     $renderer->start ();
     $renderer->draw_password_row ('password1');
     $renderer->draw_password_row ('password2');
@@ -158,9 +156,7 @@ class PASSWORD_FORM extends FORM
     {
       $renderer->draw_check_box_row ('remember');
     }
-    $renderer->draw_separator ();
     $renderer->draw_submit_button_row ();
     $renderer->finish ();
   }
 }
-?>

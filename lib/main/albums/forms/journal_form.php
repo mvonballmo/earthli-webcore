@@ -57,14 +57,14 @@ class JOURNAL_FORM extends ALBUM_ENTRY_FORM
 
     $field = new INTEGER_FIELD ();
     $field->id = 'lo_temp';
-    $field->caption = 'Low Temperature';
+    $field->caption = 'Low';
     $field->min_value = -60;
     $field->max_value = 60;
     $this->add_field ($field);
 
     $field = new INTEGER_FIELD ();
     $field->id = 'hi_temp';
-    $field->caption = 'High Temperature';
+    $field->caption = 'High';
     $field->min_value = -60;
     $field->max_value = 60;
     $this->add_field ($field);
@@ -143,13 +143,13 @@ class JOURNAL_FORM extends ALBUM_ENTRY_FORM
   {
     $renderer->start ();
     $renderer->draw_text_line_row ('title');
-    $renderer->draw_check_box_row ('is_visible');
-    $renderer->draw_separator ();
 
     $renderer->draw_date_row ('day');
-    $renderer->draw_separator ();
 
-    $icons = $this->app->display_options->weather_icons ();
+    /** @var ALBUM_APPLICATION_DISPLAY_OPTIONS $album_display_options */
+    $album_display_options = $this->app->display_options;
+    /** @var PROPERTY_VALUE[] $icons */
+    $icons = $album_display_options->weather_icons ();
 
     if (sizeof ($icons))
     {
@@ -160,35 +160,28 @@ class JOURNAL_FORM extends ALBUM_ENTRY_FORM
       foreach ($icons as $icon)
       {
         $i += 1;
-        $props->add_item ($icon->icon_as_html ('30px'), $i);
+        $props->add_item ($icon->icon_as_html (Thirty_px), $i);
       }
 
       $renderer->draw_radio_group_row ('weather_type', $props);
     }
 
-    $renderer->draw_text_box_row ('weather', $renderer->default_control_width, '3em');
-    $renderer->draw_separator ();
+    $renderer->draw_text_box_row ('weather');
 
     $options = new FORM_TEXT_CONTROL_OPTIONS ();
-    $options->width = '3em';
+    $options->css_class = 'tiny';
 
-    $renderer->start_row ('Temperatures');
-    echo 'Low ';
-    echo $renderer->text_line_as_html ('lo_temp', $options);
-    echo ' High ';
-    echo $renderer->text_line_as_html ('hi_temp', $options);
-    echo ' <span class="notes">(Temperatures are in Celsius)</span>';
+    $renderer->start_row ('Temps', 'text-line');
+    echo $renderer->text_line_as_html ('lo_temp', $options) . '&deg;C to ';
+    echo $renderer->text_line_as_html ('hi_temp', $options) . '&deg;C ';
     $renderer->finish_row ();
     $renderer->draw_error_row ('lo_temp');
     $renderer->draw_error_row ('hi_temp');
 
     $renderer->draw_error_row ('temps');
-    $renderer->draw_separator ();
-    $renderer->draw_submit_button_row ();
-    $renderer->draw_separator ();
-    $renderer->draw_text_box_row ('description', $renderer->default_control_width, '20em');
+    $renderer->draw_text_box_row ('description', 'tall');
+    $renderer->draw_check_box_row ('is_visible');
 
-    $renderer->draw_separator ();
     $renderer->draw_submit_button_row ();
 
     $this->_draw_history_item_controls ($renderer, false);
@@ -196,4 +189,3 @@ class JOURNAL_FORM extends ALBUM_ENTRY_FORM
     $renderer->finish ();
   }
 }
-?>

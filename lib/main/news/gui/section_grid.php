@@ -49,49 +49,34 @@ require_once ('webcore/gui/folder_grid.php');
 class SECTION_GRID extends FOLDER_GRID
 {
   /**
-   * @var string
-   */
-  public $object_name = 'section';
-
-  /**
-   * @var string
-   */
-  public $box_style = 'object-in-list';
-
-  /**
-   * @var boolean
-   */
-  public $show_separator = false;
-
-  /**
-   * @param SECTION $obj
+   * @param FOLDER $obj
    * @access private
    */
   protected function _draw_box ($obj)
   {
     $t = $obj->title_formatter ();
     $t->max_visible_output_chars = 0;
-    echo $obj->title_as_link ($t);
+    echo '<h3>' . $obj->title_as_link ($t) . '</h3>';
 
     $entry_query = $obj->entry_query ();
     $entry_query->set_filter (Visible);
     $size = $entry_query->size ();
-  ?>
-    <div style="float: right">
-      (<span class="field"><?php echo $size; ?></span> Articles)
-    </div>
-  <?php
+
     if ($size)
     {
       $entry_query->set_limits (0, 10);
+      /** @var ENTRY[] $entries */
       $entries = $entry_query->objects ();
       $count = sizeof ($entries);
       if ($count)
       {
   ?>
-    <ul class="detail" style="padding: 0em; margin: 0px; margin-top: 1em; margin-left: 2em">
+    <p>
+      <?php echo $size; ?> Articles
+    </p>
+    <ul class="detail">
   <?php
-        foreach ($entries as &$entry)
+        foreach ($entries as $entry)
         {
           $t = $entry->title_formatter ();
           $f = $entry->time_created->formatter ();
@@ -99,7 +84,7 @@ class SECTION_GRID extends FOLDER_GRID
           $f->show_local_time = false;
           $t->title = $entry->time_created->format ($f);
   ?>
-      <li style="margin: 0px">
+      <li>
         <?php echo $entry->title_as_link ($t); ?>
       </li>
   <?php
@@ -107,7 +92,7 @@ class SECTION_GRID extends FOLDER_GRID
 
         if ($size > 10)
         {
-          echo "<li style=\"margin-bottom: 0px\">[<a href=\"view_folder.php?id=$obj->id\">More</a>]</li>\n";
+          echo "<li>[<a href=\"view_folder.php?id=$obj->id\">More</a>]</li>\n";
         }
     ?>
     </ul>

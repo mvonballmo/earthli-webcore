@@ -563,7 +563,10 @@ class SUBSCRIPTION_SUMMARY_PANEL extends SUBSCRIPTION_PANEL
 
     echo '<table class="basic columns">';
 
-    $this->_echo_button_with_description ('Settings', $button);
+    echo '<tr>';
+    echo '<td>Settings</td>';
+    echo '<td>' . $button . '</td>';
+    echo '</tr>';
 
     $panels = $this->_panel_manager->ordered_panels (Panel_location);
     foreach ($panels as $panel)
@@ -573,27 +576,16 @@ class SUBSCRIPTION_SUMMARY_PANEL extends SUBSCRIPTION_PANEL
         $url->replace_argument ('panel', $panel->id);
         $desc = 'Subscribed to <span class="field">' . $panel->num_objects () . '</span> ' . $panel->raw_title ();
         $button = $renderer->button_as_html ('Change...', $url->as_text (), '{icons}buttons/edit');
-        $this->_echo_button_with_description ($desc, $button);
+        echo '<tr>';
+        echo '<td>' . $desc . '</td>';
+        echo '<td>' . $button . '</td>';
+        echo '</tr>';
       }
     }
 
     echo '</table>';
   ?>
 <?php
-  }
-  
-  /**
-   * Show a piece of text with a button.
-   * @param string $desc
-   * @param string $button
-   * @access private
-   */
-  protected function _echo_button_with_description ($desc, $button)
-  {
-    echo '<tr>';
-    echo '<td>' . $desc . '</td>';
-    echo '<td>' . $button . '</td>';
-    echo '</tr>';
   }
 
   /**

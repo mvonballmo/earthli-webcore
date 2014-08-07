@@ -123,6 +123,12 @@ define ('Browser_opera', 'opera');
 define ('Browser_presto', 'presto');
 
 /**
+ * Browser uses the Blink rendering engine (Chrome or Opera); version numbers changed from
+ * browsers identified as {@link Browser_opera} or {@link Browser_presto}.
+ */
+define ('Browser_blink', 'blink');
+
+/**
  * Browser uses the WebTV renderer.
  */
 define ('Browser_webtv', 'webtv');
@@ -735,8 +741,8 @@ class USER_AGENT_PARSER
     
     preg_match_all ('/([a-zA-Z]|[a-zA-Z]+[0-9]+|[a-zA-Z]+[ 0-9]+[a-zA-Z]|[a-zA-Z][ \-&a-zA-Z]*[a-zA-Z])[-\/: ]?[vV]?([0-9][0-9a-z]*([\.-][0-9][0-9a-z]*)*)/', $s, $parts);
 
-    $ids = $parts [1];
-    $vers = $parts [2];
+    $identifiers = $parts [1];
+    $versions = $parts [2];
 
     $ignored_ids = $this->_tables->ignored_ids ();
     $system_ids = $this->_tables->system_ids ();
@@ -748,17 +754,17 @@ class USER_AGENT_PARSER
     $current_renderer = null;
     $browser_is_final = false;
 
-    while ($continue_processing && ($index < sizeof ($ids)))
+    while ($continue_processing && ($index < sizeof ($identifiers)))
     {
-      $ver = $this->_extract_version ($vers [$index]);
-      $id = strtolower ($ids [$index]);
+      $ver = $this->_extract_version ($versions [$index]);
+      $id = strtolower ($identifiers [$index]);
       
       // Remove the trailing version marker if needed
       
       if (strcasecmp(substr($id, -2), ' v') == 0)
       {
         $id = substr($id, 0, -2);
-        $ids [$index] = substr($ids [$index], 0, -2);
+        $identifiers [$index] = substr($identifiers [$index], 0, -2);
       }
 
       // Don't bother processing ids only one character long
@@ -818,7 +824,7 @@ class USER_AGENT_PARSER
             }
             else
             {
-              $Result->name = $ids [$index]; // Use the id in original case
+              $Result->name = $identifiers [$index]; // Use the id in original case
             }
           }
         }
@@ -1007,11 +1013,12 @@ class USER_AGENT_PARSE_TABLES
       'shiira' => new USER_AGENT_RENDERER_INFO (Browser_webkit, 'Webcore', User_agent_final_browser_abort, 'Shiira'),
       'applewebkit' => new USER_AGENT_RENDERER_INFO (Browser_webkit, 'Webcore', User_agent_final_renderer),
       'netscape6' => new USER_AGENT_RENDERER_INFO (Browser_gecko, 'Netscape', User_agent_final_browser),
-      'chrome' => new USER_AGENT_RENDERER_INFO (Browser_webkit, 'Google Chrome', User_agent_final_browser_abort),
+      'chrome' => new USER_AGENT_RENDERER_INFO (Browser_blink, 'Google Chrome', User_agent_final_browser),
       'opera mini' => new USER_AGENT_RENDERER_INFO (Browser_opera, 'Presto (Opera)', User_agent_final_browser_temporary_renderer, 'Opera Mini'),
       'opera' => new USER_AGENT_RENDERER_INFO (Browser_opera, 'Presto (Opera)', User_agent_temporary_renderer, 'Opera'),
       'presto' => new USER_AGENT_RENDERER_INFO (Browser_presto, 'Presto (Opera)', User_agent_final_renderer, 'Opera'),
       'version' => new USER_AGENT_RENDERER_INFO (Browser_presto, 'Presto (Opera)', User_agent_final_browser, 'Opera'),
+      'opr' => new USER_AGENT_RENDERER_INFO (Browser_blink, 'Blink (Opera)', User_agent_final_browser, 'Opera'),
       'konqueror' => new USER_AGENT_RENDERER_INFO (Browser_webkit, 'KHTML', User_agent_final_browser, 'Konqueror'),
       'omniweb' => new USER_AGENT_RENDERER_INFO (Browser_omniweb, 'OmniWeb', User_agent_final_browser),
       'webtv' => new USER_AGENT_RENDERER_INFO (Browser_webtv, 'WebTV', User_agent_final_browser),

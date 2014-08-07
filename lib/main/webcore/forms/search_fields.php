@@ -390,6 +390,7 @@ class SEARCH_DATE_FIELDS extends SEARCH_FIELDS
     $props->add_item ('This week', Search_date_this_week);
     $props->add_item ('This month', Search_date_this_month);
     $props->add_item ('Selected dates', Search_date_constant);
+    $props->css_class = 'short';
     $renderer->draw_drop_down_row ($this->search_type_name (), $props);
 
     $renderer->draw_date_row ($this->after_name ());
@@ -612,18 +613,22 @@ class SEARCH_USER_FIELDS extends SEARCH_FIELDS
   public function draw_fields ($form, $renderer)
   {
     $props = $renderer->make_list_properties ();
+    $props->css_class = 'small';
     $props->add_item ('Context or none', Search_user_context_none);
     $props->add_item ('Context or login', Search_user_context_login);
     $props->add_item ('Name(s) listed', Search_user_constant);
 
+    $text_props = new FORM_TEXT_CONTROL_OPTIONS();
+    $text_props->css_class = 'medium';
+
     $renderer->start_row ('by');
       echo $renderer->drop_down_as_html ($this->search_type_name (), $props);
       echo ' ';
-      echo $renderer->text_line_as_html ($this->base_name);
+      echo $renderer->text_line_as_html ($this->base_name, $text_props);
     $renderer->finish_row ();
 
     $renderer->draw_text_row (' ', 'Separate multiple names with a semi-colon.', 'notes');
-    $renderer->draw_error_row ($this->base_name, ' ', $renderer->width);
+    $renderer->draw_error_row ($this->base_name, ' ');
   }
 
   /**
@@ -874,17 +879,25 @@ class SORT_FIELDS extends SEARCH_FIELDS
   {
     $props = $renderer->make_list_properties ();
     $props->add_item ('[Default]', '');
+    $props->css_class = 'small';
     foreach ($sort_values as $key => $value)
     {
       $props->add_item ($value, $key);
     }
-    $renderer->draw_drop_down_row ($this->sort_name (), $props);
 
+    $renderer->start_row('Sort by');
+
+    echo $renderer->drop_down_as_html ($this->sort_name (), $props);
     $props = $renderer->make_list_properties ();
     $props->items_per_row = 2;
-    $props->add_item ($this->context->resolve_icon_as_html ('{icons}indicators/sort_ascending', 'Asc', '16px'), 'asc');
-    $props->add_item ($this->context->resolve_icon_as_html ('{icons}indicators/sort_descending', 'Desc', '16px'), 'desc');
-    $renderer->draw_radio_group_row ($this->direction_name (), $props);
+    $props->add_item ($this->context->get_icon_with_text('{icons}indicators/sort_ascending', Sixteen_px, 'Ascending'), 'asc');
+    $props->add_item ($this->context->get_icon_with_text('{icons}indicators/sort_descending', Sixteen_px, 'Descending'), 'desc');
+
+    // TODO This part also needs to be able to render a control group without a surrounding form-row
+
+    echo $renderer->radio_group_as_html ($this->direction_name (), $props);
+
+    $renderer->finish_row();
   }
 
   /**
@@ -1093,7 +1106,7 @@ class SEARCH_OBJECT_FIELDS extends WEBCORE_OBJECT
 
     if (read_var ('quick_search'))
     {
-      $layer = $renderer->start_layer_row ('advanced-search-settings', '', 'Click the arrow for advanced settings');
+      $layer = $renderer->start_layer_row ('advanced-search-settings', 'Advanced', 'Click the arrow for advanced settings');
     }
 
     $props = $renderer->make_list_properties ();
@@ -1105,12 +1118,9 @@ class SEARCH_OBJECT_FIELDS extends WEBCORE_OBJECT
 
     $renderer->draw_check_boxes_row ('In', $props);
 
-    $renderer->draw_separator ();
-
     $this->_draw_user_fields ($form, $renderer);
     $this->_draw_date_fields ($form, $renderer);
 
-    $renderer->draw_separator ();
     $this->_draw_sort_fields ($form, $renderer);
 
     if (isset ($layer))
@@ -1209,9 +1219,7 @@ class SEARCH_OBJECT_FIELDS extends WEBCORE_OBJECT
       if (! isset ($this->_linked_fields [$user->base_name]))
       {
         $renderer->start_row ($user->title);
-          $renderer->start_block ();
-            $user->draw_fields ($form, $renderer);
-          $renderer->finish_block ();
+          $user->draw_fields ($form, $renderer);
         $renderer->finish_row ();
       }
     }
@@ -1230,11 +1238,8 @@ class SEARCH_OBJECT_FIELDS extends WEBCORE_OBJECT
 
     foreach ($this->_sorts as $sort)
     {
-      $renderer->start_column ('Sort by');
       $sort->draw_fields ($form, $renderer, $sort_values);
     }
-
-    $renderer->finish_column ();
   }
 
   /**
@@ -1650,10 +1655,11 @@ class SEARCH_OBJECT_IN_FOLDER_FIELDS extends SEARCH_CONTENT_OBJECT_FIELDS
     $old_width = $renderer->default_control_width;
     $renderer->default_control_width = '10em';
 
-    $renderer->start_row ('State');
-      echo $renderer->check_box_as_html ('not_state');
-      echo ' ';
+    // TODO Make this emit a checkbox that is NOT wrapped in a form-row
 
+    echo $renderer->check_box_as_html ('not_state');
+
+    $renderer->start_row ('State');
       $props = $renderer->make_list_properties ();
       $props->add_item ('[all]', 0);
       $states = $this->_states ();
@@ -1826,7 +1832,6 @@ class SEARCH_OBJECT_IN_FOLDER_FIELDS extends SEARCH_CONTENT_OBJECT_FIELDS
   protected function _draw_date_fields ($form, $renderer)
   {
     $this->_draw_state_selector ($form, $renderer);
-    $renderer->draw_separator ();
     $this->_draw_folder_selector ($form, $renderer);
     parent::_draw_date_fields ($form, $renderer);
   }
@@ -1853,11 +1858,11 @@ class SEARCH_ENTRY_FIELDS extends SEARCH_OBJECT_IN_FOLDER_FIELDS
 class SEARCH_DRAFTABLE_FIELDS extends SEARCH_ENTRY_FIELDS
 {
   /**
-   * @param APPLICATION $app Main application.
+   * @param APPLICATION $context Main application.
    */
-  public function __construct ($app)
+  public function __construct ($context)
   {
-    parent::__construct ($app);
+    parent::__construct ($context);
 
     $this->_add_date ('time_published', 'Published');
     $this->_add_user ('publisher_id', 'Publisher');
@@ -1888,11 +1893,11 @@ class SEARCH_DRAFTABLE_FIELDS extends SEARCH_ENTRY_FIELDS
 class SEARCH_USER_OBJECT_FIELDS extends SEARCH_CONTENT_OBJECT_FIELDS
 {
   /**
-   * @param APPLICATION $app Main application.
+   * @param APPLICATION $context Main application.
    */
-  public function __construct ($app)
+  public function __construct ($context)
   {
-    parent::__construct ($app);
+    parent::__construct ($context);
 
     $this->_add_text ('real_first_name', 'First name');
     $this->_add_text ('real_last_name', 'Last name');
@@ -1962,30 +1967,13 @@ class SEARCH_USER_OBJECT_FIELDS extends SEARCH_CONTENT_OBJECT_FIELDS
    */
   protected function _draw_kind_selector ($form, $renderer)
   {
-    $old_width = $renderer->default_control_width;
-    $renderer->default_control_width = '10em';
-
-    $layer = $this->context->make_layer ('user_kind');
-    $layer->visible = $form->value_for ('user_kind') != Privilege_kind_registered;
-
-    $renderer->draw_text_row ('Advanced', $layer->toggle_as_html () . ' Click the arrow for advanced search options.', 'notes');
-
-    $renderer->start_row (' ');
-      $layer->start ();
-        $renderer->start_block ();
-
-          $props = $renderer->make_list_properties ();
-          $props->show_description_on_same_line = true;
-          $props->add_item ('[all]', 'all');
-          $props->add_item ('Anonymous', Privilege_kind_anonymous);
-          $props->add_item ('Registered', Privilege_kind_registered);
-          $renderer->draw_drop_down_row ('user_kind', $props);
-
-        $renderer->finish_block ();
-      $layer->finish ();
-    $renderer->finish_row ();
-
-    $renderer->default_control_width = $old_width;
+    $props = $renderer->make_list_properties ();
+    $props->show_description_on_same_line = true;
+    $props->css_class = 'medium';
+    $props->add_item ('[all]', 'all');
+    $props->add_item ('Anonymous', Privilege_kind_anonymous);
+    $props->add_item ('Registered', Privilege_kind_registered);
+    $renderer->draw_drop_down_row ('user_kind', $props);
   }
 
   /**
@@ -2010,11 +1998,11 @@ class SEARCH_USER_OBJECT_FIELDS extends SEARCH_CONTENT_OBJECT_FIELDS
 class SEARCH_FOLDER_FIELDS extends SEARCH_OBJECT_IN_FOLDER_FIELDS
 {
   /**
-   * @param APPLICATION $app Main application.
+   * @param APPLICATION $context Main application.
    */
-  public function __construct ($app)
+  public function __construct ($context)
   {
-    parent::__construct ($app);
+    parent::__construct ($context);
 
     $this->_add_text ('summary', 'Summary');
   }

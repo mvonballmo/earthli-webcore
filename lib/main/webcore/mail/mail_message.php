@@ -240,12 +240,10 @@ class MAIL_MESSAGE extends WEBCORE_OBJECT
 
   /**
    * Send the message using the given provider.
-   * @param PROVIDER $provider
+   * @param MAIL_PROVIDER $provider
    */
   public function send ($provider)
   {
     $provider->send ($this);
   }
 }
-
-?>

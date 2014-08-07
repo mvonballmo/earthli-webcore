@@ -48,6 +48,8 @@ require_once ('webcore/forms/content_object_form.php');
  */
 class OBJECT_IN_FOLDER_FORM extends CONTENT_OBJECT_FORM
 {
+  var $description_control_css_class = '';
+
   /**
    * @param FOLDER $folder Object is created/edited in this folder.
    */
@@ -175,14 +177,11 @@ class OBJECT_IN_FOLDER_FORM extends CONTENT_OBJECT_FORM
   {
     $renderer->start ();
     $renderer->draw_text_line_row ('title');
-    $renderer->draw_separator ();
+    $renderer->draw_text_box_row ('description', $this->description_control_css_class);
     if ($this->_has_options ())
     {
       $this->_draw_options ($renderer);
-      $renderer->draw_separator ();
     }
-    $renderer->draw_text_box_row ('description');
-    $renderer->draw_separator ();
     $renderer->draw_submit_button_row ();
     $this->_draw_history_item_controls ($renderer, false);
     $renderer->finish ();
@@ -275,15 +274,16 @@ class ATTACHMENT_HOST_FORM extends OBJECT_IN_FOLDER_FORM
    */
   protected function _draw_attachment_selector ($renderer)
   {
-    $atts = $this->_attachments ();
-    if (sizeof ($atts))
+    $attachments = $this->_attachments ();
+    if (sizeof ($attachments))
     {
       $props = $renderer->make_list_properties ();
-      foreach ($atts as $att)
+      $props->css_class = 'small';
+      foreach ($attachments as $att)
       {
         $props->add_item ($att->title_as_plain_text (), $att->file_name);
       }
-      $attachments = $renderer->drop_down_as_html ('attachments', $props);
+      $attachment_control = $renderer->drop_down_as_html ('attachments', $props);
       
       $props = $renderer->make_list_properties ();
       $props->add_item ('None', 'none');
@@ -292,6 +292,7 @@ class ATTACHMENT_HOST_FORM extends OBJECT_IN_FOLDER_FORM
       $props->add_item ('Center', 'center');
       $props->add_item ('Right', 'right');
       $props->add_item ('Right (alone)', 'right-column');
+      $props->css_class = 'small';
       $alignments = $renderer->drop_down_as_html ('alignments', $props);
       
       $props = $renderer->make_list_properties ();
@@ -300,6 +301,7 @@ class ATTACHMENT_HOST_FORM extends OBJECT_IN_FOLDER_FORM
       $props->add_item ('50%', '50');
       $props->add_item ('75%', '75');
       $props->add_item ('Full-size', '100');
+      $props->css_class = 'small';
       $sizes = $renderer->drop_down_as_html ('sizes', $props);
         
       $props = $renderer->make_list_properties ();
@@ -307,24 +309,16 @@ class ATTACHMENT_HOST_FORM extends OBJECT_IN_FOLDER_FORM
       $props->add_item ('Caption', 'caption');
       $props->add_item ('Tooltip', 'tooltip');
       $props->add_item ('Both', 'both');
+      $props->css_class = 'small';
       $caption_modes = $renderer->drop_down_as_html ('caption_modes', $props);
       
       $renderer->start_row ('Attachments');
-        echo $attachments . '&nbsp;';
-        echo $alignments . '&nbsp;';
-        echo $sizes . '&nbsp;';
+        echo $attachment_control;
+        echo $alignments;
+        echo $sizes;
         echo $caption_modes;
         echo $renderer->javascript_button_as_html ('Add', 'on_insert_attachment ()');
       $renderer->finish_row ();
-      $browser = $this->env->browser ();
-      if ($browser->supports (Browser_DOM_2))
-      {
-        $renderer->draw_text_row (' ', 'Insert image/media tag for the selected attachment.', 'notes');
-      }
-      else
-      {
-        $renderer->draw_text_row (' ', 'Append image/media tag for the selected attachment (scroll to end of text).', 'notes');
-      }
     }
   }
   
@@ -413,8 +407,8 @@ class ATTACHMENT_HOST_FORM extends OBJECT_IN_FOLDER_FORM
    */
   protected function _draw_options ($renderer)
   {
-    parent::_draw_options ($renderer);
     $this->_draw_attachment_selector ($renderer);
+    parent::_draw_options ($renderer);
   }
 }
 

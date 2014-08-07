@@ -169,9 +169,6 @@ abstract class MULTIPLE_OBJECT_ACTION_FORM extends ID_BASED_FORM
    */
   protected function _draw_selected_objects ()
   {
-?>
-<div class="left-sidebar" style="white-space: nowrap">
-  <?php
     $count = sizeof ($this->object_list->folders);
 
     if ($count)
@@ -217,9 +214,6 @@ abstract class MULTIPLE_OBJECT_ACTION_FORM extends ID_BASED_FORM
 
       echo "</ul>\n";
     }
-  ?>
-</div>
-<?php
   }
 
   /**
@@ -236,26 +230,29 @@ abstract class MULTIPLE_OBJECT_ACTION_FORM extends ID_BASED_FORM
    */
   protected function _draw_controls ($renderer)
   {
-    $renderer->set_width ('');
-
-    $renderer->start ();
-
     if ($this->object_list->has_objects ())
     {
-      $renderer->start_column ();
-      $renderer->start_row ('', ' ');
-        echo $this->_draw_selected_objects ();
-      $renderer->finish_row ();
-      $renderer->start_column ();
-      $this->_draw_message ($renderer);
+      $renderer->start_column ('left-sidebar-column text-flow');
+?>
+      <div class="left-sidebar">
+<?php
+        $this->_draw_selected_objects ();
+?>
+      </div>
+<?php
+      $renderer->labels_css_class = 'top';
+      $renderer->start_column ('content-column');
+        $renderer->start ();
+        $this->_draw_message ($renderer);
+        $renderer->finish ();
       $renderer->finish_column ();
     }
     else
     {
+      $renderer->start ();
       $renderer->draw_text_row ('', 'No items were selected. Please select at least one item and try again.', 'error');
+      $renderer->finish ();
     }
-
-    $renderer->finish ();
   }
 
   /**

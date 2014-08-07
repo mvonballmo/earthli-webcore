@@ -64,7 +64,7 @@ class CHANGE_RENDERER extends PROJECT_ENTRY_RENDERER
         <?php
         $props = $entry->kind_properties ();
 
-        echo $this->context->get_text_with_icon($props->icon, $entry->kind_as_text (), '16px');
+        echo $this->context->get_icon_with_text($props->icon, Sixteen_px, $entry->kind_as_text());
         ?>
       </td>
     </tr>
@@ -77,7 +77,7 @@ class CHANGE_RENDERER extends PROJECT_ENTRY_RENDERER
       <th>Component</th>
       <td>
         <?php
-        echo $this->app->get_text_with_icon($comp->icon_url, $comp->title_as_link (), '16px');
+        echo $this->app->get_icon_with_text($comp->icon_url, Sixteen_px, $comp->title_as_link());
         ?>
       </td>
     </tr>
@@ -92,7 +92,7 @@ class CHANGE_RENDERER extends PROJECT_ENTRY_RENDERER
     if ($job)
     {
       $t = $job->title_formatter ();
-      $t->CSS_class = '';
+      $t->css_class = '';
       echo $job->title_as_link ($t);
     }
     else
@@ -131,28 +131,16 @@ class CHANGE_RENDERER extends PROJECT_ENTRY_RENDERER
       }
     }
 
-    if (! $this->_hide_files && $entry->files)
+    if ($entry->files)
     {
-      $layer = $this->app->make_layer ();
-      $layer->margin_top = '0px';
-      $layer->name = "id_{$entry->id}_details";
-      $layer->visible = ! $this->app->dhtml_allowed ();
 ?>
     <tr>
       <th>
-        <?php if (! $layer->visible) $layer->draw_toggle (); ?> Files
+        Files
       </th>
       <td>
-        <?php echo $entry->num_files (); ?>
-      </td>
-    </tr>
-    <tr>
-      <td></td>
-      <td>
 <?php
-      $layer->start ();
       echo $entry->files_as_html ();
-      $layer->finish ();
 ?>
       </td>
     </tr>

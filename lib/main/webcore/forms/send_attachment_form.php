@@ -50,11 +50,11 @@ require_once ('webcore/forms/send_object_in_folder_form.php');
 class SEND_ATTACHMENT_FORM extends SEND_OBJECT_IN_FOLDER_FORM
 {
   /**
-   * @param APPLICATION $app Main application.
+   * @param APPLICATION $context Main application.
    */
-  public function __construct ($app)
+  public function __construct ($context)
   {
-    parent::__construct ($app);
+    parent::__construct ($context);
 
     $field = new TEXT_FIELD ();
     $field->id = 'type';

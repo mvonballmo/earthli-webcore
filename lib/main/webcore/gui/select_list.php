@@ -97,7 +97,7 @@ class SELECT_LIST extends LIST_GRID
     $col .= "<a href=\"#\" onclick=\"toggle_selected (document.getElementById('$this->form_name')['{$this->control_name}[]']); return false;\" title=\"$this->toggle_title\">";
     if ($this->toggle_image)
     {
-      $col .= $this->app->resolve_icon_as_html ($this->toggle_image, $this->toggle_title);
+      $col .= $this->app->resolve_icon_as_html ($this->toggle_image, '', $this->toggle_title);
     }
     else
     {
@@ -121,12 +121,13 @@ class SELECT_LIST extends LIST_GRID
   /**
    * Draw the given column's data using the given object.
    * @param UNIQUE_OBJECT $obj
-   * @param integer $index
+   * @param integer $col_index
+   * @param $row_index
    * @access private
    */
-  protected function _draw_column_contents ($obj, $index)
+  protected function _draw_column_contents ($obj, $col_index, $row_index)
   {
-    switch ($index)
+    switch ($col_index)
     {
     case 0:
       $this->_draw_selector ($obj);

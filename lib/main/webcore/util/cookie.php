@@ -161,5 +161,3 @@ class COOKIE extends CLIENT_STORAGE
    */
   protected $_multiple_value_key;
 }
-
-?>

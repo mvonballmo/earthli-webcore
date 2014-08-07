@@ -118,29 +118,14 @@ class USER extends CONTENT_OBJECT
   public $ad_hoc_login = false;
 
   /**
-   * Icon, renderered as HTML.
+   * Icon, rendered as HTML.
    * The requested size can also be given, which is either used to retrieve the image or used in the HTML.
    * @var string $size
    * @return string
    */
-  public function icon_as_html ($size = '32px')
+  public function icon_as_html ($size = Thirty_two_px)
   {
-    return $this->app->image_as_html ($this->expanded_icon_url ($size), ' ');
-  }
-
-  /**
-   * Fully resolved path to the icon for this user.
-   * @param string $size
-   * @return string
-   */
-  public function expanded_icon_url ($size = '32px')
-  {
-    if ($this->icon_url)
-    {
-      return $this->app->get_icon_url ($this->icon_url, $size);
-    }
-    
-    return '';
+    return $this->app->resolve_icon_as_html($this->icon_url, $size, ' ');
   }
 
   /**

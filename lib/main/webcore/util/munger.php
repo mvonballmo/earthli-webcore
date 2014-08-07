@@ -2054,7 +2054,7 @@ class MUNGER extends MUNGER_PARSER
   {
     if ($url && isset ($this->_context_object))
     {
-      return $this->_context_object->resolve_url($url, $root_override);
+      return $this->_context_object->resolve_file($url, $root_override);
     }
     
     return $url;

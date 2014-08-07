@@ -204,21 +204,12 @@ class CHANGE_FORM extends PROJECT_ENTRY_FORM
     $renderer->start ();
     $renderer->draw_text_line_row ('title');
     $renderer->draw_check_box_row ('is_visible');
-    $renderer->draw_separator ();
     $this->_draw_kind_controls ($renderer);
     $this->_draw_component_controls ($renderer);
 
     // Start the branch section
 
-    $renderer->draw_separator ();
-    $renderer->start_row ('Branches');
-?>
-  <p class="notes">
-    Assign this job to one or more of the following branches.
-  </p>
-<?php
-      $this->_draw_branch_controls ($renderer);
-    $renderer->finish_row ();
+    $this->_draw_branch_controls ($renderer);
 
     $renderer->draw_submit_button_row ();
 

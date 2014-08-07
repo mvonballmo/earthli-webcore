@@ -203,21 +203,10 @@ class COMMENT extends ATTACHMENT_HOST
    * @param string $size
    * @return string
    */
-  public function icon ($size = '15px')
+  public function icon ($size = Fifteen_px)
   {
     $props = $this->icon_properties ();
     return $props->icon_as_html ($size);
-  }
-
-  /**
-   * The raw URL to the icon to use for this comment.
-   * @param string $size
-   * @return string
-   */
-  public function icon_url ($size = '15px')
-  {
-    $props = $this->icon_properties ();
-    return $props->expanded_icon_url($size);
   }
 
   /**

@@ -50,19 +50,19 @@ abstract class ALBUM_ENTRY_GRID extends CONTENT_OBJECT_GRID
 {
   /**
    * Render the grid itself.
-   * @param stdClass[] $objs
+   * @param ALBUM_ENTRY[] $objects
    * @access private
    */
-  protected function _draw ($objs)
+  protected function _draw ($objects)
   {
-    if (sizeof ($objs))
+    if (sizeof ($objects))
     {
-      $this->_url = new URL ($objs [0]->home_page ());
+      $this->_url = new URL ($objects [0]->home_page ());
       $url = new URL ($this->env->url (Url_part_no_host_path));
       $this->_url->replace_arguments ($url->query_string ());
     }
 
-    parent::_draw ($objs);
+    parent::_draw ($objects);
   }
 
   /**
@@ -89,5 +89,3 @@ abstract class ALBUM_ENTRY_GRID extends CONTENT_OBJECT_GRID
    */
   protected $_url;
 }
-
-?>

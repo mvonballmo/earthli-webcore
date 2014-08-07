@@ -52,7 +52,8 @@ http://www.earthli.com/software/webcore
 <div class="main-box">
   <div class="text-flow">
     <p>An error occurred while processing your last request.</p>
-    <p>To help us address this issue, please <span class="field">submit</span> the prepared <span class="field">report</span> below. Or, take a chance and <span class="field">try again</span>. You never know.</p>
+    <p>Please submit the prepared report below to help us address this issue.</p>
+    <p>Or take a chance and try again. You never know.</p>
     <p>We apologize for the inconvenience and thank you in advance for your help,<br>
       the earthli Team.</p>
   </div>
@@ -71,14 +72,6 @@ http://www.earthli.com/software/webcore
     ?>
   </p>
   <?php
-    $Page->show_message('By default, the report includes some browser and web site data. See the full report details for more information.', 'info');
-
-    $layer = $Page->make_layer ('exception_details');
-  ?>
-  <p class="detail"><?php $layer->draw_toggle (); ?> Toggle the arrow to see the full report details.</p>
-  <?php
-
-  $layer->start ();
   $class_name = $Page->final_class_name ('EXCEPTION_RENDERER', 'webcore/gui/exception_renderer.php');
   /** @var $renderer EXCEPTION_RENDERER */
   $renderer = new $class_name ($Page);
@@ -93,11 +86,10 @@ http://www.earthli.com/software/webcore
 
   $debug_form_data = $sig->as_form (array ('debug' => 1), 'debug_form');
   echo $debug_form_data;
-
-  $layer->finish ();
 ?>
   <div class="form-content">
 <?php
+  $Page->show_message('By default, the report includes some browser and web site data. See the full report details for more information.', 'info');
   $form->display ();
 ?>
   </div>

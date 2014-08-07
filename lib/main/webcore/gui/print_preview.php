@@ -210,9 +210,9 @@ class PRINT_PREVIEW extends WEBCORE_OBJECT
    */
   public $options;
 
-  public function __construct ($app)
+  public function __construct ($context)
   {
-    parent::__construct ($app);
+    parent::__construct ($context);
 
     $this->options = $this->_make_print_options ();
     $this->options->load_from_request ();
@@ -271,9 +271,7 @@ class PRINT_PREVIEW extends WEBCORE_OBJECT
   protected function _draw_separator ()
   {
 ?>
-<p>&nbsp;</p>
-<div class="horizontal-separator" style="clear: both"></div>
-<p>&nbsp;</p>
+<hr>
 <?php
   }
 
@@ -292,9 +290,6 @@ class PRINT_PREVIEW extends WEBCORE_OBJECT
    */
   protected function _draw_finish ()
   {
-?>
-<div>&nbsp;</div>
-<?php
   }
 
   /**

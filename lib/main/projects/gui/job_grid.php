@@ -49,11 +49,6 @@ require_once ('projects/gui/project_entry_grid.php');
 class JOB_GRID extends PROJECT_ENTRY_GRID
 {
   /**
-   * @var string
-   */
-  public $object_name = 'Job';
-
-  /**
    * Draw entry-specific information for the given release.
    * @param JOB $obj
    * @param JOB_BRANCH_INFO $branch_info
@@ -107,7 +102,7 @@ class JOB_GRID extends PROJECT_ENTRY_GRID
   <div>
     <span class="field"><?php
       $status_props = $branch_info->status_properties ();
-      echo $this->app->get_text_with_icon($status_props->icon, $status_props->title, '16px');
+      echo $this->app->get_icon_with_text($status_props->icon, Sixteen_px, $status_props->title);
     ?></span>
   <?php
     if ($is_closed)
@@ -140,7 +135,7 @@ class JOB_GRID extends PROJECT_ENTRY_GRID
   <div>
     <?php
     $priority_props = $branch_info->priority_properties ();
-    echo $this->app->get_text_with_icon($priority_props->icon, $priority_props->title, '16px');
+    echo $this->app->get_icon_with_text($priority_props->icon, Sixteen_px, $priority_props->title);
     ?>
   </div>
   <?php } ?>
@@ -165,11 +160,11 @@ class JOB_GRID extends PROJECT_ENTRY_GRID
           $text = '<span class="notes">Not assigned</span>';
         }
 
-        echo $this->app->get_text_with_icon($obj->get_assignee_icon_url(), $text, '16px');
+        echo $this->app->get_icon_with_text($obj->get_assignee_icon_url(), Sixteen_px, $text);
       }
     ?>
     </div>
-    <div style="clear: both"></div>
+    <div class="clear-both"></div>
   </div>
   <?php
   }
@@ -189,7 +184,7 @@ class JOB_GRID extends PROJECT_ENTRY_GRID
     $branch_info = $obj->main_branch_info ();
     if ($branch_info->is_closed ())
     {
-      $Result->CSS_class = '';
+      $Result->css_class = '';
     }
     $Result->max_visible_output_chars = 0;
     return $Result;
@@ -205,10 +200,6 @@ class JOB_GRID extends PROJECT_ENTRY_GRID
  */
 class JOB_SUMMARY_GRID extends PROJECT_ENTRY_SUMMARY_GRID
 {
-  /**
-   * @var string
-   */
-  public $object_name = 'Job';
 }
 
 ?>

@@ -60,11 +60,11 @@ class USER_PERMISSIONS_FORM extends PERMISSIONS_FORM
   public $button_icon = '{icons}buttons/save';
   
   /**
-   * @param APPLICATION $app Main application.
+   * @param APPLICATION $context Main application.
    */
-  public function __construct ($app)
+  public function __construct ($context)
   {
-    parent::__construct ($app);
+    parent::__construct ($context);
 
     $field = new TITLE_FIELD ();
     $field->id = 'name';
@@ -234,6 +234,13 @@ function update_controls ()
 <?php
   }
 
+  protected function _draw_controls($renderer)
+  {
+    $renderer->labels_css_class = 'top';
+
+    parent::_draw_controls($renderer);
+  }
+
   /**
    * @param FORM_RENDERER $renderer
    * @param PERMISSIONS_FORMATTER $formatter
@@ -242,9 +249,8 @@ function update_controls ()
    */
   protected function _draw_permission_controls ($renderer, $formatter)
   {
-    $renderer->draw_text_row ('', 'The settings on the left can override content permissions, either <em>Granting</em> or <em>Denying</em> them. <em>[Folder]</em> uses the permissions defined in the folder.', 'notes');
-    $renderer->draw_separator ();
-    
+    $renderer->draw_text_row ('', 'The settings on the left can override content permissions, either <em>Granting</em> or <em>Denying</em> them. <em>Default</em> uses the permissions defined in the folder.');
+
     if ($this->visible ('use_defaults'))
     {
       $props = $renderer->make_list_properties ();
@@ -262,40 +268,37 @@ function update_controls ()
       $renderer->start_row ();
       echo $renderer->radio_group_as_HTML ('use_defaults', $props);
       $renderer->finish_row ();
-      $renderer->draw_separator ();
     }
 
     $this->_draw_buttons ($renderer);
 
     $props = $renderer->make_list_properties ();
-    $props->add_item ('[Folder]', Privilege_controlled_by_content);
+    $props->add_item ('Default', Privilege_controlled_by_content);
     $props->add_item ('Granted', Privilege_always_granted);
     $props->add_item ('Denied', Privilege_always_denied);
 
-    $renderer->start_column ();
+    $renderer->start_column ('left-column');
 
       foreach ($this->content_groups as $group)
       {
-        $renderer->start_row ($group->title);
+        $renderer->start_block ($group->title);
         foreach ($group->maps as $map)
         {
           $this->_draw_tri_permission ($map, $formatter, $renderer, $props);
         }
-        $renderer->finish_row ();
-        $renderer->draw_separator ();
+        $renderer->finish_block ();
       }
 
     $renderer->start_column (); 
 
       foreach ($this->global_groups as $group)
       {
-        $renderer->start_row ($group->title);
+        $renderer->start_block ($group->title);
         foreach ($group->maps as $map)
         {
           $this->_draw_permission ($map, $formatter, $renderer, $props);
         }
-        $renderer->finish_row ();
-        $renderer->draw_separator ();
+        $renderer->finish_block ();
       }
 
     $renderer->finish_column ();
@@ -317,10 +320,11 @@ function update_controls ()
   {
     $id = $map->id ();
     $field = $this->field_at ($id);
-    $field->caption = $formatter->icon_for ($map) . ' ' . $formatter->title_for ($map);
-    echo '<div style="margin-bottom: .4em">';
+    $field->caption = $this->context->get_icon_with_text($formatter->icon_url_for($map), Sixteen_px, $formatter->title_for($map));
+    echo '<div class="three-inputs">';
     echo $renderer->drop_down_as_HTML ($id, $props);
-    echo ' ' . $field->caption . "</div>\n";
+    echo ' ' . $field->caption;
+    echo "</div>";
   }
 
   /**

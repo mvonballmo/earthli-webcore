@@ -49,39 +49,14 @@ require_once ('webcore/gui/grid.php');
 class COMPONENT_GRID extends STANDARD_GRID
 {
   /**
-   * @var string
+   * @param CONTEXT $context Context to which this grid belongs.
    */
-  public $box_style = 'object-in-list';
+  public function __construct ($context)
+  {
+    parent::__construct ($context);
 
-  /**
-   * @var string
-   */
-  public $object_name = 'Component';
-
-  /**
-   * @var boolean
-   */
-  public $even_columns = false;
-
-  /**
-   * @var boolean
-   */
-  public $show_separator = false;
-
-  /**
-   * @var boolean Show creator/modifier with releases?
-   */
-  public $show_user = true;
-
-  /**
-   * @var boolean Show project for release?
-   */
-  public $show_folder = false;
-
-  /**
-   * @var boolean Show branch for release?
-   */
-  public $show_branch = false;
+    $this->even_columns = false;
+  }
 
   /**
    * @param COMPONENT $obj
@@ -89,15 +64,11 @@ class COMPONENT_GRID extends STANDARD_GRID
    */
   protected function _draw_box ($obj)
   {
+    $this->_display_start_minimal_commands_block($obj);
 ?>
-  <div class="grid-item">
-    <div class="minimal-commands">
-      <?php $this->_draw_menu_for ($obj, Menu_size_minimal); ?>
-    </div>
-    <div class="minimal-commands-content">
-    <h3>
-      <?php echo $this->app->get_text_with_icon($obj->icon_url, $obj->title_as_link (), '20px'); ?>
-    </h3>
+  <h3>
+    <?php echo $this->app->get_icon_with_text($obj->icon_url, Twenty_px, $obj->title_as_link()); ?>
+  </h3>
   <?php
     $menu = $this->context->make_menu ();
 
@@ -115,9 +86,9 @@ class COMPONENT_GRID extends STANDARD_GRID
     $menu->append ('Comments', $url->as_html ());
 
     $menu->display ();
-  ?>
-  </div>
-<?php
+
+    $this->_display_finish_minimal_commands_block();
   }
 }
+
 ?>

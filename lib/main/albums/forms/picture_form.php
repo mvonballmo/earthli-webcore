@@ -389,12 +389,13 @@ class PICTURE_FORM extends ALBUM_ENTRY_FORM
   protected function _draw_thumbnail_options ($renderer, $row_title)
   {
     $options = new FORM_TEXT_CONTROL_OPTIONS ();
-    $options->width = '4em';
+    $options->css_class = 'tiny';
 
     $renderer->start_row ($row_title);
       $props = $renderer->make_check_properties ();
       $props->text = ' no larger than ' . $renderer->text_line_as_html ('thumbnail_size', $options). ' pixels.';
       $props->on_click_script = 'on_click_thumbnail (this)';
+      $props->css_class = 'text-line';
       echo $renderer->check_box_as_html ('create_thumbnail', $props);
     $renderer->finish_row ();
     $renderer->draw_error_row ('create_thumbnail');
@@ -431,78 +432,11 @@ class PICTURE_FORM extends ALBUM_ENTRY_FORM
     $renderer->start ();
 
     $renderer->draw_text_line_row ('title');
-    $renderer->draw_separator ();
-
-    if ($upload_allowed)
-    {
-      if (! $upload_found)
-      {
-        $options = new FORM_TEXT_CONTROL_OPTIONS ();
-        $options->width = '30em';
-
-        $renderer->start_row ('Picture');
-        $renderer->start_block (true);
-
-        $props = $renderer->make_list_properties ();
-        $props->width = '30em';
-        $props->on_click_script = 'file_option_changed (this)';
-        $props->add_item ($this->app->resolve_icon_as_html ('{icons}buttons/upload', 'Upload', '16px') . ' Upload the picture below', 1);
-        $renderer->start_row ();
-          echo $renderer->radio_group_as_html ('use_upload', $props);
-        $renderer->finish_row ();
-        $renderer->start_row ();
-          $renderer->start_indent ();
-          $options->on_change_script = 'upload_file_changed (this)';
-          echo $renderer->file_as_html ('upload_file', $options);
-          echo $renderer->check_box_as_html ('overwrite');
-          $renderer->finish_indent ();
-        $renderer->finish_row ();
-        $renderer->draw_error_row ('upload_file');
-
-        $renderer->draw_separator ();
-
-        $props->clear_items ();
-        $props->add_item ('Show the picture from the URL below', 0);
-        $renderer->start_row ();
-          echo $renderer->radio_group_as_html ('use_upload', $props);
-        $renderer->finish_row ();
-        $renderer->start_row ();
-          $renderer->start_indent ();
-          $options->on_change_script = 'file_name_changed (this)';
-          echo $renderer->text_line_as_html ('file_name', $options);
-          $renderer->finish_indent ();
-        $renderer->finish_row ();
-        $renderer->draw_error_row ('file_name');
-
-        $renderer->draw_separator ();
-
-        $this->_draw_thumbnail_options ($renderer, '');
-
-        $renderer->finish_block ();
-        $renderer->finish_row ();
-      }
-      else
-      {
-        $renderer->draw_file_row ('upload_file');
-        $this->_draw_thumbnail_options ($renderer, ' ');
-      }
-    }
-    else
-    {
-      $renderer->draw_text_line_row ('file_name');
-      $this->_draw_thumbnail_options ($renderer, ' ');
-    }
-
-    $renderer->draw_submit_button_row ();
-    $renderer->draw_separator ();
-
-    $renderer->start_row ('Day');
-    $renderer->start_block (true);
 
     if (!$this->object_exists ())
     {
+      $renderer->start_block ('Day');
       $props = $renderer->make_list_properties ();
-      $props->width = '30em';
       $props->on_click_script = 'on_date_changed (this)';
       if (isset ($this->_exif_date))
       {
@@ -515,26 +449,91 @@ class PICTURE_FORM extends ALBUM_ENTRY_FORM
       $props->add_item ($caption, 1);
       $props->add_item ('Use the date below', 0);
       $renderer->start_row ();
-        echo $renderer->radio_group_as_html ('read_exif', $props);
+      echo $renderer->radio_group_as_html ('read_exif', $props);
       $renderer->finish_row ();
+
+      $renderer->draw_date_row('day');
+
+      $renderer->draw_error_row ('read_exif');
+      $renderer->draw_error_row ('day');
+      $renderer->finish_block ();
+    }
+    else
+    {
+      $renderer->draw_date_row('day');
     }
 
-    $renderer->start_row ();
-      $renderer->start_indent ();
-      echo $renderer->date_as_html ('day');
-      $renderer->finish_indent ();
-    $renderer->finish_row ();
+    $renderer->draw_text_box_row ('description', 'short-medium');
 
-    $renderer->draw_error_row ('read_exif');
-    $renderer->draw_error_row ('day');
+    if ($upload_allowed)
+    {
+      if (! $upload_found)
+      {
+        $options = new FORM_TEXT_CONTROL_OPTIONS ();
 
-    $renderer->finish_block ();
-    $renderer->finish_row ();
+        $renderer->start_block ('Picture');
+
+        if ($this->object_exists())
+        {
+          /** @var PICTURE $pic */
+          $pic = $this->_object;
+
+          echo '<img class="pullquote right align-right" src="' . $pic->full_thumbnail_name() . '" alt="Picture">';
+        }
+
+        $props = $renderer->make_list_properties ();
+        $props->on_click_script = 'file_option_changed (this)';
+        $props->add_item ($this->app->resolve_icon_as_html ('{icons}buttons/upload', Sixteen_px, 'Upload') . ' Upload the picture below', 1);
+        $renderer->start_row ();
+        echo $renderer->radio_group_as_html ('use_upload', $props);
+        $renderer->finish_row ();
+
+        $renderer->start_row ();
+        $options->on_change_script = 'upload_file_changed (this)';
+        echo $renderer->file_as_html ('upload_file', $options);
+        echo $renderer->check_box_as_html ('overwrite');
+        $renderer->finish_row ();
+        $renderer->draw_error_row ('upload_file');
+
+        $props->clear_items ();
+        $props->add_item ('Show the picture from the URL below', 0);
+        $renderer->start_row ();
+        echo $renderer->radio_group_as_html ('use_upload', $props);
+        $renderer->finish_row ();
+
+        $renderer->start_row ();
+        $options->on_change_script = 'file_name_changed (this)';
+        $options->css_class = 'medium';
+        echo $renderer->text_line_as_html ('file_name', $options);
+        $renderer->finish_row ();
+        $renderer->draw_error_row ('file_name');
+
+        $this->_draw_thumbnail_options ($renderer, '');
+
+        $renderer->finish_block ();
+      }
+      else
+      {
+        $renderer->draw_file_row ('upload_file');
+        $this->_draw_thumbnail_options ($renderer, ' ');
+      }
+    }
+    else
+    {
+      $renderer->start_row();
+      if ($this->object_exists())
+      {
+        /** @var PICTURE $pic */
+        $pic = $this->_object;
+
+        echo '<img class="pullquote right align-right" src="' . $pic->full_thumbnail_name() . '" alt="Picture">';
+      }
+      $renderer->finish_row();
+      $renderer->draw_text_line_row ('file_name');
+      $this->_draw_thumbnail_options ($renderer, ' ');
+    }
 
     $renderer->draw_check_box_row ('is_visible');
-    $renderer->draw_separator ();
-
-    $renderer->draw_text_box_row ('description', $renderer->default_control_width, '15em');
 
     $renderer->draw_submit_button_row ();
     $this->_draw_history_item_controls ($renderer, false);
@@ -542,6 +541,7 @@ class PICTURE_FORM extends ALBUM_ENTRY_FORM
     $renderer->finish ();
   }
 
+  /** @var DATE_TIME */
   private $_exif_date;
 }
 

@@ -34,17 +34,13 @@ h2
   font-size: 18pt;
 }
 
-h3, .menu-title
+h3
 {
   font-size: 16pt;
 }
 
 body,
 h4,
-td,
-th,
-.menu-control,
-.text-control,
 .menu,
 .nav-box,
 .button,
@@ -61,7 +57,9 @@ h5,
 .info-box-top,
 .login-status,
 .footnote-reference,
-.subdued
+.subdued,
+.basic-form .description,
+.message-box .description
 {
   font-size: 12pt;
 }
@@ -88,4 +86,9 @@ h5,
 .icon.thirty-two
 {
   padding-top: .7em;
+}
+
+.style-controls select:not([size])
+{
+  height: 39px;
 }

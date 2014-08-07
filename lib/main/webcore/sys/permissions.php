@@ -361,15 +361,15 @@ class USER_PERMISSIONS extends STORABLE
   public $global_privileges;
 
   /**
-   * @param APPLICATION $app Main application.
+   * @param APPLICATION $context Main application.
    */
-  public function __construct ($app)
+  public function __construct ($context)
   {
-    parent::__construct ($app);
+    parent::__construct ($context);
 
     $this->global_privileges = new GLOBAL_PRIVILEGES ();
-    $this->allow_privileges = $app->make_privileges ();
-    $this->deny_privileges = $app->make_privileges ();
+    $this->allow_privileges = $context->make_privileges ();
+    $this->deny_privileges = $context->make_privileges ();
   }
 
   /**

@@ -48,7 +48,7 @@ http://www.earthli.com/software/webcore
 
     if ($type_info->icon)
     {
-      $icon = $App->get_icon_url($type_info->icon, '');
+      $icon = $App->resolve_file($type_info->icon);
     }
     else
     {

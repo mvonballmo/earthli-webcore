@@ -55,21 +55,26 @@ class JOURNAL_RENDERER extends ENTRY_RENDERER
    */
   protected function _display_as_html ($entry)
   {
+    /** @var ALBUM $folder */
     $folder = $entry->parent_folder ();
 ?>
     <p class="date-time">
       <?php echo $folder->format_date ($entry->date); ?>
     </p>
-    <div class="left-icon">
-      <?php echo $entry->weather_icon (); ?>
-    </div>
+    <?php
+    $props = $entry->weather_icon_properties ();
+    $this->context->start_icon_container($props->icon, Thirty_px);
+    ?>
     <div>
-      <?php echo $entry->temperature_as_html (); ?>
+      <?php echo $entry->temperature_as_html(); ?>
     </div>
     <div>
       <?php echo $entry->weather_as_html () ?>
     </div>
-    <div style="clear:both" class="text-flow">
+    <?php
+    $this->context->finish_icon_container();
+    ?>
+    <div class="text-flow">
 <?php echo $entry->description_as_html (); ?>
     </div>
 <?php

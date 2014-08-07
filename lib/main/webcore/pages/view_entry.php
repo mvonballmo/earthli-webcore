@@ -62,6 +62,7 @@ http://www.earthli.com/software/webcore
 
     $show_entry_list = false;
     $show_links = false;
+    $opt_link = '';
     $has_multiple_entries = $navigator->size() > 1;
 
     if ($has_multiple_entries)
@@ -109,8 +110,7 @@ http://www.earthli.com/software/webcore
       $caption = 'Hide list';
     }
 
-    $icon = $App->get_icon_url ($icon, '16px');
-    ?><a href="<?php echo $opt_link; ?>" class="button"><span class="icon sixteen" style="background-image: url(<?php echo $icon; ?>)"><?php echo $caption; ?></span></a><?php
+    ?><a href="<?php echo $opt_link; ?>" class="button"><?php echo $Page->get_icon_with_text($icon, Sixteen_px, $caption); ?></a><?php
   }
   else
   {
@@ -120,7 +120,9 @@ http://www.earthli.com/software/webcore
   /** @var $renderer MENU_RENDERER */
   $renderer = $entry->handler_for (Handler_menu);
   $renderer->set_size (Menu_size_standard);
-  $renderer->display ($entry->handler_for (Handler_commands));
+  /** @var COMMANDS $commands */
+  $commands = $entry->handler_for(Handler_commands);
+  $renderer->display ($commands);
 
   echo '</div>';
 ?>
@@ -143,7 +145,7 @@ http://www.earthli.com/software/webcore
   if (isset ($associated_data))
   {
     ?>
-    <div style="clear: both">
+    <div class="clear-both">
     <?php
       $associated_data->display ($entry);
     ?>

@@ -918,4 +918,10 @@ define ('Newsfeed_content_full_html', 'full_html');
  */
 define ('Newsfeed_content_text', 'text');
 
-?>
+define ('Sixteen_px', '16px');
+define ('Fifteen_px', '15px');
+define ('Twenty_px', '20px');
+define ('Thirty_px', '30px');
+define ('Thirty_two_px', '32px');
+define ('Fifty_px', '50px');
+define ('One_hundred_px', '100px');

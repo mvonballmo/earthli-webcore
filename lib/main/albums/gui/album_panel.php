@@ -141,5 +141,3 @@ class ALBUM_USER_PANEL_MANAGER extends USER_PANEL_MANAGER
     _configure_album_panels ($this);
   }
 }
-
-?>

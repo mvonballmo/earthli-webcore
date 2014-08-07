@@ -49,11 +49,6 @@ require_once ('projects/gui/project_entry_grid.php');
 class CHANGE_GRID extends PROJECT_ENTRY_GRID
 {
   /**
-   * @var string
-   */
-  public $object_name = 'Change';
-  
-  /**
    * Draw entry-specific information for the given release.
    * @param CHANGE $obj
    * @param CHANGE_BRANCH_INFO $branch_info
@@ -87,11 +82,10 @@ class CHANGE_GRID extends PROJECT_ENTRY_GRID
     }
     echo  ' on ' . $obj->time_created->format ();
   }
-  
+
   /**
    * Draw extra description information for the entry.
    * @param CHANGE $obj
-   * @param CHANGE_BRANCH_INFO $branch_info
    */
   protected function _draw_description ($obj)
   {
@@ -112,10 +106,4 @@ class CHANGE_GRID extends PROJECT_ENTRY_GRID
  */
 class CHANGE_SUMMARY_GRID extends PROJECT_ENTRY_SUMMARY_GRID
 {
-  /**
-   * @var string
-   */
-  public $object_name = 'Change';
 }
-
-?>

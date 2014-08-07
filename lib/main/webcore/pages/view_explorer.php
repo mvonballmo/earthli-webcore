@@ -68,15 +68,14 @@ http://www.earthli.com/software/webcore
       $caption = 'Hide folders';
     }
 
-    $icon = $App->get_icon_url ($icon, '16px');
-    ?><a href="<?php echo $opt_link; ?>" class="button"><span class="icon sixteen" style="background-image: url(<?php echo $icon; ?>)"><?php echo $caption; ?></span></a><?php
+    ?><a href="<?php echo $opt_link; ?>" class="button"><?php echo $Page->get_icon_with_text($icon, Sixteen_px, $caption); ?></a><?php
 
     $class_name = $App->final_class_name ('EXPLORER_COMMANDS', 'webcore/cmd/explorer_commands.php');
     /** @var $commands EXPLORER_COMMANDS */
     $commands = new $class_name ($folder, $form_name);
     /** @var $renderer MENU_RENDERER */
     $renderer = $folder->handler_for (Handler_menu);
-    $renderer->set_size (Menu_size_compact);
+    $renderer->set_size (Menu_size_standard);
     $renderer->display ($commands);
     ?>
     </div>
@@ -89,7 +88,7 @@ http://www.earthli.com/software/webcore
         $box->start_column_set ();
         $box->new_column_of_type ('left-column');
     ?>
-      <div class="left-sidebar" style="white-space: nowrap">
+      <div class="left-sidebar tree-content">
         <?php
           /* Make a copy (not a reference). */
           $tree = $App->make_tree_renderer ();
@@ -166,7 +165,7 @@ http://www.earthli.com/software/webcore
             $items_text = ' ' . $list->pager->num_items () . ' ' . $type_info->plural_title;
           }
       ?>
-      <h2 id="<?php echo $type_info->id . '_list'; ?>"><?php echo $items_text; ?></h2>
+      <h2><?php echo $items_text; ?></h2>
       <?php
           $list->display ();
         }
@@ -181,7 +180,6 @@ http://www.earthli.com/software/webcore
       }
 ?>
     </div>
-  </div>
   <?php
     $Page->finish_display ();
   }

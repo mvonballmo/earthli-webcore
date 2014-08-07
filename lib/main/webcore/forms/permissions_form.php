@@ -81,7 +81,6 @@ abstract class PERMISSIONS_FORM extends FORM
   {
     $formatter = $this->app->make_permissions_formatter ();
 
-    $renderer->set_width ('');
     $renderer->start ();
     $this->_draw_permission_controls ($renderer, $formatter);
     $renderer->finish ();
@@ -96,10 +95,7 @@ abstract class PERMISSIONS_FORM extends FORM
     $buttons [] = $renderer->javascript_button_as_html ('Grant All', 'grant_all_permissions (this.form)', '{icons}buttons/select');
     $buttons [] = $renderer->javascript_button_as_html ('Grant None', 'grant_no_permissions (this.form)', '{icons}buttons/close');
     $buttons [] = $renderer->submit_button_as_html ();
-    $renderer->start_button_row ('');
     $renderer->draw_buttons_in_row ($buttons);
-    $renderer->finish_row ();
-    $renderer->draw_separator ();
   }
 
   /**
@@ -123,9 +119,8 @@ abstract class PERMISSIONS_FORM extends FORM
   {
     $id = $map->id ();
     $field = $this->field_at ($id);
-    $field->caption = $formatter->icon_for ($map) . ' ' . $formatter->title_for ($map);
+    $field->caption = $this->context->get_icon_with_text($formatter->icon_url_for($map), Sixteen_px, $formatter->title_for($map));
     echo $renderer->check_box_as_HTML ($id);
-    echo "<div style=\"height: .2em\"></div>\n";
   }
 }
 

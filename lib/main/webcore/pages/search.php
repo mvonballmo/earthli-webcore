@@ -27,6 +27,8 @@ http://www.earthli.com/software/webcore
 ****************************************************************************/
 
   $search_type = read_var ('type');
+
+  /** @var OBJECT_IN_FOLDER_SEARCH $search */
   $search = $App->make_search ($search_type);
 
   if (isset ($search))
@@ -62,7 +64,7 @@ http://www.earthli.com/software/webcore
 
     if (isset ($folder))
     {
-      $search->folder_from_context = $folder;
+      $search->set_folder_from_context($folder);
       $Page->location->add_folder_link ($folder);
       $Page->title->add_object ($folder);          
     }
@@ -106,9 +108,9 @@ http://www.earthli.com/software/webcore
       <?php
         $grid = $search->grid ();
         $grid->show_folder = true;
-        $grid->items_are_selectable = true;
+        $grid->items_are_selectable = false;
         $grid->selector_name = "{$type_info->id}_ids";
-        $grid->set_ranges (10, 1);
+        $grid->set_ranges (10, 2);
         $grid->set_query ($search_query);
         $grid->display ();
       ?>

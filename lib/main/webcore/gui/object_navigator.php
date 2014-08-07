@@ -266,8 +266,8 @@ class OBJECT_NAVIGATOR extends WEBCORE_OBJECT
         $id = 'id="' . $this->page_anchor . '"';
       }
 
-      $this->_controls .= '<span class="counters"' . $id . '>' . '<span class="field">' . $this->_context->position_of_selected_id .
-        '</span> of <span class="field">' . $this->_context->num_objects_in_list . '</span>' . $this->separator . "</span>";
+      $this->_controls .= '<span class="counters"' . $id . '>' . $this->_context->position_of_selected_id .
+        ' of ' . $this->_context->num_objects_in_list . $this->separator . "</span>";
     }
   }
 
@@ -319,12 +319,12 @@ class OBJECT_NAVIGATOR extends WEBCORE_OBJECT
 
     if ($id == $this->_selected)
     {
-      $t->CSS_class = 'selected';
+      $t->css_class = 'selected';
       $Result = $obj->title_as_html ($t);
     }
     else
     {
-      $t->CSS_class = '';
+      $t->css_class = '';
       $Result = $obj->title_as_link ($t);
     }
     return $Result;
@@ -361,17 +361,17 @@ class OBJECT_NAVIGATOR extends WEBCORE_OBJECT
       switch ($type)
       {
         case 'first':
-          return $this->context->resolve_icon_as_html ('{icons}buttons/go_to_first', $title, '16px');
+          return $this->context->resolve_icon_as_html ('{icons}buttons/go_to_first', Sixteen_px, $title);
         case 'previous':
-          return $this->context->resolve_icon_as_html ('{icons}buttons/go_to_previous', $title, '16px');
+          return $this->context->resolve_icon_as_html ('{icons}buttons/go_to_previous', Sixteen_px, $title);
         case 'next':
-          return $this->context->resolve_icon_as_html ('{icons}buttons/go_to_next', $title, '16px');
+          return $this->context->resolve_icon_as_html ('{icons}buttons/go_to_next', Sixteen_px, $title);
         case 'last':
-          return $this->context->resolve_icon_as_html ('{icons}buttons/go_to_last', $title, '16px');
+          return $this->context->resolve_icon_as_html ('{icons}buttons/go_to_last', Sixteen_px, $title);
         case 'page_up':
-          return $this->context->resolve_icon_as_html ('{icons}buttons/move_up', $title, '16px');
+          return $this->context->resolve_icon_as_html ('{icons}buttons/move_up', Sixteen_px, $title);
         case 'page_down':
-          return $this->context->resolve_icon_as_html ('{icons}buttons/move_down', $title, '16px');
+          return $this->context->resolve_icon_as_html ('{icons}buttons/move_down', Sixteen_px, $title);
       }
     }
     else

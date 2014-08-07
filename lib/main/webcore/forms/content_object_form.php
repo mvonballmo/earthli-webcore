@@ -49,11 +49,11 @@ require_once ('webcore/forms/auditable_form.php');
 class CONTENT_OBJECT_FORM extends AUDITABLE_FORM
 {
   /**
-   * @param APPLICATION $app
+   * @param APPLICATION $context
    */
-  public function __construct ($app)
+  public function __construct ($context)
   {
-    parent::__construct ($app);
+    parent::__construct ($context);
 
     $field = new MUNGER_TITLE_FIELD ();
     $field->id = 'title';
@@ -100,9 +100,7 @@ class CONTENT_OBJECT_FORM extends AUDITABLE_FORM
   {
     $renderer->start ();
     $renderer->draw_text_line_row ('title');
-    $renderer->draw_separator ();
     $renderer->draw_text_box_row ('description');
-    $renderer->draw_separator ();
     $renderer->draw_submit_button_row ();
     $this->_draw_history_item_controls ($renderer, false);
     $renderer->finish ();

@@ -62,81 +62,94 @@ class BROWSER_RENDERER extends OBJECT_RENDERER
   {
     $browser = $obj;
 ?>
-    <dl>
-      <dt class="field">Application</dt>
-      <dd class="detail">
-        <?php
-        $icon_name = $browser->icon_name ();
-        if ($icon_name)
-        {
-          echo $this->context->resolve_icon_as_html ('{icons}logos/browsers/' . $icon_name, '', '32px') . ' ';
-        }
-        echo $browser->name () . ' ' . $browser->version ();
-      ?>
-      </dd>
-      <dt class="field">Renderer</dt>
-      <dd class="detail">
-        <?php echo $browser->renderer_name (); ?> <?php echo $browser->renderer_version (); ?>
-        <?php
-        if ($browser->is (Browser_gecko))
-        {
-          $gd = $browser->gecko_date ();
-          if ($gd)
+    <table class="basic columns left-labels">
+      <tr>
+        <th>Application</th>
+        <td>
+          <?php
+          $icon_name = $browser->icon_name ();
+          if ($icon_name)
           {
-            $t = $gd->formatter ();
-            $t->type = Date_time_format_short_date;
-            echo '(Released ' . $gd->format ($t) . ')';
+            $this->context->start_icon_container('{icons}logos/browsers/' . $icon_name, Thirty_two_px);
+            echo $browser->name () . ' ' . $browser->version ();
+            $this->context->finish_icon_container();
           }
-        }
-      ?>
-      </dd>
-      <dt class="field">Operating System</dt>
-      <dd class="detail">
-        <?php echo $browser->system_id (); ?>
-      </dd>
-      <dt class="field">JavaScript</dt>
-      <dd class="detail">
-        <?php echo $this->_boolean_as_html ($browser->supports (Browser_JavaScript)); ?>
-      </dd>
-      <dt class="field">CSS</dt>
-      <dd class="detail">
-        <?php
-        echo $this->_boolean_as_html ($browser->supports (Browser_CSS_1), '1.0');
-        echo ' ';
-        echo $this->_boolean_as_html ($browser->supports (Browser_CSS_2), '2.0');
-        echo ' ';
-        echo $this->_boolean_as_html ($browser->supports (Browser_CSS_2_1), '2.1');
-        echo ' ';
-        echo $this->_boolean_as_html ($browser->supports (Browser_columns), 'columns');
-      ?>
-      </dd>
-      <dt class="field">DOM</dt>
-      <dd class="detail">
-        <?php 
-        echo $this->_boolean_as_html ($browser->supports (Browser_DOM_1), '1.0'); 
-        echo ' ';
-        echo $this->_boolean_as_html ($browser->supports (Browser_DOM_2), '2.0');
-        ?>
-      </dd>
-      <dt class="field">Alpha PNG</dt>
-      <dd class="detail">
-        <?php echo $this->_boolean_as_html ($browser->supports (Browser_alpha_PNG)); ?>
-      </dd>
-      <dt class="field">Cookies</dt>
-      <dd class="detail">
-        <?php echo $this->_boolean_as_html ($browser->supports (Browser_cookie)); ?>
-      </dd>
+          ?>
+        </td>
+      </tr>
+      <tr>
+        <th>Renderer</th>
+        <td>
+          <?php echo $browser->renderer_name (); ?> <?php echo $browser->renderer_version (); ?>
+          <?php
+          if ($browser->is (Browser_gecko))
+          {
+            $gd = $browser->gecko_date ();
+            if ($gd)
+            {
+              $t = $gd->formatter ();
+              $t->type = Date_time_format_short_date;
+              echo '(Released ' . $gd->format ($t) . ')';
+            }
+          }
+          ?>
+        </td>
+      </tr>
+      <tr>
+        <th><abbr title ="Operating System">OS</abbr></th>
+        <td><?php echo $browser->system_id (); ?></td>
+      </tr>
+      <tr>
+        <th>JavaScript</th>
+        <td><?php echo $this->_boolean_as_html ($browser->supports (Browser_JavaScript)); ?></td>
+      </tr>
+      <tr>
+        <th>CSS</th>
+        <td>
+          <?php
+          echo $this->_boolean_as_html ($browser->supports (Browser_CSS_1), '1.0');
+          echo '<br>';
+          echo $this->_boolean_as_html ($browser->supports (Browser_CSS_2), '2.0');
+          echo '<br>';
+          echo $this->_boolean_as_html ($browser->supports (Browser_CSS_2_1), '2.1');
+          echo '<br>';
+          echo $this->_boolean_as_html ($browser->supports (Browser_columns), 'columns');
+          ?>
+        </td>
+      </tr>
+      <tr>
+        <th>DOM</th>
+        <td>
+          <?php
+          echo $this->_boolean_as_html ($browser->supports (Browser_DOM_1), '1.0');
+          echo '<br>';
+          echo $this->_boolean_as_html ($browser->supports (Browser_DOM_2), '2.0');
+          ?>
+        </td>
+      </tr>
+      <tr>
+        <th>Alpha PNG</th>
+        <td><?php echo $this->_boolean_as_html ($browser->supports (Browser_alpha_PNG)); ?></td>
+      </tr>
+      <tr>
+        <th>Cookies</th>
+        <td><?php echo $this->_boolean_as_html ($browser->supports (Browser_cookie)); ?></td>
+      </tr>
       <?php
       if ($this->show_user_agent)
       {
         ?>
-        <dt class="field">User Agent String</dt>
-        <dd class="detail">
-          <?php echo $browser->user_agent_string; ?>
-        </dd>
-        <?php
+        <tr>
+          <th>User Agent</th>
+          <td><?php echo $browser->user_agent_string; ?></td>
+        </tr>
+      <?php
       }
       ?>
+    </table>
+
+
+    <dl>
     </dl>
 <?php    
   }
@@ -196,7 +209,7 @@ class BROWSER_RENDERER extends OBJECT_RENDERER
       {
         $text = 'yes';
       }
-      return $this->context->resolve_icon_as_html ('{icons}comment/thumbs_up', '', '15px') . ' ' . $text;
+      return $this->context->get_icon_with_text('{icons}comment/thumbs_up', Fifteen_px, $text);
     }
     else
     {
@@ -204,7 +217,7 @@ class BROWSER_RENDERER extends OBJECT_RENDERER
       {
         $text = 'no';
       }
-      return $this->context->resolve_icon_as_html ('{icons}comment/thumbs_down', '', '15px') . ' ' . $text;
+      return $this->context->get_icon_with_text ('{icons}comment/thumbs_down', Fifteen_px, $text);
     }
   }
 

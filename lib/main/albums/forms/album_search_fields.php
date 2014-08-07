@@ -49,11 +49,11 @@ require_once ('webcore/forms/search_fields.php');
 class SEARCH_PICTURE_FIELDS extends SEARCH_ENTRY_FIELDS
 {
   /**
-   * @param APPLICATION $app Main application.
+   * @param APPLICATION $context Main application.
    */
-  public function __construct ($app)
+  public function __construct ($context)
   {
-    parent::__construct ($app);
+    parent::__construct ($context);
 
     $this->_add_text ('file_name', 'File name', false, false, 'pic');
   }
@@ -69,11 +69,11 @@ class SEARCH_PICTURE_FIELDS extends SEARCH_ENTRY_FIELDS
 class SEARCH_JOURNAL_FIELDS extends SEARCH_ENTRY_FIELDS
 {
   /**
-   * @param APPLICATION $app Main application.
+   * @param APPLICATION $context Main application.
    */
-  public function __construct ($app)
+  public function __construct ($context)
   {
-    parent::__construct ($app);
+    parent::__construct ($context);
 
     $this->_add_text ('weather', 'Weather', false, false, 'jrnl');
 
@@ -209,22 +209,19 @@ class SEARCH_JOURNAL_FIELDS extends SEARCH_ENTRY_FIELDS
     foreach ($icons as $icon)
     {
       $i += 1;
-      $props->add_item ($icon->icon_as_html ('20px'), $i);
+      $props->add_item ($icon->icon_as_html (Twenty_px), $i);
     }
     $renderer->draw_check_group_row ('weather_type', $props);
 
     $renderer->start_row (' ');
 
       $options = new FORM_TEXT_CONTROL_OPTIONS ();
-      $options->width = '3em';
+      $options->css_class = 'tiny';
 
       echo 'Warmer than ' . $renderer->text_line_as_html ('warmer_than', $options);
       echo '&deg; and cooler than ' . $renderer->text_line_as_html ('colder_than', $options) . '&deg';
     $renderer->finish_row ();
 
-    $renderer->draw_separator ();
     parent::_draw_date_fields ($form, $renderer);
   }
 }
-
-?>

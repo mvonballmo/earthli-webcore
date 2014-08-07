@@ -93,7 +93,7 @@ abstract class TREE extends WEBCORE_OBJECT
 
   /**
    * Render the tree using the given nodes.
-   * @param array [object] $nodes
+   * @param TREE_NODE[] $nodes
    */
   public function display ($nodes)
   {
@@ -228,19 +228,11 @@ abstract class TREE extends WEBCORE_OBJECT
   {
     switch ($kind)
     {
-    case Tree_line:
-      echo $this->context->resolve_icon_as_html ('{icons}tree/vert', '|');
-      break;
-    case Tree_blank:
-      echo $this->context->resolve_icon_as_html ('{icons}tree/blank', ' ');
-      break;
-    case Tree_ell:
     case Tree_ell_plus:
-      echo $this->context->resolve_icon_as_html ('{icons}tree/ell', 'L');
+      echo $this->context->resolve_icon_as_html ('{icons}tree/ell', '', 'L');
       break;
-    case Tree_tee:
     case Tree_tee_plus:
-      echo $this->context->resolve_icon_as_html ('{icons}tree/tee', '|-');
+      echo $this->context->resolve_icon_as_html ('{icons}tree/tee', '', '|-');
       break;
     }
   }
@@ -275,7 +267,7 @@ abstract class TREE extends WEBCORE_OBJECT
     }
     else
     {
-      echo $this->context->get_text_with_icon($icon_url, $caption, '16px');
+      echo $this->context->get_icon_with_text($icon_url, Sixteen_px, $caption);
     }
   }
 
@@ -302,11 +294,11 @@ abstract class TREE extends WEBCORE_OBJECT
         {
           if ($s)
           {
-//            $this->draw_icon (Tree_line, $node);
+            $this->draw_icon (Tree_line, $node);
           }
           else
           {
-//            $this->draw_icon (Tree_blank, $node);
+            $this->draw_icon (Tree_blank, $node);
           }
         }
       }
@@ -321,7 +313,7 @@ abstract class TREE extends WEBCORE_OBJECT
           }
           else
           {
-//            $this->draw_icon (Tree_ell, $node);
+            $this->draw_icon (Tree_ell, $node);
           }
           array_push ($this->_stack, 0);
         }
@@ -333,7 +325,7 @@ abstract class TREE extends WEBCORE_OBJECT
           }
           else
           {
-//            $this->draw_icon (Tree_tee, $node);
+            $this->draw_icon (Tree_tee, $node);
           }
           array_push ($this->_stack, 1);
         }
@@ -601,7 +593,7 @@ class TREE_DECORATOR extends WEBCORE_OBJECT
    */
   public function __construct ($tree)
   {
-    parent::__construct ($tree->app);
+    parent::__construct ($tree->context);
     $this->tree = $tree;
   }
 
@@ -648,13 +640,7 @@ class TREE_DECORATOR extends WEBCORE_OBJECT
  */
 class HTML_TREE extends TREE
 {
-  /**
-   * Is this tree centered in its parent container?
-   * @var boolean
-   */
-  public $centered = false;
-
-  public $CSS_class = 'tree';
+  public $css_class = 'tree';
 
   /**
    * Start rendering the tree.
@@ -662,12 +648,11 @@ class HTML_TREE extends TREE
    */
   public function start ()
   {
-    $class = $this->CSS_class ? "class=\"$this->CSS_class\"" : '';
-    $style = $this->centered ? "style=\"margin: auto; display: table\"" : '';
+    $class = $this->css_class ? "class=\"$this->css_class\"" : '';
 
-    if ($class || $style)
+    if ($class)
     {
-      echo "<ul $class $style>";
+      echo "<ul $class>";
     }
   }
 
@@ -677,7 +662,7 @@ class HTML_TREE extends TREE
    */
   public function finish ()
   {
-    if ($this->centered || $this->CSS_class)
+    if ($this->css_class)
     {
 ?>
 </ul>

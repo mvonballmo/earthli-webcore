@@ -55,15 +55,6 @@ class ATTACHMENT_RENDERER extends CONTENT_OBJECT_RENDERER
    */
   protected function _display_as_html ($obj)
   {
-?>
-    <div style="float: left">
-<?php
-    echo $obj->icon_as_html ('50px');
-?>
-    </div>
-    <div style="margin-left: 65px">
-<?php
-
     $file_name = $obj->full_file_name ();
     $file_url = htmlentities ($obj->full_url ());
 ?>
@@ -83,7 +74,9 @@ class ATTACHMENT_RENDERER extends CONTENT_OBJECT_RENDERER
       <tr>
         <th>Type</th>
         <td>
-          <?php echo $obj->mime_type; ?>
+          <?php
+            echo $obj->mime_type;
+          ?>
         </td>
       </tr>
 <?php
@@ -121,9 +114,8 @@ class ATTACHMENT_RENDERER extends CONTENT_OBJECT_RENDERER
     }
 ?>
     </table>
-  </div>
-<?php
 
+<?php
     if ($obj->is_image)
     {
       $this->_draw_html_image ($obj, $file_url);
@@ -299,10 +291,9 @@ class ATTACHMENT_RENDERER extends CONTENT_OBJECT_RENDERER
   {
     $ft = $this->context->file_type_manager ();
     $url = new FILE_URL ($entry->name);
-    $icon_url = $ft->expanded_icon_url ('', $url->extension (), '16px');
+    $icon_with_text = $this->context->get_icon_with_text($ft->icon_url('', $url->extension()), Sixteen_px, $entry->name);
 
-    echo '<tr><td><span class="icon sixteen" style="background-image: url(' . $icon_url . ')">' . $entry->name
-         . '</span></td><td>' . file_size_as_text ($entry->size) . '</td></tr>';
+    echo '<tr><td>' . $icon_with_text  . '</td><td>' . file_size_as_text ($entry->size) . '</td></tr>';
   }
 
   /**

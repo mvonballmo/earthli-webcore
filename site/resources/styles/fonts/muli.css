@@ -1,8 +1,6 @@
 @import "http://fonts.googleapis.com/css?family=Muli:400,400italic";
 
-body,
-.text-control,
-.menu-control
+body
 {
 	font-family: 'Muli', Verdana, Arial, Helvetica, sans-serif;
 }

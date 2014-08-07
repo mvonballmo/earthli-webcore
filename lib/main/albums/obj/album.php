@@ -190,15 +190,15 @@ class ALBUM extends FOLDER
   public $max_picture_height;
 
   /**
-   * @param ALBUM_APPLICATION $app Main application.
+   * @param ALBUM_APPLICATION $context Main application.
    */
-  public function __construct ($app)
+  public function __construct ($context)
   {
-    parent::__construct ($app);
+    parent::__construct ($context);
 
     include_once ('webcore/sys/date_time.php');
-    $this->first_day = $app->make_date_time ();
-    $this->last_day = $app->make_date_time ();
+    $this->first_day = $context->make_date_time ();
+    $this->last_day = $context->make_date_time ();
   }
 
   /**
@@ -524,7 +524,7 @@ class ALBUM extends FOLDER
    * {@link Force_root_on}.
    * @return string
    */
-  public function resolve_url ($url, $root_override = null)
+  public function resolve_file ($url, $root_override = null)
   {
     $thumb_key = '{pic_thumb}';
     $pic_key = '{pic_image}';
@@ -574,7 +574,7 @@ class ALBUM extends FOLDER
       }
     }
 
-    return parent::resolve_url ($url, $root_override);
+    return parent::resolve_file ($url, $root_override);
   }
 
   /**

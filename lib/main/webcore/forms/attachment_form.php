@@ -157,7 +157,9 @@ class ATTACHMENT_FORM extends OBJECT_IN_FOLDER_FORM
     {
       $obj->file_name = $file->normalized_name;
       $url = new FILE_URL ($obj->full_file_name ());
-      $this->_move_uploaded_file ($this->field_at ('file_name'), $file, $url->path ());
+      /** @var UPLOAD_FILE_FIELD $file_name_field */
+      $file_name_field = $this->field_at('file_name');
+      $this->_move_uploaded_file ($file_name_field, $file, $url->path ());
     }
     
     /* Create the thumbnail if needed. */
@@ -165,6 +167,7 @@ class ATTACHMENT_FORM extends OBJECT_IN_FOLDER_FORM
     if ($obj->is_image && $this->value_for ('create_thumbnail'))
     {
       $class_name = $this->app->final_class_name ('THUMBNAIL_CREATOR', 'webcore/util/image.php');
+      /** @var THUMBNAIL_CREATOR $creator */
       $creator = new $class_name ($this->app);
       $creator->create_thumbnail_for ($obj->full_file_name (), $this->value_for ('thumbnail_size'));
       if ($creator->error_message)
@@ -176,7 +179,7 @@ class ATTACHMENT_FORM extends OBJECT_IN_FOLDER_FORM
 
   /**
    * Store the form's values to this object.
-   * @param STORABLE $obj
+   * @param ATTACHMENT $obj
    * @access private
    */
   protected function _store_to_object ($obj)
@@ -250,11 +253,12 @@ class ATTACHMENT_FORM extends OBJECT_IN_FOLDER_FORM
     $props->add_item ('overwrite', 1);
     
     $options = new FORM_TEXT_CONTROL_OPTIONS ();
-    $options->width = '4em';
+    $options->css_class = 'tiny';
     
     $check_props = $renderer->make_check_properties ('create_thumbnail');
     $check_props->on_click_script = 'on_click_thumbnail (this)';
     $check_props->text = ' no larger than ' . $renderer->text_line_as_html ('thumbnail_size', $options) . ' pixels.';
+    $check_props->css_class = 'text-line';
     $props->add_item_object ($check_props);
 
     $renderer->draw_check_boxes_row (' ', $props);
@@ -271,38 +275,38 @@ class ATTACHMENT_FORM extends OBJECT_IN_FOLDER_FORM
 
     if ($this->object_exists ())
     {
-      $img = $this->_object->icon_as_html ('32px');
-      if ($this->_object->is_image)
+      /** @var ATTACHMENT $attachment */
+      $attachment = $this->_object;
+
+      $img = $attachment->icon_as_html (Thirty_two_px);
+      if ($attachment->is_image)
       {
-        $thumb = $this->_object->thumbnail_as_html ();
+        $thumb = $attachment->thumbnail_as_html ();
         if ($thumb)
         {
           $img = $thumb;
         }
       }
 
-      $renderer->draw_text_row ('Current file', '<div style="float: left; margin-right: .5em">' . $img . '</div><div>' . $this->_object->original_file_name . '</div><div style="margin-top: .5em">' . $this->_object->mime_type . ' (' . file_size_as_text ($this->_object->size) . ')</div>', 'detail');
-      $renderer->draw_separator ();
+      $renderer->start_row('Current file');
+
+      echo '<div class="info-box-top"><p>' . $this->_object->original_file_name . '</p>';
+      echo '<p>' . $this->_object->mime_type . ' (' . file_size_as_text ($this->_object->size) . ')</p></div>';
+      echo '<p>' . $img . '</p>';
+
+
+      $renderer->finish_row();
 
       $renderer->draw_text_line_row ('title');
       $renderer->draw_check_box_row ('is_visible');
-      if ($this->visible ('is_visible'))
-      {
-        $renderer->draw_separator ();
-      }
       $renderer->draw_text_box_row ('description');
-
-      $renderer->draw_separator ();
 
       if ($this->login->is_allowed (Privilege_set_attachment, Privilege_upload, $this->_folder))
       {
-        $renderer->start_row (' ');
-          $renderer->start_block (true, '30em');
-            $renderer->draw_text_row (' ', 'Replacing the file for the attachment is optional; you can regenerate the thumbnail from the current image by clicking "Save" below.', 'notes');
-            $renderer->draw_separator ();
-            $this->_draw_file_controls ($renderer);
-          $renderer->finish_block (true);
-        $renderer->finish_row ();
+        $renderer->start_block ('Options');
+          $renderer->draw_text_row (' ', 'Replacing the file for the attachment is optional; you can regenerate the thumbnail from the current image by clicking "Save" below.', 'notes');
+          $this->_draw_file_controls ($renderer);
+        $renderer->finish_block ();
       }
     }
     else
@@ -310,19 +314,13 @@ class ATTACHMENT_FORM extends OBJECT_IN_FOLDER_FORM
       if ($this->login->is_allowed (Privilege_set_attachment, Privilege_upload, $this->_folder))
       {
         $this->_draw_file_controls ($renderer);
-        $renderer->draw_separator ();
       }
 
       $renderer->draw_text_line_row ('title');
       $renderer->draw_check_box_row ('is_visible');
-      if ($this->visible ('is_visible'))
-      {
-        $renderer->draw_separator ();
-      }
       $renderer->draw_text_box_row ('description');
     }
 
-    $renderer->draw_separator ();
     $renderer->draw_submit_button_row ();
     
     $this->_draw_history_item_controls ($renderer, false);

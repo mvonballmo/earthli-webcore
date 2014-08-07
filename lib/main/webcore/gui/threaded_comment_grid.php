@@ -49,13 +49,13 @@ require_once ('webcore/gui/flat_comment_grid.php');
 class THREADED_COMMENT_GRID extends FLAT_COMMENT_GRID
 {
   /**
-   * @param COMMENT[] $objs
+   * @param COMMENT[] $objects
    * @access private
    */
-  protected function _draw_cells ($objs)
+  protected function _draw_cells ($objects)
   {
     $depth = 0;
-    $this->_draw_comments ($objs, $depth);
+    $this->_draw_comments ($objects, $depth);
   }
 
   /**
@@ -81,6 +81,7 @@ class THREADED_COMMENT_GRID extends FLAT_COMMENT_GRID
 
     if ($this->_comment)
     {
+      /** @var COMMENT[] $Result */
       $Result = $this->_query->tree ($this->_comment->id, $this->_comment->root_id);
       $sub_comments = $Result;  // break the reference deliberately, otherwise there is an infinite loop
       $this->_comment->set_sub_comments ($sub_comments);
@@ -141,11 +142,11 @@ class THREADED_COMMENT_GRID extends FLAT_COMMENT_GRID
   }
 
   /**
-   * @param COMMENT[] $objs
+   * @param COMMENT[] $objects
    * @param integer $depth Nesting level.
    * @access private
    */
-  protected function _draw_comments ($objs, $depth)
+  protected function _draw_comments ($objects, $depth)
   {
     if ($depth > 0)
     {
@@ -154,7 +155,7 @@ class THREADED_COMMENT_GRID extends FLAT_COMMENT_GRID
 <?php
     }
     $depth += 1;
-    foreach ($objs as &$obj)
+    foreach ($objects as &$obj)
     {
       $this->_draw_comment ($obj, $depth);
     }
@@ -175,10 +176,10 @@ class THREADED_COMMENT_GRID extends FLAT_COMMENT_GRID
   protected function _draw_comment ($obj, $depth)
   {
     $this->_draw_comment_contents ($obj);
-    $objs = $obj->sub_comments ();  // break the reference deliberately or there is an infinite loop
-    if ($objs)
+    $objects = $obj->sub_comments ();  // break the reference deliberately or there is an infinite loop
+    if ($objects)
     {
-      $this->_draw_comments ($objs, $depth);
+      $this->_draw_comments ($objects, $depth);
     }
   }
 }

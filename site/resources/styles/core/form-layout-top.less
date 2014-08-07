@@ -1,0 +1,39 @@
+@import "core-values";
+
+.basic-form.top
+{
+  fieldset
+  {
+    padding-right: 0px;
+    margin-right: 0px;
+
+    fieldset
+    {
+      border-right-width: 0px;
+    }
+  }
+
+  .form-row
+  {
+    .button:first-child
+    {
+      margin-left: -@standard_border_radius - @hairline_border_width;
+    }
+  }
+
+  label:first-child
+  {
+    display: block;
+    margin-bottom: @small_spacing;
+  }
+
+  .help
+  {
+    float: right;
+  }
+
+  .required label:after
+  {
+    content: '*';
+  }
+}

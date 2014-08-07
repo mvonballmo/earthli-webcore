@@ -56,11 +56,11 @@ class EXECUTE_MIGRATOR_TASK_FORM extends EXECUTE_TASK_FORM
   public $button_icon = '{icons}buttons/upgrade';
 
   /**
-   * @param FRAMEWORK_INFO $app Main application.
+   * @param APPLICATION $context Main application.
    */
-  public function __construct ($app)
+  public function __construct ($context)
   {
-    parent::__construct ($app);
+    parent::__construct ($context);
 
     $field = new BOOLEAN_FIELD ();
     $field->id = 'ignore_from_version';
@@ -97,7 +97,7 @@ class EXECUTE_MIGRATOR_TASK_FORM extends EXECUTE_TASK_FORM
 
   /**
    * Execute the form.
-   * @param TASK $obj
+   * @param MIGRATOR_TASK $obj
    * @access private
    */
   public function commit ($obj)
@@ -129,11 +129,8 @@ class EXECUTE_MIGRATOR_TASK_FORM extends EXECUTE_TASK_FORM
     if (! $this->_object->info->exists ())
     {
       $warning_message = 'Since there is no version in the database, the migrator for <span class="field">' . $this->_object->info->database_version . '</span> will be used and "Ignore Version in Database" is required.';
-      $renderer->draw_text_row ($this->context->resolve_icon_as_html ('{icons}indicators/warning', 'Warning', '32px'), $warning_message, 'caution');
-      $renderer->draw_separator ();
+      $renderer->draw_text_row ($this->context->resolve_icon_as_html ('{icons}indicators/warning', Thirty_two_px, 'Warning'), $warning_message, 'caution');
     }
     parent::_draw_options ($renderer);
   }
 }
-
-?>

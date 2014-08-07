@@ -56,11 +56,11 @@ class EXECUTE_PUBLISHER_TASK_FORM extends EXECUTE_TASK_FORM
   public $button_icon = '{icons}indicators/published';
 
   /**
-   * @param APPLICATION $app Main application.
+   * @param APPLICATION $context Main application.
    */
-  public function __construct ($app)
+  public function __construct ($context)
   {
-    parent::__construct ($app);
+    parent::__construct ($context);
 
     $field = new BOOLEAN_FIELD ();
     $field->id = 'preview';
@@ -80,7 +80,7 @@ class EXECUTE_PUBLISHER_TASK_FORM extends EXECUTE_TASK_FORM
 
   /**
    * Load initial properties from this branch.
-   * @param TASK $obj
+   * @param PUBLISHER_TASK $obj
    */
   public function load_from_object ($obj)
   {
@@ -90,7 +90,7 @@ class EXECUTE_PUBLISHER_TASK_FORM extends EXECUTE_TASK_FORM
 
   /**
    * Execute the form.
-   * @param TASK $obj
+   * @param PUBLISHER_TASK $obj
    * @access private
    */
   public function commit ($obj)
@@ -110,5 +110,3 @@ class EXECUTE_PUBLISHER_TASK_FORM extends EXECUTE_TASK_FORM
     $props->add_item ('preview', 1);    
   }
 }
-
-?>

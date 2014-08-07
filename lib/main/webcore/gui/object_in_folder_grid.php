@@ -50,16 +50,6 @@ require_once ('webcore/gui/content_object_grid.php');
 class OBJECT_IN_FOLDER_SUMMARY_GRID extends CONTENT_OBJECT_GRID
 {
   /**
-   * @var string
-   */
-  public $box_style = 'object-in-list';
-
-  /**
-   * @var boolean
-   */
-  public $show_separator = false;
-
-  /**
    * Show check-box selectors next to items?
    * @var boolean
    */
@@ -71,9 +61,6 @@ class OBJECT_IN_FOLDER_SUMMARY_GRID extends CONTENT_OBJECT_GRID
    */
   protected function _draw_box ($obj)
   {
-?>
-  <div class="grid-item">
-    <?php
     $this->_display_start_minimal_commands_block($obj);
     ?>
     <h3><?php echo $this->obj_link ($obj); ?></h3>
@@ -81,9 +68,6 @@ class OBJECT_IN_FOLDER_SUMMARY_GRID extends CONTENT_OBJECT_GRID
     $this->_echo_header ($obj);
     $this->_echo_text_summary ($obj);
     $this->_display_finish_minimal_commands_block();
-    ?>
-  </div>
-  <?php
   }
   
   /**
@@ -170,7 +154,7 @@ class OBJECT_IN_FOLDER_SUMMARY_GRID extends CONTENT_OBJECT_GRID
         echo str_repeat ('&nbsp;', ($depth - 1) * 2);
         echo $this->app->display_options->object_separator;
       }
-      echo $this->app->get_text_with_icon($folder->icon_url, $folder->title_as_link (), '16px');
+      echo $this->app->get_icon_with_text($folder->icon_url, Sixteen_px, $folder->title_as_link());
       echo '<br>';
       $folder = $folder->parent_folder ();
       $depth += 1;

@@ -60,11 +60,11 @@ class FOLDER_PERMISSIONS_FORM extends PERMISSIONS_FORM
   public $button_icon = '{icons}buttons/save';
 
   /**
-   * @param APPLICATION $app Main application.
+   * @param APPLICATION $context Main application.
    */
-  public function __construct ($app)
+  public function __construct ($context)
   {
-    parent::__construct ($app);
+    parent::__construct ($context);
 
     $field = new INTEGER_FIELD ();
     $field->id = 'id';
@@ -152,16 +152,13 @@ class FOLDER_PERMISSIONS_FORM extends PERMISSIONS_FORM
     $this->_draw_buttons ($renderer);
     foreach ($this->groups as $group)
     {
-      $renderer->start_row ($group->title);
+      $renderer->start_block ($group->title);
       foreach ($group->maps as $map)
       {
         $this->_draw_permission ($map, $formatter, $renderer);
       }
-      $renderer->finish_row ();
-      $renderer->draw_separator ();
+      $renderer->finish_block ();
     }
     $this->_draw_buttons ($renderer);
   }
 }
-
-?>

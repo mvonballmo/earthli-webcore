@@ -1,0 +1,122 @@
+@import "core-values";
+@import "form-values";
+
+.basic-form.ltr
+{
+  fieldset
+  {
+    legend
+    {
+      float: left;
+      width: @label-area-width - @standard_spacing;
+      margin-left: -@label-area-width;
+      margin-top: .15em;
+    }
+
+    &.toggle
+    {
+      legend
+      {
+        margin-top: 0;
+      }
+    }
+
+    margin-left: @label-area-width;
+
+    fieldset
+    {
+      margin-left: 0;
+    }
+  }
+
+  .hint
+  {
+    margin-left: 0;
+  }
+
+  > p
+  {
+    /* Applies to form rows appearing directly in a form (not in a fieldset). */
+
+    margin-left: @label-area-width;
+  }
+
+  > .form-row,
+  > .group,
+  > .hint
+  {
+    margin-left: @label-area-width;
+  }
+
+  .form-row .form-row
+  {
+    margin-left: 0;
+  }
+
+  .form-row
+  {
+    .button:first-child
+    {
+      margin-left: -@standard_border_radius - @hairline_border_width;
+    }
+  }
+
+  .help
+  {
+    float: right;
+  }
+
+  .text-line
+  {
+    label
+    {
+      margin-top: @small_spacing;
+    }
+  }
+
+  label
+  {
+    &:first-child
+    {
+      float: left;
+      width: @label-area-width - @standard_spacing;
+      margin-left: -@label-area-width;
+    }
+  }
+
+  &.left
+  {
+    // Include styles specific to left-aligned ltr-label forms
+
+    .required label:after
+    {
+      content: '*';
+    }
+  }
+
+  &.right
+  {
+    // Include styles specific to right-aligned ltr-label forms
+
+    fieldset
+    {
+      legend
+      {
+        text-align: right;
+      }
+    }
+
+    label
+    {
+      &:first-child
+      {
+        text-align: right;
+      }
+
+      .required label:before
+      {
+        content: '*';
+      }
+    }
+  }
+}

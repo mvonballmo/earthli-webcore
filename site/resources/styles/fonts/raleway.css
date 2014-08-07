@@ -3,9 +3,7 @@
 
 /*@import "http://brick.a.ssl.fastly.net/Raleway:400,400i,700,700i";*/
 
-body,
-.text-control,
-.menu-control
+body
 {
 	font-family: 'Raleway', Verdana, Arial, Helvetica, sans-serif;
 }

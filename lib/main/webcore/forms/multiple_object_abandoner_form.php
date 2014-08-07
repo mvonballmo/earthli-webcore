@@ -77,7 +77,6 @@ class MULTIPLE_OBJECT_ABANDONER_FORM extends MULTIPLE_OBJECT_ACTION_FORM
   protected function _draw_message ($renderer)
   {
     $renderer->draw_text_row ('', 'Are you sure you want to abandon ' . $this->object_list->description () . '?');
-    $renderer->draw_separator ();
     $buttons [] = $renderer->button_as_HTML ('No', "view_explorer.php?id={$this->_folder->id}");
     $buttons [] = $renderer->submit_button_as_HTML ();
     $renderer->draw_buttons_in_row ($buttons);

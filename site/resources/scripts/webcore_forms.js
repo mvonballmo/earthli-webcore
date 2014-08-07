@@ -367,6 +367,52 @@ function submit_form (form_name, submit_all, submitted_name, preview_name)
   _submit_form (document.getElementById (form_name), submit_all, submitted_name, preview_name);
 }
 
+function execute_field(url, form_name, field_name)
+{
+  var request = new XMLHttpRequest();
+  request.open('POST', url, true);
+  request.setRequestHeader("Content-type", "application/x-www-form-urlencoded;charset=ISO-8859-1");
+
+  var form = document.getElementById(form_name);
+  var idField = form['id'];
+  var dataField = document.getElementById(field_name);
+
+  request.send('id=' + encodeURIComponent(idField.value) + '&inputText=' + encodeURIComponent(dataField.value));
+
+  request.onreadystatechange = function ()
+  {
+    if (request.readyState == 4 && request.status == 200)
+    {
+      var data = JSON.parse(request.responseText);
+
+      var previewBlock = document.getElementById("inline_preview_block");
+      var previewArea = document.getElementById("inline_preview");
+      var messageArea = document.getElementById("inline_preview_message");
+
+      if (data.errors.length > 0)
+      {
+        var error_text = '';
+
+        for (var i = 0; i < data.errors.length; i++)
+        {
+          var error = data.errors[i];
+
+          error_text += "<p>[<a href='#' onclick='select_line_column_range (document.getElementById(\"" + field_name + "\"), " + error.line_number + ", " + error.column_start + ", " + error.line_number + ", " + error.column_end + ")'>line " + error.line_number + ', col ' + error.column_start + '</a>]: ' + error.message + '</p>';
+        }
+
+        previewArea.innerHTML = error_text;
+      }
+      else
+      {
+        previewArea.innerHTML = data.text;
+      }
+
+      messageArea.innerHTML = data.message;
+      previewBlock.style.display = 'block';
+    }
+  }
+}
+
 function preview_form (form_name, submit_all, submitted_name, preview_name)
 {
 	submit_form (form_name, submit_all, preview_name, submitted_name);

@@ -61,15 +61,15 @@ class PERMISSIONS_QUERY extends QUERY
   public $id = 'ref_id';
 
   /**
-   * @param APPLICATION $app Main application.
+   * @param APPLICATION $context Main application.
    */
-  public function __construct ($app)
+  public function __construct ($context)
   {
-    parent::__construct ($app);
+    parent::__construct ($context);
 
     $this->_select = 'perm.*';
     $this->_order = 'kind DESC, importance DESC';
-    $this->_tables = "{$app->table_names->folder_permissions} perm";
+    $this->_tables = "{$context->table_names->folder_permissions} perm";
     $this->type = All;
   }
 

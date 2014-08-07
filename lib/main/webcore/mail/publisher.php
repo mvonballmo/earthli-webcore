@@ -278,6 +278,8 @@ class PUBLISHER extends LOGGABLE
 
                       $subscriber_records [$subscriber->email]->history_items [$history_item->id] = $history_item;
                       $subscriber_records [$subscriber->email]->num_objects += 1;
+
+                      $subscriber_records [$subscriber->email]->objects [$history_item->access_id][$object_type][$object_id] = new stdClass();
                       $subscriber_records [$subscriber->email]->objects [$history_item->access_id][$object_type][$object_id]->object = $obj;
                       $subscriber_records [$subscriber->email]->objects [$history_item->access_id][$object_type][$object_id]->history_items [] = $history_item;
                     }
@@ -504,7 +506,7 @@ class PUBLISHER extends LOGGABLE
         $Result = $mail_renderer->as_text ($item->rendering_options ());
       }
 
-      $this->_renderered_bodies [$item->identifier] = $Result;
+      $this->_rendered_bodies [$item->identifier] = $Result;
     }
 
     return $this->_replace_aliases ($item, $Result);
@@ -579,7 +581,7 @@ class PUBLISHER extends LOGGABLE
             echo "<p class=\"field\">$msg->subject</p>";
             if ($msg->send_as_html)
             {
-              echo '<div class="chart"><div class="chart-body">' . $msg->body . '</div></div>';
+              echo $msg->body;
             }
             else
             {

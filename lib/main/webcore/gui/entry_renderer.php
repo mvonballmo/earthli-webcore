@@ -164,7 +164,7 @@ class ENTRY_ASSOCIATED_DATA_RENDERER extends HANDLER_RENDERER
         /** @var $com_renderer COMMENT_LIST_RENDERER */
         $com_renderer = new $class_name ($com_query, $obj);
       ?>
-      <h2 id="comments" style="clear: both">
+      <h2 id="comments" class="clear-both">
         Comments
       </h2>
       <?php

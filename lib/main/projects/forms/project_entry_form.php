@@ -257,7 +257,7 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
   {
     $field = new BOOLEAN_FIELD ();
     $field->id = "branch_{$branch->id}_enabled";
-    $field->caption = $branch->title_as_link ();
+    $field->caption = $branch->title_as_html ();
     $this->add_field ($field);
 
     $field = new INTEGER_FIELD ();
@@ -390,11 +390,10 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
     if (sizeof ($kinds))
     {
       $props = $renderer->make_list_properties ();
-      $props->items_per_row = 1;
       $index = 0;
-      foreach ($kinds as &$kind)
+      foreach ($kinds as $kind)
       {
-        $props->add_item ($this->app->get_text_with_icon($kind->icon, $kind->title, '20px'), $index);
+        $props->add_item ($this->app->get_icon_with_text($kind->icon, Twenty_px, $kind->title), $index);
         $index += 1;
       }
       $renderer->draw_radio_group_row ('kind', $props);
@@ -407,6 +406,7 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
   protected function _draw_component_controls ($renderer)
   {
     $props = $renderer->make_list_properties ();
+    $props->css_class = 'medium';
     $props->add_item ('[None]', 0);
 
     /** @var PROJECT $folder */
@@ -454,7 +454,7 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
         $title = $release->title_as_link ();
         if ($release->locked ())
         {
-          $title = $this->context->get_text_with_icon('{icons}indicators/locked', $title, '16px');
+          $title = $this->context->get_icon_with_text('{icons}indicators/locked', Sixteen_px, $title);
         }
         $renderer->draw_text_row ('Release', $title);
       }
@@ -468,6 +468,7 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
     else
     {
       $props = $renderer->make_list_properties ();
+      $props->css_class = 'medium';
       $props->add_item ('[Next release]', 0);
 
       $release_query = $branch->pending_release_query (Release_not_locked);
@@ -533,10 +534,12 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
   {
     if (sizeof ($this->branches))
     {
-      $renderer->start_block ();
-      $renderer->start_row ();
-
-      $use_DHTML = $this->context->dhtml_allowed ();
+      $renderer->start_block ('Branches');
+?>
+      <p class="description">
+        Assign this job to one or more of the following branches.
+      </p>
+<?php
       $check_props = $renderer->make_check_properties ();
 
       foreach ($this->branches as $branch)
@@ -546,7 +549,7 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
 
         if ($visible || ! $branch->locked ())
         {
-          if ($use_DHTML && ! $visible)
+          if (! $visible)
           {
             $style = 'display: none';
           }
@@ -570,10 +573,10 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
           {
             $renderer->draw_hidden ("branch_{$branch->id}_enabled");
 
-            $title = $branch->title_as_link ();
+            $title = $branch->title_as_html ();
             if ($branch->locked ())
             {
-              $title = $this->context->get_text_with_icon('{icons}indicators/locked', $title, '16px');
+              $title = $this->context->get_icon_with_text('{icons}indicators/locked', Sixteen_px, $title);
             }
             echo $title;
           }
@@ -583,9 +586,9 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
             echo $renderer->check_box_as_HTML ("branch_{$branch->id}_enabled", $check_props);
           }
         ?>
-        <div id="branch_<?php echo $branch->id; ?>_panel" class="preview"<?php if ($style) echo 'style="' . $style . '"'; ?>>
+        <div id="branch_<?php echo $branch->id; ?>_panel" <?php if ($style) echo 'style="' . $style . '"'; ?>>
           <?php
-            $renderer->start_block ();
+            $renderer->start_block ('');
               $this->_draw_branch_info_controls ($branch, $renderer, $visible, $release);
             $renderer->finish_block ();
           ?>
@@ -594,7 +597,6 @@ class PROJECT_ENTRY_FORM extends ENTRY_FORM
         }
       }
 
-      $renderer->finish_row ();
       $renderer->draw_error_row ('main_branch_id');
       $renderer->finish_block ();
     }

@@ -80,7 +80,7 @@ class FOLDER_GROUP_PERMISSIONS_CREATE_FORM extends FOLDER_PERMISSIONS_FORM
   
   /**
    * Called after fields are validated.
-   * @param PERMISSIONS $obj
+   * @param FOLDER_PERMISSIONS $obj
    * @access private
    */
   protected function _post_validate ($obj)
@@ -112,7 +112,7 @@ class FOLDER_GROUP_PERMISSIONS_CREATE_FORM extends FOLDER_PERMISSIONS_FORM
 
   /**
    * Store the form's values to this set of permissions.
-   * @param PERMISSIONS $obj
+   * @param FOLDER_PERMISSIONS $obj
    * @access private
    */
   public function commit ($obj)
@@ -135,6 +135,7 @@ class FOLDER_GROUP_PERMISSIONS_CREATE_FORM extends FOLDER_PERMISSIONS_FORM
     $selected_group_id = read_var ('selected_group_id', 0);
     if ($selected_group_id)
     {
+      /** @var GROUP $group */
       $group = $this->_group_query->object_at_id ($selected_group_id);
       $this->set_value ('group_name', $group->title);
     }
@@ -165,15 +166,7 @@ class FOLDER_GROUP_PERMISSIONS_CREATE_FORM extends FOLDER_PERMISSIONS_FORM
    */
   protected function _draw_permission_controls ($renderer, $formatter)
   {
-    $options = new FORM_TEXT_CONTROL_OPTIONS ();
-    $options->width = '20em';
-
-    $renderer->draw_text_line_row ('group_name', $options);
-
-    $buttons [] = $renderer->javascript_button_as_HTML ('Browse...', 'field.show_picker()', '{icons}buttons/browse');
-    $renderer->draw_buttons_in_row ($buttons);
-
-    $renderer->draw_separator ();
+    $renderer->draw_text_line_with_browse_button_row ('group_name', 'field.show_picker()');
 
     parent::_draw_permission_controls ($renderer, $formatter);
   }

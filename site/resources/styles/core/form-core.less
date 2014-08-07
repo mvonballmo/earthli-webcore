@@ -1,0 +1,409 @@
+@import "core-values";
+@import "core-mixins";
+@import "form-values";
+
+.style-controls
+{
+  input[type="radio"],
+  input[type="checkbox"]
+  {
+    vertical-align: middle;
+  }
+
+  button,
+  input[type=submit],
+  input[type=button],
+  input[type=text],
+  input[type=password],
+  select,
+  textarea
+  {
+    font-family: inherit;
+    font-size: inherit;
+  }
+
+  input[type=text],
+  input[type=password],
+  select,
+  textarea
+  {
+    line-height: inherit;
+  }
+}
+
+.basic-form
+{
+  line-height: @text_flow_line_height;
+
+  fieldset
+  {
+    border: none;
+    margin: @standard_spacing 0;
+    padding: 0;
+
+    &.toggle
+    {
+      .content
+      {
+        margin-top: @standard_spacing;
+      }
+
+      .toggle
+      {
+        float: left;
+        margin-right: @small_spacing;
+
+        & + .text
+        {
+          display: block;
+          margin-left: 13px + @small_spacing;
+        }
+      }
+    }
+  }
+
+  textarea,
+  select,
+  input[type=password],
+  input[type=text]
+  {
+    width: 100%;
+  }
+
+  input[type=checkbox],
+  input[type=radio]
+  {
+    vertical-align: baseline;
+    margin-left: 0;
+  }
+
+  .help
+  {
+    p:first-child
+    {
+      margin-top: 0;
+    }
+
+    p:last-child
+    {
+      margin-bottom: 0;
+    }
+  }
+
+  .hint,
+  > .form-row,
+  fieldset .hint,
+  fieldset > .form-row
+  {
+    display: block;
+  }
+
+  .form-row
+  {
+    margin-top: @small_spacing;
+    margin-bottom: @small_spacing;
+  }
+
+  .form-row
+  {
+    label:first-child
+    {
+      & + input[type=radio],
+      & + input[type=checkbox]
+      {
+        float: left;
+        margin-right: @small_spacing;
+        margin-top: @small_spacing + 1;
+
+        & + label
+        {
+          display: block;
+          margin-left: 13px + @small_spacing;
+        }
+      }
+    }
+
+    input[type=radio]:first-child,
+    input[type=checkbox]:first-child
+    {
+      float: left;
+      margin-right: @small_spacing;
+      margin-top: @small_spacing + 1;
+    }
+
+    &.text-line
+    {
+      input[type=radio]:first-child,
+      input[type=checkbox]:first-child
+      {
+        margin-top: @small_spacing + @standard_border_radius + @hairline_border_width + 4; // magic number
+      }
+    }
+
+    label:not(:first-child)
+    {
+      & + input[type=radio],
+      & + input[type=checkbox]
+      {
+        margin-left: @small_spacing;
+      }
+    }
+
+    label
+    {
+      .description
+      {
+        display: block;
+        margin-left: 13px + @small_spacing;
+        margin-bottom: 0;
+      }
+    }
+
+    .error,
+    .warning,
+    .caution
+    {
+      margin-right: @small_spacing;
+    }
+  }
+
+  .one-input
+  {
+    input,
+    select,
+    textarea
+    {
+      width: 100%;
+    }
+  }
+
+  .two-inputs
+  {
+    input,
+    select,
+    textarea
+    {
+      width: 50%;
+    }
+  }
+
+  .three-inputs
+  {
+    input,
+    select,
+    textarea
+    {
+      width: 33%;
+    }
+  }
+
+  .four-inputs
+  {
+    input,
+    select,
+    textarea
+    {
+      width: 25%;
+    }
+  }
+
+  .browse
+  {
+    input
+    {
+      width: 200px;
+    }
+  }
+
+  input[type=text],
+  input[type=password],
+  input[type=file],
+  textarea,
+  select
+  {
+    &.tiny
+    {
+      width: 3em;
+    }
+
+    &.small
+    {
+      width: 10em;
+    }
+
+    &.small-medium
+    {
+      width: 15em;
+    }
+
+    &.medium
+    {
+      width: 20em;
+    }
+
+    &.short
+    {
+      height: 5em;
+    }
+
+    &.short-medium
+    {
+      height: 10em;
+    }
+
+    &.medium-height
+    {
+      height: 15em;
+    }
+
+    &.medium-tall
+    {
+      height: 20em;
+    }
+
+    &.tall
+    {
+      height: 30em;
+    }
+  }
+
+  .help
+  {
+    width: @label-area-width;
+    height: auto;
+    margin-right: @standard_spacing;
+  }
+}
+
+.button,
+button
+{
+  display: inline-block;
+  min-width: @minimum_button_width;
+  min-height: @minimum_button_height;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.button,
+.style-controls button
+{
+  .border-box();
+  padding: .4em;
+  text-decoration: none;
+  cursor: pointer;
+  background-color: #EEE;
+  border: @hairline_border_width solid @standard_border_color;
+  border-radius: @standard_border_radius;
+  line-height: normal;
+  text-align: center;
+}
+
+a.button:link, a.button:visited
+{
+  color: #333;
+  text-decoration: none;
+}
+
+.button:hover:not(.disabled):not(.selected),
+.style-controls button:hover:not(.disabled):not(.selected)
+{
+  border-color: darkgray;
+  background-color: #DDDDDD;
+}
+
+.button + .button,
+button + button,
+.button + button,
+button + .button
+{
+  margin-left: @button_spacing;
+}
+
+.input
+{
+  display: inline-block;
+}
+
+input,
+textarea,
+select
+{
+  margin-left: 0;
+  .border-box();
+}
+
+.input + .input,
+.input + input,
+input + .input,
+select + select,
+select + .input,
+.input + select,
+input + input,
+input + select,
+select + input,
+input + .button,
+input + button,
+.input + button,
+.input + .button,
+select + button,
+select + .button
+{
+  margin-left: @small_spacing;
+}
+
+.button.disabled,
+.style-controls button.disabled
+{
+  color: #AAA;
+  border-color: #DDD;
+  cursor: default;
+}
+
+.button.selected,
+.style-controls button.selected
+{
+  cursor: default;
+  background-color: gray;
+  border-color: #666;
+  color: white;
+}
+
+.button .icon,
+.style-controls button .icon
+{
+  display: inline-block;
+  .border-box();
+  position: relative;
+  top: 2px;
+}
+
+.style-controls .basic-form
+{
+  .form-row
+  {
+    button:first-child
+    {
+      margin-left: -@standard_border_radius - @hairline_border_width;
+    }
+  }
+}
+
+#inline_preview_block
+{
+  display: none;
+  position: absolute;
+  left: @page_max_width + 50px;
+  margin-right: @standard_spacing;
+}
+
+#inline_preview_message
+{
+
+}
+
+#inline_preview_block
+{
+  overflow: auto;
+  height: 42em;
+}

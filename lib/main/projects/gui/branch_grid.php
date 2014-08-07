@@ -49,27 +49,7 @@ require_once ('webcore/gui/content_object_grid.php');
 class BRANCH_GRID extends CONTENT_OBJECT_GRID
 {
   /**
-   * @var string
-   */
-  public $box_style = 'object-in-list';
-
-  /**
-   * @var string
-   */
-  public $object_name = 'Branch';
-
-  /**
-   * @var boolean
-   */
-  public $even_columns = false;
-
-  /**
-   * @var boolean
-   */
-  public $show_separator = false;
-
-  /**
-   * @var boolean Show creator/modifier with branchs?
+   * @var boolean Show creator/modifier with branches?
    */
   public $show_user = true;
 
@@ -79,28 +59,33 @@ class BRANCH_GRID extends CONTENT_OBJECT_GRID
   public $show_folder = false;
 
   /**
+   * @param CONTEXT $context Context to which this grid belongs.
+   */
+  public function __construct($context)
+  {
+    parent::__construct($context);
+
+    $this->even_columns = false;
+  }
+
+  /**
    * @param BRANCH $obj
    * @access private
    */
   protected function _draw_box ($obj)
   {
-    $folder = $obj->parent_folder ();
-    $creator = $obj->creator ();
+    $this->_display_start_minimal_commands_block($obj);
   ?>
-  <div class="grid-item">
-    <div class="minimal-commands">
-      <?php $this->_draw_menu_for ($obj, Menu_size_minimal); ?>
-    </div>
-    <div class="minimal-commands-content">
     <h3>
     <?php
       if ($this->show_folder)
       {
+        $folder = $obj->parent_folder ();
         echo $folder->title_as_link () . $this->app->display_options->object_separator;
       }
       if ($obj->locked ())
       {
-        echo $this->app->get_text_with_icon('{icons}indicators/locked', $this->obj_link ($obj), '16px');
+        echo $this->app->get_icon_with_text('{icons}indicators/locked', Sixteen_px, $this->obj_link($obj));
       }
       else
       {
@@ -108,14 +93,6 @@ class BRANCH_GRID extends CONTENT_OBJECT_GRID
       }
     ?>
     </h3>
-  <div>
-    <div style="float: left; margin-right: .5em">
-    <?php
-      $layer = $this->context->make_layer ("id_{$obj->id}_details");
-      $layer->draw_toggle ();
-    ?>
-    </div>
-    <div class="detail" style="float: left">
     <?php
       $menu = $this->context->make_menu ();
       $menu->append ('Releases', $obj->home_page () . '&panel=releases');
@@ -123,36 +100,32 @@ class BRANCH_GRID extends CONTENT_OBJECT_GRID
       $menu->append ('Changes', $obj->home_page () . '&panel=change');
       $menu->display ();
     ?>
-    </div>
-    <div style="clear: both"></div>
-  </div>
-  <?php
-    $layer->start ();
-  ?>
-  <p class="detail">
-  <?php
-    echo 'Created ';
-    if ($this->show_user)
-    {
-      echo 'by ' . $creator->title_as_link () . ' - ';
-    }
-    echo $obj->time_created->format ();
-  
-    if (! $obj->time_created->equals ($obj->time_modified))
-    {
-      $modifier = $obj->modifier ();
-      echo '<br>Updated ';
+    <p>
+    <?php
+      echo 'Created ';
       if ($this->show_user)
       {
-        echo 'by ' . $modifier->title_as_link () . ' - ';
+        $creator = $obj->creator ();
+        echo 'by ' . $creator->title_as_link () . ' - ';
       }
-      echo $obj->time_modified->format ();
-    }
-  ?>
-  </p>
-  <?php
+      echo $obj->time_created->format ();
+
+      if (! $obj->time_created->equals ($obj->time_modified))
+      {
+        $modifier = $obj->modifier ();
+        echo '<br>Updated ';
+        if ($this->show_user)
+        {
+          echo 'by ' . $modifier->title_as_link () . ' - ';
+        }
+        echo $obj->time_modified->format ();
+      }
+    ?>
+    </p>
+    <?php
     echo $obj->description_as_html ();
-    $layer->finish ();
+    $this->_display_finish_minimal_commands_block();
   }
 }
+
 ?>

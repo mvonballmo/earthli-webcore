@@ -58,22 +58,24 @@ class PICTURE_NAVIGATOR extends MULTI_TYPE_ENTRY_NAVIGATOR
   {
     parent::_adjust_query ($query);
 
-    $journal = read_var ('journal');
+    $journal_id = read_var ('journal');
     $first_day = read_var ('first_day');
     $last_day = read_var ('last_day');
 
-    if ($journal)
+    if ($journal_id)
     {
+      /** @var ALBUM $folder */
       $folder = $this->_entry->parent_folder ();
-      $jrnl_query = $folder->entry_query ();
-      $jrnl = $jrnl_query->object_at_id ($journal);
-      if (isset ($jrnl))
+      $journal_query = $folder->entry_query ();
+      /** @var JOURNAL $journal */
+      $journal = $journal_query->object_at_id ($journal_id);
+      if (isset ($journal))
       {
-        $jrnl->adjust_query ($query);
+        $journal->adjust_query ($query);
       }
     }
 
-    if (! $journal && $first_day)
+    if (! $journal_id && $first_day)
     {
       $query->set_days ($first_day, $last_day);
     }

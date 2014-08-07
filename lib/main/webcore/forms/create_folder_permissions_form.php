@@ -55,11 +55,11 @@ class CREATE_FOLDER_PERMISSIONS_FORM extends ID_BASED_FORM
   public $button = 'Yes';
 
   /**
-   * @param APPLICATION $app
+   * @param APPLICATION $context
    */
-  public function __construct ($app)
+  public function __construct ($context)
   {
-    parent::__construct ($app);
+    parent::__construct ($context);
 
     $field = new ENUMERATED_FIELD ();
     $field->id = 'copy_mode';
@@ -100,13 +100,16 @@ class CREATE_FOLDER_PERMISSIONS_FORM extends ID_BASED_FORM
    */
   protected function _draw_controls ($renderer)
   {
-    if (! $this->_object->defines_security ())
+    $renderer->labels_css_class = 'top';
+
+    /** @var FOLDER $folder */
+    $folder = $this->_object;
+    if (! $folder->defines_security ())
     {
       $renderer->start ();
-      $renderer->draw_text_row ('', 'Are you sure you want to create new permissions for ' . $this->_object->title_as_link () . '?');
-      $renderer->draw_separator ();
-      
-      $parent_folder = $this->_object->parent_folder ();
+      $renderer->draw_text_row ('', 'Are you sure you want to create new permissions for ' . $folder->title_as_link () . '?');
+
+      $parent_folder = $folder->parent_folder ();
       $permissions_folder = $parent_folder->permissions_folder ();
       
       $props = $renderer->make_list_properties ();
@@ -114,17 +117,15 @@ class CREATE_FOLDER_PERMISSIONS_FORM extends ID_BASED_FORM
       $props->add_item ('Copy current permissions from ' . $permissions_folder->title_as_link (), Security_copy_current);
       $props->add_item ('Grant all permissions for user ' . $this->login->title_as_link (), Security_create_admin);
       $renderer->draw_radio_group_row ('copy_mode', $props);
-      $renderer->draw_separator ();
 
       $buttons [] = $renderer->button_as_HTML ('No', 'view_folder_permissions.php?id=' . $this->_object->id);
       $buttons [] = $renderer->submit_button_as_HTML ();
       $renderer->draw_buttons_in_row ($buttons);
-      $renderer->draw_separator ();
 
       $permissions = $this->login->permissions ();      
       if ($permissions->value_for (Privilege_set_folder, Privilege_view) != Privilege_always_granted)
       {
-        $renderer->draw_text_row ('', '<div class="caution">' . $this->app->resolve_icon_as_html ('{icons}/indicators/warning', 'Warning', '16px') . ' *In this case, you <span class="field">will not</span> be able to see this folder.</div>', 'notes');
+        $renderer->draw_text_row ('', $this->app->get_message('*In this case, you <span class="field">will not</span> be able to see this folder.', 'warning'), 'notes');
       }
       else
       {
@@ -137,13 +138,11 @@ class CREATE_FOLDER_PERMISSIONS_FORM extends ID_BASED_FORM
     {
       $renderer->start ();
 
-      $renderer->draw_text_row ('', 'Are you sure you want to remove permissions for ' . $this->_object->title_as_link () . '?*');
-      $renderer->draw_separator ();
+      $renderer->draw_text_row ('', 'Are you sure you want to remove permissions for ' . $folder->title_as_link () . '?*');
 
-      $buttons [] = $renderer->button_as_HTML ('No', 'view_folder_permissions.php?id=' . $this->_object->id);
+      $buttons [] = $renderer->button_as_HTML ('No', 'view_folder_permissions.php?id=' . $folder->id);
       $buttons [] = $renderer->submit_button_as_HTML ();
       $renderer->draw_buttons_in_row ($buttons);
-      $renderer->draw_separator ();
 
       $renderer->draw_text_row ('', '*Doing so will revert all permissions to those used by the parent folder.', 'notes');
 
@@ -151,4 +150,3 @@ class CREATE_FOLDER_PERMISSIONS_FORM extends ID_BASED_FORM
     }
   }
 }
-?>

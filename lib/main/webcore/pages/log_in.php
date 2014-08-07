@@ -27,6 +27,7 @@ http://www.earthli.com/software/webcore
 ****************************************************************************/
 
   $class_name = $App->final_class_name ('LOG_IN_FORM', 'webcore/forms/log_in_form.php');
+  /** @var LOG_IN_FORM $form */
   $form = new $class_name ($App);
 
   $Page->title->subject = 'Log in';
@@ -45,7 +46,7 @@ http://www.earthli.com/software/webcore
   }
 
   $Page->location->add_root_link ();
-  $Page->location->append ($App->resolve_icon_as_html ('{icons}buttons/login', ' ', '16px') . ' ' . $Page->title->subject);
+  $Page->location->append ($App->resolve_icon_as_html ('{icons}buttons/login', Sixteen_px, ' ') . ' ' . $Page->title->subject);
 
   $Page->start_display ();
 ?>

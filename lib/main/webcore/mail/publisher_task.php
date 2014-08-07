@@ -195,5 +195,3 @@ class PUBLISHER_TASK extends TASK
     $publisher->publish_history_items ($history_item_query);
   }
 }
-
-?>

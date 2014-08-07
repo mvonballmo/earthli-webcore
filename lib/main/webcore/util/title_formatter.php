@@ -54,7 +54,7 @@ class TITLE_FORMATTER extends WEBCORE_OBJECT
    * Used for both text and link.
    * @var string
    */
-  public $CSS_class = '';
+  public $css_class = '';
 
   /**
    * The maximum displayed length of the text.
@@ -109,10 +109,10 @@ class TITLE_FORMATTER extends WEBCORE_OBJECT
    */
   public function set_name ($page_name)
   {
-    $qmark = strpos ($this->location, '?');
-    if ($qmark !== false)
+    $question_mark_position = strpos ($this->location, '?');
+    if ($question_mark_position !== false)
     {
-      $this->location = $page_name . substr ($this->location, $qmark);
+      $this->location = $page_name . substr ($this->location, $question_mark_position);
     }
     else
     {
@@ -258,9 +258,9 @@ class TITLE_FORMATTER extends WEBCORE_OBJECT
       $Result .= " title=\"$title_to_use\"";
     }
 
-    if ($this->CSS_class)
+    if ($this->css_class)
     {
-      $Result .= " class=\"$this->CSS_class\"";
+      $Result .= " class=\"$this->css_class\"";
     }
 
     $Result .= '>' . $text_to_use . $suffix;

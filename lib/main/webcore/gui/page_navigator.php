@@ -431,7 +431,7 @@ class PAGE_NAVIGATOR extends WEBCORE_OBJECT
           $text = 'Last page';
       }
 
-      return $this->context->resolve_icon_as_html ('{icons}buttons/' . $type, $text, '16px');
+      return $this->context->resolve_icon_as_html ('{icons}buttons/' . $type, Sixteen_px, $text);
     }
     else
     {

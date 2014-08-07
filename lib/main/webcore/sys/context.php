@@ -477,7 +477,7 @@ class CONTEXT extends RESOLVER
     $Result->content_mode = Menu_show_as_buttons | Menu_show_icon | Menu_show_title;
     $Result->trigger_title = 'Newsfeeds';
     $Result->trigger_icon = "{icons}indicators/newsfeed_rss";
-    $Result->trigger_button_CSS_class = 'newsfeed';
+    $Result->trigger_button_css_class = 'newsfeed';
     
     return $Result;
   }
@@ -554,10 +554,51 @@ class CONTEXT extends RESOLVER
    * Adds a message to the output stream.
    * @param string $message The message to display
    * @param string $type The type of message; can be 'error', 'warning' and 'info'
+   * @param string $tag_name
    */
-  public function show_message ($message, $type = 'error')
+  public function show_message ($message, $type = 'error', $tag_name = 'p')
   {
-    echo $this->get_begin_message ($type) . $message . $this->get_end_message();
+    echo $this->get_message ($message, $type, $tag_name);
+  }
+
+  /**
+   * Gets a formatted message.
+   * @param string $message The message to display
+   * @param string $type The type of message; can be 'error', 'warning' and 'info'
+   * @param string $tag_name
+   * @return string
+   */
+  public function get_message ($message, $type = 'error', $tag_name = 'p')
+  {
+    return $this->get_begin_message ($type, $tag_name) . $message . $this->get_end_message($tag_name);
+  }
+
+  /**
+   * Get the beginning of a message tag formatted for HTML output.
+   * @param string $type The type of message; can be 'error', 'warning' and 'info'
+   * @param string $tag_name
+   * @return string
+   */
+  public function get_begin_message ($type = 'error', $tag_name = 'p')
+  {
+    $icon_url = '{icons}indicators/' . $type;
+    if ($type == 'info')
+    {
+      $type = 'caution';
+    }
+
+    // TODO P tag should just set the background icon and use an appropriate padding rather than a nested container
+
+    $sub_tag_name = $tag_name == 'p' ? 'span' : 'div';
+
+    $Result = '<' . $tag_name . ' class="' . $type . '">' . $this->_get_start_icon_container($sub_tag_name, $icon_url, Sixteen_px);
+
+    if ($sub_tag_name == 'span')
+    {
+      $Result .= '</span><span class="caption">';
+    }
+
+    return $Result;
   }
 
   /**
@@ -575,23 +616,80 @@ class CONTEXT extends RESOLVER
     return '</div></' . $tag_name . '>';
   }
 
-  /**
-   * Get the beginning of a message tag formatted for HTML output.
-   * @param string $type The type of message; can be 'error', 'warning' and 'info'
-   * @param string $tag_name
-   * @return string
-   */
-  public function get_begin_message ($type = 'error', $tag_name = 'p')
+  public function start_icon_container($icon_url, $size)
   {
-    $icon_url = $this->get_icon_url ('{icons}indicators/' . $type, '16px');
-    if ($type == 'info')
+    echo $this->_get_start_icon_container('div', $icon_url, $size);
+  }
+
+  public function finish_icon_container()
+  {
+    echo '</div>';
+  }
+
+  public function start_icon_wrapper($icon_url, $size)
+  {
+    echo $this->_get_start_icon_container('span', $icon_url, $size);
+  }
+
+  public function finish_icon_wrapper()
+  {
+    echo '</span>';
+  }
+
+  public function get_icon_with_text($icon_url, $size, $text)
+  {
+    if ($icon_url)
     {
-      $type = 'caution';
+      $Result = $this->_get_start_icon_container('span', $icon_url, $size) . '</span>';
+
+      if ($text)
+      {
+        $Result .= "<span class=\"caption\">$text</span>";
+      }
+
+      return $Result;
+    }
+    else
+    {
+      return $text;
+    }
+  }
+
+  private function _get_start_icon_container($tag_name, $icon_url, $size, $css_class = '')
+  {
+    switch ($size)
+    {
+      case Fifteen_px:
+        $class = 'fifteen';
+        break;
+      case Sixteen_px:
+        $class = 'sixteen';
+        break;
+      case Twenty_px:
+        $class = 'twenty';
+        break;
+      case Thirty_two_px:
+        $class = 'thirty-two';
+        break;
+      case Thirty_px:
+        $class = 'thirty';
+        break;
+      case Fifty_px:
+        $class = 'fifty';
+        break;
+      case One_hundred_px:
+        $class = 'one-hundred';
+        break;
+      default:
+        throw new UNKNOWN_VALUE_EXCEPTION($size);
     }
 
-    $sub_tag_name = $tag_name == 'p' ? 'span' : 'div';
+    if ($css_class)
+    {
+      $class .= ' ' . $css_class;
+    }
 
-    return '<' . $tag_name . ' class="' . $type . '"><' . $sub_tag_name . ' class="icon sixteen" style="display: block; background-image: url(' . $icon_url . ')">';
+    return '<' . $tag_name . ' class="icon ' . $class . '" style="background-image: url(' . $this->get_icon_url($icon_url, $size) . ')">';
   }
 
   /**

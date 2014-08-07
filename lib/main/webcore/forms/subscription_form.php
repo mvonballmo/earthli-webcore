@@ -71,12 +71,12 @@ abstract class SUBSCRIPTION_FORM extends FORM
   public $panel_name;
 
   /**
-   * @param APPLICATION $app Main application.
+   * @param APPLICATION $context Main application.
    * @param SUBSCRIBER $subscriber Edit subscriptions for this user.
    */
-  public function __construct ($app)
+  public function __construct ($context)
   {
-    parent::__construct ($app);
+    parent::__construct ($context);
 
     $field = new EMAIL_FIELD ();
     $field->id = 'email';
@@ -178,7 +178,6 @@ abstract class CONTENT_OBJECT_SUBSCRIPTION_FORM extends SUBSCRIPTION_FORM
         $buttons [] = $renderer->submit_button_as_HTML ();
         $renderer->draw_buttons_in_row ($buttons);
 
-        $renderer->draw_separator ();
         $renderer->draw_error_row ('ids');
       }
 
@@ -186,7 +185,6 @@ abstract class CONTENT_OBJECT_SUBSCRIPTION_FORM extends SUBSCRIPTION_FORM
       $grid->display ();
       $renderer->finish_row ();
 
-      $renderer->draw_separator ();
       if ($size > 0)
       {
         $renderer->draw_buttons_in_row ($buttons);

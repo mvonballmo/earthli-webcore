@@ -60,7 +60,7 @@ $Page->start_display();
     <li><a href="#report_problem">How do I report a problem with browser detection?</a></li>
   </ul>
   <h2>FAQ</h2>
-  <div class="icon thirty-two no-label" style="background-image: url(<?php echo $Page->get_icon_url('{icons}indicators/question', '32px'); ?>)">
+  <div>
     <p class="quote-block" id="unsupported_browser">
       Why do I see a warning at the top of the page?
     </p>
@@ -72,7 +72,7 @@ $Page->start_display();
     ?>
     <p>While this site degrades gracefully under older browsers, it won't look as nice as it could.</p>
   </div>
-  <div class="icon thirty-two no-label" style="background-image: url(<?php echo $Page->get_icon_url('{icons}indicators/question', '32px'); ?>)">
+  <div>
     <p class="quote-block" id="what_cant_i_do">
       What kind of stuff won't I be able to do?
     </p>
@@ -88,7 +88,7 @@ $Page->start_display();
     <p>The default theme has been carefully designed so that it looks nice even on non-compliant
       browsers.</p>
   </div>
-  <div class="icon thirty-two no-label" style="background-image: url(<?php echo $Page->get_icon_url('{icons}indicators/question', '32px'); ?>)">
+  <div>
     <p class="quote-block" id="remove_warning">
       How do I get rid of the warning?
     </p>
@@ -96,7 +96,7 @@ $Page->start_display();
       <a href="#downloads">browsers</a> in the downloads sidebar. Or you can just check the "Do not show this message
       again." box.</p>
   </div>
-  <div class="icon thirty-two no-label" style="background-image: url(<?php echo $Page->get_icon_url('{icons}indicators/question', '32px'); ?>)">
+  <div>
     <p class="quote-block" id="technologies">
       What does my browser need?
     </p>
@@ -115,7 +115,7 @@ $Page->start_display();
     </ul>
     <p>Your browser's capabilities are listed in the <a href="#your_browser">your browser</a> box above.</p>
   </div>
-  <div class="icon thirty-two no-label" style="background-image: url(<?php echo $Page->get_icon_url('{icons}indicators/question', '32px'); ?>)">
+  <div>
     <p class="quote-block" id="report_problem">
       How do I report a problem with browser detection?
     </p>
@@ -133,72 +133,57 @@ $Page->start_display();
     $form->display();
     ?>
   </div>
-  <div>
-    <div class="notes"><a name="report_problem"></a>Details courtesy of the
-      <a href="http://earthli.com/software/browser_detector/">earthli Browser Detector</a>.
-    </div>
-  </div>
   <?php
     $box->new_column_of_type('right-sidebar-column');
   ?>
   <div class="right-sidebar">
-    <h2 id="your_browser">
-      Your browser
-    </h2>
+    <h2 id="your_browser">Your browser</h2>
     <?php
     $class_name = $Page->final_class_name('BROWSER_RENDERER', 'webcore/gui/browser_renderer.php');
     /** @var BROWSER_RENDERER $renderer */
     $renderer = new $class_name ($Page);
     $renderer->display_as_html($browser);
     ?>
-    <hr class="horizontal-separator" style="margin: .5em">
-    <p class="notes">Problems with your browser? <a href="#report_problem">Report it</a>.</p>
+    <div class="info-box-bottom">
+      <p>Calculated by the <a href="http://earthli.com/software/browser_detector/">earthli Browser Detector</a>.</p>
+      <p>Something look wrong? <a href="#report_problem">Report it</a>.</p>
+    </div>
     <h2 id="downloads">
-      <?php echo $Page->resolve_icon_as_html('{icons}buttons/download_to_hd', '', '32px'); ?> Download
+      <?php echo $Page->get_icon_with_text('{icons}buttons/download_to_hd', Thirty_two_px, 'Download'); ?>
     </h2>
     <p>For a better browsing experience, try one of these:</p>
-    <dl>
-      <dt class="field">
-      <span
-        style="float: left"><?php echo $Page->resolve_icon_as_html('{icons}logos/browsers/opera1_t', '', '32px'); ?></span>
-        <a href="http://opera.com" style="margin-left: 8px">Opera</a>
-      </dt>
-      <dd class="detail" style="margin-left: 40px; margin-bottom: 2em">
-        Free (Mac/Windows/Linux)
-      </dd>
-      <dt class="field">
-      <span
-        style="float: left"><?php echo $Page->resolve_icon_as_html('{icons}logos/browsers/chrome', '', '32px'); ?></span>
-        <a href="http://google.com/chrome/" style="margin-left: 8px">Chrome</a>
-      </dt>
-      <dd class="detail" style="margin-left: 40px; margin-bottom: 2em">
-        Free (Mac/Windows/Linux)
-      </dd>
-      <dt class="field">
-      <span
-        style="float: left"><?php echo $Page->resolve_icon_as_html('{icons}logos/browsers/firefox', '', '32px'); ?></span>
-        <a href="http://mozilla.org/products/firefox/" style="margin-left: 8px">Firefox</a>
-      </dt>
-      <dd class="detail" style="margin-left: 40px; margin-bottom: 2em">
-        Free (Mac/Windows/Linux)
-      </dd>
-      <dt class="field">
-      <span
-        style="float: left"><?php echo $Page->resolve_icon_as_html('{icons}logos/browsers/safari', '', '32px'); ?></span>
-        <a href="http://apple.com/safari" style="margin-left: 8px">Safari</a>
-      </dt>
-      <dd class="detail" style="margin-left: 40px; margin-bottom: 2em">
-        Free (Mac)
-      </dd>
-      <dt class="field">
-      <span
-        style="float: left"><?php echo $Page->resolve_icon_as_html('{icons}logos/browsers/omniweb5', '', '32px'); ?></span>
-        <a href="http://omnigroup.com/applications/omniweb/" style="margin-left: 8px">Omniweb</a>
-      </dt>
-      <dd class="detail" style="margin-left: 40px">
-        Free (Mac)
-      </dd>
-    </dl>
+    <?php
+    $Page->start_icon_container('{icons}logos/browsers/opera1_t', Thirty_two_px);
+    ?>
+    <h3><a href="http://opera.com">Opera</a></h3>
+    <p class="detail">Free (Mac/Windows/Linux)</p>
+    <?php
+    $Page->finish_icon_container();
+    ?>
+    <?php
+    $Page->start_icon_container('{icons}logos/browsers/chrome', Thirty_two_px);
+    ?>
+    <h3><a href="http://google.com/chrome/">Chrome</a></h3>
+    <p class="detail">Free (Mac/Windows/Linux)</p>
+    <?php
+    $Page->finish_icon_container();
+    ?>
+    <?php
+    $Page->start_icon_container('{icons}logos/browsers/firefox', Thirty_two_px);
+    ?>
+    <h3><a href="http://mozilla.org/products/firefox/">Firefox</a></h3>
+    <p class="detail">Free (Mac/Windows/Linux)</p>
+    <?php
+    $Page->finish_icon_container();
+    ?>
+    <?php
+    $Page->start_icon_container('{icons}logos/browsers/safari', Thirty_two_px);
+    ?>
+    <h3><a href="http://apple.com/safari">Safari</a></h3>
+    <p class="detail">Free (Mac)</p>
+    <?php
+    $Page->finish_icon_container();
+    ?>
   </div>
   <?php
     $box->finish_column_set ();

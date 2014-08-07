@@ -204,7 +204,7 @@ class MENU_RENDERER extends WEBCORE_OBJECT
    *
    * @var string
    */
-  public $trigger_button_CSS_class = 'button';
+  public $trigger_button_css_class = 'button';
 
   /**
    * The class to include when {@link Menu_show_as_buttons} is <code>False</code>.
@@ -307,10 +307,10 @@ class MENU_RENDERER extends WEBCORE_OBJECT
    * @param boolean $important_only If <code>True</code>, shows only the first
    * {@link $num_important_commands} when sorted by {@link
    * COMMAND::$importance}.
-   * @param string $CSS_class CSS class used for each {@link COMMAND}.
+   * @param string $css_class CSS class used for each {@link COMMAND}.
    * @access private
    */
-  protected function _draw_commands ($commands, $important_only, $CSS_class)
+  protected function _draw_commands ($commands, $important_only, $css_class)
   {
     $cmds = $commands->command_list ();
     $num_cmds_to_be_shown = $commands->num_executable_commands ();
@@ -328,7 +328,7 @@ class MENU_RENDERER extends WEBCORE_OBJECT
       {
         if ($this->content_mode & Menu_show_as_buttons)
         {
-          echo '<li>' . $this->_command_as_html ($cmd, $CSS_class) . '</li>';
+          echo '<li>' . $this->_command_as_html ($cmd, $css_class) . '</li>';
         }
         else
         {
@@ -346,31 +346,30 @@ class MENU_RENDERER extends WEBCORE_OBJECT
   /**
    * Create an HTML link for the command.
    * @param COMMAND $cmd
-   * @param string $CSS_class
+   * @param string $css_class
    * @return string
    * @access private
    */
-  protected function _command_as_html ($cmd, $CSS_class)
+  protected function _command_as_html ($cmd, $css_class)
   {
     $Result = '';
-    $style = '';
     $text = '';
-
-    if ($cmd->icon && ($this->content_mode & Menu_show_icon))
-    {
-      $style = 'style="background-image: url(' . $this->context->get_icon_url ($cmd->icon, '16px') . ')"';
-    }
 
     if ($cmd->caption && (($this->content_mode & Menu_show_title) || ! $cmd->icon))
     {
       $text = $cmd->caption;
     }
 
+    if ($cmd->icon && ($this->content_mode & Menu_show_icon))
+    {
+      $text = $this->context->get_icon_with_text($cmd->icon, Sixteen_px, $text);
+    }
+
     if (!empty ($text))
     {
       $Result = $text;
 
-      $class_statement = $CSS_class ? ' class="' . $CSS_class . '"' : '';
+      $class_statement = $css_class ? ' class="' . $css_class . '"' : '';
 
       if ($cmd->link)
       {
@@ -386,33 +385,17 @@ class MENU_RENDERER extends WEBCORE_OBJECT
         }
         $tag .= '>';
 
-        if ($style)
-        {
-          $tag .= '<span class="icon sixteen" ' . $style . '>';
-        }
-
-	      if (!empty($cmd->description) && $CSS_class == 'menu-item')
+	      if (!empty($cmd->description) && $css_class == 'menu-item')
 	      {
-          $description_class_statement = $CSS_class ? ' class="' . $CSS_class . '-description"' : '';
+          $description_class_statement = $css_class ? ' class="' . $css_class . '-description"' : '';
           $Result .= ' <span ' . $description_class_statement . '>' . $cmd->description . '</span>';
 	      }
 
-        /* Important! IE displays the last character in this last link of the last
-         * button in the menu again underneath the menus. The code below makes
-         * sure that it is a space so it doesn't appear on the screen. IE - so
-         * crappy it hurts.
-         */
-
         $Result = $tag . $Result;
-
-        if ($style)
-        {
-          $Result .= '</span>';
-        }
 
         $Result .= '</a>';
       }
-      elseif ($class_statement || $style)
+      elseif ($class_statement)
       {
         $tag = '';
 
@@ -421,11 +404,6 @@ class MENU_RENDERER extends WEBCORE_OBJECT
           $tag = '<span ' . $class_statement . '>';
         }
 
-        if ($style)
-        {
-          $tag .= '<span class="icon sixteen" ' . $style . '>';
-        }
-
         $Result = $tag . $Result;
 
         if ($class_statement)
@@ -433,12 +411,7 @@ class MENU_RENDERER extends WEBCORE_OBJECT
           $Result .= '</span>';
         }
 
-        if ($style)
-        {
-          $Result .= '</span>';
-        }
-
-	      if (!empty($cmd->description) && $CSS_class == 'menu-item')
+	      if (!empty($cmd->description) && $css_class == 'menu-item')
 	      {
 	        $Result .= '<span class="menu-item-description">' . $cmd->description . '</span>';
 	      }
@@ -565,16 +538,16 @@ class MENU_RENDERER extends WEBCORE_OBJECT
       }
     }
 
-    echo '<li class="' . $trigger_class . '"' . $menu_tag . '><div class="' . $this->trigger_button_CSS_class . '">';
+    echo '<li class="' . $trigger_class . '"' . $menu_tag . '><div class="' . $this->trigger_button_css_class . '">';
     if ($this->options & Menu_options_show_trigger_icon)
     {
       if (empty ($trigger))
       {
-        echo $this->context->resolve_icon_as_html($this->trigger_icon, '', '16px');
+        echo $this->context->resolve_icon_as_html($this->trigger_icon, Sixteen_px, '');
       }
       else
       {
-        echo $this->context->get_text_with_icon($this->trigger_icon, $trigger, '16px');
+        echo $this->context->get_icon_with_text($this->trigger_icon, Sixteen_px, $trigger);
       }
     }
     else

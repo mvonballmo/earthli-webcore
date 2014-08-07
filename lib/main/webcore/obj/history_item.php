@@ -126,12 +126,12 @@ class HISTORY_ITEM extends UNIQUE_OBJECT
   public $system_description = '';
 
   /**
-   * @param APPLICATION $app Application for this history item
+   * @param APPLICATION $context Application for this history item
    */
-  public function __construct ($app)
+  public function __construct ($context)
   {
-    parent::__construct ($app);
-    $this->time_created = $app->make_date_time ();
+    parent::__construct ($context);
+    $this->time_created = $context->make_date_time ();
   }
 
   /**
@@ -181,11 +181,11 @@ class HISTORY_ITEM extends UNIQUE_OBJECT
    * @throws UNKNOWN_VALUE_EXCEPTION
    * @return string
    */
-  public function publication_state_as_icon ($size = '16px')
+  public function publication_state_as_icon ($size = Sixteen_px)
   {
     $icon_name = $this->publication_state_icon_url();
 
-    return $this->app->resolve_icon_as_html ($icon_name, $this->publication_state_as_text (), $size);
+    return $this->app->resolve_icon_as_html ($icon_name, $size, $this->publication_state_as_text());
   }
 
   /**
@@ -217,9 +217,9 @@ class HISTORY_ITEM extends UNIQUE_OBJECT
    * @param string $size The size of image to return.
    * @return string
    */
-  public function kind_as_icon ($size = '16px')
+  public function kind_as_icon ($size = Sixteen_px)
   {
-    return $this->app->resolve_icon_as_html ($this->kind_icon_url (), $this->kind, $size);
+    return $this->app->resolve_icon_as_html ($this->kind_icon_url(), $size, $this->kind);
   }
 
   /**

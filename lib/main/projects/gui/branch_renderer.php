@@ -71,9 +71,7 @@ class BRANCH_RENDERER extends CONTENT_OBJECT_RENDERER
     <tr>
       <th>State</th>
       <td>
-        <?php
-        echo $this->context->get_text_with_icon($obj->state_icon_url(), $obj->state_as_string(), '16px');
-        ?>
+        <?php echo $obj->state_as_string(); ?>
       </td>
     </tr>
 <?php
@@ -87,16 +85,8 @@ class BRANCH_RENDERER extends CONTENT_OBJECT_RENDERER
       <td>
       <?php
         echo $parent_branch->title_as_link ();
-        if ($this->_options->show_as_summary)
-        {
-          echo '<div style="margin-left: .75em">' . $this->app->display_options->object_separator;
-          echo $parent_release->title_as_link () . '</div>';
-        }
-        else
-        {
-          echo $this->app->display_options->object_separator;
-          echo $parent_release->title_as_link ();
-        }
+        echo $this->app->display_options->object_separator;
+        echo $parent_release->title_as_link ();
       ?>
       </td>
     </tr>
@@ -117,7 +107,7 @@ class BRANCH_RENDERER extends CONTENT_OBJECT_RENDERER
 ?>
     <tr>
       <th>Latest</th>
-      <td><?php echo $rel_text; ?></td>
+      <td><?php echo $rel_text ?></td>
     </tr>
 <?php
 

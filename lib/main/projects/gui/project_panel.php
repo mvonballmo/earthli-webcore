@@ -49,19 +49,19 @@ require_once ('webcore/gui/panel.php');
 class RELEASE_PANEL extends QUERY_PANEL
 {
   /**
-   * @var string
+   * @param PANEL_MANAGER $manager Owner of this panel.
+   * @param QUERY $query Show objects from this query.
    */
-  public $id = 'release';
+  public function __construct ($manager, $query)
+  {
+    parent::__construct($manager, $query);
 
-  /**
-   * @var string
-   */
-  public $title = 'Releases';
+    $this->columns = 2;
+    $this->id = 'release';
+    $this->title = 'Releases';
+    $this->uses_time_selector = false;
+  }
 
-  /**
-   * @var boolean
-   */
-  public $uses_time_selector = false;
   /**
    * @return RELEASE_GRID
    * @access private
@@ -76,31 +76,37 @@ class RELEASE_PANEL extends QUERY_PANEL
 class JOB_PANEL extends ENTRY_PANEL
 {
   /**
-   * Number of rows to use in the grid.
-   * @var integer
+   * @param PANEL_MANAGER $manager Owner of this panel.
+   * @param QUERY $query Show objects from this query.
+   * @param TYPE_INFO $type_info
    */
-  public $rows = 15;
+  public function __construct ($manager, $query, $type_info = null)
+  {
+    parent::__construct($manager, $query, $type_info);
 
-  /**
-   * Number of columns to use in the grid.
-   * @var integer
-   */
-  public $columns = 2;
+    $this->columns = 2;
+    $this->rows = 15;
+    $this->id = 'job';
+    $this->title = 'Jobs';
+  }
 }
 
 class CHANGE_PANEL extends ENTRY_PANEL
 {
   /**
-   * Number of rows to use in the grid.
-   * @var integer
+   * @param PANEL_MANAGER $manager Owner of this panel.
+   * @param QUERY $query Show objects from this query.
+   * @param TYPE_INFO $type_info
    */
-  public $rows = 15;
+  public function __construct ($manager, $query, $type_info = null)
+  {
+    parent::__construct($manager, $query, $type_info);
 
-  /**
-   * Number of columns to use in the grid.
-   * @var integer
-   */
-  public $columns = 2;
+    $this->columns = 2;
+    $this->rows = 15;
+    $this->id = 'change';
+    $this->title = 'Changes';
+  }
 }
 
 /**
@@ -113,19 +119,18 @@ class CHANGE_PANEL extends ENTRY_PANEL
 class BRANCH_PANEL extends QUERY_PANEL
 {
   /**
-   * @var string
+   * @param PANEL_MANAGER $manager Owner of this panel.
+   * @param QUERY $query Show objects from this query.
    */
-  public $id = 'branch';
+  public function __construct ($manager, $query)
+  {
+    parent::__construct($manager, $query);
 
-  /**
-   * @var string
-   */
-  public $title = 'Branches';
-
-  /**
-   * @var boolean
-   */
-  public $uses_time_selector = false;
+    $this->columns = 2;
+    $this->uses_time_selector = false;
+    $this->id = 'branch';
+    $this->title = 'Branches';
+  }
 
   /**
    * @return BRANCH_GRID
@@ -148,19 +153,18 @@ class BRANCH_PANEL extends QUERY_PANEL
 class COMPONENT_PANEL extends QUERY_PANEL
 {
   /**
-   * @var string
+   * @param PANEL_MANAGER $manager Owner of this panel.
+   * @param QUERY $query Show objects from this query.
    */
-  public $id = 'component';
+  public function __construct ($manager, $query)
+  {
+    parent::__construct($manager, $query);
 
-  /**
-   * @var string
-   */
-  public $title = 'Components';
-
-  /**
-   * @var boolean
-   */
-  public $uses_time_selector = false;
+    $this->columns = 2;
+    $this->uses_time_selector = false;
+    $this->id = 'component';
+    $this->title = 'Components';
+  }
 
   /**
    * @return COMPONENT_GRID
@@ -175,6 +179,7 @@ class COMPONENT_PANEL extends QUERY_PANEL
 
 /**
  * Adds restrictions for finding only open jobs.
+ * @param QUERY $query
  * @access private
  */
 function restrict_to_open ($query)
@@ -184,6 +189,7 @@ function restrict_to_open ($query)
 
 /**
  * Adds restrictions for finding only closed jobs.
+ * @param QUERY $query
  * @access private
  */
 function restrict_to_closed ($query)
@@ -195,6 +201,7 @@ function restrict_to_closed ($query)
 
 /**
  * Adds restrictions for finding only scheduled jobs.
+ * @param QUERY $query
  * @access private
  */
 function restrict_to_scheduled ($query)
@@ -592,7 +599,7 @@ class PROJECT_BRANCH_PANEL_MANAGER extends WEBCORE_PANEL_MANAGER
   }
   
   /**
-   * @param PROJECT $folder Project for which to show panels.
+   * @param BRANCH $branch Branch for which to show panels.
    */
   public function __construct ($branch)
   {
@@ -921,5 +928,3 @@ class PROJECT_COMPONENT_PANEL_MANAGER extends WEBCORE_PANEL_MANAGER
    */
   protected $_component;
 }
-
-?>

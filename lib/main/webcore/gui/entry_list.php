@@ -50,17 +50,11 @@ require_once ('webcore/gui/select_list.php');
 class ENTRY_LIST extends SELECT_LIST
 {
   /**
-   * @var string
-   * @access private
+   * @param APPLICATION $context Main application.
    */
-  public $object_name = 'object';
-
-  /**
-   * @param APPLICATION $app Main application.
-   */
-  public function __construct ($app)
+  public function __construct ($context)
   {
-    parent::__construct ($app);
+    parent::__construct ($context);
     $this->append_column ('Name');
     $this->append_column ('Date');
     $this->append_column ('Creator');
@@ -69,12 +63,13 @@ class ENTRY_LIST extends SELECT_LIST
   /**
    * Draw the given column's data using the given object.
    * @param ENTRY $obj
-   * @param integer $index
+   * @param integer $col_index
+   * @param $row_index
    * @access private
    */
-  protected function _draw_column_contents ($obj, $index)
+  protected function _draw_column_contents ($obj, $col_index, $row_index)
   {
-    switch ($index)
+    switch ($col_index)
     {
     case 0:
       $this->_draw_selector ($obj);

@@ -200,19 +200,17 @@ class RELEASE_FORM extends OBJECT_IN_FOLDER_FORM
   {
     $renderer->start ();
     $renderer->draw_text_line_row ('title');
-    $renderer->draw_separator ();
 
     if ($this->visible ('branch_id'))
     {
       $props = $renderer->make_list_properties ();
-      $props->width = '10em';
+      $props->css_class = 'small';
       foreach ($this->_branches as $branch)
       {
         $props->add_item ($branch->title_as_plain_text (), $branch->id);
       }
 
       $renderer->draw_drop_down_row ('branch_id', $props);
-      $renderer->draw_separator ();
     }
 
     if (! $this->object_exists () || ! $this->_object->shipped ())
@@ -221,21 +219,18 @@ class RELEASE_FORM extends OBJECT_IN_FOLDER_FORM
       $renderer->draw_date_row ('time_scheduled');
     }
 
-    $renderer->draw_separator ();
-    $renderer->start_row ('Status');
-    $renderer->start_block (true);
+    $renderer->start_block ('Status');
     
     if (! $this->object_exists () || $this->_object->planned ())
     {
       $props = $renderer->make_list_properties ();
       $props->show_descriptions = true;
-      $props->width = '';
       if ($this->visible ('is_visible'))
       {
-        $props->add_item ($this->app->resolve_icon_as_html ('{icons}indicators/invisible', ' ', '16px') . ' Hidden', Hidden, 'Prevent searching or browsing by non-admin users.');
+        $props->add_item ($this->app->resolve_icon_as_html ('{icons}indicators/invisible', Sixteen_px, ' ') . ' Hidden', Hidden, 'Prevent searching or browsing by non-admin users.');
       }
-      $props->add_item ($this->app->resolve_icon_as_html ('{icons}buttons/calendar', ' ', '16px') . ' Planned', Planned, 'Release is in development.');
-      $props->add_item ($this->app->resolve_icon_as_html ('{app_icons}statuses/working', ' ', '16px') . ' Testing', Testing, 'Release is feature-complete and in testing.');
+      $props->add_item ($this->app->resolve_icon_as_html ('{icons}buttons/calendar', Sixteen_px, ' ') . ' Planned', Planned, 'Release is in development.');
+      $props->add_item ($this->app->resolve_icon_as_html ('{app_icons}statuses/working', Sixteen_px, ' ') . ' Testing', Testing, 'Release is feature-complete and in testing.');
       $renderer->draw_radio_group_row ('state', $props);
     }
     else
@@ -244,21 +239,17 @@ class RELEASE_FORM extends OBJECT_IN_FOLDER_FORM
       $props->show_descriptions = true;
       if ($this->visible ('is_visible'))
       {
-        $props->add_item ($this->app->resolve_icon_as_html ('{icons}indicators/invisible', ' ', '16px') . ' Hidden', Hidden, 'Prevent searching or browsing by non-admin users.');
+        $props->add_item ($this->app->resolve_icon_as_html ('{icons}indicators/invisible', Sixteen_px, ' ') . ' Hidden', Hidden, 'Prevent searching or browsing by non-admin users.');
       }
-      $props->add_item ($this->app->resolve_icon_as_html ('{icons}buttons/ship', ' ', '16px') . ' Shipped', Shipped, 'Jobs and changes can still be added and removed.');
-      $props->add_item ($this->app->resolve_icon_as_html ('{icons}indicators/locked', ' ', '16px') . ' Locked', Locked, 'Changes and jobs cannot be added or removed.');
+      $props->add_item ($this->app->resolve_icon_as_html ('{icons}buttons/ship', Sixteen_px, ' ') . ' Shipped', Shipped, 'Jobs and changes can still be added and removed.');
+      $props->add_item ($this->app->resolve_icon_as_html ('{icons}indicators/locked', Sixteen_px, ' ') . ' Locked', Locked, 'Changes and jobs cannot be added or removed.');
       $renderer->draw_radio_group_row ('state', $props);
     }
     
     $renderer->finish_block ();
-    $renderer->finish_row ();
 
-    $renderer->draw_separator ();
     $renderer->draw_text_box_row ('summary');
-    $renderer->draw_separator ();
     $renderer->draw_text_box_row ('description');
-    $renderer->draw_separator ();
     $renderer->draw_submit_button_row ();
     $this->_draw_history_item_controls ($renderer, false);
     $renderer->finish ();

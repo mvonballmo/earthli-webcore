@@ -270,7 +270,7 @@ class MAIL_BODY_RENDERER extends MAIL_RENDERER
 class MAIL_BODY_RENDERER_OBJECT
 {
   /**
-   * @var UNIQUE_OBJECT $obj
+   * @var UNIQUE_OBJECT|HISTORY_ITEM $obj
    */
   public $obj;
 

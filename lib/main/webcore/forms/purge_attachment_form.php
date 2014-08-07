@@ -49,12 +49,12 @@ require_once ('webcore/forms/purge_form.php');
 class PURGE_ATTACHMENT_FORM extends PURGE_OBJECT_FORM
 {
   /**
-   * @param FOLDER $app Deleting content from this folder.
+   * @param FOLDER $context Deleting content from this folder.
    * @param string $set_name
    */
-  public function __construct ($app)
+  public function __construct ($context)
   {
-    parent::__construct ($app);
+    parent::__construct ($context);
 
     $field = new TEXT_FIELD ();
     $field->id = 'type';

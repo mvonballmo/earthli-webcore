@@ -62,7 +62,7 @@ class IMAGE_TEST_TASK extends TEST_TASK
   protected function _check_local_urls ()
   {
     $this->page->prefer_relative_urls = false;
-    $local_url = $this->context->resolve_file ('{icons}/buttons/blank_16px.png');
+    $local_url = $this->context->get_icon_url ('{icons}/buttons/blank', Sixteen_px);
     $local_url_with_domain = $this->env->resolve_file ($local_url, Force_root_on);
     $local_path = url_to_file_name ($local_url_with_domain);
 

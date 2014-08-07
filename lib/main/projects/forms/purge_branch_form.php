@@ -54,11 +54,11 @@ class PURGE_BRANCH_FORM extends PURGE_OBJECT_FORM
   public $button = 'Yes';
 
   /**
-   * @param APPLICATION $app
+   * @param APPLICATION $context
    */
-  public function __construct ($app)
+  public function __construct ($context)
   {
-    parent::__construct ($app);
+    parent::__construct ($context);
 
     $field = new ENUMERATED_FIELD ();
     $field->id = 'sub_history_item_publication_state';
@@ -86,32 +86,14 @@ class PURGE_BRANCH_FORM extends PURGE_OBJECT_FORM
     $this->set_value ('sub_history_item_publication_state', History_item_silent);
   }
 
-  /**
-   * @param FORM_RENDERER $renderer
-   * @access private
-   */
-  protected function _draw_controls ($renderer)
+  protected function _draw_options($renderer)
   {
-    $renderer->start ();
-    $renderer->draw_text_row ('', 'Are you sure you want to purge ' . $this->_object->title_as_link () . '?');
-    $renderer->draw_separator ();
+    parent::_draw_options($renderer);
 
     $props = $renderer->make_list_properties ();
     $props->show_descriptions = true;
     $props->add_item ('Publish branch only', History_item_silent, 'Generate a single notification indicating that the branch was purged.');
     $props->add_item ('Publish all', History_item_needs_send, 'Generate individual notifications for affected jobs and changes.');
     $renderer->draw_radio_group_row ('sub_history_item_publication_state', $props);
-    $renderer->draw_separator ();
-
-    $buttons [] = $renderer->button_as_HTML ('No', $this->_object->home_page ());
-    $buttons [] = $renderer->submit_button_as_HTML ();
-    $renderer->draw_buttons_in_row ($buttons);
-
-    $renderer->draw_separator ();
-    $renderer->draw_text_row ('', '*Purging a branch removes all connections to it and permanently removes it from the database.', 'notes');
-
-    $renderer->finish ();
   }
 }
-
-?>

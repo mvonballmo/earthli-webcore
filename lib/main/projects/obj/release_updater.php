@@ -343,7 +343,7 @@ class RELEASE_SHIPPER extends RELEASE_UPDATER
 
   /**
    * Changes the closed status for this branch.
-   * @param PROJECT_ENTRY_BRANCH_INFO $branch_info
+   * @param JOB_BRANCH_INFO $branch_info
    * @access private
    */
   protected function _map_status ($branch_info)
@@ -360,7 +360,7 @@ class RELEASE_SHIPPER extends RELEASE_UPDATER
  * @version 3.5.0
  * @since 1.9.0
  */
-class UPDATE_RELEASE_PREVIEW_SETTINGS extends FORM_PREVIEW_SETTINGS
+abstract class UPDATE_RELEASE_PREVIEW_SETTINGS extends FORM_PREVIEW_SETTINGS
 {
   /**
    * Draw a list with a title.
@@ -378,11 +378,20 @@ class UPDATE_RELEASE_PREVIEW_SETTINGS extends FORM_PREVIEW_SETTINGS
       $this->_objects_displayed = true;
   ?>
   <h3><?php echo sizeof ($objects); ?> <?php echo $title; ?></h3>
-  <p class="notes">
+  <p>
     <?php echo $text; ?>
   </p>
   <?php
-      $this->_draw_entries ($objects);
+      $this->app->display_options->overridden_max_title_size = 100;
+      echo '<ul class="minimal">';
+      foreach ($objects as $entry)
+      {
+        $props = $entry->kind_properties();
+        $text = $this->context->get_icon_with_text($props->icon, Sixteen_px, $entry->title_as_link());
+
+        echo '<li>' . $text . '</li>';
+      }
+      echo '</ul>';
     }
   }
 
@@ -394,29 +403,6 @@ class UPDATE_RELEASE_PREVIEW_SETTINGS extends FORM_PREVIEW_SETTINGS
    */
   protected function _draw_entries ($entries, $show_status = false)
   {
-    $this->app->display_options->overridden_max_title_size = 100;
-    echo '<div style="margin-left: 2em">';
-    foreach ($entries as $entry)
-    {
-      $this->_draw_entry ($entry, $show_status);
-    }
-    echo '</div>';
-  }
-
-  /**
-   * @param PROJECT_ENTRY $entry
-   * @param bool $show_status
-   * @access private
-   */
-  protected function _draw_entry ($entry, $show_status = false)
-  {
-    $icon = $entry->kind_icon ('16px');
-    if ($show_status)
-    {
-      $branch_info = $entry->main_branch_info ();
-      $icon = $branch_info->status_icon () . ' ' . $icon;
-    }
-    echo '<div>' . $icon . ' ' . $entry->title_as_link () . '</div>';
   }
 
   /**

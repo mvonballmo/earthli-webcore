@@ -412,8 +412,9 @@ abstract class DATE_TIME_CONVERTER extends RAISABLE
 
   /**
    * Convert a string to a php time.
-   * @param string $t
-   * @param integer $parts Which parts of the text should be converted?
+   * @param $value
+   * @param int $parts Which parts of the text should be converted?
+   * @internal param string $t
    * @return integer
    * @abstract
    */
@@ -580,7 +581,7 @@ class EXIF_DATE_TIME_CONVERTER extends DATE_TIME_CONVERTER
 class DATE_TIME extends RAISABLE
 {
   /**
-   * @param object $time Can be either a PHP or ISO time.
+   * @param int $time Can be either a PHP or ISO time.
    * @param string $type Can be either {@link Date_time_php} or {@link
    * Date_time_iso}.
    */
@@ -817,8 +818,20 @@ class DATE_TIME extends RAISABLE
   }
 
   /**
+   * @param DATE_TIME $first
+   * @param DATE_TIME $last
+   * @param int $parts Can be {@link Date_time_date_part}, {@link Date_time_time_part} or {@link Date_time_both_parts}.
+   * @return bool
+   */
+  public function between ($first, $last, $parts = Date_time_both_parts)
+  {
+    return $first->less_than_equal($this, $parts) && $this->less_than_equal($last);
+  }
+
+  /**
    * The last valid day of any month.
    * This is useful for building calendars. Handles leap years.
+   * @throws UNKNOWN_VALUE_EXCEPTION
    * @return integer
    */
   public function last_legal_day ()

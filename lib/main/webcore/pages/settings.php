@@ -114,7 +114,6 @@ class SAMPLE_FORM extends FORM
   protected function _draw_controls($renderer)
   {
     $renderer->default_control_height = '75px';
-    $renderer->set_width('25em');
 
     $renderer->start();
     $props = $renderer->make_list_properties ();
@@ -124,25 +123,24 @@ class SAMPLE_FORM extends FORM
     $renderer->draw_check_boxes_row('Options', $props);
     $renderer->start_row('Text');
     $text_props = new FORM_TEXT_CONTROL_OPTIONS();
-    $text_props->width = '8em';
+    $text_props->css_class = 'small';
     echo $renderer->date_as_html('date');
     echo ' ';
     echo $renderer->text_line_as_html('name', $text_props);
     $renderer->finish_row();
-    $renderer->draw_text_box_row('description', null);
+    $renderer->draw_text_box_row('description');
 
-    $renderer->start_row('Block');
-    $renderer->start_block(true);
+    $renderer->start_block('');
 
     $props = $renderer->make_list_properties ();
     $props->show_descriptions = true;
+    $props->css_class = 'small';
     $props->add_item ('Option One', 0, 'Description for option one.');
     $props->add_item ('Option Two', 1, 'Description for option two.');
     $props->items_per_row = 2;
     $renderer->draw_radio_group_row('select', $props);
 
     $field = $this->field_at('select');
-    $props->width = '8em';
 
     $renderer->start_row('Menus');
     echo $renderer->drop_down_as_html('select', $props);
@@ -160,7 +158,6 @@ class SAMPLE_FORM extends FORM
     $renderer->finish_row();
 
     $renderer->finish_block();
-    $renderer->finish_row();
     $renderer->draw_submit_button_row();
 
     $renderer->finish();
@@ -177,7 +174,7 @@ class SAMPLE_FORM extends FORM
   ?>
   <div class="left-sidebar">
     <p>Customize the font and theme to the right and see a preview below.</p>
-    <div class="form-content">
+    <div class="form-content" style="width: 200px">
       <?php
       $form->display ();
       ?>
@@ -261,47 +258,52 @@ class SAMPLE_FORM extends FORM
   <div class="button-content">
     <?php
     $renderer = $Page->make_controls_renderer ();
-    echo $renderer->button_as_html ('Upgrayedd', '#', '{icons}buttons/upgrade', '32px');
-    echo $renderer->button_as_html ('Upgrayedd', '#', '{icons}buttons/upgrade', '20px');
-    echo $renderer->button_as_html ('Upgrayedd', '#', '{icons}buttons/upgrade', '16px');
+    echo $renderer->button_as_html ('', '#', '{icons}buttons/upgrade', Thirty_two_px);
+    echo $renderer->button_as_html ('Upgrayedd', '#', '{icons}buttons/upgrade', Thirty_two_px);
+    echo $renderer->button_as_html ('', '#', '{icons}buttons/upgrade', Twenty_px);
+    echo $renderer->button_as_html ('Upgrayedd', '#', '{icons}buttons/upgrade', Twenty_px);
+    echo $renderer->button_as_html ('', '#', '{icons}buttons/upgrade', Sixteen_px);
+    echo $renderer->button_as_html ('Upgrayedd', '#', '{icons}buttons/upgrade', Sixteen_px);
     ?>
   </div>
-  <div class="button-content">
+  <div class="tree-content">
     <?php
     include ('webcore/gui/tree_node.php');
+    include ('webcore/gui/selector_tree_decorator.php');
 
     $tree = $Page->make_tree_renderer ();
     $tree->node_info = new GENERIC_TREE_NODE_INFO($Page);
 
-    $node = new TREE_NODE ('Documents', '', false);
-    $node->append (new TREE_NODE ('Specs (PDF)', '#', '', true));
-    $node->append (new TREE_NODE ('Specs 2 (PDF)', '#'));
-    $node->append (new TREE_NODE ('Specs 3 (PDF)', '#'));
-    $nodes [] = $node;
+    $documents_node = new TREE_NODE ('Documents', '', false);
+    $documents_node->append (new TREE_NODE ('Specs (PDF)', '#', '', true));
+    $documents_node->append (new TREE_NODE ('Specs 2 (PDF)', '#'));
+    $documents_node->append (new TREE_NODE ('Specs 3 (PDF)', '#'));
 
     $root = new TREE_NODE ('Encodo', '', false, '', true);
-    foreach ($nodes as $node)
-    {
-      $root->append ($node);
-    }
+    $root->append ($documents_node);
+
     $roots [] = $root;
     $roots [] = new TREE_NODE ('Earthli');
 
-    $node = new TREE_NODE ('Archive');
-    $node->append (new TREE_NODE ('Specs (PDF)', '#'));
-    $node->append (new TREE_NODE ('Specs 2 (PDF)', '#'));
-    $node->append (new TREE_NODE ('Specs 3 (PDF)', '#'));
+    $tree->display ($roots);
 
-    $nodes = null;
-    $nodes [] = $node;
+    $archive_node = new TREE_NODE ('Archive', '', false);
+    $archive_node->append (new TREE_NODE ('Specs (PDF)', '#'));
+    $archive_node->append (new TREE_NODE ('Specs 2 (PDF)', '#'));
+    $archive_node->append (new TREE_NODE ('Specs 3 (PDF)', '#'));
 
-    $root = new TREE_NODE ('Home');
-    foreach ($nodes as $node)
+    $root = new TREE_NODE ('Home', '', false);
+    $root->append ($archive_node);
+
+    foreach ($archive_node->children() as $child_node)
     {
-      $root->append ($node);
+      $tree->node_info->set_selected_node($child_node);
     }
+
+    $roots = null;
     $roots [] = $root;
 
+    $tree->decorator = new SELECTOR_TREE_DECORATOR($tree);
     $tree->display ($roots);
     ?>
   </div>
@@ -383,9 +385,9 @@ class SAMPLE_FORM extends FORM
     This is the text of an abstract. These are often used to summarize much longer blocks of text, similar in a way to the block at the beginning of a scientific paper.
   </div>
   <p>This is text before a rule.</p>
-  <p><span class="horizontal-separator"></span></p>
+  <hr>
   <p>This is text after a rule.</p>
-  <div class="quote pullquote right" style="float: right; width: 150px">Pull-quotes catch your eye.</div>
+  <div class="quote pullquote right align-right" style="width: 150px">Pull-quotes catch your eye.</div>
   <p>This is the text that accompanies the pull-quote. Pull-quotes are often used to highlight interesting bits of text in much longer articles in order to pique a reader's interest or to catch a scanner's eye.</p>
   <table class="basic columns left-labels">
     <tr>

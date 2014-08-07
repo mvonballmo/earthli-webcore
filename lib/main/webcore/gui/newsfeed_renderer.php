@@ -397,7 +397,7 @@ class NEWSFEED_OBJECT_RENDERER extends HANDLER_RENDERER
   /**
    * Return the appropriate renderer for the given object and options.
    * @param RENDERABLE $obj
-   * @param NEWSFEEDER_RENDERER_OPTIONS $options
+   * @param NEWSFEED_RENDERER_OPTIONS $options
    * @access private
    */
   protected function _content_for ($obj, $options = null)
@@ -483,7 +483,7 @@ class NEWSFEED_OBJECT_RENDERER extends HANDLER_RENDERER
  * @since 2.7.1
  * @access private
  */
-class NEWSFEEDER_RENDERER_OPTIONS extends OBJECT_RENDERER_OPTIONS
+class NEWSFEED_RENDERER_OPTIONS extends OBJECT_RENDERER_OPTIONS
 {
   /**
    * Which handler should be used to render sub-items?

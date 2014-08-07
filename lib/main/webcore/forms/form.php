@@ -132,7 +132,7 @@ abstract class FORM extends WEBCORE_OBJECT
    * Main form container has this CSS class.
    * @var string
    */
-  public $CSS_class = 'basic';
+  public $css_class = 'basic';
 
   /**
    * Always executes the form as submitted, if set.
@@ -151,6 +151,8 @@ abstract class FORM extends WEBCORE_OBJECT
    * @var CAPTCHA
    */
   public $captcha;
+
+  public $allow_cancel_only = false;
 
   /**
    * @param CONTEXT $context Attach to this object.
@@ -975,7 +977,7 @@ abstract class FORM extends WEBCORE_OBJECT
    */
   public function object_exists ()
   {
-    return isset ($this->_object) && $this->_object->exists ();
+    return isset ($this->_object) && method_exists($this->_object, 'exists') && $this->_object->exists ();
   }
 
   /**
@@ -1593,11 +1595,11 @@ abstract class FORM extends WEBCORE_OBJECT
 abstract class ID_BASED_FORM extends FORM
 {
   /**
-   * @param APPLICATION $app Main application.
+   * @param APPLICATION $context Main application.
    */
-  public function __construct ($app)
+  public function __construct ($context)
   {
-    parent::__construct ($app);
+    parent::__construct ($context);
 
     $field = new INTEGER_FIELD ();
     $field->id = 'id';

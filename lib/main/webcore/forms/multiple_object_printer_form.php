@@ -106,7 +106,7 @@ class MULTIPLE_OBJECT_PRINTER_FORM extends MULTIPLE_OBJECT_ACTION_FORM
   /**
    * Do nothing with entries.
    * Redirects to a different page, so there is no action needed here.
-   * @param ENTRY $entry
+   * @param ENTRY $obj
    * @access private
    */
   protected function _entry_run ($obj) {}
@@ -119,9 +119,7 @@ class MULTIPLE_OBJECT_PRINTER_FORM extends MULTIPLE_OBJECT_ACTION_FORM
   protected function _draw_message ($renderer)
   {
     $renderer->draw_text_row ('', 'To the left are the items you selected. Please select your printing options below and click <span class="reference">View printable</span> to see a preview. Then simply print the preview page from the browser window.');
-    $renderer->draw_separator ();
     $this->_draw_print_options ($renderer);
-    $renderer->draw_separator ();
     $buttons [] = $renderer->button_as_HTML ('Cancel', "view_explorer.php?id={$this->_folder->id}", '{icons}buttons/close');
     $buttons [] = $renderer->submit_button_as_HTML ();
     $renderer->draw_buttons_in_row ($buttons);
@@ -135,7 +133,6 @@ class MULTIPLE_OBJECT_PRINTER_FORM extends MULTIPLE_OBJECT_ACTION_FORM
   protected function _draw_print_options ($renderer)
   {
     $props = $renderer->make_list_properties ();
-    $props->smart_wrapping = true;
     $props->add_item ('Don\'t show comments', Print_comments_off);
     $props->add_item ('Show comments threaded', Print_comments_threaded);
     $props->add_item ('Show comments flat', Print_comments_flat);

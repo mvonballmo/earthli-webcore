@@ -145,21 +145,21 @@ class TREE_NODE
    */
   public function text ()
   {
-    $CSS_class = $this->_selected ? ' class="selected"' : '';
+    $css_class = $this->_selected ? ' class="selected"' : '';
 
     if ($this->_link)
     {
       if ($this->_target)
       {
-        return "<a href=\"$this->_link\" target=\"$this->_target\"$CSS_class>$this->_title</a>";
+        return "<a href=\"$this->_link\" target=\"$this->_target\"$css_class>$this->_title</a>";
       }
 
-      return "<a href=\"$this->_link\"$CSS_class>$this->_title</a>";
+      return "<a href=\"$this->_link\"$css_class>$this->_title</a>";
     }
 
-    if ($CSS_class)
+    if ($css_class)
     {
-      return "<span$CSS_class>$this->_title</span>";
+      return "<span$css_class>$this->_title</span>";
     }
 
     return $this->_title;
@@ -296,5 +296,7 @@ class GENERIC_TREE_NODE_INFO extends TREE_NODE_INFO
     {
       return $node->id();
     }
+
+    return null;
   }
 }

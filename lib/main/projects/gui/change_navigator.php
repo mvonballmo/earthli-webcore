@@ -69,6 +69,6 @@ class CHANGE_NAVIGATOR extends ENTRY_NAVIGATOR
   {
     $props = $obj->kind_properties ();
 
-    return $this->context->get_text_with_icon($props->icon, parent::_text_for_list ($obj), '16px');
+    return $this->context->get_icon_with_text($props->icon, Sixteen_px, parent::_text_for_list($obj));
   }
 }

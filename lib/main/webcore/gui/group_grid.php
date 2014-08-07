@@ -37,7 +37,7 @@ http://www.earthli.com/software/webcore
 ****************************************************************************/
 
 /** */
-require_once ('webcore/gui/grid.php');
+require_once ('webcore/gui/list_grid.php');
 
 /**
  * Displays {@link GROUP}s from a {@link QUERY}.
@@ -46,49 +46,43 @@ require_once ('webcore/gui/grid.php');
  * @version 3.5.0
  * @since 2.2.1
  */
-class GROUP_GRID extends STANDARD_GRID
+class GROUP_GRID extends LIST_GRID
 {
   /**
-   * @var string
+   * @param APPLICATION $context Main application.
    */
-  public $object_name = 'group';
-
-  /**
-   * @var boolean
-   */
-  public $show_separator = false;
-
-  /**
-   * @var string
-   */
-  public $width = '';
-
-  /**
-   * @param GROUP $obj
-   * @access private
-   */
-  protected function _draw_box ($obj)
+  function __construct($context)
   {
-    $this->_draw_menu_for ($obj, Menu_size_minimal);
-    echo "</td>\n<td>";
-    echo $obj->title_as_link ();
-    echo "</td>\n<td>";
-    $user_query = $obj->user_query ();
-    echo $user_query->size ();
+    parent::__construct($context);
+
+    $this->width = '';
+
+    $this->append_column(''); // Menu
+    $this->append_column('Name');
+    $this->append_column('Users', 'numeric');
   }
 
   /**
+   * Draw the given column's data using the given object.
+   * @param GROUP $obj
+   * @param integer $col_index
+   * @param $row_index
    * @access private
    */
-  protected function _draw_header ()
+  protected function _draw_column_contents($obj, $col_index, $row_index)
   {
-?>
-<tr>
-  <th></th>
-  <th>Name</th>
-  <th>Users</th>
-</tr>
-<?php
+    switch ($col_index)
+    {
+      case 0:
+        $this->_draw_menu_for ($obj, Menu_size_minimal);
+        break;
+      case 1:
+        echo $obj->title_as_link ();
+        break;
+      case 2:
+        $user_query = $obj->user_query ();
+        echo $user_query->size ();
+        break;
+    }
   }
 }
-?>

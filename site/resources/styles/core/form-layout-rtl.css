@@ -1,0 +1,45 @@
+.basic-form {
+  text-align: right;
+}
+.basic-form input[type=checkbox],
+.basic-form input[type=radio] {
+  float: right;
+}
+.basic-form > .form-row,
+.basic-form > .group,
+.basic-form > .hint {
+  margin-right: 215px;
+}
+.basic-form > p,
+.basic-form > div,
+.basic-form fieldset > p,
+.basic-form fieldset > div {
+  clear: right;
+}
+.basic-form .group,
+.basic-form .hint {
+  float: right;
+  clear: right;
+}
+.basic-form label:first-child {
+  float: right;
+  width: 215px;
+}
+.basic-form .one-input label {
+  margin-left: 0px;
+  margin-right: 18px;
+}
+.basic-form .help {
+  float: left;
+  width: 180px;
+  height: auto;
+  margin-left: 12px;
+}
+.basic-form fieldset {
+  padding-left: 0px;
+  margin-left: 0px;
+  clear: right;
+}
+.basic-form fieldset fieldset {
+  border-left-width: 0px;
+}

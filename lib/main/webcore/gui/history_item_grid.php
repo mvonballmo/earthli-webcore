@@ -49,28 +49,13 @@ require_once ('webcore/gui/grid.php');
 class HISTORY_ITEM_GRID extends STANDARD_GRID
 {
   /**
-   * @var string
-   */
-  public $box_style = 'object-in-list';
-
-  /**
-   * @var string
-   */
-  public $object_name = 'history item';
-
-  /**
-   * @var bool
-   */
-  public $show_separator = false;
-
-  /**
    * Render the grid itself.
-   * @param object[] $objs
+   * @param HISTORY_ITEM[] $objects
    * @access private
    */
-  protected function _draw ($objs)
+  protected function _draw ($objects)
   {
-    foreach ($objs as $obj)
+    foreach ($objects as $obj)
     {
       if (isset ($this->_last_time))
       {
@@ -80,7 +65,7 @@ class HISTORY_ITEM_GRID extends STANDARD_GRID
       $this->_last_time = $obj->time_created;
     }
 
-    parent::_draw ($objs);
+    parent::_draw ($objects);
   }
 
   /**
@@ -141,29 +126,19 @@ class HISTORY_ITEM_GRID extends STANDARD_GRID
     <tr>
       <th>User</th>
       <td>
-        <?php
-        $icon = $creator->expanded_icon_url ('16px');
-        if ($icon)
-        {
-          ?><span class="sixteen icon" style="background-image: url(<?php echo $icon; ?>)"><?php echo $creator->title_as_link (); ?></span><?php
-        }
-        else
-        {
-          echo $creator->title_as_link ();
-        }
-        ?>
+        <?php echo $this->context->get_icon_with_text($creator->icon_url, Sixteen_px, $creator->title_as_link()); ?>
       </td>
     </tr>
     <tr>
       <th>Kind</th>
       <td>
-        <span class="sixteen icon" style="background-image: url(<?php echo $this->context->get_icon_url($obj->kind_icon_url (), '16px'); ?>)"><?php echo $obj->kind; ?></span>
+        <?php echo $this->context->get_icon_with_text($obj->kind_icon_url(), Sixteen_px, $obj->kind); ?>
       </td>
     </tr>
     <tr>
       <th>Emails</th>
       <td>
-        <span class="sixteen icon" style="background-image: url(<?php echo $this->context->get_icon_url($obj->publication_state_icon_url (), '16px'); ?>)"><?php echo $obj->publication_state_as_text (); ?></span>
+        <?php echo $this->context->get_icon_with_text($obj->publication_state_icon_url(), Sixteen_px, $obj->publication_state_as_text()); ?>
       </td>
     </tr>
   </table>

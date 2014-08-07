@@ -74,7 +74,7 @@ class SEND_MAIL_FORM_RENDERER extends MAIL_OBJECT_RENDERER
     <?php if ($sender_name) { ?>
     <p class="quoter">&mdash;<?php echo $sender_name; ?></p>
     <?php } ?>
-    <div class="horizontal-separator"></div>
+    <hr>
 <?php
     }
   }

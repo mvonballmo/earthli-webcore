@@ -924,7 +924,7 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
    * 
    * @var string
    */
-  public $main_CSS_class = '';
+  public $main_css_class = '';
 
   /**
    * True if the main tag is a block element.
@@ -991,72 +991,87 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
 
     $alignment = read_array_index ($attributes, 'align');
 
+    $clear_class = '';
     $clear = read_array_index ($attributes, 'clear');
     switch ($clear)
     {
-      case 'right':
-        if ($alignment == 'left-column')
-        {
-          $clear = 'both';
-        }
-        break;
       case 'left':
         if ($alignment == 'right-column')
         {
-          $clear = 'both';
+          $clear_class = 'clear-both';
+        }
+        else
+        {
+          $clear_class = 'clear-left';
+        }
+        break;
+      case 'right':
+        if ($alignment == 'left-column')
+        {
+          $clear_class = 'clear-both';
+        }
+        else
+        {
+          $clear_class = 'clear-right';
         }
         break;
       case 'both':
-        ; // value is ok
+        $clear_class = 'clear-both';
         break;
       default:
         if ($alignment == 'left-column')
         {
-          $clear = 'left';
+          $clear_class = 'clear-left';
         }
         elseif ($alignment == 'right-column')
         {
-          $clear = 'right';
+          $clear_class = 'clear-right';
         }
         break;
     }
 
-    if (!empty ($clear))
-    {
-      $outer_css->add_text ('clear: ' . $clear);
-    }
+    $align_class = '';
 
     switch ($alignment)
     {
 	    case 'left-column':
-	      // 'clear' attribute is handled above
 	    case 'left':
-	      $outer_css->add_text ('float: left; margin-right: .5em; margin-bottom: .5em');
+        $align_class = 'align-left';
 	      break;
 	    case 'right-column':
-	      // 'clear' attribute is handled above
 	    case 'right':
-	      $outer_css->add_text ('float: right; margin-left: .5em; margin-bottom: .5em');
+        $align_class = 'align-right';
 	      break;
 	    case 'center':
-	      $outer_css->add_text ('margin: auto; display: table');
+        $align_class = 'align-center';
 	      break;
     }
 
     $inner_css = $munger->make_style_builder ();
     $inner_css->add_text (read_array_index ($attributes, 'style'));
 
-    $class = read_array_index ($attributes, 'class');
+    $inner_class = read_array_index ($attributes, 'class');
     if ($this->css_classes)
     {
-      if ($class)
+      if ($inner_class)
       {
-        $class = $this->css_classes . ' ' . $class;
+        $inner_class = $this->css_classes . ' ' . $inner_class;
       }
       else
       {
-        $class = $this->css_classes;
+        $inner_class = $this->css_classes;
       }
+    }
+
+    $outer_class = '';
+    if ($align_class)
+    {
+      $outer_class .= ' ' . $align_class;
+    }
+
+    if ($clear_class)
+    {
+      $outer_class .= ' ' . $clear_class;
     }
 
     $this->_caption = $this->_calculate_caption ($munger, $attributes);
@@ -1090,8 +1105,9 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
 
       $caption = $this->_get_caption ($is_block, true);
       $builder->add_attribute ('style', $outer_css->as_text ());
+      $builder->add_attribute ('class', $outer_class);
       $outer_css->clear ();
-      $inner = $this->_open_inner_area ($munger, $attributes, $outer_css, $inner_css, $class);
+      $inner = $this->_open_inner_area ($munger, $attributes, $outer_css, $inner_css, $inner_class);
       if ($is_block)
       {
         $tag = '<div class="auto-content-block">' . $caption;
@@ -1100,11 +1116,12 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
       {
         $tag = '<span class="auto-content-inline">' . $caption;
       }
+
       $Result = $builder->as_html () . $tag . $inner;
     }
     else
     {
-      $Result = $this->_open_inner_area ($munger, $attributes, $outer_css, $inner_css, $class);
+      $Result = $this->_open_inner_area ($munger, $attributes, $outer_css, $inner_css, $inner_class);
     }
 
     return $Result;
@@ -1207,9 +1224,9 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
   {
     $builder = $munger->make_tag_builder ($this->main_tag);
     
-    if (! empty ($this->main_CSS_class))
+    if (! empty ($this->main_css_class))
     {
-    	$css_class = $this->main_CSS_class . ' ' . $inner_class;
+    	$css_class = $this->main_css_class . ' ' . $inner_class;
     }
     else
     {
@@ -2288,7 +2305,7 @@ class HTML_TEXT_MUNGER extends HTML_BASE_MUNGER
     $no_quote_transformer = new HTML_QUOTE_TRANSFORMER ();
     $no_quote_transformer->default_quote_style = Munger_quote_style_none;
     $shell_replacer = new HTML_PREFORMATTED_BLOCK_REPLACER ();
-    $shell_replacer->main_CSS_class = 'shell';
+    $shell_replacer->main_css_class = 'shell';
 
     /** @var THEMED_PAGE $page */
     global $Page;
@@ -2305,7 +2322,7 @@ class HTML_TEXT_MUNGER extends HTML_BASE_MUNGER
     $this->register_transformer ('error', $block_transformer);
     $this->register_replacer ('error', new MUNGER_BASIC_REPLACER ($page->get_begin_message('error', 'p'), $page->get_end_message('p')));
     $this->register_transformer ('div', $block_transformer);
-    $this->register_replacer ('clear', new MUNGER_BASIC_REPLACER ('<span style="display: block; clear: both"></span>', ''));
+    $this->register_replacer ('clear', new MUNGER_BASIC_REPLACER ('<span class="clear-both"></span>', ''));
     $this->register_transformer ('pre', $nop_transformer);
     $this->register_replacer ('pre', new HTML_PREFORMATTED_BLOCK_REPLACER ());
     $this->register_transformer ('box', $block_transformer);
@@ -2328,7 +2345,7 @@ class HTML_TEXT_MUNGER extends HTML_BASE_MUNGER
     $this->register_replacer ('fn', new HTML_FOOTNOTE_REFERENCE_REPLACER (), false);
     $this->register_transformer ('ft', $block_transformer);
     $this->register_replacer ('ft', new HTML_FOOTNOTE_TEXT_REPLACER ());
-    $this->register_replacer ('hr', new HTML_BASIC_REPLACER ('<span class="horizontal-separator"></span>', ''), false);
+    $this->register_replacer ('hr', new HTML_BASIC_REPLACER ('<hr>', ''), false);
     $this->register_replacer ('a', new HTML_LINK_REPLACER ());
     $this->register_replacer ('anchor', new HTML_ANCHOR_REPLACER (), false);
     $this->register_replacer ('img', new HTML_IMAGE_REPLACER (), false);

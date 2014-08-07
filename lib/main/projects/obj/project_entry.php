@@ -80,11 +80,11 @@ abstract class PROJECT_ENTRY extends MULTI_TYPE_ENTRY
   public $extra_description;
 
   /**
-   * @param PROJECT_APPLICATION $app Main application.
+   * @param PROJECT_APPLICATION $context Main application.
    */
-  public function __construct ($app)
+  public function __construct ($context)
   {
-    parent::__construct ($app);
+    parent::__construct ($context);
 
     $this->_main_branch_info = $this->_make_branch_info ();
   }
@@ -107,17 +107,6 @@ abstract class PROJECT_ENTRY extends MULTI_TYPE_ENTRY
       $prop->title = "[Unknown kind ($this->kind)]";
       return $prop;
     }
-  }
-
-  /**
-   * HTML code for the icon to use for this kind.
-   * @param string $size
-   * @return string
-   */
-  public function kind_icon ($size = '20px')
-  {
-    $props = $this->kind_properties ();
-    return $props->icon_as_html ($size);
   }
 
   /**

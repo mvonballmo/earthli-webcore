@@ -127,19 +127,19 @@ class MUNGER_BASE_TEST_TASK extends TEST_TASK
     if (! $this->_num_errors)
     {
       echo "<p>" . 
-        $this->context->resolve_icon_as_html("{icons}/indicators/error", "info", "20px") . 
+        $this->context->resolve_icon_as_html("{icons}/indicators/error", Twenty_px, "info") .
         " Congratulations! All [$this->_num_tests] tests have completed successfully.</p>";
     }
     elseif ($this->_num_ignored == $this->_num_errors)
     {
       echo "<p>" . 
-        $this->context->resolve_icon_as_html("{icons}/indicators/warning", "info", "20px") . 
+        $this->context->resolve_icon_as_html("{icons}/indicators/warning", Twenty_px, "info") .
         " Congratulations! You passed [$this->_num_tests] tests; [$this->_num_ignored] errors were ignored.</p>";
     }
     else
     {
       echo "<p class=\"error\">" . 
-        $this->context->resolve_icon_as_html("{icons}/indicators/error", "error", "20px") . 
+        $this->context->resolve_icon_as_html("{icons}/indicators/error", Twenty_px, "error") .
         " You failed [$this->_num_errors] of [$this->_num_tests] tests; [$this->_num_ignored] errors were ignored.</p>";
     }
 

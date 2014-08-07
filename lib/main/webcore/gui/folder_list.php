@@ -51,11 +51,6 @@ class FOLDER_LIST extends SELECT_LIST
   /**
    * @var string
    */
-  public $object_name = 'folder';
-
-  /**
-   * @var string
-   */
   public $control_name = 'folder_ids';
 
   /**
@@ -66,11 +61,11 @@ class FOLDER_LIST extends SELECT_LIST
   public $page_name = '';
 
   /**
-   * @param APPLICATION $app Main application.
+   * @param APPLICATION $context Main application.
    */
-  public function __construct ($app)
+  public function __construct ($context)
   {
-    parent::__construct ($app);
+    parent::__construct ($context);
     $this->append_column ('Name');
     $this->append_column ('Summary');
   }
@@ -78,12 +73,13 @@ class FOLDER_LIST extends SELECT_LIST
   /**
    * Draw the given column's data using the given object.
    * @param FOLDER $obj
-   * @param integer $index
+   * @param integer $col_index
+   * @param integer $row_index
    * @access private
    */
-  protected function _draw_column_contents ($obj, $index)
+  protected function _draw_column_contents ($obj, $col_index, $row_index)
   {
-    switch ($index)
+    switch ($col_index)
     {
     case 0:
       $this->_draw_selector ($obj);
@@ -101,7 +97,7 @@ class FOLDER_LIST extends SELECT_LIST
       $t = $obj->html_formatter ();
       $t->force_paragraphs = false;
       echo $obj->summary_as_html ($t);
+      break;
     }
   }
 }
-?>

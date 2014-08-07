@@ -49,11 +49,11 @@ require_once ('webcore/forms/search_fields.php');
 class SEARCH_PROJECT_ENTRY_FIELDS extends SEARCH_ENTRY_FIELDS
 {
   /**
-   * @param APPLICATION $app Main application.
+   * @param APPLICATION $context Main application.
    */
-  public function __construct ($app)
+  public function __construct ($context)
   {
-    parent::__construct ($app);
+    parent::__construct ($context);
 
     $this->_add_text ('extra_description', 'Extra description');
 
@@ -209,18 +209,14 @@ class SEARCH_PROJECT_ENTRY_FIELDS extends SEARCH_ENTRY_FIELDS
     if (sizeof ($kinds))
     {
       $props = $renderer->make_list_properties ();
-      $props->items_per_row = 1;
-      $props->line_spacing = '.15em';
       $index = 0;
       foreach ($kinds as $kind)
       {
-        $props->add_item ($this->context->get_text_with_icon($kind->icon, $kind->title, '16px'), $index);
+        $props->add_item ($this->context->get_icon_with_text($kind->icon, Sixteen_px, $kind->title), $index);
         $index += 1;
       }
       $renderer->draw_check_group_row ('kind', $props);
     }
-
-    $renderer->draw_separator ();
 
     parent::_draw_date_fields ($form, $renderer);
   }
@@ -247,11 +243,11 @@ class SEARCH_JOB_FIELDS extends SEARCH_PROJECT_ENTRY_FIELDS
 class SEARCH_CHANGE_FIELDS extends SEARCH_PROJECT_ENTRY_FIELDS
 {
   /**
-   * @param APPLICATION $app Main application.
+   * @param APPLICATION $context Main application.
    */
-  public function __construct ($app)
+  public function __construct ($context)
   {
-    parent::__construct ($app);
+    parent::__construct ($context);
 
     $this->_add_text ('files', 'Files', false, false, 'chng');
   }
