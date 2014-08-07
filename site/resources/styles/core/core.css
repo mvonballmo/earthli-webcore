@@ -1201,11 +1201,11 @@ hr {
 .basic-form fieldset.toggle .content {
   margin-top: 15px;
 }
-.basic-form fieldset.toggle .toggle {
+.basic-form fieldset.toggle span.toggle {
   float: left;
   margin-right: 5px;
 }
-.basic-form fieldset.toggle .toggle + .text {
+.basic-form fieldset.toggle span.toggle + .text {
   display: block;
   margin-left: 18px;
 }
