@@ -109,10 +109,10 @@ class TITLE_FORMATTER extends WEBCORE_OBJECT
    */
   public function set_name ($page_name)
   {
-    $qmark = strpos ($this->location, '?');
-    if ($qmark !== false)
+    $question_mark_position = strpos ($this->location, '?');
+    if ($question_mark_position !== false)
     {
-      $this->location = $page_name . substr ($this->location, $qmark);
+      $this->location = $page_name . substr ($this->location, $question_mark_position);
     }
     else
     {

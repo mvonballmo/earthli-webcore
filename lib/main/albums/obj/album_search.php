@@ -85,5 +85,3 @@ class JOURNAL_SEARCH extends MULTI_ENTRY_SEARCH
     parent::__construct ($context, new SEARCH_JOURNAL_FIELDS ($context));
   }
 }
-
-?>
