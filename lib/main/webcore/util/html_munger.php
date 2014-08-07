@@ -1050,28 +1050,28 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
     $inner_css = $munger->make_style_builder ();
     $inner_css->add_text (read_array_index ($attributes, 'style'));
 
-    $class = read_array_index ($attributes, 'class');
+    $inner_class = read_array_index ($attributes, 'class');
+    if ($this->css_classes)
+    {
+      if ($inner_class)
+      {
+        $inner_class = $this->css_classes . ' ' . $inner_class;
+      }
+      else
+      {
+        $inner_class = $this->css_classes;
+      }
+    }
 
+    $outer_class = '';
     if ($align_class)
     {
-      $class .= ' ' . $align_class;
+      $outer_class .= ' ' . $align_class;
     }
 
     if ($clear_class)
     {
-      $class .= ' ' . $clear_class;
-    }
-
-    if ($this->css_classes)
-    {
-      if ($class)
-      {
-        $class = $this->css_classes . ' ' . $class;
-      }
-      else
-      {
-        $class = $this->css_classes;
-      }
+      $outer_class .= ' ' . $clear_class;
     }
 
     $this->_caption = $this->_calculate_caption ($munger, $attributes);
@@ -1105,8 +1105,9 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
 
       $caption = $this->_get_caption ($is_block, true);
       $builder->add_attribute ('style', $outer_css->as_text ());
+      $builder->add_attribute ('class', $outer_class);
       $outer_css->clear ();
-      $inner = $this->_open_inner_area ($munger, $attributes, $outer_css, $inner_css, $class);
+      $inner = $this->_open_inner_area ($munger, $attributes, $outer_css, $inner_css, $inner_class);
       if ($is_block)
       {
         $tag = '<div class="auto-content-block">' . $caption;
@@ -1115,11 +1116,12 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
       {
         $tag = '<span class="auto-content-inline">' . $caption;
       }
+
       $Result = $builder->as_html () . $tag . $inner;
     }
     else
     {
-      $Result = $this->_open_inner_area ($munger, $attributes, $outer_css, $inner_css, $class);
+      $Result = $this->_open_inner_area ($munger, $attributes, $outer_css, $inner_css, $inner_class);
     }
 
     return $Result;
