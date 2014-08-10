@@ -1290,7 +1290,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
         $Result .= ' onChange="' . $props->on_click_script . '"';
       }
 
-      $Result .= 'size="' . $props->height . '"';
+      $Result .= ' size="' . $props->height . '"';
       $Result .= '>';
 
       $selected_value = $field->value ();
