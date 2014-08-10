@@ -77,6 +77,31 @@
     margin-left: 0;
   }
 
+  .input + .input,
+  .input + input,
+  input + .input,
+  select + select,
+  select + .input,
+  .input + select,
+  input + input,
+  input + select,
+  select + input,
+  input + .button,
+  input + button,
+  .input + button,
+  .input + .button,
+  select + button,
+  select + .button,
+  .button + input,
+  button + input,
+  button + .input,
+  .button + .input,
+  button + select,
+  .button + select
+  {
+    margin-left: @small_spacing;
+  }
+
   .help
   {
     p:first-child
@@ -331,25 +356,6 @@ select
 {
   margin-left: 0;
   .border-box();
-}
-
-.input + .input,
-.input + input,
-input + .input,
-select + select,
-select + .input,
-.input + select,
-input + input,
-input + select,
-select + input,
-input + .button,
-input + button,
-.input + button,
-.input + .button,
-select + button,
-select + .button
-{
-  margin-left: @small_spacing;
 }
 
 .button.disabled,

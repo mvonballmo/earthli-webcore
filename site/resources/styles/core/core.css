@@ -1220,6 +1220,41 @@ hr {
   vertical-align: baseline;
   margin-left: 0;
 }
+.basic-form .input + .input,
+.basic-form .input + input,
+.basic-form input + .input,
+.basic-form select + select,
+.basic-form select + .input,
+.basic-form .input + select,
+.basic-form input + input,
+.basic-form input + select,
+.basic-form select + input,
+.basic-form input + .button,
+.basic-form input + button,
+.basic-form .input + button,
+.basic-form .input + .button,
+.basic-form select + button,
+.basic-form select + .button,
+.basic-form .button + input,
+.basic-form button + input,
+.basic-form button + .input,
+.basic-form .button + .input,
+.basic-form button + select,
+.basic-form .button + select,
+.basic-form input + input[type=button],
+.basic-form .input + input[type=button],
+.basic-form select + input[type=button],
+.basic-form input[type=button] + input,
+.basic-form input[type=button] + .input,
+.basic-form input[type=button] + select,
+.basic-form input + input[type=submit],
+.basic-form .input + input[type=submit],
+.basic-form select + input[type=submit],
+.basic-form input[type=submit] + input,
+.basic-form input[type=submit] + .input,
+.basic-form input[type=submit] + select {
+  margin-left: 5px;
+}
 .basic-form .help p:first-child {
   margin-top: 0;
 }
@@ -1423,29 +1458,6 @@ select {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
 }
-.input + .input,
-.input + input,
-input + .input,
-select + select,
-select + .input,
-.input + select,
-input + input,
-input + select,
-select + input,
-input + .button,
-input + button,
-.input + button,
-.input + .button,
-select + button,
-select + .button,
-input + input[type=button],
-.input + input[type=button],
-select + input[type=button],
-input + input[type=submit],
-.input + input[type=submit],
-select + input[type=submit] {
-  margin-left: 5px;
-}
 .button.disabled,
 .style-controls button.disabled,
 .style-controls input[type=button].disabled,
@@ -1545,6 +1557,12 @@ select + input[type=submit] {
   width: 120px;
   margin-left: -135px;
   margin-top: .15em;
+}
+.basic-form.ltr fieldset textarea:not([class]),
+.basic-form.ltr fieldset select:not([class]),
+.basic-form.ltr fieldset input[type=password]:not([class]),
+.basic-form.ltr fieldset input[type=text]:not([class]) {
+  margin-left: -5px;
 }
 .basic-form.ltr fieldset.toggle legend {
   margin-top: 0;
