@@ -247,16 +247,6 @@ h2
   border-bottom: @hairline_border_width dotted @standard_border_color;
 }
 
-dl
-{
-  margin: @standard_spacing 0;
-}
-
-dd
-{
-  margin: @small_spacing 0 @standard_spacing 1.5em
-}
-
 a:link,
 a:visited
 {
@@ -532,7 +522,7 @@ pre > code
 
 .footer-data + .footer-data
 {
-  margin-top: .3em;
+  margin-top: @small_spacing;
 }
 
 /* @end */
@@ -551,18 +541,28 @@ pre > code
 
     li
     {
-      padding-left: .5em;
+      padding-left: @li_indent;
     }
   }
 
   ul:not([class])
   {
-    padding-left: 1.1em;
+    padding-left: @ul_indent;
   }
 
   ol:not([class])
   {
-    padding-left: 1.3em;
+    padding-left: @ol_indent;
+  }
+
+  dl
+  {
+    margin: @standard_spacing 0;
+  }
+
+  dd
+  {
+    margin: @small_spacing 0 @standard_spacing @dd_indent;
   }
 }
 
@@ -831,7 +831,7 @@ ul.menu
 
   .menu-group-title
   {
-    padding: .6em .5em;
+    padding: @button_padding;
     border-bottom: @hairline_border_width dotted @standard_border_color;
     cursor: default;
   }
@@ -840,7 +840,7 @@ ul.menu
   {
     display: block;
     margin: @small_spacing 0 0 0;
-    width: 200px;
+    max-width: @menu_max_width;
     white-space: normal;
     line-height: @compressed_text_flow_line_height;
   }
@@ -848,8 +848,10 @@ ul.menu
 
 .menu-item
 {
-  padding: .6em .5em;
+  padding: @button_padding;
   display: block;
+  min-height: @minimum_button_height;
+  box-sizing: border-box;
   border-top: @hairline_border_width solid transparent;
   border-bottom: @hairline_border_width solid transparent;
   .disable-text-selection();
@@ -906,14 +908,14 @@ button + .menu-items.buttons,
 .menu-items.standard li:before
 {
   content: '|';
-  padding: 0 .4em;
+  padding: 0 @button_padding;
 }
 
 .menu-items.objects li:before,
 .menu-items.location li:before
 {
   content: '>';
-  padding: 0 .4em;
+  padding: 0 @button_padding;
 }
 
 .menu-items li:first-child:before
@@ -1007,8 +1009,7 @@ button + .menu-items.buttons,
 
 .object-navigator li
 {
-  padding-top: 3px;
-  padding-bottom: 3px;
+  padding: @small_spacing 0;
 }
 
 .object-navigator .page-up
@@ -1054,69 +1055,38 @@ button + .menu-items.buttons,
   .cell-selected,
   .cell-highlight
   {
-    width: (@page_max_width - @standard_spacing - 8 * @hairline_border_width) / 7;
-    height: 5em;
+    width: @calendar_box_width;
+    height: @calendar_box_height;
     box-sizing: border-box;
+    padding: @small_spacing;
+    vertical-align: top;
+    empty-cells: show;
   }
-}
 
-.calendar-banner, .calendar-footer
-{
-  padding: .1em;
-}
-
-.calendar-today
-{
-
-}
-
-.calendar-footer
-{
-  padding-top: .5em;
-}
-
-.calendar-body
-{
-  border-collapse: collapse;
-}
-
-.weekday
-{
-}
-
-.day-number
-{
-
-}
-
-.day-content
-{
-  a
+  .cell-non-empty,
+  .cell-selected,
+  .cell-highlight
   {
-    display: block;
+    border: @hairline_border_width solid @standard_border_color;
   }
-}
 
-.cell-empty,
-.cell-non-empty,
-.cell-selected,
-.cell-highlight
-{
-  padding: @small_spacing;
-  vertical-align: top;
-  empty-cells: show;
-}
+  .cell-empty
+  {
+    border: none;
+  }
 
-.cell-non-empty,
-.cell-selected,
-.cell-highlight
-{
-  border: @hairline_border_width solid @standard_border_color;
-}
+  .day-content
+  {
+    a
+    {
+      display: block;
+    }
+  }
 
-.cell-empty
-{
-  border: none;
+  .day-number
+  {
+
+  }
 }
 
 /* @end */
@@ -1337,11 +1307,6 @@ ul.minimal
   }
 }
 
-p div:first-child img:first-child
-{
-  margin-top: 1.5em;
-}
-
 /* Make sure that paragraphs inside block elements don't use margins.*/
 
 blockquote p:first-child,
@@ -1367,11 +1332,11 @@ blockquote p:first-child,
 .auto-content-inline
 {
   display: block;
+  line-height: 0px;
 }
 
 .auto-content-caption
 {
-  font-size: 85%;
   padding-top: @small_spacing;
   display: block;
 }
@@ -1391,9 +1356,9 @@ blockquote p:first-child,
 .footnote-reference
 {
   display: block;
-  margin-top: .5em;
-  margin-left: 2em;
-  margin-bottom: .5em;
+  margin-top: @small_spacing;
+  margin-left: 1.8em;
+  margin-bottom: @small_spacing;
 }
 
 .footnote-reference .footnote-number:first-child
@@ -1467,13 +1432,13 @@ hr
 .minimal-commands
 {
   float: left;
-  margin-right: .35em;
+  margin-right: @button_spacing;
   margin-top: @standard_spacing;
 }
 
 .minimal-commands-content
 {
-  margin-left: 2.55em;
+  margin-left: @minimum_button_width + @button_padding;
 }
 
 .minimal-commands .selector
