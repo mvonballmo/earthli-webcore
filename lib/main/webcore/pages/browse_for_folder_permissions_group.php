@@ -60,8 +60,6 @@ http://www.earthli.com/software/webcore
       <h2>
         Browse for group
       </h2>
-      <p class="notes">Groups that already have permissions for <?php echo $folder->title_as_link (); ?>
-        are <em>not</em> displayed.</p>
     <?php
       $group_query = $App->group_query ();
 
@@ -87,6 +85,8 @@ http://www.earthli.com/software/webcore
       $grid->set_query ($group_query);
       $grid->display ();
     ?>
+      <p class="info-box-bottom">Groups that already have permissions for <?php echo $folder->title_as_link (); ?>
+        are <em>not</em> displayed.</p>
     </div>
     <?php
       $Page->finish_display ();

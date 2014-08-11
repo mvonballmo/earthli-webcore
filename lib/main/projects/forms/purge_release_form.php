@@ -128,7 +128,7 @@ class PURGE_RELEASE_FORM extends PURGE_OBJECT_FORM
     $buttons [] = $renderer->submit_button_as_HTML ();
     $renderer->draw_buttons_in_row ($buttons);
 
-    $renderer->draw_text_row ('', '*Purging an release removes all connections to it and permanently removes it from the database.', 'notes');
+    $renderer->draw_text_row ('', '*Purging a release removes all connections to it and permanently removes it from the database.', 'info-box-bottom');
 
     $renderer->finish ();
   }
@@ -170,7 +170,7 @@ class PURGE_RELEASE_PREVIEW_SETTINGS extends UPDATE_RELEASE_PREVIEW_SETTINGS
     if (! $this->_objects_displayed)
     {
 ?>
-  <p class="notes">No jobs or changes will be affected by purging this release.</p>
+  <p class="info-box-bottom">No jobs or changes will be affected by purging this release.</p>
 <?php
     }
   }

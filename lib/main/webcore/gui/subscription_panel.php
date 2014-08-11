@@ -266,7 +266,7 @@ class ENTRY_SUBSCRIPTION_PANEL extends FORM_BASED_SUBSCRIPTION_PANEL
 ?>
   <p>You will receive notifications for all activity on subscribed items. Notifications are sent when an item is changed, or when
     a new item is attached (like a comment).</p>
-  <p class="notes">You cannot subscribe to items here; subscribe to items from their home pages.</p>
+  <p class="info-box-top">You cannot subscribe to items here; subscribe to items from their home pages.</p>
 <?php
     parent::display ();
   }
@@ -332,7 +332,7 @@ class USER_SUBSCRIPTION_PANEL extends FORM_BASED_SUBSCRIPTION_PANEL
 ?>
   <p>You will receive notifications for items created by subscribed users. Notifications are 
     sent when an item is changed, or when a new item is attached (like a comment).</p>
-  <p class="notes">You cannot subscribe to users here; subscribe to users from their home pages.</p>
+  <p class="info-box-top">You cannot subscribe to users here; subscribe to users from their home pages.</p>
 <?php
     parent::display ();
   }

@@ -224,7 +224,7 @@ class JOB_RENDERER extends PROJECT_ENTRY_RENDERER
       else
       {
   ?>
-  (<?php echo $time_in_status->format (); ?>) <span class="notes">(open for <?php echo $time_open->format (); ?>)</span><br>
+  &ndash; <?php echo $time_in_status->format (); ?> (open for <?php echo $time_open->format (); ?>)<br>
   <?php
       }
 

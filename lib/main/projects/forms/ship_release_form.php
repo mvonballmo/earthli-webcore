@@ -222,7 +222,7 @@ class SHIP_RELEASE_PREVIEW_SETTINGS extends UPDATE_RELEASE_PREVIEW_SETTINGS
     if (! $this->_objects_displayed)
     {
 ?>
-  <p class="notes">There are no jobs or changes that will be affected by shipping this release.</p>
+  <p class="info-box-bottom">There are no jobs or changes that will be affected by shipping this release.</p>
 <?php
      }
   }

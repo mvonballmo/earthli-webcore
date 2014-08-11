@@ -54,8 +54,6 @@ http://www.earthli.com/software/webcore
       <h2>
         Browse for user
       </h2>
-      <p class="notes">Users who already have permissions for <?php echo $folder->title_as_link (); ?>
-        are <em>not</em> displayed.</p>
     <?php
       $user_query = $App->user_query ();
 
@@ -90,6 +88,8 @@ http://www.earthli.com/software/webcore
       $grid->set_query ($user_query);
       $grid->display ();
     ?>
+      <p class="info-box-bottom">Users who already have permissions for <?php echo $folder->title_as_link (); ?>
+        are <em>not</em> displayed.</p>
     </div>
     <?php
       $Page->finish_display ();

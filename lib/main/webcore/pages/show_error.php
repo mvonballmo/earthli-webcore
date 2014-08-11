@@ -86,7 +86,7 @@ http://www.earthli.com/software/webcore
     $page_url = $Page->url ();
     $Page->show_message(htmlentities($page_url));
   ?>
-  <p class="notes">Please see the <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html">HTTP 1.1 Status Code Definitions</a> for more information.</p>
+  <p class="info-box-bottom">Please see the <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html">HTTP 1.1 Status Code Definitions</a> for more information.</p>
   </div>
 </div>
 <?php

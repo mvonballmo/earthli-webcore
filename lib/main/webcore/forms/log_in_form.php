@@ -192,14 +192,10 @@ class LOG_IN_FORM extends FORM
       $anon = $this->app->anon_user ();
       if ($anon->is_allowed (Privilege_set_user, Privilege_create))
       {
-?>
-<div class="notes">Don't have an account? <a href="<?php echo $this->app->page_names->user_create; ?>">Register...</a></div>
-<?php
+        $renderer->draw_text_row('', "Don't have an account? <a href=\"" . $this->app->page_names->user_create . "\">Register now...</a>", 'info-box-bottom');
       }
     }
 
     echo '</div>';
   }
 }
-
-?>

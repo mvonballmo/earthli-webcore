@@ -125,7 +125,7 @@ class JOB_GRID extends PROJECT_ENTRY_GRID
       else
       {
   ?>
-  (<?php echo $time_in_status->format (); ?>) <span class="notes">(open for <?php echo $time_open->format (); ?>)</span>
+  &ndash; <?php echo $time_in_status->format (); ?> (open for <?php echo $time_open->format (); ?>)
   <?php
       }
     }
@@ -157,7 +157,7 @@ class JOB_GRID extends PROJECT_ENTRY_GRID
         }
         else
         {
-          $text = '<span class="notes">Not assigned</span>';
+          $text = 'Not assigned';
         }
 
         echo $this->app->get_icon_with_text($obj->get_assignee_icon_url(), Sixteen_px, $text);

@@ -79,17 +79,20 @@ class MULTIPLE_OBJECT_DELETER_FORM extends MULTIPLE_OBJECT_ACTION_FORM
     $renderer->start_row ();
 ?>
 <p>Are you sure you want to delete <?php echo $this->object_list->description (); ?>?</p>
-<p class="notes">
-  *Deleting an object marks it as 'invisible', but does not delete the object.
-  The object can always be restored in its entirety until it is purged.
-  If you purge the object, it and all contained content (entries, comments, etc.)
-  is removed from the database.
-</p>
 <?php
     $renderer->finish_row ();
     $buttons [] = $renderer->button_as_HTML ('No', "view_explorer.php?id={$this->_folder->id}");
     $buttons [] = $renderer->submit_button_as_HTML ();
     $renderer->draw_buttons_in_row ($buttons);
+
+?>
+    <p class="info-box-bottom">
+      *Deleting an object marks it as 'invisible', but does not delete the object.
+      The object can always be restored in its entirety until it is purged.
+      If you purge the object, it and all contained content (entries, comments, etc.)
+      is removed from the database.
+    </p>
+<?php
   }
 }
 

@@ -44,7 +44,7 @@ http://www.earthli.com/software/webcore/albums
   <h2>
     Choose cover picture for <?php echo $folder->title_as_link (); ?>
   </h2>
-  <p class="notes">Click a picture below to select it. Click "Clear" to select
+  <p class="info-box-top">Click a picture below to select it. Click "Clear" to select
     no cover picture.</p>
   <?php
     $controls_renderer = $App->make_controls_renderer ();
