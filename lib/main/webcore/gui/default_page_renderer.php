@@ -143,8 +143,6 @@ class DEFAULT_PAGE_RENDERER extends WEBCORE_PAGE_RENDERER
 
   protected function _finish_body ()
   {
-    parent::_finish_body();
-
     $page = $this->page;
     $options = $page->template_options;
     $browser = $this->env->browser();
@@ -206,6 +204,7 @@ class DEFAULT_PAGE_RENDERER extends WEBCORE_PAGE_RENDERER
     ?>
   </div>  <!-- end of page -->
   <?php
+    parent::_finish_body();
   }
 
   /**
