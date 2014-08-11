@@ -1063,17 +1063,6 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
       }
     }
 
-    $outer_class = '';
-    if ($align_class)
-    {
-      $outer_class .= ' ' . $align_class;
-    }
-
-    if ($clear_class)
-    {
-      $outer_class .= ' ' . $clear_class;
-    }
-
     $this->_caption = $this->_calculate_caption ($munger, $attributes);
 
     $width = $this->_calculate_width ($munger, $attributes);
@@ -1103,6 +1092,17 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
         }
       }
 
+      $outer_class = '';
+      if ($align_class)
+      {
+        $outer_class .= ' ' . $align_class;
+      }
+
+      if ($clear_class)
+      {
+        $outer_class .= ' ' . $clear_class;
+      }
+
       $caption = $this->_get_caption ($is_block, true);
       $builder->add_attribute ('style', $outer_css->as_text ());
       $builder->add_attribute ('class', $outer_class);
@@ -1121,6 +1121,16 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
     }
     else
     {
+      if ($align_class)
+      {
+        $inner_class .= ' ' . $align_class;
+      }
+
+      if ($clear_class)
+      {
+        $inner_class .= ' ' . $clear_class;
+      }
+
       $Result = $this->_open_inner_area ($munger, $attributes, $outer_css, $inner_css, $inner_class);
     }
 
