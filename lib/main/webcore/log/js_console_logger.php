@@ -180,6 +180,7 @@ class JS_CONSOLE_LOGGER extends TEXT_OUTPUT_LOGGER
    * Handles HTML/new line conversions and sets a flag if the message should trigger the popup window.
    * @param string $msg
    * @param integer $type
+   * @param string $channel
    * @param boolean $has_html
    * @access private
    */
@@ -236,6 +237,7 @@ class JS_CONSOLE_LOGGER extends TEXT_OUTPUT_LOGGER
    * Wrap output in an HTML tag.
    * @param string $text
    * @param string $class CSS class to use for the message.
+   * @return string
    * @access private
    */
   protected function _format_html_tag ($text, $class)

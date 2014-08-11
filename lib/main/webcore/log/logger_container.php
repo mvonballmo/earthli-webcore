@@ -129,5 +129,3 @@ class LOGGER_CONTAINER extends RAISABLE
     }
   }
 }
-
-?>

@@ -440,7 +440,7 @@ abstract class LOGGER extends LOGGER_CONTAINER
   }
 
   /**
-   * Override in descendents to finish logging to specific media.
+   * Override in descendants to finish logging to specific media.
    * File logs can close their files; Javascript loggers can output to the page.
    * @access private
    */
@@ -461,6 +461,7 @@ abstract class LOGGER extends LOGGER_CONTAINER
   /**
    * @param string $msg
    * @param integer $type
+   * @param $channel
    * @param boolean $has_html
    * @see LOGGER::record()
    * @access private
