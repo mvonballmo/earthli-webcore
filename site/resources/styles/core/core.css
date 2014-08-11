@@ -1646,6 +1646,12 @@ select {
 .basic-form.top fieldset fieldset {
   border-right-width: 0px;
 }
+.basic-form.top textarea:not([class]),
+.basic-form.top select:not([class]),
+.basic-form.top input[type=password]:not([class]),
+.basic-form.top input[type=text]:not([class]) {
+  margin-left: -5px;
+}
 .basic-form.top .form-row .button:first-child {
   margin-left: -5px;
 }

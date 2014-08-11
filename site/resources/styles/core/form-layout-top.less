@@ -13,6 +13,18 @@
     }
   }
 
+  textarea,
+  select,
+  input[type=password],
+  input[type=text]
+  {
+    &:not([class])
+    {
+      // Move these controls out so that the text they contain lines up with standard text flows
+      margin-left: -@standard_border_radius - @hairline_border_width;
+    }
+  }
+
   .form-row
   {
     .button:first-child
