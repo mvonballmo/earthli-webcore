@@ -65,8 +65,14 @@ http://www.earthli.com/software/webcore
 
     if ($defined)
     {
-      $menu->append('Add user...', 'create_folder_user_permissions.php?id=' . $folder->id, '{icons}buttons/add');
-      $menu->append('Add group...', 'create_folder_group_permissions.php?id=' . $folder->id, '{icons}buttons/add');
+      if ($App->login->is_allowed (Privilege_set_user, Privilege_view))
+      {
+        $menu->append('Add user...', 'create_folder_user_permissions.php?id=' . $folder->id, '{icons}buttons/add');
+      }
+      if ($App->login->is_allowed (Privilege_set_group, Privilege_view))
+      {
+        $menu->append('Add group...', 'create_folder_group_permissions.php?id=' . $folder->id, '{icons}buttons/add');
+      }
     }
 
     if ($folder->defines_security ())
