@@ -256,12 +256,21 @@ ul.menu
     border-color: @control_hover_border_color;
   }
 
+  .menu-item
+  {
+    &:link,
+    &:visited
+    {
+      color: @control_text_color;
+    }
+  }
+
+
   .menu-item-description
   {
     color: @control_text_color;
   }
 }
-
 
 .button,
 .style-controls button

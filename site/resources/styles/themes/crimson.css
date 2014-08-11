@@ -262,6 +262,10 @@ ul.menu .menu-item:hover {
   background-color: #a93431;
   border-color: #b56968;
 }
+ul.menu .menu-item:link,
+ul.menu .menu-item:visited {
+  color: #dabfbe;
+}
 ul.menu .menu-item-description {
   color: #dabfbe;
 }
