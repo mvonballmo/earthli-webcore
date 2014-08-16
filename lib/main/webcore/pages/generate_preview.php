@@ -8,10 +8,12 @@ class TEXT_VALIDATION_ERROR
   public $column_end;
 }
 
-$parameterData = read_var ('inputText');
+$title = read_var ('title');
+$description = read_var ('description');
 $contentObjectId = read_var ('id');
 
-$input = iconv("UTF-8", "CP1252", $parameterData);
+$newTitle = iconv("UTF-8", "CP1252", $title);
+$newDescription = iconv("UTF-8", "CP1252", $description);
 
 $munger = $App->html_text_formatter();
 
@@ -25,7 +27,7 @@ $formatted_text = '';
 if ($obj != null)
 {
   $tag_validator = $App->make_tag_validator (Tag_validator_multi_line);
-  $tag_validator->validate ($input);
+  $tag_validator->validate ($newDescription);
 
   $errors = array();
   if (sizeof ($tag_validator->errors))
@@ -46,8 +48,13 @@ if ($obj != null)
   }
   else
   {
-    $formatted_text = $munger->transform($input, $obj);
-    $message = 'Preview was updated.';
+    $now = new DATE_TIME();
+    $now->set_now ();
+    $f = $now->formatter ();
+    $f->type = Date_time_format_date_and_time;
+    $f->clear_flags ();
+    $formatted_text = $munger->transform($newDescription, $obj);
+    $message = 'Preview updated at ' . $now->format ($f) . '.';
     $message_type = 'info';
   }
 }

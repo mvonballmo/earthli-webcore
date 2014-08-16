@@ -299,12 +299,12 @@
 
     &.medium-tall
     {
-      height: 20em;
+      height: @medium-tall-height;
     }
 
     &.tall
     {
-      height: 30em;
+      height: @tall-height;
     }
   }
 
@@ -411,21 +411,36 @@ select
   }
 }
 
-#inline_preview_block
+.form-with-preview
 {
-  display: none;
-  position: absolute;
-  left: @page_max_width + 50px;
-  margin-right: @standard_spacing;
-}
+  display: flex;
 
-#inline_preview_message
-{
+  .basic-form
+  {
+    flex: 1;
+  }
 
-}
+  .inline-preview-block
+  {
+    flex: 1;
+    display: none;
+    margin: 0 @standard_spacing;
+    flex-direction: column;
+  }
 
-#inline_preview_block
-{
-  overflow: auto;
-  height: 42em;
+  .inline-preview
+  {
+    overflow: auto;
+    flex: 1;
+  }
+
+  .tall
+  {
+    height: @tall-preview-height;
+  }
+
+  .medium-tall
+  {
+    height: @medium-tall-preview-height
+  }
 }

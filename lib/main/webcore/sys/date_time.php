@@ -885,10 +885,10 @@ class DATE_TIME extends RAISABLE
   }
 
   /**
-   * Returns the toolki for this date/time.
+   * Returns the toolkit for this date/time.
    * This basic date/time class uses the {@link global_date_time_toolkit()},
    * which is fine for most applications. Applications which need specialized
-   * toolkits can define a descendent and redefine this function.
+   * toolkits can define a descendant and redefine this function.
    * @see formatter()
    * @see use_toolkit()
    * @return DATE_TIME_TOOLKIT

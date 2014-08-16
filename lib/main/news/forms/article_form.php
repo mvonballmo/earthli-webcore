@@ -57,7 +57,7 @@ class ARTICLE_FORM extends DRAFTABLE_ENTRY_FORM
 
     $this->field_at('update_modifier_on_change')->visible = true;
 
-    $this->description_control_css_class = 'tall';
+    $this->description_control_css_class = 'medium-tall';
   }
 
   /**
@@ -90,10 +90,10 @@ class ARTICLE_FORM extends DRAFTABLE_ENTRY_FORM
   protected function _draw_controls ($renderer)
   {
     $renderer->inline_operations_enabled = true;
-    $renderer->draw_inline_preview_area();
-
-    // TODO use flexbox here
+    $renderer->start_inline_preview_area();
 
     parent::_draw_controls ($renderer);
+
+    $renderer->finish_inline_preview_area($this->description_control_css_class);
   }
 }

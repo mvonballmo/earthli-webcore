@@ -1480,15 +1480,27 @@ select {
 .style-controls .basic-form .form-row input[type=submit]:first-child {
   margin-left: -5px;
 }
-#inline_preview_block {
-  display: none;
-  position: absolute;
-  left: 950px;
-  margin-right: 15px;
+.form-with-preview {
+  display: flex;
 }
-#inline_preview_block {
+.form-with-preview .basic-form {
+  flex: 1;
+}
+.form-with-preview .inline-preview-block {
+  flex: 1;
+  display: none;
+  margin: 0 15px;
+  flex-direction: column;
+}
+.form-with-preview .inline-preview {
   overflow: auto;
-  height: 42em;
+  flex: 1;
+}
+.form-with-preview .tall {
+  height: 40em;
+}
+.form-with-preview .medium-tall {
+  height: 30em;
 }
 .style-controls button,
 .style-controls input[type=submit],

@@ -229,7 +229,7 @@ class FORM_LIST_PROPERTIES
 
   /**
    * Replace an existing item in the list.
-   * These items are then renderered by specific controls, using the values given.
+   * These items are then rendered by specific controls, using the values given.
    * @param $index int Zero-based index of item to replace.
    * @param $title string Display text. Used by all controls.
    * @param $value string Value submitted with form data. Used by all controls.
@@ -410,12 +410,20 @@ class FORM_RENDERER extends CONTROLS_RENDERER
   {
   }
 
-  public function draw_inline_preview_area()
+  public function start_inline_preview_area()
   {
-    echo '<div class="preview" id="inline_preview_block">';
+    echo '<div class="form-with-preview">';
+  }
+
+  public function finish_inline_preview_area($height_class = 'medium-tall')
+  {
+    echo '<div class="inline-preview-block preview text-flow">';
+    echo '<div class="fixed-header">';
     echo '<div class="preview-title">Preview</div>';
-    echo '<div id="inline_preview_message" class="text-flow"></div>';
-    echo '<div class="text-flow" id="inline_preview"></div>';
+    echo '<div class="inline-preview-message"></div>';
+    echo '</div>';
+    echo '<div class="' . $height_class . ' inline-preview"></div>';
+    echo '</div>';
     echo '</div>';
   }
 
@@ -919,6 +927,19 @@ class FORM_RENDERER extends CONTROLS_RENDERER
         $buttons [] = $this->submit_button_as_html ();
       }
 
+      if ($this->drafts_enabled)
+      {
+        if ($this->_form->object_exists() && $this->inline_operations_enabled)
+        {
+          $url = $this->app->resolve_file('{app}/save_field.php');
+          $buttons [] = $this->javascript_button_as_html('Save', 'execute_field(\'' . $url . '\', \'' . $this->_form->name . '\')', '{icons}buttons/save');
+        }
+        else
+        {
+          $buttons [] = $this->submit_button_as_html ('Save', '{icons}buttons/save', 'quick_save_and_reload');
+        }
+      }
+
       if (! isset ($show_preview))
       {
         $show_preview = $this->preview_enabled;
@@ -929,25 +950,11 @@ class FORM_RENDERER extends CONTROLS_RENDERER
         if ($this->_form->object_exists() && $this->inline_operations_enabled)
         {
           $url = $this->context->resolve_file('{app}/generate_preview.php');
-          $buttons [] = $this->javascript_button_as_html('Preview', 'execute_field(\'' . $url . '\', \'' . $this->_form->name . '\', \'' . 'description' . '\')', '{icons}buttons/view');
+          $buttons [] = $this->javascript_button_as_html('Preview', 'execute_field(\'' . $url . '\', \'' . $this->_form->name . '\')', '{icons}buttons/view');
         }
         else
         {
           $buttons [] = $this->submit_button_as_html ('Preview', '{icons}buttons/view', 'preview_form');
-        }
-      }
-
-      if ($this->drafts_enabled)
-      {
-        $buttons [] = $this->submit_button_as_html ('Save version', '{icons}buttons/save', 'save_as_draft');
-        if ($this->_form->object_exists() && $this->inline_operations_enabled)
-        {
-          $url = $this->app->resolve_file('{app}/save_field.php');
-          $buttons [] = $this->javascript_button_as_html('Quick save', 'execute_field(\'' . $url . '\', \'' . $this->_form->name . '\', \'' . 'description' . '\')', '{icons}buttons/quick_save');
-        }
-        else
-        {
-          $buttons [] = $this->submit_button_as_html ('Quick Save', '{icons}buttons/quick_save', 'quick_save_and_reload');
         }
       }
     }
