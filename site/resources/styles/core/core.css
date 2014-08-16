@@ -1192,6 +1192,9 @@ hr {
   display: block;
   margin-left: 18px;
 }
+.basic-form fieldset fieldset:last-child {
+  margin: 0;
+}
 .basic-form textarea,
 .basic-form select,
 .basic-form input[type=password],
@@ -1311,6 +1314,9 @@ hr {
 }
 .basic-form .browse input {
   width: 200px;
+}
+.basic-form .search input {
+  width: 120px;
 }
 .basic-form input[type=text].tiny,
 .basic-form input[type=password].tiny,
@@ -1529,7 +1535,6 @@ select {
   padding-top: 5px;
 }
 .basic-form fieldset legend {
-  padding: 2px 4px;
   margin-left: -4px;
 }
 .basic-form.ltr fieldset {

@@ -390,7 +390,7 @@ class SEARCH_DATE_FIELDS extends SEARCH_FIELDS
     $props->add_item ('This week', Search_date_this_week);
     $props->add_item ('This month', Search_date_this_month);
     $props->add_item ('Selected dates', Search_date_constant);
-    $props->css_class = 'short';
+    $props->css_class = 'small-medium';
     $renderer->draw_drop_down_row ($this->search_type_name (), $props);
 
     $renderer->draw_date_row ($this->after_name ());
@@ -621,7 +621,7 @@ class SEARCH_USER_FIELDS extends SEARCH_FIELDS
     $text_props = new FORM_TEXT_CONTROL_OPTIONS();
     $text_props->css_class = 'medium';
 
-    $renderer->start_row ('by');
+    $renderer->start_row ('by', 'text-line');
       echo $renderer->drop_down_as_html ($this->search_type_name (), $props);
       echo ' ';
       echo $renderer->text_line_as_html ($this->base_name, $text_props);
@@ -874,8 +874,9 @@ class SORT_FIELDS extends SEARCH_FIELDS
    * @param FORM $form
    * @param FORM_RENDERER $renderer
    * @param string[] $sort_values
+   * @param integer $sort_index
    */
-  public function draw_fields ($form, $renderer, $sort_values)
+  public function draw_fields ($form, $renderer, $sort_values, $sort_index)
   {
     $props = $renderer->make_list_properties ();
     $props->add_item ('[Default]', '');
@@ -885,17 +886,25 @@ class SORT_FIELDS extends SEARCH_FIELDS
       $props->add_item ($value, $key);
     }
 
-    $renderer->start_row('Sort by');
+    if ($sort_index == 0)
+    {
+      $renderer->start_row('Sort by', 'text-line');
+    }
+    else
+    {
+      $renderer->start_row('Then by', 'text-line');
+    }
 
     echo $renderer->drop_down_as_html ($this->sort_name (), $props);
     $props = $renderer->make_list_properties ();
     $props->items_per_row = 2;
-    $props->add_item ($this->context->get_icon_with_text('{icons}indicators/sort_ascending', Sixteen_px, 'Ascending'), 'asc');
-    $props->add_item ($this->context->get_icon_with_text('{icons}indicators/sort_descending', Sixteen_px, 'Descending'), 'desc');
+    $props->add_item ('Ascending', 'asc');
+    $props->add_item ('Descending', 'desc');
 
     // TODO This part also needs to be able to render a control group without a surrounding form-row
 
-    echo $renderer->radio_group_as_html ($this->direction_name (), $props);
+    $props->css_class = 'small';
+    echo $renderer->drop_down_as_html($this->direction_name (), $props);
 
     $renderer->finish_row();
   }
@@ -1106,7 +1115,7 @@ class SEARCH_OBJECT_FIELDS extends WEBCORE_OBJECT
 
     if (read_var ('quick_search'))
     {
-      $layer = $renderer->start_layer_row ('advanced-search-settings', 'Advanced', 'Click the arrow for advanced settings');
+      $layer = $renderer->start_layer_row ('advanced-search-settings', 'Advanced', 'Toggle advanced settings');
     }
 
     $props = $renderer->make_list_properties ();
@@ -1178,9 +1187,6 @@ class SEARCH_OBJECT_FIELDS extends WEBCORE_OBJECT
    */
   protected function _draw_date_fields ($form, $renderer)
   {
-    $old_width = $renderer->default_control_width;
-    $renderer->default_control_width = '10em';
-
     foreach ($this->_dates as $date)
     {
       if (isset ($this->_linked_fields [$date->base_name]))
@@ -1189,7 +1195,7 @@ class SEARCH_OBJECT_FIELDS extends WEBCORE_OBJECT
       }
 
       $visible = $date->needs_visible ($form) || (isset ($user) && $user->needs_visible ($form));
-      $layer = $renderer->start_layer_row($date->base_name, $date->title, 'Click the arrow to search by ' . $date->title . '.', $visible);
+      $layer = $renderer->start_layer_row($date->base_name, $date->title, 'Toggle ' . $date->title . ' options.', $visible);
 
       if (isset ($user))
       {
@@ -1200,8 +1206,6 @@ class SEARCH_OBJECT_FIELDS extends WEBCORE_OBJECT
 
       $renderer->finish_layer_row($layer);
     }
-
-    $renderer->default_control_width = $old_width;
   }
 
   /**
@@ -1211,9 +1215,6 @@ class SEARCH_OBJECT_FIELDS extends WEBCORE_OBJECT
    */
   protected function _draw_user_fields ($form, $renderer)
   {
-    $old_width = $renderer->default_control_width;
-    $renderer->default_control_width = '10em';
-
     foreach ($this->_users as $user)
     {
       if (! isset ($this->_linked_fields [$user->base_name]))
@@ -1223,8 +1224,6 @@ class SEARCH_OBJECT_FIELDS extends WEBCORE_OBJECT
         $renderer->finish_row ();
       }
     }
-
-    $renderer->default_control_width = $old_width;
   }
 
   /**
@@ -1236,10 +1235,16 @@ class SEARCH_OBJECT_FIELDS extends WEBCORE_OBJECT
   {
     $sort_values = $this->_sort_values ();
 
+    $layer = $renderer->start_layer_row('sorts', 'Sorting', 'Toggle sorting options.', false);
+
+    $sort_index = 0;
     foreach ($this->_sorts as $sort)
     {
-      $sort->draw_fields ($form, $renderer, $sort_values);
+      $sort->draw_fields ($form, $renderer, $sort_values, $sort_index);
+      $sort_index += 1;
     }
+
+    $renderer->finish_layer_row($layer);
   }
 
   /**
@@ -1652,14 +1657,11 @@ class SEARCH_OBJECT_IN_FOLDER_FIELDS extends SEARCH_CONTENT_OBJECT_FIELDS
    */
   protected function _draw_state_selector ($form, $renderer)
   {
-    $old_width = $renderer->default_control_width;
-    $renderer->default_control_width = '10em';
-
     // TODO Make this emit a checkbox that is NOT wrapped in a form-row
 
     echo $renderer->check_box_as_html ('not_state');
 
-    $renderer->start_row ('State');
+    $renderer->start_row ('State', 'text-line');
       $props = $renderer->make_list_properties ();
       $props->add_item ('[all]', 0);
       $states = $this->_states ();
@@ -1668,10 +1670,10 @@ class SEARCH_OBJECT_IN_FOLDER_FIELDS extends SEARCH_CONTENT_OBJECT_FIELDS
         $props->add_item ($state_title, $state);
       }
 
+      $props->css_class = 'small';
+
       echo $renderer->drop_down_as_html ('state', $props);
     $renderer->finish_row ();
-
-    $renderer->default_control_width = $old_width;
   }
 
   /**
@@ -1760,9 +1762,6 @@ class SEARCH_OBJECT_IN_FOLDER_FIELDS extends SEARCH_CONTENT_OBJECT_FIELDS
    */
   protected function _draw_folder_selector ($form, $renderer)
   {
-    $old_width = $renderer->default_control_width;
-    $renderer->default_control_width = '10em';
-
     $props = $renderer->make_list_properties ();
     $props->add_item ('Context or none', Search_user_context_none);
     $props->add_item ('Selected folder(s)', Search_user_constant);
@@ -1786,7 +1785,7 @@ class SEARCH_OBJECT_IN_FOLDER_FIELDS extends SEARCH_CONTENT_OBJECT_FIELDS
     $visible = ($form->value_for ('folder_search_type') != Search_user_context_none
       || (sizeof ($selected_folder_ids) > 0));
 
-    $layer = $renderer->start_layer_row('folders', 'Folder(s)', 'Click the arrow to search by folder.', $visible);
+    $layer = $renderer->start_layer_row('folders', 'Folder(s)', 'Toggle folder options.', $visible);
 
     $renderer->start_row (' ');
     echo $renderer->drop_down_as_html ('folder_search_type', $props);
@@ -1820,8 +1819,6 @@ class SEARCH_OBJECT_IN_FOLDER_FIELDS extends SEARCH_CONTENT_OBJECT_FIELDS
     $renderer->finish_row ();
 
     $renderer->finish_layer_row($layer);
-
-    $renderer->default_control_width = $old_width;
   }
 
   /**

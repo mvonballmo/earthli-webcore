@@ -382,36 +382,6 @@ class FORM_RENDERER extends CONTROLS_RENDERER
   }
 
   /**
-   * Restrict the width of the generated form.
-   * Applied widths are stored in a stack and can be restored with {@link
-   * restore_width()}.
-   * @param string $css_width
-   */
-  public function set_width ($css_width)
-  {
-    /* Store the current values. */
-    $stored_width = new stdClass();
-    $stored_width->width = $this->width;
-    $stored_width->control_width = $this->default_control_width;
-    $this->_widths [] = $stored_width;
-
-    /* Apply the new width */
-    $this->default_control_width = $css_width;
-    $this->width = $css_width;
-  }
-
-  /**
-   * Restore width settings changed by {@link set_width()}.
-   * Should be paired with a call to {@link set_width()}.
-   */
-  public function restore_width ()
-  {
-    $stored_width = array_pop ($this->_widths);
-    $this->default_control_width = $stored_width->width;
-    $this->width = $stored_width->control_width;
-  }
-
-  /**
    * Return a helper class for creating lists.
    * @return FORM_LIST_PROPERTIES
    */
@@ -548,6 +518,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
       </span>
 <?php
     }
+
     ?>
     <span class="text">
       <?php echo $description; ?>
@@ -763,16 +734,17 @@ class FORM_RENDERER extends CONTROLS_RENDERER
     $this->_draw_field_row ($this->_field_at ($id), $this->text_line_as_html ($id, $options), 'text-line');
   }
 
-  /**
-   * Draw a single-line text control with a 'browse' button onto a separate row in the form.
-   *
-   * @param string $id The id of the field to render.
-   * @param string $button The button to show next to the control.
-   * @param FORM_TEXT_CONTROL_OPTIONS $options Override the default text control rendering; can be null.
-   */
-  public function draw_text_line_with_button_row($id, $button, $options = null)
+    /**
+     * Draw a single-line text control with a 'browse' button onto a separate row in the form.
+     *
+     * @param string $id The id of the field to render.
+     * @param string $button The button to show next to the control.
+     * @param FORM_TEXT_CONTROL_OPTIONS $options Override the default text control rendering; can be null.
+     * @param string $css_class The class to apply to the overall container.
+     */
+  public function draw_text_line_with_button_row($id, $button, $options = null, $css_class = 'browse')
   {
-    $control_text = '<span class="browse">';
+    $control_text = '<span class="' . $css_class . '">';
     $control_text .= $this->text_line_as_html($id, $options);
     $control_text .= $button;
     $control_text .= '</span>';
@@ -1228,7 +1200,12 @@ class FORM_RENDERER extends CONTROLS_RENDERER
 
       $Result = '';
 
-      $ctrl = $this->_start_control ($field, 'select') . ' class="' . $css_class . '"';
+      $ctrl = $this->_start_control ($field, 'select');
+
+      if ($css_class)
+      {
+        $ctrl .= ' class="' . $css_class . '"';
+      }
 
       if (isset ($props->on_click_script))
       {

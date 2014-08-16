@@ -264,10 +264,9 @@ class EXECUTE_SEARCH_FORM extends ID_BASED_FORM
       $this->button = 'Go';
 
       $renderer->start ();
-        $renderer->draw_text_line_with_button_row('search_text', $renderer->submit_button_as_html ());
+        $renderer->draw_text_line_with_button_row('search_text', $renderer->submit_button_as_html (), null, 'search');
       
         $props = $renderer->make_list_properties ();
-        $props->css_class = 'detail';
 
         /* Fill with all the registered search types. */
         $type_infos = $this->app->search_type_infos ();
@@ -276,11 +275,7 @@ class EXECUTE_SEARCH_FORM extends ID_BASED_FORM
           $props->add_item ($t->plural_title, $t->id);
         }
 
-        $renderer->start_row();
-        echo '<div class="two-inputs">';
-        echo $renderer->drop_down_as_html('type', $props);
-        echo '</div>';
-        $renderer->finish_row();
+        $renderer->draw_drop_down_row('type', $props);
       $renderer->finish ();
     }
     else

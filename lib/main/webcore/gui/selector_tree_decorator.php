@@ -56,20 +56,32 @@ class SELECTOR_TREE_DECORATOR extends TREE_DECORATOR
   public $control_name = 'selector';
 
   /**
-   * Render the decorator for this node.
+   * Render the contents before the toggle for this node.
    * @param object $node
    * @param string $text
    * @param string $icon
    */
-  public function draw ($node, $text, $icon)
+  public function draw_pre_toggle ($node, $text, $icon)
   {
     $node_info = $this->node_info ();
     $id = $node_info->id ($node);
     $disabled = ! ($node_info->selectable ($node));
     $dom_id = $this->control_name . '_' . $id;
-?>
-    <input type="radio" id="<?php echo $dom_id; ?>" name="<?php echo $this->control_name; ?>" value="<?php echo $id; ?>" <?php if ($disabled) echo ' disabled'; ?>><label for="<?php echo $dom_id; ?>"><?php echo $this->context->get_icon_with_text($icon, Sixteen_px, $text); ?></label>
-<?php
+?><input type="radio" id="<?php echo $dom_id; ?>" name="<?php echo $this->control_name; ?>" value="<?php echo $id; ?>" <?php if ($disabled) echo ' disabled'; ?>><?php
+  }
+
+  /**
+   * Render the contents after the toggle for this node.
+   * @param object $node
+   * @param string $text
+   * @param string $icon
+   */
+  public function draw_post_toggle ($node, $text, $icon)
+  {
+    $node_info = $this->node_info ();
+    $id = $node_info->id ($node);
+    $dom_id = $this->control_name . '_' . $id;
+    ?><label for="<?php echo $dom_id; ?>"><?php echo $this->context->get_icon_with_text($icon, Sixteen_px, $text); ?></label><?php
   }
 }
 
@@ -99,6 +111,11 @@ class MULTI_SELECTOR_TREE_DECORATOR extends TREE_DECORATOR
    * @var string
    */
   public $form_name = 'update_form';
+
+  /**
+   * @var int[]
+   */
+  private $child_map;
 
   /**
    * @param TREE $tree Decorate this tree.
@@ -152,9 +169,10 @@ class MULTI_SELECTOR_TREE_DECORATOR extends TREE_DECORATOR
 ?>
 <script type="text/javascript">
 
-  var <?php echo $control_name ?>_children = new Array ();
+  var <?php echo $control_name ?>_children = [];
 
   <?php
+  /** @var $child_ids int[] */
   foreach ($this->child_map as $id => $child_ids)
   {
     $child_ids = join (',', $child_ids);
@@ -191,12 +209,12 @@ class MULTI_SELECTOR_TREE_DECORATOR extends TREE_DECORATOR
   }
 
   /**
-   * Render the decorator for this node.
+   * Render the contents before the toggle for this node.
    * @param object $node
    * @param string $text
    * @param string $icon
    */
-  public function draw ($node, $text, $icon)
+  public function draw_pre_toggle ($node, $text, $icon)
   {
     $control_name = $this->control_name;
     $node_info = $this->node_info ();
@@ -218,10 +236,21 @@ class MULTI_SELECTOR_TREE_DECORATOR extends TREE_DECORATOR
 
     $disabled = ! ($this->tree->node_info->selectable ($node));
     $dom_id = $this->control_name . '_' . $id;
-?>
-    <input type="checkbox" id="<?php echo $dom_id; ?>" name="<?php echo $control_name; ?>[]" <?php if (isset ($on_click)) echo "onclick=\"$on_click\""; ?> value="<?php echo $node->id; ?>" <?php echo $state; ?><?php if ($disabled) echo ' disabled'; ?>>
-    <label for="<?php echo $dom_id; ?>"><?php echo $this->context->get_icon_with_text($icon, Sixteen_px, $text); ?></label>
-<?php
+?><input type="checkbox" id="<?php echo $dom_id; ?>" name="<?php echo $control_name; ?>[]" <?php if (isset ($on_click)) echo "onclick=\"$on_click\""; ?> value="<?php echo $node->id; ?>" <?php echo $state; ?><?php if ($disabled) echo ' disabled'; ?>><?php
+  }
+
+  /**
+   * Render the contents after the toggle for this node.
+   * @param object $node
+   * @param string $text
+   * @param string $icon
+   */
+  public function draw_post_toggle ($node, $text, $icon)
+  {
+    $node_info = $this->node_info ();
+    $id = $node_info->id ($node);
+    $dom_id = $this->control_name . '_' . $id;
+?><label for="<?php echo $dom_id; ?>"><?php echo $this->context->get_icon_with_text($icon, Sixteen_px, $text); ?></label><?php
   }
 }
 ?>

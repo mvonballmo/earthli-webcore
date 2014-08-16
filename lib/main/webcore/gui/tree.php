@@ -238,40 +238,6 @@ abstract class TREE extends WEBCORE_OBJECT
   }
 
   /**
-   * Render the node itself.
-   * Defaults to drawing the 'title' of the node.
-   * @see TREE::draw_title()
-   * @param TREE_NODE $node
-   * @access private
-   */
-  public function draw_node ($node)
-  {
-    $this->draw_title ($node);
-  }
-  
-  /**
-   * Render the title for this node.
-   * Defers this function to the 'decorator' passed in to the constructor.
-   * @see TREE_DECORATOR
-   * @param TREE_NODE $node
-   * @access private
-   */
-  public function draw_title ($node)
-  {
-    $icon_url = $this->node_info->get_icon_url ($node);
-    $caption = $this->node_info->get_caption ($node);
-    
-    if (isset ($this->decorator))
-    {
-      $this->decorator->draw ($node, $caption, $icon_url);
-    }
-    else
-    {
-      echo $this->context->get_icon_with_text($icon_url, Sixteen_px, $caption);
-    }
-  }
-
-  /**
    * Render the sub-tree for this node.
    * @param TREE_NODE $node
    * @param boolean $is_last Is this a terminal node in this list?
@@ -287,6 +253,14 @@ abstract class TREE extends WEBCORE_OBJECT
       $has_children = !empty ($nodes);
 
       $this->start_node ($node, $is_last, $has_children, $sibling_has_children);
+
+      $icon_url = $this->node_info->get_icon_url ($node);
+      $caption = $this->node_info->get_caption ($node);
+
+      if (isset ($this->decorator))
+      {
+        $this->decorator->draw_pre_toggle ($node, $caption, $icon_url);
+      }
 
       if (count ($this->_stack))
       {
@@ -331,7 +305,14 @@ abstract class TREE extends WEBCORE_OBJECT
         }
       }
 
-      $this->draw_node ($node);
+      if (isset ($this->decorator))
+      {
+        $this->decorator->draw_post_toggle ($node, $caption, $icon_url);
+      }
+      else
+      {
+        echo $this->context->get_icon_with_text($icon_url, Sixteen_px, $caption);
+      }
 
       if ($has_children)
       {
@@ -614,12 +595,20 @@ class TREE_DECORATOR extends WEBCORE_OBJECT
   public function post_iterate () {}
 
   /**
-   * Render the decorator for this node.
+   * Render the contents before the toggle for this node.
    * @param object $node
    * @param string $text
    * @param string $icon
    */
-  public function draw ($node, $text, $icon) {}
+  public function draw_pre_toggle ($node, $text, $icon) {}
+
+  /**
+   * Render the contents after the toggle for this node.
+   * @param object $node
+   * @param string $text
+   * @param string $icon
+   */
+  public function draw_post_toggle ($node, $text, $icon) {}
 
   /**
    * Reference to the parent tree's node info object.

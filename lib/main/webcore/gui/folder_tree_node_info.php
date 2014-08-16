@@ -283,5 +283,3 @@ class SUBSCRIPTION_FOLDER_TREE_NODE_INFO extends FOLDER_TREE_NODE_INFO
     return $this->app->login->is_allowed (Privilege_set_folder, Privilege_modify, $node);
   }
 }
-
-?>

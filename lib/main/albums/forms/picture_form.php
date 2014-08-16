@@ -503,7 +503,6 @@ class PICTURE_FORM extends ALBUM_ENTRY_FORM
 
         $renderer->start_row ();
         $options->on_change_script = 'file_name_changed (this)';
-        $options->css_class = 'medium';
         echo $renderer->text_line_as_html ('file_name', $options);
         $renderer->finish_row ();
         $renderer->draw_error_row ('file_name');
