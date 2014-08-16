@@ -70,7 +70,7 @@ class RELEASE_COMMANDS extends COMMANDS
       $cmd->link = "create_job.php?id=$folder->id&branch_id=$branch->id&release_id=$obj->id";
       $cmd->icon = '{app_icons}buttons/new_job';
       $cmd->executable = ! $obj->locked () && $this->login->is_allowed (Privilege_set_entry, Privilege_create, $obj);
-      $cmd->importance = Command_importance_high;
+      $cmd->importance = Command_importance_high + Command_importance_increment;
       $this->append ($cmd);
 
       $cmd = $this->make_command ();
@@ -79,7 +79,7 @@ class RELEASE_COMMANDS extends COMMANDS
       $cmd->link = "create_change.php?id=$folder->id&branch_id=$branch->id&release_id=$obj->id";
       $cmd->icon = '{app_icons}buttons/new_change';
       $cmd->executable = ! $obj->locked () && $this->login->is_allowed (Privilege_set_entry, Privilege_create, $obj);
-      $cmd->importance = Command_importance_high;
+      $cmd->importance = Command_importance_high + Command_importance_increment;
       $this->append ($cmd);
     }
 

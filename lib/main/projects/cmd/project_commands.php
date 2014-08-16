@@ -81,7 +81,7 @@ class PROJECT_COMMANDS extends FOLDER_COMMANDS
     }
     $cmd->icon = '{app_icons}buttons/new_job';
     $cmd->executable = $this->login->is_allowed (Privilege_set_entry, Privilege_create, $folder);
-    $cmd->importance = Command_importance_high;
+    $cmd->importance = Command_importance_high + Command_importance_increment;
     $this->append ($cmd);
 
     $cmd = $this->make_command ();
