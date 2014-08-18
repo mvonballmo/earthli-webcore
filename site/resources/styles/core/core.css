@@ -30,6 +30,9 @@ body {
   background-color: #ffffff;
   color: #333333;
 }
+p {
+  margin: 15px 0;
+}
 table {
   border-collapse: collapse;
   border-spacing: 0;
@@ -1150,6 +1153,41 @@ hr {
 }
 .page-break {
   page-break-before: always;
+}
+.grid {
+  display: table;
+  width: 100%;
+  margin: 15px 0;
+}
+.grid.natural-size {
+  width: auto;
+}
+.grid > div {
+  display: table-row;
+}
+.grid > div > div {
+  display: table-cell;
+  vertical-align: top;
+}
+.grid > div > div + div {
+  box-sizing: border-box;
+  padding-left: 15px;
+}
+.two-column > div > div,
+.two-column > tr > td {
+  width: 50%;
+}
+.three-column > div > div,
+.three-column > tr > td {
+  width: 33.33%;
+}
+.four-column > div > div,
+.four-column > tr > td {
+  width: 25%;
+}
+.five-column > div > div,
+.five-column > tr > td {
+  width: 20%;
 }
 .style-controls input[type="radio"],
 .style-controls input[type="checkbox"] {

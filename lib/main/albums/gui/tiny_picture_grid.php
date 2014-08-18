@@ -61,7 +61,7 @@ class TINY_PICTURE_GRID extends CSS_FLOW_GRID
   {
     parent::__construct($context);
 
-    $this->width = '';
+    $this->css_class .= ' natural-size';
     $this->box_css_class = 'tiny-picture';
   }
 

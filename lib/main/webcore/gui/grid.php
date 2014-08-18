@@ -51,22 +51,17 @@ require_once('webcore/obj/webcore_object.php');
 abstract class GRID extends WEBCORE_OBJECT
 {
   /**
-   * A CSS-style specifying the width of the grid.
-   * @var string
-   */
-  public $width = '100%';
-
-  /**
    * Displays page navigation for the grid, if necessary.
    * @var PAGE_NAVIGATOR
    */
   public $pager;
 
   /**
-   * Force all columns to even width, regardless of content.
-   * @var boolean
+   * Style to use for each the grid itself.
+   * Should be a defined CSS class.
+   * @var string
    */
-  public $even_columns = true;
+  public $css_class = '';
 
   /**
    * Style to use for each box containing an object.
@@ -560,10 +555,6 @@ abstract class GRID extends WEBCORE_OBJECT
    */
   protected function _style_for_grid()
   {
-    if ($this->width)
-    {
-      $styles [] = "width: $this->width";
-    }
     if ($this->show_page_breaks)
     {
       $styles [] = 'page-break-before: always';
@@ -575,6 +566,24 @@ abstract class GRID extends WEBCORE_OBJECT
     }
 
     return '';
+  }
+
+  /**
+   * CSS classes to apply to the main grid container.
+   * @return string
+   * @access private
+   */
+  protected function _css_class_for_grid()
+  {
+    $Result = $this->css_class;
+
+    $col_class = $this->_get_column_class();
+    if ($col_class)
+    {
+      $Result .= ' ' . $col_class;
+    }
+
+    return $Result;
   }
 
   /**
@@ -612,13 +621,6 @@ abstract class GRID extends WEBCORE_OBJECT
    */
   protected function _style_for_box()
   {
-    if ($this->even_columns && ($this->_num_columns > 1))
-    {
-      $width = round(100 / $this->_num_columns, 0);
-
-      return "vertical-align: top; width: $width%";
-    }
-
     return "";
   }
 
@@ -628,6 +630,23 @@ abstract class GRID extends WEBCORE_OBJECT
   protected function _class_for_box()
   {
     return $this->box_css_class;
+  }
+
+  protected function _get_column_class()
+  {
+    switch ($this->_num_columns)
+    {
+      case 2:
+        return 'two-column';
+      case 3:
+        return 'three-column';
+      case 4:
+        return 'four-column';
+      case 5:
+        return 'five-column';
+      default:
+        return '';
+    }
   }
 
   /**
@@ -655,29 +674,18 @@ abstract class GRID extends WEBCORE_OBJECT
   protected $_query;
 }
 
-/**
- * Renders a grid using an HTML table.
- * The width is always fixed to the number of columns specified; it can never be less.
- * Use the {@link CSS_FLOW_GRID} to allow the grid to resize smaller, if needed.
- * @package webcore
- * @subpackage grid
- * @version 3.5.0
- * @since 2.6.0
- * @abstract
- */
-abstract class HTML_TABLE_GRID extends GRID
+abstract class HTML_GRID extends GRID
 {
-  public $table_style = 'basic';
-
   /**
    * Start rendering the grid.
    * @access private
    */
   protected function _start_grid()
   {
+    $class = $this->_css_class_for_grid();
     $style = $this->_style_for_grid();
     ?>
-    <table class="grid <?php echo $this->table_style; ?>" <?php if ($style)
+    <<?php echo $this->_table_tag_name; ?> class="<?php echo $class; ?>" <?php if ($style)
   {
     echo " style=\"$style\"";
   } ?>>
@@ -742,9 +750,7 @@ abstract class HTML_TABLE_GRID extends GRID
    */
   protected function _finish_grid()
   {
-    ?>
-    </table>
-  <?php
+    echo '</' . $this->_table_tag_name . '>';
   }
 
   protected function _new_column($attributes = null)
@@ -757,11 +763,11 @@ abstract class HTML_TABLE_GRID extends GRID
   {
     if ($attributes)
     {
-      echo '<tr ' . $attributes . '>';
+      echo '<' . $this->_row_tag_name . ' ' . $attributes . '>';
     }
     else
     {
-      echo '<tr>';
+      echo '<' . $this->_row_tag_name . '>';
     }
   }
 
@@ -769,39 +775,104 @@ abstract class HTML_TABLE_GRID extends GRID
   {
     if ($attributes)
     {
-      echo '<td ' . $attributes . '>';
+      echo '<' . $this->_cell_tag_name . ' ' . $attributes . '>';
     }
     else
     {
-      echo '<td>';
+      echo '<' . $this->_cell_tag_name . '>';
     }
   }
 
   protected function _internal_finish_cell()
   {
-    echo '</td>';
+    echo '</' . $this->_cell_tag_name . '>';
   }
 
   protected function _internal_start_header_cell($attributes = null)
   {
     if ($attributes)
     {
-      echo '<th ' . $attributes . '>';
+      echo '<' . $this->_header_cell_tag_name . ' ' . $attributes . '>';
     }
     else
     {
-      echo '<th>';
+      echo '<' . $this->_header_cell_tag_name . '>';
     }
   }
 
   protected function _internal_finish_header_cell()
   {
-    echo '</th>';
+    echo '</' . $this->_header_cell_tag_name . '>';
   }
 
   protected function _internal_finish_row()
   {
-    echo '</tr>';
+    echo '</' . $this->_row_tag_name . '>';
+  }
+
+  protected $_table_tag_name;
+  protected $_row_tag_name;
+  protected $_cell_tag_name;
+  protected $_header_cell_tag_name;
+}
+
+/**
+ * Renders a grid using an HTML table.
+ * The width is always fixed to the number of columns specified; it can never be less.
+ * Use the {@link CSS_FLOW_GRID} to allow the grid to resize smaller, if needed.
+ * @package webcore
+ * @subpackage grid
+ * @version 3.5.0
+ * @since 2.6.0
+ * @abstract
+ */
+abstract class HTML_TABLE_GRID extends HTML_GRID
+{
+  var $even_columns = true;
+
+  /**
+   * @param CONTEXT $context Context to which this grid belongs.
+   */
+  public function __construct($context)
+  {
+    parent::__construct($context);
+
+    $this->_table_tag_name = 'table';
+    $this->_row_tag_name = 'tr';
+    $this->_cell_tag_name = 'td';
+    $this->_header_cell_tag_name = 'th';
+  }
+
+  /**
+   * CSS classes to apply to the main grid container.
+   * @return string
+   * @access private
+   */
+  protected function _css_class_for_grid()
+  {
+    if (!$this->even_columns)
+    {
+      return $this->css_class;
+    }
+
+    return parent::_css_class_for_grid();
+  }
+}
+
+abstract class DIV_GRID extends HTML_GRID
+{
+  /**
+   * @param CONTEXT $context Context to which this grid belongs.
+   */
+  public function __construct($context)
+  {
+    parent::__construct($context);
+
+    $this->css_class = 'grid';
+    $this->_table_tag_name = 'div';
+    $this->_row_tag_name = 'div';
+    $this->_cell_tag_name = 'div';
+    $this->_header_cell_tag_name = 'div';
   }
 }
 
@@ -831,8 +902,6 @@ abstract class CSS_FLOW_GRID extends GRID
   public function __construct($context)
   {
     parent::__construct($context);
-
-    $this->even_columns = false;
   }
 
   /**
@@ -863,11 +932,11 @@ abstract class CSS_FLOW_GRID extends GRID
    */
   protected function _start_box ($obj)
   {
-    $attrs = $this->_CSS_for_box();
+    $attributes = $this->_CSS_for_box();
     ?>
-    <div<?php if ($attrs)
+    <div<?php if ($attributes)
     {
-      echo " $attrs";
+      echo " $attributes";
     } ?>><?php
   }
 
@@ -948,17 +1017,15 @@ abstract class CSS_FLOW_GRID extends GRID
 /**
  * Placeholder class for extending classes.
  * Descendants that inherit from this class will automatically be updated to a new
- * implementation if the ancestor here is changed. Prevents all descendent classes
+ * implementation if the ancestor here is changed. Prevents all descendant classes
  * from specifying that they explicitly use an HTML table for rendering.
- * @see CSS_FLOW_GRID
- * @see HTML_TABLE_GRID
  * @package webcore
  * @subpackage grid
  * @version 3.5.0
  * @since 2.6.0
  * @abstract
  */
-abstract class STANDARD_GRID extends HTML_TABLE_GRID
+abstract class STANDARD_GRID extends DIV_GRID
 {
 }
 

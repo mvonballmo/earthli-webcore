@@ -68,9 +68,6 @@ class RELEASE_GRID extends CONTENT_OBJECT_GRID
   function __construct($context)
   {
     parent::__construct($context);
-
-    $this->even_columns = false;
-    $this->columns = 2;
   }
 
   /**

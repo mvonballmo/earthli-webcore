@@ -164,7 +164,7 @@ abstract class CONTENT_OBJECT_SUBSCRIPTION_FORM extends SUBSCRIPTION_FORM
       $grid->set_query ($query);
       $grid->items_are_selectable = true;
       $grid->items_are_selected = true;
-      $grid->width = '';
+      $grid->css_class .= ' natural-size';
 
       $ctrl_name = $this->js_name ('ids');
 

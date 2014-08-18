@@ -56,8 +56,7 @@ class GROUP_USER_GRID extends STANDARD_GRID
     parent::__construct ($group->app);
     $this->_group_id = $group->id;
     $this->_controls_renderer = $this->app->make_controls_renderer ();
-    $this->even_columns = false;
-    $this->width = '';
+    $this->css_class .= ' natural-size';
   }
 
   /**

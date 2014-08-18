@@ -59,8 +59,7 @@ class ICON_GRID extends STANDARD_GRID
   {
     parent::__construct($context);
 
-    $this->even_columns = true;
-    $this->width = '';
+    $this->css_class .= ' natural-size';
   }
 
   /**

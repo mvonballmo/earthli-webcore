@@ -37,6 +37,11 @@ body
   color: @text_color;
 }
 
+p
+{
+  margin: @standard_spacing 0;
+}
+
 table
 {
   border-collapse: collapse;
@@ -1725,6 +1730,89 @@ hr
 .page-break
 {
   page-break-before: always;
+}
+
+.grid
+{
+  display: table;
+  width: 100%;
+  margin: @standard_spacing 0;
+
+  &.natural-size
+  {
+    width: auto;
+  }
+
+  > div
+  {
+    display: table-row;
+
+    > div
+    {
+      display: table-cell;
+      vertical-align: top;
+
+      + div
+      {
+        box-sizing: border-box;
+        padding-left: @standard_spacing;
+      }
+    }
+  }
+}
+
+.two-column
+{
+  > div > div,
+  > tr > td
+  {
+    width: 50%;
+  }
+}
+
+// TODO treat these as just suggestions; be responsive
+
+//@media (max-width: 450px) {
+//  .two-column
+//  {
+//    > div
+//    {
+//      display: block;
+//
+//      > div
+//      {
+//        display: block;
+//        width: auto;
+//      }
+//    }
+//  }
+//}
+
+.three-column
+{
+  > div > div,
+  > tr > td
+  {
+    width: 33.33%;
+  }
+}
+
+.four-column
+{
+  > div > div,
+  > tr > td
+  {
+    width: 25%;
+  }
+}
+
+.five-column
+{
+  > div > div,
+  > tr > td
+  {
+    width: 20%;
+  }
 }
 
 @import "form-core";

@@ -54,7 +54,7 @@ require_once ('webcore/gui/grid.php');
  * @since 2.2.1
  * @abstract
  */
-abstract class LIST_GRID extends STANDARD_GRID
+abstract class LIST_GRID extends HTML_TABLE_GRID
 {
   /**
    * @param CONTEXT $context Context to which this grid belongs.
@@ -62,8 +62,6 @@ abstract class LIST_GRID extends STANDARD_GRID
   public function __construct($context)
   {
     parent::__construct($context);
-
-    $this->even_columns = false;
   }
 
   /**

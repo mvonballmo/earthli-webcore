@@ -56,8 +56,7 @@ class USER_BROWSER_GRID extends STANDARD_GRID
   {
     parent::__construct ($context);
     $this->_controls_renderer = $this->app->make_controls_renderer ();
-    $this->width = '';
-    $this->even_columns = false;
+    $this->css_class .= ' natural-size';
   }
 
   /**
@@ -96,4 +95,5 @@ class USER_BROWSER_GRID extends STANDARD_GRID
    */
   protected $_controls_renderer;
 }
+
 ?>

@@ -55,7 +55,7 @@ class GROUP_GRID extends LIST_GRID
   {
     parent::__construct($context);
 
-    $this->width = '';
+    $this->css_class .= ' natural-size';
 
     $this->append_column(''); // Menu
     $this->append_column('Name');

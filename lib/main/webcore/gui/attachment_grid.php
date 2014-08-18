@@ -55,8 +55,7 @@ class ATTACHMENT_GRID extends STANDARD_GRID
   {
     parent::__construct ($context);
 
-    $this->width = '';
-    $this->even_columns = true;
+    $this->css_class .= ' natural-size';
   }
 
   /**

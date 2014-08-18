@@ -54,8 +54,6 @@ class COMPONENT_GRID extends STANDARD_GRID
   public function __construct ($context)
   {
     parent::__construct ($context);
-
-    $this->even_columns = false;
   }
 
   /**
