@@ -53,32 +53,27 @@ h5,
   height: @select_control_height;
 }
 
-//.icon
-//{
-//  + .caption
-//  {
-//    position: relative;
-//  }
-//
-//  &.thir
-//}
-
-.icon.thirty-two + .caption
+.icon
 {
-  position: relative;
-  top: -@icon_thirty_two_caption_offset;
-}
+  + .caption
+  {
+    position: relative;
+  }
 
-.icon.sixteen + .caption
-{
-  position: relative;
-  top: -@icon_sixteen_caption_offset;
-}
+  &.thirty-two + .caption
+  {
+    top: -@icon_thirty_two_caption_offset;
+  }
 
-.icon.twenty + .caption
-{
-  position: relative;
-  top: -@icon_twenty_caption_offset;
+  &.twenty + .caption
+  {
+    top: -@icon_twenty_caption_offset;
+  }
+
+  &.sixteen + .caption
+  {
+    top: -@icon_sixteen_caption_offset;
+  }
 }
 
 .button .icon,

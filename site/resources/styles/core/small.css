@@ -62,17 +62,17 @@ h5,
 .style-controls select:not([size]) {
   height: 31px;
 }
-.icon.thirty-two + .caption {
+.icon + .caption {
   position: relative;
+}
+.icon.thirty-two + .caption {
   top: -8px;
 }
-.icon.sixteen + .caption {
-  position: relative;
-  top: -1px;
-}
 .icon.twenty + .caption {
-  position: relative;
   top: -3px;
+}
+.icon.sixteen + .caption {
+  top: -1px;
 }
 .button .icon,
 .style-controls button .icon {
