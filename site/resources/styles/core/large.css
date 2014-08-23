@@ -23,72 +23,58 @@ For more information about the earthli WebCore, visit:
 http://www.earthli.com/software/webcore
 
 ****************************************************************************/
-
-h1, .banner-title
-{
+h1,
+.banner-title {
   font-size: 28pt;
 }
-
-h2
-{
+h2 {
   font-size: 18pt;
 }
-
-h3
-{
+h3 {
   font-size: 16pt;
 }
-
 body,
 h4,
-.menu,
-.nav-box,
+pre,
 .button,
-pre
-{
-  font-size: 14pt;
+.menu {
+  font-size: 16pt;
 }
-
 h5,
 .detail,
-.footer,
 .notes,
 .info-box-bottom,
 .info-box-top,
+.subdued,
 .login-status,
 .footnote-reference,
-.subdued,
 .basic-form .description,
-.message-box .description
-{
+.message-box .description {
   font-size: 12pt;
 }
-
 .shell,
 .copyright,
 .versions,
 .statistics,
-.modification-time
-{
- 	font-size: 11pt;
+.modification-time {
+  font-size: 11pt;
 }
-
-.icon.sixteen
-{
-  padding-top: 1px;
-}
-
-.icon.twenty
-{
-  padding-top: .2em;
-}
-
-.icon.thirty-two
-{
-  padding-top: .7em;
-}
-
-.style-controls select:not([size])
-{
+.style-controls select:not([size]) {
   height: 39px;
+}
+.icon.thirty-two + .caption {
+  position: relative;
+  top: -6px;
+}
+.icon.sixteen + .caption {
+  position: relative;
+  top: 0;
+}
+.icon.twenty + .caption {
+  position: relative;
+  top: -1px;
+}
+.button .icon,
+.style-controls button .icon {
+  top: 2px;
 }

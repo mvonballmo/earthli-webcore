@@ -310,7 +310,6 @@ class SAMPLE_FORM extends FORM
   <h3>Form elements (level 3 heading)</h3>
   <div class="form-content">
     <?php
-
     $form = new SAMPLE_FORM($Page);
     $form_renderer = new FORM_RENDERER($form);
     $form->display();

@@ -1511,7 +1511,6 @@ select {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   position: relative;
-  top: 2px;
 }
 .style-controls .basic-form .form-row button:first-child,
 .style-controls .basic-form .form-row input[type=button]:first-child,

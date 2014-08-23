@@ -23,30 +23,23 @@ For more information about the earthli WebCore, visit:
 http://www.earthli.com/software/webcore
 
 ****************************************************************************/
-
-h1, .banner-title
-{
+h1,
+.banner-title {
   font-size: 24pt;
 }
-
-h2
-{
-  font-size: 20pt
+h2 {
+  font-size: 20pt;
 }
-
-h3
-{
-  font-size: 18pt
+h3 {
+  font-size: 18pt;
 }
-
 body,
 h4,
 pre,
-.button
-{
-  font-size: 12pt
+.button,
+.menu {
+  font-size: 12pt;
 }
-
 h5,
 .detail,
 .notes,
@@ -56,33 +49,32 @@ h5,
 .login-status,
 .footnote-reference,
 .basic-form .description,
-.message-box .description
-{
-  font-size: 10pt
+.message-box .description {
+  font-size: 10pt;
 }
-
 .shell,
 .copyright,
 .versions,
 .statistics,
-.modification-time
-{
-	font-size: 9pt;
+.modification-time {
+  font-size: 9pt;
 }
-
-.style-controls select:not([size])
-{
+.style-controls select:not([size]) {
   height: 35px;
 }
-
-.icon.thirty-two + .caption
-{
+.icon.thirty-two + .caption {
   position: relative;
   top: -8px;
 }
-
-.icon.sixteen + .caption
-{
+.icon.sixteen + .caption {
   position: relative;
-  top: -1px;
+  top: 0;
+}
+.icon.twenty + .caption {
+  position: relative;
+  top: -2px;
+}
+.button .icon,
+.style-controls button .icon {
+  top: 2px;
 }
