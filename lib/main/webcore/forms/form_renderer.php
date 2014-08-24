@@ -433,6 +433,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    */
   public function start ()
   {
+    $this->_text_control_was_rendered = false;
     $this->_column_started = false;
 
     echo '<div class="' . $this->_form->css_class . '-form ' . $this->labels_css_class . '">' . "\n";
@@ -916,6 +917,8 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    */
   public function draw_submit_button_row ($show_preview = null)
   {
+    $buttons = [];
+
     if (!$this->_form->allow_cancel_only)
     {
       if ($this->drafts_enabled)
@@ -967,6 +970,12 @@ class FORM_RENDERER extends CONTROLS_RENDERER
 	    {
 	    	$buttons [] = $this->button_as_html('Cancel', $referer_url, '{icons}buttons/cancel');
 	    }
+    }
+
+    if ($this->_text_control_was_rendered)
+    {
+      $icon = $this->context->get_icon_with_text('{icons}/indicators/question', Sixteen_px, 'Help');
+      $buttons [] = '<a class="button" href="text_formatting.php" target="_blank" title="Show formatting help">' . $icon . '</a>';
     }
     
     $this->draw_buttons_in_row ($buttons);
@@ -1114,11 +1123,6 @@ class FORM_RENDERER extends CONTROLS_RENDERER
       else
       {
         $text = '';
-      }
-
-      if ($field->tag_validator_type != Tag_validator_none)
-      {
-        $text .= ' Find out more about <a href="text_formatting.php">supported tags and formatting</a>.';
       }
 
       if ($text)
@@ -1438,6 +1442,10 @@ class FORM_RENDERER extends CONTROLS_RENDERER
   {
     if ($field->visible)
     {
+      if ($field->tag_validator_type != Tag_validator_none)
+      {
+        $this->_text_control_was_rendered = true;
+      }
 ?>
       <div class="form-row<?php if ($field->required) { echo ' required'; }?><?php if ($css_class) { echo ' ' . $css_class; }?>">
 <?php
@@ -1788,18 +1796,16 @@ class FORM_RENDERER extends CONTROLS_RENDERER
   protected $_num_controls = array ();
 
   /**
-   * Stack of widths applied with {@link set_width()}.
-   * @var STORED_WIDTH[]
-   * @access private
-   */
-  protected $_widths;
-
-  /**
    * Stack of box renderers created with {@link start_column()}.
    * @var BOX_RENDERER[]
    * @access private
    */
   private $_box_renderers;
+
+  /**
+   * @var bool
+   */
+  private $_text_control_was_rendered;
 }
 
 /**
