@@ -277,7 +277,9 @@ function update_controls ()
     $props->add_item ('Granted', Privilege_always_granted);
     $props->add_item ('Denied', Privilege_always_denied);
 
-    $renderer->start_column ('left-column');
+    $box_renderer = $this->context->make_box_renderer();
+    $box_renderer->start_column_set();
+    $box_renderer->new_column_of_type('left-column');
 
       foreach ($this->content_groups as $group)
       {
@@ -289,7 +291,7 @@ function update_controls ()
         $renderer->finish_block ();
       }
 
-    $renderer->start_column (); 
+    $box_renderer->new_column_of_type();
 
       foreach ($this->global_groups as $group)
       {
@@ -301,7 +303,7 @@ function update_controls ()
         $renderer->finish_block ();
       }
 
-    $renderer->finish_column ();
+    $box_renderer->finish_column_set ();
 
     $this->_draw_buttons ($renderer);
   }

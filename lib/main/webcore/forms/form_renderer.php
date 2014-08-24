@@ -434,7 +434,6 @@ class FORM_RENDERER extends CONTROLS_RENDERER
   public function start ()
   {
     $this->_text_control_was_rendered = false;
-    $this->_column_started = false;
 
     echo '<div class="' . $this->_form->css_class . '-form ' . $this->labels_css_class . '">' . "\n";
 
@@ -692,44 +691,6 @@ class FORM_RENDERER extends CONTROLS_RENDERER
   public function finish_indent ()
   {
     echo "</div>\n";
-  }
-
-  /**
-   * Start a new set of columns in an open block.
-   * 
-   * Starting a column block automatically starts a new row, so {@link start_row()} should not be
-   * called first. Successive calls to this function will create new column content areas until
-   * {@link finish_column()} is called to finish the column block.
-   * 
-   * @param string $css_class The CSS class to use for the column.
-   */
-  public function start_column ($css_class = '')
-  {
-    if (! $this->_column_started)
-    {
-      $this->_column_started = true;
-      $box_renderer = $this->context->make_box_renderer();
-      $this->_box_renderers []= $box_renderer;
-      $box_renderer->start_column_set();
-      $box_renderer->new_column_of_type($css_class);
-    }
-    else
-    {
-      $box_renderer = $this->_box_renderers [count($this->_box_renderers) - 1];
-      $box_renderer->new_column_of_type($css_class);
-    }
-  }
-
-  /**
-   * Stop generating columns in this content block.
-   * 
-   * Must follow at least one call to {@link start_column()}.
-   */
-  public function finish_column ()
-  {
-    $this->_column_started = false;
-    $box_renderer = $this->_box_renderers [count($this->_box_renderers) - 1];
-    $box_renderer->finish_column_set();
   }
 
   /**
@@ -1780,13 +1741,6 @@ class FORM_RENDERER extends CONTROLS_RENDERER
   protected $_form;
 
   /**
-   * Currently building columns.
-   * @var boolean
-   * @access private
-   */
-  protected $_column_started = false;
-
-  /**
    * Table of used DOM ids.
    * If radio buttons or other group controls are rendered to different parts of a page for the
    * same field, this structure remembers which DOM id was last used for the given field.
@@ -1794,13 +1748,6 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * @access private
    */
   protected $_num_controls = array ();
-
-  /**
-   * Stack of box renderers created with {@link start_column()}.
-   * @var BOX_RENDERER[]
-   * @access private
-   */
-  private $_box_renderers;
 
   /**
    * @var bool

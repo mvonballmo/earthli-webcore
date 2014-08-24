@@ -295,11 +295,15 @@ class PROJECT_FORM extends FOLDER_FORM
    */
   protected function _draw_controls ($renderer)
   {
-    $renderer->start_column ('left-sidebar-column');
+    $box_renderer = $this->context->make_box_renderer();
+    $box_renderer->start_column_set();
+    $box_renderer->new_column_of_type('left-sidebar-column');
 ?>
     <div class="left-sidebar">
       <?php
         $folder_query = $this->login->folder_query ();
+
+        /** @var PROJECT[] $folders */
         $folders = $folder_query->tree ();
 
         include_once ('projects/gui/project_tree_node_info.php');
@@ -316,7 +320,7 @@ class PROJECT_FORM extends FOLDER_FORM
       ?>
     </div>
 <?php
-    $renderer->start_column ('content-column');
+    $box_renderer->new_column_of_type ('content-column');
 
     $renderer->start ();
     $renderer->draw_text_line_row ('title');
@@ -354,6 +358,9 @@ class PROJECT_FORM extends FOLDER_FORM
 
     // if this folder has a parent, then show the inheritance options
 
+    /** @var PROJECT $parent */
+    $parent = null;
+
     if (! $this->object_exists ())
     {
       $parent = $this->_folder;
@@ -366,6 +373,7 @@ class PROJECT_FORM extends FOLDER_FORM
     if ($parent)
     {
       $renderer->start_block ('Options');
+      /** @var FOLDER $options_folder */
       $options_folder = $folder_query->object_at_id ($parent->options_id);
       $props = $renderer->make_list_properties ();
       $props->css_class = 'medium';
@@ -426,7 +434,7 @@ class PROJECT_FORM extends FOLDER_FORM
     $this->_draw_history_item_controls ($renderer, false);
 
     $renderer->finish ();
-    $renderer->finish_column ();
+    $box_renderer->finish_column_set ();
   }
 
   /**
@@ -478,4 +486,5 @@ class PROJECT_FORM extends FOLDER_FORM
    */
   protected $_user_list_error_message;
 }
+
 ?>
