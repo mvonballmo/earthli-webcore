@@ -837,6 +837,7 @@ abstract class HTML_TABLE_GRID extends HTML_GRID
   {
     parent::__construct($context);
 
+    $this->css_class = 'grid top basic columns';
     $this->_table_tag_name = 'table';
     $this->_row_tag_name = 'tr';
     $this->_cell_tag_name = 'td';

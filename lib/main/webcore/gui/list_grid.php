@@ -57,14 +57,6 @@ require_once ('webcore/gui/grid.php');
 abstract class LIST_GRID extends HTML_TABLE_GRID
 {
   /**
-   * @param CONTEXT $context Context to which this grid belongs.
-   */
-  public function __construct($context)
-  {
-    parent::__construct($context);
-  }
-
-  /**
    * Add a column to the end of the list.
    * @param string $name
    * @param string $css_class
