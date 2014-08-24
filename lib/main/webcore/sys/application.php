@@ -240,6 +240,7 @@ class APPLICATION extends CONTEXT
 
   /**
    * Name and version of the application.
+   * @param bool $as_html
    * @return string
    */
   public function description ($as_html = true)
@@ -461,14 +462,23 @@ class APPLICATION extends CONTEXT
       $this->page->raise_security_violation ('You are not allowed to log in.');
     }
 
-    if ($remember)  // user wants the password stored between sessions
-      $this->storage->expire_in_n_days ($this->storage_options->login_duration);
+    /** @var APPLICATION_STORAGE_OPTIONS $storage_options */
+    $storage_options = $this->storage_options;
+
+    $storage = $this->_get_login_storage();
+
+    // user wants the password stored between sessions
+
+    if ($remember)
+    {
+      $storage->expire_in_n_days ($storage_options->login_duration);
+    }
     else
     {
-      $this->storage->expire_when_session_ends ();
+      $storage->expire_when_session_ends ();
     }
 
-    $this->_get_login_storage()->set_value ($this->storage_options->login_user_name, $this->_encode_user ($user));
+    $storage->set_value ($storage_options->login_user_name, $this->_encode_user ($user));
     
     $this->set_login ($user);
   }
@@ -500,6 +510,9 @@ class APPLICATION extends CONTEXT
    */
   public function impersonate ($name, $password)
   {
+    /** @var USER $user */
+    $user = null;
+
     if ($name)
     {
       $user_query = $this->user_query ();
@@ -551,10 +564,12 @@ class APPLICATION extends CONTEXT
     if (! empty ($id))
     {
       $cache = $this->user_cache ();
-      $old = $cache->query->permissions_included;
-      $cache->query->include_permissions ($include_permissions);
+      /** @var USER_QUERY $user_query */
+      $user_query = $cache->query;
+      $old = $user_query->permissions_included;
+      $user_query->include_permissions ($include_permissions);
       $Result = $cache->object_at_id ($id);
-      $cache->query->include_permissions ($old);
+      $user_query->include_permissions ($old);
     }
 
     if (empty ($Result))
@@ -1230,5 +1245,3 @@ class DRAFTABLE_APPLICATION extends APPLICATION
     $this->register_class ('USER_ENTRY_QUERY', 'USER_DRAFTABLE_ENTRY_QUERY', 'webcore/db/user_entry_query.php');
   }
 }
-
-?>
