@@ -362,5 +362,3 @@ class CONTEXT_STORAGE_OPTIONS
    */
   public $setting_duration = 180;
 }
-
-?>

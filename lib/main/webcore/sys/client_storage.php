@@ -50,7 +50,7 @@ define ('Msg_channel_client', 'Storage');
 /**
  * Interface to loading/storing client-side data.
  * This is a base class that provides both an interface and a large part of the
- * implementation for sophisicated data storage and retrieval. Use {@link
+ * implementation for sophisticated data storage and retrieval. Use {@link
  * exists_on_client()} and {@link value()} to read data and {@link set_value()}
  * and {@link clear_value()} to store data. Multiple values can be stored
  * together with {@link start_multiple_value()} and read back with {@link

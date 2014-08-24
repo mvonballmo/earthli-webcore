@@ -70,7 +70,7 @@ class CONTEXT extends RESOLVER
 
   /**
    * Implementation-independent per-client storage.
-   * Points to the {@link $cookie}, by default. Descendents can implement other
+   * Points to the {@link $cookie}, by default. Descendants can implement other
    * storage providers.
    * @var CLIENT_STORAGE
    */
@@ -586,8 +586,6 @@ class CONTEXT extends RESOLVER
     {
       $type = 'caution';
     }
-
-    // TODO P tag should just set the background icon and use an appropriate padding rather than a nested container
 
     $sub_tag_name = $tag_name == 'p' ? 'span' : 'div';
 

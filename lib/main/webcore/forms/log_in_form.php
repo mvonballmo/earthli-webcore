@@ -198,4 +198,9 @@ class LOG_IN_FORM extends FORM
 
     echo '</div>';
   }
+
+  /**
+   * @var USER
+   */
+  private $_user;
 }
