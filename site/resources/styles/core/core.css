@@ -88,6 +88,13 @@ table.basic > tbody > tr:last-child > td,
 table.basic > tbody > tr:last-child > th {
   padding-bottom: 0;
 }
+table.mini td {
+  width: auto;
+  height: auto;
+}
+table.mini td a {
+  display: block;
+}
 table.columns > tbody > tr > td,
 table.columns > tbody > tr > th {
   padding: 2px 15px;
@@ -528,7 +535,7 @@ div.sixteen {
 .menu-trigger:hover {
   cursor: pointer;
 }
-ul.menu {
+.menu {
   position: relative;
   z-index: 100;
   display: inline-block;
@@ -542,27 +549,30 @@ ul.menu {
   background-color: #FFFFFF;
   border: 1px solid #c2c2c2;
 }
-ul.menu > li {
+.menu > li {
   padding: 0;
   min-height: 18px;
 }
-ul.menu > li:last-child .menu-item:hover {
+.menu > li:last-child .menu-item:hover {
   border-bottom-color: transparent;
 }
-ul.menu > li:first-child .menu-item:hover {
+.menu > li:first-child .menu-item:hover {
   border-top-color: transparent;
 }
-ul.menu .menu-group-title {
+.menu .menu-group-title {
   padding: 0.4em;
   border-bottom: 1px dotted #c2c2c2;
   cursor: default;
 }
-ul.menu .menu-item-description {
+.menu .menu-item-description {
   display: block;
   margin: 5px 0 0 0;
   max-width: 200px;
   white-space: normal;
   line-height: 130%;
+}
+.menu .calendar-menu-item {
+  margin: 15px;
 }
 .menu-item {
   padding: 0.4em;
@@ -1065,6 +1075,7 @@ hr {
 }
 .column-set {
   display: table;
+  width: 100%;
 }
 .column-set-column {
   display: table-cell;
@@ -1245,38 +1256,42 @@ hr {
   margin-left: 0;
 }
 .basic-form .input + .input,
+.basic-form .input + .button,
+.basic-form .input + .buttons,
 .basic-form .input + input,
-.basic-form input + .input,
-.basic-form select + select,
-.basic-form select + .input,
 .basic-form .input + select,
+.basic-form .input + button,
+.basic-form input + .input,
+.basic-form input + .button,
+.basic-form input + .buttons,
 .basic-form input + input,
 .basic-form input + select,
-.basic-form select + input,
-.basic-form input + .button,
 .basic-form input + button,
-.basic-form .input + button,
-.basic-form .input + .button,
+.basic-form select + .input,
+.basic-form select + .button select + .buttons select + select,
+.basic-form select + input,
 .basic-form select + button,
-.basic-form select + .button,
-.basic-form .button + input,
 .basic-form button + input,
+.basic-form button + select,
 .basic-form button + .input,
 .basic-form .button + .input,
-.basic-form button + select,
+.basic-form .button + input,
 .basic-form .button + select,
-.basic-form input + input[type=button],
+.basic-form .buttons + .input,
+.basic-form .buttons + input,
+.basic-form .buttons + select,
 .basic-form .input + input[type=button],
+.basic-form input + input[type=button],
 .basic-form select + input[type=button],
 .basic-form input[type=button] + input,
-.basic-form input[type=button] + .input,
 .basic-form input[type=button] + select,
-.basic-form input + input[type=submit],
+.basic-form input[type=button] + .input,
 .basic-form .input + input[type=submit],
+.basic-form input + input[type=submit],
 .basic-form select + input[type=submit],
 .basic-form input[type=submit] + input,
-.basic-form input[type=submit] + .input,
-.basic-form input[type=submit] + select {
+.basic-form input[type=submit] + select,
+.basic-form input[type=submit] + .input {
   margin-left: 5px;
 }
 .basic-form .help p:first-child {
@@ -1297,58 +1312,41 @@ hr {
 }
 .basic-form .form-row label:first-child + input[type=radio],
 .basic-form .form-row label:first-child + input[type=checkbox] {
-  float: left;
   margin-right: 5px;
   margin-top: 6px;
 }
 .basic-form .form-row label:first-child + input[type=radio] + label,
 .basic-form .form-row label:first-child + input[type=checkbox] + label {
-  display: block;
-  margin-left: 18px;
+  margin-left: 5px;
+}
+.basic-form .form-row input[type=radio],
+.basic-form .form-row input[type=checkbox] {
+  margin-top: 6px;
 }
 .basic-form .form-row input[type=radio]:first-child,
 .basic-form .form-row input[type=checkbox]:first-child {
   float: left;
   margin-right: 5px;
-  margin-top: 6px;
+}
+.basic-form .form-row.multiple input[type=radio] + label + input[type=radio],
+.basic-form .form-row.multiple input[type=checkbox] + label + input[type=radio],
+.basic-form .form-row.multiple input[type=radio] + label + input[type=checkbox],
+.basic-form .form-row.multiple input[type=checkbox] + label + input[type=checkbox] {
+  margin-left: 15px;
 }
 .basic-form .form-row.text-line input[type=radio]:first-child,
 .basic-form .form-row.text-line input[type=checkbox]:first-child {
   margin-top: 14px;
 }
-.basic-form .form-row label:not(:first-child) + input[type=radio],
-.basic-form .form-row label:not(:first-child) + input[type=checkbox] {
-  margin-left: 5px;
-}
 .basic-form .form-row label .description {
   display: block;
-  margin-left: 18px;
+  margin-left: 20px;
   margin-bottom: 0;
 }
 .basic-form .form-row .error,
 .basic-form .form-row .warning,
 .basic-form .form-row .caution {
   margin-right: 5px;
-}
-.basic-form .one-input input,
-.basic-form .one-input select,
-.basic-form .one-input textarea {
-  width: 100%;
-}
-.basic-form .two-inputs input,
-.basic-form .two-inputs select,
-.basic-form .two-inputs textarea {
-  width: 50%;
-}
-.basic-form .three-inputs input,
-.basic-form .three-inputs select,
-.basic-form .three-inputs textarea {
-  width: 33%;
-}
-.basic-form .four-inputs input,
-.basic-form .four-inputs select,
-.basic-form .four-inputs textarea {
-  width: 25%;
 }
 .basic-form .browse input {
   width: 200px;
@@ -1362,6 +1360,13 @@ hr {
 .basic-form textarea.tiny,
 .basic-form select.tiny {
   width: 3em;
+}
+.basic-form input[type=text].tiny-small,
+.basic-form input[type=password].tiny-small,
+.basic-form input[type=file].tiny-small,
+.basic-form textarea.tiny-small,
+.basic-form select.tiny-small {
+  width: 6em;
 }
 .basic-form input[type=text].small,
 .basic-form input[type=password].small,
@@ -1433,6 +1438,7 @@ input[type=submit] {
   min-height: 2em;
   cursor: pointer;
   white-space: nowrap;
+  margin: 0;
 }
 .button,
 .style-controls button,
@@ -1512,9 +1518,15 @@ select {
   -webkit-box-sizing: border-box;
   position: relative;
 }
-.style-controls .basic-form .form-row button:first-child,
-.style-controls .basic-form .form-row input[type=button]:first-child,
-.style-controls .basic-form .form-row input[type=submit]:first-child {
+.style-controls .basic-form .form-row > button:first-child,
+.style-controls .basic-form .form-row > div > button:first-child,
+.style-controls .basic-form .form-row > span > button:first-child,
+.style-controls .basic-form .form-row > input[type=button]:first-child,
+.style-controls .basic-form .form-row > div > input[type=button]:first-child,
+.style-controls .basic-form .form-row > span > input[type=button]:first-child,
+.style-controls .basic-form .form-row > input[type=submit]:first-child,
+.style-controls .basic-form .form-row > div > input[type=submit]:first-child,
+.style-controls .basic-form .form-row > span > input[type=submit]:first-child {
   margin-left: -5px;
 }
 .form-with-preview {
@@ -1607,6 +1619,10 @@ select {
 .basic-form.ltr fieldset fieldset {
   margin-left: 0;
 }
+.basic-form.ltr select + label,
+.basic-form.ltr input + label {
+  margin-left: 5px;
+}
 .basic-form.ltr .hint {
   margin-left: 0;
 }
@@ -1622,7 +1638,9 @@ select {
 .basic-form.ltr .form-row .form-row {
   margin-left: 0;
 }
-.basic-form.ltr .form-row .button:first-child {
+.basic-form.ltr .form-row > .button:first-child,
+.basic-form.ltr .form-row > div > .button:first-child,
+.basic-form.ltr .form-row > span > .button:first-child {
   margin-left: -5px;
 }
 .basic-form.ltr .help {
@@ -1712,6 +1730,10 @@ select {
 .basic-form.top label:first-child {
   display: block;
   margin-bottom: 5px;
+}
+.basic-form.top select + label,
+.basic-form.top input + label {
+  margin-left: 5px;
 }
 .basic-form.top .help {
   float: right;

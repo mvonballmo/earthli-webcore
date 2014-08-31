@@ -86,26 +86,32 @@
   }
 
   .input + .input,
+  .input + .button,
+  .input + .buttons,
   .input + input,
-  input + .input,
-  select + select,
-  select + .input,
   .input + select,
+  .input + button,
+  input + .input,
+  input + .button,
+  input + .buttons,
   input + input,
   input + select,
-  select + input,
-  input + .button,
   input + button,
-  .input + button,
-  .input + .button,
+  select + .input,
+  select + .button
+  select + .buttons
+  select + select,
+  select + input,
   select + button,
-  select + .button,
-  .button + input,
   button + input,
+  button + select,
   button + .input,
   .button + .input,
-  button + select,
-  .button + select
+  .button + input,
+  .button + select,
+  .buttons + .input,
+  .buttons + input,
+  .buttons + select
   {
     margin-left: @small_spacing;
   }
@@ -144,24 +150,42 @@
       & + input[type=radio],
       & + input[type=checkbox]
       {
-        float: left;
         margin-right: @small_spacing;
         margin-top: @small_spacing + 1;
 
         & + label
         {
-          display: block;
-          margin-left: 13px + @small_spacing;
+          margin-left: @small_spacing;
         }
       }
     }
 
-    input[type=radio]:first-child,
-    input[type=checkbox]:first-child
+    input[type=radio],
+    input[type=checkbox]
     {
-      float: left;
-      margin-right: @small_spacing;
       margin-top: @small_spacing + 1;
+
+      &:first-child
+      {
+        float: left;
+        margin-right: @small_spacing;
+      }
+    }
+
+    &.multiple
+    {
+      input[type=radio],
+      input[type=checkbox]
+      {
+        + label
+        {
+          + input[type=radio],
+          + input[type=checkbox]
+          {
+            margin-left: @standard_spacing;
+          }
+        }
+      }
     }
 
     &.text-line
@@ -173,21 +197,12 @@
       }
     }
 
-    label:not(:first-child)
-    {
-      & + input[type=radio],
-      & + input[type=checkbox]
-      {
-        margin-left: @small_spacing;
-      }
-    }
-
     label
     {
       .description
       {
         display: block;
-        margin-left: 13px + @small_spacing;
+        margin-left: @standard_spacing + @small_spacing;
         margin-bottom: 0;
       }
     }
@@ -197,46 +212,6 @@
     .caution
     {
       margin-right: @small_spacing;
-    }
-  }
-
-  .one-input
-  {
-    input,
-    select,
-    textarea
-    {
-      width: 100%;
-    }
-  }
-
-  .two-inputs
-  {
-    input,
-    select,
-    textarea
-    {
-      width: 50%;
-    }
-  }
-
-  .three-inputs
-  {
-    input,
-    select,
-    textarea
-    {
-      width: 33%;
-    }
-  }
-
-  .four-inputs
-  {
-    input,
-    select,
-    textarea
-    {
-      width: 25%;
     }
   }
 
@@ -265,6 +240,11 @@
     &.tiny
     {
       width: 3em;
+    }
+
+    &.tiny-small
+    {
+      width: 6em;
     }
 
     &.small
@@ -324,6 +304,7 @@ button
   min-height: @minimum_button_height;
   cursor: pointer;
   white-space: nowrap;
+  margin: 0;
 }
 
 .button,
@@ -403,7 +384,9 @@ select
 {
   .form-row
   {
-    button:first-child
+    > button:first-child,
+    > div > button:first-child,
+    > span > button:first-child
     {
       margin-left: -@standard_border_radius - @hairline_border_width;
     }

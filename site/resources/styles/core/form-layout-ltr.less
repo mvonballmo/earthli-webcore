@@ -41,6 +41,15 @@
     }
   }
 
+  select,
+  input
+  {
+    + label
+    {
+      margin-left: @small_spacing;
+    }
+  }
+
   .hint
   {
     margin-left: 0;
@@ -67,7 +76,9 @@
 
   .form-row
   {
-    .button:first-child
+    > .button:first-child,
+    > div > .button:first-child,
+    > span > .button:first-child
     {
       margin-left: -@standard_border_radius - @hairline_border_width;
     }

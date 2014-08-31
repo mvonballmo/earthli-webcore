@@ -249,23 +249,23 @@ div.info-box-top {
 .quote-block {
   color: #6d6d6d;
 }
-ul.menu {
+.menu {
   background-color: #e9e9e9;
   border-color: #b8b8b8;
 }
-ul.menu .menu-group-title {
+.menu .menu-group-title {
   background-color: #e1e1e1;
   border-color: #b8b8b8;
 }
-ul.menu .menu-item:hover {
+.menu .menu-item:hover {
   background-color: #ffffff;
   border-color: #b8b8b8;
 }
-ul.menu .menu-item:link,
-ul.menu .menu-item:visited {
+.menu .menu-item:link,
+.menu .menu-item:visited {
   color: #585858;
 }
-ul.menu .menu-item-description {
+.menu .menu-item-description {
   color: #585858;
 }
 .button,
