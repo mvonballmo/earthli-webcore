@@ -49,11 +49,7 @@ require_once ('webcore/obj/webcore_object.php');
  */
 class BOX_RENDERER extends WEBCORE_OBJECT
 {
-  /**
-   * A CSS-style specifying the width of the box.
-   * @var string
-   */
-  var $width = '100%';
+  var $css_class = 'column-set';
 
   /**
    * A CSS-style specifying the height of the box.
@@ -76,44 +72,7 @@ class BOX_RENDERER extends WEBCORE_OBJECT
    */
   public function start_column_set ()
   {
-    include_once('webcore/util/tags.php');
-    $builder = new CSS_STYLE_BUILDER();
-
-    if ($this->width)
-    {
-      $builder->add_attribute('width', $this->width);
-    }
-
-    if ($this->height)
-    {
-      $builder->add_attribute('height', $this->height);
-    }
-
-    echo '<div class="column-set" style="' . $builder->as_text() . '">' . "\n";
-  }
-  
-  /**
-   * Open a column after calling {@link start_column_set()}.
-   * Closes a previously opened column automatically.
-   * @param string $CSS_style Use this style for the column.
-   */
-  public function new_column ($CSS_style = '')
-  {
-    if ($this->_column_started)
-    {
-      $this->_close_column ();
-    }
-      
-    if ($CSS_style)
-    {
-      echo '  <div class="column-set-column" style="' . $CSS_style . '">' . "\n";
-    }
-    else
-    {
-      echo '  <div class="column-set-column">' . "\n";
-    }
-
-    $this->_column_started = true; 
+    echo '<div class="' . $this->css_class . '">' . "\n";
   }
 
   /**
