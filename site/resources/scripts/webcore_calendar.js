@@ -30,28 +30,14 @@ var Calendar_show_month_selector = false;
 var Calendar_show_now_selector = true;
 var Calendar_first_day_of_week = 1;
 var Calendar_page_name = 'date_picker.html';
-var Calendar_width = 200;
-var Calendar_height = 200;
 var Calendar_close_on_select = true;
 
-var Calendar_style_main = 'calendar';
-var Calendar_style_banner = 'calendar-banner';
-var Calendar_style_title = 'calendar-title';
-var Calendar_style_body = 'calendar-body';
-var Calendar_style_footer = 'calendar-footer';
-var Calendar_style_weekday_banner = 'calendar-weekday-banner';
-var Calendar_style_weekday = 'calendar-weekday';
+var Calendar_style_main = 'basic';
+var Calendar_style_weekday = 'weekday';
 var Calendar_style_today = 'calendar-today';
 var Calendar_style_weekend_day = 'calendar-weekend-day';
 var Calendar_style_month_day = 'calendar-month-day';
 var Calendar_style_other_day = 'calendar-other-day';
-
-var Calendar_image_path = '';
-
-var Calendar_image_previous_year = 'previous_year.png';
-var Calendar_image_next_year = 'next_year.png';
-var Calendar_image_previous_month = 'previous_month.png';
-var Calendar_image_next_month = 'next_month.png';
 
 var Date_time_field_output_format = Date_format_euro;
 
@@ -77,10 +63,6 @@ function DATE_TIME_FIELD()
   this.show_month_selector = Calendar_show_month_selector;
   /** Name of the calendar page. */
   this.page_name = Calendar_page_name;
-  /** How wide should the calendar window be? */
-  this.width = Calendar_width;
-  /** How high should the calendar window be? */
-  this.height = Calendar_height;
   /** How to format dates? */
   this.output_format = Date_time_field_output_format;
 
@@ -126,47 +108,6 @@ DATE_TIME_FIELD.prototype.report_error = function (msg)
 };
 
 /**
- * Show the calendar window positioned on the given date.
- *
- * Uses 'initial_date_time' if given. If that is empty, it uses the date/time displayed
- * in the target control. If that is empty, it uses the current date/time.
- *
- * @param {string} initial_date_time
- */
-DATE_TIME_FIELD.prototype.show_calendar = function (initial_date_time)
-{
-  var dt = this.as_js_date(initial_date_time);
-
-  var window_location = this.page_name + '?'
-    + 'datetime' + this.id + '=' + dt.valueOf()
-    + '&showtime' + this.id + '=' + this.show_time
-    + '&showmonthsel' + this.id + '=' + this.show_month_selector
-    + '&id=' + this.id;
-
-  if (this.calendar && !this.calendar.closed)
-  {
-    this.calendar.location = window_location;
-  }
-  else
-  {
-    var h = this.height;
-    if (this.show_time)
-    {
-      h += 20;
-    }
-
-    var window_params = 'width=' + this.width
-      + ',height=' + h
-      + ',status=no,resizable=no,dependent=yes,alwaysRaised=yes';
-
-    var window_title = this.title;
-
-    this.calendar = window.open(window_location, window_title, window_params);
-    this.calendar.focus();
-  }
-};
-
-/**
  * Apply a new value to the form control.
  *
  * Generally called from the CALENDAR object in the page displayed with 'show_calendar'.
@@ -204,18 +145,31 @@ DATE_TIME_FIELD.prototype.as_js_date = function (initial_date_time)
 
   var dt = initial_date_time;
   if (!dt)
+  {
     dt = this.control.value;
+  }
 
   if (dt)
   {
-    // if its a number, assume its milliseconds
-    if ((typeof (dt) == 'number') || Date_is_number.exec(dt))
+    if (dt instanceof Date)
+    {
+      Result = dt;
+    }
+    else if ((typeof (dt) == 'number') || Date_is_number.exec(dt))
+    {
+      // if it's a number, assume its milliseconds
+
       Result = new Date(dt);
+    }
     else
+    {
       Result = date_time_from_string(dt, this.century_break);
+    }
   }
   else
+  {
     Result = new Date();
+  }
 
   return Result;
 };
@@ -266,33 +220,21 @@ function CALENDAR()
 }
 
 /**
- * Registers a calendar with a DATE_TIME_FIELD 'id'.
  *
- * Pass in an id, if the calendar should interact with a field and an optional date/time.
- *
- * @param {int} id
- * @param {int} initial_date_time Should be the result of calling valueOf() on a Date object.
+ * @param {Date} initial_date_time
  */
-CALENDAR.prototype.register = function (id, initial_date_time)
+CALENDAR.prototype.set_initial_date_time = function (initial_date_time)
 {
-  if (!initial_date_time)
-    initial_date_time = parseInt(Query_string.item('datetime' + id));
-
-  this.id = id;
-  this.now = new Date();
-
-  this.show_time = parseBool(Query_string.item('showtime' + id));
-  this.show_month_selector = parseBool(Query_string.item('showmonthsel' + id));
-
   if (initial_date_time)
-    this.today = new Date(initial_date_time);
+  {
+    this.today = initial_date_time;
+  }
   else
+  {
     this.today = new Date();
+  }
 
-  if (window.opener && window.opener.date_time_fields)
-    this.date_time_field = window.opener.date_time_fields [id];
-  if (!this.date_time_field)
-    CALENDAR.prototype.report_error("Date picker not found.");
+  this.now = new Date();
 
   this.previous_year = this.offset_date(Calendar_year, -1);
   this.next_year = this.offset_date(Calendar_year, 1);
@@ -302,6 +244,15 @@ CALENDAR.prototype.register = function (id, initial_date_time)
   this.first_day = new Date(this.today);
   this.first_day.setDate(1);
   this.first_day.setDate(1 - (7 + this.first_day.getDay() - this.first_day_of_week) % 7);
+
+  this.show_time = parseBool(Query_string.item('showtime' + this.id));
+  this.show_month_selector = parseBool(Query_string.item('showmonthsel' + this.id));
+};
+
+CALENDAR.prototype.attach = function (field)
+{
+  this.id = field.id;
+  this.field = field;
 
   calendars [this.id] = this;
 };
@@ -318,20 +269,18 @@ CALENDAR.prototype.register = function (id, initial_date_time)
  */
 CALENDAR.prototype.offset_date = function (part, offset)
 {
-  var Result = new Date(this.today);
+  var current = this.today;
+  var Result = new Date(current.getFullYear(), current.getMonth(), current.getDay(), current.getHours(), current.getMinutes(), current.getSeconds(), current.getMilliseconds());
 
   switch (part)
   {
     case Calendar_year:
-      Result.setFullYear(this.today.getFullYear() + offset);
+      Result.setFullYear(current.getFullYear() + offset);
       break;
     case Calendar_month:
-      Result.setMonth(this.today.getMonth() + offset);
+      Result.setMonth(current.getMonth() + offset);
       break;
   }
-
-  if (Result.getDate() != this.today.getDate())
-    Result.setDate(0);
 
   return Result;
 };
@@ -341,15 +290,15 @@ CALENDAR.prototype.offset_date = function (part, offset)
  *
  * Do not pass a Javascript Date here, use Date.valueOf() instead.
  *
- * @param {int} dt
+ * @param {string} utc_formatted_time
  */
-CALENDAR.prototype.select_date = function (dt)
+CALENDAR.prototype.select_date = function (utc_formatted_time)
 {
-  this.date_time_field.set_value(parseInt(dt));
-  if (this.close_on_select)
-    window.close();
-  else
-    this.change_date(dt);
+  var date = new Date(Date.parse(utc_formatted_time));
+
+  this.field.set_value(date);
+
+  closeMenus(document);
 };
 
 /**
@@ -370,11 +319,17 @@ CALENDAR.prototype.select_time = function (ts)
  *
  * Do not pass a Javascript Date here, use Date.valueOf() instead.
  *
- * @param {int} dt
+ * @param {string} utc_formatted_time
  */
-CALENDAR.prototype.change_date = function (dt)
+CALENDAR.prototype.change_date = function (utc_formatted_time)
 {
-  this.date_time_field.show_calendar(parseInt(dt));
+  var dom_element = $q('#' + this.field.control.id + '_field').first();
+
+  var date = new Date(Date.parse(utc_formatted_time));
+
+  this.set_initial_date_time(date);
+
+  dom_element.innerHTML = this.getText();
 };
 
 /**
@@ -430,36 +385,17 @@ CALENDAR.prototype.echo = function (s)
  * Call 'display' to show the calendar in a page. */
 function HTML_CALENDAR()
 {
+  CALENDAR.call();
+
   this.main_style = Calendar_style_main;
-  this.banner_style = Calendar_style_banner;
-  this.title_style = Calendar_style_title;
-  this.body_style = Calendar_style_body;
-  this.footer_style = Calendar_style_footer;
-  this.weekday_banner_style = Calendar_style_weekday_banner;
   this.weekday_style = Calendar_style_weekday;
   this.today_style = Calendar_style_today;
   this.weekend_day_style = Calendar_style_weekend_day;
   this.month_day_style = Calendar_style_month_day;
   this.other_day_style = Calendar_style_other_day;
-
-  this.image_path = Calendar_image_path;
-  this.previous_year_image = Calendar_image_previous_year;
-  this.next_year_image = Calendar_image_next_year;
-  this.previous_month_image = Calendar_image_previous_month;
-  this.next_month_image = Calendar_image_next_month;
 }
 
 HTML_CALENDAR.prototype = new CALENDAR;
-
-/**
- * Adjust the image file name, if necessary.
- *
- * @param {string} file_name
- * @return {string} */
-HTML_CALENDAR.prototype.expand_image_file_name = function (file_name)
-{
-  return this.image_path + file_name;
-};
 
 /**
  * Return JavaScript to select this date.
@@ -470,21 +406,7 @@ HTML_CALENDAR.prototype.expand_image_file_name = function (file_name)
  */
 HTML_CALENDAR.prototype.make_javascript_selector = function (dt, func_name)
 {
-  return 'calendars [' + this.id + '].' + func_name + ' (' + dt + ')';
-};
-
-/**
- * Return an icon as HTML.
- *
- * Resolves the icon to the property path and uses the default extension for the chosen theme.
- *
- * @param {string} file_name
- * @param {string} title
- * @return {string}
- */
-HTML_CALENDAR.prototype.icon_as_html = function (file_name, title)
-{
-  return '<img src="' + this.expand_image_file_name(file_name) + '" title="' + title + '" alt="' + title + '" style="vertical-align: middle">';
+  return 'calendars [' + this.id + '].' + func_name + ' (\'' + dt + '\')';
 };
 
 /**
@@ -493,11 +415,21 @@ HTML_CALENDAR.prototype.icon_as_html = function (file_name, title)
  * @param {Date} d
  * @param {string} text
  * @param {string} func_name
+ * @param {string} css_class
  * @return {string}
  */
-HTML_CALENDAR.prototype.make_link = function (d, text, func_name)
+HTML_CALENDAR.prototype.make_link = function (d, text, func_name, css_class)
 {
-  return '<a href="javascript:' + this.make_javascript_selector(d.valueOf(), func_name) + '">' + text + '</a>';
+  var Result = '<a ';
+
+  if (css_class)
+  {
+    Result += 'class="' + css_class + '" ';
+  }
+
+  Result += 'href="javascript:' + this.make_javascript_selector(d.toUTCString(), func_name) + '">' + text + '</a>';
+
+  return Result;
 };
 
 /**
@@ -517,16 +449,18 @@ HTML_CALENDAR.prototype.make_selector_link = function (d, text)
  *
  * @param {Date} d
  * @param {string} text
+ * @param {string} css_class
  * @return {string}
  */
-HTML_CALENDAR.prototype.make_changer_link = function (d, text)
+HTML_CALENDAR.prototype.make_changer_link = function (d, text, css_class)
 {
-  return this.make_link(d, text, 'change_date');
+  return this.make_link(d, text, 'change_date', css_class);
 };
 
-HTML_CALENDAR.prototype.draw_month_selector = function ()
+HTML_CALENDAR.prototype.get_month_selector = function ()
 {
-  this.echo('<select class="' + this.menu_control_style + '" onChange="' + this.make_javascript_selector('this.value', 'change_date') + '">');
+  var result = '';
+  result += '<select class="tiny-small" onChange="' + this.make_javascript_selector('this.value', 'change_date') + '">';
   var month_day = new Date(this.today);
   for (var idxMonth = 0; idxMonth < 12; idxMonth++)
   {
@@ -541,63 +475,70 @@ HTML_CALENDAR.prototype.draw_month_selector = function ()
       selText = '';
     }
 
-    this.echo('<option value="' + month_day.valueOf() + '"' + selText + '>' + Month_short_names [idxMonth] + '</option>');
+    result += '<option value="' + month_day.valueOf() + '"' + selText + '>' + Month_short_names [idxMonth] + '</option>';
   }
-  this.echo('</select>');
-  this.echo(this.today.getFullYear());
+  result += '</select>';
+  result += this.today.getFullYear();
+
+  return result;
 };
 
-HTML_CALENDAR.prototype.draw_time_selector = function ()
+HTML_CALENDAR.prototype.getText = function ()
 {
-  this.echo('<div style="text-align: center">');
-  if (this.show_time)
+  var result = '<div class="button-content">';
+
+  result += '<ul class="menu-items buttons">';
+
+  if (this.show_year_selector)
   {
-    this.echo('<form onSubmit="' + this.make_javascript_selector('this.time' + this.id + '.value', 'select_time') + '">');
-    this.echo('<input id="time' + this.id + '" class="' + this.text_control_style + '" type="text" value="' + format_date_time(this.today, 'H:i:s') + '" maxlength="8" size="8">');
-    this.echo('</form>');
+    result += '<li>' + this.make_changer_link(this.previous_year, '<<') + '</li>';
   }
-  if (this.show_now_selector)
-    this.echo(this.make_changer_link(this.now, this.icon_as_html(this.now_image, 'Move to current date and time')));
-  this.echo('</div>');
-};
 
-/** Draw an HTML-table-based calendar with JavaScript. */
-HTML_CALENDAR.prototype.display = function ()
-{
-  this.echo('<table class="' + this.main_style + '">');
-  this.echo('<tr><td class="' + this.banner_style + '">');
-  this.echo('<table>');
-  this.echo('<tr><td">');
+  result += '<li>' + this.make_changer_link(this.previous_month, '<') + '</li>';
+  result += '<li>' + this.make_changer_link(this.next_month, '>') + '</li>';
+
   if (this.show_year_selector)
-    this.echo(this.make_changer_link(this.previous_year, this.icon_as_html(this.previous_year_image, 'Move to previous year')));
-  this.echo(this.make_changer_link(this.previous_month, this.icon_as_html(this.previous_month_image, 'Move to previous month')));
-  this.echo('</td><td class="' + this.title_style + '" style="width: 100%">');
+  {
+    result += '<li>' + this.make_changer_link(this.next_year, '>>') + '</li>';
+  }
+
   if (this.show_month_selector)
-    this.draw_month_selector();
+  {
+    result += '<li>' + this.get_month_selector() + '</li>';
+  }
   else
-    this.echo(Month_names [this.today.getMonth()] + ' ' + this.today.getFullYear());
-  this.echo('</td><td style="white-space: nowrap">');
-  this.echo(this.make_changer_link(this.next_month, this.icon_as_html(this.next_month_image, 'Move to next month')));
-  if (this.show_year_selector)
-    this.echo(this.make_changer_link(this.next_year, this.icon_as_html(this.next_year_image, 'Move to next year')));
-  this.echo('</td></tr>');
-  this.echo('</table>');
-  this.echo('</td></tr>');
-  this.echo('<tr><td>');
-  this.echo('<table class="' + this.body_style + '" cellspacing="0" style="width: 100%">');
+  {
+    result += '<li>' + Month_names [this.today.getMonth()] + ' ' + this.today.getFullYear() + '</li>';
+  }
 
-  this.echo('<tr class="' + this.weekday_banner_style + '">');
+  if (this.show_time || this.show_now_selector)
+  {
+    if (this.show_time)
+    {
+      result += '<li>' + '<input id="time' + this.id + '" type="text" value="' + format_date_time(this.today, 'H:i:s') + '" maxlength="8" size="8">' + '</li>';
+    }
+    if (this.show_now_selector)
+    {
+      result += '<li>' + this.make_changer_link(this.now, 'Now') + '</li>';
+    }
+  }
+
+  result += '</ul></div>';
+
+  result += '<table class="' + this.main_style + ' mini">';
+
+  result += '<tr>';
   for (var idxDow = 0; idxDow < 7; idxDow++)
   {
-    this.echo('<td class="' + this.weekday_style + '">' + Weekday_short_names [(this.first_day_of_week + idxDow) % 7] + '</td>');
+    result += '<td class="' + this.weekday_style + '">' + Weekday_short_names [(this.first_day_of_week + idxDow) % 7] + '</td>';
   }
-  this.echo('</tr>');
+  result += '</tr>';
 
   var current = new Date(this.first_day);
   while ((current.getMonth() == this.today.getMonth())
     || current.getMonth() == this.first_day.getMonth())
   {
-    this.echo('<tr>');
+    result += '<tr>';
     for (var idxDow = 0; idxDow < 7; idxDow++)
     {
       var css_class;
@@ -618,21 +559,21 @@ HTML_CALENDAR.prototype.display = function ()
         css_class = this.month_day_style;
       }
 
-      this.echo('<td class="' + css_class + '">' + this.make_selector_link(current, current.getDate()) + '</td>');
+      result += '<td class="' + css_class + '">' + this.make_selector_link(current, current.getDate()) + '</td>';
 
       current.setDate(current.getDate() + 1);
     }
-    this.echo('</tr>');
+    result += '</tr>';
   }
-  this.echo('</table>');
-  this.echo('</td></tr>');
-  if (this.show_time || this.show_now_selector)
-  {
-    this.echo('<tr><td class="' + this.footer_style + '">');
-    this.draw_time_selector();
-    this.echo('</td></tr>');
-  }
-  this.echo('</table>');
+  result += '</table>';
+
+  return result;
+}
+
+/** Draw an HTML-table-based calendar with JavaScript. */
+HTML_CALENDAR.prototype.display = function ()
+{
+  this.echo(this.getText());
 };
 
 /**
@@ -640,31 +581,15 @@ HTML_CALENDAR.prototype.display = function ()
  */
 function WEBCORE_HTML_CALENDAR()
 {
+  HTML_CALENDAR.call();
+
   this.today_style = 'cell-selected';
   this.weekend_day_style = 'cell-highlight';
   this.month_day_style = 'cell-non-empty';
   this.other_day_style = 'cell-empty';
-
-  this.previous_year_image = 'go_to_first';
-  this.next_year_image = 'go_to_last';
-  this.previous_month_image = 'go_to_previous';
-  this.next_month_image = 'go_to_next';
-  this.now_image = 'now';
 }
 
 WEBCORE_HTML_CALENDAR.prototype = new HTML_CALENDAR;
-
-/**
- * Reroute image requests to the icons folder.
- *
- * Also applies the default icon extension for the theme.
- *
- * @param {string} file_name
- */
-WEBCORE_HTML_CALENDAR.prototype.expand_image_file_name = function (file_name)
-{
-  return image_path + 'buttons/' + file_name + '_16px.' + image_extension;
-};
 
 /**
  * {DATE_TIME_FIELD} that uses a WebCore calendar.

@@ -730,9 +730,14 @@ PICKER.prototype.register = function (id, initial_value)
   this.id = id;
 
   if (window.opener && window.opener.picker_fields)
+  {
     this.picker_field = window.opener.picker_fields [id];
+  }
+
   if (!this.picker_field)
+  {
     PICKER.prototype.report_error("Field [" + id + "] not found.");
+  }
 
   pickers [this.id] = this;
 

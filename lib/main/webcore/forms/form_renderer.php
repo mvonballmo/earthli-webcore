@@ -191,7 +191,7 @@ class FORM_LIST_PROPERTIES
 
   /**
    * Add an item to the list.
-   * These items are renderered by specific controls using the values given. {@link add_item_object()}
+   * These items are rendered by specific controls using the values given. {@link add_item_object()}
    * does the same with an existing {@link FORM_LIST_ITEM} object.
    * @param string $title Display text. Used by all controls.
    * @param string $value Value submitted with form data. Used by all controls.
@@ -973,11 +973,11 @@ class FORM_RENDERER extends CONTROLS_RENDERER
   public function label_as_html($id)
   {
     $field = $this->_field_at ($id);
-    $title = $field->caption;
+    $caption = $field->caption;
 
-    if ($title && !ctype_space($title))
+    if ($caption && !ctype_space($caption))
     {
-      return '<label for="' . $id . '">' . $title . '</label>';
+      return '<label for="' . $id . '">' . $caption . '</label>';
     }
 
     return '';
@@ -1041,19 +1041,34 @@ class FORM_RENDERER extends CONTROLS_RENDERER
     {
       $js_form = $this->_form->js_form_name ();
 
-      $Result .= "<script type=\"text/javascript\">";
-      $Result .= 'var ' . $id . "_field = new WEBCORE_DATE_TIME_FIELD ();";
-      $Result .= $id . "_field.output_format = Date_format_us;";
+      /** @var DATE_TIME $value */
+      $value = $field->value();
+      $js_date_value = $value->as_RFC_2822();
 
+      $script = 'var ' . $id . "_field = new WEBCORE_DATE_TIME_FIELD ();\n";
+      $script .= $id . "_field.output_format = Date_format_us;\n";
       if ($includes_time)
       {
-        $Result .= $id . "_field.show_time = true;";
+        $script .= $id . "_field.show_time = true;\n";
       }
 
-      $Result .= $id . '_field.attach (' . $js_form . '.' . $id . ");";
+      $script .= $id . '_field.attach (' . $js_form . '.' . $id . ");\n";
 
+      $script .= "cal = new WEBCORE_HTML_CALENDAR ();\n";
+      $script .= "cal.show_month_selector = true;\n";
+      $script .= "cal.show_now_selector = true;\n";
+      $script .= "cal.attach(" . $id . "_field);\n";
+      $script .= "cal.set_initial_date_time(new Date('" . $js_date_value . "'));\n";
+      $script .= "cal.display()";
+
+      $Result .= '<ul class="menu-items buttons"><li class="menu-trigger">';
+      $Result .= $this->javascript_button_as_html('', '', '{icons}buttons/calendar');
+      $Result .= '<div class="menu-dropdown"><div class="menu"><div class="calendar-menu-item" id="' . $id . '_field">';
+      $Result .= "<script type=\"text/javascript\">";
+      $Result .= $script;
       $Result .= "</script>";
-      $Result .= $this->javascript_button_as_html('', $id . '_field.show_calendar ()', '{icons}buttons/calendar');
+      $Result .= '</div></div></div>';
+      $Result .= '</li></ul>';
 
       return $Result;
     }
@@ -1599,6 +1614,10 @@ class FORM_RENDERER extends CONTROLS_RENDERER
       $item_count = 0;
       foreach ($props->items as $item)
       {
+        // TODO Clean up usage of item->css_class, props->css_class
+        // TODO Add support for "guessing" whether multiple items are on the
+        //      same line and automatically adding the "multiple" CSS class
+
         $css_class = $item->css_class ? 'form-row ' . $item->css_class : 'form-row';
 
         if ($Result == '')
