@@ -78,7 +78,7 @@ class FOLDER_USER_PERMISSIONS_CREATE_FORM extends FOLDER_PERMISSIONS_FORM
 
   /**
    * Called after fields are validated.
-   * @param PERMISSIONS $obj
+   * @param FOLDER_PERMISSIONS $obj
    * @access private
    */
   protected function _post_validate ($obj)
@@ -110,7 +110,7 @@ class FOLDER_USER_PERMISSIONS_CREATE_FORM extends FOLDER_PERMISSIONS_FORM
 
   /**
    * Store the form's values to this set of permissions.
-   * @param PERMISSIONS $obj
+   * @param FOLDER_PERMISSIONS $obj
    * @access private
    */
   public function commit ($obj)

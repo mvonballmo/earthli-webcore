@@ -149,7 +149,6 @@ class FOLDER_PERMISSIONS_FORM extends PERMISSIONS_FORM
    */
   protected function _draw_permission_controls ($renderer, $formatter)
   {
-    $this->_draw_buttons ($renderer);
     foreach ($this->groups as $group)
     {
       $renderer->start_block ($group->title);

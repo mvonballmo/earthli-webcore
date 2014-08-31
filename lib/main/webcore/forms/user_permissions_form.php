@@ -77,7 +77,9 @@ class USER_PERMISSIONS_FORM extends PERMISSIONS_FORM
     $field->caption = 'Use Defaults';
     $this->add_field ($field);
 
+    /** @var PERMISSIONS_FORMATTER $formatter */
     $formatter = $this->app->make_permissions_formatter ();
+
     $this->content_groups = $formatter->content_privilege_groups ();
     $this->global_groups = $formatter->global_privilege_groups ();
 
@@ -141,6 +143,7 @@ class USER_PERMISSIONS_FORM extends PERMISSIONS_FORM
 
     foreach ($this->content_groups as $group)
     {
+      /** @type $map */
       foreach ($group->maps as $map)
       {
         $this->set_value ($map->id (), $permissions->value_for ($map->set_name, $map->type));
@@ -276,6 +279,7 @@ function update_controls ()
     $props->add_item ('Default', Privilege_controlled_by_content);
     $props->add_item ('Granted', Privilege_always_granted);
     $props->add_item ('Denied', Privilege_always_denied);
+    $props->css_class = 'tiny-small';
 
     $box_renderer = $this->context->make_box_renderer();
     $box_renderer->start_column_set();
@@ -323,10 +327,10 @@ function update_controls ()
     $id = $map->id ();
     $field = $this->field_at ($id);
     $field->caption = $this->context->get_icon_with_text($formatter->icon_url_for($map), Sixteen_px, $formatter->title_for($map));
-    echo '<div class="three-inputs">';
+    $renderer->start_row();
     echo $renderer->drop_down_as_HTML ($id, $props);
-    echo ' ' . $field->caption;
-    echo "</div>";
+    echo $renderer->label_as_html($id);
+    $renderer->finish_row();
   }
 
   /**
