@@ -869,7 +869,7 @@ class DATE_TIME_FIELD extends FIELD
 
   /**
    * Called by the form when adding this field to its list.
-   * Override in descendents to implement custom behavior.
+   * Override in descendants to implement custom behavior.
    * @param FORM $form
    */
   public function added_to_form ($form)
@@ -1022,7 +1022,7 @@ class ARRAY_FIELD extends FIELD
 
   /**
    * Transform the id to a valid JavaScript id.
-   * field names ending in [] are automatically marshalled to arrays by PHP.
+   * field names ending in [] are automatically marshaled to arrays by PHP.
    * @return string
    */
   public function js_name ()
@@ -1231,7 +1231,9 @@ class UPLOAD_FILE_FIELD extends FIELD
     if ($this->continue_validating ($form))
     {
       $idx = 0;
-      foreach ($this->_value->files as &$file)
+      /** @var UPLOADED_FILE_SET $file_value */
+      $file_value = $this->_value;
+      foreach ($file_value->files as $file)
       {
         if (! $file->is_valid ())
         {
@@ -1255,7 +1257,7 @@ class UPLOAD_FILE_FIELD extends FIELD
 
   /**
    * Called by the form when adding this field to its list.
-   * Override in descendents to implement custom behavior.
+   * Override in descendants to implement custom behavior.
    * @param FORM $form
    */
   public function added_to_form ($form)
