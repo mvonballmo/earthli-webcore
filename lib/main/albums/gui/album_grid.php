@@ -55,8 +55,6 @@ class ALBUM_GRID extends FOLDER_GRID
   protected function _draw_box($obj)
   {
     $main_pic = $obj->main_picture();
-    ?>
-    <?php
     if ($main_pic)
     {
       $f = $main_pic->date->formatter();
@@ -88,6 +86,7 @@ class ALBUM_GRID extends FOLDER_GRID
         <a href="view_folder.php?<?php echo "id=$obj->id"; ?>"><?php echo $obj->title; ?></a>
       </p>
     <?php
+      $this->_display_finish_minimal_commands_block();
     }
     ?>
     <p class="detail">
