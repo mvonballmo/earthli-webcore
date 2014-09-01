@@ -61,7 +61,7 @@ class PAGE extends CONTEXT
   /**
    * @var string
    */
-  public $doc_type = '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/1998/REC-html40-19980424/strict.dtd">';
+  public $doc_type = '<!DOCTYPE HTML>';
 
   /**
    * @var string
