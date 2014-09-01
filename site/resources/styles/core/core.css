@@ -475,6 +475,10 @@ pre > code .reserved {
 div.icon {
   display: block;
 }
+h2.icon {
+  display: block;
+  background-position: right;
+}
 .one-hundred {
   min-width: 100px;
   min-height: 100px;
