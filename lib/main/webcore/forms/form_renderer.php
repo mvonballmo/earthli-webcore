@@ -878,7 +878,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    */
   public function draw_submit_button_row ($show_preview = null)
   {
-    $buttons = [];
+    $buttons = array();
 
     if (!$this->_form->allow_cancel_only)
     {

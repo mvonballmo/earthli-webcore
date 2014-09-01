@@ -352,7 +352,7 @@ class EXCEPTION_SIGNATURE
    */
   protected function _add_vars_for ($type)
   {
-    $variables = [];
+    $variables = array();
 
     switch ($type)
     {
