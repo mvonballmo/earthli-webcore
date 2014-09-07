@@ -704,22 +704,17 @@ class FORM_RENDERER extends CONTROLS_RENDERER
     $this->_draw_field_row ($this->_field_at ($id), $this->text_line_as_html ($id, $options), 'text-line');
   }
 
-    /**
-     * Draw a single-line text control with a 'browse' button onto a separate row in the form.
-     *
-     * @param string $id The id of the field to render.
-     * @param string $button The button to show next to the control.
-     * @param FORM_TEXT_CONTROL_OPTIONS $options Override the default text control rendering; can be null.
-     * @param string $css_class The class to apply to the overall container.
-     */
+  /**
+   * Draw a single-line text control with a 'browse' button onto a separate row in the form.
+   *
+   * @param string $id The id of the field to render.
+   * @param string $button The button to show next to the control.
+   * @param FORM_TEXT_CONTROL_OPTIONS $options Override the default text control rendering; can be null.
+   * @param string $css_class The class to apply to the overall container.
+   */
   public function draw_text_line_with_button_row($id, $button, $options = null, $css_class = 'browse')
   {
-    $control_text = '<span class="' . $css_class . '">';
-    $control_text .= $this->text_line_as_html($id, $options);
-    $control_text .= $button;
-    $control_text .= '</span>';
-
-    $this->_draw_field_row ($this->_field_at ($id), $control_text, 'text-line');
+    $this->_draw_field_row ($this->_field_at ($id), $this->text_line_with_button_as_html($id, $button, $options, $css_class), 'text-line');
   }
 
   /**
@@ -731,7 +726,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    */
   public function draw_text_line_with_browse_button_row($id, $browse_script, $options = null)
   {
-    $this->draw_text_line_with_button_row($id, $this->javascript_button_as_HTML ('Browse...', $browse_script, '{icons}buttons/browse'), $options);
+    $this->_draw_field_row ($this->_field_at ($id), $this->text_line_with_browse_button_as_html($id, $browse_script, $options), 'text-line');
   }
 
   /**
@@ -995,6 +990,39 @@ class FORM_RENDERER extends CONTROLS_RENDERER
     return $this->_text_line_as_html ($id, 'text', $options);
   }
 
+
+  /**
+   * Draw a single-line text control with a 'browse' button onto a separate row in the form.
+   *
+   * @param string $id The id of the field to render.
+   * @param string $button The button to show next to the control.
+   * @param FORM_TEXT_CONTROL_OPTIONS $options Override the default text control rendering; can be null.
+   * @param string $css_class The class to apply to the overall container.
+   * @return string
+   */
+  public function text_line_with_button_as_html($id, $button, $options = null, $css_class = 'browse')
+  {
+    $result = '<span class="' . $css_class . '">';
+    $result .= $this->text_line_as_html($id, $options);
+    $result .= $button;
+    $result .= '</span>';
+
+    return $result;
+  }
+
+  /**
+   * Draw a single-line text control with a 'browse' button onto a separate row in the form.
+   *
+   * @param string $id The id of the field to render.
+   * @param string $browse_script The script to execute from the browse button.
+   * @param FORM_TEXT_CONTROL_OPTIONS $options Override the default text control rendering; can be null.
+   * @return string
+   */
+  public function text_line_with_browse_button_as_html($id, $browse_script, $options = null)
+  {
+    return $this->text_line_with_button_as_html($id, $this->javascript_button_as_HTML ('Browse...', $browse_script, '{icons}buttons/browse'), $options);
+  }
+
   /**
    * Return HTML for a password field.
    * Commonly used to render {@link TEXT_FIELD}s.
@@ -1035,45 +1063,38 @@ class FORM_RENDERER extends CONTROLS_RENDERER
       }
     }
 
-    $Result = $this->text_line_as_html ($id, $options);
+    $js_form = $this->_form->js_form_name ();
 
-    if (isset ($Result))
+    /** @var DATE_TIME $value */
+    $value = $field->value();
+    $js_date_value = $value->as_RFC_2822();
+
+    $script = 'var ' . $id . "_field = new WEBCORE_DATE_TIME_FIELD ();\n";
+    $script .= $id . "_field.output_format = Date_format_us;\n";
+    if ($includes_time)
     {
-      $js_form = $this->_form->js_form_name ();
-
-      /** @var DATE_TIME $value */
-      $value = $field->value();
-      $js_date_value = $value->as_RFC_2822();
-
-      $script = 'var ' . $id . "_field = new WEBCORE_DATE_TIME_FIELD ();\n";
-      $script .= $id . "_field.output_format = Date_format_us;\n";
-      if ($includes_time)
-      {
-        $script .= $id . "_field.show_time = true;\n";
-      }
-
-      $script .= $id . '_field.attach (' . $js_form . '.' . $id . ");\n";
-
-      $script .= "cal = new WEBCORE_HTML_CALENDAR ();\n";
-      $script .= "cal.show_month_selector = true;\n";
-      $script .= "cal.show_now_selector = true;\n";
-      $script .= "cal.attach(" . $id . "_field);\n";
-      $script .= "cal.set_initial_date_time(new Date('" . $js_date_value . "'));\n";
-      $script .= "cal.display()";
-
-      $Result .= '<ul class="menu-items buttons"><li class="menu-trigger">';
-      $Result .= $this->javascript_button_as_html('', '', '{icons}buttons/calendar');
-      $Result .= '<div class="menu-dropdown"><div class="menu"><div class="calendar-menu-item" id="' . $id . '_field">';
-      $Result .= "<script type=\"text/javascript\">";
-      $Result .= $script;
-      $Result .= "</script>";
-      $Result .= '</div></div></div>';
-      $Result .= '</li></ul>';
-
-      return $Result;
+      $script .= $id . "_field.show_time = true;\n";
     }
-    
-    return '';
+
+    $script .= $id . '_field.attach (' . $js_form . '.' . $id . ");\n";
+
+    $script .= "cal = new WEBCORE_HTML_CALENDAR ();\n";
+    $script .= "cal.show_month_selector = true;\n";
+    $script .= "cal.show_now_selector = true;\n";
+    $script .= "cal.attach(" . $id . "_field);\n";
+    $script .= "cal.set_initial_date_time(new Date('" . $js_date_value . "'));\n";
+    $script .= "cal.display()";
+
+    $button = '<ul class="menu-items buttons"><li class="menu-trigger">';
+    $button .= $this->javascript_button_as_html('', '', '{icons}buttons/calendar');
+    $button .= '<div class="menu-dropdown"><div class="menu"><div class="calendar-menu-item" id="' . $id . '_field">';
+    $button .= "<script type=\"text/javascript\">";
+    $button .= $script;
+    $button .= "</script>";
+    $button .= '</div></div></div>';
+    $button .= '</li></ul>';
+
+    return $this->text_line_with_button_as_html($id, $button, $options);
   }
 
   /**
