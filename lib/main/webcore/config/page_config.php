@@ -330,6 +330,13 @@ class PAGE_NEWSFEED_OPTIONS
 class PAGE_TEMPLATE_OPTIONS
 {
   /**
+   * The CSS class to apply to the body.
+   * Use this to use a different layout for certain pages.
+   * @var string
+   */
+  public $css_class = '';
+
+  /**
    * Show the standard header for this page?
    * @var boolean
    */
@@ -347,12 +354,6 @@ class PAGE_TEMPLATE_OPTIONS
    */
   public $include_scripts = true;
 
-  /**
-   * JavaScript to execute when the page is loaded.
-   * @var string
-   */
-  public $body_load_script = '';
-  
   /**
    * Short title for the page (usually one word).
    * @var string

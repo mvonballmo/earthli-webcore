@@ -37,6 +37,11 @@ body
   color: @text_color;
 }
 
+iframe
+{
+  border: none;
+}
+
 p
 {
   margin: @standard_spacing 0;
@@ -69,6 +74,7 @@ table
   td
   {
     > p,
+    > div,
     > pre,
     > ul
     {
@@ -78,11 +84,15 @@ table
       }
     }
 
-    > p:last-child,
-    > pre:last-child,
-    > ul:last-child
+    > p,
+    > div,
+    > pre,
+    > ul
     {
-      margin-bottom: 0;
+      &:last-child
+      {
+        margin-bottom: 0;
+      }
     }
 
     &.numeric
@@ -619,6 +629,15 @@ pre > code
   margin-right: -@standard_spacing;
   padding-left: @standard_spacing;
   padding-right: 0;
+
+  p,
+  div
+  {
+    &:last-child
+    {
+      margin-bottom: 0;
+    }
+  }
 }
 
 .chart,
@@ -1154,18 +1173,24 @@ button + .menu-items.buttons,
   }
 }
 
-.caution p:first-child,
-.warning p:first-child,
-.error  p:first-child
+.caution,
+.warning,
+.error
 {
-  margin-top: 0;
+  p:first-child
+  {
+    margin-top: 0;
+  }
 }
 
-.caution p:last-child,
-.warning p:last-child,
-.error  p:last-child
+.caution,
+.warning,
+.error
 {
-  margin-bottom: 0;
+  p:last-child
+  {
+    margin-bottom: 0;
+  }
 }
 
 .error
@@ -1605,23 +1630,9 @@ hr
   padding-left: @standard_spacing;
 }
 
-.full-height
-{
-  height: 100%;
-  box-sizing: border-box;
-  overflow: auto;
-}
-
 .content-column
 {
   width: 75%;
-}
-
-.fill-viewport
-{
-  height: 100%;
-  width: 100%;
-  border: none;
 }
 
 .column-set
@@ -1838,6 +1849,55 @@ hr
   > tr > td
   {
     width: 20%;
+  }
+}
+
+.viewport
+{
+  display: flex;
+  height: 100%;
+
+  body,
+  .style-controls,
+  .page,
+  .main-box
+  {
+    display: flex;
+    flex: 1;
+  }
+
+  .page
+  {
+    flex-direction: column;
+  }
+
+  .page-body
+  {
+    display: flex;
+    flex: 1;
+
+    .column-set
+    {
+      display: flex;
+      flex: 1;
+
+      .left-sidebar-column
+      {
+        overflow: auto;
+      }
+
+      .content-column
+      {
+        margin-left: -@standard_spacing;  // Remove padding because the document in the iframe adds it as well
+        display: flex;
+        flex: 1;
+
+        iframe
+        {
+          flex: 1;
+        }
+      }
+    }
   }
 }
 

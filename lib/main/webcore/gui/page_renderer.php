@@ -58,27 +58,28 @@ class PAGE_RENDERER extends WEBCORE_OBJECT
   public function start_display ()
   {
     $this->display_doc_type ();
+
+    $opts = $this->page->template_options;
+    if ($opts->css_class)
+    {
+?>
+<html class="<?php echo $opts->css_class; ?>">
+<?php
+  }
+  else
+  {
 ?>
 <html>
+<?php
+  }
+?>
   <head>
   <?php
     $this->display_head ();
   ?>
   </head>
-<?php
-    $opts = $this->page->template_options;
-    if ($opts->body_load_script)
-    {
-?>
-  <body onload="<?php echo $opts->body_load_script; ?>">
-<?php
-    }
-    else
-    {
-?>
   <body>
 <?php
-    }
 
     $this->_start_body ();
   }

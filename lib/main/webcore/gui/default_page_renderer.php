@@ -152,7 +152,7 @@ class DEFAULT_PAGE_RENDERER extends WEBCORE_PAGE_RENDERER
       $this->env->logs->close_all ();
     }
 ?>
-    </div>  <!-- end of page-body -->
+    </div>
     <?php
       if ($options->footer_visible && !$browser->is(Browser_previewer))
       {
@@ -202,7 +202,7 @@ class DEFAULT_PAGE_RENDERER extends WEBCORE_PAGE_RENDERER
     <?php
       }
     ?>
-  </div>  <!-- end of page -->
+  </div>
   <?php
     parent::_finish_body();
   }
