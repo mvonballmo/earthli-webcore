@@ -1854,7 +1854,7 @@ hr
 
 .viewport
 {
-  display: flex;
+  .flex-display();
   height: 100%;
 
   body,
@@ -1862,39 +1862,42 @@ hr
   .page,
   .main-box
   {
-    display: flex;
-    flex: 1;
+    .flex-display();
+    .flex(1);
   }
 
   .page
   {
-    flex-direction: column;
+    .flex-direction(column);
   }
 
   .page-body
   {
-    display: flex;
-    flex: 1;
+    .flex-display();
+    .flex(1);
 
     .column-set
     {
-      display: flex;
-      flex: 1;
+      .flex-display();
+      .flex(1);
 
       .left-sidebar-column
       {
         overflow: auto;
+        padding-right: 0;
+        margin-right: @standard_spacing;
       }
 
       .content-column
       {
+        .flex-display();
+        .flex(1);
+
         margin-left: -@standard_spacing;  // Remove padding because the document in the iframe adds it as well
-        display: flex;
-        flex: 1;
 
         iframe
         {
-          flex: 1;
+          .flex(1);
         }
       }
     }
