@@ -121,7 +121,7 @@ class SAMPLE_FORM extends FORM
     $props->add_item('bool2', 1);
     $props->items_per_row = 4;
     $renderer->draw_check_boxes_row('Options', $props);
-    $renderer->start_row('Text');
+    $renderer->start_row('Text', 'text-line');
     $text_props = new FORM_TEXT_CONTROL_OPTIONS();
     $text_props->css_class = 'small';
     echo $renderer->date_as_html('date');
@@ -137,12 +137,11 @@ class SAMPLE_FORM extends FORM
     $props->css_class = 'small';
     $props->add_item ('Option One', 0, 'Description for option one.');
     $props->add_item ('Option Two', 1, 'Description for option two.');
-    $props->items_per_row = 2;
     $renderer->draw_radio_group_row('select', $props);
 
     $field = $this->field_at('select');
 
-    $renderer->start_row('Menus');
+    $renderer->start_row('Menus', 'text-line');
     echo $renderer->drop_down_as_html('select', $props);
     echo ' ';
     $field->required = true;

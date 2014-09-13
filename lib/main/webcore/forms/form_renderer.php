@@ -178,13 +178,6 @@ class FORM_LIST_PROPERTIES
   public $show_description_on_same_line = false;
 
   /**
-   * Style to use for the list item title.
-   * Used only if {@link $show_descriptions} is True.
-   * @var string name of a CSS class.
-   */
-  public $item_class = '';
-
-  /**
    * Extra CSS class to apply to the control.
    */
   public $css_class = '';
@@ -1203,7 +1196,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
       $css_class = '';
       if ($props->css_class)
       {
-        $css_class = ' ' . $props->css_class;
+        $css_class = $props->css_class;
       }
 
       $Result = '';
@@ -1621,6 +1614,17 @@ class FORM_RENDERER extends CONTROLS_RENDERER
 
     if (! isset ($field) || $field->visible)
     {
+      $css_class = '';
+      if ($props->css_class)
+      {
+        $css_class = $props->css_class;
+      }
+
+      if ($props->items_per_row > 1 && count($props->items) > 1)
+      {
+        $css_class .= ' multiple';
+      }
+
       $counter = 0;
       if ($id)
       {
@@ -1635,23 +1639,17 @@ class FORM_RENDERER extends CONTROLS_RENDERER
       $item_count = 0;
       foreach ($props->items as $item)
       {
-        // TODO Clean up usage of item->css_class, props->css_class
-        // TODO Add support for "guessing" whether multiple items are on the
-        //      same line and automatically adding the "multiple" CSS class
-
-        $css_class = $item->css_class ? 'form-row ' . $item->css_class : 'form-row';
+        $row_css_class = $css_class . ' ' . ($item->css_class ? 'form-row ' . $item->css_class : 'form-row');
 
         if ($Result == '')
         {
-          $Result = '<div class="' . $css_class . '">';
+          $Result = '<div class="' . $row_css_class . '">';
         }
 
-        if ($props->items_per_row >= 1)
+        $need_row_break = $item_count != 0 && $item_count % $props->items_per_row == 0;
+        if ($need_row_break)
         {
-          if ($item_count != 0 && $item_count % $props->items_per_row == 0)
-          {
-            $Result .= '</div><div class="' . $css_class . '">';
-          }
+          $Result .= '</div><div class="' . $row_css_class . '">';
         }
 
         $counter += 1;
