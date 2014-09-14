@@ -180,7 +180,7 @@ class ALBUM_APPLICATION extends APPLICATION
   /**
    * @var integer
    */
-  public $version = '3.4.0';
+  public $version = '3.5';
 
   /**
    * @param PAGE $page Page to which this application is attached.

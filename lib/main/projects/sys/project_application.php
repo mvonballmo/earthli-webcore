@@ -254,7 +254,7 @@ class PROJECT_APPLICATION extends APPLICATION
   /**
    * @var integer
    */
-  public $version = '3.4.0';
+  public $version = '3.5';
 
   /**
    * @param PAGE $page Page to which this application is attached.
@@ -384,5 +384,3 @@ class PROJECT_APPLICATION extends APPLICATION
     return __FILE__;
   }
 }
-
-?>
