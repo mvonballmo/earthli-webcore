@@ -1742,12 +1742,13 @@ class FORM_RENDERER extends CONTROLS_RENDERER
 
       $ctrl .= '>';
 
-      $label = '<label for="' . $dom_id . '">';
+      $label = '';
+
       if ($item->description && (!isset($props) || $props->show_descriptions))
       {
         if ($item->title && !ctype_space($item->title))
         {
-          $label .= '<span class="title">' . $item->title . '</span><span class="description">' . $item->description . '</span>';
+          $label .= '<label for="' . $dom_id . '"><span class="title">' . $item->title . '</span></label><label for="' . $dom_id . '"><span class="description">' . $item->description . '</span></label>';
         }
         else
         {
@@ -1756,10 +1757,10 @@ class FORM_RENDERER extends CONTROLS_RENDERER
       }
       else
       {
+        $label = '<label for="' . $dom_id . '">';
         $label .= $item->title;
+        $label .= '</label>';
       }
-
-      $label .= '</label>';
 
       if ($item->text)
       {
