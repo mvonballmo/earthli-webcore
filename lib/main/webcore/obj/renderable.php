@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage obj
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.4.0
  */
 
@@ -44,7 +44,7 @@ require_once ('webcore/obj/webcore_object.php');
  * Use the {@link handler_for()}
  * @package webcore
  * @subpackage obj
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.5.0
  * @abstract
  */

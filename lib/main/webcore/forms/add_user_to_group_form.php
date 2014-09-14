@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage forms
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.2.1
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/forms/form.php');
  * Adds a {@link USER} to a security {@link GROUP}.
  * @package webcore
  * @subpackage forms
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.2.1
  */
 class ADD_USER_TO_GROUP_FORM extends ID_BASED_FORM

@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage db
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.2.1
  */
 
@@ -70,7 +70,7 @@ define ('Msg_channel_sql', '__sql');
  * Describes a field in a physical database.
  * @package webcore
  * @subpackage db
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.2.1
  * @access private
  */
@@ -162,7 +162,7 @@ class SQL_FIELD
  * Describes a table in a physical database.
  * @package webcore
  * @subpackage db
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.2.1
  * @access private
  */
@@ -404,7 +404,7 @@ class SQL_TABLE extends WEBCORE_OBJECT
  * @see STORABLE
  * @package webcore
  * @subpackage db
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.2.1
  * @access private
  */

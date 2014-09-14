@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage db
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.2.1
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/db/comment_query.php');
  * Return {@link COMMENT}s for a {@link FOLDER}.
  * @package webcore
  * @subpackage db
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.2.1
  */
 class FOLDER_COMMENT_QUERY extends COMMENT_QUERY
@@ -126,7 +126,7 @@ class FOLDER_COMMENT_QUERY extends COMMENT_QUERY
  * Return {@link COMMENT}s for a {@link FOLDER} in a multi-type entry application.
  * @package webcore
  * @subpackage db
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.2.1
  */
 class FOLDER_MULTI_TYPE_COMMENT_QUERY extends FOLDER_COMMENT_QUERY

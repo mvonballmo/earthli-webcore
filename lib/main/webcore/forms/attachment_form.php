@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage forms
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.5.0
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/forms/object_in_folder_form.php');
  * Form that stores {@link ATTACHMENT}s.
  * @package webcore
  * @subpackage forms
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.5.0
  */
 class ATTACHMENT_FORM extends OBJECT_IN_FOLDER_FORM

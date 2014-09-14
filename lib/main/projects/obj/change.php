@@ -6,7 +6,7 @@
  * @filesource
  * @package projects
  * @subpackage obj
- * @version 3.5.0
+ * @version 3.6.0
  * @since 1.4.1
  */
 
@@ -45,7 +45,7 @@ require_once ('projects/obj/project_entry.php');
  * to {@link JOB}s.
  * @package projects
  * @subpackage obj
- * @version 3.5.0
+ * @version 3.6.0
  * @since 1.4.1
  */
 class CHANGE extends PROJECT_ENTRY
@@ -287,7 +287,7 @@ class CHANGE extends PROJECT_ENTRY
  * and to add or remove a change from a branch.
  * @package projects
  * @subpackage obj
- * @version 3.5.0
+ * @version 3.6.0
  * @since 1.4.1
  */
 class CHANGE_BRANCH_INFO extends PROJECT_ENTRY_BRANCH_INFO

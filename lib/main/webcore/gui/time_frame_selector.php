@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage gui
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.2.1
  */
 
@@ -68,7 +68,7 @@ define ('Time_frame_all', 'all');
  * available time frames as a {@link MENU}.
  * @package webcore
  * @subpackage gui
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.2.1
  */
 class TIME_FRAME_SELECTOR extends WEBCORE_OBJECT

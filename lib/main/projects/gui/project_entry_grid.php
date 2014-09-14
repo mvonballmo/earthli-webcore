@@ -6,7 +6,7 @@
    * @filesource
    * @package projects
    * @subpackage gui
-   * @version 3.5.0
+   * @version 3.6.0
    * @since 1.9.0
    */
 
@@ -43,7 +43,7 @@
    * Used as a base class only.
    * @package projects
    * @subpackage gui
-   * @version 3.5.0
+   * @version 3.6.0
    * @since 1.9.0
    */
   class PROJECT_ENTRY_GRID extends CONTENT_OBJECT_GRID
@@ -194,7 +194,7 @@
    * Display {@link PROJECT_ENTRY}s from a {@link QUERY}.
    * @package projects
    * @subpackage gui
-   * @version 3.5.0
+   * @version 3.6.0
    * @since 1.4.1
    */
   class PROJECT_ENTRY_SUMMARY_GRID extends ENTRY_SUMMARY_GRID

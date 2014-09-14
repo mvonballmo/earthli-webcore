@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage forms
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.4.0
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/forms/renderable_form.php');
  * Form that stores {@link AUDITABLE} objects.
  * @package webcore
  * @subpackage forms
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.4.0
  * @abstract
  */

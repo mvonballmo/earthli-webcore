@@ -6,7 +6,7 @@
  * @filesource
  * @package albums
  * @subpackage obj
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.5.0
  */
 
@@ -45,7 +45,7 @@ require_once ('webcore/obj/multi_type_entry.php');
  * @abstract
  * @package albums
  * @subpackage obj
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.5.0
  */
 abstract class ALBUM_ENTRY extends MULTI_TYPE_ENTRY

@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage log
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.2.1
  */
 
@@ -44,7 +44,7 @@ require_once ('webcore/log/logger.php');
  * Manages a {@link LOGGER} object internally.
  * @package webcore
  * @subpackage log
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.2.1
  */
 class LOGGABLE extends WEBCORE_OBJECT

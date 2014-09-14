@@ -6,7 +6,7 @@
  * @filesource
  * @package projects
  * @subpackage gui
- * @version 3.5.0
+ * @version 3.6.0
  * @since 1.4.1
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/gui/panel.php');
  * Display a list of {@link RELEASE}s in a {@link PANEL}.
  * @package projects
  * @subpackage gui
- * @version 3.5.0
+ * @version 3.6.0
  * @since 1.4.1
  */
 class RELEASE_PANEL extends QUERY_PANEL
@@ -113,7 +113,7 @@ class CHANGE_PANEL extends ENTRY_PANEL
  * Display a list of {@link BRANCH}es in a {@link PANEL}.
  * @package projects
  * @subpackage gui
- * @version 3.5.0
+ * @version 3.6.0
  * @since 1.4.1
  */
 class BRANCH_PANEL extends QUERY_PANEL
@@ -147,7 +147,7 @@ class BRANCH_PANEL extends QUERY_PANEL
  * Display a list of {@link COMPONENT}s in a {@link PANEL}.
  * @package projects
  * @subpackage gui
- * @version 3.5.0
+ * @version 3.6.0
  * @since 1.7.0
  */
 class COMPONENT_PANEL extends QUERY_PANEL
@@ -229,7 +229,7 @@ function restrict_to_unscheduled ($query)
  * Options used by the project {@link PANEL_MANAGER}s.
  * @package projects
  * @subpackage gui
- * @version 3.5.0
+ * @version 3.6.0
  * @since 1.9.0
  */
 class PROJECT_PANEL_OPTIONS extends PANEL_OPTIONS
@@ -260,7 +260,7 @@ class PROJECT_PANEL_OPTIONS extends PANEL_OPTIONS
  * Manage a list of {@link PANEL}s for all {@link PROJECT}s.
  * @package projects
  * @subpackage gui
- * @version 3.5.0
+ * @version 3.6.0
  * @since 1.4.1
  */
 class PROJECT_INDEX_PANEL_MANAGER extends INDEX_PANEL_MANAGER
@@ -362,7 +362,7 @@ class PROJECT_INDEX_PANEL_MANAGER extends INDEX_PANEL_MANAGER
  * Manage a list of {@link PANEL}s associated with {@link PROJECT}s.
  * @package projects
  * @subpackage gui
- * @version 3.5.0
+ * @version 3.6.0
  * @since 1.4.1
  */
 class PROJECT_FOLDER_PANEL_MANAGER extends FOLDER_PANEL_MANAGER
@@ -477,7 +477,7 @@ class PROJECT_FOLDER_PANEL_MANAGER extends FOLDER_PANEL_MANAGER
  * Manage a list of {@link PANEL}s associated with {@link PROJECT_USER}s.
  * @package projects
  * @subpackage gui
- * @version 3.5.0
+ * @version 3.6.0
  * @since 1.4.1
  */
 class PROJECT_USER_PANEL_MANAGER extends USER_PANEL_MANAGER
@@ -573,7 +573,7 @@ class PROJECT_USER_PANEL_MANAGER extends USER_PANEL_MANAGER
  * Manage a list of {@link PANEL}s associated with {@link BRANCH}es.
  * @package projects
  * @subpackage gui
- * @version 3.5.0
+ * @version 3.6.0
  * @since 1.4.1
  */
 class PROJECT_BRANCH_PANEL_MANAGER extends WEBCORE_PANEL_MANAGER
@@ -709,7 +709,7 @@ class PROJECT_BRANCH_PANEL_MANAGER extends WEBCORE_PANEL_MANAGER
  * Manage a list of {@link PANEL}s associated with {@link RELEASE}es.
  * @package projects
  * @subpackage gui
- * @version 3.5.0
+ * @version 3.6.0
  * @since 1.4.1
  */
 class PROJECT_RELEASE_PANEL_MANAGER extends WEBCORE_PANEL_MANAGER
@@ -817,7 +817,7 @@ class PROJECT_RELEASE_PANEL_MANAGER extends WEBCORE_PANEL_MANAGER
  * Manage a list of {@link PANEL}s associated with {@link PROJECT}s.
  * @package projects
  * @subpackage gui
- * @version 3.5.0
+ * @version 3.6.0
  * @since 1.4.1
  */
 class PROJECT_COMPONENT_PANEL_MANAGER extends WEBCORE_PANEL_MANAGER

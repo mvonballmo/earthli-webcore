@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage forms
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.2.1
  */
 
@@ -44,7 +44,7 @@ require_once ('webcore/forms/form.php');
  * @abstract
  * @package webcore
  * @subpackage forms
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.2.1
  */
 abstract class SUBSCRIPTION_FORM extends FORM
@@ -123,7 +123,7 @@ abstract class SUBSCRIPTION_FORM extends FORM
  * @abstract 
  * @package webcore
  * @subpackage forms
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.7.0
  */
 abstract class CONTENT_OBJECT_SUBSCRIPTION_FORM extends SUBSCRIPTION_FORM

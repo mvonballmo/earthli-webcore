@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage forms
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.5.0
  */
 
@@ -44,7 +44,7 @@ require_once ('webcore/forms/send_object_in_folder_form.php');
  * Deleting marks a database object as deleted, but does not remove it from the database.
  * @package webcore
  * @subpackage forms
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.5.0
  */
 class SEND_ATTACHMENT_FORM extends SEND_OBJECT_IN_FOLDER_FORM

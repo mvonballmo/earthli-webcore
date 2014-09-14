@@ -6,7 +6,7 @@
  * @filesource
  * @package projects
  * @subpackage forms
- * @version 3.5.0
+ * @version 3.6.0
  * @since 1.7.0
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/forms/search_fields.php');
  * Create a filter for {@link JOB}s.
  * @package projects
  * @subpackage forms
- * @version 3.5.0
+ * @version 3.6.0
  * @since 1.7.0
  */
 class SEARCH_PROJECT_ENTRY_FIELDS extends SEARCH_ENTRY_FIELDS
@@ -226,7 +226,7 @@ class SEARCH_PROJECT_ENTRY_FIELDS extends SEARCH_ENTRY_FIELDS
  * Create a filter for {@link JOB}s.
  * @package projects
  * @subpackage forms
- * @version 3.5.0
+ * @version 3.6.0
  * @since 1.7.0
  */
 class SEARCH_JOB_FIELDS extends SEARCH_PROJECT_ENTRY_FIELDS
@@ -237,7 +237,7 @@ class SEARCH_JOB_FIELDS extends SEARCH_PROJECT_ENTRY_FIELDS
  * Create a filter for {@link CHANGE}s.
  * @package projects
  * @subpackage forms
- * @version 3.5.0
+ * @version 3.6.0
  * @since 1.7.0
  */
 class SEARCH_CHANGE_FIELDS extends SEARCH_PROJECT_ENTRY_FIELDS

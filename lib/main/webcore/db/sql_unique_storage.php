@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage db
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.2.1
  */
 
@@ -44,7 +44,7 @@ require_once ('webcore/db/sql_storage.php');
  * Once the object has been created, it retrieves the id for the new object and sets the appropriate field.
  * @package webcore
  * @subpackage db
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.2.1
  * @access private
  */

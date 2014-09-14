@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage grid
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.5.0
  */
 
@@ -42,7 +42,7 @@ require_once('webcore/gui/grid.php');
  * Displays {@link SEARCH} objects from a {@link QUERY}.
  * @package webcore
  * @subpackage grid
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.5.0
  */
 class SEARCH_GRID extends STANDARD_GRID

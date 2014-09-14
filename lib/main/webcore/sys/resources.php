@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage sys
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.7.0
  */
 
@@ -63,7 +63,7 @@ require_once ('webcore/config/text_config.php');
  *
  * @package webcore
  * @subpackage sys
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.7.0
  */
 class RESOURCE_MANAGER extends RAISABLE

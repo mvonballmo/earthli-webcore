@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage grid
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.5.0
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/gui/grid.php');
  * Displays {@link ATTACHMENT}s from a {@link QUERY}.
  * @package webcore
  * @subpackage grid
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.5.0
  */
 class ATTACHMENT_GRID extends STANDARD_GRID

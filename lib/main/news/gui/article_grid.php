@@ -6,7 +6,7 @@
    * @filesource
    * @package news
    * @subpackage gui
-   * @version 3.5.0
+   * @version 3.6.0
    * @since 2.4.0
    */
 
@@ -42,7 +42,7 @@
    * Base rendering for {@link ARTICLE}s from a {@link QUERY}.
    * @package news
    * @subpackage gui
-   * @version 3.5.0
+   * @version 3.6.0
    * @since 2.7.1
    */
   class BASE_ARTICLE_GRID extends CONTENT_OBJECT_GRID
@@ -165,7 +165,7 @@
    * Display {@link ARTICLE}s from a {@link QUERY}.
    * @package news
    * @subpackage gui
-   * @version 3.5.0
+   * @version 3.6.0
    * @since 2.4.0
    */
   class ARTICLE_GRID extends BASE_ARTICLE_GRID
@@ -276,7 +276,7 @@
    * Display {@link ARTICLE}s from a {@link QUERY}.
    * @package news
    * @subpackage gui
-   * @version 3.5.0
+   * @version 3.6.0
    * @since 2.4.0
    */
   class ARTICLE_SUMMARY_GRID extends DRAFTABLE_ENTRY_SUMMARY_GRID

@@ -6,7 +6,7 @@
  * @filesource
  * @package albums
  * @subpackage gui
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.5.0
  */
 
@@ -44,7 +44,7 @@ require_once ('webcore/gui/grid.php');
  * Use only from the {@link ALBUM_FORM} to select a main picture.
  * @package albums
  * @subpackage gui
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.5.0
  */
 class SIMPLE_PICTURE_GRID extends STANDARD_GRID

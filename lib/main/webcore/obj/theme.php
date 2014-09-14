@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage obj
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.2.1
  */
 
@@ -44,7 +44,7 @@ require_once ('webcore/obj/unique_object.php');
  * Used by {@link THEMED_PAGE}.
  * @package webcore
  * @subpackage obj
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.2.1
  */
 class THEME extends UNIQUE_OBJECT

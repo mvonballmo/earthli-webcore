@@ -6,7 +6,7 @@
  * @filesource
  * @package albums
  * @subpackage gui
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.7.0
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/gui/entry_renderer.php');
  * Render details for a {@link JOURNAL}.
  * @package albums
  * @subpackage gui
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.7.0
  */
 class JOURNAL_RENDERER extends ENTRY_RENDERER
@@ -141,7 +141,7 @@ class JOURNAL_RENDERER extends ENTRY_RENDERER
  * Also renders other data with {@link ENTRY_ASSOCIATED_DATA_RENDERER}.
  * @package albums
  * @subpackage gui
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.9.0
  */
 class JOURNAL_ASSOCIATED_DATA_RENDERER extends ENTRY_ASSOCIATED_DATA_RENDERER

@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage forms
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.7.0
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/forms/purge_form.php');
  * Handles purging of {@link ATTACHMENT}s.
  * @package webcore
  * @subpackage forms
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.5.0
  */
 class PURGE_ATTACHMENT_FORM extends PURGE_OBJECT_FORM

@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage sys
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.5.0
  */
 
@@ -40,7 +40,7 @@ http://www.earthli.com/software/webcore
  * File settings used by the various file and url functions.
  * @package webcore
  * @subpackage sys
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.5.0
  */
 class FILE_OPTIONS

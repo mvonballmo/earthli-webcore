@@ -6,7 +6,7 @@
    * @filesource
    * @package albums
    * @subpackage gui
-   * @version 3.5.0
+   * @version 3.6.0
    * @since 2.5.0
    */
 
@@ -42,7 +42,7 @@
    * Display {@link JOURNAL}s from a {@link QUERY}.
    * @package albums
    * @subpackage gui
-   * @version 3.5.0
+   * @version 3.6.0
    * @since 2.5.0
    */
   class JOURNAL_GRID extends ALBUM_ENTRY_GRID
@@ -112,7 +112,7 @@
    * Display {@link JOURNAL}s from a {@link QUERY}.
    * @package albums
    * @subpackage gui
-   * @version 3.5.0
+   * @version 3.6.0
    * @since 2.5.0
    */
   class JOURNAL_SUMMARY_GRID extends ENTRY_SUMMARY_GRID

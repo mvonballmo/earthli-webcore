@@ -6,7 +6,7 @@
  * @filesource
  * @package projects
  * @subpackage db
- * @version 3.5.0
+ * @version 3.6.0
  * @since 1.4.1
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/db/user_comment_query.php');
  * Retrieves {@link COMMENT}s visible to a {@link USER}.
  * @package projects
  * @subpackage db
- * @version 3.5.0
+ * @version 3.6.0
  * @since 1.4.1
  */
 class PROJECT_USER_COMMENT_QUERY extends USER_MULTI_TYPE_COMMENT_QUERY

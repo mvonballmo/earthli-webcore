@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage text
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.7.0
  */
 
@@ -40,7 +40,7 @@ http://www.earthli.com/software/webcore
  * Creates an HTML tag string.
  * @package webcore
  * @subpackage text
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.5.0
  */
 class HTML_TAG_BUILDER
@@ -99,7 +99,7 @@ class HTML_TAG_BUILDER
  * Creates a CSS style for use as a tag property.
  * @package webcore
  * @subpackage text
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.6.1
  */
 class CSS_STYLE_BUILDER

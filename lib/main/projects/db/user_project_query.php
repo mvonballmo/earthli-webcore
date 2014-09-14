@@ -6,7 +6,7 @@
  * @filesource
  * @package projects
  * @subpackage db
- * @version 3.5.0
+ * @version 3.6.0
  * @since 1.4.1
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/db/user_folder_query.php');
  * Retrieves {@link PROJECT}s visible to a {@link PROJECT_USER}.
  * @package projects
  * @subpackage db
- * @version 3.5.0
+ * @version 3.6.0
  * @since 1.4.1
  */
 class USER_PROJECT_QUERY extends USER_FOLDER_QUERY

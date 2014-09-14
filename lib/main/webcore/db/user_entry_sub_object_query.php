@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage db
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.2.1
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/db/object_in_folder_query.php');
  * Return subobjects of an {@link ENTRY} visible to a {@link USER}.
  * @package webcore
  * @subpackage db
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.7.0
  */
 abstract class USER_ENTRY_SUB_OBJECT_QUERY extends OBJECT_IN_FOLDER_QUERY

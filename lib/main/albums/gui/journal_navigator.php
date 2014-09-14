@@ -6,7 +6,7 @@
  * @filesource
  * @package albums
  * @subpackage gui
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.9.0
  * @access private
  */
@@ -44,7 +44,7 @@ require_once ('webcore/gui/entry_navigator.php');
  * Display a list of {@link JOURNAL}s 'around' the current one.
  * @package albums
  * @subpackage gui
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.9.0
  */
 class JOURNAL_NAVIGATOR extends MULTI_TYPE_ENTRY_NAVIGATOR

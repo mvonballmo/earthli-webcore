@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage forms
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.7.1
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/forms/form.php');
  * Offers a list of tests to execute from a {@link TEST_SUITE}.
  * @package webcore
  * @subpackage forms
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.7.1
  */
 class EXECUTE_TEST_SUITE_FORM extends FORM

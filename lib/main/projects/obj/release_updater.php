@@ -6,7 +6,7 @@
  * @filesource
  * @package projects
  * @subpackage obj
- * @version 3.5.0
+ * @version 3.6.0
  * @since 1.7.0
  */
 
@@ -46,7 +46,7 @@ require_once ('webcore/obj/webcore_object.php');
  * @package projects
  * @subpackage obj
  * @access private
- * @version 3.5.0
+ * @version 3.6.0
  * @since 1.7.0
  */
 abstract class RELEASE_UPDATER extends WEBCORE_OBJECT
@@ -211,7 +211,7 @@ abstract class RELEASE_UPDATER extends WEBCORE_OBJECT
  * Manages purging of a {@link RELEASE}.
  * @package projects
  * @subpackage obj
- * @version 3.5.0
+ * @version 3.6.0
  * @since 1.7.0
  * @access private
  */
@@ -234,7 +234,7 @@ class RELEASE_PURGER extends RELEASE_UPDATER
  * entry histories properly when applying the change.
  * @package projects
  * @subpackage obj
- * @version 3.5.0
+ * @version 3.6.0
  * @since 1.7.0
  * @access private
  */
@@ -357,7 +357,7 @@ class RELEASE_SHIPPER extends RELEASE_UPDATER
  * Used when purging or shipping a release.
  * @package projects
  * @subpackage obj
- * @version 3.5.0
+ * @version 3.6.0
  * @since 1.9.0
  */
 abstract class UPDATE_RELEASE_PREVIEW_SETTINGS extends FORM_PREVIEW_SETTINGS

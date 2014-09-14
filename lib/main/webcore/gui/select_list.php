@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage grid
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.2.1
  */
 
@@ -45,7 +45,7 @@ require_once ('webcore/gui/list_grid.php');
  * multiple rows (commonly implemented with a checkbox on each row).
  * @package webcore
  * @subpackage grid
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.2.1
  */
 class SELECT_LIST extends LIST_GRID

@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage db
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.7.0
  */
 
@@ -44,7 +44,7 @@ require_once ('webcore/db/user_entry_sub_object_query.php');
  * Only supports attachments made for {@link ENTRY} objects.
  * @package webcore
  * @subpackage db
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.7.0
  */
 class USER_ATTACHMENT_QUERY extends USER_ENTRY_SUB_OBJECT_QUERY
@@ -150,7 +150,7 @@ class USER_ATTACHMENT_QUERY extends USER_ENTRY_SUB_OBJECT_QUERY
  * Only supports attachments made for {@link ENTRY} objects.
  * @package webcore
  * @subpackage db
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.7.0
  */
 class USER_MULTI_TYPE_ATTACHMENT_QUERY extends USER_ATTACHMENT_QUERY

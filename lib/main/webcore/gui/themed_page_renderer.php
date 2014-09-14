@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage page
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.2.1
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/gui/page_renderer.php');
  * Provides automated {@link THEME} support.
  * @package webcore
  * @subpackage page
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.2.1
  */
 class THEMED_PAGE_RENDERER extends PAGE_RENDERER

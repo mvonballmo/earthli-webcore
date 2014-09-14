@@ -6,7 +6,7 @@
  * @filesource
  * @package recipes
  * @subpackage gui
- * @version 3.5.0
+ * @version 3.6.0
  * @since 1.3.0
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/gui/entry_renderer.php');
  * Render details for a {@link RECIPE}.
  * @package recipes
  * @subpackage gui
- * @version 3.5.0
+ * @version 3.6.0
  * @since 1.3.0
  */
 class RECIPE_RENDERER extends DRAFTABLE_ENTRY_RENDERER

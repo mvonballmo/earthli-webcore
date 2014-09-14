@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage grid
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.2.1
  */
 
@@ -44,7 +44,7 @@ require_once ('webcore/gui/grid.php');
  * Used when creating user permissions to select a user.
  * @package webcore
  * @subpackage grid
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.2.1
  */
 class USER_BROWSER_GRID extends STANDARD_GRID

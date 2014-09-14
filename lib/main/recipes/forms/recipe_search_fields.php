@@ -6,7 +6,7 @@
  * @filesource
  * @package recipes
  * @subpackage forms
- * @version 3.5.0
+ * @version 3.6.0
  * @since 1.3.0
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/forms/search_fields.php');
  * Create a filter for {@link RECIPE}s.
  * @package recipes
  * @subpackage forms
- * @version 3.5.0
+ * @version 3.6.0
  * @since 1.5.0
  */
 class SEARCH_RECIPE_FIELDS extends SEARCH_DRAFTABLE_FIELDS

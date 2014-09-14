@@ -6,7 +6,7 @@
  * @filesource
  * @package albums
  * @subpackage gui
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.7.0
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/gui/folder_renderer.php');
  * Render details for an {@link ALBUM}.
  * @package albums
  * @subpackage gui
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.5.0
  */
 class ALBUM_RENDERER extends FOLDER_RENDERER

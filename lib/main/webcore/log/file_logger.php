@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage log
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.2.1
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/log/text_output_logger.php');
  * Records messages to file.
  * @package webcore
  * @subpackage log
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.2.1
  */
 class FILE_LOGGER extends TEXT_OUTPUT_LOGGER

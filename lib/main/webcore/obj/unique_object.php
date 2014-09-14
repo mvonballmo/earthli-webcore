@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage obj
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.2.1
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/obj/named_object.php');
  * An object with a unique id in a database
  * @package webcore
  * @subpackage obj
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.2.1
  */
 abstract class UNIQUE_OBJECT extends NAMED_OBJECT

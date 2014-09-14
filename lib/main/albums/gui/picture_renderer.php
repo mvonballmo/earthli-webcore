@@ -6,7 +6,7 @@
  * @filesource
  * @package albums
  * @subpackage gui
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.7.0
  */
 
@@ -44,7 +44,7 @@ require_once ('webcore/gui/location_renderer.php');
  * Render details for a {@link PICTURE}.
  * @package albums
  * @subpackage gui
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.7.0
  */
 class PICTURE_RENDERER extends ENTRY_RENDERER
@@ -151,7 +151,7 @@ class PICTURE_RENDERER extends ENTRY_RENDERER
  * Renders a location for a {@link PROJECT_ENTRY} into a {@link PAGE}.
  * @package albums
  * @subpackage gui
- * @version 3.5.0
+ * @version 3.6.0
  * @since 1.9.1
  */
 class PICTURE_LOCATION_RENDERER extends OBJECT_IN_FOLDER_LOCATION_RENDERER

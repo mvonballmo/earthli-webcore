@@ -6,7 +6,7 @@
  * @filesource
  * @package news
  * @subpackage command
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.8.0
  * @access private
  */
@@ -44,7 +44,7 @@ require_once ('webcore/cmd/entry_commands.php');
  * Return the commands for a {@link ARTICLE}.
  * @package news
  * @subpackage command
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.8.0
  * @access private
  */

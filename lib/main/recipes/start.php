@@ -6,7 +6,7 @@
  * @author Marco Von Ballmoos
  * @filesource
  * @package recipes
- * @version 3.5.0
+ * @version 3.6.0
  * @since 1.6.0
  */
 
@@ -45,7 +45,7 @@ require_once ('recipes/init.php');
  * {@link PAGE::register_application()} for help on customizing the
  * application creation and initialization.
  * @global RECIPE_APPLICATION $App
- * @version 3.5.0
+ * @version 3.6.0
  * @since 1.3.0
  */
 $App = $Page->make_application (Recipe_application_id, true, true);

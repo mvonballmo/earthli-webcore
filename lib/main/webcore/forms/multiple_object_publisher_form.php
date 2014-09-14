@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage forms
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.7.1
  */
 
@@ -44,7 +44,7 @@ require_once ('webcore/forms/multiple_object_action_form.php');
  * Restoring sets the entry or folder as visible again, removing the hidden or deleted flag.
  * @package webcore
  * @subpackage forms
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.7.1
  */
 class MULTIPLE_OBJECT_PUBLISHER_FORM extends MULTIPLE_OBJECT_ACTION_FORM

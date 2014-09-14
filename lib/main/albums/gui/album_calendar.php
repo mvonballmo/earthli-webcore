@@ -6,7 +6,7 @@
  * @filesource
  * @package albums
  * @subpackage gui
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.5.0
  */
 
@@ -43,7 +43,7 @@ require_once('webcore/gui/basic_calendar.php');
  * Renders {@link JOURNAL}s and {@link PICTURE}s into a calendar for an {@link ALBUM}.
  * @package albums
  * @subpackage gui
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.5.0
  */
 class ALBUM_CALENDAR extends BASIC_CALENDAR

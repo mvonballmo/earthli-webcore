@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage forms
- * @version 3.5.0
+ * @version 3.6.0
  * @since 1.7.0
  */
 
@@ -44,7 +44,7 @@ require_once ('projects/obj/release_updater.php');
  * Handles deletion of {@link RELEASE} objects.
  * @package projects
  * @subpackage forms
- * @version 3.5.0
+ * @version 3.6.0
  * @since 1.7.0
  */
 class PURGE_RELEASE_FORM extends PURGE_OBJECT_FORM
@@ -138,7 +138,7 @@ class PURGE_RELEASE_FORM extends PURGE_OBJECT_FORM
  * Represents an object to preview in a form.
  * @package projects
  * @subpackage forms
- * @version 3.5.0
+ * @version 3.6.0
  * @since 1.9.0
  */
 class PURGE_RELEASE_PREVIEW_SETTINGS extends UPDATE_RELEASE_PREVIEW_SETTINGS

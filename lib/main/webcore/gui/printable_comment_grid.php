@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage grid
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.2.1
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/gui/grid.php');
  * Displays {@link COMMENT}s from a query with support for pagination.
  * @package webcore
  * @subpackage grid
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.2.1
  */
 abstract class PRINTABLE_COMMENT_GRID extends STANDARD_GRID

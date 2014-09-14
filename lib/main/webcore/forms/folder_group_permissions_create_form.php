@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage forms
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.2.1
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/forms/folder_permissions_form.php');
  * Create {@link PERMISSIONS} for a {@link USER} in a {@link FOLDER}.
  * @package webcore
  * @subpackage forms
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.2.1
  */
 class FOLDER_GROUP_PERMISSIONS_CREATE_FORM extends FOLDER_PERMISSIONS_FORM

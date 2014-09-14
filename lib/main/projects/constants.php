@@ -4,7 +4,7 @@
  * @copyright Copyright (c) 2002-2014 Marco Von Ballmoos
  * @author Marco Von Ballmoos
  * @filesource
- * @version 3.5.0
+ * @version 3.6.0
  * @since 1.4.1
  * @package projects
  */

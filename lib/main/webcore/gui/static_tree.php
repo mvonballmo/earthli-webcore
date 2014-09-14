@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage tree
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.2.1
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/gui/tree.php');
  * Static tree rendered using simple HTML tables.
  * @package webcore
  * @subpackage tree
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.2.1
  */
 class STATIC_TREE extends HTML_TREE

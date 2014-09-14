@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage renderer
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.7.0
  */
 
@@ -147,7 +147,7 @@ define ('Menu_options_show_trigger_title_and_icon', 3);
  * Renders {@link COMMAND}s to HTML.
  * @package webcore
  * @subpackage renderer
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.7.0
  * @abstract
  */

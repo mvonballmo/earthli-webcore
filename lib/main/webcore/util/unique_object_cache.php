@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage util
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.4.0
  * @access private
  */
@@ -44,7 +44,7 @@ require_once ('webcore/util/object_cache.php');
  * Generates a {@link UNIQUE_OBJECT}'s 'context' within a list.
  * @package webcore
  * @subpackage util
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.4.0
  * @access private
  */

@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage forms
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.2.1
  */
 
@@ -44,7 +44,7 @@ require_once ('webcore/sys/security.php');
  * Create or delete {@link PERMISSIONS} for a {@link FOLDER}.
  * @package webcore
  * @subpackage forms
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.2.1
  */
 class CREATE_FOLDER_PERMISSIONS_FORM extends ID_BASED_FORM

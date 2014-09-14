@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage db
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.7.0
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/db/query.php');
  * Return a list of {@link FRAMEWORK_INFO}s.
  * @package webcore
  * @subpackage db
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.7.0
  */
 class FRAMEWORK_INFO_QUERY extends QUERY

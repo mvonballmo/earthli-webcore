@@ -6,7 +6,7 @@
  * @filesource
  * @package albums
  * @subpackage command
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.9.0
  * @access private
  */
@@ -44,7 +44,7 @@ require_once ('webcore/cmd/entry_commands.php');
  * Return the commands for a {@link JOURNAL}.
  * @package albums
  * @subpackage command
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.9.0
  * @access private
  */
@@ -73,5 +73,3 @@ class JOURNAL_COMMANDS extends ENTRY_COMMANDS
     $cmd->link = "send_journal.php?id=$entry->id";
   }
 }
-
-?>

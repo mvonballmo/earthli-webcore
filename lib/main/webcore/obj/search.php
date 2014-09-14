@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage obj
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.5.0
  */
 
@@ -83,7 +83,7 @@ require_once ('webcore/obj/content_object.php');
  * A filter for objects in the WebCore.
  * @package webcore
  * @subpackage obj
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.5.0
  * @abstract
  */
@@ -307,7 +307,7 @@ abstract class SEARCH extends CONTENT_OBJECT
  * A filter for {@link OBJECT_IN_FOLDER} objects.
  * @package webcore
  * @subpackage obj
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.5.0
  */
 abstract class OBJECT_IN_FOLDER_SEARCH extends SEARCH
@@ -333,7 +333,7 @@ abstract class OBJECT_IN_FOLDER_SEARCH extends SEARCH
  * A filter for {@link ENTRY} objects.
  * @package webcore
  * @subpackage obj
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.5.0
  */
 class ENTRY_SEARCH extends OBJECT_IN_FOLDER_SEARCH
@@ -369,7 +369,7 @@ class ENTRY_SEARCH extends OBJECT_IN_FOLDER_SEARCH
  * A filter for {@link ENTRY} objects in a multi-entry application.
  * @package webcore
  * @subpackage obj
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.7.0
  */
 class MULTI_ENTRY_SEARCH extends ENTRY_SEARCH
@@ -391,7 +391,7 @@ class MULTI_ENTRY_SEARCH extends ENTRY_SEARCH
  * A filter for {@link COMMENT}s.
  * @package webcore
  * @subpackage obj
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.5.0
  */
 class COMMENT_SEARCH extends OBJECT_IN_FOLDER_SEARCH
@@ -442,7 +442,7 @@ class COMMENT_SEARCH extends OBJECT_IN_FOLDER_SEARCH
  * A filter for {@link GROUP}s.
  * @package webcore
  * @subpackage obj
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.5.0
  */
 class GROUP_SEARCH extends SEARCH
@@ -488,7 +488,7 @@ class GROUP_SEARCH extends SEARCH
  * A filter for {@link USER}s.
  * @package webcore
  * @subpackage obj
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.5.0
  */
 class USER_SEARCH extends SEARCH
@@ -534,7 +534,7 @@ class USER_SEARCH extends SEARCH
  * A filter for {@link FOLDER}s.
  * @package webcore
  * @subpackage obj
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.5.0
  */
 class FOLDER_SEARCH extends OBJECT_IN_FOLDER_SEARCH

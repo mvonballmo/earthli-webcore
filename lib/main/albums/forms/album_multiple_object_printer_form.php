@@ -6,7 +6,7 @@
  * @filesource
  * @package albums
  * @subpackage forms
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.5.0
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/forms/multiple_object_printer_form.php');
  * Print objects from an {@link ALBUM}.
  * @package albums
  * @subpackage forms
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.5.0
  */
 class ALBUM_MULTIPLE_OBJECT_PRINTER_FORM extends MULTIPLE_OBJECT_PRINTER_FORM

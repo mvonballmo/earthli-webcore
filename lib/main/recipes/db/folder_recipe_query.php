@@ -6,7 +6,7 @@
  * @filesource
  * @package recipes
  * @subpackage db
- * @version 3.5.0
+ * @version 3.6.0
  * @since 1.3.0
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/db/folder_entry_query.php');
  * Retrieves {@link RECIPE}s related to a particular {@link RECIPE_BOOK}.
  * @package recipes
  * @subpackage db
- * @version 3.5.0
+ * @version 3.6.0
  * @since 1.3.0
  */
 class FOLDER_RECIPE_QUERY extends FOLDER_ENTRY_QUERY

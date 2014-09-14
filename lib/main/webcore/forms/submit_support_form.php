@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage forms
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.7.0
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/forms/send_mail_form.php');
  * Send information about a browser in an email.
  * @package webcore
  * @subpackage forms
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.7.0
  */
 class SUBMIT_SUPPORT_FORM extends SEND_MAIL_FORM

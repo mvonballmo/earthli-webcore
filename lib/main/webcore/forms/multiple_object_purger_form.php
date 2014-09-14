@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage forms
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.2.1
  */
 
@@ -44,7 +44,7 @@ require_once ('webcore/forms/multiple_object_action_form.php');
  * Purging removes the entry or folder and all contents from the database.
  * @package webcore
  * @subpackage forms
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.2.1
  */
 class MULTIPLE_OBJECT_PURGER_FORM extends MULTIPLE_OBJECT_ACTION_FORM

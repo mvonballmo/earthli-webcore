@@ -6,7 +6,7 @@
  * @filesource
  * @package albums
  * @subpackage forms
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.7.0
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/forms/object_in_folder_form.php');
  * Edit or create an {@link ALBUM_ENTRY}.
  * @package albums
  * @subpackage forms
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.5.0
  */
 class ALBUM_ENTRY_FORM extends ENTRY_FORM

@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage obj
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.7.0
  */
 
@@ -44,7 +44,7 @@ require_once ('webcore/obj/named_object.php');
  * This can be an {@link APPLICATION} or an {@link ENVIRONMENT}.
  * @package webcore
  * @subpackage obj
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.7.0
  */
 class FRAMEWORK_INFO extends NAMED_OBJECT
@@ -218,7 +218,7 @@ class FRAMEWORK_INFO extends NAMED_OBJECT
  * Used to display the information in the configuration page.
  * @package webcore
  * @subpackage obj
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.7.0
  */
 class APPLICATION_CONFIGURATION_INFO extends WEBCORE_OBJECT

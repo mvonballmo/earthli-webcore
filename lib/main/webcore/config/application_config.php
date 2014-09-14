@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage config
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.5.0
  */
 
@@ -43,7 +43,7 @@ http://www.earthli.com/software/webcore
  * here to make the links work correctly.
  * @package webcore
  * @subpackage config
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.2.1
  */
 class APPLICATION_PAGE_NAMES
@@ -137,7 +137,7 @@ class APPLICATION_PAGE_NAMES
  * update them here to make the application access the correct data.
  * @package webcore
  * @subpackage config
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.2.1
  */
 class APPLICATION_TABLE_NAMES
@@ -226,7 +226,7 @@ class APPLICATION_TABLE_NAMES
 /**
  * @package webcore
  * @subpackage config
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.2.1
  */
 class APPLICATION_DISPLAY_OPTIONS extends CONTEXT_DISPLAY_OPTIONS
@@ -313,7 +313,7 @@ class APPLICATION_DISPLAY_OPTIONS extends CONTEXT_DISPLAY_OPTIONS
 /**
  * @package webcore
  * @subpackage config
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.2.1
  */
 class APPLICATION_MAIL_OPTIONS extends CONTEXT_MAIL_OPTIONS
@@ -354,7 +354,7 @@ class APPLICATION_MAIL_OPTIONS extends CONTEXT_MAIL_OPTIONS
 /**
  * @package webcore
  * @subpackage config
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.2.1
  */
 class APPLICATION_USER_OPTIONS
@@ -416,7 +416,7 @@ class APPLICATION_USER_OPTIONS
 /**
  * @package webcore
  * @subpackage config
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.2.1
  */
 class APPLICATION_STORAGE_OPTIONS extends CONTEXT_STORAGE_OPTIONS

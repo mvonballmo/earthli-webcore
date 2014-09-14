@@ -6,7 +6,7 @@
  * @filesource
  * @package news
  * @subpackage sys
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.4.0
  */
 
@@ -114,7 +114,7 @@ class NEWS_APPLICATION_TABLE_NAMES extends APPLICATION_TABLE_NAMES
  * Includes a 'draft' mode for unfinished work.
  * @package news
  * @subpackage sys
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.4.0
  */
 class NEWS_APPLICATION extends DRAFTABLE_APPLICATION

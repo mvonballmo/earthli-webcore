@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage db
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.2.1
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/db/query.php');
  * Return {@link SUBSCRIBER}s (which may or may not correspond to {@link USER}s).
  * @package webcore
  * @subpackage db
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.2.1
  */
 class SUBSCRIBER_QUERY extends QUERY
@@ -88,7 +88,7 @@ class SUBSCRIBER_QUERY extends QUERY
  * Return a list of subscriptions.
  * @package webcore
  * @subpackage db
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.2.1
  */
 class SUBSCRIPTION_QUERY extends SUBSCRIBER_QUERY

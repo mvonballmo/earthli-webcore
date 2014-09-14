@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage db
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.5.0
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/db/query.php');
  * Base class for queries that return {@link OBJECT_IN_FOLDER} objects.
  * @package webcore
  * @subpackage db
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.5.0
  * @abstract
  */
@@ -180,7 +180,7 @@ abstract class OBJECT_IN_FOLDER_QUERY extends HIERARCHICAL_QUERY
  * Base class for queries based on a single folder.
  * @package webcore
  * @subpackage db
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.5.0
  * @abstract
  */

@@ -6,7 +6,7 @@
  * @filesource
  * @package projects
  * @subpackage sys
- * @version 3.5.0
+ * @version 3.6.0
  * @since 1.4.1
  */
 
@@ -44,7 +44,7 @@ require_once ('projects/sys/project_type_infos.php');
 /**
  * @package projects
  * @subpackage sys
- * @version 3.5.0
+ * @version 3.6.0
  * @since 1.4.1
  */
 class PROJECT_APPLICATION_PAGE_NAMES extends APPLICATION_PAGE_NAMES
@@ -78,7 +78,7 @@ class PROJECT_APPLICATION_PAGE_NAMES extends APPLICATION_PAGE_NAMES
 /**
  * @package projects
  * @subpackage sys
- * @version 3.5.0
+ * @version 3.6.0
  * @since 1.4.1
  */
 class PROJECT_APPLICATION_TABLE_NAMES extends APPLICATION_TABLE_NAMES
@@ -187,7 +187,7 @@ class PROJECT_APPLICATION_TABLE_NAMES extends APPLICATION_TABLE_NAMES
 /**
  * @package projects
  * @subpackage sys
- * @version 3.5.0
+ * @version 3.6.0
  * @since 1.4.1
  */
 class PROJECT_APPLICATION_XML_OPTIONS
@@ -220,7 +220,7 @@ class PROJECT_APPLICATION_XML_OPTIONS
  * {@link BRANCH}es and {@link RELEASE}s and generates {@link CHANGE_LOG}s.
  * @package projects
  * @subpackage sys
- * @version 3.5.0
+ * @version 3.6.0
  * @since 1.4.1
  */
 class PROJECT_APPLICATION extends APPLICATION

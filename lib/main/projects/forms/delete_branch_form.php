@@ -6,7 +6,7 @@
  * @filesource
  * @package projects
  * @subpackage forms
- * @version 3.5.0
+ * @version 3.6.0
  * @since 1.9.0
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/forms/delete_form.php');
  * Handles deletion a {@link BRANCH}.
  * @package projects
  * @subpackage forms
- * @version 3.5.0
+ * @version 3.6.0
  * @since 1.7.0
  */
 class DELETE_BRANCH_FORM extends DELETE_OBJECT_IN_FOLDER_FORM

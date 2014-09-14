@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage obj
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.5.0
  */
 
@@ -45,7 +45,7 @@ require_once ('webcore/obj/object_in_folder.php');
  * and {@link GROUP}s.
  * @package webcore
  * @subpackage obj
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.5.0
  */
 class ATTACHMENT extends OBJECT_IN_FOLDER

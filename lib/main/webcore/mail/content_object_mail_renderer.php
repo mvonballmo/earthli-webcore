@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage mail
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.5.0
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/mail/mail_object_renderer.php');
  * Renders mail content for {@link CONTENT_OBJECT}s.
  * @package webcore
  * @subpackage mail
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.5.0
  */
 class CONTENT_OBJECT_MAIL_RENDERER extends MAIL_OBJECT_RENDERER

@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage forms
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.7.1
  */
 
@@ -45,7 +45,7 @@ require_once ('webcore/forms/multiple_object_action_form.php');
  * published yet.
  * @package webcore
  * @subpackage forms
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.7.1
  */
 class MULTIPLE_OBJECT_QUEUER_FORM extends MULTIPLE_OBJECT_ACTION_FORM

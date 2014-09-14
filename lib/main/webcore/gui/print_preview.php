@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage gui
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.2.1
  */
 
@@ -58,7 +58,7 @@ define ('Print_comments_flat', 'flat_comments');
  * Descendants specialize the rendering to show new fields.
  * @package webcore
  * @subpackage gui
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.2.1
  * @access private
  */
@@ -199,7 +199,7 @@ class ENTRY_PRINT_RENDERER extends WEBCORE_OBJECT
  * Handles displaying lists of {@link ENTRY}s for print preview.
  * @package webcore
  * @subpackage gui
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.2.1
  */
 class PRINT_PREVIEW extends WEBCORE_OBJECT
@@ -335,7 +335,7 @@ class PRINT_PREVIEW extends WEBCORE_OBJECT
  * Printing options for {@link ENTRY} objects in a {@link FOLDER}.
  * @package webcore
  * @subpackage gui
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.5.0
  * @access private
  */

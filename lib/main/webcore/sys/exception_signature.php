@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage sys
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.6.0
  * @access private
  */
@@ -41,7 +41,7 @@ http://www.earthli.com/software/webcore
  * Information about the error condition.
  * @package webcore
  * @subpackage sys
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.5.0
  * @access private
  */

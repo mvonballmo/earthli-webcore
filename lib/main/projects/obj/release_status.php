@@ -6,7 +6,7 @@
  * @filesource
  * @package projects
  * @subpackage obj
- * @version 3.5.0
+ * @version 3.6.0
  * @since 1.8.0
  */
 
@@ -44,7 +44,7 @@ require_once ('webcore/obj/webcore_object.php');
  * Includes two {@link RELEASE_DATE_STATUS} objects, describing the testing and shipping status.
  * @package projects
  * @subpackage obj
- * @version 3.5.0
+ * @version 3.6.0
  * @since 1.8.0
  * @access private
  */
@@ -188,7 +188,7 @@ class RELEASE_STATUS extends WEBCORE_OBJECT
  * Releases have two dates: testing and shipping.
  * @package projects
  * @subpackage obj
- * @version 3.5.0
+ * @version 3.6.0
  * @since 1.8.0
  */
 class RELEASE_DATE_STATUS extends WEBCORE_OBJECT

@@ -6,7 +6,7 @@
  * @filesource
  * @package projects
  * @subpackage gui
- * @version 3.5.0
+ * @version 3.6.0
  * @since 1.4.1
  */
 
@@ -42,7 +42,7 @@ require_once('webcore/gui/folder_grid.php');
  * Display a list of {@link PROJECT}s from a {@link QUERY}.
  * @package projects
  * @subpackage gui
- * @version 3.5.0
+ * @version 3.6.0
  * @since 1.4.1
  */
 class PROJECT_GRID extends FOLDER_GRID

@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage panels
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.2.1
  */
 
@@ -43,7 +43,7 @@ require_once ('webcore/gui/panel.php');
  * Base class for subscription panels.
  * @package webcore
  * @subpackage panels
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.2.1
  * @abstract
  */
@@ -77,7 +77,7 @@ abstract class SUBSCRIPTION_PANEL extends PANEL
 /**
  * @package webcore
  * @subpackage panels
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.2.1
  * @abstract
  */
@@ -140,7 +140,7 @@ class FORM_BASED_SUBSCRIPTION_PANEL extends SUBSCRIPTION_PANEL
  * Displays {@link FOLDER}s to which one is subscribed.
  * @package webcore
  * @subpackage panels
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.2.1
  */
 class FOLDER_SUBSCRIPTION_PANEL extends FORM_BASED_SUBSCRIPTION_PANEL
@@ -213,7 +213,7 @@ class FOLDER_SUBSCRIPTION_PANEL extends FORM_BASED_SUBSCRIPTION_PANEL
  * Displays {@link ENTRY}s to which one is subscribed.
  * @package webcore
  * @subpackage panels
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.2.1
  */
 class ENTRY_SUBSCRIPTION_PANEL extends FORM_BASED_SUBSCRIPTION_PANEL
@@ -292,7 +292,7 @@ class ENTRY_SUBSCRIPTION_PANEL extends FORM_BASED_SUBSCRIPTION_PANEL
  * Displays {@link USER}s to which one is subscribed.
  * @package webcore
  * @subpackage panels
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.7.0
  */
 class USER_SUBSCRIPTION_PANEL extends FORM_BASED_SUBSCRIPTION_PANEL
@@ -353,7 +353,7 @@ class USER_SUBSCRIPTION_PANEL extends FORM_BASED_SUBSCRIPTION_PANEL
  * The {@link SUBSCRIBER} can choose HTML/Plain text email or various other settings.
  * @package webcore
  * @subpackage panels
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.4.0
  */
 class USER_SUBSCRIPTION_OPTIONS_PANEL extends FORM_BASED_SUBSCRIPTION_PANEL
@@ -392,7 +392,7 @@ class USER_SUBSCRIPTION_OPTIONS_PANEL extends FORM_BASED_SUBSCRIPTION_PANEL
  * Displays a summary of all subscription information.
  * @package webcore
  * @subpackage panels
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.4.0
  */
 class SUBSCRIPTION_SUMMARY_PANEL extends SUBSCRIPTION_PANEL
@@ -604,7 +604,7 @@ class SUBSCRIPTION_SUMMARY_PANEL extends SUBSCRIPTION_PANEL
  * Shows subscribed objects, folders and options panels.
  * @package webcore
  * @subpackage panels
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.2.1
  */
 class SUBSCRIPTION_PANEL_MANAGER extends PANEL_MANAGER

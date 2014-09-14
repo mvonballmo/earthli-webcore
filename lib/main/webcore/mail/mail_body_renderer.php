@@ -6,7 +6,7 @@
  * @filesource
  * @package webcore
  * @subpackage mail
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.2.1
  */
 
@@ -45,7 +45,7 @@ require_once ('webcore/mail/mail_renderer.php');
  * then filling in the correct headers and footers.
  * @package webcore
  * @subpackage mail
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.2.1
  */
 class MAIL_BODY_RENDERER extends MAIL_RENDERER
@@ -263,7 +263,7 @@ class MAIL_BODY_RENDERER extends MAIL_RENDERER
  * and their renderers.
  * @package webcore
  * @subpackage mail
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.2.1
  * @access private
  */

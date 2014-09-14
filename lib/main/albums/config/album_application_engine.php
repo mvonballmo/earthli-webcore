@@ -6,7 +6,7 @@
  * @filesource
  * @package albums
  * @subpackage config
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.9.0
  */
 
@@ -44,7 +44,7 @@ include_once ('webcore/config/application_engine.php');
  * Inherit from this class to customize startup for the application.
  * @package albums
  * @subpackage config
- * @version 3.5.0
+ * @version 3.6.0
  * @since 2.9.0
  */
 class ALBUM_APPLICATION_ENGINE extends APPLICATION_ENGINE
