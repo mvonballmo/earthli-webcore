@@ -200,7 +200,7 @@ abstract class NEWSFEED_RENDERER extends WEBCORE_OBJECT
      * provided which items should use to wrap their content.
      */
 
-    $class_name = $this->context->final_class_name ('NEWSFEEDER_RENDERER_OPTIONS');
+    $class_name = $this->context->final_class_name ('NEWSFEED_RENDERER_OPTIONS');
     $options = new $class_name ();
 
     $options->language = $this->language;
