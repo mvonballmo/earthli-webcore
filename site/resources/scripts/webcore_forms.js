@@ -470,7 +470,7 @@ function execute_field(url, form_name)
         {
           var error = errors[i];
 
-          error_text += "<li>[<a href='#' onclick='select_line_column_range (document.getElementById(\"" + field_name + "\"), " + error.line_number + ", " + error.column_start + ", " + error.line_number + ", " + error.column_end + ")'>line " + error.line_number + ', col ' + error.column_start + '</a>]: ' + error.message + '</li>';
+          error_text += "<li>[<a href='#' onclick='select_line_column_range (document.getElementById(\"id\"), " + error.line_number + ", " + error.column_start + ", " + error.line_number + ", " + error.column_end + ")'>line " + error.line_number + ', col ' + error.column_start + '</a>]: ' + error.message + '</li>';
         }
 
         error_text += '</ul>';
