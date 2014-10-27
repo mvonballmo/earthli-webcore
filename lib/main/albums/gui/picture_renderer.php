@@ -141,7 +141,7 @@ class PICTURE_RENDERER extends ENTRY_RENDERER
       <?php $this->_echo_html_description ($entry); ?>
     </div>
       <?php
-      $this->context->show_message('[$metrics->url] could not be displayed.');
+      $this->context->show_message('['. $metrics->url . '] could not be displayed.');
       $this->_echo_html_user_information ($entry, 'info-box-bottom');
     }
   }
@@ -178,9 +178,9 @@ class PICTURE_LOCATION_RENDERER extends OBJECT_IN_FOLDER_LOCATION_RENDERER
 
     if ($journal)
     {
-      $jrnl_query = $folder->entry_query ();
-      $jrnl = $jrnl_query->object_at_id ($journal);
-      if (isset ($jrnl))
+      $journal_query = $folder->entry_query ();
+      $journal_entry = $journal_query->object_at_id ($journal);
+      if (isset ($journal_entry))
       {
         if ($calendar)
         {
@@ -190,7 +190,7 @@ class PICTURE_LOCATION_RENDERER extends OBJECT_IN_FOLDER_LOCATION_RENDERER
         {
           $args = '';
         }
-        $this->page->location->add_object_link ($jrnl, $args);
+        $this->page->location->add_object_link ($journal_entry, $args);
       }
     }
 
