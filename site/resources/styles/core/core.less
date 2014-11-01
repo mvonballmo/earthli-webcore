@@ -571,6 +571,19 @@ pre > code
     li
     {
       padding-left: @li_indent;
+
+      p, pre, pre > code
+      {
+        &:last-child
+        {
+          margin-bottom: 0;
+        }
+
+        &:first-child
+        {
+          margin-top: 0;
+        }
+      }
     }
   }
 

@@ -366,6 +366,22 @@ pre > code .reserved {
 .text-flow ol:not([class]) li {
   padding-left: 0.5em;
 }
+.text-flow ul:not([class]) li p:last-child,
+.text-flow ol:not([class]) li p:last-child,
+.text-flow ul:not([class]) li pre:last-child,
+.text-flow ol:not([class]) li pre:last-child,
+.text-flow ul:not([class]) li pre > code:last-child,
+.text-flow ol:not([class]) li pre > code:last-child {
+  margin-bottom: 0;
+}
+.text-flow ul:not([class]) li p:first-child,
+.text-flow ol:not([class]) li p:first-child,
+.text-flow ul:not([class]) li pre:first-child,
+.text-flow ol:not([class]) li pre:first-child,
+.text-flow ul:not([class]) li pre > code:first-child,
+.text-flow ol:not([class]) li pre > code:first-child {
+  margin-top: 0;
+}
 .text-flow ul:not([class]) {
   padding-left: 1.1em;
 }
