@@ -177,6 +177,7 @@ abstract class CALENDAR extends WEBCORE_OBJECT
 
     while ((($this->_curr_year * 12) + $this->_curr_month) <= (($this->_last_year * 12) + $this->_last_month))
     {
+      $this->_page_changed();
       $current_month_has_content = $this->month_has_content ($this->_curr_month, $this->_curr_year);
       $month_displayed = $month_displayed || $current_month_has_content;
 
@@ -201,13 +202,13 @@ abstract class CALENDAR extends WEBCORE_OBJECT
       }
       else
       {
-        $this->finish_year ($this->_curr_year);
+        $this->finish_year($this->_curr_year);
         $this->_curr_month = 1;
         $this->_curr_year += 1;
 
         if ($this->_curr_year <= $this->_last_year)
         {
-          $this->start_year ($this->_curr_year);
+          $this->start_year($this->_curr_year);
         }
       }
     }
@@ -319,7 +320,7 @@ abstract class CALENDAR extends WEBCORE_OBJECT
   /**
    * Render the given months as completely empty.
    * This is only called if 'month_has_content' has returned false for one or more
-   * months in a row. This mechnism avoids showing the full calendar for uninteresting months.
+   * months in a row. This mechanism avoids showing the full calendar for uninteresting months.
    * Most representations will just show the span of missing months as text without a grid.
    * Descendants should call this method in order to clear the internal variables.
    * @access private
