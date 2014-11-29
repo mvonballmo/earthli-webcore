@@ -340,8 +340,10 @@ pre
   text-align: left;
 }
 
-pre > code
+pre > code,
+.source
 {
+  color: @code_text_color;
   display: block;
   padding-left: @standard_spacing;
   border-left: @thick_border_width solid @code_border_color;
@@ -351,11 +353,11 @@ pre > code
   {
     font-weight: bold;
   }
+}
 
-  .comment
-  {
-
-  }
+.source
+{
+  white-space: pre-wrap;
 }
 
 .chart > .chart-body > pre > code
@@ -1142,6 +1144,17 @@ button + .menu-items.buttons,
     a
     {
       display: block;
+      margin: @small_spacing;
+
+      &:first-child
+      {
+        margin-top: 0;
+      }
+
+      &:last-child
+      {
+        margin-bottom: 0;
+      }
     }
   }
 

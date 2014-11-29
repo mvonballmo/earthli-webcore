@@ -204,14 +204,20 @@ pre {
   line-height: normal;
   text-align: left;
 }
-pre > code {
+pre > code,
+.source {
+  color: #333333;
   display: block;
   padding-left: 15px;
   border-left: 6px solid #c2c2c2;
   margin: 15px 0 15px -6px;
 }
-pre > code .reserved {
+pre > code .reserved,
+.source .reserved {
   font-weight: bold;
+}
+.source {
+  white-space: pre-wrap;
 }
 .chart > .chart-body > pre > code {
   padding-left: 0;
@@ -772,6 +778,13 @@ input[type=submit] + .menu-items.buttons,
 }
 .calendar .day-content a {
   display: block;
+  margin: 5px;
+}
+.calendar .day-content a:first-child {
+  margin-top: 0;
+}
+.calendar .day-content a:last-child {
+  margin-bottom: 0;
 }
 /* @end */
 /* @group Statuses */

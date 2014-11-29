@@ -74,8 +74,37 @@ body {
   background-color: #000000;
   color: #ffffff;
 }
-code {
+code,
+.source {
   color: #a98ebd;
+}
+code .comment,
+.source .comment {
+  color: #cccccc;
+}
+code .symbol,
+.source .symbol {
+  color: #a98ebd;
+}
+code .keyword,
+.source .keyword {
+  color: #6ca7ff;
+}
+code .tag-name,
+.source .tag-name {
+  color: #6ca7ff;
+}
+code .tag,
+.source .tag {
+  color: #6ca7ff;
+}
+code .attribute-name,
+.source .attribute-name {
+  color: #3988ff;
+}
+code .attribute-value,
+.source .attribute-value {
+  color: #597094;
 }
 pre > code {
   border-color: #a98ebd;
