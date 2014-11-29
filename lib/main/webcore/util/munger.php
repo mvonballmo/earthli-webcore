@@ -223,7 +223,7 @@ class MUNGER_TOKEN
   /**
    * List of attributes found in the tag.
    * The default implementation parses out XML-style attributes, but this can be overridden.
-   * Attributes are expected in key="value" format, seperated by white-space.
+   * Attributes are expected in key="value" format, separated by white-space.
    * @return string[]
    */
   public function attributes()
@@ -240,7 +240,7 @@ class MUNGER_TOKEN
         /* There is more than just the name in this tag, so use the remainder as
            the attributes. */
 
-        $attrs_data = substr($this->tag_data(), $name_len, $this->size - $name_len);
+        $attribute_data = substr($this->tag_data(), $name_len, $this->size - $name_len);
 
         /* Now, we assume that the attributes are well-formed and XML-compliant. If
            they aren't, the behavior is undefined, but will return a list of *some*
@@ -260,7 +260,7 @@ class MUNGER_TOKEN
           [two]
         */
 
-        $attrs = explode('"', $attrs_data);
+        $attributes = explode('"', $attribute_data);
 
         /* Iterate the list, treating every even entry as an attribute name and every
            odd entry as an attribute value. Only iterate if there are at least two
@@ -269,21 +269,21 @@ class MUNGER_TOKEN
            sure that the '=' sign is removed first, then whitespace is trimmed, so that
            [attr   ="value"] is properly trimmed to [attr] instead of [attr   ]. */
 
-        $num_attrs = sizeof($attrs);
+        $attribute_count = sizeof($attributes);
         $attr_name = ''; // Compiler warning
 
-        if ($num_attrs > 1)
+        if ($attribute_count > 1)
         {
           $attr_idx = 0;
-          while ($attr_idx < $num_attrs)
+          while ($attr_idx < $attribute_count)
           {
             if ($attr_idx % 2 == 0)
             {
-              $attr_name = trim(substr($attrs[$attr_idx], 0, -1));
+              $attr_name = trim(substr($attributes[$attr_idx], 0, -1));
             }
             else
             {
-              $Result[$attr_name] = $attrs[$attr_idx];
+              $Result[$attr_name] = $attributes[$attr_idx];
             }
 
             $attr_idx += 1;

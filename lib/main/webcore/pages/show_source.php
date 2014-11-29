@@ -57,6 +57,8 @@ http://www.earthli.com/software/webcore
       if (is_file ($file_name))
       {
         $class_name = $Page->final_class_name ('HIGHLIGHTER', 'webcore/util/highlighter.php');
+
+        /** @var HIGHLIGHTER $highlighter */
         $highlighter = new $class_name ($Page);
 
         $page_text = $highlighter->file_as_html ($file_name);

@@ -219,7 +219,7 @@ abstract class OBJECT_RENDERER extends HANDLER_RENDERER
    * @abstract
    */
   protected abstract function _display_as_plain_text ($obj);
-  
+
   /**
    * Outputs the object in printable format.
    * 
@@ -298,5 +298,3 @@ class OBJECT_RENDERER_OPTIONS
     $this->right_margin = read_var ('right_margin', $this->right_margin);
   }
 }
-
-?>

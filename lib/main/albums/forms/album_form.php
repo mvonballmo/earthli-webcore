@@ -215,8 +215,10 @@ class ALBUM_FORM extends FOLDER_FORM
 
     if (! $this->value_for ('constrain_picture_size'))
     {
-      $this->set_value ('max_picture_width', $this->app->picture_options->default_max_picture_width);
-      $this->set_value ('max_picture_height', $this->app->picture_options->default_max_picture_height);
+      /** @var ALBUM_APPLICATION $app */
+      $app = $this->app;
+      $this->set_value ('max_picture_width', $app->picture_options->default_max_picture_width);
+      $this->set_value ('max_picture_height', $app->picture_options->default_max_picture_height);
     }
 
     $this->set_value ('date_style', $obj->date_style ());
@@ -432,7 +434,10 @@ class ALBUM_FORM extends FOLDER_FORM
 
 <?php
     $adjust_url_root = intval(! $this->object_exists ());
-    $parent_url = new URL ($this->_folder->url_root);
+
+    /** @var ALBUM $folder */
+    $folder = $this->_folder;
+    $parent_url = new URL ($folder->url_root);
     $parent_url->ensure_ends_with_delimiter ();
     $parent_url_root = $parent_url->path ();
 ?>

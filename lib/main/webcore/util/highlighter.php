@@ -76,6 +76,18 @@ class HIGHLIGHTER extends WEBCORE_OBJECT
   }
 
   /**
+   * Syntax-highlight the given {@link $text} as PHP.
+   * @param string $text The text to convert.
+   * @return string
+   */
+  public function text_as_html ($text)
+  {
+    $highlighter = $this->create_highlighter();
+    $highlighter->loadString($text);
+    return $highlighter->toHtml (true, $this->show_line_numbers);
+  }
+
+  /**
    * Syntax-highlight the contents of the file as PHP.
    * Use {@link url_to_file_name()} to convert a URL to a local path.
    * @see current_as_html()
@@ -84,23 +96,20 @@ class HIGHLIGHTER extends WEBCORE_OBJECT
    */
   public function file_as_html ($file_name)
   {
-    if (function_exists ('token_get_all'))
-    {
-      include_once ('third_party/aidan.dotgeek.org/PHP_Highlight.php');
-      $highlighter = new PHP_Highlight ();
-      $highlighter->link_functions = $this->link_functions;
-      $highlighter->loadFile ($file_name);
-      return $highlighter->toHtml (true, $this->show_line_numbers);
-    }
-    else
-    {
-      ob_start ();
-        highlight_file ($file_name);
-        $Result = ob_get_contents ();
-      ob_end_clean ();
-      return $Result;
-    }
+    $highlighter = $this->create_highlighter();
+    $highlighter->loadFile ($file_name);
+    return $highlighter->toHtml (true, $this->show_line_numbers);
+  }
+
+  /**
+   * @return PHP_Highlight
+   */
+  private function create_highlighter()
+  {
+    include_once('third_party/aidan.dotgeek.org/PHP_Highlight.php');
+    $highlighter = new PHP_Highlight ();
+    $highlighter->link_functions = $this->link_functions;
+
+    return $highlighter;
   }
 }
-
-?>

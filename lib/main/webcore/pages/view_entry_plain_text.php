@@ -67,6 +67,7 @@ http://www.earthli.com/software/webcore
   <div class="main-box">
     <pre class="log-box">
 <?php
+    /** @var ENTRY_RENDERER $renderer */
     $renderer = $entry->handler_for (Handler_text_renderer);
     $options = $renderer->options();
     $options->load_from_request();

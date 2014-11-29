@@ -122,6 +122,7 @@ class JOURNAL_RENDERER extends ENTRY_RENDERER
         if ($num_pics > 0)
         {
           $class_name = $this->app->final_class_name ('PICTURE_GRID', 'albums/gui/picture_grid.php');
+          /** @var PICTURE_GRID $grid */
           $grid = new $class_name ($this->app);
           $grid->description_length = 0;  // no truncation
           $grid->show_controls = false;

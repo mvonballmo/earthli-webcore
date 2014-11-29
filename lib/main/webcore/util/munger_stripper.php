@@ -42,7 +42,7 @@ require_once ('webcore/util/munger.php');
 /**
  * A munger that strips tags.
  * 
- * This is tag-stripper for tag-based syntaxes; anything in an XML-style format,
+ * This is a tag-stripper for a tag-based syntax; anything in an XML-style format,
  * with open and close tags, delineated by open and close characters for the tag data.
  * 
  * @package webcore
