@@ -113,7 +113,7 @@ abstract class CONTENT_OBJECT extends AUDITABLE
   /**
    * Return default handler objects for supported tasks.
    * @param string $handler_type Specific functionality required.
-   * @param object $options
+   * @param OBJECT_RENDERER_OPTIONS $options
    * @return object
    * @access private
    */
@@ -124,6 +124,7 @@ abstract class CONTENT_OBJECT extends AUDITABLE
       case Handler_print_renderer:
       case Handler_html_renderer:
       case Handler_text_renderer:
+      case Handler_source_renderer:
         include_once ('webcore/gui/content_object_renderer.php');
         return new CONTENT_OBJECT_RENDERER ($this->app, $options);
       case Handler_mail:
@@ -137,5 +138,3 @@ abstract class CONTENT_OBJECT extends AUDITABLE
     }
   }
 }
-
-?>

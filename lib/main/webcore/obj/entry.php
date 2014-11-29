@@ -534,6 +534,7 @@ class DRAFTABLE_ENTRY extends ENTRY
       case Handler_print_renderer:
       case Handler_html_renderer:
       case Handler_text_renderer:
+      case Handler_source_renderer:
         include_once ('webcore/gui/entry_renderer.php');
         return new DRAFTABLE_ENTRY_RENDERER ($this->app, $options);
       case Handler_rss_renderer:

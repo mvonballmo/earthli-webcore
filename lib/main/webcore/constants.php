@@ -712,6 +712,12 @@ define ('Handler_html_renderer', 'html');
 define ('Handler_text_renderer', 'text');
 
 /**
+ * Return a source format renderer.
+ * @see Handler_constants
+ */
+define ('Handler_source_renderer', 'source');
+
+/**
  * Return a pdf format renderer.
  * @see Handler_constants
  */

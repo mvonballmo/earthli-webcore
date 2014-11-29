@@ -157,6 +157,15 @@ class ENTRY_COMMANDS extends COMMANDS
     $this->append ($cmd);
 
     $cmd = $this->make_command ();
+    $cmd->id = 'source';
+    $cmd->caption = 'Source';
+    $cmd->link = "view_entry_source.php?id=$entry->id";
+    $cmd->icon = '{icons}buttons/source';
+    $cmd->executable = true;
+    $cmd->importance = Command_importance_high - Command_importance_increment * 2;
+    $this->append ($cmd);
+
+    $cmd = $this->make_command ();
     $cmd->id = 'history';
     $cmd->caption = 'History';
     $cmd->link = "view_entry_history.php?id=$entry->id";

@@ -49,6 +49,22 @@ require_once ('webcore/gui/content_object_renderer.php');
 class ENTRY_RENDERER extends CONTENT_OBJECT_RENDERER
 {
   /**
+   * @param ENTRY $obj
+   * @param OBJECT_RENDERER_OPTIONS $options
+   */
+  public function display($obj, $options = null)
+  {
+    switch ($this->handler_type)
+    {
+      case Handler_source_renderer:
+        $this->display_as_source ($obj, $options);
+        break;
+      default:
+        parent::display($obj, $options);
+    }
+  }
+
+  /**
    * Outputs the object as HTML.
    * @param ENTRY $obj
    * @access private
@@ -57,6 +73,38 @@ class ENTRY_RENDERER extends CONTENT_OBJECT_RENDERER
   {
     $this->_echo_html_user_information ($obj);
     $this->_echo_html_description ($obj);
+  }
+
+  /**
+   * Outputs the object as content source (e.g. munger text).
+   * @param ENTRY $obj
+   * @param OBJECT_RENDERER_OPTIONS $options
+   */
+  public function display_as_source ($obj, $options = null)
+  {
+    if (isset ($options))
+    {
+      $this->_options = $options;
+    }
+    $this->_display_as_source ($obj);
+  }
+
+  /**
+   * Outputs the object as content source (e.g. munger text).
+   *
+   * @param ENTRY $obj
+   * @access private
+   * @abstract
+   */
+  protected function _display_as_source ($obj)
+  {
+    include_once('webcore/util/munger_highlighter.php');
+    $highlighter = new MUNGER_HIGHLIGHTER();
+
+    echo '<h1>Title</h1>';
+    echo '<p class="source">' . $highlighter->highlight($obj->title) . '</p>';
+    echo '<h1>Description</h1>';
+    echo '<div class="source">' . $highlighter->highlight($obj->description) . '</div>';
   }
 }
 
