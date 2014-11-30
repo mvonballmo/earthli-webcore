@@ -1753,7 +1753,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
         }
         else
         {
-          $label .= $text . $item->description;
+          $label .= $text . '<label for="' . $dom_id . '">' . $item->description . '</label>';
         }
       }
       else
