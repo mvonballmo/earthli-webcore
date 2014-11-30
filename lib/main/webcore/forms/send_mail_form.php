@@ -399,7 +399,4 @@ class SEND_MAIL_FORM_PREVIEW_SETTINGS extends FORM_PREVIEW_SETTINGS
       echo '</pre>';
     }
   }
-
-  /** @var FORM */
-  private $_form;
 }

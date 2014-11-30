@@ -335,6 +335,9 @@ abstract class FORM_PREVIEW_SETTINGS extends WEBCORE_OBJECT
   }
 
   protected abstract function _display();
+
+  /** @var FORM */
+  protected $_form;
 }
 
 ?>

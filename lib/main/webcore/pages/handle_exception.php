@@ -59,12 +59,7 @@ http://www.earthli.com/software/webcore
   </div>
   <?php
   $controls_renderer = $Page->make_controls_renderer ();
-  $buttons [] = $controls_renderer->javascript_button_as_html ('Submit report', 'document.getElementById (\'update_form\').submit()', '{icons}buttons/send');
-  $buttons [] = $controls_renderer->javascript_button_as_html ('Try again', 'document.getElementById (\'retry_form\').submit()', '{icons}buttons/restore');
-  if ($Env->debug_enabled)
-  {
-    $buttons [] = $controls_renderer->javascript_button_as_html ('Debug', 'document.getElementById (\'debug_form\').submit()', '{icons}buttons/debug');
-  }
+  $buttons [] = $controls_renderer->button_as_html ('Submit report', '#submission-form', '{icons}buttons/send');
   ?>
   <p>
     <?php
@@ -72,24 +67,20 @@ http://www.earthli.com/software/webcore
     ?>
   </p>
   <?php
-  $class_name = $Page->final_class_name ('EXCEPTION_RENDERER', 'webcore/gui/exception_renderer.php');
-  /** @var $renderer EXCEPTION_RENDERER */
-  $renderer = new $class_name ($Page);
-  /** @var $options EXCEPTION_RENDERER_OPTIONS */
-  $options = $renderer->options ();
-  $options->include_page_data = true;
-  $options->include_browser_info = true;
-  $renderer->display_as_html ($sig, $options);
-
-  $retry_form_data = $sig->as_form (array(), 'retry_form');
-  echo $retry_form_data;
-
-  $debug_form_data = $sig->as_form (array ('debug' => 1), 'debug_form');
-  echo $debug_form_data;
+  if (!$form->previewing())
+  {
+    $class_name = $Page->final_class_name ('EXCEPTION_RENDERER', 'webcore/gui/exception_renderer.php');
+    /** @var $renderer EXCEPTION_RENDERER */
+    $renderer = new $class_name ($Page);
+    /** @var $options EXCEPTION_RENDERER_OPTIONS */
+    $options = $renderer->options ();
+    $options->include_page_data = true;
+    $options->include_browser_info = true;
+    $renderer->display_as_html ($sig, $options);
+  }
 ?>
-  <div class="form-content">
+  <div class="form-content" id="submission-form">
 <?php
-  $Page->show_message('By default, the report includes some browser and web site data. See the full report details for more information.', 'info');
   $form->display ();
 ?>
   </div>
