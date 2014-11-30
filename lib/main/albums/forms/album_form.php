@@ -107,7 +107,7 @@ class ALBUM_FORM extends FOLDER_FORM
     $field = new BOOLEAN_FIELD ();
     $field->id = 'constrain_picture_size';
     $field->caption = 'Display pictures as';
-    $field->description = 'Initial size for larger pictures; clicking shows it full size.';
+    $field->description = 'Constrain larger pictures to this initial size.';
     $this->add_field ($field);
 
     $field = new INTEGER_FIELD ();
@@ -497,26 +497,26 @@ class ALBUM_FORM extends FOLDER_FORM
       $props->add_item ('show_times', 1);
       $props->add_item ('is_organizational', 1);
 
-      $options = new FORM_TEXT_CONTROL_OPTIONS ();
-      $options->css_class = 'tiny';
       $item = $renderer->make_check_properties ();
       $item->title = 'constrain_picture_size';
-      $item->text = ' ' . $renderer->text_line_as_HTML ('max_picture_width', $options) . ' x ' . $renderer->text_line_as_HTML ('max_picture_height', $options);
+      $options = new FORM_TEXT_CONTROL_OPTIONS ();
+      $options->css_class = 'tiny';
+      $picture_width_control = $renderer->text_line_as_HTML('max_picture_width', $options);
+      $picture_height_control = $renderer->text_line_as_HTML('max_picture_height', $options);
+      $item->text = ' ' . $picture_width_control . ' x ' . $picture_height_control;
       $item->on_click_script = 'on_pic_size_constraint_changed (this)';
+      $item->css_class = 'text-line';
       $props->add_item_object ($item);
 
       $renderer->draw_check_boxes_row('', $props);
 
-      $renderer->start_row ();
-        echo 'Show temperatures in ';
+      $renderer->start_row ('Temperature');
         $props = $renderer->make_list_properties ();
         $props->items_per_row = 2;
         $props->add_item ('Celsius', 1);
         $props->add_item ('Fahrenheit', 0);
         echo $renderer->radio_group_as_HTML ('show_celsius', $props);
       $renderer->finish_row ();
-
-      $renderer->draw_error_row ('picture');
 
     $renderer->finish_block ();
 
