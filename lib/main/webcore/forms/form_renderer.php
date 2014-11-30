@@ -1742,29 +1742,25 @@ class FORM_RENDERER extends CONTROLS_RENDERER
 
       $ctrl .= '>';
 
+      $text = $item->text ? $item->text : '';
       $label = '';
 
       if ($item->description && (!isset($props) || $props->show_descriptions))
       {
         if ($item->title && !ctype_space($item->title))
         {
-          $label .= '<label for="' . $dom_id . '"><span class="title">' . $item->title . '</span></label><label for="' . $dom_id . '"><span class="description">' . $item->description . '</span></label>';
+          $label .= '<label for="' . $dom_id . '"><span class="title">' . $item->title . '</span></label>' .  $text . '<label for="' . $dom_id . '"><span class="description">' . $item->description . '</span></label>';
         }
         else
         {
-          $label .= $item->description;
+          $label .= $text . $item->description;
         }
       }
       else
       {
         $label = '<label for="' . $dom_id . '">';
         $label .= $item->title;
-        $label .= '</label>';
-      }
-
-      if ($item->text)
-      {
-        $label .= $item->text;
+        $label .= '</label>' . $text;
       }
 
       return $ctrl . $label;
