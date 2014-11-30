@@ -99,8 +99,8 @@ class LOG_IN_FORM extends FORM
 
     $field = new BOOLEAN_FIELD ();
     $field->id = 'remember';
-    $field->caption = 'Remember me';
-    $field->description = 'Store your user information on this computer and avoid logging in every time.';
+    $field->caption = '';
+    $field->description = 'Remember me on this machine.';
     $this->add_field ($field);
 
     $field = new TEXT_FIELD ();
