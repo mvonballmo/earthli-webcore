@@ -153,22 +153,24 @@ class PICTURE extends ALBUM_ENTRY
   public function metrics ($apply_folder_size = true, $load_image = true)
   {
     $class_name = $this->app->final_class_name ('IMAGE_METRICS', 'webcore/util/image.php');
+    /** @var IMAGE_METRICS $Result */
     $Result = new $class_name ();
     $url = $this->location (Force_root_on);
     $Result->set_url ($url->as_text (), $load_image);
 
     if ($apply_folder_size)
     {
-      $fldr = $this->parent_folder ();
-      if ($fldr->max_picture_width && $fldr->max_picture_height)
+      /** @var ALBUM $folder */
+      $folder = $this->parent_folder ();
+      if ($folder->max_picture_width && $folder->max_picture_height)
       {
         if ($load_image)
         {
-          $Result->resize_to_fit ($fldr->max_picture_width, $fldr->max_picture_height);
+          $Result->resize_to_fit ($folder->max_picture_width, $folder->max_picture_height);
         }
         else
         {
-          $Result->resize ($fldr->max_picture_width, $fldr->max_picture_height);
+          $Result->resize ($folder->max_picture_width, $folder->max_picture_height);
         }
       }
     }
@@ -233,25 +235,26 @@ class PICTURE extends ALBUM_ENTRY
    * Move the object to the specified folder.
    * If both the source and target albums are {@link Album_location_type_local},
    * then move the pictures to the new folder.
-   * @param FOLDER $fldr
+   * @param ALBUM $folder
    * @param FOLDER_OPERATION_OPTIONS $options
    */
-  protected function _move_to ($fldr, $options)
+  protected function _move_to ($folder, $options)
   {
     if ($options->update_now)
     {
+      /** @var ALBUM $parent */
       $parent = $this->parent_folder ();
       $old_location = $parent->location;
       $old_folder = url_to_folder ($parent->picture_folder_url (true));
     }
 
-    parent::_move_to ($fldr, $options);
+    parent::_move_to ($folder, $options);
 
     if ($options->update_now)
     {
-      if (($old_location == Album_location_type_local) && ($fldr->location == Album_location_type_local))
+      if (($old_location == Album_location_type_local) && ($folder->location == Album_location_type_local))
       {
-        $new_folder = url_to_folder ($fldr->picture_folder_url (true));
+        $new_folder = url_to_folder ($folder->picture_folder_url (true));
 
         if ($old_folder != $new_folder)
         {
@@ -299,25 +302,26 @@ class PICTURE extends ALBUM_ENTRY
    * Copy the object to the specified folder.
    * If both the source and target albums are {@link Album_location_type_local},
    * and they are different folders, copy the pictures to the new folder.
-   * @param FOLDER $fldr
+   * @param ALBUM $folder
    * @param FOLDER_OPERATION_OPTIONS $options
    */
-  protected function _copy_to ($fldr, $options)
+  protected function _copy_to ($folder, $options)
   {
     if ($options->update_now)
     {
+      /** @var ALBUM $parent */
       $parent = $this->parent_folder ();
       $old_location = $parent->location;
       $old_folder = url_to_folder ($parent->picture_folder_url (true));
     }
 
-    parent::_copy_to ($fldr, $options);
+    parent::_copy_to ($folder, $options);
 
     if ($options->update_now)
     {
-      if (($old_location == Album_location_type_local) && ($fldr->location == Album_location_type_local))
+      if (($old_location == Album_location_type_local) && ($folder->location == Album_location_type_local))
       {
-        $new_folder = url_to_folder ($fldr->picture_folder_url (true));
+        $new_folder = url_to_folder ($folder->picture_folder_url (true));
 
         if ($old_folder != $new_folder)
         {
@@ -389,7 +393,7 @@ class PICTURE extends ALBUM_ENTRY
   /**
    * Return default handler objects for supported tasks.
    * @param string $handler_type Specific functionality required.
-   * @param object $options
+   * @param OBJECT_RENDERER_OPTIONS $options
    * @return object
    * @access private
    */
@@ -426,5 +430,3 @@ class PICTURE extends ALBUM_ENTRY
    */
   public $type = 'picture';
 }
-
-?>

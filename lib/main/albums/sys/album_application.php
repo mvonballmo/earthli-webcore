@@ -249,7 +249,7 @@ class ALBUM_APPLICATION extends APPLICATION
 
   /**
    * The actual file system location of the application source.
-   * Copy/paste to descendents to return the correct location.
+   * Copy/paste to descendants to return the correct location.
    * @return string
    * @access private
    */
@@ -258,5 +258,3 @@ class ALBUM_APPLICATION extends APPLICATION
     return __FILE__;
   }
 }
-
-?>

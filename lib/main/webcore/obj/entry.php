@@ -486,10 +486,10 @@ class DRAFTABLE_ENTRY extends ENTRY
 
   /**
    * Copy the object to the specified folder.
-   * @param FOLDER $fldr
+   * @param FOLDER $folder
    * @param FOLDER_OPERATION_OPTIONS $options
    */
-  protected function _copy_to ($fldr, $options)
+  protected function _copy_to ($folder, $options)
   {
     if ($options->copy_as_draft)
     {
@@ -499,7 +499,7 @@ class DRAFTABLE_ENTRY extends ENTRY
     {
       $this->state = Visible;
     }
-    parent::_copy_to ($fldr, $options);
+    parent::_copy_to ($folder, $options);
   }
 
   /**
