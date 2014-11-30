@@ -72,5 +72,25 @@ class PICTURE_COMMANDS extends ENTRY_COMMANDS
     $cmd = $this->command_at ('send');
     $cmd->link = "send_picture.php?id=$entry->id";
   }
+
+  /**
+   * Add commands that edit the picture.
+   * @param PICTURE $entry
+   * @access private
+   */
+  protected function _add_editors ($entry)
+  {
+    parent::_add_editors($entry);
+
+    $last_page = urlencode ($this->env->url (Url_part_all));
+
+    $cmd = $this->make_command ();
+    $cmd->id = 'make_key_photo';
+    $cmd->caption = 'Make Key Photo';
+    $cmd->link = "make_key_photo.php?id=$entry->id&last_page=$last_page";
+    $cmd->icon = '{icons}buttons/password';
+    $cmd->executable = $this->login->is_allowed (Privilege_set_folder, Privilege_modify, $entry->parent_folder());
+    $cmd->importance = Command_importance_high;
+    $this->append ($cmd);
+  }
 }
-?>

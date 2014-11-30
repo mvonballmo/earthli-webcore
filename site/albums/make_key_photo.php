@@ -2,7 +2,7 @@
 
 /****************************************************************************
 
-Copyright (c) 2002-2014 Marco Von Ballmoos
+Copyright (c) 2014 Marco Von Ballmoos
 
 This file is part of earthli Albums.
 
@@ -24,8 +24,36 @@ For more information about the earthli Albums, visit:
 
 http://www.earthli.com/software/webcore/albums
 
-****************************************************************************/
+ ****************************************************************************/
 
-  require_once ('albums/start.php');
-  require_once ($App->page_template_for ('albums/pages/browse_picture.php'));
-?>
+require_once ('albums/start.php');
+
+$id = read_var ('id');
+$last_page = read_array_index($_GET, 'last_page');
+
+if ($id)
+{
+  $query = $App->login->all_entry_query ();
+  /** @var $obj ENTRY */
+  $obj = $query->object_at_id ($id);
+}
+
+if ($id && $last_page && $obj)
+{
+  /** @var ALBUM $folder */
+  $folder = $obj->parent_folder();
+  $Page->location->add_folder_link($folder);
+  $Page->location->add_object_link($obj);
+
+  $history_item = $folder->new_history_item ();
+  $folder->main_picture_id = $id;
+  $folder->store_if_different ($history_item);
+
+  $Env->redirect_root($last_page);
+}
+else
+{
+  $Page->start_display();
+  echo "<div class=\"error\">Could not set key photo to photo with id = [$id].</div>";
+  $Page->finish_display();
+}

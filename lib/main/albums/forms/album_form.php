@@ -112,7 +112,7 @@ class ALBUM_FORM extends FOLDER_FORM
 
     $field = new INTEGER_FIELD ();
     $field->id = 'main_picture_id';
-    $field->caption = 'Main picture';
+    $field->caption = 'Key photo';
     $field->min_value = 0;
     $field->visible = false;
     $this->add_field ($field);
@@ -328,51 +328,7 @@ class ALBUM_FORM extends FOLDER_FORM
   protected function _draw_scripts ()
   {
     parent::_draw_scripts ();
-    $js_form = $this->js_form_name ();
 ?>
-
-  function PICTURE_VALUE_FIELD ()
-  {
-  }
-  PICTURE_VALUE_FIELD.prototype = new OBJECT_VALUE_FIELD;
-
-  PICTURE_VALUE_FIELD.prototype.set_value = function (v)
-  {
-    if (this.original_value === undefined)
-    {
-      this.original_value = v;
-    }
-    else
-    {
-      if (this.original_value != v)
-      {
-        var parts = v.split ("|");
-        this.control.value = parts [0];
-        if (parts [1])
-        {
-          document.getElementById ('main_picture_image').setAttribute('src', parts [1]);
-          document.getElementById ('main_picture_image').setAttribute('style', 'display: inline');
-          document.getElementById ('main_picture_none_text').setAttribute('style', 'display: none');
-        }
-        else
-        {
-          document.getElementById ('main_picture_image').setAttribute('style', 'display: none');
-          document.getElementById ('main_picture_none_text').setAttribute('style', 'display: inline');
-        }
-        document.getElementById ('main_picture_changed').setAttribute('style', 'display: block');
-
-        this.original_value = v;
-      }
-    }
-  }
-
-  var field = new PICTURE_VALUE_FIELD ();
-  field.attach (<?php echo $js_form . '.main_picture_id'; ?>);
-  field.object_id = <?php echo $this->value_for ('id'); ?>;
-  field.width = 700;
-  field.height = 700;
-  field.page_name = 'browse_picture.php';
-
   function on_day_mode_changed (ctrl)
   {
     var form = <?php echo $this->js_form_name (); ?>;
@@ -521,7 +477,7 @@ class ALBUM_FORM extends FOLDER_FORM
     $props->add_item ('One day', Album_is_single_day, 'For parties or sporting events.');
     $props->add_item ('Several days', Album_is_span, 'For trips; both first and last day are fixed.');
     $props->add_item ('Journal', Album_is_journal, 'First day is fixed; last day is always today\'s date.');
-    $props->add_item ('Freeform', Album_is_adjusted, 'Calculated automatically from pictures and journals.');
+    $props->add_item('Free-form', Album_is_adjusted, 'Calculated automatically from pictures and journals.');
     $renderer->start_row ('');
     echo $renderer->radio_group_as_html ('date_style', $props);
     $renderer->finish_row ();
@@ -532,8 +488,6 @@ class ALBUM_FORM extends FOLDER_FORM
     $renderer->draw_error_row ('dates');
 
     $renderer->finish_block ();
-
-    $renderer->draw_submit_button_row ();
 
     $renderer->start_block ('Settings');
       $props = $renderer->make_list_properties ();
@@ -566,7 +520,7 @@ class ALBUM_FORM extends FOLDER_FORM
 
     $renderer->finish_block ();
 
-    $this->_draw_cover_picture ($renderer);
+    $this->_draw_key_photo($renderer);
 
     $renderer->draw_text_box_row ('summary');
     $renderer->draw_text_box_row ('description');
@@ -581,7 +535,7 @@ class ALBUM_FORM extends FOLDER_FORM
    * @param FORM_RENDERER $renderer
    * @access private
    */
-  protected function _draw_cover_picture ($renderer)
+  protected function _draw_key_photo($renderer)
   {
     if ($this->object_exists ())
     {
@@ -596,7 +550,8 @@ class ALBUM_FORM extends FOLDER_FORM
         $main_picture = $pic_query->object_at_id ($main_picture_id);
       }
 
-      $renderer->start_block ('Cover picture');
+      $key_photo_field = $this->field_at ('main_picture_id');
+      $renderer->start_block($key_photo_field->caption);
       $renderer->start_row ();
 
       if (isset ($main_picture))
@@ -604,28 +559,21 @@ class ALBUM_FORM extends FOLDER_FORM
         $f = $main_picture->date->formatter ();
         $f->clear_flags ();
         $title = $main_picture->title_as_plain_text () . " (" . $this->_object->format_date ($main_picture->date, $f) . ")";
-        $image_display = 'inline';
-        $text_display = 'none';
         $image_source = $main_picture->full_thumbnail_name ();
+?>
+        <p>
+          <img src="<?php echo $image_source; ?>" alt="<?php echo $title; ?>">
+        </p>
+<?php
       }
       else
       {
-        $title = '';
-        $image_display = 'none';
-        $text_display = 'inline';
-        $image_source = '';
+?>
+        <p>[None]</p>
+<?php
       }
 ?>
-      <p>
-        <span id="main_picture_none_text" style="display: <?php echo $text_display; ?>">[None]</span>
-        <img id="main_picture_image" class="frame" style="display: <?php echo $image_display; ?>" src="<?php echo $image_source; ?>" alt="<?php echo $title; ?>">
-      </p>
-      <p class="button-content">
-        <?php echo $renderer->javascript_button_as_HTML ('Browse...', 'field.show_picker ()', '{icons}buttons/browse'); ?>
-      </p>
-      <div id="main_picture_changed" style="display: none">
-        <?php $this->context->show_message('Modified - click "Save" to store changes', 'info'); ?>
-      </div>
+      <p class="info-box-bottom">To change or set the key photo, select "Make Key Photo" from a picture's command menu.</p>
   <?php
       $renderer->finish_row ();
       $renderer->finish_block ();
