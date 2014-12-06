@@ -12,8 +12,8 @@ $title = read_var ('title');
 $description = read_var ('description');
 $contentObjectId = read_var ('id');
 
-$newTitle = iconv("UTF-8", "CP1252", $title);
-$newDescription = iconv("UTF-8", "CP1252", $description);
+$newTitle = @iconv("UTF-8", "CP1252", $title);
+$newDescription = @iconv("UTF-8", "CP1252", $description);
 
 $munger = $App->html_text_formatter();
 
