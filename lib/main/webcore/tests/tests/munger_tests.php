@@ -155,9 +155,9 @@ heading</h2>\r
 \r
 ", 8);
     
-    $this->_run_validator_test ("<bq quote_style=\"none\">Content</bq>\r
-<bq quote_style=\"single\">Content</bq>\r
-<bq quote_style=\"multiple\">Content</bq>", 0);
+    $this->_run_validator_test ("<bq quote-style=\"none\">Content</bq>\r
+<bq quote-style=\"single\">Content</bq>\r
+<bq quote-style=\"multiple\">Content</bq>", 0);
     
     $this->_run_validator_test ("
 <span class=\"test\">span</span>
@@ -315,9 +315,9 @@ heading\r
 \r
 ");
     
-    $this->_run_stripper_test ("<bq quote_style=\"none\">Content</bq>\r
-<bq quote_style=\"single\">Content</bq>\r
-<bq quote_style=\"multiple\">Content</bq>", "Content\r
+    $this->_run_stripper_test ("<bq quote-style=\"none\">Content</bq>\r
+<bq quote-style=\"single\">Content</bq>\r
+<bq quote-style=\"multiple\">Content</bq>", "Content\r
 Content\r
 Content");
     

@@ -184,7 +184,7 @@ $this->_run_munger_test (
 );
 
 $this->_run_munger_test (
-  "<bq quote_style=\"none\">First Paragraph
+  "<bq quote-style=\"none\">First Paragraph
 
 Second Paragraph</bq>",
   "First Paragraph
@@ -194,7 +194,7 @@ Second Paragraph
 );
 
 $this->_run_munger_test (
-  "<bq quote_style=\"single\">First Paragraph
+  "<bq quote-style=\"single\">First Paragraph
 
 Second Paragraph</bq>",
   "\"First Paragraph
@@ -204,7 +204,7 @@ Second Paragraph\"
 );
 
 $this->_run_munger_test (
-  "<bq quote_style=\"multiple\">First Paragraph
+  "<bq quote-style=\"multiple\">First Paragraph
 
 Second Paragraph</bq>",
   "\"First Paragraph\"
@@ -214,7 +214,7 @@ Second Paragraph</bq>",
 );
 
 $this->_run_munger_test (
-  "<bq quote_style=\"multiple\">First Paragraph
+  "<bq quote-style=\"multiple\">First Paragraph
 
 Second Paragraph
 
@@ -2334,8 +2334,8 @@ $this->_run_munger_test (
 );
 
 $this->_run_munger_test (
-  "Horace Greeley likes to write in German (üöäÖ)",
-  "Horace Greeley likes to write in German (üöäÖ)"
+  "Horace Greeley likes to write in German (ï¿½ï¿½ï¿½ï¿½)",
+  "Horace Greeley likes to write in German (ï¿½ï¿½ï¿½ï¿½)"
 );
 
 $this->_run_munger_test (

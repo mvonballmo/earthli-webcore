@@ -476,7 +476,7 @@ class MUNGER_DEFAULT_TEXT_VALIDATOR extends MUNGER_BASE_VALIDATOR
     $base_tag_props = array ('class', 'style', 'author', 'href', 'source', 'date');
     $div_tag_props = array_merge ($base_tag_props, array ('caption', 'align', 'width', 'clear', 'caption-position'));
     $div_tag_info = new MUNGER_VALIDATOR_TAG_INFO (true, $div_tag_props);
-    $quote_tag_info = new MUNGER_VALIDATOR_TAG_INFO (true, array_merge ($div_tag_props, array ('quote_style')));
+    $quote_tag_info = new MUNGER_VALIDATOR_TAG_INFO (true, array_merge ($div_tag_props, array ('quote-style')));
     $asset_tag_props = array_merge ($div_tag_props, array ('title', 'src', 'format', 'attachment'));
 
     $this->register_known_tag ('h', new MUNGER_VALIDATOR_TAG_INFO (true, array ('level', 'style', 'class')));

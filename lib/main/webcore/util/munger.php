@@ -1382,11 +1382,16 @@ abstract class MUNGER_BLOCK_TRANSFORMER extends MUNGER_TRANSFORMER
     $Result = '';
     if ($value)
     {
-      $attrs = $token->attributes();
-      $Result = read_array_index($attrs, 'quote_style');
+      $attributes = $token->attributes();
+      $Result = read_array_index($attributes, 'quote-style');
       if (!$Result)
       {
-        $Result = $this->default_quote_style;
+        // Support the legacy attribute form, so that older articles still format as expected
+        $Result = read_array_index($attributes, 'quote_style');
+        if (!$Result)
+        {
+          $Result = $this->default_quote_style;
+        }
       }
     }
 

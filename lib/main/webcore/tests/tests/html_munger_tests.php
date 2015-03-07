@@ -485,7 +485,7 @@ $this->_run_munger_test (
 
 
 $this->_run_munger_test (
-  "<bq quote_style=\"none\">First Paragraph
+  "<bq quote-style=\"none\">First Paragraph
 \nSecond Paragraph</bq>",
   "<div class=\"quote quote-block\"><p>First Paragraph</p>
 <p>Second Paragraph</p>
@@ -493,7 +493,7 @@ $this->_run_munger_test (
 );
 
 $this->_run_munger_test (
-  "<bq quote_style=\"single\">First Paragraph
+  "<bq quote-style=\"single\">First Paragraph
 \nSecond Paragraph</bq>",
   "<div class=\"quote quote-block\"><p>&ldquo;First Paragraph</p>
 <p>Second Paragraph&rdquo;</p>
@@ -501,7 +501,7 @@ $this->_run_munger_test (
 );
 
 $this->_run_munger_test (
-  "<bq quote_style=\"multiple\">First Paragraph
+  "<bq quote-style=\"multiple\">First Paragraph
 \nSecond Paragraph</bq>",
   "<div class=\"quote quote-block\"><p>&ldquo;First Paragraph&rdquo;</p>
 <p>&ldquo;Second Paragraph&rdquo;</p>
@@ -509,7 +509,7 @@ $this->_run_munger_test (
 );
 
 $this->_run_munger_test (
-  "<bq quote_style=\"multiple\">First Paragraph
+  "<bq quote-style=\"multiple\">First Paragraph
 \nSecond Paragraph
 \nThird Paragraph</bq>",
   "<div class=\"quote quote-block\"><p>&ldquo;First Paragraph&rdquo;</p>
