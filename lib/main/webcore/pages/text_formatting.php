@@ -96,20 +96,19 @@ http://www.earthli.com/software/webcore
   <p>These tags look like HTML and often share a name with a similar HTML
     element, but are <em>not</em> actually HTML tags. The content you write
     is transformed to HTML when displayed in a web page, but can also be transformed
-    to plain-text - e.g. when generating a plain-text email.</p>
+    to plain-text&mdash;e.g. when generating a plain-text email.</p>
   <h1>Text</h1>
   <h2 id="exceptions">Single-line vs. Multi-line</h2>
   <p>Some fields, like object titles, are explicitly single-line and support only a
-    limited number of tags. In particular, block and image tags are not applied and
+    limited number of nested tags. If block or image tags are included, they
     are instead inserted as if they were just text. Only the <span class="highlight">&lt;b&gt;</span>,
-    <span class="highlight">&lt;i&gt;</span> and <span class="highlight">&lt;code&gt;</span>
-    tags are supported in single-line mode. If attributes are specified,
-    the tag will be rendered as text (this behavior may change in future revisions).</p>
+    <span class="highlight">&lt;i&gt;</span> and <span class="highlight">&lt;c&gt;</span>
+    tags are supported in single-line mode.</p>
   <h2 id="new_lines">Newline handling</h2>
   <p>If you are just writing unformatted text, you may treat newlines as you
     normally would; both the HTML and plain-text formatter will honor the
-    spacing you've chosen. In some cases, HTML forces extra spacing that cannot
-    be avoided - e.g. if you separate a normal text run from a pre-formatted
+    vertical spacing you've chosen. In some cases, HTML forces extra spacing that cannot
+    be avoided&mdash;e.g. if you separate a normal text run from a pre-formatted
     text run with a single newline, HTML will render this with a double newline
     because the blocks are separated by a margin. In these cases, it makes
     no difference if you use zero, one or two newlines -- there are always
@@ -246,7 +245,7 @@ http://www.earthli.com/software/webcore
     on the output format.</p>
   <p>Unknown tags are rendered as text, by default.</p>
   <h2 id="Usingastext">Using &lt; as text</h2>
-  <p>Since the content can be delimited by tags, the &lt; character must necessarily
+  <p>Since the content can be delimited by tags, the &lt; character must
     be escaped in certain circumstances. These situations have been limited
     so that you will only very rarely have to use the escaped character. The
     only time you <em>may</em> need to escape the &lt; character is if the
@@ -380,12 +379,12 @@ http://www.earthli.com/software/webcore
     <tr>
       <th>source</th>
       <td>Included in the caption by appending "(SOURCE)" wrapped in a link that goes to the root domain
-        of the <span class="highlight">href</span> value.></td>
+        of the <span class="highlight">href</span> value.</td>
     </tr>
     <tr>
       <th>caption</th>
       <td>If specified, it will be included with the block (top or bottom, depending
-        on <span class="highlight">caption-position</span>.</td>
+        on <span class="highlight">caption-position</span>).</td>
     </tr>
     <tr>
       <th>caption-position</th>
@@ -421,11 +420,11 @@ http://www.earthli.com/software/webcore
   <h2 id="generic">Generic formatting</h2>
   <p>You may also use <span class="highlight">&lt;span&gt;</span> and <span class="highlight">&lt;div&gt;</span>
     tags. In the HTML formatter, they are copied in as tags and will have
-    whatever functionality the browser gives them. They are ignored in the
+    whatever functionality the browser gives them. They are stripped by the
     plain-text formatter.</p>
   <h2 id="character">Character formatting</h2>
   <p>There are several character-formatting tags, aligned more or less with the common
-    HTML tags. These are all ignored in the plain-text formatter.</p>
+    HTML tags. These are all stripped by the plain-text formatter.</p>
   <table class="basic columns left-labels">
     <tr>
       <th>Tag</th>
@@ -521,7 +520,7 @@ http://www.earthli.com/software/webcore
   <table class="basic columns left-labels top">
     <tr>
       <th>level</th>
-      <td>Heading level, analogous to the HTML heading level. The default is 3.
+      <td>Heading level, analogous to the HTML heading level. The default is 2.
         Since headings are usually just used to distinguish between sections, you
         shouldn't often need to control the heading level.</td>
     </tr>
@@ -531,8 +530,8 @@ http://www.earthli.com/software/webcore
     <table class="basic">
       <tr>
         <td style="width: 50%">
-          <p><span class="highlight">&lt;h level="2"&gt;</span>Products<span class="highlight">&lt;/h&gt;</span></p>
-          <p><span class="highlight">&lt;h&gt;</span>earthli WebCore<span class="highlight">&lt;/h&gt;</span></p>
+          <p><span class="highlight">&lt;h&gt;</span>Products<span class="highlight">&lt;/h&gt;</span></p>
+          <p><span class="highlight">&lt;h level="3"&gt;</span>earthli WebCore<span class="highlight">&lt;/h&gt;</span></p>
         </td>
         <td style="font-size: 150%">&rarr;</td>
         <td>
@@ -1030,33 +1029,33 @@ to be
   <h2 id="quoting">Quoting</h2>
   <p>Often, you pull information from other sites. You can indicate this with
     the <span class="highlight">&lt;iq&gt;</span> (inline quote) and <span class="highlight">&lt;bq&gt;</span>
-    (block quote) tags. The inline-quote just applies formatting and coloring.
+    (block quote) tags. The inline quote just applies formatting and coloring.
     The block quote will put the text in a separate block and indent it slightly,
     while also providing theme-specific coloring and formatting.</p>
   <p>The following attributes apply to <span class="highlight">&lt;bq&gt;</span> tags.</p>
   <table class="basic columns left-labels top">
     <tr>
-      <th>quote_style</th>
+      <th>quote-style</th>
       <td>
         <p>The default value is 'default'. This parameter applies to both the HTML and the plain-text renderer.</p>
         <table class="basic columns left-labels top">
+          <tr>
+            <th>multiple</th>
+            <td>Add a quote mark at the very beginning of each each contained block/paragraph and quote mark at the
+              very of the quoted content (this is the literary quoting style).</td>
+          </tr>
           <tr>
             <th>none</th>
             <td>Do not add any quote marks. Use this when surrounding quotes for lists or code examples otherwise
               complex, quoted content just looks confusing.</td>
           </tr>
           <tr>
-            <th>default</th>
-            <td>Add a quote mark at the very beginning and very end of the quoted content.</td>
-          </tr>
-          <tr>
             <th>single</th>
             <td>Add a quote mark at the very beginning and very end of the quoted content.</td>
           </tr>
           <tr>
-            <th>multiple</th>
-            <td>Add a quote mark at the very beginning of each each contained block/paragraph and quote mark at the
-              very of the quoted content (this is the literary quoting style).</td>
+            <th>default</th>
+            <td>A synonym for multiple.</td>
           </tr>
         </table>
       </td>
@@ -1103,7 +1102,7 @@ to be
     <table class="basic">
       <tr>
         <td style="width: 50%">
-          <p>As Mark Twain once said, <span class="highlight">&lt;bq quote_style="multiple"&gt;</span>A banker is a fellow who</p>
+          <p>As Mark Twain once said, <span class="highlight">&lt;bq quote-style="multiple"&gt;</span>A banker is a fellow who</p>
           <p>lends you his umbrella when the sun is shining,</p>
           <p>but wants it back the minute it begins to rain.<span class="highlight">&lt;/bq&gt;</span></p>
         </td>
@@ -1147,7 +1146,7 @@ to be
     tag at the beginning of longer articles to provide a synopsis or a
     <abbr title="too long; didn't read">tl;dr</abbr>. In the HTML formatter, this
     translates to the 'abstract' CSS style. It is ignored in the plain-text formatter.</p>
-  <p>The <span class="highlight">&lt;quote_style&gt;</span> attribute (see <a href="#quoting">quoting</a> above)
+  <p>The <span class="highlight">&lt;quote-style&gt;</span> attribute (see <a href="#quoting">quoting</a> above)
     applies this tag as well, but the default value is <span class="highlight">none</span>.</p>
   <div class="preview">
     <h3 class="preview-title">Example</h3>
@@ -1175,8 +1174,8 @@ to be
   <p>Use the <span class="highlight">&lt;pullquote&gt;</span>
     tag throughout longer articles to highlight . In the HTML formatter, this
     translates to the 'abstract' CSS style. It is ignored in the plain-text formatter.</p>
-  <p>The <span class="highlight">&lt;quote_style&gt;</span> attribute (see <a href="#quoting">quoting</a> above)
-    applies this tag as well, but the default value is <span class="highlight">none</span>.</p>
+  <p>The <span class="highlight">&lt;quote-style&gt;</span> attribute (see <a href="#quoting">quoting</a> above)
+    applies to this tag as well, but the default value is <span class="highlight">none</span>.</p>
   <div class="preview">
     <h3 class="preview-title">Example</h3>
     <table class="basic">
@@ -1376,7 +1375,7 @@ to be
     </table>
   </div>
   <h2 id="anchors">Anchors</h2>
-  <p>Use a <span class="highlight">&lt;anchor&gt;</span> tag to provide an invisible anchor in the text to which you can link
+  <p>Use an <span class="highlight">&lt;anchor&gt;</span> tag to provide an invisible anchor in the text to which you can link
     with an <span class="highlight">&lt;a&gt;</span> tag. You can also use the attribute
     <span class="highlight">id</span> on any other tag to do the same thing, but this tag lets
     you avoid adding unnecessary begin/end tags, as shown in the example below.</p>
