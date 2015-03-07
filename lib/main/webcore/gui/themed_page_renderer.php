@@ -84,7 +84,6 @@ class THEMED_PAGE_RENDERER extends PAGE_RENDERER
     $theme = $page->theme;
 
     $res = $page->resources ();
-    $styles [] = $res->resolve_file ('{styles}core/core');
     $styles [] = $res->resolve_file ($theme->font_size_CSS_file_name);
     $styles [] = $res->resolve_file ($theme->font_name_CSS_file_name);
     $styles [] = $res->resolve_file ($theme->main_CSS_file_name);

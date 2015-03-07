@@ -28,12 +28,20 @@
   textarea
   {
     line-height: inherit;
+    background-color: @edit_control_background_color;
+    .repeated-background(@edit_control_background_url);
+    border-color: @control_border_color;
+    border-radius: @standard_border_radius;
+    padding: @standard_border_radius;
   }
 }
 
 .basic-form
 {
   line-height: @text_flow_line_height;
+  color: @form_text_color;
+  background-color: @form_background_color;
+  .repeated-background(@form_background_url);
 
   fieldset
   {
@@ -316,24 +324,31 @@ button
   padding: .4em;
   text-decoration: none;
   cursor: pointer;
-  background-color: #EEE;
-  border: @hairline_border_width solid @standard_border_color;
+  border: @hairline_border_width solid @control_border_color;
   border-radius: @standard_border_radius;
   line-height: normal;
   text-align: center;
+  background-color: @control_background_color;
+  .repeated-background(@control_background_url);
+  color: @control_text_color;
 }
 
-a.button:link, a.button:visited
+a.button
 {
-  color: #333;
-  text-decoration: none;
+  &:link,
+  &:visited
+  {
+    color: @control_text_color;
+    text-decoration: none;
+  }
 }
 
 .button:hover:not(.disabled):not(.selected),
 .style-controls button:hover:not(.disabled):not(.selected)
 {
-  border-color: darkgray;
-  background-color: #DDDDDD;
+  background-color: @control_hover_background_color;
+  .repeated-background(@control_hover_background_url);
+  border-color: @control_hover_border_color;
 }
 
 .button + .button,
@@ -360,18 +375,21 @@ select
 .button.disabled,
 .style-controls button.disabled
 {
-  color: #AAA;
-  border-color: #DDD;
   cursor: default;
+  background-color: @disabled_control_background_color;
+  .repeated-background(@disabled_control_background_url);
+  border-color: @disabled_control_border_color;
+  color: @disabled_control_text_color;
 }
 
 .button.selected,
 .style-controls button.selected
 {
   cursor: default;
-  background-color: gray;
-  border-color: #666;
-  color: white;
+  background-color: @selected_control_background_color;
+  .repeated-background(@selected_control_background_url);
+  border-color: @control_border_color;
+  color: @selected_control_text_color;
 }
 
 .button .icon,

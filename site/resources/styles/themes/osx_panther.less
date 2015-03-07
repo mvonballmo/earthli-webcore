@@ -1,29 +1,3 @@
-/****************************************************************************
-
-Copyright (c) 2002-2014 Marco Von Ballmoos
-
-This file is part of earthli WebCore.
-
-earthli WebCore is free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation; either version 2 of the License, or
-(at your option) any later version.
-
-earthli WebCore is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with earthli WebCore; if not, write to the Free Software
-Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-
-For more information about the earthli WebCore, visit:
-
-http://www.earthli.com/software/webcore
-
-****************************************************************************/
-
 @import "theme-base";
 
 @background_color: #CCC;
@@ -34,43 +8,21 @@ http://www.earthli.com/software/webcore
 @highlighted_text_color: #C8F39C;
 @selected_text_color: #366dc8;
 @edit_control_background_color: white;
-
-body
-{
-  background-image: url(osx/os_x_app_background.png);
-  background-repeat: repeat;
-}
-
-.cell-selected
-{
-  background-image: url(osx/10_percent_black.png);
-  background-repeat: repeat;
-}
-
-.cell-highlight
-{
-  background-image: url(osx/5_percent_black.png);
-  background-repeat: repeat;
-}
-
-.graph-foreground
-{
-  background-image: url(osx/graph_full.png);
-  background-repeat: repeat;
-}
+@background_url: 'osx/os_x_app_background.png';
+@cell_highlight_background_url: 'osx/5_percent_black.png';
+@cell_selected_background_url: 'osx/10_percent_black.png';
+@graph_foreground_url: 'osx/graph_full.png';
+@form_background_url: 'osx/5_percent_black.png';
 
 .chart,
 .preview
 {
-  .extruded_border(2px);
+  .extruded_border(2px, #888);
 }
 
-.basic-form,
-.basic-form-block
+.basic-form
 {
-  .engraved_border(2px);
-  background-image: url(osx/5_percent_black.png);
-  background-repeat: repeat;
+  .engraved_border(2px, #888);
   padding: @small_spacing;
 }
 
