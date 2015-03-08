@@ -311,15 +311,6 @@ class USER_FORM extends CONTENT_OBJECT_FORM
   }
 
   /**
-   * @access private
-   */
-  protected function _draw_scripts ()
-  {
-    parent::_draw_scripts ();
-    $this->_draw_icon_browser_script_for ('icon_url');
-  }
-
-  /**
    * @param FORM_RENDERER $renderer
    * @access private
    */

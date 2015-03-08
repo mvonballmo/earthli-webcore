@@ -714,6 +714,32 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * Draw a single-line text control with a 'browse' button onto a separate row in the form.
    *
    * @param string $id The id of the field to render.
+   * @param FORM_LIST_ITEM[] $items The items to include as options in the chooser.
+   * @param FORM_TEXT_CONTROL_OPTIONS $options Override the default text control rendering; can be null.
+   * @param string $css_class The class to apply to the overall container.
+   */
+  public function draw_text_line_with_chooser_row($id, $items, $options = null, $css_class = 'browse')
+  {
+    $this->_draw_field_row ($this->_field_at ($id), $this->text_line_with_chooser_as_html($id, $items, $options, $css_class), 'text-line');
+  }
+
+  /**
+   * Draw a single-line text control with a 'browse' button onto a separate row in the form.
+   *
+   * @param string $id The id of the field to render.
+   * @param NAMED_OBJECT[] $items The items to include as options in the chooser.
+   * @param FORM_TEXT_CONTROL_OPTIONS $options Override the default text control rendering; can be null.
+   * @param string $css_class The class to apply to the overall container.
+   */
+  public function draw_text_line_with_named_object_chooser_row($id, $items, $options = null, $css_class = 'browse')
+  {
+    $this->_draw_field_row ($this->_field_at ($id), $this->text_line_with_named_object_chooser_as_html($id, $items, $options, $css_class), 'text-line');
+  }
+
+  /**
+   * Draw a single-line text control with a 'browse' button onto a separate row in the form.
+   *
+   * @param string $id The id of the field to render.
    * @param string $browse_script The script to execute from the browse button.
    * @param FORM_TEXT_CONTROL_OPTIONS $options Override the default text control rendering; can be null.
    */
@@ -955,7 +981,23 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    */
   public function draw_icon_browser_row ($field_id)
   {
-    $this->draw_text_line_with_button_row($field_id, $this->javascript_button_as_HTML ('Browse...', $field_id . '_field.show_picker ()', '{icons}buttons/browse'));
+    $icon_query = $this->app->icon_query ();
+
+    /** @var ICON[] $icons */
+    $icons = $icon_query->objects();
+
+    $list_items = [];
+    foreach ($icons as $icon)
+    {
+      $list_item = new FORM_LIST_ITEM();
+      $list_item->text = $icon->id;
+      $list_item->value = $icon->url;
+      $list_item->title = $this->context->get_icon_with_text($icon->url, Sixteen_px, $icon->title_as_html());
+
+      $list_items []= $list_item;
+    }
+
+    $this->draw_text_line_with_chooser_row ($field_id, $list_items);
   }
 
   public function label_as_html($id)
@@ -983,7 +1025,6 @@ class FORM_RENDERER extends CONTROLS_RENDERER
     return $this->_text_line_as_html ($id, 'text', $options);
   }
 
-
   /**
    * Draw a single-line text control with a 'browse' button onto a separate row in the form.
    *
@@ -998,6 +1039,71 @@ class FORM_RENDERER extends CONTROLS_RENDERER
     $result = '<span class="' . $css_class . '">';
     $result .= $this->text_line_as_html($id, $options);
     $result .= $button;
+    $result .= '</span>';
+
+    return $result;
+  }
+
+  /**
+   * Draw a single-line text control with a 'browse' button onto a separate row in the form.
+   *
+   * @param string $id The id of the field to render.
+   * @param NAMED_OBJECT[] $items The items to include as options in the chooser.
+   * @param FORM_TEXT_CONTROL_OPTIONS $options Override the default text control rendering; can be null.
+   * @param string $css_class The class to apply to the overall container.
+   * @return string
+   */
+  public function text_line_with_named_object_chooser_as_html($id, $items, $options = null, $css_class = 'browse')
+  {
+    $list_items = [];
+    foreach ($items as $item)
+    {
+      $list_item = new FORM_LIST_ITEM();
+      $list_item->text = $item->title_as_plain_text();
+      $list_item->value = $list_item->text;
+      $list_item->title = $item->title_as_html();
+
+      $list_items []= $list_item;
+    }
+
+    return $this->text_line_with_chooser_as_html($id, $list_items, $options, $css_class);
+  }
+
+  /**
+   * Draw a single-line text control with a 'browse' button onto a separate row in the form.
+   *
+   * @param string $id The id of the field to render.
+   * @param FORM_LIST_ITEM[] $items The items to include as options in the chooser.
+   * @param FORM_TEXT_CONTROL_OPTIONS $options Override the default text control rendering; can be null.
+   * @param string $css_class The class to apply to the overall container.
+   * @return string
+   */
+  public function text_line_with_chooser_as_html($id, $items, $options = null, $css_class = 'browse')
+  {
+    $result = '<span class="' . $css_class . '">';
+    $result .= $this->text_line_as_html($id, $options);
+
+    $commands = new COMMANDS($this->context);
+
+    foreach ($items as $item)
+    {
+      $cmd = $commands->make_command();
+      $cmd->id = $item->text;
+      $cmd->caption = $item->title;
+      $cmd->on_click = 'set_control_value(event, \'' . $id .  '\', \'' . $item->value .'\')';
+      $cmd->link = '#';
+      $commands->append($cmd);
+    }
+
+    $menu_renderer = $this->context->make_menu_renderer();
+    $menu_renderer->set_size(Menu_size_minimal);
+    $menu_renderer->menu_class .= ' chooser';
+
+    ob_start ();
+    $menu_renderer->display($commands);
+    $result .= ob_get_contents ();
+    ob_end_clean ();
+
     $result .= '</span>';
 
     return $result;
@@ -1068,7 +1174,6 @@ class FORM_RENDERER extends CONTROLS_RENDERER
     {
       $script .= $id . "_field.show_time = true;\n";
     }
-
     $script .= $id . '_field.attach (' . $js_form . '.' . $id . ");\n";
 
     $script .= "cal = new WEBCORE_HTML_CALENDAR ();\n";

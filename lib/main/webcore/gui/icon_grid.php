@@ -63,53 +63,25 @@ class ICON_GRID extends STANDARD_GRID
   }
 
   /**
-   * Draw JavaScripts used by this grid.
-   * @access private
-   */
-  protected function _draw_scripts()
-  {
-    parent::_draw_scripts();
-    ?>
-    picker = new PICKER ();
-    picker.register (Query_string.item ('fieldid'));
-  <?php
-  }
-
-  /**
    * @param ICON $obj
    * @access private
    */
   protected function _draw_box($obj)
   {
-    if ($this->is_chooser)
-    {
-      $this->_display_start_overlay_container();
-      $this->_display_start_bottom_right_overlay($obj);
-      ?>
-      <a class="button" href="#" onclick="picker.select_value ('<?php echo $obj->url; ?>'); return false;"
-         title="Choose this icon"><?php echo $obj->title_as_html(); ?></a>
+    $this->_display_start_overlay_commands($obj);
+    $this->_draw_thumbnail($obj);
+    ?>
+    <h3>
       <?php
-      $this->_display_finish_bottom_right_overlay();
-      $this->_draw_thumbnail($obj);
-      $this->_display_finish_overlay_container();
-    }
-    else
-    {
-      $this->_display_start_overlay_commands($obj);
-      $this->_draw_thumbnail($obj);
+      echo $obj->title_as_html();
       ?>
-      <h3>
-        <?php
-        echo $obj->title_as_html();
-        ?>
-      </h3>
-      <?php
-      if ($obj->category)
-      {
-        echo "<p>{$obj->category}</p>";
-      }
-      $this->_display_finish_overlay_commands();
+    </h3>
+    <?php
+    if ($obj->category)
+    {
+      echo "<p>{$obj->category}</p>";
     }
+    $this->_display_finish_overlay_commands();
   }
 
   /**

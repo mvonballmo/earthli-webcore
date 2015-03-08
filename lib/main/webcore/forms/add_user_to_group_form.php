@@ -126,36 +126,42 @@ class ADD_USER_TO_GROUP_FORM extends ID_BASED_FORM
   }
 
   /**
-   * @access private
-   */
-  protected function _draw_scripts ()
-  {
-    parent::_draw_scripts ();
-    $js_form = $this->js_form_name ();
-?>
-  var field = new OBJECT_VALUE_FIELD ();
-  field.attach (<?php echo $js_form . '.name'; ?>);
-  field.object_id = <?php echo $this->value_for ('id'); ?>;
-  field.width = 400;
-  field.height = 600;
-  field.page_name = 'browse_group_user.php';
-<?php
-  }
-
-  /**
    * @param FORM_RENDERER $renderer
    * @access private
    */
   protected function _draw_controls ($renderer)
   {
     $renderer->start ();
-    $renderer->draw_text_line_row ('name');
 
-    $buttons [] = $renderer->javascript_button_as_HTML ('Browse...', 'field.show_picker()', '{icons}buttons/browse');
+    $user_query = $this->app->user_query ();
+    $group_query = $this->app->group_query ();
+    /** @var GROUP $group */
+    $group = $group_query->object_at_id ($this->value_for ('id'));
+
+    $group_user_query = $group->user_query ();
+    $ids = $group_user_query->indexed_objects ();
+    if (sizeof ($ids))
+    {
+      $user_query->restrict_by_op ('usr.id', array_keys ($ids), Operator_not_in);
+    }
+
+    if (read_var ('show_anon'))
+    {
+      $user_query->set_kind (Privilege_kind_anonymous);
+    }
+    else
+    {
+      $user_query->set_kind (Privilege_kind_registered);
+    }
+
+    /** @var USER[] $items */
+    $items = $user_query->objects();
+
+    $renderer->draw_text_line_with_named_object_chooser_row('name', $items);
+
     $buttons [] = $renderer->submit_button_as_HTML ();
     $renderer->draw_buttons_in_row ($buttons);
 
     $renderer->finish ();
   }
 }
-?>

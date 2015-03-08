@@ -133,23 +133,6 @@ class FOLDER_USER_PERMISSIONS_CREATE_FORM extends FOLDER_PERMISSIONS_FORM
   }
 
   /**
-   * @access private
-   */
-  protected function _draw_scripts ()
-  {
-    parent::_draw_scripts ();
-    $js_form = $this->js_form_name ();
-?>
-  var field = new OBJECT_VALUE_FIELD ();
-  field.attach (<?php echo $js_form . '.title'; ?>);
-  field.object_id = <?php echo $this->_folder->id; ?>;
-  field.width = 400;
-  field.height = 600;
-  field.page_name = 'browse_for_folder_permissions_user.php';
-<?php
-  }
-
-  /**
    * @param FORM_RENDERER $renderer
    * @param PERMISSIONS_FORMATTER $formatter
    * @access private
@@ -157,9 +140,44 @@ class FOLDER_USER_PERMISSIONS_CREATE_FORM extends FOLDER_PERMISSIONS_FORM
    */
   protected function _draw_permission_controls ($renderer, $formatter)
   {
-    $renderer->draw_text_line_with_browse_button_row ('title', 'field.show_picker()');
+    $user_query = $this->app->user_query ();
+
+    /* get the list of user ids that are already mapped in this folder. */
+
+    $folder_query = $this->app->login->folder_query ();
+    /** @var FOLDER $folder */
+    $folder = $folder_query->object_at_id ($this->value_for ('id'));
+
+    $security = $folder->security_definition ();
+    $permissions = $security->user_permissions ();
+
+    $ids = array ();
+    foreach ($permissions as $permission)
+    {
+      $ids [] = $permission->ref_id;
+    }
+    if (sizeof ($ids))
+    {
+      $user_query->restrict_by_op ('usr.id', $ids, Operator_not_in);
+    }
+
+    if (read_var ('show_anon'))
+    {
+      $user_query->set_kind (Privilege_kind_anonymous);
+    }
+    else
+    {
+      $user_query->set_kind (Privilege_kind_registered);
+    }
+
+    /** @var USER[] $users */
+    $users = $user_query->objects();
+
+    $renderer->draw_text_line_with_named_object_chooser_row ('title', $users);
 
     parent::_draw_permission_controls ($renderer, $formatter);
   }
+
+  /** @var USER */
+  private $_user;
 }
-?>

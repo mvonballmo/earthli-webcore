@@ -717,6 +717,10 @@ div.sixteen {
   background-image: url('osx/dialog_light.gif');
   background-repeat: repeat;
 }
+.menu.chooser {
+  max-height: 500px;
+  overflow: auto;
+}
 .menu > li {
   padding: 0;
   min-height: 18px;

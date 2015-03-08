@@ -139,7 +139,6 @@ class CONTROLS_RENDERER extends WEBCORE_OBJECT
    * @param $location
    * @param string $icon
    * @param string $icon_size
-   * @internal param string $action Link to go to when clicked. HTML characters should not be escaped.
    * @return string
    */
   public function button_as_html ($title, $location, $icon = '', $icon_size = Sixteen_px)

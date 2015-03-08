@@ -214,6 +214,12 @@ class MENU_RENDERER extends WEBCORE_OBJECT
   public $separator_class;
 
   /**
+   * The class to apply to the body of the drop-down container.
+   * @var string
+   */
+  public $menu_class = 'menu';
+
+  /**
    * Target frame for generated links.
    * @var string
    */
@@ -431,7 +437,7 @@ class MENU_RENDERER extends WEBCORE_OBJECT
    */
   protected function _draw_vertical_menu ($commands, $important_only)
   {
-    echo '<ul class="menu">' . "\n";
+    echo '<ul class="' . $this->menu_class . '">' . "\n";
     if ($important_only)
     {
       $this->_draw_commands ($commands, true, 'menu-item');

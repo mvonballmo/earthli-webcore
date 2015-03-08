@@ -726,6 +726,10 @@ div.sixteen {
   background-image: url('hochzeit/milkweed_paper.jpg');
   background-repeat: repeat;
 }
+.menu.chooser {
+  max-height: 500px;
+  overflow: auto;
+}
 .menu > li {
   padding: 0;
   min-height: 18px;

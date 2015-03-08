@@ -142,23 +142,6 @@ class FOLDER_GROUP_PERMISSIONS_CREATE_FORM extends FOLDER_PERMISSIONS_FORM
   }
 
   /**
-   * @access private
-   */
-  protected function _draw_scripts ()
-  {
-    parent::_draw_scripts ();
-    $js_form = $this->js_form_name ();
-?>
-  var field = new OBJECT_VALUE_FIELD ();
-  field.attach (<?php echo $js_form . '.group_name'; ?>);
-  field.object_id = <?php echo $this->_folder->id; ?>;
-  field.width = 400;
-  field.height = 300;
-  field.page_name = 'browse_for_folder_permissions_group.php';
-<?php
-  }
-
-  /**
    * @param FORM_RENDERER $renderer
    * @param PERMISSIONS_FORMATTER $formatter
    * @access private
@@ -166,9 +149,35 @@ class FOLDER_GROUP_PERMISSIONS_CREATE_FORM extends FOLDER_PERMISSIONS_FORM
    */
   protected function _draw_permission_controls ($renderer, $formatter)
   {
-    $renderer->draw_text_line_with_browse_button_row ('group_name', 'field.show_picker()');
+    $group_query = $this->app->group_query ();
+
+    /* Show only groups that do not have permission in this folder. */
+
+    $folder_query = $this->app->login->folder_query ();
+    /** @var FOLDER $folder */
+    $folder = $folder_query->object_at_id (read_var ('id'));
+
+    $security = $folder->security_definition ();
+    $permissions = $security->group_permissions ();
+
+    $ids = array ();
+    foreach ($permissions as $permission)
+    {
+      $ids [] = $permission->ref_id;
+    }
+    if (sizeof ($ids))
+    {
+      $group_query->restrict_by_op ('grp.id', $ids, Operator_not_in);
+    }
+
+    /** @var GROUP[] $groups */
+    $groups = $group_query->objects();
+
+    $renderer->draw_text_line_with_named_object_chooser_row ('group_name', $groups);
 
     parent::_draw_permission_controls ($renderer, $formatter);
   }
+
+  /** @var GROUP */
+  private $_group;
 }
-?>

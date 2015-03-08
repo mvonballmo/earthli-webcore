@@ -1432,28 +1432,6 @@ abstract class FORM extends WEBCORE_OBJECT
   protected function _draw_scripts () {}
 
   /**
-   * Create the JavaScript needed for an icon browser.
-   * @param string $id
-   * @access private
-   */
-  protected function _draw_icon_browser_script_for ($id)
-  {
-    $this->_verify_id ($id, '_draw_icon_browser_script_for');
-    $js_form = $this->js_form_name ();
-?>
-  if (<?php echo $js_form . '.' . $id; ?>)
-  {
-    var icon_url_field = new WEBCORE_VALUE_FIELD ();
-    <?php echo $id; ?>_field.attach (<?php echo $js_form . '.' . $id; ?>);
-    <?php echo $id; ?>_field.width = 600;
-    <?php echo $id; ?>_field.height = 600;
-    <?php echo $id; ?>_field.page_name = 'browse_icon.php';
-    <?php echo $id; ?>_field.set_value ('<?php echo $this->value_for ($id); ?>');
-  }
-<?php
-  }
-
-  /**
    * Draw errors for the field at 'id'
    * @param string $id
    * @param boolean $use_style Surround messages with 'error' style if True.

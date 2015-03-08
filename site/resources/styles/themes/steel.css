@@ -707,6 +707,10 @@ div.sixteen {
   border: 1px solid #6c7a8d;
   background-color: #869ebf;
 }
+.menu.chooser {
+  max-height: 500px;
+  overflow: auto;
+}
 .menu > li {
   padding: 0;
   min-height: 18px;
