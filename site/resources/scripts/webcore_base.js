@@ -42,11 +42,6 @@ function report_error(s)
   }
 }
 
-function reload_as_top()
-{
-  if (window != top) top.location.href = location.href;
-}
-
 function pad_10(value)
 {
   return value < 10 ? '0' + value : value;
@@ -57,30 +52,7 @@ function parseBool(value)
   return value == 'true';
 }
 
-/** Strips 'px' from the end of a value. */
-function convert_style_value(value)
-{
-  if (!value)
-    return 0;
-
-  if (value >= 0)
-    return value;
-  else
-  {
-    var len = value.length;
-
-    if (len)
-    {
-      if ((value.substring(len - 2, len) == "px"))
-        return value.substring(0, len - 2);
-      else
-        return value;
-    }
-    else
-      return 0;
-  }
-}
-
+//noinspection JSUnusedGlobalSymbols
 function toggle_visibility(id)
 {
   var layer_name = id + "_layer";
@@ -139,14 +111,11 @@ function QUERY_STRING()
 QUERY_STRING.prototype.item = function (s)
 {
   return this._table [s];
-}
+};
 
 var Query_string = new QUERY_STRING();
 
-/****************************************************
- * Image handling
- ****************************************************/
-
+//noinspection JSUnusedGlobalSymbols
 function open_image(url, width, height)
 {
   if (width == 0)
@@ -200,10 +169,6 @@ var Month_names = ["January", "February", "March", "April", "May", "June", "July
 var Month_short_names = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 var Weekday_names = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 var Weekday_short_names = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
-
-var Short_date_and_time = 1;
-var Short_month_and_year = 2;
-var Slashed_date = 3;
 
 /** Format 'd' using 'fmt'; uses PHP formatting directives.
  * @param d Date
@@ -271,6 +236,7 @@ function format_date_time(d, fmt)
 
 }
 
+//noinspection JSUnusedGlobalSymbols
 /** Format a date from number of seconds.
  * @param secs integer
  * @param fmt string
