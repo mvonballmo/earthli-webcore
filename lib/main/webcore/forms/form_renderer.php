@@ -986,7 +986,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
     /** @var ICON[] $icons */
     $icons = $icon_query->objects();
 
-    $list_items = [];
+    $list_items = array();
     foreach ($icons as $icon)
     {
       $list_item = new FORM_LIST_ITEM();
@@ -1055,7 +1055,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    */
   public function text_line_with_named_object_chooser_as_html($id, $items, $options = null, $css_class = 'browse')
   {
-    $list_items = [];
+    $list_items = array();
     foreach ($items as $item)
     {
       $list_item = new FORM_LIST_ITEM();
