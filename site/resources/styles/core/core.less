@@ -359,9 +359,18 @@ pre
   text-align: left;
 }
 
+code
+{
+  border: @inline_code_border_width @inline_code_border_style @inline_code_border_color;
+  background-color: @inline_code_background_color;
+  .repeated-background(@inline_code_background_url);
+}
+
 pre > code,
 .source
 {
+  background-color: transparent;
+  border: none;
   color: @code_text_color;
   display: block;
   padding-left: @standard_spacing;

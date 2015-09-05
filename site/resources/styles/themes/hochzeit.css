@@ -238,8 +238,16 @@ pre {
   line-height: normal;
   text-align: left;
 }
+code {
+  border: 1px solid #cbc2b0;
+  background-color: #fbf0c9;
+  background-image: url('hochzeit/fossil_paper_light.jpg');
+  background-repeat: repeat;
+}
 pre > code,
 .source {
+  background-color: transparent;
+  border: none;
   color: #554433;
   display: block;
   padding-left: 15px;

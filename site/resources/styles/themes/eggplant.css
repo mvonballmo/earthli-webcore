@@ -236,8 +236,14 @@ pre {
   line-height: normal;
   text-align: left;
 }
+code {
+  border: 1px solid #836b79;
+  background-color: #422842;
+}
 pre > code,
 .source {
+  background-color: transparent;
+  border: none;
   color: #eeeecc;
   display: block;
   padding-left: 15px;
