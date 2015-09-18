@@ -191,7 +191,7 @@ class FOLDER_COMMANDS extends COMMANDS
     $cmd->link = "create_entry.php?id=$folder->id";
     $cmd->icon = '{icons}buttons/new_object';
     $cmd->executable = $this->login->is_allowed (Privilege_set_entry, Privilege_create, $folder);
-    $cmd->importance = Command_importance_high;
+    $cmd->importance = Command_importance_high + Command_importance_increment;
     $this->append ($cmd);
     
     if ($folder->is_organizational ())
