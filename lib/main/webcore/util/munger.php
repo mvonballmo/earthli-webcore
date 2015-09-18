@@ -1970,8 +1970,7 @@ class MUNGER extends MUNGER_PARSER
    * @param string $name
    * @param MUNGER_REPLACER $replacer
    * @param bool $has_end_tag
-   * @internal param $MUNGER_REPLACER
-   * @access private
+   * @access protected
    */
   public function register_replacer($name, $replacer, $has_end_tag = true)
   {
