@@ -78,6 +78,13 @@
 @code_attribute_name_color: darken(@code_tag_color, 10%);
 @code_attribute_value_color: mix(@code_attribute_name_color, @standard_border_color, 30%);
 
+@inline_code_border_width: 1px;
+@inline_code_border_style: solid;
+@inline_code_border_color: @control_border_color;
+@inline_code_background_color: @control_background_color;
+@inline_code_background_url: @control_background_url;
+@inline_code_padding: @cell_spacing;
+
 @highlighted_text_color: green;
 @selected_text_color: @text_color;
 
@@ -119,6 +126,13 @@
 @message_box_text_color: #765;
 @message_box_link_color: #66C;
 
+@error_border_color: #A00000;
+@error_background_color: #FFEAEA;
+@warning_border_color: #A06000;
+@warning_background_color: #ffd08d;
+@caution_border_color: #A0A000;
+@caution_background_color: #FFFFCC;
+
 @graph_foreground_url: @selected_control_background_url;
 @graph_background_url: '';
 @graph_foreground_color: @title_color;
@@ -135,9 +149,3 @@
 @form_text_color: @text_color;
 @form_background_url: '';
 @form_background_color: transparent;
-
-@inline_code_border_width: 1px;
-@inline_code_border_style: solid;
-@inline_code_border_color: @control_border_color;
-@inline_code_background_color: @control_background_color;
-@inline_code_background_url: @control_background_url;

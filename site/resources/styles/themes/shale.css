@@ -239,6 +239,7 @@ pre {
 code {
   border: 1px solid #71777c;
   background-color: #3c4349;
+  padding: 2px;
 }
 pre > code,
 .source {
@@ -981,21 +982,26 @@ input[type=submit] + .menu-items.buttons,
   padding-left: 26px;
 }
 .error {
-  background-color: #FFEAEA;
-  border-color: #A00000;
+  background-color: #ffeaea;
+  border-color: #a00000;
 }
 .warning {
-  background-color: #f0a05d;
-  border-color: #A06000;
+  background-color: #ffd08d;
+  border-color: #a06000;
 }
 .caution {
-  background-color: #FFFFCC;
-  border-color: #A0A000;
+  background-color: #ffffcc;
+  border-color: #a0a000;
 }
-span.error,
-span.caution,
-span.warning {
+span .error,
+span .warning,
+span .caution {
   padding: 1px;
+}
+div .error,
+div .warning,
+div .caution {
+  padding: 15px;
 }
 .highlight {
   font-weight: normal;
@@ -1115,7 +1121,7 @@ blockquote p:first-child,
 }
 .auto-content-inline {
   display: block;
-  line-height: 0px;
+  line-height: 0;
 }
 .auto-content-caption {
   padding-top: 5px;
