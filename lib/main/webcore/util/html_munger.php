@@ -2326,11 +2326,11 @@ class HTML_TEXT_MUNGER extends HTML_BASE_MUNGER
     $this->register_transformer ('div', $block_transformer);
     $this->register_replacer ('div', new HTML_DIV_REPLACER ());
     $this->register_transformer ('info', $block_transformer);
-    $this->register_replacer ('info', new MUNGER_BASIC_REPLACER ($page->get_begin_message('info', 'p'), $page->get_end_message('p')));
+    $this->register_replacer ('info', new HTML_DIV_REPLACER('caution'));
     $this->register_transformer ('warning', $block_transformer);
-    $this->register_replacer ('warning', new MUNGER_BASIC_REPLACER ($page->get_begin_message('warning', 'p'), $page->get_end_message('p')));
+    $this->register_replacer ('warning', new HTML_DIV_REPLACER('warning')); // new MUNGER_BASIC_REPLACER ($page->get_begin_message('warning', 'div'), $page->get_end_message('div'))
     $this->register_transformer ('error', $block_transformer);
-    $this->register_replacer ('error', new MUNGER_BASIC_REPLACER ($page->get_begin_message('error', 'p'), $page->get_end_message('p')));
+    $this->register_replacer ('error', new HTML_DIV_REPLACER('error'));
     $this->register_transformer ('div', $block_transformer);
     $this->register_replacer ('clear', new MUNGER_BASIC_REPLACER ('<span class="clear-both"></span>', ''));
     $this->register_transformer ('pre', $nop_transformer);
