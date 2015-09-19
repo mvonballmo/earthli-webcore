@@ -959,9 +959,6 @@ input[type=submit] + .menu-items.buttons,
 .warning,
 .error {
   padding: 5px;
-  margin-left: -5px;
-  margin-top: 15px;
-  margin-bottom: 15px;
   border: 1px dotted #666666;
   color: #776655;
 }
@@ -1005,14 +1002,18 @@ input[type=submit] + .menu-items.buttons,
   background-color: #ffffcc;
   border-color: #a0a000;
 }
-span .error,
-span .warning,
-span .caution {
-  padding: 1px;
+span.error,
+span.warning,
+span.caution {
+  margin-left: -2px;
+  padding: 2px;
 }
-div .error,
-div .warning,
-div .caution {
+div.error,
+div.warning,
+div.caution {
+  margin-left: -5px;
+  margin-top: 15px;
+  margin-bottom: 15px;
   padding: 15px;
 }
 .highlight {

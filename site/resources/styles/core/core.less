@@ -364,7 +364,7 @@ code
   border: @inline_code_border_width @inline_code_border_style @inline_code_border_color;
   background-color: @inline_code_background_color;
   .repeated-background(@inline_code_background_url);
-  padding: @inline_code_padding;
+  padding: @inline_code_spacing;
 }
 
 pre > code,
@@ -1363,9 +1363,6 @@ button + .menu-items.buttons,
 .error
 {
   padding: @small_spacing;
-  margin-left: -@small_spacing;
-  margin-top: @standard_spacing;
-  margin-bottom: @standard_spacing;
   border: @hairline_border_width dotted #666;
   color: @message_box_text_color;
 
@@ -1415,20 +1412,24 @@ button + .menu-items.buttons,
 
 span
 {
-  .error,
-  .warning,
-  .caution
+  &.error,
+  &.warning,
+  &.caution
   {
-    padding: 1px;
+    margin-left: -@inline_bordered_element_spacing;
+    padding: @inline_bordered_element_spacing;
   }
 }
 
 div
 {
-  .error,
-  .warning,
-  .caution
+  &.error,
+  &.warning,
+  &.caution
   {
+    margin-left: -@small_spacing;
+    margin-top: @standard_spacing;
+    margin-bottom: @standard_spacing;
     padding: @standard_spacing;
   }
 }
