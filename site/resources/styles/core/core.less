@@ -2101,6 +2101,8 @@ hr
   {
     .flex-display();
     .flex(1);
+    min-height: 0;
+    min-width: 0;
 
     .column-set
     {
@@ -2109,15 +2111,28 @@ hr
 
       .left-sidebar-column
       {
-        overflow: auto;
+        .flex-display();
+        .flex(2);
         padding-right: 0;
         margin-right: @standard_spacing;
+
+        .left-sidebar
+        {
+          .flex-display();
+          .flex-direction(column);
+          .flex(1);
+
+          .tree
+          {
+            overflow: auto;
+          }
+        }
       }
 
       .content-column
       {
         .flex-display();
-        .flex(1);
+        .flex(5);
 
         margin-left: -@standard_spacing;  // Remove padding because the document in the iframe adds it as well
 
