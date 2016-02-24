@@ -415,25 +415,25 @@ select
 
 .form-with-preview
 {
-  display: flex;
+  .flex-display();
 
   .basic-form
   {
-    flex: 1;
+    .flex();
   }
 
   .inline-preview-block
   {
-    flex: 1;
+    .flex();
+    .flex-direction(column);
     display: none;
     margin: 0 @standard_spacing;
-    flex-direction: column;
   }
 
   .inline-preview
   {
+    .flex();
     overflow: auto;
-    flex: 1;
   }
 
   .tall

@@ -445,10 +445,12 @@ function execute_field(url, form_name)
   // Make the page max-width = two times what it is (1800px instead of 900px)
   // Make the submitting form class be "top" instead of "left"
 
+  var html = $q('html').first();
   var page = $q('.page').first();
   var form = document.getElementById(form_name);
   var form_container = $q('.basic-form', form).first();
 
+  html.className = 'viewport';
   form_container.className = 'basic-form top';
   page.style.maxWidth = '1600px';
 

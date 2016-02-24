@@ -77,6 +77,12 @@
   user-select: none;
 }
 
+.flex-display-and-flex(@columns: 1)
+{
+  .flex-display();
+  .flex(@columns);
+}
+
 // Obtained from <https://gist.github.com/jayj/4012969>
 
 // --------------------------------------------------
@@ -97,7 +103,7 @@
 // The 'flex' shorthand
 // - applies to: flex items
 // <positive-number>, initial, auto, or none
-.flex(@columns: initial) {
+.flex(@columns: 1) {
   -webkit-flex: @columns;
   -moz-flex: @columns;
   -ms-flex: @columns;
@@ -112,6 +118,8 @@
   -moz-flex-direction: @direction;
   -ms-flex-direction: @direction;
   flex-direction: @direction;
+  min-height: 0;
+  min-width: 0;
 }
 
 // Flex Line Wrapping
