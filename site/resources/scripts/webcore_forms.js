@@ -450,7 +450,7 @@ function execute_field(url, form_name)
   var form = document.getElementById(form_name);
   var form_container = $q('.basic-form', form).first();
 
-  html.className = 'viewport';
+  html.className = 'full-screen-edit';
   form_container.className = 'basic-form top';
   page.style.maxWidth = '1600px';
 

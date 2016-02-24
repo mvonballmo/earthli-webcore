@@ -2078,7 +2078,7 @@ hr
   }
 }
 
-.viewport
+.viewport, .full-screen-edit
 {
   .flex-display();
   height: 100%;
@@ -2184,8 +2184,7 @@ hr
               }
 
               > div:nth-child(3),
-              > div:nth-child(4),
-              > div:nth-child(6)
+              > fieldset
               {
                 display: none;
               }
@@ -2194,6 +2193,16 @@ hr
         }
       }
     }
+  }
+}
+
+.full-screen-edit
+{
+  .banner,
+  .top-box,
+  .footer
+  {
+    display: none;
   }
 }
 
