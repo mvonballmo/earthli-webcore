@@ -1229,40 +1229,53 @@ button + .menu-items.buttons,
   color: white;
 }
 
-.object-navigator ul
+.object-navigator
 {
-  list-style: none;
-  padding-left: 0;
-  margin: 0;
+  ul
+  {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+
+    li
+    {
+      padding: @small_spacing 0;
+    }
+  }
+
+  .page-up
+  {
+    margin-bottom: @small_spacing;
+  }
+
+  .page-down
+  {
+    margin-top: @small_spacing;
+  }
 }
 
-.object-navigator li
-{
-  padding: @small_spacing 0;
-}
-
-.object-navigator .page-up
-{
-  margin-bottom: @small_spacing;
-}
-
-.object-navigator .links .button
-{
-  display: block;
-}
-
-.object-navigator .page-down
-{
-  margin-top: @small_spacing;
-}
-
-.object-navigator .links
+.links
 {
   margin: @standard_spacing 0;
 
   .column-width(250px);
   .column-rule(@hairline_border_width, solid, @standard_border_color);
   .column-gap(@standard_spacing);
+
+  .button
+  {
+    display: block;
+  }
+
+  p:first-child
+  {
+    margin-top: 0;
+  }
+
+  p:last-child
+  {
+    margin-bottom: 0;
+  }
 }
 
 .object-list li

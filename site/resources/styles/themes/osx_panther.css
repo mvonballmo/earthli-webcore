@@ -267,23 +267,23 @@ pre > code .symbol,
 }
 pre > code .keyword,
 .source .keyword {
-  color: #c8f39c;
+  color: #afed6f;
 }
 pre > code .tag-name,
 .source .tag-name {
-  color: #c8fe91;
+  color: #affe5e;
 }
 pre > code .tag,
 .source .tag {
-  color: #c8f39c;
+  color: #afed6f;
 }
 pre > code .attribute-name,
 .source .attribute-name {
-  color: #afed6f;
+  color: #95e841;
 }
 pre > code .attribute-value,
 .source .attribute-value {
-  color: #a0b28c;
+  color: #98b17f;
 }
 .source {
   white-space: pre-wrap;
@@ -872,19 +872,16 @@ input[type=submit] + .menu-items.buttons,
   padding-left: 0;
   margin: 0;
 }
-.object-navigator li {
+.object-navigator ul li {
   padding: 5px 0;
 }
 .object-navigator .page-up {
   margin-bottom: 5px;
 }
-.object-navigator .links .button {
-  display: block;
-}
 .object-navigator .page-down {
   margin-top: 5px;
 }
-.object-navigator .links {
+.links {
   margin: 15px 0;
   column-width: 250px;
   -webkit-column-width: 250px;
@@ -895,6 +892,15 @@ input[type=submit] + .menu-items.buttons,
   column-gap: 15px;
   -webkit-column-gap: 15px;
   -moz-column-gap: 15px;
+}
+.links .button {
+  display: block;
+}
+.links p:first-child {
+  margin-top: 0;
+}
+.links p:last-child {
+  margin-bottom: 0;
 }
 .object-list li {
   padding-top: 1px;

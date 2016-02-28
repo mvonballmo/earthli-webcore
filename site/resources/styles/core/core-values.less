@@ -73,7 +73,7 @@
 @code_text_color: @text_color;
 @code_comment_color: @dimmer_text_color;
 @code_symbol_color: @code_text_color;
-@code_keyword_color: @highlighted_text_color;
+@code_keyword_color: darken(@highlighted_text_color, 10%);
 @code_tag_color: @code_keyword_color;
 @code_tag_name_color: saturate(@code_tag_color, 20%);
 @code_attribute_name_color: darken(@code_tag_color, 10%);
