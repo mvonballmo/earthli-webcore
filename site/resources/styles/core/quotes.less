@@ -1,0 +1,75 @@
+@import "core-values";
+
+.quote,
+.quote-inline,
+.quote-block
+{
+  color: @quote_text_color;
+}
+
+.quote
+{
+  display: block;
+  margin: @standard_spacing 0;
+}
+
+.quote-block
+{
+  padding-left: @standard_spacing;
+  border-left: @thick_border_width solid @accent_border_color;
+  margin-left: -@thick_border_width;
+}
+
+.quote-block p:first-child
+{
+  margin-top: 0;
+}
+
+.quote-block p:last-child
+{
+  margin-bottom: 0;
+}
+
+.quote-inline
+{
+  font-style: italic;
+}
+
+.quote-inline em
+{
+  font-style: normal;
+}
+
+.pullquote
+{
+  border: @hairline_border_width solid @accent_border_color;
+  padding: @standard_spacing;
+  font-size: 150%;
+  margin: 0;
+  line-height: @compressed_text_flow_line_height;
+}
+
+.pullquote.right,
+.pullquote.right-column
+{
+  text-align: left;
+  border-width: 0;
+  border-left-width: @hairline_border_width;
+  padding: 0 0 0 @standard_spacing;
+  margin-left: @small_spacing;
+}
+
+.pullquote.left,
+.pullquote.left-column
+{
+  text-align: right;
+  border-width: 0;
+  border-right-width: @hairline_border_width;
+  padding: 0 @standard_spacing 0 0;
+  margin-right: @small_spacing;
+}
+
+.quoter
+{
+  font-style: italic;
+}

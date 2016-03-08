@@ -1,0 +1,129 @@
+@import "core-mixins";
+
+.viewport, .full-screen-edit
+{
+  .flex-display();
+  height: 100%;
+
+  body,
+  .style-controls,
+  .page,
+  .main-box
+  {
+    .flex-display-and-flex();
+    min-height: 0;
+    min-width: 0;
+  }
+
+  .page
+  {
+    .flex-direction(column);
+
+    .page-body
+    {
+      .flex-display-and-flex();
+      .flex-direction(column);
+      min-height: 0;
+      min-width: 0;
+
+      .column-set
+      {
+        .flex-display-and-flex();
+        min-height: 0;
+        min-width: 0;
+
+        .left-sidebar-column
+        {
+          .flex-display-and-flex(2);
+          min-height: 0;
+          min-width: 0;
+          padding-right: 0;
+          margin-right: @standard_spacing;
+
+          .left-sidebar
+          {
+            .flex-display-and-flex();
+            .flex-direction(column);
+            min-height: 0;
+            min-width: 0;
+
+            .tree
+            {
+              overflow: auto;
+              .flex();
+            }
+          }
+        }
+
+        .content-column
+        {
+          .flex-display-and-flex(5);
+
+          margin-left: -@standard_spacing;  // Remove padding because the document in the iframe adds it as well
+
+          iframe
+          {
+            .flex(1);
+          }
+        }
+      }
+
+      .form-content
+      {
+        .flex-display-and-flex();
+
+        form
+        {
+          .flex-display-and-flex();
+
+          > div
+          {
+            .flex-display-and-flex();
+
+            .form-with-preview
+            {
+              .flex-display-and-flex();
+
+              .basic-form
+              {
+                .flex-display-and-flex();
+                .flex-direction(column);
+                min-height: 0;
+                min-width: 0;
+
+                > div:nth-child(2)
+                {
+                  .flex-display-and-flex();
+                  .flex-direction(column);
+                  min-height: 0;
+                  min-width: 0;
+
+                  textarea
+                  {
+                    .flex();
+                  }
+                }
+
+                > div:nth-child(3),
+                > fieldset
+                {
+                  display: none;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.full-screen-edit
+{
+  .banner,
+  .top-box,
+  .footer
+  {
+    display: none;
+  }
+}

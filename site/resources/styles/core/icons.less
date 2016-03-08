@@ -1,0 +1,106 @@
+@import "core-mixins";
+
+.icon
+{
+  display: inline-block;
+  background-repeat: no-repeat;
+  .border-box();
+}
+
+.inline-icon
+{
+  vertical-align: middle;
+}
+
+.image-without-text
+{
+  line-height: 0;
+}
+
+div.icon
+{
+  display: block;
+}
+
+h2.icon
+{
+  display: block;
+  background-position: right;
+}
+
+.one-hundred
+{
+  min-width: 100px;
+  min-height: 100px;
+}
+
+div.one-hundred
+{
+  padding-left: 100px + @standard_spacing;
+}
+
+.fifty
+{
+  min-width: 50px;
+  min-height: 50px;
+}
+
+div.fifty
+{
+  padding-left: 50px + @small_spacing;
+}
+
+.thirty
+{
+  min-width: 30px;
+  min-height: 30px;
+}
+
+div.thirty
+{
+  padding-left: 30px + @small_spacing;
+}
+
+.thirty-two
+{
+  min-width: 32px;
+  min-height: 32px;
+}
+
+div.thirty-two
+{
+  padding-left: 32px + @small_spacing;
+}
+
+.twenty
+{
+  min-width: 20px;
+  min-height: 20px;
+}
+
+div.twenty
+{
+  padding-left: 20px + @small_spacing;
+}
+
+.sixteen
+{
+  min-width: 16px;
+  min-height: 16px;
+}
+
+div.sixteen
+{
+  padding-left: 16px + @small_spacing;
+}
+
+.icon + .caption
+{
+  padding-left: @small_spacing;
+}
+
+.fifteen
+{
+  padding-left: 15px + @small_spacing;
+  min-height: 15px;
+}

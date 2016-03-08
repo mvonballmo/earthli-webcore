@@ -1,0 +1,44 @@
+.overlay-container
+{
+  position: relative;
+  display: inline-block;
+}
+
+.overlay()
+{
+  position: absolute;
+
+  .button
+  {
+    opacity: 0.75;
+
+    &:hover
+    {
+      opacity: 1;
+    }
+  }
+}
+
+.top-left-overlay
+{
+  .overlay;
+  left: 0;
+  top: 0;
+}
+
+.bottom-right-overlay
+{
+  .overlay;
+  right: 0;
+  bottom: 0;
+}
+
+.top-left-overlay .button
+{
+  border-top-left-radius: 0;
+}
+
+.bottom-right-overlay .button
+{
+  border-bottom-right-radius: 0;
+}

@@ -1,0 +1,61 @@
+@import "core-values";
+
+.tree
+{
+  line-height: @text_flow_line_height;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  .leaf
+  {
+    padding-left: 18px;
+  }
+
+  .tree-node
+  {
+    white-space: nowrap;
+    margin: @small_spacing 0;
+    padding: 0;
+
+    &:first-child
+    {
+      margin-top: 0;
+    }
+
+    &:last-child
+    {
+      margin-bottom: 0;
+    }
+
+    img
+    {
+      padding-right: @small_spacing;
+    }
+  }
+
+  input[type=radio],
+  input[type=checkbox]
+  {
+    margin: 0 @small_spacing 0 0;
+  }
+
+  ul
+  {
+    margin: 0;
+    padding: 0 0 0 16px + @small_spacing;
+    list-style: none;
+
+    .leaf-only
+    {
+      padding-left: 18px;
+    }
+
+    li
+    {
+      margin: 0;
+      padding: 0;
+    }
+  }
+}
+

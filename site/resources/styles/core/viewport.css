@@ -1,0 +1,234 @@
+.viewport,
+.full-screen-edit {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: -ms-flex;
+  display: flex;
+  height: 100%;
+}
+.viewport body,
+.full-screen-edit body,
+.viewport .style-controls,
+.full-screen-edit .style-controls,
+.viewport .page,
+.full-screen-edit .page,
+.viewport .main-box,
+.full-screen-edit .main-box {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: -ms-flex;
+  display: flex;
+  -webkit-flex: 1;
+  -moz-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  min-height: 0;
+  min-width: 0;
+}
+.viewport .page,
+.full-screen-edit .page {
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  min-height: 0;
+  min-width: 0;
+}
+.viewport .page .page-body,
+.full-screen-edit .page .page-body {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: -ms-flex;
+  display: flex;
+  -webkit-flex: 1;
+  -moz-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  min-height: 0;
+  min-width: 0;
+}
+.viewport .page .page-body .column-set,
+.full-screen-edit .page .page-body .column-set {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: -ms-flex;
+  display: flex;
+  -webkit-flex: 1;
+  -moz-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  min-height: 0;
+  min-width: 0;
+}
+.viewport .page .page-body .column-set .left-sidebar-column,
+.full-screen-edit .page .page-body .column-set .left-sidebar-column {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: -ms-flex;
+  display: flex;
+  -webkit-flex: 2;
+  -moz-flex: 2;
+  -ms-flex: 2;
+  flex: 2;
+  min-height: 0;
+  min-width: 0;
+  padding-right: 0;
+  margin-right: 15px;
+}
+.viewport .page .page-body .column-set .left-sidebar-column .left-sidebar,
+.full-screen-edit .page .page-body .column-set .left-sidebar-column .left-sidebar {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: -ms-flex;
+  display: flex;
+  -webkit-flex: 1;
+  -moz-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  min-height: 0;
+  min-width: 0;
+}
+.viewport .page .page-body .column-set .left-sidebar-column .left-sidebar .tree,
+.full-screen-edit .page .page-body .column-set .left-sidebar-column .left-sidebar .tree {
+  overflow: auto;
+  -webkit-flex: 1;
+  -moz-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+.viewport .page .page-body .column-set .content-column,
+.full-screen-edit .page .page-body .column-set .content-column {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: -ms-flex;
+  display: flex;
+  -webkit-flex: 5;
+  -moz-flex: 5;
+  -ms-flex: 5;
+  flex: 5;
+  margin-left: -15px;
+}
+.viewport .page .page-body .column-set .content-column iframe,
+.full-screen-edit .page .page-body .column-set .content-column iframe {
+  -webkit-flex: 1;
+  -moz-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+.viewport .page .page-body .form-content,
+.full-screen-edit .page .page-body .form-content {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: -ms-flex;
+  display: flex;
+  -webkit-flex: 1;
+  -moz-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+.viewport .page .page-body .form-content form,
+.full-screen-edit .page .page-body .form-content form {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: -ms-flex;
+  display: flex;
+  -webkit-flex: 1;
+  -moz-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+.viewport .page .page-body .form-content form > div,
+.full-screen-edit .page .page-body .form-content form > div {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: -ms-flex;
+  display: flex;
+  -webkit-flex: 1;
+  -moz-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+.viewport .page .page-body .form-content form > div .form-with-preview,
+.full-screen-edit .page .page-body .form-content form > div .form-with-preview {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: -ms-flex;
+  display: flex;
+  -webkit-flex: 1;
+  -moz-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+.viewport .page .page-body .form-content form > div .form-with-preview .basic-form,
+.full-screen-edit .page .page-body .form-content form > div .form-with-preview .basic-form {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: -ms-flex;
+  display: flex;
+  -webkit-flex: 1;
+  -moz-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  min-height: 0;
+  min-width: 0;
+}
+.viewport .page .page-body .form-content form > div .form-with-preview .basic-form > div:nth-child(2),
+.full-screen-edit .page .page-body .form-content form > div .form-with-preview .basic-form > div:nth-child(2) {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: -ms-flex;
+  display: flex;
+  -webkit-flex: 1;
+  -moz-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  min-height: 0;
+  min-width: 0;
+}
+.viewport .page .page-body .form-content form > div .form-with-preview .basic-form > div:nth-child(2) textarea,
+.full-screen-edit .page .page-body .form-content form > div .form-with-preview .basic-form > div:nth-child(2) textarea {
+  -webkit-flex: 1;
+  -moz-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+.viewport .page .page-body .form-content form > div .form-with-preview .basic-form > div:nth-child(3),
+.full-screen-edit .page .page-body .form-content form > div .form-with-preview .basic-form > div:nth-child(3),
+.viewport .page .page-body .form-content form > div .form-with-preview .basic-form > fieldset,
+.full-screen-edit .page .page-body .form-content form > div .form-with-preview .basic-form > fieldset {
+  display: none;
+}
+.full-screen-edit .banner,
+.full-screen-edit .top-box,
+.full-screen-edit .footer {
+  display: none;
+}

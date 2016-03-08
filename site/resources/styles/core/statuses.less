@@ -1,0 +1,131 @@
+@import "core-values";
+
+.invisible
+{
+  font-style: italic
+}
+
+.selected
+{
+  font-weight: normal;
+  color: @selected_text_color;
+}
+
+.highlight
+{
+  font-weight: normal;
+  color: @highlighted_text_color;
+}
+
+.unavailable
+{
+  opacity: 0.20;
+}
+
+.field
+{
+  font-weight: bold
+}
+
+.detail
+{
+  font-style: normal
+}
+
+.excerpt
+{
+  font-size: 150%
+}
+
+.notes
+{
+  font-style: italic;
+  font-weight: normal;
+}
+
+.notes em
+{
+  font-weight: bold;
+}
+
+.reference
+{
+  font-style: italic
+}
+
+.caution,
+.warning,
+.error
+{
+  padding: @small_spacing;
+  border: @hairline_border_width dotted #666;
+  color: @message_box_text_color;
+
+  p:first-child
+  {
+    margin-top: 0;
+  }
+
+  p:last-child
+  {
+    margin-bottom: 0;
+  }
+
+  a:link, a:visited
+  {
+    color: @message_box_link_color;
+  }
+
+  &.icon
+  {
+    background-position: @small_spacing @small_spacing * 2;
+
+    &.sixteen
+    {
+      padding-left: 16px + @small_spacing * 2;
+    }
+  }
+}
+
+.error
+{
+  background-color: @error_background_color;
+  border-color: @error_border_color;
+}
+
+.warning
+{
+  background-color: @warning_background_color;
+  border-color: @warning_border_color;
+}
+
+.caution
+{
+  background-color: @caution_background_color;
+  border-color: @caution_border_color;
+}
+
+span
+{
+  &.error,
+  &.warning,
+  &.caution
+  {
+    margin-left: -@inline_bordered_element_spacing;
+    padding: @inline_bordered_element_spacing;
+  }
+}
+
+div
+{
+  &.error,
+  &.warning,
+  &.caution
+  {
+    margin-left: -@small_spacing;
+    margin-top: @standard_spacing;
+    margin-bottom: @standard_spacing;
+    padding: @standard_spacing;
+  }
+}
+

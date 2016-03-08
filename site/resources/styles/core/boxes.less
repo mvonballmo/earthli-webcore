@@ -1,0 +1,283 @@
+@import "core-values";
+@import "core-mixins";
+
+hr
+{
+  color: transparent;
+  border: 0;
+  border-bottom: @hairline_border_width solid @standard_border_color;
+  height: @hairline_border_width;
+  clear: both;
+  display: block;
+}
+
+.form-content,
+.grid-content,
+.button-content,
+.tree-content
+{
+  margin-top: @standard_spacing;
+  margin-bottom: @standard_spacing;
+}
+
+.button-content
+{
+  > *:first-child,
+  > *:first-child > *:first-child
+  {
+    button:first-child,
+    a.button:first-child
+    {
+      margin-left: -@standard_border_radius - @hairline_border_width;
+    }
+  }
+}
+
+.menu-bar-top,
+.menu-bar-bottom
+{
+  margin: @standard_spacing 0;
+}
+
+.chart,
+.preview
+{
+  border-left: @thin_border_width solid @accent_border_color;
+  padding-left: @standard_spacing;
+  margin: @standard_spacing 0 @standard_spacing -@thin_border_width;
+}
+
+.chart
+{
+  color: @chart_text_color;
+  background-color: @chart_background_color;
+  .repeated-background(@chart_background_url);
+}
+
+.preview
+{
+  color: @preview_text_color;
+  background-color: @preview_background_color;
+  .repeated-background(@preview_background_url);
+}
+
+.hidden-layer
+{
+  margin-left: 7px;
+}
+
+.chart + .chart
+{
+  margin-top: @standard_spacing;
+}
+
+.chart-body
+{
+}
+
+.chart-title,
+.preview-title
+{
+  .set-color(@title_color);
+}
+
+.info-box-top,
+.info-box-bottom,
+.subdued
+{
+  color: @dimmest_text_color;
+
+  p,
+  div,
+  pre,
+  ul
+  {
+    margin-top: @small_spacing;
+    margin-bottom: @small_spacing;
+  }
+
+  a:link, a:visited
+  {
+    color: @dimmer_link_color;
+  }
+
+  a:hover, a:active
+  {
+    color: @link_hover_color;
+  }
+}
+
+.info-box-top
+{
+  line-height: @info_box_line_height;
+  border-bottom: @hairline_border_width solid @standard_border_color;
+  margin-bottom: @standard_spacing;
+  clear: both;
+}
+
+.info-box-bottom
+{
+  line-height: @info_box_line_height;
+  border-top: @hairline_border_width solid @standard_border_color;
+  margin-top: @standard_spacing;
+  clear: both;
+}
+
+p, div
+{
+  &.info-box-bottom
+  {
+    padding-top: @small_spacing;
+  }
+
+  &.info-box-top
+  {
+    padding-bottom: @small_spacing;
+  }
+}
+
+.graph-foreground
+{
+  display: inline-block;
+  color: @background_color;
+  background-color: @graph_foreground_color;
+  .repeated-background(@graph_foreground_url);
+}
+
+.graph-background
+{
+  line-height: 0;
+  background-color: @graph_background_color;
+  .repeated-background(@graph_background_url);
+}
+
+.graph-foreground.vertical
+{
+  width: @small_spacing * 2;
+}
+
+.graph-foreground.horizontal
+{
+  height: @small_spacing * 2;
+}
+
+/* @group object header */
+
+.description-box
+{
+  width: 25%;
+  border-right: @hairline_border_width solid @standard_border_color;
+  padding-right: @standard_spacing;
+}
+
+.description-box table:first-child
+{
+  margin-top: @standard_spacing;
+}
+
+.contents-box
+{
+  width: 20%;
+  padding-left: @standard_spacing;
+  padding-right: @standard_spacing;
+  margin-bottom: @standard_spacing;
+}
+
+.sub-folders-box
+{
+  width: 30%;
+  padding-left: @standard_spacing;
+  padding-right: @standard_spacing;
+}
+
+.sub-folders-box .tree
+{
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.contents-box .panels
+{
+}
+
+.tools-box
+{
+  width: 25%;
+  padding-left: @standard_spacing;
+  padding-right: @standard_spacing;
+}
+
+.shell
+{
+  font-family: monospace;
+  background-color: #333;
+  border: @hairline_border_width solid @standard_border_color;
+  color: white;
+  padding: 0 @small_spacing;
+  display: block;
+}
+
+.frame
+{
+  border: @hairline_border_width solid @standard_border_color;
+}
+
+.chart-body p:first-child
+{
+  margin: 0;
+}
+
+.comment-block
+{
+  margin-left: 35px
+}
+
+.comment-title
+{
+  background-repeat: no-repeat;
+  margin-bottom: @small_spacing;
+  padding-left: 20px;
+}
+
+.description
+{
+  margin-bottom: @standard_spacing;
+}
+
+.message-box
+{
+  margin: @standard_spacing 0;
+
+  .description
+  {
+    margin: @standard_spacing 0;
+  }
+}
+
+.entries
+{
+  width: 100%;
+
+  .short-date,
+  .folder
+  {
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  .short-date
+  {
+    width: 100px;
+  }
+
+  .folder
+  {
+    width: 170px;
+  }
+}
+
+.log-in-form
+{
+  width: 30em;
+}
+

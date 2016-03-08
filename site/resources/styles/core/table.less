@@ -1,0 +1,211 @@
+table
+{
+  border-collapse: collapse;
+  border-spacing: 0;
+  margin: 0;
+  padding: 0;
+
+  td, th
+  {
+    padding: 0;
+    text-align: left;
+  }
+
+  th
+  {
+    font-weight: normal;
+    border-bottom: @hairline_border_width solid @standard_border_color;
+
+    &.numeric
+    {
+      text-align: right;
+    }
+  }
+
+  td
+  {
+    > p,
+    > div,
+    > pre,
+    > ul
+    {
+      &:first-child
+      {
+        margin-top: 0;
+      }
+    }
+
+    > p,
+    > div,
+    > pre,
+    > ul
+    {
+      &:last-child
+      {
+        margin-bottom: 0;
+      }
+    }
+
+    &.numeric
+    {
+      text-align: right;
+    }
+  }
+
+  &.basic
+  {
+    margin: @standard_spacing 0;
+
+    > tbody > tr
+    {
+      > td,
+      > th
+      {
+        padding: @cell_spacing @standard_spacing @cell_spacing @cell_spacing;
+        line-height: @compressed_text_flow_line_height;
+
+        &:first-child
+        {
+          padding-left: 0;
+        }
+
+        &:last-child
+        {
+          padding-right: 0;
+        }
+      }
+
+      &:first-child
+      {
+        > td,
+        > th
+        {
+          padding-top: 0;
+        }
+      }
+
+      &:last-child
+      {
+        > td,
+        > th
+        {
+          padding-bottom: 0;
+        }
+      }
+    }
+  }
+
+  &.mini
+  {
+    td
+    {
+      width: auto;
+      height: auto;
+
+      a
+      {
+        display: block;
+      }
+    }
+  }
+
+  &.columns
+  {
+    > tbody > tr
+    {
+      > td,
+      > th
+      {
+        padding: @cell_spacing @standard_spacing;
+        border-right: @hairline_border_width solid @standard_border_color;
+
+        &:last-child
+        {
+          border-right: none;
+        }
+      }
+    }
+  }
+
+  &.numeric-data
+  {
+    td
+    {
+      text-align: right;
+    }
+  }
+
+  &.left-labels
+  {
+    > tbody > tr
+    {
+      > td:not([colspan]),
+      > th
+      {
+        &:first-child
+        {
+          text-align: right;
+          white-space: nowrap;
+          border-bottom: none;
+          vertical-align: baseline;
+        }
+      }
+    }
+
+    &.top > tbody > tr
+    {
+      > td,
+      > th
+      {
+        &:first-child
+        {
+          vertical-align: baseline;
+        }
+      }
+    }
+
+    &.bottom > tbody > tr
+    {
+      > td,
+      > th
+      {
+        &:first-child
+        {
+          vertical-align: bottom;
+        }
+      }
+    }
+  }
+
+  &.top > tbody > tr
+  {
+    > td,
+    > th
+    {
+      vertical-align: baseline;
+    }
+  }
+
+  &.bottom > tbody > tr
+  {
+    > td,
+    > th
+    {
+      vertical-align: bottom;
+    }
+  }
+
+  &.panels
+  {
+    td
+    {
+      white-space: nowrap;
+    }
+  }
+}
+
+.text-flow table.basic > tbody > tr > td,
+.text-flow table.left-labels.top > tbody > tr > th:first-child
+{
+  line-height: @text_flow_line_height;
+}

@@ -1,0 +1,70 @@
+@import "core-values";
+@import "core-mixins";
+
+.cell-non-empty,
+.cell-selected,
+.cell-highlight
+{
+  border: @hairline_border_width solid @standard_border_color;
+}
+
+.cell-highlight
+{
+  color: @cell_highlight_text_color;
+  background-color: @cell_highlight_background_color;
+  .repeated-background(@cell_highlight_background_url);
+}
+
+.cell-selected
+{
+  color: @cell_selected_text_color;
+  background-color: @cell_selected_background_color;
+  .repeated-background(@cell_selected_background_url);
+}
+
+.cell-empty
+{
+  border: none;
+}
+
+.calendar
+{
+  border: none;
+
+  .cell-empty,
+  .cell-non-empty,
+  .cell-selected,
+  .cell-highlight
+  {
+    width: @calendar_box_width;
+    height: @calendar_box_height;
+    box-sizing: border-box;
+    padding: @small_spacing;
+    vertical-align: top;
+    empty-cells: show;
+  }
+
+  .day-content
+  {
+    a
+    {
+      display: block;
+      margin: @small_spacing;
+
+      &:first-child
+      {
+        margin-top: 0;
+      }
+
+      &:last-child
+      {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  .day-number
+  {
+
+  }
+}

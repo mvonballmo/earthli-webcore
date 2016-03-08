@@ -1,0 +1,78 @@
+@import "core-values";
+@import "core-mixins";
+
+.left-sidebar-column
+{
+  padding-right: @standard_spacing;
+}
+
+.right-sidebar-column
+{
+  padding-left: @standard_spacing;
+}
+
+.left-sidebar
+{
+  padding-left: @standard_spacing;
+  margin-left: -@standard_spacing;
+  border-right: @hairline_border_width solid @standard_border_color;
+  padding-right: @standard_spacing;
+}
+
+.right-sidebar
+{
+  padding-right: @standard_spacing;
+  margin-right: -@standard_spacing;
+  border-left: @hairline_border_width solid @standard_border_color;
+  padding-left: @standard_spacing;
+}
+
+.content-column
+{
+  width: 75%;
+}
+
+.column-set
+{
+  display: table;
+  width: 100%;
+}
+
+.column-set-column
+{
+  display: table-cell;
+  vertical-align: top;
+}
+
+.left-column
+{
+  padding-right: @standard_spacing;
+}
+
+.right-column
+{
+  width: 75%;
+}
+
+.two-columns
+{
+  .border-box();
+  width: 50%;
+
+  + .two-columns
+  {
+    margin-left: @standard_spacing;
+  }
+}
+
+.three-columns
+{
+  .border-box();
+  width: 33%;
+
+  + .three-columns
+  {
+    margin-left: @standard_spacing;
+  }
+}
+

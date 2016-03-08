@@ -1,0 +1,81 @@
+@import "core-values";
+@import "core-mixins";
+
+.pager
+{
+  margin-top: @standard_spacing;
+}
+
+.pager .counters
+{
+  margin: 0 @button_spacing;
+  display: inline-block;
+  text-align: center;
+}
+
+.pager .disabled
+{
+  background: #EEE;
+  color: #AAAAAA;
+}
+
+.pager .selected
+{
+  background-color: #666;
+  color: white;
+}
+
+.object-navigator
+{
+  ul
+  {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+
+    li
+    {
+      padding: @small_spacing 0;
+    }
+  }
+
+  .page-up
+  {
+    margin-bottom: @small_spacing;
+  }
+
+  .page-down
+  {
+    margin-top: @small_spacing;
+  }
+}
+
+.links
+{
+  margin: @standard_spacing 0;
+
+  .column-width(250px);
+  .column-rule(@hairline_border_width, solid, @standard_border_color);
+  .column-gap(@standard_spacing);
+
+  .button
+  {
+    display: block;
+  }
+
+  p:first-child
+  {
+    margin-top: 0;
+  }
+
+  p:last-child
+  {
+    margin-bottom: 0;
+  }
+}
+
+.object-list li
+{
+  padding-top: 1px;
+  padding-bottom: 1px;
+}
