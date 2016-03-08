@@ -435,28 +435,175 @@ pre > code,
 
 /* @group Structure */
 
-/* Page super-structure. Meant to be used like this:
-
-		body (HTML)
-			page
-				banner
-          banner-header
-            banner-logo
-            banner-icon
-            banner-content
-              banner-title
-              login-status
-          nav-box
-				page-body
-				footer
-*/
-
 .page
 {
   max-width: @page_max_width;
   min-width: @page_min_width;
   margin-bottom: @small_spacing;
   margin-right: @small_spacing;
+
+  .banner
+  {
+    padding-top: @standard_spacing;
+    padding-left: @standard_spacing;
+    background-color: @banner_background_color;
+    .repeated-background(@banner_background_url);
+    color: @banner_text_color;
+
+    a:link, a:visited
+    {
+      color: @banner_link_color;
+    }
+
+    a:hover, a:active
+    {
+      color: @banner_link_hover_color;
+    }
+
+    .banner-header
+    {
+      position: relative;
+
+      .banner-logo
+      {
+        background-repeat: no-repeat;
+        width: 250px;
+        height: 75px;
+
+        a
+        {
+          display: block;
+          height: 100%;
+        }
+      }
+
+      .banner-content
+      {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        text-align: right;
+
+        .banner-title
+        {
+          display: inline-block;
+          color: @banner_title_color;
+        }
+
+        .icon-container
+        {
+          .banner-icon
+          {
+            width: 50px;
+            height: 50px;
+            display: inline-block;
+            position: absolute;
+            right: 0;
+            bottom: 10px;
+            margin-left: @standard_spacing;
+            background-repeat: no-repeat;
+          }
+
+          .banner-title
+          {
+            margin-right: 65px;
+          }
+
+          .login-status
+          {
+            margin-right: 65px;
+            margin-top: 10px;
+          }
+        }
+      }
+
+      .banner-content when not (@banner_background_color = transparent)
+      {
+        margin-right: @standard_spacing;
+      }
+    }
+
+    .nav-box
+    {
+      margin-top: @standard_spacing;
+      margin-left: -@standard_spacing;
+      padding-left: @standard_spacing;
+      padding-bottom: @small_spacing;
+      border-bottom: @hairline_border_width solid @standard_border_color;
+      line-height: @text_flow_line_height;
+    }
+  }
+
+  .page-body
+  {
+    padding: 0 @standard_spacing;
+    margin-bottom: @standard_spacing;
+    clear: both;
+
+    .top-box
+    {
+      border-bottom: @hairline_border_width solid @standard_border_color;
+      margin-bottom: @standard_spacing;
+      margin-right: -@standard_spacing;
+      margin-left: -@standard_spacing;
+      padding-left: @standard_spacing;
+      padding-right: @standard_spacing;
+    }
+
+    .main-box
+    {
+      margin-left: -@standard_spacing;
+      margin-right: -@standard_spacing;
+      padding-left: @standard_spacing;
+      padding-right: 0;
+
+      p,
+      div
+      {
+        &:last-child
+        {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+
+  .footer
+  {
+    clear: both;
+    padding-left: @standard_spacing;
+    margin-top: @standard_spacing;
+    border-top: @hairline_border_width solid @standard_border_color;
+    padding-top: @small_spacing;
+    background-color: @footer_background_color;
+    .repeated-background(@footer_background_url);
+    color: @footer_text_color;
+
+    a:link, a:visited
+    {
+      color: @footer_link_color;
+    }
+
+    a:hover, a:active
+    {
+      color: @footer_link_hover_color;
+    }
+
+    .footer-data
+    {
+      display: block;
+    }
+
+    .footer-data + .footer-data
+    {
+      margin-top: @small_spacing;
+    }
+  }
+
+  .footer when not (@footer_background_color = transparent)
+  {
+    padding-bottom: @small_spacing;
+  }
 }
 
 .page when not (@footer_background_color = transparent)
@@ -464,129 +611,11 @@ pre > code,
   margin-bottom: 0;
 }
 
-.page-body
-{
-  padding: 0 @standard_spacing;
-  margin-bottom: @standard_spacing;
-  clear: both
-}
-
-.banner
-{
-  padding-top: @standard_spacing;
-  padding-left: @standard_spacing;
-  background-color: @banner_background_color;
-  .repeated-background(@banner_background_url);
-  color: @banner_text_color;
-
-  a:link, a:visited
-  {
-    color: @banner_link_color;
-  }
-
-  a:hover, a:active
-  {
-    color: @banner_link_hover_color;
-  }
-}
-
-.banner-header
-{
-  position: relative;
-}
-
-.banner-logo
-{
-  background-repeat: no-repeat;
-  width: 250px;
-  height: 75px;
-
-  a
-  {
-    display: block;
-    height: 100%;
-  }
-}
-
-.banner-content
-{
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  text-align: right;
-
-  h1
-  {
-    margin: 0;
-  }
-}
-
-.banner-content when not (@banner_background_color = transparent)
-{
-  margin-right: @standard_spacing;
-}
-
-.banner-title
-{
-  display: inline-block;
-  color: @banner_title_color;
-}
-
 .newsfeed
 {
   display: inline-block;
   padding: 10px;
   margin: -10px;
-}
-
-.icon-container
-{
-  .banner-title
-  {
-    margin-right: 65px;
-  }
-
-  .login-status
-  {
-    margin-right: 65px;
-  }
-}
-
-.banner-icon
-{
-  width: 50px;
-  height: 50px;
-  display: inline-block;
-  position: absolute;
-  right: 0;
-  bottom: 10px;
-  margin-left: @standard_spacing;
-  background-repeat: no-repeat;
-}
-
-.login-status
-{
-  margin-top: 10px;
-}
-
-.nav-box
-{
-  margin-top: @standard_spacing;
-  margin-left: -@standard_spacing;
-  padding-left: @standard_spacing;
-  padding-bottom: @small_spacing;
-  border-bottom: @hairline_border_width solid @standard_border_color;
-  line-height: @text_flow_line_height;
-}
-
-.top-box
-{
-  border-bottom: @hairline_border_width solid @standard_border_color;
-  margin-bottom: @standard_spacing;
-  margin-right: -@standard_spacing;
-  margin-left: -@standard_spacing;
-  padding-left: @standard_spacing;
-  padding-right: @standard_spacing;
 }
 
 .log-in-form
@@ -619,43 +648,6 @@ pre > code,
 .nav-item
 {
   font-weight: normal;
-}
-
-.footer
-{
-  clear: both;
-  padding-left: @standard_spacing;
-  margin-top: @standard_spacing;
-  border-top: @hairline_border_width solid @standard_border_color;
-  padding-top: @small_spacing;
-  background-color: @footer_background_color;
-  .repeated-background(@footer_background_url);
-  color: @footer_text_color;
-
-  a:link, a:visited
-  {
-    color: @footer_link_color;
-  }
-
-  a:hover, a:active
-  {
-    color: @footer_link_hover_color;
-  }
-}
-
-.footer when not (@footer_background_color = transparent)
-{
-  padding-bottom: @small_spacing;
-}
-
-.footer-data
-{
-  display: block;
-}
-
-.footer-data + .footer-data
-{
-  margin-top: @small_spacing;
 }
 
 /* @end */
@@ -720,42 +712,6 @@ pre > code,
 /* @end */
 
 /* @group Containers */
-
-/* Defines blocks within the page-body.
-
-		Should hold the page's main content
-
-		box
-		  box-title
-
-		Defines areas outside of the main content -- perhaps with additional information
-		or directing to other areas.
-
-		Used for blocks within a box.
-
-		chart
-		  chart-title
-			chart-body
-
-		description - used for long runs of text
-*/
-
-.main-box
-{
-  margin-left: -@standard_spacing;
-  margin-right: -@standard_spacing;
-  padding-left: @standard_spacing;
-  padding-right: 0;
-
-  p,
-  div
-  {
-    &:last-child
-    {
-      margin-bottom: 0;
-    }
-  }
-}
 
 .chart,
 .preview
@@ -1914,7 +1870,6 @@ hr
   }
 }
 
-
 .overlay-container
 {
   position: relative;
@@ -2105,97 +2060,97 @@ hr
   .page
   {
     .flex-direction(column);
-  }
 
-  .page-body
-  {
-    .flex-display-and-flex();
-    .flex-direction(column);
-    min-height: 0;
-    min-width: 0;
-
-    .column-set
+    .page-body
     {
       .flex-display-and-flex();
+      .flex-direction(column);
       min-height: 0;
       min-width: 0;
 
-      .left-sidebar-column
+      .column-set
       {
-        .flex-display-and-flex(2);
+        .flex-display-and-flex();
         min-height: 0;
         min-width: 0;
-        padding-right: 0;
-        margin-right: @standard_spacing;
 
-        .left-sidebar
+        .left-sidebar-column
         {
-          .flex-display-and-flex();
-          .flex-direction(column);
+          .flex-display-and-flex(2);
           min-height: 0;
           min-width: 0;
+          padding-right: 0;
+          margin-right: @standard_spacing;
 
-          .tree
+          .left-sidebar
           {
-            overflow: auto;
-            .flex();
+            .flex-display-and-flex();
+            .flex-direction(column);
+            min-height: 0;
+            min-width: 0;
+
+            .tree
+            {
+              overflow: auto;
+              .flex();
+            }
+          }
+        }
+
+        .content-column
+        {
+          .flex-display-and-flex(5);
+
+          margin-left: -@standard_spacing;  // Remove padding because the document in the iframe adds it as well
+
+          iframe
+          {
+            .flex(1);
           }
         }
       }
 
-      .content-column
-      {
-        .flex-display-and-flex(5);
-
-        margin-left: -@standard_spacing;  // Remove padding because the document in the iframe adds it as well
-
-        iframe
-        {
-          .flex(1);
-        }
-      }
-    }
-
-    .form-content
-    {
-      .flex-display-and-flex();
-
-      form
+      .form-content
       {
         .flex-display-and-flex();
 
-        > div
+        form
         {
           .flex-display-and-flex();
 
-          .form-with-preview
+          > div
           {
             .flex-display-and-flex();
 
-            .basic-form
+            .form-with-preview
             {
               .flex-display-and-flex();
-              .flex-direction(column);
-              min-height: 0;
-              min-width: 0;
 
-              > div:nth-child(2)
+              .basic-form
               {
                 .flex-display-and-flex();
                 .flex-direction(column);
                 min-height: 0;
                 min-width: 0;
 
-                textarea
+                > div:nth-child(2)
                 {
-                  .flex();
-                }
-              }
+                  .flex-display-and-flex();
+                  .flex-direction(column);
+                  min-height: 0;
+                  min-width: 0;
 
-              > div:nth-child(3),
-              > fieldset
-              {
-                display: none;
+                  textarea
+                  {
+                    .flex();
+                  }
+                }
+
+                > div:nth-child(3),
+                > fieldset
+                {
+                  display: none;
+                }
               }
             }
           }
