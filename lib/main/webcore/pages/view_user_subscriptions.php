@@ -107,8 +107,7 @@ http://www.earthli.com/software/webcore
       $box->finish_column_set();
       ?>
     </div>
-  <?php
-      $box->finish_column_set ();
+    <?php
       $Page->finish_display ();
     }
     else
