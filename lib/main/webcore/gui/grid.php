@@ -761,13 +761,16 @@ abstract class HTML_GRID extends GRID
 
   protected function _internal_start_row($attributes = null)
   {
-    if ($attributes)
+    if ($this->_row_tag_name)
     {
-      echo '<' . $this->_row_tag_name . ' ' . $attributes . '>';
-    }
-    else
-    {
-      echo '<' . $this->_row_tag_name . '>';
+      if ($attributes)
+      {
+        echo '<' . $this->_row_tag_name . ' ' . $attributes . '>';
+      }
+      else
+      {
+        echo '<' . $this->_row_tag_name . '>';
+      }
     }
   }
 
@@ -807,7 +810,10 @@ abstract class HTML_GRID extends GRID
 
   protected function _internal_finish_row()
   {
-    echo '</' . $this->_row_tag_name . '>';
+    if ($this->_row_tag_name)
+    {
+      echo '</' . $this->_row_tag_name . '>';
+    }
   }
 
   protected $_table_tag_name;
@@ -871,7 +877,6 @@ abstract class DIV_GRID extends HTML_GRID
 
     $this->css_class = 'grid';
     $this->_table_tag_name = 'div';
-    $this->_row_tag_name = 'div';
     $this->_cell_tag_name = 'div';
     $this->_header_cell_tag_name = 'div';
   }
@@ -968,7 +973,7 @@ abstract class CSS_FLOW_GRID extends GRID
   protected function _finish_grid()
   {
     ?>
-    <div class="clear-both"></div>
+      <div class="clear-both"></div>
     </div>
   <?php
   }

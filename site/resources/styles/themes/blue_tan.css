@@ -1416,45 +1416,29 @@ table.panels td {
   line-height: 160%;
 }
 .grid {
-  display: table;
-  width: 100%;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
   margin: 15px 0;
 }
 .grid.natural-size {
+  display: table;
   width: auto;
 }
 .grid > div {
-  display: table-row;
-}
-.grid > div > div {
-  display: table-cell;
-  vertical-align: top;
-}
-.grid > div > div + div {
   box-sizing: border-box;
-  padding-left: 15px;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  display: inline-block;
+  vertical-align: top;
+  width: 300px;
 }
-.two-column > div > div,
-.two-column > tr > td {
-  width: 50%;
-}
-.three-column > div > div,
-.three-column > tr > td {
-  width: 33.33%;
-}
-.four-column > div > div,
-.four-column > tr > td {
-  width: 25%;
-}
-.five-column > div > div,
-.five-column > tr > td {
-  width: 20%;
+.grid > div + div {
+  padding-right: 15px;
+  padding-bottom: 15px;
 }
 .page-break {
   page-break-before: always;
-}
-.multi-column-grid-description {
-  margin-right: 20%;
 }
 .tiny-picture {
   margin-right: 5px;
