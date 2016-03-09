@@ -165,7 +165,7 @@ class DEFAULT_PAGE_RENDERER extends WEBCORE_PAGE_RENDERER
 
       if ($options->show_links)
       {
-        $lines [] = '<div class="links">' . $this->_links_as_text ($options) . '</div>';
+        $lines [] = '<div class="footer-links">' . $this->_links_as_text ($options) . '</div>';
       }
 
       if ($options->copyright)
