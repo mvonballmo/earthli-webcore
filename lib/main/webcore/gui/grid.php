@@ -636,6 +636,8 @@ abstract class GRID extends WEBCORE_OBJECT
   {
     switch ($this->_num_columns)
     {
+      case 1:
+        return 'one-column';
       case 2:
         return 'two-column';
       case 3:
@@ -866,7 +868,7 @@ abstract class HTML_TABLE_GRID extends HTML_GRID
   }
 }
 
-abstract class DIV_GRID extends HTML_GRID
+abstract class HTML_DIV_GRID extends HTML_GRID
 {
   /**
    * @param CONTEXT $context Context to which this grid belongs.
@@ -883,144 +885,6 @@ abstract class DIV_GRID extends HTML_GRID
 }
 
 /**
- * Renders a grid using CSS floats.
- * Each row will have at most {@link $_num_columns}; if there is not enough space,
- * a row may have fewer cells as content is automatically reflowed. See {@link HTML_TABLE_GRID}
- * for a container that enforces number of columns.
- * @package webcore
- * @subpackage grid
- * @version 3.6.0
- * @since 2.6.0
- * @abstract
- */
-abstract class CSS_FLOW_GRID extends GRID
-{
-  /**
-   * Minimum width of a single box.
-   * Use CSS units to specify the width.
-   * @var string
-   */
-  public $min_box_width = '';
-
-  /**
-   * @param CONTEXT $context Context to which this grid belongs.
-   */
-  public function __construct($context)
-  {
-    parent::__construct($context);
-  }
-
-  /**
-   * Start rendering the grid.
-   * @access private
-   */
-  protected function _start_grid()
-  {
-    ?>
-    <div style="<?php echo $this->_style_for_grid(); ?>">
-  <?php
-  }
-
-  /**
-   * Start rendering a row.
-   * @param object $obj
-   * @access private
-   */
-  protected function _start_row($obj)
-  {
-    $this->_first_cell_in_row = true;
-  }
-
-  /**
-   * Render the start of a single cell.
-   * @param object $obj
-   * @access private
-   */
-  protected function _start_box ($obj)
-  {
-    $attributes = $this->_CSS_for_box();
-    ?>
-    <div<?php if ($attributes)
-    {
-      echo " $attributes";
-    } ?>><?php
-  }
-
-  /**
-   * Close the open cell.
-   * @param object $obj
-   * @access private
-   */
-  protected function _finish_box ($obj)
-  {
-    ?></div><?php
-    $this->_first_cell_in_row = false;
-  }
-
-  /**
-   * Finish rendering a row.
-   * @param object $obj
-   * @access private
-   */
-  protected function _finish_row($obj)
-  {
-  }
-
-  /**
-   * Finish rendering the grid.
-   * @access private
-   */
-  protected function _finish_grid()
-  {
-    ?>
-      <div class="clear-both"></div>
-    </div>
-  <?php
-  }
-
-  /**
-   * CSS styles to apply to each cell (box).
-   * Applies the "float: left" style to each cell in the grid.
-   * @return string
-   * @access private
-   */
-  protected function _style_for_box()
-  {
-    $style = parent::_style_for_box();
-    if ($style)
-    {
-      $Result = $style . '; float: left';
-    }
-    else
-    {
-      $Result = 'float: left';
-    }
-
-    if ($this->min_box_width)
-    {
-      $Result .= '; min-width: ' . $this->min_box_width;
-    }
-
-    return $Result;
-  }
-
-  protected function _class_for_box()
-  {
-    $result = parent::_class_for_box();
-    if ($this->_first_cell_in_row)
-    {
-      $result .= ' clear-both';
-    }
-
-    return $result;
-  }
-
-  /**
-   * @var boolean */
-  private $_first_cell_in_row;
-}
-
-/**
  * Placeholder class for extending classes.
  * Descendants that inherit from this class will automatically be updated to a new
  * implementation if the ancestor here is changed. Prevents all descendant classes
@@ -1031,7 +895,7 @@ abstract class CSS_FLOW_GRID extends GRID
  * @since 2.6.0
  * @abstract
  */
-abstract class STANDARD_GRID extends DIV_GRID
+abstract class STANDARD_GRID extends HTML_DIV_GRID
 {
 }
 

@@ -59,6 +59,16 @@
     public $show_folder = true;
 
     /**
+     * @param CONTEXT $context Context to which this grid belongs.
+     */
+    public function __construct($context)
+    {
+      parent::__construct($context);
+
+      $this->css_class .= ' large-tiles';
+    }
+
+    /**
      * @param COMMENT $obj
      * @access private
      */

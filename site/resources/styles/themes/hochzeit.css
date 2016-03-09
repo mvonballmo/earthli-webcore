@@ -1081,6 +1081,9 @@ div.caution {
 .image-without-text {
   line-height: 0;
 }
+.image-without-text > a {
+  display: inline-block;
+}
 div.icon {
   display: block;
 }
@@ -1439,10 +1442,6 @@ table.panels td {
   -webkit-box-sizing: border-box;
   margin: 15px 0;
 }
-.grid.natural-size {
-  display: table;
-  width: auto;
-}
 .grid > div {
   box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -1451,20 +1450,35 @@ table.panels td {
   vertical-align: top;
   width: 300px;
 }
+.grid > div:nth-child(2) {
+  padding-left: 15px;
+}
 .grid > div + div {
   padding-right: 15px;
   padding-bottom: 15px;
 }
+.grid.one-column > div {
+  width: 100%;
+  padding-right: 0;
+}
+.grid.small-tiles > div {
+  width: 200px;
+}
+.grid.large-tiles > div {
+  width: 450px;
+}
+.grid.content-sized-tiles > div {
+  width: auto;
+}
+.grid.content-sized-tiles > div:nth-child(2) {
+  padding-left: 5px;
+}
+.grid.content-sized-tiles > div + div {
+  padding-right: 5px;
+  padding-bottom: 5px;
+}
 .page-break {
   page-break-before: always;
-}
-.tiny-picture {
-  margin-right: 5px;
-  margin-bottom: 5px;
-  line-height: 0;
-}
-.tiny-picture a {
-  display: inline-block;
 }
 .tree {
   line-height: 160%;

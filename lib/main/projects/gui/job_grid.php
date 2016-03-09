@@ -49,6 +49,16 @@ require_once ('projects/gui/project_entry_grid.php');
 class JOB_GRID extends PROJECT_ENTRY_GRID
 {
   /**
+   * @param CONTEXT $context Context to which this grid belongs.
+   */
+  public function __construct($context)
+  {
+    parent::__construct($context);
+
+    $this->css_class .= ' large-tiles';
+  }
+
+  /**
    * Draw entry-specific information for the given release.
    * @param JOB $obj
    * @param JOB_BRANCH_INFO $branch_info

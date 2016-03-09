@@ -72,7 +72,6 @@ abstract class SUBSCRIPTION_FORM extends FORM
 
   /**
    * @param APPLICATION $context Main application.
-   * @param SUBSCRIBER $subscriber Edit subscriptions for this user.
    */
   public function __construct ($context)
   {
@@ -144,6 +143,7 @@ abstract class CONTENT_OBJECT_SUBSCRIPTION_FORM extends SUBSCRIPTION_FORM
    */
   protected function _draw_controls ($renderer)
   {
+    $renderer->labels_css_class = 'top';
     $size = 0;
     
     if ($this->object_exists ())
@@ -164,7 +164,6 @@ abstract class CONTENT_OBJECT_SUBSCRIPTION_FORM extends SUBSCRIPTION_FORM
       $grid->set_query ($query);
       $grid->items_are_selectable = true;
       $grid->items_are_selected = true;
-      $grid->css_class .= ' natural-size';
 
       $ctrl_name = $this->js_name ('ids');
 

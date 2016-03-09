@@ -71,6 +71,8 @@ class FOLDER_SUBSCRIPTION_FORM extends SUBSCRIPTION_FORM
    */
   protected function _draw_controls ($renderer)
   {
+    $renderer->labels_css_class = 'top';
+
     if ($this->object_exists ())
     {
       $selected_folder_ids = $this->_object->subscribed_ids_for (Subscribe_folder);

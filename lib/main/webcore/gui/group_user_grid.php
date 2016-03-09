@@ -46,7 +46,7 @@ require_once ('webcore/gui/grid.php');
  * @version 3.6.0
  * @since 2.2.1
  */
-class GROUP_USER_GRID extends STANDARD_GRID
+class GROUP_USER_GRID extends HTML_TABLE_GRID
 {
   /**
    * @param GROUP $group Show users from this group.
@@ -56,7 +56,6 @@ class GROUP_USER_GRID extends STANDARD_GRID
     parent::__construct ($group->app);
     $this->_group_id = $group->id;
     $this->_controls_renderer = $this->app->make_controls_renderer ();
-    $this->css_class .= ' natural-size';
   }
 
   /**
@@ -122,5 +121,7 @@ class GROUP_USER_GRID extends STANDARD_GRID
    * @access private
    */
   protected $_controls_renderer;
+
+  private $_group_id;
 }
 ?>
