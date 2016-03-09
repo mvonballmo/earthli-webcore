@@ -190,7 +190,7 @@ class FOLDER_SUBSCRIPTION_PANEL extends FORM_BASED_SUBSCRIPTION_PANEL
   public function display ()
   {
 ?>
-  <p>You will receive notifications for all activity within subscribed folders. Notifications are sent when a new item is created
+  <p class="text-flow">You will receive notifications for all activity within subscribed folders. Notifications are sent when a new item is created
     or when an existing item is modified.</p>
 <?php
     parent::display ();
