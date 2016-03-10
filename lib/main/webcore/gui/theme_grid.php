@@ -53,6 +53,16 @@ class THEME_GRID extends STANDARD_GRID
   public $is_chooser = false;
 
   /**
+   * @param CONTEXT $context Context to which this grid belongs.
+   */
+  public function __construct($context)
+  {
+    parent::__construct($context);
+
+    $this->css_class .= ' small-tiles';
+  }
+
+  /**
    * @param THEME $obj
    * @access private
    */
@@ -61,7 +71,7 @@ class THEME_GRID extends STANDARD_GRID
     if ($this->is_chooser)
     {
       $this->_display_start_overlay_container();
-      $this->_display_start_bottom_right_overlay($obj);
+      $this->_display_start_bottom_right_overlay();
       ?>
       <a class="button" href="#" onclick="set_main_theme ('<?php echo $obj->id; ?>'); return false;"
          title="Choose this theme"><?php echo $obj->title_as_html(); ?></a>
