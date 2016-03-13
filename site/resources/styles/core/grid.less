@@ -10,8 +10,6 @@
   {
     .border-box();
     display: inline-block;
-    vertical-align: top;
-    width: @grid_standard_tile_width;
 
     &:nth-child(2)
     {
@@ -25,21 +23,16 @@
     }
   }
 
-  &.full-width
+  > div
   {
-    > div
-    {
-      width: 100%;
-      padding-right: 0;
-      padding-left: 0;
-    }
+    .set-responsive-columns(@grid_standard_tile_width);
   }
 
   &.tiny-tiles
   {
     > div
     {
-      width: @grid_tiny_tile_width;
+      .set-responsive-columns(@grid_tiny_tile_width);
     }
   }
 
@@ -47,7 +40,7 @@
   {
     > div
     {
-      width: @grid_small_tile_width;
+      .set-responsive-columns(@grid_small_tile_width);
     }
   }
 
@@ -55,7 +48,7 @@
   {
     > div
     {
-      width: @grid_large_tile_width;
+      .set-responsive-columns(@grid_large_tile_width);
     }
   }
 
@@ -75,6 +68,16 @@
         padding-right: @small_spacing;
         padding-bottom: @small_spacing;
       }
+    }
+  }
+
+  &.full-width
+  {
+    > div
+    {
+      width: 100%;
+      padding-right: 0;
+      padding-left: 0;
     }
   }
 
