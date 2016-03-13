@@ -179,7 +179,6 @@ class RECIPE_APPLICATION extends DRAFTABLE_APPLICATION
     $this->register_class ('ENTRY_FORM', 'RECIPE_FORM', 'recipes/forms/recipe_form.php');
     $this->register_class ('FOLDER_GRID', 'RECIPE_BOOK_GRID', 'recipes/gui/recipe_book_grid.php');
     $this->register_class ('ENTRY_SUMMARY_GRID', 'RECIPE_SUMMARY_GRID', 'recipes/gui/recipe_grid.php');
-    $this->register_class ('PANEL_MANAGER_HELPER', 'RECIPE_PANEL_MANAGER_HELPER', 'recipes/gui/recipe_panel.php');
     $this->register_class ('APPLICATION_TABLE_NAMES', 'RECIPE_APPLICATION_TABLE_NAMES');
     $this->register_class ('APPLICATION_PAGE_NAMES', 'RECIPE_APPLICATION_PAGE_NAMES');
 

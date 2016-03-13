@@ -83,7 +83,7 @@ http://www.earthli.com/software/webcore
       $class_name = $Page->final_class_name ('USER_GRID', 'webcore/gui/user_grid.php');
       /** @var $grid USER_GRID */
       $grid = new $class_name ($App);
-      $grid->set_ranges (10, 3);
+      $grid->set_page_size (Default_page_size);
       $grid->set_query ($user_query);
 
       $pager = $grid->get_pager();

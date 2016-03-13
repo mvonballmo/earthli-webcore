@@ -57,7 +57,7 @@ if ($App->login->is_allowed(Privilege_set_global, Privilege_resources))
       $class_name = $App->final_class_name('THEME_GRID', 'webcore/gui/theme_grid.php');
       /** @var $grid THEME_GRID */
       $grid = new $class_name ($App);
-      $grid->set_ranges(3, 3);
+      $grid->set_page_size (Default_page_size);
       $grid->set_query($theme_query);
       $grid->display();
       ?>

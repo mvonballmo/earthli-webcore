@@ -60,16 +60,26 @@
     /**
      * @var integer
      */
-    public $chars_to_show_for_hidden = 200;
+    public $chars_to_show_for_hidden = 500;
     /**
      * @var integer
      */
-    public $chars_to_show_for_visible = 0;
+    public $chars_to_show_for_visible = 500;
 
     /**
      * @var boolean
      */
     public $show_description = false;
+
+    /**
+     * @param CONTEXT $context Context to which this grid belongs.
+     */
+    public function __construct($context)
+    {
+      parent::__construct($context);
+
+      $this->css_class .= ' large-tiles';
+    }
 
     /**
      * @param DRAFTABLE_ENTRY $obj
@@ -243,12 +253,7 @@
           $this->last_date = $curr_date;
 
           $this->_internal_start_row();
-          if ($this->items_are_selectable)
-          {
-            $this->_internal_start_cell();
-            $this->_internal_finish_cell();
-          }
-          $this->_internal_start_cell();
+          $this->_internal_start_cell('class="full-width"');
           echo '<h2>';
           echo $interval_text;
           echo '</h2>';

@@ -931,3 +931,5 @@ define ('Thirty_px', '30px');
 define ('Thirty_two_px', '32px');
 define ('Fifty_px', '50px');
 define ('One_hundred_px', '100px');
+
+define ('Default_page_size', 30);

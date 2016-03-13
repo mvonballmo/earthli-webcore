@@ -49,7 +49,15 @@ require_once ('webcore/gui/content_object_grid.php');
  */
 class TINY_ARTICLE_GRID extends CONTENT_OBJECT_GRID
 {
-  public $width = '';
+  /**
+   * @param CONTEXT $context Context to which this grid belongs.
+   */
+  public function __construct($context)
+  {
+    parent::__construct($context);
+
+    $this->css_class .= ' full-width';
+  }
 
   protected function _draw_box ($obj)
   {

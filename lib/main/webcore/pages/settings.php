@@ -189,7 +189,7 @@ class SAMPLE_FORM extends FORM
       $grid->pager->pages_to_show = 2;
       $grid->pager->show_first_and_last = false;
       $grid->pager->show_total = false;
-      $grid->set_ranges (13, 1);
+      $grid->set_page_size (Default_page_size);
       $grid->set_query ($theme_query);
       $grid->display ();
       ?>

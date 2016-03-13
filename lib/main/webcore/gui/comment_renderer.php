@@ -192,12 +192,12 @@ class COMMENT_LIST_RENDERER extends WEBCORE_OBJECT
     case Comment_render_flat:
       $class_name = $this->context->final_class_name ('FLAT_COMMENT_GRID', 'webcore/gui/flat_comment_grid.php');
       $grid = new $class_name ($this->app, $this->_comment);
-      $grid->set_ranges (20, 1);
+      $grid->set_page_size (Default_page_size);
       break;
     case Comment_render_threaded:
       $class_name = $this->context->final_class_name ('THREADED_COMMENT_GRID', 'webcore/gui/threaded_comment_grid.php');
       $grid = new $class_name ($this->app, $this->_comment);
-      $grid->set_ranges (10, 1);
+      $grid->set_page_size (Default_page_size);
       break;
     }
 

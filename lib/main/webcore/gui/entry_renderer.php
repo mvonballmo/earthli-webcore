@@ -191,9 +191,9 @@ class ENTRY_ASSOCIATED_DATA_RENDERER extends HANDLER_RENDERER
     $class_name = $this->app->final_class_name ('ATTACHMENT_GRID', 'webcore/gui/attachment_grid.php');
     /** @var $grid ATTACHMENT_GRID */
     $grid = new $class_name ($this->app);
-    $grid->set_ranges (3, 3);
     $grid->pager->page_anchor = 'attachments';
     $grid->pager->page_number_var_name = 'attachment_page_number';
+    $grid->set_page_size (Default_page_size);
     $grid->set_query ($attachment_query);
     $grid->display ();
   ?>

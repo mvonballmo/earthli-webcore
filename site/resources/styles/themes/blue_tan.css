@@ -1434,7 +1434,7 @@ table.panels td {
   -webkit-box-sizing: border-box;
   display: inline-block;
   vertical-align: top;
-  width: 300px;
+  width: 450px;
 }
 .grid > div:nth-child(2) {
   padding-left: 15px;
@@ -1443,15 +1443,19 @@ table.panels td {
   padding-right: 15px;
   padding-bottom: 15px;
 }
-.grid.one-column > div {
+.grid.full-width > div {
   width: 100%;
   padding-right: 0;
+  padding-left: 0;
 }
-.grid.small-tiles > div {
+.grid.tiny-tiles > div {
   width: 200px;
 }
+.grid.small-tiles > div {
+  width: 300px;
+}
 .grid.large-tiles > div {
-  width: 450px;
+  width: 600px;
 }
 .grid.content-sized-tiles > div {
   width: auto;
@@ -1462,6 +1466,9 @@ table.panels td {
 .grid.content-sized-tiles > div + div {
   padding-right: 5px;
   padding-bottom: 5px;
+}
+.grid > div.full-width {
+  width: 100%;
 }
 .page-break {
   page-break-before: always;

@@ -42,7 +42,7 @@ http://www.earthli.com/software/webcore
       /** @var SEARCH_GRID $grid */
       $grid = new $class_name ($App);
       $grid->last_page = '';
-      $grid->set_ranges (10, 1);
+      $grid->set_page_size (Default_page_size);
       $grid->set_query ($search_query);
       $grid->display ();
     ?>

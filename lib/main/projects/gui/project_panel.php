@@ -84,8 +84,6 @@ class JOB_PANEL extends ENTRY_PANEL
   {
     parent::__construct($manager, $query, $type_info);
 
-    $this->columns = 2;
-    $this->rows = 15;
     $this->id = 'job';
     $this->title = 'Jobs';
   }
@@ -102,8 +100,6 @@ class CHANGE_PANEL extends ENTRY_PANEL
   {
     parent::__construct($manager, $query, $type_info);
 
-    $this->columns = 2;
-    $this->rows = 15;
     $this->id = 'change';
     $this->title = 'Changes';
   }
@@ -126,7 +122,6 @@ class BRANCH_PANEL extends QUERY_PANEL
   {
     parent::__construct($manager, $query);
 
-    $this->columns = 2;
     $this->uses_time_selector = false;
     $this->id = 'branch';
     $this->title = 'Branches';
@@ -160,7 +155,6 @@ class COMPONENT_PANEL extends QUERY_PANEL
   {
     parent::__construct($manager, $query);
 
-    $this->columns = 2;
     $this->uses_time_selector = false;
     $this->id = 'component';
     $this->title = 'Components';

@@ -68,7 +68,7 @@ if (isset ($search))
   <?php
     $grid = $search->grid ();
     $grid->show_folder = true;
-    $grid->set_ranges (10, 2);
+    $grid->set_page_size (Default_page_size);
     $grid->set_query ($search_query);
     $grid->display ();
   ?>

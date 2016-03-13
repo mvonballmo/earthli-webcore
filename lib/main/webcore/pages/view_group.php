@@ -63,7 +63,7 @@ if (isset ($group))
   /** @var $grid GROUP_USER_GRID */
   $grid = new $class_name ($group);
   $grid->show_folder = true;
-  $grid->set_ranges (25, 1);
+  $grid->set_page_size (Default_page_size);
   $grid->set_query ($user_query);
   $grid->display ();
 ?>

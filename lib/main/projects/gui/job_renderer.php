@@ -419,7 +419,7 @@ class JOB_ASSOCIATED_DATA_RENDERER extends ENTRY_ASSOCIATED_DATA_RENDERER
   $class_name = $this->app->final_class_name ('CHANGE_GRID', 'projects/gui/change_grid.php');
   /** @var $grid CHANGE_GRID */
   $grid = new $class_name ($this->app, read_var ('search_text'));
-  $grid->set_ranges (20, 1);
+  $grid->set_page_size (Default_page_size);
   $grid->set_query ($change_query);
   $grid->display ();
 ?>

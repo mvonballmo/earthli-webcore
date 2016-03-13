@@ -167,7 +167,7 @@ class ENTRY_PRINT_RENDERER extends WEBCORE_OBJECT
       $this->grid->show_user_info = $this->preview->options->show_users;
       $this->grid->show_paginated = false;  // print all comments
       $this->grid->show_controls = false;    // don't show modification controls
-      $this->grid->set_ranges (20, 1);  // ranges irrevelevant because pagination is off
+      $this->grid->set_page_size (Default_page_size); // ranges irrelevant because pagination is off
     }
 
     $this->grid->set_query ($com_query);

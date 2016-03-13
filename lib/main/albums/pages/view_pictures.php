@@ -86,7 +86,7 @@ http://www.earthli.com/software/webcore/albums
     $class_name = $Page->final_class_name ('PICTURE_GRID', 'albums/gui/picture_grid.php');
     /** @var PICTURE_GRID $grid */
     $grid = new $class_name ($Page);
-    $grid->set_ranges (3, 3);
+    $grid->set_page_size (Default_page_size);
     $grid->set_query ($pic_query);
     $grid->display ();
   ?>

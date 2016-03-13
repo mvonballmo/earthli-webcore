@@ -113,17 +113,10 @@ abstract class GRID extends WEBCORE_OBJECT
     $this->pager = new PAGE_NAVIGATOR ($context);
   }
 
-  /**
-   * Specify the number of desired columns and rows.
-   * The grid will use a pager to allow access to the objects not representable in a 'num_rows' x 'num_cols' grid.
-   * @see GRID::display()
-   * @param integer $num_rows Number of rows to display.
-   * @param integer $num_cols Number of columns to display (some grids are not designed to use more than one column).
-   */
-  public function set_ranges($num_rows, $num_cols)
+  public function set_page_size($size)
   {
-    $this->_num_rows = $num_rows;
-    $this->_num_columns = $num_cols;
+    $this->_num_rows = $size;
+    $this->_num_columns = 1;
   }
 
   /**
@@ -634,6 +627,8 @@ abstract class GRID extends WEBCORE_OBJECT
 
   protected function _get_column_class()
   {
+    return '';
+
     switch ($this->_num_columns)
     {
       case 1:

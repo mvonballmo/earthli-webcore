@@ -128,7 +128,7 @@ http://www.earthli.com/software/webcore
         $list->form_name = $form_name;
         $list->pager->page_number_var_name = 'folder_page_number';
         $list->pager->page_anchor = "folder_list";
-        $list->set_ranges (20, 1);
+        $list->set_page_size (Default_page_size);
         $list->set_query ($folder_query);
         $list->display ();
       }
@@ -149,7 +149,7 @@ http://www.earthli.com/software/webcore
           $list->pager->page_number_var_name = "{$type_info->id}_page_number";
           $list->pager->page_anchor = "{$type_info->id}_list";
           $list->form_name = $form_name;
-          $list->set_ranges (20, 1);
+          $list->set_page_size (Default_page_size);
           $list->set_query ($entry_query);
           
           /* make a drop-down selector to choose number of entries per page and

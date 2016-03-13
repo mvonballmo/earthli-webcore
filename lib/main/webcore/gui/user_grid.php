@@ -53,6 +53,8 @@ class USER_GRID extends CONTENT_OBJECT_GRID
   public function __construct($context)
   {
     parent::__construct($context);
+
+    $this->css_class .= ' small-tiles';
   }
 
   /**

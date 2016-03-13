@@ -62,7 +62,7 @@ http://www.earthli.com/software/webcore
       $class_name = $App->final_class_name ('GROUP_GRID', 'webcore/gui/group_grid.php');
       /** @var $grid GROUP_GRID */
       $grid = new $class_name ($App);
-      $grid->set_ranges (25, 1);
+      $grid->set_page_size (Default_page_size);
       $grid->set_query ($group_query);
       $grid->display ();
     ?>

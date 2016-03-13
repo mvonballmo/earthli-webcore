@@ -49,6 +49,16 @@ require_once ('webcore/gui/grid.php');
 class ATTACHMENT_GRID extends STANDARD_GRID
 {
   /**
+   * @param CONTEXT $context Context to which this grid belongs.
+   */
+  public function __construct($context)
+  {
+    parent::__construct($context);
+
+    $this->css_class .= ' small-tiles';
+  }
+
+  /**
    * @param ATTACHMENT $obj
    * @access private
    */

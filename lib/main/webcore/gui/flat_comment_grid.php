@@ -122,7 +122,7 @@ class FLAT_COMMENT_GRID extends PRINTABLE_COMMENT_GRID
       $class_name = $this->app->final_class_name('ATTACHMENT_GRID', 'webcore/gui/attachment_grid.php');
       /** @var $grid ATTACHMENT_GRID */
       $grid = new $class_name ($this->app);
-      $grid->set_ranges(3, 3);
+      $grid->set_page_size (Default_page_size);
       $grid->set_query($attachment_query);
       $grid->display();
     }

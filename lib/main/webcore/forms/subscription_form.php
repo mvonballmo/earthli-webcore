@@ -160,7 +160,7 @@ abstract class CONTENT_OBJECT_SUBSCRIPTION_FORM extends SUBSCRIPTION_FORM
     if ($size)
     {
       $grid = $this->_make_grid ();
-      $grid->set_ranges ($size, 1);
+      $grid->set_page_size ($size);
       $grid->set_query ($query);
       $grid->items_are_selectable = true;
       $grid->items_are_selected = true;

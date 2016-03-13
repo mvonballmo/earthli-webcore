@@ -77,6 +77,7 @@ abstract class CONTENT_OBJECT_GRID extends SELECTABLE_GRID
   public function obj_link ($obj)
   {
     $t = $this->title_formatter ($obj);
+
     return $obj->title_as_link ($t);
   }
 

@@ -151,7 +151,7 @@ class ADD_TO_LIST_FORM extends ID_BASED_FORM
 
     $grid = $this->_search->grid ();
     $grid->show_folder = true;
-    $grid->set_ranges (10, 1);
+    $grid->set_page_size (Default_page_size);
     $grid->set_query ($this->_search_query);
     $grid->display ();
   }

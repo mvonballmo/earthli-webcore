@@ -27,7 +27,6 @@ http://www.earthli.com/software/webcore/news
 ****************************************************************************/
 
   require_once ('news/start.php');
-  require_once ('news/gui/news_panel.php');
   $panel_manager_class_name = 'NEWS_USER_PANEL_MANAGER';
   require_once ($App->page_template_for ('webcore/pages/view_user.php'));
 ?>

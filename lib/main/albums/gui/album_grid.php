@@ -49,6 +49,16 @@ require_once('webcore/gui/folder_grid.php');
 class ALBUM_GRID extends FOLDER_GRID
 {
   /**
+   * @param CONTEXT $context Context to which this grid belongs.
+   */
+  public function __construct($context)
+  {
+    parent::__construct($context);
+
+    $this->css_class .= ' small-tiles';
+  }
+
+  /**
    * @param ALBUM $obj
    * @access private
    */

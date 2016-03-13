@@ -25,12 +25,21 @@
     }
   }
 
-  &.one-column
+  &.full-width
   {
     > div
     {
       width: 100%;
       padding-right: 0;
+      padding-left: 0;
+    }
+  }
+
+  &.tiny-tiles
+  {
+    > div
+    {
+      width: @grid_tiny_tile_width;
     }
   }
 
@@ -66,6 +75,14 @@
         padding-right: @small_spacing;
         padding-bottom: @small_spacing;
       }
+    }
+  }
+
+  > div
+  {
+    &.full-width
+    {
+      width: 100%;
     }
   }
 }

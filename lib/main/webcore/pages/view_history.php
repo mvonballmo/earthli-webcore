@@ -43,7 +43,7 @@ http://www.earthli.com/software/webcore
     $class_name = $App->final_class_name ('HISTORY_ITEM_GRID', 'webcore/gui/history_item_grid.php');
     /** @var $grid HISTORY_ITEM_GRID */
     $grid = new $class_name ($App);
-    $grid->set_ranges (10, 1);
+    $grid->set_page_size (Default_page_size);
     $grid->set_query ($history_item_query);
     $grid->display ();
   ?>

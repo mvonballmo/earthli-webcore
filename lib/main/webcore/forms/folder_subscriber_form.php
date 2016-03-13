@@ -113,7 +113,7 @@ class FOLDER_SUBSCRIBER_FORM extends ID_BASED_FORM
     $grid = new $class_name ($this->app, $this);
     
     $num_rows = max ($query->size (), 1);
-    $grid->set_ranges ($num_rows, 1);
+    $grid->set_page_size ($num_rows);
     $grid->set_query ($query);
 
     $renderer->start_row ();

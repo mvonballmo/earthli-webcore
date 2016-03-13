@@ -60,7 +60,7 @@ http://www.earthli.com/software/webcore
       /** @var ICON_GRID $grid */
       $grid = new $class_name ($App);
       $grid->last_page = '';
-      $grid->set_ranges (4, 4);
+      $grid->set_page_size (Default_page_size);
       $grid->set_query ($icon_query);
       $grid->display ();
     ?>

@@ -77,7 +77,7 @@ http://www.earthli.com/software/webcore/albums
     $class_name = $App->final_class_name ('JOURNAL_GRID', 'albums/gui/journal_grid.php');
     /** @var JOURNAL_GRID $grid */
     $grid = new $class_name ($App);
-    $grid->set_ranges (15, 1);
+    $grid->set_page_size (Default_page_size);
     $grid->set_query ($journal_query);
     $grid->display ();
   ?>

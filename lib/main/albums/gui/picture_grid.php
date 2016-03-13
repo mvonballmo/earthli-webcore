@@ -74,6 +74,16 @@ class PICTURE_GRID extends ALBUM_ENTRY_GRID
   public $show_date = true;
 
   /**
+   * @param CONTEXT $context Context to which this grid belongs.
+   */
+  public function __construct($context)
+  {
+    parent::__construct($context);
+
+    $this->css_class .= ' small-tiles';
+  }
+
+  /**
    * @param PICTURE $obj
    * @access private
    */

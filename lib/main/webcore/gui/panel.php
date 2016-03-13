@@ -109,6 +109,11 @@ class PANEL_MANAGER extends WEBCORE_OBJECT
   public $options;
 
   /**
+   * @var TIME_FRAME_SELECTOR
+   */
+  public $time_menu;
+
+  /**
    * @param APPLICATION $context Main application.
    * @param boolean $show_time_menu Show a TIME_FRAME_SELECTOR with the panels?
    */
@@ -403,7 +408,7 @@ class PANEL_MANAGER extends WEBCORE_OBJECT
   {
     foreach ($this->_selection_order as $id)
     {
-      if ($this->_panels [$id]->selectable ())
+      if ($this->_panels[$id]->selectable ())
       {
         return $id;
       }
@@ -482,6 +487,7 @@ class PANEL_MANAGER extends WEBCORE_OBJECT
    * add_panel()}.
    * @var PANEL[]
    * @see PANEL
+   * @var int
    * @access private
    */
   protected $_location_order;
@@ -489,6 +495,7 @@ class PANEL_MANAGER extends WEBCORE_OBJECT
   /**
    * Insert new panels after this index in the selection.
    * @see add_panels_after()
+   * @var int
    * @access private
    */
   protected $_selection_add_index;
@@ -496,6 +503,7 @@ class PANEL_MANAGER extends WEBCORE_OBJECT
   /**
    * Insert new panels after this index in the display.
    * @see add_panels_after()
+   * @var int
    * @access private
    */
   protected $_location_add_index;
@@ -684,6 +692,11 @@ abstract class PANEL extends WEBCORE_OBJECT
     $url->replace_argument ('panel', $this->id);
     return $url->as_html ();
   }
+
+  /**
+   * @var PANEL_MANAGER
+   */
+  protected $_panel_manager;
 }
 
 /**
@@ -784,7 +797,7 @@ class WEBCORE_PANEL_MANAGER extends PANEL_MANAGER
     {
       $query_for_type = clone($query);
       $query_for_type->set_type ($type_info->id);
-      $class_name = $this->app->final_class_name ('ENTRY_PANEL', '', $type_info->id);
+      $class_name = $this->app->final_class_name ($panel_class_name, '', $type_info->id);
       $this->_add_entry_panel_for ($query_for_type, $type_info, $class_name);
     }
   }
@@ -828,8 +841,8 @@ class WEBCORE_PANEL_MANAGER extends PANEL_MANAGER
    * Adds three panels, one for {@link Draft}s, one for {@link Abandoned}
    * entries and one for {@link Queued} entries.
    * @param QUERY $query The base query for all entries of this type.
-   * @param $type_info The type info describing the base entry type.
-   * @param $panel_class_name The name of the panel class to create
+   * @param $type_info TYPE_INFO The type info describing the base entry type.
+   * @param $panel_class_name string The name of the panel class to create
    * @see _add_entry_panels_for()
    * @access private
    */
@@ -959,6 +972,10 @@ class INDEX_PANEL_MANAGER extends WEBCORE_PANEL_MANAGER
  */
 class FOLDER_PANEL_MANAGER extends WEBCORE_PANEL_MANAGER
 {
+  /**
+   * FOLDER_PANEL_MANAGER constructor.
+   * @param FOLDER $folder
+   */
   public function __construct ($folder)
   {
     $this->_folder = $folder;
@@ -984,11 +1001,11 @@ class FOLDER_PANEL_MANAGER extends WEBCORE_PANEL_MANAGER
    */
   protected function _add_panels ()
   {
-    $this->_add_folder_panels_for ($this->_folder->sub_folders (), true);
+    $this->_add_folder_panels_for ($this->_folder->sub_folders ());
     if (! $this->_folder->is_organizational ())
     {
-      $this->_add_entry_panels_for ($this->_folder->entry_query (), false, true);
-      $this->_add_comment_panel_for ($this->_folder->comment_query (), false, true);
+      $this->_add_entry_panels_for ($this->_folder->entry_query ());
+      $this->_add_comment_panel_for ($this->_folder->comment_query ());
     }
   }
 
@@ -1010,6 +1027,10 @@ class FOLDER_PANEL_MANAGER extends WEBCORE_PANEL_MANAGER
  */
 class USER_PANEL_MANAGER extends WEBCORE_PANEL_MANAGER
 {
+  /**
+   * USER_PANEL_MANAGER constructor.
+   * @param USER $user
+   */
   public function __construct ($user)
   {
     $this->_user = $user;
@@ -1035,8 +1056,8 @@ class USER_PANEL_MANAGER extends WEBCORE_PANEL_MANAGER
    */
   protected function _add_panels ()
   {
-    $this->_add_entry_panels_for ($this->login->user_entry_query ($this->_user->id), true, false);
-    $this->_add_comment_panel_for ($this->login->user_comment_query ($this->_user->id), true, false);
+    $this->_add_entry_panels_for ($this->login->user_entry_query ($this->_user->id));
+    $this->_add_comment_panel_for ($this->login->user_comment_query ($this->_user->id));
   }
 
   /**
@@ -1107,6 +1128,18 @@ abstract class GRID_PANEL extends PANEL
   public $columns = 1;
 
   /**
+   * The maximum number of items per page.
+   * @var int
+   */
+  public $page_size = 30;
+
+  /**
+   * The CSS class to add to this grid.
+   * @var string
+   */
+  public $css_class;
+
+  /**
    * Renders this panel.
    */
   public function display ()
@@ -1159,7 +1192,12 @@ abstract class GRID_PANEL extends PANEL
       $this->_panel_manager->options->apply_to($this->_grid);
       $this->_set_up_grid($this->_grid);
 
-      $this->_grid->set_ranges($this->rows, $this->columns);
+      if ($this->css_class)
+      {
+        $this->_grid->css_class .= ' ' . $this->css_class;
+      }
+
+      $this->_grid->set_page_size($this->page_size);
     }
   }
 
@@ -1273,7 +1311,7 @@ class COMMENT_PANEL extends QUERY_PANEL
   {
     parent::__construct($manager, $query);
 
-    $this->columns = 2;
+    $this->rows = 25;
     $this->id = 'comments';
     $this->title = 'Comments';
   }
@@ -1352,7 +1390,7 @@ class USER_PANEL extends QUERY_PANEL
     $this->uses_time_selector = false;
     $this->title = 'Users';
     $this->id = 'users';
-    $this->columns = 3;
+    $this->rows = 50;
   }
 
   /**
@@ -1396,8 +1434,7 @@ class THEME_PANEL extends QUERY_PANEL
     $this->uses_time_selector = false;
     $this->title = 'Themes';
     $this->id = 'themes';
-    $this->rows = 10;
-    $this->columns = 3;
+    $this->rows = 30;
   }
 
   /**
@@ -1441,8 +1478,7 @@ class ICON_PANEL extends QUERY_PANEL
     $this->uses_time_selector = false;
     $this->title = 'Icons';
     $this->id = 'icons';
-    $this->rows = 8;
-    $this->columns = 3;
+    $this->css_class = 'tiny-tiles';
   }
 
   /**
@@ -1493,7 +1529,7 @@ class ENTRY_PANEL extends QUERY_PANEL
   }
 
   /**
-   * @return ENTRY_GRID
+   * @return GRID
    * @access private
    */
   protected function _make_grid ()
@@ -1536,8 +1572,6 @@ class FOLDER_PANEL extends GRID_PANEL
     $type_info = $this->app->type_info_for ('FOLDER', 'webcore/obj/folder.php');
     $this->id = $type_info->id;
     $this->title = $type_info->plural_title;
-    $this->rows = 5;
-    $this->columns = 3;
   }
 
   /**
@@ -1600,7 +1634,7 @@ class FOLDER_PANEL extends GRID_PANEL
 
   /**
    * Configure the grid before displaying it.
-   * @param GRID $grid The grid to be displayed.
+   * @param FOLDER_GRID $grid The grid to be displayed.
    * @access private
    */
   protected function _set_up_grid ($grid)
@@ -1639,6 +1673,11 @@ abstract class FORM_PANEL extends PANEL
    * @abstract
    */
   public abstract function check ();
+
+  /**
+   * @var FORM
+   */
+  protected $form;
 }
 
 /**

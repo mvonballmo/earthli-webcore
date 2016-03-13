@@ -128,7 +128,7 @@ class JOURNAL_RENDERER extends ENTRY_RENDERER
           $grid->show_controls = false;
           $grid->show_date = false;
           $grid->show_page_breaks = true;
-          $grid->set_ranges (100, 3);
+          $grid->set_page_size (Default_page_size * 10);
           $grid->set_query ($pic_query);
           $grid->display ();
         }
@@ -168,7 +168,7 @@ class JOURNAL_ASSOCIATED_DATA_RENDERER extends ENTRY_ASSOCIATED_DATA_RENDERER
     $class_name = $this->app->final_class_name ('PICTURE_GRID', 'albums/gui/picture_grid.php');
     /** @var $grid PICTURE_GRID */
     $grid = new $class_name ($this->app);
-    $grid->set_ranges (2, 3);
+    $grid->set_page_size (Default_page_size);
     $grid->set_query ($pic_query);
     $grid->display ();
 ?>

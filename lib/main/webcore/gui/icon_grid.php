@@ -59,7 +59,7 @@ class ICON_GRID extends STANDARD_GRID
   {
     parent::__construct($context);
 
-    $this->css_class .= ' small-tiles';
+    $this->css_class .= ' tiny-tiles';
   }
 
   /**
