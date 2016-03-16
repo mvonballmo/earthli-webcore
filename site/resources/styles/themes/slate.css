@@ -34,7 +34,7 @@ body {
 }
 body .page {
   max-width: 100%;
-  min-width: 500px;
+  min-width: 0%;
 }
 body .page .banner {
   padding-top: 15px;
