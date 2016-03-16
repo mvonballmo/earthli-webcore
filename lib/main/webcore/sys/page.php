@@ -106,6 +106,11 @@ class PAGE extends CONTEXT
   /**
    * @var string
    */
+  public $viewport = 'width=device-width, initial-scale=1';
+
+  /**
+   * @var string
+   */
   public $author = '';
   
   /**

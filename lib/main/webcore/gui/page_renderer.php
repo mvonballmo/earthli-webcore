@@ -185,6 +185,7 @@ class PAGE_RENDERER extends WEBCORE_OBJECT
     $this->display_meta_name_tag ('author', $this->page->author);
     $this->display_meta_name_tag ('keywords', $this->page->keywords);
     $this->display_meta_name_tag ('description', $this->page->description);
+    $this->display_meta_name_tag ('viewport', $this->page->viewport);
   }
 
   public function start_display_as_text ()
