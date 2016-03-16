@@ -58,6 +58,11 @@ class RECIPE_GRID extends CONTENT_OBJECT_GRID
   public $show_folder = false;
 
   /**
+   * @var boolean
+   */
+  public $show_description = true;
+
+  /**
    * @param RECIPE $obj
    * @access private
    */
@@ -84,7 +89,11 @@ class RECIPE_GRID extends CONTENT_OBJECT_GRID
       echo $obj->time_created->format();
       ?>
     </div>
-    <div class="text-flow">
+    <?php
+    if ($this->show_description)
+    {
+      ?>
+      <div class="text-flow">
       <?php
       if ($obj->originator)
       {
@@ -92,7 +101,7 @@ class RECIPE_GRID extends CONTENT_OBJECT_GRID
         <p>
           From the kitchen of <em><?php echo $obj->originator; ?></em>
         </p>
-      <?php
+        <?php
       }
 
       if ($obj->description && !$this->items_are_selectable)
@@ -100,8 +109,10 @@ class RECIPE_GRID extends CONTENT_OBJECT_GRID
         echo $obj->description_as_html();
       }
       ?>
-    </div>
-    <?php
+      </div>
+      <?php
+    }
+
     $this->_display_finish_minimal_commands_block();
   }
 }

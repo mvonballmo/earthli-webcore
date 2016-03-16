@@ -74,6 +74,21 @@
     public $show_component = true;
 
     /**
+     * @var boolean
+     */
+    public $show_description = true;
+
+    /**
+     * @var boolean
+     */
+    public $show_user_details = true;
+
+    /**
+     * @var boolean
+     */
+    public $show_release_details = true;
+
+    /**
      * @param CONTEXT $context Context to which this grid belongs.
      */
     public function __construct($context)
@@ -100,17 +115,23 @@
       ?>
       <div class="text-flow">
         <?php
-          if ($this->show_release)
+          if ($this->show_release && $this->show_release_details)
           {
             $this->_draw_release_details($obj, $branch_info);
           }
-          $this->_draw_user_details($obj, $branch_info);
-          echo $obj->description_as_html();
-          if ($obj->extra_description)
+          if ($this->show_user_details)
           {
-            echo "<p><span class=\"field\">" . strlen($obj->extra_description) . "</span> bytes of extra information.</p>";
+            $this->_draw_user_details($obj, $branch_info);
           }
-          $this->_draw_description($obj);
+          if ($this->show_description)
+          {
+            echo $obj->description_as_html();
+            if ($obj->extra_description)
+            {
+              echo "<p><span class=\"field\">" . strlen($obj->extra_description) . "</span> bytes of extra information.</p>";
+            }
+            $this->_draw_description($obj);
+          }
         ?>
       </div>
       <?php
