@@ -1451,6 +1451,7 @@ table.panels td {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   display: inline-block;
+  vertical-align: top;
 }
 .grid > div:nth-child(2) {
   padding-left: 15px;
