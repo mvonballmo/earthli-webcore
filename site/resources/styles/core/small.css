@@ -23,6 +23,13 @@ For more information about the earthli WebCore, visit:
 http://www.earthli.com/software/webcore
 
 ****************************************************************************/
+body,
+h4,
+pre,
+.button,
+.menu {
+  font-size: 10pt;
+}
 h1,
 .banner-title {
   font-size: 20pt;
@@ -32,13 +39,6 @@ h2 {
 }
 h3 {
   font-size: 12pt;
-}
-body,
-h4,
-pre,
-.button,
-.menu {
-  font-size: 10pt;
 }
 h5,
 .detail,
