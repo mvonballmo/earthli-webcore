@@ -23,58 +23,18 @@ For more information about the earthli WebCore, visit:
 http://www.earthli.com/software/webcore
 
 ****************************************************************************/
-body,
-h4,
-pre,
-.button,
-.menu {
+body {
   font-size: 21.3px;
 }
-h1,
-.banner-title {
-  font-size: 200%;
-}
-h2 {
-  font-size: 167%;
-}
-h3 {
-  font-size: 140%;
-}
-h5,
-.detail,
-.notes,
-.info-box-bottom,
-.info-box-top,
-.subdued,
-.login-status,
-.footnote-reference,
-.basic-form .description,
-.message-box .description {
-  font-size: 85%;
-}
-.shell,
-.copyright,
-.versions,
-.statistics,
-.modification-time {
-  font-size: 75%;
-}
-.style-controls select:not([size]) {
-  height: 47.925px;
-}
-.icon + .caption {
-  position: relative;
-}
 .icon.thirty-two + .caption {
+  position: relative;
   top: -5.35px;
 }
 .icon.twenty + .caption {
+  position: relative;
   top: 0px;
 }
 .icon.sixteen + .caption {
-  top: 0px;
-}
-.button .icon,
-.style-controls button .icon {
+  position: relative;
   top: 0px;
 }

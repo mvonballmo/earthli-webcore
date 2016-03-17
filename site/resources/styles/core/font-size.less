@@ -1,0 +1,30 @@
+@import "core-values";
+
+body
+{
+  font-size: @body_font_size;
+}
+
+.set-caption-top-relative-to-icon(@icon_size)
+{
+  position: relative;
+  top: min(0px, -((@icon_size - @body_font_size) / 2));
+}
+
+.icon
+{
+  &.thirty-two + .caption
+  {
+    .set-caption-top-relative-to-icon(32px);
+  }
+
+  &.twenty + .caption
+  {
+    .set-caption-top-relative-to-icon(20px);
+  }
+
+  &.sixteen + .caption
+  {
+    .set-caption-top-relative-to-icon(16px);
+  }
+}

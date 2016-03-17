@@ -27,6 +27,66 @@ iframe {
   border: none;
 }
 body {
+  font-size: 16px;
+}
+.icon.thirty-two + .caption {
+  position: relative;
+  top: -8px;
+}
+.icon.twenty + .caption {
+  position: relative;
+  top: -2px;
+}
+.icon.sixteen + .caption {
+  position: relative;
+  top: 0px;
+}
+h4,
+pre,
+.button,
+.menu {
+  font-size: 100%;
+}
+h1,
+.banner-title {
+  font-size: 200%;
+}
+h2 {
+  font-size: 167%;
+}
+h3 {
+  font-size: 140%;
+}
+h5,
+.detail,
+.notes,
+.info-box-bottom,
+.info-box-top,
+.subdued,
+.login-status,
+.footnote-reference,
+.basic-form .description,
+.message-box .description {
+  font-size: 85%;
+}
+.shell,
+.copyright,
+.versions,
+.statistics,
+.modification-time {
+  font-size: 75%;
+}
+.style-controls select:not([size]) {
+  height: 4ex;
+}
+.button .icon,
+.style-controls button .icon,
+.style-controls input[type=button] .icon,
+.style-controls input[type=submit] .icon {
+  position: relative;
+  top: 0.25ex;
+}
+body {
   margin: 0;
   padding: 0;
   background-color: #f8ffb6;
