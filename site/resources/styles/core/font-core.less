@@ -1,4 +1,5 @@
 @import "font-values";
+@import "core-mixins";
 
 body,
 h4,
@@ -53,6 +54,11 @@ h5,
   height: @select_control_height;
 }
 
+.set-caption-top-relative-to-icon(@icon_size)
+{
+  top: min(0px, -((@icon_size - @body_font_size) / 2));
+}
+
 .icon
 {
   + .caption
@@ -62,17 +68,17 @@ h5,
 
   &.thirty-two + .caption
   {
-    top: -@icon_thirty_two_caption_offset;
+    .set-caption-top-relative-to-icon(32px);
   }
 
   &.twenty + .caption
   {
-    top: -@icon_twenty_caption_offset;
+    .set-caption-top-relative-to-icon(20px);
   }
 
   &.sixteen + .caption
   {
-    top: -@icon_sixteen_caption_offset;
+    .set-caption-top-relative-to-icon(16px);
   }
 }
 

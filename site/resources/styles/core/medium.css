@@ -38,7 +38,7 @@ h2 {
   font-size: 167%;
 }
 h3 {
-  font-size: 150%;
+  font-size: 140%;
 }
 h5,
 .detail,
@@ -60,7 +60,7 @@ h5,
   font-size: 75%;
 }
 .style-controls select:not([size]) {
-  height: 35px;
+  height: 36px;
 }
 .icon + .caption {
   position: relative;
@@ -72,7 +72,7 @@ h5,
   top: -2px;
 }
 .icon.sixteen + .caption {
-  top: 0;
+  top: 0px;
 }
 .button .icon,
 .style-controls button .icon {

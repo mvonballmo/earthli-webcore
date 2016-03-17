@@ -171,7 +171,7 @@ class SAMPLE_FORM extends FORM
   $box->start_column_set();
   $box->new_column_of_type('left-sidebar-column');
   ?>
-  <div class="left-sidebar">
+  <div class="left-sidebar text-flow">
     <p>Customize the font and theme to the right and see a preview below.</p>
     <div class="form-content" style="width: 200px">
       <?php

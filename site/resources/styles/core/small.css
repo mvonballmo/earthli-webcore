@@ -28,17 +28,17 @@ h4,
 pre,
 .button,
 .menu {
-  font-size: 10pt;
+  font-size: 14px;
 }
 h1,
 .banner-title {
-  font-size: 20pt;
+  font-size: 200%;
 }
 h2 {
-  font-size: 14pt;
+  font-size: 167%;
 }
 h3 {
-  font-size: 12pt;
+  font-size: 140%;
 }
 h5,
 .detail,
@@ -50,23 +50,23 @@ h5,
 .footnote-reference,
 .basic-form .description,
 .message-box .description {
-  font-size: 8pt;
+  font-size: 85%;
 }
 .shell,
 .copyright,
 .versions,
 .statistics,
 .modification-time {
-  font-size: 8pt;
+  font-size: 75%;
 }
 .style-controls select:not([size]) {
-  height: 31px;
+  height: 31.5px;
 }
 .icon + .caption {
   position: relative;
 }
 .icon.thirty-two + .caption {
-  top: -8px;
+  top: -9px;
 }
 .icon.twenty + .caption {
   top: -3px;
