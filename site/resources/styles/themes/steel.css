@@ -862,15 +862,6 @@ pre > code .attribute-value,
 .text-flow {
   line-height: 160%;
   text-align: left;
-  column-width: 50em;
-  -webkit-column-width: 50em;
-  -moz-column-width: 50em;
-  column-rule: 1px solid #6c7a8d;
-  -webkit-column-rule: 1px solid #6c7a8d;
-  -moz-column-rule: 1px solid #6c7a8d;
-  column-gap: 30px;
-  -webkit-column-gap: 30px;
-  -moz-column-gap: 30px;
 }
 .text-flow ul:not([class]),
 .text-flow ol:not([class]) {
