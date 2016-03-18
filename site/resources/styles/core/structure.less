@@ -41,8 +41,8 @@ body
         .banner-logo
         {
           background-repeat: no-repeat;
-          width: 250px;
-          height: 75px;
+          width: @banner_logo_width;
+          height: @banner_logo_height;
 
           a
           {
@@ -53,6 +53,7 @@ body
 
         .banner-content
         {
+          display: inline-block;
           position: absolute;
           right: 0;
           bottom: 0;

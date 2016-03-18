@@ -117,14 +117,15 @@ body .page .banner .banner-header {
 }
 body .page .banner .banner-header .banner-logo {
   background-repeat: no-repeat;
-  width: 250px;
-  height: 75px;
+  width: 242px;
+  height: 74px;
 }
 body .page .banner .banner-header .banner-logo a {
   display: block;
   height: 100%;
 }
 body .page .banner .banner-header .banner-content {
+  display: inline-block;
   position: absolute;
   right: 0;
   bottom: 0;
@@ -582,7 +583,6 @@ div.info-box-top {
 }
 /* @group object header */
 .description-box {
-  width: 25%;
   border-right: 1px solid #b6b6b6;
   padding-right: 15px;
 }
@@ -590,13 +590,11 @@ div.info-box-top {
   margin-top: 15px;
 }
 .contents-box {
-  width: 20%;
   padding-left: 15px;
   padding-right: 15px;
   margin-bottom: 15px;
 }
 .sub-folders-box {
-  width: 30%;
   padding-left: 15px;
   padding-right: 15px;
 }
@@ -605,7 +603,6 @@ div.info-box-top {
   overflow-y: auto;
 }
 .tools-box {
-  width: 25%;
   padding-left: 15px;
   padding-right: 15px;
 }
@@ -874,6 +871,15 @@ pre > code .attribute-value,
 .text-flow {
   line-height: 160%;
   text-align: left;
+  column-width: 50em;
+  -webkit-column-width: 50em;
+  -moz-column-width: 50em;
+  column-rule: 1px solid #b6b6b6;
+  -webkit-column-rule: 1px solid #b6b6b6;
+  -moz-column-rule: 1px solid #b6b6b6;
+  column-gap: 30px;
+  -webkit-column-gap: 30px;
+  -moz-column-gap: 30px;
 }
 .text-flow ul:not([class]),
 .text-flow ol:not([class]) {
@@ -1302,8 +1308,8 @@ input[type=submit] + .menu-items.buttons,
   padding-left: 10px;
 }
 .menu-items.standard li:before {
-  content: '|';
-  padding: 0 0.4em;
+  content: '| ';
+  padding: 0 0 0 0.3em;
 }
 .menu-items.objects li:before,
 .menu-items.location li:before {
@@ -1753,13 +1759,13 @@ table.panels td {
 .content-column {
   width: 75%;
 }
-.column-set {
-  display: table;
-  width: 100%;
-}
-.column-set-column {
-  display: table-cell;
+.column-set > div {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  display: inline-block;
   vertical-align: top;
+  padding-right: 15px;
 }
 .left-column {
   padding-right: 15px;
@@ -1771,7 +1777,6 @@ table.panels td {
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
-  width: 50%;
 }
 .two-columns + .two-columns {
   margin-left: 15px;
@@ -1780,7 +1785,6 @@ table.panels td {
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
-  width: 33%;
 }
 .three-columns + .three-columns {
   margin-left: 15px;

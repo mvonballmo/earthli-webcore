@@ -195,6 +195,10 @@ pre > code,
   line-height: @text_flow_line_height;
   text-align: left;
 
+  .column-width(@text_flow_column_width);
+  .column-rule(@hairline_border_width, solid, @standard_border_color);
+  .column-gap(2 * @standard_spacing);
+
   ul:not([class]),
   ol:not([class])
   {
