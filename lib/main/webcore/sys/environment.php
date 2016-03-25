@@ -87,6 +87,13 @@ class ENVIRONMENT extends RESOLVER
    */
   public $default_domain;
 
+  /**
+   * Default protocol to use (e.g. "HTTP").
+   * Set this value with {@link set_host_properties()}.
+   * @var string
+   */
+  public $default_protocol = 'https';
+
   /* Helper objects */
 
   /**
@@ -339,7 +346,7 @@ class ENVIRONMENT extends RESOLVER
 
     if (! isset ($this->_running_on_declared_host))
     {
-      $this->_running_on_declared_host = preg_match ('/^' . str_replace('/', '\\/', 'http://' . $this->server_domain ()) . '/', $this->url_options->main_domain);
+      $this->_running_on_declared_host = preg_match ('/^' . str_replace('/', '\\/', $this->default_protocol . '://' . $this->server_domain ()) . '/', $this->url_options->main_domain);
     }
 
     return $this->_running_on_declared_host;
@@ -397,7 +404,7 @@ class ENVIRONMENT extends RESOLVER
     {
       $host_name = $this->default_domain ();
     }
-    return ensure_has_protocol ($host_name, 'http');
+    return ensure_has_protocol ($host_name, $this->default_protocol);
   }
 
   /**
@@ -498,8 +505,10 @@ class ENVIRONMENT extends RESOLVER
    *
    * @see url_to_file_name()
    * @see url_to_folder()
-   * @param string $default_domain Default host to use if ({@link
-   * is_http_server()} is <code>False</code>).
+   * @param string $default_protocol Default protocol to use if {@link
+   * is_http_server()} is <code>False</code>.
+   * @param string $default_domain Default host to use if {@link
+   * is_http_server()} is <code>False</code>.
    * @param string[] $domains Optional list of domains and their
    * corresponding server-local paths. The default mapping maps the server root
    * to the document root. However, you can customize the mapping with regular
@@ -507,8 +516,9 @@ class ENVIRONMENT extends RESOLVER
    * ('mydomain. [net|com]' => '/var/www/mydomain/', '[www.]? otherdomain\.
    * [com|net|org]' => '/var/www/otherdomain/').
    */
-  public function set_host_properties ($default_domain, $domains = null)
+  public function set_host_properties ($default_protocol, $default_domain, $domains = null)
   {
+    $this->default_protocol = $default_protocol;
     $this->default_domain = $default_domain;
     if (isset($domains))
     {
