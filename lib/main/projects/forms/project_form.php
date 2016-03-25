@@ -431,7 +431,7 @@ class PROJECT_FORM extends FOLDER_FORM
     $renderer->draw_text_box_row ('description');
 
     $renderer->draw_submit_button_row ();
-    $this->_draw_history_item_controls ($renderer, false);
+    $this->_draw_history_item_controls ($renderer);
 
     $renderer->finish ();
     $box_renderer->finish_column_set ();

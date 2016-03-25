@@ -559,7 +559,7 @@ class JOB_FORM extends PROJECT_ENTRY_FORM
 
     $renderer->draw_check_boxes_row(' ', $props);
 
-    $this->_draw_history_item_controls ($renderer, false);
+    $this->_draw_history_item_controls ($renderer);
 
     $renderer->finish ();
   }

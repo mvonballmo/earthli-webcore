@@ -185,7 +185,7 @@ class COMMENT_FORM extends ATTACHMENT_HOST_FORM
 
     $renderer->draw_submit_button_row ();
 
-    $this->_draw_history_item_controls ($renderer, false);
+    $this->_draw_history_item_controls ($renderer);
 
     $renderer->finish ();
   }

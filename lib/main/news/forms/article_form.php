@@ -70,7 +70,11 @@ class ARTICLE_FORM extends DRAFTABLE_ENTRY_FORM
   protected function _draw_options ($renderer)
   {
     parent::_draw_options ($renderer);
-    $renderer->draw_check_box_row ('update_modifier_on_change');
+
+    $props = $renderer->make_check_properties ();
+    $props->css_class = 'full-screen-optional';
+
+    $renderer->draw_check_box_row ('update_modifier_on_change', $props);
   }
   
   /**

@@ -481,21 +481,23 @@ class FORM_RENDERER extends CONTROLS_RENDERER
 <?php
   }
 
-  /**
-   * Starts a hideable/hidden area in the form.
-   * @param string $id Unique name of the layer
-   * @param string $title Title displayed for the layer row
-   * @param string $description Text displayed next to the title; formatted
-   * using {@link PHP_MANUAL#sprintf} to build the final string; make sure to
-   * include %s somewhere in the string so the instructions for toggling the
-   * layer are included (e.g. "These are only for advanced users. %s advanced
-   * options." generates "These are only for advanced users. Use the arrow to
-   * the left to show advanced options.").
-   * @param boolean $visible Whether to initially display the layer or not
-   * @return LAYER Pass this layer to {@link finish_layer_row()} to close it.
-   * @see finish_layer_row()
-   */
-  public function start_layer_row ($id, $title, $description, $visible = false)
+/**
+ * Starts a hideable/hidden area in the form.
+ * @param string $id Unique name of the layer
+ * @param string $title Title displayed for the layer row
+ * @param string $description Text displayed next to the title; formatted
+ * using {@link PHP_MANUAL#sprintf} to build the final string; make sure to
+ * include %s somewhere in the string so the instructions for toggling the
+ * layer are included (e.g. "These are only for advanced users. %s advanced
+ * options." generates "These are only for advanced users. Use the arrow to
+ * the left to show advanced options.").
+ * @param boolean $visible Whether to initially display the layer or not
+ * @param string $css_class An optional class to use on the outer layer.
+ * @return LAYER Pass this layer to <a href='psi_element://finish_layer_row()'>finish_layer_row()</a> to close it.
+ * to close it.
+ * @see finish_layer_row()
+ */
+  public function start_layer_row ($id, $title, $description, $visible = false, $css_class = '')
   {
     if ($this->context->dhtml_allowed())
     {
@@ -510,7 +512,9 @@ class FORM_RENDERER extends CONTROLS_RENDERER
       $Result = null;
     }
 
-    $this->start_block ($title, 'toggle');
+    $css_class = empty($css_class) ? 'toggle' : $css_class . ' toggle';
+
+    $this->start_block ($title, $css_class);
     if (isset($toggle))
     {
 ?>
@@ -630,12 +634,14 @@ class FORM_RENDERER extends CONTROLS_RENDERER
     }
   }
 
-  /**
-   * Open a nested content area in the form.
-   * Use this feature to create hierarchical 'sub-forms'. Any rows added to the form
-   * are added to blocks nested within the content area of the last open row. Should only be called when
-   * there is already a row opened with {@link start_row()}. Must be closed with {@link finish_block()}.
-   */
+    /**
+     * Open a nested content area in the form.
+     * Use this feature to create hierarchical 'sub-forms'. Any rows added to the form
+     * are added to blocks nested within the content area of the last open row. Should only be called when
+     * there is already a row opened with {@link start_row()}. Must be closed with {@link finish_block()}.
+     * @param string $title The title to use for the legend.
+     * @param string $css_class An optional CSS class to apply to the outer layer.
+     */
   public function start_block ($title, $css_class = '')
   {
     if ($css_class)

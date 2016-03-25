@@ -251,13 +251,12 @@ abstract class AUDITABLE_FORM extends RENDERABLE_FORM
   /**
    * Draws controls for history item notification.
    * @param FORM_RENDERER $renderer
-   * @param boolean $show_initially
    * @access private
    */
-  protected function _draw_history_item_controls ($renderer, $show_initially)
+  protected function _draw_history_item_controls ($renderer)
   {
     $description = 'Change history is stored automatically. %s history options.';
-    $layer = $renderer->start_layer_row ('history', 'History', $description);
+    $layer = $renderer->start_layer_row ('history', 'History', $description, false, 'full-screen-optional');
       $props = $renderer->make_list_properties ();
       $props->show_descriptions = true;
       $props->add_item ('Default', History_item_default, 'Let the system decide whether to send notifications for this change.');

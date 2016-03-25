@@ -349,7 +349,7 @@ class USER_FORM extends CONTENT_OBJECT_FORM
       $renderer->draw_text_box_row ('description', 'short-medium');
     $renderer->finish_layer_row ($layer);
 
-    $this->_draw_history_item_controls ($renderer, false);
+    $this->_draw_history_item_controls ($renderer);
 
     $renderer->finish ();
   }

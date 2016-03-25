@@ -166,7 +166,10 @@ class OBJECT_IN_FOLDER_FORM extends CONTENT_OBJECT_FORM
    */
   protected function _draw_options ($renderer)
   {
-    $renderer->draw_check_box_row ('is_visible');
+    $props = $renderer->make_check_properties ();
+    $props->css_class = 'full-screen-optional';
+
+    $renderer->draw_check_box_row ('is_visible', $props);
   }
 
   /**
@@ -183,7 +186,7 @@ class OBJECT_IN_FOLDER_FORM extends CONTENT_OBJECT_FORM
       $this->_draw_options ($renderer);
     }
     $renderer->draw_submit_button_row ();
-    $this->_draw_history_item_controls ($renderer, false);
+    $this->_draw_history_item_controls ($renderer);
     $renderer->finish ();
   }
 

@@ -442,10 +442,8 @@ body .page {
   -ms-flex: 1;
   flex: 1;
 }
-.viewport .page .page-body .form-content form > div .form-with-preview .basic-form > div:nth-child(3),
-.full-screen-edit .page .page-body .form-content form > div .form-with-preview .basic-form > div:nth-child(3),
-.viewport .page .page-body .form-content form > div .form-with-preview .basic-form > fieldset,
-.full-screen-edit .page .page-body .form-content form > div .form-with-preview .basic-form > fieldset {
+.viewport .page .page-body .form-content form > div .form-with-preview .basic-form > .full-screen-optional,
+.full-screen-edit .page .page-body .form-content form > div .form-with-preview .basic-form > .full-screen-optional {
   display: none;
 }
 .full-screen-edit .banner,
