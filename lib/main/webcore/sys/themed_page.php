@@ -429,7 +429,6 @@ class THEMED_PAGE extends PAGE
   public function set_printable ()
   {
     parent::set_printable ();
-    $this->theme->main_CSS_file_name = '{' . Folder_name_themes . '}/printable';
     $this->theme->font_name_CSS_file_name = '{' . Folder_name_styles . '}fonts/georgia';
   }
 
