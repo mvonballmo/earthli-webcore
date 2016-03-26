@@ -75,28 +75,26 @@ class DEFAULT_PAGE_RENDERER extends WEBCORE_PAGE_RENDERER
     if ($options->header_visible && !$browser->is(Browser_previewer))
     {
 ?>
-    <div class="banner">
-      <div class="banner-header">
+    <div class="header">
+      <div class="banner">
       <?php
         if ($options->logo_file)
         {
           $root_url = $page->path_to (Folder_name_root);
           $logo_url = $page->resolve_file ($options->logo_file);
       ?>
-        <div class="banner-logo" style="background-image: url(<?php echo $logo_url; ?>)"><a href="<?php echo $root_url; ?>"></a></div>
+        <div class="logo" style="background-image: url(<?php echo $logo_url; ?>)"><a href="<?php echo $root_url; ?>"></a></div>
       <?php } ?>
-        <div class="banner-content">
+        <div class="content">
           <?php
           if ($options->icon)
           {
             ?>
-            <div class="icon-container">
-              <div class="banner-icon" style="background-image: url(<?php echo $page->get_icon_url ($options->icon, Fifty_px); ?>)"></div>
+              <div class="icon" style="background-image: url(<?php echo $page->get_icon_url ($options->icon, Fifty_px); ?>)"></div>
           <?php
           }
           ?>
-
-          <div class="banner-title">
+          <div class="title">
           <?php
           $newsfeed_commands = $this->page->newsfeed_options->make_commands($this->context);
           if ($newsfeed_commands->num_executable_commands())
@@ -111,16 +109,7 @@ class DEFAULT_PAGE_RENDERER extends WEBCORE_PAGE_RENDERER
           <div class="login-status">
             <?php echo $this->_login_theme_status ($options); ?>
           </div>
-          <?php
-          if ($options->icon)
-          {
-            ?>
-            </div>
-            <?php
-          }
-          ?>
         </div>
-        <div class="clear-both"></div>
       </div>
       <div class="nav-box">
       <?php

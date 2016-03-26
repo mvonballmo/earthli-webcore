@@ -23,6 +23,30 @@ For more information about the earthli WebCore, visit:
 http://www.earthli.com/software/webcore
 
 ****************************************************************************/
+.align-left {
+  float: left;
+  margin: 0 15px 15px 0;
+}
+.align-right {
+  float: right;
+  margin: 0 0 15px 15px;
+}
+.align-center {
+  margin: auto;
+  display: table;
+}
+.clear-left {
+  clear: left;
+  display: block;
+}
+.clear-right {
+  clear: right;
+  display: block;
+}
+.clear-both {
+  clear: both;
+  display: block;
+}
 iframe {
   border: none;
 }
@@ -48,7 +72,7 @@ pre,
   font-size: 100%;
 }
 h1,
-.banner-title {
+.banner .title {
   font-size: 200%;
 }
 h2 {
@@ -96,73 +120,63 @@ body .page {
   max-width: 100%;
   min-width: 0%;
 }
-body .page .banner {
+body .page .header {
   padding-top: 15px;
-  padding-left: 15px;
-  padding-right: 15px;
-  margin-right: -15px;
   background-color: transparent;
   color: #c0c0c0;
 }
-body .page .banner a:link,
-body .page .banner a:visited {
+body .page .header a:link,
+body .page .header a:visited {
   color: #cccc66;
 }
-body .page .banner a:hover,
-body .page .banner a:active {
+body .page .header a:hover,
+body .page .header a:active {
   color: #f0f0a8;
 }
-body .page .banner .banner-header {
-  position: relative;
-}
-body .page .banner .banner-header .banner-logo {
-  background-repeat: no-repeat;
+body .page .header .banner .logo {
+  display: inline-block;
+  margin-left: 15px;
   width: 242px;
   height: 74px;
+  background-repeat: no-repeat;
 }
-body .page .banner .banner-header .banner-logo a {
+body .page .header .banner .logo a {
   display: block;
   height: 100%;
 }
-body .page .banner .banner-header .banner-content {
+body .page .header .banner .content {
   display: inline-block;
-  position: absolute;
-  right: 0;
-  bottom: 0;
+  float: right;
   text-align: right;
+  margin-right: 15px;
 }
-body .page .banner .banner-header .banner-content .banner-title {
+body .page .header .banner .content .title {
   display: inline-block;
   color: #ffc63f;
 }
-body .page .banner .banner-header .banner-content .icon-container {
-  margin-right: 15px;
-}
-body .page .banner .banner-header .banner-content .icon-container .banner-icon {
+body .page .header .banner .content .icon {
   width: 50px;
   height: 50px;
   display: inline-block;
-  position: absolute;
-  right: 0;
-  bottom: 10px;
   margin-left: 15px;
   background-repeat: no-repeat;
   margin-right: 15px;
 }
-body .page .banner .banner-header .banner-content .icon-container .banner-title {
-  margin-right: 65px;
-}
-body .page .banner .banner-header .banner-content .icon-container .login-status {
-  margin-right: 65px;
-  margin-top: 10px;
-}
-body .page .banner .nav-box {
-  margin-top: 15px;
+body .page .header .nav-box {
   margin-left: -15px;
+  margin-right: -15px;
   padding-left: 15px;
+  padding-right: 15px;
+  clear: both;
+  display: block;
+  margin-top: 15px;
   padding-bottom: 5px;
   border-bottom: 1px solid #5d5d5d;
   line-height: 160%;
+}
+body .page .header .nav-box .menu-items {
+  padding-left: 15px;
+  padding-right: 15px;
 }
 body .page .page-body {
   padding: 0 15px;
@@ -170,12 +184,12 @@ body .page .page-body {
   clear: both;
 }
 body .page .page-body .top-box {
-  border-bottom: 1px solid #5d5d5d;
-  margin-bottom: 15px;
-  margin-right: -15px;
   margin-left: -15px;
+  margin-right: -15px;
   padding-left: 15px;
   padding-right: 15px;
+  border-bottom: 1px solid #5d5d5d;
+  margin-bottom: 15px;
 }
 body .page .page-body .main-box {
   margin-left: -15px;
@@ -189,10 +203,10 @@ body .page .page-body .main-box div:last-child {
 }
 body .page .footer {
   clear: both;
-  padding-left: 15px;
   margin-top: 15px;
-  border-top: 1px solid #5d5d5d;
   padding-top: 5px;
+  padding-bottom: 5px;
+  border-top: 1px solid #5d5d5d;
   background-color: transparent;
   color: #c0c0c0;
 }
@@ -206,6 +220,8 @@ body .page .footer a:active {
 }
 body .page .footer .footer-data {
   display: block;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 body .page .footer .footer-data + .footer-data {
   margin-top: 5px;
@@ -926,30 +942,6 @@ pre > code .attribute-value,
   line-height: 150%;
   margin-left: -2em;
   margin-top: .3em;
-}
-.align-left {
-  float: left;
-  margin: 0 15px 15px 0;
-}
-.align-right {
-  float: right;
-  margin: 0 0 15px 15px;
-}
-.align-center {
-  margin: auto;
-  display: table;
-}
-.clear-left {
-  clear: left;
-  display: block;
-}
-.clear-right {
-  clear: right;
-  display: block;
-}
-.clear-both {
-  clear: both;
-  display: block;
 }
 .abstract {
   border-width: 1px 0;
@@ -2378,7 +2370,7 @@ select {
 }
 @media print {
   .top-box,
-  .banner-header,
+  .banner,
   .footer-data .links,
   .footer-data .versions {
     display: none;

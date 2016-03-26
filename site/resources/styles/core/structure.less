@@ -14,35 +14,32 @@ body
     max-width: @page_max_width;
     min-width: @page_min_width;
 
-    .banner
+    .header
     {
       padding-top: @standard_spacing;
-      padding-left: @standard_spacing;
-      padding-right: @standard_spacing;
-      margin-right: -@standard_spacing;
-      background-color: @banner_background_color;
-      .repeated-background(@banner_background_url);
-      color: @banner_text_color;
+      background-color: @header_background_color;
+      .repeated-background(@header_background_url);
+      color: @header_text_color;
 
       a:link, a:visited
       {
-        color: @banner_link_color;
+        color: @header_link_color;
       }
 
       a:hover, a:active
       {
-        color: @banner_link_hover_color;
+        color: @header_link_hover_color;
       }
 
-      .banner-header
+      .banner
       {
-        position: relative;
-
-        .banner-logo
+        .logo
         {
-          background-repeat: no-repeat;
+          display: inline-block;
+          margin-left: @standard_spacing;
           width: @banner_logo_width;
           height: @banner_logo_height;
+          background-repeat: no-repeat;
 
           a
           {
@@ -51,64 +48,45 @@ body
           }
         }
 
-        .banner-content
+        .content
         {
           display: inline-block;
-          position: absolute;
-          right: 0;
-          bottom: 0;
+          float: right;
           text-align: right;
+          margin-right: @standard_spacing;
 
-          .banner-title
+          .title
           {
             display: inline-block;
             color: @banner_title_color;
           }
 
-          .icon-container
+          .icon
           {
+            width: 50px;
+            height: 50px;
+            display: inline-block;
+            margin-left: @standard_spacing;
+            background-repeat: no-repeat;
             margin-right: @standard_spacing;
-
-            .banner-icon
-            {
-              width: 50px;
-              height: 50px;
-              display: inline-block;
-              position: absolute;
-              right: 0;
-              bottom: 10px;
-              margin-left: @standard_spacing;
-              background-repeat: no-repeat;
-              margin-right: @standard_spacing;
-            }
-
-            .banner-title
-            {
-              margin-right: 65px;
-            }
-
-            .login-status
-            {
-              margin-right: 65px;
-              margin-top: 10px;
-            }
           }
-        }
-
-        .banner-content when not (@banner_background_color = transparent)
-        {
-          margin-right: @standard_spacing;
         }
       }
 
       .nav-box
       {
+        .non-intrusive-x-spacing();
+        .clear-both();
         margin-top: @standard_spacing;
-        margin-left: -@standard_spacing;
-        padding-left: @standard_spacing;
         padding-bottom: @small_spacing;
         border-bottom: @hairline_border_width solid @standard_border_color;
         line-height: @text_flow_line_height;
+
+        .menu-items
+        {
+          padding-left: @standard_spacing;
+          padding-right: @standard_spacing;
+        }
       }
     }
 
@@ -120,20 +98,14 @@ body
 
       .top-box
       {
+        .non-intrusive-x-spacing();
         border-bottom: @hairline_border_width solid @standard_border_color;
         margin-bottom: @standard_spacing;
-        margin-right: -@standard_spacing;
-        margin-left: -@standard_spacing;
-        padding-left: @standard_spacing;
-        padding-right: @standard_spacing;
       }
 
       .main-box
       {
-        margin-left: -@standard_spacing;
-        margin-right: -@standard_spacing;
-        padding-left: @standard_spacing;
-        padding-right: @standard_spacing;
+        .non-intrusive-x-spacing();
 
         p,
         div
@@ -149,10 +121,10 @@ body
     .footer
     {
       clear: both;
-      padding-left: @standard_spacing;
       margin-top: @standard_spacing;
-      border-top: @hairline_border_width solid @standard_border_color;
       padding-top: @small_spacing;
+      padding-bottom: @small_spacing;
+      border-top: @hairline_border_width solid @standard_border_color;
       background-color: @footer_background_color;
       .repeated-background(@footer_background_url);
       color: @footer_text_color;
@@ -170,6 +142,8 @@ body
       .footer-data
       {
         display: block;
+        padding-left: @standard_spacing;
+        padding-right: @standard_spacing;
       }
 
       .footer-data + .footer-data
@@ -177,15 +151,5 @@ body
         margin-top: @small_spacing;
       }
     }
-
-    .footer when not (@footer_background_color = transparent)
-    {
-      padding-bottom: @small_spacing;
-    }
-  }
-
-  .page when not (@footer_background_color = transparent)
-  {
-    margin-bottom: 0;
   }
 }
