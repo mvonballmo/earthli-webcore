@@ -151,7 +151,7 @@ class RECIPE_APPLICATION extends DRAFTABLE_APPLICATION
   /**
    * @var integer
    */
-  public $version = '3.5';
+  public $version = '3.7';
 
   /**
    * @param PAGE $page Page to which this application is attached.
