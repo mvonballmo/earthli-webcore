@@ -368,6 +368,18 @@ class PAGE_TEMPLATE_OPTIONS
   public $icon = '';
 
   /**
+   * Determines whether to show the {@link $icon}.
+   * @var boolean
+   */
+  public $show_icon = false;
+
+  /**
+   * Determines whether to show the {@link $title}.
+   * @var boolean
+   */
+  public $show_title = false;
+
+  /**
    * Text of the copyright message for this page.
    * @var string
    */

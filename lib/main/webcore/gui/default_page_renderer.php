@@ -77,53 +77,61 @@ class DEFAULT_PAGE_RENDERER extends WEBCORE_PAGE_RENDERER
 ?>
     <div class="header">
       <div class="banner">
-      <?php
+        <?php
         if ($options->logo_file)
         {
-          $root_url = $page->path_to (Folder_name_root);
-          $logo_url = $page->resolve_file ($options->logo_file);
-      ?>
-        <div class="logo" style="background-image: url(<?php echo $logo_url; ?>)"><a href="<?php echo $root_url; ?>"></a></div>
-      <?php } ?>
+          $root_url = $page->path_to(Folder_name_root);
+          $logo_url = $page->resolve_file($options->logo_file);
+          ?>
+          <div class="logo" style="background-image: url(<?php echo $logo_url; ?>)"><a
+              href="<?php echo $root_url; ?>"></a></div>
+          <?php
+        }
+        ?>
         <div class="content">
           <?php
-          if ($options->icon)
+          if ($options->show_icon && $options->icon)
           {
-            ?>
-              <div class="icon" style="background-image: url(<?php echo $page->get_icon_url ($options->icon, Fifty_px); ?>)"></div>
+          ?>
+          <div class="icon" style="background-image: url(<?php echo $page->get_icon_url ($options->icon, Fifty_px); ?>)"></div>
           <?php
           }
+
+          if ($options->show_title && $options->title)
+          {
           ?>
           <div class="title">
-          <?php
-          $newsfeed_commands = $this->page->newsfeed_options->make_commands($this->context);
-          if ($newsfeed_commands->num_executable_commands())
-          {
-            $renderer = $this->context->make_newsfeed_menu_renderer ();
-            $renderer->set_size (Menu_size_minimal);
-            $renderer->display ($newsfeed_commands);
-          }
-          ?>
           <?php echo $options->title; ?>
           </div>
-          <div class="login-status">
-            <?php echo $this->_login_theme_status ($options); ?>
+          <?php
+          }
+          ?>
+          <div class="commands">
+            <?php
+            $newsfeed_commands = $this->page->newsfeed_options->make_commands($this->context);
+            if ($newsfeed_commands->num_executable_commands())
+            {
+              $renderer = $this->context->make_newsfeed_menu_renderer ();
+              $renderer->set_size (Menu_size_minimal);
+              $renderer->display ($newsfeed_commands);
+            }
+
+            echo $this->_login_theme_status ($options); ?>
           </div>
         </div>
       </div>
-      <div class="nav-box">
       <?php
-        $this->_handle_client_data_warnings ($options);
-        $this->_handle_browser_warnings ($options, true);
-
-        if ($page->location->size ())
-        {
-          $page->location->display ();
-        }
+      if ($page->location->size ())
+      {
       ?>
-      </div>
+      <div class="nav-box"><?php $page->location->display (); ?></div>
+      <?php
+      }
+      ?>
     </div>
 <?php
+      $this->_handle_client_data_warnings ($options);
+      $this->_handle_browser_warnings ($options, true);
     }
 ?>
     <div class="page-body">
