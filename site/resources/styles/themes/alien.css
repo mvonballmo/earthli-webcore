@@ -87,18 +87,15 @@ h5,
 .info-box-bottom,
 .info-box-top,
 .subdued,
-.login-status,
 .footnote-reference,
 .basic-form .description,
-.message-box .description {
-  font-size: 85%;
-}
+.message-box .description,
 .shell,
 .copyright,
 .versions,
 .statistics,
 .modification-time {
-  font-size: 75%;
+  font-size: 85%;
 }
 .style-controls select:not([size]) {
   height: 4ex;
@@ -110,11 +107,14 @@ h5,
   position: relative;
   top: 0.25ex;
 }
+.subtle-titles h3 {
+  font-size: 105%;
+}
 body {
   margin: 0;
   padding: 0;
-  background-color: #000000;
-  color: #ffffff;
+  background-color: black;
+  color: white;
 }
 body .page {
   max-width: 100%;
@@ -122,8 +122,8 @@ body .page {
 }
 body .page .header {
   padding-top: 15px;
-  background-color: #222222;
-  color: #ffffff;
+  background-color: #222;
+  color: white;
 }
 body .page .header a:link,
 body .page .header a:visited {
@@ -152,6 +152,7 @@ body .page .header .banner .content {
 }
 body .page .header .banner .content .title {
   display: inline-block;
+  min-height: 50px;
   color: #ff8d46;
 }
 body .page .header .banner .content .icon {
@@ -177,6 +178,11 @@ body .page .header .nav-box {
 body .page .header .nav-box .menu-items {
   padding-left: 15px;
   padding-right: 15px;
+}
+body .page .header:after {
+  content: "";
+  display: block;
+  clear: both;
 }
 body .page .page-body {
   padding: 0 15px;
@@ -207,8 +213,8 @@ body .page .footer {
   padding-top: 5px;
   padding-bottom: 5px;
   border-top: 1px solid #666666;
-  background-color: #222222;
-  color: #ffffff;
+  background-color: #222;
+  color: white;
 }
 body .page .footer a:link,
 body .page .footer a:visited {
@@ -494,11 +500,11 @@ hr {
   margin: 15px 0 15px -3px;
 }
 .chart {
-  color: #ffffff;
+  color: white;
   background-color: transparent;
 }
 .preview {
-  color: #ffffff;
+  color: white;
   background-color: transparent;
 }
 .hidden-layer {
@@ -573,7 +579,7 @@ div.info-box-top {
 }
 .graph-foreground {
   display: inline-block;
-  color: #000000;
+  color: black;
   background-color: #ff8d46;
 }
 .graph-background {
@@ -657,7 +663,7 @@ div.info-box-top {
   width: 170px;
 }
 .log-in-form {
-  width: 30em;
+  max-width: 30em;
 }
 .pager {
   margin-top: 15px;
@@ -779,7 +785,7 @@ cite {
   font-style: italic;
 }
 abbr {
-  border-bottom: 1px dotted #aaaaaa;
+  border-bottom: 1px dotted #AAA;
 }
 var,
 kbd {
@@ -792,7 +798,7 @@ kbd {
   border-radius: 4px;
   border: 1px solid silver;
   border-bottom: medium none #FFFFFF;
-  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.196), 0 0 0 1px #ffffff inset;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.196), 0 0 0 1px #FFFFFF inset;
   color: #444444;
   padding: 0 5px;
   white-space: nowrap;
@@ -1043,8 +1049,8 @@ pre > code .attribute-value,
 .warning,
 .error {
   padding: 5px;
-  border: 1px dotted #666666;
-  color: #776655;
+  border: 1px dotted #666;
+  color: #765;
 }
 .caution p:first-child,
 .warning p:first-child,
@@ -1062,7 +1068,7 @@ pre > code .attribute-value,
 .caution a:visited,
 .warning a:visited,
 .error a:visited {
-  color: #6666cc;
+  color: #66C;
 }
 .caution.icon,
 .warning.icon,
@@ -1076,15 +1082,15 @@ pre > code .attribute-value,
 }
 .error {
   background-color: #ff8484;
-  border-color: #a00000;
+  border-color: #A00000;
 }
 .warning {
   background-color: #ffa627;
-  border-color: #a06000;
+  border-color: #A06000;
 }
 .caution {
   background-color: #ffff66;
-  border-color: #a0a000;
+  border-color: #A0A000;
 }
 span.error,
 span.warning,
@@ -1285,8 +1291,8 @@ input[type=submit] + .menu-items.buttons,
 }
 .menu-items.objects li:before,
 .menu-items.location li:before {
-  content: '>';
-  padding: 0 0.4em;
+  content: '> ';
+  padding: 0 0 0 0.3em;
 }
 .menu-items li:first-child:before {
   content: '';
@@ -1320,11 +1326,11 @@ input[type=submit] + .menu-items.buttons,
   border: 1px solid #666666;
 }
 .cell-highlight {
-  color: #ffffff;
+  color: white;
   background-color: #1f1f1f;
 }
 .cell-selected {
-  color: #ffffff;
+  color: white;
   background-color: #141414;
 }
 .cell-empty {
@@ -1465,205 +1471,241 @@ table.panels td {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   margin: 15px 0;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: -ms-flex;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  -moz-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
 }
 .grid > div {
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
-  display: inline-block;
+  -webkit-flex-basis: auto;
+  -moz-flex-basis: auto;
+  -ms-flex-basis: auto;
+  flex-basis: auto;
+  -webkit-flex-grow: 1;
+  -moz-flex-grow: 1;
+  -ms-flex-grow: 1;
+  flex-grow: 1;
   vertical-align: top;
-  padding-right: 15px;
-  padding-bottom: 15px;
+  margin-right: 15px;
+  margin-bottom: 15px;
+}
+@media screen and (min-width: 450px) {
+  .grid > div {
+    width: 50%;
+  }
 }
 @media screen and (min-width: 900px) {
   .grid > div {
-    width: 50%;
+    width: 33.33333333%;
   }
 }
 @media screen and (min-width: 1350px) {
   .grid > div {
-    width: 33.33333333%;
+    width: 25%;
   }
 }
 @media screen and (min-width: 1800px) {
   .grid > div {
-    width: 25%;
+    width: 20%;
   }
 }
 @media screen and (min-width: 2250px) {
   .grid > div {
-    width: 20%;
+    width: 16.66666667%;
   }
 }
 @media screen and (min-width: 2700px) {
   .grid > div {
-    width: 16.66666667%;
+    width: 14.28571429%;
   }
 }
 @media screen and (min-width: 3150px) {
   .grid > div {
-    width: 14.28571429%;
+    width: 12.5%;
   }
 }
 @media screen and (min-width: 3600px) {
   .grid > div {
-    width: 12.5%;
+    width: 11.11111111%;
   }
 }
 @media screen and (min-width: 4050px) {
   .grid > div {
-    width: 11.11111111%;
+    width: 10%;
   }
 }
 @media screen and (min-width: 4500px) {
   .grid > div {
-    width: 10%;
+    width: 9.09090909%;
+  }
+}
+@media screen and (min-width: 200px) {
+  .grid.tiny-tiles > div {
+    width: 50%;
   }
 }
 @media screen and (min-width: 400px) {
   .grid.tiny-tiles > div {
-    width: 50%;
+    width: 33.33333333%;
   }
 }
 @media screen and (min-width: 600px) {
   .grid.tiny-tiles > div {
-    width: 33.33333333%;
+    width: 25%;
   }
 }
 @media screen and (min-width: 800px) {
   .grid.tiny-tiles > div {
-    width: 25%;
+    width: 20%;
   }
 }
 @media screen and (min-width: 1000px) {
   .grid.tiny-tiles > div {
-    width: 20%;
+    width: 16.66666667%;
   }
 }
 @media screen and (min-width: 1200px) {
   .grid.tiny-tiles > div {
-    width: 16.66666667%;
+    width: 14.28571429%;
   }
 }
 @media screen and (min-width: 1400px) {
   .grid.tiny-tiles > div {
-    width: 14.28571429%;
+    width: 12.5%;
   }
 }
 @media screen and (min-width: 1600px) {
   .grid.tiny-tiles > div {
-    width: 12.5%;
+    width: 11.11111111%;
   }
 }
 @media screen and (min-width: 1800px) {
   .grid.tiny-tiles > div {
-    width: 11.11111111%;
+    width: 10%;
   }
 }
 @media screen and (min-width: 2000px) {
   .grid.tiny-tiles > div {
-    width: 10%;
+    width: 9.09090909%;
+  }
+}
+@media screen and (min-width: 300px) {
+  .grid.small-tiles > div {
+    width: 50%;
   }
 }
 @media screen and (min-width: 600px) {
   .grid.small-tiles > div {
-    width: 50%;
+    width: 33.33333333%;
   }
 }
 @media screen and (min-width: 900px) {
   .grid.small-tiles > div {
-    width: 33.33333333%;
+    width: 25%;
   }
 }
 @media screen and (min-width: 1200px) {
   .grid.small-tiles > div {
-    width: 25%;
+    width: 20%;
   }
 }
 @media screen and (min-width: 1500px) {
   .grid.small-tiles > div {
-    width: 20%;
+    width: 16.66666667%;
   }
 }
 @media screen and (min-width: 1800px) {
   .grid.small-tiles > div {
-    width: 16.66666667%;
+    width: 14.28571429%;
   }
 }
 @media screen and (min-width: 2100px) {
   .grid.small-tiles > div {
-    width: 14.28571429%;
+    width: 12.5%;
   }
 }
 @media screen and (min-width: 2400px) {
   .grid.small-tiles > div {
-    width: 12.5%;
+    width: 11.11111111%;
   }
 }
 @media screen and (min-width: 2700px) {
   .grid.small-tiles > div {
-    width: 11.11111111%;
+    width: 10%;
   }
 }
 @media screen and (min-width: 3000px) {
   .grid.small-tiles > div {
-    width: 10%;
+    width: 9.09090909%;
   }
 }
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 600px) {
   .grid.large-tiles > div {
     width: 50%;
   }
 }
-@media screen and (min-width: 1800px) {
+@media screen and (min-width: 1200px) {
   .grid.large-tiles > div {
     width: 33.33333333%;
   }
 }
-@media screen and (min-width: 2400px) {
+@media screen and (min-width: 1800px) {
   .grid.large-tiles > div {
     width: 25%;
   }
 }
-@media screen and (min-width: 3000px) {
+@media screen and (min-width: 2400px) {
   .grid.large-tiles > div {
     width: 20%;
   }
 }
-@media screen and (min-width: 3600px) {
+@media screen and (min-width: 3000px) {
   .grid.large-tiles > div {
     width: 16.66666667%;
   }
 }
-@media screen and (min-width: 4200px) {
+@media screen and (min-width: 3600px) {
   .grid.large-tiles > div {
     width: 14.28571429%;
   }
 }
-@media screen and (min-width: 4800px) {
+@media screen and (min-width: 4200px) {
   .grid.large-tiles > div {
     width: 12.5%;
   }
 }
-@media screen and (min-width: 5400px) {
+@media screen and (min-width: 4800px) {
   .grid.large-tiles > div {
     width: 11.11111111%;
   }
 }
-@media screen and (min-width: 6000px) {
+@media screen and (min-width: 5400px) {
   .grid.large-tiles > div {
     width: 10%;
   }
 }
+@media screen and (min-width: 6000px) {
+  .grid.large-tiles > div {
+    width: 9.09090909%;
+  }
+}
 .grid.content-sized-tiles > div {
   width: auto;
-  padding-right: 5px;
-  padding-bottom: 5px;
+  margin-right: 5px;
+  margin-bottom: 5px;
 }
 .grid.full-width > div {
   width: 100%;
-  padding-right: 0;
-  padding-left: 0;
+  margin-right: 0;
+  margin-left: 0;
 }
 .grid > div.full-width {
   width: 100%;
@@ -1727,6 +1769,23 @@ table.panels td {
   margin-right: -15px;
   border-left: 1px solid #666666;
   padding-left: 15px;
+}
+.columns {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: -ms-flex;
+  display: flex;
+  -webkit-flex-flow: row wrap;
+  -moz-flex-flow: row wrap;
+  -ms-flex-flow: row wrap;
+  flex-flow: row wrap;
+}
+.columns > div {
+  -webkit-flex: auto;
+  -moz-flex: auto;
+  -ms-flex: auto;
+  flex: auto;
 }
 .content-column {
   width: 75%;
@@ -1821,7 +1880,7 @@ table.panels td {
 }
 .basic-form {
   line-height: 160%;
-  color: #ffffff;
+  color: white;
   background-color: transparent;
 }
 .basic-form fieldset {
