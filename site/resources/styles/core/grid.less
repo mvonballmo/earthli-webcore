@@ -5,15 +5,19 @@
 {
   .border-box();
   margin: @standard_spacing 0;
+  .flex-display();
+  .flex-wrap(wrap);
 
   > div
   {
     .border-box();
-    display: inline-block;
+    .flex-basis(auto);
+    .flex-grow(1);
+
     vertical-align: top;
 
-    padding-right: @standard_spacing;
-    padding-bottom: @standard_spacing;
+    margin-right: @standard_spacing;
+    margin-bottom: @standard_spacing;
   }
 
   > div
@@ -51,8 +55,8 @@
     {
       width: auto;
 
-      padding-right: @small_spacing;
-      padding-bottom: @small_spacing;
+      margin-right: @small_spacing;
+      margin-bottom: @small_spacing;
     }
   }
 
@@ -61,8 +65,8 @@
     > div
     {
       width: 100%;
-      padding-right: 0;
-      padding-left: 0;
+      margin-right: 0;
+      margin-left: 0;
     }
   }
 
