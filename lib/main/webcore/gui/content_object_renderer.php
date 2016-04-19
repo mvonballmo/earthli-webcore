@@ -106,7 +106,7 @@ class CONTENT_OBJECT_RENDERER extends AUDITABLE_RENDERER
       $munger = $obj->html_formatter ();
       $this->_prepare_formatter ($munger);
   ?>
-      <div class="text-flow">
+      <div class="text-flow wide">
   <?php
       echo $munger->transform ($text, $obj);
   ?>

@@ -849,6 +849,17 @@ pre > code .attribute-value,
   line-height: 160%;
   text-align: left;
 }
+.text-flow.wide {
+  column-width: 30em;
+  -webkit-column-width: 30em;
+  -moz-column-width: 30em;
+  column-rule: 1px solid #cbc2b0;
+  -webkit-column-rule: 1px solid #cbc2b0;
+  -moz-column-rule: 1px solid #cbc2b0;
+  column-gap: 30px;
+  -webkit-column-gap: 30px;
+  -moz-column-gap: 30px;
+}
 .text-flow ul:not([class]),
 .text-flow ol:not([class]) {
   margin-left: 0;
