@@ -93,10 +93,8 @@ http://www.earthli.com/software/webcore
   $Page->start_display ();
 ?>
   <div class="top-box">
+    <div class="columns text-flow">
     <?php
-    $box = $Page->make_box_renderer ();
-    $box->start_column_set ();
-
     if (isset ($folder))
     {
       /** @var $renderer OBJECT_RENDERER */
@@ -109,51 +107,55 @@ http://www.earthli.com/software/webcore
 
       if ($text)
       {
-        $box->new_column_of_type ('description-box');
-
-        echo $text;
+        ?>
+        <div class="left-sidebar">
+          <?php echo $text; ?>
+        </div>
+        <?php
       }
     }
 
-    $box->new_column_of_type ('contents-box');
-
-    echo '<h4>Contents</h4>';
-    echo '<div class="panels">';
-
-    $panel_manager->display ();
-
-    echo '</div>';
-
+    ?>
+    <div>
+      <h4>Contents</h4>
+      <div class="panels">
+        <?php $panel_manager->display (); ?>
+      </div>
+    </div>
+    <?php
     if (! empty ($folders))
     {
-      $box->new_column_of_type('sub-folders-box');
-
       $folder_type_info = $App->type_info_for ('FOLDER');
-
-      echo '<h4>' . $folder_type_info->plural_title . '</h4>';
-      /* Make a copy (not a reference). */
-      $tree = $App->make_tree_renderer ();
-      include_once ('webcore/gui/folder_tree_node_info.php');
-      $tree->node_info = new FOLDER_TREE_NODE_INFO ($App);
-      $tree->node_info->page_args = read_vars (array ('panel', 'time_frame'));
-      $tree->display ($folders);
+      ?>
+      <div class="tree-content">
+        <h4><?php echo $folder_type_info->plural_title; ?></h4>
+        <?php
+        $tree = $App->make_tree_renderer ();
+        include_once ('webcore/gui/folder_tree_node_info.php');
+        $tree->node_info = new FOLDER_TREE_NODE_INFO ($App);
+        $tree->node_info->page_args = read_vars (array ('panel', 'time_frame'));
+        $tree->display ($folders);
+        ?>
+      </div>
+      <?php
     }
-
-    $box->new_column_of_type ('tools-box');
-
-    echo '<h4>Search</h4>';
-
-    $class_name = $App->final_class_name ('EXECUTE_SEARCH_FORM', 'webcore/forms/execute_search_form.php');
-    $search = null;
-    $selected_panel = $panel_manager->selected_panel ();
-    /** @var $form EXECUTE_SEARCH_FORM */
-    $form = new $class_name ($App, $search);
-    $form->load_with_defaults ();
-    $form->set_value ('state', $selected_panel->state);
-    $form->display ();
-
-    $box->finish_column_set ();
     ?>
+      <div>
+        <h4>Search</h4>
+        <div class="form-content">
+          <?php
+          $class_name = $App->final_class_name ('EXECUTE_SEARCH_FORM', 'webcore/forms/execute_search_form.php');
+          $search = null;
+          $selected_panel = $panel_manager->selected_panel ();
+          /** @var $form EXECUTE_SEARCH_FORM */
+          $form = new $class_name ($App, $search);
+          $form->load_with_defaults ();
+          $form->set_value ('state', $selected_panel->state);
+          $form->display ();
+          ?>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="main-box">
     <div class="menu-bar-top">

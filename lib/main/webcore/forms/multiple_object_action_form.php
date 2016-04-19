@@ -232,22 +232,21 @@ abstract class MULTIPLE_OBJECT_ACTION_FORM extends ID_BASED_FORM
   {
     if ($this->object_list->has_objects ())
     {
-      $box_renderer = $this->context->make_box_renderer();
-      $box_renderer->start_column_set();
-      $box_renderer->new_column_of_type('left-sidebar-column text-flow');
 ?>
-      <div class="left-sidebar">
-<?php
-        $this->_draw_selected_objects ();
-?>
+      <div class="columns text-flow">
+        <div class="left-sidebar">
+          <?php $this->_draw_selected_objects (); ?>
+        </div>
+        <div>
+          <?php
+          $renderer->labels_css_class = 'top';
+          $renderer->start ();
+          $this->_draw_message ($renderer);
+          $renderer->finish ();
+          ?>
+        </div>
       </div>
-<?php
-      $renderer->labels_css_class = 'top';
-      $box_renderer->new_column_of_type('content-column');
-        $renderer->start ();
-        $this->_draw_message ($renderer);
-        $renderer->finish ();
-      $box_renderer->finish_column_set ();
+      <?php
     }
     else
     {

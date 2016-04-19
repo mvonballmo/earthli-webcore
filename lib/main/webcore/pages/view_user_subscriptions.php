@@ -82,11 +82,7 @@ http://www.earthli.com/software/webcore
       $Page->start_display ();
   ?>
     <div class="main-box">
-      <?php
-      $box = $Page->make_box_renderer();
-      $box->start_column_set();
-      $box->new_column_of_type('left-sidebar-column');
-      ?>
+      <div class="columns text-flow">
         <div class="left-sidebar text-flow">
           <h2>
             Subscriptions
@@ -95,17 +91,14 @@ http://www.earthli.com/software/webcore
           $panel_manager->display (true);
           ?>
         </div>
-      <?php
-      $box->new_column_of_type('content-column');
-      ?>
-        <div class="form-content">
-      <?php
-      $selected_panel->display ();
-      ?>
+        <div>
+          <div class="form-content">
+            <?php
+            $selected_panel->display ();
+            ?>
+          </div>
         </div>
-      <?php
-      $box->finish_column_set();
-      ?>
+      </div>
     </div>
     <?php
       $Page->finish_display ();

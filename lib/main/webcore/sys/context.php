@@ -447,15 +447,6 @@ class CONTEXT extends RESOLVER
   }
 
   /**
-   * Return an object to draw boxes and columns.
-   * @return BOX_RENDERER
-   */
-  public function make_box_renderer ()
-  {
-    return $this->make_object ('box_renderer', 'BOX_RENDERER', 'webcore/gui/box_renderer.php');
-  }
-
-  /**
    * Return an object to draw menus.
    * @see make_menu()
    * @return MENU_RENDERER

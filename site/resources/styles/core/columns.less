@@ -1,87 +1,86 @@
 @import "core-values";
 @import "core-mixins";
 
-.left-sidebar-column
-{
-  padding-right: @standard_spacing;
-}
-
-.right-sidebar-column
-{
-  padding-left: @standard_spacing;
-}
-
 .left-sidebar
 {
-  padding-left: @standard_spacing;
-  margin-left: -@standard_spacing;
-  border-right: @hairline_border_width solid @standard_border_color;
-  padding-right: @standard_spacing;
+  .hairline-bottom-border();
 }
 
 .right-sidebar
 {
-  padding-right: @standard_spacing;
-  margin-right: -@standard_spacing;
-  border-left: @hairline_border_width solid @standard_border_color;
-  padding-left: @standard_spacing;
+  .hairline-top-border();
 }
 
-.content-column
+.top-box
 {
-  width: 75%;
-}
-
-.column-set
-{
-  //display: table;
-  //width: 100%;
-
-  > div
+  .columns
   {
-    .border-box();
-    display: inline-block;
-    vertical-align: top;
+    > div
+    {
+      margin-bottom: @standard_spacing;
 
-    padding-right: @standard_spacing;
+      .tree,
+      .panels
+      {
+        max-height: 300px;
+        overflow-y: auto;
+      }
+    }
   }
 }
 
-.column-set-column
+@media screen and (min-width: @min-width-for-columns)
 {
-  //display: table-cell;
-  //vertical-align: top;
-}
-
-.left-column
-{
-  padding-right: @standard_spacing;
-}
-
-.right-column
-{
-  width: 75%;
-}
-
-.two-columns
-{
-  .border-box();
-//  width: 50%;
-
-  + .two-columns
+  .columns
   {
-    margin-left: @standard_spacing;
+    .flex-display();
+    .flex-wrap(wrap);
+
+    > div
+    {
+      .flex(5);
+      margin: 0 @standard_spacing;
+
+      &:first-child
+      {
+        margin-left: 0;
+      }
+
+      &:last-child
+      {
+        margin-right: 0;
+      }
+
+      &.left-sidebar
+      {
+        .flex(2);
+        border: none;
+        padding-top: 0;
+        margin-left: -@standard_spacing;
+        padding-left: @standard_spacing;
+        .hairline-right-border();
+      }
+
+      &.right-sidebar
+      {
+        .flex(2);
+        border: none;
+        padding-top: 0;
+        .hairline-left-border();
+        padding-right: @standard_spacing;
+        margin-right: -@standard_spacing;
+      }
+    }
+  }
+
+  .top-box
+  {
+    .columns
+    {
+      > div.left-sidebar
+      {
+        .flex(3);
+      }
+    }
   }
 }
-
-.three-columns
-{
-  .border-box();
-//  width: 33%;
-
-  + .three-columns
-  {
-    margin-left: @standard_spacing;
-  }
-}
-

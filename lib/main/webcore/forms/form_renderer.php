@@ -562,7 +562,6 @@ class FORM_RENDERER extends CONTROLS_RENDERER
    * @param $title string The title to use for the row.
    * @param $text string The text to display.
    * @param string $css_class The class to use for the content box.
-   * @internal param string $class CSS class used for text.
    */
   public function draw_text_row ($title, $text, $css_class = '')
   {

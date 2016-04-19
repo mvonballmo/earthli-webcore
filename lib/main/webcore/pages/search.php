@@ -78,9 +78,12 @@ http://www.earthli.com/software/webcore
     $Page->start_display ();
   ?>
   <div class="main-box">
-    <div class="form-content" id="search-form">
-      <?php $form->display (); ?>
-    </div>
+    <div class="columns text-flow">
+      <div class="left-sidebar">
+        <div class="form-content" id="search-form">
+          <?php $form->display (); ?>
+        </div>
+      </div>
     <?php
       if ($form->committed ())
       {
@@ -90,34 +93,26 @@ http://www.earthli.com/software/webcore
         $renderer = $folder->handler_for (Handler_menu);
         $renderer->display ($commands);
 */
+
+        $label = $num_search_results == 1 ? 'Result' : 'Results';
     ?>
-    <h2 id="search-results">
-    <?php 
-      if ($num_search_results == 1)
-      {
-        echo $num_search_results . ' Result';
-      }
-      else
-      {
-        echo $num_search_results . ' Results';
-      }
-    ?>
-    </h2>
-    <div class="text-flow">
-      <?php echo $search->system_description_as_html (); ?>
-      <?php
-        $grid = $search->grid ();
-        $grid->show_folder = true;
-        $grid->items_are_selectable = false;
-        $grid->selector_name = "{$type_info->id}_ids";
-        $grid->set_page_size (Default_page_size);
-        $grid->set_query ($search_query);
-        $grid->display ();
-      ?>
-    </div>
+        <div>
+          <h2 id="search-results"><?php echo "$num_search_results $label"; ?></h2>
+          <?php echo $search->system_description_as_html (); ?>
+          <?php
+            $grid = $search->grid ();
+            $grid->show_folder = true;
+            $grid->items_are_selectable = false;
+            $grid->selector_name = "{$type_info->id}_ids";
+            $grid->set_page_size (Default_page_size);
+            $grid->set_query ($search_query);
+            $grid->display ();
+          ?>
+        </div>
     <?php
       }
     ?>
+    </div>
   </div>
   <?php
     $Page->finish_display ();

@@ -60,122 +60,125 @@ http://www.earthli.com/software/webcore/albums
 
     $Page->start_display ();
 ?>
-<div class="top-box">
-  <?php
-  $box = $Page->make_box_renderer ();
-  $box->start_column_set ();
+    <div class="top-box">
+      <div class="columns text-flow">
+        <?php
 
-  /** @var $renderer OBJECT_RENDERER */
-  $renderer = $folder->handler_for (Handler_html_renderer);
-  $options = $renderer->options ();
-  $options->show_as_summary = true;
-  $options->show_users = false;
+        /** @var $renderer OBJECT_RENDERER */
+        $renderer = $folder->handler_for (Handler_html_renderer);
+        $options = $renderer->options ();
+        $options->show_as_summary = true;
+        $options->show_users = false;
 
-  $text = $renderer->display_to_string ($folder);
+        $text = $renderer->display_to_string ($folder);
 
-  if ($text)
-  {
-    $box->new_column_of_type ('description-box');
+        if ($text)
+        {
+          ?>
+          <div class="left-sidebar">
+            <?php echo $text; ?>
+          </div>
+          <?php
+        }
 
-    echo $text;
-  }
-
-  $box->new_column_of_type ('contents-box');
-
-  echo '<h4>Contents</h4>';
-  echo '<div class="panels">';
-
-  $panel_manager->display ();
-
-  echo '</div>';
-
-  if (! empty ($folders))
-  {
-    $box->new_column_of_type('sub-folders-box');
-
-    $folder_type_info = $App->type_info_for ('FOLDER');
-
-    echo '<h4>Sub-' . $folder_type_info->plural_title . '</h4>';
-
-    $tree = $App->make_tree_renderer ();
-    include_once ('webcore/gui/folder_tree_node_info.php');
-    $tree->node_info = new FOLDER_TREE_NODE_INFO ($App);
-    $tree->node_info->page_args = read_vars (array ('panel', 'time_frame'));
-    $tree->display ($folders);
-  }
-
-  $box->new_column_of_type ('tools-box');
-
-  echo '<h4>Search</h4>';
-
-  $class_name = $App->final_class_name ('EXECUTE_SEARCH_FORM', 'webcore/forms/execute_search_form.php');
-  $search = null;
-  $selected_panel = $panel_manager->selected_panel ();
-  /** @var $form EXECUTE_SEARCH_FORM */
-  $form = new $class_name ($App, $search);
-  $form->load_with_defaults ();
-  $form->set_value ('state', $selected_panel->state);
-  $form->set_value ('folder_ids', $folder->id);
-  $form->set_value ('folder_search_type', Search_user_constant);
-  $form->display ();
-
-  $box->finish_column_set ();
-  ?>
-</div>
-<div class="main-box">
-  <div class="menu-bar-top">
-    <?php
-    if ($panel->uses_time_selector)
-    {
-      $panel_manager->display_time_menu ();
-    }
-    $pager = $panel->get_pager();
-
-    if ($pager)
-    {
-      $pager->pages_to_show = 0;
-      $pager->display();
-    }
-
-    $grid = $panel->get_grid();
-    if ($grid)
-    {
-      $grid->show_pager = false;
-    }
-
-    /** @var MENU_RENDERER $renderer */
-    $renderer = $folder->handler_for (Handler_menu);
-    $renderer->set_size(Menu_size_standard);
-    $renderer->num_important_commands = 2;
-    /** @var COMMANDS $commands */
-    $commands = $folder->handler_for(Handler_commands);
-    $renderer->display($commands);
-    ?>
-  </div>
-  <?php
-    $panel->display ();
-
-    if ($panel->num_objects ())
-    {
-      // don't show the bottom selector if there are no objects
-    ?>
-    <div class="menu-bar-bottom">
-    <?php
-      if ($panel->uses_time_selector)
-      {
-        $panel_manager->display_time_menu ();
-      }
-      if ($pager)
-      {
-        $pager->pages_to_show = 5;
-        $pager->display(true);
-      }
-    ?>
+        ?>
+        <div>
+          <h4>Contents</h4>
+          <div class="panels">
+            <?php $panel_manager->display (); ?>
+          </div>
+        </div>
+        <?php
+        if (! empty ($folders))
+        {
+          $folder_type_info = $App->type_info_for ('FOLDER');
+          ?>
+          <div class="tree-content">
+            <h4>Sub-<?php echo $folder_type_info->plural_title; ?></h4>
+            <?php
+            $tree = $App->make_tree_renderer ();
+            include_once ('webcore/gui/folder_tree_node_info.php');
+            $tree->node_info = new FOLDER_TREE_NODE_INFO ($App);
+            $tree->node_info->page_args = read_vars (array ('panel', 'time_frame'));
+            $tree->display ($folders);
+            ?>
+          </div>
+          <?php
+        }
+        ?>
+        <div>
+          <h4>Search</h4>
+          <div class="form-content">
+            <?php
+            $class_name = $App->final_class_name ('EXECUTE_SEARCH_FORM', 'webcore/forms/execute_search_form.php');
+            $search = null;
+            $selected_panel = $panel_manager->selected_panel ();
+            /** @var $form EXECUTE_SEARCH_FORM */
+            $form = new $class_name ($App, $search);
+            $form->load_with_defaults ();
+            $form->set_value ('state', $selected_panel->state);
+            $form->set_value ('folder_ids', $folder->id);
+            $form->set_value ('folder_search_type', Search_user_constant);
+            $form->display ();
+            ?>
+          </div>
+        </div>
+      </div>
     </div>
-    <?php
-    }
-    ?>
-</div>
+    <div class="main-box">
+      <div class="menu-bar-top">
+        <?php
+        if ($panel->uses_time_selector)
+        {
+          $panel_manager->display_time_menu ();
+        }
+        $pager = $panel->get_pager();
+
+        if ($pager)
+        {
+          $pager->pages_to_show = 0;
+          $pager->display();
+        }
+
+        $grid = $panel->get_grid();
+        if ($grid)
+        {
+          $grid->show_pager = false;
+        }
+
+        /** @var MENU_RENDERER $renderer */
+        $renderer = $folder->handler_for (Handler_menu);
+        $renderer->set_size(Menu_size_standard);
+        $renderer->num_important_commands = 2;
+        /** @var COMMANDS $commands */
+        $commands = $folder->handler_for(Handler_commands);
+        $renderer->display($commands);
+        ?>
+      </div>
+      <?php
+        $panel->display ();
+
+        if ($panel->num_objects ())
+        {
+          // don't show the bottom selector if there are no objects
+        ?>
+        <div class="menu-bar-bottom">
+        <?php
+          if ($panel->uses_time_selector)
+          {
+            $panel_manager->display_time_menu ();
+          }
+          if ($pager)
+          {
+            $pager->pages_to_show = 5;
+            $pager->display(true);
+          }
+        ?>
+        </div>
+        <?php
+        }
+        ?>
+    </div>
 <?php
     $Page->finish_display ();
   }

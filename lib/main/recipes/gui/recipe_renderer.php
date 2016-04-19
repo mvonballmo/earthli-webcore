@@ -66,15 +66,22 @@ class RECIPE_RENDERER extends DRAFTABLE_ENTRY_RENDERER
   <?php
     if (! $this->_options->preferred_text_length )
     {
-      $box = $this->context->make_box_renderer ();
-      $box->start_column_set ();
-      $box->new_column_of_type ('two-columns text-flow');
-      echo '<h3>Ingredients</h3>';
-      echo $entry->ingredients_as_html ();
-      $box->new_column_of_type ('two-columns text-flow');
-      echo '<h3>Instructions</h3>';
-      echo $entry->instructions_as_html ();
-      $box->finish_column_set();
+      ?>
+      <div class="columns text-flow">
+        <div>
+          <h3>Ingredients</h3>
+          <?php
+          echo $entry->ingredients_as_html ();
+          ?>
+        </div>
+        <div>
+          <h3>Instructions</h3>
+          <?php
+          echo $entry->instructions_as_html ();
+          ?>
+        </div>
+      </div>
+  <?php
     }
 
     $this->_echo_html_user_information ($entry, 'info-box-bottom');

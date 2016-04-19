@@ -567,7 +567,6 @@ class MENU_RENDERER extends WEBCORE_OBJECT
 
   /**
    * Draw important commands and a trigger side-by-side.
-   * Uses a {@link BOX_RENDERER} to draw cross-platform.
    * @param COMMANDS $commands
    * @access private
    */

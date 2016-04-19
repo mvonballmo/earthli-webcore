@@ -295,33 +295,30 @@ class PROJECT_FORM extends FOLDER_FORM
    */
   protected function _draw_controls ($renderer)
   {
-    $box_renderer = $this->context->make_box_renderer();
-    $box_renderer->start_column_set();
-    $box_renderer->new_column_of_type('left-sidebar-column');
 ?>
-    <div class="left-sidebar">
-      <?php
-        $folder_query = $this->login->folder_query ();
+    <div class="columns text-flow">
+      <div class="left-sidebar">
+        <?php
+          $folder_query = $this->login->folder_query ();
 
-        /** @var PROJECT[] $folders */
-        $folders = $folder_query->tree ();
+          /** @var PROJECT[] $folders */
+          $folders = $folder_query->tree ();
 
-        include_once ('projects/gui/project_tree_node_info.php');
-        $tree_node_info = new PROJECT_TREE_NODE_INFO ($this->app);
-        $tree_node_info->page_link = $this->env->url (Url_part_file_name);
-        $tree_node_info->set_visible_node ($this->_folder);
-        $tree_node_info->set_selected_node ($this->_folder);
-        $tree_node_info->set_defined_nodes_visible ($folders);
+          include_once ('projects/gui/project_tree_node_info.php');
+          $tree_node_info = new PROJECT_TREE_NODE_INFO ($this->app);
+          $tree_node_info->page_link = $this->env->url (Url_part_file_name);
+          $tree_node_info->set_visible_node ($this->_folder);
+          $tree_node_info->set_selected_node ($this->_folder);
+          $tree_node_info->set_defined_nodes_visible ($folders);
 
-        /* Make a copy (not a reference). */
-        $tree = $this->app->make_tree_renderer ();
-        $tree->node_info = $tree_node_info;
-        $tree->display ($folders);
-      ?>
-    </div>
+          /* Make a copy (not a reference). */
+          $tree = $this->app->make_tree_renderer ();
+          $tree->node_info = $tree_node_info;
+          $tree->display ($folders);
+        ?>
+      </div>
+      <div>
 <?php
-    $box_renderer->new_column_of_type ('content-column');
-
     $renderer->start ();
     $renderer->draw_text_line_row ('title');
     $renderer->draw_icon_browser_row ('icon_url');
@@ -434,7 +431,10 @@ class PROJECT_FORM extends FOLDER_FORM
     $this->_draw_history_item_controls ($renderer);
 
     $renderer->finish ();
-    $box_renderer->finish_column_set ();
+?>
+        </div>
+      </div>
+<?php
   }
 
   /**

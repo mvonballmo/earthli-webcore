@@ -84,17 +84,14 @@ http://www.earthli.com/software/webcore
 </div>
 <div class="main-box">
   <?php
-    if ($show_tree)
-    {
-      $folders = $folder_query->tree ();
-      $folder_type_info = $folder->type_info ();
-
-      $box = $Page->make_box_renderer ();
-      $box->start_column_set ();
-      $box->new_column_of_type ('left-sidebar-column');
+  if ($show_tree)
+  {
+    $folders = $folder_query->tree ();
+    $folder_type_info = $folder->type_info ();
   ?>
-  <div class="left-sidebar">
-  <?php
+  <div class="columns">
+    <div class="left-sidebar">
+    <?php
       include_once ('webcore/gui/folder_tree_node_info.php');
       $tree_node_info = new SUBSCRIPTION_FOLDER_TREE_NODE_INFO ($App);
       $tree_node_info->page_link = $Env->url ();
@@ -104,21 +101,24 @@ http://www.earthli.com/software/webcore
       $tree = $App->make_tree_renderer ();
       $tree->node_info = $tree_node_info;
       $tree->display ($folders);
-  ?>
-  </div>
+    ?>
+    </div>
+    <div>
   <?php
-      $box->new_column_of_type('content-column text-flow');
     }
 
     $form->button = "Update";
     $form->display ();
 
-    if (isset ($box))
+    if ($show_tree)
     {
-      $box->finish_column_set ();
-    }
-  ?>
+?>
+    </div>
   </div>
+<?php
+    }
+?>
+</div>
 <?php
     $Page->finish_display ();
   }

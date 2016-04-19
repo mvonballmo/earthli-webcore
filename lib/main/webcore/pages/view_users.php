@@ -52,30 +52,25 @@ http://www.earthli.com/software/webcore
     $Page->start_display ();
   ?>
   <div class="top-box">
-    <?php
-    $box = $Page->make_box_renderer ();
-    $box->start_column_set ();
-    $box->new_column_of_type ('description-box');
-    ?>
-    <p>This page lists all of the registered users for <?php echo $App->title; ?>.</p>
-    <?php
-    $box->new_column_of_type ('tools-box');
-
-    echo '<h4>Search</h4>';
-    echo '<div class="form-content">';
-
-    $class_name = $App->final_class_name ('EXECUTE_SEARCH_FORM', 'webcore/forms/execute_search_form.php');
-    $search = null;
-    /** @var $form EXECUTE_SEARCH_FORM */
-    $form = new $class_name ($App, $search);
-    $form->load_with_defaults ();
-    $form->set_value ('type', 'user');
-    $form->display ();
-
-    echo '</div>';
-
-    $box->finish_column_set ();
-    ?>
+    <div class="columns text-flow">
+      <div class="left-sidebar">
+        <p>This page lists all of the registered users for <?php echo $App->title; ?>.</p>
+      </div>
+      <div>
+        <h4>Search</h4>
+        <div class="form-content">
+          <?php
+          $class_name = $App->final_class_name ('EXECUTE_SEARCH_FORM', 'webcore/forms/execute_search_form.php');
+          $search = null;
+          /** @var $form EXECUTE_SEARCH_FORM */
+          $form = new $class_name ($App, $search);
+          $form->load_with_defaults ();
+          $form->set_value ('type', 'user');
+          $form->display ();
+          ?>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="main-box">
     <div class="menu-bar-top">

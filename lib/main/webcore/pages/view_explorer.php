@@ -84,101 +84,104 @@ http://www.earthli.com/software/webcore
     <?php
       if ($show_tree)
       {
-        $box = $Page->make_box_renderer ();
-        $box->start_column_set ();
-        $box->new_column_of_type ('left-column');
     ?>
-      <div class="left-sidebar tree-content">
-        <?php
+        <div class="columns">
+        <div class="left-sidebar tree-content">
+          <?php
           /* Make a copy (not a reference). */
-          $tree = $App->make_tree_renderer ();
-  
-          include_once ('webcore/gui/folder_tree_node_info.php');
+          $tree = $App->make_tree_renderer();
+
+          include_once('webcore/gui/folder_tree_node_info.php');
           $tree_node_info = new EXPLORER_FOLDER_TREE_NODE_INFO ($App);
           $tree_node_info->page_link = 'view_explorer.php';
-          $tree_node_info->set_visible_node ($folder);
-          $tree_node_info->set_selected_node ($folder);
+          $tree_node_info->set_visible_node($folder);
+          $tree_node_info->set_selected_node($folder);
           $tree->node_info = $tree_node_info;
-  
-          $folders = $folder_query->tree ();
-          $tree->display ($folders);
-        ?>
-      </div>
-    <?php
-        $box->new_column_of_type ('right-column');
-      }
-    ?>
-      <form id="<?php echo $form_name; ?>" method="post" action="">
-        <div>
-          <input type="hidden" name="id" value="<?php echo $folder->id; ?>">
-          <input type="hidden" name="debug" value="<?php echo read_var ('debug'); ?>">
-    <?php
-      $folder_query->restrict ("parent_id = $folder->id");
-      $num_folders = $folder_query->size ();
-      if ($num_folders)
-      {
-        $folder_info = $App->type_info_for ('FOLDER');
-    ?>
-    <h2 id="folder_list"><?php echo $num_folders . ' ' . $folder_info->plural_title; ?></h2>
-    <?php
-        $class_name = $App->final_class_name ('FOLDER_LIST', 'webcore/gui/folder_list.php');
-        /** @var $list FOLDER_LIST */
-        $list = new $class_name ($App);
-        $list->page_name = $Env->url (Url_part_file_name);
-        $list->form_name = $form_name;
-        $list->pager->page_number_var_name = 'folder_page_number';
-        $list->pager->page_anchor = "folder_list";
-        $list->set_page_size (Default_page_size);
-        $list->set_query ($folder_query);
-        $list->display ();
-      }
 
-      $entry_types = $App->entry_type_infos ();
-      foreach ($entry_types as $type_info)
-      {
-        /** @var $entry_query FOLDER_DRAFTABLE_ENTRY_QUERY */
-        $entry_query = $folder->entry_query ();
-        $entry_query->set_type ($type_info->id);
-        $num_objs = $entry_query->size ();
-        if ($num_objs)
-        {
-          $class_name = $App->final_class_name ('ENTRY_LIST', 'webcore/gui/entry_list.php', $type_info->id);
-          /** @var $list ENTRY_LIST */
-          $list = new $class_name ($App);
-          $list->control_name = "{$type_info->id}_ids";
-          $list->pager->page_number_var_name = "{$type_info->id}_page_number";
-          $list->pager->page_anchor = "{$type_info->id}_list";
-          $list->form_name = $form_name;
-          $list->set_page_size (Default_page_size);
-          $list->set_query ($entry_query);
-          
-          /* make a drop-down selector to choose number of entries per page and
-           * which filter to apply to the entries (for state).
-           */
-          
-          if ($list->pager->num_pages () > 1)
-          {
-            $items_text = ' Showing ' . $list->pager->first_item_index () . ' - ' . $list->pager->last_item_index () . ' of ' . $list->pager->num_items () . ' ' . $type_info->plural_title;
-          }
-          else
-          {
-            $items_text = ' ' . $list->pager->num_items () . ' ' . $type_info->plural_title;
-          }
-      ?>
-      <h2><?php echo $items_text; ?></h2>
-      <?php
-          $list->display ();
-        }
+          /** @var FOLDER[] $folders */
+          $folders = $folder_query->tree();
+          $tree->display($folders);
+          ?>
+        </div>
+        <div>
+    <?php
       }
     ?>
-        </div>
-      </form>
-<?php
-      if (isset ($box))
+          <div class="form-content">
+            <form id="<?php echo $form_name; ?>" method="post" action="">
+              <div>
+                <input type="hidden" name="id" value="<?php echo $folder->id; ?>">
+                <input type="hidden" name="debug" value="<?php echo read_var ('debug'); ?>">
+                <?php
+                  $folder_query->restrict ("parent_id = $folder->id");
+                  $num_folders = $folder_query->size ();
+                  if ($num_folders)
+                  {
+                    $folder_info = $App->type_info_for ('FOLDER');
+                ?>
+                <h2 id="folder_list"><?php echo $num_folders . ' ' . $folder_info->plural_title; ?></h2>
+                <?php
+                  $class_name = $App->final_class_name ('FOLDER_LIST', 'webcore/gui/folder_list.php');
+                  /** @var $list FOLDER_LIST */
+                  $list = new $class_name ($App);
+                  $list->page_name = $Env->url (Url_part_file_name);
+                  $list->form_name = $form_name;
+                  $list->pager->page_number_var_name = 'folder_page_number';
+                  $list->pager->page_anchor = "folder_list";
+                  $list->set_page_size (Default_page_size);
+                  $list->set_query ($folder_query);
+                  $list->display ();
+                }
+
+                $entry_types = $App->entry_type_infos ();
+                foreach ($entry_types as $type_info)
+                {
+                  /** @var $entry_query FOLDER_DRAFTABLE_ENTRY_QUERY */
+                  $entry_query = $folder->entry_query ();
+                  $entry_query->set_type ($type_info->id);
+                  $num_objs = $entry_query->size ();
+                  if ($num_objs)
+                  {
+                    $class_name = $App->final_class_name ('ENTRY_LIST', 'webcore/gui/entry_list.php', $type_info->id);
+                    /** @var $list ENTRY_LIST */
+                    $list = new $class_name ($App);
+                    $list->control_name = "{$type_info->id}_ids";
+                    $list->pager->page_number_var_name = "{$type_info->id}_page_number";
+                    $list->pager->page_anchor = "{$type_info->id}_list";
+                    $list->form_name = $form_name;
+                    $list->set_page_size (Default_page_size);
+                    $list->set_query ($entry_query);
+
+                    /* make a drop-down selector to choose number of entries per page and
+                     * which filter to apply to the entries (for state).
+                     */
+
+                    if ($list->pager->num_pages () > 1)
+                    {
+                      $items_text = ' Showing ' . $list->pager->first_item_index () . ' - ' . $list->pager->last_item_index () . ' of ' . $list->pager->num_items () . ' ' . $type_info->plural_title;
+                    }
+                    else
+                    {
+                      $items_text = ' ' . $list->pager->num_items () . ' ' . $type_info->plural_title;
+                    }
+
+                    echo "<h2>$items_text</h2>";
+                    $list->display ();
+                  }
+                }
+              ?>
+              </div>
+            </form>
+          </div>
+      <?php
+      if ($show_tree)
       {
-        $box->finish_column_set ();
+      ?>
+        </div>
+      </div>
+      <?php
       }
-?>
+      ?>
     </div>
   <?php
     $Page->finish_display ();

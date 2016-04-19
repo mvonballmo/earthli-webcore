@@ -281,35 +281,37 @@ function update_controls ()
     $props->add_item ('Denied', Privilege_always_denied);
     $props->css_class = 'tiny-small';
 
-    $box_renderer = $this->context->make_box_renderer();
-    $box_renderer->start_column_set();
-    $box_renderer->new_column_of_type('left-column');
-
-      foreach ($this->content_groups as $group)
-      {
-        $renderer->start_block ($group->title);
-        foreach ($group->maps as $map)
+    ?>
+    <div class="columns text-flow">
+      <div>
+        <?php
+        foreach ($this->content_groups as $group)
         {
-          $this->_draw_tri_permission ($map, $formatter, $renderer, $props);
+          $renderer->start_block ($group->title);
+          foreach ($group->maps as $map)
+          {
+            $this->_draw_tri_permission ($map, $formatter, $renderer, $props);
+          }
+          $renderer->finish_block ();
         }
-        $renderer->finish_block ();
-      }
-
-    $box_renderer->new_column_of_type();
-
-      foreach ($this->global_groups as $group)
-      {
-        $renderer->start_block ($group->title);
-        foreach ($group->maps as $map)
+        ?>
+      </div>
+      <div>
+        <?php
+        foreach ($this->global_groups as $group)
         {
-          $this->_draw_permission ($map, $formatter, $renderer, $props);
+          $renderer->start_block ($group->title);
+          foreach ($group->maps as $map)
+          {
+            $this->_draw_permission ($map, $formatter, $renderer, $props);
+          }
+          $renderer->finish_block ();
         }
-        $renderer->finish_block ();
-      }
-
-    $box_renderer->finish_column_set ();
-
-    $this->_draw_buttons ($renderer);
+        ?>
+      </div>
+    </div>
+    <?php
+      $this->_draw_buttons ($renderer);
   }
 
   /**

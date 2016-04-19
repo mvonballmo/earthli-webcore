@@ -166,284 +166,277 @@ class SAMPLE_FORM extends FORM
   $Page->start_display ();
 ?>
 <div class="main-box">
-  <?php
-  $box = $Page->make_box_renderer();
-  $box->start_column_set();
-  $box->new_column_of_type('left-sidebar-column');
-  ?>
-  <div class="left-sidebar text-flow">
-    <p>Customize the font and theme to the right and see a preview below.</p>
-    <div class="form-content" style="width: 200px">
-      <?php
-      $form->display ();
-      ?>
+  <div class="columns text-flow">
+    <div class="left-sidebar">
+      <p>Customize the font and theme to the right and see a preview below.</p>
+      <div class="form-content">
+        <?php
+        $form->display ();
+        ?>
+      </div>
+      <p>You can also switch themes with the samples below. Press the button under the thumbnail to select a theme.</p>
+      <div class="grid-content">
+        <?php
+        $class_name = $Page->final_class_name ('THEME_GRID', 'webcore/gui/theme_grid.php');
+
+        /** @var $grid THEME_GRID */
+        $grid = new $class_name ($Page);
+        $grid->is_chooser = true;
+        $grid->pager->pages_to_show = 2;
+        $grid->pager->show_first_and_last = false;
+        $grid->pager->show_total = false;
+        $grid->set_page_size (Default_page_size);
+        $grid->set_query ($theme_query);
+        $grid->display ();
+        ?>
+      </div>
     </div>
-    <p>You can also switch themes with the samples below. Press the button under the thumbnail to select a theme.</p>
-    <div class="grid-content">
+    <div>
+      <h1>Preview (level 1 heading)</h1>
+      <h2>Buttons & Menus (level 2 heading)</h2>
       <?php
-      $class_name = $Page->final_class_name ('THEME_GRID', 'webcore/gui/theme_grid.php');
-
-      /** @var $grid THEME_GRID */
-      $grid = new $class_name ($Page);
-      $grid->is_chooser = true;
-      $grid->pager->pages_to_show = 2;
-      $grid->pager->show_first_and_last = false;
-      $grid->pager->show_total = false;
-      $grid->set_page_size (Default_page_size);
-      $grid->set_query ($theme_query);
-      $grid->display ();
+      require_once ('webcore/gui/page_navigator.php');
+      $navigator = new PAGE_NAVIGATOR($Page);
+      $navigator->set_ranges(50, 10);
+      $navigator->pages_to_show = 4;
+      $navigator->display();
       ?>
-    </div>
-  </div>
-  <?php
-  $box->new_column_of_type('content-column text-flow');
-  ?>
-  <h1>Preview (level 1 heading)</h1>
-  <h2>Buttons & Menus (level 2 heading)</h2>
-  <?php
-  require_once ('webcore/gui/page_navigator.php');
-  $navigator = new PAGE_NAVIGATOR($Page);
-  $navigator->set_ranges(50, 10);
-  $navigator->pages_to_show = 4;
-  $navigator->display();
-  ?>
-  <div class="button-content">
-    <?php
-    require_once ('webcore/cmd/commands.php');
-    $menu = $Page->make_menu();
-    $menu->commands->append_group('Group One');
-    $menu->append('One', '#', '{icons}/buttons/edit');
-    $menu->append('Two', '#', '{icons}/buttons/add');
-    $item = $menu->append('Three', '#', '{icons}/buttons/delete');
-    $item->description = 'Button three includes a description below';
-    $menu->renderer->content_mode &= ~Menu_show_icon;
-    $menu->display();
-    ?>
-  </div>
-  <div class="button-content">
-    <?php
-    $menu->renderer->separator_class = 'objects';
-    $menu->display();
-    ?>
-  </div>
-  <div class="button-content">
-    <?php
-    $menu->renderer->separator_class = 'location';
-    $menu->display();
-    ?>
-  </div>
-  <div class="button-content">
-    <a href="#" class="button">L</a><?php
-    $menu->renderer->set_size(Menu_size_compact);
-    $menu->renderer->content_mode |= Menu_show_as_buttons | Menu_show_icon;
-    $menu->renderer->options &= ~Menu_options_show_trigger_title;
-    $menu->display();
-    $menu->renderer->set_size(Menu_size_full);
-    $menu->renderer->content_mode = Menu_show_all_as_buttons;
-    $menu->display();
-    $menu->renderer->set_size(Menu_size_compact);
-    $menu->renderer->content_mode |= Menu_show_as_buttons | Menu_show_icon;
-    $menu->renderer->options &= ~Menu_options_show_trigger_title;
-    $menu->display();
-    ?><a href="#" class="button">R</a>
-  </div>
-  <div class="button-content">
-    <a href="#" class="button">L</a><?php
-    $menu->renderer->set_size(Menu_size_full);
-    $menu->renderer->content_mode = Menu_show_all_as_buttons;
-    $menu->display();
-    ?><a href="#" class="button">R</a>
-  </div>
-  <div class="button-content">
-    <?php
-    $renderer = $Page->make_controls_renderer ();
-    echo $renderer->button_as_html ('', '#', '{icons}buttons/upgrade', Thirty_two_px);
-    echo $renderer->button_as_html ('Upgrayedd', '#', '{icons}buttons/upgrade', Thirty_two_px);
-    echo $renderer->button_as_html ('', '#', '{icons}buttons/upgrade', Twenty_px);
-    echo $renderer->button_as_html ('Upgrayedd', '#', '{icons}buttons/upgrade', Twenty_px);
-    echo $renderer->button_as_html ('', '#', '{icons}buttons/upgrade', Sixteen_px);
-    echo $renderer->button_as_html ('Upgrayedd', '#', '{icons}buttons/upgrade', Sixteen_px);
-    ?>
-  </div>
-  <div class="tree-content">
-    <?php
-    include ('webcore/gui/tree_node.php');
-    include ('webcore/gui/selector_tree_decorator.php');
+      <div class="button-content">
+        <?php
+        require_once ('webcore/cmd/commands.php');
+        $menu = $Page->make_menu();
+        $menu->commands->append_group('Group One');
+        $menu->append('One', '#', '{icons}/buttons/edit');
+        $menu->append('Two', '#', '{icons}/buttons/add');
+        $item = $menu->append('Three', '#', '{icons}/buttons/delete');
+        $item->description = 'Button three includes a description below';
+        $menu->renderer->content_mode &= ~Menu_show_icon;
+        $menu->display();
+        ?>
+      </div>
+      <div class="button-content">
+        <?php
+        $menu->renderer->separator_class = 'objects';
+        $menu->display();
+        ?>
+      </div>
+      <div class="button-content">
+        <?php
+        $menu->renderer->separator_class = 'location';
+        $menu->display();
+        ?>
+      </div>
+      <div class="button-content">
+        <a href="#" class="button">L</a><?php
+        $menu->renderer->set_size(Menu_size_compact);
+        $menu->renderer->content_mode |= Menu_show_as_buttons | Menu_show_icon;
+        $menu->renderer->options &= ~Menu_options_show_trigger_title;
+        $menu->display();
+        $menu->renderer->set_size(Menu_size_full);
+        $menu->renderer->content_mode = Menu_show_all_as_buttons;
+        $menu->display();
+        $menu->renderer->set_size(Menu_size_compact);
+        $menu->renderer->content_mode |= Menu_show_as_buttons | Menu_show_icon;
+        $menu->renderer->options &= ~Menu_options_show_trigger_title;
+        $menu->display();
+        ?><a href="#" class="button">R</a>
+      </div>
+      <div class="button-content">
+        <a href="#" class="button">L</a><?php
+        $menu->renderer->set_size(Menu_size_full);
+        $menu->renderer->content_mode = Menu_show_all_as_buttons;
+        $menu->display();
+        ?><a href="#" class="button">R</a>
+      </div>
+      <div class="button-content">
+        <?php
+        $renderer = $Page->make_controls_renderer ();
+        echo $renderer->button_as_html ('', '#', '{icons}buttons/upgrade', Thirty_two_px);
+        echo $renderer->button_as_html ('Upgrayedd', '#', '{icons}buttons/upgrade', Thirty_two_px);
+        echo $renderer->button_as_html ('', '#', '{icons}buttons/upgrade', Twenty_px);
+        echo $renderer->button_as_html ('Upgrayedd', '#', '{icons}buttons/upgrade', Twenty_px);
+        echo $renderer->button_as_html ('', '#', '{icons}buttons/upgrade', Sixteen_px);
+        echo $renderer->button_as_html ('Upgrayedd', '#', '{icons}buttons/upgrade', Sixteen_px);
+        ?>
+      </div>
+      <div class="tree-content">
+        <?php
+        include ('webcore/gui/tree_node.php');
+        include ('webcore/gui/selector_tree_decorator.php');
 
-    $tree = $Page->make_tree_renderer ();
-    $tree->node_info = new GENERIC_TREE_NODE_INFO($Page);
+        $tree = $Page->make_tree_renderer ();
+        $tree->node_info = new GENERIC_TREE_NODE_INFO($Page);
 
-    $documents_node = new TREE_NODE ('Documents', '', false);
-    $documents_node->append (new TREE_NODE ('Specs (PDF)', '#', '', true));
-    $documents_node->append (new TREE_NODE ('Specs 2 (PDF)', '#'));
-    $documents_node->append (new TREE_NODE ('Specs 3 (PDF)', '#'));
+        $documents_node = new TREE_NODE ('Documents', '', false);
+        $documents_node->append (new TREE_NODE ('Specs (PDF)', '#', '', true));
+        $documents_node->append (new TREE_NODE ('Specs 2 (PDF)', '#'));
+        $documents_node->append (new TREE_NODE ('Specs 3 (PDF)', '#'));
 
-    $root = new TREE_NODE ('Encodo', '', false, '', true);
-    $root->append ($documents_node);
+        $root = new TREE_NODE ('Encodo', '', false, '', true);
+        $root->append ($documents_node);
 
-    $roots [] = $root;
-    $roots [] = new TREE_NODE ('Earthli');
+        $roots [] = $root;
+        $roots [] = new TREE_NODE ('Earthli');
 
-    $tree->display ($roots);
+        $tree->display ($roots);
 
-    $archive_node = new TREE_NODE ('Archive', '', false);
-    $archive_node->append (new TREE_NODE ('Specs (PDF)', '#'));
-    $archive_node->append (new TREE_NODE ('Specs 2 (PDF)', '#'));
-    $archive_node->append (new TREE_NODE ('Specs 3 (PDF)', '#'));
+        $archive_node = new TREE_NODE ('Archive', '', false);
+        $archive_node->append (new TREE_NODE ('Specs (PDF)', '#'));
+        $archive_node->append (new TREE_NODE ('Specs 2 (PDF)', '#'));
+        $archive_node->append (new TREE_NODE ('Specs 3 (PDF)', '#'));
 
-    $root = new TREE_NODE ('Home', '', false);
-    $root->append ($archive_node);
+        $root = new TREE_NODE ('Home', '', false);
+        $root->append ($archive_node);
 
-    foreach ($archive_node->children() as $child_node)
+        foreach ($archive_node->children() as $child_node)
+        {
+          $tree->node_info->set_selected_node($child_node);
+        }
+
+        $roots = null;
+        $roots [] = $root;
+
+        $tree->decorator = new SELECTOR_TREE_DECORATOR($tree);
+        $tree->display ($roots);
+        ?>
+      </div>
+      <h3>Form elements (level 3 heading)</h3>
+      <div class="form-content">
+        <?php
+        $form = new SAMPLE_FORM($Page);
+        $form_renderer = new FORM_RENDERER($form);
+        $form->display();
+        ?>
+      </div>
+      <div class="info-box-top">
+        <p>This is an info box at the top of a <a href="#">page</a> or <a href="#">section</a>.</p>
+      </div>
+      <h4>Text and block elements (level 4 heading)</h4>
+      <p>Standard paragraph text.</p>
+      <ol><li>Item One</li><li>Item Two</li></ol>
+      <ul><li>Item One</li><li>Item Two</li></ul>
+      <div class="info-box-bottom">
+        <p>This is an info box at the bottom of a <a href="#">page</a> or <a href="#">section</a>.</p>
+        <p>Paragraph two.</p>
+        <p>Paragraph three.</p>
+        <p>Div one.</p>
+        <p>Paragraph four.</p>
+        <p>Div two.</p>
+      </div>
+      <p class="quote-block">"This is a block quote. These are often used in article to include
+        text from other sources. This is generally used for larger citations. Use the inline
+        style for smaller citations."</p>
+      <div class="preview">
+        <h3 class="preview-title">Title</h3>
+        <p>This is text in a preview box. <span class="quote-inline">This is an example of an inline quotation.</span>
+          This text following the citation and should make the paragraph wrap at least once.</p>
+      </div>
+      <?php
+        $Page->show_message('This is a <a href="#">caution</a> box.', 'info');
+        $Page->show_message('This is a <a href="#">warning</a> box.', 'warning');
+        $Page->show_message('This is an <a href="#">error</a> box.');
+      ?>
+      <h3>Chart/Graph</h3>
+      <div class="graph-background">
+        <div class="graph-foreground" style="width: 30px; height: 100px"></div>
+        <div class="graph-foreground" style="width: 30px; height: 10px"></div>
+        <div class="graph-foreground" style="width: 30px; height: 80px"></div>
+        <div class="graph-foreground" style="width: 30px; height: 75px"></div>
+        <div class="graph-foreground" style="width: 30px; height: 75px"></div>
+        <div class="graph-foreground" style="width: 30px; height: 100px"></div>
+        <div class="graph-foreground" style="width: 30px; height: 50px"></div>
+      </div>
+      <div class="chart">
+        <h3 class="chart-title">Box</h3>
+        <div class="chart-body">
+          <p>The following is a code from the <c>MUNGER</c>.</p>
+          <pre><code>protected function _process($input, $tokenizer)
     {
-      $tree->node_info->set_selected_node($child_node);
-    }
-
-    $roots = null;
-    $roots [] = $root;
-
-    $tree->decorator = new SELECTOR_TREE_DECORATOR($tree);
-    $tree->display ($roots);
-    ?>
-  </div>
-  <h3>Form elements (level 3 heading)</h3>
-  <div class="form-content">
-    <?php
-    $form = new SAMPLE_FORM($Page);
-    $form_renderer = new FORM_RENDERER($form);
-    $form->display();
-    ?>
-  </div>
-  <div class="info-box-top">
-    <p>This is an info box at the top of a <a href="#">page</a> or <a href="#">section</a>.</p>
-  </div>
-  <h4>Text and block elements (level 4 heading)</h4>
-  <p>Standard paragraph text.</p>
-  <ol><li>Item One</li><li>Item Two</li></ol>
-  <ul><li>Item One</li><li>Item Two</li></ul>
-  <div class="info-box-bottom">
-    <p>This is an info box at the bottom of a <a href="#">page</a> or <a href="#">section</a>.</p>
-    <p>Paragraph two.</p>
-    <p>Paragraph three.</p>
-    <p>Div one.</p>
-    <p>Paragraph four.</p>
-    <p>Div two.</p>
-  </div>
-  <p class="quote-block">"This is a block quote. These are often used in article to include
-    text from other sources. This is generally used for larger citations. Use the inline
-    style for smaller citations."</p>
-  <div class="preview">
-    <h3 class="preview-title">Title</h3>
-    <p>This is text in a preview box. <span class="quote-inline">This is an example of an inline quotation.</span>
-      This text following the citation and should make the paragraph wrap at least once.</p>
-  </div>
-  <?php
-    $Page->show_message('This is a <a href="#">caution</a> box.', 'info');
-    $Page->show_message('This is a <a href="#">warning</a> box.', 'warning');
-    $Page->show_message('This is an <a href="#">error</a> box.');
-  ?>
-  <h3>Chart/Graph</h3>
-  <div class="graph-background">
-    <div class="graph-foreground" style="width: 30px; height: 100px"></div>
-    <div class="graph-foreground" style="width: 30px; height: 10px"></div>
-    <div class="graph-foreground" style="width: 30px; height: 80px"></div>
-    <div class="graph-foreground" style="width: 30px; height: 75px"></div>
-    <div class="graph-foreground" style="width: 30px; height: 75px"></div>
-    <div class="graph-foreground" style="width: 30px; height: 100px"></div>
-    <div class="graph-foreground" style="width: 30px; height: 50px"></div>
-  </div>
-  <div class="chart">
-    <h3 class="chart-title">Box</h3>
-    <div class="chart-body">
-      <p>The following is a code from the <c>MUNGER</c>.</p>
-      <pre><code>protected function _process($input, $tokenizer)
-{
-  $tokenizer->set_input($input);
-  while ($tokenizer->available())
-  {
-    $tokenizer->read_next();
-    $token = $tokenizer->current();
-    $this->_process($token);
-  }
-}</code></pre>
+      $tokenizer->set_input($input);
+      while ($tokenizer->available())
+      {
+        $tokenizer->read_next();
+        $token = $tokenizer->current();
+        $this->_process($token);
+      }
+    }</code></pre>
+        </div>
+      </div>
+      <p>This is code by itself.</p>
+    <pre><code>protected function _process($input, $tokenizer)
+    {
+      $tokenizer->set_input($input);
+      while ($tokenizer->available())
+      {
+        $tokenizer->read_next();
+        $token = $tokenizer->current();
+        $this->_process($token);
+      }
+    }</code></pre>
+      <div class="abstract">
+        This is the text of an abstract. These are often used to summarize much longer blocks of text, similar in a way to the block at the beginning of a scientific paper.
+      </div>
+      <p>This is text before a rule.</p>
+      <hr>
+      <p>This is text after a rule.</p>
+      <div class="quote pullquote right align-right" style="width: 150px">Pull-quotes catch your eye.</div>
+      <p>This is the text that accompanies the pull-quote. Pull-quotes are often used to highlight interesting bits of text in much longer articles in order to pique a reader's interest or to catch a scanner's eye.</p>
+      <table class="basic columns left-labels">
+        <tr>
+          <th>Style</th>
+          <th>Description</th>
+        </tr>
+        <tr>
+          <td><strong>strong</strong></td>
+          <td>Strongly formatted text</td>
+        </tr>
+        <tr>
+          <td><em>emphasized</em></td>
+          <td>Emphasized text</td>
+        </tr>
+        <tr>
+          <td><small class="notes">notes</small></td>
+          <td>Notes/comments</td>
+        </tr>
+        <tr>
+          <td><code>code</code></td>
+          <td>Inline code</td>
+        </tr>
+        <tr>
+          <td><strong class="highlight">highlighted</strong></td>
+          <td>Highlighted text</td>
+        </tr>
+        <tr>
+          <td><strong class="selected">selected</strong></td>
+          <td>Selected text</td>
+        </tr>
+        <tr>
+          <td><del>deleted</del></td>
+          <td>Deleted text</td>
+        </tr>
+        <tr>
+          <td><var>variableOne</var></td>
+          <td>Variable names</td>
+        </tr>
+        <tr>
+          <td><kbd>&#8984;</kbd> + <kbd>B</kbd></td>
+          <td>Keyboard characters</td>
+        </tr>
+        <tr>
+          <td><dfn>definition</dfn></td>
+          <td>Definitions</td>
+        </tr>
+        <tr>
+          <td><abbr title="Computer-aided Design">CAD</abbr></td>
+          <td>Abbreviations</td>
+        </tr>
+        <tr>
+          <td><cite>citation</cite></td>
+          <td>Citations</td>
+        </tr>
+      </table>
     </div>
   </div>
-  <p>This is code by itself.</p>
-<pre><code>protected function _process($input, $tokenizer)
-{
-  $tokenizer->set_input($input);
-  while ($tokenizer->available())
-  {
-    $tokenizer->read_next();
-    $token = $tokenizer->current();
-    $this->_process($token);
-  }
-}</code></pre>
-  <div class="abstract">
-    This is the text of an abstract. These are often used to summarize much longer blocks of text, similar in a way to the block at the beginning of a scientific paper.
-  </div>
-  <p>This is text before a rule.</p>
-  <hr>
-  <p>This is text after a rule.</p>
-  <div class="quote pullquote right align-right" style="width: 150px">Pull-quotes catch your eye.</div>
-  <p>This is the text that accompanies the pull-quote. Pull-quotes are often used to highlight interesting bits of text in much longer articles in order to pique a reader's interest or to catch a scanner's eye.</p>
-  <table class="basic columns left-labels">
-    <tr>
-      <th>Style</th>
-      <th>Description</th>
-    </tr>
-    <tr>
-      <td><strong>strong</strong></td>
-      <td>Strongly formatted text</td>
-    </tr>
-    <tr>
-      <td><em>emphasized</em></td>
-      <td>Emphasized text</td>
-    </tr>
-    <tr>
-      <td><small class="notes">notes</small></td>
-      <td>Notes/comments</td>
-    </tr>
-    <tr>
-      <td><code>code</code></td>
-      <td>Inline code</td>
-    </tr>
-    <tr>
-      <td><strong class="highlight">highlighted</strong></td>
-      <td>Highlighted text</td>
-    </tr>
-    <tr>
-      <td><strong class="selected">selected</strong></td>
-      <td>Selected text</td>
-    </tr>
-    <tr>
-      <td><del>deleted</del></td>
-      <td>Deleted text</td>
-    </tr>
-    <tr>
-      <td><var>variableOne</var></td>
-      <td>Variable names</td>
-    </tr>
-    <tr>
-      <td><kbd>&#8984;</kbd> + <kbd>B</kbd></td>
-      <td>Keyboard characters</td>
-    </tr>
-    <tr>
-      <td><dfn>definition</dfn></td>
-      <td>Definitions</td>
-    </tr>
-    <tr>
-      <td><abbr title="Computer-aided Design">CAD</abbr></td>
-      <td>Abbreviations</td>
-    </tr>
-    <tr>
-      <td><cite>citation</cite></td>
-      <td>Citations</td>
-    </tr>
-  </table>
-  <?php
-  $box->finish_column_set ();
-  ?>
 </div>
 <?php
   $Page->finish_display ();

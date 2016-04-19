@@ -176,33 +176,30 @@ http://www.earthli.com/software/webcore
       {
         /** @var FOLDER[] $folders */
         $folders = $folder_query->tree ();
-
-        $box = $Page->make_box_renderer ();
-        $box->start_column_set ();
-        $box->new_column_of_type ('left-sidebar-column');
     ?>
-    <div class="left-sidebar">
-    <?php
-        include_once ('webcore/gui/folder_tree_node_info.php');
-        $tree_node_info = new SECURITY_FOLDER_TREE_NODE_INFO ($App);
-        $tree_node_info->page_link = $Env->url ();
-        $tree_node_info->set_visible_node ($folder);
-        $tree_node_info->set_selected_node ($folder);
-        $tree_node_info->set_defined_nodes_visible ($folders);
+    <div class="columns">
+      <div class="left-sidebar">
+        <?php
+          include_once ('webcore/gui/folder_tree_node_info.php');
+          $tree_node_info = new SECURITY_FOLDER_TREE_NODE_INFO ($App);
+          $tree_node_info->page_link = $Env->url ();
+          $tree_node_info->set_visible_node ($folder);
+          $tree_node_info->set_selected_node ($folder);
+          $tree_node_info->set_defined_nodes_visible ($folders);
 
-        $tree = $App->make_tree_renderer ();
-        $tree->node_info = $tree_node_info;
-        $tree->display ($folders);
-    ?>
-    </div>
-    <?php
-        $box->new_column_of_type('content-column text-flow');
-      }
-      else
-      {
+          $tree = $App->make_tree_renderer ();
+          $tree->node_info = $tree_node_info;
+          $tree->display ($folders);
+        ?>
+      </div>
+      <div>
+        <?php
+          }
+          else
+          {
         ?>
         <div class="text-flow">
-        <p>
+          <p>
           <?php
           if ($folder->defines_security ())
           {
@@ -230,93 +227,33 @@ http://www.earthli.com/software/webcore
             echo 'Permissions are inherited from ' . $title . '.';
           }
           ?>
-        </p>
+          </p>
         <?php
-      }
-    ?>
-  <table class="basic top columns left-labels">
-  <?php
-
-    $cols = sizeof ($privilege_groups) + 2;
-  ?>
-    <tr>
-      <td colspan="<?php echo $cols; ?>">
-        <h2>General</h2>
-      </td>
-    </tr>
-    <?php
-    draw_headers ();
-    ?>
-    <tr>
-      <?php
-      draw_privilege_set ('Registered', $security->registered_permissions ());
-      ?>
-      <td>
-        <?php
-        if ($defined)
-        {
-          $args = 'id=' . $folder->id;
-          $menu = $App->make_menu();
-          $menu->append('Edit...', 'edit_folder_all_users_permissions.php?' . $args, '{icons}buttons/edit');
-          $menu->renderer->set_size(Menu_size_minimal);
-          $menu->renderer->content_mode = Menu_show_all_as_buttons;
-          $menu->display();
         }
         ?>
-      </td>
-    </tr>
-    <tr>
-      <?php
-      draw_privilege_set ('Anonymous', $security->anonymous_permissions ());
-      ?>
-      <td>
+        <table class="basic top columns left-labels">
         <?php
-        if ($defined)
-        {
-          $args = 'id=' . $folder->id;
-          $menu = $App->make_menu();
-          $menu->append('Edit...', 'edit_folder_anon_user_permissions.php?' . $args, '{icons}buttons/edit');
-          $menu->renderer->set_size(Menu_size_minimal);
-          $menu->renderer->content_mode = Menu_show_all_as_buttons;
-          $menu->display();
-        }
+          $cols = sizeof ($privilege_groups) + 2;
         ?>
-      </td>
-    </tr>
-<?php
-
-
-    $users = $security->user_permissions ();
-
-    if (sizeof ($users) || $defined)
-    {
-      ?>
-      <tr>
-        <td colspan="<?php echo $cols; ?>">
-          <h2><?php echo sizeof ($users); ?> Users</h2>
-        </td>
-      </tr>
-
-      <?php
-      if (sizeof ($users))
-      {
-        draw_headers ();
-        foreach ($users as $perms)
-        {
-          $user = $perms->user ();
+          <tr>
+            <td colspan="<?php echo $cols; ?>">
+              <h2>General</h2>
+            </td>
+          </tr>
+          <?php
+          draw_headers ();
           ?>
           <tr>
             <?php
-            draw_privilege_set ($user->title_as_link (), $perms);
+            draw_privilege_set ('Registered', $security->registered_permissions ());
             ?>
             <td>
               <?php
               if ($defined)
               {
-                $args = 'id=' . $folder->id . '&name=' . urlencode ($user->title);
+                $args = 'id=' . $folder->id;
                 $menu = $App->make_menu();
-                $menu->append('Edit...', 'edit_folder_user_permissions.php?' . $args, '{icons}buttons/edit');
-                $menu->append('Delete...', 'delete_folder_user_permissions.php?' . $args, '{icons}buttons/delete');
+                $menu->append('Edit...', 'edit_folder_all_users_permissions.php?' . $args, '{icons}buttons/edit');
                 $menu->renderer->set_size(Menu_size_minimal);
                 $menu->renderer->content_mode = Menu_show_all_as_buttons;
                 $menu->display();
@@ -324,66 +261,115 @@ http://www.earthli.com/software/webcore
               ?>
             </td>
           </tr>
-        <?php
-        }
-      }
-    }
+          <tr>
+            <?php
+            draw_privilege_set ('Anonymous', $security->anonymous_permissions ());
+            ?>
+            <td>
+              <?php
+              if ($defined)
+              {
+                $args = 'id=' . $folder->id;
+                $menu = $App->make_menu();
+                $menu->append('Edit...', 'edit_folder_anon_user_permissions.php?' . $args, '{icons}buttons/edit');
+                $menu->renderer->set_size(Menu_size_minimal);
+                $menu->renderer->content_mode = Menu_show_all_as_buttons;
+                $menu->display();
+              }
+              ?>
+            </td>
+          </tr>
+      <?php
 
-      $groups = $security->group_permissions ();
 
-      if (sizeof ($groups) || $defined)
-      {
-    ?>
-    <tr>
-      <td colspan="<?php echo $cols; ?>">
-        <h2><?php echo sizeof ($groups); ?> Groups</h2>
-      </td>
-    </tr>
-    <?php
-        if (sizeof ($groups))
-        {
-          draw_headers ();
-          foreach ($groups as $perms)
+          $users = $security->user_permissions ();
+
+          if (sizeof ($users) || $defined)
           {
-            $group = $perms->group ();
-    ?>
-    <tr>
-    <?php
-            draw_privilege_set ($group->title_as_link (), $perms);
-    ?>
-      <td>
-        <?php
-        if ($defined)
-        {
-          $args = 'id=' . $folder->id . '&group_id=' . $perms->ref_id;
-          $menu = $App->make_menu();
-          $menu->append('Edit...', 'edit_folder_group_permissions.php?' . $args, '{icons}buttons/edit');
-          $menu->append('Delete...', 'delete_folder_group_permissions.php?' . $args, '{icons}buttons/delete');
-          $menu->renderer->set_size(Menu_size_minimal);
-          $menu->renderer->content_mode = Menu_show_all_as_buttons;
-          $menu->display();
-        }
-        ?>
-      </td>
-    </tr>
-    <?php
+            ?>
+            <tr>
+              <td colspan="<?php echo $cols; ?>">
+                <h2><?php echo sizeof ($users); ?> Users</h2>
+              </td>
+            </tr>
+
+            <?php
+            if (sizeof ($users))
+            {
+              draw_headers ();
+              foreach ($users as $perms)
+              {
+                $user = $perms->user ();
+                ?>
+                <tr>
+                  <?php
+                  draw_privilege_set ($user->title_as_link (), $perms);
+                  ?>
+                  <td>
+                    <?php
+                    if ($defined)
+                    {
+                      $args = 'id=' . $folder->id . '&name=' . urlencode ($user->title);
+                      $menu = $App->make_menu();
+                      $menu->append('Edit...', 'edit_folder_user_permissions.php?' . $args, '{icons}buttons/edit');
+                      $menu->append('Delete...', 'delete_folder_user_permissions.php?' . $args, '{icons}buttons/delete');
+                      $menu->renderer->set_size(Menu_size_minimal);
+                      $menu->renderer->content_mode = Menu_show_all_as_buttons;
+                      $menu->display();
+                    }
+                    ?>
+                  </td>
+                </tr>
+              <?php
+              }
+            }
           }
-        }
-      }
-?>
-  </table>
-<?php
-      if (isset ($box))
-      {
-        $box->finish_column_set ();
-      }
-    else
-    {
-    ?>
-        </div>
-    <?php
-    }
-?>
+
+            $groups = $security->group_permissions ();
+
+            if (sizeof ($groups) || $defined)
+            {
+          ?>
+          <tr>
+            <td colspan="<?php echo $cols; ?>">
+              <h2><?php echo sizeof ($groups); ?> Groups</h2>
+            </td>
+          </tr>
+          <?php
+              if (sizeof ($groups))
+              {
+                draw_headers ();
+                foreach ($groups as $perms)
+                {
+                  $group = $perms->group ();
+          ?>
+          <tr>
+          <?php
+                  draw_privilege_set ($group->title_as_link (), $perms);
+          ?>
+            <td>
+              <?php
+              if ($defined)
+              {
+                $args = 'id=' . $folder->id . '&group_id=' . $perms->ref_id;
+                $menu = $App->make_menu();
+                $menu->append('Edit...', 'edit_folder_group_permissions.php?' . $args, '{icons}buttons/edit');
+                $menu->append('Delete...', 'delete_folder_group_permissions.php?' . $args, '{icons}buttons/delete');
+                $menu->renderer->set_size(Menu_size_minimal);
+                $menu->renderer->content_mode = Menu_show_all_as_buttons;
+                $menu->display();
+              }
+              ?>
+            </td>
+          </tr>
+          <?php
+                }
+              }
+            }
+      ?>
+        </table>
+      </div>
+    </div>
   </div>
   <?php
     $Page->finish_display ();
