@@ -1,67 +1,70 @@
 @import "core-values";
 @import "form-values";
 
-.basic-form.rtl
+@media screen and (min-width: @min-width-for-columns)
 {
-  text-align: right;
-
-  input[type=checkbox],
-  input[type=radio]
+  .basic-form.rtl
   {
-    float: right;
-  }
+    text-align: right;
 
-  > .form-row,
-  > .group,
-  > .hint
-  {
-    margin-right: @label-area-width;
-  }
+    input[type=checkbox],
+    input[type=radio]
+    {
+      float: right;
+    }
 
-  > p,
-  > div,
-  fieldset > p,
-  fieldset > div
-  {
-    clear: right;
-  }
+    > .form-row,
+    > .group,
+    > .hint
+    {
+      margin-right: @label-area-width;
+    }
 
-  .group,
-  .hint
-  {
-    float: right;
-    clear: right;
-  }
+    > p,
+    > div,
+    fieldset > p,
+    fieldset > div
+    {
+      clear: right;
+    }
 
-  label:first-child
-  {
-    float: right;
-    width: @label-area-width;
-  }
+    .group,
+    .hint
+    {
+      float: right;
+      clear: right;
+    }
 
-  .one-input label
-  {
-    margin-left: 0px;
-    margin-right: 18px;
-  }
+    label:first-child
+    {
+      float: right;
+      width: @label-area-width;
+    }
 
-  .help
-  {
-    float: left;
-    width: 180px;
-    height: auto;
-    margin-left: 12px;
-  }
+    .one-input label
+    {
+      margin-left: 0px;
+      margin-right: 18px;
+    }
 
-  fieldset
-  {
-    padding-left: 0px;
-    margin-left: 0px;
-    clear: right;
+    .help
+    {
+      float: left;
+      width: 180px;
+      height: auto;
+      margin-left: 12px;
+    }
 
     fieldset
     {
-      border-left-width: 0px;
+      padding-left: 0px;
+      margin-left: 0px;
+      clear: right;
+
+      fieldset
+      {
+        border-left-width: 0px;
+      }
     }
   }
 }
