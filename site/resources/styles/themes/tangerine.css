@@ -155,14 +155,6 @@ body .page .header .banner .content .title {
   min-height: 50px;
   color: #65a23b;
 }
-body .page .header .banner .content .icon {
-  width: 50px;
-  height: 50px;
-  display: inline-block;
-  margin-left: 15px;
-  background-repeat: no-repeat;
-  margin-right: 15px;
-}
 body .page .header .nav-box {
   margin-left: -15px;
   margin-right: -15px;
@@ -1290,6 +1282,7 @@ input[type=submit] + .menu-items.buttons,
   display: inline-block;
   padding: 10px;
   margin: -10px;
+  margin-right: 0;
 }
 .toc {
   line-height: 160%;
