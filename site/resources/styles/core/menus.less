@@ -107,10 +107,6 @@
   }
 }
 
-/* @end */
-
-/* @group Buttons / Inline Menu */
-
 .button + .menu-items.buttons,
 .menu-items.buttons + .menu-items.buttons,
 .menu-items.buttons + .button,
@@ -127,38 +123,44 @@ button + .menu-items.buttons,
   margin: 0;
   padding: 0;
   line-height: 100%;
-}
 
-.menu-items > li
-{
-  display: inline;
-}
-
-.menu-items.buttons
-{
-  > li + li
+  > li
   {
-    padding-left: @button_spacing;
+    display: inline;
   }
-}
 
-.menu-items.standard li:before
-{
-  content: '| ';
-  padding: 0 0 0 @menu_item_padding;
-}
+  &.buttons
+  {
+    > li + li
+    {
+      padding-left: @button_spacing;
+    }
+  }
 
-.menu-items.objects li:before,
-.menu-items.location li:before
-{
-  content: '> ';
-  padding: 0 0 0 @menu_item_padding;
-}
+  &.standard
+  {
+    li:before
+    {
+      content: '| ';
+      padding: 0 0 0 @menu_item_padding;
+    }
+  }
 
-.menu-items li:first-child:before
-{
-  content: '';
-  padding: 0;
+  &.objects,
+  &.location
+  {
+    li:before
+    {
+      content: '> ';
+      padding: 0 0 0 @menu_item_padding;
+    }
+  }
+
+  li:first-child:before
+  {
+    content: '';
+    padding: 0;
+  }
 }
 
 .minimal-commands
@@ -166,21 +168,21 @@ button + .menu-items.buttons,
   float: left;
   margin-right: @button_spacing;
   margin-top: @standard_spacing;
+
+  .selector
+  {
+    margin-right: @small_spacing;
+  }
 }
 
 .minimal-commands-content
 {
   margin-left: @minimum_button_width + @button_padding;
-}
 
-.minimal-commands .selector
-{
-  margin-right: @small_spacing;
-}
-
-.minimal-commands-content.selector
-{
-  margin-left: 53px;
+  &.selector
+  {
+    margin-left: 53px;
+  }
 }
 
 .nav-item
