@@ -2288,73 +2288,75 @@ select {
 .basic-form fieldset legend {
   margin-left: -4px;
 }
-.basic-form.ltr fieldset {
-  margin-left: 135px;
-}
-.basic-form.ltr fieldset legend {
-  float: left;
-  width: 120px;
-  margin-left: -135px;
-  margin-top: .15em;
-}
-.basic-form.ltr fieldset textarea:not([class]),
-.basic-form.ltr fieldset select:not([class]),
-.basic-form.ltr fieldset input[type=password]:not([class]),
-.basic-form.ltr fieldset input[type=text]:not([class]) {
-  margin-left: -5px;
-}
-.basic-form.ltr fieldset.toggle legend {
-  margin-top: 0;
-}
-.basic-form.ltr fieldset fieldset {
-  margin-left: 0;
-}
-.basic-form.ltr select + label,
-.basic-form.ltr input + label {
-  margin-left: 5px;
-}
-.basic-form.ltr .hint {
-  margin-left: 0;
-}
-.basic-form.ltr > p {
-  /* Applies to form rows appearing directly in a form (not in a fieldset). */
-  margin-left: 135px;
-}
-.basic-form.ltr > .form-row,
-.basic-form.ltr > .group,
-.basic-form.ltr > .hint {
-  margin-left: 135px;
-}
-.basic-form.ltr .form-row .form-row {
-  margin-left: 0;
-}
-.basic-form.ltr .form-row > .button:first-child,
-.basic-form.ltr .form-row > div > .button:first-child,
-.basic-form.ltr .form-row > span > .button:first-child {
-  margin-left: -5px;
-}
-.basic-form.ltr .help {
-  float: right;
-}
-.basic-form.ltr .text-line label {
-  margin-top: 5px;
-}
-.basic-form.ltr label:first-child {
-  float: left;
-  width: 120px;
-  margin-left: -135px;
-}
-.basic-form.ltr.left .required label:after {
-  content: '*';
-}
-.basic-form.ltr.right fieldset legend {
-  text-align: right;
-}
-.basic-form.ltr.right label:first-child {
-  text-align: right;
-}
-.basic-form.ltr.right label .required label:before {
-  content: '*';
+@media screen and (min-width: 600px) {
+  .basic-form fieldset {
+    margin-left: 135px;
+  }
+  .basic-form fieldset legend {
+    float: left;
+    width: 120px;
+    margin-left: -135px;
+    margin-top: .15em;
+  }
+  .basic-form fieldset textarea:not([class]),
+  .basic-form fieldset select:not([class]),
+  .basic-form fieldset input[type=password]:not([class]),
+  .basic-form fieldset input[type=text]:not([class]) {
+    margin-left: -5px;
+  }
+  .basic-form fieldset.toggle legend {
+    margin-top: 0;
+  }
+  .basic-form fieldset fieldset {
+    margin-left: 0;
+  }
+  .basic-form select + label,
+  .basic-form input + label {
+    margin-left: 5px;
+  }
+  .basic-form .hint {
+    margin-left: 0;
+  }
+  .basic-form > p {
+    /* Applies to form rows appearing directly in a form (not in a fieldset). */
+    margin-left: 135px;
+  }
+  .basic-form > .form-row,
+  .basic-form > .group,
+  .basic-form > .hint {
+    margin-left: 135px;
+  }
+  .basic-form .form-row .form-row {
+    margin-left: 0;
+  }
+  .basic-form .form-row > .button:first-child,
+  .basic-form .form-row > div > .button:first-child,
+  .basic-form .form-row > span > .button:first-child {
+    margin-left: -5px;
+  }
+  .basic-form .help {
+    float: right;
+  }
+  .basic-form .text-line label {
+    margin-top: 5px;
+  }
+  .basic-form label:first-child {
+    float: left;
+    width: 120px;
+    margin-left: -135px;
+  }
+  .basic-form.left .required label:after {
+    content: '*';
+  }
+  .basic-form.right fieldset legend {
+    text-align: right;
+  }
+  .basic-form.right label:first-child {
+    text-align: right;
+  }
+  .basic-form.right label .required label:before {
+    content: '*';
+  }
 }
 .basic-form.rtl {
   text-align: right;
@@ -2401,34 +2403,34 @@ select {
 .basic-form.rtl fieldset fieldset {
   border-left-width: 0px;
 }
-.basic-form.top fieldset {
+.basic-form fieldset {
   padding-right: 0;
   margin-right: 0;
 }
-.basic-form.top fieldset fieldset {
+.basic-form fieldset fieldset {
   border-right-width: 0;
 }
-.basic-form.top textarea:not([class]),
-.basic-form.top select:not([class]),
-.basic-form.top input[type=password]:not([class]),
-.basic-form.top input[type=text]:not([class]) {
+.basic-form textarea:not([class]),
+.basic-form select:not([class]),
+.basic-form input[type=password]:not([class]),
+.basic-form input[type=text]:not([class]) {
   margin-left: -5px;
 }
-.basic-form.top .form-row .button:first-child {
+.basic-form .form-row .button:first-child {
   margin-left: -5px;
 }
-.basic-form.top label:first-child {
+.basic-form label:first-child {
   display: block;
   margin-bottom: 5px;
 }
-.basic-form.top select + label,
-.basic-form.top input + label {
+.basic-form select + label,
+.basic-form input + label {
   margin-left: 5px;
 }
-.basic-form.top .help {
+.basic-form .help {
   float: right;
 }
-.basic-form.top .required label:after {
+.basic-form .required label:after {
   content: '*';
 }
 @media print {

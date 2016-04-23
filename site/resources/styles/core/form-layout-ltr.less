@@ -1,131 +1,102 @@
 @import "core-values";
 @import "form-values";
 
-.basic-form.ltr
+
+@media screen and (min-width: @min-width-for-columns)
 {
-  fieldset
+  .basic-form
   {
-    legend
+    fieldset
     {
-      float: left;
-      width: @label-area-width - @standard_spacing;
-      margin-left: -@label-area-width;
-      margin-top: .15em;
+      legend
+      {
+        float: left;
+        width: @label-area-width - @standard_spacing;
+        margin-left: -@label-area-width;
+        margin-top: .15em;
+      }
+
+      textarea,
+      select,
+      input[type=password],
+      input[type=text]
+      {
+        &:not([class])
+        {
+          // Move these controls out so that the text they contain lines up with standard text flows
+          margin-left: -@standard_border_radius - @hairline_border_width;
+        }
+      }
+
+      &.toggle
+      {
+        legend
+        {
+          margin-top: 0;
+        }
+      }
+
+      margin-left: @label-area-width;
+
+      fieldset
+      {
+        margin-left: 0;
+      }
     }
 
-    textarea,
     select,
-    input[type=password],
-    input[type=text]
+    input
     {
-      &:not([class])
+      + label
       {
-        // Move these controls out so that the text they contain lines up with standard text flows
+        margin-left: @small_spacing;
+      }
+    }
+
+    .hint
+    {
+      margin-left: 0;
+    }
+
+    > p
+    {
+      /* Applies to form rows appearing directly in a form (not in a fieldset). */
+
+      margin-left: @label-area-width;
+    }
+
+    > .form-row,
+    > .group,
+    > .hint
+    {
+      margin-left: @label-area-width;
+    }
+
+    .form-row .form-row
+    {
+      margin-left: 0;
+    }
+
+    .form-row
+    {
+      > .button:first-child,
+      > div > .button:first-child,
+      > span > .button:first-child
+      {
         margin-left: -@standard_border_radius - @hairline_border_width;
       }
     }
 
-    &.toggle
+    .help
     {
-      legend
+      float: right;
+    }
+
+    .text-line
+    {
+      label
       {
-        margin-top: 0;
-      }
-    }
-
-    margin-left: @label-area-width;
-
-    fieldset
-    {
-      margin-left: 0;
-    }
-  }
-
-  select,
-  input
-  {
-    + label
-    {
-      margin-left: @small_spacing;
-    }
-  }
-
-  .hint
-  {
-    margin-left: 0;
-  }
-
-  > p
-  {
-    /* Applies to form rows appearing directly in a form (not in a fieldset). */
-
-    margin-left: @label-area-width;
-  }
-
-  > .form-row,
-  > .group,
-  > .hint
-  {
-    margin-left: @label-area-width;
-  }
-
-  .form-row .form-row
-  {
-    margin-left: 0;
-  }
-
-  .form-row
-  {
-    > .button:first-child,
-    > div > .button:first-child,
-    > span > .button:first-child
-    {
-      margin-left: -@standard_border_radius - @hairline_border_width;
-    }
-  }
-
-  .help
-  {
-    float: right;
-  }
-
-  .text-line
-  {
-    label
-    {
-      margin-top: @small_spacing;
-    }
-  }
-
-  label
-  {
-    &:first-child
-    {
-      float: left;
-      width: @label-area-width - @standard_spacing;
-      margin-left: -@label-area-width;
-    }
-  }
-
-  &.left
-  {
-    // Include styles specific to left-aligned ltr-label forms
-
-    .required label:after
-    {
-      content: '*';
-    }
-  }
-
-  &.right
-  {
-    // Include styles specific to right-aligned ltr-label forms
-
-    fieldset
-    {
-      legend
-      {
-        text-align: right;
+        margin-top: @small_spacing;
       }
     }
 
@@ -133,12 +104,45 @@
     {
       &:first-child
       {
-        text-align: right;
+        float: left;
+        width: @label-area-width - @standard_spacing;
+        margin-left: -@label-area-width;
       }
+    }
 
-      .required label:before
+    &.left
+    {
+      // Include styles specific to left-aligned ltr-label forms
+
+      .required label:after
       {
         content: '*';
+      }
+    }
+
+    &.right
+    {
+      // Include styles specific to right-aligned ltr-label forms
+
+      fieldset
+      {
+        legend
+        {
+          text-align: right;
+        }
+      }
+
+      label
+      {
+        &:first-child
+        {
+          text-align: right;
+        }
+
+        .required label:before
+        {
+          content: '*';
+        }
       }
     }
   }
