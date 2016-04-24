@@ -63,13 +63,13 @@ class PAGE_RENDERER extends WEBCORE_OBJECT
     if ($opts->css_class)
     {
 ?>
-<html class="<?php echo $opts->css_class; ?>">
+<html class="<?php echo $opts->css_class; ?>" lang="<?php echo $opts->language; ?>">
 <?php
   }
   else
   {
 ?>
-<html>
+<html lang="<?php echo $opts->language; ?>">
 <?php
   }
 ?>
