@@ -915,7 +915,7 @@ class IMAGE_METRICS
     {
       $opts = global_text_options ();
       $title = $opts->convert_to_html_attribute ($title);
-      $Result = '<img src="' . $this->url . '" alt="' . $title . '" title="' . $title . '"';
+      $Result = '<img src="' . $this->url . '" alt="' . $title . '"';
       if ($css_class)
       {
         $Result .= ' class="' . $css_class . '"';
