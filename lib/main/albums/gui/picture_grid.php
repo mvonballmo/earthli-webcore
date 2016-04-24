@@ -100,7 +100,7 @@ class PICTURE_GRID extends ALBUM_ENTRY_GRID
     }
     ?>
     <div class="image-without-text">
-      <a href="<?php echo $this->_url->as_html(); ?>"><img src="<?php echo $obj->full_thumbnail_name(); ?>" alt=""></a>
+      <a href="<?php echo $this->_url->as_html(); ?>"><img src="<?php echo $obj->full_thumbnail_name(); ?>" alt="Picture"></a>
     </div>
     <?php
     if ($this->show_controls)
