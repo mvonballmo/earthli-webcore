@@ -1222,8 +1222,6 @@ div.sixteen {
 .menu .menu-item:visited {
   color: #202c1e;
 }
-/* @end */
-/* @group Buttons / Inline Menu */
 .button + .menu-items.buttons,
 .menu-items.buttons + .menu-items.buttons,
 .menu-items.buttons + .button,
@@ -1266,11 +1264,11 @@ input[type=submit] + .menu-items.buttons,
   margin-right: 10px;
   margin-top: 15px;
 }
-.minimal-commands-content {
-  margin-left: 2.4em;
-}
 .minimal-commands .selector {
   margin-right: 5px;
+}
+.minimal-commands-content {
+  margin-left: 2.4em;
 }
 .minimal-commands-content.selector {
   margin-left: 53px;
@@ -2266,119 +2264,121 @@ select {
   margin-left: -4px;
 }
 @media screen and (min-width: 600px) {
-  .basic-form fieldset {
+  .basic-form.ltr fieldset {
     margin-left: 135px;
   }
-  .basic-form fieldset legend {
+  .basic-form.ltr fieldset legend {
     float: left;
     width: 120px;
     margin-left: -135px;
     margin-top: .15em;
   }
-  .basic-form fieldset textarea:not([class]),
-  .basic-form fieldset select:not([class]),
-  .basic-form fieldset input[type=password]:not([class]),
-  .basic-form fieldset input[type=text]:not([class]) {
+  .basic-form.ltr fieldset textarea:not([class]),
+  .basic-form.ltr fieldset select:not([class]),
+  .basic-form.ltr fieldset input[type=password]:not([class]),
+  .basic-form.ltr fieldset input[type=text]:not([class]) {
     margin-left: -5px;
   }
-  .basic-form fieldset.toggle legend {
+  .basic-form.ltr fieldset.toggle legend {
     margin-top: 0;
   }
-  .basic-form fieldset fieldset {
+  .basic-form.ltr fieldset fieldset {
     margin-left: 0;
   }
-  .basic-form select + label,
-  .basic-form input + label {
+  .basic-form.ltr select + label,
+  .basic-form.ltr input + label {
     margin-left: 5px;
   }
-  .basic-form .hint {
+  .basic-form.ltr .hint {
     margin-left: 0;
   }
-  .basic-form > p {
+  .basic-form.ltr > p {
     /* Applies to form rows appearing directly in a form (not in a fieldset). */
     margin-left: 135px;
   }
-  .basic-form > .form-row,
-  .basic-form > .group,
-  .basic-form > .hint {
+  .basic-form.ltr > .form-row,
+  .basic-form.ltr > .group,
+  .basic-form.ltr > .hint {
     margin-left: 135px;
   }
-  .basic-form .form-row .form-row {
+  .basic-form.ltr .form-row .form-row {
     margin-left: 0;
   }
-  .basic-form .form-row > .button:first-child,
-  .basic-form .form-row > div > .button:first-child,
-  .basic-form .form-row > span > .button:first-child {
+  .basic-form.ltr .form-row > .button:first-child,
+  .basic-form.ltr .form-row > div > .button:first-child,
+  .basic-form.ltr .form-row > span > .button:first-child {
     margin-left: -5px;
   }
-  .basic-form .help {
+  .basic-form.ltr .help {
     float: right;
   }
-  .basic-form .text-line label {
+  .basic-form.ltr .text-line label {
     margin-top: 5px;
   }
-  .basic-form label:first-child {
+  .basic-form.ltr label:first-child {
     float: left;
     width: 120px;
     margin-left: -135px;
   }
-  .basic-form.left .required label:after {
+  .basic-form.ltr.left .required label:after {
     content: '*';
   }
-  .basic-form.right fieldset legend {
+  .basic-form.ltr.right fieldset legend {
     text-align: right;
   }
-  .basic-form.right label:first-child {
+  .basic-form.ltr.right label:first-child {
     text-align: right;
   }
-  .basic-form.right label .required label:before {
+  .basic-form.ltr.right label .required label:before {
     content: '*';
   }
 }
-.basic-form.rtl {
-  text-align: right;
-}
-.basic-form.rtl input[type=checkbox],
-.basic-form.rtl input[type=radio] {
-  float: right;
-}
-.basic-form.rtl > .form-row,
-.basic-form.rtl > .group,
-.basic-form.rtl > .hint {
-  margin-right: 135px;
-}
-.basic-form.rtl > p,
-.basic-form.rtl > div,
-.basic-form.rtl fieldset > p,
-.basic-form.rtl fieldset > div {
-  clear: right;
-}
-.basic-form.rtl .group,
-.basic-form.rtl .hint {
-  float: right;
-  clear: right;
-}
-.basic-form.rtl label:first-child {
-  float: right;
-  width: 135px;
-}
-.basic-form.rtl .one-input label {
-  margin-left: 0px;
-  margin-right: 18px;
-}
-.basic-form.rtl .help {
-  float: left;
-  width: 180px;
-  height: auto;
-  margin-left: 12px;
-}
-.basic-form.rtl fieldset {
-  padding-left: 0px;
-  margin-left: 0px;
-  clear: right;
-}
-.basic-form.rtl fieldset fieldset {
-  border-left-width: 0px;
+@media screen and (min-width: 600px) {
+  .basic-form.rtl {
+    text-align: right;
+  }
+  .basic-form.rtl input[type=checkbox],
+  .basic-form.rtl input[type=radio] {
+    float: right;
+  }
+  .basic-form.rtl > .form-row,
+  .basic-form.rtl > .group,
+  .basic-form.rtl > .hint {
+    margin-right: 135px;
+  }
+  .basic-form.rtl > p,
+  .basic-form.rtl > div,
+  .basic-form.rtl fieldset > p,
+  .basic-form.rtl fieldset > div {
+    clear: right;
+  }
+  .basic-form.rtl .group,
+  .basic-form.rtl .hint {
+    float: right;
+    clear: right;
+  }
+  .basic-form.rtl label:first-child {
+    float: right;
+    width: 135px;
+  }
+  .basic-form.rtl .one-input label {
+    margin-left: 0px;
+    margin-right: 18px;
+  }
+  .basic-form.rtl .help {
+    float: left;
+    width: 180px;
+    height: auto;
+    margin-left: 12px;
+  }
+  .basic-form.rtl fieldset {
+    padding-left: 0px;
+    margin-left: 0px;
+    clear: right;
+  }
+  .basic-form.rtl fieldset fieldset {
+    border-left-width: 0px;
+  }
 }
 .basic-form fieldset {
   padding-right: 0;
