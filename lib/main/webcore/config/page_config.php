@@ -361,6 +361,11 @@ class PAGE_TEMPLATE_OPTIONS
   public $title = '';
 
   /**
+   * @var string
+   */
+  public $language = 'en';
+
+  /**
    * Icon that represents the page content. Paths are resolved relative to the
    * {@link Folder_name_icons} folder in the {@link PAGE}.
    * @var string
