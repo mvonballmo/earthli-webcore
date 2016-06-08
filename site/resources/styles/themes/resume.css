@@ -845,7 +845,7 @@ pre > code .attribute-value,
   line-height: 160%;
   text-align: left;
 }
-@media screen and (min-width: 600px) {
+@media (min-width: 600px) {
   .text-flow.wide {
     column-width: 35em;
     -webkit-column-width: 35em;
@@ -1481,202 +1481,202 @@ table.panels td {
   margin-right: 30px;
   margin-bottom: 30px;
 }
-@media screen and (min-width: 450px) {
+@media (min-width: 450px) {
   .grid > div {
     width: 50%;
   }
 }
-@media screen and (min-width: 900px) {
+@media (min-width: 900px) {
   .grid > div {
     width: 33.33333333%;
   }
 }
-@media screen and (min-width: 1350px) {
+@media (min-width: 1350px) {
   .grid > div {
     width: 25%;
   }
 }
-@media screen and (min-width: 1800px) {
+@media (min-width: 1800px) {
   .grid > div {
     width: 20%;
   }
 }
-@media screen and (min-width: 2250px) {
+@media (min-width: 2250px) {
   .grid > div {
     width: 16.66666667%;
   }
 }
-@media screen and (min-width: 2700px) {
+@media (min-width: 2700px) {
   .grid > div {
     width: 14.28571429%;
   }
 }
-@media screen and (min-width: 3150px) {
+@media (min-width: 3150px) {
   .grid > div {
     width: 12.5%;
   }
 }
-@media screen and (min-width: 3600px) {
+@media (min-width: 3600px) {
   .grid > div {
     width: 11.11111111%;
   }
 }
-@media screen and (min-width: 4050px) {
+@media (min-width: 4050px) {
   .grid > div {
     width: 10%;
   }
 }
-@media screen and (min-width: 4500px) {
+@media (min-width: 4500px) {
   .grid > div {
     width: 9.09090909%;
   }
 }
-@media screen and (min-width: 200px) {
+@media (min-width: 200px) {
   .grid.tiny-tiles > div {
     width: 50%;
   }
 }
-@media screen and (min-width: 400px) {
+@media (min-width: 400px) {
   .grid.tiny-tiles > div {
     width: 33.33333333%;
   }
 }
-@media screen and (min-width: 600px) {
+@media (min-width: 600px) {
   .grid.tiny-tiles > div {
     width: 25%;
   }
 }
-@media screen and (min-width: 800px) {
+@media (min-width: 800px) {
   .grid.tiny-tiles > div {
     width: 20%;
   }
 }
-@media screen and (min-width: 1000px) {
+@media (min-width: 1000px) {
   .grid.tiny-tiles > div {
     width: 16.66666667%;
   }
 }
-@media screen and (min-width: 1200px) {
+@media (min-width: 1200px) {
   .grid.tiny-tiles > div {
     width: 14.28571429%;
   }
 }
-@media screen and (min-width: 1400px) {
+@media (min-width: 1400px) {
   .grid.tiny-tiles > div {
     width: 12.5%;
   }
 }
-@media screen and (min-width: 1600px) {
+@media (min-width: 1600px) {
   .grid.tiny-tiles > div {
     width: 11.11111111%;
   }
 }
-@media screen and (min-width: 1800px) {
+@media (min-width: 1800px) {
   .grid.tiny-tiles > div {
     width: 10%;
   }
 }
-@media screen and (min-width: 2000px) {
+@media (min-width: 2000px) {
   .grid.tiny-tiles > div {
     width: 9.09090909%;
   }
 }
-@media screen and (min-width: 300px) {
+@media (min-width: 300px) {
   .grid.small-tiles > div {
     width: 50%;
   }
 }
-@media screen and (min-width: 600px) {
+@media (min-width: 600px) {
   .grid.small-tiles > div {
     width: 33.33333333%;
   }
 }
-@media screen and (min-width: 900px) {
+@media (min-width: 900px) {
   .grid.small-tiles > div {
     width: 25%;
   }
 }
-@media screen and (min-width: 1200px) {
+@media (min-width: 1200px) {
   .grid.small-tiles > div {
     width: 20%;
   }
 }
-@media screen and (min-width: 1500px) {
+@media (min-width: 1500px) {
   .grid.small-tiles > div {
     width: 16.66666667%;
   }
 }
-@media screen and (min-width: 1800px) {
+@media (min-width: 1800px) {
   .grid.small-tiles > div {
     width: 14.28571429%;
   }
 }
-@media screen and (min-width: 2100px) {
+@media (min-width: 2100px) {
   .grid.small-tiles > div {
     width: 12.5%;
   }
 }
-@media screen and (min-width: 2400px) {
+@media (min-width: 2400px) {
   .grid.small-tiles > div {
     width: 11.11111111%;
   }
 }
-@media screen and (min-width: 2700px) {
+@media (min-width: 2700px) {
   .grid.small-tiles > div {
     width: 10%;
   }
 }
-@media screen and (min-width: 3000px) {
+@media (min-width: 3000px) {
   .grid.small-tiles > div {
     width: 9.09090909%;
   }
 }
-@media screen and (min-width: 600px) {
+@media (min-width: 600px) {
   .grid.large-tiles > div {
     width: 50%;
   }
 }
-@media screen and (min-width: 1200px) {
+@media (min-width: 1200px) {
   .grid.large-tiles > div {
     width: 33.33333333%;
   }
 }
-@media screen and (min-width: 1800px) {
+@media (min-width: 1800px) {
   .grid.large-tiles > div {
     width: 25%;
   }
 }
-@media screen and (min-width: 2400px) {
+@media (min-width: 2400px) {
   .grid.large-tiles > div {
     width: 20%;
   }
 }
-@media screen and (min-width: 3000px) {
+@media (min-width: 3000px) {
   .grid.large-tiles > div {
     width: 16.66666667%;
   }
 }
-@media screen and (min-width: 3600px) {
+@media (min-width: 3600px) {
   .grid.large-tiles > div {
     width: 14.28571429%;
   }
 }
-@media screen and (min-width: 4200px) {
+@media (min-width: 4200px) {
   .grid.large-tiles > div {
     width: 12.5%;
   }
 }
-@media screen and (min-width: 4800px) {
+@media (min-width: 4800px) {
   .grid.large-tiles > div {
     width: 11.11111111%;
   }
 }
-@media screen and (min-width: 5400px) {
+@media (min-width: 5400px) {
   .grid.large-tiles > div {
     width: 10%;
   }
 }
-@media screen and (min-width: 6000px) {
+@media (min-width: 6000px) {
   .grid.large-tiles > div {
     width: 9.09090909%;
   }
@@ -1753,7 +1753,7 @@ table.panels td {
   max-height: 300px;
   overflow-y: auto;
 }
-@media screen and (min-width: 600px) {
+@media (min-width: 600px) {
   .columns {
     display: -webkit-flex;
     display: -moz-flex;
@@ -2275,7 +2275,7 @@ select {
 .basic-form fieldset legend {
   margin-left: -4px;
 }
-@media screen and (min-width: 600px) {
+@media (min-width: 600px) {
   .basic-form.ltr fieldset {
     margin-left: 135px;
   }
@@ -2430,6 +2430,100 @@ select {
     display: none;
   }
 }
+h2 {
+  border: none;
+}
+h3 {
+  margin-top: 45px;
+}
+.legend td {
+  width: 30px;
+}
+.timeline {
+  position: relative;
+}
+.timeline .years {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  z-index: -1;
+}
+.timeline .years > div {
+  width: 16.12903226%;
+  padding-left: 5px;
+  border-left: 1px solid silver;
+  opacity: .6;
+  float: left;
+  height: 100%;
+  box-sizing: border-box;
+}
+.timeline .years > div:last-child {
+  width: 3.22580645%;
+}
+.timeline .projects {
+  padding-top: 60px;
+}
+section:first-child > h2 {
+  visibility: hidden;
+}
+section h2:first-child {
+  flex: 1;
+  font-variant: small-caps;
+  margin-top: 45px;
+  margin-right: 45px;
+}
+section p:first-child {
+  margin-top: 45px;
+}
+section > div > h3:first-child {
+  margin-top: 45px;
+}
+section > div:first-child {
+  flex: 1;
+  margin-top: 0;
+  margin-right: 45px;
+}
+section > div:first-child > h3 {
+  margin-top: 0;
+}
+section div {
+  flex: 5;
+  margin-top: 0;
+}
+section div.grid {
+  margin-top: 45px;
+}
+section div.grid > div {
+  margin-right: 45px;
+  margin-bottom: 45px;
+}
+section div.grid > div h3:first-child {
+  margin-top: 0;
+}
+section div.contact {
+  display: flex;
+}
+section div.contact div {
+  flex: 4;
+}
+section div.contact ul {
+  flex: 2;
+  list-style: none;
+}
+@media (min-width: 600px) {
+  section {
+    display: flex;
+  }
+}
+.project ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.project ul li {
+  padding: 0;
+  margin: 5px 0;
+}
 .level-expert {
   background-color: #82d8d8;
   white-space: nowrap;
@@ -2437,25 +2531,25 @@ select {
   margin: 1px 0;
 }
 .level-proficient {
-  background-color: #9be0e0;
+  background-color: #a1e2e2;
   white-space: nowrap;
   padding: 2px;
   margin: 1px 0;
 }
 .level-competent {
-  background-color: #b4e8e8;
+  background-color: #c1ecec;
   white-space: nowrap;
   padding: 2px;
   margin: 1px 0;
 }
 .level-advanced-beginner {
-  background-color: #cdefef;
+  background-color: #e0f5f5;
   white-space: nowrap;
   padding: 2px;
   margin: 1px 0;
 }
 .level-novice {
-  background-color: #e6f7f7;
+  background-color: #f3fbfb;
   white-space: nowrap;
   padding: 2px;
   margin: 1px 0;
@@ -2529,98 +2623,4 @@ select {
 .single-line > div:nth-child(2) {
   margin-top: -30px;
   color: transparent;
-}
-.legend td {
-  width: 30px;
-}
-.timeline .content {
-  position: relative;
-}
-.timeline .content .years {
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  z-index: -1;
-}
-.timeline .content .years > div {
-  width: 16.12903226%;
-  padding-left: 5px;
-  border-left: 1px solid silver;
-  opacity: .6;
-  float: left;
-  height: 100%;
-  box-sizing: border-box;
-}
-.timeline .content .years > div:last-child {
-  width: 3.22580645%;
-}
-.timeline .content .projects {
-  padding-top: 60px;
-}
-h2 {
-  border: none;
-}
-h3 {
-  margin-top: 45px;
-}
-section:first-child > h2 {
-  visibility: hidden;
-}
-section h2:first-child {
-  flex: 1;
-  font-variant: small-caps;
-  margin-top: 45px;
-  margin-right: 45px;
-}
-section p:first-child {
-  margin-top: 45px;
-}
-section > div > h3:first-child {
-  margin-top: 45px;
-}
-section > div:first-child {
-  flex: 1;
-  margin-top: 0;
-  margin-right: 45px;
-}
-section > div:first-child > h3 {
-  margin-top: 0;
-}
-section div {
-  flex: 5;
-  margin-top: 0;
-}
-section div.grid {
-  margin-top: 45px;
-}
-section div.grid > div {
-  margin-right: 45px;
-  margin-bottom: 45px;
-}
-section div.grid > div h3:first-child {
-  margin-top: 0;
-}
-section div.contact {
-  display: flex;
-}
-section div.contact div {
-  flex: 4;
-}
-section div.contact ul {
-  flex: 2;
-  list-style: none;
-}
-@media screen and (min-width: 600px) {
-  section {
-    display: flex;
-  }
-}
-.project ul {
-  padding: 0;
-  margin: 0;
-  list-style: none;
-}
-.project ul li {
-  padding: 0;
-  margin: 5px 0;
 }

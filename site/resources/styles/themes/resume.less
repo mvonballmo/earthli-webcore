@@ -26,6 +26,164 @@
 
 @resume_spacing: 3 * @standard_spacing;
 
+h2
+{
+  border: none;
+}
+
+h3
+{
+  margin-top: @resume_spacing;
+}
+
+.legend
+{
+  td
+  {
+    width: @default-stripe-width * 3;
+  }
+}
+
+.timeline
+{
+  position: relative;
+
+  .years
+  {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+
+    > div
+    {
+      width: 100% * 5 / 31;
+      padding-left: @small_spacing;
+      border-left: 1px solid silver;
+      opacity: .6;
+      float: left;
+      height: 100%;
+      box-sizing: border-box;
+
+      &:last-child
+      {
+        width: 100% * 1 / 31;
+      }
+    }
+  }
+
+  .projects
+  {
+    padding-top: 2 * @default-top-spacing;
+  }
+}
+
+section
+{
+  &:first-child
+  {
+    > h2
+    {
+      visibility: hidden;
+    }
+  }
+
+  h2:first-child
+  {
+    flex: 1;
+    font-variant: small-caps;
+    margin-top: @resume_spacing;
+    margin-right: @resume_spacing;
+  }
+
+  p:first-child
+  {
+    margin-top: @resume_spacing;
+  }
+
+  > div
+  {
+    > h3:first-child
+    {
+      margin-top: @resume_spacing;
+    }
+
+    &:first-child
+    {
+      flex: 1;
+      margin-top: 0;
+      margin-right: @resume_spacing;
+
+      > h3
+      {
+        margin-top: 0;
+      }
+    }
+  }
+
+  div
+  {
+    flex: 5;
+    margin-top: 0;
+
+    &.grid
+    {
+      margin-top: @resume_spacing;
+
+      > div
+      {
+        margin-right: @resume_spacing;
+        margin-bottom: @resume_spacing;
+
+        h3:first-child
+        {
+          margin-top: 0;
+        }
+      }
+    }
+
+    &.contact
+    {
+      display: flex;
+
+      div
+      {
+        flex: 4;
+      }
+
+      ul
+      {
+        flex: 2;
+        list-style: none;
+      }
+    }
+  }
+}
+
+@media (min-width: @min-width-for-columns)
+{
+  section
+  {
+    display: flex;
+  }
+}
+
+.project
+{
+  ul
+  {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+
+    li
+    {
+      padding: 0;
+      margin: @small_spacing 0;
+    }
+  }
+}
+
 .level(@opacity, @background-color: @base-color)
 {
   background-color: mix(@background-color, white, @opacity * 100);
@@ -41,22 +199,22 @@
 
 .level-proficient
 {
-  .level(0.8);
+  .level(0.75);
 }
 
 .level-competent
 {
-  .level(0.6);
+  .level(0.5);
 }
 
 .level-advanced-beginner
 {
-  .level(0.4);
+  .level(0.25);
 }
 
 .level-novice
 {
-  .level(0.2);
+  .level(0.1);
 }
 
 .support
@@ -165,172 +323,5 @@
   {
     margin-top: -@default-top-spacing;
     color: transparent;
-  }
-}
-
-.legend
-{
-  td
-  {
-    width: @default-stripe-width * 3;
-  }
-}
-
-.timeline
-{
-  .content
-  {
-    position: relative;
-
-    .years
-    {
-      position: absolute;
-      height: 100%;
-      width: 100%;
-      z-index: -1;
-
-      > div
-      {
-        width: 100% * 5 / 31;
-        padding-left: @small_spacing;
-        border-left: 1px solid silver;
-        opacity: .6;
-        float: left;
-        height: 100%;
-        box-sizing: border-box;
-
-        &:last-child
-        {
-          width: 100% * 1 / 31;
-        }
-      }
-    }
-
-    .projects
-    {
-      padding-top: 2 * @default-top-spacing;
-    }
-  }
-}
-
-h2
-{
-  border: none;
-}
-
-h3
-{
-//  border-top: 1px @text_color dotted;
-  margin-top: @resume_spacing;
-}
-
-section
-{
-  &:first-child
-  {
-    > h2
-    {
-      visibility: hidden;
-    }
-  }
-
-  h2:first-child
-  {
-    flex: 1;
-    font-variant: small-caps;
-    margin-top: @resume_spacing;
-    margin-right: @resume_spacing;
-  }
-
-  p:first-child
-  {
-    margin-top: @resume_spacing;
-  }
-
-  > div
-  {
-    //&.content
-    //{
-    //  border-top: 1px solid @text_color;
-    //}
-
-    > h3:first-child
-    {
-      margin-top: @resume_spacing;
-    }
-
-    &:first-child
-    {
-      flex: 1;
-      margin-top: 0;
-      margin-right: @resume_spacing;
-
-      > h3
-      {
-        margin-top: 0;
-      }
-    }
-  }
-
-  div
-  {
-    flex: 5;
-    margin-top: 0;
-
-    &.grid
-    {
-      margin-top: @resume_spacing;
-
-      > div
-      {
-        margin-right: @resume_spacing;
-        margin-bottom: @resume_spacing;
-
-        h3:first-child
-        {
-          margin-top: 0;
-        }
-      }
-    }
-
-    &.contact
-    {
-      display: flex;
-
-      div
-      {
-        flex: 4;
-      }
-
-      ul
-      {
-        flex: 2;
-        list-style: none;
-      }
-    }
-  }
-}
-
-@media screen and (min-width: @min-width-for-columns)
-{
-  section
-  {
-    display: flex;
-  }
-}
-
-.project
-{
-  ul
-  {
-    padding: 0;
-    margin: 0;
-    list-style: none;
-
-    li
-    {
-      padding: 0;
-      margin: @small_spacing 0;
-    }
   }
 }
