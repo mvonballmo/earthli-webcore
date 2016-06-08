@@ -1,0 +1,336 @@
+@import "theme-base";
+
+// hard
+@base-color: #6fb5cc;
+@project-manager-color: #fda3cd;
+@architect-color: #88e4b7;
+@lead-developer-color: @base-color;
+@developer-color: #b3e2ff;
+@support-color: #fffbcc;
+@employee-color: #E8E8E8;
+
+//soft
+@base-color: #82d8d8;
+@project-manager-color: #e6aecc;
+@architect-color: #b8d8a7;
+@lead-developer-color: @base-color;
+@developer-color: #a0bfed;
+@support-color: #e5be97;
+
+@default-stripe-width: 2 * @small_spacing;
+@default-top-spacing: 2 * @standard_spacing;
+@default-stripe-angle: -45deg;
+@title_color: black;
+@link_color: @title_color;
+@text_color: #444;
+
+@resume_spacing: 3 * @standard_spacing;
+
+.level(@opacity, @background-color: @base-color)
+{
+  background-color: mix(@background-color, white, @opacity * 100);
+  white-space: nowrap;
+  padding: 2px;
+  margin: 1px 0;
+}
+
+.level-expert
+{
+  .level(1);
+}
+
+.level-proficient
+{
+  .level(0.8);
+}
+
+.level-competent
+{
+  .level(0.6);
+}
+
+.level-advanced-beginner
+{
+  .level(0.4);
+}
+
+.level-novice
+{
+  .level(0.2);
+}
+
+.support
+{
+  .level(1, @support-color);
+}
+
+.developer
+{
+  .level(1, @developer-color);
+}
+
+.lead-developer
+{
+  .level(1, @lead-developer-color);
+}
+
+.architect
+{
+  .level(1, @architect-color);
+}
+
+.project-manager
+{
+  .level(1, @project-manager-color);
+}
+
+.employee
+{
+  .level(1, @employee-color);
+  position: absolute;
+  top: 0;
+  height: 100%;
+  z-index: -2;
+  padding-top: @default-top-spacing;
+  box-sizing: border-box;
+}
+
+.two-color-diagonal-stripes(@first-color, @second-color, @stripe-width: @default-stripe-width, @stripe-angle: @default-stripe-angle)
+{
+  background: repeating-linear-gradient(
+    @stripe-angle,
+    @first-color,
+    @first-color @stripe-width,
+    @second-color @stripe-width,
+    @second-color 2 * @stripe-width,
+  );
+}
+
+.three-color-diagonal-stripes(@first-color, @second-color, @third-color, @stripe-width: @default-stripe-width, @stripe-angle: @default-stripe-angle)
+{
+  background: repeating-linear-gradient(
+    @stripe-angle,
+    @first-color,
+    @first-color @stripe-width,
+    @second-color @stripe-width,
+    @second-color 2 * @stripe-width,
+    @third-color 2 * @stripe-width,
+    @third-color 3 * @stripe-width
+  );
+}
+
+.project-manager.architect.lead-developer
+{
+  .three-color-diagonal-stripes(@architect-color, @project-manager-color, @lead-developer-color);
+}
+
+.project-manager.architect.developer
+{
+  .three-color-diagonal-stripes(@architect-color, @project-manager-color, @developer-color);
+}
+
+.architect.lead-developer
+{
+  .two-color-diagonal-stripes(@architect-color, @lead-developer-color);
+}
+
+.architect.developer
+{
+  .two-color-diagonal-stripes(@architect-color, @developer-color);
+}
+
+.project-manager.lead-developer.support
+{
+  .three-color-diagonal-stripes(@project-manager-color, @lead-developer-color, @support-color);
+}
+
+.project-manager.developer.support
+{
+  .three-color-diagonal-stripes(@project-manager-color, @developer-color, @support-color);
+}
+
+.lead-developer.support
+{
+  .two-color-diagonal-stripes(@lead-developer-color, @support-color);
+}
+
+.developer.support
+{
+  .two-color-diagonal-stripes(@developer-color, @support-color);
+}
+
+.single-line
+{
+  > div:nth-child(2)
+  {
+    margin-top: -@default-top-spacing;
+    color: transparent;
+  }
+}
+
+.legend
+{
+  td
+  {
+    width: @default-stripe-width * 3;
+  }
+}
+
+.timeline
+{
+  .content
+  {
+    position: relative;
+
+    .years
+    {
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      z-index: -1;
+
+      > div
+      {
+        width: 100% * 5 / 31;
+        padding-left: @small_spacing;
+        border-left: 1px solid silver;
+        opacity: .6;
+        float: left;
+        height: 100%;
+        box-sizing: border-box;
+
+        &:last-child
+        {
+          width: 100% * 1 / 31;
+        }
+      }
+    }
+
+    .projects
+    {
+      padding-top: 2 * @default-top-spacing;
+    }
+  }
+}
+
+h2
+{
+  border: none;
+}
+
+h3
+{
+//  border-top: 1px @text_color dotted;
+  margin-top: @resume_spacing;
+}
+
+section
+{
+  &:first-child
+  {
+    > h2
+    {
+      visibility: hidden;
+    }
+  }
+
+  h2:first-child
+  {
+    flex: 1;
+    font-variant: small-caps;
+    margin-top: @resume_spacing;
+    margin-right: @resume_spacing;
+  }
+
+  p:first-child
+  {
+    margin-top: @resume_spacing;
+  }
+
+  > div
+  {
+    //&.content
+    //{
+    //  border-top: 1px solid @text_color;
+    //}
+
+    > h3:first-child
+    {
+      margin-top: @resume_spacing;
+    }
+
+    &:first-child
+    {
+      flex: 1;
+      margin-top: 0;
+      margin-right: @resume_spacing;
+
+      > h3
+      {
+        margin-top: 0;
+      }
+    }
+  }
+
+  div
+  {
+    flex: 5;
+    margin-top: 0;
+
+    &.grid
+    {
+      margin-top: @resume_spacing;
+
+      > div
+      {
+        margin-right: @resume_spacing;
+        margin-bottom: @resume_spacing;
+
+        h3:first-child
+        {
+          margin-top: 0;
+        }
+      }
+    }
+
+    &.contact
+    {
+      display: flex;
+
+      div
+      {
+        flex: 4;
+      }
+
+      ul
+      {
+        flex: 2;
+        list-style: none;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: @min-width-for-columns)
+{
+  section
+  {
+    display: flex;
+  }
+}
+
+.project
+{
+  ul
+  {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+
+    li
+    {
+      padding: 0;
+      margin: @small_spacing 0;
+    }
+  }
+}
