@@ -36,6 +36,11 @@ h3
   margin-top: @resume_spacing;
 }
 
+.footer
+{
+  display: none;
+}
+
 .legend
 {
   td
@@ -96,7 +101,8 @@ section
     margin-right: @resume_spacing;
   }
 
-  p:first-child
+  p:first-child,
+  ul:first-child
   {
     margin-top: @resume_spacing;
   }
@@ -165,6 +171,40 @@ section
   section
   {
     display: flex;
+  }
+}
+
+@media print
+{
+  body
+  {
+    .page
+    {
+      .header
+      {
+        .nav-box
+        {
+          display: none;
+        }
+      }
+    }
+  }
+
+  section
+  {
+    display: flex;
+
+    div
+    {
+      &.grid
+      {
+        > div
+        {
+          // Move columns a bit closer together to use less whitespace
+          margin-right: @standard_spacing * 2;
+        }
+      }
+    }
   }
 }
 

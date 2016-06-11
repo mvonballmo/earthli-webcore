@@ -223,16 +223,35 @@
   align-self: @align;
 }
 
-.set-responsive-columns(@base_width, @n: 10, @i: 1) when (@i =< @n)
+.set-responsive-columns(@base_screen_column_width, @print_portrait_column_count, @print_landscape_column_count)
+{
+  .set-print-columns(@print_portrait_column_count, @print_landscape_column_count);
+  .set-screen-columns(@base_screen_column_width);
+}
+
+.set-screen-columns(@base_width, @n: 10, @i: 1) when (@i =< @n)
 {
   @viewport_min_width: (@base_width * @i);
 
-  @media (min-width: @viewport_min_width)
+  @media screen and (min-width: @viewport_min_width)
   {
     width: 100% / (@i + 1);
   }
 
-  .set-responsive-columns(@base_width, @n, (@i + 1));
+  .set-screen-columns(@base_width, @n, (@i + 1));
+}
+
+.set-print-columns(@portrait_column_count, @landscape_column_count)
+{
+  @media print and (orientation: portrait)
+  {
+    width: 100% / @portrait_column_count;
+  }
+
+  @media print and (orientation: landscape)
+  {
+    width: 100% / @landscape_column_count;
+  }
 }
 
 .non-intrusive-x-spacing(@value: @standard_spacing)

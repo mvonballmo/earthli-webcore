@@ -1481,202 +1481,242 @@ table.panels td {
   margin-right: 30px;
   margin-bottom: 30px;
 }
-@media (min-width: 450px) {
+@media print and (orientation: portrait) {
   .grid > div {
     width: 50%;
   }
 }
-@media (min-width: 900px) {
+@media print and (orientation: landscape) {
   .grid > div {
     width: 33.33333333%;
   }
 }
-@media (min-width: 1350px) {
+@media screen and (min-width: 450px) {
+  .grid > div {
+    width: 50%;
+  }
+}
+@media screen and (min-width: 900px) {
+  .grid > div {
+    width: 33.33333333%;
+  }
+}
+@media screen and (min-width: 1350px) {
   .grid > div {
     width: 25%;
   }
 }
-@media (min-width: 1800px) {
+@media screen and (min-width: 1800px) {
   .grid > div {
     width: 20%;
   }
 }
-@media (min-width: 2250px) {
+@media screen and (min-width: 2250px) {
   .grid > div {
     width: 16.66666667%;
   }
 }
-@media (min-width: 2700px) {
+@media screen and (min-width: 2700px) {
   .grid > div {
     width: 14.28571429%;
   }
 }
-@media (min-width: 3150px) {
+@media screen and (min-width: 3150px) {
   .grid > div {
     width: 12.5%;
   }
 }
-@media (min-width: 3600px) {
+@media screen and (min-width: 3600px) {
   .grid > div {
     width: 11.11111111%;
   }
 }
-@media (min-width: 4050px) {
+@media screen and (min-width: 4050px) {
   .grid > div {
     width: 10%;
   }
 }
-@media (min-width: 4500px) {
+@media screen and (min-width: 4500px) {
   .grid > div {
     width: 9.09090909%;
   }
 }
-@media (min-width: 200px) {
-  .grid.tiny-tiles > div {
-    width: 50%;
-  }
-}
-@media (min-width: 400px) {
-  .grid.tiny-tiles > div {
-    width: 33.33333333%;
-  }
-}
-@media (min-width: 600px) {
+@media print and (orientation: portrait) {
   .grid.tiny-tiles > div {
     width: 25%;
   }
 }
-@media (min-width: 800px) {
-  .grid.tiny-tiles > div {
-    width: 20%;
-  }
-}
-@media (min-width: 1000px) {
+@media print and (orientation: landscape) {
   .grid.tiny-tiles > div {
     width: 16.66666667%;
   }
 }
-@media (min-width: 1200px) {
+@media screen and (min-width: 200px) {
+  .grid.tiny-tiles > div {
+    width: 50%;
+  }
+}
+@media screen and (min-width: 400px) {
+  .grid.tiny-tiles > div {
+    width: 33.33333333%;
+  }
+}
+@media screen and (min-width: 600px) {
+  .grid.tiny-tiles > div {
+    width: 25%;
+  }
+}
+@media screen and (min-width: 800px) {
+  .grid.tiny-tiles > div {
+    width: 20%;
+  }
+}
+@media screen and (min-width: 1000px) {
+  .grid.tiny-tiles > div {
+    width: 16.66666667%;
+  }
+}
+@media screen and (min-width: 1200px) {
   .grid.tiny-tiles > div {
     width: 14.28571429%;
   }
 }
-@media (min-width: 1400px) {
+@media screen and (min-width: 1400px) {
   .grid.tiny-tiles > div {
     width: 12.5%;
   }
 }
-@media (min-width: 1600px) {
+@media screen and (min-width: 1600px) {
   .grid.tiny-tiles > div {
     width: 11.11111111%;
   }
 }
-@media (min-width: 1800px) {
+@media screen and (min-width: 1800px) {
   .grid.tiny-tiles > div {
     width: 10%;
   }
 }
-@media (min-width: 2000px) {
+@media screen and (min-width: 2000px) {
   .grid.tiny-tiles > div {
     width: 9.09090909%;
   }
 }
-@media (min-width: 300px) {
-  .grid.small-tiles > div {
-    width: 50%;
-  }
-}
-@media (min-width: 600px) {
+@media print and (orientation: portrait) {
   .grid.small-tiles > div {
     width: 33.33333333%;
   }
 }
-@media (min-width: 900px) {
+@media print and (orientation: landscape) {
   .grid.small-tiles > div {
     width: 25%;
   }
 }
-@media (min-width: 1200px) {
+@media screen and (min-width: 300px) {
+  .grid.small-tiles > div {
+    width: 50%;
+  }
+}
+@media screen and (min-width: 600px) {
+  .grid.small-tiles > div {
+    width: 33.33333333%;
+  }
+}
+@media screen and (min-width: 900px) {
+  .grid.small-tiles > div {
+    width: 25%;
+  }
+}
+@media screen and (min-width: 1200px) {
   .grid.small-tiles > div {
     width: 20%;
   }
 }
-@media (min-width: 1500px) {
+@media screen and (min-width: 1500px) {
   .grid.small-tiles > div {
     width: 16.66666667%;
   }
 }
-@media (min-width: 1800px) {
+@media screen and (min-width: 1800px) {
   .grid.small-tiles > div {
     width: 14.28571429%;
   }
 }
-@media (min-width: 2100px) {
+@media screen and (min-width: 2100px) {
   .grid.small-tiles > div {
     width: 12.5%;
   }
 }
-@media (min-width: 2400px) {
+@media screen and (min-width: 2400px) {
   .grid.small-tiles > div {
     width: 11.11111111%;
   }
 }
-@media (min-width: 2700px) {
+@media screen and (min-width: 2700px) {
   .grid.small-tiles > div {
     width: 10%;
   }
 }
-@media (min-width: 3000px) {
+@media screen and (min-width: 3000px) {
   .grid.small-tiles > div {
     width: 9.09090909%;
   }
 }
-@media (min-width: 600px) {
+@media print and (orientation: portrait) {
+  .grid.large-tiles > div {
+    width: 100%;
+  }
+}
+@media print and (orientation: landscape) {
   .grid.large-tiles > div {
     width: 50%;
   }
 }
-@media (min-width: 1200px) {
+@media screen and (min-width: 600px) {
+  .grid.large-tiles > div {
+    width: 50%;
+  }
+}
+@media screen and (min-width: 1200px) {
   .grid.large-tiles > div {
     width: 33.33333333%;
   }
 }
-@media (min-width: 1800px) {
+@media screen and (min-width: 1800px) {
   .grid.large-tiles > div {
     width: 25%;
   }
 }
-@media (min-width: 2400px) {
+@media screen and (min-width: 2400px) {
   .grid.large-tiles > div {
     width: 20%;
   }
 }
-@media (min-width: 3000px) {
+@media screen and (min-width: 3000px) {
   .grid.large-tiles > div {
     width: 16.66666667%;
   }
 }
-@media (min-width: 3600px) {
+@media screen and (min-width: 3600px) {
   .grid.large-tiles > div {
     width: 14.28571429%;
   }
 }
-@media (min-width: 4200px) {
+@media screen and (min-width: 4200px) {
   .grid.large-tiles > div {
     width: 12.5%;
   }
 }
-@media (min-width: 4800px) {
+@media screen and (min-width: 4800px) {
   .grid.large-tiles > div {
     width: 11.11111111%;
   }
 }
-@media (min-width: 5400px) {
+@media screen and (min-width: 5400px) {
   .grid.large-tiles > div {
     width: 10%;
   }
 }
-@media (min-width: 6000px) {
+@media screen and (min-width: 6000px) {
   .grid.large-tiles > div {
     width: 9.09090909%;
   }
@@ -2436,6 +2476,9 @@ h2 {
 h3 {
   margin-top: 45px;
 }
+.footer {
+  display: none;
+}
 .legend td {
   width: 30px;
 }
@@ -2472,7 +2515,8 @@ section h2:first-child {
   margin-top: 45px;
   margin-right: 45px;
 }
-section p:first-child {
+section p:first-child,
+section ul:first-child {
   margin-top: 45px;
 }
 section > div > h3:first-child {
@@ -2513,6 +2557,17 @@ section div.contact ul {
 @media (min-width: 600px) {
   section {
     display: flex;
+  }
+}
+@media print {
+  body .page .header .nav-box {
+    display: none;
+  }
+  section {
+    display: flex;
+  }
+  section div.grid > div {
+    margin-right: 30px;
   }
 }
 .project ul {

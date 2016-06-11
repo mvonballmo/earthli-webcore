@@ -22,14 +22,14 @@
 
   > div
   {
-    .set-responsive-columns(@grid_standard_tile_width);
+    .set-responsive-columns(@grid_standard_tile_width, 2, 3);
   }
 
   &.tiny-tiles
   {
     > div
     {
-      .set-responsive-columns(@grid_tiny_tile_width);
+      .set-responsive-columns(@grid_tiny_tile_width, 4, 6);
     }
   }
 
@@ -37,7 +37,7 @@
   {
     > div
     {
-      .set-responsive-columns(@grid_small_tile_width);
+      .set-responsive-columns(@grid_small_tile_width, 3, 4);
     }
   }
 
@@ -45,7 +45,7 @@
   {
     > div
     {
-      .set-responsive-columns(@grid_large_tile_width);
+      .set-responsive-columns(@grid_large_tile_width, 1, 2);
     }
   }
 
