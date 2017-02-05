@@ -225,7 +225,7 @@ class MAIL_BODY_RENDERER extends MAIL_RENDERER
     $Result = $this->line ("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">");
     $Result .= $this->line ("<html>");
     $Result .= $this->line ("<head>");
-    $Result .= $this->line ("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=iso-8859-1\">");
+    $Result .= $this->line ("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=windows-1252\">");
 
     $Result .= $this->_html_head_content ();
 

@@ -456,7 +456,7 @@ function execute_field(url, form_name)
 
   var request = new XMLHttpRequest();
   request.open('POST', url, true);
-  request.setRequestHeader("Content-type", "application/x-www-form-urlencoded;charset=ISO-8859-1");
+  request.setRequestHeader("Content-type", "application/x-www-form-urlencoded;charset=windows-1252");
 
   var idField = form['id'];
   var title = document.getElementById('title');

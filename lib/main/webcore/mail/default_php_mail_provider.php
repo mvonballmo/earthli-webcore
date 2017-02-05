@@ -51,6 +51,7 @@ class DEFAULT_PHP_MAIL_PROVIDER extends MAIL_PROVIDER
   /**
    * @param MAIL_MESSAGE $message
    * @access private
+   * @return bool
    */
   protected function _internal_send ($message)
   {
@@ -63,7 +64,7 @@ class DEFAULT_PHP_MAIL_PROVIDER extends MAIL_PROVIDER
     $header .= $this->renderer->line ("MIME-Version: 1.0");
     if ($message->send_as_html)
     {
-      $header .= $this->renderer->line ("Content-Type: text/html; charset=iso-8859-1");
+      $header .= $this->renderer->line ("Content-Type: text/html; charset=windows-1252");
     }
     else
     {
