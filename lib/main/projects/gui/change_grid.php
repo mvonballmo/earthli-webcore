@@ -55,7 +55,7 @@ class CHANGE_GRID extends PROJECT_ENTRY_GRID
   {
     parent::__construct($context);
 
-    $this->css_class .= ' large-tiles';
+    $this->css_class .= ' small-tiles';
   }
 
   /**
