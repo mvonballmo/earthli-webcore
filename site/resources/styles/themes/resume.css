@@ -974,7 +974,7 @@ pre > code .attribute-value,
   border-width: 0;
   border-left-width: 1px;
   padding: 0 0 0 15px;
-  margin-left: 5px;
+  margin-left: 15px;
 }
 .pullquote.left,
 .pullquote.left-column {
@@ -982,7 +982,7 @@ pre > code .attribute-value,
   border-width: 0;
   border-right-width: 1px;
   padding: 0 15px 0 0;
-  margin-right: 5px;
+  margin-right: 15px;
 }
 .quoter {
   font-style: italic;
