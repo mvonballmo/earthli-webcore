@@ -11,7 +11,6 @@
 
 class DB_Sql
 {
-  
   /* public: connection parameters */
   public $Host = "";
   public $Database = "";
@@ -40,22 +39,7 @@ class DB_Sql
   protected $Link_ID = 0;
   protected $Query_ID = 0;
 
-  /* public: constructor */
-  function DB_Sql ($query = "")
-  {
-    $this->query ($query);
-  }
-
-  /* public: some trivial reporting */
-  function link_id ()
-  {
-    return $this->Link_ID;
-  }
-
-  function query_id ()
-  {
-    return $this->Query_ID;
-  }
+  private $_mysqli;
 
   /* public: connection management */
   function connect ($Database = "", $Host = "", $User = "", $Password = "")
@@ -73,7 +57,10 @@ class DB_Sql
     /* establish connection, select database */
     if (0 == $this->Link_ID)
     {
-      
+      $this->_mysqli = new mysqli($this->Host, $this->User, $this->Password, $this->Database);
+      if ($this->_mysqli->connect_errno) {
+        echo "Failed to connect to MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
+      }
       $this->Link_ID = @mysql_pconnect ($Host, $User, $Password);
       if (!$this->Link_ID)
       {
@@ -302,89 +289,6 @@ class DB_Sql
       return 0;
     }
     return $nextid;
-  }
-
-  /* public: return table metadata */
-  function metadata ($table = '', $full = false)
-  {
-    $id = 0;
-    $res = array ();
-    
-    /*
-     * Due to compatibility problems with Table we changed the behavior
-     * of metadata();
-     * depending on $full, metadata returns the following values:
-     *
-     * - full is false (default):
-     * $result[]:
-     *   [0]["table"]  table name
-     *   [0]["name"]   field name
-     *   [0]["type"]   field type
-     *   [0]["len"]    field length
-     *   [0]["flags"]  field flags
-     *
-     * - full is true
-     * $result[]:
-     *   ["num_fields"] number of metadata records
-     *   [0]["table"]  table name
-     *   [0]["name"]   field name
-     *   [0]["type"]   field type
-     *   [0]["len"]    field length
-     *   [0]["flags"]  field flags
-     *   ["meta"][field name]  index of field named "field name"
-     *   The last one is used, if you have a field name, but no index.
-     *   Test:  if (isset($result['meta']['myfield'])) { ...
-     */
-    
-    // if no $table specified, assume that we are working with a query
-    // result
-    if ($table)
-    {
-      $this->connect ();
-      $id = @mysql_list_fields ($this->Database, $table);
-      if (!$id)
-        $this->halt ("Metadata query failed.");
-    }
-    else
-    {
-      $id = $this->Query_ID;
-      if (!$id)
-        $this->halt ("No query specified.");
-    }
-    
-    $count = @mysql_num_fields ($id);
-    
-    // made this IF due to performance (one if is faster than $count if's)
-    if (!$full)
-    {
-      for($i = 0; $i < $count; $i++)
-      {
-        $res [$i] ["table"] = @mysql_field_table ($id, $i);
-        $res [$i] ["name"] = @mysql_field_name ($id, $i);
-        $res [$i] ["type"] = @mysql_field_type ($id, $i);
-        $res [$i] ["len"] = @mysql_field_len ($id, $i);
-        $res [$i] ["flags"] = @mysql_field_flags ($id, $i);
-      }
-    }
-    else
-    { // full
-      $res ["num_fields"] = $count;
-      
-      for($i = 0; $i < $count; $i++)
-      {
-        $res [$i] ["table"] = @mysql_field_table ($id, $i);
-        $res [$i] ["name"] = @mysql_field_name ($id, $i);
-        $res [$i] ["type"] = @mysql_field_type ($id, $i);
-        $res [$i] ["len"] = @mysql_field_len ($id, $i);
-        $res [$i] ["flags"] = @mysql_field_flags ($id, $i);
-        $res ["meta"] [$res [$i] ["name"]] = $i;
-      }
-    }
-    
-    // free the result only if we were called on a table
-    if ($table)
-      @mysql_free_result ($id);
-    return $res;
   }
 
   /* private: error handling */

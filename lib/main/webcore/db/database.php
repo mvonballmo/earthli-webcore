@@ -37,7 +37,7 @@ http://www.earthli.com/software/webcore
 ****************************************************************************/
 
 /** */
-require_once ("third_party/php_lib73/db_mysql.inc");
+include_once ('webcore/obj/webcore_object.php');
 
 /**
  * Messages from the database are logged to this channel.
@@ -52,7 +52,7 @@ define ('Msg_channel_database', 'Database');
  * @version 3.6.0
  * @since 2.2.1
  */
-class DATABASE extends DB_Sql
+class DATABASE extends WEBCORE_OBJECT
 {
   /**
    * @var string
@@ -80,39 +80,8 @@ class DATABASE extends DB_Sql
   public function __construct ($env)
   {
     $this->env = $env;
-    $this->Halt_On_Error = "no";
-    $this->Auto_Free = 1;
   }
 
-  /**
-   * Internal error-handling.
-   * @param string $msg
-   * @access private
-   */
-  public function halt($msg)
-  {
-    DB_Sql::halt ($msg);
-
-    include_once ('webcore/obj/webcore_object.php');
-    raise ("$msg (MySQL Error = $this->Errno, $this->Error)", 'halt', 'DATABASE', $this);
-  }
-
-  /**
-   * Analogous to the 'use' SQL command.
-   * Should be used instead of setting the 'Database' directly because it
-   * handles closing an existing connection.
-   * @param string $name
-   */
-  public function set_name ($name)
-  {
-    if ($this->Link_ID)
-    {
-      mysql_close ($this->Link_ID);
-    }
-    $this->Link_ID = 0;
-    $this->Database = $name;
-  }
-  
   /**
    * Search for the table in the current database.
    * 
@@ -141,12 +110,13 @@ class DATABASE extends DB_Sql
   /**
    * Return a field from the current row.
    * @param string|integer $name Index or name of the column to retrieve.
+   * @return string
    */
   public function f ($name)
   {
-    if (isset ($this->Record[$name]))
+    if (isset ($this->_row[$name]))
     {
-      return $this->Record[$name];
+      return $this->_row[$name];
     }
 
     return null;
@@ -175,12 +145,12 @@ class DATABASE extends DB_Sql
     if (isset ($this->env->profiler))
     {
       $this->env->profiler->start ('db');
-      DB_Sql::query ($qs);
+      $this->_execute_query($qs);
       $this->env->profiler->stop ('db');
     }
     else
     {
-      DB_Sql::query ($qs);
+      $this->_execute_query($qs);
     }
 
     $this->env->num_queries_executed += 1;
@@ -203,6 +173,10 @@ class DATABASE extends DB_Sql
     {
       $elapsed = $this->env->profiler->elapsed ('query');
     }
+    else
+    {
+      $elapsed = '[not profiled]';
+    }
     log_message ("<b>Ran generic query in [$elapsed] seconds:</b><p>$qs</p>", Msg_type_debug_info, Msg_channel_database, true);
   }
 
@@ -212,19 +186,67 @@ class DATABASE extends DB_Sql
    */
   function __clone ()
   {
-    $this->Link_ID = 0;
-    $this->Query_ID = 0;
-
-//    $Result->Host = $this->Host;
-//    $Result->User = $this->User;
-//    $Result->Password = $this->Password;
-//    $Result->Database = $this->Database;
-//    $Result->_query_texts = $this->_query_texts;
+    $this->_connection = null;
+    $this->_result_set = null;
+    $this->_row = null;
   }
-  
+
+  /**
+   * @return bool
+   */
+  public function next_record()
+  {
+    if (!$this->_result_set)
+    {
+      $this->halt ("next_record called with no query pending.");
+
+      return false;
+    }
+
+    $this->_row = $this->_result_set->fetch_array();
+
+    return isset($this->_row);
+  }
+
+  private function _execute_query($qs)
+  {
+    if (!isset($this->_connection))
+    {
+      $this->_connection = new mysqli($this->Host, $this->User, $this->Password, $this->Database);
+      if ($this->_connection->connect_errno)
+      {
+        $msg = "Failed to connect to MySQL: (" . $this->_connection->connect_errno . ") " . $this->_connection->connect_error;
+        raise ($msg, '_execute_query', 'DATABASE', $this);
+
+        $this->_connection = null;
+      }
+    }
+
+    if (isset($this->_connection))
+    {
+      $this->_result_set = $this->_connection->query($qs);
+      $this->_result_set->data_seek(0);
+    }
+  }
+
+  /**
+   * @var mysqli
+   */
+  private $_connection;
+
+  /**
+   * @var mysqli_result
+   */
+  private $_result_set;
+
+  /**
+   * @var array
+   */
+  private $_row;
+
   /**
    * Used for duplicate query checking.
-   * @var string[]
+   * @var int[]
    * @access private
    */
   protected $_query_texts;
@@ -249,5 +271,3 @@ class DATABASE extends DB_Sql
    */
   public $profiler = null;
 }
-
-?>
