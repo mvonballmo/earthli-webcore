@@ -400,7 +400,7 @@ abstract class FORM extends WEBCORE_OBJECT
     if (! empty ($scripts) || ($this->allow_focus && $this->_initial_focus))
     {
 ?>
-<script type="text/javascript">
+<script>
 <?php
   if (! empty ($scripts))
   {

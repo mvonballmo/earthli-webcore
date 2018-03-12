@@ -1191,7 +1191,7 @@ class FORM_RENDERER extends CONTROLS_RENDERER
     $button = '<ul class="menu-items buttons"><li class="menu-trigger">';
     $button .= $this->javascript_button_as_html('', '', '{icons}buttons/calendar');
     $button .= '<div class="menu-dropdown"><div class="menu"><div class="calendar-menu-item" id="' . $id . '_field">';
-    $button .= "<script type=\"text/javascript\">";
+    $button .= "<script>";
     $button .= $script;
     $button .= "</script>";
     $button .= '</div></div></div>';

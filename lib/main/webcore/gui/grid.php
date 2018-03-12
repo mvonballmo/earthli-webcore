@@ -250,7 +250,7 @@ abstract class GRID extends WEBCORE_OBJECT
     if (!empty ($scripts))
     {
       ?>
-      <script type="text/javascript">
+      <script>
         <?php echo $scripts; ?>
       </script>
     <?php

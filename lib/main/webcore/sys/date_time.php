@@ -256,7 +256,7 @@ class DATE_TIME_FORMATTER extends RAISABLE
       // replace the escape character so it's properly escaped on Javascript as well.
 
       $fmt = str_replace ('\\', '\\\\', $fmt);
-      $Result = "<script type=\"text/javascript\">document.write (local_time ($php_time, '$fmt'));</script>";
+      $Result = "<script>document.write (local_time ($php_time, '$fmt'));</script>";
     }
     else
     {

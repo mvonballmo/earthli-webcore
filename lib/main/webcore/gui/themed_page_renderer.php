@@ -106,11 +106,11 @@ class THEMED_PAGE_RENDERER extends PAGE_RENDERER
     $script_folder = $page->path_to (Folder_name_scripts);
     $icon_folder = $page->path_to (Folder_name_icons);
 ?>
-  <script type="text/javascript">
+  <script>
     var image_path = "<?php echo $icon_folder; ?>";
     var image_extension = "<?php echo $page->extension_for_alias (Folder_name_icons); ?>";
   </script>
-  <script type="text/javascript" src="<?php echo "{$script_folder}webcore_base.js"; ?>"></script>
+  <script src="<?php echo "{$script_folder}webcore_base.js"; ?>"></script>
 <?php
     parent::display_scripts ();
   }

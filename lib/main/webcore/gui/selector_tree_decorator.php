@@ -167,7 +167,7 @@ class MULTI_SELECTOR_TREE_DECORATOR extends TREE_DECORATOR
       $control_name = $this->control_name;
       $form_name = $this->form_name;
 ?>
-<script type="text/javascript">
+<script>
 
   var <?php echo $control_name ?>_children = [];
 

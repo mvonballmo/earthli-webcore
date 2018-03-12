@@ -140,7 +140,7 @@ class JS_CONSOLE_LOGGER extends TEXT_OUTPUT_LOGGER
     if (sizeof ($this->_messages) > 0)
     {
   ?>
-  <script type="text/javascript">
+  <script>
   <!--
   var console = window.open ("", "_console", "width=<?php echo $this->width; ?>,height=<?php echo $this->height; ?>,screenX=0,screenY=30,resizable=yes,scrollbars=yes");
   console.document.open();
