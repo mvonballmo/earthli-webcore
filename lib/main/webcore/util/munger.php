@@ -1868,7 +1868,7 @@ class MUNGER_PARSER extends RAISABLE
    * @var MUNGER_TOKENIZER[]
    * @access private
    */
-  protected $_tokenizers;
+  protected $_tokenizers = array();
 
   /**
    * The current nesting level of tokenization.

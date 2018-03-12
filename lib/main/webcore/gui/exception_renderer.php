@@ -196,7 +196,7 @@ class EXCEPTION_RENDERER extends OBJECT_RENDERER
 
   protected function _show_array_as_html ($title, $arr)
   {
-    if (sizeof ($arr))
+    if (is_array($arr) && sizeof ($arr))
     {
 ?>
 <tr>

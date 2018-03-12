@@ -64,63 +64,66 @@ abstract class PROJECT_ENTRY_RENDERER extends ENTRY_RENDERER
        that stored in the database. */
 
     $branch_infos = $entry->current_branch_infos ();
-    if (sizeof ($branch_infos) == 0)
+    if (!is_array($branch_infos) || sizeof ($branch_infos) == 0)
     {
       $branch_info_query = $entry->branch_info_query ();
       $branch_infos = $branch_info_query->objects ();
     }
 
-    foreach ($branch_infos as $branch_info)
+    if (is_array($branch_infos))
     {
-      $rel = $branch_info->release ();
-  ?>
-    <dt>
-    <?php
-      if ($branch_info->is_main () && (sizeof ($branch_infos) > 1))
+      foreach ($branch_infos as $branch_info)
       {
-        echo '<span title="Used for non-branch-specific lists.">&bull;&nbsp;</span>';
-      }
-      $branch = $branch_info->branch ();
-      if ($branch->locked ())
-      {
-        echo $this->app->get_icon_with_text('{icons}indicators/locked', Sixteen_px, $branch_info->title_as_link());
-      }
-      else
-      {
-        echo $branch_info->title_as_link ();
-      }
+        $rel = $branch_info->release ();
+        ?>
+        <dt>
+          <?php
+          if ($branch_info->is_main () && (sizeof ($branch_infos) > 1))
+          {
+            echo '<span title="Used for non-branch-specific lists.">&bull;&nbsp;</span>';
+          }
+          $branch = $branch_info->branch ();
+          if ($branch->locked ())
+          {
+            echo $this->app->get_icon_with_text('{icons}indicators/locked', Sixteen_px, $branch_info->title_as_link());
+          }
+          else
+          {
+            echo $branch_info->title_as_link ();
+          }
 
-      echo $this->app->display_options->object_separator;
+          echo $this->app->display_options->object_separator;
 
-      if ($rel)
-      {
-        $rel_status = $rel->status ();
+          if ($rel)
+          {
+            $rel_status = $rel->status ();
 
-        if ($rel->locked ())
-        {
-          echo $this->app->get_icon_with_text('{icons}indicators/locked', Sixteen_px, $rel->title_as_link());
-        }
-        else
-        {
-          echo $rel->title_as_link ();
-        }
+            if ($rel->locked ())
+            {
+              echo $this->app->get_icon_with_text('{icons}indicators/locked', Sixteen_px, $rel->title_as_link());
+            }
+            else
+            {
+              echo $rel->title_as_link ();
+            }
+          }
+          else
+          {
+            $this->_echo_html_branch_release_info ($branch_info);
+          }
+          ?>
+        </dt>
+        <dd class="text-flow">
+          <?php
+          echo $this->_echo_html_branch_info ($entry, $branch_info);
+          if (isset ($rel_status))
+          {
+            echo '<br>' . $rel_status->as_html ();
+          }
+          ?>
+        </dd>
+        <?php
       }
-      else
-      {
-        $this->_echo_html_branch_release_info ($branch_info);
-      }
-    ?>
-    </dt>
-    <dd class="text-flow">
-      <?php
-        echo $this->_echo_html_branch_info ($entry, $branch_info);
-        if (isset ($rel_status))
-        {
-          echo '<br>' . $rel_status->as_html ();
-        }
-      ?>
-    </dd>
-  <?php
     }
   ?>
   </dl>

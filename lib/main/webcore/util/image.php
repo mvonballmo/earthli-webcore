@@ -595,22 +595,24 @@ class IMAGE_PROPERTIES
     	log_message ('[' . $name . ']: ' . $php_errormsg, Msg_type_debug_warning, Msg_channel_image);
     }
     
-    if ($size === FALSE)
+    if (!is_array($size) || $size === FALSE)
     {
     	log_message ('[' . $name . ']: Could not get image size or file type (file is probably not an image).', Msg_type_warning, Msg_channel_image);
     }
-
-    if (count($size) < 2 || $size[2] < 1)
+    else
     {
-      log_message ('[' . $name . ']: Could not get image size or file type (file is an image, but type is unknown)', Msg_type_warning, Msg_channel_image);
-    }
+      if (count($size) < 2 || $size[2] < 1)
+      {
+        log_message ('[' . $name . ']: Could not get image size or file type (file is an image, but type is unknown)', Msg_type_warning, Msg_channel_image);
+      }
 
-    if ($size && $size [2] > 0)
-    {
-      $this->php_type = $size [2];
-      $this->mime_type = image_type_to_mime_type ($this->php_type);
-      $this->width = $size [0];
-      $this->height = $size [1];
+      if ($size && $size [2] > 0)
+      {
+        $this->php_type = $size [2];
+        $this->mime_type = image_type_to_mime_type ($this->php_type);
+        $this->width = $size [0];
+        $this->height = $size [1];
+      }
     }
   }
 
