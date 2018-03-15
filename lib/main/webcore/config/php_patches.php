@@ -47,6 +47,7 @@ if (! function_exists ('is_a'))
    * @version 3.6.0
    * @since 2.2.1
    * @access private
+   * @return bool
    */
   function is_a ($object, $class_name)
   {
@@ -70,6 +71,7 @@ if (! function_exists ('html_entity_decode'))
    * @version 3.6.0
    * @since 2.2.1
    * @access private
+   * @return string
    */
   function html_entity_decode ($text)
   {
@@ -89,6 +91,7 @@ if (! function_exists ('image_type_to_mime_type'))
    * @version 3.6.0
    * @since 2.2.1
    * @access private
+   * @return string
    */
   function image_type_to_mime_type ($imagetype)
   {
@@ -125,6 +128,7 @@ if (! function_exists ('file_get_contents'))
    * @version 3.6.0
    * @since 2.7.0
    * @access private
+   * @return string
    */
   function file_get_contents ($file_name)
   {
@@ -142,6 +146,7 @@ if (! function_exists ('file_get_contents'))
  * @version 3.6.0
  * @since 2.6.0
  * @access private
+ * @return string
  */
 function print_r_capture ($value)
 {
@@ -159,11 +164,8 @@ function print_r_capture ($value)
  * @param array &$array Original array
  * @param integer $index Index into array
  * @param object $value Value to insert at 'index'
- * @return array
  */
 function array_insert (&$array, $index, $value)
 {
   $array = array_merge (array_slice ($array, 0, $index), array ($value), array_slice ($array, $index));
 }
-
-?>

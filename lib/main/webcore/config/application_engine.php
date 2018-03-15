@@ -166,8 +166,8 @@ class APPLICATION_ENGINE extends RESOLVER
      * rights on all content.
      */
 
-  //  $app->mail_options->publisher_user_name = 'auto_publisher';
-  //  $app->mail_options->publisher_user_password = 'password';
+    $app->mail_options->publisher_user_name = $page->mail_options->publisher_user_name;
+    $app->mail_options->publisher_password = $page->mail_options->publisher_password;
 
     /* Set up the tables for stand-alone operation.
      * This is only important if you plan on adding more WebCore modules. Modules
@@ -220,5 +220,3 @@ class APPLICATION_ENGINE extends RESOLVER
     $page->app = $app;
   }
 }
-
-?>

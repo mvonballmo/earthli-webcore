@@ -159,6 +159,7 @@ class PAGE extends CONTEXT
 
   /**
    * @param ENVIRONMENT $env Global environment.
+   * @throws Exception
    */
   public function __construct ($env)
   {
@@ -243,6 +244,7 @@ class PAGE extends CONTEXT
    * to show (in the page title or the navigation bar).
    * @param string $msg
    * @param WEBCORE_OBJECT $context
+   * @throws Exception
    */
   public function raise_security_violation ($msg, $context = null)
   {
@@ -261,8 +263,11 @@ class PAGE extends CONTEXT
 
       if (is_a ($context, 'folder'))
       {
-        $this->location->add_folder_link ($context);
-        $this->title->add_object ($context);
+        /** @var FOLDER $folder */
+        $folder = $context;
+
+        $this->location->add_folder_link ($folder);
+        $this->title->add_object ($folder);
       }
       else
       {
@@ -305,8 +310,11 @@ class PAGE extends CONTEXT
   {
     if (is_a ($context, 'folder'))
     {
-      $this->location->add_folder_link ($context);
-      $this->title->add_object ($context);
+      /** @var FOLDER $folder */
+      $folder = $context;
+
+      $this->location->add_folder_link ($folder);
+      $this->title->add_object ($folder);
     }
     else
     {
@@ -355,32 +363,31 @@ class PAGE extends CONTEXT
    * Makes this application with this unique id available to the environment.
    * Call {@link make_application()} to create an instance. This function is
    * commonly called from the application "init.php" file.
-   * 
+   *
    * The albums application is registered like this:
-   * 
+   *
    * <code>$Env->register_application (Album_application_id,
    * 'ALBUM_APPLICATION_ENGINE');
    * </code>
-   * 
+   *
    * To customize this application, a deployment can create a new {@link
    * APPLICATION_ENGINE} and register it as a plugin using the standard {@link
    * register_class()} function. This is commonly done from the {@link ENGINE::
    * _init_page()} method in the site customizer class. That plugin registration
    * should look like this:
-   * 
+   *
    * <code>
    * $page->register_class ('APPLICATION_ENGINE',
    * 'CUSTOM_ALBUM_APPLICATION_ENGINE', 'path/to/custom/application/class/file',
    * Album_application_id);
    * </code>
-   * 
+   *
    * It is important to include the unique id for the application as the
    * <code>context</code>.
-   * 
+   *
    * @param string $id Unique name of the application.
    * @param string $engine_name Name of the {@link APPLICATION_ENGINE} class to
    * create by default.
-   * @return APPLICATION
    */
   public function register_application ($id, $engine_name)
   {
@@ -411,6 +418,8 @@ class PAGE extends CONTEXT
   public function make_application ($id, $set_as_default = false, $start = true)
   {
     $class_name = $this->final_class_name ('APPLICATION_ENGINE', 'webcore/config/application_engine.php', $id);
+
+    /** @var APPLICATION_ENGINE $engine */
     $engine = new $class_name ();
     
     $engine->init ($this);

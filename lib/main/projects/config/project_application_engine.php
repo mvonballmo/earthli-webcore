@@ -77,5 +77,3 @@ class PROJECT_APPLICATION_ENGINE extends APPLICATION_ENGINE
     $app->storage->prefix = 'webcore_projects_';
   }
 }
-
-?>

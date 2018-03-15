@@ -663,6 +663,7 @@ class ENVIRONMENT extends RESOLVER
    * To redirect to a fully resolved URL, use {@link redirect_remote()}.
    * To redirect to a fully resolved URL on the same server, use (@link redirect_root()}.
    * @param string $location
+   * @throws Exception
    */
   public function redirect_local ($location)
   {
@@ -704,7 +705,7 @@ class ENVIRONMENT extends RESOLVER
     }
     else
     {
-      $this->assert ($this->is_http_server (), "Could not redirect to [$location]: not running from server", 'redirect_remote', 'SYSTEM', $this);
+      $this->assert ($this->is_http_server (), "Could not redirect to [$location]: not running from server", 'redirect_remote', 'SYSTEM');
       header ('Location: ' . $location);
       exit;
     }

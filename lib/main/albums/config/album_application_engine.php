@@ -77,5 +77,3 @@ class ALBUM_APPLICATION_ENGINE extends APPLICATION_ENGINE
     $app->storage->prefix = 'webcore_albums_';
   }
 }
-
-?>

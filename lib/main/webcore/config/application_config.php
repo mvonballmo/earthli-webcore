@@ -319,11 +319,6 @@ class APPLICATION_DISPLAY_OPTIONS extends CONTEXT_DISPLAY_OPTIONS
 class APPLICATION_MAIL_OPTIONS extends CONTEXT_MAIL_OPTIONS
 {
   /**
-   * @var string
-   */
-  public $publisher_user_name = 'auto-publisher';
-
-  /**
    * Specifies how much of an entry to send by default.
    * Used when sending a single entry or when publishing.
    * @var integer

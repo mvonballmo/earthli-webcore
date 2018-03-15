@@ -246,6 +246,22 @@ class CONTEXT_MAIL_OPTIONS
   public $comment_publication_filter;
 
   /**
+   * The name of the user to use to auto-publish content.
+   *
+   * Only content to which this user has access will be publishable.
+   *
+   * @var string
+   */
+  public $publisher_user_name = 'auto-publisher';
+
+  /**
+   * The password for the {@link publisher_user_name}.
+   *
+   * @var string
+   */
+  public $publisher_password = '';
+
+  /**
    * @param CONTEXT_MAIL_OPTIONS
    */
   public function copy_from ($opts)
@@ -258,6 +274,8 @@ class CONTEXT_MAIL_OPTIONS
     $this->log_file_name = $opts->log_file_name;
     $this->logging_enabled = $opts->logging_enabled;
     $this->SMTP_server = $opts->SMTP_server;
+    $this->publisher_user_name = $opts->publisher_user_name;
+    $this->publisher_password = $opts->publisher_password;
   }
 }
 
@@ -361,4 +379,11 @@ class CONTEXT_STORAGE_OPTIONS
    * @var integer
    */
   public $setting_duration = 180;
+
+  /**
+   * The name of the key under which to store the login user.
+   *
+   * @var string
+   */
+  public $login_user_name;
 }

@@ -77,5 +77,3 @@ class RECIPE_APPLICATION_ENGINE extends APPLICATION_ENGINE
     $app->storage->prefix = 'webcore_recipes_';
   }
 }
-
-?>

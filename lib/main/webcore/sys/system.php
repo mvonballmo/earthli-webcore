@@ -384,7 +384,7 @@ class RAISABLE
    * use {@link validate_as_integer()} instead.
    * @param object $value The integer prospect
    * @param boolean $allow_empty Is an empty value interpreted as 0?
-   * @return object Returns false if it's not an integer. Returns the integer otherwise (or 0 if empty).
+   * @return int Returns false if it's not an integer. Returns the integer otherwise (or 0 if empty).
    * @access private
    */
   public function validate_as_integer_silent ($value, $allow_empty = true)
@@ -423,6 +423,8 @@ class RAISABLE
 
     $value = htmlentities($value);
     $this->raise ("[$value] is not an integer.", '', '');
+
+    return -1;
   }
 
   /**
@@ -479,7 +481,7 @@ class EXCEPTION_HANDLER
   public function signature ($message, $routine_name, $class_name, $obj)
   {
     include_once ('webcore/sys/exception_signature.php');
-    $Result = new EXCEPTION_SIGNATURE ($message, $routine_name, $class_name, $obj);
+    $Result = new EXCEPTION_SIGNATURE ();
     $Result->load_from_exception ($message, $routine_name, $class_name, $obj);
     return $Result;
   }
@@ -549,6 +551,8 @@ class TYPE_INFO
   /**
    * Return the number with the title attached as units.
    * Uses {@link $plural_title} or {@link $singular_title}.
+   * @param $num int
+   * @return string
    */
   public function format_amount ($num)
   {
