@@ -22,7 +22,7 @@
 {
   margin: 1em 1.5em;
   border: 1px dotted #999999;
-  border-right: 0em;
+  border-right: 0;
 }
 
 .log-msg-channel

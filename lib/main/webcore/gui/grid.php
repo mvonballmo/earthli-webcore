@@ -628,22 +628,6 @@ abstract class GRID extends WEBCORE_OBJECT
   protected function _get_column_class()
   {
     return '';
-
-    switch ($this->_num_columns)
-    {
-      case 1:
-        return 'one-column';
-      case 2:
-        return 'two-column';
-      case 3:
-        return 'three-column';
-      case 4:
-        return 'four-column';
-      case 5:
-        return 'five-column';
-      default:
-        return '';
-    }
   }
 
   /**

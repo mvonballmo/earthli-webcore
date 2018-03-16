@@ -116,6 +116,7 @@ class PANEL_MANAGER extends WEBCORE_OBJECT
   /**
    * @param APPLICATION $context Main application.
    * @param boolean $show_time_menu Show a TIME_FRAME_SELECTOR with the panels?
+   * @throws Exception
    */
   public function __construct ($context, $show_time_menu = true)
   {
@@ -433,7 +434,7 @@ class PANEL_MANAGER extends WEBCORE_OBJECT
    * Called from {@link move_panel()}.
    * @param string $id Name of the panel to move.
    * @param integer $index Position in the ordering.
-   * @param PANEL[] &$panels List of panels to move.
+   * @param string[] &$panels List of panels to move.
    * @access private
    */
   protected function _move_panel_to ($id, $index, &$panels)
@@ -475,8 +476,7 @@ class PANEL_MANAGER extends WEBCORE_OBJECT
    * Panels ids in the order they should be selected.
    * By default, these are in the order in which they were added with {@link
    * add_panel()}.
-   * @var PANEL[]
-   * @see PANEL
+   * @var string[]
    * @access private
    */
   protected $_selection_order;
@@ -485,9 +485,7 @@ class PANEL_MANAGER extends WEBCORE_OBJECT
    * Panels ids in the order they should be displayed.
    * By default, these are in the order in which they were added with {@link
    * add_panel()}.
-   * @var PANEL[]
-   * @see PANEL
-   * @var int
+   * @var string[]
    * @access private
    */
   protected $_location_order;
@@ -820,7 +818,7 @@ class WEBCORE_PANEL_MANAGER extends PANEL_MANAGER
    * Override in descendents to adjust the configuration and number of panels to
    * add per entry. {@link DRAFTABLE_ENTRY}s have more than one panel and are
    * configured by {@link _add_draft_panels_for()}.
-   * @param QUERY $query
+   * @param OBJECT_IN_FOLDER_QUERY $query
    * @param TYPE_INFO $type_info Type information for the {@link ENTRY}.
    * @param string $panel_class_name Name of the {@link PANEL} class to create.
    * */
@@ -840,7 +838,7 @@ class WEBCORE_PANEL_MANAGER extends PANEL_MANAGER
    * Add a {@link ENTRY_PANEL} for drafting states.
    * Adds three panels, one for {@link Draft}s, one for {@link Abandoned}
    * entries and one for {@link Queued} entries.
-   * @param QUERY $query The base query for all entries of this type.
+   * @param OBJECT_IN_FOLDER_QUERY $query The base query for all entries of this type.
    * @param $type_info TYPE_INFO The type info describing the base entry type.
    * @param $panel_class_name string The name of the panel class to create
    * @see _add_entry_panels_for()

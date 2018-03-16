@@ -102,5 +102,3 @@ class THEMED_ENGINE extends ENGINE
     }
   }
 }
-
-?>
