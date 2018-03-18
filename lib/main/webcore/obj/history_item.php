@@ -600,7 +600,7 @@ class HISTORY_ITEM extends UNIQUE_OBJECT
     }
     else
     {
-      $num_diffs = sizeof ($this->_differences);
+      $num_diffs = is_array($this->_differences) ? sizeof ($this->_differences) : 0;
       if ($num_diffs)
       {
         $Result = $this->_differences [$num_diffs - 1];

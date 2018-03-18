@@ -261,6 +261,7 @@ class SQL_TABLE extends WEBCORE_OBJECT
   /**
    * Check for existence of field.
    * @return boolean
+   * @throws UNKNOWN_VALUE_EXCEPTION
    */
   public function exists ()
   {
@@ -279,6 +280,7 @@ class SQL_TABLE extends WEBCORE_OBJECT
   /**
    * Execute the requested action on this table.
    * @param integer $action
+   * @throws UNKNOWN_VALUE_EXCEPTION
    */
   public function commit ($action)
   {
@@ -297,10 +299,11 @@ class SQL_TABLE extends WEBCORE_OBJECT
    * Get the fields and values for this action.
    * @param integer $action
    * @return string[]
+   * @throws UNKNOWN_VALUE_EXCEPTION
    */
   public function fields_as_sql ($action)
   {
-    $Result = '';
+    $Result = array();
     foreach ($this->fields as $id => $field)
     {
       if ($field->needed_for_action ($action))
@@ -315,6 +318,7 @@ class SQL_TABLE extends WEBCORE_OBJECT
    * Get the restrictions for this table.
    * Used by {@link _update()} and {@link exists()}.
    * @return string
+   * @throws UNKNOWN_VALUE_EXCEPTION
    */
   public function restrictions_as_sql ()
   {
@@ -337,10 +341,11 @@ class SQL_TABLE extends WEBCORE_OBJECT
     
     return '';
   }
-  
+
   /**
    * Create the object specified in the schema.
    * @access private
+   * @throws UNKNOWN_VALUE_EXCEPTION
    */
   protected function _create ()
   {
@@ -355,6 +360,7 @@ class SQL_TABLE extends WEBCORE_OBJECT
   /**
    * Update the object specified in the schema.
    * @access private
+   * @throws UNKNOWN_VALUE_EXCEPTION
    */
   protected function _update ()
   {
@@ -455,6 +461,7 @@ class SQL_STORAGE extends WEBCORE_OBJECT
   /**
    * Create the object specified in the schema.
    * @param STORABLE $obj
+   * @throws UNKNOWN_VALUE_EXCEPTION
    */
   public function create_object ($obj)
   {
@@ -464,18 +471,20 @@ class SQL_STORAGE extends WEBCORE_OBJECT
   /**
    * Update the object specified in the schema.
    * @param STORABLE $obj
+   * @throws UNKNOWN_VALUE_EXCEPTION
    */
   public function update_object ($obj)
   {
     $this->_commit ($obj, Storage_action_update);
   }
-  
+
   /**
    * Check existence of the object specified in the schema.
    * The object is deemed to exist if it exists in at least one of the tables in
    * its schema.
    * @param STORABLE $obj
    * @return boolean
+   * @throws UNKNOWN_VALUE_EXCEPTION
    */
   public function object_exists ($obj)
   {
@@ -500,6 +509,7 @@ class SQL_STORAGE extends WEBCORE_OBJECT
    * @param STORABLE $obj
    * @param integer $action
    * @access private
+   * @throws UNKNOWN_VALUE_EXCEPTION
    */
   protected function _commit ($obj, $action)
   {
@@ -531,6 +541,7 @@ class SQL_STORAGE extends WEBCORE_OBJECT
    * @param integer $action
    * @param STORABLE $obj
    * @access private
+   * @throws UNKNOWN_VALUE_EXCEPTION
    */
   protected function _commit_table ($table, $action, $obj)
   {
