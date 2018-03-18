@@ -224,8 +224,12 @@ class DATABASE extends WEBCORE_OBJECT
 
     if (isset($this->_connection))
     {
-      $this->_result_set = $this->_connection->query($qs);
-      $this->_result_set->data_seek(0);
+      $query_result = $this->_connection->query($qs);
+      if (is_a($query_result, 'mysqli_result'))
+      {
+        $this->_result_set = $query_result;
+        $this->_result_set->data_seek(0);
+      }
     }
   }
 
