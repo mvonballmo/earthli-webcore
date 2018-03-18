@@ -142,7 +142,7 @@ abstract class UNIQUE_OBJECT extends NAMED_OBJECT
    * @access private
    * @abstract
    */
-  protected abstract function table_name ();
+  public abstract function table_name ();
 
   /**
    * @return SQL_UNIQUE_STORAGE
@@ -165,5 +165,3 @@ abstract class UNIQUE_OBJECT extends NAMED_OBJECT
     $this->id = 0;
   }
 }
-
-?>

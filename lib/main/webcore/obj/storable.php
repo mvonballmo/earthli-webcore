@@ -61,6 +61,7 @@ abstract class STORABLE extends RENDERABLE
   /**
    * Does this object exist in the database?
    * @return boolean
+   * @throws UNKNOWN_VALUE_EXCEPTION
    */
   public function exists_in_database ()
   {
@@ -79,6 +80,7 @@ abstract class STORABLE extends RENDERABLE
    * Store an object.
    * Determines automatically whether to update an existing entry or create a
    * new one.
+   * @throws UNKNOWN_VALUE_EXCEPTION
    */
   public function store ()
   {
@@ -132,6 +134,7 @@ abstract class STORABLE extends RENDERABLE
    * Store the object for the first time
    * Do not call this directly, call 'store' instead.
    * @access private
+   * @throws UNKNOWN_VALUE_EXCEPTION
    */
   protected function _create ()
   {
@@ -143,6 +146,7 @@ abstract class STORABLE extends RENDERABLE
    * Update an existing object
    * Do not call this directly, call 'store' instead.
    * @access private
+   * @throws UNKNOWN_VALUE_EXCEPTION
    */
   protected function _update ()
   {
@@ -202,6 +206,7 @@ abstract class STORABLE extends RENDERABLE
    * @param string $from_field
    * @param string $to_table
    * @param string $to_field
+   * @param string $condition
    * @access private
    */
   protected function _purge_foreign_key ($from_table, $from_field, $to_table, $to_field, $condition = '(1)')
@@ -252,5 +257,3 @@ class PURGE_OPTIONS
    */
   public $remove_resources = true;
 }
-
-?>

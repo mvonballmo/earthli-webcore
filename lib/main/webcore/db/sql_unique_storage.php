@@ -53,8 +53,9 @@ class SQL_UNIQUE_STORAGE extends SQL_STORAGE
   /**
    * @param SQL_TABLE $table
    * @param integer $action
-   * @param STORABLE $obj
+   * @param UNIQUE_OBJECT $obj
    * @access private
+   * @throws UNKNOWN_VALUE_EXCEPTION
    */
   protected function _commit_table ($table, $action, $obj)
   {
@@ -69,5 +70,3 @@ class SQL_UNIQUE_STORAGE extends SQL_STORAGE
     }
   }
 }
-
-?>
