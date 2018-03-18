@@ -230,6 +230,10 @@ class DATABASE extends WEBCORE_OBJECT
         $this->_result_set = $query_result;
         $this->_result_set->data_seek(0);
       }
+      else if ($query_result === false)
+      {
+        $this->raise('Error executing query: ' . $this->_connection->error, '_execute_query', 'DATABASE');
+      }
     }
   }
 
