@@ -19,12 +19,23 @@
   {
     .flex-direction(column);
 
+    .header
+    {
+      padding-top: 0;
+
+      .nav-box
+      {
+        margin-top: @small_spacing;
+      }
+    }
+
     .page-body
     {
       .flex-display-and-flex();
       .flex-direction(column);
       min-height: 0;
       min-width: 0;
+      margin-bottom: @small_spacing;
 
       .columns
       {

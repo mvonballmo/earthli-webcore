@@ -1,6 +1,12 @@
 @import "https://fonts.googleapis.com/css?family=Forum";
+@import "https://fonts.googleapis.com/css?family=Raleway:400,700";
 
 body
+{
+	font-family: 'Raleway', Verdana, Arial, Helvetica, sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6
 {
 	font-family: 'Forum', Georgia, Times New Roman, Times, serif;
 }

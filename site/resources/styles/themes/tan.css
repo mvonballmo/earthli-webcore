@@ -266,6 +266,14 @@ body .page .footer .footer-data + .footer-data {
   min-height: 0;
   min-width: 0;
 }
+.viewport .page .header,
+.full-screen-edit .page .header {
+  padding-top: 0;
+}
+.viewport .page .header .nav-box,
+.full-screen-edit .page .header .nav-box {
+  margin-top: 5px;
+}
 .viewport .page .page-body,
 .full-screen-edit .page .page-body {
   display: -webkit-flex;
@@ -283,6 +291,7 @@ body .page .footer .footer-data + .footer-data {
   flex-direction: column;
   min-height: 0;
   min-width: 0;
+  margin-bottom: 5px;
 }
 .viewport .page .page-body .columns,
 .full-screen-edit .page .page-body .columns {
