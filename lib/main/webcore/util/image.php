@@ -539,6 +539,7 @@ class IMAGE_PROPERTIES
    */
   protected function _read_exif ($name)
   {
+    /** @var PROFILER $Profiler */
     global $Profiler;
     if (isset ($Profiler)) $Profiler->start ('EXIF');
 
@@ -692,7 +693,7 @@ class IMAGE_PROPERTIES
    */
   protected function _use_internal_exif ()
   {
-    return $this->use_internal_exif && function_exists ('exif_read_data');
+    return $this->use_internal_exif && is_callable('exif_read_data');
   }
 }
 

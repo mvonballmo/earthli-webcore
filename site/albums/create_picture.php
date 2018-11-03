@@ -29,4 +29,3 @@ http://www.earthli.com/software/webcore/albums
   require_once ('albums/start.php');
   $entry_type_info = $App->type_info_for ('PICTURE', 'albums/obj/picture.php');
   require_once ($App->page_template_for ('webcore/pages/create_entry.php'));
-?>
