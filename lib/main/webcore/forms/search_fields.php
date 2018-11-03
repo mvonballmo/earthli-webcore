@@ -1700,7 +1700,7 @@ class SEARCH_OBJECT_IN_FOLDER_FIELDS extends SEARCH_CONTENT_OBJECT_FIELDS
           {
             $folder_names [] = $folder->title_as_plain_text ();
           }
-          $folder_names = join (', ', $folder_names);
+
           if ($obj->parameters ['folder_search_type'] == Search_user_constant)
           {
             $folder_text = 'Folder is ';
@@ -1712,11 +1712,11 @@ class SEARCH_OBJECT_IN_FOLDER_FIELDS extends SEARCH_CONTENT_OBJECT_FIELDS
 
           if (sizeof ($folder_names) == 1)
           {
-            $Result [] = $folder_text . $folder_names;
+            $Result [] = $folder_text . $folder_names[0];
           }
           else
           {
-            $Result [] = $folder_text . 'one of ' . $folder_names;
+            $Result [] = $folder_text . 'one of ' . join (', ', $folder_names);
           }
         }
       }
