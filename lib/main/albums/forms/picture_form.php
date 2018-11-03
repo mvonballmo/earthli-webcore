@@ -451,11 +451,10 @@ class PICTURE_FORM extends ALBUM_ENTRY_FORM
       $renderer->start_row ();
       echo $renderer->radio_group_as_html ('read_exif', $props);
       $renderer->finish_row ();
+      $renderer->draw_error_row ('read_exif');
 
       $renderer->draw_date_row('day');
 
-      $renderer->draw_error_row ('read_exif');
-      $renderer->draw_error_row ('day');
       $renderer->finish_block ();
     }
     else
