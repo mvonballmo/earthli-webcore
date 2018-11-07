@@ -167,7 +167,8 @@ class OBJECT_LIST_BUILDER extends WEBCORE_OBJECT
     $this->_entry_ids = read_var ('entry_ids');
     if (! empty ($this->_entry_ids))
     {
-      $this->_contents [] = $entry_types [0]->format_amount (sizeof ($this->_entry_ids));
+      $entry_id_count = is_array($this->_entry_ids) ? sizeof($this->_entry_ids) : 1;
+      $this->_contents [] = $entry_types [0]->format_amount ($entry_id_count);
     }
     else
     {
