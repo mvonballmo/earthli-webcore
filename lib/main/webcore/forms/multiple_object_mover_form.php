@@ -258,7 +258,6 @@ class MULTIPLE_DRAFTABLE_OBJECT_MOVER_FORM extends MULTIPLE_OBJECT_MOVER_FORM
 {
   /**
    * @param FOLDER $folder Objects are from this folder.
-   * @param FOLDER $target Move objects to this folder.
    */
   public function __construct ($folder)
   {
@@ -268,5 +267,3 @@ class MULTIPLE_DRAFTABLE_OBJECT_MOVER_FORM extends MULTIPLE_OBJECT_MOVER_FORM
     $field->visible = true;
   }
 }
-
-?>

@@ -177,7 +177,7 @@ abstract class MULTIPLE_OBJECT_ACTION_FORM extends ID_BASED_FORM
       echo '<h2>' . $folder_info->plural_title . '</h2>';
       echo '<ul class="object-list">';
       
-      foreach ($this->object_list->folders as &$folder)
+      foreach ($this->object_list->folders as $folder)
       {
         echo '<li>' . $folder->title_as_link () . "</li>";
       }

@@ -125,7 +125,7 @@ class OBJECT_LIST_BUILDER extends WEBCORE_OBJECT
   
   /**
    * List of entry ids; used by {@link FORM}s.
-   * @return integer[]
+   * @return int[]
    */
   public function entry_ids ()
   {
@@ -134,7 +134,7 @@ class OBJECT_LIST_BUILDER extends WEBCORE_OBJECT
   
   /**
    * List of folder ids; used by {@link FORM}s.
-   * @return integer[]
+   * @return int[]
    */
   public function folder_ids ()
   {

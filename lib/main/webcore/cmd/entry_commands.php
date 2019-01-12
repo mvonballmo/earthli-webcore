@@ -240,8 +240,9 @@ class DRAFTABLE_ENTRY_COMMANDS extends ENTRY_COMMANDS
 {
   /**
    * Add commands that edit the entry.
-   * @param ENTRY $entry
+   * @param DRAFTABLE_ENTRY $entry
    * @access private
+   * @throws Exception
    */
   protected function _add_editors ($entry)
   {
@@ -286,5 +287,3 @@ class DRAFTABLE_ENTRY_COMMANDS extends ENTRY_COMMANDS
     $this->append ($cmd);
   }
 }
-
-?>

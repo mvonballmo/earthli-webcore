@@ -104,4 +104,7 @@ class DYNAMIC_TREE extends HTML_TREE
   {
     $this->_layer->finish('ul');
   }
+
+  /** @var LAYER */
+  private $_layer;
 }
