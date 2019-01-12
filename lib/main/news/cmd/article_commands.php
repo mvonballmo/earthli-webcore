@@ -67,7 +67,10 @@ class ARTICLE_COMMANDS extends DRAFTABLE_ENTRY_COMMANDS
     $cmd->link = "purge_article.php?id=$entry->id";
 
     $cmd = $this->command_at ('clone');
-    $cmd->link = "clone_article.php?id=$entry->id";
+    if ($cmd)
+    {
+      $cmd->link = "clone_article.php?id=$entry->id";
+    }
 
     $cmd = $this->command_at ('send');
     $cmd->link = "send_article.php?id=$entry->id";
