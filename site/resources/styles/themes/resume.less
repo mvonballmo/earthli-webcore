@@ -82,24 +82,28 @@ h3
 
   .years
   {
+    display: flex;
     position: absolute;
-    height: 100%;
     width: 100%;
+    height: 100%;
     z-index: -1;
 
     > div
     {
-      width: (100% / @block_count) - .1%;
+      flex-basis: calc(~"("@years_per_block~" / "@year_count~") * 100%");
       padding-left: @small_spacing;
       border-left: 1px solid silver;
-      opacity: .6;
-      float: left;
-      height: 100%;
       box-sizing: border-box;
+      opacity: .6;
 
       &:last-child
       {
-        width: 0;
+        border-right: 1px solid silver;
+      }
+
+      &:after
+      {
+        content: attr(title);
       }
     }
   }
@@ -206,6 +210,14 @@ section
   }
 }
 
+@media (max-width: @min-width-for-columns)
+{
+  table.projects tbody tr td:nth-child(2) span:first-child
+  {
+    font-size: 70%;
+  }
+}
+
 @media print
 {
   body
@@ -270,10 +282,7 @@ section
 
 .make-background-container()
 {
-  white-space: nowrap;
-  padding: 2px;
   margin: 1px 0;
-  box-sizing: border-box;
 }
 
 .level-expert

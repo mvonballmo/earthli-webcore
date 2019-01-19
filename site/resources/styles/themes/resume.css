@@ -2495,22 +2495,23 @@ h3 {
   position: relative;
 }
 .timeline .years {
+  display: flex;
   position: absolute;
-  height: 100%;
   width: 100%;
+  height: 100%;
   z-index: -1;
 }
 .timeline .years > div {
-  width: 14.18571429%;
-  padding-left: 5px;
+  flex-basis: calc(( 5  /  35 ) * 100%);
   border-left: 1px solid silver;
-  opacity: .6;
-  float: left;
-  height: 100%;
   box-sizing: border-box;
+  opacity: .6;
 }
 .timeline .years > div:last-child {
-  width: 0;
+  border-right: 1px solid silver;
+}
+.timeline .years > div:after {
+  content: attr(title);
 }
 .timeline .projects {
   padding-top: 30px;
@@ -2568,6 +2569,11 @@ section div.contact ul {
     display: flex;
   }
 }
+@media (max-width: 600px) {
+  table.projects tbody tr td:nth-child(2) span:first-child {
+    font-size: 70%;
+  }
+}
 @media print {
   body .page .header .nav-box {
     display: none;
@@ -2589,64 +2595,38 @@ section div.contact ul {
   margin: 5px 0;
 }
 .level-expert {
-  white-space: nowrap;
-  padding: 2px;
   margin: 1px 0;
-  box-sizing: border-box;
   background-color: #004c6d;
 }
 .level-proficient {
-  white-space: nowrap;
-  padding: 2px;
   margin: 1px 0;
-  box-sizing: border-box;
   background-color: #6996b3;
 }
 .level-competent {
-  white-space: nowrap;
-  padding: 2px;
   margin: 1px 0;
-  box-sizing: border-box;
   background-color: #c1e7ff;
 }
 .support {
-  white-space: nowrap;
-  padding: 2px;
   margin: 1px 0;
-  box-sizing: border-box;
   background-color: #ffa600;
 }
 .developer {
-  white-space: nowrap;
-  padding: 2px;
   margin: 1px 0;
-  box-sizing: border-box;
   background-color: #ff6361;
 }
 .lead-developer {
-  white-space: nowrap;
-  padding: 2px;
   margin: 1px 0;
-  box-sizing: border-box;
   background-color: #003f5c;
 }
 .architect {
-  white-space: nowrap;
-  padding: 2px;
   margin: 1px 0;
-  box-sizing: border-box;
   background-color: #bc5090;
 }
 .project-manager {
-  white-space: nowrap;
-  padding: 2px;
   margin: 1px 0;
-  box-sizing: border-box;
   background-color: #58508d;
 }
 .employee {
-  white-space: nowrap;
-  padding: 2px;
   margin: 1px 0;
   background-color: #E8E8E8;
   position: absolute;
