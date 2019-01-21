@@ -63,6 +63,11 @@ h3
   margin-top: @resume_spacing;
 }
 
+h4
+{
+  font-size: 120%;
+}
+
 .footer
 {
   display: none;
@@ -212,9 +217,27 @@ section
 
 @media (max-width: @min-width-for-columns)
 {
-  table.projects tbody tr td:nth-child(2) span:first-child
+  table.projects tbody tr td
   {
-    font-size: 70%;
+    font-size: 80%;
+  }
+
+  table.projects tbody tr th:first-child
+  {
+    display: none !important;
+  }
+}
+
+@media (max-width: 320px)
+{
+  table.projects tbody tr td
+  {
+    font-size: 65%;
+  }
+
+  table.projects tbody tr th:first-child
+  {
+    display: none !important;
   }
 }
 
@@ -327,13 +350,15 @@ section
 
 .employee
 {
-  .use-background(@employee-color);
   position: absolute;
-  top: 0;
-  height: 100%;
+  width: 100%;
+  height: calc(100%~" - "@default-top-spacing);
   z-index: -2;
-  padding-top: @default-top-spacing;
-  box-sizing: border-box;
+
+  span:nth-child(2)
+  {
+    .use-background(@employee-color);
+  }
 }
 
 .two-color-diagonal-stripes(@first-color, @second-color, @stripe-width: @default-stripe-width, @stripe-angle: @default-stripe-angle)
@@ -358,6 +383,26 @@ section
     @third-color 2 * @stripe-width,
     @third-color 3 * @stripe-width
   );
+}
+
+.four-color-diagonal-stripes(@first-color, @second-color, @third-color, @fourth-color, @stripe-width: @default-stripe-width, @stripe-angle: @default-stripe-angle)
+{
+  background: repeating-linear-gradient(
+    @stripe-angle,
+    @first-color,
+    @first-color @stripe-width,
+    @second-color @stripe-width,
+    @second-color 2 * @stripe-width,
+    @third-color 2 * @stripe-width,
+    @third-color 3 * @stripe-width,
+    @fourth-color 3 * @stripe-width,
+    @fourth-color 4 * @stripe-width
+  );
+}
+
+.project-manager.architect.lead-developer.support
+{
+  .four-color-diagonal-stripes(@architect-color, @project-manager-color, @lead-developer-color, @support-color);
 }
 
 .project-manager.architect.lead-developer
