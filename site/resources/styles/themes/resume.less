@@ -73,17 +73,33 @@ h4
   display: none;
 }
 
-.legend
-{
-  td
-  {
-    width: @default-stripe-width * 3;
-  }
-}
-
 .timeline
 {
   position: relative;
+
+  .chart
+  {
+    position: relative;
+  }
+
+  .legend
+  {
+    position: absolute;
+    font-size: @micro_font_size;
+    left: @standard_spacing;
+    top: @standard_spacing;
+
+    &.early
+    {
+      left: auto;
+      right: @standard_spacing;
+    }
+
+    td
+    {
+      width: @default-stripe-width * 2;
+    }
+  }
 
   .years
   {
@@ -97,13 +113,13 @@ h4
     {
       flex-basis: calc(~"("@years_per_block~" / "@year_count~") * 100%");
       padding-left: @small_spacing;
-      border-left: 1px solid silver;
+      border-left: @hairline_border_width solid @standard_border_color;
       box-sizing: border-box;
       opacity: .6;
 
       &:last-child
       {
-        border-right: 1px solid silver;
+        border-right: @hairline_border_width solid @standard_border_color;
       }
 
       &:after
@@ -205,6 +221,38 @@ section
       }
     }
   }
+
+  table.list
+  {
+    display: block;
+    padding-left: @ul_indent;
+
+    tr
+    {
+      &:first-child
+      {
+        display: none;
+      }
+
+      display: list-item;
+      padding-left: @li_indent;
+
+      th, td
+      {
+        display: inline;
+      }
+
+      th
+      {
+        border: none;
+
+        &:after
+        {
+          content: ": ";
+        }
+      }
+    }
+  }
 }
 
 @media (min-width: @min-width-for-columns)
@@ -219,12 +267,24 @@ section
 {
   table.projects tbody tr td
   {
-    font-size: 80%;
+    font-size: @micro_font_size;
   }
 
   table.projects tbody tr th:first-child
   {
     display: none !important;
+  }
+
+  table.basic.legend
+  {
+    position: relative;
+    margin: 2 * @standard_spacing 0;
+
+    &.early
+    {
+      left: @standard_spacing;
+      right: auto;
+    }
   }
 }
 
@@ -232,7 +292,7 @@ section
 {
   table.projects tbody tr td
   {
-    font-size: 65%;
+    font-size: @nano_font_size;
   }
 
   table.projects tbody tr th:first-child
@@ -305,7 +365,7 @@ section
 
 .make-background-container()
 {
-  margin: 1px 0;
+  margin: @hairline_border_width 0;
 }
 
 .level-expert
@@ -418,6 +478,11 @@ section
 .architect.lead-developer
 {
   .two-color-diagonal-stripes(@architect-color, @lead-developer-color);
+}
+
+.project-manager.developer
+{
+  .two-color-diagonal-stripes(@project-manager-color, @developer-color);
 }
 
 .architect.developer

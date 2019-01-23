@@ -1359,6 +1359,11 @@ table {
   margin: 0;
   padding: 0;
 }
+table caption {
+  text-align: left;
+  border-bottom: 1px solid #c7c7c7;
+  margin-bottom: 5px;
+}
 table td,
 table th {
   padding: 0;
@@ -2491,11 +2496,24 @@ h4 {
 .footer {
   display: none;
 }
-.legend td {
-  width: 30px;
-}
 .timeline {
   position: relative;
+}
+.timeline .chart {
+  position: relative;
+}
+.timeline .legend {
+  position: absolute;
+  font-size: 75%;
+  left: 15px;
+  top: 15px;
+}
+.timeline .legend.early {
+  left: auto;
+  right: 15px;
+}
+.timeline .legend td {
+  width: 20px;
 }
 .timeline .years {
   display: flex;
@@ -2507,12 +2525,12 @@ h4 {
 .timeline .years > div {
   flex-basis: calc(( 5  /  35 ) * 100%);
   padding-left: 5px;
-  border-left: 1px solid silver;
+  border-left: 1px solid #c7c7c7;
   box-sizing: border-box;
   opacity: .6;
 }
 .timeline .years > div:last-child {
-  border-right: 1px solid silver;
+  border-right: 1px solid #c7c7c7;
 }
 .timeline .years > div:after {
   content: attr(title);
@@ -2568,6 +2586,27 @@ section div.contact ul {
   flex: 2;
   list-style: none;
 }
+section table.list {
+  display: block;
+  padding-left: 1.1em;
+}
+section table.list tr {
+  display: list-item;
+  padding-left: 0.5em;
+}
+section table.list tr:first-child {
+  display: none;
+}
+section table.list tr th,
+section table.list tr td {
+  display: inline;
+}
+section table.list tr th {
+  border: none;
+}
+section table.list tr th:after {
+  content: ": ";
+}
 @media (min-width: 600px) {
   section {
     display: flex;
@@ -2575,10 +2614,18 @@ section div.contact ul {
 }
 @media (max-width: 600px) {
   table.projects tbody tr td {
-    font-size: 80%;
+    font-size: 75%;
   }
   table.projects tbody tr th:first-child {
     display: none !important;
+  }
+  table.basic.legend {
+    position: relative;
+    margin: 30px 0;
+  }
+  table.basic.legend.early {
+    left: 15px;
+    right: auto;
   }
 }
 @media (max-width: 320px) {
@@ -2662,6 +2709,9 @@ section div.contact ul {
 }
 .architect.lead-developer {
   background: repeating-linear-gradient(-45deg, #bc5090, #bc5090 10px, #003f5c 10px, #003f5c 20px);
+}
+.project-manager.developer {
+  background: repeating-linear-gradient(-45deg, #58508d, #58508d 10px, #ff6361 10px, #ff6361 20px);
 }
 .architect.developer {
   background: repeating-linear-gradient(-45deg, #bc5090, #bc5090 10px, #ff6361 10px, #ff6361 20px);
