@@ -129,13 +129,88 @@ h4
     }
   }
 
-  .projects
+  table.projects
   {
+    display: block;
     padding-top: @default-top-spacing;
 
-    div
+    th
     {
-      // Adjust properties of text in blocks
+      border: none;
+    }
+
+    thead
+    {
+      display: none;
+    }
+
+    tbody
+    {
+      display: block;
+
+      tr
+      {
+        display: block;
+
+        th:first-child
+        {
+          display: block;
+          position: absolute; left: -15ex;
+          width: 14ex;
+          text-align: right;
+          font-size: 80%;
+        }
+
+        td
+        {
+          display: block;
+
+          &:nth-child(2)
+          {
+            display: flex;
+
+            span:first-child:not(:empty)
+            {
+              text-align: right;
+              padding-right: .5em;
+              box-sizing: border-box;
+            }
+
+            span:last-child:not(:empty)
+            {
+              padding-left: .5em;
+              box-sizing: border-box;
+            }
+
+            span:nth-child(3)
+            {
+              white-space: nowrap;
+            }
+
+            &.level-expert:after
+            {
+              /*TODO Fix these appends*/
+
+              content: " (Expert)";
+            }
+
+            &.level-proficient:after
+            {
+              content: " (Proficient)";
+            }
+
+            &.level-competent:after
+            {
+              content: " (Competent)";
+            }
+          }
+
+          &:nth-child(3)
+          {
+            display: none;
+          }
+        }
+      }
     }
   }
 }
