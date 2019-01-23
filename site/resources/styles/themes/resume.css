@@ -2499,7 +2499,7 @@ h4 {
 .timeline {
   position: relative;
 }
-.timeline .chart {
+.timeline .timeline-box {
   position: relative;
 }
 .timeline .legend {
