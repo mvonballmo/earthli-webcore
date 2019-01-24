@@ -1,4 +1,5 @@
 @import "../theme-base";
+@import "resume_years.css";
 
 @employee-color: #E8E8E8;
 
@@ -52,6 +53,17 @@
 @block_count: @year_count / @years_per_block;
 
 @resume_spacing: 3 * @standard_spacing;
+
+@minimum_width: 0;
+@columns_per_year: 2;
+@one_year_percent: 100 / @year_count;
+@total_columns: @year_count * @columns_per_year;
+@half_year: @columns_per_year / 2;
+
+.set-basis(@numerator, @denominator)
+{
+  flex-basis: calc(~"("@numerator~" / "@denominator~") * 100%");
+}
 
 h2
 {
@@ -111,7 +123,7 @@ h4
 
     > div
     {
-      flex-basis: calc(~"("@years_per_block~" / "@year_count~") * 100%");
+      .set-basis(@years_per_block, @year_count);
       padding-left: @small_spacing;
       border-left: @hairline_border_width solid @standard_border_color;
       box-sizing: border-box;
@@ -215,6 +227,37 @@ h4
   }
 }
 
+.text-flow
+{
+  section
+  {
+    div
+    {
+      &.contact
+      {
+        display: flex;
+
+        div
+        {
+          flex: 4;
+        }
+
+        ul
+        {
+          flex: 2;
+          list-style: none;
+          padding-left: 0;
+
+          li
+          {
+            padding-left: 0;
+          }
+        }
+      }
+    }
+  }
+}
+
 section
 {
   &:first-child
@@ -279,22 +322,6 @@ section
         }
       }
     }
-
-    &.contact
-    {
-      display: flex;
-
-      div
-      {
-        flex: 4;
-      }
-
-      ul
-      {
-        flex: 2;
-        list-style: none;
-      }
-    }
   }
 
   table.list
@@ -330,6 +357,7 @@ section
   }
 }
 
+
 @media (min-width: @min-width-for-columns)
 {
   section
@@ -360,6 +388,11 @@ section
       left: @standard_spacing;
       right: auto;
     }
+  }
+
+  .text-flow section div.contact
+  {
+    display: block;
   }
 }
 

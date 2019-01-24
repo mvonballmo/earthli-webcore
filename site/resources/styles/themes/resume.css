@@ -23,6 +23,7 @@ For more information about the earthli WebCore, visit:
 http://www.earthli.com/software/webcore
 
 ****************************************************************************/
+@import "resume_years.css";
 .align-left {
   float: left;
   margin: 0 15px 15px 0;
@@ -2590,6 +2591,20 @@ h4 {
 .timeline table.projects tbody tr td:nth-child(3) {
   display: none;
 }
+.text-flow section div.contact {
+  display: flex;
+}
+.text-flow section div.contact div {
+  flex: 4;
+}
+.text-flow section div.contact ul {
+  flex: 2;
+  list-style: none;
+  padding-left: 0;
+}
+.text-flow section div.contact ul li {
+  padding-left: 0;
+}
 section:first-child > h2 {
   visibility: hidden;
 }
@@ -2627,16 +2642,6 @@ section div.grid > div {
 }
 section div.grid > div h3:first-child {
   margin-top: 0;
-}
-section div.contact {
-  display: flex;
-}
-section div.contact div {
-  flex: 4;
-}
-section div.contact ul {
-  flex: 2;
-  list-style: none;
 }
 section table.list {
   display: block;
@@ -2678,6 +2683,9 @@ section table.list tr th:after {
   table.basic.legend.early {
     left: 15px;
     right: auto;
+  }
+  .text-flow section div.contact {
+    display: block;
   }
 }
 @media (max-width: 320px) {
