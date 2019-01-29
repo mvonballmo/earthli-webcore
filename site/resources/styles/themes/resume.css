@@ -855,7 +855,7 @@ pre > code .attribute-value,
   line-height: 160%;
   text-align: left;
 }
-@media (min-width: 600px) {
+@media (min-width: 500px) {
   .text-flow.wide {
     column-width: 35em;
     -webkit-column-width: 35em;
@@ -1808,7 +1808,7 @@ table.panels td {
   max-height: 300px;
   overflow-y: auto;
 }
-@media (min-width: 600px) {
+@media (min-width: 500px) {
   .columns {
     display: -webkit-flex;
     display: -moz-flex;
@@ -2330,7 +2330,7 @@ select {
 .basic-form fieldset legend {
   margin-left: -4px;
 }
-@media (min-width: 600px) {
+@media (min-width: 500px) {
   .basic-form.ltr fieldset {
     margin-left: 135px;
   }
@@ -2400,7 +2400,7 @@ select {
     content: '*';
   }
 }
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 500px) {
   .basic-form.rtl {
     text-align: right;
   }
@@ -2489,7 +2489,7 @@ h2 {
   border: none;
 }
 h3 {
-  margin-top: 45px;
+  margin-top: 30px;
 }
 h4 {
   font-size: 120%;
@@ -2502,6 +2502,61 @@ h4 {
 }
 .timeline .timeline-box {
   position: relative;
+}
+.timeline .timeline-box table {
+  display: block;
+  padding-top: 30px;
+}
+.timeline .timeline-box table th {
+  border: none;
+}
+.timeline .timeline-box table thead {
+  display: none;
+}
+.timeline .timeline-box table tbody {
+  display: block;
+}
+.timeline .timeline-box table tbody tr {
+  display: block;
+}
+.timeline .timeline-box table tbody tr th:first-child {
+  display: block;
+  position: absolute;
+  left: -15ex;
+  width: 14ex;
+  text-align: right;
+  font-size: 80%;
+}
+.timeline .timeline-box table tbody tr td {
+  display: block;
+}
+.timeline .timeline-box table tbody tr td:nth-child(2) {
+  display: flex;
+}
+.timeline .timeline-box table tbody tr td:nth-child(2) span:first-child:not(:empty) {
+  text-align: right;
+  padding-right: .5em;
+  box-sizing: border-box;
+}
+.timeline .timeline-box table tbody tr td:nth-child(2) span:last-child:not(:empty) {
+  padding-left: .5em;
+  box-sizing: border-box;
+}
+.timeline .timeline-box table tbody tr td:nth-child(2) span:nth-child(3) {
+  white-space: nowrap;
+}
+.timeline .timeline-box table tbody tr td:nth-child(2).level-expert:after {
+  /*TODO Fix these appends*/
+  content: " (Expert)";
+}
+.timeline .timeline-box table tbody tr td:nth-child(2).level-proficient:after {
+  content: " (Proficient)";
+}
+.timeline .timeline-box table tbody tr td:nth-child(2).level-competent:after {
+  content: " (Competent)";
+}
+.timeline .timeline-box table tbody tr td:nth-child(3) {
+  display: none;
 }
 .timeline .legend {
   position: absolute;
@@ -2536,61 +2591,6 @@ h4 {
 .timeline .years > div:after {
   content: attr(title);
 }
-.timeline table.projects {
-  display: block;
-  padding-top: 30px;
-}
-.timeline table.projects th {
-  border: none;
-}
-.timeline table.projects thead {
-  display: none;
-}
-.timeline table.projects tbody {
-  display: block;
-}
-.timeline table.projects tbody tr {
-  display: block;
-}
-.timeline table.projects tbody tr th:first-child {
-  display: block;
-  position: absolute;
-  left: -15ex;
-  width: 14ex;
-  text-align: right;
-  font-size: 80%;
-}
-.timeline table.projects tbody tr td {
-  display: block;
-}
-.timeline table.projects tbody tr td:nth-child(2) {
-  display: flex;
-}
-.timeline table.projects tbody tr td:nth-child(2) span:first-child:not(:empty) {
-  text-align: right;
-  padding-right: .5em;
-  box-sizing: border-box;
-}
-.timeline table.projects tbody tr td:nth-child(2) span:last-child:not(:empty) {
-  padding-left: .5em;
-  box-sizing: border-box;
-}
-.timeline table.projects tbody tr td:nth-child(2) span:nth-child(3) {
-  white-space: nowrap;
-}
-.timeline table.projects tbody tr td:nth-child(2).level-expert:after {
-  /*TODO Fix these appends*/
-  content: " (Expert)";
-}
-.timeline table.projects tbody tr td:nth-child(2).level-proficient:after {
-  content: " (Proficient)";
-}
-.timeline table.projects tbody tr td:nth-child(2).level-competent:after {
-  content: " (Competent)";
-}
-.timeline table.projects tbody tr td:nth-child(3) {
-  display: none;
-}
 .text-flow section div.contact {
   display: flex;
 }
@@ -2611,20 +2611,20 @@ section:first-child > h2 {
 section h2:first-child {
   flex: 1;
   font-variant: small-caps;
-  margin-top: 45px;
-  margin-right: 45px;
+  margin-top: 30px;
+  margin-right: 30px;
 }
 section p:first-child,
 section ul:first-child {
-  margin-top: 45px;
+  margin-top: 30px;
 }
 section > div > h3:first-child {
-  margin-top: 45px;
+  margin-top: 30px;
 }
 section > div:first-child {
   flex: 1;
   margin-top: 0;
-  margin-right: 45px;
+  margin-right: 30px;
 }
 section > div:first-child > h3 {
   margin-top: 0;
@@ -2634,11 +2634,11 @@ section div {
   margin-top: 0;
 }
 section div.grid {
-  margin-top: 45px;
+  margin-top: 30px;
 }
 section div.grid > div {
-  margin-right: 45px;
-  margin-bottom: 45px;
+  margin-right: 30px;
+  margin-bottom: 30px;
 }
 section div.grid > div h3:first-child {
   margin-top: 0;
@@ -2664,17 +2664,17 @@ section table.list tr th {
 section table.list tr th:after {
   content: ": ";
 }
-@media (min-width: 600px) {
+@media (min-width: 500px) {
   section {
     display: flex;
   }
 }
-@media (max-width: 600px) {
-  table.projects tbody tr td {
+@media (max-width: 500px) {
+  .timeline .timeline-box table tbody tr td {
     font-size: 75%;
   }
-  table.projects tbody tr th:first-child {
-    display: none !important;
+  .timeline .timeline-box table tbody tr th:first-child {
+    display: none;
   }
   table.basic.legend {
     position: relative;
@@ -2689,30 +2689,33 @@ section table.list tr th:after {
   }
 }
 @media (max-width: 320px) {
-  table.projects tbody tr td {
+  .timeline .timeline-box table tbody tr td {
     font-size: 65%;
   }
-  table.projects tbody tr th:first-child {
-    display: none !important;
+  .timeline .timeline-box table tbody tr th:first-child {
+    display: none;
   }
 }
 @media print {
   body .page .header .nav-box {
     display: none;
   }
-  section {
-    display: flex;
+  body .page section {
+    display: block;
   }
-  section div.grid > div {
+  body .page section div.grid > div {
     margin-right: 30px;
   }
+  .page-break {
+    page-break-before: always;
+  }
 }
-.project ul {
+.projects ul {
   padding: 0;
   margin: 0;
   list-style: none;
 }
-.project ul li {
+.projects ul li {
   padding: 0;
   margin: 5px 0;
 }
