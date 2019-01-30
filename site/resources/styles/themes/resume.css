@@ -73,16 +73,16 @@ pre,
 }
 h1,
 .banner .title {
-  font-size: 200%;
+  font-size: 167%;
 }
 h2 {
-  font-size: 167%;
+  font-size: 150%;
 }
 h3 {
   font-size: 140%;
 }
 h4 {
-  font-size: 100%;
+  font-size: 120%;
 }
 h5 {
   font-size: 100%;
@@ -2488,12 +2488,6 @@ select {
 h2 {
   border: none;
 }
-h3 {
-  margin-top: 30px;
-}
-h4 {
-  font-size: 120%;
-}
 .footer {
   display: none;
 }
@@ -2605,6 +2599,10 @@ h4 {
 .text-flow section div.contact div {
   flex: 4;
 }
+.text-flow section div.contact div h2 {
+  margin-top: 15px;
+  font-size: 167%;
+}
 .text-flow section div.contact ul {
   flex: 2;
   list-style: none;
@@ -2613,20 +2611,23 @@ h4 {
 .text-flow section div.contact ul li {
   padding-left: 0;
 }
-section:first-child > h2 {
+section:first-child > h1 {
   visibility: hidden;
 }
-section h2:first-child {
+section h1:first-child {
   flex: 1;
   font-variant: small-caps;
   margin-top: 30px;
   margin-right: 30px;
 }
+section h2:first-child {
+  margin-top: 0;
+}
 section p:first-child,
 section ul:first-child {
   margin-top: 30px;
 }
-section > div > h3:first-child {
+section > div > h2:first-child {
   margin-top: 30px;
 }
 section > div:first-child {
@@ -2634,7 +2635,7 @@ section > div:first-child {
   margin-top: 0;
   margin-right: 30px;
 }
-section > div:first-child > h3 {
+section > div:first-child > h2 {
   margin-top: 0;
 }
 section div {
