@@ -2678,17 +2678,20 @@ section table.list tr th:after {
   }
 }
 @media (max-width: 500px) {
-  .timeline .timeline-box table tbody tr td {
+  .text-flow .timeline .years {
     font-size: 75%;
   }
-  .timeline .timeline-box table tbody tr th:first-child {
+  .text-flow .timeline .timeline-box table tbody tr td {
+    font-size: 75%;
+  }
+  .text-flow .timeline .timeline-box table tbody tr th:first-child {
     display: none;
   }
-  table.basic.legend {
+  .text-flow table.basic.legend {
     position: relative;
     margin: 30px 0;
   }
-  table.basic.legend.early {
+  .text-flow table.basic.legend.early {
     left: 15px;
     right: auto;
   }
@@ -2697,10 +2700,13 @@ section table.list tr th:after {
   }
 }
 @media (max-width: 320px) {
-  .timeline .timeline-box table tbody tr td {
+  .text-flow .timeline .years {
     font-size: 65%;
   }
-  .timeline .timeline-box table tbody tr th:first-child {
+  .text-flow .timeline .timeline-box table tbody tr td {
+    font-size: 65%;
+  }
+  .text-flow .timeline .timeline-box table tbody tr th:first-child {
     display: none;
   }
 }
