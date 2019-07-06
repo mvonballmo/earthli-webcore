@@ -160,8 +160,6 @@ body .page .header .banner .content .title {
   color: #bc561f;
 }
 body .page .header .nav-box {
-  margin-left: -15px;
-  margin-right: -15px;
   padding-left: 15px;
   padding-right: 15px;
   clear: both;
@@ -854,7 +852,7 @@ pre > code .attribute-value,
   line-height: 160%;
   text-align: left;
 }
-@media (min-width: 600px) {
+@media (min-width: 500px) {
   .text-flow.wide {
     column-width: 35em;
     -webkit-column-width: 35em;
@@ -1359,6 +1357,11 @@ table {
   margin: 0;
   padding: 0;
 }
+table caption {
+  text-align: left;
+  border-bottom: 1px solid #7d7063;
+  margin-bottom: 5px;
+}
 table td,
 table th {
   padding: 0;
@@ -1802,7 +1805,7 @@ table.panels td {
   max-height: 300px;
   overflow-y: auto;
 }
-@media (min-width: 600px) {
+@media (min-width: 500px) {
   .columns {
     display: -webkit-flex;
     display: -moz-flex;
@@ -2255,14 +2258,7 @@ select {
   -moz-flex: 1;
   -ms-flex: 1;
   flex: 1;
-  -webkit-flex-direction: column;
-  -moz-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  min-height: 0;
-  min-width: 0;
   display: none;
-  margin: 0 15px;
 }
 .form-with-preview .inline-preview {
   -webkit-flex: 1;
@@ -2324,7 +2320,7 @@ select {
 .basic-form fieldset legend {
   margin-left: -4px;
 }
-@media (min-width: 600px) {
+@media (min-width: 500px) {
   .basic-form.ltr fieldset {
     margin-left: 135px;
   }
@@ -2394,7 +2390,7 @@ select {
     content: '*';
   }
 }
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 500px) {
   .basic-form.rtl {
     text-align: right;
   }
