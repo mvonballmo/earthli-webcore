@@ -626,31 +626,34 @@ class HTML_PUNCTUATION_CONVERTER extends MUNGER_CONVERTER
    * Table of punctuation mappings to apply in {@link _convert()}
    * @var string[]
    */
-  public $punctuation_table = array ( '---' => '&mdash;'
-                                 , '--' => '&#8211;'
-                                 , '1/2' => '&frac12;'
-                                 , '1/4' => '&frac14;'
-                                 , '3/4' => '&frac34;'
-                                 , '...' => '&#8230;'
-                                 , '(tm)' => '&trade;'
-                                 , '(c)' => '&copy;'
-                                 , '(R)' => '&reg;'
-                                 , ' x ' => ' &times; '
-                                 , ' - ' => ' &minus; '
-                                 , '(S,)' => '&#350;'      // Turkish S with cedilla
-                                 , '(s,)' => '&#351;'      // Turkish s with cedilla
-                                 , '(C,)' => '&Ccedil;'    // Turkish C with cedilla
-                                 , '(c,)' => '&ccedil;'    // Turkish c with cedilla
-                                 , '(i-)' => '&#305;'      // Turkish i without dot
-                                 , '(g-)' => '&#287;'      // Turkish g (silent)
-                                 , '(I.)' => '&#304;'      // Turkish I with dot
-                                 , '(Z-)' => '&#381;'      // Slavic Z with a caron
-                                 , '(z-)' => '&#382;'      // Slavic z with a caron
-                                 , '(-cmd)' => '&#8984;'   // Command-key icon for Apple
-                                 , '(-shift)' => '&#8679;' // Shift-key icon
-                                 , '(-opt)' => '&#8997;'   // Option-key icon
-                                 , '(-eject)' => '&#9167;'   // Eject-key icon
-                                 );
+  public $punctuation_table = array (
+    '---' => '&mdash;',
+    '--' => '&#8211;',
+    '1/2' => '&frac12;',
+    '1/4' => '&frac14;',
+    '3/4' => '&frac34;',
+    '...' => '&#8230;',
+    '(tm)' => '&trade;',
+    '(c)' => '&copy;',
+    '(R)' => '&reg;',
+    ' x ' => ' &times; ',
+    ' - ' => ' &minus; ',
+    '(S,)' => '&#350;',      // Turkish S with cedilla
+    '(s,)' => '&#351;',      // Turkish s with cedilla
+    '(C,)' => '&Ccedil;',    // Turkish C with cedilla
+    '(c,)' => '&ccedil;',    // Turkish c with cedilla
+    '(i-)' => '&#305;',      // Turkish i without dot
+    '(g-)' => '&#287;',      // Turkish g (silent)
+    '(I.)' => '&#304;',      // Turkish I with dot
+    '(l-)' => '&#322;',      // Polish l with a slash
+    '(L-)' => '&#321;',      // Polish L with a slash
+    '(Z-)' => '&#381;',      // Slavic Z with a caron
+    '(z-)' => '&#382;',      // Slavic z with a caron
+    '(-cmd)' => '&#8984;',   // Command-key icon for Apple
+    '(-shift)' => '&#8679;', // Shift-key icon
+    '(-opt)' => '&#8997;',   // Option-key icon
+    '(-eject)' => '&#9167;'  // Eject-key icon
+  );
 
   /**
    * Convert the text to an output format.
