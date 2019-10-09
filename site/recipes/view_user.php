@@ -27,7 +27,6 @@ http://www.earthli.com/software/webcore/recipes
 ****************************************************************************/
   
   require_once ('recipes/start.php');
-  require_once ('recipes/gui/recipe_panel.php');
   $panel_manager_class_name = 'RECIPE_USER_PANEL_MANAGER';
   require_once ($App->page_template_for ('webcore/pages/view_user.php'));
 ?>
