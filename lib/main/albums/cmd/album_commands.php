@@ -76,7 +76,7 @@ class ALBUM_COMMANDS extends FOLDER_COMMANDS
     $cmd->link = "view_calendar.php?id=$folder->id";
     $cmd->icon = '{icons}buttons/calendar';
     $cmd->executable = true;
-    $cmd->importance = Command_importance_high;
+    $cmd->importance = Command_importance_high + Command_importance_increment * 2;
     $this->append ($cmd);
 
     $cmd = $this->make_command ();
@@ -158,7 +158,7 @@ class ALBUM_COMMANDS extends FOLDER_COMMANDS
     $cmd->executable = $folder->app->login->is_allowed (Privilege_set_entry, Privilege_create, $folder)
                        && $folder->app->login->is_allowed (Privilege_set_entry, Privilege_upload, $folder)
                        && $folder->uploads_allowed ();
-    $cmd->importance = Command_importance_high + Command_importance_increment;
+    $cmd->importance = Command_importance_high + Command_importance_increment * 2;
     $this->append ($cmd);
   }
 }
