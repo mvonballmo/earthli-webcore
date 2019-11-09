@@ -89,8 +89,10 @@ class ALBUM_RENDERER extends FOLDER_RENDERER
   <?php
     }
 
+    echo '<div class="folder-description">';
     $this->_echo_html_descriptions ($obj);
     $this->_echo_html_user_information ($obj, 'info-box-bottom');
+    echo '</div>';
   }
 
   /**

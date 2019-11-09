@@ -627,6 +627,10 @@ div.info-box-top {
 .log-in-form {
   max-width: 30em;
 }
+.folder-description {
+  overflow: auto;
+  max-height: 15em;
+}
 .pager {
   margin-top: 15px;
 }
