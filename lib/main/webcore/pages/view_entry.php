@@ -41,6 +41,7 @@ http://www.earthli.com/software/webcore
       $entry_query->set_type ($entry_type_id);
     }
 
+    /** @var $entry ENTRY */
     $entry = $entry_query->object_at_id ($id);
   }
 
@@ -60,28 +61,21 @@ http://www.earthli.com/software/webcore
     $navigator->set_query ($entry_query);
     $navigator->set_selected ($id);
 
-    $show_entry_list = false;
-    $show_links = false;
-    $opt_link = '';
-    $has_multiple_entries = $navigator->size() > 1;
-
-    if ($has_multiple_entries)
-    {
-      include_once ('webcore/util/options.php');
-      $option = new STORED_OPTION ($App, "show_{$entry_info->id}_list");
-      $show_entry_list = $option->value ();
-      $opt_link = $option->setter_url_as_html (! $show_entry_list);
-
-      $show_links = ($navigator->size () > 1) && $show_entry_list;
-    }
-
     $Page->add_script_file('{scripts}swiped-events.min.js');
     $Page->start_display ();
 ?>
 <div class="top-box">
 <?php
+  $has_multiple_entries = $navigator->size() > 1;
+
   if ($has_multiple_entries)
   {
+    include_once ('webcore/util/options.php');
+    $show_list_option = new STORED_OPTION ($App, "show_{$entry_info->id}_list");
+    $show_entry_list = $show_list_option->value ();
+
+    $show_links = ($navigator->size () > 1) && $show_entry_list;
+
     echo '<div class="object-navigator">';
 
     if ($show_links)
@@ -112,19 +106,21 @@ http://www.earthli.com/software/webcore
       $caption = 'Hide list';
     }
 
-    ?><a href="<?php echo $opt_link; ?>" class="button"><?php echo $Page->get_icon_with_text($icon, Sixteen_px, $caption); ?></a><?php
+    $show_list_option_link = $show_list_option->setter_url_as_html (! $show_entry_list);
+
+    ?><a href="<?php echo $show_list_option_link; ?>" class="button"><?php echo $Page->get_icon_with_text($icon, Sixteen_px, $caption); ?></a><?php
   }
   else
   {
     echo '<div class="button-content">';
   }
 
-  /** @var $renderer MENU_RENDERER */
-  $renderer = $entry->handler_for (Handler_menu);
-  $renderer->set_size (Menu_size_standard);
+  /** @var $command_renderer MENU_RENDERER */
+  $menu_renderer = $entry->handler_for (Handler_menu);
+  $menu_renderer->set_size (Menu_size_standard);
   /** @var COMMANDS $commands */
   $commands = $entry->handler_for(Handler_commands);
-  $renderer->display ($commands);
+  $menu_renderer->display ($commands);
 
   echo '</div>';
 ?>
@@ -139,8 +135,9 @@ http://www.earthli.com/software/webcore
     ?>
     </h1>
   <?php
-  $renderer = $entry->handler_for (Handler_html_renderer);
-  $renderer->display ($entry);
+  /** @var $object_renderer OBJECT_RENDERER */
+  $object_renderer = $entry->handler_for (Handler_html_renderer);
+  $object_renderer->display ($entry);
 
   /** @var $associated_data ENTRY_ASSOCIATED_DATA_RENDERER */
   $associated_data = $entry->handler_for (Handler_associated_data);
