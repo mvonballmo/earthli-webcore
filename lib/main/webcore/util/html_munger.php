@@ -647,6 +647,8 @@ class HTML_PUNCTUATION_CONVERTER extends MUNGER_CONVERTER
     '(I.)' => '&#304;',      // Turkish I with dot
     '(l-)' => '&#322;',      // Polish l with a slash
     '(L-)' => '&#321;',      // Polish L with a slash
+    '(o\')' => '&#337;',     // Hungarian o with double acute accent
+    '(O\')' => '&#336;',     // Hungarian O with double acute accent
     '(Z-)' => '&#381;',      // Slavic Z with a caron
     '(z-)' => '&#382;',      // Slavic z with a caron
     '(-cmd)' => '&#8984;',   // Command-key icon for Apple
@@ -2289,8 +2291,8 @@ class HTML_BASE_MUNGER extends HTML_MUNGER
     $this->register_replacer ('macro', new MUNGER_MACRO_REPLACER (), false);
     
     $this->register_converter ('tags', new MUNGER_HTML_CONVERTER ());
-    $this->register_converter ('quotes', new HTML_SMART_QUOTE_CONVERTER ());
     $this->register_converter ('punctuation', new HTML_PUNCTUATION_CONVERTER ());
+    $this->register_converter ('quotes', new HTML_SMART_QUOTE_CONVERTER ());
     $this->register_converter ('highlight', new HTML_HIGHLIGHT_CONVERTER ());
   }
 }
