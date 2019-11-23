@@ -887,6 +887,7 @@ class IMAGE_METRICS
    * unconstrained image in it. The image tag itself is constrained to the desired size.
    * @param string $title Title to use for the image.
    * @param string $css_class CSS class to use for the image.
+   * @return string
    * @see as_html_without_link()
    */
   public function as_html ($title = ' ', $css_class = '')
@@ -907,9 +908,34 @@ class IMAGE_METRICS
 
   /**
    * Return HTML code for displaying the image.
+   * If the image has been resized, the image is wrapped in a link which will pop up a window with the
+   * unconstrained image in it. The image tag itself is constrained to the desired size.
+   * @param string $title Title to use for the image.
+   * @param string $css_class CSS class to use for the image.
+   * @return string
+   * @see as_html_without_link()
+   */
+  public function as_html_no_resize ($title = ' ', $css_class = '')
+  {
+    $was_resized = $this->was_resized;
+    $this->was_resized = false;
+    $Result = $this->as_html_without_link ($title, $css_class);
+    $this->was_resized = $was_resized;
+
+    if ($Result)
+    {
+      return "<a href=\"#\" onclick=\"open_image ('{$this->url}', {$this->original_width}, {$this->original_height}); return false;\">$Result</a>";
+    }
+
+    return '';
+  }
+
+  /**
+   * Return HTML code for displaying the image.
    * If the image has been resized, the image tag itself is constrained to the desired size.
    * @param string $title Title to use for the image.
    * @param string $css_class CSS class to use for the image.
+   * @return string
    * @see as_html()
    */
   public function as_html_without_link ($title = ' ', $css_class = '')

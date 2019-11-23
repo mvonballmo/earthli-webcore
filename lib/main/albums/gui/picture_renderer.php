@@ -94,55 +94,75 @@ class PICTURE_RENDERER extends ENTRY_RENDERER
     /** @var ALBUM $folder */
     $folder = $entry->parent_folder ();
     $metrics = $entry->metrics ();
-    if ($metrics->loaded ())
+    if ($this->_options->show_interactive)
     {
-  ?>
-  <div style="width: <?php echo $metrics->width (); ?>px">
-    <p>
-      <?php echo $folder->format_date ($entry->date); ?>
-    </p>
-    <div class="text-flow">
-      <?php $this->_echo_html_description ($entry); ?>
-    </div>
-    <div>
-    <?php
-      if ($this->_options->show_interactive)
-      {
-        echo $metrics->as_html ($entry->title_as_plain_text (), '');
-      }
-      else
-      {
-        echo $metrics->as_html_without_link ($entry->title_as_plain_text ());
-      }
-    ?>
-    </div>
-    <?php
-      if ($this->_options->show_interactive && $metrics->was_resized)
-      {
-    ?>
-    <div class="subdued">
-      Displayed at <?php echo $metrics->constrained_width; ?> x <?php echo $metrics->constrained_height; ?>;
-      click to show full-size (<?php echo $metrics->original_width; ?> x <?php echo $metrics->original_height; ?>).
-    </div>
-    <?php
-      }
+      ?>
+      <p>
+        <?php echo $folder->format_date ($entry->date); ?>
+      </p>
+      <div class="text-flow">
+        <?php $this->_echo_html_description ($entry); ?>
+      </div>
+      <div class="picture">
+      <?php
+        echo $metrics->as_html_no_resize($entry->title_as_plain_text (), '');
+      ?>
+      </div>
+      <?php
       $this->_echo_html_user_information ($entry, 'info-box-bottom');
-    ?>
-  </div>
-  <?php
     }
     else
     {
-  ?>
-    <p>
-      <?php echo $folder->format_date ($entry->date); ?>
-    </p>
-    <div class="text-flow">
-      <?php $this->_echo_html_description ($entry); ?>
-    </div>
-      <?php
-      $this->context->show_message('['. $metrics->url . '] could not be displayed.');
-      $this->_echo_html_user_information ($entry, 'info-box-bottom');
+      if ($metrics->loaded ())
+      {
+        ?>
+        <div style="width: <?php echo $metrics->width (); ?>px">
+          <p>
+            <?php echo $folder->format_date ($entry->date); ?>
+          </p>
+          <div class="text-flow">
+            <?php $this->_echo_html_description ($entry); ?>
+          </div>
+          <div>
+            <?php
+            if ($this->_options->show_interactive)
+            {
+              echo $metrics->as_html ($entry->title_as_plain_text (), '');
+            }
+            else
+            {
+              echo $metrics->as_html_without_link ($entry->title_as_plain_text ());
+            }
+            ?>
+          </div>
+          <?php
+          if ($this->_options->show_interactive && $metrics->was_resized)
+          {
+            ?>
+            <div class="subdued">
+              Displayed at <?php echo $metrics->constrained_width; ?> x <?php echo $metrics->constrained_height; ?>;
+              click to show full-size (<?php echo $metrics->original_width; ?> x <?php echo $metrics->original_height; ?>).
+            </div>
+            <?php
+          }
+          $this->_echo_html_user_information ($entry, 'info-box-bottom');
+          ?>
+        </div>
+        <?php
+      }
+      else
+      {
+        ?>
+        <p>
+          <?php echo $folder->format_date ($entry->date); ?>
+        </p>
+        <div class="text-flow">
+          <?php $this->_echo_html_description ($entry); ?>
+        </div>
+        <?php
+        $this->context->show_message('['. $metrics->url . '] could not be displayed.');
+        $this->_echo_html_user_information ($entry, 'info-box-bottom');
+      }
     }
   }
 }
