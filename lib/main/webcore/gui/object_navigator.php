@@ -266,7 +266,7 @@ class OBJECT_NAVIGATOR extends WEBCORE_OBJECT
       {
         $this->_controls .= $this->_text_for_control ($first_object, 'first') . $this->separator;
         $this->_controls .= $this->_text_for_control ($previous_object, 'previous') . $this->separator;
-        $this->_shortcut_key_scripts .= $this->_text_for_shortcut('PageUp', $previous_object);
+        $this->_shortcut_key_scripts .= $this->_text_for_shortcut('PageUp', 'swiped-left', $previous_object);
       }
       else
       {
@@ -278,7 +278,7 @@ class OBJECT_NAVIGATOR extends WEBCORE_OBJECT
       {
         $this->_controls .= $this->_text_for_control ($next_object, 'next') . $this->separator;
         $this->_controls .= $this->_text_for_control ($last_object, 'last');
-        $this->_shortcut_key_scripts .= $this->_text_for_shortcut('PageDown', $next_object);
+        $this->_shortcut_key_scripts .= $this->_text_for_shortcut('PageDown', 'swiped-right', $next_object);
       }
       else
       {
@@ -441,15 +441,19 @@ class OBJECT_NAVIGATOR extends WEBCORE_OBJECT
 
   /**
    * @param string $keyName
+   * @param string $event_name
    * @param UNIQUE_OBJECT $obj
    * @return string
    */
-  private function _text_for_shortcut(string $keyName, UNIQUE_OBJECT $obj): string
+  private function _text_for_shortcut(string $keyName, string $event_name, UNIQUE_OBJECT $obj): string
   {
     $this->_url->replace_argument ($this->primary_key_field_name, $obj->id);
     $href = $this->_url->as_html ();
 
-    return "document.addEventListener('keyup', e => { if (e.ctrlKey && e.key === '{$keyName}') { window.location = '$href' } });\n";
+    return "
+    document.addEventListener('keyup', e => { if (e.ctrlKey && e.key === '{$keyName}') { window.location = '$href' } });
+    document.addEventListener('{$event_name}', e => window.location = '$href');
+    ";
   }
 
   /**

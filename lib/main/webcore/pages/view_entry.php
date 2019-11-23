@@ -75,6 +75,7 @@ http://www.earthli.com/software/webcore
       $show_links = ($navigator->size () > 1) && $show_entry_list;
     }
 
+    $Page->add_script_file('{scripts}swiped-events.min.js');
     $Page->start_display ();
 ?>
 <div class="top-box">
