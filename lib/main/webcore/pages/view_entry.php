@@ -97,6 +97,7 @@ http://www.earthli.com/software/webcore
     echo '<div class="button-content">';
     echo '<span class="pager">';
     echo $navigator->controls ();
+    echo "\n<script>" . $navigator->shortcut_key_scripts () . "</script>";
     echo '</span>';
 
     if (! $show_entry_list)

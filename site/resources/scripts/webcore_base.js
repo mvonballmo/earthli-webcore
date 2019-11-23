@@ -49,7 +49,7 @@ function pad_10(value)
 
 function parseBool(value)
 {
-  return value == 'true';
+  return value === 'true';
 }
 
 //noinspection JSUnusedGlobalSymbols
@@ -62,7 +62,7 @@ function toggle_visibility(id)
 
   if (layer && image)
   {
-    if (layer.style.display == "none")
+    if (layer.style.display === "none")
     {
       layer.style.display = "block";
       image.src = image_path + "tree/collapse." + image_extension;
@@ -397,4 +397,3 @@ document.addEventListener('DOMContentLoaded', function ()
     })
   }
 });
-

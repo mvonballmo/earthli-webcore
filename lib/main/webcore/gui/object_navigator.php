@@ -183,6 +183,19 @@ class OBJECT_NAVIGATOR extends WEBCORE_OBJECT
   }
 
   /**
+   * Returns scripts for first/previous/next/last shortcut keys centered on the selected entry.
+   * @return string
+   */
+  public function shortcut_key_scripts ()
+  {
+    if (! isset ($this->_shortcut_key_scripts))
+    {
+      $this->_generate ();
+    }
+    return $this->_shortcut_key_scripts;
+  }
+
+  /**
    * Returns a list of linked entries 'near' the selected entry.
    * @return string
    */
@@ -203,6 +216,7 @@ class OBJECT_NAVIGATOR extends WEBCORE_OBJECT
   {
     $this->_list_near_selected = '';
     $this->_controls = '';
+    $this->_shortcut_key_scripts = '';
 
     $this->_context->set_selected_id ($this->_selected);
     if ($this->_context->is_valid ())
@@ -213,15 +227,27 @@ class OBJECT_NAVIGATOR extends WEBCORE_OBJECT
 
       // Build the context list
 
+      /** @var UNIQUE_OBJECT $first_object */
+      $first_object = $this->_context->first_object;
+      /** @var UNIQUE_OBJECT $previous_object */
+      $previous_object = $this->_context->previous_object;
+      /** @var UNIQUE_OBJECT $previous_page_object */
+      $previous_page_object = $this->_context->previous_page_object;
+      /** @var UNIQUE_OBJECT $next_object */
+      $next_object = $this->_context->next_object;
+      /** @var UNIQUE_OBJECT $next_page_object */
+      $next_page_object = $this->_context->next_page_object;
+      /** @var UNIQUE_OBJECT $last_object */
+      $last_object = $this->_context->last_object;
+
       if (! $this->_context->is_on_first_page ())
       {
-        $this->_list_near_selected .= '<li class="page-up">' .
-                                      $this->_text_for_control ($this->_context->previous_page_object, 'page_up') .
-                                      "</li>\n";
+        $this->_list_near_selected .= '<li class="page-up">' . $this->_text_for_control ($previous_page_object, 'page_up') . "</li>\n";
       }
 
       $objs = $this->_context->objects_in_window;
 
+      /** @var UNIQUE_OBJECT $obj */
       foreach ($objs as $obj)
       {
         $this->_list_near_selected .= '<li>' . $this->_text_for_list ($obj) . "</li>\n";
@@ -229,9 +255,7 @@ class OBJECT_NAVIGATOR extends WEBCORE_OBJECT
 
       if (! $this->_context->is_on_last_page ())
       {
-        $this->_list_near_selected .= '<li class="page-down">' .
-                                      $this->_text_for_control ($this->_context->next_page_object, 'page_down') .
-                                      "</li>\n";
+        $this->_list_near_selected .= '<li class="page-down">' . $this->_text_for_control ($next_page_object, 'page_down') . "</li>\n";
       }
 
       $this->_list_near_selected .= '</ul>';
@@ -240,8 +264,9 @@ class OBJECT_NAVIGATOR extends WEBCORE_OBJECT
 
       if (! $this->_context->is_first ())
       {
-        $this->_controls .= $this->_text_for_control ($this->_context->first_object, 'first') . $this->separator;
-        $this->_controls .= $this->_text_for_control ($this->_context->previous_object, 'previous') . $this->separator;
+        $this->_controls .= $this->_text_for_control ($first_object, 'first') . $this->separator;
+        $this->_controls .= $this->_text_for_control ($previous_object, 'previous') . $this->separator;
+        $this->_shortcut_key_scripts .= $this->_text_for_shortcut('PageUp', $previous_object);
       }
       else
       {
@@ -251,8 +276,9 @@ class OBJECT_NAVIGATOR extends WEBCORE_OBJECT
 
       if (! $this->_context->is_last ())
       {
-        $this->_controls .= $this->_text_for_control ($this->_context->next_object, 'next') . $this->separator;
-        $this->_controls .= $this->_text_for_control ($this->_context->last_object, 'last');
+        $this->_controls .= $this->_text_for_control ($next_object, 'next') . $this->separator;
+        $this->_controls .= $this->_text_for_control ($last_object, 'last');
+        $this->_shortcut_key_scripts .= $this->_text_for_shortcut('PageDown', $next_object);
       }
       else
       {
@@ -414,12 +440,33 @@ class OBJECT_NAVIGATOR extends WEBCORE_OBJECT
   }
 
   /**
+   * @param string $keyName
+   * @param UNIQUE_OBJECT $obj
+   * @return string
+   */
+  private function _text_for_shortcut(string $keyName, UNIQUE_OBJECT $obj): string
+  {
+    $this->_url->replace_argument ($this->primary_key_field_name, $obj->id);
+    $href = $this->_url->as_html ();
+
+    return "document.addEventListener('keyup', e => { if (e.ctrlKey && e.key === '{$keyName}') { window.location = '$href' } });\n";
+  }
+
+  /**
    * Previous/next/first/last controls.
    * @see ENTRY_NAVIGATOR::_generate()
    * @var string
    * @access private
    */
   protected $_controls;
+
+  /**
+   * Previous/next/first/last scripts.
+   * @see ENTRY_NAVIGATOR::_generate()
+   * @var string
+   * @access private
+   */
+  protected $_shortcut_key_scripts;
 
   /**
    * List of entries 'near' this selected one.
@@ -443,6 +490,12 @@ class OBJECT_NAVIGATOR extends WEBCORE_OBJECT
    * @access private
    */
   protected $_url;
+
+  /**
+   * Id of the selected object.
+   * @var int
+   */
+  protected $_selected;
 
   /**
    * @var UNIQUE_OBJECT_CACHE
