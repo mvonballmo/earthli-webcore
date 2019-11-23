@@ -170,6 +170,22 @@ class PICTURE_SUMMARY_GRID extends ENTRY_SUMMARY_GRID
     <?php
     parent::_echo_header($obj);
   }
+
+  /**
+   * Show search details for an object.
+   * @param PICTURE $obj
+   * @access private
+   */
+  protected function _echo_details ($obj)
+  {
+?>
+    <tr>
+      <th>Taken on</th>
+      <td><?php echo $obj->date->format (); ?></td>
+    </tr>
+<?php
+    parent::_echo_details($obj);
+  }
 }
 
 ?>

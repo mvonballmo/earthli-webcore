@@ -127,6 +127,10 @@
       parent::_echo_details($obj);
       ?>
       <tr>
+        <th>Date</th>
+        <td><?php echo $obj->date->format (); ?></td>
+      </tr>
+      <tr>
         <th>Weather</th>
         <td>
           <?php

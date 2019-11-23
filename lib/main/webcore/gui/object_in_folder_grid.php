@@ -92,7 +92,7 @@ class OBJECT_IN_FOLDER_SUMMARY_GRID extends CONTENT_OBJECT_GRID
   <table class="basic columns left-labels top">
     <?php $this->_echo_details ($obj); ?>
     <tr>
-      <th>Location</th>
+      <th>Found in</th>
       <td>
         <?php $this->_echo_folders ($obj); ?>
       </td>
@@ -132,7 +132,7 @@ class OBJECT_IN_FOLDER_SUMMARY_GRID extends CONTENT_OBJECT_GRID
       <td><?php echo $user->title_as_link (); ?></td>
     </tr>
     <tr>
-      <th>Date</th>
+      <th>On</th>
       <td><?php echo $date->format (); ?></td>
     </tr>
 <?php
