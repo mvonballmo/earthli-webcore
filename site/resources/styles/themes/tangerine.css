@@ -1492,8 +1492,8 @@ table.panels td {
   -ms-flex-grow: 1;
   flex-grow: 1;
   vertical-align: top;
-  margin-right: 30px;
-  margin-bottom: 30px;
+  margin-right: 15px;
+  margin-bottom: 15px;
 }
 @media print and (orientation: portrait) {
   .grid > div {
