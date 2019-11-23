@@ -236,6 +236,33 @@ class ALBUM_CALENDAR extends BASIC_CALENDAR
             $iso_first_day = $first_day->as_iso();
             $iso_last_day = $last_day->as_iso();
             $num_pics = count($pictures);
+
+            $key_photo_for_day = $pictures[0];
+
+            foreach ($pictures as $p)
+            {
+              if ($p->is_key_photo_for_day)
+              {
+                $key_photo_for_day = $p;
+
+                break;
+              }
+            }
+
+            $url = $key_photo_for_day->thumbnail_location (Force_root_on);
+            $is_local = $url->has_local_domain ();
+            $metrics = $key_photo_for_day->thumbnail_metrics ($is_local);
+            if ($is_local)
+            {
+              $metrics->resize_to_fit (100, 75);
+            }
+            else
+            {
+              $metrics->resize (100, 75);
+            }
+
+            ?><a href="view_pictures.php?<?php echo "id={$this->album->id}&amp;calendar=1&amp;first_day=$iso_first_day&amp;last_day=$iso_last_day"; ?>"><?php echo $metrics->as_html_without_link ($key_photo_for_day->title_as_plain_text ()); ?></a><?php
+
             ?>
             <a href="view_pictures.php?<?php echo "id={$this->album->id}&amp;calendar=1&amp;first_day=$iso_first_day&amp;last_day=$iso_last_day"; ?>"><?php echo "$num_pics pictures"; ?></a>
           <?php
@@ -243,6 +270,25 @@ class ALBUM_CALENDAR extends BASIC_CALENDAR
           else
           {
             $picture = $pictures [0];
+
+            $url = $picture->thumbnail_location (Force_root_on);
+            $is_local = $url->has_local_domain ();
+            $metrics = $picture->thumbnail_metrics ($is_local);
+            if ($is_local)
+            {
+              $metrics->resize_to_fit (100, 75);
+            }
+            else
+            {
+              $metrics->resize (100, 75);
+            }
+
+////            $t = $picture->title_formatter();
+////            $t->add_argument('calendar', '1');
+////            $t->text = $metrics->as_html_without_link ($picture->title_as_plain_text ());
+//
+//            echo $picture->title_as_link($t);
+
             $t = $picture->title_formatter();
             $t->add_argument('calendar', '1');
             echo $picture->title_as_link($t);

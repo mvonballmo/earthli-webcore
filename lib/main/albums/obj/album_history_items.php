@@ -63,6 +63,7 @@ class PICTURE_HISTORY_ITEM extends ENTRY_HISTORY_ITEM
 
     $this->_record_time_difference ('Date', $orig->date, $new->date);
     $this->_record_string_difference ('File name', $orig->file_name, $new->file_name);
+    $this->_record_boolean_difference ('Key photo for day', $orig->is_key_photo_for_day, $new->is_key_photo_for_day);
   }
 }
 

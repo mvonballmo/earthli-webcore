@@ -61,6 +61,13 @@ class PICTURE extends ALBUM_ENTRY
   public $file_name;
 
   /**
+   * A value indicating whether this picture represents the key photo for this day in the calendar.
+   *
+   * @var bool
+   */
+  public $is_key_photo_for_day;
+
+  /**
    * Return the path to the picture as a URL.
    * @param boolean $force_root If set to {@link Force_root_on}, returns a fully
    * resolved URL.
@@ -201,6 +208,7 @@ class PICTURE extends ALBUM_ENTRY
   {
     parent::load ($db);
     $this->file_name = $db->f ('file_name');
+    $this->is_key_photo_for_day = $db->f ('is_key_photo_for_day');
   }
 
   /**
@@ -210,6 +218,7 @@ class PICTURE extends ALBUM_ENTRY
   {
     parent::store_to ($storage);
     $storage->add ($this->secondary_table_name (), 'file_name', Field_type_string, $this->file_name);
+    $storage->add ($this->secondary_table_name (), 'is_key_photo_for_day', Field_type_boolean, $this->is_key_photo_for_day);
   }
 
   /**

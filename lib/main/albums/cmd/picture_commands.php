@@ -92,5 +92,14 @@ class PICTURE_COMMANDS extends ENTRY_COMMANDS
     $cmd->executable = $this->login->is_allowed (Privilege_set_folder, Privilege_modify, $entry->parent_folder());
     $cmd->importance = Command_importance_high;
     $this->append ($cmd);
+
+    $cmd = $this->make_command ();
+    $cmd->id = 'make_key_photo_for_day';
+    $cmd->caption = 'Make Key Photo for Day';
+    $cmd->link = "make_key_photo_for_day.php?id=$entry->id&last_page=$last_page";
+    $cmd->icon = '{icons}buttons/password';
+    $cmd->executable = $this->login->is_allowed (Privilege_set_folder, Privilege_modify, $entry->parent_folder());
+    $cmd->importance = Command_importance_high;
+    $this->append ($cmd);
   }
 }
