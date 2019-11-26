@@ -246,7 +246,7 @@ class PAGE_RENDERER extends WEBCORE_OBJECT
         if ($script)
         {
 ?>
-  <script async src="<?php echo $script; ?>"></script>
+  <script src="<?php echo $script; ?>"></script>
 <?php
         }
       }
