@@ -288,6 +288,13 @@ class OBJECT_RENDERER_OPTIONS
   public $right_margin = 80;
 
   /**
+   * A value indicating whether to show only minimal details.
+   *
+   * @var bool
+   */
+  public $minimal = false;
+
+  /**
    * Load values from the HTTP request.
    */
   public function load_from_request ()
@@ -296,5 +303,6 @@ class OBJECT_RENDERER_OPTIONS
     $this->show_users = read_var ('show_users', $this->show_users);
     $this->show_as_summary = read_var ('show_as_summary', $this->show_as_summary);
     $this->right_margin = read_var ('right_margin', $this->right_margin);
+    $this->minimal = read_var ('minimal', $this->minimal);
   }
 }
