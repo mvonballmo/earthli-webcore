@@ -110,7 +110,7 @@ class LOCATION_MENU extends MENU
         $t->add_arguments ($page_args);
       }
       
-      $this->prepend ($parent->title_as_link ($t), '', $parent->icon_url);
+      $this->prepend ($t->text, $t->as_url(), $parent->icon_url);
 
       if ($include_parents)
       {
@@ -161,7 +161,8 @@ class LOCATION_MENU extends MENU
     {
       $t->add_arguments ($page_args);
     }
-    $this->append ($obj->title_as_link ($t), '', $icon);
+
+    $this->append ($t->text, $t->as_url(), '', $icon);
   }
 
   /**

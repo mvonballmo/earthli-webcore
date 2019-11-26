@@ -153,8 +153,18 @@ class TITLE_FORMATTER extends WEBCORE_OBJECT
    */
   public function as_html_link ()
   {
-    $page = htmlspecialchars ($this->_page ());
+    $page = $this->as_url();
     return $this->_make_html_tag ("<a href=\"$page\"", '</a>');
+  }
+
+  /**
+   * Return the formatted URL.
+   *
+   * @return string
+   */
+  public function as_url ()
+  {
+    return htmlspecialchars ($this->_page ());
   }
 
   /**
