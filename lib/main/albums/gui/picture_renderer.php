@@ -97,7 +97,7 @@ class PICTURE_RENDERER extends ENTRY_RENDERER
     if ($this->_options->show_interactive)
     {
       ?>
-      <p>
+      <p class="taken-on">
         <?php echo $folder->format_date ($entry->date); ?>
       </p>
       <div class="text-flow">
