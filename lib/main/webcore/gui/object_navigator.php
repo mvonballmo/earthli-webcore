@@ -468,7 +468,7 @@ class OBJECT_NAVIGATOR extends WEBCORE_OBJECT
   private function _text_for_shortcut(string $keyName, string $event_name, UNIQUE_OBJECT $obj): string
   {
     $this->_url->replace_argument ($this->primary_key_field_name, $obj->id);
-    $href = $this->_url->as_html ();
+    $href = $this->_url->as_text ();
 
     return "
     document.addEventListener('keyup', e => { if (e.ctrlKey && e.key === '{$keyName}') { window.location = '$href' } });
