@@ -466,14 +466,14 @@ body .page .footer .footer-data + .footer-data {
   margin-right: 5px;
   margin-top: -5px;
 }
-.minimal .minimal-commands-content {
-  margin-left: 1.6em;
-}
-.minimal .button {
+.minimal .minimal-commands .menu-trigger .button {
   min-width: auto;
   min-height: auto;
   line-height: 0;
   padding: 0.2em;
+}
+.minimal .minimal-commands-content {
+  margin-left: 1.6em;
 }
 hr {
   color: transparent;
