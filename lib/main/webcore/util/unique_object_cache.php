@@ -141,9 +141,14 @@ class UNIQUE_OBJECT_CACHE extends OBJECT_CACHE
    */
   protected function _read_value ($name)
   {
-    $Result = $this->_app->storage->value ($this->_stored_name ($name));
-    $this->_record ("Read [$name] = [$Result]");
-    return $Result;
+    if ($this->storage_enabled)
+    {
+      $Result = $this->_app->storage->value ($this->_stored_name ($name));
+      $this->_record ("Read [$name] = [$Result]");
+      return $Result;
+    }
+
+    return '';
   }
 
   /**
@@ -154,14 +159,17 @@ class UNIQUE_OBJECT_CACHE extends OBJECT_CACHE
    */
   protected function _write_value ($name, $value)
   {
-    $this->_app->storage->set_value ($this->_stored_name ($name), $value);
-    $this->_record ("Wrote [$name] = [$value]");
+    if ($this->storage_enabled)
+    {
+      $this->_app->storage->set_value ($this->_stored_name ($name), $value);
+      $this->_record ("Wrote [$name] = [$value]");
+    }
   }
 
   /**
    * Record a message to a logging mechanism.
    * @param string $msg
-   * @param string $type Type of the message; see {@link Msg_type_debug_info}
+   * @param int $type Type of the message; see {@link Msg_type_debug_info}
    * @param string $channel identifier indicating the channel on which the message is sent.
    * @access private
    * @abstract
@@ -233,5 +241,3 @@ class UNIQUE_OBJECT_CACHE extends OBJECT_CACHE
    */
   protected $_iteration_db;
 }
-
-?>

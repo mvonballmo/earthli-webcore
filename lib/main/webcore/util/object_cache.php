@@ -77,6 +77,16 @@ abstract class OBJECT_CACHE extends RAISABLE
   public $window_size;
 
   /**
+   * A value indicating whether the cache will load/store to the backing store.
+   *
+   * If disabled, then the cache will always miss. Disable the cache if it's not
+   * helping or if you don't want to store to the backing store anymore.
+   *
+   * @var bool
+   */
+  public $storage_enabled;
+
+  /**
    * Total number of objects represented by this cache.
    * The cache is simply a window of objects over a (possibly) larger list. This is the number
    * of objects in the entire (virtual) list. {@link $objects_in_window} will only have {@link window_size}

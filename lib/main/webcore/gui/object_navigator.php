@@ -147,6 +147,7 @@ class OBJECT_NAVIGATOR extends WEBCORE_OBJECT
     $this->_adjust_query ($query);
     include_once ('webcore/util/unique_object_cache.php');
     $this->_context = new UNIQUE_OBJECT_CACHE ($query);
+    $this->_context->storage_enabled = false;
     $this->_query = $query;
   }
 
