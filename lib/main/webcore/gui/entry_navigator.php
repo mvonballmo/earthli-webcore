@@ -69,6 +69,11 @@ class ENTRY_NAVIGATOR extends OBJECT_NAVIGATOR
   {
     $query->set_select ('entry.id, entry.title, entry.state');
   }
+
+  /**
+   * @var ENTRY
+   */
+  protected $_entry;
 }
 
 /**
@@ -91,5 +96,3 @@ class MULTI_TYPE_ENTRY_NAVIGATOR extends ENTRY_NAVIGATOR
     $query->add_select ('entry.type as entry_type');
   }
 }
-
-?>

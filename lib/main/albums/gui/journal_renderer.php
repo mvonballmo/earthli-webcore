@@ -38,6 +38,7 @@ http://www.earthli.com/software/webcore/albums
 
 /** */
 require_once ('webcore/gui/entry_renderer.php');
+require_once ('webcore/gui/location_renderer.php');
 
 /**
  * Render details for a {@link JOURNAL}.
@@ -133,6 +134,45 @@ class JOURNAL_RENDERER extends ENTRY_RENDERER
           $grid->display ();
         }
       }
+    }
+  }
+}
+
+/**
+ * Renders a location for a {@link PROJECT_ENTRY} into a {@link PAGE}.
+ * @package albums
+ * @subpackage gui
+ * @version 3.6.0
+ * @since 1.9.1
+ */
+class JOURNAL_LOCATION_RENDERER extends OBJECT_IN_FOLDER_LOCATION_RENDERER
+{
+  /**
+   * Render any parent objects to the title and location.
+   * @param PAGE $page
+   * @param RENDERABLE $obj
+   * @access private
+   */
+  protected function _add_context ($page, $obj)
+  {
+    parent::_add_context ($page, $obj);
+
+    $calendar = read_var ('calendar');
+    $first_day = read_var ('first_day');
+    $folder = $obj->parent_folder ();
+
+    if ($first_day)
+    {
+      $day = $this->app->make_date_time ($first_day, Date_time_iso);
+      $url = new URL ($this->env->url (Url_part_no_host_path));
+      $url->replace_argument ('id', $folder->id);
+      $url->replace_name_and_extension ('view_journals.php');
+      $this->page->location->append ($folder->format_date ($day), $url->as_text ());
+    }
+
+    if ($calendar)
+    {
+      $this->page->location->append ('Calendar', "view_calendar.php?id=$folder->id", '{icons}/buttons/calendar');
     }
   }
 }

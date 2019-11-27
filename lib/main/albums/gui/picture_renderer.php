@@ -179,7 +179,7 @@ class PICTURE_LOCATION_RENDERER extends OBJECT_IN_FOLDER_LOCATION_RENDERER
   /**
    * Render any parent objects to the title and location.
    * @param PAGE $page
-   * @param RENDERABLE $obj
+   * @param PICTURE $obj
    * @access private
    */
   protected function _add_context ($page, $obj)
@@ -189,11 +189,12 @@ class PICTURE_LOCATION_RENDERER extends OBJECT_IN_FOLDER_LOCATION_RENDERER
     $calendar = read_var ('calendar');
     $journal = read_var ('journal');
     $first_day = read_var ('first_day');
+    /** @var ALBUM $obj */
     $folder = $obj->parent_folder ();
 
     if ($calendar)
     {
-      $this->page->location->append ('Calendar', "view_calendar.php?id=$folder->id");
+      $this->page->location->append ('Calendar', "view_calendar.php?id=$folder->id", '{icons}/buttons/calendar');
     }
 
     if ($journal)

@@ -56,24 +56,11 @@ class JOURNAL_NAVIGATOR extends MULTI_TYPE_ENTRY_NAVIGATOR
    */
   protected function _adjust_query ($query)
   {
-    $calendar = read_var ('calendar');
     $first_day = read_var ('first_day');
     $last_day = read_var ('last_day');
-    $folder = $this->_entry->parent_folder ();
-
-    if ($calendar)
-    {
-      $this->page->location->append ("Calendar", "view_calendar.php?id=$folder->id");
-    }
 
     if ($first_day)
     {
-      $day = $this->app->make_date_time ($first_day, Date_time_iso);
-      $url = new URL ($this->env->url (Url_part_no_host_path));
-      $url->replace_argument ('id', $folder->id);
-      $url->replace_name_and_extension ('view_journals.php');
-      $this->page->location->append ($folder->format_date ($day), $url->as_text ());
-
       $query->set_days ($first_day, $last_day);
     }
 
@@ -82,5 +69,3 @@ class JOURNAL_NAVIGATOR extends MULTI_TYPE_ENTRY_NAVIGATOR
     parent::_adjust_query ($query);
   }
 }
-
-?>

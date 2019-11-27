@@ -238,7 +238,7 @@ class JOURNAL extends ALBUM_ENTRY
     {
       case Handler_navigator:
         include_once ('albums/gui/journal_navigator.php');
-        return new JOURNAL_NAVIGATOR ($this, $options);
+        return new JOURNAL_NAVIGATOR ($this);
       case Handler_print_renderer:
       case Handler_html_renderer:
       case Handler_text_renderer:
@@ -253,6 +253,9 @@ class JOURNAL extends ALBUM_ENTRY
       case Handler_associated_data:
         include_once ('albums/gui/journal_renderer.php');
         return new JOURNAL_ASSOCIATED_DATA_RENDERER ($this->app, $options);
+      case Handler_location:
+        include_once ('albums/gui/journal_renderer.php');
+        return new JOURNAL_LOCATION_RENDERER ($this->context);
       default:
         return parent::_default_handler_for ($handler_type, $options);
     }

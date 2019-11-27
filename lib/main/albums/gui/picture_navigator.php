@@ -83,5 +83,3 @@ class PICTURE_NAVIGATOR extends MULTI_TYPE_ENTRY_NAVIGATOR
     $query->order_by_day('ASC');    
   }
 }
-
-?>
