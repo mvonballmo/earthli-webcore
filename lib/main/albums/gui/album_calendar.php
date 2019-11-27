@@ -261,7 +261,12 @@ class ALBUM_CALENDAR extends BASIC_CALENDAR
               $metrics->resize (100, 75);
             }
 
-            ?><a href="view_pictures.php?<?php echo "id={$this->album->id}&amp;calendar=1&amp;first_day=$iso_first_day&amp;last_day=$iso_last_day"; ?>"><?php echo $metrics->as_html_without_link ($key_photo_for_day->title_as_plain_text ()); ?></a><?php
+            $t = $key_photo_for_day->title_formatter();
+            $t->add_argument('calendar', '1');
+            $t->add_argument('first_day', $iso_first_day);
+            $t->add_argument('last_day', $iso_last_day);
+
+            echo '<a href="' . $t->as_url() . '">' . $metrics->as_html_without_link ($key_photo_for_day->title_as_plain_text ()) . '</a>';
 
             ?>
             <a href="view_pictures.php?<?php echo "id={$this->album->id}&amp;calendar=1&amp;first_day=$iso_first_day&amp;last_day=$iso_last_day"; ?>"><?php echo "$num_pics pictures"; ?></a>
