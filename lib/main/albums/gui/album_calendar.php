@@ -288,8 +288,12 @@ class ALBUM_CALENDAR extends BASIC_CALENDAR
               $metrics->resize (100, 75);
             }
 
+            $iso_first_day = $first_day->as_iso();
+            $iso_last_day = $last_day->as_iso();
             $t = $picture->title_formatter();
             $t->add_argument('calendar', '1');
+            $t->add_argument('first_day', $iso_first_day);
+            $t->add_argument('last_day', $iso_last_day);
 
             echo '<a href="' . $t->as_url() . '">' . $metrics->as_html_without_link ($picture->title_as_plain_text ()) . '</a>';
 
