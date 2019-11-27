@@ -606,10 +606,11 @@ class FOLDER extends ATTACHMENT_HOST
     $this->db->logged_query ("DELETE LOW_PRIORITY FROM {$tables->subscriptions} WHERE ref_id = $this->id");
 
     $this->permissions_id = 0;
-    $this->parent_id = 0;
     $this->root_id = 0;
     
     parent::_purge ($options);
+
+    $this->parent_id = 0;
   }
 
   /**
