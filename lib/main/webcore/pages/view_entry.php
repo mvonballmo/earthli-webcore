@@ -65,6 +65,11 @@ if (isset($entry_query) && isset ($entry) && $App->login->is_allowed (Privilege_
   $mobile_option = new STORED_OPTION ($App, "mobile_mode_{$entry_info->id}");
   $mobile_mode = $mobile_option->value ();
 
+  if ($mobile_mode === null)
+  {
+    $mobile_mode = isset($mobile_mode_default) ? $mobile_mode_default : 0;
+  }
+
   $Page->add_script_file ('{scripts}swiped-events.min.js');
 
   if (!$mobile_mode)
