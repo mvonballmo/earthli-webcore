@@ -950,7 +950,7 @@ class ARRAY_FIELD extends FIELD
     parent::validate ($form);
     if ($this->continue_validating ($form))
     {
-      $size = sizeof ($this->_value);
+      $size = is_array ($this->_value) ? sizeof ($this->_value) : 0;
       if (isset ($this->min_values))
       {
         if (isset ($this->max_values))
