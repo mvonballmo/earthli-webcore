@@ -92,9 +92,6 @@ class ALBUM_GRID extends FOLDER_GRID
       <h3>
         <?php echo $obj->title_as_link(); ?>
       </h3>
-      <p>
-        <a href="view_folder.php?<?php echo "id=$obj->id"; ?>"><?php echo $obj->title; ?></a>
-      </p>
     <?php
       $this->_display_finish_minimal_commands_block();
     }
