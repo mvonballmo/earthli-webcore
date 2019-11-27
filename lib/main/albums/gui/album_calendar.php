@@ -283,14 +283,11 @@ class ALBUM_CALENDAR extends BASIC_CALENDAR
               $metrics->resize (100, 75);
             }
 
-////            $t = $picture->title_formatter();
-////            $t->add_argument('calendar', '1');
-////            $t->text = $metrics->as_html_without_link ($picture->title_as_plain_text ());
-//
-//            echo $picture->title_as_link($t);
-
             $t = $picture->title_formatter();
             $t->add_argument('calendar', '1');
+
+            echo '<a href="' . $t->as_url() . '">' . $metrics->as_html_without_link ($picture->title_as_plain_text ()) . '</a>';
+
             echo $picture->title_as_link($t);
           }
         }
