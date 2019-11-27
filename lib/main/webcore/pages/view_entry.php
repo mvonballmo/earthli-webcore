@@ -132,6 +132,14 @@ if (isset($entry_query) && isset ($entry) && $App->login->is_allowed (Privilege_
       else
       {
         echo '<div class="button-content">';
+
+        $icon = '{icons}indicators/high_green';
+        $caption = 'Mobile Mode';
+
+        $mobile_mode_link = $mobile_option->setter_url_as_html (!$mobile_mode);
+
+        ?><a href="<?php echo $mobile_mode_link; ?>"
+             class="button"><?php echo $Page->get_icon_with_text ($icon, Sixteen_px, $caption); ?></a><?php
       }
 
       /** @var $command_renderer MENU_RENDERER */
