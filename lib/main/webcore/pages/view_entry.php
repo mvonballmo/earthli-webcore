@@ -230,29 +230,26 @@ if (isset($entry_query) && isset ($entry) && $App->login->is_allowed (Privilege_
           ?>
         </h1>
       </div>
-
-      <?php
-      /** @var $object_renderer OBJECT_RENDERER */
-      $object_renderer = $entry->handler_for (Handler_html_renderer);
-      $options = new OBJECT_RENDERER_OPTIONS();
-      $options->minimal = true;
-      $object_renderer->display ($entry, $options);
-
-      /** @var $associated_data ENTRY_ASSOCIATED_DATA_RENDERER */
-      $associated_data = $entry->handler_for (Handler_associated_data);
-      if (isset ($associated_data))
-      {
-        ?>
-        <div class="clear-both">
-          <?php
-          $associated_data->display ($entry);
-          ?>
-        </div>
-        <?php
-      }
-      ?>
     </div>
     <?php
+    /** @var $object_renderer OBJECT_RENDERER */
+    $object_renderer = $entry->handler_for (Handler_html_renderer);
+    $options = new OBJECT_RENDERER_OPTIONS();
+    $options->minimal = true;
+    $object_renderer->display ($entry, $options);
+
+    /** @var $associated_data ENTRY_ASSOCIATED_DATA_RENDERER */
+    $associated_data = $entry->handler_for (Handler_associated_data);
+    if (isset ($associated_data))
+    {
+      ?>
+      <div class="clear-both">
+        <?php
+        $associated_data->display ($entry);
+        ?>
+      </div>
+      <?php
+    }
   }
   $Page->finish_display ();
 }
