@@ -72,7 +72,7 @@ class ALBUM_GRID extends FOLDER_GRID
       $pic_title = $main_pic->title_as_plain_text() . " (" . $obj->format_date($main_pic->date, $f) . ")";
       ?>
       <h3>
-        <?php echo $obj->title_as_html(); ?>
+        <?php echo $obj->title_as_link(); ?>
       </h3>
       <?php
       $this->_display_start_overlay_commands($obj);
