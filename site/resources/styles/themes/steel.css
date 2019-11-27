@@ -462,8 +462,18 @@ body .page .footer .footer-data + .footer-data {
   right: 15px;
 }
 .minimal .minimal-commands {
-  margin-top: 0;
   margin-bottom: 5px;
+  margin-right: 5px;
+  margin-top: -5px;
+}
+.minimal .minimal-commands-content {
+  margin-left: 1.6em;
+}
+.minimal .button {
+  min-width: auto;
+  min-height: auto;
+  line-height: 0;
+  padding: 0.2em;
 }
 hr {
   color: transparent;
@@ -2185,7 +2195,7 @@ input[type=submit] {
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
-  padding: .4em;
+  padding: 0.4em;
   text-decoration: none;
   cursor: pointer;
   border: 1px solid #6c7a8d;
