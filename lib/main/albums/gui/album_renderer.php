@@ -65,7 +65,7 @@ class ALBUM_RENDERER extends FOLDER_RENDERER
     ?>
     <div>
       <p>
-        <img src="<?php echo $main_pic->full_thumbnail_name (); ?>" alt="<?php echo $pic_title; ?>" title="<?php echo $pic_title; ?>">
+        <a href="<?php echo $main_pic->home_page () ?>"><img src="<?php echo $main_pic->full_thumbnail_name (); ?>" alt="<?php echo $pic_title; ?>" title="<?php echo $pic_title; ?>"></a>
       </p>
     </div>
     <?php
