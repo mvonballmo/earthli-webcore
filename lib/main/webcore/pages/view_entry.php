@@ -219,6 +219,9 @@ if (isset($entry_query) && isset ($entry) && $App->login->is_allowed (Privilege_
           $t = $entry->title_formatter ();
           $t->max_visible_output_chars = 0;
           echo $entry->title_as_html ($t);
+
+          $counts = $navigator->counts ();
+          echo " ($counts)";
           ?>
         </h1>
       </div>

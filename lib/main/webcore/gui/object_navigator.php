@@ -196,6 +196,19 @@ class OBJECT_NAVIGATOR extends WEBCORE_OBJECT
   }
 
   /**
+   * Returns scripts for current index and total items for the selected entry.
+   * @return string
+   */
+  public function counts ()
+  {
+    if (! isset ($this->_counts))
+    {
+      $this->_generate ();
+    }
+    return $this->_counts;
+  }
+
+  /**
    * Returns a list of linked entries 'near' the selected entry.
    * @return string
    */
@@ -286,15 +299,21 @@ class OBJECT_NAVIGATOR extends WEBCORE_OBJECT
         $this->_controls .= '<span class="button disabled">' . $this->_get_button_content('last') . '</span>';
       }
 
-      $id = '';
-      if ($this->page_anchor)
-      {
-        $id = 'id="' . $this->page_anchor . '"';
-      }
-
-      $this->_controls .= '<span class="counters"' . $id . '>' . $this->_context->position_of_selected_id .
-        ' of ' . $this->_context->num_objects_in_list . $this->separator . "</span>";
+      $this->_counts = $this->_text_for_counters ();
+      $this->_controls .= $this->_counts;
     }
+  }
+
+  protected function _text_for_counters ()
+  {
+    $id = '';
+    if ($this->page_anchor)
+    {
+      $id = 'id="' . $this->page_anchor . '"';
+    }
+
+    return '<span class="counters"' . $id . '>' . $this->_context->position_of_selected_id .
+      ' of ' . $this->_context->num_objects_in_list . $this->separator . "</span>";
   }
 
   /**
@@ -463,6 +482,14 @@ class OBJECT_NAVIGATOR extends WEBCORE_OBJECT
    * @access private
    */
   protected $_controls;
+
+  /**
+   * Current and total item counts.
+   * @see ENTRY_NAVIGATOR::_generate()
+   * @var string
+   * @access private
+   */
+  protected $_counts;
 
   /**
    * Previous/next/first/last scripts.
