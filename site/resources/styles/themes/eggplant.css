@@ -726,11 +726,27 @@ h1 {
 h1 code {
   color: #B9B;
 }
+h1 a:link,
+h1 a:visited {
+  color: #B9B;
+}
+h1 a:link code,
+h1 a:visited code {
+  color: #B9B;
+}
 h2 {
   color: #B9B;
   border-bottom: 1px dotted #836b79;
 }
 h2 code {
+  color: #B9B;
+}
+h2 a:link,
+h2 a:visited {
+  color: #B9B;
+}
+h2 a:link code,
+h2 a:visited code {
   color: #B9B;
 }
 h3 {
@@ -739,16 +755,40 @@ h3 {
 h3 code {
   color: #bb99b0;
 }
+h3 a:link,
+h3 a:visited {
+  color: #bb99b0;
+}
+h3 a:link code,
+h3 a:visited code {
+  color: #bb99b0;
+}
 h4 {
   color: #bb99b0;
 }
 h4 code {
   color: #bb99b0;
 }
+h4 a:link,
+h4 a:visited {
+  color: #bb99b0;
+}
+h4 a:link code,
+h4 a:visited code {
+  color: #bb99b0;
+}
 h5 {
   color: #bb99b0;
 }
 h5 code {
+  color: #bb99b0;
+}
+h5 a:link,
+h5 a:visited {
+  color: #bb99b0;
+}
+h5 a:link code,
+h5 a:visited code {
   color: #bb99b0;
 }
 p {

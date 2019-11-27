@@ -727,11 +727,27 @@ h1 {
 h1 code {
   color: black;
 }
+h1 a:link,
+h1 a:visited {
+  color: black;
+}
+h1 a:link code,
+h1 a:visited code {
+  color: black;
+}
 h2 {
   color: black;
   border-bottom: 1px dotted #c7c7c7;
 }
 h2 code {
+  color: black;
+}
+h2 a:link,
+h2 a:visited {
+  color: black;
+}
+h2 a:link code,
+h2 a:visited code {
   color: black;
 }
 h3 {
@@ -740,16 +756,40 @@ h3 {
 h3 code {
   color: #000000;
 }
+h3 a:link,
+h3 a:visited {
+  color: #000000;
+}
+h3 a:link code,
+h3 a:visited code {
+  color: #000000;
+}
 h4 {
   color: #000000;
 }
 h4 code {
   color: #000000;
 }
+h4 a:link,
+h4 a:visited {
+  color: #000000;
+}
+h4 a:link code,
+h4 a:visited code {
+  color: #000000;
+}
 h5 {
   color: #000000;
 }
 h5 code {
+  color: #000000;
+}
+h5 a:link,
+h5 a:visited {
+  color: #000000;
+}
+h5 a:link code,
+h5 a:visited code {
   color: #000000;
 }
 p {
