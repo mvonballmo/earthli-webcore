@@ -202,8 +202,6 @@ if (isset($entry_query) && isset ($entry) && $App->login->is_allowed (Privilege_
         $renderer->set_size (Menu_size_minimal);
         /** @var COMMANDS $commands */
 
-        // TODO Prepare a new list of commands
-
         $quick_commands = new COMMANDS ($App);
 
         $location_commands = array_reverse ($Page->location->commands->command_list ());

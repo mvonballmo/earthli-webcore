@@ -105,7 +105,9 @@ class PICTURE_RENDERER extends ENTRY_RENDERER
       </div>
       <div class="picture">
       <?php
-        echo $metrics->as_html_no_resize($entry->title_as_plain_text (), '');
+        $metrics->was_resized = false;
+
+        echo $metrics->as_html_without_link($entry->title_as_plain_text (), '');
       ?>
       </div>
       <?php
