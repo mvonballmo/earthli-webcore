@@ -280,7 +280,7 @@ class OBJECT_NAVIGATOR extends WEBCORE_OBJECT
       {
         $this->_controls .= $this->_text_for_control ($first_object, 'first') . $this->separator;
         $this->_controls .= $this->_text_for_control ($previous_object, 'previous') . $this->separator;
-        $this->_shortcut_key_scripts .= $this->_text_for_shortcut('PageUp', 'swiped-right', $previous_object);
+        $this->_shortcut_key_scripts .= $this->_text_for_shortcut('ArrowLeft', 'swiped-right', $previous_object);
       }
       else
       {
@@ -292,7 +292,7 @@ class OBJECT_NAVIGATOR extends WEBCORE_OBJECT
       {
         $this->_controls .= $this->_text_for_control ($next_object, 'next') . $this->separator;
         $this->_controls .= $this->_text_for_control ($last_object, 'last');
-        $this->_shortcut_key_scripts .= $this->_text_for_shortcut('PageDown', 'swiped-left', $next_object);
+        $this->_shortcut_key_scripts .= $this->_text_for_shortcut('ArrowRight', 'swiped-left', $next_object);
       }
       else
       {
@@ -471,7 +471,7 @@ class OBJECT_NAVIGATOR extends WEBCORE_OBJECT
     $href = $this->_url->as_text ();
 
     return "
-    document.addEventListener('keyup', e => { if (e.ctrlKey && e.key === '{$keyName}') { window.location = '$href' } });
+    document.addEventListener('keyup', e => { console.log(e); if (e.key === '{$keyName}') { window.location = '$href' } });
     document.addEventListener('{$event_name}', e => window.location = '$href');
     ";
   }
