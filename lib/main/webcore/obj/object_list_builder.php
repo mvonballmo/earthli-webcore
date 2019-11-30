@@ -157,7 +157,8 @@ class OBJECT_LIST_BUILDER extends WEBCORE_OBJECT
       $this->folders = $folder_query->objects_at_ids ($this->_folder_ids);
       
       $folder_info = $this->app->type_info_for ('FOLDER');
-      $this->_contents [] = $folder_info->format_amount (sizeof ($this->folders));
+      $folder_count = is_array($this->folders) ? sizeof($this->folders) : 1;
+      $this->_contents [] = $folder_info->format_amount ($folder_count);
     }
 
     $entry_types = $this->app->entry_type_infos ();
