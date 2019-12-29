@@ -9,6 +9,7 @@
 @lead-developer-color: @base-color;
 @developer-color: #ff6361;
 @support-color: #ffa600;
+@reviewer-color: @support-color;
 
 @expert-color: #004c6d;
 @proficient-color: #6996b3;
@@ -537,6 +538,11 @@ section
   .use-background(@lead-developer-color);
 }
 
+.reviewer
+{
+  .use-background(@reviewer-color);
+}
+
 .architect
 {
   .use-background(@architect-color);
@@ -627,6 +633,11 @@ section
 .architect.developer
 {
   .two-color-diagonal-stripes(@architect-color, @developer-color);
+}
+
+.architect.reviewer
+{
+  .two-color-diagonal-stripes(@architect-color, @reviewer-color);
 }
 
 .project-manager.lead-developer.support

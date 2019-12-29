@@ -2834,6 +2834,10 @@ section table.list tr th:after {
   margin: 1px 0;
   background-color: #003f5c;
 }
+.reviewer {
+  margin: 1px 0;
+  background-color: #ffa600;
+}
 .architect {
   margin: 1px 0;
   background-color: #bc5090;
@@ -2869,6 +2873,9 @@ section table.list tr th:after {
 }
 .architect.developer {
   background: repeating-linear-gradient(-45deg, #bc5090, #bc5090 10px, #ff6361 10px, #ff6361 20px);
+}
+.architect.reviewer {
+  background: repeating-linear-gradient(-45deg, #bc5090, #bc5090 10px, #ffa600 10px, #ffa600 20px);
 }
 .project-manager.lead-developer.support {
   background: repeating-linear-gradient(-45deg, #58508d, #58508d 10px, #003f5c 10px, #003f5c 20px, #ffa600 20px, #ffa600 30px);
