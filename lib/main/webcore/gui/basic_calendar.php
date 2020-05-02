@@ -73,6 +73,7 @@ class BASIC_CALENDAR extends CALENDAR
       {
 ?>
       <td class="cell-highlight">
+        <?php echo $day; ?>
         <?php echo $content; ?>
       </td>
 <?php
