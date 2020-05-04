@@ -225,6 +225,16 @@ class ALBUM extends FOLDER
     return $url->as_text ();
   }
 
+  public function social_image_url()
+  {
+    $picture = $this->main_picture ();
+
+    if ($picture)
+    {
+      return $picture->full_file_name (true);
+    }
+  }
+
   /**
    * The picture used to represent this album.
    * May be empty.

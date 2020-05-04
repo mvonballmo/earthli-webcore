@@ -87,6 +87,12 @@ class PAGE extends CONTEXT
   public $refresh_options;
 
   /**
+   * Controls the meta tags for social data.
+   * @var PAGE_SOCIAL_OPTIONS
+   */
+  public $social_options;
+
+  /**
    * Controls the formatting of the page template.
    * @var PAGE_TEMPLATE_OPTIONS
    * @see DEFAULT_PAGE_TEMPLATE
@@ -184,6 +190,7 @@ class PAGE extends CONTEXT
     $this->icon_options = new PAGE_ICON_OPTIONS ($this);
     $this->refresh_options = new PAGE_REFRESH_OPTIONS ($this);
     $this->newsfeed_options = new PAGE_NEWSFEED_OPTIONS ($this);
+    $this->social_options = new PAGE_SOCIAL_OPTIONS ($this);
   }
 
   /**

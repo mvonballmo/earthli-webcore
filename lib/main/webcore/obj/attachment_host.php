@@ -80,6 +80,18 @@ abstract class ATTACHMENT_HOST extends OBJECT_IN_FOLDER
     return $this->_attachment_query;
   }
 
+  public function social_image_url()
+  {
+    // TODO Consider adding a "preferred" attachment flag
+
+    /** @var ATTACHMENT[] $attachments */
+    $attachments = $this->attachment_query ()->objects ();
+    if (count($attachments) > 0)
+    {
+      return $attachments[0]->full_url (true);
+    }
+  }
+
   /**
    * Expand all folder aliases and return a usable URL.
    * @param string $url

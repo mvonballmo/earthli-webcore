@@ -107,8 +107,8 @@ class THEMED_PAGE_RENDERER extends PAGE_RENDERER
     $icon_folder = $page->path_to (Folder_name_icons);
 ?>
   <script>
-    var image_path = "<?php echo $icon_folder; ?>";
-    var image_extension = "<?php echo $page->extension_for_alias (Folder_name_icons); ?>";
+    const image_path = "<?php echo $icon_folder; ?>";
+    const image_extension = "<?php echo $page->extension_for_alias (Folder_name_icons); ?>";
   </script>
   <script src="<?php echo "{$script_folder}webcore_base.js"; ?>"></script>
 <?php

@@ -113,6 +113,7 @@ class PAGE_RENDERER extends WEBCORE_OBJECT
     $this->page->icon_options->display ();
     $this->page->newsfeed_options->display ();
     $this->page->refresh_options->display ();
+    $this->page->social_options->display ();
     $this->display_styles_and_scripts ();
   }
 

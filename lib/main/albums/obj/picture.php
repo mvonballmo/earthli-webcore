@@ -201,6 +201,11 @@ class PICTURE extends ALBUM_ENTRY
     return $Result;
   }
 
+  public function social_image_url()
+  {
+    return $this->full_file_name (true);
+  }
+
   /**
    * @param DATABASE $db
    */

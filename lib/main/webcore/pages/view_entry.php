@@ -49,6 +49,34 @@ if (isset($entry_query) && isset ($entry) && $App->login->is_allowed (Privilege_
   $App->set_referer ();
   $App->set_search_text (read_var ('search_text'));
 
+  $Page->social_options->enabled = true;
+
+  if ($entry instanceof DRAFTABLE_ENTRY)
+  {
+    $Page->social_options->publication_time = $entry->time_published;
+    $Page->social_options->author = $entry->publisher ()->title;
+  }
+  else
+  {
+    $Page->social_options->publication_time = $entry->time_created;
+    $Page->social_options->author = $entry->creator ()->title;
+  }
+
+  $Page->social_options->title = $entry->title_as_plain_text ();
+
+  $munger = $entry->plain_text_formatter ();
+  $munger->max_visible_output_chars = 200;
+  $munger->force_paragraphs = false;
+
+  $Page->social_options->description = $entry->description_as_plain_text ($munger);
+  $Page->social_options->modification_time = $entry->time_created;
+
+  $social_image_url = $entry->social_image_url();
+  if ($social_image_url !== '')
+  {
+    $Page->social_options->image = $social_image_url;
+  }
+
   $entry_info = $entry->type_info ();
 
   /** @var $location_renderer LOCATION_RENDERER */
