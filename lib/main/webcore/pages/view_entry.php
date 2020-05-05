@@ -50,6 +50,7 @@ if (isset($entry_query) && isset ($entry) && $App->login->is_allowed (Privilege_
   $App->set_search_text (read_var ('search_text'));
 
   $Page->social_options->enabled = true;
+  $Page->social_options->url = $entry->home_page (true);
 
   if ($entry instanceof DRAFTABLE_ENTRY)
   {
