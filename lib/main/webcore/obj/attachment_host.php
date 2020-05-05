@@ -80,15 +80,21 @@ abstract class ATTACHMENT_HOST extends OBJECT_IN_FOLDER
     return $this->_attachment_query;
   }
 
-  public function social_image_url()
+  public function set_social_options(PAGE_SOCIAL_OPTIONS $social_options)
   {
-    // TODO Consider adding a "preferred" attachment flag
-
-    /** @var ATTACHMENT[] $attachments */
-    $attachments = $this->attachment_query ()->objects ();
-    if (count($attachments) > 0)
+    $attachment = $this->get_preferred_attachment ();
+    if (isset($attachment))
     {
-      return $attachments[0]->full_url (true);
+      $social_options->image = $attachment->full_url (true);
+
+      $class_name = $this->app->final_class_name ('IMAGE_METRICS', 'webcore/util/image.php');
+      /** @var $metrics IMAGE_METRICS */
+      $metrics = new $class_name ();
+      $metrics->set_url ($social_options->image);
+      if ($metrics->loaded ())
+
+      $social_options->image_width = $metrics->original_width;
+      $social_options->image_height = $metrics->original_height;
     }
   }
 
@@ -147,6 +153,24 @@ abstract class ATTACHMENT_HOST extends OBJECT_IN_FOLDER
     
     parent::_purge ($options);
   }
+
+  /**
+   * @return ATTACHMENT|null
+   */
+  protected function get_preferred_attachment()
+  {
+    // TODO Consider adding a "preferred" attachment flag
+
+    /** @var ATTACHMENT[] $attachments */
+    $attachments = $this->attachment_query ()->objects ();
+    if (count($attachments) > 0)
+    {
+      return $attachments[0];
+    }
+
+    return null;
+  }
+
 
   /**
    * @var ATTACHMENT_QUERY

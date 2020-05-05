@@ -225,13 +225,17 @@ class ALBUM extends FOLDER
     return $url->as_text ();
   }
 
-  public function social_image_url()
+  public function set_social_options(PAGE_SOCIAL_OPTIONS $social_options)
   {
     $picture = $this->main_picture ();
 
     if ($picture)
     {
-      return $picture->full_file_name (true);
+      $metrics = $picture->metrics (false);
+
+      $social_options->image = $picture->full_file_name (true);
+      $social_options->image_width = $metrics->original_width;
+      $social_options->image_height = $metrics->original_height;
     }
   }
 
@@ -244,7 +248,11 @@ class ALBUM extends FOLDER
   {
     $pic_query = $this->entry_query ();
     $pic_query->set_type ('picture');
-    return $pic_query->object_at_id ($this->main_picture_id);
+
+    /** @var PICTURE $result */
+    $result = $pic_query->object_at_id ($this->main_picture_id);
+
+    return $result;
   }
 
   /**

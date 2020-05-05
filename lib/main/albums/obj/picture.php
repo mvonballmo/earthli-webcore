@@ -201,9 +201,13 @@ class PICTURE extends ALBUM_ENTRY
     return $Result;
   }
 
-  public function social_image_url()
+  public function set_social_options(PAGE_SOCIAL_OPTIONS $social_options)
   {
-    return $this->full_file_name (true);
+    $metrics = $this->metrics (false);
+
+    $social_options->image = $this->full_file_name (true);
+    $social_options->image_width = $metrics->original_width;
+    $social_options->image_height = $metrics->original_height;
   }
 
   /**

@@ -72,11 +72,7 @@ if (isset($entry_query) && isset ($entry) && $App->login->is_allowed (Privilege_
   $Page->social_options->description = $entry->description_as_plain_text ($munger);
   $Page->social_options->modification_time = $entry->time_created;
 
-  $social_image_url = $entry->social_image_url();
-  if ($social_image_url !== '')
-  {
-    $Page->social_options->image = $social_image_url;
-  }
+  $entry->set_social_options($Page->social_options);
 
   $entry_info = $entry->type_info ();
 

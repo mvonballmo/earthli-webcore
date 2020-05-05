@@ -181,9 +181,9 @@ abstract class OBJECT_IN_FOLDER extends CONTENT_OBJECT
     return $Result;
   }
 
-  public function social_image_url()
+  public function set_social_options(PAGE_SOCIAL_OPTIONS $social_options)
   {
-    return '';
+    // NOP
   }
 
   /**
