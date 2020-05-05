@@ -186,6 +186,8 @@ abstract class OBJECT_IN_FOLDER_QUERY extends HIERARCHICAL_QUERY
  */
 abstract class OBJECT_IN_SINGLE_FOLDER_QUERY extends OBJECT_IN_FOLDER_QUERY
 {
+  public $override_visible;
+
   /**
    * Builds a query for an object in a folder.
    * @param FOLDER $folder
@@ -203,7 +205,7 @@ abstract class OBJECT_IN_SINGLE_FOLDER_QUERY extends OBJECT_IN_FOLDER_QUERY
    */
   protected function _visible_objects_available ()
   {
-    return $this->login->is_allowed ($this->_privilege_set, Privilege_view, $this->_folder, $this->login);
+    return $this->override_visible || $this->login->is_allowed ($this->_privilege_set, Privilege_view, $this->_folder, $this->login);
   }
 
   /**

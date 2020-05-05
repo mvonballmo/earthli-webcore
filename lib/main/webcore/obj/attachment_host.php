@@ -162,7 +162,10 @@ abstract class ATTACHMENT_HOST extends OBJECT_IN_FOLDER
     // TODO Consider adding a "preferred" attachment flag
 
     /** @var ATTACHMENT[] $attachments */
-    $attachments = $this->attachment_query ()->objects ();
+    $attachment_query = $this->attachment_query ();
+    $attachment_query->override_visible = true;
+
+    $attachments = $attachment_query->objects ();
     if (count($attachments) > 0)
     {
       return $attachments[0];
@@ -178,5 +181,3 @@ abstract class ATTACHMENT_HOST extends OBJECT_IN_FOLDER
    */
   protected $_attachment_query;
 }
-
-?>
