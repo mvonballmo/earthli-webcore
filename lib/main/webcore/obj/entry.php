@@ -400,8 +400,11 @@ class DRAFTABLE_ENTRY extends ENTRY
   {
     parent::set_social_options ($social_options);
 
-    $social_options->publication_time = $this->time_published;
-    $social_options->author = $this->publisher ()->title;
+    if (!$this->unpublished ())
+    {
+      $social_options->publication_time = $this->time_published;
+      $social_options->author = $this->publisher ()->title;
+    }
   }
 
   /**
