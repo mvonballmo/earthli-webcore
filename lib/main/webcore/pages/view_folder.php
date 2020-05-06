@@ -35,20 +35,6 @@ http://www.earthli.com/software/webcore/albums
     $App->set_referer ();
 
     $Page->social_options->enabled = true;
-    $Page->social_options->url = $folder->home_page (true);
-
-    $Page->social_options->publication_time = $folder->time_created;
-    $Page->social_options->author = $folder->creator ()->title;
-
-    $Page->social_options->title = $folder->title_as_plain_text ();
-
-    $munger = $folder->plain_text_formatter ();
-    $munger->max_visible_output_chars = 200;
-    $munger->force_paragraphs = false;
-
-    $Page->social_options->description = $folder->description_as_plain_text ($munger);
-    $Page->social_options->modification_time = $folder->time_created;
-
     $folder->set_social_options($Page->social_options);
 
     /* get the folder from the folder query because the tree has

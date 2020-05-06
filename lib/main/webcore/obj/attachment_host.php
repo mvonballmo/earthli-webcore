@@ -82,6 +82,8 @@ abstract class ATTACHMENT_HOST extends OBJECT_IN_FOLDER
 
   public function set_social_options(PAGE_SOCIAL_OPTIONS $social_options)
   {
+    parent::set_social_options ($social_options);
+
     $attachment = $this->get_preferred_attachment ();
     if (isset($attachment))
     {

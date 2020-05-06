@@ -227,6 +227,8 @@ class ALBUM extends FOLDER
 
   public function set_social_options(PAGE_SOCIAL_OPTIONS $social_options)
   {
+    parent::set_social_options ($social_options);
+
     $picture = $this->main_picture ();
 
     if ($picture)

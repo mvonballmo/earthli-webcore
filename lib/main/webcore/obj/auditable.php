@@ -133,6 +133,15 @@ abstract class AUDITABLE extends UNIQUE_OBJECT
     return $this->app->user_at_id ($this->modifier_id);
   }
 
+  public function set_social_options(PAGE_SOCIAL_OPTIONS $social_options)
+  {
+    parent::set_social_options ($social_options);
+
+    $social_options->publication_time = $this->time_created;
+    $social_options->modification_time = $this->time_modified;
+    $social_options->author = $this->creator ()->title;
+  }
+
   /**
    * Title for an associated history item.
    * Override this function to show other information for an history item's object in the title. The subscriber

@@ -203,6 +203,8 @@ class PICTURE extends ALBUM_ENTRY
 
   public function set_social_options(PAGE_SOCIAL_OPTIONS $social_options)
   {
+    parent::set_social_options ($social_options);
+
     $metrics = $this->metrics (false);
 
     $social_options->image = $this->full_file_name (true);

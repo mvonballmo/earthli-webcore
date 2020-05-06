@@ -396,6 +396,14 @@ class DRAFTABLE_ENTRY extends ENTRY
     $storage->add ($tname, 'publisher_id', Field_type_integer, $this->publisher_id);
   }
 
+  public function set_social_options (PAGE_SOCIAL_OPTIONS $social_options)
+  {
+    parent::set_social_options ($social_options);
+
+    $social_options->publication_time = $this->time_published;
+    $social_options->author = $this->publisher ()->title;
+  }
+
   /**
    * State of item when created.
    * @return string

@@ -278,6 +278,12 @@ abstract class NAMED_OBJECT extends STORABLE
     return $this->title_as_plain_text ($formatter);
   }
 
+  public function set_social_options(PAGE_SOCIAL_OPTIONS $social_options)
+  {
+    $social_options->url = $this->home_page (true);
+    $social_options->title = $this->title_as_plain_text ();
+  }
+
   /**
    * Transform a text for this object into HTML.
    * If no specific munger is provided, the one from {@link NAMED_OBJECT::html_formatter()} is used.

@@ -181,11 +181,6 @@ abstract class OBJECT_IN_FOLDER extends CONTENT_OBJECT
     return $Result;
   }
 
-  public function set_social_options(PAGE_SOCIAL_OPTIONS $social_options)
-  {
-    // NOP
-  }
-
   /**
    * Reroutes unhandled folder aliases through the {@link FOLDER}.
    * @param string $url

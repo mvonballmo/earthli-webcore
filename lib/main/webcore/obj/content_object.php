@@ -89,6 +89,22 @@ abstract class CONTENT_OBJECT extends AUDITABLE
     return $this->title;
   }
 
+  public function set_social_options(PAGE_SOCIAL_OPTIONS $social_options)
+  {
+    parent::set_social_options ($social_options);
+
+    $munger = $this->context->body_stripper ();
+    $text = $munger->strip ($this->description);
+    $truncated_text = substr ($text, 0, 200);
+
+    if (strlen ($truncated_text) < strlen ($text))
+    {
+      $truncated_text .= "...";
+    }
+
+    $social_options->description = $truncated_text;
+  }
+
   /**
    * @param DATABASE $db Database from which to load values.
    */
