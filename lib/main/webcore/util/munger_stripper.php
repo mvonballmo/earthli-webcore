@@ -150,12 +150,14 @@ class MUNGER_BASE_STRIPPER extends MUNGER_STRIPPER
     $this->register_known_tag ('n', true);
     $this->register_known_tag ('c', true);
     $this->register_known_tag ('hl', true);
-    $this->register_known_tag ('var', true);
-    $this->register_known_tag ('kbd', true);
-    $this->register_known_tag ('dfn', true);
-    $this->register_known_tag ('abbr', true);
-    $this->register_known_tag ('cite', true);
-    $this->register_known_tag ('macro', false);
+    $this->register_known_tag ('del', true);  // deleted text
+    $this->register_known_tag ('var', true);  // program variables
+    $this->register_known_tag ('kbd', true);  // keyboard input
+    $this->register_known_tag ('dfn', true);  // defining instance of a term
+    $this->register_known_tag ('abbr', true); // abbreviation
+    $this->register_known_tag ('cite', true); // citations of other sources
+    $this->register_known_tag ('sub', true);  // subscript
+    $this->register_known_tag ('sup', true);  // superscript
   }
 }
 
@@ -169,3 +171,45 @@ class MUNGER_BASE_STRIPPER extends MUNGER_STRIPPER
 class MUNGER_DEFAULT_TITLE_STRIPPER extends MUNGER_BASE_STRIPPER
 {
 }
+
+/**
+ * Default stripper for {@link HTML_MUNGER} and {@link PLAIN_TEXT_MUNGER}.
+ * @package webcore
+ * @subpackage text
+ * @version 3.6.0
+ * @since 3.2.0
+ */
+class MUNGER_DEFAULT_DESCRIPTION_STRIPPER extends MUNGER_BASE_STRIPPER
+{
+  public function __construct ()
+  {
+    parent::__construct ();
+
+    $this->register_known_tag ('a', true);
+    $this->register_known_tag ('h', true);
+    $this->register_known_tag ('div', true);
+    $this->register_known_tag ('info', true);
+    $this->register_known_tag ('warning', true);
+    $this->register_known_tag ('error', true);
+    $this->register_known_tag ('pre', true);
+    $this->register_known_tag ('box', true);
+    $this->register_known_tag ('code', true);
+    $this->register_known_tag ('iq', true);
+    $this->register_known_tag ('shell', true);
+    $this->register_known_tag ('bq', true);
+    $this->register_known_tag ('pullquote', true);
+    $this->register_known_tag ('abstract', true);
+    $this->register_known_tag ('ul', true);
+    $this->register_known_tag ('dl', true);
+    $this->register_known_tag ('ol', true);
+    $this->register_known_tag ('ft', true);
+    $this->register_known_tag ('fn', false);
+    $this->register_known_tag ('hr', false);
+    $this->register_known_tag ('anchor', false);
+    $this->register_known_tag ('img', false);
+    $this->register_known_tag ('media', false);
+    $this->register_known_tag ('page', false);
+    $this->register_known_tag ('clear', false);
+    $this->register_known_tag ('macro', false);
+  }}
+

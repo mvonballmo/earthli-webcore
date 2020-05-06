@@ -332,7 +332,17 @@ class CONTEXT extends RESOLVER
    */
   public function title_stripper ()
   {
-    return $this->make_object ('munger_strpper', 'MUNGER_DEFAULT_TITLE_STRIPPER', 'webcore/util/munger_stripper.php');
+    return $this->make_object ('munger_title_stripper', 'MUNGER_DEFAULT_TITLE_STRIPPER', 'webcore/util/munger_stripper.php');
+  }
+
+  /**
+   * Customizable tag stripper.
+   * This is specialized for stripping titles of tags.
+   * @return MUNGER_STRIPPER
+   */
+  public function body_stripper ()
+  {
+    return $this->make_object ('munger_body_stripper', 'MUNGER_DEFAULT_DESCRIPTION_STRIPPER', 'webcore/util/munger_stripper.php');
   }
 
   /**
