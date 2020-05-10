@@ -256,7 +256,7 @@ class PAGE_SOCIAL_OPTIONS
       <meta property="og:url" content="<?php echo $this->url ?>" />
       <meta property="og:title" content="<?php echo $this->title ?>" />
       <meta property="og:type" content="<?php echo $this->type ?>" />
-      <meta property="og:description" content="<?php echo $this->description ?>" />
+      <meta property="og:description" content="<?php echo htmlentities ($this->description) ?>" />
       <meta property="article:author" content="<?php echo $this->author ?>" />
       <meta property="article:published_time" content="<?php echo $this->publication_time->format ($this->formatter) ?>" />
       <meta property="article:modified_time" content="<?php echo $this->modification_time->format ($this->formatter) ?>" />
