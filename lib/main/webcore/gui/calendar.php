@@ -72,6 +72,10 @@ abstract class CALENDAR extends WEBCORE_OBJECT
    * The number of years to display in the pager.
    * @var int */
   public $num_years;
+  /**
+   * @var PAGE_NAVIGATOR
+   */
+  public $pager;
 
   /**
    * @param APPLICATION $context Main application.
@@ -81,7 +85,7 @@ abstract class CALENDAR extends WEBCORE_OBJECT
     parent::__construct ($context);
 
     include_once ('webcore/gui/page_navigator.php');
-    $this->pager = new PAGE_NAVIGATOR ($context);
+    $this->pager = new PAGE_NAVIGATOR ($context, 0, 0, true);
     $this->pager->pages_to_show = 5;
   }
 

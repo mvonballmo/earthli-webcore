@@ -156,14 +156,23 @@ class PAGE_NAVIGATOR extends WEBCORE_OBJECT
   public $show_single_page = false;
 
   /**
+   * Gets a value indicating whether to default to the last page if no page is explicitly set.
+   * @var bool
+   */
+  public $default_to_last = false;
+
+  /**
    * @param CONTEXT $context
    * @param integer $num_total_objects Total number of objects that need to be displayed.
    * @param integer $num_objects_per_page Number of objects to show per page.
+   * @param bool $default_to_last Sets the initial value of {@link $default_to_last}
+   * @throws Exception
    */
-  public function __construct ($context, $num_total_objects = 0, $num_objects_per_page = 0)
+  public function __construct ($context, $num_total_objects = 0, $num_objects_per_page = 0, $default_to_last = false)
   {
     parent::__construct ($context);
     $this->separator = $context->display_options->page_separator;
+    $this->default_to_last = $default_to_last;
     if ($num_objects_per_page > 0)
     {
       $this->set_ranges ($num_total_objects, $num_objects_per_page);
@@ -192,7 +201,8 @@ class PAGE_NAVIGATOR extends WEBCORE_OBJECT
 
     if (! $this->page_number)
     {
-      $this->page_number = read_var ($this->page_number_var_name, 1);
+      $default_value = $this->default_to_last ? $this->_count : 1;
+      $this->page_number = read_var ($this->page_number_var_name, $default_value);
     }
 
     if ($this->page_number > $this->_count)
