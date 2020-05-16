@@ -33,7 +33,10 @@ http://www.earthli.com/software/webcore/albums
   if (isset ($folder) && $App->login->is_allowed (Privilege_set_folder, Privilege_view, $folder))
   {
     $App->set_referer ();
-    
+
+    $Page->social_options->enabled = true;
+    $folder->set_social_options($Page->social_options);
+
     $Page->title->add_object ($folder);
     $Page->title->subject = 'Calendar';
     $Page->location->add_folder_link ($folder->parent_folder (), '', 'view_calendar.php');
