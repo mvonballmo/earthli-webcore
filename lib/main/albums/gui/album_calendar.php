@@ -239,6 +239,21 @@ class ALBUM_CALENDAR extends BASIC_CALENDAR
 
             $key_photo_for_day = $pictures[0];
 
+            /** @var ALBUM $album */
+            $album = $key_photo_for_day->parent_folder ();
+            if (isset($album))
+            {
+              $album_time_interval = $album->last_day->diff ($album->first_day);
+              if ($album_time_interval->total_seconds () <= Day_seconds)
+              {
+                $main_picture = $album->main_picture ();
+                if (isset($main_picture))
+                {
+                  $key_photo_for_day = $main_picture;
+                }
+              }
+            }
+
             foreach ($pictures as $p)
             {
               if ($p->is_key_photo_for_day)

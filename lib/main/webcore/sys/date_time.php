@@ -84,6 +84,8 @@ define ('Date_time_iso', 'iso');
 
 define ('Date_time_unassigned', -1);
 
+define ('Day_seconds', 86400);
+
 /**
  * Provides formatting and conversion for {@link DATE_TIME}s.
  * @package webcore
@@ -1030,6 +1032,11 @@ class TIME_INTERVAL
   public function equals ($other)
   {
     return $this->_total_seconds == $other->_total_seconds;
+  }
+
+  public function total_seconds()
+  {
+    return $this->_total_seconds;
   }
 
   /**
