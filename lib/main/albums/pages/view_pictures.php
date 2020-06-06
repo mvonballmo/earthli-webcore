@@ -70,19 +70,25 @@ http://www.earthli.com/software/webcore/albums
     else
       $Page->location->append ("Pictures");
 
-    $Page->start_display ();
-?>
-<div class="main-box">
-  <div class="grid-content">
-  <?php
     /** @var ALBUM_ENTRY_QUERY $pic_query */
     $pic_query = $folder->entry_query ();
     $pic_query->set_type ('picture');
     $pic_query->set_days ($first_day->as_iso (), $last_day->as_iso ());
 
-    $first_day = read_var ('first_day');
-    $last_day = read_var ('last_day');
+    /** @var PICTURE $first_picture */
+    $first_picture = $pic_query->first_object ();
 
+    if ($first_picture)
+    {
+      $Page->social_options->enabled = true;
+      $first_picture->set_social_options($Page->social_options);
+    }
+
+    $Page->start_display ();
+?>
+<div class="main-box">
+  <div class="grid-content">
+  <?php
     $class_name = $Page->final_class_name ('PICTURE_GRID', 'albums/gui/picture_grid.php');
     /** @var PICTURE_GRID $grid */
     $grid = new $class_name ($Page);
