@@ -175,11 +175,43 @@ class JOURNAL extends ALBUM_ENTRY
   public function picture_query ()
   {
     $folder = $this->parent_folder ();
+    /** @var ALBUM_ENTRY_QUERY $Result */
     $Result = $folder->entry_query ();
     $Result->set_type ('picture');
     $this->adjust_query ($Result);
     return $Result;
   }
+
+  public function set_social_options(PAGE_SOCIAL_OPTIONS $social_options)
+  {
+    parent::set_social_options ($social_options);
+
+    $picture_query = $this->picture_query ();
+    $pictures = $picture_query->objects ();
+
+    /** @var PICTURE $key_photo_for_day */
+    $key_photo_for_day = $pictures[0];
+
+    foreach ($pictures as $p)
+    {
+      if ($p->is_key_photo_for_day)
+      {
+        $key_photo_for_day = $p;
+
+        break;
+      }
+    }
+
+    if ($key_photo_for_day)
+    {
+      $metrics = $key_photo_for_day->metrics (false);
+
+      $social_options->image = $key_photo_for_day->full_file_name (true);
+      $social_options->image_width = $metrics->original_width;
+      $social_options->image_height = $metrics->original_height;
+    }
+  }
+
 
   /**
    * @param DATABASE $db
