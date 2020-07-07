@@ -2657,13 +2657,14 @@ h2 {
   z-index: -1;
 }
 .text-flow .timeline .years > div {
-  flex-basis: calc(( 5  /  35 ) * 100%);
+  flex-basis: calc(( 5  /  37 ) * 100%);
   padding-left: 5px;
   border-left: 1px solid #c7c7c7;
   box-sizing: border-box;
   opacity: .6;
 }
 .text-flow .timeline .years > div:last-child {
+  flex-basis: calc(( 2  /  37 ) * 100%);
   border-right: 1px solid #c7c7c7;
 }
 .text-flow .timeline .years > div:after {
