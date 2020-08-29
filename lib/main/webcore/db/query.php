@@ -651,8 +651,7 @@ abstract class QUERY extends WEBCORE_OBJECT
     $old_count = $this->_num_records;
     $this->set_limits (0, 1);
     $objs = $this->objects ();
-    $this->first = $old_first;
-    $this->count = $old_count;
+    $this->set_limits($old_first, $old_count);
     if (! empty ($objs))
     {
       return $objs [0];
@@ -1386,6 +1385,11 @@ abstract class QUERY extends WEBCORE_OBJECT
    * @access private
    */
   protected $_object_tree;
+
+  /**
+   * @var string[]
+   */
+  private $_restrictions;
 }
 
 /**
