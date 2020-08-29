@@ -110,7 +110,7 @@ class BATCH_CREATE_PICTURES_TASK extends TASK
   public $starting_index = 1;
 
   /**
-   * @param FOLDER $folder Create pictures in this folder.
+   * @param ALBUM $folder Create pictures in this folder.
    */
   public function __construct ($folder)
   {
@@ -277,9 +277,13 @@ class BATCH_CREATE_PICTURES_TASK extends TASK
   protected $_target_directory;
 
   /**
+   * @var ALBUM
+   */
+  private $_folder;
+
+  /**
    * @var integer
    * @access private
    */
   protected $_num_pictures_imported;
 }
-?>

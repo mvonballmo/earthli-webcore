@@ -398,5 +398,3 @@ abstract class TASK extends WEBCORE_OBJECT
    */
   protected $_logger;
 }
-
-?>

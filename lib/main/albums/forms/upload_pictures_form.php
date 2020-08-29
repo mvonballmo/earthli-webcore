@@ -59,7 +59,7 @@ class UPLOAD_PICTURES_FORM extends ID_BASED_FORM
   public $button_icon = '{icons}buttons/upload';
 
   /**
-   * @param FOLDER $folder
+   * @param ALBUM $folder
    */
   public function __construct ($folder)
   {
@@ -140,6 +140,7 @@ class UPLOAD_PICTURES_FORM extends ID_BASED_FORM
   }
 
   /**
+   * @param object $obj
    * @access private
    */
   public function commit ($obj)
@@ -147,6 +148,7 @@ class UPLOAD_PICTURES_FORM extends ID_BASED_FORM
     include_once ('albums/tasks/batch_create_pictures.php');
     $task = new BATCH_CREATE_PICTURES_TASK ($this->_folder);
 
+    /** @var UPLOADED_FILE_SET $file_set */
     $file_set = $this->value_for ('zipfile');
     $file = $file_set->files [0];
     $task->archive_file_name = $file->current_name ();
@@ -217,6 +219,11 @@ class UPLOAD_PICTURES_FORM extends ID_BASED_FORM
     $renderer->draw_submit_button_row ();
     $renderer->finish ();
   }
+
+  /**
+   * @var ALBUM
+   */
+  private $_folder;
 }
 
 ?>
