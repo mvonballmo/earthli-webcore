@@ -1416,7 +1416,16 @@ class HTML_BASE_REPLACER extends MUNGER_REPLACER
     {
       if ($Result)
       {
-        $Result = rtrim($Result) . ' on ' . $date;
+        $is_year = is_numeric ($date);
+        $has_comma = strpos ($date, ",") != 0;
+
+        $separator = "on";
+        if ($is_year || !$has_comma)
+        {
+          $separator = "in";
+        }
+
+        $Result = rtrim($Result) . ' ' . $separator . ' ' . $date;
       }
       else
       {
