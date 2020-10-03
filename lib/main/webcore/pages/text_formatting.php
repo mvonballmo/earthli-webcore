@@ -152,25 +152,43 @@ http://www.earthli.com/software/webcore
           <td> - </td><td>&minus;</td>
         </tr>
         <tr>
-          <td>(S,)</td><td>&#350;</td>
-        </tr>
-        <tr>
-          <td>(s,)</td><td>&#351;</td>
-        </tr>
-        <tr>
           <td>(C,)</td><td>&Ccedil;</td>
         </tr>
         <tr>
           <td>(c,)</td><td>&ccedil;</td>
         </tr>
         <tr>
-          <td>(i-)</td><td>&#305;</td>
+          <td>(C-)</td><td>&Ccaron;</td>
+        </tr>
+        <tr>
+          <td>(c-)</td><td>&ccaron;</td>
+        </tr>
+        <tr>
+          <td>(C')</td><td>&Cacute;</td>
+        </tr>
+        <tr>
+          <td>(c')</td><td>&cacute;</td>
         </tr>
         <tr>
           <td>(g-)</td><td>&#287;</td>
         </tr>
         <tr>
+          <td>(i-)</td><td>&#305;</td>
+        </tr>
+        <tr>
           <td>(I.)</td><td>&#304;</td>
+        </tr>
+        <tr>
+          <td>(S,)</td><td>&#350;</td>
+        </tr>
+        <tr>
+          <td>(s,)</td><td>&#351;</td>
+        </tr>
+        <tr>
+          <td>(S-)</td><td>&Scaron;</td>
+        </tr>
+        <tr>
+          <td>(s-)</td><td>&scaron;</td>
         </tr>
         <tr>
           <td>(Z-)</td><td>&#381;</td>
