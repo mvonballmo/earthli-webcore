@@ -984,6 +984,7 @@ pre > code .attribute-value,
 .auto-content-caption {
   padding-top: 5px;
   display: block;
+  text-align: right;
 }
 .footnote-number {
   vertical-align: super;
