@@ -642,8 +642,10 @@ class HTML_PUNCTUATION_CONVERTER extends MUNGER_CONVERTER
     '(A\')' => '&#193;',     // Hungarian/Scottish A with stress
     '(c,)' => '&ccedil;',    // Turkish c with cedilla
     '(C,)' => '&Ccedil;',    // Turkish C with cedilla
-    '(c-)' => '&ccaron;',    // Turkish c with cedilla
-    '(C-)' => '&Ccaron;',    // Turkish C with cedilla
+    '(c-)' => '&ccaron;',    // Slavic c with caron
+    '(C-)' => '&Ccaron;',    // Slavic C with caron
+    '(c\')' => '&cacute;',   // Slavic c with acute
+    '(C\')' => '&Cacute;',   // Slavic C with acute
     '(i-)' => '&#305;',      // Turkish i without dot
     '(g-)' => '&#287;',      // Turkish g (silent)
     '(I.)' => '&#304;',      // Turkish I with dot
