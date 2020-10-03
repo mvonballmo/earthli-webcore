@@ -200,13 +200,22 @@ http://www.earthli.com/software/webcore
           <td>(-cmd)</td><td>&#8984;</td>
         </tr>
         <tr>
-          <td>(-shift)</td><td>&#8679;</td>
+          <td>(-del)</td><td>&#9003;</td>
+        </tr>
+        <tr>
+          <td>(-eject)</td><td>&#9167;</td>
+        </tr>
+        <tr>
+          <td>(-enter)</td><td>&#9166;</td>
         </tr>
         <tr>
           <td>(-opt)</td><td>&#8997;</td>
         </tr>
         <tr>
-          <td>(-eject)</td><td>&#9167;</td>
+          <td>(-shift)</td><td>&#8679;</td>
+        </tr>
+        <tr>
+          <td>(-tab)</td><td>&#8677;</td>
         </tr>
       </table>
       <p>Additionally, the following character pairs are automatically converted to
