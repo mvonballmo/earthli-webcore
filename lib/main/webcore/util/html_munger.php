@@ -642,6 +642,8 @@ class HTML_PUNCTUATION_CONVERTER extends MUNGER_CONVERTER
     '(A\')' => '&#193;',     // Hungarian/Scottish A with stress
     '(c,)' => '&ccedil;',    // Turkish c with cedilla
     '(C,)' => '&Ccedil;',    // Turkish C with cedilla
+    '(c-)' => '&ccaron;',    // Turkish c with cedilla
+    '(C-)' => '&Ccaron;',    // Turkish C with cedilla
     '(i-)' => '&#305;',      // Turkish i without dot
     '(g-)' => '&#287;',      // Turkish g (silent)
     '(I.)' => '&#304;',      // Turkish I with dot
@@ -651,6 +653,8 @@ class HTML_PUNCTUATION_CONVERTER extends MUNGER_CONVERTER
     '(O\')' => '&#336;',     // Hungarian O with double acute accent
     '(s,)' => '&#351;',      // Turkish s with cedilla
     '(S,)' => '&#350;',      // Turkish S with cedilla
+    '(S-)' => '&Scaron;',    // Slavic S with a caron
+    '(s-)' => '&scaron;',    // Slavic s with a caron
     '(Z-)' => '&#381;',      // Slavic Z with a caron
     '(z-)' => '&#382;',      // Slavic z with a caron
     '(-cmd)' => '&#8984;',   // Command-key icon for Apple
