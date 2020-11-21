@@ -312,7 +312,9 @@ abstract class NEWSFEED_RENDERER extends WEBCORE_OBJECT
     $query->set_filter (Visible);
     $this->_prepare_sort ($query);
     $class_name = $this->context->final_class_name ('TIME_FRAME_SELECTOR', 'webcore/gui/time_frame_selector.php');
+    /** @var TIME_FRAME_SELECTOR $selector */
     $selector = new $class_name ($this->context, Time_frame_recent);
+    $selector->num_in_recent = 250;
     $selector->prepare_query ($query);
   }
 

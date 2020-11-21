@@ -72,10 +72,11 @@ class NEWSFEED_ENGINE extends WEBCORE_OBJECT
     $this->format = read_var ('format', Newsfeed_format_rss);
     $this->content = read_var ('content', Newsfeed_content_html);
   }
-  
+
   /**
    * Return a newsfeed renderer for the given folder.
    * @param OBJECT_IN_FOLDER $obj
+   * @return NEWSFEED_RENDERER
    */
   public function make_renderer ($obj)
   {

@@ -27,11 +27,13 @@ http://www.earthli.com/software/webcore
 ****************************************************************************/
 
   $folder_query = $App->login->folder_query ();
+  /** @var FOLDER $folder */
   $folder = $folder_query->object_at_id ($App->root_folder_id);
 
   $class_name = $App->final_class_name ('NEWSFEED_ENGINE', 'webcore/config/newsfeed_engine.php', 'index');
+
+  /** @var NEWSFEED_ENGINE $newsfeed_engine */
   $newsfeed_engine = new $class_name ($App);
 
   $newsfeed = $newsfeed_engine->make_renderer ($folder);
   $newsfeed->display ($App->login->all_entry_query ());
-?>
