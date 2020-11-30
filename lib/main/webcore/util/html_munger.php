@@ -651,6 +651,8 @@ class HTML_PUNCTUATION_CONVERTER extends MUNGER_CONVERTER
     '(I.)' => '&#304;',       // Turkish I with dot
     '(l-)' => '&#322;',       // Polish l with a slash
     '(L-)' => '&#321;',       // Polish L with a slash
+    '(n\')' => '&nacute;',    // Hungarian n with double acute accent
+    '(N\')' => '&Nacute;',    // Hungarian N with double acute accent
     '(o\')' => '&#337;',      // Hungarian o with double acute accent
     '(O\')' => '&#336;',      // Hungarian O with double acute accent
     '(s,)' => '&#351;',       // Turkish s with cedilla
@@ -1954,6 +1956,8 @@ class HTML_MEDIA_REPLACER extends HTML_INLINE_ASSET_REPLACER
   {
     return $this->_asset_as_movie ($munger, $src, $attributes, $inner_css, $outer_css, $inner_class);
   }
+
+  // TODO Make a "youtube" tag
 
   /**
    * Return a control to display the movie.
