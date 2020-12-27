@@ -639,6 +639,7 @@ class HTML_PUNCTUATION_CONVERTER extends MUNGER_CONVERTER
     ' x ' => ' &times; ',
     ' - ' => ' &minus; ',
     '(a\')' => '&#225;',      // Hungarian/Scottish a with stress
+    '(a_)' => '&#x101;',      // Pinying a with line over it
     '(A\')' => '&#193;',      // Hungarian/Scottish A with stress
     '(c,)' => '&ccedil;',     // Turkish c with cedilla
     '(C,)' => '&Ccedil;',     // Turkish C with cedilla
@@ -659,6 +660,7 @@ class HTML_PUNCTUATION_CONVERTER extends MUNGER_CONVERTER
     '(S,)' => '&#350;',       // Turkish S with cedilla
     '(S-)' => '&Scaron;',     // Slavic S with a caron
     '(s-)' => '&scaron;',     // Slavic s with a caron
+    '(u-)' => '&#x16D;',      // Pinying u with caron
     '(Z-)' => '&#381;',       // Slavic Z with a caron
     '(z-)' => '&#382;',       // Slavic z with a caron
     '(-cmd)' => '&#8984;',    // Command-key icon for Apple
