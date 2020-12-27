@@ -140,7 +140,7 @@ abstract class PROJECT_ENTRY_RENDERER extends ENTRY_RENDERER
     if ($entry->extra_description && ! $this->_options->preferred_text_length)
     {
       echo '<h3>Extra description</h3>';
-      echo $entry->extra_description_as_html ();
+      $this->_echo_text_as_html ($entry, $entry->extra_description);
     }
   }
 
