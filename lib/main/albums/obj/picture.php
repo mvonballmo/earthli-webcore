@@ -292,23 +292,29 @@ class PICTURE extends ALBUM_ENTRY
             $new_url->replace_extension ('jpg');
           }
 
-          if (file_exists ($old_url->as_text ()))
+          $old_url_as_text = $old_url->as_text ();
+          $new_url_as_text = $new_url->as_text ();
+
+          if (file_exists ($old_url_as_text))
           {
-            ensure_path_exists ($new_folder);
-            log_message ('Moved [' . $old_url->as_text () . '] to [' . $new_url->as_text () . ']', Msg_type_debug_info, Msg_channel_system);
-            if (! rename ($old_url->as_text (), $new_url->as_text ()))
+            ensure_path_exists (dirname ($new_url_as_text));
+            log_message ('Moved [' . $old_url_as_text . '] to [' . $new_url_as_text . ']', Msg_type_debug_info, Msg_channel_system);
+            if (! rename ($old_url_as_text, $new_url_as_text))
             {
-              $this->raise ('_move_to', 'PICTURE', 'Could not move main image for [' . $this->title_as_plain_text () . '].');
+              $this->raise ('_move_to', 'PICTURE', 'Could not move main image for [' . $this->title_as_plain_text () . '] from [' . $old_url_as_text . '] to [' . $new_url_as_text . '].');
             }
           }
 
           $old_url->append_to_name (Picture_thumbnail_suffix);
           $new_url->append_to_name (Picture_thumbnail_suffix);
-          if (file_exists ($old_url->as_text ()))
+          $old_url_as_text = $old_url->as_text ();
+          $new_url_as_text = $new_url->as_text ();
+
+          if (file_exists ($old_url_as_text))
           {
-            ensure_path_exists ($new_folder);
-            log_message ('Moved [' . $old_url->as_text () . '] to [' . $new_url->as_text () . ']', Msg_type_debug_info, Msg_channel_system);
-            if (! rename ($old_url->as_text (), $new_url->as_text ()))
+            ensure_path_exists (dirname ($new_url_as_text));
+            log_message ('Moved [' . $old_url_as_text . '] to [' . $new_url_as_text . ']', Msg_type_debug_info, Msg_channel_system);
+            if (! rename ($old_url_as_text, $new_url_as_text))
             {
               $this->raise ('_move_to', 'PICTURE', 'Could not move thumbnail image for [' . $this->title_as_plain_text () . '].');
             }
