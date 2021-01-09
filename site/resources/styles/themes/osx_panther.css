@@ -363,6 +363,7 @@ body .page .footer .footer-data + .footer-data {
   -moz-flex: 1;
   -ms-flex: 1;
   flex: 1;
+  margin-top: 0;
 }
 .viewport .page .page-body .form-content form,
 .full-screen-edit .page .page-body .form-content form {
@@ -1001,7 +1002,7 @@ pre > code .attribute-value,
   font-size: 100%;
   line-height: 150%;
   margin-left: -2em;
-  margin-top: .3em;
+  margin-top: 0.3em;
 }
 .abstract {
   border-width: 1px 0;
@@ -1078,7 +1079,7 @@ pre > code .attribute-value,
   color: #C8F39C;
 }
 .unavailable {
-  opacity: 0.20;
+  opacity: 0.2;
 }
 .field {
   font-weight: bold;
@@ -2430,7 +2431,7 @@ select {
     float: left;
     width: 120px;
     margin-left: -135px;
-    margin-top: .15em;
+    margin-top: 0.15em;
   }
   .basic-form.ltr fieldset textarea:not([class]),
   .basic-form.ltr fieldset select:not([class]),
