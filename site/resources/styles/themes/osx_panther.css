@@ -2369,6 +2369,7 @@ select {
   -ms-flex: 1;
   flex: 1;
   overflow: auto;
+  padding-left: 6px;
 }
 .form-with-preview .tall {
   height: 40em;
