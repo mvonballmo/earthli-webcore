@@ -1,0 +1,18 @@
+{
+  "name": "earthli-webcore",
+  "version": "1.0.0",
+  "description": "The earthli WebCore is a fully object-oriented, open-source framework for building scalable, attractive and customizable web sites with PHP.",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "dependencies": {
+    "lessc": "^1.0.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
