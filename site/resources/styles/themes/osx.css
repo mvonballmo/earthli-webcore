@@ -930,15 +930,7 @@ pre > code .attribute-value,
 }
 @media (min-width: 500px) {
   .text-flow.wide {
-    column-width: 35em;
-    -webkit-column-width: 35em;
-    -moz-column-width: 35em;
-    column-rule: 1px solid #b8b8b8;
-    -webkit-column-rule: 1px solid #b8b8b8;
-    -moz-column-rule: 1px solid #b8b8b8;
-    column-gap: 30px;
-    -webkit-column-gap: 30px;
-    -moz-column-gap: 30px;
+    max-width: 75ex;
   }
 }
 .text-flow ul:not([class]),
