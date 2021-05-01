@@ -1987,7 +1987,7 @@ class HTML_MEDIA_REPLACER extends HTML_INLINE_ASSET_REPLACER
     $builder->add_attribute ('style', $inner_css->as_text ());
     $builder->add_attribute ('FlashVars', read_array_index ($attributes, 'args'));
 
-    return $builder->as_html () . '</embed>';
+    return $builder->as_html ();
   }
 
   /**
