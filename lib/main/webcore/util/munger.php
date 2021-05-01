@@ -810,8 +810,6 @@ class MUNGER_HTML_CONVERTER extends MUNGER_CONVERTER
       case Munger_convert_html_strict:
         $options = global_text_options();
         return $options->convert_to_html_entities($text);
-      case Munger_convert_plain_text:
-        return $text;
       default :
         return $text;
     }

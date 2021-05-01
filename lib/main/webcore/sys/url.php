@@ -142,7 +142,7 @@ class URL
    */
   public function __construct ($text)
   {
-    $this->_text = urldecode ($text);
+    $this->_text = $text;
   }
 
   /**
@@ -195,7 +195,7 @@ class URL
    */
   public function as_html ()
   {
-    return htmlentities ($this->_text);
+    return $this->_text;
   }
 
   /**
@@ -489,6 +489,9 @@ class URL
     {
       $value = 0;
     }
+
+    $value = urlencode ($value);
+
     $this->add_arguments ("$name=$value");
   }
 

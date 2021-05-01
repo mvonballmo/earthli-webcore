@@ -2196,11 +2196,6 @@ class HTML_MUNGER extends MUNGER
   public $highlighted_words = '';
 
   /**
-   * @var string
-   */
-  public $convert_mode = Munger_convert_html_strict;
-
-  /**
    * Shared instance used by {@link MUNGER_REPLACER}s and {@link MUNGER_TRANSFORMER}s.
    * @param string $name Name of the tag to start creating.
    * @return HTML_TAG_BUILDER

@@ -153,8 +153,9 @@ class TITLE_FORMATTER extends WEBCORE_OBJECT
    */
   public function as_html_link ()
   {
-    $page = $this->as_url();
-    return $this->_make_html_tag ("<a href=\"$page\"", '</a>');
+    $url = $this->as_url();
+
+    return $this->_make_html_tag ("<a href=\"$url\"", '</a>');
   }
 
   /**
@@ -252,7 +253,6 @@ class TITLE_FORMATTER extends WEBCORE_OBJECT
       {
         $title_to_use = $stripped_text . ' (' . $title_to_use . ')';
       }
-      $text_to_use = $this->context->text_options->convert_to_html_attribute ($text_to_use);
     }
     else
     {

@@ -134,6 +134,25 @@ class OBJECT_NAVIGATOR extends WEBCORE_OBJECT
 
     $this->num_entries = Unassigned;
     $this->page_link = $this->env->url (Url_part_no_host_path);
+
+    $url_components = parse_url ($this->page_link);
+
+    $path = $url_components['path'];
+    $query = $url_components['query'];
+
+    parse_str($query, $parameters);
+
+    $query_parameters = [];
+
+    foreach ($parameters as $key => $value)
+    {
+      $value = urlencode ($value);
+      array_push ($query_parameters, "$key=$value");
+    }
+
+    $query_text = join ("&", $query_parameters);
+
+    $this->page_link = "$path?$query_text";
   }
 
   /**
