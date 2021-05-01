@@ -175,7 +175,7 @@ class URL
           $equal_pos = strpos ($qs_part, '=');
           if ($equal_pos !== false)
           {
-            $new_parts [] = substr ($qs_part, 0, $equal_pos) . '=' . htmlspecialchars (substr ($qs_part, $equal_pos + 1));
+            $new_parts [] = substr ($qs_part, 0, $equal_pos) . '=' . urlencode (htmlspecialchars (substr ($qs_part, $equal_pos + 1)));
           }
           else
           {

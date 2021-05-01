@@ -99,7 +99,7 @@ class TITLE_FORMATTER extends WEBCORE_OBJECT
 
   public function add_argument ($name, $value)
   {
-    $this->add_arguments ($name . '=' . $value);
+    $this->add_arguments ($name . '=' . urlencode($value));
   }
 
   /**
