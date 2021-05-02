@@ -214,8 +214,6 @@ class DATABASE extends WEBCORE_OBJECT
     {
       $this->_connection = new mysqli($this->Host, $this->User, $this->Password, $this->Database);
 
-      mysqli_set_charset ($this->_connection, 'utf8');
-
       if ($this->_connection->connect_errno)
       {
         $msg = "Failed to connect to MySQL: (" . $this->_connection->connect_errno . ") " . $this->_connection->connect_error;
@@ -223,6 +221,8 @@ class DATABASE extends WEBCORE_OBJECT
 
         $this->_connection = null;
       }
+
+      mysqli_set_charset ($this->_connection, 'utf8mb4');
     }
 
     if (isset($this->_connection))
