@@ -142,7 +142,10 @@ class PAGE_RENDERER extends WEBCORE_OBJECT
    */
   public function display_content_type ()
   {
-    $this->display_meta_header_tag ('Content-Type', $this->page->content_type);
+    $options = $this->context->text_options;
+    $content_type = $options->convert_to_html_entities($this->page->content_type);
+
+    echo "<meta charset=\"$content_type\">\n";
   }
 
   /**

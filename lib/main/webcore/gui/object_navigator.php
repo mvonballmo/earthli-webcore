@@ -357,7 +357,7 @@ class OBJECT_NAVIGATOR extends WEBCORE_OBJECT
     $id = $obj->id;
     $t = $this->_formatter_for_object ($obj);
     $this->_url->replace_argument ($this->primary_key_field_name, $obj->id);
-    $t->location = $this->_url->as_text ();
+    $t->location = $this->_url->as_text (true);
     if ($this->page_anchor)
     {
       $t->location .= '#' . $this->page_anchor;

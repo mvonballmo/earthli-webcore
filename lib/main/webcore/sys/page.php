@@ -66,7 +66,7 @@ class PAGE extends CONTEXT
   /**
    * @var string
    */
-  public $content_type = 'text/html; charset=windows-1252';
+  public $content_type = 'utf-8';
 
   /**
    * Controls the page icon.

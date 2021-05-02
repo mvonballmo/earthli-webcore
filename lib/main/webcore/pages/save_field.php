@@ -3,6 +3,7 @@
 class TEXT_VALIDATION_ERROR
 {
   public $message;
+  public $message;
   public $line_number;
   public $column_start;
   public $column_end;
@@ -12,9 +13,7 @@ $title = read_var ('title');
 $description = read_var ('description');
 $contentObjectId = read_var ('id');
 
-$newTitle = @iconv("UTF-8", "CP1252", $title);
-$newDescription = @iconv("UTF-8", "CP1252", $description);
-
+/** @var APPLICATION $App */
 $munger = $App->html_text_formatter();
 
 $entry_query = $App->login->all_entry_query();
@@ -27,7 +26,7 @@ $formatted_text = '';
 if ($obj != null)
 {
   $tag_validator = $App->make_tag_validator (Tag_validator_multi_line);
-  $tag_validator->validate ($newDescription);
+  $tag_validator->validate ($description);
 
   $errors = array();
   if (sizeof ($tag_validator->errors))
@@ -49,15 +48,15 @@ if ($obj != null)
   else
   {
     // Store changes; only difference from preview mode
-    $obj->title = $newTitle;
-    $obj->description = $newDescription;
+    $obj->title = $title;
+    $obj->description = $description;
     $obj->store_as_is();
 
     $f = $obj->time_modified->formatter ();
     $f->type = Date_time_format_date_and_time;
     $f->clear_flags ();
 
-    $formatted_text = $munger->transform($newDescription, $obj);
+    $formatted_text = $munger->transform($description, $obj);
     $message = 'Saved at ' . $obj->time_modified->format($f) . '.';
     $message_type = 'info';
   }
