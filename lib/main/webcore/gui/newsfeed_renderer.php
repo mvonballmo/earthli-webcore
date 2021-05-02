@@ -124,7 +124,7 @@ abstract class NEWSFEED_RENDERER extends WEBCORE_OBJECT
    * The character set to use for the HTTP response.
    * @var string
    */
-  public $character_set = 'windows-1252';
+  public $character_set = 'utf-8';
 
   /**
    * @param CONTEXT $context

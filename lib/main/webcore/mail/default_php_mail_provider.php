@@ -64,7 +64,7 @@ class DEFAULT_PHP_MAIL_PROVIDER extends MAIL_PROVIDER
     $header .= $this->renderer->line ("MIME-Version: 1.0");
     if ($message->send_as_html)
     {
-      $header .= $this->renderer->line ("Content-Type: text/html; charset=windows-1252");
+      $header .= $this->renderer->line ("Content-Type: text/html; charset=utf-8");
     }
     else
     {
