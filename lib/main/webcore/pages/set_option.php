@@ -26,7 +26,7 @@ http://www.earthli.com/software/webcore
 
  ****************************************************************************/
 
-$last_page = read_array_index($_GET, 'last_page');
+$last_page = urldecode (read_array_index($_GET, 'last_page'));
 $opt_name = read_array_index($_GET, 'opt_name');
 $opt_value = read_array_index($_GET, 'opt_value');
 $opt_page_context = read_array_index($_GET, 'opt_page_context');
