@@ -3,7 +3,6 @@
 class TEXT_VALIDATION_ERROR
 {
   public $message;
-  public $message;
   public $line_number;
   public $column_start;
   public $column_end;
