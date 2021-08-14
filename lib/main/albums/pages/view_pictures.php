@@ -83,13 +83,28 @@ $folder_query = $App->login->folder_query ();
     $pic_query->set_type ('picture');
     $pic_query->set_days ($first_day->as_iso (), $last_day->as_iso ());
 
-    /** @var PICTURE $first_picture */
-    $first_picture = $pic_query->first_object ();
+    $all_pictures = $pic_query->objects ();
 
-    if ($first_picture)
+    $key_photo_for_day = null;
+
+    if (count($all_pictures) > 0)
+    {
+      $key_photo_for_day = $all_pictures[0];
+      foreach ($all_pictures as $p)
+      {
+        if ($p->is_key_photo_for_day)
+        {
+          $key_photo_for_day = $p;
+
+          break;
+        }
+      }
+    }
+
+    if ($key_photo_for_day)
     {
       $Page->social_options->enabled = true;
-      $first_picture->set_social_options($Page->social_options);
+      $key_photo_for_day->set_social_options($Page->social_options);
     }
 
     $Page->start_display ();
