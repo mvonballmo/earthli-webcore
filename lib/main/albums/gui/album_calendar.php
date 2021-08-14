@@ -283,8 +283,11 @@ class ALBUM_CALENDAR extends BASIC_CALENDAR
 
             echo '<a href="' . $t->as_url() . '">' . $metrics->as_html_without_link ($key_photo_for_day->title_as_plain_text ()) . '</a>';
 
+            $encoded_first_day = urlencode ($iso_first_day);
+            $encoded_last_day = urlencode ($iso_last_day);
+
             ?>
-            <a href="view_pictures.php?<?php echo "id={$this->album->id}&amp;calendar=1&amp;first_day=$iso_first_day&amp;last_day=$iso_last_day"; ?>"><?php echo "$num_pics pictures"; ?></a>
+            <a href="view_pictures.php?<?php echo "id={$this->album->id}&amp;calendar=1&amp;first_day=$encoded_first_day&amp;last_day=$encoded_last_day"; ?>"><?php echo "$num_pics pictures"; ?></a>
           <?php
           }
           else

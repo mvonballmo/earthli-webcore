@@ -175,7 +175,9 @@ class URL
           $equal_pos = strpos ($qs_part, '=');
           if ($equal_pos !== false)
           {
-            $new_parts [] = substr ($qs_part, 0, $equal_pos) . '=' . urlencode (htmlspecialchars (substr ($qs_part, $equal_pos + 1)));
+            $value = substr ($qs_part, $equal_pos + 1);
+            $value = urldecode ($value);
+            $new_parts [] = substr ($qs_part, 0, $equal_pos) . '=' . urlencode (htmlspecialchars ($value));
           }
           else
           {
@@ -532,7 +534,7 @@ class URL
       foreach ($pairs as $pair)
       {
         @list ($n, $v) = explode ('=', $pair);
-        $args [strtolower ($n)] = $v;
+        $args [strtolower ($n)] = urldecode ($v);
       }
 
       $this->_integrate_into_query_string ($args);

@@ -41,8 +41,14 @@ $folder_query = $App->login->folder_query ();
     $Page->title->add_object ($folder);
     $Page->location->add_folder_link ($folder);
 
-    $first_day = $App->make_date_time (read_var ('first_day'), Date_time_iso);
-    $last_day = $App->make_date_time (read_var ('last_day'), Date_time_iso);
+    $first_day = read_var ('first_day');
+    $last_day = read_var ('last_day');
+
+    $first_day = urldecode ($first_day);
+    $last_day = urldecode ($last_day);
+
+    $first_day = $App->make_date_time ($first_day, Date_time_iso);
+    $last_day = $App->make_date_time ($last_day, Date_time_iso);
     $calendar = read_var ('calendar');
     $journal_id = read_var ('journal');
     $page_number = read_var ('page_number');
