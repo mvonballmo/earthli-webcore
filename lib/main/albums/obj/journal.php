@@ -190,7 +190,10 @@ class JOURNAL extends ALBUM_ENTRY
     $pictures = $picture_query->objects ();
 
     /** @var PICTURE $key_photo_for_day */
-    $key_photo_for_day = $pictures[0];
+    if (count($pictures) > 0)
+    {
+      $key_photo_for_day = $pictures[0];
+    }
 
     foreach ($pictures as $p)
     {
