@@ -26,7 +26,8 @@ http://www.earthli.com/software/webcore/albums
 
 ****************************************************************************/
 
-  $folder_query = $App->login->folder_query ();
+/** @var APPLICATION $App */
+$folder_query = $App->login->folder_query ();
   /** @var ALBUM $folder */
   $folder = $folder_query->object_at_id (read_var ('id'));
 
@@ -36,6 +37,7 @@ http://www.earthli.com/software/webcore/albums
   {
     $App->set_referer ();
 
+    /** @var THEMED_PAGE $Page */
     $Page->title->add_object ($folder);
     $Page->location->add_folder_link ($folder);
 

@@ -29,5 +29,6 @@ http://www.earthli.com/software/webcore/albums
   require_once ('albums/start.php');
   $entry_type_id = 'picture';
   $mobile_mode_default = true;
-  require_once ($App->page_template_for ('webcore/pages/view_entry.php'));
-?>
+
+  /** @var APPLICATION $App */
+require_once ($App->page_template_for ('webcore/pages/view_entry.php'));

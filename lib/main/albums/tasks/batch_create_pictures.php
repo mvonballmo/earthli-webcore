@@ -136,6 +136,8 @@ class BATCH_CREATE_PICTURES_TASK extends TASK
   protected function _execute ()
   {
     $class_name = $this->app->final_class_name ('ARCHIVE', 'webcore/util/archive.php');
+
+    /** @var ARCHIVE $archive */
     $archive = new $class_name ($this->archive_file_name);
 
     log_open_block ('Extracting files from archive...');

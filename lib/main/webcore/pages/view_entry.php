@@ -26,6 +26,8 @@
  ****************************************************************************/
 
 $id = read_var ('id');
+
+/** @var APPLICATION $App */
 $folder_query = $App->login->folder_query ();
 $folder = $folder_query->folder_for_entry_at_id ($id);
 
@@ -49,6 +51,7 @@ if (isset($entry_query) && isset ($entry) && $App->login->is_allowed (Privilege_
   $App->set_referer ();
   $App->set_search_text (read_var ('search_text'));
 
+  /** @var THEMED_PAGE $Page */
   $Page->social_options->enabled = true;
   $entry->set_social_options($Page->social_options);
 

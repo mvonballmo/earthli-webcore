@@ -191,7 +191,7 @@ class PICTURE_LOCATION_RENDERER extends OBJECT_IN_FOLDER_LOCATION_RENDERER
     $calendar = read_var ('calendar');
     $journal = read_var ('journal');
     $first_day = read_var ('first_day');
-    /** @var ALBUM $obj */
+    /** @var ALBUM $folder */
     $folder = $obj->parent_folder ();
 
     if ($calendar)
