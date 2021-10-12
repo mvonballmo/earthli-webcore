@@ -189,9 +189,9 @@ class JOURNAL extends ALBUM_ENTRY
     $picture_query = $this->picture_query ();
     $pictures = $picture_query->objects ();
 
-    /** @var PICTURE $key_photo_for_day */
     if (count($pictures) > 0)
     {
+      /** @var PICTURE $key_photo_for_day */
       $key_photo_for_day = $pictures[0];
     }
 
@@ -205,7 +205,7 @@ class JOURNAL extends ALBUM_ENTRY
       }
     }
 
-    if ($key_photo_for_day)
+    if (isset($key_photo_for_day))
     {
       $metrics = $key_photo_for_day->metrics (false);
 
