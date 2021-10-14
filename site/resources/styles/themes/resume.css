@@ -2557,6 +2557,8 @@ select {
 }
 h2 {
   border: none;
+  border-top: 1px solid silver;
+  padding-top: 5px;
 }
 .footer {
   display: none;
@@ -2639,21 +2641,18 @@ h2 {
   padding: 0;
 }
 .text-flow .timeline .years {
-  display: flex;
   position: absolute;
   width: 100%;
   height: 100%;
   z-index: -1;
 }
 .text-flow .timeline .years > div {
-  flex-basis: calc(( 5  /  38 ) * 100%);
   padding-left: 5px;
   border-left: 1px solid #c7c7c7;
   box-sizing: border-box;
   opacity: 0.6;
 }
 .text-flow .timeline .years > div:last-child {
-  flex-basis: calc(( 2  /  38 ) * 100%);
   border-right: 1px solid #c7c7c7;
 }
 .text-flow .timeline .years > div:after {
@@ -2814,15 +2813,19 @@ section table.list tr th:after {
 }
 .support {
   margin: 1px 0;
-  background-color: #ffa600;
+  background-color: #f95d6a;
 }
 .developer {
   margin: 1px 0;
-  background-color: #ff6361;
+  background-color: #d45087;
 }
 .lead-developer {
   margin: 1px 0;
-  background-color: #003f5c;
+  background-color: #a05195;
+}
+.author {
+  margin: 1px 0;
+  background-color: #ffa600;
 }
 .reviewer {
   margin: 1px 0;
@@ -2830,15 +2833,15 @@ section table.list tr th:after {
 }
 .architect {
   margin: 1px 0;
-  background-color: #bc5090;
+  background-color: #ff7c43;
 }
 .instructor {
   margin: 1px 0;
-  background-color: #bc5090;
+  background-color: #665191;
 }
 .project-manager {
   margin: 1px 0;
-  background-color: #58508d;
+  background-color: #003f5c;
 }
 .employee {
   position: absolute;
@@ -2851,37 +2854,40 @@ section table.list tr th:after {
   background-color: #E8E8E8;
 }
 .project-manager.architect.lead-developer.support {
-  background: repeating-linear-gradient(-45deg, #bc5090, #bc5090 10px, #58508d 10px, #58508d 20px, #003f5c 20px, #003f5c 30px, #ffa600 30px, #ffa600 40px);
+  background: repeating-linear-gradient(-45deg, #ff7c43, #ff7c43 10px, #003f5c 10px, #003f5c 20px, #a05195 20px, #a05195 30px, #f95d6a 30px, #f95d6a 40px);
 }
 .project-manager.architect.lead-developer {
-  background: repeating-linear-gradient(-45deg, #bc5090, #bc5090 10px, #58508d 10px, #58508d 20px, #003f5c 20px, #003f5c 30px);
+  background: repeating-linear-gradient(-45deg, #ff7c43, #ff7c43 10px, #003f5c 10px, #003f5c 20px, #a05195 20px, #a05195 30px);
 }
 .project-manager.architect.developer {
-  background: repeating-linear-gradient(-45deg, #bc5090, #bc5090 10px, #58508d 10px, #58508d 20px, #ff6361 20px, #ff6361 30px);
+  background: repeating-linear-gradient(-45deg, #ff7c43, #ff7c43 10px, #003f5c 10px, #003f5c 20px, #d45087 20px, #d45087 30px);
 }
 .architect.lead-developer {
-  background: repeating-linear-gradient(-45deg, #bc5090, #bc5090 10px, #003f5c 10px, #003f5c 20px);
+  background: repeating-linear-gradient(-45deg, #ff7c43, #ff7c43 10px, #a05195 10px, #a05195 20px);
 }
 .project-manager.developer {
-  background: repeating-linear-gradient(-45deg, #58508d, #58508d 10px, #ff6361 10px, #ff6361 20px);
+  background: repeating-linear-gradient(-45deg, #003f5c, #003f5c 10px, #d45087 10px, #d45087 20px);
 }
-.architect.developer {
-  background: repeating-linear-gradient(-45deg, #bc5090, #bc5090 10px, #ff6361 10px, #ff6361 20px);
-}
-.architect.reviewer {
-  background: repeating-linear-gradient(-45deg, #bc5090, #bc5090 10px, #ffa600 10px, #ffa600 20px);
-}
-.project-manager.lead-developer.support {
-  background: repeating-linear-gradient(-45deg, #58508d, #58508d 10px, #003f5c 10px, #003f5c 20px, #ffa600 20px, #ffa600 30px);
-}
-.project-manager.developer.support {
-  background: repeating-linear-gradient(-45deg, #58508d, #58508d 10px, #ff6361 10px, #ff6361 20px, #ffa600 20px, #ffa600 30px);
-}
-.lead-developer.support {
+.project-manager.author {
   background: repeating-linear-gradient(-45deg, #003f5c, #003f5c 10px, #ffa600 10px, #ffa600 20px);
 }
+.architect.developer {
+  background: repeating-linear-gradient(-45deg, #ff7c43, #ff7c43 10px, #d45087 10px, #d45087 20px);
+}
+.architect.reviewer {
+  background: repeating-linear-gradient(-45deg, #ff7c43, #ff7c43 10px, #ffa600 10px, #ffa600 20px);
+}
+.project-manager.lead-developer.support {
+  background: repeating-linear-gradient(-45deg, #003f5c, #003f5c 10px, #a05195 10px, #a05195 20px, #f95d6a 20px, #f95d6a 30px);
+}
+.project-manager.developer.support {
+  background: repeating-linear-gradient(-45deg, #003f5c, #003f5c 10px, #d45087 10px, #d45087 20px, #f95d6a 20px, #f95d6a 30px);
+}
+.lead-developer.support {
+  background: repeating-linear-gradient(-45deg, #a05195, #a05195 10px, #f95d6a 10px, #f95d6a 20px);
+}
 .developer.support {
-  background: repeating-linear-gradient(-45deg, #ff6361, #ff6361 10px, #ffa600 10px, #ffa600 20px);
+  background: repeating-linear-gradient(-45deg, #d45087, #d45087 10px, #f95d6a 10px, #f95d6a 20px);
 }
 .single-line > div:nth-child(2) {
   margin-top: -30px;
