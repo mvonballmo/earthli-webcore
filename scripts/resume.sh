@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 FOLDER="../site/resources/styles/themes"
+LESS=../node_modules/less/bin/lessc
 
-lessc $FOLDER/resume.less $FOLDER/resume.css
+$LESS $FOLDER/resume.less $FOLDER/resume.css
 	
