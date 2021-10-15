@@ -2557,8 +2557,6 @@ select {
 }
 h2 {
   border: none;
-  border-top: 1px solid silver;
-  padding-top: 5px;
 }
 .footer {
   display: none;
@@ -2717,6 +2715,10 @@ section div.grid > div {
 section div.grid > div h3:first-child {
   margin-top: 0;
 }
+section div.page-break > h2 {
+  border-top: 1px solid silver;
+  padding-top: 5px;
+}
 section table.list {
   display: block;
   padding-left: 1.1em;
@@ -2788,6 +2790,7 @@ section table.list tr th:after {
   }
   .page-break {
     page-break-before: always;
+    border: none;
   }
 }
 .projects ul {

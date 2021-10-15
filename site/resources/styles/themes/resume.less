@@ -48,8 +48,6 @@
 h2
 {
   border: none;
-  border-top: 1px solid silver;
-  padding-top: 5px;
 }
 
 .footer
@@ -316,6 +314,12 @@ section
         }
       }
     }
+
+    &.page-break > h2
+    {
+      border-top: 1px solid silver;
+      padding-top: 5px;
+    }
   }
 
   table.list
@@ -350,7 +354,6 @@ section
     }
   }
 }
-
 
 @media (min-width: @min-width-for-columns)
 {
@@ -473,6 +476,7 @@ section
   .page-break
   {
     page-break-before: always;
+    border: none;
   }
 }
 
