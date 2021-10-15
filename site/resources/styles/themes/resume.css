@@ -2711,13 +2711,10 @@ section div.grid {
 section div.grid > div {
   margin-right: 30px;
   margin-bottom: 30px;
+  max-width: 300px;
 }
 section div.grid > div h3:first-child {
   margin-top: 0;
-}
-section div.page-break > h2 {
-  border-top: 1px solid silver;
-  padding-top: 5px;
 }
 section table.list {
   display: block;
@@ -2740,12 +2737,29 @@ section table.list tr th {
 section table.list tr th:after {
   content: ": ";
 }
+.page-break > h2 {
+  border-top: 1px solid silver;
+  padding-top: 5px;
+  margin-top: 20px;
+}
 @media (min-width: 500px) {
   section {
     display: flex;
   }
 }
 @media (max-width: 500px) {
+  .text-flow h1 {
+    border-top: 1px solid silver;
+    background-color: #EEE;
+    border-bottom: 1px solid silver;
+    padding: 5px 0;
+  }
+  .text-flow .page-break > h2 {
+    border-top: 1px solid silver;
+    background-color: #EEE;
+    border-bottom: 1px solid silver;
+    padding: 5px 0;
+  }
   .text-flow .timeline .years {
     font-size: 75%;
   }
@@ -2790,6 +2804,8 @@ section table.list tr th:after {
   }
   .page-break {
     page-break-before: always;
+  }
+  .page-break > h2 {
     border: none;
   }
 }
@@ -2828,7 +2844,7 @@ section table.list tr th:after {
 }
 .author {
   margin: 1px 0;
-  background-color: #ffa600;
+  background-color: #665191;
 }
 .reviewer {
   margin: 1px 0;
@@ -2840,7 +2856,7 @@ section table.list tr th:after {
 }
 .instructor {
   margin: 1px 0;
-  background-color: #665191;
+  background-color: #2f4b7c;
 }
 .project-manager {
   margin: 1px 0;
@@ -2859,6 +2875,9 @@ section table.list tr th:after {
 .project-manager.architect.lead-developer.support {
   background: repeating-linear-gradient(-45deg, #ff7c43, #ff7c43 10px, #003f5c 10px, #003f5c 20px, #a05195 20px, #a05195 30px, #f95d6a 30px, #f95d6a 40px);
 }
+.project-manager.architect.developer.support {
+  background: repeating-linear-gradient(-45deg, #ff7c43, #ff7c43 10px, #003f5c 10px, #003f5c 20px, #d45087 20px, #d45087 30px, #f95d6a 30px, #f95d6a 40px);
+}
 .project-manager.architect.lead-developer {
   background: repeating-linear-gradient(-45deg, #ff7c43, #ff7c43 10px, #003f5c 10px, #003f5c 20px, #a05195 20px, #a05195 30px);
 }
@@ -2871,8 +2890,14 @@ section table.list tr th:after {
 .project-manager.developer {
   background: repeating-linear-gradient(-45deg, #003f5c, #003f5c 10px, #d45087 10px, #d45087 20px);
 }
+.project-manager.lead-developer {
+  background: repeating-linear-gradient(-45deg, #003f5c, #003f5c 10px, #a05195 10px, #a05195 20px);
+}
+.project-manager.support {
+  background: repeating-linear-gradient(-45deg, #003f5c, #003f5c 10px, #f95d6a 10px, #f95d6a 20px);
+}
 .project-manager.author {
-  background: repeating-linear-gradient(-45deg, #003f5c, #003f5c 10px, #ffa600 10px, #ffa600 20px);
+  background: repeating-linear-gradient(-45deg, #003f5c, #003f5c 10px, #665191 10px, #665191 20px);
 }
 .architect.developer {
   background: repeating-linear-gradient(-45deg, #ff7c43, #ff7c43 10px, #d45087 10px, #d45087 20px);

@@ -4,8 +4,8 @@
 @employee-color: #E8E8E8;
 @base-color: #003f5c;
 @project-manager-color: #003f5c;
-@instructor-color: #665191;
-@author-color: #ffa600;
+@instructor-color: #2f4b7c;
+@author-color: #665191;
 @lead-developer-color: #a05195;
 @developer-color: #d45087;
 @support-color: #f95d6a;
@@ -307,18 +307,13 @@ section
       {
         margin-right: @resume_spacing;
         margin-bottom: @resume_spacing;
+        max-width: 300px;
 
         h3:first-child
         {
           margin-top: 0;
         }
       }
-    }
-
-    &.page-break > h2
-    {
-      border-top: 1px solid silver;
-      padding-top: 5px;
     }
   }
 
@@ -355,6 +350,13 @@ section
   }
 }
 
+.page-break > h2
+{
+  border-top: 1px solid silver;
+  padding-top: 5px;
+  margin-top: 20px;
+}
+
 @media (min-width: @min-width-for-columns)
 {
   section
@@ -367,6 +369,22 @@ section
 {
   .text-flow
   {
+    h1
+    {
+      border-top: 1px solid silver;
+      background-color: #EEE;
+      border-bottom: 1px solid silver;
+      padding: 5px 0;
+    }
+
+    .page-break > h2
+    {
+      border-top: 1px solid silver;
+      background-color: #EEE;
+      border-bottom: 1px solid silver;
+      padding: 5px 0;
+    }
+
     .timeline
     {
       .years
@@ -476,7 +494,11 @@ section
   .page-break
   {
     page-break-before: always;
-    border: none;
+
+    > h2
+    {
+      border: none;
+    }
   }
 }
 
@@ -625,6 +647,11 @@ section
   .four-color-diagonal-stripes(@architect-color, @project-manager-color, @lead-developer-color, @support-color);
 }
 
+.project-manager.architect.developer.support
+{
+  .four-color-diagonal-stripes(@architect-color, @project-manager-color, @developer-color, @support-color);
+}
+
 .project-manager.architect.lead-developer
 {
   .three-color-diagonal-stripes(@architect-color, @project-manager-color, @lead-developer-color);
@@ -643,6 +670,16 @@ section
 .project-manager.developer
 {
   .two-color-diagonal-stripes(@project-manager-color, @developer-color);
+}
+
+.project-manager.lead-developer
+{
+  .two-color-diagonal-stripes(@project-manager-color, @lead-developer-color);
+}
+
+.project-manager.support
+{
+  .two-color-diagonal-stripes(@project-manager-color, @support-color);
 }
 
 .project-manager.author
