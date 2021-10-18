@@ -12,9 +12,13 @@
 @architect-color: #ff7c43;
 @reviewer-color: #ffa600;
 
-@expert-color: #004c6d;
-@proficient-color: #6996b3;
-@competent-color: #c1e7ff;
+@expert-color: #486d24;
+@proficient-color: #899e71;
+@competent-color: #cbd1c3;
+
+@summary-expert-color: #b5de8a;
+@summary-proficient-color: rgb(172, 202, 225);
+@summary-competent-color: #e8e3ae;
 
 @default-stripe-width: 2 * @small_spacing;
 @default-top-spacing: 2 * @standard_spacing;
@@ -28,7 +32,8 @@
 @years_per_block: 5;
 @year_count: @last_year - @first_year;
 
-@resume_spacing: 2 * @standard_spacing;
+@resume_spacing: 1.5 * @standard_spacing;
+@resume_grid_spacing: 2.5 * @standard_spacing;
 
 @minimum_width: 0;
 @columns_per_year: 2;
@@ -43,6 +48,11 @@
 .set-basis(@numerator, @denominator)
 {
   flex-basis: calc(~"("@numerator~" / "@denominator~") * 100%");
+}
+
+.main-box
+{
+  max-width: 210mm;
 }
 
 h2
@@ -274,6 +284,14 @@ section
     margin-top: @resume_spacing;
   }
 
+  a
+  {
+    &:link, &:visited
+    {
+      text-decoration: underline dotted #AAA;
+    }
+  }
+
   > div
   {
     > h2:first-child
@@ -305,7 +323,7 @@ section
 
       > div
       {
-        margin-right: @resume_spacing;
+        margin-right: @resume_grid_spacing;
         margin-bottom: @resume_spacing;
         max-width: 300px;
 
@@ -322,6 +340,11 @@ section
     display: block;
     padding-left: @ul_indent;
 
+    tbody
+    {
+      display: block;
+    }
+
     tr
     {
       &:first-child
@@ -330,11 +353,14 @@ section
       }
 
       display: list-item;
-      padding-left: @li_indent;
+      scroll-padding-inline-start: @li_indent;
+      margin-bottom: 2px;
+      position: relative; // for positioning the language progress bars
 
       th, td
       {
         display: inline;
+        padding: 3px;
       }
 
       th
@@ -346,7 +372,71 @@ section
           content: ": ";
         }
       }
+
+      td
+      {
+        font-size: @detail_font_size;
+        text-align: right;  // Use flex?
+      }
+
+      td:after
+      {
+        content: " ";
+        position: absolute;
+        left: 0;
+        z-index: -1;
+        height: 90%;
+        margin: 1px 0;
+      }
+
+      &.native, &.expert
+      {
+        td:after
+        {
+          background-color: @summary-expert-color;
+          width: 100%;
+        }
+      }
+
+      &.fluent, &.proficient
+      {
+        td:after
+        {
+          background-color: @summary-proficient-color;
+          width: 85%;
+        }
+      }
+
+      &.mixed, &.competent
+      {
+        td:after
+        {
+          background-color: @summary-competent-color;
+          width: 50%;
+        }
+      }
     }
+  }
+}
+
+ul.employment
+{
+  list-style: none;
+  padding-inline-start: 0;
+
+  li
+  {
+    display: inline;
+
+    &:after
+    {
+      content: "; ";
+    }
+  }
+
+  li:last-child:after
+  {
+    content: "";
   }
 }
 
@@ -508,7 +598,6 @@ section
   {
     padding: 0;
     margin: 0;
-    list-style: none;
 
     li
     {

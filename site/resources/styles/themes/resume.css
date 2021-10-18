@@ -2555,6 +2555,9 @@ select {
     display: none;
   }
 }
+.main-box {
+  max-width: 210mm;
+}
 h2 {
   border: none;
 }
@@ -2680,23 +2683,27 @@ section:first-child > h1 {
 section h1:first-child {
   flex: 1;
   font-variant: small-caps;
-  margin-top: 30px;
-  margin-right: 30px;
+  margin-top: 22.5px;
+  margin-right: 22.5px;
 }
 section h2:first-child {
   margin-top: 0;
 }
 section p:first-child,
 section ul:first-child {
-  margin-top: 30px;
+  margin-top: 22.5px;
+}
+section a:link,
+section a:visited {
+  text-decoration: underline dotted #AAA;
 }
 section > div > h2:first-child {
-  margin-top: 30px;
+  margin-top: 22.5px;
 }
 section > div:first-child {
   flex: 1;
   margin-top: 0;
-  margin-right: 30px;
+  margin-right: 22.5px;
 }
 section > div:first-child > h2 {
   margin-top: 0;
@@ -2706,11 +2713,11 @@ section div {
   margin-top: 0;
 }
 section div.grid {
-  margin-top: 30px;
+  margin-top: 22.5px;
 }
 section div.grid > div {
-  margin-right: 30px;
-  margin-bottom: 30px;
+  margin-right: 37.5px;
+  margin-bottom: 22.5px;
   max-width: 300px;
 }
 section div.grid > div h3:first-child {
@@ -2720,9 +2727,14 @@ section table.list {
   display: block;
   padding-left: 1.1em;
 }
+section table.list tbody {
+  display: block;
+}
 section table.list tr {
   display: list-item;
-  padding-left: 0.5em;
+  scroll-padding-inline-start: 0.5em;
+  margin-bottom: 2px;
+  position: relative;
 }
 section table.list tr:first-child {
   display: none;
@@ -2730,12 +2742,53 @@ section table.list tr:first-child {
 section table.list tr th,
 section table.list tr td {
   display: inline;
+  padding: 3px;
 }
 section table.list tr th {
   border: none;
 }
 section table.list tr th:after {
   content: ": ";
+}
+section table.list tr td {
+  font-size: 85%;
+  text-align: right;
+}
+section table.list tr td:after {
+  content: " ";
+  position: absolute;
+  left: 0;
+  z-index: -1;
+  height: 90%;
+  margin: 1px 0;
+}
+section table.list tr.native td:after,
+section table.list tr.expert td:after {
+  background-color: #b5de8a;
+  width: 100%;
+}
+section table.list tr.fluent td:after,
+section table.list tr.proficient td:after {
+  background-color: #accae1;
+  width: 85%;
+}
+section table.list tr.mixed td:after,
+section table.list tr.competent td:after {
+  background-color: #e8e3ae;
+  width: 50%;
+}
+ul.employment {
+  list-style: none;
+  padding-inline-start: 0;
+}
+ul.employment li {
+  display: inline;
+}
+ul.employment li:after {
+  content: ", ";
+}
+ul.employment li:last-child:after {
+  content: "";
 }
 .page-break > h2 {
   border-top: 1px solid silver;
@@ -2812,7 +2865,6 @@ section table.list tr th:after {
 .projects ul {
   padding: 0;
   margin: 0;
-  list-style: none;
 }
 .projects ul li {
   padding: 0;
@@ -2820,15 +2872,15 @@ section table.list tr th:after {
 }
 .level-expert {
   margin: 1px 0;
-  background-color: #004c6d;
+  background-color: #486d24;
 }
 .level-proficient {
   margin: 1px 0;
-  background-color: #6996b3;
+  background-color: #899e71;
 }
 .level-competent {
   margin: 1px 0;
-  background-color: #c1e7ff;
+  background-color: #cbd1c3;
 }
 .support {
   margin: 1px 0;
