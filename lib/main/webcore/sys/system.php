@@ -117,7 +117,7 @@ function read_array_index ($arr, $index, $default_value = '')
  * passing a value at all.
  * @version 3.6.0
  * @since 2.2.1
- * @param integer $index
+ * @param string $index
  * @param string $default_value
  * @return string
  */
