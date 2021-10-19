@@ -2561,6 +2561,11 @@ select {
 h2 {
   border: none;
 }
+h3,
+h4 {
+  margin-top: 5px;
+}
+.header,
 .footer {
   display: none;
 }
@@ -2678,7 +2683,7 @@ h2 {
   padding-left: 0;
 }
 section:first-child > h1 {
-  visibility: hidden;
+  display: none;
 }
 section h1:first-child {
   flex: 1;
@@ -2714,6 +2719,7 @@ section div {
 }
 section div.grid {
   margin-top: 22.5px;
+  display: grid;
 }
 section div.grid > div {
   margin-right: 37.5px;
@@ -2785,7 +2791,7 @@ ul.employment li {
   display: inline;
 }
 ul.employment li:after {
-  content: ", ";
+  content: "; ";
 }
 ul.employment li:last-child:after {
   content: "";
@@ -2849,11 +2855,18 @@ ul.employment li:last-child:after {
   body .page .header .nav-box {
     display: none;
   }
+  body .page .main-box {
+    max-width: none;
+  }
+  body .page .text-flow {
+    line-height: 140%;
+  }
   body .page section {
     display: block;
   }
   body .page section div.grid > div {
     margin-right: 30px;
+    max-width: 320px;
   }
   .page-break {
     page-break-before: always;

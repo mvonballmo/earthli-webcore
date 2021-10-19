@@ -60,7 +60,12 @@ h2
   border: none;
 }
 
-.footer
+h3, h4
+{
+  margin-top: @small_spacing;
+}
+
+.header, .footer
 {
   display: none;
 }
@@ -261,7 +266,7 @@ section
   {
     > h1
     {
-      visibility: hidden;
+      display: none;
     }
   }
 
@@ -562,6 +567,14 @@ ul.employment
         }
       }
 
+      .main-box {
+        max-width: none;
+      }
+
+      .text-flow {
+        line-height: 140%;
+      }
+
       section
       {
         display: block;
@@ -574,6 +587,7 @@ ul.employment
             {
               // Move columns a bit closer together to use less whitespace
               margin-right: @standard_spacing * 2;
+              max-width: 320px;
             }
           }
         }
