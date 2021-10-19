@@ -346,11 +346,13 @@ section
       grid-column-gap: @standard_spacing;
       grid-row-gap: @standard_spacing;
 
+      &.employment
+      {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
       > div
       {
-        margin-right: @resume_grid_spacing;
-        margin-bottom: @resume_spacing;
-
         h3:first-child
         {
           margin-top: 0;
@@ -539,6 +541,21 @@ ul.employment
     {
       display: block;
     }
+
+    section div.grid
+    {
+      grid-template-columns: 1fr;
+
+      &.projects ul.details li
+      {
+        list-style-type: none;
+      }
+
+      &.employment
+      {
+        grid-template-columns: 1fr;
+      }
+    }
   }
 }
 
@@ -600,15 +617,17 @@ ul.employment
 
         div
         {
+          .timeline
+          {
+            left: 100px;
+            margin-right: 100px;
+          }
+
           &.grid
           {
             > div
             {
               width: 100%;
-              margin-right: 0; // Use the grid-gap instead
-              margin-bottom: 0; // Use the grid-gap instead
-              // Move columns a bit closer together to use less whitespace
-//              margin-right: @standard_spacing * 2;
             }
           }
         }
