@@ -52,7 +52,7 @@
 
 .main-box
 {
-  max-width: 210mm;
+  max-width: 240mm;
 }
 
 h2
@@ -260,6 +260,22 @@ h3, h4
   }
 }
 
+@media screen and (min-width: 900px)
+{
+  .grid > div
+  {
+    width: 100%;
+  }
+}
+
+@media screen and (min-width: 450px)
+{
+  .grid > div
+  {
+    width: 100%;
+  }
+}
+
 section
 {
   &:first-child
@@ -325,12 +341,15 @@ section
     &.grid
     {
       margin-top: @resume_spacing;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-column-gap: @standard_spacing;
+      grid-row-gap: @standard_spacing;
 
       > div
       {
         margin-right: @resume_grid_spacing;
         margin-bottom: @resume_spacing;
-        max-width: 300px;
 
         h3:first-child
         {
@@ -572,7 +591,7 @@ ul.employment
       }
 
       .text-flow {
-        line-height: 140%;
+        line-height: 130%;
       }
 
       section
@@ -585,9 +604,11 @@ ul.employment
           {
             > div
             {
+              width: 100%;
+              margin-right: 0; // Use the grid-gap instead
+              margin-bottom: 0; // Use the grid-gap instead
               // Move columns a bit closer together to use less whitespace
-              margin-right: @standard_spacing * 2;
-              max-width: 320px;
+//              margin-right: @standard_spacing * 2;
             }
           }
         }
@@ -616,7 +637,7 @@ ul.employment
     li
     {
       padding: 0;
-      margin: @small_spacing 0;
+      margin: 3px 0; // Need to tighten a bit from @small_spacing for printing
     }
   }
 }

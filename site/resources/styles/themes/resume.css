@@ -2556,7 +2556,7 @@ select {
   }
 }
 .main-box {
-  max-width: 210mm;
+  max-width: 240mm;
 }
 h2 {
   border: none;
@@ -2682,6 +2682,16 @@ h4 {
 .text-flow section div.contact ul li {
   padding-left: 0;
 }
+@media screen and (min-width: 900px) {
+  .grid > div {
+    width: 100%;
+  }
+}
+@media screen and (min-width: 450px) {
+  .grid > div {
+    width: 100%;
+  }
+}
 section:first-child > h1 {
   display: none;
 }
@@ -2720,11 +2730,13 @@ section div {
 section div.grid {
   margin-top: 22.5px;
   display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-column-gap: 15px;
+  grid-row-gap: 15px;
 }
 section div.grid > div {
   margin-right: 37.5px;
   margin-bottom: 22.5px;
-  max-width: 300px;
 }
 section div.grid > div h3:first-child {
   margin-top: 0;
@@ -2859,14 +2871,15 @@ ul.employment li:last-child:after {
     max-width: none;
   }
   body .page .text-flow {
-    line-height: 140%;
+    line-height: 130%;
   }
   body .page section {
     display: block;
   }
   body .page section div.grid > div {
-    margin-right: 30px;
-    max-width: 320px;
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 0;
   }
   .page-break {
     page-break-before: always;
@@ -2881,7 +2894,7 @@ ul.employment li:last-child:after {
 }
 .projects ul li {
   padding: 0;
-  margin: 5px 0;
+  margin: 3px 0;
 }
 .level-expert {
   margin: 1px 0;
