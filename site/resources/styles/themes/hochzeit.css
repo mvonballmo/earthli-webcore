@@ -931,6 +931,11 @@ pre > code .attribute-value,
     max-width: 75ex;
   }
 }
+@media print {
+  .text-flow.wide {
+    max-width: none;
+  }
+}
 .text-flow ul:not([class]),
 .text-flow ol:not([class]) {
   margin-left: 0;

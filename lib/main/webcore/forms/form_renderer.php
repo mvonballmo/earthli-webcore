@@ -957,6 +957,8 @@ class FORM_RENDERER extends CONTROLS_RENDERER
       $icon = $this->context->get_icon_with_text('{icons}/indicators/question', Sixteen_px, 'Help');
       $buttons [] = '<a class="button" href="text_formatting.php" target="_blank" title="Show formatting help">' . $icon . '</a>';
     }
+
+    // Render attach button (or make it easier to insert an attach button)
     
     $this->draw_buttons_in_row ($buttons);
   }
