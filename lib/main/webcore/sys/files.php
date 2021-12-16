@@ -70,6 +70,8 @@ class FILE_OPTIONS
    */
   public $default_access_mode = 0777;
 
+  public $temp_folder = '/tmp';
+
   /**
    * List of characters to convert <i>from</i> in a file name.
    * {@link normalize_file_id()} replaces these characters with their
@@ -755,7 +757,12 @@ function is_valid_path ($path, $opts = null)
 {
   if (isset ($path) && $path)
   {
-    if ($this->normalized_ids_are_lower_case)
+    if (! isset ($opts))
+    {
+      $opts = global_file_options ();
+    }
+
+    if ($opts->normalized_ids_are_lower_case)
     {
       $path = strtolower ($path);
     }
@@ -847,11 +854,17 @@ function write_text_file ($file_name, $text, $opts = null)
 
 /**
  * Return the server system temp directory.
+ * @param FILE_OPTIONS $opts
  * @return string
  */
-function temp_folder ()
+function temp_folder ($opts = null)
 {
-  $name = tempnam ('', 'WebCore');
+  if (! isset ($opts))
+  {
+    $opts = global_file_options ();
+  }
+
+  $name = tempnam ($opts->temp_folder, 'WebCore');
   unlink ($name);
   $url = new FILE_URL ($name);
   $url->strip_name ();
