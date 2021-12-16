@@ -905,7 +905,8 @@ class USER_AGENT_PARSER
     $raw_data = strtolower ($raw_data);
     $props->calculated_system_name = Browser_unknown;
     $oss = $this->_tables->os_ids ();
-    while (($props->calculated_system_name == Browser_unknown) && (list ($key, $value) = each ($oss)))
+
+    foreach ($oss as $key => $value)
     {
       if ($key)
       {
@@ -918,6 +919,8 @@ class USER_AGENT_PARSER
         if ($match)
         {
           $props->calculated_system_name = $value;
+
+          break;
         }
       }
     }
