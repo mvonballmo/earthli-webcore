@@ -84,7 +84,7 @@ class THEMED_ENGINE extends ENGINE
   /**
    * Called immediately after creating a page.
    * @param ENVIRONMENT $env
-   * @param PAGE $page
+   * @param THEMED_PAGE $page
    * @access private
    */
   protected function _init_page ($env, $page)

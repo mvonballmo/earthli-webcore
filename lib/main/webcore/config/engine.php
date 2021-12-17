@@ -345,7 +345,7 @@ class ENGINE extends RESOLVER
    * Override this function to customize initialization.
    * @see _make_page()
    * @param ENVIRONMENT $env
-   * @param THEMED_PAGE $page
+   * @param PAGE $page
    * @access private
    */
   protected function _init_page ($env, $page)
@@ -403,5 +403,3 @@ class ENGINE extends RESOLVER
     $page->add_icon_alias ($env, Folder_name_icons);
   }
 }
-
-?>
