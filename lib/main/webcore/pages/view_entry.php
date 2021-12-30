@@ -237,8 +237,11 @@ if (isset($entry_query) && isset ($entry) && $App->login->is_allowed (Privilege_
           $t->max_visible_output_chars = 0;
           echo $entry->title_as_html ($t);
 
-          $counts = $navigator->counts ();
-          echo " ($counts)";
+          if ($has_multiple_entries)
+          {
+            $counts = $navigator->counts ();
+            echo " ($counts)";
+          }
           ?>
         </h1>
       </div>
