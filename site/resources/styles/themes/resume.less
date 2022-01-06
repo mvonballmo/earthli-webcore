@@ -235,12 +235,17 @@ h3, h4
 
         div
         {
-          flex: 4;
+          flex: 2;
 
           h2
           {
             margin-top: @standard_spacing;
             font-size: @h1_font_size;
+
+            &+ul
+            {
+              margin-top: 0;
+            }
           }
         }
 
@@ -249,11 +254,19 @@ h3, h4
           flex: 2;
           list-style: none;
           padding-left: 0;
+          margin-bottom: 0;
+          margin-top: @standard_spacing;
 
           li
           {
             padding-left: 0;
           }
+        }
+
+        img
+        {
+          margin-top: @standard_spacing;
+          height: 120px;
         }
       }
     }
@@ -290,7 +303,6 @@ section
   {
     flex: 1;
     font-variant: small-caps;
-    margin-top: @resume_spacing;
     margin-right: @resume_spacing;
   }
 
@@ -302,7 +314,7 @@ section
   p:first-child,
   ul:first-child
   {
-    margin-top: @resume_spacing;
+    //margin-top: @resume_spacing;
   }
 
   a
@@ -340,11 +352,11 @@ section
 
     &.grid
     {
-      margin-top: @resume_spacing;
+      margin-top: @standard_spacing;
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       grid-column-gap: @standard_spacing;
-      grid-row-gap: @standard_spacing;
+      grid-row-gap: 0;
 
       &.employment
       {
